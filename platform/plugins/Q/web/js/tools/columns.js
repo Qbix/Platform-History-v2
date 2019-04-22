@@ -19,18 +19,22 @@ var dataKey_opening = 'opening';
  *  @param {String}  [options.column] You can put a default content for all columns here (which is shown as they are loading)
  *  @param {String}  [options.controls] You can put default controls HTML for all columns here (which is shown as they are loading)
  *  @param {Object}  [options.data] Any data you want to associate with the column, to be retrieved later by the tool.data() method
+ *  @param {Object} [options.expandOnMobile] Whether to expand the top/bottom of columns as they are opened on a mobile device, to fill the scren
+ *  @param {Boolean} [options.expandOnMobile.top=true] 
+ *  @param {Boolean} [options.expandOnMobile.bottom=true] 
  *  @param {Object}  [options.attributes] Any attributes you want to add to the column element
  *  @param {Object}  [options.animation] For customizing animated transitions
  *  @param {Number}  [options.animation.duration] The duration of the transition in milliseconds, defaults to 500
  *  @param {Object}  [options.animation.hide] The css properties in "hide" state of animation
  *  @param {Object}  [options.back] For customizing the back button on mobile
  *  @param {String}  [options.back.src] The src of the image to use for the back button
- *  @param {Boolean} [options.back.triggerFromTitle] Whether the whole title would be a trigger for the back button. Defaults to true.
- *  @param {Object}  [options.textfill={}] Options for Q/textfill on the title, or pass null here to skip this effect.
  *  @param {Boolean} [options.back.hide] Whether to hide the back button. Defaults to false, but you can pass true on android, for example.
  *  @param {Object}  [options.close] For customizing the back button on desktop and tablet
  *  @param {String}  [options.close.src] The src of the image to use for the close button
  *  @param {Object}  [options.close.clickable] If not null, enables the Q/clickable tool with options from here. Defaults to null.
+ *  @param {Object}  [options.textfill={}] Options for Q/textfill on the title, or pass null here to skip this effect.
+ *  @param {Boolean} [options.closeFromSwipeDown=true] on a touchscreen, close a column after a swipe-down gesture starting from the title
+ *  @param {boolean} [options.closeFromTitleClick=false] Whether the whole title would be a trigger for the back button. Defaults to true.
  *  @param {Object}  [options.scrollbarsAutoHide] If an object, enables Q/scrollbarsAutoHide functionality with options from here. Enabled by default.
  *  @param {Object}  [options.handlers] Pairs of columnName: handler where the handler can be a function or a string, in which you assign a function to Q.exports .
  *  @param {Boolean} [options.fullscreen] Whether to use fullscreen mode on mobile phones, using document to scroll instead of relying on possibly buggy "overflow" CSS implementation. Defaults to true on Android stock browser, false everywhere else.
@@ -59,7 +63,7 @@ Q.Tool.define("Q/columns", function(options) {
 		}
 
 		var selector = '.Q_close';
-		if (Q.info.isMobile && state.back.triggerFromTitle) {
+		if (Q.info.isMobile && state.closeFromTitleClick) {
 			selector = '.Q_columns_title';
 		}
 		$(tool.element).on(Q.Pointer.fastclick, selector, function(){
@@ -123,7 +127,6 @@ Q.Tool.define("Q/columns", function(options) {
 	},
 	back: {
 		src: "{{Q}}/img/back-v.png",
-		triggerFromTitle: true,
 		hide: false
 	},
 	close: {
@@ -137,6 +140,12 @@ Q.Tool.define("Q/columns", function(options) {
 	controls: undefined,
 	pagePushUrl: true,
 	scrollbarsAutoHide: {},
+	closeFromTitleClick: false,
+	closeFromSwipeDown: true,
+	expandOnMobile: {
+		top: true,
+		bottom: true
+	},
 	textfill: null,
 	fullscreen: Q.info.useFullscreen,
 	hideBackgroundColumns: true,
@@ -263,6 +272,44 @@ Q.Tool.define("Q/columns", function(options) {
 			columnSlot = $('.Q_column_slot', div)[0];
 			controlsSlot = $('.Q_controls_slot', div)[0];
 			$div.attr('data-title', $(titleSlot).text() || document.title);
+		}
+		if (state.closeFromSwipeDown) {
+			$(titleSlot).on('touchstart', function (e1) {
+				var x1 = Q.Pointer.getX(e1);
+				var y1 = Q.Pointer.getY(e1);
+				$('body').on('touchmove', _onTouchmove);
+				$('body').on('touchend', _onTouchend);
+				var $div = $(div);
+				var originalTop = $div.css('top');
+				var originalOpacity = $div.css('opacity');
+				var _closed = false;
+				function _onTouchmove(e2) {
+					var x2 = Q.Pointer.getX(e2);
+					var y2 = Q.Pointer.getY(e2);
+					var threshold = (typeof state.closeFromSwipeDown === 'number')
+						? state.closeFromSwipeDown
+						: Q.getObject(['originalEvent', 'touches', 0, 'radiusY'], e1)*2 || 50;
+					var z = (y2 - y1) / threshold;
+					$(div).css('top', parseInt(originalTop)+Math.max(0, y2-y1));
+					$(div).css('opacity', 1-z);
+					if (y2 - y1 > threshold
+					&& Math.abs((y2-y1)/(x2-x1)) > 2) { //generally down direction
+						tool.close(index);
+						_closed = true;
+						$('body').off('touchmove', _onTouchmove);
+					}
+				}
+				function _onTouchend(e2) {
+					if (!_closed) {
+						$div.animate({
+							top: originalTop,
+							opacity: originalOpacity
+						}, 100);
+					}
+					$('body').off('touchmove', _onTouchmove);
+					$('body').off('touchend', _onTouchend);
+				}
+			});
 		}
 		if (o.url) {
 			var url = Q.url(o.url);
@@ -445,19 +492,25 @@ Q.Tool.define("Q/columns", function(options) {
 				});
 			});
 			
+			var expandTop = index > 0 && state.expandOnMobile && state.expandOnMobile.top;
+			var expandBottom = index > 0 && state.expandOnMobile && state.expandOnMobile.bottom;
+			var $sc = $(state.container);
+			var top = expandTop
+				? -$sc.offset().top
+				: 0;
 			var show = {
 				opacity: 1,
-				top: 0
+				top: top
 			};
 			tool.oldMinHeight = undefined;
 			var hide = o.animation.css.hide;
 			$div.css('position', 'absolute');
 			if (Q.info.isMobile) {
-				var $sc = $(state.container);
-				var h = Q.Pointer.windowHeight() - $sc.offset().top;
+				var h = expandBottom
+					? Q.Pointer.windowHeight() - top
+					: state.container.clientHeight;
 				show.width = tool.element.clientWidth;
 				show.height = h;
-				$sc.height(h);
 			} else {
 				var cs = $div[0].computedStyle();
 				$div.show();
@@ -477,6 +530,12 @@ Q.Tool.define("Q/columns", function(options) {
 				show = lastShow;
 			}
 			$div.data(dataKey_hide, hide);
+			
+			if (expandTop || expandBottom) {
+				var $parents = $(tool.element).parents();
+				$parents.addClass('Q_columns_containsExpanded');
+				$parents.siblings().addClass('Q_columns_siblingContainsExpanded');
+			}
 			
 			state.locked = true;
 			openAnimation();
@@ -679,6 +738,14 @@ Q.Tool.define("Q/columns", function(options) {
 		
 		Q.Pointer.cancelClick();
 		
+		var expandTop = index > 0 && state.expandOnMobile && state.expandOnMobile.top;
+		var expandBottom = index > 0 && state.expandOnMobile && state.expandOnMobile.bottom;
+		if (expandTop || expandBottom) {
+			var $parents = $(tool.element).parents();
+			$parents.removeClass('Q_columns_containsExpanded');
+			$parents.siblings().removeClass('Q_columns_siblingContainsExpanded');
+		}
+		
 		if (duration) {
 			$div.animate($div.data(dataKey_hide), duration, _close);
 		} else {
@@ -803,6 +870,7 @@ Q.Template.set('Q/columns/column',
 );
 
 function presentColumn(tool, $column, fullscreen) {
+	var state = tool.state;
 	if (!$column) {
 		$column = tool.state.$currentColumn;
 		fullscreen = tool.state.fullscreen;
@@ -824,7 +892,7 @@ function presentColumn(tool, $column, fullscreen) {
 		if (fullscreen) {
 			$cs.add($div).css('height', 'auto');
 			$cs.css('min-height', heightToBottom);
-		} else {
+		} else if (state.expandOnMobile && state.expandOnMobile.bottom) {
 			$cs.height(heightToBottom);
 			$column.css('height', 'auto');
 		}
@@ -883,6 +951,21 @@ function prepareColumns(tool) {
 			}
 		});
 	}
+}
+
+function _topZ() {
+	var topZ = 0;
+	$('body').children().each(function () {
+		var $this = $(this);
+		if ($this.hasClass('Q_click_mask')) {
+			return;
+		}
+		var z = parseInt($this.css('z-index'));
+		if (!isNaN(z)) {
+			topZ = Math.max(topZ, z)
+		}
+	});
+	return topZ;
 }
 
 })(Q, jQuery);

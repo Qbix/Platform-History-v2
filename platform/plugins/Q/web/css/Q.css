@@ -721,10 +721,18 @@ html.Q_scanning body > .Q_scanning_code {
 	transition: opacity 0.01s linear;
 }
 .Q_disabled {
-	background-color: grey;
+	background-color: gray;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
 	filter: alpha(opacity=90);
 	-moz-opacity: 0.9;
 	opacity: 0.9;
 	pointer-events: none;
+}
+
+.Q_columns_containsExpanded {
+	overflow: visible !important;
+	z-index: 100 !important;
+}
+.Q_columns_siblingContainsExpanded {
+	z-index: 0 !important;
 }

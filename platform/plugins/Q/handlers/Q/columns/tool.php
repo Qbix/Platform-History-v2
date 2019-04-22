@@ -20,11 +20,12 @@
  *  @param {array}  [options.animation.show] The css properties in "show" state of animation
  *  @param {array}  [options.back] For customizing the back button on mobile
  *  @param {string}  [options.back.src] The src of the image to use for the back button
- *  @param {boolean} [options.back.triggerFromTitle] Whether the whole title would be a trigger for the back button. Defaults to true.
  *  @param {boolean} [options.back.hide] Whether to hide the back button. Defaults to false, but you can pass true on android, for example.
  *  @param {array}  [options.close] For customizing the back button on desktop and tablet
  *  @param {string}  [options.close.src] The src of the image to use for the close button
  *  @param {Object}  [options.close.clickable] If not null, enables the Q/clickable tool with options from here. Defaults to null.
+ *  @param {Boolean} [options.closeFromSwipeDown=true] on a touchscreen, close a column after a swipe-down gesture starting from the title
+ *  @param {boolean} [options.closeFromTitleClick] Whether the whole title would be a trigger for the back button. Defaults to true.
  *  @param {array}  [options.scrollbarsAutoHide] If not null, enables Q/scrollbarsAutoHide functionality with options from here. Enabled by default.
  *  @param {boolean} [options.fullscreen] Whether to use fullscreen mode on mobile phones, using document to scroll instead of relying on possibly buggy "overflow" CSS implementation. Defaults to true on Android, false everywhere else.
  *  @param {array}   [options.columns] In PHP only, an array of $name => $column pairs, where $column is in the form array('title' => $html, 'content' => $html, 'close' => true, 'controls' => $html, 'url' => $url), 'columnClass' => string, with "controls", "close", "columnClass" and "url" being optional
