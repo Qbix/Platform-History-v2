@@ -45,16 +45,20 @@ Q.Tool.jQuery('Q/overlay',
 
 			var ap = o.alignParent && (o.alignParent[0] || o.alignParent);
 			var apr = ap && ap.getBoundingClientRect();
-			var br = document.body.getBoundingClientRect();
+			var br = {
+				left: 0,
+				top: 0,
+				right: Q.Pointer.windowWidth(),
+				bottom: Q.Pointer.windowHeight()
+			};
 			var sl = ap ? apr.left : -br.left;
-
 			var st = ap ? apr.top : -br.top;
 			// if dialog element have position=fixed - it means it positioned related to viewport
 			// It means that position independent of scrolls of all ancestors.
 			st = $this.css("position") === "fixed" ? 0 : st;
 
-			var sw = ap ? apr.right - apr.left : Q.Pointer.windowWidth();
-			var sh = ap ? apr.bottom - apr.top : Q.Pointer.windowHeight();
+			var sw = ap ? apr.right - apr.left : br.right - br.left;
+			var sh = ap ? apr.bottom - apr.top : br.bottom - br.top;
 
 			var diff = 2;
 			if (($this.previousWidth === undefined) || (Math.abs(width - $this.previousWidth) > diff)) {
