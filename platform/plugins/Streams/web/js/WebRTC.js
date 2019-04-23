@@ -1107,7 +1107,7 @@
 							}, {width: 250, height: 250})
 						} else if(videoWidth == 0 && videoHeight == 0 && screenElRect.width != 0 && screenElRect.height != 0 ) {
 							newRectSize = {
-								width: screen.nameEl.firstChild.scrollWidth,
+								width: screen.nameEl.firstChild.scrollWidth + 30 + (screen.nameEl.firstChild.offsetLeft * 2),
 								height: screen.nameEl.scrollHeight
 							};
 						} else {
