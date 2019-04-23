@@ -1,9 +1,7 @@
-#page, #content_slot, .Streams_webrtc_tool {
+[webrtc-container], .Streams_webrtc_tool {
     overflow: visible;
 }
-#content_slot {
-    padding: 0;
-}
+
 .Streams_webrtc_tool {
     height: 100%;
 }
@@ -1390,6 +1388,9 @@
 .participants-list-btns {
     justify-content: center;
     display: flex;
+}
+.participants-list-btns button{
+    box-shadow: 0 5px 20px -5px #0048b5;
 }
 .webrtc_tool_disconnect-btn,
 .Q_touchscreen .Q_button.webrtc_tool_disconnect-btn {
