@@ -639,9 +639,9 @@ var WebRTCconferenceLib = function app(options){
 
 		function craetAudioeAnalyser(track, screen) {
 			if (AudioContext == false) return;
-			let context = new AudioContext();
-			let analyser = context.createScriptProcessor(1024, 1, 1);
-			let source = context.createMediaStreamSource(track.stream);
+			var context = new AudioContext();
+			var analyser = context.createScriptProcessor(1024, 1, 1);
+			var source = context.createMediaStreamSource(track.stream);
 			source.connect(analyser);
 			//source.connect(context.destination); // connect the source to the destination
 
@@ -653,24 +653,97 @@ var WebRTCconferenceLib = function app(options){
 				instant: 0.0,
 				slow: 0.0,
 				clip: 0.0,
+				updateInterval: null,
 			};
+			var svgWidth = 100;
+			var svgHeight = 40;
+			var xmlns = 'http://www.w3.org/2000/svg';
+			var svg = document.createElementNS(xmlns, 'svg');
+			svg.setAttribute('width', svgWidth);
+			svg.setAttribute('height', svgHeight);
+			var defs = document.createElementNS (xmlns, "defs");
+			var clippath = document.createElementNS(xmlns, 'clipPath');
+			clippath.setAttributeNS(null, 'id', 'waveform-mask');
+
+			defs.appendChild(clippath);
+			svg.appendChild(defs);
+			screen.soundEl.appendChild(svg);
+
+			var bucketSVGWidth = 4;
+			var bucketSVGHeight = 0;
+			var spaceBetweenRects = 1;
+			var totalBarsNum =  Math.floor(svgWidth / (bucketSVGWidth + spaceBetweenRects));
+			var soundBars = [];
+			var i;
+			for(i = 0; i < totalBarsNum; i++) {
+				var rect = document.createElementNS(xmlns, 'rect');
+				var x = (bucketSVGWidth * i + (spaceBetweenRects * (i + 1)))
+				var y = 0;
+				var fillColor = '#95ffff';
+				rect.setAttributeNS(null, 'x', x);
+				rect.setAttributeNS(null, 'y', 0);
+				rect.setAttributeNS(null, 'width', bucketSVGWidth + 'px');
+				rect.setAttributeNS(null, 'height', bucketSVGHeight + 'px');
+				rect.setAttributeNS(null, 'fill', fillColor);
+				rect.style.strokeWidth = '1';
+				rect.style.stroke = '#1479b5';
+
+				var barObject = {
+					volume: 0,
+					rect: rect,
+					x: x,
+					y: y,
+					width: bucketSVGWidth,
+					height: bucketSVGHeight,
+					fill: fillColor
+				}
+
+				soundBars.push(barObject);
+				svg.appendChild(rect);
+			}
 
 			analyser.onaudioprocess = (function(e) {
 
 				var input = e.inputBuffer.getChannelData(0);
 				var i;
 				var sum = 0.0;
-				let clipcount = 0;
+				var clipcount = 0;
 				for (i = 0; i < input.length; ++i) {
 					sum += input[i] * input[i];
 					if (Math.abs(input[i]) > 0.99) {
 						clipcount += 1;
 					}
+
 				}
 				screen.soundMeter.instant = Math.sqrt(sum / input.length);
 				screen.soundMeter.slow = 0.95 * screen.soundMeter.slow + 0.05 * screen.soundMeter.instant;
 				screen.soundMeter.clip = clipcount / input.length;
 
+				var i;
+				for (i = 0; i < totalBarsNum; i++) {
+
+
+					var bar = soundBars[i];
+					if(i == totalBarsNum - 1) {
+						bar.volume = screen.soundMeter.instant;
+						var height = (bar.volume / 2 * 100);
+						bar.y = svgHeight / 2 - height / 2
+						bar.height = height;
+						bar.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
+
+						bar.rect.setAttributeNS(null, 'height', bar.height + 'px');
+						bar.rect.setAttributeNS(null, 'y', bar.y);
+					} else {
+						var nextBar = soundBars[i + 1];
+						bar.volume = nextBar.volume;
+						bar.height = nextBar.height;
+						bar.fill = nextBar.fill;
+						bar.y = nextBar.y;
+						bar.rect.setAttributeNS(null, 'height', bar.height + 'px');
+						bar.rect.setAttributeNS(null, 'y', bar.y);
+					}
+
+				}
 			}).bind(screen);
 		}
 
@@ -777,6 +850,8 @@ var WebRTCconferenceLib = function app(options){
 			}
 			var chatParticipantName = document.createElement('DIV');
 			chatParticipantName.className = 'chat-participant-name';
+			var chatParticipantVoice = document.createElement('DIV');
+			chatParticipantVoice.className = 'chat-participant-voice';
 			var participantNameTextCon = document.createElement("DIV");
 			participantNameTextCon.className = "participant-name-text";
 			var participantNameText = document.createElement("DIV");
@@ -801,6 +876,7 @@ var WebRTCconferenceLib = function app(options){
 			//newScreen.screenEl = chatParticipantEl;
 			newScreen.videoCon = chatParticipantVideoCon;
 			newScreen.nameEl = chatParticipantName;
+			newScreen.soundEl = chatParticipantVoice;
 			newScreen.isMain = participant.videoTracks.length < 2;
 			newScreen.isLocal = isLocal;
 			if(_debug) console.log('createParticipantScreen END')
@@ -860,13 +936,18 @@ var WebRTCconferenceLib = function app(options){
 
 		var getLoudestScreen = function (mode, callback) {
 			var screenToAnalyze = roomScreens;
-			if(mode == 'allButMe') screenToAnalyze.filter(function (s) {
-				return !s.isLocal;
-			});
-
-			var loudest = screenToAnalyze.filter(function (s) {
+			if(mode == 'allButMe') {
+				screenToAnalyze = screenToAnalyze.filter(function (s) {
+					return !s.isLocal;
+				});
+			}
+			screenToAnalyze = screenToAnalyze.filter(function (s) {
 				return s.soundMeter != null;
-			}).reduce(function(prev, current) {
+			})
+
+			if(screenToAnalyze.length == 0) return;
+
+			var loudest = screenToAnalyze.reduce(function(prev, current) {
 				return (prev.soundMeter.slow > current.soundMeter.slow) ? prev : current;
 			})
 
