@@ -105,7 +105,7 @@ Q.Tool.define("Q/columns", function(options) {
 		}, tool);
 
 		tool.refresh();
-		this.startAdjustingPositions();
+		tool.startAdjustingPositions();
 		Q.onLayout(tool).set(function () {
 			tool.refresh();
 		}, tool);
@@ -847,14 +847,15 @@ Q.Tool.define("Q/columns", function(options) {
 	
 	startAdjustingPositions: function (milliseconds) {
 		milliseconds = milliseconds || 300;
-		this.startAdjustingPositions.interval = setInterval(function () {
-			var top = $(state.container).offset().top;
-			if (this.startAdjustingPositions.top === top) {
+		var tool = this;
+		tool.startAdjustingPositions.interval = setInterval(function () {
+			var top = $(tool.state.container).offset().top;
+			if (tool.startAdjustingPositions.top === top) {
 				return;
 			}
-			var diff = this.startAdjustingPositions.top - top;
-			this.startAdjustingPositions.top = top;
-			Q.each(state.columns, function (i, column) {
+			var diff = tool.startAdjustingPositions.top - top;
+			tool.startAdjustingPositions.top = top;
+			Q.each(tool.state.columns, function (i, column) {
 				var rect = column.getBoundingClientRect();
 				$(column).css('top', rect.top + diff);
 			});
