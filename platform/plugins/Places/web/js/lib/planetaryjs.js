@@ -312,8 +312,10 @@
     var drawPing = function(planet, context, now, alive, ping) {
       var alpha = 1 - (alive / ping.options.ttl);
       var color = d3.rgb(ping.options.color);
+	  var lineWidth = ping.options.lineWidth || 1;
       color = "rgba(" + color.r + "," + color.g + "," + color.b + "," + alpha + ")";
       context.strokeStyle = color;
+	  context.lineWidth = lineWidth;
       var circle = d3.geo.circle().origin([ping.lng, ping.lat])
         .angle(alive / ping.options.ttl * ping.options.angle)();
       context.beginPath();
