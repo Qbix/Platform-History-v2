@@ -689,7 +689,7 @@
 	                var loudestSelect = document.createElement('SELECT');
 	                loudestSelect.className = 'loudest-options'
 	                var option1 = document.createElement('OPTION');
-	                option1.innerHTML = 'Maximize Loudest';
+	                option1.innerHTML = 'Loudest';
 	                option1.value = 'all';
 	                var option2 = document.createElement('OPTION');
 	                option2.innerHTML = 'Loudest Except Me';
@@ -697,7 +697,7 @@
 	                option2.selected = true;
 	                var option3 = document.createElement('OPTION');
 	                option3.value = 'disabled';
-	                option3.innerHTML = 'Loudest Mode Off';
+	                option3.innerHTML = 'Static';
 	                loudestSelect.addEventListener('change', function (e) {
 		                var value = loudestSelect.options[loudestSelect.selectedIndex].value;
 		                if(value == 'disabled') {
@@ -799,13 +799,14 @@
 	                tool.loudestModeInterval = setInterval(function () {
 		                webRTClib.screensInterface.getLoudestScreen(mode, function (loudestScreen) {
 			                if(Q.info.isMobile)
-			                	tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(loudestScreen);
-			                else tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(loudestScreen);
+			                	tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(loudestScreen, 300);
+			                else tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(loudestScreen, 300);
 
 		                });
 	                }, 1000);
 
                 }
+
                 function disableLoudesScreenMode() {
                 	if(tool.loudestModeInterval != null) {
                 		clearInterval(tool.loudestModeInterval);

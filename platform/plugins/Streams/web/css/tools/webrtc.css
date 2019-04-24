@@ -10,6 +10,7 @@
     top: 0;
     left: 0;
     z-index: 99999;
+    pointer-events: none;
 }
 
 .webrtc_tool_desktop-screen .Streams_webrtc_controls_tool {
@@ -26,7 +27,7 @@
     justify-content: center;
     z-index: 999999;
     position: fixed;
-    right: 5px;
+    width:100%;
     bottom: 5px;
 }
 
@@ -336,6 +337,9 @@
     -moz-transform:none;
 }
 
+.webrtc_tool_mobile-screen .webrtc_tool_chat-participant {
+    pointer-events: all;
+}
 .webrtc_tool_mobile-screen .webrtc_tool_tiled-grid-screen.webrtc_tool_chat-participant {
     width:100%;
     height:100%;
@@ -648,6 +652,22 @@
 }*/
 
 
+.webrtc_tool_mobile-screen .webrtc_tool_participant-voice {
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    z-index: 99999;
+    opacity: 0.9;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_maximized-main-screen .webrtc_tool_participant-voice {
+    top: 0;
+    right: 5px;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_minimized-small-screen .webrtc_tool_participant-voice {
+    right: 0;
+}
 .webrtc_tool_mobile-screen .webrtc_tool_chat-participant-name {
     padding: 8px 5px 8px 10px;
     /* transform: translateY(100%); */
@@ -655,7 +675,7 @@
     justify-content: space-between;
     position: absolute;
     width: 100%;
-    bottom: 0;
+    top: 0;
     box-sizing: border-box;
     z-index: 1;
     background-color: rgba(0, 0, 0, 0.4);
@@ -690,6 +710,7 @@
     /* overflow: hidden; */
     position: absolute;
     z-index: 1000;
+    pointer-events: all;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
@@ -825,6 +846,15 @@
     background: white;
     color:black;
 }
+.webrtc_tool_desktop-screen .webrtc_tool_participant-voice {
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    z-index: 99999;
+    opacity: 0.9;
+}
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-name {
     display: flex;
     justify-content: space-between;
@@ -847,6 +877,9 @@
     color: black;
     position: absolute;
     font-size: 14px;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-small-screen .webrtc_tool_participant-voice {
+    right: 0;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text{
     display: flex;
