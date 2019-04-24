@@ -316,7 +316,9 @@
 
 					var i, screen;
 					for (i = 0; screen = roomScreens[i]; i++) {
-						if(screen.videoTrack != null) screen.videoTrack.play();
+						if(screen.videoTrack != null) {
+							screen.videoTrack.play();
+						}
 					}
 				} else {
 					//renderMinimizedScreensGrid()
@@ -359,6 +361,8 @@
 				chatParticipantVideoCon.className = 'webrtc_tool_chat-participant-video';
 				var chatParticipantName = document.createElement('DIV');
 				chatParticipantName.className = 'webrtc_tool_chat-participant-name';
+				var participantVoice = screen.soundEl;
+				participantVoice.className = "webrtc_tool_participant-voice";
 				var participantNameTextCon = document.createElement("DIV");
 				participantNameTextCon.className = "webrtc_tool_participant-name-text";
 				var participantNameText = document.createElement("DIV");
@@ -384,6 +388,7 @@
 
 				participantNameTextCon.appendChild(participantNameText);
 				chatParticipantName.appendChild(participantNameTextCon);
+				chatParticipantEl.appendChild(participantVoice);
 				chatParticipantEl.appendChild(chatParticipantName);
 
 				if(!Q.info.isMobile) {
@@ -451,6 +456,7 @@
 
 				screen.screenEl = chatParticipantEl;
 				screen.nameEl = chatParticipantName;
+				//screen.soundEl = participantVoice;
 
 				if(screen.isLocal) updateLocalScreenClasses(screen);
 
@@ -1014,7 +1020,8 @@
 			 * Render participants' screens on desktop's screen
 			 * @method renderMaximizedScreensGrid
 			 */
-			function renderMaximizedScreensGrid(screenToMaximize) {
+			function renderMaximizedScreensGrid(screenToMaximize, duration) {
+				if(typeof duration == 'undefined') duration = 500;
 				if(_debug) console.log('renderMaximizedScreensGrid')
 				if(_layoutTool == null || _controls == null || (screenToMaximize != null && screenToMaximize == activeScreen)) return;
 				var roomScreens = WebRTCconference.screens();
@@ -1036,7 +1043,7 @@
 				});
 
 				var elements = toggleScreensClass('maximizedScreensGrid');
-				_layoutTool.animate('maximizedScreensGrid', elements, 100, true);
+				_layoutTool.animate('maximizedScreensGrid', elements, duration, true);
 
 				viewMode = 'maximized';
 				updateScreensButtons();
@@ -1550,6 +1557,7 @@
 			if(_roomsMedia.parentNode != null) _roomsMedia.parentNode.removeChild(_roomsMedia);
 			if(_controls != null) {
 				var controlsTool = Q.Tool.from(_controls, "Streams/webrtc/controls");
+				controlsTool.participantsPopup().disableLoudesScreenMode();
 				if(_controls.parentNode != null) _controls.parentNode.removeChild(_controls);
 				Q.Tool.remove(controlsTool);
 			}
