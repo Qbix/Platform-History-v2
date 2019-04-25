@@ -2326,10 +2326,8 @@ var WebRTCconferenceLib = function app(options){
 			connect(token, {
 				name:options.roomName,
 				audio:audioDevices != 0,
-				//video:true,
 				video:videoDevices != 0,
 				preferredVideoCodecs: ['H264', 'VP8'],
-				//logLevel: 'debug'
 			}).then(function(room) {
 				if(_debug) console.log(`Successfully joined a Room: ${room}`, room);
 				room.on('participantConnected', function(participant){

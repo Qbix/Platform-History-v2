@@ -609,10 +609,11 @@
     justify-content: center;
     align-items: center;
     z-index: 1;
+    width:100%;
+    height: 100%;
 }
 .webrtc_tool_mobile-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video {
     height: 100%;
-    width:100%;
 }
 
 .webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video.isHorizontal,
@@ -673,12 +674,11 @@
     /* transform: translateY(100%); */
     display: flex;
     justify-content: space-between;
-    position: absolute;
+    position: relative;
     width: 100%;
-    top: 0;
     box-sizing: border-box;
-    z-index: 1;
-    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 9;
+    background-color: black;
     color: white;
 }
 
@@ -1479,24 +1479,16 @@
 }
 /* Arrow */
 .loudest-options-con::after {
-    content: '\25BC';
+    content: url('data:image/svg+xml; utf8, <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="9.75 10.5 81.5 81.5" enable-background="new 9.75 10.5 81.5 81.5" xml:space="preserve">  <rect x="12.75" y="52.75" fill="none" stroke="%23FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="36.25" height="36.25"/>  <line fill="none" stroke="%23FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="60.5" y1="42.75" x2="75.75" y2="27.5"/>  <polyline fill="none" stroke="%23FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="   63.708,27.5 75.75,27.5 75.75,39.541 "/>  <polyline fill="none" stroke="%23FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="   57.75,89 88.25,89 88.25,13.5 12.75,13.5 12.75,44 "/>  </svg>  ');
+    width: 45px;
+    height: 100%;
     position: absolute;
-    top: 0;
     right: 0;
     bottom: 0;
-    padding: 0 10px;
-    line-height: 3;
+    padding: 10px 10px;
+    line-height: 1;
     background: #4aaa4e;
     pointer-events: none;
-}
-/* Transition */
-.loudest-options-con:hover::after {
-    color: #fff;
-}
-.loudest-options-con::after {
-    -webkit-transition: .25s all ease;
-    -o-transition: .25s all ease;
-    transition: .25s all ease;
 }
 
 .webrtc_tool_resize-handler {

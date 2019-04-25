@@ -489,7 +489,7 @@
 							{},
 							function () {
 								var tool = this;
-								tool.state.onMoved.add(function () {
+								tool.state.onResized.add(function () {
 									var movedScreen = WebRTCconference.screens().filter(function (s) {
 										return s.screenEl == tool.element || s.screenEl.contains(tool.element);
 									});

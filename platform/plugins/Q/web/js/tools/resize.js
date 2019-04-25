@@ -22,6 +22,7 @@
 			keepRatioBasedOnElement: null,
 			appliedRecently: false,
 			onMoved: new Q.Event(),
+			onResized: new Q.Event(),
 			onUpdate: new Q.Event(),
 			onRefresh: new Q.Event()
 		},
@@ -99,8 +100,15 @@
 							elementToMove.style.width = elRect.width + 'px';
 							elementToMove.style.height = elRect.height + 'px';
 						}
-						elementToMove.style.top = elRect.top + 'px';
-						elementToMove.style.left = elRect.left + 'px';
+						var elementPosition = elementToMove.style.position;
+						if(elementPosition == 'fixed'){
+							elementToMove.style.top = elRect.top + 'px';
+							elementToMove.style.left = elRect.left + 'px';
+						} else if (elementPosition == 'absolute') {
+							elementToMove.style.top = elementToMove.offsetTop + 'px';
+							elementToMove.style.left = elementToMove.offsetLeft + 'px';
+						}
+
 						elementToMove.style.transform = '';
 						elementToMove.style.position = 'absolute';
 						elementToMove.style.cursor = 'grabbing';
@@ -348,7 +356,7 @@
 						_oldy = null;
 
 						if(tool.state.appliedRecently) {
-							tool.state.onMoved.handle.call(tool);
+							tool.state.onResized.handle.call(tool);
 							setTimeout(function () {
 								tool.state.appliedRecently = false;
 							}, 200)
