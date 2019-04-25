@@ -559,6 +559,16 @@ var WebRTCconferenceLib = function app(options){
 			this.isLocal = null;
 			this.isActive = true;
 			this.screensharing = null;
+			this.soundMeter = {
+				context: null,
+				script: null,
+				instant: 0.0,
+				slow: 0.0,
+				clip: 0.0,
+				reset: function() {
+
+				},
+			}
 			this.getTracksContainer = function() {
 				var chatParticipantVideoCon = document.createElement('DIV');
 				chatParticipantVideoCon.className = 'chat-participant-video';
@@ -653,10 +663,28 @@ var WebRTCconferenceLib = function app(options){
 				instant: 0.0,
 				slow: 0.0,
 				clip: 0.0,
-				updateInterval: null,
+				resetTimeout: null,
+				reset: function() {
+					if(this.resetTimeout != null) {
+						clearTimeout(this.resetTimeout);
+						this.resetTimeout = null;
+					}
+					this.resetTimeout = setTimeout(function () {
+						source.disconnect();
+						analyser.disconnect();
+						craetAudioeAnalyser(track, screen);
+					}, 500)
+				},
 			};
-			var svgWidth = 100;
-			var svgHeight = 40;
+
+			var screenWidth, elHeight;
+			if(screen.nameEl != null){
+				var rect = screen.nameEl.getBoundingClientRect();
+				screenWidth = rect.width;
+				elHeight = rect.height;
+			}
+			var svgWidth = screenWidth != null && screenWidth != 0 ? screenWidth : 100;
+			var svgHeight = elHeight != null && elHeight != 0 ? elHeight :40;
 			var xmlns = 'http://www.w3.org/2000/svg';
 			var svg = document.createElementNS(xmlns, 'svg');
 			svg.setAttribute('width', svgWidth);
@@ -667,6 +695,7 @@ var WebRTCconferenceLib = function app(options){
 
 			defs.appendChild(clippath);
 			svg.appendChild(defs);
+			screen.soundEl.innerHTML = '';
 			screen.soundEl.appendChild(svg);
 
 			var bucketSVGWidth = 4;

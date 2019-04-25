@@ -654,17 +654,17 @@
 
 
 .webrtc_tool_mobile-screen .webrtc_tool_participant-voice {
-    width: 100px;
-    height: 40px;
+    width: 100%;
+    height: 100%;
     position: absolute;
-    bottom: 0;
-    right: 10px;
-    z-index: 99999;
+    top: 0;
+    left: 0;
+    z-index: 1;
     opacity: 0.9;
+    pointer-events: none;
 }
 .webrtc_tool_mobile-screen .webrtc_tool_maximized-main-screen .webrtc_tool_participant-voice {
     top: 0;
-    right: 5px;
 }
 .webrtc_tool_mobile-screen .webrtc_tool_minimized-small-screen .webrtc_tool_participant-voice {
     right: 0;
@@ -686,7 +686,8 @@
     overflow: hidden;
     display: flex;
     align-items: center;
-    white-space: nowrap
+    white-space: nowrap;
+    z-index: 10;
 }
 .webrtc_tool_mobile-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text div{
     overflow: hidden;
@@ -847,12 +848,12 @@
     color:black;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_participant-voice {
-    width: 100px;
+    width: 100%;
     height: 40px;
     position: absolute;
-    bottom: 0;
-    right: 10px;
-    z-index: 99999;
+    top: 0;
+    left: 0;
+    z-index: 1;
     opacity: 0.9;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-name {
@@ -878,6 +879,9 @@
     position: absolute;
     font-size: 14px;
 }
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_maximized-main-screen .webrtc_tool_participant-voice {
+    top:0;
+}
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-small-screen .webrtc_tool_participant-voice {
     right: 0;
 }
@@ -885,10 +889,13 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    z-index: 10;
+    font-weight: bold;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns{
     display: flex;
     align-items: center;
+    z-index:10;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns span{
     display: block;
@@ -1082,6 +1089,7 @@
     height: 100%;
     width: 100%;
     position: relative;
+    overflow: hidden;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video video{
     width: 100%;
@@ -1467,6 +1475,7 @@
     box-shadow: 0 5px 20px -5px #0048b5;
 }
 .loudest-options-con select {
+    font-size: 1em;
     width: 100%;
     height: 100%;
     margin: 0;
