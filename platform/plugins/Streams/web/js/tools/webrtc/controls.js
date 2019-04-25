@@ -62,7 +62,7 @@
 
                 tool.createSettingsPopup();
                 tool.participantsPopup().createList();
-                tool.participantsPopup().enableLoudesScreenMode('allButMe');
+                tool.participantsPopup().toggleLoudesScreenMode('allButMe');
 
                 tool.element.appendChild(controlBar);
                 tool.bindRTCEvents();
@@ -743,12 +743,8 @@
 	                option3.innerHTML = 'Static';
 	                loudestSelect.addEventListener('change', function (e) {
 		                var value = loudestSelect.options[loudestSelect.selectedIndex].value;
-		                if(value == 'disabled') {
-			                disableLoudesScreenMode();
-		                } else {
-			                disableLoudesScreenMode();
-			                enableLoudesScreenMode(value);
-		                }
+		                toggleLoudesScreenMode(value);
+		                
 	                })
 	                loudestSelect.appendChild(option1);
 	                loudestSelect.appendChild(option2);
@@ -837,8 +833,16 @@
 	                }
                 }
 
-                function enableLoudesScreenMode(mode) {
-                	if(tool.loudestModeInterval != null) return;
+                function toggleLoudesScreenMode(mode) {
+                	if(tool.loudestModeInterval != null) {
+                		clearInterval(tool.loudestModeInterval);
+		                tool.loudestModeInterval = null;
+	                }
+
+	                if(mode == 'disabled'){
+                		return;
+	                }
+
 	                tool.loudestModeInterval = setInterval(function () {
 		                webRTClib.screensInterface.getLoudestScreen(mode, function (loudestScreen) {
 			                if(Q.info.isMobile)
@@ -855,6 +859,10 @@
                 		clearInterval(tool.loudestModeInterval);
 		                tool.loudestModeInterval = null;
 	                }
+	                var disabledOption = tool.loudestSelect.querySelector('option[value="disabled"');
+                	if(disabledOption != null) {
+		                disabledOption.selected = true;
+	                }
                 }
 
                 return {
@@ -863,7 +871,7 @@
 	                toggleLocalAudio:toggleLocalAudio,
                     addItem:addItem,
                     removeItem:removeItem,
-	                enableLoudesScreenMode:enableLoudesScreenMode,
+	                toggleLoudesScreenMode:toggleLoudesScreenMode,
 	                disableLoudesScreenMode:disableLoudesScreenMode,
                 }
             },
