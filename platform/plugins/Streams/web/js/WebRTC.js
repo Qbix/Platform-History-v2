@@ -14,6 +14,7 @@
 		var WebRTCconference;
 		var _options = {};
 		var _controls = null;
+		var _controlsTool = null;
 		var _roomsMedia = null;
 		var _layoutTool = null;
 		var _roomStream = null;
@@ -122,6 +123,7 @@
 							{},
 							function () {
 								_controls = this.element;
+								_controlsTool = this;
 								screensRendering.updateLayout();
 							}
 						);
@@ -388,7 +390,7 @@
 
 				participantNameTextCon.appendChild(participantNameText);
 				chatParticipantName.appendChild(participantNameTextCon);
-				chatParticipantEl.appendChild(participantVoice);
+				chatParticipantName.appendChild(participantVoice);
 				chatParticipantEl.appendChild(chatParticipantName);
 
 				if(!Q.info.isMobile) {
@@ -489,7 +491,7 @@
 							{},
 							function () {
 								var tool = this;
-								tool.state.onMoved.add(function () {
+								tool.state.onResized.add(function () {
 									var movedScreen = WebRTCconference.screens().filter(function (s) {
 										return s.screenEl == tool.element || s.screenEl.contains(tool.element);
 									});
@@ -722,6 +724,8 @@
 					if(Q.info.isMobile){
 						renderMaximizedScreensGridMobile(tappedScreen);
 					} else renderMaximizedScreensGrid(tappedScreen);
+
+					if(_controlsTool != null) _controlsTool.participantsPopup().disableLoudesScreenMode();
 					return;
 				} else if (activeScreen && activeScreen.excludeFromRendering && (activeScreen.screenEl.contains(e.target) || activeScreen.screenEl == e.target)) {
 					enableAllScreenToRender();
@@ -729,6 +733,8 @@
 					if(Q.info.isMobile){
 						renderMaximizedScreensGridMobile(tappedScreen);
 					} else renderMaximizedScreensGrid(tappedScreen);
+
+					if(_controlsTool != null) _controlsTool.participantsPopup().disableLoudesScreenMode();
 					return;
 				}
 
@@ -772,7 +778,12 @@
 				} else if(modeToSwitch == 'maximizedMobile') {
 					renderMaximizedScreensGridMobile(tappedScreen);
 				} else if(modeToSwitch == 'tiled') {
-					renderTiledScreenGridDesktop();
+					var roomScreens = WebRTCconference.screens();
+					if(roomScreens.length == 1) {
+						modeToSwitch = 'regular';
+						renderDesktopScreensGrid();
+					} else renderTiledScreenGridDesktop();
+
 				}
 
 				viewMode = modeToSwitch;
@@ -886,7 +897,7 @@
 						return e != null;
 					});
 
-					if(layout == 'maximizedScreensGrid' || layout == 'maximizedVerticalMobile' || layout == 'maximizedHorizontalMobile'){
+					if((layout == 'maximizedScreensGrid' || layout == 'maximizedVerticalMobile' || layout == 'maximizedHorizontalMobile') && activeScreen){
 						elements.unshift(activeScreen.screenEl)
 						moveScreenBack(activeScreen.screenEl);
 					}
@@ -953,6 +964,7 @@
 				}
 				activeScreen = null;
 
+				roomScreens.map(function (screen) {screen.soundMeter.reset();});
 			}
 
 			function renderTiledScreenGridDesktop() {
@@ -970,6 +982,7 @@
 				activeScreen = null;
 
 				updateScreensButtons();
+				roomScreens.map(function (screen) {screen.soundMeter.reset();});
 			}
 
 			/**
@@ -993,6 +1006,7 @@
 				_layoutTool.animate('regularScreensGrid', elements, 500, true);
 
 				updateScreensButtons();
+				roomScreens.map(function (screen) {screen.soundMeter.reset();});
 			}
 
 			/**
@@ -1014,6 +1028,7 @@
 
 				viewMode = 'minimized';
 				updateScreensButtons();
+				roomScreens.map(function (screen) {screen.soundMeter.reset();});
 			}
 
 			/**
@@ -1047,6 +1062,7 @@
 
 				viewMode = 'maximized';
 				updateScreensButtons();
+				roomScreens.map(function (screen) {screen.soundMeter.reset();});
 			}
 
 			/**
@@ -1077,6 +1093,8 @@
 					var elements = toggleScreensClass('maximizedHorizontalMobile');
 					_layoutTool.animate('maximizedHorizontalMobile', elements, 100, true);
 				}
+
+				roomScreens.map(function (screen) {screen.soundMeter.reset();});
 			}
 
 			var customLayouts = {
