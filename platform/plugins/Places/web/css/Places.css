@@ -3,12 +3,27 @@
 	padding-left: 20%;
 	text-align: right;
 	text-shadow: white 0px 0px 5px;
-	background-image: url(../img/prompt.svg);
 	background-position: left center;
 	background-repeat: no-repeat;
 	font-size: 30px;
 	font-weight: bold;
 	padding-top: 30px;
+}
+
+.Places_user_location_whileObtaining {
+	position: relative;
+}
+
+.Places_user_location_noGlobe .Places_user_location_set {
+	background-image: url(../img/prompt.svg);
+}
+
+.Places_user_location_globe .Places_globe_tool {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 200px;
+	height: 200px;
 }
 
 .Places_user_location_map,
