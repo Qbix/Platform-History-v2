@@ -11,7 +11,7 @@
 .Q_columns_column {
 	display: block;
 	float: left;
-	background: transparent;
+	background: white;
 	overflow: hidden;
 }
 
@@ -138,7 +138,7 @@ html.Q_ios.Q_standalone .Q_columns_title {
 }
 
 .Q_columns_column .Q_controls_slot {
-	background: #fafafa;
+	background: #f8f8f8;
 	height: 50px;
 	line-height: 50px;
 	position: relative;
@@ -160,4 +160,9 @@ html.Q_ios.Q_standalone .Q_columns_title {
 
 .Q_overflowHidden {
 	overflow: hidden;
+}
+
+.Q_columns_title,
+.Q_columns_title *{
+	user-select: none;
 }
