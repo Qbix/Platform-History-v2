@@ -202,12 +202,16 @@ class Users_Label extends Base_Users_Label
 	 * @method getPermissions
 	 * @param {string} $communityId The community for which need to get permissions
 	 * @param {string} [$userId=null] The user for which permissions requested. If null - logged user.
-	 * @return array
+	 * @return array The array of permissions. Will be empty if user is not logged in.
 	 */
 	static function getPermissions($communityId, $userId = null)
 	{
 		if (!$userId) {
-			$userId = Users::loggedInUser(true)->id;
+			$user = Users::loggedInUser();
+			if (!$user) {
+				return array();
+			}
+			$userId = $user->id;
 		}
 
 		$result = array(

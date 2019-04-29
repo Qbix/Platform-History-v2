@@ -10367,6 +10367,13 @@ Q.info = {
 	    var proceed = false;
 	    var div = document.createElement('div');
 		var CSS = window.CSS || null;
+	    if (CSS && CSS.supports('padding-top: env(safe-area-inset-top)')) {
+	        div.style.paddingTop = 'env(safe-area-inset-top)';
+	        proceed = true;
+	    } else if (CSS && CSS.supports('padding-top: constant(safe-area-inset-top)')) {
+	        div.style.paddingTop = 'constant(safe-area-inset-top)';
+	        proceed = true;
+	    }
 	    if (CSS && CSS.supports('padding-bottom: env(safe-area-inset-bottom)')) {
 	        div.style.paddingBottom = 'env(safe-area-inset-bottom)';
 	        proceed = true;
@@ -10376,7 +10383,8 @@ Q.info = {
 	    }
 	    if (proceed) {
 	        document.body.appendChild(div);
-	        var calculatedPadding = parseInt(div.computedStyle('padding-bottom'));
+	        var calculatedPadding = parseInt(div.computedStyle('padding-top'))
+				+ parseInt(div.computedStyle('padding-bottom'));
 	        document.body.removeChild(div);
 	        if (calculatedPadding > 0) {
 	            return true;
