@@ -105,7 +105,9 @@ Q.Tool.define("Q/columns", function(options) {
 		}, tool);
 
 		tool.refresh();
-		tool.startAdjustingPositions();
+		if (Q.isMobile) {
+			tool.startAdjustingPositions();
+		}
 		Q.onLayout(tool).set(function () {
 			tool.refresh();
 		}, tool);
