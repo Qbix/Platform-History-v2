@@ -217,7 +217,7 @@ var _generators = {
 	    rects.push(mainScreenRect);
 
 	    var rectWidth = 100;
-	    var rectHeight = 100;
+	    var rectHeight = 139;
 	    var spaceBetween = 10;
 	    var totalRects = (size.parentWidth * (size.parentHeight - 66)) / ((rectWidth + spaceBetween) * (rectHeight + spaceBetween));
 	    var perCol = Math.floor((size.parentHeight - 66) / (rectHeight + spaceBetween));

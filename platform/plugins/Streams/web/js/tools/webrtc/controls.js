@@ -740,6 +740,7 @@
 	                option2.selected = true;
 	                var option3 = document.createElement('OPTION');
 	                option3.value = 'disabled';
+	                option3.className = 'loudest-options-disabled';
 	                option3.innerHTML = 'Static';
 	                loudestSelect.addEventListener('change', function (e) {
 		                var value = loudestSelect.options[loudestSelect.selectedIndex].value;
@@ -859,9 +860,10 @@
                 		clearInterval(tool.loudestModeInterval);
 		                tool.loudestModeInterval = null;
 	                }
-	                var disabledOption = tool.loudestSelect.querySelector('option[value="disabled"');
+	                var disabledOption = tool.loudestSelect.getElementsByClassName('loudest-options-disabled')[0];
+                	console.log('disabledOption', tool.loudestSelect.childNodes[2])
                 	if(disabledOption != null) {
-		                disabledOption.selected = true;
+		                disabledOption.selected = 'selected';
 	                }
                 }
 
