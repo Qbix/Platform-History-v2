@@ -495,8 +495,8 @@ Q.Tool.define("Q/columns", function(options) {
 				});
 			});
 			
-			var expandTop = index > 0 && state.expandOnMobile && state.expandOnMobile.top;
-			var expandBottom = index > 0 && state.expandOnMobile && state.expandOnMobile.bottom;
+			var expandTop = index > 0 && Q.info.isMobile && state.expandOnMobile && state.expandOnMobile.top;
+			var expandBottom = index > 0 && Q.info.isMobile && state.expandOnMobile && state.expandOnMobile.bottom;
 			var $sc = $(state.container);
 			var top = expandTop
 				? -$sc.offset().top
@@ -921,7 +921,7 @@ function presentColumn(tool, $column, fullscreen) {
 		if (fullscreen) {
 			$cs.add($div).css('height', 'auto');
 			$cs.css('min-height', heightToBottom);
-		} else if (state.expandOnMobile && state.expandOnMobile.bottom) {
+		} else if (Q.info.isMobile && state.expandOnMobile && state.expandOnMobile.bottom) {
 			$cs.height(heightToBottom);
 			$column.css('height', 'auto');
 		}
