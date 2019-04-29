@@ -85,7 +85,7 @@
 	cursor: wait;
 }
 
-.Places_obtaining:before {
+.Places_obtaining::before {
 	content: "";
 	display: block;
 	position: absolute;

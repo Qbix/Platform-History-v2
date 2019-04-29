@@ -275,11 +275,11 @@ Q.Tool.define("Q/columns", function(options) {
 			$div.attr('data-title', $(titleSlot).text() || document.title);
 		}
 		if (state.closeFromSwipeDown) {
-			$(titleSlot).on('touchstart', function (e1) {
+			Q.addEventListener($title[0], 'touchstart', function (e1) {
 				var x1 = Q.Pointer.getX(e1);
 				var y1 = Q.Pointer.getY(e1);
-				$('body').on('touchmove', _onTouchmove);
-				$('body').on('touchend', _onTouchend);
+				Q.addEventListener(document.body, 'touchmove', _onTouchmove, false, true);
+				Q.addEventListener(document.body, 'touchend', _onTouchend, false, true);
 				var $div = $(div);
 				var originalTop = $div.css('top');
 				var originalOpacity = $div.css('opacity');
@@ -297,7 +297,7 @@ Q.Tool.define("Q/columns", function(options) {
 					&& Math.abs((y2-y1)/(x2-x1)) > 2) { //generally down direction
 						tool.close(index);
 						_closed = true;
-						$('body').off('touchmove', _onTouchmove);
+						Q.removeEventListener(document.body, 'touchmove', _onTouchmove);
 					}
 				}
 				function _onTouchend(e2) {
@@ -307,10 +307,10 @@ Q.Tool.define("Q/columns", function(options) {
 							opacity: originalOpacity
 						}, 100);
 					}
-					$('body').off('touchmove', _onTouchmove);
-					$('body').off('touchend', _onTouchend);
+					Q.removeEventListener(document.body, 'touchmove', _onTouchmove);
+					Q.removeEventListener(document.body, 'touchend', _onTouchend);
 				}
-			});
+			}, false, true);
 		}
 		if (o.url) {
 			var url = Q.url(o.url);
@@ -849,7 +849,11 @@ Q.Tool.define("Q/columns", function(options) {
 		milliseconds = milliseconds || 300;
 		var tool = this;
 		tool.startAdjustingPositions.interval = setInterval(function () {
-			var top = $(tool.state.container).offset().top;
+			var $tsc = $(tool.state.container);
+			if (!$tsc.is(":visible")) {
+				return;
+			}
+			var top = $tsc.offset().top;
 			if (tool.startAdjustingPositions.top === top) {
 				return;
 			}

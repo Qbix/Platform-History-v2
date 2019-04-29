@@ -163,7 +163,7 @@
 	font-size: 20px;
 }
 
-.Streams_photoSelector_tool_title:before {
+.Streams_photoSelector_tool_title::before {
 	content: '2.';
 	color: #FFA800;
 	margin-right: 5px;
@@ -808,13 +808,13 @@
 	width: 100%;
 }
 
-.Streams_aspect_interests, .Streams_aspect_interests:before {
+.Streams_aspect_interests, .Streams_aspect_interests::before {
 	color: #bf1118; border-color: #bf1118;
 }
-.Streams_aspect_chats, .Streams_aspect_chats:before {
+.Streams_aspect_chats, .Streams_aspect_chats::before {
 	color: #0b94a9; border-color: #0b94a9;
 }
-.Streams_aspect_promote, .Streams_aspect_promote:before {
+.Streams_aspect_promote, .Streams_aspect_promote::before {
 	color: #742e7f; border-color: #742e7f;
 }
 
@@ -952,10 +952,6 @@
 
 .Streams_unseen_nonzero {
 	display: inline-block !important;
-}
-
-.Streams_chat_preview_tool {
-	background: white;
 }
 
 .Streams_complete_overlay .Q_dialog_content {
