@@ -858,7 +858,7 @@ form#join-form  h1 {
     right: 10px;
     font-size: 20px;
 }
-.dialog-box .close-dialog-sign:before {
+.dialog-box .close-dialog-sign::before {
     content: "\02715";
     color: white;
 }
