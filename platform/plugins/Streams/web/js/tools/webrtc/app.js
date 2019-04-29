@@ -673,16 +673,23 @@ var WebRTCconferenceLib = function app(options){
 				screen.soundMeter.instant = 0.0;
 				screen.soundMeter.slow = 0.0;
 				screen.soundMeter.clip = 0.0;
+				screen.soundMeter.isDisabled = false;
 				screen.soundMeter.reset = function() {
-					if(screen.isLocal && !app.conferenceControl.micIsEnabled()) return;
+					if(screen.isLocal && screen.soundMeter.isDisabled) return;
 					this.script.onaudioprocess = null;
 					setTimeout(function () {
 						buildVisualization(screen);
 					}, 1000);
 
 				}
+				screen.soundMeter.start = function() {
+					screen.soundMeter.isDisabled = false;
+					screen.soundEl.innerHTML = '';
+					this.script.onaudioprocess = null;
+					buildVisualization(screen);
+				}
 				screen.soundMeter.stop = function() {
-
+					screen.soundMeter.isDisabled = true;
 					this.script.onaudioprocess = null;
 					screen.soundEl.innerHTML = '';
 				}
@@ -695,8 +702,8 @@ var WebRTCconferenceLib = function app(options){
 					screenWidth = rect.width;
 					elHeight = rect.height;
 				}
-				var svgWidth = screenWidth != null && screenWidth != 0 ? screenWidth : 100;
-				var svgHeight = elHeight != null && elHeight != 0 ? elHeight :40;
+				var svgWidth = screenWidth != null && screenWidth != 0 ? screenWidth / 2 : 100;
+				var svgHeight = elHeight != null && elHeight != 0 ? elHeight / 100 * 80 : 40;
 				var xmlns = 'http://www.w3.org/2000/svg';
 				var svg = document.createElementNS(xmlns, 'svg');
 				svg.setAttribute('width', svgWidth);
@@ -796,6 +803,7 @@ var WebRTCconferenceLib = function app(options){
 								bar.volume = screen.soundMeter.instant;
 								//var height = (bar.volume / 2 * 100);
 								var height = bar.volume > 0 && average > 0 ? (bar.volume / average * 100) : 0;
+								if(height > 100) height = 100;
 								//console.log('height', bar.volume, height, average)
 								//bar.y = svgHeight / 2 - height / 2
 								bar.y = svgHeight - (svgHeight / 100 * height);
@@ -2346,7 +2354,7 @@ var WebRTCconferenceLib = function app(options){
 
 			var i, screen;
 			for(i = 0; screen = localParticipant.screens[i]; i++) {
-				screen.soundMeter.reset();
+				screen.soundMeter.start();
 			}
 			if(_debug) console.log('enableAudioTracks', micIsDisabled);
 
