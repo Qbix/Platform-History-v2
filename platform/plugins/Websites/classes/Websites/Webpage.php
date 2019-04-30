@@ -222,6 +222,8 @@ class Websites_Webpage
 			}
 		}
 
+		$result['host'] = $parsedUrl['host'];
+
 		return $result;
 	}
 	/**
