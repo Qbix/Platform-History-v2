@@ -36,10 +36,10 @@ class Websites_Webpage
 		if (!is_array($response) || count($response) < 2) {
 			throw new Exception("Server return wrong response!");
 		}
-		$headers = $document = '';
+		$http_response_header = $document = '';
 		foreach ($response as $i => $item) {
 			if (strpos($item, 'HTTP/') === 0 && empty($document)) {
-				$headers = $item;
+				$http_response_header = $item;
 			} else {
 				$document .= $item;
 			}
@@ -47,7 +47,15 @@ class Websites_Webpage
 
 
 		$document = file_get_contents($url);
-		$headers = $http_response_header;
+
+		//If http response header mentions that content is gzipped, then uncompress it
+		foreach ($http_response_header as $item) {
+			if(stristr($item, 'content-encoding') && stristr($item, 'gzip')) {
+				//Now lets uncompress the compressed data
+				$document = gzinflate(substr($document,10,-8) );
+				break;
+			}
+		}
 
 		if (!$document) {
 			throw new Exception("Unable to access the site");
@@ -82,13 +90,12 @@ class Websites_Webpage
 
 		// split headers string into array
 		$result['headers'] = array();
-		if (is_string($headers)) {
-			$data = explode("\n", $headers);
-		} else {
-			$data = $headers;
+		if (is_string($http_response_header)) {
+			$http_response_header = explode("\n", $http_response_header);
 		}
-		foreach ($data as $part) {
-			$middle = explode(":",$part);
+
+		foreach ($http_response_header as $item) {
+			$middle = explode(":",$item);
 			$result['headers'][trim($middle[0])] = trim(Q::ifset($middle, 1, null));
 		}
 
@@ -132,15 +139,62 @@ class Websites_Webpage
 		// parse url
 		$result['url'] = $canonicalUrl ?: $url;
 
-		// get icon
+		// get big icon
 		$icon = Q::ifset($result, 'image', null);
+		$bigIconAllowedMetas = array( // search icon among <link> with these "rel"
+			'apple-touch-icon',
+			'apple-touch-icon-precomposed',
+			'icon'
+		);
 		if (Q_Valid::url($icon)) {
 			$result['bigIcon'] = $icon;
 		} else {
-			$result['bigIcon'] = Q::ifset($icons, 'apple-touch-icon', Q::ifset($icons, 'apple-touch-icon-precomposed', Q::ifset($icons, 'icon', null)));
+			foreach ($bigIconAllowedMetas as $item) {
+				if ($item = Q::ifset($icons, $item, null)) {
+					$result['bigIcon'] = $item;
+					break;
+				}
+			}
 		}
 
-		$result['smallIcon'] = Q::ifset($icons, 'icon', Q::ifset($icons, 'shortcut icon', $result['bigIcon']));
+		// get small icon
+		$smallIconAllowedMetas = array( // search icon among <link> with these "rel"
+			'icon',
+			'shortcut icon'
+		);
+		foreach ($smallIconAllowedMetas as $item) {
+			if ($item = Q::ifset($icons, $item, null)) {
+				$result['smallIcon'] = $item;
+				break;
+			}
+
+			// by default
+			$result['smallIcon'] = $result['bigIcon'];
+		}
+
+		// as we don't support SVG images in Users::importIcon, try to select another image
+		// when we start support SVG, just remove these blocks
+		if (pathinfo($result['bigIcon'], PATHINFO_EXTENSION) == 'svg') {
+			reset($bigIconAllowedMetas);
+			foreach ($bigIconAllowedMetas as $item) {
+				$item = Q::ifset($icons, $item, null);
+				if ($item && pathinfo($item, PATHINFO_EXTENSION) != 'svg') {
+					$result['bigIcon'] = $item;
+					break;
+				}
+			}
+		}
+		if (pathinfo($result['smallIcon'], PATHINFO_EXTENSION) == 'svg') {
+			reset($smallIconAllowedMetas);
+			foreach ($smallIconAllowedMetas as $item) {
+				$item = Q::ifset($icons, $item, null);
+				if ($item && pathinfo($item, PATHINFO_EXTENSION) != 'svg') {
+					$result['smallIcon'] = $item;
+					break;
+				}
+			}
+		}
+		//---------------------------------------------------------------
 
 		// if big icon empty, set it to small icon
 		if (empty($result['bigIcon']) && !empty($result['smallIcon'])) {
@@ -167,6 +221,8 @@ class Websites_Webpage
 				}
 			}
 		}
+
+		$result['host'] = $parsedUrl['host'];
 
 		return $result;
 	}
