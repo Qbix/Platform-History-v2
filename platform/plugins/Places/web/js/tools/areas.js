@@ -191,7 +191,7 @@
 					// get array of areas exist
 					var areasExist = tool.relatedTool.$(".Streams_preview_title").map(function(){
 						return $.trim($(this).text());
-					}).get();
+					}).get() || [];
 
 					// if title already exist
 					if (areasExist.indexOf(title) >= 0) {
