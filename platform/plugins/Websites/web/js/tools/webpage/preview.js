@@ -38,6 +38,7 @@
 		editable: ['title'],
 		mode: 'document',
 		onInvoke: new Q.Event(),
+		onRender: new Q.Event(),
 		hideIfNoParticipants: false
 	},
 
@@ -82,16 +83,6 @@
 				}, function (err, html) {
 
 					tool.element.innerHTML = html;
-
-					Q.activate(tool, function () {
-						var parent, parents = this.parents();
-						for (var id in parents) {
-							parent = parents[id];
-						}
-						if (parent) {
-							Q.layout(parent.element);
-						}
-					});
 
 					var $a = tool.$('a');
 					if ($a.length) {
