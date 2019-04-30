@@ -85,6 +85,13 @@
 
 					Q.activate(tool);
 
+					tool.$('a').on('click', function () {
+						if (state.mode === 'title') {
+							return;
+						}
+						return false;
+					});
+
 					if (state.mode === 'title') {
 						return;
 					}
@@ -94,7 +101,6 @@
 						if ($te.closest('.Websites_webpage_composer_tool').length) {
 							return;
 						}
-
 						Q.handle(state.onInvoke, tool, [tool.preview]);
 					});
 
