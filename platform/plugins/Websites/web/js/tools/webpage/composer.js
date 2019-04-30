@@ -16,7 +16,7 @@
 		});
 
 		// loading styles
-		Q.addStylesheet('{{Websites}}/css/tools/WebpageComposer.css', pipe.fill('styles'));
+		Q.addStylesheet('{{Websites}}/css/tools/webpage/composer.css', pipe.fill('styles'));
 
 		// loading text
 		Q.Text.get('Websites/content', function (err, text) {
