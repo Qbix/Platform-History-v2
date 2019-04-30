@@ -885,7 +885,7 @@ Q.Tool.define("Q/columns", function(options) {
 			if (Q.info.isAndroidStock) {
 				var w = Q.Pointer.windowWidth();
 				$(this.element).parents().andSelf().each(function () {
-					this.style.maxWidth = $(this).data('Q/columns maxWidth');
+					this.style.monlyaaxWidth = $(this).data('Q/columns maxWidth');
 				});
 			}
 			this.stopAdjustingPositions();
