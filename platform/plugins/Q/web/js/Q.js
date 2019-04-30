@@ -12568,13 +12568,6 @@ Q.onInit.add(function () {
 	
 	if (root.SpeechSynthesisUtterance && root.speechSynthesis) {
 		Q.addEventListener(document.body, 'click', _enableSpeech, false, true);
-		function _enableSpeech () {
-			var s = new SpeechSynthesisUtterance();
-			s.text = '';
-			speechSynthesis.speak(s); // enable speech for the site, on any click
-			Q.removeEventListener(document.body, 'click', _enableSpeech);
-			Q.Audio.speak.enabled = true;
-		}
 	}
 
 	Q.Text.get('Q/content', function (err, text) {
@@ -12589,6 +12582,14 @@ Q.onInit.add(function () {
 		QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
 		QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
 	});
+
+	function _enableSpeech () {
+		var s = new SpeechSynthesisUtterance();
+		s.text = '';
+		speechSynthesis.speak(s); // enable speech for the site, on any click
+		Q.removeEventListener(document.body, 'click', _enableSpeech);
+		Q.Audio.speak.enabled = true;
+	}
 }, 'Q');
 
 Q.onJQuery.add(function ($) {
