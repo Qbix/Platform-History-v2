@@ -23,6 +23,7 @@ var Streams = Q.Streams;
  *   @param {String} [options.className] Any css classes to add to the tool element
  *   @param {Boolean} [options.reflectChanges=true] Whether the tool should update its contents on changes to user streams like firstName, lastName, username and icon. Set to false if you are showing many avatars in a list such as "Users/list" or "Streams/participating" tools. Otherwise it can result many database queries – one per avatar!
  *   @param {Boolean} [options.reflectIconChanges=String(options.icon).isUrl()] Whether to automatically update the icon if the user's icon stream changes
+ *   @param {Boolean} [options.withGender=false] Whether to also load the gender, and listen for its changes
  *   @param {Number} [options.cacheBust=null] Number of milliseconds to use for combating the re-use of cached images when they are first loaded.
  *   @param {Object} [options.templates]
  *     @param {Object} [options.templates.icon]
@@ -80,8 +81,10 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 		.set(handleChange, this);
 		Streams.Stream.onFieldChanged(state.userId, 'Streams/user/lastName', 'content')
 		.set(handleChange, this);
-		Streams.Stream.onFieldChanged(state.userId, 'Streams/user/gender', 'content')
-		.set(handleChange, this);
+		if (state.withGender) {
+			Streams.Stream.onFieldChanged(state.userId, 'Streams/user/gender', 'content')
+				.set(handleChange, this);
+		}
 	}
 	function handleChange(fields, field) {
 		Streams.Avatar.get.forget(state.userId);
@@ -96,6 +99,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	"short": false,
 	className: null,
 	reflectChanges: true,
+	withGender: false,
 	templates: {
 		icon: {
 			dir: '{{Users}}/views',
@@ -212,13 +216,16 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 		if (state.reflectChanges) {
 			// Retain the streams, so they can be refreshed while this tool is active,
 			// triggering the Streams plugin to update the avatar.
-			Streams.Stream.retain(state.userId, [
-				'Streams/user/firstName', 
-				'Streams/user/lastName', 
-				'Streams/user/gender', 
+			var names = [
+				'Streams/user/firstName',
+				'Streams/user/lastName',
 				'Streams/user/username',
 				'Streams/user/icon'
-			], tool);
+			];
+			if (state.withGender) {
+				names.push('Streams/user/gender');
+			}
+			Streams.Stream.retain(state.userId, names, tool);
 		}
 	
 		function _present() {
