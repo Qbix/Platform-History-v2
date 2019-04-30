@@ -61,13 +61,14 @@
 				var url = webpageStream.getAttribute("url");
 
 				Q.Template.render('Websites/webpage/preview', {
-					title: $.inArray('title', state.editable) >= 0 ? Q.Tool.setUpElementHTML('div', 'Streams/inplace', {
+					title: state.editable.indexOf(title) >= 0
+					? Q.Tool.setUpElementHTML('div', 'Streams/inplace', {
 						publisherId: webpageStream.fields.publisherId,
 						streamName: webpageStream.fields.name,
 						field: 'title',
 						inplaceType: 'text'
 					}) : webpageStream.fields.title,
-					description: $.inArray('description', state.editable) >= 0 ? Q.Tool.setUpElementHTML('div', 'Streams/inplace', {
+					description: state.editable.indexOf('description') >= 0 ? Q.Tool.setUpElementHTML('div', 'Streams/inplace', {
 						publisherId: webpageStream.fields.publisherId,
 						streamName: webpageStream.fields.name,
 						field: 'content',
@@ -96,7 +97,9 @@
 						});
 					}
 
-					Q.handle(state.onRender);
+					Q.activate(tool.element, function () {
+						Q.handle(state.onRender, tool);
+					});
 
 					if (state.mode === 'title') {
 						return;
