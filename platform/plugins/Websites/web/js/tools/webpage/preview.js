@@ -85,18 +85,17 @@
 
 					Q.activate(tool);
 
-					if ($te.find('a').length) {
-						$te.plugin('Q/clickable').on('click', function () {
-							if (state.mode === 'title') {
-								var $a = $te.find('a');
+					var $a = tool.$('a');
+					if ($a.length) {
+						if (state.mode === 'title') {
+							$te.on('click', function () {
 								window.open($a.attr('href'), $a.attr('target'));
-							}
+							});
+						}
+						$a.on('click', function (e) {
+							e.preventDefault();
 						});
 					}
-
-					tool.$('a').on('click', function (e) {
-						e.preventDefault();
-					});
 
 					if (state.mode === 'title') {
 						return;
