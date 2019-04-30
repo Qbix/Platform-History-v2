@@ -61,7 +61,7 @@
 				var url = webpageStream.getAttribute("url");
 
 				Q.Template.render('Websites/webpage/preview', {
-					title: state.editable.indexOf(title) >= 0
+					title: state.editable.indexOf('title') >= 0
 					? Q.Tool.setUpElementHTML('div', 'Streams/inplace', {
 						publisherId: webpageStream.fields.publisherId,
 						streamName: webpageStream.fields.name,
