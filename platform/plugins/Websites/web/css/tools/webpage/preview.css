@@ -3,7 +3,6 @@
 	margin: 2px 2px 10px 0;
 	padding: 0;
 	position: relative;
-	box-shadow: 0 0 1px rgba(0,0,0,0.1), 0 0 2px rgba(0,0,0,0.2);
 	border-radius: 7px;
 	border: none;
 }
@@ -65,7 +64,7 @@
 	width: calc(100% - 60px);
 }
 .Websites_webpage_preview_tool[data-participants] .Streams_preview_contents {
-	width: calc(100% - 100px);
+	width: calc(100% - 110px);
 }
 .Websites_webpage_preview_tool .Streams_preview_contents,
 .Websites_webpage_preview_tool .Streams_preview_contents > * {
