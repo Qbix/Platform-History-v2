@@ -11,6 +11,9 @@
 	margin: 0;
 	box-shadow: none;
 }
+.Websites_webpage_preview_tool[data-mode=title] {
+	cursor: pointer;
+}
 .Websites_webpage_preview_tool[data-mode=title] .Users_pile_tool,
 .Websites_webpage_preview_tool[data-mode=title] .streams_chat_unseen {
 	display: none;
