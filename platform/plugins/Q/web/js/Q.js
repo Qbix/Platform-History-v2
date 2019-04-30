@@ -10367,6 +10367,13 @@ Q.info = {
 	    var proceed = false;
 	    var div = document.createElement('div');
 		var CSS = window.CSS || null;
+	    if (CSS && CSS.supports('padding-top: env(safe-area-inset-top)')) {
+	        div.style.paddingTop = 'env(safe-area-inset-top)';
+	        proceed = true;
+	    } else if (CSS && CSS.supports('padding-top: constant(safe-area-inset-top)')) {
+	        div.style.paddingTop = 'constant(safe-area-inset-top)';
+	        proceed = true;
+	    }
 	    if (CSS && CSS.supports('padding-bottom: env(safe-area-inset-bottom)')) {
 	        div.style.paddingBottom = 'env(safe-area-inset-bottom)';
 	        proceed = true;
@@ -10376,7 +10383,8 @@ Q.info = {
 	    }
 	    if (proceed) {
 	        document.body.appendChild(div);
-	        var calculatedPadding = parseInt(div.computedStyle('padding-bottom'));
+	        var calculatedPadding = parseInt(div.computedStyle('padding-top'))
+				+ parseInt(div.computedStyle('padding-bottom'));
 	        document.body.removeChild(div);
 	        if (calculatedPadding > 0) {
 	            return true;
@@ -12560,13 +12568,6 @@ Q.onInit.add(function () {
 	
 	if (root.SpeechSynthesisUtterance && root.speechSynthesis) {
 		Q.addEventListener(document.body, 'click', _enableSpeech, false, true);
-		function _enableSpeech () {
-			var s = new SpeechSynthesisUtterance();
-			s.text = '';
-			speechSynthesis.speak(s); // enable speech for the site, on any click
-			Q.removeEventListener(document.body, 'click', _enableSpeech);
-			Q.Audio.speak.enabled = true;
-		}
 	}
 
 	Q.Text.get('Q/content', function (err, text) {
@@ -12581,6 +12582,14 @@ Q.onInit.add(function () {
 		QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
 		QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
 	});
+
+	function _enableSpeech () {
+		var s = new SpeechSynthesisUtterance();
+		s.text = '';
+		speechSynthesis.speak(s); // enable speech for the site, on any click
+		Q.removeEventListener(document.body, 'click', _enableSpeech);
+		Q.Audio.speak.enabled = true;
+	}
 }, 'Q');
 
 Q.onJQuery.add(function ($) {

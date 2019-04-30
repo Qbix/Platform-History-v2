@@ -98,7 +98,7 @@
   font-size: 20px;
 }
 
-.Users_friendSelector_tool_title:before
+.Users_friendSelector_tool_title::before
 {
 	content: '1.';
 	color: #FFA800;
@@ -321,7 +321,7 @@ a.Users_activation_resend:active {
 .Users_app_icon { vertical-align: middle; }
 
 .Users_authorize_scope_granted { font-style: italic; opacity: 0.5;  }
-.Users_authorize_scope_granted:before {
+.Users_authorize_scope_granted::before {
 	content: '✔';
 }
 #Users_authorize_what { padding: 10px; background: rgba(255, 255, 0, 0.2); }
@@ -436,6 +436,7 @@ a.Users_activation_resend:active {
     width: 40px;
     height: 40px;
 	position: relative;
+	overflow: visible;
 }
 .Users_pile_caption {
     position: absolute;

@@ -150,7 +150,7 @@ class Websites_Webpage
 		// additional handler for youtube.com
 		if ($parsedUrl['host'] == 'www.youtube.com') {
 			$googleapisKey = Q_Config::expect('Websites', 'youtube', 'keys', 'server');
-			preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $googleapisMatches);
+			preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\\/)[^&\n]+(?=\\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $googleapisMatches);
 			$googleapisUrl = sprintf('https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&fields=items(snippet(title,description,tags,thumbnails))&part=snippet', reset($googleapisMatches), $googleapisKey);
 			$googleapisRes = json_decode(Q_Utils::get($googleapisUrl));
 			// if json is valid
@@ -182,11 +182,11 @@ class Websites_Webpage
 	static function normalizeHref ($href, $baseUrl) {
 		$parts = parse_url($baseUrl);
 
-		if (preg_match("#^\/\/#", $href)) {
+		if (preg_match("#^\\/\\/#", $href)) {
 			return $parts['scheme'].':'.$href;
 		}
 
-		if (preg_match("#^\/#", $href)) {
+		if (preg_match("#^\\/#", $href)) {
 			return $parts['scheme'] . '://' . $parts['host'] . $href;
 		}
 
@@ -319,7 +319,7 @@ class Websites_Webpage
 				'lang' => Q::ifset($params, 'lang', 'en')
 			),
 			'skipAccess' => true,
-			'name' => "Websites/webpage/".self::normalizeUrl($url)
+			'name' => "Websites/webpage/".substr(self::normalizeUrl($url), 0, 100)
 		), array(
 			'publisherId' => $interestPublisherId,
 			'streamName' => $interestStreamName,

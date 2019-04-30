@@ -3703,7 +3703,7 @@
           parent = sel.createRange().parentElement();
         }
 
-        if (parent != null && ($.inArray(editor.$el.get(0), $(parent).parents()) >= 0 || parent == editor.$el.get(0))) {
+        if (parent != null && ($(parent).parents().indexOf(editor.$el.get(0)) >= 0 || parent == editor.$el.get(0))) {
           return parent;
         }
         else {
