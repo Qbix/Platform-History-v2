@@ -83,7 +83,15 @@
 
 					tool.element.innerHTML = html;
 
-					Q.activate(tool);
+					Q.activate(tool, function () {
+						var parent, parents = this.parents();
+						for (var id in parents) {
+							parent = parents[id];
+						}
+						if (id) {
+							Q.layout(parent.element);
+						}
+					});
 
 					var $a = tool.$('a');
 					if ($a.length) {
@@ -96,6 +104,8 @@
 							e.preventDefault();
 						});
 					}
+
+					Q.handle(state.onRender);
 
 					if (state.mode === 'title') {
 						return;
