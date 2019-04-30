@@ -17,6 +17,7 @@ var Users = Q.Users;
  *	 @param {String} [options.avatar.icon=80] The default size of the avatar icon
  *	 @param {String} [options.avatar.contents=!Q.info.isMobile] Whether to show the name
  *	 @param {String} [options.avatar.short=true] Whether the name shown should be short
+ *   @param {String} [options.clickable=falser] Whether to apply Q/clickable effect
  */
 Q.Tool.define("Users/status", function(options) {
 	this.refresh(!!this.element.innerHTML);
@@ -30,6 +31,7 @@ Q.Tool.define("Users/status", function(options) {
 		contents: !Q.info.isMobile,
 		short: true
 	},
+	clickable: false,
 	onInvoke: new Q.Event()
 },
 {
@@ -44,11 +46,13 @@ Q.Tool.define("Users/status", function(options) {
 					.append(avatar)
 				).activate();
 			}
-			tool.$('.Users_status_avatar')
-			.plugin('Q/clickable')
+			var $avatar = tool.$('.Users_status_avatar')
 			.on(Q.Pointer.click, tool, function () {
 				Q.handle(state.onInvoke);
 			});
+			if (state.clickable) {
+				$avatar.plugin('Q/clickable', clickable || {})
+			}
 			_wireup();
 		} else {
 			Q.Text.get('Users/content', function (err, text) {

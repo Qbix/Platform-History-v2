@@ -382,7 +382,7 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 	
 	Q: {
 		beforeRemove: function () {
-			clearInterval(tool.rotationInterval);
+			clearInterval(this.rotationInterval);
 		}
 	}
 	

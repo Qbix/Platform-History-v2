@@ -191,10 +191,10 @@
 					// get array of areas exist
 					var areasExist = tool.relatedTool.$(".Streams_preview_title").map(function(){
 						return $.trim($(this).text());
-					}).get();
+					}).get() || [];
 
 					// if title already exist
-					if ($.inArray(title, areasExist) >= 0) {
+					if (areasExist.indexOf(title) >= 0) {
 						Q.alert(state.text.areas.exist, {
 							title: state.text.areas.error,
 							onClose: function(){

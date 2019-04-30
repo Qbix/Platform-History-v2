@@ -29,6 +29,8 @@ Options include:
 --app             Translate the text in the app
 
 --plugins         Translate the text in all the plugins
+
+--plugin          Translate the text in a specific plugin
        
 --format          Can be "google" or "human".
                   "google" automatically translates files using Google Translation API.
@@ -58,7 +60,7 @@ EOT;
 
 // get all CLI options
 $opts = array( 'h::', 's::', 'i::', 'o::', 'n::', 'f::', 'g::', 'r:', 'l:', 'p:');
-$longopts = array('help::', 'source::', 'in::', 'out::', 'null::', 'format::', 'google-format::', 'retranslate:', 'locales:', 'plugins');
+$longopts = array('help::', 'source::', 'in::', 'out::', 'null::', 'format::', 'google-format::', 'retranslate:', 'locales:', 'plugins', 'plugin:');
 $options = getopt(implode('', $opts), $longopts);
 if (isset($options['help'])) {
 	echo $help;
@@ -78,19 +80,25 @@ if (!empty($options['google-format'])) {
 } else {
 	$options['google-format'] = 'html';
 }
+$app = isset($options['app']);
 if (isset($options['plugins'])) {
 	$plugins = Q::plugins();
-	foreach ($plugins as $plugin) {
-		$PLUGIN = strtoupper($plugin);
-		$PLUGIN_DIR = constant($PLUGIN . '_PLUGIN_DIR');
-		foreach (glob($PLUGIN_DIR . DS . 'text' . DS . '*') as $textFolder) {
-			$options['in'] = $options['out'] = $textFolder;
-			echo "Translating $textFolder\n";
-			$translate = new Q_Translate($options);
-			$translate->saveAll();
-		}
-	}
+} else if (isset($options['plugin'])) {
+	$plugins = is_array($options['plugin']) ? $options['plugin'] : array($options['plugin']);
 } else {
+	$app = true;
+}
+foreach ($plugins as $plugin) {
+	$PLUGIN = strtoupper($plugin);
+	$PLUGIN_DIR = constant($PLUGIN . '_PLUGIN_DIR');
+	foreach (glob($PLUGIN_DIR . DS . 'text' . DS . '*') as $textFolder) {
+		$options['in'] = $options['out'] = $textFolder;
+		echo "Translating $textFolder\n";
+		$translate = new Q_Translate($options);
+		$translate->saveAll();
+	}
+}
+if ($app) {
 	$textFolder = APP_DIR . DS . 'text' . DS . CONFIGURE_ORIGINAL_APP_NAME;
 	if (empty($options['in'])) {
 		$options['in'] = $textFolder;

@@ -19,7 +19,7 @@
 		});
 
 		// loading styles
-		Q.addStylesheet('{{Websites}}/css/tools/WebpagePreview.css', pipe.fill('styles'));
+		Q.addStylesheet('{{Websites}}/css/tools/webpage/preview.css', pipe.fill('styles'));
 
 		// loading text
 		Q.Text.get('Websites/content', function (err, text) {
@@ -38,6 +38,7 @@
 		editable: ['title'],
 		mode: 'document',
 		onInvoke: new Q.Event(),
+		onRender: new Q.Event(),
 		hideIfNoParticipants: false
 	},
 
@@ -60,13 +61,14 @@
 				var url = webpageStream.getAttribute("url");
 
 				Q.Template.render('Websites/webpage/preview', {
-					title: $.inArray('title', state.editable) >= 0 ? Q.Tool.setUpElementHTML('div', 'Streams/inplace', {
+					title: state.editable && state.editable.indexOf('title') >= 0
+					? Q.Tool.setUpElementHTML('div', 'Streams/inplace', {
 						publisherId: webpageStream.fields.publisherId,
 						streamName: webpageStream.fields.name,
 						field: 'title',
 						inplaceType: 'text'
 					}) : webpageStream.fields.title,
-					description: $.inArray('description', state.editable) >= 0 ? Q.Tool.setUpElementHTML('div', 'Streams/inplace', {
+					description: state.editable && state.editable.indexOf('description') >= 0 ? Q.Tool.setUpElementHTML('div', 'Streams/inplace', {
 						publisherId: webpageStream.fields.publisherId,
 						streamName: webpageStream.fields.name,
 						field: 'content',
@@ -83,7 +85,21 @@
 
 					tool.element.innerHTML = html;
 
-					Q.activate(tool);
+					var $a = tool.$('a');
+					if ($a.length) {
+						if (state.mode === 'title') {
+							$te.on('click', function () {
+								window.open($a.attr('href'), $a.attr('target'));
+							});
+						}
+						$a.on('click', function (e) {
+							e.preventDefault();
+						});
+					}
+
+					Q.activate(tool.element, function () {
+						Q.handle(state.onRender, tool);
+					});
 
 					if (state.mode === 'title') {
 						return;
@@ -94,7 +110,6 @@
 						if ($te.closest('.Websites_webpage_composer_tool').length) {
 							return;
 						}
-
 						Q.handle(state.onInvoke, tool, [tool.preview]);
 					});
 
