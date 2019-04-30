@@ -60,7 +60,6 @@
 			});
 			WebRTCconference.event.on('participantDisconnected', function (participant) {
 				if(_debug) console.log('%c TWILIO: ANOTHER USER DISCONNECTED', 'background:blue;color:white;', participant)
-
 				screensRendering.updateLayout();
 			});
 			WebRTCconference.event.on('trackAdded', function (participant) {
@@ -68,9 +67,29 @@
 				screensRendering.updateLayout();
 			});
 
+			WebRTCconference.event.on('videoTrackIsBeingAdded', function (screen) {
+				if(_debug) console.log('%c TWILIO: TRACK videoTrackIsBeingAdded', 'background:blue;color:white;')
+				screensRendering.updateLayout();
+				screensRendering.showLoader('screensharingStarting', screen.participant);
+			});
+
 			WebRTCconference.event.on('videoTrackLoaded', function (e) {
-				if(_debug) console.log('%c TWILIO: TRACK LOADED', 'background:blue;color:white;', e)
+				if(_debug) console.log('%c TWILIO: TRACK videoTrackLoaded', 'background:blue;color:white;')
+
+				screensRendering.hideLoader('screensharingStarting', e.screen.participant);
 				screensRendering.fitScreenToVideo(e.trackEl, e.screen, e.reset, e.oldSize)
+			});
+
+			WebRTCconference.event.on('screensharingStarting', function (data) {
+				if(_debug) console.log('%c TWILIO: TRACK screensharingStarting', 'background:blue;color:white;')
+
+				screensRendering.showLoader('screensharingStarting', data.participant);
+			});
+			WebRTCconference.event.on('screensharingStarted', function (data) {
+				//screensRendering.hideLoader('screensharingStarting', data.participant);
+			});
+			WebRTCconference.event.on('screensharingFailed', function (data) {
+				//screensRendering.hideLoader('screensharingStarting', data.participant);
 			});
 		}
 
@@ -704,6 +723,41 @@
 				}).filter(function (el) {return el != null;}))
 
 				screenEl.style.zIndex = currentLowestZIndex-1;
+			}
+
+			function showLoader(loaderName, participant) {
+				var screen = participant.screens[0];
+
+				if(loaderName == 'screensharingStarting') {
+					var loader = screen.screenEl.querySelector('.spinner-load');
+					if(loader != null) return;
+					var loaderCon = document.createElement('DIV');
+					loaderCon.className = 'spinner-load';
+					loaderCon.innerHTML = '<div class="sk-circle">\n' +
+						'  <div class="sk-circle1 sk-child"></div>\n' +
+						'  <div class="sk-circle2 sk-child"></div>\n' +
+						'  <div class="sk-circle3 sk-child"></div>\n' +
+						'  <div class="sk-circle4 sk-child"></div>\n' +
+						'  <div class="sk-circle5 sk-child"></div>\n' +
+						'  <div class="sk-circle6 sk-child"></div>\n' +
+						'  <div class="sk-circle7 sk-child"></div>\n' +
+						'  <div class="sk-circle8 sk-child"></div>\n' +
+						'  <div class="sk-circle9 sk-child"></div>\n' +
+						'  <div class="sk-circle10 sk-child"></div>\n' +
+						'  <div class="sk-circle11 sk-child"></div>\n' +
+						'  <div class="sk-circle12 sk-child"></div>\n' +
+						'</div>';
+
+					screen.screenEl.appendChild(loaderCon);
+				}
+			}
+
+			function hideLoader(loaderName, participant) {
+				var screen = participant.screens[0];
+				if(loaderName == 'screensharingStarting') {
+					var loader = screen.screenEl.querySelector('.spinner-load');
+					if(loader != null && loader.parentNode != null) loader.parentNode.removeChild(loader);
+				}
 			}
 
 			function toggleViewModeByScreenClick(e) {
@@ -1462,6 +1516,8 @@
 				updateLocalScreenClasses:updateLocalScreenClasses,
 				renderMaximizedScreensGrid:renderMaximizedScreensGrid,
 				renderMaximizedScreensGridMobile:renderMaximizedScreensGridMobile,
+				showLoader:showLoader,
+				hideLoader:hideLoader,
 			};
 		})()
 
