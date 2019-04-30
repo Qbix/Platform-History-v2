@@ -53,6 +53,9 @@
 	right: 10px;
 	top: 2px;
 }
+.Websites_webpage_preview_tool {
+	cursor: pointer;
+}
 .Websites_webpage_preview_tool .Streams_aspect_url a:link,
 .Websites_webpage_preview_tool .Streams_aspect_url a:visited,
 .Websites_webpage_preview_tool .Streams_aspect_url a:focus {
