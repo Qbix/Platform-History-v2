@@ -19,7 +19,7 @@
 		});
 
 		// loading styles
-		Q.addStylesheet('{{Websites}}/css/tools/WebpagePreview.css', pipe.fill('styles'));
+		Q.addStylesheet('{{Websites}}/css/tools/webpage/preview.css', pipe.fill('styles'));
 
 		// loading text
 		Q.Text.get('Websites/content', function (err, text) {
@@ -85,11 +85,12 @@
 
 					Q.activate(tool);
 
-					tool.$('a').on('click', function () {
+					tool.$('a').on('click', function (e) {
 						if (state.mode === 'title') {
-							return;
+							var $t = $(this);
+							window.open($t.attr('href'), $t.attr('target'));
 						}
-						return false;
+						e.preventDefault();
 					});
 
 					if (state.mode === 'title') {
