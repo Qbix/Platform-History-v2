@@ -88,7 +88,7 @@
 						for (var id in parents) {
 							parent = parents[id];
 						}
-						if (id) {
+						if (parent) {
 							Q.layout(parent.element);
 						}
 					});
