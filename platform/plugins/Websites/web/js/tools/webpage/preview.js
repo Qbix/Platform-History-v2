@@ -68,7 +68,7 @@
 						field: 'title',
 						inplaceType: 'text'
 					}) : webpageStream.fields.title,
-					description: state && state.editable.indexOf('description') >= 0 ? Q.Tool.setUpElementHTML('div', 'Streams/inplace', {
+					description: state.editable && state.editable.indexOf('description') >= 0 ? Q.Tool.setUpElementHTML('div', 'Streams/inplace', {
 						publisherId: webpageStream.fields.publisherId,
 						streamName: webpageStream.fields.name,
 						field: 'content',
