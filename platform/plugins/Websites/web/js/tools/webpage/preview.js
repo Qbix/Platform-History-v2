@@ -85,11 +85,16 @@
 
 					Q.activate(tool);
 
+					if ($te.find('a').length) {
+						$te.plugin('Q/clickable').on('click', function () {
+							if (state.mode === 'title') {
+								var $a = $te.find('a');
+								window.open($a.attr('href'), $a.attr('target'));
+							}
+						});
+					}
+
 					tool.$('a').on('click', function (e) {
-						if (state.mode === 'title') {
-							var $t = $(this);
-							window.open($t.attr('href'), $t.attr('target'));
-						}
 						e.preventDefault();
 					});
 
