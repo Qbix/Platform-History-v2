@@ -11,9 +11,6 @@
 	margin: 0;
 	box-shadow: none;
 }
-.Websites_webpage_preview_tool[data-mode=title] .Streams_preview_contents {
-	height: 55px;
-}
 .Websites_webpage_preview_tool[data-mode=title] .Users_pile_tool,
 .Websites_webpage_preview_tool[data-mode=title] .streams_chat_unseen {
 	display: none;
@@ -82,6 +79,7 @@
 }
 .Websites_webpage_preview_tool h3.Streams_preview_title {
 	font-size: 16px;
+	height: 24px;
 }
 .Websites_webpage_preview_tool .Streams_aspect_description {
 	font-size: 12px;
