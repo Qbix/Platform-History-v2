@@ -72,6 +72,14 @@
 	overflow: hidden;
 	text-overflow:ellipsis;
 }
+.Websites_webpage_preview_tool .Streams_preview_contents,
+.Websites_webpage_preview_tool .Streams_preview_contents > * {
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+.Websites_webpage_preview_tool .Streams_preview_contents > .Users_pile_tool {
+	overflow: visible;
+}
 .Websites_webpage_preview_tool h3.Streams_preview_title {
 	font-size: 16px;
 }
