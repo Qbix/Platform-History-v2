@@ -743,7 +743,7 @@ Q.Tool.define("Q/columns", function(options) {
 		
 		var expandTop = index > 0 && state.expandOnMobile && state.expandOnMobile.top;
 		var expandBottom = index > 0 && state.expandOnMobile && state.expandOnMobile.bottom;
-		if (expandTop || expandBottom) {
+		if (index > 0 && (expandTop || expandBottom)) {
 			var $parents = $(tool.element).parents();
 			$parents.removeClass('Q_columns_containsExpanded');
 			$parents.siblings().removeClass('Q_columns_siblingContainsExpanded');

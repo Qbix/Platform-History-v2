@@ -143,7 +143,7 @@ Q.Tool.define("Places/user/location", function (options) {
 				_submit();
 			});
 	
-			tool.$('.Places_user_location_set, .Places_user_location_update_button')
+			tool.$('.Places_user_location_set, .Places_user_location_update_button, .Places_globe_tool')
 			.on(Q.Pointer.click, function () {
 				var $this = $(this);
 				$this.addClass('Places_obtaining');
