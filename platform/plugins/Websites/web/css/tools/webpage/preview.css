@@ -98,6 +98,9 @@
 	font-weight: normal;
 	white-space: nowrap;
 	line-height: 20px;
+	background: #ccccee;
+	border-radius: 5px;
+	padding: 2px;
 }
 .Websites_webpage_preview_tool .Streams_aspect_interests img {
 	width: 16px;
