@@ -861,7 +861,6 @@
 		                tool.loudestModeInterval = null;
 	                }
 	                var disabledOption = tool.loudestSelect.getElementsByClassName('loudest-options-disabled')[0];
-                	console.log('disabledOption', tool.loudestSelect.childNodes[2])
                 	if(disabledOption != null) {
 		                disabledOption.selected = 'selected';
 	                }
