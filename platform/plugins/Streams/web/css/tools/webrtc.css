@@ -612,8 +612,8 @@
     width:100%;
     height: 100%;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video {
-    height: 100%;
+.webrtc_tool_mobile-screen .webrtc_tool_maximized-screens-grid webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video {
+    display: block;
 }
 
 .webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video.isHorizontal,
@@ -637,11 +637,15 @@
     object-fit: cover;
 }
 .webrtc_tool_mobile-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video video.isHorizontal {
+    width: 100%;
     height: 100%;
+    object-fit: cover;
     position: absolute;
 }
 .webrtc_tool_mobile-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video video.isVertical {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     position: absolute;
 }
 /*
@@ -654,20 +658,41 @@
 
 
 .webrtc_tool_mobile-screen .webrtc_tool_participant-voice {
-    width: 100%;
+    width: 50%;
     height: 100%;
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     z-index: 1;
-    opacity: 0.9;
+    opacity: 0.8;
     pointer-events: none;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_participant-voice:before {
+    content: ' ';
+    z-index: 10;
+    display: block;
+    position: absolute;
+    left:0;
+    width:10%;
+    height:100%;
+    background: rgba(0,0,0,1);
+    background: -moz-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.97) 3%, rgba(0,0,0,0) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(0,0,0,1)), color-stop(3%, rgba(0,0,0,0.97)), color-stop(100%, rgba(0,0,0,0)));
+    background: -webkit-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.97) 3%, rgba(0,0,0,0) 100%);
+    background: -o-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.97) 3%, rgba(0,0,0,0) 100%);
+    background: -ms-linear-gradient(left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.97) 3%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.97) 3%, rgba(0,0,0,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000', GradientType=1 );
 }
 .webrtc_tool_mobile-screen .webrtc_tool_maximized-main-screen .webrtc_tool_participant-voice {
     top: 0;
 }
 .webrtc_tool_mobile-screen .webrtc_tool_minimized-small-screen .webrtc_tool_participant-voice {
     right: 0;
+}
+.webrtc_tool_mobile-screen .webrtc_tool_participant-voice svg{
+    position: absolute;
+    bottom: 0;
 }
 .webrtc_tool_mobile-screen .webrtc_tool_chat-participant-name {
     padding: 8px 5px 8px 10px;
@@ -841,6 +866,7 @@
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name {
     display: flex;
+    position: relative;
     justify-content: space-between;
     white-space: nowrap;
     padding: 8px 5px 8px 10px;
@@ -848,13 +874,34 @@
     color:black;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_participant-voice {
-    width: 100%;
-    height: 40px;
+    width: 50%;
+    height: 100%;
     position: absolute;
-    top: 0;
-    left: 0;
+    bottom: 0;
+    right: 0;
     z-index: 1;
-    opacity: 0.9;
+    opacity: 0.8;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_participant-voice:before {
+    content: ' ';
+    z-index: 10;
+    display: block;
+    position: absolute;
+    left:0;
+    width:10%;
+    height:100%;
+    background: rgba(255,255,255,1);
+    background: -moz-linear-gradient(left, rgba(255,255,255,1) 32%, rgba(255,255,255,0) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(32%, rgba(255,255,255,1)), color-stop(100%, rgba(255,255,255,0)));
+    background: -webkit-linear-gradient(left, rgba(255,255,255,1) 32%, rgba(255,255,255,0) 100%);
+    background: -o-linear-gradient(left, rgba(255,255,255,1) 32%, rgba(255,255,255,0) 100%);
+    background: -ms-linear-gradient(left, rgba(255,255,255,1) 32%, rgba(255,255,255,0) 100%);
+    background: linear-gradient(to right, rgba(255,255,255,1) 32%, rgba(255,255,255,0) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff', GradientType=1 );
+}
+.webrtc_tool_desktop-screen .webrtc_tool_participant-voice svg{
+    position: absolute;
+    bottom: 0;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-name {
     display: flex;
@@ -871,20 +918,20 @@
     height: auto;
     padding: 5px 5px 7px 8px;
     width: 100%;
-    bottom: 0;
     box-sizing: border-box;
     z-index: 2;
     background-color: white;
     color: black;
-    position: absolute;
+    position: relative;
     font-size: 14px;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_maximized-main-screen .webrtc_tool_participant-voice {
-    top:0;
+    bottom:0;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-small-screen .webrtc_tool_participant-voice {
     right: 0;
 }
+
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text{
     display: flex;
     flex-direction: column;
@@ -1112,10 +1159,10 @@
     height: 50px;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-name {
-    position: static;
+    position: relative;
 }
 
-.webrtc_tool_desktop-screen ..webrtc_tool_tiled-screens-grid .webrtc_tool_chat-participant-video {
+.webrtc_tool_desktop-screen .webrtc_tool_tiled-screens-grid .webrtc_tool_chat-participant-video {
     flex: 1;
     background: black;
     display: block;
@@ -1490,7 +1537,7 @@
 .loudest-options-con::after {
     content: url('data:image/svg+xml; utf8, <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="9.75 10.5 81.5 81.5" enable-background="new 9.75 10.5 81.5 81.5" xml:space="preserve">  <rect x="12.75" y="52.75" fill="none" stroke="%23FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="36.25" height="36.25"/>  <line fill="none" stroke="%23FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="60.5" y1="42.75" x2="75.75" y2="27.5"/>  <polyline fill="none" stroke="%23FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="   63.708,27.5 75.75,27.5 75.75,39.541 "/>  <polyline fill="none" stroke="%23FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="   57.75,89 88.25,89 88.25,13.5 12.75,13.5 12.75,44 "/>  </svg>  ');
     width: 45px;
-    height: 100%;
+    height: 44px;
     position: absolute;
     right: 0;
     bottom: 0;

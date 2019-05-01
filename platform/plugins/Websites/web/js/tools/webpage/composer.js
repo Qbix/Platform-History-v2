@@ -16,7 +16,10 @@
 		});
 
 		// loading styles
-		Q.addStylesheet('{{Websites}}/css/tools/webpage/composer.css', pipe.fill('styles'));
+		Q.addStylesheet([
+			'{{Websites}}/css/tools/webpage/composer.css',
+			'{{Websites}}/css/tools/webpage/preview.css'
+		], pipe.fill('styles'));
 
 		// loading text
 		Q.Text.get('Websites/content', function (err, text) {
@@ -62,11 +65,14 @@
 							return Q.alert(msg);
 						}
 
+						var slot = response.slots.start;
+						state.publisherId = slot.publisherId;
+						state.streamName = slot.streamName;
+
 						Q.handle(state.onStart, tool);
 					}, {
 						fields: {
-							publisherId: state.publisherId,
-							streamName: state.streamName,
+							data: state.siteData,
 							message: $message.val()
 						}
 					});
@@ -86,7 +92,7 @@
 					$message.removeClass("Q_disabled").plugin('Q/clickfocus');
 					$te.addClass('Websites_webpage_loading');
 
-					Q.req('Websites/scrape', ['publisherId', 'streamName', 'result'], function (err, response) {
+					Q.req('Websites/scrape', ['result'], function (err, response) {
 						var msg = Q.firstErrorMessage(err, response && response.errors);
 						if (msg) {
 							$te.removeClass('Websites_webpage_loading');
@@ -94,29 +100,27 @@
 							return Q.alert(msg);
 						}
 
-						Q.Streams.get(response.slots.publisherId, response.slots.streamName, function (err) {
-							$te.removeClass('Websites_webpage_loading');
+						state.siteData = response.slots.result;
 
-							var msg = Q.firstErrorMessage(err);
-							if (msg) {
-								$message.addClass('Q_disabled');
-								return Q.alert(msg);
-							}
+						$te.removeClass('Websites_webpage_loading');
 
-							state.publisherId = this.fields.publisherId;
-							state.streamName = this.fields.name;
-
-							tool.$(".Websites_webpage_composer").tool('Streams/preview', {
-								'publisherId': state.publisherId,
-								'streamName': state.streamName,
-								'closeable': false,
-								'editable': false
-							}).tool('Websites/webpage/preview').activate();
-
-							$startButton.removeClass('Q_disabled');
-
-							Q.handle(state.onCreate, tool, [this]);
+						Q.Template.render('Websites/webpage/composer/preview', {
+							title: state.siteData.title,
+							description: state.siteData.description,
+							interest: {
+								title: ' ' + state.siteData.host,
+								icon: state.siteData.smallIcon,
+							},
+							src: state.siteData.bigIcon,
+							url: state.siteData.url,
+							text: tool.text.webpage
+						}, function (err, html) {
+							tool.$(".Websites_webpage_composer").html(html);
 						});
+
+						$startButton.removeClass('Q_disabled');
+
+						Q.handle(state.onCreate, tool, [this]);
 					}, {
 						method: 'post',
 						fields: {
@@ -129,8 +133,20 @@
 	});
 
 	Q.Template.set('Websites/webpage/composer',
-		'<div class="Websites_webpage_composer"><input name="url" autocomplete="off" placeholder="{{text.composer.PasteLinkHere}}"> <button name="go" class="Q_button">{{text.composer.Go}}</button></div>' +
+		'<div class="Websites_webpage_composer Websites_webpage_preview_tool" data-type="document"><input name="url" autocomplete="off" placeholder="{{text.composer.PasteLinkHere}}"> <button name="go" class="Q_button">{{text.composer.Go}}</button></div>' +
 		'<textarea name="message" class="Q_disabled" placeholder="{{text.composer.WriteToStartConversation}}"></textarea>' +
 		'<button name="startConversation" class="Q_button Q_disabled">{{text.composer.StartConversation}}</button>'
+	);
+
+	Q.Template.set('Websites/webpage/composer/preview',
+		'<img alt="icon" class="Streams_preview_icon" src="{{& src}}">' +
+		'<div class="Streams_preview_contents">' +
+		'	<h3 class="Streams_preview_title Streams_preview_view">{{& title}}</h3>' +
+		//'	<div class="Streams_aspect_url">{{& url}}</div>' +
+		//'	<div class="Streams_aspect_description">{{& description}}</div>' +
+		'	<div class="Streams_aspect_interests"><img src="{{& interest.icon}}"><a href="{{& url}}" target="_blank">{{& interest.title}}</a></div>' +
+		'	<div class="streams_chat_participants"></div>' +
+		'	<div class="streams_chat_unseen"></div>' +
+		'</div>'
 	);
 })(Q, Q.$, window);

@@ -94,13 +94,15 @@
 					}
 
 					var twilioRoomName = _roomStream.getAttribute('twilioRoomName');
+					
 					WebRTCconference = WebRTCconferenceLib({
 						mode:'twilio',
 						roomName:twilioRoomName,
 						twilioAccessToken: response.slots.token,
 						useAsLibrary: true,
 					});
-					WebRTCconference.init(function () {
+					window.WebConf = WebRTCconference;
+						WebRTCconference.init(function () {
 						bindConferenceEvents();
 						screensRendering.updateLayout();
 						updateParticipantData();
@@ -294,6 +296,23 @@
 					createRoomScreen(participantScreen);
 				}
 
+				function doPlayTracks() {
+					var i, screen;
+					for (i = 0; screen = roomScreens[i]; i++) {
+						if(screen.videoTrack != null) {
+							var promise = screen.videoTrack.play();
+							if (promise !== undefined) {
+								promise.catch(error => {
+									// Auto-play was prevented
+									// Show a UI element to let the user manually start playback
+								}).then(() => {
+									// Auto-play started
+								});
+							}
+						}
+					}
+				}
+
 
 				if(Q.info.isMobile){
 
@@ -316,12 +335,7 @@
 						renderMaximizedScreensGridMobile();
 					}
 
-					var i, screen;
-					for (i = 0; screen = roomScreens[i]; i++) {
-						if(screen.videoTrack != null) {
-							screen.videoTrack.play();
-						}
-					}
+					doPlayTracks()
 				} else {
 					//renderMinimizedScreensGrid()
 					if(viewMode == null || viewMode == 'regular'){
@@ -334,10 +348,7 @@
 						renderTiledScreenGridDesktop();
 					}
 
-					var i, screen;
-					for (i = 0; screen = roomScreens[i]; i++) {
-						if(screen.videoTrack != null) screen.videoTrack.play();
-					}
+					doPlayTracks();
 
 				}
 
@@ -669,6 +680,13 @@
 				}
 
 			}
+			
+			function resetAudioVisualization() {
+				var roomScreens = WebRTCconference.screens();
+				roomScreens.map(function (screen) {
+					screen.soundMeter.reset();
+				});
+			}
 
 			function moveScreenFront(e) {
 				var screenEl = this;
@@ -963,12 +981,10 @@
 					_layoutTool.animate('tiledHorizontalMobile', elements, 500, true);
 				}
 				activeScreen = null;
-
-				roomScreens.map(function (screen) {screen.soundMeter.reset();});
+				resetAudioVisualization();
 			}
 
 			function renderTiledScreenGridDesktop() {
-				var roomScreens = WebRTCconference.screens();
 				if(_debug) console.log('renderTiledScreenGridDesktop')
 				if(window.innerHeight > window.innerWidth) {
 					//_roomsMedia.className = 'webrtc_tool_tiled-vertical-grid';
@@ -982,7 +998,7 @@
 				activeScreen = null;
 
 				updateScreensButtons();
-				roomScreens.map(function (screen) {screen.soundMeter.reset();});
+				resetAudioVisualization();
 			}
 
 			/**
@@ -991,7 +1007,6 @@
 			 */
 			function renderDesktopScreensGrid() {
 				if(_layoutTool == null || _controls == null) return;
-				var roomScreens = WebRTCconference.screens();
 				activeScreen = null;
 
 				var elements = toggleScreensClass('regularScreensGrid');
@@ -1000,13 +1015,11 @@
 					return customLayouts.regularScreensGrid(document.body, count);
 				});
 
-				var roomScreens = WebRTCconference.screens();
-
 				if(_debug) console.log('renderDesktopScreensGrid', roomScreens, elements);
 				_layoutTool.animate('regularScreensGrid', elements, 500, true);
 
 				updateScreensButtons();
-				roomScreens.map(function (screen) {screen.soundMeter.reset();});
+				resetAudioVisualization();
 			}
 
 			/**
@@ -1028,7 +1041,7 @@
 
 				viewMode = 'minimized';
 				updateScreensButtons();
-				roomScreens.map(function (screen) {screen.soundMeter.reset();});
+				resetAudioVisualization();
 			}
 
 			/**
@@ -1062,7 +1075,7 @@
 
 				viewMode = 'maximized';
 				updateScreensButtons();
-				roomScreens.map(function (screen) {screen.soundMeter.reset();});
+				resetAudioVisualization();
 			}
 
 			/**
@@ -1071,7 +1084,7 @@
 			 */
 			function renderMaximizedScreensGridMobile(screenToMaximize) {
 				if(_debug) console.log('renderMaximizedScreensGridMobile')
-				if(_layoutTool == null || _controls == null) return;
+				if(_layoutTool == null || _controls == null || (screenToMaximize != null && screenToMaximize == activeScreen)) return;
 				var roomScreens = WebRTCconference.screens();
 				if(screenToMaximize != null) activeScreen = screenToMaximize;
 				if(screenToMaximize == null && (activeScreen == null || activeScreen.isLocal) && roomScreens.length == 2) {
@@ -1094,7 +1107,7 @@
 					_layoutTool.animate('maximizedHorizontalMobile', elements, 100, true);
 				}
 
-				roomScreens.map(function (screen) {screen.soundMeter.reset();});
+				resetAudioVisualization();
 			}
 
 			var customLayouts = {

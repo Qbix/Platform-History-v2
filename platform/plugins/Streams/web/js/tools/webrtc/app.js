@@ -3,6 +3,7 @@ var IceCandidate = window.mozRTCIceCandidate || window.RTCIceCandidate;
 var SessionDescription = window.mozRTCSessionDescription || window.RTCSessionDescription;
 navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
 navigator.mediaDevices.getUserMedia = navigator.mediaDevices.getUserMedia || navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 var WebRTCconferenceLib = function app(options){
@@ -72,10 +73,6 @@ var WebRTCconferenceLib = function app(options){
 		disabledSpeaker: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0 0 99.999 99.999" enable-background="new 0 0 99.999 99.999" xml:space="preserve">  <path fill="#FFFFFF" d="M50,0C22.431,0,0,22.43,0,50c0,27.571,22.429,50,50,50c27.568,0,49.999-22.429,49.999-50   C99.999,22.431,77.568,0,50,0z M50,95.929C24.675,95.929,4.071,75.325,4.071,50C4.071,24.675,24.675,4.07,50,4.07   C75.324,4.07,95.927,24.674,95.927,50C95.927,75.326,75.324,95.929,50,95.929z"/>  <g>   <path fill="#FFFFFF" d="M43.8,68.242c0.13,0.072,0.16,0.109,0.31,0.131c0.055,0.01,0.113,0.012,0.169,0.004    c0.056-0.004,0.112-0.016,0.165-0.033c0.107-0.041,0.203-0.104,0.279-0.188c0.038-0.043,0.277-0.092,0.303-0.141    c0.072-0.135,0.287-0.178,0.287-0.326v-6.393l-4.271,4.722L43.8,68.242z"/>   <path fill="#FFFFFF" d="M45.314,32.309c0-0.056-0.213-0.113-0.227-0.168c-0.027-0.109-0.185-0.211-0.261-0.295    c-0.037-0.042-0.132-0.079-0.178-0.11c-0.047-0.031-0.126-0.05-0.177-0.075c-0.055-0.013-0.123-0.025-0.178-0.037    c-0.149,0.004-0.199-0.008-0.339,0.051c-0.051,0.022-0.1,0.291-0.149,0.319l-10.092,7.808h-8.545c-0.06,0-0.121-0.228-0.179-0.212    c-0.117,0.032-0.223-0.024-0.309,0.062c-0.042,0.043-0.079,0.032-0.109,0.084c-0.03,0.052-0.135,0.078-0.151,0.136    c-0.016,0.057-0.105,0.088-0.105,0.148v19.964c0,0.062,0.09,0.121,0.105,0.18c0.016,0.058,0.08,0.113,0.11,0.166    c0.06,0.104,0.167,0.191,0.273,0.252c0.052,0.027,0.118,0.116,0.176,0.132c0.058,0.014,0.129,0.088,0.189,0.088h8.544l1.704,1.059    l9.898-11.321V32.309z"/>   <path fill="#FFFFFF" d="M53.123,59.289c-0.385,0.394-0.375,1.026,0.021,1.412c0.193,0.188,0.445,0.283,0.695,0.283    c0.263,0,0.522-0.102,0.722-0.303c5.376-5.542,5.232-11.014,3.819-15.036l-1.497,1.738C57.72,50.709,57.34,54.942,53.123,59.289z"    />   <path fill="#FFFFFF" d="M54.545,39.31c-0.391-0.388-1.021-0.387-1.415,0.005c-0.387,0.393-0.387,1.026,0.01,1.415    c0.018,0.018,0.059,0.06,0.111,0.114l1.308-1.52C54.556,39.321,54.546,39.311,54.545,39.31z"/>   <path fill="#FFFFFF" d="M59.311,64.598c-0.385,0.395-0.375,1.029,0.021,1.414c0.191,0.188,0.443,0.281,0.693,0.281    c0.264,0,0.522-0.104,0.722-0.305c10.414-10.733,7.009-21.294,3.533-27.195l-1.324,1.538    C66.038,45.763,68.617,55.007,59.311,64.598z"/>   <path fill="#FFFFFF" d="M65.171,69.037c-0.384,0.395-0.375,1.027,0.021,1.414c0.195,0.186,0.445,0.279,0.697,0.279    c0.26,0,0.521-0.098,0.719-0.301c15.134-15.601,7.428-30.921,2.728-37.507l-1.299,1.509C72.5,40.69,79.215,54.562,65.171,69.037z"    />  </g>  <rect x="47.989" y="13.233" transform="matrix(0.7577 0.6526 -0.6526 0.7577 44.7397 -20.5144)" fill="#C12337" width="4.02" height="73.532"/>  </svg>',
 		switchCameras: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <g>   <path fill="#FFFFFF" d="M50.037,43.904c-3.939,0-7.151,3.212-7.151,7.168c0,3.947,3.212,7.167,7.151,7.167    c3.947,0,7.152-3.22,7.152-7.167C57.189,47.116,53.984,43.904,50.037,43.904z M50.037,56.49c-2.988,0-5.402-2.431-5.402-5.417    c0-2.997,2.414-5.418,5.402-5.418c2.98,0,5.402,2.422,5.402,5.418C55.439,54.069,53.017,56.49,50.037,56.49z"/>   <path fill="#FFFFFF" d="M63.047,43.286c-0.596,0-1.084,0.487-1.084,1.091c0,0.604,0.488,1.091,1.084,1.091    c0.597,0,1.083-0.487,1.083-1.091C64.13,43.773,63.644,43.286,63.047,43.286z"/>   <path fill="#FFFFFF" d="M50,0C22.431,0,0,22.43,0,50c0,27.571,22.429,50,50,50c27.569,0,50-22.429,50-50C100,22.431,77.569,0,50,0z     M25.111,51.626c0.934-0.933,2.432-0.933,3.366,0c0.934,0.936,0.926,2.446-0.007,3.382l-6.642,6.634    c-0.448,0.451-1.058,0.703-1.692,0.703c-0.633,0-1.242-0.252-1.689-0.703l-6.639-6.634c-0.933-0.936-0.933-2.446,0-3.382    c0.934-0.933,2.365-0.931,3.299,0l2.477,2.563V50c0-17.784,14.551-32.255,32.336-32.255c1.321,0,2.427,1.071,2.427,2.389    c0,1.32-1.017,2.39-2.337,2.39C34.86,22.524,22.583,34.85,22.583,50v4.189L25.111,51.626z M33.583,59.54V43.897    c0-1.44,1.517-3.086,2.956-3.086h5.341l2.703-2.58v-0.008c1-0.518,1.5-1.412,2.258-1.412h6.502c0.711,0,1.338,0.578,1.804,1.043    l0.015,0.158c0.007,0,0.022-0.172,0.022-0.172l3.128,2.971h5.224c1.433,0,3.048,1.646,3.048,3.086V59.54    c0,1.439-1.615,3.271-3.048,3.271H36.538C35.099,62.811,33.583,60.979,33.583,59.54z M86.506,49.071    c-0.614,0-1.063-0.235-1.529-0.698l-2.395-2.56V50c0,17.787-14.631,32.255-32.419,32.255c-1.32,0-2.47-1.067-2.47-2.39    c0-1.32,1.08-2.388,2.399-2.388c15.151,0,27.489-12.329,27.489-27.478v-4.187l-2.611,2.56c-0.934,0.931-2.473,0.931-3.403,0    c-0.938-0.934-0.951-2.447-0.014-3.381l6.63-6.636c0.935-0.935,2.442-0.935,3.375,0l6.635,6.636    c0.936,0.934,0.935,2.447-0.001,3.381C87.728,48.836,87.116,49.071,86.506,49.071z"/>  </g>  </svg>',
 	}
-
-	var AudioContext = window.AudioContext // Default
-		|| window.webkitAudioContext // Safari and old versions of Chrome
-		|| false;
 
 	var Participant = function () {
 		this.sid = null;
@@ -565,7 +562,11 @@ var WebRTCconferenceLib = function app(options){
 				instant: 0.0,
 				slow: 0.0,
 				clip: 0.0,
+				history: {averageVolume: 0, volumeValues:[]},
 				reset: function() {
+
+				},
+				stop: function() {
 
 				},
 			}
@@ -615,6 +616,7 @@ var WebRTCconferenceLib = function app(options){
 		};
 
 		function attachTrack(track, participant) {
+			if(_debug) console.log('attachTrack track', track);
 			if(_debug) console.log('attachTrack participant', participant);
 
 			var screenToAttach;
@@ -628,10 +630,10 @@ var WebRTCconferenceLib = function app(options){
 			} else screenToAttach = curRoomScreens[0];
 			track.parentScreen = screenToAttach;
 
-			var trackEl = createTrackElement(track);
+			var trackEl = createTrackElement(track, participant);
 			if(track.kind == 'audio') craetAudioeAnalyser(track, screenToAttach)
 			if(_debug) console.log('trackEl',Object.keys(trackEl))
-			if(screenToAttach.videoTrack && screenToAttach.videoTrack.parentNode) screenToAttach.videoTrack.parentNode.removeChild(screenToAttach.videoTrack);
+			if(track.kind == 'video' && screenToAttach.videoTrack && screenToAttach.videoTrack.parentNode) screenToAttach.videoTrack.parentNode.removeChild(screenToAttach.videoTrack);
 			screenToAttach.videoCon.appendChild(trackEl);
 			if(track.kind == 'video') screenToAttach.videoTrack = trackEl;
 			screenToAttach.screensharing = track.screensharing == true ? true : false;
@@ -648,132 +650,185 @@ var WebRTCconferenceLib = function app(options){
 		}
 
 		function craetAudioeAnalyser(track, screen) {
-			if (AudioContext == false) return;
-			var context = new AudioContext();
-			var analyser = context.createScriptProcessor(1024, 1, 1);
+
+
+			var context = new window.AudioContext();
+			var analyser
+			if(context.createScriptProcessor) {
+				analyser = context.createScriptProcessor(2048, 2, 1);
+			} else if(context.createJavaScriptNode) {
+				analyser = context.createJavaScriptNode(2048, 2, 1);
+			} else {
+			}
 			var source = context.createMediaStreamSource(track.stream);
 			source.connect(analyser);
 			//source.connect(context.destination); // connect the source to the destination
 
 			analyser.connect(context.destination); // chrome needs the analyser to be connected too...
 
-			screen.soundMeter = {
-				context: context,
-				script: analyser,
-				instant: 0.0,
-				slow: 0.0,
-				clip: 0.0,
-				resetTimeout: null,
-				reset: function() {
-					if(this.resetTimeout != null) {
-						clearTimeout(this.resetTimeout);
-						this.resetTimeout = null;
-					}
-					this.resetTimeout = setTimeout(function () {
-						source.disconnect();
-						analyser.disconnect();
-						craetAudioeAnalyser(track, screen);
-					}, 500)
-				},
-			};
 
-			var screenWidth, elHeight;
-			if(screen.nameEl != null){
-				var rect = screen.nameEl.getBoundingClientRect();
-				screenWidth = rect.width;
-				elHeight = rect.height;
-			}
-			var svgWidth = screenWidth != null && screenWidth != 0 ? screenWidth : 100;
-			var svgHeight = elHeight != null && elHeight != 0 ? elHeight :40;
-			var xmlns = 'http://www.w3.org/2000/svg';
-			var svg = document.createElementNS(xmlns, 'svg');
-			svg.setAttribute('width', svgWidth);
-			svg.setAttribute('height', svgHeight);
-			var defs = document.createElementNS (xmlns, "defs");
-			var clippath = document.createElementNS(xmlns, 'clipPath');
-			clippath.setAttributeNS(null, 'id', 'waveform-mask');
+				screen.soundMeter.context = context;
+				screen.soundMeter.script = analyser;
+				screen.soundMeter.source = source;
+				screen.soundMeter.instant = 0.0;
+				screen.soundMeter.slow = 0.0;
+				screen.soundMeter.clip = 0.0;
+				screen.soundMeter.isDisabled = false;
+				screen.soundMeter.reset = function() {
+					if(screen.isLocal && screen.soundMeter.isDisabled) return;
+					this.script.onaudioprocess = null;
+					setTimeout(function () {
+						buildVisualization(screen);
+					}, 1000);
 
-			defs.appendChild(clippath);
-			svg.appendChild(defs);
-			screen.soundEl.innerHTML = '';
-			screen.soundEl.appendChild(svg);
-
-			var bucketSVGWidth = 4;
-			var bucketSVGHeight = 0;
-			var spaceBetweenRects = 1;
-			var totalBarsNum =  Math.floor(svgWidth / (bucketSVGWidth + spaceBetweenRects));
-			var soundBars = [];
-			var i;
-			for(i = 0; i < totalBarsNum; i++) {
-				var rect = document.createElementNS(xmlns, 'rect');
-				var x = (bucketSVGWidth * i + (spaceBetweenRects * (i + 1)))
-				var y = 0;
-				var fillColor = '#95ffff';
-				rect.setAttributeNS(null, 'x', x);
-				rect.setAttributeNS(null, 'y', 0);
-				rect.setAttributeNS(null, 'width', bucketSVGWidth + 'px');
-				rect.setAttributeNS(null, 'height', bucketSVGHeight + 'px');
-				rect.setAttributeNS(null, 'fill', fillColor);
-				rect.style.strokeWidth = '1';
-				rect.style.stroke = '#1479b5';
-
-				var barObject = {
-					volume: 0,
-					rect: rect,
-					x: x,
-					y: y,
-					width: bucketSVGWidth,
-					height: bucketSVGHeight,
-					fill: fillColor
+				}
+				screen.soundMeter.start = function() {
+					screen.soundMeter.isDisabled = false;
+					screen.soundEl.innerHTML = '';
+					this.script.onaudioprocess = null;
+					buildVisualization(screen);
+				}
+				screen.soundMeter.stop = function() {
+					screen.soundMeter.isDisabled = true;
+					this.script.onaudioprocess = null;
+					screen.soundEl.innerHTML = '';
 				}
 
-				soundBars.push(barObject);
-				svg.appendChild(rect);
-			}
 
-			analyser.onaudioprocess = (function(e) {
+			function buildVisualization(screen) {
+				var screenWidth, elHeight;
+				if(screen.nameEl != null){
+					var rect = screen.nameEl.getBoundingClientRect();
+					screenWidth = rect.width;
+					elHeight = rect.height;
+				}
+				var svgWidth = screenWidth != null && screenWidth != 0 ? screenWidth / 2 : 100;
+				var svgHeight = elHeight != null && elHeight != 0 ? elHeight / 100 * 80 : 40;
+				var xmlns = 'http://www.w3.org/2000/svg';
+				var svg = document.createElementNS(xmlns, 'svg');
+				svg.setAttribute('width', svgWidth);
+				svg.setAttribute('height', svgHeight);
+				var defs = document.createElementNS (xmlns, "defs");
+				var clippath = document.createElementNS(xmlns, 'clipPath');
+				clippath.setAttributeNS(null, 'id', 'waveform-mask');
 
-				var input = e.inputBuffer.getChannelData(0);
+				defs.appendChild(clippath);
+				svg.appendChild(defs);
+				screen.soundEl.innerHTML = '';
+				screen.soundEl.appendChild(svg);
+
+				var bucketSVGWidth = 4;
+				var bucketSVGHeight = 0;
+				var spaceBetweenRects = 1;
+				var totalBarsNum =  Math.floor(svgWidth / (bucketSVGWidth + spaceBetweenRects));
+				var soundBars = [];
 				var i;
-				var sum = 0.0;
-				var clipcount = 0;
-				for (i = 0; i < input.length; ++i) {
-					sum += input[i] * input[i];
-					if (Math.abs(input[i]) > 0.99) {
-						clipcount += 1;
+				for(i = 0; i < totalBarsNum; i++) {
+					var rect = document.createElementNS(xmlns, 'rect');
+					var x = (bucketSVGWidth * i + (spaceBetweenRects * (i + 1)))
+					var y = 0;
+					var fillColor = '#95ffff';
+					rect.setAttributeNS(null, 'x', x);
+					rect.setAttributeNS(null, 'y', 0);
+					rect.setAttributeNS(null, 'width', bucketSVGWidth + 'px');
+					rect.setAttributeNS(null, 'height', bucketSVGHeight + 'px');
+					rect.setAttributeNS(null, 'fill', fillColor);
+					rect.style.strokeWidth = '1';
+					rect.style.stroke = '#1479b5';
+
+					var barObject = {
+						volume: 0,
+						rect: rect,
+						x: x,
+						y: y,
+						width: bucketSVGWidth,
+						height: bucketSVGHeight,
+						fill: fillColor
 					}
 
+					soundBars.push(barObject);
+					svg.appendChild(rect);
 				}
-				screen.soundMeter.instant = Math.sqrt(sum / input.length);
-				screen.soundMeter.slow = 0.95 * screen.soundMeter.slow + 0.05 * screen.soundMeter.instant;
-				screen.soundMeter.clip = clipcount / input.length;
-
-				var i;
-				for (i = 0; i < totalBarsNum; i++) {
 
 
-					var bar = soundBars[i];
-					if(i == totalBarsNum - 1) {
-						bar.volume = screen.soundMeter.instant;
-						var height = (bar.volume / 2 * 100);
-						bar.y = svgHeight / 2 - height / 2
-						bar.height = height;
-						bar.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
+				screen.soundMeter.script.onaudioprocess = function(e) {
 
-						bar.rect.setAttributeNS(null, 'height', bar.height + 'px');
-						bar.rect.setAttributeNS(null, 'y', bar.y);
-					} else {
-						var nextBar = soundBars[i + 1];
-						bar.volume = nextBar.volume;
-						bar.height = nextBar.height;
-						bar.fill = nextBar.fill;
-						bar.y = nextBar.y;
-						bar.rect.setAttributeNS(null, 'height', bar.height + 'px');
-						bar.rect.setAttributeNS(null, 'y', bar.y);
+					var input = e.inputBuffer.getChannelData(0);
+					var i;
+					var sum = 0.0;
+					var clipcount = 0;
+					for (i = 0; i < input.length; ++i) {
+						sum += input[i] * input[i];
+						if (Math.abs(input[i]) > 0.99) {
+							clipcount += 1;
+						}
+
 					}
 
+
+					//console.log('input', Math.sqrt(sum / input.length));
+					screen.soundMeter.instant = Math.sqrt(sum / input.length);
+					screen.soundMeter.slow = 0.95 * screen.soundMeter.slow + 0.05 * screen.soundMeter.instant;
+					screen.soundMeter.clip = clipcount / input.length;
+					var historyLength = screen.soundMeter.history.volumeValues.length;
+					if(historyLength > 100) screen.soundMeter.history.volumeValues.splice(0, historyLength - 100);
+					screen.soundMeter.history.volumeValues.push({
+						time: performance.now(),
+						value: screen.soundMeter.instant
+					});
+
+					var latest500ms = screen.soundMeter.history.volumeValues.filter(function (o) {
+						return performance.now() - o.time < 500;
+					});
+					var sum = latest500ms.reduce((a, b) => a + (b['value'] || 0), 0);
+					var average = (sum / 2);
+					//console.log('average', sum, sum / 2, latest500ms.length)
+					/*if(screen.soundMeter.history.startTime == null)
+						screen.soundMeter.history.startTime = performance.now();
+					else {
+						if(performance.now() - screen.soundMeter.history.startTime >= 1000){
+							console.log('history', screen.soundMeter.history.volumeValues.length);
+							screen.soundMeter.history.startTime = null;
+							//screen.soundMeter.history.volumeValues = [];
+						}
+					}*/
+
+
+						var i;
+						for (i = 0; i < totalBarsNum; i++) {
+
+
+							var bar = soundBars[i];
+							if(i == totalBarsNum - 1) {
+								bar.volume = screen.soundMeter.instant;
+								//var height = (bar.volume / 2 * 100);
+								var height = bar.volume > 0 && average > 0 ? (bar.volume / average * 100) : 0;
+								if(height > 100) height = 100;
+								//console.log('height', bar.volume, height, average)
+								//bar.y = svgHeight / 2 - height / 2
+								bar.y = svgHeight - (svgHeight / 100 * height);
+								bar.height = height;
+								bar.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
+
+								bar.rect.setAttributeNS(null, 'height', bar.height + '%');
+								bar.rect.setAttributeNS(null, 'y', bar.y);
+							} else {
+								var nextBar = soundBars[i + 1];
+								bar.volume = nextBar.volume;
+								bar.height = nextBar.height;
+								bar.fill = nextBar.fill;
+								bar.y = nextBar.y;
+								bar.rect.setAttributeNS(null, 'height', bar.height + '%');
+								bar.rect.setAttributeNS(null, 'y', bar.y);
+							}
+
+						}
+
+
 				}
-			}).bind(screen);
+			}
+
+			buildVisualization(screen)
 		}
 
 		function getScreenOfTrack(track) {
@@ -809,7 +864,7 @@ var WebRTCconferenceLib = function app(options){
 			//removeEmptyScreens();
 		}
 
-		function createTrackElement(track) {
+		function createTrackElement(track, participant) {
 			//if(track.twilioReference != null) return track.twilioReference.attach();
 			if(_debug) console.log('createTrackElement', track)
 			var remoteStreamEl = document.createElement(track.kind);
@@ -817,11 +872,17 @@ var WebRTCconferenceLib = function app(options){
 			stream.addTrack(track.mediaStreamTrack);
 			if(_debug) console.log('createTrackElement stream', track.mediaStreamTrack.getSettings())
 
-			remoteStreamEl.srcObject = stream;
-			if(!track.isLocal || track.isLocal && track.kind == 'video') remoteStreamEl.autoplay = true;
-			remoteStreamEl.playsInline = true;
+			if(track.twilioReference != null) {
+				track.twilioReference.attach(remoteStreamEl)
+			} else {
+				remoteStreamEl.srcObject = stream;
+				if(!track.isLocal || track.isLocal && track.kind == 'video') remoteStreamEl.autoplay = true;
+				remoteStreamEl.playsInline = true;
+			}
 
-			track.stream = stream;
+
+			participant.stream = remoteStreamEl.srcObject;
+			track.stream = remoteStreamEl.srcObject;
 			//remoteStream.srcObject = track.twilioReference != null ? track.twilioReference.mediaStreamTrack : track.MediaStreamTrack;
 			if(track.kind == 'video') {
 				remoteStreamEl.addEventListener('loadedmetadata', function (e) {
@@ -2251,30 +2312,73 @@ var WebRTCconferenceLib = function app(options){
 		}
 
 		function enableAudioTracks() {
-			var tracks = localParticipant.tracks
+			/*var tracks = localParticipant.tracks
 
 			tracks.forEach(function(track) {
 				if(track.kind == 'audio') {
 					track.mediaStreamTrack.enabled = true;
 				}
+			});*/
+
+			Twilio.createLocalAudioTrack().then(function(localAudioTrack) {
+				var participant = localParticipant.twilioInstance;
+
+
+				var twilioTracks = []
+
+				var i = localParticipant.tracks.length
+				while (i--) {
+					if (localParticipant.tracks[i].kind == 'video') continue;
+					twilioTracks.push(localParticipant.tracks[i].twilioReference);
+					localParticipant.tracks[i].remove();
+				}
+				 console.log("UNPUBLISH", twilioTracks, localAudioTrack);
+
+				//participant.unpublishTracks(twilioTracks);
+
+				participant.publishTrack(localAudioTrack);
+				var trackToAttach = new Track();
+				trackToAttach.sid = localAudioTrack.sid;
+				trackToAttach.mediaStreamTrack = localAudioTrack.mediaStreamTrack;
+				trackToAttach.kind = localAudioTrack.kind;
+				trackToAttach.twilioReference = localAudioTrack;
+
+				app.screensInterface.attachTrack(trackToAttach, localParticipant);
+				//app.conferenceControl.enableVideo();
+				app.views.closeAllDialogues();
+
+				//currentCameraDevice = deviceToSwitch;
 			});
 
 			micIsDisabled = false;
-			if(_debug) console.log('enableAudioTracks', micIsDisabled)
+
+			var i, screen;
+			for(i = 0; screen = localParticipant.screens[i]; i++) {
+				screen.soundMeter.start();
+			}
+			if(_debug) console.log('enableAudioTracks', micIsDisabled);
 
 		}
 
 		function disableAudioTracks() {
-			var tracks = localParticipant.tracks;
+			console.log('disableAudioTracks')
 
-			tracks.forEach(function(track) {
-				if(track.kind == 'audio') {
-					track.mediaStreamTrack.enabled = false;
-				}
-			});
+			var twilioTracks = []
 
+			var i = localParticipant.tracks.length
+			while (i--) {
+				if (localParticipant.tracks[i].kind == 'video') continue;
+				twilioTracks.push(localParticipant.tracks[i].twilioReference);
+				localParticipant.tracks[i].remove();
+			}
+
+			localParticipant.twilioInstance.unpublishTracks(twilioTracks);
 			micIsDisabled = true;
-			if(_debug) console.log('disableAudioTracks', micIsDisabled)
+
+			var i, screen;
+			for(i = 0; screen = localParticipant.screens[i]; i++) {
+				screen.soundMeter.stop();
+			}
 		}
 
 		function destroyControlBar() {
@@ -2591,6 +2695,11 @@ var WebRTCconferenceLib = function app(options){
 	}
 	app.disconnect = function () {
 		if(window.room != null) window.room.disconnect();
+		var i, screen;
+		for (i = 0; screen = roomScreens[i]; i++) {
+			if(screen.soundMeter.script != null) screen.soundMeter.script.disconnect();
+			if(screen.soundMeter.source != null) screen.soundMeter.source.disconnect();
+		}
 	}
 
 	function log(message) {
