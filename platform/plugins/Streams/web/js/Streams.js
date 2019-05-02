@@ -1455,7 +1455,12 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 						break;
 				}
 			})
-		}, { method: 'post', fields: o, baseUrl: baseUrl });
+		}, {
+			method: 'post',
+			fields: o,
+			baseUrl: baseUrl,
+			xhr: { sync: true } // so we can open the window on mobile browsers
+		});
 	}
 	if (o.identifier || o.token || o.xids || o.userIds || o.label) {
 		return _request();
