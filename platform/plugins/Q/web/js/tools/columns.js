@@ -174,7 +174,7 @@ Q.Tool.define("Q/columns", function(options) {
 	 * @param {Function} callback Called when the column is opened
 	 */
 	push: function (options, callback) {
-		this.open(options, this.max(), callback);
+		this.open(options, this.max()+1, callback);
 		return this;
 	},
 	
@@ -209,8 +209,9 @@ Q.Tool.define("Q/columns", function(options) {
 	open: function (options, index, callback, internal) {
 		var tool = this;
 		var state = this.state;
+		var max = tool.max();
 		if (index === undefined) {
-			index = tool.max();
+			index = max + 1;
 		}
 		if (typeof options === 'number') {
 			options = {};
@@ -219,7 +220,7 @@ Q.Tool.define("Q/columns", function(options) {
 		}
 		var o = Q.extend({}, 10, state, 10, options);
 
-		if (index > this.max() + 1) {
+		if (index > max + 1) {
 			throw new Q.Exception("Q/columns open: index is too big");
 		}
 		if (index < 0) {
