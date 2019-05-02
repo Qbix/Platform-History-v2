@@ -98,6 +98,8 @@
 	font-weight: normal;
 	white-space: nowrap;
 	line-height: 20px;
+}
+.Websites_webpage_preview_tool[data-mode=title] .Strems_aspect_interests {
 	background: #ccccee;
 	border-radius: 5px;
 	padding: 2px;
