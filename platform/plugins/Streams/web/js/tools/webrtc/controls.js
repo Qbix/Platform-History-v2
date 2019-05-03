@@ -152,6 +152,7 @@
 
                 cameraBtn.addEventListener('touchend', function () {
                     if(!Q.info.isMobile && !Q.info.isTablet) return;
+	                //tool.selectCameraDialogue();
                     Q.Dialogs.push({
                         title: "Video Sources",
                         className: 'webrtc_tool_participants-list',
@@ -260,15 +261,66 @@
                     tool.speakerBtn.classList.add('webrtc_tool_hidden');
                 }*/
 
-                if(webRTClib.conferenceControl.currentAudioDevice() == null) {
+                /*if(webRTClib.conferenceControl.currentAudioDevice() == null) {
                     tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
-                } else if(!conferenceControl.micIsEnabled()) {
+                } else */
+                if(!conferenceControl.micIsEnabled()) {
                     tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
                 } else if(conferenceControl.micIsEnabled()) {
                     tool.microphoneBtn.innerHTML = icons.microphone;
                 }
+                console.log('webRTClib.conferenceControl.currentAudioDevice()', webRTClib.conferenceControl.currentAudioDevice())
+                console.log('conferenceControl.micIsEnabled()', conferenceControl.micIsEnabled())
             },
 
+	        selectCameraDialogue: function(){
+            	var tool = this;
+		        console.log('selectCameraDialogue')
+		        //self.closeAllDialogues();
+
+		        var bg=document.createElement('DIV');
+		        bg.className = 'dialog-bg';
+
+		        var dialogCon=document.createElement('DIV');
+		        dialogCon.className = 'dialog-con';
+		        dialogCon.addEventListener('click', function (e){
+			        e.stopPropagation();
+			        //if(e.currentTarget == e.target) self.closeAllDialogues();
+		        });
+
+		        var dialogue=document.createElement('DIV');
+		        dialogue.className = 'dialog-box select-camera';
+
+		        var dialogTitle=document.createElement('H3');
+		        dialogTitle.innerHTML = 'Select camera';
+		        dialogTitle.className = 'dialog-header';
+
+		        var dialogInner=document.createElement('DIV');
+		        dialogInner.className = 'dialog-inner';
+
+
+		        var close=document.createElement('div');
+		        close.className = 'close-dialog-sign';
+
+
+		        var chooseCameraList = document.createElement('DIV');
+		        chooseCameraList.className = 'choose-device';
+
+		        close.addEventListener('click', function () {
+			        if(bg.parentNode != null) bg.parentNode.removeChild(bg);
+			        if(dialogCon.parentNode != null) dialogCon.parentNode.removeChild(dialogCon);
+		        });
+
+		        dialogInner.appendChild(dialogTitle);
+		        dialogInner.appendChild(tool.settingsPopupEl);
+
+		        dialogue.appendChild(close);
+		        dialogue.appendChild(dialogInner);
+		        dialogCon.appendChild(dialogue)
+		        document.body.appendChild(dialogCon);
+		        document.body.appendChild(bg);
+
+	        },
             /**
              * Create settings popup that appears while pointer hovers camera button on desktop/in modal box on mobile
              * @method createSettingsPopup
@@ -315,6 +367,7 @@
                             checked.parentNode.classList.add('webrtc_tool_disabled-radio');
                             checked.checked = true;
                             checked.disabled = true;
+	                        Q.Dialogs.pop();
                             var cameraId = checked.value;
                             if (cameraId != null) {
                             	webRTClib.conferenceControl.toggleCameras(cameraId, function () {
@@ -323,8 +376,6 @@
 		                            for (i = 0; screen = localScreens[i]; i++) {
 			                            tool.state.webrtcClass.screenRendering.updateLocalScreenClasses(screen);
 		                            }
-
-		                            Q.Dialogs.pop();
 	                            })
                             }
                         }
@@ -393,7 +444,6 @@
                         checked.parentNode.classList.add('webrtc_tool_disabled-radio');
                         checked.disabled = true;
                         checked.checked = true;
-                        var cameraId = checked.value;
                         webRTClib.conferenceControl.disableVideo();
 	                    Q.Dialogs.pop();
                     }
