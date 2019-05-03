@@ -687,7 +687,7 @@ Q.Tool.define("Q/columns", function(options) {
 		var p, waitFor = [];
 		if (t === 'object') {
 			p = new Q.Pipe();
-			Q.each(index.max||state.max-1, index.min||0, -1, function (i) {
+			Q.each(index.max||state.max, index.min||0, -1, function (i) {
 				try { tool.close(i, p.fill(i), options); } catch (e) {}
 				waitFor.push(i);
 			});
@@ -753,8 +753,8 @@ Q.Tool.define("Q/columns", function(options) {
 		
 		Q.Pointer.cancelClick();
 		
-		var expandTop = index > 0 && state.expandOnMobile && state.expandOnMobile.top;
-		var expandBottom = index > 0 && state.expandOnMobile && state.expandOnMobile.bottom;
+		var expandTop = index > 0 && Q.info.isMobile && state.expandOnMobile && state.expandOnMobile.top;
+		var expandBottom = index > 0 && Q.info.isMobile && state.expandOnMobile && state.expandOnMobile.bottom;
 		if (state.max === 0 && (expandTop || expandBottom)) {
 			var $parents = $(tool.element).parents();
 			$parents.removeClass('Q_columns_containsExpanded');
