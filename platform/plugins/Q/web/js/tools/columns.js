@@ -185,7 +185,7 @@ Q.Tool.define("Q/columns", function(options) {
 	 * @param {Object} options Can be used to override various tool options
 	 */
 	pop: function (callback, options) {
-		this.close(this.max()-1, callback, options);
+		this.close(this.max(), callback, options);
 		return this;
 	},
 	
