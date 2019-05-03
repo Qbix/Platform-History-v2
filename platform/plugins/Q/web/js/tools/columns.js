@@ -976,12 +976,15 @@ function prepareColumns(tool) {
 		tool.element.appendChild(state.container);
 	} else {
 		state.columns = [];
+		var max = 0;
 		tool.$('.Q_columns_column').each(function (index) {
 			var $this = $(this);
 			state.columns.push(this);
 			$this.data(dataKey_index, index)
 				.data(dataKey_scrollTop, Q.Pointer.scrollTop());
-			++state.max;
+			if (index > 0) {
+				max = index;
+			}
 			if (!$this.hasClass('Q_columns_opened')
 			 && !$this.hasClass('Q_columns_opening')) {
 				tool.open({
