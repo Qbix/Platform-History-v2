@@ -659,19 +659,14 @@ abstract class Db
 	 * @static
 	 * @param {string} $datetime
 	 *  The DateTime string that comes from the db
+	 * @param {string} [$timezone='GMT']
 	 * @return {string}
 	 *  The timestamp
 	 */
-	static function fromDateTime ($datetime)
+	static function fromDateTime ($datetime, $timezone = 'GMT')
 	{
-		$year = substr($datetime, 0, 4);
-		$month = substr($datetime, 5, 2);
-		$day = substr($datetime, 8, 2);
-		$hour = substr($datetime, 11, 2);
-		$min = substr($datetime, 14, 2);
-		$sec = substr($datetime, 17, 2);
-		
-		return mktime($hour, $min, $sec, $month, $day, $year);
+		$date = new DateTime($datetime, new DateTimeZone($timezone));
+		return $date->getTimestamp();
 	}
 
 	/**
@@ -683,11 +678,15 @@ abstract class Db
 	 * @static
 	 * @param {string} $timestamp
 	 *  The UNIX timestamp, e.g. from strtotime function
+	 * @param {string} [$timezone='GMT']
 	 * @return {string}
 	 */
-	static function toDateTime ($timestamp)
+	static function toDateTime ($timestamp, $timezone = 'GMT')
 	{
-		return date('Y-m-d H:i:s', $timestamp);
+		$date = new DateTime();
+		$date->setTimestamp($timestamp);
+		$date->setTimezone($timezone);
+		return $date->format('Y-m-d H:i:s');
 	}
 	
 	/**
