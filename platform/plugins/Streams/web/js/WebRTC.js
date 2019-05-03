@@ -85,6 +85,9 @@
 
 				screensRendering.showLoader('screensharingStarting', data.participant);
 			});
+			WebRTCconference.event.on('beforeCamerasToggle', function (data) {
+				screensRendering.showLoader('screensharingStarting', data.participant);
+			});
 			WebRTCconference.event.on('screensharingStarted', function (data) {
 				//screensRendering.hideLoader('screensharingStarting', data.participant);
 			});
@@ -98,7 +101,7 @@
 		 * @method startTwilioRoom
 		 */
 		var startTwilioRoom = function(roomId) {
-			Q.addStylesheet('{{Streams}}/css/tools/webrtc.css');
+			Q.addStylesheet('{{Streams}}/css/tools/webrtc.css?ts=' + performance.now());
 
 			Q.addScript([
 				"https://requirejs.org/docs/release/2.2.0/minified/require.js",

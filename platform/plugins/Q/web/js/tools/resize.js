@@ -93,7 +93,8 @@
 					}
 
 					var initMoving = function(evt){
-						if(!tool.state.active) return;
+						if(!tool.state.active || evt.button == 1 || evt.button == 2) return;
+
 						if(!tool.state.movable || (Q.info.isMobile && (tool.isScreenResizing || evt.targetTouches.length != 1))) return;
 						var elRect = elementToMove.getBoundingClientRect();
 						if(elementToMove == elementToResize) {
@@ -185,7 +186,7 @@
 					var _oldy = null;
 
 					function initialise(e) {
-						if(!tool.state.active) return;
+						if(!tool.state.active || e.button == 1 || e.button == 2) return;
 						e.propertyIsEnumerable();
 						e.stopPropagation();
 						_handlerPosition = e.target.dataset.position;
