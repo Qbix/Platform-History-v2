@@ -582,14 +582,10 @@ function _loadUrl(o, cb) {
 function _handlePosAndScroll(o)
 {
 	var $this = this;
-	var ots = $('.Q_title_slot', $this);
-	var ods = $('.Q_dialog_slot', $this);
 	var parent = $this.parent();
 	var topMargin = 0, bottomMargin = 0, parentHeight = 0;
 	var wasVertical = null; // for touch devices
 	var inputWasFocused = false;
-
-	var contentsWrapper = null, contentsLength = 0;
 
 	if (interval) {
 		clearInterval(interval);
@@ -599,7 +595,6 @@ function _handlePosAndScroll(o)
 	_adjustPosition();
 
 	function _adjustPosition() {
-		var maxContentsHeight;
 		var isInput = $(document.activeElement).is(":input");
 		if (isInput) {
 			inputWasFocused = true;
@@ -626,8 +621,6 @@ function _handlePosAndScroll(o)
 		if (typeof(bottomMargin) === 'string') // percentage
 			bottomMargin = Math.round(parseInt(bottomMargin) / 100 * parentHeight);
 
-		var rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
-		var outerWidth = $this.outerWidth();
 		if (!o.noCalculatePosition
 			&& (!Q.info.isTouchscreen || !inputWasFocused)) {
 			$this.data('Q/overlay').calculatePosition();
