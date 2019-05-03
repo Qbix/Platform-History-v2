@@ -99,9 +99,14 @@
 	white-space: nowrap;
 	line-height: 20px;
 }
+.Websites_webpage_preview_tool[data-mode=title] .Streams_aspect_interests {
+	background: #ccccee;
+	border-radius: 5px;
+	padding: 2px;
+}
 .Websites_webpage_preview_tool .Streams_aspect_interests img {
-	width: 16px;
-	height: auto;
+	width: auto;
+	height: 16px;
 }
 .Websites_webpage_preview_tool ._Streams_aspect_interests::before {
 	font-family: 'qplatform-communities' !important;
