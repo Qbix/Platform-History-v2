@@ -994,6 +994,7 @@ function prepareColumns(tool) {
 				}, index, null, true);
 			}
 		});
+		state.max = max;
 	}
 }
 
