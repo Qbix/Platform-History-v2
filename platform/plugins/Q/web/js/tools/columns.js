@@ -741,7 +741,7 @@ Q.Tool.define("Q/columns", function(options) {
 	
 		$div.css('min-height', 0);
 		
-		if (index === state.max-1) {
+		if (index === state.max) {
 			var max = 0;
 			Q.each(state.columns, function (i, c) {
 				if (c) {
