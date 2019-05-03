@@ -1386,10 +1386,10 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 							});
 						break;
 					case "facebook":
-						window.open("https://www.facebook.com/sharer/sharer.php?u=" + rsd.url);
+						window.open("https://www.facebook.com/sharer/sharer.php?u=" + rsd.url, "_blank");
 						break;
 					case "twitter":
-						window.open("http://www.twitter.com/share?url=" + rsd.url);
+						window.open("http://www.twitter.com/share?url=" + rsd.url, "_blank");
 						break;
 					case "QR":
 						if (err) return;
@@ -1455,7 +1455,12 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 						break;
 				}
 			})
-		}, { method: 'post', fields: o, baseUrl: baseUrl });
+		}, {
+			method: 'post',
+			fields: o,
+			baseUrl: baseUrl,
+			xhr: { sync: true } // so we can open the window on mobile browsers
+		});
 	}
 	if (o.identifier || o.token || o.xids || o.userIds || o.label) {
 		return _request();
@@ -1467,8 +1472,9 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		}
 		if (r.sendBy) {
 			_generateInviteURL();
+		} else {
+			_request();
 		}
-		_request();
 	});
 	return null;
 };

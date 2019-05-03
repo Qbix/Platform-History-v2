@@ -16,6 +16,7 @@ var Places = Q.Places;
  * @param {Number} [options.center.latitude] the initial latitude to rotate to
  * @param {Number} [options.center.longitude] the initial longitude to rotate to
  * @param {String} [options.countryCode=null] the initial country to rotate to and highlight
+ * @param {String} [options.rotateOnClick=null] whether to handle clicks and rotate the globe when they happen
  * @param {Array} [options.highlight={}] pairs of {countryCode: color},
  *   if color is true then state.colors.highlight is used.
  *   This is modified by the default handler for beforeRotateToCountry added by this tool.
@@ -48,22 +49,24 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 		tool.$canvas = $('<canvas />').attr({
 			width: $te.outerWidth(),
 			height: $te.outerHeight()
-		}).appendTo($te)
-		.on(Q.Pointer.fastclick, tool, function(event) {
-			var ll = tool.getCoordinates(event);
-			tool.geocoder.geocode(
-				{'location': { lat: ll.latitude, lng: ll.longitude }},
-				function(results, status) {
-					if (status === google.maps.GeocoderStatus.OK && results[0]) {
-						var countryCode = _getComponent(results[0], 'country');
-						tool.rotateToCountry(countryCode);
-					} else {
-						tool.rotateTo(ll.latitude, ll.longitude);
+		}).appendTo($te);
+		if (state.rotateOnClick) {
+			tool.$canvas.on(Q.Pointer.fastclick, tool, function(event) {
+				var ll = tool.getCoordinates(event);
+				tool.geocoder.geocode(
+					{'location': { lat: ll.latitude, lng: ll.longitude }},
+					function(results, status) {
+						if (status === google.maps.GeocoderStatus.OK && results[0]) {
+							var countryCode = _getComponent(results[0], 'country');
+							tool.rotateToCountry(countryCode);
+						} else {
+							tool.rotateTo(ll.latitude, ll.longitude);
+						}
+						Q.handle(state.onSelect, [ll.latitude, ll.longitude, countryCode]);
 					}
-					Q.handle(state.onSelect, [ll.latitude, ll.longitude, countryCode]);
-				}
-			);
-		});
+				);
+			});
+		}
 		
 		if (!state.radius) {
 			state.radius = 0.9;
@@ -172,6 +175,7 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 
 { // default options here
 	countryCode: null,
+	rotateOnClick: false,
 	colors: {
 		oceans: '#2a357d',
 		land: '#389631',

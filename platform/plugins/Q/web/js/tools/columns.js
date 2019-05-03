@@ -39,8 +39,9 @@ var dataKey_opening = 'opening';
  *  @param {Object}  [options.handlers] Pairs of columnName: handler where the handler can be a function or a string, in which you assign a function to Q.exports .
  *  @param {Boolean} [options.fullscreen] Whether to use fullscreen mode on mobile phones, using document to scroll instead of relying on possibly buggy "overflow" CSS implementation. Defaults to true on Android stock browser, false everywhere else.
  *  @param {Boolean} [options.hideBackgroundColumns=true] Whether to hide background columns on mobile (perhaps improving browser rendering).
- *  @param {Boolean} [options.pagePushUrl] if this is true and the url of the column 
- *    is specified, then Q.Page.push() is called with this URL.
+ *  @param {Boolean|String} [options.pagePushUrl] if this is true and the url of the column
+ *    is specified, then Q.Page.push() is called with this URL. You can also pass a string here,
+ *    to override the url (in case, for example, the url of the column is not specified, because it is rendered client-side).
  *  @param {Q.Event} [options.beforeOpen] Event that happens before a column is opened. Return false to prevent opening. Receives (options, index).
  *  @param {Q.Event} [options.beforeClose] Event that happens before a column is closed. Receives (index, indexAfterClose, columnElement). Return false to prevent closing.
  *  @param {Q.Event} [options.onOpen] Event that happens after a column is opened. Receives (options, index, columnElement).
@@ -173,7 +174,7 @@ Q.Tool.define("Q/columns", function(options) {
 	 * @param {Function} callback Called when the column is opened
 	 */
 	push: function (options, callback) {
-		this.open(options, this.max(), callback);
+		this.open(options, this.max()+1, callback);
 		return this;
 	},
 	
@@ -184,7 +185,7 @@ Q.Tool.define("Q/columns", function(options) {
 	 * @param {Object} options Can be used to override various tool options
 	 */
 	pop: function (callback, options) {
-		this.close(this.max()-1, callback, options);
+		this.close(this.max(), callback, options);
 		return this;
 	},
 	
@@ -208,8 +209,9 @@ Q.Tool.define("Q/columns", function(options) {
 	open: function (options, index, callback, internal) {
 		var tool = this;
 		var state = this.state;
+		var max = tool.max();
 		if (index === undefined) {
-			index = tool.max();
+			index = max + 1;
 		}
 		if (typeof options === 'number') {
 			options = {};
@@ -218,7 +220,7 @@ Q.Tool.define("Q/columns", function(options) {
 		}
 		var o = Q.extend({}, 10, state, 10, options);
 
-		if (index > this.max()) {
+		if (index > max + 1) {
 			throw new Q.Exception("Q/columns open: index is too big");
 		}
 		if (index < 0) {
@@ -314,8 +316,13 @@ Q.Tool.define("Q/columns", function(options) {
 				}
 			}, false, true);
 		}
-		if (o.url) {
-			var url = Q.url(o.url);
+		var url = null;
+		if (typeof o.pagePushUrl === 'string') {
+			url = Q.url(o.pagePushUrl);
+		} else if (o.url) {
+			url = Q.url(o.url);
+		}
+		if (url) {
 			$div.attr('data-url', url);
 		}
 		if (o && o.columnClass) {
@@ -390,7 +397,6 @@ Q.Tool.define("Q/columns", function(options) {
 					$div.removeClass('Q_columns_loading');
 					tool.close(index);
 				}
-				var url = options.url;
 				var params = Q.extend({
 					slotNames: ["title", "column", "controls"], 
 					slotContainer: {
@@ -419,7 +425,7 @@ Q.Tool.define("Q/columns", function(options) {
 				};
 				params.onActivate = p.fill('activated');
 				// this.state.triggers[index] = options.trigger || null;
-				Q.loadUrl(url, params);
+				Q.loadUrl(options.url, params);
 			}
 			
 			if (o.title != undefined) {
@@ -681,7 +687,7 @@ Q.Tool.define("Q/columns", function(options) {
 		var p, waitFor = [];
 		if (t === 'object') {
 			p = new Q.Pipe();
-			Q.each(index.max||state.max-1, index.min||0, -1, function (i) {
+			Q.each(index.max||state.max, index.min||0, -1, function (i) {
 				try { tool.close(i, p.fill(i), options); } catch (e) {}
 				waitFor.push(i);
 			});
@@ -735,15 +741,21 @@ Q.Tool.define("Q/columns", function(options) {
 	
 		$div.css('min-height', 0);
 		
-		if (index === state.max-1) {
-			--state.max;
+		if (index === state.max) {
+			var max = 0;
+			Q.each(state.columns, function (i, c) {
+				if (c) {
+					max = i;
+				}
+			});
+			state.max = max;
 		}
 		
 		Q.Pointer.cancelClick();
 		
-		var expandTop = index > 0 && state.expandOnMobile && state.expandOnMobile.top;
-		var expandBottom = index > 0 && state.expandOnMobile && state.expandOnMobile.bottom;
-		if (expandTop || expandBottom) {
+		var expandTop = index > 0 && Q.info.isMobile && state.expandOnMobile && state.expandOnMobile.top;
+		var expandBottom = index > 0 && Q.info.isMobile && state.expandOnMobile && state.expandOnMobile.bottom;
+		if (state.max === 0 && (expandTop || expandBottom)) {
 			var $parents = $(tool.element).parents();
 			$parents.removeClass('Q_columns_containsExpanded');
 			$parents.siblings().removeClass('Q_columns_siblingContainsExpanded');
@@ -964,12 +976,15 @@ function prepareColumns(tool) {
 		tool.element.appendChild(state.container);
 	} else {
 		state.columns = [];
+		var max = 0;
 		tool.$('.Q_columns_column').each(function (index) {
 			var $this = $(this);
 			state.columns.push(this);
 			$this.data(dataKey_index, index)
 				.data(dataKey_scrollTop, Q.Pointer.scrollTop());
-			++state.max;
+			if (index > 0) {
+				max = index;
+			}
 			if (!$this.hasClass('Q_columns_opened')
 			 && !$this.hasClass('Q_columns_opening')) {
 				tool.open({
@@ -979,6 +994,7 @@ function prepareColumns(tool) {
 				}, index, null, true);
 			}
 		});
+		state.max = max;
 	}
 }
 
