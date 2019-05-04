@@ -1103,6 +1103,7 @@ abstract class Streams extends Base_Streams
 			// simulate calls to beforeSave, to update avatars and do other stuff
 			$s = new Streams_Stream($tc);
 			$s->beforeSave($tc);
+			$s->fields['insertedTime'] = new Db_Expression('CURRENT_TIMESTAMP');
 			$toCreate[$s->name] = $s->fields;
 			$streams[$s->name] = $s;
 			
