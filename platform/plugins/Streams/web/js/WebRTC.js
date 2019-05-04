@@ -117,7 +117,7 @@
 
 					var twilioRoomName = _roomStream.getAttribute('twilioRoomName');
 					
-					WebRTCconference = WebRTCconferenceLib({
+					WebRTCconference = window.WebRTCconferenceLib({
 						mode:'twilio',
 						roomName:twilioRoomName,
 						twilioAccessToken: response.slots.token,

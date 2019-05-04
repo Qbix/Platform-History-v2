@@ -269,8 +269,6 @@
                 } else if(conferenceControl.micIsEnabled()) {
                     tool.microphoneBtn.innerHTML = icons.microphone;
                 }
-                console.log('webRTClib.conferenceControl.currentAudioDevice()', webRTClib.conferenceControl.currentAudioDevice())
-                console.log('conferenceControl.micIsEnabled()', conferenceControl.micIsEnabled())
             },
 
 	        selectCameraDialogue: function(){
