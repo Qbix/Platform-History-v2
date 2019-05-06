@@ -699,7 +699,7 @@ class Streams_Stream extends Base_Streams_Stream
 
 		return $this;
 	}
-	
+
 	/**
 	 * @method clearAttribute
 	 * @param {string} $attributeName The name of the attribute to remove
