@@ -84,7 +84,7 @@ abstract class Base_Streams_Stream extends Db_Row
 	 * @property $content
 	 * @type string
 	 * @default ""
-	 * This content can be indexable
+	 * this content can be indexable, such as the description of a long article
 	 */
 	/**
 	 * @property $attributes
@@ -738,7 +738,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".content");
-		if (strlen($value) > 1023)
+		if (strlen($value) > 8192)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".content");
 		return array('content', $value);			
 	}
@@ -750,7 +750,7 @@ return array (
 	function maxSize_content()
 	{
 
-		return 1023;			
+		return 8192;			
 	}
 
 	/**
@@ -764,7 +764,7 @@ return array (
   0 => 
   array (
     0 => 'varchar',
-    1 => '1023',
+    1 => '8192',
     2 => '',
     3 => false,
   ),
