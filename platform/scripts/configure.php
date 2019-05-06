@@ -20,14 +20,14 @@ EOT;
 if (isset($argv[1]) and in_array($argv[1], array('--help', '/?', '-h', '-?', '/h')))
 	die($help);
 
-#Check primary arguments count: 1 if running /app/scripts/Q/install.php
+#Check primary arguments count: 1 if running /app/scripts/Q/configure.php
 if ($count < 2)
 	die($usage);
 
 #Read primary arguments
 $LOCAL_DIR = APP_DIR;
 
-if ($count > 1) {
+if ($count > 2) {
 	$AppName = $argv[1];
 	$Desired = $argv[2];
 } else {
