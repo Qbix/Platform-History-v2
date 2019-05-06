@@ -1,6 +1,6 @@
 ALTER TABLE {$prefix}stream
-MODIFY COLUMN content VARCHAR(32767) NOT NULL COMMENT 'this content can be indexable, such as the description of a long article';
+MODIFY COLUMN content VARCHAR(4095) NOT NULL COMMENT 'this content can be indexable, such as the description of a long article';
 
 ALTER TABLE {$prefix}message
-MODIFY COLUMN content VARCHAR(32767) NOT NULL COMMENT 'store human-readable content here',
-MODIFY COLUMN instructions VARCHAR(65535) NOT NULL COMMENT 'instructions are in a machine-readable format depending on the type of the stream. delta, reverse delta, linking and embedding';
+MODIFY COLUMN content VARCHAR(4095) NOT NULL COMMENT 'store human-readable content here',
+MODIFY COLUMN instructions VARCHAR(8191) NOT NULL COMMENT 'instructions are in a machine-readable format depending on the type of the stream. delta, reverse delta, linking and embedding';
