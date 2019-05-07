@@ -322,7 +322,7 @@ Base.prototype.beforeSet_query = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".query");
-		if (typeof value === "string" && value.length > 255)
+		if (typeof value === "string" && value.length > 127)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".query");
 		return value;
 };
@@ -333,7 +333,7 @@ Base.prototype.beforeSet_query = function (value) {
 	 */
 Base.prototype.maxSize_query = function () {
 
-		return 255;
+		return 127;
 };
 
 	/**
@@ -342,7 +342,7 @@ Base.prototype.maxSize_query = function () {
 	 */
 Base.column_query = function () {
 
-return [["varchar","255","",false],false,"PRI",null];
+return [["varchar","127","",false],false,"PRI",null];
 };
 
 /**
@@ -360,7 +360,7 @@ Base.prototype.beforeSet_types = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".types");
-		if (typeof value === "string" && value.length > 255)
+		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".types");
 		return value;
 };
@@ -371,7 +371,7 @@ Base.prototype.beforeSet_types = function (value) {
 	 */
 Base.prototype.maxSize_types = function () {
 
-		return 255;
+		return 31;
 };
 
 	/**
@@ -380,7 +380,7 @@ Base.prototype.maxSize_types = function () {
 	 */
 Base.column_types = function () {
 
-return [["varchar","255","",false],false,"PRI",null];
+return [["varchar","31","",false],false,"PRI",null];
 };
 
 /**
@@ -404,7 +404,7 @@ Base.prototype.beforeSet_latitude = function (value) {
 	 */
 Base.column_latitude = function () {
 
-return [["double","255","",false],false,"PRI",null];
+return [["double","31","",false],false,"PRI",null];
 };
 
 /**
@@ -428,7 +428,7 @@ Base.prototype.beforeSet_longitude = function (value) {
 	 */
 Base.column_longitude = function () {
 
-return [["double","255","",false],false,"PRI",null];
+return [["double","31","",false],false,"PRI",null];
 };
 
 /**
@@ -452,7 +452,7 @@ Base.prototype.beforeSet_meters = function (value) {
 	 */
 Base.column_meters = function () {
 
-return [["double","255","",false],false,"PRI",null];
+return [["double","31","",false],false,"PRI",null];
 };
 
 /**
@@ -477,7 +477,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -503,7 +503,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","255","",false],true,"",null];
+return [["timestamp","31","",false],true,"",null];
 };
 
 /**
