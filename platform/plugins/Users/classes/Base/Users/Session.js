@@ -781,7 +781,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","'mobile','tablet','desktop'","",false],true,"",null];
+return [["timestamp","'mobile','tablet','desktop'","",false],true,"MUL",null];
 };
 
 /**
