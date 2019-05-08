@@ -602,7 +602,7 @@ class Q_Session
 				return false;
 			}
 			
-			$our_SESSION = $_SESSION;
+			$our_SESSION = Q::ifset($_SESSION, null);
 			$old_data = self::$sess_data;
 			$changed = ($sess_data !== $old_data);
 			$result = false;
