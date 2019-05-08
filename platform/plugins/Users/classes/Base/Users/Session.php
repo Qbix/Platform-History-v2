@@ -983,7 +983,7 @@ return array (
     3 => false,
   ),
   1 => true,
-  2 => '',
+  2 => 'MUL',
   3 => NULL,
 );			
 	}

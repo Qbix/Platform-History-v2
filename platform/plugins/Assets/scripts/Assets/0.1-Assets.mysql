@@ -1,6 +1,6 @@
 CREATE TABLE `{$prefix}badge` (
-  `app` varbinary(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `app` varbinary(31) NOT NULL,
+  `name` varchar(63) NOT NULL,
   `title` text NOT NULL,
   `pic_small` varbinary(255) NOT NULL,
   `pic_big` varbinary(255) NOT NULL,
