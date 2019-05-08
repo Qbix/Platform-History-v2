@@ -14,7 +14,7 @@ function Streams_after_Q_Plugin_install($params)
 	// get stream names already installed
     $key = "Streams/User/onInsert";
     $extra = Q_Plugin::extra('Streams', 'plugin', 'Streams');
-    $extra[$key] = is_array($extra[$key]) ? $extra[$key] : array();
+    $extra[$key] = Q::ifset($extra, $key, array());
     $streamsInstalled = $extra[$key];
 
 	$streamsNeedToInstall = array();
