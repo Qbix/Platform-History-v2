@@ -1,66 +1,3 @@
-
-var socket;
-function enableiOSDebug() {
-	console.log = function (txt) {
-
-		if(!socket || socket && !socket.connected) return;
-
-		try {
-			//originallog.apply(console, arguments);
-			var i, argument;
-			var argumentsString = '';
-			for (i = 1; argument = arguments[i]; i++){
-				if (typeof argument == 'object') {
-					argumentsString = argumentsString + ', OBJECT';
-				} else {
-					argumentsString = argumentsString + ', ' + argument;
-				}
-			}
-			socket.emit('log', txt + argumentsString + '\n')
-		} catch (e) {
-
-		}
-	}
-
-	//socket.emit('log', 'enableiOSDebug ' + typeof navigator.getUserMedia + '---' + typeof navigator.webkitGetUserMedia)
-
-
-	window.onerror = function(msg, url, line, col, error) {
-		if(socket == null) return;
-		var extra = !col ? '' : '\ncolumn: ' + col;
-		extra += !error ? '' : '\nerror: ' + error;
-
-		var today = new Date();
-		var dd = today.getDate();
-		var mm = today.getMonth() + 1; //January is 0!
-
-		var yyyy = today.getFullYear();
-		if (dd < 10) {
-			dd = '0' + dd;
-		}
-		if (mm < 10) {
-			mm = '0' + mm;
-		}
-		var today = dd + '/' + mm + '/' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-
-		var errMessage = "\n\n" + today + " Error: " + msg + "\nurl: " + url + "\nline: " + line + extra + "\n";
-
-		socket.emit('errorlog', errMessage);
-	};
-
-}
-
-var ua=navigator.userAgent;
-if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
-	require(['https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'], function (io) {
-		socket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket']});
-		socket.on('connect', function () {
-			console.log('CONNECTED', socket);
-			enableiOSDebug(socket);
-		});
-	});
-}
-
 var PeerConnection = RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
 var IceCandidate = window.mozRTCIceCandidate || window.RTCIceCandidate;
 var SessionDescription = window.mozRTCSessionDescription || window.RTCSessionDescription;
@@ -1483,6 +1420,7 @@ WebRTCconferenceLib = function app(options){
 		}
 
 		function dataTrackRecieved(track, participant) {
+			console.log('dataTrackRecieved', track, participant);
 			var trackToAttach = new Track();
 			trackToAttach.sid = track.sid;
 			trackToAttach.kind = track.kind;
@@ -1493,10 +1431,6 @@ WebRTCconferenceLib = function app(options){
 			participant.dataTrack.on('message', function (data) {
 				processDataTrackMessage(data, participant);
 			});
-
-			if(participant.isLocal) {
-				sendOnlineStatus();
-			}
 		}
 
 		function trackSubscribed(track, trackpublication, participant) {
@@ -1529,6 +1463,7 @@ WebRTCconferenceLib = function app(options){
 				var existingParticipant = roomParticipants.filter(function (roomParticipant) {
 					return roomParticipant.sid == participant.sid;
 				})[0];
+				if(_debug) console.log('checkOnlineStatus')
 
 				if(existingParticipant != null)	{
 					participant.online = performance.now();
@@ -1544,6 +1479,7 @@ WebRTCconferenceLib = function app(options){
 				for (i = 0; participant = roomParticipants[i]; i++){
 					if(participant == localParticipant || participant.dataTrack == null) continue;
 					if(performance.now() - participant.online >= 9000) {
+						if(_debug) console.log('checkOnlineStatus : participantDisconnected')
 						participantDisconnected(participant);
 					}
 				}
@@ -1590,7 +1526,7 @@ WebRTCconferenceLib = function app(options){
 		}
 
 		function twilioParticipantDisconnected(twilioParticipant) {
-			if(_debug) console.log("participantDisconnected:", twilioParticipant);
+			if(_debug) console.log("twilioParticipantDisconnected:", twilioParticipant);
 			var existingParticipant = roomParticipants.filter(function (roomParticipant) {
 				return roomParticipant.sid == twilioParticipant.sid;
 			})[0];
@@ -1603,18 +1539,19 @@ WebRTCconferenceLib = function app(options){
 
 			log('You left the room');
 
-			var tracks = Array.from(room.localParticipant.tracks.values());
+			var tracks = Array.from(localParticipant.twilioInstance.tracks.values());
 
-			tracks.forEach(function(track) {
-				//track.disable();
-				room.localParticipant.unpublishTrack(track);
-				//track.stop();
+			localParticipant.tracks.forEach(function(track) {
+				console.log('track',track)
+				localParticipant.twilioInstance.unpublishTrack(track.twilioReference);
+				track.twilioReference.stop();
 			});
 
 			app.screensInterface.detachTracks(tracks);
-			app.screensInterface.removeScreensByParticipant(room.localParticipant);
+			app.screensInterface.removeScreensByParticipant(localParticipant);
 
-			room.participants.forEach(function (participant) {
+			roomParticipants.forEach(function (participant) {
+				participant = participant.twilioInstance;
 				var tracks = Array.from(participant.tracks.values());
 				app.screensInterface.detachTracks(tracks);
 			});
@@ -1649,25 +1586,25 @@ WebRTCconferenceLib = function app(options){
 				return obj.sid == room.localParticipant.sid;
 			})[0];
 
-			if(participantScreen == null || participantScreen.videoTrack == null || participantScreen.audioTrack == null) {
+			if(participantScreen == null) {
 				if(_debug) console.log('room.localParticipant', room.localParticipant, participantScreen);
-				//app.screensInterface.addParticipantScreen(room.localParticipant);
+
 				localParticipant = new Participant();
-				localParticipant.sid = room.localParticipant.sid,
-					localParticipant.identity = room.localParticipant.identity,
-					localParticipant.tracks = [],
-					localParticipant.isLocal = true,
-					localParticipant.twilioInstance = room.localParticipant
-				if(_debug) console.log('room.localParticipant AFTER', localParticipant);
-				if(_debug) console.log('roomJoined roomParticipants', roomParticipants);
+				localParticipant.sid = room.localParticipant.sid;
+				localParticipant.identity = room.localParticipant.identity;
+				localParticipant.tracks = [];
+				localParticipant.isLocal = true;
+				localParticipant.twilioInstance = room.localParticipant;
 
 				roomParticipants.push(localParticipant);
 
 				var tracks = Array.from(room.localParticipant.tracks.values());
 
 				for(var i in tracks) {
+					if(_debug) console.log('localTracks', tracks[i]);
+
 					if(tracks[i].track.kind == 'data') {
-						dataTrackRecieved(tracks[i].track, localParticipant);
+
 						continue;
 					}
 					var trackToAttach = new Track();
@@ -1679,6 +1616,14 @@ WebRTCconferenceLib = function app(options){
 
 					app.screensInterface.attachTrack(trackToAttach, localParticipant);
 				}
+
+				var dataTrack = new Twilio.LocalDataTrack();
+				localParticipant.twilioInstance.publishTrack(dataTrack).then(function (dataTrackPublication) {
+					localParticipant.dataTrack = dataTrackPublication.track;
+					sendOnlineStatus();
+				});
+
+
 			}
 
 			// Attach the Tracks of the Room's Participants.
@@ -2797,7 +2742,7 @@ WebRTCconferenceLib = function app(options){
 				if (mediaDevices[i].kind === 'videoinput') {
 					videoDevices++;
 				} else if (mediaDevices[i].kind === 'audioinput') {
-					if(_debug) console.log('initOrConnectConversation mediaDevices[i]', mediaDevices[i]);
+					//if(_debug) console.log('initOrConnectConversation mediaDevices[i]', mediaDevices[i]);
 
 					audioDevices++;
 				}
@@ -2807,13 +2752,10 @@ WebRTCconferenceLib = function app(options){
 				navigator.mediaDevices.getUserMedia ({
 					'audio': audioDevices != 0,
 					'video': videoDevices != 0,
-					'debugLevel': 'debug'
 				}).then(function (stream) {
 					var tracks = stream.getTracks();
-					var dataTrack = new Twilio.LocalDataTrack();
 
-					console.log('dataTrack', dataTrack)
-					tracks.push(dataTrack);
+					console.log('tracks', tracks)
 
 					var connect = Twilio.connect;
 					if(_debug) console.log('options.roomName', options.roomName);
@@ -2822,6 +2764,7 @@ WebRTCconferenceLib = function app(options){
 						name:options.roomName,
 						tracks: tracks,
 						preferredVideoCodecs: codecs,
+						debugLevel: 'debug'
 					}).then(function(room) {
 						if(_debug) console.log(`Successfully joined a Room: ${room}`, room);
 						room.on('participantConnected', function(participant){
@@ -2920,12 +2863,13 @@ WebRTCconferenceLib = function app(options){
 	var initWithTwilio = function(callback){
 
 		var ua=navigator.userAgent;
-		if(ua.indexOf('Android')!=-1||ua.indexOf('Windows Phone')!=-1||ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
+		if(ua.indexOf('Android')!=-1||ua.indexOf('Windows Phone')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
 			_isMobile=true;
-			if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) _isiOS = true;
 			app.views.isMobile(true);
 			app.views.updateOrientation();
 		} else app.views.isMobile(false);
+
+		if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) _isiOS = true;
 
 		if(_debug) console.log('options.twilioToken', options)
 		if(options.twilioAccessToken != null) {
