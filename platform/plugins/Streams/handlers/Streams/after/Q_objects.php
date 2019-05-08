@@ -65,8 +65,8 @@ function Streams_after_Q_objects () {
 		),
 		'templateName' => $templateName,
 		'stream' => $stream->exportArray(),
-		'relations' => $relations ? Db::exportArray($relations) : array(),
-		'related' => $related ? Db::exportArray($related) : array()
+		'relations' => !empty($relations) ? Db::exportArray($relations) : array(),
+		'related' => !empty($related) ? Db::exportArray($related) : array()
 	);
 
 	$config = Streams_Stream::getConfigField($stream->type, 'invite', array());
