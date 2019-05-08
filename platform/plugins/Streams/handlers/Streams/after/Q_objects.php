@@ -5,10 +5,10 @@ function Streams_after_Q_objects () {
 	if (!$invite) {
 		return;
 	}
+	$nameIsMissing = true;
 	if ($user = Users::loggedInUser()) {
 		$displayName = $user->displayName(array('show' => 'flu'));
 		$showDialog = !$displayName;	
-		$nameIsMissing = true;
 		$avatar = Streams_Avatar::fetch($user->id, $user->id);
 		if (Q::ifset($avatar, 'username', null) || Q::ifset($avatar, 'firstName', null) || Q::ifset($avatar, 'lastName', null)) {
 			$nameIsMissing = false;
