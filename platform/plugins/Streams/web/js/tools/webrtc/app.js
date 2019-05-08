@@ -43,7 +43,7 @@ WebRTCconferenceLib = function app(options){
 
 	var _isMobile;
 	var _isiOS;
-	var _debug = true;
+	var _debug = false;
 
 	var pc_config = {"iceServers": [
 			{
@@ -657,7 +657,6 @@ WebRTCconferenceLib = function app(options){
 
 			if(curRoomScreens.length == 0) {
 				screenToAttach = createRoomScreen(participant);
-				console.log('screenToAttach', screenToAttach)
 			} else screenToAttach = curRoomScreens[0];
 			track.parentScreen = screenToAttach;
 
@@ -669,11 +668,8 @@ WebRTCconferenceLib = function app(options){
 				//track.twilioReference.unmute();
 				screenToAttach.videoCon.appendChild(trackEl);
 				screenToAttach.videoTrack = trackEl;
-				console.log('attachTrack mediStream', track.stream)
 				app.event.dispatch('videoTrackIsBeingAdded', screenToAttach);
 			} else if(track.kind == 'video' && screenToAttach.videoTrack == null){
-				console.log('CREATE VIDEO TRACK')
-
 				var trackEl = createTrackElement(track, participant);
 				track.trackEl = trackEl;
 				screenToAttach.videoCon.appendChild(trackEl);
@@ -1066,7 +1062,7 @@ WebRTCconferenceLib = function app(options){
 					var currentRation = videoConWidth / videoConHeight;
 					var videoRatio = e.target.videoWidth / e.target.videoHeight;
 
-					console.log('loadedmetadata ' + videoConWidth + ' - ' + videoConHeight)
+					if(_debug) console.log('loadedmetadata ' + videoConWidth + ' - ' + videoConHeight)
 					var shouldReset = (track.parentScreen != null && currentRation.toFixed(1) != videoRatio.toFixed(1)) || track.screensharing == true;
 
 					app.event.dispatch('videoTrackLoaded', {
@@ -1398,8 +1394,7 @@ WebRTCconferenceLib = function app(options){
 
 	app.eventBinding = (function () {
 		function twilioParticipantConnected(participant) {
-
-			console.log('twilioParticipantConnected', participant.sid)
+			if(_debug) console.log('twilioParticipantConnected', participant.sid)
 			var newParticipant = new Participant();
 			newParticipant.sid = participant.sid;
 			newParticipant.identity = participant.identity;
@@ -1420,7 +1415,7 @@ WebRTCconferenceLib = function app(options){
 		}
 
 		function dataTrackRecieved(track, participant) {
-			console.log('dataTrackRecieved', track, participant);
+			if(_debug) console.log('dataTrackRecieved', track, participant);
 			var trackToAttach = new Track();
 			trackToAttach.sid = track.sid;
 			trackToAttach.kind = track.kind;
@@ -2755,8 +2750,6 @@ WebRTCconferenceLib = function app(options){
 				}).then(function (stream) {
 					var tracks = stream.getTracks();
 
-					console.log('tracks', tracks)
-
 					var connect = Twilio.connect;
 					if(_debug) console.log('options.roomName', options.roomName);
 
@@ -2994,11 +2987,9 @@ WebRTCconferenceLib = function app(options){
 	app.init = function(callback){
 		if(options.webrtcMode == 'twilio') {
 			require(['/Q/plugins/Streams/js/tools/webrtc/twilio-video.min.js?ts=' + (+new Date)], function (TwilioInstance) {
-				console.log('TwilioInstance', TwilioInstance)
 				Twilio = window.Twilio = TwilioInstance;
 				initWithTwilio(callback);
 			});
-			//var twilio = await Twilio;
 		} else {
 			initWithNodeJs(callback);
 		}

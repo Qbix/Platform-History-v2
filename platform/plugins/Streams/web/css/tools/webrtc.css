@@ -916,8 +916,19 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    max-width: 100%;
     z-index: 10;
     font-weight: bold;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text .Users_avatar_name{
+    max-width: 100%;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text .Users_avatar_name > *{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+    display: inline-block;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns{
     display: flex;
