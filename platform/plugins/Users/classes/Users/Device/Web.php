@@ -10,11 +10,11 @@ class Users_Device_Web
 	static function prepare($notification)
 	{
 		return array(
-			'title' => $notification['alert']['title'],
-			'body' => $notification['alert']['body'],
-			'icon' => empty($notification['icon']) ? '' : $notification['icon'],
-			'click_action' => empty($notification['url']) ? null : $notification['url'],
-			'sound' => empty($notification['sound']) ? 'default' : $notification['sound']
+			'title' => Q::ifset($notification, 'alert', 'title', null),
+			'body' => Q::ifset($notification, 'alert', 'body', null),
+			'icon' => Q::ifset($notification, 'icon', ''),
+			'click_action' => Q::ifset($notification, 'url', null),
+			'sound' => Q::ifset($notification, 'sound', 'default')
 		);
 	}
 
