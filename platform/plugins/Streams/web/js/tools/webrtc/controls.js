@@ -152,13 +152,13 @@
 
                 cameraBtn.addEventListener('touchend', function () {
                     if(!Q.info.isMobile && !Q.info.isTablet) return;
-	                tool.selectCameraDialogue();
-                    /*Q.Dialogs.push({
+	                //tool.selectCameraDialogue();
+	                Q.Dialogs.push({
                         title: "Video Sources",
                         className: 'webrtc_tool_participants-list',
                         content: tool.settingsPopupEl,
                         apply: true
-                    });*/
+                    });
                     //tool.toggleVideo()
                 })
 
@@ -372,7 +372,7 @@
                             checked.parentNode.classList.add('webrtc_tool_disabled-radio');
                             checked.checked = true;
                             checked.disabled = true;
-	                        //Q.Dialogs.pop();
+	                        Q.Dialogs.pop();
 	                        tool.closeAllDialogues();
 	                        console.log('controls toggle camera')
                             var cameraId = checked.value;
@@ -427,7 +427,7 @@
                             currentSelectedItem.classList.remove('webrtc_tool_disabled-radio');
                         }
                         e.target.classList.add('webrtc_tool_disabled-radio');
-	                    //Q.Dialogs.pop();
+	                    Q.Dialogs.pop();
 	                    tool.closeAllDialogues();
                     }, function (e) {
                         console.error('startShareScreen', e)
@@ -453,7 +453,7 @@
                         checked.disabled = true;
                         checked.checked = true;
                         webRTClib.conferenceControl.disableVideo();
-	                    //Q.Dialogs.pop();
+	                    Q.Dialogs.pop();
 	                    tool.closeAllDialogues();
                     }
                 })

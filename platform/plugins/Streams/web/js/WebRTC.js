@@ -313,7 +313,6 @@
 				if(WebRTCconference == null) return;
 
 				var roomScreens = WebRTCconference.screens();
-				console.log('roomScreens', roomScreens)
 				var i, participantScreen;
 				for(i = 0; participantScreen = roomScreens[i]; i++) {
 					createRoomScreen(participantScreen);
