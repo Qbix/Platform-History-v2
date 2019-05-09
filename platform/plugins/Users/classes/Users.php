@@ -2021,6 +2021,7 @@ abstract class Users extends Base_Users
 					$normalized = $identifier;
 					break;
 				default:
+					$normalized = null;
 					break;
 			}
 			$hashed = Q_Utils::hash($normalized);
