@@ -97,11 +97,8 @@ WebRTCconferenceLib = function app(options){
 			}
 		}
 		this.remove = function () {
-			console.log('this.remove', this)
-
 			for(var i = roomScreens.length -1; i >= 0; i--){
 				var currentScreen = this;
-				console.log('this.remove', this, currentScreen)
 				var screen = roomScreens[i];
 				if(currentScreen != screen.participant) continue;
 				if(screen.screenEl.parentNode != null) screen.screenEl.parentNode.removeChild(screen.screenEl);
@@ -899,6 +896,7 @@ WebRTCconferenceLib = function app(options){
 				screen.soundMeter.latestUpdate = performance.now();
 
 				screen.soundMeter.script.onaudioprocess = function(e) {
+
 					var input = e.inputBuffer.getChannelData(0);
 					var i;
 					var sum = 0.0;
@@ -982,7 +980,6 @@ WebRTCconferenceLib = function app(options){
 						var maxVolume = Math.max.apply(Math, screen.soundMeter.soundBars.map(function(o) {
 							return o.volume;
 						}));
-						console.log('onaudioprocess suspend volume' + maxVolume)
 						if(maxVolume <= 0) {
 							//screen.soundMeter.script.onaudioprocess = null;
 							screen.soundMeter.context.suspend();
@@ -1986,6 +1983,7 @@ WebRTCconferenceLib = function app(options){
 		var hoverTimeout = {setttingsPopup:null, participantsPopup:null};
 
 		function loadDevicesList(mediaDevices) {
+			//console.log('mediaDevices', mediaDevices)
 			var i, device;
 			for(i = 0; device = mediaDevices[i]; i++){
 				if(_debug) console.log('loadDevicesList', device);
@@ -1993,7 +1991,6 @@ WebRTCconferenceLib = function app(options){
 					videoInputDevices.push(device);
 					for(var x in localParticipant.tracks) {
 						var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
-						if(_debug) console.log('loadDevicesList2',localParticipant.tracks[x]);
 
 						if(mediaStreamTrack.enabled == true && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label)) {
 							frontCameraDevice = currentCameraDevice = device;
@@ -2004,6 +2001,7 @@ WebRTCconferenceLib = function app(options){
 					audioInputDevices.push(device);
 					for(var x in localParticipant.tracks) {
 						var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
+
 						if(mediaStreamTrack.enabled == true && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label)) {
 							currentAudioDevice = device;
 						}
@@ -2012,9 +2010,6 @@ WebRTCconferenceLib = function app(options){
 			}
 			if(_debug) console.log('currentCameraDevice', currentCameraDevice)
 			if(_debug) console.log('currentAudioDevice', currentAudioDevice)
-			if(currentCameraDevice == null) cameraIsDisabled = true;
-			if(currentAudioDevice == null) micIsDisabled = true;
-			//updateControlBar();
 		}
 
 		function getVideoDevices() {
@@ -2632,7 +2627,7 @@ WebRTCconferenceLib = function app(options){
 		}
 
 		function disableAudioTracks() {
-			console.log('disableAudioTracks')
+			if(_debug) console.log('disableAudioTracks')
 			if(micIsDisabled) return;
 
 			var twilioTracks = []
