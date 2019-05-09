@@ -5,10 +5,10 @@ function Streams_after_Q_objects () {
 	if (!$invite) {
 		return;
 	}
+	$nameIsMissing = true;
 	if ($user = Users::loggedInUser()) {
 		$displayName = $user->displayName(array('show' => 'flu'));
 		$showDialog = !$displayName;	
-		$nameIsMissing = true;
 		$avatar = Streams_Avatar::fetch($user->id, $user->id);
 		if (Q::ifset($avatar, 'username', null) || Q::ifset($avatar, 'firstName', null) || Q::ifset($avatar, 'lastName', null)) {
 			$nameIsMissing = false;
@@ -65,8 +65,8 @@ function Streams_after_Q_objects () {
 		),
 		'templateName' => $templateName,
 		'stream' => $stream->exportArray(),
-		'relations' => $relations ? Db::exportArray($relations) : array(),
-		'related' => $related ? Db::exportArray($related) : array()
+		'relations' => !empty($relations) ? Db::exportArray($relations) : array(),
+		'related' => !empty($related) ? Db::exportArray($related) : array()
 	);
 
 	$config = Streams_Stream::getConfigField($stream->type, 'invite', array());
