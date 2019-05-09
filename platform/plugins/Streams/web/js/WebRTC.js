@@ -790,9 +790,9 @@
 					});
 				}
 
-				if(activeScreen && !activeScreen.screenEl.contains(e.target)) {
+				if(_controlsTool != null) _controlsTool.participantsPopup().disableLoudesScreenMode();
 
-					if(_controlsTool != null) _controlsTool.participantsPopup().disableLoudesScreenMode();
+				if(activeScreen && !activeScreen.screenEl.contains(e.target)) {
 
 					enableAllScreenToRender();
 
@@ -804,7 +804,6 @@
 
 					return;
 				} else if (activeScreen && activeScreen.excludeFromRendering && (activeScreen.screenEl.contains(e.target) || activeScreen.screenEl == e.target)) {
-					if(_controlsTool != null) _controlsTool.participantsPopup().disableLoudesScreenMode();
 
 					enableAllScreenToRender();
 
