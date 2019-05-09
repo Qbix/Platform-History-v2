@@ -78,11 +78,11 @@
 					}
 
 					var drag = function(evt){
-						if(Q.info.isMobile && (tool.isScreenResizing || evt.touches.length != 1 || evt.changedTouches.length != 1 || evt.targetTouches.length != 1)) return;
+						if(Q.info.isTouchscreen && (tool.isScreenResizing || evt.touches.length != 1 || evt.changedTouches.length != 1 || evt.targetTouches.length != 1)) return;
 
 						evt = evt || window.event;
-						var posX = Q.info.isMobile ? evt.changedTouches[0].clientX : evt.clientX,
-							posY = Q.info.isMobile ? evt.changedTouches[0].clientY : evt.clientY,
+						var posX = Q.info.isTouchscreen ? evt.changedTouches[0].clientX : evt.clientX,
+							posY = Q.info.isTouchscreen ? evt.changedTouches[0].clientY : evt.clientY,
 							aX = posX - diffX,
 							aY = posY - diffY;
 						if (aX < 0) aX = 0;
@@ -95,7 +95,7 @@
 					var initMoving = function(evt){
 						if(!tool.state.active || evt.button == 1 || evt.button == 2) return;
 
-						if(!tool.state.movable || (Q.info.isMobile && (tool.isScreenResizing || evt.targetTouches.length != 1))) return;
+						if(!tool.state.movable || (Q.info.isTouchscreen && (tool.isScreenResizing || evt.targetTouches.length != 1))) return;
 						var elRect = elementToMove.getBoundingClientRect();
 						if(elementToMove == elementToResize) {
 							elementToMove.style.width = elRect.width + 'px';
@@ -116,8 +116,8 @@
 						tool.element.style.boxShadow = '10px -10px 60px 0 rgba(0,0,0,0.5)';
 
 						evt = evt || window.event;
-						posX = Q.info.isMobile ? evt.touches[0].clientX : evt.clientX,
-							posY = Q.info.isMobile ? evt.touches[0].clientY : evt.clientY,
+						posX = Q.info.isTouchscreen ? evt.touches[0].clientX : evt.clientX,
+							posY = Q.info.isTouchscreen ? evt.touches[0].clientY : evt.clientY,
 							divTop = elementToMove.style.top,
 							divLeft = elementToMove.style.left,
 							eWi = parseInt(elementToMove.offsetWidth),
@@ -128,14 +128,14 @@
 						divLeft = divLeft.replace('px','');
 						diffX = posX - divLeft, diffY = posY - divTop;
 
-						if(Q.info.isMobile)
+						if(Q.info.isTouchscreen)
 							window.addEventListener('touchmove', drag);
 						else window.addEventListener('mousemove', drag);
 					}
 
 					var stopMoving = function(container){
 						//console.log('stopMoving')
-						if(Q.info.isMobile)
+						if(Q.info.isTouchscreen)
 							window.removeEventListener('touchmove', drag)
 						else window.removeEventListener('mousemove', drag)
 
@@ -200,7 +200,6 @@
 						} else if (_elementPosition == 'absolute') {
 							_centerPosition = _elementToResize.offsetLeft + elementRect.width / 2;
 						}
-
 
 						if(_elementPosition == 'fixed'){
 							_centerPositionFromTop = elementRect.top + elementRect.height / 2;
@@ -308,11 +307,6 @@
 						}
 
 
-
-
-
-
-
 						if(elementWidth <= _latestWidthValue || elementHeight <= _latestHeightValue) {
 							action = 'reduce';
 						} else {
@@ -365,7 +359,7 @@
 					}
 
 					function setHandler(element) {
-						if(Q.info.isMobile) {
+						if(Q.info.isTouchscreen) {
 							resizeByPinchGesture(element);
 							return;
 						}
@@ -409,12 +403,28 @@
 
 					function resizeByPinchGesture(element) {
 						_elementToResize = element;
+
 						element.addEventListener('touchstart', function () {
-							_startResizingByPinch()
+							_startResizingByPinch();
 						});
 					}
 
 					function _startResizingByPinch(e) {
+						_elementPosition = _elementToResize.style.position;
+						var elementRect = _elementToResize.getBoundingClientRect();
+
+						if(_elementPosition == 'fixed'){
+							_centerPosition = elementRect.left + elementRect.width / 2;
+						} else if (_elementPosition == 'absolute') {
+							_centerPosition = _elementToResize.offsetLeft + elementRect.width / 2;
+						}
+
+						if(_elementPosition == 'fixed'){
+							_centerPositionFromTop = elementRect.top + elementRect.height / 2;
+						} else if (_elementPosition == 'absolute') {
+							_centerPositionFromTop = _elementToResize.offsetTop + elementRect.height / 2;
+						}
+
 						ratio = _elementToResize.offsetWidth / _elementToResize.offsetHeight;
 						window.addEventListener('touchend', _stopResizingByPinch);
 						window.addEventListener('touchmove', resizeByPinch);
@@ -492,6 +502,11 @@
 
 						if(elementWidth <= _minSize || elementHeight <= _minSize || elementHeight > document.body.offsetHeight || elementWidth >= document.body.offsetWidth) {
 							return;
+						}
+
+						if(_elementPosition == 'fixed' || _elementPosition == 'absolute') {
+							_elementToResize.style.left = _centerPosition - (elementWidth / 2) + 'px';
+							_elementToResize.style.top = _centerPositionFromTop - (elementHeight / 2) + 'px';
 						}
 
 						_elementToResize.style.width = elementWidth + 'px';
@@ -621,11 +636,10 @@
 
 				return {
 					bind: function () {
-						if(Q.info.isMobile) {
+						if(Q.info.isTouchscreen) {
 							elementToMove.addEventListener('touchstart', _dragElement.initMoving);
 							elementToMove.addEventListener('touchend', _dragElement.stopMoving);
 						} else {
-
 							elementToMove.addEventListener('mousedown', _dragElement.initMoving);
 							elementToMove.addEventListener('mouseup', _dragElement.stopMoving);
 						}

@@ -916,8 +916,19 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    max-width: 100%;
     z-index: 10;
     font-weight: bold;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text .Users_avatar_name{
+    max-width: 100%;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text .Users_avatar_name > *{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+    display: inline-block;
 }
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns{
     display: flex;
@@ -1271,7 +1282,7 @@
 .dialog-con {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     position: fixed;
     top: 0;
@@ -1286,15 +1297,14 @@
     position: relative;
     padding: 1em;
     margin: 1em;
-    width: 90%;
-    border-radius: 4px;
+    margin-top: 4em;
+    max-width: 90%;
+    /*border-radius: 4px;*/
     z-index: 999999;
-    overflow-y: scroll;
-    background-color: white;
+    /*overflow-y: scroll;*/
     -webkit-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.2);
     box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.2);
-    overflow: hidden;
 }
 .dialog-box.select-camera {
     padding: 0;
@@ -1302,35 +1312,51 @@
 .dialog-box .close-dialog-sign {
     position: absolute;
     color: black;
-    top: 5px;
-    right: 10px;
     font-size: 20px;
+    right: -20px;
+    top: -20px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 rgba(50,200,50, 0.4);
+    animation: Q_wiggle 5s ease-in-out infinite, Q_grayscale 5s ease-in-out infinite;
+    animation-delay: 5s;
 }
 .dialog-box .close-dialog-sign:before {
-    content: "\02715";
-    color: white;
+    /*content: "\02715";
+    color: white;*/
 }
 .dialog-box .dialog-inner {
-    background: white;
-    border-radius: 4px;
     overflow: hidden;
 }
 .dialog-box h3.dialog-header {
     margin: 0;
     padding: 10px 0 10px 10px;
-    border-bottom: 1px solid #ccc;
     color: white;
+    font-size: 18px;
     /* background: #ccc;
      background: #4e5adc;
      background: -moz-linear-gradient(left, #4e5adc 1%, #146ada 100%);
      background: -webkit-linear-gradient(left, #4e5adc 1%,#146ada 100%);
      background: linear-gradient(to right, #4e5adc 1%,#146ada 100%);
      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e5adc', endColorstr='#146ada',GradientType=1 );*/
-    background: #18aa8d;
+    background: #3640c5;
+    border-bottom: 1px solid #181d8c;
+    border-radius: 10px 10px 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.webrtc_tool_popup-box {
+    background: white;
+    overflow: hidden;
 }
 .webrtc_tool_popup-box .webrtc_tool_choose-device,
 .dialog-box .webrtc_tool_choose-device {
     padding: 15px;
+}
+.webrtc_tool_popup-box > div {
+    float:left;
 }
 .webrtc_tool_popup-box .webrtc_tool_choose-device h4,
 .dialog-box .webrtc_tool_choose-device h4{

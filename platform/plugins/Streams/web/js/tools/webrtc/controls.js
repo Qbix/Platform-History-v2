@@ -153,7 +153,7 @@
                 cameraBtn.addEventListener('touchend', function () {
                     if(!Q.info.isMobile && !Q.info.isTablet) return;
 	                //tool.selectCameraDialogue();
-                    Q.Dialogs.push({
+	                Q.Dialogs.push({
                         title: "Video Sources",
                         className: 'webrtc_tool_participants-list',
                         content: tool.settingsPopupEl,
@@ -269,8 +269,6 @@
                 } else if(conferenceControl.micIsEnabled()) {
                     tool.microphoneBtn.innerHTML = icons.microphone;
                 }
-                console.log('webRTClib.conferenceControl.currentAudioDevice()', webRTClib.conferenceControl.currentAudioDevice())
-                console.log('conferenceControl.micIsEnabled()', conferenceControl.micIsEnabled())
             },
 
 	        selectCameraDialogue: function(){
@@ -293,7 +291,7 @@
 
 		        var dialogTitle=document.createElement('H3');
 		        dialogTitle.innerHTML = 'Select camera';
-		        dialogTitle.className = 'dialog-header';
+		        dialogTitle.className = 'dialog-header ';
 
 		        var dialogInner=document.createElement('DIV');
 		        dialogInner.className = 'dialog-inner';
@@ -301,6 +299,7 @@
 
 		        var close=document.createElement('div');
 		        close.className = 'close-dialog-sign';
+		        close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/apply.png") + '")';
 
 
 		        var chooseCameraList = document.createElement('DIV');
@@ -319,6 +318,11 @@
 		        dialogCon.appendChild(dialogue)
 		        document.body.appendChild(dialogCon);
 		        document.body.appendChild(bg);
+
+		        var contentWidth = tool.settingsPopupEl.firstChild.scrollWidth;
+
+		        dialogue.style.minWidth = tool.settingsPopupEl.firstChild.scrollWidth + 'px';
+
 
 	        },
             /**
@@ -356,8 +360,9 @@
 
                     radioBtnItem.addEventListener('click', function (e) {
                         //if(!webRTClib.conferenceControl.cameraIsEnabled()) webRTClib.conferenceControl.enableVideo();
+	                    console.log('controls toggle camera 0', e.currentTarget.outerHTML)
 
-                        var checked = e.target.querySelector('input[name="cameras"]');
+                        var checked = e.currentTarget.querySelector('input[name="cameras"]');
                         if(checked) {
                             var allItems = tool.settingsPopupEl.querySelectorAll('input[name="cameras"]');
                             allItems.forEach( function(item) {
@@ -368,6 +373,8 @@
                             checked.checked = true;
                             checked.disabled = true;
 	                        Q.Dialogs.pop();
+	                        tool.closeAllDialogues();
+	                        console.log('controls toggle camera')
                             var cameraId = checked.value;
                             if (cameraId != null) {
                             	webRTClib.conferenceControl.toggleCameras(cameraId, function () {
@@ -421,6 +428,7 @@
                         }
                         e.target.classList.add('webrtc_tool_disabled-radio');
 	                    Q.Dialogs.pop();
+	                    tool.closeAllDialogues();
                     }, function (e) {
                         console.error('startShareScreen', e)
                         var currentCameraId = webRTClib.conferenceControl.currentCameraDevice().deviceId;
@@ -446,6 +454,7 @@
                         checked.checked = true;
                         webRTClib.conferenceControl.disableVideo();
 	                    Q.Dialogs.pop();
+	                    tool.closeAllDialogues();
                     }
                 })
 
@@ -926,6 +935,13 @@
 	                disableLoudesScreenMode:disableLoudesScreenMode,
                 }
             },
+	        closeAllDialogues: function () {
+		        var elems=[].slice.call(document.getElementsByClassName('dialog-con')).concat([].slice.call(document.getElementsByClassName('dialog-bg')));
+		        for(var i=0;i<elems.length;i++) {
+			        elems[i].parentNode.removeChild(elems[i]);
+		        }
+		        //app.views.dialogIsClosed();
+	        }
         }
 
     );

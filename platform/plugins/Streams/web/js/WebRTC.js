@@ -105,7 +105,7 @@
 
 			Q.addScript([
 				"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-				"{{Streams}}/js/tools/webrtc/app.js",
+				"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+new Date()),
 			], function () {
 
 				Q.req("Streams/webrtc", ["token"], function (err, response) {
@@ -117,7 +117,7 @@
 
 					var twilioRoomName = _roomStream.getAttribute('twilioRoomName');
 					
-					WebRTCconference = WebRTCconferenceLib({
+					WebRTCconference = window.WebRTCconferenceLib({
 						mode:'twilio',
 						roomName:twilioRoomName,
 						twilioAccessToken: response.slots.token,
@@ -792,6 +792,8 @@
 
 				if(activeScreen && !activeScreen.screenEl.contains(e.target)) {
 
+					if(_controlsTool != null) _controlsTool.participantsPopup().disableLoudesScreenMode();
+
 					enableAllScreenToRender();
 
 					tappedScreen.screenEl.style.zIndex = '';
@@ -800,16 +802,16 @@
 						renderMaximizedScreensGridMobile(tappedScreen);
 					} else renderMaximizedScreensGrid(tappedScreen);
 
-					if(_controlsTool != null) _controlsTool.participantsPopup().disableLoudesScreenMode();
 					return;
 				} else if (activeScreen && activeScreen.excludeFromRendering && (activeScreen.screenEl.contains(e.target) || activeScreen.screenEl == e.target)) {
+					if(_controlsTool != null) _controlsTool.participantsPopup().disableLoudesScreenMode();
+
 					enableAllScreenToRender();
 
 					if(Q.info.isMobile){
 						renderMaximizedScreensGridMobile(tappedScreen);
 					} else renderMaximizedScreensGrid(tappedScreen);
 
-					if(_controlsTool != null) _controlsTool.participantsPopup().disableLoudesScreenMode();
 					return;
 				}
 
