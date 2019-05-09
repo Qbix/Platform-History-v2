@@ -1331,7 +1331,7 @@
 }
 .dialog-box h3.dialog-header {
     margin: 0;
-    padding: 10px 0 10px 10px;
+    /*padding: 10px 0 10px 10px;*/
     color: white;
     font-size: 18px;
     /* background: #ccc;
@@ -1340,7 +1340,7 @@
      background: -webkit-linear-gradient(left, #4e5adc 1%,#146ada 100%);
      background: linear-gradient(to right, #4e5adc 1%,#146ada 100%);
      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e5adc', endColorstr='#146ada',GradientType=1 );*/
-    background: #3640c5;
+    /*background: #3640c5;*/
     border-bottom: 1px solid #181d8c;
     border-radius: 10px 10px 0 0;
     white-space: nowrap;
