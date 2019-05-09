@@ -2,11 +2,12 @@ var PeerConnection = RTCPeerConnection || window.mozRTCPeerConnection || window.
 var IceCandidate = window.mozRTCIceCandidate || window.RTCIceCandidate;
 var SessionDescription = window.mozRTCSessionDescription || window.RTCSessionDescription;
 navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
+//console.log('typeof', typeof navigator.mediaDevices);
 navigator.mediaDevices.getUserMedia = navigator.mediaDevices.getUserMedia || navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
-var WebRTCconferenceLib = function app(options){
+WebRTCconferenceLib = function app(options){
 	var app = {};
 	var defaultOptions = {
 		webrtcMode: 'twilio',
@@ -135,7 +136,7 @@ var WebRTCconferenceLib = function app(options){
 			this.parentScreen.tracks = this.parentScreen.tracks.filter(function (obj) {
 				return obj != null;
 			})
-			if(this.kind == 'video') this.parentScreen.videoTrack = null;
+			//if(this.kind == 'video') this.parentScreen.videoTrack = null;
 
 			var index = this.participant.tracks.map(function(e) { return e.mediaStreamTrack.id; }).indexOf(this.mediaStreamTrack.id);
 			this.participant.tracks[index] = null;
@@ -143,7 +144,7 @@ var WebRTCconferenceLib = function app(options){
 				return obj != null;
 			})
 
-			if(this.trackEl.parentNode != null) this.trackEl.parentNode.removeChild(this.trackEl);
+			//if(this.trackEl.parentNode != null) this.trackEl.parentNode.removeChild(this.trackEl);
 		};
 	}
 
@@ -575,12 +576,16 @@ var WebRTCconferenceLib = function app(options){
 			this.isActive = true;
 			this.screensharing = null;
 			this.soundMeter = {
+				svg: null,
 				context: null,
 				script: null,
 				instant: 0.0,
 				slow: 0.0,
 				clip: 0.0,
+				soundBars: [],
+				barsLength: 0,
 				history: {averageVolume: 0, volumeValues:[]},
+				isDisabled: false,
 				reset: function() {
 
 				},
@@ -618,7 +623,7 @@ var WebRTCconferenceLib = function app(options){
 			this.removeTrack = function (twilioTrack) {
 				if(_debug) console.log('removeTrack', twilioTrack)
 
-				if(twilioTrack.kind == 'video' || twilioTrack.kind == 'audio') {
+				/*if(twilioTrack.kind == 'video' || twilioTrack.kind == 'audio') {
 					var detachedElements = twilioTrack.detach();
 
 					for (var i in detachedElements) {
@@ -626,7 +631,7 @@ var WebRTCconferenceLib = function app(options){
 						var detachedElement = detachedElements[i];
 						if (detachedElement.parentNode != null) detachedElement.parentNode.removeChild(detachedElement);
 					}
-				}
+				}*/
 
 				var index = this.tracks.map(function(e) { return e.sid; }).indexOf(twilioTrack.sid);
 				this.tracks[index].remove();
@@ -637,6 +642,12 @@ var WebRTCconferenceLib = function app(options){
 		function attachTrack(track, participant) {
 			if(_debug) console.log('attachTrack track', track);
 			if(_debug) console.log('attachTrack participant', participant);
+
+			if(window.mediaTracks == null) window.mediaTracks = [];
+			if((track.kind == 'video' && !participant.isLocal) || (track.kind == 'video' && _isiOS)) {
+				window.mediaTracks.push(track.mediaStreamTrack);
+			}
+
 
 			var screenToAttach;
 			var curRoomScreens = roomScreens.filter(function (obj) {
@@ -650,12 +661,13 @@ var WebRTCconferenceLib = function app(options){
 			track.parentScreen = screenToAttach;
 
 			if(track.kind == 'video' && screenToAttach.videoTrack) {
-				var mediastream = screenToAttach.videoTrack.srcObject;
-				var videoTracks = mediastream.getVideoTracks();
-				for(var i in videoTracks) {
-					mediastream.removeTrack(videoTracks[i]);
-				}
-				mediastream.addTrack(mediastream.mediaStreamTrack);
+				if(screenToAttach.videoTrack.parentNode) screenToAttach.videoTrack.parentNode.removeChild(screenToAttach.videoTrack)
+				var trackEl = createTrackElement(track, participant);
+				track.trackEl = trackEl;
+				track.trackEl.play();
+				//track.twilioReference.unmute();
+				screenToAttach.videoCon.appendChild(trackEl);
+				screenToAttach.videoTrack = trackEl;
 				app.event.dispatch('videoTrackIsBeingAdded', screenToAttach);
 			} else if(track.kind == 'video' && screenToAttach.videoTrack == null){
 				var trackEl = createTrackElement(track, participant);
@@ -674,7 +686,11 @@ var WebRTCconferenceLib = function app(options){
 			track.participant = participant;
 
 			screenToAttach.tracks.push(track);
-			participant.tracks.push(track);
+
+			var trackExist = participant.tracks.filter(function (t) {
+				return t == track;
+			})[0];
+			if(trackExist == null) participant.tracks.push(track);
 
 			if(participant == localParticipant) app.conferenceControl.updateControlBar();
 			app.event.dispatch('trackAdded', screenToAttach);
@@ -682,52 +698,154 @@ var WebRTCconferenceLib = function app(options){
 		}
 
 		function craetAudioeAnalyser(track, screen) {
+			if(_debug) console.log('craetAudioeAnalyser', track.mediaStreamTrack)
 
+			if(screen.soundMeter.source != null) {
+				/*screen.soundMeter.script.disconnect();
+				screen.soundMeter.source.disconnect();*/
+				screen.soundMeter.context.resume();
 
-			var context = new window.AudioContext();
-			var analyser
-			if(context.createScriptProcessor) {
-				analyser = context.createScriptProcessor(2048, 2, 1);
-			} else if(context.createJavaScriptNode) {
-				analyser = context.createJavaScriptNode(2048, 2, 1);
+				screen.soundMeter.audioTrack = track.mediaStreamTrack;
+				screen.soundMeter.source = screen.soundMeter.context.createMediaStreamSource(track.stream);
+
+				screen.soundMeter.source.connect(screen.soundMeter.script);
+				screen.soundMeter.script.connect(screen.soundMeter.context.destination);
+				return;
+			}
+			
+			screen.soundMeter.audioTrack = track.mediaStreamTrack;
+			screen.soundMeter.context = new window.AudioContext();
+			if(screen.soundMeter.context.createScriptProcessor) {
+				screen.soundMeter.script = screen.soundMeter.context.createScriptProcessor(2048, 2, 1);
+			} else if(screen.soundMeter.context.createJavaScriptNode) {
+				screen.soundMeter.script = screen.soundMeter.context.createJavaScriptNode(2048, 2, 1);
 			} else {
 			}
-			var source = context.createMediaStreamSource(track.stream);
-			source.connect(analyser);
+
+			screen.soundMeter.source = screen.soundMeter.context.createMediaStreamSource(track.stream);
+			screen.soundMeter.source.connect(screen.soundMeter.script);
 			//source.connect(context.destination); // connect the source to the destination
 
-			analyser.connect(context.destination); // chrome needs the analyser to be connected too...
+			screen.soundMeter.script.connect(screen.soundMeter.context.destination); // chrome needs the analyser to be connected too...
 
 
-				screen.soundMeter.context = context;
-				screen.soundMeter.script = analyser;
-				screen.soundMeter.source = source;
-				screen.soundMeter.instant = 0.0;
-				screen.soundMeter.slow = 0.0;
-				screen.soundMeter.clip = 0.0;
-				screen.soundMeter.isDisabled = false;
-				screen.soundMeter.reset = function() {
-					if(screen.isLocal && screen.soundMeter.isDisabled) return;
-					this.script.onaudioprocess = null;
-					setTimeout(function () {
-						buildVisualization(screen);
-					}, 1000);
+			screen.soundMeter.instant = 0;
+			screen.soundMeter.slow = 0;
+			screen.soundMeter.clip = 0;
+			screen.soundMeter.reset = function() {
+				if(screen.isLocal && screen.soundMeter.isDisabled) return;
+				setTimeout(function () {
+					updatVisualizationWidth(screen);
+				}, 2000);
 
+			}
+			screen.soundMeter.start = function() {
+				this.isDisabled = false;
+				setTimeout(function () {
+					updatVisualizationWidth(screen);
+				}, 2000);
+				//this.context.resume();
+				//craetAudioeAnalyser(track, screen);
+				/*var i;
+				for (i = 0; i < barsLength; i++) {
+						var bar = screen.soundMeter.soundBars[i];
+						bar.height = 0;
+						bar.rect.setAttributeNS(null, 'height', bar.height);
+						//bar.rect.setAttributeNS(null, 'height', bar.height);
+				}*/
+			}
+			screen.soundMeter.stop = function() {
+				this.isDisabled = true;
+			}
+
+
+
+			function updatVisualizationWidth(screen) {
+				if(screen.soundMeter.svg == null) return;
+				var screenWidth, elHeight;
+				if(screen.nameEl != null){
+					var rect = screen.nameEl.getBoundingClientRect();
+					screenWidth = rect.width;
+					elHeight = rect.height;
 				}
-				screen.soundMeter.start = function() {
-					screen.soundMeter.isDisabled = false;
-					screen.soundEl.innerHTML = '';
-					this.script.onaudioprocess = null;
-					buildVisualization(screen);
-				}
-				screen.soundMeter.stop = function() {
-					screen.soundMeter.isDisabled = true;
-					this.script.onaudioprocess = null;
-					screen.soundEl.innerHTML = '';
-				}
+				var svgWidth = screenWidth != null && screenWidth != 0 ? screenWidth / 2 : 100;
+				var svgHeight = elHeight != null && elHeight != 0 ? elHeight / 100 * 80 : 40;
+				screen.soundMeter.svg.setAttribute('width', svgWidth);
+				screen.soundMeter.svg.setAttribute('height', svgHeight);
 
+				var bucketSVGWidth = 4;
+				var bucketSVGHeight = 0;
+				var spaceBetweenRects = 1;
+				var totalBarsNum =  Math.floor(svgWidth / (bucketSVGWidth + spaceBetweenRects));
+				var currentBarsNum = screen.soundMeter.soundBars.length;
+				if(totalBarsNum > currentBarsNum) {
+					var barsToCreate = totalBarsNum - currentBarsNum;
+					var xmlns = 'http://www.w3.org/2000/svg';
+					var i;
+					for (i = 0; i < currentBarsNum; i++) {
+						var bar = screen.soundMeter.soundBars[i];
+
+						//bar.height = 0;
+						bar.x = (bucketSVGWidth * i + (spaceBetweenRects * (i + 1)));
+						bar.y = svgHeight - (svgHeight / 100 * bar.height);
+						bar.rect.setAttributeNS(null, 'x', bar.x);
+						bar.rect.setAttributeNS(null, 'y', bar.y);
+						//bar.rect.setAttributeNS(null, 'height', bar.height);
+					}
+
+					var rectsToAdd = [];
+					var i;
+					for (i = 0; i < barsToCreate; i++) {
+						var rect = document.createElementNS(xmlns, 'rect');
+						var x = (bucketSVGWidth * (i + currentBarsNum) + (spaceBetweenRects * ((i + currentBarsNum) + 1)))
+						var y = 0;
+						var fillColor = '#95ffff';
+						rect.setAttributeNS(null, 'x', x);
+						rect.setAttributeNS(null, 'y', 0);
+						rect.setAttributeNS(null, 'width', bucketSVGWidth + 'px');
+						rect.setAttributeNS(null, 'height', bucketSVGHeight + 'px');
+						rect.setAttributeNS(null, 'fill', fillColor);
+						rect.style.strokeWidth = '1';
+						rect.style.stroke = '#1479b5';
+
+						var barObject = {
+							volume: 0,
+							rect: rect,
+							x: x,
+							y: y,
+							width: bucketSVGWidth,
+							height: 0,
+							fill: fillColor
+						}
+
+						rectsToAdd.push(barObject);
+					}
+					screen.soundMeter.soundBars = screen.soundMeter.soundBars.concat(rectsToAdd)
+					var i;
+					for (i = 0; i < barsToCreate; i++) {
+						screen.soundMeter.svg.insertBefore(rectsToAdd[i].rect, screen.soundMeter.svg.firstChild);
+					}
+					screen.soundMeter.barsLength = screen.soundMeter.soundBars.length;
+
+				} else if(totalBarsNum < currentBarsNum) {
+					var barsToRemove = currentBarsNum - totalBarsNum;
+					screen.soundMeter.barsLength = totalBarsNum;
+					var i;
+					for(i = totalBarsNum; i < currentBarsNum; i++) {
+						var bar = screen.soundMeter.soundBars[i];
+						bar.rect.parentNode.removeChild(bar.rect);
+					}
+					screen.soundMeter.soundBars.splice(totalBarsNum, barsToRemove);
+				}
+			}
 
 			function buildVisualization(screen) {
+				if(screen.soundMeter.svg && screen.soundMeter.svg.parentNode) {
+					screen.soundMeter.svg.parentNode.removeChild(screen.soundMeter.svg);
+				}
+				screen.soundMeter.soundBars = [];
+				screen.soundEl.innerHTML = '';
+
 				var screenWidth, elHeight;
 				if(screen.nameEl != null){
 					var rect = screen.nameEl.getBoundingClientRect();
@@ -740,20 +858,16 @@ var WebRTCconferenceLib = function app(options){
 				var svg = document.createElementNS(xmlns, 'svg');
 				svg.setAttribute('width', svgWidth);
 				svg.setAttribute('height', svgHeight);
-				var defs = document.createElementNS (xmlns, "defs");
+				screen.soundMeter.svg = svg;
 				var clippath = document.createElementNS(xmlns, 'clipPath');
 				clippath.setAttributeNS(null, 'id', 'waveform-mask');
 
-				defs.appendChild(clippath);
-				svg.appendChild(defs);
-				screen.soundEl.innerHTML = '';
-				screen.soundEl.appendChild(svg);
+				screen.soundEl.appendChild(screen.soundMeter.svg);
 
 				var bucketSVGWidth = 4;
 				var bucketSVGHeight = 0;
 				var spaceBetweenRects = 1;
 				var totalBarsNum =  Math.floor(svgWidth / (bucketSVGWidth + spaceBetweenRects));
-				var soundBars = [];
 				var i;
 				for(i = 0; i < totalBarsNum; i++) {
 					var rect = document.createElementNS(xmlns, 'rect');
@@ -778,13 +892,13 @@ var WebRTCconferenceLib = function app(options){
 						fill: fillColor
 					}
 
-					soundBars.push(barObject);
+					screen.soundMeter.soundBars.push(barObject);
 					svg.appendChild(rect);
 				}
-
+				screen.soundMeter.barsLength = screen.soundMeter.soundBars.length;
+				screen.soundMeter.latestUpdate = performance.now();
 
 				screen.soundMeter.script.onaudioprocess = function(e) {
-
 					var input = e.inputBuffer.getChannelData(0);
 					var i;
 					var sum = 0.0;
@@ -797,11 +911,20 @@ var WebRTCconferenceLib = function app(options){
 
 					}
 
+					var audioIsDisabled = screen.soundMeter.source.mediaStream && (screen.soundMeter.source.mediaStream.active == false || screen.soundMeter.audioTrack.readyState == 'ended' || (screen.isLocal && screen.soundMeter.isDisabled));
+					if(!audioIsDisabled) {
+						//console.log('onaudioprocess ENABLED')
+						screen.soundMeter.instant = Math.sqrt(sum / input.length);
+						screen.soundMeter.slow = 0.95 * screen.soundMeter.slow + 0.05 * screen.soundMeter.instant;
+						screen.soundMeter.clip = clipcount / input.length;
+					} else {
+						//console.log('onaudioprocess DISABLED')
 
-					//console.log('input', Math.sqrt(sum / input.length));
-					screen.soundMeter.instant = Math.sqrt(sum / input.length);
-					screen.soundMeter.slow = 0.95 * screen.soundMeter.slow + 0.05 * screen.soundMeter.instant;
-					screen.soundMeter.clip = clipcount / input.length;
+						screen.soundMeter.instant = 0;
+						screen.soundMeter.slow = 0;
+						screen.soundMeter.clip = 0;
+					}
+
 					var historyLength = screen.soundMeter.history.volumeValues.length;
 					if(historyLength > 100) screen.soundMeter.history.volumeValues.splice(0, historyLength - 100);
 					screen.soundMeter.history.volumeValues.push({
@@ -809,58 +932,71 @@ var WebRTCconferenceLib = function app(options){
 						value: screen.soundMeter.instant
 					});
 
+					/*if(performance.now() - screen.soundMeter.latestUpdate < 500) {
+						return;
+					};*/
+
+
 					var latest500ms = screen.soundMeter.history.volumeValues.filter(function (o) {
 						return performance.now() - o.time < 500;
 					});
 					var sum = latest500ms.reduce((a, b) => a + (b['value'] || 0), 0);
 					var average = (sum / 2);
-					//console.log('average', sum, sum / 2, latest500ms.length)
-					/*if(screen.soundMeter.history.startTime == null)
-						screen.soundMeter.history.startTime = performance.now();
-					else {
-						if(performance.now() - screen.soundMeter.history.startTime >= 1000){
-							console.log('history', screen.soundMeter.history.volumeValues.length);
-							screen.soundMeter.history.startTime = null;
-							//screen.soundMeter.history.volumeValues = [];
-						}
-					}*/
+					if(!audioIsDisabled) {
+						screen.soundMeter.changedVolume = screen.soundMeter.instant / average * 100;
+					} else screen.soundMeter.changedVolume = 0;
 
 
-						var i;
-						for (i = 0; i < totalBarsNum; i++) {
+					var barsLength = screen.soundMeter.barsLength;
+					var i;
+					for(i = 0; i < barsLength; i++){
+						var bar = screen.soundMeter.soundBars[i];
+						if(i == barsLength - 1) {
+							bar.volume = screen.soundMeter.instant;
+							var height = !screen.soundMeter.isDisabled && (bar.volume > 0 && average > 0) ? (bar.volume / average * 100) : 0;
+							if(height > 100) height = 100;
+							bar.y = svgHeight - (svgHeight / 100 * height);
+							bar.height = height;
+							bar.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
 
-
-							var bar = soundBars[i];
-							if(i == totalBarsNum - 1) {
-								bar.volume = screen.soundMeter.instant;
-								//var height = (bar.volume / 2 * 100);
-								var height = bar.volume > 0 && average > 0 ? (bar.volume / average * 100) : 0;
-								if(height > 100) height = 100;
-								//console.log('height', bar.volume, height, average)
-								//bar.y = svgHeight / 2 - height / 2
-								bar.y = svgHeight - (svgHeight / 100 * height);
-								bar.height = height;
-								bar.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
-
-								bar.rect.setAttributeNS(null, 'height', bar.height + '%');
-								bar.rect.setAttributeNS(null, 'y', bar.y);
-							} else {
-								var nextBar = soundBars[i + 1];
-								bar.volume = nextBar.volume;
-								bar.height = nextBar.height;
-								bar.fill = nextBar.fill;
-								bar.y = nextBar.y;
-								bar.rect.setAttributeNS(null, 'height', bar.height + '%');
-								bar.rect.setAttributeNS(null, 'y', bar.y);
+							if(audioIsDisabled) {
+								bar.volume = 0;
+								bar.height = 0;
 							}
 
+							bar.rect.setAttributeNS(null, 'height', bar.height + '%');
+							bar.rect.setAttributeNS(null, 'y', bar.y);
+
+						} else {
+							var nextBar = screen.soundMeter.soundBars[i + 1];
+							bar.volume = nextBar.volume;
+							bar.height = nextBar.height;
+							bar.fill = nextBar.fill;
+							bar.y = nextBar.y;
+							bar.rect.setAttributeNS(null, 'height', bar.height + '%');
+							bar.rect.setAttributeNS(null, 'y', bar.y);
 						}
+					}
 
+					if(screen.soundMeter.source.mediaStream != null && screen.soundMeter.source.mediaStream.active == false || screen.soundMeter.audioTrack.readyState == 'ended') {
+						var maxVolume = Math.max.apply(Math, screen.soundMeter.soundBars.map(function(o) {
+							return o.volume;
+						}));
+						console.log('onaudioprocess suspend volume' + maxVolume)
+						if(maxVolume <= 0) {
+							//screen.soundMeter.script.onaudioprocess = null;
+							screen.soundMeter.context.suspend();
+							screen.soundMeter.script.disconnect();
+							screen.soundMeter.source.disconnect();
+						}
+					}
 
+					screen.soundMeter.latestUpdate = performance.now();
 				}
+
 			}
 
-			buildVisualization(screen)
+			buildVisualization(screen);
 
 		}
 
@@ -879,8 +1015,15 @@ var WebRTCconferenceLib = function app(options){
 			var screenOfTrack;
 			tracks.forEach(function(track) {
 				screenOfTrack = getScreenOfTrack(track);
+				if(_debug) console.log('detachTracks screenOfTrack', track);
+
 				if(screenOfTrack !=null) screenOfTrack.removeTrack(track);
 
+
+				if(track.mediaStreamTrack != null) {
+					track.mediaStreamTrack.enabled = false;
+					track.mediaStreamTrack.stop();
+				}
 			});
 
 
@@ -893,8 +1036,6 @@ var WebRTCconferenceLib = function app(options){
 				removeEmptyScreens()
 			}, 1000)
 
-
-			//removeEmptyScreens();
 		}
 
 		function createTrackElement(track, participant) {
@@ -905,13 +1046,10 @@ var WebRTCconferenceLib = function app(options){
 			stream.addTrack(track.mediaStreamTrack);
 			if(_debug) console.log('createTrackElement stream', track.mediaStreamTrack.getSettings())
 
-			if(track.twilioReference != null) {
-				track.twilioReference.attach(remoteStreamEl)
-			} else {
+
 				remoteStreamEl.srcObject = stream;
 				if(!track.isLocal || track.isLocal && track.kind == 'video') remoteStreamEl.autoplay = true;
 				remoteStreamEl.playsInline = true;
-			}
 
 
 			participant.stream = remoteStreamEl.srcObject;
@@ -924,6 +1062,7 @@ var WebRTCconferenceLib = function app(options){
 					var currentRation = videoConWidth / videoConHeight;
 					var videoRatio = e.target.videoWidth / e.target.videoHeight;
 
+					if(_debug) console.log('loadedmetadata ' + videoConWidth + ' - ' + videoConHeight)
 					var shouldReset = (track.parentScreen != null && currentRation.toFixed(1) != videoRatio.toFixed(1)) || track.screensharing == true;
 
 					app.event.dispatch('videoTrackLoaded', {
@@ -1052,6 +1191,7 @@ var WebRTCconferenceLib = function app(options){
 
 		var getLoudestScreen = function (mode, callback) {
 			var screenToAnalyze = roomScreens;
+
 			if(mode == 'allButMe') {
 				screenToAnalyze = screenToAnalyze.filter(function (s) {
 					return !s.isLocal;
@@ -1067,7 +1207,7 @@ var WebRTCconferenceLib = function app(options){
 				return (prev.soundMeter.slow > current.soundMeter.slow) ? prev : current;
 			})
 
-			if(loudest != null && Math.abs(loudest.soundMeter.slow) > 0.05 && callback != null) callback(loudest);
+			if(loudest != null && callback != null && loudest.soundMeter.slow > 0.0004) callback(loudest);
 
 		}
 
@@ -1254,7 +1394,7 @@ var WebRTCconferenceLib = function app(options){
 
 	app.eventBinding = (function () {
 		function twilioParticipantConnected(participant) {
-
+			if(_debug) console.log('twilioParticipantConnected', participant.sid)
 			var newParticipant = new Participant();
 			newParticipant.sid = participant.sid;
 			newParticipant.identity = participant.identity;
@@ -1263,20 +1403,19 @@ var WebRTCconferenceLib = function app(options){
 
 			participantConnected(newParticipant);
 			log("Joining: '" + participant.identity + "'");
+			return  newParticipant;
 		}
 
 		function participantConnected(newParticipant) {
 			roomParticipants.unshift(newParticipant);
 			app.screensInterface.createParticipantScreen(newParticipant)
-			app.participantsList.add(newParticipant);
+			//app.participantsList.add(newParticipant);
 
-			if(app.event.doesHandlerExist('participantConnected')) {
-				app.event.dispatch('participantConnected', newParticipant);
-				return;
-			}
+			app.event.dispatch('participantConnected', newParticipant);
 		}
 
 		function dataTrackRecieved(track, participant) {
+			if(_debug) console.log('dataTrackRecieved', track, participant);
 			var trackToAttach = new Track();
 			trackToAttach.sid = track.sid;
 			trackToAttach.kind = track.kind;
@@ -1287,14 +1426,10 @@ var WebRTCconferenceLib = function app(options){
 			participant.dataTrack.on('message', function (data) {
 				processDataTrackMessage(data, participant);
 			});
-
-			if(participant.isLocal) {
-				sendOnlineStatus();
-			}
 		}
 
-		function trackSubscribed(track, participant) {
-			if(_debug) console.log("trackAdded:", participant);
+		function trackSubscribed(track, trackpublication, participant) {
+			if(_debug) console.log("trackAdded:",track, participant);
 
 			var existingParticipant = roomParticipants.filter(function (roomParticipant) {
 				return roomParticipant.sid == participant.sid;
@@ -1320,7 +1455,16 @@ var WebRTCconferenceLib = function app(options){
 			if(data.type == 'screensharingStarting' || data.type == 'screensharingStarted' || data.type == 'screensharingFailed' || data.type == 'beforeCamerasToggle') {
 				app.event.dispatch(data.type, {content:data.content != null ? data.content : null, participant: participant});
 			} else if(data.type == 'online') {
-				participant.online = performance.now();
+				var existingParticipant = roomParticipants.filter(function (roomParticipant) {
+					return roomParticipant.sid == participant.sid;
+				})[0];
+				if(_debug) console.log('checkOnlineStatus')
+
+				if(existingParticipant != null)	{
+					participant.online = performance.now();
+				} else {
+					participantConnected(participant);
+				}
 			}
 		}
 
@@ -1330,6 +1474,7 @@ var WebRTCconferenceLib = function app(options){
 				for (i = 0; participant = roomParticipants[i]; i++){
 					if(participant == localParticipant || participant.dataTrack == null) continue;
 					if(performance.now() - participant.online >= 9000) {
+						if(_debug) console.log('checkOnlineStatus : participantDisconnected')
 						participantDisconnected(participant);
 					}
 				}
@@ -1345,7 +1490,7 @@ var WebRTCconferenceLib = function app(options){
 		function sendDataTrackMessage(type, content) {
 			var message = {type:type};
 			if(content != null) message.content = content;
-			localParticipant.dataTrack.send(JSON.stringify(message));
+			if(localParticipant.dataTrack != null) localParticipant.dataTrack.send(JSON.stringify(message));
 		}
 
 		function trackUnsubscribed(track, participant) {
@@ -1376,7 +1521,7 @@ var WebRTCconferenceLib = function app(options){
 		}
 
 		function twilioParticipantDisconnected(twilioParticipant) {
-			if(_debug) console.log("participantDisconnected:", twilioParticipant);
+			if(_debug) console.log("twilioParticipantDisconnected:", twilioParticipant);
 			var existingParticipant = roomParticipants.filter(function (roomParticipant) {
 				return roomParticipant.sid == twilioParticipant.sid;
 			})[0];
@@ -1389,18 +1534,19 @@ var WebRTCconferenceLib = function app(options){
 
 			log('You left the room');
 
-			var tracks = Array.from(room.localParticipant.tracks.values());
+			var tracks = Array.from(localParticipant.twilioInstance.tracks.values());
 
-			tracks.forEach(function(track) {
-				//track.disable();
-				room.localParticipant.unpublishTrack(track);
-				//track.stop();
+			localParticipant.tracks.forEach(function(track) {
+				console.log('track',track)
+				localParticipant.twilioInstance.unpublishTrack(track.twilioReference);
+				track.twilioReference.stop();
 			});
 
 			app.screensInterface.detachTracks(tracks);
-			app.screensInterface.removeScreensByParticipant(room.localParticipant);
+			app.screensInterface.removeScreensByParticipant(localParticipant);
 
-			room.participants.forEach(function (participant) {
+			roomParticipants.forEach(function (participant) {
+				participant = participant.twilioInstance;
 				var tracks = Array.from(participant.tracks.values());
 				app.screensInterface.detachTracks(tracks);
 			});
@@ -1435,65 +1581,74 @@ var WebRTCconferenceLib = function app(options){
 				return obj.sid == room.localParticipant.sid;
 			})[0];
 
-			if(participantScreen == null || participantScreen.videoTrack == null || participantScreen.audioTrack == null) {
-				if(_debug) console.log('room.localParticipant', room.localParticipant);
-				//app.screensInterface.addParticipantScreen(room.localParticipant);
+			if(participantScreen == null) {
+				if(_debug) console.log('room.localParticipant', room.localParticipant, participantScreen);
+
 				localParticipant = new Participant();
-				localParticipant.sid = room.localParticipant.sid,
-					localParticipant.identity = room.localParticipant.identity,
-					localParticipant.tracks = [],
-					localParticipant.isLocal = true,
-					localParticipant.twilioInstance = room.localParticipant
-				if(_debug) console.log('room.localParticipant AFTER', localParticipant);
-				if(_debug) console.log('roomJoined roomParticipants', roomParticipants);
+				localParticipant.sid = room.localParticipant.sid;
+				localParticipant.identity = room.localParticipant.identity;
+				localParticipant.tracks = [];
+				localParticipant.isLocal = true;
+				localParticipant.twilioInstance = room.localParticipant;
 
 				roomParticipants.push(localParticipant);
 
 				var tracks = Array.from(room.localParticipant.tracks.values());
 
 				for(var i in tracks) {
-					if(tracks[i].kind == 'data') {
-						dataTrackRecieved(tracks[i], localParticipant);
+					if(_debug) console.log('localTracks', tracks[i]);
+
+					if(tracks[i].track.kind == 'data') {
+
 						continue;
 					}
 					var trackToAttach = new Track();
-					trackToAttach.sid = tracks[i].sid;
-					trackToAttach.kind = tracks[i].kind;
+					trackToAttach.sid = tracks[i].track.sid;
+					trackToAttach.kind = tracks[i].track.kind;
 					trackToAttach.isLocal = true;
-					trackToAttach.mediaStreamTrack = tracks[i].mediaStreamTrack;
-					trackToAttach.twilioReference = tracks[i];
+					trackToAttach.mediaStreamTrack = tracks[i].track.mediaStreamTrack;
+					trackToAttach.twilioReference = tracks[i].track;
 
 					app.screensInterface.attachTrack(trackToAttach, localParticipant);
 				}
+
+				var dataTrack = new Twilio.LocalDataTrack();
+				localParticipant.twilioInstance.publishTrack(dataTrack).then(function (dataTrackPublication) {
+					localParticipant.dataTrack = dataTrackPublication.track;
+					sendOnlineStatus();
+				});
+
+
 			}
 
 			// Attach the Tracks of the Room's Participants.
 			room.participants.forEach(function(participant) {
 				if(participant == localParticipant.twilioInstance) return;
 				if(_debug) console.log("Already in Room: '" + participant.identity + "'");
-				var remoteParticipant = new Participant();
-				if(_debug) console.log('already in room remoteParticipant', remoteParticipant)
-				remoteParticipant.sid = participant.sid;
-				remoteParticipant.identity = participant.identity;
-				remoteParticipant.twilioInstance = participant;
-				remoteParticipant.screens = [];
-
-				roomParticipants.unshift(remoteParticipant);
+				var remoteParticipant = twilioParticipantConnected(participant);
 
 				//app.screensInterface.addParticipantScreen(participant);
-				var tracks = Array.from(participant.tracks.values());
-				for(var i in tracks) {
-					if(tracks[i].kind == 'data') {
-						dataTrackRecieved(tracks[i], remoteParticipant);
-						continue;
-					}
-					var trackToAttach = new Track();
-					trackToAttach.sid = tracks[i].sid;
-					trackToAttach.kind = tracks[i].kind;
-					trackToAttach.twilioReference = tracks[i];
+				/*var tracks = Array.from(participant.tracks.values());
+				setTimeout(function () {
+					participant.tracks.forEach(publication => {
+						if(publication.kind == 'data' && publication.isSubscribed) {
+							dataTrackRecieved(publication.track, remoteParticipant);
 
-					app.screensInterface.attachTrack(trackToAttach, remoteParticipant);
-				}
+						} else if (publication.isSubscribed) {
+							if (_debug) console.log('BEFORE attachTrack', publication.track)
+
+							var track = publication.track;
+							var trackToAttach = new Track();
+							trackToAttach.sid = track.sid;
+							trackToAttach.kind = track.kind;
+							trackToAttach.twilioReference = track;
+							if (_debug) console.log('BEFORE attachTrack', trackToAttach)
+
+							app.screensInterface.attachTrack(trackToAttach, remoteParticipant);
+						}
+					})
+				}, 1000)*/
+
 			});
 
 			//app.views.switchTo(participantsListView);
@@ -2276,34 +2431,69 @@ var WebRTCconferenceLib = function app(options){
 			}
 
 			Twilio.createLocalVideoTrack({
-				deviceId: { exact: cameraId != null ? cameraId : deviceToSwitch.deviceId }
+				deviceId: { exact: cameraId != null ? cameraId : deviceToSwitch.deviceId },
+				logLevel: 'debug',
 			}).then(function(localVideoTrack) {
 				var participant = localParticipant.twilioInstance;
 
 
 				var twilioTracks = []
 
-				var i = localParticipant.tracks.length
-				while (i--) {
+				console.log('localParticipant.tracks.length', localParticipant.tracks.length)
+				for(var i = localParticipant.tracks.length -1; i >= 0; i--){
 					if (localParticipant.tracks[i].kind == 'audio') continue;
 					twilioTracks.push(localParticipant.tracks[i].twilioReference);
+					localParticipant.tracks[i].twilioReference.stop();
+					localParticipant.tracks[i].twilioReference.mediaStreamTrack.stop();
+					localParticipant.tracks[i].mediaStreamTrack.stop();
+					localParticipant.tracks[i].twilioReference.mediaStreamTrack.enabled = false;
+					localParticipant.tracks[i].mediaStreamTrack.enabled = false;
 					localParticipant.tracks[i].remove();
+					//roomScreens.splice(i, 1);
 				}
+
 				if(_debug) console.log("UNPUBLISH", twilioTracks);
 
 				participant.unpublishTracks(twilioTracks);
 
-				participant.publishTrack(localVideoTrack);
-				var trackToAttach = new Track();
-				trackToAttach.sid = localVideoTrack.sid;
-				trackToAttach.mediaStreamTrack = localVideoTrack.mediaStreamTrack;
-				trackToAttach.kind = localVideoTrack.kind;
-				trackToAttach.twilioReference = localVideoTrack;
+				var trackPublication = participant.publishTrack(localVideoTrack).then(function (publication) {
+					console.log('ENABLE VIDEO trackPublication 0 ' + publication.track.isEnabled );
+					var props = '';
+					Object.keys(publication.track).forEach(function(key,index) {
+						props = props + ', ' + key;
+					});
+					console.log('ENABLE VIDEO trackPublication 0.1 ' + props );
 
-				app.screensInterface.attachTrack(trackToAttach, localParticipant);
-				app.conferenceControl.enableVideo();
-				//app.views.closeAllDialogues();
-				if(_debug) console.log('togglecameras', deviceToSwitch == frontCameraDevice)
+
+
+
+					var vTrack = publication.track;
+					var trackToAttach = new Track();
+					trackToAttach.sid = vTrack.sid;
+					trackToAttach.mediaStreamTrack = vTrack.mediaStreamTrack;
+					trackToAttach.kind = vTrack.kind;
+					trackToAttach.twilioReference = vTrack;
+
+					app.screensInterface.attachTrack(trackToAttach, localParticipant);
+					app.conferenceControl.enableVideo();
+					//localVideoTrack.enable();
+					//app.views.closeAllDialogues();
+					if(_debug) console.log('togglecameras', deviceToSwitch == frontCameraDevice)
+					//app.screensInterface.attachTrack(trackToAttach, localParticipant);
+					//app.screensInterface.generateScreensGrid();
+					//app.conferenceControl.enableVideo();
+					//app.views.closeAllDialogues();
+					//trackToAttach.trackEl.play();
+
+
+
+
+					setTimeout(function () {
+						console.log('ENABLE VIDEO 0.2' + publication.track.isEnabled);
+						publication.track.enable();
+					}, 5000)
+				});
+
 
 				currentCameraDevice = deviceToSwitch;
 				if(callback != null) callback();
@@ -2443,12 +2633,14 @@ var WebRTCconferenceLib = function app(options){
 
 		function disableAudioTracks() {
 			console.log('disableAudioTracks')
+			if(micIsDisabled) return;
 
 			var twilioTracks = []
 
 			var i = localParticipant.tracks.length
 			while (i--) {
 				if (localParticipant.tracks[i].kind == 'video') continue;
+				//console.log('localParticipant.tracks[i]', localParticipant.tracks[i].twilioReference, localParticipant.tracks[i].mediaStreamTrack.muted, localParticipant.tracks[i].mediaStreamTrack.readyState)
 				twilioTracks.push(localParticipant.tracks[i].twilioReference);
 			}
 
@@ -2504,24 +2696,34 @@ var WebRTCconferenceLib = function app(options){
 		if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
 			if(_debug) console.log("enumerateDevices() not supported.");
 
-			var connect = Twilio.connect;
-			connect(token, {
-				sid:options.roomName,
-				audio:true,
-				//video:true,
-				video:true,
-				preferredVideoCodecs: codecs
-				//logLevel: 'debug'
-			}).then(function(room) {
-				if(_debug) console.log(`Successfully joined a Room: ${room}`, room);
-				room.on('participantConnected', function(participant){
-					if(_debug) console.log(`A remote Participant connected: ${participant}`);
-				});
+			navigator.getUserMedia ({
+				'audio': true,
+				'video': true
+			}, function (stream) {
+				var tracks = stream.getTracks();
+				var dataTrack = new Twilio.LocalDataTrack();
 
-				app.eventBinding.roomJoined(room);
-				if(callback != null) callback();
-			}, function(error) {
-				console.error(`Unable to connect to Room: ${error.message}`);
+				tracks.push(dataTrack);
+
+				var connect = Twilio.connect;
+				if(_debug) console.log('options.roomName', options.roomName);
+
+				connect(token, {
+					name:options.roomName,
+					tracks: tracks,
+					preferredVideoCodecs: codecs,
+				}).then(function(room) {
+					if(_debug) console.log('Successfully joined a Room: ' + room);
+
+					app.eventBinding.roomJoined(room);
+
+					app.event.dispatch('joined');
+					if(callback != null) callback();
+				}, function(error) {
+					console.error(`Unable to connect to Room: ${error.message}`);
+				});
+			}, function (err) {
+				console.error(err.name + ": " + err.message);
 			});
 			return;
 		}
@@ -2535,20 +2737,18 @@ var WebRTCconferenceLib = function app(options){
 				if (mediaDevices[i].kind === 'videoinput') {
 					videoDevices++;
 				} else if (mediaDevices[i].kind === 'audioinput') {
-					if(_debug) console.log('initOrConnectConversation mediaDevices[i]', mediaDevices[i]);
+					//if(_debug) console.log('initOrConnectConversation mediaDevices[i]', mediaDevices[i]);
 
 					audioDevices++;
 				}
 			}
 
+			//console.log('audioDevices', audioDevices, videoDevices);
 				navigator.mediaDevices.getUserMedia ({
 					'audio': audioDevices != 0,
-					'video': videoDevices != 0
+					'video': videoDevices != 0,
 				}).then(function (stream) {
 					var tracks = stream.getTracks();
-					var dataTrack = new Twilio.LocalDataTrack();
-
-					tracks.push(dataTrack);
 
 					var connect = Twilio.connect;
 					if(_debug) console.log('options.roomName', options.roomName);
@@ -2557,6 +2757,7 @@ var WebRTCconferenceLib = function app(options){
 						name:options.roomName,
 						tracks: tracks,
 						preferredVideoCodecs: codecs,
+						debugLevel: 'debug'
 					}).then(function(room) {
 						if(_debug) console.log(`Successfully joined a Room: ${room}`, room);
 						room.on('participantConnected', function(participant){
@@ -2655,12 +2856,13 @@ var WebRTCconferenceLib = function app(options){
 	var initWithTwilio = function(callback){
 
 		var ua=navigator.userAgent;
-		if(ua.indexOf('Android')!=-1||ua.indexOf('Windows Phone')!=-1||ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
+		if(ua.indexOf('Android')!=-1||ua.indexOf('Windows Phone')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
 			_isMobile=true;
-			if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) _isiOS = true;
 			app.views.isMobile(true);
 			app.views.updateOrientation();
 		} else app.views.isMobile(false);
+
+		if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) _isiOS = true;
 
 		if(_debug) console.log('options.twilioToken', options)
 		if(options.twilioAccessToken != null) {
@@ -2693,18 +2895,6 @@ var WebRTCconferenceLib = function app(options){
 		});
 
 
-		/*var ua=navigator.userAgent;
-		if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) _isiOS = true;
-		if(_isiOS) {
-			require(['https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'], function (io) {
-				socket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket']});
-				socket.on('connect', function () {
-					if (_debug) console.log('CONNECTED', socket);
-					enableiOSDebug(socket);
-				});
-			});
-
-		}*/
 	}
 
 	var initWithNodeJs = function(callback){
@@ -2796,7 +2986,7 @@ var WebRTCconferenceLib = function app(options){
 
 	app.init = function(callback){
 		if(options.webrtcMode == 'twilio') {
-			require(['/Q/plugins/Streams/js/tools/webrtc/twilio-video.min.js'], function (TwilioInstance) {
+			require(['/Q/plugins/Streams/js/tools/webrtc/twilio-video.min.js?ts=' + (+new Date)], function (TwilioInstance) {
 				Twilio = window.Twilio = TwilioInstance;
 				initWithTwilio(callback);
 			});
@@ -2921,60 +3111,23 @@ var WebRTCconferenceLib = function app(options){
 		}
 	}())
 
+	/*var ua=navigator.userAgent;
+	if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) _isiOS = true;
+	var originallog = console.log;
+	console.log = function (txt) {
+
+		if(!socket || socket && !socket.connected) return;
+
+		try {
+			originallog.apply(console, arguments);
+			//socket.emit('log', [arguments[0], arguments[1], ua])
+		} catch (e) {
+
+		}
+	}*/
 
 	/*for debugging purpose*/
-	function enableiOSDebug(socket) {
-		var originallog = console.log;
-		/*console.log = function (txt) {
 
-			if(!socket || socket && !socket.connected) return;
-
-			try {
-				originallog.apply(console, arguments);
-				socket.emit('log', [arguments[0], arguments[1], ua])
-			} catch (e) {
-
-			}
-			return;
-			var consLogItem = document.createElement('DIV');
-			if(arguments[0][0] == '%') consLogItem.style = arguments[1];
-			consLogItem.classList.add('console-log-item');
-			consLogItem.style.borderBottom = '1px solid #ccc';
-			try {
-				var err = (new Error);
-				var caller_line = err.stack.split("\n")[4];
-				var index = caller_line.indexOf("at ");
-				var clean = caller_line.slice(index + 2, caller_line.length);
-			} catch (e) {
-
-			}
-
-		}*/
-
-		window.onerror = function(msg, url, line, col, error) {
-			if(!socket || socket && !socket.connected) return;
-			var extra = !col ? '' : '\ncolumn: ' + col;
-			extra += !error ? '' : '\nerror: ' + error;
-
-			var today = new Date();
-			var dd = today.getDate();
-			var mm = today.getMonth() + 1; //January is 0!
-
-			var yyyy = today.getFullYear();
-			if (dd < 10) {
-				dd = '0' + dd;
-			}
-			if (mm < 10) {
-				mm = '0' + mm;
-			}
-			var today = dd + '/' + mm + '/' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-
-			var errMessage = "\n\n" + today + " Error: " + msg + "\nurl: " + url + "\nline: " + line + extra + "\n" + ua;
-
-			socket.emit('errorlog', errMessage);
-		};
-
-	}
 
 	return app;
 }
