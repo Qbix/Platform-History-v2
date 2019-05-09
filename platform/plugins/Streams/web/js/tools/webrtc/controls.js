@@ -152,13 +152,13 @@
 
                 cameraBtn.addEventListener('touchend', function () {
                     if(!Q.info.isMobile && !Q.info.isTablet) return;
-	                //tool.selectCameraDialogue();
-	                Q.Dialogs.push({
+	                tool.selectCameraDialogue();
+	                /*Q.Dialogs.push({
                         title: "Video Sources",
                         className: 'webrtc_tool_participants-list',
                         content: tool.settingsPopupEl,
                         apply: true
-                    });
+                    });*/
                     //tool.toggleVideo()
                 })
 
@@ -244,9 +244,14 @@
             updateControlBar: function () {
                 var tool = this;
                 if(tool.controlBar == null) return;
-                var conferenceControl = webRTClib.conferenceControl;
+	            var localParticipant = webRTClib.localParticipant();
+	            var conferenceControl = webRTClib.conferenceControl;
 
-                if(webRTClib.conferenceControl.currentCameraDevice() == null) {
+	            var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
+		            return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
+	            }).length;
+
+                if(enabledVideoTracks == 0) {
                     tool.cameraBtnIcon.innerHTML = icons.disabledCamera;
                 } else if(!conferenceControl.cameraIsEnabled()) {
                     tool.cameraBtnIcon.innerHTML = icons.disabledCamera;
@@ -261,10 +266,14 @@
                     tool.speakerBtn.classList.add('webrtc_tool_hidden');
                 }*/
 
-                /*if(webRTClib.conferenceControl.currentAudioDevice() == null) {
+
+	            var enabledAudioTracks = localParticipant.tracks.filter(function (t) {
+		            return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
+	            }).length;
+
+                if(enabledAudioTracks == 0) {
                     tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
-                } else */
-                if(!conferenceControl.micIsEnabled()) {
+                } else if(!conferenceControl.micIsEnabled()) {
                     tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
                 } else if(conferenceControl.micIsEnabled()) {
                     tool.microphoneBtn.innerHTML = icons.microphone;
@@ -273,7 +282,6 @@
 
 	        selectCameraDialogue: function(){
             	var tool = this;
-		        console.log('selectCameraDialogue')
 		        //self.closeAllDialogues();
 
 		        var bg=document.createElement('DIV');
@@ -291,7 +299,7 @@
 
 		        var dialogTitle=document.createElement('H3');
 		        dialogTitle.innerHTML = 'Select camera';
-		        dialogTitle.className = 'dialog-header ';
+		        dialogTitle.className = 'dialog-header Q_dialog_title';
 
 		        var dialogInner=document.createElement('DIV');
 		        dialogInner.className = 'dialog-inner';
