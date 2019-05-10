@@ -27,6 +27,8 @@ class Users_Device_Android extends Users_Device
 			'click_action' => empty($notification['url']) ? null : $notification['url'],
 			'sound' => empty($notification['sound']) ? 'default' : $notification['sound']
 		);
+		self::$device = $this;
+		self::sendPushNotifications();
 	}
 
 	/**
