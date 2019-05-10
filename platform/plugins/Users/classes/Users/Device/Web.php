@@ -40,10 +40,10 @@ class Users_Device_Web
 		// send multiple notifications with payload
 		foreach ($notifications as $notification) {
 			$webPush->sendNotification(
-				$device->fields['deviceId'],
+				$device->deviceId,
 				json_encode($notification), // payload
-				$device->fields['p256dh'],
-				$device->fields['auth']
+				$device->p256dh,
+				$device->auth
 			);
 		}
 		$webPush->flush();

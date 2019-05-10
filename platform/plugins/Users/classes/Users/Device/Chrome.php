@@ -15,6 +15,8 @@ class Users_Device_Chrome extends Users_Device
 	function handlePushNotification($notification, $options = array())
 	{
 		self::$push[] = Users_Device_Web::prepare($notification);
+		self::$device = $this;
+		self::sendPushNotifications();
 	}
 
 	/**
