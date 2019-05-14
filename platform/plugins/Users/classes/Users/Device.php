@@ -61,21 +61,29 @@ class Users_Device extends Base_Users_Device
 		$sessionId = isset($device['sessionId']) ? $device['sessionId'] : Q_Session::id();
 		$user = Users::fetch($userId);
 		$liu = Users::loggedInUser();
+		$primary = array(
+			'sessionId' => $sessionId,
+			'userId' => $userId,
+			'auth' => $auth
+		);
 		$info = array(
 			'sessionId' => $sessionId,
 			'userId' => $userId,
+			'auth' => $auth,
 			'deviceId' => $deviceId,
 			'appId' => $platformAppId,
-			'auth' => $auth,
 			'p256dh' => $p256dh
 		);
 		if ($userId === $liu->id) {
 			$info = array_merge(Q_Request::userAgentInfo(), $info);
 		}
-		$deviceArray = Q::take($device, $info);
 		$className = "Users_Device_" . ucfirst($platform);
+		$primaryArray = Q::take($device, $primary);
+		$existingRow = new $className($primaryArray);
+		$deviceArray = Q::take($device, $info);
 		$deviceRow = new $className($deviceArray);
-		if (!$skipNotification) {
+		$exists = $existingRow->retrieve();
+		if (!$exists && !$skipNotification) {
 			// The following call may throw an exception if deviceId is invalid.
 			// This may cancel Users::register() registration and remove user.
 			$alert = Q_Config::get(
@@ -87,6 +95,9 @@ class Users_Device extends Base_Users_Device
 			));
 			$payload = compact('userId');
 			$deviceRow->pushNotification(compact('alert', 'payload'));
+		}
+		if ($exists and $deviceRow->toArray() == $existingRow->toArray()) {
+			return $deviceRow; // no changes
 		}
 		$deviceRow->save(true);
 		$deviceArray['deviceId'] = $deviceRow->deviceId;
