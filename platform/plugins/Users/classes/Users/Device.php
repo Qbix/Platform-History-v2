@@ -34,10 +34,10 @@ class Users_Device extends Base_Users_Device
 	 * @param {string} $device.formFactor the form factor of the device
 	 * @param {string} $device.version the version of the platform
 	 * @param {string} [$device.sessionId=Q_Session::id()] the session id to associate to the device.
-	 * @param {boolean} [$skipNotification=false] if true, skips sending notification
+	 * @param {boolean} [$skipNotification=true] if true, skips sending notification
 	 * @return {Users_Device}
 	 */
-	static function add($device, $skipNotification=false)
+	static function add($device, $skipNotification=true)
 	{
 		if (($device['platform'] === 'chrome') || ($device['platform'] === 'firefox')) {
 			$fields = array('userId', 'deviceId', 'platform', 'appId', 'formFactor', 'version', 'auth', 'p256dh');
