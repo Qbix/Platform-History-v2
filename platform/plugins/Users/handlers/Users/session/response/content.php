@@ -17,7 +17,7 @@ function Users_session_response_content()
 	$scheme = Q::ifset($appInfo, 'scheme', null);
 	$paths = Q::ifset($appInfo, 'paths', false);
 	if (Q::startsWith($redirect, $baseUrl)) {
-		$path = substr($redirect, strlen($baseUrl)+1);
+		$path = substr($redirect, strlen($baseUrl)+1) ?: '/';
 	} else if (Q::startsWith($redirect, $scheme)) {
 		$path = substr($redirect, strlen($scheme));
 	} else {
