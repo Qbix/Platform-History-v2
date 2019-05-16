@@ -2597,7 +2597,7 @@
 					'&state=' + _stringGen(10) +
 					'&response_type=token&scope=email,public_profile';
 				cordova.plugins.browsertab.openUrl(url,
-					{schema: Users.Facebook.scheme + '://'},
+					{scheme: Users.Facebook.scheme + '://'},
 					function(success) { console.log(success); },
 					function(err) { console.log(err); }
 				);
