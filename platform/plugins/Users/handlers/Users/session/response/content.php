@@ -48,6 +48,9 @@ function Users_session_response_content()
 	$redirectFields = Q_Utils::sign($redirectFields, 'Q.Users.signature');
 	$qs = http_build_query($redirectFields);
 	$url = Q_Uri::fixUrl("$redirect#$qs");
-	Q_Response::redirect($url, array('noProxy' => true));
+
+	Q_Response::addScript('{{Users}}/js/pages/session.js', 'Users');
+	Q_Response::setScriptData("Q.Cordova.handoff.url", $url);
+	//Q_Response::redirect($url, array('noProxy' => true));
 	return true;
 }
