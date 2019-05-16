@@ -19,7 +19,7 @@ function Users_session_response_content()
 	if (Q::startsWith($redirect, $baseUrl)) {
 		$path = substr($redirect, strlen($baseUrl)+1) ?: '/';
 	} else if (Q::startsWith($redirect, $scheme)) {
-		$path = substr($redirect, strlen($scheme));
+		$path = substr($redirect, strlen($scheme)) ?: '/';
 	} else {
 		throw new Users_Exception_Redirect(array('uri' => $redirect));
 	}
