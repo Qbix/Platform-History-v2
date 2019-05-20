@@ -2362,6 +2362,36 @@
 		}
 	}, 'Users');
 
+	// handoff action
+	Q.onHandleOpenUrl.set(function (url) {
+		window.cordova.plugins.browsertab.close();
+		if (url.includes('Q.Users.newSessionId')) { // handoff action
+			var fields = _getParams(url.split('#')[1]);
+			if (fields['Q.Users.newSessionId']) {
+				Q.cookie('Q_sessionId', fields['Q.Users.newSessionId']);
+				document.location.reload();
+			}
+		}
+
+		function _getParams(url) {
+			var res = {};
+			try {
+				var pieces = url.split('&');
+				for (var i = 0; i < pieces.length; i++) {
+					var val = pieces[i].split('=');
+					if (val.length !== 2) {
+						continue;
+					}
+					res[val[0]] = val[1];
+				}
+			} catch (err) {
+				console.warn('Error parsing params');
+				return null;
+			}
+			return res;
+		}
+	}, 'Users.handoff');
+
 	Q.beforeActivate.add(function (elem) {
 		// Every time before anything is activated,
 		// process any preloaded users data we find
@@ -2536,12 +2566,6 @@
 								accessToken: Users.Facebook.accessToken
 							}
 						});
-					} else if (url.includes('Q.Users.newSessionId')) { // handoff action
-						var fields = _getParams(url.split('#')[1]);
-						if (fields['Q.Users.newSessionId']) {
-							Q.cookie('Q_sessionId', fields['Q.Users.newSessionId']);
-							document.location.reload();
-						}
 					}
 
 					function _getParams(url) {
@@ -2561,7 +2585,7 @@
 						}
 						return res;
 					}
-				}, 'Users');
+				}, 'Users.facebook');
 				Users.Facebook.type = 'oauth';
 				if (Q.info.platform === 'ios') {
 					// ios
