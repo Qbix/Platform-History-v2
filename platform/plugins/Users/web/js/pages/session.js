@@ -3,7 +3,12 @@ Q.page("Users/session", function () {
 
 	console.log("Trying to redirect to:", url);
 
-	document.location.href = url;
+	var timeId = setInterval(function () {
+		if (typeof handleOpenURL === 'function') {
+			clearInterval(timeId);
+			handleOpenURL(url);
+		}
+	}, 500);
 
 	return function () {
 		// code to execute before page starts unloading
