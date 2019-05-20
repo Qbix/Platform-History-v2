@@ -17,9 +17,9 @@ function Users_session_response_content()
 	$scheme = Q::ifset($appInfo, 'scheme', null);
 	$paths = Q::ifset($appInfo, 'paths', false);
 	if (Q::startsWith($redirect, $baseUrl)) {
-		$path = substr($redirect, strlen($baseUrl)+1);
+		$path = substr($redirect, strlen($baseUrl)+1) ?: '/';
 	} else if (Q::startsWith($redirect, $scheme)) {
-		$path = substr($redirect, strlen($scheme));
+		$path = substr($redirect, strlen($scheme)) ?: '/';
 	} else {
 		throw new Users_Exception_Redirect(array('uri' => $redirect));
 	}
@@ -48,6 +48,9 @@ function Users_session_response_content()
 	$redirectFields = Q_Utils::sign($redirectFields, 'Q.Users.signature');
 	$qs = http_build_query($redirectFields);
 	$url = Q_Uri::fixUrl("$redirect#$qs");
-	Q_Response::redirect($url, array('noProxy' => true));
+
+	Q_Response::addScript('{{Users}}/js/pages/session.js', 'Users');
+	Q_Response::setScriptData("Q.Cordova.handoff.url", $url);
+	//Q_Response::redirect($url, array('noProxy' => true));
 	return true;
 }
