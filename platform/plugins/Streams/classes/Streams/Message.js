@@ -395,13 +395,20 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/email.handlebars';
 			}
-			Users.Email.sendMessage(
-				emailAddress, o.subject, viewPath, o.fields, {
-					html: true, 
-					language: uf.preferredLanguage
-				}, callback
-			);
-			result.push({'email': emailAddress});
+
+			// check if allowed to send from Users/profile/settings
+			Streams.fetchOne(toUserId, toUserId, 'Users/profile/settings', function (err, stream) {
+				if (stream && stream.getAttribute('notesByEmail') === 'off') {
+					return;
+				}
+				Users.Email.sendMessage(
+					emailAddress, o.subject, viewPath, o.fields, {
+						html: true,
+						language: uf.preferredLanguage
+					}, callback
+				);
+				result.push({'email': emailAddress});
+			});
 		}
 		function _mobile(mobileNumber, callback) {
 			o.destination = 'mobile';
@@ -411,8 +418,15 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/mobile.handlebars';
 			}
-			Users.Mobile.sendMessage(mobileNumber, viewPath, o.fields, {language: uf.preferredLanguage}, callback);
-			result.push({'mobile': mobileNumber});
+
+			// check if allowed to send from Users/profile/settings
+			Streams.fetchOne(toUserId, toUserId, 'Users/profile/settings', function (err, stream) {
+				if (stream && stream.getAttribute('notesBySMS') === 'off') {
+					return;
+				}
+				Users.Mobile.sendMessage(mobileNumber, viewPath, o.fields, {language: uf.preferredLanguage}, callback);
+				result.push({'mobile': mobileNumber});
+			});
 		}
 		function _device(deviceId, callback) {
 			o.destination = 'devices';
@@ -423,22 +437,29 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				viewPath = 'Streams/message/device.handlebars';
 			}
 
-			Users.pushNotifications(
-				toUserId, 
-				{
-					alert: { title: o.subject },
-					payload: message.getAllInstructions(),
-					url: o.url,
-					icon: o.icon
-				},
-				callback, 
-				{view: viewPath, fields: o.fields, language: uf.preferredLanguage},
-				function (device) {
-					if (deviceId && device.deviceId !== deviceId) {
-					return false;
+			// check if allowed to send from Users/profile/settings
+			Streams.fetchOne(toUserId, toUserId, 'Users/profile/settings', function (err, stream) {
+				if (stream && stream.getAttribute('notesByDevice') === 'off') {
+					return;
 				}
+
+				Users.pushNotifications(
+					toUserId,
+					{
+						alert: { title: o.subject },
+						payload: message.getAllInstructions(),
+						url: o.url,
+						icon: o.icon
+					},
+					callback,
+					{view: viewPath, fields: o.fields, language: uf.preferredLanguage},
+					function (device) {
+						if (deviceId && device.deviceId !== deviceId) {
+							return false;
+						}
+					});
+				result.push({'devices': deviceId || true});
 			});
-			result.push({'devices': deviceId || true});
 		}
 		function _platform(platform, callback) {
 			var appId = Users.appInfo(platform).appId;

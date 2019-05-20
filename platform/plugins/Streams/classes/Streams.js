@@ -1024,7 +1024,7 @@ Streams.fetchOne = function (asUserId, publisherId, streamName, callback, fields
 		    return callback(err);
 		}
 		if (!res.length) {
-		    callback(null, null);
+		    return callback(null, null);
 		}
 		res[0].calculateAccess(asUserId, function () {
 		    callback.call(res[0], null, res[0]);
