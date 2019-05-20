@@ -391,11 +391,15 @@ Sp.updateParticipantCounts = function (newState, prevState, callback) {
  * @param {String} event The type of Streams event, such as "Streams/post" or "Streams/remove"
  * @param {String} userId User who initiated the event
  * @param {Streams_Message} message 
- * @param {Boolean} dontNotifyObservers 
+ * @param {Boolean} dontNotifyObservers
+ * @return {Boolean} Whether the system went on to get and notify participants
  */
 Sp.notifyParticipants = function (event, userId, message, dontNotifyObservers) {
 	var fields = this.fields;
 	var stream = this;
+	if (Streams.Notification.paused) {
+		return false;
+	}
 	Streams.getParticipants(fields.publisherId, fields.name, function (participants) {
 		message.fields.streamType = fields.type;
 		for (var userId in participants) {
@@ -413,6 +417,7 @@ Sp.notifyParticipants = function (event, userId, message, dontNotifyObservers) {
 			stream.notifyObservers(event, userId, message);
 		}
 	});
+	return true;
 };
 
 /**
