@@ -2342,11 +2342,11 @@
 				Q.plugins.Users.setIdentifier();
 				return false;
 			});
-		if (!location.hash.queryField('Q.Users.oAuth')) {
+		if (!location.hash.queryField('Q.Users.newSessionId')) {
 			return;
 		}
 		var fieldNames = [
-			'Q.Users.appId', 'Q.Users.newSessionId', 
+			'Q.Users.appId', 'Q.Users.newSessionId',
 			'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.signature'
 		];
 		var fields = location.hash.queryField(fieldNames);
@@ -2528,20 +2528,26 @@
 				Users.Facebook.scheme = Users.Facebook.scheme && Users.Facebook.scheme.replace('://', '');
 				Q.onHandleOpenUrl.set(function (url) {
 					window.cordova.plugins.browsertab.close();
-					var params = _getParams(url);
-					Users.Facebook.accessToken = params.access_token;
-					Users.Facebook.doLogin({
-						status: 'connected',
-						authResponse: {
-							accessToken: params.access_token
+					Users.Facebook.accessToken = Q.getObject(["access_token"], _getParams(url.split('?')[1]));
+					if (Users.Facebook.accessToken) {
+						Users.Facebook.doLogin({
+							status: 'connected',
+							authResponse: {
+								accessToken: Users.Facebook.accessToken
+							}
+						});
+					} else if (url.includes('Q.Users.newSessionId')) { // handoff action
+						var fields = _getParams(url.split('#')[1]);
+						if (fields['Q.Users.newSessionId']) {
+							Q.cookie('Q_sessionId', fields['Q.Users.newSessionId']);
+							document.location.reload();
 						}
-					});
+					}
 
 					function _getParams(url) {
 						var res = {};
 						try {
-							var str = url.split('?')[1];
-							var pieces = str.split('&');
+							var pieces = url.split('&');
 							for (var i = 0; i < pieces.length; i++) {
 								var val = pieces[i].split('=');
 								if (val.length !== 2) {
@@ -2551,7 +2557,7 @@
 							}
 						} catch (err) {
 							console.warn('Error parsing params');
-							throw(err);
+							return null;
 						}
 						return res;
 					}
