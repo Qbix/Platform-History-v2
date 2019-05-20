@@ -688,6 +688,12 @@ function Streams_request_handler (req, res, next) {
 			persist();
 			
 			return;
+		case "Streams/Notification/pause":
+			Streams.Notification.paused = true;
+			break;
+		case "Streams/Notification/resume":
+			Streams.Notification.paused = false;
+			break;
 		default:
 			break;
 	}
