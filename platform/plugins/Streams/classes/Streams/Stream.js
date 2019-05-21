@@ -397,9 +397,7 @@ Sp.updateParticipantCounts = function (newState, prevState, callback) {
 Sp.notifyParticipants = function (event, userId, message, dontNotifyObservers) {
 	var fields = this.fields;
 	var stream = this;
-	if (Streams.Notification.paused) {
-		return false;
-	}
+
 	Streams.getParticipants(fields.publisherId, fields.name, function (participants) {
 		message.fields.streamType = fields.type;
 		for (var userId in participants) {
@@ -1160,8 +1158,14 @@ Sp.notify = function(participant, event, userId, message, callback) {
 				return; // no need to notify the user of their own actions
 			}
 			if (participant.fields.subscribed !== 'yes') {
-				callback && callback(null, []);
+				return callback && callback(null, []);
 			}
+
+			// don't send offline notifications if paused
+			if (Streams.Notification.paused) {
+				return false;
+			}
+
 			Streams.Subscription.test(userId, stream, message.fields.type, _continue2);
 		}
 		function _continue2(err, deliveries) {
