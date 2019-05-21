@@ -23,14 +23,14 @@ class Streams_Notification extends Base_Streams_Notification
 		parent::setUp();
 	}
 
-	function pause()
+	static function pause()
 	{
 		Q_Utils::sendToNode(array(
 			"Q/method" => "Streams/Notification/pause"
 		));
 	}
 
-	function resume()
+	static function resume()
 	{
 		Q_Utils::sendToNode(array(
 			"Q/method" => "Streams/Notification/resume"
