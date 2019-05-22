@@ -70,13 +70,13 @@
 			WebRTCconference.event.on('videoTrackIsBeingAdded', function (screen) {
 				if(_debug) console.log('%c TWILIO: TRACK videoTrackIsBeingAdded', 'background:blue;color:white;')
 				screensRendering.updateLayout();
-				screensRendering.showLoader('screensharingStarting', screen.participant);
+				screensRendering.showLoader('videoTrackIsBeingAdded', screen.participant);
 			});
 
 			WebRTCconference.event.on('videoTrackLoaded', function (e) {
 				if(_debug) console.log('%c TWILIO: TRACK videoTrackLoaded', 'background:blue;color:white;')
 
-				screensRendering.hideLoader('screensharingStarting', e.screen.participant);
+				screensRendering.hideLoader('videoTrackLoaded', e.screen.participant);
 				screensRendering.fitScreenToVideo(e.trackEl, e.screen, e.reset, e.oldSize)
 			});
 
@@ -85,8 +85,12 @@
 
 				screensRendering.showLoader('screensharingStarting', data.participant);
 			});
-			WebRTCconference.event.on('beforeCamerasToggle', function (data) {
-				screensRendering.showLoader('screensharingStarting', data.participant);
+
+			WebRTCconference.event.on('afterCamerasToggle', function (e) {
+				screensRendering.hideLoader('afterCamerasToggle', e.participant);
+			});
+			WebRTCconference.event.on('beforeCamerasToggle', function (e) {
+				screensRendering.showLoader('beforeCamerasToggle', e.participant);
 			});
 			WebRTCconference.event.on('screensharingStarted', function (data) {
 				//screensRendering.hideLoader('screensharingStarting', data.participant);
@@ -104,9 +108,14 @@
 			Q.addStylesheet('{{Streams}}/css/tools/webrtc.css?ts=' + performance.now());
 
 			Q.addScript([
+				"https://cdn.trackjs.com/agent/v3/latest/t.js",
 				"https://requirejs.org/docs/release/2.2.0/minified/require.js",
 				"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+new Date()),
 			], function () {
+				window.TrackJS && TrackJS.install({
+					token: "c8b43db909ae49728a17089490341b57"
+					// for more configuration options, see https://docs.trackjs.com
+				});
 
 				Q.req("Streams/webrtc", ["token"], function (err, response) {
 					var msg = Q.firstErrorMessage(err, response && response.errors);
@@ -116,12 +125,15 @@
 					}
 
 					var twilioRoomName = _roomStream.getAttribute('twilioRoomName');
-					
+
+					console.log('twilioRoomName', twilioRoomName)
+
 					WebRTCconference = window.WebRTCconferenceLib({
 						mode:'twilio',
 						roomName:twilioRoomName,
 						twilioAccessToken: response.slots.token,
 						useAsLibrary: true,
+						startWith: _options.startWith
 					});
 					window.WebConf = WebRTCconference;
 						WebRTCconference.init(function () {
@@ -195,6 +207,7 @@
 			var roomId = _options.roomId != null ? _options.roomId : null;
 
 			if(roomId == null) {
+				if(_debug) console.log('SOCKET CREATE', roomId)
 
 				Q.req("Streams/webrtc", ["stream"], function (err, response) {
 					var msg = Q.firstErrorMessage(err, response && response.errors);
@@ -216,6 +229,7 @@
 				});
 
 			} else {
+				if(_debug) console.log('SOCKET JOIN', roomId)
 				Q.req("Streams/webrtc", ["join"], function (err, response) {
 					var msg = Q.firstErrorMessage(err, response && response.errors);
 
@@ -226,6 +240,22 @@
 					Q.Streams.get(_options.roomPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
 						bindStreamsEvents(stream);
 					});
+
+					Q.activate(
+						document.body.appendChild(
+							Q.Tool.setUpElement(
+								"div", // or pass an existing element
+								"Streams/webrtc/controls",
+								{webRTClibraryInstance: WebRTCconference, webrtcClass: module}
+							)
+						),
+						{},
+						function () {
+							_controls = this.element;
+							_controlsTool = this;
+							screensRendering.updateLayout();
+						}
+					);
 				}, {
 					method: 'get',
 					fields: {
@@ -235,7 +265,7 @@
 			}
 
 
-			var roomsMedia = document.createElement('DIV');
+			/*var roomsMedia = document.createElement('DIV');
 			roomsMedia.id = 'webrtc_tool_room-media';
 			var dashboard = document.getElementById('dashboard_slot');
 			if(Q.info.isMobile && !Q.info.isTablet) {
@@ -243,19 +273,8 @@
 				roomsMedia.style.top = dashboard.offsetHeight + 'px';
 			}
 			_options.element.appendChild(roomsMedia);
-			_roomsMedia = roomsMedia;
+			_roomsMedia = roomsMedia;*/
 
-			Q.activate(
-				Q.Tool.setUpElement(
-					participantScreen.videoCon, // or pass an existing element
-					"Q/layouts",
-					{}
-				),
-				{},
-				function () {
-					_layoutTool = this;
-				}
-			);
 		}
 
 		/**
@@ -263,32 +282,34 @@
 		 * @method initWithStreams
 		 */
 		var initWithNodeServer = function() {
-			var tool = this;
 			Q.addStylesheet('{{Streams}}/css/tools/webrtc.css');
 
 			Q.addScript([
 				"https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js",
+				"https://cdn.trackjs.com/agent/v3/latest/t.js",
 				"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-				"{{Streams}}/js/tools/webrtc/app.js",
+				"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+new Date())
 			], function () {
+				//if(Q.info.isIOS) {
+					window.TrackJS && TrackJS.install({
+						token: "c8b43db909ae49728a17089490341b57"
+						// for more configuration options, see https://docs.trackjs.com
+					});
+				//}
 				var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
-				window.WebRTCconference = WebRTCconference({
+				WebRTCconference = window.WebRTCconferenceLib({
 					webrtcMode:'nodejs',
 					useAsLibrary: true,
 					nodeServer: _options.nodeServer,
 					roomName: roomId,
 					sid:  Q.Users.loggedInUser.id,
 					username:  Q.Users.loggedInUser.displayName,
+					startWith: _options.startWith
 				});
 				WebRTCconference.init(function () {
 					bindConferenceEvents();
 					startNodeJsRoom();
 					screensRendering.updateLayout();
-
-					var controlEl = Q.Tool.setUpElement('DIV', 'Streams/webrtc/controls', {});
-					$(controlEl).appendTo(document.querySelector('body')).activate(function () {
-						screensRendering.updateLayout();
-					});
 				});
 			});
 		}
@@ -401,25 +422,27 @@
 				var participantNameTextCon = document.createElement("DIV");
 				participantNameTextCon.className = "webrtc_tool_participant-name-text";
 				var participantNameText = document.createElement("DIV");
-				var userId = screen.participant.identity.split('\t')[0];
+				var userId = screen.participant.identity != null ? screen.participant.identity.split('\t')[0] : Q.Users.loggedInUser.id;
 
-				Q.activate(
-					Q.Tool.setUpElement(
-						participantNameText, // or pass an existing element
-						"Users/avatar",
-						{
-							userId: userId,
-							icon: false
+				if(screen.isLocal) {
+					Q.activate(
+						Q.Tool.setUpElement(
+							participantNameText, // or pass an existing element
+							"Users/avatar",
+							{
+								userId: userId,
+								icon: false
+							}
+						),
+						{},
+						function () {
+							setTimeout(function () {
+								screensRendering.updateLayout();
+							}, 1000);
+
 						}
-					),
-					{},
-					function () {
-						setTimeout(function () {
-							screensRendering.updateLayout();
-						}, 1000);
-
-					}
-				);
+					);
+				}
 
 				participantNameTextCon.appendChild(participantNameText);
 				chatParticipantName.appendChild(participantNameTextCon);
@@ -731,7 +754,7 @@
 			function showLoader(loaderName, participant) {
 				var screen = participant.screens[0];
 
-				if(loaderName == 'screensharingStarting') {
+				if(loaderName == 'screensharingStarting' || loaderName == 'videoTrackIsBeingAdded' || loaderName == 'beforeCamerasToggle') {
 					var loader = screen.screenEl.querySelector('.spinner-load');
 					if(loader != null) return;
 					var loaderCon = document.createElement('DIV');
@@ -757,7 +780,7 @@
 
 			function hideLoader(loaderName, participant) {
 				var screen = participant.screens[0];
-				if(loaderName == 'screensharingStarting') {
+				if(loaderName == 'screensharingStarting' || loaderName == 'videoTrackLoaded' || loaderName == 'afterCamerasToggle') {
 					var loader = screen.screenEl.querySelector('.spinner-load');
 					if(loader != null && loader.parentNode != null) loader.parentNode.removeChild(loader);
 				}
@@ -1073,7 +1096,6 @@
 					return customLayouts.regularScreensGrid(document.body, count);
 				});
 
-				if(_debug) console.log('renderDesktopScreensGrid', roomScreens, elements);
 				_layoutTool.animate('regularScreensGrid', elements, 500, true);
 
 				updateScreensButtons();
@@ -1565,6 +1587,8 @@
 
 
 			var createRoomStream = function (roomId, asPublisherId) {
+				if(_debug) console.log('createRoomStream')
+
 				Q.req("Streams/webrtc", ["stream"], function (err, response) {
 					var msg = Q.firstErrorMessage(err, response && response.errors);
 
@@ -1595,6 +1619,7 @@
 			}
 
 			var joinRoomStream = function (roomId, roomPublisherId) {
+				if(_debug) console.log('joinRoomStream')
 				Q.req("Streams/webrtc", ["join"], function (err, response) {
 					var msg = Q.firstErrorMessage(err, response && response.errors);
 
@@ -1644,11 +1669,18 @@
 
 		module.stop = function () {
 			if(_debug) console.log('disconnect');
+			try {
+				var err = (new Error);
+				console.log(err.stack);
+			} catch (e) {
+
+			}
 			WebRTCconference.disconnect()
 			if(_roomsMedia.parentNode != null) _roomsMedia.parentNode.removeChild(_roomsMedia);
 			if(_controls != null) {
 				var controlsTool = Q.Tool.from(_controls, "Streams/webrtc/controls");
 				controlsTool.participantsPopup().disableLoudesScreenMode();
+				controlsTool.participantsPopup().disableCheckActiveMediaTracks();
 				if(_controls.parentNode != null) _controls.parentNode.removeChild(_controls);
 				Q.Tool.remove(controlsTool);
 			}
