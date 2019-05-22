@@ -9,6 +9,14 @@ class Users_Device_Web
 
 	static function prepare($notification)
 	{
+		// lead to common standard
+		if (is_string($notification['alert'])) {
+			$notification['alert'] = array(
+				'title' => Users::communityName(),
+				'body' => $notification['alert']
+			);
+		}
+
 		return array(
 			'title' => Q::ifset($notification, 'alert', 'title', null),
 			'body' => Q::ifset($notification, 'alert', 'body', null),
@@ -32,10 +40,10 @@ class Users_Device_Web
 		// send multiple notifications with payload
 		foreach ($notifications as $notification) {
 			$webPush->sendNotification(
-				$device->fields['deviceId'],
+				$device->deviceId,
 				json_encode($notification), // payload
-				$device->fields['p256dh'],
-				$device->fields['auth']
+				$device->p256dh,
+				$device->auth
 			);
 		}
 		$webPush->flush();

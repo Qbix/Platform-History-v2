@@ -2,6 +2,11 @@
 	
 function Users_session_response_content()
 {
+	$user = Users::loggedInUser();
+	if (!$user) {
+		return Q::view('Users/content/session.php');
+	}
+
 	Q_Request::requireFields(array('appId', 'redirect'), true);
 	$req = Q::take($_REQUEST, array('appId' => null, 'deviceId' => null, 'redirect' => null));
 	$platform = Q_Request::platform();
@@ -10,11 +15,11 @@ function Users_session_response_content()
 	$redirect = $req['redirect'];
 	$baseUrl = Q_Request::baseUrl();
 	$scheme = Q::ifset($appInfo, 'scheme', null);
-	$paths = Q::ifset($info, 'paths', false);
+	$paths = Q::ifset($appInfo, 'paths', false);
 	if (Q::startsWith($redirect, $baseUrl)) {
-		$path = substr($redirect, strlen($baseUrl)+1);
+		$path = substr($redirect, strlen($baseUrl)+1) ?: '/';
 	} else if (Q::startsWith($redirect, $scheme)) {
-		$path = substr($redirect, strlen($scheme));
+		$path = substr($redirect, strlen($scheme)) ?: '/';
 	} else {
 		throw new Users_Exception_Redirect(array('uri' => $redirect));
 	}
@@ -22,10 +27,6 @@ function Users_session_response_content()
 		throw new Users_Exception_Redirect(array('uri' => $req['redirectUri']));
 	}
 	
-	$user = Users::loggedInUser();
-	if (!$user) {
-		return Q::view('Users/content/session.php');
-	}
 	$duration_name = Q_Request::isMobile()
 		? 'mobile'
 		: (Q_Request::isTablet() 
@@ -47,6 +48,9 @@ function Users_session_response_content()
 	$redirectFields = Q_Utils::sign($redirectFields, 'Q.Users.signature');
 	$qs = http_build_query($redirectFields);
 	$url = Q_Uri::fixUrl("$redirect#$qs");
-	Q_Response::redirect($url, array('noProxy' => true));
+
+	Q_Response::addScript('{{Users}}/js/pages/session.js', 'Users');
+	Q_Response::setScriptData("Q.Cordova.handoff.url", $url);
+	//Q_Response::redirect($url, array('noProxy' => true));
 	return true;
 }

@@ -2342,11 +2342,11 @@
 				Q.plugins.Users.setIdentifier();
 				return false;
 			});
-		if (!location.hash.queryField('Q.Users.oAuth')) {
+		if (!location.hash.queryField('Q.Users.newSessionId')) {
 			return;
 		}
 		var fieldNames = [
-			'Q.Users.appId', 'Q.Users.newSessionId', 
+			'Q.Users.appId', 'Q.Users.newSessionId',
 			'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.signature'
 		];
 		var fields = location.hash.queryField(fieldNames);
@@ -2361,6 +2361,36 @@
 			});
 		}
 	}, 'Users');
+
+	// handoff action
+	Q.onHandleOpenUrl.set(function (url) {
+		window.cordova.plugins.browsertab.close();
+		if (url.includes('Q.Users.newSessionId')) { // handoff action
+			var fields = _getParams(url.split('#')[1]);
+			if (fields['Q.Users.newSessionId']) {
+				Q.cookie('Q_sessionId', fields['Q.Users.newSessionId']);
+				document.location.reload();
+			}
+		}
+
+		function _getParams(url) {
+			var res = {};
+			try {
+				var pieces = url.split('&');
+				for (var i = 0; i < pieces.length; i++) {
+					var val = pieces[i].split('=');
+					if (val.length !== 2) {
+						continue;
+					}
+					res[val[0]] = val[1];
+				}
+			} catch (err) {
+				console.warn('Error parsing params');
+				return null;
+			}
+			return res;
+		}
+	}, 'Users.handoff');
 
 	Q.beforeActivate.add(function (elem) {
 		// Every time before anything is activated,
@@ -2528,20 +2558,20 @@
 				Users.Facebook.scheme = Users.Facebook.scheme && Users.Facebook.scheme.replace('://', '');
 				Q.onHandleOpenUrl.set(function (url) {
 					window.cordova.plugins.browsertab.close();
-					var params = _getParams(url);
-					Users.Facebook.accessToken = params.access_token;
-					Users.Facebook.doLogin({
-						status: 'connected',
-						authResponse: {
-							accessToken: params.access_token
-						}
-					});
+					Users.Facebook.accessToken = Q.getObject(["access_token"], _getParams(url.split('?')[1]));
+					if (Users.Facebook.accessToken) {
+						Users.Facebook.doLogin({
+							status: 'connected',
+							authResponse: {
+								accessToken: Users.Facebook.accessToken
+							}
+						});
+					}
 
 					function _getParams(url) {
 						var res = {};
 						try {
-							var str = url.split('?')[1];
-							var pieces = str.split('&');
+							var pieces = url.split('&');
 							for (var i = 0; i < pieces.length; i++) {
 								var val = pieces[i].split('=');
 								if (val.length !== 2) {
@@ -2551,11 +2581,11 @@
 							}
 						} catch (err) {
 							console.warn('Error parsing params');
-							throw(err);
+							return null;
 						}
 						return res;
 					}
-				}, 'Users');
+				}, 'Users.facebook');
 				Users.Facebook.type = 'oauth';
 				if (Q.info.platform === 'ios') {
 					// ios
@@ -2597,7 +2627,7 @@
 					'&state=' + _stringGen(10) +
 					'&response_type=token&scope=email,public_profile';
 				cordova.plugins.browsertab.openUrl(url,
-					{schema: Users.Facebook.scheme + '://'},
+					{scheme: Users.Facebook.scheme + '://'},
 					function(success) { console.log(success); },
 					function(err) { console.log(err); }
 				);

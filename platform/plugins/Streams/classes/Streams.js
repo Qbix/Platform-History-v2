@@ -537,24 +537,9 @@ function Streams_request_handler (req, res, next) {
 	var clientId = parsed["Q.clientId"];
 	var stream = parsed.stream
 		&& Streams.Stream.construct(JSON.parse(parsed.stream), true);
+	var userId = parsed.userId;
+	var sessionId = parsed.sessionId;
 	switch (parsed['Q/method']) {
-		case 'Users/device':
-			break;
-		case 'Users/logout':
-			var userId = parsed.userId;
-			var sessionId = parsed.sessionId;
-			if (userId && sessionId) {
-				var clients = Users.clients[userId];
-				for (var cid in clients) {
-					if (clients[cid].sessionId === sessionId) {
-						clients[cid].disconnect();
-					}
-				}
-			}
-			Users.pushNotifications(userId, {
-				badge: 0
-			});
-			break;
 		case 'Streams/Stream/join':
 			participant = new Streams.Participant(JSON.parse(parsed.participant));
 			participant.fillMagicFields();
@@ -688,6 +673,12 @@ function Streams_request_handler (req, res, next) {
 			persist();
 			
 			return;
+		case "Streams/Notification/pause":
+			Streams.Notification.paused = true;
+			break;
+		case "Streams/Notification/resume":
+			Streams.Notification.paused = false;
+			break;
 		default:
 			break;
 	}
@@ -1024,7 +1015,7 @@ Streams.fetchOne = function (asUserId, publisherId, streamName, callback, fields
 		    return callback(err);
 		}
 		if (!res.length) {
-		    callback(null, null);
+		    return callback(null, null);
 		}
 		res[0].calculateAccess(asUserId, function () {
 		    callback.call(res[0], null, res[0]);

@@ -11133,7 +11133,7 @@ Q.Pointer = {
 			});
 		} else if (options.speak) {
 			Q.Audio.speak(options.speak.text, Q.extend({}, 10, options.speak, {
-				onStart: audioEvent.handle
+				onSpeak: audioEvent.handle
 			}));
 		} else {
 			audioEvent.handle();
@@ -12190,6 +12190,7 @@ Q.Audio.loadVoices = Q.getter(function (callback) {
  * @param {Number} [options.locale] a 4 character code that specifies the language that should be used to synthesize the text.
  * @param {Q.Event|function} [options.onStart] This gets called when the speaking has begun
  * @param {Q.Event|function} [options.onEnd] This gets called when the speaking has finished
+ * @param {Q.Event|function} [options.onSpeak] This gets called when the system called speak(), whether or not it worked
  */
 Q.Audio.speak = function (text, options) {
 	var TTS = root.TTS; // cordova
@@ -12301,6 +12302,7 @@ Q.Audio.speak = function (text, options) {
 					Q.handle(o.onEnd, [u]);
 				};
 				SS.speak(u);
+				Q.handle(o.onSpeak);
 			});
 		}
 	}

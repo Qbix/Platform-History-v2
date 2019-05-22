@@ -391,11 +391,13 @@ Sp.updateParticipantCounts = function (newState, prevState, callback) {
  * @param {String} event The type of Streams event, such as "Streams/post" or "Streams/remove"
  * @param {String} userId User who initiated the event
  * @param {Streams_Message} message 
- * @param {Boolean} dontNotifyObservers 
+ * @param {Boolean} dontNotifyObservers
+ * @return {Boolean} Whether the system went on to get and notify participants
  */
 Sp.notifyParticipants = function (event, userId, message, dontNotifyObservers) {
 	var fields = this.fields;
 	var stream = this;
+
 	Streams.getParticipants(fields.publisherId, fields.name, function (participants) {
 		message.fields.streamType = fields.type;
 		for (var userId in participants) {
@@ -413,6 +415,7 @@ Sp.notifyParticipants = function (event, userId, message, dontNotifyObservers) {
 			stream.notifyObservers(event, userId, message);
 		}
 	});
+	return true;
 };
 
 /**
@@ -1155,8 +1158,14 @@ Sp.notify = function(participant, event, userId, message, callback) {
 				return; // no need to notify the user of their own actions
 			}
 			if (participant.fields.subscribed !== 'yes') {
-				callback && callback(null, []);
+				return callback && callback(null, []);
 			}
+
+			// don't send offline notifications if paused
+			if (Streams.Notification.paused) {
+				return false;
+			}
+
 			Streams.Subscription.test(userId, stream, message.fields.type, _continue2);
 		}
 		function _continue2(err, deliveries) {

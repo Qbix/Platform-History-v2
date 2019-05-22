@@ -195,7 +195,24 @@ function Users_request_handler(req, res, next) {
     if (!parsed || !parsed['Q/method']) {
 		return next();
 	}
+	var userId = parsed.userId;
+	var sessionId = parsed.sessionId;
     switch (parsed['Q/method']) {
+		case 'Users/device':
+			break;
+		case 'Users/logout':
+			if (userId && sessionId) {
+				var clients = Users.clients[userId];
+				for (var cid in clients) {
+					if (clients[cid].sessionId === sessionId) {
+						clients[cid].disconnect();
+					}
+				}
+			}
+			Users.pushNotifications(userId, {
+				badge: 0
+			});
+			break;
 		case 'Users/session':
             var sid = parsed.sessionId;
             var content = parsed.content ? JSON.parse(parsed.content) : null;
