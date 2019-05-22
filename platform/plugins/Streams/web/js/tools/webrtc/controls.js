@@ -63,6 +63,7 @@
                 tool.createSettingsPopup();
                 tool.participantsPopup().createList();
                 tool.participantsPopup().toggleLoudesScreenMode('allButMe');
+                tool.participantsPopup().checkActiveMediaTracks();
 
                 tool.element.appendChild(controlBar);
                 tool.bindRTCEvents();
@@ -152,7 +153,9 @@
 
                 cameraBtn.addEventListener('touchend', function () {
                     if(!Q.info.isMobile && !Q.info.isTablet) return;
-	                tool.selectCameraDialogue();
+                    if(document.querySelector('.dialog-box.select-camera') == null) {
+	                    tool.selectCameraDialogue();
+                    }
 	                /*Q.Dialogs.push({
                         title: "Video Sources",
                         className: 'webrtc_tool_participants-list',
@@ -331,7 +334,6 @@
 
 		        dialogue.style.minWidth = tool.settingsPopupEl.firstChild.scrollWidth + 'px';
 
-
 	        },
             /**
              * Create settings popup that appears while pointer hovers camera button on desktop/in modal box on mobile
@@ -391,6 +393,7 @@
 		                            for (i = 0; screen = localScreens[i]; i++) {
 			                            tool.state.webrtcClass.screenRendering.updateLocalScreenClasses(screen);
 		                            }
+		                            tool.updateControlBar();
 	                            })
                             }
                         }
@@ -411,7 +414,7 @@
                 screenSharingRadioItem.appendChild(radioBtn);
                 screenSharingRadioItem.appendChild(textLabel);
                 screenSharingRadioItem.appendChild(checkmark);
-                if(!Q.info.isMobile) chooseCameraList.appendChild(screenSharingRadioItem);
+                if(!Q.info.isMobile && !Q.info.isTablet) chooseCameraList.appendChild(screenSharingRadioItem);
 
                 var turnOffradioBtnItem = document.createElement('LABEL');
                 var radioBtn= document.createElement('INPUT');
@@ -422,6 +425,14 @@
 	            var checkmark = document.createElement('SPAN');
 	            checkmark.className = 'webrtc_tool_radio-checkmark';
 	            checkmark.innerHTML = icons.switchOffCameras;
+	            var localParticipant = webRTClib.localParticipant();
+	            var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
+		            return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
+	            }).length;
+	            if(enabledVideoTracks == 0) {
+		            screenSharingRadioItem.classList.add('webrtc_tool_disabled-radio');
+		            radioBtn.checked = 'checked';
+	            }
                 turnOffradioBtnItem.appendChild(radioBtn);
                 turnOffradioBtnItem.appendChild(textLabel);
                 turnOffradioBtnItem.appendChild(checkmark);
@@ -437,6 +448,7 @@
                         e.target.classList.add('webrtc_tool_disabled-radio');
 	                    Q.Dialogs.pop();
 	                    tool.closeAllDialogues();
+	                    tool.updateControlBar();
                     }, function (e) {
                         console.error('startShareScreen', e)
                         var currentCameraId = webRTClib.conferenceControl.currentCameraDevice().deviceId;
@@ -446,11 +458,12 @@
                             currentDevice.disabled = true;
                             currentDevice.parentNode.classList.add('webrtc_tool_disabled-radio');
                         }
+	                    tool.updateControlBar();
                     })
                 })
 
                 turnOffradioBtnItem.addEventListener('mouseup', function (e) {
-                    var checked = e.target.querySelector('input[name="cameras"]');
+                    var checked = e.currentTarget.querySelector('input[name="cameras"]');
                     if(checked) {
                         var allItems = tool.settingsPopupEl.querySelectorAll('input[name="cameras"]');
                         allItems.forEach( function(item) {
@@ -463,6 +476,7 @@
                         webRTClib.conferenceControl.disableVideo();
 	                    Q.Dialogs.pop();
 	                    tool.closeAllDialogues();
+	                    tool.updateControlBar();
                     }
                 })
 
@@ -524,14 +538,26 @@
                     this.participant = null;
                     this.isAudioMuted = null;
                     this.isVideoMuted = null;
-                    this.toggleAudio = function () {
+	                this.manuallyToggled = false;
+	                this.audioToggledManually = false;
+                    this.toggleAudio = function (manually) {
+	                    var participant = this.participant;
+	                    var enabledAudioTracks = participant.tracks.filter(function (t) {
+		                    console.log(t.mediaStreamTrack.enabled, t.mediaStreamTrack.muted, t.mediaStreamTrack.readyState)
+		                    return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled && !t.mediaStreamTrack.muted;
+	                    }).length;
+	                    if(enabledAudioTracks == 0) return;
 	                    if(this.participant == localParticipant) {
 		                    this.toggleLocalAudio();
 		                    return;
 	                    }
-                        if(this.isAudioMuted == false || this.isAudioMuted == null)
-                            this.muteAudio();
-                        else this.unmuteAudio();
+                        if(this.isAudioMuted == false || this.isAudioMuted == null) {
+	                        this.muteAudio();
+	                        this.audioToggledManually = manually;
+                        } else {
+                        	this.unmuteAudio();
+	                        this.audioToggledManually = false;
+                        }
                     };
                     this.toggleVideo = function () {
                         if(this.participant == localParticipant) {
@@ -595,11 +621,13 @@
                             var stream = new MediaStream()
                             stream.addTrack(track.mediaStreamTrack)
                             track.trackEl.srcObject = stream;
+	                        track.stream =  track.trackEl.srcObject;
                         }
                         this.videoBtnEl.innerHTML = listIcons.screen;
                         this.isVideoMuted = false;
                     };
                     this.muteAudio = function () {
+                    	if(this.isAudioMuted == true) return;
                         var participant = this.participant;
 
                         for(var i in participant.tracks) {
@@ -608,8 +636,10 @@
                         }
                         this.audioBtnEl.innerHTML = listIcons.disabledSpeaker;
                         this.isAudioMuted = true;
+                        this.participant.audioIsMuted = this.isAudioMuted;
                     };
                     this.unmuteAudio = function () {
+	                    if(this.isAudioMuted == false) return;
                         var participant = this.participant;
                         for(var i in participant.tracks) {
                             var track = participant.tracks[i];
@@ -617,6 +647,7 @@
                         }
                         this.audioBtnEl.innerHTML = listIcons.loudSpeaker;
                         this.isAudioMuted = false;
+	                    this.participant.audioIsMuted = this.isAudioMuted;
                     };
                     this.remove = function () {
                         if(this.listElement.parentNode != null) this.listElement.parentNode.removeChild(this.listElement);
@@ -632,28 +663,43 @@
                         })
 
                     };
-	                this.removeScreen = function () {
-		                var screens = this.participant.screens;
+	                this.toggleScreen = function (manually) {
+	                	var participant = this.participant;
+		                var screens = participant.screens;
+		                var enabledVideoTracks = participant.tracks.filter(function (t) {
+			                return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled && !t.mediaStreamTrack.muted;
+		                }).length;
 		                for(var i in screens) {
 			                if(screens[i].screenEl.parentNode != null) {
 				                //screens[i].screenEl.parentNode.removeChild(screens[i].screenEl)
-				                if(screens[i].screenEl.style.display == 'none') {
-					                screens[i].screenEl.style.display = '';
-					                screens[i].isActive = true;
-					                this.unmuteVideo();
-					                tool.state.webrtcClass.screenRendering.updateLayout();
-
+				                if(screens[i].screenEl.style.display == 'none' && (enabledVideoTracks != 0 || (enabledVideoTracks == 0 && manually == true))) {
+					                this.showScreen(screens[i]);
 				                } else {
-					                screens[i].screenEl.style.display = 'none';
-					                //if(screens[i].screenEl.parentNode != null) screens[i].screenEl.parentNode.removeChild(screens[i].screenEl)
-					                screens[i].isActive = false;
-					                this.muteVideo();
-					                tool.state.webrtcClass.screenRendering.updateLayout();
+				                	this.removeScreen(screens[i]);
 				                }
-
+				                this.manuallyToggled = manually;
 			                }
 		                }
 
+	                };
+	                this.removeScreen = function (screen) {
+	                	if(screen.isActive === false) return;
+		                if(screen.screenEl.parentNode != null) {
+			                screen.screenEl.style.display = 'none';
+			                screen.isActive = false;
+			                this.muteVideo();
+			                tool.state.webrtcClass.screenRendering.updateLayout();
+
+		                }
+	                };
+	                this.showScreen = function (screen) {
+		                if(screen.isActive === true) return;
+		                if(screen.screenEl.parentNode != null) {
+			                screen.screenEl.style.display = '';
+			                screen.isActive = true;
+			                this.unmuteVideo();
+			                tool.state.webrtcClass.screenRendering.updateLayout();
+		                }
 	                };
                 }
 
@@ -685,7 +731,7 @@
                     var participantIdentity = document.createElement('DIV');
                     participantIdentity.className = 'webrtc_tool_participants-identity';
                     var participantIdentityText = document.createElement('DIV');
-	                var userId = roomParticipant.identity.split('\t')[0];
+	                var userId = roomParticipant.identity != null ? roomParticipant.identity.split('\t')[0] : Q.Users.loggedInUser.id;
 	                Q.activate(
 		                Q.Tool.setUpElement(
 			                participantIdentityText, // or pass an existing element
@@ -715,10 +761,10 @@
                     tool.participantsList.push(listItem);
 
                     muteAudioBtn.addEventListener('click', function (e) {
-                        listItem.toggleAudio();
+                        listItem.toggleAudio(true);
                     });
                     muteVideoBtn.addEventListener('click', function (e) {
-                        listItem.removeScreen();
+                        listItem.toggleScreen(true);
                     });
 
                 }
@@ -857,8 +903,8 @@
 						                press: {size: 1.2},
 						                release: {size: 1.2}
 					                }).on(Q.Pointer.fastclick, function () {
-						                tool.state.webrtcClass.stop();
 						                Q.Dialogs.pop();
+						                tool.state.webrtcClass.stop();
 					                });
 				                },
 			                });
@@ -932,6 +978,48 @@
 		                disabledOption.selected = 'selected';
 	                }
                 }
+                
+                function checkActiveMediaTracks() {
+	                tool.checkActiveMediaTracksInterval = setInterval(function () {
+		                var i, listItem;
+		                for (i = 0; listItem = tool.participantsList[i]; i++){
+		                	var participant = listItem.participant;
+			                var screens = participant.screens;
+			                var enabledAudioTracks = participant.tracks.filter(function (t) {
+			                	//console.log(t.mediaStreamTrack.enabled, t.mediaStreamTrack.muted, t.mediaStreamTrack.readyState)
+				                return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled && !t.mediaStreamTrack.muted;
+			                }).length;
+			                var enabledVideoTracks = participant.tracks.filter(function (t) {
+				                return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled && !t.mediaStreamTrack.muted;
+			                }).length;
+
+			                if(enabledAudioTracks == 0 && enabledVideoTracks == 0 && listItem.manuallyToggled == false) {
+				                for(var s in screens) {
+					                if(screens[s].screenEl.parentNode != null) {
+						                listItem.removeScreen(screens[s]);
+					                }
+				                }
+			                } else if((enabledAudioTracks != 0 || enabledVideoTracks != 0) && listItem.manuallyToggled == false) {
+				                for(var s in screens) {
+					                if(screens[s].screenEl.parentNode != null) {
+						                listItem.showScreen(screens[s]);
+					                }
+				                }
+			                }
+
+			                if(enabledAudioTracks == 0 && participant.isLocal == false){
+				                listItem.muteAudio();
+			                } else if (participant.isLocal == false && listItem.audioToggledManually == false) listItem.unmuteAudio();
+		                }
+	                }, 1000);
+                }
+
+	            function disableCheckActiveMediaTracks() {
+		            if(tool.checkActiveMediaTracksInterval != null) {
+			            clearInterval(tool.checkActiveMediaTracksInterval);
+			            tool.checkActiveMediaTracksInterval = null;
+		            }
+	            }
 
                 return {
                     createList:createList,
@@ -940,7 +1028,9 @@
                     addItem:addItem,
                     removeItem:removeItem,
 	                toggleLoudesScreenMode:toggleLoudesScreenMode,
+	                checkActiveMediaTracks:checkActiveMediaTracks,
 	                disableLoudesScreenMode:disableLoudesScreenMode,
+	                disableCheckActiveMediaTracks:disableCheckActiveMediaTracks,
                 }
             },
 	        closeAllDialogues: function () {
