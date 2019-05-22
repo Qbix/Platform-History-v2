@@ -40,6 +40,7 @@
 		"routes@start": {
 			"s/:publisherId/:streamName[]": {"module": "Streams", "action": "stream"},
 			"i/:token": {"module": "Streams", "action": "invited"},
+			"Streams/participating": {"module": "Streams", "action": "participating"},
 			"Q/plugins/Streams/invite/:token": {"module": "Streams", "action": "invite"},
 			"Q/plugins/Streams/:action": {"module": "Streams"}
 		},
