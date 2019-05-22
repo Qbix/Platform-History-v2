@@ -78,6 +78,7 @@
 					}
 
 					var drag = function(evt){
+						evt.preventDefault();
 						if(Q.info.isTouchscreen && (tool.isScreenResizing || evt.touches.length != 1 || evt.changedTouches.length != 1 || evt.targetTouches.length != 1)) return;
 
 						evt = evt || window.event;
@@ -114,6 +115,7 @@
 						elementToMove.style.position = 'absolute';
 						elementToMove.style.cursor = 'grabbing';
 						tool.element.style.boxShadow = '10px -10px 60px 0 rgba(0,0,0,0.5)';
+						evt.preventDefault();
 
 						evt = evt || window.event;
 						posX = Q.info.isTouchscreen ? evt.touches[0].clientX : evt.clientX,
