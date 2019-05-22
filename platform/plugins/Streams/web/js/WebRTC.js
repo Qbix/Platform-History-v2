@@ -424,25 +424,24 @@
 				var participantNameText = document.createElement("DIV");
 				var userId = screen.participant.identity != null ? screen.participant.identity.split('\t')[0] : Q.Users.loggedInUser.id;
 
-				if(screen.isLocal) {
-					Q.activate(
-						Q.Tool.setUpElement(
-							participantNameText, // or pass an existing element
-							"Users/avatar",
-							{
-								userId: userId,
-								icon: false
-							}
-						),
-						{},
-						function () {
-							setTimeout(function () {
-								screensRendering.updateLayout();
-							}, 1000);
-
+				Q.activate(
+					Q.Tool.setUpElement(
+						participantNameText, // or pass an existing element
+						"Users/avatar",
+						{
+							userId: userId,
+							icon: false
 						}
-					);
-				}
+					),
+					{},
+					function () {
+						setTimeout(function () {
+							screensRendering.updateLayout();
+						}, 1000);
+
+					}
+				);
+
 
 				participantNameTextCon.appendChild(participantNameText);
 				chatParticipantName.appendChild(participantNameTextCon);
