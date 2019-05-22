@@ -1,0 +1,26 @@
+.Streams_participating_stream {
+	background-color: #eeeeff;
+	border: 1px solid #e1e1e1;
+	border-radius: 7px;
+	margin-bottom: 10px;
+	display: inline-block;
+}
+.Streams_participating_stream > * {
+	display: inline-block;
+	line-height: 40px;
+	vertical-align: top;
+}
+.Streams_participating_stream img.Streams_participating_stream_icon,
+.Streams_participating_stream .Streams_participating_stream_checkmark {
+	width: 40px;
+	height: 40px;
+	margin: 0;
+}
+.Streams_participating_stream h2 {
+	font-size: 20px;
+	font-weight: normal;
+	width: 300px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
