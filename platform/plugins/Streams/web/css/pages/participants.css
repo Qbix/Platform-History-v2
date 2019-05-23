@@ -1,14 +1,34 @@
-.Streams_participating_stream {
+.Streams_participating_stream th {
+	text-align: center;
+}
+.Streams_participating_stream tr {
 	background-color: #eeeeff;
 	border: 1px solid #e1e1e1;
-	border-radius: 7px;
-	margin-bottom: 10px;
-	display: inline-block;
 }
-.Streams_participating_stream > * {
+.Streams_participating_stream tr:empty {
+	height: 5px;
+	background-color: #fff;
+}
+.Streams_participating_stream td {
+	vertical-align: top;
+}
+.Streams_participating_stream td[data-type=title],
+.Streams_participating_stream td[data-type=checkmark] {
+	padding: 15px 0;
+}
+.Streams_participating_stream td[data-type=title] {
+	white-space: nowrap;
+}
+.Streams_participating_stream td[data-type=title] > * {
 	display: inline-block;
 	line-height: 40px;
 	vertical-align: top;
+}
+.Streams_participating_stream td[data-type=checkmark] {
+	text-align: center;
+}
+.Streams_participating_stream td[data-type=participants] {
+	min-width: 280px;
 }
 .Streams_participating_stream img.Streams_participating_stream_icon,
 .Streams_participating_stream .Streams_participating_stream_checkmark {
@@ -16,11 +36,21 @@
 	height: 40px;
 	margin: 0;
 }
+.Streams_participating_stream img.Streams_participating_stream_icon {
+	margin: 0 5px;
+}
 .Streams_participating_stream h2 {
 	font-size: 20px;
 	font-weight: normal;
-	width: 300px;
+	width: 220px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
+}
+.Streams_participating_stream .Streams_participants_tool {
+	position: relative;
+}
+.Streams_participating_stream .Streams_participants_tool .Streams_participants_summary {
+	position: absolute;
+	right: 40px;
 }
