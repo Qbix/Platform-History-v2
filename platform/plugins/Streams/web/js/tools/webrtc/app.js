@@ -1,6 +1,30 @@
 
 var socket;
 function enableiOSDebug() {
+	var ua=navigator.userAgent;
+	if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
+		console.log = function (txt) {
+
+			if(!socket || socket && !socket.connected) return;
+
+			try {
+				//originallog.apply(console, arguments);
+				var i, argument;
+				var argumentsString = '';
+				for (i = 1; argument = arguments[i]; i++){
+					if (typeof argument == 'object') {
+						argumentsString = argumentsString + ', OBJECT';
+					} else {
+						argumentsString = argumentsString + ', ' + argument;
+					}
+				}
+				socket.emit('log', txt + argumentsString + '\n')
+			} catch (e) {
+
+			}
+		}
+	}
+
 	window.onerror = function(msg, url, line, col, error) {
 		if(socket == null) return;
 		var extra = !col ? '' : '\ncolumn: ' + col;
@@ -2378,8 +2402,9 @@ WebRTCconferenceLib = function app(options){
 
 		var hoverTimeout = {setttingsPopup:null, participantsPopup:null};
 
-		function loadDevicesList(mediaDevices) {
-			//console.log('mediaDevices', mediaDevices)
+		function loadDevicesList(mediaDevicesList) {
+			mediaDevices = mediaDevicesList;
+			console.log('mediaDevices', mediaDevices)
 			var i, device;
 			for(i = 0; device = mediaDevices[i]; i++){
 				if(_debug) console.log('loadDevicesList', device);
@@ -2821,10 +2846,20 @@ WebRTCconferenceLib = function app(options){
 				return;
 			}
 
-			Twilio.createLocalVideoTrack({
-				deviceId: { exact: cameraId != null ? cameraId : deviceToSwitch.deviceId },
-				logLevel: 'debug',
-			}).then(function(localVideoTrack) {
+			console.log('toggleCameras device id ')
+			console.log( cameraId != null ? cameraId : deviceToSwitch.deviceId )
+			try {
+				var err = (new Error);
+				console.log( JSON.stringify(err) )
+			} catch (e) {}
+
+			navigator.mediaDevices.getUserMedia ({
+				'audio': false,
+				'video': { deviceId: { exact: cameraId != null ? cameraId : deviceToSwitch.deviceId } },
+			}).then(function (stream) {
+				var localVideoTrack = stream.getVideoTracks()[0];
+				console.log('toggleCameras')
+				console.log(stream.getVideoTracks().length)
 				var participant = localParticipant.twilioInstance;
 
 
@@ -2848,15 +2883,7 @@ WebRTCconferenceLib = function app(options){
 				participant.unpublishTracks(twilioTracks);
 
 				var trackPublication = participant.publishTrack(localVideoTrack).then(function (publication) {
-					console.log('ENABLE VIDEO trackPublication 0 ' + publication.track.isEnabled );
-					var props = '';
-					Object.keys(publication.track).forEach(function(key,index) {
-						props = props + ', ' + key;
-					});
-					console.log('ENABLE VIDEO trackPublication 0.1 ' + props );
-
-
-
+					if(_debug) console.log('togglecameras')
 
 					var vTrack = publication.track;
 					var trackToAttach = new Track();
@@ -2881,16 +2908,46 @@ WebRTCconferenceLib = function app(options){
 						publication.track.enable();
 					}, 500)
 					if(_debug) console.log('togglecameras', deviceToSwitch == frontCameraDevice)
-					//app.screensInterface.attachTrack(trackToAttach, localParticipant);
-					//app.screensInterface.generateScreensGrid();
-					//app.conferenceControl.enableVideo();
-					//app.views.closeAllDialogues();
-					//trackToAttach.trackEl.play();
 
 				});
 
+			}).catch(function(err) {
+				console.error('trackPublication ERROR' + err.name + ": " + err.message);
+				console.log('trackPublication ERROR' + err.name + ": " + err.message);
+			});
+
+		}
+
+		function enableCamera(callback) {
+			navigator.mediaDevices.getUserMedia ({
+				'audio': false,
+				'video': true,
+			}).then(function (stream) {
+				var localVideoTrack = stream.getVideoTracks()[0];
+
+				var participant = localParticipant.twilioInstance;
+				var trackPublication = participant.publishTrack(localVideoTrack).then(function (publication) {
+
+					var vTrack = publication.track;
+					var trackToAttach = new Track();
+					trackToAttach.sid = vTrack.sid;
+					trackToAttach.mediaStreamTrack = vTrack.mediaStreamTrack;
+					trackToAttach.kind = vTrack.kind;
+					trackToAttach.twilioReference = vTrack;
+
+					app.screensInterface.attachTrack(trackToAttach, localParticipant);
+					app.conferenceControl.enableVideo();
+
+					videoInputDevices = [];
+					audioInputDevices = [];
+					loadDevicesList(mediaDevices);
+					app.conferenceControl.enableVideo();
+					if(callback != null) callback();
+				});
 
 
+			}).catch(function(err) {
+				console.error(err.name + ": " + err.message);
 			});
 		}
 
@@ -3132,6 +3189,7 @@ WebRTCconferenceLib = function app(options){
 			toggleVideo: toggleVideo,
 			toggleAudio: toggleAudio,
 			toggleCameras: toggleCameras,
+			requestCamera: enableCamera,
 			disableAudioOfAll: disableAudioOfAll,
 			enableAudioOfAll: enableAudioOfAll,
 			micIsEnabled: micIsEnabled,
@@ -3202,8 +3260,10 @@ WebRTCconferenceLib = function app(options){
 				var audioDevices = 0;
 				for(var i in mediaDevices) {
 					if (mediaDevices[i].kind === 'videoinput' || mediaDevices[i].kind === 'video') {
+						if(_debug) console.log('initOrConnectConversation mediaDevices[i]', mediaDevices[i].deviceId);
 						videoDevices++;
-					} else if (mediaDevices[i].kind === 'audioinput' || mediaDevices[i].kind === 'audio') {if(_debug) console.log('initOrConnectConversation mediaDevices[i]', mediaDevices[i]);
+					} else if (mediaDevices[i].kind === 'audioinput' || mediaDevices[i].kind === 'audio') {
+						
 
 						audioDevices++;
 					}

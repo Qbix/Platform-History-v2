@@ -153,6 +153,22 @@
 
 				cameraBtn.addEventListener('touchend', function () {
 					if(!Q.info.isMobile && !Q.info.isTablet) return;
+					if(webRTClib.conferenceControl.frontCameraDevice() == null) {
+						webRTClib.conferenceControl.requestCamera(function () {
+							var currentCamera = webRTClib.conferenceControl.frontCameraDevice();
+							if(currentCamera != null && tool.settingsPopupEl != null) {
+								var labelToSelect = tool.settingsPopupEl.querySelector('label[data-device-id="' + currentCamera.deviceId + '"]');
+								if(labelToSelect != null) {
+									tool.toggleCameraButtons(labelToSelect)
+								} else {
+									var labelToSelect = tool.settingsPopupEl.querySelector('label[data-device-id="off"]');
+									if(labelToSelect != null) tool.toggleCameraButtons(labelToSelect);
+								}
+							}
+							tool.updateControlBar();
+						});
+						return;
+					}
 					if(document.querySelector('.dialog-box.select-camera') == null) {
 						tool.selectCameraDialogue();
 					}
@@ -355,6 +371,7 @@
 					if(!label.classList.contains('webrtc_tool_disabled-radio')) label.classList.add('webrtc_tool_disabled-radio');
 					label.querySelector('input').checked = true;
 				}
+				tool.toggleCameraButtons = toggleRadioButton;
 
 				var chooseCameraList = document.createElement('DIV');
 				chooseCameraList.className = 'webrtc_tool_choose-device'
@@ -379,7 +396,8 @@
 						toggleRadioButton(radioBtnItem);
 					}
 
-					radioBtnItem.addEventListener('click', function (e) {
+					radioBtnItem.addEventListener('mouseup', function (e) {
+						console.log('addEventListener');
 						var checked = e.currentTarget.querySelector('input[name="cameras"]');
 						toggleRadioButton(e.currentTarget);
 
@@ -474,13 +492,32 @@
 
 				tool.hoverTimeout = {setttingsPopup: null, participantsPopup: null};
 				if(!Q.info.isMobile) {
-
 					tool.cameraBtn.addEventListener('mouseenter', function (e) {
-						if (tool.hoverTimeout.setttingsPopup != null) {
-							clearTimeout(tool.hoverTimeout.setttingsPopup);
-							tool.hoverTimeout.setttingsPopup = null;
+						if(webRTClib.conferenceControl.frontCameraDevice() != null) {
+							if (tool.hoverTimeout.setttingsPopup != null) {
+								clearTimeout(tool.hoverTimeout.setttingsPopup);
+								tool.hoverTimeout.setttingsPopup = null;
+							}
+							tool.cameraBtn.parentNode.classList.add('webrtc_tool_hover');
 						}
-						tool.cameraBtn.parentNode.classList.add('webrtc_tool_hover');
+					});
+					tool.cameraBtn.addEventListener('click', function (e) {
+						if(webRTClib.conferenceControl.frontCameraDevice() == null) {
+							webRTClib.conferenceControl.requestCamera(function () {
+								var currentCamera = webRTClib.conferenceControl.frontCameraDevice();
+								if(currentCamera != null && tool.settingsPopupEl != null) {
+									var labelToSelect = tool.settingsPopupEl.querySelector('label[data-device-id="' + currentCamera.deviceId + '"]');
+									if(labelToSelect != null) {
+										tool.toggleCameraButtons(labelToSelect)
+									} else {
+										var labelToSelect = tool.settingsPopupEl.querySelector('label[data-device-id="off"]');
+										if(labelToSelect != null) tool.toggleCameraButtons(labelToSelect);
+									}
+								}
+								tool.updateControlBar();
+							});
+							return;
+						}
 					});
 					tool.cameraBtn.addEventListener('mouseleave', function (e) {
 						if (e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
@@ -532,7 +569,7 @@
 						var enabledAudioTracks = participant.tracks.filter(function (t) {
 							return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled && !t.mediaStreamTrack.muted;
 						}).length;
-						if(enabledAudioTracks == 0) return;
+						//if(enabledAudioTracks == 0) return;
 						if(this.participant == localParticipant) {
 							this.toggleLocalAudio();
 							return;
@@ -661,7 +698,7 @@
 							return t.kind == 'video' && t.mediaStreamTrack != null;
 						}).length;
 
-						if(enabledVideoTracks == 0) return;
+						if(enabledVideoTracks == 0 && !this.isActive) return;
 
 						for(var i in screens) {
 							//if(screens[i].screenEl.parentNode != null) {
