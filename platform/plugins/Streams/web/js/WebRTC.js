@@ -57,6 +57,22 @@
 			}
 		}
 
+		var createInfoSnippet = function(){
+			var noticeContainer = document.createElement('div');
+			noticeContainer.className = 'notice-container';
+
+			document.body.appendChild(noticeContainer);
+		}
+
+		var log = function(message) {
+			var noticeDiv = document.querySelector('.notice-container');
+			noticeDiv.innerHTML = message;
+			noticeDiv.classList.add('shown');
+			setTimeout(function () {
+				noticeDiv.classList.remove('shown');
+			}, 4000)
+		}
+
 		/**
 		 * Bind events that are needed for negotiating process to init WebRTC without using twilio
 		 * @method bindStreamsEvents
@@ -82,10 +98,35 @@
 			WebRTCconference.event.on('participantConnected', function (participant) {
 				if(_debug) console.log('%c TWILIO: ANOTHER USER JOINED', 'background:blue;color:white;', participant)
 
+				var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
+
+				if(userId != null){
+					Q.Streams.get(userId, 'Streams/user/firstName', function () {
+						var firstName = this.fields.content;
+						log("Joining: " + firstName);
+					});
+				}
+
 				screensRendering.updateLayout();
 			});
 			WebRTCconference.event.on('participantDisconnected', function (participant) {
 				if(_debug) console.log('%c TWILIO: ANOTHER USER DISCONNECTED', 'background:blue;color:white;', participant)
+				var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
+
+
+				if(userId != null){
+					Q.Streams.get(userId, 'Streams/user/firstName', function () {
+						var firstName = this.fields.content;
+						log(firstName + " left the room");
+					});
+				}
+				screensRendering.updateLayout();
+			});
+			WebRTCconference.event.on('localParticipantDisconnected', function (participant) {
+				if(_debug) console.log('%c TWILIO: ANOTHER USER DISCONNECTED', 'background:blue;color:white;', participant)
+
+				log('You left the room');
+
 				screensRendering.updateLayout();
 			});
 			WebRTCconference.event.on('trackAdded', function (participant) {
@@ -121,8 +162,9 @@
 			WebRTCconference.event.on('screensharingStarted', function (data) {
 				//screensRendering.hideLoader('screensharingStarting', data.participant);
 			});
-			WebRTCconference.event.on('screensharingFailed', function (data) {
-				//screensRendering.hideLoader('screensharingStarting', data.participant);
+			WebRTCconference.event.on('screensharingFailed', function (e) {
+				console.log('screensharingFailed')
+				screensRendering.hideLoader('screensharingStarting', e.participant);
 			});
 		}
 
@@ -134,14 +176,14 @@
 			Q.addStylesheet('{{Streams}}/css/tools/webrtc.css?ts=' + performance.now());
 
 			Q.addScript([
-				"https://cdn.trackjs.com/agent/v3/latest/t.js",
+				/*"https://cdn.trackjs.com/agent/v3/latest/t.js",*/
 				"https://requirejs.org/docs/release/2.2.0/minified/require.js",
 				"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+new Date()),
 			], function () {
-				window.TrackJS && TrackJS.install({
+				/*window.TrackJS && TrackJS.install({
 					token: "c8b43db909ae49728a17089490341b57"
 					// for more configuration options, see https://docs.trackjs.com
-				});
+				});*/
 
 				Q.req("Streams/webrtc", ["token"], function (err, response) {
 					var msg = Q.firstErrorMessage(err, response && response.errors);
@@ -162,11 +204,13 @@
 						startWith: _options.startWith
 					});
 					window.WebConf = WebRTCconference;
-						WebRTCconference.init(function () {
+					WebRTCconference.init(function () {
 						bindConferenceEvents();
 						screensRendering.updateLayout();
 						updateParticipantData();
 						hidePageLoader();
+
+						log("You joined the room");
 
 						/*if(!Q.info.isMobile) {
 							var controlEl = Q.Tool.setUpElement('DIV', 'Streams/webrtc/controls', {});
@@ -318,10 +362,10 @@
 				"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+new Date())
 			], function () {
 				//if(Q.info.isIOS) {
-					window.TrackJS && TrackJS.install({
-						token: "c8b43db909ae49728a17089490341b57"
-						// for more configuration options, see https://docs.trackjs.com
-					});
+				window.TrackJS && TrackJS.install({
+					token: "c8b43db909ae49728a17089490341b57"
+					// for more configuration options, see https://docs.trackjs.com
+				});
 				//}
 				var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
 				WebRTCconference = window.WebRTCconferenceLib({
@@ -360,7 +404,7 @@
 			function updateLayout() {
 				if(WebRTCconference == null) return;
 
-				var roomScreens = WebRTCconference.screens();
+				var roomScreens = WebRTCconference.screens(true);
 				var i, participantScreen;
 				for(i = 0; participantScreen = roomScreens[i]; i++) {
 					createRoomScreen(participantScreen);
@@ -751,7 +795,7 @@
 				}
 
 			}
-			
+
 			function resetAudioVisualization() {
 				var roomScreens = WebRTCconference.screens();
 				roomScreens.map(function (screen) {
@@ -778,9 +822,10 @@
 			}
 
 			function showLoader(loaderName, participant) {
+				console.log('showLoader')
 				var screen = participant.screens[0];
-
-				if(loaderName == 'screensharingStarting' || loaderName == 'videoTrackIsBeingAdded' || loaderName == 'beforeCamerasToggle') {
+				screen.videoIsChanging = true;
+				if(loaderName == 'videoTrackIsBeingAdded' || loaderName == 'beforeCamerasToggle') {
 					var loader = screen.screenEl.querySelector('.spinner-load');
 					if(loader != null) return;
 					var loaderCon = document.createElement('DIV');
@@ -801,11 +846,23 @@
 						'</div>';
 
 					screen.screenEl.appendChild(loaderCon);
+				} else if(loaderName == 'screensharingStarting') {
+					var loader = screen.screenEl.querySelector('.spinner-load');
+					if(loader != null) return;
+					var loaderCon = document.createElement('DIV');
+					loaderCon.className = 'spinner-load';
+					var loaderIcon = document.createElement('DIV');
+					loaderIcon.className = 'webrtc_tool_screen-sharing';
+					loaderIcon.innerHTML = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="130.35 175.058 235.692 150.425"    enable-background="new 130.35 175.058 235.692 150.425" xml:space="preserve">  <path shape-rendering="auto" image-rendering="auto" color-rendering="auto" fill="#FFFFFF" d="M153.86,175.058   c-6.743,0-12.271,5.542-12.271,12.285v110.45c0,6.743,5.528,12.271,12.271,12.271h188.672c6.742,0,12.271-5.527,12.271-12.271   V187.343c0-6.743-5.527-12.285-12.271-12.285L153.86,175.058L153.86,175.058z M153.86,182.085h188.672   c2.971,0,5.243,2.285,5.243,5.257v110.45c0,2.972-2.272,5.243-5.243,5.243H153.86c-2.971,0-5.243-2.271-5.243-5.243V187.343   C148.617,184.371,150.889,182.085,153.86,182.085L153.86,182.085z"/>  <path fill="#FFFFFF" d="M130.35,312.092c0,7.418,5.123,13.391,11.483,13.391H354.56c6.36,0,11.482-5.973,11.482-13.391H130.35z    M265.75,316.858h-35.101c-0.542,0-0.978-0.437-0.978-0.978s0.436-0.979,0.978-0.979h35.101c0.542,0,0.978,0.436,0.978,0.979   C266.728,316.422,266.292,316.858,265.75,316.858z"/>  <path fill="#FFFFFF" d="M193.391,291.705c-0.146,0-0.294-0.021-0.44-0.063c-0.729-0.214-1.198-0.92-1.113-1.675   c7.413-65.442,58.168-70.528,73.548-70.528c1.435,0,2.632,0.042,3.541,0.09v-20.55c0-0.63,0.379-1.199,0.961-1.442   c0.58-0.242,1.252-0.113,1.701,0.332l32.512,32.179c0.296,0.293,0.463,0.694,0.463,1.111s-0.167,0.817-0.465,1.111l-32.512,32.114   c-0.448,0.443-1.119,0.575-1.7,0.33c-0.581-0.242-0.96-0.812-0.96-1.441v-20.548c-1.78-0.149-3.449-0.185-4.634-0.185   c-13.734,0-48,4.706-69.501,48.296C194.523,291.378,193.973,291.705,193.391,291.705z"/>  </svg>';
+					loaderCon.appendChild(loaderIcon);
+					screen.screenEl.appendChild(loaderCon);
 				}
 			}
 
 			function hideLoader(loaderName, participant) {
+				console.log('hideLoader', participant)
 				var screen = participant.screens[0];
+				screen.videoIsChanging = false;
 				if(loaderName == 'screensharingStarting' || loaderName == 'videoTrackLoaded' || loaderName == 'afterCamerasToggle') {
 					var loader = screen.screenEl.querySelector('.spinner-load');
 					if(loader != null && loader.parentNode != null) loader.parentNode.removeChild(loader);
@@ -1578,6 +1635,7 @@
 		module.start = function(options) {
 			_options = Q.extend({}, _options, options);
 
+			createInfoSnippet()
 			showPageLoader();
 
 			var roomId = _options.roomId != null ? _options.roomId : null;
