@@ -77,11 +77,15 @@
 						if(currentTop != parseInt(ypos, 10) || currentLeft != parseInt(xpos, 10) ) tool.state.appliedRecently = true;
 					}
 
+					var preventScrolling = function (e) {
+						e.preventDefault();
+					}
+
 					var drag = function(evt){
-						evt.preventDefault();
 						if(Q.info.isTouchscreen && (tool.isScreenResizing || evt.touches.length != 1 || evt.changedTouches.length != 1 || evt.targetTouches.length != 1)) return;
 
 						evt = evt || window.event;
+						evt.preventDefault();
 						var posX = Q.info.isTouchscreen ? evt.changedTouches[0].clientX : evt.clientX,
 							posY = Q.info.isTouchscreen ? evt.changedTouches[0].clientY : evt.clientY,
 							aX = posX - diffX,
@@ -115,7 +119,6 @@
 						elementToMove.style.position = 'absolute';
 						elementToMove.style.cursor = 'grabbing';
 						tool.element.style.boxShadow = '10px -10px 60px 0 rgba(0,0,0,0.5)';
-						evt.preventDefault();
 
 						evt = evt || window.event;
 						posX = Q.info.isTouchscreen ? evt.touches[0].clientX : evt.clientX,
@@ -130,16 +133,15 @@
 						divLeft = divLeft.replace('px','');
 						diffX = posX - divLeft, diffY = posY - divTop;
 
-						if(Q.info.isTouchscreen)
-							window.addEventListener('touchmove', drag);
-						else window.addEventListener('mousemove', drag);
+						if(Q.info.isTouchscreen) {
+							window.addEventListener('touchmove', drag, { passive: false });
+						} else window.addEventListener('mousemove', drag, { passive: false });
 					}
 
 					var stopMoving = function(container){
-						//console.log('stopMoving')
-						if(Q.info.isTouchscreen)
-							window.removeEventListener('touchmove', drag)
-						else window.removeEventListener('mousemove', drag)
+						if(Q.info.isTouchscreen) {
+							window.removeEventListener('touchmove', drag, { passive: false });
+						} else window.removeEventListener('mousemove', drag, { passive: false });
 
 						if(elementToMove != null) elementToMove.style.cursor='';
 

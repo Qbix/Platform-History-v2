@@ -31,6 +31,32 @@
 			}
 		}
 
+		var showPageLoader = function () {
+			if(document.querySelector('.webrtc_tool_page-loader-con') == null) {
+				var loader = document.createElement('DIV');
+				loader.className = 'webrtc_tool_page-loader-con';
+				loader.innerHTML = `<div class="webrtc_tool_loader">
+										<div class="webrtc_tool_loader_square"></div>
+										<div class="webrtc_tool_loader_square"></div>
+										<div class="webrtc_tool_loader_square webrtc_tool_loader_last"></div>
+										<div class="webrtc_tool_loader_square webrtc_tool_loader_clear"></div>
+										<div class="webrtc_tool_loader_square"></div>
+										<div class="webrtc_tool_loader_square webrtc_tool_loader_last"></div>
+										<div class="webrtc_tool_loader_square webrtc_tool_loader_clear"></div>
+										<div class="webrtc_tool_loader_square"></div>
+										<div class="webrtc_tool_loader_square webrtc_tool_loader_last"></div>
+									</div>`;
+				document.body.appendChild(loader);
+			}
+		}
+
+		var hidePageLoader = function () {
+			var loader = document.querySelector('.webrtc_tool_page-loader-con');
+			if(loader != null && loader.parentNode != null) {
+				loader.parentNode.removeChild(loader);
+			}
+		}
+
 		/**
 		 * Bind events that are needed for negotiating process to init WebRTC without using twilio
 		 * @method bindStreamsEvents
@@ -140,6 +166,7 @@
 						bindConferenceEvents();
 						screensRendering.updateLayout();
 						updateParticipantData();
+						hidePageLoader();
 
 						/*if(!Q.info.isMobile) {
 							var controlEl = Q.Tool.setUpElement('DIV', 'Streams/webrtc/controls', {});
@@ -1550,6 +1577,8 @@
 		module.screenRendering = screensRendering;
 		module.start = function(options) {
 			_options = Q.extend({}, _options, options);
+
+			showPageLoader();
 
 			var roomId = _options.roomId != null ? _options.roomId : null;
 			if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
