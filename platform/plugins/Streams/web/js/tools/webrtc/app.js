@@ -5,20 +5,28 @@ navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || 
 //console.log('typeof', typeof navigator.mediaDevices);
 navigator.mediaDevices.getUserMedia = navigator.mediaDevices.getUserMedia || navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
-
+//location.href = 'https://www.demoproject.co.ua/Q/plugins/Q/js/tools/resize.js'
 
 WebRTCconferenceLib = function app(options){
 	var app = {};
 	var defaultOptions = {
-		webrtcMode: 'twilio',
+		mode: 'twilio',
 		nodeServer: 'https://www.demoproject.co.ua:8443',
 		useAsLibrary: false,
-		startWith: { audio: true, video: true }
+		startWith: { audio: true, video: false },
+		twilioAccessToken: null,
 	};
-	options = typeof options !== 'undefined' ? Object.assign(defaultOptions, options) : defaultOptions;
+	
+	if(typeof options === 'object') {
+		var mergedOptions = {};
+		for (var key in defaultOptions) {
+			if (defaultOptions.hasOwnProperty(key)) {
+				mergedOptions[key] = options.hasOwnProperty(key) && typeof options[key] !== 'undefined' ? options[key] : defaultOptions[key];
+			}
+		}
+		options = mergedOptions;
+	}
 
-
-	var webrtcMode = 'twilio';
 	var Twilio;
 	var mainView;
 	var joinFormView;
@@ -3581,8 +3589,8 @@ WebRTCconferenceLib = function app(options){
 	}
 
 	app.init = function(callback){
-		console.log('options.webrtcMode', options.webrtcMode)
-		if(options.webrtcMode == 'twilio') {
+		console.log('options.mode', options.mode)
+		if(options.mode == 'twilio') {
 			require(['/Q/plugins/Streams/js/tools/webrtc/twilio-video.min.js?ts=' + (+new Date)], function (TwilioInstance) {
 				Twilio = window.Twilio = TwilioInstance;
 				initWithTwilio(callback);

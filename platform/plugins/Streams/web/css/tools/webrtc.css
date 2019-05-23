@@ -1716,3 +1716,222 @@
           transform: scale(1);
       }
 }
+
+
+/*page loader*/
+.webrtc_tool_page-loader-con {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9999999999999999;
+    pointer-events: none;
+}
+.webrtc_tool_loader {
+    position: absolute;
+    left: 50%;
+    margin-left: -37.5px;
+    margin-top: -37.5px;
+}
+
+.webrtc_tool_loader_square {
+    background: rgb(31,190,202);
+    width: 21px;
+    height: 21px;
+    float: left;
+    top: -14px;
+    margin-right: 7px;
+    margin-top: 7px;
+    position: relative;
+    opacity: 0;
+    animation: webrtc_tool_loader_enter 5.7s infinite;
+    -o-animation: webrtc_tool_loader_enter 5.7s infinite;
+    -ms-animation: webrtc_tool_loader_enter 5.7s infinite;
+    -webkit-animation: webrtc_tool_loader_enter 5.7s infinite;
+    -moz-animation: webrtc_tool_loader_enter 5.7s infinite;
+}
+
+.webrtc_tool_loader_enter {
+    top: 0px;
+    opacity: 1;
+}
+
+.webrtc_tool_loader_square:nth-child(1) {
+    animation-delay: 1.71s;
+    -o-animation-delay: 1.71s;
+    -ms-animation-delay: 1.71s;
+    -webkit-animation-delay: 1.71s;
+    -moz-animation-delay: 1.71s;
+}
+
+.webrtc_tool_loader_square:nth-child(2) {
+    animation-delay: 1.995s;
+    -o-animation-delay: 1.995s;
+    -ms-animation-delay: 1.995s;
+    -webkit-animation-delay: 1.995s;
+    -moz-animation-delay: 1.995s;
+}
+
+.webrtc_tool_loader_square:nth-child(3) {
+    animation-delay: 2.28s;
+    -o-animation-delay: 2.28s;
+    -ms-animation-delay: 2.28s;
+    -webkit-animation-delay: 2.28s;
+    -moz-animation-delay: 2.28s;
+    background: rgb(31,191,202);
+}
+
+.webrtc_tool_loader_square:nth-child(4) {
+    animation-delay: 0.855s;
+    -o-animation-delay: 0.855s;
+    -ms-animation-delay: 0.855s;
+    -webkit-animation-delay: 0.855s;
+    -moz-animation-delay: 0.855s;
+    animation-delay: 0.855s;
+}
+
+.webrtc_tool_loader_square:nth-child(5) {
+    animation-delay: 1.14s;
+    -o-animation-delay: 1.14s;
+    -ms-animation-delay: 1.14s;
+    -webkit-animation-delay: 1.14s;
+    -moz-animation-delay: 1.14s;
+    animation-delay: 1.14s;
+}
+
+.webrtc_tool_loader_square:nth-child(6) {
+    animation-delay: 1.425s;
+    -o-animation-delay: 1.425s;
+    -ms-animation-delay: 1.425s;
+    -webkit-animation-delay: 1.425s;
+    -moz-animation-delay: 1.425s;
+    animation-delay: 1.425s;
+}
+
+.webrtc_tool_loader_square:nth-child(8) {
+    animation-delay: 0.285s;
+    -o-animation-delay: 0.285s;
+    -ms-animation-delay: 0.285s;
+    -webkit-animation-delay: 0.285s;
+    -moz-animation-delay: 0.285s;
+    animation-delay: 0.285s;
+}
+
+.webrtc_tool_loader_square:nth-child(9) {
+    animation-delay: 0.57s;
+    -o-animation-delay: 0.57s;
+    -ms-animation-delay: 0.57s;
+    -webkit-animation-delay: 0.57s;
+    -moz-animation-delay: 0.57s;
+    animation-delay: 0.57s;
+}
+
+.webrtc_tool_loader_clear {
+    clear: both;
+}
+
+.webrtc_tool_loader_last {
+    margin-right: 0;
+}
+
+
+
+@keyframes webrtc_tool_loader_enter {
+    0% {
+        opacity: 0;
+        top: -14px;
+    }
+    5% {
+        opacity: 1;
+        top: 0px;
+    }
+    50.9% {
+        opacity: 1;
+        top: 0px;
+    }
+    55.9% {
+        opacity: 0;
+        top: 14px;
+    }
+}
+
+@-o-keyframes webrtc_tool_loader_enter {
+    0% {
+        opacity: 0;
+        top: -14px;
+    }
+    5% {
+        opacity: 1;
+        top: 0px;
+    }
+    50.9% {
+        opacity: 1;
+        top: 0px;
+    }
+    55.9% {
+        opacity: 0;
+        top: 14px;
+    }
+}
+
+@-ms-keyframes webrtc_tool_loader_enter {
+    0% {
+        opacity: 0;
+        top: -14px;
+    }
+    5% {
+        opacity: 1;
+        top: 0px;
+    }
+    50.9% {
+        opacity: 1;
+        top: 0px;
+    }
+    55.9% {
+        opacity: 0;
+        top: 14px;
+    }
+}
+
+@-webkit-keyframes webrtc_tool_loader_enter {
+    0% {
+        opacity: 0;
+        top: -14px;
+    }
+    5% {
+        opacity: 1;
+        top: 0px;
+    }
+    50.9% {
+        opacity: 1;
+        top: 0px;
+    }
+    55.9% {
+        opacity: 0;
+        top: 14px;
+    }
+}
+
+@-moz-keyframes webrtc_tool_loader_enter {
+    0% {
+        opacity: 0;
+        top: -14px;
+    }
+    5% {
+        opacity: 1;
+        top: 0px;
+    }
+    50.9% {
+        opacity: 1;
+        top: 0px;
+    }
+    55.9% {
+        opacity: 0;
+        top: 14px;
+    }
+}
