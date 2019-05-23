@@ -92,5 +92,10 @@
 			"subject": "Did you get an invite?",
 			"body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!"
 		}
+	},
+	"participating": {
+		"Title": "Title",
+		"Subscribed": "Subscribed",
+		"Participants": "Participants"
 	}
 }
