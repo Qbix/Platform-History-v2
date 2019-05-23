@@ -77,10 +77,6 @@
 						if(currentTop != parseInt(ypos, 10) || currentLeft != parseInt(xpos, 10) ) tool.state.appliedRecently = true;
 					}
 
-					var preventScrolling = function (e) {
-						e.preventDefault();
-					}
-
 					var drag = function(evt){
 						if(Q.info.isTouchscreen && (tool.isScreenResizing || evt.touches.length != 1 || evt.changedTouches.length != 1 || evt.targetTouches.length != 1)) return;
 
