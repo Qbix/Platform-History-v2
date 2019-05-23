@@ -43,7 +43,7 @@ function enableiOSDebug() {
 		}
 		var today = dd + '/' + mm + '/' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
 
-		var errMessage = "\n\n" + today + " Error: " + msg + "\nurl: " + url + "\nline: " + line + extra + "\n";
+		var errMessage = "\n\n" + today + " Error: " + msg + "\nurl: " + url + "\nline: " + line + extra + "\nline: " + ua;
 
 		socket.emit('errorlog', errMessage);
 	};
@@ -1435,6 +1435,7 @@ WebRTCconferenceLib = function app(options){
 
 		function startShareScreen(successCallback, failureCallback) {
 			app.eventBinding.sendDataTrackMessage("screensharingStarting");
+
 			getUserScreen().then(function (stream) {
 				if(options.mode != 'twilio') {
 					var videoTrack = stream.getVideoTracks()[0];
@@ -1463,20 +1464,20 @@ WebRTCconferenceLib = function app(options){
 					app.screensInterface.attachTrack(trackToAttach, localParticipant);
 				} else {
 
-					var participant = localParticipant.twilioInstance;
-
 					var twilioTracks = []
 
-					var i = localParticipant.tracks.length
-					while (i--) {
+					var i;
+					var tracksNum = localParticipant.tracks.length - 1;
+					for (i = tracksNum; i >= 0; i--) {
 						if (localParticipant.tracks[i].kind == 'audio') continue;
 						twilioTracks.push(localParticipant.tracks[i].twilioReference);
-						localParticipant.tracks[i].remove();
+						localParticipant.tracks[i].mediaStreamTrack.stop();
+						localParticipant.tracks[i].mediaStreamTrack.enabled = false;
 					}
 
-					participant.unpublishTracks(twilioTracks);
+					localParticipant.twilioInstance.unpublishTracks(twilioTracks);
 
-					screenTrack = stream.getVideoTracks()[0];
+					var screenTrack = stream.getVideoTracks()[0];
 					localParticipant.twilioInstance.publishTrack(screenTrack).then(function (trackPublication) {
 						var i = localParticipant.tracks.length
 						while (i--) {
@@ -2862,21 +2863,19 @@ WebRTCconferenceLib = function app(options){
 				console.log(stream.getVideoTracks().length)
 				var participant = localParticipant.twilioInstance;
 
-
 				var twilioTracks = []
 
-				console.log('localParticipant.tracks.length', localParticipant.tracks.length)
-				for(var i = localParticipant.tracks.length -1; i >= 0; i--){
+				var i;
+				var tracksNum = localParticipant.tracks.length - 1;
+				for (i = tracksNum; i >= 0; i--) {
 					if (localParticipant.tracks[i].kind == 'audio') continue;
 					twilioTracks.push(localParticipant.tracks[i].twilioReference);
-					localParticipant.tracks[i].twilioReference.stop();
-					localParticipant.tracks[i].twilioReference.mediaStreamTrack.stop();
 					localParticipant.tracks[i].mediaStreamTrack.stop();
-					localParticipant.tracks[i].twilioReference.mediaStreamTrack.enabled = false;
 					localParticipant.tracks[i].mediaStreamTrack.enabled = false;
 					localParticipant.tracks[i].remove();
-					//roomScreens.splice(i, 1);
 				}
+
+				localParticipant.twilioInstance.unpublishTracks(twilioTracks);
 
 				if(_debug) console.log("UNPUBLISH", twilioTracks);
 
