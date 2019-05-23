@@ -1360,7 +1360,7 @@
 .dialog-box .webrtc_tool_choose-device {
     padding: 15px;
 }
-.webrtc_tool_popup-box > div {
+webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     float:left;
 }
 .webrtc_tool_popup-box .webrtc_tool_choose-device h4,
@@ -1382,6 +1382,11 @@
 .webrtc_tool_popup-box .webrtc_tool_choose-device  .webrtc_tool_disabled-radio,
 .dialog-box .webrtc_tool_choose-device  .webrtc_tool_disabled-radio{
     color: #a7a7a7;
+    pointer-events: none;
+}
+.webrtc_tool_popup-box .webrtc_tool_choose-device  .webrtc_tool_disabled-radio svg,
+.dialog-box .webrtc_tool_choose-device  .webrtc_tool_disabled-radio svg{
+    pointer-events: none;
 }
 .webrtc_tool_popup-box .webrtc_tool_choose-device input,
 .dialog-box .webrtc_tool_choose-device input{
@@ -1486,7 +1491,7 @@
     margin-bottom:10px;
 }
 .participants-list-btns {
-    justify-content: center;
+    justify-content: space-between;
     display: flex;
 }
 .participants-list-btns button{
@@ -1592,6 +1597,7 @@
     width: 100%;
     height: 100%;
     align-items: center;
+    justify-content: center;
     opacity:0.8;
     pointer-events: none;
 }
@@ -1717,6 +1723,22 @@
       }
 }
 
+/*screen sharing loader*/
+.spinner-load .webrtc_tool_screen-sharing svg {
+    width: 100px;
+    animation: zoominoutsinglefeatured 1s infinite ;
+}
+@keyframes zoominoutsinglefeatured {
+    0% {
+        transform: scale(1,1);
+    }
+    50% {
+        transform: scale(1.2,1.2);
+    }
+    100% {
+        transform: scale(1,1);
+    }
+}
 
 /*page loader*/
 .webrtc_tool_page-loader-con {
