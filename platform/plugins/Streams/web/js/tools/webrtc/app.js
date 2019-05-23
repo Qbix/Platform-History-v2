@@ -5,7 +5,7 @@ navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || 
 //console.log('typeof', typeof navigator.mediaDevices);
 navigator.mediaDevices.getUserMedia = navigator.mediaDevices.getUserMedia || navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
-
+//location.href = 'https://www.demoproject.co.ua/Q/plugins/Q/js/tools/resize.js'
 
 WebRTCconferenceLib = function app(options){
 	var app = {};
