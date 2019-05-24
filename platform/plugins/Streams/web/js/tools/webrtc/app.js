@@ -975,7 +975,7 @@ WebRTCconferenceLib = function app(options){
 					screenWidth = rect.width;
 					elHeight = rect.height;
 				}
-				var svgWidth = screenWidth != null && screenWidth != 0 ? screenWidth : 100;
+				var svgWidth = screenWidth != null && screenWidth != 0 ? screenWidth : 250;
 				var svgHeight = elHeight != null && elHeight != 0 ? elHeight / 100 * 80 : 40;
 
 				visualization.width = svgWidth;
