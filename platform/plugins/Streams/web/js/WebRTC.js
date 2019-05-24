@@ -513,6 +513,13 @@
 					}
 				);
 
+				WebRTCconference.screensInterface.audioVisualization().build({
+					name:'participantScreen',
+					screen: screen,
+					element:participantVoice,
+					stopOnMute:true,
+				});
+
 
 				participantNameTextCon.appendChild(participantNameText);
 				chatParticipantName.appendChild(participantNameTextCon);
@@ -799,7 +806,7 @@
 			function resetAudioVisualization() {
 				var roomScreens = WebRTCconference.screens();
 				roomScreens.map(function (screen) {
-					screen.soundMeter.reset();
+					if(screen.soundMeter.visualizations.participantScreen != null) screen.soundMeter.visualizations.participantScreen.reset();
 				});
 			}
 
