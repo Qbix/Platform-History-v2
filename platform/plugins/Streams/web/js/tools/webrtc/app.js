@@ -120,7 +120,7 @@ WebRTCconferenceLib = function app(options){
 
 	var _isMobile;
 	var _isiOS;
-	var _debug = true;
+	var _debug = false;
 
 	var pc_config = {"iceServers": [
 			{
