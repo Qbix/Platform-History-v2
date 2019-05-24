@@ -2458,8 +2458,7 @@ WebRTCconferenceLib = function app(options){
 		var hoverTimeout = {setttingsPopup:null, participantsPopup:null};
 
 		function loadDevicesList(mediaDevicesList) {
-			mediaDevices = mediaDevicesList;
-			console.log('mediaDevices', mediaDevices)
+			if(mediaDevicesList != null) mediaDevices = mediaDevicesList;
 			var i, device;
 			for(i = 0; device = mediaDevices[i]; i++){
 				if(_debug) console.log('loadDevicesList', device);
@@ -2467,8 +2466,7 @@ WebRTCconferenceLib = function app(options){
 					videoInputDevices.push(device);
 					for(var x in localParticipant.tracks) {
 						var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
-
-						if(mediaStreamTrack.enabled == true && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label)) {
+						if(mediaStreamTrack.enabled == true && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label || mediaStreamTrack.label == device.label)) {
 							frontCameraDevice = currentCameraDevice = device;
 						}
 					}
@@ -2478,7 +2476,7 @@ WebRTCconferenceLib = function app(options){
 					for(var x in localParticipant.tracks) {
 						var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
 
-						if(mediaStreamTrack.enabled == true && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label)) {
+						if(mediaStreamTrack.enabled == true && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label || mediaStreamTrack.label == device.label)) {
 							currentAudioDevice = device;
 						}
 					}
@@ -2979,21 +2977,22 @@ WebRTCconferenceLib = function app(options){
 		}
 
 		function enableCamera(callback) {
-			navigator.mediaDevices.getUserMedia ({
+			navigator.mediaDevices.getUserMedia({
 				'audio': false,
 				'video': {
-					width: { min: 320, max: 1280 },
-					height: { min: 240, max: 720 },
+					width: {min: 320, max: 1280},
+					height: {min: 240, max: 720},
 				},
 			}).then(function (stream) {
 				var localVideoTrack = stream.getVideoTracks()[0];
-				console.log('ENABLE VIDEO: GOT STREAM');
+				if(_debug) console.log('ENABLE VIDEO: GOT STREAM', stream, localVideoTrack);
 				var videoSetting = localVideoTrack.getSettings();
 				console.log(JSON.stringify(videoSetting));
 				var participant = localParticipant.twilioInstance;
 				var trackPublication = participant.publishTrack(localVideoTrack).then(function (publication) {
 
 					var vTrack = publication.track;
+					console.log('vTrack', vTrack)
 					var trackToAttach = new Track();
 					trackToAttach.sid = vTrack.sid;
 					trackToAttach.mediaStreamTrack = vTrack.mediaStreamTrack;
@@ -3005,13 +3004,13 @@ WebRTCconferenceLib = function app(options){
 
 					videoInputDevices = [];
 					audioInputDevices = [];
-					loadDevicesList(mediaDevices);
+					loadDevicesList();
 					app.conferenceControl.enableVideo();
-					if(callback != null) callback();
+					if (callback != null) callback();
 				});
 
 
-			}).catch(function(err) {
+			}).catch(function (err) {
 				console.error(err.name + ": " + err.message);
 			});
 		}
@@ -3390,26 +3389,30 @@ WebRTCconferenceLib = function app(options){
 
 					var connect = Twilio.connect;
 					if(_debug) console.log('options.roomName', options.roomName);
+					navigator.mediaDevices.enumerateDevices().then(function (mediaDevicesList) {
+						connect(token, {
+							name:options.roomName,
+							tracks: tracks,
+							preferredVideoCodecs: codecs,
+							debugLevel: 'debug'
+						}).then(function(room) {
+							if(_debug) console.log(`Successfully joined a Room: ${room}`, room);
+							room.on('participantConnected', function(participant){
+								if(_debug) console.log(`A remote Participant connected: ${participant}`);
+							});
 
-					connect(token, {
-						name:options.roomName,
-						tracks: tracks,
-						preferredVideoCodecs: codecs,
-						debugLevel: 'debug'
-					}).then(function(room) {
-						if(_debug) console.log(`Successfully joined a Room: ${room}`, room);
-						room.on('participantConnected', function(participant){
-							if(_debug) console.log(`A remote Participant connected: ${participant}`);
+							app.eventBinding.roomJoined(room);
+
+							app.conferenceControl.loadDevicesList(mediaDevicesList);
+							app.event.dispatch('joined');
+							if(callback != null) callback();
+						}, function(error) {
+							console.error(`Unable to connect to Room: ${error.message}`);
 						});
-
-						app.eventBinding.roomJoined(room);
-						app.conferenceControl.loadDevicesList(mediaDevicesList);
-
-						app.event.dispatch('joined');
-						if(callback != null) callback();
-					}, function(error) {
-						console.error(`Unable to connect to Room: ${error.message}`);
+					}).catch(function () {
+						console.error('ERROR: cannot get device info')
 					});
+
 				}).catch(function(err) {
 					console.error(err.name + ": " + err.message);
 				});
