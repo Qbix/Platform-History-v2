@@ -78,6 +78,10 @@
 				var tool = this;
 				webRTClib.event.on('participantConnected', function (participant) {
 					tool.participantsPopup().addItem(participant);
+					var screens = webRTClib.screens(true);
+					for (var i in screens) {
+						screens[i].soundMeter.visualizations.participantsPopup.reset();
+					}
 				});
 				webRTClib.event.on('participantDisconnected', function (participant) {
 					tool.participantsPopup().removeItem(participant);
@@ -543,6 +547,7 @@
 
 					});
 				}
+
 			},
 
 			/**
@@ -783,10 +788,22 @@
 					//$(participantIdentityText).tool('Users/avatar', { userId: userId }).activate();
 					//participantIdentityText.innerHTML = isLocal ? roomParticipant.identity + ' <span style="font-weight: normal;font-style: italic;">(me)</span>' : roomParticipant.identity;
 
+					var audioVisualization = document.createElement('DIV')
+					audioVisualization.className = 'webrtc_tool_popup-visualization';
+					var screen = roomParticipant.screens[0];
+
+					webRTClib.screensInterface.audioVisualization().build({
+						name:'participantsPopup',
+						screen: screen,
+						element:audioVisualization,
+						updateSizeOnlyOnce:true,
+					});
+
 					participantItem.appendChild(tracksControlBtns);
 					tracksControlBtns.appendChild(muteVideoBtn);
 					tracksControlBtns.appendChild(muteAudioBtn);
 					participantItem.appendChild(tracksControlBtns);
+					participantIdentity.appendChild(audioVisualization)
 					participantIdentity.appendChild(participantIdentityText)
 					participantItem.appendChild(participantIdentity)
 
@@ -945,6 +962,13 @@
 										Q.Dialogs.pop();
 										tool.state.webrtcClass.stop();
 									});
+									setTimeout(function () {
+										var screens = webRTClib.screens(true);
+										for (var i in screens) {
+											console.log('screens[i].soundMeter.visualizations', screens[i].soundMeter.visualizations.participantsPopup)
+											screens[i].soundMeter.visualizations.participantsPopup.reset();
+										}
+									}, 3000)
 								},
 							});
 						});
@@ -955,6 +979,12 @@
 								clearTimeout(tool.hoverTimeout.participantsPopup);
 								tool.hoverTimeout.participantsPopup = null;
 							}
+
+							var screens = webRTClib.screens(true);
+							for (var i in screens) {
+								screens[i].soundMeter.visualizations.participantsPopup.reset();
+							}
+
 							tool.usersBtn.parentNode.classList.add('webrtc_tool_hover');
 						});
 						tool.usersBtn.parentNode.addEventListener('mouseleave', function (e) {

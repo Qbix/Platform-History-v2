@@ -120,7 +120,7 @@ WebRTCconferenceLib = function app(options){
 
 	var _isMobile;
 	var _isiOS;
-	var _debug = false;
+	var _debug = true;
 
 	var pc_config = {"iceServers": [
 			{
@@ -665,6 +665,7 @@ WebRTCconferenceLib = function app(options){
 				barsLength: 0,
 				history: {averageVolume: 0, volumeValues:[]},
 				isDisabled: false,
+				visualizations: {},
 				reset: function() {
 
 				},
@@ -821,46 +822,180 @@ WebRTCconferenceLib = function app(options){
 				setTimeout(function () {
 					updatVisualizationWidth(screen);
 				}, 2000);
-				//this.context.resume();
-				//craetAudioeAnalyser(track, screen);
-				/*var i;
-				for (i = 0; i < barsLength; i++) {
-						var bar = screen.soundMeter.soundBars[i];
-						bar.height = 0;
-						bar.rect.setAttributeNS(null, 'height', bar.height);
-						//bar.rect.setAttributeNS(null, 'height', bar.height);
-				}*/
 			}
 			screen.soundMeter.stop = function() {
-				this.isDisabled = true;
+				/*for (var key in screen.soundMeter.visualizations) {
+					if (screen.soundMeter.visualizations.hasOwnProperty(key)) {
+						var visualization = screen.soundMeter.visualizations[key];
+						var barsLength = visualization.barsLength;
+						var i;
+						var el;
+						var elems=[].slice.call(visualization.svg.childNodes);
+						for(i = 0; el = elems[i]; i++){
+							console.log('soundmeter stop')
+							el.setAttributeNS(null, 'height', '0%');
+							el.setAttributeNS(null, 'y', 0);
+						}
+					}
+				}*/
 			}
 
+			function buildVisualization(screen) {
+				screen.soundMeter.latestUpdate = performance.now();
+
+				screen.soundMeter.script.onaudioprocess = function(e) {
+
+					var input = e.inputBuffer.getChannelData(0);
+					var i;
+					var sum = 0.0;
+					var clipcount = 0;
+					for (i = 0; i < input.length; ++i) {
+						sum += input[i] * input[i];
+						if (Math.abs(input[i]) > 0.99) {
+							clipcount += 1;
+						}
+
+					}
+
+					var audioIsDisabled = screen.soundMeter.source.mediaStream && (screen.soundMeter.source.mediaStream.active == false || screen.soundMeter.audioTrack.readyState == 'ended');
+					if(!audioIsDisabled) {
+						//console.log('onaudioprocess ENABLED')
+						screen.soundMeter.instant = Math.sqrt(sum / input.length);
+						screen.soundMeter.slow = 0.95 * screen.soundMeter.slow + 0.05 * screen.soundMeter.instant;
+						screen.soundMeter.clip = clipcount / input.length;
+					} else {
+						//console.log('onaudioprocess DISABLED')
+
+						screen.soundMeter.instant = 0;
+						screen.soundMeter.slow = 0;
+						screen.soundMeter.clip = 0;
+					}
+
+					var historyLength = screen.soundMeter.history.volumeValues.length;
+					if(historyLength > 100) screen.soundMeter.history.volumeValues.splice(0, historyLength - 100);
+					screen.soundMeter.history.volumeValues.push({
+						time: performance.now(),
+						value: screen.soundMeter.instant
+					});
+
+					/*if(performance.now() - screen.soundMeter.latestUpdate < 500) {
+						return;
+					};*/
 
 
-			function updatVisualizationWidth(screen) {
-				if(screen.soundMeter.svg == null) return;
+					var latest500ms = screen.soundMeter.history.volumeValues.filter(function (o) {
+						return performance.now() - o.time < 500;
+					});
+					var sum = latest500ms.reduce((a, b) => a + (b['value'] || 0), 0);
+					var average = (sum / 2);
+					if(!audioIsDisabled) {
+						screen.soundMeter.changedVolume = screen.soundMeter.instant / average * 100;
+					} else screen.soundMeter.changedVolume = 0;
+
+
+
+					for (var key in screen.soundMeter.visualizations) {
+						if (screen.soundMeter.visualizations.hasOwnProperty(key)) {
+							var visualization = screen.soundMeter.visualizations[key];
+							var barsLength = visualization.barsLength;
+							var i;
+							for(i = 0; i < barsLength; i++){
+								var bar = visualization.soundBars[i];
+								if(i == barsLength - 1) {
+									bar.volume = screen.soundMeter.instant;
+									var height = !screen.soundMeter.isDisabled && (bar.volume > 0 && average > 0) ? (bar.volume / average * 100) : 0;
+									if(height > 100) height = 100;
+									bar.y = visualization.height - (visualization.height / 100 * height);
+									bar.height = height;
+									bar.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
+
+									if(screen.soundMeter.source.mediaStream != null && screen.soundMeter.source.mediaStream.active == false || screen.soundMeter.audioTrack.readyState == 'ended') {
+										bar.volume = 0;
+										bar.height = 0;
+									}
+
+									bar.rect.setAttributeNS(null, 'height', bar.height + '%');
+									bar.rect.setAttributeNS(null, 'y', bar.y);
+
+								} else {
+									var nextBar = visualization.soundBars[i + 1];
+									bar.volume = nextBar.volume;
+									bar.height = nextBar.height;
+									bar.fill = nextBar.fill;
+									bar.y = nextBar.y;
+									bar.rect.setAttributeNS(null, 'height', bar.height + '%');
+									bar.rect.setAttributeNS(null, 'y', bar.y);
+								}
+							}
+						}
+					}
+
+					if(screen.soundMeter.source.mediaStream != null && screen.soundMeter.source.mediaStream.active == false || screen.soundMeter.audioTrack.readyState == 'ended') {
+						var maxVolume;
+						for (var key in screen.soundMeter.visualizations) {
+							if (screen.soundMeter.visualizations.hasOwnProperty(key)) {
+								var visualization = screen.soundMeter.visualizations[key];
+								maxVolume = Math.max.apply(Math, visualization.soundBars.map(function(o) {
+									return o.volume;
+								}));
+							}
+							break;
+						}
+
+						if(maxVolume <= 0) {
+							//screen.soundMeter.script.onaudioprocess = null;
+							screen.soundMeter.context.suspend();
+							screen.soundMeter.script.disconnect();
+							screen.soundMeter.source.disconnect();
+						}
+					}
+
+					screen.soundMeter.latestUpdate = performance.now();
+				}
+
+			}
+
+			buildVisualization(screen);
+
+		}
+
+		function audioVisualization() {
+
+			function updatVisualizationWidth(screen, visualization) {
+
+				if((visualization == null || visualization.svg == null) || (visualization.updateSizeOnlyOnce && visualization.updated)) return;
+
+				var element = visualization.element;
+
 				var screenWidth, elHeight;
-				if(screen.nameEl != null){
-					var rect = screen.nameEl.getBoundingClientRect();
+				if(element != null){
+					var rect = element.getBoundingClientRect();
+					console.log('updatVisualizationWidth rect', rect)
+
 					screenWidth = rect.width;
 					elHeight = rect.height;
 				}
-				var svgWidth = screenWidth != null && screenWidth != 0 ? screenWidth / 2 : 100;
+				var svgWidth = screenWidth != null && screenWidth != 0 ? screenWidth : 100;
 				var svgHeight = elHeight != null && elHeight != 0 ? elHeight / 100 * 80 : 40;
-				screen.soundMeter.svg.setAttribute('width', svgWidth);
-				screen.soundMeter.svg.setAttribute('height', svgHeight);
+
+				visualization.width = svgWidth;
+				visualization.height = svgHeight;
+				visualization.updated = true;
+				console.log('updatVisualizationWidth', svgWidth, svgHeight)
+				visualization.svg.setAttribute('width', svgWidth);
+				visualization.svg.setAttribute('height', svgHeight);
 
 				var bucketSVGWidth = 4;
 				var bucketSVGHeight = 0;
 				var spaceBetweenRects = 1;
 				var totalBarsNum =  Math.floor(svgWidth / (bucketSVGWidth + spaceBetweenRects));
-				var currentBarsNum = screen.soundMeter.soundBars.length;
+				var currentBarsNum = visualization.soundBars.length;
 				if(totalBarsNum > currentBarsNum) {
 					var barsToCreate = totalBarsNum - currentBarsNum;
 					var xmlns = 'http://www.w3.org/2000/svg';
 					var i;
 					for (i = 0; i < currentBarsNum; i++) {
-						var bar = screen.soundMeter.soundBars[i];
+						var bar = visualization.soundBars[i];
 
 						//bar.height = 0;
 						bar.x = (bucketSVGWidth * i + (spaceBetweenRects * (i + 1)));
@@ -897,49 +1032,60 @@ WebRTCconferenceLib = function app(options){
 
 						rectsToAdd.push(barObject);
 					}
-					screen.soundMeter.soundBars = screen.soundMeter.soundBars.concat(rectsToAdd)
+					visualization.soundBars = visualization.soundBars.concat(rectsToAdd)
 					var i;
 					for (i = 0; i < barsToCreate; i++) {
-						screen.soundMeter.svg.insertBefore(rectsToAdd[i].rect, screen.soundMeter.svg.firstChild);
+						visualization.svg.insertBefore(rectsToAdd[i].rect, visualization.svg.firstChild);
 					}
-					screen.soundMeter.barsLength = screen.soundMeter.soundBars.length;
+					visualization.barsLength = visualization.soundBars.length;
 
 				} else if(totalBarsNum < currentBarsNum) {
 					var barsToRemove = currentBarsNum - totalBarsNum;
-					screen.soundMeter.barsLength = totalBarsNum;
+					visualization.barsLength = totalBarsNum;
 					var i;
 					for(i = totalBarsNum; i < currentBarsNum; i++) {
-						var bar = screen.soundMeter.soundBars[i];
+						var bar = visualization.soundBars[i];
 						bar.rect.parentNode.removeChild(bar.rect);
 					}
-					screen.soundMeter.soundBars.splice(totalBarsNum, barsToRemove);
+					visualization.soundBars.splice(totalBarsNum, barsToRemove);
 				}
 			}
 
-			function buildVisualization(screen) {
-				if(screen.soundMeter.svg && screen.soundMeter.svg.parentNode) {
-					screen.soundMeter.svg.parentNode.removeChild(screen.soundMeter.svg);
-				}
-				screen.soundMeter.soundBars = [];
-				screen.soundEl.innerHTML = '';
+			function buildVisualization(options) {
+				var name = options.name;
+				var element = options.element;
+				var screen = options.screen;
 
-				var screenWidth, elHeight;
-				if(screen.nameEl != null){
-					var rect = screen.nameEl.getBoundingClientRect();
-					screenWidth = rect.width;
+				screen.soundMeter.visualizations[name] = {};
+				var visualisation = screen.soundMeter.visualizations[name];
+				visualisation.element = element;
+				visualisation.updateSizeOnlyOnce = options.updateSizeOnlyOnce != null ? options.updateSizeOnlyOnce : false;
+				visualisation.stopOnMute = options.stopOnMute != null ? options.stopOnMute : false;
+				if(visualisation.svg && visualisation.svg.parentNode) {
+					visualisation.svg.parentNode.removeChild(visualisation.svg);
+				}
+				visualisation.soundBars = [];
+				visualisation.element.innerHTML = '';
+
+				var elWidth, elHeight;
+				if(visualisation.element != null){
+					var rect = visualisation.element.getBoundingClientRect();
+					elWidth = rect.width;
 					elHeight = rect.height;
 				}
-				var svgWidth = screenWidth != null && screenWidth != 0 ? screenWidth / 2 : 100;
-				var svgHeight = elHeight != null && elHeight != 0 ? elHeight / 100 * 80 : 40;
+				var svgWidth = 0;
+				var svgHeight = 0;
+				visualisation.width = svgWidth;
+				visualisation.height = svgHeight;
 				var xmlns = 'http://www.w3.org/2000/svg';
 				var svg = document.createElementNS(xmlns, 'svg');
 				svg.setAttribute('width', svgWidth);
 				svg.setAttribute('height', svgHeight);
-				screen.soundMeter.svg = svg;
+				visualisation.svg = svg;
 				var clippath = document.createElementNS(xmlns, 'clipPath');
 				clippath.setAttributeNS(null, 'id', 'waveform-mask');
 
-				screen.soundEl.appendChild(screen.soundMeter.svg);
+				visualisation.element.appendChild(visualisation.svg);
 
 				var bucketSVGWidth = 4;
 				var bucketSVGHeight = 0;
@@ -969,112 +1115,22 @@ WebRTCconferenceLib = function app(options){
 						fill: fillColor
 					}
 
-					screen.soundMeter.soundBars.push(barObject);
+					visualisation.soundBars.push(barObject);
 					svg.appendChild(rect);
 				}
-				screen.soundMeter.barsLength = screen.soundMeter.soundBars.length;
-				screen.soundMeter.latestUpdate = performance.now();
-
-				screen.soundMeter.script.onaudioprocess = function(e) {
-
-					var input = e.inputBuffer.getChannelData(0);
-					var i;
-					var sum = 0.0;
-					var clipcount = 0;
-					for (i = 0; i < input.length; ++i) {
-						sum += input[i] * input[i];
-						if (Math.abs(input[i]) > 0.99) {
-							clipcount += 1;
-						}
-
-					}
-
-					var audioIsDisabled = screen.soundMeter.source.mediaStream && (screen.soundMeter.source.mediaStream.active == false || screen.soundMeter.audioTrack.readyState == 'ended' || (screen.isLocal && screen.soundMeter.isDisabled));
-					if(!audioIsDisabled) {
-						//console.log('onaudioprocess ENABLED')
-						screen.soundMeter.instant = Math.sqrt(sum / input.length);
-						screen.soundMeter.slow = 0.95 * screen.soundMeter.slow + 0.05 * screen.soundMeter.instant;
-						screen.soundMeter.clip = clipcount / input.length;
-					} else {
-						//console.log('onaudioprocess DISABLED')
-
-						screen.soundMeter.instant = 0;
-						screen.soundMeter.slow = 0;
-						screen.soundMeter.clip = 0;
-					}
-
-					var historyLength = screen.soundMeter.history.volumeValues.length;
-					if(historyLength > 100) screen.soundMeter.history.volumeValues.splice(0, historyLength - 100);
-					screen.soundMeter.history.volumeValues.push({
-						time: performance.now(),
-						value: screen.soundMeter.instant
-					});
-
-					/*if(performance.now() - screen.soundMeter.latestUpdate < 500) {
-						return;
-					};*/
+				visualisation.barsLength = visualisation.soundBars.length;
 
 
-					var latest500ms = screen.soundMeter.history.volumeValues.filter(function (o) {
-						return performance.now() - o.time < 500;
-					});
-					var sum = latest500ms.reduce((a, b) => a + (b['value'] || 0), 0);
-					var average = (sum / 2);
-					if(!audioIsDisabled) {
-						screen.soundMeter.changedVolume = screen.soundMeter.instant / average * 100;
-					} else screen.soundMeter.changedVolume = 0;
-
-
-					var barsLength = screen.soundMeter.barsLength;
-					var i;
-					for(i = 0; i < barsLength; i++){
-						var bar = screen.soundMeter.soundBars[i];
-						if(i == barsLength - 1) {
-							bar.volume = screen.soundMeter.instant;
-							var height = !screen.soundMeter.isDisabled && (bar.volume > 0 && average > 0) ? (bar.volume / average * 100) : 0;
-							if(height > 100) height = 100;
-							bar.y = svgHeight - (svgHeight / 100 * height);
-							bar.height = height;
-							bar.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
-
-							if(audioIsDisabled) {
-								bar.volume = 0;
-								bar.height = 0;
-							}
-
-							bar.rect.setAttributeNS(null, 'height', bar.height + '%');
-							bar.rect.setAttributeNS(null, 'y', bar.y);
-
-						} else {
-							var nextBar = screen.soundMeter.soundBars[i + 1];
-							bar.volume = nextBar.volume;
-							bar.height = nextBar.height;
-							bar.fill = nextBar.fill;
-							bar.y = nextBar.y;
-							bar.rect.setAttributeNS(null, 'height', bar.height + '%');
-							bar.rect.setAttributeNS(null, 'y', bar.y);
-						}
-					}
-
-					if(screen.soundMeter.source.mediaStream != null && screen.soundMeter.source.mediaStream.active == false || screen.soundMeter.audioTrack.readyState == 'ended') {
-						var maxVolume = Math.max.apply(Math, screen.soundMeter.soundBars.map(function(o) {
-							return o.volume;
-						}));
-						if(maxVolume <= 0) {
-							//screen.soundMeter.script.onaudioprocess = null;
-							screen.soundMeter.context.suspend();
-							screen.soundMeter.script.disconnect();
-							screen.soundMeter.source.disconnect();
-						}
-					}
-
-					screen.soundMeter.latestUpdate = performance.now();
-				}
-
+				visualisation.reset = function () {
+					setTimeout(function () {
+						updatVisualizationWidth(screen, visualisation)
+					}, 300);
+				};
 			}
 
-			buildVisualization(screen);
-
+			return {
+				build: buildVisualization,
+			}
 		}
 
 		function getScreenOfTrack(track) {
@@ -1100,6 +1156,10 @@ WebRTCconferenceLib = function app(options){
 				if(track.mediaStreamTrack != null) {
 					track.mediaStreamTrack.enabled = false;
 					track.mediaStreamTrack.stop();
+				}
+
+				if(track.kind == 'audio') {
+					screenOfTrack.soundMeter.stop();
 				}
 			});
 
@@ -1410,6 +1470,7 @@ WebRTCconferenceLib = function app(options){
 			createParticipantScreen: createRoomScreen,
 			removeScreensByParticipant: removeScreensByParticipant,
 			getLoudestScreen: getLoudestScreen,
+			audioVisualization: audioVisualization,
 		}
 	}())
 
@@ -2856,9 +2917,16 @@ WebRTCconferenceLib = function app(options){
 
 			navigator.mediaDevices.getUserMedia ({
 				'audio': false,
-				'video': { deviceId: { exact: cameraId != null ? cameraId : deviceToSwitch.deviceId } },
+				'video': {
+					width: { min: 320, max: 1280 },
+					height: { min: 240, max: 720 },
+					deviceId: { exact: cameraId != null ? cameraId : deviceToSwitch.deviceId }
+					},
 			}).then(function (stream) {
 				var localVideoTrack = stream.getVideoTracks()[0];
+				console.log('ENABLE VIDEO: GOT STREAM');
+				var videoSetting = localVideoTrack.getSettings();
+				console.log(JSON.stringify(videoSetting));
 				console.log('toggleCameras')
 				console.log(stream.getVideoTracks().length)
 				var participant = localParticipant.twilioInstance;
@@ -2920,10 +2988,15 @@ WebRTCconferenceLib = function app(options){
 		function enableCamera(callback) {
 			navigator.mediaDevices.getUserMedia ({
 				'audio': false,
-				'video': true,
+				'video': {
+					width: { min: 320, max: 1280 },
+					height: { min: 240, max: 720 },
+				},
 			}).then(function (stream) {
 				var localVideoTrack = stream.getVideoTracks()[0];
-
+				console.log('ENABLE VIDEO: GOT STREAM');
+				var videoSetting = localVideoTrack.getSettings();
+				console.log(JSON.stringify(videoSetting));
 				var participant = localParticipant.twilioInstance;
 				var trackPublication = participant.publishTrack(localVideoTrack).then(function (publication) {
 
@@ -3127,10 +3200,10 @@ WebRTCconferenceLib = function app(options){
 
 			micIsDisabled = false;
 
-			var i, screen;
+			/*var i, screen;
 			for(i = 0; screen = localParticipant.screens[i]; i++) {
 				screen.soundMeter.start();
-			}
+			}*/
 			if(_debug) console.log('enableAudioTracks', micIsDisabled);
 
 		}
@@ -3166,10 +3239,10 @@ WebRTCconferenceLib = function app(options){
 			}
 			micIsDisabled = true;
 
-			var i, screen;
+			/*var i, screen;
 			for(i = 0; screen = localParticipant.screens[i]; i++) {
 				screen.soundMeter.stop();
-			}
+			}*/
 		}
 
 		function destroyControlBar() {
@@ -3220,9 +3293,19 @@ WebRTCconferenceLib = function app(options){
 		if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
 			if(_debug) console.log("enumerateDevices() not supported.");
 
+			var videoConstrains;
+			if(options.startWith.video == false){
+				videoConstrains = false;
+			} else {
+				videoConstrains = {
+					width: { min: 320, max: 1280 },
+					height: { min: 240, max: 720 },
+				};
+			}
+
 			navigator.getUserMedia ({
 				'audio': options.startWith.audio,
-				'video': options.startWith.video
+				'video': videoConstrains
 			}, function (stream) {
 				var tracks = stream.getTracks();
 				var dataTrack = new Twilio.LocalDataTrack();
@@ -3296,9 +3379,19 @@ WebRTCconferenceLib = function app(options){
 					return;
 				}
 
+				var videoConstrains;
+				if(videoDevices == 0 && options.startWith.video == false){
+					videoConstrains = false;
+				} else if(videoDevices != 0 && options.startWith.video) {
+					videoConstrains = {
+						width: { min: 320, max: 1280 },
+						height: { min: 240, max: 720 },
+					};
+				}
+
 				navigator.mediaDevices.getUserMedia ({
 					'audio': audioDevices != 0 && options.startWith.audio,
-					'video': videoDevices != 0 && options.startWith.video,
+					'video': videoConstrains,
 				}).then(function (stream) {
 					var tracks = stream.getTracks();
 
