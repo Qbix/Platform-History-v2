@@ -3,7 +3,7 @@
 function Streams_participating_response_content()
 {
 	$loggedUserId = Users::loggedInUser(true)->id;
-	$participants = Db::connect('Streams')->rawQuery("select srt.*, sp.state, sp.subscribed, sp.streamType from 
+	$participants = Db::connect('Streams')->rawQuery("select srt.*, sp.state, sp.subscribed, sp.streamType, sp.publisherId from 
 	streams_related_to srt, streams_participant sp 
 	where srt.toPublisherId='".$loggedUserId."' and srt.toStreamname='Streams/participating'
 	and sp.publisherId=srt.fromPublisherId and sp.streamName=srt.fromStreamName and sp.userId='".$loggedUserId."' 
@@ -14,6 +14,10 @@ function Streams_participating_response_content()
 	// group by stream type
 	$participantsGrouped = array();
 	foreach($participants as $participant) {
+		if ($skipOwnStreams && $participant->publisherId == $loggedUserId) {
+			continue;
+		}
+
 		if (!is_array($participantsGrouped[$participant->streamType])) {
 			$participantsGrouped[$participant->streamType] = array();
 		}
@@ -21,10 +25,6 @@ function Streams_participating_response_content()
 		$stream = Streams::fetchOne($loggedUserId, $participant->fromPublisherId, $participant->fromStreamName);
 		$checked = $participant->subscribed == 'yes' ? 'checked' : '';
 		$iconUrl = $stream->iconUrl('40.png');
-
-		if ($skipOwnStreams && $stream->publisherId == $loggedUserId) {
-			continue;
-		}
 
 		$participantsGrouped[$participant->streamType][] = Q::view("Streams/content/participatingItem.php",
 			compact('stream', 'iconUrl', 'checked')
