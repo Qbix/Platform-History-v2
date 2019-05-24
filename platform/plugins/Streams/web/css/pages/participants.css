@@ -1,3 +1,6 @@
+.Streams_participating_stream {
+	width: 100%;
+}
 .Streams_participating_stream th {
 	text-align: center;
 }
@@ -39,7 +42,7 @@
 .Streams_participating_stream img.Streams_participating_stream_icon {
 	margin: 0 5px;
 }
-.Streams_participating_stream h2 {
+.Streams_participating_stream div[data-type=title] > div {
 	font-size: 20px;
 	font-weight: normal;
 	width: 220px;
@@ -53,4 +56,13 @@
 .Streams_participating_stream .Streams_participants_tool .Streams_participants_summary {
 	position: absolute;
 	right: 40px;
+}
+.Q_tool.Q_expandable_tool h2 {
+	padding: 10px;
+	background-color: rgba(180, 200, 220, 0.7);
+	font-weight: 400;
+}
+.Q_tool.Q_expandable_tool h2 span {
+	font-weight: normal;
+	color: blue;
 }
