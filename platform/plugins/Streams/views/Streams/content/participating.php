@@ -6,8 +6,7 @@
 
         $content = '<table class="Streams_participating_stream"><tr>
             <th>'.$participating['Title'].'</th>
-            <th>'.$participating['Subscribed'].'</th>
-            <th>'.$participating['Participants'].'</th></tr>'.join($participants).'</table>';
+            <th>'.$participating['Subscribed'].'</th>'.join($participants).'</table>';
 
 		echo Q::Tool("Q/expandable", array(
 			'title' => $streamType.' <span>('.count($participants).')</span>',
