@@ -121,8 +121,27 @@
     z-index: 5;
     cursor: pointer;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_microphone-control-btn {
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_manage-users-btn-btn {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 5;
     cursor: pointer;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_users-counter{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #777;
+    position: absolute;
+    right: -10px;
+    top:-5px;
+    font-size: 12px;
+    text-align: center;
+    color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .webrtc_tool_toggle-view-mode {
     display: flex;
@@ -197,6 +216,22 @@
     height: 100%;
     width: 100%;
     z-index: 5;
+}
+
+.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner .webrtc_tool_users-counter{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #777;
+    position: absolute;
+    right: -10px;
+    top:-5px;
+    font-size: 12px;
+    text-align: center;
+    color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .webrtc_tool_mobile-screen.Q_verticalOrientation #webrtc_tool_room-media {
     position: fixed;

@@ -812,16 +812,9 @@ WebRTCconferenceLib = function app(options){
 			screen.soundMeter.clip = 0;
 			screen.soundMeter.reset = function() {
 				if(screen.isLocal && screen.soundMeter.isDisabled) return;
-				setTimeout(function () {
-					updatVisualizationWidth(screen);
-				}, 2000);
-
 			}
 			screen.soundMeter.start = function() {
 				this.isDisabled = false;
-				setTimeout(function () {
-					updatVisualizationWidth(screen);
-				}, 2000);
 			}
 			screen.soundMeter.stop = function() {
 				/*for (var key in screen.soundMeter.visualizations) {
@@ -1159,7 +1152,7 @@ WebRTCconferenceLib = function app(options){
 				}
 
 				if(track.kind == 'audio') {
-					screenOfTrack.soundMeter.stop();
+					if(screenOfTrack != null) screenOfTrack.soundMeter.stop();
 				}
 			});
 

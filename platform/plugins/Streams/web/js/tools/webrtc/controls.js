@@ -80,11 +80,16 @@
 					tool.participantsPopup().addItem(participant);
 					var screens = webRTClib.screens(true);
 					for (var i in screens) {
-						screens[i].soundMeter.visualizations.participantsPopup.reset();
+						if(screens[i].soundMeter.visualizations.participantsPopup != null) screens[i].soundMeter.visualizations.participantsPopup.reset();
 					}
+					var participantsCount = webRTClib.roomParticipants().length;
+					tool.usersCounter.innerHTML = participantsCount;
 				});
 				webRTClib.event.on('participantDisconnected', function (participant) {
 					tool.participantsPopup().removeItem(participant);
+
+					var participantsCount = webRTClib.roomParticipants().length;
+					tool.usersCounter.innerHTML = participantsCount;
 				});
 			},
 
@@ -127,6 +132,11 @@
 				var usersBtnIcon = document.createElement('DIV');
 				usersBtnIcon.className = 'webrtc_tool_manage-users-btn-icon';
 				usersBtnIcon.innerHTML = icons.user;
+				var counterBadge = document.createElement('DIV');
+				counterBadge.className = 'webrtc_tool_users-counter';
+				var counterBadgeSpan = document.createElement('DIV');
+				var participantsCount = webRTClib.roomParticipants().length;
+				counterBadgeSpan.innerHTML = participantsCount;
 
 				if(!Q.info.isMobile) {
 					var screenSharingBtn = document.createElement('DIV');
@@ -142,16 +152,19 @@
 				controlBarCon.appendChild(microphoneBtn);
 				usersBtnCon.appendChild(usersBtn);
 				usersBtnCon.appendChild(usersBtnIcon);
+				counterBadge.appendChild(counterBadgeSpan);
+				usersBtnCon.appendChild(counterBadge);
 				controlBarCon.appendChild(usersBtnCon);
 				controlBar.appendChild(controlBarCon);
 
-				tool.controlBar = controlBar;
+				tool.controlBar = counterBadgeSpan;
 				tool.cameraBtn = cameraBtn;
 				tool.cameraBtnIcon = cameraBtnIcon;
 				//tool.speakerBtn = speakerBtn;
 				tool.microphoneBtn = microphoneBtn;
 				tool.usersBtn = usersBtn;
 				tool.usersBtnIcon = usersBtnIcon;
+				tool.usersCounter = counterBadge;
 
 
 
@@ -723,7 +736,6 @@
 					this.removeScreen = function (screen) {
 						if(this.isActive === false || screen.videoIsChanging === true || this.manuallyToggled) return;
 						//if(screen.screenEl.parentNode != null) {
-						console.log('screen.screenEl.parentNode', screen.screenEl.parentNode)
 						if(screen.screenEl.parentNode != null) screen.screenEl.parentNode.removeChild(screen.screenEl);
 
 						screen.screenEl.style.display = 'none';
