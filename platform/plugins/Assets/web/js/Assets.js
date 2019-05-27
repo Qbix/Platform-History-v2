@@ -595,16 +595,10 @@
 	}
 
 	function _redirectToBrowserTab(paymentOptions) {
-		var protocol = location.protocol;
-		var slashes = protocol.concat("//");
-		var url = slashes.concat(window.location.hostname);
-		if(url.indexOf('?') !== -1) {
-			url = url + "&browsertab=yes";
-		}else{
-			url = url + "?browsertab=yes";
-		}
-		url += "&paymentOptions=" + encodeURIComponent(JSON.stringify(paymentOptions));
-		cordova.plugins.browsertab.openUrl(url);
+		var url = new URL(document.location.href);
+		url.searchParams.set('browsertab', 'yes');
+		url.searchParams.set('paymentOptions', JSON.stringify(paymentOptions));
+		cordova.plugins.browsertab.openUrl(url.toString());
 	}
 
 	if (window.location.href.indexOf('browsertab=yes') !== -1) {
