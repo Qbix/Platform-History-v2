@@ -1,8 +1,12 @@
 .Streams_participating_stream {
+	table-layout: fixed;
 	width: 100%;
 }
 .Streams_participating_stream th {
 	text-align: center;
+}
+.Streams_participating_stream th[data-type=checkmark] {
+	width: 100px;
 }
 .Streams_participating_stream tr {
 	background-color: #eeeeff;
@@ -18,14 +22,20 @@
 .Streams_participating_stream td[data-type=title],
 .Streams_participating_stream td[data-type=checkmark] {
 	padding: 15px 0;
-}
-.Streams_participating_stream td[data-type=title] {
 	white-space: nowrap;
 }
 .Streams_participating_stream td[data-type=title] > * {
 	display: inline-block;
 	line-height: 40px;
 	vertical-align: top;
+}
+.Streams_participating_stream td[data-type=title] > div {
+	font-size: 20px;
+	font-weight: normal;
+	width: calc(100% - 40px);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 .Streams_participating_stream td[data-type=checkmark] {
 	text-align: center;
@@ -41,14 +51,6 @@
 }
 .Streams_participating_stream img.Streams_participating_stream_icon {
 	margin: 0 5px;
-}
-.Streams_participating_stream div[data-type=title] > div {
-	font-size: 20px;
-	font-weight: normal;
-	width: 220px;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
 }
 .Streams_participating_stream .Streams_participants_tool {
 	position: relative;
