@@ -21,7 +21,7 @@
 }
 .Streams_participating_stream td[data-type=title],
 .Streams_participating_stream td[data-type=checkmark] {
-	padding: 15px 0;
+	padding: 5px 0;
 	white-space: nowrap;
 }
 .Streams_participating_stream td[data-type=title] > * {
@@ -59,12 +59,16 @@
 	position: absolute;
 	right: 40px;
 }
-.Q_tool.Q_expandable_tool h2 {
+.Streams_participating .Q_tool.Q_expandable_tool h2 {
 	padding: 10px;
 	background-color: rgba(180, 200, 220, 0.7);
 	font-weight: 400;
 }
-.Q_tool.Q_expandable_tool h2 span {
+.Streams_participating .Q_tool.Q_expandable_tool h2 span {
 	font-weight: normal;
 	color: blue;
+}
+.Streams_participating .Q_tool.Q_expandable_tool .Q_expandable_container {
+	padding-left: 0;
+	padding-right: 0;
 }
