@@ -603,8 +603,9 @@
 
 	if (window.location.href.indexOf('browsertab=yes') !== -1) {
 		window.onload = function() {
+			var params = new URLSearchParams(document.location.href);
 			try {
-				var paymentOptions = JSON.parse(JSON.parse(decodeURIComponent(location.search.split('paymentOptions=')[1])));
+				var paymentOptions = JSON.parse(JSON.parse(params.get('paymentOptions')));
 			} catch(err) {
 				console.warn('Undefined payment options');
 				throw(err);
