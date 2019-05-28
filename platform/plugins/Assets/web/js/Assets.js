@@ -289,16 +289,12 @@
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			stripe: function (options, callback) {
-				var paymentOptions = JSON.stringify(options);
-
-				var err;
-				if (!Assets.Payments || !Assets.Payments.stripe) {
-					err = _error("Assets.Payments.stripe: missing configuration");
-					if (callback) {
-						callback(err);
-					}
+				if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
+					_redirectToBrowserTab(options);
 					return;
 				}
+
+				var err;
 				var o = Q.extend({},
 					Q.text.Assets.payments,
 					Assets.Payments.stripe.options,
@@ -313,10 +309,6 @@
 				}
 				if (!o.userId) {
 					o.userId = Q.Users.loggedInUser ? Q.Users.loggedInUser.id : null;
-				}
-				if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
-					_redirectToBrowserTab(paymentOptions);
-					return;
 				}
 
 				try {
@@ -352,7 +344,42 @@
 					_standardStripe(o, callback);
 				}
 			},
-
+			/**
+			 * This method use applePay or googlePay what exist
+			 * and then charge that payment profile.
+			 * @method cordova
+			 * @static
+			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
+			 *  @param {Number} options.amount the amount to pay.
+			 *  @param {String} [options.currency="usd"] the currency to pay in.
+			 *  @param {String} [options.publisherId=Q.Users.communityId] The publisherId of the Assets/product or Assets/service stream
+			 *  @param {String} [options.streamName] The name of the Assets/product or Assets/service stream
+			 *  @param {String} [options.name=Users::communityName()] The name of the organization the user will be paying
+			 *  @param {String} [options.image] The url pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
+			 *  @param {String} [options.description] A short name or description of the product or service being purchased.
+			 *  @param {String} [options.panelLabel] The label of the payment button in the Stripe Checkout form (e.g. "Pay {{amount}}", etc.). If you include {{amount}}, it will be replaced by the provided amount. Otherwise, the amount will be appended to the end of your label.
+			 *  @param {String} [options.zipCode] Specify whether Stripe Checkout should validate the billing ZIP code (true or false). The default is false.
+			 *  @param {Boolean} [options.billingAddress] Specify whether Stripe Checkout should collect the user's billing address (true or false). The default is false.
+			 *  @param {Boolean} [options.shippingAddress] Specify whether Checkout should collect the user's shipping address (true or false). The default is false.
+			 *  @param {String} [options.email] Set the email address, if any, provided to Stripe Checkout to be pre-filled.
+			 *  @param {Boolean} [options.allowRememberMe=true] Specify whether to include the option to "Remember Me" for future purchases (true or false).
+			 *  @param {Boolean} [options.bitcoin=false] Specify whether to accept Bitcoin (true or false).
+			 *  @param {Boolean} [options.alipay=false] Specify whether to accept Alipay ('auto', true, or false).
+			 *  @param {Boolean} [options.alipayReusable=false] Specify if you need reusable access to the customer's Alipay account (true or false).
+			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
+			 */
+			cordova: function (options, callback) {
+				sgap.setKey(Assets.Payments.stripe.publishableKey).then(function () {
+					sgap.isReadyToPay()
+				}).then(function () {
+					sgap.requestPayment(options.amount, options.currency).then(function (token) {
+						options.token = token;
+						Assets.Payments.pay('stripe', options, callback);
+					});
+				}).catch(function (err) {
+					Q.handle(callback, this, [err])
+				});
+			},
 			/**
 			 * Charge the user once you've obtained a token
 			 * @method pay
@@ -595,22 +622,18 @@
 	}
 
 	function _redirectToBrowserTab(paymentOptions) {
-		var protocol = location.protocol;
-		var slashes = protocol.concat("//");
-		var url = slashes.concat(window.location.hostname);
-		if(url.indexOf('?') !== -1) {
-			url = url + "&browsertab=yes";
-		}else{
-			url = url + "?browsertab=yes";
-		}
-		url += "&paymentOptions=" + encodeURIComponent(JSON.stringify(paymentOptions));
-		cordova.plugins.browsertab.openUrl(url);
+		var url = new URL(document.location.href);
+		url.searchParams.set('browsertab', 'yes');
+		paymentOptions.userId = Q.Users.loggedInUserId();
+		url.searchParams.set('paymentOptions', JSON.stringify(paymentOptions));
+		cordova.plugins.browsertab.openUrl(url.toString());
 	}
 
 	if (window.location.href.indexOf('browsertab=yes') !== -1) {
 		window.onload = function() {
+			var params = new URLSearchParams(document.location.href);
 			try {
-				var paymentOptions = JSON.parse(JSON.parse(decodeURIComponent(location.search.split('paymentOptions=')[1])));
+				var paymentOptions = JSON.parse(params.get('paymentOptions'));
 			} catch(err) {
 				console.warn('Undefined payment options');
 				throw(err);
