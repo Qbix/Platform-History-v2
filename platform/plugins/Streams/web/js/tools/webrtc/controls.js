@@ -14,6 +14,7 @@
 		switchCameras: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <g>   <path fill="#FFFFFF" d="M50.037,43.904c-3.939,0-7.151,3.212-7.151,7.168c0,3.947,3.212,7.167,7.151,7.167    c3.947,0,7.152-3.22,7.152-7.167C57.189,47.116,53.984,43.904,50.037,43.904z M50.037,56.49c-2.988,0-5.402-2.431-5.402-5.417    c0-2.997,2.414-5.418,5.402-5.418c2.98,0,5.402,2.422,5.402,5.418C55.439,54.069,53.017,56.49,50.037,56.49z"/>   <path fill="#FFFFFF" d="M63.047,43.286c-0.596,0-1.084,0.487-1.084,1.091c0,0.604,0.488,1.091,1.084,1.091    c0.597,0,1.083-0.487,1.083-1.091C64.13,43.773,63.644,43.286,63.047,43.286z"/>   <path fill="#FFFFFF" d="M50,0C22.431,0,0,22.43,0,50c0,27.571,22.429,50,50,50c27.569,0,50-22.429,50-50C100,22.431,77.569,0,50,0z     M25.111,51.626c0.934-0.933,2.432-0.933,3.366,0c0.934,0.936,0.926,2.446-0.007,3.382l-6.642,6.634    c-0.448,0.451-1.058,0.703-1.692,0.703c-0.633,0-1.242-0.252-1.689-0.703l-6.639-6.634c-0.933-0.936-0.933-2.446,0-3.382    c0.934-0.933,2.365-0.931,3.299,0l2.477,2.563V50c0-17.784,14.551-32.255,32.336-32.255c1.321,0,2.427,1.071,2.427,2.389    c0,1.32-1.017,2.39-2.337,2.39C34.86,22.524,22.583,34.85,22.583,50v4.189L25.111,51.626z M33.583,59.54V43.897    c0-1.44,1.517-3.086,2.956-3.086h5.341l2.703-2.58v-0.008c1-0.518,1.5-1.412,2.258-1.412h6.502c0.711,0,1.338,0.578,1.804,1.043    l0.015,0.158c0.007,0,0.022-0.172,0.022-0.172l3.128,2.971h5.224c1.433,0,3.048,1.646,3.048,3.086V59.54    c0,1.439-1.615,3.271-3.048,3.271H36.538C35.099,62.811,33.583,60.979,33.583,59.54z M86.506,49.071    c-0.614,0-1.063-0.235-1.529-0.698l-2.395-2.56V50c0,17.787-14.631,32.255-32.419,32.255c-1.32,0-2.47-1.067-2.47-2.39    c0-1.32,1.08-2.388,2.399-2.388c15.151,0,27.489-12.329,27.489-27.478v-4.187l-2.611,2.56c-0.934,0.931-2.473,0.931-3.403,0    c-0.938-0.934-0.951-2.447-0.014-3.381l6.63-6.636c0.935-0.935,2.442-0.935,3.375,0l6.635,6.636    c0.936,0.934,0.935,2.447-0.001,3.381C87.728,48.836,87.116,49.071,86.506,49.071z"/>  </g>  </svg>',
 		changeView: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="2.292 0.765 100.001 100" enable-background="new 2.292 0.765 100.001 100"    xml:space="preserve">  <path fill="#FFFFFF" d="M52.291,0.765c-27.568,0-49.999,22.43-49.999,50c0,27.57,22.429,49.999,49.999,49.999   c27.57,0,50.002-22.429,50.002-49.999C102.293,23.196,79.861,0.765,52.291,0.765z M49.793,78.265H24.792v-25h5v20h20.001V78.265z    M49.793,28.265H29.792v20h-5v-25h25.001V28.265z M79.793,78.265h-25v-5h20v-20h5V78.265z M79.793,48.265h-5v-20h-20v-5h25V48.265z"   />  </svg>  ',
 		switchOffCameras: '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-2.176 -1.153 100 99.999" enable-background="new -2.176 -1.153 100 99.999"    xml:space="preserve">  <path fill="#8C8C8C" d="M47.823-1.153c-27.569,0-50,22.43-50,49.999c0,27.571,22.429,50,50,50c27.569,0,50.001-22.429,50.001-50   C97.824,21.277,75.393-1.153,47.823-1.153z M70.475,66.547l-4.949,4.949L47.824,53.795L30.122,71.496l-4.949-4.949l17.701-17.701   L25.173,31.145l4.949-4.95l17.702,17.702l17.702-17.702l4.949,4.95L52.773,48.846L70.475,66.547z"/>  </svg>  ',
+		textChat: '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="4.559 -1.605 100 99.999" enable-background="new 4.559 -1.605 100 99.999"    xml:space="preserve">  <path fill="#FFFFFF" d="M54.559-1.605c-27.569,0-50,22.43-50,50s22.429,49.999,50,49.999c27.569,0,50.001-22.429,50.001-49.999   C104.56,20.825,82.128-1.605,54.559-1.605z M82.718,60.974c0,3.964-3.248,7.211-7.21,7.211H64.075l-6.625,5.91   c-1.624,1.496-4.157,1.496-5.781,0l-6.626-5.91H33.61c-3.962,0-7.21-3.247-7.21-7.211V32.782c0-3.963,3.248-7.21,7.21-7.21h41.963   c3.962,0,7.211,3.183,7.145,7.21V60.974z"/>  <path fill="#FFFFFF" d="M42.314,42.656c-2.598,0-4.677,2.078-4.677,4.677s2.079,4.677,4.677,4.677s4.677-2.078,4.677-4.677   S44.913,42.656,42.314,42.656z"/>  <path fill="#FFFFFF" d="M55.371,42.656c-2.598,0-4.677,2.078-4.677,4.677s2.079,4.677,4.677,4.677s4.677-2.078,4.677-4.677   S57.969,42.656,55.371,42.656z"/>  <path fill="#FFFFFF" d="M68.428,42.656c-2.599,0-4.678,2.078-4.678,4.677s2.079,4.677,4.678,4.677c2.598,0,4.678-2.078,4.678-4.677   S71.025,42.656,68.428,42.656z"/>  </svg>',
 	}
 
 	/**
@@ -21,6 +22,7 @@
 	 * @type {Object}
 	 */
 	var webRTClib = null;
+	var webRTCclass = null;
 
 	/**
 	 * Streams/webrtc/control tool.
@@ -39,6 +41,7 @@
 
 			this.state = Q.extend({}, this.state, options);
 			webRTClib = options.webRTClibraryInstance;
+			webRTCclass = options.webrtcClass;
 
 			this.refresh();
 
@@ -60,12 +63,14 @@
 				window.WebRTCcontrolBar = controlBar;
 				tool.updateControlBar();
 
+				tool.element.appendChild(controlBar);
+
+				tool.textChat().init();
 				tool.createSettingsPopup();
 				tool.participantsPopup().createList();
 				tool.participantsPopup().toggleLoudesScreenMode('allButMe');
-				tool.participantsPopup().checkActiveMediaTracks();
 
-				tool.element.appendChild(controlBar);
+				tool.participantsPopup().checkActiveMediaTracks();
 				tool.bindRTCEvents();
 
 			},
@@ -137,6 +142,17 @@
 				var counterBadgeSpan = document.createElement('DIV');
 				var participantsCount = webRTClib.roomParticipants().length;
 				counterBadgeSpan.innerHTML = participantsCount;
+				var textChatBtnCon = document.createElement('DIV');
+				textChatBtnCon.className = 'webrtc_tool_text-chat-btn';
+				var textChatBtn = document.createElement('DIV');
+				textChatBtn.className = 'webrtc_tool_text-chat-btn';
+				var textChatBtnIcon = document.createElement('DIV');
+				textChatBtnIcon.className = 'webrtc_tool_text-chat-icon';
+				textChatBtnIcon.innerHTML = icons.textChat;
+				var textChatCounterBadge = document.createElement('DIV');
+				textChatCounterBadge.className = 'webrtc_tool_text-chat-counter';
+				var textChatCounterBadgeSpan = document.createElement('DIV');
+				//textChatCounterBadgeSpan.innerHTML = participantsCount;
 
 				if(!Q.info.isMobile) {
 					var screenSharingBtn = document.createElement('DIV');
@@ -155,9 +171,14 @@
 				counterBadge.appendChild(counterBadgeSpan);
 				usersBtnCon.appendChild(counterBadge);
 				controlBarCon.appendChild(usersBtnCon);
+				textChatBtnCon.appendChild(textChatBtn);
+				textChatBtnCon.appendChild(textChatBtnIcon);
+				textChatCounterBadge.appendChild(textChatCounterBadgeSpan);
+				textChatBtnCon.appendChild(textChatCounterBadge);
+				controlBarCon.appendChild(textChatBtnCon);
 				controlBar.appendChild(controlBarCon);
 
-				tool.controlBar = counterBadgeSpan;
+				tool.controlBar = controlBar;
 				tool.cameraBtn = cameraBtn;
 				tool.cameraBtnIcon = cameraBtnIcon;
 				//tool.speakerBtn = speakerBtn;
@@ -208,7 +229,126 @@
 					tool.toggleAudio();
 				})
 
+				textChatBtnCon.addEventListener('mouseup', function () {
+					tool.textChat.toggle();
+				})
+
 				return controlBar;
+			},
+
+			textChat: function() {
+				var tool = this;
+				function createPopup() {
+					var dialogue=document.createElement('DIV');
+					dialogue.className = 'dialog-box text-chat webrtc_tool_hidden';
+
+					var dialogTitle=document.createElement('H3');
+					dialogTitle.innerHTML = 'Conference chat';
+					dialogTitle.className = 'dialog-header Q_dialog_title';
+
+					var dialogInner=document.createElement('DIV');
+					dialogInner.className = 'dialog-inner';
+					var chatBox=document.createElement('DIV');
+					chatBox.className = 'webrtc_tool_popup-chat-box';
+
+
+					var close=document.createElement('div');
+					close.className = 'close-dialog-sign';
+					close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
+					close.style.backgroundRepeat = 'no-repeat';
+					close.style.backgroundSize = 'cover';
+
+
+					var chooseCameraList = document.createElement('DIV');
+					chooseCameraList.className = 'choose-device';
+
+					dialogInner.appendChild(dialogTitle);
+					dialogInner.appendChild(chatBox);
+
+					dialogue.appendChild(close);
+					dialogue.appendChild(dialogInner);
+					webRTCclass.roomsMediaContainer().appendChild(dialogue);
+
+					var controlsRect = tool.controlBar.getBoundingClientRect();
+					if(Q.info.isMobile) {
+						dialogue.style.left = (window.innerWidth / 2) - (285 / 2) + 'px';
+						dialogue.style.bottom = (controlsRect.height + 10) + 'px';
+					} else {
+						dialogue.style.left = (controlsRect.left + controlsRect.width + 15) + 'px';
+					}
+
+
+					close.addEventListener('click', function () {
+						tool.textChat.hide();
+					});
+
+					tool.chatDialogue = chatBox;
+					tool.chatBox = chatBox;
+
+					setTimeout(function () {
+						Q.activate(
+							Q.Tool.setUpElement(
+								dialogue, // or pass an existing element
+								"Q/resize",
+								{
+									movable: true,
+									resizeByWheel: false,
+									active: true,
+								}
+							),
+							{},
+							function () {
+								var tool = this;
+							}
+						);
+					}, 3000)
+
+					tool.textChat = {
+						chatDialogue: dialogue,
+						chatBox: chatBox,
+						isHidden: true,
+						hide: function () {
+							if(!this.chatDialogue.classList.contains('webrtc_tool_hidden')){
+								this.chatDialogue.classList.add('webrtc_tool_hidden');
+								this.isHidden = true;
+							}
+						},
+						show: function () {
+							if(this.chatDialogue.classList.contains('webrtc_tool_hidden')) {
+								this.chatDialogue.classList.remove('webrtc_tool_hidden');
+								this.chatBox.scrollTop = this.chatBox.scrollHeight;
+								this.isHidden = false;
+							}
+						},
+						toggle: function () {
+							if(this.isHidden) {
+								this.show();
+							} else this.hide();
+						}
+					}
+
+				}
+
+				function init() {
+					createPopup();
+
+					Q.activate(
+						tool.chatBox.appendChild(
+							Q.Tool.setUpElement(
+								"div", // or pass an existing element
+								"Streams/chat",
+								{
+									publisherId:webRTCclass.options().roomPublisherId,
+									streamName:'Streams/webrtc/' + webRTCclass.options().roomId,
+								}
+							)
+						)
+					);
+				}
+
+				return {
+					init: init,
+				}
 			},
 
 			/**
@@ -1071,7 +1211,7 @@
 								return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 							}).length;
 
-							//console.log('checkActiveMediaTracks', enabledVideoTracks)
+							//console.log('checkActiveMediaTracks', participant, enabledVideoTracks)
 							if(enabledVideoTracks == 0) {
 
 								for(var s in screens) {

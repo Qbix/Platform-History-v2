@@ -19,6 +19,7 @@
 
 		{
 			active: false,
+			resizeByWheel: true,
 			keepRatioBasedOnElement: null,
 			appliedRecently: false,
 			onMoved: new Q.Event(),
@@ -63,6 +64,7 @@
 				var tool = this;
 				var elementToResize = tool.element;
 				var elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
+				var elementComputedStyle = window.getComputedStyle(elementToResize);
 				var moveWithinEl = document.body;
 
 				var _dragElement = (function (){
@@ -103,10 +105,14 @@
 							elementToMove.style.height = elRect.height + 'px';
 						}
 						var elementPosition = elementToMove.style.position;
+						console.log('elementPosition0', elementPosition,  elementPosition == '')
+
+						elementPosition = elementPosition != '' && elementPosition != null ? elementPosition : elementComputedStyle.position;
+						console.log('elementPosition', elementPosition)
 						if(elementPosition == 'fixed'){
 							elementToMove.style.top = elRect.top + 'px';
 							elementToMove.style.left = elRect.left + 'px';
-						} else if (elementPosition == 'absolute') {
+						} else if (elementPosition == 'absolute' || elementPosition == 'relative' || elementPosition == 'static') {
 							elementToMove.style.top = elementToMove.offsetTop + 'px';
 							elementToMove.style.left = elementToMove.offsetLeft + 'px';
 						}
@@ -250,21 +256,22 @@
 							}
 
 							if (e.pageY <= _oldy) {
-								elementHeight = _latestHeightValue + (_oldy - e.pageY);
+								elementHeight = _latestHeightValue - Math.abs(e.pageY - _oldy);
 							} else if (e.pageY > _oldy) {
-								elementHeight = _latestHeightValue - (e.pageY - _oldy);
+								elementHeight = _latestHeightValue + Math.abs(_oldy - e.pageY);
 							}
 
 						} else if(_handlerPosition == 'topright') {
 							if (e.pageX <= _oldx) {
-								elementWidth = _latestWidthValue - (_oldx - e.pageX);
+								elementWidth = _latestWidthValue - Math.abs(_oldx - e.pageX);
 							} else if (e.pageX > _oldx) {
 								elementWidth = _latestWidthValue + (e.pageX - _oldx);
 							}
+
 							if (e.pageY <= _oldy) {
-								elementHeight = _latestHeightValue - (_oldy - e.pageY);
+								elementHeight = _latestHeightValue + Math.abs(e.pageY - _oldy);
 							} else if (e.pageY > _oldy) {
-								elementHeight = _latestHeightValue + (e.pageY - _oldy);
+								elementHeight = _latestHeightValue - Math.abs(_oldy - e.pageY);
 							}
 
 						} else if(_handlerPosition == 'topleft') {
@@ -393,7 +400,7 @@
 						topLeftHandler.dataset.position = 'topleft';
 						element.appendChild(topLeftHandler);
 
-						bindMouseWheelEvent(element);
+						if(tool.state.resizeByWheel) bindMouseWheelEvent(element);
 						resizeHandler.addEventListener('mousedown', initialise)
 						leftBottomHandler.addEventListener('mousedown', initialise)
 						topRightHandler.addEventListener('mousedown', initialise)
