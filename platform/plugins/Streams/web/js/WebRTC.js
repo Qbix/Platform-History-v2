@@ -1789,6 +1789,14 @@
 			}
 		};
 
+		module.roomsMediaContainer = function () {
+			return _roomsMedia;
+		};
+
+		module.options = function () {
+			return _options;
+		};
+
 
 		return module;
 	};

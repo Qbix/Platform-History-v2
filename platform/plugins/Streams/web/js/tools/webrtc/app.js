@@ -120,7 +120,7 @@ WebRTCconferenceLib = function app(options){
 
 	var _isMobile;
 	var _isiOS;
-	var _debug = false;
+	var _debug = true;
 
 	var pc_config = {"iceServers": [
 			{
@@ -1649,6 +1649,7 @@ WebRTCconferenceLib = function app(options){
 			newParticipant.identity = participant.identity;
 			newParticipant.isLocal = false;
 			newParticipant.twilioInstance = participant;
+			newParticipant.online = performance.now();
 
 			participantConnected(newParticipant);
 			return  newParticipant;
@@ -1680,7 +1681,7 @@ WebRTCconferenceLib = function app(options){
 			if(_debug) console.log("trackAdded:",track, participant.sid);
 
 			var existingParticipant = roomParticipants.filter(function (roomParticipant) {
-				if(_debug) console.log("trackAdded:  roomParticipant.sid", roomParticipant.sid);
+				if(_debug) console.log("trackAdded:  roomParticipant.sid", participant.sid, roomParticipant.sid);
 
 				return roomParticipant.sid == participant.sid;
 			})[0];
@@ -1726,6 +1727,7 @@ WebRTCconferenceLib = function app(options){
 			app.checkOnlineStatusInterval = setInterval(function () {
 				var i, participant;
 				for (i = 0; participant = roomParticipants[i]; i++){
+					console.log('checkOnlineStatus : participantDisconnected',  performance.now() - participant.online)
 					if(participant != localParticipant && participant.online != null && performance.now() - participant.online >= 3000) {
 						if(_debug) console.log('checkOnlineStatus : participantDisconnected')
 						participantDisconnected(participant);
