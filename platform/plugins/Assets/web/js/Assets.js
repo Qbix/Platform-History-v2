@@ -289,6 +289,11 @@
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			stripe: function (options, callback) {
+				if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
+					_redirectToBrowserTab(options);
+					return;
+				}
+
 				var paymentOptions = JSON.stringify(options);
 
 				var err;
@@ -313,10 +318,6 @@
 				}
 				if (!o.userId) {
 					o.userId = Q.Users.loggedInUser ? Q.Users.loggedInUser.id : null;
-				}
-				if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
-					_redirectToBrowserTab(paymentOptions);
-					return;
 				}
 
 				try {
@@ -597,6 +598,7 @@
 	function _redirectToBrowserTab(paymentOptions) {
 		var url = new URL(document.location.href);
 		url.searchParams.set('browsertab', 'yes');
+		paymentOptions.userId = Q.Users.loggedInUserId();
 		url.searchParams.set('paymentOptions', JSON.stringify(paymentOptions));
 		cordova.plugins.browsertab.openUrl(url.toString());
 	}
@@ -605,7 +607,7 @@
 		window.onload = function() {
 			var params = new URLSearchParams(document.location.href);
 			try {
-				var paymentOptions = JSON.parse(JSON.parse(params.get('paymentOptions')));
+				var paymentOptions = JSON.parse(params.get('paymentOptions'));
 			} catch(err) {
 				console.warn('Undefined payment options');
 				throw(err);
