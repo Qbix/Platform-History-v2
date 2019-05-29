@@ -30,7 +30,7 @@
 function Places_geolocation_post()
 {
 	$user = Users::loggedInUser(true);
-	$stream = Places_Location::userStream();
+	$stream = Places_Location::userStream(false, $created);
 	$oldLatitude = $stream->getAttribute('latitude');
 	$oldLongitude = $stream->getAttribute('longitude');
 	$oldMeters = $stream->getAttribute('meters');
@@ -207,5 +207,6 @@ function Places_geolocation_post()
 			);
 		}
 	}
+	$attributes['created'] = $created;
 	Q::event("Places/geolocation", $attributes, 'after');
 }
