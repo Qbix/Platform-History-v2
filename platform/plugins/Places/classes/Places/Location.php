@@ -7,11 +7,13 @@ class Places_Location
 	 * @method userStream
 	 * @param {boolean} [$throwIfNotLoggedIn=false]
 	 *   Whether to throw a Users_Exception_NotLoggedIn if no user is logged in.
+	 * @param {boolean} [$created] Optional reference to a variable that
+	 *   will be set to true if the stream was created, or false otherwise.
 	 * @return {Streams_Stream|null}
 	 * @throws {Users_Exception_NotLoggedIn} If user is not logged in and
 	 *   $throwIfNotLoggedIn is true
 	 */
-	static function userStream($throwIfNotLoggedIn = false)
+	static function userStream($throwIfNotLoggedIn = false, &$created = null)
 	{
 		$user = Users::loggedInUser($throwIfNotLoggedIn);
 		if (!$user) {
@@ -24,6 +26,9 @@ class Places_Location
 				'name' => $streamName
 			));
 			$stream->join();
+			$created = true;
+		} else {
+			$created = false;
 		}
 		return $stream;
 	}
