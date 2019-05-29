@@ -34,7 +34,8 @@ class Places_Geohash
      * @static
 	 * @param {float} $latitude
 	 * @param {float} $longitude
-	 * @param {integer} [$length] Optional length of the resulting geohash
+	 * @param {integer} [$length] Optional length of the resulting geohash.
+     *  Defaults to the length needed to encode the non-decimal part of lat, long.
 	 * @return {string}
      */
     static public function encode($latitude, $longtitude, $length = null){
