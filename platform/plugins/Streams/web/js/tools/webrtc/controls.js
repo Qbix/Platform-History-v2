@@ -83,10 +83,11 @@
 				var tool = this;
 				webRTClib.event.on('participantConnected', function (participant) {
 					tool.participantsPopup().addItem(participant);
-					var screens = webRTClib.screens(true);
-					for (var i in screens) {
-						if(screens[i].soundMeter.visualizations.participantsPopup != null) screens[i].soundMeter.visualizations.participantsPopup.reset();
+					var participants = webRTClib.roomParticipants();
+					for (var i in participants) {
+						if(participants[i].soundMeter.visualizations.participantsPopup != null) participants[i].soundMeter.visualizations.participantsPopup.reset();
 					}
+
 					var participantsCount = webRTClib.roomParticipants().length;
 					tool.usersCounter.innerHTML = participantsCount;
 				});
@@ -96,6 +97,21 @@
 					var participantsCount = webRTClib.roomParticipants().length;
 					tool.usersCounter.innerHTML = participantsCount;
 				});
+
+				var roomStream = webRTCclass.roomStream();
+				console.log('roomStream', roomStream)
+				roomStream.onMessage('Streams/chat/message').set(function () {
+					console.log('roomStream NEW MESSAGE', roomStream)
+
+					if(tool.textChat.isHidden) {
+						var msgCounterBadge = tool.newMessagesCounter.parentNode;
+						if(msgCounterBadge.classList.contains('webrtc_tool_hidden')) msgCounterBadge.classList.remove('webrtc_tool_hidden');
+
+						var currentMsgNum = tool.newMessagesCounter.innerHTML != '' ? parseInt(tool.newMessagesCounter.innerHTML, 10) : 0;
+						console.log('currentMsgNum', currentMsgNum, tool.newMessagesCounter.innerHTML)
+						tool.newMessagesCounter.innerHTML = currentMsgNum + 1;
+					}
+				}, tool);
 			},
 
 			/**
@@ -139,7 +155,7 @@
 				usersBtnIcon.innerHTML = icons.user;
 				var counterBadge = document.createElement('DIV');
 				counterBadge.className = 'webrtc_tool_users-counter';
-				var counterBadgeSpan = document.createElement('DIV');
+				var counterBadgeSpan = document.createElement('SPAN');
 				var participantsCount = webRTClib.roomParticipants().length;
 				counterBadgeSpan.innerHTML = participantsCount;
 				var textChatBtnCon = document.createElement('DIV');
@@ -150,8 +166,8 @@
 				textChatBtnIcon.className = 'webrtc_tool_text-chat-icon';
 				textChatBtnIcon.innerHTML = icons.textChat;
 				var textChatCounterBadge = document.createElement('DIV');
-				textChatCounterBadge.className = 'webrtc_tool_text-chat-counter';
-				var textChatCounterBadgeSpan = document.createElement('DIV');
+				textChatCounterBadge.className = 'webrtc_tool_text-chat-counter webrtc_tool_hidden';
+				var textChatCounterBadgeSpan = document.createElement('SPAN');
 				//textChatCounterBadgeSpan.innerHTML = participantsCount;
 
 				if(!Q.info.isMobile) {
@@ -186,6 +202,7 @@
 				tool.usersBtn = usersBtn;
 				tool.usersBtnIcon = usersBtnIcon;
 				tool.usersCounter = counterBadge;
+				tool.newMessagesCounter = textChatCounterBadgeSpan;
 
 
 
@@ -318,6 +335,10 @@
 								this.chatDialogue.classList.remove('webrtc_tool_hidden');
 								this.chatBox.scrollTop = this.chatBox.scrollHeight;
 								this.isHidden = false;
+
+								tool.newMessagesCounter.innerHTML = '0';
+								var msgCounter = tool.newMessagesCounter.parentNode;
+								if(!msgCounter.classList.contains('webrtc_tool_hidden')) msgCounter.classList.add('webrtc_tool_hidden');
 							}
 						},
 						toggle: function () {
@@ -880,7 +901,6 @@
 
 						screen.screenEl.style.display = 'none';
 							this.isActive = false;
-							console.log('removeScreen')
 							this.muteVideo();
 							tool.state.webrtcClass.screenRendering.updateLayout();
 
@@ -890,7 +910,6 @@
 						if(this.isActive === true || this.manuallyToggled) return;
 						//if(screen.screenEl.parentNode != null) {
 							screen.screenEl.style.display = '';
-						console.log('showScreen')
 
 						this.isActive = true;
 							this.unmuteVideo();
@@ -942,11 +961,10 @@
 
 					var audioVisualization = document.createElement('DIV')
 					audioVisualization.className = 'webrtc_tool_popup-visualization';
-					var screen = roomParticipant.screens[0];
 
 					webRTClib.screensInterface.audioVisualization().build({
 						name:'participantsPopup',
-						screen: screen,
+						participant: roomParticipant,
 						element:audioVisualization,
 						updateSizeOnlyOnce:true,
 					});
@@ -1029,7 +1047,7 @@
 					var item = tool.participantsList.filter(function (listItem) {
 						return listItem.participant.sid == participant.sid;
 					})[0];
-					item.remove();
+					if(item != null) item.remove();
 				}
 
 				/**
@@ -1115,10 +1133,9 @@
 										tool.state.webrtcClass.stop();
 									});
 									setTimeout(function () {
-										var screens = webRTClib.screens(true);
-										for (var i in screens) {
-											console.log('screens[i].soundMeter.visualizations', screens[i].soundMeter.visualizations.participantsPopup)
-											screens[i].soundMeter.visualizations.participantsPopup.reset();
+										var participants = webRTClib.roomParticipants();
+										for (var i in participants) {
+											if(participants[i].soundMeter.visualizations.participantsPopup != null) participants[i].soundMeter.visualizations.participantsPopup.reset();
 										}
 									}, 3000)
 								},
@@ -1132,9 +1149,9 @@
 								tool.hoverTimeout.participantsPopup = null;
 							}
 
-							var screens = webRTClib.screens(true);
-							for (var i in screens) {
-								screens[i].soundMeter.visualizations.participantsPopup.reset();
+							var participants = webRTClib.roomParticipants();
+							for (var i in participants) {
+								if(participants[i].soundMeter.visualizations.participantsPopup != null) participants[i].soundMeter.visualizations.participantsPopup.reset();
 							}
 
 							tool.usersBtn.parentNode.classList.add('webrtc_tool_hover');
