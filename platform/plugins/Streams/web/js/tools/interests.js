@@ -101,7 +101,7 @@ Q.Tool.define("Streams/interests", function (options) {
 		Streams.Interests.load(state.communityId, function () {
 			var categories = state.ordering
 				= state.ordering || Object.keys(Interests.all[state.communityId]);
-			Q.each(state.ordering, function (i, category) {
+			Q.each(categories, function (i, category) {
 				addExpandable(
 					category, 
 					Interests.all[state.communityId][category], 
