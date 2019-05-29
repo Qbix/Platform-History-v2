@@ -738,7 +738,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".content");
-		if (strlen($value) > 8192)
+		if (strlen($value) > 4095)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".content");
 		return array('content', $value);			
 	}
@@ -750,7 +750,7 @@ return array (
 	function maxSize_content()
 	{
 
-		return 8192;			
+		return 4095;			
 	}
 
 	/**
@@ -764,7 +764,7 @@ return array (
   0 => 
   array (
     0 => 'varchar',
-    1 => '8192',
+    1 => '4095',
     2 => '',
     3 => false,
   ),

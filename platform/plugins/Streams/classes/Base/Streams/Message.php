@@ -82,7 +82,7 @@ abstract class Base_Streams_Message extends Db_Row
 	 * @property $content
 	 * @type string
 	 * @default ""
-	 * short human-readable content, like twitter and its 140 characters
+	 * store human-readable content here
 	 */
 	/**
 	 * @property $instructions
@@ -737,7 +737,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".content");
-		if (strlen($value) > 1023)
+		if (strlen($value) > 4095)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".content");
 		return array('content', $value);			
 	}
@@ -749,7 +749,7 @@ return array (
 	function maxSize_content()
 	{
 
-		return 1023;			
+		return 4095;			
 	}
 
 	/**
@@ -763,7 +763,7 @@ return array (
   0 => 
   array (
     0 => 'varchar',
-    1 => '1023',
+    1 => '4095',
     2 => '',
     3 => false,
   ),
@@ -791,7 +791,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".instructions");
-		if (strlen($value) > 4092)
+		if (strlen($value) > 8191)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".instructions");
 		return array('instructions', $value);			
 	}
@@ -803,7 +803,7 @@ return array (
 	function maxSize_instructions()
 	{
 
-		return 4092;			
+		return 8191;			
 	}
 
 	/**
@@ -817,7 +817,7 @@ return array (
   0 => 
   array (
     0 => 'varchar',
-    1 => '4092',
+    1 => '8191',
     2 => '',
     3 => false,
   ),
