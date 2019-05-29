@@ -1,8 +1,12 @@
 .Streams_participating_stream {
+	table-layout: fixed;
 	width: 100%;
 }
 .Streams_participating_stream th {
 	text-align: center;
+}
+.Streams_participating_stream th[data-type=checkmark] {
+	width: 100px;
 }
 .Streams_participating_stream tr {
 	background-color: #eeeeff;
@@ -17,15 +21,21 @@
 }
 .Streams_participating_stream td[data-type=title],
 .Streams_participating_stream td[data-type=checkmark] {
-	padding: 15px 0;
-}
-.Streams_participating_stream td[data-type=title] {
+	padding: 5px 0;
 	white-space: nowrap;
 }
 .Streams_participating_stream td[data-type=title] > * {
 	display: inline-block;
 	line-height: 40px;
 	vertical-align: top;
+}
+.Streams_participating_stream td[data-type=title] > div {
+	font-size: 20px;
+	font-weight: normal;
+	width: calc(100% - 40px);
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 .Streams_participating_stream td[data-type=checkmark] {
 	text-align: center;
@@ -42,14 +52,6 @@
 .Streams_participating_stream img.Streams_participating_stream_icon {
 	margin: 0 5px;
 }
-.Streams_participating_stream div[data-type=title] > div {
-	font-size: 20px;
-	font-weight: normal;
-	width: 220px;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-}
 .Streams_participating_stream .Streams_participants_tool {
 	position: relative;
 }
@@ -57,12 +59,16 @@
 	position: absolute;
 	right: 40px;
 }
-.Q_tool.Q_expandable_tool h2 {
+.Streams_participating .Q_tool.Q_expandable_tool h2 {
 	padding: 10px;
 	background-color: rgba(180, 200, 220, 0.7);
 	font-weight: 400;
 }
-.Q_tool.Q_expandable_tool h2 span {
+.Streams_participating .Q_tool.Q_expandable_tool h2 span {
 	font-weight: normal;
 	color: blue;
+}
+.Streams_participating .Q_tool.Q_expandable_tool .Q_expandable_container {
+	padding-left: 0;
+	padding-right: 0;
 }
