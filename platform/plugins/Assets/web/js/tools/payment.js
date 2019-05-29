@@ -35,6 +35,9 @@ Q.Tool.define("Assets/payment", function (options) {
 	if (!Q.Users.loggedInUser) {
 		throw new Q.Error("Assets/payment: Don't render tool when user is not logged in");
 	}
+
+
+
 	if (['authnet', 'stripe'].indexOf(payments) < 0) {
 		throw new Q.Error("Assets/payment: payments must be either 'authnet' or 'stripe'");
 	}
@@ -46,6 +49,19 @@ Q.Tool.define("Assets/payment", function (options) {
 	}
 	
 	tool.$('.Assets_pay').on(Q.Pointer.click, function () {
+		if (typeof sgap === 'object') {
+			Q.Assets.Payments.cordova(state, function (err) {
+				if (err) {
+					alert(Q.firstErrorMessage(err));
+					return;
+				}
+
+				Q.handle(state.onPay, tool, arguments);
+			});
+
+			return false;
+		}
+
 		Q.Assets.Payments[payments](state, function (err) {
 			if (err) {
 				if (err.code !== 20) {
@@ -61,6 +77,7 @@ Q.Tool.define("Assets/payment", function (options) {
 
 { // default options here
 	planPublisherId: Q.Users.communityId,
+	userId: Q.Users.loggedInUserId(),
 	planStreamName: null,
 	onPay: new Q.Event()
 },

@@ -648,7 +648,7 @@ Base.prototype.beforeSet_content = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".content");
-		if (typeof value === "string" && value.length > 8192)
+		if (typeof value === "string" && value.length > 4095)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".content");
 		return value;
 };
@@ -659,7 +659,7 @@ Base.prototype.beforeSet_content = function (value) {
 	 */
 Base.prototype.maxSize_content = function () {
 
-		return 8192;
+		return 4095;
 };
 
 	/**
@@ -668,7 +668,7 @@ Base.prototype.maxSize_content = function () {
 	 */
 Base.column_content = function () {
 
-return [["varchar","8192","",false],false,"",null];
+return [["varchar","4095","",false],false,"",null];
 };
 
 /**
