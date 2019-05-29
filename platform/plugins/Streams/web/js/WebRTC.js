@@ -129,8 +129,13 @@
 
 				screensRendering.updateLayout();
 			});
-			WebRTCconference.event.on('trackAdded', function (participant) {
-				if(_debug) console.log('%c TWILIO: TRACK ADDED', 'background:blue;color:white;', participant)
+			WebRTCconference.event.on('screenAdded', function (participant) {
+				console.log('%c TWILIO: SCREEN ADDED', 'background:blue;color:white;', participant)
+				//screensRendering.updateLayout();
+			});
+			WebRTCconference.event.on('trackAdded', function (e) {
+				console.log('%c TWILIO: TRACK ADDED', 'background:blue;color:white;', e)
+				if(e.track.kind == 'video') e.screen.isActive = true;
 				screensRendering.updateLayout();
 			});
 
@@ -413,7 +418,7 @@
 				function doPlayTracks() {
 					var i, screen;
 					for (i = 0; screen = roomScreens[i]; i++) {
-						if(screen.videoTrack != null) {
+						if(screen.videoTrack != null && screen.isActive) {
 							var promise = screen.videoTrack.play();
 							if (promise !== undefined) {
 								promise.catch(error => {
@@ -515,7 +520,7 @@
 
 				WebRTCconference.screensInterface.audioVisualization().build({
 					name:'participantScreen',
-					screen: screen,
+					participant: screen.participant,
 					element:participantVoice,
 					stopOnMute:true,
 				});
@@ -804,10 +809,10 @@
 			}
 
 			function resetAudioVisualization() {
-				var roomScreens = WebRTCconference.screens();
-				roomScreens.map(function (screen) {
-					if(screen.soundMeter.visualizations.participantScreen != null) screen.soundMeter.visualizations.participantScreen.reset();
-				});
+				var participants = WebRTCconference.roomParticipants();
+				for (var i in participants) {
+					if(participants[i].soundMeter.visualizations.participantScreen != null) participants[i].soundMeter.visualizations.participantScreen.reset();
+				}
 			}
 
 			function moveScreenFront(e) {
@@ -832,6 +837,7 @@
 				console.log('showLoader')
 				var screen = participant.screens[0];
 				screen.videoIsChanging = true;
+				participant.videoIsChanging = true;
 				if(loaderName == 'videoTrackIsBeingAdded' || loaderName == 'beforeCamerasToggle') {
 					var loader = screen.screenEl.querySelector('.spinner-load');
 					if(loader != null) return;
@@ -876,6 +882,7 @@
 				console.log('hideLoader', participant)
 				var screen = participant.screens[0];
 				screen.videoIsChanging = false;
+				participant.videoIsChanging = false;
 				if(loaderName == 'screensharingFailed' || loaderName == 'videoTrackLoaded' || loaderName == 'afterCamerasToggle') {
 					var loader = screen.screenEl.querySelector('.spinner-load');
 					if(loader != null && loader.parentNode != null) loader.parentNode.removeChild(loader);
@@ -1482,6 +1489,7 @@
 					var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
 					var parentWidth = containerRect.width;
 					var parentHeight = containerRect.height;
+
 					var size = {parentWidth:parentWidth, parentHeight:parentHeight}
 					var rects = [];
 
@@ -1490,9 +1498,10 @@
 					var spaceBetween = 10;
 					var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
 
-					var startX = (size.parentWidth / 2) - (elementToWrap.width / 2);
+					var startX = (size.parentWidth / 2);
 					var startY = (size.parentHeight - (elementToWrap.height));
 					var startingRect = new DOMRect(startX, startY-10, 200, 100);
+
 					var widthToTheLeft = startX;
 					var widthToTheRight = size.parentWidth - (startingRect.x + startingRect.width);
 
@@ -1548,7 +1557,7 @@
 							} else {
 
 								y = startingRect.y
-								x = startingRect.x + (startingRect.width + spaceBetween);
+								x = (elementToWrap.left + elementToWrap.width + spaceBetween);
 							}
 							rightSideCounter++;
 							side = 'left';
@@ -1573,7 +1582,8 @@
 							} else {
 
 								y = startingRect.y;
-								x = startingRect.x - (rectWidth + spaceBetween);
+								x = (elementToWrap.left - (rectWidth + spaceBetween));
+
 							}
 							leftSideCounter++;
 							side = 'right';
@@ -1791,6 +1801,10 @@
 
 		module.roomsMediaContainer = function () {
 			return _roomsMedia;
+		};
+
+		module.roomStream = function () {
+			return _roomStream;
 		};
 
 		module.options = function () {
