@@ -28,6 +28,7 @@ module.exports = Base;
  */
 Base.tableClasses = [
 	"Places_Autocomplete",
+	"Places_Location",
 	"Places_Postcode"
 ];
 
@@ -56,6 +57,13 @@ Base.connectionName = function() {
  * @type Places.Autocomplete
  */
 Base.Autocomplete = Q.require('Places/Autocomplete');
+
+/**
+ * Link to Places.Location model
+ * @property Location
+ * @type Places.Location
+ */
+Base.Location = Q.require('Places/Location');
 
 /**
  * Link to Places.Postcode model

@@ -5,12 +5,12 @@
         }
 
         $content = '<table class="Streams_participating_stream"><tr>
-            <th>'.$participating['Title'].'</th>
-            <th>'.$participating['Subscribed'].'</th>'.join($participants).'</table>';
+            <th data-type="title">'.$participating['Title'].'</th>
+            <th data-type="checkmark">'.$participating['Subscribed'].'</th>'.join($participants).'</table>';
 
 		echo Q::Tool("Q/expandable", array(
 			'title' => $streamType.' <span>('.count($participants).')</span>',
             'content' => $content
-		), uniqid());
+		), $streamType);
     }?>
 </div>
