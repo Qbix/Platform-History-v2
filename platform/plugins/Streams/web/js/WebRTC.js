@@ -301,7 +301,10 @@
 					});
 
 				}, {
-					method: 'post'
+					method: 'post',
+					fields: {
+						publisherId: _options.roomPublisherId
+					}
 				});
 
 			} else {
@@ -1659,6 +1662,17 @@
 
 		var module = {};
 		module.screenRendering = screensRendering;
+		
+		/**
+		 * TODO: please document all methods in JS too
+		 * Starts a WebRTC room
+		 * @method start
+		 * @static
+		 * @param {String} publisherId The publisher of the Streams/webrtc stream to use
+		 * @param {String} [roomId=null] Set the room id, to use an existing room, otherwise new one is created
+		 * @param {Function} [callback] Called with (foo, bar) where foo is this, and bar is that.
+		 * @return {Boolean} whether the request was sent or something
+		 */
 		module.start = function(options) {
 			_options = Q.extend({}, _options, options);
 
@@ -1699,8 +1713,8 @@
 			);
 
 
-			var createRoomStream = function (roomId, asPublisherId) {
-				if(_debug) console.log('createRoomStream')
+			function createOrJoin (roomId, asPublisherId) {
+				if(_debug) console.log('createOrJoin')
 
 				Q.req("Streams/webrtc", ["stream"], function (err, response) {
 					var msg = Q.firstErrorMessage(err, response && response.errors);
@@ -1725,13 +1739,13 @@
 				}, {
 					method: 'post',
 					fields: {
-						streamName: roomId,
+						roomId: roomId,
 						publisherId: asPublisherId
 					}
 				});
 			}
 
-			var joinRoomStream = function (roomId, roomPublisherId) {
+			function joinRoomStream (roomId, roomPublisherId) {
 				if(_debug) console.log('joinRoomStream')
 				Q.req("Streams/webrtc", ["join"], function (err, response) {
 					var msg = Q.firstErrorMessage(err, response && response.errors);
@@ -1758,25 +1772,10 @@
 				});
 			}
 
-			if(roomId != null && _options.roomPublisherId != null) {
-				Q.Streams.get(_options.roomPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
-					if(stream != null){
-						joinRoomStream(roomId, _options.roomPublisherId);
-					} else {
-						createRoomStream(roomId, _options.roomPublisherId);
-					}
-
-
-
-				});
-				return;
+			if (_options.roomPublisherId == null) {
+				throw new Q.Exception("Streams.WebRTC.start(): publisherId is required")
 			}
-
-			if(roomId == null) {
-				createRoomStream(roomId, _options.roomPublisherId);
-			} else {
-				joinRoomStream(roomId, _options.roomPublisherId);
-			}
+			createOrJoin(roomId, _options.roomPublisherId);
 
 		}
 
