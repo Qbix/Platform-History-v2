@@ -458,7 +458,7 @@
 
 	function _applePayStripe(options, callback) {
 		if (!Assets.Payments.stripe.applePayAvailable) {
-			callback(_error('Apple pay is not available', 21));
+			return callback(_error('Apple pay is not available', 21));
 		}
 		var request = {
 			currencyCode: options.currency,
