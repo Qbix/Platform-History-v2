@@ -37,7 +37,9 @@
 		"Streams/task/progress": "Progress made on {{stream.fields.title}}",
 		"Streams/task/complete": "Task completed: {{stream.fields.title}}",
 		"Streams/task/error": "Error during: {{stream.fields.title}}",
-		"Streams/incoming/*": "{{app}}: Incoming Message"
+		"Streams/incoming/*": "{{app}}: Incoming Message",
+		"ManageEmailSubscriptions": "manage your email subscriptions",
+		"IfUnsubscribe": "If you want to unsubscribe"
 	},
 	"invite": {
 		"messageContent": "{{displayName}} invited you to {{inviteUrl}}",
