@@ -128,7 +128,11 @@
     z-index: 5;
     cursor: pointer;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_users-counter{
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_text-chat-btn{
+    cursor: pointer;
+}
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_users-counter,
+.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_text-chat-counter{
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -218,7 +222,8 @@
     z-index: 5;
 }
 
-.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner .webrtc_tool_users-counter{
+.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner .webrtc_tool_users-counter,
+.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner .webrtc_tool_text-chat-counter {
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -1381,6 +1386,16 @@
 .dialog-box.select-camera {
     padding: 0;
 }
+.dialog-box.text-chat {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    bottom: 0;
+    width: 285px;
+    height: 350px;
+    border-radius: 10px 10px 0 0;
+    pointer-events: auto;
+}
 .dialog-box .close-dialog-sign {
     position: absolute;
     color: black;
@@ -1393,6 +1408,7 @@
     box-shadow: 0 0 0 rgba(50,200,50, 0.4);
     animation: Q_wiggle 5s ease-in-out infinite, Q_grayscale 5s ease-in-out infinite;
     animation-delay: 5s;
+    z-index: 999;
 }
 .dialog-box .close-dialog-sign:before {
     /*content: "\02715";
@@ -1400,6 +1416,15 @@
 }
 .dialog-box .dialog-inner {
     overflow: hidden;
+}
+.dialog-box.text-chat  .dialog-inner {
+    overflow: hidden;
+    background: #ffffff;
+    height: 100%;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 .dialog-box h3.dialog-header {
     margin: 0;
@@ -1524,6 +1549,16 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
 .webrtc_tool_popup-box .dialog-btns-group button:first-child,
 .dialog-box .dialog-btns-group button:first-child{
     margin-right: 20px;
+}
+
+.dialog-box.text-chat .dialog-inner .webrtc_tool_popup-chat-box {
+    flex:1;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.dialog-box.text-chat .dialog-inner .Streams_chat_tool{
+    padding: 10px;
 }
 
 .webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_flex-row-item.loudest-screen-btn-con {
