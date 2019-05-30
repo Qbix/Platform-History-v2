@@ -27,19 +27,4 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
     function joinRoom($loggedUserId, $publisherId, $streamName) {
 
     }
-
-    /**
-     * @method getRoom
-     * @static
-     * @param {string} $$roomIdOrName The twilio roomId or room name
-     * @return {Streams_WebRTC_Room|null}
-	 * @throws Twilio_Exception
-	 */
-    function getRoom($roomIdOrName) {
-
-    }
-
-    function getParticipant($sid) {
-
-    }
 }

@@ -24,7 +24,7 @@ function Streams_webrtc_post($params = array())
 {
     $params = array_merge($_REQUEST, $params);
     Q_Valid::requireFields(array('publisherId', 'adapter'), $params, true);
-    Users::loggedInUser(true); // require that user's logged in
+    $userId = Users::loggedInUser(true)->id; // require that user's logged in
     $roomId = Q::ifset($params, 'roomId', null);
     switch ($_REQUEST['adapter']) {
         case 'node':
@@ -39,7 +39,7 @@ function Streams_webrtc_post($params = array())
     $className = "Streams_WebRTC_".ucfirst($adapter);
     $webrtc = new $className();
     $roomStream = $webrtc->createRoom($publisherId, $roomId);
-    $roomStream->join();
+	$webrtc->joinRoom($userId, $publisherId, $streamName);
 
     Q_Response::setSlot("stream", $roomStream);
 

@@ -10,8 +10,11 @@ class Streams_WebRTC_Twilio extends Streams_WebRTC implements Streams_WebRTC_Int
 	 * This class represents WebRTC rooms
 	 * @class Streams_WebRTC_Twilio
 	 * @constructor
+	 * @param {string} $publisherId
+	 * @param {string} $roomId
+	 * @param {boolean} [$join=true] Whether to join the room also
 	 */
-    function createRoom($publisherId, $roomId) {
+    function createRoom($publisherId, $roomId, $join = true) {
         if (empty($publisherId)) {
             throw new Q_Exception_RequiredField(array('field' => 'publisherId'));
         }
@@ -45,12 +48,12 @@ class Streams_WebRTC_Twilio extends Streams_WebRTC implements Streams_WebRTC_Int
         return $stream;
     }
     
-    function joinRoom($loggedUserId, $publisherId, $streamName) {
-        $stream = Streams::fetchOne($loggedUserId, $publisherId, $streamName);
+    function joinRoom($userId, $publisherId, $streamName) {
+        $stream = Streams::fetchOne($userId, $publisherId, $streamName);
         $participants = $stream->getParticipants(array(
             "state" => "participating"
         ));
-        if (!isset($participants[$loggedUserId])) {
+        if (!isset($participants[$userId])) {
             $stream->join();
         } else {
             Streams_Message::post(null, $publisherId, $streamName, array(
@@ -77,6 +80,7 @@ class Streams_WebRTC_Twilio extends Streams_WebRTC implements Streams_WebRTC_Int
             }
 
         }
+		$stream->join();
 
         //print_r($twilioRoom);die('1213');
         return $stream;
@@ -108,18 +112,6 @@ class Streams_WebRTC_Twilio extends Streams_WebRTC implements Streams_WebRTC_Int
 			'name' => $twilioRoom->uniqueName
 		));
         return $room;
-    }
-
-    function getParticipant($sid) {
-        $twilioAccountSid = Q_Config::expect('Streams', 'twilio', 'accountSid');
-        $twilioApiKey = Q_Config::expect('Streams', 'twilio', 'apiKey');
-        $twilioApiSecret = Q_Config::expect('Streams', 'twilio', 'apiSecret');
-        $authToken = Q_Config::expect('Streams', 'twilio', 'authToken');
-
-        $twilio = new Client($twilioApiKey, $twilioApiSecret, $twilioAccountSid);
-        $twilioParticipant = $twilio->video->rooms($sid)->participants->read(array("status" => "connected"));
-
-        return $twilioParticipant;
     }
 
     function getAccessToken($sid) {
