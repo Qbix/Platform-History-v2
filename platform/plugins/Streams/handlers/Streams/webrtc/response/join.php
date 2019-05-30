@@ -5,8 +5,8 @@ function Streams_webrtc_response_join($params = array()) {
 
     $loggedUserId = Users::loggedInUser(true)->id;
     $communityId = Users::communityId();
-    $streamName = Q::ifset($params, 'streamName', null);
     $publisherId = Q::ifset($params, 'publisherId', null);
+    $streamName = Q::ifset($params, 'streamName', null);
 
 
     $roomStream = Streams_WebRTC::joinRoom($loggedUserId, $publisherId, $streamName);
