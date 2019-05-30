@@ -26,19 +26,6 @@ interface Streams_WebRTC_Interface
      * TODO: please document every method
      */
     function joinRoom($loggedUserId, $publisherId, $streamName);
-    
-    /**
-     * @method getRoom
-     * @static
-     * @param {string} $sidOrName The twilio roomId or room name
-     * @return {WebRTC_Room|null}
-     */
-    function getRoom($sidOrName);
-    
-    /**
-     * TODO: please document every method
-     */
-    function getParticipant($sid);
 }
 
 /**

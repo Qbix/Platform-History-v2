@@ -8,8 +8,8 @@ function Streams_webrtc_response_join($params = array()) {
     $publisherId = Q::ifset($params, 'publisherId', null);
     $streamName = Q::ifset($params, 'streamName', null);
 
-
-    $roomStream = Streams_WebRTC::joinRoom($loggedUserId, $publisherId, $streamName);
+	$adapter = Streams_WebRTC_Twilio();
+    $roomStream = $adapter->joinRoom($loggedUserId, $publisherId, $streamName);
 
     Q_Response::setSlot('join', $roomStream);
 
