@@ -289,27 +289,21 @@
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			stripe: function (options, callback) {
-				if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
-					_redirectToBrowserTab(options);
-					return;
-				}
-
 				var err;
-				var o = Q.extend({},
+				options = Q.extend({},
 					Q.text.Assets.payments,
 					Assets.Payments.stripe.options,
 					options
 				);
-				if (!o.amount) {
+				if (!options.amount) {
 					err = _error("Assets.Payments.stripe: amount is required");
 					if (callback) {
 						callback(err);
 					}
 					return;
 				}
-				if (!o.userId) {
-					o.userId = Q.Users.loggedInUser ? Q.Users.loggedInUser.id : null;
-				}
+
+				options.userId = options.userId || Q.Users.loggedInUserId();
 
 				try {
 					Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
@@ -321,9 +315,9 @@
 					return;
 				}
 				if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari')) { // It's considered that ApplePay is supported in IOS Safari
-					_applePayStripe(o, function (err, res) {
+					_applePayStripe(options, function (err, res) {
 						if (err && (err.code === 21)) { // code 21 means that this type of payment is not supported in some reason
-							_standardStripe(o, callback);
+							_standardStripe(options, callback);
 							return;
 						}
 						if (callback) {
@@ -331,9 +325,9 @@
 						}
 					});
 				} else if (window.PaymentRequest) { // check for payment request
-					_paymentRequestStripe(o, function (err, res) {
+					_paymentRequestStripe(options, function (err, res) {
 						if (err && (err.code === 9)) {
-							_standardStripe(o, callback);
+							_standardStripe(options, callback);
 							return;
 						}
 						if (callback) {
@@ -341,34 +335,23 @@
 						}
 					});
 				} else {
-					_standardStripe(o, callback);
+					if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
+						_redirectToBrowserTab(options);
+					} else {
+						_standardStripe(options, callback);
+					}
 				}
 			},
 			/**
-			 * This method use applePay or googlePay what exist
+			 * This method use googlePay
 			 * and then charge that payment profile.
-			 * @method cordova
+			 * @method googlepay
 			 * @static
 			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
 			 *  @param {Number} options.amount the amount to pay.
 			 *  @param {String} [options.currency="usd"] the currency to pay in.
-			 *  @param {String} [options.publisherId=Q.Users.communityId] The publisherId of the Assets/product or Assets/service stream
-			 *  @param {String} [options.streamName] The name of the Assets/product or Assets/service stream
-			 *  @param {String} [options.name=Users::communityName()] The name of the organization the user will be paying
-			 *  @param {String} [options.image] The url pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
-			 *  @param {String} [options.description] A short name or description of the product or service being purchased.
-			 *  @param {String} [options.panelLabel] The label of the payment button in the Stripe Checkout form (e.g. "Pay {{amount}}", etc.). If you include {{amount}}, it will be replaced by the provided amount. Otherwise, the amount will be appended to the end of your label.
-			 *  @param {String} [options.zipCode] Specify whether Stripe Checkout should validate the billing ZIP code (true or false). The default is false.
-			 *  @param {Boolean} [options.billingAddress] Specify whether Stripe Checkout should collect the user's billing address (true or false). The default is false.
-			 *  @param {Boolean} [options.shippingAddress] Specify whether Checkout should collect the user's shipping address (true or false). The default is false.
-			 *  @param {String} [options.email] Set the email address, if any, provided to Stripe Checkout to be pre-filled.
-			 *  @param {Boolean} [options.allowRememberMe=true] Specify whether to include the option to "Remember Me" for future purchases (true or false).
-			 *  @param {Boolean} [options.bitcoin=false] Specify whether to accept Bitcoin (true or false).
-			 *  @param {Boolean} [options.alipay=false] Specify whether to accept Alipay ('auto', true, or false).
-			 *  @param {Boolean} [options.alipayReusable=false] Specify if you need reusable access to the customer's Alipay account (true or false).
-			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
-			cordova: function (options, callback) {
+			googlepay: function (options, callback) {
 				sgap.setKey(Assets.Payments.stripe.publishableKey).then(function () {
 					sgap.isReadyToPay()
 				}).then(function () {

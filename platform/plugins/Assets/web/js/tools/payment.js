@@ -30,17 +30,20 @@
 Q.Tool.define("Assets/payment", function (options) {
 	var tool = this;
 	var state = tool.state;
-	var $te = $(tool.element);
-	var payments = state.payments && state.payments.toLowerCase();
+
 	if (!Q.Users.loggedInUser) {
 		throw new Q.Error("Assets/payment: Don't render tool when user is not logged in");
 	}
 
+	var $button = tool.$('.Assets_pay');
+	if (typeof sgap === 'object' && Q.info.isAndroid()) {
+		state.payments = 'googlepay';
 
-
-	if (['authnet', 'stripe'].indexOf(payments) < 0) {
-		throw new Q.Error("Assets/payment: payments must be either 'authnet' or 'stripe'");
+		$button.html("Pay with Google Pay");
 	}
+
+	var payments = state.payments && state.payments.toLowerCase();
+
 	if (!state.amount) {
 		throw new Q.Error("Assets/payment: amount is required");
 	}
@@ -49,19 +52,6 @@ Q.Tool.define("Assets/payment", function (options) {
 	}
 	
 	tool.$('.Assets_pay').on(Q.Pointer.click, function () {
-		if (typeof sgap === 'object') {
-			Q.Assets.Payments.cordova(state, function (err) {
-				if (err) {
-					alert(Q.firstErrorMessage(err));
-					return;
-				}
-
-				Q.handle(state.onPay, tool, arguments);
-			});
-
-			return false;
-		}
-
 		Q.Assets.Payments[payments](state, function (err) {
 			if (err) {
 				if (err.code !== 20) {
