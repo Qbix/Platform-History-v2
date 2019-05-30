@@ -171,10 +171,12 @@ class Places_Geohash
      */
     static function fetchByDistance($query, $field, $center, $limit)
     {
-    	$above = (clone $query)->where(array(
+		$above = clone $query;
+    	$above = $above->where(array(
 	        $field => new Db_Range($center, true, false, null)
 	    ))->orderBy($field, true)->fetchDbRows();
-	    $below = (clone $query)->where(array(
+		$below = clone $query;
+	    $below = $below->where(array(
 		    $field => new Db_Range(null, false, false, $center)
 	    ))->orderBy($field, false)->fetchDbRows();
     	$result = array();
