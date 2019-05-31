@@ -20,6 +20,7 @@
 		{
 			active: false,
 			resizeByWheel: true,
+			activateOnElement: null,
 			keepRatioBasedOnElement: null,
 			appliedRecently: false,
 			onMoved: new Q.Event(),
@@ -64,6 +65,7 @@
 				var tool = this;
 				var elementToResize = tool.element;
 				var elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
+				var activateOnElement = tool.state.activateOnElement != null ? tool.state.activateOnElement : elementToMove;
 				var elementComputedStyle = window.getComputedStyle(elementToResize);
 				var moveWithinEl = document.body;
 
@@ -644,18 +646,18 @@
 				return {
 					bind: function () {
 						if(Q.info.isTouchscreen) {
-							elementToMove.addEventListener('touchstart', _dragElement.initMoving);
-							elementToMove.addEventListener('touchend', _dragElement.stopMoving);
+							activateOnElement.addEventListener('touchstart', _dragElement.initMoving);
+							activateOnElement.addEventListener('touchend', _dragElement.stopMoving);
 						} else {
-							elementToMove.addEventListener('mousedown', _dragElement.initMoving);
-							elementToMove.addEventListener('mouseup', _dragElement.stopMoving);
+							activateOnElement.addEventListener('mousedown', _dragElement.initMoving);
+							activateOnElement.addEventListener('mouseup', _dragElement.stopMoving);
 						}
 
 						tool.unbindEvents = function () {
-							elementToMove.removeEventListener('mousedown', _dragElement.initMoving);
-							elementToMove.removeEventListener('mouseup', _dragElement.stopMoving);
-							elementToMove.removeEventListener('mousedown', _dragElement.initMoving);
-							elementToMove.removeEventListener('mouseup', _dragElement.stopMoving);
+							activateOnElement.removeEventListener('mousedown', _dragElement.initMoving);
+							activateOnElement.removeEventListener('mouseup', _dragElement.stopMoving);
+							activateOnElement.removeEventListener('mousedown', _dragElement.initMoving);
+							activateOnElement.removeEventListener('mouseup', _dragElement.stopMoving);
 						}
 						resizeElement.setHandler(elementToResize);
 					}

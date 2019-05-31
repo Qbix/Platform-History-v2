@@ -1683,7 +1683,8 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     top: -7% !important;
 }
 
-.flipped video{
+.flipped video,
+.flipped canvas{
     transform: rotateY(180deg);
     -webkit-transform:rotateY(180deg); /* Safari and Chrome */
     -moz-transform:rotateY(180deg); /* Firefox */
