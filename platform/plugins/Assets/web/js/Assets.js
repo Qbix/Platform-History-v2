@@ -492,28 +492,42 @@
 	function _paymentRequestStripe(options, callback) {
 		var supportedInstruments = [
 			{
-				supportedMethods: ['basic-card'],
+				supportedMethods: 'basic-card',
 				data: {
 					supportedNetworks: ['amex', 'discover', 'mastercard', 'visa'],
 					supportedTypes: ['credit']
 				}
 			}
 		];
-		if (Assets.Payments.androidPay) {
+		if (Assets.Payments.googlePay) {
 			supportedInstruments.push({
-				supportedMethods: ['https://android.com/pay'],
+				supportedMethods: 'https://google.com/pay',
 				data: {
-					merchantId: Assets.Payments.androidPay.gateway,
-					environment: Assets.Payments.androidPay.environment,
-					allowedCardNetwork: ['amex', 'discover', 'mastercard', 'visa'],
-					paymentMethodTokenizationParameters: {
-						tokenizationType: 'GATEWAY_TOKEN',
+					environment: Assets.Payments.googlePay.environment,
+					apiVersion: 2,
+					apiVersionMinor: 0,
+					merchantInfo: {
+						// A merchant ID is available after approval by Google.
+						// @see {@link https://developers.google.com/pay/api/web/guides/test-and-deploy/integration-checklist}
+						merchantId: Assets.Payments.googlePay.merchantId,
+						merchantName: Assets.Payments.googlePay.merchantName
+					},
+					allowedPaymentMethods: [{
+						type: 'CARD',
 						parameters: {
-							'gateway': 'stripe',
-							'stripe:publishableKey': Assets.Payments.stripe.publishableKey,
-							'stripe:version': Assets.Payments.stripe.version
+							allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+							allowedCardNetworks: ["AMEX", "DISCOVER", "JCB", "MASTERCARD", "VISA"]
+						},
+						tokenizationSpecification: {
+							type: 'PAYMENT_GATEWAY',
+							// Check with your payment gateway on the parameters to pass.
+							// @see {@link https://developers.google.com/pay/api/web/reference/object#Gateway}
+							parameters: {
+								'gateway': Assets.Payments.googlePay.gateway,
+								'gatewayMerchantId': Assets.Payments.stripe.publishableKey
+							}
 						}
-					}
+					}]
 				}
 			})
 		}
@@ -548,7 +562,7 @@
 					});
 				});
 			}
-			if (result.methodName === 'https://android.com/pay') {
+			if (result.methodName === 'https://google.com/pay') {
 				promise = new Promise(function (resolve, reject) {
 					options.token = JSON.parse(result.details.paymentMethodToken);
 					return Q.Assets.Payments.pay('stripe', options, function (err) {
@@ -571,16 +585,14 @@
 		});
 	}
 
-	function _standardStripe(o, callback) {
-		Q.addScript(o.javascript, function () {
-			var params = Q.extend({
-				name: o.name,
-				amount: o.amount
-			}, o);
-			params.amount *= 100;
+	function _standardStripe(options, callback) {
+		Q.addScript(options.javascript, function () {
 			var token_triggered = false;
-			StripeCheckout.configure(Q.extend({
+			StripeCheckout.configure({
 				key: Assets.Payments.stripe.publishableKey,
+				name: options.name,
+				description: options.description,
+				amount: options.amount * 100,
 				closed: function() {
 					if (!token_triggered) {
 						callback(new Error('Cancelled'));
@@ -588,10 +600,10 @@
 				},
 				token: function (token) {
 					token_triggered = true;
-					o.token = token;
-					Assets.Payments.pay('stripe', o, callback);
+					options.token = token;
+					Assets.Payments.pay('stripe', options, callback);
 				}
-			}, params)).open();
+			}).open();
 		});
 	}
 
