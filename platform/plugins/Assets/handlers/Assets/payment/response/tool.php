@@ -24,45 +24,30 @@
  *  @param {boolean} [$options.alipay=false] Specify whether to accept Alipay ('auto', true, or false). 
  *  @param {boolean} [$options.alipayReusable=false] Specify if you need reusable access to the customer's Alipay account (true or false).
  */
-function Assets_payment_tool($options)
+function Assets_payment_response_tool($options)
 {
-	Q_Valid::requireFields(array('payments', 'amount'), $options, true);
-	if (empty($options['name'])) {
-		$options['name'] = Users::communityName();
+	$options = array_merge($_REQUEST, $options);
+	$supportedPayment = array('Authnet', 'Stripe');
+
+	Q_Valid::requireFields(array('payments'), $options, true);
+	$payments = $options["payments"];
+
+	if (!in_array($payments, $supportedPayment)) {
+		throw new Q_Exception("Unsupported payment method ".$payments.". Supported methods are: ".join(',', $supportedPayment));
 	}
-	if (!empty($options['image'])) {
-		$options['image'] = Q_Html::themedUrl($options['image']);
-	}
-	$options['payments'] = mb_strtolower($options['payments'], 'UTF-8');
-	if (empty($options['email'])) {
-		$options['email'] = Users::loggedInUser(true)->emailAddress;
-	}
-	$payments = ucfirst($options['payments']);
-	$currency = strtolower(Q::ifset($options, 'currency', 'usd'));
-	if ($payments === 'Authnet' and $currency !== 'usd') {
-		throw new Q_Exception("Authnet doesn't support currencies other than USD", 'currency');
-	}
+
 	$className = "Assets_Payments_$payments";
 	switch ($payments) {
 		case 'Authnet':
 			$adapter = new $className($options);
-		    $token = $options['token'] = $adapter->authToken();
-			$testing = $options['testing'] = Q_Config::expect('Assets', 'payments', $lcpayments, 'testing');
-			$action = $options['action'] = $testing
-				? "https://test.authorize.net/profile/manage"
-				: "https://secure.authorize.net/profile/manage";
+		    $token = $adapter->authToken();
+			$testing = Q_Config::expect('Assets', 'payments', $payments, 'testing');
+			$action = $testing ? "https://test.authorize.net/profile/manage" : "https://secure.authorize.net/profile/manage";
 			break;
 		case 'Stripe':
 			$publishableKey = Q_Config::expect('Assets', 'payments', 'stripe', 'publishableKey');
 			break;
 	}
-	$titles = array(
-		'Authnet' => 'Authorize.net',
-		'Stripe' => 'Stripe'
-	);
-	Q_Response::setToolOptions($options);
-	$payButton = Q::ifset($options, 'payButton', "Pay with " . $titles[$payments]);
-	return Q::view("Assets/tool/payment/$payments.php", compact(
-		'token', 'publishableKey', 'action', 'payButton'
-	));
+
+	return compact('token', 'action', 'publishableKey');
 };
