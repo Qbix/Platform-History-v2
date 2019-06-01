@@ -350,6 +350,7 @@
 			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
 			 *  @param {Number} options.amount the amount to pay.
 			 *  @param {String} [options.currency="usd"] the currency to pay in.
+			 *  @param {Function} [callback]
 			 */
 			googlepay: function (options, callback) {
 				sgap.setKey(Assets.Payments.stripe.publishableKey).then(function () {

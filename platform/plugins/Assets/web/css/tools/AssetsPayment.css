@@ -1,0 +1,10 @@
+.Q_tool.Assets_payment_tool .Assets_pay {
+	text-align: center;
+}
+#page .Q_tool.Assets_payment_tool .Assets_gpay {
+	width: 100px;
+	background-image: url('../../img/gpay.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 80%;
+}
