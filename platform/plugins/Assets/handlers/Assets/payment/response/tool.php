@@ -31,6 +31,7 @@ function Assets_payment_response_tool($options)
 
 	Q_Valid::requireFields(array('payments'), $options, true);
 	$payments = $options["payments"];
+	$currency = $options["currency"];
 
 	if (!in_array($payments, $supportedPayment)) {
 		throw new Q_Exception("Unsupported payment method ".$payments.". Supported methods are: ".join(',', $supportedPayment));
@@ -49,5 +50,9 @@ function Assets_payment_response_tool($options)
 			break;
 	}
 
-	return compact('token', 'action', 'publishableKey');
+	$symbol = Assets::currency($currency);
+
+	$text = Q_Text::get('Assets/content');
+
+	return compact('token', 'action', 'publishableKey', 'symbol', 'text');
 };
