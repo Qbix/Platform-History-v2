@@ -131,7 +131,7 @@ WebRTCconferenceLib = function app(options){
 
 	var _isMobile;
 	var _isiOS;
-	var _debug = false;
+	var _debug = true;
 
 	var pc_config = {
 		"iceServers": [
@@ -1308,7 +1308,7 @@ WebRTCconferenceLib = function app(options){
 
 				// get pixel data from input canvas
 				var pixelData = inputCtx.getImageData( 0, 0, videoWidth, videoHeight );
-console.log('pixelData', pixelData)
+				console.log('pixelData', pixelData)
 				/*var avg, i;
 
 				// simple greyscale transformation
@@ -1809,8 +1809,8 @@ console.log('pixelData', pixelData)
 					var disconnectTime = options.disconnectTime != null ? options.disconnectTime : 3000;
 
 					if(!participant.isLocal && participant.online && participant.latestOnlineTime != null && performance.now() - participant.latestOnlineTime >= disconnectTime) {
-						 if(_debug) console.log('checkOnlineStatus : remove', performance.now() - participant.latestOnlineTime, !participant.videoIsChanging)
-						 participantDisconnected(participant);
+						if(_debug) console.log('checkOnlineStatus : remove', performance.now() - participant.latestOnlineTime, !participant.videoIsChanging)
+						participantDisconnected(participant);
 					}
 				}
 			}, 1000);
@@ -3000,7 +3000,7 @@ console.log('pixelData', pixelData)
 					width: { min: 320, max: 1280 },
 					height: { min: 240, max: 720 },
 					deviceId: { exact: cameraId != null ? cameraId : deviceToSwitch.deviceId }
-					},
+				},
 			}).then(function (stream) {
 				var localVideoTrack = stream.getVideoTracks()[0];
 				console.log('ENABLE VIDEO: GOT STREAM');

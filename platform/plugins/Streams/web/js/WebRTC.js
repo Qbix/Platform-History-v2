@@ -2,7 +2,7 @@
 (function (Q, $) {
 
 	var Streams = Q.Streams;
-	var _debug = false;
+	var _debug = true;
 
 	/**
 	 * Runs  adapter for Streams/webrtc tools

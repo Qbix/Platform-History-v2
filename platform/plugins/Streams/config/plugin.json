@@ -390,6 +390,16 @@
 					"icon": "Streams/chat"
 				}
 			},
+			"Streams/webrtc": {
+				"description": "real time video/audio conference",
+				"defaults": {
+					"title": "Real Time Conference",
+					"icon": "Streams/webrtc"
+				},
+				"messages": {
+					"Streams/webrtc/joined": {}
+				}
+			},
 			"Streams/experience": {
 				"description": "a common experience for members of a community"
 			},
