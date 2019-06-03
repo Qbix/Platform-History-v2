@@ -1485,7 +1485,7 @@ class Q_Response
 	 * @param {boolean} [$options.loop=false] If false, and current URL is the same as the new one, skips setting the redirect header and just returns false.
 	 * @param {boolean} [$options.permanently=false] If true, sets response code as 304 instead of 302
 	 * @param {boolean} [$options.noProxy=false] If true, doesn't use the proxy mapping to determine URL
-	 * @param {boolean} [$options.withQuery=true] If true, attach all GET params to redirect url.
+	 * @param {boolean} [$options.querystring=true] If true, attach all existing GET params to redirect url.
 	 * @throws Q_Exception_BadValue
 	 * @return {boolean}
  	 *  Return whether the redirect header was set.
@@ -1523,8 +1523,8 @@ class Q_Response
 		if (!empty($loop) and Q_Request::url() === $url) {
 			return false;
 		}
-		if (!isset($withQuery) || $withQuery) {
-			$url .= $_SERVER['REQUEST_URI'];
+		if (!empty($querystring) and !empty($_SERVER['QUERY_STRING'])) {
+			$url = Q::fixUrl($url . '? ' . $_SERVER['QUERY_STRING']);
 		}
 		if (!Q_Request::isAjax()) {
 			if (!empty($permanently)) {
