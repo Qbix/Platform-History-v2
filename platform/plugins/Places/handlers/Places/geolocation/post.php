@@ -30,9 +30,14 @@
 function Places_geolocation_post()
 {
 	$user = Users::loggedInUser(true);
-	$stream = Places_Location::userStream(false, $created);
+	$stream = Places_Location::userStream();
 	$oldLatitude = $stream->getAttribute('latitude');
 	$oldLongitude = $stream->getAttribute('longitude');
+
+	if (empty($oldLatitude) || empty($oldLongitude)) {
+		$created = true;
+	}
+
 	$oldMeters = $stream->getAttribute('meters');
 	$fields = array(
 		'accuracy',
