@@ -2,13 +2,7 @@
 (function (Q, $) {
 
 	var Streams = Q.Streams;
-	var _debug = false;
-	
-	myconsole = {
-		log: function () { if (_debug) { console.log.apply(this, arguments); } },
-		warn: function () { if (_debug) { console.log.apply(this, arguments); } },
-		error: function () { if (_debug) { console.log.apply(this, arguments); } },
-	};
+	var _debug = true;
 
 	/**
 	 * Runs  adapter for Streams/webrtc tools
@@ -88,10 +82,10 @@
 			var tool = this;
 
 			stream.onMessage('Streams/join').set(function (stream, message) {
-				myconsole.log('%c STREAMS: ANOTHER USER JOINED', 'background:blue;color:white;', stream, message)
+				if(_debug) console.log('%c STREAMS: ANOTHER USER JOINED', 'background:blue;color:white;', stream, message)
 			});
 			stream.onMessage('Streams/connected').set(function (stream, message) {
-				myconsole.log('%c STREAMS: ANOTHER USER JOINED', 'background:blue;color:white;', stream, message)
+				if(_debug) console.log('%c STREAMS: ANOTHER USER JOINED', 'background:blue;color:white;', stream, message)
 			});
 		}
 
@@ -102,7 +96,7 @@
 		var bindConferenceEvents = function() {
 			var tool = this;
 			WebRTCconference.event.on('participantConnected', function (participant) {
-				myconsole.log('%c TWILIO: ANOTHER USER JOINED', 'background:blue;color:white;', participant)
+				if(_debug) console.log('%c TWILIO: ANOTHER USER JOINED', 'background:blue;color:white;', participant)
 
 				var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
 
@@ -116,7 +110,7 @@
 				screensRendering.updateLayout();
 			});
 			WebRTCconference.event.on('participantDisconnected', function (participant) {
-				myconsole.log('%c TWILIO: ANOTHER USER DISCONNECTED', 'background:blue;color:white;', participant)
+				if(_debug) console.log('%c TWILIO: ANOTHER USER DISCONNECTED', 'background:blue;color:white;', participant)
 				var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
 
 
@@ -129,37 +123,37 @@
 				screensRendering.updateLayout();
 			});
 			WebRTCconference.event.on('localParticipantDisconnected', function (participant) {
-				myconsole.log('%c TWILIO: ANOTHER USER DISCONNECTED', 'background:blue;color:white;', participant)
+				if(_debug) console.log('%c TWILIO: ANOTHER USER DISCONNECTED', 'background:blue;color:white;', participant)
 
 				log('You left the room');
 
 				screensRendering.updateLayout();
 			});
 			WebRTCconference.event.on('screenAdded', function (participant) {
-				myconsole.log('%c TWILIO: SCREEN ADDED', 'background:blue;color:white;', participant)
+				console.log('%c TWILIO: SCREEN ADDED', 'background:blue;color:white;', participant)
 				//screensRendering.updateLayout();
 			});
 			WebRTCconference.event.on('trackAdded', function (e) {
-				myconsole.log('%c TWILIO: TRACK ADDED', 'background:blue;color:white;', e)
+				console.log('%c TWILIO: TRACK ADDED', 'background:blue;color:white;', e)
 				if(e.track.kind == 'video') e.screen.isActive = true;
 				screensRendering.updateLayout();
 			});
 
 			WebRTCconference.event.on('videoTrackIsBeingAdded', function (screen) {
-				myconsole.log('%c TWILIO: TRACK videoTrackIsBeingAdded', 'background:blue;color:white;')
+				if(_debug) console.log('%c TWILIO: TRACK videoTrackIsBeingAdded', 'background:blue;color:white;')
 				screensRendering.updateLayout();
 				screensRendering.showLoader('videoTrackIsBeingAdded', screen.participant);
 			});
 
 			WebRTCconference.event.on('videoTrackLoaded', function (e) {
-				myconsole.log('%c TWILIO: TRACK videoTrackLoaded', 'background:blue;color:white;')
+				if(_debug) console.log('%c TWILIO: TRACK videoTrackLoaded', 'background:blue;color:white;')
 
 				screensRendering.hideLoader('videoTrackLoaded', e.screen.participant);
 				screensRendering.fitScreenToVideo(e.trackEl, e.screen, e.reset, e.oldSize)
 			});
 
 			WebRTCconference.event.on('screensharingStarting', function (data) {
-				myconsole.log('%c TWILIO: TRACK screensharingStarting', 'background:blue;color:white;')
+				if(_debug) console.log('%c TWILIO: TRACK screensharingStarting', 'background:blue;color:white;')
 
 				screensRendering.showLoader('screensharingStarting', data.participant);
 			});
@@ -174,7 +168,7 @@
 				//screensRendering.hideLoader('screensharingStarting', data.participant);
 			});
 			WebRTCconference.event.on('screensharingFailed', function (e) {
-				myconsole.log('screensharingFailed')
+				console.log('screensharingFailed')
 				screensRendering.hideLoader('screensharingFailed', e.participant);
 			});
 		}
@@ -183,7 +177,7 @@
 		 * Connect webrtc room using twilio.
 		 * @method startTwilioRoom
 		 */
-		var startTwilioRoom = function(roomId) {
+		var startTwilioRoom = function(roomId, accessToken) {
 			Q.addStylesheet('{{Streams}}/css/tools/webrtc.css?ts=' + performance.now());
 
 			Q.addScript([
@@ -196,72 +190,42 @@
 					// for more configuration options, see https://docs.trackjs.com
 				});*/
 
-				Q.req("Streams/webrtc", ["token"], function (err, response) {
-					var msg = Q.firstErrorMessage(err, response && response.errors);
+				var twilioRoomName = _roomStream.getAttribute('twilioRoomName');
 
-					if (msg) {
-						return Q.alert(msg);
-					}
+				console.log('twilioRoomName', twilioRoomName)
 
-					var twilioRoomName = _roomStream.getAttribute('twilioRoomName');
+				WebRTCconference = window.WebRTCconferenceLib({
+					mode:'twilio',
+					roomName:twilioRoomName,
+					twilioAccessToken: accessToken,
+					useAsLibrary: true,
+					startWith: _options.startWith
+				});
+				window.WebConf = WebRTCconference;
+				WebRTCconference.init(function () {
+					bindConferenceEvents();
+					screensRendering.updateLayout();
+					updateParticipantData();
+					hidePageLoader();
 
-					myconsole.log('twilioRoomName', twilioRoomName)
+					log("You joined the room");
 
-					WebRTCconference = window.WebRTCconferenceLib({
-						mode:'twilio',
-						roomName:twilioRoomName,
-						twilioAccessToken: response.slots.token,
-						useAsLibrary: true,
-						startWith: _options.startWith
-					});
-					window.WebConf = WebRTCconference;
-					WebRTCconference.init(function () {
-						bindConferenceEvents();
-						screensRendering.updateLayout();
-						updateParticipantData();
-						hidePageLoader();
-
-						log("You joined the room");
-
-						/*if(!Q.info.isMobile) {
-							var controlEl = Q.Tool.setUpElement('DIV', 'Streams/webrtc/controls', {});
-							$(controlEl).appendTo(document.querySelector('body')).activate(function () {
-								screensRendering.updateLayout();
-							});
+					Q.activate(
+						document.body.appendChild(
+							Q.Tool.setUpElement(
+								"div", // or pass an existing element
+								"Streams/webrtc/controls",
+								{webRTClibraryInstance: WebRTCconference, webrtcClass: module}
+							)
+						),
+						{},
+						function () {
+							_controls = this.element;
+							_controlsTool = this;
+							screensRendering.updateLayout();
 						}
-	*/
-						Q.activate(
-							document.body.appendChild(
-								Q.Tool.setUpElement(
-									"div", // or pass an existing element
-									"Streams/webrtc/controls",
-									{webRTClibraryInstance: WebRTCconference, webrtcClass: module}
-								)
-							),
-							{},
-							function () {
-								_controls = this.element;
-								_controlsTool = this;
-								screensRendering.updateLayout();
-							}
-						);
+					);
 
-						/* Q.activate(
-							 Q.Tool.setUpElement('DIV', "Q/resize", {}),
-							 {},
-							 function () {
-								 var tool = this;
-								 _controls = tool.element;
-							 }
-						 );*/
-					});
-
-				}, {
-					method: 'get',
-					fields: {
-						streamName: _roomStream.fields.name,
-						publisherId: _options.roomPublisherId,
-					}
 				});
 			});
 		}
@@ -283,48 +247,41 @@
 			})
 		}
 
-		var startNodeJsRoom = function() {
-			var tool = this;
+		/**
+		 * Init conference using own node.js server.
+		 * @method initWithStreams
+		 */
+		var initWithNodeServer = function(turnCredentials) {
+			if(_debug) console.log('initWithNodeServer');
+			Q.addStylesheet('{{Streams}}/css/tools/webrtc.css');
 
-			var roomId = _options.roomId != null ? _options.roomId : null;
-
-			if(roomId == null) {
-				myconsole.log('SOCKET CREATE', roomId)
-
-				Q.req("Streams/webrtc", ["stream"], function (err, response) {
-					var msg = Q.firstErrorMessage(err, response && response.errors);
-
-					if (msg) {
-						return myconsole.error(msg);
-					}
-
-					roomId = (response.slots.stream.name).replace('Streams/webrtc/', '');
-
-					Q.Streams.get(_options.roomPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
-
-						bindStreamsEvents(stream);
-						_roomStream = stream;
-					});
-
-				}, {
-					method: 'post',
-					fields: {
-						publisherId: _options.roomPublisherId
-					}
+			Q.addScript([
+				"https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js",
+				/*"https://cdn.trackjs.com/agent/v3/latest/t.js",*/
+				"https://requirejs.org/docs/release/2.2.0/minified/require.js",
+				"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+new Date())
+			], function () {
+				//if(Q.info.isIOS) {
+				/*window.TrackJS && TrackJS.install({
+					token: "c8b43db909ae49728a17089490341b57"
+					// for more configuration options, see https://docs.trackjs.com
+				});*/
+				//}
+				var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
+				WebRTCconference = window.WebRTCconferenceLib({
+					mode:'nodejs',
+					useAsLibrary: true,
+					nodeServer: _options.nodeServer,
+					roomName: roomId,
+					sid:  Q.Users.loggedInUser.id,
+					username:  Q.Users.loggedInUser.displayName,
+					startWith: _options.startWith,
+					turnCredentials: turnCredentials
 				});
-
-			} else {
-				myconsole.log('SOCKET JOIN', roomId)
-				Q.req("Streams/webrtc", ["join"], function (err, response) {
-					var msg = Q.firstErrorMessage(err, response && response.errors);
-
-					if (msg) {
-						return myconsole.error(msg);
-					}
-
-					Q.Streams.get(_options.roomPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
-						bindStreamsEvents(stream);
-					});
+				WebRTCconference.init(function () {
+					bindConferenceEvents();
+					hidePageLoader();
+					screensRendering.updateLayout();
 
 					Q.activate(
 						document.body.appendChild(
@@ -341,60 +298,6 @@
 							screensRendering.updateLayout();
 						}
 					);
-				}, {
-					method: 'get',
-					fields: {
-						streamName: 'Streams/webrtc/' + roomId
-					}
-				});
-			}
-
-
-			/*var roomsMedia = document.createElement('DIV');
-			roomsMedia.id = 'webrtc_tool_room-media';
-			var dashboard = document.getElementById('dashboard_slot');
-			if(Q.info.isMobile && !Q.info.isTablet) {
-				roomsMedia.style.height = 'calc(100% - ' + dashboard.offsetHeight + 'px)';
-				roomsMedia.style.top = dashboard.offsetHeight + 'px';
-			}
-			_options.element.appendChild(roomsMedia);
-			_roomsMedia = roomsMedia;*/
-
-		}
-
-		/**
-		 * Init conference using own node.js server.
-		 * @method initWithStreams
-		 */
-		var initWithNodeServer = function() {
-			Q.addStylesheet('{{Streams}}/css/tools/webrtc.css');
-
-			Q.addScript([
-				"https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js",
-				"https://cdn.trackjs.com/agent/v3/latest/t.js",
-				"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-				"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+new Date())
-			], function () {
-				//if(Q.info.isIOS) {
-				window.TrackJS && TrackJS.install({
-					token: "c8b43db909ae49728a17089490341b57"
-					// for more configuration options, see https://docs.trackjs.com
-				});
-				//}
-				var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
-				WebRTCconference = window.WebRTCconferenceLib({
-					webrtcMode:'nodejs',
-					useAsLibrary: true,
-					nodeServer: _options.nodeServer,
-					roomName: roomId,
-					sid:  Q.Users.loggedInUser.id,
-					username:  Q.Users.loggedInUser.displayName,
-					startWith: _options.startWith
-				});
-				WebRTCconference.init(function () {
-					bindConferenceEvents();
-					startNodeJsRoom();
-					screensRendering.updateLayout();
 				});
 			});
 		}
@@ -661,12 +564,12 @@
 				var ratio = Math.min(baseSize.width / initSize.width, baseSize.height / initSize.height);
 				/*var elementWidth, elementHeight;
 				if (ratio < 1) {
-					myconsole.log('getElementSizeKeepingRatio VERTICLE');
+					console.log('getElementSizeKeepingRatio VERTICLE');
 					elementWidth = parseInt(baseSize.height * ratio);
 					elementHeight = baseSize.height;
 
 				} else {
-					myconsole.log('getElementSizeKeepingRatio HORIZONTAL');
+					console.log('getElementSizeKeepingRatio HORIZONTAL');
 					elementHeight = parseInt( baseSize.width / ratio);
 					elementWidth = baseSize.width;
 
@@ -674,7 +577,7 @@
 
 
 				/*if(baseSize.height != null && elementHeight > baseSize.height) {
-					myconsole.log('getElementSizeKeepingRatio OVERSIZE');
+					console.log('getElementSizeKeepingRatio OVERSIZE');
 
 					elementWidth = Math.round(baseSize.height * ratio);
 					elementHeight = ( elementWidth / ratio);
@@ -843,7 +746,7 @@
 			}
 
 			function showLoader(loaderName, participant) {
-				myconsole.log('showLoader')
+				console.log('showLoader')
 				var screen = participant.screens[0];
 				screen.videoIsChanging = true;
 				participant.videoIsChanging = true;
@@ -879,6 +782,8 @@
 					loaderCon.appendChild(loaderIcon);
 					screen.screenEl.appendChild(loaderCon);
 					screen.screensharing = true;
+					_controlsTool.participantsPopup().showScreen(screen);
+
 					if(Q.info.isMobile){
 						renderMaximizedScreensGridMobile(screen);
 					} else {
@@ -888,7 +793,7 @@
 			}
 
 			function hideLoader(loaderName, participant) {
-				myconsole.log('hideLoader', participant)
+				console.log('hideLoader', participant)
 				var screen = participant.screens[0];
 				screen.videoIsChanging = false;
 				participant.videoIsChanging = false;
@@ -903,7 +808,7 @@
 			}
 
 			function toggleViewModeByScreenClick(e) {
-				myconsole.log('toggleViewModeByScreenClick')
+				if(_debug) console.log('toggleViewModeByScreenClick')
 				e.stopImmediatePropagation();
 				e.preventDefault();
 				var roomScreens = WebRTCconference.screens();
@@ -981,7 +886,7 @@
 
 
 
-				myconsole.log('toggleViewMode', modeToSwitch)
+				if(_debug) console.log('toggleViewMode', modeToSwitch)
 				if(modeToSwitch == null || modeToSwitch == 'regular') {
 					renderDesktopScreensGrid();
 				} else if(modeToSwitch == 'minimized') {
@@ -1010,7 +915,7 @@
 			 * @param {String} [layout] layout name
 			 */
 			function toggleScreensClass(layout) {
-				myconsole.log('toggleScreensClass', layout);
+				if(_debug) console.log('toggleScreensClass', layout);
 				var gridClasses = [
 					'webrtc_tool_tiled-screens-grid',
 					'webrtc_tool_maximized-screens-grid',
@@ -1182,7 +1087,7 @@
 			}
 
 			function renderTiledScreenGridDesktop() {
-				myconsole.log('renderTiledScreenGridDesktop')
+				if(_debug) console.log('renderTiledScreenGridDesktop')
 				if(window.innerHeight > window.innerWidth) {
 					//_roomsMedia.className = 'webrtc_tool_tiled-vertical-grid';
 					var elements = toggleScreensClass('tiledVertical');
@@ -1223,7 +1128,7 @@
 			 * @method renderMinimizedScreensGrid
 			 */
 			function renderMinimizedScreensGrid() {
-				myconsole.log('renderMinimizedScreensGrid')
+				if(_debug) console.log('renderMinimizedScreensGrid')
 				if(_layoutTool == null || _controls == null) return;
 
 				activeScreen = null;
@@ -1246,7 +1151,7 @@
 			 */
 			function renderMaximizedScreensGrid(screenToMaximize, duration) {
 				if(typeof duration == 'undefined') duration = 500;
-				myconsole.log('renderMaximizedScreensGrid')
+				if(_debug) console.log('renderMaximizedScreensGrid', screenToMaximize)
 				if(_layoutTool == null || _controls == null || (screenToMaximize != null && screenToMaximize == activeScreen)) return;
 				var roomScreens = WebRTCconference.screens();
 				if(screenToMaximize != null) activeScreen = screenToMaximize;
@@ -1279,7 +1184,7 @@
 			 * @param screenToMaximize
 			 */
 			function renderMaximizedScreensGridMobile(screenToMaximize) {
-				myconsole.log('renderMaximizedScreensGridMobile')
+				if(_debug) console.log('renderMaximizedScreensGridMobile')
 				if(_layoutTool == null || _controls == null || (screenToMaximize != null && screenToMaximize == activeScreen)) return;
 				var roomScreens = WebRTCconference.screens();
 				if(screenToMaximize != null) activeScreen = screenToMaximize;
@@ -1668,18 +1573,17 @@
 
 		var module = {};
 		module.screenRendering = screensRendering;
-		
-		/**
-		 * TODO: please document all methods in JS too
-		 * Starts a WebRTC room
-		 * @method start
-		 * @static
-		 * @param {String} publisherId The publisher of the Streams/webrtc stream to use
-		 * @param {String} [roomId=null] Set the room id, to use an existing room, otherwise new one is created
-		 * @param {Function} [callback] Called with (foo, bar) where foo is this, and bar is that.
-		 * @return {Boolean} whether the request was sent or something
-		 */
 		module.start = function(options) {
+			/*document.addEventListener('deviceready', function () {
+				// Just for iOS devices.
+				try {
+					if (window.device.platform === 'iOS') {
+						cordova.plugins.iosrtc.registerGlobals();
+					}
+				} catch(e) {
+					//alert(e.message)
+				}
+			});*/
 			_options = Q.extend({}, _options, options);
 
 			createInfoSnippet()
@@ -1719,26 +1623,29 @@
 			);
 
 
-			function createOrJoin (roomId, asPublisherId) {
-				myconsole.log('createOrJoin')
+			var createOrJoinRoomStream = function (roomId, asPublisherId) {
+				if(_debug) console.log('createRoomStream')
 
-				Q.req("Streams/webrtc", ["stream"], function (err, response) {
+				Q.req("Streams/webrtc", ["room"], function (err, response) {
 					var msg = Q.firstErrorMessage(err, response && response.errors);
 
 					if (msg) {
 						return Q.alert(msg);
 					}
+					console.log('response.slots', response.slots)
 
-					roomId = (response.slots.stream.name).replace('Streams/webrtc/', '');
+					roomId = (response.slots.room.roomId).replace('Streams/webrtc/', '');
+					var turnCredentials = response.slots.room.turnCredentials;
 
-					var connectUrl = updateQueryStringParameter(location.href, 'Q.rid', roomId);
-					connectUrl = updateQueryStringParameter(connectUrl, 'Q.pid', asPublisherId);
+					//var connectUrl = updateQueryStringParameter(location.href, 'Q.rid', roomId);
+					//connectUrl = updateQueryStringParameter(connectUrl, 'Q.pid', asPublisherId);
 					Q.Streams.get(asPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
 						_roomStream = stream;
+						console.log('_roomStream', _roomStream)
 						bindStreamsEvents(stream);
 						if(_options.mode == 'twilio') {
-							startTwilioRoom(roomId);
-						} else initWithNodeServer();
+							startTwilioRoom(roomId, response.slots.room.accessToken);
+						} else initWithNodeServer(turnCredentials);
 
 					});
 
@@ -1746,50 +1653,22 @@
 					method: 'post',
 					fields: {
 						roomId: roomId,
-						publisherId: asPublisherId
+						publisherId: asPublisherId,
+						adapter: _options.mode
 					}
 				});
 			}
 
-			function joinRoomStream (roomId, roomPublisherId) {
-				myconsole.log('joinRoomStream')
-				Q.req("Streams/webrtc", ["join"], function (err, response) {
-					var msg = Q.firstErrorMessage(err, response && response.errors);
-
-					if(msg) {
-						return Q.alert(msg);
-					}
-
-					Q.Streams.get(roomPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
-						_roomStream = stream;
-
-						bindStreamsEvents(stream);
-						if(_options.mode == 'twilio') {
-							startTwilioRoom(roomId);
-						} else initWithNodeServer();
-
-					});
-				}, {
-					method: 'get',
-					fields: {
-						streamName: 'Streams/webrtc/' + roomId,
-						publisherId: roomPublisherId
-					}
-				});
+			if(roomId != null && _options.roomPublisherId != null) {
+				createOrJoinRoomStream(roomId, _options.roomPublisherId);
 			}
-
-			if (_options.roomPublisherId == null) {
-				throw new Q.Exception("Streams.WebRTC.start(): publisherId is required")
-			}
-			createOrJoin(roomId, _options.roomPublisherId);
-
 		}
 
 		module.stop = function () {
-			myconsole.log('disconnect');
+			if(_debug) console.log('disconnect');
 			try {
 				var err = (new Error);
-				myconsole.log(err.stack);
+				console.log(err.stack);
 			} catch (e) {
 
 			}
