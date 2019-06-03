@@ -16,16 +16,12 @@ interface Streams_WebRTC_Interface
      * @class Streams_WebRTC_Interface
      * @constructor
      */
-    
+
     /**
      * TODO: please document every method
      */
     function createRoom($publisherId, $roomId);
-    
-    /**
-     * TODO: please document every method
-     */
-    function joinRoom($loggedUserId, $publisherId, $streamName);
+
 }
 
 /**
@@ -35,5 +31,23 @@ interface Streams_WebRTC_Interface
  */
 abstract class Streams_WebRTC
 {
+
+    /**
+     * @method getTwilioTurnCredentials Retrievs credentials for using twilio turn server
+     * @return {Array|null}
+     * @throws Twilio_Exception
+     */
+    function getTwilioTurnCredentials() {
+        $twilioAccountSid = Q_Config::expect('Streams', 'twilio', 'accountSid');
+        $twilioApiKey = Q_Config::expect('Streams', 'twilio', 'apiKey');
+        $twilioApiSecret = Q_Config::expect('Streams', 'twilio', 'apiSecret');
+        $authToken = Q_Config::expect('Streams', 'twilio', 'authToken');
+
+        $twilio = new Client($twilioApiKey, $twilioApiSecret, $twilioAccountSid);
+
+        $token = $twilio->tokens->create();
+
+        return $token->iceServers[1];
+    }
 
 };
