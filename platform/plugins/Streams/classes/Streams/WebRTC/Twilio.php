@@ -1,4 +1,9 @@
 <?php
+require STREAMS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
+
+use Twilio\Jwt\AccessToken;
+use Twilio\Jwt\Grants\VideoGrant;
+use Twilio\Rest\Client;
 
 /**
  * @module Streams
