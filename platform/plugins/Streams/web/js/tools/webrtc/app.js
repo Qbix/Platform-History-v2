@@ -2,7 +2,28 @@
 var socket;
 function enableiOSDebug() {
 	var ua=navigator.userAgent;
+	if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
+		console.log = function (txt) {
 
+			if(!socket || socket && !socket.connected) return;
+
+			try {
+				//originallog.apply(console, arguments);
+				var i, argument;
+				var argumentsString = '';
+				for (i = 1; argument = arguments[i]; i++){
+					if (typeof argument == 'object') {
+						argumentsString = argumentsString + ', OBJECT';
+					} else {
+						argumentsString = argumentsString + ', ' + argument;
+					}
+				}
+				socket.emit('log', txt + argumentsString + '\n')
+			} catch (e) {
+
+			}
+		}
+	}
 	window.onerror = function(msg, url, line, col, error) {
 		if(socket == null) return;
 		var extra = !col ? '' : '\ncolumn: ' + col;
@@ -57,7 +78,8 @@ WebRTCconferenceLib = function app(options){
 		useAsLibrary: false,
 		startWith: { audio: true, video: false },
 		twilioAccessToken: null,
-		disconnectTime: 3000
+		disconnectTime: 3000,
+		turnCredentials: null
 	};
 
 	if(typeof options === 'object') {
@@ -111,7 +133,8 @@ WebRTCconferenceLib = function app(options){
 	var _isiOS;
 	var _debug = false;
 
-	var pc_config = {"iceServers": [
+	var pc_config = {
+		"iceServers": [
 			{
 				"urls": "stun:stun.l.google.com:19302"
 			},
@@ -120,7 +143,13 @@ WebRTCconferenceLib = function app(options){
 				 'credential': 'asdf',
 				 'username': 'qbix'
 			 }*/
-		]};
+		]
+	};
+
+	if(options.turnCredentials != null) {
+		pc_config['iceServers'].push(options.turnCredentials)
+		console.log('pc_config', pc_config)
+	}
 
 
 	window.localScreens = function () {
