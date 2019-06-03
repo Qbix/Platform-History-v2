@@ -2,9 +2,6 @@
 //require_once('twilio-php-master/Twilio/autoload.php'); // Loads the library
 require STREAMS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
 
-use Twilio\Jwt\AccessToken;
-use Twilio\Jwt\Grants\VideoGrant;
-use Twilio\Rest\Client;
 
 /**
  * @module Streams
@@ -24,23 +21,28 @@ function Streams_webrtc_post($params = array())
 {
     $params = array_merge($_REQUEST, $params);
     Q_Valid::requireFields(array('publisherId', 'adapter'), $params, true);
-    $userId = Users::loggedInUser(true)->id; // require that user's logged in
+    Users::loggedInUser(true); // require that user's logged in
+    $publisherId = Q::ifset($params, 'publisherId', null);
     $roomId = Q::ifset($params, 'roomId', null);
-    switch ($_REQUEST['adapter']) {
+
+    switch ($params['adapter']) {
         case 'node':
-			$webrtc = new Streams_WebRTC_Node();
+            $adapter = 'node';
             break;
         case 'twilio':
-			$webrtc = new Streams_WebRTC_Twilio();
+            $adapter = 'twilio';
             break;
         default:
             throw new Q_Exception_WrongValue(array('field' => 'adapter', 'range' => 'node or twilio'));
     }
+
     $className = "Streams_WebRTC_".ucfirst($adapter);
+
     $webrtc = new $className();
     $roomStream = $webrtc->createRoom($publisherId, $roomId);
-	$webrtc->joinRoom($userId, $publisherId, $streamName);
 
-    Q_Response::setSlot("stream", $roomStream);
+    $roomStream->stream->join();
+
+    Q_Response::setSlot("room", $roomStream);
 
 }

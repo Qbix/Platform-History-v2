@@ -1,20 +1,22 @@
 <?php
 
+use Twilio\Jwt\AccessToken;
+use Twilio\Jwt\Grants\VideoGrant;
+use Twilio\Rest\Client;
+
 /**
  * @module Streams
  */
 
 class Streams_WebRTC_Twilio extends Streams_WebRTC implements Streams_WebRTC_Interface
 {
-	/**
-	 * This class represents WebRTC rooms
-	 * @class Streams_WebRTC_Twilio
-	 * @constructor
-	 * @param {string} $publisherId
-	 * @param {string} $roomId
-	 * @param {boolean} [$join=true] Whether to join the room also
-	 */
-    function createRoom($publisherId, $roomId, $join = true) {
+    /**
+     * This class represents WebRTC rooms
+     * @class Streams_WebRTC_Twilio
+     * @constructor
+     */
+    function createRoom($publisherId, $roomId) {
+
         if (empty($publisherId)) {
             throw new Q_Exception_RequiredField(array('field' => 'publisherId'));
         }
@@ -30,91 +32,99 @@ class Streams_WebRTC_Twilio extends Streams_WebRTC implements Streams_WebRTC_Int
             $stream = Streams::create($publisherId, $publisherId, 'Streams/webrtc');
             $roomId = substr($stream->name, strlen('Streams/webrtc/'));
         }
+
         try {
-            $twilioRoom = $this->getRoom($twilioRoomName);
+            $twilioRoom = $this->getTwilioRoom($roomId, $publisherId);
         } catch (Exception $e) {
-            $twilioAccountSid = Q_Config::expect('Streams', 'twilio', 'accountSid');
-            $twilioApiKey = Q_Config::expect('Streams', 'twilio', 'apiKey');
-            $twilioApiSecret = Q_Config::expect('Streams', 'twilio', 'apiSecret');
-            $authToken = Q_Config::expect('Streams', 'twilio', 'authToken');
-            $twilio = new Client($twilioApiKey, $twilioApiSecret, $twilioAccountSid);
-            $roomUniqueName = "$publisherId-$roomId";
-            $twilioRoom = $twilio->video->v1->rooms->create(array("uniqueName" => $roomUniqueName));
-        }
-		$stream->set('twilioRoom', $twilioRoom);
-        $stream->setAttribute('twilioRoomSid', $twilioRoom->sid);
-        $stream->setAttribute('twilioRoomName', $twilioRoom->uniqueName);
-        $stream->changed();
-        return $stream;
-    }
-    
-    function joinRoom($userId, $publisherId, $streamName) {
-        $stream = Streams::fetchOne($userId, $publisherId, $streamName);
-        $participants = $stream->getParticipants(array(
-            "state" => "participating"
-        ));
-        if (!isset($participants[$userId])) {
-            $stream->join();
-        } else {
-            Streams_Message::post(null, $publisherId, $streamName, array(
-                'type' => 'Streams/webrtc/joined'
-            ), true);
-        }
-
-        $twilioRoomSid = $stream->getAttribute('twilioRoomSid');
-        $twilioRoomName = $stream->getAttribute('twilioRoomName');
-        if (!$twilioRoomSid) {
-            $twilioRoom = $this->createTwilioRoom($stream);
-            $stream->setAttribute('twilioRoomSid', $room->id);
-            $stream->setAttribute('twilioRoomName', $room->name);
+            $twilioRoom = $this->createTwilioRoom($roomId, $publisherId);
+            $stream->set('twilioRoom', $twilioRoom);
+            $stream->setAttribute('twilioRoomSid', $twilioRoom->sid);
+            $stream->setAttribute('twilioRoomName', $twilioRoom->uniqueName);
             $stream->changed();
-        } else {
-            try {
-                $twilioRoom = $this->getRoom($twilioRoomName);
-            } catch (Exception $e) {
-                //die('catch');
-                $twilioRoom = $this->createRoom($stream);
-                $stream->setAttribute('twilioRoomSid', $room->id);
-                $stream->setAttribute('twilioRoomName', $room->name);
-                $stream->changed();
-            }
 
         }
-		$stream->join();
 
-        //print_r($twilioRoom);die('1213');
-        return $stream;
+        try {
+            $accessToken = $this->getTwilioAccessToken($twilioRoom->sid);
+            $stream->setAttribute('accessToken', $accessToken);
+            ///$stream->changed();
+            //print_r($stream);die;
+
+        } catch(Exception $e) {
+
+        }
+
+        return (object) [
+            'stream' => $stream,
+            'roomId' => $stream->name,
+            'accessToken' => $accessToken,
+        ];
     }
 
     /**
-     * @method getRoom
+     * @method getTwilioRoom
      * @static
-     * @param {string} $$roomIdOrName The twilio roomId or room name
-     * @return {Streams_WebRTC_Room|null}
-	 * @throws Twilio_Exception
-	 */
-    function getRoom($sidOrName) {
+     * @param {string} $roomIdOrName The twilio roomId or room name
+     * @param {string} $roomId Room id in Qbix (last marp of stream name)
+     * @return {Object|null}
+     * @throws Twilio_Exception
+     */
+    function getTwilioRoom($publisherId, $roomId) {
         $twilioAccountSid = Q_Config::expect('Streams', 'twilio', 'accountSid');
         $twilioApiKey = Q_Config::expect('Streams', 'twilio', 'apiKey');
         $twilioApiSecret = Q_Config::expect('Streams', 'twilio', 'apiSecret');
         $authToken = Q_Config::expect('Streams', 'twilio', 'authToken');
         $twilio = new Client($twilioApiKey, $twilioApiSecret, $twilioAccountSid);
-		try {
-			$twilioRoom = $twilio->video->v1->rooms($sidOrName)->fetch();
-		} catch (Exception $e) {
-			// TODO: test what kind of exception it is,
-			// and only do the below if the type is "missing" room
-			// otherwise you should re-throw exception
-			return null;
-		}
-		$room = new Streams_WebRTC_Room(array(
-			'id' => $twilioRoom->sid,
-			'name' => $twilioRoom->uniqueName
-		));
-        return $room;
+        $roomUniqueName = "$publisherId-$roomId";
+
+        $twilioRoom = $twilio->video->v1->rooms($roomUniqueName)->fetch();
+        return $twilioRoom;
     }
 
-    function getAccessToken($sid) {
+    /**
+     * @method getRoom
+     * @param {string} $$roomIdOrName The twilio roomId or room name
+     * @return {Streams_WebRTC_Room|null}
+     * @throws Twilio_Exception
+     */
+    function createTwilioRoom($publisherId, $roomId) {
+        $twilioAccountSid = Q_Config::expect('Streams', 'twilio', 'accountSid');
+        $twilioApiKey = Q_Config::expect('Streams', 'twilio', 'apiKey');
+        $twilioApiSecret = Q_Config::expect('Streams', 'twilio', 'apiSecret');
+        $authToken = Q_Config::expect('Streams', 'twilio', 'authToken');
+        $twilio = new Client($twilioApiKey, $twilioApiSecret, $twilioAccountSid);
+        $roomUniqueName = "$publisherId-$roomId";
+
+        $twilioRoom = $twilio->video->v1->rooms->create(array("uniqueName" => $roomUniqueName));
+
+        return $twilioRoom;
+    }
+
+    /**
+     * @method getParticipant Retrieves all participants in the room connected to twilio
+     * @param {string} $sid Sid of twilio room
+     * @return {Array|null}
+     * @throws Twilio_Exception
+     */
+    function getParticipant($sid) {
+        $twilioAccountSid = Q_Config::expect('Streams', 'twilio', 'accountSid');
+        $twilioApiKey = Q_Config::expect('Streams', 'twilio', 'apiKey');
+        $twilioApiSecret = Q_Config::expect('Streams', 'twilio', 'apiSecret');
+        $authToken = Q_Config::expect('Streams', 'twilio', 'authToken');
+
+        $twilio = new Client($twilioApiKey, $twilioApiSecret, $twilioAccountSid);
+        $twilioParticipant = $twilio->video->rooms($sid)->participants->read(array("status" => "connected"));
+
+        return $twilioParticipant;
+    }
+
+    /**
+     * @method getParticipant Generates access token that is used on the client
+     * @param {string} $sid Sid of twilio room
+     * @return {String|null}
+     * @throws Twilio_Exception
+     */
+    function getTwilioAccessToken($sid) {
         $twilioAccountSid = Q_Config::expect('Streams', 'twilio', 'accountSid');
         $twilioApiKey = Q_Config::expect('Streams', 'twilio', 'apiKey');
         $twilioApiSecret = Q_Config::expect('Streams', 'twilio', 'apiSecret');
@@ -138,4 +148,5 @@ class Streams_WebRTC_Twilio extends Streams_WebRTC implements Streams_WebRTC_Int
 
         return $token->toJWT();
     }
+
 }
