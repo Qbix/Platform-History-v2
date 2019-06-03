@@ -34,6 +34,8 @@ function Streams_before_Q_objects()
 	if ($invite->state !== 'pending') {
 		$exception = null;
 		switch ($invite->state) {
+		case 'accepted':
+			break;
 		case 'expired':
 			$exception = new Streams_Exception_AlreadyExpired(null, 'token');
 			break;
@@ -44,7 +46,7 @@ function Streams_before_Q_objects()
 			$exception = new Streams_Exception_AlreadyForwarded(null, 'token');
 			break;
 		case 'claimed':
-			$exception = new Streams_Exception_AlreadyForwarded(null, 'token');
+			$exception = new Streams_Exception_AlreadyC(null, 'token');
 			break;
 		default:
 			$exception = new Q_Exception("This invite has already been " . $invite->state, 'token');
