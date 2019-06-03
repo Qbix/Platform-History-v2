@@ -29,11 +29,22 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
             $roomId = substr($stream->name, strlen('Streams/webrtc/'));
         }
 
+        try {
+            $turnCredentials = $this->getTwilioTurnCredentials();
+
+        } catch(Exception $e) {
+
+        }
 
         return (object) [
             'stream' => $stream,
             'roomId' => $stream->name,
+            'turnCredentials' => $turnCredentials,
         ];
+    }
+
+    function getTwilioTurnCredentials() {
+        return parent::getTwilioTurnCredentials();
     }
 
 }

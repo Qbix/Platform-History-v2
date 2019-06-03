@@ -149,5 +149,4 @@ class Streams_WebRTC_Twilio extends Streams_WebRTC implements Streams_WebRTC_Int
         return $token->toJWT();
     }
 
-
 }

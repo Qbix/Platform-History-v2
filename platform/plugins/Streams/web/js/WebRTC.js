@@ -251,7 +251,7 @@
 		 * Init conference using own node.js server.
 		 * @method initWithStreams
 		 */
-		var initWithNodeServer = function() {
+		var initWithNodeServer = function(turnCredentials) {
 			if(_debug) console.log('initWithNodeServer');
 			Q.addStylesheet('{{Streams}}/css/tools/webrtc.css');
 
@@ -275,7 +275,8 @@
 					roomName: roomId,
 					sid:  Q.Users.loggedInUser.id,
 					username:  Q.Users.loggedInUser.displayName,
-					startWith: _options.startWith
+					startWith: _options.startWith,
+					turnCredentials: turnCredentials
 				});
 				WebRTCconference.init(function () {
 					bindConferenceEvents();
@@ -1634,6 +1635,7 @@
 					console.log('response.slots', response.slots)
 
 					roomId = (response.slots.room.roomId).replace('Streams/webrtc/', '');
+					var turnCredentials = response.slots.room.turnCredentials;
 
 					//var connectUrl = updateQueryStringParameter(location.href, 'Q.rid', roomId);
 					//connectUrl = updateQueryStringParameter(connectUrl, 'Q.pid', asPublisherId);
@@ -1643,7 +1645,7 @@
 						bindStreamsEvents(stream);
 						if(_options.mode == 'twilio') {
 							startTwilioRoom(roomId, response.slots.room.accessToken);
-						} else initWithNodeServer();
+						} else initWithNodeServer(turnCredentials);
 
 					});
 
