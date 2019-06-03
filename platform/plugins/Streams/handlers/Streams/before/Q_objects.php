@@ -32,12 +32,10 @@ function Streams_before_Q_objects()
 	
 	// is invite still pending?
 	if ($invite->state !== 'pending') {
+		$exception = null;
 		switch ($invite->state) {
 		case 'expired':
 			$exception = new Streams_Exception_AlreadyExpired(null, 'token');
-			break;
-		case 'accepted':
-			$exception = new Streams_Exception_AlreadyAccepted(null, 'token');
 			break;
 		case 'declined':
 			$exception = new Streams_Exception_AlreadyDeclined(null, 'token');
@@ -45,17 +43,22 @@ function Streams_before_Q_objects()
 		case 'forwarded':
 			$exception = new Streams_Exception_AlreadyForwarded(null, 'token');
 			break;
+		case 'claimed':
+			$exception = new Streams_Exception_AlreadyForwarded(null, 'token');
+			break;
 		default:
 			$exception = new Q_Exception("This invite has already been " . $invite->state, 'token');
 			break;
 		}
-		$shouldThrow = Q::event('Streams/objects/inviteException', 
-			compact('invite', 'exception'), 'before'
-		);
-		if ($shouldThrow === null) {
-			Q_Response::setNotice('Streams/objects', $exception->getMessage());
-		} else if ($shouldThrow === true) {
-			throw $exception;
+		if ($exception) {
+			$shouldThrow = Q::event('Streams/objects/inviteException', 
+				compact('invite', 'exception'), 'before'
+			);
+			if ($shouldThrow === null) {
+				Q_Response::setNotice('Streams/objects', $exception->getMessage());
+			} else if ($shouldThrow === true) {
+				throw $exception;
+			}
 		}
 	}
 	
