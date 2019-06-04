@@ -8,5 +8,11 @@
 		"ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
 		"SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
 		"YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+	},
+	"payment": {
+		"AboutOrder": "Info about order",
+		"PaymentMethod": "Payment method",
+		"ContactInfo": "Contact info",
+		"Pay": "Pay"
 	}
 }
