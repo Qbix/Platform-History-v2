@@ -5,10 +5,6 @@ use Twilio\Jwt\AccessToken;
 use Twilio\Jwt\Grants\VideoGrant;
 use Twilio\Rest\Client;
 
-use Twilio\Jwt\AccessToken;
-use Twilio\Jwt\Grants\VideoGrant;
-use Twilio\Rest\Client;
-
 /**
  * @module Streams
  */
