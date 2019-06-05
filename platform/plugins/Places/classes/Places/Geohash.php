@@ -171,10 +171,12 @@ class Places_Geohash
      */
     static function fetchByDistance($query, $field, $center, $limit)
     {
-    	$above = (clone $query)->where(array(
+		$above = clone $query;
+    	$above = $above->where(array(
 	        $field => new Db_Range($center, true, false, null)
 	    ))->orderBy($field, true)->fetchDbRows();
-	    $below = (clone $query)->where(array(
+		$below = clone $query;
+	    $below = $below->where(array(
 		    $field => new Db_Range(null, false, false, $center)
 	    ))->orderBy($field, false)->fetchDbRows();
     	$result = array();
@@ -196,11 +198,13 @@ class Places_Geohash
 	    while ($k < $limit && $j < $b) {
     		$result[] = $below[$j];
     		++$j;
+    		++$k;
 	    }
 
+	    return $result;
     }
 
-    private function closer($center, $a, $b) {
+    private static function closer($center, $a, $b) {
     	$cn = self::alpha2num($center);
     	$an = self::alpha2num($a);
     	$bn = self::alpha2num($b);
@@ -213,7 +217,7 @@ class Places_Geohash
 	 * @return string The converted number.
 	 * @author Theriault
 	 */
-	private function alpha2num($a) {
+	private static function alpha2num($a) {
 		$r = 0;
 		$l = strlen($a);
 		for ($i = 0; $i < $l; $i++) {
