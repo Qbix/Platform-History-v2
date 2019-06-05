@@ -297,10 +297,7 @@
 				);
 				if (!options.amount) {
 					err = _error("Assets.Payments.stripe: amount is required");
-					if (callback) {
-						callback(err);
-					}
-					return;
+					return Q.handle(callback, null, [err]);
 				}
 
 				options.userId = options.userId || Q.Users.loggedInUserId();
@@ -309,20 +306,23 @@
 					Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
 				} catch (err) {
 					err = _error('Please preload Stripe js library');
-					if (callback) {
-						callback(err);
-					}
-					return;
+					return Q.handle(callback, null, [err]);
 				}
-				if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari')) { // It's considered that ApplePay is supported in IOS Safari
+				if (!Q.info.isCordova && Q.info.platform === 'ios' && Q.info.browser.name === 'safari') { // It's considered that ApplePay is supported in IOS Safari
 					_applePayStripe(options, function (err, res) {
 						if (err && (err.code === 21)) { // code 21 means that this type of payment is not supported in some reason
 							_standardStripe(options, callback);
 							return;
 						}
-						if (callback) {
-							callback(err, res);
+
+						Q.handle(callback, null, [err, res]);
+					});
+				} else if (Q.info.isCordova && window.ApplePay) { // check for payment request
+					_appleCordovaPay(options, function (err, res) {
+						if (err) {
+							return _standardStripe(options, callback);
 						}
+						Q.handle(callback, null, [err, res]);
 					});
 				} else if (window.PaymentRequest) { // check for payment request
 					_paymentRequestStripe(options, function (err, res) {
@@ -330,9 +330,7 @@
 							_standardStripe(options, callback);
 							return;
 						}
-						if (callback) {
-							callback(err, res);
-						}
+						Q.handle(callback, null, [err, res]);
 					});
 				} else {
 					if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
@@ -451,18 +449,57 @@
 	
 	Q.onInit.set(function () {
 		if (Q.info.platform === 'ios' && Q.getObject("Stripe.applePay.checkAvailability")) {
+			Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
 			Stripe.applePay.checkAvailability(function (available) {
 				Assets.Payments.stripe.applePayAvailable = available;
 			});
 		}
 	}, 'Assets');
 
+	function _appleCordovaPay (options, callback) {
+		var supportedNetworks = ['amex', 'discover', 'masterCard', 'visa'];
+		var merchantCapabilities = ['3ds', 'debit', 'credit'];
+
+		ApplePay.canMakePayments({
+			// supportedNetworks should not be an empty array. The supported networks currently are: amex, discover, masterCard, visa
+			supportedNetworks: supportedNetworks,
+
+			// when merchantCapabilities is passed in, supportedNetworks must also be provided. Valid values: 3ds, debit, credit, emv
+			merchantCapabilities: merchantCapabilities
+		}).then((message) => {
+			ApplePay.makePaymentRequest({
+				items: [{
+					label: options.description,
+					amount: options.amount
+				}],
+				supportedNetworks: supportedNetworks,
+				merchantCapabilities: merchantCapabilities,
+				merchantIdentifier: 'merchant.com.qbix.yang2020',
+				currencyCode: options.currency.toUpperCase(),
+				countryCode: 'US',
+				billingAddressRequirement: 'none',
+				shippingAddressRequirement: 'none',
+				shippingType: 'service'
+			}).then((paymentResponse) => {
+				// paymentResponse.paymentData - base64 encoded token
+				options.token = atob(paymentResponse.paymentData);
+				Q.Assets.Payments.pay('stripe', options, function (err) {
+					if (err) {
+						return console.error(err);
+					}
+				});
+			});
+		}).catch((err) => {
+			Q.handle(callback, null, [err]);
+		});
+	}
+
 	function _applePayStripe(options, callback) {
 		if (!Assets.Payments.stripe.applePayAvailable) {
 			return callback(_error('Apple pay is not available', 21));
 		}
 		var request = {
-			currencyCode: options.currency,
+			currencyCode: options.currency.toUpperCase(),
 			countryCode: options.countryCode ? options.countryCode : 'US',
 			total: {
 				label: options.description,
