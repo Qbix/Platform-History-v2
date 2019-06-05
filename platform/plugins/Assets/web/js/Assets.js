@@ -289,27 +289,21 @@
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			stripe: function (options, callback) {
-				if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
-					_redirectToBrowserTab(options);
-					return;
-				}
-
 				var err;
-				var o = Q.extend({},
+				options = Q.extend({},
 					Q.text.Assets.payments,
 					Assets.Payments.stripe.options,
 					options
 				);
-				if (!o.amount) {
+				if (!options.amount) {
 					err = _error("Assets.Payments.stripe: amount is required");
 					if (callback) {
 						callback(err);
 					}
 					return;
 				}
-				if (!o.userId) {
-					o.userId = Q.Users.loggedInUser ? Q.Users.loggedInUser.id : null;
-				}
+
+				options.userId = options.userId || Q.Users.loggedInUserId();
 
 				try {
 					Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
@@ -321,9 +315,9 @@
 					return;
 				}
 				if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari')) { // It's considered that ApplePay is supported in IOS Safari
-					_applePayStripe(o, function (err, res) {
+					_applePayStripe(options, function (err, res) {
 						if (err && (err.code === 21)) { // code 21 means that this type of payment is not supported in some reason
-							_standardStripe(o, callback);
+							_standardStripe(options, callback);
 							return;
 						}
 						if (callback) {
@@ -331,9 +325,9 @@
 						}
 					});
 				} else if (window.PaymentRequest) { // check for payment request
-					_paymentRequestStripe(o, function (err, res) {
+					_paymentRequestStripe(options, function (err, res) {
 						if (err && (err.code === 9)) {
-							_standardStripe(o, callback);
+							_standardStripe(options, callback);
 							return;
 						}
 						if (callback) {
@@ -341,34 +335,24 @@
 						}
 					});
 				} else {
-					_standardStripe(o, callback);
+					if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
+						_redirectToBrowserTab(options);
+					} else {
+						_standardStripe(options, callback);
+					}
 				}
 			},
 			/**
-			 * This method use applePay or googlePay what exist
+			 * This method use googlePay
 			 * and then charge that payment profile.
-			 * @method cordova
+			 * @method googlepay
 			 * @static
 			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
 			 *  @param {Number} options.amount the amount to pay.
 			 *  @param {String} [options.currency="usd"] the currency to pay in.
-			 *  @param {String} [options.publisherId=Q.Users.communityId] The publisherId of the Assets/product or Assets/service stream
-			 *  @param {String} [options.streamName] The name of the Assets/product or Assets/service stream
-			 *  @param {String} [options.name=Users::communityName()] The name of the organization the user will be paying
-			 *  @param {String} [options.image] The url pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
-			 *  @param {String} [options.description] A short name or description of the product or service being purchased.
-			 *  @param {String} [options.panelLabel] The label of the payment button in the Stripe Checkout form (e.g. "Pay {{amount}}", etc.). If you include {{amount}}, it will be replaced by the provided amount. Otherwise, the amount will be appended to the end of your label.
-			 *  @param {String} [options.zipCode] Specify whether Stripe Checkout should validate the billing ZIP code (true or false). The default is false.
-			 *  @param {Boolean} [options.billingAddress] Specify whether Stripe Checkout should collect the user's billing address (true or false). The default is false.
-			 *  @param {Boolean} [options.shippingAddress] Specify whether Checkout should collect the user's shipping address (true or false). The default is false.
-			 *  @param {String} [options.email] Set the email address, if any, provided to Stripe Checkout to be pre-filled.
-			 *  @param {Boolean} [options.allowRememberMe=true] Specify whether to include the option to "Remember Me" for future purchases (true or false).
-			 *  @param {Boolean} [options.bitcoin=false] Specify whether to accept Bitcoin (true or false).
-			 *  @param {Boolean} [options.alipay=false] Specify whether to accept Alipay ('auto', true, or false).
-			 *  @param {Boolean} [options.alipayReusable=false] Specify if you need reusable access to the customer's Alipay account (true or false).
-			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
+			 *  @param {Function} [callback]
 			 */
-			cordova: function (options, callback) {
+			googlepay: function (options, callback) {
 				sgap.setKey(Assets.Payments.stripe.publishableKey).then(function () {
 					sgap.isReadyToPay()
 				}).then(function () {
@@ -475,7 +459,7 @@
 
 	function _applePayStripe(options, callback) {
 		if (!Assets.Payments.stripe.applePayAvailable) {
-			callback(_error('Apple pay is not available', 21));
+			return callback(_error('Apple pay is not available', 21));
 		}
 		var request = {
 			currencyCode: options.currency,
@@ -509,28 +493,42 @@
 	function _paymentRequestStripe(options, callback) {
 		var supportedInstruments = [
 			{
-				supportedMethods: ['basic-card'],
+				supportedMethods: 'basic-card',
 				data: {
 					supportedNetworks: ['amex', 'discover', 'mastercard', 'visa'],
 					supportedTypes: ['credit']
 				}
 			}
 		];
-		if (Assets.Payments.androidPay) {
+		if (Assets.Payments.googlePay) {
 			supportedInstruments.push({
-				supportedMethods: ['https://android.com/pay'],
+				supportedMethods: 'https://google.com/pay',
 				data: {
-					merchantId: Assets.Payments.androidPay.gateway,
-					environment: Assets.Payments.androidPay.environment,
-					allowedCardNetwork: ['amex', 'discover', 'mastercard', 'visa'],
-					paymentMethodTokenizationParameters: {
-						tokenizationType: 'GATEWAY_TOKEN',
+					environment: Assets.Payments.googlePay.environment,
+					apiVersion: 2,
+					apiVersionMinor: 0,
+					merchantInfo: {
+						// A merchant ID is available after approval by Google.
+						// @see {@link https://developers.google.com/pay/api/web/guides/test-and-deploy/integration-checklist}
+						merchantId: Assets.Payments.googlePay.merchantId,
+						merchantName: Assets.Payments.googlePay.merchantName
+					},
+					allowedPaymentMethods: [{
+						type: 'CARD',
 						parameters: {
-							'gateway': 'stripe',
-							'stripe:publishableKey': Assets.Payments.stripe.publishableKey,
-							'stripe:version': Assets.Payments.stripe.version
+							allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+							allowedCardNetworks: ["AMEX", "DISCOVER", "JCB", "MASTERCARD", "VISA"]
+						},
+						tokenizationSpecification: {
+							type: 'PAYMENT_GATEWAY',
+							// Check with your payment gateway on the parameters to pass.
+							// @see {@link https://developers.google.com/pay/api/web/reference/object#Gateway}
+							parameters: {
+								'gateway': Assets.Payments.googlePay.gateway,
+								'gatewayMerchantId': Assets.Payments.stripe.publishableKey
+							}
 						}
-					}
+					}]
 				}
 			})
 		}
@@ -565,7 +563,7 @@
 					});
 				});
 			}
-			if (result.methodName === 'https://android.com/pay') {
+			if (result.methodName === 'https://google.com/pay') {
 				promise = new Promise(function (resolve, reject) {
 					options.token = JSON.parse(result.details.paymentMethodToken);
 					return Q.Assets.Payments.pay('stripe', options, function (err) {
@@ -588,16 +586,14 @@
 		});
 	}
 
-	function _standardStripe(o, callback) {
-		Q.addScript(o.javascript, function () {
-			var params = Q.extend({
-				name: o.name,
-				amount: o.amount
-			}, o);
-			params.amount *= 100;
+	function _standardStripe(options, callback) {
+		Q.addScript(options.javascript, function () {
 			var token_triggered = false;
-			StripeCheckout.configure(Q.extend({
+			StripeCheckout.configure({
 				key: Assets.Payments.stripe.publishableKey,
+				name: options.name,
+				description: options.description,
+				amount: options.amount * 100,
 				closed: function() {
 					if (!token_triggered) {
 						callback(new Error('Cancelled'));
@@ -605,10 +601,10 @@
 				},
 				token: function (token) {
 					token_triggered = true;
-					o.token = token;
-					Assets.Payments.pay('stripe', o, callback);
+					options.token = token;
+					Assets.Payments.pay('stripe', options, callback);
 				}
-			}, params)).open();
+			}).open();
 		});
 	}
 

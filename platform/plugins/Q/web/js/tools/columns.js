@@ -288,6 +288,7 @@ Q.Tool.define("Q/columns", function(options) {
 				var originalTop = $div.css('top');
 				var originalOpacity = $div.css('opacity');
 				var _closed = false;
+				var _addedEventListener = false;
 				function _onTouchmove(e2) {
 					var x2 = Q.Pointer.getX(e2);
 					var y2 = Q.Pointer.getY(e2);
@@ -299,6 +300,11 @@ Q.Tool.define("Q/columns", function(options) {
 					$(div).css('opacity', 1-z);
 					if (y2 - y1 > threshold
 					&& Math.abs((y2-y1)/(x2-x1)) > 2) { //generally down direction
+						if (!_addedEventListener) {
+							Q.addEventListener(document.body, 'touchmove', _cancelScroll, false, true);	
+							Q.Masks.show('Q.click.mask');
+							_addedEventListener = true;
+						}
 						tool.close(index);
 						_closed = true;
 						Q.removeEventListener(document.body, 'touchmove', _onTouchmove);
@@ -311,8 +317,14 @@ Q.Tool.define("Q/columns", function(options) {
 							opacity: originalOpacity
 						}, 100);
 					}
+					Q.Masks.hide('Q.click.mask');
 					Q.removeEventListener(document.body, 'touchmove', _onTouchmove);
 					Q.removeEventListener(document.body, 'touchend', _onTouchend);
+					Q.removeEventListener(document.body, 'touchmove', _cancelScroll);
+					_addedEventListener = false;
+				}
+				function _cancelScroll(e) {
+					e.preventDefault();
 				}
 			}, false, true);
 		}
