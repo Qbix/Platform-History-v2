@@ -324,7 +324,13 @@
 						}
 						Q.handle(callback, null, [err, res]);
 					});
-				} else if (window.PaymentRequest) { // check for payment request
+				} else if (false && window.PaymentRequest) {
+					// check for payment request
+					// this method turned off because stripe offer universal interface
+					// which allow to select saved cards from browser and googlePay.
+					// But using window.PaymentRequest with googlePay require to get
+					// merchantId from google (which long and dreary). Instructions to get merchantId:
+					// https://developers.google.com/pay/api/web/guides/test-and-deploy/integration-checklist
 					_paymentRequestStripe(options, function (err, res) {
 						if (err && (err.code === 9)) {
 							_standardStripe(options, callback);
@@ -633,7 +639,7 @@
 				amount: options.amount * 100,
 				closed: function() {
 					if (!token_triggered) {
-						callback(new Error('Cancelled'));
+						callback(_error("Request cancelled", 20));
 					}
 				},
 				token: function (token) {
