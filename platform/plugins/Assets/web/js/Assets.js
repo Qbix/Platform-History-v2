@@ -357,6 +357,9 @@
 			 *  @param {Function} [callback]
 			 */
 			googlepay: function (options, callback) {
+				// while we fixing problems with GoolePay
+				return _standardStripe(options, callback);
+
 				sgap.setKey(Assets.Payments.stripe.publishableKey).then(function () {
 					sgap.isReadyToPay()
 				}).then(function () {
