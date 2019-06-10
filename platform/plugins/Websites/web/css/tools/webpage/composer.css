@@ -2,9 +2,37 @@
 	white-space: nowrap;
 	border: none;
 }
-.Websites_webpage_composer_tool input[name=url] {
+.Websites_webpage_composer_tool .Websites_webpage_composer_input {
 	width: calc(100% - 70px);
 	display: inline-block;
+	position: relative;
+}
+.Websites_webpage_composer_tool .Websites_webpage_composer_input a {
+	display: none;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	bottom: 5px;
+	padding: 5px;
+	color: #888;
+	cursor: pointer;
+	font-size: .8em;
+}
+.Websites_webpage_composer_tool .Websites_webpage_composer_input a span {
+	display: block;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.Websites_webpage_composer_tool .Websites_webpage_composer_input a:hover {
+	color: #000;
+	background: #eee;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+.Websites_webpage_composer_tool input[name=url] {
+	width: 100%;
 	padding: 5px;
 }
 .Websites_webpage_composer_tool.Websites_webpage_loading input[name=url] {
