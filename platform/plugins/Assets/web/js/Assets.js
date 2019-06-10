@@ -519,7 +519,7 @@
 		};
 		var session = Stripe && Stripe.applePay.buildSession(request, 
 		function (result, completion) {
-			options.token = result.token;
+			options.token = result.token.id;
 			Q.Assets.Payments.pay('stripe', options, function (err) {
 				if (err) {
 					completion(ApplePaySession.STATUS_FAILURE);
