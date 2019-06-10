@@ -519,7 +519,7 @@
 		};
 		var session = Stripe && Stripe.applePay.buildSession(request, 
 		function (result, completion) {
-			options.token = result.token.id;
+			options.token = result.token;
 			Q.Assets.Payments.pay('stripe', options, function (err) {
 				if (err) {
 					completion(ApplePaySession.STATUS_FAILURE);
@@ -622,7 +622,7 @@
 				});
 			} else if (result.methodName === 'https://google.com/pay') {
 				promise = new Promise(function (resolve, reject) {
-					options.token = Q.getObject("details.paymentMethodData.tokenizationData.token", result);
+					options.token = Q.getObject("details.paymentMethodData.tokenizationData", result);
 					return Q.Assets.Payments.pay('stripe', options, function (err) {
 						if (err) {
 							return reject({result: result, err: err});
