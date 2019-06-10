@@ -301,6 +301,7 @@
 				}
 
 				options.userId = options.userId || Q.Users.loggedInUserId();
+				options.currency = (options.currency || 'USD').toUpperCase();
 
 				try {
 					Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
@@ -324,7 +325,7 @@
 						}
 						Q.handle(callback, null, [err, res]);
 					});
-				} else if (false && window.PaymentRequest) {
+				} else if (window.PaymentRequest) {
 					// check for payment request
 					// this method turned off because stripe offer universal interface
 					// which allow to select saved cards from browser and googlePay.
@@ -392,6 +393,7 @@
 					streamName: options.streamName,
 					token: options.token,
 					amount: options.amount,
+					currency: options.currency,
 					description: options.description,
 					userId: options.userId
 
@@ -484,7 +486,7 @@
 				supportedNetworks: supportedNetworks,
 				merchantCapabilities: merchantCapabilities,
 				merchantIdentifier: 'merchant.com.qbix.yang2020',
-				currencyCode: options.currency.toUpperCase(),
+				currencyCode: options.currency,
 				countryCode: 'US',
 				billingAddressRequirement: 'none',
 				shippingAddressRequirement: 'none',
@@ -508,7 +510,7 @@
 			return callback(_error('Apple pay is not available', 21));
 		}
 		var request = {
-			currencyCode: options.currency.toUpperCase(),
+			currencyCode: options.currency,
 			countryCode: options.countryCode ? options.countryCode : 'US',
 			total: {
 				label: options.description,
@@ -537,6 +539,8 @@
 	}
 
 	function _paymentRequestStripe(options, callback) {
+		var currency = options.currency || 'USD';
+
 		var supportedInstruments = [
 			{
 				supportedMethods: 'basic-card',
@@ -556,8 +560,9 @@
 					merchantInfo: {
 						// A merchant ID is available after approval by Google.
 						// @see {@link https://developers.google.com/pay/api/web/guides/test-and-deploy/integration-checklist}
-						merchantId: Assets.Payments.googlePay.merchantId,
-						merchantName: Assets.Payments.googlePay.merchantName
+						//merchantId: Assets.Payments.googlePay.merchantId,
+						//merchantName: Assets.Payments.googlePay.merchantName
+						merchantName: 'Example Merchant'
 					},
 					allowedPaymentMethods: [{
 						type: 'CARD',
@@ -570,18 +575,25 @@
 							// Check with your payment gateway on the parameters to pass.
 							// @see {@link https://developers.google.com/pay/api/web/reference/object#Gateway}
 							parameters: {
-								'gateway': Assets.Payments.googlePay.gateway,
-								'gatewayMerchantId': Assets.Payments.stripe.publishableKey
+								//'gateway': Assets.Payments.googlePay.gateway,
+								//'gatewayMerchantId': Assets.Payments.stripe.publishableKey
+								'gateway': 'example',
+								'gatewayMerchantId': 'exampleGatewayMerchantId'
 							}
 						}
-					}]
+					}],
+					transactionInfo: {
+						totalPriceStatus: "FINAL",
+						totalPrice: options.amount.toString(10),
+						currencyCode: currency
+					}
 				}
 			})
 		}
 		var details = {
 			total: {
 				label: options.description ? options.description : 'Total due',
-				amount: {currency: options.currency ? options.currency : 'USD', value: options.amount}
+				amount: {currency: currency, value: options.amount}
 			}
 		};
 		var request = new PaymentRequest(supportedInstruments, details, {requestPayerEmail: true});
@@ -608,10 +620,9 @@
 						});
 					});
 				});
-			}
-			if (result.methodName === 'https://google.com/pay') {
+			} else if (result.methodName === 'https://google.com/pay') {
 				promise = new Promise(function (resolve, reject) {
-					options.token = JSON.parse(result.details.paymentMethodToken);
+					options.token = Q.getObject("details.paymentMethodData.tokenizationData.token", result);
 					return Q.Assets.Payments.pay('stripe', options, function (err) {
 						if (err) {
 							return reject({result: result, err: err});
@@ -625,8 +636,8 @@
 			result.complete('success');
 			callback(null, result);
 		}).catch(function (err) {
-			if (err.result && err.result.complete) {
-				err.result.complete('fail');
+			if (Q.getObject("result.complete", err)) {
+				return err.result.complete('fail');
 			}
 			callback(err);
 		});
