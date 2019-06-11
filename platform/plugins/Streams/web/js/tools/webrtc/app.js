@@ -2,28 +2,6 @@
 var socket;
 function enableiOSDebug() {
 	var ua=navigator.userAgent;
-	if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
-		console.log = function (txt) {
-
-			if(!socket || socket && !socket.connected) return;
-
-			try {
-				//originallog.apply(console, arguments);
-				var i, argument;
-				var argumentsString = '';
-				for (i = 1; argument = arguments[i]; i++){
-					if (typeof argument == 'object') {
-						argumentsString = argumentsString + ', OBJECT';
-					} else {
-						argumentsString = argumentsString + ', ' + argument;
-					}
-				}
-				socket.emit('log', txt + argumentsString + '\n')
-			} catch (e) {
-
-			}
-		}
-	}
 	window.onerror = function(msg, url, line, col, error) {
 		if(socket == null) return;
 		var extra = !col ? '' : '\ncolumn: ' + col;
@@ -55,9 +33,6 @@ try {
 		socket.on('connect', function () {
 			console.log('CONNECTED', socket);
 			enableiOSDebug(socket);
-		});
-		socket.on('ios.console.log', function (command) {
-			eval(command);
 		});
 	});
 } catch (e) {
@@ -927,7 +902,7 @@ WebRTCconferenceLib = function app(options){
 		}
 
 		function craetAudioeAnalyser(track, participant) {
-			if(typeof cordova != 'undefined' && window.device.platform === 'iOS') return;
+			if(typeof cordova != 'undefined' && _isiOS) return;
 
 			if(_debug) console.log('craetAudioeAnalyser', track)
 
@@ -2411,7 +2386,7 @@ WebRTCconferenceLib = function app(options){
 			if(_debug) console.log('socketParticipantConnected ', localTracks)
 
 			if(app.conferenceControl.cameraIsEnabled()){
-				if(typeof cordova != 'undefined' && localParticipant.stream){
+				if(typeof cordova != 'undefined' && _isiOS && localParticipant.stream){
 					newPeerConnection.addStream(localParticipant.stream);
 				} else {
 					for (var t in localTracks) {
@@ -2515,7 +2490,7 @@ WebRTCconferenceLib = function app(options){
 				var newPeerConnection = new RTCPeerConnection(pc_config);
 				var localTracks = localParticipant.tracks;
 				if(app.conferenceControl.cameraIsEnabled()){
-					if(typeof cordova != 'undefined' && localParticipant.stream){
+					if(typeof cordova != 'undefined' && _isiOS && localParticipant.stream){
 						newPeerConnection.addStream(localParticipant.stream);
 					} else {
 						for (var t in localTracks) {
@@ -3449,7 +3424,7 @@ WebRTCconferenceLib = function app(options){
 
 				for (var p in roomParticipants) {
 					if (!roomParticipants[p].isLocal && roomParticipants[p].RTCPeerConnection != null) {
-						if(typeof cordova != 'undefined' && localParticipant.stream){
+						if(typeof cordova != 'undefined' && _isiOS && localParticipant.stream){
 							roomParticipants[p].addStream(localParticipant.stream);
 						} else {
 							var videoTracks = localParticipant.videoTracks();
