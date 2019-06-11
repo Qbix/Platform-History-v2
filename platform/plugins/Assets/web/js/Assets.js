@@ -485,7 +485,7 @@
 				}],
 				supportedNetworks: supportedNetworks,
 				merchantCapabilities: merchantCapabilities,
-				merchantIdentifier: 'merchant.com.qbix.yang2020',
+				merchantIdentifier: Q.getObject("Payments.applePay.merchantIdentifier", Assets),
 				currencyCode: options.currency,
 				countryCode: 'US',
 				billingAddressRequirement: 'none',
@@ -493,15 +493,18 @@
 				shippingType: 'service'
 			}).then((paymentResponse) => {
 				// paymentResponse.paymentData - base64 encoded token
-				options.token = atob(paymentResponse.paymentData);
-				Q.Assets.Payments.pay('stripe', options, function (err) {
+				options.token = paymentResponse;
+				Assets.Payments.pay('stripe', options, function (err) {
 					if (err) {
+						ApplePay.completeLastTransaction('failure');
 						return console.error(err);
 					}
+					ApplePay.completeLastTransaction('success');
 				});
 			});
 		}).catch((err) => {
 			Q.handle(callback, null, [err]);
+			ApplePay.completeLastTransaction('failure');
 		});
 	}
 
@@ -520,7 +523,7 @@
 		var session = Stripe && Stripe.applePay.buildSession(request, 
 		function (result, completion) {
 			options.token = result.token;
-			Q.Assets.Payments.pay('stripe', options, function (err) {
+			Assets.Payments.pay('stripe', options, function (err) {
 				if (err) {
 					completion(ApplePaySession.STATUS_FAILURE);
 					callback(err);
@@ -612,7 +615,7 @@
 							return reject({result: result, err: new Error('Stripe gateway error')});
 						}
 						options.token = token;
-						return Q.Assets.Payments.pay('stripe', options, function (err) {
+						return Assets.Payments.pay('stripe', options, function (err) {
 							if (err) {
 								return reject({result: result, err: err});
 							}
@@ -623,7 +626,7 @@
 			} else if (result.methodName === 'https://google.com/pay') {
 				promise = new Promise(function (resolve, reject) {
 					options.token = Q.getObject("details.paymentMethodData.tokenizationData", result);
-					return Q.Assets.Payments.pay('stripe', options, function (err) {
+					return Assets.Payments.pay('stripe', options, function (err) {
 						if (err) {
 							return reject({result: result, err: err});
 						}
