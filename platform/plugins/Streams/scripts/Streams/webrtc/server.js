@@ -4,11 +4,13 @@ const express = require('express');
 const app = express();
 var socket = require('socket.io');
 
+/*
 var options = {
-	key: fs.readFileSync('/etc/letsencrypt/live/www.demoproject.co.ua/privkey.pem'),
-	cert: fs.readFileSync('/etc/letsencrypt/live/www.demoproject.co.ua/cert.pem'),
-	ca: fs.readFileSync('/etc/letsencrypt/live/www.demoproject.co.ua/chain.pem')
+	key: fs.readFileSync(''),
+	cert: fs.readFileSync(''),
+	ca: fs.readFileSync('')
 };
+*/
 
 
 var server = https.createServer(options, app).listen(8443);
