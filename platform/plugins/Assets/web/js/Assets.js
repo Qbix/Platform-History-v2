@@ -297,42 +297,47 @@
 				);
 				if (!options.amount) {
 					err = _error("Assets.Payments.stripe: amount is required");
-					if (callback) {
-						callback(err);
-					}
-					return;
+					return Q.handle(callback, null, [err]);
 				}
 
 				options.userId = options.userId || Q.Users.loggedInUserId();
+				options.currency = (options.currency || 'USD').toUpperCase();
 
 				try {
 					Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
 				} catch (err) {
 					err = _error('Please preload Stripe js library');
-					if (callback) {
-						callback(err);
-					}
-					return;
+					return Q.handle(callback, null, [err]);
 				}
-				if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari')) { // It's considered that ApplePay is supported in IOS Safari
+				if (!Q.info.isCordova && Q.info.platform === 'ios' && Q.info.browser.name === 'safari') { // It's considered that ApplePay is supported in IOS Safari
 					_applePayStripe(options, function (err, res) {
 						if (err && (err.code === 21)) { // code 21 means that this type of payment is not supported in some reason
 							_standardStripe(options, callback);
 							return;
 						}
-						if (callback) {
-							callback(err, res);
-						}
+
+						Q.handle(callback, null, [err, res]);
 					});
-				} else if (window.PaymentRequest) { // check for payment request
+				} else if (Q.info.isCordova && window.ApplePay) { // check for payment request
+					_appleCordovaPay(options, function (err, res) {
+						if (err) {
+							return _standardStripe(options, callback);
+						}
+						Q.handle(callback, null, [err, res]);
+					});
+				} else if (window.PaymentRequest) {
+					// check for payment request
+					// this method turned off because stripe offer universal interface
+					// which allow to select saved cards from browser and googlePay.
+					// But using window.PaymentRequest with googlePay require to get
+					// merchantId from google (which long and dreary). Instructions to get merchantId:
+					// https://developers.google.com/pay/api/web/guides/test-and-deploy/integration-checklist
 					_paymentRequestStripe(options, function (err, res) {
 						if (err && (err.code === 9)) {
 							_standardStripe(options, callback);
 							return;
 						}
-						if (callback) {
-							callback(err, res);
-						}
+						Q.handle(callback, null, [err, res]);
 					});
 				} else {
 					if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
@@ -353,6 +358,9 @@
 			 *  @param {Function} [callback]
 			 */
 			googlepay: function (options, callback) {
+				// while we fixing problems with GoolePay
+				return _standardStripe(options, callback);
+
 				sgap.setKey(Assets.Payments.stripe.publishableKey).then(function () {
 					sgap.isReadyToPay()
 				}).then(function () {
@@ -385,6 +393,7 @@
 					streamName: options.streamName,
 					token: options.token,
 					amount: options.amount,
+					currency: options.currency,
 					description: options.description,
 					userId: options.userId
 
@@ -451,11 +460,53 @@
 	
 	Q.onInit.set(function () {
 		if (Q.info.platform === 'ios' && Q.getObject("Stripe.applePay.checkAvailability")) {
+			Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
 			Stripe.applePay.checkAvailability(function (available) {
 				Assets.Payments.stripe.applePayAvailable = available;
 			});
 		}
 	}, 'Assets');
+
+	function _appleCordovaPay (options, callback) {
+		var supportedNetworks = ['amex', 'discover', 'masterCard', 'visa'];
+		var merchantCapabilities = ['3ds', 'debit', 'credit'];
+
+		ApplePay.canMakePayments({
+			// supportedNetworks should not be an empty array. The supported networks currently are: amex, discover, masterCard, visa
+			supportedNetworks: supportedNetworks,
+
+			// when merchantCapabilities is passed in, supportedNetworks must also be provided. Valid values: 3ds, debit, credit, emv
+			merchantCapabilities: merchantCapabilities
+		}).then((message) => {
+			ApplePay.makePaymentRequest({
+				items: [{
+					label: options.description,
+					amount: options.amount
+				}],
+				supportedNetworks: supportedNetworks,
+				merchantCapabilities: merchantCapabilities,
+				merchantIdentifier: Q.getObject("Payments.applePay.merchantIdentifier", Assets),
+				currencyCode: options.currency,
+				countryCode: 'US',
+				billingAddressRequirement: 'none',
+				shippingAddressRequirement: 'none',
+				shippingType: 'service'
+			}).then((paymentResponse) => {
+				// paymentResponse.paymentData - base64 encoded token
+				options.token = paymentResponse;
+				Assets.Payments.pay('stripe', options, function (err) {
+					if (err) {
+						ApplePay.completeLastTransaction('failure');
+						return console.error(err);
+					}
+					ApplePay.completeLastTransaction('success');
+				});
+			});
+		}).catch((err) => {
+			Q.handle(callback, null, [err]);
+			ApplePay.completeLastTransaction('failure');
+		});
+	}
 
 	function _applePayStripe(options, callback) {
 		if (!Assets.Payments.stripe.applePayAvailable) {
@@ -472,7 +523,7 @@
 		var session = Stripe && Stripe.applePay.buildSession(request, 
 		function (result, completion) {
 			options.token = result.token;
-			Q.Assets.Payments.pay('stripe', options, function (err) {
+			Assets.Payments.pay('stripe', options, function (err) {
 				if (err) {
 					completion(ApplePaySession.STATUS_FAILURE);
 					callback(err);
@@ -491,6 +542,8 @@
 	}
 
 	function _paymentRequestStripe(options, callback) {
+		var currency = options.currency || 'USD';
+
 		var supportedInstruments = [
 			{
 				supportedMethods: 'basic-card',
@@ -510,8 +563,9 @@
 					merchantInfo: {
 						// A merchant ID is available after approval by Google.
 						// @see {@link https://developers.google.com/pay/api/web/guides/test-and-deploy/integration-checklist}
-						merchantId: Assets.Payments.googlePay.merchantId,
-						merchantName: Assets.Payments.googlePay.merchantName
+						//merchantId: Assets.Payments.googlePay.merchantId,
+						//merchantName: Assets.Payments.googlePay.merchantName
+						merchantName: 'Example Merchant'
 					},
 					allowedPaymentMethods: [{
 						type: 'CARD',
@@ -524,18 +578,25 @@
 							// Check with your payment gateway on the parameters to pass.
 							// @see {@link https://developers.google.com/pay/api/web/reference/object#Gateway}
 							parameters: {
-								'gateway': Assets.Payments.googlePay.gateway,
-								'gatewayMerchantId': Assets.Payments.stripe.publishableKey
+								//'gateway': Assets.Payments.googlePay.gateway,
+								//'gatewayMerchantId': Assets.Payments.stripe.publishableKey
+								'gateway': 'example',
+								'gatewayMerchantId': 'exampleGatewayMerchantId'
 							}
 						}
-					}]
+					}],
+					transactionInfo: {
+						totalPriceStatus: "FINAL",
+						totalPrice: options.amount.toString(10),
+						currencyCode: currency
+					}
 				}
 			})
 		}
 		var details = {
 			total: {
 				label: options.description ? options.description : 'Total due',
-				amount: {currency: options.currency ? options.currency : 'USD', value: options.amount}
+				amount: {currency: currency, value: options.amount}
 			}
 		};
 		var request = new PaymentRequest(supportedInstruments, details, {requestPayerEmail: true});
@@ -554,7 +615,7 @@
 							return reject({result: result, err: new Error('Stripe gateway error')});
 						}
 						options.token = token;
-						return Q.Assets.Payments.pay('stripe', options, function (err) {
+						return Assets.Payments.pay('stripe', options, function (err) {
 							if (err) {
 								return reject({result: result, err: err});
 							}
@@ -562,11 +623,10 @@
 						});
 					});
 				});
-			}
-			if (result.methodName === 'https://google.com/pay') {
+			} else if (result.methodName === 'https://google.com/pay') {
 				promise = new Promise(function (resolve, reject) {
-					options.token = JSON.parse(result.details.paymentMethodToken);
-					return Q.Assets.Payments.pay('stripe', options, function (err) {
+					options.token = Q.getObject("details.paymentMethodData.tokenizationData", result);
+					return Assets.Payments.pay('stripe', options, function (err) {
 						if (err) {
 							return reject({result: result, err: err});
 						}
@@ -579,8 +639,8 @@
 			result.complete('success');
 			callback(null, result);
 		}).catch(function (err) {
-			if (err.result && err.result.complete) {
-				err.result.complete('fail');
+			if (Q.getObject("result.complete", err)) {
+				return err.result.complete('fail');
 			}
 			callback(err);
 		});
@@ -596,7 +656,7 @@
 				amount: options.amount * 100,
 				closed: function() {
 					if (!token_triggered) {
-						callback(new Error('Cancelled'));
+						callback(_error("Request cancelled", 20));
 					}
 				},
 				token: function (token) {
