@@ -3,7 +3,7 @@
 function Streams_before_Q_responseExtras()
 {
 	Q_Response::addScript('{{Streams}}/js/Streams.js', 'Streams');
-	Q_Response::addScript('{{Streams}}/js/WebRTC.js', 'Streams');
+	Q_Response::addScript('{{Streams}}/js/WebRTC.js' , 'Streams');
 
 	$user = Users::loggedInUser();
 	if ($user) {

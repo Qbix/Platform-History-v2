@@ -25,6 +25,8 @@
 			appliedRecently: false,
 			onMoved: new Q.Event(),
 			onResized: new Q.Event(),
+			onMovingStart: new Q.Event(),
+			onMovingStop: new Q.Event(),
 			onUpdate: new Q.Event(),
 			onRefresh: new Q.Event()
 		},
@@ -79,6 +81,7 @@
 						elementToMove.style.top = ypos + 'px';
 
 						if(currentTop != parseInt(ypos, 10) || currentLeft != parseInt(xpos, 10) ) tool.state.appliedRecently = true;
+						if(typeof cordova != "undefined" && window.device.platform === 'iOS') cordova.plugins.iosrtc.refreshVideos();
 					}
 
 					var drag = function(evt){
@@ -137,6 +140,7 @@
 						divLeft = divLeft.replace('px','');
 						diffX = posX - divLeft, diffY = posY - divTop;
 
+						tool.state.onMovingStart.handle.call(tool);
 						if(Q.info.isTouchscreen) {
 							window.addEventListener('touchmove', drag, { passive: false });
 						} else window.addEventListener('mousemove', drag, { passive: false });
@@ -150,6 +154,8 @@
 						if(elementToMove != null) elementToMove.style.cursor='';
 
 						tool.element.style.boxShadow = '';
+
+						tool.state.onMovingStop.handle.call(tool);
 
 						if (tool.state.appliedRecently) {
 							tool.state.onMoved.handle.call(tool);
@@ -345,6 +351,7 @@
 						_oldy = e.pageY;
 
 						tool.state.appliedRecently = true;
+						if(typeof cordova != "undefined" && window.device.platform === 'iOS') cordova.plugins.iosrtc.refreshVideos();
 
 					}
 
@@ -520,6 +527,7 @@
 
 						_elementToResize.style.width = elementWidth + 'px';
 						_elementToResize.style.height = elementHeight + 'px';
+						if(typeof cordova != "undefined" && window.device.platform === 'iOS') cordova.plugins.iosrtc.refreshVideos();
 
 						_latestWidthValue = elementWidth;
 						_latestHeightValue = elementHeight;

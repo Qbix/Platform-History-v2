@@ -207,7 +207,40 @@
 
 				cameraBtn.addEventListener('touchend', function () {
 					if(!Q.info.isMobile && !Q.info.isTablet) return;
+					if(webRTClib.conferenceControl.frontCameraDevice() == null) {
+						webRTClib.conferenceControl.requestCamera(function () {
+							var currentCamera = webRTClib.conferenceControl.frontCameraDevice();
+							if(currentCamera != null && tool.settingsPopupEl != null) {
+								var labelToSelect = tool.settingsPopupEl.querySelector('label[data-device-id="' + currentCamera.deviceId + '"]');
+								if(labelToSelect != null) {
+									tool.toggleCameraButtons(labelToSelect)
+								} else {
+									var labelToSelect = tool.settingsPopupEl.querySelector('label[data-device-id="off"]');
+									if(labelToSelect != null) tool.toggleCameraButtons(labelToSelect);
+								}
 
+								var turnOnCameraItem = tool.settingsPopupEl.querySelector('label[data-device-id="auto"]');
+
+								if(turnOnCameraItem != null && turnOnCameraItem.parentNode != null) turnOnCameraItem.parentNode.removeChild(turnOnCameraItem);
+								tool.loadCamerasList();
+							}
+							tool.updateControlBar();
+						}, function () {
+							var participant = webRTClib.localParticipant();
+							var enabledVideoTracks = participant.tracks.filter(function (t) {
+								return t.screensharing;
+							})[0];
+
+							var turnOnCameraItem = tool.settingsPopupEl.querySelector('label[data-device-id="auto"]');
+							var screenSharingRadioItem = tool.settingsPopupEl.querySelector('label[data-device-id="screen"]');
+
+							if(enabledVideoTracks != null)
+								tool.toggleCameraButtons(screenSharingRadioItem);
+							else tool.toggleCameraButtons(turnOffradioBtnItem);
+
+						});
+						return;
+					}
 					if(document.querySelector('.dialog-box.select-camera') == null) {
 						tool.selectCameraDialogue();
 					}
@@ -544,7 +577,7 @@
 
 
 				var turnOnCameraItem = document.createElement('LABEL');
-				turnOnCameraItem.dataset.deviceId = 'screen';
+				turnOnCameraItem.dataset.deviceId = 'auto';
 				var radioBtn= document.createElement('INPUT');
 				radioBtn.name = 'cameras';
 				radioBtn.type = 'radio';
@@ -642,6 +675,7 @@
 
 					});
 				}
+				tool.loadCamerasList = loadCamerasList;
 
 				turnOnCameraItem.addEventListener('mouseup', function (e) {
 					var label = e.currentTarget;
