@@ -20,7 +20,8 @@
 	"webpage": {
 		"composer": {
 			"Go": "Go",
-			"PasteLinkHere": "Paste a link here",
+			"PasteLinkHere": "https://...",
+			"BrowseTheWeb": "Browse",
 			"WriteToStartConversation": "Write your thoughts to start off the conversation",
 			"StartConversation": "Start Conversation"
 		}
