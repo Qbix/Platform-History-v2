@@ -454,47 +454,46 @@ Q.Tool.define('Streams/chat', function(options) {
 			callback.call(tool, messages);
 		});
 	},
-
+	/**
+	 * get more messages
+	*/
+	renderMore: function (messages) {
+		var tool = this;
+		var results = tool.prepareMessages(messages);
+		var $more = tool.$('.Streams_chat_more');
+		if (Q.isEmpty(results)) {
+			return $more.hide();
+		};
+		var $scm = tool.$('.Streams_chat_messages');
+		tool.renderMessages(results, function (items) {
+			tool.$('.Streams_chat_noMessages').remove();
+			var least = 1000;
+			var totalHeight = 0;
+			Q.each(items, function (ordinal, $element) {
+				$element.prependTo($scm).activate();
+				least = ordinal;
+				totalHeight += ($element.outerHeight(true) + $element.outerHeight())/2;
+			}, {ascending: false});
+			$more.prependTo($scm);
+			$scm.scrollTop(totalHeight);
+			if (least <= 1) {
+				return $more.hide();
+			}
+			tool.processDOM();
+		});
+	},
 	addEvents: function(){
 		var tool    = this,
 			state   = this.state,
 			blocked = false;
 
-		/*
-		 * get more messages
-		 */
-		function _renderMore(messages) {
-			var results = tool.prepareMessages(messages);
-			var $more = tool.$('.Streams_chat_more');
-			if (Q.isEmpty(results)) {
-				return $more.hide();
-			};
-			var $scm = tool.$('.Streams_chat_messages');
-			tool.renderMessages(results, function (items) {
-				tool.$('.Streams_chat_noMessages').remove();
-				var least = 1000;
-				var totalHeight = 0;
-				Q.each(items, function (ordinal, $element) {
-					$element.prependTo($scm).activate();
-					least = ordinal;
-					totalHeight += ($element.outerHeight(true) + $element.outerHeight())/2;
-				}, {ascending: false});
-				$more.prependTo($scm);
-				$scm.scrollTop(totalHeight);
-				if (least <= 1) {
-					return $more.hide();
-				}
-				tool.processDOM();
-			});
-		};
-
 		if (state.more.isClick) {
 			tool.$('.Streams_chat_more').click(function(){
-				tool.more(_renderMore);
+				tool.more(tool.renderMore);
 			});
 		} else {
 			this.niceScroll(function(){
-				tool.more(_renderMore);
+				tool.more(tool.renderMore);
 			});
 		}
 
