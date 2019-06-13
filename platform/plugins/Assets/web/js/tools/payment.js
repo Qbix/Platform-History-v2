@@ -143,7 +143,7 @@ Q.Tool.define("Assets/payment", function (options) {
 							var $body = $("body");
 							var bodyOverflow = $body.css('overflow');
 							var _close = function () {
-								$preload.css('top', $("body").outerHeight());
+								$preload.css('top', $body.outerHeight() + $body[0].scrollTop);
 								setTimeout(function () {
 									$this.remove();
 									$body.css('overflow', bodyOverflow);
@@ -166,8 +166,9 @@ Q.Tool.define("Assets/payment", function (options) {
 								_pay();
 							});
 
+							$preload.css('top', $body.outerHeight() + $body[0].scrollTop);
 							$this.appendTo("body");
-							$preload.css('top', $body.outerHeight() - $preload.outerHeight());
+							$preload.css('top', $body.outerHeight() + $body[0].scrollTop - $preload.outerHeight());
 						}
 					);
 				});
