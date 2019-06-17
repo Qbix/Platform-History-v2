@@ -542,6 +542,7 @@ abstract class Streams extends Base_Streams
 	 *  specifically for $asUserId . Make sure to call the methods 
 	 *  testReadLevel(), testWriteLevel() and testAdminLevel()
 	 *  on these streams before using them on the user's behalf.
+	 * @throws {Q_Exception_MissingRow} If the stream is missing
 	 */
 	static function fetchOne(
 		$asUserId,
