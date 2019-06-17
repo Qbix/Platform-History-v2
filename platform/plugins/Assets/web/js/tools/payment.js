@@ -11,7 +11,7 @@
  * @param {array} options Override various options for this tool
  *  @param {string} options.payments can be "authnet" or "stripe"
  *  @param {string} options.amount the amount to pay.
- *  @param {double} [options.currency="usd"] the currency to pay in. (authnet supports only "usd")
+ *  @param {string} [options.currency="usd"] the currency to pay in. (authnet supports only "usd")
  *  @param {string} [options.payButton] Can override the title of the pay button
  *  @param {string} [options.name=Users::communityName()] The name of the organization the user will be paying
  *  @param {string} [options.image] The url pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
@@ -19,6 +19,7 @@
  *  @param {boolean} [options.allowRememberMe=true] Specify whether to include the option to "Remember Me" for future purchases (true or false).
  *  @param {boolean} [options.billingAddress=false] Specify whether to include the option to set billing address.
  *  @param {boolean} [options.shippingAddress=false] Specify whether to include the option to set shipping address.
+ *  @param {boolean} [options.showGPayPanel=false] If true, show Chrome like panel, pop up below, with info about product and price.
  *  @param {boolean} [options.bitcoin=false] Specify whether to accept Bitcoin (true or false).
  *  @param {boolean} [options.alipay=false] Specify whether to accept Alipay ('auto', true, or false). 
  *  @param {boolean} [options.alipayReusable=false] Specify if you need reusable access to the customer's Alipay account (true or false).
@@ -69,6 +70,7 @@ Q.Tool.define("Assets/payment", function (options) {
 	allowRememberMe: true,
 	shippingAddress: false,
 	billingAddress: false,
+	showGPayPanel: false,
 	bitcoin: false,
 	alipay: false,
 	alipayReusable: false,
@@ -121,6 +123,10 @@ Q.Tool.define("Assets/payment", function (options) {
 				$('.Assets_pay', $te).on(Q.Pointer.click, _pay);
 
 				$('.Assets_gpay', $te).on(Q.Pointer.click, function () {
+					if (!state.showGPayPanel) {
+						return _pay();
+					}
+
 					if ($("body > .Assets_payment_Gpay_preload").length) {
 						return;
 					}
