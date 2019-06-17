@@ -16,6 +16,7 @@
 		"Pay": "Pay"
 	},
 	"credits": {
-		"InviteAcceptedBy": "Invite accepted by {{1}}"
+		"InviteAcceptedBy": "Invite accepted by {{1}}",
+		"YouHaveCreditsToStart": "You have {{1}} credits to start"
 	}
 }
