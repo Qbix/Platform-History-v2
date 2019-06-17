@@ -12913,6 +12913,13 @@ if (_isCordova) {
 					cordova.InAppBrowser.open(url, '_system', options);
 				}
 			};
+			root.close = function (url, target, options) {
+				if (result) {
+					cordova.plugins.browsertab.close();
+				} else if (cordova.InAppBrowser) {
+					cordova.InAppBrowser.close();
+				}
+			};
 		}, function () {});
 	}, 'Q.browsertab');
 }
