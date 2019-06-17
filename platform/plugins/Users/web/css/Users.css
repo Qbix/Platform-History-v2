@@ -380,7 +380,7 @@ a.Users_activation_resend:active {
 	margin: 5px 0px 5px 0px;
 }
 
-#Users_login_dialog #Users_agree { margin-right: 5px; }
+#Users_login_dialog #Users_agree { margin-right: 5px; -webkit-appearance: checkbox; }
 
 .Q_notMobile .Q_overlay.Users_login_dialog,
 .Q_notMobile .Q_overlay.Users_setIdentifier_dialog { width: 350px; }
