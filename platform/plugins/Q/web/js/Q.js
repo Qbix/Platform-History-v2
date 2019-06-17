@@ -12620,7 +12620,8 @@ Q.onJQuery.add(function ($) {
 		"Q/pie": "{{Q}}/js/tools/pie.js",
 		"Q/badge": "{{Q}}/js/tools/badge.js",
 		"Q/resize": "{{Q}}/js/tools/resize.js",
-		"Q/layouts": "{{Q}}/js/tools/layouts.js"
+		"Q/layouts": "{{Q}}/js/tools/layouts.js",
+		"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js"
 	});
 	
 	Q.Tool.jQuery({

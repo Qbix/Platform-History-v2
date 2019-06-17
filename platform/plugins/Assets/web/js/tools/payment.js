@@ -11,13 +11,16 @@
  * @param {array} options Override various options for this tool
  *  @param {string} options.payments can be "authnet" or "stripe"
  *  @param {string} options.amount the amount to pay.
- *  @param {double} [options.currency="usd"] the currency to pay in. (authnet supports only "usd")
+ *  @param {string} [options.currency="usd"] the currency to pay in. (authnet supports only "usd")
  *  @param {string} [options.payButton] Can override the title of the pay button
  *  @param {string} [options.name=Users::communityName()] The name of the organization the user will be paying
  *  @param {string} [options.image] The url pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
  *  @param {string} [options.description=null] A short name or description of the product or service being purchased.
  *  @param {boolean} [options.allowRememberMe=true] Specify whether to include the option to "Remember Me" for future purchases (true or false).
- *  @param {boolean} [options.bitcoin=false] Specify whether to accept Bitcoin (true or false). 
+ *  @param {boolean} [options.billingAddress=false] Specify whether to include the option to set billing address.
+ *  @param {boolean} [options.shippingAddress=false] Specify whether to include the option to set shipping address.
+ *  @param {boolean} [options.showGPayPanel=false] If true, show Chrome like panel, pop up below, with info about product and price.
+ *  @param {boolean} [options.bitcoin=false] Specify whether to accept Bitcoin (true or false).
  *  @param {boolean} [options.alipay=false] Specify whether to accept Alipay ('auto', true, or false). 
  *  @param {boolean} [options.alipayReusable=false] Specify if you need reusable access to the customer's Alipay account (true or false).
  */
@@ -65,6 +68,9 @@ Q.Tool.define("Assets/payment", function (options) {
 	payButton: null,
 	description: null,
 	allowRememberMe: true,
+	shippingAddress: false,
+	billingAddress: false,
+	showGPayPanel: false,
 	bitcoin: false,
 	alipay: false,
 	alipayReusable: false,
@@ -94,9 +100,9 @@ Q.Tool.define("Assets/payment", function (options) {
 
 		Q.Template.render(
 			templateName,
-			Q.extend({}, data, {
-				payButton: "Pay with " + payments
-			}),
+			{
+				text: data.text.payment
+			},
 			function (err, html) {
 				if (err) return;
 
@@ -117,6 +123,10 @@ Q.Tool.define("Assets/payment", function (options) {
 				$('.Assets_pay', $te).on(Q.Pointer.click, _pay);
 
 				$('.Assets_gpay', $te).on(Q.Pointer.click, function () {
+					if (!state.showGPayPanel) {
+						return _pay();
+					}
+
 					if ($("body > .Assets_payment_Gpay_preload").length) {
 						return;
 					}
@@ -143,7 +153,7 @@ Q.Tool.define("Assets/payment", function (options) {
 							var $body = $("body");
 							var bodyOverflow = $body.css('overflow');
 							var _close = function () {
-								$preload.css('top', $("body").outerHeight());
+								$preload.css('top', $body.outerHeight() + $body[0].scrollTop);
 								setTimeout(function () {
 									$this.remove();
 									$body.css('overflow', bodyOverflow);
@@ -166,8 +176,9 @@ Q.Tool.define("Assets/payment", function (options) {
 								_pay();
 							});
 
+							$preload.css('top', $body.outerHeight() + $body[0].scrollTop);
 							$this.appendTo("body");
-							$preload.css('top', $body.outerHeight() - $preload.outerHeight());
+							$preload.css('top', $body.outerHeight() + $body[0].scrollTop - $preload.outerHeight());
 						}
 					);
 				});
@@ -206,12 +217,12 @@ Q.Template.set('Assets/payment/Gpay',
 	'<button class="Q_button Assets_gpay">&nbsp;</button>'
 );
 Q.Template.set('Assets/payment/Stripe',
-	'<button class="Q_button Assets_pay">{{payButton}}</button>'
+	'<button class="Q_button Assets_pay">{{text.Pay}}</button>'
 );
 Q.Template.set('Assets/payment/Authnet',
 	'<form method="post" target="Assets_authnet" action="{{action}}">' +
 	'<input type="hidden" name="Token" value="{{token}}">' +
-	'<button class="Q_button Assets_pay">{{payButton}}</button>' +
+	'<button class="Q_button Assets_pay">{{text.Pay}}</button>' +
 	'</form>'
 );
 

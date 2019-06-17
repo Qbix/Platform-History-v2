@@ -18,6 +18,7 @@ function Assets_before_Q_responseExtras() {
 			Q_Response::addScript($jsLibrary, 'Assets');
 		}
 		Q_Response::setScriptData('Q.plugins.Assets.Payments.stripe.publishableKey', $publishableKey);
+		Q_Response::setScriptData('Q.plugins.Assets.Payments.applePay.merchantIdentifier', Q_Config::get('Assets', 'payments', 'applePay', 'merchantIdentifier', null));
 		Q_Response::setScriptData('Q.plugins.Assets.Payments.googlePay', Q_Config::get('Assets', 'payments', 'googlePay', null));
 		Q_Response::setScriptData('Q.plugins.Assets.Payments.stripe.version', Q_Config::get('Assets', 'payments', 'stripe', 'version', null));
 	}

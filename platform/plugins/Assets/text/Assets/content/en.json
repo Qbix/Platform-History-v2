@@ -14,5 +14,9 @@
 		"PaymentMethod": "Payment method",
 		"ContactInfo": "Contact info",
 		"Pay": "Pay"
+	},
+	"credits": {
+		"InviteAcceptedBy": "Invite accepted by {{1}}",
+		"YouHaveCreditsToStart": "You have {{1}} credits to start"
 	}
 }

@@ -174,17 +174,17 @@ class Places_Geohash
 		$above = clone $query;
     	$above = $above->where(array(
 	        $field => new Db_Range($center, true, false, null)
-	    ))->orderBy($field, true)->fetchDbRows();
+	    ))->orderBy($field, true)->fetchAll(PDO::FETCH_ASSOC);
 		$below = clone $query;
 	    $below = $below->where(array(
 		    $field => new Db_Range(null, false, false, $center)
-	    ))->orderBy($field, false)->fetchDbRows();
+	    ))->orderBy($field, false)->fetchAll(PDO::FETCH_ASSOC);
     	$result = array();
     	$i = $j = $k = 0;
     	$a = count($above);
     	$b = count($below);
     	while ($k < $limit && $i < $a) {
-    		while ($j < $b) {
+    		while ($k < $limit && $j < $b) {
     			if (self::closer($center, $above[$i], $below[$j])) {
     				$result[] = $above[$i];
     				++$i;
@@ -192,6 +192,7 @@ class Places_Geohash
     				$result[] = $below[$j];
     				++$j;
 			    }
+				++$k;
 		    }
 		    ++$k;
 	    }
