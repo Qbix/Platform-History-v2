@@ -948,9 +948,10 @@ Elp.isVisible = function () {
  * on the same line.
  * @method remainingWidth
  * @param {boolean} subpixelAccuracy
+ * @param {boolean} excludeMargins
  * @return {number|null} Returns the remaining width, or null if element has no parent
  */
-Elp.remainingWidth = function (subpixelAccuracy) {
+Elp.remainingWidth = function (subpixelAccuracy, excludeMargins) {
 	var element = this;
 	var pn = this.parentNode;
 	if (!pn) {
@@ -964,14 +965,18 @@ Elp.remainingWidth = function (subpixelAccuracy) {
 		+ _parseFloat(cs.borderLeftWidth) + _parseFloat(cs.borderRightWidth);
 	Q.each(pn.children, function () {
 		if (this === element || !this.isVisible()) return;
-		var style = this.computedStyle();
 		var rect3 = this.getBoundingClientRect();
 		if (rect1.top > rect3.bottom || rect1.bottom < rect3.top) {
 			return;
 		}
+		var style = this.computedStyle();
 		w -= (rect3.right - rect3.left
 			+ _parseFloat(style.marginLeft) + _parseFloat(style.marginRight));
-	});	
+	});
+	if (excludeMargins) {
+		var tcs = this.computedStyle();
+		w -= (_parseFloat(tcs.marginLeft) + _parseFloat(tcs.marginRight));
+	}
 	return subpixelAccuracy ? w : Math.floor(w-0.01);
 };
 
