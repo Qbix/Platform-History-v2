@@ -11,3 +11,5 @@
 // check daily
 
 // if today is the day to charge, then call Assets::charge() on this subscription
+
+// if subscription not current and time() < endDate and not stopped, then charge
