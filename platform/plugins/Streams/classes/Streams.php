@@ -1691,14 +1691,13 @@ abstract class Streams extends Base_Streams
 			if (isset($relatedToArray[$sn])) {
 				continue;
 			}
-			if (!isset($relatedToArray[$sn])) {
-				// at least one new relation will be inserted
-				if (isset($options['weight'])) {
-					$parts = explode('+', "$options[weight]");
-					if (count($parts) > 1) {
-						$calculateWeights = $parts[1];
-						break;
-					}
+
+			// at least one new relation will be inserted
+			if (isset($options['weight'])) {
+				$parts = explode('+', "$options[weight]");
+				if (count($parts) > 1) {
+					$calculateWeights = $parts[1];
+					break;
 				}
 			}
 		}
@@ -1820,7 +1819,10 @@ abstract class Streams extends Base_Streams
 		$relatedFrom_messages = array();
 		$relatedTo_messages = array();
 		foreach ($$arrayField as $sn) {
-			
+			if (isset($relatedToArray[$sn])) {
+				continue;
+			}
+
 			$category = ($arrayField === 'toStreamName') ? $categories[$sn] : reset($categories);
 			$stream = ($arrayField === 'fromStreamName') ? $streams[$sn] : reset($streams);
 			$weight = (isset($options['weight']) && is_numeric($options['weight']))

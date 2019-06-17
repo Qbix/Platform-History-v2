@@ -50,11 +50,31 @@
 			}, function (err, html) {
 				$te.html(html);
 				var $url = tool.$('input').plugin('Q/placeholders');
+				var $browse = tool.$('.Websites_webpage_composer_input a');
 				var $goButton = tool.$('button[name=go]');
 				var $startButton = tool.$('button[name=startConversation]');
 				var $message = tool.$('textarea[name=message]').plugin('Q/placeholders').plugin('Q/autogrow');
 
-				$url.on('focus', function () { $(this).removeClass('Q_error'); });
+				$url.on('change keyup keydown input paste', function () {
+					setTimeout(function () {
+						if (tool.validUrl($url.val())) {
+							$browse.show();
+							$url.removeClass('Q_error');
+						} else {
+							$browse.hide();
+						}
+					}, 100);
+				});
+
+				$browse.on(Q.Pointer.fastclick, function () {
+					var url = $url.val();
+
+					if (Q.info.isCordova) {
+						cordova.plugins.browsertab.openUrl(url);
+					} else {
+						window.open(url, '_blank');
+					}
+				});
 
 				$startButton.on(Q.Pointer.fastclick, function () {
 					$startButton.addClass('Q_working');
@@ -82,9 +102,8 @@
 				$goButton.on(Q.Pointer.fastclick, function () {
 					var url = $url.val();
 
-					if (!/^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(url)) {
+					if (!tool.validUrl(url)) {
 						$url.addClass('Q_error');
-
 						return false;
 					}
 
@@ -129,11 +148,26 @@
 					});
 				});
 			});
+		},
+		/**
+		 * Check whether string is valid URL
+		 * @method validUrl
+		 * @param {string} url
+		 * @return bool
+		 */
+		validUrl: function (url) {
+			return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(url);
 		}
 	});
 
 	Q.Template.set('Websites/webpage/composer',
-		'<div class="Websites_webpage_composer Websites_webpage_preview_tool" data-type="document"><input name="url" autocomplete="off" placeholder="{{text.composer.PasteLinkHere}}"> <button name="go" class="Q_button">{{text.composer.Go}}</button></div>' +
+		'<div class="Websites_webpage_composer Websites_webpage_preview_tool" data-type="document">' +
+		'	<div class="Websites_webpage_composer_input">' +
+		'		<input name="url" autocomplete="off" placeholder="{{text.composer.PasteLinkHere}}">' +
+		'		<a><span>{{text.composer.BrowseTheWeb}}</span></a>' +
+		'	</div>' +
+		'	<button name="go" class="Q_button">{{text.composer.Go}}</button>' +
+		'</div>' +
 		'<textarea name="message" class="Q_disabled" placeholder="{{text.composer.WriteToStartConversation}}"></textarea>' +
 		'<button name="startConversation" class="Q_button Q_disabled">{{text.composer.StartConversation}}</button>'
 	);
