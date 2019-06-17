@@ -24,6 +24,8 @@ function Assets_after_Assets_startSubscription($params)
 	$communitySuffix = Users::communitySuffix();
 	$amount = $stream->getAttribute('amount');
 	$months = $stream->getAttribute('months');
+	$weeks = $stream->getAttribute('weeks');
+	$days = $stream->getAttribute('days');
 	$link = Q_Request::baseUrl('action.php') . "/Assets/payment"
 			. "?publisherId=" . urlencode($publisherId)
 			. "&userId=" . urlencode($user->id);
@@ -31,7 +33,7 @@ function Assets_after_Assets_startSubscription($params)
 	$fields = compact(
 		'user', 'publisher', 'publisherId', 'communityId', 'communityName', 'communitySuffix',
 		'description', 'subscription', 'stream', 'plan', 'currency',
-		'name', 'symbol', 'currencyName', 'amount', 'months', 'startDate', 'endDate', 'link'
+		'name', 'symbol', 'currencyName', 'amount', 'months', 'weeks', 'days', 'startDate', 'endDate', 'link'
 	);
 	
 	if ($user->emailAddress) {

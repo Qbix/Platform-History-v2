@@ -736,3 +736,8 @@ html.Q_scanning body > .Q_scanning_code {
 .Q_columns_siblingContainsExpanded {
 	z-index: 0 !important;
 }
+
+input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}

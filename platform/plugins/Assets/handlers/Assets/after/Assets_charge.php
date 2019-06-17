@@ -11,13 +11,10 @@ function Assets_after_Assets_charge($params)
 		$publisherId = $stream->publisherId;
 		$publisher = Users_User::fetch($publisherId, true);
 		if ($stream->type === 'Assets/subscription') {
-			$plan = Streams::fetchOne(
-				$stream->getAttribute('planPublisherId'),
-				$stream->getAttribute('planPublisherId'),
-				$stream->getAttribute('planStreamName'),
-				true
-			);
-			$months = $stream->getAttribute('months');
+			$plan = Assets_Subscription::getPlan($stream);
+			$months = $plan->getAttribute('months');
+			$weeks = $plan->getAttribute('weeks');
+			$days = $plan->getAttribute('days');
 			$startDate = $stream->getAttribute('startDate');
 			$endDate = $stream->getAttribute('endDate');
 		}
