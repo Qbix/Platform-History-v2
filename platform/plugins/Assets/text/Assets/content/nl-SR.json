@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Bedankt voor uw betaling tot {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} geabonneerd op {{plan.title}}",
         "YouSubscribedTo": "U bent ingeschreven voor {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Info over bestelling",
+        "PaymentMethod": "Betalingsmiddel",
+        "ContactInfo": "Contact informatie",
+        "Pay": "Betalen"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Uitnodiging geaccepteerd door {{1}}",
+        "YouHaveCreditsToStart": "Je hebt {{1}} credits om te starten"
     }
 }

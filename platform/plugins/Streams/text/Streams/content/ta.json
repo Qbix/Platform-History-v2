@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "{{stream.fields.title}}",
         "Streams\/task\/complete": "பணி முடிந்தது: {{stream.fields.title}}",
         "Streams\/task\/error": "போது பிழை: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: உள்வரும் செய்தி"
+        "Streams\/incoming\/*": "{{app}}: உள்வரும் செய்தி",
+        "ManageEmailSubscriptions": "உங்கள் மின்னஞ்சல் சந்தாக்களை நிர்வகிக்கவும்",
+        "IfUnsubscribe": "நீங்கள் குழுவிலக விரும்பினால்"
     },
     "invite": {
         "messageContent": "{{9}} {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "நீங்கள் ஒரு அழைப்பைப் பெற்றீர்களா?",
             "body": "ஏய், {{app}} பயன்பாட்டிற்கு ஒரு அழைப்பை நான் உங்களுக்கு அனுப்பியுள்ளேன். தயவு செய்து உங்கள் மின்னஞ்சலைச் சரிபார்த்து, அங்கே உள்ள இணைப்பை கிளிக் செய்க!"
         }
+    },
+    "participating": {
+        "Title": "தலைப்பு",
+        "Subscribed": "குழுசேரப்பட்டது",
+        "Participants": "பங்கேற்பாளர்கள்"
     }
 }

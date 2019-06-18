@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Go raibh maith agat as d&#39;íocaíocht le {{call 'publisher.displayName'}}",
         "SubscribedTo": "Liostáladh {{call 'user.displayName'}} le {{plan.title}}",
         "YouSubscribedTo": "Tá suibscríobh agat le {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Eolas faoi ordú",
+        "PaymentMethod": "Modh íocaíochta",
+        "ContactInfo": "Eolas teagmhála",
+        "Pay": "Pá"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Glacadh le {{1}}",
+        "YouHaveCreditsToStart": "Tá creidmheasanna {{1}} agat le tosú"
     }
 }

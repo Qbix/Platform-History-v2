@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "{9 9}} پر تیار کی گئی",
         "Streams\/task\/complete": "ٹاسک مکمل ہوگیا: {{stream.fields.title}}",
         "Streams\/task\/error": "دوران غلطی: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{999}}: آنے والے پیغام"
+        "Streams\/incoming\/*": "{999}}: آنے والے پیغام",
+        "ManageEmailSubscriptions": "اپنا ای میل سبسکرائب کریں",
+        "IfUnsubscribe": "اگر آپ سبسکرائب کرنا چاہتے ہیں"
     },
     "invite": {
         "messageContent": "{{displayName}} آپ کو {{inviteUrl}} میں مدعو کیا",
@@ -92,5 +94,10 @@
             "subject": "کیا آپ نے مدعو کیا؟",
             "body": "ارے، میں نے صرف آپ {{app}} اپلی کیشن میں ایک دعوت نامہ بھیجی ہے. براہ کرم اپنا ای میل چیک کریں اور اس لنک پر کلک کریں!"
         }
+    },
+    "participating": {
+        "Title": "عنوان",
+        "Subscribed": "سبسکرائب",
+        "Participants": "امیدوار"
     }
 }

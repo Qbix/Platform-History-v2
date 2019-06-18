@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Pokrok dosiahnutý {{stream.fields.title}}",
         "Streams\/task\/complete": "Úloha bola dokončená: {{stream.fields.title}}",
         "Streams\/task\/error": "Chyba počas: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Prichádzajúca správa"
+        "Streams\/incoming\/*": "{{app}}: Prichádzajúca správa",
+        "ManageEmailSubscriptions": "spravovať odbery e-mailov",
+        "IfUnsubscribe": "Ak sa chcete odhlásiť"
     },
     "invite": {
         "messageContent": "{{displayName}} vás pozvalo na {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Dostali ste pozvanie?",
             "body": "Hej, práve som vám poslal pozvánku na aplikáciu {{app}}. Skontrolujte svoj e-mail a kliknite na odkaz."
         }
+    },
+    "participating": {
+        "Title": "nadpis",
+        "Subscribed": "upísaný",
+        "Participants": "účastníci"
     }
 }

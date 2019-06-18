@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Дякуємо за ваш платіж до {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} підписався на {{plan.title}}",
         "YouSubscribedTo": "Ви підписані на {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Інформація про замовлення",
+        "PaymentMethod": "Спосіб оплати",
+        "ContactInfo": "Контактна інформація",
+        "Pay": "Оплатити"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Запрошення, прийняте {{1}}",
+        "YouHaveCreditsToStart": "Для початку потрібно {{1}}"
     }
 }

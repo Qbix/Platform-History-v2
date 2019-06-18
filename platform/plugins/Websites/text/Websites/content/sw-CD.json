@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Nenda",
-            "PasteLinkHere": "Weka kiungo hapa"
+            "PasteLinkHere": "Weka kiungo hapa",
+            "BrowseTheWeb": "Vinjari",
+            "WriteToStartConversation": "Andika mawazo yako ili uanze mazungumzo",
+            "StartConversation": "Anza Majadiliano"
         }
     }
 }

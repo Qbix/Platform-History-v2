@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Dėkojame, kad apmokėjote {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} prenumeravo {{plan.title}}",
         "YouSubscribedTo": "Jūs prenumeravote {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Informacija apie užsakymą",
+        "PaymentMethod": "Mokėjimo būdas",
+        "ContactInfo": "Kontaktinė informacija",
+        "Pay": "Mokėti"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Pakviesti {{1}}",
+        "YouHaveCreditsToStart": "Pradėti reikia {{1}} kreditų"
     }
 }

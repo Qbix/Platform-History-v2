@@ -2,25 +2,28 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "\ud64d\ubcf4 \ub9c1\ud06c",
-                "startDate": "\uc2dc\uc791 \ub0a0\uc9dc",
-                "startTime": "\uc2dc\uc791 \uc2dc\uac04",
-                "endDate": "\uc885\ub8cc\uc77c",
-                "endTime": "\uc885\ub8cc \uc2dc\uac04",
-                "budget": "\uc608\uc0b0"
+                "link": "홍보 링크",
+                "startDate": "시작 날짜",
+                "startTime": "시작 시간",
+                "endDate": "종료일",
+                "endTime": "종료 시간",
+                "budget": "예산"
             },
             "interests": {
-                "Title": "\uad00\uc2ec \ubd84\uc57c\ubcc4 \ud544\ud130\ub9c1",
-                "FilterInterests": "\uad00\uc2ec \ubd84\uc57c\ub97c \uc785\ub825\ud558\uae30 \uc2dc\uc791\ud569\ub2c8\ub2e4 ..."
+                "Title": "관심 분야별 필터링",
+                "FilterInterests": "관심 분야를 입력하기 시작합니다 ..."
             },
-            "Interest": "\uad00\uc2ec",
-            "Location": "\uc704\uce58"
+            "Interest": "관심",
+            "Location": "위치"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "\uac00\uae30",
-            "PasteLinkHere": "\uc5ec\uae30\uc5d0 \ub9c1\ud06c \ubd99\uc5ec \ub123\uae30"
+            "Go": "가기",
+            "PasteLinkHere": "여기에 링크 붙여 넣기",
+            "BrowseTheWeb": "검색",
+            "WriteToStartConversation": "대화를 시작할 생각을 남기세요.",
+            "StartConversation": "대화 시작"
         }
     }
 }

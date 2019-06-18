@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Σας ευχαριστούμε για την πληρωμή σας στην {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} εγγραφεί στο {{plan.title}}",
         "YouSubscribedTo": "Έχετε εγγραφεί στο {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Πληροφορίες σχετικά με την παραγγελία",
+        "PaymentMethod": "Μέθοδος πληρωμής",
+        "ContactInfo": "Πληροφορίες επαφής",
+        "Pay": "Πληρωμή"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Η πρόσκληση έγινε αποδεκτή από την {{1}}",
+        "YouHaveCreditsToStart": "Έχετε {{1}} πιστώσεις για να ξεκινήσετε"
     }
 }

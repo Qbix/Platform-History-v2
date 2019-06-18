@@ -1,96 +1,103 @@
 {
     "preview": {
-        "NewItemTitle": "\u0e44\u0e2d\u0e40\u0e17\u0e47\u0e21\u0e43\u0e2b\u0e21\u0e48"
+        "NewItemTitle": "ไอเท็มใหม่"
     },
     "labels": {
-        "Streams/invited": "\u0e04\u0e19\u0e17\u0e35\u0e48\u0e09\u0e31\u0e19\u0e40\u0e0a\u0e34\u0e0d",
-        "Streams/invitedMe": "\u0e43\u0e04\u0e23\u0e40\u0e0a\u0e34\u0e0d\u0e09\u0e31\u0e19"
+        "Streams/invited": "คนที่ฉันเชิญ",
+        "Streams/invitedMe": "ใครเชิญฉัน"
     },
     "interests": {
-        "Filter": "\u0e04\u0e38\u0e13\u0e0a\u0e2d\u0e1a\u0e2d\u0e30\u0e44\u0e23",
-        "CanAdd": "\u0e2b\u0e32\u0e01\u0e04\u0e38\u0e13\u0e22\u0e31\u0e07\u0e44\u0e21\u0e48\u0e1e\u0e1a\u0e2a\u0e34\u0e48\u0e07\u0e17\u0e35\u0e48\u0e04\u0e38\u0e13\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e04\u0e38\u0e13\u0e2a\u0e32\u0e21\u0e32\u0e23\u0e16\u0e40\u0e1e\u0e34\u0e48\u0e21\u0e04\u0e27\u0e32\u0e21\u0e2a\u0e19\u0e43\u0e08\u0e43\u0e2b\u0e21\u0e48\u0e14\u0e49\u0e32\u0e19\u0e25\u0e48\u0e32\u0e07:",
-        "TrySynonyms": "\u0e44\u0e21\u0e48\u0e40\u0e2b\u0e47\u0e19\u0e40\u0e2b\u0e23\u0e2d \u0e25\u0e2d\u0e07\u0e04\u0e33\u0e1e\u0e49\u0e2d\u0e07\u0e04\u0e27\u0e32\u0e21\u0e2b\u0e21\u0e32\u0e22",
-        "AddUnderCategory": "\u0e40\u0e1e\u0e34\u0e48\u0e21\u0e20\u0e32\u0e22\u0e43\u0e15\u0e49\u0e2b\u0e21\u0e27\u0e14\u0e2b\u0e21\u0e39\u0e48 ...",
-        "Other": "\u0e2d\u0e37\u0e48\u0e19 \u0e46",
-        "Unlisted": "\u0e44\u0e21\u0e48\u0e41\u0e2a\u0e14\u0e07"
+        "Filter": "คุณชอบอะไร",
+        "CanAdd": "หากคุณยังไม่พบสิ่งที่คุณต้องการคุณสามารถเพิ่มความสนใจใหม่ด้านล่าง:",
+        "TrySynonyms": "ไม่เห็นเหรอ ลองคำพ้องความหมาย",
+        "AddUnderCategory": "เพิ่มภายใต้หมวดหมู่ ...",
+        "Other": "อื่น ๆ",
+        "Unlisted": "ไม่แสดง"
     },
     "chat": {
-        "flaggedForAdminReview": "\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e16\u0e39\u0e01\u0e15\u0e31\u0e49\u0e07\u0e04\u0e48\u0e32\u0e2a\u0e16\u0e32\u0e19\u0e30\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e43\u0e2b\u0e49\u0e1c\u0e39\u0e49\u0e14\u0e39\u0e41\u0e25\u0e23\u0e30\u0e1a\u0e1a\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a \u0e41\u0e15\u0e30\u0e2d\u0e35\u0e01\u0e04\u0e23\u0e31\u0e49\u0e07\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e22\u0e01\u0e40\u0e25\u0e34\u0e01\u0e01\u0e32\u0e23\u0e15\u0e34\u0e14\u0e18\u0e07",
-        "noOneSaid": "\u0e44\u0e21\u0e48\u0e21\u0e35\u0e43\u0e04\u0e23\u0e1e\u0e39\u0e14\u0e2d\u0e30\u0e44\u0e23\u0e40\u0e25\u0e22",
-        "closeChatButton": "\u0e1b\u0e34\u0e14\u0e01\u0e32\u0e23\u0e41\u0e0a\u0e17",
-        "closeChatConfirmTitle": "\u0e1b\u0e34\u0e14\u0e01\u0e32\u0e23\u0e41\u0e0a\u0e17\u0e19\u0e35\u0e49\u0e44\u0e2b\u0e21",
-        "closeChatConfirm": "\u0e04\u0e38\u0e13\u0e41\u0e19\u0e48\u0e43\u0e08\u0e2b\u0e23\u0e37\u0e2d\u0e27\u0e48\u0e32\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e1b\u0e34\u0e14\u0e01\u0e32\u0e23\u0e41\u0e0a\u0e17\u0e19\u0e35\u0e49?",
-        "closeChatConfirmYes": "\u0e43\u0e0a\u0e48",
-        "closeChatConfirmNo": "\u0e44\u0e21\u0e48",
-        "earlierComments": "\u0e04\u0e27\u0e32\u0e21\u0e04\u0e34\u0e14\u0e40\u0e2b\u0e47\u0e19\u0e01\u0e48\u0e2d\u0e19\u0e2b\u0e19\u0e49\u0e32"
+        "flaggedForAdminReview": "ข้อความถูกตั้งค่าสถานะเพื่อให้ผู้ดูแลระบบตรวจสอบ แตะอีกครั้งเพื่อยกเลิกการติดธง",
+        "noOneSaid": "ไม่มีใครพูดอะไรเลย",
+        "closeChatButton": "ปิดการแชท",
+        "closeChatConfirmTitle": "ปิดการแชทนี้ไหม",
+        "closeChatConfirm": "คุณแน่ใจหรือว่าต้องการปิดการแชทนี้?",
+        "closeChatConfirmYes": "ใช่",
+        "closeChatConfirmNo": "ไม่",
+        "earlierComments": "ความคิดเห็นก่อนหน้า"
     },
     "notifications": {
-        "*": "\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21 {{& message.fields.type}} \u0e16\u0e36\u0e07 {{1,000}}",
-        "Streams/chat/message": "{{&call 'avatar.displayName'}} \u0e1e\u0e39\u0e14\u0e27\u0e48\u0e32:",
-        "Streams/changed": "\u0e01\u0e32\u0e23\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1b\u0e25\u0e07\u0e43\u0e19 {{stream.fields.title}}",
-        "Streams/invite": "\u0e04\u0e38\u0e13\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a\u0e40\u0e0a\u0e34\u0e0d\u0e43\u0e2b\u0e49 {{& stream.fields.title}}",
-        "Streams/announcement": "\u0e1b\u0e23\u0e30\u0e01\u0e32\u0e28\u0e43\u0e19 {{& streams.fields.title}}",
-        "Streams/access": "{{&call 'avatar.displayName'}} \u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e01\u0e32\u0e23\u0e40\u0e02\u0e49\u0e32\u0e16\u0e36\u0e07\u0e2a\u0e15\u0e23\u0e35\u0e21",
-        "Streams/chat/edit": "\u0e41\u0e01\u0e49\u0e44\u0e02\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e41\u0e0a\u0e17\u0e41\u0e25\u0e49\u0e27",
-        "Streams/chat/remove": "\u0e25\u0e1a\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e41\u0e0a\u0e17\u0e41\u0e25\u0e49\u0e27",
-        "Streams/closed": "{{stream.fields.title}} \u0e1b\u0e34\u0e14\u0e41\u0e25\u0e49\u0e27",
-        "Streams/task/progress": "\u0e04\u0e27\u0e32\u0e21\u0e04\u0e37\u0e1a\u0e2b\u0e19\u0e49\u0e32\u0e40\u0e21\u0e37\u0e48\u0e2d\u0e27\u0e31\u0e19\u0e17\u0e35\u0e48 {{stream.fields.title}}",
-        "Streams/task/complete": "\u0e20\u0e32\u0e23\u0e01\u0e34\u0e08\u0e40\u0e2a\u0e23\u0e47\u0e08\u0e2a\u0e34\u0e49\u0e19: {{stream.fields.title}}",
-        "Streams/task/error": "\u0e02\u0e49\u0e2d\u0e1c\u0e34\u0e14\u0e1e\u0e25\u0e32\u0e14\u0e23\u0e30\u0e2b\u0e27\u0e48\u0e32\u0e07: {{stream.fields.title}}",
-        "Streams/incoming/*": "{{app}}: \u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e17\u0e35\u0e48\u0e40\u0e02\u0e49\u0e32\u0e21\u0e32"
+        "*": "ข้อความ {{& message.fields.type}} ถึง {{1,000}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} พูดว่า:",
+        "Streams/changed": "การเปลี่ยนแปลงใน {{stream.fields.title}}",
+        "Streams/invite": "คุณได้รับเชิญให้ {{& stream.fields.title}}",
+        "Streams/announcement": "ประกาศใน {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} เปลี่ยนการเข้าถึงสตรีม",
+        "Streams/chat/edit": "แก้ไขข้อความแชทแล้ว",
+        "Streams/chat/remove": "ลบข้อความแชทแล้ว",
+        "Streams/closed": "{{stream.fields.title}} ปิดแล้ว",
+        "Streams/task/progress": "ความคืบหน้าเมื่อวันที่ {{stream.fields.title}}",
+        "Streams/task/complete": "ภารกิจเสร็จสิ้น: {{stream.fields.title}}",
+        "Streams/task/error": "ข้อผิดพลาดระหว่าง: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: ข้อความที่เข้ามา",
+        "ManageEmailSubscriptions": "จัดการการสมัครอีเมลของคุณ",
+        "IfUnsubscribe": "หากคุณต้องการยกเลิกการสมัคร"
     },
     "invite": {
-        "messageContent": "{{displayName}} \u0e40\u0e0a\u0e34\u0e0d\u0e04\u0e38\u0e13\u0e40\u0e02\u0e49\u0e32\u0e23\u0e48\u0e27\u0e21 {{1,000}}",
+        "messageContent": "{{displayName}} เชิญคุณเข้าร่วม {{1,000}}",
         "dialog": {
-            "chooseFromContacts": "\u0e40\u0e25\u0e37\u0e2d\u0e01\u0e08\u0e32\u0e01\u0e1c\u0e39\u0e49\u0e15\u0e34\u0e14\u0e15\u0e48\u0e2d\u0e02\u0e2d\u0e07\u0e04\u0e38\u0e13",
-            "selectFromContacts": "\u0e40\u0e25\u0e37\u0e2d\u0e01\u0e08\u0e32\u0e01\u0e1c\u0e39\u0e49\u0e15\u0e34\u0e14\u0e15\u0e48\u0e2d",
-            "photo": "\u0e16\u0e48\u0e32\u0e22\u0e23\u0e39\u0e1b",
-            "photoInstruction": "\u0e2b\u0e32\u0e01\u0e1a\u0e38\u0e04\u0e04\u0e25\u0e17\u0e35\u0e48\u0e2a\u0e41\u0e01\u0e19\u0e23\u0e2b\u0e31\u0e2a QR \u0e02\u0e2d\u0e07\u0e04\u0e38\u0e13\u0e2d\u0e22\u0e39\u0e48\u0e02\u0e49\u0e32\u0e07\u0e2b\u0e19\u0e49\u0e32\u0e04\u0e38\u0e13\u0e43\u0e2b\u0e49\u0e16\u0e48\u0e32\u0e22\u0e23\u0e39\u0e1b\u0e1e\u0e27\u0e01\u0e40\u0e02\u0e32",
-            "to": "\u0e16\u0e36\u0e07: {{Stream Title}}",
-            "go": "\u0e44\u0e1b",
-            "title": "\u0e40\u0e0a\u0e34\u0e0d",
-            "placeholder": "\u0e2b\u0e21\u0e32\u0e22\u0e40\u0e25\u0e02\u0e42\u0e17\u0e23\u0e28\u0e31\u0e1e\u0e17\u0e4c\u0e2b\u0e23\u0e37\u0e2d\u0e17\u0e35\u0e48\u0e2d\u0e22\u0e39\u0e48\u0e2d\u0e35\u0e40\u0e21\u0e25",
-            "orInvite": "\u0e2b\u0e23\u0e37\u0e2d\u0e40\u0e0a\u0e34\u0e0d\u0e1c\u0e39\u0e49\u0e04\u0e19\u0e42\u0e14\u0e22\u0e43\u0e0a\u0e49:",
-            "QR": "{{ClickOrTap}} \u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e2a\u0e23\u0e49\u0e32\u0e07\u0e23\u0e2b\u0e31\u0e2a QR",
-            "QRtitle": "\u0e2a\u0e41\u0e01\u0e19\u0e23\u0e2b\u0e31\u0e2a QR \u0e19\u0e35\u0e49",
-            "byEmail": "\u0e2d\u0e35\u0e40\u0e21\u0e25\u0e4c",
-            "byText": "\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21",
+            "chooseFromContacts": "เลือกจากผู้ติดต่อของคุณ",
+            "selectFromContacts": "เลือกจากผู้ติดต่อ",
+            "photo": "ถ่ายรูป",
+            "photoInstruction": "หากบุคคลที่สแกนรหัส QR ของคุณอยู่ข้างหน้าคุณให้ถ่ายรูปพวกเขา",
+            "to": "ถึง: {{Stream Title}}",
+            "go": "ไป",
+            "title": "เชิญ",
+            "placeholder": "หมายเลขโทรศัพท์หรือที่อยู่อีเมล",
+            "orInvite": "หรือเชิญผู้คนโดยใช้:",
+            "QR": "{{ClickOrTap}} เพื่อสร้างรหัส QR",
+            "QRtitle": "สแกนรหัส QR นี้",
+            "byEmail": "อีเมล์",
+            "byText": "ข้อความ",
             "byFacebook": "Facebook",
-            "byTwitter": "\u0e1e\u0e39\u0e14\u0e40\u0e1a\u0e32\u0e41\u0e25\u0e30\u0e23\u0e27\u0e14\u0e40\u0e23\u0e47\u0e27",
-            "QRscanned": "\u0e1e\u0e27\u0e01\u0e40\u0e02\u0e32\u0e2a\u0e41\u0e01\u0e19\u0e21\u0e31\u0e19!"
+            "byTwitter": "พูดเบาและรวดเร็ว",
+            "QRscanned": "พวกเขาสแกนมัน!"
         },
         "email": {
-            "subject": "\u0e40\u0e2e\u0e49\u0e25\u0e2d\u0e07\u0e14\u0e39\u0e19\u0e35\u0e48\u0e2a\u0e34",
-            "PleaseVisitLink": "\u0e01\u0e23\u0e38\u0e13\u0e32\u0e40\u0e22\u0e35\u0e48\u0e22\u0e21\u0e0a\u0e21\u0e25\u0e34\u0e07\u0e04\u0e4c\u0e15\u0e48\u0e2d\u0e44\u0e1b\u0e19\u0e35\u0e49:",
-            "InvitingYou": "\u0e09\u0e31\u0e19\u0e40\u0e0a\u0e34\u0e0d\u0e04\u0e38\u0e13\u0e43\u0e2b\u0e49 {{title}}",
-            "HasInvitedYou": "{{displayName}} \u0e40\u0e0a\u0e34\u0e0d\u0e04\u0e38\u0e13\u0e43\u0e2b\u0e49 {{title}}"
+            "subject": "เฮ้ลองดูนี่สิ",
+            "PleaseVisitLink": "กรุณาเยี่ยมชมลิงค์ต่อไปนี้:",
+            "InvitingYou": "ฉันเชิญคุณให้ {{title}}",
+            "HasInvitedYou": "{{displayName}} เชิญคุณให้ {{title}}"
         },
         "sms": {
-            "content": "\u0e04\u0e38\u0e13\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a\u0e40\u0e0a\u0e34\u0e0d\u0e43\u0e2b\u0e49 {{title}} \u0e01\u0e23\u0e38\u0e13\u0e32\u0e41\u0e15\u0e30 {{1,000}}"
+            "content": "คุณได้รับเชิญให้ {{title}} กรุณาแตะ {{1,000}}"
         },
         "notice": {
-            "text": "\u0e04\u0e38\u0e13\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a\u0e40\u0e0a\u0e34\u0e0d {{ClickOrTap}} \u0e17\u0e35\u0e48\u0e19\u0e35\u0e48\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e22\u0e2d\u0e21\u0e23\u0e31\u0e1a\u0e41\u0e25\u0e30\u0e40\u0e02\u0e49\u0e32\u0e23\u0e48\u0e27\u0e21"
+            "text": "คุณได้รับเชิญ {{ClickOrTap}} ที่นี่เพื่อยอมรับและเข้าร่วม"
         }
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} \u0e42\u0e1e\u0e2a\u0e15\u0e4c\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21 <em>{{message.fields.type}}</em> \u0e44\u0e1b\u0e17\u0e35\u0e48 {{stream.fields.title}}"
+            "posted": "{{call 'avatar.displayName'}} โพสต์ข้อความ <em>{{message.fields.type}}</em> ไปที่ {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} \u0e43\u0e19 {{& url}}: {{& message.fields.content}}"
+            "body": "{{& call 'avatar.displayName'}} ใน {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {
         "mobile": {
-            "alert": "\u0e04\u0e33\u0e40\u0e0a\u0e34\u0e0d\u0e08\u0e30\u0e16\u0e39\u0e01\u0e2a\u0e48\u0e07\u0e08\u0e32\u0e01\u0e2b\u0e21\u0e32\u0e22\u0e40\u0e25\u0e02\u0e02\u0e2d\u0e07\u0e40\u0e23\u0e32\u0e0b\u0e36\u0e48\u0e07\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e19\u0e02\u0e2d\u0e07\u0e04\u0e38\u0e13\u0e22\u0e31\u0e07\u0e08\u0e33\u0e44\u0e21\u0e48\u0e44\u0e14\u0e49 \u0e15\u0e34\u0e14\u0e15\u0e32\u0e21\u0e14\u0e49\u0e27\u0e22\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e14\u0e48\u0e27\u0e19\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e43\u0e2b\u0e49\u0e1e\u0e27\u0e01\u0e40\u0e02\u0e32\u0e23\u0e39\u0e49\u0e27\u0e48\u0e32\u0e04\u0e33\u0e40\u0e0a\u0e34\u0e0d\u0e21\u0e32\u0e08\u0e32\u0e01\u0e04\u0e38\u0e13\u0e02\u0e2d\u0e43\u0e2b\u0e49\u0e1e\u0e27\u0e01\u0e40\u0e02\u0e32\u0e04\u0e25\u0e34\u0e01\u0e17\u0e35\u0e48\u0e25\u0e34\u0e07\u0e04\u0e4c",
-            "confirm": "\u0e04\u0e33\u0e40\u0e0a\u0e34\u0e0d\u0e08\u0e30\u0e16\u0e39\u0e01\u0e2a\u0e48\u0e07\u0e08\u0e32\u0e01\u0e2b\u0e21\u0e32\u0e22\u0e40\u0e25\u0e02\u0e02\u0e2d\u0e07\u0e40\u0e23\u0e32\u0e0b\u0e36\u0e48\u0e07\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e19\u0e02\u0e2d\u0e07\u0e04\u0e38\u0e13\u0e22\u0e31\u0e07\u0e08\u0e33\u0e44\u0e21\u0e48\u0e44\u0e14\u0e49 \u0e04\u0e38\u0e13\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e15\u0e34\u0e14\u0e15\u0e32\u0e21\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e2a\u0e31\u0e49\u0e19 \u0e46 \u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e43\u0e2b\u0e49\u0e1e\u0e27\u0e01\u0e40\u0e02\u0e32\u0e17\u0e23\u0e32\u0e1a\u0e27\u0e48\u0e32\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e40\u0e0a\u0e34\u0e0d\u0e21\u0e32\u0e08\u0e32\u0e01\u0e04\u0e38\u0e13\u0e02\u0e2d\u0e43\u0e2b\u0e49\u0e1e\u0e27\u0e01\u0e40\u0e02\u0e32\u0e04\u0e25\u0e34\u0e01\u0e25\u0e34\u0e07\u0e01\u0e4c",
-            "check": "\u0e2a\u0e27\u0e31\u0e2a\u0e14\u0e35\u0e09\u0e31\u0e19\u0e40\u0e1e\u0e34\u0e48\u0e07\u0e2a\u0e48\u0e07\u0e04\u0e33\u0e40\u0e0a\u0e34\u0e0d\u0e43\u0e2b\u0e49\u0e04\u0e38\u0e13\u0e44\u0e1b\u0e22\u0e31\u0e07\u0e41\u0e2d\u0e1b {{app}} \u0e01\u0e23\u0e38\u0e13\u0e32\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a sms \u0e02\u0e2d\u0e07\u0e04\u0e38\u0e13\u0e41\u0e25\u0e49\u0e27\u0e04\u0e25\u0e34\u0e01\u0e17\u0e35\u0e48\u0e25\u0e34\u0e07\u0e04\u0e4c!"
+            "alert": "คำเชิญจะถูกส่งจากหมายเลขของเราซึ่งเพื่อนของคุณยังจำไม่ได้ ติดตามด้วยข้อความด่วนเพื่อให้พวกเขารู้ว่าคำเชิญมาจากคุณขอให้พวกเขาคลิกที่ลิงค์",
+            "confirm": "คำเชิญจะถูกส่งจากหมายเลขของเราซึ่งเพื่อนของคุณยังจำไม่ได้ คุณต้องการติดตามข้อความสั้น ๆ เพื่อให้พวกเขาทราบว่าข้อความเชิญมาจากคุณขอให้พวกเขาคลิกลิงก์",
+            "check": "สวัสดีฉันเพิ่งส่งคำเชิญให้คุณไปยังแอป {{app}} กรุณาตรวจสอบ sms ของคุณแล้วคลิกที่ลิงค์!"
         },
         "email": {
-            "alert": "\u0e04\u0e33\u0e40\u0e0a\u0e34\u0e0d\u0e08\u0e30\u0e16\u0e39\u0e01\u0e2a\u0e48\u0e07\u0e08\u0e32\u0e01\u0e42\u0e14\u0e40\u0e21\u0e19\u0e02\u0e2d\u0e07\u0e40\u0e23\u0e32\u0e0b\u0e36\u0e48\u0e07\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e19\u0e02\u0e2d\u0e07\u0e04\u0e38\u0e13\u0e22\u0e31\u0e07\u0e08\u0e33\u0e44\u0e21\u0e48\u0e44\u0e14\u0e49 \u0e15\u0e34\u0e14\u0e15\u0e32\u0e21\u0e14\u0e49\u0e27\u0e22\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e14\u0e48\u0e27\u0e19\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e43\u0e2b\u0e49\u0e1e\u0e27\u0e01\u0e40\u0e02\u0e32\u0e23\u0e39\u0e49\u0e27\u0e48\u0e32\u0e04\u0e33\u0e40\u0e0a\u0e34\u0e0d\u0e21\u0e32\u0e08\u0e32\u0e01\u0e04\u0e38\u0e13\u0e02\u0e2d\u0e43\u0e2b\u0e49\u0e1e\u0e27\u0e01\u0e40\u0e02\u0e32\u0e04\u0e25\u0e34\u0e01\u0e17\u0e35\u0e48\u0e25\u0e34\u0e07\u0e04\u0e4c",
-            "confirm": "\u0e04\u0e33\u0e40\u0e0a\u0e34\u0e0d\u0e08\u0e30\u0e16\u0e39\u0e01\u0e2a\u0e48\u0e07\u0e08\u0e32\u0e01\u0e42\u0e14\u0e40\u0e21\u0e19\u0e02\u0e2d\u0e07\u0e40\u0e23\u0e32\u0e0b\u0e36\u0e48\u0e07\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e19\u0e02\u0e2d\u0e07\u0e04\u0e38\u0e13\u0e22\u0e31\u0e07\u0e08\u0e33\u0e44\u0e21\u0e48\u0e44\u0e14\u0e49 \u0e04\u0e38\u0e13\u0e15\u0e49\u0e2d\u0e07\u0e01\u0e32\u0e23\u0e15\u0e34\u0e14\u0e15\u0e32\u0e21\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e2a\u0e31\u0e49\u0e19 \u0e46 \u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e43\u0e2b\u0e49\u0e1e\u0e27\u0e01\u0e40\u0e02\u0e32\u0e17\u0e23\u0e32\u0e1a\u0e27\u0e48\u0e32\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e40\u0e0a\u0e34\u0e0d\u0e21\u0e32\u0e08\u0e32\u0e01\u0e04\u0e38\u0e13\u0e02\u0e2d\u0e43\u0e2b\u0e49\u0e1e\u0e27\u0e01\u0e40\u0e02\u0e32\u0e04\u0e25\u0e34\u0e01\u0e25\u0e34\u0e07\u0e01\u0e4c",
-            "subject": "\u0e04\u0e38\u0e13\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a\u0e04\u0e33\u0e40\u0e0a\u0e34\u0e0d\u0e2b\u0e23\u0e37\u0e2d\u0e44\u0e21\u0e48",
-            "body": "\u0e2a\u0e27\u0e31\u0e2a\u0e14\u0e35\u0e09\u0e31\u0e19\u0e40\u0e1e\u0e34\u0e48\u0e07\u0e2a\u0e48\u0e07\u0e04\u0e33\u0e40\u0e0a\u0e34\u0e0d\u0e43\u0e2b\u0e49\u0e04\u0e38\u0e13\u0e44\u0e1b\u0e22\u0e31\u0e07\u0e41\u0e2d\u0e1b {{app}} \u0e42\u0e1b\u0e23\u0e14\u0e15\u0e23\u0e27\u0e08\u0e2a\u0e2d\u0e1a\u0e2d\u0e35\u0e40\u0e21\u0e25\u0e02\u0e2d\u0e07\u0e04\u0e38\u0e13\u0e41\u0e25\u0e30\u0e04\u0e25\u0e34\u0e01\u0e25\u0e34\u0e07\u0e01\u0e4c\u0e43\u0e19\u0e19\u0e31\u0e49\u0e19!"
+            "alert": "คำเชิญจะถูกส่งจากโดเมนของเราซึ่งเพื่อนของคุณยังจำไม่ได้ ติดตามด้วยข้อความด่วนเพื่อให้พวกเขารู้ว่าคำเชิญมาจากคุณขอให้พวกเขาคลิกที่ลิงค์",
+            "confirm": "คำเชิญจะถูกส่งจากโดเมนของเราซึ่งเพื่อนของคุณยังจำไม่ได้ คุณต้องการติดตามข้อความสั้น ๆ เพื่อให้พวกเขาทราบว่าข้อความเชิญมาจากคุณขอให้พวกเขาคลิกลิงก์",
+            "subject": "คุณได้รับคำเชิญหรือไม่",
+            "body": "สวัสดีฉันเพิ่งส่งคำเชิญให้คุณไปยังแอป {{app}} โปรดตรวจสอบอีเมลของคุณและคลิกลิงก์ในนั้น!"
         }
+    },
+    "participating": {
+        "Title": "หัวข้อ",
+        "Subscribed": "สมัครเป็นสมาชิก",
+        "Participants": "ผู้เข้าร่วม"
     }
 }

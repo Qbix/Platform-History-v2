@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "{{call 'publisher.displayName'}} కు మీ చెల్లింపుకు ధన్యవాదాలు",
         "SubscribedTo": "{{plan.title}} కు చందా చేసారు {{call 'user.displayName'}}",
         "YouSubscribedTo": "మీరు {{plan.title}} కు చందా చేసారు"
+    },
+    "payment": {
+        "AboutOrder": "ఆర్డర్ గురించి సమాచారం",
+        "PaymentMethod": "పైకము చెల్లించు విదానం",
+        "ContactInfo": "సంప్రదింపు సమాచారం",
+        "Pay": "చెల్లించండి"
+    },
+    "credits": {
+        "InviteAcceptedBy": "ఆహ్వానించబడినది {{999} by",
+        "YouHaveCreditsToStart": "ప్రారంభించడానికి మీకు {{1}} క్రెడిట్‌లు ఉన్నాయి"
     }
 }

@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Kemajuan yang dibuat pada {{stream.fields.title}}",
         "Streams\/task\/complete": "Tugas selesai: {{stream.fields.title}}",
         "Streams\/task\/error": "Ralat semasa: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Mesej Masuk"
+        "Streams\/incoming\/*": "{{app}}: Mesej Masuk",
+        "ManageEmailSubscriptions": "uruskan langganan e-mel anda",
+        "IfUnsubscribe": "Sekiranya anda mahu berhenti berlangganan"
     },
     "invite": {
         "messageContent": "{{displayName}} menjemput anda ke {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Adakah anda mendapat jemputan?",
             "body": "Hei, saya hanya menghantar anda jemputan ke aplikasi {{app}}. Sila semak e-mel anda dan klik pautan di sana!"
         }
+    },
+    "participating": {
+        "Title": "Tajuk",
+        "Subscribed": "Dilanggan",
+        "Participants": "Peserta"
     }
 }

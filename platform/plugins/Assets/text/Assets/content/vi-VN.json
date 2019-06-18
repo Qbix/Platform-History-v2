@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Cảm ơn bạn đã thanh toán cho {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} đã đăng ký {{plan.title}}",
         "YouSubscribedTo": "Bạn đã đăng ký {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Thông tin về đơn hàng",
+        "PaymentMethod": "Phương thức thanh toán",
+        "ContactInfo": "Thông tin liên lạc",
+        "Pay": "Trả"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Mời được chấp nhận bởi {{1}}",
+        "YouHaveCreditsToStart": "Bạn có {{1}} tín dụng để bắt đầu"
     }
 }

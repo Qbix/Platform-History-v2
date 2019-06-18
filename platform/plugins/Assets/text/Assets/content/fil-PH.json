@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Salamat sa iyong pagbabayad sa {{call 'publisher.displayName'}}",
         "SubscribedTo": "Nag-subscribe ang {{call 'user.displayName'}} sa {{plan.title}}",
         "YouSubscribedTo": "Nag-subscribe ka sa {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Impormasyon ukol sa pagkakasunud-sunod",
+        "PaymentMethod": "Paraan ng Pagbayad",
+        "ContactInfo": "Impormasyon ng contact",
+        "Pay": "Magbayad"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Imbitasyon na tinanggap ng {{1}}",
+        "YouHaveCreditsToStart": "Mayroon kang {{1}} credits upang magsimula"
     }
 }

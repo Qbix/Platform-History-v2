@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Framsteg gjord den {{stream.fields.title}}",
         "Streams\/task\/complete": "Uppgift slutfört: {{stream.fields.title}}",
         "Streams\/task\/error": "Fel under: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Inkommande meddelande"
+        "Streams\/incoming\/*": "{{app}}: Inkommande meddelande",
+        "ManageEmailSubscriptions": "hantera dina epostabonnemang",
+        "IfUnsubscribe": "Om du vill avsluta prenumerationen"
     },
     "invite": {
         "messageContent": "{{displayName}} bjöd in dig till {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Fick du en inbjudan?",
             "body": "Hej, jag har precis skickat dig en inbjudan till appen {{app}}. Vänligen kolla din email och klicka på länken där inne!"
         }
+    },
+    "participating": {
+        "Title": "Titel",
+        "Subscribed": "prenumererar",
+        "Participants": "Deltagarna"
     }
 }

@@ -37,7 +37,9 @@
         "Streams/task/progress": "Ang pag-unlad na ginawa sa {{stream.fields.title}}",
         "Streams/task/complete": "Tapos na ang gawain: {{stream.fields.title}}",
         "Streams/task/error": "Error sa panahon ng: {{stream.fields.title}}",
-        "Streams/incoming/*": "{{app}}: Papasok na Mensahe"
+        "Streams/incoming/*": "{{app}}: Papasok na Mensahe",
+        "ManageEmailSubscriptions": "pamahalaan ang iyong mga subscription sa email",
+        "IfUnsubscribe": "Kung nais mong mag-unsubscribe"
     },
     "invite": {
         "messageContent": "Inimbitahan ka ni {{displayName}} na {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Nakatanggap ka ba ng isang imbitasyon?",
             "body": "Hey, naipadala ko lang sa iyo ang isang imbitasyon sa {{app}} app. Mangyaring suriin ang iyong email at i-click ang link sa doon!"
         }
+    },
+    "participating": {
+        "Title": "Pamagat",
+        "Subscribed": "Nag-subscribe",
+        "Participants": "Mga kalahok"
     }
 }
