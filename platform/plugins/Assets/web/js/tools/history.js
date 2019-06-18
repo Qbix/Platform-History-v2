@@ -105,7 +105,9 @@ Q.Template.set('Assets/history/charges',
 	'<table class="Assets_history" data-type="charges">' +
 	'	<tr><th>{{text.Date}}</th><th>{{text.Amount}}</th><th>{{text.Description}}</th></tr>' +
 	'	{{#each rows}}' +
-	'		<tr><td>{{this.date}}</td><td>{{this.currency}} {{this.amount}}</td><td>{{this.description}}</td></tr>' +
+	'		<tr><td class="Assets_history_date">{{this.date}}</td>' +
+	'		<td class="Assets_history_amount">{{this.currency}} {{this.amount}}</td>' +
+	'		<td class="Assets_history_description">{{this.description}}</td></tr>' +
 	'	{{/each}}' +
 	'</table>'
 );
