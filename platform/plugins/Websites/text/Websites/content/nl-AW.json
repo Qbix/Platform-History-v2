@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Gaan",
-            "PasteLinkHere": "Plak hier een link"
+            "PasteLinkHere": "Plak hier een link",
+            "BrowseTheWeb": "Blader",
+            "WriteToStartConversation": "Schrijf je gedachten om het gesprek te starten",
+            "StartConversation": "Begin een gesprek"
         }
     }
 }

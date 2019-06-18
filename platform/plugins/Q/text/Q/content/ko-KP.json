@@ -70,8 +70,8 @@
         "tooSmall": "큰 이미지를 선택하십시오.",
         "cropping": {
             "title": "크기와 위치 조정",
-            "touchscreen": "손가락을 사용하여 확대 \/ 축소 및 드래그",
-            "notTouchscreen": "확대 \/ 축소하려면 마우스와 휠을 사용하십시오."
+            "touchscreen": "손가락을 사용하여 확대 / 축소 및 드래그",
+            "notTouchscreen": "확대 / 축소하려면 마우스와 휠을 사용하십시오."
         }
     }
 }

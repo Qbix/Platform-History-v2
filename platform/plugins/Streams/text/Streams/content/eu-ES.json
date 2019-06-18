@@ -37,7 +37,9 @@
         "Streams/task/progress": "{{stream.fields.title}} egunean egindako aurrerapenak",
         "Streams/task/complete": "Zeregina osatu da: {{stream.fields.title}}",
         "Streams/task/error": "Errorea: {{stream.fields.title}}",
-        "Streams/incoming/*": "{{app}}: Sarrerako mezua"
+        "Streams/incoming/*": "{{app}}: Sarrerako mezua",
+        "ManageEmailSubscriptions": "kudeatu zure posta elektronikoaren harpidetzak",
+        "IfUnsubscribe": "Harpidetza kendu nahi baduzu"
     },
     "invite": {
         "messageContent": "{{displayName}} gonbidatu zaitu {{inviteUrl}} zerbitzura",
@@ -92,5 +94,10 @@
             "subject": "Gonbidapen bat lortu al duzu?",
             "body": "Hey, gonbidapen bat bidali dizuet {{app}} aplikazioan. Egiaztatu mezu elektronikoa eta egin klik estekan dagoen estekan."
         }
+    },
+    "participating": {
+        "Title": "Izenburua",
+        "Subscribed": "harpidetutako",
+        "Participants": "Parte-hartzaileak"
     }
 }

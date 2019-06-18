@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Takk fyrir greiðslu þína til {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} áskrifandi að {{plan.title}}",
         "YouSubscribedTo": "Þú hefur verið áskrifandi að {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Upplýsingar um pöntun",
+        "PaymentMethod": "Greiðslumáti",
+        "ContactInfo": "Hafa samband",
+        "Pay": "Borga"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Bjóddu samþykkt af {{1}}",
+        "YouHaveCreditsToStart": "Þú hefur {{1}} einingar til að byrja"
     }
 }

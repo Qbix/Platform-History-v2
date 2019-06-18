@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "{{stream.fields.title}}에 진행됨",
         "Streams\/task\/complete": "완료된 작업 : {{stream.fields.title}}",
         "Streams\/task\/error": "동안 오류 : {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}} : 수신 메시지"
+        "Streams\/incoming\/*": "{{app}} : 수신 메시지",
+        "ManageEmailSubscriptions": "이메일 구독 관리",
+        "IfUnsubscribe": "구독을 취소하려면"
     },
     "invite": {
         "messageContent": "{{displayName}} 님이 {{inviteUrl}}에 당신을 초대했습니다.",
@@ -92,5 +94,10 @@
             "subject": "초대 받았어?",
             "body": "방금 {{app}} 앱에 초대장을 보냈습니다. 이메일을 확인하고 거기에있는 링크를 클릭하십시오!"
         }
+    },
+    "participating": {
+        "Title": "표제",
+        "Subscribed": "구독 됨",
+        "Participants": "참가자"
     }
 }

@@ -3,24 +3,27 @@
         "campaign": {
             "placeholders": {
                 "link": "Lien pour promouvoir",
-                "startDate": "Date de d\u00e9but",
-                "startTime": "Heure de d\u00e9but",
+                "startDate": "Date de début",
+                "startTime": "Heure de début",
                 "endDate": "Date de fin",
                 "endTime": "Heure de fin",
                 "budget": "Budget"
             },
             "interests": {
-                "Title": "Filtrer par int\u00e9r\u00eat",
-                "FilterInterests": "Commencez \u00e0 taper un int\u00e9r\u00eat ..."
+                "Title": "Filtrer par intérêt",
+                "FilterInterests": "Commencez à taper un intérêt ..."
             },
-            "Interest": "Int\u00e9r\u00eat",
+            "Interest": "Intérêt",
             "Location": "Emplacement"
         }
     },
     "webpage": {
         "composer": {
             "Go": "Aller",
-            "PasteLinkHere": "Collez un lien ici"
+            "PasteLinkHere": "Collez un lien ici",
+            "BrowseTheWeb": "Feuilleter",
+            "WriteToStartConversation": "Ecrivez vos pensées pour commencer la conversation",
+            "StartConversation": "Démarrer la conversation"
         }
     }
 }

@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Прагрэс, дасягнуты на {{stream.fields.title}}",
         "Streams\/task\/complete": "Задача выканана: {{stream.fields.title}}",
         "Streams\/task\/error": "Памылка пры: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Уваходныя паведамленні"
+        "Streams\/incoming\/*": "{{app}}: Уваходныя паведамленні",
+        "ManageEmailSubscriptions": "кіраваць падпіскамі на электронную пошту",
+        "IfUnsubscribe": "Калі вы хочаце, каб адпісацца"
     },
     "invite": {
         "messageContent": "{{displayName}} запрасіў вас {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Ці атрымалі вы запрашэнне?",
             "body": "Эй, я толькі што адправіў вам запрашэнне да {{app}} прыкладання. Калі ласка, праверце сваю электронную пошту і націсніце на спасылку там!"
         }
+    },
+    "participating": {
+        "Title": "Назва",
+        "Subscribed": "Падпіска",
+        "Participants": "Удзельнікі"
     }
 }

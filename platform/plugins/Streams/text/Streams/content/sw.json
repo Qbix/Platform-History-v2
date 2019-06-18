@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Maendeleo yaliyotolewa kwenye {{stream.fields.title}}",
         "Streams\/task\/complete": "Kazi imekamilika: {{stream.fields.title}}",
         "Streams\/task\/error": "Hitilafu wakati: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Ujumbe usioingia"
+        "Streams\/incoming\/*": "{{app}}: Ujumbe usioingia",
+        "ManageEmailSubscriptions": "kudhibiti usajili wako wa barua pepe",
+        "IfUnsubscribe": "Ikiwa unataka kujiondoa"
     },
     "invite": {
         "messageContent": "{{displayName}} alikualika {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Umepata mwaliko?",
             "body": "Hey, nilikupeleka mwaliko kwenye programu ya {{app}}. Tafadhali angalia barua pepe yako na bofya kiungo huko!"
         }
+    },
+    "participating": {
+        "Title": "Kichwa",
+        "Subscribed": "Imejiandikisha",
+        "Participants": "Washiriki"
     }
 }

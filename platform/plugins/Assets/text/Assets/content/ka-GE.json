@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "გმადლობთ, რომ გადაიხადოთ {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{9}} {{plan.title}}",
         "YouSubscribedTo": "თქვენ გამოწერილი ხართ {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "ინფორმაცია წესრიგის შესახებ",
+        "PaymentMethod": "Გადახდის საშუალება",
+        "ContactInfo": "Საკონტაქტო ინფორმაცია",
+        "Pay": "გადაიხადე"
+    },
+    "credits": {
+        "InviteAcceptedBy": "მოიწვიეთ მიღებული {{1}}",
+        "YouHaveCreditsToStart": "თქვენ გაქვთ {{1}} კრედიტების დაწყება"
     }
 }

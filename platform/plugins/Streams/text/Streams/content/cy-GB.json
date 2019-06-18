@@ -9,7 +9,7 @@
     "interests": {
         "Filter": "Beth ydych chi&#39;n ei fwynhau?",
         "CanAdd": "Os na allwch ddod o hyd i&#39;r hyn rydych chi&#39;n chwilio amdano, gallwch ychwanegu llog newydd isod:",
-        "TrySynonyms": "Peidiwch \u00e2&#39;i weld? Rhowch gynnig ar rai cyfystyron.",
+        "TrySynonyms": "Peidiwch â&#39;i weld? Rhowch gynnig ar rai cyfystyron.",
         "AddUnderCategory": "Ychwanegu dan y categori ...",
         "Other": "Arall",
         "Unlisted": "Heb ei restru"
@@ -19,7 +19,7 @@
         "noOneSaid": "Nid oes neb wedi dweud dim",
         "closeChatButton": "Sgwrs agos",
         "closeChatConfirmTitle": "Caewch y sgwrs hon?",
-        "closeChatConfirm": "Ydych chi&#39;n si\u0175r eich bod am gau&#39;r sgwrs hon?",
+        "closeChatConfirm": "Ydych chi&#39;n siŵr eich bod am gau&#39;r sgwrs hon?",
         "closeChatConfirmYes": "Ydw",
         "closeChatConfirmNo": "Na",
         "earlierComments": "sylwadau cynharach"
@@ -37,7 +37,9 @@
         "Streams/task/progress": "Cynnydd wedi&#39;i wneud ar {{stream.fields.title}}",
         "Streams/task/complete": "Cwblhawyd y dasg: {{stream.fields.title}}",
         "Streams/task/error": "Gwall yn ystod: {{stream.fields.title}}",
-        "Streams/incoming/*": "{{app}}: Neges sy&#39;n dod i mewn"
+        "Streams/incoming/*": "{{app}}: Neges sy&#39;n dod i mewn",
+        "ManageEmailSubscriptions": "rheoli eich tanysgrifiadau e-bost",
+        "IfUnsubscribe": "Os ydych chi eisiau dad-danysgrifio"
     },
     "invite": {
         "messageContent": "Gwahoddwyd {{displayName}} i {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "A gawsoch wahoddiad?",
             "body": "Hey, anfonais wahoddiad atoch chi i&#39;r ap {{app}}. Gwiriwch eich e-bost a chliciwch ar y ddolen yno!"
         }
+    },
+    "participating": {
+        "Title": "Teitl",
+        "Subscribed": "Tanysgrifio",
+        "Participants": "Cyfranogwyr"
     }
 }

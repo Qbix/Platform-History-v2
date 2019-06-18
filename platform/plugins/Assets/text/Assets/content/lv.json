@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Paldies par maksājumu {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} abonēja {{plan.title}}",
         "YouSubscribedTo": "Jūs esat abonējis {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Informācija par pasūtījumu",
+        "PaymentMethod": "Apmaksas veids",
+        "ContactInfo": "Kontaktinformācija",
+        "Pay": "Maksa"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Uzaicinājums akceptēts {{1}}",
+        "YouHaveCreditsToStart": "Lai sāktu, jums ir {{1}} kredīti"
     }
 }

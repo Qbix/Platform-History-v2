@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Pergi",
-            "PasteLinkHere": "Tampalkan pautan di sini"
+            "PasteLinkHere": "Tampalkan pautan di sini",
+            "BrowseTheWeb": "Semak imbas",
+            "WriteToStartConversation": "Tulis pemikiran anda untuk memulakan perbualan",
+            "StartConversation": "Mula Perbualan"
         }
     }
 }

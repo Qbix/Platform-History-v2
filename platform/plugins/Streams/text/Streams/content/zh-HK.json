@@ -1,96 +1,103 @@
 {
     "preview": {
-        "NewItemTitle": "\u65b0\u7269\u54c1"
+        "NewItemTitle": "新物品"
     },
     "labels": {
-        "Streams/invited": "\u6211\u9080\u8bf7\u7684\u4eba",
-        "Streams/invitedMe": "\u8c01\u9080\u8bf7\u4e86\u6211"
+        "Streams/invited": "我邀请的人",
+        "Streams/invitedMe": "谁邀请了我"
     },
     "interests": {
-        "Filter": "\u4f60\u559c\u6b22\u4ec0\u4e48\uff1f",
-        "CanAdd": "\u5982\u679c\u60a8\u4ecd\u7136\u65e0\u6cd5\u627e\u5230\u6240\u9700\u5185\u5bb9\uff0c\u53ef\u4ee5\u5728\u4e0b\u65b9\u6dfb\u52a0\u65b0\u5174\u8da3\uff1a",
-        "TrySynonyms": "\u770b\u4e0d\u5230\u4e86\u5417\uff1f\u5c1d\u8bd5\u4e00\u4e9b\u540c\u4e49\u8bcd\u3002",
-        "AddUnderCategory": "\u5728\u7c7b\u522b\u4e0b\u6dfb\u52a0...",
-        "Other": "\u5176\u4ed6",
-        "Unlisted": "\u4e0d\u516c\u5f00"
+        "Filter": "你喜欢什么？",
+        "CanAdd": "如果您仍然无法找到所需内容，可以在下方添加新兴趣：",
+        "TrySynonyms": "看不到了吗？尝试一些同义词。",
+        "AddUnderCategory": "在类别下添加...",
+        "Other": "其他",
+        "Unlisted": "不公开"
     },
     "chat": {
-        "flaggedForAdminReview": "\u6d88\u606f\u5df2\u88ab\u6807\u8bb0\u4e3a\u7ba1\u7406\u5458\u5ba1\u6838\u3002\u518d\u6b21\u70b9\u6309\u5373\u53ef\u53d6\u6d88\u6807\u8bb0\u3002",
-        "noOneSaid": "\u6ca1\u6709\u4eba\u8bf4\u8fc7\u4ec0\u4e48",
-        "closeChatButton": "\u5173\u95ed\u804a\u5929",
-        "closeChatConfirmTitle": "\u5173\u95ed\u6b64\u804a\u5929\uff1f",
-        "closeChatConfirm": "\u60a8\u786e\u5b9a\u8981\u5173\u95ed\u6b64\u804a\u5929\u5417\uff1f",
-        "closeChatConfirmYes": "\u662f",
-        "closeChatConfirmNo": "\u6ca1\u6709",
-        "earlierComments": "\u65e9\u5148\u7684\u8bc4\u8bba"
+        "flaggedForAdminReview": "消息已被标记为管理员审核。再次点按即可取消标记。",
+        "noOneSaid": "没有人说过什么",
+        "closeChatButton": "关闭聊天",
+        "closeChatConfirmTitle": "关闭此聊天？",
+        "closeChatConfirm": "您确定要关闭此聊天吗？",
+        "closeChatConfirmYes": "是",
+        "closeChatConfirmNo": "没有",
+        "earlierComments": "早先的评论"
     },
     "notifications": {
-        "*": "\u6d88\u606f{{& message.fields.type}}\u81f3{{& stream.fields.title}}",
-        "Streams/chat/message": "{{&call 'avatar.displayName'}}\u8bf4\uff1a",
-        "Streams/changed": "{{stream.fields.title}}\u4e2d\u7684\u66f4\u6539",
-        "Streams/invite": "\u4f60\u88ab\u9080\u8bf7\u5230{{& stream.fields.title}}",
-        "Streams/announcement": "{{& streams.fields.title}}\u4e2d\u7684\u516c\u544a",
-        "Streams/access": "{{&call 'avatar.displayName'}}\u66f4\u6539\u4e86\u6d41\u8bbf\u95ee\u6743\u9650",
-        "Streams/chat/edit": "\u804a\u5929\u6d88\u606f\u5df2\u7f16\u8f91",
-        "Streams/chat/remove": "\u804a\u5929\u6d88\u606f\u5df2\u5220\u9664",
-        "Streams/closed": "{{stream.fields.title}}\u5df2\u88ab\u5173\u95ed",
-        "Streams/task/progress": "{{stream.fields.title}}\u53d6\u5f97\u7684\u8fdb\u5c55",
-        "Streams/task/complete": "\u4efb\u52a1\u5df2\u5b8c\u6210\uff1a{{stream.fields.title}}",
-        "Streams/task/error": "\u9519\u8bef\u671f\u95f4\uff1a{{stream.fields.title}}",
-        "Streams/incoming/*": "{{app}}\uff1a\u4f20\u5165\u6d88\u606f"
+        "*": "消息{{& message.fields.type}}至{{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}}说：",
+        "Streams/changed": "{{stream.fields.title}}中的更改",
+        "Streams/invite": "你被邀请到{{& stream.fields.title}}",
+        "Streams/announcement": "{{& streams.fields.title}}中的公告",
+        "Streams/access": "{{&call 'avatar.displayName'}}更改了流访问权限",
+        "Streams/chat/edit": "聊天消息已编辑",
+        "Streams/chat/remove": "聊天消息已删除",
+        "Streams/closed": "{{stream.fields.title}}已被关闭",
+        "Streams/task/progress": "{{stream.fields.title}}取得的进展",
+        "Streams/task/complete": "任务已完成：{{stream.fields.title}}",
+        "Streams/task/error": "错误期间：{{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}：传入消息",
+        "ManageEmailSubscriptions": "管理您的电子邮件订阅",
+        "IfUnsubscribe": "如果你想取消订阅"
     },
     "invite": {
-        "messageContent": "{{displayName}}\u9080\u8bf7\u60a8{{inviteUrl}}",
+        "messageContent": "{{displayName}}邀请您{{inviteUrl}}",
         "dialog": {
-            "chooseFromContacts": "\u4ece\u8054\u7cfb\u4eba\u4e2d\u9009\u62e9",
-            "selectFromContacts": "\u9009\u62e9\u6765\u81ea\u8054\u7cfb\u4eba",
-            "photo": "\u62cd\u5f20\u7167\u7247",
-            "photoInstruction": "\u5982\u679c\u626b\u63cf\u60a8\u7684QR\u7801\u7684\u4eba\u5728\u60a8\u9762\u524d\uff0c\u8bf7\u62cd\u4e0b\u4ed6\u4eec\u7684\u7167\u7247",
-            "to": "\u6536\u4ef6\u4eba\uff1a{{Stream Title}}",
-            "go": "\u8d70",
-            "title": "\u9080\u8bf7",
-            "placeholder": "\u624b\u673a\u53f7\u7801\u6216\u7535\u5b50\u90ae\u4ef6\u5730\u5740",
-            "orInvite": "\u6216\u8005\u901a\u8fc7\u4f7f\u7528\u4ee5\u4e0b\u65b9\u5f0f\u9080\u8bf7",
-            "QR": "{{ClickOrTap}}\u751f\u6210QR\u7801",
-            "QRtitle": "\u626b\u63cf\u6b64\u4e8c\u7ef4\u7801",
-            "byEmail": "\u7535\u5b50\u90ae\u4ef6",
-            "byText": "\u6587\u672c",
-            "byFacebook": "Facebook\u7684",
-            "byTwitter": "\u63a8\u7279",
-            "QRscanned": "\u4ed6\u4eec\u626b\u63cf\u4e86\u4e00\u4e0b\uff01"
+            "chooseFromContacts": "从联系人中选择",
+            "selectFromContacts": "选择来自联系人",
+            "photo": "拍张照片",
+            "photoInstruction": "如果扫描您的QR码的人在您面前，请拍下他们的照片",
+            "to": "收件人：{{Stream Title}}",
+            "go": "走",
+            "title": "邀请",
+            "placeholder": "手机号码或电子邮件地址",
+            "orInvite": "或者通过使用以下方式邀请",
+            "QR": "{{ClickOrTap}}生成QR码",
+            "QRtitle": "扫描此二维码",
+            "byEmail": "电子邮件",
+            "byText": "文本",
+            "byFacebook": "Facebook的",
+            "byTwitter": "推特",
+            "QRscanned": "他们扫描了一下！"
         },
         "email": {
-            "subject": "\u563f\uff0c\u770b\u770b\u8fd9\u4e2a",
-            "PleaseVisitLink": "\u8bf7\u8bbf\u95ee\u4ee5\u4e0b\u94fe\u63a5\uff1a",
-            "InvitingYou": "\u6211\u9080\u8bf7\u4f60{{title}}",
-            "HasInvitedYou": "{{displayName}}\u5df2\u9080\u8bf7\u60a8{{title}}"
+            "subject": "嘿，看看这个",
+            "PleaseVisitLink": "请访问以下链接：",
+            "InvitingYou": "我邀请你{{title}}",
+            "HasInvitedYou": "{{displayName}}已邀请您{{title}}"
         },
         "sms": {
-            "content": "\u60a8\u5df2\u53d7\u9080{{title}}\u3002\u8bf7\u70b9\u6309{{url}}"
+            "content": "您已受邀{{title}}。请点按{{url}}"
         },
         "notice": {
-            "text": "\u4f60\u88ab\u9080\u8bf7\u4e86\u3002 {{ClickOrTap}}\u5728\u8fd9\u91cc\u63a5\u53d7\u5e76\u52a0\u5165\u3002"
+            "text": "你被邀请了。 {{ClickOrTap}}在这里接受并加入。"
         }
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}}\u5411{{stream.fields.title}}\u53d1\u5e03\u4e86<em>{{message.fields.type}}\u6761</em>\u6d88\u606f"
+            "posted": "{{call 'avatar.displayName'}}向{{stream.fields.title}}发布了<em>{{message.fields.type}}条</em>消息"
         },
         "text": {
-            "body": "{{& url}}\u4e2d\u7684{{& call 'avatar.displayName'}}\uff1a{{& message.fields.content}}"
+            "body": "{{& url}}中的{{& call 'avatar.displayName'}}：{{& message.fields.content}}"
         }
     },
     "followup": {
         "mobile": {
-            "alert": "\u9080\u8bf7\u662f\u4ece\u6211\u4eec\u7684\u53f7\u7801\u53d1\u9001\u7684\uff0c\u60a8\u7684\u670b\u53cb\u5c1a\u672a\u8ba4\u51fa\u3002\u8ddf\u8fdb\u4e00\u4e2a\u5feb\u901f\u6587\u672c\uff0c\u8ba9\u4ed6\u4eec\u77e5\u9053\u60a8\u7684\u9080\u8bf7\uff0c\u8981\u6c42\u4ed6\u4eec\u70b9\u51fb\u94fe\u63a5\u3002",
-            "confirm": "\u9080\u8bf7\u662f\u4ece\u6211\u4eec\u7684\u53f7\u7801\u53d1\u9001\u7684\uff0c\u60a8\u7684\u670b\u53cb\u5c1a\u672a\u8ba4\u51fa\u3002\u60a8\u60f3\u8ddf\u8fdb\u4e00\u4e2a\u5feb\u901f\u6587\u672c\uff0c\u8ba9\u4ed6\u4eec\u77e5\u9053\u60a8\u7684\u9080\u8bf7\uff0c\u8bf7\u4ed6\u4eec\u70b9\u51fb\u94fe\u63a5\u3002",
-            "check": "\u563f\uff0c\u6211\u521a\u7ed9\u4f60\u53d1\u4e86\u4e00\u4e2a{{app}}\u5e94\u7528\u9080\u8bf7\u51fd\u3002\u8bf7\u68c0\u67e5\u60a8\u7684\u77ed\u4fe1\uff0c\u7136\u540e\u5355\u51fb\u94fe\u63a5\uff01"
+            "alert": "邀请是从我们的号码发送的，您的朋友尚未认出。跟进一个快速文本，让他们知道您的邀请，要求他们点击链接。",
+            "confirm": "邀请是从我们的号码发送的，您的朋友尚未认出。您想跟进一个快速文本，让他们知道您的邀请，请他们点击链接。",
+            "check": "嘿，我刚给你发了一个{{app}}应用邀请函。请检查您的短信，然后单击链接！"
         },
         "email": {
-            "alert": "\u9080\u8bf7\u662f\u4ece\u6211\u4eec\u7684\u57df\u53d1\u9001\u7684\uff0c\u60a8\u7684\u670b\u53cb\u5c1a\u672a\u8bc6\u522b\u3002\u8ddf\u8fdb\u4e00\u4e2a\u5feb\u901f\u6587\u672c\uff0c\u8ba9\u4ed6\u4eec\u77e5\u9053\u60a8\u7684\u9080\u8bf7\uff0c\u8981\u6c42\u4ed6\u4eec\u70b9\u51fb\u94fe\u63a5\u3002",
-            "confirm": "\u9080\u8bf7\u662f\u4ece\u6211\u4eec\u7684\u57df\u53d1\u9001\u7684\uff0c\u60a8\u7684\u670b\u53cb\u5c1a\u672a\u8bc6\u522b\u3002\u60a8\u60f3\u8ddf\u8fdb\u4e00\u4e2a\u5feb\u901f\u6587\u672c\uff0c\u8ba9\u4ed6\u4eec\u77e5\u9053\u60a8\u7684\u9080\u8bf7\uff0c\u8bf7\u4ed6\u4eec\u70b9\u51fb\u94fe\u63a5\u3002",
-            "subject": "\u4f60\u6709\u9080\u8bf7\u5417\uff1f",
-            "body": "\u563f\uff0c\u6211\u521a\u7ed9\u4f60\u53d1\u4e86\u4e00\u4e2a{{app}}\u5e94\u7528\u9080\u8bf7\u51fd\u3002\u8bf7\u68c0\u67e5\u60a8\u7684\u7535\u5b50\u90ae\u4ef6\uff0c\u7136\u540e\u5355\u51fb\u5176\u4e2d\u7684\u94fe\u63a5\uff01"
+            "alert": "邀请是从我们的域发送的，您的朋友尚未识别。跟进一个快速文本，让他们知道您的邀请，要求他们点击链接。",
+            "confirm": "邀请是从我们的域发送的，您的朋友尚未识别。您想跟进一个快速文本，让他们知道您的邀请，请他们点击链接。",
+            "subject": "你有邀请吗？",
+            "body": "嘿，我刚给你发了一个{{app}}应用邀请函。请检查您的电子邮件，然后单击其中的链接！"
         }
+    },
+    "participating": {
+        "Title": "标题",
+        "Subscribed": "订阅",
+        "Participants": "参与者"
     }
 }

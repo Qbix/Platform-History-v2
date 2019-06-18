@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "行く",
-            "PasteLinkHere": "ここにリンクを貼り付けてください"
+            "PasteLinkHere": "ここにリンクを貼り付けてください",
+            "BrowseTheWeb": "ブラウズ",
+            "WriteToStartConversation": "会話を始めるためにあなたの考えを書きなさい",
+            "StartConversation": "会話を開始"
         }
     }
 }

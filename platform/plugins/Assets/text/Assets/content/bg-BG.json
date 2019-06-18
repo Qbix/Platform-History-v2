@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Благодарим Ви за плащането до {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} се абонира за {{plan.title}}",
         "YouSubscribedTo": "Абонирани сте за {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Информация за поръчката",
+        "PaymentMethod": "Начин на плащане",
+        "ContactInfo": "Информация за контакт",
+        "Pay": "плащам"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Покана, приета от {{1}}",
+        "YouHaveCreditsToStart": "Имате {{1}} кредити за започване"
     }
 }

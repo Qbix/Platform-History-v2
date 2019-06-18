@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Progress magħmul fi {{stream.fields.title}}",
         "Streams\/task\/complete": "Kompitu komplut: {{stream.fields.title}}",
         "Streams\/task\/error": "Żball waqt: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Messaġġ li Jidħol"
+        "Streams\/incoming\/*": "{{app}}: Messaġġ li Jidħol",
+        "ManageEmailSubscriptions": "immaniġġja l-abbonamenti bl-email tiegħek",
+        "IfUnsubscribe": "Jekk trid tabbona"
     },
     "invite": {
         "messageContent": "{{displayName}} stiednek biex {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Irċivejt stedina?",
             "body": "Ħej, jien bgħattlek biss invit għall-app {{app}}. Jekk jogħġbok iċċekkja l-email tiegħek u kklikkja l-link hemm!"
         }
+    },
+    "participating": {
+        "Title": "Titolu",
+        "Subscribed": "Sottoskritt",
+        "Participants": "Parteċipanti"
     }
 }

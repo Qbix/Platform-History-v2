@@ -37,7 +37,9 @@
         "Streams/task/progress": "Kemajuan dibuat pada {{stream.fields.title}}",
         "Streams/task/complete": "Tugas selesai: {{stream.fields.title}}",
         "Streams/task/error": "Kesalahan saat: {{stream.fields.title}}",
-        "Streams/incoming/*": "{{app}}: Pesan Masuk"
+        "Streams/incoming/*": "{{app}}: Pesan Masuk",
+        "ManageEmailSubscriptions": "kelola langganan email Anda",
+        "IfUnsubscribe": "Jika Anda ingin berhenti berlangganan"
     },
     "invite": {
         "messageContent": "{{displayName}} mengundang Anda ke {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Apakah Anda mendapat undangan?",
             "body": "Hai, saya baru saja mengirimi Anda undangan ke aplikasi {{app}}. Silakan periksa email Anda dan klik tautan di sana!"
         }
+    },
+    "participating": {
+        "Title": "Judul",
+        "Subscribed": "Berlangganan",
+        "Participants": "Peserta"
     }
 }

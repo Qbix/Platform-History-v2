@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "برو",
-            "PasteLinkHere": "یک پیوند را در اینجا بگذارید"
+            "PasteLinkHere": "یک پیوند را در اینجا بگذارید",
+            "BrowseTheWeb": "مرور کردن",
+            "WriteToStartConversation": "افکار خود را برای شروع گفتگو بنویسید",
+            "StartConversation": "شروع مکالمه"
         }
     }
 }

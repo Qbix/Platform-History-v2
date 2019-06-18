@@ -8,19 +8,19 @@
     },
     "interests": {
         "Filter": "Cosa ti piace?",
-        "CanAdd": "Se ancora non riesci a trovare ci\u00f2 che stai cercando, puoi aggiungere un nuovo interesse di seguito:",
+        "CanAdd": "Se ancora non riesci a trovare ciò che stai cercando, puoi aggiungere un nuovo interesse di seguito:",
         "TrySynonyms": "Non lo vedi? Prova alcuni sinonimi.",
         "AddUnderCategory": "Aggiungi sotto categoria ...",
         "Other": "Altro",
         "Unlisted": "non in elenco"
     },
     "chat": {
-        "flaggedForAdminReview": "Il messaggio \u00e8 stato contrassegnato per la revisione dell&#39;amministratore. Tocca di nuovo per sganciare.",
+        "flaggedForAdminReview": "Il messaggio è stato contrassegnato per la revisione dell&#39;amministratore. Tocca di nuovo per sganciare.",
         "noOneSaid": "Nessuno ha detto nulla",
         "closeChatButton": "Chiudi chat",
         "closeChatConfirmTitle": "Chiudi questa chat?",
         "closeChatConfirm": "Sei sicuro di voler chiudere questa chat?",
-        "closeChatConfirmYes": "s\u00ec",
+        "closeChatConfirmYes": "sì",
         "closeChatConfirmNo": "No",
         "earlierComments": "commenti precedenti"
     },
@@ -33,11 +33,13 @@
         "Streams/access": "{{&call 'avatar.displayName'}} ha cambiato l&#39;accesso al flusso",
         "Streams/chat/edit": "Messaggio di chat modificato",
         "Streams/chat/remove": "Messaggio di chat rimosso",
-        "Streams/closed": "{{stream.fields.title}} \u00e8 stato chiuso",
+        "Streams/closed": "{{stream.fields.title}} è stato chiuso",
         "Streams/task/progress": "Progressi effettuati su {{stream.fields.title}}",
-        "Streams/task/complete": "Attivit\u00e0 completata: {{stream.fields.title}}",
+        "Streams/task/complete": "Attività completata: {{stream.fields.title}}",
         "Streams/task/error": "Errore durante: {{stream.fields.title}}",
-        "Streams/incoming/*": "{{app}}: messaggio in entrata"
+        "Streams/incoming/*": "{{app}}: messaggio in entrata",
+        "ManageEmailSubscriptions": "gestisci le tue iscrizioni e-mail",
+        "IfUnsubscribe": "Se vuoi annullare l&#39;iscrizione"
     },
     "invite": {
         "messageContent": "{{displayName}} ti ha invitato a {{inviteUrl}}",
@@ -45,7 +47,7 @@
             "chooseFromContacts": "Scegli tra i tuoi contatti",
             "selectFromContacts": "Seleziona dai contatti",
             "photo": "Scattare una foto",
-            "photoInstruction": "Se la persona che ha scansionato il tuo codice QR \u00e8 di fronte a te, scatta una foto",
+            "photoInstruction": "Se la persona che ha scansionato il tuo codice QR è di fronte a te, scatta una foto",
             "to": "A: {{Stream Title}}",
             "go": "Partire",
             "title": "Invitare",
@@ -82,15 +84,20 @@
     },
     "followup": {
         "mobile": {
-            "alert": "Gli inviti vengono inviati dal nostro numero, che i tuoi amici non riconoscono ancora. Segui un breve testo per far loro sapere che l&#39;invito \u00e8 arrivato da te, chiedendo loro di fare clic sul link.",
-            "confirm": "Gli inviti vengono inviati dal nostro numero, che i tuoi amici non riconoscono ancora. Ti piacerebbe seguire un breve testo per far loro sapere che l&#39;invito \u00e8 arrivato da te, chiedendo loro di fare clic sul link.",
+            "alert": "Gli inviti vengono inviati dal nostro numero, che i tuoi amici non riconoscono ancora. Segui un breve testo per far loro sapere che l&#39;invito è arrivato da te, chiedendo loro di fare clic sul link.",
+            "confirm": "Gli inviti vengono inviati dal nostro numero, che i tuoi amici non riconoscono ancora. Ti piacerebbe seguire un breve testo per far loro sapere che l&#39;invito è arrivato da te, chiedendo loro di fare clic sul link.",
             "check": "Ehi, ti ho appena inviato un invito all&#39;app {{app}}. Per favore controlla il tuo sms e clicca sul link!"
         },
         "email": {
-            "alert": "Gli inviti vengono inviati dal nostro dominio, che i tuoi amici non riconoscono ancora. Segui un breve testo per far loro sapere che l&#39;invito \u00e8 arrivato da te, chiedendo loro di fare clic sul link.",
-            "confirm": "Gli inviti vengono inviati dal nostro dominio, che i tuoi amici non riconoscono ancora. Ti piacerebbe seguire un breve testo per far loro sapere che l&#39;invito \u00e8 arrivato da te, chiedendo loro di fare clic sul link.",
+            "alert": "Gli inviti vengono inviati dal nostro dominio, che i tuoi amici non riconoscono ancora. Segui un breve testo per far loro sapere che l&#39;invito è arrivato da te, chiedendo loro di fare clic sul link.",
+            "confirm": "Gli inviti vengono inviati dal nostro dominio, che i tuoi amici non riconoscono ancora. Ti piacerebbe seguire un breve testo per far loro sapere che l&#39;invito è arrivato da te, chiedendo loro di fare clic sul link.",
             "subject": "Hai ricevuto un invito?",
             "body": "Ehi, ti ho appena inviato un invito all&#39;app {{app}}. Controlla la tua email e fai clic sul link qui!"
         }
+    },
+    "participating": {
+        "Title": "Titolo",
+        "Subscribed": "sottoscritto",
+        "Participants": "I partecipanti"
     }
 }

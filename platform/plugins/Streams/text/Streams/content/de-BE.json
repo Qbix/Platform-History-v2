@@ -7,43 +7,45 @@
         "Streams/invitedMe": "Wer hat mich eingeladen?"
     },
     "interests": {
-        "Filter": "Was genie\u00dft du?",
-        "CanAdd": "Wenn Sie immer noch nicht finden, wonach Sie suchen, k\u00f6nnen Sie unten ein neues Interesse hinzuf\u00fcgen:",
+        "Filter": "Was genießt du?",
+        "CanAdd": "Wenn Sie immer noch nicht finden, wonach Sie suchen, können Sie unten ein neues Interesse hinzufügen:",
         "TrySynonyms": "Sehe es nicht Probieren Sie einige Synonyme aus.",
-        "AddUnderCategory": "Unter Kategorie hinzuf\u00fcgen ...",
+        "AddUnderCategory": "Unter Kategorie hinzufügen ...",
         "Other": "Andere",
         "Unlisted": "Nicht gelistet"
     },
     "chat": {
-        "flaggedForAdminReview": "Nachricht wurde zur \u00dcberpr\u00fcfung durch den Administrator gekennzeichnet. Tippen Sie erneut auf, um die Markierung aufzuheben.",
+        "flaggedForAdminReview": "Nachricht wurde zur Überprüfung durch den Administrator gekennzeichnet. Tippen Sie erneut auf, um die Markierung aufzuheben.",
         "noOneSaid": "Niemand hat etwas gesagt",
-        "closeChatButton": "Chat schlie\u00dfen",
-        "closeChatConfirmTitle": "Diesen Chat schlie\u00dfen",
-        "closeChatConfirm": "M\u00f6chten Sie diesen Chat wirklich schlie\u00dfen?",
+        "closeChatButton": "Chat schließen",
+        "closeChatConfirmTitle": "Diesen Chat schließen",
+        "closeChatConfirm": "Möchten Sie diesen Chat wirklich schließen?",
         "closeChatConfirmYes": "Ja",
         "closeChatConfirmNo": "Nein",
-        "earlierComments": "fr\u00fchere Kommentare"
+        "earlierComments": "frühere Kommentare"
     },
     "notifications": {
         "*": "Nachricht {{& message.fields.type}} an {{& stream.fields.title}}",
         "Streams/chat/message": "{{&call 'avatar.displayName'}} sagte:",
-        "Streams/changed": "\u00c4nderungen in {{stream.fields.title}}",
+        "Streams/changed": "Änderungen in {{stream.fields.title}}",
         "Streams/invite": "Sie wurden zu {{& stream.fields.title}} eingeladen.",
-        "Streams/announcement": "Ank\u00fcndigung in {{& streams.fields.title}}",
-        "Streams/access": "{{&call 'avatar.displayName'}} hat den Streamzugriff ge\u00e4ndert",
+        "Streams/announcement": "Ankündigung in {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} hat den Streamzugriff geändert",
         "Streams/chat/edit": "Chat-Nachricht bearbeitet",
         "Streams/chat/remove": "Chat-Nachricht entfernt",
         "Streams/closed": "{{stream.fields.title}} wurde geschlossen",
         "Streams/task/progress": "Fortschritt am {{stream.fields.title}}",
         "Streams/task/complete": "Aufgabe abgeschlossen: {{stream.fields.title}}",
-        "Streams/task/error": "Fehler w\u00e4hrend: {{stream.fields.title}}",
-        "Streams/incoming/*": "{{app}}: Eingehende Nachricht"
+        "Streams/task/error": "Fehler während: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Eingehende Nachricht",
+        "ManageEmailSubscriptions": "Verwalten Sie Ihre E-Mail-Abonnements",
+        "IfUnsubscribe": "Wenn Sie sich abmelden möchten"
     },
     "invite": {
         "messageContent": "{{displayName}} hat Sie zu {{inviteUrl}} eingeladen",
         "dialog": {
-            "chooseFromContacts": "W\u00e4hlen Sie aus Ihren Kontakten",
-            "selectFromContacts": "W\u00e4hlen Sie Aus Kontakten",
+            "chooseFromContacts": "Wählen Sie aus Ihren Kontakten",
+            "selectFromContacts": "Wählen Sie Aus Kontakten",
             "photo": "Mach ein Foto",
             "photoInstruction": "Wenn sich die Person, die Ihren QR-Code gescannt hat, vor Ihnen befindet, machen Sie ein Foto von ihnen",
             "to": "An: {{Stream Title}}",
@@ -82,15 +84,20 @@
     },
     "followup": {
         "mobile": {
-            "alert": "Einladungen werden von unserer Nummer gesendet, die Ihre Freunde noch nicht kennen. Folgen Sie einem kurzen Text, um sie dar\u00fcber zu informieren, dass die Einladung von Ihnen stammt, und bitten Sie, auf den Link zu klicken.",
-            "confirm": "Einladungen werden von unserer Nummer gesendet, die Ihre Freunde noch nicht kennen. M\u00f6chten Sie mit einem kurzen Text darauf aufmerksam machen, dass die Einladung von Ihnen stammt, und bitten Sie, auf den Link zu klicken.",
-            "check": "Ich habe Ihnen gerade eine Einladung zur {{app}} App gesendet. Bitte \u00fcberpr\u00fcfen Sie Ihre SMS und klicken Sie auf den Link!"
+            "alert": "Einladungen werden von unserer Nummer gesendet, die Ihre Freunde noch nicht kennen. Folgen Sie einem kurzen Text, um sie darüber zu informieren, dass die Einladung von Ihnen stammt, und bitten Sie, auf den Link zu klicken.",
+            "confirm": "Einladungen werden von unserer Nummer gesendet, die Ihre Freunde noch nicht kennen. Möchten Sie mit einem kurzen Text darauf aufmerksam machen, dass die Einladung von Ihnen stammt, und bitten Sie, auf den Link zu klicken.",
+            "check": "Ich habe Ihnen gerade eine Einladung zur {{app}} App gesendet. Bitte überprüfen Sie Ihre SMS und klicken Sie auf den Link!"
         },
         "email": {
-            "alert": "Einladungen werden von unserer Domain gesendet, die Ihre Freunde noch nicht kennen. Folgen Sie einem kurzen Text, um sie dar\u00fcber zu informieren, dass die Einladung von Ihnen stammt, und bitten Sie, auf den Link zu klicken.",
-            "confirm": "Einladungen werden von unserer Domain gesendet, die Ihre Freunde noch nicht kennen. M\u00f6chten Sie mit einem kurzen Text darauf aufmerksam machen, dass die Einladung von Ihnen stammt, und bitten Sie, auf den Link zu klicken.",
+            "alert": "Einladungen werden von unserer Domain gesendet, die Ihre Freunde noch nicht kennen. Folgen Sie einem kurzen Text, um sie darüber zu informieren, dass die Einladung von Ihnen stammt, und bitten Sie, auf den Link zu klicken.",
+            "confirm": "Einladungen werden von unserer Domain gesendet, die Ihre Freunde noch nicht kennen. Möchten Sie mit einem kurzen Text darauf aufmerksam machen, dass die Einladung von Ihnen stammt, und bitten Sie, auf den Link zu klicken.",
             "subject": "Hast du eine Einladung bekommen?",
-            "body": "Ich habe Ihnen gerade eine Einladung zur {{app}} App gesendet. Bitte \u00fcberpr\u00fcfen Sie Ihre E-Mail und klicken Sie auf den Link dort!"
+            "body": "Ich habe Ihnen gerade eine Einladung zur {{app}} App gesendet. Bitte überprüfen Sie Ihre E-Mail und klicken Sie auf den Link dort!"
         }
+    },
+    "participating": {
+        "Title": "Titel",
+        "Subscribed": "Gezeichnet",
+        "Participants": "Teilnehmer"
     }
 }

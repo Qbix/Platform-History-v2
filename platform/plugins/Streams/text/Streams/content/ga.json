@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Dul chun cinn déanta ar {{stream.fields.title}}",
         "Streams\/task\/complete": "Tasc críochnaithe: {{stream.fields.title}}",
         "Streams\/task\/error": "Earráid le linn: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Teachtaireacht Isteach"
+        "Streams\/incoming\/*": "{{app}}: Teachtaireacht Isteach",
+        "ManageEmailSubscriptions": "bainistíonn tú do shíntiúis ríomhphoist",
+        "IfUnsubscribe": "Más mian leat díliostáil"
     },
     "invite": {
         "messageContent": "Thug {{displayName}} cuireadh duit {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "An bhfuair tú cuireadh?",
             "body": "Hey, chuir mé cuireadh chugat chuig an aip {{app}}. Seiceáil do ríomhphost agus cliceáil ar an nasc ann!"
         }
+    },
+    "participating": {
+        "Title": "Teideal",
+        "Subscribed": "Suibscríofa",
+        "Participants": "Rannpháirtithe"
     }
 }

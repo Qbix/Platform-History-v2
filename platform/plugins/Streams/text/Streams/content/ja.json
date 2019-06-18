@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "{{stream.fields.title}}の進捗状況",
         "Streams\/task\/complete": "タスクが完了しました：{{stream.fields.title}}",
         "Streams\/task\/error": "エラー：{{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}：受信メッセージ"
+        "Streams\/incoming\/*": "{{app}}：受信メッセージ",
+        "ManageEmailSubscriptions": "メール購読を管理する",
+        "IfUnsubscribe": "退会したい場合"
     },
     "invite": {
         "messageContent": "{{displayName}}はあなたを{{inviteUrl}}に招待しました",
@@ -92,5 +94,10 @@
             "subject": "あなたは招待を受けましたか？",
             "body": "こんにちは、私はあなたに{{app}}アプリへの招待状を送ったばかりです。あなたのEメールをチェックしてそこにあるリンクをクリックしてください！"
         }
+    },
+    "participating": {
+        "Title": "タイトル",
+        "Subscribed": "購読しています",
+        "Participants": "参加者"
     }
 }

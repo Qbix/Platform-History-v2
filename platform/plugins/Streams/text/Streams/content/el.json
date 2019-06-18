@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Η πρόοδος που σημειώθηκε στις {{stream.fields.title}}",
         "Streams\/task\/complete": "Η εργασία ολοκληρώθηκε: {{stream.fields.title}}",
         "Streams\/task\/error": "Σφάλμα κατά τη διάρκεια: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Εισερχόμενο μήνυμα"
+        "Streams\/incoming\/*": "{{app}}: Εισερχόμενο μήνυμα",
+        "ManageEmailSubscriptions": "διαχείριση των συνδρομών ηλεκτρονικού ταχυδρομείου σας",
+        "IfUnsubscribe": "Αν θέλετε να καταργήσετε την εγγραφή σας"
     },
     "invite": {
         "messageContent": "{{displayName}} σε προσκάλεσε σε {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Λάβατε μια πρόσκληση;",
             "body": "Σας έστειλα μια πρόσκληση στην εφαρμογή {{app}}. Ελέγξτε το email σας και κάντε κλικ στο σύνδεσμο εκεί!"
         }
+    },
+    "participating": {
+        "Title": "Τίτλος",
+        "Subscribed": "Εγγραφή",
+        "Participants": "Συμμετέχοντες"
     }
 }
