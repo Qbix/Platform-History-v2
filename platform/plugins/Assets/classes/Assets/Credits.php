@@ -49,7 +49,10 @@ class Assets_Credits
 			$amount = Q_Config::get('Assets', 'credits', 'amounts', 'Users/insertUser', self::DEFAULT_AMOUNT);
 			$reason = Q_Text::get('Assets/content', array('language' => Users::getLanguage($userId)));
 			$reason = Q::interpolate($reason['credits']['YouHaveCreditsToStart'], array($amount));
-			self::earn($amount, $userId, compact('reason'));
+			self::earn($amount, $userId, array(
+				'reason' => $reason,
+				'publisherId' => Users::communityId()
+			));
 		}
 		return $stream;
 	}
@@ -105,12 +108,16 @@ class Assets_Credits
 		$stream->save();
 		
 		$instructions_json = Q::json_encode(array_merge(
-			array('app' => Q::app()),
+			array(
+				'app' => Q::app(),
+				'operation' => '-'
+			),
 			$more
 		));
 		$stream->post($userId, array(
 			'type' => 'Assets/credits/spent',
 			'content' => $amount,
+			'byClientId' => Q::ifset($more, 'publisherId', null),
 			'instructions' => $instructions_json
 		));
 	}
@@ -149,8 +156,12 @@ class Assets_Credits
 		$stream->post($userId, array(
 			'type' => 'Assets/credits/earned',
 			'content' => $amount,
+			'byClientId' => Q::ifset($more, 'publisherId', null),
 			'instructions' => Q::json_encode(array_merge(
-				array('app' => Q::app()),
+				array(
+					'app' => Q::app(),
+					'operation' => '+'
+				),
 				$more
 			))
 		));
@@ -177,10 +188,14 @@ class Assets_Credits
 
 		$fromUserId = Q::ifset($fromUserId, Users::loggedInUser(true)->id);
 
-		$instructions_json = Q::json_encode(array_merge(
+		if ($toUserId == $fromUserId) {
+			throw new Q_Exception_WrongValue(array('field' => 'fromUserId', 'range' => 'you can\'t send to yourself'));
+		}
+
+		$instructions = array_merge(
 			array('app' => Q::app()),
 			$more
-		));
+		);
 		$from_stream = self::userStream($fromUserId, $fromUserId);
 		$existing_amount = $from_stream->getAttribute('amount');
 		if ($existing_amount < $amount) {
@@ -192,10 +207,12 @@ class Assets_Credits
 		$from_stream->setAttribute('amount', $existing_amount - $amount);
 		$from_stream->save();
 
+		$instructions['operation'] = '-';
 		$from_stream->post($fromUserId, array(
 			'type' => 'Assets/credits/sent',
+			'byClientId' => $toUserId,
 			'content' => $amount,
-			'instructions' => $instructions_json
+			'instructions' => Q::json_encode($instructions)
 		));
 		
 		// TODO: add journaling system
@@ -204,10 +221,12 @@ class Assets_Credits
 		$to_stream = self::userStream($toUserId, $toUserId, true);
 		$to_stream->setAttribute('amount', $to_stream->getAttribute('amount') + $amount);
 		$to_stream->save();
+		$instructions['operation'] = '+';
 		$to_stream->post($toUserId, array(
 			'type' => 'Assets/credits/received',
+			'byClientId' => $fromUserId,
 			'content' => $amount,
-			'instructions' => $instructions_json
+			'instructions' => Q::json_encode($instructions)
 		));
 	}
 };
