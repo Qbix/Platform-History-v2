@@ -327,11 +327,6 @@
 					});
 				} else if (window.PaymentRequest) {
 					// check for payment request
-					// this method turned off because stripe offer universal interface
-					// which allow to select saved cards from browser and googlePay.
-					// But using window.PaymentRequest with googlePay require to get
-					// merchantId from google (which long and dreary). Instructions to get merchantId:
-					// https://developers.google.com/pay/api/web/guides/test-and-deploy/integration-checklist
 					Assets.Payments.paymentRequestStripe(options, function (err, res) {
 						if (err && (err.code === 9)) {
 							Assets.Payments.standardStripe(options, callback);
@@ -358,8 +353,10 @@
 			 *  @param {Function} [callback]
 			 */
 			googlepay: function (options, callback) {
-				// while we fixing problems with GoolePay
-				return Assets.Payments.standardStripe(options, callback);
+				if (!Q.getObject("Assets.Payments.googlePay")) {
+					//return Assets.Payments.standardStripe(options, callback);
+					return _redirectToBrowserTab(options);
+				}
 
 				sgap.setKey(Assets.Payments.stripe.publishableKey).then(function () {
 					sgap.isReadyToPay()
@@ -756,7 +753,8 @@
 
 	Q.Tool.define({
 		"Assets/subscription": "{{Assets}}/js/tools/subscription.js",
-		"Assets/payment": "{{Assets}}/js/tools/payment.js"
+		"Assets/payment": "{{Assets}}/js/tools/payment.js",
+		"Assets/history": "{{Assets}}/js/tools/history.js"
 	});
 	
 	Q.onInit.set(function () {
