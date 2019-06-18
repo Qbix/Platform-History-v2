@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Téigh",
-            "PasteLinkHere": "Greamaigh nasc anseo"
+            "PasteLinkHere": "Greamaigh nasc anseo",
+            "BrowseTheWeb": "Brabhsáil",
+            "WriteToStartConversation": "Scríobh do chuid smaointe chun tús a chur leis an gcomhrá",
+            "StartConversation": "Comhrá Tosaigh"
         }
     }
 }

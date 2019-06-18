@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Merci pour votre paiement à {{call 'publisher.displayName'}}.",
         "SubscribedTo": "{{call 'user.displayName'}} a souscrit à {{plan.title}}",
         "YouSubscribedTo": "Vous êtes abonné à {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Informations sur la commande",
+        "PaymentMethod": "Mode de paiement",
+        "ContactInfo": "Informations de contact",
+        "Pay": "Payer"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Invitation acceptée par {{1}}",
+        "YouHaveCreditsToStart": "Vous avez {{1}} crédits pour commencer"
     }
 }

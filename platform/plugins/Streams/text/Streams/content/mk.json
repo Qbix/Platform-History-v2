@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Напредок направен на {{stream.fields.title}}",
         "Streams\/task\/complete": "Задача завршена: {{stream.fields.title}}",
         "Streams\/task\/error": "Грешка во текот: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Дојдовна порака"
+        "Streams\/incoming\/*": "{{app}}: Дојдовна порака",
+        "ManageEmailSubscriptions": "управувајте со претплатите за е-пошта",
+        "IfUnsubscribe": "Ако сакате да се откажете"
     },
     "invite": {
         "messageContent": "{{displayName}} ве покани да {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Дали добивте покана?",
             "body": "Еј, ти испратив покана до апликацијата {{app}}. Ве молиме проверете ја вашата е-пошта и кликнете на врската таму!"
         }
+    },
+    "participating": {
+        "Title": "Наслов",
+        "Subscribed": "Претплатени",
+        "Participants": "Учесници"
     }
 }

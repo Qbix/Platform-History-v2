@@ -2,7 +2,7 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link for \u00e5 fremme",
+                "link": "Link for å fremme",
                 "startDate": "Startdato",
                 "startTime": "Starttid",
                 "endDate": "Sluttdato",
@@ -11,7 +11,7 @@
             },
             "interests": {
                 "Title": "Filtrer etter interesse",
-                "FilterInterests": "Begynn \u00e5 skrive en interesse ..."
+                "FilterInterests": "Begynn å skrive en interesse ..."
             },
             "Interest": "Renter",
             "Location": "plassering"
@@ -19,8 +19,11 @@
     },
     "webpage": {
         "composer": {
-            "Go": "G\u00e5",
-            "PasteLinkHere": "Lim inn en lenke her"
+            "Go": "Gå",
+            "PasteLinkHere": "Lim inn en lenke her",
+            "BrowseTheWeb": "Søk",
+            "WriteToStartConversation": "Skriv dine tanker for å starte samtalen",
+            "StartConversation": "Start samtale"
         }
     }
 }

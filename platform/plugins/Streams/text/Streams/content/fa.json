@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "پیشرفت در {{stream.fields.title}} انجام شد",
         "Streams\/task\/complete": "وظیفه تکمیل شده: {{stream.fields.title}}",
         "Streams\/task\/error": "خطا در طول {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: پیام ورودی"
+        "Streams\/incoming\/*": "{{app}}: پیام ورودی",
+        "ManageEmailSubscriptions": "اشتراک های ایمیل خود را مدیریت کنید",
+        "IfUnsubscribe": "اگر میخواهید اشتراک را لغو کنید"
     },
     "invite": {
         "messageContent": "{{displayName}} شما را به {{inviteUrl}} دعوت کرد",
@@ -92,5 +94,10 @@
             "subject": "دعوت کردید؟",
             "body": "هی، من فقط یک دعوتنامه به برنامه {{app}} فرستادم. لطفا ایمیل خود را بررسی کنید و روی پیوند آن کلیک کنید!"
         }
+    },
+    "participating": {
+        "Title": "عنوان",
+        "Subscribed": "مشترک شده",
+        "Participants": "شركت كنندگان"
     }
 }

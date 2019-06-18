@@ -2,16 +2,16 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "T\u0259\u015fviq etm\u0259k \u00fc\u00e7\u00fcn \u0259laq\u0259",
-                "startDate": "Ba\u015flan\u011f\u0131c tarixi",
-                "startTime": "Vaxt\u0131n\u0131 ba\u015fla",
-                "endDate": "Bitm\u0259 vaxt\u0131",
+                "link": "Təşviq etmək üçün əlaqə",
+                "startDate": "Başlanğıc tarixi",
+                "startTime": "Vaxtını başla",
+                "endDate": "Bitmə vaxtı",
                 "endTime": "End Time",
-                "budget": "B\u00fcdc\u0259"
+                "budget": "Büdcə"
             },
             "interests": {
-                "Title": "Faizl\u0259r\u0259 g\u00f6r\u0259 Filter",
-                "FilterInterests": "Maraq yazma\u011fa ba\u015flay\u0131n ..."
+                "Title": "Faizlərə görə Filter",
+                "FilterInterests": "Maraq yazmağa başlayın ..."
             },
             "Interest": "Faiz",
             "Location": "Yer"
@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Gedin",
-            "PasteLinkHere": "Burada bir ke\u00e7id qoyun"
+            "PasteLinkHere": "Burada bir keçid qoyun",
+            "BrowseTheWeb": "Gözdən keçirin",
+            "WriteToStartConversation": "Söhbətdən başlamaq üçün fikirlərinizi yazın",
+            "StartConversation": "Söhbətə başlayın"
         }
     }
 }

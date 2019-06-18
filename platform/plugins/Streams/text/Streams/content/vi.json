@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Tiến trình thực hiện vào {{stream.fields.title}}",
         "Streams\/task\/complete": "Nhiệm vụ đã hoàn thành: {{stream.fields.title}}",
         "Streams\/task\/error": "Lỗi trong: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Tin nhắn đến"
+        "Streams\/incoming\/*": "{{app}}: Tin nhắn đến",
+        "ManageEmailSubscriptions": "quản lý đăng ký email của bạn",
+        "IfUnsubscribe": "Nếu bạn muốn hủy đăng ký"
     },
     "invite": {
         "messageContent": "{{displayName}} đã mời bạn đến {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Bạn đã nhận được một lời mời?",
             "body": "Xin chào, tôi vừa gửi cho bạn lời mời đến ứng dụng {{app}}. Vui lòng kiểm tra email của bạn và nhấp vào liên kết trong đó!"
         }
+    },
+    "participating": {
+        "Title": "Chức vụ",
+        "Subscribed": "Đã đăng ký",
+        "Participants": "Người tham gia"
     }
 }

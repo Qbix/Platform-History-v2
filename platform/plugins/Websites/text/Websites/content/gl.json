@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Vaia",
-            "PasteLinkHere": "Pegue unha ligazón aquí"
+            "PasteLinkHere": "Pegue unha ligazón aquí",
+            "BrowseTheWeb": "Navega",
+            "WriteToStartConversation": "Escribe os teus pensamentos para comezar a conversa",
+            "StartConversation": "Iniciar conversa"
         }
     }
 }

@@ -21,7 +21,7 @@ function Assets_after_Streams_inviteAccept($params)
 	$text = Q::interpolate($text['credits']['InviteAcceptedBy'], array($invitedUser->displayName()));
 
 	Assets_Credits::earn($credits, $invite->invitingUserId, array(
-		$text,
+		'reason' => $text,
 		'publisherId' => $participant->publisherId,
 		'streamName' => $participant->streamName
 	));

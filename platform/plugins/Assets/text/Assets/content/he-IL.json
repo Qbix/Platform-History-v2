@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "תודה על התשלום שלך ל- {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} נרשם ל- {{plan.title}}",
         "YouSubscribedTo": "נרשמת ל- {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "מידע על הזמנה",
+        "PaymentMethod": "אמצעי תשלום",
+        "ContactInfo": "פרטים ליצירת קשר",
+        "Pay": "שלם"
+    },
+    "credits": {
+        "InviteAcceptedBy": "הזמן את ההזמנה על ידי {{1}}",
+        "YouHaveCreditsToStart": "יש לך {{1}} זיכויים כדי להתחיל"
     }
 }

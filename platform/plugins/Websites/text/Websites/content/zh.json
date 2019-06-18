@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "走",
-            "PasteLinkHere": "在此处粘贴链接"
+            "PasteLinkHere": "在此处粘贴链接",
+            "BrowseTheWeb": "浏览",
+            "WriteToStartConversation": "写下你的想法，开始谈话",
+            "StartConversation": "开始对话"
         }
     }
 }

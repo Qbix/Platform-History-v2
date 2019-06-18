@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Gitmek",
-            "PasteLinkHere": "Linki buraya yapıştırın"
+            "PasteLinkHere": "Linki buraya yapıştırın",
+            "BrowseTheWeb": "Araştır",
+            "WriteToStartConversation": "Sohbeti başlatmak için düşüncelerinizi yazın",
+            "StartConversation": "Sohbeti Başlat"
         }
     }
 }

@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Иди",
-            "PasteLinkHere": "Налепите линк овде"
+            "PasteLinkHere": "Налепите линк овде",
+            "BrowseTheWeb": "Бровсе",
+            "WriteToStartConversation": "Напишите своје мисли да бисте започели разговор",
+            "StartConversation": "Старт Цонверсатион"
         }
     }
 }

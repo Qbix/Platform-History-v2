@@ -3,15 +3,15 @@
         "campaign": {
             "placeholders": {
                 "link": "Link za promicanje",
-                "startDate": "Po\u010detni datum",
-                "startTime": "Vrijeme po\u010detka",
-                "endDate": "Datum zavr\u0161etka",
-                "endTime": "Vrijeme zavr\u0161etka",
-                "budget": "bud\u017eet"
+                "startDate": "Početni datum",
+                "startTime": "Vrijeme početka",
+                "endDate": "Datum završetka",
+                "endTime": "Vrijeme završetka",
+                "budget": "budžet"
             },
             "interests": {
                 "Title": "Filtriraj po interesu",
-                "FilterInterests": "Po\u010dnite tipkati interes ..."
+                "FilterInterests": "Počnite tipkati interes ..."
             },
             "Interest": "Interes",
             "Location": "Mjesto"
@@ -19,8 +19,11 @@
     },
     "webpage": {
         "composer": {
-            "Go": "I\u0107i",
-            "PasteLinkHere": "Ovdje zalijepite vezu"
+            "Go": "Ići",
+            "PasteLinkHere": "Ovdje zalijepite vezu",
+            "BrowseTheWeb": "pretraživati",
+            "WriteToStartConversation": "Napišite svoje misli kako biste započeli razgovor",
+            "StartConversation": "Pokreni razgovor"
         }
     }
 }

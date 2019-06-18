@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "{{stream.fields.title}} पर प्रगति",
         "Streams\/task\/complete": "टास्क पूरा हुआ: {{stream.fields.title}}",
         "Streams\/task\/error": "इस दौरान त्रुटि: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: आने वाला संदेश"
+        "Streams\/incoming\/*": "{{app}}: आने वाला संदेश",
+        "ManageEmailSubscriptions": "अपने ईमेल सदस्यता का प्रबंधन करें",
+        "IfUnsubscribe": "यदि आप सदस्यता समाप्त करना चाहते हैं"
     },
     "invite": {
         "messageContent": "{{displayName}} ने आपको {{inviteUrl}} आमंत्रित किया",
@@ -92,5 +94,10 @@
             "subject": "क्या आपको निमंत्रण मिला?",
             "body": "अरे, मैंने आपको {{app}} ऐप पर एक आमंत्रण भेजा है। कृपया अपना ईमेल देखें और वहां लिंक पर क्लिक करें!"
         }
+    },
+    "participating": {
+        "Title": "शीर्षक",
+        "Subscribed": "सदस्यता लिया",
+        "Participants": "प्रतिभागियों"
     }
 }

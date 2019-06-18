@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Mennä",
-            "PasteLinkHere": "Liitä linkki tähän"
+            "PasteLinkHere": "Liitä linkki tähän",
+            "BrowseTheWeb": "selailla",
+            "WriteToStartConversation": "Kirjoita ajatuksesi keskustelun aloittamiseksi",
+            "StartConversation": "Aloita keskustelu"
         }
     }
 }
