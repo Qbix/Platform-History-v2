@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Дзякуй за ваш плацёж да {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} падпісаўся {{plan.title}}",
         "YouSubscribedTo": "Вы падпісаліся на {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Інфармацыя пра парадак",
+        "PaymentMethod": "Спосаб аплаты",
+        "ContactInfo": "Кантактная інфармацыя",
+        "Pay": "Аплаціць"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Запрашэнне прынятае {{1}}",
+        "YouHaveCreditsToStart": "Для вас {{1}} крэдытаў"
     }
 }

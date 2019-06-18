@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "ขอบคุณสำหรับการชำระเงินถึง {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} สมัครรับข้อมูล {{1,000}}",
         "YouSubscribedTo": "คุณสมัครรับข้อมูลจาก {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "ข้อมูลเกี่ยวกับการสั่งซื้อ",
+        "PaymentMethod": "วิธีการชำระเงิน",
+        "ContactInfo": "ข้อมูลติดต่อ",
+        "Pay": "จ่ายเงิน"
+    },
+    "credits": {
+        "InviteAcceptedBy": "คำเชิญได้รับการยอมรับโดย {{1}}",
+        "YouHaveCreditsToStart": "คุณมี {{1}} หน่วยกิตที่จะเริ่มต้น"
     }
 }

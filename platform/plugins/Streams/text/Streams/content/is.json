@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Framfarir gerðar á {{stream.fields.title}}",
         "Streams\/task\/complete": "Verkefni lokið: {{stream.fields.title}}",
         "Streams\/task\/error": "Villa við: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Innkomið skilaboð"
+        "Streams\/incoming\/*": "{{app}}: Innkomið skilaboð",
+        "ManageEmailSubscriptions": "stjórna tölvupósti áskriftunum þínum",
+        "IfUnsubscribe": "Ef þú vilt segja upp áskrift"
     },
     "invite": {
         "messageContent": "{{displayName}} bauð þér að {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Fékkstu boð?",
             "body": "Hey, ég sendi þér bara boð í {{app}} app. Vinsamlegast athugaðu netfangið þitt og smelltu á tengilinn þarna!"
         }
+    },
+    "participating": {
+        "Title": "Titill",
+        "Subscribed": "Áskrifandi",
+        "Participants": "Þátttakendur"
     }
 }

@@ -37,7 +37,9 @@
         "Streams/task/progress": "Voortgang gemaakt op {{stream.fields.title}}",
         "Streams/task/complete": "Taak voltooid: {{stream.fields.title}}",
         "Streams/task/error": "Fout tijdens: {{stream.fields.title}}",
-        "Streams/incoming/*": "{{app}}: inkomend bericht"
+        "Streams/incoming/*": "{{app}}: inkomend bericht",
+        "ManageEmailSubscriptions": "beheer uw e-mailabonnementen",
+        "IfUnsubscribe": "Als u zich wilt afmelden"
     },
     "invite": {
         "messageContent": "{{displayName}} heeft je uitgenodigd voor {{inviteUrl}}",
@@ -60,7 +62,7 @@
             "QRscanned": "Ze hebben het gescand!"
         },
         "email": {
-            "subject": "H\u00e9, kijk hier eens",
+            "subject": "Hé, kijk hier eens",
             "PleaseVisitLink": "Ga naar de volgende link:",
             "InvitingYou": "Ik nodig u uit voor {{title}}",
             "HasInvitedYou": "{{displayName}} heeft u uitgenodigd voor {{title}}"
@@ -92,5 +94,10 @@
             "subject": "Heb je een uitnodiging ontvangen?",
             "body": "Hallo, ik heb je zojuist een uitnodiging gestuurd naar de app {{app}}. Controleer uw e-mail en klik op de link daar!"
         }
+    },
+    "participating": {
+        "Title": "Titel",
+        "Subscribed": "geabonneerd",
+        "Participants": "Deelnemers"
     }
 }

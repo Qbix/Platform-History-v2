@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Vai",
-            "PasteLinkHere": "Cole um link aqui"
+            "PasteLinkHere": "Cole um link aqui",
+            "BrowseTheWeb": "Squeaky toy",
+            "WriteToStartConversation": "Escreva seus pensamentos para começar a conversa",
+            "StartConversation": "Iniciar conversa"
         }
     }
 }

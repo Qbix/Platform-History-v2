@@ -1,22 +1,22 @@
 {
-	"browsertab": {
-		"html": "{{button}}",
-		"button": "Tap to pay"
-	},
-	"notifications": {
-		"ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-		"ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-		"SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-		"YouSubscribedTo": "You have been subscribed to {{plan.title}}"
-	},
-	"payment": {
-		"AboutOrder": "Info about order",
-		"PaymentMethod": "Payment method",
-		"ContactInfo": "Contact info",
-		"Pay": "Pay"
-	},
-	"credits": {
-		"InviteAcceptedBy": "Invite accepted by {{1}}",
-		"YouHaveCreditsToStart": "You have {{1}} credits to start"
-	}
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tap to pay"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Info about order",
+        "PaymentMethod": "Payment method",
+        "ContactInfo": "Contact info",
+        "Pay": "Pay"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Invite accepted by {{1}}",
+        "YouHaveCreditsToStart": "You have {{1}} credits to start"
+    }
 }

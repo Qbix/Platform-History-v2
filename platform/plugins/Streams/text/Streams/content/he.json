@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "ההתקדמות בוצעה בתאריך {{stream.fields.title}}",
         "Streams\/task\/complete": "המשימה הושלמה: {{stream.fields.title}}",
         "Streams\/task\/error": "שגיאה במהלך: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: הודעה נכנסת"
+        "Streams\/incoming\/*": "{{app}}: הודעה נכנסת",
+        "ManageEmailSubscriptions": "לנהל את מינויי הדוא&quot;ל שלך",
+        "IfUnsubscribe": "אם אתה רוצה לבטל את המנוי"
     },
     "invite": {
         "messageContent": "{{displayName}} הזמין אותך ל {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "קיבלת הזמנה?",
             "body": "היי, כרגע שלחתי לך הזמנה לאפליקציה {{app}}. בדוק את הדוא&quot;ל שלך ולחץ על הקישור שם!"
         }
+    },
+    "participating": {
+        "Title": "כותרת",
+        "Subscribed": "מנוי",
+        "Participants": "משתתפים"
     }
 }

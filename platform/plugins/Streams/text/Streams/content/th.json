@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "ความคืบหน้าเมื่อวันที่ {{stream.fields.title}}",
         "Streams\/task\/complete": "ภารกิจเสร็จสิ้น: {{stream.fields.title}}",
         "Streams\/task\/error": "ข้อผิดพลาดระหว่าง: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: ข้อความที่เข้ามา"
+        "Streams\/incoming\/*": "{{app}}: ข้อความที่เข้ามา",
+        "ManageEmailSubscriptions": "จัดการการสมัครอีเมลของคุณ",
+        "IfUnsubscribe": "หากคุณต้องการยกเลิกการสมัคร"
     },
     "invite": {
         "messageContent": "{{displayName}} เชิญคุณเข้าร่วม {{1,000}}",
@@ -92,5 +94,10 @@
             "subject": "คุณได้รับคำเชิญหรือไม่",
             "body": "สวัสดีฉันเพิ่งส่งคำเชิญให้คุณไปยังแอป {{app}} โปรดตรวจสอบอีเมลของคุณและคลิกลิงก์ในนั้น!"
         }
+    },
+    "participating": {
+        "Title": "หัวข้อ",
+        "Subscribed": "สมัครเป็นสมาชิก",
+        "Participants": "ผู้เข้าร่วม"
     }
 }

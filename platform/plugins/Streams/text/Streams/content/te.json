@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "{{stream.fields.title}}",
         "Streams\/task\/complete": "టాస్క్ పూర్తయింది: {{stream.fields.title}}",
         "Streams\/task\/error": "లోపం: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: ఇన్కమింగ్ మెసేజ్"
+        "Streams\/incoming\/*": "{{app}}: ఇన్కమింగ్ మెసేజ్",
+        "ManageEmailSubscriptions": "మీ ఇమెయిల్ సభ్యత్వాలను నిర్వహించండి",
+        "IfUnsubscribe": "మీరు చందాను తొలగించాలనుకుంటే"
     },
     "invite": {
         "messageContent": "{{displayName}} మిమ్మల్ని {{inviteUrl}} కి ఆహ్వానించారు",
@@ -92,5 +94,10 @@
             "subject": "మీకు ఆహ్వానం వచ్చింది?",
             "body": "హేయ్, నేను {{app}} అనువర్తనం కోసం మిమ్మల్ని ఆహ్వానించాను. దయచేసి మీ ఇమెయిల్ను తనిఖీ చేసి, అక్కడ ఉన్న లింక్ని క్లిక్ చేయండి!"
         }
+    },
+    "participating": {
+        "Title": "శీర్షిక",
+        "Subscribed": "సబ్ స్క్రైబ్",
+        "Participants": "పాల్గొనేవారు"
     }
 }

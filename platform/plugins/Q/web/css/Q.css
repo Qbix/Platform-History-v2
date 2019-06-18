@@ -737,7 +737,8 @@ html.Q_scanning body > .Q_scanning_code {
 	z-index: 0 !important;
 }
 
-input {
+input[type=text],
+input[type=password] {
     -webkit-appearance: none;
     -moz-appearance: none;
 }

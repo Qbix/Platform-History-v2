@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "{{stream.fields.title}} પર પ્રગતિ",
         "Streams\/task\/complete": "કાર્ય પૂર્ણ થયું: {{stream.fields.title}}",
         "Streams\/task\/error": "દરમિયાન ભૂલ: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: આવનારી સંદેશ"
+        "Streams\/incoming\/*": "{{app}}: આવનારી સંદેશ",
+        "ManageEmailSubscriptions": "તમારા ઇમેઇલ સબ્સ્ક્રિપ્શન્સ મેનેજ કરો",
+        "IfUnsubscribe": "જો તમે અનસબ્સ્ક્રાઇબ કરવા માંગો છો"
     },
     "invite": {
         "messageContent": "{{displayName}} તમને {{inviteUrl}} માં આમંત્રિત કર્યા છે",
@@ -92,5 +94,10 @@
             "subject": "શું તમે આમંત્રણ મેળવ્યું?",
             "body": "અરે, મેં હમણાં જ તમને {{app}} એપ્લિકેશન પર આમંત્રણ મોકલ્યું છે. કૃપા કરીને તમારું ઇમેઇલ તપાસો અને ત્યાંની લિંકને ક્લિક કરો!"
         }
+    },
+    "participating": {
+        "Title": "શીર્ષક",
+        "Subscribed": "સબ્સ્ક્રાઇબ કર્યું",
+        "Participants": "સહભાગીઓ"
     }
 }

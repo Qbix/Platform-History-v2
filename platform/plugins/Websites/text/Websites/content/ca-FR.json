@@ -2,25 +2,28 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Enlla\u00e7 per promocionar",
+                "link": "Enllaç per promocionar",
                 "startDate": "Data d&#39;inici",
                 "startTime": "L&#39;hora d&#39;inici",
-                "endDate": "Data de finalitzaci\u00f3",
+                "endDate": "Data de finalització",
                 "endTime": "Fi del temps",
                 "budget": "Pressupost"
             },
             "interests": {
                 "Title": "Filtrar per interessos",
-                "FilterInterests": "Comenceu a escriure un inter\u00e8s ..."
+                "FilterInterests": "Comenceu a escriure un interès ..."
             },
-            "Interest": "Inter\u00e8s",
-            "Location": "Ubicaci\u00f3"
+            "Interest": "Interès",
+            "Location": "Ubicació"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "V\u00e9s",
-            "PasteLinkHere": "Enganxa un enlla\u00e7 aqu\u00ed"
+            "Go": "Vés",
+            "PasteLinkHere": "Enganxa un enllaç aquí",
+            "BrowseTheWeb": "Navegueu",
+            "WriteToStartConversation": "Escriviu els vostres pensaments per començar la conversa",
+            "StartConversation": "Inicia la conversa"
         }
     }
 }

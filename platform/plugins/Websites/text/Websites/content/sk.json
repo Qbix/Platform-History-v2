@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "ísť",
-            "PasteLinkHere": "Vložte tu odkaz"
+            "PasteLinkHere": "Vložte tu odkaz",
+            "BrowseTheWeb": "prezerať",
+            "WriteToStartConversation": "Napíšte svoje myšlienky na začatie konverzácie",
+            "StartConversation": "Spustite konverzáciu"
         }
     }
 }

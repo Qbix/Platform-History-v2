@@ -2,25 +2,28 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "\u03a3\u03cd\u03bd\u03b4\u03b5\u03c3\u03bc\u03bf\u03c2 \u03b3\u03b9\u03b1 \u03c4\u03b7\u03bd \u03c0\u03c1\u03bf\u03ce\u03b8\u03b7\u03c3\u03b7",
-                "startDate": "\u0397\u03bc\u03b5\u03c1\u03bf\u03bc\u03b7\u03bd\u03af\u03b1 \u03ad\u03bd\u03b1\u03c1\u03be\u03b7\u03c2",
-                "startTime": "\u03a9\u03c1\u03b1 \u03ad\u03bd\u03b1\u03c1\u03be\u03b7\u03c2",
-                "endDate": "\u0397\u03bc\u03b5\u03c1\u03bf\u03bc\u03b7\u03bd\u03af\u03b1 \u03bb\u03ae\u03be\u03b7\u03c2",
-                "endTime": "\u03a4\u03ad\u03bb\u03bf\u03c2 \u03c7\u03c1\u03cc\u03bd\u03bf\u03c5",
-                "budget": "\u03a0\u03c1\u03bf\u03cb\u03c0\u03bf\u03bb\u03bf\u03b3\u03b9\u03c3\u03bc\u03cc\u03c2"
+                "link": "Σύνδεσμος για την προώθηση",
+                "startDate": "Ημερομηνία έναρξης",
+                "startTime": "Ωρα έναρξης",
+                "endDate": "Ημερομηνία λήξης",
+                "endTime": "Τέλος χρόνου",
+                "budget": "Προϋπολογισμός"
             },
             "interests": {
-                "Title": "\u03a6\u03b9\u03bb\u03c4\u03c1\u03ac\u03c1\u03b9\u03c3\u03bc\u03b1 \u03b2\u03ac\u03c3\u03b5\u03b9 \u03b5\u03bd\u03b4\u03b9\u03b1\u03c6\u03ad\u03c1\u03bf\u03bd\u03c4\u03bf\u03c2",
-                "FilterInterests": "\u039e\u03b5\u03ba\u03b9\u03bd\u03ae\u03c3\u03c4\u03b5 \u03bd\u03b1 \u03c0\u03bb\u03b7\u03ba\u03c4\u03c1\u03bf\u03bb\u03bf\u03b3\u03b5\u03af\u03c4\u03b5 \u03ad\u03bd\u03b1 \u03b5\u03bd\u03b4\u03b9\u03b1\u03c6\u03ad\u03c1\u03bf\u03bd ..."
+                "Title": "Φιλτράρισμα βάσει ενδιαφέροντος",
+                "FilterInterests": "Ξεκινήστε να πληκτρολογείτε ένα ενδιαφέρον ..."
             },
-            "Interest": "\u0395\u03bd\u03b4\u03b9\u03b1\u03c6\u03ad\u03c1\u03bf\u03bd",
-            "Location": "\u03a4\u03bf\u03c0\u03bf\u03b8\u03b5\u03c3\u03af\u03b1"
+            "Interest": "Ενδιαφέρον",
+            "Location": "Τοποθεσία"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "\u03a0\u03b7\u03b3\u03b1\u03af\u03bd\u03c9",
-            "PasteLinkHere": "\u0395\u03c0\u03b9\u03ba\u03bf\u03bb\u03bb\u03ae\u03c3\u03c4\u03b5 \u03ad\u03bd\u03b1 \u03c3\u03cd\u03bd\u03b4\u03b5\u03c3\u03bc\u03bf \u03b5\u03b4\u03ce"
+            "Go": "Πηγαίνω",
+            "PasteLinkHere": "Επικολλήστε ένα σύνδεσμο εδώ",
+            "BrowseTheWeb": "Ξεφυλλίζω",
+            "WriteToStartConversation": "Γράψτε τις σκέψεις σας για να ξεκινήσετε τη συζήτηση",
+            "StartConversation": "Ξεκινήστε τη συνομιλία"
         }
     }
 }

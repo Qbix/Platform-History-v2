@@ -19,8 +19,11 @@
     },
     "webpage": {
         "composer": {
-            "Go": "G\u00e5",
-            "PasteLinkHere": "Inds\u00e6t et link her"
+            "Go": "Gå",
+            "PasteLinkHere": "Indsæt et link her",
+            "BrowseTheWeb": "Gennemse",
+            "WriteToStartConversation": "Skriv dine tanker for at starte samtalen",
+            "StartConversation": "Start samtale"
         }
     }
 }

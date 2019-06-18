@@ -1,80 +1,82 @@
 {
     "preview": {
-        "NewItemTitle": "\u09af\u09a5\u09cb\u09aa\u09af\u09c1\u0995\u09cd\u09a4 \u09b8\u09c3\u09b7\u09cd\u099f\u09bf\u0995\u09b0\u09cd\u09a4\u09be"
+        "NewItemTitle": "যথোপযুক্ত সৃষ্টিকর্তা"
     },
     "labels": {
-        "Streams/invited": "\u0986\u09ae\u09bf \u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09bf\u09a4 \u09ae\u09be\u09a8\u09c1\u09b7",
-        "Streams/invitedMe": "\u0995\u09c7 \u0986\u09ae\u09be\u0995\u09c7 \u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3 \u099c\u09be\u09a8\u09bf\u09af\u09bc\u09c7\u099b\u09c7"
+        "Streams/invited": "আমি আমন্ত্রিত মানুষ",
+        "Streams/invitedMe": "কে আমাকে আমন্ত্রণ জানিয়েছে"
     },
     "interests": {
-        "Filter": "\u09a4\u09c1\u09ae\u09bf \u0995\u09bf \u0989\u09aa\u09ad\u09cb\u0997 \u0995\u09b0?",
-        "CanAdd": "\u0986\u09aa\u09a8\u09bf \u09af\u09be \u0996\u09c1\u099c\u099b\u09c7\u09a8 \u09a4\u09be \u09af\u09a6\u09bf \u0986\u09aa\u09a8\u09bf \u098f\u0996\u09a8\u0993 \u0996\u09c1\u0981\u099c\u09c7 \u09aa\u09be\u09a8 \u09a8\u09be \u09a4\u09ac\u09c7 \u0986\u09aa\u09a8\u09bf \u09a8\u09c0\u099a\u09c7\u09b0 \u098f\u0995\u099f\u09bf \u09a8\u09a4\u09c1\u09a8 \u0986\u0997\u09cd\u09b0\u09b9 \u09af\u09c1\u0995\u09cd\u09a4 \u0995\u09b0\u09a4\u09c7 \u09aa\u09be\u09b0\u09c7\u09a8:",
-        "TrySynonyms": "\u098f\u099f\u09be \u09a6\u09c7\u0996\u09a4\u09c7 \u09aa\u09be\u099a\u09cd\u099b\u09c7\u09a8 \u09a8\u09be? \u0995\u09bf\u099b\u09c1 \u09aa\u09cd\u09b0\u09a4\u09bf\u09b6\u09ac\u09cd\u09a6 \u099a\u09c7\u09b7\u09cd\u099f\u09be \u0995\u09b0\u09c1\u09a8\u0964",
-        "AddUnderCategory": "\u09ac\u09bf\u09ad\u09be\u0997\u09c7\u09b0 \u0985\u09a7\u09c0\u09a8\u09c7 \u09af\u09cb\u0997 \u0995\u09b0\u09c1\u09a8 ...",
-        "Other": "\u0985\u09a8\u09cd\u09af\u09be\u09a8\u09cd\u09af",
-        "Unlisted": "\u0985\u09a4\u09be\u09b2\u09bf\u0995\u09be\u09ad\u09c1\u0995\u09cd\u09a4"
+        "Filter": "তুমি কি উপভোগ কর?",
+        "CanAdd": "আপনি যা খুজছেন তা যদি আপনি এখনও খুঁজে পান না তবে আপনি নীচের একটি নতুন আগ্রহ যুক্ত করতে পারেন:",
+        "TrySynonyms": "এটা দেখতে পাচ্ছেন না? কিছু প্রতিশব্দ চেষ্টা করুন।",
+        "AddUnderCategory": "বিভাগের অধীনে যোগ করুন ...",
+        "Other": "অন্যান্য",
+        "Unlisted": "অতালিকাভুক্ত"
     },
     "chat": {
-        "flaggedForAdminReview": "\u09ac\u09be\u09b0\u09cd\u09a4\u09be \u0985\u09cd\u09af\u09be\u09a1\u09ae\u09bf\u09a8 \u09aa\u09b0\u09cd\u09af\u09be\u09b2\u09cb\u099a\u09a8\u09be \u099c\u09a8\u09cd\u09af \u09aa\u09a4\u09be\u0995\u09be\u0999\u09cd\u0995\u09bf\u09a4 \u0995\u09b0\u09be \u09b9\u09af\u09bc\u09c7\u099b\u09c7\u0964 Unflag \u0995\u09b0\u09a4\u09c7 \u0986\u09ac\u09be\u09b0 \u0986\u09b2\u09a4\u09cb \u099a\u09be\u09aa\u09c1\u09a8\u0964",
-        "noOneSaid": "\u0995\u09c7\u0989 \u0995\u09bf\u099b\u09c1 \u09ac\u09b2\u09c7\u09a8\u09bf",
-        "closeChatButton": "\u099a\u09cd\u09af\u09be\u099f \u09ac\u09a8\u09cd\u09a7 \u0995\u09b0\u09c1\u09a8",
-        "closeChatConfirmTitle": "\u098f\u0987 \u099a\u09cd\u09af\u09be\u099f \u09ac\u09a8\u09cd\u09a7?",
-        "closeChatConfirm": "\u0986\u09aa\u09a8\u09bf \u098f\u0987 \u099a\u09cd\u09af\u09be\u099f \u09ac\u09a8\u09cd\u09a7 \u0995\u09b0\u09a4\u09c7 \u099a\u09be\u09a8 \u0986\u09aa\u09a8\u09bf \u0995\u09bf \u09a8\u09bf\u09b6\u09cd\u099a\u09bf\u09a4?",
-        "closeChatConfirmYes": "\u09b9\u09be\u0981",
-        "closeChatConfirmNo": "\u09a8\u09be",
-        "earlierComments": "\u0986\u0997\u09c7 \u09ae\u09a8\u09cd\u09a4\u09ac\u09cd\u09af"
+        "flaggedForAdminReview": "বার্তা অ্যাডমিন পর্যালোচনা জন্য পতাকাঙ্কিত করা হয়েছে। Unflag করতে আবার আলতো চাপুন।",
+        "noOneSaid": "কেউ কিছু বলেনি",
+        "closeChatButton": "চ্যাট বন্ধ করুন",
+        "closeChatConfirmTitle": "এই চ্যাট বন্ধ?",
+        "closeChatConfirm": "আপনি এই চ্যাট বন্ধ করতে চান আপনি কি নিশ্চিত?",
+        "closeChatConfirmYes": "হাঁ",
+        "closeChatConfirmNo": "না",
+        "earlierComments": "আগে মন্তব্য"
     },
     "notifications": {
-        "*": "\u09ac\u09be\u09b0\u09cd\u09a4\u09be {{& message.fields.type}} \u09a5\u09c7\u0995\u09c7 {{& stream.fields.title}}",
-        "Streams/chat/message": "{{&call 'avatar.displayName'}} \u09ac\u09b2\u09c7\u099b\u09c7\u09a8:",
-        "Streams/changed": "{{stream.fields.title}} \u098f \u09aa\u09b0\u09bf\u09ac\u09b0\u09cd\u09a4\u09a8",
-        "Streams/invite": "\u0986\u09aa\u09a8\u09bf {{& stream.fields.title}} \u098f \u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09bf\u09a4 \u099b\u09bf\u09b2\u09c7\u09a8",
-        "Streams/announcement": "{{& streams.fields.title}} \u098f \u0998\u09cb\u09b7\u09a3\u09be",
-        "Streams/access": "{{&call 'avatar.displayName'}} \u09b8\u09cd\u099f\u09cd\u09b0\u09bf\u09ae \u0985\u09cd\u09af\u09be\u0995\u09cd\u09b8\u09c7\u09b8 \u09aa\u09b0\u09bf\u09ac\u09b0\u09cd\u09a4\u09a8",
-        "Streams/chat/edit": "\u099a\u09cd\u09af\u09be\u099f \u09ac\u09be\u09b0\u09cd\u09a4\u09be \u09b8\u09ae\u09cd\u09aa\u09be\u09a6\u09a8\u09be",
-        "Streams/chat/remove": "\u099a\u09cd\u09af\u09be\u099f \u09ac\u09be\u09b0\u09cd\u09a4\u09be \u09ae\u09c1\u099b\u09c7 \u09ab\u09c7\u09b2\u09be \u09b9\u09af\u09bc\u09c7\u099b\u09c7",
-        "Streams/closed": "{{stream.fields.title}} \u09ac\u09a8\u09cd\u09a7 \u0995\u09b0\u09be \u09b9\u09af\u09bc\u09c7\u099b\u09c7",
-        "Streams/task/progress": "{{stream.fields.title}} \u098f \u0985\u0997\u09cd\u09b0\u0997\u09a4\u09bf",
-        "Streams/task/complete": "\u099f\u09be\u09b8\u09cd\u0995 \u09b8\u09ae\u09cd\u09aa\u09a8\u09cd\u09a8: {{stream.fields.title}}",
-        "Streams/task/error": "\u09b8\u09ae\u09af\u09bc \u09a4\u09cd\u09b0\u09c1\u099f\u09bf: {{stream.fields.title}}",
-        "Streams/incoming/*": "{{app}}: \u0986\u09b8\u09a8\u09cd\u09a8 \u09ac\u09be\u09b0\u09cd\u09a4\u09be"
+        "*": "বার্তা {{& message.fields.type}} থেকে {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} বলেছেন:",
+        "Streams/changed": "{{stream.fields.title}} এ পরিবর্তন",
+        "Streams/invite": "আপনি {{& stream.fields.title}} এ আমন্ত্রিত ছিলেন",
+        "Streams/announcement": "{{& streams.fields.title}} এ ঘোষণা",
+        "Streams/access": "{{&call 'avatar.displayName'}} স্ট্রিম অ্যাক্সেস পরিবর্তন",
+        "Streams/chat/edit": "চ্যাট বার্তা সম্পাদনা",
+        "Streams/chat/remove": "চ্যাট বার্তা মুছে ফেলা হয়েছে",
+        "Streams/closed": "{{stream.fields.title}} বন্ধ করা হয়েছে",
+        "Streams/task/progress": "{{stream.fields.title}} এ অগ্রগতি",
+        "Streams/task/complete": "টাস্ক সম্পন্ন: {{stream.fields.title}}",
+        "Streams/task/error": "সময় ত্রুটি: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: আসন্ন বার্তা",
+        "ManageEmailSubscriptions": "আপনার ইমেইল সাবস্ক্রিপশন পরিচালনা করুন",
+        "IfUnsubscribe": "আপনি আনসাবস্ক্রাইব করতে চান"
     },
     "invite": {
-        "messageContent": "{{displayName}} \u0986\u09aa\u09a8\u09be\u0995\u09c7 {{inviteUrl}} \u098f \u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3 \u099c\u09be\u09a8\u09bf\u09af\u09bc\u09c7\u099b\u09c7",
+        "messageContent": "{{displayName}} আপনাকে {{inviteUrl}} এ আমন্ত্রণ জানিয়েছে",
         "dialog": {
-            "chooseFromContacts": "\u0986\u09aa\u09a8\u09be\u09b0 \u09aa\u09b0\u09bf\u099a\u09bf\u09a4\u09bf \u09a5\u09c7\u0995\u09c7 \u099a\u09af\u09bc\u09a8 \u0995\u09b0\u09c1\u09a8",
-            "selectFromContacts": "\u09aa\u09b0\u09bf\u099a\u09bf\u09a4\u09bf \u09a5\u09c7\u0995\u09c7 \u09a8\u09bf\u09b0\u09cd\u09ac\u09be\u099a\u09a8 \u0995\u09b0\u09c1\u09a8",
-            "photo": "\u098f\u0995\u099f\u09bf \u099b\u09ac\u09bf \u09a4\u09c1\u09b2\u09c1\u09a8",
-            "photoInstruction": "\u09af\u09a6\u09bf \u0986\u09aa\u09a8\u09be\u09b0 QR \u0995\u09cb\u09a1 \u09b8\u09cd\u0995\u09cd\u09af\u09be\u09a8 \u0995\u09b0\u09be \u09ac\u09cd\u09af\u0995\u09cd\u09a4\u09bf \u0986\u09aa\u09a8\u09be\u09b0 \u09b8\u09be\u09ae\u09a8\u09c7 \u09a5\u09be\u0995\u09c7 \u09a4\u09ac\u09c7 \u09a4\u09be\u09a6\u09c7\u09b0 \u098f\u0995\u099f\u09bf \u09ab\u099f\u09cb \u09a8\u09bf\u09a8",
-            "to": "\u098f\u09a4\u09c7: {{Stream Title}}",
-            "go": "\u09af\u09be\u0993\u09af\u09bc\u09be",
-            "title": "\u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3 \u0995\u09b0\u09be",
-            "placeholder": "\u09ae\u09cb\u09ac\u09be\u0987\u09b2 \u09a8\u09ae\u09cd\u09ac\u09b0 \u09ac\u09be \u0987\u09ae\u09c7\u0987\u09b2 \u09a0\u09bf\u0995\u09be\u09a8\u09be",
-            "orInvite": "\u09ac\u09be \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0 \u0995\u09b0\u09c7 \u09ae\u09be\u09a8\u09c1\u09b7\u0995\u09c7 \u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3 \u099c\u09be\u09a8\u09be\u09a8:",
-            "QR": "{{ClickOrTap}} QR \u0995\u09cb\u09a1 \u09a4\u09c8\u09b0\u09bf \u0995\u09b0\u09a4\u09c7",
-            "QRtitle": "\u098f\u0987 QR \u0995\u09cb\u09a1 \u09b8\u09cd\u0995\u09cd\u09af\u09be\u09a8 \u0995\u09b0\u09c1\u09a8",
-            "byEmail": "\u0987\u09ae\u09c7\u0987\u09b2",
-            "byText": "\u09aa\u09be\u09a0",
-            "byFacebook": "\u09ab\u09c7\u09b8\u09ac\u09c1\u0995",
-            "byTwitter": "\u099f\u09c1\u0987\u099f\u09be\u09b0",
-            "QRscanned": "\u09a4\u09be\u09b0\u09be \u098f\u099f\u09be \u09b8\u09cd\u0995\u09cd\u09af\u09be\u09a8!"
+            "chooseFromContacts": "আপনার পরিচিতি থেকে চয়ন করুন",
+            "selectFromContacts": "পরিচিতি থেকে নির্বাচন করুন",
+            "photo": "একটি ছবি তুলুন",
+            "photoInstruction": "যদি আপনার QR কোড স্ক্যান করা ব্যক্তি আপনার সামনে থাকে তবে তাদের একটি ফটো নিন",
+            "to": "এতে: {{Stream Title}}",
+            "go": "যাওয়া",
+            "title": "আমন্ত্রণ করা",
+            "placeholder": "মোবাইল নম্বর বা ইমেইল ঠিকানা",
+            "orInvite": "বা ব্যবহার করে মানুষকে আমন্ত্রণ জানান:",
+            "QR": "{{ClickOrTap}} QR কোড তৈরি করতে",
+            "QRtitle": "এই QR কোড স্ক্যান করুন",
+            "byEmail": "ইমেইল",
+            "byText": "পাঠ",
+            "byFacebook": "ফেসবুক",
+            "byTwitter": "টুইটার",
+            "QRscanned": "তারা এটা স্ক্যান!"
         },
         "email": {
-            "subject": "\u0986\u09b0\u09c7, \u098f\u0987 \u099a\u09c7\u0995 \u0986\u0989\u099f",
-            "PleaseVisitLink": "\u09a8\u09bf\u099a\u09c7\u09b0 \u09b2\u09bf\u0999\u09cd\u0995\u09c7 \u09af\u09be\u09a8 \u09a6\u09af\u09bc\u09be \u0995\u09b0\u09c7:",
-            "InvitingYou": "\u0986\u09ae\u09bf \u0986\u09aa\u09a8\u09be\u0995\u09c7 {{title}} \u098f \u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3 \u099c\u09be\u09a8\u09be\u099a\u09cd\u099b\u09bf",
-            "HasInvitedYou": "{{displayName}} \u0986\u09aa\u09a8\u09be\u0995\u09c7 {{title}} \u098f \u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3 \u099c\u09be\u09a8\u09bf\u09af\u09bc\u09c7\u099b\u09c7"
+            "subject": "আরে, এই চেক আউট",
+            "PleaseVisitLink": "নিচের লিঙ্কে যান দয়া করে:",
+            "InvitingYou": "আমি আপনাকে {{title}} এ আমন্ত্রণ জানাচ্ছি",
+            "HasInvitedYou": "{{displayName}} আপনাকে {{title}} এ আমন্ত্রণ জানিয়েছে"
         },
         "sms": {
-            "content": "\u0986\u09aa\u09a8\u09bf {{title}} \u098f \u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09bf\u09a4 \u09b9\u09af\u09bc\u09c7\u099b\u09c7\u09a8\u0964 \u0985\u09a8\u09c1\u0997\u09cd\u09b0\u09b9 \u0995\u09b0\u09c7 {{url}} \u099f\u09cd\u09af\u09be\u09aa \u0995\u09b0\u09c1\u09a8"
+            "content": "আপনি {{title}} এ আমন্ত্রিত হয়েছেন। অনুগ্রহ করে {{url}} ট্যাপ করুন"
         },
         "notice": {
-            "text": "\u0986\u09aa\u09a8\u09bf \u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09bf\u09a4 \u09b9\u09af\u09bc\u09c7\u099b\u09c7\u0964 {{ClickOrTap}} \u098f\u0996\u09be\u09a8\u09c7 \u0997\u09cd\u09b0\u09b9\u09a3 \u098f\u09ac\u0982 \u09af\u09cb\u0997 \u09a6\u09bf\u09a4\u09c7\u0964"
+            "text": "আপনি আমন্ত্রিত হয়েছে। {{ClickOrTap}} এখানে গ্রহণ এবং যোগ দিতে।"
         }
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} {{stream.fields.title}} \u098f \u098f\u0995\u099f\u09bf <em>{{message.fields.type}}</em> \u09ac\u09be\u09b0\u09cd\u09a4\u09be \u09aa\u09cb\u09b8\u09cd\u099f \u0995\u09b0\u09c7\u099b\u09c7\u09a8"
+            "posted": "{{call 'avatar.displayName'}} {{stream.fields.title}} এ একটি <em>{{message.fields.type}}</em> বার্তা পোস্ট করেছেন"
         },
         "text": {
             "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
@@ -82,15 +84,20 @@
     },
     "followup": {
         "mobile": {
-            "alert": "\u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3 \u0986\u09ae\u09be\u09a6\u09c7\u09b0 \u09a8\u09ae\u09cd\u09ac\u09b0 \u09a5\u09c7\u0995\u09c7 \u09aa\u09be\u09a0\u09be\u09a8\u09cb \u09b9\u09af\u09bc, \u09af\u09be \u0986\u09aa\u09a8\u09be\u09b0 \u09ac\u09a8\u09cd\u09a7\u09c1\u09a6\u09c7\u09b0 \u098f\u0996\u09a8\u0993 \u099a\u09bf\u09a8\u09a4\u09c7 \u09a8\u09be\u0964 \u09a4\u09be\u09a6\u09c7\u09b0 \u0995\u09be\u099b \u09a5\u09c7\u0995\u09c7 \u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3 \u099c\u09be\u09a8\u09be\u09a8\u09cb\u09b0 \u099c\u09a8\u09cd\u09af \u098f\u0995\u099f\u09bf \u09a6\u09cd\u09b0\u09c1\u09a4 \u09aa\u09be\u09a0\u09cd\u09af \u0985\u09a8\u09c1\u09b8\u09b0\u09a3 \u0995\u09b0\u09c1\u09a8, \u09a4\u09be\u09a6\u09c7\u09b0\u0995\u09c7 \u09b2\u09bf\u0999\u09cd\u0995\u099f\u09bf\u09a4\u09c7 \u0995\u09cd\u09b2\u09bf\u0995 \u0995\u09b0\u09be\u09b0 \u099c\u09a8\u09cd\u09af \u099c\u09bf\u099c\u09cd\u099e\u09be\u09b8\u09be \u0995\u09b0\u09c1\u09a8\u0964",
-            "confirm": "\u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3 \u0986\u09ae\u09be\u09a6\u09c7\u09b0 \u09a8\u09ae\u09cd\u09ac\u09b0 \u09a5\u09c7\u0995\u09c7 \u09aa\u09be\u09a0\u09be\u09a8\u09cb \u09b9\u09af\u09bc, \u09af\u09be \u0986\u09aa\u09a8\u09be\u09b0 \u09ac\u09a8\u09cd\u09a7\u09c1\u09a6\u09c7\u09b0 \u098f\u0996\u09a8\u0993 \u099a\u09bf\u09a8\u09a4\u09c7 \u09a8\u09be\u0964 \u0986\u09aa\u09a8\u09bf \u09a4\u09be\u09a6\u09c7\u09b0 \u0995\u09be\u099b \u09a5\u09c7\u0995\u09c7 \u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3 \u099c\u09be\u09a8\u09be\u09a8\u09cb\u09b0 \u099c\u09a8\u09cd\u09af \u098f\u0995\u099f\u09bf \u09a6\u09cd\u09b0\u09c1\u09a4 \u09aa\u09be\u09a0\u09cd\u09af \u0985\u09a8\u09c1\u09b8\u09b0\u09a3 \u0995\u09b0\u09a4\u09c7 \u099a\u09be\u09a8, \u09b2\u09bf\u0999\u09cd\u0995\u099f\u09bf \u0995\u09cd\u09b2\u09bf\u0995 \u0995\u09b0\u09a4\u09c7 \u09a4\u09be\u09a6\u09c7\u09b0 \u099c\u09bf\u099c\u09cd\u099e\u09be\u09b8\u09be \u0995\u09b0\u09c1\u09a8\u0964",
-            "check": "\u0986\u09b0\u09c7, \u0986\u09ae\u09bf \u0986\u09aa\u09a8\u09be\u0995\u09c7 {{app}} \u0985\u09cd\u09af\u09be\u09aa\u09cd\u09b2\u09bf\u0995\u09c7\u09b6\u09a8\u09c7 \u098f\u0995\u099f\u09bf \u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3 \u09aa\u09be\u09a0\u09bf\u09af\u09bc\u09c7\u099b\u09bf\u0964 \u0986\u09aa\u09a8\u09be\u09b0 \u098f\u09b8\u098f\u09ae\u098f\u09b8 \u099a\u09c7\u0995 \u0995\u09b0\u09c1\u09a8 \u098f\u09ac\u0982 \u09b2\u09bf\u0999\u09cd\u0995 \u0995\u09cd\u09b2\u09bf\u0995 \u0995\u09b0\u09c1\u09a8!"
+            "alert": "আমন্ত্রণ আমাদের নম্বর থেকে পাঠানো হয়, যা আপনার বন্ধুদের এখনও চিনতে না। তাদের কাছ থেকে আমন্ত্রণ জানানোর জন্য একটি দ্রুত পাঠ্য অনুসরণ করুন, তাদেরকে লিঙ্কটিতে ক্লিক করার জন্য জিজ্ঞাসা করুন।",
+            "confirm": "আমন্ত্রণ আমাদের নম্বর থেকে পাঠানো হয়, যা আপনার বন্ধুদের এখনও চিনতে না। আপনি তাদের কাছ থেকে আমন্ত্রণ জানানোর জন্য একটি দ্রুত পাঠ্য অনুসরণ করতে চান, লিঙ্কটি ক্লিক করতে তাদের জিজ্ঞাসা করুন।",
+            "check": "আরে, আমি আপনাকে {{app}} অ্যাপ্লিকেশনে একটি আমন্ত্রণ পাঠিয়েছি। আপনার এসএমএস চেক করুন এবং লিঙ্ক ক্লিক করুন!"
         },
         "email": {
-            "alert": "\u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3\u0997\u09c1\u09b2\u09bf \u0986\u09ae\u09be\u09a6\u09c7\u09b0 \u09a1\u09cb\u09ae\u09c7\u09a8 \u09a5\u09c7\u0995\u09c7 \u09aa\u09be\u09a0\u09be\u09a8\u09cb \u09b9\u09af\u09bc, \u09af\u09be \u0986\u09aa\u09a8\u09be\u09b0 \u09ac\u09a8\u09cd\u09a7\u09c1\u09a6\u09c7\u09b0 \u098f\u0996\u09a8\u0993 \u099a\u09bf\u09a8\u09a4\u09c7 \u09aa\u09be\u09b0\u09c7 \u09a8\u09be\u0964 \u09a4\u09be\u09a6\u09c7\u09b0 \u0995\u09be\u099b \u09a5\u09c7\u0995\u09c7 \u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3 \u099c\u09be\u09a8\u09be\u09a8\u09cb\u09b0 \u099c\u09a8\u09cd\u09af \u098f\u0995\u099f\u09bf \u09a6\u09cd\u09b0\u09c1\u09a4 \u09aa\u09be\u09a0\u09cd\u09af \u0985\u09a8\u09c1\u09b8\u09b0\u09a3 \u0995\u09b0\u09c1\u09a8, \u09a4\u09be\u09a6\u09c7\u09b0\u0995\u09c7 \u09b2\u09bf\u0999\u09cd\u0995\u099f\u09bf\u09a4\u09c7 \u0995\u09cd\u09b2\u09bf\u0995 \u0995\u09b0\u09be\u09b0 \u099c\u09a8\u09cd\u09af \u099c\u09bf\u099c\u09cd\u099e\u09be\u09b8\u09be \u0995\u09b0\u09c1\u09a8\u0964",
-            "confirm": "\u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3\u0997\u09c1\u09b2\u09bf \u0986\u09ae\u09be\u09a6\u09c7\u09b0 \u09a1\u09cb\u09ae\u09c7\u09a8 \u09a5\u09c7\u0995\u09c7 \u09aa\u09be\u09a0\u09be\u09a8\u09cb \u09b9\u09af\u09bc, \u09af\u09be \u0986\u09aa\u09a8\u09be\u09b0 \u09ac\u09a8\u09cd\u09a7\u09c1\u09a6\u09c7\u09b0 \u098f\u0996\u09a8\u0993 \u099a\u09bf\u09a8\u09a4\u09c7 \u09aa\u09be\u09b0\u09c7 \u09a8\u09be\u0964 \u0986\u09aa\u09a8\u09bf \u09a4\u09be\u09a6\u09c7\u09b0 \u0995\u09be\u099b \u09a5\u09c7\u0995\u09c7 \u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3 \u099c\u09be\u09a8\u09be\u09a8\u09cb\u09b0 \u099c\u09a8\u09cd\u09af \u098f\u0995\u099f\u09bf \u09a6\u09cd\u09b0\u09c1\u09a4 \u09aa\u09be\u09a0\u09cd\u09af \u0985\u09a8\u09c1\u09b8\u09b0\u09a3 \u0995\u09b0\u09a4\u09c7 \u099a\u09be\u09a8, \u09b2\u09bf\u0999\u09cd\u0995\u099f\u09bf \u0995\u09cd\u09b2\u09bf\u0995 \u0995\u09b0\u09a4\u09c7 \u09a4\u09be\u09a6\u09c7\u09b0 \u099c\u09bf\u099c\u09cd\u099e\u09be\u09b8\u09be \u0995\u09b0\u09c1\u09a8\u0964",
-            "subject": "\u0986\u09aa\u09a8\u09bf \u098f\u0995\u099f\u09bf \u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3 \u09aa\u09c7\u09af\u09bc\u09c7\u099b\u09bf\u09b2\u09be\u09ae?",
-            "body": "\u0986\u09b0\u09c7, \u0986\u09ae\u09bf \u0986\u09aa\u09a8\u09be\u0995\u09c7 {{app}} \u0985\u09cd\u09af\u09be\u09aa\u09cd\u09b2\u09bf\u0995\u09c7\u09b6\u09a8\u09c7 \u098f\u0995\u099f\u09bf \u0986\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3 \u09aa\u09be\u09a0\u09bf\u09af\u09bc\u09c7\u099b\u09bf\u0964 \u0986\u09aa\u09a8\u09be\u09b0 \u0987\u09ae\u09c7\u0987\u09b2 \u099a\u09c7\u0995 \u0995\u09b0\u09c1\u09a8 \u098f\u09ac\u0982 \u09b8\u09c7\u0996\u09be\u09a8\u09c7 \u09b2\u09bf\u0999\u09cd\u0995 \u0995\u09cd\u09b2\u09bf\u0995 \u0995\u09b0\u09c1\u09a8!"
+            "alert": "আমন্ত্রণগুলি আমাদের ডোমেন থেকে পাঠানো হয়, যা আপনার বন্ধুদের এখনও চিনতে পারে না। তাদের কাছ থেকে আমন্ত্রণ জানানোর জন্য একটি দ্রুত পাঠ্য অনুসরণ করুন, তাদেরকে লিঙ্কটিতে ক্লিক করার জন্য জিজ্ঞাসা করুন।",
+            "confirm": "আমন্ত্রণগুলি আমাদের ডোমেন থেকে পাঠানো হয়, যা আপনার বন্ধুদের এখনও চিনতে পারে না। আপনি তাদের কাছ থেকে আমন্ত্রণ জানানোর জন্য একটি দ্রুত পাঠ্য অনুসরণ করতে চান, লিঙ্কটি ক্লিক করতে তাদের জিজ্ঞাসা করুন।",
+            "subject": "আপনি একটি আমন্ত্রণ পেয়েছিলাম?",
+            "body": "আরে, আমি আপনাকে {{app}} অ্যাপ্লিকেশনে একটি আমন্ত্রণ পাঠিয়েছি। আপনার ইমেইল চেক করুন এবং সেখানে লিঙ্ক ক্লিক করুন!"
         }
+    },
+    "participating": {
+        "Title": "খেতাব",
+        "Subscribed": "সাবস্ক্রাইব",
+        "Participants": "অংশগ্রহণকারীরা"
     }
 }

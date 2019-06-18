@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Köszönjük a {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} feliratkozott a {{plan.title}}",
         "YouSubscribedTo": "Feliratkozott a {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Információ a rendelésről",
+        "PaymentMethod": "Fizetési mód",
+        "ContactInfo": "Elérhetőségei",
+        "Pay": "Fizetés"
+    },
+    "credits": {
+        "InviteAcceptedBy": "A {{1}} által elfogadott meghívás",
+        "YouHaveCreditsToStart": "A {{1}} kredited van az indításhoz"
     }
 }

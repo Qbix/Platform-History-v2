@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Gå",
-            "PasteLinkHere": "Klistra in en länk här"
+            "PasteLinkHere": "Klistra in en länk här",
+            "BrowseTheWeb": "Bläddra",
+            "WriteToStartConversation": "Skriv dina tankar för att starta samtalet",
+            "StartConversation": "Starta konversationen"
         }
     }
 }
