@@ -14,7 +14,8 @@
 	text-align: center;
 }
 
-.Streams_invite_dialog .Streams_invite_choose_contact {
+.Streams_invite_dialog .Streams_invite_choose_contact,
+.Streams_invite_dialog .Streams_invite_submit_contact {
 	width: 100%;
 	background-color: #2b4170; /* fallback color */
 	background: -moz-linear-gradient(top, #3b5998, #2b4170);
@@ -23,7 +24,9 @@
 	border: 1px solid #2b4170;
 	text-shadow: 0 -1px -1px #1f2f52;
 }
-
+.Streams_invite_dialog .Streams_invite_submit_contact {
+	margin-top: 10px;
+}
 .Streams_invite_dialog .Streams_invite_submit {
 	display: flex;
 }

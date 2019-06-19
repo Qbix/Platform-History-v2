@@ -1080,6 +1080,50 @@ Streams.Dialogs = {
 					stylesheet: '{{Streams}}/css/Streams/invite.css',
 					className: 'Streams_invite_dialog',
 					onActivate: function (dialog) {
+
+						// handle "choose from contacts" button
+						$('.Streams_invite_choose_contact', dialog)
+							.on(Q.Pointer.fastclick, function () {
+								var $this = $(this);
+								var $eContacts = $(".Streams_invite_contacts", dialog);
+								$eContacts.empty();
+								$eContacts.data("contacts", null);
+
+								var options = {
+									prefix: "Users",
+									data: $eContacts.data("contacts") || null
+								};
+
+								Users.Dialogs.contacts(options, function (contacts) {
+									if (!contacts || Q.getObject('length', contacts) <= 0) {
+										return;
+									}
+
+									Q.Template.render("Users/templates/contacts/display", {
+										contacts: contacts,
+										text: text
+									}, function (err, html) {
+										if (err) {
+											return;
+										}
+
+										$eContacts.html(html);
+
+										$("button.Streams_invite_submit_contact", $eContacts).on(Q.Pointer.fastclick, function () {
+											contacts.forEach(function(contact) {
+												Q.handle(callback, Streams, [{
+													identifier: contact[contact.prefix]
+												}]);
+											});
+											Q.Dialogs.pop(); // close the Dialog
+										});
+									});
+
+									$eContacts.data("contacts", contacts);
+									$this.text(text.chooseAgainFromContacts);
+								})
+							});
+
 						if (!Q.info.isTouchscreen) {
 							$('.Streams_invite_submit input[type=text]').focus();
 						}
@@ -1091,6 +1135,7 @@ Streams.Dialogs = {
 							Q.Dialogs.pop(); // close the Dialog
 							e.preventDefault();
 						});
+
 						// handle social buttons
 						$('.Streams_invite_social_buttons button, .Streams_invite_QR', dialog)
 						.on(Q.Pointer.fastclick, function () {

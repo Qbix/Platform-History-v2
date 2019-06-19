@@ -2471,6 +2471,224 @@
 	}, 'Users');
 
 	/**
+	 * Operates with dialogs.
+	 * @class Users.Dialogs
+	 */
+	Users.Dialogs = {
+		/**
+	 	* Show a dialog with contacts.
+	 	* @static
+	 	* @method contacts
+	 	* @param {Function} [callback] The function to call after dialog is activated
+	 	*/
+		contacts: function(options, callback) {
+			if (!Q.info.isCordova || !navigator.contacts) {
+				throw new Error("Users.Dialogs.contacts: supported only in Cordova");
+			}
+			var contacts = null;
+			var text = null;
+			var o = Q.extend({}, Users.Dialogs.contacts.options, options);
+
+			var pipe = Q.pipe(['contacts', 'text'], function () {
+				Q.Template.render(o.templateName, {
+					contacts: contacts
+				}, function (err, html) {
+					if (err) {
+						return;
+					}
+					var selectedContacts = [];
+					function _selectContact(id, name, contact, contactType) {
+						for (let i = 0; i < selectedContacts.length; i++) {
+							if(selectedContacts[i].id == id) {
+								selectedContacts.splice(i, 1);
+								break;
+							}
+						}
+						selectedContacts.push({
+							id: id,
+							name: name,
+							prefix: contactType,
+							[contactType]: contact
+						})
+					}
+					Q.Dialogs.push({
+						title: text.title,
+						content: html,
+						stylesheet: '{{Users}}/css/Users/contacts.css',
+						apply: true,
+						onActivate: function (dialog) {
+							if (o.data) {
+								selectedContacts = o.data;
+								for (let i = 0; i < selectedContacts.length; i++) {
+									let prefix = Object.keys(selectedContacts[i])[Object.keys(selectedContacts[i]).length-1];
+									$('[data-rawid='+ selectedContacts[i].id +']', dialog)
+										.find(".Users_contacts_dialog_" + prefix)
+										.addClass("checked");
+								}
+							}
+							$('.Users_contacts_dialog_buttons', dialog)
+								.on(Q.Pointer.fastclick, function () {
+									let $row = $(this).closest("tr");
+									let rawid = $row.data("rawid");
+									let name = $row.find(".Users_contacts_dialog_name").text();
+									let contact = $(this).closest("td").data();
+									let contactType = Object.keys(contact)[0];
+										contact = Q.getObject(contactType, contact);
+									if (!contact || $(this).hasClass("checked")) {
+										return;
+									}
+
+									$row.find(".checked").removeClass("checked");
+									$(this).addClass("checked");
+
+									if (contact.length > 1) {
+										let $this = $(this);
+										Users.Dialogs.select({
+											displayName: name,
+											contacts: contact
+										}, function (data) {
+											if (!data) {
+												$this.removeClass("checked");
+												return;
+											}
+											_selectContact(rawid, name, data.value, contactType);
+										})
+									} else {
+										_selectContact(rawid, name, contact[0].value, contactType);
+									}
+								});
+							$('.Users_contacts_dialog_name', dialog)
+								.on(Q.Pointer.fastclick, function () {
+									let $row = $(this).closest("tr");
+									let $email = $row.find(".Users_contacts_dialog_email");
+									let $phone = $row.find(".Users_contacts_dialog_phone");
+									let emailContact = $email.closest("td").data("email");
+									let phoneContact = $phone.closest("td").data("phone");
+									let name = $row.find(".Users_contacts_dialog_name").text();
+									let rawid = $row.data("rawid");
+
+									$row.addClass("Users_contacts_flash");
+									setTimeout(function () {
+										$row.removeClass("Users_contacts_flash");
+									}, 1000);
+									$row.find(".checked").removeClass("checked");
+
+									if (Q.getObject('length', emailContact)) {
+										if (emailContact.length > 1) {
+											let $this = $(this);
+											Users.Dialogs.select({
+												displayName: name,
+												contacts: emailContact
+											}, function (data) {
+												if (!data) {
+													$this.removeClass("checked");
+													return;
+												}
+												$email.addClass("checked");
+												_selectContact(rawid, name, data.value, "email");
+											})
+										} else if (emailContact.length === 1) {
+											$email.addClass("checked");
+											_selectContact(rawid, name, emailContact[0].value, "email");
+										}
+									} else if (Q.getObject('length', phoneContact)) {
+										if (phoneContact.length > 1) {
+											let $this = $(this);
+											Users.Dialogs.select({
+												displayName: name,
+												contacts: phoneContact
+											}, function (data) {
+												if (!data) {
+													$this.removeClass("checked");
+													return;
+												}
+												$phone.addClass("checked");
+												_selectContact(rawid, name, data.value, "phone");
+											})
+										} else if (phoneContact.length === 1) {
+											$phone.addClass("checked");
+											_selectContact(rawid, name, phoneContact[0].value, "phone");
+										}
+									}
+								});
+						},
+						onClose: function () {
+							Q.handle(callback, Users, [selectedContacts]);
+						}
+					});
+				});
+			});
+
+			Q.Text.get("Users/content", function (err, result) {
+				text = Q.getObject(["contacts", "dialog"], result);
+				pipe.fill('text')();
+			})
+
+			var options = new ContactFindOptions();
+			options.filter = "";
+			options.multiple = true;
+			var fields = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+			navigator.contacts.find(fields, function (data) {
+				contacts = data;
+				pipe.fill('contacts')();
+			}, function (err) {
+				throw new Error("Users.Dialogs.contacts: " + err);
+			}, options);
+		},
+		/**
+		 * Show a select dialog with several emails/phones.
+		 * @static
+		 * @method contacts
+		 * @param {Function} [callback] The function to call after dialog is activated
+		 */
+		select: function (options, callback) {
+			var o = Q.extend({}, Users.Dialogs.select.options, options);
+			if (!o.contacts) return;
+			Q.Text.get("Users/content", function (err, result) {
+				var text = Q.getObject(["contacts", "select"], result);
+				Q.Template.render(o.templateName, {
+					contacts: o.contacts
+				}, function (err, html) {
+					if (err) {
+						return;
+					}
+					var selectedContact = null;
+					Q.Dialogs.push({
+						title: text.title.interpolate({
+							displayName: o.displayName
+						}),
+						content: html,
+						stylesheet: '{{Users}}/css/Users/contacts.css',
+						apply: true,
+						onActivate: function (dialog) {
+							$('.Users_contacts_dialog_buttons', dialog)
+								.on(Q.Pointer.fastclick, function () {
+									if($(this).hasClass('checked')) {
+										return;
+									}
+									$(dialog).find(".checked").removeClass("checked");
+									$(this).addClass("checked");
+									selectedContact = $(this).closest("td").data("contact");
+								});
+						},
+						onClose: function () {
+							Q.handle(callback, Users, [selectedContact]);
+						}
+					})
+				});
+			});
+		}
+	};
+	Users.Dialogs.contacts.options = {
+		templateName: "Users/templates/contacts/dialog",
+		prefix: "Users"
+	};
+
+	Users.Dialogs.select.options = {
+		templateName: "Users/templates/contacts/select"
+	}
+
+	/**
 	 * Some replacements for Q.Socket methods, use these instead.
 	 * They implement logic involving sockets, users, sessions, devices, and more.
 	 * Everything goes through the "Users" namespace in socket.io
