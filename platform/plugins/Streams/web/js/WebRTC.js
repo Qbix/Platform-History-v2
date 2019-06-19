@@ -1,8 +1,9 @@
 "use strict";
 (function (Q, $) {
 
+
 	var Streams = Q.Streams;
-	var _debug = true;
+	var _debug = false;
 
 	/**
 	 * Runs  adapter for Streams/webrtc tools
@@ -147,9 +148,13 @@
 
 			WebRTCconference.event.on('videoTrackLoaded', function (e) {
 				if(_debug) console.log('%c TWILIO: TRACK videoTrackLoaded', 'background:blue;color:white;')
+				screensRendering.updateLayout();
 
 				screensRendering.hideLoader('videoTrackLoaded', e.screen.participant);
-				screensRendering.fitScreenToVideo(e.trackEl, e.screen, e.reset, e.oldSize)
+				screensRendering.fitScreenToVideo(e.trackEl, e.screen, e.reset, e.oldSize);
+				if(e.trackEl) {
+					e.trackEl.play();
+				}
 			});
 
 			WebRTCconference.event.on('screensharingStarting', function (data) {
@@ -183,12 +188,15 @@
 			Q.addScript([
 				/*"https://cdn.trackjs.com/agent/v3/latest/t.js",*/
 				"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-				"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+new Date()),
+				"{{Streams}}/js/tools/webrtc/app.js",
 			], function () {
-				/*window.TrackJS && TrackJS.install({
-					token: "c8b43db909ae49728a17089490341b57"
-					// for more configuration options, see https://docs.trackjs.com
-				});*/
+				/*var ua=navigator.userAgent;
+				if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
+					window.TrackJS && TrackJS.install({
+						token: "da842b9825d74b7d8bb76b0b1d13de44"
+						// for more configuration options, see https://docs.trackjs.com
+					});
+				}*/
 
 				var twilioRoomName = _roomStream.getAttribute('twilioRoomName');
 
@@ -253,20 +261,21 @@
 		 */
 		var initWithNodeServer = function(turnCredentials) {
 			if(_debug) console.log('initWithNodeServer');
-			Q.addStylesheet('{{Streams}}/css/tools/webrtc.css');
+			Q.addStylesheet('{{Streams}}/css/tools/webrtc.css?ts=' + performance.now());
 
 			Q.addScript([
 				"https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js",
 				/*"https://cdn.trackjs.com/agent/v3/latest/t.js",*/
 				"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-				"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+new Date())
+				"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+Date.now())
 			], function () {
-				//if(Q.info.isIOS) {
-				/*window.TrackJS && TrackJS.install({
-					token: "c8b43db909ae49728a17089490341b57"
-					// for more configuration options, see https://docs.trackjs.com
-				});*/
+				//if (typeof cordova != 'undefined' && window.device.platform === 'iOS') {
+					/*window.TrackJS && TrackJS.install({
+						token: "da842b9825d74b7d8bb76b0b1d13de44"
+						// for more configuration options, see https://docs.trackjs.com
+					});*/
 				//}
+
 				var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
 				WebRTCconference = window.WebRTCconferenceLib({
 					mode:'nodejs',
@@ -274,7 +283,7 @@
 					nodeServer: _options.nodeServer,
 					roomName: roomId,
 					sid:  Q.Users.loggedInUser.id,
-					username:  Q.Users.loggedInUser.displayName,
+					username:  Q.Users.loggedInUser.id + '\t' + Date.now(),
 					startWith: _options.startWith,
 					turnCredentials: turnCredentials
 				});
@@ -299,6 +308,7 @@
 						}
 					);
 				});
+				window.WebConf = WebRTCconference;
 			});
 		}
 
@@ -320,6 +330,7 @@
 			 */
 			function updateLayout() {
 				if(WebRTCconference == null) return;
+
 
 				var roomScreens = WebRTCconference.screens(true);
 				var i, participantScreen;
@@ -490,14 +501,14 @@
 				chatParticipantEl.appendChild(chatParticipantVideoCon);
 
 
-				if(Q.info.isMobile) {
+				if(Q.info.isTouchscreen) {
 					chatParticipantEl.addEventListener('touchstart', moveScreenFront);
 				} else chatParticipantEl.addEventListener('mousedown', moveScreenFront);
 
 				chatParticipantVideoCon.addEventListener('click', function (e) {
 					e.preventDefault();
 				});
-				if(Q.info.isMobile) {
+				if(Q.info.isTouchscreen) {
 					window.addEventListener('touchend', function (e) {
 						var target = e.target;
 						if (target == chatParticipantEl || chatParticipantEl.contains(target)) {
@@ -548,6 +559,30 @@
 
 									if(movedScreen[0] != null) movedScreen[0].excludeFromRendering = true;
 								}, tool);
+								/*tool.state.onMovingStart.add(function () {
+									if(typeof cordova != "undefined" && window.device.platform === 'iOS') {
+										var movedScreen = WebRTCconference.screens().filter(function (s) {
+											return s.screenEl == tool.element || s.screenEl.contains(tool.element);
+										});
+										if(movedScreen.videoTrack != null) {
+											smovedScreen.videoTrack.style.visibility = 'hidden';
+											cordova.plugins.iosrtc.refreshVideos();
+										}
+									}
+
+								}, tool);
+								tool.state.onMovingStop.add(function () {
+									if(typeof cordova != "undefined" && window.device.platform === 'iOS') {
+										var movedScreen = WebRTCconference.screens().filter(function (s) {
+											return s.screenEl == tool.element || s.screenEl.contains(tool.element);
+										});
+										if(movedScreen.videoTrack != null) {
+											movedScreen.videoTrack.style.visibility = '';
+											cordova.plugins.iosrtc.refreshVideos();
+										}
+									}
+
+								}, tool);*/
 								/*if(viewMode != 'regular')
 									tool.deactivate()
 								else tool.state.active = true;*/
@@ -728,10 +763,19 @@
 			}
 
 			function moveScreenFront(e) {
+				console.log('moveScreenFront');
+
 				var screenEl = this;
 				var screens = WebRTCconference.screens();
 				var currentHighestZIndex = Math.max.apply(Math, screens.map(function(o) { return o.screenEl != null && o.screenEl.style.zIndex != '' ? o.screenEl.style.zIndex : 1000; }))
 				screenEl.style.zIndex = currentHighestZIndex+1;
+
+				if(typeof cordova != "undefined" && window.device.platform === 'iOS') {
+					var video = screenEl.querySelector('video');
+					console.log('moveScreenFront video ' + (video != null));
+					if(video != null) video.style.zIndex = currentHighestZIndex+1;
+					cordova.plugins.iosrtc.refreshVideos();
+				}
 
 			}
 
@@ -739,17 +783,25 @@
 				var screens = WebRTCconference.screens();
 
 				var currentLowestZIndex = Math.min.apply(Math, screens.map(function(o) {
-					return o.screenEl != null && o.screenEl.style.zIndex != '' ? o.screenEl.style.zIndex : 100;
+					return o.screenEl != null && o.screenEl.style.zIndex != '' ? o.screenEl.style.zIndex : 1000;
 				}).filter(function (el) {return el != null;}))
 
 				screenEl.style.zIndex = currentLowestZIndex-1;
+
+				if(typeof cordova != "undefined" && window.device.platform === 'iOS') {
+					var video = screenEl.querySelector('video');
+					if(video != null) video.style.zIndex = currentLowestZIndex-1;
+					cordova.plugins.iosrtc.refreshVideos();
+				}
 			}
 
 			function showLoader(loaderName, participant) {
 				console.log('showLoader')
 				var screen = participant.screens[0];
-				screen.videoIsChanging = true;
+				if(screen != null) screen.videoIsChanging = true;
 				participant.videoIsChanging = true;
+				console.log('showLoader screen', screen)
+
 				if(loaderName == 'videoTrackIsBeingAdded' || loaderName == 'beforeCamerasToggle') {
 					var loader = screen.screenEl.querySelector('.spinner-load');
 					if(loader != null) return;
@@ -805,6 +857,7 @@
 				if(loaderName == 'screensharingFailed'){
 					screen.screensharng = false;
 				}
+				if(typeof cordova != 'undefined' && window.device.platform === 'iOS') cordova.plugins.iosrtc.refreshVideos();
 			}
 
 			function toggleViewModeByScreenClick(e) {
@@ -1012,14 +1065,22 @@
 							if(screen.videoTrack != null && screen.videoTrack.videoWidth == 0 && screen.videoTrack.videoheight == 0) screen.videoTrack.style.display = 'none';
 						}
 
+						/*if(typeof cordova != 'undefined' && window.device.platform === 'iOS') {
+							return screen != activeScreen ? (screen.videoTrack != null ? screen.videoTrack : null) : null;
+						}*/
 						return screen != activeScreen ? screen.screenEl : null;
 					}).filter(function (e) {
 						return e != null;
 					});
 
 					if((layout == 'maximizedScreensGrid' || layout == 'maximizedVerticalMobile' || layout == 'maximizedHorizontalMobile') && activeScreen){
-						elements.unshift(activeScreen.screenEl)
-						moveScreenBack(activeScreen.screenEl);
+						/*if(typeof cordova != 'undefined' && window.device.platform === 'iOS') {
+							if(activeScreen.videoTrack != null) elements.unshift(activeScreen.videoTrack)
+						} else {*/
+							elements.unshift(activeScreen.screenEl)
+							moveScreenBack(activeScreen.screenEl);
+						//}
+
 					}
 
 
@@ -1172,6 +1233,12 @@
 				});
 
 				var elements = toggleScreensClass('maximizedScreensGrid');
+				if(typeof cordova != "undefined" && window.device.platform === 'iOS') {
+					setTimeout(function () {
+						cordova.plugins.iosrtc.refreshVideos();
+					}, duration+100);
+				}
+
 				_layoutTool.animate('maximizedScreensGrid', elements, duration, true);
 
 				viewMode = 'maximized';
@@ -1574,16 +1641,24 @@
 		var module = {};
 		module.screenRendering = screensRendering;
 		module.start = function(options) {
-			/*document.addEventListener('deviceready', function () {
+			document.addEventListener('deviceready', function () {
+				
 				// Just for iOS devices.
 				try {
 					if (window.device.platform === 'iOS') {
-						cordova.plugins.iosrtc.registerGlobals();
+						//cordova.plugins.iosrtc.registerGlobals();
 					}
 				} catch(e) {
 					//alert(e.message)
 				}
-			});*/
+				var script = document.createElement('script');
+				script.type = 'text/javascript';
+				script.src = 'https://webrtc.github.io/adapter/adapter-1.0.2.js';
+
+				//document.getElementsByTagName('head')[0].appendChild(script);
+			});
+
+
 			_options = Q.extend({}, _options, options);
 
 			createInfoSnippet()
