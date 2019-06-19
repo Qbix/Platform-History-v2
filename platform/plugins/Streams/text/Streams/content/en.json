@@ -1,103 +1,98 @@
 {
-    "preview": {
-        "NewItemTitle": "New Item"
-    },
-    "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me"
-    },
-    "interests": {
-        "Filter": "What do you enjoy?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
-    },
-    "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments"
-    },
-    "notifications": {
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: ",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed stream access",
-        "Streams\/chat\/edit": "Chat message edited",
-        "Streams\/chat\/remove": "Chat message removed",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe"
-    },
-    "invite": {
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "byEmail": "Email",
-            "byText": "Text",
-            "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
-        },
-        "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}"
-        },
-        "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
-        },
-        "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} in {{& url}}: {{& message.fields.content}}"
-        }
-    },
-    "followup": {
-        "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!"
-        },
-        "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!"
-        }
-    },
-    "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants"
-    }
+	"preview": {
+		"NewItemTitle": "New Item"
+	},
+	"labels": {
+		"Streams/invited": "People I invited",
+		"Streams/invitedMe": "Who invited me"
+	},
+	"interests": {
+		"Filter": "What do you enjoy?",
+		"CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+		"TrySynonyms": "Don't see it? Try some synonyms.",
+		"AddUnderCategory": "Add under category...",
+		"Other": "Other",
+		"Unlisted": "Unlisted"
+	},
+	"chat": {
+		"flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+		"noOneSaid": "No one has said anything",
+		"closeChatButton": "Close chat",
+		"closeChatConfirmTitle": "Close this chat?",
+		"closeChatConfirm": "Are you sure you want to close this chat?",
+		"closeChatConfirmYes": "Yes",
+		"closeChatConfirmNo": "No",
+		"earlierComments": "earlier comments"
+	},
+	"notifications": {
+		"*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+		"Streams/chat/message": "{{&call 'avatar.displayName'}} said: ",
+		"Streams/changed": "Changes in {{stream.fields.title}}",
+		"Streams/invite": "You were invited to {{& stream.fields.title}}",
+		"Streams/announcement": "Announcement in {{& streams.fields.title}}",
+		"Streams/access": "{{&call 'avatar.displayName'}} changed stream access",
+		"Streams/chat/edit": "Chat message edited",
+		"Streams/chat/remove": "Chat message removed",
+		"Streams/closed": "{{stream.fields.title}} has been closed",
+		"Streams/task/progress": "Progress made on {{stream.fields.title}}",
+		"Streams/task/complete": "Task completed: {{stream.fields.title}}",
+		"Streams/task/error": "Error during: {{stream.fields.title}}",
+		"Streams/incoming/*": "{{app}}: Incoming Message"
+	},
+	"invite": {
+		"messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+		"dialog": {
+			"chooseFromContacts": "Choose from your Contacts",
+			"chooseAgainFromContacts": "Choose Again from Contacts",
+			"inviteSelectedContacts": "Invite Selected Contacts",
+			"selectFromContacts": "Select From Contacts",
+			"photo": "Take a photo",
+			"photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+			"to": "To: {{Stream Title}}",
+			"go": "Go",
+			"title": "Invite",
+			"placeholder": "Mobile number or email address",
+			"orInvite": "Or invite people by using:",
+			"QR": "{{ClickOrTap}} to generate QR code",
+			"QRtitle": "Scan this QR code",
+			"QRscanned": "They scanned it!",
+			"byEmail": "Email",
+			"byText": "Text",
+			"byFacebook": "Facebook",
+			"byTwitter": "Twitter"
+		},
+		"email": {
+			"subject": "Hey, check this out",
+			"PleaseVisitLink": "Please visit the following link:",
+			"InvitingYou": "I am inviting you to {{title}}",
+			"HasInvitedYou": "{{displayName}} has invited you to {{title}}"
+		},
+		"sms": {
+			"content": "You have been invited to {{title}}. Please tap {{url}}"
+		},
+		"notice": {
+			"text": "You have been invited. {{ClickOrTap}} here to accept and join."
+		}
+	},
+	"message": {
+		"html": {
+			"posted": "{{call 'avatar.displayName'}} posted a <em>{{message.fields.type}}</em> message to {{stream.fields.title}}"
+		},
+		"text": {
+			"body": "{{& call 'avatar.displayName'}} in {{& url}}: {{& message.fields.content}}"
+		}
+	},
+	"followup": {
+		"mobile": {
+			"alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+			"confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+			"check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!"
+		},
+		"email": {
+			"alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+			"confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+			"subject": "Did you get an invite?",
+			"body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!"
+		}
+	}
 }
