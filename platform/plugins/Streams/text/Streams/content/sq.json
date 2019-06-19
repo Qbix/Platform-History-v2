@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Progresi i bërë në {{stream.fields.title}}",
         "Streams\/task\/complete": "Detyra e përfunduar: {{stream.fields.title}}",
         "Streams\/task\/error": "Gabim gjatë: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Mesazhi i ardhur"
+        "Streams\/incoming\/*": "{{app}}: Mesazhi i ardhur",
+        "ManageEmailSubscriptions": "menaxho abonimet tuaja me email",
+        "IfUnsubscribe": "Nëse dëshironi të abonoheni"
     },
     "invite": {
         "messageContent": "{{displayName}} ju ftoi për të {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "A keni marrë një ftesë?",
             "body": "Hej, sapo kam dërguar një ftesë në aplikacionin {{app}}. Ju lutemi kontrolloni email-in tuaj dhe klikoni lidhjen atje!"
         }
+    },
+    "participating": {
+        "Title": "titull",
+        "Subscribed": "regjistruar",
+        "Participants": "pjesëmarrësit"
     }
 }

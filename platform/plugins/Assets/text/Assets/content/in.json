@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Terima kasih atas pembayaran Anda ke {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} berlangganan {{plan.title}}",
         "YouSubscribedTo": "Anda telah berlangganan {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Info tentang pesanan",
+        "PaymentMethod": "Metode pembayaran",
+        "ContactInfo": "Info kontak",
+        "Pay": "Membayar"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Undangan diterima oleh {{1}}",
+        "YouHaveCreditsToStart": "Anda memiliki {{1}} kredit untuk memulai"
     }
 }

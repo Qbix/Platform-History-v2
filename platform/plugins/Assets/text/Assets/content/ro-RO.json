@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Vă mulțumim pentru plata dvs. la {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} sa abonat la {{plan.title}}",
         "YouSubscribedTo": "Ați fost abonat la {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Informații despre comandă",
+        "PaymentMethod": "Modalitate de plată",
+        "ContactInfo": "Informatii de contact",
+        "Pay": "A plati"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Invitație acceptată de {{1}}",
+        "YouHaveCreditsToStart": "Aveți la dispoziție {{1}} credite pentru a începe"
     }
 }

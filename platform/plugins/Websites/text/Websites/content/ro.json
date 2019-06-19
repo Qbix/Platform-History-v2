@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Merge",
-            "PasteLinkHere": "Inserați aici un link"
+            "PasteLinkHere": "Inserați aici un link",
+            "BrowseTheWeb": "Naviga",
+            "WriteToStartConversation": "Scrieți gândurile pentru a începe conversația",
+            "StartConversation": "Porniți conversația"
         }
     }
 }

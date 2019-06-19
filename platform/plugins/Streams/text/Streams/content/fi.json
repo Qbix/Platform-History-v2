@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Edistyminen {{stream.fields.title}}",
         "Streams\/task\/complete": "Tehtävä on valmis: {{stream.fields.title}}",
         "Streams\/task\/error": "Virhe aikana: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Saapuva viesti"
+        "Streams\/incoming\/*": "{{app}}: Saapuva viesti",
+        "ManageEmailSubscriptions": "hallitse sähköpostiosoitteitasi",
+        "IfUnsubscribe": "Jos haluat peruuttaa tilauksen"
     },
     "invite": {
         "messageContent": "{{displayName}} kutsui sinut {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Saitko kutsun?",
             "body": "Lähetin juuri sinulle kutsun {{app}} -sovellukseen. Tarkista sähköpostiosoitteesi ja napsauta siellä olevaa linkkiä!"
         }
+    },
+    "participating": {
+        "Title": "otsikko",
+        "Subscribed": "Tilatut",
+        "Participants": "osallistujien"
     }
 }

@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Progrés realitzat a {{stream.fields.title}}",
         "Streams\/task\/complete": "Tasca completada: {{stream.fields.title}}",
         "Streams\/task\/error": "Error durant: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Missatge entrant"
+        "Streams\/incoming\/*": "{{app}}: Missatge entrant",
+        "ManageEmailSubscriptions": "gestiona les vostres subscripcions de correu electrònic",
+        "IfUnsubscribe": "Si voleu donar-vos de baixa"
     },
     "invite": {
         "messageContent": "{{displayName}} t&#39;ha convidat a {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Heu rebut una invitació?",
             "body": "Hola, acabo de enviar-te una invitació a l&#39;aplicació {{app}}. Comproveu el vostre correu electrònic i feu clic a l’enllaç allà."
         }
+    },
+    "participating": {
+        "Title": "Títol",
+        "Subscribed": "Subscrit",
+        "Participants": "Participants"
     }
 }

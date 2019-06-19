@@ -3,24 +3,27 @@
         "campaign": {
             "placeholders": {
                 "link": "Odkaz na podporu",
-                "startDate": "Po\u010d\u00e1te\u010dn\u00ed datum",
-                "startTime": "Doba spu\u0161t\u011bn\u00ed",
-                "endDate": "Datum ukon\u010den\u00ed",
-                "endTime": "\u010cas ukon\u010den\u00ed",
-                "budget": "Rozpo\u010det"
+                "startDate": "Počáteční datum",
+                "startTime": "Doba spuštění",
+                "endDate": "Datum ukončení",
+                "endTime": "Čas ukončení",
+                "budget": "Rozpočet"
             },
             "interests": {
-                "Title": "Filtrovat podle z\u00e1jmu",
-                "FilterInterests": "Za\u010dn\u011bte ps\u00e1t z\u00e1jem ..."
+                "Title": "Filtrovat podle zájmu",
+                "FilterInterests": "Začněte psát zájem ..."
             },
-            "Interest": "Z\u00e1jem",
-            "Location": "Um\u00edst\u011bn\u00ed"
+            "Interest": "Zájem",
+            "Location": "Umístění"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "J\u00edt",
-            "PasteLinkHere": "Vlo\u017ete odkaz zde"
+            "Go": "Jít",
+            "PasteLinkHere": "Vložte odkaz zde",
+            "BrowseTheWeb": "Procházet",
+            "WriteToStartConversation": "Napište své myšlenky a začněte konverzaci",
+            "StartConversation": "Spusťte konverzaci"
         }
     }
 }

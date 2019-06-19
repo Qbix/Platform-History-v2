@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Fortschritt am {{stream.fields.title}}",
         "Streams\/task\/complete": "Aufgabe abgeschlossen: {{stream.fields.title}}",
         "Streams\/task\/error": "Fehler während: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Eingehende Nachricht"
+        "Streams\/incoming\/*": "{{app}}: Eingehende Nachricht",
+        "ManageEmailSubscriptions": "Verwalten Sie Ihre E-Mail-Abonnements",
+        "IfUnsubscribe": "Wenn Sie sich abmelden möchten"
     },
     "invite": {
         "messageContent": "{{displayName}} hat Sie zu {{inviteUrl}} eingeladen",
@@ -92,5 +94,10 @@
             "subject": "Hast du eine Einladung bekommen?",
             "body": "Ich habe Ihnen gerade eine Einladung zur {{app}} App gesendet. Bitte überprüfen Sie Ihre E-Mail und klicken Sie auf den Link dort!"
         }
+    },
+    "participating": {
+        "Title": "Titel",
+        "Subscribed": "Gezeichnet",
+        "Participants": "Teilnehmer"
     }
 }

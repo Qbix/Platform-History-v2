@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Vielen Dank für Ihre Zahlung an {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} hat {{plan.title}} abonniert.",
         "YouSubscribedTo": "Sie wurden abonniert für {{plan.title}}."
+    },
+    "payment": {
+        "AboutOrder": "Infos zur Bestellung",
+        "PaymentMethod": "Zahlungsmethode",
+        "ContactInfo": "Kontaktinformation",
+        "Pay": "Zahlen"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Einladung von {{1}} angenommen",
+        "YouHaveCreditsToStart": "Sie haben {{1}} Startguthaben"
     }
 }

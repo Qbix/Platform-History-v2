@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Прогресс, достигнутый {{stream.fields.title}}",
         "Streams\/task\/complete": "Задача выполнена: {{stream.fields.title}}",
         "Streams\/task\/error": "Ошибка во время: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: входящее сообщение"
+        "Streams\/incoming\/*": "{{app}}: входящее сообщение",
+        "ManageEmailSubscriptions": "управлять подписками на электронную почту",
+        "IfUnsubscribe": "Если вы хотите отписаться"
     },
     "invite": {
         "messageContent": "{{displayName}} пригласил вас на {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Вы получили приглашение?",
             "body": "Эй, я только что отправил вам приглашение в приложение {{app}}. Пожалуйста, проверьте свою электронную почту и нажмите на ссылку там!"
         }
+    },
+    "participating": {
+        "Title": "заглавие",
+        "Subscribed": "подписной",
+        "Participants": "участники"
     }
 }

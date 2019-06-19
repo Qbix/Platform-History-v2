@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "{{stream.fields.title}}取得的进展",
         "Streams\/task\/complete": "任务已完成：{{stream.fields.title}}",
         "Streams\/task\/error": "错误期间：{{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}：传入消息"
+        "Streams\/incoming\/*": "{{app}}：传入消息",
+        "ManageEmailSubscriptions": "管理您的电子邮件订阅",
+        "IfUnsubscribe": "如果你想取消订阅"
     },
     "invite": {
         "messageContent": "{{displayName}}邀请您{{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "你有邀请吗？",
             "body": "嘿，我刚给你发了一个{{app}}应用邀请函。请检查您的电子邮件，然后单击其中的链接！"
         }
+    },
+    "participating": {
+        "Title": "标题",
+        "Subscribed": "订阅",
+        "Participants": "参与者"
     }
 }

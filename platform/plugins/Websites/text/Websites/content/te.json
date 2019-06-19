@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "వెళ్ళండి",
-            "PasteLinkHere": "ఇక్కడ లింక్ను అతికించండి"
+            "PasteLinkHere": "ఇక్కడ లింక్ను అతికించండి",
+            "BrowseTheWeb": "బ్రౌజ్",
+            "WriteToStartConversation": "సంభాషణను ప్రారంభించడానికి మీ ఆలోచనలను రాయండి",
+            "StartConversation": "సంభాషణను ప్రారంభించండి"
         }
     }
 }

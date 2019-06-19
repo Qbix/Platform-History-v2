@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Děkujeme za platbu ve výši {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} se přihlásilo k odběru {{plan.title}}",
         "YouSubscribedTo": "Byli jste přihlášeni k odběru {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Informace o objednávce",
+        "PaymentMethod": "Způsob platby",
+        "ContactInfo": "Kontaktní informace",
+        "Pay": "Platit"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Pozvání přijato {{1}}",
+        "YouHaveCreditsToStart": "Máte {{1}} kredity ke spuštění"
     }
 }

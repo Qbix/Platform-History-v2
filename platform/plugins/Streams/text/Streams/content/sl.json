@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Napredek, dosežen {{stream.fields.title}}",
         "Streams\/task\/complete": "Naloga je končana: {{stream.fields.title}}",
         "Streams\/task\/error": "Napaka med: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Dohodno sporočilo"
+        "Streams\/incoming\/*": "{{app}}: Dohodno sporočilo",
+        "ManageEmailSubscriptions": "upravljate svoje e-poštne naročnine",
+        "IfUnsubscribe": "Če se želite odjaviti"
     },
     "invite": {
         "messageContent": "{{displayName}} vas je povabil na {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Si dobil povabilo?",
             "body": "Hej, pravkar sem ti poslal povabilo v aplikacijo {{app}}. Preverite vaš e-poštni naslov in kliknite povezavo tam!"
         }
+    },
+    "participating": {
+        "Title": "Naslov",
+        "Subscribed": "Naročen",
+        "Participants": "Udeleženci"
     }
 }

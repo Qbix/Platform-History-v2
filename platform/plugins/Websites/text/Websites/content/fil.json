@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Pumunta",
-            "PasteLinkHere": "Mag-paste ng isang link dito"
+            "PasteLinkHere": "Mag-paste ng isang link dito",
+            "BrowseTheWeb": "Mag-browse",
+            "WriteToStartConversation": "Isulat ang iyong mga saloobin upang simulan ang pag-uusap",
+            "StartConversation": "Simulan ang Pag-uusap"
         }
     }
 }

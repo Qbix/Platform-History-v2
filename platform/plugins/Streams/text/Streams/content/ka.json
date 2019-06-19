@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "{{stream.fields.title}}",
         "Streams\/task\/complete": "სამუშაო დასრულდა: {{stream.fields.title}}",
         "Streams\/task\/error": "შეცდომა დროს: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: შემომავალი შეტყობინება"
+        "Streams\/incoming\/*": "{{app}}: შემომავალი შეტყობინება",
+        "ManageEmailSubscriptions": "თქვენი ელფოსტის გამოწერის მართვა",
+        "IfUnsubscribe": "თუ გსურთ გაუქმება"
     },
     "invite": {
         "messageContent": "{{displayName}} მოიწვია თქვენ {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "მოიწვიე?",
             "body": "ჰეი, მე უბრალოდ გამოგიგზავნეთ ნომერზე {999}}. გთხოვთ, შეამოწმოთ ელ.ფოსტა და დააჭირეთ ბმულს აქ!"
         }
+    },
+    "participating": {
+        "Title": "სათაური",
+        "Subscribed": "გამოწერილია",
+        "Participants": "Მონაწილეები"
     }
 }

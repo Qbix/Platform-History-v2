@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "{{call 'publisher.displayName'}}へのお支払いいただきありがとうございます",
         "SubscribedTo": "{{call 'user.displayName'}}は{{plan.title}}を購読しています",
         "YouSubscribedTo": "あなたは{{plan.title}}を購読しています"
+    },
+    "payment": {
+        "AboutOrder": "注文に関する情報",
+        "PaymentMethod": "支払方法",
+        "ContactInfo": "連絡先情報",
+        "Pay": "支払う"
+    },
+    "credits": {
+        "InviteAcceptedBy": "招待を{{1}}が承認しました",
+        "YouHaveCreditsToStart": "開始するには{{1}}クレジットがあります"
     }
 }

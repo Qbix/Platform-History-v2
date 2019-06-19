@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "感谢您付款给{{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}}已订阅{{plan.title}}",
         "YouSubscribedTo": "您已订阅{{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "有关订单的信息",
+        "PaymentMethod": "付款方法",
+        "ContactInfo": "联系信息",
+        "Pay": "工资"
+    },
+    "credits": {
+        "InviteAcceptedBy": "邀请被{{1}}接受",
+        "YouHaveCreditsToStart": "你有{{1}}学分开始"
     }
 }

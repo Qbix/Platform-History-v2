@@ -6,21 +6,24 @@
                 "startDate": "Fecha de inicio",
                 "startTime": "Hora de inicio",
                 "endDate": "Fecha final",
-                "endTime": "Hora de finalizaci\u00f3n",
+                "endTime": "Hora de finalización",
                 "budget": "Presupuesto"
             },
             "interests": {
-                "Title": "Filtrar por inter\u00e9s",
-                "FilterInterests": "Comience a escribir un inter\u00e9s ..."
+                "Title": "Filtrar por interés",
+                "FilterInterests": "Comience a escribir un interés ..."
             },
             "Interest": "Interesar",
-            "Location": "Ubicaci\u00f3n"
+            "Location": "Ubicación"
         }
     },
     "webpage": {
         "composer": {
             "Go": "Ir",
-            "PasteLinkHere": "Pega un enlace aqu\u00ed"
+            "PasteLinkHere": "Pega un enlace aquí",
+            "BrowseTheWeb": "Vistazo",
+            "WriteToStartConversation": "Escribe tus pensamientos para comenzar la conversación.",
+            "StartConversation": "Iniciar conversación"
         }
     }
 }

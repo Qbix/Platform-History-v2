@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Progresele înregistrate pe {{stream.fields.title}}",
         "Streams\/task\/complete": "Sarcina a fost finalizată: {{stream.fields.title}}",
         "Streams\/task\/error": "Eroare în timpul: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: mesajul primit"
+        "Streams\/incoming\/*": "{{app}}: mesajul primit",
+        "ManageEmailSubscriptions": "gestionați abonamentele dvs. prin e-mail",
+        "IfUnsubscribe": "Dacă doriți să vă dezabonați"
     },
     "invite": {
         "messageContent": "{{displayName}} te-a invitat la {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Ai primit o invitație?",
             "body": "Hei, v-am trimis o invitație la aplicația {{app}}. Verificați adresa de e-mail și faceți clic pe link-ul de acolo!"
         }
+    },
+    "participating": {
+        "Title": "Titlu",
+        "Subscribed": "subscrisă",
+        "Participants": "Participanți"
     }
 }

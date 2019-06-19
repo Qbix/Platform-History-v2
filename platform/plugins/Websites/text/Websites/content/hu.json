@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Megy",
-            "PasteLinkHere": "Illessze be a linket ide"
+            "PasteLinkHere": "Illessze be a linket ide",
+            "BrowseTheWeb": "Böngésszen",
+            "WriteToStartConversation": "Írja meg gondolatait, hogy elkezdje a beszélgetést",
+            "StartConversation": "Indítsa el a beszélgetést"
         }
     }
 }

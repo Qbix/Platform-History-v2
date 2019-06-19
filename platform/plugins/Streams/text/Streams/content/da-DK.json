@@ -8,9 +8,9 @@
     },
     "interests": {
         "Filter": "Hvad nyder du?",
-        "CanAdd": "Hvis du stadig ikke kan finde det, du leder efter, kan du tilf\u00f8je en ny interesse nedenfor:",
-        "TrySynonyms": "Kan du ikke se det? Pr\u00f8v nogle synonymer.",
-        "AddUnderCategory": "Tilf\u00f8j under kategori ...",
+        "CanAdd": "Hvis du stadig ikke kan finde det, du leder efter, kan du tilføje en ny interesse nedenfor:",
+        "TrySynonyms": "Kan du ikke se det? Prøv nogle synonymer.",
+        "AddUnderCategory": "Tilføj under kategori ...",
         "Other": "Andet",
         "Unlisted": "Unoterede"
     },
@@ -19,7 +19,7 @@
         "noOneSaid": "Ingen har sagt noget",
         "closeChatButton": "Luk chat",
         "closeChatConfirmTitle": "Luk denne chat?",
-        "closeChatConfirm": "Er du sikker p\u00e5, at du vil lukke denne chat?",
+        "closeChatConfirm": "Er du sikker på, at du vil lukke denne chat?",
         "closeChatConfirmYes": "Ja",
         "closeChatConfirmNo": "Ingen",
         "earlierComments": "tidligere kommentarer"
@@ -27,27 +27,29 @@
     "notifications": {
         "*": "Meddelelse {{& message.fields.type}} til {{& stream.fields.title}}",
         "Streams/chat/message": "{{&call 'avatar.displayName'}} sagde:",
-        "Streams/changed": "\u00c6ndringer i {{stream.fields.title}}",
+        "Streams/changed": "Ændringer i {{stream.fields.title}}",
         "Streams/invite": "Du blev inviteret til {{& stream.fields.title}}",
         "Streams/announcement": "Meddelelse i {{& streams.fields.title}}",
-        "Streams/access": "{{&call 'avatar.displayName'}} \u00e6ndret str\u00f8madgang",
+        "Streams/access": "{{&call 'avatar.displayName'}} ændret strømadgang",
         "Streams/chat/edit": "Chat besked redigeret",
         "Streams/chat/remove": "Chat besked fjernet",
         "Streams/closed": "{{stream.fields.title}} er blevet lukket",
         "Streams/task/progress": "Fremskridt lavet den {{stream.fields.title}}",
-        "Streams/task/complete": "Opgave udf\u00f8rt: {{stream.fields.title}}",
+        "Streams/task/complete": "Opgave udført: {{stream.fields.title}}",
         "Streams/task/error": "Fejl under: {{stream.fields.title}}",
-        "Streams/incoming/*": "{{app}}: Indg\u00e5ende meddelelse"
+        "Streams/incoming/*": "{{app}}: Indgående meddelelse",
+        "ManageEmailSubscriptions": "Administrer dine e-mail abonnementer",
+        "IfUnsubscribe": "Hvis du vil afmelde abonnementet"
     },
     "invite": {
         "messageContent": "{{displayName}} inviterede dig til {{inviteUrl}}",
         "dialog": {
-            "chooseFromContacts": "V\u00e6lg fra dine kontakter",
-            "selectFromContacts": "V\u00e6lg Fra Kontakter",
+            "chooseFromContacts": "Vælg fra dine kontakter",
+            "selectFromContacts": "Vælg Fra Kontakter",
             "photo": "Tag et billede",
             "photoInstruction": "Hvis den person, der scannede din QR-kode, er foran dig, skal du tage et billede af dem",
             "to": "Til: {{Stream Title}}",
-            "go": "G\u00e5",
+            "go": "Gå",
             "title": "Invitere",
             "placeholder": "Mobilnummer eller e-mail-adresse",
             "orInvite": "Eller invitere folk ved at bruge:",
@@ -61,12 +63,12 @@
         },
         "email": {
             "subject": "Hej, tjek dette ud",
-            "PleaseVisitLink": "Bes\u00f8g venligst f\u00f8lgende link:",
+            "PleaseVisitLink": "Besøg venligst følgende link:",
             "InvitingYou": "Jeg inviterer dig til {{title}}",
             "HasInvitedYou": "{{displayName}} har inviteret dig til {{title}}"
         },
         "sms": {
-            "content": "Du er blevet inviteret til {{title}}. Tryk venligst p\u00e5 {{url}}"
+            "content": "Du er blevet inviteret til {{title}}. Tryk venligst på {{url}}"
         },
         "notice": {
             "text": "Du er blevet inviteret. {{ClickOrTap}} her for at acceptere og deltage."
@@ -82,15 +84,20 @@
     },
     "followup": {
         "mobile": {
-            "alert": "Invitationer sendes fra vores nummer, som dine venner endnu ikke genkender. F\u00f8lg med en hurtig tekst for at fort\u00e6lle dem, at invitationen kom fra dig og bede dem om at klikke p\u00e5 linket.",
-            "confirm": "Invitationer sendes fra vores nummer, som dine venner endnu ikke genkender. Vil du f\u00f8lge med med en hurtig tekst for at fort\u00e6lle dem, at invitationen kom fra dig, og bede dem om at klikke p\u00e5 linket.",
-            "check": "Hej, jeg har lige sendt dig en invitation til appen {{app}}. Tjek venligst dine sms og klik p\u00e5 linket!"
+            "alert": "Invitationer sendes fra vores nummer, som dine venner endnu ikke genkender. Følg med en hurtig tekst for at fortælle dem, at invitationen kom fra dig og bede dem om at klikke på linket.",
+            "confirm": "Invitationer sendes fra vores nummer, som dine venner endnu ikke genkender. Vil du følge med med en hurtig tekst for at fortælle dem, at invitationen kom fra dig, og bede dem om at klikke på linket.",
+            "check": "Hej, jeg har lige sendt dig en invitation til appen {{app}}. Tjek venligst dine sms og klik på linket!"
         },
         "email": {
-            "alert": "Invitationer sendes fra vores dom\u00e6ne, som dine venner endnu ikke genkender. F\u00f8lg med en hurtig tekst for at fort\u00e6lle dem, at invitationen kom fra dig og bede dem om at klikke p\u00e5 linket.",
-            "confirm": "Invitationer sendes fra vores dom\u00e6ne, som dine venner endnu ikke genkender. Vil du f\u00f8lge med med en hurtig tekst for at fort\u00e6lle dem, at invitationen kom fra dig, og bede dem om at klikke p\u00e5 linket.",
+            "alert": "Invitationer sendes fra vores domæne, som dine venner endnu ikke genkender. Følg med en hurtig tekst for at fortælle dem, at invitationen kom fra dig og bede dem om at klikke på linket.",
+            "confirm": "Invitationer sendes fra vores domæne, som dine venner endnu ikke genkender. Vil du følge med med en hurtig tekst for at fortælle dem, at invitationen kom fra dig, og bede dem om at klikke på linket.",
             "subject": "Fik du en invitation?",
-            "body": "Hej, jeg har lige sendt dig en invitation til appen {{app}}. Tjek venligst din email og klik p\u00e5 linket derinde!"
+            "body": "Hej, jeg har lige sendt dig en invitation til appen {{app}}. Tjek venligst din email og klik på linket derinde!"
         }
+    },
+    "participating": {
+        "Title": "Titel",
+        "Subscribed": "Abonneret",
+        "Participants": "Deltagere"
     }
 }

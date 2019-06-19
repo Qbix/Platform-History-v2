@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "{{call 'publisher.displayName'}} tutarındaki ödemeniz için teşekkür ederiz.",
         "SubscribedTo": "{{call 'user.displayName'}} abone oldu {{plan.title}}",
         "YouSubscribedTo": "{{plan.title}} adlı kullanıcıya abone oldunuz."
+    },
+    "payment": {
+        "AboutOrder": "Sipariş hakkında bilgi",
+        "PaymentMethod": "Ödeme şekli",
+        "ContactInfo": "İletişim bilgileri",
+        "Pay": "ödeme"
+    },
+    "credits": {
+        "InviteAcceptedBy": "{{1}} tarafından kabul edilen davet",
+        "YouHaveCreditsToStart": "Başlamak için {{1}} krediniz var"
     }
 }

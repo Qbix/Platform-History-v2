@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "{{stream.fields.title}} pasiekta pažanga",
         "Streams\/task\/complete": "Užduotis baigta: {{stream.fields.title}}",
         "Streams\/task\/error": "Klaida: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: gaunamas pranešimas"
+        "Streams\/incoming\/*": "{{app}}: gaunamas pranešimas",
+        "ManageEmailSubscriptions": "tvarkykite el. pašto prenumeratas",
+        "IfUnsubscribe": "Jei norite atsisakyti prenumeratos"
     },
     "invite": {
         "messageContent": "{{displayName}} pakvietė jus į {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Ar gavote kvietimą?",
             "body": "Ei, aš tiesiog atsiuntė jums kvietimą į {{app}} programą. Patikrinkite el. Paštą ir spustelėkite ten esančią nuorodą!"
         }
+    },
+    "participating": {
+        "Title": "Pavadinimas",
+        "Subscribed": "Prenumeruota",
+        "Participants": "Dalyviai"
     }
 }
