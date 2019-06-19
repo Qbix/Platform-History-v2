@@ -35,6 +35,7 @@ try {
 			console.log('CONNECTED', socket);
 			enableiOSDebug(socket);
 		});
+
 	});
 } catch (e) {
 
@@ -3980,7 +3981,7 @@ WebRTCconferenceLib = function app(options){
 
 				var dataTrack = new Twilio.LocalDataTrack();
 
-				if((audioDevices == 0 && videoDevices == 0) || (!options.startWith.audio && !options.startWith.video)){
+				var twilioConnectWithNoTracks = function () {
 					var connect = Twilio.connect;
 					if(_debug) console.log('options.roomName', options.roomName);
 					var tracks = [];
@@ -3997,7 +3998,9 @@ WebRTCconferenceLib = function app(options){
 					}, function(error) {
 						console.error(`Unable to connect to Room: ${error.message}`);
 					});
-
+				}
+				if((audioDevices == 0 && videoDevices == 0) || (!options.startWith.audio && !options.startWith.video)){
+					twilioConnectWithNoTracks();
 					return;
 				}
 
@@ -4024,6 +4027,7 @@ WebRTCconferenceLib = function app(options){
 
 				}).catch(function(err) {
 					console.error(err.name + ": " + err.message);
+					twilioConnectWithNoTracks()
 				});
 
 
