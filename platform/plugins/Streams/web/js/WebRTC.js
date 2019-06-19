@@ -3,7 +3,7 @@
 
 
 	var Streams = Q.Streams;
-	var _debug = true;
+	var _debug = false;
 
 	/**
 	 * Runs  adapter for Streams/webrtc tools
@@ -148,9 +148,13 @@
 
 			WebRTCconference.event.on('videoTrackLoaded', function (e) {
 				if(_debug) console.log('%c TWILIO: TRACK videoTrackLoaded', 'background:blue;color:white;')
+				screensRendering.updateLayout();
 
 				screensRendering.hideLoader('videoTrackLoaded', e.screen.participant);
-				screensRendering.fitScreenToVideo(e.trackEl, e.screen, e.reset, e.oldSize)
+				screensRendering.fitScreenToVideo(e.trackEl, e.screen, e.reset, e.oldSize);
+				if(e.trackEl) {
+					e.trackEl.play();
+				}
 			});
 
 			WebRTCconference.event.on('screensharingStarting', function (data) {
@@ -186,10 +190,13 @@
 				"https://requirejs.org/docs/release/2.2.0/minified/require.js",
 				"{{Streams}}/js/tools/webrtc/app.js",
 			], function () {
-				/*window.TrackJS && TrackJS.install({
-					token: "c8b43db909ae49728a17089490341b57"
-					// for more configuration options, see https://docs.trackjs.com
-				});*/
+				/*var ua=navigator.userAgent;
+				if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
+					window.TrackJS && TrackJS.install({
+						token: "da842b9825d74b7d8bb76b0b1d13de44"
+						// for more configuration options, see https://docs.trackjs.com
+					});
+				}*/
 
 				var twilioRoomName = _roomStream.getAttribute('twilioRoomName');
 
@@ -260,14 +267,14 @@
 				"https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js",
 				/*"https://cdn.trackjs.com/agent/v3/latest/t.js",*/
 				"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-				"{{Streams}}/js/tools/webrtc/app.js"
+				"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+Date.now())
 			], function () {
-				if (typeof cordova != 'undefined' && window.device.platform === 'iOS') {
-					window.TrackJS && TrackJS.install({
+				//if (typeof cordova != 'undefined' && window.device.platform === 'iOS') {
+					/*window.TrackJS && TrackJS.install({
 						token: "da842b9825d74b7d8bb76b0b1d13de44"
 						// for more configuration options, see https://docs.trackjs.com
-					});
-				}
+					});*/
+				//}
 
 				var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
 				WebRTCconference = window.WebRTCconferenceLib({
@@ -323,6 +330,7 @@
 			 */
 			function updateLayout() {
 				if(WebRTCconference == null) return;
+
 
 				var roomScreens = WebRTCconference.screens(true);
 				var i, participantScreen;
@@ -792,6 +800,8 @@
 				var screen = participant.screens[0];
 				if(screen != null) screen.videoIsChanging = true;
 				participant.videoIsChanging = true;
+				console.log('showLoader screen', screen)
+
 				if(loaderName == 'videoTrackIsBeingAdded' || loaderName == 'beforeCamerasToggle') {
 					var loader = screen.screenEl.querySelector('.spinner-load');
 					if(loader != null) return;
@@ -847,6 +857,7 @@
 				if(loaderName == 'screensharingFailed'){
 					screen.screensharng = false;
 				}
+				if(typeof cordova != 'undefined' && window.device.platform === 'iOS') cordova.plugins.iosrtc.refreshVideos();
 			}
 
 			function toggleViewModeByScreenClick(e) {
