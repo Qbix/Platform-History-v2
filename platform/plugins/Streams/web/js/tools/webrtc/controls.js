@@ -25,7 +25,10 @@
 	var webRTCclass = null;
 
 	var ua=navigator.userAgent;
-	if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) var _isiOS = true;
+	var _isiOS = false;
+	var _isiOSCordova = false;
+	if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) _isiOS = true;
+	if(typeof cordova != 'undefined' && _isiOS) _isiOSCordova = true;
 
 	/**
 	 * Streams/webrtc/control tool.
@@ -103,7 +106,16 @@
 				});
 				webRTClib.event.on('trackAdded', function () {
 					console.log('bindRTCEvents videoTrackIsBeingAdded')
-					tool.webViewElements().showOrHide();
+					if(_isiOSCordova) tool.webViewElements().showOrHide();
+				});
+				webRTClib.event.on('cameraEnabled', function () {
+					tool.updateControlBar();
+				});
+				webRTClib.event.on('cameraToggled', function () {
+					tool.updateControlBar();
+				});
+				webRTClib.event.on('micEnabled', function () {
+					tool.updateControlBar();
 				});
 
 				var roomStream = webRTCclass.roomStream();
@@ -239,7 +251,7 @@
 								return t.screensharing;
 							})[0];
 
-							var turnOnCameraItem = tool.settingsPopupEl.querySelector('label[data-device-id="auto"]');
+							var turnOffradioBtnItem = tool.settingsPopupEl.querySelector('label[data-device-id="off"]');
 							var screenSharingRadioItem = tool.settingsPopupEl.querySelector('label[data-device-id="screen"]');
 
 							if(enabledVideoTracks != null)
@@ -429,7 +441,14 @@
 			 */
 			toggleAudio: function () {
 				var tool = this;
-				if(webRTClib.conferenceControl.micIsEnabled()){
+				var localParticipant = webRTClib.localParticipant();
+				var enabledAudioTracks = localParticipant.tracks.filter(function (t) {
+					return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
+				}).length;
+
+				console.log('toggleAudio--' + (webRTClib.conferenceControl.micIsEnabled()))
+				console.log('toggleAudio--' + (enabledAudioTracks))
+				if(webRTClib.conferenceControl.micIsEnabled() && enabledAudioTracks != 0){
 					webRTClib.conferenceControl.disableAudio();
 				} else {
 					webRTClib.conferenceControl.enableAudio();
@@ -503,7 +522,7 @@
 					tool.microphoneBtn.innerHTML = icons.microphone;
 				}
 
-				tool.webViewElements().showOrHide();
+				if(_isiOSCordova) tool.webViewElements().showOrHide();
 			},
 
 			webViewElements: function() {
@@ -587,7 +606,7 @@
 				close.addEventListener('click', function () {
 					if(bg.parentNode != null) bg.parentNode.removeChild(bg);
 					if(dialogCon.parentNode != null) dialogCon.parentNode.removeChild(dialogCon);
-					tool.webViewElements().show();
+					if(_isiOSCordova) tool.webViewElements().show();
 					tool.state.dialogIsOpened = false;
 				});
 
@@ -605,7 +624,7 @@
 				dialogue.style.minWidth = tool.settingsPopupEl.firstChild.scrollWidth + 'px';
 
 				tool.state.dialogIsOpened = true;
-				tool.webViewElements().hide();
+				if(_isiOSCordova) tool.webViewElements().hide();
 			},
 			/**
 			 * Create settings popup that appears while pointer hovers camera button on desktop/in modal box on mobile
@@ -926,7 +945,11 @@
 						var i, listItem;
 						for (i = 0; listItem = tool.participantsList[i]; i++){
 							if(listItem.participant == localParticipant) {
-								if(webRTClib.conferenceControl.micIsEnabled()){
+								var enabledAudioTracks = localParticipant.tracks.filter(function (t) {
+									return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
+								}).length;
+
+								if(webRTClib.conferenceControl.micIsEnabled() && enabledAudioTracks != 0){
 									listItem.audioBtnEl.innerHTML = listIcons.locDisabledMic;
 									webRTClib.conferenceControl.disableAudio();
 								} else {
@@ -1364,7 +1387,6 @@
 				}
 
 				function checkActiveMediaTracks() {
-					return;
 					tool.checkActiveMediaTracksInterval = setInterval(function () {
 						var i, listItem;
 						for (i = 0; listItem = tool.participantsList[i]; i++){
@@ -1372,11 +1394,13 @@
 							var screens = participant.screens;
 
 							var enabledVideoTracks = participant.tracks.filter(function (t) {
+								if(!participant.isLocal) console.log('checkActiveMediaTracks enabledAudioTracks = ' + (t.mediaStreamTrack != null) + '--' + (t.mediaStreamTrack.enabled) + '--' + (t.mediaStreamTrack.readyState));
+
 								return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 							}).length;
 
 							//console.log('checkActiveMediaTracks', participant, enabledVideoTracks)
-							if(enabledVideoTracks == 0) {
+							if(enabledVideoTracks == 0 || participant.remoteCameraIsEnabled == false) {
 
 								for(var s in screens) {
 									if(!listItem.participant.videoIsChanging) {
@@ -1431,7 +1455,7 @@
 					elems[i].parentNode.removeChild(elems[i]);
 				}
 				tool.state.dialogIsOpened = false;
-				tool.webViewElements().show()
+				if(_isiOSCordova) tool.webViewElements().show();
 			}
 		}
 
