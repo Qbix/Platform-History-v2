@@ -2,6 +2,78 @@
 var socket;
 function enableiOSDebug() {
 	var ua=navigator.userAgent;
+	if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
+		console.stdlog = console.log.bind(console);
+		console.log = function (txt) {
+
+			if(!socket || socket && !socket.connected) return;
+
+			try {
+				//originallog.apply(console, arguments);
+				var i, argument;
+				var argumentsString = '';
+				for (i = 1; argument = arguments[i]; i++){
+					if (typeof argument == 'object') {
+						argumentsString = argumentsString + ', OBJECT';
+					} else {
+						argumentsString = argumentsString + ', ' + argument;
+					}
+				}
+				socket.emit('log', txt + argumentsString + '\n');
+				console.stdlog.apply(console, arguments);
+			} catch (e) {
+
+			}
+		}
+	}
+	console.stderror = console.error.bind(console);
+
+	console.error = function (txt) {
+
+		if(!socket || socket && !socket.connected) return;
+
+		try {
+			var err = (new Error);
+		} catch (e) {
+
+		}
+
+		try {
+			var i, argument;
+			var argumentsString = '';
+			for (i = 1; argument = arguments[i]; i++){
+				if (typeof argument == 'object') {
+					argumentsString = argumentsString + ', OBJECT';
+				} else {
+					argumentsString = argumentsString + ', ' + argument;
+				}
+			}
+
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth() + 1;
+
+			var yyyy = today.getFullYear();
+			if (dd < 10) {
+				dd = '0' + dd;
+			}
+			if (mm < 10) {
+				mm = '0' + mm;
+			}
+			var today = dd + '/' + mm + '/' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+
+			var errorMessage = "\n\n" + today + " Error: " + txt + ', ' +  argumentsString + "\nurl: " + location.origin + "\nline: ";
+
+			if(typeof err != 'undefined' && typeof err.stack != 'undefined')
+				errorMessage = errorMessage + err.stack + "\n " + ua;
+			else errorMessage = errorMessage + "\n " + ua;
+			socket.emit('errorlog', errorMessage + '\n');
+			console.stderror.apply(console, arguments);
+
+		} catch (e) {
+			console.log(e.name + ' ' + e.message)
+		}
+	}
 
 	window.onerror = function(msg, url, line, col, error) {
 		if(socket == null) return;
@@ -10,7 +82,7 @@ function enableiOSDebug() {
 
 		var today = new Date();
 		var dd = today.getDate();
-		var mm = today.getMonth() + 1; //January is 0!
+		var mm = today.getMonth() + 1;
 
 		var yyyy = today.getFullYear();
 		if (dd < 10) {
@@ -3949,6 +4021,7 @@ WebRTCconferenceLib = function app(options){
 				});
 			}, function (err) {
 				console.error(err.name + ": " + err.message);
+				console.log(err.name + ": " + err.message);
 			});
 			return;
 		}
@@ -4011,7 +4084,7 @@ WebRTCconferenceLib = function app(options){
 					var tracks = stream.getTracks();
 					tracks.push(dataTrack);
 					var connect = Twilio.connect;
-					if(_debug) console.log('options.roomName', options.roomName);
+					if(_debug) console.log('options.roomName2', options.roomName);
 					navigator.mediaDevices.enumerateDevices().then(function (mediaDevicesList) {
 						connect(token, {
 							name:options.roomName,
@@ -4020,6 +4093,8 @@ WebRTCconferenceLib = function app(options){
 							debugLevel: 'debug'
 						}).then(function(room) {
 							joinRoom(room, dataTrack, mediaDevicesList);
+						}).catch(function(err) {
+							console.error(err.name + ": " + err.message);
 						});
 					}).catch(function () {
 						console.error('ERROR: cannot get device info')
@@ -4027,7 +4102,7 @@ WebRTCconferenceLib = function app(options){
 
 				}).catch(function(err) {
 					console.error(err.name + ": " + err.message);
-					twilioConnectWithNoTracks()
+					twilioConnectWithNoTracks();
 				});
 
 
@@ -4275,7 +4350,7 @@ WebRTCconferenceLib = function app(options){
 	}
 
 	var initWithTwilio = function(callback){
-		console.log('initWithTwilio')
+		if(_debug) console.log('initWithTwilio')
 
 		var ua=navigator.userAgent;
 		if(ua.indexOf('Android')!=-1||ua.indexOf('Windows Phone')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
@@ -4405,11 +4480,7 @@ WebRTCconferenceLib = function app(options){
 	app.init = function(callback){
 		console.log('options', options)
 		if(options.mode == 'twilio') {
-			console.log('app.init0')
-
 			require(['/Q/plugins/Streams/js/tools/webrtc/twilio-video.min.js?ts=' + (+new Date)], function (TwilioInstance) {
-				console.log('app.init2')
-
 				Twilio = window.Twilio = TwilioInstance;
 				initWithTwilio(callback);
 			});
