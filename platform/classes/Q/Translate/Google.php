@@ -47,7 +47,7 @@ class Q_Translate_Google {
 				$tree = new Q_Tree();
 				$tree->load($localeFile);
 				$tree->merge($arr);
-				$tree->save($localeFile, array(), null, JSON_PRETTY_PRINT);
+				$tree->save($localeFile, array(), null, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 			} else {
 				copy($langFile, $localeFile);
 			}

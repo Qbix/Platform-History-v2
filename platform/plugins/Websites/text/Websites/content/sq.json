@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "shkoj",
-            "PasteLinkHere": "Ngjit një lidhje këtu"
+            "PasteLinkHere": "Ngjit një lidhje këtu",
+            "BrowseTheWeb": "shfletoj",
+            "WriteToStartConversation": "Shkruani mendimet tuaja për të nisur bisedën",
+            "StartConversation": "Filloni bisedën"
         }
     }
 }

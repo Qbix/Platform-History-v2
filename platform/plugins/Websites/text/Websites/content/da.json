@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Gå",
-            "PasteLinkHere": "Indsæt et link her"
+            "PasteLinkHere": "Indsæt et link her",
+            "BrowseTheWeb": "Gennemse",
+            "WriteToStartConversation": "Skriv dine tanker for at starte samtalen",
+            "StartConversation": "Start samtale"
         }
     }
 }

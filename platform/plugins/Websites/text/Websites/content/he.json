@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "ללכת",
-            "PasteLinkHere": "הדבק קישור כאן"
+            "PasteLinkHere": "הדבק קישור כאן",
+            "BrowseTheWeb": "עיון",
+            "WriteToStartConversation": "כתוב את המחשבות שלך כדי להתחיל את השיחה",
+            "StartConversation": "התחל שיחה"
         }
     }
 }

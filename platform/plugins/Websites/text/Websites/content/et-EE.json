@@ -3,14 +3,14 @@
         "campaign": {
             "placeholders": {
                 "link": "Link reklaamimiseks",
-                "startDate": "Algus kuup\u00e4ev",
+                "startDate": "Algus kuupäev",
                 "startTime": "Algusaeg",
-                "endDate": "L\u00f5ppkuup\u00e4ev",
-                "endTime": "L\u00f5puaeg",
+                "endDate": "Lõppkuupäev",
+                "endTime": "Lõpuaeg",
                 "budget": "Eelarve"
             },
             "interests": {
-                "Title": "Filtreeri intressi j\u00e4rgi",
+                "Title": "Filtreeri intressi järgi",
                 "FilterInterests": "Alustage huvi kirjutamist ..."
             },
             "Interest": "Huvi",
@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Mine",
-            "PasteLinkHere": "Kleebi link siia"
+            "PasteLinkHere": "Kleebi link siia",
+            "BrowseTheWeb": "Sirvi",
+            "WriteToStartConversation": "Kirjutage oma mõtted vestluse alustamiseks",
+            "StartConversation": "Alustage vestlust"
         }
     }
 }

@@ -1,26 +1,29 @@
 {
-	"advert": {
-		"campaign": {
-			"placeholders": {
-				"link": "Link to promote",
-				"startDate": "Start Date",
-				"startTime": "Start Time",
-				"endDate": "End Date",
-				"endTime": "End Time",
-				"budget": "Budget"
-			},
-			"interests": {
-				"Title": "Filter By Interest",
-				"FilterInterests": "Start typing an interest..."
-			},
-			"Interest": "Interest",
-			"Location": "Location"
-		}
-	},
-	"webpage": {
-		"composer": {
-			"Go": "Go",
-			"PasteLinkHere": "Paste a link here"
-		}
-	}
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
+            },
+            "interests": {
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
+            },
+            "Interest": "Interest",
+            "Location": "Location"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Go",
+            "PasteLinkHere": "https://...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation"
+        }
+    }
 }

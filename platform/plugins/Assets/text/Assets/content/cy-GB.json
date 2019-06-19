@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Diolch i chi am eich taliad i {{call 'publisher.displayName'}}",
         "SubscribedTo": "Tanysgrifiwyd {{call 'user.displayName'}} i {{plan.title}}",
         "YouSubscribedTo": "Rydych wedi tanysgrifio i {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Gwybodaeth am drefn",
+        "PaymentMethod": "Dull talu",
+        "ContactInfo": "Manylion cyswllt",
+        "Pay": "Cyflog"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Gwahoddwyd gwahoddiad gan {{1}}",
+        "YouHaveCreditsToStart": "Mae gennych chi {{1}} credydau i ddechrau"
     }
 }

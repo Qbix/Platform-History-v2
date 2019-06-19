@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Iet",
-            "PasteLinkHere": "Ielīmējiet saiti šeit"
+            "PasteLinkHere": "Ielīmējiet saiti šeit",
+            "BrowseTheWeb": "Pārlūkot",
+            "WriteToStartConversation": "Uzrakstiet savas domas, lai sāktu sarunu",
+            "StartConversation": "Sāciet sarunu"
         }
     }
 }

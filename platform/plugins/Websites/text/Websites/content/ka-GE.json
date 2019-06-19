@@ -2,25 +2,28 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "\u10d1\u10db\u10e3\u10da\u10d8 \u10ee\u10d4\u10da\u10d8 \u10e8\u10d4\u10e3\u10ec\u10e7\u10dd\u10e1",
-                "startDate": "\u1c93\u10d0\u10ec\u10e7\u10d4\u10d1\u10d8\u10e1 \u10d7\u10d0\u10e0\u10d8\u10e6\u10d8",
-                "startTime": "\u10d3\u10d0\u10ec\u10e7\u10d4\u10d1\u10d8\u10e1 \u10d3\u10e0\u10dd",
-                "endDate": "\u1c93\u10d0\u10e1\u10e0\u10e3\u10da\u10d4\u10d1\u10d8\u10e1 \u10d7\u10d0\u10e0\u10d8\u10e6\u10d8",
-                "endTime": "\u1c93\u10e0\u10dd\u10d8\u10e1 \u10d3\u10d0\u10e1\u10d0\u10e1\u10e0\u10e3\u10da\u10d8",
-                "budget": "\u10d1\u10d8\u10e3\u10ef\u10d4\u10e2\u10d8"
+                "link": "ბმული ხელი შეუწყოს",
+                "startDate": "Დაწყების თარიღი",
+                "startTime": "დაწყების დრო",
+                "endDate": "Დასრულების თარიღი",
+                "endTime": "Დროის დასასრული",
+                "budget": "ბიუჯეტი"
             },
             "interests": {
-                "Title": "\u10d8\u10dc\u10e2\u10d4\u10e0\u10d4\u10e1\u10d7\u10d0 \u10d3\u10d0\u10ea\u10d5\u10d0",
-                "FilterInterests": "\u10d3\u10d0\u10d8\u10dc\u10e2\u10d4\u10e0\u10d4\u10e1\u10d3\u10d8\u10d7 \u10d0\u10d9\u10e0\u10d4\u10e4\u10d8\u10d7 ..."
+                "Title": "ინტერესთა დაცვა",
+                "FilterInterests": "დაინტერესდით აკრეფით ..."
             },
-            "Interest": "\u10d8\u10dc\u10e2\u10d4\u10e0\u10d4\u10e1\u10d8",
-            "Location": "\u10db\u10d3\u10d4\u10d1\u10d0\u10e0\u10d4\u10dd\u10d1\u10d0"
+            "Interest": "ინტერესი",
+            "Location": "მდებარეობა"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "\u10ec\u10d0\u10d3\u10d8",
-            "PasteLinkHere": "\u10e9\u10d0\u10e1\u10db\u10d0 \u10d1\u10db\u10e3\u10da\u10d8 \u10d0\u10e5"
+            "Go": "წადი",
+            "PasteLinkHere": "ჩასმა ბმული აქ",
+            "BrowseTheWeb": "იხილე",
+            "WriteToStartConversation": "ჩაწერეთ თქვენი აზრები, რომ დაიწყოთ საუბარი",
+            "StartConversation": "დაიწყეთ საუბარი"
         }
     }
 }

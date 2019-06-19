@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "ісці",
-            "PasteLinkHere": "Ўставіць спасылку тут"
+            "PasteLinkHere": "Ўставіць спасылку тут",
+            "BrowseTheWeb": "Агляд",
+            "WriteToStartConversation": "Напішыце свае думкі, каб пачаць размову",
+            "StartConversation": "Пачатак размовы"
         }
     }
 }

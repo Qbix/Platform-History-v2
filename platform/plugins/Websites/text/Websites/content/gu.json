@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "જાવ",
-            "PasteLinkHere": "અહીં એક લિંક પેસ્ટ કરો"
+            "PasteLinkHere": "અહીં એક લિંક પેસ્ટ કરો",
+            "BrowseTheWeb": "બ્રાઉઝ કરો",
+            "WriteToStartConversation": "વાતચીત શરૂ કરવા માટે તમારા વિચારો લખો",
+            "StartConversation": "વાતચીત શરૂ કરો"
         }
     }
 }

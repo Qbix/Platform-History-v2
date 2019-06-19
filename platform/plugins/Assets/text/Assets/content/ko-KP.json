@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "{{call 'publisher.displayName'}}에 지불 해 주셔서 감사합니다.",
         "SubscribedTo": "{{call 'user.displayName'}}이 (가) {{plan.title}}을 구독했습니다.",
         "YouSubscribedTo": "{{plan.title}}에 가입했습니다."
+    },
+    "payment": {
+        "AboutOrder": "주문 정보",
+        "PaymentMethod": "지불 방법",
+        "ContactInfo": "연락처 정보",
+        "Pay": "지불"
+    },
+    "credits": {
+        "InviteAcceptedBy": "{{1}} (으)로 초대 됨",
+        "YouHaveCreditsToStart": "시작할 크레딧이 {{999}입니다."
     }
 }

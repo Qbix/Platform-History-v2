@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Faleminderit për pagesën tuaj në {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} u pajtua për {{plan.title}}",
         "YouSubscribedTo": "Ju jeni regjistruar në {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Informacion rreth rendit",
+        "PaymentMethod": "Metoda e pagesës",
+        "ContactInfo": "Kontakt info",
+        "Pay": "paguaj"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Ftoni të pranuar nga {{1}}",
+        "YouHaveCreditsToStart": "Ju keni {{1}} kredi për të filluar"
     }
 }

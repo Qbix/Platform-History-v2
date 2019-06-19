@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "joan",
-            "PasteLinkHere": "Itsatsi esteka hemen"
+            "PasteLinkHere": "Itsatsi esteka hemen",
+            "BrowseTheWeb": "arakatu",
+            "WriteToStartConversation": "Idatzi zure pentsamenduak elkarrizketa hasteko",
+            "StartConversation": "Hasi elkarrizketa"
         }
     }
 }

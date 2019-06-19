@@ -3,78 +3,80 @@
         "NewItemTitle": "Nouvel article"
     },
     "labels": {
-        "Streams/invited": "Les gens que j&#39;ai invit\u00e9s",
-        "Streams/invitedMe": "Qui m&#39;a invit\u00e9"
+        "Streams/invited": "Les gens que j&#39;ai invités",
+        "Streams/invitedMe": "Qui m&#39;a invité"
     },
     "interests": {
         "Filter": "Qu&#39;est ce que tu aimes?",
-        "CanAdd": "Si vous ne trouvez toujours pas ce que vous cherchez, vous pouvez ajouter un nouvel int\u00e9r\u00eat ci-dessous:",
+        "CanAdd": "Si vous ne trouvez toujours pas ce que vous cherchez, vous pouvez ajouter un nouvel intérêt ci-dessous:",
         "TrySynonyms": "Ne le vois pas? Essayez des synonymes.",
-        "AddUnderCategory": "Ajouter sous cat\u00e9gorie ...",
+        "AddUnderCategory": "Ajouter sous catégorie ...",
         "Other": "Autre",
-        "Unlisted": "Non r\u00e9pertori\u00e9"
+        "Unlisted": "Non répertorié"
     },
     "chat": {
-        "flaggedForAdminReview": "Le message a \u00e9t\u00e9 marqu\u00e9 pour r\u00e9vision par l&#39;administrateur. Appuyez \u00e0 nouveau pour d\u00e9-marquer.",
+        "flaggedForAdminReview": "Le message a été marqué pour révision par l&#39;administrateur. Appuyez à nouveau pour dé-marquer.",
         "noOneSaid": "Personne n&#39;a rien dit",
         "closeChatButton": "Fermer la discussion",
         "closeChatConfirmTitle": "Fermer ce chat?",
-        "closeChatConfirm": "\u00cates-vous s\u00fbr de vouloir fermer ce chat?",
+        "closeChatConfirm": "Êtes-vous sûr de vouloir fermer ce chat?",
         "closeChatConfirmYes": "Oui",
         "closeChatConfirmNo": "Non",
-        "earlierComments": "commentaires pr\u00e9c\u00e9dents"
+        "earlierComments": "commentaires précédents"
     },
     "notifications": {
-        "*": "Message {{& message.fields.type}} \u00e0 {{& stream.fields.title}}",
-        "Streams/chat/message": "{{&call 'avatar.displayName'}} a d\u00e9clar\u00e9:",
+        "*": "Message {{& message.fields.type}} à {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} a déclaré:",
         "Streams/changed": "Changements dans {{stream.fields.title}}",
-        "Streams/invite": "Vous avez \u00e9t\u00e9 invit\u00e9 \u00e0 {{& stream.fields.title}}",
+        "Streams/invite": "Vous avez été invité à {{& stream.fields.title}}",
         "Streams/announcement": "Annonce dans {{& streams.fields.title}}",
-        "Streams/access": "{{&call 'avatar.displayName'}} modification de l&#39;acc\u00e8s au flux",
-        "Streams/chat/edit": "Message de chat modifi\u00e9",
-        "Streams/chat/remove": "Message de chat supprim\u00e9",
-        "Streams/closed": "{{stream.fields.title}} a \u00e9t\u00e9 ferm\u00e9",
-        "Streams/task/progress": "Progr\u00e8s r\u00e9alis\u00e9s le {{stream.fields.title}}",
-        "Streams/task/complete": "T\u00e2che termin\u00e9e: {{stream.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} modification de l&#39;accès au flux",
+        "Streams/chat/edit": "Message de chat modifié",
+        "Streams/chat/remove": "Message de chat supprimé",
+        "Streams/closed": "{{stream.fields.title}} a été fermé",
+        "Streams/task/progress": "Progrès réalisés le {{stream.fields.title}}",
+        "Streams/task/complete": "Tâche terminée: {{stream.fields.title}}",
         "Streams/task/error": "Erreur pendant: {{stream.fields.title}}",
-        "Streams/incoming/*": "{{app}}: Message entrant"
+        "Streams/incoming/*": "{{app}}: Message entrant",
+        "ManageEmailSubscriptions": "gérer vos abonnements email",
+        "IfUnsubscribe": "Si vous souhaitez vous désabonner"
     },
     "invite": {
-        "messageContent": "{{displayName}} vous a invit\u00e9 \u00e0 {{inviteUrl}}",
+        "messageContent": "{{displayName}} vous a invité à {{inviteUrl}}",
         "dialog": {
             "chooseFromContacts": "Choisissez parmi vos contacts",
-            "selectFromContacts": "S\u00e9lectionner dans les contacts",
+            "selectFromContacts": "Sélectionner dans les contacts",
             "photo": "Prendre une photo",
-            "photoInstruction": "Si la personne qui a scann\u00e9 votre code QR est devant vous, prenez-en une photo.",
+            "photoInstruction": "Si la personne qui a scanné votre code QR est devant vous, prenez-en une photo.",
             "to": "Pour: {{Stream Title}}",
             "go": "Aller",
             "title": "Inviter",
-            "placeholder": "Num\u00e9ro de portable ou adresse email",
+            "placeholder": "Numéro de portable ou adresse email",
             "orInvite": "Ou inviter des personnes en utilisant:",
-            "QR": "{{ClickOrTap}} pour g\u00e9n\u00e9rer le code QR",
+            "QR": "{{ClickOrTap}} pour générer le code QR",
             "QRtitle": "Scannez ce code QR",
             "byEmail": "Email",
             "byText": "Texte",
             "byFacebook": "Facebook",
             "byTwitter": "Gazouillement",
-            "QRscanned": "Ils l&#39;ont scann\u00e9!"
+            "QRscanned": "Ils l&#39;ont scanné!"
         },
         "email": {
-            "subject": "H\u00e9, regarde \u00e7a",
-            "PleaseVisitLink": "S&#39;il vous pla\u00eet visitez le lien suivant:",
-            "InvitingYou": "Je vous invite \u00e0 {{title}}",
-            "HasInvitedYou": "{{displayName}} vous a invit\u00e9 \u00e0 {{title}}"
+            "subject": "Hé, regarde ça",
+            "PleaseVisitLink": "S&#39;il vous plaît visitez le lien suivant:",
+            "InvitingYou": "Je vous invite à {{title}}",
+            "HasInvitedYou": "{{displayName}} vous a invité à {{title}}"
         },
         "sms": {
-            "content": "Vous avez \u00e9t\u00e9 invit\u00e9 \u00e0 {{title}}. Appuyez sur {{url}}."
+            "content": "Vous avez été invité à {{title}}. Appuyez sur {{url}}."
         },
         "notice": {
-            "text": "Vous avez \u00e9t\u00e9 invit\u00e9. {{ClickOrTap}} ici pour accepter et rejoindre."
+            "text": "Vous avez été invité. {{ClickOrTap}} ici pour accepter et rejoindre."
         }
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} a envoy\u00e9 un message <em>{{message.fields.type}}</em> \u00e0 {{stream.fields.title}}"
+            "posted": "{{call 'avatar.displayName'}} a envoyé un message <em>{{message.fields.type}}</em> à {{stream.fields.title}}"
         },
         "text": {
             "body": "{{& call 'avatar.displayName'}} dans {{& url}}: {{& message.fields.content}}"
@@ -82,15 +84,20 @@
     },
     "followup": {
         "mobile": {
-            "alert": "Les invitations sont envoy\u00e9es \u00e0 partir de notre num\u00e9ro, ce que vos amis ne reconnaissent pas encore. Faites un suivi avec un bref message pour leur faire savoir que l&#39;invitation est venue de vous et leur demander de cliquer sur le lien.",
-            "confirm": "Les invitations sont envoy\u00e9es \u00e0 partir de notre num\u00e9ro, ce que vos amis ne reconnaissent pas encore. Souhaitez-vous un suivi avec un texte rapide pour leur faire savoir que l&#39;invitation est venue de vous, leur demandant de cliquer sur le lien.",
-            "check": "H\u00e9, je viens de vous envoyer une invitation \u00e0 l&#39;application {{app}}. S&#39;il vous pla\u00eet v\u00e9rifier votre sms et cliquez sur le lien!"
+            "alert": "Les invitations sont envoyées à partir de notre numéro, ce que vos amis ne reconnaissent pas encore. Faites un suivi avec un bref message pour leur faire savoir que l&#39;invitation est venue de vous et leur demander de cliquer sur le lien.",
+            "confirm": "Les invitations sont envoyées à partir de notre numéro, ce que vos amis ne reconnaissent pas encore. Souhaitez-vous un suivi avec un texte rapide pour leur faire savoir que l&#39;invitation est venue de vous, leur demandant de cliquer sur le lien.",
+            "check": "Hé, je viens de vous envoyer une invitation à l&#39;application {{app}}. S&#39;il vous plaît vérifier votre sms et cliquez sur le lien!"
         },
         "email": {
-            "alert": "Les invitations sont envoy\u00e9es depuis notre domaine, ce que vos amis ne reconnaissent pas encore. Faites un suivi avec un bref message pour leur faire savoir que l&#39;invitation est venue de vous et leur demander de cliquer sur le lien.",
-            "confirm": "Les invitations sont envoy\u00e9es depuis notre domaine, ce que vos amis ne reconnaissent pas encore. Souhaitez-vous un suivi avec un texte rapide pour leur faire savoir que l&#39;invitation est venue de vous, leur demandant de cliquer sur le lien.",
-            "subject": "Avez-vous re\u00e7u une invitation?",
-            "body": "H\u00e9, je viens de vous envoyer une invitation \u00e0 l&#39;application {{app}}. S&#39;il vous pla\u00eet v\u00e9rifier votre email et cliquez sur le lien l\u00e0-bas!"
+            "alert": "Les invitations sont envoyées depuis notre domaine, ce que vos amis ne reconnaissent pas encore. Faites un suivi avec un bref message pour leur faire savoir que l&#39;invitation est venue de vous et leur demander de cliquer sur le lien.",
+            "confirm": "Les invitations sont envoyées depuis notre domaine, ce que vos amis ne reconnaissent pas encore. Souhaitez-vous un suivi avec un texte rapide pour leur faire savoir que l&#39;invitation est venue de vous, leur demandant de cliquer sur le lien.",
+            "subject": "Avez-vous reçu une invitation?",
+            "body": "Hé, je viens de vous envoyer une invitation à l&#39;application {{app}}. S&#39;il vous plaît vérifier votre email et cliquez sur le lien là-bas!"
         }
+    },
+    "participating": {
+        "Title": "Titre",
+        "Subscribed": "Abonné",
+        "Participants": "Participants"
     }
 }

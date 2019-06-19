@@ -38,16 +38,18 @@ class Assets_Credits
 		$streamName = 'Assets/user/credits';
 		$stream = Streams::fetchOne($asUserId, $userId, $streamName);
 		if (!$stream) {
-			$amount = Q_Config::get(
-				'Assets', 'credits', 'amounts', 'Users/insertUser', self::DEFAULT_AMOUNT
-			);
 			$stream = Streams::create($userId, $userId, 'Assets/credits', array(
 				'name' => 'Assets/user/credits',
 				'title' => "Credits",
 				'icon' => '{{Assets}}/img/credits.png',
 				'content' => '',
-				'attributes' => Q::json_encode(compact('amount'))
+				'attributes' => Q::json_encode(array('amount' => 0))
 			));
+
+			$amount = Q_Config::get('Assets', 'credits', 'amounts', 'Users/insertUser', self::DEFAULT_AMOUNT);
+			$reason = Q_Text::get('Assets/content', array('language' => Users::getLanguage($userId)));
+			$reason = Q::interpolate($reason['credits']['YouHaveCreditsToStart'], array($amount));
+			self::earn($amount, $userId, compact('reason'));
 		}
 		return $stream;
 	}
@@ -135,7 +137,9 @@ class Assets_Credits
 			));
 		}
 
-		$userId = Q::ifset($userId, Users::loggedInUser(true)->id);
+		if (empty($userId)) {
+			$userId = Users::loggedInUser(true)->id;
+		}
 
 		$stream = self::userStream($userId, $userId);
 		$stream->setAttribute('amount', $stream->getAttribute('amount') + $amount);

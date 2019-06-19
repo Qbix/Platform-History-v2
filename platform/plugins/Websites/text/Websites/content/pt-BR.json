@@ -3,8 +3,8 @@
         "campaign": {
             "placeholders": {
                 "link": "Link para promover",
-                "startDate": "Data de in\u00edcio",
-                "startTime": "Hora de in\u00edcio",
+                "startDate": "Data de início",
+                "startTime": "Hora de início",
                 "endDate": "Data final",
                 "endTime": "Fim do tempo",
                 "budget": "Despesas"
@@ -14,13 +14,16 @@
                 "FilterInterests": "Comece a digitar um interesse ..."
             },
             "Interest": "Interesse",
-            "Location": "Localiza\u00e7\u00e3o"
+            "Location": "Localização"
         }
     },
     "webpage": {
         "composer": {
             "Go": "Vai",
-            "PasteLinkHere": "Cole um link aqui"
+            "PasteLinkHere": "Cole um link aqui",
+            "BrowseTheWeb": "Squeaky toy",
+            "WriteToStartConversation": "Escreva seus pensamentos para começar a conversa",
+            "StartConversation": "Iniciar conversa"
         }
     }
 }

@@ -1,96 +1,103 @@
 {
     "preview": {
-        "NewItemTitle": "N\u00fdtt atri\u00f0i"
+        "NewItemTitle": "Nýtt atriði"
     },
     "labels": {
-        "Streams/invited": "F\u00f3lk sem \u00e9g bau\u00f0",
-        "Streams/invitedMe": "Hver bau\u00f0 m\u00e9r"
+        "Streams/invited": "Fólk sem ég bauð",
+        "Streams/invitedMe": "Hver bauð mér"
     },
     "interests": {
-        "Filter": "Hva\u00f0 finnst \u00fe\u00e9r gaman?",
-        "CanAdd": "Ef \u00fe\u00fa finnur enn\u00fe\u00e1 ekki \u00fea\u00f0 sem \u00fe\u00fa ert a\u00f0 leita a\u00f0 getur \u00fe\u00fa b\u00e6tt vi\u00f0 n\u00fdjum \u00e1huga h\u00e9r a\u00f0 ne\u00f0an:",
-        "TrySynonyms": "S\u00e9r\u00f0u \u00fea\u00f0 ekki? Pr\u00f3fa\u00f0u samheiti.",
-        "AddUnderCategory": "B\u00e6ta vi\u00f0 undir flokki ...",
-        "Other": "Anna\u00f0",
-        "Unlisted": "\u00d3skr\u00e1\u00f0"
+        "Filter": "Hvað finnst þér gaman?",
+        "CanAdd": "Ef þú finnur ennþá ekki það sem þú ert að leita að getur þú bætt við nýjum áhuga hér að neðan:",
+        "TrySynonyms": "Sérðu það ekki? Prófaðu samheiti.",
+        "AddUnderCategory": "Bæta við undir flokki ...",
+        "Other": "Annað",
+        "Unlisted": "Óskráð"
     },
     "chat": {
-        "flaggedForAdminReview": "Skilabo\u00f0 hefur veri\u00f0 merkt til a\u00f0 f\u00e1 umsj\u00f3n me\u00f0 admin. Pikka\u00f0u aftur til unflag.",
+        "flaggedForAdminReview": "Skilaboð hefur verið merkt til að fá umsjón með admin. Pikkaðu aftur til unflag.",
         "noOneSaid": "Enginn hefur sagt neitt",
-        "closeChatButton": "Loka\u00f0u spjalli",
-        "closeChatConfirmTitle": "Loka\u00f0u \u00feessu spjalli?",
-        "closeChatConfirm": "Ertu viss um a\u00f0 \u00fe\u00fa viljir loka \u00feessu spjalli?",
-        "closeChatConfirmYes": "J\u00e1",
+        "closeChatButton": "Lokaðu spjalli",
+        "closeChatConfirmTitle": "Lokaðu þessu spjalli?",
+        "closeChatConfirm": "Ertu viss um að þú viljir loka þessu spjalli?",
+        "closeChatConfirmYes": "Já",
         "closeChatConfirmNo": "Nr",
         "earlierComments": "fyrri athugasemdir"
     },
     "notifications": {
-        "*": "Skilabo\u00f0 {{& message.fields.type}} til {{& stream.fields.title}}",
-        "Streams/chat/message": "{{&call 'avatar.displayName'}} sag\u00f0i:",
-        "Streams/changed": "Breytingar \u00e1 {{stream.fields.title}}",
-        "Streams/invite": "\u00de\u00fa varst bo\u00f0i\u00f0 a\u00f0 {{& stream.fields.title}}",
-        "Streams/announcement": "Tilkynning \u00ed {{& streams.fields.title}}",
-        "Streams/access": "{{&call 'avatar.displayName'}} breytt strauma\u00f0gangur",
-        "Streams/chat/edit": "Spjallskilabo\u00f0 breytt",
-        "Streams/chat/remove": "Spjallskilabo\u00f0 fjarl\u00e6g\u00f0",
-        "Streams/closed": "{{stream.fields.title}} hefur veri\u00f0 loka\u00f0",
-        "Streams/task/progress": "Framfarir ger\u00f0ar \u00e1 {{stream.fields.title}}",
-        "Streams/task/complete": "Verkefni loki\u00f0: {{stream.fields.title}}",
-        "Streams/task/error": "Villa vi\u00f0: {{stream.fields.title}}",
-        "Streams/incoming/*": "{{app}}: Innkomi\u00f0 skilabo\u00f0"
+        "*": "Skilaboð {{& message.fields.type}} til {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} sagði:",
+        "Streams/changed": "Breytingar á {{stream.fields.title}}",
+        "Streams/invite": "Þú varst boðið að {{& stream.fields.title}}",
+        "Streams/announcement": "Tilkynning í {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} breytt straumaðgangur",
+        "Streams/chat/edit": "Spjallskilaboð breytt",
+        "Streams/chat/remove": "Spjallskilaboð fjarlægð",
+        "Streams/closed": "{{stream.fields.title}} hefur verið lokað",
+        "Streams/task/progress": "Framfarir gerðar á {{stream.fields.title}}",
+        "Streams/task/complete": "Verkefni lokið: {{stream.fields.title}}",
+        "Streams/task/error": "Villa við: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Innkomið skilaboð",
+        "ManageEmailSubscriptions": "stjórna tölvupósti áskriftunum þínum",
+        "IfUnsubscribe": "Ef þú vilt segja upp áskrift"
     },
     "invite": {
-        "messageContent": "{{displayName}} bau\u00f0 \u00fe\u00e9r a\u00f0 {{inviteUrl}}",
+        "messageContent": "{{displayName}} bauð þér að {{inviteUrl}}",
         "dialog": {
-            "chooseFromContacts": "Veldu \u00far tengili\u00f0um \u00fe\u00ednum",
-            "selectFromContacts": "Veldu \u00far tengili\u00f0um",
+            "chooseFromContacts": "Veldu úr tengiliðum þínum",
+            "selectFromContacts": "Veldu úr tengiliðum",
             "photo": "Taktu mynd",
-            "photoInstruction": "Ef s\u00e1 sem skanna\u00f0i QR k\u00f3\u00f0ann \u00feinn er fyrir framan \u00feig skaltu taka mynd af \u00feeim",
+            "photoInstruction": "Ef sá sem skannaði QR kóðann þinn er fyrir framan þig skaltu taka mynd af þeim",
             "to": "Til: {{Stream Title}}",
             "go": "Fara",
-            "title": "Bj\u00f3ddu",
-            "placeholder": "Fars\u00edman\u00famer e\u00f0a netfang",
-            "orInvite": "E\u00f0a bj\u00f3\u00f0i\u00f0 f\u00f3lki me\u00f0 \u00fev\u00ed a\u00f0 nota:",
-            "QR": "{{ClickOrTap}} til a\u00f0 b\u00faa til QR k\u00f3\u00f0a",
-            "QRtitle": "Skanna\u00f0u \u00feetta QR k\u00f3\u00f0a",
+            "title": "Bjóddu",
+            "placeholder": "Farsímanúmer eða netfang",
+            "orInvite": "Eða bjóðið fólki með því að nota:",
+            "QR": "{{ClickOrTap}} til að búa til QR kóða",
+            "QRtitle": "Skannaðu þetta QR kóða",
             "byEmail": "Email",
             "byText": "Texti",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "\u00deeir skanna\u00f0u \u00fea\u00f0!"
+            "QRscanned": "Þeir skannaðu það!"
         },
         "email": {
-            "subject": "Hey, athuga\u00f0u \u00feetta \u00fat",
-            "PleaseVisitLink": "Vinsamlegast far\u00f0u \u00e1 eftirfarandi tengil:",
-            "InvitingYou": "\u00c9g b\u00fd\u00f0 \u00fe\u00e9r a\u00f0 {{title}}",
-            "HasInvitedYou": "{{displayName}} hefur bo\u00f0i\u00f0 \u00fe\u00e9r a\u00f0 {{title}}"
+            "subject": "Hey, athugaðu þetta út",
+            "PleaseVisitLink": "Vinsamlegast farðu á eftirfarandi tengil:",
+            "InvitingYou": "Ég býð þér að {{title}}",
+            "HasInvitedYou": "{{displayName}} hefur boðið þér að {{title}}"
         },
         "sms": {
-            "content": "\u00de\u00fa hefur veri\u00f0 bo\u00f0i\u00f0 {{title}}. Vinsamlegast banka\u00f0u \u00e1 {{url}}"
+            "content": "Þú hefur verið boðið {{title}}. Vinsamlegast bankaðu á {{url}}"
         },
         "notice": {
-            "text": "\u00de\u00fa hefur veri\u00f0 bo\u00f0i\u00f0. {{ClickOrTap}} h\u00e9r til a\u00f0 sam\u00feykkja og taka \u00fe\u00e1tt."
+            "text": "Þú hefur verið boðið. {{ClickOrTap}} hér til að samþykkja og taka þátt."
         }
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} sendi <em>{{message.fields.type}}</em> skilabo\u00f0 til {{stream.fields.title}}"
+            "posted": "{{call 'avatar.displayName'}} sendi <em>{{message.fields.type}}</em> skilaboð til {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} \u00ed {{& url}}: {{& message.fields.content}}"
+            "body": "{{& call 'avatar.displayName'}} í {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Bo\u00f0 eru send fr\u00e1 n\u00famerinu okkar, sem vinir \u00fe\u00ednir \u00feekkja ekki enn\u00fe\u00e1. Fylgdu me\u00f0 skj\u00f3tum texta til a\u00f0 l\u00e1ta \u00fe\u00e1 vita a\u00f0 bo\u00f0i\u00f0 kom fr\u00e1 \u00fe\u00e9r og bi\u00f0ja \u00fe\u00e1 a\u00f0 smella \u00e1 tengilinn.",
-            "confirm": "Bo\u00f0 eru send fr\u00e1 n\u00famerinu okkar, sem vinir \u00fe\u00ednir \u00feekkja ekki enn\u00fe\u00e1. Viltu fylgja me\u00f0 stuttum texta til a\u00f0 l\u00e1ta \u00fe\u00e1 vita a\u00f0 bo\u00f0i\u00f0 kom fr\u00e1 \u00fe\u00e9r og bi\u00f0ja \u00fe\u00e1 a\u00f0 smella \u00e1 tengilinn.",
-            "check": "Hey, \u00e9g sendi \u00fe\u00e9r bara bo\u00f0 \u00ed {{app}} app. Vinsamlegast athuga\u00f0u sms og smelltu \u00e1 tengilinn!"
+            "alert": "Boð eru send frá númerinu okkar, sem vinir þínir þekkja ekki ennþá. Fylgdu með skjótum texta til að láta þá vita að boðið kom frá þér og biðja þá að smella á tengilinn.",
+            "confirm": "Boð eru send frá númerinu okkar, sem vinir þínir þekkja ekki ennþá. Viltu fylgja með stuttum texta til að láta þá vita að boðið kom frá þér og biðja þá að smella á tengilinn.",
+            "check": "Hey, ég sendi þér bara boð í {{app}} app. Vinsamlegast athugaðu sms og smelltu á tengilinn!"
         },
         "email": {
-            "alert": "Bo\u00f0 eru send fr\u00e1 l\u00e9ninu okkar, sem vinir \u00fe\u00ednir \u00feekkja ekki enn\u00fe\u00e1. Fylgdu me\u00f0 skj\u00f3tum texta til a\u00f0 l\u00e1ta \u00fe\u00e1 vita a\u00f0 bo\u00f0i\u00f0 kom fr\u00e1 \u00fe\u00e9r og bi\u00f0ja \u00fe\u00e1 a\u00f0 smella \u00e1 tengilinn.",
-            "confirm": "Bo\u00f0 eru send fr\u00e1 l\u00e9ninu okkar, sem vinir \u00fe\u00ednir \u00feekkja ekki enn\u00fe\u00e1. Viltu fylgja me\u00f0 stuttum texta til a\u00f0 l\u00e1ta \u00fe\u00e1 vita a\u00f0 bo\u00f0i\u00f0 kom fr\u00e1 \u00fe\u00e9r og bi\u00f0ja \u00fe\u00e1 a\u00f0 smella \u00e1 tengilinn.",
-            "subject": "F\u00e9kkstu bo\u00f0?",
-            "body": "Hey, \u00e9g sendi \u00fe\u00e9r bara bo\u00f0 \u00ed {{app}} app. Vinsamlegast athuga\u00f0u netfangi\u00f0 \u00feitt og smelltu \u00e1 tengilinn \u00fearna!"
+            "alert": "Boð eru send frá léninu okkar, sem vinir þínir þekkja ekki ennþá. Fylgdu með skjótum texta til að láta þá vita að boðið kom frá þér og biðja þá að smella á tengilinn.",
+            "confirm": "Boð eru send frá léninu okkar, sem vinir þínir þekkja ekki ennþá. Viltu fylgja með stuttum texta til að láta þá vita að boðið kom frá þér og biðja þá að smella á tengilinn.",
+            "subject": "Fékkstu boð?",
+            "body": "Hey, ég sendi þér bara boð í {{app}} app. Vinsamlegast athugaðu netfangið þitt og smelltu á tengilinn þarna!"
         }
+    },
+    "participating": {
+        "Title": "Titill",
+        "Subscribed": "Áskrifandi",
+        "Participants": "Þátttakendur"
     }
 }

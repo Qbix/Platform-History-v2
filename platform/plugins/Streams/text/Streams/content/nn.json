@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Fremskritt gjort på {{stream.fields.title}}",
         "Streams\/task\/complete": "Oppgave fullført: {{stream.fields.title}}",
         "Streams\/task\/error": "Feil under: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Innkommende melding"
+        "Streams\/incoming\/*": "{{app}}: Innkommende melding",
+        "ManageEmailSubscriptions": "administrer epostabonnementene dine",
+        "IfUnsubscribe": "Hvis du vil avslutte abonnementet"
     },
     "invite": {
         "messageContent": "{{displayName}} inviterte deg til {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Fikk du en invitasjon?",
             "body": "Hei, jeg sendte deg en invitasjon til {{app}} appen. Vennligst sjekk e-posten din og klikk på linken der inne!"
         }
+    },
+    "participating": {
+        "Title": "Tittel",
+        "Subscribed": "abonnerer",
+        "Participants": "deltakere"
     }
 }
