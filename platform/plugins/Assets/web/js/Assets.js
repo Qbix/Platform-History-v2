@@ -353,8 +353,7 @@
 			 *  @param {Function} [callback]
 			 */
 			googlepay: function (options, callback) {
-				if (!Q.getObject("Assets.Payments.googlePay")) {
-					//return Assets.Payments.standardStripe(options, callback);
+				if (!Q.getObject("Q.Assets.Payments.googlePay")) {
 					return _redirectToBrowserTab(options);
 				}
 
@@ -382,8 +381,9 @@
 			 *  @param {Function} [callback]
 			 */
 			applePayCordova: function (options, callback) {
-
-				return _redirectToBrowserTab(options);
+				if (!Q.getObject("Q.Assets.Payments.applePay")) {
+					return _redirectToBrowserTab(options);
+				}
 
 				var supportedNetworks = ['amex', 'discover', 'masterCard', 'visa'];
 				var merchantCapabilities = ['3ds', 'debit', 'credit'];
