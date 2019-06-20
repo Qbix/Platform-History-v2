@@ -251,6 +251,7 @@
 						twilioAccessToken: accessToken,
 						useAsLibrary: true,
 						startWith: _options.startWith,
+						stream: stream,
 
 					});
 					window.WebConf = WebRTCconference;
@@ -281,7 +282,7 @@
 					});
 				}
 
-				if(_options.mediaDevicesDialog){
+				if(_options.mediaDevicesDialog && _options.startWith.audio){
 					mediaDevicesDialog(
 						function (stream) {
 							init(stream);
@@ -324,46 +325,57 @@
 				"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+Date.now())
 			], function () {
 				//if (typeof cordova != 'undefined' && window.device.platform === 'iOS') {
-					/*window.TrackJS && TrackJS.install({
-						token: "da842b9825d74b7d8bb76b0b1d13de44"
-						// for more configuration options, see https://docs.trackjs.com
-					});*/
+				/*window.TrackJS && TrackJS.install({
+					token: "da842b9825d74b7d8bb76b0b1d13de44"
+					// for more configuration options, see https://docs.trackjs.com
+				});*/
 				//}
 
-				var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
-				WebRTCconference = window.WebRTCconferenceLib({
-					mode:'nodejs',
-					useAsLibrary: true,
-					nodeServer: _options.nodeServer,
-					roomName: roomId,
-					sid:  Q.Users.loggedInUser.id,
-					username:  Q.Users.loggedInUser.id + '\t' + Date.now(),
-					startWith: _options.startWith,
-					turnCredentials: turnCredentials
-				});
-				WebRTCconference.init(function () {
-					bindConferenceEvents();
-					hidePageLoader();
-					_debugTimer.loadEnd = performance.now();
-					screensRendering.updateLayout();
+				var init = function (stream) {
+					var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
+					WebRTCconference = window.WebRTCconferenceLib({
+						mode:'nodejs',
+						useAsLibrary: true,
+						nodeServer: _options.nodeServer,
+						roomName: roomId,
+						stream: stream,
+						sid:  Q.Users.loggedInUser.id,
+						username:  Q.Users.loggedInUser.id + '\t' + Date.now(),
+						startWith: _options.startWith,
+						turnCredentials: turnCredentials
+					});
+					WebRTCconference.init(function () {
+						bindConferenceEvents();
+						hidePageLoader();
+						_debugTimer.loadEnd = performance.now();
+						screensRendering.updateLayout();
 
-					Q.activate(
-						document.body.appendChild(
-							Q.Tool.setUpElement(
-								"div", // or pass an existing element
-								"Streams/webrtc/controls",
-								{webRTClibraryInstance: WebRTCconference, webrtcClass: module}
-							)
-						),
-						{},
-						function () {
-							_controls = this.element;
-							_controlsTool = this;
-							screensRendering.updateLayout();
+						Q.activate(
+							document.body.appendChild(
+								Q.Tool.setUpElement(
+									"div", // or pass an existing element
+									"Streams/webrtc/controls",
+									{webRTClibraryInstance: WebRTCconference, webrtcClass: module}
+								)
+							),
+							{},
+							function () {
+								_controls = this.element;
+								_controlsTool = this;
+								screensRendering.updateLayout();
+							}
+						);
+					});
+					window.WebConf = WebRTCconference;
+				}
+
+				if(_options.mediaDevicesDialog && _options.startWith.audio){
+					mediaDevicesDialog(
+						function (stream) {
+							init(stream);
 						}
 					);
-				});
-				window.WebConf = WebRTCconference;
+				} else init();
 			});
 		}
 
@@ -1132,8 +1144,8 @@
 						/*if(typeof cordova != 'undefined' && window.device.platform === 'iOS') {
 							if(activeScreen.videoTrack != null) elements.unshift(activeScreen.videoTrack)
 						} else {*/
-							elements.unshift(activeScreen.screenEl)
-							moveScreenBack(activeScreen.screenEl);
+						elements.unshift(activeScreen.screenEl)
+						moveScreenBack(activeScreen.screenEl);
 						//}
 
 					}
