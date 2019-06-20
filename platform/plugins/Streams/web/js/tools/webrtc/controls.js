@@ -1394,7 +1394,7 @@
 							var screens = participant.screens;
 
 							var enabledVideoTracks = participant.tracks.filter(function (t) {
-								if(!participant.isLocal) console.log('checkActiveMediaTracks enabledAudioTracks = ' + (t.mediaStreamTrack != null) + '--' + (t.mediaStreamTrack.enabled) + '--' + (t.mediaStreamTrack.readyState));
+								//if(!participant.isLocal) console.log('checkActiveMediaTracks enabledAudioTracks = ' + (t.mediaStreamTrack != null) + '--' + (t.mediaStreamTrack.enabled) + '--' + (t.mediaStreamTrack.readyState));
 
 								return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 							}).length;

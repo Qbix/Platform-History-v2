@@ -1,117 +1,6 @@
 
 var socket;
-function enableiOSDebug() {
-	var ua=navigator.userAgent;
-	if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
-		console.stdlog = console.log.bind(console);
-		console.log = function (txt) {
 
-			if(!socket || socket && !socket.connected) return;
-
-			try {
-				//originallog.apply(console, arguments);
-				var i, argument;
-				var argumentsString = '';
-				for (i = 1; argument = arguments[i]; i++){
-					if (typeof argument == 'object') {
-						argumentsString = argumentsString + ', OBJECT';
-					} else {
-						argumentsString = argumentsString + ', ' + argument;
-					}
-				}
-				socket.emit('log', txt + argumentsString + '\n');
-				console.stdlog.apply(console, arguments);
-			} catch (e) {
-
-			}
-		}
-	}
-	console.stderror = console.error.bind(console);
-
-	console.error = function (txt) {
-
-		if(!socket || socket && !socket.connected) return;
-
-		try {
-			var err = (new Error);
-		} catch (e) {
-
-		}
-
-		try {
-			var i, argument;
-			var argumentsString = '';
-			for (i = 1; argument = arguments[i]; i++){
-				if (typeof argument == 'object') {
-					argumentsString = argumentsString + ', OBJECT';
-				} else {
-					argumentsString = argumentsString + ', ' + argument;
-				}
-			}
-
-			var today = new Date();
-			var dd = today.getDate();
-			var mm = today.getMonth() + 1;
-
-			var yyyy = today.getFullYear();
-			if (dd < 10) {
-				dd = '0' + dd;
-			}
-			if (mm < 10) {
-				mm = '0' + mm;
-			}
-			var today = dd + '/' + mm + '/' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-
-			var errorMessage = "\n\n" + today + " Error: " + txt + ', ' +  argumentsString + "\nurl: " + location.origin + "\nline: ";
-
-			if(typeof err != 'undefined' && typeof err.stack != 'undefined')
-				errorMessage = errorMessage + err.stack + "\n " + ua;
-			else errorMessage = errorMessage + "\n " + ua;
-			socket.emit('errorlog', errorMessage + '\n');
-			console.stderror.apply(console, arguments);
-
-		} catch (e) {
-			console.log(e.name + ' ' + e.message)
-		}
-	}
-
-	window.onerror = function(msg, url, line, col, error) {
-		if(socket == null) return;
-		var extra = !col ? '' : '\ncolumn: ' + col;
-		extra += !error ? '' : '\nerror: ' + error;
-
-		var today = new Date();
-		var dd = today.getDate();
-		var mm = today.getMonth() + 1;
-
-		var yyyy = today.getFullYear();
-		if (dd < 10) {
-			dd = '0' + dd;
-		}
-		if (mm < 10) {
-			mm = '0' + mm;
-		}
-		var today = dd + '/' + mm + '/' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-
-		var errMessage = "\n\n" + today + " Error: " + msg + "\nurl: " + url + "\nline: " + line + extra + "\nline: " + ua;
-
-		socket.emit('errorlog', errMessage);
-	}
-
-}
-
-try {
-	require(['https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'], function (io) {
-		socket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket']});
-		socket.on('connect', function () {
-			console.log('CONNECTED', socket);
-			enableiOSDebug(socket);
-		});
-
-	});
-} catch (e) {
-
-}
 
 if(typeof cordova != 'undefined' && window.device.platform === 'iOS') {
 	document.addEventListener('deviceready', function () {
@@ -1522,6 +1411,14 @@ WebRTCconferenceLib = function app(options){
 			}
 		}
 
+		function sendVideoDataToServer(data, mediaStreamId) {
+			if(!socket || !socket.connected) return;
+
+			//var data = JSON.stringify(data);
+			console.log('videoData',data);
+			socket.emit('videoData', data, options.roomName, mediaStreamId);
+		}
+
 		function createVideoCanvas(screen, track) {
 			//return;
 			console.log('createVideoCanvas');
@@ -1534,14 +1431,14 @@ WebRTCconferenceLib = function app(options){
 			var inputCtx = videoCanvas.getContext('2d');
 			var outputCtx = videoCanvas.getContext('2d');
 
+			var mediaStreamId = screen.videoTrack.srcObject.id;
 			var localVideo = screen.videoTrack;
 			var canvasWidth;
 			var canvasHeight;
 			var videoWidth;
 			var videoHeight;
 
-
-			function drawVideoToCanvas(localVideo, canvasWidth, canvasHeight, videoWidth, videoHeight) {
+			function drawVideoToCanvas(localVideo, mediaStreamId, canvasWidth, canvasHeight, videoWidth, videoHeight) {
 				//console.log('createVideoCanvas', localVideo);
 
 
@@ -1550,6 +1447,8 @@ WebRTCconferenceLib = function app(options){
 
 				// get pixel data from input canvas
 				var pixelData = inputCtx.getImageData( 0, 0, videoWidth, videoHeight );
+				sendVideoDataToServer(pixelData, mediaStreamId);
+				//if(socket && socket.connected) socket.emit('videoData', txt + argumentsString + '\n');;
 				//console.log('pixelData', pixelData)
 				/*var avg, i;
 
@@ -1564,7 +1463,7 @@ WebRTCconferenceLib = function app(options){
 				outputCtx.putImageData( pixelData, 0, 0);
 
 				requestAnimationFrame( function () {
-					drawVideoToCanvas(localVideo, canvasWidth, canvasHeight, videoWidth, videoHeight);
+					drawVideoToCanvas(localVideo, mediaStreamId, canvasWidth, canvasHeight, videoWidth, videoHeight);
 				} );
 				//setTimeout(drawVideoToCanvas);
 			}
@@ -1587,7 +1486,7 @@ WebRTCconferenceLib = function app(options){
 						videoCanvas.height = canvasHeight;
 						localVideo.style.width = canvasWidth + 'px';
 						localVideo.style.height = canvasHeight + 'px';
-						drawVideoToCanvas(localVideo, canvasWidth, canvasHeight, videoWidth, videoHeight);
+						drawVideoToCanvas(localVideo, mediaStreamId, canvasWidth, canvasHeight, videoWidth, videoHeight);
 						//}, 0);
 						clearInterval(waitingVideoTimer);
 						waitingVideoTimer = null;
