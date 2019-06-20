@@ -40,6 +40,7 @@ WebRTCconferenceLib = function app(options){
 		nodeServer: 'https://www.demoproject.co.ua:8443',
 		useAsLibrary: false,
 		startWith: { audio: true, video: false },
+		stream: null,
 		twilioAccessToken: null,
 		disconnectTime: 3000,
 		turnCredentials: null,
@@ -95,7 +96,7 @@ WebRTCconferenceLib = function app(options){
 
 	var _isMobile;
 	var _isiOS;
-	var _debug = false;
+	var _debug = true;
 
 	var pc_config = {
 		"iceServers": [
@@ -3956,7 +3957,7 @@ WebRTCconferenceLib = function app(options){
 
 				if(options.stream != null) {
 
-					if(_debug) console.log('options.roomName', options.roomName);
+					if(_debug) console.log('options.stream', options.stream);
 					var tracks = options.stream.getTracks();
 					tracks.push(dataTrack);
 					connect(token, {
@@ -4094,6 +4095,11 @@ WebRTCconferenceLib = function app(options){
 					width: { min: 320, max: 1280 },
 					height: { min: 240, max: 720 },
 				};
+			}
+
+			if(options.stream != null) {
+				joinRoom(options.stream, mediaDevices);
+				return;
 			}
 
 			if((audioDevices == 0 && videoDevices == 0) || (!options.startWith.audio && !options.startWith.video)){
