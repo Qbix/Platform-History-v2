@@ -5,7 +5,7 @@ function Assets_after_Assets_charge($params)
 	$user = $payments = $amount = $currency = $charge = $adapter = $options = $format = null;
 	extract($params, EXTR_OVERWRITE);
 
-	$text = Q_Text::get('Assets/content', array('language' => Users::getLanguage($invitedUser->id)));
+	$text = Q_Text::get('Assets/content', array('language' => Users::getLanguage($user->id)));
 	$description = Q::ifset($text, 'charges', 'GenericDescription', 'a product or service');
 	$stream = Q::ifset($options, 'stream', null);
 	if ($stream) {
