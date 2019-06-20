@@ -16,7 +16,9 @@
 	 */
 	Streams.WebRTC = function Streams_WebRTC() {
 		var WebRTCconference;
-		var _options = {};
+		var _options = {
+			mediaDevicesDialog: true
+		};
 		var _controls = null;
 		var _controlsTool = null;
 		var _roomsMedia = null;
@@ -181,6 +183,43 @@
 			});
 		}
 
+		var mediaDevicesDialog = function (callback) {
+			var micIcon = '<svg class="microphone-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"    y="0px" viewBox="-0.165 -0.245 99.499 99.498"    enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve">  <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M41.061,32.316c0-4.655,3.775-8.43,8.431-8.43   c4.657,0,8.43,3.774,8.43,8.43v19.861c0,4.655-3.773,8.431-8.43,8.431c-4.656,0-8.431-3.775-8.431-8.431V32.316z M63.928,52.576   c0,7.32-5.482,13.482-12.754,14.336v5.408h6.748v3.363h-16.86V72.32h6.749v-5.408c-7.271-0.854-12.753-7.016-12.754-14.336v-10.33   h3.362v10.125c0,6.115,4.958,11.073,11.073,11.073c6.116,0,11.073-4.958,11.073-11.073V42.246h3.363V52.576z"/>  </svg>';
+
+			navigator.mediaDevices.enumerateDevices().then(function () {
+
+				var mediaDevicesDialog = document.createElement('DIV');
+				var turnMicOnbtn = document.createElement('BUTTON');
+				turnMicOnbtn.type = 'button';
+				turnMicOnbtn.className = 'Q_button webrtc_tool_enable-microphone-btn';
+				turnMicOnbtn.innerHTML = micIcon + '<span>Enable Microphone</span>';
+
+				mediaDevicesDialog.appendChild(turnMicOnbtn);
+				mediaDevicesDialog.addEventListener('mouseup', function (e) {
+					navigator.mediaDevices.getUserMedia ({
+						'audio': true,
+						'video': false,
+					}).then(function (stream) {
+						if(callback) callback(stream);
+						Q.Dialogs.pop();
+					}).catch(function(err) {
+						console.error(err.name + ": " + err.message);
+					});
+				});
+
+				Q.Dialogs.push({
+					title: "Conversation",
+					className: 'webrtc_tool_participants-list',
+					content: mediaDevicesDialog,
+					apply: true,
+				});
+			}).catch(function (e) {
+				console.error('ERROR: cannot get device info: ' + e.message)
+			});
+
+
+		}
+
 		/**
 		 * Connect webrtc room using twilio.
 		 * @method startTwilioRoom
@@ -201,43 +240,56 @@
 					});
 				}*/
 
-				var twilioRoomName = _roomStream.getAttribute('twilioRoomName');
+				var init = function (stream) {
+					var twilioRoomName = _roomStream.getAttribute('twilioRoomName');
 
-				console.log('twilioRoomName', twilioRoomName)
+					console.log('twilioRoomName', twilioRoomName)
 
-				WebRTCconference = window.WebRTCconferenceLib({
-					mode:'twilio',
-					roomName:twilioRoomName,
-					twilioAccessToken: accessToken,
-					useAsLibrary: true,
-					startWith: _options.startWith
-				});
-				window.WebConf = WebRTCconference;
-				WebRTCconference.init(function () {
-					bindConferenceEvents();
-					screensRendering.updateLayout();
-					updateParticipantData();
-					hidePageLoader();
-					_debugTimer.loadEnd = performance.now();
-					log("You joined the room");
+					WebRTCconference = window.WebRTCconferenceLib({
+						mode:'twilio',
+						roomName:twilioRoomName,
+						twilioAccessToken: accessToken,
+						useAsLibrary: true,
+						startWith: _options.startWith,
 
-					Q.activate(
-						document.body.appendChild(
-							Q.Tool.setUpElement(
-								"div", // or pass an existing element
-								"Streams/webrtc/controls",
-								{webRTClibraryInstance: WebRTCconference, webrtcClass: module}
-							)
-						),
-						{},
-						function () {
-							_controls = this.element;
-							_controlsTool = this;
-							screensRendering.updateLayout();
+					});
+					window.WebConf = WebRTCconference;
+					WebRTCconference.init(function () {
+						bindConferenceEvents();
+						screensRendering.updateLayout();
+						updateParticipantData();
+						hidePageLoader();
+						_debugTimer.loadEnd = performance.now();
+						log("You joined the room");
+
+						Q.activate(
+							document.body.appendChild(
+								Q.Tool.setUpElement(
+									"div", // or pass an existing element
+									"Streams/webrtc/controls",
+									{webRTClibraryInstance: WebRTCconference, webrtcClass: module}
+								)
+							),
+							{},
+							function () {
+								_controls = this.element;
+								_controlsTool = this;
+								screensRendering.updateLayout();
+							}
+						);
+
+					});
+				}
+
+				if(_options.mediaDevicesDialog){
+					mediaDevicesDialog(
+						function (stream) {
+							init(stream);
 						}
 					);
+				} else init();
 
-				});
+
 			});
 		}
 		var updateParticipantData = function() {
@@ -1645,7 +1697,7 @@
 		function enableiOSDebug() {
 			var ua=navigator.userAgent;
 			if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
-				console.stdlog = console.log.bind(console);
+				/*console.stdlog = console.log.bind(console);
 				console.log = function (txt) {
 
 					if(!socket || socket && !socket.connected) return;
@@ -1667,7 +1719,7 @@
 					} catch (e) {
 
 					}
-				}
+				}*/
 			}
 			console.stderror = console.error.bind(console);
 
