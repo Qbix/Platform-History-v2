@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "جاؤ",
-            "PasteLinkHere": "یہاں ایک لنک چسپاں کریں"
+            "PasteLinkHere": "یہاں ایک لنک چسپاں کریں",
+            "BrowseTheWeb": "براؤز کریں",
+            "WriteToStartConversation": "بات چیت شروع کرنے کے لئے اپنے خیالات لکھیں",
+            "StartConversation": "بات چیت شروع کریں"
         }
     }
 }

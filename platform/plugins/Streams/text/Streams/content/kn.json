@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "ಪ್ರಗತಿಯು {{stream.fields.title}}",
         "Streams\/task\/complete": "ಕಾರ್ಯ ಪೂರ್ಣಗೊಂಡಿದೆ: {{stream.fields.title}}",
         "Streams\/task\/error": "ಈ ಸಮಯದಲ್ಲಿ ದೋಷ: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: ಒಳಬರುವ ಸಂದೇಶ"
+        "Streams\/incoming\/*": "{{app}}: ಒಳಬರುವ ಸಂದೇಶ",
+        "ManageEmailSubscriptions": "ನಿಮ್ಮ ಇಮೇಲ್ ಚಂದಾದಾರಿಕೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
+        "IfUnsubscribe": "ನೀವು ಅನ್ಸಬ್ಸ್ಕ್ರೈಬ್ ಮಾಡಲು ಬಯಸಿದರೆ"
     },
     "invite": {
         "messageContent": "{{displayName}} ನಿಮ್ಮನ್ನು {{inviteUrl}} ಗೆ ಆಹ್ವಾನಿಸಿದ್ದಾರೆ",
@@ -92,5 +94,10 @@
             "subject": "ನೀವು ಆಮಂತ್ರಣವನ್ನು ಸ್ವೀಕರಿಸಿದ್ದೀರಾ?",
             "body": "ಹೇ, ನಾನು ನಿಮಗೆ {{app}} ಅಪ್ಲಿಕೇಶನ್ಗೆ ಆಹ್ವಾನವನ್ನು ಕಳುಹಿಸಿದೆ. ದಯವಿಟ್ಟು ನಿಮ್ಮ ಇಮೇಲ್ ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಅಲ್ಲಿರುವ ಲಿಂಕ್ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ!"
         }
+    },
+    "participating": {
+        "Title": "ಶೀರ್ಷಿಕೆ",
+        "Subscribed": "ಚಂದಾದಾರರಾಗಿದ್ದಾರೆ",
+        "Participants": "ಭಾಗವಹಿಸುವವರು"
     }
 }

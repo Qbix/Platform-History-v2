@@ -5,19 +5,17 @@ function Assets_after_Assets_charge($params)
 	$user = $payments = $amount = $currency = $charge = $adapter = $options = $format = null;
 	extract($params, EXTR_OVERWRITE);
 
-	$description = 'a product or service';
+	$text = Q_Text::get('Assets/content', array('language' => Users::getLanguage($invitedUser->id)));
+	$description = Q::ifset($text, 'charges', 'GenericDescription', 'a product or service');
 	$stream = Q::ifset($options, 'stream', null);
 	if ($stream) {
 		$publisherId = $stream->publisherId;
 		$publisher = Users_User::fetch($publisherId, true);
 		if ($stream->type === 'Assets/subscription') {
-			$plan = Streams::fetchOne(
-				$stream->getAttribute('planPublisherId'),
-				$stream->getAttribute('planPublisherId'),
-				$stream->getAttribute('planStreamName'),
-				true
-			);
-			$months = $stream->getAttribute('months');
+			$plan = Assets_Subscription::getPlan($stream);
+			$months = $plan->getAttribute('months');
+			$weeks = $plan->getAttribute('weeks');
+			$days = $plan->getAttribute('days');
 			$startDate = $stream->getAttribute('startDate');
 			$endDate = $stream->getAttribute('endDate');
 		}

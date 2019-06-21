@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Kiitos maksustasi {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} tilasi {{plan.title}}",
         "YouSubscribedTo": "Olet tilannut {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Tietoa tilasta",
+        "PaymentMethod": "Maksutapa",
+        "ContactInfo": "Yhteystiedot",
+        "Pay": "Maksaa"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Kutsu {{1}} hyväksyi kutsun",
+        "YouHaveCreditsToStart": "Sinulla on {{1}} luottoja aloittaa"
     }
 }

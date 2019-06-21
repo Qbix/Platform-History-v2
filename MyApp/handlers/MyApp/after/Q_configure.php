@@ -35,7 +35,9 @@ function MyApp_log_shard_query($params)
 		if (!empty($params['exception'])) {
 			Q::log("ROLLBACK (due to exception)");
 			Q::log("query was: " . $params['sql']);
-			Q::log($params['exception']);
+			Q::log($params['exception'], null, true, array(
+				'maxLength' => 2000
+			));
 		} else if ($rollback = $query->getClause('ROLLBACK')) {
 			Q::log($rollback);
 		}

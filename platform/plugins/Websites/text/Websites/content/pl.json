@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Udać się",
-            "PasteLinkHere": "Wklej link tutaj"
+            "PasteLinkHere": "Wklej link tutaj",
+            "BrowseTheWeb": "Paść się",
+            "WriteToStartConversation": "Napisz swoje myśli, aby rozpocząć rozmowę",
+            "StartConversation": "Rozpocznij rozmowę"
         }
     }
 }

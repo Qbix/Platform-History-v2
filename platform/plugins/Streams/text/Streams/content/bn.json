@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "{{stream.fields.title}} এ অগ্রগতি",
         "Streams\/task\/complete": "টাস্ক সম্পন্ন: {{stream.fields.title}}",
         "Streams\/task\/error": "সময় ত্রুটি: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: আসন্ন বার্তা"
+        "Streams\/incoming\/*": "{{app}}: আসন্ন বার্তা",
+        "ManageEmailSubscriptions": "আপনার ইমেইল সাবস্ক্রিপশন পরিচালনা করুন",
+        "IfUnsubscribe": "আপনি আনসাবস্ক্রাইব করতে চান"
     },
     "invite": {
         "messageContent": "{{displayName}} আপনাকে {{inviteUrl}} এ আমন্ত্রণ জানিয়েছে",
@@ -92,5 +94,10 @@
             "subject": "আপনি একটি আমন্ত্রণ পেয়েছিলাম?",
             "body": "আরে, আমি আপনাকে {{app}} অ্যাপ্লিকেশনে একটি আমন্ত্রণ পাঠিয়েছি। আপনার ইমেইল চেক করুন এবং সেখানে লিঙ্ক ক্লিক করুন!"
         }
+    },
+    "participating": {
+        "Title": "খেতাব",
+        "Subscribed": "সাবস্ক্রাইব",
+        "Participants": "অংশগ্রহণকারীরা"
     }
 }

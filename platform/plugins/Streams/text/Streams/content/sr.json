@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Напредак остварен {{stream.fields.title}}",
         "Streams\/task\/complete": "Задатак је завршен: {{stream.fields.title}}",
         "Streams\/task\/error": "Грешка током: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Долазна порука"
+        "Streams\/incoming\/*": "{{app}}: Долазна порука",
+        "ManageEmailSubscriptions": "управљајте својим претплатама е-поште",
+        "IfUnsubscribe": "Ако желите да се одјавите"
     },
     "invite": {
         "messageContent": "{{displayName}} вас је позвао на {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Јеси ли добио позивницу?",
             "body": "Хеј, управо сам ти послао позивницу у {{app}} апликацију. Молимо Вас да проверите своју е-пошту и кликнете на линк тамо!"
         }
+    },
+    "participating": {
+        "Title": "Наслов",
+        "Subscribed": "Претплаћено",
+        "Participants": "Учесници"
     }
 }

@@ -3,15 +3,15 @@
         "campaign": {
             "placeholders": {
                 "link": "Link do promocji",
-                "startDate": "Data rozpocz\u0119cia",
-                "startTime": "Czas rozpocz\u0119cia",
+                "startDate": "Data rozpoczęcia",
+                "startTime": "Czas rozpoczęcia",
                 "endDate": "Data zakonczenia",
                 "endTime": "Koniec czasu",
-                "budget": "Bud\u017cet"
+                "budget": "Budżet"
             },
             "interests": {
-                "Title": "Filtruj wed\u0142ug odsetek",
-                "FilterInterests": "Zacznij wpisywa\u0107 zainteresowanie ..."
+                "Title": "Filtruj według odsetek",
+                "FilterInterests": "Zacznij wpisywać zainteresowanie ..."
             },
             "Interest": "Zainteresowanie",
             "Location": "Lokalizacja"
@@ -19,8 +19,11 @@
     },
     "webpage": {
         "composer": {
-            "Go": "Uda\u0107 si\u0119",
-            "PasteLinkHere": "Wklej link tutaj"
+            "Go": "Udać się",
+            "PasteLinkHere": "Wklej link tutaj",
+            "BrowseTheWeb": "Paść się",
+            "WriteToStartConversation": "Napisz swoje myśli, aby rozpocząć rozmowę",
+            "StartConversation": "Rozpocznij rozmowę"
         }
     }
 }

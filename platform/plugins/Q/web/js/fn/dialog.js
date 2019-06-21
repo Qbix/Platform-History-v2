@@ -45,16 +45,20 @@ Q.Tool.jQuery('Q/overlay',
 
 			var ap = o.alignParent && (o.alignParent[0] || o.alignParent);
 			var apr = ap && ap.getBoundingClientRect();
-			var br = document.body.getBoundingClientRect();
+			var br = {
+				left: 0,
+				top: 0,
+				right: Q.Pointer.windowWidth(),
+				bottom: Q.Pointer.windowHeight()
+			};
 			var sl = ap ? apr.left : -br.left;
-
 			var st = ap ? apr.top : -br.top;
 			// if dialog element have position=fixed - it means it positioned related to viewport
 			// It means that position independent of scrolls of all ancestors.
 			st = $this.css("position") === "fixed" ? 0 : st;
 
-			var sw = ap ? apr.right - apr.left : Q.Pointer.windowWidth();
-			var sh = ap ? apr.bottom - apr.top : Q.Pointer.windowHeight();
+			var sw = ap ? apr.right - apr.left : br.right - br.left;
+			var sh = ap ? apr.bottom - apr.top : br.bottom - br.top;
 
 			var diff = 2;
 			if (($this.previousWidth === undefined) || (Math.abs(width - $this.previousWidth) > diff)) {
@@ -209,6 +213,11 @@ Q.Tool.jQuery('Q/overlay',
 			},
 			close: function(e)
 			{
+				if (e) {
+					$.Event(e).preventDefault();
+				}
+				Q.Pointer.stopHints($this[0]);
+				Q.Pointer.cancelClick();
 				dialogs.pop();
 				var data = $this.data('Q/overlay');
 				var $html = $('html');
@@ -252,9 +261,6 @@ Q.Tool.jQuery('Q/overlay',
 					}
 					Q.handle(data.options.onClose, $this, [$this]);
 				}
-				if (e) $.Event(e).preventDefault();
-				Q.Pointer.stopHints($this[0]);
-				Q.Pointer.cancelClick();
 			},
 			calculatePosition: function () {
 				calculatePosition($this);
@@ -576,14 +582,10 @@ function _loadUrl(o, cb) {
 function _handlePosAndScroll(o)
 {
 	var $this = this;
-	var ots = $('.Q_title_slot', $this);
-	var ods = $('.Q_dialog_slot', $this);
 	var parent = $this.parent();
 	var topMargin = 0, bottomMargin = 0, parentHeight = 0;
 	var wasVertical = null; // for touch devices
 	var inputWasFocused = false;
-
-	var contentsWrapper = null, contentsLength = 0;
 
 	if (interval) {
 		clearInterval(interval);
@@ -593,7 +595,6 @@ function _handlePosAndScroll(o)
 	_adjustPosition();
 
 	function _adjustPosition() {
-		var maxContentsHeight;
 		var isInput = $(document.activeElement).is(":input");
 		if (isInput) {
 			inputWasFocused = true;
@@ -620,8 +621,6 @@ function _handlePosAndScroll(o)
 		if (typeof(bottomMargin) === 'string') // percentage
 			bottomMargin = Math.round(parseInt(bottomMargin) / 100 * parentHeight);
 
-		var rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
-		var outerWidth = $this.outerWidth();
 		if (!o.noCalculatePosition
 			&& (!Q.info.isTouchscreen || !inputWasFocused)) {
 			$this.data('Q/overlay').calculatePosition();

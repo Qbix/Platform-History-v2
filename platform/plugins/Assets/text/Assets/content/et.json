@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Täname teid makse eest {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} tellis {{plan.title}}",
         "YouSubscribedTo": "Olete tellinud {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Info tellimuse kohta",
+        "PaymentMethod": "Makseviis",
+        "ContactInfo": "Kontaktinfo",
+        "Pay": "Maksma"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Kutsu {{1}} poolt heaks kiidetud",
+        "YouHaveCreditsToStart": "Alustamiseks on teil {{1}} krediiti"
     }
 }

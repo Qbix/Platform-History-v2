@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Takk for betalingen din til {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} abonnerer på {{plan.title}}",
         "YouSubscribedTo": "Du har blitt abonnert på {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Info om bestilling",
+        "PaymentMethod": "Betalingsmetode",
+        "ContactInfo": "Kontaktinfo",
+        "Pay": "Betale"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Invitér akseptert av {{1}}",
+        "YouHaveCreditsToStart": "Du har {{1}} studiepoeng for å starte"
     }
 }

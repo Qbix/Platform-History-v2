@@ -13,8 +13,8 @@ function Streams_after_Q_Plugin_install($params)
 	$streamsToInstall = Q_Config::get('Streams', 'onInsert', 'Users_User', array());
 	// get stream names already installed
     $key = "Streams/User/onInsert";
-    $extra = Q_Plugin::handleExtra('Streams', 'plugin', 'Streams');
-    $extra[$key] = is_array($extra[$key]) ? $extra[$key] : array();
+    $extra = Q_Plugin::extra('Streams', 'plugin', 'Streams');
+    $extra[$key] = Q::ifset($extra, $key, array());
     $streamsInstalled = $extra[$key];
 
 	$streamsNeedToInstall = array();
@@ -61,10 +61,10 @@ function Streams_after_Q_Plugin_install($params)
 	if (count($streamsToInstall)) {
 		// save installed streams to table [plugin_name]_q_plugin extra field
 	    $key = "Streams/User/onInsert";
-	    $extra = Q_Plugin::handleExtra('Streams', 'plugin', 'Streams');
+	    $extra = Q_Plugin::extra('Streams', 'plugin', 'Streams');
 	    $extra[$key] = is_array($extra[$key]) ? $extra[$key] : array();
 	    $extra[$key] = array_values(array_unique(array_merge($extra[$key], $streamsToInstall)));
-	    return Q_Plugin::handleExtra('Streams', 'plugin', 'Streams', compact('extra'));
+	    return Q_Plugin::extra('Streams', 'plugin', 'Streams', compact('extra'));
 	}
 
 	echo PHP_EOL;

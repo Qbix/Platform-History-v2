@@ -948,9 +948,10 @@ Elp.isVisible = function () {
  * on the same line.
  * @method remainingWidth
  * @param {boolean} subpixelAccuracy
+ * @param {boolean} excludeMargins
  * @return {number|null} Returns the remaining width, or null if element has no parent
  */
-Elp.remainingWidth = function (subpixelAccuracy) {
+Elp.remainingWidth = function (subpixelAccuracy, excludeMargins) {
 	var element = this;
 	var pn = this.parentNode;
 	if (!pn) {
@@ -964,14 +965,18 @@ Elp.remainingWidth = function (subpixelAccuracy) {
 		+ _parseFloat(cs.borderLeftWidth) + _parseFloat(cs.borderRightWidth);
 	Q.each(pn.children, function () {
 		if (this === element || !this.isVisible()) return;
-		var style = this.computedStyle();
 		var rect3 = this.getBoundingClientRect();
 		if (rect1.top > rect3.bottom || rect1.bottom < rect3.top) {
 			return;
 		}
+		var style = this.computedStyle();
 		w -= (rect3.right - rect3.left
 			+ _parseFloat(style.marginLeft) + _parseFloat(style.marginRight));
-	});	
+	});
+	if (excludeMargins) {
+		var tcs = this.computedStyle();
+		w -= (_parseFloat(tcs.marginLeft) + _parseFloat(tcs.marginRight));
+	}
 	return subpixelAccuracy ? w : Math.floor(w-0.01);
 };
 
@@ -10367,6 +10372,13 @@ Q.info = {
 	    var proceed = false;
 	    var div = document.createElement('div');
 		var CSS = window.CSS || null;
+	    if (CSS && CSS.supports('padding-top: env(safe-area-inset-top)')) {
+	        div.style.paddingTop = 'env(safe-area-inset-top)';
+	        proceed = true;
+	    } else if (CSS && CSS.supports('padding-top: constant(safe-area-inset-top)')) {
+	        div.style.paddingTop = 'constant(safe-area-inset-top)';
+	        proceed = true;
+	    }
 	    if (CSS && CSS.supports('padding-bottom: env(safe-area-inset-bottom)')) {
 	        div.style.paddingBottom = 'env(safe-area-inset-bottom)';
 	        proceed = true;
@@ -10376,7 +10388,8 @@ Q.info = {
 	    }
 	    if (proceed) {
 	        document.body.appendChild(div);
-	        var calculatedPadding = parseInt(div.computedStyle('padding-bottom'));
+	        var calculatedPadding = parseInt(div.computedStyle('padding-top'))
+				+ parseInt(div.computedStyle('padding-bottom'));
 	        document.body.removeChild(div);
 	        if (calculatedPadding > 0) {
 	            return true;
@@ -11004,6 +11017,8 @@ Q.Pointer = {
 		img1.style.position = 'absolute';
 		img1.style.width = o.width;
 		img1.style.height = o.height;
+		img1.style.left = 0;
+		img1.style.top = 0;
 		img1.style.display = 'block';
 		img1.style.pointerEvents = 'none';
 		img1.setAttribute('class', 'Q_hint');
@@ -11123,7 +11138,7 @@ Q.Pointer = {
 			});
 		} else if (options.speak) {
 			Q.Audio.speak(options.speak.text, Q.extend({}, 10, options.speak, {
-				onStart: audioEvent.handle
+				onSpeak: audioEvent.handle
 			}));
 		} else {
 			audioEvent.handle();
@@ -12180,6 +12195,7 @@ Q.Audio.loadVoices = Q.getter(function (callback) {
  * @param {Number} [options.locale] a 4 character code that specifies the language that should be used to synthesize the text.
  * @param {Q.Event|function} [options.onStart] This gets called when the speaking has begun
  * @param {Q.Event|function} [options.onEnd] This gets called when the speaking has finished
+ * @param {Q.Event|function} [options.onSpeak] This gets called when the system called speak(), whether or not it worked
  */
 Q.Audio.speak = function (text, options) {
 	var TTS = root.TTS; // cordova
@@ -12291,6 +12307,7 @@ Q.Audio.speak = function (text, options) {
 					Q.handle(o.onEnd, [u]);
 				};
 				SS.speak(u);
+				Q.handle(o.onSpeak);
 			});
 		}
 	}
@@ -12558,13 +12575,6 @@ Q.onInit.add(function () {
 	
 	if (root.SpeechSynthesisUtterance && root.speechSynthesis) {
 		Q.addEventListener(document.body, 'click', _enableSpeech, false, true);
-		function _enableSpeech () {
-			var s = new SpeechSynthesisUtterance();
-			s.text = '';
-			speechSynthesis.speak(s); // enable speech for the site, on any click
-			Q.removeEventListener(document.body, 'click', _enableSpeech);
-			Q.Audio.speak.enabled = true;
-		}
 	}
 
 	Q.Text.get('Q/content', function (err, text) {
@@ -12579,6 +12589,14 @@ Q.onInit.add(function () {
 		QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
 		QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
 	});
+
+	function _enableSpeech () {
+		var s = new SpeechSynthesisUtterance();
+		s.text = '';
+		speechSynthesis.speak(s); // enable speech for the site, on any click
+		Q.removeEventListener(document.body, 'click', _enableSpeech);
+		Q.Audio.speak.enabled = true;
+	}
 }, 'Q');
 
 Q.onJQuery.add(function ($) {
@@ -12602,7 +12620,8 @@ Q.onJQuery.add(function ($) {
 		"Q/pie": "{{Q}}/js/tools/pie.js",
 		"Q/badge": "{{Q}}/js/tools/badge.js",
 		"Q/resize": "{{Q}}/js/tools/resize.js",
-		"Q/layouts": "{{Q}}/js/tools/layouts.js"
+		"Q/layouts": "{{Q}}/js/tools/layouts.js",
+		"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js"
 	});
 	
 	Q.Tool.jQuery({
@@ -12901,6 +12920,13 @@ if (_isCordova) {
 					cordova.plugins.browsertab.openUrl(url, function() {}, function() {});
 				} else if (cordova.InAppBrowser) {
 					cordova.InAppBrowser.open(url, '_system', options);
+				}
+			};
+			root.close = function (url, target, options) {
+				if (result) {
+					cordova.plugins.browsertab.close();
+				} else if (cordova.InAppBrowser) {
+					cordova.InAppBrowser.close();
 				}
 			};
 		}, function () {});
@@ -13388,11 +13414,14 @@ Q.beforeInit.addOnce(function () {
 	if (Q.getObject('Q.info.cookies.indexOf') && Q.info.cookies.indexOf('Q_dpr')) {
 		Q.cookie('Q_dpr', window.devicePixelRatio);
 	}
+	var e;
 	if (!Q.ignoreBackwardCompatibility.dashboard) {
-		document.getElementById('dashboard_slot').addClass('Q_fixed_top');
+		e = document.getElementById('dashboard_slot');
+		e && e.addClass('Q_fixed_top');
 	}
 	if (!Q.ignoreBackwardCompatibility.notices) {
-		document.getElementById('notices_slot').addClass('Q_fixed_top');
+		e = document.getElementById('notices_slot');
+		e && e.addClass('Q_fixed_top');
 	}
 	// This loads bluebird library to enable Promise for browsers which do not
 	// support Promise natively. For example: IE, Opera Mini.

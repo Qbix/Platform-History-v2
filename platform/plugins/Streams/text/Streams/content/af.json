@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Vordering gemaak op {{stream.fields.title}}",
         "Streams\/task\/complete": "Taak voltooi: {{stream.fields.title}}",
         "Streams\/task\/error": "Fout tydens: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Inkomende Boodskap"
+        "Streams\/incoming\/*": "{{app}}: Inkomende Boodskap",
+        "ManageEmailSubscriptions": "Bestuur jou e-pos intekeninge",
+        "IfUnsubscribe": "As jy wil uitteken"
     },
     "invite": {
         "messageContent": "{{displayName}} het jou genooi na {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Het jy &#39;n uitnodiging gekry?",
             "body": "Haai, ek het jou net &#39;n uitnodiging na die {{app}} -program gestuur. Gaan asseblief jou e-pos en klik die skakel daar in!"
         }
+    },
+    "participating": {
+        "Title": "Titel",
+        "Subscribed": "ingeskryf",
+        "Participants": "deelnemers"
     }
 }

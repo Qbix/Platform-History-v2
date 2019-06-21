@@ -149,7 +149,7 @@ table { border-spacing:0; border-collapse:collapse; }
 
 /* Clear fix */
 
-.Q_clearfix:after { content: ""; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
+.Q_clearfix::after { content: ""; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
 html[xmlns] .Q_clearfix { display: block; }
 
 /* For IE6 only */
@@ -323,12 +323,12 @@ button.basic16 { background-color: #eee; color: black; }
 .Q_notTouchscreen button.basic16:active { background-color: #ccc; color: black; }
 .Q_button { padding: 0.4em 1em 0.4em 1em; box-sizing: border-box; }
 
-.Q_aspect_who, .Q_aspect_who:before { color: #394ad5; border-color: #394ad5; }
-.Q_aspect_what, .Q_aspect_what:before { color: #bf1118; border-color: #bf1118; }
-.Q_aspect_info, .Q_aspect_info:before,
-.Q_aspect_where, .Q_aspect_where:before { color: #222; }
-.Q_aspect_when, .Q_aspect_when:before { color: #449944; border-color: #449944; }
-.Q_aspect_scan, .Q_aspect_scan:before { color: #444; }
+.Q_aspect_who, .Q_aspect_who::before { color: #394ad5; border-color: #394ad5; }
+.Q_aspect_what, .Q_aspect_what::before { color: #bf1118; border-color: #bf1118; }
+.Q_aspect_info, .Q_aspect_info::before,
+.Q_aspect_where, .Q_aspect_where::before { color: #222; }
+.Q_aspect_when, .Q_aspect_when::before { color: #449944; border-color: #449944; }
+.Q_aspect_scan, .Q_aspect_scan::before { color: #444; }
 
 .Q_button.Q_aspect_who {
 	background: #394ad5; /* for non-css3 browsers */
@@ -592,7 +592,7 @@ html.Q_scanning body > .Q_scanning_code {
 	z-index: 9999;
 	cursor: pointer;
 }
-.Q_scanning_close:before, .Q_scanning_close:after {
+.Q_scanning_close::before, .Q_scanning_close::after {
 	position: absolute;
 	left: 15px;
 	content: ' ';
@@ -601,10 +601,10 @@ html.Q_scanning body > .Q_scanning_code {
 	background-color: #000;
 	box-shadow: 0 0 12px 1px #fff;
 }
-.Q_scanning_close:before {
+.Q_scanning_close::before {
 	transform: rotate(45deg);
 }
-.Q_scanning_close:after {
+.Q_scanning_close::after {
 	transform: rotate(-45deg);
 }
 .Q_dialog_content {
@@ -700,6 +700,8 @@ html.Q_scanning body > .Q_scanning_code {
 }
 .Q_touchlabel {
 	position: absolute;
+	left: 0;
+	top: 0;
 	padding: 10px;
 	white-space: nowrap;
 	background: rgba(0, 0, 0, 0.8);
@@ -719,10 +721,24 @@ html.Q_scanning body > .Q_scanning_code {
 	transition: opacity 0.01s linear;
 }
 .Q_disabled {
-	background-color: grey;
+	background-color: gray;
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
 	filter: alpha(opacity=90);
 	-moz-opacity: 0.9;
 	opacity: 0.9;
 	pointer-events: none;
+}
+
+.Q_columns_containsExpanded {
+	overflow: visible !important;
+	z-index: 100 !important;
+}
+.Q_columns_siblingContainsExpanded {
+	z-index: 0 !important;
+}
+
+input[type=text],
+input[type=password] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }

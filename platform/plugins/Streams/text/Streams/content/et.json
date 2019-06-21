@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "{{stream.fields.title}} tehtud edusammud",
         "Streams\/task\/complete": "Ülesanne on lõpetatud: {{stream.fields.title}}",
         "Streams\/task\/error": "Viga: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Sissetulev sõnum"
+        "Streams\/incoming\/*": "{{app}}: Sissetulev sõnum",
+        "ManageEmailSubscriptions": "hallake oma e-posti tellimusi",
+        "IfUnsubscribe": "Kui soovite tellimuse lõpetada"
     },
     "invite": {
         "messageContent": "{{displayName}} kutsus teid {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Kas sa said kutse?",
             "body": "Hei, ma lihtsalt saatsin teile kutse {{app}} rakendusse. Palun kontrollige oma e-posti ja klõpsake seal olevat linki!"
         }
+    },
+    "participating": {
+        "Title": "Pealkiri",
+        "Subscribed": "Tellitud",
+        "Participants": "Osalejad"
     }
 }

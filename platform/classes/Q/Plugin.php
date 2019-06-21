@@ -55,12 +55,12 @@ class Q_Plugin
 	 * @param {string} $name The name of application or plugin
 	 * @param {string} $type One of 'app' or 'plugin'
 	 * @param {string} $conn_name The name of the connection to affect
-	 * @param {array} $options Contain data parsed from command line
-	 * @param {array} $options.extra
+	 * @param {array} $options
+	 * @param {array} $options.extra The information to store in the extra field
 	 * @throws {Exception} If cannot connect to database
 	 * @return array List of installed stream names
 	 */
-	static function handleExtra($name, $type, $conn_name, $options = array())
+	static function extra($name, $type, $conn_name, $options = array())
 	{
 		// Get SQL connection for currently installed schema
 		// Is schema connection information provided?
@@ -814,7 +814,7 @@ EOT;
 
 	static function commandExists($cmd) {
 		// check which command exist "which" (linux) or "where" (win)
-		$command = shell_exec("which") ? "which" : shell_exec("where") ? "where" : null;
+		$command = @shell_exec("where") ? "where" : "which";
 
 		if (!$command) {
 			return false;

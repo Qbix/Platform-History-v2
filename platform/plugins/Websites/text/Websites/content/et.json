@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Mine",
-            "PasteLinkHere": "Kleebi link siia"
+            "PasteLinkHere": "Kleebi link siia",
+            "BrowseTheWeb": "Sirvi",
+            "WriteToStartConversation": "Kirjutage oma mõtted vestluse alustamiseks",
+            "StartConversation": "Alustage vestlust"
         }
     }
 }

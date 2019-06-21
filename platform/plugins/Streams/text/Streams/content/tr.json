@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "{{stream.fields.title}} tarihinde ilerleme kaydedildi",
         "Streams\/task\/complete": "Görev tamamlandı: {{stream.fields.title}}",
         "Streams\/task\/error": "Hata sırasında: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Gelen Mesaj"
+        "Streams\/incoming\/*": "{{app}}: Gelen Mesaj",
+        "ManageEmailSubscriptions": "e-posta aboneliklerinizi yönetin",
+        "IfUnsubscribe": "Abonelikten çıkmak istiyorsanız"
     },
     "invite": {
         "messageContent": "{{displayName}} seni {{inviteUrl}} davet etti",
@@ -92,5 +94,10 @@
             "subject": "Davet aldın mı?",
             "body": "Hey, size {{app}} uygulamasına bir davetiye gönderdim. Lütfen e-postanızı kontrol edin ve oradaki bağlantıyı tıklayın!"
         }
+    },
+    "participating": {
+        "Title": "Başlık",
+        "Subscribed": "Abone",
+        "Participants": "Katılımcılar"
     }
 }

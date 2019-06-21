@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "წადი",
-            "PasteLinkHere": "ჩასმა ბმული აქ"
+            "PasteLinkHere": "ჩასმა ბმული აქ",
+            "BrowseTheWeb": "იხილე",
+            "WriteToStartConversation": "ჩაწერეთ თქვენი აზრები, რომ დაიწყოთ საუბარი",
+            "StartConversation": "დაიწყეთ საუბარი"
         }
     }
 }

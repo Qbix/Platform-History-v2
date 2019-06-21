@@ -2,25 +2,28 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Li\u00ean k\u1ebft \u0111\u1ec3 qu\u1ea3ng b\u00e1",
-                "startDate": "Ng\u00e0y b\u1eaft \u0111\u1ea7u",
-                "startTime": "Th\u1eddi gian b\u1eaft \u0111\u1ea7u",
-                "endDate": "Ng\u00e0y cu\u1ed1i",
-                "endTime": "Th\u1eddi gian k\u1ebft th\u00fac",
-                "budget": "Ng\u00e2n s\u00e1ch"
+                "link": "Liên kết để quảng bá",
+                "startDate": "Ngày bắt đầu",
+                "startTime": "Thời gian bắt đầu",
+                "endDate": "Ngày cuối",
+                "endTime": "Thời gian kết thúc",
+                "budget": "Ngân sách"
             },
             "interests": {
-                "Title": "L\u1ecdc theo s\u1edf th\u00edch",
-                "FilterInterests": "B\u1eaft \u0111\u1ea7u nh\u1eadp m\u1ed9t s\u1edf th\u00edch ..."
+                "Title": "Lọc theo sở thích",
+                "FilterInterests": "Bắt đầu nhập một sở thích ..."
             },
-            "Interest": "Quan t\u00e2m",
-            "Location": "V\u1ecb tr\u00ed"
+            "Interest": "Quan tâm",
+            "Location": "Vị trí"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "\u0110i",
-            "PasteLinkHere": "D\u00e1n m\u1ed9t li\u00ean k\u1ebft \u1edf \u0111\u00e2y"
+            "Go": "Đi",
+            "PasteLinkHere": "Dán một liên kết ở đây",
+            "BrowseTheWeb": "Duyệt",
+            "WriteToStartConversation": "Viết suy nghĩ của bạn để bắt đầu cuộc trò chuyện",
+            "StartConversation": "Bắt đầu hội thoại"
         }
     }
 }

@@ -10,6 +10,6 @@ function MyApp_terms_response_content()
 	$governingLaw = 'U.S. law';
 	$jurisdiction = 'New York State';
 	echo Q::view('MyApp/content/terms.php', compact(
-		'communityName', 'organizationName', 'dmcaEmail'
+		'communityName', 'organizationName', 'dmcaEmail', 'governingLaw', 'jurisdiction'
 	));
 }

@@ -1,96 +1,103 @@
 {
     "preview": {
-        "NewItemTitle": "\u0c15\u0c4a\u0c24\u0c4d\u0c24 \u0c35\u0c38\u0c4d\u0c24\u0c41\u0c35\u0c41"
+        "NewItemTitle": "కొత్త వస్తువు"
     },
     "labels": {
-        "Streams/invited": "\u0c28\u0c47\u0c28\u0c41 \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c3f\u0c02\u0c1a\u0c3f\u0c28 \u0c35\u0c4d\u0c2f\u0c15\u0c4d\u0c24\u0c41\u0c32\u0c41",
-        "Streams/invitedMe": "\u0c0e\u0c35\u0c30\u0c41 \u0c28\u0c28\u0c4d\u0c28\u0c41 \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c3f\u0c02\u0c1a\u0c3e\u0c30\u0c41"
+        "Streams/invited": "నేను ఆహ్వానించిన వ్యక్తులు",
+        "Streams/invitedMe": "ఎవరు నన్ను ఆహ్వానించారు"
     },
     "interests": {
-        "Filter": "\u0c2e\u0c40\u0c30\u0c41 \u0c0f\u0c2e\u0c3f \u0c06\u0c28\u0c02\u0c26\u0c3f\u0c38\u0c4d\u0c24\u0c41\u0c28\u0c4d\u0c28\u0c3e\u0c30\u0c41?",
-        "CanAdd": "\u0c2e\u0c40\u0c30\u0c41 \u0c07\u0c02\u0c15\u0c3e \u0c35\u0c46\u0c24\u0c41\u0c15\u0c41\u0c24\u0c41\u0c28\u0c4d\u0c28 \u0c26\u0c3e\u0c28\u0c4d\u0c28\u0c3f \u0c15\u0c28\u0c41\u0c17\u0c4a\u0c28\u0c32\u0c47\u0c15\u0c2a\u0c4b\u0c24\u0c47, \u0c26\u0c3f\u0c17\u0c41\u0c35 \u0c15\u0c4a\u0c24\u0c4d\u0c24 \u0c06\u0c38\u0c15\u0c4d\u0c24\u0c3f\u0c28\u0c3f \u0c1c\u0c4b\u0c21\u0c3f\u0c02\u0c1a\u0c35\u0c1a\u0c4d\u0c1a\u0c41:",
-        "TrySynonyms": "\u0c26\u0c40\u0c28\u0c4d\u0c28\u0c3f \u0c1a\u0c42\u0c21\u0c32\u0c47\u0c26\u0c3e? \u0c15\u0c4a\u0c28\u0c4d\u0c28\u0c3f \u0c2a\u0c30\u0c4d\u0c2f\u0c3e\u0c2f\u0c2a\u0c26\u0c3e\u0c32\u0c41 \u0c2a\u0c4d\u0c30\u0c2f\u0c24\u0c4d\u0c28\u0c3f\u0c02\u0c1a\u0c02\u0c21\u0c3f.",
-        "AddUnderCategory": "\u0c35\u0c30\u0c4d\u0c17\u0c3e\u0c28\u0c3f\u0c15\u0c3f \u0c1a\u0c47\u0c30\u0c4d\u0c1a\u0c02\u0c21\u0c3f ...",
-        "Other": "\u0c07\u0c24\u0c30",
-        "Unlisted": "\u0c05\u0c28\u0c4d\u0c32\u0c3f\u0c38\u0c4d\u0c1f\u0c46\u0c21\u0c4d"
+        "Filter": "మీరు ఏమి ఆనందిస్తున్నారు?",
+        "CanAdd": "మీరు ఇంకా వెతుకుతున్న దాన్ని కనుగొనలేకపోతే, దిగువ కొత్త ఆసక్తిని జోడించవచ్చు:",
+        "TrySynonyms": "దీన్ని చూడలేదా? కొన్ని పర్యాయపదాలు ప్రయత్నించండి.",
+        "AddUnderCategory": "వర్గానికి చేర్చండి ...",
+        "Other": "ఇతర",
+        "Unlisted": "అన్లిస్టెడ్"
     },
     "chat": {
-        "flaggedForAdminReview": "\u0c28\u0c3f\u0c30\u0c4d\u0c35\u0c3e\u0c39\u0c15 \u0c38\u0c2e\u0c40\u0c15\u0c4d\u0c37 \u0c15\u0c4b\u0c38\u0c02 \u0c38\u0c02\u0c26\u0c47\u0c36\u0c02 \u0c2b\u0c4d\u0c32\u0c3e\u0c17\u0c4d \u0c1a\u0c47\u0c2f\u0c2c\u0c21\u0c3f\u0c02\u0c26\u0c3f. \u0c05\u0c28\u0c4d\u0c2b\u0c4d\u0c32\u0c3e\u0c17\u0c4d \u0c1a\u0c47\u0c2f\u0c21\u0c3e\u0c28\u0c3f\u0c15\u0c3f \u0c2e\u0c33\u0c4d\u0c32\u0c40 \u0c28\u0c4a\u0c15\u0c4d\u0c15\u0c02\u0c21\u0c3f.",
-        "noOneSaid": "\u0c0e\u0c35\u0c30\u0c42 \u0c0f\u0c2e\u0c40 \u0c1a\u0c46\u0c2a\u0c4d\u0c2a\u0c32\u0c47\u0c26\u0c41",
-        "closeChatButton": "\u0c1a\u0c3e\u0c1f\u0c4d\u0c28\u0c41 \u0c2e\u0c42\u0c38\u0c3f\u0c35\u0c47\u0c2f\u0c3f",
-        "closeChatConfirmTitle": "\u0c08 \u0c1a\u0c3e\u0c1f\u0c4d \u0c28\u0c3f \u0c2e\u0c42\u0c38\u0c3f\u0c35\u0c47\u0c2f\u0c3e\u0c32\u0c3e?",
-        "closeChatConfirm": "\u0c2e\u0c40\u0c30\u0c41 \u0c16\u0c1a\u0c4d\u0c1a\u0c3f\u0c24\u0c02\u0c17\u0c3e \u0c08 \u0c1a\u0c3e\u0c1f\u0c4d\u0c28\u0c41 \u0c2e\u0c42\u0c38\u0c3f\u0c35\u0c47\u0c2f\u0c3e\u0c32\u0c28\u0c41\u0c15\u0c41\u0c02\u0c1f\u0c41\u0c28\u0c4d\u0c28\u0c3e\u0c30\u0c3e?",
-        "closeChatConfirmYes": "\u0c05\u0c35\u0c41\u0c28\u0c41",
-        "closeChatConfirmNo": "\u0c24\u0c4b\u0c2c\u0c41\u0c1f\u0c4d\u0c1f\u0c41\u0c35\u0c41\u0c32",
-        "earlierComments": "\u0c2e\u0c41\u0c28\u0c41\u0c2a\u0c1f\u0c3f \u0c35\u0c4d\u0c2f\u0c3e\u0c16\u0c4d\u0c2f\u0c32\u0c41"
+        "flaggedForAdminReview": "నిర్వాహక సమీక్ష కోసం సందేశం ఫ్లాగ్ చేయబడింది. అన్ఫ్లాగ్ చేయడానికి మళ్లీ నొక్కండి.",
+        "noOneSaid": "ఎవరూ ఏమీ చెప్పలేదు",
+        "closeChatButton": "చాట్ను మూసివేయి",
+        "closeChatConfirmTitle": "ఈ చాట్ ని మూసివేయాలా?",
+        "closeChatConfirm": "మీరు ఖచ్చితంగా ఈ చాట్ను మూసివేయాలనుకుంటున్నారా?",
+        "closeChatConfirmYes": "అవును",
+        "closeChatConfirmNo": "తోబుట్టువుల",
+        "earlierComments": "మునుపటి వ్యాఖ్యలు"
     },
     "notifications": {
-        "*": "{{& stream.fields.title}} \u0c15\u0c3f \u0c38\u0c02\u0c26\u0c47\u0c36\u0c02 {{& message.fields.type}}",
-        "Streams/chat/message": "{{&call 'avatar.displayName'}} \u0c05\u0c28\u0c4d\u0c28\u0c3e\u0c30\u0c41:",
-        "Streams/changed": "{{stream.fields.title}} \u0c32\u0c4b \u0c2e\u0c3e\u0c30\u0c4d\u0c2a\u0c41\u0c32\u0c41",
-        "Streams/invite": "\u0c2e\u0c40\u0c30\u0c41 {{& stream.fields.title}} \u0c15\u0c3f \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c3f\u0c02\u0c1a\u0c2c\u0c21\u0c4d\u0c21\u0c3e\u0c30\u0c41",
-        "Streams/announcement": "{{& streams.fields.title}} \u0c32\u0c4b \u0c2a\u0c4d\u0c30\u0c15\u0c1f\u0c28",
-        "Streams/access": "{{&call 'avatar.displayName'}} \u0c38\u0c4d\u0c1f\u0c4d\u0c30\u0c40\u0c2e\u0c4d \u0c2f\u0c3e\u0c15\u0c4d\u0c38\u0c46\u0c38\u0c4d \u0c2e\u0c3e\u0c30\u0c4d\u0c1a\u0c2c\u0c21\u0c3f\u0c02\u0c26\u0c3f",
-        "Streams/chat/edit": "\u0c1a\u0c3e\u0c1f\u0c4d \u0c38\u0c02\u0c26\u0c47\u0c36\u0c3e\u0c28\u0c4d\u0c28\u0c3f \u0c38\u0c35\u0c30\u0c3f\u0c02\u0c1a\u0c3e\u0c30\u0c41",
-        "Streams/chat/remove": "\u0c1a\u0c3e\u0c1f\u0c4d \u0c38\u0c02\u0c26\u0c47\u0c36\u0c02 \u0c24\u0c40\u0c38\u0c3f\u0c35\u0c47\u0c2f\u0c2c\u0c21\u0c3f\u0c02\u0c26\u0c3f",
-        "Streams/closed": "{{stream.fields.title}} \u0c2e\u0c42\u0c38\u0c3f\u0c35\u0c47\u0c2f\u0c2c\u0c21\u0c3f\u0c02\u0c26\u0c3f",
+        "*": "{{& stream.fields.title}} కి సందేశం {{& message.fields.type}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} అన్నారు:",
+        "Streams/changed": "{{stream.fields.title}} లో మార్పులు",
+        "Streams/invite": "మీరు {{& stream.fields.title}} కి ఆహ్వానించబడ్డారు",
+        "Streams/announcement": "{{& streams.fields.title}} లో ప్రకటన",
+        "Streams/access": "{{&call 'avatar.displayName'}} స్ట్రీమ్ యాక్సెస్ మార్చబడింది",
+        "Streams/chat/edit": "చాట్ సందేశాన్ని సవరించారు",
+        "Streams/chat/remove": "చాట్ సందేశం తీసివేయబడింది",
+        "Streams/closed": "{{stream.fields.title}} మూసివేయబడింది",
         "Streams/task/progress": "{{stream.fields.title}}",
-        "Streams/task/complete": "\u0c1f\u0c3e\u0c38\u0c4d\u0c15\u0c4d \u0c2a\u0c42\u0c30\u0c4d\u0c24\u0c2f\u0c3f\u0c02\u0c26\u0c3f: {{stream.fields.title}}",
-        "Streams/task/error": "\u0c32\u0c4b\u0c2a\u0c02: {{stream.fields.title}}",
-        "Streams/incoming/*": "{{app}}: \u0c07\u0c28\u0c4d\u0c15\u0c2e\u0c3f\u0c02\u0c17\u0c4d \u0c2e\u0c46\u0c38\u0c47\u0c1c\u0c4d"
+        "Streams/task/complete": "టాస్క్ పూర్తయింది: {{stream.fields.title}}",
+        "Streams/task/error": "లోపం: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: ఇన్కమింగ్ మెసేజ్",
+        "ManageEmailSubscriptions": "మీ ఇమెయిల్ సభ్యత్వాలను నిర్వహించండి",
+        "IfUnsubscribe": "మీరు చందాను తొలగించాలనుకుంటే"
     },
     "invite": {
-        "messageContent": "{{displayName}} \u0c2e\u0c3f\u0c2e\u0c4d\u0c2e\u0c32\u0c4d\u0c28\u0c3f {{inviteUrl}} \u0c15\u0c3f \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c3f\u0c02\u0c1a\u0c3e\u0c30\u0c41",
+        "messageContent": "{{displayName}} మిమ్మల్ని {{inviteUrl}} కి ఆహ్వానించారు",
         "dialog": {
-            "chooseFromContacts": "\u0c2e\u0c40 \u0c2a\u0c30\u0c3f\u0c1a\u0c2f\u0c3e\u0c32 \u0c28\u0c41\u0c02\u0c21\u0c3f \u0c0e\u0c02\u0c1a\u0c41\u0c15\u0c4b\u0c02\u0c21\u0c3f",
-            "selectFromContacts": "\u0c2a\u0c30\u0c3f\u0c1a\u0c2f\u0c3e\u0c32 \u0c28\u0c41\u0c02\u0c21\u0c3f \u0c0e\u0c02\u0c1a\u0c41\u0c15\u0c4b\u0c02\u0c21\u0c3f",
-            "photo": "\u0c12\u0c15 \u0c2b\u0c4b\u0c1f\u0c4b \u0c24\u0c40\u0c38\u0c41\u0c15\u0c41\u0c28\u0c3f",
-            "photoInstruction": "\u0c2e\u0c40 QR \u0c15\u0c4b\u0c21\u0c4d\u0c28\u0c41 \u0c38\u0c4d\u0c15\u0c3e\u0c28\u0c4d \u0c1a\u0c47\u0c38\u0c3f\u0c28 \u0c35\u0c4d\u0c2f\u0c15\u0c4d\u0c24\u0c3f \u0c2e\u0c40\u0c30\u0c41 \u0c2e\u0c41\u0c02\u0c26\u0c41 \u0c09\u0c02\u0c1f\u0c47, \u0c35\u0c3e\u0c1f\u0c3f \u0c2f\u0c4a\u0c15\u0c4d\u0c15 \u0c2b\u0c4b\u0c1f\u0c4b \u0c24\u0c40\u0c2f\u0c02\u0c21\u0c3f",
-            "to": "\u0c15\u0c3f: {{Stream Title}}",
-            "go": "\u0c35\u0c46\u0c33\u0c4d\u0c33\u0c02\u0c21\u0c3f",
-            "title": "\u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c3f\u0c02\u0c1a\u0c02\u0c21\u0c3f",
-            "placeholder": "\u0c2e\u0c4a\u0c2c\u0c48\u0c32\u0c4d \u0c28\u0c02\u0c2c\u0c30\u0c4d \u0c32\u0c47\u0c26\u0c3e \u0c07\u0c2e\u0c46\u0c2f\u0c3f\u0c32\u0c4d \u0c1a\u0c3f\u0c30\u0c41\u0c28\u0c3e\u0c2e\u0c3e",
-            "orInvite": "\u0c32\u0c47\u0c26\u0c3e \u0c09\u0c2a\u0c2f\u0c4b\u0c17\u0c3f\u0c02\u0c1a\u0c21\u0c02 \u0c26\u0c4d\u0c35\u0c3e\u0c30\u0c3e \u0c35\u0c4d\u0c2f\u0c15\u0c4d\u0c24\u0c41\u0c32\u0c28\u0c41 \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c3f\u0c02\u0c1a\u0c02\u0c21\u0c3f:",
-            "QR": "QR \u0c15\u0c4b\u0c21\u0c4d\u0c28\u0c41 \u0c09\u0c24\u0c4d\u0c2a\u0c24\u0c4d\u0c24\u0c3f \u0c1a\u0c47\u0c2f\u0c21\u0c3e\u0c28\u0c3f\u0c15\u0c3f {{ClickOrTap}}",
-            "QRtitle": "\u0c08 QR \u0c15\u0c4b\u0c21\u0c4d\u0c28\u0c41 \u0c38\u0c4d\u0c15\u0c3e\u0c28\u0c4d \u0c1a\u0c47\u0c2f\u0c02\u0c21\u0c3f",
-            "byEmail": "\u0c07\u0c2e\u0c46\u0c2f\u0c3f\u0c32\u0c4d",
-            "byText": "\u0c1f\u0c46\u0c15\u0c4d\u0c38\u0c4d\u0c1f\u0c4d",
-            "byFacebook": "\u0c2b\u0c47\u0c38\u0c4d\u0c2c\u0c41\u0c15\u0c4d",
-            "byTwitter": "\u0c1f\u0c4d\u0c35\u0c3f\u0c1f\u0c4d\u0c1f\u0c30\u0c4d",
-            "QRscanned": "\u0c35\u0c3e\u0c30\u0c41 \u0c26\u0c3e\u0c28\u0c3f\u0c28\u0c3f \u0c38\u0c4d\u0c15\u0c3e\u0c28\u0c4d \u0c1a\u0c47\u0c36\u0c3e\u0c30\u0c41!"
+            "chooseFromContacts": "మీ పరిచయాల నుండి ఎంచుకోండి",
+            "selectFromContacts": "పరిచయాల నుండి ఎంచుకోండి",
+            "photo": "ఒక ఫోటో తీసుకుని",
+            "photoInstruction": "మీ QR కోడ్ను స్కాన్ చేసిన వ్యక్తి మీరు ముందు ఉంటే, వాటి యొక్క ఫోటో తీయండి",
+            "to": "కి: {{Stream Title}}",
+            "go": "వెళ్ళండి",
+            "title": "ఆహ్వానించండి",
+            "placeholder": "మొబైల్ నంబర్ లేదా ఇమెయిల్ చిరునామా",
+            "orInvite": "లేదా ఉపయోగించడం ద్వారా వ్యక్తులను ఆహ్వానించండి:",
+            "QR": "QR కోడ్ను ఉత్పత్తి చేయడానికి {{ClickOrTap}}",
+            "QRtitle": "ఈ QR కోడ్ను స్కాన్ చేయండి",
+            "byEmail": "ఇమెయిల్",
+            "byText": "టెక్స్ట్",
+            "byFacebook": "ఫేస్బుక్",
+            "byTwitter": "ట్విట్టర్",
+            "QRscanned": "వారు దానిని స్కాన్ చేశారు!"
         },
         "email": {
-            "subject": "\u0c39\u0c47, \u0c08 \u0c24\u0c28\u0c3f\u0c16\u0c40",
-            "PleaseVisitLink": "\u0c26\u0c2f\u0c1a\u0c47\u0c38\u0c3f \u0c15\u0c4d\u0c30\u0c3f\u0c02\u0c26\u0c3f \u0c32\u0c3f\u0c02\u0c15\u0c4d\u0c28\u0c41 \u0c38\u0c02\u0c26\u0c30\u0c4d\u0c36\u0c3f\u0c02\u0c1a\u0c02\u0c21\u0c3f:",
-            "InvitingYou": "\u0c28\u0c47\u0c28\u0c41 \u0c2e\u0c3f\u0c2e\u0c4d\u0c2e\u0c32\u0c4d\u0c28\u0c3f {{title}}",
-            "HasInvitedYou": "{{9}} {{title}} \u0c15\u0c41 \u0c2e\u0c3f\u0c2e\u0c4d\u0c2e\u0c32\u0c4d\u0c28\u0c3f \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c3f\u0c02\u0c1a\u0c3e\u0c30\u0c41"
+            "subject": "హే, ఈ తనిఖీ",
+            "PleaseVisitLink": "దయచేసి క్రింది లింక్ను సందర్శించండి:",
+            "InvitingYou": "నేను మిమ్మల్ని {{title}}",
+            "HasInvitedYou": "{{9}} {{title}} కు మిమ్మల్ని ఆహ్వానించారు"
         },
         "sms": {
-            "content": "\u0c2e\u0c40\u0c30\u0c41 {{title}} \u0c15\u0c41 \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c3f\u0c02\u0c1a\u0c2c\u0c21\u0c4d\u0c21\u0c3e\u0c30\u0c41. \u0c26\u0c2f\u0c1a\u0c47\u0c38\u0c3f {{url}} \u0c28\u0c4a\u0c15\u0c4d\u0c15\u0c02\u0c21\u0c3f"
+            "content": "మీరు {{title}} కు ఆహ్వానించబడ్డారు. దయచేసి {{url}} నొక్కండి"
         },
         "notice": {
-            "text": "\u0c2e\u0c40\u0c30\u0c41 \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c3f\u0c02\u0c1a\u0c2c\u0c21\u0c4d\u0c21\u0c3e\u0c30\u0c41. {{ClickOrTap}} \u0c07\u0c15\u0c4d\u0c15\u0c21 \u0c05\u0c02\u0c17\u0c40\u0c15\u0c30\u0c3f\u0c02\u0c1a\u0c3f \u0c1a\u0c47\u0c30\u0c21\u0c3e\u0c28\u0c3f\u0c15\u0c3f."
+            "text": "మీరు ఆహ్వానించబడ్డారు. {{ClickOrTap}} ఇక్కడ అంగీకరించి చేరడానికి."
         }
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} {{stream.fields.title}} \u0c15\u0c41 {{ <em>1000}}</em> \u0c38\u0c02\u0c26\u0c47\u0c36\u0c3e\u0c28\u0c4d\u0c28\u0c3f \u0c2a\u0c4b\u0c38\u0c4d\u0c1f\u0c4d \u0c1a\u0c47\u0c36\u0c3e\u0c30\u0c41"
+            "posted": "{{call 'avatar.displayName'}} {{stream.fields.title}} కు {{ <em>1000}}</em> సందేశాన్ని పోస్ట్ చేశారు"
         },
         "text": {
-            "body": "{{& url}} \u0c32\u0c4b {{& message.fields.content}}"
+            "body": "{{& url}} లో {{& message.fields.content}}"
         }
     },
     "followup": {
         "mobile": {
-            "alert": "\u0c2e\u0c40 \u0c38\u0c4d\u0c28\u0c47\u0c39\u0c3f\u0c24\u0c41\u0c32\u0c41 \u0c07\u0c02\u0c15\u0c3e \u0c17\u0c41\u0c30\u0c4d\u0c24\u0c3f\u0c02\u0c1a\u0c28\u0c3f \u0c2e\u0c3e \u0c28\u0c02\u0c2c\u0c30\u0c4d \u0c28\u0c41\u0c02\u0c21\u0c3f \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c3e\u0c32\u0c41 \u0c2a\u0c02\u0c2a\u0c2c\u0c21\u0c24\u0c3e\u0c2f\u0c3f. \u0c32\u0c3f\u0c02\u0c15\u0c4d\u0c28\u0c41 \u0c15\u0c4d\u0c32\u0c3f\u0c15\u0c4d \u0c1a\u0c47\u0c2f\u0c2e\u0c28\u0c3f \u0c35\u0c3e\u0c30\u0c3f\u0c28\u0c3f \u0c05\u0c21\u0c41\u0c17\u0c41\u0c24\u0c42, \u0c2e\u0c40 \u0c28\u0c41\u0c02\u0c21\u0c3f \u0c35\u0c1a\u0c4d\u0c1a\u0c3f\u0c28 \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c3e\u0c28\u0c4d\u0c28\u0c3f \u0c2e\u0c40\u0c15\u0c41 \u0c24\u0c46\u0c32\u0c3f\u0c2f\u0c1c\u0c47\u0c2f\u0c21\u0c3e\u0c28\u0c3f\u0c15\u0c3f \u0c24\u0c4d\u0c35\u0c30\u0c3f\u0c24 \u0c35\u0c1a\u0c28\u0c3e\u0c28\u0c4d\u0c28\u0c3f \u0c05\u0c28\u0c41\u0c38\u0c30\u0c3f\u0c02\u0c1a\u0c02\u0c21\u0c3f.",
-            "confirm": "\u0c2e\u0c40 \u0c38\u0c4d\u0c28\u0c47\u0c39\u0c3f\u0c24\u0c41\u0c32\u0c41 \u0c07\u0c02\u0c15\u0c3e \u0c17\u0c41\u0c30\u0c4d\u0c24\u0c3f\u0c02\u0c1a\u0c28\u0c3f \u0c2e\u0c3e \u0c28\u0c02\u0c2c\u0c30\u0c4d \u0c28\u0c41\u0c02\u0c21\u0c3f \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c3e\u0c32\u0c41 \u0c2a\u0c02\u0c2a\u0c2c\u0c21\u0c24\u0c3e\u0c2f\u0c3f. \u0c2e\u0c40\u0c30\u0c41 \u0c2e\u0c40 \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c02 \u0c35\u0c1a\u0c4d\u0c1a\u0c3f\u0c28\u0c1f\u0c4d\u0c32\u0c41 \u0c24\u0c46\u0c32\u0c2a\u0c21\u0c3e\u0c28\u0c3f\u0c15\u0c3f \u0c24\u0c4d\u0c35\u0c30\u0c3f\u0c24 \u0c35\u0c1a\u0c28\u0c02\u0c24\u0c4b \u0c05\u0c28\u0c41\u0c38\u0c30\u0c3f\u0c02\u0c1a\u0c3e\u0c32\u0c28\u0c3f \u0c05\u0c28\u0c41\u0c15\u0c41\u0c02\u0c1f\u0c41\u0c28\u0c4d\u0c28\u0c3e\u0c30\u0c3e, \u0c32\u0c3f\u0c02\u0c15\u0c4d\u0c28\u0c41 \u0c15\u0c4d\u0c32\u0c3f\u0c15\u0c4d \u0c1a\u0c47\u0c2f\u0c2e\u0c28\u0c3f \u0c35\u0c3e\u0c30\u0c3f\u0c28\u0c3f \u0c15\u0c4b\u0c30\u0c02\u0c21\u0c3f.",
-            "check": "\u0c39\u0c47\u0c2f\u0c4d, \u0c28\u0c47\u0c28\u0c41 {{app}} \u0c05\u0c28\u0c41\u0c35\u0c30\u0c4d\u0c24\u0c28\u0c02 \u0c15\u0c4b\u0c38\u0c02 \u0c2e\u0c3f\u0c2e\u0c4d\u0c2e\u0c32\u0c4d\u0c28\u0c3f \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c3f\u0c02\u0c1a\u0c3e\u0c28\u0c41. \u0c26\u0c2f\u0c1a\u0c47\u0c38\u0c3f \u0c2e\u0c40 sms \u0c28\u0c41 \u0c24\u0c28\u0c3f\u0c16\u0c40 \u0c1a\u0c47\u0c38\u0c3f \u0c32\u0c3f\u0c02\u0c15\u0c4d\u0c28\u0c3f \u0c15\u0c4d\u0c32\u0c3f\u0c15\u0c4d \u0c1a\u0c47\u0c2f\u0c02\u0c21\u0c3f!"
+            "alert": "మీ స్నేహితులు ఇంకా గుర్తించని మా నంబర్ నుండి ఆహ్వానాలు పంపబడతాయి. లింక్ను క్లిక్ చేయమని వారిని అడుగుతూ, మీ నుండి వచ్చిన ఆహ్వానాన్ని మీకు తెలియజేయడానికి త్వరిత వచనాన్ని అనుసరించండి.",
+            "confirm": "మీ స్నేహితులు ఇంకా గుర్తించని మా నంబర్ నుండి ఆహ్వానాలు పంపబడతాయి. మీరు మీ ఆహ్వానం వచ్చినట్లు తెలపడానికి త్వరిత వచనంతో అనుసరించాలని అనుకుంటున్నారా, లింక్ను క్లిక్ చేయమని వారిని కోరండి.",
+            "check": "హేయ్, నేను {{app}} అనువర్తనం కోసం మిమ్మల్ని ఆహ్వానించాను. దయచేసి మీ sms ను తనిఖీ చేసి లింక్ని క్లిక్ చేయండి!"
         },
         "email": {
-            "alert": "\u0c2e\u0c40 \u0c38\u0c4d\u0c28\u0c47\u0c39\u0c3f\u0c24\u0c41\u0c32\u0c41 \u0c07\u0c02\u0c15\u0c3e \u0c17\u0c41\u0c30\u0c4d\u0c24\u0c3f\u0c02\u0c1a\u0c28\u0c3f \u0c2e\u0c3e \u0c21\u0c4a\u0c2e\u0c48\u0c28\u0c4d \u0c28\u0c41\u0c02\u0c21\u0c3f \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c3e\u0c32\u0c41 \u0c2a\u0c02\u0c2a\u0c2c\u0c21\u0c24\u0c3e\u0c2f\u0c3f. \u0c32\u0c3f\u0c02\u0c15\u0c4d\u0c28\u0c41 \u0c15\u0c4d\u0c32\u0c3f\u0c15\u0c4d \u0c1a\u0c47\u0c2f\u0c2e\u0c28\u0c3f \u0c35\u0c3e\u0c30\u0c3f\u0c28\u0c3f \u0c05\u0c21\u0c41\u0c17\u0c41\u0c24\u0c42, \u0c2e\u0c40 \u0c28\u0c41\u0c02\u0c21\u0c3f \u0c35\u0c1a\u0c4d\u0c1a\u0c3f\u0c28 \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c3e\u0c28\u0c4d\u0c28\u0c3f \u0c2e\u0c40\u0c15\u0c41 \u0c24\u0c46\u0c32\u0c3f\u0c2f\u0c1c\u0c47\u0c2f\u0c21\u0c3e\u0c28\u0c3f\u0c15\u0c3f \u0c24\u0c4d\u0c35\u0c30\u0c3f\u0c24 \u0c35\u0c1a\u0c28\u0c3e\u0c28\u0c4d\u0c28\u0c3f \u0c05\u0c28\u0c41\u0c38\u0c30\u0c3f\u0c02\u0c1a\u0c02\u0c21\u0c3f.",
-            "confirm": "\u0c2e\u0c40 \u0c38\u0c4d\u0c28\u0c47\u0c39\u0c3f\u0c24\u0c41\u0c32\u0c41 \u0c07\u0c02\u0c15\u0c3e \u0c17\u0c41\u0c30\u0c4d\u0c24\u0c3f\u0c02\u0c1a\u0c28\u0c3f \u0c2e\u0c3e \u0c21\u0c4a\u0c2e\u0c48\u0c28\u0c4d \u0c28\u0c41\u0c02\u0c21\u0c3f \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c3e\u0c32\u0c41 \u0c2a\u0c02\u0c2a\u0c2c\u0c21\u0c24\u0c3e\u0c2f\u0c3f. \u0c2e\u0c40\u0c30\u0c41 \u0c2e\u0c40 \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c02 \u0c35\u0c1a\u0c4d\u0c1a\u0c3f\u0c28\u0c1f\u0c4d\u0c32\u0c41 \u0c24\u0c46\u0c32\u0c2a\u0c21\u0c3e\u0c28\u0c3f\u0c15\u0c3f \u0c24\u0c4d\u0c35\u0c30\u0c3f\u0c24 \u0c35\u0c1a\u0c28\u0c02\u0c24\u0c4b \u0c05\u0c28\u0c41\u0c38\u0c30\u0c3f\u0c02\u0c1a\u0c3e\u0c32\u0c28\u0c3f \u0c05\u0c28\u0c41\u0c15\u0c41\u0c02\u0c1f\u0c41\u0c28\u0c4d\u0c28\u0c3e\u0c30\u0c3e, \u0c32\u0c3f\u0c02\u0c15\u0c4d\u0c28\u0c41 \u0c15\u0c4d\u0c32\u0c3f\u0c15\u0c4d \u0c1a\u0c47\u0c2f\u0c2e\u0c28\u0c3f \u0c35\u0c3e\u0c30\u0c3f\u0c28\u0c3f \u0c15\u0c4b\u0c30\u0c02\u0c21\u0c3f.",
-            "subject": "\u0c2e\u0c40\u0c15\u0c41 \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c02 \u0c35\u0c1a\u0c4d\u0c1a\u0c3f\u0c02\u0c26\u0c3f?",
-            "body": "\u0c39\u0c47\u0c2f\u0c4d, \u0c28\u0c47\u0c28\u0c41 {{app}} \u0c05\u0c28\u0c41\u0c35\u0c30\u0c4d\u0c24\u0c28\u0c02 \u0c15\u0c4b\u0c38\u0c02 \u0c2e\u0c3f\u0c2e\u0c4d\u0c2e\u0c32\u0c4d\u0c28\u0c3f \u0c06\u0c39\u0c4d\u0c35\u0c3e\u0c28\u0c3f\u0c02\u0c1a\u0c3e\u0c28\u0c41. \u0c26\u0c2f\u0c1a\u0c47\u0c38\u0c3f \u0c2e\u0c40 \u0c07\u0c2e\u0c46\u0c2f\u0c3f\u0c32\u0c4d\u0c28\u0c41 \u0c24\u0c28\u0c3f\u0c16\u0c40 \u0c1a\u0c47\u0c38\u0c3f, \u0c05\u0c15\u0c4d\u0c15\u0c21 \u0c09\u0c28\u0c4d\u0c28 \u0c32\u0c3f\u0c02\u0c15\u0c4d\u0c28\u0c3f \u0c15\u0c4d\u0c32\u0c3f\u0c15\u0c4d \u0c1a\u0c47\u0c2f\u0c02\u0c21\u0c3f!"
+            "alert": "మీ స్నేహితులు ఇంకా గుర్తించని మా డొమైన్ నుండి ఆహ్వానాలు పంపబడతాయి. లింక్ను క్లిక్ చేయమని వారిని అడుగుతూ, మీ నుండి వచ్చిన ఆహ్వానాన్ని మీకు తెలియజేయడానికి త్వరిత వచనాన్ని అనుసరించండి.",
+            "confirm": "మీ స్నేహితులు ఇంకా గుర్తించని మా డొమైన్ నుండి ఆహ్వానాలు పంపబడతాయి. మీరు మీ ఆహ్వానం వచ్చినట్లు తెలపడానికి త్వరిత వచనంతో అనుసరించాలని అనుకుంటున్నారా, లింక్ను క్లిక్ చేయమని వారిని కోరండి.",
+            "subject": "మీకు ఆహ్వానం వచ్చింది?",
+            "body": "హేయ్, నేను {{app}} అనువర్తనం కోసం మిమ్మల్ని ఆహ్వానించాను. దయచేసి మీ ఇమెయిల్ను తనిఖీ చేసి, అక్కడ ఉన్న లింక్ని క్లిక్ చేయండి!"
         }
+    },
+    "participating": {
+        "Title": "శీర్షిక",
+        "Subscribed": "సబ్ స్క్రైబ్",
+        "Participants": "పాల్గొనేవారు"
     }
 }

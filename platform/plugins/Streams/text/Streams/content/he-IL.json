@@ -1,96 +1,103 @@
 {
     "preview": {
-        "NewItemTitle": "\u05e4\u05e8\u05d9\u05d8 \u05d7\u05d3\u05e9"
+        "NewItemTitle": "פריט חדש"
     },
     "labels": {
-        "Streams/invited": "\u05d0\u05e0\u05e9\u05d9\u05dd \u05e9\u05d4\u05d6\u05de\u05e0\u05ea\u05d9",
-        "Streams/invitedMe": "\u05de\u05d9 \u05d4\u05d6\u05de\u05d9\u05df \u05d0\u05d5\u05ea\u05d9"
+        "Streams/invited": "אנשים שהזמנתי",
+        "Streams/invitedMe": "מי הזמין אותי"
     },
     "interests": {
-        "Filter": "\u05de\u05de\u05d4 \u05d0\u05ea\u05d4 \u05e0\u05d4\u05e0\u05d4?",
-        "CanAdd": "\u05d0\u05dd \u05e2\u05d3\u05d9\u05d9\u05df \u05d0\u05d9\u05e0\u05da \u05de\u05d5\u05e6\u05d0 \u05d0\u05ea \u05de\u05d4 \u05e9\u05d0\u05ea\u05d4 \u05de\u05d7\u05e4\u05e9, \u05ea\u05d5\u05db\u05dc \u05dc\u05d4\u05d5\u05e1\u05d9\u05e3 \u05e2\u05e0\u05d9\u05d9\u05df \u05d7\u05d3\u05e9 \u05d1\u05d4\u05de\u05e9\u05da:",
-        "TrySynonyms": "\u05dc\u05d0 \u05e8\u05d5\u05d0\u05d4 \u05d0\u05ea \u05d6\u05d4? \u05e0\u05e1\u05d4 \u05db\u05de\u05d4 \u05de\u05d9\u05dc\u05d9\u05dd \u05e0\u05e8\u05d3\u05e4\u05d5\u05ea.",
-        "AddUnderCategory": "\u05d4\u05d5\u05e1\u05e3 \u05d1\u05e7\u05d8\u05d2\u05d5\u05e8\u05d9\u05d4 ...",
-        "Other": "\u05d0\u05d7\u05e8",
-        "Unlisted": "\u05dc\u05d0 \u05e8\u05e9\u05d5\u05dd"
+        "Filter": "ממה אתה נהנה?",
+        "CanAdd": "אם עדיין אינך מוצא את מה שאתה מחפש, תוכל להוסיף עניין חדש בהמשך:",
+        "TrySynonyms": "לא רואה את זה? נסה כמה מילים נרדפות.",
+        "AddUnderCategory": "הוסף בקטגוריה ...",
+        "Other": "אחר",
+        "Unlisted": "לא רשום"
     },
     "chat": {
-        "flaggedForAdminReview": "\u05d4\u05d4\u05d5\u05d3\u05e2\u05d4 \u05e1\u05d5\u05de\u05e0\u05d4 \u05dc\u05d1\u05d3\u05d9\u05e7\u05ea \u05de\u05e0\u05d4\u05dc \u05d4\u05de\u05e2\u05e8\u05db\u05ea. \u05d4\u05e7\u05e9 \u05e9\u05d5\u05d1 \u05db\u05d3\u05d9 \u05dc\u05d1\u05d8\u05dc \u05d0\u05ea \u05d4\u05e6\u05d9\u05dc\u05d5\u05dd.",
-        "noOneSaid": "\u05d0\u05d9\u05e9 \u05dc\u05d0 \u05d0\u05de\u05e8 \u05d3\u05d1\u05e8",
-        "closeChatButton": "\u05e1\u05d2\u05d5\u05e8 \u05e6&#39;\u05d0\u05d8",
-        "closeChatConfirmTitle": "\u05e1\u05d2\u05d5\u05e8 \u05d0\u05ea \u05d4\u05e6&#39;\u05d0\u05d8 \u05d4\u05d6\u05d4?",
-        "closeChatConfirm": "\u05d4\u05d0\u05dd \u05d0\u05ea\u05d4 \u05d1\u05d8\u05d5\u05d7 \u05e9\u05d1\u05e8\u05e6\u05d5\u05e0\u05da \u05dc\u05e1\u05d2\u05d5\u05e8 \u05d0\u05ea \u05d4\u05e6&#39;\u05d0\u05d8 \u05d4\u05d6\u05d4?",
-        "closeChatConfirmYes": "\u05db\u05df",
-        "closeChatConfirmNo": "\u05dc\u05d0",
-        "earlierComments": "\u05d4\u05e2\u05e8\u05d5\u05ea \u05de\u05d5\u05e7\u05d3\u05de\u05d5\u05ea \u05d9\u05d5\u05ea\u05e8"
+        "flaggedForAdminReview": "ההודעה סומנה לבדיקת מנהל המערכת. הקש שוב כדי לבטל את הצילום.",
+        "noOneSaid": "איש לא אמר דבר",
+        "closeChatButton": "סגור צ&#39;אט",
+        "closeChatConfirmTitle": "סגור את הצ&#39;אט הזה?",
+        "closeChatConfirm": "האם אתה בטוח שברצונך לסגור את הצ&#39;אט הזה?",
+        "closeChatConfirmYes": "כן",
+        "closeChatConfirmNo": "לא",
+        "earlierComments": "הערות מוקדמות יותר"
     },
     "notifications": {
-        "*": "\u05d4\u05d5\u05d3\u05e2\u05d4 {{& message.fields.type}} \u05dc {{& stream.fields.title}}",
-        "Streams/chat/message": "{{&call 'avatar.displayName'}} \u05d0\u05de\u05e8:",
-        "Streams/changed": "\u05e9\u05d9\u05e0\u05d5\u05d9\u05d9\u05dd \u05d1 {{stream.fields.title}}",
-        "Streams/invite": "\u05d4\u05d5\u05d6\u05de\u05e0\u05ea \u05dc {{& stream.fields.title}}",
-        "Streams/announcement": "\u05d4\u05db\u05e8\u05d6\u05d4 \u05d1 {{& streams.fields.title}}",
-        "Streams/access": "{{&call 'avatar.displayName'}} \u05e9\u05d9\u05e0\u05d4 \u05d0\u05ea \u05d2\u05d9\u05e9\u05ea \u05d4\u05d6\u05e8\u05dd",
-        "Streams/chat/edit": "\u05d4\u05d5\u05d3\u05e2\u05ea \u05d4\u05e6&#39;\u05d0\u05d8 \u05e0\u05e2\u05e8\u05db\u05d4",
-        "Streams/chat/remove": "\u05d4\u05d5\u05d3\u05e2\u05ea \u05e6&#39;\u05d0\u05d8 \u05d4\u05d5\u05e1\u05e8\u05d4",
-        "Streams/closed": "{{stream.fields.title}} \u05e0\u05e1\u05d2\u05e8",
-        "Streams/task/progress": "\u05d4\u05d4\u05ea\u05e7\u05d3\u05de\u05d5\u05ea \u05d1\u05d5\u05e6\u05e2\u05d4 \u05d1\u05ea\u05d0\u05e8\u05d9\u05da {{stream.fields.title}}",
-        "Streams/task/complete": "\u05d4\u05de\u05e9\u05d9\u05de\u05d4 \u05d4\u05d5\u05e9\u05dc\u05de\u05d4: {{stream.fields.title}}",
-        "Streams/task/error": "\u05e9\u05d2\u05d9\u05d0\u05d4 \u05d1\u05de\u05d4\u05dc\u05da: {{stream.fields.title}}",
-        "Streams/incoming/*": "{{app}}: \u05d4\u05d5\u05d3\u05e2\u05d4 \u05e0\u05db\u05e0\u05e1\u05ea"
+        "*": "הודעה {{& message.fields.type}} ל {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} אמר:",
+        "Streams/changed": "שינויים ב {{stream.fields.title}}",
+        "Streams/invite": "הוזמנת ל {{& stream.fields.title}}",
+        "Streams/announcement": "הכרזה ב {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} שינה את גישת הזרם",
+        "Streams/chat/edit": "הודעת הצ&#39;אט נערכה",
+        "Streams/chat/remove": "הודעת צ&#39;אט הוסרה",
+        "Streams/closed": "{{stream.fields.title}} נסגר",
+        "Streams/task/progress": "ההתקדמות בוצעה בתאריך {{stream.fields.title}}",
+        "Streams/task/complete": "המשימה הושלמה: {{stream.fields.title}}",
+        "Streams/task/error": "שגיאה במהלך: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: הודעה נכנסת",
+        "ManageEmailSubscriptions": "לנהל את מינויי הדוא&quot;ל שלך",
+        "IfUnsubscribe": "אם אתה רוצה לבטל את המנוי"
     },
     "invite": {
-        "messageContent": "{{displayName}} \u05d4\u05d6\u05de\u05d9\u05df \u05d0\u05d5\u05ea\u05da \u05dc {{inviteUrl}}",
+        "messageContent": "{{displayName}} הזמין אותך ל {{inviteUrl}}",
         "dialog": {
-            "chooseFromContacts": "\u05d1\u05d7\u05e8 \u05de\u05ea\u05d5\u05da \u05d0\u05e0\u05e9\u05d9 \u05d4\u05e7\u05e9\u05e8 \u05e9\u05dc\u05da",
-            "selectFromContacts": "\u05d1\u05d7\u05e8 \u05de\u05ea\u05d5\u05da \u05d0\u05e0\u05e9\u05d9 \u05e7\u05e9\u05e8",
-            "photo": "\u05e6\u05dc\u05dd \u05ea\u05de\u05d5\u05e0\u05d4",
-            "photoInstruction": "\u05d0\u05dd \u05d4\u05d0\u05d3\u05dd \u05e9\u05e1\u05e8\u05e7 \u05d0\u05ea \u05e7\u05d5\u05d3 QR \u05e9\u05dc\u05da \u05e0\u05de\u05e6\u05d0 \u05dc\u05e4\u05e0\u05d9\u05da, \u05e6\u05dc\u05dd \u05ea\u05de\u05d5\u05e0\u05d4 \u05e9\u05dc \u05d0\u05d5\u05ea\u05dd",
-            "to": "\u05d0\u05dc: {{Stream Title}}",
-            "go": "\u05dc\u05dc\u05db\u05ea",
-            "title": "\u05dc\u05d4\u05d6\u05de\u05d9\u05df",
-            "placeholder": "\u05de\u05e1\u05e4\u05e8 \u05d8\u05dc\u05e4\u05d5\u05df \u05e0\u05d9\u05d9\u05d3 \u05d0\u05d5 \u05db\u05ea\u05d5\u05d1\u05ea \u05d3\u05d5\u05d0&quot;\u05dc",
-            "orInvite": "\u05d0\u05d5 \u05dc\u05d4\u05d6\u05de\u05d9\u05df \u05d0\u05e0\u05e9\u05d9\u05dd \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea:",
-            "QR": "{{ClickOrTap}} \u05dc\u05d9\u05e6\u05d9\u05e8\u05ea \u05e7\u05d5\u05d3 QR",
-            "QRtitle": "\u05e1\u05e8\u05d5\u05e7 \u05e7\u05d5\u05d3 QR \u05d6\u05d4",
-            "byEmail": "\u05d3\u05d5\u05d0&quot;\u05dc",
-            "byText": "\u05d8\u05e7\u05e1\u05d8",
-            "byFacebook": "\u05e4\u05d9\u05d9\u05e1\u05d1\u05d5\u05e7",
-            "byTwitter": "\u05d8\u05d5\u05d5\u05d9\u05d8\u05e8",
-            "QRscanned": "\u05d4\u05dd \u05e1\u05e8\u05e7\u05d5 \u05d0\u05ea \u05d6\u05d4!"
+            "chooseFromContacts": "בחר מתוך אנשי הקשר שלך",
+            "selectFromContacts": "בחר מתוך אנשי קשר",
+            "photo": "צלם תמונה",
+            "photoInstruction": "אם האדם שסרק את קוד QR שלך נמצא לפניך, צלם תמונה של אותם",
+            "to": "אל: {{Stream Title}}",
+            "go": "ללכת",
+            "title": "להזמין",
+            "placeholder": "מספר טלפון נייד או כתובת דוא&quot;ל",
+            "orInvite": "או להזמין אנשים באמצעות:",
+            "QR": "{{ClickOrTap}} ליצירת קוד QR",
+            "QRtitle": "סרוק קוד QR זה",
+            "byEmail": "דוא&quot;ל",
+            "byText": "טקסט",
+            "byFacebook": "פייסבוק",
+            "byTwitter": "טוויטר",
+            "QRscanned": "הם סרקו את זה!"
         },
         "email": {
-            "subject": "\u05dc\u05dc\u05d0 \u05e9\u05dd: \u05d4\u05d9\u05d9, \u05dc\u05d1\u05d3\u05d5\u05e7 \u05d0\u05ea \u05d6\u05d4",
-            "PleaseVisitLink": "\u05d1\u05e7\u05e8 \u05d1\u05e7\u05d9\u05e9\u05d5\u05e8 \u05d4\u05d1\u05d0:",
-            "InvitingYou": "\u05d0\u05e0\u05d9 \u05de\u05d6\u05de\u05d9\u05df \u05d0\u05d5\u05ea\u05da {{title}}",
-            "HasInvitedYou": "{{displayName}} \u05d4\u05d6\u05de\u05d9\u05df \u05d0\u05d5\u05ea\u05da \u05dc {{title}}"
+            "subject": "ללא שם: היי, לבדוק את זה",
+            "PleaseVisitLink": "בקר בקישור הבא:",
+            "InvitingYou": "אני מזמין אותך {{title}}",
+            "HasInvitedYou": "{{displayName}} הזמין אותך ל {{title}}"
         },
         "sms": {
-            "content": "\u05d4\u05d5\u05d6\u05de\u05e0\u05ea \u05dc {{title}}. \u05d4\u05e7\u05e9 \u05e2\u05dc {{url}}"
+            "content": "הוזמנת ל {{title}}. הקש על {{url}}"
         },
         "notice": {
-            "text": "\u05d4\u05d5\u05d6\u05de\u05e0\u05ea. {{ClickOrTap}} \u05db\u05d0\u05df \u05db\u05d3\u05d9 \u05dc\u05e7\u05d1\u05dc \u05d5\u05dc\u05d4\u05e6\u05d8\u05e8\u05e3."
+            "text": "הוזמנת. {{ClickOrTap}} כאן כדי לקבל ולהצטרף."
         }
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} \u05e4\u05e8\u05e1\u05dd \u05d4\u05d5\u05d3\u05e2\u05d4 <em>{{message.fields.type}}</em> \u05dc- {{stream.fields.title}}"
+            "posted": "{{call 'avatar.displayName'}} פרסם הודעה <em>{{message.fields.type}}</em> ל- {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} \u05d1- {{& url}}: {{& message.fields.content}}"
+            "body": "{{& call 'avatar.displayName'}} ב- {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {
         "mobile": {
-            "alert": "\u05d4\u05d4\u05d6\u05de\u05e0\u05d5\u05ea \u05e0\u05e9\u05dc\u05d7\u05d5\u05ea \u05de\u05d4\u05de\u05e1\u05e4\u05e8 \u05e9\u05dc\u05e0\u05d5, \u05e9\u05d4\u05d7\u05d1\u05e8\u05d9\u05dd \u05e9\u05dc\u05da \u05e2\u05d3\u05d9\u05d9\u05df \u05dc\u05d0 \u05de\u05d6\u05d4\u05d9\u05dd. \u05e2\u05e7\u05d5\u05d1 \u05d0\u05d7\u05e8 \u05d8\u05e7\u05e1\u05d8 \u05e7\u05e6\u05e8 \u05db\u05d3\u05d9 \u05dc\u05d4\u05d5\u05d3\u05d9\u05e2 \u05dc\u05d4\u05dd \u05e2\u05dc \u05d4\u05d4\u05d6\u05de\u05e0\u05d4 \u05e9\u05d4\u05d2\u05d9\u05e2\u05d4 \u05de\u05de\u05da, \u05d5\u05dc\u05d1\u05e7\u05e9 \u05de\u05d4\u05dd \u05dc\u05dc\u05d7\u05d5\u05e5 \u05e2\u05dc \u05d4\u05e7\u05d9\u05e9\u05d5\u05e8.",
-            "confirm": "\u05d4\u05d4\u05d6\u05de\u05e0\u05d5\u05ea \u05e0\u05e9\u05dc\u05d7\u05d5\u05ea \u05de\u05d4\u05de\u05e1\u05e4\u05e8 \u05e9\u05dc\u05e0\u05d5, \u05e9\u05d4\u05d7\u05d1\u05e8\u05d9\u05dd \u05e9\u05dc\u05da \u05e2\u05d3\u05d9\u05d9\u05df \u05dc\u05d0 \u05de\u05d6\u05d4\u05d9\u05dd. \u05d4\u05d0\u05dd \u05d1\u05e8\u05e6\u05d5\u05e0\u05da \u05dc\u05e2\u05e7\u05d5\u05d1 \u05d0\u05d7\u05e8 \u05d8\u05e7\u05e1\u05d8 \u05e7\u05e6\u05e8 \u05db\u05d3\u05d9 \u05dc\u05d4\u05d5\u05d3\u05d9\u05e2 \u05dc\u05d4\u05dd \u05e2\u05dc \u05d4\u05d4\u05d6\u05de\u05e0\u05d4 \u05e9\u05d4\u05d2\u05d9\u05e2\u05d4 \u05de\u05de\u05da, \u05d5\u05dc\u05d1\u05e7\u05e9 \u05de\u05d4\u05dd \u05dc\u05dc\u05d7\u05d5\u05e5 \u05e2\u05dc \u05d4\u05e7\u05d9\u05e9\u05d5\u05e8.",
-            "check": "\u05d4\u05d9\u05d9, \u05db\u05e8\u05d2\u05e2 \u05e9\u05dc\u05d7\u05ea\u05d9 \u05dc\u05da \u05d4\u05d6\u05de\u05e0\u05d4 \u05dc\u05d0\u05e4\u05dc\u05d9\u05e7\u05e6\u05d9\u05d4 {{app}}. \u05d1\u05d3\u05d5\u05e7 \u05d0\u05ea \u05d4- SMS \u05e9\u05dc\u05da \u05d5\u05dc\u05d7\u05e5 \u05e2\u05dc \u05d4\u05e7\u05d9\u05e9\u05d5\u05e8!"
+            "alert": "ההזמנות נשלחות מהמספר שלנו, שהחברים שלך עדיין לא מזהים. עקוב אחר טקסט קצר כדי להודיע להם על ההזמנה שהגיעה ממך, ולבקש מהם ללחוץ על הקישור.",
+            "confirm": "ההזמנות נשלחות מהמספר שלנו, שהחברים שלך עדיין לא מזהים. האם ברצונך לעקוב אחר טקסט קצר כדי להודיע להם על ההזמנה שהגיעה ממך, ולבקש מהם ללחוץ על הקישור.",
+            "check": "היי, כרגע שלחתי לך הזמנה לאפליקציה {{app}}. בדוק את ה- SMS שלך ולחץ על הקישור!"
         },
         "email": {
-            "alert": "\u05d4\u05d4\u05d6\u05de\u05e0\u05d5\u05ea \u05e0\u05e9\u05dc\u05d7\u05d5\u05ea \u05de\u05d4\u05d3\u05d5\u05de\u05d9\u05d9\u05df \u05e9\u05dc\u05e0\u05d5, \u05e9\u05d4\u05d7\u05d1\u05e8\u05d9\u05dd \u05e9\u05dc\u05da \u05e2\u05d3\u05d9\u05d9\u05df \u05dc\u05d0 \u05de\u05d6\u05d4\u05d9\u05dd. \u05e2\u05e7\u05d5\u05d1 \u05d0\u05d7\u05e8 \u05d8\u05e7\u05e1\u05d8 \u05e7\u05e6\u05e8 \u05db\u05d3\u05d9 \u05dc\u05d4\u05d5\u05d3\u05d9\u05e2 \u05dc\u05d4\u05dd \u05e2\u05dc \u05d4\u05d4\u05d6\u05de\u05e0\u05d4 \u05e9\u05d4\u05d2\u05d9\u05e2\u05d4 \u05de\u05de\u05da, \u05d5\u05dc\u05d1\u05e7\u05e9 \u05de\u05d4\u05dd \u05dc\u05dc\u05d7\u05d5\u05e5 \u05e2\u05dc \u05d4\u05e7\u05d9\u05e9\u05d5\u05e8.",
-            "confirm": "\u05d4\u05d4\u05d6\u05de\u05e0\u05d5\u05ea \u05e0\u05e9\u05dc\u05d7\u05d5\u05ea \u05de\u05d4\u05d3\u05d5\u05de\u05d9\u05d9\u05df \u05e9\u05dc\u05e0\u05d5, \u05e9\u05d4\u05d7\u05d1\u05e8\u05d9\u05dd \u05e9\u05dc\u05da \u05e2\u05d3\u05d9\u05d9\u05df \u05dc\u05d0 \u05de\u05d6\u05d4\u05d9\u05dd. \u05d4\u05d0\u05dd \u05d1\u05e8\u05e6\u05d5\u05e0\u05da \u05dc\u05e2\u05e7\u05d5\u05d1 \u05d0\u05d7\u05e8 \u05d8\u05e7\u05e1\u05d8 \u05e7\u05e6\u05e8 \u05db\u05d3\u05d9 \u05dc\u05d4\u05d5\u05d3\u05d9\u05e2 \u05dc\u05d4\u05dd \u05e2\u05dc \u05d4\u05d4\u05d6\u05de\u05e0\u05d4 \u05e9\u05d4\u05d2\u05d9\u05e2\u05d4 \u05de\u05de\u05da, \u05d5\u05dc\u05d1\u05e7\u05e9 \u05de\u05d4\u05dd \u05dc\u05dc\u05d7\u05d5\u05e5 \u05e2\u05dc \u05d4\u05e7\u05d9\u05e9\u05d5\u05e8.",
-            "subject": "\u05e7\u05d9\u05d1\u05dc\u05ea \u05d4\u05d6\u05de\u05e0\u05d4?",
-            "body": "\u05d4\u05d9\u05d9, \u05db\u05e8\u05d2\u05e2 \u05e9\u05dc\u05d7\u05ea\u05d9 \u05dc\u05da \u05d4\u05d6\u05de\u05e0\u05d4 \u05dc\u05d0\u05e4\u05dc\u05d9\u05e7\u05e6\u05d9\u05d4 {{app}}. \u05d1\u05d3\u05d5\u05e7 \u05d0\u05ea \u05d4\u05d3\u05d5\u05d0&quot;\u05dc \u05e9\u05dc\u05da \u05d5\u05dc\u05d7\u05e5 \u05e2\u05dc \u05d4\u05e7\u05d9\u05e9\u05d5\u05e8 \u05e9\u05dd!"
+            "alert": "ההזמנות נשלחות מהדומיין שלנו, שהחברים שלך עדיין לא מזהים. עקוב אחר טקסט קצר כדי להודיע להם על ההזמנה שהגיעה ממך, ולבקש מהם ללחוץ על הקישור.",
+            "confirm": "ההזמנות נשלחות מהדומיין שלנו, שהחברים שלך עדיין לא מזהים. האם ברצונך לעקוב אחר טקסט קצר כדי להודיע להם על ההזמנה שהגיעה ממך, ולבקש מהם ללחוץ על הקישור.",
+            "subject": "קיבלת הזמנה?",
+            "body": "היי, כרגע שלחתי לך הזמנה לאפליקציה {{app}}. בדוק את הדוא&quot;ל שלך ולחץ על הקישור שם!"
         }
+    },
+    "participating": {
+        "Title": "כותרת",
+        "Subscribed": "מנוי",
+        "Participants": "משתתפים"
     }
 }

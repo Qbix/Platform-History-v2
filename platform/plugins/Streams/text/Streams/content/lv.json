@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "Panākumi {{stream.fields.title}}",
         "Streams\/task\/complete": "Uzdevums pabeigts: {{stream.fields.title}}",
         "Streams\/task\/error": "Kļūda laikā: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Ienākošais ziņojums"
+        "Streams\/incoming\/*": "{{app}}: Ienākošais ziņojums",
+        "ManageEmailSubscriptions": "pārvaldiet e-pasta abonementus",
+        "IfUnsubscribe": "Ja vēlaties atcelt abonēšanu"
     },
     "invite": {
         "messageContent": "{{displayName}} uzaicināja jūs uz {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Vai jūs saņēmāt uzaicinājumu?",
             "body": "Hei, es tikai nosūtīju jums uzaicinājumu uz {{app}} lietotni. Lūdzu, pārbaudiet savu e-pastu un noklikšķiniet uz saites!"
         }
+    },
+    "participating": {
+        "Title": "Nosaukums",
+        "Subscribed": "Abonēts",
+        "Participants": "Dalībnieki"
     }
 }

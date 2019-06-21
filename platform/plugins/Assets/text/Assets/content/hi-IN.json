@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "{{call 'publisher.displayName'}} आपके भुगतान के लिए धन्यवाद",
         "SubscribedTo": "{{९९९}} {{१०००}} की सदस्यता ली",
         "YouSubscribedTo": "आपको {{plan.title}} की सदस्यता दी गई है"
+    },
+    "payment": {
+        "AboutOrder": "आदेश के बारे में जानकारी",
+        "PaymentMethod": "भुगतान का तरीका",
+        "ContactInfo": "संपर्क सूचना",
+        "Pay": "वेतन"
+    },
+    "credits": {
+        "InviteAcceptedBy": "{{1}} द्वारा स्वीकृत आमंत्रण",
+        "YouHaveCreditsToStart": "आपके पास शुरू करने के लिए {{1}} क्रेडिट हैं"
     }
 }

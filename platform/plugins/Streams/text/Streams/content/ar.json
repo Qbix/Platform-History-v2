@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "التقدم المحرز في {{stream.fields.title}}",
         "Streams\/task\/complete": "المهمة مكتملة: {{stream.fields.title}}",
         "Streams\/task\/error": "خطأ أثناء: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: رسالة واردة"
+        "Streams\/incoming\/*": "{{app}}: رسالة واردة",
+        "ManageEmailSubscriptions": "إدارة اشتراكات البريد الإلكتروني الخاص بك",
+        "IfUnsubscribe": "إذا كنت ترغب في إلغاء الاشتراك"
     },
     "invite": {
         "messageContent": "{{displayName}} دعاك إلى {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "هل تلقيت دعوة؟",
             "body": "مرحبًا ، لقد أرسلت إليك دعوة إلى تطبيق {{app}}. يرجى التحقق من بريدك الإلكتروني والنقر على الرابط هناك!"
         }
+    },
+    "participating": {
+        "Title": "عنوان",
+        "Subscribed": "المشترك",
+        "Participants": "المشاركين"
     }
 }

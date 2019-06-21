@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Đi",
-            "PasteLinkHere": "Dán một liên kết ở đây"
+            "PasteLinkHere": "Dán một liên kết ở đây",
+            "BrowseTheWeb": "Duyệt",
+            "WriteToStartConversation": "Viết suy nghĩ của bạn để bắt đầu cuộc trò chuyện",
+            "StartConversation": "Bắt đầu hội thoại"
         }
     }
 }
