@@ -18,7 +18,10 @@
 		var WebRTCconference;
 		var _options = {
 			mediaDevicesDialog: true,
-			startWith: {}
+			startWith: {
+				audio: true,
+				video: false
+			}
 		};
 		var _controls = null;
 		var _controlsTool = null;
@@ -197,10 +200,8 @@
 
 				mediaDevicesDialog.appendChild(turnMicOnbtn);
 				mediaDevicesDialog.addEventListener('mouseup', function (e) {
-					navigator.mediaDevices.getUserMedia ({
-						'audio': true,
-						'video': false,
-					}).then(function (stream) {
+					navigator.mediaDevices.getUserMedia(_options.startWith)
+					.then(function (stream) {
 						if(callback) callback(stream);
 						Q.Dialogs.pop();
 					}).catch(function(err) {
@@ -213,6 +214,14 @@
 					className: 'webrtc_tool_participants-list',
 					content: mediaDevicesDialog,
 					apply: true,
+				});
+				
+				navigator.mediaDevices.getUserMedia(_options.startWith)
+				.then(function (stream) {
+					if(callback) callback(stream);
+					Q.Dialogs.pop();
+				}).catch(function(err) {
+					console.error(err.name + ": " + err.message);
 				});
 			}).catch(function (e) {
 				console.error('ERROR: cannot get device info: ' + e.message)
@@ -283,15 +292,16 @@
 					});
 				}
 
-				if(_options.mediaDevicesDialog && _options.startWith.audio){
-					mediaDevicesDialog(
-						function (stream) {
+				if(_options.mediaDevicesDialog) {
+					var startWith = _options.startWith || {};
+					if (startWith.audio || startWith.video) {
+						mediaDevicesDialog(function (stream) {
 							init(stream);
-						}
-					);
-				} else init();
-
-
+						});
+					}
+				} else {
+					init();
+				}
 			});
 		}
 		var updateParticipantData = function() {
@@ -370,13 +380,16 @@
 					window.WebConf = WebRTCconference;
 				}
 
-				if(_options.mediaDevicesDialog && _options.startWith.audio){
-					mediaDevicesDialog(
-						function (stream) {
+				if(_options.mediaDevicesDialog) {
+					var startWith = _options.startWith || {};
+					if (startWith.audio || startWith.video) {
+						mediaDevicesDialog(function (stream) {
 							init(stream);
-						}
-					);
-				} else init();
+						});
+					}
+				} else {
+					init();
+				}
 			});
 		}
 
