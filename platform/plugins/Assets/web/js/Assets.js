@@ -327,11 +327,6 @@
 					});
 				} else if (window.PaymentRequest) {
 					// check for payment request
-					// this method turned off because stripe offer universal interface
-					// which allow to select saved cards from browser and googlePay.
-					// But using window.PaymentRequest with googlePay require to get
-					// merchantId from google (which long and dreary). Instructions to get merchantId:
-					// https://developers.google.com/pay/api/web/guides/test-and-deploy/integration-checklist
 					Assets.Payments.paymentRequestStripe(options, function (err, res) {
 						if (err && (err.code === 9)) {
 							Assets.Payments.standardStripe(options, callback);
@@ -358,8 +353,9 @@
 			 *  @param {Function} [callback]
 			 */
 			googlepay: function (options, callback) {
-				// while we fixing problems with GoolePay
-				return Assets.Payments.standardStripe(options, callback);
+				if (!Q.getObject("Q.Assets.Payments.googlePay")) {
+					return _redirectToBrowserTab(options);
+				}
 
 				sgap.setKey(Assets.Payments.stripe.publishableKey).then(function () {
 					sgap.isReadyToPay()
@@ -385,6 +381,10 @@
 			 *  @param {Function} [callback]
 			 */
 			applePayCordova: function (options, callback) {
+				if (!Q.getObject("Q.Assets.Payments.applePay")) {
+					return _redirectToBrowserTab(options);
+				}
+
 				var supportedNetworks = ['amex', 'discover', 'masterCard', 'visa'];
 				var merchantCapabilities = ['3ds', 'debit', 'credit'];
 
@@ -409,14 +409,16 @@
 						shippingAddressRequirement: options.shippingAddress ? 'all' : 'none',
 						shippingType: options.shippingType || 'service'
 					}).then((paymentResponse) => {
-						// paymentResponse.paymentData - base64 encoded token
+						paymentResponse.id = JSON.parse(atob(paymentResponse.paymentData)); //paymentResponse.paymentData - base64 encoded token
 						options.token = paymentResponse;
 						Assets.Payments.pay('stripe', options, function (err) {
 							if (err) {
 								ApplePay.completeLastTransaction('failure');
+								Q.handle(callback, null, [err]);
 								return console.error(err);
 							}
 							ApplePay.completeLastTransaction('success');
+							Q.handle(callback, null, [null, true]);
 						});
 					});
 				}).catch((err) => {
@@ -446,11 +448,16 @@
 					total: {
 						label: options.description,
 						amount: options.amount
-					},
-					requiredBillingContactFields: options.shippingAddress,
-					requiredShippingContactFields: options.shippingAddress,
-					shippingType: options.shippingType || 'service'
+					}
 				};
+
+				// add shipping option
+				if (options.shippingAddress) {
+					request.requiredBillingContactFields = true;
+					request.requiredShippingContactFields = true;
+					request.shippingType = options.shippingType || 'shipping';
+				}
+
 				var session = Stripe && Stripe.applePay.buildSession(request,
 					function (result, completion) {
 						options.token = result.token;
@@ -756,7 +763,8 @@
 
 	Q.Tool.define({
 		"Assets/subscription": "{{Assets}}/js/tools/subscription.js",
-		"Assets/payment": "{{Assets}}/js/tools/payment.js"
+		"Assets/payment": "{{Assets}}/js/tools/payment.js",
+		"Assets/history": "{{Assets}}/js/tools/history.js"
 	});
 	
 	Q.onInit.set(function () {

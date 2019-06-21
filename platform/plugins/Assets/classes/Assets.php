@@ -117,7 +117,7 @@ abstract class Assets extends Base_Assets
 		$charge->userId = $user->id;
 		$charge->publisherId = Q::ifset($options, 'stream', 'publisherId', '');
 		$charge->streamName = Q::ifset($options, 'stream', 'name', '');
-		$charge->description = Q::ifset($options, 'description', '');
+		$charge->description = Q::ifset($options, 'metadata', 'description', '');
 		$attributes = array(
 			"payments" => $payments,
 			"customerId" => $customerId,
