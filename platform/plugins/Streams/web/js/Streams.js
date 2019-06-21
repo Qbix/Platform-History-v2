@@ -568,7 +568,7 @@ Q.Tool.define({
 	"Streams/import"	   : "{{Streams}}/js/tools/import.js",
 	"Streams/activity"	 : "{{Streams}}/js/tools/activity.js",
 	"Streams/webrtc"	   : "{{Streams}}/js/tools/webrtc/webrtc.js",
-	"Streams/webrtc/controls"  : "{{Streams}}/js/tools/webrtc/controls.js?ts=" + (+new Date),
+	"Streams/webrtc/controls"  : "{{Streams}}/js/tools/webrtc/controls.js",
 	"Streams/image/album": "{{Streams}}/js/tools/album/tool.js",
 	"Streams/default/preview": "{{Streams}}/js/tools/default/preview.js",
 	"Streams/player": function () {
@@ -1118,7 +1118,6 @@ Streams.Dialogs = {
 											Q.Dialogs.pop(); // close the Dialog
 										});
 									});
-
 									$eContacts.data("contacts", contacts);
 									$this.text(text.chooseAgainFromContacts);
 								})

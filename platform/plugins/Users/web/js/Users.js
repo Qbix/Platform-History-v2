@@ -2509,7 +2509,7 @@
 							name: name,
 							prefix: contactType,
 							[contactType]: contact
-						})
+						});
 					}
 					Q.Dialogs.push({
 						title: text.title,
@@ -2533,7 +2533,7 @@
 									let name = $row.find(".Users_contacts_dialog_name").text();
 									let contact = $(this).closest("td").data();
 									let contactType = Object.keys(contact)[0];
-										contact = Q.getObject(contactType, contact);
+									contact = Q.getObject(contactType, contact);
 									if (!contact || $(this).hasClass("checked")) {
 										return;
 									}
