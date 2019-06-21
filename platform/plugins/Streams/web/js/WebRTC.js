@@ -341,7 +341,7 @@
 						stream: stream,
 						sid:  Q.Users.loggedInUser.id,
 						username:  Q.Users.loggedInUser.id + '\t' + Date.now(),
-						startWith: _options.startWith,
+						startWith: _options.startWith || {},
 						turnCredentials: turnCredentials
 					});
 					WebRTCconference.init(function () {
