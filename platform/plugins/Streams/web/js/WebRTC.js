@@ -17,7 +17,8 @@
 	Streams.WebRTC = function Streams_WebRTC() {
 		var WebRTCconference;
 		var _options = {
-			mediaDevicesDialog: true
+			mediaDevicesDialog: true,
+			startWith: {}
 		};
 		var _controls = null;
 		var _controlsTool = null;
@@ -341,7 +342,7 @@
 						stream: stream,
 						sid:  Q.Users.loggedInUser.id,
 						username:  Q.Users.loggedInUser.id + '\t' + Date.now(),
-						startWith: _options.startWith || {},
+						startWith: _options.startWith,
 						turnCredentials: turnCredentials
 					});
 					WebRTCconference.init(function () {
