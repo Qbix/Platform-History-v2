@@ -1125,7 +1125,7 @@
 			// check password
 			step2_form = setupLoginForm();
 		} else if (json.verified) {
-			// let the user gain access by resending an activation message
+			// var the user gain access by resending an activation message
 			step2_form = setupResendForm(true);
 		} else {
 			// remind to activate -- this is probably a futureUser created using an invite
@@ -1819,7 +1819,7 @@
 	 * @param {String} [options.width="200px"]
 	 * @param {String} [options.height="200px"]
 	 * @param {Integer} [options.zIndex=99999]
-	 * @param {boolean} [option.dontStopBeforeShown=false] Don't let Q.Pointer.stopHints stop this hint before it's shown.
+	 * @param {boolean} [option.dontStopBeforeShown=false] Don't var Q.Pointer.stopHints stop this hint before it's shown.
 	 * @param {Boolean} [options.dontRemove=false] Pass true to keep current hints displayed
 	 * @param {String} [options.audio.src] Can be used to play an audio file.
 	 * @param {String} [options.audio.from=0] Number of seconds inside the audio to start playing the audio from. Make sure audio is longer than this.
@@ -2498,18 +2498,19 @@
 					}
 					var selectedContacts = [];
 					function _selectContact(id, name, contact, contactType) {
-						for (let i = 0; i < selectedContacts.length; i++) {
+						for (var i = 0; i < selectedContacts.length; i++) {
 							if(selectedContacts[i].id == id) {
 								selectedContacts.splice(i, 1);
 								break;
 							}
 						}
-						selectedContacts.push({
+						var c = {
 							id: id,
 							name: name,
-							prefix: contactType,
-							[contactType]: contact
-						});
+							prefix: contactType
+						};
+						c[contactType] = contact;
+						selectedContacts.push(c);
 					}
 					Q.Dialogs.push({
 						title: text.title,
@@ -2519,8 +2520,8 @@
 						onActivate: function (dialog) {
 							if (o.data) {
 								selectedContacts = o.data;
-								for (let i = 0; i < selectedContacts.length; i++) {
-									let prefix = Object.keys(selectedContacts[i])[Object.keys(selectedContacts[i]).length-1];
+								for (var i = 0; i < selectedContacts.length; i++) {
+									var prefix = Object.keys(selectedContacts[i])[Object.keys(selectedContacts[i]).length-1];
 									$('[data-rawid='+ selectedContacts[i].id +']', dialog)
 										.find(".Users_contacts_dialog_" + prefix)
 										.addClass("checked");
@@ -2528,11 +2529,11 @@
 							}
 							$('.Users_contacts_dialog_buttons', dialog)
 								.on(Q.Pointer.fastclick, function () {
-									let $row = $(this).closest("tr");
-									let rawid = $row.data("rawid");
-									let name = $row.find(".Users_contacts_dialog_name").text();
-									let contact = $(this).closest("td").data();
-									let contactType = Object.keys(contact)[0];
+									var $row = $(this).closest("tr");
+									var rawid = $row.data("rawid");
+									var name = $row.find(".Users_contacts_dialog_name").text();
+									var contact = $(this).closest("td").data();
+									var contactType = Object.keys(contact)[0];
 									contact = Q.getObject(contactType, contact);
 									if (!contact || $(this).hasClass("checked")) {
 										return;
@@ -2542,7 +2543,7 @@
 									$(this).addClass("checked");
 
 									if (contact.length > 1) {
-										let $this = $(this);
+										var $this = $(this);
 										Users.Dialogs.select({
 											displayName: name,
 											contacts: contact
@@ -2559,13 +2560,13 @@
 								});
 							$('.Users_contacts_dialog_name', dialog)
 								.on(Q.Pointer.fastclick, function () {
-									let $row = $(this).closest("tr");
-									let $email = $row.find(".Users_contacts_dialog_email");
-									let $phone = $row.find(".Users_contacts_dialog_phone");
-									let emailContact = $email.closest("td").data("email");
-									let phoneContact = $phone.closest("td").data("phone");
-									let name = $row.find(".Users_contacts_dialog_name").text();
-									let rawid = $row.data("rawid");
+									var $row = $(this).closest("tr");
+									var $email = $row.find(".Users_contacts_dialog_email");
+									var $phone = $row.find(".Users_contacts_dialog_phone");
+									var emailContact = $email.closest("td").data("email");
+									var phoneContact = $phone.closest("td").data("phone");
+									var name = $row.find(".Users_contacts_dialog_name").text();
+									var rawid = $row.data("rawid");
 
 									$row.addClass("Users_contacts_flash");
 									setTimeout(function () {
@@ -2575,7 +2576,7 @@
 
 									if (Q.getObject('length', emailContact)) {
 										if (emailContact.length > 1) {
-											let $this = $(this);
+											var $this = $(this);
 											Users.Dialogs.select({
 												displayName: name,
 												contacts: emailContact
@@ -2593,7 +2594,7 @@
 										}
 									} else if (Q.getObject('length', phoneContact)) {
 										if (phoneContact.length > 1) {
-											let $this = $(this);
+											var $this = $(this);
 											Users.Dialogs.select({
 												displayName: name,
 												contacts: phoneContact
