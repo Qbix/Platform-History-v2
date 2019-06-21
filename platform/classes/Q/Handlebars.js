@@ -88,6 +88,13 @@ handlebars.registerHelper('toCapitalized', function(text) {
 	return text.charAt(0).toUpperCase() + text.slice(1);
 });
 
+handlebars.registerHelper('json', function(context) {
+	if (typeof context == "object") {
+		return JSON.stringify(context);
+	}
+	return context;
+});
+
 handlebars.registerHelper('interpolate', function(expression) {
 	if (arguments.length < 2) {
 		return '';

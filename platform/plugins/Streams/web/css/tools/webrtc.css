@@ -836,7 +836,7 @@
 .webrtc_tool_desktop-screen .webrtc_tool_chat-participant-video {
     flex: 1;
     background: black;
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
     overflow: hidden;
@@ -1204,7 +1204,7 @@
     width: 100%;
     bottom: 0;
     box-sizing: border-box;
-    z-index: 2;
+    z-index: 99999999999999999999999;
     display: flex;
     justify-content: space-between;
     white-space: nowrap;
@@ -1651,20 +1651,6 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
 }
 .loudest-options-con select::-ms-expand {
     display: none;
-}
-/* Arrow */
-.loudest-options-con::after {
-    content: url('data:image/svg+xml; utf8, <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="9.75 10.5 81.5 81.5" enable-background="new 9.75 10.5 81.5 81.5" xml:space="preserve">  <rect x="12.75" y="52.75" fill="none" stroke="%23FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" width="36.25" height="36.25"/>  <line fill="none" stroke="%23FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="60.5" y1="42.75" x2="75.75" y2="27.5"/>  <polyline fill="none" stroke="%23FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="   63.708,27.5 75.75,27.5 75.75,39.541 "/>  <polyline fill="none" stroke="%23FFFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="   57.75,89 88.25,89 88.25,13.5 12.75,13.5 12.75,44 "/>  </svg>  ');
-    width: 45px;
-    height: 44px;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    padding: 10px 10px;
-    line-height: 1;
-    background: #4aaa4e;
-    pointer-events: none;
-    box-sizing: border-box;
 }
 
 .webrtc_tool_resize-handler {
