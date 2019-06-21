@@ -6665,7 +6665,7 @@ Q.request = function (url, slotNames, callback, options) {
 					var resultFunction = o.resultFunction
 						? Q.getObject(o.resultFunction, iframe.contentWindow)
 						: null;
-					var result = resultFunction ? resultFunction() : undefined;
+					var result = typeof(resultFunction) === 'function' ? resultFunction() : undefined;
 					_Q_request_callback.call(request, null, result, true);
 				}
 			});
