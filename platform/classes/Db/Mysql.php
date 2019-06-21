@@ -142,7 +142,7 @@ class Db_Mysql implements Db_Interface
 
 		// The connection may have already been made with these parameters,
 		// in which case we will just retrieve the existing connection.
-		$this->pdo = Db::pdo($dsn, $username, $password, $driver_options);
+		$this->pdo = Db::pdo($dsn, $username, $password, $driver_options, $connectionName, $shardName);
 		$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$this->shardName = $shardName;
 		$this->dbname = $dsn_array['dbname'];
@@ -540,7 +540,7 @@ class Db_Mysql implements Db_Interface
 	 * @param {string|null} $sql May contain one or more SQL statements.
 	 *  Pass null here for an empty query that you can add other clauses to, e.g. ->commit().
 	 * @param {array} [$bind=array()] An array of parameters to bind to the query, using
-	 * the Db_Query_Mysql->bind method.
+	 * the Db_Query_Mysql->bind method. They are used to replace foo=:foo and bar=?
 	 * @return {Db_Query_Mysql}
 	 */
 	function rawQuery ($sql = null, $bind = array())
