@@ -1,0 +1,75 @@
+.Users_contacts_dialog {
+    width: 100%;
+}
+
+.Users_contacts_dialog:not(.Users_contacts_select) tr:not(:last-child) {
+    border-bottom: 2px solid #444;
+}
+
+.Users_contacts_dialog tr {
+    font-size: 20px;
+}
+
+.Users_contacts_dialog tr.Users_contacts_flash {
+    animation: flash 1s;
+}
+
+.Users_contacts_dialog td {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.Users_contacts_dialog.Users_contacts_select td {
+    padding: 10px;
+}
+
+.Users_contacts_dialog td[data-email] {
+    width: 50px;
+    padding-left: 10px;
+}
+
+.Users_contacts_select .Users_contacts_dialog_buttons {
+    margin-right: 10px;
+}
+
+.Users_contacts_dialog .Users_contacts_dialog_buttons {
+    text-align: center;
+    border: 2px solid #444;
+    border-radius: 100%;
+    padding: 3px;
+    height: 45px;
+    width: 45px;
+    cursor: pointer;
+}
+
+.Users_contacts_dialog .Users_contacts_dialog_buttons.checked {
+    background: #394ad5;
+    border-color: #253584;
+}
+
+.Users_contacts_dialog td[data-email="[]"] .Users_contacts_dialog_email,
+.Users_contacts_dialog td[data-phone="[]"] .Users_contacts_dialog_phone {
+    border-color: #848484;
+}
+
+.Users_contacts_dialog td[data-email="[]"] .Users_contacts_dialog_email i,
+.Users_contacts_dialog td[data-phone="[]"] .Users_contacts_dialog_phone i {
+    color: #bbbbbb;
+}
+
+.Users_contacts_dialog .Users_contacts_dialog_buttons.checked i {
+    color: #ffffff;
+}
+
+.Users_contacts_dialog .Users_contacts_dialog_email i {
+    margin-top: 4px;
+}
+
+.Users_contacts_dialog .Users_contacts_dialog_phone i {
+    margin-top: 3px;
+}
+
+@keyframes flash {
+    from { background-color: #b6b6b6; }
+    to { background-color: inherit; }
+}
