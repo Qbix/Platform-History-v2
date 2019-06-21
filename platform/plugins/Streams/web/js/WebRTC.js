@@ -261,8 +261,7 @@
 						twilioAccessToken: accessToken,
 						useAsLibrary: true,
 						startWith: _options.startWith,
-						stream: stream,
-
+						stream: stream
 					});
 					window.WebConf = WebRTCconference;
 					WebRTCconference.init(function () {
