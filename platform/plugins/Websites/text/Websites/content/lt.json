@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Eik",
-            "PasteLinkHere": "Įklijuokite nuorodą čia"
+            "PasteLinkHere": "Įklijuokite nuorodą čia",
+            "BrowseTheWeb": "Naršyti",
+            "WriteToStartConversation": "Parašykite savo mintis, kad pradėtumėte pokalbį",
+            "StartConversation": "Pradėkite pokalbį"
         }
     }
 }

@@ -299,7 +299,7 @@ abstract class Base_Places_Autocomplete extends Db_Row
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".query");
-		if (strlen($value) > 255)
+		if (strlen($value) > 127)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".query");
 		return array('query', $value);			
 	}
@@ -311,7 +311,7 @@ abstract class Base_Places_Autocomplete extends Db_Row
 	function maxSize_query()
 	{
 
-		return 255;			
+		return 127;			
 	}
 
 	/**
@@ -325,7 +325,7 @@ return array (
   0 => 
   array (
     0 => 'varchar',
-    1 => '255',
+    1 => '127',
     2 => '',
     3 => false,
   ),
@@ -353,7 +353,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".types");
-		if (strlen($value) > 255)
+		if (strlen($value) > 31)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".types");
 		return array('types', $value);			
 	}
@@ -365,7 +365,7 @@ return array (
 	function maxSize_types()
 	{
 
-		return 255;			
+		return 31;			
 	}
 
 	/**
@@ -379,7 +379,7 @@ return array (
   0 => 
   array (
     0 => 'varchar',
-    1 => '255',
+    1 => '31',
     2 => '',
     3 => false,
   ),
@@ -411,7 +411,7 @@ return array (
   0 => 
   array (
     0 => 'double',
-    1 => '255',
+    1 => '31',
     2 => '',
     3 => false,
   ),
@@ -443,7 +443,7 @@ return array (
   0 => 
   array (
     0 => 'double',
-    1 => '255',
+    1 => '31',
     2 => '',
     3 => false,
   ),
@@ -475,7 +475,7 @@ return array (
   0 => 
   array (
     0 => 'double',
-    1 => '255',
+    1 => '31',
     2 => '',
     3 => false,
   ),
@@ -521,7 +521,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '255',
+    1 => '31',
     2 => '',
     3 => false,
   ),
@@ -570,7 +570,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '255',
+    1 => '31',
     2 => '',
     3 => false,
   ),

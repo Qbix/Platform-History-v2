@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Grazzi tal-ħlas tiegħek lil {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} sottoskritt għal {{plan.title}}",
         "YouSubscribedTo": "Inti ġejt sottoskritt għal {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Informazzjoni dwar ordni",
+        "PaymentMethod": "Metodu ta &#39;pagament",
+        "ContactInfo": "Informazzjoni ta &#39;kuntatt",
+        "Pay": "Tħallas"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Stedina aċċettata minn {{1}}",
+        "YouHaveCreditsToStart": "Għandek {{1}} krediti biex tibda"
     }
 }

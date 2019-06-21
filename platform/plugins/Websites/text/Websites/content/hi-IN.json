@@ -2,25 +2,28 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "\u092c\u0922\u093c\u093e\u0935\u093e \u0926\u0947\u0928\u0947 \u0915\u0947 \u0932\u093f\u090f \u0932\u093f\u0902\u0915",
-                "startDate": "\u0906\u0930\u0902\u092d \u0915\u0930\u0928\u0947 \u0915\u0940 \u0924\u093f\u0925\u093f",
-                "startTime": "\u0938\u092e\u092f \u0936\u0941\u0930\u0942",
-                "endDate": "\u0905\u0902\u0924\u093f\u092e \u0924\u093f\u0925\u093f",
-                "endTime": "\u0905\u0902\u0924\u093f\u092e \u0938\u092e\u092f",
-                "budget": "\u092c\u091c\u091f"
+                "link": "बढ़ावा देने के लिए लिंक",
+                "startDate": "आरंभ करने की तिथि",
+                "startTime": "समय शुरू",
+                "endDate": "अंतिम तिथि",
+                "endTime": "अंतिम समय",
+                "budget": "बजट"
             },
             "interests": {
-                "Title": "\u092c\u094d\u092f\u093e\u091c \u0926\u094d\u0935\u093e\u0930\u093e \u092b\u093c\u093f\u0932\u094d\u091f\u0930 \u0915\u0930\u0947\u0902",
-                "FilterInterests": "\u092c\u094d\u092f\u093e\u091c \u0932\u093f\u0916\u0928\u093e \u0936\u0941\u0930\u0942 \u0915\u0930\u0947\u0902 ..."
+                "Title": "ब्याज द्वारा फ़िल्टर करें",
+                "FilterInterests": "ब्याज लिखना शुरू करें ..."
             },
-            "Interest": "\u092c\u094d\u092f\u093e\u091c",
-            "Location": "\u0938\u094d\u0925\u093e\u0928"
+            "Interest": "ब्याज",
+            "Location": "स्थान"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "\u091a\u0932\u0947 \u091c\u093e\u0913",
-            "PasteLinkHere": "\u092f\u0939\u093e\u0902 \u090f\u0915 \u0932\u093f\u0902\u0915 \u092a\u0947\u0938\u094d\u091f \u0915\u0930\u0947\u0902"
+            "Go": "चले जाओ",
+            "PasteLinkHere": "यहां एक लिंक पेस्ट करें",
+            "BrowseTheWeb": "ब्राउज",
+            "WriteToStartConversation": "बातचीत शुरू करने के लिए अपने विचार लिखें",
+            "StartConversation": "बातचीत शुरू करें"
         }
     }
 }

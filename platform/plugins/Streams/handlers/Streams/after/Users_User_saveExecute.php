@@ -31,6 +31,7 @@ function Streams_after_Users_User_saveExecute($params)
 	unset($mf['sessionCount']);
 	unset($mf['insertedTime']);
 	if (empty($mf)) {
+		$processing = false;
 		return;
 	}
 
@@ -122,7 +123,7 @@ function Streams_after_Users_User_saveExecute($params)
 	$rows = Streams_Stream::select('name')->where(array(
 		'publisherId' => $user->id,
 		'name' => $toInsert
-	))->fetchAll(PDO::FETCH_ASSOC);
+	))->ignoreCache()->fetchAll(PDO::FETCH_ASSOC);
 	$existing = array();
 	foreach ($rows as $row) {
 		$existing[$row['name']] = true;

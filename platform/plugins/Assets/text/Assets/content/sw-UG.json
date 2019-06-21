@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Asante kwa malipo yako kwa {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} imesajiliwa {{plan.title}}",
         "YouSubscribedTo": "Umejisajiliwa {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Maelezo kuhusu utaratibu",
+        "PaymentMethod": "Njia ya malipo",
+        "ContactInfo": "Maelezo ya mawasiliano",
+        "Pay": "Kulipa"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Paribisha kukubaliwa na {{1}}",
+        "YouHaveCreditsToStart": "Una mikopo ya {{1}} kuanza"
     }
 }

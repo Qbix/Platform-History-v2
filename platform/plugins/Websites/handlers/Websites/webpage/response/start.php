@@ -8,18 +8,9 @@ function Websites_webpage_response_start($params)
 
 	$r = array_merge($_REQUEST, $params);
 
-	$publisherId = Q::ifset($r, 'publisherId', null);
-	$streamName = Q::ifset($r, 'streamName', null);
 	$message = Q::ifset($r, 'message', null);
 
-	if (!$publisherId) {
-		throw new Exception("publisherId required");
-	}
-	if (!$streamName) {
-		throw new Exception("streamName required");
-	}
-
-	$stream = Streams::fetchOne($userId, $publisherId, $streamName);
+	$stream = Websites_Webpage::createStream($userId, $r['data']);
 
 	if (!$stream) {
 		throw new Exception("stream not found");
@@ -27,7 +18,7 @@ function Websites_webpage_response_start($params)
 
 	$communitiesId = Users::communityId();
 	$mainChatCategory = 'Streams/chats/main';
-	$chatRelationType = 'Streams/chat';
+	$chatRelationType = 'Websites/webpage';
 
 	// if this stream already related, exit
 	if (Streams_RelatedTo::select()->where(array(
@@ -57,12 +48,17 @@ function Websites_webpage_response_start($params)
 	if (!empty($message)) {
 		Streams_Message::post(
 			$userId,
-			$publisherId,
-			$streamName,
+			$stream->publisherId,
+			$stream->name,
 			array(
 				'type' => "Streams/chat/message",
 				'content' => $message
 			)
 		);
 	}
+
+	return array(
+		'publisherId' => $stream->publisherId,
+		'streamName' => $stream->name
+	);
 }

@@ -16,7 +16,7 @@
     },
     "chat": {
         "flaggedForAdminReview": "Boodskap is gemerk vir admin review. Tik weer aan unflag.",
-        "noOneSaid": "Niemand het iets ges\u00ea nie",
+        "noOneSaid": "Niemand het iets gesê nie",
         "closeChatButton": "Sluit klets",
         "closeChatConfirmTitle": "Sluit hierdie klets?",
         "closeChatConfirm": "Is jy seker jy wil hierdie klets sluit?",
@@ -26,7 +26,7 @@
     },
     "notifications": {
         "*": "Boodskap {{& message.fields.type}} na {{& stream.fields.title}}",
-        "Streams/chat/message": "{{&call 'avatar.displayName'}} het ges\u00ea:",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} het gesê:",
         "Streams/changed": "Wysigings in {{stream.fields.title}}",
         "Streams/invite": "U is genooi na {{& stream.fields.title}}",
         "Streams/announcement": "Aankondiging in {{& streams.fields.title}}",
@@ -37,7 +37,9 @@
         "Streams/task/progress": "Vordering gemaak op {{stream.fields.title}}",
         "Streams/task/complete": "Taak voltooi: {{stream.fields.title}}",
         "Streams/task/error": "Fout tydens: {{stream.fields.title}}",
-        "Streams/incoming/*": "{{app}}: Inkomende Boodskap"
+        "Streams/incoming/*": "{{app}}: Inkomende Boodskap",
+        "ManageEmailSubscriptions": "Bestuur jou e-pos intekeninge",
+        "IfUnsubscribe": "As jy wil uitteken"
     },
     "invite": {
         "messageContent": "{{displayName}} het jou genooi na {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Het jy &#39;n uitnodiging gekry?",
             "body": "Haai, ek het jou net &#39;n uitnodiging na die {{app}} -program gestuur. Gaan asseblief jou e-pos en klik die skakel daar in!"
         }
+    },
+    "participating": {
+        "Title": "Titel",
+        "Subscribed": "ingeskryf",
+        "Participants": "deelnemers"
     }
 }

@@ -15,6 +15,7 @@ var Places = Q.Places;
  * @constructor
  * @param {Object} [options] used to pass options
  * @param {Object} [options.changes] what to do when location changes
+ * @param {Boolean|Object} [options.globe] Pass true or options for a Places/globe tool to display a rotating globe instead of a static globe image
  * @param {Number} [options.joinNearby=1] Pass 1 to join to the Places/nearby stream at the new location. Pass 2 to join and subscribe.
  * @param {Number} [options.leaveNearby=2] Pass 1 to unsubscribe from the Places/nearby stream at the old location. Pass 2 to unsubscribe and leave.
  * @param {Number} [options.joinInterests=2] Pass 1 to join to all the local interests at the new location. Pass 2 to join and subscribe.
@@ -75,7 +76,7 @@ Q.Tool.define("Places/user/location", function (options) {
 		});
 		Q.Template.render('Places/user/location', state, function (err, html) {
 			tool.element.innerHTML = html;
-			$te.find('.Places_user_location_container')
+			tool.$('.Places_user_location_container')
 			.addClass('Places_user_location_checking');
 	
 			var pipe = Q.pipe(['info', 'show'], function (params) {
@@ -111,9 +112,22 @@ Q.Tool.define("Places/user/location", function (options) {
 						.addClass('Places_user_location_obtaining');
 					$te.find('.Places_user_location_container')
 						.removeClass('Places_user_location_checking');
-					Q.handle(state.onUnset, tool, [err, stream]);
-					if (!state.onReady.occurred) {
-						Q.handle(state.onReady, tool, [err, stream]);
+					if (state.globe) {
+						var globeOptions = Q.isPlainObject(state.globe) ? state.globe : {};
+						$('<div />').tool('Places/globe', globeOptions).appendTo(
+							tool.$('.Places_user_location_whileObtaining')
+						).activate(function () {
+							Q.handle(state.onUnset, tool, [err, stream]);
+							if (!state.onReady.occurred) {
+								Q.handle(state.onReady, tool, [err, stream]);
+							}
+							this.rotationSpeed(40);
+						});
+					} else {
+						Q.handle(state.onUnset, tool, [err, stream]);
+						if (!state.onReady.occurred) {
+							Q.handle(state.onReady, tool, [err, stream]);
+						}
 					}
 				}
 				setTimeout(function () {
@@ -129,7 +143,7 @@ Q.Tool.define("Places/user/location", function (options) {
 				_submit();
 			});
 	
-			tool.$('.Places_user_location_set, .Places_user_location_update_button')
+			tool.$('.Places_user_location_set, .Places_user_location_update_button, .Places_globe_tool')
 			.on(Q.Pointer.click, function () {
 				var $this = $(this);
 				$this.addClass('Places_obtaining');
@@ -330,6 +344,7 @@ Q.Tool.define("Places/user/location", function (options) {
 		delay: 300,
 		prompt: null
 	},
+	globe: true,
 	changes: {
 		joinNearby: 1,
 		joinInterests: 2,
@@ -349,7 +364,9 @@ Q.Tool.define("Places/user/location", function (options) {
 });
 
 Q.Template.set('Places/user/location', 
-	'<div class="Places_user_location_container Places_user_location_checking">'
+	'<div class="Places_user_location_container Places_user_location_checking '
+	+ '{{#if globe}}Places_user_location_globe{{else}}Places_user_location_noGlobe{{/if}}'
+	+ '">'
 		+ '{{& interested}}'
 		+ '<div class="Places_user_location_whileObtaining">'
 			+ '<div class="Places_user_location_set Q_aspect_where">'

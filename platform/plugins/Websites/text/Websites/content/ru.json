@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Идти",
-            "PasteLinkHere": "Вставьте ссылку сюда"
+            "PasteLinkHere": "Вставьте ссылку сюда",
+            "BrowseTheWeb": "Просматривать",
+            "WriteToStartConversation": "Напишите свои мысли, чтобы начать разговор",
+            "StartConversation": "Начать разговор"
         }
     }
 }

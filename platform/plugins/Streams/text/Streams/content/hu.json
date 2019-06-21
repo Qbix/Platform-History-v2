@@ -37,7 +37,9 @@
         "Streams\/task\/progress": "A {{stream.fields.title}}",
         "Streams\/task\/complete": "Feladat kész: {{stream.fields.title}}",
         "Streams\/task\/error": "Hiba történt a következővel: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Bejövő üzenet"
+        "Streams\/incoming\/*": "{{app}}: Bejövő üzenet",
+        "ManageEmailSubscriptions": "kezelje az e-mail előfizetéseit",
+        "IfUnsubscribe": "Ha le szeretné szüntetni a feliratkozást"
     },
     "invite": {
         "messageContent": "{{displayName}} meghívta Önt a {{inviteUrl}}",
@@ -92,5 +94,10 @@
             "subject": "Meghívást kapott?",
             "body": "Hé, csak küldött neked egy meghívót a {{app}} alkalmazásra. Kérjük, ellenőrizze e-mailjét, és kattintson az ott található linkre!"
         }
+    },
+    "participating": {
+        "Title": "Cím",
+        "Subscribed": "Jegyzett",
+        "Participants": "résztvevők"
     }
 }

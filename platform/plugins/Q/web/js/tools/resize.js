@@ -13,21 +13,29 @@
 
 			var tool = this;
 			tool.state = Q.extend({}, tool.state, options);
-			this.bindEvents();
+			this.eventBinding().bind();
 
 		},
 
 		{
 			active: false,
+			resizeByWheel: true,
+			activateOnElement: null,
 			keepRatioBasedOnElement: null,
 			appliedRecently: false,
-			onCreate: new Q.Event(),
+			onMoved: new Q.Event(),
+			onResized: new Q.Event(),
+			onMovingStart: new Q.Event(),
+			onMovingStop: new Q.Event(),
 			onUpdate: new Q.Event(),
 			onRefresh: new Q.Event()
 		},
 
 
 		{
+			unbindEvents: function () {
+				
+			},
 			deactivate:function () {
 				var tool = this;
 				tool.state.active = false;
@@ -52,14 +60,20 @@
 				} else return tool.element;
 
 			},
-			bindEvents: function () {
+			bindDraggingEvenets: function(){
+
+			},
+			eventBinding: function () {
 				var tool = this;
 				var elementToResize = tool.element;
 				var elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
+				var activateOnElement = tool.state.activateOnElement != null ? tool.state.activateOnElement : elementToMove;
+				var elementComputedStyle = window.getComputedStyle(elementToResize);
+				var moveWithinEl = document.body;
 
-				var _dragElement = (function(){
-					var elementToMove;
+				var _dragElement = (function (){
 					var posX, posY, divTop, divLeft, eWi, eHe, cWi, cHe, diffX, diffY;
+
 					var move = function(xpos,ypos){
 						var currentTop = parseInt(elementToMove.style.top, 10)
 						var currentLeft = parseInt(elementToMove.style.left, 10)
@@ -67,13 +81,16 @@
 						elementToMove.style.top = ypos + 'px';
 
 						if(currentTop != parseInt(ypos, 10) || currentLeft != parseInt(xpos, 10) ) tool.state.appliedRecently = true;
+						if(typeof cordova != "undefined" && window.device.platform === 'iOS') cordova.plugins.iosrtc.refreshVideos();
 					}
+
 					var drag = function(evt){
-						if(Q.info.isMobile && (tool.isScreenResizing || evt.touches.length != 1 || evt.changedTouches.length != 1 || evt.targetTouches.length != 1)) return;
+						if(Q.info.isTouchscreen && (tool.isScreenResizing || evt.touches.length != 1 || evt.changedTouches.length != 1 || evt.targetTouches.length != 1)) return;
 
 						evt = evt || window.event;
-						var posX = Q.info.isMobile ? evt.changedTouches[0].clientX : evt.clientX,
-							posY = Q.info.isMobile ? evt.changedTouches[0].clientY : evt.clientY,
+						evt.preventDefault();
+						var posX = Q.info.isTouchscreen ? evt.changedTouches[0].clientX : evt.clientX,
+							posY = Q.info.isTouchscreen ? evt.changedTouches[0].clientY : evt.clientY,
 							aX = posX - diffX,
 							aY = posY - diffY;
 						if (aX < 0) aX = 0;
@@ -82,54 +99,80 @@
 						if (aY + eHe > cHe) aY = cHe -eHe;
 						move(aX,aY);
 					}
-					var initMoving = function(divid,container,evt){
-						if(!tool.state.active) return;
-						if(!tool.state.movable || (Q.info.isMobile && (tool.isScreenResizing || evt.targetTouches.length != 1))) return;
-						elementToMove = divid;
+
+					var initMoving = function(evt){
+						if(!tool.state.active || evt.button == 1 || evt.button == 2) return;
+
+						if(!tool.state.movable || (Q.info.isTouchscreen && (tool.isScreenResizing || evt.targetTouches.length != 1))) return;
 						var elRect = elementToMove.getBoundingClientRect();
 						if(elementToMove == elementToResize) {
 							elementToMove.style.width = elRect.width + 'px';
 							elementToMove.style.height = elRect.height + 'px';
 						}
-						elementToMove.style.top = elRect.top + 'px';
-						elementToMove.style.left = elRect.left + 'px';
+						var elementPosition = elementToMove.style.position;
+						console.log('elementPosition0', elementPosition,  elementPosition == '')
+
+						elementPosition = elementPosition != '' && elementPosition != null ? elementPosition : elementComputedStyle.position;
+						console.log('elementPosition', elementPosition)
+						if(elementPosition == 'fixed'){
+							elementToMove.style.top = elRect.top + 'px';
+							elementToMove.style.left = elRect.left + 'px';
+						} else if (elementPosition == 'absolute' || elementPosition == 'relative' || elementPosition == 'static') {
+							elementToMove.style.top = elementToMove.offsetTop + 'px';
+							elementToMove.style.left = elementToMove.offsetLeft + 'px';
+						}
+
 						elementToMove.style.transform = '';
-						elementToMove.style.position = 'fixed';
+						elementToMove.style.position = 'absolute';
 						elementToMove.style.cursor = 'grabbing';
+						tool.element.style.boxShadow = '10px -10px 60px 0 rgba(0,0,0,0.5)';
 
 						evt = evt || window.event;
-						posX = Q.info.isMobile ? evt.touches[0].clientX : evt.clientX,
-							posY = Q.info.isMobile ? evt.touches[0].clientY : evt.clientY,
+						posX = Q.info.isTouchscreen ? evt.touches[0].clientX : evt.clientX,
+							posY = Q.info.isTouchscreen ? evt.touches[0].clientY : evt.clientY,
 							divTop = elementToMove.style.top,
 							divLeft = elementToMove.style.left,
 							eWi = parseInt(elementToMove.offsetWidth),
 							eHe = parseInt(elementToMove.offsetHeight),
-							cWi = parseInt(container.offsetWidth),
-							cHe = parseInt(container.offsetHeight);
+							cWi = parseInt(moveWithinEl.offsetWidth),
+							cHe = parseInt(moveWithinEl.offsetHeight);
 						divTop = divTop.replace('px','');
 						divLeft = divLeft.replace('px','');
 						diffX = posX - divLeft, diffY = posY - divTop;
 
-						if(Q.info.isMobile)
-							window.addEventListener('touchmove', drag);
-						else window.addEventListener('mousemove', drag);
+						tool.state.onMovingStart.handle.call(tool);
+						if(Q.info.isTouchscreen) {
+							window.addEventListener('touchmove', drag, { passive: false });
+						} else window.addEventListener('mousemove', drag, { passive: false });
 					}
+
 					var stopMoving = function(container){
-						if(Q.info.isMobile)
-							window.removeEventListener('touchmove', drag)
-						else window.removeEventListener('mousemove', drag)
+						if(Q.info.isTouchscreen) {
+							window.removeEventListener('touchmove', drag, { passive: false });
+						} else window.removeEventListener('mousemove', drag, { passive: false });
 
 						if(elementToMove != null) elementToMove.style.cursor='';
 
-						setTimeout(function () {
-							tool.state.appliedRecently = false;
-						}, 200)
+						tool.element.style.boxShadow = '';
+
+						tool.state.onMovingStop.handle.call(tool);
+
+						if (tool.state.appliedRecently) {
+							tool.state.onMoved.handle.call(tool);
+
+							setTimeout(function () {
+								tool.state.appliedRecently = false;
+							}, 200)
+						}
+
 					}
+
 					return {
 						initMoving: initMoving,
 						stopMoving: stopMoving
 					}
-				})();
+				}())
+
 
 				var resizeElement = (function (e) {
 					var docRect = document.body.getBoundingClientRect();
@@ -142,6 +185,7 @@
 					var _handlerPosition;
 					var _centerPosition;
 					var _centerPositionFromTop;
+					var _elementPosition;
 					var _elLeftBorder;
 					var _elRightBorder;
 					var _elLeftMargin;
@@ -156,15 +200,26 @@
 					var _oldy = null;
 
 					function initialise(e) {
-						if(!tool.state.active) return;
+						if(!tool.state.active || e.button == 1 || e.button == 2) return;
 						e.propertyIsEnumerable();
 						e.stopPropagation();
 						_handlerPosition = e.target.dataset.position;
 						if(_handlerPosition == null) _handlerPosition = 'bottomright';
 						_elementToResize = e.target.parentNode;
+						_elementPosition = _elementToResize.style.position;
 						var elementRect = _elementToResize.getBoundingClientRect();
-						_centerPosition = elementRect.left + elementRect.width / 2;
-						_centerPositionFromTop = elementRect.top + elementRect.height / 2;
+
+						if(_elementPosition == 'fixed'){
+							_centerPosition = elementRect.left + elementRect.width / 2;
+						} else if (_elementPosition == 'absolute') {
+							_centerPosition = _elementToResize.offsetLeft + elementRect.width / 2;
+						}
+
+						if(_elementPosition == 'fixed'){
+							_centerPositionFromTop = elementRect.top + elementRect.height / 2;
+						} else if (_elementPosition == 'absolute') {
+							_centerPositionFromTop = _elementToResize.offsetTop + elementRect.height / 2;
+						}
 
 						_elLeftBorder = elementRect.left;
 						_elRightBorder = elementRect.right;
@@ -209,21 +264,22 @@
 							}
 
 							if (e.pageY <= _oldy) {
-								elementHeight = _latestHeightValue + (_oldy - e.pageY);
+								elementHeight = _latestHeightValue - Math.abs(e.pageY - _oldy);
 							} else if (e.pageY > _oldy) {
-								elementHeight = _latestHeightValue - (e.pageY - _oldy);
+								elementHeight = _latestHeightValue + Math.abs(_oldy - e.pageY);
 							}
 
 						} else if(_handlerPosition == 'topright') {
 							if (e.pageX <= _oldx) {
-								elementWidth = _latestWidthValue - (_oldx - e.pageX);
+								elementWidth = _latestWidthValue - Math.abs(_oldx - e.pageX);
 							} else if (e.pageX > _oldx) {
 								elementWidth = _latestWidthValue + (e.pageX - _oldx);
 							}
+
 							if (e.pageY <= _oldy) {
-								elementHeight = _latestHeightValue - (_oldy - e.pageY);
+								elementHeight = _latestHeightValue + Math.abs(e.pageY - _oldy);
 							} else if (e.pageY > _oldy) {
-								elementHeight = _latestHeightValue + (e.pageY - _oldy);
+								elementHeight = _latestHeightValue - Math.abs(_oldy - e.pageY);
 							}
 
 						} else if(_handlerPosition == 'topleft') {
@@ -240,7 +296,7 @@
 							}
 
 						}
-						console.log('%c resizing1', 'background:green', elementWidth,elementHeight, _ratio);
+
 						if(tool.state.keepRatioBasedOnElement != null) {
 							var baseEl = tool.state.keepRatioBasedOnElement;
 							var srcWidth = baseEl.videoWidth;
@@ -252,7 +308,6 @@
 								elementWidth = Math.floor(elementHeight * ratio);
 							} else {
 								var newElHeight = Math.floor(elementWidth / ratio);
-								console.log('%c resizing1', 'background:green', elementHeight, newElHeight,  currentSize.height, ratio);
 								elementHeight = newElHeight + 50;
 
 							}
@@ -267,29 +322,21 @@
 						}
 
 
-
-
-
-
-
 						if(elementWidth <= _latestWidthValue || elementHeight <= _latestHeightValue) {
 							action = 'reduce';
 						} else {
 							action = 'increase';
 						}
-						console.log('action', action)
-						if(elementWidth <= _minSize || elementHeight <= _minSize || elementHeight > document.body.offsetHeight || elementWidth >= document.body.offsetWidth) {
-							console.log('%c STOP', 'background:red;color:white;')
 
+						if(elementWidth <= _minSize || elementHeight <= _minSize || elementHeight > document.body.offsetHeight || elementWidth >= document.body.offsetWidth) {
 							return;
 						}
 
 						if(action == 'increase' && elementToMove != _elementToResize && (elementToMove.offsetHeight >= document.body.offsetHeight || elementToMove.offsetWidth >= document.body.offsetWidth)) {
-							console.log('%c STOP2', 'background:red;color:white;')
 							return;
 						}
 
-						if(elementToMove.style.position == 'fixed') {
+						if(_elementPosition == 'fixed' || _elementPosition == 'absolute') {
 							elementToMove.style.left = _centerPosition - (elementWidth / 2) + 'px';
 							elementToMove.style.top = _centerPositionFromTop - (elementHeight / 2) + 'px';
 						}
@@ -304,6 +351,7 @@
 						_oldy = e.pageY;
 
 						tool.state.appliedRecently = true;
+						if(typeof cordova != "undefined" && window.device.platform === 'iOS') cordova.plugins.iosrtc.refreshVideos();
 
 					}
 
@@ -317,13 +365,17 @@
 						_ratio = null;
 						_oldx = null;
 						_oldy = null;
-						setTimeout(function () {
-							tool.state.appliedRecently = false;
-						}, 200)
+
+						if(tool.state.appliedRecently) {
+							tool.state.onResized.handle.call(tool);
+							setTimeout(function () {
+								tool.state.appliedRecently = false;
+							}, 200)
+						}
 					}
 
 					function setHandler(element) {
-						if(Q.info.isMobile) {
+						if(Q.info.isTouchscreen) {
 							resizeByPinchGesture(element);
 							return;
 						}
@@ -357,7 +409,7 @@
 						topLeftHandler.dataset.position = 'topleft';
 						element.appendChild(topLeftHandler);
 
-						bindMouseWheelEvent(element);
+						if(tool.state.resizeByWheel) bindMouseWheelEvent(element);
 						resizeHandler.addEventListener('mousedown', initialise)
 						leftBottomHandler.addEventListener('mousedown', initialise)
 						topRightHandler.addEventListener('mousedown', initialise)
@@ -367,12 +419,28 @@
 
 					function resizeByPinchGesture(element) {
 						_elementToResize = element;
+
 						element.addEventListener('touchstart', function () {
-							_startResizingByPinch()
+							_startResizingByPinch();
 						});
 					}
 
 					function _startResizingByPinch(e) {
+						_elementPosition = _elementToResize.style.position;
+						var elementRect = _elementToResize.getBoundingClientRect();
+
+						if(_elementPosition == 'fixed'){
+							_centerPosition = elementRect.left + elementRect.width / 2;
+						} else if (_elementPosition == 'absolute') {
+							_centerPosition = _elementToResize.offsetLeft + elementRect.width / 2;
+						}
+
+						if(_elementPosition == 'fixed'){
+							_centerPositionFromTop = elementRect.top + elementRect.height / 2;
+						} else if (_elementPosition == 'absolute') {
+							_centerPositionFromTop = _elementToResize.offsetTop + elementRect.height / 2;
+						}
+
 						ratio = _elementToResize.offsetWidth / _elementToResize.offsetHeight;
 						window.addEventListener('touchend', _stopResizingByPinch);
 						window.addEventListener('touchmove', resizeByPinch);
@@ -383,6 +451,7 @@
 						touch1 = touch2 = prevPosOfTouch1 = prevPosOfTouch2 = _latestHeightValue = _latestWidthValue = ratio = null;
 						window.removeEventListener('touchend', _stopResizingByPinch);
 						window.removeEventListener('touchmove', resizeByPinch);
+						tool.state.onMoved.handle.call(tool);
 					}
 
 					var touch1, touch2, prevPosOfTouch1, prevPosOfTouch2, ratio;
@@ -448,11 +517,17 @@
 
 
 						if(elementWidth <= _minSize || elementHeight <= _minSize || elementHeight > document.body.offsetHeight || elementWidth >= document.body.offsetWidth) {
-							return
+							return;
+						}
+
+						if(_elementPosition == 'fixed' || _elementPosition == 'absolute') {
+							_elementToResize.style.left = _centerPosition - (elementWidth / 2) + 'px';
+							_elementToResize.style.top = _centerPositionFromTop - (elementHeight / 2) + 'px';
 						}
 
 						_elementToResize.style.width = elementWidth + 'px';
 						_elementToResize.style.height = elementHeight + 'px';
+						if(typeof cordova != "undefined" && window.device.platform === 'iOS') cordova.plugins.iosrtc.refreshVideos();
 
 						_latestWidthValue = elementWidth;
 						_latestHeightValue = elementHeight;
@@ -466,8 +541,22 @@
 					function onWheel(e) {
 						_elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
 						var elRect = _elementToMove.getBoundingClientRect();
-						if(_centerPosition == null) _centerPosition = elRect.left + elRect.width / 2;
-						if(_centerPositionFromTop == null) _centerPositionFromTop = elRect.top + elRect.height / 2;
+						var elementPosition = elementToMove.style.position;
+						if(_centerPosition == null) {
+							if(elementPosition == 'fixed'){
+								_centerPosition = elRect.left + elRect.width / 2;
+							} else if (elementPosition == 'absolute') {
+								_centerPosition = _elementToMove.offsetLeft + elRect.width / 2;
+							}
+						}
+						if(_centerPositionFromTop == null){
+							if(elementPosition == 'fixed'){
+								_centerPositionFromTop = elRect.top + elRect.height / 2;
+							} else if (elementPosition == 'absolute') {
+								_centerPositionFromTop = _elementToMove.offsetTop + elRect.height / 2;
+							}
+
+						}
 						//e = e || window.event;
 						//var currentTarget = document.elementFromPoint(e.clientX, e.clientY);
 						//if(_elementToResize == null) _elementToResize = e.target;
@@ -497,7 +586,7 @@
 						}
 
 						var elRect = _elementToResize.getBoundingClientRect();
-						if(elementToMove.style.position == 'fixed') {
+						if(elementPosition == 'fixed' || elementPosition == 'absolute') {
 							elementToMove.style.left = _centerPosition - (elRect.width / 2) + 'px';
 							elementToMove.style.top = _centerPositionFromTop - (elRect.height / 2) + 'px';
 						}
@@ -518,7 +607,6 @@
 
 							}
 						}
-						console.log('%c resizing1', 'background:green', elementWidth, elementHeight);
 
 						_elementToResize.style.width = elementWidth + 'px';
 						_elementToResize.style.height = elementHeight + 'px';
@@ -535,12 +623,12 @@
 						_resetInitPosTimeout = setTimeout(function () {
 							_centerPosition = null;
 							_centerPositionFromTop = null;
+							tool.state.onMoved.handle.call(tool);
 						}, 1000)
 					}
 
 					function bindMouseWheelEvent(elem) {
 						_elementToResize = elem;
-
 						if (elem.addEventListener) {
 							if ('onwheel' in document) {
 								// IE9+, FF17+, Ch31+
@@ -563,46 +651,40 @@
 					}
 				})();
 
-				if(Q.info.isMobile) {
-					elementToMove.addEventListener('touchstart', function (e) {
-						_dragElement.initMoving(e.currentTarget, document.body, e)
-					});
-					elementToMove.addEventListener('touchend', function (e) {
-						_dragElement.stopMoving(document.body)
-					});
-				} else {
-
-					elementToMove.addEventListener('mousedown', function (e) {
-						_dragElement.initMoving(e.currentTarget, document.body, e)
-						//e.preventDefault();
-						//e.stopPropagation();
-					});
-					elementToMove.addEventListener('mouseup', function (e) {
-						_dragElement.stopMoving(document.body)
-						//e.preventDefault();
-						//e.stopPropagation();
-					});
-				}
-
-				resizeElement.setHandler(elementToResize);
-
-
-				(function(e){
-					e.closest = e.closest || function(css){
-						var node = this;
-
-						while (node) {
-							if (node.matches(css)) return node;
-							else node = node.parentElement;
+				return {
+					bind: function () {
+						if(Q.info.isTouchscreen) {
+							activateOnElement.addEventListener('touchstart', _dragElement.initMoving);
+							activateOnElement.addEventListener('touchend', _dragElement.stopMoving);
+						} else {
+							activateOnElement.addEventListener('mousedown', _dragElement.initMoving);
+							activateOnElement.addEventListener('mouseup', _dragElement.stopMoving);
 						}
-						return null;
-					}
-				})(Element.prototype);
 
+						tool.unbindEvents = function () {
+							activateOnElement.removeEventListener('mousedown', _dragElement.initMoving);
+							activateOnElement.removeEventListener('mouseup', _dragElement.stopMoving);
+							activateOnElement.removeEventListener('mousedown', _dragElement.initMoving);
+							activateOnElement.removeEventListener('mouseup', _dragElement.stopMoving);
+						}
+						resizeElement.setHandler(elementToResize);
+					}
+				}
 			},
 		}
 
 	);
 
+	(function(e){
+		e.closest = e.closest || function(css){
+			var node = this;
+
+			while (node) {
+				if (node.matches(css)) return node;
+				else node = node.parentElement;
+			}
+			return null;
+		}
+	})(Element.prototype);
 
 })(window.jQuery, window);

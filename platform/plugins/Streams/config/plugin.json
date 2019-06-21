@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "1.0.7",
+				"version": "1.0.8",
 				"compatible": "0.9",
 				"requires": {"Users": "1.0.4"},
 				"permissions": ["Streams/icons"],
@@ -40,6 +40,7 @@
 		"routes@start": {
 			"s/:publisherId/:streamName[]": {"module": "Streams", "action": "stream"},
 			"i/:token": {"module": "Streams", "action": "invited"},
+			"Streams/participating": {"module": "Streams", "action": "participating"},
 			"Q/plugins/Streams/invite/:token": {"module": "Streams", "action": "invite"},
 			"Q/plugins/Streams/:action": {"module": "Streams"}
 		},
@@ -185,7 +186,8 @@
 					},
 					"Streams/chat/message": {
 						"description": "A chat message was posted",
-						"subject": ["Streams/content", ["notifications", "Streams/chat/message"]]
+						"subject": ["Streams/content", ["notifications", "Streams/chat/message"]],
+						"autosubscribe": true
 					},
 					"Streams/chat/edit": {
 						"description": "A chat message was edited",
@@ -386,6 +388,16 @@
 				"defaults": {
 					"title": "Conversation",
 					"icon": "Streams/chat"
+				}
+			},
+			"Streams/webrtc": {
+				"description": "real time video/audio conference",
+				"defaults": {
+					"title": "Real Time Conference",
+					"icon": "Streams/webrtc"
+				},
+				"messages": {
+					"Streams/webrtc/joined": {}
 				}
 			},
 			"Streams/experience": {

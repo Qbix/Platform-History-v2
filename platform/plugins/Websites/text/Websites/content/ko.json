@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "가기",
-            "PasteLinkHere": "여기에 링크 붙여 넣기"
+            "PasteLinkHere": "여기에 링크 붙여 넣기",
+            "BrowseTheWeb": "검색",
+            "WriteToStartConversation": "대화를 시작할 생각을 남기세요.",
+            "StartConversation": "대화 시작"
         }
     }
 }

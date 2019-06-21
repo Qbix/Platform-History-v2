@@ -542,6 +542,7 @@ abstract class Streams extends Base_Streams
 	 *  specifically for $asUserId . Make sure to call the methods 
 	 *  testReadLevel(), testWriteLevel() and testAdminLevel()
 	 *  on these streams before using them on the user's behalf.
+	 * @throws {Q_Exception_MissingRow} If the stream is missing
 	 */
 	static function fetchOne(
 		$asUserId,
@@ -1103,6 +1104,7 @@ abstract class Streams extends Base_Streams
 			// simulate calls to beforeSave, to update avatars and do other stuff
 			$s = new Streams_Stream($tc);
 			$s->beforeSave($tc);
+			$s->fields['insertedTime'] = new Db_Expression('CURRENT_TIMESTAMP');
 			$toCreate[$s->name] = $s->fields;
 			$streams[$s->name] = $s;
 			
@@ -1689,14 +1691,13 @@ abstract class Streams extends Base_Streams
 			if (isset($relatedToArray[$sn])) {
 				continue;
 			}
-			if (!isset($relatedToArray[$sn])) {
-				// at least one new relation will be inserted
-				if (isset($options['weight'])) {
-					$parts = explode('+', "$options[weight]");
-					if (count($parts) > 1) {
-						$calculateWeights = $parts[1];
-						break;
-					}
+
+			// at least one new relation will be inserted
+			if (isset($options['weight'])) {
+				$parts = explode('+', "$options[weight]");
+				if (count($parts) > 1) {
+					$calculateWeights = $parts[1];
+					break;
 				}
 			}
 		}
@@ -1818,7 +1819,10 @@ abstract class Streams extends Base_Streams
 		$relatedFrom_messages = array();
 		$relatedTo_messages = array();
 		foreach ($$arrayField as $sn) {
-			
+			if (isset($relatedToArray[$sn])) {
+				continue;
+			}
+
 			$category = ($arrayField === 'toStreamName') ? $categories[$sn] : reset($categories);
 			$stream = ($arrayField === 'fromStreamName') ? $streams[$sn] : reset($streams);
 			$weight = (isset($options['weight']) && is_numeric($options['weight']))
@@ -4228,35 +4232,43 @@ abstract class Streams extends Base_Streams
 	 * Streams/userInviteUrl/signature/length.
 	 * The "sig" may be missing if the Q/internal/secret config is empty.
 	 * @param {string} $userId The id of the user for whom to generate this url
+	 * @param {string} $appUrl The url to bring the user to
+	 * @param {string} [$streamName=null] Optional stream
 	 * @param {Streams_Invite} [&$invite=null] You can pass a variable reference here
 	 *  to be filled with the Streams_Invite object.
 	 * @return {string}
 	 */
-	static function userInviteUrl($userId, &$invite = null)
+	static function userInviteUrl(
+		$userId, 
+		$appUrl, 
+		$streamName = 'Streams/user/profile',
+		&$invite = null)
 	{
 		$expires = time() + Q_Config::get('Streams', 'invites', 'expires', 86400);
-		$fields = array(compact('userId', 'expires'));
+		$fields = array(
+			'u' => $userId,
+			'e' => $expires
+		);
 		$len = Q_Config::get('Streams', 'invites', 'signature', 'length', 10);
-		$fields = Q_Utils::sign($fields, array('sig'));
-		if (!empty($fields['sig'])) {
-			$fields['sig'] = substr($fields['sig'], 0, $len);
+		$fields = Q_Utils::sign($fields, array('s'));
+		if (!empty($fields['s'])) {
+			$fields['s'] = substr($fields['s'], 0, $len);
 		}
-		$streamName = 'Streams/userInviteUrl';
+		$streamName = 'Streams/user/profile';
 		$stream = Streams::fetchOne($userId, $userId, $streamName);
 		if (!$stream) {
-			$stream = Streams::create($userId, $userId, 'Streams/text/url', array(
-				'name' => 'Streams/userInviteUrl',
-				'title' => 'User Invite URL'
+			$stream = Streams::create($userId, $userId, 'Streams/resource', array(
+				'name' => $streamName
 			));
-			$ret = $stream->invite(array('token' => true));
+			$ret = $stream->invite(array('token' => true, 'appUrl' => $appUrl));
 			$invite = $ret['invite'];
-			$userInviteUrl = $invite->url() . '?' . http_build_query($fields, null, '&');
-			$stream->content = $userInviteUrl;
+			$userInviteUrl = $invite->url();
+			$stream->setAttribute('userInviteUrl', $userInviteUrl);
 			$stream->changed();
 		} else {
-			$userInviteUrl = $stream->content;
+			$userInviteUrl = $stream->getAttribute('userInviteUrl');
 		}
-		return $userInviteUrl;
+		return $userInviteUrl . '?' . http_build_query($fields, null, '&');
 	}
 	
 	protected static function afterFetchExtended($publisherId, $streams)

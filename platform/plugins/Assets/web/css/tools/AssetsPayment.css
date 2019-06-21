@@ -1,0 +1,138 @@
+.Q_tool.Assets_payment_tool .Assets_pay {
+	text-align: center;
+}
+#page .Q_tool.Assets_payment_tool .Assets_gpay {
+	width: 100px;
+	background-image: url('../../img/gpay.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 80%;
+}
+.Assets_payment_Gpay_preload {
+	position: absolute;
+	padding: 10px;
+	top: 100%;
+	left: 0;
+	right: 0;
+	background-color: #fff;
+	transition: top 0.8s ease;
+	font-size: 14px;
+}
+.Assets_payment_Gpay_preload .ApGp_header {
+	position: relative;
+	height: 70px;
+}
+.Assets_payment_Gpay_preload .ApGp_header > * {
+	position: absolute;
+}
+.Assets_payment_Gpay_preload .ApGp_header .ApGp_header_icon {
+	left: 0;
+	top: 0;
+	width: 70px;
+	height: 70px;
+	background-image: url('/img/icon/400.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 80%;
+}
+.Assets_payment_Gpay_preload .ApGp_header h2 {
+	left: 70px;
+	top: 15px;
+	font-size: 14px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 70%;
+	white-space: nowrap;
+}
+.Assets_payment_Gpay_preload .ApGp_header .ApGp_header_url {
+	left: 70px;
+	top: 37px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 70%;
+	white-space: nowrap;
+}
+.Assets_payment_Gpay_preload .ApGp_header .ApGp_header_url[data-secured=true] {
+	padding-left: 20px;
+	background-image: url('../../img/greenLock.png');
+	background-repeat: no-repeat;
+	background-position: center left;
+	background-size: contain;
+}
+.Assets_payment_Gpay_preload .ApGp_header .ApGp_header_url[data-secured=true] .ApGp_header_url_protocol {
+	color: #0c7f45;
+}
+.Assets_payment_Gpay_preload .ApGp_header .ApGp_header_close {
+	width: 20px;
+	height: 20px;
+	right: 0;
+	top: 0;
+	background-image: url('../../img/close.png');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: contain;
+}
+.Assets_payment_Gpay_preload .ApGp_prodInfo,
+.Assets_payment_Gpay_preload .ApGp_methodInfo,
+.Assets_payment_Gpay_preload .ApGp_contactInfo {
+	border-bottom: 1px solid #edeced;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+}
+.Assets_payment_Gpay_preload .ApGp_contactInfo {
+	border-bottom: none;
+}
+.Assets_payment_Gpay_preload .ApGp_text {
+	font-size: 12px;
+	color: #568acf;
+}
+.Assets_payment_Gpay_preload .ApGp_prodInfo_name,
+.Assets_payment_Gpay_preload .ApGp_prodInfo_price {
+	display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	vertical-align: top;
+}
+.Assets_payment_Gpay_preload .ApGp_prodInfo_price {
+	text-transform: uppercase;
+	width: 30%;
+	text-align: right;
+}
+.Assets_payment_Gpay_preload .ApGp_prodInfo_price span {
+	font-weight: bold;
+}
+.Assets_payment_Gpay_preload .ApGp_prodInfo_name {
+	width: 70%;
+}
+.Assets_payment_Gpay_preload .ApGp_methodInfo_name {
+	background-image: url('../../img/gpay.png');
+	background-repeat: no-repeat;
+	background-position: right center;
+	background-size: contain;
+}
+.Assets_payment_Gpay_preload .ApGp_pay {
+	text-align: right;
+}
+.Assets_payment_Gpay_preload .ApGp_pay button {
+	background-color: #1c73e9;
+	color: #fff;
+	padding: 5px 20px;
+	border: none;
+	border-radius: 3px;
+}
+.Assets_payment_Gpay_bg {
+	position: fixed;
+	top: 0;
+	bottom: 100%;
+	left: 0;
+	right: 100%;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+/* preload some images */
+body::after{
+	position:absolute; width:0; height:0; overflow:hidden; z-index:-1;
+	content: url('../../img/gpay.png') url('/img/icon/400.png') url('../../img/greenLock.png') url('../../img/close.png');
+}

@@ -252,6 +252,8 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		avatar: avatar,
 		config: Q.Config.getAll()
 	};
+	// set baseUrl
+	fields.baseUrl = Q.getObject("config.Q.web.appRootUrl", fields);
 	var message = this;
 	var messageType = this.fields.type;
 	var subject = Streams.Stream.getConfigField(

@@ -321,8 +321,8 @@ Q.PHPJS = {
 	                                                                            // only
 	              phpjs.locale = d.getElementsByTagNameNS(NS_XHTML, 'html')[0].lang;
 	          }
-	      } else if (d.getElementsByTagName('html')[0] && d.getElementsByTagName('html')[0].lang) {
-	          phpjs.locale = d.getElementsByTagName('html')[0].lang;
+	      } else if (d.document.documentElement && d.document.documentElement.lang) {
+	          phpjs.locale = d.document.documentElement.lang;
 	      }
 	  }
 	  phpjs.locale = phpjs.locale.replace('-', '_'); // PHP-style

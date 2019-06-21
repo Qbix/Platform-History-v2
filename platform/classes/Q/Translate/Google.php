@@ -12,15 +12,6 @@ class Q_Translate_Google {
 		list($fromLang, $locale) = preg_split("/(_|-)/", $this->parent->options['source']);
 		$in = $this->parent->getSrc($fromLang, $locale, true);
 		foreach ($this->parent->locales as $toLang => $localeNames) {
-			if (!empty($this->parent->options['in']) && !empty($this->parent->options['out'])) {
-				if (($fromLang == $toLang)
-				&& ($this->parent->options['in'] === $this->parent->options['out'])) {
-					foreach ($localeNames as $localeName) {
-						$this->saveLocale($toLang, $localeName, $res, $jsonFiles);
-					}
-					continue;
-				}
-			}
 			if (($toLang === $fromLang) && $this->parent->options['out']) {
 				$res = $in;
 			}
@@ -30,6 +21,15 @@ class Q_Translate_Google {
 				$res = $this->translate($fromLang, $toLang, $in, $out);
 			}
 			$this->saveJson($toLang, $res, $jsonFiles);
+			if (!empty($this->parent->options['in']) && !empty($this->parent->options['out'])) {
+				if (($fromLang == $toLang)
+					&& ($this->parent->options['in'] === $this->parent->options['out'])) {
+					foreach ($localeNames as $localeName) {
+						$this->saveLocale($toLang, $localeName, $res, $jsonFiles);
+					}
+					continue;
+				}
+			}
 			foreach ($localeNames as $localeName) {
 				$this->saveLocale($toLang, $localeName, $res, $jsonFiles);
 			}
@@ -47,7 +47,7 @@ class Q_Translate_Google {
 				$tree = new Q_Tree();
 				$tree->load($localeFile);
 				$tree->merge($arr);
-				$tree->save($localeFile, array(), null, JSON_PRETTY_PRINT);
+				$tree->save($localeFile, array(), null, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 			} else {
 				copy($langFile, $localeFile);
 			}

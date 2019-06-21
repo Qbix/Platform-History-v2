@@ -8,10 +8,6 @@
     -webkit-transform-origin: 0 0;
 }
 
-.Assets_pay {
-    text-align: center;
-}
-
 .Assets_subscribe, .Assets_payment {
     margin: 10px;
 }
@@ -46,9 +42,9 @@
 	overflow: auto;
 }
 
-.Assets_aspect_business, .Assets_aspect_business:before,
-.Assets_aspect_deals, .Assets_aspect_deals:before { color: #e3892f; border-color: #e3892f; }
-.Assets_aspect_funds, .Assets_aspect_funds:before { color: #742e7f; border-color: #742e7f; }
+.Assets_aspect_business, .Assets_aspect_business::before,
+.Assets_aspect_deals, .Assets_aspect_deals::before { color: #e3892f; border-color: #e3892f; }
+.Assets_aspect_funds, .Assets_aspect_funds::before { color: #742e7f; border-color: #742e7f; }
 .Q_button.Assets_aspect_business,
 .Q_button.Assets_aspect_deals {
 	background: #e3892f; /* for non-css3 browsers */

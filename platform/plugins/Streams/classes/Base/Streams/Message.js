@@ -91,7 +91,7 @@ Q.mixin(Base, Row);
  * @property content
  * @type String
  * @default ""
- * short human-readable content, like twitter and its 140 characters
+ * store human-readable content here
  */
 /**
  * @property instructions
@@ -620,7 +620,7 @@ Base.prototype.beforeSet_content = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".content");
-		if (typeof value === "string" && value.length > 1023)
+		if (typeof value === "string" && value.length > 4095)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".content");
 		return value;
 };
@@ -631,7 +631,7 @@ Base.prototype.beforeSet_content = function (value) {
 	 */
 Base.prototype.maxSize_content = function () {
 
-		return 1023;
+		return 4095;
 };
 
 	/**
@@ -640,7 +640,7 @@ Base.prototype.maxSize_content = function () {
 	 */
 Base.column_content = function () {
 
-return [["varchar","1023","",false],false,"",null];
+return [["varchar","4095","",false],false,"",null];
 };
 
 /**
@@ -658,7 +658,7 @@ Base.prototype.beforeSet_instructions = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".instructions");
-		if (typeof value === "string" && value.length > 4092)
+		if (typeof value === "string" && value.length > 8191)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".instructions");
 		return value;
 };
@@ -669,7 +669,7 @@ Base.prototype.beforeSet_instructions = function (value) {
 	 */
 Base.prototype.maxSize_instructions = function () {
 
-		return 4092;
+		return 8191;
 };
 
 	/**
@@ -678,7 +678,7 @@ Base.prototype.maxSize_instructions = function () {
 	 */
 Base.column_instructions = function () {
 
-return [["varchar","4092","",false],false,"",null];
+return [["varchar","8191","",false],false,"",null];
 };
 
 /**

@@ -16,4 +16,4 @@ class Db_Exception_Blocked extends Db_Exception
 	 */
 };
 
-Db_Exception::add('Db_Exception_Blocked', 'shard \'$shard_name\' for connection \'$connection\' is temporary blocked for writing');
+Db_Exception::add('Db_Exception_Blocked', 'shard \'$shard_name\' for connection \'$connection\' is temporarily blocked for writing');

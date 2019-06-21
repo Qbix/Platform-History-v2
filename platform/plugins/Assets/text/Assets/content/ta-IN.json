@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "{{call 'publisher.displayName'}} க்கான உங்கள் கட்டணத்திற்கு நன்றி",
         "SubscribedTo": "{{plan.title}} க்கு சந்தாதாரராக {{call 'user.displayName'}}",
         "YouSubscribedTo": "நீங்கள் {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "ஒழுங்கு பற்றிய தகவல்",
+        "PaymentMethod": "கட்டணம் செலுத்தும் முறை",
+        "ContactInfo": "தொடர்பு தகவல்",
+        "Pay": "செலுத்த"
+    },
+    "credits": {
+        "InviteAcceptedBy": "ஏற்றுக்கொள்ளப்பட்ட அழைப்பை {{999} by",
+        "YouHaveCreditsToStart": "தொடங்க உங்களுக்கு {{1}} வரவு உள்ளது"
     }
 }

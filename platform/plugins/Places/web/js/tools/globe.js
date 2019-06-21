@@ -12,7 +12,11 @@ var Places = Q.Places;
  * @class Places globe
  * @constructor
  * @param {Object} [options] used to pass options
+ * @param {Object} [options.center] the initial coordinates to rotate to
+ * @param {Number} [options.center.latitude] the initial latitude to rotate to
+ * @param {Number} [options.center.longitude] the initial longitude to rotate to
  * @param {String} [options.countryCode=null] the initial country to rotate to and highlight
+ * @param {String} [options.rotateOnClick=null] whether to handle clicks and rotate the globe when they happen
  * @param {Array} [options.highlight={}] pairs of {countryCode: color},
  *   if color is true then state.colors.highlight is used.
  *   This is modified by the default handler for beforeRotateToCountry added by this tool.
@@ -45,22 +49,24 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 		tool.$canvas = $('<canvas />').attr({
 			width: $te.outerWidth(),
 			height: $te.outerHeight()
-		}).appendTo($te)
-		.on(Q.Pointer.fastclick, tool, function(event) {
-			var ll = tool.getCoordinates(event);
-			tool.geocoder.geocode(
-				{'location': { lat: ll.latitude, lng: ll.longitude }},
-				function(results, status) {
-					if (status === google.maps.GeocoderStatus.OK && results[0]) {
-						var countryCode = _getComponent(results[0], 'country');
-						tool.rotateToCountry(countryCode);
-					} else {
-						tool.rotateTo(ll.latitude, ll.longitude);
+		}).appendTo($te);
+		if (state.rotateOnClick) {
+			tool.$canvas.on(Q.Pointer.fastclick, tool, function(event) {
+				var ll = tool.getCoordinates(event);
+				tool.geocoder.geocode(
+					{'location': { lat: ll.latitude, lng: ll.longitude }},
+					function(results, status) {
+						if (status === google.maps.GeocoderStatus.OK && results[0]) {
+							var countryCode = _getComponent(results[0], 'country');
+							tool.rotateToCountry(countryCode);
+						} else {
+							tool.rotateTo(ll.latitude, ll.longitude);
+						}
+						Q.handle(state.onSelect, [ll.latitude, ll.longitude, countryCode]);
 					}
-					Q.handle(state.onSelect, [ll.latitude, ll.longitude, countryCode]);
-				}
-			);
-		});
+				);
+			});
+		}
 		
 		if (!state.radius) {
 			state.radius = 0.9;
@@ -169,11 +175,16 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 
 { // default options here
 	countryCode: null,
+	rotateOnClick: false,
 	colors: {
 		oceans: '#2a357d',
 		land: '#389631',
 		borders: '#008000',
 		highlight: '#ff0000'
+	},
+	center: {
+		latitude: 0,
+		longitude: 0
 	},
 	highlight: {},
 	radius: null,
@@ -211,7 +222,11 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 			var waitForTopoJsonLoad = setInterval(_a, 50);
 			function _a() {
 				if (!Q.getObject('globe.plugins.topojson.world', tool)) return;
-				tool.rotateToCountry(state.countryCode);
+				if (state.countryCode) {
+					tool.rotateToCountry(state.countryCode, 0);	
+				} else if (state.center) {
+					tool.rotateTo(state.center.latitude, state.center.longitude, 0);
+				}
 				clearInterval(waitForTopoJsonLoad);
 				Q.handle(state.onRefresh, tool);
 			}
@@ -247,24 +262,29 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 			duration = tool.state.duration;
 		}
 		var projection = tool.globe.projection;
+		var c = tool.state.center;
+		tool.state.center = {
+			latitude: latitude,
+			longitude: longitude
+		};
+		if (tool.animation) {
+			tool.animation.pause();
+		}
 		if (duration === 0) {
 			return projection.rotate([-longitude, -latitude]);
 		}
 		Q.handle(tool.state.beforeRotate, tool, [latitude, longitude, duration]);
-		d3.transition()
-			.duration(duration)
-			.tween('rotate', function() {
-				var r = d3.interpolate(projection.rotate(), [-longitude, -latitude]);
-				tool.center = {
-					latitude: latitude,
-					longitude: longitude
-				};
-				return function(t) {
-					projection.rotate(r(t));
-					callback && callback.apply(this, arguments);
-				};
-			})
-			.transition();
+		tool.animation = Q.Animation.play(function (x, y) {
+			var latitude2 = c.latitude + (latitude - c.latitude) * y;
+			var longitude2 = c.longitude + (longitude - c.longitude) * y;
+			if (longitude2 < 180) {
+				longitude2 = longitude2 + 360;
+			}
+			if (longitude2 > -180) {
+				longitude2 = longitude2 - 360;
+			}
+			projection.rotate([-longitude2, -latitude2]);
+		}, duration);
 	}),
 		
 	/**
@@ -332,9 +352,42 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 		if (!globe.plugins.pings) return;
 		globe.plugins.pings.add(longitude, latitude, { 
 			color: color || state.pings.color, 
+			lineWidth: 2,
 			ttl: duration || state.pings.duration, 
 			angle: size || state.pings.size
 		});
+	},
+	
+	/**
+	 * Starts globe rotating at the given angular speed, pass 0 to stop rotating.
+	 * @param {Number} longitudeSpeed The number of longitude degrees to rotate in 1 second
+	 */
+	rotationSpeed: function (longitudeSpeed, fps) {
+		var tool = this;
+		tool.rotationInterval && clearInterval(tool.rotationInterval);
+		if (!longitudeSpeed) {
+			return;
+		}
+		fps = fps || 50;
+		tool.rotationInterval = setInterval(function () {
+			if (!tool.globe || !tool.state.center) return;
+			var longitude = tool.state.center.longitude
+				+ (longitudeSpeed * fps / 1000);
+			var ms = fps;
+			if (longitude > 360 * 10000 + 180) {
+				longitude = longitude % 360 - 360;
+			}
+			if (longitude < -360 * 10000 - 180) {
+				longitude = longitude % 360 + 360;
+			}
+			tool.rotateTo(tool.state.center.latitude, longitude, ms);
+		}, fps);
+	},
+	
+	Q: {
+		beforeRemove: function () {
+			clearInterval(this.rotationInterval);
+		}
 	}
 	
 });

@@ -20,7 +20,10 @@
     "webpage": {
         "composer": {
             "Go": "Vés",
-            "PasteLinkHere": "Enganxa un enllaç aquí"
+            "PasteLinkHere": "Enganxa un enllaç aquí",
+            "BrowseTheWeb": "Navegueu",
+            "WriteToStartConversation": "Escriviu els vostres pensaments per començar la conversa",
+            "StartConversation": "Inicia la conversa"
         }
     }
 }

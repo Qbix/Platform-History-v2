@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "Eskerrik asko {{call 'publisher.displayName'}} zerbitzura ordaintzeagatik",
         "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} (e) n harpidetu da",
         "YouSubscribedTo": "{{plan.title}} zerbitzuan harpidetu zara"
+    },
+    "payment": {
+        "AboutOrder": "Ordena buruzko informazioa",
+        "PaymentMethod": "Ordainketa modua",
+        "ContactInfo": "Harremanetarako informazioa",
+        "Pay": "Ordaindu"
+    },
+    "credits": {
+        "InviteAcceptedBy": "{999}} -k onartutako gonbidapena",
+        "YouHaveCreditsToStart": "{{1}} kreditu dituzu hasteko"
     }
 }

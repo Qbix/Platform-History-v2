@@ -33,6 +33,11 @@ function Places_geolocation_post()
 	$stream = Places_Location::userStream();
 	$oldLatitude = $stream->getAttribute('latitude');
 	$oldLongitude = $stream->getAttribute('longitude');
+
+	if (empty($oldLatitude) || empty($oldLongitude)) {
+		$created = true;
+	}
+
 	$oldMeters = $stream->getAttribute('meters');
 	$fields = array(
 		'accuracy',
@@ -207,5 +212,6 @@ function Places_geolocation_post()
 			);
 		}
 	}
+	$attributes['created'] = $created;
 	Q::event("Places/geolocation", $attributes, 'after');
 }

@@ -8,5 +8,15 @@
         "ThankYouForYourPayment": "{{call 'publisher.displayName'}} ಗೆ ನಿಮ್ಮ ಪಾವತಿಯ ಧನ್ಯವಾದಗಳು",
         "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} ಗೆ ಚಂದಾದಾರರಾಗಿದ್ದಾರೆ",
         "YouSubscribedTo": "ನೀವು {{plan.title}} ಗೆ ಚಂದಾದಾರರಾಗಿರುವಿರಿ"
+    },
+    "payment": {
+        "AboutOrder": "ಆದೇಶದ ಬಗೆಗಿನ ಮಾಹಿತಿ",
+        "PaymentMethod": "ಪಾವತಿ ವಿಧಾನ",
+        "ContactInfo": "ಸಂಪರ್ಕ ಮಾಹಿತಿ",
+        "Pay": "ಪಾವತಿ"
+    },
+    "credits": {
+        "InviteAcceptedBy": "ಆಹ್ವಾನಿಸಿ {{1}}",
+        "YouHaveCreditsToStart": "ಪ್ರಾರಂಭಿಸಲು ನೀವು {{1}} ಸಾಲಗಳನ್ನು ಹೊಂದಿದ್ದೀರಿ"
     }
 }

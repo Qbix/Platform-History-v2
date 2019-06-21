@@ -15,6 +15,14 @@
 		"writeLevel": 0,
 		"adminLevel": 0
 	},
+	"Streams/user/profile": {
+		"type": "Streams/user/profile",
+		"title": "User Profile",
+		"icon": "Streams/profile",
+		"readLevel": 40,
+		"writeLevel": 0,
+		"adminLevel": 0
+	},
 	"Streams/invited": {
 		"type": "Streams/invited",
 		"title": "Invited",

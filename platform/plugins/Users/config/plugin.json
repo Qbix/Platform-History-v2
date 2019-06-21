@@ -28,7 +28,7 @@
 		},
 		"routes@start": {
 			"login/facebook": {"module": "Users", "action": "facebook"},
-			"Users/session": {"module": "Users", "action": "session"},
+			"session": {"module": "Users", "action": "session"},
 			"Users/authorize": {"module": "Users", "action": "authorize"},
 			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
 			"Q/plugins/Users/:action": {"module": "Users"},
