@@ -93,7 +93,7 @@ Q.Tool.define("Assets/payment", function (options) {
 		}
 
 		// use plugin cordova-plugin-stripe-google-apple-pay for google pay
-		if (typeof sgap === 'object' && Q.info.isAndroid()) {
+		if (typeof sgap === 'object' && Q.info.isAndroid() && Q.getObject("Q.plugins.Assets.Payments.googlePay")) {
 			payments = 'googlepay';
 			templateName = "Assets/payment/gpay";
 		}
