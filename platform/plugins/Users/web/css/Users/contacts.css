@@ -1,3 +1,13 @@
+
+.Users_contacts_display {
+	margin: 0 auto;
+}
+.Users_contacts_display td {
+	text-align: left;
+}
+.Users_contacts_display td span {
+	margin: 0;
+}
 .Users_contacts_dialog {
     width: 100%;
 }
