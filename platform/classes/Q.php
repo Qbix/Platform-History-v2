@@ -1260,7 +1260,7 @@ class Q
 			$timestamp = true;
 		}
 		if (false === Q::event('Q/log', compact(
-			'message', 'timestamp', 'error_log_arguments'
+			'message', 'timestamp'
 		), 'before')) {
 			return;
 		}
