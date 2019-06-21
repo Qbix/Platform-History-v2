@@ -1,0 +1,9 @@
+<table class="Users_contacts_display">
+{{#each contacts}}
+	<tr>
+		<td><i class='qp-communities-{{this.prefix}}'></i></td>
+		<td><span>{{this.name}}</span></td>
+	</tr>
+{{/each}}
+</table>
+<button class="Q_button Streams_invite_submit_contact">{{text.inviteSelectedContacts}}</button>

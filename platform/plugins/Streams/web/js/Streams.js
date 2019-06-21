@@ -1086,21 +1086,38 @@ Streams.Dialogs = {
 							.on(Q.Pointer.fastclick, function () {
 								var $this = $(this);
 								var $eContacts = $(".Streams_invite_contacts", dialog);
-								$eContacts.html("");
+								$eContacts.empty();
+								$eContacts.data("contacts", null);
+
 								var options = {
 									prefix: "Users",
 									data: $eContacts.data("contacts") || null
-								}
+								};
 
 								Users.Dialogs.contacts(options, function (contacts) {
-									if (!contacts) {
+									if (!contacts || Q.getObject('length', contacts) <= 0) {
 										return;
 									}
-									for (let i = 0; i < contacts.length; i++) {
-										let prefix = (Object.keys(contacts[i])[Object.keys(contacts[i]).length-1] == "email" )? "email": "mobile";
-										$eContacts.append("<div><i class='qp-communities-"+ prefix +"'></i><span>"+ contacts[i].name +"</span></div>")
-									}
 
+									Q.Template.render("Users/templates/contacts/display", {
+										contacts: contacts,
+										text: text
+									}, function (err, html) {
+										if (err) {
+											return;
+										}
+
+										$eContacts.html(html);
+
+										$("button.Streams_invite_submit_contact", $eContacts).on(Q.Pointer.fastclick, function () {
+											contacts.forEach(function(contact) {
+												Q.handle(callback, Streams, [{
+													identifier: contact[contact.prefix]
+												}]);
+											});
+											Q.Dialogs.pop(); // close the Dialog
+										});
+									});
 									$eContacts.data("contacts", contacts);
 									$this.text(text.chooseAgainFromContacts);
 								})
