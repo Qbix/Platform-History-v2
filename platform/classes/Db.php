@@ -565,8 +565,14 @@ abstract class Db
 	 * @param {array} $driver_options Driver options
 	 * @return {PDO}
 	 */
-	static function pdo ($dsn, $username, $password, $driver_options)
-	{
+	static function pdo (
+		$dsn,
+		$username,
+		$password,
+		$driver_options,
+		$connection = null,
+		$shard_name = null
+	) {
 		$key = $dsn . $username . $password . serialize($driver_options);
 		if (isset(self::$pdo_array[$key])) {
 			return self::$pdo_array[$key];
@@ -584,7 +590,8 @@ abstract class Db
 			if (class_exists('Q_Config') and Q_Config::get('Db', 'exceptions', 'log', true)) {
 				Q::log($e);
 			}
-			throw $e;
+			$exception = new Db_Exception_Connect(compact('connection', 'shard_name'));
+			throw $exception; // so we don't reveal connection details in some PHP instances
 		}
 		return self::$pdo_array[$key];
 	}
