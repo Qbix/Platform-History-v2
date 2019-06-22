@@ -441,7 +441,7 @@
 			 *  @param {Function} [callback]
 			 */
 			applePayStripe: function (options, callback) {
-				if (!Assets.Payments.stripe.applePayAvailable) {
+				if (!Q.getObject("Payments.stripe.applePayAvailable", Assets)) {
 					return callback(_error('Apple pay is not available', 21));
 				}
 				var request = {
