@@ -744,8 +744,7 @@ WebRTCconferenceLib = function app(options){
 
 		function attachTrack(track, participant) {
 			if(_debug) console.log('attachTrack track', track);
-			if(_debug) console.log('attachTrack track', track);
-			if(_debug) console.log('attachTrack local stream', localParticipant.videoStream);
+			if(_debug) console.log('attachTrack participant', typeof participant);
 
 			var screenToAttach;
 			var curRoomScreens = roomScreens.filter(function (obj) {
@@ -790,7 +789,6 @@ WebRTCconferenceLib = function app(options){
 				craetAudioeAnalyser(track, participant)
 
 			}
-			if(_debug) console.log('attachTrack local stream 2', localParticipant.videoStream);
 
 			screenToAttach.screensharing = track.screensharing == true ? true : false;
 
@@ -2803,11 +2801,12 @@ WebRTCconferenceLib = function app(options){
 						videoInputDevices.push(device);
 						for (var x in localParticipant.tracks) {
 							var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
+							if (_debug) console.log('loadDevicesList device obj', JSON.stringify(Object.keys(device)));
 							if (_debug) console.log('loadDevicesList device id', device.deviceId);
 							if (_debug) console.log('loadDevicesList device label', device.label);
 							if (_debug) console.log('loadDevicesList track label', mediaStreamTrack.id);
 							try {
-								if (_debug) console.log('loadDevicesList mediaStreamTrack: ' + JSON.stringify(Object.keys(mediaStreamTrack)));
+								if (_debug) console.log('loadDevicesList mediaStreamTrack: ' + JSON.stringify(Object.keys(mediaStreamTrack.getConstrains())));
 							} catch (e) {
 								console.log('ERRRRRRRRROOOOR: ' + e.message);
 
@@ -3463,7 +3462,7 @@ WebRTCconferenceLib = function app(options){
 			});
 		}
 
-		function addTrack(track) {
+		function addTrack(track, stream) {
 			if(options.mode == 'twilio') {
 				var participant = localParticipant.twilioInstance;
 				participant.publishTrack(track).then(function (publication) {
@@ -3474,6 +3473,9 @@ WebRTCconferenceLib = function app(options){
 					trackToAttach.mediaStreamTrack = twilioTrack.mediaStreamTrack;
 					trackToAttach.kind = twilioTrack.kind;
 					trackToAttach.twilioReference = twilioTrack;
+					if(typeof cordova != "undefined" && _isiOS) {
+						trackToAttach.stream = stream;
+					}
 					app.screensInterface.attachTrack(trackToAttach, localParticipant);
 					if(track.kind == 'video')
 						app.conferenceControl.enableVideo();
@@ -3485,6 +3487,9 @@ WebRTCconferenceLib = function app(options){
 				var trackToAttach = new Track();
 				trackToAttach.mediaStreamTrack = track;
 				trackToAttach.kind = track.kind;
+				if(typeof cordova != "undefined" && _isiOS) {
+					trackToAttach.stream = stream;
+				}
 				app.screensInterface.attachTrack(trackToAttach, localParticipant);
 				if(track.kind == 'video')
 					app.conferenceControl.enableVideo();
@@ -4183,6 +4188,15 @@ WebRTCconferenceLib = function app(options){
 		}
 
 
+		function joinRoom(stream, mediaDevicesList) {
+			app.eventBinding.socketRoomJoined((stream != null ? [stream] : []));
+			app.conferenceControl.loadDevicesList(mediaDevicesList);
+
+			app.event.dispatch('joined');
+			if(callback != null) callback();
+		}
+
+
 		cordova.plugins.iosrtc.enumerateDevices(function(mediaDevicesList){
 			if(_debug) console.log('initOrConnectConversation mediaDevicesList: ' + mediaDevicesList.length);
 			var mediaDevices = mediaDevicesList;
@@ -4209,9 +4223,16 @@ WebRTCconferenceLib = function app(options){
 				};
 			}
 
+			/*if((audioDevices == 0 && videoDevices == 0) || (!options.audio && !options.video)){
+				if(_debug) console.log('initOrConnectConversation no stream needed');
+				//TODO: make screenEl if there are no devices available
+				joinRoom(null, mediaDevices);
+				return;
+			}*/
+
 			console.log('videoConstrains ' + videoConstrains)
 			console.log('audioDevices ' + (audioDevices != 0 && options.audio))
-			if(audioDevices != 0 && options.audio && 2<1) {
+			if(audioDevices != 0 && options.audio) {
 				cordova.plugins.iosrtc.getUserMedia(
 					{
 						audio: true,

@@ -234,7 +234,7 @@
 								.then(function (stream) {
 									var tracks = stream.getTracks();
 									for (var t in tracks) {
-										WebRTCconference.conferenceControl.addTrack(tracks[t]);
+										WebRTCconference.conferenceControl.addTrack(tracks[t], stream);
 									}
 									Q.Dialogs.pop();
 								}).catch(function (err) {
@@ -256,7 +256,7 @@
 					.then(function (stream) {
 						var tracks = stream.getTracks();
 						for(var t in tracks) {
-							WebRTCconference.conferenceControl.addTrack(tracks[t]);
+							WebRTCconference.conferenceControl.addTrack(tracks[t], stream);
 						}
 						Q.Dialogs.pop();
 						navigator.mediaDevices.enumerateDevices().then(function (mediaDevices) {
@@ -414,13 +414,14 @@
 							screensRendering.updateLayout();
 						}
 					);
+
+					var startWith = _options.startWith || {};
+					if (startWith.audio || startWith.video) {
+						publishMediaTracks();
+					}
 				});
 				window.WebConf = WebRTCconference;
 
-				var startWith = _options.startWith || {};
-				if (startWith.audio || startWith.video) {
-					publishMediaTracks();
-				}
 
 			});
 		}
@@ -1755,7 +1756,7 @@
 		function enableiOSDebug() {
 			var ua=navigator.userAgent;
 			if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
-				/*console.stdlog = console.log.bind(console);
+				console.stdlog = console.log.bind(console);
 				console.log = function (txt) {
 
 					if(!socket || socket && !socket.connected) return;
@@ -1777,7 +1778,7 @@
 					} catch (e) {
 
 					}
-				}*/
+				}
 			}
 			console.stderror = console.error.bind(console);
 
@@ -1817,7 +1818,9 @@
 
 					var errorMessage = "\n\n" + today + " Error: " + txt + ', ' +  argumentsString + "\nurl: " + location.origin + "\nline: ";
 
-					if(typeof err != 'undefined' && typeof err.stack != 'undefined')
+					if(typeof err != 'undefined' && typeof err.lineNumber != 'undefined') {
+						errorMessage = errorMessage + err.lineNumber + "\n " + ua+ "\n";
+					} else if(typeof err != 'undefined' && typeof err.stack != 'undefined')
 						errorMessage = errorMessage + err.stack + "\n " + ua+ "\n";
 					else errorMessage = errorMessage + "\n " + ua + "\n";
 					socket.emit('errorlog', errorMessage);
