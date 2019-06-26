@@ -452,9 +452,11 @@ class Q_Response
 	{
 		if (is_array($name)) {
 			foreach ($name as $k => $v) {
-				self::setMeta($k, $v, $slotName);
+				if (isset($v)) {
+					self::setMeta($k, $v, $slotName);
+				}
 			}
-			exit;
+			return;
 		}
 		self::$metas[$name] = $content;
 
