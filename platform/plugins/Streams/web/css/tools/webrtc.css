@@ -1599,6 +1599,12 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
 .participants-list-btns button{
     box-shadow: 0 5px 20px -5px #0048b5;
 }
+.webrtc_tool_devices_dialog .webrtc_tool_devices_dialog_inner{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 .webrtc_tool_disconnect-btn,
 .webrtc_tool_enable-microphone-btn,
 .Q_touchscreen .Q_button.webrtc_tool_enable-microphone-btn,
@@ -1613,6 +1619,7 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
 .webrtc_tool_enable-microphone-btn span,
 .webrtc_tool_disconnect-btn span {
     margin-left:10px;
+    margin-right:10px;
 }
 
 .webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_disconnect-btn svg,

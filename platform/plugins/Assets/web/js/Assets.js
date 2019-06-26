@@ -353,7 +353,8 @@
 			 *  @param {Function} [callback]
 			 */
 			googlepay: function (options, callback) {
-				if (!Q.getObject("Q.Assets.Payments.googlePay")) {
+				var googlePayConfig = Q.getObject("Q.Assets.Payments.googlePay");
+				if (!googlePayConfig) {
 					return _redirectToBrowserTab(options);
 				}
 
@@ -381,7 +382,8 @@
 			 *  @param {Function} [callback]
 			 */
 			applePayCordova: function (options, callback) {
-				if (!Q.getObject("Q.Assets.Payments.applePay")) {
+				var applePayConfig = Q.getObject("Q.Assets.Payments.applePay");
+				if (!applePayConfig) {
 					return _redirectToBrowserTab(options);
 				}
 
@@ -402,7 +404,7 @@
 						}],
 						supportedNetworks: supportedNetworks,
 						merchantCapabilities: merchantCapabilities,
-						merchantIdentifier: Q.getObject("Payments.applePay.merchantIdentifier", Assets),
+						merchantIdentifier: applePayConfig.merchantIdentifier,
 						currencyCode: options.currency,
 						countryCode: 'US',
 						billingAddressRequirement: options.shippingAddress ? 'all' : 'none',
@@ -439,7 +441,7 @@
 			 *  @param {Function} [callback]
 			 */
 			applePayStripe: function (options, callback) {
-				if (!Assets.Payments.stripe.applePayAvailable) {
+				if (!Q.getObject("Payments.stripe.applePayAvailable", Assets)) {
 					return callback(_error('Apple pay is not available', 21));
 				}
 				var request = {

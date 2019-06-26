@@ -39,7 +39,8 @@ WebRTCconferenceLib = function app(options){
 		mode: 'twilio',
 		nodeServer: 'https://www.demoproject.co.ua:8443',
 		useAsLibrary: false,
-		startWith: { audio: true, video: false },
+		audio: true,
+		video: false,
 		stream: null,
 		twilioAccessToken: null,
 		disconnectTime: 3000,
@@ -2794,46 +2795,53 @@ WebRTCconferenceLib = function app(options){
 		var hoverTimeout = {setttingsPopup:null, participantsPopup:null};
 
 		function loadDevicesList(mediaDevicesList) {
-			if(mediaDevicesList != null) mediaDevices = mediaDevicesList;
-			var i, device;
-			for(i = 0; device = mediaDevices[i]; i++){
-				if(_debug) console.log('loadDevicesList', device.label);
-				if (device.kind.indexOf('video') != -1) {
-					videoInputDevices.push(device);
-					for(var x in localParticipant.tracks) {
-						var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
-						if(_debug) console.log('loadDevicesList device id', device.deviceId);
-						if(_debug) console.log('loadDevicesList device label', device.label);
-						if(_debug) console.log('loadDevicesList track label', mediaStreamTrack.id);
-						try {
-							if (_debug) console.log('loadDevicesList mediaStreamTrack: ' + JSON.stringify(Object.keys(mediaStreamTrack)));
-						} catch (e){
-							console.log('ERRRRRRRRROOOOR: ' + e.message);
+			if(mediaDevicesList != null) {
+				var i, device;
+				for (i = 0; device = mediaDevicesList[i]; i++) {
+					if (_debug) console.log('loadDevicesList', device.label);
+					if (device.kind.indexOf('video') != -1) {
+						videoInputDevices.push(device);
+						for (var x in localParticipant.tracks) {
+							var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
+							if (_debug) console.log('loadDevicesList device id', device.deviceId);
+							if (_debug) console.log('loadDevicesList device label', device.label);
+							if (_debug) console.log('loadDevicesList track label', mediaStreamTrack.id);
+							try {
+								if (_debug) console.log('loadDevicesList mediaStreamTrack: ' + JSON.stringify(Object.keys(mediaStreamTrack)));
+							} catch (e) {
+								console.log('ERRRRRRRRROOOOR: ' + e.message);
 
+							}
+							if (!(typeof cordova != 'undefined' && _isiOS)) {
+								if (mediaStreamTrack.enabled == true && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label || mediaStreamTrack.label == device.label)) {
+									frontCameraDevice = currentCameraDevice = device;
+								}
+							}
 						}
-						if(!(typeof cordova != 'undefined' && _isiOS)) {
-							if (mediaStreamTrack.enabled == true && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label || mediaStreamTrack.label == device.label)) {
-								frontCameraDevice = currentCameraDevice = device;
+					}
+					if (device.kind.indexOf('audio') != -1) {
+						audioInputDevices.push(device);
+						for (var x in localParticipant.tracks) {
+							var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
+
+							if (!(typeof cordova != 'undefined' && _isiOS)) {
+								if (mediaStreamTrack.enabled == true && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label || mediaStreamTrack.label == device.label)) {
+									currentAudioDevice = device;
+								}
 							}
 						}
 					}
 				}
-				if (device.kind.indexOf('audio') != -1) {
-					audioInputDevices.push(device);
-					for(var x in localParticipant.tracks) {
-						var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
-
-						if(!(typeof cordova != 'undefined' && _isiOS)) {
-							if (mediaStreamTrack.enabled == true && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label || mediaStreamTrack.label == device.label)) {
-								currentAudioDevice = device;
-							}
-						}
-					}
-				}
+			} else if (navigator.mediaDevices || navigator.mediaDevices.enumerateDevices) {
+				navigator.mediaDevices.enumerateDevices().then(function (mediaDevicesList) {
+					loadDevicesList(mediaDevicesList);
+				}).catch(function () {
+					console.error('ERROR: cannot get device info');
+				});
 			}
-			if(_debug) console.log('currentCameraDevice', currentCameraDevice)
-			if(_debug) console.log('currentAudioDevice', currentAudioDevice)
-			if(_debug) console.log('frontCameraDevice', frontCameraDevice)
+			if(_debug) console.log('currentCameraDevice', currentCameraDevice);
+			if(_debug) console.log('currentAudioDevice', currentAudioDevice);
+			if(_debug) console.log('frontCameraDevice', frontCameraDevice);
 		}
 
 		function getVideoDevices() {
@@ -3455,6 +3463,38 @@ WebRTCconferenceLib = function app(options){
 			});
 		}
 
+		function addTrack(track) {
+			if(options.mode == 'twilio') {
+				var participant = localParticipant.twilioInstance;
+				participant.publishTrack(track).then(function (publication) {
+
+					var twilioTrack = publication.track;
+					var trackToAttach = new Track();
+					trackToAttach.sid = twilioTrack.sid;
+					trackToAttach.mediaStreamTrack = twilioTrack.mediaStreamTrack;
+					trackToAttach.kind = twilioTrack.kind;
+					trackToAttach.twilioReference = twilioTrack;
+					app.screensInterface.attachTrack(trackToAttach, localParticipant);
+					if(track.kind == 'video')
+						app.conferenceControl.enableVideo();
+					else {
+						app.conferenceControl.enableAudio();
+					}
+				});
+			} else {
+				var trackToAttach = new Track();
+				trackToAttach.mediaStreamTrack = track;
+				trackToAttach.kind = track.kind;
+				app.screensInterface.attachTrack(trackToAttach, localParticipant);
+				if(track.kind == 'video')
+					app.conferenceControl.enableVideo();
+				else {
+					app.conferenceControl.enableAudio();
+				}
+			}
+
+		}
+
 		function switchSpeaker(state) {
 			var i, participant;
 			for(i = 0; participant = roomParticipants[i]; i++) {
@@ -3853,6 +3893,7 @@ WebRTCconferenceLib = function app(options){
 			requestMicrophone: enableMicrophone,
 			disableAudioOfAll: disableAudioOfAll,
 			enableAudioOfAll: enableAudioOfAll,
+			addTrack: addTrack,
 			micIsEnabled: micIsEnabled,
 			cameraIsEnabled: cameraIsEnabled,
 			speakerIsEnabled: speakerIsEnabled,
@@ -3889,7 +3930,7 @@ WebRTCconferenceLib = function app(options){
 			if(_debug) console.log("enumerateDevices() not supported.");
 
 			var videoConstrains;
-			if(options.startWith.video == false){
+			if(options.video == false){
 				videoConstrains = false;
 			} else {
 				videoConstrains = {
@@ -3899,7 +3940,7 @@ WebRTCconferenceLib = function app(options){
 			}
 
 			navigator.getUserMedia ({
-				'audio': options.startWith.audio,
+				'audio': options.audio,
 				'video': videoConstrains
 			}, function (stream) {
 				var tracks = stream.getTracks();
@@ -3943,9 +3984,9 @@ WebRTCconferenceLib = function app(options){
 
 
 				var videoConstrains;
-				if(videoDevices == 0 && options.startWith.video == false){
+				if(videoDevices == 0 && options.video == false){
 					videoConstrains = false;
-				} else if(videoDevices != 0 && options.startWith.video) {
+				} else if(videoDevices != 0 && options.video) {
 					videoConstrains = {
 						width: { min: 320, max: 1280 },
 						height: { min: 240, max: 720 },
@@ -3997,13 +4038,13 @@ WebRTCconferenceLib = function app(options){
 
 					});
 				}
-				if((audioDevices == 0 && videoDevices == 0) || (!options.startWith.audio && !options.startWith.video)){
+				if((audioDevices == 0 && videoDevices == 0) || (!options.audio && !options.video)){
 					twilioConnectWithNoTracks();
 					return;
 				}
 
 				navigator.mediaDevices.getUserMedia ({
-					'audio': audioDevices != 0 && options.startWith.audio,
+					'audio': audioDevices != 0 && options.audio,
 					'video': videoConstrains,
 				}).then(function (stream) {
 					var tracks = stream.getTracks();
@@ -4060,8 +4101,8 @@ WebRTCconferenceLib = function app(options){
 			if(_debug) console.log("enumerateDevices() not supported.");
 
 			navigator.mediaDevices.getUserMedia ({
-				'audio': options.startWith.audio,
-				'video': options.startWith.video,
+				'audio': options.audio,
+				'video': options.video,
 			}).then(function (stream) {
 				joinRoom(stream);
 			}).catch(function(err) {
@@ -4088,7 +4129,7 @@ WebRTCconferenceLib = function app(options){
 			}
 
 			var videoConstrains;
-			if(options.startWith.video == false){
+			if(options.video == false){
 				videoConstrains = false;
 			} else {
 				videoConstrains = {
@@ -4102,7 +4143,7 @@ WebRTCconferenceLib = function app(options){
 				return;
 			}
 
-			if((audioDevices == 0 && videoDevices == 0) || (!options.startWith.audio && !options.startWith.video)){
+			if((audioDevices == 0 && videoDevices == 0) || (!options.audio && !options.video)){
 				if(_debug) console.log('initOrConnectConversation no stream needed');
 				//TODO: make screenEl if there are no devices available
 				joinRoom(null, mediaDevices);
@@ -4110,7 +4151,7 @@ WebRTCconferenceLib = function app(options){
 			}
 
 			navigator.mediaDevices.getUserMedia ({
-				'audio': audioDevices != 0 && options.startWith.audio,
+				'audio': audioDevices != 0 && options.audio,
 				'video': videoConstrains,
 			}).then(function (stream) {
 				navigator.mediaDevices.enumerateDevices().then(function (mediaDevicesList) {
@@ -4159,9 +4200,9 @@ WebRTCconferenceLib = function app(options){
 			}
 
 			var videoConstrains;
-			if(videoDevices == 0 || options.startWith.video == false){
+			if(videoDevices == 0 || options.video == false){
 				videoConstrains = false;
-			} else if(videoDevices != 0 && options.startWith.video) {
+			} else if(videoDevices != 0 && options.video) {
 				videoConstrains = {
 					width: { min: 320, max: 1280 },
 					height: { min: 240, max: 720 },
@@ -4169,8 +4210,8 @@ WebRTCconferenceLib = function app(options){
 			}
 
 			console.log('videoConstrains ' + videoConstrains)
-			console.log('audioDevices ' + (audioDevices != 0 && options.startWith.audio))
-			if(audioDevices != 0 && options.startWith.audio && 2<1) {
+			console.log('audioDevices ' + (audioDevices != 0 && options.audio))
+			if(audioDevices != 0 && options.audio && 2<1) {
 				cordova.plugins.iosrtc.getUserMedia(
 					{
 						audio: true,
