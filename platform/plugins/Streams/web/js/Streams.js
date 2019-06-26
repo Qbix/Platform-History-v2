@@ -1144,8 +1144,8 @@ Streams.Dialogs = {
 								identifier: null,
 								sendBy: sendBy
 							}
-							Q.handle(callback, Streams, [result]);
 							Q.Dialogs.pop(); // close the Dialog
+							Q.handle(callback, Streams, [result]);
 						});
 					},
 				});
