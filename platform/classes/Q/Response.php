@@ -444,12 +444,18 @@ class Q_Response
 	 * Sets a particular meta tag
 	 * @method setMeta
 	 * @static
-	 * @param {string} $name The name of the meta tag
+	 * @param {string|array} $name The name of the meta tag, or an array of key=>value pairs of metas
 	 * @param {mixed} $content The content of the meta tag
 	 * @param {string} [$slotName=null]
 	 */
 	static function setMeta($name, $content, $slotName = null)
 	{
+		if (is_array($name)) {
+			foreach ($name as $k => $v) {
+				self::setMeta($k, $v, $slotName);
+			}
+			exit;
+		}
 		self::$metas[$name] = $content;
 
 		// Now, for the slot
