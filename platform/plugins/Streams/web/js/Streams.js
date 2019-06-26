@@ -1295,9 +1295,9 @@ Streams.release = function (key) {
  *   @param {String} [options.readLevel] the read level to grant those who are invited
  *   @param {String} [options.writeLevel] the write level to grant those who are invited
  *   @param {String} [options.adminLevel] the admin level to grant those who are invited
- *   @param {String} [options.displayName] Optionally override the name to display in the invitation for the inviting user
  *   @param {String} [options.callback] Also can be used to provide callbacks, which are called before the followup.
  *   @param {Boolean} [options.followup="future"] Whether to set up a followup email or sms for the user to send. Set to true to always send followup, or false to never send it. Set to "future" to send followups only to users who haven't registered yet.
+ *   @param {string} [$_REQUEST.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  *   @param {String} [options.uri] If you need to hit a custom "Module/action" endpoint
  * @param {Function} callback Called with (err, result) .
  *   In this way you can obtain the invite token, email addresses, etc.
@@ -1322,7 +1322,6 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 	}, Streams.invite.options, options);
 	o.publisherId = publisherId,
 		o.streamName = streamName;
-	o.displayName = o.displayName || Users.loggedInUser.displayName;
 	function _request() {
 		return Q.req(o.uri, ['data'], function (err, response) {
 			var msg = Q.firstErrorMessage(err, response && response.errors);
@@ -2884,10 +2883,10 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
  *   @param {String} [options.readLevel] the read level to grant those who are invited
  *   @param {String} [options.writeLevel] the write level to grant those who are invited
  *   @param {String} [options.adminLevel] the admin level to grant those who are invited
- *   @param {String} [options.displayName] Optionally override the name to display in the invitation for the inviting user
  *   @param {String} [options.callback] Also can be used to provide callbacks.
  *   @param {Boolean} [options.followup="future"] Whether to set up a followup email or sms for the user to send. Set to true to always send followup, or false to never send it. Set to "future" to send followups only when the invited user hasn't registered yet.
  *   @param {String} [options.uri] If you need to hit a custom "Module/action" endpoint
+ *   @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  * @param {Function} callback Called with (err, result)
  * @return {Q.Request} represents the request that was made if an identifier was provided
  */
@@ -3964,7 +3963,7 @@ var MTotal = Streams.Message.Total = {
 	 * @param {String} streamName the name of the stream
 	 * @param {String} messageType the type of messages
 	 * @param {Number|Boolean} [messageTotal] Pass the total messages seen of this type.
-	 *  Or, pass true to set the latest messageTotal if any was cached, otherwise do nothing.
+	 *  Or, pass true to set the latest messageTotal (if any was cached), otherwise do nothing.
 	 * @param {Function} [callback] This is only in the case where messageTotal is passed
 	 * @return {Number|false} Returns the total number of messages seen of this type.
 	 *  If messageTotal === true, however, returns false if nothing was actually done.

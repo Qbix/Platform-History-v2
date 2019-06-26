@@ -27,22 +27,27 @@ function Streams_chat_tool($options)
 	$options = array_merge($defaults, $options);
 	*/
 	extract($options);
-
-	if (!isset($publisherId)) {
-		$publisherId = Streams::requestedPublisherId(true);
+	
+	if (!isset($stream)) {
+		$options['publisherId'] = $stream->publisherId;
+		$options['streamName'] = $stream->name;
+		unset($options);
+	} else {
+		if (!isset($publisherId)) {
+			$publisherId = Streams::requestedPublisherId(true);
+		}
+		if (!isset($streamName)) {
+			$streamName = Streams::requestedName();
+		}
+		$stream = Streams::fetchOne($userId, $publisherId, $streamName);
+		if (!$stream) {
+			throw new Q_Exception_MissingRow(array(
+				'table'    => 'stream',
+				'criteria' => compact('publisherId', 'streamName')
+			));
+		}
 	}
 
-	if (!isset($streamName)) {
-		$streamName = Streams::requestedName();
-	}
-
-	$stream = Streams::fetchOne($userId, $publisherId, $streamName);
-	if (!$stream) {
-		throw new Q_Exception_MissingRow(array(
-			'table'    => 'stream',
-			'criteria' => compact('publisherId', 'streamName')
-		));
-	}
 
 	$options['userId'] = $userId;
 

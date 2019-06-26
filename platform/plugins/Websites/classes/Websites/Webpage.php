@@ -100,7 +100,9 @@ class Websites_Webpage
 		}
 
 		// collect language from diff metas
-		$result['lang'] = Q::ifset($result, 'language', Q::ifset($result, 'lang', Q::ifset($result, 'locale', null)));
+		$result['lang'] = Q::ifset($result, 'language', Q::ifset(
+			$result, 'lang', Q::ifset($result, 'locale', null)
+		));
 
 		// if language empty, collect from html tag or headers
 		if (empty($result['lang'])) {
@@ -202,7 +204,7 @@ class Websites_Webpage
 		}
 
 		// additional handler for youtube.com
-		if ($parsedUrl['host'] == 'www.youtube.com') {
+		if (in_array($parsedUrl['host'], array('www.youtube.com', 'youtube.com'))) {
 			$googleapisKey = Q_Config::expect('Websites', 'youtube', 'keys', 'server');
 			preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\\/)[^&\n]+(?=\\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $googleapisMatches);
 			$googleapisUrl = sprintf('https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&fields=items(snippet(title,description,tags,thumbnails))&part=snippet', reset($googleapisMatches), $googleapisKey);
@@ -270,12 +272,19 @@ class Websites_Webpage
 	static function fetchStream($publisherId, $url) {
 		return Streams::fetchOne($publisherId, $publisherId, "Websites/webpage/".self::normalizeUrl($url));
 	}
-		/**
+	/**
 	 * Create Websites/webpage stream from params
 	 * @method createStream
 	 * @static
-	 * @param string $publisherId
-	 * @param array $params
+	 * @param {string} $publisherId
+	 * @param {array} $params
+	 * @param {string} [$params.title]
+	 * @param {string} [$params.keywords]
+	 * @param {string} [$params.description]
+	 * @param {string} [$params.bigIcon]
+	 * @param {string} [$params.smallIcon]
+	 * @param {array} [$params.headers] array with key "Content-Type"
+	 * @param {string} [$params.lang] two-letter code
 	 * @throws Exception
 	 * @return Streams_Stream
 	 */

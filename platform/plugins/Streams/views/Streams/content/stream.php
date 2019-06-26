@@ -36,5 +36,10 @@
 		<div class='Streams_stream_activity'>
 			<?php echo Q::tool('Streams/activity')?>
 		</div>
+		<?php if ($stream->testReadLevel('messages')): ?> 
+			<div class='Streams_stream_chat'>
+				<?php echo Q::tool('Streams/chat')?>
+			</div>
+		<?php endif; ?>
 	</div>
 </div>

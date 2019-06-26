@@ -4,8 +4,8 @@
 	 * @class Websites/webpage/composer
 	 * @constructor
 	 * @param {Object} [options] this is an object that contains parameters for this function
-	 *   @param {Q.Event} [options.onCreate] fires when the tool successfully creates a new Websites/webpage stream
-	 *   @param {Q.Event} [options.onStart] fires when the user click on "Start Conversation" button
+	 *   @param {Q.Event} [options.onScrape] fires when the tool successfully scrapes a webpage
+	 *   @param {Q.Event} [options.onCreate] fires when the Websites/webpage stream successfully created
 	 */
 	Q.Tool.define("Websites/webpage/composer", function (options) {
 		var tool = this;
@@ -35,8 +35,8 @@
 	},
 
 	{
-		onCreate: new Q.Event(),
-		onStart: new Q.Event()
+		onScrape: new Q.Event(),
+		onCreate: new Q.Event()
 	},
 
 	{
@@ -89,7 +89,7 @@
 						state.publisherId = slot.publisherId;
 						state.streamName = slot.streamName;
 
-						Q.handle(state.onStart, tool);
+						Q.handle(state.onCreate, tool);
 					}, {
 						fields: {
 							data: state.siteData,
@@ -126,6 +126,7 @@
 						Q.Template.render('Websites/webpage/composer/preview', {
 							title: state.siteData.title,
 							description: state.siteData.description,
+							keywords: state.siteData.keywords || '',
 							interest: {
 								title: ' ' + state.siteData.host,
 								icon: state.siteData.smallIcon,
@@ -139,7 +140,7 @@
 
 						$startButton.removeClass('Q_disabled');
 
-						Q.handle(state.onCreate, tool, [this]);
+						Q.handle(state.onScrape, tool, [this]);
 					}, {
 						method: 'post',
 						fields: {
