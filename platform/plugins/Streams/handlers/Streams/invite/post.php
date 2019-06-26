@@ -15,16 +15,17 @@
  *  @param {string} [$_REQUEST.readLevel] the read level to grant those who are invited
  *  @param {string} [$_REQUEST.writeLevel] the write level to grant those who are invited
  *  @param {string} [$_REQUEST.adminLevel] the admin level to grant those who are invited
- *	@param {string} [$_REQUEST.displayName] optionally override the name to display in the invitation for the inviting user
- * @see Users::addLink()
+ *  @param {string} [$_REQUEST.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  */
 function Streams_invite_post()
 {
 	$publisherId = Streams::requestedPublisherId(true);
 	$streamName = Streams::requestedName(true);
 	
-	$r = $_REQUEST;
-	$r['skipAccess'] = false;
+	$r = Q::take($_REQUEST, array(
+		'readLevel', 'writeLevel', 'adminLevel', 'permissions',
+		'addLabel', 'addMyLabel', 'appUrl'
+	));
 
 	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
 	Streams::$cache['invite'] = Streams::invite($publisherId, $streamName, $r, $r);

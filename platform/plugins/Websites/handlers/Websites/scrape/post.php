@@ -2,6 +2,7 @@
 	
 function Websites_scrape_post($params)
 {
+	// don't let just anyone call this, but only pages loaded from valid sessions
 	Q_Valid::nonce(true);
 
 	$loggedUser = Users::loggedInUser(true);
