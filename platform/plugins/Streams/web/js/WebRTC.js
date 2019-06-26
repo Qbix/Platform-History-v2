@@ -187,44 +187,88 @@
 			});
 		}
 
-		var mediaDevicesDialog = function (callback) {
+		var publishMediaTracks = function () {
 			var micIcon = '<svg class="microphone-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"    y="0px" viewBox="-0.165 -0.245 99.499 99.498"    enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve">  <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M41.061,32.316c0-4.655,3.775-8.43,8.431-8.43   c4.657,0,8.43,3.774,8.43,8.43v19.861c0,4.655-3.773,8.431-8.43,8.431c-4.656,0-8.431-3.775-8.431-8.431V32.316z M63.928,52.576   c0,7.32-5.482,13.482-12.754,14.336v5.408h6.748v3.363h-16.86V72.32h6.749v-5.408c-7.271-0.854-12.753-7.016-12.754-14.336v-10.33   h3.362v10.125c0,6.115,4.958,11.073,11.073,11.073c6.116,0,11.073-4.958,11.073-11.073V42.246h3.363V52.576z"/>  </svg>';
+			var cameraIcon = '<svg class="camera-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498"    xml:space="preserve">  <path fill="#FFFFFF" class="cameraPath" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M77.156,60.693l-15.521-8.961v8.51H25.223v-23.42   h36.412v8.795l15.521-8.961V60.693z"/>  </svg>';
 
-			navigator.mediaDevices.enumerateDevices().then(function () {
+			navigator.mediaDevices.enumerateDevices().then(function (mediaDevices) {
+				var videoDevices = 0;
+				var audioDevices = 0;
+				for(var i in mediaDevices) {
+					if (mediaDevices[i].kind === 'videoinput' || mediaDevices[i].kind === 'video') {
+						if(_debug) console.log('initOrConnectConversation mediaDevices[i]', mediaDevices[i].deviceId);
+						videoDevices++;
+					} else if (mediaDevices[i].kind === 'audioinput' || mediaDevices[i].kind === 'audio') {
+						audioDevices++;
+					}
+				}
 
-				var mediaDevicesDialog = document.createElement('DIV');
-				var turnMicOnbtn = document.createElement('BUTTON');
-				turnMicOnbtn.type = 'button';
-				turnMicOnbtn.className = 'Q_button webrtc_tool_enable-microphone-btn';
-				turnMicOnbtn.innerHTML = micIcon + '<span>Enable Microphone</span>';
+				if(_options.mediaDevicesDialog) {
+					Q.Text.get("Streams/content", function (err, result) {
+						var mediaDevicesDialog = document.createElement('DIV');
+						mediaDevicesDialog.className = 'webrtc_tool_devices_dialog_inner';
+						var turnOnBtn = document.createElement('BUTTON');
+						turnOnBtn.type = 'button';
+						turnOnBtn.className = 'Q_button webrtc_tool_enable-microphone-btn';
+						var btnText = document.createElement('SPAN');
+						turnOnBtn.appendChild(btnText)
+						var titleText;
+						if (_options.startWith.audio) {
+							turnOnBtn.innerHTML = micIcon + turnOnBtn.innerHTML;
+							titleText = 'microphoneTitle';
+						}
+						if (_options.startWith.video) {
+							turnOnBtn.innerHTML = turnOnBtn.innerHTML + cameraIcon;
+							titleText = 'cameraTitle';
+						}
+						if (_options.startWith.audio && _options.startWith.video) {
+							titleText = 'cameraAndMicrophoneTitle';
+						}
+						var text = Q.getObject("webrtc.allow." + titleText, result);
+						turnOnBtn.querySelector('SPAN').innerHTML = text;
 
-				mediaDevicesDialog.appendChild(turnMicOnbtn);
-				mediaDevicesDialog.addEventListener('mouseup', function (e) {
-					navigator.mediaDevices.getUserMedia(_options.startWith)
+
+						mediaDevicesDialog.appendChild(turnOnBtn);
+						mediaDevicesDialog.addEventListener('mouseup', function (e) {
+							navigator.mediaDevices.getUserMedia({video: _options.startWith.video && videoDevices != 0, audio:_options.startWith.audio && audioDevices != 0})
+								.then(function (stream) {
+									var tracks = stream.getTracks();
+									for (var t in tracks) {
+										WebRTCconference.conferenceControl.addTrack(tracks[t]);
+									}
+									Q.Dialogs.pop();
+								}).catch(function (err) {
+								console.error(err.name + ": " + err.message);
+							});
+						});
+
+						Q.Dialogs.push({
+							title: text,
+							className: 'webrtc_tool_devices_dialog Q_working',
+							content: mediaDevicesDialog,
+							apply: true,
+						});
+
+					})
+				}
+				console.log('_options.startWith',_options.startWith)
+				navigator.mediaDevices.getUserMedia({video: _options.startWith.video && videoDevices != 0, audio:_options.startWith.audio && audioDevices != 0})
 					.then(function (stream) {
-						if(callback) callback(stream);
+						var tracks = stream.getTracks();
+						for(var t in tracks) {
+							WebRTCconference.conferenceControl.addTrack(tracks[t]);
+						}
 						Q.Dialogs.pop();
+						navigator.mediaDevices.enumerateDevices().then(function (mediaDevices) {
+							WebRTCconference.conferenceControl.loadDevicesList(mediaDevices);
+						}).catch(function (e) {
+							console.error('ERROR: cannot get device info: ' + e.message);
+						});
 					}).catch(function(err) {
-						console.error(err.name + ": " + err.message);
-					});
-				});
-
-				Q.Dialogs.push({
-					title: "Conversation",
-					className: 'webrtc_tool_participants-list',
-					content: mediaDevicesDialog,
-					apply: true,
-				});
-				
-				navigator.mediaDevices.getUserMedia(_options.startWith)
-				.then(function (stream) {
-					if(callback) callback(stream);
-					Q.Dialogs.pop();
-				}).catch(function(err) {
 					console.error(err.name + ": " + err.message);
 				});
 			}).catch(function (e) {
-				console.error('ERROR: cannot get device info: ' + e.message)
+				console.error('ERROR: cannot get device info: ' + e.message);
 			});
 
 
@@ -250,57 +294,52 @@
 					});
 				}*/
 
-				var init = function (stream) {
-					var twilioRoomName = _roomStream.getAttribute('twilioRoomName');
 
-					console.log('twilioRoomName', twilioRoomName)
+				var twilioRoomName = _roomStream.getAttribute('twilioRoomName');
 
-					WebRTCconference = window.WebRTCconferenceLib({
-						mode:'twilio',
-						roomName:twilioRoomName,
-						twilioAccessToken: accessToken,
-						useAsLibrary: true,
-						startWith: _options.startWith,
-						stream: stream
-					});
-					window.WebConf = WebRTCconference;
-					WebRTCconference.init(function () {
-						bindConferenceEvents();
-						screensRendering.updateLayout();
-						updateParticipantData();
-						hidePageLoader();
-						_debugTimer.loadEnd = performance.now();
-						log("You joined the room");
+				console.log('twilioRoomName', twilioRoomName)
+				console.log('startTwilioRoom _options.startWith',_options.startWith)
+				WebRTCconference = window.WebRTCconferenceLib({
+					mode:'twilio',
+					roomName:twilioRoomName,
+					twilioAccessToken: accessToken,
+					useAsLibrary: true,
+					video: false,
+					audio: false,
+				});
+				window.WebConf = WebRTCconference;
+				WebRTCconference.init(function () {
+					bindConferenceEvents();
+					screensRendering.updateLayout();
+					updateParticipantData();
+					hidePageLoader();
+					_debugTimer.loadEnd = performance.now();
+					log("You joined the room");
 
-						Q.activate(
-							document.body.appendChild(
-								Q.Tool.setUpElement(
-									"div", // or pass an existing element
-									"Streams/webrtc/controls",
-									{webRTClibraryInstance: WebRTCconference, webrtcClass: module}
-								)
-							),
-							{},
-							function () {
-								_controls = this.element;
-								_controlsTool = this;
-								screensRendering.updateLayout();
-							}
-						);
+					Q.activate(
+						document.body.appendChild(
+							Q.Tool.setUpElement(
+								"div", // or pass an existing element
+								"Streams/webrtc/controls",
+								{webRTClibraryInstance: WebRTCconference, webrtcClass: module}
+							)
+						),
+						{},
+						function () {
+							_controls = this.element;
+							_controlsTool = this;
+							screensRendering.updateLayout();
+						}
+					);
 
-					});
-				}
 
-				if(_options.mediaDevicesDialog) {
 					var startWith = _options.startWith || {};
 					if (startWith.audio || startWith.video) {
-						mediaDevicesDialog(function (stream) {
-							init(stream);
-						});
+						publishMediaTracks();
 					}
-				} else {
-					init();
-				}
+
+				});
+
 			});
 		}
 		var updateParticipantData = function() {
@@ -341,54 +380,48 @@
 				});*/
 				//}
 
-				var init = function (stream) {
-					var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
-					WebRTCconference = window.WebRTCconferenceLib({
-						mode:'nodejs',
-						useAsLibrary: true,
-						nodeServer: _options.nodeServer,
-						roomName: roomId,
-						stream: stream,
-						sid:  Q.Users.loggedInUser.id,
-						username:  Q.Users.loggedInUser.id + '\t' + Date.now(),
-						startWith: _options.startWith,
-						turnCredentials: turnCredentials
-					});
-					WebRTCconference.init(function () {
-						bindConferenceEvents();
-						hidePageLoader();
-						_debugTimer.loadEnd = performance.now();
-						screensRendering.updateLayout();
 
-						Q.activate(
-							document.body.appendChild(
-								Q.Tool.setUpElement(
-									"div", // or pass an existing element
-									"Streams/webrtc/controls",
-									{webRTClibraryInstance: WebRTCconference, webrtcClass: module}
-								)
-							),
-							{},
-							function () {
-								_controls = this.element;
-								_controlsTool = this;
-								screensRendering.updateLayout();
-							}
-						);
-					});
-					window.WebConf = WebRTCconference;
+				var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
+				WebRTCconference = window.WebRTCconferenceLib({
+					mode:'nodejs',
+					useAsLibrary: true,
+					nodeServer: _options.nodeServer,
+					roomName: roomId,
+					sid:  Q.Users.loggedInUser.id,
+					username:  Q.Users.loggedInUser.id + '\t' + Date.now(),
+					video: false,
+					audio: false,
+					turnCredentials: turnCredentials
+				});
+				WebRTCconference.init(function () {
+					bindConferenceEvents();
+					hidePageLoader();
+					_debugTimer.loadEnd = performance.now();
+					screensRendering.updateLayout();
+
+					Q.activate(
+						document.body.appendChild(
+							Q.Tool.setUpElement(
+								"div", // or pass an existing element
+								"Streams/webrtc/controls",
+								{webRTClibraryInstance: WebRTCconference, webrtcClass: module}
+							)
+						),
+						{},
+						function () {
+							_controls = this.element;
+							_controlsTool = this;
+							screensRendering.updateLayout();
+						}
+					);
+				});
+				window.WebConf = WebRTCconference;
+
+				var startWith = _options.startWith || {};
+				if (startWith.audio || startWith.video) {
+					publishMediaTracks();
 				}
 
-				if(_options.mediaDevicesDialog) {
-					var startWith = _options.startWith || {};
-					if (startWith.audio || startWith.video) {
-						mediaDevicesDialog(function (stream) {
-							init(stream);
-						});
-					}
-				} else {
-					init();
-				}
 			});
 		}
 
@@ -1844,8 +1877,15 @@
 					Q.alert('Unfortunatelly your browser doesn\'t support WebRTC')
 				}
 
+				console.log('_options startWith', _options.startWith)
 				_options = Q.extend({}, _options, options);
+				console.log('_options startWith', _options.startWith)
 
+				/*if(typeof options === 'object') {
+					for (var key in options) {
+						_options[key] = options.hasOwnProperty(key) && typeof options[key] !== 'undefined' ? options[key] : _options[key];
+					}
+				}*/
 
 				var checkPageLoading = function(ms) {
 					if(_debugTimer.loadStart != null && _debugTimer.loadEnd == null) {

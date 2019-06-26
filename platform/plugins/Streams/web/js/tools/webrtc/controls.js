@@ -107,6 +107,7 @@
 				webRTClib.event.on('trackAdded', function () {
 					console.log('bindRTCEvents videoTrackIsBeingAdded')
 					if(_isiOSCordova) tool.webViewElements().showOrHide();
+					tool.updateControlBar();
 				});
 				webRTClib.event.on('cameraEnabled', function () {
 					tool.updateControlBar();
@@ -486,6 +487,8 @@
 			 */
 			updateControlBar: function () {
 				var tool = this;
+				console.log('updateControlBar')
+
 				if(tool.controlBar == null) return;
 				var localParticipant = webRTClib.localParticipant();
 				var conferenceControl = webRTClib.conferenceControl;
@@ -494,6 +497,7 @@
 					return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 				}).length;
 
+				console.log('enabledVideoTracks', enabledVideoTracks, conferenceControl.cameraIsEnabled())
 				if(enabledVideoTracks == 0) {
 					tool.cameraBtnIcon.innerHTML = icons.disabledCamera;
 				} else if(!conferenceControl.cameraIsEnabled()) {
