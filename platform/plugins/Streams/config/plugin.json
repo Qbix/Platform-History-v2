@@ -315,16 +315,6 @@
 					"title": "Untitled Image"
 				}
 			},
-			"Streams/audio": {
-				"description": "audio clip",
-				"create": true,
-				"edit": true,
-				"defaults": {
-					"icon": "Streams/audio",
-					"title": "Untitled Audio Clip"
-				},
-				"updateTitle": true
-			},
 			"Streams/file": {
 				"description": "uploaded file",
 				"create": true,
@@ -335,6 +325,36 @@
 				},
 				"updateTitle": true,
 				"updateIcon": true
+			},
+			"Streams/audio": {
+				"description": "audio clip",
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"icon": "Streams/audio",
+					"title": "Untitled Audio Clip"
+				},
+				"updateTitle": true
+			},
+			"Streams/video": {
+				"description": "video clip",
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"icon": "Streams/video",
+					"title": "Untitled Video Clip"
+				},
+				"updateTitle": true
+			},
+			"Streams/live": {
+				"description": "live video or audio",
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"icon": "Streams/live",
+					"title": "Untitled Live Audio/Video"
+				},
+				"updateTitle": true
 			},
 			"Streams/category": {
 				"description": "category to which other things can be related",
