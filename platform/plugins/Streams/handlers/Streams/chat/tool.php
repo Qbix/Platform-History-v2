@@ -28,7 +28,7 @@ function Streams_chat_tool($options)
 	*/
 	extract($options);
 	
-	if (!isset($stream)) {
+	if (isset($stream)) {
 		$options['publisherId'] = $stream->publisherId;
 		$options['streamName'] = $stream->name;
 		unset($options);
