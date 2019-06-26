@@ -4,8 +4,8 @@
 	 * @class Websites/webpage/composer
 	 * @constructor
 	 * @param {Object} [options] this is an object that contains parameters for this function
-	 *   @param {Q.Event} [options.onScrape] fires when the tool successfully scrapes a webpage
-	 *   @param {Q.Event} [options.onCreate] fires when the Websites/webpage stream successfully created
+	 * @param {Q.Event} [options.onScrape] fires when the tool successfully scrapes a webpage
+	 * @param {Q.Event} [options.onCreate] fires when the Websites/webpage stream successfully created
 	 */
 	Q.Tool.define("Websites/webpage/composer", function (options) {
 		var tool = this;
