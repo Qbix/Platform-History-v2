@@ -2014,6 +2014,47 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 		return false;
 	}
+	
+	/**
+	 * @method setMetas
+	 * @param {array} $options You can use these to override the default places to look
+	 * @param {string} [$options.icon] The name of an attribute that contains the icon url prefix
+	 * @param {string} [$options.iconFile] The name of an attribute that contains the icon url prefix
+	 * @param {string} [$options.title] The name of an attribute that contains the title
+	 * @param {string} [$options.description] The name of an attribute that contains the description
+	 * @param {string} [$options.keywords] The name of an attribute that contains the title
+	 * @param {string} [$options.url] The name of an attribute that contains the url
+	 * @return {array} The metas to set
+	 */
+	function metas($options)
+	{
+		if (!empty($options['iconFile'])) {
+			$iconFile = '500x.png';
+		} else {
+			$sizes = Q_Image::getSizes('Streams/image', $maxStretch);
+			ksort($sizes);
+			$iconFile = end($sizes);
+		}
+		$maxLength = Q_Config::get('Streams', 'meta', 'description', 'maxLength', 150);
+		$description = substr($this->content, 0, $maxLength);
+		if (strlen($this->content) > $maxLength) {
+			$description .= '...';
+		}
+		$description = preg_replace("/(\r?\n){2,}/", " ", $description);
+		$image = Q::ifset($options, 'icon', $this->iconUrl($iconFile));
+		$title = Q::ifset($options, 'title', $this->title);
+		$description = Q::ifset($options, 'description', $description);
+		$keywords = $this->getAttribute('keywords');
+		$metas = compact('title', 'image', 'description', 'keywords');
+		$url = Q::ifset($options, 'url', $this->url());
+		foreach (array('og', 'twitter') as $prefix) {
+			foreach ($metas as $k => $v) {
+				$metas["$prefix:$k"] = $v;
+			}
+		}
+		$metas['twitter:card'] = 'summary';
+		return $metas;
+	}
 
 	/* * * */
 	/**

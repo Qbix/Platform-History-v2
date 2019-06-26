@@ -94,11 +94,9 @@
 		},
 		"quotas": {
 			"Streams/invite": {
-				"": {
-					"604800": 10
-				},
-				"Users/admins": {
-					"604800": 1000
+				"86400": {
+					"": 10,
+					"Users/admins": 1000
 				}
 			}
 		}
@@ -519,6 +517,11 @@
 			"timeLimit": 100000,
 			"task": {
 				"title": "Importing members into {{communityName}}"
+			}
+		},
+		"meta": {
+			"description": {
+				"maxLength": 150
 			}
 		}
 	}

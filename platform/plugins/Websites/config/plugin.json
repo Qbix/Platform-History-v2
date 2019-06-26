@@ -20,6 +20,11 @@
 		},
 		"routes@start": {
 			"Websites/:action/:articleId": {"module": "Websites"}
+		},
+		"quotas": {
+			"Websites/scrape": {
+				"86400": 3
+			}
 		}
 	},
 	"Streams": {
