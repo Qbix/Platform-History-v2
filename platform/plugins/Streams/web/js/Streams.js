@@ -1285,7 +1285,7 @@ Streams.release = function (key) {
  *	will accept this invite either right away, or as soon as they log in.
  *	They will then be added to the list of Streams_Invited for this stream, thus
  *	keeping track of who accepted whose invite.
- * @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
+ * @param {String|Function} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  * @param {String} [options.userId] user id or an array of user ids to invite
  * @param {string} [options.platform] platform for which xids are passed
  * @param {String} [options.xid] xid or arary of xids to invite
@@ -1297,7 +1297,6 @@ Streams.release = function (key) {
  * @param {String} [options.adminLevel] the admin level to grant those who are invited
  * @param {String} [options.callback] Also can be used to provide callbacks, which are called before the followup.
  * @param {Boolean} [options.followup="future"] Whether to set up a followup email or sms for the user to send. Set to true to always send followup, or false to never send it. Set to "future" to send followups only to users who haven't registered yet.
- * @param {string} [$_REQUEST.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  * @param {String} [options.uri] If you need to hit a custom "Module/action" endpoint
  * @param {Function} callback Called with (err, result) .
  *   In this way you can obtain the invite token, email addresses, etc.
@@ -1322,6 +1321,9 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 	}, Streams.invite.options, options);
 	o.publisherId = publisherId,
 	o.streamName = streamName;
+	if (typeof o.appUrl === 'function') {
+		o.appUrl = o.appUrl();
+	}
 	function _request() {
 		return Q.req(o.uri, ['data'], function (err, response) {
 			var msg = Q.firstErrorMessage(err, response && response.errors);
