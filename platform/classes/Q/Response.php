@@ -448,7 +448,7 @@ class Q_Response
 	 * @param {mixed} $content The content of the meta tag
 	 * @param {string} [$slotName=null]
 	 */
-	static function setMeta($name, $content, $slotName = null)
+	static function setMeta($name, $content = null, $slotName = null)
 	{
 		if (is_array($name)) {
 			foreach ($name as $k => $v) {
