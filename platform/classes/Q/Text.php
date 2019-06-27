@@ -85,6 +85,7 @@ class Q_Text
 	{
 		if (is_array($name)) {
 			$result = new Q_Tree();
+			$name = array_unique($name);
 			foreach ($name as $n) {
 				$result->merge(self::get($n, $options));
 			}
@@ -107,6 +108,8 @@ class Q_Text
 
 	/**
 	 * Get sources for a view template merged from all the wildcards in the config
+	 * Looks in the config under Q/text/$viewPattern and expects an array of strings,
+	 * of an object of options, with key "sources" with an array of strings.
 	 * @method sources
 	 * @static
 	 * @param {array} $parts The parts of the view name, to use with Q/text config
@@ -138,7 +141,9 @@ class Q_Text
 	}
 
 	/**
-	 * Get parameters merged from all the text sources corresponding to a view template
+	 * Get parameters merged from all the text sources corresponding to a view template.
+	 * Looks in the config under Q/text/$viewPattern and expects an array of strings,
+	 * of an object of options, with key "sources" with an array of strings.
 	 * @method params
 	 * @static
 	 * @param {array} $parts The parts of the view name, to use with Q/text config
@@ -158,20 +163,26 @@ class Q_Text
 		}
 		$count = count($try);
 		$tree = new Q_Tree();
+		$sources = array();
 		for ($j=0; $j<$count; ++$j) {
 			$p = array_merge(array('Q', 'text'), $try[$j], array(null));
 			if ($text = call_user_func_array(array('Q_Config', 'get'), $p)) {
-				if (Q::isAssociative($text)) {
+				if (Q::isAssociative($text)) { 
 					$options2 = array_merge($options, $text);
-					if (!isset($options2['sources'])) {
+					if (empty($options2['sources'])) {
 						continue;
 					}
-					$text = $options2['sources'];
+					$sources = array_merge($sources, $options2['sources']);
 				} else {
 					$options2 = $options;
+					$sources = array_merge($sources, $text);
 				}
-				$tree->merge(Q_Text::get($text, $options2));
+				
 			}
+		}
+		$sources = array_unique($sources);
+		foreach ($sources as $s) {
+			$tree->merge(Q_Text::get($s, $options2));
 		}
 		return $tree->getAll();
 	}
