@@ -94,11 +94,9 @@
 		},
 		"quotas": {
 			"Streams/invite": {
-				"": {
-					"604800": 10
-				},
-				"Users/admins": {
-					"604800": 1000
+				"86400": {
+					"": 10,
+					"Users/admins": 1000
 				}
 			}
 		}
@@ -317,16 +315,6 @@
 					"title": "Untitled Image"
 				}
 			},
-			"Streams/audio": {
-				"description": "audio clip",
-				"create": true,
-				"edit": true,
-				"defaults": {
-					"icon": "Streams/audio",
-					"title": "Untitled Audio Clip"
-				},
-				"updateTitle": true
-			},
 			"Streams/file": {
 				"description": "uploaded file",
 				"create": true,
@@ -337,6 +325,36 @@
 				},
 				"updateTitle": true,
 				"updateIcon": true
+			},
+			"Streams/audio": {
+				"description": "audio clip",
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"icon": "Streams/audio",
+					"title": "Untitled Audio Clip"
+				},
+				"updateTitle": true
+			},
+			"Streams/video": {
+				"description": "video clip",
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"icon": "Streams/video",
+					"title": "Untitled Video Clip"
+				},
+				"updateTitle": true
+			},
+			"Streams/live": {
+				"description": "live video or audio",
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"icon": "Streams/live",
+					"title": "Untitled Live Audio/Video"
+				},
+				"updateTitle": true
 			},
 			"Streams/category": {
 				"description": "category to which other things can be related",
@@ -519,6 +537,11 @@
 			"timeLimit": 100000,
 			"task": {
 				"title": "Importing members into {{communityName}}"
+			}
+		},
+		"meta": {
+			"description": {
+				"maxLength": 150
 			}
 		}
 	}

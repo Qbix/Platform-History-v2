@@ -58,7 +58,11 @@ function _Streams_participants(options) {
 },
 
 {
-	invite: false,
+	invite: {
+		appUrl: function () {
+			return location.href;
+		}
+	},
 	maxShow: 10,
 	maxLoad: 100,
 	max: null,

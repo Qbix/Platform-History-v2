@@ -1144,8 +1144,8 @@ Streams.Dialogs = {
 								identifier: null,
 								sendBy: sendBy
 							}
-							Q.handle(callback, Streams, [result]);
 							Q.Dialogs.pop(); // close the Dialog
+							Q.handle(callback, Streams, [result]);
 						});
 					},
 				});
@@ -1278,27 +1278,26 @@ Streams.release = function (key) {
  * @param {String} publisherId The user id of the publisher of the stream
  * @param {String} streamName The name of the stream you are inviting to
  * @param {Object} [options] More options that are passed to the API, which can include:
- *   @param {String|Array} [options.identifier] An email address or mobile number to invite. Might not belong to an existing user yet. Can also be an array of identifiers.
- *   @param {boolean} [options.token=false] Pass true here to generate an invite
+ * @param {String|Array} [options.identifier] An email address or mobile number to invite. Might not belong to an existing user yet. Can also be an array of identifiers.
+ * @param {boolean} [options.token=false] Pass true here to generate an invite
  *	which you can then send to anyone however you like. When they show up with the token
  *	and presents it via "Q.Streams.token" querystring parameter, the Streams plugin
  *	will accept this invite either right away, or as soon as they log in.
  *	They will then be added to the list of Streams_Invited for this stream, thus
  *	keeping track of who accepted whose invite.
- *   @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
- *   @param {String} [options.userId] user id or an array of user ids to invite
- *   @param {string} [options.platform] platform for which xids are passed
- *   @param {String} [options.xid] xid or arary of xids to invite
- *   @param {String} [options.label] label or an array of labels to invite, or tab-delimited string
- *   @param {String|Array} [options.addLabel] label or an array of labels for adding publisher's contacts
- *   @param {String|Array} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts
- *   @param {String} [options.readLevel] the read level to grant those who are invited
- *   @param {String} [options.writeLevel] the write level to grant those who are invited
- *   @param {String} [options.adminLevel] the admin level to grant those who are invited
- *   @param {String} [options.displayName] Optionally override the name to display in the invitation for the inviting user
- *   @param {String} [options.callback] Also can be used to provide callbacks, which are called before the followup.
- *   @param {Boolean} [options.followup="future"] Whether to set up a followup email or sms for the user to send. Set to true to always send followup, or false to never send it. Set to "future" to send followups only to users who haven't registered yet.
- *   @param {String} [options.uri] If you need to hit a custom "Module/action" endpoint
+ * @param {String|Function} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
+ * @param {String} [options.userId] user id or an array of user ids to invite
+ * @param {string} [options.platform] platform for which xids are passed
+ * @param {String} [options.xid] xid or arary of xids to invite
+ * @param {String} [options.label] label or an array of labels to invite, or tab-delimited string
+ * @param {String|Array} [options.addLabel] label or an array of labels for adding publisher's contacts
+ * @param {String|Array} [options.addMyLabel] label or an array of labels for adding logged-in user's contacts
+ * @param {String} [options.readLevel] the read level to grant those who are invited
+ * @param {String} [options.writeLevel] the write level to grant those who are invited
+ * @param {String} [options.adminLevel] the admin level to grant those who are invited
+ * @param {String} [options.callback] Also can be used to provide callbacks, which are called before the followup.
+ * @param {Boolean} [options.followup="future"] Whether to set up a followup email or sms for the user to send. Set to true to always send followup, or false to never send it. Set to "future" to send followups only to users who haven't registered yet.
+ * @param {String} [options.uri] If you need to hit a custom "Module/action" endpoint
  * @param {Function} callback Called with (err, result) .
  *   In this way you can obtain the invite token, email addresses, etc.
  *   See Streams::invite on the PHP side for the possible return values.
@@ -1321,8 +1320,10 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		uri: 'Streams/invite'
 	}, Streams.invite.options, options);
 	o.publisherId = publisherId,
-		o.streamName = streamName;
-	o.displayName = o.displayName || Users.loggedInUser.displayName;
+	o.streamName = streamName;
+	if (typeof o.appUrl === 'function') {
+		o.appUrl = o.appUrl();
+	}
 	function _request() {
 		return Q.req(o.uri, ['data'], function (err, response) {
 			var msg = Q.firstErrorMessage(err, response && response.errors);
@@ -2884,10 +2885,10 @@ Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
  *   @param {String} [options.readLevel] the read level to grant those who are invited
  *   @param {String} [options.writeLevel] the write level to grant those who are invited
  *   @param {String} [options.adminLevel] the admin level to grant those who are invited
- *   @param {String} [options.displayName] Optionally override the name to display in the invitation for the inviting user
  *   @param {String} [options.callback] Also can be used to provide callbacks.
  *   @param {Boolean} [options.followup="future"] Whether to set up a followup email or sms for the user to send. Set to true to always send followup, or false to never send it. Set to "future" to send followups only when the invited user hasn't registered yet.
  *   @param {String} [options.uri] If you need to hit a custom "Module/action" endpoint
+ *   @param {String} [options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  * @param {Function} callback Called with (err, result)
  * @return {Q.Request} represents the request that was made if an identifier was provided
  */
@@ -3964,7 +3965,7 @@ var MTotal = Streams.Message.Total = {
 	 * @param {String} streamName the name of the stream
 	 * @param {String} messageType the type of messages
 	 * @param {Number|Boolean} [messageTotal] Pass the total messages seen of this type.
-	 *  Or, pass true to set the latest messageTotal if any was cached, otherwise do nothing.
+	 *  Or, pass true to set the latest messageTotal (if any was cached), otherwise do nothing.
 	 * @param {Function} [callback] This is only in the case where messageTotal is passed
 	 * @return {Number|false} Returns the total number of messages seen of this type.
 	 *  If messageTotal === true, however, returns false if nothing was actually done.

@@ -5,26 +5,33 @@
  * @param {array} $_REQUEST
  * @param {string} $_REQUEST.publisherId The id of the stream publisher
  * @param {string} $_REQUEST.streamName The name of the stream the user will be invited to
- *  @param {string} [$_REQUEST.userId] user id or an array of user ids
- * @param {string} [$who.platform] platform for which xids are passed
- * @param {string|array} [$who.xid]  platform xid or array of xids
- *  @param {string} [$_REQUEST.label]  label or an array of labels, or tab-delimited string
- *  @param {string} [$_REQUEST.identifier] identifier or an array of identifiers
- *  @param {string|array} [$_REQUEST.addLabel] label or an array of labels for adding publisher's contacts
- *  @param {string|array} [$_REQUEST.addMyLabel] label or an array of labels for adding logged-in user's contacts
- *  @param {string} [$_REQUEST.readLevel] the read level to grant those who are invited
- *  @param {string} [$_REQUEST.writeLevel] the write level to grant those who are invited
- *  @param {string} [$_REQUEST.adminLevel] the admin level to grant those who are invited
- *	@param {string} [$_REQUEST.displayName] optionally override the name to display in the invitation for the inviting user
- * @see Users::addLink()
+ * @param {string} [$_REQUEST.userId] user id or an array of user ids
+ * @param {string} [$_REQUEST.platform] platform for which xids are passed
+ * @param {string|array} [$_REQUEST.xid]  platform xid or array of xids
+ * @param {string} [$_REQUEST.label]  label or an array of labels, or tab-delimited string
+ * @param {string} [$_REQUEST.identifier] identifier or an array of identifiers
+ * @param {boolean} [$_REQUEST.token=false] pass true here to save a Streams_Invite row
+ *  with empty userId, which is used whenever someone shows up with the token
+ *  and presents it via "Q.Streams.token" querystring parameter.
+ *  This row is stored under "invite" key of the returned array
+ *  See the Streams/before/Q_objects.php hook for more information.
+ * @param {string|array} [$_REQUEST.addLabel] label or an array of labels for adding publisher's contacts
+ * @param {string|array} [$_REQUEST.addMyLabel] label or an array of labels for adding logged-in user's contacts
+ * @param {string} [$_REQUEST.readLevel] the read level to grant those who are invited
+ * @param {string} [$_REQUEST.writeLevel] the write level to grant those who are invited
+ * @param {string} [$_REQUEST.adminLevel] the admin level to grant those who are invited
+ * @param {string} [$_REQUEST.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
  */
 function Streams_invite_post()
 {
 	$publisherId = Streams::requestedPublisherId(true);
 	$streamName = Streams::requestedName(true);
 	
-	$r = $_REQUEST;
-	$r['skipAccess'] = false;
+	$r = Q::take($_REQUEST, array(
+		'readLevel', 'writeLevel', 'adminLevel', 'permissions',
+		'addLabel', 'addMyLabel', 'appUrl',
+		'userId', 'xid', 'platform', 'label', 'identifier', 'token'
+	));
 
 	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
 	Streams::$cache['invite'] = Streams::invite($publisherId, $streamName, $r, $r);
