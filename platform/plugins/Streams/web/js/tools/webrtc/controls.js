@@ -126,7 +126,7 @@
 
 					if(tool.textChat.isHidden) {
 						var msgCounterBadge = tool.newMessagesCounter.parentNode;
-						if(msgCounterBadge.classList.contains('webrtc_tool_hidden')) msgCounterBadge.classList.remove('webrtc_tool_hidden');
+						if(msgCounterBadge.classList.contains('Streams_webrtc_hidden')) msgCounterBadge.classList.remove('Streams_webrtc_hidden');
 
 						var currentMsgNum = tool.newMessagesCounter.innerHTML != '' ? parseInt(tool.newMessagesCounter.innerHTML, 10) : 0;
 						console.log('currentMsgNum', currentMsgNum, tool.newMessagesCounter.innerHTML)
@@ -142,57 +142,57 @@
 			createControlBar: function() {
 				var tool = this;
 				var controlBar = document.createElement('DIV');
-				controlBar.className = 'webrtc_tool_conference-control';
+				controlBar.className = 'Streams_webrtc_conference-control';
 				var controlBarCon = document.createElement('DIV');
-				controlBarCon.className = 'webrtc_tool_conference-control-inner';
+				controlBarCon.className = 'Streams_webrtc_conference-control-inner';
 				var cameraBtnCon = document.createElement('DIV');
-				cameraBtnCon.className = 'webrtc_tool_camera-control';
+				cameraBtnCon.className = 'Streams_webrtc_camera-control';
 				var cameraBtn = document.createElement('DIV');
-				cameraBtn.className = 'webrtc_tool_camera-control-btn';
+				cameraBtn.className = 'Streams_webrtc_camera-control-btn';
 				var cameraBtnIcon = document.createElement('DIV');
-				cameraBtnIcon.className = 'webrtc_tool_camera-control-icon';
+				cameraBtnIcon.className = 'Streams_webrtc_camera-control-icon';
 				cameraBtnIcon.innerHTML = icons.disabledCamera;
 				var cameraSwitcherBtnCon = document.createElement('DIV');
-				cameraSwitcherBtnCon.className = 'webrtc_tool_camera-switcher';
+				cameraSwitcherBtnCon.className = 'Streams_webrtc_camera-switcher';
 				var cameraSwitcherBtn = document.createElement('DIV');
-				cameraSwitcherBtn.className = 'webrtc_tool_camera-switcher-btn';
+				cameraSwitcherBtn.className = 'Streams_webrtc_camera-switcher-btn';
 				cameraSwitcherBtn.innerHTML = icons.switchCameras;
 				/*var speakerBtnCon = document.createElement('DIV');
-				speakerBtnCon.className = 'webrtc_tool_speaker-control';
+				speakerBtnCon.className = 'Streams_webrtc_speaker-control';
 				var speakerBtn = document.createElement('DIV');
-				speakerBtn.className = 'webrtc_tool_speaker-control-btn';
+				speakerBtn.className = 'Streams_webrtc_speaker-control-btn';
 				speakerBtn.innerHTML = icons.enabledSpeaker;*/
 				var microphoneBtnCon = document.createElement('DIV');
-				microphoneBtnCon.className = 'webrtc_tool_microphone-control';
+				microphoneBtnCon.className = 'Streams_webrtc_microphone-control';
 				var microphoneBtn = document.createElement('DIV');
-				microphoneBtn.className = 'webrtc_tool_microphone-control-btn';
+				microphoneBtn.className = 'Streams_webrtc_microphone-control-btn';
 				microphoneBtn.innerHTML = icons.microphone;
 				var textChatBtnCon = document.createElement('DIV');
-				textChatBtnCon.className = 'webrtc_tool_text-chat-btn';
+				textChatBtnCon.className = 'Streams_webrtc_text-chat-btn';
 				var textChatBtn = document.createElement('DIV');
-				textChatBtn.className = 'webrtc_tool_text-chat-btn';
+				textChatBtn.className = 'Streams_webrtc_text-chat-btn';
 				var textChatBtnIcon = document.createElement('DIV');
-				textChatBtnIcon.className = 'webrtc_tool_text-chat-icon';
+				textChatBtnIcon.className = 'Streams_webrtc_text-chat-icon';
 				textChatBtnIcon.innerHTML = icons.textChat;
 				var textChatCounterBadge = document.createElement('DIV');
-				textChatCounterBadge.className = 'webrtc_tool_text-chat-counter webrtc_tool_hidden';
+				textChatCounterBadge.className = 'Streams_webrtc_text-chat-counter Streams_webrtc_hidden';
 				var textChatCounterBadgeSpan = document.createElement('SPAN');
 				var usersBtnCon = document.createElement('DIV');
-				usersBtnCon.className = 'webrtc_tool_manage-users-btn';
+				usersBtnCon.className = 'Streams_webrtc_manage-users-btn';
 				var usersBtn = document.createElement('DIV');
-				usersBtn.className = 'webrtc_tool_manage-users-btn-btn';
+				usersBtn.className = 'Streams_webrtc_manage-users-btn-btn';
 				var usersBtnIcon = document.createElement('DIV');
-				usersBtnIcon.className = 'webrtc_tool_manage-users-btn-icon';
+				usersBtnIcon.className = 'Streams_webrtc_manage-users-btn-icon';
 				usersBtnIcon.innerHTML = icons.user;
 				var counterBadge = document.createElement('DIV');
-				counterBadge.className = 'webrtc_tool_users-counter';
+				counterBadge.className = 'Streams_webrtc_users-counter';
 				var counterBadgeSpan = document.createElement('SPAN');
 				var participantsCount = webRTClib.roomParticipants().length;
 				counterBadgeSpan.innerHTML = participantsCount;
 
 				if(!Q.info.isMobile) {
 					var screenSharingBtn = document.createElement('DIV');
-					screenSharingBtn.className = 'webrtc_tool_screen-sharing-btn';
+					screenSharingBtn.className = 'Streams_webrtc_screen-sharing-btn';
 					screenSharingBtn.innerHTML = icons.screen;
 				}
 
@@ -228,7 +228,7 @@
 
 				cameraBtn.addEventListener('touchend', function () {
 					if(!Q.info.isMobile && !Q.info.isTablet) return;
-					if(webRTClib.conferenceControl.frontCameraDevice() == null && !(typeof cordova != 'undefined' && _isiOS)) {
+					if(webRTClib.conferenceControl.frontCameraDevice() == null) {
 						webRTClib.conferenceControl.requestCamera(function () {
 							var currentCamera = webRTClib.conferenceControl.frontCameraDevice();
 							if(currentCamera != null && tool.settingsPopupEl != null) {
@@ -268,7 +268,7 @@
 					}
 					/*Q.Dialogs.push({
 						title: "Video Sources",
-						className: 'webrtc_tool_participants-list',
+						className: 'Streams_webrtc_participants-list',
 						content: tool.settingsPopupEl,
 						apply: true
 					});*/
@@ -296,7 +296,7 @@
 				var tool = this;
 				function createPopup() {
 					var dialogue=document.createElement('DIV');
-					dialogue.className = 'dialog-box text-chat webrtc_tool_hidden';
+					dialogue.className = 'dialog-box text-chat Streams_webrtc_hidden';
 
 					var dialogTitle=document.createElement('H3');
 					dialogTitle.innerHTML = 'Conference chat';
@@ -305,7 +305,7 @@
 					var dialogInner=document.createElement('DIV');
 					dialogInner.className = 'dialog-inner';
 					var chatBox=document.createElement('DIV');
-					chatBox.className = 'webrtc_tool_popup-chat-box';
+					chatBox.className = 'Streams_webrtc_popup-chat-box';
 
 
 					var close=document.createElement('div');
@@ -365,20 +365,20 @@
 						chatBox: chatBox,
 						isHidden: true,
 						hide: function () {
-							if(!this.chatDialogue.classList.contains('webrtc_tool_hidden')){
-								this.chatDialogue.classList.add('webrtc_tool_hidden');
+							if(!this.chatDialogue.classList.contains('Streams_webrtc_hidden')){
+								this.chatDialogue.classList.add('Streams_webrtc_hidden');
 								this.isHidden = true;
 							}
 						},
 						show: function () {
-							if(this.chatDialogue.classList.contains('webrtc_tool_hidden')) {
-								this.chatDialogue.classList.remove('webrtc_tool_hidden');
+							if(this.chatDialogue.classList.contains('Streams_webrtc_hidden')) {
+								this.chatDialogue.classList.remove('Streams_webrtc_hidden');
 								this.chatBox.scrollTop = this.chatBox.scrollHeight;
 								this.isHidden = false;
 
 								tool.newMessagesCounter.innerHTML = '0';
 								var msgCounter = tool.newMessagesCounter.parentNode;
-								if(!msgCounter.classList.contains('webrtc_tool_hidden')) msgCounter.classList.add('webrtc_tool_hidden');
+								if(!msgCounter.classList.contains('Streams_webrtc_hidden')) msgCounter.classList.add('Streams_webrtc_hidden');
 							}
 						},
 						toggle: function () {
@@ -507,10 +507,10 @@
 				}
 
 				/*if (!conferenceControl.cameraIsEnabled()) {
-					tool.speakerBtn.classList.remove('webrtc_tool_hidden');
+					tool.speakerBtn.classList.remove('Streams_webrtc_hidden');
 					tool.speakerBtn.innerHTML = conferenceControl.speakerIsEnabled() ? icons.enabledSpeaker : icons.disabledSpeaker;
 				} else {
-					tool.speakerBtn.classList.add('webrtc_tool_hidden');
+					tool.speakerBtn.classList.add('Streams_webrtc_hidden');
 				}*/
 
 
@@ -638,25 +638,25 @@
 				var tool = this;
 
 				var settingsPopup=document.createElement('DIV');
-				settingsPopup.className = 'webrtc_tool_popup-settings webrtc_tool_popup-box';
+				settingsPopup.className = 'Streams_webrtc_popup-settings Streams_webrtc_popup-box';
 
 				function toggleRadioButton(label) {
 					var allItems = Array.prototype.slice.call(settingsPopup.querySelectorAll('label'));
 					for(var i in allItems) {
 						if(allItems[i] == label) continue;
 						allItems[i].querySelector('input').checked = false;
-						allItems[i].classList.remove('webrtc_tool_disabled-radio');
+						allItems[i].classList.remove('Streams_webrtc_disabled-radio');
 					}
 
 					if(typeof label == "undefined") return;
 
-					if(!label.classList.contains('webrtc_tool_disabled-radio')) label.classList.add('webrtc_tool_disabled-radio');
+					if(!label.classList.contains('Streams_webrtc_disabled-radio')) label.classList.add('Streams_webrtc_disabled-radio');
 					label.querySelector('input').checked = true;
 				}
 				tool.toggleCameraButtons = toggleRadioButton;
 
 				var videoinputList = document.createElement('DIV');
-				videoinputList.className = 'webrtc_tool_choose-device'
+				videoinputList.className = 'Streams_webrtc_choose-device'
 
 
 				var turnOnCameraItem = document.createElement('LABEL');
@@ -667,7 +667,7 @@
 				radioBtn.value = 'camera';
 				var textLabel = document.createTextNode('Web Camera');
 				var checkmark = document.createElement('SPAN');
-				checkmark.className = 'webrtc_tool_radio-checkmark';
+				checkmark.className = 'Streams_webrtc_radio-checkmark';
 				checkmark.innerHTML = icons.screen;
 				turnOnCameraItem.appendChild(radioBtn);
 				turnOnCameraItem.appendChild(textLabel);
@@ -682,7 +682,7 @@
 				radioBtn.value = 'screen';
 				var textLabel = document.createTextNode('Screen sharing');
 				var checkmark = document.createElement('SPAN');
-				checkmark.className = 'webrtc_tool_radio-checkmark';
+				checkmark.className = 'Streams_webrtc_radio-checkmark';
 				checkmark.innerHTML = icons.screen;
 				screenSharingRadioItem.appendChild(radioBtn);
 				screenSharingRadioItem.appendChild(textLabel);
@@ -697,7 +697,7 @@
 				radioBtn.value = 'off';
 				var textLabel = document.createTextNode('Turn off all cameras');
 				var checkmark = document.createElement('SPAN');
-				checkmark.className = 'webrtc_tool_radio-checkmark';
+				checkmark.className = 'Streams_webrtc_radio-checkmark';
 				checkmark.innerHTML = icons.switchOffCameras;
 				turnOffradioBtnItem.appendChild(radioBtn);
 				turnOffradioBtnItem.appendChild(textLabel);
@@ -724,7 +724,7 @@
 						radioBtn.value = mediaDevice.deviceId;
 						var textLabel = document.createTextNode(mediaDevice.label || `Camera ${count  }`);
 						var checkmark = document.createElement('SPAN');
-						checkmark.className = 'webrtc_tool_radio-checkmark';
+						checkmark.className = 'Streams_webrtc_radio-checkmark';
 						checkmark.innerHTML = icons.camera;
 						radioBtnItem.appendChild(radioBtn);
 						radioBtnItem.appendChild(textLabel);
@@ -836,7 +836,7 @@
 							clearTimeout(tool.hoverTimeout.setttingsPopup);
 							tool.hoverTimeout.setttingsPopup = null;
 						}
-						tool.cameraBtn.parentNode.classList.add('webrtc_tool_hover');
+						tool.cameraBtn.parentNode.classList.add('Streams_webrtc_hover');
 					});
 					/*tool.cameraBtn.addEventListener('click', function (e) {
 						if(webRTClib.conferenceControl.frontCameraDevice() == null) {
@@ -862,7 +862,7 @@
 							e.preventDefault();
 						}
 						tool.hoverTimeout.setttingsPopup = setTimeout(function () {
-							tool.cameraBtn.parentNode.classList.remove('webrtc_tool_hover');
+							tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
 						}, 300)
 					});
 
@@ -875,7 +875,7 @@
 					})
 					settingsPopup.addEventListener('mouseleave', function (e) {
 						setTimeout(function () {
-							tool.cameraBtn.parentNode.classList.remove('webrtc_tool_hover');
+							tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
 						}, 300)
 
 					});
@@ -1108,16 +1108,16 @@
 					var isLocal = roomParticipant == localParticipant;
 					var participantItem = document.createElement('LI');
 					var tracksControlBtns = document.createElement('DIV');
-					tracksControlBtns.className = 'webrtc_tool_tracks-control';
+					tracksControlBtns.className = 'Streams_webrtc_tracks-control';
 					var muteVideoBtn = document.createElement('DIV');
-					muteVideoBtn.className = 'webrtc_tool_mute-video-btn' + (isLocal ? ' webrtc_tool_isLocal' : '');
+					muteVideoBtn.className = 'Streams_webrtc_mute-video-btn' + (isLocal ? ' Streams_webrtc_isLocal' : '');
 					muteVideoBtn.innerHTML = listIcons.screen;
 
 					var muteAudioBtn = document.createElement('DIV');
-					muteAudioBtn.className = 'webrtc_tool_mute-audio-btn' + (isLocal ? ' webrtc_tool_isLocal' : '');
+					muteAudioBtn.className = 'Streams_webrtc_mute-audio-btn' + (isLocal ? ' Streams_webrtc_isLocal' : '');
 					muteAudioBtn.innerHTML = isLocal ? icons.microphone : listIcons.loudSpeaker;
 					var participantIdentity = document.createElement('DIV');
-					participantIdentity.className = 'webrtc_tool_participants-identity';
+					participantIdentity.className = 'Streams_webrtc_participants-identity';
 					var participantIdentityText = document.createElement('DIV');
 					var userId = roomParticipant.identity != null ? roomParticipant.identity.split('\t')[0] : Q.Users.loggedInUser.id;
 					Q.activate(
@@ -1133,7 +1133,7 @@
 					//participantIdentityText.innerHTML = isLocal ? roomParticipant.identity + ' <span style="font-weight: normal;font-style: italic;">(me)</span>' : roomParticipant.identity;
 
 					var audioVisualization = document.createElement('DIV')
-					audioVisualization.className = 'webrtc_tool_popup-visualization';
+					audioVisualization.className = 'Streams_webrtc_popup-visualization';
 
 					webRTClib.screensInterface.audioVisualization().build({
 						name:'participantsPopup',
@@ -1230,13 +1230,13 @@
 				function createList() {
 					if(tool.participantsList == null) tool.participantsList = [];
 					var participantsListCon = document.createElement('DIV');
-					participantsListCon.className = 'webrtc_tool_popup-participants-list webrtc_tool_popup-box';
+					participantsListCon.className = 'Streams_webrtc_popup-participants-list Streams_webrtc_popup-box';
 
 					var topBtns = document.createElement('DIV');
 					topBtns.className = 'participants-list-btns';
 					var disconnectbtn = document.createElement('BUTTON');
 					disconnectbtn.type = 'button';
-					disconnectbtn.className = 'Q_button webrtc_tool_disconnect-btn';
+					disconnectbtn.className = 'Q_button Streams_webrtc_disconnect-btn';
 					disconnectbtn.innerHTML = icons.endCall + '<span>Disconnect</span>';
 
 					var loudestSelectCon = document.createElement('DIV');
@@ -1270,7 +1270,7 @@
 					participantsListCon.appendChild(topBtns);
 
 					tool.participantListEl = document.createElement('UL');
-					tool.participantListEl.className = 'webrtc_tool_participants-list';
+					tool.participantListEl.className = 'Streams_webrtc_participants-list';
 					addItem(localParticipant);
 					roomParticipants = webRTClib.roomParticipants();
 					for(var i in roomParticipants) {
@@ -1291,10 +1291,10 @@
 					if(Q.info.isMobile || Q.info.isTablet) {
 
 						tool.usersBtn.addEventListener('touchend', function (e) {
-							//tool.usersBtn.parentNode.classList.toggle('webrtc_tool_hover');
+							//tool.usersBtn.parentNode.classList.toggle('Streams_webrtc_hover');
 							Q.Dialogs.push({
 								title: "Participants",
-								className: 'webrtc_tool_participants-list',
+								className: 'Streams_webrtc_participants-list',
 								content: participantsListCon,
 								apply: true,
 								onActivate: function (dialog) {
@@ -1327,11 +1327,11 @@
 								if(participants[i].soundMeter.visualizations.participantsPopup != null) participants[i].soundMeter.visualizations.participantsPopup.reset();
 							}
 
-							tool.usersBtn.parentNode.classList.add('webrtc_tool_hover');
+							tool.usersBtn.parentNode.classList.add('Streams_webrtc_hover');
 						});
 						tool.usersBtn.parentNode.addEventListener('mouseleave', function (e) {
 							tool.hoverTimeout.participantsPopup = setTimeout(function () {
-								tool.usersBtn.parentNode.classList.remove('webrtc_tool_hover');
+								tool.usersBtn.parentNode.classList.remove('Streams_webrtc_hover');
 							}, 300)
 						});
 
@@ -1344,7 +1344,7 @@
 						})
 						participantsListCon.addEventListener('mouseleave', function (e) {
 							setTimeout(function () {
-								tool.usersBtn.parentNode.classList.remove('webrtc_tool_hover');
+								tool.usersBtn.parentNode.classList.remove('Streams_webrtc_hover');
 							}, 300)
 
 						});
