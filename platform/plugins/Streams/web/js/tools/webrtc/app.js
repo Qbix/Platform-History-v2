@@ -2774,8 +2774,8 @@ WebRTCconferenceLib = function app(options){
 
 		var hoverTimeout = {setttingsPopup:null, participantsPopup:null};
 
-		function loadDevicesList(mediaDevicesList) {
-			if(mediaDevicesList != null) {
+		function loadDevicesList(mediaDevicesList, reload) {
+			if(mediaDevicesList != null && typeof reload == 'undefined') {
 				var i, device;
 				for (i = 0; device = mediaDevicesList[i]; i++) {
 					if (_debug) console.log('loadDevicesList', device.label);
@@ -2787,12 +2787,7 @@ WebRTCconferenceLib = function app(options){
 							if (_debug) console.log('loadDevicesList device id', device.deviceId);
 							if (_debug) console.log('loadDevicesList device label', device.label);
 							if (_debug) console.log('loadDevicesList track label', mediaStreamTrack.id);
-							try {
-								if (_debug) console.log('loadDevicesList mediaStreamTrack: ' + JSON.stringify(Object.keys(mediaStreamTrack.getConstrains())));
-							} catch (e) {
-								console.log('ERRRRRRRRROOOOR: ' + e.message);
 
-							}
 							if (!(typeof cordova != 'undefined' && _isiOS)) {
 								if (mediaStreamTrack.enabled == true && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label || mediaStreamTrack.label == device.label)) {
 									frontCameraDevice = currentCameraDevice = device;
@@ -2813,7 +2808,9 @@ WebRTCconferenceLib = function app(options){
 						}
 					}
 				}
-			} else if (navigator.mediaDevices || navigator.mediaDevices.enumerateDevices) {
+				app.event.dispatch('deviceListUpdated');
+
+			} else if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
 				navigator.mediaDevices.enumerateDevices().then(function (mediaDevicesList) {
 					loadDevicesList(mediaDevicesList);
 				}).catch(function () {
@@ -3384,7 +3381,7 @@ WebRTCconferenceLib = function app(options){
 					app.conferenceControl.enableVideo();
 					videoInputDevices = [];
 					audioInputDevices = [];
-					//loadDevicesList();
+					loadDevicesList();
 					//}
 					app.event.dispatch('cameraEnabled');
 

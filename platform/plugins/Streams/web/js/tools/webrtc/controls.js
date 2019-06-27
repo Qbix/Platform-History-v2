@@ -118,6 +118,9 @@
 				webRTClib.event.on('micEnabled', function () {
 					tool.updateControlBar();
 				});
+				webRTClib.event.on('deviceListUpdated', function () {
+					tool.loadCamerasList();
+				});
 
 				var roomStream = webRTCclass.roomStream();
 				console.log('roomStream', roomStream)
