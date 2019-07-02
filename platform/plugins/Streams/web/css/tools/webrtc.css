@@ -5,7 +5,7 @@
 .Streams_webrtc_tool {
     height: 100%;
 }
-#webrtc_tool_room-media {
+#Streams_webrtc_room-media {
     position: fixed;
     top: 0;
     left: 0;
@@ -13,7 +13,7 @@
     pointer-events: none;
 }
 
-.webrtc_tool_desktop-screen .Streams_webrtc_controls_tool {
+.Streams_webrtc_desktop-screen .Streams_webrtc_controls_tool {
     display: flex;
     justify-content: center;
     bottom:0;
@@ -22,7 +22,7 @@
     z-index: 9999999;
 }
 
-.webrtc_tool_mobile-screen .Streams_webrtc_controls_tool {
+.Streams_webrtc_mobile-screen .Streams_webrtc_controls_tool {
     display: flex;
     justify-content: center;
     z-index: 999999;
@@ -31,7 +31,7 @@
     bottom: 0;
 }
 
-.webrtc_tool_hidden {
+.Streams_webrtc_hidden {
     display: none !important;
 }
 
@@ -65,7 +65,7 @@
 }
 
 
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control{
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control{
     display: flex;
     justify-content: center;
     padding-top: 15px;
@@ -78,61 +78,61 @@
     border-top-left-radius: 7px;
 
 }
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner{
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner{
     display: flex;
     height: 50px;
     max-width: 640px;
 }
 
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner > div{
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner > div{
     margin-right: 10px;
     height: 100%;
     display: flex;
     position: relative;
     justify-content: center;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner > div:last-child{
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner > div:last-child{
     margin-right: 0;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .additional-menu-con{
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .additional-menu-con{
     display: flex;
     align-items: center;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .additional-menu-con svg{
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .additional-menu-con svg{
     height: 35px;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner svg{
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner svg{
     height: 50px;
     pointer-events: all;
 }
 
 
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_camera-control-btn {
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_camera-control-btn {
     position: absolute;
     height: 100%;
     width: 100%;
     z-index: 5;
     cursor: pointer;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_manage-users-btn-btn {
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_manage-users-btn-btn {
     position: absolute;
     height: 100%;
     width: 100%;
     z-index: 5;
     cursor: pointer;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_manage-users-btn-btn {
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_manage-users-btn-btn {
     position: absolute;
     height: 100%;
     width: 100%;
     z-index: 5;
     cursor: pointer;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_text-chat-btn{
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_text-chat-btn{
     cursor: pointer;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_users-counter,
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_text-chat-counter{
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_users-counter,
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_text-chat-counter{
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -147,7 +147,7 @@
     justify-content: center;
     align-items: center;
 }
-.webrtc_tool_toggle-view-mode {
+.Streams_webrtc_toggle-view-mode {
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -171,7 +171,7 @@
 }
 
 
-.webrtc_tool_mobile-screen .webrtc_tool_conference-control{
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control{
     padding: 5px 5px 5px 5px;
     display: flex;
     justify-content: center;
@@ -181,49 +181,49 @@
     border-top-right-radius: 7px;
     border-top-left-radius: 7px;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner{
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner{
     display: flex;
     height: 45px;
     max-width: 640px;
 }
 
-.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner > div{
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner > div{
     margin-right: 10px;
     height: 100%;
     position: relative;
     display: flex;
     justify-content: center;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner > div:last-child{
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner > div:last-child{
     margin-right: 0;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner .additional-menu-con{
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner .additional-menu-con{
     display: flex;
     align-items: center;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner .additional-menu-con svg{
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner .additional-menu-con svg{
     height: 45px;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner svg{
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner svg{
     height: 45px;
 }
 
 
-.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner .webrtc_tool_camera-control-btn {
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_camera-control-btn {
     position: absolute;
     height: 100%;
     width: 100%;
     z-index: 5;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner .webrtc_tool_manage-users-btn-btn {
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_manage-users-btn-btn {
     position: absolute;
     height: 100%;
     width: 100%;
     z-index: 5;
 }
 
-.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner .webrtc_tool_users-counter,
-.webrtc_tool_mobile-screen .webrtc_tool_conference-control-inner .webrtc_tool_text-chat-counter {
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_users-counter,
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_text-chat-counter {
     width: 20px;
     height: 20px;
     border-radius: 50%;
@@ -238,7 +238,7 @@
     justify-content: center;
     align-items: center;
 }
-.webrtc_tool_mobile-screen.Q_verticalOrientation #webrtc_tool_room-media {
+.Streams_webrtc_mobile-screen.Q_verticalOrientation #Streams_webrtc_room-media {
     position: fixed;
     display: flex;
     justify-content: center;
@@ -248,7 +248,7 @@
     width: 100%;
 }
 
-.webrtc_tool_mobile-screen.Q_horizontalOrientation #webrtc_tool_room-media {
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation #Streams_webrtc_room-media {
     position: fixed;
     display: flex;
     justify-content: center;
@@ -256,7 +256,7 @@
     height: 100%;
     width: 100%;
 }
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_main-screen-stream {
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_main-screen-stream {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -264,48 +264,48 @@
     flex: 1;
     min-height: 0;
 }
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_main-screen-stream {
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_main-screen-stream {
     flex: 1;
     display: flex;
     justify-content: center;
     background: black;
     position:relative;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_full-screen-stream {
+.Streams_webrtc_mobile-screen .Streams_webrtc_full-screen-stream {
     width: 100vw;
     height: 100%;
 }
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_full-width-row {
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_full-width-row {
     width: 100vw;
     display: flex;
     align-items: center;
     position: relative;
 }
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_full-height-col {
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_full-height-col {
 
 }
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_half-width-row {
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_half-width-row {
     display: flex;
     width: 100vw;
 }
 
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_two-rows-grid .webrtc_tool_full-width-row,
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_two-rows-grid .webrtc_tool_half-width-row {
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_two-rows-grid .Streams_webrtc_full-width-row,
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_two-rows-grid .Streams_webrtc_half-width-row {
     height:50%;
 }
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_webrtc_tool_three-rows-grid .webrtc_tool_full-width-row,
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_webrtc_tool_three-rows-grid .webrtc_tool_half-width-row {
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_webrtc_tool_three-rows-grid .Streams_webrtc_full-width-row,
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_webrtc_tool_three-rows-grid .Streams_webrtc_half-width-row {
     height:33.3333333333%;
 }
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_two-cols-grid .webrtc_tool_full-height-col,
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_two-cols-grid .webrtc_tool_half-height-col {
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_two-cols-grid .Streams_webrtc_full-height-col,
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_two-cols-grid .Streams_webrtc_half-height-col {
     width:50%;
 }
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_three-cols-grid .webrtc_tool_full-height-col,
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_three-cols-grid .webrtc_tool_half-height-col {
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_three-cols-grid .Streams_webrtc_full-height-col,
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_three-cols-grid .Streams_webrtc_half-height-col {
     width:33.3333333333%;
 }
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_video-thumbs-wrapper {
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_video-thumbs-wrapper {
     height: 99px;
     max-width: 100vw;
     overflow-y: hidden;
@@ -318,7 +318,7 @@
     justify-content: flex-end;
     z-index: 999999999;
 }
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_video-thumbs-wrapper {
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_video-thumbs-wrapper {
     max-height: 100%;
     width: 24vw;
     overflow-y: scroll;
@@ -331,7 +331,7 @@
     justify-content: flex-end;
     z-index: 999999999;
 }
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-inner{
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_video-thumbs-inner{
     height: auto;
     overflow: hidden;
     white-space: nowrap;
@@ -339,59 +339,59 @@
     flex-direction: row;
     justify-content: flex-end;
 }
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-inner{
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_video-thumbs-inner{
     white-space: nowrap;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
 }
 
-.webrtc_tool_mobile-screen .webrtc_tool_full-screen-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_chat-participant{
+.Streams_webrtc_mobile-screen .Streams_webrtc_full-screen-grid .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_chat-participant{
     position: static;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_full-screen-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_chat-participant-video video{
+.Streams_webrtc_mobile-screen .Streams_webrtc_full-screen-grid .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_chat-participant-video video{
     max-width: 100%;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_full-screen-stream {
+.Streams_webrtc_mobile-screen .Streams_webrtc_full-screen-stream {
     /*width:auto;*/
 }
-.webrtc_tool_mobile-screen .video-thumbs-row {
+.Streams_webrtc_mobile-screen .video-thumbs-row {
     width:100%;
     height:100%;
 }
 
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_video-thumbs-wrapper .webrtc_tool_flex-row-item{
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_flex-row-item{
     display: inline-block;
     width:100%;
     height:100px;
     margin-bottom: 5px;
 }
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_video-thumbs-wrapper .webrtc_tool_flex-row-item{
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_flex-row-item{
     display: block;
     width:100px;
     height:100px;
     margin-right:5px;
 }
 
-.Q_horizontalOrientation.webrtc_tool_mobile-screen .webrtc_tool_chat-participant.screensharing {
+.Q_horizontalOrientation.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant.screensharing {
     transform: none;
     -webkit-transform:none;
     -moz-transform:none;
 }
-.Q_horizontalOrientation.webrtc_tool_mobile-screen .webrtc_tool_chat-participant.screensharing {
+.Q_horizontalOrientation.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant.screensharing {
     transform: none;
     -webkit-transform:none;
     -moz-transform:none;
 }
 
-.webrtc_tool_mobile-screen .webrtc_tool_chat-participant {
+.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant {
     pointer-events: all;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_tiled-grid-screen.webrtc_tool_chat-participant {
+.Streams_webrtc_mobile-screen .Streams_webrtc_tiled-grid-screen.Streams_webrtc_chat-participant {
     width:100%;
     height:100%;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_tiled-grid-screen.webrtc_tool_chat-participant {
+.Streams_webrtc_mobile-screen .Streams_webrtc_tiled-grid-screen.Streams_webrtc_chat-participant {
     width: 100%;
     margin: 0;
     height: 100%;
@@ -400,46 +400,46 @@
     position: absolute;
     border-radius: 0;
 }
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_full-width-row .webrtc_tool_chat-participant {
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_full-width-row .Streams_webrtc_chat-participant {
     width: 100%;
     position: absolute;
     height: 100%;
 }
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_full-height-col .webrtc_tool_chat-participant {
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_full-height-col .Streams_webrtc_chat-participant {
     height: 100%;
 }
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_half-width-row .webrtc_tool_chat-participant {
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_half-width-row .Streams_webrtc_chat-participant {
     width:50%;
 }
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_half-height-col .webrtc_tool_chat-participant {
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_half-height-col .Streams_webrtc_chat-participant {
     height:50%;
 }
 
-.webrtc_tool_mobile-screen .app-view .view-header {
+.Streams_webrtc_mobile-screen .app-view .view-header {
     display: flex;
     height: 55px;
     border-bottom: 1px solid #cccccc;
 }
-.webrtc_tool_mobile-screen .app-view .back-arrow {
+.Streams_webrtc_mobile-screen .app-view .back-arrow {
     display: flex;
     align-items: center;
     padding: 0 20px 0 15px;
 }
-.webrtc_tool_mobile-screen .app-view .back-arrow svg{
+.Streams_webrtc_mobile-screen .app-view .back-arrow svg{
     height: 25px;
 }
-.webrtc_tool_mobile-screen .app-view .view-title {
+.Streams_webrtc_mobile-screen .app-view .view-title {
     display: flex;
     align-items: center;
 }
-.webrtc_tool_mobile-screen .app-view .view-title span{
+.Streams_webrtc_mobile-screen .app-view .view-title span{
     font-weight: bold;
     font-size: 20px;
 }
 
 
 /*participants list*/
-.webrtc_tool_mobile-screen #participants-list-view {
+.Streams_webrtc_mobile-screen #participants-list-view {
     display: none;
     position: fixed;
     z-index: 10;
@@ -448,43 +448,43 @@
     height: 100%;
     background: white;
 }
-.webrtc_tool_mobile-screen #participants-list-view.active {
+.Streams_webrtc_mobile-screen #participants-list-view.active {
     display:block;
 }
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list {
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list {
     margin:0;
     padding: 0;
 }
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list li {
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list li {
     display: flex;
     padding: 8px 16px;
     border-bottom: 1px solid #ddd;
     width:100%;
 }
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control {
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control {
     display: flex;
 }
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control div {
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control div {
     margin-right:10px;
 }
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control svg{
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control svg{
     height:50px;
 }
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control .webrtc_tool_mute-video-btn.webrtc_tool_isLocal .camera-icon path,
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control .webrtc_tool_mute-audio-btn.webrtc_tool_isLocal .microphone-icon path {
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn.Streams_webrtc_isLocal .camera-icon path,
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-audio-btn.Streams_webrtc_isLocal .microphone-icon path {
     fill: #C12337;
 }
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity{
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity{
     display: flex;
     align-items: center;
     padding-left: 10px;
 }
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity span{
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity span{
     font-weight: bold;
     color: #000;
 }
 
-.webrtc_tool_mobile-screen .webrtc_tool_conference-control .webrtc_tool_popup-box {
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control .Streams_webrtc_popup-box {
     display: none;
     padding: 0;
     margin: 0;
@@ -502,10 +502,10 @@
     width: 90vw;
     z-index: 9999999999;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_conference-control .webrtc_tool_hover .webrtc_tool_popup-box {
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control .Streams_webrtc_hover .Streams_webrtc_popup-box {
     display: block;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_conference-control .webrtc_tool_hover .webrtc_tool_popup-box::after{
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control .Streams_webrtc_hover .Streams_webrtc_popup-box::after{
     content: "";
     position: absolute;
     top: 100%;
@@ -516,30 +516,30 @@
     border-width: 20px;
     margin-left: -20px;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_conference-control .webrtc_tool_hover .webrtc_tool_popup-box ul li:last-child{
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control .Streams_webrtc_hover .Streams_webrtc_popup-box ul li:last-child{
     border: 0;
 }
 
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list li {
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list li {
     display: flex;
     padding: 8px 16px;
     border-bottom: 1px solid #ddd;
     width: 100%;
 }
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control {
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control {
     display: flex;
 }
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control div {
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control div {
     margin-right: 10px;
 }
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control svg {
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control svg {
     height: 50px;
 }
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control .webrtc_tool_mute-video-btn.webrtc_tool_isLocal .camera-icon path,
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control .webrtc_tool_mute-audio-btn.webrtc_tool_isLocal .microphone-icon path {
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn.Streams_webrtc_isLocal .camera-icon path,
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-audio-btn.Streams_webrtc_isLocal .microphone-icon path {
     fill: #C12337;
 }
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity {
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity {
     flex: 1;
     display: flex;
     align-items: center;
@@ -548,7 +548,7 @@
     position: relative;
 }
 
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity .webrtc_tool_popup-visualization {
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity .Streams_webrtc_popup-visualization {
     position:absolute;
     width: 100%;
     height:100%;
@@ -556,19 +556,19 @@
     right: 0;
     z-index: 1;
 }
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity .Users_avatar_tool {
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity .Users_avatar_tool {
     display: flex;
     flex-wrap: nowrap;
     max-width: 100%;
     z-index: 10;
 }
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity .Users_avatar_name {
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity .Users_avatar_name {
     font-weight: bold;
     margin-left: 5px;
     flex: 1;
     overflow: hidden;
 }
-.webrtc_tool_mobile-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity .Users_avatar_name span{
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity .Users_avatar_name span{
     display: inline-block;
     max-width: 100%;
     text-overflow: ellipsis;
@@ -576,9 +576,9 @@
 }
 
 
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_full-screen-grid .webrtc_tool_chat-participant,
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_two-cols-grid .webrtc_tool_chat-participant,
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_two-cols-grid .webrtc_tool_chat-participant {
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_full-screen-grid .Streams_webrtc_chat-participant,
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_two-cols-grid .Streams_webrtc_chat-participant,
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_two-cols-grid .Streams_webrtc_chat-participant {
     display: flex;
     flex-direction: column;
     background-color: #fff;
@@ -587,8 +587,8 @@
     position: relative;
 }
 
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant,
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_chat-participant {
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_chat-participant,
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_chat-participant {
     display: block;
     background-color: lightgrey;
     box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
@@ -598,29 +598,29 @@
     width: 100%;
 }
 
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen.webrtc_tool_chat-participant,
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen.webrtc_tool_chat-participant {
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_minimized-small-screen.Streams_webrtc_chat-participant,
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_minimized-small-screen.Streams_webrtc_chat-participant {
     z-index: 1000;
     border-radius: 5px;
     box-shadow: 0 0 40px 0 rgba(0,0,0,0.5);
 }
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen.webrtc_tool_chat-participant {
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_minimized-small-screen.Streams_webrtc_chat-participant {
 
 }
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen.webrtc_tool_chat-participant {
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_minimized-small-screen.Streams_webrtc_chat-participant {
 
 }
 
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_maximized-main-screen.webrtc_tool_chat-participant {
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_maximized-main-screen.Streams_webrtc_chat-participant {
     overflow: hidden;
 }
 
-.webrtc_tool_mobile-screen .webrtc_tool_two-rows-grid .webrtc_tool_chat-participant-video,
-.webrtc_tool_mobile-screen .webrtc_tool_webrtc_tool_three-rows-grid .webrtc_tool_chat-participant-video,
-.webrtc_tool_mobile-screen .webrtc_tool_full-screen-grid .webrtc_tool_chat-participant-video,
-.webrtc_tool_mobile-screen .webrtc_tool_two-cols-grid .webrtc_tool_chat-participant-video,
-.webrtc_tool_mobile-screen .webrtc_tool_three-cols-grid .webrtc_tool_chat-participant-video,
-.webrtc_tool_mobile-screen .webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video {
+.Streams_webrtc_mobile-screen .Streams_webrtc_two-rows-grid .Streams_webrtc_chat-participant-video,
+.Streams_webrtc_mobile-screen .Streams_webrtc_webrtc_tool_three-rows-grid .Streams_webrtc_chat-participant-video,
+.Streams_webrtc_mobile-screen .Streams_webrtc_full-screen-grid .Streams_webrtc_chat-participant-video,
+.Streams_webrtc_mobile-screen .Streams_webrtc_two-cols-grid .Streams_webrtc_chat-participant-video,
+.Streams_webrtc_mobile-screen .Streams_webrtc_three-cols-grid .Streams_webrtc_chat-participant-video,
+.Streams_webrtc_mobile-screen .Streams_webrtc_tiled-grid-screen .Streams_webrtc_chat-participant-video {
     flex: 1;
     background: black;
     display: flex;
@@ -630,38 +630,38 @@
     height: 100%;
     overflow: hidden;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_three-cols-grid .webrtc_tool_chat-participant-video.isHorizontal {
+.Streams_webrtc_mobile-screen .Streams_webrtc_three-cols-grid .Streams_webrtc_chat-participant-video.isHorizontal {
     justify-content: normal;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_two-rows-grid .webrtc_tool_chat-participant-video video,
-.webrtc_tool_mobile-screen .webrtc_tool_webrtc_tool_three-rows-grid .webrtc_tool_chat-participant-video video,
-.webrtc_tool_mobile-screen .webrtc_tool_full-screen-grid .webrtc_tool_chat-participant-video video,
-.webrtc_tool_mobile-screen .webrtc_tool_two-cols-grid .webrtc_tool_chat-participant-video video,
-.webrtc_tool_mobile-screen .webrtc_tool_three-cols-grid .webrtc_tool_chat-participant-video video {
+.Streams_webrtc_mobile-screen .Streams_webrtc_two-rows-grid .Streams_webrtc_chat-participant-video video,
+.Streams_webrtc_mobile-screen .Streams_webrtc_webrtc_tool_three-rows-grid .Streams_webrtc_chat-participant-video video,
+.Streams_webrtc_mobile-screen .Streams_webrtc_full-screen-grid .Streams_webrtc_chat-participant-video video,
+.Streams_webrtc_mobile-screen .Streams_webrtc_two-cols-grid .Streams_webrtc_chat-participant-video video,
+.Streams_webrtc_mobile-screen .Streams_webrtc_three-cols-grid .Streams_webrtc_chat-participant-video video {
     position: absolute;
     max-width: 100%;
     max-height: 100%;
 }
 
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video video.isHorizontal {
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_tiled-grid-screen .Streams_webrtc_chat-participant-video video.isHorizontal {
     position: absolute;
     height: 100%
 }
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video video.isHorizontal {
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_tiled-grid-screen .Streams_webrtc_chat-participant-video video.isHorizontal {
     position: absolute;
     height: 100%
 }
-.webrtc_tool_mobile-screen .webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video video.isVertical {
+.Streams_webrtc_mobile-screen .Streams_webrtc_tiled-grid-screen .Streams_webrtc_chat-participant-video video.isVertical {
     position: absolute;
     width: 100%
 }
-.webrtc_tool_mobile-screen .webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video video {
+.Streams_webrtc_mobile-screen .Streams_webrtc_tiled-grid-screen .Streams_webrtc_chat-participant-video video {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.webrtc_tool_mobile-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video {
+.Streams_webrtc_mobile-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_chat-participant-video {
     flex: 1;
     background: black;
     display: flex;
@@ -671,52 +671,52 @@
     width:100%;
     height: 100%;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_maximized-screens-grid webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video {
+.Streams_webrtc_mobile-screen .Streams_webrtc_maximized-screens-grid webrtc_tool_minimized-small-screen .Streams_webrtc_chat-participant-video {
     display: block;
 }
 
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video.isHorizontal,
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video.isVertical {
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_chat-participant-video.isHorizontal,
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_chat-participant-video.isVertical {
     /*flex-direction: row;*/
 }
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video.isHorizontal,
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video.isVertical {
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_chat-participant-video.isHorizontal,
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_chat-participant-video.isVertical {
     /*flex-direction: column;*/
 }
 
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isHorizontal,
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isVertical{
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_maximized-main-screen .Streams_webrtc_chat-participant-video video.isHorizontal,
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_maximized-main-screen .Streams_webrtc_chat-participant-video video.isVertical{
     width: 100%;
 }
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isHorizontal,
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_maximized-screens-grid .webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isVertical{
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_maximized-main-screen .Streams_webrtc_chat-participant-video video.isHorizontal,
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_maximized-main-screen .Streams_webrtc_chat-participant-video video.isVertical{
     width: 100%;
     height: 100%;
     position: absolute;
     object-fit: cover;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video video.isHorizontal {
+.Streams_webrtc_mobile-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_minimized-small-screen .Streams_webrtc_chat-participant-video video.isHorizontal {
     width: 100%;
     height: 100%;
     object-fit: cover;
     position: absolute;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video video.isVertical {
+.Streams_webrtc_mobile-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_minimized-small-screen .Streams_webrtc_chat-participant-video video.isVertical {
     width: 100%;
     height: 100%;
     object-fit: cover;
     position: absolute;
 }
 /*
-.webrtc_tool_mobile-screen .webrtc_tool_chat-participant-video video.isVertical{
+.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-video video.isVertical{
     width: 100%;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_chat-participant-video video.isHorizontal{
+.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-video video.isHorizontal{
     height: 100%;
 }*/
 
 
-.webrtc_tool_mobile-screen .webrtc_tool_participant-voice {
+.Streams_webrtc_mobile-screen .Streams_webrtc_participant-voice {
     width: 50%;
     height: 100%;
     position: absolute;
@@ -726,7 +726,7 @@
     opacity: 0.8;
     pointer-events: none;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_participant-voice:before {
+.Streams_webrtc_mobile-screen .Streams_webrtc_participant-voice:before {
     content: ' ';
     z-index: 10;
     display: block;
@@ -743,17 +743,17 @@
     background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.97) 3%, rgba(0,0,0,0) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000', GradientType=1 );
 }
-.webrtc_tool_mobile-screen .webrtc_tool_maximized-main-screen .webrtc_tool_participant-voice {
+.Streams_webrtc_mobile-screen .Streams_webrtc_maximized-main-screen .Streams_webrtc_participant-voice {
     top: 0;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_minimized-small-screen .webrtc_tool_participant-voice {
+.Streams_webrtc_mobile-screen .Streams_webrtc_minimized-small-screen .Streams_webrtc_participant-voice {
     right: 0;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_participant-voice svg{
+.Streams_webrtc_mobile-screen .Streams_webrtc_participant-voice svg{
     position: absolute;
     bottom: 0;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_chat-participant-name {
+.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-name {
     padding: 8px 5px 8px 10px;
     /* transform: translateY(100%); */
     display: flex;
@@ -766,14 +766,14 @@
     color: white;
 }
 
-.webrtc_tool_mobile-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text{
+.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-name-text{
     overflow: hidden;
     display: flex;
     align-items: center;
     white-space: nowrap;
     z-index: 10;
 }
-.webrtc_tool_mobile-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text div{
+.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-name-text div{
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -782,7 +782,7 @@
 
 
 /*desktop version*/
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant {
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant {
     display: flex;
     flex-direction: column;
     background-color: #fff;
@@ -807,12 +807,12 @@
     /* border: 5px solid transparent; */
 }
 
-.webrtc_tool_desktop-screen .video-thumbs-row .webrtc_tool_flex-row-item {
+.Streams_webrtc_desktop-screen .video-thumbs-row .Streams_webrtc_flex-row-item {
     display: inline-block;
     width: 176px;
     height: 99px;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant {
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant {
     display: flex;
     flex-direction: column;
     border-radius: 6px;
@@ -823,17 +823,17 @@
     overflow: hidden;
     /*margin: 15px;*/
 }
-.webrtc_tool_desktop-screen .desktop-screen-grid .webrtc_tool_chat-participant:hover {
+.Streams_webrtc_desktop-screen .desktop-screen-grid .Streams_webrtc_chat-participant:hover {
     cursor:grab;
 }
-.webrtc_tool_desktop-screen .video-thumbs-row .webrtc_tool_flex-row-item .webrtc_tool_chat-participant {
+.Streams_webrtc_desktop-screen .video-thumbs-row .Streams_webrtc_flex-row-item .Streams_webrtc_chat-participant {
     height: 100%;
     width: auto;
     margin: 0;
     border-radius: 0;
 }
 
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-video {
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-video {
     flex: 1;
     background: black;
     display: block;
@@ -843,69 +843,69 @@
 }
 
 
-.webrtc_tool_desktop-screen .webrtc_tool_full-screen-stream {
+.Streams_webrtc_desktop-screen .Streams_webrtc_full-screen-stream {
     display: flex;
     justify-content: center;
     position: relative;
     flex: 1;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_full-screen-stream .webrtc_tool_chat-participant-video {
+.Streams_webrtc_desktop-screen .Streams_webrtc_full-screen-stream .Streams_webrtc_chat-participant-video {
     max-height: 100%;
 }
-.webrtc_tool_desktop-screen .video-thumbs-row .webrtc_tool_chat-participant-video {
+.Streams_webrtc_desktop-screen .video-thumbs-row .Streams_webrtc_chat-participant-video {
     height: 100%;
     max-height: 100%;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video {
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant.Streams_webrtc_minimized-small-screen .Streams_webrtc_chat-participant-video {
     height: 100%;
     max-height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-video.isVertical {
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant.Streams_webrtc_regular-screen .Streams_webrtc_chat-participant-video.isVertical {
     height: 100%;
     width: 100%;
     flex-direction: column;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-video.isHorizontal {
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant.Streams_webrtc_regular-screen .Streams_webrtc_chat-participant-video.isHorizontal {
     height: 100%;
     width: 100%;
     flex-direction: column;
     position: relative;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isHorizontal{
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant.Streams_webrtc_maximized-main-screen .Streams_webrtc_chat-participant-video video.isHorizontal{
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_maximized-main-screen .webrtc_tool_chat-participant-video video.isVertical{
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant.Streams_webrtc_maximized-main-screen .Streams_webrtc_chat-participant-video video.isVertical{
     width: 100%;
     height: 100%;
     position: absolute;
     object-fit: cover;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-video video.isHorizontal {
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant.Streams_webrtc_regular-screen .Streams_webrtc_chat-participant-video video.isHorizontal {
     width:100%;
     height: auto;
     position: absolute;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-video video.isVertical {
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant.Streams_webrtc_regular-screen .Streams_webrtc_chat-participant-video video.isVertical {
     height: 100%;
     width: auto;
     position: absolute;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video video{
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant.Streams_webrtc_minimized-small-screen .Streams_webrtc_chat-participant-video video{
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_tiled-grid-screen .webrtc_tool_chat-participant-video video{
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant.Streams_webrtc_tiled-grid-screen .Streams_webrtc_chat-participant-video video{
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name {
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name {
     width: 100%;
     box-sizing: border-box;
     z-index: 2;
@@ -917,7 +917,7 @@
     background: white;
     color:black;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_participant-voice {
+.Streams_webrtc_desktop-screen .Streams_webrtc_participant-voice {
     width: 50%;
     height: 100%;
     position: absolute;
@@ -926,7 +926,7 @@
     z-index: 1;
     opacity: 0.8;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_participant-voice:before {
+.Streams_webrtc_desktop-screen .Streams_webrtc_participant-voice:before {
     content: ' ';
     z-index: 10;
     display: block;
@@ -943,11 +943,11 @@
     background: linear-gradient(to right, rgba(255,255,255,1) 32%, rgba(255,255,255,0) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff', GradientType=1 );
 }
-.webrtc_tool_desktop-screen .webrtc_tool_participant-voice svg{
+.Streams_webrtc_desktop-screen .Streams_webrtc_participant-voice svg{
     position: absolute;
     bottom: 0;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-name {
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant.Streams_webrtc_regular-screen .Streams_webrtc_chat-participant-name {
     display: flex;
     justify-content: space-between;
     white-space: nowrap;
@@ -958,7 +958,7 @@
     height: 50px;
     width: auto;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-name {
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant.Streams_webrtc_minimized-small-screen .Streams_webrtc_chat-participant-name {
     height: auto;
     padding: 5px 5px 7px 8px;
     width: 100%;
@@ -969,14 +969,14 @@
     position: relative;
     font-size: 14px;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_maximized-main-screen .webrtc_tool_participant-voice {
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant.Streams_webrtc_maximized-main-screen .Streams_webrtc_participant-voice {
     bottom:0;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-small-screen .webrtc_tool_participant-voice {
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant.Streams_webrtc_minimized-small-screen .Streams_webrtc_participant-voice {
     right: 0;
 }
 
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text{
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-name-text{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -984,25 +984,25 @@
     z-index: 10;
     font-weight: bold;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text .Users_avatar_name{
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-name-text .Users_avatar_name{
     max-width: 100%;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-name-text .Users_avatar_name > *{
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-name-text .Users_avatar_name > *{
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     max-width: 100%;
     display: inline-block;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns{
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-screen-btns{
     display: flex;
     align-items: center;
     z-index:10;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns span{
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-screen-btns span{
     display: block;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns button{
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-screen-btns button{
     background: transparent;
     border: 0;
     outline: 0;
@@ -1011,20 +1011,20 @@
     margin: 0;
     height: 30px;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns{
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant.Streams_webrtc_minimized-small-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-screen-btns{
     display: none;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns img{
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-screen-btns img{
     height: 100%;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_chat-participant.webrtc_tool_regular-screen .webrtc_tool_chat-participant-name .webrtc_tool_participant-screen-btns img{
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant.Streams_webrtc_regular-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-screen-btns img{
     height: 100%;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_full-screen-stream .webrtc_tool_chat-participant-name {
+.Streams_webrtc_desktop-screen .Streams_webrtc_full-screen-stream .Streams_webrtc_chat-participant-name {
     background-color: rgba(0, 0, 0, 0.4);
     color: white;
 }
-.webrtc_tool_desktop-screen .video-thumbs-row .webrtc_tool_chat-participant-name {
+.Streams_webrtc_desktop-screen .video-thumbs-row .Streams_webrtc_chat-participant-name {
     width: 100%;
     padding: 3px 10px;
     background-color: rgba(0, 0, 0, 0.4);
@@ -1033,24 +1033,24 @@
 
 /*minimized/screen grid*/
 
-.webrtc_tool_desktop-screen .webrtc_tool_desktop-fixed-screen-grid {
+.Streams_webrtc_desktop-screen .Streams_webrtc_desktop-fixed-screen-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     padding-top: 10px;
 }
 
-.webrtc_tool_desktop-screen .webrtc_tool_desktop-fixed-screen-grid .webrtc_tool_video-thumbs-wrapper {
+.Streams_webrtc_desktop-screen .Streams_webrtc_desktop-fixed-screen-grid .Streams_webrtc_video-thumbs-wrapper {
     position: static;
 }
 
-.webrtc_tool_desktop-screen .webrtc_tool_desktop-fixed-screen-grid .webrtc_tool_video-thumbs-row .webrtc_tool_flex-row-item{
+.Streams_webrtc_desktop-screen .Streams_webrtc_desktop-fixed-screen-grid .Streams_webrtc_video-thumbs-row .Streams_webrtc_flex-row-item{
     display: inline-block;
     width:176px;
     height:99px;
 }
 
-.webrtc_tool_desktop-screen .webrtc_tool_desktop-fixed-screen-grid .webrtc_tool_chat-participant {
+.Streams_webrtc_desktop-screen .Streams_webrtc_desktop-fixed-screen-grid .Streams_webrtc_chat-participant {
     display: flex;
     flex-direction: column;
     background-color: #fff;
@@ -1065,7 +1065,7 @@
     /* border: 5px solid transparent; */
 }
 
-.webrtc_tool_desktop-screen .webrtc_tool_desktop-fixed-screen-grid .webrtc_tool_chat-participant-video {
+.Streams_webrtc_desktop-screen .Streams_webrtc_desktop-fixed-screen-grid .Streams_webrtc_chat-participant-video {
     flex: 1;
     background: black;
     display: flex;
@@ -1076,7 +1076,7 @@
     /* border: 5px solid transparent; */
 }
 
-.webrtc_tool_desktop-screen .webrtc_tool_desktop-fixed-screen-grid .webrtc_tool_chat-participant-name {
+.Streams_webrtc_desktop-screen .Streams_webrtc_desktop-fixed-screen-grid .Streams_webrtc_chat-participant-name {
     padding: 8px 5px 8px 10px;
     /* transform: translateY(100%);
     position: absolute;*/
@@ -1089,7 +1089,7 @@
 }
 
 
-.webrtc_tool_desktop-screen .webrtc_tool_desktop-fixed-screen-grid .webrtc_tool_video-thumbs-row .webrtc_tool_flex-row-item {
+.Streams_webrtc_desktop-screen .Streams_webrtc_desktop-fixed-screen-grid .Streams_webrtc_video-thumbs-row .Streams_webrtc_flex-row-item {
     display: inline-block;
     width: 176px;
     height: 99px;
@@ -1099,7 +1099,7 @@
 
 
 /*desktop main screen and thumbs grid*/
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid {
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid {
     position: fixed;
     display: flex;
     justify-content: center;
@@ -1110,32 +1110,32 @@
     width: 100vw;
     height: 100vh;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_main-screen-stream {
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_main-screen-stream {
     flex: 1;
     align-items: center;
     display: flex;
     justify-content: center;
     position: relative;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper {
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_video-thumbs-wrapper {
     overflow-y: auto;
 }
 
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-inner {
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_video-thumbs-inner {
     overflow: hidden;
     height:80px;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-right,
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-left {
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_video-thumbs-right,
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_video-thumbs-left {
     height:80px;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-left {
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_video-thumbs-left {
     text-align: right;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-right {
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_video-thumbs-right {
    text-align: left;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_flex-row-item {
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_flex-row-item {
     display: block;
     width: 105px;
     height: 80px;
@@ -1143,24 +1143,24 @@
     /*position:absolute;*/
 }
 
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-left .webrtc_tool_flex-row-item{
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_video-thumbs-left .Streams_webrtc_flex-row-item{
     margin-right:5px;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-left .webrtc_tool_flex-row-item:last-child{
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_video-thumbs-left .Streams_webrtc_flex-row-item:last-child{
     margin-right:0;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-right .webrtc_tool_flex-row-item{
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_video-thumbs-right .Streams_webrtc_flex-row-item{
     margin-left: 5px;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_video-thumbs-right .webrtc_tool_flex-row-item:first-child{
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_video-thumbs-right .Streams_webrtc_flex-row-item:first-child{
     margin-left: 0;
 }
 
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_flex-row-item.loudest-screen-btn-con {
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_flex-row-item.loudest-screen-btn-con {
     height: auto;
     text-align: center;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant{
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_chat-participant{
     display: flex;
     background-color: #fff;
     overflow: hidden;
@@ -1168,20 +1168,20 @@
     width:auto;
     height:auto;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_video-thumbs-wrapper .webrtc_tool_chat-participant{
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_chat-participant{
    /* position: absolute;*/
     height: 100%;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
 
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_main-screen-stream .webrtc_tool_chat-participant {
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_main-screen-stream .Streams_webrtc_chat-participant {
     height: auto;
     position: absolute;
     height: 95%;
 }
 
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-video {
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_chat-participant-video {
     flex: 1;
     background: black;
     display: block;
@@ -1193,18 +1193,18 @@
     position: relative;
     overflow: hidden;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-video video{
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_minimized-small-screen .Streams_webrtc_chat-participant-video video{
     width: 100%;
     height: 100%;
     position: absolute;
     object-fit: cover;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_chat-participant-name {
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_chat-participant-name {
     /* transform: translateY(100%); */
     width: 100%;
     bottom: 0;
     box-sizing: border-box;
-    z-index: 99999999999999999999999;
+    z-index: 1000;
     display: flex;
     justify-content: space-between;
     white-space: nowrap;
@@ -1213,11 +1213,11 @@
     font-size: 14px;
     height: 50px;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_maximized-screens-grid .webrtc_tool_minimized-small-screen .webrtc_tool_chat-participant-name {
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_minimized-small-screen .Streams_webrtc_chat-participant-name {
     position: relative;
 }
 
-.webrtc_tool_desktop-screen .webrtc_tool_tiled-screens-grid .webrtc_tool_chat-participant-video {
+.Streams_webrtc_desktop-screen .Streams_webrtc_tiled-screens-grid .Streams_webrtc_chat-participant-video {
     flex: 1;
     background: black;
     display: block;
@@ -1228,7 +1228,7 @@
     width: 100%;
     position: relative;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_tiled-screens-grid .webrtc_tool_chat-participant-video video{
+.Streams_webrtc_desktop-screen .Streams_webrtc_tiled-screens-grid .Streams_webrtc_chat-participant-video video{
     width: 100%;
     height: 100%;
     position: absolute;
@@ -1238,7 +1238,7 @@
 .dialog-participants-con {
     padding-top: 20px;
 }
-.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list {
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list {
     padding: 0;
     margin: 0;
     min-width: 400px;
@@ -1248,7 +1248,7 @@
     overflow-x: hidden;
 }
 
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control .webrtc_tool_popup-box {
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control .Streams_webrtc_popup-box {
     display: none;
     padding: 0;
     margin: 0;
@@ -1259,10 +1259,10 @@
     left: -175px;
     width:400px;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control .webrtc_tool_hover .webrtc_tool_popup-box {
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control .Streams_webrtc_hover .Streams_webrtc_popup-box {
     display: block;
 }
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control .webrtc_tool_hover .webrtc_tool_popup-box::after{
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control .Streams_webrtc_hover .Streams_webrtc_popup-box::after{
     content: "";
     position: absolute;
     top: 99%;
@@ -1273,36 +1273,36 @@
     border-color: white transparent transparent transparent;
 }
 
-.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list li {
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list li {
     display: flex;
     position: relative;
     padding: 8px 16px;
     border-bottom: 1px solid #ddd;
     width: 100%;
 }
-.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control {
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control {
     display: flex;
     min-width: 120px;
 }
-.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control div {
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control div {
     margin-right: 10px;
     cursor: pointer;
 }
-.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control svg {
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control svg {
     height: 50px;
 }
-.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control .webrtc_tool_mute-video-btn.webrtc_tool_isLocal .camera-icon path,
-.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_tracks-control .webrtc_tool_mute-audio-btn.webrtc_tool_isLocal .microphone-icon path {
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn.Streams_webrtc_isLocal .camera-icon path,
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-audio-btn.Streams_webrtc_isLocal .microphone-icon path {
     fill: #C12337;
 }
-.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity {
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity {
     flex: 1;
     display: flex;
     position: relative;
     align-items: center;
     padding-left: 10px;
 }
-.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity .webrtc_tool_popup-visualization {
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity .Streams_webrtc_popup-visualization {
     position:absolute;
     width: 100%;
     height:100%;
@@ -1310,16 +1310,16 @@
     right: 0;
     z-index: 1;
 }
-.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity .Users_avatar_tool {
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity .Users_avatar_tool {
     display: flex;
     z-index: 10;
 }
-.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity .Users_avatar_tool .Users_avatar_name {
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity .Users_avatar_tool .Users_avatar_name {
     display: flex;
     flex-direction: column;
     margin-left: 5px;
 }
-.webrtc_tool_desktop-screen ul.webrtc_tool_participants-list .webrtc_tool_participants-identity span {
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity span {
     font-weight: bold;
 }
 
@@ -1444,75 +1444,75 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.webrtc_tool_popup-box {
+.Streams_webrtc_popup-box {
     background: white;
     overflow: hidden;
 }
-.webrtc_tool_popup-box .webrtc_tool_choose-device,
-.dialog-box .webrtc_tool_choose-device {
+.Streams_webrtc_popup-box .Streams_webrtc_choose-device,
+.dialog-box .Streams_webrtc_choose-device {
     padding: 15px;
 }
-webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
+webrtc_tool_popup-settings.Streams_webrtc_popup-box > div {
     float:left;
 }
-.webrtc_tool_popup-box .webrtc_tool_choose-device h4,
-.dialog-box .webrtc_tool_choose-device h4{
+.Streams_webrtc_popup-box .Streams_webrtc_choose-device h4,
+.dialog-box .Streams_webrtc_choose-device h4{
     margin: 10px 0;
 }
-.webrtc_tool_popup-box .webrtc_tool_choose-device select,
-.dialog-box .webrtc_tool_choose-device select{
+.Streams_webrtc_popup-box .Streams_webrtc_choose-device select,
+.dialog-box .Streams_webrtc_choose-device select{
     display: block;
 }
-.webrtc_tool_popup-box .webrtc_tool_choose-device label,
-.dialog-box .webrtc_tool_choose-device label{
+.Streams_webrtc_popup-box .Streams_webrtc_choose-device label,
+.dialog-box .Streams_webrtc_choose-device label{
     display: block;
     position: relative;
     padding-left: 35px;
     padding-top: 2px;
     margin-top: 7px;
 }
-.webrtc_tool_popup-box .webrtc_tool_choose-device  .webrtc_tool_disabled-radio,
-.dialog-box .webrtc_tool_choose-device  .webrtc_tool_disabled-radio{
+.Streams_webrtc_popup-box .Streams_webrtc_choose-device  .Streams_webrtc_disabled-radio,
+.dialog-box .Streams_webrtc_choose-device  .Streams_webrtc_disabled-radio{
     color: #a7a7a7;
     pointer-events: none;
 }
-.webrtc_tool_popup-box .webrtc_tool_choose-device  .webrtc_tool_disabled-radio svg,
-.dialog-box .webrtc_tool_choose-device  .webrtc_tool_disabled-radio svg{
+.Streams_webrtc_popup-box .Streams_webrtc_choose-device  .Streams_webrtc_disabled-radio svg,
+.dialog-box .Streams_webrtc_choose-device  .Streams_webrtc_disabled-radio svg{
     pointer-events: none;
 }
-.webrtc_tool_popup-box .webrtc_tool_choose-device input,
-.dialog-box .webrtc_tool_choose-device input{
+.Streams_webrtc_popup-box .Streams_webrtc_choose-device input,
+.dialog-box .Streams_webrtc_choose-device input{
     position: absolute;
     opacity: 0;
     cursor: pointer;
 }
-.webrtc_tool_popup-box .webrtc_tool_choose-device .webrtc_tool_radio-checkmark,
-.dialog-box .webrtc_tool_choose-device .webrtc_tool_radio-checkmark{
+.Streams_webrtc_popup-box .Streams_webrtc_choose-device .Streams_webrtc_radio-checkmark,
+.dialog-box .Streams_webrtc_choose-device .Streams_webrtc_radio-checkmark{
     position: absolute;
     top: 0;
     left: 0;
     height: 25px;
     width: 25px;
 }
-.webrtc_tool_popup-box .webrtc_tool_choose-device .webrtc_tool_radio-checkmark svg path,
-.dialog-box .webrtc_tool_choose-device .webrtc_tool_radio-checkmark svg path {
+.Streams_webrtc_popup-box .Streams_webrtc_choose-device .Streams_webrtc_radio-checkmark svg path,
+.dialog-box .Streams_webrtc_choose-device .Streams_webrtc_radio-checkmark svg path {
     fill:#8c8c8c;
 }
-.webrtc_tool_popup-box .webrtc_tool_choose-device input:checked ~ .webrtc_tool_radio-checkmark svg path,
-.dialog-box .webrtc_tool_choose-device input:checked ~ .webrtc_tool_radio-checkmark svg path {
+.Streams_webrtc_popup-box .Streams_webrtc_choose-device input:checked ~ .Streams_webrtc_radio-checkmark svg path,
+.dialog-box .Streams_webrtc_choose-device input:checked ~ .Streams_webrtc_radio-checkmark svg path {
     fill:green;
 }
-.webrtc_tool_popup-box .webrtc_tool_choose-device .webrtc_tool_radio-checkmark svg,
-.dialog-box .webrtc_tool_choose-device .webrtc_tool_radio-checkmark svg{
+.Streams_webrtc_popup-box .Streams_webrtc_choose-device .Streams_webrtc_radio-checkmark svg,
+.dialog-box .Streams_webrtc_choose-device .Streams_webrtc_radio-checkmark svg{
     height: 25px;
 }
-.webrtc_tool_popup-box .dialog-btns-group,
+.Streams_webrtc_popup-box .dialog-btns-group,
 .dialog-box .dialog-btns-group {
     padding: 15px;
     display: flex;
     justify-content: center;
 }
-.webrtc_tool_popup-box .button,
+.Streams_webrtc_popup-box .button,
 .dialog-box .button{
     border-radius: 5px;
     border: solid 1px #2aa48b;
@@ -1523,11 +1523,11 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     display: inline-block;
     font-size: 16px;
 }
-.webrtc_tool_popup-box .button[disabled],
+.Streams_webrtc_popup-box .button[disabled],
 .dialog-box .button[disabled]{
     opacity: 0.6;
 }
-.webrtc_tool_popup-box .button.btn-blue,
+.Streams_webrtc_popup-box .button.btn-blue,
 .dialog-box .button.btn-blue{
     box-shadow: 0 7px 20px -5px #b2b4d1;
     /*background: #4e5adc;
@@ -1537,7 +1537,7 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e5adc', endColorstr='#146ada', GradientType=1);*/
     background: #18aa8d;
 }
-.webrtc_tool_popup-box .button.btn-gray,
+.Streams_webrtc_popup-box .button.btn-gray,
 .dialog-box .button.btn-gray {
     background: -moz-linear-gradient(left, #e2e2e2 1%,#f3f3f3 100%);
     background: -webkit-linear-gradient(left, #e2e2e2 1%,#f3f3f3 100%);
@@ -1546,12 +1546,12 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     box-shadow: 0 7px 20px -5px #b2b4d1;
     border: 1px solid #e4e4e4;
 }
-.webrtc_tool_popup-box .dialog-btns-group button:first-child,
+.Streams_webrtc_popup-box .dialog-btns-group button:first-child,
 .dialog-box .dialog-btns-group button:first-child{
     margin-right: 20px;
 }
 
-.dialog-box.text-chat .dialog-inner .webrtc_tool_popup-chat-box {
+.dialog-box.text-chat .dialog-inner .Streams_webrtc_popup-chat-box {
     flex:1;
     overflow-y: scroll;
     overflow-x: hidden;
@@ -1561,17 +1561,17 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     padding: 10px;
 }
 
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_flex-row-item.loudest-screen-btn-con {
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_flex-row-item.loudest-screen-btn-con {
     display: inline-flex;
     justify-content: center;
     align-items: center;
 }
-.webrtc_tool_mobile-screen.Q_verticalOrientation .webrtc_tool_flex-row-item.loudest-screen-btn-con button{
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_flex-row-item.loudest-screen-btn-con button{
     position: absolute;
     margin: 0;
 }
 
-.webrtc_tool_mobile-screen.Q_horizontalOrientation .webrtc_tool_flex-row-item.loudest-screen-btn-con {
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_flex-row-item.loudest-screen-btn-con {
     height: auto;
     text-align: center;
 }
@@ -1599,16 +1599,16 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
 .participants-list-btns button{
     box-shadow: 0 5px 20px -5px #0048b5;
 }
-.webrtc_tool_devices_dialog .webrtc_tool_devices_dialog_inner{
+.Streams_webrtc_devices_dialog .Streams_webrtc_devices_dialog_inner{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.webrtc_tool_disconnect-btn,
-.webrtc_tool_enable-microphone-btn,
-.Q_touchscreen .Q_button.webrtc_tool_enable-microphone-btn,
-.Q_touchscreen .Q_button.webrtc_tool_disconnect-btn {
+.Streams_webrtc_disconnect-btn,
+.Streams_webrtc_enable-microphone-btn,
+.Q_touchscreen .Q_button.Streams_webrtc_enable-microphone-btn,
+.Q_touchscreen .Q_button.Streams_webrtc_disconnect-btn {
     border: 0;
     margin: 15px;
     padding: 7px 10px 7px 10px;
@@ -1616,15 +1616,15 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     align-items: center;
     background: #c12236;
 }
-.webrtc_tool_enable-microphone-btn span,
-.webrtc_tool_disconnect-btn span {
+.Streams_webrtc_enable-microphone-btn span,
+.Streams_webrtc_disconnect-btn span {
     margin-left:10px;
     margin-right:10px;
 }
 
-.webrtc_tool_desktop-screen .webrtc_tool_conference-control-inner .webrtc_tool_disconnect-btn svg,
-.webrtc_tool_enable-microphone-btn svg,
-.webrtc_tool_disconnect-btn svg{
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_disconnect-btn svg,
+.Streams_webrtc_enable-microphone-btn svg,
+.Streams_webrtc_disconnect-btn svg{
     height: 30px;
     width: 30px;
 }
@@ -1664,20 +1664,18 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     display: none;
 }
 
-.webrtc_tool_resize-handler {
-    position: absolute;
-    bottom: 0;
-    cursor: nesw-resize;
-    width: 10%;
-    height: 10%;
-    z-index: 3;
-}
-.webrtc_tool_maximized-main-screen .webrtc_tool_resize-handler[data-position="topright"],
-.webrtc_tool_tiled-screens-grid .webrtc_tool_resize-handler[data-position="topright"],
-.webrtc_tool_regular-screen .webrtc_tool_resize-handler[data-position="topright"] {
+.Streams_webrtc_maximized-main-screen .Q_resize_resize-handler[data-position="topright"],
+.Streams_webrtc_tiled-screens-grid .Q_resize_resize-handler[data-position="topright"],
+.Streams_webrtc_regular-screen .Q_resize_resize-handler[data-position="topright"] {
     cursor: nesw-resize;
     right: -7% !important;
     top: -7% !important;
+    z-index: 2000;
+}
+.Streams_webrtc_maximized-main-screen .Q_resize_resize-handler[data-position="topleft"],
+.Streams_webrtc_tiled-screens-grid .Q_resize_resize-handler[data-position="topleft"],
+.Streams_webrtc_regular-screen .Q_resize_resize-handler[data-position="topleft"] {
+    z-index: 2000;
 }
 
 .flipped video,
@@ -1824,7 +1822,7 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
 }
 
 /*screen sharing loader*/
-.spinner-load .webrtc_tool_screen-sharing svg {
+.spinner-load .Streams_webrtc_screen-sharing svg {
     width: 100px;
     animation: zoominoutsinglefeatured 1s infinite ;
 }
@@ -1841,7 +1839,7 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
 }
 
 /*page loader*/
-.webrtc_tool_page-loader-con {
+.Streams_webrtc_page-loader-con {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1854,14 +1852,14 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     z-index: 9999999999999999;
     pointer-events: none;
 }
-.webrtc_tool_loader {
+.Streams_webrtc_loader {
     position: absolute;
     left: 50%;
     margin-left: -37.5px;
     margin-top: -37.5px;
 }
 
-.webrtc_tool_loader_square {
+.Streams_webrtc_loader_square {
     background: rgb(31,190,202);
     width: 21px;
     height: 21px;
@@ -1871,19 +1869,19 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     margin-top: 7px;
     position: relative;
     opacity: 0;
-    animation: webrtc_tool_loader_enter 5.7s infinite;
-    -o-animation: webrtc_tool_loader_enter 5.7s infinite;
-    -ms-animation: webrtc_tool_loader_enter 5.7s infinite;
-    -webkit-animation: webrtc_tool_loader_enter 5.7s infinite;
-    -moz-animation: webrtc_tool_loader_enter 5.7s infinite;
+    animation: Streams_webrtc_loader_enter 5.7s infinite;
+    -o-animation: Streams_webrtc_loader_enter 5.7s infinite;
+    -ms-animation: Streams_webrtc_loader_enter 5.7s infinite;
+    -webkit-animation: Streams_webrtc_loader_enter 5.7s infinite;
+    -moz-animation: Streams_webrtc_loader_enter 5.7s infinite;
 }
 
-.webrtc_tool_loader_enter {
+.Streams_webrtc_loader_enter {
     top: 0px;
     opacity: 1;
 }
 
-.webrtc_tool_loader_square:nth-child(1) {
+.Streams_webrtc_loader_square:nth-child(1) {
     animation-delay: 1.71s;
     -o-animation-delay: 1.71s;
     -ms-animation-delay: 1.71s;
@@ -1891,7 +1889,7 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     -moz-animation-delay: 1.71s;
 }
 
-.webrtc_tool_loader_square:nth-child(2) {
+.Streams_webrtc_loader_square:nth-child(2) {
     animation-delay: 1.995s;
     -o-animation-delay: 1.995s;
     -ms-animation-delay: 1.995s;
@@ -1899,7 +1897,7 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     -moz-animation-delay: 1.995s;
 }
 
-.webrtc_tool_loader_square:nth-child(3) {
+.Streams_webrtc_loader_square:nth-child(3) {
     animation-delay: 2.28s;
     -o-animation-delay: 2.28s;
     -ms-animation-delay: 2.28s;
@@ -1908,7 +1906,7 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     background: rgb(31,191,202);
 }
 
-.webrtc_tool_loader_square:nth-child(4) {
+.Streams_webrtc_loader_square:nth-child(4) {
     animation-delay: 0.855s;
     -o-animation-delay: 0.855s;
     -ms-animation-delay: 0.855s;
@@ -1917,7 +1915,7 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     animation-delay: 0.855s;
 }
 
-.webrtc_tool_loader_square:nth-child(5) {
+.Streams_webrtc_loader_square:nth-child(5) {
     animation-delay: 1.14s;
     -o-animation-delay: 1.14s;
     -ms-animation-delay: 1.14s;
@@ -1926,7 +1924,7 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     animation-delay: 1.14s;
 }
 
-.webrtc_tool_loader_square:nth-child(6) {
+.Streams_webrtc_loader_square:nth-child(6) {
     animation-delay: 1.425s;
     -o-animation-delay: 1.425s;
     -ms-animation-delay: 1.425s;
@@ -1935,7 +1933,7 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     animation-delay: 1.425s;
 }
 
-.webrtc_tool_loader_square:nth-child(8) {
+.Streams_webrtc_loader_square:nth-child(8) {
     animation-delay: 0.285s;
     -o-animation-delay: 0.285s;
     -ms-animation-delay: 0.285s;
@@ -1944,7 +1942,7 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     animation-delay: 0.285s;
 }
 
-.webrtc_tool_loader_square:nth-child(9) {
+.Streams_webrtc_loader_square:nth-child(9) {
     animation-delay: 0.57s;
     -o-animation-delay: 0.57s;
     -ms-animation-delay: 0.57s;
@@ -1953,17 +1951,17 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     animation-delay: 0.57s;
 }
 
-.webrtc_tool_loader_clear {
+.Streams_webrtc_loader_clear {
     clear: both;
 }
 
-.webrtc_tool_loader_last {
+.Streams_webrtc_loader_last {
     margin-right: 0;
 }
 
 
 
-@keyframes webrtc_tool_loader_enter {
+@keyframes Streams_webrtc_loader_enter {
     0% {
         opacity: 0;
         top: -14px;
@@ -1982,7 +1980,7 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     }
 }
 
-@-o-keyframes webrtc_tool_loader_enter {
+@-o-keyframes Streams_webrtc_loader_enter {
     0% {
         opacity: 0;
         top: -14px;
@@ -2001,7 +1999,7 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     }
 }
 
-@-ms-keyframes webrtc_tool_loader_enter {
+@-ms-keyframes Streams_webrtc_loader_enter {
     0% {
         opacity: 0;
         top: -14px;
@@ -2020,7 +2018,7 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     }
 }
 
-@-webkit-keyframes webrtc_tool_loader_enter {
+@-webkit-keyframes Streams_webrtc_loader_enter {
     0% {
         opacity: 0;
         top: -14px;
@@ -2039,7 +2037,7 @@ webrtc_tool_popup-settings.webrtc_tool_popup-box > div {
     }
 }
 
-@-moz-keyframes webrtc_tool_loader_enter {
+@-moz-keyframes Streams_webrtc_loader_enter {
     0% {
         opacity: 0;
         top: -14px;

@@ -15,6 +15,8 @@
 			tool.state = Q.extend({}, tool.state, options);
 			this.eventBinding().bind();
 
+			Q.addStylesheet('{{Q}}/css/resize.css');
+
 		},
 
 		{
@@ -380,21 +382,21 @@
 							return;
 						}
 						var resizeHandler = document.createElement('DIV');
-						resizeHandler.classList.add('webrtc_tool_resize-handler');
+						resizeHandler.classList.add('Q_resize_resize-handler');
 						resizeHandler.style.right = '0';
 						resizeHandler.style.cursor = 'nwse-resize';
 						resizeHandler.dataset.position = 'bottomright';
 						element.appendChild(resizeHandler);
 
 						var leftBottomHandler = document.createElement('DIV');
-						leftBottomHandler.classList.add('webrtc_tool_resize-handler');
+						leftBottomHandler.classList.add('Q_resize_resize-handler');
 						leftBottomHandler.style.cursor = 'nesw-resize';
 						leftBottomHandler.style.left = '0';
 						leftBottomHandler.dataset.position = 'bottomleft';
 						element.appendChild(leftBottomHandler);
 
 						var topRightHandler = document.createElement('DIV');
-						topRightHandler.classList.add('webrtc_tool_resize-handler');
+						topRightHandler.classList.add('Q_resize_resize-handler');
 						topRightHandler.style.cursor = 'nesw-resize';
 						topRightHandler.style.right = '0';
 						topRightHandler.style.top = '0';
@@ -402,7 +404,7 @@
 						element.appendChild(topRightHandler);
 
 						var topLeftHandler = document.createElement('DIV');
-						topLeftHandler.classList.add('webrtc_tool_resize-handler');
+						topLeftHandler.classList.add('Q_resize_resize-handler');
 						topLeftHandler.style.cursor = 'nwse-resize';
 						topLeftHandler.style.left = '0';
 						topLeftHandler.style.top = '0';

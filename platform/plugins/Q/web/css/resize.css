@@ -1,0 +1,8 @@
+.Q_resize_resize-handler {
+    position: absolute;
+    bottom: 0;
+    cursor: nesw-resize;
+    width: 10%;
+    height: 10%;
+    z-index: 3;
+}
