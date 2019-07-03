@@ -10158,7 +10158,7 @@ Q.Browser = {
 			prefix: prefix,
 			OS: OS.toLowerCase(),
 			engine: engine,
-			device: OSdata.device,
+			device: OSdata && OSdata.device,
 			isWebView: isWebView,
 			isStandalone: isStandalone,
 			isCordova: _isCordova
@@ -10278,7 +10278,7 @@ Q.Browser = {
 		},
 		{
 			string : navigator.platform,
-			subString : "BlackBerry",
+			subString : "RIM",
 			identity : "BlackBerry"
 		},
 		{
@@ -13049,7 +13049,7 @@ Q.Camera = {
 				var $closeIcon = $('<a href="#" class="Q_scanning_close">')
 					.on(Q.Pointer.fastclick, _close)
 					.appendTo("body");
-				Q.addEventListener(document, 'deviceready', function () {
+				sQ.addEventListener(document, 'deviceready', function () {
 					QRScanner.prepare(function(err, status){
 						if (err) {
 							Q.handle(_close, $closeIcon);

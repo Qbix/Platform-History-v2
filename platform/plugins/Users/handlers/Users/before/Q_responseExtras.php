@@ -59,6 +59,7 @@ function Users_before_Q_responseExtras()
 	foreach (Q_Config::get('Users', 'apps', 'export', array()) as $platform) {
 		$platforms[] = $platform;
 	}
+	$platforms = array_unique($platforms);
 	$browsers = array(Q_Request::browser());
 	foreach (array('apps' => $platforms, 'browserApps' => $browsers) as $k => $arr) {
 		$apps = array();
@@ -78,8 +79,6 @@ function Users_before_Q_responseExtras()
 				}
 			}
 		}
-		//exit;
 		Q_Response::setScriptData("Q.plugins.Users.$k", $apps);
 	}
-
 }

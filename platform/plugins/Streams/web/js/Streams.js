@@ -2280,7 +2280,11 @@ Sp.removePermission = function (permission) {
  */
 Sp.url = function (messageOrdinal, baseUrl)
 {
-	var url = Q.getObject("Q.plugins.Streams.urls." + this.fields.type);
+	var urls = Q.plugins.Streams.urls;
+	if (!urls) {
+		return null;
+	}
+	var url = urls[this.fields.type] || urls['*'];
 	if (!url) {
 		return null;
 	}

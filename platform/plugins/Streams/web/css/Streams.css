@@ -493,7 +493,7 @@
 }
 .Streams_chat_item {
 	font-size: 11pt;
-	margin: 10px 0;
+	margin: 10px 10px;
 	position: relative;
 }
 .Streams_chat_noMessages {
