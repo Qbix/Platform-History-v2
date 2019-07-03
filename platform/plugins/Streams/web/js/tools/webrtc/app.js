@@ -1313,14 +1313,14 @@ WebRTCconferenceLib = function app(options){
 			}
 
 
-			if(track.kind == 'video') remoteStreamEl.muted = true;
 			//if(!track.isLocal || track.isLocal && track.kind == 'video') remoteStreamEl.autoplay = true;
 			if(!track.isLocal && track.kind == 'audio') remoteStreamEl.play()
 			remoteStreamEl.playsInline = true;
 			remoteStreamEl.setAttribute('webkit-playsinline', true);
 
-			if(participant.isLocal) {
+			if(participant.isLocal || track.isLocal || track.kind == 'video') {
 				remoteStreamEl.volume = 0;
+				remoteStreamEl.muted = true;
 			}
 
 			if(options.useIosrtcPlugin && typeof cordova != 'undefined' && _isiOS) {
@@ -1665,6 +1665,7 @@ WebRTCconferenceLib = function app(options){
 					trackToAttach.sid = videoTrack.id;
 					trackToAttach.mediaStreamTrack = videoTrack;
 					trackToAttach.kind = videoTrack.kind;
+					trackToAttach.isLocal = true;
 
 					app.screensInterface.attachTrack(trackToAttach, localParticipant);
 					app.conferenceControl.enableVideo();
@@ -1703,6 +1704,7 @@ WebRTCconferenceLib = function app(options){
 						trackToAttach.sid = trackPublication.track.sid;
 						trackToAttach.kind = trackPublication.track.kind;
 						trackToAttach.screensharing = true;
+						trackToAttach.isLocal = true;
 						trackToAttach.mediaStreamTrack = trackPublication.track.mediaStreamTrack;
 						trackToAttach.twilioReference = trackPublication.track;
 
@@ -3932,6 +3934,7 @@ WebRTCconferenceLib = function app(options){
 						trackToAttach.sid = videoTrack.id;
 						trackToAttach.mediaStreamTrack = videoTrack;
 						trackToAttach.kind = videoTrack.kind;
+						trackToAttach.isLocal = true;
 						if(options.useIosrtcPlugin && typeof cordova != "undefined" && window.device.platform === 'iOS') {
 							trackToAttach.stream = videoStream;
 							localParticipant.videoStream = videoStream;
@@ -4027,6 +4030,7 @@ WebRTCconferenceLib = function app(options){
 					trackToAttach.sid = vTrack.sid;
 					trackToAttach.mediaStreamTrack = vTrack.mediaStreamTrack;
 					trackToAttach.kind = vTrack.kind;
+					trackToAttach.isLocal = true;
 					trackToAttach.twilioReference = vTrack;
 
 					app.screensInterface.attachTrack(trackToAttach, localParticipant);
@@ -4076,6 +4080,7 @@ WebRTCconferenceLib = function app(options){
 						trackToAttach.sid = vTrack.sid;
 						trackToAttach.mediaStreamTrack = vTrack.mediaStreamTrack;
 						trackToAttach.kind = vTrack.kind;
+						trackToAttach.isLocal = true;
 						trackToAttach.twilioReference = vTrack;
 						app.screensInterface.attachTrack(trackToAttach, localParticipant);
 						app.conferenceControl.enableVideo();
@@ -4103,6 +4108,7 @@ WebRTCconferenceLib = function app(options){
 					var trackToAttach = new Track();
 					trackToAttach.mediaStreamTrack = localVideoTrack;
 					trackToAttach.kind = localVideoTrack.kind;
+					trackToAttach.isLocal = true;
 					if(typeof cordova != "undefined" && _isiOS) {
 						trackToAttach.stream = videoStream;
 					}
@@ -4185,6 +4191,7 @@ WebRTCconferenceLib = function app(options){
 					trackToAttach.sid = twilioTrack.sid;
 					trackToAttach.mediaStreamTrack = twilioTrack.mediaStreamTrack;
 					trackToAttach.kind = twilioTrack.kind;
+					trackToAttach.isLocal = true;
 					trackToAttach.twilioReference = twilioTrack;
 					if(typeof cordova != "undefined" && _isiOS) {
 						trackToAttach.stream = stream;
@@ -4212,6 +4219,7 @@ WebRTCconferenceLib = function app(options){
 				var trackToAttach = new Track();
 				trackToAttach.mediaStreamTrack = track;
 				trackToAttach.kind = track.kind;
+				trackToAttach.isLocal = true;
 				if(typeof cordova != "undefined" && _isiOS) {
 					trackToAttach.stream = stream;
 				}
@@ -4858,10 +4866,10 @@ WebRTCconferenceLib = function app(options){
 		}*/
 
 		function joinRoom(stream, mediaDevicesList) {
-			app.eventBinding.socketRoomJoined((stream != null ? [stream] : []));
-			app.conferenceControl.loadDevicesList(mediaDevicesList);
-			app.event.dispatch('joined');
-			if(callback != null) callback();
+				app.eventBinding.socketRoomJoined((stream != null ? [stream] : []));
+				app.conferenceControl.loadDevicesList(mediaDevicesList);
+				app.event.dispatch('joined');
+				if(callback != null) callback();
 		}
 
 		if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
@@ -4912,8 +4920,8 @@ WebRTCconferenceLib = function app(options){
 					joinRoom(options.stream, mediaDevices);
 				} else {
 					//app.event.on('joined', function () {
-					console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
-					//localParticipant.iosrtcRTCPeerConnection.addStream(options.stream);
+						console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+						//localParticipant.iosrtcRTCPeerConnection.addStream(options.stream);
 
 					//});
 					joinRoom(options.stream, mediaDevices);
@@ -5346,11 +5354,12 @@ WebRTCconferenceLib = function app(options){
 
 
 					var trackToAttach = new Track();
-					trackToAttach.sid = track.sid;
-					trackToAttach.kind = track.kind;
-					trackToAttach.mediaStreamTrack = track;
-					trackToAttach.stream = stream;
-					//localParticipant.videoStream = stream;
+						trackToAttach.sid = track.sid;
+						trackToAttach.kind = track.kind;
+						trackToAttach.mediaStreamTrack = track;
+						trackToAttach.isLocal = true;
+						trackToAttach.stream = stream;
+						//localParticipant.videoStream = stream;
 
 					app.screensInterface.attachTrack(trackToAttach, localParticipant);
 
@@ -5369,7 +5378,7 @@ WebRTCconferenceLib = function app(options){
 					});
 				}
 
-				//}, 4000)
+					//}, 4000)
 
 
 				/*var stream = e.streams[0];
