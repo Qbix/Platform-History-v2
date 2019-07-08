@@ -119,6 +119,8 @@
 					tool.updateControlBar();
 				});
 				webRTClib.event.on('deviceListUpdated', function () {
+					console.log('CONTROLS loadCamerasList');
+
 					tool.loadCamerasList();
 				});
 
@@ -231,7 +233,13 @@
 
 				cameraBtn.addEventListener('touchend', function () {
 					if(!Q.info.isMobile && !Q.info.isTablet) return;
-					if(webRTClib.conferenceControl.frontCameraDevice() == null) {
+					console.log('ENABLE VIDEO TAP')
+					var enabledAudioTracks = webRTClib.localParticipant().tracks.filter(function (t) {
+						return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
+					}).length;
+
+					console.log('updateControlBar audio num=' + enabledAudioTracks);
+					if(webRTClib.conferenceControl.frontCameraDevice() == null && enabledAudioTracks == 0 && webRTClib.localParticipant().audioStream == null && !(typeof cordova != 'undefined' && window.device.platform === 'iOS')) {
 						webRTClib.conferenceControl.requestCamera(function () {
 							var currentCamera = webRTClib.conferenceControl.frontCameraDevice();
 							if(currentCamera != null && tool.settingsPopupEl != null) {
@@ -452,7 +460,7 @@
 
 				console.log('toggleAudio--' + (webRTClib.conferenceControl.micIsEnabled()))
 				console.log('toggleAudio--' + (enabledAudioTracks))
-				if(webRTClib.conferenceControl.micIsEnabled() && enabledAudioTracks != 0){
+				if(webRTClib.conferenceControl.micIsEnabled() && (enabledAudioTracks != 0 || localParticipant.audioStream != null)){
 					webRTClib.conferenceControl.disableAudio();
 				} else {
 					webRTClib.conferenceControl.enableAudio();
@@ -501,7 +509,7 @@
 				}).length;
 
 				console.log('enabledVideoTracks', enabledVideoTracks, conferenceControl.cameraIsEnabled())
-				if(enabledVideoTracks == 0) {
+				if(enabledVideoTracks == 0 && webRTClib.localParticipant().videoStream == null) {
 					tool.cameraBtnIcon.innerHTML = icons.disabledCamera;
 				} else if(!conferenceControl.cameraIsEnabled()) {
 					tool.cameraBtnIcon.innerHTML = icons.disabledCamera;
@@ -521,11 +529,16 @@
 					return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 				}).length;
 
-				if(enabledAudioTracks == 0) {
+				console.log('updateControlBar audio num=' + enabledAudioTracks)
+
+				if(enabledAudioTracks == 0 && webRTClib.localParticipant().audioStream == null) {
+					console.log('updateControlBar audio 0')
 					tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
 				} else if(!conferenceControl.micIsEnabled()) {
+					console.log('updateControlBar audio 1')
 					tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
 				} else if(conferenceControl.micIsEnabled()) {
+					console.log('updateControlBar audio 2')
 					tool.microphoneBtn.innerHTML = icons.microphone;
 				}
 
@@ -535,6 +548,7 @@
 			webViewElements: function() {
 				var tool = this;
 				 function hide() {
+				 	return;
 					console.log('webViewElements 2');
 					var screens = webRTClib.screens();
 					for (var i in screens) {
@@ -548,6 +562,7 @@
 				}
 
 				function show() {
+				 	return;
 					console.log('webViewElements 2');
 					var screens = webRTClib.screens();
 					for (var i in screens) {
@@ -560,6 +575,7 @@
 				}
 
 				function showOrHide() {
+				 	return;
 					if(typeof cordova != 'undefined' && _isiOS) {
 						if( tool.state.dialogIsOpened == true) {
 							this.hide();
@@ -638,6 +654,7 @@
 			 * @method createSettingsPopup
 			 */
 			createSettingsPopup: function () {
+				console.log('createSettingsPopup');
 				var tool = this;
 
 				var settingsPopup=document.createElement('DIV');
@@ -711,13 +728,26 @@
 				var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
 					return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 				}).length;
-				if(enabledVideoTracks == 0) {
+				if(enabledVideoTracks == 0 && localParticipant.videoStream == null) {
 					toggleRadioButton(turnOffradioBtnItem);
 				}
 
+				console.log('createSettingsPopup loadCamerasList 0');
 
 				function loadCamerasList () {
+					console.log('loadCamerasList');
 					var count = 1;
+					var existingItems = videoinputList.getElementsByTagName('input');
+					//videoinputList.innerHTML = '';
+					for(var c in existingItems) {
+						if (typeof existingItems[c].parentNode != 'undefined') {
+							var itemValue = existingItems[c].value;
+							if(itemValue != 'auto' && itemValue != 'screen' && itemValue != 'off') {
+								existingItems[c].parentNode.removeChild(existingItems[c]);
+							}
+						}
+					}
+
 					webRTClib.conferenceControl.videoInputDevices().forEach(function(mediaDevice){
 						var radioBtnItem = document.createElement('LABEL');
 						radioBtnItem.dataset.deviceId = mediaDevice.deviceId;
@@ -765,8 +795,7 @@
 					});
 				}
 				tool.loadCamerasList = loadCamerasList;
-				if(typeof cordova != "undefined" && _isiOS)   loadCamerasList();
-
+				loadCamerasList();
 
 				turnOnCameraItem.addEventListener('mouseup', function (e) {
 					var label = e.currentTarget;
@@ -820,6 +849,7 @@
 				})
 
 				turnOffradioBtnItem.addEventListener('mouseup', function (e) {
+					console.log('turnOffradioBtnItem');
 					toggleRadioButton(e.currentTarget);
 					webRTClib.conferenceControl.disableVideo();
 					Q.Dialogs.pop();
@@ -956,7 +986,7 @@
 									return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 								}).length;
 
-								if(webRTClib.conferenceControl.micIsEnabled() && enabledAudioTracks != 0){
+								if(webRTClib.conferenceControl.micIsEnabled() && (enabledAudioTracks != 0 || localParticipant.audioStream != null)){
 									listItem.audioBtnEl.innerHTML = listIcons.locDisabledMic;
 									webRTClib.conferenceControl.disableAudio();
 								} else {
@@ -1406,7 +1436,7 @@
 								return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 							}).length;
 
-							//console.log('checkActiveMediaTracks', participant, enabledVideoTracks)
+							//console.log('checkActiveMediaTracks ' + enabledVideoTracks)
 							if(enabledVideoTracks == 0 || participant.remoteCameraIsEnabled == false) {
 
 								for(var s in screens) {
