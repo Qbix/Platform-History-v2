@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "New Item"
+    },
+    "labels": {
+        "Streams\/invited": "Leit, déi ech invitéiert hunn",
+        "Streams\/invitedMe": "Wien huet mech invitéiert"
+    },
+    "interests": {
+        "Filter": "Wat Iech gutt?",
+        "CanAdd": "Wann Dir nach ëmmer keng fonnt hutt wat Dir sicht, kënnt Dir en neit Interesse méi maachen:",
+        "TrySynonyms": "Kuckt et net? Versucht e puer Synonyme.",
+        "AddUnderCategory": "Ënn ënner Rubrik ...",
+        "Other": "Aner",
+        "Unlisted": "Ongeléist"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Message ass fir Admin iwwerpréift. Tap nees ze fläissen.",
+        "noOneSaid": "Keen huet eppes gesot",
+        "closeChatButton": "Zoumaachen",
+        "closeChatConfirmTitle": "Zoumaachen?",
+        "closeChatConfirm": "Sidd dir sëcher datt Dir dëse Chat wëllt schloen?",
+        "closeChatConfirmYes": "jo",
+        "closeChatConfirmNo": "Nee",
+        "earlierComments": "fréier Kommentaren"
+    },
+    "notifications": {
+        "*": "Message {{& message.fields.type}} op {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} huet gesot:",
+        "Streams\/changed": "Ännerungen an {{stream.fields.title}}",
+        "Streams\/invite": "Dir gouf invitéiert op {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement zu {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} geännert Stream Accès",
+        "Streams\/chat\/edit": "Chat Message geännert",
+        "Streams\/chat\/remove": "Chat Message erofgeholl",
+        "Streams\/closed": "{{stream.fields.title}} zougemaach",
+        "Streams\/task\/progress": "Fortschrëtter gemaach an {{stream.fields.title}}",
+        "Streams\/task\/complete": "Aarbecht opgedeelt: {{stream.fields.title}}",
+        "Streams\/task\/error": "Feeler während: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Message komm"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} invitéiert Iech op {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Wielt vun Äre Kontakten",
+            "chooseAgainFromContacts": "Wielt zwëschen de Kontakter",
+            "inviteSelectedContacts": "Invitéiert Ausgewielt Kontakter",
+            "selectFromContacts": "Wielt vun de Konten",
+            "photo": "Maach eng Foto",
+            "photoInstruction": "Wann de Persoun, deen Är QR Code gescannt ass virun Iech, fuert e Foto vun hinne",
+            "to": "Zu: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invitéieren",
+            "placeholder": "Mobile Nummer oder E-Mailadress",
+            "orInvite": "Oder luet Leit mat:",
+            "QR": "{{ClickOrTap}} fir QR QR generéieren",
+            "QRtitle": "Scannen dëse QR code",
+            "QRscanned": "Si hunn hir gescannt!",
+            "byEmail": "Email",
+            "byText": "Text",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hey, kontrolléiert dat aus",
+            "PleaseVisitLink": "Kuckt de Link op",
+            "InvitingYou": "Ech invitéieren Iech op {{title}}",
+            "HasInvitedYou": "{{displayName}} huet Iech invitéiert op {{title}}"
+        },
+        "sms": {
+            "content": "Dir sidd invitéiert op {{title}}. Bitte op t&#39;huelt {{url}}"
+        },
+        "notice": {
+            "text": "Dir hutt invitéiert. {{ClickOrTap}} hei fir ze akzeptéieren a matzemaachen."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} publizéiert eng <em>{{message.fields.type}}<\/em> Noriicht op {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} an {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invitatioune gi vun eiser Zuel geschéckt, déi Är Frënn net erkenne kënnen. Follegt mat engem schnellen Text, fir se ze wëssen, datt d&#39;Invitatioun vun Iech komm ass a se gefrot huet fir op de Link ze klicken.",
+            "confirm": "Invitatioune gi vun eiser Zuel geschéckt, déi Är Frënn net erkenne kënnen. Wëllt Dir Iech mat engem schnellen Text ze weisen, fir ze wëssen datt d&#39;Invitatioun vun Iech komm ass a se gefrot ze klickt op de Link.",
+            "check": "Hey, ech hunn Iech just e Invitatioun an der {{app}} App geschéckt. Kuckt weg Är SMS un an klickt op de Link!"
+        },
+        "email": {
+            "alert": "Invitatioune ginn aus eiser Domain geschéckt, déi Är Frënn net erkennen. Follegt mat engem schnellen Text, fir se ze wëssen, datt d&#39;Invitatioun vun Iech komm ass a se gefrot huet fir op de Link ze klicken.",
+            "confirm": "Invitatioune ginn aus eiser Domain geschéckt, déi Är Frënn net erkennen. Wëllt Dir Iech mat engem schnellen Text ze weisen, fir ze wëssen datt d&#39;Invitatioun vun Iech komm ass a se gefrot ze klickt op de Link.",
+            "subject": "Hutt Dir eng Invitatioun?",
+            "body": "Hey, ech hunn Iech just e Invitatioun an der {{app}} App geschéckt. Gidd weg d&#39;E-Mail an a klickt op de Link hei!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "De Mikrofoon aktivéieren",
+            "cameraTitle": "Camera aktivéieren",
+            "cameraAndMicrophoneTitle": "Kamera a Microphone aktivéieren"
+        }
+    }
+}

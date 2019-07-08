@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Tuhinga Hou"
+    },
+    "labels": {
+        "Streams\/invited": "Nga tangata i karangatia",
+        "Streams\/invitedMe": "Ko wai i kii mai ki ahau"
+    },
+    "interests": {
+        "Filter": "He aha koe e koa ana?",
+        "CanAdd": "Mena kaore e taea e koe te rapu i nga mea e rapu ana koe, ka taea e koe te whakauru i tetahi kaupapa hou kei raro nei:",
+        "TrySynonyms": "Kaua e kite? Nganahia etahi kupu whakarite.",
+        "AddUnderCategory": "Tāpiri i raro i te kāwai ...",
+        "Other": "Ētahi atu",
+        "Unlisted": "Whakaritenga"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Kua tohua te karere mo te arotake a te kaiwhakahaere. Patohia ano ki te rehu.",
+        "noOneSaid": "Kaore he korero a tetahi",
+        "closeChatButton": "Katia te korerorero",
+        "closeChatConfirmTitle": "Katia tenei whakawhitinga kōrero?",
+        "closeChatConfirm": "Kei te hiahia koe kia kati i tenei korerorero?",
+        "closeChatConfirmYes": "Ae",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "Tuhinga o mua"
+    },
+    "notifications": {
+        "*": "Karere {{& message.fields.type}} ki {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} i mea:",
+        "Streams\/changed": "Nga huringa i {{stream.fields.title}}",
+        "Streams\/invite": "I tohua koe ki {{& stream.fields.title}}",
+        "Streams\/announcement": "Whakaara i roto i {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} te whakawhiti awa",
+        "Streams\/chat\/edit": "Korerohia te karere karere",
+        "Streams\/chat\/remove": "Kua wehea te karere poroporoaki",
+        "Streams\/closed": "Kua katia te {{stream.fields.title}}",
+        "Streams\/task\/progress": "Ko te ahunga whakamua i {{stream.fields.title}}",
+        "Streams\/task\/complete": "Kua oti te mahi: {{stream.fields.title}}",
+        "Streams\/task\/error": "Hapa i te wā: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Karere Taumai"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} i karangatia koe ki {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Kōwhiria mai i ō Hoapā",
+            "chooseAgainFromContacts": "Kōwhirihia mai i Hoapā",
+            "inviteSelectedContacts": "Karangatia Ngā Hoapā kua Tīpakohia",
+            "selectFromContacts": "Tīpako Mai i Ngā Hoapā",
+            "photo": "Tangohia he whakaahua",
+            "photoInstruction": "Mena kei mua i te aroaro o te tangata nana i tirotiro i to QR code, tangohia he whakaahua",
+            "to": "Ki: {{Stream Title}}",
+            "go": "Haere",
+            "title": "Fakaafe&#39;i",
+            "placeholder": "Tau nama me te wāhitau īmēra",
+            "orInvite": "Raneihia nga iwi ma te whakamahi:",
+            "QR": "{{ClickOrTap}} ki te whakaputa QR code",
+            "QRtitle": "Matahia tenei QR waehere",
+            "QRscanned": "I tirotirohia e ratou!",
+            "byEmail": "Īmēra",
+            "byText": "Kuputuhi",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Tena, tirohia tenei",
+            "PleaseVisitLink": "Tena koa ki te hononga e whai ake nei:",
+            "InvitingYou": "Kei te karanga ahau ki a koe [{999}}",
+            "HasInvitedYou": "Kua karangatia koe e {{displayName}} ki {{title}}"
+        },
+        "sms": {
+            "content": "Kua tohaina koe ki {{title}}. Tena koa {{url}}"
+        },
+        "notice": {
+            "text": "Kua karangatia koe. {{ClickOrTap}} konei hei whakaae me te whakauru mai."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} te tuku i te <em>{{message.fields.type}}<\/em> karere ki {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} i {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Ka tukuna mai nga tono mai i to maatau nama, kaore i mohiohia e ou hoa. Whakamahia he korero tere kia mohio ai ratou kua tae mai te awhina mai ia koe, me te tono ia ratou ki te patene i te hononga.",
+            "confirm": "Ka tukuna mai nga tono mai i to maatau nama, kaore i mohiohia e ou hoa. E hiahia ana koe ki te whai ake i tetahi tuhinga tere kia mohio ai koe kua tae mai te tono mai ia koe, me te tono ia ratou ki te patene i te hononga.",
+            "check": "Na, kua tonoa e ahau he tono ki a koe ki te taupānga {{app}}. Titiro koa ki a koutou sms ka kiria te hononga!"
+        },
+        "email": {
+            "alert": "Ka tukuna mai nga tono mai i to rohe, kaore ano i mohio o hoa. Whakamahia he korero tere kia mohio ai ratou kua tae mai te awhina mai ia koe, me te tono ia ratou ki te patene i te hononga.",
+            "confirm": "Ka tukuna mai nga tono mai i to rohe, kaore ano i mohio o hoa. E hiahia ana koe ki te whai ake i tetahi tuhinga tere kia mohio ai koe kua tae mai te tono mai ia koe, me te tono ia ratou ki te patene i te hononga.",
+            "subject": "I whiwhi koe i tetahi urunga?",
+            "body": "Na, kua tonoa e ahau he tono ki a koe ki te taupānga {{app}}. Tena koa tirohia to īmēra me te pāwhiri i te hono i reira!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Whakahohea te Waeaoro",
+            "cameraTitle": "Whakahohea te Kāmera",
+            "cameraAndMicrophoneTitle": "Whakahohea te Kāmera me te Waeaoro"
+        }
+    }
+}

@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Waxyaabaha cusub"
+    },
+    "labels": {
+        "Streams\/invited": "Dadka aan ku casuumay",
+        "Streams\/invitedMe": "Yaa iigu yeedhay"
+    },
+    "interests": {
+        "Filter": "Maxaad ku raaxaysataa?",
+        "CanAdd": "Haddii aadan weli helin waxaad raadineyso, waxaad ku dari kartaa dulsaar cusub:",
+        "TrySynonyms": "Ma aragto? Isku day qaar isku mid ah.",
+        "AddUnderCategory": "Ku dar qeybta ...",
+        "Other": "Kuwa kale",
+        "Unlisted": "Liis ma liisto"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Farriinta ayaa lagu calaamadeeyay dib u eegista admin. Mar labaad ku dheji foolxumo.",
+        "noOneSaid": "Qofna wax ma sheegin",
+        "closeChatButton": "Sheekeysi dhow",
+        "closeChatConfirmTitle": "Kudhaw khariidadan?",
+        "closeChatConfirm": "Ma hubtaa inaad rabto inaad xirto wada sheekeysiga?",
+        "closeChatConfirmYes": "Haa",
+        "closeChatConfirmNo": "Maya",
+        "earlierComments": "faallooyinka hore"
+    },
+    "notifications": {
+        "*": "Fariin {{& message.fields.type}} ilaa {1000}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ayaa yiri:",
+        "Streams\/changed": "Isbedelada {999}}",
+        "Streams\/invite": "Waxaa laguugu casuumay {999}}",
+        "Streams\/announcement": "Ogeysiiska gudaha {999}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} ayaa la beddelay gelitaanka socodka",
+        "Streams\/chat\/edit": "Farriinta sheekaysiga ayaa la sameeyay",
+        "Streams\/chat\/remove": "Farriinta hadalka ayaa laga saaray",
+        "Streams\/closed": "{{stream.fields.title}} waa la xidhay",
+        "Streams\/task\/progress": "Horumarka laga gaaray {{stream.fields.title}}",
+        "Streams\/task\/complete": "Hawlaha la dhammeeyey: {999}}",
+        "Streams\/task\/error": "Xilliga lagu jiro: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Farriinta soo socota"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} kugu martiqaaday {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Xulo Xidhiidhkaaga",
+            "chooseAgainFromContacts": "Mar labaad ka doorto Xiriirrada",
+            "inviteSelectedContacts": "Ku casuumi Xiriirrada la Doortay",
+            "selectFromContacts": "Xulo Xiriirada",
+            "photo": "Qaado sawir",
+            "photoInstruction": "Haddii qofka ku sawiray qadarkaaga QR waa adiga horteed, sawir ka qaado",
+            "to": "Ku:: {{Stream Title}}",
+            "go": "Tag",
+            "title": "Soo-jeedi",
+            "placeholder": "Lambarka taleefanka ama cinwaanka emailka",
+            "orInvite": "Ama ku casuumi dadka adigoo isticmaalaya:",
+            "QR": "{{ClickOrTap}} si loo abuuro QR code",
+            "QRtitle": "Sawir QR-QR",
+            "QRscanned": "Waxay tarjumeen!",
+            "byEmail": "Email",
+            "byText": "Qoraalka",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hey, hubi tan",
+            "PleaseVisitLink": "Fadlan booqo xiriirka soo socda:",
+            "InvitingYou": "Waxaan kugu martiqaadayaa {999}",
+            "HasInvitedYou": "{{displayName}} ayaa kugu martiqaaday {{title}}"
+        },
+        "sms": {
+            "content": "Waxaa lagugu casuumay {999}}. Fadlan wac {{url}}"
+        },
+        "notice": {
+            "text": "Waxaa lagugu casuumey. {{ClickOrTap}} halkan si aad u aqbalo una biirto."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} fariin <em>{{1000}<\/em> fariin {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Soo-casuumaad ayaa laga soo diraa lambarkayaga, kuwaas oo saaxiibadaa aysan weli aqoonsan. La soco qoraal deg-deg ah si aad ugu sheegto martiqaadku inuu kaa yimid, adoo waydiinaya inay isku xiraan link.",
+            "confirm": "Soo-casuumaad ayaa laga soo diraa lambarkayaga, kuwaas oo saaxiibadaa aysan weli aqoonsan. Ma jeclaan lahayd in aad la socoto qoraal deg-deg ah si aad ugu sheegto martiqaadku inuu kuu yimaado, adoo weydiinaya inay isku xiraan link.",
+            "check": "Haa, waxaan kaliya kuu soo diray martiqaadka barnaamijka {999}}. Fadlan hubi sms-kaaga oo guji link"
+        },
+        "email": {
+            "alert": "Soo-casuumaadyada ayaa laga soo diraa nooca domain, kuwaas oo asxaabtaadu aanay weli aqoonsan. La soco qoraal deg-deg ah si aad ugu sheegto martiqaadku inuu kaa yimid, adoo waydiinaya inay isku xiraan link.",
+            "confirm": "Soo-casuumaadyada ayaa laga soo diraa nooca domain, kuwaas oo asxaabtaadu aanay weli aqoonsan. Ma jeclaan lahayd in aad la socoto qoraal deg-deg ah si aad ugu sheegto martiqaadku inuu kuu yimaado, adoo weydiinaya inay isku xiraan link.",
+            "subject": "Ma heshay martiqaad?",
+            "body": "Haa, waxaan kaliya kuu soo diray martiqaadka barnaamijka {999}}. Fadlan calaamadee emailkaaga oo guji linkada!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "U oggolow Mikrafoon",
+            "cameraTitle": "Awood siinta Kamarida",
+            "cameraAndMicrophoneTitle": "Awood injiiyaha iyo Maqalka"
+        }
+    }
+}

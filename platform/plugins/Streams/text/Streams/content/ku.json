@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Pirtûka nû"
+    },
+    "labels": {
+        "Streams\/invited": "Mirovên ku ez vexwendin",
+        "Streams\/invitedMe": "Yê ku min vexwendin"
+    },
+    "interests": {
+        "Filter": "Hûn bi kêfê dikin?",
+        "CanAdd": "Heke hûn hîn nebînin ku hûn çi digerin, hûn dikarin balkêşek nû bikişînin:",
+        "TrySynonyms": "Ma nabînin? Hinek hevpeymanan hewl bikin.",
+        "AddUnderCategory": "Jêr kategoriyê binivîse ...",
+        "Other": "Yên din",
+        "Unlisted": "Unlisted"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Peyamek ji bo birêvebirinê ji bo birêvebirin. Dîsa dîsa hilbijêre.",
+        "noOneSaid": "Kesek tiştek tiştek negirtiye",
+        "closeChatButton": "Chat chat",
+        "closeChatConfirmTitle": "Vê chatê vekin?",
+        "closeChatConfirm": "Ma hûn rast binivîsin ku hûn vê chat-ê nêzî bikin?",
+        "closeChatConfirmYes": "Erê",
+        "closeChatConfirmNo": "Na",
+        "earlierComments": "pêşniyarên berê"
+    },
+    "notifications": {
+        "*": "Peyama {{& message.fields.type}} ji {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} got:",
+        "Streams\/changed": "Guherînên li {{stream.fields.title}}",
+        "Streams\/invite": "Tu ji bo {{& stream.fields.title}} vexwendin",
+        "Streams\/announcement": "Di daxuyaniyê de {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} veguhastina guhartinê guhertin",
+        "Streams\/chat\/edit": "Peyama Chat Chat",
+        "Streams\/chat\/remove": "Peyama Chat Chat jêbirin",
+        "Streams\/closed": "{999}} hat girtin",
+        "Streams\/task\/progress": "Pêşveçûn li ser {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task qedandin: {{stream.fields.title}}",
+        "Streams\/task\/error": "Di dema çewtiyê de {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Peyama Dawîn"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} tu ji {{inviteUrl}} vexwendin",
+        "dialog": {
+            "chooseFromContacts": "Ji têkiliyên xwe hilbijêre",
+            "chooseAgainFromContacts": "Ji nû ve Têkilî hilbijêre",
+            "inviteSelectedContacts": "Têkiliyên bijartî vexwendin",
+            "selectFromContacts": "Ji Ji Têkilî hilbijêre",
+            "photo": "Dîsa wêne",
+            "photoInstruction": "Heke ku kîjan kodê QR-ê şanoyê we li pêş li we ye, wêneyek wan bigirin",
+            "to": "Ji bo: {{Stream Title}}",
+            "go": "Çûyin",
+            "title": "Ezimanden",
+            "placeholder": "Navnîşa mobîl an navnîşa e-nameyê",
+            "orInvite": "An jî kesên ku bi kar tînin bikar bînin:",
+            "QR": "{999}} ji bo kodê qeyd bike",
+            "QRtitle": "Vê kodê qeyd bike",
+            "QRscanned": "Wan ew scanned!",
+            "byEmail": "Email",
+            "byText": "Nivîstok",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hey, vê yekê bibînin",
+            "PleaseVisitLink": "Ji kerema xwe pêwendiya jêrîn bibînin:",
+            "InvitingYou": "Ez ji we re ji {{title}} vexwendin",
+            "HasInvitedYou": "{{displayName}} te ji bo {{title}} vexwendin"
+        },
+        "sms": {
+            "content": "Ji bo {{title}} ve hat vexwendin. Ji kerema xwe {{url}}"
+        },
+        "notice": {
+            "text": "Te vexwendin. Li vir {{ClickOrTap}} li vir bipejirîne û tevlî bibin."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} peyamek <em>{{message.fields.type}}<\/em> ji bo {{stream.fields.title}} nivîsand"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} di {{& url}} de: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invite ji me hejmarek şandin, ku hevalên we ne nas dikin. Bi nivîskî zûtirîn bişopînin da ku ew bizanin ku vexwendina we ji we re hat, ji wan re ji wan re dipirsin ku li girêdana navnîşê.",
+            "confirm": "Invite ji me hejmarek şandin, ku hevalên we ne nas dikin. Ma hûn dixwazin dixwazin bi tekstek zûtirîn peyda bikin ku bila wan bizanin ku ji wan re vexwendin ji we re hatin, ji wan re dipirsin ku li ser vê rûpelê.",
+            "check": "Hey, ez ji we re şîfreya {{app}} anî we şandime. Ji kerema xwe smsê xwe binihêrin û girêdana li jêr bike!"
+        },
+        "email": {
+            "alert": "Invite ji navenda me re şandiye, ku hevalên we ne nas dikin. Bi nivîskî zûtirîn bişopînin da ku ew bizanin ku vexwendina we ji we re hat, ji wan re ji wan re dipirsin ku li girêdana navnîşê.",
+            "confirm": "Invite ji navenda me re şandiye, ku hevalên we ne nas dikin. Ma hûn dixwazin dixwazin bi tekstek zûtirîn peyda bikin ku bila wan bizanin ku ji wan re vexwendin ji we re hatin, ji wan re dipirsin ku li ser vê rûpelê.",
+            "subject": "Ma hûn ji bo vegotin?",
+            "body": "Hey, ez ji we re şîfreya {{app}} anî we şandime. Ji kerema xwe, e-nameya xwe bibînin û li wir li wir binêrin!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Microphone",
+            "cameraTitle": "Kamera çalak",
+            "cameraAndMicrophoneTitle": "Kamera û Microphone çalak bike"
+        }
+    }
+}

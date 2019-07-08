@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "nkag rau hauv",
+        "LogOut": "sau tawm"
+    },
+    "activate": {
+        "SetAsPrimary": "Teem {{1}} raws li kuv thawj {{2}}",
+        "ChoosePassPhrase": "Xaiv <strong>kab lus dhau<\/strong> los kom nkag mus nrog. <br> Cov kab lus yooj yooj yim uas muaj ob peb lo lus uas koj yuav nco tau yooj yim.",
+        "ChoosePassPhraseSeeSuggestions": "Xaiv ib <strong>kab lus zoo<\/strong> los tiv thaiv koj tus as khauj. Saib cov lus qhia rau qee cov tswv yim.",
+        "LogOutAndTryAgain": "Sau tawm thiab sim dua",
+        "IfYouFeel": "Yog tias koj xav tias ib yam dab tsi mus tsis ncaj ncees lawm, koj tuaj yeem ua tau",
+        "SetIdentifierButtonTitle": "pib dua"
+    },
+    "session": {
+        "GetStarted": "Pib Tau"
+    },
+    "authorize": {
+        "GetStarted": "Pib Tau",
+        "Authorize": "Tso cai",
+        "TermsLabel": "Kuv tau nyeem thiab pom zoo <br> rau {999}}",
+        "TermsTitle": "Cov ntsiab lus"
+    },
+    "register": {
+        "TermsLabel": "Kuv txais cov {{link}}",
+        "TermsTitle": "Cov ntsiab lus"
+    },
+    "notifications": {
+        "title": "Tso Cai",
+        "prompt": "Koj puas xav pab qhia ntawv? Koj yuav tau txais cov xov xwm tshiab ntawm lub sijhawm koj xav txog.",
+        "yes": "Muaj",
+        "no": "Tsis yog",
+        "WelcomePleaseVerifyEmail": "Txais tos! Thov qhia koj email chaw nyob.",
+        "WelcomeVerifyEmail": "Txais tos! Tshawb xyuas koj email chaw nyob.",
+        "ForgetPass": "Lus hauv no teb Hav, koj puas tau hnov qab koj cov lus nug?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Xaiv qhov sib tham"
+        },
+        "select": {
+            "title": "Xaiv hu rau {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Thov xaiv daim ntawv lo.",
+        "inviteUser": "Caw Neeg"
+    },
+    "invalidLanguageSelected": "Cov lus xaiv tsis raug xaiv"
+}

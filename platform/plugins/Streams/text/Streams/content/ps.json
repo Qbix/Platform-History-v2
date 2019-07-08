@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "نوی توکي"
+    },
+    "labels": {
+        "Streams\/invited": "هغه کسان چې ما بلنه کړې وه",
+        "Streams\/invitedMe": "چا چا ته بلنه ورکړه؟"
+    },
+    "interests": {
+        "Filter": "تاسو څه خوند اخلئ؟",
+        "CanAdd": "که تاسو اوس هم نشی موندلی هغه څه چې تاسو یې غواړئ، تاسو کولی شئ لاندې لیوالتیا اضافه کړئ:",
+        "TrySynonyms": "دا نه ګوری؟ ځینې سیمییزمونه هڅه وکړئ.",
+        "AddUnderCategory": "د لاندې کټګورۍ اضافه کول ...",
+        "Other": "نور",
+        "Unlisted": "نالست شوی"
+    },
+    "chat": {
+        "flaggedForAdminReview": "پیغام د ادارې بیاکتنې لپاره نښه شوی. ناڅاپه بیا بیا وپټئ.",
+        "noOneSaid": "هیڅوک هیڅ څه نه دي ویلي",
+        "closeChatButton": "بند چټک",
+        "closeChatConfirmTitle": "دا چاره بنده کړه؟",
+        "closeChatConfirm": "ایا ته باوري یې چې دا چیٹ بندول غواړئ؟",
+        "closeChatConfirmYes": "هو",
+        "closeChatConfirmNo": "نه",
+        "earlierComments": "پخوانیو څرګندونو"
+    },
+    "notifications": {
+        "*": "پیغام {{& message.fields.type}} {{& stream.fields.title}} ته",
+        "Streams\/chat\/message": "{9 9}} وویل:",
+        "Streams\/changed": "په {9 9 99}} کې بدلونونه",
+        "Streams\/invite": "تاسو ته {{& stream.fields.title}} وبلل شو",
+        "Streams\/announcement": "په {9 9}} کې اعلان",
+        "Streams\/access": "{9 9}} د سټیټ لاسرسي بدل کړه",
+        "Streams\/chat\/edit": "د چیٹ پیغام تایید شوی",
+        "Streams\/chat\/remove": "د چیٹ پیغام لرې شو",
+        "Streams\/closed": "{9 9}} تړل شوی",
+        "Streams\/task\/progress": "پرمختګ په {9 9 99}} کې جوړ شوی",
+        "Streams\/task\/complete": "دندې بشپړ شوی: {9 9}}}",
+        "Streams\/task\/error": "په تېروتنه کې: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{9 9}}: راتلونکی پیغام"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} تاسو ته {{inviteUrl}} بلنه ورکړه",
+        "dialog": {
+            "chooseFromContacts": "ستاسو د اړیکو څخه غوره کړئ",
+            "chooseAgainFromContacts": "د تماسونو څخه بیا وټاکئ",
+            "inviteSelectedContacts": "غوره تماسونه دعوت کړئ",
+            "selectFromContacts": "د اړیکو څخه غوره کړئ",
+            "photo": "انځور واخله",
+            "photoInstruction": "که چیرې هغه شخص چې ستاسو د QR کود سکینر ستاسو په مخ کې وي، د دوی عکس واخلئ",
+            "to": "ته: {{Stream Title}}",
+            "go": "لاړ شه",
+            "title": "بلنه ورکړه",
+            "placeholder": "د ګرځنده نمبر یا بریښنالیک پته",
+            "orInvite": "یا د کارولو له لارې خلکو ته بلنه ورکړئ:",
+            "QR": "{9 9}} د آر آر کوډ د جوړولو لپاره",
+            "QRtitle": "دا QR Code سکین کړئ",
+            "QRscanned": "دوی دا سکینډ کړی!",
+            "byEmail": "برېښلیک",
+            "byText": "متن",
+            "byFacebook": "فیسبوک",
+            "byTwitter": "ټویټر"
+        },
+        "email": {
+            "subject": "هو، دا وګوره",
+            "PleaseVisitLink": "لطفا لاندې لینک وګورئ:",
+            "InvitingYou": "زه تاسو ته {9 999}} بلنه درکوم",
+            "HasInvitedYou": "{{displayName}} تاسو ته {{title}} بلنه درکړي"
+        },
+        "sms": {
+            "content": "تاسو ته {{title}} رابلل شوي. مهرباني وکړئ {{url}} ټیک کړئ"
+        },
+        "notice": {
+            "text": "تاسو ته بلنه ورکړل شوې ده. {{ClickOrTap}} دلته د منلو او ګډون لپاره دلته."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} يو <em>{{message.fields.type}}<\/em> پېغام وليکئ {{stream.fields.title}} ته"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} په {{& url}} کې: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "دعوت زموږ د شمیرې څخه لیږل کیږي، کوم چې ستاسو ملګري لا تر اوسه پیژني. د چټک متن سره تعقیب کړئ چې دوی ته اجازه درکړي چې تاسو ته بلنه درکړل شي، او له هغوی څخه یې غوښتنه وکړه چې دا لینک کلیک وکړئ.",
+            "confirm": "دعوت زموږ د شمیرې څخه لیږل کیږي، کوم چې ستاسو ملګري لا تر اوسه پیژني. ایا تاسو غواړئ چې د چټک متن سره تعقیب کړئ ترڅو دوی ته اجازه درکړي چې تاسو ته بلنه درکړي، او له هغوی څخه یې د لینک کلیک کولو غوښتنه وکړه.",
+            "check": "ما، ما تاسو ته {{app}} اپیل ته بلنه واستوله. مهرباني وکړئ خپل سایټ وګورئ او په لینک کلیک وکړئ!"
+        },
+        "email": {
+            "alert": "دعوت زمونږ د ډومین څخه لیږل کیږي، کوم چې ستاسو ملګري لا تر اوسه پیژني. د چټک متن سره تعقیب کړئ چې دوی ته اجازه درکړي چې تاسو ته بلنه درکړل شي، او له هغوی څخه یې غوښتنه وکړه چې دا لینک کلیک وکړئ.",
+            "confirm": "دعوت زمونږ د ډومین څخه لیږل کیږي، کوم چې ستاسو ملګري لا تر اوسه پیژني. ایا تاسو غواړئ چې د چټک متن سره تعقیب کړئ ترڅو دوی ته اجازه درکړي چې تاسو ته بلنه درکړي، او له هغوی څخه یې د لینک کلیک کولو غوښتنه وکړه.",
+            "subject": "ایا تاسو بلنه ترلاسه کړې؟",
+            "body": "ما، ما تاسو ته {{app}} اپیل ته بلنه واستوله. مهرباني وکړئ خپل برېښنالیک وګورئ او په دې کې لینک کلیک وکړئ!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "مایکروفون فعال کړئ",
+            "cameraTitle": "کیمپ فعال کړئ",
+            "cameraAndMicrophoneTitle": "کیمرې او مایکروفون فعال کړئ"
+        }
+    }
+}

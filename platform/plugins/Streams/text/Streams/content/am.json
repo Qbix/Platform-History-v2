@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "አዲስ ንጥል"
+    },
+    "labels": {
+        "Streams\/invited": "የጋበዝኳቸው ሰዎች",
+        "Streams\/invitedMe": "ማን እንደጋበዘኝ"
+    },
+    "interests": {
+        "Filter": "ምን ደስ ይልዎታል?",
+        "CanAdd": "የሚፈልጉትን ነገር አሁንም የማይፈልጉ ከሆነ ከዚህ በታች አንድ አዲስ ፍላጎት ማከል ይችላሉ:",
+        "TrySynonyms": "አታዩትም? አንዳንድ ተመሳሳይ ተመሳሳይ ቃላት ሞክር.",
+        "AddUnderCategory": "በምድብ ውስጥ አክል ...",
+        "Other": "ሌላ",
+        "Unlisted": "ያልተዘረዘረ"
+    },
+    "chat": {
+        "flaggedForAdminReview": "መልዕክት ለአስተዳዳሪ ግምገማ ተጠቁሟል. ለማዘግየት እንደገና መታ ያድርጉ.",
+        "noOneSaid": "ማንም አልነገርም",
+        "closeChatButton": "ውይይት ዝጋ",
+        "closeChatConfirmTitle": "ይህ ውይይት ይዝጉ?",
+        "closeChatConfirm": "እርግጠኛ ነዎት ይህን ውይይት መዝጋት ይፈልጋሉ?",
+        "closeChatConfirmYes": "አዎ",
+        "closeChatConfirmNo": "አይ",
+        "earlierComments": "ቀደምት አስተያየቶች"
+    },
+    "notifications": {
+        "*": "መልዕክት {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} እንዲህ አለ:",
+        "Streams\/changed": "በ {{stream.fields.title}} ለውጦች",
+        "Streams\/invite": "ወደ {{& stream.fields.title}} ተጋብዘዋል",
+        "Streams\/announcement": "ማስታወቂያ በ {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} የዥረት መዳረሻ ለውጧል",
+        "Streams\/chat\/edit": "የቻት መልዕክት አርትዕ ተደርጓል",
+        "Streams\/chat\/remove": "የውይይት መልዕክት ተወግዷል",
+        "Streams\/closed": "{{stream.fields.title}} ተዘግቷል",
+        "Streams\/task\/progress": "በ {{stream.fields.title}} ላይ የተደረገው ሂደት",
+        "Streams\/task\/complete": "ተግባር ተጠናቅቋል: {{stream.fields.title}}",
+        "Streams\/task\/error": "ስህተት በዚህ ጊዜ: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: ገቢ መልዕክት"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} ወደ {{inviteUrl}} እንዲገኙ ጋብዘዎታል",
+        "dialog": {
+            "chooseFromContacts": "ከእውቂያዎችዎ ውስጥ ይምረጡ",
+            "chooseAgainFromContacts": "ከዕውቂያዎች ውስጥ እንደገና ምረጥ",
+            "inviteSelectedContacts": "የተመረጡ እውቂያዎችን ይጋብዙ",
+            "selectFromContacts": "ከእውቂያዎች ውስጥ ይምረጡ",
+            "photo": "ፎቶ አንሳ",
+            "photoInstruction": "የ QR ኮድዎን ያሰመረው ሰው ከእርስዎ በፊት ከሆነ, ፎቶግራፍ ይውሰዱ",
+            "to": "ለ: {{Stream Title}}",
+            "go": "ሂድ",
+            "title": "ይጋብዙ",
+            "placeholder": "የሞባይል ቁጥር ወይም የኢሜይል አድራሻ",
+            "orInvite": "ወይም እነኚህን በመጠቀም ሰዎችን ጋብዝ:",
+            "QR": "QR ኮድ ለማመንጨት {{ClickOrTap}}",
+            "QRtitle": "ይህን የ QR ኮድ ይቃኙ",
+            "QRscanned": "እነሱ ያዩትታል!",
+            "byEmail": "ኢሜይል",
+            "byText": "ጽሑፍ",
+            "byFacebook": "ፌስቡክ",
+            "byTwitter": "ትዊተር"
+        },
+        "email": {
+            "subject": "ሄይ, ይህን አረጋግጡ",
+            "PleaseVisitLink": "እባክዎ የሚከተለውን አገናኝ ይጎብኙ:",
+            "InvitingYou": "ወደ {{title}} በመጋበዝ ላይ ነኝ",
+            "HasInvitedYou": "{{displayName}} እርስዎን በ {{title}} ላይ ጋብዞዎታል"
+        },
+        "sms": {
+            "content": "ወደ {{title}} ተጋብዘዋል. እባክዎ {{url}} ን መታ ያድርጉ"
+        },
+        "notice": {
+            "text": "ተጋብዘዋል. ለመቀበል እና ለመቀላቀል እዚህ ላይ {{ClickOrTap}} እዚህ."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} አንድ <em>{{message.fields.type}}<\/em> መልዕክት ወደ {{stream.fields.title}} አውጥቷል"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} በ {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "ግብዣዎች ጓደኞችዎ እስካላወቁት ድረስ ከእኛ ቁጥር ይላካሉ. ግብዣው የመጣው ከእርስዎ የመጣ መሆኑን እንዲያውቁ እና አገናኙን ጠቅ እንዲያደርጉላቸው በፍጥነት የሚገልጽ ጽሑፍ ይከታተሉ.",
+            "confirm": "ግብዣዎች ጓደኞችዎ እስካላወቁት ድረስ ከእኛ ቁጥር ይላካሉ. ግብዣው የመጣው ከእርስዎ የመጣ መሆኑን እንዲያውቁ እና አገናኙን ጠቅ እንዲያደርጉ እንዲረዳቸው በቅጽበት ጽሑፍ መከታተል ይፈልጋሉ.",
+            "check": "ሰላም, አሁን ለ {{app}} መተግበሪያ ግብዣ ልካሎሻለሁ. እባክዎ ኢሜልዎን ይፈትሹ እና አገናኙን ጠቅ ያድርጉ!"
+        },
+        "email": {
+            "alert": "ግብዣዎች ጓደኞችዎ እስካላወቁት ድረስ ከእኛ ጎራ የተላከ ነው. ግብዣው የመጣው ከእርስዎ የመጣ መሆኑን እንዲያውቁ እና አገናኙን ጠቅ እንዲያደርጉላቸው በፍጥነት የሚገልጽ ጽሑፍ ይከታተሉ.",
+            "confirm": "ግብዣዎች ጓደኞችዎ እስካላወቁት ድረስ ከእኛ ጎራ የተላከ ነው. ግብዣው የመጣው ከእርስዎ የመጣ መሆኑን እንዲያውቁ እና አገናኙን ጠቅ እንዲያደርጉ እንዲረዳቸው በቅጽበት ጽሑፍ መከታተል ይፈልጋሉ.",
+            "subject": "ግብዣ አግኝተው ነበር?",
+            "body": "ሰላም, አሁን ለ {{app}} መተግበሪያ ግብዣ ልካሎሻለሁ. እባክዎ ኢሜይልዎን ይፈትሹ እና እዛው ጠቅ ያድርጉ!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "ማይክሮፎን አንቃ",
+            "cameraTitle": "ካሜራ አንቃ",
+            "cameraAndMicrophoneTitle": "ካሜራ እና ማይክሮፎን ያንቁ"
+        }
+    }
+}

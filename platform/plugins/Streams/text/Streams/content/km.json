@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "ធាតុថ្មី"
+    },
+    "labels": {
+        "Streams\/invited": "មនុស្សដែលខ្ញុំបានអញ្ជើញ",
+        "Streams\/invitedMe": "តើអ្នកណាបានអញ្ជើញខ្ញុំ"
+    },
+    "interests": {
+        "Filter": "តើអ្នកចូលចិត្តអ្វី?",
+        "CanAdd": "ប្រសិនបើអ្នកនៅតែមិនអាចស្វែងរកអ្វីដែលអ្នកកំពុងស្វែងរកអ្នកអាចបន្ថែមចំណាប់អារម្មណ៍ថ្មីមួយនៅខាងក្រោម:",
+        "TrySynonyms": "កុំមើលវា? សាកល្បងនិក្ខេបបទខ្លះ។",
+        "AddUnderCategory": "បន្ថែមនៅក្រោមប្រភេទ ...",
+        "Other": "ផ្សេងទៀត",
+        "Unlisted": "មិនបានចុះបញ្ជី"
+    },
+    "chat": {
+        "flaggedForAdminReview": "សារត្រូវបានដាក់ទង់សម្រាប់ការពិនិត្យមើលដោយអ្នកគ្រប់គ្រង។ ប៉ះម្តងទៀតដើម្បីបិទបើក។",
+        "noOneSaid": "គ្មាននរណាម្នាក់និយាយអ្វីទេ",
+        "closeChatButton": "បិទការជជែក",
+        "closeChatConfirmTitle": "បិទការជជែកនេះ?",
+        "closeChatConfirm": "តើអ្នកប្រាកដជាចង់បិទការជជែកនេះមែនទេ?",
+        "closeChatConfirmYes": "បាទ",
+        "closeChatConfirmNo": "ទេ",
+        "earlierComments": "យោបល់មុន"
+    },
+    "notifications": {
+        "*": "សារ {{& message.fields.type}} ទៅ {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} បាននិយាយថា:",
+        "Streams\/changed": "ការផ្លាស់ប្តូរនៅក្នុង {{stream.fields.title}}",
+        "Streams\/invite": "អ្នកត្រូវបានអញ្ជើញឱ្យចូលរួម {{& stream.fields.title}}",
+        "Streams\/announcement": "សេចក្តីជូនដំណឹងនៅក្នុង {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} បានផ្លាស់ប្តូរការចូលស្ទ្រីម",
+        "Streams\/chat\/edit": "បានផ្លាស់ប្ដូរសារជជែក",
+        "Streams\/chat\/remove": "បានលុបសារជជែក",
+        "Streams\/closed": "{{stream.fields.title}} ត្រូវបានបិទ",
+        "Streams\/task\/progress": "វឌ្ឍនភាពបានធ្វើនៅលើ {{stream.fields.title}}",
+        "Streams\/task\/complete": "កិច្ចការត្រូវបានបញ្ចប់: {{stream.fields.title}}",
+        "Streams\/task\/error": "កំហុសក្នុងកំឡុងពេល: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: សារចូល"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} បានអញ្ជើញអ្នកមក {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "ជ្រើសពីទំនាក់ទំនងរបស់អ្នក",
+            "chooseAgainFromContacts": "ជ្រើសម្តងទៀតពីទំនាក់ទំនង",
+            "inviteSelectedContacts": "អញ្ជើញទំនាក់ទំនងដែលបានជ្រើសរើស",
+            "selectFromContacts": "ជ្រើសពីទំនាក់ទំនង",
+            "photo": "ថតរូប",
+            "photoInstruction": "ប្រសិនបើអ្នកដែលស្កេនលេខកូដ QR របស់អ្នកនៅពីមុខអ្នកសូមថតរូបពួកគេ",
+            "to": "ទៅ: {{Stream Title}}",
+            "go": "ទៅ",
+            "title": "អញ្ជើញ",
+            "placeholder": "លេខទូរស័ព្ទឬអាសយដ្ឋានអ៊ីម៉ែល",
+            "orInvite": "ឬអញ្ជើញមនុស្សដោយប្រើ:",
+            "QR": "{{ClickOrTap}} ដើម្បីបង្កើតកូដ QR",
+            "QRtitle": "វិភាគកូដ QR នេះ",
+            "QRscanned": "ពួកគេបានស្កេនវា!",
+            "byEmail": "អ៊ីមែល",
+            "byText": "អត្ថបទ",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "ហេសូមពិនិត្យមើលវាចេញ",
+            "PleaseVisitLink": "សូមទស្សនាតំណខាងក្រោម:",
+            "InvitingYou": "ខ្ញុំសូមអញ្ជើញអ្នកចូលរួម {{title}}",
+            "HasInvitedYou": "{{displayName}} បានអញ្ជើញអ្នកមក {{title}}"
+        },
+        "sms": {
+            "content": "អ្នកត្រូវបានអញ្ជើញឱ្យចូល {{title}} ។ សូមប៉ះ {{url}}"
+        },
+        "notice": {
+            "text": "អ្នកត្រូវបានអញ្ជើញ។ {{ClickOrTap}} នៅទីនេះដើម្បីទទួលយកនិងចូលរួម។"
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} បានបង្ហោះសារ <em>{{message.fields.type}}<\/em> មួយទៅកាន់ {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} នៅក្នុង {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "ការអញ្ជើញត្រូវបានផ្ញើចេញពីលេខរបស់យើងដែលមិត្ដភក្ដិរបស់អ្នកមិនទាន់ស្គាល់។ តាមដានជាមួយអត្ថបទរហ័សដើម្បីឱ្យពួកគេដឹងថាការអញ្ជើញបានមកពីអ្នកដោយប្រាប់ពួកគេឱ្យចុចតំណ។",
+            "confirm": "ការអញ្ជើញត្រូវបានផ្ញើចេញពីលេខរបស់យើងដែលមិត្ដភក្ដិរបស់អ្នកមិនទាន់ស្គាល់។ តើអ្នកចង់តាមដានជាមួយអត្ថបទរហ័សដើម្បីឱ្យពួកគេដឹងថាការអញ្ជើញបានមកពីអ្នកដោយប្រាប់ពួកគេឱ្យចុចតំណ។",
+            "check": "ហេ, ខ្ញុំទើបតែបានផ្ញើការអញ្ជើញដល់កម្មវិធី {{app}} ។ សូមពិនិត្យមើលសាររបស់អ្នកហើយចុចលើតំណភ្ជាប់!"
+        },
+        "email": {
+            "alert": "ការអញ្ជើញត្រូវបានផ្ញើចេញពីដែនរបស់យើងដែលមិត្ដភក្ដិរបស់អ្នកមិនទាន់ទទួលស្គាល់។ តាមដានជាមួយអត្ថបទរហ័សដើម្បីឱ្យពួកគេដឹងថាការអញ្ជើញបានមកពីអ្នកដោយប្រាប់ពួកគេឱ្យចុចតំណ។",
+            "confirm": "ការអញ្ជើញត្រូវបានផ្ញើចេញពីដែនរបស់យើងដែលមិត្ដភក្ដិរបស់អ្នកមិនទាន់ទទួលស្គាល់។ តើអ្នកចង់តាមដានជាមួយអត្ថបទរហ័សដើម្បីឱ្យពួកគេដឹងថាការអញ្ជើញបានមកពីអ្នកដោយប្រាប់ពួកគេឱ្យចុចតំណ។",
+            "subject": "តើអ្នកទទួលបានការអញ្ជើញទេ?",
+            "body": "ហេ, ខ្ញុំទើបតែបានផ្ញើការអញ្ជើញដល់កម្មវិធី {{app}} ។ សូមពិនិត្យអ៊ីម៉ែលរបស់អ្នកហើយចុចតំណនៅទីនោះ!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "បើកដំណើរការមីក្រូហ្វូន",
+            "cameraTitle": "បើកកាមេរ៉ា",
+            "cameraAndMicrophoneTitle": "បើកដំណើរការកាមេរ៉ានិងមីក្រូហ្វូន"
+        }
+    }
+}

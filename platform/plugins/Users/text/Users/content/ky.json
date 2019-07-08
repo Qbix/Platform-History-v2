@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "кирүү",
+        "LogOut": "чыгуу"
+    },
+    "activate": {
+        "SetAsPrimary": "Set {{1}} менин негизги катары {{2}}",
+        "ChoosePassPhrase": "Менен кирүү үчүн <strong>паспортту сөздөрдү<\/strong> тандоо. <br> сиз эстеп бир нече сөздөн турган жөнөкөй сөз.",
+        "ChoosePassPhraseSeeSuggestions": "Сиздин каттоо жазууну коргоо үчүн жакшы <strong>өттү деген сөз айкашын<\/strong> тандоо. айрым идеялар боюнча сунуштарды карагыла.",
+        "LogOutAndTryAgain": "Log Out жана Дагы аракет кылып көрүү",
+        "IfYouFeel": "Эгер бир нерсе туура эмес кетти сезилип жатса, анда мүмкүн",
+        "SetIdentifierButtonTitle": "баштоо үстүнөн"
+    },
+    "session": {
+        "GetStarted": "Баштоо"
+    },
+    "authorize": {
+        "GetStarted": "Баштоо",
+        "Authorize": "уруксат",
+        "TermsLabel": "Мен окуп чыгып, кабыл алдым <br> үчүн {{link}}",
+        "TermsTitle": "шарттары"
+    },
+    "register": {
+        "TermsLabel": "Мен кабыл {{link}}",
+        "TermsTitle": "шарттары"
+    },
+    "notifications": {
+        "title": "уруксат",
+        "prompt": "Эскертмелерди иштетүү үчүн келеби? Сиз кам көргөн нерселер тууралуу реалдуу убакытта алып турасыз.",
+        "yes": "Ооба",
+        "no": "Жок",
+        "WelcomePleaseVerifyEmail": "Кош келдиңиз! Сураныч, сиздин электрондук почтанын дарегин тастыктоо.",
+        "WelcomeVerifyEmail": "Кош келдиңиз! сиздин электрондук почтанын дарегин тастыктоо.",
+        "ForgetPass": "Эй, сен айкашын унутуп калды экен?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "байланышты тандоо"
+        },
+        "select": {
+            "title": "боюнча тандоо байланыш {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Сураныч, жазуучу тандоо.",
+        "inviteUser": "чакыруу колдонуучу"
+    },
+    "invalidLanguageSelected": "Жараксыз тил тандалды"
+}

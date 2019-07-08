@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "New Item"
+    },
+    "labels": {
+        "Streams\/invited": "מענטשן איך פארבעטן",
+        "Streams\/invitedMe": "ווער געבעטן מיר"
+    },
+    "interests": {
+        "Filter": "וואָס טאָן דו הנאה?",
+        "CanAdd": "אויב איר נאָך קענען נישט געפֿינען וואָס איר זוכט פֿאַר, איר קענען לייגן אַ נייַע אינטערעס:",
+        "TrySynonyms": "צי ניט זען עס? פרובירט עטלעכע סינאָנימס.",
+        "AddUnderCategory": "לייג אונטער קאַטעגאָריע ...",
+        "Other": "אנדערע",
+        "Unlisted": "Unlisted"
+    },
+    "chat": {
+        "flaggedForAdminReview": "אָנזאָג איז געווען פלאַגד פֿאַר אַדמין איבערבליק. טאַפּט ווידער צו ונפלאַג.",
+        "noOneSaid": "קיין איינער האט געזאגט עפּעס",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "נאָענט דעם שמועס?",
+        "closeChatConfirm": "זענט איר זיכער איר ווילן צו פאַרמאַכן דעם שמועס?",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "ניין",
+        "earlierComments": "פריער באַמערקונגען"
+    },
+    "notifications": {
+        "*": "אָנזאָג {{& message.fields.type}} צו {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} האט געזאגט:",
+        "Streams\/changed": "ענדערונגען אין {{stream.fields.title}}",
+        "Streams\/invite": "איר זענען פארבעטן צו {{& stream.fields.title}}",
+        "Streams\/announcement": "אָנזאָג אין {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} געביטן טייַך אַקסעס",
+        "Streams\/chat\/edit": "שמועסן אָנזאָג ענדערונגען",
+        "Streams\/chat\/remove": "שמועסן אָנזאָג אראפגענומען",
+        "Streams\/closed": "{{stream.fields.title}} איז פארשלאסן געווארן",
+        "Streams\/task\/progress": "פּראָגרעס געמאכט אויף {{stream.fields.title}}",
+        "Streams\/task\/complete": "אַרבעט געענדיקט: {{stream.fields.title}}",
+        "Streams\/task\/error": "טעות בעשאַס: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: ינקאָמינג אָנזאָג"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} פארבעטן איר צו {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "קלייַבן פון דיין קאַנטאַקס",
+            "chooseAgainFromContacts": "קלייַבן ווידער פון קאַנטאַקס",
+            "inviteSelectedContacts": "פארנומען סעלעקטעד קאָנטאַקטן",
+            "selectFromContacts": "אויסקלייַבן פון קאָנטאַקטן",
+            "photo": "נעם א בילד",
+            "photoInstruction": "אויב די מענטש וואס סקאַנד דיין QR קאָד איז אין פאָרויס פון איר, נעמען אַ פאָטאָ פון זיי",
+            "to": "צו: {{Stream Title}}",
+            "go": "גיין",
+            "title": "Invite",
+            "placeholder": "מאָביל נומער אָדער בליצפּאָסט אַדרעס",
+            "orInvite": "אָדער פאַרבעטן מענטשן דורך ניצן:",
+            "QR": "{{ClickOrTap}} צו פּראָדוצירן QR קאָד",
+            "QRtitle": "יבערקוקן דעם קר קאָד",
+            "QRscanned": "זיי סקאַנד עס!",
+            "byEmail": "Email",
+            "byText": "טעקסט",
+            "byFacebook": "פאַסעבאָאָק",
+            "byTwitter": "טוויטער"
+        },
+        "email": {
+            "subject": "היי, קאָנטראָלירן דעם אויס",
+            "PleaseVisitLink": "ביטע באַזוכן די פאלגענדע לינק:",
+            "InvitingYou": "איך בין אייך ינווייטינג צו {{title}}",
+            "HasInvitedYou": "{{displayName}} האָט איר פארבעטן צו {{title}}"
+        },
+        "sms": {
+            "content": "איר זענט פארבעטן צו {{title}}. ביטע צאַפּן {{url}}"
+        },
+        "notice": {
+            "text": "איר האָט שוין פארבעטן. {{ClickOrTap}} דאָ צו אָננעמען און פאַרבינדן."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} האָט אַ <em>{{message.fields.type}}<\/em> אָנזאָג צו {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} אין {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "ינווייץ זענען געשיקט פון אונדזער נומער, וואָס דיין פריינט טאָן ניט נאָך דערקענען. גיי אַרויף מיט אַ שנעל טעקסט צו לאָזן זיי וויסן די ינווייטינג געקומען פון איר, אַסקינג זיי צו גיט די לינק.",
+            "confirm": "ינווייץ זענען געשיקט פון אונדזער נומער, וואָס דיין פריינט טאָן ניט נאָך דערקענען. איר וואָלט ווי צו נאָכגיין מיט אַ שנעל טעקסט צו לאָזן זיי וויסן די ינווייטינג געקומען פון איר, אַסקינג זיי צו גיט די לינק.",
+            "check": "היי, איך נאָר געשיקט איר אַ לאַדן צו די {{app}} אַפּ. ביטע טשעק דיין SMS און גיט די לינקס!"
+        },
+        "email": {
+            "alert": "ינווייץ זענען געשיקט פון אונדזער פעלד, וואָס דיין פריינט טאָן ניט נאָך דערקענען. גיי אַרויף מיט אַ שנעל טעקסט צו לאָזן זיי וויסן די ינווייטינג געקומען פון איר, אַסקינג זיי צו גיט די לינק.",
+            "confirm": "ינווייץ זענען געשיקט פון אונדזער פעלד, וואָס דיין פריינט טאָן ניט נאָך דערקענען. איר וואָלט ווי צו נאָכגיין מיט אַ שנעל טעקסט צו לאָזן זיי וויסן די ינווייטינג געקומען פון איר, אַסקינג זיי צו גיט די לינק.",
+            "subject": "האָט איר באַקומען אַ פאַרבעטן?",
+            "body": "היי, איך נאָר געשיקט איר אַ לאַדן צו די {{app}} אַפּ. ביטע טשעק דיין בליצפּאָסט און גיט די לינקס אין דאָרט!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "געבן מיקראָפאָן",
+            "cameraTitle": "Enable Camera",
+            "cameraAndMicrophoneTitle": "געבן קאַמעראַ און מיקראָפאָן"
+        }
+    }
+}

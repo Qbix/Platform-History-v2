@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "kena",
+        "LogOut": "tsoa ka ntle"
+    },
+    "activate": {
+        "SetAsPrimary": "Beha {{1}} e le sa ka sehloohong {{2}}",
+        "ChoosePassPhrase": "Khetha <strong>polelo ea<\/strong> ho <strong>feta<\/strong> ho kena le eona. <br> Mantsoe a bonolo a nang le mantsoe a seng makae ao u tla hopola habonolo.",
+        "ChoosePassPhraseSeeSuggestions": "Khetha <strong>polelo e<\/strong> ntle ea ho <strong>feta<\/strong> ho sireletsa akhaonto ea hau. Bona litlhahiso tsa maikutlo a mang.",
+        "LogOutAndTryAgain": "Phalla &#39;me u Leke hape",
+        "IfYouFeel": "Haeba u utloa hore ho hong ho fositse, u ka khona",
+        "SetIdentifierButtonTitle": "qala holimo"
+    },
+    "session": {
+        "GetStarted": "Qala"
+    },
+    "authorize": {
+        "GetStarted": "Qala",
+        "Authorize": "Lumella",
+        "TermsLabel": "Ke balile mme kea lumela <br> ho {{link}}",
+        "TermsTitle": "Melao"
+    },
+    "register": {
+        "TermsLabel": "Ke amohela {{link}}",
+        "TermsTitle": "Melao"
+    },
+    "notifications": {
+        "title": "Lumello",
+        "prompt": "Na o batla ho nolofalletsa litlhahisoleseding? U tla fumana lisebelisoa tsa nako ea sebele ka lintho tseo u li hlokomelang.",
+        "yes": "E.",
+        "no": "Che",
+        "WelcomePleaseVerifyEmail": "Amoheloa! Ka kopo netefatsa aterese ea hau ea imeile.",
+        "WelcomeVerifyEmail": "Amoheloa! Netefatsa aterese ea hau ea imeile.",
+        "ForgetPass": "Hey, o kile oa lebala molaetsa oa hau?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Khetha moqoqo"
+        },
+        "select": {
+            "title": "Khetha puisano ea {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Ka kopo khetha lebokose.",
+        "inviteUser": "Mema User"
+    },
+    "invalidLanguageSelected": "Puo e sa nepahaleng e khethiloeng"
+}

@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "{{Error CMXCIX per petitionem}}",
+        "canceled": "request cancellatam",
+        "500": "Internum distributorii errorem",
+        "404": "Non inveni: {{CMXCIX}}",
+        "501": "request intermisit"
+    },
+    "nonce": {
+        "sameDomain": "Periodus finit. Page rursum reficere.",
+        "otherDomain": "Clausus crucem, ad petitionem domain domain in externis {{CMXCIX}}"
+    },
+    "words": {
+        "tap": "ICTUS",
+        "click": "click",
+        "yes": "etiam",
+        "no": "nihil",
+        "Tap": "ICTUS",
+        "Click": "Click",
+        "Yes": "Ita",
+        "No": "nullum"
+    },
+    "months": {
+        "1": "Ianuarii",
+        "2": "Februarius",
+        "3": "Martii",
+        "4": "Aprilis",
+        "5": "May",
+        "6": "June",
+        "7": "Iulii",
+        "8": "August",
+        "9": "September",
+        "10": "Octobris",
+        "11": "November",
+        "12": "December"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Tortor velit permittere accessum ad",
+        "record": "record",
+        "recording": "Book",
+        "remains": "permanet",
+        "maximum": "maximum",
+        "playing": "ludens",
+        "recorded": "memoriae",
+        "clip": "clip",
+        "orupload": "aut onerati",
+        "usethis": "uti haec",
+        "discard": "Relinquere",
+        "encoding": "modum translitterandi"
+    },
+    "alert": {
+        "title": "erecti"
+    },
+    "confirm": {
+        "title": "Constituo",
+        "ok": "Ita",
+        "cancel": "nullum"
+    },
+    "prompt": {
+        "title": "promptus",
+        "ok": "ad"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Lectio file Error",
+        "cameraCommands": {
+            "prompt": "Quid velis agere?",
+            "photo": "Ut nova photo",
+            "library": "Select a bibliotheca"
+        },
+        "tooSmall": "Placere eligere maior imago.",
+        "cropping": {
+            "title": "Adjust magnitudine dignitateque",
+            "touchscreen": "Et trahunt digitis tuis zoom",
+            "notTouchscreen": "Uti &amp; mus et rota to zoom drag"
+        }
+    }
+}

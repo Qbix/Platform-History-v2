@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Iphutha {{status}} ngexesha lesicelo",
+        "canceled": "Isicelo sikhanseliwe",
+        "500": "Impazamo yeSeva yangaphakathi",
+        "404": "Afunyanwanga: {{url}}",
+        "501": "Isicelo saphazamiseka"
+    },
+    "nonce": {
+        "sameDomain": "Iseshoni iphelelwe yisikhathi. Hlaziya kwakhona iphepha kwaye uzame kwakhona.",
+        "otherDomain": "Isicelo esivinjiweyo-domain domain ekhutshwe kwi-domain yangaphandle kwi {{baseUrl}}"
+    },
+    "words": {
+        "tap": "kampompo",
+        "click": "nqakraza",
+        "yes": "Ewe",
+        "no": "hayi",
+        "Tap": "Thepha",
+        "Click": "Cofa",
+        "Yes": "Ewe",
+        "No": "Hayi"
+    },
+    "months": {
+        "1": "EyoMqungu",
+        "2": "EyoMdumba",
+        "3": "EyoKwindla",
+        "4": "UTshazimpuzi",
+        "5": "UCanzibe",
+        "6": "Isilimela",
+        "7": "EyeKhala",
+        "8": "EyeThupha",
+        "9": "EyoMsintsi",
+        "10": "EyeDwarha",
+        "11": "EyeNkanga",
+        "12": "EtiMnga"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Nceda vumela ukufikelela kwimakrofoni yakho",
+        "record": "Rekhoda",
+        "recording": "Ukurekhoda",
+        "remains": "ihleli",
+        "maximum": "buninzi",
+        "playing": "Ukudlala",
+        "recorded": "I rekhodi",
+        "clip": "klipu",
+        "orupload": "Okanye Layisha",
+        "usethis": "Sebenzisa le",
+        "discard": "Lahla",
+        "encoding": "Ukucwangcisa"
+    },
+    "alert": {
+        "title": "Isaziso"
+    },
+    "confirm": {
+        "title": "Qinisekisa",
+        "ok": "Ewe",
+        "cancel": "Hayi"
+    },
+    "prompt": {
+        "title": "Ukunyuswa",
+        "ok": "Hamba"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Iphutha lokufunda ifayile",
+        "cameraCommands": {
+            "prompt": "Ingaba ungathanda ukwenza ntoni?",
+            "photo": "Thatha isithombe esitsha",
+            "library": "Khetha kwilayibrari"
+        },
+        "tooSmall": "Nceda ukhethe umfanekiso omkhulu.",
+        "cropping": {
+            "title": "Lungisa ubungakanani kunye nesimo",
+            "touchscreen": "Sebenzisa iminwe yakho ukuze usondeza uze udibe",
+            "notTouchscreen": "Sebenzisa imouse yakho kunye nevili ukuze ukondeza uze udibe"
+        }
+    }
+}

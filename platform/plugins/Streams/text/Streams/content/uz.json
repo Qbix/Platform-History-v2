@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Yangi element"
+    },
+    "labels": {
+        "Streams\/invited": "Men taklif qilingan odamlar",
+        "Streams\/invitedMe": "Meni kim taklif qildi?"
+    },
+    "interests": {
+        "Filter": "Siz nimani yoqtirasiz?",
+        "CanAdd": "Siz hali ham izlayotgan narsani topa olmasangiz, quyidagi qiziqishlarni qo&#39;shishingiz mumkin:",
+        "TrySynonyms": "Uni ko&#39;rmaysizmi? Ba&#39;zi sinonimlarni ko&#39;ring.",
+        "AddUnderCategory": "Kategoriya bo&#39;yicha qo&#39;shish ...",
+        "Other": "Boshqa",
+        "Unlisted": "Listelenmemiş"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Xabar administratorni tekshirish uchun belgilandi. Yopish uchun yana bir marta bosing.",
+        "noOneSaid": "Hech kim hech narsa demadi",
+        "closeChatButton": "Suhbatni yoping",
+        "closeChatConfirmTitle": "Ushbu suhbatni o&#39;chirib qo&#39;yingmi?",
+        "closeChatConfirm": "Ushbu suhbatni yopmoqchimisiz?",
+        "closeChatConfirmYes": "Ha",
+        "closeChatConfirmNo": "Yo&#39;q",
+        "earlierComments": "oldingi sharhlar"
+    },
+    "notifications": {
+        "*": "{{& message.fields.type}} dan {{& stream.fields.title}} ga xabar yuborish",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} quyidagilarni aytgan:",
+        "Streams\/changed": "{{stream.fields.title}} da o&#39;zgarish",
+        "Streams\/invite": "{{& stream.fields.title}} ga taklif qilindingiz",
+        "Streams\/announcement": "{{& streams.fields.title}} da e&#39;lon qilish",
+        "Streams\/access": "{{&call 'avatar.displayName'}} translatsiya ruxsatini o&#39;zgartirdi",
+        "Streams\/chat\/edit": "Chat xabarlari tahrirlangan",
+        "Streams\/chat\/remove": "Tezkor xabar olib tashlandi",
+        "Streams\/closed": "{{stream.fields.title}} yopildi",
+        "Streams\/task\/progress": "{{stream.fields.title}} da bajarilgan progress",
+        "Streams\/task\/complete": "Vazifa tugadi: {{stream.fields.title}}",
+        "Streams\/task\/error": "{{stream.fields.title}} paytida xatolik yuz berdi",
+        "Streams\/incoming\/*": "{{app}}: Kirish xabar"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} sizni {{inviteUrl}} ga taklif qildi",
+        "dialog": {
+            "chooseFromContacts": "Kontaktlaringizdan tanlang",
+            "chooseAgainFromContacts": "Kontaktlardan qayta-ni tanlang",
+            "inviteSelectedContacts": "Tanlangan aloqalarni taklif qilish",
+            "selectFromContacts": "Kontaktlar-dan tanlang",
+            "photo": "Suratga olish",
+            "photoInstruction": "QR kodingizni skanerlagan shaxs sizning oldingizda bo&#39;lsa, ularni rasmga oling",
+            "to": "Kimga: {{Stream Title}}",
+            "go": "Boring",
+            "title": "Taklif qiling",
+            "placeholder": "Mobil telefon raqami yoki elektron pochta manzili",
+            "orInvite": "Yoki foydalanib, odamlarni taklif qiling:",
+            "QR": "QR kodini yaratish uchun {{ClickOrTap}}",
+            "QRtitle": "Ushbu QR kodini skanerlash",
+            "QRscanned": "Uni skanerlashdi!",
+            "byEmail": "E-pochta",
+            "byText": "Matn",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hey, buni tekshirib ko&#39;ring",
+            "PleaseVisitLink": "Iltimos, quyidagi havolaga tashrif buyuring:",
+            "InvitingYou": "Men sizni {{title}} ga taklif qilyapman",
+            "HasInvitedYou": "{{displayName}} sizni {{title}} ga taklif qildi"
+        },
+        "sms": {
+            "content": "Siz {{title}} ga taklif qilingansiz. Iltimos, {{url}}"
+        },
+        "notice": {
+            "text": "Sizni taklif qilishdi. {{ClickOrTap}} bu erda qabul va qo&#39;shilish uchun."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} uchun <em>{{message.fields.type}}<\/em> xabar chop {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& url}} da {{& call 'avatar.displayName'}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Do&#39;stlaringiz hali tanish bo&#39;lmagan raqamlarimizdan takliflar yuboriladi. Sizdan kelgan taklifnomani ularga havola etishni so&#39;rash uchun tezkor matn bilan kuzatib boring.",
+            "confirm": "Do&#39;stlaringiz hali tanish bo&#39;lmagan raqamlarimizdan takliflar yuboriladi. Sizdan kelgan taklifnomani ularga etkazib berishni so&#39;rash uchun ularni tezkor matn bilan kuzatib borishni istaysizmi?",
+            "check": "Hey, men sizga faqat {{app}} ilovaga taklifnoma yubordim. Iltimos, SMS-ni tekshiring va havolani bosing!"
+        },
+        "email": {
+            "alert": "Do&#39;stlaringiz hali tanish bo&#39;lmagan domenimizdan takliflar yuboriladi. Sizdan kelgan taklifnomani ularga havola etishni so&#39;rash uchun tezkor matn bilan kuzatib boring.",
+            "confirm": "Do&#39;stlaringiz hali tanish bo&#39;lmagan domenimizdan takliflar yuboriladi. Sizdan kelgan taklifnomani ularga etkazib berishni so&#39;rash uchun ularni tezkor matn bilan kuzatib borishni istaysizmi?",
+            "subject": "Siz taklif oldingizmi?",
+            "body": "Hey, men sizga faqat {{app}} ilovaga taklifnoma yubordim. E-pochtangizni tekshiring va u yerdagi havolani bosing!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Mikrofonni yoqish",
+            "cameraTitle": "Kamerani yoqish",
+            "cameraAndMicrophoneTitle": "Kamera va mikrofonni yoqish"
+        }
+    }
+}

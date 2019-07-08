@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Nij item"
+    },
+    "labels": {
+        "Streams\/invited": "Minsken dy&#39;t ik útnoege",
+        "Streams\/invitedMe": "Wa hat my frege"
+    },
+    "interests": {
+        "Filter": "Wat wolle jo?",
+        "CanAdd": "As jo noch net fine wat jo sykje, kinne jo in nij belang jaan oan:",
+        "TrySynonyms": "Sjoch it net? Besykje wat synonyms.",
+        "AddUnderCategory": "Under kategory taheakje ...",
+        "Other": "Oar",
+        "Unlisted": "Unlisted"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Berjocht is markearre foar admin review. Tapearje op &#39;e nij om te fleanen.",
+        "noOneSaid": "Nimmen hat neat sein",
+        "closeChatButton": "Slute chat",
+        "closeChatConfirmTitle": "Slút dit petear?",
+        "closeChatConfirm": "Binne jo wis dat jo dit petear slute wolle?",
+        "closeChatConfirmYes": "Ja",
+        "closeChatConfirmNo": "Nee",
+        "earlierComments": "earder kommentaren"
+    },
+    "notifications": {
+        "*": "Berjocht {{& message.fields.type}} nei {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sei:",
+        "Streams\/changed": "Feroarings yn {{stream.fields.title}}",
+        "Streams\/invite": "Jo waarden útnoege ta {{& stream.fields.title}}",
+        "Streams\/announcement": "Ferjouwing yn {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} feroare tagongsrjochten",
+        "Streams\/chat\/edit": "Chat berjocht bewurke",
+        "Streams\/chat\/remove": "Koe berjocht wiske wurde",
+        "Streams\/closed": "{{stream.fields.title}} is sletten",
+        "Streams\/task\/progress": "Progress makke op {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task is foltôge: {{stream.fields.title}}",
+        "Streams\/task\/error": "Flater ûnder: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Inkommende berjocht"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} hat jo nei {{inviteUrl}} útnoege",
+        "dialog": {
+            "chooseFromContacts": "Kies út jo kontakten",
+            "chooseAgainFromContacts": "Kies nochris fan kontakten",
+            "inviteSelectedContacts": "Lit selektearre kontakten útnoegje",
+            "selectFromContacts": "Selektearje fan kontakten",
+            "photo": "Meitsje in foto",
+            "photoInstruction": "As de persoan dy&#39;t jo QR code besprutsen hat, is foar jo in foto fan har",
+            "to": "To: {{Stream Title}}",
+            "go": "Rinne",
+            "title": "Noegje",
+            "placeholder": "Mobile nûmer of e-mailadres",
+            "orInvite": "Of of minsken útnoegje troch te brûken:",
+            "QR": "{{ClickOrTap}} om QR code te generearjen",
+            "QRtitle": "Scan dit QR code",
+            "QRscanned": "Se scannen it!",
+            "byEmail": "E-post",
+            "byText": "Tekst",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hjir, kontrolearje dit út",
+            "PleaseVisitLink": "Besykje op &#39;e folgjende link:",
+            "InvitingYou": "Ik freegje jo nei {{title}}",
+            "HasInvitedYou": "{{displayName}} hat jo útnoege ta {{title}}"
+        },
+        "sms": {
+            "content": "Jo binne oanmeld nei {{title}}. Folje op {{url}}"
+        },
+        "notice": {
+            "text": "Jo binne oanmeld. {{ClickOrTap}} hjir te akseptearjen en te gean."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} brocht in <em>{{message.fields.type}}<\/em> berjocht nei {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} yn {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Untfongen wurde út ús nûmere stjoerd, dy&#39;t jo freonen net werkenne. Folgje mei in fluchste tekst om se te wite litten hoe&#39;t de útnoeging fan jo kaam, en freegje har om de link te klikken.",
+            "confirm": "Untfongen wurde út ús nûmere stjoerd, dy&#39;t jo freonen net werkenne. Wolle jo trochgean mei in fluchste tekst om se te wite litte jo de útnoeging fan jo kaam, freegje se om de link te klikken.",
+            "check": "Hey, ik stjoerde jo gewoan in útnoeging nei de {{app}} app. Kontrolearje jo sms en klik op de link!"
+        },
+        "email": {
+            "alert": "Untfongen wurde út ús domein stjoerd, dy&#39;t jo freonen net werkenne. Folgje mei in fluchste tekst om se te wite litten hoe&#39;t de útnoeging fan jo kaam, en freegje har om de link te klikken.",
+            "confirm": "Untfongen wurde út ús domein stjoerd, dy&#39;t jo freonen net werkenne. Wolle jo trochgean mei in fluchste tekst om se te wite litte jo de útnoeging fan jo kaam, freegje se om de link te klikken.",
+            "subject": "Hawwe jo in útnoeging?",
+            "body": "Hey, ik stjoerde jo gewoan in útnoeging nei de {{app}} app. Kontrolje jo e-post en klik de link yn!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Mikrofoan ynskeakelje",
+            "cameraTitle": "Kamera ynskeakelje",
+            "cameraAndMicrophoneTitle": "Kamera en mikrofoan ynskeakelje"
+        }
+    }
+}

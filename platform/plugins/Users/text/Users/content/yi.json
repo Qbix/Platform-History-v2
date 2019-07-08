@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "צייכן אריין",
+        "LogOut": "קלאָץ אויס"
+    },
+    "activate": {
+        "SetAsPrimary": "שטעלן {{1}} ווי מיין ערשטיק {{2}}",
+        "ChoosePassPhrase": "קלייַבן אַ <strong>פאָרן פראַזע<\/strong> צו קלאָץ אין מיט. <br> א פּשוט פראַזע קאַנסיסטינג פון אַ ביסל ווערטער אַז איר וועט לייכט געדענקען.",
+        "ChoosePassPhraseSeeSuggestions": "קלייַבן אַ גוט <strong>פּאַסן פראַזע<\/strong> צו באַשיצן דיין חשבון. זען די פֿירלייגן פֿאַר עטלעכע געדאנקען.",
+        "LogOutAndTryAgain": "קלאָץ אויס און פּרובירן ווידער",
+        "IfYouFeel": "אויב איר פילן עפּעס איז פאַלש, איר קענען",
+        "SetIdentifierButtonTitle": "אָנהייב איבער"
+    },
+    "session": {
+        "GetStarted": "הייב אהן"
+    },
+    "authorize": {
+        "GetStarted": "הייב אהן",
+        "Authorize": "Authorize",
+        "TermsLabel": "איך האָבן לייענען און שטימען <br> צו די {{link}}",
+        "TermsTitle": "Terms"
+    },
+    "register": {
+        "TermsLabel": "איך אָננעמען די {{link}}",
+        "TermsTitle": "Terms"
+    },
+    "notifications": {
+        "title": "דערלויבעניש",
+        "prompt": "ווילן צו געבן נאָוטאַפאַקיישאַנז? איר וועט באַקומען פאַקטיש-צייַט דערהייַנטיקונגען וועגן זאכן איר זאָרג וועגן.",
+        "yes": "Yes",
+        "no": "ניין",
+        "WelcomePleaseVerifyEmail": "באַגריסונג! ביטע באַשטעטיקן דיין בליצפּאָסט אַדרעס.",
+        "WelcomeVerifyEmail": "באַגריסונג! באַשטעטיקן דיין בליצפּאָסט אַדרעס.",
+        "ForgetPass": "היי, האָט איר פאַרגעסן דיין פּאַסספראַס?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "קלייַבן קאָנטאַקט"
+        },
+        "select": {
+            "title": "אויסקלייַבן קאָנטאַקט פון {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "ביטע אויסקלייַבן פירמע.",
+        "inviteUser": "Invite User"
+    },
+    "invalidLanguageSelected": "אומלעגאַלע שפּראַך אויסגעקליבן"
+}

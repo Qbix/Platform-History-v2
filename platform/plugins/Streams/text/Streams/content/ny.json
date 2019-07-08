@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Chinthu Chatsopano"
+    },
+    "labels": {
+        "Streams\/invited": "Anthu omwe ndinawaitana",
+        "Streams\/invitedMe": "Ndani anandiitana"
+    },
+    "interests": {
+        "Filter": "Kodi mumakonda chiyani?",
+        "CanAdd": "Ngati simungapeze zomwe mukufuna, mukhoza kuwonjezera chidwi chatsopano:",
+        "TrySynonyms": "Simukuziwona? Yesani zina zofanana.",
+        "AddUnderCategory": "Onjezerani pansi pa gulu ...",
+        "Other": "Zina",
+        "Unlisted": "Osatchulidwa"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Uthenga wagwidwa kuti uwonereredwe ndi admin. Dinani kachiwiri kuti musatuluke.",
+        "noOneSaid": "Palibe amene wanena chilichonse",
+        "closeChatButton": "Tsekani macheza",
+        "closeChatConfirmTitle": "Tsekani chiyanjano ichi?",
+        "closeChatConfirm": "Kodi mukutsimikiza kuti mukufuna kutseka chatsopano ichi?",
+        "closeChatConfirmYes": "Inde",
+        "closeChatConfirmNo": "Ayi",
+        "earlierComments": "ndemanga zoyambirira"
+    },
+    "notifications": {
+        "*": "Uthenga {{& message.fields.type}} kwa {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} adati:",
+        "Streams\/changed": "Zosintha mu {{stream.fields.title}}",
+        "Streams\/invite": "Mudapitidwa ku {{& stream.fields.title}}",
+        "Streams\/announcement": "Chilengezo mu {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} anasintha kufika kwa mtsinje",
+        "Streams\/chat\/edit": "Uthenga wa macheza wasinthidwa",
+        "Streams\/chat\/remove": "Uthenga wa macheza wachotsedwa",
+        "Streams\/closed": "{{stream.fields.title}} yatsekedwa",
+        "Streams\/task\/progress": "Kupita patsogolo kunapangidwa pa {{stream.fields.title}}",
+        "Streams\/task\/complete": "Ntchito idatha: {{stream.fields.title}}",
+        "Streams\/task\/error": "Cholakwika pa: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Uthenga Wolowera"
+    },
+    "invite": {
+        "messageContent": "{{9}} akuitanani ku {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Sankhani kuchokera kwa Othandizira Anu",
+            "chooseAgainFromContacts": "Sankhani Ndiponso kuchokera kwa Othandizira",
+            "inviteSelectedContacts": "Pemphani Othandizidwa Osankhidwa",
+            "selectFromContacts": "Sankhani Kwa Ophatikizana",
+            "photo": "Tengani chithunzi",
+            "photoInstruction": "Ngati munthu yemwe adafufuza code yanu ya QR ali patsogolo panu, tengani chithunzi chawo",
+            "to": "Ku: {{Stream Title}}",
+            "go": "Pitani",
+            "title": "Pemphani",
+            "placeholder": "Nambala yam&#39;manja kapena imelo",
+            "orInvite": "Kapena muitane anthu pogwiritsa ntchito:",
+            "QR": "{{ClickOrTap}} kuti apange code QR",
+            "QRtitle": "Shandani khodi iyi QR",
+            "QRscanned": "Iwo anazifufuza izo!",
+            "byEmail": "Imelo",
+            "byText": "Malembo",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Eya, fufuzani izi",
+            "PleaseVisitLink": "Chonde tananizilani izi:",
+            "InvitingYou": "Ndikukuitanani ku {{title}}",
+            "HasInvitedYou": "{{displayName}} wakuitanani ku {{title}}"
+        },
+        "sms": {
+            "content": "Mwaitanidwa ku {{title}}. Chonde tambani {{url}}"
+        },
+        "notice": {
+            "text": "Mwapitanidwa. {{ClickOrTap}} apa kulandira ndi kujowina."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} atumiza uthenga <em>{{message.fields.type}}<\/em> kwa {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} mu {{}}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Oitanidwa akutumizidwa kuchokera ku chiwerengero chathu, chomwe anzanu sadziwa. Tsatirani ndi malemba ofulumira kuti awadziwitse kuyitanidwa kukuchokera kwa inu, kuwapempha kuti asindikize kulumikizana.",
+            "confirm": "Oitanidwa akutumizidwa kuchokera ku chiwerengero chathu, chomwe anzanu sadziwa. Kodi mungakonde kufufuza ndi malemba ofulumira kuti muwadziwitse kuyitanidwa kukuchokera kwa inu, kuwapempha kuti afikitse kulumikizana.",
+            "check": "Eya, ndangokuitanani kuitana {{app}}. Chonde onani sms yanu ndipo dinani kulumikizana!"
+        },
+        "email": {
+            "alert": "Oitanidwa akutumizidwa kuchokera ku domeni yathu, zomwe abwenzi anu sadziwa. Tsatirani ndi malemba ofulumira kuti awadziwitse kuyitanidwa kukuchokera kwa inu, kuwapempha kuti asindikize kulumikizana.",
+            "confirm": "Oitanidwa akutumizidwa kuchokera ku domeni yathu, zomwe abwenzi anu sadziwa. Kodi mungakonde kufufuza ndi malemba ofulumira kuti muwadziwitse kuyitanidwa kukuchokera kwa inu, kuwapempha kuti afikitse kulumikizana.",
+            "subject": "Mudalandira kuyitanidwa?",
+            "body": "Eya, ndangokuitanani kuitana {{app}}. Chonde onani imelo yanu ndipo dinani chiyanjano mmenemo!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Thandizani maikolofoni",
+            "cameraTitle": "Thandizani Kamera",
+            "cameraAndMicrophoneTitle": "Thandizani Kamera ndi Microphone"
+        }
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "ynlogge",
+        "LogOut": "útlogge"
+    },
+    "activate": {
+        "SetAsPrimary": "Set {{1}} as myn primêre {{2}}",
+        "ChoosePassPhrase": "Kies in <strong>passende phrase<\/strong> om yn te loggen mei. <br> In ienfâldige phrase dy&#39;t bestiet út in pear wurden dy&#39;t jo maklik makliker fine.",
+        "ChoosePassPhraseSeeSuggestions": "Kies in goeie <strong>passoaze<\/strong> om jo akkount te beskermjen. Sjoch de suggestjes foar guon ideeën.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "As jo fiele dat wat ferkeard is, kinne jo",
+        "SetIdentifierButtonTitle": "oernij begjinne"
+    },
+    "session": {
+        "GetStarted": "Begjinne"
+    },
+    "authorize": {
+        "GetStarted": "Begjinne",
+        "Authorize": "Authorize",
+        "TermsLabel": "Ik haw lêzen en oerien <br> nei de {{link}}",
+        "TermsTitle": "Betingsten"
+    },
+    "register": {
+        "TermsLabel": "Ik akseptearje de {{link}}",
+        "TermsTitle": "Betingsten"
+    },
+    "notifications": {
+        "title": "Permisje",
+        "prompt": "Wolle jo notifikaasjes ynskeakelje? Jo krije regisseur-fernijings oer dingen dy&#39;t jo soargje.",
+        "yes": "Ja",
+        "no": "Nee",
+        "WelcomePleaseVerifyEmail": "Wolkom! Kontrolearje jo jo adres.",
+        "WelcomeVerifyEmail": "Wolkom! Kontrolearje jo email adres.",
+        "ForgetPass": "Hey, ferjitten jo passphrase?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Kies kontakt"
+        },
+        "select": {
+            "title": "Selektearje kontaktpersoan fan {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Selektearje labels.",
+        "inviteUser": "Meidogger brûke"
+    },
+    "invalidLanguageSelected": "Unjildige taal selektearre"
+}

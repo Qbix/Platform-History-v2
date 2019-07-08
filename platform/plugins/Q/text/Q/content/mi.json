@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Hapa {{status}} i te wa e tono ana",
+        "canceled": "Kua whakakorea te tono",
+        "500": "Hapa o te tūmau ā-roto",
+        "404": "Kāore i kitea: {{url}}",
+        "501": "Ka tukuna te tono"
+    },
+    "nonce": {
+        "sameDomain": "Kua pau te Runanga. Whakahouhia te whārangi ka ngana ano.",
+        "otherDomain": "Ko te tono rohe-rohe kua murua ki te rohe ke i {{baseUrl}}"
+    },
+    "words": {
+        "tap": "tap",
+        "click": "pāwhiritia",
+        "yes": "ae",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Pāwhiritia",
+        "Yes": "Ae",
+        "No": "No"
+    },
+    "months": {
+        "1": "Hanuere",
+        "2": "Hui-tanguru",
+        "3": "Maehe",
+        "4": "Paenga-whāwhā",
+        "5": "Haratua",
+        "6": "Pipiri",
+        "7": "Hōngongoi",
+        "8": "Akuhata",
+        "9": "Mahuru",
+        "10": "Oketopa",
+        "11": "Noema",
+        "12": "Hakihea"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Tukua he uru ki to kuorooro",
+        "record": "Tuhia",
+        "recording": "Te tuhi",
+        "remains": "noho tonu",
+        "maximum": "teitei",
+        "playing": "Te takaro",
+        "recorded": "Kua tuhia",
+        "clip": "topenga",
+        "orupload": "Ko te Tukuna",
+        "usethis": "Whakamahia tenei",
+        "discard": "Makaia",
+        "encoding": "Whakauru"
+    },
+    "alert": {
+        "title": "Aara"
+    },
+    "confirm": {
+        "title": "Whakaae",
+        "ok": "Ae",
+        "cancel": "No"
+    },
+    "prompt": {
+        "title": "Whakataka",
+        "ok": "Haere"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Hapa ki te pānui i te kōnae",
+        "cameraCommands": {
+            "prompt": "He aha e hiahia ana koe ki te mahi?",
+            "photo": "Tangohia he whakaahua hou",
+            "library": "Tīpako mai i te whare pukapuka"
+        },
+        "tooSmall": "Tohua koa he whakaahua nui atu.",
+        "cropping": {
+            "title": "Whakatikahia te rahi me te tūranga",
+            "touchscreen": "Whakamahia ou maihao ki te tarai me te toi",
+            "notTouchscreen": "Whakamahia te kiore me te wira ki te toro me te toi"
+        }
+    }
+}

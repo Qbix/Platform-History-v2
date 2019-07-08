@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Նոր նյութեր"
+    },
+    "labels": {
+        "Streams\/invited": "Մարդիկ հրավիրեցի",
+        "Streams\/invitedMe": "Ով է ինձ հրավիրել"
+    },
+    "interests": {
+        "Filter": "Ինչ եք վայելում:",
+        "CanAdd": "Եթե դեռ չեք կարող գտնել այն, ինչ փնտրում եք, կարող եք ավելացնել նոր հետաքրքրություն ստորեւ:",
+        "TrySynonyms": "Չեմ տեսնում այն: Փորձեք որոշ հոմանիշներ:",
+        "AddUnderCategory": "Ավելացնել կատեգորիայի տակ ...",
+        "Other": "Այլ",
+        "Unlisted": "Լիցենզավորված չէ"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Հաղորդագրությունը դրված է admin- ի վերանայման համար: Հպեք կրկին անփայլ:",
+        "noOneSaid": "Ոչ ոք ոչինչ չի ասել",
+        "closeChatButton": "Զրույցը զրուցելիս",
+        "closeChatConfirmTitle": "Զրույցը փակել:",
+        "closeChatConfirm": "Վստահ եք, որ ցանկանում եք փակել այս զրույցը:",
+        "closeChatConfirmYes": "Այո",
+        "closeChatConfirmNo": "Ոչ",
+        "earlierComments": "ավելի վաղ մեկնաբանություններ"
+    },
+    "notifications": {
+        "*": "Հաղորդագրություն {{& message.fields.type}} - ից {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ասել է.",
+        "Streams\/changed": "{{stream.fields.title}} էջում փոփոխություններ են կատարվել",
+        "Streams\/invite": "Դուք հրավիրված եք {{& stream.fields.title}}",
+        "Streams\/announcement": "Հայտարարություն {{& streams.fields.title}} - ում",
+        "Streams\/access": "{{999} }- ը փոխեց հոսքի հասանելիությունը",
+        "Streams\/chat\/edit": "Խմբագրված հաղորդագրությունը խմբագրվել է",
+        "Streams\/chat\/remove": "Զրուցարան հաղորդագրություն հեռացվեց",
+        "Streams\/closed": "{{stream.fields.title}} - ը փակվել է",
+        "Streams\/task\/progress": "{{stream.fields.title}} - ում կատարված առաջընթաց",
+        "Streams\/task\/complete": "Առաջադրանքն ավարտվեց `{{stream.fields.title}}",
+        "Streams\/task\/error": "{{stream.fields.title}} - ի սխալ ժամանակ",
+        "Streams\/incoming\/*": "{{app}}: Մուտքային հաղորդագրություն"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} հրավիրեց ձեզ {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Ընտրեք ձեր կոնտակտներից",
+            "chooseAgainFromContacts": "Ընտրեք կրկին կոնտակտներից",
+            "inviteSelectedContacts": "Հրավիրեք ընտրված կոնտակտներ",
+            "selectFromContacts": "Ընտրեք կոնտակտներից",
+            "photo": "Լուսանկարել",
+            "photoInstruction": "Եթե ձեր QR- կոդը սկանավորողը ձեր առջեւ է, ապա նրանց լուսանկարը",
+            "to": "{{Stream Title}}",
+            "go": "Գնացեք",
+            "title": "Հրավիրեք",
+            "placeholder": "Բջջային համարը կամ էլփոստի հասցեն",
+            "orInvite": "Կամ հրավիրեք մարդկանց, օգտագործելով `",
+            "QR": "{{ClickOrTap}}, QR կոդը ստեղծելու համար",
+            "QRtitle": "Scan այս QR կոդը",
+            "QRscanned": "Նրանք սկանեցին այն:",
+            "byEmail": "Email",
+            "byText": "Տեքստը",
+            "byFacebook": "Facebook- ը",
+            "byTwitter": "Twitter- ը"
+        },
+        "email": {
+            "subject": "Hey, ստուգեք սա",
+            "PleaseVisitLink": "Խնդրում ենք այցելել հետեւյալ հղումը.",
+            "InvitingYou": "Ես հրավիրում եմ ձեզ {{title}}",
+            "HasInvitedYou": "{{displayName}} հրավիրել է ձեզ {{title}}"
+        },
+        "sms": {
+            "content": "Դուք հրավիրվել եք {{title}}: Խնդրում ենք `{{url}}"
+        },
+        "notice": {
+            "text": "Դուք հրավիրվել եք: {{ClickOrTap}} այստեղ ընդունելու եւ միանալու համար:"
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} - <em>{{message.fields.type}}<\/em> հաղորդագրություն է ուղարկվել {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} {{& url}} - ում {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Հրավիրատոմսերը ուղարկվում են մեր թվից, որոնք ձեր ընկերները դեռեւս չեն ճանաչում: Հետեւեք արագ տեքստին, որպեսզի նրանք իմանան, որ հրավերն եկել է ձեզանից, խնդրելով սեղմել հղումը:",
+            "confirm": "Հրավիրատոմսերը ուղարկվում են մեր թվից, որոնք ձեր ընկերները դեռեւս չեն ճանաչում: Ցանկանում եք հետեւել արագ տեքստին, որպեսզի նրանք իմանան, որ հրավերն եկել է ձեզանից, խնդրելով սեղմել հղումը:",
+            "check": "Hey, ես պարզապես հրավիրել եմ {{app}} հավելված: Խնդրում ենք ստուգել ձեր sms եւ սեղմեք հղումը:"
+        },
+        "email": {
+            "alert": "Հրավիրատոմսերը ուղարկվում են մեր տիրույթից, որը ձեր ընկերները դեռեւս չեն ճանաչում: Հետեւեք արագ տեքստին, որպեսզի նրանք իմանան, որ հրավերն եկել է ձեզանից, խնդրելով սեղմել հղումը:",
+            "confirm": "Հրավիրատոմսերը ուղարկվում են մեր տիրույթից, որը ձեր ընկերները դեռեւս չեն ճանաչում: Ցանկանում եք հետեւել արագ տեքստին, որպեսզի նրանք իմանան, որ հրավերն եկել է ձեզանից, խնդրելով սեղմել հղումը:",
+            "subject": "Դուք հրավիրել եք:",
+            "body": "Hey, ես պարզապես հրավիրել եմ {{app}} հավելված: Խնդրում ենք ստուգել ձեր էլ.փոստը եւ սեղմեք հղումը:"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Միացնել խոսափողը",
+            "cameraTitle": "Միացնել տեսախցիկը",
+            "cameraAndMicrophoneTitle": "Միացնել Camera եւ Microphone"
+        }
+    }
+}

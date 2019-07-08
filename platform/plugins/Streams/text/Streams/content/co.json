@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "New Item"
+    },
+    "labels": {
+        "Streams\/invited": "E persone ch&#39;e aghju invitato",
+        "Streams\/invitedMe": "Chi mi ha invitatu"
+    },
+    "interests": {
+        "Filter": "Cosa ti piace?",
+        "CanAdd": "Sì ancu ùn pudete micca truvà ciò chì stai cercendu, pudete aghjunghje un interessu novu qui:",
+        "TrySynonyms": "Ùn la vede micca? Prova certi sinonimi",
+        "AddUnderCategory": "Add in category ...",
+        "Other": "Altri",
+        "Unlisted": "Non listatu"
+    },
+    "chat": {
+        "flaggedForAdminReview": "U missaghju hè statu tracciatu per una rivista amministrativa. Tocca torna per unflag.",
+        "noOneSaid": "Nisunu hà dettu qualcosa",
+        "closeChatButton": "Chiudite u chat",
+        "closeChatConfirmTitle": "Chiudite questu chat?",
+        "closeChatConfirm": "Sì sicuru chì vulete fermà sta chat?",
+        "closeChatConfirmYes": "Iè",
+        "closeChatConfirmNo": "Innò",
+        "earlierComments": "primu commenti"
+    },
+    "notifications": {
+        "*": "Messaggio {{& message.fields.type}} per {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ha dettu:",
+        "Streams\/changed": "Cambiamenti in {999}}",
+        "Streams\/invite": "Avete invitu à {{& stream.fields.title}}",
+        "Streams\/announcement": "Annuncio in {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} hà cambiatu l&#39;accessu à u fluxu",
+        "Streams\/chat\/edit": "Modificatu un missaghju di chat",
+        "Streams\/chat\/remove": "Messu di chat eliminatu",
+        "Streams\/closed": "{{stream.fields.title}} hè statu chjusu",
+        "Streams\/task\/progress": "Progressu fattu in {{stream.fields.title}}",
+        "Streams\/task\/complete": "U travagliu cumpletitu: {{stream.fields.title}}",
+        "Streams\/task\/error": "Errore durante: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Messaggio in entrata"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} ti invita à {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Sceglite da i vostri Contatti",
+            "chooseAgainFromContacts": "Scegli una volta da i Contatti",
+            "inviteSelectedContacts": "Invita i Contatti Selezionati",
+            "selectFromContacts": "Sceglite Da i Contatti",
+            "photo": "Fate una foto",
+            "photoInstruction": "Se a persona chì scansiu u vostru codice QR hè davanti à voi, piglià una foto di loro",
+            "to": "A: {{Stream Title}}",
+            "go": "Vai",
+            "title": "Invita",
+            "placeholder": "Numero di mobile o indirizzu email",
+            "orInvite": "Invitendu o persone cù u:",
+            "QR": "{{ClickOrTap}} per generà u codice QR",
+            "QRtitle": "Scansione questo codice QR",
+            "QRscanned": "Hè spinuu!",
+            "byEmail": "Email",
+            "byText": "Testo",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hey, fighjate questu",
+            "PleaseVisitLink": "Visite u ligame chì seguita:",
+            "InvitingYou": "Vi invita à {{title}}",
+            "HasInvitedYou": "{{displayName}} ti hà invitato à {{title}}"
+        },
+        "sms": {
+            "content": "Avete invitu à {{title}}. Please tap tap {{url}}"
+        },
+        "notice": {
+            "text": "Avete invitu. {{ClickOrTap}} quì per accettà è riunitevi."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} ha inviatu un messaggio <em>{{message.fields.type}}<\/em> a {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} in {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "L&#39;invite hè inviata da u nostru numeru, chì i vostri amichi ùn ricanùvanu micca. Fate una prova à un testu rapidu per dà li sapete chì l&#39;invitazione hè venuta da voi, dumandanduli di cliccà u ligame.",
+            "confirm": "L&#39;invite hè inviata da u nostru numeru, chì i vostri amichi ùn ricanùvanu micca. Ti piacerebbe seguitu cun un testu rapidu per fà sapè chì l&#39;invite venia da voi, dumandanduli di cliccà u ligame.",
+            "check": "Hey, aghju mandatu appena una invitazione à l&#39;applicazione {{app}}. Per piacè, verificate u vostru sms è cliccate nantu à u ligame!"
+        },
+        "email": {
+            "alert": "I inviti sò inviati da u nostru duminiu chì i vostri amichi ùn ricunnosce micca. Fate una prova à un testu rapidu per dà li sapete chì l&#39;invitazione hè venuta da voi, dumandanduli di cliccà u ligame.",
+            "confirm": "I inviti sò inviati da u nostru duminiu chì i vostri amichi ùn ricunnosce micca. Ti piacerebbe seguitu cun un testu rapidu per fà sapè chì l&#39;invite venia da voi, dumandanduli di cliccà u ligame.",
+            "subject": "Avete ottenutu un invita?",
+            "body": "Hey, aghju mandatu appena una invitazione à l&#39;applicazione {{app}}. Per piacè, verificate u vostru email è cliccate nantu à u ligame!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Abilate Microphone",
+            "cameraTitle": "Abilita a Camera",
+            "cameraAndMicrophoneTitle": "Abilita Fotocamera è Microphone"
+        }
+    }
+}

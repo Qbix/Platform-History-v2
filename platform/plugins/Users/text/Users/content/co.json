@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "Accedi",
+        "LogOut": "scunnettà si"
+    },
+    "activate": {
+        "SetAsPrimary": "Set {{1}} cum&#39;è a mo primu {{2}}",
+        "ChoosePassPhrase": "Sceglite una <strong>frase<\/strong> per a so log in. <br> Una semplice frase chì consiste in poche parole chì vi ricordate.",
+        "ChoosePassPhraseSeeSuggestions": "Sceglite una bona <strong>frase<\/strong> per proteggere u vostru contu. Vede i suggerimenti per qualchì idea.",
+        "LogOutAndTryAgain": "Esci duvete è pruvate dinò",
+        "IfYouFeel": "Se sentite chì qualcosa hà sbagatu, pudete",
+        "SetIdentifierButtonTitle": "ripartisce"
+    },
+    "session": {
+        "GetStarted": "Get Started"
+    },
+    "authorize": {
+        "GetStarted": "Get Started",
+        "Authorize": "Autorizà",
+        "TermsLabel": "Aghju letto è d&#39;accordu <br> a {{link}}",
+        "TermsTitle": "Cundizioni"
+    },
+    "register": {
+        "TermsLabel": "Sò accettatu u {999}}",
+        "TermsTitle": "Cundizioni"
+    },
+    "notifications": {
+        "title": "Permissione",
+        "prompt": "Vulete abilità notifiche? Riceverete l&#39;aggiornamentu in tempo reale nantu à e cose chì vi interessanu.",
+        "yes": "Iè",
+        "no": "Innò",
+        "WelcomePleaseVerifyEmail": "Benvenuti! Per piacè verificate u vostru indirizzu email.",
+        "WelcomeVerifyEmail": "Benvenuti! Verificate u vostru indirizzu email.",
+        "ForgetPass": "Hey, hai scurdatu u passphrase?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Sceglite u cuntattu"
+        },
+        "select": {
+            "title": "Selezziunate u cuntattu di {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Selezziunate etichetta.",
+        "inviteUser": "Invita l&#39;Utilizzatore"
+    },
+    "invalidLanguageSelected": "Lingua selezionata non validu"
+}

@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "ເຂົ້າ​ສູ່​ລະ​ບົບ",
+        "LogOut": "ອອກ​ຈາກ​ລະ​ບົບ"
+    },
+    "activate": {
+        "SetAsPrimary": "ຕັ້ງ {{1}} ເປັນປະຖົມ {{2}} ຂອງຂ້ອຍ",
+        "ChoosePassPhrase": "ເລືອກ <strong>ປະໂຫຍກທີ່ຜ່ານມາ<\/strong> ເພື່ອເຂົ້າສູ່ລະບົບດ້ວຍ. <br> ປະໂຫຍກທີ່ງ່າຍດາຍປະກອບດ້ວຍຄໍາສັບຕ່າງໆທີ່ທ່ານຈະສາມາດຈົດຈໍາໄດ້ຢ່າງງ່າຍດາຍ.",
+        "ChoosePassPhraseSeeSuggestions": "ເລືອກ <strong>ປະໂຫຍກ<\/strong> ທີ່ດີເພື່ອປົກປ້ອງບັນຊີຂອງທ່ານ. ເບິ່ງຄໍາແນະນໍາສໍາລັບບາງຄໍາແນະນໍາ.",
+        "LogOutAndTryAgain": "ອອກຈາກແລະພະຍາຍາມອີກເທື່ອຫນຶ່ງ",
+        "IfYouFeel": "ຖ້າທ່ານຮູ້ສຶກບາງສິ່ງບາງຢ່າງທີ່ຜິດພາດ, ທ່ານສາມາດເຮັດໄດ້",
+        "SetIdentifierButtonTitle": "ເລີ່ມຕົ້ນຫຼາຍກວ່າ"
+    },
+    "session": {
+        "GetStarted": "ເລີ່ມ​ຕົ້ນ"
+    },
+    "authorize": {
+        "GetStarted": "ເລີ່ມ​ຕົ້ນ",
+        "Authorize": "ອະນຸຍາດ",
+        "TermsLabel": "ຂ້າພະເຈົ້າໄດ້ອ່ານແລະຕົກລົງເຫັນດີ <br> ກັບ {{link}}",
+        "TermsTitle": "ຂໍ້ກໍານົດ"
+    },
+    "register": {
+        "TermsLabel": "ຂ້ອຍຍອມຮັບ {{link}}",
+        "TermsTitle": "ຂໍ້ກໍານົດ"
+    },
+    "notifications": {
+        "title": "ການອະນຸຍາດ",
+        "prompt": "ທ່ານຕ້ອງການເປີດການແຈ້ງເຕືອນບໍ? ທ່ານຈະໄດ້ຮັບການປັບປຸງເວລາທີ່ແທ້ຈິງກ່ຽວກັບສິ່ງທີ່ທ່ານສົນໃຈ.",
+        "yes": "ແມ່ນແລ້ວ",
+        "no": "ບໍ່ມີ",
+        "WelcomePleaseVerifyEmail": "ຍິນດີຕ້ອນຮັບ! ກະລຸນາກວດສອບອີເມວຂອງທ່ານ.",
+        "WelcomeVerifyEmail": "ຍິນດີຕ້ອນຮັບ! ຢືນ​ຢັນ​ທີ່​ຢູ່​ອີ​ເມວ​ຂອງ​ທ່ານ.",
+        "ForgetPass": "Hey, ທ່ານລືມລະຫັດຜ່ານຂອງທ່ານບໍ?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "ເລືອກຕິດຕໍ່"
+        },
+        "select": {
+            "title": "ເລືອກທີ່ຕິດຕໍ່ຂອງ {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "ກະລຸນາເລືອກເອົາປ້າຍຊື່.",
+        "inviteUser": "Invite User"
+    },
+    "invalidLanguageSelected": "ພາສາບໍ່ຖືກຕ້ອງທີ່ເລືອກ"
+}

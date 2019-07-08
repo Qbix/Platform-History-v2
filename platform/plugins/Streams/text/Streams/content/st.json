@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Sehlooho se secha"
+    },
+    "labels": {
+        "Streams\/invited": "Batho bao ke ba memileng",
+        "Streams\/invitedMe": "Ke mang ea nketselitseng"
+    },
+    "interests": {
+        "Filter": "U thabela eng?",
+        "CanAdd": "Haeba u ntse u sa fumane seo u se batlang, u ka kenya thahasello e ncha tlase:",
+        "TrySynonyms": "U se ke ua e bona? Leka li-synonyms tse ling.",
+        "AddUnderCategory": "Eketsa tlas&#39;a sehlopha ...",
+        "Other": "Tse ling",
+        "Unlisted": "Ha e ngoloe"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Molaetsa o &#39;nile oa tšoaetsoa bakeng sa tlhahlobo ea admin. Tlanya hape ho unflag.",
+        "noOneSaid": "Ha ho motho ea buileng letho",
+        "closeChatButton": "Tlosa puisano",
+        "closeChatConfirmTitle": "Tlosa puisano ee?",
+        "closeChatConfirm": "Na u netefatsa hore u batla ho koala puisano ee?",
+        "closeChatConfirmYes": "E.",
+        "closeChatConfirmNo": "Che",
+        "earlierComments": "pejana litlhaloso"
+    },
+    "notifications": {
+        "*": "Molaetsa {{& message.fields.type}} ho {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} o itse:",
+        "Streams\/changed": "Liphetoho ka {{stream.fields.title}}",
+        "Streams\/invite": "U ile ua memeloa ho {{& stream.fields.title}}",
+        "Streams\/announcement": "Phatlalatso ka {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} e fetotse monyetla oa ho fumana molaetsa",
+        "Streams\/chat\/edit": "Molaetsa oa puisano o hlophisitsoeng",
+        "Streams\/chat\/remove": "Molaetsa oa puisano o tlosoa",
+        "Streams\/closed": "{{stream.fields.title}} e koetsoe",
+        "Streams\/task\/progress": "Tsoelo-pele e entsoeng ka {{stream.fields.title}}",
+        "Streams\/task\/complete": "Mosebetsi o phethiloe: {{stream.fields.title}}",
+        "Streams\/task\/error": "Phoso nakong ea: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Molaetsa o sa keneng"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} eu meme ho {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Khetha ho Litso tsa hau",
+            "chooseAgainFromContacts": "Khetha hape ho Metsoalle",
+            "inviteSelectedContacts": "Mema Mabitso a Khethiloeng",
+            "selectFromContacts": "Khetha ho Mabitso",
+            "photo": "Nka setšoantšo",
+            "photoInstruction": "Haeba motho ea hlahlobang khoutu ea hau ea QR a le ka pel&#39;a hao, nka setšoantšo sa bona",
+            "to": "Ho: {{Stream Title}}",
+            "go": "Tsamaea",
+            "title": "Mema",
+            "placeholder": "Nomoro ea mohala kapa aterese ea imeile",
+            "orInvite": "Kapa u meme batho ka ho sebelisa:",
+            "QR": "{{ClickOrTap}} ho hlahisa khoutu ea QR",
+            "QRtitle": "Hlakola khoutu ena ea QR",
+            "QRscanned": "Ba ile ba e hlahloba!",
+            "byEmail": "Imeile",
+            "byText": "Mongolo",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hey, hlahloba sena",
+            "PleaseVisitLink": "Ka kopo, etela kgokahanyo e latelang:",
+            "InvitingYou": "Ke u mema ho {{title}}",
+            "HasInvitedYou": "{{displayName}} eu mema ho {{title}}"
+        },
+        "sms": {
+            "content": "U mengoe ho {{title}}. Ka kōpo tlanya {{url}}"
+        },
+        "notice": {
+            "text": "U memetsoe. {{ClickOrTap}} mona ho amohela le ho ikopanya."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} e rometse <em>{{message.fields.type}}<\/em> molaetsa ho {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} ka {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Memo e romeloa ho tloha palo ea rona, eo metsoalle ea hau e sa e tsebeng. Latela ka temana e potlakileng ho ba tsebisa memo eo e tsoa ho uena, u ba kōpe hore ba tobetse konteraka.",
+            "confirm": "Memo e romeloa ho tloha palo ea rona, eo metsoalle ea hau e sa e tsebeng. Na o ka rata ho latela le mongolo o potlakileng ho ba tsebisa memo eo e tsoa ho uena, o ba kopa ho tobetsa konteraka.",
+            "check": "Hey, ke u rometse memo ho {{app}} app. Ka kopo sheba li-sms tsa hau mme o tobetsa sekahare!"
+        },
+        "email": {
+            "alert": "Memo e romeloa ho tsoa ho domain, eo metsoalle ea hau e sa e tsebeng. Latela ka temana e potlakileng ho ba tsebisa memo eo e tsoa ho uena, u ba kōpe hore ba tobetse konteraka.",
+            "confirm": "Memo e romeloa ho tsoa ho domain, eo metsoalle ea hau e sa e tsebeng. Na o ka rata ho latela le mongolo o potlakileng ho ba tsebisa memo eo e tsoa ho uena, o ba kopa ho tobetsa konteraka.",
+            "subject": "O fumane tumemo?",
+            "body": "Hey, ke u rometse memo ho {{app}} app. Ka kopo, sheba lengolo la hau la imeile mme o tobetsa konteraka ho eona!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Numella Microphone",
+            "cameraTitle": "Etsa K&#39;hamera",
+            "cameraAndMicrophoneTitle": "Etsa K&#39;hamera le Microphone"
+        }
+    }
+}

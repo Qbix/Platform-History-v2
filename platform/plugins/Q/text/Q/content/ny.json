@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Zolakwitsa {{status}} panthawi yopempha",
+        "canceled": "Pempho laletsedwa",
+        "500": "Cholakwika Cham&#39;kati Chaseva",
+        "404": "Sapezeka: {{url}}",
+        "501": "Pempho linasokonezedwa"
+    },
+    "nonce": {
+        "sameDomain": "Gawo lapita. Onjezani tsamba ndikuyesanso.",
+        "otherDomain": "Kulowetsedwa kwa-domain-request request kupita kunja kwa {{baseUrl}}"
+    },
+    "words": {
+        "tap": "tapani",
+        "click": "dinani",
+        "yes": "inde",
+        "no": "ayi",
+        "Tap": "Dinani",
+        "Click": "Dinani",
+        "Yes": "Inde",
+        "No": "Ayi"
+    },
+    "months": {
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Chonde lolani kuti mufike ku maikrofoni anu",
+        "record": "Lembani",
+        "recording": "Kujambula",
+        "remains": "imakhalabe",
+        "maximum": "zapamwamba",
+        "playing": "Akusewera",
+        "recorded": "Zalembedwa",
+        "clip": "chojambula",
+        "orupload": "Kapena Pakani",
+        "usethis": "Gwiritsani Ntchito Izi",
+        "discard": "Taya",
+        "encoding": "Kulemba"
+    },
+    "alert": {
+        "title": "Chenjezo"
+    },
+    "confirm": {
+        "title": "Tsimikizirani",
+        "ok": "Inde",
+        "cancel": "Ayi"
+    },
+    "prompt": {
+        "title": "Mwamsanga",
+        "ok": "Pitani"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Zolakwitsa kuwerenga fayilo",
+        "cameraCommands": {
+            "prompt": "Kodi mungakonde kuchita chiyani?",
+            "photo": "Tengani chithunzi chatsopano",
+            "library": "Sankhani ku laibulale"
+        },
+        "tooSmall": "Chonde sankhani chithunzi chachikulu.",
+        "cropping": {
+            "title": "Sinthani kukula ndi malo",
+            "touchscreen": "Gwiritsani ntchito zala zanu kuti muzisindikize ndikukoka",
+            "notTouchscreen": "Gwiritsani ntchito mbewa yanu ndi gudumu kuti muziseko ndikukoka"
+        }
+    }
+}

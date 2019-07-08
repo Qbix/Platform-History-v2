@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Iphutha {{status}} ngesikhathi sokucela",
+        "canceled": "Isicelo sikhanseliwe",
+        "500": "Iphutha Leseva Engaphakathi",
+        "404": "Ayitholakali: {{url}}",
+        "501": "Isicelo siphazamisekile"
+    },
+    "nonce": {
+        "sameDomain": "Iseshini iphelelwe yisikhathi. Qala kabusha ikhasi uphinde uzame.",
+        "otherDomain": "Ivinjelwe isicelo esiwela esiphambanweni kwisizinda sangaphandle ku {{baseUrl}}"
+    },
+    "words": {
+        "tap": "thinta",
+        "click": "chofoza",
+        "yes": "Yebo",
+        "no": "cha",
+        "Tap": "Thepha",
+        "Click": "Chofoza",
+        "Yes": "Yebo",
+        "No": "Cha"
+    },
+    "months": {
+        "1": "Januwari",
+        "2": "Februwari",
+        "3": "Mashi",
+        "4": "April",
+        "5": "May",
+        "6": "Juni",
+        "7": "Julayi",
+        "8": "Agasti",
+        "9": "Septemba",
+        "10": "Okthoba",
+        "11": "Novemba",
+        "12": "Disemba"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Sicela uvumele ukufinyelela kumakrofoni yakho",
+        "record": "Qopha",
+        "recording": "Ukurekhoda",
+        "remains": "uhlala",
+        "maximum": "esiphezulu",
+        "playing": "Ukudlala",
+        "recorded": "Irekhodiwe",
+        "clip": "isiqeshana",
+        "orupload": "Noma Layisha",
+        "usethis": "Sebenzisa lokhu",
+        "discard": "Lahla",
+        "encoding": "Ukubhalisa"
+    },
+    "alert": {
+        "title": "Isaziso"
+    },
+    "confirm": {
+        "title": "Qinisekisa",
+        "ok": "Yebo",
+        "cancel": "Cha"
+    },
+    "prompt": {
+        "title": "I-Prompt",
+        "ok": "Hamba"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Iphutha ekufuneni ifayela",
+        "cameraCommands": {
+            "prompt": "Yini ongathanda ukuyenza?",
+            "photo": "Thatha isithombe esisha",
+            "library": "Khetha kusuka kulabhulali"
+        },
+        "tooSmall": "Sicela ukhethe isithombe esikhulu.",
+        "cropping": {
+            "title": "Lungisa usayizi nesimo",
+            "touchscreen": "Sebenzisa iminwe yakho ukuze usondeze bese uhudula",
+            "notTouchscreen": "Sebenzisa i-mouse yakho &amp; isondo ukuze usondise bese uhudula"
+        }
+    }
+}

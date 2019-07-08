@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Yuam kev {{status}} thaum thov",
+        "canceled": "Thov tso tseg",
+        "500": "Sab hauv neeg rau zaub mov yuam kev",
+        "404": "Tsis pom: {{url}}",
+        "501": "Thov cuam tshuam"
+    },
+    "nonce": {
+        "sameDomain": "Kev sib kho tas sij hawm. Hloov cov nplooj ntawv thiab sim dua.",
+        "otherDomain": "Thaiv qhov kev thov nkag mus rau txawv teb chaws lub npe ntawm {{baseUrl}}"
+    },
+    "words": {
+        "tap": "coj mus rhaub",
+        "click": "nyem",
+        "yes": "yog",
+        "no": "tsis muaj",
+        "Tap": "Coj mus rhaub",
+        "Click": "Nyem",
+        "Yes": "Muaj",
+        "No": "Tsis yog"
+    },
+    "months": {
+        "1": "Lub Ib Hlis",
+        "2": "Lub Ob Hlis",
+        "3": "Lub Peb Hlis Ntuj",
+        "4": "Plaub Hlis Ntuj",
+        "5": "Tsib",
+        "6": "Lub Rau Hli",
+        "7": "Lub Xya Hli",
+        "8": "Lub yim hli ntuj",
+        "9": "Lub Cuaj Hli",
+        "10": "Lub Kaum Hlis",
+        "11": "Kaum Ib Hlis",
+        "12": "Kaum Ob Hlis"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Thov cia nkag mus rau koj lub microphone",
+        "record": "Cov ntaub ntawv",
+        "recording": "Cov ntaubntawv",
+        "remains": "tshua",
+        "maximum": "siab kawg",
+        "playing": "Ua si",
+        "recorded": "Sau tseg",
+        "clip": "clip",
+        "orupload": "Los Upload",
+        "usethis": "Siv Qhov no",
+        "discard": "Muab pov tseg",
+        "encoding": "Encoding"
+    },
+    "alert": {
+        "title": "Kev ceeb toom"
+    },
+    "confirm": {
+        "title": "Tshawb xyuas",
+        "ok": "Muaj",
+        "cancel": "Tsis yog"
+    },
+    "prompt": {
+        "title": "Sij hawm",
+        "ok": "Mus"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Cov ntawv nyeem kev ua yuam kev",
+        "cameraCommands": {
+            "prompt": "Koj nyiam ua dab tsi?",
+            "photo": "Noj tshiab yees duab",
+            "library": "Xaiv tau los ntawm tsev qiv ntawv"
+        },
+        "tooSmall": "Thov xaiv duab loj.",
+        "cropping": {
+            "title": "Kho qhov loj thiab qhov chaw",
+            "touchscreen": "Siv koj tus ntiv tes kom zoom thiab luag",
+            "notTouchscreen": "Siv koj tus nas &amp; lub log kom zoom thiab luag"
+        }
+    }
+}

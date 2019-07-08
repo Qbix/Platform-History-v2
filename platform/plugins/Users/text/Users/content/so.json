@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "galaan",
+        "LogOut": "ka bax"
+    },
+    "activate": {
+        "SetAsPrimary": "U samee {999}} aniga ahaan asalkiisa {1000}",
+        "ChoosePassPhrase": "Dooro <strong>weedho gudbin<\/strong> si aad u gasho. <br> Erey fudud oo ka kooban dhowr eray oo aad si fudud u xasuusan kartid.",
+        "ChoosePassPhraseSeeSuggestions": "Dooro <strong>weedho<\/strong> saxan oo wanaagsan si aad u ilaaliso xisaabtaada. Fiiri talooyinka fikradaha qaarkood.",
+        "LogOutAndTryAgain": "Isku day oo isku day mar labaad",
+        "IfYouFeel": "Haddii aad dareento wax qalad ah, waad awoodi kartaa",
+        "SetIdentifierButtonTitle": "bilaabi"
+    },
+    "session": {
+        "GetStarted": "Raadso Bilaab"
+    },
+    "authorize": {
+        "GetStarted": "Raadso Bilaab",
+        "Authorize": "Oggolow",
+        "TermsLabel": "Waxaan aqriyay oo aan ogolaaday <br> ilaa {999}}",
+        "TermsTitle": "Shuruudaha"
+    },
+    "register": {
+        "TermsLabel": "Waan aqbalayaa {999}}",
+        "TermsTitle": "Shuruudaha"
+    },
+    "notifications": {
+        "title": "Ogolaashaha",
+        "prompt": "Ma rabtaa inaad ogeysiiso ogeysiisyada? Waxaad heli doontaa warar dhab ah oo ku saabsan waxyaabaha aad ka daryeesho.",
+        "yes": "Haa",
+        "no": "Maya",
+        "WelcomePleaseVerifyEmail": "Soo dhawow! Fadlan xaqiiji cinwaanka emailkaaga.",
+        "WelcomeVerifyEmail": "Soo dhawow! Hubi cinwaankaaga emailkaaga.",
+        "ForgetPass": "Hey, miyaad illowday marinkaaga?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Dooro xiriirka"
+        },
+        "select": {
+            "title": "Xulo xiriirinta {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Fadlan dooro calaamad.",
+        "inviteUser": "Ku marti isticmaal User"
+    },
+    "invalidLanguageSelected": "Luqad aan sax ahayn ee la doortay"
+}

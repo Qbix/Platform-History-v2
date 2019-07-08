@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "ግባ",
+        "LogOut": "ውጣ"
+    },
+    "activate": {
+        "SetAsPrimary": "{{1}} ን እንደ ዋናው {{2}} አድርጌ አዘጋጅ",
+        "ChoosePassPhrase": "ለመግባት <strong>የይለፍ ሐረግ<\/strong> ይምረጡ. <br> በቀላሉ የሚረዷቸው ጥቂት ቃላትን የያዘ ቀላል ሐረግ.",
+        "ChoosePassPhraseSeeSuggestions": "መለያዎን ለመጠበቅ ጥሩ <strong>የምልክት ሐረግ<\/strong> ይምረጡ. ለአንዳንድ ሀሳቦች የተሰጡ አስተያየቶችን ይመልከቱ.",
+        "LogOutAndTryAgain": "ዘግተው ይውጡ እና እንደገና ይሞክሩ",
+        "IfYouFeel": "የሆነ ነገር ተሳስቷል ብለው ከተሰማዎት ማድረግ ይችላሉ",
+        "SetIdentifierButtonTitle": "እንደገና ጀምር"
+    },
+    "session": {
+        "GetStarted": "መጀመር"
+    },
+    "authorize": {
+        "GetStarted": "መጀመር",
+        "Authorize": "ፈቃድ ስጥ",
+        "TermsLabel": "እኔ አንብቤ ተስማማለሁ <br> ወደ {{link}}",
+        "TermsTitle": "ውሎች"
+    },
+    "register": {
+        "TermsLabel": "{{link}} ተቀብያለሁ",
+        "TermsTitle": "ውሎች"
+    },
+    "notifications": {
+        "title": "ፍቃድ",
+        "prompt": "ማሳወቂያዎችን ማንቃት ይፈልጋሉ? ስለሚጨነቁላቸው ነገሮች ቅጽበታዊ ዝማኔዎች ይደርሰዎታል.",
+        "yes": "አዎ",
+        "no": "አይ",
+        "WelcomePleaseVerifyEmail": "እንኳን ደህና መጣህ! እባክዎ የኢሜይል አድራሻዎን ያረጋግጡ.",
+        "WelcomeVerifyEmail": "እንኳን ደህና መጣህ! የኢሜይል አድራሻህን አረጋግጥ.",
+        "ForgetPass": "ሃይም, የይለፍ ሐረግዎን ረስተዋል?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "ዕውቂያ ይምረጡ"
+        },
+        "select": {
+            "title": "የ {{displayName}} እውቂያ ይምረጡ"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "እባክዎ መለያውን ይምረጡ.",
+        "inviteUser": "ተጠቃሚ ጋብዝ"
+    },
+    "invalidLanguageSelected": "ልክ ያልሆነ ቋንቋ ተመርጧል"
+}

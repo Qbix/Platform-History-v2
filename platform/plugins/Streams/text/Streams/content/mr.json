@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "नवीन आयटम"
+    },
+    "labels": {
+        "Streams\/invited": "मी आमंत्रित लोक",
+        "Streams\/invitedMe": "मला कोण आमंत्रित केले"
+    },
+    "interests": {
+        "Filter": "तुम्हाला काय आवडते?",
+        "CanAdd": "आपण जे शोधत आहात ते अद्याप आपल्याला सापडत नसल्यास, आपण खाली एक नवीन व्याज जोडू शकता:",
+        "TrySynonyms": "हे दिसत नाही का? काही समानार्थी प्रयत्न करा.",
+        "AddUnderCategory": "श्रेणी अंतर्गत जोडा ...",
+        "Other": "इतर",
+        "Unlisted": "असूचीबद्ध"
+    },
+    "chat": {
+        "flaggedForAdminReview": "प्रशासकीय पुनरावलोकनासाठी संदेश ध्वजांकित केला गेला आहे. अनलॅग करण्यासाठी पुन्हा टॅप करा.",
+        "noOneSaid": "कोणीही काहीही सांगितले नाही",
+        "closeChatButton": "गप्पा बंद करा",
+        "closeChatConfirmTitle": "हे गप्प बंद करायचे?",
+        "closeChatConfirm": "आपणास खात्री आहे की आपण ही चॅट बंद करू इच्छिता?",
+        "closeChatConfirmYes": "हो",
+        "closeChatConfirmNo": "नाही",
+        "earlierComments": "पूर्वीच्या टिप्पण्या"
+    },
+    "notifications": {
+        "*": "संदेश {{& message.fields.type}} वर {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} म्हणाले:",
+        "Streams\/changed": "{{stream.fields.title}} मधील बदल",
+        "Streams\/invite": "आपल्याला {{& stream.fields.title}} वर आमंत्रित केले गेले",
+        "Streams\/announcement": "{{& streams.fields.title}} मधील घोषणा",
+        "Streams\/access": "{{&call 'avatar.displayName'}} ने प्रवाह प्रवेश बदलला",
+        "Streams\/chat\/edit": "गप्पा संदेश संपादित",
+        "Streams\/chat\/remove": "गप्पा संदेश काढला",
+        "Streams\/closed": "{{stream.fields.title}} बंद केले गेले आहे",
+        "Streams\/task\/progress": "{{stream.fields.title}} वर प्रगती",
+        "Streams\/task\/complete": "कार्य पूर्ण झाले: {{stream.fields.title}}",
+        "Streams\/task\/error": "दरम्यान त्रुटी: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: येणार्या संदेश"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} ने आपल्याला {{inviteUrl}} वर आमंत्रित केले",
+        "dialog": {
+            "chooseFromContacts": "आपल्या संपर्कांमधून निवडा",
+            "chooseAgainFromContacts": "संपर्कांमधून पुन्हा निवडा",
+            "inviteSelectedContacts": "निवडलेले संपर्क आमंत्रित करा",
+            "selectFromContacts": "संपर्कांमधून निवडा",
+            "photo": "फोटो काढ",
+            "photoInstruction": "जर आपल्या क्यूआर कोड स्कॅन करणार्या व्यक्तीने आपल्या समोर असाल तर त्यापैकी एक फोटो घ्या",
+            "to": "प्रति: {{Stream Title}}",
+            "go": "जा",
+            "title": "आमंत्रित करा",
+            "placeholder": "मोबाइल नंबर किंवा ईमेल पत्ता",
+            "orInvite": "किंवा लोकांना वापरुन निमंत्रण द्या:",
+            "QR": "{{ClickOrTap}} क्यूआर कोड व्युत्पन्न करण्यासाठी",
+            "QRtitle": "हा क्यूआर कोड स्कॅन करा",
+            "QRscanned": "ते स्कॅन केले!",
+            "byEmail": "ईमेल",
+            "byText": "मजकूर",
+            "byFacebook": "फेसबुक",
+            "byTwitter": "ट्विटर"
+        },
+        "email": {
+            "subject": "अहो, हे तपासा",
+            "PleaseVisitLink": "कृपया खालील दुव्यावर भेट द्या:",
+            "InvitingYou": "मी आपल्याला {{title}} वर आमंत्रित करीत आहे",
+            "HasInvitedYou": "{{displayName}} ने आपल्याला {{title}} वर आमंत्रित केले आहे"
+        },
+        "sms": {
+            "content": "आपल्याला {{title}} वर आमंत्रित केले गेले आहे. कृपया {{url}} टॅप करा"
+        },
+        "notice": {
+            "text": "आपल्याला आमंत्रित केले गेले आहे. {{99 9}} स्वीकारण्यासाठी आणि सामील होण्यासाठी येथे."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} ने {{100}}} वर एक <em>{{message.fields.type}}<\/em> संदेश पोस्ट केला"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} मध्ये {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "आमंत्रण आमच्या क्रमांकावरून पाठविले गेले आहे, जे आपले मित्र अद्याप ओळखत नाहीत. आपल्याकडून आमंत्रण आले असल्याचे त्यांना कळवण्यासाठी द्रुत मजकुरासह अनुसरण करा, त्यांना दुव्यावर क्लिक करण्यास सांगा.",
+            "confirm": "आमंत्रण आमच्या क्रमांकावरून पाठविले गेले आहे, जे आपले मित्र अद्याप ओळखत नाहीत. आपण आमंत्रण आपल्याकडून आला, त्यांना लिंकवर क्लिक करण्यास सांगण्यासाठी त्यांना एक त्वरित मजकूर पाठवणे आवडेल.",
+            "check": "अहो, मी नुकतेच आपल्याला {{app}} अॅपमध्ये आमंत्रण पाठविले. कृपया आपल्या एसएमएस तपासा आणि लिंक क्लिक करा!"
+        },
+        "email": {
+            "alert": "आमंत्रणे आमच्या डोमेनमधून पाठविली जातात, ज्या आपल्या मित्रांना अद्याप ओळखत नाही. आपल्याकडून आमंत्रण आले असल्याचे त्यांना कळवण्यासाठी द्रुत मजकुरासह अनुसरण करा, त्यांना दुव्यावर क्लिक करण्यास सांगा.",
+            "confirm": "आमंत्रणे आमच्या डोमेनमधून पाठविली जातात, ज्या आपल्या मित्रांना अद्याप ओळखत नाही. आपण आमंत्रण आपल्याकडून आला, त्यांना लिंकवर क्लिक करण्यास सांगण्यासाठी त्यांना एक त्वरित मजकूर पाठवणे आवडेल.",
+            "subject": "तुम्हाला आमंत्रण मिळाले का?",
+            "body": "अहो, मी नुकतेच आपल्याला {{app}} अॅपमध्ये आमंत्रण पाठविले. कृपया आपला ईमेल तपासा आणि तेथे क्लिक करा!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "मायक्रोफोन सक्षम करा",
+            "cameraTitle": "कॅमेरा सक्षम करा",
+            "cameraAndMicrophoneTitle": "कॅमेरा आणि मायक्रोफोन सक्षम करा"
+        }
+    }
+}

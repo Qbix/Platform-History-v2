@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "aloggen",
+        "LogOut": "ausloggen"
+    },
+    "activate": {
+        "SetAsPrimary": "Set {{1}} als meng primär {{2}}",
+        "ChoosePassPhrase": "Kuckt eng <strong>Passform<\/strong> ze verbannen mat. <br> Eng einfach Phrase besteet aus e puer Wierder, déi Dir ganz einfach erënnert.",
+        "ChoosePassPhraseSeeSuggestions": "Wielt eng gutt <strong>Passuerdnung<\/strong> fir Äre Kont ze schützen. Kuckt d&#39;Suggestioun fir e puer Ideen.",
+        "LogOutAndTryAgain": "Log Out a Verspriechen",
+        "IfYouFeel": "Wann Dir Iech fillt, wat geschitt ass, kënnt Dir",
+        "SetIdentifierButtonTitle": "nei ufänken"
+    },
+    "session": {
+        "GetStarted": "Ufänken"
+    },
+    "authorize": {
+        "GetStarted": "Ufänken",
+        "Authorize": "Autorisatioun",
+        "TermsLabel": "Ech hunn gelies an eens <br> fir de {{link}}",
+        "TermsTitle": "Konditiounen"
+    },
+    "register": {
+        "TermsLabel": "Ech akzeptéieren d&#39;{{link}}",
+        "TermsTitle": "Konditiounen"
+    },
+    "notifications": {
+        "title": "Erlaabnes",
+        "prompt": "Wëllt Dir Notifikatiounen aktivéieren? Dir kritt Echtzäit Updates u Saachen déi Dir Iech interesséieren.",
+        "yes": "jo",
+        "no": "Nee",
+        "WelcomePleaseVerifyEmail": "Wëllkomm! Gitt weg Är E-Mailadress.",
+        "WelcomeVerifyEmail": "Wëllkomm! Äert E-Mailadress verifizéiert.",
+        "ForgetPass": "Hey, hutt Dir Äert Passphrase vergiess?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Kontakt wielen"
+        },
+        "select": {
+            "title": "Wielt Äre Kontakt vun {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Wielt we g",
+        "inviteUser": "Invitéiere Benotzer"
+    },
+    "invalidLanguageSelected": "Ongülteg Sprooch ausgewielt"
+}

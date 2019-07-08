@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "Log a-steach",
+        "LogOut": "Log a-mach"
+    },
+    "activate": {
+        "SetAsPrimary": "Suidhich {{1}} mar mo phrìomh {{2}}",
+        "ChoosePassPhrase": "Tagh <strong>abairt gluasaid<\/strong> airson logadh a-steach. <br> Abairt shìmplidh le beagan fhaclan a bhios cuimhne agad gu furasta.",
+        "ChoosePassPhraseSeeSuggestions": "Tagh <strong>abairt<\/strong> deagh- <strong>chead<\/strong> gus an cunntas agad a dhìon. Faic na molaidhean airson cuid de bheachdan.",
+        "LogOutAndTryAgain": "Log a-mach is feuch e a-rithist",
+        "IfYouFeel": "Ma tha thu a ’faireachdainn gun deach rudeigin ceàrr, faodaidh tu",
+        "SetIdentifierButtonTitle": "Tòisich a-rithist"
+    },
+    "session": {
+        "GetStarted": "Toiseach tòiseachaidh"
+    },
+    "authorize": {
+        "GetStarted": "Toiseach tòiseachaidh",
+        "Authorize": "Ceadaich",
+        "TermsLabel": "Tha mi air a leughadh agus ag aontachadh <br> chun an {{link}}",
+        "TermsTitle": "Riaghailtean"
+    },
+    "register": {
+        "TermsLabel": "Tha mi a ’gabhail ris an {{link}}",
+        "TermsTitle": "Riaghailtean"
+    },
+    "notifications": {
+        "title": "Cead",
+        "prompt": "A bheil thu airson brathan a chur an comas? Gheibh thu ùrachadh fìor-ama mu na rudan a tha cudromach dhut.",
+        "yes": "tha",
+        "no": "Chan eil",
+        "WelcomePleaseVerifyEmail": "Fàilte! Dearbhaich an seòladh puist-d agad.",
+        "WelcomeVerifyEmail": "Fàilte! Dearbhaich an seòladh puist-d agad.",
+        "ForgetPass": "Hey, an do dhìochuimhnich thu an abairt-fhaire agad?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Tagh conaltradh"
+        },
+        "select": {
+            "title": "Tagh conaltradh le {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Tagh leubail.",
+        "inviteUser": "Thoir cuireadh do chleachdaiche"
+    },
+    "invalidLanguageSelected": "Cànan mì-dhligheach air a thaghadh"
+}
