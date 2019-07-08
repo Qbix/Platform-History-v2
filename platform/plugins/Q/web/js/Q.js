@@ -3166,9 +3166,17 @@ Q.getter = function _Q_getter(original, options) {
 			function _result(subject, params) {
 				gw.onResult.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = cached;
-				callback.apply(subject, params);
+				var err = null;
+				try {
+					callback.apply(subject, params);
+				} catch (e) {
+					err = e;
+				}
 				gw.onExecuted.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = false;
+				if (err) {
+					throw err;
+				}
 			}
 		}
 

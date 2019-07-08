@@ -11,6 +11,7 @@ html { background: #f2f2f2; height: 100%; box-sizing: border-box; }
 body { height: 100%; overflow: auto; touch-action: none; }
 h2 { margin: 0; }
 *, *::before, *::after { box-sizing: inherit; }
+table { table-layout: fixed; }
 
 /* The various slot containers */
 #notices_slot {
@@ -36,6 +37,7 @@ h2 { margin: 0; }
 	z-index: 900;
 	text-align: left;
 	cursor: default; 
+	touch-action: manipulation;
     box-shadow: #555 0 0 4px; -webkit-box-shadow: #555 0 0 4px; -moz-box-shadow: #555 0 0 4px;
     background: #555; /* for non-css3 browsers */
     background: -webkit-gradient(linear, left top, left bottom, from(#555), to(#444)); /* for webkit browsers */

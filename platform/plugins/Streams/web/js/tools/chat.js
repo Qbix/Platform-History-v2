@@ -149,7 +149,9 @@ Q.Tool.define('Streams/chat', function(options) {
 		main: {
 			dir: '{{Streams}}/views',
 			name: 'Streams/chat/main',
-			fields: { placeholder: "Add a comment" }
+			fields: {
+				placeholder: "Add a comment"
+			}
 		},
 		Streams_chat_noMessages: {
 			dir: '{{Streams}}/views',
@@ -256,17 +258,25 @@ Q.Tool.define('Streams/chat', function(options) {
 		var state = tool.state;
 		var isPublisher = Q.Users.loggedInUserId() === Q.getObject("stream.fields.publisherId", state);
 
+		var subscribed = ('yes' === Q.getObject('stream.participant.subscribed', state));
+		var what = subscribed ? 'on' : 'off';
+		var touchlabel = subscribed ? 'Subscribe' : 'Unsubscribe';
+
 		var fields = Q.extend({}, state.more, state.templates.main.fields);
 		fields.textarea = (state.inputType === 'textarea');
 		fields.text = tool.text;
 		fields.closeable = state.closeable && isPublisher;
 		fields.earlierSrc = Q.url('{{Streams}}/img/chat/earlier.png');
+		fields.subscriptionSrc = Q.url('{{Communities}}/img/subscription/'+what+'/80.png');
 		Q.Template.render(
 			'Streams/chat/main',
 			fields,
 			function(error, html){
 				if (error) { return error; }
 				$te.html(html).activate();
+				
+				$te.find('Streams_chat_subscription')
+				.attr('data-touchlabel', touchlabel);
 				
 				if (Q.Users.loggedInUser
 				&& !state.stream.testWriteLevel('post')) {
@@ -921,6 +931,7 @@ Q.Template.set('Streams/chat/main',
 		'{{#if textarea}}' +
 			'<textarea placeholder="{{placeholder}}"></textarea>'+
 		'{{else}}' +
+			'<button class="Streams_chat_subscription">{{subscriptionSrc}}</button>' +
 			'<input type="text" placeholder="{{placeholder}}">'+
 		'{{/if}}' +
 		'<div class="submit Q_disappear"></div>' +
