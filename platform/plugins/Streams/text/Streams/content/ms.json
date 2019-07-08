@@ -59,7 +59,9 @@
             "byText": "Teks",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Mereka mengimbasnya!"
+            "QRscanned": "Mereka mengimbasnya!",
+            "chooseAgainFromContacts": "Pilih Lagi dari Kenalan",
+            "inviteSelectedContacts": "Undang Kenalan Terpilih"
         },
         "email": {
             "subject": "Hei, periksa ini",
@@ -99,5 +101,12 @@
         "Title": "Tajuk",
         "Subscribed": "Dilanggan",
         "Participants": "Peserta"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Dayakan Mikrofon",
+            "cameraTitle": "Dayakan Kamera",
+            "cameraAndMicrophoneTitle": "Dayakan Kamera dan Mikrofon"
+        }
     }
 }

@@ -37,5 +37,13 @@
         "selectLabel": "Vui lòng chọn nhãn.",
         "inviteUser": "Mời người dùng"
     },
-    "invalidLanguageSelected": "Đã chọn ngôn ngữ không hợp lệ"
+    "invalidLanguageSelected": "Đã chọn ngôn ngữ không hợp lệ",
+    "contacts": {
+        "dialog": {
+            "title": "Chọn liên hệ"
+        },
+        "select": {
+            "title": "Chọn liên hệ của {{displayName}}"
+        }
+    }
 }

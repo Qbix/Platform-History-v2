@@ -37,5 +37,13 @@
         "selectLabel": "Επιλέξτε ετικέτα.",
         "inviteUser": "Πρόσκληση χρήστη"
     },
-    "invalidLanguageSelected": "Επιλέχθηκε μη έγκυρη γλώσσα"
+    "invalidLanguageSelected": "Επιλέχθηκε μη έγκυρη γλώσσα",
+    "contacts": {
+        "dialog": {
+            "title": "Επιλέξτε επαφή"
+        },
+        "select": {
+            "title": "Επιλέξτε επαφή του {{displayName}}"
+        }
+    }
 }

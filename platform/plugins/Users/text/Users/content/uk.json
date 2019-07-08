@@ -37,5 +37,13 @@
         "selectLabel": "Виберіть позначку.",
         "inviteUser": "Запросити користувача"
     },
-    "invalidLanguageSelected": "Вибрано недійсну мову"
+    "invalidLanguageSelected": "Вибрано недійсну мову",
+    "contacts": {
+        "dialog": {
+            "title": "Виберіть контакт"
+        },
+        "select": {
+            "title": "Виберіть контакт користувача {{displayName}}"
+        }
+    }
 }

@@ -59,7 +59,9 @@
             "byText": "Teksti",
             "byFacebook": "Facebook",
             "byTwitter": "Viserrys",
-            "QRscanned": "He skannasi sen!"
+            "QRscanned": "He skannasi sen!",
+            "chooseAgainFromContacts": "Valitse Yhteystiedot-sovelluksesta uudelleen",
+            "inviteSelectedContacts": "Kutsu valitut yhteystiedot"
         },
         "email": {
             "subject": "Hei, tarkista tämä",
@@ -99,5 +101,12 @@
         "Title": "otsikko",
         "Subscribed": "Tilatut",
         "Participants": "osallistujien"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Ota mikrofoni käyttöön",
+            "cameraTitle": "Ota kamera käyttöön",
+            "cameraAndMicrophoneTitle": "Ota kamera ja mikrofoni käyttöön"
+        }
     }
 }

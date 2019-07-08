@@ -59,7 +59,9 @@
             "byText": "Text",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "El van escanejar!"
+            "QRscanned": "El van escanejar!",
+            "chooseAgainFromContacts": "Trieu de nou els contactes",
+            "inviteSelectedContacts": "Convida a contactes seleccionats"
         },
         "email": {
             "subject": "Hola, comprova-ho",
@@ -99,5 +101,12 @@
         "Title": "Títol",
         "Subscribed": "Subscrit",
         "Participants": "Participants"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Activa el micròfon",
+            "cameraTitle": "Habilita la càmera",
+            "cameraAndMicrophoneTitle": "Activa la càmera i el micròfon"
+        }
     }
 }

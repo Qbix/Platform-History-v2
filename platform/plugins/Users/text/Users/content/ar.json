@@ -37,5 +37,13 @@
         "selectLabel": "يرجى اختيار التسمية.",
         "inviteUser": "دعوة المستخدم"
     },
-    "invalidLanguageSelected": "تم تحديد لغة غير صالحة"
+    "invalidLanguageSelected": "تم تحديد لغة غير صالحة",
+    "contacts": {
+        "dialog": {
+            "title": "اختيار الاتصال"
+        },
+        "select": {
+            "title": "اختر جهة اتصال {{displayName}}"
+        }
+    }
 }

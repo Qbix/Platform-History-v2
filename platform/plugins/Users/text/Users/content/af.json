@@ -37,5 +37,13 @@
         "selectLabel": "Kies asseblief die etiket.",
         "inviteUser": "Nooi gebruiker"
     },
-    "invalidLanguageSelected": "Ongeldige taal gekies"
+    "invalidLanguageSelected": "Ongeldige taal gekies",
+    "contacts": {
+        "dialog": {
+            "title": "Kies kontak"
+        },
+        "select": {
+            "title": "Kies kontak van {{displayName}}"
+        }
+    }
 }

@@ -3,7 +3,8 @@
         "error": "Fel {{status}} under begäran",
         "canceled": "Förfrågan avbruten",
         "500": "Internt serverfel",
-        "404": "Hittades inte: {{url}}"
+        "404": "Hittades inte: {{url}}",
+        "501": "Förfrågan avbruten"
     },
     "nonce": {
         "sameDomain": "Sessionen löpte. Uppdatera sidan och försök igen.",

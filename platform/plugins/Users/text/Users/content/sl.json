@@ -37,5 +37,13 @@
         "selectLabel": "Izberite oznako.",
         "inviteUser": "Povabi uporabnika"
     },
-    "invalidLanguageSelected": "Izbran je bil neveljaven jezik"
+    "invalidLanguageSelected": "Izbran je bil neveljaven jezik",
+    "contacts": {
+        "dialog": {
+            "title": "Izberite stik"
+        },
+        "select": {
+            "title": "Izberite stik osebe {{displayName}}"
+        }
+    }
 }

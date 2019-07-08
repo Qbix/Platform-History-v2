@@ -59,7 +59,9 @@
             "byText": "Testo",
             "byFacebook": "Facebook",
             "byTwitter": "cinguettio",
-            "QRscanned": "Lo hanno scannerizzato!"
+            "QRscanned": "Lo hanno scannerizzato!",
+            "chooseAgainFromContacts": "Scegli di nuovo dai contatti",
+            "inviteSelectedContacts": "Invita i contatti selezionati"
         },
         "email": {
             "subject": "Ehi, dai un&#39;occhiata",
@@ -99,5 +101,12 @@
         "Title": "Titolo",
         "Subscribed": "sottoscritto",
         "Participants": "I partecipanti"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Abilita microfono",
+            "cameraTitle": "Abilita fotocamera",
+            "cameraAndMicrophoneTitle": "Abilita fotocamera e microfono"
+        }
     }
 }

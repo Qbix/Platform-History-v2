@@ -59,7 +59,9 @@
             "byText": "Tekst",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Nad skaneerisid seda!"
+            "QRscanned": "Nad skaneerisid seda!",
+            "chooseAgainFromContacts": "Valige uuesti kontaktidest",
+            "inviteSelectedContacts": "Kutsu valitud kontaktid"
         },
         "email": {
             "subject": "Hei, vaata seda",
@@ -99,5 +101,12 @@
         "Title": "Pealkiri",
         "Subscribed": "Tellitud",
         "Participants": "Osalejad"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Luba mikrofon",
+            "cameraTitle": "Luba kaamera",
+            "cameraAndMicrophoneTitle": "Luba kaamera ja mikrofon"
+        }
     }
 }

@@ -37,5 +37,13 @@
         "selectLabel": "Selecteer een label.",
         "inviteUser": "Gebruiker uitnodigen"
     },
-    "invalidLanguageSelected": "Ongeldige taal geselecteerd"
+    "invalidLanguageSelected": "Ongeldige taal geselecteerd",
+    "contacts": {
+        "dialog": {
+            "title": "Kies contact"
+        },
+        "select": {
+            "title": "Selecteer contact van {{displayName}}"
+        }
+    }
 }

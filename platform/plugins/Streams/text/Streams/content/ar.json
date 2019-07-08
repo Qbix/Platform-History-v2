@@ -59,7 +59,9 @@
             "byText": "نص",
             "byFacebook": "فيس بوك",
             "byTwitter": "تغريد",
-            "QRscanned": "قاموا بمسحها ضوئيًا!"
+            "QRscanned": "قاموا بمسحها ضوئيًا!",
+            "chooseAgainFromContacts": "اختر مرة أخرى من جهات الاتصال",
+            "inviteSelectedContacts": "دعوة جهات الاتصال المحددة"
         },
         "email": {
             "subject": "مهلا ، تحقق من ذلك",
@@ -99,5 +101,12 @@
         "Title": "عنوان",
         "Subscribed": "المشترك",
         "Participants": "المشاركين"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "تمكين الميكروفون",
+            "cameraTitle": "قم بتفعيل الكاميرا",
+            "cameraAndMicrophoneTitle": "تمكين الكاميرا والميكروفون"
+        }
     }
 }

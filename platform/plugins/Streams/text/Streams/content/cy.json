@@ -59,7 +59,9 @@
             "byText": "Testun",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Roedden nhw&#39;n ei sganio!"
+            "QRscanned": "Roedden nhw&#39;n ei sganio!",
+            "chooseAgainFromContacts": "Dewiswch eto o gysylltiadau",
+            "inviteSelectedContacts": "Gwahodd Cysylltiadau Dethol"
         },
         "email": {
             "subject": "Hey, gwiriwch hyn",
@@ -99,5 +101,12 @@
         "Title": "Teitl",
         "Subscribed": "Tanysgrifio",
         "Participants": "Cyfranogwyr"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Galluogi Meicroffon",
+            "cameraTitle": "Galluogi Camera",
+            "cameraAndMicrophoneTitle": "Galluogi Camera a Meicroffon"
+        }
     }
 }

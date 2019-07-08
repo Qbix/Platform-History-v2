@@ -37,5 +37,13 @@
         "selectLabel": "லேபிளைத் தேர்ந்தெடுக்கவும்.",
         "inviteUser": "பயனரை அழைக்கவும்"
     },
-    "invalidLanguageSelected": "தவறான மொழி தேர்ந்தெடுக்கப்பட்டது"
+    "invalidLanguageSelected": "தவறான மொழி தேர்ந்தெடுக்கப்பட்டது",
+    "contacts": {
+        "dialog": {
+            "title": "தொடர்பைத் தேர்வுசெய்க"
+        },
+        "select": {
+            "title": "Contact {999} contact இன் தொடர்பைத் தேர்ந்தெடுக்கவும்"
+        }
+    }
 }

@@ -59,7 +59,9 @@
             "byText": "Nakala",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Walichunguza!"
+            "QRscanned": "Walichunguza!",
+            "chooseAgainFromContacts": "Chagua tena kutoka kwa wasiliana",
+            "inviteSelectedContacts": "Paribisha Mawasiliano Wachaguliwa"
         },
         "email": {
             "subject": "Hey, angalia hii nje",
@@ -99,5 +101,12 @@
         "Title": "Kichwa",
         "Subscribed": "Imejiandikisha",
         "Participants": "Washiriki"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Wezesha kipaza sauti",
+            "cameraTitle": "Wezesha Kamera",
+            "cameraAndMicrophoneTitle": "Wezesha kamera na kipaza sauti"
+        }
     }
 }

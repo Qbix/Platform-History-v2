@@ -37,5 +37,13 @@
         "selectLabel": "Selectați eticheta.",
         "inviteUser": "Invitați utilizatorul"
     },
-    "invalidLanguageSelected": "Limba nevalidă selectată"
+    "invalidLanguageSelected": "Limba nevalidă selectată",
+    "contacts": {
+        "dialog": {
+            "title": "Alegeți o persoană de contact"
+        },
+        "select": {
+            "title": "Selectați persoana de contact din {{displayName}}"
+        }
+    }
 }

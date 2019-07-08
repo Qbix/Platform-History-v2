@@ -59,7 +59,9 @@
             "byText": "متن",
             "byFacebook": "فیس بک",
             "byTwitter": "ٹویٹر",
-            "QRscanned": "انہوں نے اسے سکین کیا!"
+            "QRscanned": "انہوں نے اسے سکین کیا!",
+            "chooseAgainFromContacts": "رابطہ سے دوبارہ منتخب کریں",
+            "inviteSelectedContacts": "منتخب رابطوں کو مدعو کریں"
         },
         "email": {
             "subject": "ارے، اسے چیک کرو",
@@ -99,5 +101,12 @@
         "Title": "عنوان",
         "Subscribed": "سبسکرائب",
         "Participants": "امیدوار"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "مائیکروفون کو فعال کریں",
+            "cameraTitle": "کیمرے کو فعال کریں",
+            "cameraAndMicrophoneTitle": "کیمرے اور مائیکروفون کو فعال کریں"
+        }
     }
 }

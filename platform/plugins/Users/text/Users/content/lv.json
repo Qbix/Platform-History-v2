@@ -37,5 +37,13 @@
         "selectLabel": "Lūdzu, atlasiet etiķeti.",
         "inviteUser": "Uzaicināt lietotāju"
     },
-    "invalidLanguageSelected": "Izvēlēta nederīga valoda"
+    "invalidLanguageSelected": "Izvēlēta nederīga valoda",
+    "contacts": {
+        "dialog": {
+            "title": "Izvēlieties kontaktu"
+        },
+        "select": {
+            "title": "Atlasiet kontaktpersonu {{displayName}}"
+        }
+    }
 }

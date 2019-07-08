@@ -59,7 +59,9 @@
             "byText": "Szöveg",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Szkennelték!"
+            "QRscanned": "Szkennelték!",
+            "chooseAgainFromContacts": "Válasszon újra a Névjegyek közül",
+            "inviteSelectedContacts": "Meghívott partnerek meghívása"
         },
         "email": {
             "subject": "Hé, nézd meg ezt",
@@ -99,5 +101,12 @@
         "Title": "Cím",
         "Subscribed": "Jegyzett",
         "Participants": "résztvevők"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Mikrofon engedélyezése",
+            "cameraTitle": "Kamera engedélyezése",
+            "cameraAndMicrophoneTitle": "Kamera és mikrofon engedélyezése"
+        }
     }
 }

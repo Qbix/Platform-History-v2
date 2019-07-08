@@ -37,5 +37,13 @@
         "selectLabel": "Пожалуйста, выберите ярлык.",
         "inviteUser": "Пригласить пользователя"
     },
-    "invalidLanguageSelected": "Выбран неверный язык"
+    "invalidLanguageSelected": "Выбран неверный язык",
+    "contacts": {
+        "dialog": {
+            "title": "Выберите контакт"
+        },
+        "select": {
+            "title": "Выберите контакт из {{displayName}}"
+        }
+    }
 }

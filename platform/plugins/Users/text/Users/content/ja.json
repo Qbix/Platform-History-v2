@@ -37,5 +37,13 @@
         "selectLabel": "ラベルを選択してください。",
         "inviteUser": "ユーザーを招待"
     },
-    "invalidLanguageSelected": "無効な言語が選択されました"
+    "invalidLanguageSelected": "無効な言語が選択されました",
+    "contacts": {
+        "dialog": {
+            "title": "連絡先を選択"
+        },
+        "select": {
+            "title": "{{displayName}}の連絡先を選択"
+        }
+    }
 }

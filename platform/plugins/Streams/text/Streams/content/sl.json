@@ -59,7 +59,9 @@
             "byText": "Besedilo",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Skenirali so ga!"
+            "QRscanned": "Skenirali so ga!",
+            "chooseAgainFromContacts": "Ponovno izberite iz imenika",
+            "inviteSelectedContacts": "Povabi izbrane stike"
         },
         "email": {
             "subject": "Hej, poglej to",
@@ -99,5 +101,12 @@
         "Title": "Naslov",
         "Subscribed": "Naročen",
         "Participants": "Udeleženci"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Omogoči mikrofon",
+            "cameraTitle": "Omogoči fotoaparat",
+            "cameraAndMicrophoneTitle": "Omogoči kamero in mikrofon"
+        }
     }
 }

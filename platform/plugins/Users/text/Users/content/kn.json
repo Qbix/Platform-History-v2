@@ -37,5 +37,13 @@
         "selectLabel": "ದಯವಿಟ್ಟು ಲೇಬಲ್ ಆಯ್ಕೆಮಾಡಿ.",
         "inviteUser": "ಬಳಕೆದಾರರನ್ನು ಆಹ್ವಾನಿಸಿ"
     },
-    "invalidLanguageSelected": "ಅಮಾನ್ಯವಾದ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ"
+    "invalidLanguageSelected": "ಅಮಾನ್ಯವಾದ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ",
+    "contacts": {
+        "dialog": {
+            "title": "ಸಂಪರ್ಕವನ್ನು ಆರಿಸಿ"
+        },
+        "select": {
+            "title": "Contact {999} contact ನ ಸಂಪರ್ಕವನ್ನು ಆರಿಸಿ"
+        }
+    }
 }

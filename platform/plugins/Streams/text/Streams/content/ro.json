@@ -59,7 +59,9 @@
             "byText": "Text",
             "byFacebook": "Facebook",
             "byTwitter": "Stare de nervozitate",
-            "QRscanned": "Au scanat-o!"
+            "QRscanned": "Au scanat-o!",
+            "chooseAgainFromContacts": "Alegeți din nou din Contacte",
+            "inviteSelectedContacts": "Invitați contactele selectate"
         },
         "email": {
             "subject": "Hei, verifică asta",
@@ -99,5 +101,12 @@
         "Title": "Titlu",
         "Subscribed": "subscrisă",
         "Participants": "Participanți"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Activați microfonul",
+            "cameraTitle": "Activați camera",
+            "cameraAndMicrophoneTitle": "Activați camera și microfonul"
+        }
     }
 }

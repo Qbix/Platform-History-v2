@@ -37,5 +37,13 @@
         "selectLabel": "Изберете етикета.",
         "inviteUser": "Поканете го корисникот"
     },
-    "invalidLanguageSelected": "Невалиден јазик избран"
+    "invalidLanguageSelected": "Невалиден јазик избран",
+    "contacts": {
+        "dialog": {
+            "title": "Изберете контакт"
+        },
+        "select": {
+            "title": "Изберете контакт од {{displayName}}"
+        }
+    }
 }

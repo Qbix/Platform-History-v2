@@ -59,7 +59,9 @@
             "byText": "ટેક્સ્ટ",
             "byFacebook": "ફેસબુક",
             "byTwitter": "Twitter",
-            "QRscanned": "તેઓ તેને સ્કેન કરે છે!"
+            "QRscanned": "તેઓ તેને સ્કેન કરે છે!",
+            "chooseAgainFromContacts": "સંપર્કોમાંથી ફરીથી પસંદ કરો",
+            "inviteSelectedContacts": "પસંદ કરેલા સંપર્કોને આમંત્રિત કરો"
         },
         "email": {
             "subject": "અરે, આ તપાસો",
@@ -99,5 +101,12 @@
         "Title": "શીર્ષક",
         "Subscribed": "સબ્સ્ક્રાઇબ કર્યું",
         "Participants": "સહભાગીઓ"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "માઇક્રોફોન સક્ષમ કરો",
+            "cameraTitle": "કૅમેરો સક્ષમ કરો",
+            "cameraAndMicrophoneTitle": "કૅમેરો અને માઇક્રોફોનને સક્ષમ કરો"
+        }
     }
 }

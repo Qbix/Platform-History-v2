@@ -37,5 +37,13 @@
         "selectLabel": "कृपया लेबल का चयन करें।",
         "inviteUser": "उपयोगकर्ता को आमंत्रित करें"
     },
-    "invalidLanguageSelected": "अमान्य भाषा चयनित"
+    "invalidLanguageSelected": "अमान्य भाषा चयनित",
+    "contacts": {
+        "dialog": {
+            "title": "संपर्क चुनें"
+        },
+        "select": {
+            "title": "{{displayName}} के संपर्क का चयन करें"
+        }
+    }
 }

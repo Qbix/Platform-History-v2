@@ -59,7 +59,9 @@
             "byText": "文本",
             "byFacebook": "Facebook的",
             "byTwitter": "推特",
-            "QRscanned": "他们扫描了一下！"
+            "QRscanned": "他们扫描了一下！",
+            "chooseAgainFromContacts": "从联系人中再次选择",
+            "inviteSelectedContacts": "邀请选定的联系人"
         },
         "email": {
             "subject": "嘿，看看这个",
@@ -99,5 +101,12 @@
         "Title": "标题",
         "Subscribed": "订阅",
         "Participants": "参与者"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "启用麦克风",
+            "cameraTitle": "启用相机",
+            "cameraAndMicrophoneTitle": "启用相机和麦克风"
+        }
     }
 }

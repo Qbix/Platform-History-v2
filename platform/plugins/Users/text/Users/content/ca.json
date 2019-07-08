@@ -37,5 +37,13 @@
         "selectLabel": "Seleccioneu l’etiqueta.",
         "inviteUser": "Convida l&#39;usuari"
     },
-    "invalidLanguageSelected": "S&#39;ha seleccionat un idioma no vàlid"
+    "invalidLanguageSelected": "S&#39;ha seleccionat un idioma no vàlid",
+    "contacts": {
+        "dialog": {
+            "title": "Trieu el contacte"
+        },
+        "select": {
+            "title": "Seleccioneu el contacte de {{displayName}}"
+        }
+    }
 }

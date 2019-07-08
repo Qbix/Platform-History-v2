@@ -7711,9 +7711,12 @@ Q.find = function _Q_find(elem, filter, callbackBefore, callbackAfter, options, 
 	|| (typeof HTMLCollection !== 'undefined' && (elem instanceof root.HTMLCollection))
 	|| (root.jQuery && (elem instanceof jQuery))) {
 
-		Q.each(elem, function _Q_find_array(i) {
+		Q.each(elem, function _Q_find_array(i, item) {
+			if (!item) {
+				return;
+			}
 			if (false === Q.find(
-				this, filter, callbackBefore, callbackAfter, 
+				item, filter, callbackBefore, callbackAfter, 
 				options, shared, parent, i
 			)) {
 				return false;

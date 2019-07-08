@@ -37,5 +37,13 @@
         "selectLabel": "Palun valige silt.",
         "inviteUser": "Kutsu kasutaja"
     },
-    "invalidLanguageSelected": "Valitud keel on vale"
+    "invalidLanguageSelected": "Valitud keel on vale",
+    "contacts": {
+        "dialog": {
+            "title": "Valige kontakt"
+        },
+        "select": {
+            "title": "Valige kontakt {{displayName}}"
+        }
+    }
 }

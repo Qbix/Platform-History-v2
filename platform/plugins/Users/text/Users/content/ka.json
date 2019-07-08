@@ -37,5 +37,13 @@
         "selectLabel": "აირჩიეთ ლეიბლი.",
         "inviteUser": "მოიწვიეთ მომხმარებელი"
     },
-    "invalidLanguageSelected": "არჩეული არასწორი ენა"
+    "invalidLanguageSelected": "არჩეული არასწორი ენა",
+    "contacts": {
+        "dialog": {
+            "title": "კონტაქტის არჩევა"
+        },
+        "select": {
+            "title": "აირჩიეთ {{displayName}}"
+        }
+    }
 }

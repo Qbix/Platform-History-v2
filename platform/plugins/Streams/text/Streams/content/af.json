@@ -59,7 +59,9 @@
             "byText": "teks",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Hulle het dit geskandeer!"
+            "QRscanned": "Hulle het dit geskandeer!",
+            "chooseAgainFromContacts": "Kies weer uit kontakte",
+            "inviteSelectedContacts": "Nooi geselekteerde kontakte uit"
         },
         "email": {
             "subject": "Hey, check dit uit",
@@ -99,5 +101,12 @@
         "Title": "Titel",
         "Subscribed": "ingeskryf",
         "Participants": "deelnemers"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Aktiveer mikrofoon",
+            "cameraTitle": "Aktiveer kamera",
+            "cameraAndMicrophoneTitle": "Aktiveer kamera en mikrofoon"
+        }
     }
 }

@@ -37,5 +37,13 @@
         "selectLabel": "Lütfen bir etiket seçiniz.",
         "inviteUser": "Kullanıcıyı davet et"
     },
-    "invalidLanguageSelected": "Geçersiz dil seçildi"
+    "invalidLanguageSelected": "Geçersiz dil seçildi",
+    "contacts": {
+        "dialog": {
+            "title": "Kişi seç"
+        },
+        "select": {
+            "title": "{{displayName}} kişisini seçin"
+        }
+    }
 }

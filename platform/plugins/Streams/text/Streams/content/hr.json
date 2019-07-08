@@ -59,7 +59,9 @@
             "byText": "Tekst",
             "byFacebook": "Facebook",
             "byTwitter": "Cvrkut",
-            "QRscanned": "Skenirali su ga!"
+            "QRscanned": "Skenirali su ga!",
+            "chooseAgainFromContacts": "Odaberite Ponovno iz Kontakata",
+            "inviteSelectedContacts": "Pozovi odabrane kontakte"
         },
         "email": {
             "subject": "Hej, vidi ovo",
@@ -99,5 +101,12 @@
         "Title": "Titula",
         "Subscribed": "pretplaćen",
         "Participants": "sudionici"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Omogući mikrofon",
+            "cameraTitle": "Omogući fotoaparat",
+            "cameraAndMicrophoneTitle": "Omogući kameru i mikrofon"
+        }
     }
 }

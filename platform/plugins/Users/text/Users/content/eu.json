@@ -37,5 +37,13 @@
         "selectLabel": "Hautatu etiketa.",
         "inviteUser": "Gonbidatu erabiltzailea"
     },
-    "invalidLanguageSelected": "Hizkuntza baliogabea hautatu da"
+    "invalidLanguageSelected": "Hizkuntza baliogabea hautatu da",
+    "contacts": {
+        "dialog": {
+            "title": "Aukeratu kontaktua"
+        },
+        "select": {
+            "title": "{{displayName}} zerbitzuko kontaktu aukeratu"
+        }
+    }
 }

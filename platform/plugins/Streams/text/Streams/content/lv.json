@@ -59,7 +59,9 @@
             "byText": "Teksts",
             "byFacebook": "Facebook",
             "byTwitter": "Čivināt",
-            "QRscanned": "Viņi skenēja to!"
+            "QRscanned": "Viņi skenēja to!",
+            "chooseAgainFromContacts": "Izvēlieties no kontaktiem vēlreiz",
+            "inviteSelectedContacts": "Uzaicināt atlasītos kontaktus"
         },
         "email": {
             "subject": "Hei, pārbaudiet to",
@@ -99,5 +101,12 @@
         "Title": "Nosaukums",
         "Subscribed": "Abonēts",
         "Participants": "Dalībnieki"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Iespējot mikrofonu",
+            "cameraTitle": "Iespējot kameru",
+            "cameraAndMicrophoneTitle": "Iespējot kameru un mikrofonu"
+        }
     }
 }

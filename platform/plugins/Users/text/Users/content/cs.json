@@ -37,5 +37,13 @@
         "selectLabel": "Vyberte prosím popisek.",
         "inviteUser": "Pozvěte uživatele"
     },
-    "invalidLanguageSelected": "Byl vybrán neplatný jazyk"
+    "invalidLanguageSelected": "Byl vybrán neplatný jazyk",
+    "contacts": {
+        "dialog": {
+            "title": "Vyberte kontakt"
+        },
+        "select": {
+            "title": "Vyberte kontakt {{displayName}}"
+        }
+    }
 }

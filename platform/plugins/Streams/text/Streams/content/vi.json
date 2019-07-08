@@ -59,7 +59,9 @@
             "byText": "Bản văn",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Họ đã quét nó!"
+            "QRscanned": "Họ đã quét nó!",
+            "chooseAgainFromContacts": "Chọn lại từ Danh bạ",
+            "inviteSelectedContacts": "Mời các địa chỉ liên lạc được chọn"
         },
         "email": {
             "subject": "Này, kiểm tra cái này",
@@ -99,5 +101,12 @@
         "Title": "Chức vụ",
         "Subscribed": "Đã đăng ký",
         "Participants": "Người tham gia"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Kích hoạt micrô",
+            "cameraTitle": "Kích hoạt camera",
+            "cameraAndMicrophoneTitle": "Bật máy ảnh và micrô"
+        }
     }
 }

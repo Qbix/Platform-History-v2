@@ -37,5 +37,13 @@
         "selectLabel": "请选择标签。",
         "inviteUser": "邀请用户"
     },
-    "invalidLanguageSelected": "选择的语言无效"
+    "invalidLanguageSelected": "选择的语言无效",
+    "contacts": {
+        "dialog": {
+            "title": "选择联系人"
+        },
+        "select": {
+            "title": "选择{{displayName}}的联系人"
+        }
+    }
 }
