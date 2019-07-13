@@ -59,7 +59,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 	var Streams = Q.Streams;
-	var _debug = true;
+	var _debug = false;
 	var _debugTimer = {};
 	var errorLog = '';
 	var latestConsoleLog = '';
@@ -76,7 +76,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			mediaDevicesDialog: true,
 			startWith: {
 				audio: true,
-				video: true
+				video: false
 			}
 		};
 		var _controls = null;
@@ -463,7 +463,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						});
 					} else if(_options.startWith.audio && audioDevices != 0) {
 						requestAudioStream(function (audioStream) {
-							publishStreams([, audioStream]);
+							publishStreams([audioStream]);
 						});
 					}
 
@@ -2002,7 +2002,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 		function enableiOSDebug() {
 			var ua=navigator.userAgent;
-			if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
+			/*if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
 				console.stdlog = console.log.bind(console);
 				console.log = function (txt) {
 
@@ -2026,12 +2026,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 					}
 				}
-			}
+			}*/
 			console.stderror = console.error.bind(console);
 
 			console.error = function (txt) {
 
-				if(!debugSocket || debugSocket && !debugSocket.connected) return;
+				if(!debugSocket || debugSocket && !debugSocket.connected) {
+					console.stderror.apply(console, arguments);
+					return;
+				}
 
 				try {
 					var err = (new Error);
@@ -2114,145 +2117,164 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				//showPageLoader();
 				console.log('module.start');
 
-
 				_debugTimer.loadStart = performance.now();
-				Q.addScript([
-					'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js',
-				], function () {
-					try {
-						window.debugSocket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket']});
-						debugSocket.on('connect', function () {
-							console.log('CONNECTED', debugSocket);
-							enableiOSDebug(debugSocket);
-							onConnect();
-						});
-					} catch (e) {
-						console.error(e);
-					}
 
-					function onConnect() {
-						var startWith = _options.startWith || {};
-						if (startWith.audio || startWith.video) {
-							console.log('module.start 2');
-
-							publishMediaTracks();
-							//showPermissionsDialogue();
-						}
-
-
-						if((typeof window.RTCPeerConnection == 'undefined' && typeof window.mozRTCPeerConnection == 'undefined' && typeof  window.webkitRTCPeerConnection == 'undefined')) {
-							Q.alert('Unfortunatelly your browser doesn\'t support WebRTC')
-						}
-
-						console.log('_options startWith', _options.startWith)
-						_options = Q.extend({}, _options, options);
-						console.log('_options startWith', _options.startWith)
-
-						/*if(typeof options === 'object') {
-							for (var key in options) {
-								_options[key] = options.hasOwnProperty(key) && typeof options[key] !== 'undefined' ? options[key] : _options[key];
-							}
-						}*/
-
-						var checkPageLoading = function(ms) {
-							if(_debugTimer.loadStart != null && _debugTimer.loadEnd == null) {
-								if (debugSocket) {
-									debugSocket.emit('errorlog_timeout', '\n=========START LOG=========\nTIMEOUT: ' + ms + '\n' +
-										'\n ERROR LOG: ' + (errorLog != '' ? errorLog : 'empty') +
-										'\n LATEST CONSOLE LOG: ' + (latestConsoleLog != '' ? latestConsoleLog : 'empty') +
-										'\n WebRTC support: ' + (typeof window.RTCPeerConnection != 'undefined' || typeof window.mozRTCPeerConnection != 'undefined' || typeof  window.webkitRTCPeerConnection != 'undefined') +
-										'\n navigator.mediaDevices.getUserMedia support: ' + (typeof navigator.mediaDevices.getUserMedia != 'undefined') +
-										'\n navigator.getUserMedia support: ' + (typeof navigator.getUserMedia != 'undefined' || typeof navigator.mozGetUserMedia != 'undefined' || typeof navigator.webkitGetUserMedia != 'undefined') +
-										'\n=========END LOG=========\n');
-								}
-							}
-						}
-						setTimeout(function () {
-							checkPageLoading(9000);
-						}, 9000)
-						setTimeout(function () {
-							checkPageLoading(9000);
-						}, 15000)
-
-						var roomId = _options.roomId != null ? _options.roomId : null;
-						if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
-						if(roomId != null) _options.roomId = roomId;
-
-						var roomsMedia = document.createElement('DIV');
-						roomsMedia.id = 'Streams_webrtc_room-media';
-						var dashboard = document.getElementById('dashboard_slot');
-						if(Q.info.isMobile && !Q.info.isTablet) {
-							roomsMedia.style.height = 'calc(100% - ' + dashboard.offsetHeight + 'px)';
-							roomsMedia.style.top = dashboard.offsetHeight + 'px';
-						}
-
-						window.addEventListener("resize", function() {
-							setTimeout(function () {
-								screensRendering.updateLayout();
-							}, 1000)
-						});
-
-						_options.element.appendChild(roomsMedia);
-						_roomsMedia = roomsMedia;
-						if(_options.element != document.body)_options.element.dataset.webrtcContainer = true;
-						Q.activate(
-							Q.Tool.setUpElement(
-								_roomsMedia, // or pass an existing element
-								"Q/layouts",
-								{alternativeContainer: Q.info.isMobile ? null : document.body}
-							),
-							{},
-							function () {
-								_layoutTool = this;
-							}
-						);
-
-
-						var createOrJoinRoomStream = function (roomId, asPublisherId) {
-							if(_debug) console.log('createRoomStream')
-
-							Q.req("Streams/webrtc", ["room"], function (err, response) {
-								var msg = Q.firstErrorMessage(err, response && response.errors);
-
-								if (msg) {
-									return Q.alert(msg);
-								}
-								console.log('response.slots', response.slots)
-
-								roomId = (response.slots.room.roomId).replace('Streams/webrtc/', '');
-								var turnCredentials = response.slots.room.turnCredentials;
-
-								//var connectUrl = updateQueryStringParameter(location.href, 'Q.rid', roomId);
-								//connectUrl = updateQueryStringParameter(connectUrl, 'Q.pid', asPublisherId);
-								Q.Streams.get(asPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
-									_roomStream = stream;
-									console.log('_roomStream', _roomStream)
-									console.log('_options.mode', _options.mode)
-									bindStreamsEvents(stream);
-									if(_options.mode == 'twilio') {
-										startTwilioRoom(roomId, response.slots.room.accessToken);
-									} else initWithNodeServer(turnCredentials);
-
-								});
-
-							}, {
-								method: 'post',
-								fields: {
-									roomId: roomId,
-									publisherId: asPublisherId,
-									adapter: _options.mode
-								}
+				if(_debug) {
+					Q.addScript([
+						'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js',
+					], function () {
+						try {
+							window.debugSocket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket']});
+							debugSocket.on('connect', function () {
+								console.log('CONNECTED', debugSocket);
+								enableiOSDebug(debugSocket);
+								onConnect();
 							});
+						} catch (e) {
+							console.error(e);
 						}
 
-						if(roomId != null && _options.roomPublisherId != null) {
-							createOrJoinRoomStream(roomId, _options.roomPublisherId);
+					});
+				} else {
+					Q.addScript([
+						'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js',
+					], function () {
+						try {
+							window.debugSocket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket']});
+							debugSocket.on('connect', function () {
+								console.log('CONNECTED', debugSocket);
+								enableiOSDebug(debugSocket);
+
+							});
+						} catch (e) {
+							console.error(e);
 						}
+
+					});
+					onConnect();
+				}
+
+				function onConnect() {
+					console.log('module.start load time ' + (performance.now() - _debugTimer.loadStart));
+
+					var startWith = _options.startWith || {};
+					if (startWith.audio || startWith.video) {
+						console.log('module.start 2');
+
+						publishMediaTracks();
+						showPermissionsDialogue();
 					}
 
 
-				});
+					if((typeof window.RTCPeerConnection == 'undefined' && typeof window.mozRTCPeerConnection == 'undefined' && typeof  window.webkitRTCPeerConnection == 'undefined')) {
+						Q.alert('Unfortunatelly your browser doesn\'t support WebRTC')
+					}
 
+					console.log('_options startWith', _options.startWith)
+					_options = Q.extend({}, _options, options);
+					console.log('_options startWith', _options.startWith)
+
+					/*if(typeof options === 'object') {
+						for (var key in options) {
+							_options[key] = options.hasOwnProperty(key) && typeof options[key] !== 'undefined' ? options[key] : _options[key];
+						}
+					}*/
+
+					var checkPageLoading = function(ms) {
+						if(_debugTimer.loadStart != null && _debugTimer.loadEnd == null) {
+							if (debugSocket) {
+								debugSocket.emit('errorlog_timeout', '\n=========START LOG=========\nTIMEOUT: ' + ms + '\n' +
+									'\n ERROR LOG: ' + (errorLog != '' ? errorLog : 'empty') +
+									'\n LATEST CONSOLE LOG: ' + (latestConsoleLog != '' ? latestConsoleLog : 'empty') +
+									'\n WebRTC support: ' + (typeof window.RTCPeerConnection != 'undefined' || typeof window.mozRTCPeerConnection != 'undefined' || typeof  window.webkitRTCPeerConnection != 'undefined') +
+									'\n navigator.mediaDevices.getUserMedia support: ' + (typeof navigator.mediaDevices.getUserMedia != 'undefined') +
+									'\n navigator.getUserMedia support: ' + (typeof navigator.getUserMedia != 'undefined' || typeof navigator.mozGetUserMedia != 'undefined' || typeof navigator.webkitGetUserMedia != 'undefined') +
+									'\n=========END LOG=========\n');
+							}
+						}
+					}
+					setTimeout(function () {
+						checkPageLoading(9000);
+					}, 9000)
+					setTimeout(function () {
+						checkPageLoading(9000);
+					}, 15000)
+
+					var roomId = _options.roomId != null ? _options.roomId : null;
+					if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
+					if(roomId != null) _options.roomId = roomId;
+
+					var roomsMedia = document.createElement('DIV');
+					roomsMedia.id = 'Streams_webrtc_room-media';
+					var dashboard = document.getElementById('dashboard_slot');
+					if(Q.info.isMobile && !Q.info.isTablet) {
+						roomsMedia.style.height = 'calc(100% - ' + dashboard.offsetHeight + 'px)';
+						roomsMedia.style.top = dashboard.offsetHeight + 'px';
+					}
+
+					window.addEventListener("resize", function() {
+						setTimeout(function () {
+							screensRendering.updateLayout();
+						}, 1000)
+					});
+
+					_options.element.appendChild(roomsMedia);
+					_roomsMedia = roomsMedia;
+					if(_options.element != document.body)_options.element.dataset.webrtcContainer = true;
+					Q.activate(
+						Q.Tool.setUpElement(
+							_roomsMedia, // or pass an existing element
+							"Q/layouts",
+							{alternativeContainer: Q.info.isMobile ? null : document.body}
+						),
+						{},
+						function () {
+							_layoutTool = this;
+						}
+					);
+
+
+					var createOrJoinRoomStream = function (roomId, asPublisherId) {
+						if(_debug) console.log('createRoomStream')
+
+						Q.req("Streams/webrtc", ["room"], function (err, response) {
+							var msg = Q.firstErrorMessage(err, response && response.errors);
+
+							if (msg) {
+								return Q.alert(msg);
+							}
+							console.log('response.slots', response.slots)
+
+							roomId = (response.slots.room.roomId).replace('Streams/webrtc/', '');
+							var turnCredentials = response.slots.room.turnCredentials;
+
+							//var connectUrl = updateQueryStringParameter(location.href, 'Q.rid', roomId);
+							//connectUrl = updateQueryStringParameter(connectUrl, 'Q.pid', asPublisherId);
+							Q.Streams.get(asPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
+								_roomStream = stream;
+								console.log('_roomStream', _roomStream)
+								console.log('_options.mode', _options.mode)
+								bindStreamsEvents(stream);
+								if(_options.mode == 'twilio') {
+									startTwilioRoom(roomId, response.slots.room.accessToken);
+								} else initWithNodeServer(turnCredentials);
+
+							});
+
+						}, {
+							method: 'post',
+							fields: {
+								roomId: roomId,
+								publisherId: asPublisherId,
+								adapter: _options.mode
+							}
+						});
+					}
+
+					if(roomId != null && _options.roomPublisherId != null) {
+						createOrJoinRoomStream(roomId, _options.roomPublisherId);
+					}
+				}
 			});
 
 		}
