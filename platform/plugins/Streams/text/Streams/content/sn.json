@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Itsva Item"
+    },
+    "labels": {
+        "Streams\/invited": "Vanhu vandakakokwa",
+        "Streams\/invitedMe": "Ndiani akandidana"
+    },
+    "interests": {
+        "Filter": "Unofarira chii?",
+        "CanAdd": "Kana iwe usingakwanisi kuwana zvauri kutsvaga, unogona kuwedzera chido chitsva pasi:",
+        "TrySynonyms": "Usazviona? Edza mamwe maonesheni.",
+        "AddUnderCategory": "Wedzera pasi muchikwata ...",
+        "Other": "Zvimwe",
+        "Unlisted": "Asina kunyorwa"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Mharidzo yakagadzirirwa kuongororwa admin. Tora zvakare kuti urege kushandura.",
+        "noOneSaid": "Hapana akambotaura chero chinhu",
+        "closeChatButton": "Vhura mharidzo",
+        "closeChatConfirmTitle": "Vhura iyi mhinduro?",
+        "closeChatConfirm": "Unonyatsoziva here kuti unoda kuvhara iyi mharidzo?",
+        "closeChatConfirmYes": "Ehe",
+        "closeChatConfirmNo": "Aihwa",
+        "earlierComments": "pakutanga anotaura"
+    },
+    "notifications": {
+        "*": "Mharidzo kune (1000)",
+        "Streams\/chat\/message": "Vakati:",
+        "Streams\/changed": "Kuchinja mu {{stream.fields.title}}",
+        "Streams\/invite": "Iwe wakakokwa kune {{& stream.fields.title}}",
+        "Streams\/announcement": "Chiziviso mu {{& streams.fields.title}}",
+        "Streams\/access": "Akachinja kushandiswa kwemvura",
+        "Streams\/chat\/edit": "Mharidzo yehurukuro yakarongwa",
+        "Streams\/chat\/remove": "Mharidzo yekutaura yakabviswa",
+        "Streams\/closed": "Izvo zvavharwa",
+        "Streams\/task\/progress": "Kufambira mberi kwakaitwa pa {{stream.fields.title}}",
+        "Streams\/task\/complete": "Basa rakapedzwa: {{stream.fields.title}}",
+        "Streams\/task\/error": "Kukanganisa panguva: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "Mharidzo inopinda"
+    },
+    "invite": {
+        "messageContent": "Ndakakokwa iwe (1000)",
+        "dialog": {
+            "chooseFromContacts": "Sarudza kubva kune Vaunogara",
+            "chooseAgainFromContacts": "Sarudzazve Kubva kune Vatengi",
+            "inviteSelectedContacts": "Kumbira Vatengi Vakasarudza",
+            "selectFromContacts": "Sarudza Kubva Neshamwari",
+            "photo": "Tora mufananidzo",
+            "photoInstruction": "Kana munhu akaongorora QR code yako iri mberi kwako, tora mufananidzo wavo",
+            "to": "Ku: {{Stream Title}}",
+            "go": "Enda",
+            "title": "Kumbira",
+            "placeholder": "Nhamba yefoni kana email",
+            "orInvite": "Kana kukoka vanhu nekushandisa:",
+            "QR": "{}} Kuunza kR code",
+            "QRtitle": "Tora iyi code QR",
+            "QRscanned": "Vakazviona!",
+            "byEmail": "Email",
+            "byText": "Text",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hey, chengeta izvi",
+            "PleaseVisitLink": "Ndapota shanyirai link inotevera:",
+            "InvitingYou": "Ndiri kukukoka iwe ku {{title}}",
+            "HasInvitedYou": "Ndakakudanira kuna [1000]"
+        },
+        "sms": {
+            "content": "Wakadanwa ku {{title}}. Ndapota tapota {{url}}"
+        },
+        "notice": {
+            "text": "Iwe wakokwa. Ikozvino kugamuchira nekubatana."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{}} <em>{}}<\/em> {}} <em>{}}<\/em> {}"
+        },
+        "text": {
+            "body": "1000 1000 1000 1000,"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Kukokwa kunotumirwa kubva kunhamba yedu, iyo shamwari dzako dzisati dzaziva. Dzokorora nemagwaro matsva kuitira kuti vazive kukokwa kwakabva kwamuri, vachivakumbira kuti vakanise kubatanidza.",
+            "confirm": "Kukokwa kunotumirwa kubva kunhamba yedu, iyo shamwari dzako dzisati dzaziva. Ungada here kutevera nemashoko ekukurumidza kuti uvazivise kuti kukokwa kwakabva kwauri, uchivakumbira kuti vanyanise hukama.",
+            "check": "Hei, ndangokutumira kukoka kune {{app}} app. Ndapota chengetedza sms yako uye chenganisa chibatanidza!"
+        },
+        "email": {
+            "alert": "Kukokwa kunotumirwa kubva kunzvimbo yedu, iyo shamwari dzako dzisati dzaziva. Dzokorora nemagwaro matsva kuitira kuti vazive kukokwa kwakabva kwamuri, vachivakumbira kuti vakanise kubatanidza.",
+            "confirm": "Kukokwa kunotumirwa kubva kunzvimbo yedu, iyo shamwari dzako dzisati dzaziva. Ungada here kutevera nemashoko ekukurumidza kuti uvazivise kuti kukokwa kwakabva kwauri, uchivakumbira kuti vanyanise hukama.",
+            "subject": "Wakawana kukokwa here?",
+            "body": "Hei, ndangokutumira kukoka kune {{app}} app. Ndapota chengetedza email yako uye chengetedza chibatanidzi mukati maro!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Shandisa Microphone",
+            "cameraTitle": "Svumira Kamera",
+            "cameraAndMicrophoneTitle": "Ita kuti Kamera nemakrofoni vigone"
+        }
+    }
+}

@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "So&#39;rov davomida {{status}} xatolik yuz berdi",
+        "canceled": "So&#39;rov bekor qilindi",
+        "500": "Serverdagi ichki xatolik",
+        "404": "Topilmadi: {{url}}",
+        "501": "So&#39;rov to&#39;xtatildi"
+    },
+    "nonce": {
+        "sameDomain": "Seans muddati tugadi. Sahifani yangilang va qaytadan urinib ko&#39;ring.",
+        "otherDomain": "{{baseUrl}} da xorijiy domenga blokirovka qilingan o&#39;zaro faoliyat domen so&#39;rovi"
+    },
+    "words": {
+        "tap": "ni bosing",
+        "click": "tugmasini bosing",
+        "yes": "Ha",
+        "no": "Yo&#39;q",
+        "Tap": "Ni bosing",
+        "Click": "Tugmasini bosing",
+        "Yes": "Ha",
+        "No": "Yo&#39;q"
+    },
+    "months": {
+        "1": "Yanvar",
+        "2": "fevral",
+        "3": "Mart",
+        "4": "Aprel",
+        "5": "May",
+        "6": "Iyun",
+        "7": "Iyul",
+        "8": "Avgust",
+        "9": "Sentyabr",
+        "10": "Oktyabr",
+        "11": "Noyabr",
+        "12": "Dekabr"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Iltimos, mikrofoningizga ruxsat bering",
+        "record": "Yozib oling",
+        "recording": "Yozib olish",
+        "remains": "qoladi",
+        "maximum": "maksimal",
+        "playing": "Ijro etish",
+        "recorded": "Saqlandi",
+        "clip": "klip",
+        "orupload": "Yoki Yuklab oling",
+        "usethis": "Buni ishlatish",
+        "discard": "Bekor qiling",
+        "encoding": "Kodlash"
+    },
+    "alert": {
+        "title": "Ogohlantirish"
+    },
+    "confirm": {
+        "title": "Tasdiqlash",
+        "ok": "Ha",
+        "cancel": "Yo&#39;q"
+    },
+    "prompt": {
+        "title": "Tez so&#39;raladigan",
+        "ok": "Boring"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Faylni o&#39;qish xato",
+        "cameraCommands": {
+            "prompt": "Nima qilgingiz kelyapdi?",
+            "photo": "Yangi fotosurat oling",
+            "library": "Kutubxonadan tanlang"
+        },
+        "tooSmall": "Iltimos, katta rasmni tanlang.",
+        "cropping": {
+            "title": "Hajmi va pozitsiyasini o&#39;rnating",
+            "touchscreen": "Kattalashtirish va harakatlantirish uchun barmoqlaringizdan foydalaning",
+            "notTouchscreen": "Masshtabni kattalashtirish va harakatlantiring"
+        }
+    }
+}

@@ -59,7 +59,9 @@
             "byText": "পাঠ",
             "byFacebook": "ফেসবুক",
             "byTwitter": "টুইটার",
-            "QRscanned": "তারা এটা স্ক্যান!"
+            "QRscanned": "তারা এটা স্ক্যান!",
+            "chooseAgainFromContacts": "পরিচিতি থেকে আবার চয়ন করুন",
+            "inviteSelectedContacts": "নির্বাচিত পরিচিতি আমন্ত্রণ জানান"
         },
         "email": {
             "subject": "আরে, এই চেক আউট",
@@ -99,5 +101,12 @@
         "Title": "খেতাব",
         "Subscribed": "সাবস্ক্রাইব",
         "Participants": "অংশগ্রহণকারীরা"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "মাইক্রোফোন সক্রিয় করুন",
+            "cameraTitle": "ক্যামেরা সক্রিয় করুন",
+            "cameraAndMicrophoneTitle": "ক্যামেরা এবং মাইক্রোফোন সক্রিয় করুন"
+        }
     }
 }

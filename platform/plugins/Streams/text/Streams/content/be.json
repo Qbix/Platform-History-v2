@@ -59,7 +59,9 @@
             "byText": "тэкст",
             "byFacebook": "facebook",
             "byTwitter": "шчэбет",
-            "QRscanned": "Яны сканавалі яго!"
+            "QRscanned": "Яны сканавалі яго!",
+            "chooseAgainFromContacts": "Абярыце зноў з кантактаў",
+            "inviteSelectedContacts": "Запрасіце выбраныя кантакты"
         },
         "email": {
             "subject": "Эй, праверыць гэта",
@@ -99,5 +101,12 @@
         "Title": "Назва",
         "Subscribed": "Падпіска",
         "Participants": "Удзельнікі"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Уключыць мікрафон",
+            "cameraTitle": "Уключыць камеру",
+            "cameraAndMicrophoneTitle": "Уключыць камеру і мікрафон"
+        }
     }
 }

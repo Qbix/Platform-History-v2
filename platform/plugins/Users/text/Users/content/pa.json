@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "ਲਾਗਿਨ",
+        "LogOut": "ਲਾੱਗ ਆਊਟ, ਬਾਹਰ ਆਉਣਾ"
+    },
+    "activate": {
+        "SetAsPrimary": "{{1}} ਨੂੰ ਮੇਰੀ ਪ੍ਰਾਇਮਰੀ {{2}} ਦੇ ਤੌਰ ਤੇ ਸੈਟ ਕਰੋ",
+        "ChoosePassPhrase": "ਨਾਲ ਲਾਗ ਇਨ ਕਰਨ ਲਈ <strong>ਪਾਸ ਸ਼ਬਦ<\/strong> ਚੁਣੋ. <br> ਇਕ ਆਸਾਨ ਵਾਕ ਵਿਚ ਉਹ ਕੁਝ ਸ਼ਬਦ ਸ਼ਾਮਲ ਹੁੰਦੇ ਹਨ ਜੋ ਤੁਸੀਂ ਆਸਾਨੀ ਨਾਲ ਯਾਦ ਰੱਖ ਸਕੋਗੇ.",
+        "ChoosePassPhraseSeeSuggestions": "ਆਪਣੇ ਖਾਤੇ ਦੀ ਰੱਖਿਆ ਲਈ ਇੱਕ ਚੰਗੇ <strong>ਪਾਸ ਸ਼ਬਦ<\/strong> ਚੁਣੋ ਕੁਝ ਵਿਚਾਰਾਂ ਲਈ ਸੁਝਾਅ ਵੇਖੋ.",
+        "LogOutAndTryAgain": "ਆਉਟ ਕਰੋ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ",
+        "IfYouFeel": "ਜੇ ਤੁਸੀਂ ਮਹਿਸੂਸ ਕਰਦੇ ਹੋ ਕਿ ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ ਹੈ, ਤੁਸੀਂ ਕਰ ਸਕਦੇ ਹੋ",
+        "SetIdentifierButtonTitle": "ਸ਼ੁਰੂ ਕਰੋ"
+    },
+    "session": {
+        "GetStarted": "ਸ਼ੁਰੂਆਤ ਕਰੋ"
+    },
+    "authorize": {
+        "GetStarted": "ਸ਼ੁਰੂਆਤ ਕਰੋ",
+        "Authorize": "ਅਧਿਕ੍ਰਿਤੀ",
+        "TermsLabel": "ਮੈਂ ਪੜ੍ਹ ਲਿਆ ਹੈ ਅਤੇ ਸਹਿਮਤ ਹਾਂ <br> {{link}}",
+        "TermsTitle": "ਸ਼ਰਤਾਂ"
+    },
+    "register": {
+        "TermsLabel": "ਮੈਂ {{link}} ਨੂੰ ਸਵੀਕਾਰ ਕਰਦਾ \/ ਕਰਦੀ ਹਾਂ",
+        "TermsTitle": "ਸ਼ਰਤਾਂ"
+    },
+    "notifications": {
+        "title": "ਅਧਿਕਾਰ",
+        "prompt": "ਕੀ ਤੁਸੀਂ ਸੂਚਨਾਵਾਂ ਨੂੰ ਸਮਰੱਥ ਬਣਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ? ਉਹਨਾਂ ਚੀਜ਼ਾਂ ਬਾਰੇ ਤੁਹਾਨੂੰ ਰੀਅਲ-ਟਾਈਮ ਅਪਡੇਟਸ ਮਿਲੇਗਾ ਜਿਨ੍ਹਾਂ ਦੀ ਤੁਸੀਂ ਪਰਵਾਹ ਕਰਦੇ ਹੋ",
+        "yes": "ਹਾਂ",
+        "no": "ਨਹੀਂ",
+        "WelcomePleaseVerifyEmail": "ਸੁਆਗਤ ਹੈ! ਕਿਰਪਾ ਕਰਕੇ ਆਪਣਾ ਈਮੇਲ ਪਤਾ ਪ੍ਰਮਾਣਿਤ ਕਰੋ.",
+        "WelcomeVerifyEmail": "ਸੁਆਗਤ ਹੈ! ਆਪਣਾ ਈਮੇਲ ਪਤਾ ਪ੍ਰਮਾਣਿਤ ਕਰੋ",
+        "ForgetPass": "ਹੇ, ਕੀ ਤੁਸੀਂ ਆਪਣਾ ਪਾਸਫਰੇਜ ਭੁੱਲ ਗਏ ਹੋ?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "ਸੰਪਰਕ ਚੁਣੋ"
+        },
+        "select": {
+            "title": "{{displayName}} ਦੇ ਸੰਪਰਕ ਦੀ ਚੋਣ ਕਰੋ"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "ਲੇਬਲ ਦੀ ਚੋਣ ਕਰੋ.",
+        "inviteUser": "ਯੂਜ਼ਰ ਨੂੰ ਸੱਦੋ"
+    },
+    "invalidLanguageSelected": "ਗਲਤ ਭਾਸ਼ਾ ਚੁਣੀ ਗਈ"
+}

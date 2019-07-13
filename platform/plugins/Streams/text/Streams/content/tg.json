@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Қисми нав"
+    },
+    "labels": {
+        "Streams\/invited": "Мардон даъват карданд",
+        "Streams\/invitedMe": "Ки маро даъват кард"
+    },
+    "interests": {
+        "Filter": "Шумо аз чӣ истифода мекунед?",
+        "CanAdd": "Агар шумо ҳанӯз ҷустуҷӯ кунед, ки чӣ гуна ҷустуҷӯ мекунед, шумо метавонед манфиати навро дар поён гузоред:",
+        "TrySynonyms": "Оё онро мебинед? Якчанд синонимро санҷед.",
+        "AddUnderCategory": "Иловаи категорияи ...",
+        "Other": "Дигар",
+        "Unlisted": "Номаълум аст"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Паёмҳо барои тафтишоти admin flagship. Боз як бори дигар тамошо кунед.",
+        "noOneSaid": "Ҳеҷ кас чизе нагуфт",
+        "closeChatButton": "Чингизро пӯшед",
+        "closeChatConfirmTitle": "Ин сӯҳбатро пӯшед?",
+        "closeChatConfirm": "Оё боварӣ доред, ки ин паёмро пӯшед?",
+        "closeChatConfirmYes": "Бале",
+        "closeChatConfirmNo": "Не",
+        "earlierComments": "шарҳҳои қаблӣ"
+    },
+    "notifications": {
+        "*": "{{& message.fields.type}} то {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} гуфт:",
+        "Streams\/changed": "Тағирот дар {{stream.fields.title}}",
+        "Streams\/invite": "Шумо ба {{& stream.fields.title}} даъват шудед",
+        "Streams\/announcement": "Эълон дар {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} дастрасии ҷараёнро тағйир дод",
+        "Streams\/chat\/edit": "Паёмнависии чат карда шуд",
+        "Streams\/chat\/remove": "Паёмҳои ирсолшуда хориҷ карда шуд",
+        "Streams\/closed": "{{stream.fields.title}} шудааст",
+        "Streams\/task\/progress": "Пешрафт дар {{stream.fields.title}}",
+        "Streams\/task\/complete": "Вазифа ба анҷом расид: {{stream.fields.title}}",
+        "Streams\/task\/error": "Хатогӣ дар муддати: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Паёмҳои воридотӣ"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} шуморо ба {{inviteUrl}} даъват кард",
+        "dialog": {
+            "chooseFromContacts": "Аз мухотибонатон интихоб кунед",
+            "chooseAgainFromContacts": "Аз нав аз мухотибон интихоб кунед",
+            "inviteSelectedContacts": "Даъватҳои мухтасарро даъват кунед",
+            "selectFromContacts": "Аз мухотибон интихоб кунед",
+            "photo": "Аксро гирифта метавонед",
+            "photoInstruction": "Агар шахсе, ки коди QR-ро муайян кардааст, дар назди шумо қарор дорад, онҳоро акс гирифтан",
+            "to": "Ба: {{Stream Title}}",
+            "go": "Рафтан",
+            "title": "Invite",
+            "placeholder": "Рақами телефонӣ ё нишонии почтаи электронӣ",
+            "orInvite": "Ё бо истифода аз одамон истифода баред:",
+            "QR": "{{ClickOrTap}} барои эҷоди QR коди",
+            "QRtitle": "Ин рамзи QR-ро санҷед",
+            "QRscanned": "Онҳо онро таъриф мекарданд!",
+            "byEmail": "Email",
+            "byText": "Матн",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Ҳа, ин тафтиш кунед",
+            "PleaseVisitLink": "Лутфан ба пайвандҳои зерин муроҷиат кунед:",
+            "InvitingYou": "Ман шуморо даъват менамоям, ки {{title}}",
+            "HasInvitedYou": "{{displayName}} шуморо ба {{title}} даъват кард"
+        },
+        "sms": {
+            "content": "Шумо ба {{title}} даъват кардаед. Лутфан {{url}} -ро лутфан гузоред"
+        },
+        "notice": {
+            "text": "Шумо даъват кардаед. {{ClickOrTap}} дар ин ҷо барои қабул ва ҳамроҳ шудан."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} мактубро <em>{{message.fields.type}}<\/em> ба {{stream.fields.title}} фиристод"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} дар {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Эълонҳо аз рақами мо фиристода мешаванд, ки дӯстони онҳо ҳанӯз ҳам намедонанд. Бо матни фаврӣ пайравӣ кунед, то онҳо огоҳ шаванд, ки даъвати шумо аз шумо пайдо шавад, хоҳиш кунед, ки пайвандро пахш кунед.",
+            "confirm": "Эълонҳо аз рақами мо фиристода мешаванд, ки дӯстони онҳо ҳанӯз ҳам намедонанд. Оё мехоҳед, ки бо матни зудишин пайравӣ кунед, то онҳо огоҳ бошанд, ки даъвати шумо аз шумо пайдо мешавад, хоҳиш кунед, ки пайвандро пахш кунед.",
+            "check": "Хайр, ман ба шумо даъватномаи барномаи {{app}} фиристодам. Лутфан, sms худро санҷед ва пайванди ростро пахш кунед!"
+        },
+        "email": {
+            "alert": "Эълонҳо аз домҳои мо фиристода мешаванд, ки дӯстони онҳо ҳанӯз ҳам эътироф намекунанд. Бо матни фаврӣ пайравӣ кунед, то онҳо огоҳ шаванд, ки даъвати шумо аз шумо пайдо шавад, хоҳиш кунед, ки пайвандро пахш кунед.",
+            "confirm": "Эълонҳо аз домҳои мо фиристода мешаванд, ки дӯстони онҳо ҳанӯз ҳам эътироф намекунанд. Оё мехоҳед, ки бо матни зудишин пайравӣ кунед, то онҳо огоҳ бошанд, ки даъвати шумо аз шумо пайдо мешавад, хоҳиш кунед, ки пайвандро пахш кунед.",
+            "subject": "Шумо даъвати шуморо қабул кардед?",
+            "body": "Хайр, ман ба шумо даъватномаи барномаи {{app}} фиристодам. Лутфан почтаи худро тафтиш кунед ва пайванди он дар онҷо пахш кунед!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Микрофонро фаъол созед",
+            "cameraTitle": "Камераро фаъол кунед",
+            "cameraAndMicrophoneTitle": "Камера ва микрофонро фаъол созед"
+        }
+    }
+}

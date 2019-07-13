@@ -59,7 +59,9 @@
             "byText": "Texto",
             "byFacebook": "Facebook",
             "byTwitter": "Gorjeo",
-            "QRscanned": "¡Lo escanearon!"
+            "QRscanned": "¡Lo escanearon!",
+            "chooseAgainFromContacts": "Elegir de nuevo desde Contactos",
+            "inviteSelectedContacts": "Invitar contactos seleccionados"
         },
         "email": {
             "subject": "Oye mira esto",
@@ -99,5 +101,12 @@
         "Title": "Título",
         "Subscribed": "Suscrito",
         "Participants": "Participantes"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Habilitar micrófono",
+            "cameraTitle": "Habilitar cámara",
+            "cameraAndMicrophoneTitle": "Habilitar cámara y micrófono"
+        }
     }
 }

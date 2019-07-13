@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "даромадан",
+        "LogOut": "баромадан"
+    },
+    "activate": {
+        "SetAsPrimary": "{{1}} ҳамчун {{2}}",
+        "ChoosePassPhrase": "Барои ворид шудан бо <strong>ибораи гузарвожа<\/strong> интихоб кунед. <br> Як ибораи оддӣ иборат аз якчанд калимаҳоест, ки шумо ба осонӣ дар ёд доред.",
+        "ChoosePassPhraseSeeSuggestions": "Барои муҳофизат кардани ҳисоби шумо, <strong>ибораи &quot;pass pass&quot; -ро<\/strong> интихоб кунед. Ба тавсияҳои баъзе идеяҳо нигаред.",
+        "LogOutAndTryAgain": "Бастан ва такроран такрор кунед",
+        "IfYouFeel": "Агар шумо чизе ҳис кунед, шумо метавонед",
+        "SetIdentifierButtonTitle": "оғоз кунед"
+    },
+    "session": {
+        "GetStarted": "Сар кардан"
+    },
+    "authorize": {
+        "GetStarted": "Сар кардан",
+        "Authorize": "Authorize",
+        "TermsLabel": "Ман хонда ва мувофиқам <br> ба {999}}",
+        "TermsTitle": "Шартҳо"
+    },
+    "register": {
+        "TermsLabel": "Ман {{link}} -ро қабул мекунам",
+        "TermsTitle": "Шартҳо"
+    },
+    "notifications": {
+        "title": "Иҷозат",
+        "prompt": "Оё мехоҳед огоҳиҳо доред? Шумо дар бораи чизҳое, ки шумо дар бораи он ғамхорӣ мекунед, ба шумо хабарҳои воқеӣ мегиред.",
+        "yes": "Бале",
+        "no": "Не",
+        "WelcomePleaseVerifyEmail": "Хуш омадед! Лутфан нишонии почтаи электронии худро тафтиш кунед.",
+        "WelcomeVerifyEmail": "Хуш омадед! Суроғаи почтаи электронии худро тасдиқ кунед.",
+        "ForgetPass": "Ҳа, шумо папкаи худро фаромӯш кардед?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Тамосро интихоб кунед"
+        },
+        "select": {
+            "title": "Интихоби алоқаи {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Лутфан тамғаро интихоб кунед.",
+        "inviteUser": "Истифодабарандаро даъват кунед"
+    },
+    "invalidLanguageSelected": "Забони номаълум"
+}

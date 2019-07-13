@@ -37,5 +37,13 @@
         "selectLabel": "Калі ласка, абярыце ярлык.",
         "inviteUser": "запрасіць карыстальніка"
     },
-    "invalidLanguageSelected": "Няправільны абраны мова"
+    "invalidLanguageSelected": "Няправільны абраны мова",
+    "contacts": {
+        "dialog": {
+            "title": "Абярыце кантакт"
+        },
+        "select": {
+            "title": "Выберыце кантакт {{displayName}}"
+        }
+    }
 }

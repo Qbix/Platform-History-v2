@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Aʻoaʻo {{status}} i le taimi ole talosaga",
+        "canceled": "Talosaga na faalēaogā",
+        "500": "Faʻasologa o le &#39;initaneti",
+        "404": "Le maua: {{url}}",
+        "501": "Talosaga faʻalavelave"
+    },
+    "nonce": {
+        "sameDomain": "Fonotaga e faamutaina. Toe faafou le itulau ma toe taumafai.",
+        "otherDomain": "Talosaga ole felagolagomaʻi ile malo i {{baseUrl}}"
+    },
+    "words": {
+        "tap": "tap",
+        "click": "kiliki",
+        "yes": "ioe",
+        "no": "leai",
+        "Tap": "Tap",
+        "Click": "Kiliki",
+        "Yes": "ioe",
+        "No": "leai"
+    },
+    "months": {
+        "1": "Ianuari",
+        "2": "Fepuari",
+        "3": "Mati",
+        "4": "Apelila",
+        "5": "Mae",
+        "6": "Iuni",
+        "7": "Iuli",
+        "8": "Aukuso",
+        "9": "Setema",
+        "10": "Okitopa",
+        "11": "Novema",
+        "12": "Tesema"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Faamolemole ia avanoa le avanoa i lau masini faaleotele leo",
+        "record": "Faamaumauga",
+        "recording": "Faamaumauga",
+        "remains": "tumau",
+        "maximum": "maualuga",
+        "playing": "Taʻalo",
+        "recorded": "Faamaumau",
+        "clip": "faila",
+        "orupload": "Po o le Faʻatauina",
+        "usethis": "Faaaoga lenei",
+        "discard": "Lafoaʻi",
+        "encoding": "Encoding"
+    },
+    "alert": {
+        "title": "Alert"
+    },
+    "confirm": {
+        "title": "Faamautu",
+        "ok": "ioe",
+        "cancel": "leai"
+    },
+    "prompt": {
+        "title": "Totogi",
+        "ok": "Alu"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Faʻasalaga faitau le faila",
+        "cameraCommands": {
+            "prompt": "O le a se mea e te manaʻo e fai?",
+            "photo": "Ave se ata fou",
+            "library": "Filifili mai le faletusi"
+        },
+        "tooSmall": "Faamolemole filifili se ata lapoa.",
+        "cropping": {
+            "title": "Fetuunai le lapopoa ma le tulaga",
+            "touchscreen": "Faaaoga ou tamatamailima e sulu ma toso",
+            "notTouchscreen": "Faaaoga lau kiota &amp; uili e sosolo ma toso"
+        }
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "Hiditra",
+        "LogOut": "miala"
+    },
+    "activate": {
+        "SetAsPrimary": "Asio {{1}} ho loharano {{2}}",
+        "ChoosePassPhrase": "Safidio fehezandalàna <strong>handehanana<\/strong> miaraka. <br> Fehezanteny tokana ahitana teny vitsivitsy izay ho tsaroanao mora foana.",
+        "ChoosePassPhraseSeeSuggestions": "Mifidiana <strong>fehezanteny<\/strong> tsara mba hiarovana ny kaontinao. Jereo ireo soso-kevitra ho an&#39;ny hevitra sasany.",
+        "LogOutAndTryAgain": "Mivoaha ary andramo indray",
+        "IfYouFeel": "Raha mahatsapa ianao fa misy zavatra tsy mety, dia azonao atao",
+        "SetIdentifierButtonTitle": "manomboka"
+    },
+    "session": {
+        "GetStarted": "Manomboka"
+    },
+    "authorize": {
+        "GetStarted": "Manomboka",
+        "Authorize": "alalana",
+        "TermsLabel": "Namaky sy nanaiky aho <br> amin&#39;ny {{link}}",
+        "TermsTitle": "Terms"
+    },
+    "register": {
+        "TermsLabel": "Manaiky ny {{link}}",
+        "TermsTitle": "Terms"
+    },
+    "notifications": {
+        "title": "Fanomezan-dàlana",
+        "prompt": "Te-hizara fanamarihana ve ianao? Hahazo fanavaozana vaovao momba ny zavatra izay eritreretinao ianao.",
+        "yes": "Eny",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Tonga soa! Azafady avereno adiresy mailaka.",
+        "WelcomeVerifyEmail": "Tonga soa! Jereo ny adiresy mailakao.",
+        "ForgetPass": "Hey, hadinonao ny pasipaoronao?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Mifidiana fifandraisana"
+        },
+        "select": {
+            "title": "Fifantenana fifandraisana amin&#39;ny {999}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Mifidiana marika azafady.",
+        "inviteUser": "Asao ny mpampiasa"
+    },
+    "invalidLanguageSelected": "Teny tsy voafetra"
+}

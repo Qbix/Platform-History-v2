@@ -59,7 +59,9 @@
             "byText": "Metin",
             "byFacebook": "Facebook",
             "byTwitter": "heyecan",
-            "QRscanned": "Taradılar!"
+            "QRscanned": "Taradılar!",
+            "chooseAgainFromContacts": "Kişilerden Tekrar Seçin",
+            "inviteSelectedContacts": "Seçilen Kişileri Davet Et"
         },
         "email": {
             "subject": "Hey, şuna bir bak",
@@ -99,5 +101,12 @@
         "Title": "Başlık",
         "Subscribed": "Abone",
         "Participants": "Katılımcılar"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Mikrofonu Etkinleştir",
+            "cameraTitle": "Kamerayı Etkinleştir",
+            "cameraAndMicrophoneTitle": "Kamera ve Mikrofonu Etkinleştir"
+        }
     }
 }

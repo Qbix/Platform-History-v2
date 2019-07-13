@@ -37,5 +37,13 @@
         "selectLabel": "Si prega di selezionare l&#39;etichetta.",
         "inviteUser": "Invita utente"
     },
-    "invalidLanguageSelected": "Lingua selezionata non valida"
+    "invalidLanguageSelected": "Lingua selezionata non valida",
+    "contacts": {
+        "dialog": {
+            "title": "Scegli un contatto"
+        },
+        "select": {
+            "title": "Seleziona un contatto di {{displayName}}"
+        }
+    }
 }

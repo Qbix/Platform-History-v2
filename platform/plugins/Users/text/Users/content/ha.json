@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "shiga",
+        "LogOut": "shiga waje"
+    },
+    "activate": {
+        "SetAsPrimary": "Sa {{1}} a matsayin na farko {{2}}",
+        "ChoosePassPhrase": "Zaɓi <strong>kalmar fassarar<\/strong> don shiga tare da. <br> Fassara mai sauƙi wanda ya ƙunshi wasu kalmomi da za ku iya tunawa da sauƙi.",
+        "ChoosePassPhraseSeeSuggestions": "Zabi mai kyau <strong>izinin magana<\/strong> a kare asusunka. Duba shawarwari don wasu ra&#39;ayoyi.",
+        "LogOutAndTryAgain": "A fita kuma gwada sake",
+        "IfYouFeel": "Idan kun ji wani abu ya ɓace, za ku iya",
+        "SetIdentifierButtonTitle": "farawa"
+    },
+    "session": {
+        "GetStarted": "Fara Fara"
+    },
+    "authorize": {
+        "GetStarted": "Fara Fara",
+        "Authorize": "Izini",
+        "TermsLabel": "Na karanta kuma in yarda <br> zuwa {{link}}",
+        "TermsTitle": "Terms"
+    },
+    "register": {
+        "TermsLabel": "Na yarda da {{link}}",
+        "TermsTitle": "Terms"
+    },
+    "notifications": {
+        "title": "Izinin",
+        "prompt": "Shin kuna son taimaka wa sanarwarku? Za ku sami ƙarin ɗaukakawa na ainihi game da abubuwan da kuke damu.",
+        "yes": "Ee",
+        "no": "A&#39;a",
+        "WelcomePleaseVerifyEmail": "Barka da zuwa! Da fatan a tabbatar da adireshin imel naka.",
+        "WelcomeVerifyEmail": "Barka da zuwa! Tabbatar da adireshin imel naka.",
+        "ForgetPass": "Hey, baku manta da fasfonku ba?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Zaɓi lamba"
+        },
+        "select": {
+            "title": "Zaɓi lamba na {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Da fatan a zaɓi lakabin.",
+        "inviteUser": "Gayyatar mai amfani"
+    },
+    "invalidLanguageSelected": "Harshen mara inganci da aka zaɓa"
+}

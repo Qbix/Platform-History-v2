@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Barang baru"
+    },
+    "labels": {
+        "Streams\/invited": "Orang yang saya undang",
+        "Streams\/invitedMe": "Siapa yang mengundang saya"
+    },
+    "interests": {
+        "Filter": "Apa yang anda nikmati",
+        "CanAdd": "Jika Anda masih tidak dapat menemukan yang Anda cari, Anda dapat menambahkan minat baru di bawah:",
+        "TrySynonyms": "Tidak melihatnya? Coba beberapa sinonim.",
+        "AddUnderCategory": "Tambahkan dalam kategori ...",
+        "Other": "Lain",
+        "Unlisted": "Tidak terdaftar"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Pesan telah ditandai untuk ditinjau oleh admin. Ketuk lagi untuk membatalkan tanda centang.",
+        "noOneSaid": "Tidak ada yang mengatakan apa pun",
+        "closeChatButton": "Tutup obrolan",
+        "closeChatConfirmTitle": "Tutup obrolan ini?",
+        "closeChatConfirm": "Apakah Anda yakin ingin menutup obrolan ini?",
+        "closeChatConfirmYes": "iya nih",
+        "closeChatConfirmNo": "Tidak",
+        "earlierComments": "komentar sebelumnya"
+    },
+    "notifications": {
+        "*": "Pesan {{& message.fields.type}} ke {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} mengatakan:",
+        "Streams\/changed": "Perubahan {{stream.fields.title}}",
+        "Streams\/invite": "Anda diundang ke {{& stream.fields.title}}",
+        "Streams\/announcement": "Pengumuman dalam {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} mengubah akses aliran",
+        "Streams\/chat\/edit": "Pesan obrolan diedit",
+        "Streams\/chat\/remove": "Pesan obrolan dihapus",
+        "Streams\/closed": "{{stream.fields.title}} telah ditutup",
+        "Streams\/task\/progress": "Kemajuan dibuat pada {{stream.fields.title}}",
+        "Streams\/task\/complete": "Tugas selesai: {{stream.fields.title}}",
+        "Streams\/task\/error": "Kesalahan saat: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Pesan Masuk"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} mengundang Anda ke {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Pilih dari Kontak Anda",
+            "chooseAgainFromContacts": "Pilih Lagi dari Kontak",
+            "inviteSelectedContacts": "Undang Kontak yang Dipilih",
+            "selectFromContacts": "Pilih Dari Kontak",
+            "photo": "Mengambil foto",
+            "photoInstruction": "Jika orang yang memindai kode QR Anda ada di depan Anda, ambil fotonya",
+            "to": "Kepada: {{Stream Title}}",
+            "go": "Pergi",
+            "title": "Undang",
+            "placeholder": "Nomor ponsel atau alamat email",
+            "orInvite": "Atau undang orang dengan menggunakan:",
+            "QR": "{{ClickOrTap}} untuk menghasilkan kode QR",
+            "QRtitle": "Pindai kode QR ini",
+            "QRscanned": "Mereka memindainya!",
+            "byEmail": "E-mail",
+            "byText": "Teks",
+            "byFacebook": "Facebook",
+            "byTwitter": "Kericau"
+        },
+        "email": {
+            "subject": "Hei, lihat ini",
+            "PleaseVisitLink": "Silakan kunjungi tautan berikut:",
+            "InvitingYou": "Saya mengundang Anda ke {{title}}",
+            "HasInvitedYou": "{{displayName}} telah mengundang Anda ke {{title}}"
+        },
+        "sms": {
+            "content": "Anda telah diundang ke {{title}}. Silakan ketuk {{url}}"
+        },
+        "notice": {
+            "text": "Anda telah diundang. {{ClickOrTap}} di sini untuk menerima dan bergabung."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} mengeposkan pesan <em>{{message.fields.type}}<\/em> ke {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} dalam {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Undangan dikirim dari nomor kami, yang belum dikenali teman Anda. Tindak lanjuti dengan teks cepat untuk memberi tahu mereka bahwa undangan datang dari Anda, minta mereka mengklik tautan.",
+            "confirm": "Undangan dikirim dari nomor kami, yang belum dikenali teman Anda. Apakah Anda ingin menindaklanjuti dengan teks singkat untuk memberi tahu mereka bahwa undangan datang dari Anda, meminta mereka untuk mengklik tautan.",
+            "check": "Hai, saya baru saja mengirimi Anda undangan ke aplikasi {{app}}. Silakan periksa sms Anda dan klik tautannya!"
+        },
+        "email": {
+            "alert": "Undangan dikirim dari domain kami, yang belum dikenali teman Anda. Tindak lanjuti dengan teks cepat untuk memberi tahu mereka bahwa undangan datang dari Anda, minta mereka mengklik tautan.",
+            "confirm": "Undangan dikirim dari domain kami, yang belum dikenali teman Anda. Apakah Anda ingin menindaklanjuti dengan teks singkat untuk memberi tahu mereka bahwa undangan datang dari Anda, meminta mereka untuk mengklik tautan.",
+            "subject": "Apakah Anda mendapat undangan?",
+            "body": "Hai, saya baru saja mengirimi Anda undangan ke aplikasi {{app}}. Silakan periksa email Anda dan klik tautan di sana!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Aktifkan Mikrofon",
+            "cameraTitle": "Aktifkan Kamera",
+            "cameraAndMicrophoneTitle": "Aktifkan Kamera dan Mikrofon"
+        }
+    }
+}

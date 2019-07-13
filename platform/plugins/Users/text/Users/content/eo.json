@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "Ensaluti",
+        "LogOut": "elsaluti"
+    },
+    "activate": {
+        "SetAsPrimary": "Ŝanĝu {{1}} kiel mian primaran {{2}}",
+        "ChoosePassPhrase": "Elektu <strong>pasvorton<\/strong> kun kiu ensaluti. <br> Simpla frazo konsistanta el kelkaj vortoj, kiujn vi facile memoros.",
+        "ChoosePassPhraseSeeSuggestions": "Elektu bonan <strong>pasvorton<\/strong> por protekti vian konton. Vidu la sugestojn por iuj ideoj.",
+        "LogOutAndTryAgain": "Eliru kaj Provu Denove",
+        "IfYouFeel": "Se vi sentas, ke io misas, vi povas",
+        "SetIdentifierButtonTitle": "rekomencu"
+    },
+    "session": {
+        "GetStarted": "Komenciĝi"
+    },
+    "authorize": {
+        "GetStarted": "Komenciĝi",
+        "Authorize": "Permesi",
+        "TermsLabel": "Mi legis kaj konsentas <br> al la {{link}}",
+        "TermsTitle": "Kondiĉoj"
+    },
+    "register": {
+        "TermsLabel": "Mi akceptas la {{link}}",
+        "TermsTitle": "Kondiĉoj"
+    },
+    "notifications": {
+        "title": "Permeso",
+        "prompt": "Ĉu vi volas ebligi sciigojn? Vi ricevos aktualajn ĝisdatigojn pri aferoj, pri kiuj vi zorgas.",
+        "yes": "Jes",
+        "no": "Ne",
+        "WelcomePleaseVerifyEmail": "Bonvenon! Bonvolu kontroli vian retpoŝtan adreson.",
+        "WelcomeVerifyEmail": "Bonvenon! Konfirmu vian retpoŝtan adreson.",
+        "ForgetPass": "Hej, ĉu vi forgesis vian pasfrazon?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Elektu kontakton"
+        },
+        "select": {
+            "title": "Elektu kontakton de {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Bonvolu elekti etikedon.",
+        "inviteUser": "Invitu uzanton"
+    },
+    "invalidLanguageSelected": "Nevalida lingvo elektita"
+}

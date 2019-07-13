@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Nova ero"
+    },
+    "labels": {
+        "Streams\/invited": "Homoj, kiujn mi invitis",
+        "Streams\/invitedMe": "Kiu invitis min"
+    },
+    "interests": {
+        "Filter": "Kion vi ĝuas?",
+        "CanAdd": "Se vi ankoraŭ ne povas trovi kion vi serĉas, vi povas aldoni novan intereson sube:",
+        "TrySynonyms": "Ĉu vi ne vidas? Provu iujn sinonimojn.",
+        "AddUnderCategory": "Aldoni sub kategorio ...",
+        "Other": "Alia",
+        "Unlisted": "Senlistigita"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Mesaĝo estas markita kiel administra revizio. Premu denove por malfermi.",
+        "noOneSaid": "Neniu diris ion ajn",
+        "closeChatButton": "Fermu babiladon",
+        "closeChatConfirmTitle": "Fermu ĉi tiun konversacion?",
+        "closeChatConfirm": "Ĉu vi certas, ke vi volas fermi ĉi tiun konversacion?",
+        "closeChatConfirmYes": "Jes",
+        "closeChatConfirmNo": "Ne",
+        "earlierComments": "pli fruaj komentoj"
+    },
+    "notifications": {
+        "*": "Mesaĝo {{& message.fields.type}} al {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} diris:",
+        "Streams\/changed": "Ŝanĝoj en {{stream.fields.title}}",
+        "Streams\/invite": "Vi estis invitita al {{& stream.fields.title}}",
+        "Streams\/announcement": "Anonco en {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} ŝanĝis fluan aliron",
+        "Streams\/chat\/edit": "Redaktis mesaĝan mesaĝon",
+        "Streams\/chat\/remove": "Forbarita mesaĝo",
+        "Streams\/closed": "{{stream.fields.title}} estis fermita",
+        "Streams\/task\/progress": "Progresoj faritaj en {{stream.fields.title}}",
+        "Streams\/task\/complete": "Tasko kompletigita: {{stream.fields.title}}",
+        "Streams\/task\/error": "Eraro dum: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Alvenanta mesaĝo"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} invitis vin al {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Elektu el viaj Kontaktoj",
+            "chooseAgainFromContacts": "Elektu denove Kontaktojn",
+            "inviteSelectedContacts": "Inviti Selektitajn Kontaktojn",
+            "selectFromContacts": "Elektu El Kontaktoj",
+            "photo": "Prenu foton",
+            "photoInstruction": "Se la persono kiu skanis vian QR-kodon estas antaŭ vi, prenu foton pri ili",
+            "to": "Al: {{Stream Title}}",
+            "go": "Iru",
+            "title": "Inviti",
+            "placeholder": "Poŝtelefona numero aŭ retpoŝta adreso",
+            "orInvite": "Aŭ invitu homojn per uzo:",
+            "QR": "{{ClickOrTap}} generi QR-kodon",
+            "QRtitle": "Skanu ĉi tiun QR-kodon",
+            "QRscanned": "Ili skanis ĝin!",
+            "byEmail": "Retpoŝto",
+            "byText": "Teksto",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hej, kontrolu ĉi tion",
+            "PleaseVisitLink": "Bonvolu viziti la jenan ligon:",
+            "InvitingYou": "Mi invitas vin al {999}}",
+            "HasInvitedYou": "{{displayName}} invitis vin al {{title}}"
+        },
+        "sms": {
+            "content": "Vi estis invitita al {999}}. Bonvolu frapeti {{url}}"
+        },
+        "notice": {
+            "text": "Vi estis invitita. {{ClickOrTap}} ĉi tie por akcepti kaj aliĝi."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} afiŝis <em>{{message.fields.type}}<\/em> mesaĝon al {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} en {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invitoj estas senditaj de nia numero, kiun viaj amikoj ankoraŭ ne rekonas. Sekvu rapidan tekston por sciigi al ili, ke la invito venis de vi, petante ilin alklaki la ligon.",
+            "confirm": "Invitoj estas senditaj de nia numero, kiun viaj amikoj ankoraŭ ne rekonas. Ĉu vi ŝatus sekvi per rapida teksto por sciigi al ili, ke la invito venis de vi, petante ilin alklaki la ligilon.",
+            "check": "Hej, mi ĵus sendis al vi inviton al la {{app}} programo. Bonvolu kontroli viajn sms kaj klaki la ligon!"
+        },
+        "email": {
+            "alert": "Invitoj estas senditaj de nia domajno, kiun viaj amikoj ankoraŭ ne rekonas. Sekvu rapidan tekston por sciigi al ili, ke la invito venis de vi, petante ilin alklaki la ligon.",
+            "confirm": "Invitoj estas senditaj de nia domajno, kiun viaj amikoj ankoraŭ ne rekonas. Ĉu vi ŝatus sekvi per rapida teksto por sciigi al ili, ke la invito venis de vi, petante ilin alklaki la ligilon.",
+            "subject": "Ĉu vi ricevis inviton?",
+            "body": "Hej, mi ĵus sendis al vi inviton al la {{app}} programo. Bonvolu kontroli vian retpoŝton kaj alklaku la ligon tie!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Ebligu Mikrofonon",
+            "cameraTitle": "Ebligu Fotilon",
+            "cameraAndMicrophoneTitle": "Ebligi Fotilon kaj Mikrofonon"
+        }
+    }
+}

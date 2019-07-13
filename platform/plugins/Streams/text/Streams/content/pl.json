@@ -59,7 +59,9 @@
             "byText": "Tekst",
             "byFacebook": "Facebook",
             "byTwitter": "Świergot",
-            "QRscanned": "Zeskanowali to!"
+            "QRscanned": "Zeskanowali to!",
+            "chooseAgainFromContacts": "Wybierz ponownie z kontaktów",
+            "inviteSelectedContacts": "Zaproś wybrane kontakty"
         },
         "email": {
             "subject": "Hej, sprawdź to",
@@ -99,5 +101,12 @@
         "Title": "Tytuł",
         "Subscribed": "Subskrybowane",
         "Participants": "Uczestnicy"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Włącz mikrofon",
+            "cameraTitle": "Włącz kamerę",
+            "cameraAndMicrophoneTitle": "Włącz kamerę i mikrofon"
+        }
     }
 }

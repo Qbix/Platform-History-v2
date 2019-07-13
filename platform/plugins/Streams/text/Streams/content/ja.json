@@ -59,7 +59,9 @@
             "byText": "テキスト",
             "byFacebook": "フェイスブック",
             "byTwitter": "Twitter",
-            "QRscanned": "彼らはそれをスキャンしました！"
+            "QRscanned": "彼らはそれをスキャンしました！",
+            "chooseAgainFromContacts": "連絡先からもう一度選択",
+            "inviteSelectedContacts": "選択した連絡先を招待"
         },
         "email": {
             "subject": "こんにちは、これをチェックしてください",
@@ -99,5 +101,12 @@
         "Title": "タイトル",
         "Subscribed": "購読しています",
         "Participants": "参加者"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "マイクを有効にする",
+            "cameraTitle": "カメラを有効にする",
+            "cameraAndMicrophoneTitle": "カメラとマイクを有効にする"
+        }
     }
 }

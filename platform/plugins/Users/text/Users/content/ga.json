@@ -37,5 +37,13 @@
         "selectLabel": "Roghnaigh lipéad le do thoil.",
         "inviteUser": "Tabhair cuireadh don Úsáideoir"
     },
-    "invalidLanguageSelected": "Teanga neamhbhailí roghnaithe"
+    "invalidLanguageSelected": "Teanga neamhbhailí roghnaithe",
+    "contacts": {
+        "dialog": {
+            "title": "Roghnaigh teagmháil"
+        },
+        "select": {
+            "title": "Roghnaigh teagmháil le {{displayName}}"
+        }
+    }
 }

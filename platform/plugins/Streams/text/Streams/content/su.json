@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Item anyar"
+    },
+    "labels": {
+        "Streams\/invited": "Jalma Kuring diondang",
+        "Streams\/invitedMe": "Anu diondang kuring"
+    },
+    "interests": {
+        "Filter": "Naon anu anjeun resep?",
+        "CanAdd": "Upami anjeun masih henteu tiasa mendakan naon anu anjeun badé, anjeun tiasa nambihan dipikaresep di handap:",
+        "TrySynonyms": "Entong nempo? Coba sababaraha sinonim.",
+        "AddUnderCategory": "Tambahkeun handapeun kategori ...",
+        "Other": "Lain",
+        "Unlisted": "Teu daptar"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Suratna geus dikandangan pikeun review admin. Ketok deui pikeun unflag.",
+        "noOneSaid": "Salah No nyarios nanaon",
+        "closeChatButton": "Tutup obrolan",
+        "closeChatConfirmTitle": "Tutup obrolan ieu?",
+        "closeChatConfirm": "Naha anjeun yakin rék nyarios ngobrol ieu?",
+        "closeChatConfirmYes": "Enya",
+        "closeChatConfirmNo": "Entong",
+        "earlierComments": "koméntar saméméhna"
+    },
+    "notifications": {
+        "*": "Pesen {{& message.fields.type}} kana {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ngadawuh:",
+        "Streams\/changed": "Parobahan {{stream.fields.title}}",
+        "Streams\/invite": "Anjeun diondang kana {{& stream.fields.title}}",
+        "Streams\/announcement": "Pengumuman di {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} robah aksés stream",
+        "Streams\/chat\/edit": "Talatah obrolan diédit",
+        "Streams\/chat\/remove": "Pesen obrolan dihapus",
+        "Streams\/closed": "{{stream.fields.title}} parantos ditutup",
+        "Streams\/task\/progress": "Kamajuan dina {{stream.fields.title}}",
+        "Streams\/task\/complete": "Tugas réngsé: {{stream.fields.title}}",
+        "Streams\/task\/error": "Kasalahan dina mangsa: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Pesen asup"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} ngajak anjeun ka {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Milih tina Kontak anjeun",
+            "chooseAgainFromContacts": "Milih deui tina Kontak",
+            "inviteSelectedContacts": "Diondang Kontak Dipilih",
+            "selectFromContacts": "Pilih Tina Kontak",
+            "photo": "Candak poto",
+            "photoInstruction": "Upami jalma anu nyeken kodeu QR anjeun dipayuneun anjeun, candak poto éta",
+            "to": "Ka: {{Stream Title}}",
+            "go": "Buka",
+            "title": "Ngajak",
+            "placeholder": "Nomer mobile atanapi alamat surélék",
+            "orInvite": "Atawa diondang jalma nganggo nganggo:",
+            "QR": "{{ClickOrTap}} keur ngahasilkeun kode QR",
+            "QRtitle": "Nyeken kodeu QR ieu",
+            "QRscanned": "Aranjeunna nyeken éta!",
+            "byEmail": "Surélék",
+            "byText": "Téks",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Héy, parios ieu kaluarna",
+            "PleaseVisitLink": "Punten buka tumbu di handap ieu:",
+            "InvitingYou": "Kuring ngajak anjeun ka {{title}}",
+            "HasInvitedYou": "{{displayName}} ngulem anjeun ka {{title}}"
+        },
+        "sms": {
+            "content": "Anjeun geus diondang kana {{title}}. Punten toél {{url}}"
+        },
+        "notice": {
+            "text": "Anjeun geus diondang. {{ClickOrTap}} di dieu pikeun nampa sareng ngiringan."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} dipasang ka <em>{{message.fields.type}}<\/em> pesen ka {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} di {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Ulem dikirim ti jumlah kami, anu parantosan sanés teu ngakuan. Turutan sareng téks gancang kanggo ngantepkeun abdi ondangan sumping ti anjeun, nanyakeun ka klik link.",
+            "confirm": "Ulem dikirim ti jumlah kami, anu parantosan sanés teu ngakuan. Rék nuturkeun sareng téks gancang anu ngantepkeun maranéhna terang ku ondakan sumping ti anjeun, nanyakeun ka klik link.",
+            "check": "Héy, abdi ngan ngirimkeun anjeun diondang kana aplikasi {{app}}. Punten parios sms anjeun teras klik link tumbu!"
+        },
+        "email": {
+            "alert": "Uleman dikirim ti domain kami, anu réréncangan anjeun henteu acan terang. Turutan sareng téks gancang kanggo ngantepkeun abdi ondangan sumping ti anjeun, nanyakeun ka klik link.",
+            "confirm": "Uleman dikirim ti domain kami, anu réréncangan anjeun henteu acan terang. Rék nuturkeun sareng téks gancang anu ngantepkeun maranéhna terang ku ondakan sumping ti anjeun, nanyakeun ka klik link.",
+            "subject": "Naha anjeun narajang?",
+            "body": "Héy, abdi ngan ngirimkeun anjeun diondang kana aplikasi {{app}}. Punten parios email anjeun sareng klik link di dinya!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Aktipkeun Mikropon",
+            "cameraTitle": "Aktipkeun Kamera",
+            "cameraAndMicrophoneTitle": "Aktipkeun Kamera sareng Mikropon"
+        }
+    }
+}

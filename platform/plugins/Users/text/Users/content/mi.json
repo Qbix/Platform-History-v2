@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "takiuru",
+        "LogOut": "takiuru"
+    },
+    "activate": {
+        "SetAsPrimary": "Tautuhi {{1}} hei mea tuatahi [{1000}}",
+        "ChoosePassPhrase": "Kōwhirihia tētahi <strong>kupu whakawhiti<\/strong> ki te takiuru. <br> Ko te kupu o te kupu poto he kupu torutoru e mahara ana koe.",
+        "ChoosePassPhraseSeeSuggestions": "Kōwhiria he <strong>kīanga haere<\/strong> pai ki te tiaki i tō pūkete. Tirohia nga whakaaro mo etahi whakaaro.",
+        "LogOutAndTryAgain": "Putahia me te Ngana ano",
+        "IfYouFeel": "Mena ka mohio koe kaore he mea i taea, ka taea e koe",
+        "SetIdentifierButtonTitle": "tīmata"
+    },
+    "session": {
+        "GetStarted": "Tīmata"
+    },
+    "authorize": {
+        "GetStarted": "Tīmata",
+        "Authorize": "Whakaaetia",
+        "TermsLabel": "Kua pānui ahau, kua whakaae hoki <br> ki te {{link}}",
+        "TermsTitle": "Nga Ture"
+    },
+    "register": {
+        "TermsLabel": "Ka whakaaetia e ahau te {{link}}",
+        "TermsTitle": "Nga Ture"
+    },
+    "notifications": {
+        "title": "Whakaaetanga",
+        "prompt": "Kei te hiahia koe ki te tuku i nga whakamohiotanga? Ka whiwhi koe i nga whakahoutanga tino-nui mo nga mea e whakaarohia ana e koe.",
+        "yes": "Ae",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Nau mai! Manatokohia tō wāhitau īmēra.",
+        "WelcomeVerifyEmail": "Nau mai! Manatokohia tō wāhitau īmēra.",
+        "ForgetPass": "Hey, kua wareware koe ki to kupuhipa?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Kōwhiria te whakapā"
+        },
+        "select": {
+            "title": "Tīpakohia te whakapā o {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Tohua koa te tapanga.",
+        "inviteUser": "Whakauru Kaiwhakamahi"
+    },
+    "invalidLanguageSelected": "Reo muhu i tīpakohia"
+}

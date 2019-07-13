@@ -3166,9 +3166,17 @@ Q.getter = function _Q_getter(original, options) {
 			function _result(subject, params) {
 				gw.onResult.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = cached;
-				callback.apply(subject, params);
+				var err = null;
+				try {
+					callback.apply(subject, params);
+				} catch (e) {
+					err = e;
+				}
 				gw.onExecuted.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = false;
+				if (err) {
+					throw err;
+				}
 			}
 		}
 
@@ -7703,9 +7711,12 @@ Q.find = function _Q_find(elem, filter, callbackBefore, callbackAfter, options, 
 	|| (typeof HTMLCollection !== 'undefined' && (elem instanceof root.HTMLCollection))
 	|| (root.jQuery && (elem instanceof jQuery))) {
 
-		Q.each(elem, function _Q_find_array(i) {
+		Q.each(elem, function _Q_find_array(i, item) {
+			if (!item) {
+				return;
+			}
 			if (false === Q.find(
-				this, filter, callbackBefore, callbackAfter, 
+				item, filter, callbackBefore, callbackAfter, 
 				options, shared, parent, i
 			)) {
 				return false;

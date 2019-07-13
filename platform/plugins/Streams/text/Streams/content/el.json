@@ -59,7 +59,9 @@
             "byText": "Κείμενο",
             "byFacebook": "Facebook",
             "byTwitter": "Κελάδημα",
-            "QRscanned": "Το έλεγξαν!"
+            "QRscanned": "Το έλεγξαν!",
+            "chooseAgainFromContacts": "Επιλέξτε ξανά από τις Επαφές",
+            "inviteSelectedContacts": "Πρόσκληση επιλεγμένων επαφών"
         },
         "email": {
             "subject": "Ελέγξτε αυτό",
@@ -99,5 +101,12 @@
         "Title": "Τίτλος",
         "Subscribed": "Εγγραφή",
         "Participants": "Συμμετέχοντες"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Ενεργοποίηση μικροφώνου",
+            "cameraTitle": "Ενεργοποιήστε τη φωτογραφική μηχανή",
+            "cameraAndMicrophoneTitle": "Ενεργοποιήστε τη φωτογραφική μηχανή και το μικρόφωνο"
+        }
     }
 }

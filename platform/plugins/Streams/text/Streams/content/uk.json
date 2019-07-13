@@ -59,7 +59,9 @@
             "byText": "Текст",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Вони сканували його!"
+            "QRscanned": "Вони сканували його!",
+            "chooseAgainFromContacts": "Виберіть &quot;Знову&quot; у списку &quot;Контакти&quot;",
+            "inviteSelectedContacts": "Запросити вибрані контакти"
         },
         "email": {
             "subject": "Ей, перевірте це",
@@ -99,5 +101,12 @@
         "Title": "Назва",
         "Subscribed": "Передплачено",
         "Participants": "Учасники"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Увімкнути мікрофон",
+            "cameraTitle": "Увімкнути камеру",
+            "cameraAndMicrophoneTitle": "Увімкнути камеру та мікрофон"
+        }
     }
 }

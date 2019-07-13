@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "ਨਵਾਂ ਆਈਟਮ"
+    },
+    "labels": {
+        "Streams\/invited": "ਜਿਨ੍ਹਾਂ ਲੋਕਾਂ ਨੂੰ ਮੈਂ ਸੱਦੇ ਦਿੱਤਾ",
+        "Streams\/invitedMe": "ਕੌਣ ਮੈਨੂੰ ਸੱਦਾ ਦਿੱਤਾ"
+    },
+    "interests": {
+        "Filter": "ਤੁਸੀਂ ਕੀ ਮਾਣਦੇ ਹੋ?",
+        "CanAdd": "ਜੇ ਤੁਸੀਂ ਅਜੇ ਵੀ ਉਹ ਚੀਜ਼ਾਂ ਨਹੀਂ ਲੱਭ ਸਕਦੇ ਜੋ ਤੁਸੀਂ ਲੱਭ ਰਹੇ ਹੋ, ਤਾਂ ਤੁਸੀਂ ਹੇਠਾਂ ਇੱਕ ਨਵੀਂ ਵਿਆਜ ਜੋੜ ਸਕਦੇ ਹੋ:",
+        "TrySynonyms": "ਇਸ ਨੂੰ ਨਾ ਵੇਖੋ? ਕੁਝ ਸੰਕੇਤ",
+        "AddUnderCategory": "ਸ਼੍ਰੇਣੀ ਵਿੱਚ ਸ਼ਾਮਲ ਕਰੋ ...",
+        "Other": "ਹੋਰ",
+        "Unlisted": "ਸੂਚੀਬੱਧ ਰਹਿਤ"
+    },
+    "chat": {
+        "flaggedForAdminReview": "ਸੁਨੇਹਾ ਐਡਮਿਨ ਸਮੀਖਿਆ ਲਈ ਫਲੈਗ ਕੀਤਾ ਗਿਆ ਹੈ. ਫਲੇਗ ਕਰਨ ਲਈ ਦੁਬਾਰਾ ਟੈਪ ਕਰੋ",
+        "noOneSaid": "ਕਿਸੇ ਨੇ ਵੀ ਕੁਝ ਨਹੀਂ ਕਿਹਾ",
+        "closeChatButton": "ਚੈਟ ਬੰਦ ਕਰੋ",
+        "closeChatConfirmTitle": "ਇਸ ਚੈਟ ਨੂੰ ਬੰਦ ਕਰਨਾ ਹੈ?",
+        "closeChatConfirm": "ਕੀ ਤੁਸੀਂ ਨਿਸ਼ਚਤ ਰੂਪ ਤੋਂ ਇਹ ਚੈਟ ਬੰਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?",
+        "closeChatConfirmYes": "ਹਾਂ",
+        "closeChatConfirmNo": "ਨਹੀਂ",
+        "earlierComments": "ਪਹਿਲਾਂ ਦੀਆਂ ਟਿੱਪਣੀਆਂ"
+    },
+    "notifications": {
+        "*": "ਸੁਨੇਹਾ {{& message.fields.type}} ਤੋਂ {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ਨੇ ਕਿਹਾ:",
+        "Streams\/changed": "{{stream.fields.title}} ਵਿਚ ਬਦਲਾਅ",
+        "Streams\/invite": "ਤੁਹਾਨੂੰ {{& stream.fields.title}} ਤੇ ਸੱਦਿਆ ਗਿਆ ਸੀ",
+        "Streams\/announcement": "{{& streams.fields.title}} ਵਿਚ ਘੋਸ਼ਣਾ",
+        "Streams\/access": "{{&call 'avatar.displayName'}} ਬਦਲੀ ਹੋਈ ਸਟ੍ਰੀਮ ਐਕਸੈਸ",
+        "Streams\/chat\/edit": "ਗੱਲਬਾਤ ਸੰਦੇਸ਼ ਸੋਧਿਆ",
+        "Streams\/chat\/remove": "ਚੈਟ ਸੁਨੇਹਾ ਹਟਾਇਆ",
+        "Streams\/closed": "{{stream.fields.title}} ਬੰਦ ਕਰ ਦਿੱਤਾ ਗਿਆ ਹੈ",
+        "Streams\/task\/progress": "{{stream.fields.title}} ਤੇ ਤਰੱਕੀ ਕੀਤੀ ਗਈ",
+        "Streams\/task\/complete": "ਟਾਸਕ ਪੂਰਾ ਹੋਇਆ: {{stream.fields.title}}",
+        "Streams\/task\/error": "ਗਲਤੀ: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: ਇਨਕਮਿੰਗ ਸੁਨੇਹਾ"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} ਨੇ ਤੁਹਾਨੂੰ {{inviteUrl}} ਲਈ ਸੱਦਿਆ",
+        "dialog": {
+            "chooseFromContacts": "ਆਪਣੇ ਸੰਪਰਕਾਂ ਵਿੱਚੋਂ ਚੁਣੋ",
+            "chooseAgainFromContacts": "ਸੰਪਰਕ ਤੋਂ ਦੁਬਾਰਾ ਚੁਣੋ",
+            "inviteSelectedContacts": "ਚੁਣੇ ਗਏ ਸੰਪਰਕਾਂ ਨੂੰ ਸੱਦੋ",
+            "selectFromContacts": "ਸੰਪਰਕ ਤੋਂ ਚੁਣੋ",
+            "photo": "ਇੱਕ ਫੋਟੋ ਲਓ",
+            "photoInstruction": "ਜੇ ਉਹ ਵਿਅਕਤੀ ਜੋ ਤੁਹਾਡੇ QR ਕੋਡ ਨੂੰ ਸਕੈਨ ਕਰਦਾ ਹੈ ਤੁਹਾਡੇ ਸਾਹਮਣੇ ਹੈ, ਉਹਨਾਂ ਦੀ ਇੱਕ ਫੋਟੋ ਲਓ",
+            "to": "ਪ੍ਰਤੀ: {{Stream Title}}",
+            "go": "ਜਾਣਾ",
+            "title": "ਸੱਦਾ",
+            "placeholder": "ਮੋਬਾਈਲ ਨੰਬਰ ਜਾਂ ਈਮੇਲ ਪਤਾ",
+            "orInvite": "ਜਾਂ ਇਹ ਵਰਤ ਕੇ ਲੋਕਾਂ ਨੂੰ ਸੱਦਾ ਦਿਓ:",
+            "QR": "QR ਕੋਡ ਤਿਆਰ ਕਰਨ ਲਈ {{ClickOrTap}}",
+            "QRtitle": "ਇਸ QR ਕੋਡ ਨੂੰ ਸਕੈਨ ਕਰੋ",
+            "QRscanned": "ਉਹ ਇਸ ਨੂੰ ਸਕੈਨ ਕਰ ਰਹੇ ਸਨ!",
+            "byEmail": "ਈ - ਮੇਲ",
+            "byText": "ਟੈਕਸਟ",
+            "byFacebook": "ਫੇਸਬੁੱਕ",
+            "byTwitter": "ਟਵਿੱਟਰ"
+        },
+        "email": {
+            "subject": "Hey, ਇਸ ਦੀ ਜਾਂਚ ਕਰੋ",
+            "PleaseVisitLink": "ਕਿਰਪਾ ਕਰਕੇ ਹੇਠਾਂ ਦਿੱਤੇ ਲਿੰਕ &#39;ਤੇ ਜਾਓ:",
+            "InvitingYou": "ਮੈਂ ਤੁਹਾਨੂੰ ਸੱਦਾ ਦੇ ਰਿਹਾ ਹਾਂ {{title}}",
+            "HasInvitedYou": "{{displayName}} ਨੇ ਤੁਹਾਨੂੰ {{title}} ਲਈ ਸੱਦਾ ਦਿੱਤਾ ਹੈ"
+        },
+        "sms": {
+            "content": "ਤੁਹਾਨੂੰ {{title}} ਤੇ ਬੁਲਾਇਆ ਗਿਆ ਹੈ. ਕਿਰਪਾ ਕਰਕੇ {{url}} ਤੇ ਟੈਪ ਕਰੋ"
+        },
+        "notice": {
+            "text": "ਤੁਹਾਨੂੰ ਸੱਦਾ ਦਿੱਤਾ ਗਿਆ ਹੈ {{ClickOrTap}} ਇੱਥੇ ਪ੍ਰਵਾਨ ਕਰਨ ਅਤੇ ਜੁਆਇਨ ਕਰਨ ਲਈ."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} ਨੇ <em>{{message.fields.type}}<\/em> ਸੁਨੇਹੇ ਨੂੰ {{stream.fields.title}} ਤੇ ਭੇਜਿਆ ਹੈ."
+        },
+        "text": {
+            "body": "{{& url}} ਵਿੱਚ {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "ਸੱਦਾ ਸਾਡੇ ਨੰਬਰ ਤੋਂ ਭੇਜਿਆ ਜਾਂਦਾ ਹੈ, ਜੋ ਤੁਹਾਡੇ ਦੋਸਤਾਂ ਨੂੰ ਹਾਲੇ ਨਹੀਂ ਪਛਾਣੇ ਜਾਂਦੇ. ਉਹਨਾਂ ਨੂੰ ਇਹ ਦੱਸਣ ਲਈ ਇੱਕ ਤੁਰੰਤ ਟੈਕਸਟ ਨਾਲ ਅੱਗੇ ਵਧੋ ਕਿ ਤੁਹਾਡੇ ਦੁਆਰਾ ਆਏ ਸੱਦੇ ਨੂੰ, ਲਿੰਕ ਤੇ ਕਲਿਕ ਕਰਨ ਲਈ ਉਹਨਾਂ ਨੂੰ ਪੁੱਛੋ",
+            "confirm": "ਸੱਦਾ ਸਾਡੇ ਨੰਬਰ ਤੋਂ ਭੇਜਿਆ ਜਾਂਦਾ ਹੈ, ਜੋ ਤੁਹਾਡੇ ਦੋਸਤਾਂ ਨੂੰ ਹਾਲੇ ਨਹੀਂ ਪਛਾਣੇ ਜਾਂਦੇ. ਕੀ ਤੁਸੀਂ ਉਹਨਾਂ ਨੂੰ ਇਹ ਦੱਸਣ ਲਈ ਤੁਰੰਤ ਟੈਕਸਟ ਨਾਲ ਫਾਲੋ-ਅਪ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ ਕਿ ਤੁਹਾਡੇ ਵੱਲੋਂ ਆਏ ਸੱਦੇ ਨੂੰ ਲਿੰਕ ਤੇ ਕਲਿਕ ਕਰਨਾ",
+            "check": "ਹੇ, ਮੈਂ ਤੁਹਾਨੂੰ {{app}} ਐਪ ਲਈ ਇੱਕ ਸੱਦਾ ਭੇਜਿਆ. ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ ਐਸਐਮਐਸ ਦੀ ਜਾਂਚ ਕਰੋ ਅਤੇ ਲਿੰਕ ਤੇ ਕਲਿੱਕ ਕਰੋ!"
+        },
+        "email": {
+            "alert": "ਸਾਡੇ ਡੋਮੇਨ ਵੱਲੋਂ ਸੱਦਾ ਭੇਜੇ ਜਾਂਦੇ ਹਨ, ਜੋ ਤੁਹਾਡੇ ਦੋਸਤਾਂ ਨੂੰ ਹਾਲੇ ਨਹੀਂ ਪਛਾਣੇ ਜਾਂਦੇ. ਉਹਨਾਂ ਨੂੰ ਇਹ ਦੱਸਣ ਲਈ ਇੱਕ ਤੁਰੰਤ ਟੈਕਸਟ ਨਾਲ ਅੱਗੇ ਵਧੋ ਕਿ ਤੁਹਾਡੇ ਦੁਆਰਾ ਆਏ ਸੱਦੇ ਨੂੰ, ਲਿੰਕ ਤੇ ਕਲਿਕ ਕਰਨ ਲਈ ਉਹਨਾਂ ਨੂੰ ਪੁੱਛੋ",
+            "confirm": "ਸਾਡੇ ਡੋਮੇਨ ਵੱਲੋਂ ਸੱਦਾ ਭੇਜੇ ਜਾਂਦੇ ਹਨ, ਜੋ ਤੁਹਾਡੇ ਦੋਸਤਾਂ ਨੂੰ ਹਾਲੇ ਨਹੀਂ ਪਛਾਣੇ ਜਾਂਦੇ. ਕੀ ਤੁਸੀਂ ਉਹਨਾਂ ਨੂੰ ਇਹ ਦੱਸਣ ਲਈ ਤੁਰੰਤ ਟੈਕਸਟ ਨਾਲ ਫਾਲੋ-ਅਪ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ ਕਿ ਤੁਹਾਡੇ ਵੱਲੋਂ ਆਏ ਸੱਦੇ ਨੂੰ ਲਿੰਕ ਤੇ ਕਲਿਕ ਕਰਨਾ",
+            "subject": "ਕੀ ਤੁਹਾਨੂੰ ਸੱਦਾ ਮਿਲਿਆ ਸੀ?",
+            "body": "ਹੇ, ਮੈਂ ਤੁਹਾਨੂੰ {{app}} ਐਪ ਲਈ ਇੱਕ ਸੱਦਾ ਭੇਜਿਆ. ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੀ ਈਮੇਲ ਦੀ ਜਾਂਚ ਕਰੋ ਅਤੇ ਉਸ ਲਿੰਕ ਤੇ ਕਲਿੱਕ ਕਰੋ!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "ਮਾਈਕ੍ਰੋਫੋਨ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ",
+            "cameraTitle": "ਕੈਮਰਾ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ",
+            "cameraAndMicrophoneTitle": "ਕੈਮਰਾ ਅਤੇ ਮਾਈਕ੍ਰੋਫੋਨ ਸਮਰੱਥ ਕਰੋ"
+        }
+    }
+}

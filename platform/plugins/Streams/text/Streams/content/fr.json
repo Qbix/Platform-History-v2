@@ -59,7 +59,9 @@
             "byText": "Texte",
             "byFacebook": "Facebook",
             "byTwitter": "Gazouillement",
-            "QRscanned": "Ils l&#39;ont scanné!"
+            "QRscanned": "Ils l&#39;ont scanné!",
+            "chooseAgainFromContacts": "Choisissez à nouveau dans Contacts",
+            "inviteSelectedContacts": "Inviter des contacts sélectionnés"
         },
         "email": {
             "subject": "Hé, regarde ça",
@@ -99,5 +101,12 @@
         "Title": "Titre",
         "Subscribed": "Abonné",
         "Participants": "Participants"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Activer le microphone",
+            "cameraTitle": "Activer la caméra",
+            "cameraAndMicrophoneTitle": "Activer la caméra et le microphone"
+        }
     }
 }

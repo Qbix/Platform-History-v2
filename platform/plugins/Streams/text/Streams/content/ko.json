@@ -59,7 +59,9 @@
             "byText": "본문",
             "byFacebook": "페이스 북",
             "byTwitter": "지저귀다",
-            "QRscanned": "그들은 그것을 스캔!"
+            "QRscanned": "그들은 그것을 스캔!",
+            "chooseAgainFromContacts": "연락처에서 다시 선택",
+            "inviteSelectedContacts": "선택한 연락처 초대"
         },
         "email": {
             "subject": "헤이, 이것 좀 봐.",
@@ -99,5 +101,12 @@
         "Title": "표제",
         "Subscribed": "구독 됨",
         "Participants": "참가자"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "마이크 사용",
+            "cameraTitle": "카메라 사용",
+            "cameraAndMicrophoneTitle": "카메라 및 마이크 사용"
+        }
     }
 }

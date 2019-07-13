@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Greška {{status}} tokom zahtjeva",
+        "canceled": "Zahtev je otkazan",
+        "500": "Interna greška servera",
+        "404": "Nije pronađeno: {{url}}",
+        "501": "Zahtev je prekinut"
+    },
+    "nonce": {
+        "sameDomain": "Sesija je istekla. Osvežite stranicu i pokušajte ponovo.",
+        "otherDomain": "Blokiran zahtjev za više domena na strani domen na {{baseUrl}}"
+    },
+    "words": {
+        "tap": "tap",
+        "click": "klik",
+        "yes": "da",
+        "no": "ne",
+        "Tap": "Dodirnite",
+        "Click": "Kliknite",
+        "Yes": "Da",
+        "No": "Ne"
+    },
+    "months": {
+        "1": "Januar",
+        "2": "februar",
+        "3": "Mart",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "Jul",
+        "8": "August",
+        "9": "Septembar",
+        "10": "Oktobar",
+        "11": "Novembar",
+        "12": "Decembar"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Dopustite pristup mikrofonu",
+        "record": "Record",
+        "recording": "Snimanje",
+        "remains": "ostaje",
+        "maximum": "maksimum",
+        "playing": "Igranje",
+        "recorded": "Snimljeno",
+        "clip": "clip",
+        "orupload": "Ili otpremi",
+        "usethis": "Koristi ovo",
+        "discard": "Odbaci",
+        "encoding": "Kodiranje"
+    },
+    "alert": {
+        "title": "Alert"
+    },
+    "confirm": {
+        "title": "Potvrdi",
+        "ok": "Da",
+        "cancel": "Ne"
+    },
+    "prompt": {
+        "title": "Prompt",
+        "ok": "Idi"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Greška pri čitanju datoteke",
+        "cameraCommands": {
+            "prompt": "Šta želite da uradite?",
+            "photo": "Snimite novu fotografiju",
+            "library": "Izaberite iz biblioteke"
+        },
+        "tooSmall": "Molimo odaberite veću sliku.",
+        "cropping": {
+            "title": "Podesite veličinu i položaj",
+            "touchscreen": "Koristite prste za zumiranje i povlačenje",
+            "notTouchscreen": "Koristite miš i točak za zumiranje i povlačenje"
+        }
+    }
+}

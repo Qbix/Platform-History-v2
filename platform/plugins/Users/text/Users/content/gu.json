@@ -37,5 +37,13 @@
         "selectLabel": "કૃપા કરીને લેબલ પસંદ કરો.",
         "inviteUser": "વપરાશકર્તા આમંત્રિત કરો"
     },
-    "invalidLanguageSelected": "અમાન્ય ભાષા પસંદ કરી"
+    "invalidLanguageSelected": "અમાન્ય ભાષા પસંદ કરી",
+    "contacts": {
+        "dialog": {
+            "title": "સંપર્ક પસંદ કરો"
+        },
+        "select": {
+            "title": "{{displayName}} નો સંપર્ક પસંદ કરો"
+        }
+    }
 }

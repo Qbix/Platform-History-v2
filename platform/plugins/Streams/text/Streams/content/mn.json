@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Шинэ зүйл"
+    },
+    "labels": {
+        "Streams\/invited": "Миний урьсан хүмүүс",
+        "Streams\/invitedMe": "Хэн намайг урьсан юм бэ?"
+    },
+    "interests": {
+        "Filter": "Та юунд дуртай вэ?",
+        "CanAdd": "Хэрвээ та хайж буй зүйлээ олж чадахгүй бол доорх шинэ сонирхлыг нэмж болно:",
+        "TrySynonyms": "Үүнийг харахгүй байна уу? Зарим нэг синонима оролд.",
+        "AddUnderCategory": "Ангилал дотор нэмэх ...",
+        "Other": "Бусад",
+        "Unlisted": "Бүртгээгүй"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Мессежийн талаархи зурвасыг тэмдэглэсэн байна. Unflag хийх бол дахин дарна уу.",
+        "noOneSaid": "Ямар ч хүн хэлсэнгүй",
+        "closeChatButton": "Хаах чат",
+        "closeChatConfirmTitle": "Энэ чатыг хаах уу?",
+        "closeChatConfirm": "Та энэ чатыг хаах гэж байгаадаа итгэлтэй байна уу?",
+        "closeChatConfirmYes": "Тиймээ",
+        "closeChatConfirmNo": "Үгүй",
+        "earlierComments": "өмнөх тайлбарууд"
+    },
+    "notifications": {
+        "*": "Зурвас {{& message.fields.type}} руу {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} хэлсэн:",
+        "Streams\/changed": "{{stream.fields.title}} -д өөрчлөлтүүд",
+        "Streams\/invite": "Та {{& stream.fields.title}} -д уригдсан",
+        "Streams\/announcement": "{{& streams.fields.title}} дахь мэдэгдэл",
+        "Streams\/access": "{{&call 'avatar.displayName'}} дамжуулалтыг өөрчилсөн",
+        "Streams\/chat\/edit": "Чатын зурвасыг засварласан байна",
+        "Streams\/chat\/remove": "Чатын зурвас устгагдсан байна",
+        "Streams\/closed": "{{stream.fields.title}} хаалттай байна",
+        "Streams\/task\/progress": "{{stream.fields.title}} дээр хийсэн явц",
+        "Streams\/task\/complete": "Гүйцэтгэсэн ажил: {{stream.fields.title}}",
+        "Streams\/task\/error": "Алдааны үед: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Ирж буй зурвас"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} таныг {{inviteUrl}} -д урьсан",
+        "dialog": {
+            "chooseFromContacts": "Харилцагчаасаа сонгоно уу",
+            "chooseAgainFromContacts": "Харилцагчаас дахин сонгоно уу",
+            "inviteSelectedContacts": "Сонгогдсон харилцагчдыг урих",
+            "selectFromContacts": "Харилцагчаас сонгоно уу",
+            "photo": "Зураг авах",
+            "photoInstruction": "Хэрэв таны QR кодыг сканердсан хүн таны өмнө байгаа бол тэдгээрийн зургийг аваарай",
+            "to": "{{Stream Title}} руу:",
+            "go": "Явцгаая",
+            "title": "Урих",
+            "placeholder": "Гар утасны дугаар эсвэл имэйл хаяг",
+            "orInvite": "Эсвэл хүмүүсийг урихдаа:",
+            "QR": "{{ClickOrTap}} нь QR код үүсгэдэг",
+            "QRtitle": "Энэ QR кодыг шалгана уу",
+            "QRscanned": "Тэд үүнийг хянаж байсан!",
+            "byEmail": "И-мэйл хаяг",
+            "byText": "Текст",
+            "byFacebook": "Facebook",
+            "byTwitter": "Твиттер"
+        },
+        "email": {
+            "subject": "Хөөе, үүнийг шалга",
+            "PleaseVisitLink": "Дараах холбоосоор зочилно уу:",
+            "InvitingYou": "Би таныг {{title}} -д урьж байна.",
+            "HasInvitedYou": "{{displayName}} таныг {{title}} -д урьсан"
+        },
+        "sms": {
+            "content": "Та {{title}} -д уригдсан. {{url}} дарна уу"
+        },
+        "notice": {
+            "text": "Та уригдсан. {{ClickOrTap}} энд хүлээн зөвшөөрч, нэгдэнэ үү."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} <em>{{message.fields.type}}<\/em> мессеж {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Таны урилга манай дугаараас илгээгдэж байгаа бөгөөд таны найзууд танихгүй байна. Тэднийг урилга ирснийг мэдэгдэж, тэдэнд холбоосыг дарахыг хүссэн текстийг хурдан шалгаарай.",
+            "confirm": "Таны урилга манай дугаараас илгээгдэж байгаа бөгөөд таны найзууд танихгүй байна. Тэднийг урилга илгээсэн гэдгийг мэдэгдэж, тэдэнд холбоос дээр дарахыг хүсвэл текстийг хурдан авахыг хүсч байна уу.",
+            "check": "Хөөе, би таныг {{app}} апп-д урилга илгээсэн. Өөрийн зурвасыг шалгаад холбоос дээр дарна уу!"
+        },
+        "email": {
+            "alert": "Таны домэйноос урилга илгээж таны найзууд танихгүй байна. Тэднийг урилга ирснийг мэдэгдэж, тэдэнд холбоосыг дарахыг хүссэн текстийг хурдан шалгаарай.",
+            "confirm": "Таны домэйноос урилга илгээж таны найзууд танихгүй байна. Тэднийг урилга илгээсэн гэдгийг мэдэгдэж, тэдэнд холбоос дээр дарахыг хүсвэл текстийг хурдан авахыг хүсч байна уу.",
+            "subject": "Та урилга авсан уу?",
+            "body": "Хөөе, би таныг {{app}} апп-д урилга илгээсэн. Та имэйлээ шалгаад, линк дээр дарна уу!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Микрофоныг идэвхжүүлэх",
+            "cameraTitle": "Камерыг идэвхжүүлэх",
+            "cameraAndMicrophoneTitle": "Камер ба микрофоныг идэвхжүүлэх"
+        }
+    }
+}

@@ -37,5 +37,13 @@
         "selectLabel": "దయచేసి లేబుల్ ఎంచుకోండి.",
         "inviteUser": "యూజర్ని ఆహ్వానించండి"
     },
-    "invalidLanguageSelected": "చెల్లని భాష ఎంచుకోబడింది"
+    "invalidLanguageSelected": "చెల్లని భాష ఎంచుకోబడింది",
+    "contacts": {
+        "dialog": {
+            "title": "పరిచయాన్ని ఎంచుకోండి"
+        },
+        "select": {
+            "title": "Contact {999} contact యొక్క పరిచయాన్ని ఎంచుకోండి"
+        }
+    }
 }

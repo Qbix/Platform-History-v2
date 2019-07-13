@@ -59,7 +59,9 @@
             "byText": "Mətn",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Onlar bunu skanladılar!"
+            "QRscanned": "Onlar bunu skanladılar!",
+            "chooseAgainFromContacts": "Əlaqələrdən təkrar seçin",
+            "inviteSelectedContacts": "Seçilmiş kontaktları dəvət edin"
         },
         "email": {
             "subject": "Hey, bunu yoxlayın",
@@ -99,5 +101,12 @@
         "Title": "Başlıq",
         "Subscribed": "Abunə olundu",
         "Participants": "İştirakçılar"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Mikrofonu aktiv edin",
+            "cameraTitle": "Kameranı aktiv edin",
+            "cameraAndMicrophoneTitle": "Kamera və Mikrofonu aktiv edin"
+        }
     }
 }

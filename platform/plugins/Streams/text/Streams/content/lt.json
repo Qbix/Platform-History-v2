@@ -59,7 +59,9 @@
             "byText": "Tekstas",
             "byFacebook": "Facebook",
             "byTwitter": "„Twitter“",
-            "QRscanned": "Jie nuskaito jį!"
+            "QRscanned": "Jie nuskaito jį!",
+            "chooseAgainFromContacts": "Pasirinkite vėl iš „Contacts“",
+            "inviteSelectedContacts": "Pakviesti pasirinktus kontaktus"
         },
         "email": {
             "subject": "Ei, patikrinkite tai",
@@ -99,5 +101,12 @@
         "Title": "Pavadinimas",
         "Subscribed": "Prenumeruota",
         "Participants": "Dalyviai"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Įjungti mikrofoną",
+            "cameraTitle": "Įgalinti kamerą",
+            "cameraAndMicrophoneTitle": "Įgalinti kamerą ir mikrofoną"
+        }
     }
 }

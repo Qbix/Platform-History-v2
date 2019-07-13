@@ -37,5 +37,13 @@
         "selectLabel": "Kérjük, válassza ki a címkét.",
         "inviteUser": "Felhasználó meghívása"
     },
-    "invalidLanguageSelected": "Érvénytelen nyelv van kiválasztva"
+    "invalidLanguageSelected": "Érvénytelen nyelv van kiválasztva",
+    "contacts": {
+        "dialog": {
+            "title": "Válassza ki a kapcsolatot"
+        },
+        "select": {
+            "title": "Kapcsolat kiválasztása a {{displayName}}"
+        }
+    }
 }

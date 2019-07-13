@@ -59,7 +59,9 @@
             "byText": "Testua",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Eskaneatu zuten!"
+            "QRscanned": "Eskaneatu zuten!",
+            "chooseAgainFromContacts": "Aukeratu berriro Kontaktuak",
+            "inviteSelectedContacts": "Hautatutako kontaktuak gonbidatu"
         },
         "email": {
             "subject": "Hey, begiratu hau",
@@ -99,5 +101,12 @@
         "Title": "Izenburua",
         "Subscribed": "harpidetutako",
         "Participants": "Parte-hartzaileak"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Gaitu mikrofonoa",
+            "cameraTitle": "Gaitu kamera",
+            "cameraAndMicrophoneTitle": "Gaitu kamera eta mikrofonoa"
+        }
     }
 }

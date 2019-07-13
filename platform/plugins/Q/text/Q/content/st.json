@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Phoso {{status}} nakong ea kopo",
+        "canceled": "Kopo e hlakotsoe",
+        "500": "Phoso ea Kahare ea Seva",
+        "404": "Ha e fumanoe: {{url}}",
+        "501": "Kopo e sitisitsoe"
+    },
+    "nonce": {
+        "sameDomain": "Lenaneo le felile. Khutlisa leqephe mme u leke hape.",
+        "otherDomain": "E thibelitsoe cross-domain request ho ea ka ntle domain at {{baseUrl}}"
+    },
+    "words": {
+        "tap": "tlanya",
+        "click": "tobetsa",
+        "yes": "e",
+        "no": "che",
+        "Tap": "Tlanya",
+        "Click": "Tlanya",
+        "Yes": "E.",
+        "No": "Che"
+    },
+    "months": {
+        "1": "January",
+        "2": "February",
+        "3": "Etela",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Ka kopo lumella ho fihlella microphone",
+        "record": "Rekotoe",
+        "recording": "Ho rekota",
+        "remains": "e sala",
+        "maximum": "boholo",
+        "playing": "Ho bapala",
+        "recorded": "E ngotsoe",
+        "clip": "clip",
+        "orupload": "Kapa Fetella",
+        "usethis": "Sebelisa Sena",
+        "discard": "Lahla",
+        "encoding": "Ho ngodisa"
+    },
+    "alert": {
+        "title": "Tlhokomeliso"
+    },
+    "confirm": {
+        "title": "Tiisa",
+        "ok": "E.",
+        "cancel": "Che"
+    },
+    "prompt": {
+        "title": "Tsoela pele",
+        "ok": "Tsamaea"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Phoso ho bala faele",
+        "cameraCommands": {
+            "prompt": "U ka rata ho etsa eng?",
+            "photo": "Nka foto e ncha",
+            "library": "Khetha ho laebraring"
+        },
+        "tooSmall": "Ka kopo khetha setšoantšo se kholoanyane.",
+        "cropping": {
+            "title": "Fetola boholo le boemo",
+            "touchscreen": "Sebelisa menoana ea hau ho senya le ho hula",
+            "notTouchscreen": "Sebelisa mouse le maqhubu bakeng sa ho atamela le ho hula"
+        }
+    }
+}

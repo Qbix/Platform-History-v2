@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "in log",
+        "LogOut": "e log"
+    },
+    "activate": {
+        "SetAsPrimary": "{{Constitue CMXCIX}} sicut M {{primaria}}",
+        "ChoosePassPhrase": "Fusce <strong>dictum faucibus<\/strong> apud stipes. <br> A pauci simplex et constans sententia est et facilius meminisse verba.",
+        "ChoosePassPhraseSeeSuggestions": "Propter <strong>saltum<\/strong> tueri <strong>sententiam<\/strong> eligere bonum. Ecce autem quidam suggestiones pro ideas.",
+        "LogOutAndTryAgain": "Log et de Iterum Conari",
+        "IfYouFeel": "Si vos sentio aliquid abiit iniuriam, vos can",
+        "SetIdentifierButtonTitle": "incipi iterum"
+    },
+    "session": {
+        "GetStarted": "Coepi impetro"
+    },
+    "authorize": {
+        "GetStarted": "Coepi impetro",
+        "Authorize": "Auctor",
+        "TermsLabel": "Legi et ego assentior <br> {{ad}} CMXCIX",
+        "TermsTitle": "termini"
+    },
+    "register": {
+        "TermsLabel": "{{Accipio de CMXCIX}}",
+        "TermsTitle": "termini"
+    },
+    "notifications": {
+        "title": "permission",
+        "prompt": "Suspendisse ut detur tibi? Quae circa vos vicis updates, youll accipere vera curo.",
+        "yes": "Ita",
+        "no": "nullum",
+        "WelcomePleaseVerifyEmail": "Welcome! Placere cognoscere vestri email oratio.",
+        "WelcomeVerifyEmail": "Welcome! Quin vestri email oratio.",
+        "ForgetPass": "Heus, tu obliviscaris passphrase?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Elige contactu"
+        },
+        "select": {
+            "title": "Selecta ex contactu {{CMXCIX}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Placere eligere pittacio adornata sunt.",
+        "inviteUser": "User invitare"
+    },
+    "invalidLanguageSelected": "Aliquam lectus lingua"
+}

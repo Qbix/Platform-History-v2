@@ -37,5 +37,13 @@
         "selectLabel": "لطفا برچسب را انتخاب کنید",
         "inviteUser": "دعوت کاربر"
     },
-    "invalidLanguageSelected": "زبان نامعتبر انتخاب شده است"
+    "invalidLanguageSelected": "زبان نامعتبر انتخاب شده است",
+    "contacts": {
+        "dialog": {
+            "title": "تماس را انتخاب کنید"
+        },
+        "select": {
+            "title": "تماس با {{displayName}} را انتخاب کنید"
+        }
+    }
 }

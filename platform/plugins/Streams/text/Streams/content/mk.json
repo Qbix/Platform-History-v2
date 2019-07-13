@@ -59,7 +59,9 @@
             "byText": "Текст",
             "byFacebook": "Фејсбук",
             "byTwitter": "Твитер",
-            "QRscanned": "Тие го скенираа!"
+            "QRscanned": "Тие го скенираа!",
+            "chooseAgainFromContacts": "Изберете Повторно од Контакти",
+            "inviteSelectedContacts": "Поканете ги избраните контакти"
         },
         "email": {
             "subject": "Еј, провери го ова",
@@ -99,5 +101,12 @@
         "Title": "Наслов",
         "Subscribed": "Претплатени",
         "Participants": "Учесници"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Овозможи микрофон",
+            "cameraTitle": "Овозможи камера",
+            "cameraAndMicrophoneTitle": "Овозможи камера и микрофон"
+        }
     }
 }

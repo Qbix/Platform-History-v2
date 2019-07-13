@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "New Item"
+    },
+    "labels": {
+        "Streams\/invited": "Ny olona nasaina",
+        "Streams\/invitedMe": "Izay nanasa ahy"
+    },
+    "interests": {
+        "Filter": "Inona no tianao?",
+        "CanAdd": "Raha mbola tsy hitanao ny zavatra tadiavinao dia azonao atao ny mampiditra tombontsoa vaovao eto ambany:",
+        "TrySynonyms": "Tsy mahita an&#39;izany? Andramo ny sasany amin&#39;ny synonyms.",
+        "AddUnderCategory": "Add under category ...",
+        "Other": "Hafa",
+        "Unlisted": "Unlisted"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Hafatra dia nailikilika ho an&#39;ny famerenana admin. Atsangano indray ny tsy miresadresaka.",
+        "noOneSaid": "Tsy nisy niteny na inona na inona",
+        "closeChatButton": "Hikirakira akaiky",
+        "closeChatConfirmTitle": "Hamafa ity chat ity?",
+        "closeChatConfirm": "Azonao antoka fa te hanidy ity chat ity ianao?",
+        "closeChatConfirmYes": "Eny",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "fanehoan-kevitra teo aloha"
+    },
+    "notifications": {
+        "*": "Hafatra {{& message.fields.type}} amin&#39;ny {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} hoy izy:",
+        "Streams\/changed": "Fiovana ao amin&#39;ny {999}}",
+        "Streams\/invite": "Nasaina ho any {{& stream.fields.title}}",
+        "Streams\/announcement": "Fampahafantarana amin&#39;ny {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} dia nanova ny fidirana an-tserasera",
+        "Streams\/chat\/edit": "Ny hafatra fifampiresahana",
+        "Streams\/chat\/remove": "Novaina ny chat",
+        "Streams\/closed": "{{stream.fields.title}} dia nakatona",
+        "Streams\/task\/progress": "Fandrosoana vita amin&#39;ny {{stream.fields.title}}",
+        "Streams\/task\/complete": "Tanjona vita: {{stream.fields.title}}",
+        "Streams\/task\/error": "Hadisoana nandritra ny: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Hafatra ho avy"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} manasa anao ho any {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Mifidiana eo amin&#39;ny kaontinao",
+            "chooseAgainFromContacts": "Mifidiana indray amin&#39;ny Contacts",
+            "inviteSelectedContacts": "Asao ny kaonty mifantina",
+            "selectFromContacts": "Mifidiana avy amin&#39;ny kaonty",
+            "photo": "Makà sary",
+            "photoInstruction": "Raha toa eo alohanao ny olona izay nandalo ny kaody QR, dia asio sary azy ireo",
+            "to": "To: {{Stream Title}}",
+            "go": "Mandehana",
+            "title": "Asao",
+            "placeholder": "Adiresy mailaka na adiresy mailaka",
+            "orInvite": "Na manasà olona amin&#39;ny alàlan&#39;ny:",
+            "QR": "{{ClickOrTap}} mamorona kaody QR",
+            "QRtitle": "Manaova ity QR code ity",
+            "QRscanned": "Nohadihadian&#39;izy ireo izany!",
+            "byEmail": "Email",
+            "byText": "Text",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hey, jereo ity",
+            "PleaseVisitLink": "Alefaso azafady ity rohy manaraka ity:",
+            "InvitingYou": "Manasa anao amin&#39;ny {{title}}",
+            "HasInvitedYou": "{{displayName}} dia nanasa anao ho any amin&#39;ny {{title}}"
+        },
+        "sms": {
+            "content": "Nasaina hanatrika ny {{title}} ianao. Azafady, tadiavo {{url}}"
+        },
+        "notice": {
+            "text": "Nasaina ianao. {{ClickOrTap}} eto mba hanaiky sy hiaraka."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} dia nandefa hafatra <em>{{message.fields.type}}<\/em> ho an&#39;ny {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} amin&#39;ny {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Ny fanasana dia alefa amin&#39;ny isa misy anay, izay mbola tsy fantatrao ireo namanao. Araho amin&#39;ny lahatsoratra haingana mba hamela azy ireo fa ny fanasana dia avy aminao ary mangataka azy ireo mba hanindry ny rohy.",
+            "confirm": "Ny fanasana dia alefa amin&#39;ny isa misy anay, izay mbola tsy fantatrao ireo namanao. Tianao ve ny hanaraka lahatsoratra haingana mba hamela azy ireo fa ilay fanasana dia avy aminao ary mangataka azy ireo mba hanindry ny rohy.",
+            "check": "Hey, nalefako fotsiny ianao ho an&#39;ny {{app}} app. Azafady azafady ny sms ary tsindrio ny rohy!"
+        },
+        "email": {
+            "alert": "Ny fanasana dia alefa avy amin&#39;ny faritra misy anay, izay mbola tsy fantatr&#39;ireo namanao. Araho amin&#39;ny lahatsoratra haingana mba hamela azy ireo fa ny fanasana dia avy aminao ary mangataka azy ireo mba hanindry ny rohy.",
+            "confirm": "Ny fanasana dia alefa avy amin&#39;ny faritra misy anay, izay mbola tsy fantatr&#39;ireo namanao. Tianao ve ny hanaraka lahatsoratra haingana mba hamela azy ireo fa ilay fanasana dia avy aminao ary mangataka azy ireo mba hanindry ny rohy.",
+            "subject": "Nahazo fanasana ve ianao?",
+            "body": "Hey, nalefako fotsiny ianao ho an&#39;ny {{app}} app. Azafady azafady ny mailakao ary tsindrio ny rohy ao!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Alefaso ny mikrôfo",
+            "cameraTitle": "Enable Camera",
+            "cameraAndMicrophoneTitle": "Enable Camera and Microphone"
+        }
+    }
+}

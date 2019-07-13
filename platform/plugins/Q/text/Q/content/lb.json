@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Feeler {{status}} während Ufro",
+        "canceled": "Demande gespaart",
+        "500": "Intern Server Server Feeler",
+        "404": "Net fonnt: {{url}}",
+        "501": "Ënnerbriechen Ënnerbrieche"
+    },
+    "nonce": {
+        "sameDomain": "Sessioun verluer. D&#39;Säit aktualiséieren an probéiert nach eng Kéier.",
+        "otherDomain": "Blockéierte cross-domain request zu friemem Domain um {{baseUrl}}"
+    },
+    "words": {
+        "tap": "ofhänken",
+        "click": "klickt",
+        "yes": "jo",
+        "no": "Nee",
+        "Tap": "Tap",
+        "Click": "Klickt op",
+        "Yes": "jo",
+        "No": "Nee"
+    },
+    "months": {
+        "1": "Januar",
+        "2": "Februar",
+        "3": "Mäerz",
+        "4": "Abrëll",
+        "5": "Mee",
+        "6": "Juni",
+        "7": "Juli",
+        "8": "August",
+        "9": "September",
+        "10": "Oktober",
+        "11": "November",
+        "12": "Dezember"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Gitt weg Zougang zu Ärem Mikrofon",
+        "record": "Record",
+        "recording": "Opzehuelen",
+        "remains": "bleiwt",
+        "maximum": "Maximum",
+        "playing": "Ze spillen",
+        "recorded": "Opgepasst",
+        "clip": "Clip",
+        "orupload": "Oder Upload",
+        "usethis": "Benotzt dëse",
+        "discard": "Ofbriechen",
+        "encoding": "Encoding"
+    },
+    "alert": {
+        "title": "Alert"
+    },
+    "confirm": {
+        "title": "Confirm",
+        "ok": "jo",
+        "cancel": "Nee"
+    },
+    "prompt": {
+        "title": "Prompéiert",
+        "ok": "Go"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Feeler liesen Datei",
+        "cameraCommands": {
+            "prompt": "Wat wëllt Dir maachen?",
+            "photo": "Maacht nei Foto",
+            "library": "Auswielen vun der Bibliothéik"
+        },
+        "tooSmall": "Wielt we g ee méi grouss Bild.",
+        "cropping": {
+            "title": "Gréisst a Positioun änneren",
+            "touchscreen": "Benotzt Är Fanger fir ze vergréisseren an ze ziehen",
+            "notTouchscreen": "Benotzt Är Maus a Rad fir ze zoomen an ze ziehen"
+        }
+    }
+}

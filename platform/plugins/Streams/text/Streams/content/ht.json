@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Nouvo atik"
+    },
+    "labels": {
+        "Streams\/invited": "Moun mwen envite",
+        "Streams\/invitedMe": "Ki moun ki envite m &#39;"
+    },
+    "interests": {
+        "Filter": "Kisa ou renmen?",
+        "CanAdd": "Si ou toujou pa ka jwenn sa w ap chèche a, ou ka ajoute yon nouvo enterè anba a:",
+        "TrySynonyms": "Pa wè li? Eseye kèk sinonim.",
+        "AddUnderCategory": "Ajoute anba kategori ...",
+        "Other": "Lòt",
+        "Unlisted": "Non"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Mesaj te afiche pou revizyon admin. Tape ankò pou unflag.",
+        "noOneSaid": "Pa gen moun ki te di anyen",
+        "closeChatButton": "Fèmen chat",
+        "closeChatConfirmTitle": "Fèmen chat sa a?",
+        "closeChatConfirm": "Èske ou sèten ou vle fèmen chat sa a?",
+        "closeChatConfirmYes": "Wi",
+        "closeChatConfirmNo": "Non",
+        "earlierComments": "kòmantè pi bonè"
+    },
+    "notifications": {
+        "*": "Mesaj {{& message.fields.type}} a {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} te di:",
+        "Streams\/changed": "Chanjman nan {{stream.fields.title}}",
+        "Streams\/invite": "Ou te envite nan {{& stream.fields.title}}",
+        "Streams\/announcement": "Anons nan {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} chanje aksè kouran an",
+        "Streams\/chat\/edit": "Mesaj chat modifye",
+        "Streams\/chat\/remove": "Mesaj chat retire li",
+        "Streams\/closed": "{{stream.fields.title}} te fèmen",
+        "Streams\/task\/progress": "Pwogrè ki fèt sou {{stream.fields.title}}",
+        "Streams\/task\/complete": "Objektif Travay la ranpli: {{stream.fields.title}}",
+        "Streams\/task\/error": "Erè pandan: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Mesaj kap vini"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} envite ou nan {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Chwazi nan Kontak ou",
+            "chooseAgainFromContacts": "Chwazi ankò soti nan Kontak",
+            "inviteSelectedContacts": "Envite Kontak chwazi yo",
+            "selectFromContacts": "Chwazi nan Kontak",
+            "photo": "Pran yon foto",
+            "photoInstruction": "Si moun ki tcheke kòd QR ou an devan ou, pran yon foto nan yo",
+            "to": "Pou: {{Stream Title}}",
+            "go": "Ale",
+            "title": "Envite",
+            "placeholder": "Nimewo mobil oswa adrès imel",
+            "orInvite": "Oswa envite moun lè l sèvi avèk:",
+            "QR": "{{ClickOrTap}} jenere kòd QR",
+            "QRtitle": "Fè enspeksyon kòd QR sa a",
+            "QRscanned": "Yo tcheke li!",
+            "byEmail": "Imèl",
+            "byText": "Tèks",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hey, tcheke sa a soti",
+            "PleaseVisitLink": "Tanpri vizite lyen sa a:",
+            "InvitingYou": "Mwen envite ou nan {{title}}",
+            "HasInvitedYou": "{{displayName}} envite ou nan {{title}}"
+        },
+        "sms": {
+            "content": "Ou te envite nan {{title}}. Tanpri tape {1000}}"
+        },
+        "notice": {
+            "text": "Ou te envite. {{ClickOrTap}} isit la pou aksepte ak rantre nan."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} afiche yon <em>{{message.fields.type}}<\/em> mesaj bay {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} nan {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Envite yo voye soti nan nimewo nou an, ki zanmi ou pa ankò rekonèt. Swiv avèk yon tèks rapid fè yo konnen envitasyon an te soti nan ou, mande yo klike sou lyen an.",
+            "confirm": "Envite yo voye soti nan nimewo nou an, ki zanmi ou pa ankò rekonèt. Èske ou ta renmen swiv avèk yon tèks rapid yo kite yo konnen envitasyon an te soti nan ou, mande yo klike sou lyen an.",
+            "check": "Hey, mwen jis voye ou yon envite nan {{app}} app a. Tanpri tcheke SMS ou epi klike sou lyen an!"
+        },
+        "email": {
+            "alert": "Envite yo voye soti nan domèn nou an, ki zanmi ou yo pa ankò rekonèt. Swiv avèk yon tèks rapid fè yo konnen envitasyon an te soti nan ou, mande yo klike sou lyen an.",
+            "confirm": "Envite yo voye soti nan domèn nou an, ki zanmi ou yo pa ankò rekonèt. Èske ou ta renmen swiv avèk yon tèks rapid yo kite yo konnen envitasyon an te soti nan ou, mande yo klike sou lyen an.",
+            "subject": "Eske ou te jwenn yon envite?",
+            "body": "Hey, mwen jis voye ou yon envite nan {{app}} app a. Tanpri tcheke imèl ou epi klike sou lyen an nan la!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Pèmèt mikwofòn",
+            "cameraTitle": "Pèmèt kamera",
+            "cameraAndMicrophoneTitle": "Pèmèt kamera ak mikwofòn"
+        }
+    }
+}

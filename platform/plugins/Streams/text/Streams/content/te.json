@@ -59,7 +59,9 @@
             "byText": "టెక్స్ట్",
             "byFacebook": "ఫేస్బుక్",
             "byTwitter": "ట్విట్టర్",
-            "QRscanned": "వారు దానిని స్కాన్ చేశారు!"
+            "QRscanned": "వారు దానిని స్కాన్ చేశారు!",
+            "chooseAgainFromContacts": "పరిచయాల నుండి మళ్ళీ ఎంచుకోండి",
+            "inviteSelectedContacts": "ఎంచుకున్న పరిచయాలను ఆహ్వానించండి"
         },
         "email": {
             "subject": "హే, ఈ తనిఖీ",
@@ -99,5 +101,12 @@
         "Title": "శీర్షిక",
         "Subscribed": "సబ్ స్క్రైబ్",
         "Participants": "పాల్గొనేవారు"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "మైక్రోఫోన్‌ను ప్రారంభించండి",
+            "cameraTitle": "కెమెరాను ప్రారంభించండి",
+            "cameraAndMicrophoneTitle": "కెమెరా మరియు మైక్రోఫోన్‌ను ప్రారంభించండి"
+        }
     }
 }

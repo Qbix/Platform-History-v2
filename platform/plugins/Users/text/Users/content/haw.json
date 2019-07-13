@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "e hoʻokomo",
+        "LogOut": "lele"
+    },
+    "activate": {
+        "SetAsPrimary": "E hoʻonoho i {{1}} i kaʻu mea mua {{2}}",
+        "ChoosePassPhrase": "E koho i ka <strong>hua&#39;ōlelo pāloka<\/strong> e komo ai. <br> ʻO kahi hua&#39;ōlelo maʻalahi i loko o kekahi mau hua&#39;ōlelo āu e hoʻomanaʻo pinepine ai.",
+        "ChoosePassPhraseSeeSuggestions": "E koho i kahi <strong>hua&#39;ōlelo<\/strong> maikaʻi maikaʻi e pale i kāu moʻokāki. E nānā i nā manaʻo no kekahi mau manaʻo.",
+        "LogOutAndTryAgain": "E puka hou ae ho&#39;āʻo hou",
+        "IfYouFeel": "Ināʻoe e manaʻo ua pilikia kekahi mea, hiki iāʻoe",
+        "SetIdentifierButtonTitle": "hoʻomaka i luna"
+    },
+    "session": {
+        "GetStarted": "E hoʻomaka"
+    },
+    "authorize": {
+        "GetStarted": "E hoʻomaka",
+        "Authorize": "Hōʻaia",
+        "TermsLabel": "Ua heluhelu au a uaʻae wau <br> i ka {{link}}",
+        "TermsTitle": "&#39;Ōlelo"
+    },
+    "register": {
+        "TermsLabel": "&#39;Apono wau i {{link}}",
+        "TermsTitle": "&#39;Ōlelo"
+    },
+    "notifications": {
+        "title": "Palapala Aelike",
+        "prompt": "Makemakeʻoe e hoʻoikaika i nāʻike? E loaʻa iāʻoe nā loli hou e pili ana i nā mea āu e mālama nei.",
+        "yes": "Ae",
+        "no": "Aʻole",
+        "WelcomePleaseVerifyEmail": "Welina! E hōʻoia i kāu leka uila.",
+        "WelcomeVerifyEmail": "Welina! E hōʻoia i kāu leka uila.",
+        "ForgetPass": "ʻAe, ua poina iāʻoe kāu kīpala?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "E koho i ka pilina"
+        },
+        "select": {
+            "title": "E koho i ka hulina o {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "E koho i kahi lepili.",
+        "inviteUser": "E ho&#39;āʻo i ka mea hoʻohana"
+    },
+    "invalidLanguageSelected": "&#39;Ōlelo maʻamau i kohoʻia"
+}

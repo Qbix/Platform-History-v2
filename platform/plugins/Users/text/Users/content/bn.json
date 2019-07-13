@@ -37,5 +37,13 @@
         "selectLabel": "লেবেল নির্বাচন করুন।",
         "inviteUser": "ব্যবহারকারীকে আমন্ত্রণ জানান"
     },
-    "invalidLanguageSelected": "অবৈধ ভাষা নির্বাচিত"
+    "invalidLanguageSelected": "অবৈধ ভাষা নির্বাচিত",
+    "contacts": {
+        "dialog": {
+            "title": "যোগাযোগ চয়ন করুন"
+        },
+        "select": {
+            "title": "{{displayName}} এর যোগাযোগ নির্বাচন করুন"
+        }
+    }
 }

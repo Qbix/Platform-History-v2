@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Kukanganisa {{status}} panguva yekukumbira",
+        "canceled": "Chikumbiro chakabviswa",
+        "500": "Internal server error",
+        "404": "Hazviwanikwi: {{url}}",
+        "501": "Chikumbiro chakavhiringidzika"
+    },
+    "nonce": {
+        "sameDomain": "Session yakapera. Zororazve peji uye edza zvakare.",
+        "otherDomain": "Yakachengetedzwa cross-domain chikumbiro kune dzimwe nyika pa {{baseUrl}}"
+    },
+    "words": {
+        "tap": "tapi",
+        "click": "click",
+        "yes": "Ehe",
+        "no": "Aihwa",
+        "Tap": "Tapira",
+        "Click": "Dzvanya",
+        "Yes": "Ehe",
+        "No": "Aihwa"
+    },
+    "months": {
+        "1": "Ndira",
+        "2": "Kukadzi",
+        "3": "Kurume",
+        "4": "Kubvumbi",
+        "5": "Chivabvu",
+        "6": "Chikumi",
+        "7": "Chikunguru",
+        "8": "Nyamavhuvhu",
+        "9": "Gunyana",
+        "10": "Gumiguru",
+        "11": "Mbudzi",
+        "12": "Zvita"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Ndapota bvumira kubvumirana nemakrofoni",
+        "record": "Rekodha",
+        "recording": "Kunyora",
+        "remains": "rinoramba",
+        "maximum": "maximum",
+        "playing": "Kutamba",
+        "recorded": "Rakanyorwa",
+        "clip": "clip",
+        "orupload": "Kana Tora",
+        "usethis": "Shandisa Izvi",
+        "discard": "Ramba",
+        "encoding": "Encoding"
+    },
+    "alert": {
+        "title": "Alert"
+    },
+    "confirm": {
+        "title": "Tsimbisa",
+        "ok": "Ehe",
+        "cancel": "Aihwa"
+    },
+    "prompt": {
+        "title": "Kukurumidza",
+        "ok": "Enda"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Kukanganisa kuverenga faira",
+        "cameraCommands": {
+            "prompt": "Chii chaungada kuita?",
+            "photo": "Tora mutsva mufananidzo",
+            "library": "Sarudza kubva muraibhurari"
+        },
+        "tooSmall": "Ndapota sarudza chifananidzo chikuru.",
+        "cropping": {
+            "title": "Ruramisa usayizi uye nzvimbo",
+            "touchscreen": "Shandisa minwe yako kuzorora uye kudhonza",
+            "notTouchscreen": "Shandisa mouse yako uye gurusi kuti uwedzere uye udonhe"
+        }
+    }
+}

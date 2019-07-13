@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Xalad {{status}} inta lagu jiro codsiga",
+        "canceled": "Codso in la joojiyo",
+        "500": "Khalad server ah",
+        "404": "Lama helin: {999}}",
+        "501": "Codso in la joojiyo"
+    },
+    "nonce": {
+        "sameDomain": "Kulanku wuu dhacay. Cusbooneysii bogga oo mar kale isku day.",
+        "otherDomain": "Dalabaad codsi-dhaaf ah oo la xidhiidha domainka ajnabiga ah {999}}"
+    },
+    "words": {
+        "tap": "tuubo",
+        "click": "guji",
+        "yes": "haa",
+        "no": "maya",
+        "Tap": "Fiiri",
+        "Click": "Guji",
+        "Yes": "Haa",
+        "No": "Maya"
+    },
+    "months": {
+        "1": "Janaayo",
+        "2": "Febraayo",
+        "3": "Maarso",
+        "4": "Abriil",
+        "5": "Laga yaabaa",
+        "6": "Juun",
+        "7": "Julaay",
+        "8": "Ogosto",
+        "9": "Sebtembar",
+        "10": "Oktoobar",
+        "11": "November",
+        "12": "Diseembar"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Fadlan u ogolow inaad gasho makarafoonkaaga",
+        "record": "Diiwaangeli",
+        "recording": "Qorista",
+        "remains": "wali",
+        "maximum": "ugu badnaan",
+        "playing": "Diyaarinta",
+        "recorded": "Diiwaan galiyay",
+        "clip": "clip",
+        "orupload": "Ama Soo rog",
+        "usethis": "Isticmaal Tani",
+        "discard": "Iska tuur",
+        "encoding": "Qodobbada"
+    },
+    "alert": {
+        "title": "Digniin"
+    },
+    "confirm": {
+        "title": "Xaqiiji",
+        "ok": "Haa",
+        "cancel": "Maya"
+    },
+    "prompt": {
+        "title": "Baahan",
+        "ok": "Tag"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Faylka qaldan akhriska",
+        "cameraCommands": {
+            "prompt": "Maxaad jeclaan lahayd inaad sameyso?",
+            "photo": "Qaado sawir cusub",
+            "library": "Xulo maktabadda"
+        },
+        "tooSmall": "Fadlan dooro sawir weyn.",
+        "cropping": {
+            "title": "Adkee xajmiga iyo booska",
+            "touchscreen": "U isticmaal farahaaga si aad u fogaato oo jiido",
+            "notTouchscreen": "Isticmaal mashiinkaaga &amp; saqafka si aad u fogeyso una jiido"
+        }
+    }
+}

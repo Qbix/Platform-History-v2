@@ -59,7 +59,9 @@
             "byText": "ტექსტი",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "ისინი დასკანერებულნი იყვნენ!"
+            "QRscanned": "ისინი დასკანერებულნი იყვნენ!",
+            "chooseAgainFromContacts": "აირჩიეთ კონტაქტებისგან",
+            "inviteSelectedContacts": "მოიწვიე შერჩეული კონტაქტები"
         },
         "email": {
             "subject": "ჰეი, შეამოწმეთ ეს",
@@ -99,5 +101,12 @@
         "Title": "სათაური",
         "Subscribed": "გამოწერილია",
         "Participants": "Მონაწილეები"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "მიკროფონის ჩართვა",
+            "cameraTitle": "კამერის ჩართვა",
+            "cameraAndMicrophoneTitle": "კამერისა და მიკროფონის ჩართვა"
+        }
     }
 }

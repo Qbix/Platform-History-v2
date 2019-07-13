@@ -37,5 +37,13 @@
         "selectLabel": "Pasirinkite etiketę.",
         "inviteUser": "Pakviesti vartotoją"
     },
-    "invalidLanguageSelected": "Pasirinkta netinkama kalba"
+    "invalidLanguageSelected": "Pasirinkta netinkama kalba",
+    "contacts": {
+        "dialog": {
+            "title": "Pasirinkite kontaktą"
+        },
+        "select": {
+            "title": "Pasirinkite {{displayName}} kontaktą"
+        }
+    }
 }

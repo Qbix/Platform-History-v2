@@ -59,7 +59,9 @@
             "byText": "Tekst",
             "byFacebook": "Facebook",
             "byTwitter": "tjilpen",
-            "QRscanned": "Ze hebben het gescand!"
+            "QRscanned": "Ze hebben het gescand!",
+            "chooseAgainFromContacts": "Kies opnieuw uit contacten",
+            "inviteSelectedContacts": "Nodig geselecteerde contactpersonen uit"
         },
         "email": {
             "subject": "Hé, kijk hier eens",
@@ -99,5 +101,12 @@
         "Title": "Titel",
         "Subscribed": "geabonneerd",
         "Participants": "Deelnemers"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Microfoon inschakelen",
+            "cameraTitle": "Camera inschakelen",
+            "cameraAndMicrophoneTitle": "Camera en microfoon inschakelen"
+        }
     }
 }

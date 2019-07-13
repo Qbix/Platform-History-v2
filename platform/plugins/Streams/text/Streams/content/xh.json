@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Into entsha"
+    },
+    "labels": {
+        "Streams\/invited": "Abantu ndiwameme",
+        "Streams\/invitedMe": "Ngubani owamemileyo"
+    },
+    "interests": {
+        "Filter": "Uyakuthanda ntoni?",
+        "CanAdd": "Ukuba awukwazi ukufumana oko ufuna, unokongeza umdla omtsha apha ngezantsi:",
+        "TrySynonyms": "Musa ukuyibona? Zama ezinye i synonyms.",
+        "AddUnderCategory": "Yongeza phantsi kwecandelo ...",
+        "Other": "Okunye",
+        "Unlisted": "Nga bhalwanga"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Umyalezo ukhankanywe ukuphononongwa komphathi. Thepha kwakhona kwi-unflagga.",
+        "noOneSaid": "Akukho mntu uthethile nantoni na",
+        "closeChatButton": "Vala ingxoxo",
+        "closeChatConfirmTitle": "Vala le ngxoxo?",
+        "closeChatConfirm": "Uqinisekile ukuba ufuna ukuvala le ngxoxo?",
+        "closeChatConfirmYes": "Ewe",
+        "closeChatConfirmNo": "Hayi",
+        "earlierComments": "izimvo zangaphambili"
+    },
+    "notifications": {
+        "*": "Umyalezo {{& message.fields.type}} kwi {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} wathi:",
+        "Streams\/changed": "Utshintsho kwi {{stream.fields.title}}",
+        "Streams\/invite": "Umenywe {{& stream.fields.title}}",
+        "Streams\/announcement": "Ukwaziswa kwi {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} utshintshe ukufikelela komlambo",
+        "Streams\/chat\/edit": "Umyalezo wengxoxo uhlelwe",
+        "Streams\/chat\/remove": "Umyalezo wengxoxo ususiwe",
+        "Streams\/closed": "{{stream.fields.title}} ivaliwe",
+        "Streams\/task\/progress": "Inkqubela phambili eyenziwe kwi {{stream.fields.title}}",
+        "Streams\/task\/complete": "Umsebenzi ogqityiweyo: {{stream.fields.title}}",
+        "Streams\/task\/error": "Iphutha ngexesha: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Umyalezo ongenawo"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} ukumeme ukuba {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Khetha kwiNxibelelwano yakho",
+            "chooseAgainFromContacts": "Khetha kwakhona kwiNxibelelwano",
+            "inviteSelectedContacts": "Mema oNxibelelwano olukhethiweyo",
+            "selectFromContacts": "Khetha Kufownelwa",
+            "photo": "Thatha umfanekiso",
+            "photoInstruction": "Ukuba umntu okhangela ikhowudi yakho ye-QR phambi kwakho, thabatha umfanekiso wabo",
+            "to": "Ku: {{Stream Title}}",
+            "go": "Hamba",
+            "title": "Mema",
+            "placeholder": "Inombolo yeselula okanye idilesi ye-imeyile",
+            "orInvite": "Okanye mema abantu ngokusebenzisa:",
+            "QR": "{{ClickOrTap}} ukudala ikhowudi ye-QR",
+            "QRtitle": "Skena le khowudi ye-QR",
+            "QRscanned": "Bayihlola!",
+            "byEmail": "Imeyili",
+            "byText": "Umbhalo",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hayi, khangela oku",
+            "PleaseVisitLink": "Nceda u tyelele eli linxulumano:",
+            "InvitingYou": "Ndikumema ukuba {{title}}",
+            "HasInvitedYou": "{{displayName}} ukumeme ukuba {{title}}"
+        },
+        "sms": {
+            "content": "Umenywe {{title}}. Nceda uthephe {{url}}"
+        },
+        "notice": {
+            "text": "Umenywe. {{ClickOrTap}} apha ukuba wamkele kwaye ujoyine."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} ithumele <em>{{message.fields.type}}<\/em> umyalezo kwi {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} kwi {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Izimemo zithunyelwa ukusuka kwinani lethu, abahlobo bakho abangaziqondi. Landela ngokubhaliweyo okubhaliweyo ukuba ubazise isimemo esivela kuwe, ubacele ukuba banqakraze ikhonkco.",
+            "confirm": "Izimemo zithunyelwa ukusuka kwinani lethu, abahlobo bakho abangaziqondi. Ngaba ungathanda ukulandelelana ngombhalo osheshayo ukuba ubazise isimemo esivela kuwe, ubacele ukuba banqakraze isiqhagamshelo.",
+            "check": "Hayi, ndikuthumelele isimemo kwi-{{app}} insiza. Nceda ukhangele i-SMS yakho kwaye nqakraza isixhumanisi!"
+        },
+        "email": {
+            "alert": "Izimemo zithunyelwa kwi-domain yethu, apho abahlobo bakho abangaboniyo. Landela ngokubhaliweyo okubhaliweyo ukuba ubazise isimemo esivela kuwe, ubacele ukuba banqakraze ikhonkco.",
+            "confirm": "Izimemo zithunyelwa kwi-domain yethu, apho abahlobo bakho abangaboniyo. Ngaba ungathanda ukulandelelana ngombhalo osheshayo ukuba ubazise isimemo esivela kuwe, ubacele ukuba banqakraze isiqhagamshelo.",
+            "subject": "Ngaba ufumene isimemo?",
+            "body": "Hayi, ndikuthumelele isimemo kwi-{{app}} insiza. Nceda ukhangele i-imeyile yakho kwaye nqakraza ikhonkco apha!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Nika amandla iMakrofoni",
+            "cameraTitle": "Nika amandla ikhamera",
+            "cameraAndMicrophoneTitle": "Nika amandla ikhamera kunye nemakrofoni"
+        }
+    }
+}

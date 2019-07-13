@@ -59,7 +59,9 @@
             "byText": "Tekst",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "De scannede det!"
+            "QRscanned": "De scannede det!",
+            "chooseAgainFromContacts": "Vælg igen fra kontakter",
+            "inviteSelectedContacts": "Inviter valgte kontakter"
         },
         "email": {
             "subject": "Hej, tjek dette ud",
@@ -99,5 +101,12 @@
         "Title": "Titel",
         "Subscribed": "Abonneret",
         "Participants": "Deltagere"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Aktivér mikrofon",
+            "cameraTitle": "Aktivér kamera",
+            "cameraAndMicrophoneTitle": "Aktivér kamera og mikrofon"
+        }
     }
 }

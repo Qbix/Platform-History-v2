@@ -37,5 +37,13 @@
         "selectLabel": "Ju lutemi zgjidhni etiketën.",
         "inviteUser": "Fto Përdoruesin"
     },
-    "invalidLanguageSelected": "Gjuhë e pavlefshme e zgjedhur"
+    "invalidLanguageSelected": "Gjuhë e pavlefshme e zgjedhur",
+    "contacts": {
+        "dialog": {
+            "title": "Zgjidhni kontaktin"
+        },
+        "select": {
+            "title": "Përzgjidh kontaktin e {{displayName}}"
+        }
+    }
 }

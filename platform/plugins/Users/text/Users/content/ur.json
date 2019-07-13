@@ -37,5 +37,13 @@
         "selectLabel": "براہ کرم لیبل منتخب کریں.",
         "inviteUser": "صارف کو مدعو کریں"
     },
-    "invalidLanguageSelected": "غلط زبان منتخب"
+    "invalidLanguageSelected": "غلط زبان منتخب",
+    "contacts": {
+        "dialog": {
+            "title": "رابطہ منتخب کریں"
+        },
+        "select": {
+            "title": "{{displayName}} کا رابطہ منتخب کریں"
+        }
+    }
 }

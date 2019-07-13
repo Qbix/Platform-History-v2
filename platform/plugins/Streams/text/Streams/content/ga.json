@@ -59,7 +59,9 @@
             "byText": "Téacs",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Scanadh siad é!"
+            "QRscanned": "Scanadh siad é!",
+            "chooseAgainFromContacts": "Roghnaigh Arís ó Teagmhálacha",
+            "inviteSelectedContacts": "Tabhair cuireadh do Teagmhálacha Roghnaithe"
         },
         "email": {
             "subject": "Hey, seiceáil seo amach",
@@ -99,5 +101,12 @@
         "Title": "Teideal",
         "Subscribed": "Suibscríofa",
         "Participants": "Rannpháirtithe"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Cumasaigh Micreafón",
+            "cameraTitle": "Cumasaigh an Ceamara",
+            "cameraAndMicrophoneTitle": "Cumasaigh an Ceamara agus an Micreafón"
+        }
     }
 }

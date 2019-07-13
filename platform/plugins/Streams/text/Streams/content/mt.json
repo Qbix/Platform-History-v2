@@ -59,7 +59,9 @@
             "byText": "Test",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Huma skannjati!"
+            "QRscanned": "Huma skannjati!",
+            "chooseAgainFromContacts": "Agħżel darb&#39;oħra mill-Kuntatti",
+            "inviteSelectedContacts": "Stieden Kuntatti Magħżula"
         },
         "email": {
             "subject": "Ħej, iċċekkja dan",
@@ -99,5 +101,12 @@
         "Title": "Titolu",
         "Subscribed": "Sottoskritt",
         "Participants": "Parteċipanti"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Enable Mikrofonu",
+            "cameraTitle": "Ikteb il-Kamera",
+            "cameraAndMicrophoneTitle": "Enable il-Kamera u l-Mikrofonu"
+        }
     }
 }

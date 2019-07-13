@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "د ننه کیدل",
+        "LogOut": "وتل"
+    },
+    "activate": {
+        "SetAsPrimary": "{{1}} زما لومړني {{2}} په توګه وټاکئ",
+        "ChoosePassPhrase": "د <strong>ننوتلو<\/strong> لپاره یو <strong>باوري جمله<\/strong> غوره کړئ. <br> یوه ساده جمله چې څو کلمې لري چې تاسو به په اسانۍ سره په یاد ولرئ.",
+        "ChoosePassPhraseSeeSuggestions": "د خپل حساب د ساتنې لپاره يو ښه <strong>کوتل عبارت<\/strong> غوره کړئ. د ځینو نظرونو وړاندیزونه وګورئ.",
+        "LogOutAndTryAgain": "ننوتل او بیا بیا هڅه وکړئ",
+        "IfYouFeel": "که تاسو احساس کوئ نو یو څه خراب شو، تاسو کولی شئ",
+        "SetIdentifierButtonTitle": "له سره پیل کول"
+    },
+    "session": {
+        "GetStarted": "پیل کړئ"
+    },
+    "authorize": {
+        "GetStarted": "پیل کړئ",
+        "Authorize": "واکمن",
+        "TermsLabel": "ما لوستلی او موافق یم <br> {{link}} ته",
+        "TermsTitle": "شرطونه"
+    },
+    "register": {
+        "TermsLabel": "زه {{link}} وموم",
+        "TermsTitle": "شرطونه"
+    },
+    "notifications": {
+        "title": "اجازه",
+        "prompt": "ایا ته غواړئ چې خبرتیاوې فعالې کړئ؟ تاسو به د هغه شیانو په اړه چې تاسو یې فکر کوئ د اصلي وخت تازه معلومات ترلاسه کړئ.",
+        "yes": "هو",
+        "no": "نه",
+        "WelcomePleaseVerifyEmail": "ښه راغلاست! مهرباني وکړئ خپل بریښنالیک تایید کړئ.",
+        "WelcomeVerifyEmail": "ښه راغلاست! خپل برېښنالیک تایید کړۍ.",
+        "ForgetPass": "اې، ستا پاسپورت هیر کړی؟"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "اړیکې غوره کړئ"
+        },
+        "select": {
+            "title": "د {9 999}} سره اړیکه ونیسئ"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "مهرباني وکړئ لیبل غوره کړئ.",
+        "inviteUser": "کارن ته بلنه ورکړه"
+    },
+    "invalidLanguageSelected": "غلط ژبه غوره شوی"
+}

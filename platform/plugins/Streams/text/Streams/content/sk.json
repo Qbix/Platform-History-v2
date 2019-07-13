@@ -59,7 +59,9 @@
             "byText": "text",
             "byFacebook": "Facebook",
             "byTwitter": "cvrlikání",
-            "QRscanned": "Skenovali to!"
+            "QRscanned": "Skenovali to!",
+            "chooseAgainFromContacts": "Znova zvoľte možnosť Kontakty",
+            "inviteSelectedContacts": "Pozvať vybraných kontaktov"
         },
         "email": {
             "subject": "Hej, pozrite sa na to",
@@ -99,5 +101,12 @@
         "Title": "nadpis",
         "Subscribed": "upísaný",
         "Participants": "účastníci"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Povoliť mikrofón",
+            "cameraTitle": "Povoliť kameru",
+            "cameraAndMicrophoneTitle": "Povoliť kameru a mikrofón"
+        }
     }
 }

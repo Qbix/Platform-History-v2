@@ -37,5 +37,13 @@
         "selectLabel": "โปรดเลือกป้ายกำกับ",
         "inviteUser": "เชิญผู้ใช้"
     },
-    "invalidLanguageSelected": "เลือกภาษาไม่ถูกต้อง"
+    "invalidLanguageSelected": "เลือกภาษาไม่ถูกต้อง",
+    "contacts": {
+        "dialog": {
+            "title": "เลือกผู้ติดต่อ"
+        },
+        "select": {
+            "title": "เลือกผู้ติดต่อของ {{displayName}}"
+        }
+    }
 }

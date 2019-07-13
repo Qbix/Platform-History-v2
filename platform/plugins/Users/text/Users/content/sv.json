@@ -37,5 +37,13 @@
         "selectLabel": "Var god välj etikett.",
         "inviteUser": "Bjud in användaren"
     },
-    "invalidLanguageSelected": "Ogiltigt språk valt"
+    "invalidLanguageSelected": "Ogiltigt språk valt",
+    "contacts": {
+        "dialog": {
+            "title": "Välj kontakt"
+        },
+        "select": {
+            "title": "Välj kontakt för {{displayName}}"
+        }
+    }
 }

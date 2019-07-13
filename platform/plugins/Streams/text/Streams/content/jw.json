@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Anyar Item"
+    },
+    "labels": {
+        "Streams\/invited": "Wong sing diundang",
+        "Streams\/invitedMe": "Sapa sing ngajak aku"
+    },
+    "interests": {
+        "Filter": "Apa sampeyan seneng?",
+        "CanAdd": "Yen sampeyan isih ora bisa nemokake apa sing dikarepake, sampeyan bisa nambah kapentingan anyar ing ngisor iki:",
+        "TrySynonyms": "Ora weruh? Coba sawetara sinonim.",
+        "AddUnderCategory": "Tambah miturut kategori ...",
+        "Other": "Liyane",
+        "Unlisted": "Unlisted"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Pesen dikirim kanggo review admin. Tunyuk maneh kanggo mbukak.",
+        "noOneSaid": "Ora ana sing ngomong apa-apa",
+        "closeChatButton": "Nutup chatting",
+        "closeChatConfirmTitle": "Tutup chatting iki?",
+        "closeChatConfirm": "Apa sampeyan yakin arep nutup chatting iki?",
+        "closeChatConfirmYes": "Ya",
+        "closeChatConfirmNo": "Ora Ana",
+        "earlierComments": "komentar sadurungé"
+    },
+    "notifications": {
+        "*": "Pesen {{& message.fields.type}} kanggo {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ngandika:",
+        "Streams\/changed": "Owah-owahan ing {{stream.fields.title}}",
+        "Streams\/invite": "Sampeyan diundang menyang {{& stream.fields.title}}",
+        "Streams\/announcement": "Woro-woro ing {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} ngowahi akses stream",
+        "Streams\/chat\/edit": "Pesen ngobrol disunting",
+        "Streams\/chat\/remove": "Pesen chatting dibusak",
+        "Streams\/closed": "{{stream.fields.title}} wis ditutup",
+        "Streams\/task\/progress": "Perkembangan digawe ing {{stream.fields.title}}",
+        "Streams\/task\/complete": "Tugas rampung: {{stream.fields.title}}",
+        "Streams\/task\/error": "Kesalahan sajrone: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Mlebu pesen"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} ngundang sampeyan menyang {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Pilih saka Kontak",
+            "chooseAgainFromContacts": "Pilih Maneh saka Kontak",
+            "inviteSelectedContacts": "Ngundang Kontak sing Dipilih",
+            "selectFromContacts": "Pilih Saka Kontak",
+            "photo": "Njupuk foto",
+            "photoInstruction": "Yen wong sing maca kode QR sampeyan ana ing ngarepe sampeyan, njupuk potret saka wong-wong mau",
+            "to": "Kanggo: {{Stream Title}}",
+            "go": "Tindak",
+            "title": "Ngundang",
+            "placeholder": "Nomer seluler utawa alamat email",
+            "orInvite": "Utawa ngajak wong nganggo:",
+            "QR": "{{ClickOrTap}} kanggo ngasilake kode QR",
+            "QRtitle": "Pindai kode QR iki",
+            "QRscanned": "Padha nyawang!",
+            "byEmail": "Email",
+            "byText": "Teks",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Eh, cek iki metu",
+            "PleaseVisitLink": "Delengen pranala iki:",
+            "InvitingYou": "Aku ngajak sampeyan menyang {{title}}",
+            "HasInvitedYou": "{{displayName}} wis ngundang sampeyan menyang {{title}}"
+        },
+        "sms": {
+            "content": "Sampeyan wis diundang menyang {{title}}. Monggo tutul {{url}}"
+        },
+        "notice": {
+            "text": "Sampeyan wis diundang. {{ClickOrTap}} ing kene kanggo nampa lan gabung."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} dikirim pesen <em>{{message.fields.type}}<\/em> menyang {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} ing {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Ngajak dikirim saka nomer kita, sing durung kenal kanca-kanca. Tindakake karo teks cepet supaya dheweke ngerti undhangan saka sampeyan, nyuwun supaya bisa ngeklik link kasebut.",
+            "confirm": "Ngajak dikirim saka nomer kita, sing durung kenal kanca-kanca. Apa sampeyan pengin ngetutake kanthi cepet supaya bisa ngerti undhangan saka sampeyan, nyuwun supaya bisa ngeklik link kasebut.",
+            "check": "Eh, aku mung ngirim sampeyan ngajak menyang app {{app}}. Mangga dipriksa sms lan klik link!"
+        },
+        "email": {
+            "alert": "Ngundang dikirim saka domain kita, sing durung kenal kanca-kanca. Tindakake karo teks cepet supaya dheweke ngerti undhangan saka sampeyan, nyuwun supaya bisa ngeklik link kasebut.",
+            "confirm": "Ngundang dikirim saka domain kita, sing durung kenal kanca-kanca. Apa sampeyan pengin ngetutake kanthi cepet supaya bisa ngerti undhangan saka sampeyan, nyuwun supaya bisa ngeklik link kasebut.",
+            "subject": "Apa sampeyan njaluk undangan?",
+            "body": "Eh, aku mung ngirim sampeyan ngajak menyang app {{app}}. Mangga dipriksa email lan klik link kasebut!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Ngaktifake Mikropon",
+            "cameraTitle": "Ngaktifake kamera",
+            "cameraAndMicrophoneTitle": "Ngaktifake Kamera lan Mikropon"
+        }
+    }
+}

@@ -37,5 +37,13 @@
         "selectLabel": "Jekk jogħġbok agħżel it-tikketta.",
         "inviteUser": "Stieden l-Utent"
     },
-    "invalidLanguageSelected": "Lingwa mhux valida magħżula"
+    "invalidLanguageSelected": "Lingwa mhux valida magħżula",
+    "contacts": {
+        "dialog": {
+            "title": "Agħżel kuntatt"
+        },
+        "select": {
+            "title": "Agħżel kuntatt ta &#39;{{displayName}}"
+        }
+    }
 }

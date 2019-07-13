@@ -37,5 +37,13 @@
         "selectLabel": "Dewiswch y label.",
         "inviteUser": "Gwahodd y Defnyddiwr"
     },
-    "invalidLanguageSelected": "Dewis iaith annilys"
+    "invalidLanguageSelected": "Dewis iaith annilys",
+    "contacts": {
+        "dialog": {
+            "title": "Dewiswch gyswllt"
+        },
+        "select": {
+            "title": "Dewiswch gyswllt o {{displayName}}"
+        }
+    }
 }

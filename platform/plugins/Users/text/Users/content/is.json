@@ -37,5 +37,13 @@
         "selectLabel": "Vinsamlegast veldu merkið.",
         "inviteUser": "Bjóddu notanda"
     },
-    "invalidLanguageSelected": "Ógilt tungumál valið"
+    "invalidLanguageSelected": "Ógilt tungumál valið",
+    "contacts": {
+        "dialog": {
+            "title": "Veldu tengilið"
+        },
+        "select": {
+            "title": "Veldu tengilið af {{displayName}}"
+        }
+    }
 }

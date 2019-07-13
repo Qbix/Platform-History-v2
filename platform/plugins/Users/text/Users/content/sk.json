@@ -37,5 +37,13 @@
         "selectLabel": "Vyberte menovku.",
         "inviteUser": "Pozvať používateľa"
     },
-    "invalidLanguageSelected": "Vybrali ste neplatný jazyk"
+    "invalidLanguageSelected": "Vybrali ste neplatný jazyk",
+    "contacts": {
+        "dialog": {
+            "title": "Vyberte kontakt"
+        },
+        "select": {
+            "title": "Vyberte kontakt používateľa {{displayName}}"
+        }
+    }
 }

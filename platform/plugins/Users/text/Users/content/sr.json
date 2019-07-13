@@ -37,5 +37,13 @@
         "selectLabel": "Изаберите ознаку.",
         "inviteUser": "Позови корисника"
     },
-    "invalidLanguageSelected": "Изабран је неважећи језик"
+    "invalidLanguageSelected": "Изабран је неважећи језик",
+    "contacts": {
+        "dialog": {
+            "title": "Изаберите контакт"
+        },
+        "select": {
+            "title": "Изаберите контакт корисника {{displayName}}"
+        }
+    }
 }

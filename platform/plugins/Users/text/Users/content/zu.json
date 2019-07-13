@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "Ngena ngemvume",
+        "LogOut": "Phuma"
+    },
+    "activate": {
+        "SetAsPrimary": "Setha i- {{1}} njengesisekelo sami {{2}}",
+        "ChoosePassPhrase": "Khetha <strong>ibinzana lokudlula<\/strong> ukuze ungene ngemvume. <br> Ibinzana elilula elinamazwi ambalwa ozolikhumbula kalula.",
+        "ChoosePassPhraseSeeSuggestions": "Khetha <strong>ibinzana elidlula<\/strong> ukuvikela i-akhawunti yakho. Bona ukusikisela kwemibono ethile.",
+        "LogOutAndTryAgain": "Ngena ngemvume bese uzama futhi",
+        "IfYouFeel": "Uma uzizwa ukuthi kukhona okungahambi kahle, ungakwazi",
+        "SetIdentifierButtonTitle": "Qala phansi"
+    },
+    "session": {
+        "GetStarted": "Qalisa"
+    },
+    "authorize": {
+        "GetStarted": "Qalisa",
+        "Authorize": "Vumela",
+        "TermsLabel": "Ngifunde futhi ngiyavuma <br> kuya {{link}}",
+        "TermsTitle": "Imigomo"
+    },
+    "register": {
+        "TermsLabel": "Ngamukela {{link}}",
+        "TermsTitle": "Imigomo"
+    },
+    "notifications": {
+        "title": "Imvume",
+        "prompt": "Ingabe ufuna ukunika amandla izaziso? Uzothola izibuyekezo zangempela-isikhathi mayelana nezinto ozikhathalelayo.",
+        "yes": "Yebo",
+        "no": "Cha",
+        "WelcomePleaseVerifyEmail": "Siyakwamukela! Sicela uqinisekise ikheli lakho le-imeyili.",
+        "WelcomeVerifyEmail": "Siyakwamukela! Qinisekisa ikheli lakho le-imeyili.",
+        "ForgetPass": "Hhayi, ukhohlwe indlela yakho yokudlula?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Khetha othintana naye"
+        },
+        "select": {
+            "title": "Khetha oxhumana naye {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Sicela ukhethe ilebula.",
+        "inviteUser": "Mema Umsebenzisi"
+    },
+    "invalidLanguageSelected": "Ulimi olungavumelekile lukhethiwe"
+}

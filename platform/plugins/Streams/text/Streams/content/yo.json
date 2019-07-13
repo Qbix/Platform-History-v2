@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Ohun Titun"
+    },
+    "labels": {
+        "Streams\/invited": "Awọn eniyan Mo pe",
+        "Streams\/invitedMe": "Tani o pe mi"
+    },
+    "interests": {
+        "Filter": "Kini o ni igbadun?",
+        "CanAdd": "Ti o ko ba le wa ohun ti o n wa, o le fi ifẹ tuntun kun ni isalẹ:",
+        "TrySynonyms": "Ṣe ko riran naa? Gbiyanju awọn synonyms kan.",
+        "AddUnderCategory": "Fi ẹka kun labẹ ẹka ...",
+        "Other": "Miiran",
+        "Unlisted": "Olubasọrọ"
+    },
+    "chat": {
+        "flaggedForAdminReview": "A ti firanṣẹ fun ifiranṣẹ fun atunyẹwo abojuto. Fọwọ ba lẹẹkansi si unflag.",
+        "noOneSaid": "Ko si ọkan ti sọ ohunkohun",
+        "closeChatButton": "Pa iwiregbe",
+        "closeChatConfirmTitle": "Pade iwiregbe yii?",
+        "closeChatConfirm": "Ṣe o da ọ loju pe o fẹ pa iwiregbe yii pari?",
+        "closeChatConfirmYes": "Bẹẹni",
+        "closeChatConfirmNo": "Rara",
+        "earlierComments": "awọn alaye iṣaaju"
+    },
+    "notifications": {
+        "*": "Ifiranṣẹ {{& message.fields.type}} si {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sọ pe:",
+        "Streams\/changed": "Awọn ayipada ni {{stream.fields.title}}",
+        "Streams\/invite": "A pe ọ si {{& stream.fields.title}}",
+        "Streams\/announcement": "Ikede ni {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} iyipada ti o yipada pada",
+        "Streams\/chat\/edit": "Ti satunkọ ifiranṣẹ alaworan",
+        "Streams\/chat\/remove": "Ti yo ifiranṣẹ alafi kuro",
+        "Streams\/closed": "{{stream.fields.title}} ti wa ni pipade",
+        "Streams\/task\/progress": "Ilọsiwaju lọ si {{stream.fields.title}}",
+        "Streams\/task\/complete": "Iṣẹ ti pari: {{stream.fields.title}}",
+        "Streams\/task\/error": "Aṣiṣe nigba: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Ifiranṣẹ ti nwọle"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} pe o si {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Yan lati Awọn olubasọrọ rẹ",
+            "chooseAgainFromContacts": "Yan Lẹẹkansi lati Awọn olubasọrọ",
+            "inviteSelectedContacts": "Pe Awọn olubasọrọ ti o yan",
+            "selectFromContacts": "Yan Lati Awọn olubasọrọ",
+            "photo": "Ya fọto kan",
+            "photoInstruction": "Ti ẹni ti o ba ṣayẹwo koodu QR rẹ wa niwaju rẹ, ya fọto kan ti wọn",
+            "to": "Lati: {{Stream Title}}",
+            "go": "Lọ",
+            "title": "Pe",
+            "placeholder": "Nọmba nọmba tabi adirẹsi imeeli",
+            "orInvite": "Tabi pe eniyan ni lilo nipa lilo:",
+            "QR": "{{ClickOrTap}} lati ṣe koodu QR",
+            "QRtitle": "Ṣayẹwo yi QR koodu",
+            "QRscanned": "Wọn ti ṣayẹwo o!",
+            "byEmail": "Imeeli",
+            "byText": "Ọrọ",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hey, ṣayẹwo eyi jade",
+            "PleaseVisitLink": "Jọwọ ṣẹwo si ọna asopọ wọnyi:",
+            "InvitingYou": "Mo n pe ọ si {{title}}",
+            "HasInvitedYou": "{{displayName}} ti pe o si {{title}}"
+        },
+        "sms": {
+            "content": "A ti pe ọ si {{title}}. Jọwọ tẹ {{url}}"
+        },
+        "notice": {
+            "text": "O ti pe. {{ClickOrTap}} nibi lati gba ati darapo."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} firanṣẹ ifiranṣẹ <em>{{message.fields.type}}<\/em> si {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} ni {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Awọn ipe ni a fi ranṣẹ lati inu nọmba wa, ti awọn ọrẹ rẹ ko iti mọ. Tẹle pẹlu ọrọ ti o yara lati jẹ ki wọn mọ pe pipe si lati ọdọ rẹ, pe wọn lati tẹ ọna asopọ naa.",
+            "confirm": "Awọn ipe ni a fi ranṣẹ lati inu nọmba wa, ti awọn ọrẹ rẹ ko iti mọ. Ṣe o fẹ lati tẹle awọn ọrọ ti o yara lati jẹ ki wọn mọ pe pipe si lati ọdọ rẹ, ti o beere fun wọn lati tẹ ọna asopọ naa.",
+            "check": "Hey, Mo kan ranṣẹ si ọ si {{app}} app. Jọwọ ṣayẹwo awọn SMS rẹ ki o si tẹ ọna asopọ naa!"
+        },
+        "email": {
+            "alert": "Awọn ipe ni a fi ranṣẹ lati ọdọ wa, ti awọn ọrẹ rẹ ko iti mọ. Tẹle pẹlu ọrọ ti o yara lati jẹ ki wọn mọ pe pipe si lati ọdọ rẹ, pe wọn lati tẹ ọna asopọ naa.",
+            "confirm": "Awọn ipe ni a fi ranṣẹ lati ọdọ wa, ti awọn ọrẹ rẹ ko iti mọ. Ṣe o fẹ lati tẹle awọn ọrọ ti o yara lati jẹ ki wọn mọ pe pipe si lati ọdọ rẹ, ti o beere fun wọn lati tẹ ọna asopọ naa.",
+            "subject": "Ṣe o gba ipe kan?",
+            "body": "Hey, Mo kan ranṣẹ si ọ si {{app}} app. Jọwọ ṣayẹwo imeeli rẹ ki o si tẹ ọna asopọ naa wa nibẹ!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Muu gbohungbohun ṣiṣẹ",
+            "cameraTitle": "Mu kamẹra ṣiṣẹ",
+            "cameraAndMicrophoneTitle": "Mu kamẹra ati Gbohungbohun ṣiṣẹ"
+        }
+    }
+}
