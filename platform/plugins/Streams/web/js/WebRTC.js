@@ -38,6 +38,8 @@ var promisifiedOldGUM = function(constraints, successCallback, errorCallback) {
 		navigator.mozGetUserMedia ||
 		navigator.msGetUserMedia);
 
+	//if(typeof cordova != 'undefined' && window.device.platform === 'iOS') getUserMedia = cordova.plugins.iosrtc.getUserMedia;
+
 	if(!getUserMedia) {
 		return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
 	}
@@ -254,7 +256,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 			var addStreamToRoom = function(stream) {
-				if(_options.stream != null) return;
+				if(_options.streams != null) return;
 
 				if(WebRTCconference != null){
 
@@ -271,18 +273,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						});
 					}
 
-					if(WebRTCconference.state == 'connected' && _options.stream == null) {
+					if(WebRTCconference.state == 'connected' && _options.streams == null) {
 						publishTracks();
 					} else {
 						WebRTCconference.event.on('joined', function () {
-							if (_options.stream == null) {
+							if (_options.streams == null) {
 								publishTracks();
 							}
 						});
 					}
 
-				} else if (_options.stream == null) {
-					_options.stream = stream;
+				} else if (_options.streams == null) {
+					_options.streams = [stream];
 				}
 				Q.Dialogs.pop();
 			}
@@ -356,6 +358,120 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		}
 
 		var publishMediaTracks = function () {
+			console.log('publishMediaTracks: ' + _options.startWith.video + ' ' + _options.startWith.audio)
+
+			if(typeof cordova != 'undefined' && window.device.platform === 'iOS') {
+				cordova.plugins.iosrtc.enumerateDevices(function(mediaDevicesList) {
+					var mediaDevices = mediaDevicesList;
+
+					var videoDevices = 0;
+					var audioDevices = 0;
+					for (var i in mediaDevices) {
+						if (mediaDevices[i].kind.indexOf('video') != -1) {
+							if (_debug) console.log('publishMediaTracks mediaDevices[i]', mediaDevices[i].deviceId);
+							videoDevices++;
+						} else if (mediaDevices[i].kind.indexOf('audio') != -1) {
+							if (_debug) console.log('publishMediaTracks mediaDevices[i]', mediaDevices[i].deviceId);
+							audioDevices++;
+						}
+					}
+
+					var publishStreams = function (streams) {
+						if (_options.streams != null) return;
+						if (WebRTCconference != null) {
+							_options.streams = streams;
+							var publishTracks = function () {
+								for (var s in streams) {
+									var tracks = streams[s].getTracks();
+									for (var t in tracks) {
+										WebRTCconference.conferenceControl.addTrack(tracks[t], streams[s]);
+									}
+								}
+
+								navigator.mediaDevices.enumerateDevices().then(function (mediaDevices) {
+									WebRTCconference.conferenceControl.loadDevicesList(mediaDevices);
+								}).catch(function (e) {
+									console.error('ERROR: cannot get device info: ' + e.message);
+								});
+							}
+
+							if (WebRTCconference.state == 'connected') {
+								console.log('publishMediaTracks: got stream: publishTracks');
+
+								publishTracks();
+								Q.Dialogs.pop();
+							} else {
+								console.log('publishMediaTracks: got stream: delay publish');
+
+								WebRTCconference.event.on('joined', function () {
+									publishTracks();
+									Q.Dialogs.pop();
+								});
+							}
+						} else if (_options.streams == null) {
+							console.log('publishMediaTracks: got stream: add to options');
+
+							_options.streams = streams;
+							window.sstream = streams;
+
+						}
+					}
+
+					var requestVideoStream = function (callback) {
+						cordova.plugins.iosrtc.getUserMedia(
+							{
+								video: true,
+								audio: false
+							},
+							function (stream) {
+								console.log('requestVideoStream: got stream');
+								if(callback != null) callback(stream);
+							},
+							function (error) {
+								console.error('EEEEEEEEEEERRRRRRROOOOOOOOOOORRRRRRRRR requestVideoStream failed: ', error);
+								console.log('EEEEEEEEEEERRRRRRROOOOOOOOOOORRRRRRRRR requestVideoStream failed: ', error);
+							}
+						);
+					}
+
+					var requestAudioStream = function (callback) {
+						cordova.plugins.iosrtc.getUserMedia(
+							{
+								video: false,
+								audio: true
+							},
+							function (stream) {
+								console.log('publishMediaTracks: got stream');
+								if(callback != null) callback(stream);
+							},
+							function (error) {
+								console.error('EEEEEEEEEEERRRRRRROOOOOOOOOOORRRRRRRRR publishmediaTracks failed: ', error);
+								console.log('EEEEEEEEEEERRRRRRROOOOOOOOOOORRRRRRRRR publishMediaTracks failed: ', error);
+							}
+						);
+					}
+
+					if(_options.startWith.video && videoDevices != 0 && _options.startWith.audio && audioDevices != 0) {
+						requestVideoStream(function (videoStream) {
+							requestAudioStream(function (audioStream) {
+								publishStreams([videoStream, audioStream]);
+							});
+						});
+					} else if(_options.startWith.video && videoDevices != 0) {
+						requestVideoStream(function (videoStream) {
+							publishStreams([videoStream]);
+						});
+					} else if(_options.startWith.audio && audioDevices != 0) {
+						requestAudioStream(function (audioStream) {
+							publishStreams([audioStream]);
+						});
+					}
+
+
+				})
+				return;
+			}
+
 			navigator.mediaDevices.enumerateDevices().then(function (mediaDevices) {
 				var videoDevices = 0;
 				var audioDevices = 0;
@@ -367,12 +483,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						audioDevices++;
 					}
 				}
+
 				navigator.mediaDevices.getUserMedia({video: _options.startWith.video && videoDevices != 0, audio:_options.startWith.audio && audioDevices != 0})
 					.then(function (stream) {
-						if(_options.stream != null) return;
+						console.log('publishMediaTracks: stream ', stream);
+
+						if(_options.streams != null) return;
 						//Q.Dialogs.pop();
 						if(WebRTCconference != null){
-							_options.stream = stream;
+							_options.streams = [stream];
 							var publishTracks = function() {
 								var tracks = stream.getTracks();
 								for(var t in tracks) {
@@ -395,8 +514,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 									Q.Dialogs.pop();
 								});
 							}
-						} else if (_options.stream == null) {
-							_options.stream = stream;
+						} else if (_options.streams == null) {
+							console.log('publishMediaTracks: _options.streams ', stream);
+
+							_options.streams = [stream];
+							console.log('publishMediaTracks: _options.streams 2', _options.streams);
+
 
 						}
 					}).catch(function(err) {
@@ -438,7 +561,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					useAsLibrary: true,
 					video: false,
 					audio: false,
-					stream: _options.stream != null ? _options.stream : null
+					streams: _options.streams != null ? _options.streams : null
 				});
 				window.WebConf = WebRTCconference;
 
@@ -508,6 +631,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 				var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
+				console.log('roomId', roomId)
 				WebRTCconference = window.WebRTCconferenceLib({
 					mode:'nodejs',
 					useAsLibrary: true,
@@ -517,7 +641,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					username:  Q.Users.loggedInUser.id + '\t' + Date.now(),
 					video: false,
 					audio: false,
-					stream: _options.stream != null ? _options.stream : null,
+					streams: _options.streams != null ? _options.streams : null,
 					turnCredentials: turnCredentials
 				});
 
@@ -1878,7 +2002,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 		function enableiOSDebug() {
 			var ua=navigator.userAgent;
-			if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
+			/*if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
 				console.stdlog = console.log.bind(console);
 				console.log = function (txt) {
 
@@ -1902,12 +2026,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 					}
 				}
-			}
+			}*/
 			console.stderror = console.error.bind(console);
 
 			console.error = function (txt) {
 
-				if(!debugSocket || debugSocket && !debugSocket.connected) return;
+				if(!debugSocket || debugSocket && !debugSocket.connected) {
+					console.stderror.apply(console, arguments);
+					return;
+				}
 
 				try {
 					var err = (new Error);
@@ -1988,25 +2115,56 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				createInfoSnippet()
 				//showPageLoader();
-				var startWith = _options.startWith || {};
-				if (startWith.audio || startWith.video) {
-					publishMediaTracks();
-					showPermissionsDialogue();
-				}
+				console.log('module.start');
 
 				_debugTimer.loadStart = performance.now();
-				Q.addScript([
-					'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js',
-				], function () {
-					try {
-						window.debugSocket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket']});
-						debugSocket.on('connect', function () {
-							console.log('CONNECTED', debugSocket);
-							enableiOSDebug(debugSocket);
-						});
-					} catch (e) {
-						console.error(e);
+
+				if(_debug) {
+					Q.addScript([
+						'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js',
+					], function () {
+						try {
+							window.debugSocket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket']});
+							debugSocket.on('connect', function () {
+								console.log('CONNECTED', debugSocket);
+								enableiOSDebug(debugSocket);
+								onConnect();
+							});
+						} catch (e) {
+							console.error(e);
+						}
+
+					});
+				} else {
+					Q.addScript([
+						'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js',
+					], function () {
+						try {
+							window.debugSocket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket']});
+							debugSocket.on('connect', function () {
+								console.log('CONNECTED', debugSocket);
+								enableiOSDebug(debugSocket);
+
+							});
+						} catch (e) {
+							console.error(e);
+						}
+
+					});
+					onConnect();
+				}
+
+				function onConnect() {
+					console.log('module.start load time ' + (performance.now() - _debugTimer.loadStart));
+
+					var startWith = _options.startWith || {};
+					if (startWith.audio || startWith.video) {
+						console.log('module.start 2');
+
+						publishMediaTracks();
+						showPermissionsDialogue();
 					}
+
 
 					if((typeof window.RTCPeerConnection == 'undefined' && typeof window.mozRTCPeerConnection == 'undefined' && typeof  window.webkitRTCPeerConnection == 'undefined')) {
 						Q.alert('Unfortunatelly your browser doesn\'t support WebRTC')
@@ -2116,9 +2274,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					if(roomId != null && _options.roomPublisherId != null) {
 						createOrJoinRoomStream(roomId, _options.roomPublisherId);
 					}
-
-				});
-
+				}
 			});
 
 		}

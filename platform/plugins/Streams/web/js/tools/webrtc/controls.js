@@ -119,6 +119,8 @@
 					tool.updateControlBar();
 				});
 				webRTClib.event.on('deviceListUpdated', function () {
+					console.log('CONTROLS loadCamerasList');
+
 					tool.loadCamerasList();
 				});
 
@@ -160,11 +162,11 @@
 				var cameraSwitcherBtn = document.createElement('DIV');
 				cameraSwitcherBtn.className = 'Streams_webrtc_camera-switcher-btn';
 				cameraSwitcherBtn.innerHTML = icons.switchCameras;
-				/*var speakerBtnCon = document.createElement('DIV');
+				var speakerBtnCon = document.createElement('DIV');
 				speakerBtnCon.className = 'Streams_webrtc_speaker-control';
 				var speakerBtn = document.createElement('DIV');
 				speakerBtn.className = 'Streams_webrtc_speaker-control-btn';
-				speakerBtn.innerHTML = icons.enabledSpeaker;*/
+				speakerBtn.innerHTML = icons.enabledSpeaker;
 				var microphoneBtnCon = document.createElement('DIV');
 				microphoneBtnCon.className = 'Streams_webrtc_microphone-control';
 				var microphoneBtn = document.createElement('DIV');
@@ -203,7 +205,7 @@
 				cameraBtnCon.appendChild(cameraBtnIcon);
 				controlBarCon.appendChild(cameraBtnCon);
 				if(webRTClib.conferenceControl.videoInputDevices.length > 1) { controlBarCon.appendChild(cameraSwitcherBtn);}
-				//if(Q.info.isMobile) controlBarCon.appendChild(speakerBtn);
+				if(Q.info.isMobile) controlBarCon.appendChild(speakerBtn);
 				controlBarCon.appendChild(microphoneBtn);
 				textChatBtnCon.appendChild(textChatBtn);
 				textChatBtnCon.appendChild(textChatBtnIcon);
@@ -220,7 +222,7 @@
 				tool.controlBar = controlBar;
 				tool.cameraBtn = cameraBtn;
 				tool.cameraBtnIcon = cameraBtnIcon;
-				//tool.speakerBtn = speakerBtn;
+				tool.speakerBtn = speakerBtn;
 				tool.microphoneBtn = microphoneBtn;
 				tool.usersBtn = usersBtn;
 				tool.usersBtnIcon = usersBtnIcon;
@@ -231,7 +233,13 @@
 
 				cameraBtn.addEventListener('touchend', function () {
 					if(!Q.info.isMobile && !Q.info.isTablet) return;
-					if(webRTClib.conferenceControl.frontCameraDevice() == null) {
+					console.log('ENABLE VIDEO TAP')
+					var enabledAudioTracks = webRTClib.localParticipant().tracks.filter(function (t) {
+						return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
+					}).length;
+
+					console.log('updateControlBar audio num=' + enabledAudioTracks);
+					if(webRTClib.conferenceControl.frontCameraDevice() == null && enabledAudioTracks == 0 && webRTClib.localParticipant().audioStream == null && !(typeof cordova != 'undefined' && window.device.platform === 'iOS')) {
 						webRTClib.conferenceControl.requestCamera(function () {
 							var currentCamera = webRTClib.conferenceControl.frontCameraDevice();
 							if(currentCamera != null && tool.settingsPopupEl != null) {
@@ -281,9 +289,9 @@
 				cameraSwitcherBtn.addEventListener('mouseup', function () {
 					tool.toggleCameras();
 				})
-				/*speakerBtn.addEventListener('mouseup', function () {
-					tool.toggleAudioOfAll();
-				})*/
+				speakerBtn.addEventListener('mouseup', function () {
+					tool.toggleAudioOutputSpeaker();
+				})
 				microphoneBtn.addEventListener('mouseup', function () {
 					tool.toggleAudio();
 				})
@@ -452,12 +460,29 @@
 
 				console.log('toggleAudio--' + (webRTClib.conferenceControl.micIsEnabled()))
 				console.log('toggleAudio--' + (enabledAudioTracks))
-				if(webRTClib.conferenceControl.micIsEnabled() && enabledAudioTracks != 0){
+				if(webRTClib.conferenceControl.micIsEnabled() && (enabledAudioTracks != 0 || localParticipant.audioStream != null)){
 					webRTClib.conferenceControl.disableAudio();
 				} else {
 					webRTClib.conferenceControl.enableAudio();
 				}
 				tool.participantsPopup().toggleLocalAudio();
+				tool.updateControlBar();
+			},
+
+			/**
+			 * Turn on/off microphone (local audio tracks)
+			 * @method toggleAudio
+			 */
+			toggleAudioOutputSpeaker: function () {
+				var tool = this;
+				if(webRTClib.conferenceControl.audioOutputMode().getCurrent() == 'speaker'){
+					console.log('toggleAudioOutputSpeaker earpiece')
+					webRTClib.conferenceControl.audioOutputMode().set('earpiece');
+				} else {
+					console.log('toggleAudioOutputSpeaker speaker ')
+
+					webRTClib.conferenceControl.audioOutputMode().set('speaker');
+				}
 				tool.updateControlBar();
 			},
 
@@ -500,8 +525,8 @@
 					return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 				}).length;
 
-				console.log('enabledVideoTracks', enabledVideoTracks, conferenceControl.cameraIsEnabled())
-				if(enabledVideoTracks == 0) {
+				console.log('enabledVideoTracks', enabledVideoTracks, conferenceControl.cameraIsEnabled(), webRTClib.localParticipant().videoStream)
+				if(enabledVideoTracks == 0 && webRTClib.localParticipant().videoStream == null) {
 					tool.cameraBtnIcon.innerHTML = icons.disabledCamera;
 				} else if(!conferenceControl.cameraIsEnabled()) {
 					tool.cameraBtnIcon.innerHTML = icons.disabledCamera;
@@ -521,12 +546,20 @@
 					return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 				}).length;
 
-				if(enabledAudioTracks == 0) {
+				console.log('updateControlBar audio num=' + enabledAudioTracks)
+
+				if(enabledAudioTracks == 0 && webRTClib.localParticipant().audioStream == null) {
 					tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
 				} else if(!conferenceControl.micIsEnabled()) {
 					tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
 				} else if(conferenceControl.micIsEnabled()) {
 					tool.microphoneBtn.innerHTML = icons.microphone;
+				}
+
+				if(webRTClib.conferenceControl.audioOutputMode().getCurrent() == 'speaker'){
+					tool.speakerBtn.innerHTML = icons.enabledSpeaker;
+				} else {
+					tool.speakerBtn.innerHTML = icons.disabledSpeaker;
 				}
 
 				if(_isiOSCordova) tool.webViewElements().showOrHide();
@@ -535,6 +568,7 @@
 			webViewElements: function() {
 				var tool = this;
 				 function hide() {
+				 	return;
 					console.log('webViewElements 2');
 					var screens = webRTClib.screens();
 					for (var i in screens) {
@@ -548,6 +582,7 @@
 				}
 
 				function show() {
+				 	return;
 					console.log('webViewElements 2');
 					var screens = webRTClib.screens();
 					for (var i in screens) {
@@ -560,6 +595,7 @@
 				}
 
 				function showOrHide() {
+				 	return;
 					if(typeof cordova != 'undefined' && _isiOS) {
 						if( tool.state.dialogIsOpened == true) {
 							this.hide();
@@ -638,13 +674,18 @@
 			 * @method createSettingsPopup
 			 */
 			createSettingsPopup: function () {
+				console.log('createSettingsPopup');
 				var tool = this;
 
 				var settingsPopup=document.createElement('DIV');
 				settingsPopup.className = 'Streams_webrtc_popup-settings Streams_webrtc_popup-box';
 
 				function toggleRadioButton(label) {
+					console.log('toggleRadioButton', label);
+
 					var allItems = Array.prototype.slice.call(settingsPopup.querySelectorAll('label'));
+					console.log('toggleRadioButton allItems', allItems.length);
+
 					for(var i in allItems) {
 						if(allItems[i] == label) continue;
 						allItems[i].querySelector('input').checked = false;
@@ -711,20 +752,39 @@
 				var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
 					return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 				}).length;
-				if(enabledVideoTracks == 0) {
+				if(enabledVideoTracks == 0 && localParticipant.videoStream == null) {
 					toggleRadioButton(turnOffradioBtnItem);
 				}
 
+				console.log('createSettingsPopup loadCamerasList 0');
 
 				function loadCamerasList () {
+					console.log('loadCamerasList');
 					var count = 1;
+					var existingItems = videoinputList.querySelectorAll('input[data-camera="true"]');
+
+					for(var c in existingItems) {
+						if (typeof existingItems[c].parentNode != 'undefined') {
+							var label = existingItems[c].parentNode;
+							var itemValue = existingItems[c].value;
+
+							if(itemValue != 'auto' && itemValue != 'screen' && itemValue != 'off') {
+								if(label.parentNode) label.parentNode.removeChild(label);
+							}
+						}
+					}
+
 					webRTClib.conferenceControl.videoInputDevices().forEach(function(mediaDevice){
+						console.log('videoInputDevices ' + mediaDevice.id);
+
 						var radioBtnItem = document.createElement('LABEL');
 						radioBtnItem.dataset.deviceId = mediaDevice.deviceId;
 						var radioBtn= document.createElement('INPUT');
 						radioBtn.name = 'cameras';
 						radioBtn.type = 'radio';
 						radioBtn.value = mediaDevice.deviceId;
+						radioBtn.dataset.camera = true;
+
 						var textLabel = document.createTextNode(mediaDevice.label || `Camera ${count  }`);
 						var checkmark = document.createElement('SPAN');
 						checkmark.className = 'Streams_webrtc_radio-checkmark';
@@ -765,8 +825,7 @@
 					});
 				}
 				tool.loadCamerasList = loadCamerasList;
-				if(typeof cordova != "undefined" && _isiOS)   loadCamerasList();
-
+				loadCamerasList();
 
 				turnOnCameraItem.addEventListener('mouseup', function (e) {
 					var label = e.currentTarget;
@@ -820,6 +879,7 @@
 				})
 
 				turnOffradioBtnItem.addEventListener('mouseup', function (e) {
+					console.log('turnOffradioBtnItem');
 					toggleRadioButton(e.currentTarget);
 					webRTClib.conferenceControl.disableVideo();
 					Q.Dialogs.pop();
@@ -956,7 +1016,7 @@
 									return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 								}).length;
 
-								if(webRTClib.conferenceControl.micIsEnabled() && enabledAudioTracks != 0){
+								if(webRTClib.conferenceControl.micIsEnabled() && (enabledAudioTracks != 0 || localParticipant.audioStream != null)){
 									listItem.audioBtnEl.innerHTML = listIcons.locDisabledMic;
 									webRTClib.conferenceControl.disableAudio();
 								} else {
@@ -1403,10 +1463,10 @@
 							var enabledVideoTracks = participant.tracks.filter(function (t) {
 								//if(!participant.isLocal) console.log('checkActiveMediaTracks enabledAudioTracks = ' + (t.mediaStreamTrack != null) + '--' + (t.mediaStreamTrack.enabled) + '--' + (t.mediaStreamTrack.readyState));
 
-								return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
+								return t.kind == 'video' && t.mediaStreamTrack != null && (t.mediaStreamTrack.enabled && t.mediaStreamTrack.readyState != 'ended');
 							}).length;
 
-							//console.log('checkActiveMediaTracks', participant, enabledVideoTracks)
+							//console.log('checkActiveMediaTracks ' + enabledVideoTracks)
 							if(enabledVideoTracks == 0 || participant.remoteCameraIsEnabled == false) {
 
 								for(var s in screens) {
