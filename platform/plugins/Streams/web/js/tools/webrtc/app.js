@@ -1405,16 +1405,17 @@ WebRTCconferenceLib = function app(options){
 			remoteStreamEl.playsInline = true;
 			remoteStreamEl.setAttribute('webkit-playsinline', true);
 
-			if(participant.isLocal && track.kind == 'video') {
+			if(participant.isLocal) {
 				if(_debug) console.log('createTrackElement videoStream = stream')
 
 				remoteStreamEl.volume = 0;
 				remoteStreamEl.muted = true;
 
-				localParticipant.videoStream = stream;
+				if(track.kind == 'video') localParticipant.videoStream = stream;
+				if (track.kind == 'audio') localParticipant.audioStream = stream;
 			}
 
-			if (participant.isLocal && track.kind == 'audio') localParticipant.audioStream = stream;
+
 
 			/*if(typeof cordova != 'undefined' && _isiOS) {
 				remoteStreamEl.style.width = '100%';
