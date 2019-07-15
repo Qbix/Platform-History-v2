@@ -7232,6 +7232,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 				return o.returnAll ? script : false;
 			}
 			if (!Q.addScript.added[src]
+			&& !script.wasProcessedByQ
 			&& (!('readyState' in script)
 			|| (script.readyState !== 'complete'
 			|| script.readyState !== 'loaded'))) {
