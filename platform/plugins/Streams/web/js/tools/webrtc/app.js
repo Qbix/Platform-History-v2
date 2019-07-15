@@ -1415,7 +1415,7 @@ WebRTCconferenceLib = function app(options){
 				if (track.kind == 'audio') localParticipant.audioStream = stream;
 			}
 
-
+			
 
 			/*if(typeof cordova != 'undefined' && _isiOS) {
 				remoteStreamEl.style.width = '100%';

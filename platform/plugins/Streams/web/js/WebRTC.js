@@ -73,7 +73,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	Streams.WebRTC = function Streams_WebRTC() {
 		var WebRTCconference;
 		var _options = {
-			mediaDevicesDialog: true,
+			mediaDevicesDialog: {timeout:0},
 			startWith: {
 				audio: true,
 				video: false
@@ -301,50 +301,50 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					}
 				}
 
-				if(_options.mediaDevicesDialog) {
-					Q.Text.get("Streams/content", function (err, result) {
-						var mediaDevicesDialog = document.createElement('DIV');
-						mediaDevicesDialog.className = 'Streams_webrtc_devices_dialog_inner';
-						var turnOnBtn = document.createElement('BUTTON');
-						turnOnBtn.type = 'button';
-						turnOnBtn.className = 'Q_button Streams_webrtc_enable-microphone-btn';
-						var btnText = document.createElement('SPAN');
-						turnOnBtn.appendChild(btnText)
-						var titleText;
-						if (_options.startWith.audio) {
-							turnOnBtn.innerHTML = micIcon + turnOnBtn.innerHTML;
-							titleText = 'microphoneTitle';
-						}
-						if (_options.startWith.video) {
-							turnOnBtn.innerHTML = turnOnBtn.innerHTML + cameraIcon;
-							titleText = 'cameraTitle';
-						}
-						if (_options.startWith.audio && _options.startWith.video) {
-							titleText = 'cameraAndMicrophoneTitle';
-						}
-						var text = Q.getObject("webrtc.allow." + titleText, result);
-						turnOnBtn.querySelector('SPAN').innerHTML = text;
+
+				Q.Text.get("Streams/content", function (err, result) {
+					var mediaDevicesDialog = document.createElement('DIV');
+					mediaDevicesDialog.className = 'Streams_webrtc_devices_dialog_inner';
+					var turnOnBtn = document.createElement('BUTTON');
+					turnOnBtn.type = 'button';
+					turnOnBtn.className = 'Q_button Streams_webrtc_enable-microphone-btn';
+					var btnText = document.createElement('SPAN');
+					turnOnBtn.appendChild(btnText)
+					var titleText;
+					if (_options.startWith.audio) {
+						turnOnBtn.innerHTML = micIcon + turnOnBtn.innerHTML;
+						titleText = 'microphoneBtn';
+					}
+					if (_options.startWith.video) {
+						turnOnBtn.innerHTML = turnOnBtn.innerHTML + cameraIcon;
+						titleText = 'cameraBtn';
+					}
+					if (_options.startWith.audio && _options.startWith.video) {
+						titleText = 'cameraAndMicrophoneBtn';
+					}
+					var text = Q.getObject("webrtc.allow." + titleText, result);
+					turnOnBtn.querySelector('SPAN').innerHTML = text;
 
 
-						mediaDevicesDialog.appendChild(turnOnBtn);
-						mediaDevicesDialog.addEventListener('mouseup', function (e) {
-							navigator.mediaDevices.getUserMedia({video: _options.startWith.video && videoDevices != 0, audio:_options.startWith.audio && audioDevices != 0})
-								.then(function (stream) {
-									addStreamToRoom(stream);
-								}).catch(function (err) {
-								console.error(err.name + ": " + err.message);
-							});
+					mediaDevicesDialog.appendChild(turnOnBtn);
+					mediaDevicesDialog.addEventListener('mouseup', function (e) {
+						navigator.mediaDevices.getUserMedia({video: _options.startWith.video && videoDevices != 0, audio:_options.startWith.audio && audioDevices != 0})
+							.then(function (stream) {
+								addStreamToRoom(stream);
+							}).catch(function (err) {
+							console.error(err.name + ": " + err.message);
 						});
+					});
 
-						Q.Dialogs.push({
-							title: text,
-							className: 'Streams_webrtc_devices_dialog Q_working',
-							content: mediaDevicesDialog,
-							apply: true,
-						});
+					Q.Dialogs.push({
+						title: Q.getObject("webrtc.allow.dialogTitle", result),
+						className: 'Streams_webrtc_devices_dialog Q_working',
+						content: mediaDevicesDialog,
+						apply: true,
+					});
 
-					})
-				}
+				})
+
 				console.log('_options.startWith',_options.startWith)
 				navigator.mediaDevices.getUserMedia({video: _options.startWith.video && videoDevices != 0, audio:_options.startWith.audio && audioDevices != 0})
 					.then(function (stream) {
@@ -2162,7 +2162,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						console.log('module.start 2');
 
 						publishMediaTracks();
-						showPermissionsDialogue();
+						if(_options.mediaDevicesDialog != null) {
+							setTimeout(function () {
+								if(_options.streams != null) return;
+								showPermissionsDialogue();
+							}, _options.mediaDevicesDialog.timeout != null ? _options.mediaDevicesDialog.timeout : 2000);
+
+						}
 					}
 
 

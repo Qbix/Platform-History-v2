@@ -1616,6 +1616,10 @@ webrtc_tool_popup-settings.Streams_webrtc_popup-box > div {
     align-items: center;
     background: #c12236;
 }
+.Streams_webrtc_enable-microphone-btn,
+.Q_touchscreen .Q_button.Streams_webrtc_enable-microphone-btn {
+    background: #28a745;
+}
 .Streams_webrtc_enable-microphone-btn span,
 .Streams_webrtc_disconnect-btn span {
     margin-left:10px;
