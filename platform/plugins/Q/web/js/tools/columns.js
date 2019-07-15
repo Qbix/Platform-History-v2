@@ -246,7 +246,6 @@ Q.Tool.define("Q/columns", function(options) {
 			// div.style.display = 'none';
 			div.style.visibility = 'hidden';
 			$div = $(div);
-			++this.state.max;
 			this.state.columns[index] = div;
 			var $tc = $('<div class="Q_columns_title_container">');
 			var $ts = $('<h2 class="Q_title_slot"></h2>').appendTo($tc);
@@ -278,6 +277,9 @@ Q.Tool.define("Q/columns", function(options) {
 			controlsSlot = $('.Q_controls_slot', div)[0];
 			$div.attr('data-title', $(titleSlot).text() || document.title);
 		}
+
+		++this.state.max;
+
 		if (state.closeFromSwipeDown) {
 			Q.addEventListener($title[0], 'touchstart', function (e1) {
 				var x1 = Q.Pointer.getX(e1);
