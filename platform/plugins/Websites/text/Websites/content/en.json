@@ -23,7 +23,8 @@
             "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Browse",
             "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation"
+            "StartConversation": "Start Conversation",
+			"GotoConversation": "Go to Conversation"
         }
     }
 }

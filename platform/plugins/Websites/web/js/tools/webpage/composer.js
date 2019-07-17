@@ -135,6 +135,12 @@
 							url: state.siteData.url,
 							text: tool.text.webpage
 						}, function (err, html) {
+							if (state.siteData.alreadyExist) {
+								$message.hide();
+								$message.closest(".Q_autogrow_container").hide();
+								$startButton.html(tool.text.webpage.composer.GotoConversation);
+							}
+
 							tool.$(".Websites_webpage_composer").html(html);
 						});
 
