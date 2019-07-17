@@ -265,12 +265,18 @@ class Websites_Webpage
 	 * If Websites/webpage stream for this $url already exists - return one.
 	 * @method fetchStream
 	 * @static
-	 * @param {string} $publisherId
 	 * @param {string} $url
 	 * @return Streams_Stream
 	 */
-	static function fetchStream($publisherId, $url) {
-		return Streams::fetchOne($publisherId, $publisherId, "Websites/webpage/".self::normalizeUrl($url));
+	static function fetchStream($url) {
+
+		$streams = new Streams_Stream();
+		$streams->name = "Websites/webpage/".self::normalizeUrl($url);
+		if ($streams->retrieve()) {
+			return Streams::fetchOne($streams->publisherId, $streams->publisherId, $streams->name);
+		}
+
+		return null;
 	}
 	/**
 	 * Create Websites/webpage stream from params
@@ -298,11 +304,7 @@ class Websites_Webpage
 		$userId = $publisherId ?: Users::loggedInUser(true)->id;
 
 		$title = Q::ifset($params, 'title', substr($url, strrpos($url, '/') + 1));
-		if ($title) {
-			$title = substr(Q::ifset($params, 'title', ''), 0, 255);
-		} else {
-			$title = $title ?: '';
-		}
+		$title = $title ? substr($title, 0, 255) : '';
 
 		$keywords = Q::ifset($params, 'keywords', null);
 		$description = substr(Q::ifset($params, 'description', ''), 0, 1023);
@@ -362,7 +364,7 @@ class Websites_Webpage
 
 		// check if stream for this url has been already created
 		// and if yes, return it
-		if ($webpageStream = self::fetchStream($userId, $url)) {
+		if ($webpageStream = self::fetchStream($url)) {
 			return $webpageStream;
 		}
 

@@ -21,28 +21,26 @@ function Websites_webpage_response_start($params)
 	$chatRelationType = 'Websites/webpage';
 
 	// if this stream already related, exit
-	if (Streams_RelatedTo::select()->where(array(
+	if (!Streams_RelatedTo::select()->where(array(
 		'toPublisherId' => $communitiesId,
 		'toStreamName' => $mainChatCategory,
 		'type' => $chatRelationType,
 		'fromPublisherId' => $stream->publisherId,
 		'fromStreamName' => $stream->name
 	))->fetchDbRows()) {
-		return;
+		Streams::relate(
+			null,
+			$communitiesId,
+			$mainChatCategory,
+			$chatRelationType,
+			$stream->publisherId,
+			$stream->name,
+			array(
+				'skipAccess' => true,
+				'weight' => time()
+			)
+		);
 	}
-
-	Streams::relate(
-		null,
-		$communitiesId,
-		$mainChatCategory,
-		$chatRelationType,
-		$stream->publisherId,
-		$stream->name,
-		array(
-			'skipAccess' => true,
-			'weight' => time()
-		)
-	);
 
 	// if $message not empty, set it as first message to chat
 	if (!empty($message)) {
