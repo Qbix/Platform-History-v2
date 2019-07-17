@@ -149,6 +149,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 			}, {
 				ok: state.cameraCommands.photo,
 				cancel: state.cameraCommands.library,
+				className: 'Q_dialog_cameraCommands',
 				noClose: false
 			});
 			e.preventDefault();
