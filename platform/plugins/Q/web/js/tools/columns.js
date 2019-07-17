@@ -246,6 +246,7 @@ Q.Tool.define("Q/columns", function(options) {
 			// div.style.display = 'none';
 			div.style.visibility = 'hidden';
 			$div = $(div);
+			++this.state.max;
 			this.state.columns[index] = div;
 			var $tc = $('<div class="Q_columns_title_container">');
 			var $ts = $('<h2 class="Q_title_slot"></h2>').appendTo($tc);
@@ -277,8 +278,6 @@ Q.Tool.define("Q/columns", function(options) {
 			controlsSlot = $('.Q_controls_slot', div)[0];
 			$div.attr('data-title', $(titleSlot).text() || document.title);
 		}
-
-		++this.state.max;
 
 		if (state.closeFromSwipeDown) {
 			Q.addEventListener($title[0], 'touchstart', function (e1) {
@@ -990,14 +989,13 @@ function prepareColumns(tool) {
 		tool.element.appendChild(state.container);
 	} else {
 		state.columns = [];
-		var max = 0;
 		tool.$('.Q_columns_column').each(function (index) {
 			var $this = $(this);
 			state.columns.push(this);
 			$this.data(dataKey_index, index)
 				.data(dataKey_scrollTop, Q.Pointer.scrollTop());
 			if (index > 0) {
-				max = index;
+				state.max = index;
 			}
 			if (!$this.hasClass('Q_columns_opened')
 			 && !$this.hasClass('Q_columns_opening')) {
@@ -1008,7 +1006,6 @@ function prepareColumns(tool) {
 				}, index, null, true);
 			}
 		});
-		state.max = max;
 	}
 }
 
