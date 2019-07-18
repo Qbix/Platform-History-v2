@@ -1308,7 +1308,8 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 	// TODO: start integrating this with Cordova methods to invite people
 	// from your contacts or facebook flow.
 	// Follow up with the Groups app, maybe! :)
-	if (!Users.loggedInUser) {
+	var loggedUserId = Users.loggedInUserId();
+	if (!loggedUserId) {
 		Q.handle(callback, null, ["Streams.invite: not logged in"]);
 		return false; // not logged in
 	}
@@ -1486,12 +1487,12 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 										var o = {
 											path: 'Q/uploads/Users',
 											save: 'Users/icon',
-											subpath: publisherId.splitId() + '/invited/' + rsd.invite.token,
+											subpath: loggedUserId.splitId() + '/invited/' + rsd.invite.token,
 											saveSizeName: saveSizeName,
 											onFinish: function () {
 												Q.Dialogs.pop();
 											}
-										}
+										};
 										$('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
 									}
 								});
