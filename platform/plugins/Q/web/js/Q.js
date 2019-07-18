@@ -11859,7 +11859,6 @@ Q.extend(Q.alert.options, Q.text.alert);
  * @param {String} [options.title='Confirm'] to override confirm dialog title.
  * @param {String} [options.ok='Yes'] to override confirm dialog 'Yes' button label, e.g. 'OK'.
  * @param {String} [options.cancel='No'] to override confirm dialog 'No' button label, e.g. 'Cancel'.
- * @param {String} [options.className] class name added to classes list of dialog element
  * @param {boolean} [options.noClose=true] set to false to show a close button
  * @param {Q.Event} [options.onClose] Optional, occurs when dialog is closed
  */
@@ -11875,7 +11874,7 @@ Q.confirm = function(message, callback, options) {
 				$('<button class="Q_button" />').html(o.cancel)
 			)
 		),
-		'className': 'Q_confirm' + (o.className ? ' ' + o.className : ''),
+		'className': 'Q_confirm',
 		'noClose': o.noClose,
 		'onClose': {'Q.confirm': function() {
 			if (!buttonClicked) Q.handle(callback, this, [null]);

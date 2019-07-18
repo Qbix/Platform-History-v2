@@ -136,7 +136,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				return false;
 			}
 			Q.confirm(state.cameraCommands.prompt, function(result) {
-				if (result == null) return;
+				if (result === null) return;
 				var source = Camera.PictureSourceType[result ? "CAMERA" : "PHOTOLIBRARY"];
 				navigator.camera.getPicture(function(data){
 					$this.plugin('Q/imagepicker', 'pick', "data:image/jpeg;base64," + data);
@@ -149,7 +149,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 			}, {
 				ok: state.cameraCommands.photo,
 				cancel: state.cameraCommands.library,
-				className: 'Q_dialog_cameraCommands',
+				className: 'Q_confirm Q_dialog_cameraCommands',
 				noClose: false
 			});
 			e.preventDefault();
