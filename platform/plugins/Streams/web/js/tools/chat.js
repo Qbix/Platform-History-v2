@@ -110,6 +110,8 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		return false;
 	});
+
+	Q.addStylesheet('{{Streams}}/css/tools/chat.css');
 },
 
 {
