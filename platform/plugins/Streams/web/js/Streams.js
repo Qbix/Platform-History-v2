@@ -1095,12 +1095,17 @@ Streams.Dialogs = {
 								};
 
 								Users.Dialogs.contacts(options, function (contacts) {
-									if (!contacts || Q.getObject('length', contacts) <= 0) {
+									if (!contacts || Object.keys(contacts).length <= 0) {
 										return;
 									}
 
+									var aContacts = [];
+									for(var i in contacts) {
+										aContacts.push(contacts[i]);
+									}
+
 									Q.Template.render("Users/templates/contacts/display", {
-										contacts: contacts,
+										contacts: aContacts,
 										text: text
 									}, function (err, html) {
 										if (err) {
@@ -1110,12 +1115,19 @@ Streams.Dialogs = {
 										$eContacts.html(html);
 
 										$("button.Streams_invite_submit_contact", $eContacts).on(Q.Pointer.fastclick, function () {
-											contacts.forEach(function(contact) {
+											for(var i in contacts) {
 												Q.handle(callback, Streams, [{
-													identifier: contact[contact.prefix]
+													identifier: contacts[i][contacts[i].prefix]
 												}]);
-											});
+											}
 											Q.Dialogs.pop(); // close the Dialog
+										});
+
+										$(".qp-communities-close", $eContacts).on(Q.Pointer.fastclick, function () {
+											var $this = $(this);
+											var id = $this.attr('data-id');
+											$this.closest("tr").remove();
+											delete contacts[id];
 										});
 									});
 									$eContacts.data("contacts", contacts);
