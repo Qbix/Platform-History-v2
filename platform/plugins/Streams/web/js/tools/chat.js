@@ -521,7 +521,8 @@ Q.Tool.define('Streams/chat', function(options) {
 	addEvents: function(){
 		var tool    = this,
 			state   = this.state,
-			blocked = false;
+			blocked = false,
+			$te = $(this.element);
 
 		if (state.more.isClick) {
 			tool.$('.Streams_chat_more').click(function(){
@@ -533,7 +534,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			});
 		}
 
-		$(tool.element).on(Q.Pointer.click, '.Streams_chat_message',
+		$te.on(Q.Pointer.click, '.Streams_chat_message',
 		function(e) {
 			var $element = $(this);
 			if (!$element.is('.Streams_chat_message')) {
@@ -598,7 +599,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		$input.plugin('Q/placeholders', {}, function () {
 			if (isTextarea) {
 				this.plugin('Q/autogrow', {
-					maxWidth: $(tool.element).width()
+					maxWidth: $te.width()
 				});
 			}
 			if (!Q.info.isTouchscreen) {
@@ -621,6 +622,15 @@ Q.Tool.define('Streams/chat', function(options) {
 			} else {
 				$submit.removeClass('Q_appear').addClass('Q_disappear');
 			}
+		});
+
+		// when virtual keyboard appear, trying to scroll body to input element position
+		$input.on('focus', function () {
+			setTimeout(function () {
+				var $body = $("body");
+				$body[0].scrollTo(0, $body.height());
+				state.$scrolling[0].scrollTo(0, $te.height());
+			}, 1000);
 		});
 
 		// submit button handler
