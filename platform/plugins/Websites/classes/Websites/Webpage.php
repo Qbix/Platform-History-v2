@@ -271,6 +271,7 @@ class Websites_Webpage
 	static function fetchStream($url) {
 
 		$streams = new Streams_Stream();
+		$streams->publisherId = Users::communityId();
 		$streams->name = "Websites/webpage/".self::normalizeUrl($url);
 		if ($streams->retrieve()) {
 			return Streams::fetchOne($streams->publisherId, $streams->publisherId, $streams->name);
@@ -282,7 +283,6 @@ class Websites_Webpage
 	 * Create Websites/webpage stream from params
 	 * @method createStream
 	 * @static
-	 * @param {string} $publisherId
 	 * @param {array} $params
 	 * @param {string} [$params.title]
 	 * @param {string} [$params.keywords]
@@ -294,14 +294,15 @@ class Websites_Webpage
 	 * @throws Exception
 	 * @return Streams_Stream
 	 */
-	static function createStream ($publisherId, $params) {
+	static function createStream ($params) {
 		$url = Q::ifset($params, 'url', null);
 		if (!Q_Valid::url($url)) {
 			throw new Exception("Invalid URL");
 		}
 		$urlParsed = parse_url($url);
 
-		$userId = $publisherId ?: Users::loggedInUser(true)->id;
+		$loggedUserId = Users::loggedInUser(true)->id;
+		$communityId = Users::communityId();
 
 		$title = Q::ifset($params, 'title', substr($url, strrpos($url, '/') + 1));
 		$title = $title ? substr($title, 0, 255) : '';
@@ -331,7 +332,7 @@ class Websites_Webpage
 		// insofar as user created Websites/webpage stream, need to complete all actions related to interest created from client
 		Q::event('Streams/interest/post', array(
 			'title' => $interestTitle,
-			'userId' => $userId
+			'userId' => $communityId
 		));
 		$interestPublisherId = Q_Response::getSlot('publisherId');
 		$interestStreamName = Q_Response::getSlot('streamName');
@@ -368,7 +369,7 @@ class Websites_Webpage
 			return $webpageStream;
 		}
 
-		$webpageStream = Streams::create($userId, $userId, 'Websites/webpage', array(
+		$webpageStream = Streams::create($communityId, $communityId, 'Websites/webpage', array(
 			'title' => trim($title),
 			'content' => trim($description) ?: "",
 			'icon' => $streamIcon,
@@ -392,6 +393,16 @@ class Websites_Webpage
 			'streamName' => $interestStreamName,
 			'type' => 'Websites/webpage'
 		));
+
+		// grant access to this stream for logged user
+		$streamsAccess = new Streams_Access();
+		$streamsAccess->publisherId = $webpageStream->publisherId;
+		$streamsAccess->streamName = $webpageStream->name;
+		$streamsAccess->ofUserId = $loggedUserId;
+		$streamsAccess->readLevel = Streams::$READ_LEVEL['max'];
+		$streamsAccess->writeLevel = Streams::$WRITE_LEVEL['max'];
+		$streamsAccess->adminLevel = Streams::$ADMIN_LEVEL['max'];
+		$streamsAccess->save();
 
 		// set custom icon for Websites/webpage stream
 		if (Q_Valid::url($bigIcon)) {

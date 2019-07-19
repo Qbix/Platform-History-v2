@@ -10,7 +10,7 @@ function Websites_webpage_response_start($params)
 
 	$message = Q::ifset($r, 'message', null);
 
-	$stream = Websites_Webpage::createStream($userId, $r['data']);
+	$stream = Websites_Webpage::createStream($r['data']);
 
 	if (!$stream) {
 		throw new Exception("stream not found");
