@@ -262,7 +262,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		var subscribed = ('yes' === Q.getObject('stream.participant.subscribed', state));
 		var what = subscribed ? 'on' : 'off';
-		var touchlabel = subscribed ? 'Subscribed' : 'Unsubscribed';
+		var touchlabel = subscribed ? tool.text.Subscribed : tool.text.Unsubscribed;
 		var fields = Q.extend({}, state.more, state.templates.main.fields);
 		fields.textarea = (state.inputType === 'textarea');
 		fields.text = tool.text;
@@ -277,7 +277,10 @@ Q.Tool.define('Streams/chat', function(options) {
 				$te.html(html).activate();
 				
 				$te.find('.Streams_chat_subscription')
-				.attr('data-touchlabel', touchlabel)
+				.attr({
+					'data-touchlabel': touchlabel,
+					'data-subscribed': subscribed
+				})
 				.on(Q.Pointer.fastclick, function () {
 					var $this = $(this);
 					var status = $this.attr('data-touchlabel');
@@ -286,10 +289,13 @@ Q.Tool.define('Streams/chat', function(options) {
 							return console.warn(err);
 						}
 
-						$this.attr('data-touchlabel', participant.subscribed === 'yes' ? 'Subscribed' : 'Unsubscribed');
+						$this.attr({
+							'data-touchlabel': participant.subscribed === 'yes' ? tool.text.Subscribed : tool.text.Unsubscribed,
+							'data-subscribed': participant.subscribed === 'yes'
+						});
 					};
 
-					$this.attr('data-touchlabel', 'loading');
+					$this.attr('data-subscribed', 'loading');
 
 					if (status === 'Subscribed') {
 						state.stream.unsubscribe(callback);
