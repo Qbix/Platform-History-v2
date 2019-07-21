@@ -27,5 +27,23 @@
 		"To": "to",
 		"From": "from",
 		"HistoryEmpty": "You have no data yet"
+	},
+	"subscriptions": {
+		"infoTitle": "Set Payment Information",
+		"confirm": {
+			"title": "Start Subscription",
+			"message": "Would you like to subscribe to {{title}}?",
+			"ok": "OK",
+			"cancel": "Cancel"
+		}
+	},
+	"payments": {
+		"infoTitle": "Set Payment Information",
+		"confirm": {
+			"title": "Make a Payment",
+			"message": "Do you agree to pay {{symbol}}{{amount}}?",
+			"ok": "OK",
+			"cancel": "Cancel"
+		}
 	}
 }
