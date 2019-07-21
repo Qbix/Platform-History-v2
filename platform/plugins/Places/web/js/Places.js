@@ -634,7 +634,6 @@ Q.Streams.Message.shouldRefreshStream("Places/location/updated", true);
 
 Q.text.Places = {
 
-
 };
 
 Q.Tool.define({

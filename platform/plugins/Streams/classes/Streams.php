@@ -3316,9 +3316,9 @@ abstract class Streams extends Base_Streams
 	 * @param {string|array} [$who.identifier] identifier such as an email or mobile number, or an array of identifiers, or tab-delimited string
 	 * @param {integer} [$who.newFutureUsers] the number of new Users_User objects to create via Users::futureUser in order to invite them to this stream. This typically is used in conjunction with passing the "html" option to this function.
 	 * @param {boolean} [$who.token=false] pass true here to save a Streams_Invite row
-	 *  with empty userId, which is used whenever someone shows up with the token
-	 *  and presents it via "Q.Streams.token" querystring parameter.
-	 *  This row is stored under "invite" key of the returned array
+	 *  with empty userId, which is used whenever someone makes a request with the
+	 *  "Q.Streams.token" querystring parameter containing the token.
+	 *  This row is exported under "invite" key of the returned data.
 	 *  See the Streams/before/Q_objects.php hook for more information.
 	 * @param {array} [$options=array()]
 	 *  @param {string|array} [$options.addLabel] label or an array of ($label => array($title, $icon)) for adding publisher's contacts
@@ -3609,7 +3609,7 @@ abstract class Streams extends Base_Streams
 			$invite->adminLevel = $adminLevel;
 			$invite->state = 'pending';
 			$invite->save();
-			$return['invite'] = $invite;
+			$return['invite'] = $invite->exportArray();
 			$return['url'] = $invite->url();
 		}
 		

@@ -49,6 +49,7 @@
 			usingOther: "or you can ",
 			facebookSrc: null,
 			prompt: "Choose a username:",
+			newUser: "or create a new account",
 			placeholders: {
 				identifier: "your mobile # or email",
 				mobile: "enter your mobile #",
@@ -1401,7 +1402,10 @@
 					);
 					return false;
 				});
-				register_form.append(p);
+				register_form.prepend(p);
+				if (Q.text.Users.login.newUser) {
+					$formContent.prepend($('<div />').html(Q.text.Streams.login.newUser));
+				}
 			}
 			return register_form;
 		}
@@ -2320,6 +2324,12 @@
 	}, 'Users');
 
 	Q.onInit.add(function () {
+		Q.Text.get('Users/content', function (err, text) {
+			if (!text) {
+				return;
+			}
+			Q.extend(Q.text.Users, 10, text);
+		});
 		if (Q.Users.loggedInUser
 			&& Q.typeOf(Q.Users.loggedInUser) !== 'Q.Users.User') {
 			Q.Users.loggedInUser = new Users.User(Q.Users.loggedInUser);

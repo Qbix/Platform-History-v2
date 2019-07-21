@@ -534,7 +534,8 @@ class Users_User extends Base_Users_User
 	 * @method setEmailAddress
 	 * @param {string} $emailAddress
 	 * @param {boolean} [$verified=false]
-	 *  Whether to force the email address to be marked verified for this user
+	 *  Whether to force the email address to be marked verified for this user,
+	 *  even if it was verified for someone else or wasn't even saved in the database.
 	 * @param {Users_Email} [&$email] Optional reference to be filled
 	 * @throws {Q_Exception_MissingRow}
 	 *	If e-mail address is missing
@@ -554,9 +555,7 @@ class Users_User extends Base_Users_User
 			$email->activationCodeExpires = null;
 		}
 		$email->authCode = sha1(microtime() . mt_rand());
-		if ($verified) {
-			$email->userId = $this->id;
-		} else {
+		if (!$verified) {
 			if (!$retrieved) {
 				throw new Q_Exception_MissingRow(array(
 					'table' => "an email",
@@ -581,6 +580,7 @@ class Users_User extends Base_Users_User
 		}
 
 		// Everything is okay. Assign it!
+		$email->userId = $this->id;
 		$email->state = 'active';
 		$email->save();
 		
@@ -729,7 +729,8 @@ class Users_User extends Base_Users_User
 	 * @method setMobileNumber
 	 * @param {string} $mobileNumber
 	 * @param {boolean} [$verified=false]
-	 *  Whether to force the mobile number to be marked verified for this user
+	 *  Whether to force the mobile number to be marked verified for this user,
+	 *  even if it was verified for someone else or wasn't even saved in the database.
 	 * @param {Users_Mobile} [&$mobile] Optional reference to be filled
 	 * @throws {Q_Exception_MissingRow}
 	 *	If mobile number is missing
@@ -749,9 +750,7 @@ class Users_User extends Base_Users_User
 			$mobile->activationCodeExpires = null;
 		}
 		$mobile->authCode = sha1(microtime() . mt_rand());
-		if ($verified) {
-			$mobile->userId = $this->id;
-		} else if ($retrieved) {
+		if (!$verified) {
 			if (!$retrieved) {
 				throw new Q_Exception_MissingRow(array(
 					'table' => "a mobile phone",
@@ -776,6 +775,7 @@ class Users_User extends Base_Users_User
 		}
 
 		// Everything is okay. Assign it!
+		$mobile->userId = $this->id;
 		$mobile->state = 'active';
 		$mobile->save();
 		
@@ -1005,19 +1005,8 @@ class Users_User extends Base_Users_User
 			$identifiers = array_map('trim', explode("\t", $identifiers));
 		}
 		$users = array();
-		foreach ($identifiers as $identifier) {
-			if (Q_Valid::email($identifier, $emailAddress)) {
-				$ui_identifier = $emailAddress; 
-				$identifierType = 'email';
-			} else if (Q_Valid::phone($identifier, $mobileNumber)) {
-				$ui_identifier = $mobileNumber; 
-				$identifierType = 'mobile';
-			} else {
-				throw new Q_Exception_WrongType(array(
-					'field' => "identifier '$identifier",
-					'type' => 'email address or mobile number'
-				), array('identifier', 'emailAddress', 'mobileNumber'));
-			}
+		foreach ($identifiers as $i => $identifier) {
+			$identifierType = Users::identifierType($identifier, $ui_identifier);
 			$status = null;
 			$users[] = $user = Users::futureUser($identifierType, $ui_identifier, $status);
 			$statuses[] = $status;

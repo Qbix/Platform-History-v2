@@ -36,6 +36,7 @@ Q.text.Streams = {
 
 	login: {
 		prompt: "Let friends recognize you:",
+		newUser: "or create a new account",
 		picTooltip: "You can change this picture later"
 	},
 
@@ -4621,7 +4622,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 		$formContent.append(
 			$('<label for="Streams_login_fullname" />').html(Q.text.Streams.login.prompt),
 			'<br>'
-		)
+		);
 	}
 	$formContent.append(
 		$('<input id="Streams_login_fullname" name="fullName" type="text" class="text" />')
@@ -4734,7 +4735,10 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 			});
 			return false;
 		});
-		register_form.append(p);
+		register_form.prepend(p);
+		if (Q.text.Streams.login.newUser) {
+			$formContent.prepend($('<div />').html(Q.text.Streams.login.newUser));
+		}
 	}
 	return register_form;
 };
@@ -5086,6 +5090,14 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 
 Q.onInit.add(function _Streams_onInit() {
 	var Users = Q.plugins.Users;
+	
+	Q.Text.get('Streams/content', function (err, text) {
+		if (!text) {
+			return;
+		}
+		Q.extend(Q.text.Streams, 10, text);
+	});
+	
 	Users.login.options.setupRegisterForm = Streams.setupRegisterForm;
 	Q.text.Users.login.placeholders.fullName = 'Enter your full name';
 	Q.text.Users.login.maxlengths.fullName = 50;
