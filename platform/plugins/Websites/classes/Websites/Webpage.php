@@ -284,6 +284,9 @@ class Websites_Webpage
 	 * @method createStream
 	 * @static
 	 * @param {array} $params
+	 * @param {string} [$params.asUserId=null] The user who would be create stream. If null - logged user id.
+	 * @param {string} [$params.publisherId=null] Stream publisher id. If null - main community if.
+	 * @param {string} [$params.skipAccess=false] Whether to skip access in Streams::create and quota checking.
 	 * @param {string} [$params.title]
 	 * @param {string} [$params.keywords]
 	 * @param {string} [$params.description]
@@ -301,8 +304,9 @@ class Websites_Webpage
 		}
 		$urlParsed = parse_url($url);
 
-		$loggedUserId = Users::loggedInUser(true)->id;
-		$communityId = Users::communityId();
+		$asUserId = Q::ifset($params, "asUserId", Users::loggedInUser(true)->id);
+		$publisherId = Q::ifset($params, "publisherId", Users::communityId());
+		$skipAccess = (bool)Q::ifset($params, "skipAccess", false);
 
 		$title = Q::ifset($params, 'title', substr($url, strrpos($url, '/') + 1));
 		$title = $title ? substr($title, 0, 255) : '';
@@ -332,7 +336,7 @@ class Websites_Webpage
 		// insofar as user created Websites/webpage stream, need to complete all actions related to interest created from client
 		Q::event('Streams/interest/post', array(
 			'title' => $interestTitle,
-			'userId' => $communityId
+			'userId' => $publisherId
 		));
 		$interestPublisherId = Q_Response::getSlot('publisherId');
 		$interestStreamName = Q_Response::getSlot('streamName');
@@ -369,7 +373,16 @@ class Websites_Webpage
 			return $webpageStream;
 		}
 
-		$webpageStream = Streams::create($communityId, $communityId, 'Websites/webpage', array(
+		$quotaName = "Websites/webpage";
+		$quota = null;
+
+		if (!$skipAccess) {
+			// check quota
+			$roles = Users::roles();
+			$quota = Users_Quota::check($asUserId, '', $quotaName, true, 1, $roles);
+		}
+
+		$webpageStream = Streams::create($asUserId, $publisherId, 'Websites/webpage', array(
 			'title' => trim($title),
 			'content' => trim($description) ?: "",
 			'icon' => $streamIcon,
@@ -386,7 +399,7 @@ class Websites_Webpage
 				'contentType' =>$contentType,
 				'lang' => Q::ifset($params, 'lang', 'en')
 			),
-			'skipAccess' => true,
+			'skipAccess' => $skipAccess,
 			'name' => "Websites/webpage/".substr(self::normalizeUrl($url), 0, 100)
 		), array(
 			'publisherId' => $interestPublisherId,
@@ -398,7 +411,7 @@ class Websites_Webpage
 		$streamsAccess = new Streams_Access();
 		$streamsAccess->publisherId = $webpageStream->publisherId;
 		$streamsAccess->streamName = $webpageStream->name;
-		$streamsAccess->ofUserId = $loggedUserId;
+		$streamsAccess->ofUserId = $asUserId;
 		$streamsAccess->readLevel = Streams::$READ_LEVEL['max'];
 		$streamsAccess->writeLevel = Streams::$WRITE_LEVEL['max'];
 		$streamsAccess->adminLevel = Streams::$ADMIN_LEVEL['max'];
@@ -429,6 +442,11 @@ class Websites_Webpage
 					));
 				}
 			}
+		}
+
+		// set quota
+		if (!$skipAccess && $quota instanceof Users_Quota) {
+			$quota->used();
 		}
 
 		return $webpageStream;
