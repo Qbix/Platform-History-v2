@@ -629,7 +629,10 @@ Q.Tool.define('Streams/chat', function(options) {
 			setTimeout(function () {
 				var $body = $("body");
 				$body[0].scrollTo(0, $body.height());
-				state.$scrolling[0].scrollTo(0, $te.height());
+
+				setTimeout(function () {
+					tool.scrollToBottom();
+				}, 200);
 			}, 1000);
 		});
 
