@@ -609,6 +609,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			var $this = $(this);
 			var $form = $this.closest('form');
 			var $submit = $form.find('.submit');
+			var $call = $form.find('.call');
 			var content = $this.val().trim();
 
 			// 'enter' key handler
@@ -619,8 +620,10 @@ Q.Tool.define('Streams/chat', function(options) {
 
 			if (content) {
 				$submit.removeClass('Q_disappear').addClass('Q_appear');
+				$call.removeClass('Q_appear').addClass('Q_disappear');
 			} else {
 				$submit.removeClass('Q_appear').addClass('Q_disappear');
+				$call.removeClass('Q_disappear').addClass('Q_appear');
 			}
 		});
 
@@ -641,6 +644,21 @@ Q.Tool.define('Streams/chat', function(options) {
 			Q.handle(_submit, $input[0], [$input]);
 		});
 
+		// call button handler
+		tool.$(".Streams_chat_composer .call").on(Q.Pointer.fastclick, function(){
+			Q.Streams.related(state.publisherId, state.streamName, 'Streams/webrtc', true, {limit: 1}, function (err) {
+				if (err) {
+					return;
+				}
+
+				// get first property from relatedStreams (actually it should be only one)
+				var stream = this.relatedStreams[Object.keys(this.relatedStreams)[0]];
+
+				if (!stream || stream.getAttribute('endTime')) {
+					//TODO create new Streams/webrtc stream
+				}
+			});
+		});
 
 		function _submit ($this) {
 			if (blocked) {
@@ -974,6 +992,7 @@ Q.Template.set('Streams/chat/main',
 			'<input type="text" placeholder="{{placeholder}}">'+
 		'{{/if}}' +
 		'<div class="submit Q_disappear"></div>' +
+		'<div class="call Q_appear"></div>' +
 	'</form>'+
 	'<hr />'+
 	'{{#if closeable}}' +

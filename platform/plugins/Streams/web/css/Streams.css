@@ -521,7 +521,7 @@
 	margin: 0 auto;
 	display: block;
 	padding: 6px;
-	margin-left: 50px;
+	margin-left: 45px;
 	height: 30px;
 	color: black;
 	padding-right: 30px;
@@ -533,6 +533,20 @@
 	top: -3px;
 	background-size: contain;
 	background-image: url("../img/chat/message-post.png");
+	background-repeat: no-repeat;
+	width: 40px;
+	height: 40px;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+.Streams_chat_composer .call {
+	cursor: pointer;
+	position: absolute;
+	right: -6px;
+	top: -3px;
+	background-size: contain;
+	background-image: url("../img/chat/call.png");
 	background-repeat: no-repeat;
 	width: 40px;
 	height: 40px;
