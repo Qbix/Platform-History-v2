@@ -286,7 +286,6 @@ class Websites_Webpage
 	 * @param {array} $params
 	 * @param {string} [$params.asUserId=null] The user who would be create stream. If null - logged user id.
 	 * @param {string} [$params.publisherId=null] Stream publisher id. If null - main community if.
-	 * @param {string} [$params.skipAccess=false] Whether to skip access in Streams::create and quota checking.
 	 * @param {string} [$params.title]
 	 * @param {string} [$params.keywords]
 	 * @param {string} [$params.description]
@@ -294,10 +293,11 @@ class Websites_Webpage
 	 * @param {string} [$params.smallIcon]
 	 * @param {array} [$params.headers] array with key "Content-Type"
 	 * @param {string} [$params.lang] two-letter code
+	 * @param {bool} [$skipAccess=false] Whether to skip access in Streams::create and quota checking.
 	 * @throws Exception
 	 * @return Streams_Stream
 	 */
-	static function createStream ($params) {
+	static function createStream ($params, $skipAccess=false) {
 		$url = Q::ifset($params, 'url', null);
 		if (!Q_Valid::url($url)) {
 			throw new Exception("Invalid URL");
@@ -306,7 +306,6 @@ class Websites_Webpage
 
 		$asUserId = Q::ifset($params, "asUserId", Users::loggedInUser(true)->id);
 		$publisherId = Q::ifset($params, "publisherId", Users::communityId());
-		$skipAccess = (bool)Q::ifset($params, "skipAccess", false);
 
 		$title = Q::ifset($params, 'title', substr($url, strrpos($url, '/') + 1));
 		$title = $title ? substr($title, 0, 255) : '';
