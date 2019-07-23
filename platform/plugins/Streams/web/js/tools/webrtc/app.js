@@ -85,6 +85,8 @@ WebRTCconferenceLib = function app(options){
 		pc_config.sdpSemantics = 'plan-b';
 	}
 
+	var testPeerConnection = new RTCPeerConnection(pc_config);
+
 	if(options.turnCredentials != null) {
 		pc_config['iceServers'].push(options.turnCredentials)
 		var testPeerConnection;
@@ -2025,22 +2027,31 @@ WebRTCconferenceLib = function app(options){
 
 					if(!participant.isLocal && participant.online && participant.online != 'checking' && participant.latestOnlineTime != null && performance.now() - participant.latestOnlineTime >= disconnectTime) {
 						if(_debug) console.log('checkOnlineStatus : remove', performance.now() - participant.latestOnlineTime, !participant.videoIsChanging)
-						socket.emit('confirmOnlineStatus', {
-							'type': 'request',
-							'targetSid': participant.sid
-						});
-
 						let latestOnlineTime = participant.latestOnlineTime;
 						let participantSid = participant.sid;
-						participant.online = 'checking';
-						setTimeout(function () {
+						if(socket) {
+							socket.emit('confirmOnlineStatus', {
+								'type': 'request',
+								'targetSid': participant.sid
+							});
+
+							participant.online = 'checking';
+							setTimeout(function () {
+								console.log(participantSid)
+								var participantToCheck = roomParticipants.filter(function (roomParticipant) {
+									return roomParticipant.sid == participantSid;
+								})[0];
+								if (participantToCheck.latestOnlineTime != latestOnlineTime) return;
+								participantDisconnected(participantToCheck);
+							}, 1000);
+						} else {
 							console.log(participantSid)
 							var participantToCheck = roomParticipants.filter(function (roomParticipant) {
 								return roomParticipant.sid == participantSid;
 							})[0];
-							if(participantToCheck.latestOnlineTime != latestOnlineTime) return;
+							if (participantToCheck.latestOnlineTime != latestOnlineTime) return;
 							participantDisconnected(participantToCheck);
-						}, 1000);
+						}
 					}
 				}
 			}, 1000);
@@ -5107,8 +5118,12 @@ WebRTCconferenceLib = function app(options){
 			if(options.mode == 'twilio') {
 				console.log('localParticipant.audioTracks().length ' + localParticipant.audioTracks().length)
 				if(localParticipant.audioTracks().length == 0) {
+					console.log('enableAudioTracks requestMicrophone')
+
 					app.conferenceControl.requestMicrophone(function (audioTrack) {
-						//enableAudioTracks();
+						console.log('enableAudioTracks requestMicrophone enableAudioTracks')
+
+						enableAudioTracks();
 						micIsDisabled = false;
 						app.eventBinding.sendDataTrackMessage('online', {micIsEnabled: true});
 						app.event.dispatch('micEnabled');
@@ -5173,7 +5188,7 @@ WebRTCconferenceLib = function app(options){
 							for (let p in roomParticipants) {
 								if (!roomParticipants[p].isLocal && roomParticipants[p].RTCPeerConnection != null && roomParticipants[p].RTCPeerConnection.connectionState != 'closed') {
 									if('ontrack' in roomParticipants[p].RTCPeerConnection){
-										if (audioStream != null) roomParticipants[p].RTCPeerConnection.addTrack(audioStream.getAudioTracks()[0]);
+										if (audioStream != null) roomParticipants[p].RTCPeerConnection.addTrack(audioStream.getAudioTracks()[0], audioStream);
 									} else {
 										if (audioStream != null) roomParticipants[p].RTCPeerConnection.addStream(audioStream);
 									}
@@ -5279,6 +5294,18 @@ WebRTCconferenceLib = function app(options){
 					twilioTracks.push(localParticipant.tracks[i].twilioReference);
 					localParticipant.tracks[i].mediaStreamTrack.stop();
 					localParticipant.tracks[i].mediaStreamTrack.enabled = false;
+
+					for(let t = localParticipant.tracks.length - 1; t >= 0 ; t--){
+
+						if(localParticipant.tracks[t].mediaStreamTrack.id == localParticipant.tracks[i].mediaStreamTrack.id) {
+							console.log('disableAudioTracks REMOVE TRACK LOOP ' + localParticipant.tracks.length);
+
+							localParticipant.tracks.splice(t, 1);
+							console.log('disableAudioTracks REMOVE TRACK LOOP ' + localParticipant.tracks.length);
+
+
+						}
+					}
 				}
 
 				localParticipant.twilioInstance.unpublishTracks(twilioTracks);
