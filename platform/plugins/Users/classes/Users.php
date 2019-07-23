@@ -1264,15 +1264,41 @@ abstract class Users extends Base_Users
 		$user->set('identify', $ui);
 		return $user;
 	}
+	
+	/**
+	 * Determines whether the identifier is an email address or mobile number
+	 * @method identifierType
+	 * @static
+	 * @param {string} $identifier The identifier
+	 * @param {&string} [$normalized=null] Will be filled with the string representing the normalized
+	 *   email address or mobile number
+	 * @return {string} The identifier type, either "mobile" or "email"
+	 * @throws {Q_Exception_WrongType} if the identifier is not a valid email or phone number
+	 */
+	function identifierType($identifier, &$normalized = null)
+	{
+		if (Q_Valid::email($identifier, $normalized)) {
+			$identifierType = 'email';
+		} else if (Q_Valid::phone($identifier, $normalized)) {
+			$identifierType = 'mobile';
+		} else {
+			throw new Q_Exception_WrongType(array(
+				'field' => "identifier '$identifier",
+				'type' => 'email address or mobile number'
+			), array('identifier', 'emailAddress', 'mobileNumber'));
+		}
+		return $identifierType;
+	}
 
 	/**
 	 * Returns Users_Identifier rows that correspond to the identifier in the database, if any.
 	 * @method identify
 	 * @static
-	 * @param {string|array} $type can be "email", "mobile",the name of a platform,
+	 * @param {string|array} $type can be "email", "mobile", the name of a platform,
 	 *  or any of the above with optional "_hashed" suffix to indicate
 	 *  that the value has already been hashed.
-	 *   It could also be an array of ($type => $value) pairs. Then $state should be null.
+	 *  It could also be an array of ($type => $value) pairs.
+	 *  Then the second parameter should be null.
 	 * @param {string} $value The value corresponding to the type. If $type is
 	 *
 	 * * "email" - this is one of the user's email addresses
@@ -1295,7 +1321,7 @@ abstract class Users extends Base_Users
 		$types = is_array($type) ? $type : array($type => $value);
 		foreach ($types as $type => $value) {
 			list($hashed, $ui_type) = self::hashing($value, $type);
-			$identifiers = "$ui_type:$hashed";
+			$identifiers[] = "$ui_type:$hashed";
 		}
 		$uis = Users_Identify::select()->where(array(
 			'identifier' => $identifiers,
@@ -1361,11 +1387,11 @@ abstract class Users extends Base_Users
 		$user->username = "";
 		$user->icon = '{{Users}}/img/icons/future';
 		if ($type === 'email') {
+			$user->emailAddressPending = $value;
 			$user->save();
-			$user->setEmailAddress($value, true);
 		} else if ($type === 'mobile') {
+			$user->mobileNumberPending = $value;
 			$user->save();
-			$user->setMobileNumber($value, true);
 		} else if (substr($type, -7) !== '_hashed') {
 			$user->setXid($type, $value, true);
 		}

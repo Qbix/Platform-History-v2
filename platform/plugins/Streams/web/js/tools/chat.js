@@ -110,6 +110,8 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		return false;
 	});
+
+	Q.addStylesheet('{{Streams}}/css/tools/chat.css');
 },
 
 {
@@ -260,8 +262,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		var subscribed = ('yes' === Q.getObject('stream.participant.subscribed', state));
 		var what = subscribed ? 'on' : 'off';
-		var touchlabel = subscribed ? 'Subscribe' : 'Unsubscribe';
-
+		var touchlabel = subscribed ? tool.text.Subscribed : tool.text.Unsubscribed;
 		var fields = Q.extend({}, state.more, state.templates.main.fields);
 		fields.textarea = (state.inputType === 'textarea');
 		fields.text = tool.text;
@@ -275,8 +276,33 @@ Q.Tool.define('Streams/chat', function(options) {
 				if (error) { return error; }
 				$te.html(html).activate();
 				
-				$te.find('Streams_chat_subscription')
-				.attr('data-touchlabel', touchlabel);
+				$te.find('.Streams_chat_subscription')
+				.attr({
+					'data-touchlabel': touchlabel,
+					'data-subscribed': subscribed
+				})
+				.on(Q.Pointer.fastclick, function () {
+					var $this = $(this);
+					var status = $this.attr('data-touchlabel');
+					var callback = function (err, participant) {
+						if (err) {
+							return console.warn(err);
+						}
+
+						$this.attr({
+							'data-touchlabel': participant.subscribed === 'yes' ? tool.text.Subscribed : tool.text.Unsubscribed,
+							'data-subscribed': participant.subscribed === 'yes'
+						});
+					};
+
+					$this.attr('data-subscribed', 'loading');
+
+					if (status === 'Subscribed') {
+						state.stream.unsubscribe(callback);
+					} else {
+						state.stream.subscribe(callback);
+					}
+				});
 				
 				if (Q.Users.loggedInUser
 				&& !state.stream.testWriteLevel('post')) {
@@ -495,7 +521,8 @@ Q.Tool.define('Streams/chat', function(options) {
 	addEvents: function(){
 		var tool    = this,
 			state   = this.state,
-			blocked = false;
+			blocked = false,
+			$te = $(this.element);
 
 		if (state.more.isClick) {
 			tool.$('.Streams_chat_more').click(function(){
@@ -507,7 +534,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			});
 		}
 
-		$(tool.element).on(Q.Pointer.click, '.Streams_chat_message',
+		$te.on(Q.Pointer.click, '.Streams_chat_message',
 		function(e) {
 			var $element = $(this);
 			if (!$element.is('.Streams_chat_message')) {
@@ -572,7 +599,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		$input.plugin('Q/placeholders', {}, function () {
 			if (isTextarea) {
 				this.plugin('Q/autogrow', {
-					maxWidth: $(tool.element).width()
+					maxWidth: $te.width()
 				});
 			}
 			if (!Q.info.isTouchscreen) {
@@ -582,6 +609,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			var $this = $(this);
 			var $form = $this.closest('form');
 			var $submit = $form.find('.submit');
+			var $call = $form.find('.call');
 			var content = $this.val().trim();
 
 			// 'enter' key handler
@@ -592,9 +620,23 @@ Q.Tool.define('Streams/chat', function(options) {
 
 			if (content) {
 				$submit.removeClass('Q_disappear').addClass('Q_appear');
+				$call.removeClass('Q_appear').addClass('Q_disappear');
 			} else {
 				$submit.removeClass('Q_appear').addClass('Q_disappear');
+				$call.removeClass('Q_disappear').addClass('Q_appear');
 			}
+		});
+
+		// when virtual keyboard appear, trying to scroll body to input element position
+		$input.on('focus', function () {
+			setTimeout(function () {
+				var $body = $("body");
+				$body[0].scrollTo(0, $body.height());
+
+				setTimeout(function () {
+					tool.scrollToBottom();
+				}, 200);
+			}, 1000);
 		});
 
 		// submit button handler
@@ -602,6 +644,21 @@ Q.Tool.define('Streams/chat', function(options) {
 			Q.handle(_submit, $input[0], [$input]);
 		});
 
+		// call button handler
+		tool.$(".Streams_chat_composer .call").on(Q.Pointer.fastclick, function(){
+			Q.Streams.related(state.publisherId, state.streamName, 'Streams/webrtc', true, {limit: 1}, function (err) {
+				if (err) {
+					return;
+				}
+
+				// get first property from relatedStreams (actually it should be only one)
+				var stream = this.relatedStreams[Object.keys(this.relatedStreams)[0]];
+
+				if (!stream || stream.getAttribute('endTime')) {
+					//TODO create new Streams/webrtc stream
+				}
+			});
+		});
 
 		function _submit ($this) {
 			if (blocked) {
@@ -931,10 +988,11 @@ Q.Template.set('Streams/chat/main',
 		'{{#if textarea}}' +
 			'<textarea placeholder="{{placeholder}}"></textarea>'+
 		'{{else}}' +
-			'<button class="Streams_chat_subscription">{{subscriptionSrc}}</button>' +
+			'<button class="Streams_chat_subscription"></button>' +
 			'<input type="text" placeholder="{{placeholder}}">'+
 		'{{/if}}' +
 		'<div class="submit Q_disappear"></div>' +
+		'<div class="call Q_appear"></div>' +
 	'</form>'+
 	'<hr />'+
 	'{{#if closeable}}' +

@@ -5,27 +5,6 @@
 	 * @class Assets
 	 */
 
-	Q.text.Assets = {
-		subscriptions: {
-			infoTitle: "Set Payment Information",
-			confirm: {
-				title: "Start Subscription",
-				message: "Would you like to subscribe to {{title}}?",
-				ok: "OK",
-				cancel: "Cancel"
-			}
-		},
-		payments: {
-			infoTitle: "Set Payment Information",
-			confirm: {
-				title: "Make a Payment",
-				message: "Do you agree to pay {{symbol}}{{amount}}?",
-				ok: "OK",
-				cancel: "Cancel"
-			}
-		}
-	};
-
 	var Users = Q.Users;
 	Streams = Q.Streams;
 	Assets = Q.Assets = Q.plugins.Assets = {
@@ -71,54 +50,56 @@
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			authnet: function (options, callback) {
-				var o = Q.extend({},
-					Q.text.Assets.subscriptions,
-					Assets.Subscriptions.authnet.options,
-					options
-				);
-				Streams.get(o.planPublisherId, o.planStreamName, function (err) {
-					if (err) {
-						return callback && callback(err);
-					}
-					var plan = this;
-					if (!o.action || !o.token) {
-						throw new Q.Error("Assets.Subscriptions.authnet: action and token are required");
-					}
-					var $form = $('<form  method="post" target="Assets_authnet" />')
-						.attr('action', o.action)
-						.append($('<input name="Token" type="hidden" />').val(o.token));
-					var html = '<iframe ' +
-						'class="Assets_authnet" ' +
-						'name="Assets_authnet" ' +
-						'src="" ' +
-						'frameborder="0" ' +
-						'scrolling="yes" ' +
-						'></iframe>';
-					Q.Dialogs.push(Q.extend({
-						title: o.infoTitle,
-						apply: true,
-						onActivate: {
-							"Assets": function () {
-								$form.submit();
-							}
-						},
-						onClose: {
-							"Assets": function () {
-								// TODO: don't do the subscription if payment info wasn't added
-								var message = o.confirm.message.interpolate({
-									title: plan.fields.title,
-									name: o.name
-								});
-								Q.extend(o, Q.text.Assets.subscriptions.confirm);
-								Q.confirm(message, function (result) {
-									if (!result) return;
-									Assets.Subscriptions.subscribe('authnet', o, callback);
-								}, o);
-							}
+				Q.Text.get('Assets/content', function (err, text.) {
+					var o = Q.extend({},
+						text.subscriptions,
+						Assets.Subscriptions.authnet.options,
+						options
+					);
+					Streams.get(o.planPublisherId, o.planStreamName, function (err) {
+						if (err) {
+							return callback && callback(err);
 						}
-					}, options, {
-						content: html
-					}));
+						var plan = this;
+						if (!o.action || !o.token) {
+							throw new Q.Error("Assets.Subscriptions.authnet: action and token are required");
+						}
+						var $form = $('<form  method="post" target="Assets_authnet" />')
+							.attr('action', o.action)
+							.append($('<input name="Token" type="hidden" />').val(o.token));
+						var html = '<iframe ' +
+							'class="Assets_authnet" ' +
+							'name="Assets_authnet" ' +
+							'src="" ' +
+							'frameborder="0" ' +
+							'scrolling="yes" ' +
+							'></iframe>';
+						Q.Dialogs.push(Q.extend({
+							title: o.infoTitle,
+							apply: true,
+							onActivate: {
+								"Assets": function () {
+									$form.submit();
+								}
+							},
+							onClose: {
+								"Assets": function () {
+									// TODO: don't do the subscription if payment info wasn't added
+									var message = o.confirm.message.interpolate({
+										title: plan.fields.title,
+										name: o.name
+									});
+									Q.extend(o, text.subscriptions.confirm);
+									Q.confirm(message, function (result) {
+										if (!result) return;
+										Assets.Subscriptions.subscribe('authnet', o, callback);
+									}, o);
+								}
+							}
+						}, options, {
+							content: html
+						}));
+					});
 				});
 			},
 
@@ -135,28 +116,30 @@
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			stripe: function (options, callback) {
-				var o = Q.extend({
-					confirm: Q.text.Assets.subscriptions.confirm
-				}, Assets.Subscriptions.stripe.options, options);
-				Streams.get(o.planPublisherId, o.planStreamName, function (err) {
-					if (err) {
-						return callback && callback(err);
-					}
-					var plan = this;
-					Q.addScript(o.javascript, function () {
-						var params = Q.extend({
-							name: o.name,
-							description: plan.fields.title,
-							amount: plan.getAttribute('amount')
-						}, o);
-						params.amount *= 100;
-						StripeCheckout.configure(Q.extend({
-							key: Assets.Payments.stripe.publishableKey,
-							token: function (token) {
-								o.token = token;
-								Assets.Subscriptions.subscribe('stripe', o, callback);
-							}
-						}, params)).open();
+				Q.Text.get('Assets/content', function (err, text) {
+					var o = Q.extend({
+						confirm: text.subscriptions.confirm
+					}, Assets.Subscriptions.stripe.options, options);
+					Streams.get(o.planPublisherId, o.planStreamName, function (err) {
+						if (err) {
+							return callback && callback(err);
+						}
+						var plan = this;
+						Q.addScript(o.javascript, function () {
+							var params = Q.extend({
+								name: o.name,
+								description: plan.fields.title,
+								amount: plan.getAttribute('amount')
+							}, o);
+							params.amount *= 100;
+							StripeCheckout.configure(Q.extend({
+								key: Assets.Payments.stripe.publishableKey,
+								token: function (token) {
+									o.token = token;
+									Assets.Subscriptions.subscribe('stripe', o, callback);
+								}
+							}, params)).open();
+						});
 					});
 				});
 			},
@@ -213,55 +196,57 @@
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			authnet: function (options, callback) {
-				var o = Q.extend({},
-					Q.text.Assets.payments,
-					Assets.Payments.authnet.options,
-					options
-				);
-				if (!o.action || !o.token) {
-					throw new Q.Error("Assets.Payments.authnet: action and token are required");
-				}
-				if (!o.amount) {
-					throw new Q.Error("Assets.Payments.authnet: amount is required");
-				}
-				var $form = $('<form method="post" target="Assets_authnet" />')
-					.attr('action', o.action)
-					.append($('<input name="Token" type="hidden" />').val(o.token));
-				var html = '<iframe ' +
-					'class="Assets_authnet" ' +
-					'name="Assets_authnet" ' +
-					'src="" ' +
-					'frameborder="0" ' +
-					'scrolling="yes" ' +
-					'></iframe>';
-				Q.Dialogs.push(Q.extend({
-					title: o.infoTitle,
-					apply: true,
-					onActivate: {
-						"Assets": function () {
-							$form.submit();
-						}
-					},
-					onClose: {
-						"Assets": function () {
-							// TODO: don't do the payment if info wasn't added
-							Assets.Currencies.load(function () {
-								var message = o.confirm.message.interpolate({
-									amount: o.amount,
-									name: o.name,
-									symbol: Assets.Currencies.symbols.USD
-								});
-								Q.extend(o, Q.text.Assets.payments.confirm);
-								Q.confirm(message, function (result) {
-									if (!result) return;
-									Assets.Payments.pay('authnet', o, callback);
-								}, o);
-							});
-						}
+				Q.Text.get('Assets/content', function (err, text) {
+					var o = Q.extend({},
+						text.payments,
+						Assets.Payments.authnet.options,
+						options
+					);
+					if (!o.action || !o.token) {
+						throw new Q.Error("Assets.Payments.authnet: action and token are required");
 					}
-				}, options, {
-					content: html
-				}));
+					if (!o.amount) {
+						throw new Q.Error("Assets.Payments.authnet: amount is required");
+					}
+					var $form = $('<form method="post" target="Assets_authnet" />')
+						.attr('action', o.action)
+						.append($('<input name="Token" type="hidden" />').val(o.token));
+					var html = '<iframe ' +
+						'class="Assets_authnet" ' +
+						'name="Assets_authnet" ' +
+						'src="" ' +
+						'frameborder="0" ' +
+						'scrolling="yes" ' +
+						'></iframe>';
+					Q.Dialogs.push(Q.extend({
+						title: o.infoTitle,
+						apply: true,
+						onActivate: {
+							"Assets": function () {
+								$form.submit();
+							}
+						},
+						onClose: {
+							"Assets": function () {
+								// TODO: don't do the payment if info wasn't added
+								Assets.Currencies.load(function () {
+									var message = o.confirm.message.interpolate({
+										amount: o.amount,
+										name: o.name,
+										symbol: Assets.Currencies.symbols.USD
+									});
+									Q.extend(o, text.payments.confirm);
+									Q.confirm(message, function (result) {
+										if (!result) return;
+										Assets.Payments.pay('authnet', o, callback);
+									}, o);
+								});
+							}
+						}
+					}, options, {
+						content: html
+					}));
+				});
 			},
 
 			/**
@@ -289,58 +274,60 @@
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			stripe: function (options, callback) {
-				var err;
-				options = Q.extend({},
-					Q.text.Assets.payments,
-					Assets.Payments.stripe.options,
-					options
-				);
-				if (!options.amount) {
-					err = _error("Assets.Payments.stripe: amount is required");
-					return Q.handle(callback, null, [err]);
-				}
-
-				options.userId = options.userId || Q.Users.loggedInUserId();
-				options.currency = (options.currency || 'USD').toUpperCase();
-
-				try {
-					Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
-				} catch (err) {
-					err = _error('Please preload Stripe js library');
-					return Q.handle(callback, null, [err]);
-				}
-				if (!Q.info.isCordova && Q.info.platform === 'ios' && Q.info.browser.name === 'safari') { // It's considered that ApplePay is supported in IOS Safari
-					Assets.Payments.applePayStripe(options, function (err, res) {
-						if (err && (err.code === 21)) { // code 21 means that this type of payment is not supported in some reason
-							Assets.Payments.standardStripe(options, callback);
-							return;
-						}
-
-						Q.handle(callback, null, [err, res]);
-					});
-				} else if (Q.info.isCordova && window.ApplePay) { // check for payment request
-					Assets.Payments.applePayCordova(options, function (err, res) {
-						if (err) {
-							return Assets.Payments.standardStripe(options, callback);
-						}
-						Q.handle(callback, null, [err, res]);
-					});
-				} else if (window.PaymentRequest) {
-					// check for payment request
-					Assets.Payments.paymentRequestStripe(options, function (err, res) {
-						if (err && (err.code === 9)) {
-							Assets.Payments.standardStripe(options, callback);
-							return;
-						}
-						Q.handle(callback, null, [err, res]);
-					});
-				} else {
-					if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
-						_redirectToBrowserTab(options);
-					} else {
-						Assets.Payments.standardStripe(options, callback);
+				Q.Text.get('Assets/content', function (err, text) {
+					var err;
+					options = Q.extend({},
+						text.payments,
+						Assets.Payments.stripe.options,
+						options
+					);
+					if (!options.amount) {
+						err = _error("Assets.Payments.stripe: amount is required");
+						return Q.handle(callback, null, [err]);
 					}
-				}
+
+					options.userId = options.userId || Q.Users.loggedInUserId();
+					options.currency = (options.currency || 'USD').toUpperCase();
+
+					try {
+						Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
+					} catch (err) {
+						err = _error('Please preload Stripe js library');
+						return Q.handle(callback, null, [err]);
+					}
+					if (!Q.info.isCordova && Q.info.platform === 'ios' && Q.info.browser.name === 'safari') { // It's considered that ApplePay is supported in IOS Safari
+						Assets.Payments.applePayStripe(options, function (err, res) {
+							if (err && (err.code === 21)) { // code 21 means that this type of payment is not supported in some reason
+								Assets.Payments.standardStripe(options, callback);
+								return;
+							}
+
+							Q.handle(callback, null, [err, res]);
+						});
+					} else if (Q.info.isCordova && window.ApplePay) { // check for payment request
+						Assets.Payments.applePayCordova(options, function (err, res) {
+							if (err) {
+								return Assets.Payments.standardStripe(options, callback);
+							}
+							Q.handle(callback, null, [err, res]);
+						});
+					} else if (window.PaymentRequest) {
+						// check for payment request
+						Assets.Payments.paymentRequestStripe(options, function (err, res) {
+							if (err && (err.code === 9)) {
+								Assets.Payments.standardStripe(options, callback);
+								return;
+							}
+							Q.handle(callback, null, [err, res]);
+						});
+					} else {
+						if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
+							_redirectToBrowserTab(options);
+						} else {
+							Assets.Payments.standardStripe(options, callback);
+						}
+					}
+				})
 			},
 			/**
 			 * This method use googlePay

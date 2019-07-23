@@ -38,9 +38,9 @@ function Users_activate_post()
 
 	if ($type) {
 		if ($type == 'email address') {
-			$user->setEmailAddress($email->address); // may throw exception	
+			$user->setEmailAddress($email->address, true); // may throw exception	
 		} else if ($type == 'mobile number') {
-			$user->setMobileNumber($mobile->number); // may throw exception
+			$user->setMobileNumber($mobile->number, true); // may throw exception
 		}
 		// Log the user in, since they have just added an email to their account
 		Users::setLoggedInUser($user); // This also saves the user.

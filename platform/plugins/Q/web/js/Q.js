@@ -8742,7 +8742,6 @@ function _activateTools(toolElement, options, shared) {
 						args.push(req);
 					});
 					toolConstructor.apply(this, args);
-					if (normalizedName === 'q_inplace') 
 					_activateToolHandlers[""] &&
 					_activateToolHandlers[""].handle.call(this, this.options);
 					_activateToolHandlers[normalizedName] &&
@@ -11819,7 +11818,7 @@ Q.Dialogs.push.options = {
  * @static
  * @method alert
  * @param {String} message The only required parameter, this specifies text of the alert.
- * @param {Object} [options] An optional hash of options for Q.Dialog.push and also:
+ * @param {Object} [options] An optional hash of options for Q.Dialogs.push and also:
  *   @param {String} [options.title="Alert"] Optional parameter to override alert dialog title. Defaults to 'Alert'.
  *   @param {Q.Event} [options.onClose] Optional, occurs when dialog is closed
  */
@@ -11855,7 +11854,7 @@ Q.extend(Q.alert.options, Q.text.alert);
  * @param {Function} callback: This will be called when dialog is closed,
  *   passing true | false depending on whether user clicked (tapped) 'Ok' or 'Cancel' button, respectively
  *   or null if the user closed the dialog.
- * @param {Object} [options] An optional hash of options for Q.Dialog.push and also:
+ * @param {Object} [options] An optional hash of options for Q.Dialogs.push and also:
  * @param {String} [options.title='Confirm'] to override confirm dialog title.
  * @param {String} [options.ok='Yes'] to override confirm dialog 'Yes' button label, e.g. 'OK'.
  * @param {String} [options.cancel='No'] to override confirm dialog 'No' button label, e.g. 'Cancel'.

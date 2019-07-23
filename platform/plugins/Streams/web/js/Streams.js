@@ -36,6 +36,7 @@ Q.text.Streams = {
 
 	login: {
 		prompt: "Let friends recognize you:",
+		newUser: "or create a new account",
 		picTooltip: "You can change this picture later"
 	},
 
@@ -1095,12 +1096,17 @@ Streams.Dialogs = {
 								};
 
 								Users.Dialogs.contacts(options, function (contacts) {
-									if (!contacts || Q.getObject('length', contacts) <= 0) {
+									if (!contacts || Object.keys(contacts).length <= 0) {
 										return;
 									}
 
+									var aContacts = [];
+									for(var i in contacts) {
+										aContacts.push(contacts[i]);
+									}
+
 									Q.Template.render("Users/templates/contacts/display", {
-										contacts: contacts,
+										contacts: aContacts,
 										text: text
 									}, function (err, html) {
 										if (err) {
@@ -1110,12 +1116,19 @@ Streams.Dialogs = {
 										$eContacts.html(html);
 
 										$("button.Streams_invite_submit_contact", $eContacts).on(Q.Pointer.fastclick, function () {
-											contacts.forEach(function(contact) {
+											for(var i in contacts) {
 												Q.handle(callback, Streams, [{
-													identifier: contact[contact.prefix]
+													identifier: contacts[i][contacts[i].prefix]
 												}]);
-											});
+											}
 											Q.Dialogs.pop(); // close the Dialog
+										});
+
+										$(".qp-communities-close", $eContacts).on(Q.Pointer.fastclick, function () {
+											var $this = $(this);
+											var id = $this.attr('data-id');
+											$this.closest("tr").remove();
+											delete contacts[id];
 										});
 									});
 									$eContacts.data("contacts", contacts);
@@ -1308,7 +1321,8 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 	// TODO: start integrating this with Cordova methods to invite people
 	// from your contacts or facebook flow.
 	// Follow up with the Groups app, maybe! :)
-	if (!Users.loggedInUser) {
+	var loggedUserId = Users.loggedInUserId();
+	if (!loggedUserId) {
 		Q.handle(callback, null, ["Streams.invite: not logged in"]);
 		return false; // not logged in
 	}
@@ -1486,12 +1500,12 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 										var o = {
 											path: 'Q/uploads/Users',
 											save: 'Users/icon',
-											subpath: publisherId.splitId() + '/invited/' + rsd.invite.token,
+											subpath: loggedUserId.splitId() + '/invited/' + rsd.invite.token,
 											saveSizeName: saveSizeName,
 											onFinish: function () {
 												Q.Dialogs.pop();
 											}
-										}
+										};
 										$('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
 									}
 								});
@@ -4608,7 +4622,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 		$formContent.append(
 			$('<label for="Streams_login_fullname" />').html(Q.text.Streams.login.prompt),
 			'<br>'
-		)
+		);
 	}
 	$formContent.append(
 		$('<input id="Streams_login_fullname" name="fullName" type="text" class="text" />')
@@ -4721,7 +4735,10 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 			});
 			return false;
 		});
-		register_form.append(p);
+		register_form.prepend(p);
+		if (Q.text.Streams.login.newUser) {
+			$formContent.prepend($('<div />').html(Q.text.Streams.login.newUser));
+		}
 	}
 	return register_form;
 };
@@ -5073,6 +5090,14 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 
 Q.onInit.add(function _Streams_onInit() {
 	var Users = Q.plugins.Users;
+	
+	Q.Text.get('Streams/content', function (err, text) {
+		if (!text) {
+			return;
+		}
+		Q.extend(Q.text.Streams, 10, text);
+	});
+	
 	Users.login.options.setupRegisterForm = Streams.setupRegisterForm;
 	Q.text.Users.login.placeholders.fullName = 'Enter your full name';
 	Q.text.Users.login.maxlengths.fullName = 50;

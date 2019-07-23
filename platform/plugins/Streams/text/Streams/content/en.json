@@ -20,6 +20,8 @@
         "closeChatButton": "Close chat",
         "closeChatConfirmTitle": "Close this chat?",
         "closeChatConfirm": "Are you sure you want to close this chat?",
+		"Subscribed": "Subscribed",
+		"Unsubscribed": "Unsubscribed",
         "closeChatConfirmYes": "Yes",
         "closeChatConfirmNo": "No",
         "earlierComments": "earlier comments"
