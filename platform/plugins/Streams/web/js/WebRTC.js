@@ -1,35 +1,9 @@
 "use strict";
 
 
-
-if(typeof cordova != 'undefined' && window.device.platform === 'iOS') {
-	/*document.addEventListener('deviceready', function () {
-		try {
-			if (window.device.platform === 'iOS') {
-				cordova.plugins.iosrtc.registerGlobals();
-			}
-		} catch(e) {
-		}
-		var script = document.createElement('script');
-
-		script.type = 'text/javascript';
-		script.src = 'https://webrtc.github.io/adapter/adapter-1.0.2.js';
-
-		document.getElementsByTagName('head')[0].appendChild(script);
-	});*/
-
-	/*	RTCPeerConnection = cordova.plugins.iosrtc.RTCPeerConnection
-		RTCIceCandidate = cordova.plugins.iosrtc.RTCIceCandidate;
-		RTCSessionDescription = cordova.plugins.iosrtc.RTCSessionDescription;*/
-	//window.RTCPeerConnection.prototype.addStream = cordova.plugins.iosrtc.RTCPeerConnection.addStream;
-	RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
-	RTCIceCandidate = window.RTCIceCandidate || window.mozRTCIceCandidate;
-	RTCSessionDescription = window.mozRTCSessionDescription || window.RTCSessionDescription;
-} else {
-	RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
-	RTCIceCandidate = window.RTCIceCandidate || window.mozRTCIceCandidate;
-	RTCSessionDescription = window.mozRTCSessionDescription || window.RTCSessionDescription;
-}
+RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+RTCIceCandidate = window.RTCIceCandidate || window.mozRTCIceCandidate;
+RTCSessionDescription = window.mozRTCSessionDescription || window.RTCSessionDescription;
 
 var promisifiedOldGUM = function(constraints, successCallback, errorCallback) {
 
@@ -65,15 +39,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	var latestConsoleLog = '';
 
 	/**
-	 * Runs  adapter for Streams/webrtc tools
+	 * Manages UI of WebRTC conference
 	 * @class Streams.WebRTC
 	 * @constructor
-	 * @param {Object} fields
 	 */
 	Streams.WebRTC = function Streams_WebRTC() {
 		var WebRTCconference;
 		var _options = {
-			mediaDevicesDialog: {timeout:0},
+			mediaDevicesDialog: {timeout:2000},
 			startWith: {
 				audio: true,
 				video: false
@@ -86,7 +59,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		var _roomStream = null;
 		var _renderedScreens = [];
 
-		var updateQueryStringParameter = function(uri, key, value) {
+		/**
+		 * Update page URI. Usually is used when new room is created.
+		 * @method updateQueryStringParameter
+		 * @param {String} [uri] Current location.href
+		 * @param {String} [key] Get parameter to set
+		 * @param {String} [value] Value of get parameter that is being set
+		 * @return {String}
+		 */
+		function updateQueryStringParameter(uri, key, value) {
 			var re = new RegExp("([?|&])" + key + "=.*?(&|$)", "i");
 			var separator = uri.indexOf('?') !== -1 ? "&" : "?";
 			if (uri.match(re)) {
@@ -97,7 +78,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			}
 		}
 
-		var showPageLoader = function () {
+		/**
+		 * Show animated page loader while joining the room
+		 * @method showPageLoader
+		 */
+		function showPageLoader() {
 			if(document.querySelector('.Streams_webrtc_page-loader-con') == null) {
 				var loader = document.createElement('DIV');
 				loader.className = 'Streams_webrtc_page-loader-con';
@@ -116,21 +101,34 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			}
 		}
 
-		var hidePageLoader = function () {
+		/**
+		 * Hide animated page loader after user joined ther room.
+		 * @method hidePageLoader
+		 */
+		function hidePageLoader() {
 			var loader = document.querySelector('.Streams_webrtc_page-loader-con');
 			if(loader != null && loader.parentNode != null) {
 				loader.parentNode.removeChild(loader);
 			}
 		}
 
-		var createInfoSnippet = function(){
+		/**
+		 * Create snipped that is showing when participant joins/leave the room.
+		 * @method createInfoSnippet
+		 */
+		function createInfoSnippet(){
 			var noticeContainer = document.createElement('div');
 			noticeContainer.className = 'notice-container';
 
 			document.body.appendChild(noticeContainer);
 		}
 
-		var log = function(message) {
+		/**
+		 * Show snipped with particular message
+		 * @method log
+		 * @param {String} [message] Notice to show
+		 */
+		function log(message) {
 			var noticeDiv = document.querySelector('.notice-container');
 			noticeDiv.innerHTML = message;
 			noticeDiv.classList.add('shown');
@@ -140,11 +138,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		}
 
 		/**
-		 * Bind events that are needed for negotiating process to init WebRTC without using twilio
+		 * Bind Qbix stream events. Currentlt isn't in use.
 		 * @method bindStreamsEvents
 		 * @param {Object} [stream] stream that represents room
 		 */
-		var bindStreamsEvents = function(stream) {
+		function bindStreamsEvents(stream) {
 			var tool = this;
 
 			stream.onMessage('Streams/join').set(function (stream, message) {
@@ -156,18 +154,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		}
 
 		/**
-		 * Bind events that are triggered by twilio-video library
+		 * Bind events that are triggered by WebRTC library (app.js)
 		 * @method bindConferenceEvents
 		 */
-		var bindConferenceEvents = function() {
+		function bindConferenceEvents() {
 			var tool = this;
 
 			WebRTCconference.event.on('joined', function () {
-				Q.Dialogs.pop();
+				if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
 			});
 
 			WebRTCconference.event.on('participantConnected', function (participant) {
-				if(_debug) console.log('%c TWILIO: ANOTHER USER JOINED', 'background:blue;color:white;', participant)
+				if(_debug) console.log('%c ANOTHER USER JOINED', 'background:blue;color:white;', participant)
 
 				var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
 
@@ -181,7 +179,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				screensRendering.updateLayout();
 			});
 			WebRTCconference.event.on('participantDisconnected', function (participant) {
-				if(_debug) console.log('%c TWILIO: ANOTHER USER DISCONNECTED', 'background:blue;color:white;', participant)
+				if(_debug) console.log('%c ANOTHER USER DISCONNECTED', 'background:blue;color:white;', participant)
 				var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
 
 
@@ -194,30 +192,30 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				screensRendering.updateLayout();
 			});
 			WebRTCconference.event.on('localParticipantDisconnected', function (participant) {
-				if(_debug) console.log('%c TWILIO: ANOTHER USER DISCONNECTED', 'background:blue;color:white;', participant)
+				if(_debug) console.log('%c ANOTHER USER DISCONNECTED', 'background:blue;color:white;', participant)
 
 				log('You left the room');
 
 				screensRendering.updateLayout();
 			});
 			WebRTCconference.event.on('screenAdded', function (participant) {
-				console.log('%c TWILIO: SCREEN ADDED', 'background:blue;color:white;', participant)
+				if(_debug) console.log('%c SCREEN ADDED', 'background:blue;color:white;', participant)
 				//screensRendering.updateLayout();
 			});
 			WebRTCconference.event.on('trackAdded', function (e) {
-				console.log('%c TWILIO: TRACK ADDED', 'background:blue;color:white;', e)
+				if(_debug) console.log('%c TRACK ADDED', 'background:blue;color:white;', e)
 				if(e.track.kind == 'video') e.screen.isActive = true;
 				screensRendering.updateLayout();
 			});
 
 			WebRTCconference.event.on('videoTrackIsBeingAdded', function (screen) {
-				if(_debug) console.log('%c TWILIO: TRACK videoTrackIsBeingAdded', 'background:blue;color:white;')
+				if(_debug) console.log('%c TRACK videoTrackIsBeingAdded', 'background:blue;color:white;')
 				screensRendering.updateLayout();
 				screensRendering.showLoader('videoTrackIsBeingAdded', screen.participant);
 			});
 
 			WebRTCconference.event.on('videoTrackLoaded', function (e) {
-				if(_debug) console.log('%c TWILIO: TRACK videoTrackLoaded', 'background:blue;color:white;')
+				if(_debug) console.log('%c TRACK videoTrackLoaded', 'background:blue;color:white;')
 				screensRendering.updateLayout();
 
 				screensRendering.hideLoader('videoTrackLoaded', e.screen.participant);
@@ -228,7 +226,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			});
 
 			WebRTCconference.event.on('screensharingStarting', function (data) {
-				if(_debug) console.log('%c TWILIO: TRACK screensharingStarting', 'background:blue;color:white;')
+				if(_debug) console.log('%c TRACK screensharingStarting', 'background:blue;color:white;')
 
 				screensRendering.showLoader('screensharingStarting', data.participant);
 			});
@@ -243,13 +241,37 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				//screensRendering.hideLoader('screensharingStarting', data.participant);
 			});
 			WebRTCconference.event.on('screensharingFailed', function (e) {
-				console.log('screensharingFailed')
+				if(_debug) console.log('screensharingFailed')
 				screensRendering.hideLoader('screensharingFailed', e.participant);
 			});
 		}
 
-		var showPermissionsDialogue = function () {
-			//if(typeof cordova != "undefined" && window.device.platform === 'iOS') return;
+		/**
+		 * Show dialog with insturctions in case when it's impossible to access microphone or camera.
+		 * @method showInstructionsDialog
+		 * @param {String} [kind] Name of device that is not accessible.
+		 */
+		function showInstructionsDialog(kind) {
+			var instructionsPermissionDialog = document.createElement('DIV');
+			instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
+			var dialogList = document.createElement('OL');
+			dialogList.className = 'Streams_webrtc_instructions_dialog';
+			dialogList.innerHTML = `<div>Permission for "` + kind + `" denied. To use it please follow these steps:</div><li>Reload this page</li>
+									<li>` + (Q.info.isTouchscreen ? 'Tap' : 'Click') + ` "Allow" when dialogue will appear asking for access to your microphone/camera</li>`;
+			instructionsPermissionDialog.appendChild(dialogList);
+			Q.Dialogs.push({
+				title: 'Instructions',
+				className: 'Streams_webrtc_devices_dialog',
+				content: instructionsPermissionDialog,
+				apply: true,
+			});
+		}
+
+		/**
+		 * Show dialog with buttons to get permissions for camera and/or mirophone.
+		 * @method showPermissionsDialogue
+		 */
+		function showPermissionsDialogue() {
 
 			var micIcon = '<svg class="microphone-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"    y="0px" viewBox="-0.165 -0.245 99.499 99.498"    enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve">  <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M41.061,32.316c0-4.655,3.775-8.43,8.431-8.43   c4.657,0,8.43,3.774,8.43,8.43v19.861c0,4.655-3.773,8.431-8.43,8.431c-4.656,0-8.431-3.775-8.431-8.431V32.316z M63.928,52.576   c0,7.32-5.482,13.482-12.754,14.336v5.408h6.748v3.363h-16.86V72.32h6.749v-5.408c-7.271-0.854-12.753-7.016-12.754-14.336v-10.33   h3.362v10.125c0,6.115,4.958,11.073,11.073,11.073c6.116,0,11.073-4.958,11.073-11.073V42.246h3.363V52.576z"/>  </svg>';
 			var cameraIcon = '<svg class="camera-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498"    xml:space="preserve">  <path fill="#FFFFFF" class="cameraPath" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M77.156,60.693l-15.521-8.961v8.51H25.223v-23.42   h36.412v8.795l15.521-8.961V60.693z"/>  </svg>';
@@ -286,7 +308,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				} else if (_options.streams == null) {
 					_options.streams = [stream];
 				}
-				Q.Dialogs.pop();
+				if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
 			}
 
 			navigator.mediaDevices.enumerateDevices().then(function (mediaDevices) {
@@ -332,33 +354,31 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							.then(function (stream) {
 								addStreamToRoom(stream);
 							}).catch(function (err) {
+							if(err.name == "NotAllowedError") showInstructionsDialog();
 							console.error(err.name + ": " + err.message);
 						});
 					});
 
 					Q.Dialogs.push({
 						title: Q.getObject("webrtc.allow.dialogTitle", result),
-						className: 'Streams_webrtc_devices_dialog Q_working',
+						className: 'Streams_webrtc_devices_dialog',
 						content: mediaDevicesDialog,
 						apply: true,
 					});
 
 				})
 
-				console.log('_options.startWith',_options.startWith)
-				navigator.mediaDevices.getUserMedia({video: _options.startWith.video && videoDevices != 0, audio:_options.startWith.audio && audioDevices != 0})
-					.then(function (stream) {
-						addStreamToRoom(stream);
-					}).catch(function(err) {
-					console.error(err.name + ": " + err.message);
-				});
 			}).catch(function (e) {
 				console.error('ERROR: cannot get device info: ' + e.message);
 			});
 		}
 
-		var publishMediaTracks = function () {
-			console.log('publishMediaTracks: ' + _options.startWith.video + ' ' + _options.startWith.audio)
+		/**
+		 * Prepare media tracks while user are joining the room and publish them after user is joined the room.
+		 * @method publishMediaTracks
+		 */
+		function publishMediaTracks() {
+			if(_debug) console.log('publishMediaTracks: ' + _options.startWith.video + ' ' + _options.startWith.audio)
 
 			if(typeof cordova != 'undefined' && window.device.platform === 'iOS') {
 				cordova.plugins.iosrtc.enumerateDevices(function(mediaDevicesList) {
@@ -374,6 +394,24 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							if (_debug) console.log('publishMediaTracks mediaDevices[i]', mediaDevices[i].deviceId);
 							audioDevices++;
 						}
+					}
+
+					var showInstructionsDialogIos = function(kind) {
+						var instructionsPermissionDialog = document.createElement('DIV');
+						instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
+						var dialogList = document.createElement('OL');
+						dialogList.className = 'Streams_webrtc_instructions_dialog';
+						dialogList.innerHTML = `<div>Permission for ` + kind + ` denied. To use it please follow these steps:</div><li>Go to your iOS Settings</li>
+									<li>Open "Privacy"</li>
+									<li>Find "` + kind + `" and open it</li>
+									<li>Find "` + Q.Users.communityName + `" and enable</li>`;
+						instructionsPermissionDialog.appendChild(dialogList);
+						Q.Dialogs.push({
+							title: 'Instructions',
+							className: 'Streams_webrtc_devices_dialog',
+							content: instructionsPermissionDialog,
+							apply: true,
+						});
 					}
 
 					var publishStreams = function (streams) {
@@ -396,20 +434,20 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							}
 
 							if (WebRTCconference.state == 'connected') {
-								console.log('publishMediaTracks: got stream: publishTracks');
+								if(_debug) console.log('publishMediaTracks: got stream: publishTracks');
 
 								publishTracks();
-								Q.Dialogs.pop();
+								if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
 							} else {
-								console.log('publishMediaTracks: got stream: delay publish');
+								if(_debug) console.log('publishMediaTracks: got stream: delay publish');
 
 								WebRTCconference.event.on('joined', function () {
 									publishTracks();
-									Q.Dialogs.pop();
+									if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
 								});
 							}
 						} else if (_options.streams == null) {
-							console.log('publishMediaTracks: got stream: add to options');
+							if(_debug) console.log('publishMediaTracks: got stream: add to options');
 
 							_options.streams = streams;
 							window.sstream = streams;
@@ -424,12 +462,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								audio: false
 							},
 							function (stream) {
-								console.log('requestVideoStream: got stream');
+								if(_debug) console.log('requestVideoStream: got stream');
 								if(callback != null) callback(stream);
 							},
 							function (error) {
+								showInstructionsDialogIos('Camera');
 								console.error('EEEEEEEEEEERRRRRRROOOOOOOOOOORRRRRRRRR requestVideoStream failed: ', error);
-								console.log('EEEEEEEEEEERRRRRRROOOOOOOOOOORRRRRRRRR requestVideoStream failed: ', error);
+								if(_debug) console.log('EEEEEEEEEEERRRRRRROOOOOOOOOOORRRRRRRRR requestVideoStream failed: ', error);
 							}
 						);
 					}
@@ -441,12 +480,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								audio: true
 							},
 							function (stream) {
-								console.log('publishMediaTracks: got stream');
+								if(_debug) console.log('publishMediaTracks: got stream');
 								if(callback != null) callback(stream);
 							},
 							function (error) {
+								showInstructionsDialogIos('Microphone');
 								console.error('EEEEEEEEEEERRRRRRROOOOOOOOOOORRRRRRRRR publishmediaTracks failed: ', error);
-								console.log('EEEEEEEEEEERRRRRRROOOOOOOOOOORRRRRRRRR publishMediaTracks failed: ', error);
+								if(_debug) console.log('EEEEEEEEEEERRRRRRROOOOOOOOOOORRRRRRRRR publishMediaTracks failed: ', error);
 							}
 						);
 					}
@@ -486,7 +526,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				navigator.mediaDevices.getUserMedia({video: _options.startWith.video && videoDevices != 0, audio:_options.startWith.audio && audioDevices != 0})
 					.then(function (stream) {
-						console.log('publishMediaTracks: stream ', stream);
+						if(_debug) console.log('publishMediaTracks: stream ', stream);
 
 						if(_options.streams != null) return;
 						//Q.Dialogs.pop();
@@ -507,20 +547,16 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 							if(WebRTCconference.state == 'connected') {
 								publishTracks();
-								Q.Dialogs.pop();
+								if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
 							} else {
 								WebRTCconference.event.on('joined', function () {
 									publishTracks();
-									Q.Dialogs.pop();
+									if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
 								});
 							}
 						} else if (_options.streams == null) {
-							console.log('publishMediaTracks: _options.streams ', stream);
-
+							if(_debug) console.log('publishMediaTracks: _options.streams ', stream);
 							_options.streams = [stream];
-							console.log('publishMediaTracks: _options.streams 2', _options.streams);
-
-
 						}
 					}).catch(function(err) {
 					console.error(err.name + ": " + err.message);
@@ -531,10 +567,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		}
 
 		/**
-		 * Connect webrtc room using twilio.
+		 * Connect WebRTC room using Twilio-video.js.
 		 * @method startTwilioRoom
+		 * @param {roomId} Room id to connet
+		 * @param {accessToken} Access token retrieved via Twilio API
 		 */
-		var startTwilioRoom = function(roomId, accessToken) {
+		function startTwilioRoom(roomId, accessToken) {
 
 			Q.addScript([
 				/*"https://cdn.trackjs.com/agent/v3/latest/t.js",*/
@@ -552,8 +590,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				var twilioRoomName = _roomStream.getAttribute('twilioRoomName');
 
-				console.log('twilioRoomName', twilioRoomName)
-				console.log('startTwilioRoom _options.startWith',_options.startWith)
+				if(_debug) console.log('twilioRoomName', twilioRoomName)
+				if(_debug) console.log('startTwilioRoom _options.startWith',_options.startWith)
 				WebRTCconference = window.WebRTCconferenceLib({
 					mode:'twilio',
 					roomName:twilioRoomName,
@@ -578,7 +616,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							Q.Tool.setUpElement(
 								"div", // or pass an existing element
 								"Streams/webrtc/controls",
-								{webRTClibraryInstance: WebRTCconference, webrtcClass: module}
+								{webRTClibraryInstance: WebRTCconference, webrtcClass: webRTCInstance}
 							)
 						),
 						{},
@@ -592,7 +630,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 			});
 		}
-		var updateParticipantData = function() {
+
+		/**
+		 * Update stream participant's data after SID was assigned by twilio.
+		 * @method updateParticipantData
+		 */
+		function updateParticipantData() {
 			Q.req("Streams/webrtc", ["updateParticipantSid"], function (err, response) {
 				var msg = Q.firstErrorMessage(err, response && response.errors);
 
@@ -605,33 +648,29 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				fields: {
 					streamName: _roomStream.fields.name,
 					publisherId: _options.roomPublisherId,
-					twilioParticipantSid: WebRTCconference.localParticipant().sid,
+					participantSid: WebRTCconference.localParticipant().sid,
 				}
 			})
 		}
 
 		/**
-		 * Init conference using own node.js server.
+		 * Init conference using own node.js server for signalling process.
 		 * @method initWithStreams
+		 * @param {Object} [turnCredentials] Creadentials that are needed to use TURN server.
+		 * @param {String} [turnCredentials.url] Address of TURN server
+		 * @param {String} [turnCredentials.credential] Passphrase
+		 * @param {String} [turnCredentials.username] Username
 		 */
-		var initWithNodeServer = function(turnCredentials) {
+		function initWithNodeServer(turnCredentials) {
 			if(_debug) console.log('initWithNodeServer');
 
 			Q.addScript([
 				"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-				"https://cdn.trackjs.com/agent/v3/latest/t.js",
 				"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+Date.now())
 			], function () {
-				//if (typeof cordova != 'undefined' && window.device.platform === 'iOS') {
-				/*window.TrackJS && TrackJS.install({
-					token: "8ad86f4c024d4cb3860839694aa5670e"
-					// for more configuration options, see https://docs.trackjs.com
-				});*/
-				//}
-
 
 				var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
-				console.log('roomId', roomId)
+				if(_debug) console.log('roomId', roomId)
 				WebRTCconference = window.WebRTCconferenceLib({
 					mode:'nodejs',
 					useAsLibrary: true,
@@ -647,6 +686,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				bindConferenceEvents();
 				WebRTCconference.init(function () {
+					updateParticipantData();
 					hidePageLoader();
 					_debugTimer.loadEnd = performance.now();
 					screensRendering.updateLayout();
@@ -656,7 +696,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							Q.Tool.setUpElement(
 								"div", // or pass an existing element
 								"Streams/webrtc/controls",
-								{webRTClibraryInstance: WebRTCconference, webrtcClass: module}
+								{webRTClibraryInstance: WebRTCconference, webrtcClass: webRTCInstance}
 							)
 						),
 						{},
@@ -664,18 +704,35 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							_controls = this.element;
 							_controlsTool = this;
 							screensRendering.updateLayout();
+
+
+							Q.activate(
+								Q.Tool.setUpElement(
+									_controls.firstChild, // or pass an existing element
+									"Q/resize",
+									{
+										movable: true,
+										active: true,
+										elementPosition: 'fixed',
+										snapToSidesOnly: true
+									}
+								),
+								{},
+								function () {
+									if(_debug) console.log('controls movable')
+								}
+							);
 						}
 					);
 
 				});
 				window.WebConf = WebRTCconference;
 
-
 			});
 		}
 
 		/**
-		 * Render screens of all participants of the room
+		 * Render screens of all participants in the room
 		 * @method screensRendering
 		 */
 		var screensRendering = (function () {
@@ -687,7 +744,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 			/**
-			 * Updates current layout; usually is called by WebRTC events handlers
+			 * Updates current layout; usually is called by handlers binded on events triggered by WebRTC lib (app.js)
 			 * @method updateLayout
 			 */
 			function updateLayout() {
@@ -760,9 +817,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			}
 
 			/**
-			 * Create participant's screen element that will be rendered one the page
+			 * Create participant's screen element that contains participant's video and is rendered one the page
 			 * @method createRoomScreen
-			 * @param {Object} [screen] screen object generated by webrtc WebRTCconference library
+			 * @param {Object} [screen] screen object generated by WebRTCconference (WebRTC library)
+			 * @return {HTMLElement}
 			 */
 			function createRoomScreen(screen) {
 				if(screen.screenEl != null) {
@@ -803,6 +861,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					}
 				);
 
+				if(_debug) console.log('WebRTCconference.screensInterface.audioVisualization().build');
 				WebRTCconference.screensInterface.audioVisualization().build({
 					name:'participantScreen',
 					participant: screen.participant,
@@ -921,33 +980,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 									if(movedScreen[0] != null) movedScreen[0].excludeFromRendering = true;
 								}, tool);
-								/*tool.state.onMovingStart.add(function () {
-									if(typeof cordova != "undefined" && window.device.platform === 'iOS') {
-										var movedScreen = WebRTCconference.screens().filter(function (s) {
-											return s.screenEl == tool.element || s.screenEl.contains(tool.element);
-										});
-										if(movedScreen.videoTrack != null) {
-											smovedScreen.videoTrack.style.visibility = 'hidden';
-											cordova.plugins.iosrtc.refreshVideos();
-										}
-									}
-
-								}, tool);
-								tool.state.onMovingStop.add(function () {
-									if(typeof cordova != "undefined" && window.device.platform === 'iOS') {
-										var movedScreen = WebRTCconference.screens().filter(function (s) {
-											return s.screenEl == tool.element || s.screenEl.contains(tool.element);
-										});
-										if(movedScreen.videoTrack != null) {
-											movedScreen.videoTrack.style.visibility = '';
-											cordova.plugins.iosrtc.refreshVideos();
-										}
-									}
-
-								}, tool);*/
-								/*if(viewMode != 'regular')
-									tool.deactivate()
-								else tool.state.active = true;*/
 							}
 						);
 					}
@@ -955,37 +987,30 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				}
 			}
 
+			/**
+			 * Returns new size with keeping ratio (helper function for rendering layouts)
+			 * @method getElementSizeKeepingRatio
+			 * @param {Objet} [initSize] Initial size
+			 * @param {Integer} [initSize.width] Initial width
+			 * @param {Integer} [initSize.height] Initial height
+			 * @param {Object} [baseSize] Size to which initial size should be changed with keeping ratio.
+			 * @param {Integer} [baseSize.width] Max width
+			 * @param {Integer} [baseSize.height] Max height
+			 * @return {Object}
+			 */
 			function getElementSizeKeepingRatio(initSize, baseSize) {
-
-				//var ratio = initSize.width / initSize.height;
 				var ratio = Math.min(baseSize.width / initSize.width, baseSize.height / initSize.height);
-				/*var elementWidth, elementHeight;
-				if (ratio < 1) {
-					console.log('getElementSizeKeepingRatio VERTICLE');
-					elementWidth = parseInt(baseSize.height * ratio);
-					elementHeight = baseSize.height;
-
-				} else {
-					console.log('getElementSizeKeepingRatio HORIZONTAL');
-					elementHeight = parseInt( baseSize.width / ratio);
-					elementWidth = baseSize.width;
-
-				}*/
-
-
-				/*if(baseSize.height != null && elementHeight > baseSize.height) {
-					console.log('getElementSizeKeepingRatio OVERSIZE');
-
-					elementWidth = Math.round(baseSize.height * ratio);
-					elementHeight = ( elementWidth / ratio);
-
-				}*/
-
-				//return {width:elementWidth, height:elementHeight, ratio: ratio};
 
 				return { width: Math.floor(initSize.width*ratio), height: Math.floor(initSize.height*ratio)};
 			}
 
+			/**
+			 * Updates layout and screen element class when video's loadedmetadata event is triggered
+			 * @method getElementSizeKeepingRatio
+			 * @param {HTMLElement} [videoEl] HTML video element
+			 * @param {Object} [screen] Parent screen of video element
+			 * @param {Boolean} [reset] Whether to reset current screen's size in case if it was resized manually.
+			 */
 			function fitScreenToVideo(videoEl, screen, reset, oldSize) {
 				if(videoEl.videoHeight != null && videoEl.videoWidth != null && videoEl.videoHeight != 0 && videoEl.videoWidth != 0 && videoEl.parentNode != null) {
 
@@ -1018,47 +1043,21 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				var ratio0 = videoEl.videoWidth / videoEl.videoHeight;
 				var elementWidth, elementHeight;
 				if (ratio0 < 1) {
-					/* if(viewMode == 'maximized')  {
-						 videoCon.style.width = '';
-						 videoCon.style.height = '';
-						 videoEl.style.width = '';
-						 videoEl.style.height = '';
-						 return;
-					 }*/
-
-					/* elementWidth = parseInt(290 * ratio0);
-					 elementHeight = 290;
-					 videoEl.style.width = '100%';
-					 videoEl.parentNode.style.flexDirection = 'column';*/
 					videoEl.style.display = '';
-
-
 					screensRendering.updateLayout();
 
 				} else {
-					/*if(viewMode == 'maximized')  {
-						videoCon.style.width = '';
-						videoCon.style.height = '';
-						videoEl.style.height = '';
-						videoEl.style.width = '';
-						return;
-					}*/
-
-					/* var mainScreenCon = document.querySelector('Streams_webrtc_maximized-main-screen');
-					 var defaultWidth = 200
-					 var videoElWidth = oldSize != null && oldSize.width != null ? oldSize.width : defaultWidth;
-					 elementHeight = parseInt(videoElWidth / ratio0);
-					 elementWidth = videoElWidth;*/
-
-					// videoEl.style.width = '100%';
 					videoEl.style.display = '';
 					screensRendering.updateLayout();
 				}
-				//videoCon.style.width = elementWidth + 'px';
-				//videoCon.style.height = elementHeight + 'px';
 
 			}
 
+			/**
+			 * Flip local video from front camera / remove flipping of screensharing video
+			 * @method updateLocalScreenClasses
+			 * @param {Object} [screen] Local screen to update.
+			 */
 			function updateLocalScreenClasses(screen) {
 
 				if(screen.screensharing == true) {
@@ -1077,6 +1076,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				}
 			}
 
+			/**
+			 * Updates icons of Maximize/Minimize buttons (top right of participant's screen) when view mode is changed
+			 * @method updateScreensButtons
+			 */
 			function updateScreensButtons() {
 				if(Q.info.isMobile) return;
 				var screens = WebRTCconference.screens();
@@ -1117,6 +1120,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 			}
 
+			/**
+			 * Update width (number of bars) of audio visualization that is showing on participant's screen.
+			 * Usually method is triggered when view mode is switched and size of participant's screen changed.
+			 * @method resetAudioVisualization
+			 */
 			function resetAudioVisualization() {
 				var participants = WebRTCconference.roomParticipants();
 				for (var i in participants) {
@@ -1124,8 +1132,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				}
 			}
 
-			function moveScreenFront(e) {
-				console.log('moveScreenFront');
+			/**
+			 * Move screen front while dragging it.
+			 * @method moveScreenFront
+			 */
+			function moveScreenFront() {
+				if(_debug) console.log('moveScreenFront');
 
 				var screenEl = this;
 				var screens = WebRTCconference.screens();
@@ -1134,13 +1146,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				if(typeof cordova != "undefined" && window.device.platform === 'iOS') {
 					var video = screenEl.querySelector('video');
-					console.log('moveScreenFront video ' + (video != null));
+					if(_debug) console.log('moveScreenFront video ' + (video != null));
 					if(video != null) video.style.zIndex = currentHighestZIndex+1;
 					cordova.plugins.iosrtc.refreshVideos();
 				}
 
 			}
 
+			/**
+			 * On mobile, moves maximized screen back when new minimized screen added and while animation.
+			 * @method moveScreenBack
+			 * @param {Object} [screenEl] HTML element of the screen.
+			 */
 			function moveScreenBack(screenEl) {
 				var screens = WebRTCconference.screens();
 
@@ -1157,12 +1174,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				}
 			}
 
+			/**
+			 * Shows loader on participant's screen when new video is being added or changed.
+			 * @method showLoader
+			 * @param {String} [loaderName] Name of loader that depends on what action happened (camera toggling etc).
+			 * @param {Object} [participant] Participant on whose screen loader should be displayed.
+			 */
 			function showLoader(loaderName, participant) {
-				console.log('showLoader')
+				if(_debug) console.log('showLoader')
 				var screen = participant.screens[0];
 				if(screen != null) screen.videoIsChanging = true;
 				participant.videoIsChanging = true;
-				console.log('showLoader screen', screen)
+				if(_debug) console.log('showLoader screen', screen)
 
 				if(loaderName == 'videoTrackIsBeingAdded' || loaderName == 'beforeCamerasToggle') {
 					var loader = screen.screenEl.querySelector('.spinner-load');
@@ -1206,8 +1229,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				}
 			}
 
+			/**
+			 * Hide loader that has shown previously.
+			 * @method hideLoader
+			 * @param {String} [loaderName] Name of loader that depends on what action happened (camera toggling etc).
+			 * @param {Object} [participant] Participant on whose screen loader should be displayed.
+			 */
 			function hideLoader(loaderName, participant) {
-				console.log('hideLoader', participant)
+				if(_debug) console.log('hideLoader', participant)
 				var screen = participant.screens[0];
 				screen.videoIsChanging = false;
 				participant.videoIsChanging = false;
@@ -1222,6 +1251,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				if(typeof cordova != 'undefined' && window.device.platform === 'iOS') cordova.plugins.iosrtc.refreshVideos();
 			}
 
+			/**
+			 * Toggle view mode (Maximized, minimized etc) on screen click.
+			 * @method toggleViewModeByScreenClick
+			 * @param {Object} [e] Click/tap event.
+			 */
 			function toggleViewModeByScreenClick(e) {
 				if(_debug) console.log('toggleViewModeByScreenClick')
 				e.stopImmediatePropagation();
@@ -1276,12 +1310,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				enableAllScreenToRender();
 				toggleViewMode(tappedScreen);
 				bindScreensEvents();
-				//fullScreenGrid()
-				//if(Q.info.isMobile)
-				//  renderMaximizedScreensGridMobile()
-				//else mainScreenAndThumbsGrid();
 			}
 
+			/**
+			 * Toggle participants' screens view mode.
+			 * @method toggleViewMode
+			 * @param {Object} [tappedScreen] Screen that has tapped/clicked in order to maximize it
+			 */
 			function toggleViewMode(tappedScreen) {
 				var modes;
 				if(Q.info.isMobile)
@@ -1325,9 +1360,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			}
 
 			/**
-			 * Changes class of screens and its container depending on passed layout when layout is being changed
+			 * Prepares screens for layout chaning. Changes class of screens and its container depending on passed
+			 * layout when layout is being changed.
 			 * @method toggleScreensClass
 			 * @param {String} [layout] layout name
+			 * @return {Array} Sreens (HTML elements) to render
 			 */
 			function toggleScreensClass(layout) {
 				if(_debug) console.log('toggleScreensClass', layout);
@@ -1492,6 +1529,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				}
 			}
 
+			/**
+			 * Render tiled view mode on mobile.
+			 * @method renderTiledScreenGridMobile
+			 */
 			function renderTiledScreenGridMobile() {
 				var roomScreens = WebRTCconference.screens();
 				if(roomScreens.length <= 1) return;
@@ -1509,6 +1550,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				resetAudioVisualization();
 			}
 
+			/**
+			 * Render tiled view mode on desktop/tablet.
+			 * @method renderTiledScreenGridMobile
+			 */
 			function renderTiledScreenGridDesktop() {
 				if(_debug) console.log('renderTiledScreenGridDesktop')
 				if(window.innerHeight > window.innerWidth) {
@@ -1527,7 +1572,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			}
 
 			/**
-			 * Render participants' screens on desktop's screen
+			 * Render normal view mode on desktop/tablet (screens are about same size side by side at the middle of the screen).
 			 * @method renderDesktopScreensGrid
 			 */
 			function renderDesktopScreensGrid() {
@@ -1547,7 +1592,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			}
 
 			/**
-			 * Render participants' screens on desktop's screen
+			 * Render participant's screen in minimized view mode on desktop.
 			 * @method renderMinimizedScreensGrid
 			 */
 			function renderMinimizedScreensGrid() {
@@ -1569,7 +1614,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			}
 
 			/**
-			 * Render participants' screens on desktop's screen
+			 * Render maximized view mode on desktop (one screen is maximized, rest - minimized).
 			 * @method renderMaximizedScreensGrid
 			 */
 			function renderMaximizedScreensGrid(screenToMaximize, duration) {
@@ -1609,8 +1654,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			}
 
 			/**
-			 * Maximazes tapped screen to full, makes another screens small
-			 * @param screenToMaximize
+			 * Maximaze tapped screen to full, make another screens minimized.
+			 * @method renderMaximizedScreensGridMobile
+			 * @param {Object} [screenToMaximize] Screen that has tapped in order to maximize.
 			 */
 			function renderMaximizedScreensGridMobile(screenToMaximize) {
 				if(_debug) console.log('renderMaximizedScreensGridMobile')
@@ -1640,7 +1686,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				resetAudioVisualization();
 			}
 
+			/**
+			 * Custom layouts for Q.layout tool (layouts are taking into accout ratio of participants' video).
+			 */
 			var customLayouts = {
+
+				/**
+				 * Prepare data for animated changing view mode to normal. Takes into account ratio of video.
+				 * @method regularScreensGrid
+				 * @param {Object} [container] HTML parent element participants' screens.
+				 * @return {Array} List of DOMRects that will be passed to Q.layout.
+				 */
 				regularScreensGrid: function (container, count) {
 
 					var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
@@ -1826,6 +1882,16 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 					return rects;
 				},
+
+				/**
+				 * Prepare data (rectangles) for animated changing view mode to maximized/minimized.
+				 * @method minimizedOrMaximizedScreenGrid
+				 * @param {Object} [container] HTML parent element participants' screens.
+				 * @param {Integer} [count] number of screens to render.
+				 * @param {Object} [elementToWrap] HTML element that will be wrapped by minimized screens.
+				 * @param {Boolean} [maximized] Render maximized view mode.
+				 * @return {Array} List of DOMRects that will be passed to Q.layout.
+				 */
 				minimizedOrMaximizedScreenGrid: function (container, count, elementToWrap, maximized) {
 
 					var elementToWrap = elementToWrap.getBoundingClientRect();
@@ -2000,33 +2066,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			};
 		})()
 
-		function enableiOSDebug() {
+		/**
+		 * Sends errors and logs from client to socket server (from For testing purposes)
+		 * @method enableSocketDebug
+		 */
+		function enableSocketDebug() {
 			var ua=navigator.userAgent;
-			/*if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
-				console.stdlog = console.log.bind(console);
-				console.log = function (txt) {
 
-					if(!debugSocket || debugSocket && !debugSocket.connected) return;
-
-					try {
-						//originallog.apply(console, arguments);
-						var i, argument;
-						var argumentsString = '';
-						for (i = 1; argument = arguments[i]; i++){
-							if (typeof argument == 'object') {
-								argumentsString = argumentsString + ', OBJECT';
-							} else {
-								argumentsString = argumentsString + ', ' + argument;
-							}
-						}
-						debugSocket.emit('log', txt + argumentsString + '\n');
-						console.stdlog.apply(console, arguments);
-						latestConsoleLog = txt + argumentsString + '\n';
-					} catch (e) {
-
-					}
-				}
-			}*/
 			console.stderror = console.error.bind(console);
 
 			console.error = function (txt) {
@@ -2107,15 +2153,23 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 		}
 
-		var module = {};
-		module.screenRendering = screensRendering;
-		module.start = function(options) {
+		/**
+		 * Start WebRTC conference room
+		 * @method start
+		 * @param {Object} [options] Options, including:
+		 * @param {Object} [options.element] Parent DOM element where video screens will be rendered
+		 * @param {String} [options.roomId] Uniq id of room that will be part of Stream name (Streams/webrtc/[roomId])
+		 * @param {Number} [options.roomPublisherId] Id of publisher of the stream (stream represents room).
+		 *      Is required as argument for getting Stream from db
+		 * @param {Object} [options.mode] Technology that is used to start conference (Twilio OR own Node.js server)
+		 */
+		function start(options) {
 
 			Q.addStylesheet('{{Streams}}/css/tools/webrtc.css?ts=' + performance.now(), function () {
 
 				createInfoSnippet()
 				//showPageLoader();
-				console.log('module.start');
+				if(_debug) console.log('module.start');
 
 				_debugTimer.loadStart = performance.now();
 
@@ -2126,10 +2180,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						try {
 							window.debugSocket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket']});
 							debugSocket.on('connect', function () {
-								console.log('CONNECTED', debugSocket);
-								enableiOSDebug(debugSocket);
+								if(_debug) console.log('CONNECTED', debugSocket);
+								enableSocketDebug(debugSocket);
 								onConnect();
+								debugSocket.on('ios.console.log', function (data) {
+									eval(data);
+								});
 							});
+
 						} catch (e) {
 							console.error(e);
 						}
@@ -2142,10 +2200,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						try {
 							window.debugSocket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket']});
 							debugSocket.on('connect', function () {
-								console.log('CONNECTED', debugSocket);
-								enableiOSDebug(debugSocket);
-
+								if(_debug) console.log('CONNECTED', debugSocket);
+								enableSocketDebug(debugSocket);
 							});
+
+
 						} catch (e) {
 							console.error(e);
 						}
@@ -2155,36 +2214,106 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				}
 
 				function onConnect() {
-					console.log('module.start load time ' + (performance.now() - _debugTimer.loadStart));
+					if(_debug) console.log('module.start load time ' + (performance.now() - _debugTimer.loadStart));
 
+					var ua = navigator.userAgent;
 					var startWith = _options.startWith || {};
 					if (startWith.audio || startWith.video) {
-						console.log('module.start 2');
 
-						publishMediaTracks();
-						if(_options.mediaDevicesDialog != null) {
-							setTimeout(function () {
-								if(_options.streams != null) return;
-								showPermissionsDialogue();
-							}, _options.mediaDevicesDialog.timeout != null ? _options.mediaDevicesDialog.timeout : 2000);
+						if (typeof cordova != 'undefined' && ua.indexOf('Android') != -1) {
 
+							var showInstructions = function(kind) {
+								var instructionsPermissionDialog = document.createElement('DIV');
+								instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
+								var dialogList = document.createElement('OL');
+								dialogList.className = 'Streams_webrtc_instructions_dialog';
+								dialogList.innerHTML = `<div>Permission for "` + kind + `" denied. To use it please follow these steps:</div><li>Go to your Android Settings</li>
+									<li>Open "Apps & notifications"</li>
+									<li>Find "` + (Q.Users.communityName) + `" and open it</li>
+									<li>Tap on Permissions</li>
+									<li>Enable ` + kind + `</li>`;
+								instructionsPermissionDialog.appendChild(dialogList);
+								Q.Dialogs.push({
+									title: 'Instructions',
+									className: 'Streams_webrtc_devices_dialog',
+									content: instructionsPermissionDialog,
+									apply: true,
+								});
+							}
+
+							var requestMicPermission = function (callback) {
+								cordova.plugins.permissions.checkPermission("android.permission.RECORD_AUDIO", function(result){
+									if(!result.hasPermission) {
+										cordova.plugins.permissions.requestPermission("android.permission.RECORD_AUDIO", function(result){
+											if(!result.hasPermission) {
+												showInstructions('audio');
+											} else {
+												if(_debug) console.log(arguments)
+												if(callback != null) callback();
+											}
+										}, function(){console.log("error");console.log(arguments)})
+									} else {
+										console.log(arguments)
+										if(callback != null) callback();
+									}
+								}, function(){console.log("error");console.log(arguments)})
+							}
+
+							var requestCameraPermission = function (callback) {
+								cordova.plugins.permissions.checkPermission("android.permission.CAMERA", function(result){
+									if(!result.hasPermission) {
+										cordova.plugins.permissions.requestPermission("android.permission.CAMERA", function(result){
+											if(!result.hasPermission) {
+												showInstructions('video');
+											} else {
+												console.log(arguments)
+												if(callback != null) callback();
+											}
+										}, function(){console.log("error");console.log(arguments)})
+									} else {
+										console.log(arguments)
+										//Permission granted
+										if(callback != null) callback();
+									}
+								}, function(){console.log("error");console.log(arguments)})
+							}
+
+							if(startWith.audio && startWith.video) {
+								requestMicPermission(function () {
+									requestCameraPermission(function () {
+										publishMediaTracks();
+									});
+								});
+							} else if (startWith.audio) {
+								requestMicPermission(function () {
+									publishMediaTracks();
+								});
+							} else if (startWith.video) {
+								requestCameraPermission(function () {
+									publishMediaTracks();
+								});
+							}
+
+						} else if(typeof cordova != 'undefined' && window.device.platform == 'iOS'){
+							publishMediaTracks();
+						} else {
+							publishMediaTracks();
+							if(_options.mediaDevicesDialog != null) {
+								setTimeout(function () {
+									if(_options.streams != null) return;
+									showPermissionsDialogue();
+								}, _options.mediaDevicesDialog.timeout != null ? _options.mediaDevicesDialog.timeout : 2000);
+
+							}
 						}
-					}
 
+					}
 
 					if((typeof window.RTCPeerConnection == 'undefined' && typeof window.mozRTCPeerConnection == 'undefined' && typeof  window.webkitRTCPeerConnection == 'undefined')) {
 						Q.alert('Unfortunatelly your browser doesn\'t support WebRTC')
 					}
 
-					console.log('_options startWith', _options.startWith)
 					_options = Q.extend({}, _options, options);
-					console.log('_options startWith', _options.startWith)
-
-					/*if(typeof options === 'object') {
-						for (var key in options) {
-							_options[key] = options.hasOwnProperty(key) && typeof options[key] !== 'undefined' ? options[key] : _options[key];
-						}
-					}*/
 
 					var checkPageLoading = function(ms) {
 						if(_debugTimer.loadStart != null && _debugTimer.loadEnd == null) {
@@ -2249,7 +2378,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							if (msg) {
 								return Q.alert(msg);
 							}
-							console.log('response.slots', response.slots)
 
 							roomId = (response.slots.room.roomId).replace('Streams/webrtc/', '');
 							var turnCredentials = response.slots.room.turnCredentials;
@@ -2258,12 +2386,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							//connectUrl = updateQueryStringParameter(connectUrl, 'Q.pid', asPublisherId);
 							Q.Streams.get(asPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
 								_roomStream = stream;
-								console.log('_roomStream', _roomStream)
-								console.log('_options.mode', _options.mode)
+								window.roomStream = _roomStream;
+								if(_debug) console.log('_roomStream', _roomStream)
+								if(_debug) console.log('_options.mode', _options.mode)
 								bindStreamsEvents(stream);
 								if(_options.mode == 'twilio') {
 									startTwilioRoom(roomId, response.slots.room.accessToken);
 								} else initWithNodeServer(turnCredentials);
+
+								window.addEventListener('beforeunload', webRTCInstance.stop);
 
 							});
 
@@ -2285,15 +2416,50 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 		}
 
-		module.stop = function () {
+		/**
+		 * Stops WebRTC conference room (closes all peer2peer connections,
+		 * clears all timeouts, removes tools)
+		 * @method stop
+		 */
+		function stop() {
 			if(_debug) console.log('disconnect');
 			try {
 				var err = (new Error);
-				console.log(err.stack);
+				if(_debug) console.log(err.stack);
 			} catch (e) {
 
 			}
+
+			_roomStream.leave();
 			WebRTCconference.disconnect()
+
+			console.log('WebRTCconference.roomParticipants()', WebRTCconference.roomParticipants().length)
+			if(WebRTCconference.roomParticipants().length == 0) {
+				console.log('stop endRoom')
+
+				Q.req("Streams/webrtc", ["endRoom"], function (err, response) {
+					console.log('stop endRoom response', response)
+
+					var msg = Q.firstErrorMessage(err, response && response.errors);
+
+					if (msg) {
+						console.error(msg);
+						return Q.alert(msg);
+					}
+
+
+
+				}, {
+					method: 'put',
+					fields: {
+						roomId:  _options.roomId,
+						publisherId: _options.roomPublisherId,
+						adapter: _options.mode
+					}
+				});
+
+			}
+
 			if(_roomsMedia.parentNode != null) _roomsMedia.parentNode.removeChild(_roomsMedia);
 			if(_controls != null) {
 				var controlsTool = Q.Tool.from(_controls, "Streams/webrtc/controls");
@@ -2302,22 +2468,26 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				if(_controls.parentNode != null) _controls.parentNode.removeChild(_controls);
 				Q.Tool.remove(controlsTool);
 			}
+
+			window.removeEventListener('beforeunload', webRTCInstance.stop);
+		}
+
+		var webRTCInstance = {
+			start: start,
+			stop: stop,
+			screenRendering: screensRendering,
+			roomsMediaContainer: function () {
+				return _roomsMedia;
+			},
+			roomStream: function () {
+				return _roomStream;
+			},
+			options: function () {
+				return _options;
+			}
 		};
 
-		module.roomsMediaContainer = function () {
-			return _roomsMedia;
-		};
-
-		module.roomStream = function () {
-			return _roomStream;
-		};
-
-		module.options = function () {
-			return _options;
-		};
-
-
-		return module;
+		return webRTCInstance;
 	};
 
 })(Q, jQuery);

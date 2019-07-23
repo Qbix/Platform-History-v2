@@ -39,7 +39,7 @@ function Streams_webrtc_post($params = array())
     $className = "Streams_WebRTC_".ucfirst($adapter);
 
     $webrtc = new $className();
-    $roomStream = $webrtc->createRoom($publisherId, $roomId);
+    $roomStream = $webrtc->createOrJoinRoom($publisherId, $roomId);
 
     $roomStream->stream->join();
 

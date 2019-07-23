@@ -1605,6 +1605,30 @@ webrtc_tool_popup-settings.Streams_webrtc_popup-box > div {
     justify-content: center;
     align-items: center;
 }
+.Streams_webrtc_instructions_dialog{
+    margin: 0;
+    padding: 20px;
+    list-style-type: none;
+}
+.Streams_webrtc_instructions_dialog div{
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.Streams_webrtc_instructions_dialog li{
+    counter-increment: step-counter;
+    margin-bottom: 10px;
+}
+.Streams_webrtc_instructions_dialog li::before{
+    content: counter(step-counter);
+    margin-right: 5px;
+    font-size: 80%;
+    background-color: rgb(0,200,200);
+    color: white;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 3px;
+}
 .Streams_webrtc_disconnect-btn,
 .Streams_webrtc_enable-microphone-btn,
 .Q_touchscreen .Q_button.Streams_webrtc_enable-microphone-btn,

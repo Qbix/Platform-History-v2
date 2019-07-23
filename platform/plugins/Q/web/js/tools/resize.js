@@ -21,6 +21,8 @@
 
 		{
 			active: false,
+			elementPosition: null,
+			snapToSidesOnly: false,
 			resizeByWheel: true,
 			activateOnElement: null,
 			keepRatioBasedOnElement: null,
@@ -91,6 +93,33 @@
 
 						evt = evt || window.event;
 						evt.preventDefault();
+
+						if(tool.state.snapToSidesOnly){
+							var posX = Q.info.isTouchscreen ? evt.changedTouches[0].clientX : evt.clientX,
+								posY = Q.info.isTouchscreen ? evt.changedTouches[0].clientY : evt.clientY,
+								aX = posX - diffX,
+								aY = posY - diffY;
+							if(((cWi - posX) < (cHe - posY)) && ((cWi - posX) < posY) && ((cWi - posX) < posX)) {
+								console.log('moviiiing if 1');
+								aX = cWi - eWi
+								aY = posY;
+							} else if(((cHe - posY) < (cWi - posX)) && ((cHe - posY) < posY) && ((cHe - posY) < posX)) {
+								console.log('moviiiing if 2');
+								aX = posX;
+								aY = cHe - eHe;
+							} else if((posX < (cWi - posX)) && (posX < posY) && (posX < (cHe - posY))) {
+								console.log('moviiiing if 3');
+								aX = 0;
+								aY = posY;
+							} else if((posY < (cWi - posX)) && (posY < posX) && (posY < (cHe - posY))) {
+								console.log('moviiiing if 4');
+								aX = posX;
+								aY = 0;
+							}
+							move(aX,aY);
+							return;
+						}
+
 						var posX = Q.info.isTouchscreen ? evt.changedTouches[0].clientX : evt.clientX,
 							posY = Q.info.isTouchscreen ? evt.changedTouches[0].clientY : evt.clientY,
 							aX = posX - diffX,
@@ -98,7 +127,7 @@
 						if (aX < 0) aX = 0;
 						if (aY < 0) aY = 0;
 						if (aX + eWi > cWi) aX = cWi - eWi;
-						if (aY + eHe > cHe) aY = cHe -eHe;
+						if (aY + eHe > cHe) aY = cHe - eHe;
 						move(aX,aY);
 					}
 
@@ -125,7 +154,7 @@
 						}
 
 						elementToMove.style.transform = '';
-						elementToMove.style.position = 'absolute';
+						elementToMove.style.position = tool.state.elementPosition ? tool.state.elementPosition : 'absolute';
 						elementToMove.style.cursor = 'grabbing';
 						tool.element.style.boxShadow = '10px -10px 60px 0 rgba(0,0,0,0.5)';
 
@@ -229,8 +258,8 @@
 						_elRightMargin = +(_elementToResize.style.margin || _elementToResize.style.marginRight).replace('px', '');
 						_handler = e.target;
 
-						window.addEventListener('mousemove', _startResizing, true);
-						window.addEventListener('mouseup', _stopResizing, true);
+						Q.addEventListener(window, 'mousemove', _startResizing);
+						Q.addEventListener(window, 'mouseup', _stopResizing);
 					}
 
 					function _startResizing(e) {
@@ -360,8 +389,8 @@
 					function _stopResizing(e) {
 						e.preventDefault();
 						e.stopPropagation();
-						window.removeEventListener('mousemove', _startResizing, true);
-						window.removeEventListener('mouseup', _stopResizing, true);
+						Q.removeEventListener(window, 'mousemove', _startResizing);
+						Q.removeEventListener(window, 'mouseup', _stopResizing);
 						_latestWidthValue = null;
 						_latestHeightValue = null;
 						_ratio = null;
@@ -412,17 +441,17 @@
 						element.appendChild(topLeftHandler);
 
 						if(tool.state.resizeByWheel) bindMouseWheelEvent(element);
-						resizeHandler.addEventListener('mousedown', initialise)
-						leftBottomHandler.addEventListener('mousedown', initialise)
-						topRightHandler.addEventListener('mousedown', initialise)
-						topLeftHandler.addEventListener('mousedown', initialise)
+						Q.addEventListener(resizeHandler, 'mousedown', initialise);
+						Q.addEventListener(leftBottomHandler, 'mousedown', initialise);
+						Q.addEventListener(topRightHandler, 'mousedown', initialise);
+						Q.addEventListener(topLeftHandler, 'mousedown', initialise);
 
 					}
 
 					function resizeByPinchGesture(element) {
 						_elementToResize = element;
 
-						element.addEventListener('touchstart', function () {
+						Q.addEventListener(element, 'touchstart', function () {
 							_startResizingByPinch();
 						});
 					}
@@ -444,15 +473,15 @@
 						}
 
 						ratio = _elementToResize.offsetWidth / _elementToResize.offsetHeight;
-						window.addEventListener('touchend', _stopResizingByPinch);
-						window.addEventListener('touchmove', resizeByPinch);
+						Q.addEventListener(window, 'touchend', _stopResizingByPinch);
+						Q.addEventListener(window, 'touchmove', resizeByPinch);
 					}
 
 					function _stopResizingByPinch() {
 						tool.isScreenResizing = false;
 						touch1 = touch2 = prevPosOfTouch1 = prevPosOfTouch2 = _latestHeightValue = _latestWidthValue = ratio = null;
-						window.removeEventListener('touchend', _stopResizingByPinch);
-						window.removeEventListener('touchmove', resizeByPinch);
+						Q.removeEventListener(window, 'touchend', _stopResizingByPinch);
+						Q.removeEventListener(window, 'touchmove', resizeByPinch);
 						tool.state.onMoved.handle.call(tool);
 					}
 
@@ -640,7 +669,7 @@
 							} else {
 								elem.addEventListener("MozMousePixelScroll", onWheel);
 							}
-						} else { // IE8-
+						} else { // IE8-Q.addEventListener
 							elem.attachEvent("onmousewheel", onWheel);
 						}
 					}
@@ -655,20 +684,9 @@
 
 				return {
 					bind: function () {
-						if(Q.info.isTouchscreen) {
-							activateOnElement.addEventListener('touchstart', _dragElement.initMoving);
-							activateOnElement.addEventListener('touchend', _dragElement.stopMoving);
-						} else {
-							activateOnElement.addEventListener('mousedown', _dragElement.initMoving);
-							activateOnElement.addEventListener('mouseup', _dragElement.stopMoving);
-						}
+						Q.addEventListener(activateOnElement, Q.Pointer.start, _dragElement.initMoving);
+						Q.addEventListener(activateOnElement, Q.Pointer.end, _dragElement.stopMoving);
 
-						tool.unbindEvents = function () {
-							activateOnElement.removeEventListener('mousedown', _dragElement.initMoving);
-							activateOnElement.removeEventListener('mouseup', _dragElement.stopMoving);
-							activateOnElement.removeEventListener('mousedown', _dragElement.initMoving);
-							activateOnElement.removeEventListener('mouseup', _dragElement.stopMoving);
-						}
 						resizeElement.setHandler(elementToResize);
 					}
 				}
