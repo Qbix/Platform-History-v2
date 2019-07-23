@@ -55,6 +55,8 @@
 
 			this.refresh();
 
+			this.state.onCreate.handle.call(this);
+
 		},
 
 		{

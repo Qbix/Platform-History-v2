@@ -33,12 +33,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 	var Streams = Q.Streams;
-	var _debug = false;
+	var _debug = true;
 	var _debugTimer = {};
 	var errorLog = '';
 	var latestConsoleLog = '';
 
-	Streams.onWebRTCRoomCreated = new Q.Event();
 
 	/**
 	 * Manages UI of WebRTC conference
@@ -52,7 +51,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			startWith: {
 				audio: true,
 				video: false
-			}
+			},
+			onWebRTCRoomCreated: new Q.Event(),
+			onWebrtcControlsCreated: new Q.Event()
 		};
 		var _controls = null;
 		var _controlsTool = null;
@@ -536,6 +537,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							_options.streams = [stream];
 							var publishTracks = function() {
 								var tracks = stream.getTracks();
+								if(_debug) console.log('publishMediaTracks: addTrack ', tracks);
+
 								for(var t in tracks) {
 									WebRTCconference.conferenceControl.addTrack(tracks[t], stream);
 								}
@@ -610,6 +613,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					screensRendering.updateLayout();
 					updateParticipantData();
 					hidePageLoader();
+					_options.onWebRTCRoomCreated.handle.call(webRTCInstance);
 					_debugTimer.loadEnd = performance.now();
 					log("You joined the room");
 
@@ -618,7 +622,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							Q.Tool.setUpElement(
 								"div", // or pass an existing element
 								"Streams/webrtc/controls",
-								{webRTClibraryInstance: WebRTCconference, webrtcClass: webRTCInstance}
+								{
+									webRTClibraryInstance: WebRTCconference,
+									webrtcClass: webRTCInstance,
+									onCreate: function () {
+										_options.onWebrtcControlsCreated.handle.call(this);
+									}
+								}
 							)
 						),
 						{},
@@ -692,13 +702,20 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					hidePageLoader();
 					_debugTimer.loadEnd = performance.now();
 					screensRendering.updateLayout();
-					Streams.onWebRTCRoomCreated.handle.call(this);
+					_options.onWebRTCRoomCreated.handle.call(webRTCInstance);
 					Q.activate(
 						document.body.appendChild(
 							Q.Tool.setUpElement(
 								"div", // or pass an existing element
 								"Streams/webrtc/controls",
-								{webRTClibraryInstance: WebRTCconference, webrtcClass: webRTCInstance}
+								{
+									webRTClibraryInstance: WebRTCconference,
+									webrtcClass: webRTCInstance,
+									onCreate: function () {
+										_options.onWebrtcControlsCreated.handle.call(this);
+									}
+								}
+
 							)
 						),
 						{},
@@ -706,6 +723,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							_controls = this.element;
 							_controlsTool = this;
 							screensRendering.updateLayout();
+
 
 
 							Q.activate(
@@ -2166,6 +2184,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		 * @param {Object} [options.mode] Technology that is used to start conference (Twilio OR own Node.js server)
 		 */
 		function start(options) {
+
 			Q.addStylesheet('{{Streams}}/css/tools/webrtc.css?ts=' + performance.now(), function () {
 
 				createInfoSnippet()
@@ -2179,7 +2198,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js',
 					], function () {
 						try {
-							window.debugSocket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket']});
+							window.debugSocket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket'], reconnection: false});
 							debugSocket.on('connect', function () {
 								if(_debug) console.log('CONNECTED', debugSocket);
 								enableSocketDebug(debugSocket);
@@ -2199,7 +2218,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js',
 					], function () {
 						try {
-							window.debugSocket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket']});
+							window.debugSocket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket'], reconnection: false});
 							debugSocket.on('connect', function () {
 								if(_debug) console.log('CONNECTED', debugSocket);
 								enableSocketDebug(debugSocket);
