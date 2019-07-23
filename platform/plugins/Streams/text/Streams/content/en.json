@@ -24,7 +24,9 @@
 		"Unsubscribed": "Unsubscribed",
         "closeChatConfirmYes": "Yes",
         "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments"
+        "earlierComments": "earlier comments",
+		"dontHavePermissionJoinConversation": "You don't have permission to join this conversation.",
+		"startedConversation": "started a conversation"
     },
     "notifications": {
         "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
