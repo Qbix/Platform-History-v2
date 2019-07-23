@@ -38,6 +38,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	var errorLog = '';
 	var latestConsoleLog = '';
 
+	Streams.onWebRTCRoomCreated = new Q.Event();
+
 	/**
 	 * Manages UI of WebRTC conference
 	 * @class Streams.WebRTC
@@ -690,7 +692,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					hidePageLoader();
 					_debugTimer.loadEnd = performance.now();
 					screensRendering.updateLayout();
-
+					Streams.onWebRTCRoomCreated.handle.call(this);
 					Q.activate(
 						document.body.appendChild(
 							Q.Tool.setUpElement(
@@ -2164,7 +2166,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		 * @param {Object} [options.mode] Technology that is used to start conference (Twilio OR own Node.js server)
 		 */
 		function start(options) {
-
 			Q.addStylesheet('{{Streams}}/css/tools/webrtc.css?ts=' + performance.now(), function () {
 
 				createInfoSnippet()
