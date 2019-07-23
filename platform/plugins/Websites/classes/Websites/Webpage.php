@@ -265,13 +265,13 @@ class Websites_Webpage
 	 * If Websites/webpage stream for this $url already exists - return one.
 	 * @method fetchStream
 	 * @static
-	 * @param {string} $url
+	 * @param {string} $url URL string to search stream by.
+	 * @param {string} [$publisherId=null] publisher id of stream. If null, main community id used.
 	 * @return Streams_Stream
 	 */
-	static function fetchStream($url) {
-
+	static function fetchStream($url, $publisherId = null) {
 		$streams = new Streams_Stream();
-		$streams->publisherId = Users::communityId();
+		$streams->publisherId = $publisherId ?: Users::communityId();
 		$streams->name = "Websites/webpage/".self::normalizeUrl($url);
 		if ($streams->retrieve()) {
 			return Streams::fetchOne($streams->publisherId, $streams->publisherId, $streams->name);
