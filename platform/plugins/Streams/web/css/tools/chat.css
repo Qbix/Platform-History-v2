@@ -183,3 +183,209 @@
 	background-size: contain;
 	cursor: pointer;
 }
+.Streams_chat_tool {
+
+}
+.Streams_chat_tool h1 {
+	text-align: center;
+	width: 100%;
+}
+.Streams_chat_tool .Users_avatar_icon {
+	position: absolute;
+}
+.Streams_chat_avatar_icon {
+	float: left;
+}
+.Streams_chat_to_me .Streams_chat_bubble .Users_avatar_tool {
+	float: left;
+	font-weight: bold;
+}
+.Streams_chat_tool .Streams_chat_bubble .Users_avatar_name {
+	margin-right: 5px;
+	display: block;
+	color: #222;
+}
+.Streams_chat_message {
+	color: #222;
+	max-height: 100px;
+	overflow: hidden;
+	word-wrap: break-word;
+	text-overflow: ellipsis;
+	cursor: default;
+}
+.Streams_chat_messages {
+	min-height: 70px;
+}
+.Streams_chat_messages button[name=close] {
+	display: block;
+	margin: 20px auto;
+}
+.Streams_chat_item {
+	font-size: 11pt;
+	margin: 10px 10px;
+	position: relative;
+}
+.Streams_chat_noMessages {
+	color: gray;
+	font-size: 12pt;
+	text-align: center;
+	width: 100%;
+	display: block;
+	line-height: 50pt;
+}
+.Streams_chat_composer {
+	position: relative;
+}
+.Streams_chat_composer textarea {
+	font-size: 12pt;
+	margin: 0 auto;
+	display: block;
+	padding: 6px;
+	margin-left: 50px;
+	height: 30px;
+	color: black;
+}
+.Streams_chat_composer input[type=text] {
+	font-size: 12pt;
+	margin: 0 auto;
+	display: block;
+	padding: 6px;
+	margin-left: 45px;
+	height: 30px;
+	color: black;
+	padding-right: 30px;
+}
+.Streams_chat_composer .Streams_chat_submit {
+	cursor: pointer;
+	position: absolute;
+	right: -6px;
+	top: -3px;
+	background-size: contain;
+	background-image: url("../../img/chat/message-post.png");
+	background-repeat: no-repeat;
+	width: 40px;
+	height: 40px;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+.Streams_chat_composer .Streams_chat_call {
+	cursor: pointer;
+	position: absolute;
+	right: -6px;
+	top: -3px;
+	background-size: contain;
+	background-image: url("../../img/chat/call.png");
+	background-repeat: no-repeat;
+	width: 40px;
+	height: 40px;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+.Streams_chat_prevent {
+	text-align: center;
+	vertical-align: middle;
+	color: #555;
+	font-style: italic;
+}
+.Streams_chat_posting
+{
+	background: url('/Q/plugins/Q/img/throbbers/loading.gif') center no-repeat;
+}
+.Streams_chat_more {
+	cursor: pointer;
+	background-color: #eee;
+	color: #555;
+	text-align: center;
+	padding: 5px 0;
+	font-size: 11pt;
+	margin: 5px;
+	border-radius: 5px;
+	position: relative;
+}
+.Streams_chat_reachedEarliest .Streams_chat_more {
+	display: none;
+}
+.Streams_chat_more img {
+	position: absolute;
+	left: 10px;
+	width: 20px;
+	height: 20px;
+	margin-right: 5px;
+}
+.Streams_chat_more:hover {
+	color: #fff;
+	background-color: #ccc;
+}
+.Streams_chat_more:active {
+	color: #fff;
+	background-color: #bbb;
+}
+.Streams_chat_timestamp {
+	margin-right: 15px;
+	text-align: right;
+	float: right;
+	cursor: default;
+	font-size: 0.8em;
+	color: gray;
+}
+.Streams_chat_bubble {
+	position: relative;
+	min-width: 30%;
+	margin-right: 15px;
+	padding: 10px;
+	border: 1px solid #bae8ea;
+	clear: both;
+	font-size: 0.8em;
+}
+.Streams_chat_tick {
+	background: url('../../img/chat/message-tick.png');
+	width: 9px;
+	height: 13px;
+}
+.Streams_chat_to_me .Streams_chat_tick {
+	float: left;
+	margin: 0 0 0 -19px
+}
+.Streams_chat_to_me .Streams_chat_bubble {
+	border-radius: 13px;
+	margin-left: 50px;
+	background-color: #cbf9fb;
+	text-align: left;
+}
+.Streams_chat_from_me .Streams_chat_bubble {
+	border-radius: 13px;
+	margin-left: 50px;
+	background-color: #FFFFFF;
+	text-align: left;
+}
+.Streams_chat_from_me .Streams_chat_tick {
+	float: right;
+	margin: 0 -19px 0 0;
+	background-position: 0 13px;
+}
+.Streams_chat_from_me .Users_avatar_tool {
+	display: none;
+	float: left;
+}
+.Streams_chat_notification {
+	text-align: center;
+	color: gray;
+	font-size: 12pt;
+	font-style: italic;
+}
+
+.Q_tool.Streams_chat_tool[data-logged=false] .Streams_chat_subscription,
+.Q_tool.Streams_chat_tool[data-logged=false] .Streams_chat_call {
+	display: none;
+}
+
+/* phones */
+@media (min-width: 320px) and (max-width: 580px) {
+	.Streams_chat_date {
+		width: 100%;
+		float: right;
+		margin-bottom: 15px;
+	}
+}

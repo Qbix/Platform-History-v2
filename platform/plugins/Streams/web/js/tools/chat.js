@@ -111,7 +111,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		});
 
 		return false;
-	});
+	}).attr('data-logged', !!Q.Users.loggedInUserId());
 
 	Q.addStylesheet('{{Streams}}/css/tools/chat.css');
 },
@@ -709,8 +709,8 @@ Q.Tool.define('Streams/chat', function(options) {
 		}).on('keypress change input focus paste blur Q_refresh', function(event) {
 			var $this = $(this);
 			var $form = $this.closest('form');
-			var $submit = $form.find('.submit');
-			var $call = $form.find('.call');
+			var $submit = $form.find('.Streams_chat_submit');
+			var $call = $form.find('.Streams_chat_call');
 			var content = $this.val().trim();
 
 			// 'enter' key handler
@@ -741,12 +741,12 @@ Q.Tool.define('Streams/chat', function(options) {
 		});
 
 		// submit button handler
-		tool.$(".Streams_chat_composer .submit").on(Q.Pointer.fastclick, function(){
+		tool.$(".Streams_chat_composer .Streams_chat_submit").on(Q.Pointer.fastclick, function(){
 			Q.handle(_submit, $input[0], [$input]);
 		});
 
 		// call button handler
-		tool.$(".Streams_chat_composer .call").on(Q.Pointer.fastclick, function(){
+		tool.$(".Streams_chat_composer .Streams_chat_call").on(Q.Pointer.fastclick, function(){
 			tool.startWebRTC();
 		});
 
@@ -1088,8 +1088,8 @@ Q.Template.set('Streams/chat/main',
 			'<button class="Streams_chat_subscription"></button>' +
 			'<input type="text" placeholder="{{placeholder}}">'+
 		'{{/if}}' +
-		'<div class="submit Q_disappear"></div>' +
-		'<div class="call Q_appear"></div>' +
+		'<div class="Streams_chat_submit Q_disappear"></div>' +
+		'<div class="Streams_chat_call Q_appear"></div>' +
 	'</form>'+
 	'<hr />'+
 	'{{#if closeable}}' +
