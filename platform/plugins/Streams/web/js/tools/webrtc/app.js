@@ -5429,7 +5429,7 @@ WebRTCconferenceLib = function app(options){
 		if(_debug) console.log('initOrConnectConversation');
 
 		var codecs;
-		if(typeof Q.Cordova != "undefined")
+		if(Q.info.isCordova)
 			codecs = ['VP8', 'H264'];
 		else codecs = ['H264', 'VP8'];
 
@@ -5635,7 +5635,7 @@ WebRTCconferenceLib = function app(options){
 
 	var initOrConnectWithNodeJs = function (callback) {
 		if(_debug) console.log('initOrConnectWithNodeJs');
-		if(typeof Q.Cordova != "undefined" && _isiOS) {
+		if(Q.info.isCordova && _isiOS) {
 			initOrConnectWithNodeJsiOSCordova(callback);
 			return;
 		}

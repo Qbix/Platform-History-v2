@@ -613,7 +613,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					screensRendering.updateLayout();
 					updateParticipantData();
 					hidePageLoader();
-					_options.onWebRTCRoomCreated.handle.call(webRTCInstance);
+					Q.handle(_options.onWebRTCRoomCreated, webRTCInstance);
 					_debugTimer.loadEnd = performance.now();
 					log("You joined the room");
 
@@ -626,7 +626,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 									webRTClibraryInstance: WebRTCconference,
 									webrtcClass: webRTCInstance,
 									onCreate: function () {
-										_options.onWebrtcControlsCreated.handle.call(this);
+										Q.handle(_options.onWebrtcControlsCreated, this);
 									}
 								}
 							)
@@ -702,7 +702,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					hidePageLoader();
 					_debugTimer.loadEnd = performance.now();
 					screensRendering.updateLayout();
-					_options.onWebRTCRoomCreated.handle.call(webRTCInstance);
+					Q.handle(_options.onWebRTCRoomCreated, webRTCInstance);
 					Q.activate(
 						document.body.appendChild(
 							Q.Tool.setUpElement(
@@ -712,7 +712,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 									webRTClibraryInstance: WebRTCconference,
 									webrtcClass: webRTCInstance,
 									onCreate: function () {
-										_options.onWebrtcControlsCreated.handle.call(this);
+										Q.handle(_options.onWebrtcControlsCreated, this);
 									}
 								}
 
@@ -2439,12 +2439,23 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								if(_debug) console.log('_roomStream', _roomStream)
 								if(_debug) console.log('_options.mode', _options.mode)
 								bindStreamsEvents(stream);
-								if(_options.mode == 'twilio') {
+								if(_options.mode === 'twilio') {
 									startTwilioRoom(roomId, response.slots.room.accessToken);
-								} else initWithNodeServer(turnCredentials);
+								} else {
+									initWithNodeServer(turnCredentials);
+								}
 
 								window.addEventListener('beforeunload', webRTCInstance.stop);
 
+								// listen message 'join'
+								_roomStream.onMessage("Streams/join").set(function (stream, message) {
+									var userId = message.getInstruction('byUserId');
+								}, 'Streams/webrtc');
+
+								// listen message 'leave'
+								_roomStream.onMessage("Streams/leave").set(function (stream, message) {
+									var userId = message.getInstruction('byUserId');
+								}, 'Streams/webrtc');
 							});
 
 						}, {
@@ -2469,8 +2480,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		 * Stops WebRTC conference room (closes all peer2peer connections,
 		 * clears all timeouts, removes tools)
 		 * @method stop
+		 * @param {function} callback executed when all actions done.
 		 */
-		function stop() {
+		function stop(callback) {
 			if(_debug) console.log('disconnect');
 			try {
 				var err = (new Error);
@@ -2479,15 +2491,19 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 			}
 
-			_roomStream.leave();
-			WebRTCconference.disconnect()
+			if (!Streams.isStream(_roomStream)) {
+				return Q.handle(callback);
+			}
 
-			console.log('WebRTCconference.roomParticipants()', WebRTCconference.roomParticipants().length)
-			if(WebRTCconference.roomParticipants().length == 0) {
-				console.log('stop endRoom')
+			_roomStream.leave();
+			WebRTCconference.disconnect();
+
+			console.log('WebRTCconference.roomParticipants()', WebRTCconference.roomParticipants().length);
+			if(WebRTCconference.roomParticipants().length === 0) {
+				console.log('stop endRoom');
 
 				Q.req("Streams/webrtc", ["endRoom"], function (err, response) {
-					console.log('stop endRoom response', response)
+					console.log('stop endRoom response', response);
 
 					var msg = Q.firstErrorMessage(err, response && response.errors);
 
@@ -2496,8 +2512,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						return Q.alert(msg);
 					}
 
-
-
+					Q.handle(callback);
 				}, {
 					method: 'put',
 					fields: {

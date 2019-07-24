@@ -183,3 +183,6 @@
 	background-size: contain;
 	cursor: pointer;
 }
+.Q_tool.Streams_webrtc_controls_tool.Streams_chat_webrtc .Streams_webrtc_text-chat-btn {
+	display: none;
+}

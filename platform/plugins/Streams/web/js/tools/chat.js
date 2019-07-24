@@ -538,14 +538,20 @@ Q.Tool.define('Streams/chat', function(options) {
 			var stream = this.relatedStreams[Object.keys(this.relatedStreams)[0]];
 			var _createRoom = function (publisherId, streamName) {
 				// disconnect from all conversations
-				//WebRTC.stop();
+				WebRTC.stop();
 
 				// connect to this particular conversation
 				WebRTC.start({
 					element: document.body,
 					roomId: streamName.split('/').pop(),
 					roomPublisherId: publisherId,
-					mode: 'node'
+					mode: 'node',
+					onWebrtcControlsCreated: function () {
+						$(this.element).addClass('Streams_chat_webrtc');
+					},
+					onWebRTCRoomCreated: function () {
+
+					}
 				});
 			};
 			if (stream && !stream.getAttribute('endTime')) {
