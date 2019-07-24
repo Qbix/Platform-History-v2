@@ -184,7 +184,6 @@ Q.Tool.define('Streams/chat', function(options) {
 
 {
 	Q: {
-	
 		onRetain: function () {
 			var $last = this.$('.Streams_chat_bubble').last();
 			var selector = '.Streams_chat_item';
@@ -196,8 +195,14 @@ Q.Tool.define('Streams/chat', function(options) {
 					.append($nextAll)
 					.scrollTop(this.state.lastScrollTop);
 			});
+		},
+		beforeRemove: function () {
+			var state = this.state;
+
+			if (state.webrtc) {
+				Q.handle(state.webrtc.stop);
+			}
 		}
-		
 	},
 	/**
 	 * @method prevent
@@ -537,9 +542,6 @@ Q.Tool.define('Streams/chat', function(options) {
 			// get first property from relatedStreams (actually it should be only one)
 			var stream = this.relatedStreams[Object.keys(this.relatedStreams)[0]];
 			var _createRoom = function (publisherId, streamName) {
-				// disconnect from all conversations
-				WebRTC.stop();
-
 				// connect to this particular conversation
 				WebRTC.start({
 					element: document.body,
@@ -550,7 +552,7 @@ Q.Tool.define('Streams/chat', function(options) {
 						$(this.element).addClass('Streams_chat_webrtc');
 					},
 					onWebRTCRoomCreated: function () {
-
+						state.webrtc = this;
 					}
 				});
 			};
