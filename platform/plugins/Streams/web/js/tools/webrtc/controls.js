@@ -15,6 +15,17 @@
 		changeView: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="2.292 0.765 100.001 100" enable-background="new 2.292 0.765 100.001 100"    xml:space="preserve">  <path fill="#FFFFFF" d="M52.291,0.765c-27.568,0-49.999,22.43-49.999,50c0,27.57,22.429,49.999,49.999,49.999   c27.57,0,50.002-22.429,50.002-49.999C102.293,23.196,79.861,0.765,52.291,0.765z M49.793,78.265H24.792v-25h5v20h20.001V78.265z    M49.793,28.265H29.792v20h-5v-25h25.001V28.265z M79.793,78.265h-25v-5h20v-20h5V78.265z M79.793,48.265h-5v-20h-20v-5h25V48.265z"   />  </svg>  ',
 		switchOffCameras: '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-2.176 -1.153 100 99.999" enable-background="new -2.176 -1.153 100 99.999"    xml:space="preserve">  <path fill="#8C8C8C" d="M47.823-1.153c-27.569,0-50,22.43-50,49.999c0,27.571,22.429,50,50,50c27.569,0,50.001-22.429,50.001-50   C97.824,21.277,75.393-1.153,47.823-1.153z M70.475,66.547l-4.949,4.949L47.824,53.795L30.122,71.496l-4.949-4.949l17.701-17.701   L25.173,31.145l4.949-4.95l17.702,17.702l17.702-17.702l4.949,4.95L52.773,48.846L70.475,66.547z"/>  </svg>  ',
 		textChat: '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="4.559 -1.605 100 99.999" enable-background="new 4.559 -1.605 100 99.999"    xml:space="preserve">  <path fill="#FFFFFF" d="M54.559-1.605c-27.569,0-50,22.43-50,50s22.429,49.999,50,49.999c27.569,0,50.001-22.429,50.001-49.999   C104.56,20.825,82.128-1.605,54.559-1.605z M82.718,60.974c0,3.964-3.248,7.211-7.21,7.211H64.075l-6.625,5.91   c-1.624,1.496-4.157,1.496-5.781,0l-6.626-5.91H33.61c-3.962,0-7.21-3.247-7.21-7.211V32.782c0-3.963,3.248-7.21,7.21-7.21h41.963   c3.962,0,7.211,3.183,7.145,7.21V60.974z"/>  <path fill="#FFFFFF" d="M42.314,42.656c-2.598,0-4.677,2.078-4.677,4.677s2.079,4.677,4.677,4.677s4.677-2.078,4.677-4.677   S44.913,42.656,42.314,42.656z"/>  <path fill="#FFFFFF" d="M55.371,42.656c-2.598,0-4.677,2.078-4.677,4.677s2.079,4.677,4.677,4.677s4.677-2.078,4.677-4.677   S57.969,42.656,55.371,42.656z"/>  <path fill="#FFFFFF" d="M68.428,42.656c-2.599,0-4.678,2.078-4.678,4.677s2.079,4.677,4.678,4.677c2.598,0,4.678-2.078,4.678-4.677   S71.025,42.656,68.428,42.656z"/>  </svg>',
+		disconnectIcon: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  viewBox="1.567 -0.122 100 99.999" enable-background="new 1.567 -0.122 100 99.999"    xml:space="preserve">  <path fill="#C12236" d="M51.566-0.122c-27.568,0-49.999,22.43-49.999,50c0,27.57,22.429,49.999,49.999,49.999   c27.57,0,50.001-22.429,50.001-49.999C101.567,22.309,79.137-0.122,51.566-0.122z M60.213,61.126l-8.296,10.788   c-0.082,0.109-0.212,0.174-0.349,0.174s-0.266-0.064-0.349-0.174l-8.295-10.788c-0.061-0.08-0.091-0.175-0.091-0.268   c0-0.096,0.028-0.188,0.087-0.268c0.119-0.156,0.331-0.217,0.514-0.143l5.493,2.168V49.901c0-0.243,0.196-0.439,0.44-0.439h4.402   c0.242,0,0.439,0.197,0.439,0.439v12.715l5.492-2.168c0.184-0.074,0.395-0.014,0.514,0.143   C60.334,60.749,60.334,60.965,60.213,61.126z M78.925,49.499c-0.014,0.072-0.03,0.139-0.045,0.209   c-0.024,0.125-0.049,0.24-0.072,0.352c-0.012,0.046-0.021,0.099-0.032,0.146c-0.146,0.608-0.289,0.963-0.289,0.963   s-0.009-0.009-0.022-0.021c-1.048,2.637-3.365,4.287-5.714,3.43l-5.195-2.165c-2.801-1.021-4.575-4.831-3.967-8.51l0.051-0.297   c-6.357-1.769-14.504-2.456-23.952,0.218l0.116,0.696c0.611,3.679-1.165,7.487-3.965,8.509l-5.196,1.627   c-2.73,0.995-5.421-0.763-6.12-4.276c-0.651-2.066-4.049-16.147,24.39-16.693c29.981-0.572,30.765,11.326,30.006,15.808   L78.925,49.499z"/>  </svg>',
+		freeViewModeOn: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#4AAA4E" d="M50,0C22.431,0,0,22.43,0,50s22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.431,77.568,0,50,0z"/>  <path fill="#FFFFFF" d="M70.4,41.13v-6.21h-6.211v-6.208H23.39v30.157h6.208v6.209h6.209v6.209h40.8V41.13H70.4z M25.165,57.095   V30.486h37.253v4.434H29.599v22.175H25.165z M31.373,63.303v-4.435V36.694h32.816h4.438v4.436H35.808v22.173H31.373z M74.835,69.512   H37.582v-4.435V42.903H70.4h4.435V69.512z"/>  </svg> ',
+		freeViewModeOff: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#8C8C8C" d="M50,0C22.431,0,0,22.43,0,50s22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.431,77.568,0,50,0z"/>  <path fill="#FFFFFF" d="M70.4,41.13v-6.21h-6.211v-6.208H23.39v30.157h6.208v6.209h6.209v6.209h40.8V41.13H70.4z M25.165,57.095   V30.486h37.253v4.434H29.599v22.175H25.165z M31.373,63.303v-4.435V36.694h32.816h4.438v4.436H35.808v22.173H31.373z M74.835,69.512   H37.582v-4.435V42.903H70.4h4.435V69.512z"/>  </svg>',
+		tiledViewModeOn: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0 0 100 99.998" enable-background="new 0 0 100 99.998" xml:space="preserve">  <path fill="#4AAA4E" d="M50,0C22.431,0,0,22.43,0,50c0,27.569,22.429,49.998,50,49.998c27.57,0,50-22.429,50-49.999   C100,22.431,77.568,0,50,0z"/>  <g>   <g>    <path fill="#FFFFFF" d="M47.901,49.1H28.116c-0.662,0-1.199-0.537-1.199-1.199V28.115c0-0.662,0.537-1.199,1.199-1.199h19.785     c0.662,0,1.199,0.537,1.199,1.199V47.9C49.101,48.563,48.563,49.1,47.901,49.1z M29.315,46.701h17.387V29.314H29.315V46.701z"/>   </g>   <g>    <path fill="#FFFFFF" d="M71.883,49.1H52.1c-0.662,0-1.199-0.537-1.199-1.199V28.115c0-0.662,0.537-1.199,1.199-1.199h19.783     c0.663,0,1.2,0.537,1.2,1.199V47.9C73.083,48.563,72.546,49.1,71.883,49.1z M53.298,46.701h17.388V29.314H53.298V46.701z"/>   </g>   <g>    <path fill="#FFFFFF" d="M71.883,73.082H52.1c-0.662,0-1.199-0.537-1.199-1.2V52.099c0-0.662,0.537-1.201,1.199-1.201h19.783     c0.663,0,1.2,0.539,1.2,1.201v19.783C73.083,72.545,72.546,73.082,71.883,73.082z M53.298,70.685h17.388V53.297H53.298V70.685z"/>   </g>   <g>    <path fill="#FFFFFF" d="M47.901,73.082H28.116c-0.662,0-1.199-0.537-1.199-1.2V52.099c0-0.662,0.537-1.201,1.199-1.201h19.785     c0.662,0,1.199,0.539,1.199,1.201v19.783C49.101,72.545,48.563,73.082,47.901,73.082z M29.315,70.685h17.387V53.297H29.315V70.685     z"/>   </g>  </g>  </svg>',
+		tiledViewModeOff: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0 0 100 99.998" enable-background="new 0 0 100 99.998" xml:space="preserve">  <path fill="#8C8C8C" d="M50,0C22.431,0,0,22.43,0,50c0,27.569,22.429,49.998,50,49.998c27.57,0,50-22.429,50-49.999   C100,22.431,77.568,0,50,0z"/>  <g>   <g>    <path fill="#FFFFFF" d="M47.901,49.1H28.116c-0.662,0-1.199-0.537-1.199-1.199V28.115c0-0.662,0.537-1.199,1.199-1.199h19.785     c0.662,0,1.199,0.537,1.199,1.199V47.9C49.101,48.563,48.563,49.1,47.901,49.1z M29.315,46.701h17.387V29.314H29.315V46.701z"/>   </g>   <g>    <path fill="#FFFFFF" d="M71.883,49.1H52.1c-0.662,0-1.199-0.537-1.199-1.199V28.115c0-0.662,0.537-1.199,1.199-1.199h19.783     c0.663,0,1.2,0.537,1.2,1.199V47.9C73.083,48.563,72.546,49.1,71.883,49.1z M53.298,46.701h17.388V29.314H53.298V46.701z"/>   </g>   <g>    <path fill="#FFFFFF" d="M71.883,73.082H52.1c-0.662,0-1.199-0.537-1.199-1.2V52.099c0-0.662,0.537-1.201,1.199-1.201h19.783     c0.663,0,1.2,0.539,1.2,1.201v19.783C73.083,72.545,72.546,73.082,71.883,73.082z M53.298,70.685h17.388V53.297H53.298V70.685z"/>   </g>   <g>    <path fill="#FFFFFF" d="M47.901,73.082H28.116c-0.662,0-1.199-0.537-1.199-1.2V52.099c0-0.662,0.537-1.201,1.199-1.201h19.785     c0.662,0,1.199,0.539,1.199,1.201v19.783C49.101,72.545,48.563,73.082,47.901,73.082z M29.315,70.685h17.387V53.297H29.315V70.685     z"/>   </g>  </g>  </svg>',
+		loudestExceptMeOn: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#4AAA4E" d="M46.013,40.045c4.317,0,7.818-3.5,7.818-7.819c-0.005-4.315-3.503-7.813-7.818-7.818   c-4.318,0-7.818,3.501-7.818,7.818C38.194,36.544,41.695,40.045,46.013,40.045z"/>  <g>   <path fill="#4AAA4E" d="M61,54.463v-4.871c0-3.671-2.686-6.709-6.352-6.938c-2.137,2.683-5.294,4.247-8.724,4.247    c-3.429,0-6.467-1.564-8.603-4.247C33.657,42.882,31,45.919,31,49.592V66h15.396l-0.888-2.303c-0.101-0.275-0.051-0.508,0.13-0.739    c0.181-0.232,0.469-0.319,0.763-0.291l3.488,0.382L61,54.463z"/>   <path fill="#4AAA4E" d="M50.844,64.646c-0.174,0.133-0.391,0.194-0.608,0.173l-2.638-0.26l2.586,7.176l1.863-1.884    c0.155-0.154,0.361-0.246,0.58-0.254l18.908-0.765l-5.64-15.659L50.844,64.646z"/>   <polygon fill="#4AAA4E" points="56.439,71.172 57.945,75.35 66.336,72.326 65.785,70.794  "/>   <path fill="#4AAA4E" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z     M46.013,22.681c5.271,0,9.546,4.273,9.546,9.545c0,5.272-4.274,9.546-9.546,9.546c-5.272,0-9.546-4.274-9.546-9.546    C36.473,26.958,40.743,22.688,46.013,22.681z M73.465,70.13c-0.154,0.229-0.408,0.371-0.683,0.382l-5.188,0.211l0.659,1.831    c0.162,0.448-0.071,0.943-0.521,1.105l-10.017,3.608c-0.215,0.077-0.452,0.066-0.66-0.031c-0.208-0.097-0.368-0.272-0.445-0.488    l-1.982-5.504l-1.593,0.065l-2.589,2.611c-0.209,0.211-0.512,0.3-0.802,0.233s-0.525-0.289-0.624-0.57L47.02,68H29.806    c-0.226,0-0.419-0.068-0.581-0.227C29.064,67.613,29,67.41,29,67.184V49.592c0-4.784,3.857-8.661,8.642-8.66    c0.274-0.003,0.521,0.125,0.684,0.345c1.803,2.446,4.655,3.89,7.694,3.889s5.893-1.445,7.696-3.891    c0.164-0.22,0.39-0.348,0.663-0.343c4.782,0,8.621,3.879,8.621,8.66v3.554l2.744-2.06c0.223-0.167,0.526-0.219,0.794-0.142    c0.263,0.077,0.481,0.277,0.574,0.535l6.444,17.877C73.649,69.615,73.617,69.903,73.465,70.13z M74.719,63.705    c-0.13,0.281-0.401,0.469-0.71,0.495c-0.309,0.025-0.606-0.115-0.783-0.371c-0.176-0.257-0.2-0.585-0.065-0.864    c0.523-1.1,0.585-2.364,0.169-3.509c-0.44-1.224-1.354-2.22-2.534-2.766c-0.433-0.202-0.617-0.717-0.414-1.149    c0.203-0.432,0.717-0.615,1.148-0.413c1.598,0.739,2.832,2.088,3.426,3.746C75.526,60.451,75.442,62.19,74.719,63.705z     M78.168,64.801c-0.202,0.431-0.718,0.617-1.15,0.413c-0.431-0.202-0.615-0.717-0.413-1.149c0.877-1.878,0.955-4.033,0.213-5.971    c-0.719-1.96-2.18-3.557-4.067-4.446c-0.284-0.131-0.473-0.4-0.501-0.71s0.114-0.609,0.37-0.787    c0.255-0.176,0.586-0.201,0.865-0.066c2.297,1.082,4.077,3.022,4.95,5.408C79.34,59.864,79.244,62.502,78.168,64.801z"/>  </g>  </svg>',
+		loudestExceptMeOff: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#8C8C8C" d="M46.013,40.045c4.317,0,7.818-3.5,7.818-7.819c-0.005-4.315-3.503-7.813-7.818-7.818   c-4.318,0-7.818,3.501-7.818,7.818C38.194,36.544,41.695,40.045,46.013,40.045z"/>  <g>   <path fill="#8C8C8C" d="M61,54.463v-4.871c0-3.671-2.686-6.709-6.352-6.938c-2.137,2.683-5.294,4.247-8.725,4.247    c-3.429,0-6.467-1.564-8.603-4.247C33.657,42.882,31,45.919,31,49.592V66h15.396l-0.888-2.303c-0.101-0.275-0.051-0.508,0.13-0.739    c0.181-0.231,0.469-0.319,0.763-0.291l3.488,0.382L61,54.463z"/>   <path fill="#8C8C8C" d="M50.844,64.646c-0.174,0.133-0.391,0.193-0.608,0.172l-2.638-0.26l2.586,7.176l1.863-1.883    c0.155-0.154,0.361-0.246,0.58-0.254l18.908-0.766l-5.641-15.659L50.844,64.646z"/>   <polygon fill="#8C8C8C" points="56.439,71.172 57.945,75.35 66.336,72.326 65.785,70.794  "/>   <path fill="#8C8C8C" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z     M46.013,22.681c5.271,0,9.545,4.273,9.545,9.545s-4.273,9.546-9.545,9.546s-9.546-4.274-9.546-9.546    C36.473,26.958,40.743,22.688,46.013,22.681z M73.465,70.13c-0.154,0.229-0.408,0.371-0.683,0.382l-5.188,0.211l0.659,1.832    c0.162,0.447-0.071,0.942-0.521,1.104l-10.018,3.608c-0.215,0.076-0.451,0.065-0.66-0.031c-0.207-0.098-0.367-0.272-0.445-0.488    l-1.981-5.504l-1.593,0.064l-2.589,2.611c-0.209,0.211-0.512,0.301-0.802,0.232c-0.29-0.066-0.525-0.288-0.624-0.569l-2-5.583    H29.806c-0.226,0-0.419-0.068-0.581-0.227C29.064,67.613,29,67.41,29,67.184V49.592c0-4.784,3.857-8.661,8.642-8.66    c0.274-0.003,0.521,0.125,0.684,0.345c1.803,2.446,4.655,3.89,7.694,3.889s5.893-1.445,7.696-3.891    c0.164-0.22,0.39-0.348,0.663-0.343c4.782,0,8.621,3.879,8.621,8.66v3.555l2.744-2.061c0.223-0.167,0.525-0.219,0.794-0.143    c0.263,0.078,0.481,0.277,0.573,0.535l6.445,17.877C73.648,69.615,73.617,69.902,73.465,70.13z M74.719,63.705    c-0.13,0.281-0.4,0.469-0.71,0.495c-0.309,0.024-0.606-0.115-0.782-0.371c-0.177-0.257-0.201-0.585-0.065-0.864    c0.522-1.1,0.585-2.363,0.169-3.509c-0.439-1.224-1.354-2.22-2.534-2.767c-0.433-0.201-0.616-0.717-0.414-1.148    c0.203-0.432,0.718-0.615,1.147-0.413c1.599,0.739,2.832,2.088,3.427,3.746C75.525,60.451,75.441,62.189,74.719,63.705z     M78.168,64.801c-0.202,0.432-0.718,0.617-1.15,0.413c-0.431-0.202-0.615-0.717-0.412-1.149c0.877-1.877,0.955-4.032,0.213-5.971    c-0.719-1.96-2.18-3.557-4.067-4.445c-0.284-0.131-0.474-0.4-0.501-0.711c-0.027-0.31,0.113-0.608,0.37-0.787    c0.255-0.176,0.586-0.2,0.864-0.065c2.298,1.082,4.078,3.022,4.951,5.408C79.34,59.864,79.244,62.502,78.168,64.801z"/>  </g>  </svg>',
+		maximizeLoudestOn: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#4AAA4E" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"/>  <g>   <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M68.106,52.013c0,0.759,0,1.466,0,2.206c0.736,0,1.44,0,2.172,0    c0-0.746,0-1.464,0-2.206C69.553,52.013,68.86,52.013,68.106,52.013z"/>   <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M68.108,43.063c0,0.756,0,1.46,0,2.191c0.737,0,1.442,0,2.167,0    c0-0.746,0-1.464,0-2.191C69.546,43.063,68.854,43.063,68.108,43.063z"/>   <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M68.12,47.56c0,0.763,0,1.465,0,2.171c0.742,0,1.447,0,2.165,0    c0-0.735,0-1.439,0-2.171C69.556,47.56,68.851,47.56,68.12,47.56z"/>   <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M38.971,54.247c0,0,0,1.017,0,1.485    c-0.001,1.94-0.003,3.882-0.003,5.822c0,1.295,0.347,1.638,1.653,1.635c0.173,0,0.347,0,0.595,0c0-0.217,0-0.402,0-0.589    c0.002-1.625-0.009-3.251,0.011-4.877c0.011-0.93,0.768-1.474,1.539-1.139c0.448,0.195,0.675,0.566,0.678,1.036    c0.012,2.22,0.019,4.44-0.002,6.661c-0.007,0.707-0.457,1.112-1.181,1.133c-0.716,0.021-1.434,0.026-2.15,0    c-1.998-0.068-3.357-1.459-3.37-3.464c-0.016-2.36-0.004-4.721-0.004-7.081c0-0.188,0-0.376,0-0.628    c-1.301,0.052-2.527-0.028-3.492-0.992c-0.957-0.957-1.042-2.163-0.985-3.488c-0.355,0-0.679,0.009-1.003-0.002    c-0.727-0.025-1.218-0.473-1.228-1.103c-0.009-0.626,0.482-1.09,1.202-1.121c0.312-0.013,0.624-0.002,0.986-0.002    c0.026-0.487,0.027-0.936,0.078-1.378c0.213-1.887,1.545-3.089,3.453-3.104c1.958-0.016,3.916,0.002,5.874-0.016    c0.283-0.002,0.59-0.076,0.844-0.202c3.769-1.87,7.537-3.74,11.29-5.641c1.166-0.59,2.364-0.927,3.675-0.867    c0.575,0.026,1.154-0.008,1.73,0.013c1.151,0.044,2.08,0.823,2.146,1.968c0.091,1.55,0.05,3.109,0.063,4.664    c0.004,0.381,0,0.763,0,1.187c1.535,0.085,2.763,0.698,3.643,1.922c0.564,0.789,0.835,1.682,0.807,2.659    c-0.067,2.354-1.503,3.799-4.45,4.43c0,0.682,0,1.376,0,2.071c0,1.084,0.01,2.168-0.004,3.252    c-0.018,1.542-0.914,2.448-2.448,2.465c-1.063,0.012-2.137,0.065-3.189-0.051c-0.578-0.064-1.136-0.411-1.679-0.68    c-3.751-1.866-7.499-3.739-11.239-5.627c-0.499-0.253-0.993-0.384-1.552-0.36C40.524,54.24,38.971,54.247,38.971,54.247z     M59.08,38.572c-1.33,0.029-2.648-0.199-3.884,0.417c-3.812,1.902-7.623,3.806-11.425,5.727c-0.152,0.077-0.304,0.33-0.306,0.503    c-0.02,2.272-0.009,4.546-0.019,6.818c-0.001,0.277,0.07,0.433,0.334,0.563c3.487,1.731,6.968,3.476,10.452,5.216    c0.113,0.057,0.244,0.084,0.415,0.142c0-0.24,0-0.413,0-0.587c0.002-4.982,0.002-9.966,0.005-14.949    c0-0.226-0.002-0.456,0.033-0.68c0.077-0.514,0.488-0.876,1.001-0.908c0.525-0.033,0.973,0.253,1.113,0.762    c0.068,0.248,0.078,0.517,0.078,0.776c0.006,5.229,0.004,10.456,0.004,15.684c0,0.204,0,0.407,0,0.615c0.773,0,1.48,0,2.199,0    C59.08,51.965,59.08,45.294,59.08,38.572z M41.151,45.345c-0.077-0.026-0.125-0.057-0.174-0.058    c-1.748-0.004-3.497-0.024-5.245,0.001c-0.825,0.012-1.218,0.463-1.224,1.313c-0.01,1.329-0.003,2.657,0.002,3.986    c0.004,1.012,0.385,1.4,1.386,1.405c1.451,0.005,2.902,0.001,4.353,0.001c0.291,0,0.583,0,0.901,0    C41.151,49.73,41.151,47.537,41.151,45.345z M61.394,50.833c1.271-0.031,2.218-1.014,2.195-2.234    c-0.023-1.203-1.011-2.181-2.195-2.143C61.394,47.9,61.394,49.345,61.394,50.833z"/>   <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M68.106,52.013c0.754,0,1.446,0,2.172,0c0,0.742,0,1.46,0,2.206    c-0.731,0-1.436,0-2.172,0C68.106,53.479,68.106,52.771,68.106,52.013z"/>   <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M68.108,43.063c0.746,0,1.438,0,2.167,0c0,0.728,0,1.446,0,2.191    c-0.725,0-1.43,0-2.167,0C68.108,44.523,68.108,43.818,68.108,43.063z"/>   <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M68.12,47.56c0.73,0,1.436,0,2.165,0c0,0.732,0,1.437,0,2.171    c-0.718,0-1.423,0-2.165,0C68.12,49.025,68.12,48.323,68.12,47.56z"/>   <path fill="#FFFFFF" d="M26.444,69.789c-0.091,0-0.184-0.012-0.277-0.035l-0.79-0.197c-0.805-0.201-1.595-0.945-1.878-1.769    c-0.256-0.744-0.35-2.642-0.35-3.735V33.115c0-2.022,1.646-3.668,3.667-3.668h40.061c0.629,0,1.138,0.51,1.138,1.139    c0,0.628-0.509,1.138-1.138,1.138H26.817c-0.767,0-1.391,0.624-1.391,1.392v30.938c0,1.507,0.147,2.752,0.227,2.997    c0.032,0.093,0.199,0.267,0.292,0.303l0.775,0.193c0.61,0.152,0.981,0.771,0.828,1.38C27.418,69.443,26.955,69.789,26.444,69.789z"    />   <path fill="#FFFFFF" d="M31.022,76.553c-0.122,0-0.242-0.019-0.354-0.059c-0.481-0.172-0.792-0.638-0.792-1.184v-6.789    c0-0.629,0.509-1.138,1.138-1.138c0.628,0,1.138,0.509,1.138,1.138v4.201c0.008-0.009,0.017-0.018,0.026-0.026l2.723-2.715    c1.087-1.085,1.833-1.849,1.933-1.961c0.121-0.145,0.587-0.637,1.224-0.637h35.125c0.768,0,1.392-0.624,1.392-1.392V33.115    c0-0.741-0.475-1.392-1.015-1.392h-2.15c-0.629,0-1.138-0.509-1.138-1.138c0-0.629,0.509-1.139,1.138-1.139h2.15    c1.814,0,3.29,1.646,3.29,3.668v32.877c0,2.022-1.645,3.667-3.667,3.667H38.417c-0.49,0.518-1.843,1.868-1.908,1.934l-2.723,2.716    c-0.924,0.922-1.724,1.727-1.837,1.849C31.72,76.403,31.365,76.553,31.022,76.553z"/>  </g>  </svg>',
+		maximizeLoudestOff: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px"    height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <g id="Layer_1">   <path fill="#8C8C8C" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"    />   <g>    <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M68.106,52.013c0,0.759,0,1.466,0,2.206c0.736,0,1.44,0,2.172,0     c0-0.746,0-1.464,0-2.206C69.553,52.013,68.86,52.013,68.106,52.013z"/>    <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M68.108,43.063c0,0.756,0,1.46,0,2.191c0.737,0,1.442,0,2.167,0     c0-0.746,0-1.464,0-2.191C69.546,43.063,68.854,43.063,68.108,43.063z"/>    <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M68.12,47.56c0,0.763,0,1.465,0,2.171c0.742,0,1.447,0,2.165,0     c0-0.735,0-1.439,0-2.171C69.556,47.56,68.851,47.56,68.12,47.56z"/>    <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M38.971,54.247c0,0,0,1.017,0,1.485     c-0.001,1.94-0.003,3.882-0.003,5.822c0,1.295,0.347,1.638,1.653,1.635c0.173,0,0.347,0,0.595,0c0-0.217,0-0.402,0-0.589     c0.002-1.625-0.009-3.251,0.011-4.877c0.011-0.93,0.768-1.474,1.539-1.139c0.448,0.195,0.675,0.566,0.678,1.036     c0.012,2.22,0.019,4.44-0.002,6.661c-0.007,0.707-0.457,1.112-1.181,1.133c-0.716,0.021-1.434,0.026-2.15,0     c-1.998-0.068-3.357-1.459-3.37-3.464c-0.016-2.36-0.004-4.721-0.004-7.081c0-0.188,0-0.376,0-0.628     c-1.301,0.052-2.527-0.028-3.492-0.992c-0.957-0.957-1.042-2.163-0.985-3.488c-0.355,0-0.679,0.009-1.003-0.002     c-0.727-0.025-1.218-0.473-1.228-1.103c-0.009-0.626,0.482-1.09,1.202-1.121c0.312-0.013,0.624-0.002,0.986-0.002     c0.026-0.487,0.027-0.936,0.078-1.378c0.213-1.887,1.545-3.089,3.453-3.104c1.958-0.016,3.916,0.002,5.874-0.016     c0.283-0.002,0.59-0.076,0.844-0.202c3.769-1.87,7.537-3.74,11.29-5.641c1.166-0.59,2.364-0.927,3.675-0.867     c0.575,0.026,1.154-0.008,1.73,0.013c1.151,0.044,2.08,0.823,2.146,1.968c0.091,1.55,0.05,3.109,0.063,4.664     c0.004,0.381,0,0.763,0,1.187c1.535,0.085,2.763,0.698,3.643,1.922c0.564,0.789,0.835,1.682,0.807,2.659     c-0.067,2.354-1.503,3.799-4.45,4.43c0,0.682,0,1.376,0,2.071c0,1.084,0.01,2.168-0.004,3.252     c-0.018,1.542-0.914,2.448-2.448,2.465c-1.063,0.012-2.137,0.065-3.189-0.051c-0.578-0.064-1.136-0.411-1.679-0.68     c-3.751-1.866-7.499-3.739-11.239-5.627c-0.499-0.253-0.993-0.384-1.552-0.36C40.524,54.24,38.971,54.247,38.971,54.247z      M59.08,38.572c-1.33,0.029-2.648-0.199-3.884,0.417c-3.812,1.902-7.623,3.806-11.425,5.727c-0.152,0.077-0.304,0.33-0.306,0.503     c-0.02,2.272-0.009,4.546-0.019,6.818c-0.001,0.277,0.07,0.433,0.334,0.563c3.487,1.731,6.968,3.476,10.452,5.216     c0.113,0.057,0.244,0.084,0.415,0.142c0-0.24,0-0.413,0-0.587c0.002-4.982,0.002-9.966,0.005-14.949     c0-0.226-0.002-0.456,0.033-0.68c0.077-0.514,0.488-0.876,1.001-0.908c0.525-0.033,0.973,0.253,1.113,0.762     c0.068,0.248,0.078,0.517,0.078,0.776c0.006,5.229,0.004,10.456,0.004,15.684c0,0.204,0,0.407,0,0.615c0.773,0,1.48,0,2.199,0     C59.08,51.965,59.08,45.294,59.08,38.572z M41.151,45.345c-0.077-0.026-0.125-0.057-0.174-0.058     c-1.748-0.004-3.497-0.024-5.245,0.001c-0.825,0.012-1.218,0.463-1.224,1.313c-0.01,1.329-0.003,2.657,0.002,3.986     c0.004,1.012,0.385,1.4,1.386,1.405c1.451,0.005,2.902,0.001,4.353,0.001c0.291,0,0.583,0,0.901,0     C41.151,49.73,41.151,47.537,41.151,45.345z M61.394,50.833c1.271-0.031,2.218-1.014,2.195-2.234     c-0.023-1.203-1.011-2.181-2.195-2.143C61.394,47.9,61.394,49.345,61.394,50.833z"/>    <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M68.106,52.013c0.754,0,1.446,0,2.172,0c0,0.742,0,1.46,0,2.206     c-0.731,0-1.436,0-2.172,0C68.106,53.479,68.106,52.771,68.106,52.013z"/>    <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M68.108,43.063c0.746,0,1.438,0,2.167,0c0,0.728,0,1.446,0,2.191     c-0.725,0-1.43,0-2.167,0C68.108,44.523,68.108,43.818,68.108,43.063z"/>    <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M68.12,47.56c0.73,0,1.436,0,2.165,0c0,0.732,0,1.437,0,2.171     c-0.718,0-1.423,0-2.165,0C68.12,49.025,68.12,48.323,68.12,47.56z"/>    <path fill="#FFFFFF" d="M26.444,69.789c-0.091,0-0.184-0.012-0.277-0.035l-0.79-0.197c-0.805-0.201-1.595-0.945-1.878-1.769     c-0.256-0.744-0.35-2.642-0.35-3.735V33.115c0-2.022,1.646-3.668,3.667-3.668h40.061c0.629,0,1.138,0.51,1.138,1.139     c0,0.628-0.509,1.138-1.138,1.138H26.817c-0.767,0-1.391,0.624-1.391,1.392v30.938c0,1.507,0.147,2.752,0.227,2.997     c0.032,0.093,0.199,0.267,0.292,0.303l0.775,0.193c0.61,0.152,0.981,0.771,0.828,1.38C27.418,69.443,26.955,69.789,26.444,69.789z     "/>    <path fill="#FFFFFF" d="M31.022,76.553c-0.122,0-0.242-0.019-0.354-0.059c-0.481-0.172-0.792-0.638-0.792-1.184v-6.789     c0-0.629,0.509-1.138,1.138-1.138c0.628,0,1.138,0.509,1.138,1.138v4.201c0.008-0.009,0.017-0.018,0.026-0.026l2.723-2.715     c1.087-1.085,1.833-1.849,1.933-1.961c0.121-0.145,0.587-0.637,1.224-0.637h35.125c0.768,0,1.392-0.624,1.392-1.392V33.115     c0-0.741-0.475-1.392-1.015-1.392h-2.15c-0.629,0-1.138-0.509-1.138-1.138c0-0.629,0.509-1.139,1.138-1.139h2.15     c1.814,0,3.29,1.646,3.29,3.668v32.877c0,2.022-1.645,3.667-3.667,3.667H38.417c-0.49,0.518-1.843,1.868-1.908,1.934l-2.723,2.716     c-0.924,0.922-1.724,1.727-1.837,1.849C31.72,76.403,31.365,76.553,31.022,76.553z"/>   </g>  </g>  <g id="Layer_3">  </g>  </svg>',
+		staticMaximizeOn: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"     viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#4AAA4E" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"/>  <g>   <g>    <path fill="#FFFFFF" d="M73.238,74.392h-21.52c-0.663,0-1.2-0.537-1.2-1.2s0.537-1.2,1.2-1.2h20.319V30.007H29.97v20.111     c0,0.663-0.538,1.2-1.2,1.2s-1.2-0.537-1.2-1.2V28.807c0-0.663,0.538-1.2,1.2-1.2h44.468c0.663,0,1.2,0.538,1.2,1.2v44.384     C74.438,73.854,73.901,74.392,73.238,74.392z"/>   </g>   <g>    <path fill="#FFFFFF" d="M49.758,53.38c-0.307,0-0.614-0.117-0.849-0.352c-0.469-0.469-0.468-1.229,0-1.697l14.785-14.776     c0.47-0.469,1.229-0.468,1.697,0c0.469,0.469,0.469,1.229,0,1.697L50.606,53.028C50.372,53.263,50.065,53.38,49.758,53.38z"/>   </g>   <g>    <path fill="#FFFFFF" d="M65.046,48.662c-0.663,0-1.2-0.538-1.2-1.2v-9.359h-9.359c-0.663,0-1.2-0.538-1.2-1.2s0.537-1.2,1.2-1.2     h10.56c0.663,0,1.2,0.538,1.2,1.2v10.56C66.246,48.124,65.709,48.662,65.046,48.662z"/>   </g>   <g>    <path fill="#FFFFFF" d="M44.989,74.392H28.77c-0.663,0-1.2-0.537-1.2-1.2V56.982c0-0.663,0.538-1.2,1.2-1.2h16.219     c0.663,0,1.2,0.537,1.2,1.2v16.209C46.189,73.854,45.651,74.392,44.989,74.392z M29.97,71.991h13.818V58.183H29.97V71.991z"/>   </g>  </g>  </svg>',
+		staticMaximizeOff: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#8C8C8C" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"/>  <g>   <g>    <path fill="#FFFFFF" d="M73.238,74.392h-21.52c-0.663,0-1.2-0.537-1.2-1.2s0.537-1.2,1.2-1.2h20.319V30.007H29.97v20.111     c0,0.663-0.538,1.2-1.2,1.2s-1.2-0.537-1.2-1.2V28.807c0-0.663,0.538-1.2,1.2-1.2h44.468c0.663,0,1.2,0.538,1.2,1.2v44.384     C74.438,73.854,73.901,74.392,73.238,74.392z"/>   </g>   <g>    <path fill="#FFFFFF" d="M49.758,53.38c-0.307,0-0.614-0.117-0.849-0.352c-0.469-0.469-0.468-1.229,0-1.697l14.785-14.776     c0.47-0.469,1.229-0.468,1.697,0c0.469,0.469,0.469,1.229,0,1.697L50.606,53.028C50.372,53.263,50.065,53.38,49.758,53.38z"/>   </g>   <g>    <path fill="#FFFFFF" d="M65.046,48.662c-0.663,0-1.2-0.538-1.2-1.2v-9.359h-9.359c-0.663,0-1.2-0.538-1.2-1.2s0.537-1.2,1.2-1.2     h10.56c0.663,0,1.2,0.538,1.2,1.2v10.56C66.246,48.124,65.709,48.662,65.046,48.662z"/>   </g>   <g>    <path fill="#FFFFFF" d="M44.989,74.392H28.77c-0.663,0-1.2-0.537-1.2-1.2V56.982c0-0.663,0.538-1.2,1.2-1.2h16.219     c0.663,0,1.2,0.537,1.2,1.2v16.209C46.189,73.854,45.651,74.392,44.989,74.392z M29.97,71.991h13.818V58.183H29.97V71.991z"/>   </g>  </g>  </svg>',
 	}
 
 	/**
@@ -681,6 +692,35 @@
 				}
 
 				if(_isiOSCordova) tool.webViewElements().showOrHide();
+			},
+
+			/**
+			 * Update butons for toggling view mode in participants popup
+			 * @method updateControlBar
+			 */
+			updateViewModeBtns: function () {
+				var tool = this;
+				if(!tool.toggleViewBtns) return;
+				var buttonsArr = tool.toggleViewBtns;
+				var activeViewMode = tool.state.webrtcClass.screenRendering.getActiveViewMode();
+
+				if(!activeViewMode || webRTClib.screens().length == 0) return;
+
+				var viewModeToApply;
+				if(activeViewMode == 'minimized' || activeViewMode == 'maximized' || activeViewMode == 'maximizedMobile') {
+					viewModeToApply = 'maximizeStatic';
+				} else if(activeViewMode == 'tiled' || activeViewMode == 'tiledMobile') {
+					viewModeToApply = 'tiledView';
+				} else if(activeViewMode == 'regular') {
+					viewModeToApply = 'floatingView';
+				}
+
+				console.log('viewModeToApply', viewModeToApply, activeViewMode);
+				for(var b in buttonsArr) {
+					if(buttonsArr[b].viewMode == viewModeToApply) {
+						buttonsArr[b].icon.innerHTML = buttonsArr[b].onIcon;
+					} else buttonsArr[b].icon.innerHTML = buttonsArr[b].offIcon;
+				}
 			},
 
 			webViewElements: function() {
@@ -1408,6 +1448,24 @@
 				}
 
 				/**
+				 * Toggles screens view mode depending on selected option
+				 * @method toggleViewMode
+				 * @param {Object} e
+				 */
+				function toggleViewMode(e, buttonsArr) {
+					if(webRTClib.screens().length == 0) return;
+					var btn = e.currentTarget;
+					var viewModeToApply = btn.dataset.viewMode;
+					console.log('viewModeToApply', viewModeToApply);
+					for(var b in buttonsArr) {
+						if(buttonsArr[b].viewMode == viewModeToApply) {
+							buttonsArr[b].icon.innerHTML = buttonsArr[b].onIcon;
+							if(buttonsArr[b].handler != null) buttonsArr[b].handler();
+						} else buttonsArr[b].icon.innerHTML = buttonsArr[b].offIcon;
+					}
+				}
+
+				/**
 				 * Create participants list that is used in popup (on desktop) or modal box (on mobile)
 				 * @method createList
 				 */
@@ -1418,10 +1476,66 @@
 
 					var topBtns = document.createElement('DIV');
 					topBtns.className = 'participants-list-btns';
-					var disconnectbtn = document.createElement('BUTTON');
-					disconnectbtn.type = 'button';
-					disconnectbtn.className = 'Q_button Streams_webrtc_disconnect-btn';
-					disconnectbtn.innerHTML = icons.endCall + '<span>Disconnect</span>';
+					var disconnectBtn = document.createElement('DIV');
+					disconnectBtn.className = 'Streams_webrtc_disconnect-btn';
+					disconnectBtn.innerHTML = icons.disconnectIcon;
+
+
+					var viewModeSection = document.createElement('DIV');
+					viewModeSection.className = 'Streams_webrtc_toggle-view-mode-btns';
+
+					var floatingViewModeBtn = document.createElement('LABEL');
+					floatingViewModeBtn.className = 'Streams_webrtc_floating-mode-btn';
+					floatingViewModeBtn.dataset.viewMode = 'floatingView';
+					var floatingViewModeBtnInput = document.createElement('INPUT');
+					floatingViewModeBtnInput.type = 'radio';
+					floatingViewModeBtnInput.name = 'viewMode';
+					floatingViewModeBtnInput.value = 'floatingView';
+					var floatingViewModeBtnIcon = document.createElement('SPAN');
+					floatingViewModeBtnIcon.innerHTML = icons.freeViewModeOff;
+
+					var tiledViewModeBtn = document.createElement('LABEL');
+					tiledViewModeBtn.className = 'Streams_webrtc_tiled-mode-btn';
+					tiledViewModeBtn.dataset.viewMode = 'tiledView';
+					var tiledViewModeBtnInput = document.createElement('INPUT');
+					tiledViewModeBtnInput.type = 'radio';
+					tiledViewModeBtnInput.name = 'viewMode';
+					tiledViewModeBtnInput.value = 'tiledView';
+					var tiledViewModeBtnIcon = document.createElement('SPAN');
+					tiledViewModeBtnIcon.innerHTML = icons.tiledViewModeOff;
+
+					var loudestModeSection = document.createElement('DIV');
+					loudestModeSection.className = 'Streams_webrtc_toggle-loudest-mode';
+
+					var loudestExceptMeBtn = document.createElement('LABEL');
+					loudestExceptMeBtn.className = 'Streams_webrtc_lem-mode-btn';
+					loudestExceptMeBtn.dataset.viewMode = 'loudestExceptMe';
+					var loudestExceptMeBtnInput = document.createElement('INPUT');
+					loudestExceptMeBtnInput.type = 'radio';
+					loudestExceptMeBtnInput.name = 'viewMode';
+					loudestExceptMeBtnInput.value = 'loudestExceptMe';
+					var loudestExceptMeBtnIcon = document.createElement('SPAN');
+					loudestExceptMeBtnIcon.innerHTML = icons.loudestExceptMeOff;
+
+					var loudestBtn = document.createElement('LABEL');
+					loudestBtn.className = 'Streams_webrtc_loudest-mode-btn';
+					loudestBtn.dataset.viewMode = 'loudest';
+					var loudestBtnInput = document.createElement('INPUT');
+					loudestBtnInput.type = 'radio';
+					loudestBtnInput.name = 'viewMode';
+					loudestBtnInput.value = 'loudest';
+					var loudestBtnIcon = document.createElement('SPAN');
+					loudestBtnIcon.innerHTML = icons.maximizeLoudestOff;
+
+					var maximizeStaticBtn = document.createElement('LABEL');
+					maximizeStaticBtn.className = 'Streams_webrtc_loudest-mode-btn';
+					maximizeStaticBtn.dataset.viewMode = 'maximizeStatic';
+					var maximizeStaticBtnInput = document.createElement('INPUT');
+					maximizeStaticBtnInput.type = 'radio';
+					maximizeStaticBtnInput.name = 'viewMode';
+					maximizeStaticBtnInput.value = 'maximizeStatic';
+					var maximizeStaticBtnIcon = document.createElement('SPAN');
+					maximizeStaticBtnIcon.innerHTML = icons.staticMaximizeOff;
 
 					var loudestSelectCon = document.createElement('DIV');
 					loudestSelectCon.className = 'loudest-options-con'
@@ -1441,7 +1555,6 @@
 					loudestSelect.addEventListener('change', function (e) {
 						var value = loudestSelect.options[loudestSelect.selectedIndex].value;
 						toggleLoudesScreenMode(value);
-
 					})
 					loudestSelect.appendChild(option1);
 					loudestSelect.appendChild(option2);
@@ -1449,9 +1562,97 @@
 					loudestSelectCon.appendChild(loudestSelect);
 					tool.loudestSelect = loudestSelect;
 
-					topBtns.appendChild(disconnectbtn);
-					topBtns.appendChild(loudestSelectCon);
-					participantsListCon.appendChild(topBtns);
+					topBtns.appendChild(disconnectBtn);
+					floatingViewModeBtn.appendChild(floatingViewModeBtnInput);
+					floatingViewModeBtn.appendChild(floatingViewModeBtnIcon);
+					if(!Q.info.isMobile) viewModeSection.appendChild(floatingViewModeBtn);
+					tiledViewModeBtn.appendChild(tiledViewModeBtnInput);
+					tiledViewModeBtn.appendChild(tiledViewModeBtnIcon);
+					viewModeSection.appendChild(tiledViewModeBtn);
+					topBtns.appendChild(viewModeSection);
+					loudestExceptMeBtn.appendChild(loudestExceptMeBtnInput);
+					loudestExceptMeBtn.appendChild(loudestExceptMeBtnIcon);
+					loudestModeSection.appendChild(loudestExceptMeBtn);
+					loudestBtn.appendChild(loudestBtnInput);
+					loudestBtn.appendChild(loudestBtnIcon);
+					loudestModeSection.appendChild(loudestBtn);
+					maximizeStaticBtn.appendChild(maximizeStaticBtnInput);
+					maximizeStaticBtn.appendChild(maximizeStaticBtnIcon);
+					loudestModeSection.appendChild(maximizeStaticBtn);
+					topBtns.appendChild(loudestModeSection);
+					//topBtns.appendChild(loudestSelectCon);
+					participantsListCon.appendChild(topBtns)
+
+					var buttonsArr = [
+						{
+							viewMode:'floatingView',
+							btn: floatingViewModeBtn,
+							icon: floatingViewModeBtnIcon,
+							onIcon: icons.freeViewModeOn,
+							offIcon: icons.freeViewModeOff,
+							handler: function () {
+								toggleLoudesScreenMode('disabled');
+								tool.state.webrtcClass.screenRendering.renderDesktopScreensGrid();
+							}
+						},
+						{
+							viewMode:'tiledView',
+							btn: tiledViewModeBtn,
+							icon: tiledViewModeBtnIcon,
+							onIcon: icons.tiledViewModeOn,
+							offIcon: icons.tiledViewModeOff,
+							handler: function () {
+								toggleLoudesScreenMode('disabled');
+								if(Q.info.isMobile)
+									tool.state.webrtcClass.screenRendering.renderTiledScreensGridMobile();
+								else tool.state.webrtcClass.screenRendering.renderTiledScreensGridDesktop();
+							}
+						},
+						{
+							viewMode:'loudestExceptMe',
+							btn: loudestExceptMeBtn,
+							icon: loudestExceptMeBtnIcon,
+							onIcon: icons.loudestExceptMeOn,
+							offIcon: icons.loudestExceptMeOff,
+							handler: function () {
+								toggleLoudesScreenMode('allButMe');
+							}
+						},
+						{
+							viewMode:'loudest',
+							btn: loudestBtn,
+							icon: loudestBtnIcon,
+							onIcon: icons.maximizeLoudestOn,
+							offIcon: icons.maximizeLoudestOff,
+							handler: function () {
+								toggleLoudesScreenMode('all');
+							}
+						},
+						{
+							viewMode:'maximizeStatic',
+							btn: maximizeStaticBtn,
+							icon: maximizeStaticBtnIcon,
+							onIcon: icons.staticMaximizeOn,
+							offIcon: icons.staticMaximizeOff,
+							handler: function(){
+								toggleLoudesScreenMode('disabled');
+								var activeScreen = tool.state.webrtcClass.screenRendering.getActiveSreen();
+								if(activeScreen != null) {
+									tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(activeScreen, 300);
+								} else {
+									var screens = webRTClib.screens();
+									if(screens[0] != null) tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(screens[0], 300);
+								}
+							}
+						}
+						];
+					for (var b in buttonsArr) {
+						buttonsArr[b].btn.addEventListener('mouseup', function (e) {
+							toggleViewMode(e, buttonsArr);
+						});
+					}
+
+					tool.toggleViewBtns = buttonsArr;
 
 					tool.participantListEl = document.createElement('UL');
 					tool.participantListEl.className = 'Streams_webrtc_participants-list';
@@ -1482,7 +1683,7 @@
 								content: participantsListCon,
 								apply: true,
 								onActivate: function (dialog) {
-									$(disconnectbtn).plugin('Q/clickable', {
+									$(disconnectBtn).plugin('Q/clickable', {
 										press: {size: 1.2},
 										release: {size: 1.2}
 									}).on(Q.Pointer.fastclick, function () {
@@ -1533,7 +1734,7 @@
 
 						});
 
-						$(disconnectbtn).plugin('Q/clickable', {
+						$(disconnectBtn).plugin('Q/clickable', {
 							press: {size: 1.2},
 							release: {size: 1.2}
 						}).on(Q.Pointer.fastclick, function () {
@@ -1543,6 +1744,7 @@
 				}
 
 				function toggleLoudesScreenMode(mode) {
+					console.log('toggleLoudesScreenMode', mode);
 					if(tool.loudestModeInterval != null) {
 						clearInterval(tool.loudestModeInterval);
 						tool.loudestModeInterval = null;
@@ -1551,9 +1753,11 @@
 					if(mode == 'disabled'){
 						return;
 					}
+					console.log('toggleLoudesScreenMode 2')
 
 					tool.loudestModeInterval = setInterval(function () {
 						webRTClib.screensInterface.getLoudestScreen(mode, function (loudestScreen) {
+							console.log('loudestScreen', loudestScreen)
 							if(Q.info.isMobile)
 								tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(loudestScreen, 300);
 							else tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(loudestScreen, 300);

@@ -33,7 +33,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 	var Streams = Q.Streams;
-	var _debug = true;
+	var _debug = false;
 	var _debugTimer = {};
 	var errorLog = '';
 	var latestConsoleLog = '';
@@ -726,7 +726,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 
-							Q.activate(
+							/*Q.activate(
 								Q.Tool.setUpElement(
 									_controls.firstChild, // or pass an existing element
 									"Q/resize",
@@ -741,7 +741,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								function () {
 									if(_debug) console.log('controls movable')
 								}
-							);
+							);*/
 						}
 					);
 
@@ -834,6 +834,22 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				}
 
 				bindScreensEvents();
+			}
+
+			/**
+			 * Returns active (maximized) screen
+			 * @returns {Object}
+			 */
+			function getActiveSreen() {
+				return activeScreen;
+			}
+
+			/**
+			 * Returns active screens view mode
+			 * @returns {String}
+			 */
+			function getActiveViewMode() {
+				return viewMode;
 			}
 
 			/**
@@ -1375,8 +1391,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					} else renderTiledScreenGridDesktop();
 
 				}
-
-				viewMode = modeToSwitch;
 			}
 
 			/**
@@ -1566,8 +1580,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					var elements = toggleScreensClass('tiledHorizontalMobile');
 					_layoutTool.animate('tiledHorizontalMobile', elements, 500, true);
 				}
+
+				viewMode = 'tiledMobile';
 				activeScreen = null;
 				resetAudioVisualization();
+				if(_controlsTool) _controlsTool.updateViewModeBtns();
 			}
 
 			/**
@@ -1585,10 +1602,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					var elements = toggleScreensClass('tiledHorizontal');
 					_layoutTool.animate('tiledHorizontal', elements, 500, true);
 				}
+				viewMode = 'tiled';
 				activeScreen = null;
 
 				updateScreensButtons();
 				resetAudioVisualization();
+				if(_controlsTool) _controlsTool.updateViewModeBtns();
 			}
 
 			/**
@@ -1607,8 +1626,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				_layoutTool.animate('regularScreensGrid', elements, 500, true);
 
+				viewMode = 'regular';
 				updateScreensButtons();
 				resetAudioVisualization();
+				if(_controlsTool) _controlsTool.updateViewModeBtns();
 			}
 
 			/**
@@ -1671,6 +1692,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				viewMode = 'maximized';
 				updateScreensButtons();
 				resetAudioVisualization();
+				if(_controlsTool) _controlsTool.updateViewModeBtns();
 			}
 
 			/**
@@ -1703,6 +1725,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					_layoutTool.animate('maximizedHorizontalMobile', elements, 100, true);
 				}
 
+				viewMode = 'maximizedMobile';
+				if(_controlsTool) _controlsTool.updateViewModeBtns();
 				resetAudioVisualization();
 			}
 
@@ -2076,11 +2100,16 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 			return {
 				updateLayout:updateLayout,
+				getActiveViewMode:getActiveViewMode,
+				getActiveSreen:getActiveSreen,
 				fitScreenToVideo:fitScreenToVideo,
 				toggleViewMode:toggleViewMode,
 				updateLocalScreenClasses:updateLocalScreenClasses,
 				renderMaximizedScreensGrid:renderMaximizedScreensGrid,
 				renderMaximizedScreensGridMobile:renderMaximizedScreensGridMobile,
+				renderDesktopScreensGrid:renderDesktopScreensGrid,
+				renderTiledScreensGridDesktop:renderTiledScreenGridDesktop,
+				renderTiledScreensGridMobile:renderTiledScreenGridMobile,
 				showLoader:showLoader,
 				hideLoader:hideLoader,
 			};
@@ -2360,7 +2389,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					if(roomId != null) _options.roomId = roomId;
 
 					var roomsMedia = document.createElement('DIV');
-					roomsMedia.id = 'Streams_webrtc_room-media';
+					roomsMedia.className = 'Streams_webrtc_room-media';
 					var dashboard = document.getElementById('dashboard_slot');
 					if(Q.info.isMobile && !Q.info.isTablet) {
 						roomsMedia.style.height = 'calc(100% - ' + dashboard.offsetHeight + 'px)';

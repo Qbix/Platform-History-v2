@@ -32,6 +32,7 @@ WebRTCconferenceLib = function app(options){
 	var roomsMedia;
 
 	var roomName;
+	var twilioRoom;
 
 	var roomScreens = [];
 	app.screens = function(all) {
@@ -150,11 +151,16 @@ WebRTCconferenceLib = function app(options){
 				roomScreens.splice(i, 1);
 			}
 
-			var index = roomParticipants.map(function (p) {
-				return p.sid;
-			}).indexOf(this.sid);
+			for(var t = this.tracks.length - 1; t >= 0; t--){
+				if(this.tracks[t].mediaStreamTrack != null) this.tracks[t].mediaStreamTrack.stop()
+			}
 
-			if(index != -1) roomParticipants.splice(index, 1);
+			for(var p = roomParticipants.length - 1; p >= 0; p--){
+				if(roomParticipants[p].sid == this.sid) {
+					roomParticipants.splice(p, 1);
+					break;
+				}
+			}
 		}
 		this.soundMeter = {
 			svg: null,
@@ -627,7 +633,7 @@ WebRTCconferenceLib = function app(options){
 			cancelBtn.innerHTML = 'Disconnect';
 
 			close.addEventListener('click', function () {app.views.closeAllDialogues();});
-			cancelBtn.addEventListener('click', function () {app.views.closeAllDialogues();window.room.disconnect();});
+			cancelBtn.addEventListener('click', function () {app.views.closeAllDialogues();twilioRoom.disconnect();});
 
 			dialogInner.appendChild(dialogTitle);
 			dialogInner.appendChild(participantsCon);
@@ -2150,7 +2156,7 @@ WebRTCconferenceLib = function app(options){
 
 		function roomJoined(room, dataTrack) {
 			app.state = 'connected';
-			window.room = room;
+			twilioRoom = room;
 			if(!options.useAsLibrary) {
 				app.views.switchTo(mainView);
 				if(!_isMobile ) {
@@ -2267,7 +2273,7 @@ WebRTCconferenceLib = function app(options){
 			checkOnlineStatus();
 
 			function disconnect() {
-				window.room.disconnect();
+				twilioRoom.disconnect();
 			}
 			window.addEventListener('beforeunload', disconnect);
 			window.addEventListener('unload', disconnect);
@@ -6634,7 +6640,7 @@ WebRTCconferenceLib = function app(options){
 			participant.remove();
 		}
 
-		if(window.room != null) window.room.disconnect();
+		if(twilioRoom != null) twilioRoom.disconnect();
 	}
 
 	function makeid() {
