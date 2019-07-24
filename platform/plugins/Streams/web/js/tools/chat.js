@@ -1,6 +1,8 @@
 (function (Q, $) {
-	
-/**
+
+	var WebRTC = Q.Streams.WebRTC();
+
+	/**
  * Streams Tools
  * @module Streams-tools
  */
@@ -518,6 +520,73 @@ Q.Tool.define('Streams/chat', function(options) {
 			tool.processDOM();
 		});
 	},
+	/**
+	 * @method startWebRTC
+	 * Trying to connect user to video/audio conversation related to current chat stream.
+	 * If WebRTC stream doesn't exist, try to create one.
+	 */
+	startWebRTC: function () {
+		var tool = this;
+		var state = this.state;
+
+		Q.Streams.related(state.publisherId, state.streamName, 'Streams/webrtc', true, {limit: 1}, function (err) {
+			if (err) {
+				return;
+			}
+
+			// get first property from relatedStreams (actually it should be only one)
+			var stream = this.relatedStreams[Object.keys(this.relatedStreams)[0]];
+			var _createRoom = function (publisherId, streamName) {
+				// disconnect from all conversations
+				//WebRTC.stop();
+
+				// connect to this particular conversation
+				WebRTC.start({
+					element: document.body,
+					roomId: streamName.split('/').pop(),
+					roomPublisherId: publisherId,
+					mode: 'node'
+				});
+			};
+			if (stream && !stream.getAttribute('endTime')) {
+				if (!stream.testWriteLevel('join')) {
+					return Q.alert(tool.text.dontHavePermissionJoinConversation);
+				}
+
+				_createRoom(stream.fields.publisherId, stream.fields.name);
+			} else {
+				Q.req("Streams/webrtc", ["room"], function (err, response) {
+					var msg = Q.firstErrorMessage(err, response && response.errors);
+					if (msg) {
+						return Q.alert(msg);
+					}
+
+					Q.Streams.get(state.publisherId, response.slots.room.roomId, function (err) {
+						var fem = Q.firstErrorMessage(err);
+						if (fem) {
+							return console.warn("Streams.chat.webrtc.create: " + fem);
+						}
+
+						var stream = this;
+						stream.relateTo('Streams/webrtc', state.publisherId, state.streamName, function (err) {
+							var fem = Q.firstErrorMessage(err);
+							if (fem) {
+								return console.warn("Streams.chat.webrtc.relate: " + fem);
+							}
+
+							_createRoom(stream.fields.publisherId, stream.fields.name);
+						});
+					});
+				}, {
+					method: 'post',
+					fields: {
+						publisherId: state.publisherId,
+						adapter: 'node'
+					}
+				});
+			}
+		});
+	},
 	addEvents: function(){
 		var tool    = this,
 			state   = this.state,
@@ -573,6 +642,38 @@ Q.Tool.define('Streams/chat', function(options) {
 			// TODO: don't scroll to bottom, show "V 10 new messages" button
 			// on the bottom left of Streams/chat, and then jump to bottom and refresh
 			tool.scrollToBottom();
+		}, tool);
+
+		// new Streams/webrtc stream related
+		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/relatedTo').set(function(stream, message) {
+			var instructions = message.getAllInstructions();
+			var type = Q.getObject("type", instructions);
+			var publisherId = Q.getObject("fromPublisherId", instructions);
+			var streamName = Q.getObject("fromStreamName", instructions);
+
+			if (type === 'Streams/webrtc' && publisherId !== Q.Users.loggedInUserId()) {
+				Q.Template.render('Streams/chat/webrtc/available', {
+					avatar: Q.Tool.setUpElementHTML('div', 'Users/avatar', {
+						userId: publisherId
+					}),
+					text: tool.text.startedConversation
+				}, function (err, html) {
+					if (err) {
+						return;
+					}
+					var $html = $(html);
+					$te.append($html).activate();
+
+					$(".Q_close", $html).on(Q.Pointer.fastclick, function () {
+						$html.remove();
+					});
+
+					$html.on(Q.Pointer.fastclick, function () {
+						tool.startWebRTC();
+						$html.remove();
+					});
+				});
+			}
 		}, tool);
 
 		// new user joined
@@ -646,18 +747,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		// call button handler
 		tool.$(".Streams_chat_composer .call").on(Q.Pointer.fastclick, function(){
-			Q.Streams.related(state.publisherId, state.streamName, 'Streams/webrtc', true, {limit: 1}, function (err) {
-				if (err) {
-					return;
-				}
-
-				// get first property from relatedStreams (actually it should be only one)
-				var stream = this.relatedStreams[Object.keys(this.relatedStreams)[0]];
-
-				if (!stream || stream.getAttribute('endTime')) {
-					//TODO create new Streams/webrtc stream
-				}
-			});
+			tool.startWebRTC();
 		});
 
 		function _submit ($this) {
@@ -967,6 +1057,13 @@ Q.Template.set('Streams/chat/message/error',
 			'</div>'+
 		'</div>'+
 		'<div class="Q_clear"></div>'+
+	'</div>'
+);
+
+Q.Template.set('Streams/chat/webrtc/available',
+	'<div class="Streams_chat_webrtc_available">'+
+	'	{{& avatar}} {{text}}'+
+	'	<div class="Q_close"></div>'+
 	'</div>'
 );
 
