@@ -1608,27 +1608,23 @@ webrtc_tool_popup-settings.Streams_webrtc_popup-box > div {
 .participants-list-btns button{
     box-shadow: 0 5px 20px -5px #0048b5;
 }
-.participants-list-btns input[type="radio"]{
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-}
 .Streams_webrtc_toggle-view-mode-btns {
     display: flex;
     flex: 1;
     justify-content: center;
 }
-.Streams_webrtc_toggle-view-mode-btns label{
+.Streams_webrtc_toggle-view-mode-btns div{
     margin-right: 10px;
     cursor:pointer;
 }
-.Streams_webrtc_toggle-view-mode-btns label:last-child{
+.Streams_webrtc_toggle-view-mode-btns div:last-child{
     margin-right: 0;
 }
-.Streams_webrtc_toggle-loudest-mode label{
+.Streams_webrtc_toggle-loudest-mode div{
     margin-right: 10px;
+    cursor:pointer;
 }
-.Streams_webrtc_toggle-loudest-mode label:last-child{
+.Streams_webrtc_toggle-loudest-mode div:last-child{
     margin-right: 0;
 }
 .Streams_webrtc_toggle-loudest-mode {

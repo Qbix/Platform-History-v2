@@ -1478,62 +1478,48 @@
 					topBtns.className = 'participants-list-btns';
 					var disconnectBtn = document.createElement('DIV');
 					disconnectBtn.className = 'Streams_webrtc_disconnect-btn';
+					disconnectBtn.touchlabel = 'Disconnect';
 					disconnectBtn.innerHTML = icons.disconnectIcon;
 
 
 					var viewModeSection = document.createElement('DIV');
 					viewModeSection.className = 'Streams_webrtc_toggle-view-mode-btns';
 
-					var floatingViewModeBtn = document.createElement('LABEL');
+					var floatingViewModeBtn = document.createElement('DIV');
 					floatingViewModeBtn.className = 'Streams_webrtc_floating-mode-btn';
 					floatingViewModeBtn.dataset.viewMode = 'floatingView';
-					var floatingViewModeBtnInput = document.createElement('INPUT');
-					floatingViewModeBtnInput.type = 'radio';
-					floatingViewModeBtnInput.name = 'viewMode';
-					floatingViewModeBtnInput.value = 'floatingView';
+					floatingViewModeBtn.dataset.touchlabel = 'Floating Screens';
 					var floatingViewModeBtnIcon = document.createElement('SPAN');
 					floatingViewModeBtnIcon.innerHTML = icons.freeViewModeOff;
 
-					var tiledViewModeBtn = document.createElement('LABEL');
+					var tiledViewModeBtn = document.createElement('DIV');
 					tiledViewModeBtn.className = 'Streams_webrtc_tiled-mode-btn';
 					tiledViewModeBtn.dataset.viewMode = 'tiledView';
-					var tiledViewModeBtnInput = document.createElement('INPUT');
-					tiledViewModeBtnInput.type = 'radio';
-					tiledViewModeBtnInput.name = 'viewMode';
-					tiledViewModeBtnInput.value = 'tiledView';
+					tiledViewModeBtn.dataset.touchlabel = 'Tiled Screens';
 					var tiledViewModeBtnIcon = document.createElement('SPAN');
 					tiledViewModeBtnIcon.innerHTML = icons.tiledViewModeOff;
 
 					var loudestModeSection = document.createElement('DIV');
 					loudestModeSection.className = 'Streams_webrtc_toggle-loudest-mode';
 
-					var loudestExceptMeBtn = document.createElement('LABEL');
+					var loudestExceptMeBtn = document.createElement('DIV');
 					loudestExceptMeBtn.className = 'Streams_webrtc_lem-mode-btn';
 					loudestExceptMeBtn.dataset.viewMode = 'loudestExceptMe';
-					var loudestExceptMeBtnInput = document.createElement('INPUT');
-					loudestExceptMeBtnInput.type = 'radio';
-					loudestExceptMeBtnInput.name = 'viewMode';
-					loudestExceptMeBtnInput.value = 'loudestExceptMe';
+					loudestExceptMeBtn.dataset.touchlabel = 'Loudest Except Me';
 					var loudestExceptMeBtnIcon = document.createElement('SPAN');
 					loudestExceptMeBtnIcon.innerHTML = icons.loudestExceptMeOff;
 
-					var loudestBtn = document.createElement('LABEL');
+					var loudestBtn = document.createElement('DIV');
 					loudestBtn.className = 'Streams_webrtc_loudest-mode-btn';
 					loudestBtn.dataset.viewMode = 'loudest';
-					var loudestBtnInput = document.createElement('INPUT');
-					loudestBtnInput.type = 'radio';
-					loudestBtnInput.name = 'viewMode';
-					loudestBtnInput.value = 'loudest';
+					loudestBtn.dataset.touchlabel = 'Maximize Loudest';
 					var loudestBtnIcon = document.createElement('SPAN');
 					loudestBtnIcon.innerHTML = icons.maximizeLoudestOff;
 
-					var maximizeStaticBtn = document.createElement('LABEL');
+					var maximizeStaticBtn = document.createElement('DIV');
 					maximizeStaticBtn.className = 'Streams_webrtc_loudest-mode-btn';
 					maximizeStaticBtn.dataset.viewMode = 'maximizeStatic';
-					var maximizeStaticBtnInput = document.createElement('INPUT');
-					maximizeStaticBtnInput.type = 'radio';
-					maximizeStaticBtnInput.name = 'viewMode';
-					maximizeStaticBtnInput.value = 'maximizeStatic';
+					maximizeStaticBtn.dataset.touchlabel = 'Manual';
 					var maximizeStaticBtnIcon = document.createElement('SPAN');
 					maximizeStaticBtnIcon.innerHTML = icons.staticMaximizeOff;
 
@@ -1563,20 +1549,15 @@
 					tool.loudestSelect = loudestSelect;
 
 					topBtns.appendChild(disconnectBtn);
-					floatingViewModeBtn.appendChild(floatingViewModeBtnInput);
 					floatingViewModeBtn.appendChild(floatingViewModeBtnIcon);
 					if(!Q.info.isMobile) viewModeSection.appendChild(floatingViewModeBtn);
-					tiledViewModeBtn.appendChild(tiledViewModeBtnInput);
 					tiledViewModeBtn.appendChild(tiledViewModeBtnIcon);
 					viewModeSection.appendChild(tiledViewModeBtn);
 					topBtns.appendChild(viewModeSection);
-					loudestExceptMeBtn.appendChild(loudestExceptMeBtnInput);
 					loudestExceptMeBtn.appendChild(loudestExceptMeBtnIcon);
 					loudestModeSection.appendChild(loudestExceptMeBtn);
-					loudestBtn.appendChild(loudestBtnInput);
 					loudestBtn.appendChild(loudestBtnIcon);
 					loudestModeSection.appendChild(loudestBtn);
-					maximizeStaticBtn.appendChild(maximizeStaticBtnInput);
 					maximizeStaticBtn.appendChild(maximizeStaticBtnIcon);
 					loudestModeSection.appendChild(maximizeStaticBtn);
 					topBtns.appendChild(loudestModeSection);
