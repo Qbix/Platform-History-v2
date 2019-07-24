@@ -149,11 +149,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			var tool = this;
 
 			stream.onMessage('Streams/join').set(function (stream, message) {
-				if(_debug) console.log('%c STREAMS: ANOTHER USER JOINED', 'background:blue;color:white;', stream, message)
-			});
+				if(_debug) console.log('%c STREAMS: ANOTHER USER JOINED', 'background:blue;color:white;', stream, message);
+				var userId = message.getInstruction('byUserId');
+
+			}, 'Streams/webrtc');
 			stream.onMessage('Streams/connected').set(function (stream, message) {
-				if(_debug) console.log('%c STREAMS: ANOTHER USER JOINED', 'background:blue;color:white;', stream, message)
-			});
+				if(_debug) console.log('%c STREAMS: ANOTHER USER JOINED', 'background:blue;color:white;', stream, message);
+			}, 'Streams/webrtc');
+
+			stream.onMessage("Streams/leave").set(function (stream, message) {
+				var userId = message.getInstruction('byUserId');
+			}, 'Streams/webrtc');
 		}
 
 		/**
@@ -2447,15 +2453,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 								window.addEventListener('beforeunload', webRTCInstance.stop);
 
-								// listen message 'join'
-								_roomStream.onMessage("Streams/join").set(function (stream, message) {
-									var userId = message.getInstruction('byUserId');
-								}, 'Streams/webrtc');
-
-								// listen message 'leave'
-								_roomStream.onMessage("Streams/leave").set(function (stream, message) {
-									var userId = message.getInstruction('byUserId');
-								}, 'Streams/webrtc');
 							});
 
 						}, {
