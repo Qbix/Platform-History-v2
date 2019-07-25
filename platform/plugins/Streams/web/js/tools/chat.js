@@ -290,7 +290,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				})
 				.on(Q.Pointer.fastclick, function () {
 					var $this = $(this);
-					var status = $this.attr('data-touchlabel');
+					var status = $this.attr('data-subscribed');
 					var callback = function (err, participant) {
 						if (err) {
 							return console.warn(err);
@@ -304,13 +304,15 @@ Q.Tool.define('Streams/chat', function(options) {
 
 					$this.attr('data-subscribed', 'loading');
 
-					if (status === 'Subscribed') {
+					if (status === 'true') {
 						state.stream.unsubscribe(callback);
 					} else {
 						state.stream.subscribe(callback);
 					}
 				});
-				
+
+				$te.find('.Streams_chat_call').attr('data-touchlabel', tool.text.RealTimeCall);
+
 				if (Q.Users.loggedInUser
 				&& !state.stream.testWriteLevel('post')) {
 					tool.$('.Streams_chat_composer').hide();
@@ -533,6 +535,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	startWebRTC: function () {
 		var tool = this;
 		var state = this.state;
+		var $toolElement = $(this.element);
 
 		Q.Streams.related(state.publisherId, state.streamName, 'Streams/webrtc', true, {limit: 1}, function (err) {
 			if (err) {
@@ -549,7 +552,12 @@ Q.Tool.define('Streams/chat', function(options) {
 					roomPublisherId: publisherId,
 					mode: 'node',
 					onWebrtcControlsCreated: function () {
-						$(this.element).addClass('Streams_chat_webrtc');
+						$toolElement.attr('data-webrtcStarted', true);
+
+						this.Q.beforeRemove.set(function () {
+							state.webrtc = null;
+							$toolElement.attr('data-webrtcStarted', false);
+						}, this);
 					},
 					onWebRTCRoomCreated: function () {
 						state.webrtc = this;
@@ -569,7 +577,7 @@ Q.Tool.define('Streams/chat', function(options) {
 						return Q.alert(msg);
 					}
 
-					Q.Streams.get(state.publisherId, response.slots.room.roomId, function (err) {
+					Q.Streams.get(Q.Users.loggedInUserId(), response.slots.room.roomId, function (err) {
 						var fem = Q.firstErrorMessage(err);
 						if (fem) {
 							return console.warn("Streams.chat.webrtc.create: " + fem);
@@ -588,7 +596,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				}, {
 					method: 'post',
 					fields: {
-						publisherId: state.publisherId,
+						publisherId: Q.Users.loggedInUserId(),
 						adapter: 'node'
 					}
 				});
@@ -662,23 +670,21 @@ Q.Tool.define('Streams/chat', function(options) {
 			if (type === 'Streams/webrtc' && publisherId !== Q.Users.loggedInUserId()) {
 				Q.Template.render('Streams/chat/webrtc/available', {
 					avatar: Q.Tool.setUpElementHTML('div', 'Users/avatar', {
-						userId: publisherId
+						userId: publisherId,
+						icon: true,
+						short: true
 					}),
 					text: tool.text.startedConversation
 				}, function (err, html) {
 					if (err) {
 						return;
 					}
-					var $html = $(html);
-					$te.append($html).activate();
 
-					$(".Q_close", $html).on(Q.Pointer.fastclick, function () {
-						$html.remove();
-					});
-
-					$html.on(Q.Pointer.fastclick, function () {
-						tool.startWebRTC();
-						$html.remove();
+					Q.Notices.add({
+						content: html,
+						handler: function () {
+							tool.startWebRTC();
+						}
 					});
 				});
 			}
@@ -717,8 +723,8 @@ Q.Tool.define('Streams/chat', function(options) {
 		}).on('keypress change input focus paste blur Q_refresh', function(event) {
 			var $this = $(this);
 			var $form = $this.closest('form');
-			var $submit = $form.find('.submit');
-			var $call = $form.find('.call');
+			var $submit = $form.find('.Streams_chat_submit');
+			var $call = $form.find('.Streams_chat_call');
 			var content = $this.val().trim();
 
 			// 'enter' key handler
@@ -749,12 +755,12 @@ Q.Tool.define('Streams/chat', function(options) {
 		});
 
 		// submit button handler
-		tool.$(".Streams_chat_composer .submit").on(Q.Pointer.fastclick, function(){
+		tool.$(".Streams_chat_composer .Streams_chat_submit").on(Q.Pointer.fastclick, function(){
 			Q.handle(_submit, $input[0], [$input]);
 		});
 
 		// call button handler
-		tool.$(".Streams_chat_composer .call").on(Q.Pointer.fastclick, function(){
+		tool.$(".Streams_chat_composer .Streams_chat_call").on(Q.Pointer.fastclick, function(){
 			tool.startWebRTC();
 		});
 
@@ -1096,8 +1102,8 @@ Q.Template.set('Streams/chat/main',
 			'<button class="Streams_chat_subscription"></button>' +
 			'<input type="text" placeholder="{{placeholder}}">'+
 		'{{/if}}' +
-		'<div class="submit Q_disappear"></div>' +
-		'<div class="call Q_appear"></div>' +
+		'<div class="Streams_chat_submit Q_disappear"></div>' +
+		'<div class="Streams_chat_call Q_appear"></div>' +
 	'</form>'+
 	'<hr />'+
 	'{{#if closeable}}' +
