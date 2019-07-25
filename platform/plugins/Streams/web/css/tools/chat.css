@@ -376,8 +376,8 @@
 	font-style: italic;
 }
 
-.Q_tool.Streams_chat_tool[data-logged=false] .Streams_chat_subscription,
-.Q_tool.Streams_chat_tool[data-logged=false] .Streams_chat_call {
+.Users_loggedOut .Q_tool.Streams_chat_tool .Streams_chat_subscription,
+.Users_loggedOut .Q_tool.Streams_chat_tool .Streams_chat_call {
 	display: none;
 }
 

@@ -111,7 +111,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		});
 
 		return false;
-	}).attr('data-logged', !!Q.Users.loggedInUserId());
+	});
 
 	Q.addStylesheet('{{Streams}}/css/tools/chat.css');
 },
