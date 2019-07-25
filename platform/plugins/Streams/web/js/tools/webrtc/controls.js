@@ -75,7 +75,8 @@
 			onCreate: new Q.Event(),
 			onUpdate: new Q.Event(),
 			onRefresh: new Q.Event(),
-			dialogIsOpened: false
+			dialogIsOpened: false,
+			loudestMode: false
 		},
 
 		{
@@ -789,7 +790,13 @@
 
 				var viewModeToApply;
 				if(activeViewMode == 'minimized' || activeViewMode == 'maximized' || activeViewMode == 'maximizedMobile') {
-					viewModeToApply = 'maximizeStatic';
+					if(tool.state.loudestMode == 'all') {
+						viewModeToApply = 'loudest';
+					} else if(tool.state.loudestMode == 'loudestExceptMe') {
+						viewModeToApply = 'loudestExceptMe';
+					} else {
+						viewModeToApply = 'maximizeStatic';
+					}
 				} else if(activeViewMode == 'tiled' || activeViewMode == 'tiledMobile') {
 					viewModeToApply = 'tiledView';
 				} else if(activeViewMode == 'regular') {
@@ -1805,8 +1812,19 @@
 					}
 				}
 
+				function maximizeLoudestScreen(mode) {
+					webRTClib.screensInterface.getLoudestScreen(mode, function (loudestScreen) {
+						console.log('loudestScreen', loudestScreen)
+						if(Q.info.isMobile)
+							tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(loudestScreen, 300);
+						else tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(loudestScreen, 300);
+
+					});
+				}
+
 				function toggleLoudesScreenMode(mode) {
-					console.log('toggleLoudesScreenMode', mode);
+					tool.state.loudestMode = mode;
+					maximizeLoudestScreen(mode);
 					if(tool.loudestModeInterval != null) {
 						clearInterval(tool.loudestModeInterval);
 						tool.loudestModeInterval = null;
@@ -1815,16 +1833,9 @@
 					if(mode == 'disabled'){
 						return;
 					}
-					console.log('toggleLoudesScreenMode 2')
 
 					tool.loudestModeInterval = setInterval(function () {
-						webRTClib.screensInterface.getLoudestScreen(mode, function (loudestScreen) {
-							console.log('loudestScreen', loudestScreen)
-							if(Q.info.isMobile)
-								tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(loudestScreen, 300);
-							else tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(loudestScreen, 300);
-
-						});
+						maximizeLoudestScreen(mode);
 					}, 1000);
 
 				}
@@ -1896,6 +1907,7 @@
 					addItem:addItem,
 					removeItem:removeItem,
 					showScreen:showScreen,
+					maximizeLoudestScreen:maximizeLoudestScreen,
 					toggleLoudesScreenMode:toggleLoudesScreenMode,
 					checkActiveMediaTracks:checkActiveMediaTracks,
 					disableLoudesScreenMode:disableLoudesScreenMode,

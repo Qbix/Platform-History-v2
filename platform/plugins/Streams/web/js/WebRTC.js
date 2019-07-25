@@ -33,7 +33,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 	var Streams = Q.Streams;
-	var _debug = true;
+	var _debug = false;
 	var _debugTimer = {};
 	var errorLog = '';
 	var latestConsoleLog = '';
@@ -50,7 +50,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			mediaDevicesDialog: {timeout:2000},
 			startWith: {
 				audio: true,
-				video: false
+				video: true
 			},
 			onWebRTCRoomCreated: new Q.Event(),
 			onWebrtcControlsCreated: new Q.Event()
@@ -734,7 +734,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 
-							Q.activate(
+							/*Q.activate(
 								Q.Tool.setUpElement(
 									_controls.firstChild, // or pass an existing element
 									"Q/resize",
@@ -749,7 +749,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								function () {
 									if(_debug) console.log('controls movable')
 								}
-							);
+							);*/
 						}
 					);
 
