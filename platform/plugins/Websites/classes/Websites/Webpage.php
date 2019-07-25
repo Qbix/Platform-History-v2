@@ -265,12 +265,13 @@ class Websites_Webpage
 	 * If Websites/webpage stream for this $url already exists - return one.
 	 * @method fetchStream
 	 * @static
-	 * @param {string} $url
+	 * @param {string} $url URL string to search stream by.
+	 * @param {string} [$publisherId=null] publisher id of stream. If null, main community id used.
 	 * @return Streams_Stream
 	 */
-	static function fetchStream($url) {
-
+	static function fetchStream($url, $publisherId = null) {
 		$streams = new Streams_Stream();
+		$streams->publisherId = $publisherId ?: Users::communityId();
 		$streams->name = "Websites/webpage/".self::normalizeUrl($url);
 		if ($streams->retrieve()) {
 			return Streams::fetchOne($streams->publisherId, $streams->publisherId, $streams->name);
@@ -282,8 +283,9 @@ class Websites_Webpage
 	 * Create Websites/webpage stream from params
 	 * @method createStream
 	 * @static
-	 * @param {string} $publisherId
 	 * @param {array} $params
+	 * @param {string} [$params.asUserId=null] The user who would be create stream. If null - logged user id.
+	 * @param {string} [$params.publisherId=null] Stream publisher id. If null - main community if.
 	 * @param {string} [$params.title]
 	 * @param {string} [$params.keywords]
 	 * @param {string} [$params.description]
@@ -291,17 +293,19 @@ class Websites_Webpage
 	 * @param {string} [$params.smallIcon]
 	 * @param {array} [$params.headers] array with key "Content-Type"
 	 * @param {string} [$params.lang] two-letter code
+	 * @param {bool} [$skipAccess=false] Whether to skip access in Streams::create and quota checking.
 	 * @throws Exception
 	 * @return Streams_Stream
 	 */
-	static function createStream ($publisherId, $params) {
+	static function createStream ($params, $skipAccess=false) {
 		$url = Q::ifset($params, 'url', null);
 		if (!Q_Valid::url($url)) {
 			throw new Exception("Invalid URL");
 		}
 		$urlParsed = parse_url($url);
 
-		$userId = $publisherId ?: Users::loggedInUser(true)->id;
+		$asUserId = Q::ifset($params, "asUserId", Users::loggedInUser(true)->id);
+		$publisherId = Q::ifset($params, "publisherId", Users::communityId());
 
 		$title = Q::ifset($params, 'title', substr($url, strrpos($url, '/') + 1));
 		$title = $title ? substr($title, 0, 255) : '';
@@ -331,7 +335,7 @@ class Websites_Webpage
 		// insofar as user created Websites/webpage stream, need to complete all actions related to interest created from client
 		Q::event('Streams/interest/post', array(
 			'title' => $interestTitle,
-			'userId' => $userId
+			'userId' => $publisherId
 		));
 		$interestPublisherId = Q_Response::getSlot('publisherId');
 		$interestStreamName = Q_Response::getSlot('streamName');
@@ -368,7 +372,16 @@ class Websites_Webpage
 			return $webpageStream;
 		}
 
-		$webpageStream = Streams::create($userId, $userId, 'Websites/webpage', array(
+		$quotaName = "Websites/webpage";
+		$quota = null;
+
+		if (!$skipAccess) {
+			// check quota
+			$roles = Users::roles();
+			$quota = Users_Quota::check($asUserId, '', $quotaName, true, 1, $roles);
+		}
+
+		$webpageStream = Streams::create($asUserId, $publisherId, 'Websites/webpage', array(
 			'title' => trim($title),
 			'content' => trim($description) ?: "",
 			'icon' => $streamIcon,
@@ -385,13 +398,23 @@ class Websites_Webpage
 				'contentType' =>$contentType,
 				'lang' => Q::ifset($params, 'lang', 'en')
 			),
-			'skipAccess' => true,
+			'skipAccess' => $skipAccess,
 			'name' => "Websites/webpage/".substr(self::normalizeUrl($url), 0, 100)
 		), array(
 			'publisherId' => $interestPublisherId,
 			'streamName' => $interestStreamName,
 			'type' => 'Websites/webpage'
 		));
+
+		// grant access to this stream for logged user
+		$streamsAccess = new Streams_Access();
+		$streamsAccess->publisherId = $webpageStream->publisherId;
+		$streamsAccess->streamName = $webpageStream->name;
+		$streamsAccess->ofUserId = $asUserId;
+		$streamsAccess->readLevel = Streams::$READ_LEVEL['max'];
+		$streamsAccess->writeLevel = Streams::$WRITE_LEVEL['max'];
+		$streamsAccess->adminLevel = Streams::$ADMIN_LEVEL['max'];
+		$streamsAccess->save();
 
 		// set custom icon for Websites/webpage stream
 		if (Q_Valid::url($bigIcon)) {
@@ -418,6 +441,11 @@ class Websites_Webpage
 					));
 				}
 			}
+		}
+
+		// set quota
+		if (!$skipAccess && $quota instanceof Users_Quota) {
+			$quota->used();
 		}
 
 		return $webpageStream;
