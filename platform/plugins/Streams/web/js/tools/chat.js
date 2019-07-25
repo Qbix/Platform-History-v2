@@ -290,7 +290,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				})
 				.on(Q.Pointer.fastclick, function () {
 					var $this = $(this);
-					var status = $this.attr('data-touchlabel');
+					var status = $this.attr('data-subscribed');
 					var callback = function (err, participant) {
 						if (err) {
 							return console.warn(err);
@@ -304,7 +304,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 					$this.attr('data-subscribed', 'loading');
 
-					if (status === 'Subscribed') {
+					if (status === 'true') {
 						state.stream.unsubscribe(callback);
 					} else {
 						state.stream.subscribe(callback);
@@ -535,6 +535,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	startWebRTC: function () {
 		var tool = this;
 		var state = this.state;
+		var $toolElement = $(this.element);
 
 		Q.Streams.related(state.publisherId, state.streamName, 'Streams/webrtc', true, {limit: 1}, function (err) {
 			if (err) {
@@ -551,7 +552,12 @@ Q.Tool.define('Streams/chat', function(options) {
 					roomPublisherId: publisherId,
 					mode: 'node',
 					onWebrtcControlsCreated: function () {
-						$(this.element).addClass('Streams_chat_webrtc');
+						$toolElement.attr('data-webrtcStarted', true);
+
+						this.Q.beforeRemove.set(function () {
+							state.webrtc = null;
+							$toolElement.attr('data-webrtcStarted', false);
+						}, this);
 					},
 					onWebRTCRoomCreated: function () {
 						state.webrtc = this;
@@ -571,7 +577,7 @@ Q.Tool.define('Streams/chat', function(options) {
 						return Q.alert(msg);
 					}
 
-					Q.Streams.get(state.publisherId, response.slots.room.roomId, function (err) {
+					Q.Streams.get(Q.Users.loggedInUserId(), response.slots.room.roomId, function (err) {
 						var fem = Q.firstErrorMessage(err);
 						if (fem) {
 							return console.warn("Streams.chat.webrtc.create: " + fem);
@@ -590,7 +596,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				}, {
 					method: 'post',
 					fields: {
-						publisherId: state.publisherId,
+						publisherId: Q.Users.loggedInUserId(),
 						adapter: 'node'
 					}
 				});
@@ -664,23 +670,21 @@ Q.Tool.define('Streams/chat', function(options) {
 			if (type === 'Streams/webrtc' && publisherId !== Q.Users.loggedInUserId()) {
 				Q.Template.render('Streams/chat/webrtc/available', {
 					avatar: Q.Tool.setUpElementHTML('div', 'Users/avatar', {
-						userId: publisherId
+						userId: publisherId,
+						icon: true,
+						short: true
 					}),
 					text: tool.text.startedConversation
 				}, function (err, html) {
 					if (err) {
 						return;
 					}
-					var $html = $(html);
-					$te.append($html).activate();
 
-					$(".Q_close", $html).on(Q.Pointer.fastclick, function () {
-						$html.remove();
-					});
-
-					$html.on(Q.Pointer.fastclick, function () {
-						tool.startWebRTC();
-						$html.remove();
+					Q.Notices.add({
+						content: html,
+						handler: function () {
+							tool.startWebRTC();
+						}
 					});
 				});
 			}
