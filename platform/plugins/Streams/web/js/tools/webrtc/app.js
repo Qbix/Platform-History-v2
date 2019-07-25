@@ -6518,7 +6518,7 @@ WebRTCconferenceLib = function app(options){
 			require(['https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'], function (io) {
 
 
-				socket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket']});
+				socket = io.connect(options.nodeServer, {transports: ['websocket']});
 				socket.on('connect', function () {
 					if(_debug) console.log('CONNECTED', socket);
 					if(localParticipant != null) return;
@@ -6554,7 +6554,7 @@ WebRTCconferenceLib = function app(options){
 		location.hash = '#' + roomName;
 
 		app.views.createJoinFormView(function (userName) {
-			socket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket']});
+			socket = io.connect(options.nodeServer, {transports: ['websocket']});
 			socket.on('connect', function () {
 				if(_debug) console.log('CONNECTED', socket);
 				localParticipant = new Participant();
