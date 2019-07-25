@@ -33,7 +33,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 	var Streams = Q.Streams;
-	var _debug = false;
+	var _debug = true;
 	var _debugTimer = {};
 	var errorLog = '';
 	var latestConsoleLog = '';
@@ -159,6 +159,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 			stream.onMessage("Streams/leave").set(function (stream, message) {
 				var userId = message.getInstruction('byUserId');
+
+				if(_debug) console.log('%c STREAMS: USER DISCONNECTED', 'background:blue;color:white;', message);
 			}, 'Streams/webrtc');
 		}
 
@@ -732,7 +734,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 
-							/*Q.activate(
+							Q.activate(
 								Q.Tool.setUpElement(
 									_controls.firstChild, // or pass an existing element
 									"Q/resize",
@@ -747,7 +749,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								function () {
 									if(_debug) console.log('controls movable')
 								}
-							);*/
+							);
 						}
 					);
 

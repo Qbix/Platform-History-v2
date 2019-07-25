@@ -1,7 +1,7 @@
 WebRTCconferenceLib = function app(options){
 	var app = {};
 	var defaultOptions = {
-		mode: 'twilio',
+		mode: 'node',
 		useIosrtcPlugin: false,
 		nodeServer: '',
 		roomName: null,
@@ -2453,18 +2453,6 @@ WebRTCconferenceLib = function app(options){
 					existingParticipant.latestOnlineTime = performance.now();
 				}
 			});
-
-			window.onbeforeunload = function()
-			{
-				for(var p in roomParticipants) {
-					if(roomParticipants[p].isLocal) continue;
-					roomParticipants[p].RTCPeerConnection.close();
-					if(roomParticipants[p].iosrtcRTCPeerConnection != null) roomParticipants[p].iosrtcRTCPeerConnection.close();
-				}
-				if(_debug) console.log('DISCONNECT')
-
-				socket.emit('disconnect');
-			};
 		}
 
 		function setH264AsPreffered(description) {
@@ -6633,12 +6621,19 @@ WebRTCconferenceLib = function app(options){
 			app.sendOnlineStatusInterval = null;
 		}
 
-		var i, participant;
-		for (i = 0; participant = roomParticipants[i]; i++) {
-			if(participant.soundMeter.script != null) participant.soundMeter.script.disconnect();
-			if(participant.soundMeter.source != null) participant.soundMeter.source.disconnect();
-			participant.remove();
+		for(var p = roomParticipants.length - 1; p >= 0; p--){
+			if(roomParticipants[p].soundMeter.script != null) roomParticipants[p].soundMeter.script.disconnect();
+			if(roomParticipants[p].soundMeter.source != null) roomParticipants[p].soundMeter.source.disconnect();
+
+			if(options.mode == 'node' && !roomParticipants[p].isLocal) {
+				if (roomParticipants[p].RTCPeerConnection != null) roomParticipants[p].RTCPeerConnection.close();
+				if (roomParticipants[p].iosrtcRTCPeerConnection != null) roomParticipants[p].iosrtcRTCPeerConnection.close();
+			}
+
+			roomParticipants[p].remove();
 		}
+
+		if(socket != null) socket.disconnect();
 
 		if(twilioRoom != null) twilioRoom.disconnect();
 	}

@@ -315,7 +315,7 @@
 				var textChatBtnCon = document.createElement('DIV');
 				textChatBtnCon.className = 'Streams_webrtc_text-chat-btn';
 				var textChatBtn = document.createElement('DIV');
-				textChatBtn.className = 'Streams_webrtc_text-chat-btn';
+				textChatBtn.className = 'Streams_webrtc_text-chat-btn-btn';
 				var textChatBtnIcon = document.createElement('DIV');
 				textChatBtnIcon.className = 'Streams_webrtc_text-chat-icon';
 				textChatBtnIcon.innerHTML = icons.textChat;
@@ -364,6 +364,7 @@
 				tool.cameraBtnIcon = cameraBtnIcon;
 				tool.speakerBtn = speakerBtn;
 				tool.microphoneBtn = microphoneBtn;
+				tool.textChatBtn = textChatBtn;
 				tool.usersBtn = usersBtn;
 				tool.usersBtnIcon = usersBtnIcon;
 				tool.usersCounter = counterBadge;
@@ -385,9 +386,9 @@
 					tool.toggleAudio();
 				})
 
-				textChatBtnCon.addEventListener('mouseup', function () {
+				/*textChatBtnCon.addEventListener('mouseup', function () {
 					tool.textChat.toggle();
-				})
+				})*/
 
 				return controlBar;
 			},
@@ -405,7 +406,7 @@
 					var dialogInner=document.createElement('DIV');
 					dialogInner.className = 'dialog-inner';
 					var chatBox=document.createElement('DIV');
-					chatBox.className = 'Streams_webrtc_popup-chat-box';
+					chatBox.className = 'Streams_webrtc_popup-chat-box  Streams_webrtc_popup-box';
 
 
 					var close=document.createElement('div');
@@ -423,7 +424,31 @@
 
 					dialogue.appendChild(close);
 					dialogue.appendChild(dialogInner);
-					webRTCclass.roomsMediaContainer().appendChild(dialogue);
+
+
+					if(!Q.info.isMobile && !Q.info.isTablet) {
+						tool.textChatBtn.parentNode.appendChild(chatBox);
+					} else {
+						webRTCclass.roomsMediaContainer().appendChild(dialogue);
+						setTimeout(function () {
+							Q.activate(
+								Q.Tool.setUpElement(
+									dialogue, // or pass an existing element
+									"Q/resize",
+									{
+										movable: true,
+										activateOnElement: dialogTitle,
+										resizeByWheel: false,
+										active: true,
+									}
+								),
+								{},
+								function () {
+									var tool = this;
+								}
+							);
+						}, 3000)
+					}
 
 					var controlsRect = tool.controlBar.getBoundingClientRect();
 					if(Q.info.isMobile) {
@@ -441,28 +466,10 @@
 					tool.chatDialogue = chatBox;
 					tool.chatBox = chatBox;
 
-					setTimeout(function () {
-						Q.activate(
-							Q.Tool.setUpElement(
-								dialogue, // or pass an existing element
-								"Q/resize",
-								{
-									movable: true,
-									activateOnElement: dialogTitle,
-									resizeByWheel: false,
-									active: true,
-								}
-							),
-							{},
-							function () {
-								var tool = this;
-							}
-						);
-					}, 3000)
-
 					tool.textChat = {
 						chatDialogue: dialogue,
 						chatBox: chatBox,
+						static: false,
 						isHidden: true,
 						hide: function () {
 							if(!this.chatDialogue.classList.contains('Streams_webrtc_hidden')){
@@ -523,6 +530,80 @@
 							)
 						)
 					);
+
+					if(Q.info.isMobile || Q.info.isTablet) {
+
+						console.log('tool.textChatBtn', tool.textChatBtn)
+						tool.textChatBtn.addEventListener('click', function (e) {
+							tool.textChat.toggle();
+						});
+
+					} else {
+						console.log('text hat init', tool.textChatBtn)
+						tool.textChatBtn.addEventListener('mouseenter', function (e) {
+							if (tool.hoverTimeout.textChatPopup != null) {
+								clearTimeout(tool.hoverTimeout.textChatPopup);
+								tool.hoverTimeout.textChatPopup = null;
+							}
+							console.log('text hat hover')
+							tool.textChatBtn.parentNode.classList.add('Streams_webrtc_hover');
+						});
+
+						tool.textChatBtn.addEventListener('mouseleave', function (e) {
+							if(tool.textChat.static) {
+								return;
+							}
+							if (e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
+								e.stopPropagation();
+								e.preventDefault();
+							}
+							tool.hoverTimeout.textChatPopup = setTimeout(function () {
+								tool.textChatBtn.parentNode.classList.remove('Streams_webrtc_hover');
+							}, 300)
+						});
+
+						var makePopupStatic = function (e) {
+							if (tool.hoverTimeout.textChatPopup != null) {
+								clearTimeout(tool.hoverTimeout.textChatPopup);
+								tool.hoverTimeout.textChatPopup = null;
+							}
+							console.log('text hat hover')
+							tool.textChatBtn.parentNode.classList.add('Streams_webrtc_hover');
+							tool.textChat.static = true;
+
+							var removeStaticState = function (e) {
+								if(tool.chatBox.contains(e.target) || tool.chatBox == e.target) {
+									return;
+								}
+								tool.textChatBtn.parentNode.classList.remove('Streams_webrtc_hover');
+								tool.textChat.static = false;
+								window.removeEventListener('click', removeStaticState);
+							}
+
+							window.addEventListener('mousedown', removeStaticState);
+						}
+
+						tool.textChatBtn.addEventListener('mouseup', makePopupStatic);
+						tool.chatBox.addEventListener('mouseup', makePopupStatic);
+
+						tool.chatBox.addEventListener('mouseenter', function (e) {
+
+							if(tool.hoverTimeout.textChatPopup != null) {
+								clearTimeout(tool.hoverTimeout.textChatPopup);
+								tool.hoverTimeout.textChatPopup = null;
+							}
+						})
+						tool.chatBox.addEventListener('mouseleave', function (e) {
+							if(tool.textChat.static) {
+								return;
+							}
+							setTimeout(function () {
+								tool.textChatBtn.parentNode.classList.remove('Streams_webrtc_hover');
+							}, 300)
+
+						});
+					}
+
 				}
 
 				return {
@@ -1478,7 +1559,7 @@
 					topBtns.className = 'participants-list-btns';
 					var disconnectBtn = document.createElement('DIV');
 					disconnectBtn.className = 'Streams_webrtc_disconnect-btn';
-					disconnectBtn.touchlabel = 'Disconnect';
+					disconnectBtn.dataset.touchlabel = 'Disconnect';
 					disconnectBtn.innerHTML = icons.disconnectIcon;
 
 
