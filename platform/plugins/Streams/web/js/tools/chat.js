@@ -305,7 +305,9 @@ Q.Tool.define('Streams/chat', function(options) {
 						state.stream.subscribe(callback);
 					}
 				});
-				
+
+				$te.find('.Streams_chat_call').attr('data-touchlabel', tool.text.RealTimeCall);
+
 				if (Q.Users.loggedInUser
 				&& !state.stream.testWriteLevel('post')) {
 					tool.$('.Streams_chat_composer').hide();
