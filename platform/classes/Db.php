@@ -692,7 +692,7 @@ abstract class Db
 	{
 		$date = new DateTime();
 		$date->setTimestamp($timestamp);
-		$date->setTimezone($timezone);
+		$date->setTimezone(new DateTimeZone($timezone));
 		return $date->format('Y-m-d H:i:s');
 	}
 	

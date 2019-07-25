@@ -50,7 +50,7 @@
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			authnet: function (options, callback) {
-				Q.Text.get('Assets/content', function (err, text.) {
+				Q.Text.get('Assets/content', function (err, text) {
 					var o = Q.extend({},
 						text.subscriptions,
 						Assets.Subscriptions.authnet.options,
