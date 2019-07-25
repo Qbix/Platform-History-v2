@@ -13219,7 +13219,7 @@ Q.Notices = {
 	 * @param {String} [options.key] Unique key for this notice. Need if you want to modify/remove notice by key.
 	 * @param {String} options.content HTML contents of this notice.
 	 * @param {Boolean} [options.closeable=true] Whether notice can be closed with red x icon.
-	 * @param {Function|String} [options.handler] Something (callback or URL) to handle with Q.handle()
+	 * @param {Function|String} [options.handler] Something (callback or URL) to handle with Q.handle() on click notice
 	 * @param {String} [options.type=common] Arbitrary type of notice. Can be used to apply different styles dependent on type,
 	 * because appropriate CSS class appended to the notice. May be 'error', 'warning'.
 	 * @param {Boolean|Number} [options.timeout=false] Time in seconds after which to remove notice.
@@ -13283,6 +13283,7 @@ Q.Notices = {
 			}, o.timeout * 1000);
 		}
 		ul.appendChild(li);
+		Q.activate(ul);
 		setTimeout(function () {
 			Q.Notices.show(li);
 
