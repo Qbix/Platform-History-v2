@@ -2,20 +2,24 @@
 
 
 /**
+ * This class represents WebRTC rooms
+ * @class Streams_WebRTC_Node
+ * @constructor
  * @module Streams
  */
-
 class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Interface
 {
-    /**
-     * This class represents WebRTC rooms
-     * @class Streams_WebRTC_Twilio
-     * @constructor
-     */
-    function createRoom($publisherId, $roomId) {
+	/**
+	 * @method createOrJoinRoom
+	 * @param {string} $publisherId Id of room's publisher/initiator
+	 * @param {string} $roomId Room id in Qbix (last marp of stream name)
+	 * @return {Object}
+	 */
+    function createOrJoinRoom($publisherId, $roomId) {
         if (empty($publisherId)) {
             throw new Q_Exception_RequiredField(array('field' => 'publisherId'));
         }
+
         if (!empty($roomId)) {
             $streamName = "Streams/webrtc/$roomId";
             $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
@@ -29,18 +33,36 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
             $roomId = substr($stream->name, strlen('Streams/webrtc/'));
         }
 
-        try {
-            $turnCredentials = $this->getTwilioTurnCredentials();
-
-        } catch(Exception $e) {
-
-        }
+		$stream->setAttribute('startTime', time());
+		$stream->changed();
 
         return (object) [
             'stream' => $stream,
-            'roomId' => $stream->name,
-            'turnCredentials' => $turnCredentials,
-        ];
+            'roomId' => $stream->name
+		];
+    }
+
+	/**
+	 * @method endRoom Ends conference room by setting endedTime attribute after last participant left the room.
+	 * @param {string} $publisherId Id of room's publisher/initiator
+	 * @param {string} $roomId Room id in Qbix (last marp of stream name)
+	 * @return {Object}
+	 */
+    function endRoom($publisherId, $roomId) {
+        if (empty($publisherId) || empty($roomId)) {
+        	$field = empty($publisherId) ? 'publisherId' : 'roomId';
+            throw new Q_Exception_RequiredField(array('field' => $field));
+        }
+
+		$streamName = "Streams/webrtc/$roomId";
+		$stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
+		$stream->setAttribute('endTime', time());
+		$stream->changed();
+
+        return (object) [
+            'stream' => $stream,
+            'roomId' => $stream->name
+		];
     }
 
     function getTwilioTurnCredentials() {

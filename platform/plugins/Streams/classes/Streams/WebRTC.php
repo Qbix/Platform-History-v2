@@ -17,10 +17,13 @@ interface Streams_WebRTC_Interface
      * @constructor
      */
 
-    /**
-     * TODO: please document every method
-     */
-    function createRoom($publisherId, $roomId);
+	/**
+	 * @method createOrJoinRoom
+	 * @param {string} $publisherId Id of room's publisher/initiator
+	 * @param {string} $roomId Room id in Qbix (last marp of stream name)
+	 * @return {Object}
+	 */
+    function createOrJoinRoom($publisherId, $roomId);
 
 }
 
