@@ -141,51 +141,10 @@
 .Q_tool.Streams_chat_tool {
 	position: relative;
 }
-.Q_tool.Streams_chat_tool .Streams_chat_webrtc_available {
-	position: absolute;
-	bottom: 50px;
-	right: 0;
-	border: 1px solid #1a3d73;
-	border-radius: 5px;
-	background-color: #d2d3d5;
-	line-height: 60px;
-	font-size: 14px;
-	width: 100%;
-	cursor: pointer;
+.Q_tool.Streams_chat_tool[data-webrtcStarted=true] .Streams_chat_call {
+	display: none;
 }
-.Q_tool.Streams_chat_tool .Streams_chat_webrtc_available .Users_avatar_tool {
-	display: inline-block;
-	padding: 3px;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	text-align: center;
-	vertical-align: top;
-	line-height: normal;
-}
-.Q_tool.Streams_chat_tool .Streams_chat_webrtc_available .Users_avatar_tool .Users_avatar_icon {
-	position: static;
-}
-.Q_tool.Streams_chat_tool .Streams_chat_webrtc_available .Users_avatar_tool .Users_avatar_name {
-	display: block;
-	width: 100%;
-	font-size: 10px;
-	text-indent: 0;
-	text-align: center;
-	position: relative;
-}
-.Q_tool.Streams_chat_tool .Streams_chat_webrtc_available .Q_close {
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: 20px;
-	height: 20px;
-	background-image: url(/Q/plugins/Q/img/close.png);
-	background-size: contain;
-	cursor: pointer;
-}
-.Streams_chat_tool {
 
-}
 .Streams_chat_tool h1 {
 	text-align: center;
 	width: 100%;
