@@ -12,7 +12,7 @@ var promisifiedOldGUM = function(constraints, successCallback, errorCallback) {
 		navigator.mozGetUserMedia ||
 		navigator.msGetUserMedia);
 
-	//if(typeof cordova != 'undefined' && window.device.platform === 'iOS') getUserMedia = cordova.plugins.iosrtc.getUserMedia;
+	//if(Q.info.isCordova && Q.info.platform === 'ios') getUserMedia = cordova.plugins.iosrtc.getUserMedia;
 
 	if(!getUserMedia) {
 		return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
@@ -391,7 +391,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		function publishMediaTracks() {
 			if(_debug) console.log('publishMediaTracks: ' + _options.startWith.video + ' ' + _options.startWith.audio)
 
-			if(typeof cordova != 'undefined' && window.device.platform === 'iOS') {
+			if(Q.info.isCordova && Q.info.platform === 'ios') {
 				cordova.plugins.iosrtc.enumerateDevices(function(mediaDevicesList) {
 					var mediaDevices = mediaDevicesList;
 
@@ -593,7 +593,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+Date.now())
 			], function () {
 				var ua=navigator.userAgent;
-				//if (typeof cordova != 'undefined' && window.device.platform === 'iOS') {
+				//if (Q.info.isCordova && Q.info.platform === 'ios') {
 				/*window.TrackJS && TrackJS.install({
 					token: "8ad86f4c024d4cb3860839694aa5670e"
 					// for more configuration options, see https://docs.trackjs.com
@@ -1188,10 +1188,16 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				var currentHighestZIndex = Math.max.apply(Math, screens.map(function(o) { return o.screenEl != null && o.screenEl.style.zIndex != '' ? o.screenEl.style.zIndex : 1000; }))
 				screenEl.style.zIndex = currentHighestZIndex+1;
 
-				if(typeof cordova != "undefined" && window.device.platform === 'iOS') {
+				if(Q.info.isCordova && Q.info.platform === 'ios') {
 					var video = screenEl.querySelector('video');
-					if(_debug) console.log('moveScreenFront video ' + (video != null));
-					if(video != null) video.style.zIndex = currentHighestZIndex+1;
+					if(_debug){
+						console.log('moveScreenFront video ' + (video != null));
+					}
+
+					if(video != null) {
+						video.style.zIndex = currentHighestZIndex+1;
+					}
+
 					cordova.plugins.iosrtc.refreshVideos();
 				}
 
@@ -1211,9 +1217,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				screenEl.style.zIndex = currentLowestZIndex-1;
 
-				if(typeof cordova != "undefined" && window.device.platform === 'iOS') {
+				if(Q.info.isCordova && Q.info.platform === 'ios') {
 					var video = screenEl.querySelector('video');
-					if(video != null) video.style.zIndex = currentLowestZIndex-1;
+					if(video != null) {
+						video.style.zIndex = currentLowestZIndex-1;
+					}
 					cordova.plugins.iosrtc.refreshVideos();
 				}
 			}
@@ -1292,7 +1300,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				if(loaderName == 'screensharingFailed'){
 					screen.screensharng = false;
 				}
-				if(typeof cordova != 'undefined' && window.device.platform === 'iOS') cordova.plugins.iosrtc.refreshVideos();
+
+				if(Q.info.isCordova && Q.info.platform === 'ios') {
+					cordova.plugins.iosrtc.refreshVideos();
+				}
 			}
 
 			/**
@@ -1506,7 +1517,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							if(screen.videoTrack != null && screen.videoTrack.videoWidth == 0 && screen.videoTrack.videoheight == 0) screen.videoTrack.style.display = 'none';
 						}
 
-						/*if(typeof cordova != 'undefined' && window.device.platform === 'iOS') {
+						/*if(Q.info.isCordova && Q.info.platform === 'ios') {
 							return screen != activeScreen ? (screen.videoTrack != null ? screen.videoTrack : null) : null;
 						}*/
 						return screen != activeScreen ? screen.screenEl : null;
@@ -1515,7 +1526,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					});
 
 					if((layout == 'maximizedScreensGrid' || layout == 'maximizedVerticalMobile' || layout == 'maximizedHorizontalMobile') && activeScreen){
-						/*if(typeof cordova != 'undefined' && window.device.platform === 'iOS') {
+						/*if(Q.info.isCordova && Q.info.platform === 'ios') {
 							if(activeScreen.videoTrack != null) elements.unshift(activeScreen.videoTrack)
 						} else {*/
 						elements.unshift(activeScreen.screenEl)
@@ -1689,7 +1700,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				});
 
 				var elements = toggleScreensClass('maximizedScreensGrid');
-				if(typeof cordova != "undefined" && window.device.platform === 'iOS') {
+				if(Q.info.isCordova && Q.info.platform === 'ios') {
 					setTimeout(function () {
 						cordova.plugins.iosrtc.refreshVideos();
 					}, duration+100);
@@ -2277,7 +2288,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					var startWith = _options.startWith || {};
 					if (startWith.audio || startWith.video) {
 
-						if (typeof cordova != 'undefined' && ua.indexOf('Android') != -1) {
+						if (Q.info.isCordova && Q.info.isAndroid()) {
 
 							var showInstructions = function(kind) {
 								var instructionsPermissionDialog = document.createElement('DIV');
@@ -2351,7 +2362,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								});
 							}
 
-						} else if(typeof cordova != 'undefined' && window.device.platform == 'iOS'){
+						} else if(Q.info.isCordova && Q.info.platform === 'ios'){
 							publishMediaTracks();
 						} else {
 							publishMediaTracks();
