@@ -98,6 +98,12 @@
 					"": 10,
 					"Users/admins": 1000
 				}
+			},
+			"Streams/webrtc": {
+				"86400": {
+					"": 10,
+					"Users/admins": 1000
+				}
 			}
 		}
 	},

@@ -16,7 +16,7 @@ class Streams_WebRTC_Twilio extends Streams_WebRTC implements Streams_WebRTC_Int
      * @class Streams_WebRTC_Twilio
      * @constructor
      */
-    function createRoom($publisherId, $roomId) {
+    function createOrJoinRoom($publisherId, $roomId) {
 
         if (empty($publisherId)) {
             throw new Q_Exception_RequiredField(array('field' => 'publisherId'));

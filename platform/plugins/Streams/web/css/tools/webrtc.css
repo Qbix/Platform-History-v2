@@ -5,7 +5,7 @@
 .Streams_webrtc_tool {
     height: 100%;
 }
-#Streams_webrtc_room-media {
+.Streams_webrtc_room-media {
     position: fixed;
     top: 0;
     left: 0;
@@ -78,10 +78,26 @@
     border-top-left-radius: 7px;
 
 }
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left{
+    bottom:auto;
+    bottom: auto;
+    border-radius: 0;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_conference-control-inner{
+    flex-direction: column;
+}
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner{
     display: flex;
     height: 50px;
     max-width: 640px;
+}
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_conference-control-inner{
+    display: flex;
+    width: 50px;
+    height: auto;
+    max-height: 640px;
 }
 
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner > div{
@@ -91,7 +107,15 @@
     position: relative;
     justify-content: center;
 }
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_conference-control-inner > div{
+    margin-bottom: 10px;
+    margin-right: 0;
+}
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner > div:last-child{
+    margin-right: 0;
+}
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_conference-control-inner > div:last-child{
+    margin-bottom: 0;
     margin-right: 0;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .additional-menu-con{
@@ -103,7 +127,11 @@
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner svg{
     height: 50px;
+    width: 50px;
     pointer-events: all;
+}
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_popup-visualization svg{
+   width:auto;
 }
 
 
@@ -114,14 +142,8 @@
     z-index: 5;
     cursor: pointer;
 }
-.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_manage-users-btn-btn {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    z-index: 5;
-    cursor: pointer;
-}
-.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_manage-users-btn-btn {
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_manage-users-btn-btn,
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_text-chat-btn-btn {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -206,6 +228,10 @@
 }
 .Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner svg{
     height: 45px;
+    width: 45px;
+}
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_popup-visualization svg{
+    width: auto;
 }
 
 
@@ -215,7 +241,8 @@
     width: 100%;
     z-index: 5;
 }
-.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_manage-users-btn-btn {
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_manage-users-btn-btn,
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_text-chat-btn-btn {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -238,7 +265,7 @@
     justify-content: center;
     align-items: center;
 }
-.Streams_webrtc_mobile-screen.Q_verticalOrientation #Streams_webrtc_room-media {
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_room-media {
     position: fixed;
     display: flex;
     justify-content: center;
@@ -248,7 +275,7 @@
     width: 100%;
 }
 
-.Streams_webrtc_mobile-screen.Q_horizontalOrientation #Streams_webrtc_room-media {
+.Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_room-media {
     position: fixed;
     display: flex;
     justify-content: center;
@@ -1234,6 +1261,7 @@
     position: absolute;
     object-fit: cover;
 }
+
 /* participants dialog */
 .dialog-participants-con {
     padding-top: 20px;
@@ -1259,6 +1287,17 @@
     left: -175px;
     width:400px;
 }
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_popup-box {
+    display: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+    background:white;
+    bottom: -100%;
+    left: 125%;
+    width:400px;
+}
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control .Streams_webrtc_hover .Streams_webrtc_popup-box {
     display: block;
 }
@@ -1267,6 +1306,16 @@
     position: absolute;
     top: 99%;
     left: 50%;
+    margin-left: -20px;
+    border-width: 20px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+}
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_hover .Streams_webrtc_popup-box::after{
+    content: "";
+    position: absolute;
+    top: 45%;
+    left: 0%;
     margin-left: -20px;
     border-width: 20px;
     border-style: solid;
@@ -1321,6 +1370,19 @@
 }
 .Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity span {
     font-weight: bold;
+}
+
+
+/* text chat popup */
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control .Streams_webrtc_popup-chat-box {
+    display: none;
+    padding: 10px;
+    margin: 0;
+    position: absolute;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+    background:white;
+    bottom: 150%;
+    left: -175px;
 }
 
 
@@ -1446,7 +1508,6 @@
 }
 .Streams_webrtc_popup-box {
     background: white;
-    overflow: hidden;
 }
 .Streams_webrtc_popup-box .Streams_webrtc_choose-device,
 .dialog-box .Streams_webrtc_choose-device {
@@ -1505,6 +1566,7 @@ webrtc_tool_popup-settings.Streams_webrtc_popup-box > div {
 .Streams_webrtc_popup-box .Streams_webrtc_choose-device .Streams_webrtc_radio-checkmark svg,
 .dialog-box .Streams_webrtc_choose-device .Streams_webrtc_radio-checkmark svg{
     height: 25px;
+    width: 25px;
 }
 .Streams_webrtc_popup-box .dialog-btns-group,
 .dialog-box .dialog-btns-group {
@@ -1593,11 +1655,41 @@ webrtc_tool_popup-settings.Streams_webrtc_popup-box > div {
     margin-bottom:10px;
 }
 .participants-list-btns {
-    justify-content: space-between;
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+.participants-list-btns svg {
+    height:50px;
+    width:50px;
 }
 .participants-list-btns button{
     box-shadow: 0 5px 20px -5px #0048b5;
+}
+.Streams_webrtc_toggle-view-mode-btns {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+.Streams_webrtc_toggle-view-mode-btns div{
+    margin-right: 10px;
+    cursor:pointer;
+}
+.Streams_webrtc_toggle-view-mode-btns div:last-child{
+    margin-right: 0;
+}
+.Streams_webrtc_toggle-loudest-mode div{
+    margin-right: 10px;
+    cursor:pointer;
+}
+.Streams_webrtc_toggle-loudest-mode div:last-child{
+    margin-right: 0;
+}
+.Streams_webrtc_toggle-loudest-mode {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 .Streams_webrtc_devices_dialog .Streams_webrtc_devices_dialog_inner{
     display: flex;
@@ -1605,10 +1697,32 @@ webrtc_tool_popup-settings.Streams_webrtc_popup-box > div {
     justify-content: center;
     align-items: center;
 }
-.Streams_webrtc_disconnect-btn,
+.Streams_webrtc_instructions_dialog{
+    margin: 0;
+    padding: 20px;
+    list-style-type: none;
+}
+.Streams_webrtc_instructions_dialog div{
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.Streams_webrtc_instructions_dialog li{
+    counter-increment: step-counter;
+    margin-bottom: 10px;
+}
+.Streams_webrtc_instructions_dialog li::before{
+    content: counter(step-counter);
+    margin-right: 5px;
+    font-size: 80%;
+    background-color: rgb(0,200,200);
+    color: white;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 3px;
+}
 .Streams_webrtc_enable-microphone-btn,
-.Q_touchscreen .Q_button.Streams_webrtc_enable-microphone-btn,
-.Q_touchscreen .Q_button.Streams_webrtc_disconnect-btn {
+.Q_touchscreen .Q_button.Streams_webrtc_enable-microphone-btn {
     border: 0;
     margin: 15px;
     padding: 7px 10px 7px 10px;
@@ -1616,15 +1730,16 @@ webrtc_tool_popup-settings.Streams_webrtc_popup-box > div {
     align-items: center;
     background: #c12236;
 }
-.Streams_webrtc_enable-microphone-btn span,
-.Streams_webrtc_disconnect-btn span {
+.Streams_webrtc_enable-microphone-btn,
+.Q_touchscreen .Q_button.Streams_webrtc_enable-microphone-btn {
+    background: #28a745;
+}
+.Streams_webrtc_enable-microphone-btn span{
     margin-left:10px;
     margin-right:10px;
 }
 
-.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_disconnect-btn svg,
-.Streams_webrtc_enable-microphone-btn svg,
-.Streams_webrtc_disconnect-btn svg{
+.Streams_webrtc_enable-microphone-btn svg{
     height: 30px;
     width: 30px;
 }

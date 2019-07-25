@@ -19,30 +19,30 @@ require STREAMS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
  */
 function Streams_webrtc_post($params = array())
 {
-    $params = array_merge($_REQUEST, $params);
-    Q_Valid::requireFields(array('publisherId', 'adapter'), $params, true);
-    Users::loggedInUser(true); // require that user's logged in
-    $publisherId = Q::ifset($params, 'publisherId', null);
-    $roomId = Q::ifset($params, 'roomId', null);
+	$params = array_merge($_REQUEST, $params);
+	Q_Valid::requireFields(array('publisherId', 'adapter'), $params, true);
+	$loggedUserId = Users::loggedInUser(true)->id; // require that user's logged in
+	$publisherId = Q::ifset($params, 'publisherId', $loggedUserId);
+	$roomId = Q::ifset($params, 'roomId', null);
+	$adapter = Q::ifset($params, 'adapter', 'node');
 
-    switch ($params['adapter']) {
-        case 'node':
-            $adapter = 'node';
-            break;
-        case 'twilio':
-            $adapter = 'twilio';
-            break;
-        default:
-            throw new Q_Exception_WrongValue(array('field' => 'adapter', 'range' => 'node or twilio'));
-    }
+	if (!in_array($adapter, array('node', 'twilio'))) {
+		throw new Q_Exception_WrongValue(array('field' => 'adapter', 'range' => 'node or twilio'));
+	}
 
-    $className = "Streams_WebRTC_".ucfirst($adapter);
+	$className = "Streams_WebRTC_".ucfirst($adapter);
 
-    $webrtc = new $className();
-    $roomStream = $webrtc->createRoom($publisherId, $roomId);
+	// check quota
+	$quota = Users_Quota::check($loggedUserId, '', 'Streams/webrtc', true, 1, Users::roles());
 
-    $roomStream->stream->join();
+	$webrtc = new $className();
+	$roomStream = $webrtc->createOrJoinRoom($publisherId, $roomId);
+	$roomStream->stream->join();
 
-    Q_Response::setSlot("room", $roomStream);
+	// set quota
+	if ($quota instanceof Users_Quota) {
+		$quota->used();
+	}
 
+	Q_Response::setSlot("room", $roomStream);
 }
