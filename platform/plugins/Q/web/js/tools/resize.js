@@ -208,7 +208,6 @@
 					}
 
 					var stopMoving = function(container){
-						console.log('stopMoving')
 						if(Q.info.isTouchscreen) {
 							window.removeEventListener('touchmove', drag, { passive: false });
 						} else window.removeEventListener('mousemove', drag, { passive: false });

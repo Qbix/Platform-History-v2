@@ -546,7 +546,6 @@
 								clearTimeout(tool.hoverTimeout.textChatPopup);
 								tool.hoverTimeout.textChatPopup = null;
 							}
-							console.log('text hat hover')
 							tool.textChatBtn.parentNode.classList.add('Streams_webrtc_hover');
 						});
 

@@ -50,7 +50,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			mediaDevicesDialog: {timeout:2000},
 			startWith: {
 				audio: true,
-				video: true
+				video: false
 			},
 			onWebRTCRoomCreated: new Q.Event(),
 			onWebrtcControlsCreated: new Q.Event()
