@@ -773,8 +773,13 @@ Q.Tool.define('Streams/chat', function(options) {
 		});
 
 		// call button handler
-		tool.$(".Streams_chat_composer .Streams_chat_call").on(Q.Pointer.fastclick, function(){
+		tool.$(".Streams_chat_composer .Streams_chat_call").on(Q.Pointer.fastclick, function(e){
+			e.stopPropagation();
+			e.preventDefault();
 			tool.startWebRTC();
+		}).on('focus', function (e) {
+			e.stopPropagation();
+			e.preventDefault();
 		});
 
 		function _submit ($this) {
