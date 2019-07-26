@@ -78,14 +78,26 @@
     border-top-left-radius: 7px;
 
 }
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_top{
+    bottom: auto;
+    border-radius: 0;
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left{
-    bottom:auto;
     bottom: auto;
     border-radius: 0;
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
 }
-.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_conference-control-inner{
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_right{
+    bottom: auto;
+    border-radius: 0;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_conference-control-inner,
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_right .Streams_webrtc_conference-control-inner{
     flex-direction: column;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner{
@@ -93,7 +105,8 @@
     height: 50px;
     max-width: 640px;
 }
-.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_conference-control-inner{
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_conference-control-inner,
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_right .Streams_webrtc_conference-control-inner{
     display: flex;
     width: 50px;
     height: auto;
@@ -106,14 +119,17 @@
     display: flex;
     position: relative;
     justify-content: center;
+    align-items: center;
 }
-.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_conference-control-inner > div{
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_conference-control-inner > div,
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_right .Streams_webrtc_conference-control-inner > div{
     margin-bottom: 10px;
     margin-right: 0;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner > div:last-child{
     margin-right: 0;
 }
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_right .Streams_webrtc_conference-control-inner > div:last-child,
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_conference-control-inner > div:last-child{
     margin-bottom: 0;
     margin-right: 0;
@@ -1287,6 +1303,19 @@
     left: -175px;
     width:400px;
 }
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_top .Streams_webrtc_popup-box {
+    display: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+    background:white;
+    bottom: -50%;
+    transform: translateY(100%);
+    left: -175px;
+    width:400px;
+}
+
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_popup-box {
     display: none;
     padding: 0;
@@ -1294,9 +1323,25 @@
     position: absolute;
     box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
     background:white;
-    bottom: -100%;
-    left: 125%;
+    bottom: auto;
+    left: 150%;
     width:400px;
+}
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_right .Streams_webrtc_popup-box {
+    display: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+    background:white;
+    bottom: auto;
+    left: -425px;
+    width:400px;
+}
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_top .Streams_webrtc_popup-box.Streams_webrtc_popup-chat-box,
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_popup-box.Streams_webrtc_popup-chat-box,
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_right .Streams_webrtc_popup-box.Streams_webrtc_popup-chat-box {
+    padding: 10px;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control .Streams_webrtc_hover .Streams_webrtc_popup-box {
     display: block;
@@ -1307,19 +1352,44 @@
     top: 99%;
     left: 50%;
     margin-left: -20px;
-    border-width: 20px;
-    border-style: solid;
-    border-color: white transparent transparent transparent;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid white;
+}
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_top .Streams_webrtc_hover .Streams_webrtc_popup-box::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    transform: translateY(-100%);
+    left: 50%;
+    margin-left: -20px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid white;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_hover .Streams_webrtc_popup-box::after{
     content: "";
     position: absolute;
-    top: 45%;
-    left: 0%;
+    top: calc(50% - (40px / 2));
+    left: -20px;
     margin-left: -20px;
-    border-width: 20px;
-    border-style: solid;
-    border-color: white transparent transparent transparent;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 20px solid white;
+}
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_right .Streams_webrtc_hover .Streams_webrtc_popup-box::after{
+    content: "";
+    position: absolute;
+    top: calc(50% - (40px / 2));
+    right: -20px;
+    left: auto;
+    margin-right: -20px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid white;
 }
 
 .Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list li {

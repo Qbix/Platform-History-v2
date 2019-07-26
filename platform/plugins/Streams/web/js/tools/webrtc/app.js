@@ -7,7 +7,7 @@ WebRTCconferenceLib = function app(options){
 		roomName: null,
 		useAsLibrary: false,
 		audio: true,
-		video: false,
+		video: true,
 		streams: null,
 		twilioAccessToken: null,
 		disconnectTime: 3000,
@@ -1647,24 +1647,29 @@ WebRTCconferenceLib = function app(options){
 		}
 
 		var getLoudestScreen = function (mode, callback) {
-			var screenToAnalyze = roomScreens;
+
+			var participantsToAnalyze = roomParticipants;
 
 			if(mode == 'allButMe') {
-				screenToAnalyze = screenToAnalyze.filter(function (s) {
-					return !s.isLocal;
+				participantsToAnalyze = participantsToAnalyze.filter(function (p) {
+					return !p.isLocal;
 				});
 			}
-			screenToAnalyze = screenToAnalyze.filter(function (s) {
+			participantsToAnalyze = participantsToAnalyze.filter(function (s) {
 				return s.soundMeter != null;
 			})
 
-			if(screenToAnalyze.length == 0) return;
+			if(participantsToAnalyze.length == 0) return;
 
-			var loudest = screenToAnalyze.reduce(function(prev, current) {
+			var loudestParticipant = participantsToAnalyze.reduce(function(prev, current) {
 				return (prev.soundMeter.slow > current.soundMeter.slow) ? prev : current;
 			})
 
-			if(loudest != null && callback != null && loudest.soundMeter.slow > 0.0004) callback(loudest);
+			var loudestScreen = loudestParticipant.screens.filter(function (screen) {
+				return (screen.isActive == true && screen.participant.online == true);
+			})[0];
+
+			if(loudestScreen != null && callback != null && loudestParticipant.soundMeter.slow > 0.0004) callback(loudestScreen);
 
 		}
 
@@ -6518,7 +6523,7 @@ WebRTCconferenceLib = function app(options){
 			require(['https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'], function (io) {
 
 
-				socket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket']});
+				socket = io.connect(options.nodeServer, {transports: ['websocket']});
 				socket.on('connect', function () {
 					if(_debug) console.log('CONNECTED', socket);
 					if(localParticipant != null) return;
@@ -6554,7 +6559,7 @@ WebRTCconferenceLib = function app(options){
 		location.hash = '#' + roomName;
 
 		app.views.createJoinFormView(function (userName) {
-			socket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket']});
+			socket = io.connect(options.nodeServer, {transports: ['websocket']});
 			socket.on('connect', function () {
 				if(_debug) console.log('CONNECTED', socket);
 				localParticipant = new Participant();

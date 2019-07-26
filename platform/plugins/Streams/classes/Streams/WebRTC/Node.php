@@ -36,9 +36,12 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
 		$stream->setAttribute('startTime', time());
 		$stream->changed();
 
+		$socketServer = Q_Config::get('Streams', 'webrtc', 'socketServer', null);
+
         return (object) [
             'stream' => $stream,
-            'roomId' => $stream->name
+            'roomId' => $stream->name,
+            'socketServer' => $socketServer
 		];
     }
 

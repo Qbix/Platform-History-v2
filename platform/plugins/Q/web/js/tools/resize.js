@@ -38,7 +38,7 @@
 
 		{
 			unbindEvents: function () {
-				
+
 			},
 			deactivate:function () {
 				var tool = this;
@@ -76,7 +76,7 @@
 				var moveWithinEl = document.body;
 
 				var _dragElement = (function (){
-					var posX, posY, divTop, divLeft, eWi, eHe, cWi, cHe, diffX, diffY;
+					var posX, posY, divTop, divLeft, eWi, eHe, cWi, cHe, diffX, diffY, snappedTo;
 
 					var move = function(xpos,ypos){
 						var currentTop = parseInt(elementToMove.style.top, 10)
@@ -94,44 +94,76 @@
 						evt = evt || window.event;
 						evt.preventDefault();
 
-						if(tool.state.snapToSidesOnly){
-							var posX = Q.info.isTouchscreen ? evt.changedTouches[0].clientX : evt.clientX,
-								posY = Q.info.isTouchscreen ? evt.changedTouches[0].clientY : evt.clientY,
-								aX = posX - diffX,
-								aY = posY - diffY;
-							if(((cWi - posX) < (cHe - posY)) && ((cWi - posX) < posY) && ((cWi - posX) < posX)) {
-								console.log('moviiiing if 1');
-								aX = cWi - eWi
-								aY = posY;
-							} else if(((cHe - posY) < (cWi - posX)) && ((cHe - posY) < posY) && ((cHe - posY) < posX)) {
-								console.log('moviiiing if 2');
-								aX = posX;
-								aY = cHe - eHe;
-							} else if((posX < (cWi - posX)) && (posX < posY) && (posX < (cHe - posY))) {
-								console.log('moviiiing if 3');
-								aX = 0;
-								aY = posY;
-							} else if((posY < (cWi - posX)) && (posY < posX) && (posY < (cHe - posY))) {
-								console.log('moviiiing if 4');
-								aX = posX;
-								aY = 0;
-							}
-							move(aX,aY);
-							return;
-						}
+						var posX = Q.info.isTouchscreen ? evt.changedTouches[0].clientX : evt.clientX;
+						var	posY = Q.info.isTouchscreen ? evt.changedTouches[0].clientY : evt.clientY;
+						var aX, aY;
+						if(!Q.info.isMobile && tool.state.snapToSidesOnly){
+							var toggleClass = function (className) {
+								var classesArr = ['Q_resize_snapped_left', 'Q_resize_snapped_top', 'Q_resize_snapped_right', 'Q_resize_snapped_bottom'];
+								for (var c in classesArr) {
+									if(elementToMove.classList.contains(classesArr[c])) elementToMove.classList.remove(classesArr[c]);
+								}
+								elementToMove.style.width = '';
+								elementToMove.style.height = '';
+								elementToMove.style.bottom = 'auto';
+								elementToMove.classList.add(className);
 
-						var posX = Q.info.isTouchscreen ? evt.changedTouches[0].clientX : evt.clientX,
-							posY = Q.info.isTouchscreen ? evt.changedTouches[0].clientY : evt.clientY,
-							aX = posX - diffX,
+								divTop = elementToMove.style.top,
+									divLeft = elementToMove.style.left,
+									eWi = parseInt(elementToMove.offsetWidth),
+									eHe = parseInt(elementToMove.offsetHeight),
+									cWi = parseInt(moveWithinEl.offsetWidth),
+									cHe = parseInt(moveWithinEl.offsetHeight);
+								divTop = divTop.replace('px','');
+								divLeft = divLeft.replace('px','');
+								diffX = posX - divLeft, diffY = posY - divTop;
+							}
+
+							if(((cWi - posX) < (cHe - posY)) && ((cWi - posX) < posY) && ((cWi - posX) < posX)) {
+								aX = cWi - eWi
+								aY = posY - diffY;
+								if(snappedTo != 'right') {
+									toggleClass('Q_resize_snapped_right');
+								}
+								snappedTo = 'right';
+							} else if(((cHe - posY) < (cWi - posX)) && ((cHe - posY) < posY) && ((cHe - posY) < posX)) {
+								aX = posX - diffX;
+								aY = cHe - eHe;
+								if(snappedTo != 'bottom') {
+									toggleClass('Q_resize_snapped_bottom');
+								}
+								snappedTo = 'bottom';
+							} else if((posX < (cWi - posX)) && (posX < posY) && (posX < (cHe - posY))) {
+								aX = 0;
+								aY = posY - diffY;
+								if(snappedTo != 'left') {
+									toggleClass('Q_resize_snapped_left');
+								}
+								snappedTo = 'left';
+
+							} else if((posY < (cWi - posX)) && (posY < posX) && (posY < (cHe - posY))) {
+								aX = posX - diffX;
+								aY = 0;
+								if(snappedTo != 'top') {
+									toggleClass('Q_resize_snapped_top');
+								}
+								snappedTo = 'top';
+
+							}
+						} else {
+							aX = posX - diffX;
 							aY = posY - diffY;
+						}
 						if (aX < 0) aX = 0;
 						if (aY < 0) aY = 0;
 						if (aX + eWi > cWi) aX = cWi - eWi;
+
 						if (aY + eHe > cHe) aY = cHe - eHe;
 						move(aX,aY);
 					}
 
 					var initMoving = function(evt){
+
 						if(!tool.state.active || evt.button == 1 || evt.button == 2) return;
 
 						if(!tool.state.movable || (Q.info.isTouchscreen && (tool.isScreenResizing || evt.targetTouches.length != 1))) return;
@@ -141,10 +173,8 @@
 							elementToMove.style.height = elRect.height + 'px';
 						}
 						var elementPosition = elementToMove.style.position;
-						console.log('elementPosition0', elementPosition,  elementPosition == '')
 
 						elementPosition = elementPosition != '' && elementPosition != null ? elementPosition : elementComputedStyle.position;
-						console.log('elementPosition', elementPosition)
 						if(elementPosition == 'fixed'){
 							elementToMove.style.top = elRect.top + 'px';
 							elementToMove.style.left = elRect.left + 'px';
@@ -178,6 +208,7 @@
 					}
 
 					var stopMoving = function(container){
+						console.log('stopMoving')
 						if(Q.info.isTouchscreen) {
 							window.removeEventListener('touchmove', drag, { passive: false });
 						} else window.removeEventListener('mousemove', drag, { passive: false });
@@ -685,7 +716,7 @@
 				return {
 					bind: function () {
 						Q.addEventListener(activateOnElement, Q.Pointer.start, _dragElement.initMoving);
-						Q.addEventListener(activateOnElement, Q.Pointer.end, _dragElement.stopMoving);
+						Q.addEventListener(window, Q.Pointer.end, _dragElement.stopMoving);
 
 						resizeElement.setHandler(elementToResize);
 					}

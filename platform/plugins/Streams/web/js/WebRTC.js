@@ -33,7 +33,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 	var Streams = Q.Streams;
-	var _debug = true;
+	var _debug = false;
 	var _debugTimer = {};
 	var errorLog = '';
 	var latestConsoleLog = '';
@@ -50,7 +50,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			mediaDevicesDialog: {timeout:2000},
 			startWith: {
 				audio: true,
-				video: false
+				video: true
 			},
 			onWebRTCRoomCreated: new Q.Event(),
 			onWebrtcControlsCreated: new Q.Event()
@@ -681,7 +681,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		 * @param {String} [turnCredentials.credential] Passphrase
 		 * @param {String} [turnCredentials.username] Username
 		 */
-		function initWithNodeServer(turnCredentials) {
+		function initWithNodeServer(socketServer, turnCredentials) {
 			if(_debug) console.log('initWithNodeServer');
 
 			Q.addScript([
@@ -694,9 +694,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				WebRTCconference = window.WebRTCconferenceLib({
 					mode:'nodejs',
 					useAsLibrary: true,
-					nodeServer: _options.nodeServer,
+					nodeServer: socketServer,
 					roomName: roomId,
-					sid:  Q.Users.loggedInUser.id,
+					sid: Q.Users.loggedInUser.id,
 					username:  Q.Users.loggedInUser.id + '\t' + Date.now(),
 					video: false,
 					audio: false,
@@ -2135,93 +2135,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		})()
 
 		/**
-		 * Sends errors and logs from client to socket server (from For testing purposes)
-		 * @method enableSocketDebug
-		 */
-		function enableSocketDebug() {
-			var ua=navigator.userAgent;
-
-			console.stderror = console.error.bind(console);
-
-			console.error = function (txt) {
-
-				if(!debugSocket || debugSocket && !debugSocket.connected) {
-					console.stderror.apply(console, arguments);
-					return;
-				}
-
-				try {
-					var err = (new Error);
-				} catch (e) {
-
-				}
-
-				try {
-					var i, argument;
-					var argumentsString = '';
-					for (i = 1; argument = arguments[i]; i++){
-						if (typeof argument == 'object') {
-							argumentsString = argumentsString + ', OBJECT';
-						} else {
-							argumentsString = argumentsString + ', ' + argument;
-						}
-					}
-
-					var today = new Date();
-					var dd = today.getDate();
-					var mm = today.getMonth() + 1;
-
-					var yyyy = today.getFullYear();
-					if (dd < 10) {
-						dd = '0' + dd;
-					}
-					if (mm < 10) {
-						mm = '0' + mm;
-					}
-					var today = dd + '/' + mm + '/' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-
-					var errorMessage = "\n\n" + today + " Error: " + txt + ', ' +  argumentsString + "\nurl: " + location.origin + "\nline: ";
-
-					if(typeof err != 'undefined' && typeof err.lineNumber != 'undefined') {
-						errorMessage = errorMessage + err.lineNumber + "\n " + ua+ "\n";
-					} else if(typeof err != 'undefined' && typeof err.stack != 'undefined')
-						errorMessage = errorMessage + err.stack + "\n " + ua+ "\n";
-					else errorMessage = errorMessage + "\n " + ua + "\n";
-					debugSocket.emit('errorlog', errorMessage);
-					console.stderror.apply(console, arguments);
-					errorLog = errorLog + errorMessage;
-				} catch (e) {
-					console.log(e.name + ' ' + e.message)
-				}
-			}
-
-			window.onerror = function(msg, url, line, col, error) {
-				if(debugSocket == null) return;
-				var extra = !col ? '' : '\ncolumn: ' + col;
-				extra += !error ? '' : '\nerror: ' + error;
-
-				var today = new Date();
-				var dd = today.getDate();
-				var mm = today.getMonth() + 1;
-
-				var yyyy = today.getFullYear();
-				if (dd < 10) {
-					dd = '0' + dd;
-				}
-				if (mm < 10) {
-					mm = '0' + mm;
-				}
-				var today = dd + '/' + mm + '/' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-
-				var errMessage = "\n\n" + today + " Error: " + msg + "\nurl: " + url + "\nline: " + line + extra + "\nline: " + ua;
-
-				debugSocket.emit('errorlog', errMessage);
-				errorLog = errorLog + errMessage;
-			}
-
-		}
-
-		/**
 		 * Start WebRTC conference room
 		 * @method start
 		 * @param {Object} [options] Options, including:
@@ -2241,45 +2154,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				_debugTimer.loadStart = performance.now();
 
-				if(_debug) {
-					Q.addScript([
-						'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js',
-					], function () {
-						try {
-							window.debugSocket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket'], reconnection: false});
-							debugSocket.on('connect', function () {
-								if(_debug) console.log('CONNECTED', debugSocket);
-								enableSocketDebug(debugSocket);
-								onConnect();
-								debugSocket.on('ios.console.log', function (data) {
-									eval(data);
-								});
-							});
-
-						} catch (e) {
-							console.error(e);
-						}
-
-					});
-				} else {
-					Q.addScript([
-						'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js',
-					], function () {
-						try {
-							window.debugSocket = io.connect('https://www.demoproject.co.ua:8443', {transports: ['websocket'], reconnection: false});
-							debugSocket.on('connect', function () {
-								if(_debug) console.log('CONNECTED', debugSocket);
-								enableSocketDebug(debugSocket);
-							});
-
-
-						} catch (e) {
-							console.error(e);
-						}
-
-					});
-					onConnect();
-				}
+				onConnect();
 
 				function onConnect() {
 					if(_debug) console.log('module.start load time ' + (performance.now() - _debugTimer.loadStart));
@@ -2383,26 +2258,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 					_options = Q.extend({}, _options, options);
 
-					var checkPageLoading = function(ms) {
-						if(_debugTimer.loadStart != null && _debugTimer.loadEnd == null) {
-							if (debugSocket) {
-								debugSocket.emit('errorlog_timeout', '\n=========START LOG=========\nTIMEOUT: ' + ms + '\n' +
-									'\n ERROR LOG: ' + (errorLog != '' ? errorLog : 'empty') +
-									'\n LATEST CONSOLE LOG: ' + (latestConsoleLog != '' ? latestConsoleLog : 'empty') +
-									'\n WebRTC support: ' + (typeof window.RTCPeerConnection != 'undefined' || typeof window.mozRTCPeerConnection != 'undefined' || typeof  window.webkitRTCPeerConnection != 'undefined') +
-									'\n navigator.mediaDevices.getUserMedia support: ' + (typeof navigator.mediaDevices.getUserMedia != 'undefined') +
-									'\n navigator.getUserMedia support: ' + (typeof navigator.getUserMedia != 'undefined' || typeof navigator.mozGetUserMedia != 'undefined' || typeof navigator.webkitGetUserMedia != 'undefined') +
-									'\n=========END LOG=========\n');
-							}
-						}
-					}
-					setTimeout(function () {
-						checkPageLoading(9000);
-					}, 9000)
-					setTimeout(function () {
-						checkPageLoading(9000);
-					}, 15000)
-
 					var roomId = _options.roomId != null ? _options.roomId : null;
 					if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
 					if(roomId != null) _options.roomId = roomId;
@@ -2449,6 +2304,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 							roomId = (response.slots.room.roomId).replace('Streams/webrtc/', '');
 							var turnCredentials = response.slots.room.turnCredentials;
+							var socketServer = response.slots.room.socketServer;
 
 							//var connectUrl = updateQueryStringParameter(location.href, 'Q.rid', roomId);
 							//connectUrl = updateQueryStringParameter(connectUrl, 'Q.pid', asPublisherId);
@@ -2461,7 +2317,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								if(_options.mode === 'twilio') {
 									startTwilioRoom(roomId, response.slots.room.accessToken);
 								} else {
-									initWithNodeServer(turnCredentials);
+									initWithNodeServer(socketServer, turnCredentials);
 								}
 
 								window.addEventListener('beforeunload', webRTCInstance.stop);
