@@ -552,12 +552,23 @@ Q.Tool.define('Streams/chat', function(options) {
 					roomPublisherId: publisherId,
 					mode: 'node',
 					onWebrtcControlsCreated: function () {
-						$toolElement.attr('data-webrtcStarted', true);
+						//TODO: for some reason this.Q.beforeRemove doesn't call when user leave conference
+						// may be tool doesn't close at all?
 
+						$toolElement.attr('data-webrtcStarted', true);
 						this.Q.beforeRemove.set(function () {
 							state.webrtc = null;
 							$toolElement.attr('data-webrtcStarted', false);
 						}, this);
+
+						// this is duplicate to above approach
+						Q.Streams.Stream.onMessage(publisherId, streamName, 'Streams/leave').set(function(stream, message) {
+							if (message.byUserId !== Q.Users.loggedInUserId()) {
+								return;
+							}
+
+							$toolElement.attr('data-webrtcStarted', false);
+						}, tool);
 					},
 					onWebRTCRoomCreated: function () {
 						state.webrtc = this;
