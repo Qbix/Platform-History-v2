@@ -4262,7 +4262,7 @@ abstract class Streams extends Base_Streams
 			));
 			$ret = $stream->invite(array('token' => true, 'appUrl' => $appUrl));
 			$invite = $ret['invite'];
-			$userInviteUrl = $invite->url();
+			$userInviteUrl = $ret['url'];
 			$stream->setAttribute('userInviteUrl', $userInviteUrl);
 			$stream->changed();
 		} else {
