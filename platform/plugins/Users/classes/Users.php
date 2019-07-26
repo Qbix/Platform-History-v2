@@ -1275,7 +1275,7 @@ abstract class Users extends Base_Users
 	 * @return {string} The identifier type, either "mobile" or "email"
 	 * @throws {Q_Exception_WrongType} if the identifier is not a valid email or phone number
 	 */
-	function identifierType($identifier, &$normalized = null)
+	static function identifierType($identifier, &$normalized = null)
 	{
 		if (Q_Valid::email($identifier, $normalized)) {
 			$identifierType = 'email';
