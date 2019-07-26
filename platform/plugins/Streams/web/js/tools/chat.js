@@ -537,6 +537,8 @@ Q.Tool.define('Streams/chat', function(options) {
 		var state = this.state;
 		var $toolElement = $(this.element);
 
+		$toolElement.attr('data-webrtc', 'loading');
+
 		Q.Streams.related(state.publisherId, state.streamName, 'Streams/webrtc', true, {limit: 1}, function (err) {
 			if (err) {
 				return;
@@ -552,12 +554,23 @@ Q.Tool.define('Streams/chat', function(options) {
 					roomPublisherId: publisherId,
 					mode: 'node',
 					onWebrtcControlsCreated: function () {
-						$toolElement.attr('data-webrtcStarted', true);
+						//TODO: for some reason this.Q.beforeRemove doesn't call when user leave conference
+						// may be tool doesn't close at all?
 
+						$toolElement.attr('data-webrtc', true);
 						this.Q.beforeRemove.set(function () {
 							state.webrtc = null;
-							$toolElement.attr('data-webrtcStarted', false);
+							$toolElement.attr('data-webrtc', false);
 						}, this);
+
+						// this is duplicate to above approach
+						Q.Streams.Stream.onMessage(publisherId, streamName, 'Streams/leave').set(function(stream, message) {
+							if (message.byUserId !== Q.Users.loggedInUserId()) {
+								return;
+							}
+
+							$toolElement.attr('data-webrtc', false);
+						}, tool);
 					},
 					onWebRTCRoomCreated: function () {
 						state.webrtc = this;
@@ -760,8 +773,13 @@ Q.Tool.define('Streams/chat', function(options) {
 		});
 
 		// call button handler
-		tool.$(".Streams_chat_composer .Streams_chat_call").on(Q.Pointer.fastclick, function(){
+		tool.$(".Streams_chat_composer .Streams_chat_call").on(Q.Pointer.fastclick, function(e){
+			e.stopPropagation();
+			e.preventDefault();
 			tool.startWebRTC();
+		}).on('focus', function (e) {
+			e.stopPropagation();
+			e.preventDefault();
 		});
 
 		function _submit ($this) {
