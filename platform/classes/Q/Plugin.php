@@ -814,7 +814,8 @@ EOT;
 
 	static function commandExists($cmd) {
 		// check which command exist "which" (linux) or "where" (win)
-		$command = @shell_exec("where") ? "where" : "which";
+		$is_win = (substr(strtolower(PHP_OS), 0, 3) === 'win');
+		$command = $is_win ? "where" : "which";
 
 		if (!$command) {
 			return false;
