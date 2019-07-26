@@ -97,7 +97,7 @@
 						var posX = Q.info.isTouchscreen ? evt.changedTouches[0].clientX : evt.clientX;
 						var	posY = Q.info.isTouchscreen ? evt.changedTouches[0].clientY : evt.clientY;
 						var aX, aY;
-						if(tool.state.snapToSidesOnly){
+						if(!Q.info.isMobile && tool.state.snapToSidesOnly){
 							var toggleClass = function (className) {
 								var classesArr = ['Q_resize_snapped_left', 'Q_resize_snapped_top', 'Q_resize_snapped_right', 'Q_resize_snapped_bottom'];
 								for (var c in classesArr) {
@@ -120,7 +120,6 @@
 							}
 
 							if(((cWi - posX) < (cHe - posY)) && ((cWi - posX) < posY) && ((cWi - posX) < posX)) {
-								console.log('moviiiing if 1');
 								aX = cWi - eWi
 								aY = posY - diffY;
 								if(snappedTo != 'right') {
@@ -128,7 +127,6 @@
 								}
 								snappedTo = 'right';
 							} else if(((cHe - posY) < (cWi - posX)) && ((cHe - posY) < posY) && ((cHe - posY) < posX)) {
-								console.log('moviiiing if 2');
 								aX = posX - diffX;
 								aY = cHe - eHe;
 								if(snappedTo != 'bottom') {
@@ -136,7 +134,6 @@
 								}
 								snappedTo = 'bottom';
 							} else if((posX < (cWi - posX)) && (posX < posY) && (posX < (cHe - posY))) {
-								console.log('moviiiing if 3');
 								aX = 0;
 								aY = posY - diffY;
 								if(snappedTo != 'left') {
@@ -145,7 +142,6 @@
 								snappedTo = 'left';
 
 							} else if((posY < (cWi - posX)) && (posY < posX) && (posY < (cHe - posY))) {
-								console.log('moviiiing if 4');
 								aX = posX - diffX;
 								aY = 0;
 								if(snappedTo != 'top') {
@@ -154,8 +150,6 @@
 								snappedTo = 'top';
 
 							}
-							//move(aX,aY);
-							//return;
 						} else {
 							aX = posX - diffX;
 							aY = posY - diffY;
@@ -163,14 +157,12 @@
 						if (aX < 0) aX = 0;
 						if (aY < 0) aY = 0;
 						if (aX + eWi > cWi) aX = cWi - eWi;
-						console.log('moviiiing border', aY, eHe, aY + eHe, cHe);
 
 						if (aY + eHe > cHe) aY = cHe - eHe;
 						move(aX,aY);
 					}
 
 					var initMoving = function(evt){
-						console.log('initMoving')
 
 						if(!tool.state.active || evt.button == 1 || evt.button == 2) return;
 
@@ -181,10 +173,8 @@
 							elementToMove.style.height = elRect.height + 'px';
 						}
 						var elementPosition = elementToMove.style.position;
-						console.log('elementPosition0', elementPosition,  elementPosition == '')
 
 						elementPosition = elementPosition != '' && elementPosition != null ? elementPosition : elementComputedStyle.position;
-						console.log('elementPosition', elementPosition)
 						if(elementPosition == 'fixed'){
 							elementToMove.style.top = elRect.top + 'px';
 							elementToMove.style.left = elRect.left + 'px';
