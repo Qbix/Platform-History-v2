@@ -537,6 +537,8 @@ Q.Tool.define('Streams/chat', function(options) {
 		var state = this.state;
 		var $toolElement = $(this.element);
 
+		$toolElement.attr('data-webrtc', 'loading');
+
 		Q.Streams.related(state.publisherId, state.streamName, 'Streams/webrtc', true, {limit: 1}, function (err) {
 			if (err) {
 				return;
@@ -555,10 +557,10 @@ Q.Tool.define('Streams/chat', function(options) {
 						//TODO: for some reason this.Q.beforeRemove doesn't call when user leave conference
 						// may be tool doesn't close at all?
 
-						$toolElement.attr('data-webrtcStarted', true);
+						$toolElement.attr('data-webrtc', true);
 						this.Q.beforeRemove.set(function () {
 							state.webrtc = null;
-							$toolElement.attr('data-webrtcStarted', false);
+							$toolElement.attr('data-webrtc', false);
 						}, this);
 
 						// this is duplicate to above approach
@@ -567,7 +569,7 @@ Q.Tool.define('Streams/chat', function(options) {
 								return;
 							}
 
-							$toolElement.attr('data-webrtcStarted', false);
+							$toolElement.attr('data-webrtc', false);
 						}, tool);
 					},
 					onWebRTCRoomCreated: function () {
