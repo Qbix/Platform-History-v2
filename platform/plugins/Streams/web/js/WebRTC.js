@@ -2258,26 +2258,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 					_options = Q.extend({}, _options, options);
 
-					var checkPageLoading = function(ms) {
-						if(_debugTimer.loadStart != null && _debugTimer.loadEnd == null) {
-							if (debugSocket) {
-								debugSocket.emit('errorlog_timeout', '\n=========START LOG=========\nTIMEOUT: ' + ms + '\n' +
-									'\n ERROR LOG: ' + (errorLog != '' ? errorLog : 'empty') +
-									'\n LATEST CONSOLE LOG: ' + (latestConsoleLog != '' ? latestConsoleLog : 'empty') +
-									'\n WebRTC support: ' + (typeof window.RTCPeerConnection != 'undefined' || typeof window.mozRTCPeerConnection != 'undefined' || typeof  window.webkitRTCPeerConnection != 'undefined') +
-									'\n navigator.mediaDevices.getUserMedia support: ' + (typeof navigator.mediaDevices.getUserMedia != 'undefined') +
-									'\n navigator.getUserMedia support: ' + (typeof navigator.getUserMedia != 'undefined' || typeof navigator.mozGetUserMedia != 'undefined' || typeof navigator.webkitGetUserMedia != 'undefined') +
-									'\n=========END LOG=========\n');
-							}
-						}
-					}
-					setTimeout(function () {
-						checkPageLoading(9000);
-					}, 9000)
-					setTimeout(function () {
-						checkPageLoading(9000);
-					}, 15000)
-
 					var roomId = _options.roomId != null ? _options.roomId : null;
 					if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
 					if(roomId != null) _options.roomId = roomId;
