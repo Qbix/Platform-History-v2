@@ -1211,7 +1211,7 @@ class Q_Utils
 
 		$is_win = (substr(strtolower(PHP_OS), 0, 3) === 'win');
 
-		if(is_dir($link) && !$is_win && !is_link($link)) {
+		if (is_dir($link) && !$is_win && !is_link($link)) {
 			echo Q_Utils::colored(
 				"[WARN] Symlink '$link' (target: '$target') was not created".PHP_EOL, 
 				'red', 'yellow'
