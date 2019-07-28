@@ -81,6 +81,15 @@ var MyApp = (function (Q, $) {
 		});
 	}
 	
+	Q.extend(Q.Tool.jQuery.loadAtStart, [
+		'Q/clickfocus', 
+		'Q/contextual', 
+		'Q/scrollIndicators', 
+		'Q/iScroll', 
+		'Q/scroller', 
+		'Q/touchscroll'
+	]);
+	
 	return MyApp;
 	
 })(Q, jQuery);
