@@ -502,6 +502,13 @@ class Q_Dispatcher
 				return;
 			}
 			self::$handlingErrors = true;
+			
+			$header = isset($exception->header) ? $exception->header : 412;
+			if (is_numeric($header)) {
+				http_response_code($header);
+			} else if (is_string($header)) {
+				header($header);
+			}
 		
 			if (Q::canHandle("$module/errors")) {
 				/**

@@ -13,4 +13,4 @@ class Q_Exception_MissingRoute extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_MissingRoute', 'missing route {{route_pattern}}');
+Q_Exception::add('Q_Exception_MissingRoute', 'missing route {{route_pattern}}', 424);

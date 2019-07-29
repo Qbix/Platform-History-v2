@@ -13,4 +13,4 @@ class Q_Exception_NotArray extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_NotArray', 'value under {{keys}} is not an array');
+Q_Exception::add('Q_Exception_NotArray', 'value under {{keys}} is not an array', 400);

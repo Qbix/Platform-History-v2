@@ -4,9 +4,12 @@ function Q_exception_native($params)
 {
 	extract($params);
 	/**
-	 * @var Exception $exception 
+	 * @var Exception $exception
 	 */
-
+	if (Q::textMode()) {
+		echo Q_Exception::coloredString($exception);
+		exit;
+	}
 	if ($is_ajax = Q_Request::isAjax()) {
 		$json = @Q::json_encode(array(
 			'errors' => Q_Exception::toArray(array($exception))
@@ -34,10 +37,6 @@ EOT;
 			echo $callback ? "$callback($json)" : $json;
 		}
 	} else {
-		if (Q::textMode()) {
-			echo Q_Exception::coloredString($exception);
-			exit;
-		}
 		$message = $exception->getMessage();
 		$file = $exception->getFile();
 		$line = $exception->getLine();

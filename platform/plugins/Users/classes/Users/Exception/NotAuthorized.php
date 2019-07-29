@@ -13,4 +13,4 @@ class Users_Exception_NotAuthorized extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Users_Exception_NotAuthorized', 'You are not authorized to do this');
+Q_Exception::add('Users_Exception_NotAuthorized', 'You are not authorized to do this', 403);

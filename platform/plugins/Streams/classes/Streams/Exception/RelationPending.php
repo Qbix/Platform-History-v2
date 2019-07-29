@@ -15,4 +15,4 @@ class Streams_Exception_RelationPending extends Q_Exception
 	 */	
 };
 
-Q_Exception::add('Streams_Exception_RelationPending', 'The stream has been alredy {{state}}. Please, wait for admin to approve.');
+Q_Exception::add('Streams_Exception_RelationPending', 'The stream has already been {{state}}. Please, wait for admin to approve.');

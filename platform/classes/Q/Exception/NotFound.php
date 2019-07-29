@@ -13,4 +13,4 @@ class Q_Exception_NotFound extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_NotFound', 'Not found: {{url}}');
+Q_Exception::add('Q_Exception_NotFound', 'Not found: {{url}}', 404);

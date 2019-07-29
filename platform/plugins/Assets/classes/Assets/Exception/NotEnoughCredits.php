@@ -13,4 +13,4 @@ class Assets_Exception_NotEnoughCredits extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Assets_Exception_NotEnoughCredits', 'not enough credits: need {{missing}} more');
+Q_Exception::add('Assets_Exception_NotEnoughCredits', 'not enough credits: need {{missing}} more', 402);

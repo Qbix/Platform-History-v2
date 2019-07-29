@@ -13,4 +13,4 @@ class Q_Exception_MissingObject extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_MissingObject', 'missing object {{name}}');
+Q_Exception::add('Q_Exception_MissingObject', 'missing object {{name}}', 424);

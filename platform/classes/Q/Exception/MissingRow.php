@@ -14,4 +14,4 @@ class Q_Exception_MissingRow extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_MissingRow', 'Missing {{table}} with {{criteria}}.');
+Q_Exception::add('Q_Exception_MissingRow', 'Missing {{table}} with {{criteria}}.', 404);

@@ -13,4 +13,4 @@ class Q_Exception_NonceExpired extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_NonceExpired', '{{message}}');
+Q_Exception::add('Q_Exception_NonceExpired', '{{message}}', 409);

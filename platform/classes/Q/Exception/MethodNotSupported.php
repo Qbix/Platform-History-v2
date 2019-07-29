@@ -13,4 +13,4 @@ class Q_Exception_MethodNotSupported extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_MethodNotSupported', 'the {{method}} method is not supported');
+Q_Exception::add('Q_Exception_MethodNotSupported', 'the {{method}} method is not supported', 405);
