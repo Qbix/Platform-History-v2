@@ -23,6 +23,12 @@ var Places = Q.Places;
  * @param {Object} [options.meters] object of { meters: title } pairs, by default is generated from Places/nearby/meters config
  * @param {array} [options.defaultMeters] override the key in the meters array to select by default. Defaults to "Places/nearby/defaultMeters" config
  * @param {String} [options.units] second parameter to pass to Places.distanceLabel, default depends on Places.metric
+ * @param {Boolean|Object} [options.setMapButton] Pass false here to display a different style of prompt if location isn't obtained yet
+ * @param {Object} [options.setMapButton.markers] Options for map markers
+ * @param {Number} [options.setMapButton.markers.duration] The duration of the markers animation
+ * @param {Number} [options.setMapButton.markers.count] Options for map markers
+ * @param {Number} [options.setMapButton.markers.src] Image src for map markers
+ * @param {Boolean} [options.setMapButton.markers.multicolor=true] Whether to use markers of multiple colors
  * @param {String} [options.updateButton="Update my location"] override the title of the update button
  * @param {Object} [options.map] options for the map
  * @param {Number} [options.map.delay=300] how many milliseconds to delay showing the map, e.g. because the container is animating
@@ -70,7 +76,9 @@ Q.Tool.define("Places/user/location", function (options) {
 	Q.Text.get('Places/content', function (err, text) {
 		state.updateButton = state.updateButton || text.location.update;
 		state.map.prompt = (state.map.prompt || text.location.prompt)
-			.interpolate({ClickOrTap: Q.getObject(['text', 'Q', 'words', (Q.getObject("Q.info.isTouchscreen") ? 'Tap' : 'Click')], Q)});
+			.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap});
+		state.map.set = text.location.set
+			.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap});
 		state.interested = text.location.interested.interpolate({
 			select: select.outerHTML
 		});
@@ -112,7 +120,38 @@ Q.Tool.define("Places/user/location", function (options) {
 						.addClass('Places_user_location_obtaining');
 					$te.find('.Places_user_location_container')
 						.removeClass('Places_user_location_checking');
-					if (state.globe) {
+					var m = state.setMapButton;
+					if (m) {
+						var markers = m.markers || {};
+						var $map = $te.find('.Places_user_location_fake_map');
+						var rect = $map[0].getBoundingClientRect();
+						var w = rect.width / 1.2, h = rect.height / 1.2;
+						var markerCount = markers.count || 50;
+						var duration = markers.duration || 3000;
+						var src = Q.getObject('maps.markers.src', state)
+							|| Q.url('{{Places}}/img/marker.svg');
+						Q.each(0, markerCount, function () {
+							var left = Math.random() * w;
+							var top = Math.random() * h;
+							var hr = Math.random() * 360;
+							var filter = markers.multicolor ? 'hue-rotate('+hr+'deg)' : 'none';
+							setTimeout(function () {
+								$('<img class="Places_user_location_marker" />').attr({
+									src: src
+								}).css({
+									left: left,
+									top: top - 100,
+									opacity: 0,
+									filter: filter
+								}).appendTo($map).animate({
+									top: top,
+									opacity: 0.8
+								});
+							}, Math.random() * duration);
+						});
+						$te.find('.Places_user_location_button')
+							.plugin('Q/clickable');
+					} else if (state.globe) {
 						var globeOptions = Q.isPlainObject(state.globe) ? state.globe : {};
 						$('<div />').tool('Places/globe', globeOptions).appendTo(
 							tool.$('.Places_user_location_whileObtaining')
@@ -142,9 +181,14 @@ Q.Tool.define("Places/user/location", function (options) {
 			tool.$('.Places_user_location_meters').on('change', function () {
 				_submit();
 			});
-	
-			tool.$('.Places_user_location_set, .Places_user_location_update_button, .Places_globe_tool')
-			.on(Q.Pointer.click, function () {
+
+			var selectors = [
+				'.Places_user_location_set',
+				'.Places_user_location_update_button',
+				'.Places_globe_tool',
+				'.Places_user_location_button'
+			];
+			$te.on(Q.Pointer.click, selectors.join(','), function () {
 				var $this = $(this);
 				$this.addClass('Places_obtaining');
 				if (!navigator.geolocation) {
@@ -340,6 +384,14 @@ Q.Tool.define("Places/user/location", function (options) {
 
 { // default options here
 	updateButton: null,
+	setMapButton: {
+		markers: {
+			src: Q.url('{{Places}}/img/marker.svg'),
+			count: 50,
+			duration: 3000,
+			multicolor: true
+		}
+	},
 	map: {
 		delay: 300,
 		prompt: null
@@ -360,18 +412,26 @@ Q.Tool.define("Places/user/location", function (options) {
 },
 
 { // methods go here
-	
+
 });
 
-Q.Template.set('Places/user/location', 
+Q.Template.set('Places/user/location',
 	'<div class="Places_user_location_container Places_user_location_checking '
 	+ '{{#if globe}}Places_user_location_globe{{else}}Places_user_location_noGlobe{{/if}}'
 	+ '">'
 		+ '{{& interested}}'
 		+ '<div class="Places_user_location_whileObtaining">'
+		+ '{{#if setMapButton}}'
+			+ '<div class="Places_user_location_fake_map">'
+			+ '</div>'
+			+ '<button class="Places_user_location_button">'
+				+ '<span>{{& map.set}}</span>'
+			+ '</button>'
+		+ '{{else}}'
 			+ '<div class="Places_user_location_set Q_aspect_where">'
 				+ '<span>{{& map.prompt}}</span>'
 			+ '</div>'
+		+ '{{/if}}'
 		+ '</div>'
 		+ '<div class="Places_user_location_whileObtained">'
 			+ '<div class="Places_user_location_map_container">'
