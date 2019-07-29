@@ -31,6 +31,7 @@
  *         <li>"scroll" means new messages will be loaded when the scrollbar of the chat container reaches the top (for desktop) or whole document scrollbar reaches the top (android). On all other browsers it would use pull-to-refresh ... meaning, it will show "Pull to see earlier messages" (html configurable in Q.text.Streams.chat.loadMore.pull string) and as you pull "too far" you trigger the load. As for the indicator of "pulling too far", we will worry about that later, for now skip it. But remember to discuss it with me afterwards.</li>
  *         <li>null/false/etc. - no interface to load earlier messages</li>
  *     </ul>
+ *   @param {Object} [options.startConference=false] If true, start webrtc once tool activated
  *   @param {Q.Event} [options.onRefresh] Event for when an the chat has been updated
  *   @param {Q.Event} [options.onError] Event for when an error occurs, and the error is passed
  *   @param {Q.Event} [options.onClose] Event for when chat stream closed
@@ -144,6 +145,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		title: 'Message from {{displayName}}'
 	},
 	closeable: false,
+	startConference: false,
 	onRefresh: new Q.Event(),
 	onClose: new Q.Event(function () {
 		// remove tool when chat stream closed
@@ -539,7 +541,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		$toolElement.attr('data-webrtc', 'loading');
 
-		Q.Streams.related(state.publisherId, state.streamName, 'Streams/webrtc', true, {limit: 1}, function (err) {
+		Q.Streams.related(state.publisherId, state.streamName, 'Streams/webrtc', true, {limit: 1, stream: true}, function (err) {
 			if (err) {
 				return;
 			}
@@ -671,36 +673,6 @@ Q.Tool.define('Streams/chat', function(options) {
 			// TODO: don't scroll to bottom, show "V 10 new messages" button
 			// on the bottom left of Streams/chat, and then jump to bottom and refresh
 			tool.scrollToBottom();
-		}, tool);
-
-		// new Streams/webrtc stream related
-		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/relatedTo').set(function(stream, message) {
-			var instructions = message.getAllInstructions();
-			var type = Q.getObject("type", instructions);
-			var publisherId = Q.getObject("fromPublisherId", instructions);
-			var streamName = Q.getObject("fromStreamName", instructions);
-
-			if (type === 'Streams/webrtc' && publisherId !== Q.Users.loggedInUserId()) {
-				Q.Template.render('Streams/chat/webrtc/available', {
-					avatar: Q.Tool.setUpElementHTML('div', 'Users/avatar', {
-						userId: publisherId,
-						icon: true,
-						short: true
-					}),
-					text: tool.text.startedConversation
-				}, function (err, html) {
-					if (err) {
-						return;
-					}
-
-					Q.Notices.add({
-						content: html,
-						handler: function () {
-							tool.startWebRTC();
-						}
-					});
-				});
-			}
 		}, tool);
 
 		// new user joined
@@ -1019,6 +991,11 @@ Q.Tool.define('Streams/chat', function(options) {
 				Q.handle(state.onRefresh, tool);
 				
 				tool.scrollToBottom();
+
+				// if startConference is true, start webrtc
+				if (state.startConference) {
+					tool.startWebRTC();
+				}
 			});
 		
 		}
@@ -1089,13 +1066,6 @@ Q.Template.set('Streams/chat/message/error',
 			'</div>'+
 		'</div>'+
 		'<div class="Q_clear"></div>'+
-	'</div>'
-);
-
-Q.Template.set('Streams/chat/webrtc/available',
-	'<div class="Streams_chat_webrtc_available">'+
-	'	{{& avatar}} {{text}}'+
-	'	<div class="Q_close"></div>'+
 	'</div>'
 );
 
