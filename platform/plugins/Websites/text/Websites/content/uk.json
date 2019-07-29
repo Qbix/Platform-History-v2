@@ -23,7 +23,8 @@
             "PasteLinkHere": "Вставте посилання тут",
             "BrowseTheWeb": "Огляд",
             "WriteToStartConversation": "Напишіть свої думки, щоб почати розмову",
-            "StartConversation": "Почати розмову"
+            "StartConversation": "Почати розмову",
+            "GotoConversation": "Перейдіть до розмови"
         }
     }
 }

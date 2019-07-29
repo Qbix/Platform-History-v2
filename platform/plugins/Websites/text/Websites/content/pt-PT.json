@@ -23,7 +23,8 @@
             "PasteLinkHere": "Cole um link aqui",
             "BrowseTheWeb": "Squeaky toy",
             "WriteToStartConversation": "Escreva seus pensamentos para começar a conversa",
-            "StartConversation": "Iniciar conversa"
+            "StartConversation": "Iniciar conversa",
+            "GotoConversation": "Ir para conversação"
         }
     }
 }

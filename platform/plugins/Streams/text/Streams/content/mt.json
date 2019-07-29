@@ -22,7 +22,12 @@
         "closeChatConfirm": "Inti żgur li trid tagħlaq dan iċ-chat?",
         "closeChatConfirmYes": "Iva",
         "closeChatConfirmNo": "Le",
-        "earlierComments": "kummenti preċedenti"
+        "earlierComments": "kummenti preċedenti",
+        "Subscribed": "Mute Notifiki",
+        "Unsubscribed": "Ikseb Notifiki",
+        "dontHavePermissionJoinConversation": "M&#39;għandekx permess biex tissieħeb f&#39;din il-konversazzjoni.",
+        "startedConversation": "bdiet konverżazzjoni",
+        "RealTimeCall": "Sejħa f&#39;ħin Reali"
     },
     "notifications": {
         "*": "Messaġġ {{& message.fields.type}} lil {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "Enable Mikrofonu",
             "cameraTitle": "Ikteb il-Kamera",
-            "cameraAndMicrophoneTitle": "Enable il-Kamera u l-Mikrofonu"
+            "cameraAndMicrophoneTitle": "Enable il-Kamera u l-Mikrofonu",
+            "dialogTitle": "Jippermetti djalogu",
+            "microphoneBtn": "Agħti Mikrofonu",
+            "cameraBtn": "Jippermetti l-Kamera",
+            "cameraAndMicrophoneBtn": "Agħti Kamera u Mikrofonu"
         }
     }
 }

@@ -23,7 +23,8 @@
             "PasteLinkHere": "Fügen Sie hier einen Link ein",
             "BrowseTheWeb": "Durchsuche",
             "WriteToStartConversation": "Schreiben Sie Ihre Gedanken, um das Gespräch zu beginnen",
-            "StartConversation": "Konversation starten"
+            "StartConversation": "Konversation starten",
+            "GotoConversation": "Gehe zum Gespräch"
         }
     }
 }

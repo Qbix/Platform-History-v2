@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} burada <br> qurmaq <br> yer",
         "myCurrentLocation": "Mənim cari yerim",
         "enterAddress": "Bir ünvan daxil edin",
-        "enterPostcode": "Xahiş edirik poçt kodunu \/ poçt kodunu daxil edin",
+        "enterPostcode": "Xahiş edirik poçt kodunu / poçt kodunu daxil edin",
         "create": {
             "action": "Yerini əlavə edin",
             "title": "Yeni Yer",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Yer seç"
-        }
+        },
+        "set": "Məkanımı təyin edin"
     },
     "areas": {
         "filterPlaceholder": "Bu yerdəki hər hansı bir sahə?",

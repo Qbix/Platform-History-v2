@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Pumili ng Lokasyon"
-        }
+        },
+        "set": "Itakda ang Aking Lokasyon"
     },
     "areas": {
         "filterPlaceholder": "Anumang lugar sa loob ng lokasyong ito?",

@@ -22,7 +22,12 @@
         "closeChatConfirm": "Вы уверены, что хотите закрыть этот чат?",
         "closeChatConfirmYes": "да",
         "closeChatConfirmNo": "нет",
-        "earlierComments": "предыдущие комментарии"
+        "earlierComments": "предыдущие комментарии",
+        "Subscribed": "Отключить уведомления",
+        "Unsubscribed": "Получать уведомления",
+        "dontHavePermissionJoinConversation": "У вас нет разрешения присоединиться к этому разговору.",
+        "startedConversation": "завел разговор",
+        "RealTimeCall": "Звонок в реальном времени"
     },
     "notifications": {
         "*": "Сообщение {{& message.fields.type}} на {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "Текст",
             "byFacebook": "facebook",
             "byTwitter": "щебет",
-            "QRscanned": "Они сканировали это!"
+            "QRscanned": "Они сканировали это!",
+            "chooseAgainFromContacts": "Выберите снова из контактов",
+            "inviteSelectedContacts": "Пригласить выбранные контакты"
         },
         "email": {
             "subject": "Эй, проверь это",
@@ -99,5 +106,16 @@
         "Title": "заглавие",
         "Subscribed": "подписной",
         "Participants": "участники"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Включить микрофон",
+            "cameraTitle": "Включить камеру",
+            "cameraAndMicrophoneTitle": "Включить камеру и микрофон",
+            "dialogTitle": "Включение диалога",
+            "microphoneBtn": "Включить микрофон",
+            "cameraBtn": "Включить камеру",
+            "cameraAndMicrophoneBtn": "Включить камеру и микрофон"
+        }
     }
 }

@@ -22,7 +22,12 @@
         "closeChatConfirm": "هل أنت متأكد من أنك تريد إغلاق هذه الدردشة؟",
         "closeChatConfirmYes": "نعم فعلا",
         "closeChatConfirmNo": "لا",
-        "earlierComments": "التعليقات السابقة"
+        "earlierComments": "التعليقات السابقة",
+        "Subscribed": "كتم الإخطارات",
+        "Unsubscribed": "الحصول على الإشعارات",
+        "dontHavePermissionJoinConversation": "ليس لديك إذن للانضمام إلى هذه المحادثة.",
+        "startedConversation": "بدأت محادثة",
+        "RealTimeCall": "نداء الوقت الحقيقي"
     },
     "notifications": {
         "*": "رسالة {{& message.fields.type}} إلى {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "تمكين الميكروفون",
             "cameraTitle": "قم بتفعيل الكاميرا",
-            "cameraAndMicrophoneTitle": "تمكين الكاميرا والميكروفون"
+            "cameraAndMicrophoneTitle": "تمكين الكاميرا والميكروفون",
+            "dialogTitle": "تمكين الحوار",
+            "microphoneBtn": "تمكين الميكروفون",
+            "cameraBtn": "قم بتفعيل الكاميرا",
+            "cameraAndMicrophoneBtn": "تمكين الكاميرا والميكروفون"
         }
     }
 }

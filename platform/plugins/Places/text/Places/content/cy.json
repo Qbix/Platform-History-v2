@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Dewiswch Lleoliad"
-        }
+        },
+        "set": "Gosod Fy Lleoliad"
     },
     "areas": {
         "filterPlaceholder": "Unrhyw ardal y tu mewn i&#39;r lleoliad hwn?",

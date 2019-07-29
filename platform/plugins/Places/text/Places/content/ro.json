@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Alegeți locația"
-        }
+        },
+        "set": "Setați Locația mea"
     },
     "areas": {
         "filterPlaceholder": "Orice zonă din această locație?",

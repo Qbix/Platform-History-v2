@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} tutaj <br> Ustaw swój <br> Lokalizacja",
         "myCurrentLocation": "Moja aktualna lokalizacja",
         "enterAddress": "Podaj adres",
-        "enterPostcode": "Podaj swój kod pocztowy \/ kod pocztowy",
+        "enterPostcode": "Podaj swój kod pocztowy / kod pocztowy",
         "create": {
             "action": "Dodaj miejsce",
             "title": "Nowa lokalizacja",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Wybierz lokacje"
-        }
+        },
+        "set": "Ustaw moją lokalizację"
     },
     "areas": {
         "filterPlaceholder": "Jakikolwiek obszar w tej lokalizacji?",

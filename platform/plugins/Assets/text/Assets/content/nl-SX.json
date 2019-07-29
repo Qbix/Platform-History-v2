@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Uitnodiging geaccepteerd door {{1}}",
         "YouHaveCreditsToStart": "Je hebt {{1}} credits om te starten"
+    },
+    "history": {
+        "Date": "Datum",
+        "Amount": "Bedrag",
+        "Description": "Omschrijving",
+        "Client": "Cliënt",
+        "To": "naar",
+        "From": "van",
+        "HistoryEmpty": "U heeft nog geen gegevens"
+    },
+    "subscriptions": {
+        "infoTitle": "Stel betalingsinformatie in",
+        "confirm": {
+            "title": "Start abonnement",
+            "message": "Wilt u zich abonneren op {{title}}?",
+            "ok": "OK",
+            "cancel": "annuleren"
+        }
+    },
+    "payments": {
+        "infoTitle": "Stel betalingsinformatie in",
+        "confirm": {
+            "title": "Maak een betaling",
+            "message": "Ga je akkoord om {{symbol}} {{amount}} te betalen?",
+            "ok": "OK",
+            "cancel": "annuleren"
+        }
     }
 }

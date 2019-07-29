@@ -22,7 +22,12 @@
         "closeChatConfirm": "Bạn có chắc chắn muốn đóng cuộc trò chuyện này?",
         "closeChatConfirmYes": "Vâng",
         "closeChatConfirmNo": "Không",
-        "earlierComments": "ý kiến trước đó"
+        "earlierComments": "ý kiến trước đó",
+        "Subscribed": "Thông báo tắt tiếng",
+        "Unsubscribed": "Nhận thông báo",
+        "dontHavePermissionJoinConversation": "Bạn không được phép tham gia cuộc trò chuyện này.",
+        "startedConversation": "bắt đầu một cuộc trò chuyện",
+        "RealTimeCall": "Cuộc gọi thời gian thực"
     },
     "notifications": {
         "*": "Tin nhắn {{& message.fields.type}} đến {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "Kích hoạt micrô",
             "cameraTitle": "Kích hoạt camera",
-            "cameraAndMicrophoneTitle": "Bật máy ảnh và micrô"
+            "cameraAndMicrophoneTitle": "Bật máy ảnh và micrô",
+            "dialogTitle": "Kích hoạt hộp thoại",
+            "microphoneBtn": "Kích hoạt micrô",
+            "cameraBtn": "Kích hoạt camera",
+            "cameraAndMicrophoneBtn": "Bật máy ảnh và micrô"
         }
     }
 }

@@ -22,7 +22,12 @@
         "closeChatConfirm": "คุณแน่ใจหรือว่าต้องการปิดการแชทนี้?",
         "closeChatConfirmYes": "ใช่",
         "closeChatConfirmNo": "ไม่",
-        "earlierComments": "ความคิดเห็นก่อนหน้า"
+        "earlierComments": "ความคิดเห็นก่อนหน้า",
+        "Subscribed": "ปิดการแจ้งเตือน",
+        "Unsubscribed": "รับการแจ้งเตือน",
+        "dontHavePermissionJoinConversation": "คุณไม่ได้รับอนุญาตให้เข้าร่วมการสนทนานี้",
+        "startedConversation": "เริ่มการสนทนา",
+        "RealTimeCall": "โทรตามเวลาจริง"
     },
     "notifications": {
         "*": "ข้อความ {{& message.fields.type}} ถึง {{1,000}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "เปิดใช้งานไมโครโฟน",
             "cameraTitle": "เปิดใช้งานกล้อง",
-            "cameraAndMicrophoneTitle": "เปิดใช้งานกล้องและไมโครโฟน"
+            "cameraAndMicrophoneTitle": "เปิดใช้งานกล้องและไมโครโฟน",
+            "dialogTitle": "เปิดใช้งานกล่องโต้ตอบ",
+            "microphoneBtn": "เปิดใช้งานไมโครโฟน",
+            "cameraBtn": "เปิดใช้งานกล้อง",
+            "cameraAndMicrophoneBtn": "เปิดใช้งานกล้องและไมโครโฟน"
         }
     }
 }

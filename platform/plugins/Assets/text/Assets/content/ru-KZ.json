@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Приглашение принято {{1}}",
         "YouHaveCreditsToStart": "У вас есть {{1}} кредитов для начала"
+    },
+    "history": {
+        "Date": "Дата",
+        "Amount": "Количество",
+        "Description": "Описание",
+        "Client": "клиент",
+        "To": "в",
+        "From": "от",
+        "HistoryEmpty": "У вас еще нет данных"
+    },
+    "subscriptions": {
+        "infoTitle": "Установить информацию об оплате",
+        "confirm": {
+            "title": "Начать подписку",
+            "message": "Хотите подписаться на {{title}}?",
+            "ok": "Хорошо",
+            "cancel": "отменить"
+        }
+    },
+    "payments": {
+        "infoTitle": "Установить информацию об оплате",
+        "confirm": {
+            "title": "Производить платеж",
+            "message": "Вы согласны заплатить {{symbol}} {{amount}}?",
+            "ok": "Хорошо",
+            "cancel": "отменить"
+        }
     }
 }

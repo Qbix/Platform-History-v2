@@ -23,7 +23,8 @@
             "PasteLinkHere": "الصق رابط هنا",
             "BrowseTheWeb": "تصفح",
             "WriteToStartConversation": "اكتب أفكارك لبدء المحادثة",
-            "StartConversation": "بدء المحادثة"
+            "StartConversation": "بدء المحادثة",
+            "GotoConversation": "اذهب إلى المحادثة"
         }
     }
 }

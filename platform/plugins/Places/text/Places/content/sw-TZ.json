@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} hapa <br> kuweka yako <br> eneo",
         "myCurrentLocation": "Eneo langu la sasa",
         "enterAddress": "Ingiza anwani",
-        "enterPostcode": "Tafadhali ingiza msimbo wako wa posta \/ zipcode",
+        "enterPostcode": "Tafadhali ingiza msimbo wako wa posta / zipcode",
         "create": {
             "action": "Ongeza Eneo",
             "title": "Eneo Jipya",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Chagua Eneo"
-        }
+        },
+        "set": "Weka Mahali Pangu"
     },
     "areas": {
         "filterPlaceholder": "Eneo lolote ndani ya eneo hili?",

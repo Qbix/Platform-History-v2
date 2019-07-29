@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} siin <br> seadke oma <br> asukoht",
         "myCurrentLocation": "Minu praegune asukoht",
         "enterAddress": "Sisestage aadress",
-        "enterPostcode": "Palun sisestage oma sihtnumber \/ postiindeks",
+        "enterPostcode": "Palun sisestage oma sihtnumber / postiindeks",
         "create": {
             "action": "Lisa asukoht",
             "title": "Uus asukoht",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Vali asukoht"
-        }
+        },
+        "set": "Määra minu asukoht"
     },
     "areas": {
         "filterPlaceholder": "Mis tahes ala selle asukoha sees?",

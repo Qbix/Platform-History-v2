@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Zgjidhni vendndodhjen"
-        }
+        },
+        "set": "Caktoni vendndodhjen time"
     },
     "areas": {
         "filterPlaceholder": "Çdo zonë brenda këtij vendi?",

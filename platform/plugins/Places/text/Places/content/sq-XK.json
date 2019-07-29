@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} këtu <br> vendosur tuaj <br> vend",
         "myCurrentLocation": "Vendndodhja ime aktuale",
         "enterAddress": "Futni një adresë",
-        "enterPostcode": "Ju lutemi shkruani kodin postar \/ zipcode",
+        "enterPostcode": "Ju lutemi shkruani kodin postar / zipcode",
         "create": {
             "action": "Shto vendndodhjen",
             "title": "Vendndodhja e re",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Zgjidhni vendndodhjen"
-        }
+        },
+        "set": "Caktoni vendndodhjen time"
     },
     "areas": {
         "filterPlaceholder": "Çdo zonë brenda këtij vendi?",

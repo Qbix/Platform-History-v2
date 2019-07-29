@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Ftoni të pranuar nga {{1}}",
         "YouHaveCreditsToStart": "Ju keni {{1}} kredi për të filluar"
+    },
+    "history": {
+        "Date": "data",
+        "Amount": "sasi",
+        "Description": "Përshkrim",
+        "Client": "klient",
+        "To": "në",
+        "From": "nga",
+        "HistoryEmpty": "Ju nuk keni ende të dhëna"
+    },
+    "subscriptions": {
+        "infoTitle": "Vendosni informacionin e pagesës",
+        "confirm": {
+            "title": "Filloni Abonimin",
+            "message": "Dëshironi të regjistroheni në 99 999}?",
+            "ok": "Ne rregull",
+            "cancel": "anuloj"
+        }
+    },
+    "payments": {
+        "infoTitle": "Vendosni informacionin e pagesës",
+        "confirm": {
+            "title": "Bëni një Pagesë",
+            "message": "A pranoni të paguani {999}} {{amount}}?",
+            "ok": "Ne rregull",
+            "cancel": "anuloj"
+        }
     }
 }

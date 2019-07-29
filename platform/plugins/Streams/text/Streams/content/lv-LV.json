@@ -22,7 +22,12 @@
         "closeChatConfirm": "Vai tiešām vēlaties aizvērt šo tērzēšanu?",
         "closeChatConfirmYes": "Jā",
         "closeChatConfirmNo": "Nē",
-        "earlierComments": "iepriekšējie komentāri"
+        "earlierComments": "iepriekšējie komentāri",
+        "Subscribed": "Izslēgt paziņojumus",
+        "Unsubscribed": "Saņemt paziņojumus",
+        "dontHavePermissionJoinConversation": "Jums nav atļaujas pievienoties šai sarunai.",
+        "startedConversation": "sāka sarunu",
+        "RealTimeCall": "Reāllaika zvans"
     },
     "notifications": {
         "*": "Ziņojums {{& message.fields.type}} uz {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "Teksts",
             "byFacebook": "Facebook",
             "byTwitter": "Čivināt",
-            "QRscanned": "Viņi skenēja to!"
+            "QRscanned": "Viņi skenēja to!",
+            "chooseAgainFromContacts": "Izvēlieties no kontaktiem vēlreiz",
+            "inviteSelectedContacts": "Uzaicināt atlasītos kontaktus"
         },
         "email": {
             "subject": "Hei, pārbaudiet to",
@@ -99,5 +106,16 @@
         "Title": "Nosaukums",
         "Subscribed": "Abonēts",
         "Participants": "Dalībnieki"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Iespējot mikrofonu",
+            "cameraTitle": "Iespējot kameru",
+            "cameraAndMicrophoneTitle": "Iespējot kameru un mikrofonu",
+            "dialogTitle": "Dialoga iespējošana",
+            "microphoneBtn": "Iespējot mikrofonu",
+            "cameraBtn": "Iespējot kameru",
+            "cameraAndMicrophoneBtn": "Iespējot kameru un mikrofonu"
+        }
     }
 }

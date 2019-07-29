@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "{{1}} (으)로 초대 됨",
         "YouHaveCreditsToStart": "시작할 크레딧이 {{999}입니다."
+    },
+    "history": {
+        "Date": "날짜",
+        "Amount": "양",
+        "Description": "기술",
+        "Client": "고객",
+        "To": "에",
+        "From": "...에서",
+        "HistoryEmpty": "아직 데이터가 없습니다."
+    },
+    "subscriptions": {
+        "infoTitle": "지불 정보 설정",
+        "confirm": {
+            "title": "구독 시작",
+            "message": "{{title}}에 가입 하시겠습니까?",
+            "ok": "승인",
+            "cancel": "취소"
+        }
+    },
+    "payments": {
+        "infoTitle": "지불 정보 설정",
+        "confirm": {
+            "title": "지불하다",
+            "message": "{{symbol}} {{amount}}의 지불에 동의하십니까?",
+            "ok": "승인",
+            "cancel": "취소"
+        }
     }
 }

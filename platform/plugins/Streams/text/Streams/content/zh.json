@@ -22,7 +22,12 @@
         "closeChatConfirm": "您确定要关闭此聊天吗？",
         "closeChatConfirmYes": "是",
         "closeChatConfirmNo": "没有",
-        "earlierComments": "早先的评论"
+        "earlierComments": "早先的评论",
+        "Subscribed": "静音通知",
+        "Unsubscribed": "收到通知",
+        "dontHavePermissionJoinConversation": "您无权加入此对话。",
+        "startedConversation": "开始了对话",
+        "RealTimeCall": "实时通话"
     },
     "notifications": {
         "*": "消息{{& message.fields.type}}至{{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "启用麦克风",
             "cameraTitle": "启用相机",
-            "cameraAndMicrophoneTitle": "启用相机和麦克风"
+            "cameraAndMicrophoneTitle": "启用相机和麦克风",
+            "dialogTitle": "启用对话框",
+            "microphoneBtn": "启用麦克风",
+            "cameraBtn": "启用相机",
+            "cameraAndMicrophoneBtn": "启用相机和麦克风"
         }
     }
 }

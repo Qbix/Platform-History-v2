@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} tại đây để <br> đặt của bạn <br> vị trí",
         "myCurrentLocation": "Vị trí hiện tại của tôi",
         "enterAddress": "Nhập địa chỉ",
-        "enterPostcode": "Vui lòng nhập mã bưu điện \/ mã zip của bạn",
+        "enterPostcode": "Vui lòng nhập mã bưu điện / mã zip của bạn",
         "create": {
             "action": "Thêm vị trí",
             "title": "Địa điểm mới",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Chọn địa điểm"
-        }
+        },
+        "set": "Đặt vị trí của tôi"
     },
     "areas": {
         "filterPlaceholder": "Bất kỳ khu vực bên trong vị trí này?",

@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} aici <br> setați-vă <br> Locație",
         "myCurrentLocation": "Locația curentă",
         "enterAddress": "Introduceți o adresă",
-        "enterPostcode": "Introduceți codul poștal \/ codul poștal",
+        "enterPostcode": "Introduceți codul poștal / codul poștal",
         "create": {
             "action": "Adaugă locație",
             "title": "Locație nouă",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Alegeți locația"
-        }
+        },
+        "set": "Setați Locația mea"
     },
     "areas": {
         "filterPlaceholder": "Orice zonă din această locație?",

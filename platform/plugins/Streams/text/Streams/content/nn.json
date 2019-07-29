@@ -22,7 +22,12 @@
         "closeChatConfirm": "Er du sikker på at du vil lukke denne chatten?",
         "closeChatConfirmYes": "Ja",
         "closeChatConfirmNo": "Nei",
-        "earlierComments": "tidligere kommentarer"
+        "earlierComments": "tidligere kommentarer",
+        "Subscribed": "Skru av varsler",
+        "Unsubscribed": "Få varsler",
+        "dontHavePermissionJoinConversation": "Du har ikke tillatelse til å delta i denne samtalen.",
+        "startedConversation": "startet en samtale",
+        "RealTimeCall": "Sanntids samtale"
     },
     "notifications": {
         "*": "Melding {{& message.fields.type}} til {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "Tekst",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "De skannet det!"
+            "QRscanned": "De skannet det!",
+            "chooseAgainFromContacts": "Velg igjen fra kontakter",
+            "inviteSelectedContacts": "Inviter valgte kontakter"
         },
         "email": {
             "subject": "Hei, sjekk dette ut",
@@ -99,5 +106,13 @@
         "Title": "Tittel",
         "Subscribed": "abonnerer",
         "Participants": "deltakere"
+    },
+    "webrtc": {
+        "allow": {
+            "dialogTitle": "Aktiverer dialog",
+            "microphoneBtn": "Aktiver mikrofon",
+            "cameraBtn": "Aktiver kamera",
+            "cameraAndMicrophoneBtn": "Aktiver kamera og mikrofon"
+        }
     }
 }

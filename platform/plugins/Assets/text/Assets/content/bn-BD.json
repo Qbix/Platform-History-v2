@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "আমন্ত্রিত আমন্ত্রণ {{1}}",
         "YouHaveCreditsToStart": "আপনার {{1}} ক্রেডিট শুরু করার আছে"
+    },
+    "history": {
+        "Date": "তারিখ",
+        "Amount": "পরিমাণ",
+        "Description": "বিবরণ",
+        "Client": "মক্কেল",
+        "To": "থেকে",
+        "From": "থেকে",
+        "HistoryEmpty": "আপনার কাছে এখনও কোনও ডেটা নেই"
+    },
+    "subscriptions": {
+        "infoTitle": "অর্থ প্রদানের তথ্য সেট করুন",
+        "confirm": {
+            "title": "সাবস্ক্রিপশন শুরু করুন",
+            "message": "আপনি কি {{999} to সাবস্ক্রাইব করতে চান?",
+            "ok": "ঠিক আছে",
+            "cancel": "বাতিল"
+        }
+    },
+    "payments": {
+        "infoTitle": "অর্থ প্রদানের তথ্য সেট করুন",
+        "confirm": {
+            "title": "মূল্য পরিশোধ কর",
+            "message": "আপনি কি pay {999}} {{1000} pay দিতে সম্মত হন?",
+            "ok": "ঠিক আছে",
+            "cancel": "বাতিল"
+        }
     }
 }

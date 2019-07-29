@@ -5,8 +5,8 @@
     },
     "activate": {
         "SetAsPrimary": "Sett {{1}} som min primære {{2}}",
-        "ChoosePassPhrase": "Velg et <strong>passord for<\/strong> å logge inn med. <br> Et enkelt uttrykk som består av noen få ord som du lett kan huske.",
-        "ChoosePassPhraseSeeSuggestions": "Velg et godt <strong>passord for<\/strong> å beskytte kontoen din. Se forslagene til noen ideer.",
+        "ChoosePassPhrase": "Velg et <strong>passord for</strong> å logge inn med. <br> Et enkelt uttrykk som består av noen få ord som du lett kan huske.",
+        "ChoosePassPhraseSeeSuggestions": "Velg et godt <strong>passord for</strong> å beskytte kontoen din. Se forslagene til noen ideer.",
         "LogOutAndTryAgain": "Logg ut og prøv igjen",
         "IfYouFeel": "Hvis du føler at noe gikk galt, kan du",
         "SetIdentifierButtonTitle": "begynne på nytt"
@@ -37,5 +37,13 @@
         "selectLabel": "Vennligst velg etikett.",
         "inviteUser": "Inviter bruker"
     },
-    "invalidLanguageSelected": "Ugyldig språk valgt"
+    "invalidLanguageSelected": "Ugyldig språk valgt",
+    "contacts": {
+        "dialog": {
+            "title": "Velg kontakt"
+        },
+        "select": {
+            "title": "Velg kontakt fra {{displayName}}"
+        }
+    }
 }

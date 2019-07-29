@@ -29,6 +29,34 @@
 .Places_user_location_map,
 .Places_user_location_set { height: 200px; }
 
+.Places_user_location_fake_map {
+	position: relative;
+	height: 200px;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+	border-radius: 10px;
+	background: url(../img/map.png);
+	background-size: cover;
+	background-position: center center;
+	overflow: hidden;
+	margin: 15px;
+}
+
+.Places_user_location_marker {
+	position: absolute;
+	width: 25px;
+	height: 25px;
+}
+
+.Places_user_location_button {
+	border: solid 1px #aaaaaa;
+	border-radius: 10px;
+	font-weight: bold;
+	font-size: 150%;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+	background: rgba(200, 200, 200, 0.5);
+	cursor: pointer;
+}
+
 .Places_user_location_obtained .Places_user_location_whileObtaining,
 .Places_user_location_obtaining .Places_user_location_whileObtained,
 .Places_user_location_checking .Places_user_location_whileObtaining,

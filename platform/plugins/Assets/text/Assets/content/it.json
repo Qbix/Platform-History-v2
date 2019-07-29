@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Invito accettato da {{1}}",
         "YouHaveCreditsToStart": "Hai {{1}} crediti per iniziare"
+    },
+    "history": {
+        "Date": "Data",
+        "Amount": "Quantità",
+        "Description": "Descrizione",
+        "Client": "Cliente",
+        "To": "a",
+        "From": "a partire dal",
+        "HistoryEmpty": "Non hai ancora dati"
+    },
+    "subscriptions": {
+        "infoTitle": "Imposta le informazioni di pagamento",
+        "confirm": {
+            "title": "Inizia l&#39;abbonamento",
+            "message": "Vuoi iscriverti a {{title}}?",
+            "ok": "ok",
+            "cancel": "Annulla"
+        }
+    },
+    "payments": {
+        "infoTitle": "Imposta le informazioni di pagamento",
+        "confirm": {
+            "title": "Effettua un pagamento",
+            "message": "Accetti di pagare {{symbol}} {{amount}}?",
+            "ok": "ok",
+            "cancel": "Annulla"
+        }
     }
 }

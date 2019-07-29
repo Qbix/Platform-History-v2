@@ -4,7 +4,12 @@
  * Feel free to modify any of it for your own app.
  */
 
-* { font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-tap-highlight-color: transparent; }
+* { 
+	font-family: 'Anton', sans-serif;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+	box-sizing: border-box;
+}
 a { text-decoration: none; color: #0055ff; }
 a:visited { color: #aa88cc; }
 html { background: #f2f2f2; height: 100%; box-sizing: border-box; }
@@ -28,7 +33,7 @@ table { table-layout: fixed; }
 }
 #dashboard_slot {
 	position: fixed;
-	margin: auto;
+	margin: 0;
 	border: solid 0 #555; 
 	left: 0px;
 	top: 0px;
@@ -56,7 +61,8 @@ table { table-layout: fixed; }
 }
 .Q_mobile #dashboard .Users_avatar_icon { margin: 0; border-radius: 4px; }
 .Q_mobile #dashboard .Users_avatar_name { display: none; }
-.Q_mobile #page { position: relative; }
+.Q_mobile #page { position: absolute; }
+.Q_mobile #content_slot { height: 100%; }
 .Q_notMobile .Users_avatar_icon { margin-right: 5px; }
 
 #dashboard, #notices, #content { margin: auto; text-align: left; }
@@ -155,7 +161,7 @@ table { table-layout: fixed; }
 .Q_notTouchscreen #dashboard .Q_tabs_tab:hover { background: rgba(100, 100, 100, 0.1); }
 #dashboard .Q_tabs_tab img { margin-right: 10px; width: 30px; }
 #dashboard .Q_tabs_tab span { display: inline; text-align: left; }
-#dashboard .Q_tabs_tab.Q_current { background-image: url(../Q/plugins/Q/img/bg/stucco.png) !important; color: black !important; }
+#dashboard .Q_tabs_tab.Q_current { background-image: url(../Q/plugins/Q/img/bg/stucco.png); color: black !important; }
 #dashboard .Q_tabs_tab.Q_current * { color: black; }
 #dashboard .Q_tabs_tab { padding: 5px; margin: 0px; }
 .Q_mobile #dashboard .Q_tabs_tool { max-width: 80%; overflow: hidden; padding: 5px; }

@@ -142,6 +142,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {array} $who Array that can contain the following keys:
 	 * @param {string|array} [$who.userId] user id or an array of user ids
 	 * @param {string} [$who.platform] platform for which xids are passed
+	 * @param {string} [$who.appId] id of platform app for which xids are passed
 	 * @param {string|array} [$who.xid]  platform xid or array of xids
 	 * @param {string|array} [$who.label]  label or an array of labels, or tab-delimited string
 	 * @param {string|array} [$who.identifier]  identifier or an array of identifiers, or tab-delimited string

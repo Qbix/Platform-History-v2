@@ -198,7 +198,8 @@ class Q
 	        // This error code is not included in error_reporting
 			// just continue on with execution, if possible.
 			// this situation can also happen when
-			// someone has used the @ operator.
+			//
+		    // someone has used the @ operator.
 	        return;
 	    }
 		switch ($errno) {

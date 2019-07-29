@@ -23,7 +23,7 @@
         "prompt": "یہاں {{ClickOrTap}} یہاں <br> اپنا مقرر کریں <br> مقام",
         "myCurrentLocation": "میرا موجودہ مقام",
         "enterAddress": "ایک ایڈریس درج کریں",
-        "enterPostcode": "اپنا پوسٹ کوڈ \/ زپ کوڈ درج کریں",
+        "enterPostcode": "اپنا پوسٹ کوڈ / زپ کوڈ درج کریں",
         "create": {
             "action": "مقام شامل کریں",
             "title": "نیا مقام",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "مقام کا انتخاب کریں"
-        }
+        },
+        "set": "میری جگہ مقرر کریں۔"
     },
     "areas": {
         "filterPlaceholder": "اس مقام کے اندر کسی بھی علاقے؟",

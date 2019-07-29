@@ -22,7 +22,12 @@
         "closeChatConfirm": "நிச்சயமாக இந்த அரட்டை மூட விரும்புகிறீர்களா?",
         "closeChatConfirmYes": "ஆம்",
         "closeChatConfirmNo": "இல்லை",
-        "earlierComments": "முந்தைய கருத்துகள்"
+        "earlierComments": "முந்தைய கருத்துகள்",
+        "Subscribed": "அறிவிப்புகளை முடக்கு",
+        "Unsubscribed": "அறிவிப்புகள் பெற",
+        "dontHavePermissionJoinConversation": "இந்த உரையாடலில் சேர உங்களுக்கு அனுமதி இல்லை.",
+        "startedConversation": "உரையாடலைத் தொடங்கினார்",
+        "RealTimeCall": "நிகழ் நேர அழைப்பு"
     },
     "notifications": {
         "*": "{{& stream.fields.title}} க்கு {999}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "மைக்ரோஃபோனை இயக்கு",
             "cameraTitle": "கேமராவை இயக்கு",
-            "cameraAndMicrophoneTitle": "கேமரா மற்றும் மைக்ரோஃபோனை இயக்கு"
+            "cameraAndMicrophoneTitle": "கேமரா மற்றும் மைக்ரோஃபோனை இயக்கு",
+            "dialogTitle": "உரையாடலை இயக்குகிறது",
+            "microphoneBtn": "மைக்ரோஃபோனை இயக்கு",
+            "cameraBtn": "கேமராவை இயக்கு",
+            "cameraAndMicrophoneBtn": "கேமரா மற்றும் மைக்ரோஃபோனை இயக்கு"
         }
     }
 }

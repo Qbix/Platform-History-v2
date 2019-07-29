@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Gwahoddwyd gwahoddiad gan {{1}}",
         "YouHaveCreditsToStart": "Mae gennych chi {{1}} credydau i ddechrau"
+    },
+    "history": {
+        "Date": "Dyddiad",
+        "Amount": "Swm",
+        "Description": "Disgrifiad",
+        "Client": "Cleient",
+        "To": "i",
+        "From": "o",
+        "HistoryEmpty": "Nid oes gennych unrhyw ddata eto"
+    },
+    "subscriptions": {
+        "infoTitle": "Gosod Gwybodaeth Taliad",
+        "confirm": {
+            "title": "Dechreuwch Danysgrifiad",
+            "message": "Hoffech chi danysgrifio i {{title}}?",
+            "ok": "iawn",
+            "cancel": "Canslo"
+        }
+    },
+    "payments": {
+        "infoTitle": "Gosod Gwybodaeth Taliad",
+        "confirm": {
+            "title": "Gwneud Taliad",
+            "message": "Ydych chi&#39;n cytuno i dalu {{symbol}} {{amount}}?",
+            "ok": "iawn",
+            "cancel": "Canslo"
+        }
     }
 }

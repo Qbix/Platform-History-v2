@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} zde <br> nastavte si <br> umístění",
         "myCurrentLocation": "Moje aktuální poloha",
         "enterAddress": "Zadejte adresu",
-        "enterPostcode": "Zadejte své poštovní směrovací číslo \/ PSČ",
+        "enterPostcode": "Zadejte své poštovní směrovací číslo / PSČ",
         "create": {
             "action": "Přidat lokaci",
             "title": "Nové umístění",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Zvolte Umístění"
-        }
+        },
+        "set": "Nastavit moji polohu"
     },
     "areas": {
         "filterPlaceholder": "Jakékoliv místo uvnitř této lokality?",

@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Izvēlieties atrašanās vietu"
-        }
+        },
+        "set": "Iestatīt manu atrašanās vietu"
     },
     "areas": {
         "filterPlaceholder": "Jebkura vieta šajā atrašanās vietā?",

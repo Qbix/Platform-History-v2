@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Uzaicinājums akceptēts {{1}}",
         "YouHaveCreditsToStart": "Lai sāktu, jums ir {{1}} kredīti"
+    },
+    "history": {
+        "Date": "Datums",
+        "Amount": "Summa",
+        "Description": "Apraksts",
+        "Client": "Klients",
+        "To": "uz",
+        "From": "no",
+        "HistoryEmpty": "Jums vēl nav datu"
+    },
+    "subscriptions": {
+        "infoTitle": "Iestatiet maksājumu informāciju",
+        "confirm": {
+            "title": "Sākt abonēšanu",
+            "message": "Vai vēlaties abonēt {{title}}?",
+            "ok": "labi",
+            "cancel": "Atcelt"
+        }
+    },
+    "payments": {
+        "infoTitle": "Iestatiet maksājumu informāciju",
+        "confirm": {
+            "title": "Veikt maksājumu",
+            "message": "Vai piekrītat maksāt {{symbol}} {{amount}}?",
+            "ok": "labi",
+            "cancel": "Atcelt"
+        }
     }
 }

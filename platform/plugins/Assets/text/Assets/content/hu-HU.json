@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "A {{1}} által elfogadott meghívás",
         "YouHaveCreditsToStart": "A {{1}} kredited van az indításhoz"
+    },
+    "history": {
+        "Date": "Dátum",
+        "Amount": "Összeg",
+        "Description": "Leírás",
+        "Client": "Ügyfél",
+        "To": "nak nek",
+        "From": "tól től",
+        "HistoryEmpty": "Még nincs adatod"
+    },
+    "subscriptions": {
+        "infoTitle": "Állítsa be a fizetési információkat",
+        "confirm": {
+            "title": "Indítsa el az előfizetést",
+            "message": "Szeretne feliratkozni a {{title}} -ra?",
+            "ok": "rendben",
+            "cancel": "Megszünteti"
+        }
+    },
+    "payments": {
+        "infoTitle": "Állítsa be a fizetési információkat",
+        "confirm": {
+            "title": "Fizetni",
+            "message": "Elfogadja, hogy {{symbol}} {{amount}} fizet?",
+            "ok": "rendben",
+            "cancel": "Megszünteti"
+        }
     }
 }

@@ -22,7 +22,12 @@
         "closeChatConfirm": "Apakah Anda yakin ingin menutup obrolan ini?",
         "closeChatConfirmYes": "iya nih",
         "closeChatConfirmNo": "Tidak",
-        "earlierComments": "komentar sebelumnya"
+        "earlierComments": "komentar sebelumnya",
+        "Subscribed": "Bisukan Notifikasi",
+        "Unsubscribed": "Dapatkan Notifikasi",
+        "dontHavePermissionJoinConversation": "Anda tidak memiliki izin untuk bergabung dengan percakapan ini.",
+        "startedConversation": "memulai percakapan",
+        "RealTimeCall": "Panggilan Waktu Nyata"
     },
     "notifications": {
         "*": "Pesan {{& message.fields.type}} ke {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "Teks",
             "byFacebook": "Facebook",
             "byTwitter": "Kericau",
-            "QRscanned": "Mereka memindainya!"
+            "QRscanned": "Mereka memindainya!",
+            "chooseAgainFromContacts": "Pilih Lagi dari Kontak",
+            "inviteSelectedContacts": "Undang Kontak yang Dipilih"
         },
         "email": {
             "subject": "Hei, lihat ini",
@@ -99,5 +106,13 @@
         "Title": "Judul",
         "Subscribed": "Berlangganan",
         "Participants": "Peserta"
+    },
+    "webrtc": {
+        "allow": {
+            "dialogTitle": "Dialog yang Diaktifkan",
+            "microphoneBtn": "Aktifkan Mikrofon",
+            "cameraBtn": "Aktifkan Kamera",
+            "cameraAndMicrophoneBtn": "Aktifkan Kamera dan Mikrofon"
+        }
     }
 }

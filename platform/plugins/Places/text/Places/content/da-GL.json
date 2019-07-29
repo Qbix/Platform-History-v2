@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} her til <br> sæt din <br> Beliggenhed",
         "myCurrentLocation": "Min nuværende placering",
         "enterAddress": "Indtast en adresse",
-        "enterPostcode": "Indtast venligst dit postnummer \/ postnummer",
+        "enterPostcode": "Indtast venligst dit postnummer / postnummer",
         "create": {
             "action": "Tilføj placering",
             "title": "Ny placering",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Vælg Placering"
-        }
+        },
+        "set": "Indstil Min placering"
     },
     "areas": {
         "filterPlaceholder": "Ethvert område inden for denne placering?",

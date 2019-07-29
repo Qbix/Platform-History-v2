@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} di sini <br> tetapkan anda <br> lokasi",
         "myCurrentLocation": "Lokasi semasa saya",
         "enterAddress": "Masukkan alamat",
-        "enterPostcode": "Sila masukkan kod pos \/ kod pos anda",
+        "enterPostcode": "Sila masukkan kod pos / kod pos anda",
         "create": {
             "action": "Tambah lokasi",
             "title": "Lokasi Baru",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Pilih Lokasi"
-        }
+        },
+        "set": "Tetapkan Lokasi Saya"
     },
     "areas": {
         "filterPlaceholder": "Mana-mana kawasan di dalam lokasi ini?",

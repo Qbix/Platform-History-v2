@@ -23,7 +23,7 @@
         "prompt": "અહીં {{ClickOrTap}} <br> તમારું સેટ કરો <br> સ્થાન",
         "myCurrentLocation": "મારું વર્તમાન સ્થાન",
         "enterAddress": "સરનામું દાખલ કરો",
-        "enterPostcode": "તમારા પોસ્ટકોડ \/ ઝિપ કોડ દાખલ કરો",
+        "enterPostcode": "તમારા પોસ્ટકોડ / ઝિપ કોડ દાખલ કરો",
         "create": {
             "action": "સ્થાન ઉમેરો",
             "title": "નવું સ્થાન",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "સ્થાન પસંદ કરો"
-        }
+        },
+        "set": "મારું સ્થાન સેટ કરો"
     },
     "areas": {
         "filterPlaceholder": "આ સ્થાનની અંદર કોઈપણ ક્ષેત્ર?",

@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Välj Plats"
-        }
+        },
+        "set": "Ställ in min plats"
     },
     "areas": {
         "filterPlaceholder": "Alla områden inom denna plats?",

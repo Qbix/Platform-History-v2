@@ -22,7 +22,12 @@
         "closeChatConfirm": "คุณแน่ใจหรือว่าต้องการปิดการแชทนี้?",
         "closeChatConfirmYes": "ใช่",
         "closeChatConfirmNo": "ไม่",
-        "earlierComments": "ความคิดเห็นก่อนหน้า"
+        "earlierComments": "ความคิดเห็นก่อนหน้า",
+        "Subscribed": "ปิดการแจ้งเตือน",
+        "Unsubscribed": "รับการแจ้งเตือน",
+        "dontHavePermissionJoinConversation": "คุณไม่ได้รับอนุญาตให้เข้าร่วมการสนทนานี้",
+        "startedConversation": "เริ่มการสนทนา",
+        "RealTimeCall": "โทรตามเวลาจริง"
     },
     "notifications": {
         "*": "ข้อความ {{& message.fields.type}} ถึง {{1,000}}",
@@ -59,7 +64,9 @@
             "byText": "ข้อความ",
             "byFacebook": "Facebook",
             "byTwitter": "พูดเบาและรวดเร็ว",
-            "QRscanned": "พวกเขาสแกนมัน!"
+            "QRscanned": "พวกเขาสแกนมัน!",
+            "chooseAgainFromContacts": "เลือกอีกครั้งจากที่อยู่ติดต่อ",
+            "inviteSelectedContacts": "เชิญผู้ติดต่อที่เลือกไว้"
         },
         "email": {
             "subject": "เฮ้ลองดูนี่สิ",
@@ -99,5 +106,16 @@
         "Title": "หัวข้อ",
         "Subscribed": "สมัครเป็นสมาชิก",
         "Participants": "ผู้เข้าร่วม"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "เปิดใช้งานไมโครโฟน",
+            "cameraTitle": "เปิดใช้งานกล้อง",
+            "cameraAndMicrophoneTitle": "เปิดใช้งานกล้องและไมโครโฟน",
+            "dialogTitle": "เปิดใช้งานกล่องโต้ตอบ",
+            "microphoneBtn": "เปิดใช้งานไมโครโฟน",
+            "cameraBtn": "เปิดใช้งานกล้อง",
+            "cameraAndMicrophoneBtn": "เปิดใช้งานกล้องและไมโครโฟน"
+        }
     }
 }

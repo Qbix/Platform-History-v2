@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Agħżel Location"
-        }
+        },
+        "set": "Issettja l-Post Tiegħi"
     },
     "areas": {
         "filterPlaceholder": "Kwalunkwe żona ġewwa dan il-post?",

@@ -22,7 +22,12 @@
         "closeChatConfirm": "Ali ste prepričani, da želite zapreti ta klepet?",
         "closeChatConfirmYes": "Da",
         "closeChatConfirmNo": "Ne",
-        "earlierComments": "prejšnjih pripomb"
+        "earlierComments": "prejšnjih pripomb",
+        "Subscribed": "Prezri obvestila",
+        "Unsubscribed": "Dobi obvestila",
+        "dontHavePermissionJoinConversation": "Nimate dovoljenja za pridružitev temu pogovoru.",
+        "startedConversation": "začel pogovor",
+        "RealTimeCall": "Klic v realnem času"
     },
     "notifications": {
         "*": "Sporočilo {{& message.fields.type}} do {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "Omogoči mikrofon",
             "cameraTitle": "Omogoči fotoaparat",
-            "cameraAndMicrophoneTitle": "Omogoči kamero in mikrofon"
+            "cameraAndMicrophoneTitle": "Omogoči kamero in mikrofon",
+            "dialogTitle": "Omogočanje pogovornega okna",
+            "microphoneBtn": "Omogoči mikrofon",
+            "cameraBtn": "Omogoči fotoaparat",
+            "cameraAndMicrophoneBtn": "Omogoči kamero in mikrofon"
         }
     }
 }

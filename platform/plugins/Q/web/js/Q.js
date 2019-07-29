@@ -4046,6 +4046,8 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 	}
 };
 
+Q.Tool.jQuery.loadAtStart = [];
+
 /**
  * Call this function to define default options for a jQuery tool constructor,
  * even if it has not been loaded yet.
@@ -12665,15 +12667,9 @@ Q.onJQuery.add(function ($) {
 	Q.onLoad.add(function () {
 		// Start loading some plugins asynchronously after document loads.
 		// We may need them later.
-		$.fn.plugin.load([
-			'Q/clickfocus', 
-			'Q/contextual', 
-			'Q/scrollIndicators', 
-			'Q/iScroll', 
-			'Q/scroller', 
-			'Q/touchscroll'
-		]);
-	});
+		$.fn.plugin.load(Q.Tool.jQuery.loadAtStart);
+		document.documentElement.addClass('Q_loaded');
+	}, 'Q');
 	
 	if ($ && $.tools && $.tools.validator && $.tools.validator.conf) {
 		$.tools.validator.conf.formEvent = null; // form validator's handler irresponsibly sets event.target to a jquery!
@@ -13427,14 +13423,22 @@ Q.beforeInit.addOnce(function () {
 		Q.cookie('Q_dpr', window.devicePixelRatio);
 	}
 	var e;
-	if (!Q.ignoreBackwardCompatibility.dashboard) {
-		e = document.getElementById('dashboard_slot');
-		e && e.addClass('Q_fixed_top');
+	var slotNames = ['dashboard', 'notices'];
+	for (var i=0; i<slotNames.length; ++i) {
+		var sn = slotNames[i];
+		if (Q.ignoreBackwardCompatibility === true
+		|| !Q.ignoreBackwardCompatibility[sn]) {
+			if (e = document.getElementById(sn+'_slot')) {
+				var r = e.getBoundingClientRect();
+				if (r.top < window.innerHeight / 10) {
+					e.addClass('Q_fixed_top');
+				} else if (r.bottom > window.innerHeight * 9 / 10) {
+					e.addClass('Q_fixed_bottom');
+				}
+			}
+		}
 	}
-	if (!Q.ignoreBackwardCompatibility.notices) {
-		e = document.getElementById('notices_slot');
-		e && e.addClass('Q_fixed_top');
-	}
+
 	// This loads bluebird library to enable Promise for browsers which do not
 	// support Promise natively. For example: IE, Opera Mini.
 	// WARN: Could have race conditions:

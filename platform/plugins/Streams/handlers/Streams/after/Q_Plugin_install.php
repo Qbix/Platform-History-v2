@@ -56,6 +56,8 @@ function Streams_after_Q_Plugin_install($params)
 			echo "$plugin_name: processed streams for ".($j + 1)." of $c users                          ";
 		}
 	}
+	
+	echo PHP_EOL;
 
 	// if new streams installed
 	if (count($streamsToInstall)) {
@@ -66,6 +68,4 @@ function Streams_after_Q_Plugin_install($params)
 	    $extra[$key] = array_values(array_unique(array_merge($extra[$key], $streamsToInstall)));
 	    return Q_Plugin::extra('Streams', 'plugin', 'Streams', compact('extra'));
 	}
-
-	echo PHP_EOL;
 }

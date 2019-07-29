@@ -22,7 +22,12 @@
         "closeChatConfirm": "채팅을 닫으시겠습니까?",
         "closeChatConfirmYes": "예",
         "closeChatConfirmNo": "아니",
-        "earlierComments": "이전 댓글"
+        "earlierComments": "이전 댓글",
+        "Subscribed": "알림 음소거",
+        "Unsubscribed": "알림을 받다",
+        "dontHavePermissionJoinConversation": "이 대화에 참여할 수있는 권한이 없습니다.",
+        "startedConversation": "대화를 시작했다.",
+        "RealTimeCall": "실시간 통화"
     },
     "notifications": {
         "*": "메시지 {{& message.fields.type}} ~ {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "마이크 사용",
             "cameraTitle": "카메라 사용",
-            "cameraAndMicrophoneTitle": "카메라 및 마이크 사용"
+            "cameraAndMicrophoneTitle": "카메라 및 마이크 사용",
+            "dialogTitle": "대화 상자 사용",
+            "microphoneBtn": "마이크 사용",
+            "cameraBtn": "카메라 사용",
+            "cameraAndMicrophoneBtn": "카메라 및 마이크 사용"
         }
     }
 }

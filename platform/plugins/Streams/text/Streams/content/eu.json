@@ -22,7 +22,12 @@
         "closeChatConfirm": "Ziur zaude txata hau itxi nahi duzula?",
         "closeChatConfirmYes": "Bai",
         "closeChatConfirmNo": "Ez",
-        "earlierComments": "lehenago egindako iruzkinak"
+        "earlierComments": "lehenago egindako iruzkinak",
+        "Subscribed": "Mutu jakinarazpenak",
+        "Unsubscribed": "Lortu jakinarazpenak",
+        "dontHavePermissionJoinConversation": "Ez duzu elkarrizketetan sartzeko baimenik.",
+        "startedConversation": "elkarrizketa bat hasi zuen",
+        "RealTimeCall": "Denbora errealeko deia"
     },
     "notifications": {
         "*": "{{& message.fields.type}} mezua {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "Gaitu mikrofonoa",
             "cameraTitle": "Gaitu kamera",
-            "cameraAndMicrophoneTitle": "Gaitu kamera eta mikrofonoa"
+            "cameraAndMicrophoneTitle": "Gaitu kamera eta mikrofonoa",
+            "dialogTitle": "Elkarrizketa gaitu",
+            "microphoneBtn": "Gaitu mikrofonoa",
+            "cameraBtn": "Gaitu kamera",
+            "cameraAndMicrophoneBtn": "Gaitu Kamera eta Mikrofonoa"
         }
     }
 }

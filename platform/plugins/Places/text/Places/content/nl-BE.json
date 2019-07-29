@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} hier voor <br> Stel je <br> plaats",
         "myCurrentLocation": "Mijn huidige locatie",
         "enterAddress": "Geef een adres in",
-        "enterPostcode": "Voer je postcode \/ postcode in",
+        "enterPostcode": "Voer je postcode / postcode in",
         "create": {
             "action": "Voeg locatie toe",
             "title": "Nieuwe locatie",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Kies locatie"
-        }
+        },
+        "set": "Stel mijn locatie in"
     },
     "areas": {
         "filterPlaceholder": "Elk gebied binnen deze locatie?",

@@ -23,7 +23,8 @@
             "PasteLinkHere": "Prilepite povezavo tukaj",
             "BrowseTheWeb": "Brskanje",
             "WriteToStartConversation": "Napišite svoje misli, da začnete pogovor",
-            "StartConversation": "Začni pogovor"
+            "StartConversation": "Začni pogovor",
+            "GotoConversation": "Pojdite v pogovor"
         }
     }
 }

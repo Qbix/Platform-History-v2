@@ -22,7 +22,12 @@
         "closeChatConfirm": "Вы ўпэўненыя, што жадаеце закрыць гэты чат?",
         "closeChatConfirmYes": "ды",
         "closeChatConfirmNo": "няма",
-        "earlierComments": "больш раннія каментары"
+        "earlierComments": "больш раннія каментары",
+        "Subscribed": "Адключэнне гуку апавяшчэнняў",
+        "Unsubscribed": "Атрымаць апавяшчэнні",
+        "dontHavePermissionJoinConversation": "Вы не маеце дазволу далучыцца да гэтай размовы.",
+        "startedConversation": "пачаў размову",
+        "RealTimeCall": "Званок у рэжыме рэальнага часу"
     },
     "notifications": {
         "*": "Паведамленне {{& message.fields.type}} на {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "Уключыць мікрафон",
             "cameraTitle": "Уключыць камеру",
-            "cameraAndMicrophoneTitle": "Уключыць камеру і мікрафон"
+            "cameraAndMicrophoneTitle": "Уключыць камеру і мікрафон",
+            "dialogTitle": "Уключэнне дыялогавага дыялога",
+            "microphoneBtn": "Уключыць мікрафон",
+            "cameraBtn": "Уключыць камеру",
+            "cameraAndMicrophoneBtn": "Уключыць камеру і мікрафон"
         }
     }
 }

@@ -23,7 +23,8 @@
             "PasteLinkHere": "Weka kiungo hapa",
             "BrowseTheWeb": "Vinjari",
             "WriteToStartConversation": "Andika mawazo yako ili uanze mazungumzo",
-            "StartConversation": "Anza Majadiliano"
+            "StartConversation": "Anza Majadiliano",
+            "GotoConversation": "Nenda kwenye Mazungumzo"
         }
     }
 }

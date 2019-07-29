@@ -3311,7 +3311,8 @@ abstract class Streams extends Base_Streams
 	 * @param {array} $who Array that can contain the following keys:
 	 * @param {string|array} [$who.userId] user id or an array of user ids
 	 * @param {string} [$who.platform] platform for which xids are passed
-	 * @param {string|array} [$who.xid]  platform xid or array of xids
+	 * @param {string} [$who.appId] id of platform app for which xids are passed
+	 * @param {string|array} [$who.xid] platform xid or array of xids
 	 * @param {string|array} [$who.label]  label or an array of labels, or tab-delimited string
 	 * @param {string|array} [$who.identifier] identifier such as an email or mobile number, or an array of identifiers, or tab-delimited string
 	 * @param {integer} [$who.newFutureUsers] the number of new Users_User objects to create via Users::futureUser in order to invite them to this stream. This typically is used in conjunction with passing the "html" option to this function.
@@ -3426,9 +3427,10 @@ abstract class Streams extends Base_Streams
 			$statuses = array_merge($statuses, $statuses1);
 			$identifierTypes = array_merge($identifierTypes, $identifierTypes1);
 		}
-		if (!empty($who['platform']) and !empty($who['xid'])) {
+		if (!empty($who['platform']) and !empty($who['appId']) and !empty($who['xid'])) {
 			// merge users from platform xids
 			$platform = $who['platform'];
+			$appId = $who['appId'];
 			$xids = $who['xid'];
 			if (is_string($xids)) {
 				$xids = array_map('trim', explode("\t", $xids)) ;
@@ -3436,7 +3438,7 @@ abstract class Streams extends Base_Streams
 			$statuses2 = array();
 			$raw_userIds = array_merge(
 				$raw_userIds, 
-				Users_User::idsFromPlatformXids($platform, $xids, $statuses2)
+				Users_User::idsFromPlatformXids($platform, $appId, $xids, $statuses2)
 			);
 			$statuses = array_merge($statuses, $statuses2);
 			$identifiers = array_merge($identifiers, $xids);

@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Aukeratu Kokapena"
-        }
+        },
+        "set": "Ezarri Nire kokapena"
     },
     "areas": {
         "filterPlaceholder": "Kokapen honen barneko eremua?",

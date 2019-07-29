@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Kutsu {{1}} poolt heaks kiidetud",
         "YouHaveCreditsToStart": "Alustamiseks on teil {{1}} krediiti"
+    },
+    "history": {
+        "Date": "Kuupäev",
+        "Amount": "Summa",
+        "Description": "Kirjeldus",
+        "Client": "Klient",
+        "To": "kuni",
+        "From": "alates",
+        "HistoryEmpty": "Teil pole veel andmeid"
+    },
+    "subscriptions": {
+        "infoTitle": "Määrake makseteave",
+        "confirm": {
+            "title": "Alusta tellimust",
+            "message": "Kas soovite tellida {{title}}?",
+            "ok": "Okei",
+            "cancel": "Tühista"
+        }
+    },
+    "payments": {
+        "infoTitle": "Määrake makseteave",
+        "confirm": {
+            "title": "Makse sooritamine",
+            "message": "Kas nõustute maksma {{symbol}} {{amount}}?",
+            "ok": "Okei",
+            "cancel": "Tühista"
+        }
     }
 }

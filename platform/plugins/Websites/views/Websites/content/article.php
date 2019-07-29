@@ -1,4 +1,4 @@
-<div class="content">
+<div id="content">
 	<?php echo isset($header) ? $header : '' ?> 
 	<div class="Websites_article">
 		<?php echo Q::tool('Websites/article', array(

@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}}来到这里<br>设置你的<br>地点",
         "myCurrentLocation": "我目前的位置",
         "enterAddress": "输入地址",
-        "enterPostcode": "请输入您的邮政编码\/邮政编码",
+        "enterPostcode": "请输入您的邮政编码/邮政编码",
         "create": {
             "action": "添加位置",
             "title": "新位置",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "选择位置"
-        }
+        },
+        "set": "设置我的位置"
     },
     "areas": {
         "filterPlaceholder": "这个位置内的任何区域？",

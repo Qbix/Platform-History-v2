@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Glacadh le {{1}}",
         "YouHaveCreditsToStart": "Tá creidmheasanna {{1}} agat le tosú"
+    },
+    "history": {
+        "Date": "Dáta",
+        "Amount": "Méid",
+        "Description": "Cur síos",
+        "Client": "Cliant",
+        "To": "chun",
+        "From": "as",
+        "HistoryEmpty": "Níl aon sonraí agat go fóill"
+    },
+    "subscriptions": {
+        "infoTitle": "Faisnéis Socraithe Íocaíochta",
+        "confirm": {
+            "title": "Síntiús Tosaigh",
+            "message": "Ar mhaith leat síntiús a íoc le {{title}}?",
+            "ok": "OK",
+            "cancel": "Cealaigh"
+        }
+    },
+    "payments": {
+        "infoTitle": "Faisnéis Socraithe Íocaíochta",
+        "confirm": {
+            "title": "Déan Íocaíocht",
+            "message": "An aontaíonn tú íoc as {{symbol}} {{amount}}?",
+            "ok": "OK",
+            "cancel": "Cealaigh"
+        }
     }
 }

@@ -37,5 +37,13 @@
         "selectLabel": "Vennligst velg etikett.",
         "inviteUser": "Inviter bruker"
     },
-    "invalidLanguageSelected": "Ugyldig språk valgt"
+    "invalidLanguageSelected": "Ugyldig språk valgt",
+    "contacts": {
+        "dialog": {
+            "title": "Velg kontakt"
+        },
+        "select": {
+            "title": "Velg kontakt fra {{displayName}}"
+        }
+    }
 }

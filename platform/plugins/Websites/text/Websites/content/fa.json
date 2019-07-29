@@ -23,7 +23,8 @@
             "PasteLinkHere": "یک پیوند را در اینجا بگذارید",
             "BrowseTheWeb": "مرور کردن",
             "WriteToStartConversation": "افکار خود را برای شروع گفتگو بنویسید",
-            "StartConversation": "شروع مکالمه"
+            "StartConversation": "شروع مکالمه",
+            "GotoConversation": "برو به مکالمه"
         }
     }
 }

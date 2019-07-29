@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "{{1}} द्वारा स्वीकृत आमंत्रण",
         "YouHaveCreditsToStart": "आपके पास शुरू करने के लिए {{1}} क्रेडिट हैं"
+    },
+    "history": {
+        "Date": "दिनांक",
+        "Amount": "रकम",
+        "Description": "विवरण",
+        "Client": "ग्राहक",
+        "To": "सेवा मेरे",
+        "From": "से",
+        "HistoryEmpty": "आपके पास अभी तक कोई डेटा नहीं है"
+    },
+    "subscriptions": {
+        "infoTitle": "भुगतान जानकारी सेट करें",
+        "confirm": {
+            "title": "सदस्यता प्रारंभ करें",
+            "message": "क्या आप {{title}} की सदस्यता लेना चाहेंगे?",
+            "ok": "ठीक",
+            "cancel": "रद्द करना"
+        }
+    },
+    "payments": {
+        "infoTitle": "भुगतान जानकारी सेट करें",
+        "confirm": {
+            "title": "भुगतान कीजिए",
+            "message": "क्या आप {{symbol}} {{amount}} भुगतान करने के लिए सहमत हैं?",
+            "ok": "ठीक",
+            "cancel": "रद्द करना"
+        }
     }
 }

@@ -23,7 +23,8 @@
             "PasteLinkHere": "Enganxa un enllaç aquí",
             "BrowseTheWeb": "Navegueu",
             "WriteToStartConversation": "Escriviu els vostres pensaments per començar la conversa",
-            "StartConversation": "Inicia la conversa"
+            "StartConversation": "Inicia la conversa",
+            "GotoConversation": "Vés a Conversa"
         }
     }
 }

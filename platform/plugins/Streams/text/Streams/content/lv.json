@@ -22,7 +22,12 @@
         "closeChatConfirm": "Vai tiešām vēlaties aizvērt šo tērzēšanu?",
         "closeChatConfirmYes": "Jā",
         "closeChatConfirmNo": "Nē",
-        "earlierComments": "iepriekšējie komentāri"
+        "earlierComments": "iepriekšējie komentāri",
+        "Subscribed": "Izslēgt paziņojumus",
+        "Unsubscribed": "Saņemt paziņojumus",
+        "dontHavePermissionJoinConversation": "Jums nav atļaujas pievienoties šai sarunai.",
+        "startedConversation": "sāka sarunu",
+        "RealTimeCall": "Reāllaika zvans"
     },
     "notifications": {
         "*": "Ziņojums {{& message.fields.type}} uz {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "Iespējot mikrofonu",
             "cameraTitle": "Iespējot kameru",
-            "cameraAndMicrophoneTitle": "Iespējot kameru un mikrofonu"
+            "cameraAndMicrophoneTitle": "Iespējot kameru un mikrofonu",
+            "dialogTitle": "Dialoga iespējošana",
+            "microphoneBtn": "Iespējot mikrofonu",
+            "cameraBtn": "Iespējot kameru",
+            "cameraAndMicrophoneBtn": "Iespējot kameru un mikrofonu"
         }
     }
 }

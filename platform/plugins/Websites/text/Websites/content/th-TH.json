@@ -23,7 +23,8 @@
             "PasteLinkHere": "วางลิงค์ที่นี่",
             "BrowseTheWeb": "หมวด",
             "WriteToStartConversation": "เขียนความคิดของคุณเพื่อเริ่มการสนทนา",
-            "StartConversation": "เริ่มการสนทนา"
+            "StartConversation": "เริ่มการสนทนา",
+            "GotoConversation": "ไปที่การสนทนา"
         }
     }
 }

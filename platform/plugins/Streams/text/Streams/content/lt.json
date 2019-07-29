@@ -22,7 +22,12 @@
         "closeChatConfirm": "Ar tikrai norite uždaryti šį pokalbį?",
         "closeChatConfirmYes": "Taip",
         "closeChatConfirmNo": "Ne",
-        "earlierComments": "ankstesnes pastabas"
+        "earlierComments": "ankstesnes pastabas",
+        "Subscribed": "Nutildyti pranešimus",
+        "Unsubscribed": "Gauti pranešimus",
+        "dontHavePermissionJoinConversation": "Neturite leidimo prisijungti prie šio pokalbio.",
+        "startedConversation": "pradėjo pokalbį",
+        "RealTimeCall": "Skambinimas realiuoju laiku"
     },
     "notifications": {
         "*": "Pranešimas {{& message.fields.type}} į {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "Įjungti mikrofoną",
             "cameraTitle": "Įgalinti kamerą",
-            "cameraAndMicrophoneTitle": "Įgalinti kamerą ir mikrofoną"
+            "cameraAndMicrophoneTitle": "Įgalinti kamerą ir mikrofoną",
+            "dialogTitle": "Dialogo įgalinimas",
+            "microphoneBtn": "Įjungti mikrofoną",
+            "cameraBtn": "Įgalinti kamerą",
+            "cameraAndMicrophoneBtn": "Įgalinti kamerą ir mikrofoną"
         }
     }
 }

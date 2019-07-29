@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Velg plassering"
-        }
+        },
+        "set": "Angi min plassering"
     },
     "areas": {
         "filterPlaceholder": "Ethvert område inne i denne plasseringen?",

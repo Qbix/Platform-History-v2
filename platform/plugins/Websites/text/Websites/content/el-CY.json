@@ -23,7 +23,8 @@
             "PasteLinkHere": "Επικολλήστε ένα σύνδεσμο εδώ",
             "BrowseTheWeb": "Ξεφυλλίζω",
             "WriteToStartConversation": "Γράψτε τις σκέψεις σας για να ξεκινήσετε τη συζήτηση",
-            "StartConversation": "Ξεκινήστε τη συνομιλία"
+            "StartConversation": "Ξεκινήστε τη συνομιλία",
+            "GotoConversation": "Μεταβείτε στην &quot;Συνομιλία&quot;"
         }
     }
 }

@@ -22,7 +22,12 @@
         "closeChatConfirm": "Är du säker på att du vill stänga den här chatten?",
         "closeChatConfirmYes": "Ja",
         "closeChatConfirmNo": "Nej",
-        "earlierComments": "tidigare kommentarer"
+        "earlierComments": "tidigare kommentarer",
+        "Subscribed": "Stäng aviseringar",
+        "Unsubscribed": "Få aviseringar",
+        "dontHavePermissionJoinConversation": "Du har inte behörighet att gå med i den här konversationen.",
+        "startedConversation": "inledde en konversation",
+        "RealTimeCall": "Realtidssamtal"
     },
     "notifications": {
         "*": "Meddelande {{& message.fields.type}} till {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "Aktivera mikrofon",
             "cameraTitle": "Aktivera kameran",
-            "cameraAndMicrophoneTitle": "Aktivera kameran och mikrofonen"
+            "cameraAndMicrophoneTitle": "Aktivera kameran och mikrofonen",
+            "dialogTitle": "Aktiverar dialog",
+            "microphoneBtn": "Aktivera mikrofon",
+            "cameraBtn": "Aktivera kamera",
+            "cameraAndMicrophoneBtn": "Aktivera kamera och mikrofon"
         }
     }
 }

@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Pilih Lokasi"
-        }
+        },
+        "set": "Tetapkan Lokasi Saya"
     },
     "areas": {
         "filterPlaceholder": "Adakah area di dalam lokasi ini?",

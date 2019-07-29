@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Pasirinkite vietą"
-        }
+        },
+        "set": "Nustatyti mano vietą"
     },
     "areas": {
         "filterPlaceholder": "Bet kokia vietovė šioje vietovėje?",

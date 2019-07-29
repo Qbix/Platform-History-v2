@@ -22,7 +22,12 @@
         "closeChatConfirm": "ნამდვილად გსურთ ამ ჩეთის დახურვა?",
         "closeChatConfirmYes": "დიახ",
         "closeChatConfirmNo": "არა",
-        "earlierComments": "ადრე კომენტარი"
+        "earlierComments": "ადრე კომენტარი",
+        "Subscribed": "მდუმარე შეტყობინებები",
+        "Unsubscribed": "Შეტყობინებების მიღება",
+        "dontHavePermissionJoinConversation": "თქვენ არ გაქვთ ამ საუბარში მონაწილეობის უფლება.",
+        "startedConversation": "დაიწყო საუბარი",
+        "RealTimeCall": "რეალურ დროში ზარი"
     },
     "notifications": {
         "*": "შეტყობინება {{& message.fields.type}} {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "მიკროფონის ჩართვა",
             "cameraTitle": "კამერის ჩართვა",
-            "cameraAndMicrophoneTitle": "კამერისა და მიკროფონის ჩართვა"
+            "cameraAndMicrophoneTitle": "კამერისა და მიკროფონის ჩართვა",
+            "dialogTitle": "დიალოგის ჩართვა",
+            "microphoneBtn": "მიკროფონის ჩართვა",
+            "cameraBtn": "ჩართეთ კამერა",
+            "cameraAndMicrophoneBtn": "ჩართეთ კამერა და მიკროფონი"
         }
     }
 }

@@ -22,7 +22,12 @@
         "closeChatConfirm": "このチャットを終了してもよろしいですか？",
         "closeChatConfirmYes": "はい",
         "closeChatConfirmNo": "いいえ",
-        "earlierComments": "以前のコメント"
+        "earlierComments": "以前のコメント",
+        "Subscribed": "通知をミュート",
+        "Unsubscribed": "通知を受け取る",
+        "dontHavePermissionJoinConversation": "この会話に参加する権限がありません。",
+        "startedConversation": "会話を始めた",
+        "RealTimeCall": "リアルタイム通話"
     },
     "notifications": {
         "*": "メッセージ{{& message.fields.type}}から{{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "マイクを有効にする",
             "cameraTitle": "カメラを有効にする",
-            "cameraAndMicrophoneTitle": "カメラとマイクを有効にする"
+            "cameraAndMicrophoneTitle": "カメラとマイクを有効にする",
+            "dialogTitle": "ダイアログを有効にする",
+            "microphoneBtn": "マイクを有効にする",
+            "cameraBtn": "カメラを有効にする",
+            "cameraAndMicrophoneBtn": "カメラとマイクを有効にする"
         }
     }
 }

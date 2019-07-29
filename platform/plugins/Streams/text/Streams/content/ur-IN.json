@@ -22,7 +22,12 @@
         "closeChatConfirm": "کیا آپ واقعی یہ چیٹ بند کرنا چاہتے ہیں؟",
         "closeChatConfirmYes": "جی ہاں",
         "closeChatConfirmNo": "نہیں",
-        "earlierComments": "پہلے تبصرے"
+        "earlierComments": "پہلے تبصرے",
+        "Subscribed": "نوٹیفیکیشن خاموش کریں۔",
+        "Unsubscribed": "اطلاعات حاصل کریں۔",
+        "dontHavePermissionJoinConversation": "آپ کو اس گفتگو میں شامل ہونے کی اجازت نہیں ہے۔",
+        "startedConversation": "گفتگو شروع کی۔",
+        "RealTimeCall": "ریئل ٹائم کال"
     },
     "notifications": {
         "*": "پیغام {{& message.fields.type}} {{& stream.fields.title}} تک",
@@ -59,7 +64,9 @@
             "byText": "متن",
             "byFacebook": "فیس بک",
             "byTwitter": "ٹویٹر",
-            "QRscanned": "انہوں نے اسے سکین کیا!"
+            "QRscanned": "انہوں نے اسے سکین کیا!",
+            "chooseAgainFromContacts": "رابطہ سے دوبارہ منتخب کریں",
+            "inviteSelectedContacts": "منتخب رابطوں کو مدعو کریں"
         },
         "email": {
             "subject": "ارے، اسے چیک کرو",
@@ -99,5 +106,16 @@
         "Title": "عنوان",
         "Subscribed": "سبسکرائب",
         "Participants": "امیدوار"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "مائیکروفون کو فعال کریں",
+            "cameraTitle": "کیمرے کو فعال کریں",
+            "cameraAndMicrophoneTitle": "کیمرے اور مائیکروفون کو فعال کریں",
+            "dialogTitle": "مکالمہ کو فعال کرنا۔",
+            "microphoneBtn": "مائکروفون کو فعال کریں۔",
+            "cameraBtn": "کیمرہ کو فعال کریں۔",
+            "cameraAndMicrophoneBtn": "کیمرا اور مائکروفون کو فعال کریں۔"
+        }
     }
 }

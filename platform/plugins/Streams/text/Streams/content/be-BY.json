@@ -22,7 +22,12 @@
         "closeChatConfirm": "Вы ўпэўненыя, што жадаеце закрыць гэты чат?",
         "closeChatConfirmYes": "ды",
         "closeChatConfirmNo": "няма",
-        "earlierComments": "больш раннія каментары"
+        "earlierComments": "больш раннія каментары",
+        "Subscribed": "Адключэнне гуку апавяшчэнняў",
+        "Unsubscribed": "Атрымаць апавяшчэнні",
+        "dontHavePermissionJoinConversation": "Вы не маеце дазволу далучыцца да гэтай размовы.",
+        "startedConversation": "пачаў размову",
+        "RealTimeCall": "Званок у рэжыме рэальнага часу"
     },
     "notifications": {
         "*": "Паведамленне {{& message.fields.type}} на {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "тэкст",
             "byFacebook": "facebook",
             "byTwitter": "шчэбет",
-            "QRscanned": "Яны сканавалі яго!"
+            "QRscanned": "Яны сканавалі яго!",
+            "chooseAgainFromContacts": "Абярыце зноў з кантактаў",
+            "inviteSelectedContacts": "Запрасіце выбраныя кантакты"
         },
         "email": {
             "subject": "Эй, праверыць гэта",
@@ -99,5 +106,16 @@
         "Title": "Назва",
         "Subscribed": "Падпіска",
         "Participants": "Удзельнікі"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Уключыць мікрафон",
+            "cameraTitle": "Уключыць камеру",
+            "cameraAndMicrophoneTitle": "Уключыць камеру і мікрафон",
+            "dialogTitle": "Уключэнне дыялогавага дыялога",
+            "microphoneBtn": "Уключыць мікрафон",
+            "cameraBtn": "Уключыць камеру",
+            "cameraAndMicrophoneBtn": "Уключыць камеру і мікрафон"
+        }
     }
 }

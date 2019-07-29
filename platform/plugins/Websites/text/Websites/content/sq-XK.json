@@ -23,7 +23,8 @@
             "PasteLinkHere": "Ngjit një lidhje këtu",
             "BrowseTheWeb": "shfletoj",
             "WriteToStartConversation": "Shkruani mendimet tuaja për të nisur bisedën",
-            "StartConversation": "Filloni bisedën"
+            "StartConversation": "Filloni bisedën",
+            "GotoConversation": "Shkoni te Biseda"
         }
     }
 }

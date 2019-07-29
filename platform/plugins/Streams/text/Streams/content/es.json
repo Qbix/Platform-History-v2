@@ -22,7 +22,12 @@
         "closeChatConfirm": "¿Estás seguro de que quieres cerrar este chat?",
         "closeChatConfirmYes": "Sí",
         "closeChatConfirmNo": "No",
-        "earlierComments": "comentarios anteriores"
+        "earlierComments": "comentarios anteriores",
+        "Subscribed": "Silenciar notificaciones",
+        "Unsubscribed": "Recibe notificaciones",
+        "dontHavePermissionJoinConversation": "No tienes permiso para unirte a esta conversación.",
+        "startedConversation": "comenzó una conversación",
+        "RealTimeCall": "Llamada en tiempo real"
     },
     "notifications": {
         "*": "Mensaje {{& message.fields.type}} a {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "Habilitar micrófono",
             "cameraTitle": "Habilitar cámara",
-            "cameraAndMicrophoneTitle": "Habilitar cámara y micrófono"
+            "cameraAndMicrophoneTitle": "Habilitar cámara y micrófono",
+            "dialogTitle": "Habilitando el diálogo",
+            "microphoneBtn": "Habilitar micrófono",
+            "cameraBtn": "Habilitar cámara",
+            "cameraAndMicrophoneBtn": "Habilitar cámara y micrófono"
         }
     }
 }

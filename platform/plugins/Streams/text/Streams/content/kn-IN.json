@@ -22,7 +22,12 @@
         "closeChatConfirm": "ಈ ಚಾಟ್ ಅನ್ನು ಮುಚ್ಚಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?",
         "closeChatConfirmYes": "ಹೌದು",
         "closeChatConfirmNo": "ಇಲ್ಲ",
-        "earlierComments": "ಹಿಂದಿನ ಕಾಮೆಂಟ್ಗಳು"
+        "earlierComments": "ಹಿಂದಿನ ಕಾಮೆಂಟ್ಗಳು",
+        "Subscribed": "ಅಧಿಸೂಚನೆಗಳನ್ನು ಮ್ಯೂಟ್ ಮಾಡಿ",
+        "Unsubscribed": "ಅಧಿಸೂಚನೆ ಪಡೆ",
+        "dontHavePermissionJoinConversation": "ಈ ಸಂವಾದಕ್ಕೆ ಸೇರಲು ನಿಮಗೆ ಅನುಮತಿ ಇಲ್ಲ.",
+        "startedConversation": "ಸಂವಾದವನ್ನು ಪ್ರಾರಂಭಿಸಿದೆ",
+        "RealTimeCall": "ರಿಯಲ್ ಟೈಮ್ ಕರೆ"
     },
     "notifications": {
         "*": "{{& stream.fields.title}} ಗೆ {{& message.fields.type}} ಸಂದೇಶ",
@@ -59,7 +64,9 @@
             "byText": "ಪಠ್ಯ",
             "byFacebook": "ಫೇಸ್ಬುಕ್",
             "byTwitter": "ಟ್ವಿಟರ್",
-            "QRscanned": "ಅವರು ಇದನ್ನು ಸ್ಕ್ಯಾನ್ ಮಾಡಿದ್ದಾರೆ!"
+            "QRscanned": "ಅವರು ಇದನ್ನು ಸ್ಕ್ಯಾನ್ ಮಾಡಿದ್ದಾರೆ!",
+            "chooseAgainFromContacts": "ಸಂಪರ್ಕಗಳಿಂದ ಮತ್ತೆ ಆರಿಸಿ",
+            "inviteSelectedContacts": "ಆಯ್ದ ಸಂಪರ್ಕಗಳನ್ನು ಆಹ್ವಾನಿಸಿ"
         },
         "email": {
             "subject": "ಹೇ, ಇದನ್ನು ಪರಿಶೀಲಿಸಿ",
@@ -99,5 +106,16 @@
         "Title": "ಶೀರ್ಷಿಕೆ",
         "Subscribed": "ಚಂದಾದಾರರಾಗಿದ್ದಾರೆ",
         "Participants": "ಭಾಗವಹಿಸುವವರು"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "ಮೈಕ್ರೊಫೋನ್ ಸಕ್ರಿಯಗೊಳಿಸಿ",
+            "cameraTitle": "ಕ್ಯಾಮೆರಾವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
+            "cameraAndMicrophoneTitle": "ಕ್ಯಾಮೆರಾ ಮತ್ತು ಮೈಕ್ರೊಫೋನ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
+            "dialogTitle": "ಸಂವಾದವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಲಾಗುತ್ತಿದೆ",
+            "microphoneBtn": "ಮೈಕ್ರೊಫೋನ್ ಸಕ್ರಿಯಗೊಳಿಸಿ",
+            "cameraBtn": "ಕ್ಯಾಮೆರಾವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
+            "cameraAndMicrophoneBtn": "ಕ್ಯಾಮೆರಾ ಮತ್ತು ಮೈಕ್ರೊಫೋನ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"
+        }
     }
 }

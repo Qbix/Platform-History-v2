@@ -22,7 +22,12 @@
         "closeChatConfirm": "Está seguro de que quere pechar este chat?",
         "closeChatConfirmYes": "Si",
         "closeChatConfirmNo": "Non",
-        "earlierComments": "comentarios anteriores"
+        "earlierComments": "comentarios anteriores",
+        "Subscribed": "Notificacións de silencio",
+        "Unsubscribed": "Obter notificacións",
+        "dontHavePermissionJoinConversation": "Non tes permiso para unirse a esta conversa.",
+        "startedConversation": "iniciou unha conversa",
+        "RealTimeCall": "Chamada en tempo real"
     },
     "notifications": {
         "*": "Mensaxe {{& message.fields.type}} para {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "Texto",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Dixitalizáronse!"
+            "QRscanned": "Dixitalizáronse!",
+            "chooseAgainFromContacts": "Escolla de novo desde os contactos",
+            "inviteSelectedContacts": "Invitar a contactos seleccionados"
         },
         "email": {
             "subject": "Oe, mira isto",
@@ -99,5 +106,16 @@
         "Title": "Título",
         "Subscribed": "Subscrito",
         "Participants": "Participantes"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Activar o micrófono",
+            "cameraTitle": "Activar a cámara",
+            "cameraAndMicrophoneTitle": "Activar cámara e micrófono",
+            "dialogTitle": "Habilitando o diálogo",
+            "microphoneBtn": "Activar o micrófono",
+            "cameraBtn": "Activar a cámara",
+            "cameraAndMicrophoneBtn": "Activar cámara e micrófono"
+        }
     }
 }

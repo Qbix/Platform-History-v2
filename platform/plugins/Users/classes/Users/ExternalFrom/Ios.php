@@ -29,7 +29,7 @@ class Users_ExternalFrom_Ios extends Users_ExternalFrom implements Users_Externa
 		$platformAppId = (isset($appInfo['appId']) && isset($appInfo['secret']))
 			? $appInfo['appId']
 			: '';
-		
+
 		$udid = Q::ifset($_COOKIE, 'Q_udid', null);
 		if (!$udid) {
 			return null;
@@ -68,7 +68,7 @@ class Users_ExternalFrom_Ios extends Users_ExternalFrom implements Users_Externa
 		if (!is_array($fieldNames)) {
 			$fieldNames = Q_Config::get('Users', 'import', $platform, null);
 		}
-		if (!$fields) {
+		if (!$fieldNames) {
 			return array();
 		}
 	}

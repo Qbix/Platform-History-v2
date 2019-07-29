@@ -5,8 +5,8 @@
     },
     "activate": {
         "SetAsPrimary": "הגדר את {{1}} בתור {{2}} הראשי שלי",
-        "ChoosePassPhrase": "בחר <strong>ביטוי לעבור<\/strong> כדי להתחבר עם. <br> ביטוי פשוט המורכב ממספר מילים, כי אתה זוכר בקלות.",
-        "ChoosePassPhraseSeeSuggestions": "בחר <strong>ביטוי ביטוי<\/strong> טוב כדי להגן על החשבון שלך. ראה את ההצעות עבור כמה רעיונות.",
+        "ChoosePassPhrase": "בחר <strong>ביטוי לעבור</strong> כדי להתחבר עם. <br> ביטוי פשוט המורכב ממספר מילים, כי אתה זוכר בקלות.",
+        "ChoosePassPhraseSeeSuggestions": "בחר <strong>ביטוי ביטוי</strong> טוב כדי להגן על החשבון שלך. ראה את ההצעות עבור כמה רעיונות.",
         "LogOutAndTryAgain": "צא ונסה שוב",
         "IfYouFeel": "אם אתה מרגיש שמשהו השתבש, אתה יכול",
         "SetIdentifierButtonTitle": "להתחיל מחדש"
@@ -37,5 +37,13 @@
         "selectLabel": "בחר תווית.",
         "inviteUser": "הזמנת משתמש"
     },
-    "invalidLanguageSelected": "נבחרה שפה לא חוקית"
+    "invalidLanguageSelected": "נבחרה שפה לא חוקית",
+    "contacts": {
+        "dialog": {
+            "title": "בחר איש קשר"
+        },
+        "select": {
+            "title": "בחר איש קשר של {{displayName}}"
+        }
+    }
 }

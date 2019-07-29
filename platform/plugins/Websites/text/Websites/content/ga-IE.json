@@ -23,7 +23,8 @@
             "PasteLinkHere": "Greamaigh nasc anseo",
             "BrowseTheWeb": "Brabhsáil",
             "WriteToStartConversation": "Scríobh do chuid smaointe chun tús a chur leis an gcomhrá",
-            "StartConversation": "Comhrá Tosaigh"
+            "StartConversation": "Comhrá Tosaigh",
+            "GotoConversation": "Téigh go dtí an Comhrá"
         }
     }
 }

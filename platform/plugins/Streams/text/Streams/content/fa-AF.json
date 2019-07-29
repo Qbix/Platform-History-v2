@@ -22,7 +22,12 @@
         "closeChatConfirm": "آیا مطمئن هستید که می خواهید این چت را ببندید؟",
         "closeChatConfirmYes": "بله",
         "closeChatConfirmNo": "نه",
-        "earlierComments": "نظرات قبلی"
+        "earlierComments": "نظرات قبلی",
+        "Subscribed": "اعلان های بی صدا",
+        "Unsubscribed": "دریافت اعلان ها",
+        "dontHavePermissionJoinConversation": "شما اجازه پیوستن به این گفتگو را ندارید.",
+        "startedConversation": "مکالمه ای را شروع کرد",
+        "RealTimeCall": "تماس در زمان واقعی"
     },
     "notifications": {
         "*": "پیام {{& message.fields.type}} به {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "متن",
             "byFacebook": "فیس بوک",
             "byTwitter": "توییتر",
-            "QRscanned": "آنها آن را اسکن کردند!"
+            "QRscanned": "آنها آن را اسکن کردند!",
+            "chooseAgainFromContacts": "دوباره از مخاطبین را انتخاب کنید",
+            "inviteSelectedContacts": "دعوت از مخاطبین انتخابی"
         },
         "email": {
             "subject": "هی، این را چک کن",
@@ -99,5 +106,16 @@
         "Title": "عنوان",
         "Subscribed": "مشترک شده",
         "Participants": "شركت كنندگان"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "فعال کردن میکروفون",
+            "cameraTitle": "فعال کردن دوربین",
+            "cameraAndMicrophoneTitle": "دوربین و میکروفون را فعال کنید",
+            "dialogTitle": "فعال کردن گفتگو",
+            "microphoneBtn": "میکروفون را فعال کنید",
+            "cameraBtn": "دوربین را فعال کنید",
+            "cameraAndMicrophoneBtn": "دوربین و میکروفون را فعال کنید"
+        }
     }
 }

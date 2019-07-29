@@ -22,7 +22,12 @@
         "closeChatConfirm": "Esteu segur que voleu tancar aquest xat?",
         "closeChatConfirmYes": "Sí",
         "closeChatConfirmNo": "No",
-        "earlierComments": "comentaris anteriors"
+        "earlierComments": "comentaris anteriors",
+        "Subscribed": "Notificacions de silenci",
+        "Unsubscribed": "Rebre notificacions",
+        "dontHavePermissionJoinConversation": "No teniu permís per unir-vos a aquesta conversa.",
+        "startedConversation": "va iniciar una conversa",
+        "RealTimeCall": "Trucada en temps real"
     },
     "notifications": {
         "*": "Missatge {{& message.fields.type}} a {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "Text",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "El van escanejar!"
+            "QRscanned": "El van escanejar!",
+            "chooseAgainFromContacts": "Trieu de nou els contactes",
+            "inviteSelectedContacts": "Convida a contactes seleccionats"
         },
         "email": {
             "subject": "Hola, comprova-ho",
@@ -99,5 +106,16 @@
         "Title": "Títol",
         "Subscribed": "Subscrit",
         "Participants": "Participants"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Activa el micròfon",
+            "cameraTitle": "Habilita la càmera",
+            "cameraAndMicrophoneTitle": "Activa la càmera i el micròfon",
+            "dialogTitle": "Habilitació del diàleg",
+            "microphoneBtn": "Activa el micròfon",
+            "cameraBtn": "Habilita la càmera",
+            "cameraAndMicrophoneBtn": "Activa la càmera i el micròfon"
+        }
     }
 }

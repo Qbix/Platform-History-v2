@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Vælg Placering"
-        }
+        },
+        "set": "Indstil Min placering"
     },
     "areas": {
         "filterPlaceholder": "Ethvert område inden for denne placering?",

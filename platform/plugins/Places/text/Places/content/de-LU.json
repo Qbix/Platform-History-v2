@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} hier zu <br> setze deine <br> Standort",
         "myCurrentLocation": "Mein aktueller Standort",
         "enterAddress": "Gib eine Adresse ein",
-        "enterPostcode": "Bitte geben Sie Ihre Postleitzahl \/ Postleitzahl ein",
+        "enterPostcode": "Bitte geben Sie Ihre Postleitzahl / Postleitzahl ein",
         "create": {
             "action": "Ort hinzufügen",
             "title": "Neuer Standort",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Ort wählen"
-        }
+        },
+        "set": "Meinen Standort festlegen"
     },
     "areas": {
         "filterPlaceholder": "Irgendein Gebiet innerhalb dieses Ortes?",

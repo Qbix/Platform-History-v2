@@ -22,7 +22,12 @@
         "closeChatConfirm": "Jeni i sigurt se doni ta mbyllni këtë chat?",
         "closeChatConfirmYes": "po",
         "closeChatConfirmNo": "jo",
-        "earlierComments": "Komentet e mëhershme"
+        "earlierComments": "Komentet e mëhershme",
+        "Subscribed": "Njoftime për heshtje",
+        "Unsubscribed": "Merrni Njoftimet",
+        "dontHavePermissionJoinConversation": "Ju nuk keni leje për t&#39;u bashkuar me këtë bisedë.",
+        "startedConversation": "filloi një bisedë",
+        "RealTimeCall": "Thirrje në kohë reale"
     },
     "notifications": {
         "*": "Mesazhi {{& message.fields.type}} në {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "tekst",
             "byFacebook": "Facebook",
             "byTwitter": "Cicëroj",
-            "QRscanned": "Ata e skanuan atë!"
+            "QRscanned": "Ata e skanuan atë!",
+            "chooseAgainFromContacts": "Zgjidhni përsëri nga Kontaktet",
+            "inviteSelectedContacts": "Fto kontaktet e zgjedhura"
         },
         "email": {
             "subject": "Hej, shiko këtë",
@@ -99,5 +106,16 @@
         "Title": "titull",
         "Subscribed": "regjistruar",
         "Participants": "pjesëmarrësit"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Aktivizo mikrofonin",
+            "cameraTitle": "Aktivizo kamerën",
+            "cameraAndMicrophoneTitle": "Aktivizo kamerën dhe mikrofonin",
+            "dialogTitle": "Mundësimi i Dialogut",
+            "microphoneBtn": "Aktivizoni mikrofonin",
+            "cameraBtn": "Aktivizo kamerën",
+            "cameraAndMicrophoneBtn": "Aktivizo kamerën dhe mikrofonin"
+        }
     }
 }

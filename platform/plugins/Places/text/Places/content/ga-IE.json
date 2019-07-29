@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} anseo chuig <br> socraigh do <br> suíomh",
         "myCurrentLocation": "Mo láthair reatha",
         "enterAddress": "Cuir isteach seoladh",
-        "enterPostcode": "Cuir isteach do chód poist \/ zipcode le do thoil",
+        "enterPostcode": "Cuir isteach do chód poist / zipcode le do thoil",
         "create": {
             "action": "Cuir an Suíomh leis",
             "title": "Suíomh Nua",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Roghnaigh Suíomh"
-        }
+        },
+        "set": "Socraigh Mo Shuíomh"
     },
     "areas": {
         "filterPlaceholder": "Aon limistéar laistigh den suíomh seo?",

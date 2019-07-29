@@ -37,5 +37,13 @@
         "selectLabel": "Mangyaring piliin ang label.",
         "inviteUser": "Anyayahan ang Gumagamit"
     },
-    "invalidLanguageSelected": "Napili ang di-wastong wika"
+    "invalidLanguageSelected": "Napili ang di-wastong wika",
+    "contacts": {
+        "dialog": {
+            "title": "Pumili ng contact"
+        },
+        "select": {
+            "title": "Piliin ang contact ng {{displayName}}"
+        }
+    }
 }

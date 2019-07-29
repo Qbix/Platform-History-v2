@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Запрошення, прийняте {{1}}",
         "YouHaveCreditsToStart": "Для початку потрібно {{1}}"
+    },
+    "history": {
+        "Date": "Дата",
+        "Amount": "Сума",
+        "Description": "Опис",
+        "Client": "Клієнт",
+        "To": "до",
+        "From": "з",
+        "HistoryEmpty": "Ви ще не маєте даних"
+    },
+    "subscriptions": {
+        "infoTitle": "Встановити платіжну інформацію",
+        "confirm": {
+            "title": "Початок передплати",
+            "message": "Хочете підписатися на {{title}}?",
+            "ok": "в порядку",
+            "cancel": "Скасувати"
+        }
+    },
+    "payments": {
+        "infoTitle": "Встановити платіжну інформацію",
+        "confirm": {
+            "title": "Здійснити платіж",
+            "message": "Чи погоджуєтесь ви платити {{symbol}} {{amount}}?",
+            "ok": "в порядку",
+            "cancel": "Скасувати"
+        }
     }
 }

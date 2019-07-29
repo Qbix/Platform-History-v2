@@ -23,7 +23,8 @@
             "PasteLinkHere": "Lim inn en lenke her",
             "BrowseTheWeb": "Søk",
             "WriteToStartConversation": "Skriv dine tanker for å starte samtalen",
-            "StartConversation": "Start samtale"
+            "StartConversation": "Start samtale",
+            "GotoConversation": "Gå til samtale"
         }
     }
 }

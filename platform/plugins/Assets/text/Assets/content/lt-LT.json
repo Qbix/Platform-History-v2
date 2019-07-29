@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Pakviesti {{1}}",
         "YouHaveCreditsToStart": "Pradėti reikia {{1}} kreditų"
+    },
+    "history": {
+        "Date": "Data",
+        "Amount": "Suma",
+        "Description": "apibūdinimas",
+        "Client": "Klientas",
+        "To": "į",
+        "From": "iš",
+        "HistoryEmpty": "Jūs dar neturite duomenų"
+    },
+    "subscriptions": {
+        "infoTitle": "Nustatykite mokėjimo informaciją",
+        "confirm": {
+            "title": "Pradėti prenumeratą",
+            "message": "Ar norite užsisakyti {{title}}?",
+            "ok": "Gerai",
+            "cancel": "Atšaukti"
+        }
+    },
+    "payments": {
+        "infoTitle": "Nustatykite mokėjimo informaciją",
+        "confirm": {
+            "title": "Atlikite mokėjimą",
+            "message": "Ar sutinkate mokėti {{symbol}} {{amount}}?",
+            "ok": "Gerai",
+            "cancel": "Atšaukti"
+        }
     }
 }

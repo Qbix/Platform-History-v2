@@ -23,7 +23,8 @@
             "PasteLinkHere": "Поставете връзка тук",
             "BrowseTheWeb": "паса",
             "WriteToStartConversation": "Напишете мислите си, за да започнете разговора",
-            "StartConversation": "Започнете разговор"
+            "StartConversation": "Започнете разговор",
+            "GotoConversation": "Отидете в Разговор"
         }
     }
 }

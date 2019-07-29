@@ -22,7 +22,12 @@
         "closeChatConfirm": "మీరు ఖచ్చితంగా ఈ చాట్ను మూసివేయాలనుకుంటున్నారా?",
         "closeChatConfirmYes": "అవును",
         "closeChatConfirmNo": "తోబుట్టువుల",
-        "earlierComments": "మునుపటి వ్యాఖ్యలు"
+        "earlierComments": "మునుపటి వ్యాఖ్యలు",
+        "Subscribed": "నోటిఫికేషన్లను మ్యూట్ చేయండి",
+        "Unsubscribed": "నోటిఫికేషన్‌లను పొందండి",
+        "dontHavePermissionJoinConversation": "ఈ సంభాషణలో చేరడానికి మీకు అనుమతి లేదు.",
+        "startedConversation": "సంభాషణను ప్రారంభించారు",
+        "RealTimeCall": "రియల్ టైమ్ కాల్"
     },
     "notifications": {
         "*": "{{& stream.fields.title}} కి సందేశం {{& message.fields.type}}",
@@ -59,7 +64,9 @@
             "byText": "టెక్స్ట్",
             "byFacebook": "ఫేస్బుక్",
             "byTwitter": "ట్విట్టర్",
-            "QRscanned": "వారు దానిని స్కాన్ చేశారు!"
+            "QRscanned": "వారు దానిని స్కాన్ చేశారు!",
+            "chooseAgainFromContacts": "పరిచయాల నుండి మళ్ళీ ఎంచుకోండి",
+            "inviteSelectedContacts": "ఎంచుకున్న పరిచయాలను ఆహ్వానించండి"
         },
         "email": {
             "subject": "హే, ఈ తనిఖీ",
@@ -99,5 +106,16 @@
         "Title": "శీర్షిక",
         "Subscribed": "సబ్ స్క్రైబ్",
         "Participants": "పాల్గొనేవారు"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "మైక్రోఫోన్‌ను ప్రారంభించండి",
+            "cameraTitle": "కెమెరాను ప్రారంభించండి",
+            "cameraAndMicrophoneTitle": "కెమెరా మరియు మైక్రోఫోన్‌ను ప్రారంభించండి",
+            "dialogTitle": "డైలాగ్‌ను ప్రారంభిస్తోంది",
+            "microphoneBtn": "మైక్రోఫోన్‌ను ప్రారంభించండి",
+            "cameraBtn": "కెమెరాను ప్రారంభించండి",
+            "cameraAndMicrophoneBtn": "కెమెరా మరియు మైక్రోఫోన్‌ను ప్రారంభించండి"
+        }
     }
 }

@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "招待を{{1}}が承認しました",
         "YouHaveCreditsToStart": "開始するには{{1}}クレジットがあります"
+    },
+    "history": {
+        "Date": "日付",
+        "Amount": "量",
+        "Description": "説明",
+        "Client": "クライアント",
+        "To": "に",
+        "From": "から",
+        "HistoryEmpty": "まだデータがありません"
+    },
+    "subscriptions": {
+        "infoTitle": "支払い情報を設定する",
+        "confirm": {
+            "title": "購読を開始",
+            "message": "{{title}}を購読しますか？",
+            "ok": "OK",
+            "cancel": "キャンセル"
+        }
+    },
+    "payments": {
+        "infoTitle": "支払い情報を設定する",
+        "confirm": {
+            "title": "支払いをする",
+            "message": "あなたは{{symbol}} {{amount}}を支払うことに同意しますか？",
+            "ok": "OK",
+            "cancel": "キャンセル"
+        }
     }
 }

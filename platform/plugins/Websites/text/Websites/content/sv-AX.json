@@ -23,7 +23,8 @@
             "PasteLinkHere": "Klistra in en länk här",
             "BrowseTheWeb": "Bläddra",
             "WriteToStartConversation": "Skriv dina tankar för att starta samtalet",
-            "StartConversation": "Starta konversationen"
+            "StartConversation": "Starta konversationen",
+            "GotoConversation": "Gå till konversation"
         }
     }
 }

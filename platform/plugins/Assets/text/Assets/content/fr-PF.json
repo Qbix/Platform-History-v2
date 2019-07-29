@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Invitation acceptée par {{1}}",
         "YouHaveCreditsToStart": "Vous avez {{1}} crédits pour commencer"
+    },
+    "history": {
+        "Date": "Rendez-vous amoureux",
+        "Amount": "Montant",
+        "Description": "La description",
+        "Client": "Client",
+        "To": "à",
+        "From": "de",
+        "HistoryEmpty": "Vous n&#39;avez pas encore de données"
+    },
+    "subscriptions": {
+        "infoTitle": "Définir les informations de paiement",
+        "confirm": {
+            "title": "Commencer l&#39;abonnement",
+            "message": "Souhaitez-vous vous abonner à {{title}}?",
+            "ok": "D&#39;accord",
+            "cancel": "Annuler"
+        }
+    },
+    "payments": {
+        "infoTitle": "Définir les informations de paiement",
+        "confirm": {
+            "title": "Effectuer un paiement",
+            "message": "Acceptez-vous de payer le {{symbol}} {{amount}}?",
+            "ok": "D&#39;accord",
+            "cancel": "Annuler"
+        }
     }
 }
