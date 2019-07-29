@@ -26,9 +26,6 @@ function Users_before_Q_responseExtras()
 		$setIdentifierOptions = Q::take($loginOptions, array('identifierType'));
 		Q_Response::setScriptData('Q.plugins.Users.setIdentifier.serverOptions', $setIdentifierOptions);
 	}
-	if ($node_server_url = Q_Config::get('Users', 'nodeServer', 'url', null)) {
-		Q_Response::setScriptData("Q.plugins.Users.nodeServer", parse_url($node_server_url));
-	}
 	if (Q_Config::get('Users', 'showLoggedInUser', true)) {
 		$user = Q_Session::id() ? Users::loggedInUser() : null;
 		if ($user) {
