@@ -23,7 +23,8 @@
             "PasteLinkHere": "הדבק קישור כאן",
             "BrowseTheWeb": "עיון",
             "WriteToStartConversation": "כתוב את המחשבות שלך כדי להתחיל את השיחה",
-            "StartConversation": "התחל שיחה"
+            "StartConversation": "התחל שיחה",
+            "GotoConversation": "עבור אל שיחה"
         }
     }
 }

@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Veldu staðsetningu"
-        }
+        },
+        "set": "Stilltu staðsetningu mína"
     },
     "areas": {
         "filterPlaceholder": "Einhver svæði innan þessa staðsetningar?",

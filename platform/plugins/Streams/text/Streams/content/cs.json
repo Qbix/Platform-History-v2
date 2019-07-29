@@ -22,7 +22,12 @@
         "closeChatConfirm": "Opravdu chcete tento chat zavřít?",
         "closeChatConfirmYes": "Ano",
         "closeChatConfirmNo": "Ne",
-        "earlierComments": "dřívějších připomínek"
+        "earlierComments": "dřívějších připomínek",
+        "Subscribed": "Ztlumit oznámení",
+        "Unsubscribed": "Získejte oznámení",
+        "dontHavePermissionJoinConversation": "K této konverzaci nemáte povolení.",
+        "startedConversation": "zahájil konverzaci",
+        "RealTimeCall": "Volání v reálném čase"
     },
     "notifications": {
         "*": "Zpráva {{& message.fields.type}} až {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "Povolit mikrofon",
             "cameraTitle": "Povolit kameru",
-            "cameraAndMicrophoneTitle": "Zapněte fotoaparát a mikrofon"
+            "cameraAndMicrophoneTitle": "Zapněte fotoaparát a mikrofon",
+            "dialogTitle": "Povolení dialogu",
+            "microphoneBtn": "Povolit mikrofon",
+            "cameraBtn": "Povolit kameru",
+            "cameraAndMicrophoneBtn": "Povolit kameru a mikrofon"
         }
     }
 }

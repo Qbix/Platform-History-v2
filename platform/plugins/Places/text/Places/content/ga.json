@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Roghnaigh Suíomh"
-        }
+        },
+        "set": "Socraigh Mo Shuíomh"
     },
     "areas": {
         "filterPlaceholder": "Aon limistéar laistigh den suíomh seo?",

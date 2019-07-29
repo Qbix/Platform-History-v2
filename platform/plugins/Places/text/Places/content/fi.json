@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Valitse Sijainti"
-        }
+        },
+        "set": "Aseta oma sijainti"
     },
     "areas": {
         "filterPlaceholder": "Mikä tahansa alueen sijainti?",

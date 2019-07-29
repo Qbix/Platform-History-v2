@@ -22,7 +22,12 @@
         "closeChatConfirm": "क्या आप वाकई इस चैट को बंद करना चाहते हैं?",
         "closeChatConfirmYes": "हाँ",
         "closeChatConfirmNo": "नहीं",
-        "earlierComments": "पहले की टिप्पणियाँ"
+        "earlierComments": "पहले की टिप्पणियाँ",
+        "Subscribed": "सूचनाएं म्यूट करें",
+        "Unsubscribed": "सूचनाएं प्राप्त करें",
+        "dontHavePermissionJoinConversation": "आपको इस वार्तालाप में शामिल होने की अनुमति नहीं है।",
+        "startedConversation": "बातचीत शुरू की",
+        "RealTimeCall": "रियल टाइम कॉल"
     },
     "notifications": {
         "*": "संदेश {{& message.fields.type}} से {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "टेक्स्ट",
             "byFacebook": "फेसबुक",
             "byTwitter": "ट्विटर",
-            "QRscanned": "उन्होंने इसे स्कैन किया!"
+            "QRscanned": "उन्होंने इसे स्कैन किया!",
+            "chooseAgainFromContacts": "फिर से संपर्क से चुनें",
+            "inviteSelectedContacts": "चयनित संपर्कों को आमंत्रित करें"
         },
         "email": {
             "subject": "अरे, यह देखो",
@@ -99,5 +106,16 @@
         "Title": "शीर्षक",
         "Subscribed": "सदस्यता लिया",
         "Participants": "प्रतिभागियों"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "माइक्रोफोन सक्षम करें",
+            "cameraTitle": "कैमरा सक्षम करें",
+            "cameraAndMicrophoneTitle": "कैमरा और माइक्रोफोन सक्षम करें",
+            "dialogTitle": "संवाद सक्षम करना",
+            "microphoneBtn": "माइक्रोफोन सक्षम करें",
+            "cameraBtn": "कैमरा सक्षम करें",
+            "cameraAndMicrophoneBtn": "कैमरा और माइक्रोफोन सक्षम करें"
+        }
     }
 }

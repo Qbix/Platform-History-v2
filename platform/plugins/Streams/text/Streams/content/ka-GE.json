@@ -22,7 +22,12 @@
         "closeChatConfirm": "ნამდვილად გსურთ ამ ჩეთის დახურვა?",
         "closeChatConfirmYes": "დიახ",
         "closeChatConfirmNo": "არა",
-        "earlierComments": "ადრე კომენტარი"
+        "earlierComments": "ადრე კომენტარი",
+        "Subscribed": "მდუმარე შეტყობინებები",
+        "Unsubscribed": "Შეტყობინებების მიღება",
+        "dontHavePermissionJoinConversation": "თქვენ არ გაქვთ ამ საუბარში მონაწილეობის უფლება.",
+        "startedConversation": "დაიწყო საუბარი",
+        "RealTimeCall": "რეალურ დროში ზარი"
     },
     "notifications": {
         "*": "შეტყობინება {{& message.fields.type}} {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "ტექსტი",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "ისინი დასკანერებულნი იყვნენ!"
+            "QRscanned": "ისინი დასკანერებულნი იყვნენ!",
+            "chooseAgainFromContacts": "აირჩიეთ კონტაქტებისგან",
+            "inviteSelectedContacts": "მოიწვიე შერჩეული კონტაქტები"
         },
         "email": {
             "subject": "ჰეი, შეამოწმეთ ეს",
@@ -99,5 +106,16 @@
         "Title": "სათაური",
         "Subscribed": "გამოწერილია",
         "Participants": "Მონაწილეები"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "მიკროფონის ჩართვა",
+            "cameraTitle": "კამერის ჩართვა",
+            "cameraAndMicrophoneTitle": "კამერისა და მიკროფონის ჩართვა",
+            "dialogTitle": "დიალოგის ჩართვა",
+            "microphoneBtn": "მიკროფონის ჩართვა",
+            "cameraBtn": "ჩართეთ კამერა",
+            "cameraAndMicrophoneBtn": "ჩართეთ კამერა და მიკროფონი"
+        }
     }
 }

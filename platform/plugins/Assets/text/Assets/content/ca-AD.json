@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Convidat acceptat per {{1}}",
         "YouHaveCreditsToStart": "Teniu {{1}} crèdits per començar"
+    },
+    "history": {
+        "Date": "Data",
+        "Amount": "Quantitat",
+        "Description": "Descripció",
+        "Client": "Client",
+        "To": "a",
+        "From": "des de",
+        "HistoryEmpty": "Encara no teniu dades"
+    },
+    "subscriptions": {
+        "infoTitle": "Establiu la informació de pagament",
+        "confirm": {
+            "title": "Inicia la subscripció",
+            "message": "Voleu subscriure-us a {{title}}?",
+            "ok": "D&#39;acord",
+            "cancel": "Cancel · lar"
+        }
+    },
+    "payments": {
+        "infoTitle": "Establiu la informació de pagament",
+        "confirm": {
+            "title": "Fer un pagament",
+            "message": "Accepteu de pagar {{symbol}} {{amount}}?",
+            "ok": "D&#39;acord",
+            "cancel": "Cancel · lar"
+        }
     }
 }

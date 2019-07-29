@@ -23,7 +23,8 @@
             "PasteLinkHere": "ჩასმა ბმული აქ",
             "BrowseTheWeb": "იხილე",
             "WriteToStartConversation": "ჩაწერეთ თქვენი აზრები, რომ დაიწყოთ საუბარი",
-            "StartConversation": "დაიწყეთ საუბარი"
+            "StartConversation": "დაიწყეთ საუბარი",
+            "GotoConversation": "გადადით საუბარში"
         }
     }
 }

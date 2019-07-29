@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Imbitasyon na tinanggap ng {{1}}",
         "YouHaveCreditsToStart": "Mayroon kang {{1}} credits upang magsimula"
+    },
+    "history": {
+        "Date": "Petsa",
+        "Amount": "Halaga",
+        "Description": "Paglalarawan",
+        "Client": "Kliyente",
+        "To": "sa",
+        "From": "mula sa",
+        "HistoryEmpty": "Wala ka pang data"
+    },
+    "subscriptions": {
+        "infoTitle": "Itakda ang Impormasyon sa Pagbabayad",
+        "confirm": {
+            "title": "Simulan ang Subskripsyon",
+            "message": "Nais mo bang mag-subscribe sa {{title}}?",
+            "ok": "OK",
+            "cancel": "Pagkansela"
+        }
+    },
+    "payments": {
+        "infoTitle": "Itakda ang Impormasyon sa Pagbabayad",
+        "confirm": {
+            "title": "Magbayad",
+            "message": "Sumasang-ayon ka bang magbayad {{symbol}} {{amount}}?",
+            "ok": "OK",
+            "cancel": "Pagkansela"
+        }
     }
 }

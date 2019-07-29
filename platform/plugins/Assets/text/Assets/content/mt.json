@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Stedina aċċettata minn {{1}}",
         "YouHaveCreditsToStart": "Għandek {{1}} krediti biex tibda"
+    },
+    "history": {
+        "Date": "Data",
+        "Amount": "Ammont",
+        "Description": "Deskrizzjoni",
+        "Client": "Klijent",
+        "To": "lil",
+        "From": "minn",
+        "HistoryEmpty": "Għad m’għandekx dejta"
+    },
+    "subscriptions": {
+        "infoTitle": "Twaqqaf Informazzjoni ta &#39;Ħlas",
+        "confirm": {
+            "title": "Ibda Abbonament",
+            "message": "Tixtieq tabbona għal {{title}}?",
+            "ok": "kollox sew",
+            "cancel": "Ikkanċella"
+        }
+    },
+    "payments": {
+        "infoTitle": "Twaqqaf Informazzjoni ta &#39;Ħlas",
+        "confirm": {
+            "title": "Agħmel Ħlas",
+            "message": "Taqbel li tħallas {{symbol}} {{amount}}?",
+            "ok": "kollox sew",
+            "cancel": "Ikkanċella"
+        }
     }
 }

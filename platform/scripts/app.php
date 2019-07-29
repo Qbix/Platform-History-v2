@@ -123,10 +123,6 @@ for ($i = ($FROM_APP ? 1 : 2); $i < $count; ++$i) {
 			$i = $i + 1;
 			$mode = '';
 			break;
-		case 'plugin':
-			$plugins[] = $argv[$i];
-			$mode = '';
-			break;
 		case 'group':
 			$options['group'] = $argv[$i];
 			$options['filemode'] = 0664;

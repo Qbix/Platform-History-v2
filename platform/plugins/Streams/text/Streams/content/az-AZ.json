@@ -22,7 +22,12 @@
         "closeChatConfirm": "Bu söhbəti bağlamaq istəyirsiniz?",
         "closeChatConfirmYes": "Bəli",
         "closeChatConfirmNo": "Yox",
-        "earlierComments": "əvvəllər şərhlər"
+        "earlierComments": "əvvəllər şərhlər",
+        "Subscribed": "Səssiz bildirişlər",
+        "Unsubscribed": "Bildirişlər al",
+        "dontHavePermissionJoinConversation": "Bu söhbətə qoşulmaq üçün icazəniz yoxdur.",
+        "startedConversation": "söhbətə başladı",
+        "RealTimeCall": "Real vaxt zəng"
     },
     "notifications": {
         "*": "{{& message.fields.type}} - {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "Mətn",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Onlar bunu skanladılar!"
+            "QRscanned": "Onlar bunu skanladılar!",
+            "chooseAgainFromContacts": "Əlaqələrdən təkrar seçin",
+            "inviteSelectedContacts": "Seçilmiş kontaktları dəvət edin"
         },
         "email": {
             "subject": "Hey, bunu yoxlayın",
@@ -99,5 +106,16 @@
         "Title": "Başlıq",
         "Subscribed": "Abunə olundu",
         "Participants": "İştirakçılar"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Mikrofonu aktiv edin",
+            "cameraTitle": "Kameranı aktiv edin",
+            "cameraAndMicrophoneTitle": "Kamera və Mikrofonu aktiv edin",
+            "dialogTitle": "Dialogu aktivləşdirir",
+            "microphoneBtn": "Mikrofonu işə salın",
+            "cameraBtn": "Kameranı aktivləşdirin",
+            "cameraAndMicrophoneBtn": "Kamera və Mikrofonu aktivləşdirin"
+        }
     }
 }

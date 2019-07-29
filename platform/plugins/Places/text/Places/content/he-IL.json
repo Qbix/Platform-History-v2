@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} כאן <br> להגדיר את <br> מקום",
         "myCurrentLocation": "המיקום הנוכחי שלי",
         "enterAddress": "הכנס כתובת",
-        "enterPostcode": "הזן את המיקוד \/ מיקוד שלך",
+        "enterPostcode": "הזן את המיקוד / מיקוד שלך",
         "create": {
             "action": "הוסף מיקום",
             "title": "מיקום חדש",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "בחר מיקום"
-        }
+        },
+        "set": "קבע את המיקום שלי"
     },
     "areas": {
         "filterPlaceholder": "כל אזור בתוך מיקום זה?",

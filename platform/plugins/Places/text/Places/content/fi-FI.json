@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} täällä <br> aseta <br> sijainti",
         "myCurrentLocation": "Oma nykyinen sijainti",
         "enterAddress": "Anna osoite",
-        "enterPostcode": "Anna postinumerosi \/ postinumero",
+        "enterPostcode": "Anna postinumerosi / postinumero",
         "create": {
             "action": "Lisää sijainti",
             "title": "Uusi sijainti",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Valitse Sijainti"
-        }
+        },
+        "set": "Aseta oma sijainti"
     },
     "areas": {
         "filterPlaceholder": "Mikä tahansa alueen sijainti?",

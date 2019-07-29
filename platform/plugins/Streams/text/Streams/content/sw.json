@@ -22,7 +22,12 @@
         "closeChatConfirm": "Je! Una uhakika unataka kufunga mazungumzo haya?",
         "closeChatConfirmYes": "Ndiyo",
         "closeChatConfirmNo": "Hapana",
-        "earlierComments": "maoni mapema"
+        "earlierComments": "maoni mapema",
+        "Subscribed": "Arifa za Tuliza",
+        "Unsubscribed": "Pata Arifa",
+        "dontHavePermissionJoinConversation": "Huna ruhusa ya kujiunga na mazungumzo haya.",
+        "startedConversation": "alianza mazungumzo",
+        "RealTimeCall": "Simu ya Wakati wa kweli"
     },
     "notifications": {
         "*": "Ujumbe {{& message.fields.type}} kwa {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "Wezesha kipaza sauti",
             "cameraTitle": "Wezesha Kamera",
-            "cameraAndMicrophoneTitle": "Wezesha kamera na kipaza sauti"
+            "cameraAndMicrophoneTitle": "Wezesha kamera na kipaza sauti",
+            "dialogTitle": "Kuwezesha mazungumzo",
+            "microphoneBtn": "Washa kipaza sauti",
+            "cameraBtn": "Washa Kamera",
+            "cameraAndMicrophoneBtn": "Washa Kamera na kipaza sauti"
         }
     }
 }

@@ -22,7 +22,12 @@
         "closeChatConfirm": "Kas soovite kindlasti selle vestluse sulgeda?",
         "closeChatConfirmYes": "Jah",
         "closeChatConfirmNo": "Ei",
-        "earlierComments": "varasemad märkused"
+        "earlierComments": "varasemad märkused",
+        "Subscribed": "Mute teated",
+        "Unsubscribed": "Hankige teateid",
+        "dontHavePermissionJoinConversation": "Teil pole sellel vestlusel luba.",
+        "startedConversation": "alustas vestlust",
+        "RealTimeCall": "Real Time Call"
     },
     "notifications": {
         "*": "Sõnum {{& message.fields.type}} {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "Tekst",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Nad skaneerisid seda!"
+            "QRscanned": "Nad skaneerisid seda!",
+            "chooseAgainFromContacts": "Valige uuesti kontaktidest",
+            "inviteSelectedContacts": "Kutsu valitud kontaktid"
         },
         "email": {
             "subject": "Hei, vaata seda",
@@ -99,5 +106,16 @@
         "Title": "Pealkiri",
         "Subscribed": "Tellitud",
         "Participants": "Osalejad"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Luba mikrofon",
+            "cameraTitle": "Luba kaamera",
+            "cameraAndMicrophoneTitle": "Luba kaamera ja mikrofon",
+            "dialogTitle": "Dialoogi lubamine",
+            "microphoneBtn": "Luba mikrofon",
+            "cameraBtn": "Luba kaamera",
+            "cameraAndMicrophoneBtn": "Luba kaamera ja mikrofon"
+        }
     }
 }

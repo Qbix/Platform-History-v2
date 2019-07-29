@@ -3,7 +3,8 @@
         "error": "Feil {{status}} under forespørsel",
         "canceled": "Forespørsel avbrutt",
         "500": "Intern server feil",
-        "404": "Ikke funnet: {{url}}"
+        "404": "Ikke funnet: {{url}}",
+        "501": "Forespørsel avbrutt"
     },
     "nonce": {
         "sameDomain": "Sesjon utløpt. Oppdater siden og prøv igjen.",

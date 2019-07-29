@@ -22,7 +22,12 @@
         "closeChatConfirm": "Наистина ли искате да затворите този разговор?",
         "closeChatConfirmYes": "да",
         "closeChatConfirmNo": "Не",
-        "earlierComments": "по-ранни коментари"
+        "earlierComments": "по-ранни коментари",
+        "Subscribed": "Заглуши известията",
+        "Unsubscribed": "Получаване на известия",
+        "dontHavePermissionJoinConversation": "Нямате разрешение да се присъедините към този разговор.",
+        "startedConversation": "започна разговор",
+        "RealTimeCall": "Обаждане в реално време"
     },
     "notifications": {
         "*": "Съобщение {{& message.fields.type}} до {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "Текст",
             "byFacebook": "Facebook",
             "byTwitter": "кикотене",
-            "QRscanned": "Те го сканираха!"
+            "QRscanned": "Те го сканираха!",
+            "chooseAgainFromContacts": "Изберете Отново от Контакти",
+            "inviteSelectedContacts": "Покана за избрани контакти"
         },
         "email": {
             "subject": "Хей, провери това",
@@ -99,5 +106,16 @@
         "Title": "Заглавие",
         "Subscribed": "Записан",
         "Participants": "Участниците"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Активиране на микрофона",
+            "cameraTitle": "Активиране на камерата",
+            "cameraAndMicrophoneTitle": "Активиране на камерата и микрофона",
+            "dialogTitle": "Активиране на диалоговия прозорец",
+            "microphoneBtn": "Активиране на микрофона",
+            "cameraBtn": "Активиране на камерата",
+            "cameraAndMicrophoneBtn": "Активиране на камерата и микрофона"
+        }
     }
 }

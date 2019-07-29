@@ -22,7 +22,12 @@
         "closeChatConfirm": "Weet je zeker dat je deze chat wilt sluiten?",
         "closeChatConfirmYes": "Ja",
         "closeChatConfirmNo": "Nee",
-        "earlierComments": "eerdere opmerkingen"
+        "earlierComments": "eerdere opmerkingen",
+        "Subscribed": "Meldingen dempen",
+        "Unsubscribed": "Krijg meldingen",
+        "dontHavePermissionJoinConversation": "Je hebt geen toestemming om aan dit gesprek deel te nemen.",
+        "startedConversation": "begon een gesprek",
+        "RealTimeCall": "Real Time Call"
     },
     "notifications": {
         "*": "Bericht {{& message.fields.type}} tot {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "Microfoon inschakelen",
             "cameraTitle": "Camera inschakelen",
-            "cameraAndMicrophoneTitle": "Camera en microfoon inschakelen"
+            "cameraAndMicrophoneTitle": "Camera en microfoon inschakelen",
+            "dialogTitle": "Dialoogvenster inschakelen",
+            "microphoneBtn": "Microfoon inschakelen",
+            "cameraBtn": "Camera inschakelen",
+            "cameraAndMicrophoneBtn": "Camera en microfoon inschakelen"
         }
     }
 }

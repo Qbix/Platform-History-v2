@@ -22,7 +22,12 @@
         "closeChatConfirm": "Ertu viss um að þú viljir loka þessu spjalli?",
         "closeChatConfirmYes": "Já",
         "closeChatConfirmNo": "Nr",
-        "earlierComments": "fyrri athugasemdir"
+        "earlierComments": "fyrri athugasemdir",
+        "Subscribed": "Þagga tilkynningar",
+        "Unsubscribed": "Fá tilkynningar",
+        "dontHavePermissionJoinConversation": "Þú hefur ekki leyfi til að taka þátt í þessu samtali.",
+        "startedConversation": "hóf samtal",
+        "RealTimeCall": "Rauntíma símtal"
     },
     "notifications": {
         "*": "Skilaboð {{& message.fields.type}} til {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "Virkja hljóðnema",
             "cameraTitle": "Virkja myndavél",
-            "cameraAndMicrophoneTitle": "Virkja myndavél og hljóðnema"
+            "cameraAndMicrophoneTitle": "Virkja myndavél og hljóðnema",
+            "dialogTitle": "Virkir samtal",
+            "microphoneBtn": "Virkja hljóðnemann",
+            "cameraBtn": "Virkja myndavél",
+            "cameraAndMicrophoneBtn": "Virkja myndavél og hljóðnema"
         }
     }
 }

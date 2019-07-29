@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "选择位置"
-        }
+        },
+        "set": "设置我的位置"
     },
     "areas": {
         "filterPlaceholder": "这个位置内的任何区域？",

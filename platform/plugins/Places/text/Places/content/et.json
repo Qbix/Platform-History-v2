@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Vali asukoht"
-        }
+        },
+        "set": "Määra minu asukoht"
     },
     "areas": {
         "filterPlaceholder": "Mis tahes ala selle asukoha sees?",

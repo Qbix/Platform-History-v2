@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "تم قبول الدعوة بواسطة {{1}}",
         "YouHaveCreditsToStart": "لديك {{1}} ائتمانات للبدء"
+    },
+    "history": {
+        "Date": "تاريخ",
+        "Amount": "كمية",
+        "Description": "وصف",
+        "Client": "عميل",
+        "To": "إلى",
+        "From": "من عند",
+        "HistoryEmpty": "لا يوجد لديك بيانات حتى الآن"
+    },
+    "subscriptions": {
+        "infoTitle": "ضبط معلومات الدفع",
+        "confirm": {
+            "title": "بدء الاشتراك",
+            "message": "هل ترغب في الاشتراك في {{title}}؟",
+            "ok": "حسنا",
+            "cancel": "إلغاء"
+        }
+    },
+    "payments": {
+        "infoTitle": "ضبط معلومات الدفع",
+        "confirm": {
+            "title": "أتم عملية الدفع",
+            "message": "هل توافق على الدفع {{symbol}} {{amount}}؟",
+            "ok": "حسنا",
+            "cancel": "إلغاء"
+        }
     }
 }

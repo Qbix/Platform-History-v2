@@ -22,7 +22,12 @@
         "closeChatConfirm": "Ви впевнені, що хочете закрити цей чат?",
         "closeChatConfirmYes": "Так",
         "closeChatConfirmNo": "Ні",
-        "earlierComments": "попередні коментарі"
+        "earlierComments": "попередні коментарі",
+        "Subscribed": "Вимкнення сповіщень",
+        "Unsubscribed": "Отримати повідомлення",
+        "dontHavePermissionJoinConversation": "Ви не маєте дозволу приєднатися до цієї розмови.",
+        "startedConversation": "почав розмову",
+        "RealTimeCall": "Дзвінок у режимі реального часу"
     },
     "notifications": {
         "*": "Повідомлення {{& message.fields.type}} до {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "Текст",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Вони сканували його!"
+            "QRscanned": "Вони сканували його!",
+            "chooseAgainFromContacts": "Виберіть &quot;Знову&quot; у списку &quot;Контакти&quot;",
+            "inviteSelectedContacts": "Запросити вибрані контакти"
         },
         "email": {
             "subject": "Ей, перевірте це",
@@ -99,5 +106,16 @@
         "Title": "Назва",
         "Subscribed": "Передплачено",
         "Participants": "Учасники"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Увімкнути мікрофон",
+            "cameraTitle": "Увімкнути камеру",
+            "cameraAndMicrophoneTitle": "Увімкнути камеру та мікрофон",
+            "dialogTitle": "Увімкнення діалогового вікна",
+            "microphoneBtn": "Увімкнути мікрофон",
+            "cameraBtn": "Увімкнути камеру",
+            "cameraAndMicrophoneBtn": "Увімкнути камеру та мікрофон"
+        }
     }
 }

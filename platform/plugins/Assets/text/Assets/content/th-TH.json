@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "คำเชิญได้รับการยอมรับโดย {{1}}",
         "YouHaveCreditsToStart": "คุณมี {{1}} หน่วยกิตที่จะเริ่มต้น"
+    },
+    "history": {
+        "Date": "วันที่",
+        "Amount": "จำนวน",
+        "Description": "ลักษณะ",
+        "Client": "ไคลเอนต์",
+        "To": "ไปยัง",
+        "From": "จาก",
+        "HistoryEmpty": "คุณยังไม่มีข้อมูล"
+    },
+    "subscriptions": {
+        "infoTitle": "ตั้งค่าข้อมูลการชำระเงิน",
+        "confirm": {
+            "title": "เริ่มการสมัครสมาชิก",
+            "message": "คุณต้องการสมัครรับ {{title}} หรือไม่",
+            "ok": "ตกลง",
+            "cancel": "ยกเลิก"
+        }
+    },
+    "payments": {
+        "infoTitle": "ตั้งค่าข้อมูลการชำระเงิน",
+        "confirm": {
+            "title": "ชำระเงิน",
+            "message": "คุณตกลงที่จะจ่าย {{symbol}} {{amount}} หรือไม่",
+            "ok": "ตกลง",
+            "cancel": "ยกเลิก"
+        }
     }
 }

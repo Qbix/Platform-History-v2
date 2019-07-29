@@ -22,7 +22,12 @@
         "closeChatConfirm": "আপনি এই চ্যাট বন্ধ করতে চান আপনি কি নিশ্চিত?",
         "closeChatConfirmYes": "হাঁ",
         "closeChatConfirmNo": "না",
-        "earlierComments": "আগে মন্তব্য"
+        "earlierComments": "আগে মন্তব্য",
+        "Subscribed": "বিজ্ঞপ্তি নিঃশব্দ করুন",
+        "Unsubscribed": "বিজ্ঞপ্তি পেতে",
+        "dontHavePermissionJoinConversation": "আপনার এই কথোপকথনে যোগদানের অনুমতি নেই।",
+        "startedConversation": "একটি কথোপকথন শুরু",
+        "RealTimeCall": "রিয়েল টাইম কল"
     },
     "notifications": {
         "*": "বার্তা {{& message.fields.type}} থেকে {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "মাইক্রোফোন সক্রিয় করুন",
             "cameraTitle": "ক্যামেরা সক্রিয় করুন",
-            "cameraAndMicrophoneTitle": "ক্যামেরা এবং মাইক্রোফোন সক্রিয় করুন"
+            "cameraAndMicrophoneTitle": "ক্যামেরা এবং মাইক্রোফোন সক্রিয় করুন",
+            "dialogTitle": "সংলাপ সক্ষম করা হচ্ছে",
+            "microphoneBtn": "মাইক্রোফোন সক্ষম করুন",
+            "cameraBtn": "ক্যামেরা সক্ষম করুন",
+            "cameraAndMicrophoneBtn": "ক্যামেরা এবং মাইক্রোফোন সক্ষম করুন"
         }
     }
 }

@@ -22,7 +22,12 @@
         "closeChatConfirm": "Adakah anda pasti mahu menutup sembang ini?",
         "closeChatConfirmYes": "Ya",
         "closeChatConfirmNo": "Tidak",
-        "earlierComments": "komen awal"
+        "earlierComments": "komen awal",
+        "Subscribed": "Pemberitahuan Bisu",
+        "Unsubscribed": "Dapatkan notifikasi",
+        "dontHavePermissionJoinConversation": "Anda tidak mempunyai kebenaran untuk menyertai perbualan ini.",
+        "startedConversation": "memulakan perbualan",
+        "RealTimeCall": "Panggilan Masa Nyata"
     },
     "notifications": {
         "*": "Mesej {{& message.fields.type}} kepada {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "Teks",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Mereka mengimbasnya!"
+            "QRscanned": "Mereka mengimbasnya!",
+            "chooseAgainFromContacts": "Pilih Lagi dari Kenalan",
+            "inviteSelectedContacts": "Undang Kenalan Terpilih"
         },
         "email": {
             "subject": "Hei, periksa ini",
@@ -99,5 +106,16 @@
         "Title": "Tajuk",
         "Subscribed": "Dilanggan",
         "Participants": "Peserta"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Dayakan Mikrofon",
+            "cameraTitle": "Dayakan Kamera",
+            "cameraAndMicrophoneTitle": "Dayakan Kamera dan Mikrofon",
+            "dialogTitle": "Dialog Mendayakan",
+            "microphoneBtn": "Dayakan Mikrofon",
+            "cameraBtn": "Dayakan Kamera",
+            "cameraAndMicrophoneBtn": "Dayakan Kamera dan Mikrofon"
+        }
     }
 }

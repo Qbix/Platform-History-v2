@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "邀请被{{1}}接受",
         "YouHaveCreditsToStart": "你有{{1}}学分开始"
+    },
+    "history": {
+        "Date": "日期",
+        "Amount": "量",
+        "Description": "描述",
+        "Client": "客户",
+        "To": "至",
+        "From": "从",
+        "HistoryEmpty": "你还没有数据"
+    },
+    "subscriptions": {
+        "infoTitle": "设置付款信息",
+        "confirm": {
+            "title": "开始订阅",
+            "message": "您要订阅{{title}}吗？",
+            "ok": "好",
+            "cancel": "取消"
+        }
+    },
+    "payments": {
+        "infoTitle": "设置付款信息",
+        "confirm": {
+            "title": "进行付款",
+            "message": "您同意支付{{symbol}} {{amount}}吗？",
+            "ok": "好",
+            "cancel": "取消"
+        }
     }
 }

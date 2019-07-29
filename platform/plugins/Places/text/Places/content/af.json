@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Kies Ligging"
-        }
+        },
+        "set": "Stel my ligging in"
     },
     "areas": {
         "filterPlaceholder": "Enige area binne hierdie plek?",

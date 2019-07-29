@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} tukaj <br> nastavite <br> lokacijo",
         "myCurrentLocation": "Moja trenutna lokacija",
         "enterAddress": "Vnesite naslov",
-        "enterPostcode": "Vnesite poštno številko \/ poštno številko",
+        "enterPostcode": "Vnesite poštno številko / poštno številko",
         "create": {
             "action": "Dodaj lokacijo",
             "title": "Nova lokacija",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Izberite Lokacija"
-        }
+        },
+        "set": "Nastavi mojo lokacijo"
     },
     "areas": {
         "filterPlaceholder": "Kakšno območje na tej lokaciji?",

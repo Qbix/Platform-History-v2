@@ -23,7 +23,8 @@
             "PasteLinkHere": "Ўставіць спасылку тут",
             "BrowseTheWeb": "Агляд",
             "WriteToStartConversation": "Напішыце свае думкі, каб пачаць размову",
-            "StartConversation": "Пачатак размовы"
+            "StartConversation": "Пачатак размовы",
+            "GotoConversation": "Перайсці да размовы"
         }
     }
 }

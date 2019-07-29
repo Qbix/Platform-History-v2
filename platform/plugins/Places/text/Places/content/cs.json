@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Zvolte Umístění"
-        }
+        },
+        "set": "Nastavit moji polohu"
     },
     "areas": {
         "filterPlaceholder": "Jakékoliv místo uvnitř této lokality?",

@@ -19,7 +19,7 @@
     },
     "location": {
         "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update my location",
+        "update": "Update My Location",
         "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
         "myCurrentLocation": "My current location",
         "enterAddress": "Enter an address",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Choose Location"
-        }
+        },
+        "set": "Set My Location"
     },
     "areas": {
         "filterPlaceholder": "Any area inside this location?",

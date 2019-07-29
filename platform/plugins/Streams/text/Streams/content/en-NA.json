@@ -22,7 +22,12 @@
         "closeChatConfirm": "Are you sure you want to close this chat?",
         "closeChatConfirmYes": "Yes",
         "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments"
+        "earlierComments": "earlier comments",
+        "Subscribed": "Mute Notifications",
+        "Unsubscribed": "Get Notifications",
+        "dontHavePermissionJoinConversation": "You don't have permission to join this conversation.",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call"
     },
     "notifications": {
         "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byEmail": "Email",
             "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts"
         },
         "email": {
             "subject": "Hey, check this out",
@@ -99,5 +106,13 @@
         "Title": "Title",
         "Subscribed": "Subscribed",
         "Participants": "Participants"
+    },
+    "webrtc": {
+        "allow": {
+            "dialogTitle": "Enabling Dialog",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        }
     }
 }

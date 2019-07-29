@@ -23,7 +23,8 @@
             "PasteLinkHere": "Gludwch ddolen yma",
             "BrowseTheWeb": "Pori",
             "WriteToStartConversation": "Ysgrifennwch eich meddyliau i gychwyn y sgwrs",
-            "StartConversation": "Sgwrs Dechrau"
+            "StartConversation": "Sgwrs Dechrau",
+            "GotoConversation": "Ewch i&#39;r Sgwrs"
         }
     }
 }

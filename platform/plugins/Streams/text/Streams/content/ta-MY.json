@@ -22,7 +22,12 @@
         "closeChatConfirm": "நிச்சயமாக இந்த அரட்டை மூட விரும்புகிறீர்களா?",
         "closeChatConfirmYes": "ஆம்",
         "closeChatConfirmNo": "இல்லை",
-        "earlierComments": "முந்தைய கருத்துகள்"
+        "earlierComments": "முந்தைய கருத்துகள்",
+        "Subscribed": "அறிவிப்புகளை முடக்கு",
+        "Unsubscribed": "அறிவிப்புகள் பெற",
+        "dontHavePermissionJoinConversation": "இந்த உரையாடலில் சேர உங்களுக்கு அனுமதி இல்லை.",
+        "startedConversation": "உரையாடலைத் தொடங்கினார்",
+        "RealTimeCall": "நிகழ் நேர அழைப்பு"
     },
     "notifications": {
         "*": "{{& stream.fields.title}} க்கு {999}}",
@@ -59,7 +64,9 @@
             "byText": "உரை",
             "byFacebook": "முகநூல்",
             "byTwitter": "ட்விட்டர்",
-            "QRscanned": "அவர்கள் அதை ஸ்கேன்!"
+            "QRscanned": "அவர்கள் அதை ஸ்கேன்!",
+            "chooseAgainFromContacts": "தொடர்புகளிலிருந்து மீண்டும் தேர்வுசெய்க",
+            "inviteSelectedContacts": "தேர்ந்தெடுக்கப்பட்ட தொடர்புகளை அழைக்கவும்"
         },
         "email": {
             "subject": "ஏய், இதை பாருங்கள்",
@@ -99,5 +106,16 @@
         "Title": "தலைப்பு",
         "Subscribed": "குழுசேரப்பட்டது",
         "Participants": "பங்கேற்பாளர்கள்"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "மைக்ரோஃபோனை இயக்கு",
+            "cameraTitle": "கேமராவை இயக்கு",
+            "cameraAndMicrophoneTitle": "கேமரா மற்றும் மைக்ரோஃபோனை இயக்கு",
+            "dialogTitle": "உரையாடலை இயக்குகிறது",
+            "microphoneBtn": "மைக்ரோஃபோனை இயக்கு",
+            "cameraBtn": "கேமராவை இயக்கு",
+            "cameraAndMicrophoneBtn": "கேமரா மற்றும் மைக்ரோஃபோனை இயக்கு"
+        }
     }
 }

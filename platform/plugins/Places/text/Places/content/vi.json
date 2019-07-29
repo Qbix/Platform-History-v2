@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Chọn địa điểm"
-        }
+        },
+        "set": "Đặt vị trí của tôi"
     },
     "areas": {
         "filterPlaceholder": "Bất kỳ khu vực bên trong vị trí này?",

@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "場所を選択"
-        }
+        },
+        "set": "現在地を設定"
     },
     "areas": {
         "filterPlaceholder": "この場所の中のどこか？",

@@ -22,7 +22,12 @@
         "closeChatConfirm": "શું તમે ખરેખર આ ચેટ બંધ કરવા માંગો છો?",
         "closeChatConfirmYes": "હા",
         "closeChatConfirmNo": "ના",
-        "earlierComments": "અગાઉની ટિપ્પણીઓ"
+        "earlierComments": "અગાઉની ટિપ્પણીઓ",
+        "Subscribed": "સૂચનાઓ મ્યૂટ કરો",
+        "Unsubscribed": "સૂચનાઓ મેળવો",
+        "dontHavePermissionJoinConversation": "તમને આ વાતચીતમાં જોડાવાની પરવાનગી નથી.",
+        "startedConversation": "વાતચીત શરૂ કરી",
+        "RealTimeCall": "રીઅલ ટાઇમ ક Callલ"
     },
     "notifications": {
         "*": "સંદેશ {{& message.fields.type}} થી {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "ટેક્સ્ટ",
             "byFacebook": "ફેસબુક",
             "byTwitter": "Twitter",
-            "QRscanned": "તેઓ તેને સ્કેન કરે છે!"
+            "QRscanned": "તેઓ તેને સ્કેન કરે છે!",
+            "chooseAgainFromContacts": "સંપર્કોમાંથી ફરીથી પસંદ કરો",
+            "inviteSelectedContacts": "પસંદ કરેલા સંપર્કોને આમંત્રિત કરો"
         },
         "email": {
             "subject": "અરે, આ તપાસો",
@@ -99,5 +106,16 @@
         "Title": "શીર્ષક",
         "Subscribed": "સબ્સ્ક્રાઇબ કર્યું",
         "Participants": "સહભાગીઓ"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "માઇક્રોફોન સક્ષમ કરો",
+            "cameraTitle": "કૅમેરો સક્ષમ કરો",
+            "cameraAndMicrophoneTitle": "કૅમેરો અને માઇક્રોફોનને સક્ષમ કરો",
+            "dialogTitle": "સંવાદને સક્ષમ કરી રહ્યાં છે",
+            "microphoneBtn": "માઇક્રોફોનને સક્ષમ કરો",
+            "cameraBtn": "ક Cameraમેરો સક્ષમ કરો",
+            "cameraAndMicrophoneBtn": "કેમેરા અને માઇક્રોફોનને સક્ષમ કરો"
+        }
     }
 }

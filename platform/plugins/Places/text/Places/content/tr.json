@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Konum seç"
-        }
+        },
+        "set": "Konumumu Ayarla"
     },
     "areas": {
         "filterPlaceholder": "Bu yerin içinde herhangi bir alan var mı?",

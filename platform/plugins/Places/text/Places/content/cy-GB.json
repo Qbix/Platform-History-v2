@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} yma i <br> gosod eich <br> lleoliad",
         "myCurrentLocation": "Fy lleoliad presennol",
         "enterAddress": "Rhowch gyfeiriad",
-        "enterPostcode": "Rhowch eich cod post \/ zipcode os gwelwch yn dda",
+        "enterPostcode": "Rhowch eich cod post / zipcode os gwelwch yn dda",
         "create": {
             "action": "Ychwanegu Lleoliad",
             "title": "Lleoliad Newydd",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Dewiswch Lleoliad"
-        }
+        },
+        "set": "Gosod Fy Lleoliad"
     },
     "areas": {
         "filterPlaceholder": "Unrhyw ardal y tu mewn i&#39;r lleoliad hwn?",

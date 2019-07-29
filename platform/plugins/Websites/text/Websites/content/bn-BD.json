@@ -23,7 +23,8 @@
             "PasteLinkHere": "এখানে একটি লিঙ্ক পেস্ট করুন",
             "BrowseTheWeb": "ব্রাউজ করুন",
             "WriteToStartConversation": "কথোপকথন শুরু আপনার চিন্তা লিখুন",
-            "StartConversation": "কথোপকথন শুরু করুন"
+            "StartConversation": "কথোপকথন শুরু করুন",
+            "GotoConversation": "কথোপকথনে যান"
         }
     }
 }

@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "ಆಹ್ವಾನಿಸಿ {{1}}",
         "YouHaveCreditsToStart": "ಪ್ರಾರಂಭಿಸಲು ನೀವು {{1}} ಸಾಲಗಳನ್ನು ಹೊಂದಿದ್ದೀರಿ"
+    },
+    "history": {
+        "Date": "ದಿನಾಂಕ",
+        "Amount": "ಮೊತ್ತ",
+        "Description": "ವಿವರಣೆ",
+        "Client": "ಗ್ರಾಹಕ",
+        "To": "ಗೆ",
+        "From": "ನಿಂದ",
+        "HistoryEmpty": "ನಿಮ್ಮ ಬಳಿ ಇನ್ನೂ ಡೇಟಾ ಇಲ್ಲ"
+    },
+    "subscriptions": {
+        "infoTitle": "ಪಾವತಿ ಮಾಹಿತಿಯನ್ನು ಹೊಂದಿಸಿ",
+        "confirm": {
+            "title": "ಚಂದಾದಾರಿಕೆಯನ್ನು ಪ್ರಾರಂಭಿಸಿ",
+            "message": "ನೀವು {{999} to ಗೆ ಚಂದಾದಾರರಾಗಲು ಬಯಸುವಿರಾ?",
+            "ok": "ಸರಿ",
+            "cancel": "ರದ್ದುಮಾಡಿ"
+        }
+    },
+    "payments": {
+        "infoTitle": "ಪಾವತಿ ಮಾಹಿತಿಯನ್ನು ಹೊಂದಿಸಿ",
+        "confirm": {
+            "title": "ಪಾವತಿ ಮಾಡಿ",
+            "message": "{{symbol}} {{1000} pay ಪಾವತಿಸಲು ನೀವು ಒಪ್ಪುತ್ತೀರಾ?",
+            "ok": "ಸರಿ",
+            "cancel": "ರದ್ದುಮಾಡಿ"
+        }
     }
 }

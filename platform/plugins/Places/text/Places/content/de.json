@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Ort wählen"
-        }
+        },
+        "set": "Meinen Standort festlegen"
     },
     "areas": {
         "filterPlaceholder": "Irgendein Gebiet innerhalb dieses Ortes?",

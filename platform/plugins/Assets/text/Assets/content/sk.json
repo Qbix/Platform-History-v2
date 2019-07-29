@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Pozvánka prijatá {{1}}",
         "YouHaveCreditsToStart": "Začali ste {{1}} kredity"
+    },
+    "history": {
+        "Date": "dátum",
+        "Amount": "čiastka",
+        "Description": "popis",
+        "Client": "Zákazník",
+        "To": "na",
+        "From": "z",
+        "HistoryEmpty": "Zatiaľ nemáte žiadne údaje"
+    },
+    "subscriptions": {
+        "infoTitle": "Nastavte informácie o platbe",
+        "confirm": {
+            "title": "Spustite odber",
+            "message": "Chcete sa prihlásiť na odber {{title}}?",
+            "ok": "OK",
+            "cancel": "Zrušiť"
+        }
+    },
+    "payments": {
+        "infoTitle": "Nastavte informácie o platbe",
+        "confirm": {
+            "title": "Vykonať platbu",
+            "message": "Súhlasíte s tým, že zaplatíte {{symbol}} {{amount}}?",
+            "ok": "OK",
+            "cancel": "Zrušiť"
+        }
     }
 }

@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Invitér akseptert av {{1}}",
         "YouHaveCreditsToStart": "Du har {{1}} studiepoeng for å starte"
+    },
+    "history": {
+        "Date": "Dato",
+        "Amount": "Beløp",
+        "Description": "Beskrivelse",
+        "Client": "Klient",
+        "To": "til",
+        "From": "fra",
+        "HistoryEmpty": "Du har ingen data ennå"
+    },
+    "subscriptions": {
+        "infoTitle": "Angi betalingsinformasjon",
+        "confirm": {
+            "title": "Start abonnement",
+            "message": "Vil du abonnere på {{title}}?",
+            "ok": "OK",
+            "cancel": "Avbryt"
+        }
+    },
+    "payments": {
+        "infoTitle": "Angi betalingsinformasjon",
+        "confirm": {
+            "title": "Gjennomføre en betaling",
+            "message": "Er du enig i å betale {{symbol}} {{amount}}?",
+            "ok": "OK",
+            "cancel": "Avbryt"
+        }
     }
 }

@@ -22,7 +22,12 @@
         "closeChatConfirm": "Είστε βέβαιοι ότι θέλετε να κλείσετε αυτήν τη συνομιλία;",
         "closeChatConfirmYes": "Ναί",
         "closeChatConfirmNo": "Οχι",
-        "earlierComments": "προηγούμενες παρατηρήσεις"
+        "earlierComments": "προηγούμενες παρατηρήσεις",
+        "Subscribed": "Σίγαση ειδοποιήσεων",
+        "Unsubscribed": "Λαμβάνετε ειδοποιήσεις",
+        "dontHavePermissionJoinConversation": "Δεν έχετε δικαίωμα να συμμετάσχετε σε αυτήν τη συζήτηση.",
+        "startedConversation": "ξεκίνησε μια συνομιλία",
+        "RealTimeCall": "Κλήση σε πραγματικό χρόνο"
     },
     "notifications": {
         "*": "Μήνυμα {{& message.fields.type}} έως {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "Ενεργοποίηση μικροφώνου",
             "cameraTitle": "Ενεργοποιήστε τη φωτογραφική μηχανή",
-            "cameraAndMicrophoneTitle": "Ενεργοποιήστε τη φωτογραφική μηχανή και το μικρόφωνο"
+            "cameraAndMicrophoneTitle": "Ενεργοποιήστε τη φωτογραφική μηχανή και το μικρόφωνο",
+            "dialogTitle": "Ενεργοποίηση διαλόγου",
+            "microphoneBtn": "Ενεργοποίηση μικροφώνου",
+            "cameraBtn": "Ενεργοποιήστε τη φωτογραφική μηχανή",
+            "cameraAndMicrophoneBtn": "Ενεργοποιήστε τη φωτογραφική μηχανή και το μικρόφωνο"
         }
     }
 }

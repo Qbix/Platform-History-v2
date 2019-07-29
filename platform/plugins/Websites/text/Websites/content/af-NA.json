@@ -23,7 +23,8 @@
             "PasteLinkHere": "Plak &#39;n skakel hier",
             "BrowseTheWeb": "Snuffel",
             "WriteToStartConversation": "Skryf jou gedagtes om die gesprek te begin",
-            "StartConversation": "Begin gesprek"
+            "StartConversation": "Begin gesprek",
+            "GotoConversation": "Gaan na Gesprek"
         }
     }
 }

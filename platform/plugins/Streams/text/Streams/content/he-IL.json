@@ -22,7 +22,12 @@
         "closeChatConfirm": "האם אתה בטוח שברצונך לסגור את הצ&#39;אט הזה?",
         "closeChatConfirmYes": "כן",
         "closeChatConfirmNo": "לא",
-        "earlierComments": "הערות מוקדמות יותר"
+        "earlierComments": "הערות מוקדמות יותר",
+        "Subscribed": "השתק התראות",
+        "Unsubscribed": "לקבל התראות",
+        "dontHavePermissionJoinConversation": "אין לך הרשאה להצטרף לשיחה זו.",
+        "startedConversation": "פתח שיחה",
+        "RealTimeCall": "שיחה בזמן אמת"
     },
     "notifications": {
         "*": "הודעה {{& message.fields.type}} ל {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "טקסט",
             "byFacebook": "פייסבוק",
             "byTwitter": "טוויטר",
-            "QRscanned": "הם סרקו את זה!"
+            "QRscanned": "הם סרקו את זה!",
+            "chooseAgainFromContacts": "בחר שוב מאנשי קשר",
+            "inviteSelectedContacts": "הזמן אנשי קשר שנבחרו"
         },
         "email": {
             "subject": "ללא שם: היי, לבדוק את זה",
@@ -99,5 +106,13 @@
         "Title": "כותרת",
         "Subscribed": "מנוי",
         "Participants": "משתתפים"
+    },
+    "webrtc": {
+        "allow": {
+            "dialogTitle": "הפעלת דיאלוג",
+            "microphoneBtn": "אפשר מיקרופון",
+            "cameraBtn": "אפשר מצלמה",
+            "cameraAndMicrophoneBtn": "אפשר מצלמה ומיקרופון"
+        }
     }
 }

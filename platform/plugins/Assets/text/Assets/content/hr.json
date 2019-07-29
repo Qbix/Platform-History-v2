@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Poziv je prihvatio {{1}}",
         "YouHaveCreditsToStart": "Imate {{1}} kredita za početak"
+    },
+    "history": {
+        "Date": "Datum",
+        "Amount": "Iznos",
+        "Description": "Opis",
+        "Client": "Klijent",
+        "To": "do",
+        "From": "iz",
+        "HistoryEmpty": "Još nemate podataka"
+    },
+    "subscriptions": {
+        "infoTitle": "Postavite podatke o plaćanju",
+        "confirm": {
+            "title": "Pokrenite pretplatu",
+            "message": "Želite li se pretplatiti na {{title}}?",
+            "ok": "u redu",
+            "cancel": "Otkazati"
+        }
+    },
+    "payments": {
+        "infoTitle": "Postavite podatke o plaćanju",
+        "confirm": {
+            "title": "Platiti",
+            "message": "Slažete li se s plaćanjem {{symbol}} {{amount}}?",
+            "ok": "u redu",
+            "cancel": "Otkazati"
+        }
     }
 }

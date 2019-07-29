@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} hemen <br> ezarri zure <br> kokapena",
         "myCurrentLocation": "Nire uneko kokapena",
         "enterAddress": "Idatzi helbide bat",
-        "enterPostcode": "Mesedez, sartu zure posta kodea \/ kodea",
+        "enterPostcode": "Mesedez, sartu zure posta kodea / kodea",
         "create": {
             "action": "Gehitu kokapena",
             "title": "Kokaleku berria",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Aukeratu Kokapena"
-        }
+        },
+        "set": "Ezarri Nire kokapena"
     },
     "areas": {
         "filterPlaceholder": "Kokapen honen barneko eremua?",

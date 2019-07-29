@@ -22,7 +22,12 @@
         "closeChatConfirm": "Bu sohbeti kapatmak istediğinizden emin misiniz?",
         "closeChatConfirmYes": "Evet",
         "closeChatConfirmNo": "Yok hayır",
-        "earlierComments": "önceki yorumlar"
+        "earlierComments": "önceki yorumlar",
+        "Subscribed": "Bildirimleri Kapat",
+        "Unsubscribed": "Bildirim almak",
+        "dontHavePermissionJoinConversation": "Bu sohbete katılma izniniz yok.",
+        "startedConversation": "bir konuşma başlattı",
+        "RealTimeCall": "Gerçek Zamanlı Çağrı"
     },
     "notifications": {
         "*": "{{& message.fields.type}} mesajına {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "Mikrofonu Etkinleştir",
             "cameraTitle": "Kamerayı Etkinleştir",
-            "cameraAndMicrophoneTitle": "Kamera ve Mikrofonu Etkinleştir"
+            "cameraAndMicrophoneTitle": "Kamera ve Mikrofonu Etkinleştir",
+            "dialogTitle": "İletişim Kutusunu Etkinleştirme",
+            "microphoneBtn": "Mikrofonu Etkinleştir",
+            "cameraBtn": "Kamerayı Etkinleştir",
+            "cameraAndMicrophoneBtn": "Kamera ve Mikrofonu Etkinleştir"
         }
     }
 }

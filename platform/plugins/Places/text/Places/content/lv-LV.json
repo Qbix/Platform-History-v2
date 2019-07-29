@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} šeit <br> iestatiet savu <br> atrašanās vieta",
         "myCurrentLocation": "Mana pašreizējā atrašanās vieta",
         "enterAddress": "Ievadiet adresi",
-        "enterPostcode": "Lūdzu, ievadiet savu pasta indeksu \/ pasta indeksu",
+        "enterPostcode": "Lūdzu, ievadiet savu pasta indeksu / pasta indeksu",
         "create": {
             "action": "Pievienot atrašanās vietu",
             "title": "Jauna atrašanās vieta",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Izvēlieties atrašanās vietu"
-        }
+        },
+        "set": "Iestatīt manu atrašanās vietu"
     },
     "areas": {
         "filterPlaceholder": "Jebkura vieta šajā atrašanās vietā?",

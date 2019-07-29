@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Yer seç"
-        }
+        },
+        "set": "Məkanımı təyin edin"
     },
     "areas": {
         "filterPlaceholder": "Bu yerdəki hər hansı bir sahə?",

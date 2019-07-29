@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "{{1}} tərəfindən qəbul edilən dəvət",
         "YouHaveCreditsToStart": "Başlamaq üçün {{1}} kreditiniz var"
+    },
+    "history": {
+        "Date": "Tarix",
+        "Amount": "Miqdarı",
+        "Description": "Təsvir",
+        "Client": "Müştəri",
+        "To": "üçün",
+        "From": "dən",
+        "HistoryEmpty": "Hələ məlumatınız yoxdur"
+    },
+    "subscriptions": {
+        "infoTitle": "Ödəniş məlumatlarını təyin edin",
+        "confirm": {
+            "title": "Abunəliyə başlayın",
+            "message": "{{title}} səhifəsinə abunə olmaq istərdinizmi?",
+            "ok": "tamam",
+            "cancel": "Ləğv et"
+        }
+    },
+    "payments": {
+        "infoTitle": "Ödəniş məlumatlarını təyin edin",
+        "confirm": {
+            "title": "Ödəniş edin",
+            "message": "{{symbol}} {{amount}} ödəməyə razısınız?",
+            "ok": "tamam",
+            "cancel": "Ləğv et"
+        }
     }
 }

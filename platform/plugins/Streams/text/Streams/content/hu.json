@@ -22,7 +22,12 @@
         "closeChatConfirm": "Biztosan bezárja ezt a csevegést?",
         "closeChatConfirmYes": "Igen",
         "closeChatConfirmNo": "Nem",
-        "earlierComments": "korábbi megjegyzések"
+        "earlierComments": "korábbi megjegyzések",
+        "Subscribed": "Értesítések némítása",
+        "Unsubscribed": "Értesítéseket kapni",
+        "dontHavePermissionJoinConversation": "Nincs engedélye a beszélgetéshez.",
+        "startedConversation": "beszélgetést kezdett",
+        "RealTimeCall": "Valós idejű hívás"
     },
     "notifications": {
         "*": "Üzenet {{& message.fields.type}} {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "Mikrofon engedélyezése",
             "cameraTitle": "Kamera engedélyezése",
-            "cameraAndMicrophoneTitle": "Kamera és mikrofon engedélyezése"
+            "cameraAndMicrophoneTitle": "Kamera és mikrofon engedélyezése",
+            "dialogTitle": "A párbeszédablak engedélyezése",
+            "microphoneBtn": "Mikrofon engedélyezése",
+            "cameraBtn": "Kamera engedélyezése",
+            "cameraAndMicrophoneBtn": "Kamera és mikrofon engedélyezése"
         }
     }
 }

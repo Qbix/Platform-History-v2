@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Kies locatie"
-        }
+        },
+        "set": "Stel mijn locatie in"
     },
     "areas": {
         "filterPlaceholder": "Elk gebied binnen deze locatie?",

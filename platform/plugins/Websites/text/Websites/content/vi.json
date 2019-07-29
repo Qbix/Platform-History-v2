@@ -23,7 +23,8 @@
             "PasteLinkHere": "Dán một liên kết ở đây",
             "BrowseTheWeb": "Duyệt",
             "WriteToStartConversation": "Viết suy nghĩ của bạn để bắt đầu cuộc trò chuyện",
-            "StartConversation": "Bắt đầu hội thoại"
+            "StartConversation": "Bắt đầu hội thoại",
+            "GotoConversation": "Đi tới hội thoại"
         }
     }
 }

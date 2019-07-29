@@ -20,14 +20,14 @@
         "closeChatButton": "Close chat",
         "closeChatConfirmTitle": "Close this chat?",
         "closeChatConfirm": "Are you sure you want to close this chat?",
-		"Subscribed": "Mute Notifications",
-		"Unsubscribed": "Get Notifications",
+        "Subscribed": "Mute Notifications",
+        "Unsubscribed": "Get Notifications",
         "closeChatConfirmYes": "Yes",
         "closeChatConfirmNo": "No",
         "earlierComments": "earlier comments",
-		"dontHavePermissionJoinConversation": "You don't have permission to join this conversation.",
-		"startedConversation": "started a conversation",
-		"RealTimeCall": "Real Time Call"
+        "dontHavePermissionJoinConversation": "You don't have permission to join this conversation.",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call"
     },
     "notifications": {
         "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",

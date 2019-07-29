@@ -22,7 +22,12 @@
         "closeChatConfirm": "채팅을 닫으시겠습니까?",
         "closeChatConfirmYes": "예",
         "closeChatConfirmNo": "아니",
-        "earlierComments": "이전 댓글"
+        "earlierComments": "이전 댓글",
+        "Subscribed": "알림 음소거",
+        "Unsubscribed": "알림을 받다",
+        "dontHavePermissionJoinConversation": "이 대화에 참여할 수있는 권한이 없습니다.",
+        "startedConversation": "대화를 시작했다.",
+        "RealTimeCall": "실시간 통화"
     },
     "notifications": {
         "*": "메시지 {{& message.fields.type}} ~ {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "본문",
             "byFacebook": "페이스 북",
             "byTwitter": "지저귀다",
-            "QRscanned": "그들은 그것을 스캔!"
+            "QRscanned": "그들은 그것을 스캔!",
+            "chooseAgainFromContacts": "연락처에서 다시 선택",
+            "inviteSelectedContacts": "선택한 연락처 초대"
         },
         "email": {
             "subject": "헤이, 이것 좀 봐.",
@@ -99,5 +106,16 @@
         "Title": "표제",
         "Subscribed": "구독 됨",
         "Participants": "참가자"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "마이크 사용",
+            "cameraTitle": "카메라 사용",
+            "cameraAndMicrophoneTitle": "카메라 및 마이크 사용",
+            "dialogTitle": "대화 상자 사용",
+            "microphoneBtn": "마이크 사용",
+            "cameraBtn": "카메라 사용",
+            "cameraAndMicrophoneBtn": "카메라 및 마이크 사용"
+        }
     }
 }

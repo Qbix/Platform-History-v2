@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Válassza a Helyet"
-        }
+        },
+        "set": "Állítsa be a Saját pozíciót"
     },
     "areas": {
         "filterPlaceholder": "Bármely terület ezen a helyen?",

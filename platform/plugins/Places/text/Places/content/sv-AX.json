@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} här till <br> ställa in din <br> plats",
         "myCurrentLocation": "Min nuvarande plats",
         "enterAddress": "Ange en adress",
-        "enterPostcode": "Vänligen ange ditt postnummer \/ postnummer",
+        "enterPostcode": "Vänligen ange ditt postnummer / postnummer",
         "create": {
             "action": "Lägg till plats",
             "title": "Ny plats",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Välj Plats"
-        }
+        },
+        "set": "Ställ in min plats"
     },
     "areas": {
         "filterPlaceholder": "Alla områden inom denna plats?",

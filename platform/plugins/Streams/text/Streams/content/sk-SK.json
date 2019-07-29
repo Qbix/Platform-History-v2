@@ -22,7 +22,12 @@
         "closeChatConfirm": "Naozaj chcete ukončiť tento rozhovor?",
         "closeChatConfirmYes": "Áno",
         "closeChatConfirmNo": "žiadny",
-        "earlierComments": "predchádzajúce pripomienky"
+        "earlierComments": "predchádzajúce pripomienky",
+        "Subscribed": "Ignorovať upozornenia",
+        "Unsubscribed": "Dostať upozornenia",
+        "dontHavePermissionJoinConversation": "Nemáte povolenie na pripojenie sa k tejto konverzácii.",
+        "startedConversation": "začal konverzáciu",
+        "RealTimeCall": "Hovor v reálnom čase"
     },
     "notifications": {
         "*": "Správa {{& message.fields.type}} až {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "text",
             "byFacebook": "Facebook",
             "byTwitter": "cvrlikání",
-            "QRscanned": "Skenovali to!"
+            "QRscanned": "Skenovali to!",
+            "chooseAgainFromContacts": "Znova zvoľte možnosť Kontakty",
+            "inviteSelectedContacts": "Pozvať vybraných kontaktov"
         },
         "email": {
             "subject": "Hej, pozrite sa na to",
@@ -99,5 +106,16 @@
         "Title": "nadpis",
         "Subscribed": "upísaný",
         "Participants": "účastníci"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Povoliť mikrofón",
+            "cameraTitle": "Povoliť kameru",
+            "cameraAndMicrophoneTitle": "Povoliť kameru a mikrofón",
+            "dialogTitle": "Povolenie dialógu",
+            "microphoneBtn": "Povoliť mikrofón",
+            "cameraBtn": "Povoliť kameru",
+            "cameraAndMicrophoneBtn": "Povoliť fotoaparát a mikrofón"
+        }
     }
 }

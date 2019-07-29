@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} hér til <br> stilltu þinn <br> staðsetning",
         "myCurrentLocation": "Núverandi staðsetning mín",
         "enterAddress": "Sláðu inn heimilisfang",
-        "enterPostcode": "Vinsamlegast sláðu inn póstnúmer \/ póstnúmer",
+        "enterPostcode": "Vinsamlegast sláðu inn póstnúmer / póstnúmer",
         "create": {
             "action": "Bæta við staðsetningu",
             "title": "Nýtt Staðsetning",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Veldu staðsetningu"
-        }
+        },
+        "set": "Stilltu staðsetningu mína"
     },
     "areas": {
         "filterPlaceholder": "Einhver svæði innan þessa staðsetningar?",

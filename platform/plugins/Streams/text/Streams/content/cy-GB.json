@@ -22,7 +22,12 @@
         "closeChatConfirm": "Ydych chi&#39;n siŵr eich bod am gau&#39;r sgwrs hon?",
         "closeChatConfirmYes": "Ydw",
         "closeChatConfirmNo": "Na",
-        "earlierComments": "sylwadau cynharach"
+        "earlierComments": "sylwadau cynharach",
+        "Subscribed": "Hysbysiadau Munud",
+        "Unsubscribed": "Cael Hysbysiadau",
+        "dontHavePermissionJoinConversation": "Nid oes gennych ganiatâd i ymuno â&#39;r sgwrs hon.",
+        "startedConversation": "cychwyn sgwrs",
+        "RealTimeCall": "Galwad Amser Real"
     },
     "notifications": {
         "*": "Neges {{& message.fields.type}} i {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "Testun",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Roedden nhw&#39;n ei sganio!"
+            "QRscanned": "Roedden nhw&#39;n ei sganio!",
+            "chooseAgainFromContacts": "Dewiswch eto o gysylltiadau",
+            "inviteSelectedContacts": "Gwahodd Cysylltiadau Dethol"
         },
         "email": {
             "subject": "Hey, gwiriwch hyn",
@@ -99,5 +106,16 @@
         "Title": "Teitl",
         "Subscribed": "Tanysgrifio",
         "Participants": "Cyfranogwyr"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Galluogi Meicroffon",
+            "cameraTitle": "Galluogi Camera",
+            "cameraAndMicrophoneTitle": "Galluogi Camera a Meicroffon",
+            "dialogTitle": "Deialog Galluogi",
+            "microphoneBtn": "Galluogi Meicroffon",
+            "cameraBtn": "Galluogi Camera",
+            "cameraAndMicrophoneBtn": "Galluogi Camera a Meicroffon"
+        }
     }
 }

@@ -23,7 +23,8 @@
             "PasteLinkHere": "Linki buraya yapıştırın",
             "BrowseTheWeb": "Araştır",
             "WriteToStartConversation": "Sohbeti başlatmak için düşüncelerinizi yazın",
-            "StartConversation": "Sohbeti Başlat"
+            "StartConversation": "Sohbeti Başlat",
+            "GotoConversation": "Konuşmaya Git"
         }
     }
 }

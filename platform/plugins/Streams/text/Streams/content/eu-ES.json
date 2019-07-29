@@ -22,7 +22,12 @@
         "closeChatConfirm": "Ziur zaude txata hau itxi nahi duzula?",
         "closeChatConfirmYes": "Bai",
         "closeChatConfirmNo": "Ez",
-        "earlierComments": "lehenago egindako iruzkinak"
+        "earlierComments": "lehenago egindako iruzkinak",
+        "Subscribed": "Mutu jakinarazpenak",
+        "Unsubscribed": "Lortu jakinarazpenak",
+        "dontHavePermissionJoinConversation": "Ez duzu elkarrizketetan sartzeko baimenik.",
+        "startedConversation": "elkarrizketa bat hasi zuen",
+        "RealTimeCall": "Denbora errealeko deia"
     },
     "notifications": {
         "*": "{{& message.fields.type}} mezua {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "Testua",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Eskaneatu zuten!"
+            "QRscanned": "Eskaneatu zuten!",
+            "chooseAgainFromContacts": "Aukeratu berriro Kontaktuak",
+            "inviteSelectedContacts": "Hautatutako kontaktuak gonbidatu"
         },
         "email": {
             "subject": "Hey, begiratu hau",
@@ -99,5 +106,16 @@
         "Title": "Izenburua",
         "Subscribed": "harpidetutako",
         "Participants": "Parte-hartzaileak"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Gaitu mikrofonoa",
+            "cameraTitle": "Gaitu kamera",
+            "cameraAndMicrophoneTitle": "Gaitu kamera eta mikrofonoa",
+            "dialogTitle": "Elkarrizketa gaitu",
+            "microphoneBtn": "Gaitu mikrofonoa",
+            "cameraBtn": "Gaitu kamera",
+            "cameraAndMicrophoneBtn": "Gaitu Kamera eta Mikrofonoa"
+        }
     }
 }

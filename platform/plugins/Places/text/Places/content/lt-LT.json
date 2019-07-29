@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} čia <br> nustatykite savo <br> vieta",
         "myCurrentLocation": "Mano dabartinė vieta",
         "enterAddress": "Įveskite adresą",
-        "enterPostcode": "Įveskite savo pašto kodą \/ pašto kodą",
+        "enterPostcode": "Įveskite savo pašto kodą / pašto kodą",
         "create": {
             "action": "Pridėti vietą",
             "title": "Nauja vieta",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Pasirinkite vietą"
-        }
+        },
+        "set": "Nustatyti mano vietą"
     },
     "areas": {
         "filterPlaceholder": "Bet kokia vietovė šioje vietovėje?",

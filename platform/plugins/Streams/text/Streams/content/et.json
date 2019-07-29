@@ -22,7 +22,12 @@
         "closeChatConfirm": "Kas soovite kindlasti selle vestluse sulgeda?",
         "closeChatConfirmYes": "Jah",
         "closeChatConfirmNo": "Ei",
-        "earlierComments": "varasemad märkused"
+        "earlierComments": "varasemad märkused",
+        "Subscribed": "Mute teated",
+        "Unsubscribed": "Hankige teateid",
+        "dontHavePermissionJoinConversation": "Teil pole sellel vestlusel luba.",
+        "startedConversation": "alustas vestlust",
+        "RealTimeCall": "Real Time Call"
     },
     "notifications": {
         "*": "Sõnum {{& message.fields.type}} {{& stream.fields.title}}",
@@ -106,7 +111,11 @@
         "allow": {
             "microphoneTitle": "Luba mikrofon",
             "cameraTitle": "Luba kaamera",
-            "cameraAndMicrophoneTitle": "Luba kaamera ja mikrofon"
+            "cameraAndMicrophoneTitle": "Luba kaamera ja mikrofon",
+            "dialogTitle": "Dialoogi lubamine",
+            "microphoneBtn": "Luba mikrofon",
+            "cameraBtn": "Luba kaamera",
+            "cameraAndMicrophoneBtn": "Luba kaamera ja mikrofon"
         }
     }
 }

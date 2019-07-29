@@ -5,8 +5,8 @@
     },
     "activate": {
         "SetAsPrimary": "Tetapkan {{1}} sebagai utama saya {{2}}",
-        "ChoosePassPhrase": "Pilih <strong>frasa sandi<\/strong> untuk login. <br> Frasa sederhana yang terdiri dari beberapa kata yang mudah Anda ingat.",
-        "ChoosePassPhraseSeeSuggestions": "Pilih <strong>frasa sandi yang baik<\/strong> untuk melindungi akun Anda. Lihat saran untuk beberapa ide.",
+        "ChoosePassPhrase": "Pilih <strong>frasa sandi</strong> untuk login. <br> Frasa sederhana yang terdiri dari beberapa kata yang mudah Anda ingat.",
+        "ChoosePassPhraseSeeSuggestions": "Pilih <strong>frasa sandi yang baik</strong> untuk melindungi akun Anda. Lihat saran untuk beberapa ide.",
         "LogOutAndTryAgain": "Logout dan Coba Lagi",
         "IfYouFeel": "Jika Anda merasa ada yang salah, Anda bisa",
         "SetIdentifierButtonTitle": "mulai lagi dari awal"
@@ -37,5 +37,13 @@
         "selectLabel": "Silakan pilih label.",
         "inviteUser": "Undang Pengguna"
     },
-    "invalidLanguageSelected": "Bahasa yang dipilih tidak valid"
+    "invalidLanguageSelected": "Bahasa yang dipilih tidak valid",
+    "contacts": {
+        "dialog": {
+            "title": "Pilih kontak"
+        },
+        "select": {
+            "title": "Pilih kontak dari {{displayName}}"
+        }
+    }
 }

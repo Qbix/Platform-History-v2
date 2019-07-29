@@ -23,7 +23,8 @@
             "PasteLinkHere": "Vložte odkaz zde",
             "BrowseTheWeb": "Procházet",
             "WriteToStartConversation": "Napište své myšlenky a začněte konverzaci",
-            "StartConversation": "Spusťte konverzaci"
+            "StartConversation": "Spusťte konverzaci",
+            "GotoConversation": "Přejít na konverzaci"
         }
     }
 }

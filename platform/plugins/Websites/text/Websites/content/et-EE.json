@@ -23,7 +23,8 @@
             "PasteLinkHere": "Kleebi link siia",
             "BrowseTheWeb": "Sirvi",
             "WriteToStartConversation": "Kirjutage oma mõtted vestluse alustamiseks",
-            "StartConversation": "Alustage vestlust"
+            "StartConversation": "Alustage vestlust",
+            "GotoConversation": "Avage vestlus"
         }
     }
 }

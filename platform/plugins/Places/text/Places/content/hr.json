@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Odaberite Mjesto"
-        }
+        },
+        "set": "Postavi Moja lokacija"
     },
     "areas": {
         "filterPlaceholder": "Bilo koje područje na ovoj lokaciji?",

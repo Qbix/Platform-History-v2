@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Undangan diterima oleh {{1}}",
         "YouHaveCreditsToStart": "Anda memiliki {{1}} kredit untuk memulai"
+    },
+    "history": {
+        "Date": "Tanggal",
+        "Amount": "Jumlah",
+        "Description": "Deskripsi",
+        "Client": "Klien",
+        "To": "untuk",
+        "From": "dari",
+        "HistoryEmpty": "Anda belum memiliki data"
+    },
+    "subscriptions": {
+        "infoTitle": "Tetapkan Informasi Pembayaran",
+        "confirm": {
+            "title": "Mulai Berlangganan",
+            "message": "Apakah Anda ingin berlangganan {{title}}?",
+            "ok": "baik",
+            "cancel": "Membatalkan"
+        }
+    },
+    "payments": {
+        "infoTitle": "Tetapkan Informasi Pembayaran",
+        "confirm": {
+            "title": "Melakukan pembayaran",
+            "message": "Apakah Anda setuju untuk membayar {{symbol}} {{amount}}?",
+            "ok": "baik",
+            "cancel": "Membatalkan"
+        }
     }
 }

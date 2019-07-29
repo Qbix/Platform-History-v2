@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Scegli la posizione"
-        }
+        },
+        "set": "Imposta la mia posizione"
     },
     "areas": {
         "filterPlaceholder": "Qualsiasi area all&#39;interno di questa posizione?",

@@ -23,7 +23,8 @@
             "PasteLinkHere": "Illessze be a linket ide",
             "BrowseTheWeb": "Böngésszen",
             "WriteToStartConversation": "Írja meg gondolatait, hogy elkezdje a beszélgetést",
-            "StartConversation": "Indítsa el a beszélgetést"
+            "StartConversation": "Indítsa el a beszélgetést",
+            "GotoConversation": "Lépjen a Beszélgetés oldalra"
         }
     }
 }

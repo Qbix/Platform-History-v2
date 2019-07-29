@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} aquí <br> establiu el vostre <br> ubicació",
         "myCurrentLocation": "La meva ubicació actual",
         "enterAddress": "Introduïu una adreça",
-        "enterPostcode": "Introduïu el codi postal \/ codi postal",
+        "enterPostcode": "Introduïu el codi postal / codi postal",
         "create": {
             "action": "Afegeix una ubicació",
             "title": "Nova ubicació",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Trieu la ubicació"
-        }
+        },
+        "set": "Establiu la meva ubicació"
     },
     "areas": {
         "filterPlaceholder": "Hi ha cap àrea dins d’aquesta ubicació?",

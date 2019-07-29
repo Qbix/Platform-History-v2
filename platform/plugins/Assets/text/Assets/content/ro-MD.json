@@ -18,5 +18,32 @@
     "credits": {
         "InviteAcceptedBy": "Invitație acceptată de {{1}}",
         "YouHaveCreditsToStart": "Aveți la dispoziție {{1}} credite pentru a începe"
+    },
+    "history": {
+        "Date": "Data",
+        "Amount": "Cantitate",
+        "Description": "Descriere",
+        "Client": "Client",
+        "To": "la",
+        "From": "din",
+        "HistoryEmpty": "Încă nu aveți date"
+    },
+    "subscriptions": {
+        "infoTitle": "Setați informații de plată",
+        "confirm": {
+            "title": "Începe abonamentul",
+            "message": "Doriți să vă abonați la {{title}}?",
+            "ok": "O.K",
+            "cancel": "Anulare"
+        }
+    },
+    "payments": {
+        "infoTitle": "Setați informații de plată",
+        "confirm": {
+            "title": "Fa o plata",
+            "message": "Sunteți de acord să plătiți {{symbol}} {{amount}}?",
+            "ok": "O.K",
+            "cancel": "Anulare"
+        }
     }
 }

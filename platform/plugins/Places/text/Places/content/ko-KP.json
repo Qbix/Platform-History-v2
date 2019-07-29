@@ -23,7 +23,7 @@
         "prompt": "{{ClickOrTap}} 여기에 <br> 너를 세우다. <br> 위치",
         "myCurrentLocation": "내 현재 위치",
         "enterAddress": "주소 입력",
-        "enterPostcode": "우편 번호 \/ 우편 번호를 입력하십시오.",
+        "enterPostcode": "우편 번호 / 우편 번호를 입력하십시오.",
         "create": {
             "action": "위치 추가",
             "title": "새로운 위치",
@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "위치 선택"
-        }
+        },
+        "set": "내 위치 설정"
     },
     "areas": {
         "filterPlaceholder": "이 위치 안의 어떤 지역?",

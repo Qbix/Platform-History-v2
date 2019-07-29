@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "위치 선택"
-        }
+        },
+        "set": "내 위치 설정"
     },
     "areas": {
         "filterPlaceholder": "이 위치 안의 어떤 지역?",

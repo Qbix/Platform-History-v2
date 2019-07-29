@@ -22,7 +22,12 @@
         "closeChatConfirm": "Sigurado ka bang gusto mong isara ang chat na ito?",
         "closeChatConfirmYes": "Oo",
         "closeChatConfirmNo": "Hindi",
-        "earlierComments": "Mga naunang komento"
+        "earlierComments": "Mga naunang komento",
+        "Subscribed": "Mga Abiso sa I-mute",
+        "Unsubscribed": "Kumuha ng Mga Abiso",
+        "dontHavePermissionJoinConversation": "Wala kang pahintulot na sumali sa pag-uusap na ito.",
+        "startedConversation": "nagsimula ng usapan",
+        "RealTimeCall": "Tunay na Panawagan ng Oras"
     },
     "notifications": {
         "*": "Mensahe {{& message.fields.type}} sa {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "Teksto",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "Ini-scan nila ito!"
+            "QRscanned": "Ini-scan nila ito!",
+            "chooseAgainFromContacts": "Pumili Muli mula sa Mga Contact",
+            "inviteSelectedContacts": "Anyayahan ang Mga Napiling Mga contact"
         },
         "email": {
             "subject": "Uy, tingnan mo ito",
@@ -99,5 +106,13 @@
         "Title": "Pamagat",
         "Subscribed": "Nag-subscribe",
         "Participants": "Mga kalahok"
+    },
+    "webrtc": {
+        "allow": {
+            "dialogTitle": "Paganahin ang Dialog",
+            "microphoneBtn": "Paganahin ang Mikropono",
+            "cameraBtn": "Paganahin ang Camera",
+            "cameraAndMicrophoneBtn": "Paganahin ang Camera at Mikropono"
+        }
     }
 }

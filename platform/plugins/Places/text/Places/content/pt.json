@@ -42,7 +42,8 @@
         },
         "dialog": {
             "title": "Escolha a localização"
-        }
+        },
+        "set": "Definir minha localização"
     },
     "areas": {
         "filterPlaceholder": "Alguma área dentro deste local?",

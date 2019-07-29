@@ -37,5 +37,13 @@
         "selectLabel": "Silakan pilih label.",
         "inviteUser": "Undang Pengguna"
     },
-    "invalidLanguageSelected": "Bahasa yang dipilih tidak valid"
+    "invalidLanguageSelected": "Bahasa yang dipilih tidak valid",
+    "contacts": {
+        "dialog": {
+            "title": "Pilih kontak"
+        },
+        "select": {
+            "title": "Pilih kontak dari {{displayName}}"
+        }
+    }
 }

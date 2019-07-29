@@ -22,7 +22,12 @@
         "closeChatConfirm": "Sigur doriți să închideți acest chat?",
         "closeChatConfirmYes": "da",
         "closeChatConfirmNo": "Nu",
-        "earlierComments": "comentariile anterioare"
+        "earlierComments": "comentariile anterioare",
+        "Subscribed": "Mute Notifications",
+        "Unsubscribed": "Primiți notificări",
+        "dontHavePermissionJoinConversation": "Nu aveți permisiunea de a vă alătura acestei conversații.",
+        "startedConversation": "a început o conversație",
+        "RealTimeCall": "Apel în timp real"
     },
     "notifications": {
         "*": "Mesaj {{& message.fields.type}} până la {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "Text",
             "byFacebook": "Facebook",
             "byTwitter": "Stare de nervozitate",
-            "QRscanned": "Au scanat-o!"
+            "QRscanned": "Au scanat-o!",
+            "chooseAgainFromContacts": "Alegeți din nou din Contacte",
+            "inviteSelectedContacts": "Invitați contactele selectate"
         },
         "email": {
             "subject": "Hei, verifică asta",
@@ -99,5 +106,16 @@
         "Title": "Titlu",
         "Subscribed": "subscrisă",
         "Participants": "Participanți"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Activați microfonul",
+            "cameraTitle": "Activați camera",
+            "cameraAndMicrophoneTitle": "Activați camera și microfonul",
+            "dialogTitle": "Activarea dialogului",
+            "microphoneBtn": "Activați microfonul",
+            "cameraBtn": "Activați Camera",
+            "cameraAndMicrophoneBtn": "Activați aparatul foto și microfonul"
+        }
     }
 }

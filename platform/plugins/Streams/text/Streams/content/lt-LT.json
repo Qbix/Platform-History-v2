@@ -22,7 +22,12 @@
         "closeChatConfirm": "Ar tikrai norite uždaryti šį pokalbį?",
         "closeChatConfirmYes": "Taip",
         "closeChatConfirmNo": "Ne",
-        "earlierComments": "ankstesnes pastabas"
+        "earlierComments": "ankstesnes pastabas",
+        "Subscribed": "Nutildyti pranešimus",
+        "Unsubscribed": "Gauti pranešimus",
+        "dontHavePermissionJoinConversation": "Neturite leidimo prisijungti prie šio pokalbio.",
+        "startedConversation": "pradėjo pokalbį",
+        "RealTimeCall": "Skambinimas realiuoju laiku"
     },
     "notifications": {
         "*": "Pranešimas {{& message.fields.type}} į {{& stream.fields.title}}",
@@ -59,7 +64,9 @@
             "byText": "Tekstas",
             "byFacebook": "Facebook",
             "byTwitter": "„Twitter“",
-            "QRscanned": "Jie nuskaito jį!"
+            "QRscanned": "Jie nuskaito jį!",
+            "chooseAgainFromContacts": "Pasirinkite vėl iš „Contacts“",
+            "inviteSelectedContacts": "Pakviesti pasirinktus kontaktus"
         },
         "email": {
             "subject": "Ei, patikrinkite tai",
@@ -99,5 +106,16 @@
         "Title": "Pavadinimas",
         "Subscribed": "Prenumeruota",
         "Participants": "Dalyviai"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Įjungti mikrofoną",
+            "cameraTitle": "Įgalinti kamerą",
+            "cameraAndMicrophoneTitle": "Įgalinti kamerą ir mikrofoną",
+            "dialogTitle": "Dialogo įgalinimas",
+            "microphoneBtn": "Įjungti mikrofoną",
+            "cameraBtn": "Įgalinti kamerą",
+            "cameraAndMicrophoneBtn": "Įgalinti kamerą ir mikrofoną"
+        }
     }
 }

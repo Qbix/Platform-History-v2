@@ -23,7 +23,8 @@
             "PasteLinkHere": "Вметнете врска тука",
             "BrowseTheWeb": "Прегледај",
             "WriteToStartConversation": "Напишете ги вашите мисли за да започнете разговор",
-            "StartConversation": "Започни разговор"
+            "StartConversation": "Започни разговор",
+            "GotoConversation": "Одете во разговор"
         }
     }
 }

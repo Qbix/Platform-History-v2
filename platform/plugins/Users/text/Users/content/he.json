@@ -37,5 +37,13 @@
         "selectLabel": "בחר תווית.",
         "inviteUser": "הזמנת משתמש"
     },
-    "invalidLanguageSelected": "נבחרה שפה לא חוקית"
+    "invalidLanguageSelected": "נבחרה שפה לא חוקית",
+    "contacts": {
+        "dialog": {
+            "title": "בחר איש קשר"
+        },
+        "select": {
+            "title": "בחר איש קשר של {{displayName}}"
+        }
+    }
 }
