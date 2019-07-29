@@ -1338,18 +1338,13 @@
     left: -425px;
     width:400px;
 }
-.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_top .Streams_webrtc_popup-box.Streams_webrtc_popup-chat-box,
-.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_popup-box.Streams_webrtc_popup-chat-box,
-.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_right .Streams_webrtc_popup-box.Streams_webrtc_popup-chat-box {
-    padding: 10px;
-}
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control .Streams_webrtc_hover .Streams_webrtc_popup-box {
     display: block;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control .Streams_webrtc_hover .Streams_webrtc_popup-box::after{
     content: "";
     position: absolute;
-    top: 99%;
+    top: 100%;
     left: 50%;
     margin-left: -20px;
     border-left: 20px solid transparent;
@@ -1446,13 +1441,19 @@
 /* text chat popup */
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control .Streams_webrtc_popup-chat-box {
     display: none;
-    padding: 10px;
+    padding: 0;
     margin: 0;
     position: absolute;
     box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
     background:white;
     bottom: 150%;
     left: -175px;
+}
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control .Streams_webrtc_popup-chat-box .Streams_chat_tool {
+    max-height: 50vh;
+    overflow: hidden;
+    overflow-y: auto;
+    padding: 10px;
 }
 
 

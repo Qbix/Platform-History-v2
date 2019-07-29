@@ -50,9 +50,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			mediaDevicesDialog: {timeout:2000},
 			startWith: {
 				audio: true,
-				video: true
+				video: false
 			},
 			onWebRTCRoomCreated: new Q.Event(),
+			onWebRTCRoomEnded: new Q.Event(),
 			onWebrtcControlsCreated: new Q.Event()
 		};
 		var _controls = null;
@@ -935,16 +936,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					chatParticipantName.appendChild(screensBtns);
 
 					maximizeBtn.addEventListener('click', function (e) {
+						renderMaximizedScreensGrid(screen);
 						e.preventDefault();
 						e.stopPropagation();
 					});
 
 					minimizeBtn.addEventListener('click', function (e) {
+						renderMinimizedScreensGrid();
 						e.preventDefault();
 						e.stopPropagation();
 					});
 
-					$(minimizeBtn).plugin('Q/clickable', {
+					/*$(minimizeBtn).plugin('Q/clickable', {
 						className: 'Streams_webrtc_minimize-btn',
 						press: {size: 1.2},
 						release: {size: 1.2}
@@ -958,8 +961,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						release: {size: 1.2}
 					}).on(Q.Pointer.fastclick, function () {
 						renderMaximizedScreensGrid(screen);
-
-					});
+					});*/
 				}
 
 
@@ -2320,7 +2322,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 									initWithNodeServer(socketServer, turnCredentials);
 								}
 
-								window.addEventListener('beforeunload', webRTCInstance.stop);
+								//window.addEventListener('beforeunload', webRTCInstance.stop);
 
 							});
 
@@ -2352,7 +2354,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			if(_debug) console.log('disconnect');
 			try {
 				var err = (new Error);
-				if(_debug) console.log(err.stack);
+				console.log(err.stack);
 			} catch (e) {
 
 			}
@@ -2361,10 +2363,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				return Q.handle(callback);
 			}
 
-			_roomStream.leave();
-			WebRTCconference.disconnect();
 
+			WebRTCconference.localParticipant().online = false;
 			console.log('WebRTCconference.roomParticipants()', WebRTCconference.roomParticipants().length);
+
 			if(WebRTCconference.roomParticipants().length === 0) {
 				console.log('stop endRoom');
 
@@ -2390,6 +2392,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 			}
 
+			_roomStream.leave();
+			WebRTCconference.disconnect();
+
 			if(_roomsMedia.parentNode != null) _roomsMedia.parentNode.removeChild(_roomsMedia);
 			if(_controls != null) {
 				var controlsTool = Q.Tool.from(_controls, "Streams/webrtc/controls");
@@ -2400,6 +2405,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			}
 
 			window.removeEventListener('beforeunload', webRTCInstance.stop);
+			Q.handle(_options.onWebRTCRoomEnded, webRTCInstance);
 		}
 
 		var webRTCInstance = {

@@ -1989,8 +1989,8 @@ WebRTCconferenceLib = function app(options){
 				if(_debug) console.log('processDataTrackMessage service mic' + (app.conferenceControl.micIsEnabled()))
 
 				if(data.content.audioNotWork == true && app.conferenceControl.micIsEnabled())	{
-					//app.conferenceControl.disableAudio();
-					//app.conferenceControl.enableAudio();
+					app.conferenceControl.disableAudio();
+					app.conferenceControl.enableAudio();
 				}
 			}
 		}
@@ -3244,6 +3244,23 @@ WebRTCconferenceLib = function app(options){
 						}
 					}
 				}
+			}
+
+			function creteEmptyVideoTrack(width, height) {
+				if(typeof width == 'undefined') width = 640;
+				if(typeof height == 'undefined') height = 480;
+
+				let canvas = Object.assign(document.createElement("canvas"), {width, height});
+				canvas.getContext('2d').fillRect(0, 0, width, height);
+				let stream = canvas.captureStream();
+				return Object.assign(stream.getVideoTracks()[0], {enabled: false});
+			}
+
+			function creteEmptyAudioTrack(width, height) {
+				let ctx = new AudioContext(), oscillator = ctx.createOscillator();
+				let dst = oscillator.connect(ctx.createMediaStreamDestination());
+				oscillator.start();
+				return Object.assign(dst.stream.getAudioTracks()[0], {enabled: false});
 			}
 
 			function publishLocalMedia(RTCPeerConnection) {
