@@ -5782,4 +5782,62 @@ function _refreshUnlessSocket(publisherId, streamName, options) {
 _scheduleUpdate.delay = 5000;
 
 
+// show Q.Notice when somebody opened webrtc in chat where current user participated
+Users.Socket.onEvent('Streams/post').set(function (message) {
+	message = Streams.Message.construct(message);
+	var instructions = message.getAllInstructions();
+	var relationType = Q.getObject("type", instructions);
+	var publisherId = Q.getObject("fromPublisherId", instructions);
+	var streamName = Q.getObject("fromStreamName", instructions);
+	var toStreamName = Q.getObject("streamName", message) || "";
+	var conversationUrl = '/conversation/' + publisherId + '/' + toStreamName.split('/').pop();
+	var toUrl = Q.baseUrl() + conversationUrl + '/webrtc';
+
+	// only relation type Streams/webrtc and not for myself
+	if (relationType !== 'Streams/webrtc' || publisherId === Q.Users.loggedInUserId()) {
+		return;
+	}
+
+	// allowed stream types
+	if ($.inArray(message.streamType, ['Streams/chat', 'Websites/webpage']) < 0) {
+		return;
+	}
+
+	Q.Text.get("Streams/content", function (err, text) {
+		Q.Template.render('Streams/chat/webrtc/available', {
+			avatar: Q.Tool.setUpElementHTML('div', 'Users/avatar', {
+				userId: publisherId,
+				icon: true,
+				short: true
+			}),
+			text: text.chat.startedConversation
+		}, function (err, html) {
+			if (err) {
+				return;
+			}
+
+			Q.Notices.add({
+				content: html,
+				handler: function () {
+					if (window.location.href.includes(conversationUrl)) {
+						var tool = Q.Tool.from($(".Q_tool.Streams_chat_tool[data-streams-chat*='" + toStreamName + "']"), "Streams/chat");
+
+						if (tool) {
+							return tool.startWebRTC();
+						}
+					}
+
+					Q.handle(toUrl);
+				}
+			});
+		});
+	});
+}, "Streams.chat.webrtc");
+Q.Template.set('Streams/chat/webrtc/available',
+	'<div class="Streams_chat_webrtc_available">'+
+	'	{{& avatar}} {{text}}'+
+	'	<div class="Q_close"></div>'+
+	'</div>'
+);
+
 })(Q, jQuery);
