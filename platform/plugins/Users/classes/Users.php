@@ -392,15 +392,15 @@ abstract class Users extends Base_Users
 		}
 		$xid = $externalFrom->xid;
 		$authenticated = true;
+		$platformApp = "$platform\t$appId";
 		if ($retrieved) {
-			$platformApp = "$platform\t$appId";
 			$user_xid = $user->getXid($platformApp);
 			if (!$user_xid) {
 				// this is a logged-in user who was never authenticated with this platform.
 				// First, let's find any other user who has authenticated with the
 				// authenticated xid, and set their $field to 0.
 				$authenticated = 'connected';
-				$ui = Users::identify($platform, $xid);
+				$ui = Users::identify($platformApp, $xid);
 				if ($ui) {
 					$u = new Users_User();
 					$u->id = $ui->userId;
@@ -416,12 +416,10 @@ abstract class Users extends Base_Users
 					// import some fields automatically from the platform
 					$imported = $externalFrom->import($import);
 				}
-				$platformApp = "$platform\t$appId";
 				$user->setXid($platformApp, $xid);
 				$user->save();
 
 				// Save the identifier in the quick lookup table
-				$platformApp = "$platform\t$appId";
 				list($hashed, $ui_type) = self::hashing($xid, $platformApp);
 				$ui = new Users_Identify();
 				$ui->identifier = "$ui_type:$hashed";
@@ -442,7 +440,7 @@ abstract class Users extends Base_Users
 			}
 		}
 		if (!$retrieved) {
-			$ui = Users::identify($platform, $xid, null);
+			$ui = Users::identify($platformApp, $xid, null);
 			if ($ui) {
 				Users::$cache['user'] = $user = new Users_User();
 				$user->id = $ui->userId;
@@ -1238,7 +1236,7 @@ abstract class Users extends Base_Users
 	 * Returns a user in the database that corresponds to the contact info, if any.
 	 * @method userFromContactInfo
 	 * @static
-	 * @param {string} $type can be "email", "mobile",the name of a platform,
+	 * @param {string} $type can be "email", "mobile", "$platform\t$appId",
 	 *  or any of the above with optional "_hashed" suffix to indicate
 	 *  that the value has already been hashed.
 	 * @param {string} $value The value corresponding to the type. If $type is
@@ -1294,7 +1292,7 @@ abstract class Users extends Base_Users
 	 * Returns Users_Identifier rows that correspond to the identifier in the database, if any.
 	 * @method identify
 	 * @static
-	 * @param {string|array} $type can be "email", "mobile", the name of a platform,
+	 * @param {string|array} $type can be "email", "mobile", or "$platform\t$appId",
 	 *  or any of the above with optional "_hashed" suffix to indicate
 	 *  that the value has already been hashed.
 	 *  It could also be an array of ($type => $value) pairs.
@@ -1715,7 +1713,7 @@ abstract class Users extends Base_Users
 	 * @method addLink
 	 * @static
 	 * @param {string} $address Could be email address, mobile number, etc.
-	 * @param {string} [$type=null] can be "email", "mobile",the name of a platform,
+	 * @param {string} [$type=null] can be "email", "mobile", "$platform/t$appId",
 	 *  or any of the above with optional "_hashed" suffix to indicate
 	 *  that the value has already been hashed.
 	 *  If null, the function tries to guess the $type by using Q_Valid functions.

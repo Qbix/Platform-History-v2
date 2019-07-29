@@ -1020,12 +1020,14 @@ class Users_User extends Base_Users_User
 	 * @method idsFromPlatformXids
 	 * @static
 	 * @param {string} $platform The name of the platform
+	 * @param {string} $appId The id of an app on the platform
 	 * @param {array|string} $xids An array of facebook user ids, or a comma-delimited string
 	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
 	 * @return {array} The array of user ids
 	 */
 	static function idsFromPlatformXids (
-		$platform, 
+		$platform,
+		$appId,
 		$xids, 
 		&$statuses = array()
 	) {
@@ -1035,9 +1037,10 @@ class Users_User extends Base_Users_User
 		if (!is_array($xids)) {
 			$xids = array_map('trim', explode(',', $xids));
 		}
+		$platformApp = "$platform\t$appId";
 		$users = array();
 		foreach ($xids as $xid) {
-			$users[] = Users::futureUser($platform, $xid, $status);
+			$users[] = Users::futureUser($platformApp, $xid, $status);
 			$statuses[] = $status;
 		}
 		return array_map(array('Users_User', '_getId'), $users);

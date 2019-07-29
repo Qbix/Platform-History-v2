@@ -68,7 +68,7 @@ class Users_ExternalFrom_Android extends Users_ExternalFrom implements Users_Ext
 		if (!is_array($fieldNames)) {
 			$fieldNames = Q_Config::get('Users', 'import', $platform, null);
 		}
-		if (!$fields) {
+		if (!$fieldNames) {
 			return array();
 		}
 	}

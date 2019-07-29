@@ -92,7 +92,7 @@ class Q_Session
 	 * @static
 	 */
 	static protected $sess_data;
-	
+
 	/**
 	 * @method name
 	 * @static
@@ -114,7 +114,7 @@ class Q_Session
 		}
 		return session_name();
 	}
-	
+
 	/**
 	 * @method id
 	 * @static
@@ -134,7 +134,7 @@ class Q_Session
 		}
 		return session_id();
 	}
-	
+
 	/**
 	 * @method savePath
 	 * @static
@@ -162,7 +162,7 @@ class Q_Session
 		}
 		return $sp;
 	}
-	
+
 	/**
 	 * @method init
 	 * @static
@@ -172,7 +172,7 @@ class Q_Session
 		if (self::$inited) {
 			return false;
 		}
-		
+
 		ini_set("session.entropy_file", "/dev/urandom");
 		ini_set("session.entropy_length", "512");
 		ini_set("session.hash_function", "1");
@@ -193,7 +193,7 @@ class Q_Session
 
 		Q_Session::name($name);
 		session_set_cookie_params($duration, $path, $domain, false, false);
-		
+
 		if (Q_Config::get('Q', 'session', 'appendSuffix', false)
 		or isset($_GET[$name])) {
 			if (self::id()) {
@@ -205,11 +205,11 @@ class Q_Session
 				Q_Uri::suffix($suffix);
 			}
 		}
-		
+
 		self::$inited = true;
 		return true;
 	}
-	
+
 	/**
 	 * Find the session ID from the cookie and load it from the file or database.
 	 * If a session has already started, i.e. if Q_Session::id() returns something,
@@ -240,10 +240,10 @@ class Q_Session
 		}
 		if (Q_Config::get('Q', 'session', 'custom', true)) {
 			session_set_save_handler(
-				array(__CLASS__, 'openHandler'), 
-				array(__CLASS__, 'closeHandler'), 
-				array(__CLASS__, 'readHandler'), 
-				array(__CLASS__, 'writeHandler'), 
+				array(__CLASS__, 'openHandler'),
+				array(__CLASS__, 'closeHandler'),
+				array(__CLASS__, 'readHandler'),
+				array(__CLASS__, 'writeHandler'),
 				array(__CLASS__, 'destroyHandler'),
 				array(__CLASS__, 'gcHandler')
 			);
@@ -374,9 +374,9 @@ class Q_Session
 		Q::event('Q/session/start', array('original', 'changed', 'isNew', 'id'), 'after');
 		return true;
 	}
-	
+
 	/**
-	 * You can call this function to clear out the contents of 
+	 * You can call this function to clear out the contents of
 	 * a session, but keep its ID.
 	 * @method clear
 	 * @static
@@ -386,7 +386,7 @@ class Q_Session
 		session_unset();
 		$_SESSION = array();
 	}
-	
+
 	static function destroy()
 	{
 		session_destroy();
@@ -396,7 +396,7 @@ class Q_Session
 		    Q_Response::clearCookie(self::name());
 		}
 	}
-	
+
 	/**
 	 * You should use this instead of simply calling session_regenerate_id().
 	 * Generates a new session id signed with "Q"/"external"/"secret", and
@@ -420,10 +420,10 @@ class Q_Session
 		// we have to re-set all the handlers, due to a bug in PHP 5.2
 		if (Q_Config::get('Q', 'session', 'custom', true)) {
 			session_set_save_handler(
-				array(__CLASS__, 'openHandler'), 
-				array(__CLASS__, 'closeHandler'), 
-				array(__CLASS__, 'readHandler'), 
-				array(__CLASS__, 'writeHandler'), 
+				array(__CLASS__, 'openHandler'),
+				array(__CLASS__, 'closeHandler'),
+				array(__CLASS__, 'readHandler'),
+				array(__CLASS__, 'writeHandler'),
 				array(__CLASS__, 'destroyHandler'),
 				array(__CLASS__, 'gcHandler')
 			);
@@ -448,7 +448,7 @@ class Q_Session
 	//
 	// Session handling functions
 	//
-	
+
 	/**
 	 * @method openHandler
 	 * @static
@@ -460,15 +460,15 @@ class Q_Session
 	static function openHandler ($save_path, $session_name)
 	{
 		$db_info = self::processDbInfo();
-		
+
 		/**
 		 * @event Q/session/open {before}
 		 * @param {string} save_path
 		 * @param {string} session_name
 		 * @param {Db_Interface} session_db_connection
 		 */
-		Q::event('Q/session/open', 
-			compact('save_path', 'session_name', 'db_info'), 
+		Q::event('Q/session/open',
+			compact('save_path', 'session_name', 'db_info'),
 			'before'
 		);
 
@@ -480,8 +480,8 @@ class Q_Session
 		 * @param {string} session_name
 		 * @param {Db_Interface} session_db_connection
 		 */
-		Q::event('Q/session/open', 
-			compact('save_path', 'session_name', 'session_db_connection'), 
+		Q::event('Q/session/open',
+			compact('save_path', 'session_name', 'session_db_connection'),
 			'after'
 		);
 		return true;
@@ -517,11 +517,11 @@ class Q_Session
 		 * @param {Db_Interface} 'session_db_connection'
 		 * @return {string}
 		 */
-		$result = Q::event('Q/session/read', 
+		$result = Q::event('Q/session/read',
 			array(
 				'save_path' => self::$session_save_path,
 				'session_db_connection' => self::$session_db_connection
-			), 
+			),
 			'before'
 		);
 		if (isset($result)) {
@@ -565,12 +565,12 @@ class Q_Session
 		 * @param {Db_Interface} 'session_db_connection'
 		 * @return {string}
 		 */
-		$result = Q::event('Q/session/read', 
+		$result = Q::event('Q/session/read',
 			array(
 				'save_path' => self::$session_save_path,
 				'session_db_connection' => self::$session_db_connection,
 				'sess_data' => $result
-			), 
+			),
 			'after',
 			false,
 			$result
@@ -601,7 +601,7 @@ class Q_Session
 			if (self::$preventWrite) {
 				return false;
 			}
-			
+
 			$our_SESSION = isset($_SESSION) ? $_SESSION : null;
 			$old_data = self::$sess_data;
 			$changed = ($sess_data !== $old_data);
@@ -616,8 +616,8 @@ class Q_Session
 			 * @return {boolean}
 			 */
 			if (false === Q::event(
-				'Q/session/write', 
-				compact('id', 'sess_data', 'old_data', 'changed'), 
+				'Q/session/write',
+				compact('id', 'sess_data', 'old_data', 'changed'),
 				'before'
 			)) {
 				return false;
@@ -631,7 +631,7 @@ class Q_Session
 				// Make sure it has a primary key!
 				if (count(self::$session_db_row->getPrimaryKey()) != 1) {
 					throw new Q_Exception(
-						"The primary key of " . self::$session_db_row_class 
+						"The primary key of " . self::$session_db_row_class
 						. " has to consist of exactly 1 field!"
 					);
 				}
@@ -758,12 +758,12 @@ class Q_Session
 			 * @return {mixed}
 			 */
 			$result = Q::event(
-				'Q/session/write', 
+				'Q/session/write',
 				compact(
 					'id', 'data_field', 'updated_field', 'duration_field', 'platform_field',
 					'sess_file', 'row',
 					'changed', 'sess_data', 'old_data', 'existing_data', 'merged_data'
-				), 
+				),
 				'after',
 				false,
 				$result
@@ -789,8 +789,8 @@ class Q_Session
 		* @return {false}
 		*/
 		if (false === Q::event(
-			'Q/session/destroy', 
-			compact('id'), 
+			'Q/session/destroy',
+			compact('id'),
 			'before'
 		)) {
 			return false;
@@ -836,7 +836,7 @@ class Q_Session
 			self::gc($max_duration);
 		}
 	}
-	
+
 	/**
 	 * @method gc
 	 * @static
@@ -852,8 +852,8 @@ class Q_Session
 		 * @return {false}
 		 */
 		if (false === Q::event(
-			'Q/session/gc', 
-			compact('id', 'max_duration'), 
+			'Q/session/gc',
+			compact('id', 'max_duration'),
 			'before'
 		)) {
 			return false;
@@ -891,13 +891,13 @@ class Q_Session
 		 * @param {integer} since_time
 		 */
 		Q::event(
-			'Q/session/gc', 
-			compact('id', 'max_duration', 'since_time'), 
+			'Q/session/gc',
+			compact('id', 'max_duration', 'since_time'),
 			'after'
 		);
 		return true;
 	}
-	
+
 	/**
 	 * Gets nonce from the session
 	 * @method getNonce
@@ -909,7 +909,7 @@ class Q_Session
 			? $_SESSION['Q']['nonce']
 			: null;
 	}
-	
+
 	/**
 	 * Sets a nonce in the session ['Q']['nonce'] field and in cookie 'Q_nonce'
 	 * @method setNonce
@@ -937,7 +937,7 @@ class Q_Session
 		}
 		Q_Session::$nonceWasSet = true;
 	}
-	
+
 	/**
 	 * Clears the nonce in the session ['Q']['nonce'] field and in cookie 'Q_nonce'
 	 * @method clearNonce
@@ -950,7 +950,7 @@ class Q_Session
 			Q_Response::clearCookie('Q_nonce');
 		}
 	}
-	
+
 	static function durationName()
 	{
 		$ff = Q_Request::formFactor();
@@ -974,11 +974,11 @@ class Q_Session
 		$field = 'nonce';
 		throw new Q_Exception_FailedValidation(compact('message', 'field'), 'Q.nonce');
 	}
-	
+
 	static function processDbInfo()
 	{
 		static $db_info = null;
-		
+
 		if ($db_info) {
 			return $db_info;
 		}
@@ -988,35 +988,35 @@ class Q_Session
 		if (!$db_info) {
 			return null;
 		}
-		
+
 		$session_db_connection = isset($db_info['connection']) ? $db_info['connection'] : null;
 
 		// use the DB for session
 		$session_db_data_field = isset($db_info['dataField']) ? $db_info['dataField'] : null;
 		if (empty($session_db_data_field)) {
 			throw new Q_Exception_WrongType(array(
-				'field' => 'session_db_data_field', 
+				'field' => 'session_db_data_field',
 				'type' => 'string'
 			));
 		}
 		$session_db_id_field = isset($db_info['idField']) ? $db_info['idField'] : null;
 		if (empty($session_db_id_field)) {
 			throw new Q_Exception_WrongType(array(
-				'field' => 'session_db_id_field', 
+				'field' => 'session_db_id_field',
 				'type' => 'string'
 			));
 		}
 		$session_db_updated_field = isset($db_info['updatedField']) ? $db_info['updatedField'] : null;
 		if (empty($session_db_updated_field)) {
 			throw new Q_Exception_WrongType(array(
-				'field' => 'session_db_updated_field', 
+				'field' => 'session_db_updated_field',
 				'type' => 'string'
 			));
 		}
 		$session_db_duration_field = isset($db_info['durationField']) ? $db_info['durationField'] : null;
 		if (empty($session_db_duration_field)) {
 			throw new Q_Exception_WrongType(array(
-				'field' => 'session_db_duration_field', 
+				'field' => 'session_db_duration_field',
 				'type' => 'string'
 			));
 		}
@@ -1025,7 +1025,7 @@ class Q_Session
 		if (empty($session_db_row_class)
 		or ! class_exists($session_db_row_class)) {
 			throw new Q_Exception_WrongType(array(
-				'field' => 'session_db_row_class', 
+				'field' => 'session_db_row_class',
 				'type' => 'a class name'
 			));
 		}
@@ -1036,7 +1036,7 @@ class Q_Session
 			$ancestors[] = $class;
 		if (! in_array('Db_Row', $ancestors)) {
 			throw new Q_Exception_WrongType(array(
-				'field' => 'session_db_row_class', 
+				'field' => 'session_db_row_class',
 				'type' => 'name of a class that extends Db_Row'
 			));
 		}
@@ -1050,10 +1050,10 @@ class Q_Session
 		self::$session_db_platform_field = $session_db_platform_field;
 		self::$session_db_row_class = $session_db_row_class;
 		self::$session_db = Db::connect(self::$session_db_connection);
-		
+
 		return $db_info;
 	}
-	
+
 	/**
 	 * Get the session Db_Row, if it has been retrieved, otherwise null
 	 * @method row
@@ -1084,8 +1084,8 @@ class Q_Session
 		}
 		$id = base64_encode(pack('H*', $id));
 		return str_replace(
-			array('z', '+', '/', '='), 
-			array('zz', 'za', 'zb', 'zc'), 
+			array('z', '+', '/', '='),
+			array('zz', 'za', 'zb', 'zc'),
 			$id
 		);
 	}
@@ -1135,7 +1135,7 @@ class Q_Session
 			: true;
 		return array($c, $a, $b);
 	}
-	
+
 	/**
 	 * Verifies a session id, that it was correctly signed with "Q"/"external"/"secret"
 	 * so that the web server won't have to deal with session ids we haven't issued.
@@ -1147,7 +1147,7 @@ class Q_Session
 		$results = self::decodeId($id);
 		return $results[0];
 	}
-	
+
 	/**
 	 * Unserialize a session string stored by PHP using the same
 	 * session.serialize_handler as the current one.
@@ -1200,7 +1200,7 @@ class Q_Session
         }
         return $return_data;
     }
-	
+
 	/**
 	 * @property $inited
 	 * @type boolean
@@ -1208,7 +1208,7 @@ class Q_Session
 	 * @protected
 	 */
 	protected static $inited = false;
-	
+
 	/**
 	 * @property $nonceWasSet
 	 * @type boolean
