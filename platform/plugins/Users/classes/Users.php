@@ -345,13 +345,13 @@ abstract class Users extends Base_Users
 			$appId = Q::app();
 		}
 		list($appId, $appInfo) = Users::appInfo($platform, $appId);
-		$appId = $appInfo['appId'];
-		if (!isset($appId)) {
+		if (!isset($appInfo['appId'])) {
 			throw new Q_Exception_WrongType(array(
 				'field' => 'appId', 
 				'type' => "a valid $platform app id"
 			));
 		}
+		$appId = $appInfo['appId'];
 		
 		$authenticated = null;
 		$during = 'authenticate';
