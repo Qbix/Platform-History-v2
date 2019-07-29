@@ -11,12 +11,19 @@ use Twilio\Rest\Client;
 
 class Streams_WebRTC_Twilio extends Streams_WebRTC implements Streams_WebRTC_Interface
 {
-    /**
-     * This class represents WebRTC rooms
-     * @class Streams_WebRTC_Twilio
-     * @constructor
-     */
-    function createOrJoinRoom($publisherId, $roomId) {
+
+	/**
+	 * Creates or joins a room
+	 * @method createOrJoinRoom
+	 * @param {string} $publisherId Id of room's publisher/initiator
+	 * @param {string} $roomId Room id in Qbix (last marp of stream name)
+	 * @return {array} The keys are "stream", "created", "roomId", "socketServer"
+	 * @throws Q_Exception_MissingRow
+	 * @throws Q_Exception_RequiredField
+	 * @throws Users_Exception_NotAuthorized
+	 */
+    function createOrJoinRoom($publisherId, $roomId)
+    {
 
         if (empty($publisherId)) {
             throw new Q_Exception_RequiredField(array('field' => 'publisherId'));
@@ -34,6 +41,7 @@ class Streams_WebRTC_Twilio extends Streams_WebRTC implements Streams_WebRTC_Int
             $roomId = substr($stream->name, strlen('Streams/webrtc/'));
         }
 
+        $created = false;
         try {
             $twilioRoom = $this->getTwilioRoom($roomId, $publisherId);
         } catch (Exception $e) {
@@ -42,7 +50,7 @@ class Streams_WebRTC_Twilio extends Streams_WebRTC implements Streams_WebRTC_Int
             $stream->setAttribute('twilioRoomSid', $twilioRoom->sid);
             $stream->setAttribute('twilioRoomName', $twilioRoom->uniqueName);
             $stream->changed();
-
+            $created = true;
         }
 
         try {
@@ -55,11 +63,12 @@ class Streams_WebRTC_Twilio extends Streams_WebRTC implements Streams_WebRTC_Int
 
         }
 
-        return (object) [
+        return array(
             'stream' => $stream,
+	        'created' => $created,
             'roomId' => $stream->name,
             'accessToken' => $accessToken,
-        ];
+        );
     }
 
     /**

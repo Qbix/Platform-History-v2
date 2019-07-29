@@ -10,16 +10,18 @@
 class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Interface
 {
 	/**
+	 * Creates or joins a room
 	 * @method createOrJoinRoom
 	 * @param {string} $publisherId Id of room's publisher/initiator
 	 * @param {string} $roomId Room id in Qbix (last marp of stream name)
-	 * @return {Object}
+	 * @return {array} The keys are "stream", "created", "roomId", "socketServer"
 	 */
     function createOrJoinRoom($publisherId, $roomId) {
         if (empty($publisherId)) {
             throw new Q_Exception_RequiredField(array('field' => 'publisherId'));
         }
 
+        $created = false;
         if (!empty($roomId)) {
             $streamName = "Streams/webrtc/$roomId";
             $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
@@ -27,10 +29,12 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
                 $stream = Streams::create($publisherId, $publisherId, 'Streams/webrtc', array(
                     'name' => $streamName
                 ));
+                $created = true;
             }
         } else {
             $stream = Streams::create($publisherId, $publisherId, 'Streams/webrtc');
             $roomId = substr($stream->name, strlen('Streams/webrtc/'));
+            $created = true;
         }
 
 		$stream->setAttribute('startTime', time());
@@ -38,11 +42,12 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
 
 		$socketServer = Q_Config::get('Streams', 'webrtc', 'socketServer', null);
 
-        return (object) [
+        return array(
             'stream' => $stream,
+	        'created' => $created,
             'roomId' => $stream->name,
             'socketServer' => $socketServer
-		];
+        );
     }
 
 	/**
