@@ -33,16 +33,16 @@ function Streams_webrtc_post($params = array())
 	$className = "Streams_WebRTC_".ucfirst($adapter);
 
 	// check quota
-	$quota = Users_Quota::check($loggedUserId, '', 'Streams/webrtc', true, 1, Users::roles());
+	//$quota = Users_Quota::check($loggedUserId, '', 'Streams/webrtc', true, 1, Users::roles());
 
 	$webrtc = new $className();
 	$roomStream = $webrtc->createOrJoinRoom($publisherId, $roomId);
 	$roomStream->stream->join();
 
 	// set quota
-	if ($quota instanceof Users_Quota) {
+	/*if ($quota instanceof Users_Quota) {
 		$quota->used();
-	}
+	}*/
 
 	Q_Response::setSlot("room", $roomStream);
 }
