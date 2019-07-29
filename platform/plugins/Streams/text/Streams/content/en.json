@@ -102,7 +102,7 @@
     },
     "webrtc": {
         "allow": {
-            "dialogTitle": "Enabling Dialog",
+            "dialogTitle": "Connecting",
             "microphoneBtn": "Enable Microphone",
             "cameraBtn": "Enable Camera",
             "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
