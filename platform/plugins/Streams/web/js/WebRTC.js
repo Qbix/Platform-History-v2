@@ -50,7 +50,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			mediaDevicesDialog: {timeout:2000},
 			startWith: {
 				audio: false,
-				video: false
+				video: true
 			},
 			onWebRTCRoomCreated: new Q.Event(),
 			onWebRTCRoomEnded: new Q.Event(),
@@ -936,16 +936,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					chatParticipantName.appendChild(screensBtns);
 
 					maximizeBtn.addEventListener('click', function (e) {
+						renderMaximizedScreensGrid(screen);
 						e.preventDefault();
 						e.stopPropagation();
 					});
 
 					minimizeBtn.addEventListener('click', function (e) {
+						renderMinimizedScreensGrid();
 						e.preventDefault();
 						e.stopPropagation();
 					});
 
-					$(minimizeBtn).plugin('Q/clickable', {
+					/*$(minimizeBtn).plugin('Q/clickable', {
 						className: 'Streams_webrtc_minimize-btn',
 						press: {size: 1.2},
 						release: {size: 1.2}
@@ -959,8 +961,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						release: {size: 1.2}
 					}).on(Q.Pointer.fastclick, function () {
 						renderMaximizedScreensGrid(screen);
-
-					});
+					});*/
 				}
 
 
