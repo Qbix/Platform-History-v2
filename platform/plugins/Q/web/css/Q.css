@@ -746,7 +746,7 @@ html.Q_scanning body > .Q_scanning_code {
 	z-index: 100 !important;
 }
 .Q_columns_siblingContainsExpanded {
-	z-index: 0 !important;
+	z-index: 0;
 }
 
 input[type=text],
