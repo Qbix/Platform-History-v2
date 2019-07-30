@@ -508,7 +508,6 @@
 							}
 						},
 						toggle: function () {
-							console.log('this.isHidden')
 							if(this.isHidden) {
 								this.show();
 							} else this.hide();
@@ -520,18 +519,24 @@
 				function init() {
 					createPopup();
 
-					Q.activate(
-						tool.chatBox.appendChild(
-							Q.Tool.setUpElement(
-								"div", // or pass an existing element
-								"Streams/chat",
-								{
-									publisherId:webRTCclass.options().roomPublisherId,
-									streamName:'Streams/webrtc/' + webRTCclass.options().roomId,
-								}
-							)
-						)
-					);
+					var initChat = function() {
+						Q.activate(
+							tool.chatBox.appendChild(
+								Q.Tool.setUpElement(
+									"div", // or pass an existing element
+									"Streams/chat",
+									{
+										publisherId:webRTCclass.options().roomPublisherId,
+										streamName:'Streams/webrtc/' + webRTCclass.options().roomId,
+									}
+								)
+							),
+							{},
+							function () {
+								tool.textChat.chatTool = this;
+							}
+						);
+					}
 
 					if(Q.info.isMobile || Q.info.isTablet) {
 
@@ -543,6 +548,7 @@
 					} else {
 						console.log('text hat init', tool.textChatBtn)
 						tool.textChatBtn.addEventListener('mouseenter', function (e) {
+							if(tool.textChat.chatTool == null) initChat();
 							if (tool.hoverTimeout.textChatPopup != null) {
 								clearTimeout(tool.hoverTimeout.textChatPopup);
 								tool.hoverTimeout.textChatPopup = null;
