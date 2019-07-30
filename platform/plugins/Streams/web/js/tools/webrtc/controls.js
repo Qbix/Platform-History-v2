@@ -508,6 +508,7 @@
 							}
 						},
 						toggle: function () {
+							console.log('this.isHidden')
 							if(this.isHidden) {
 								this.show();
 							} else this.hide();
@@ -562,29 +563,26 @@
 							}, 300)
 						});
 
-						var makePopupStatic = function (e) {
+
+						var makeStatic = function() {
 							if (tool.hoverTimeout.textChatPopup != null) {
 								clearTimeout(tool.hoverTimeout.textChatPopup);
 								tool.hoverTimeout.textChatPopup = null;
 							}
-							console.log('text hat hover')
 							tool.textChatBtn.parentNode.classList.add('Streams_webrtc_hover');
 							tool.textChat.static = true;
-
-							var removeStaticState = function (e) {
-								if(tool.chatBox.contains(e.target) || tool.chatBox == e.target) {
-									return;
-								}
-								tool.textChatBtn.parentNode.classList.remove('Streams_webrtc_hover');
-								tool.textChat.static = false;
-								window.removeEventListener('click', removeStaticState);
-							}
-
-							window.addEventListener('mousedown', removeStaticState);
 						}
 
-						tool.textChatBtn.addEventListener('mouseup', makePopupStatic);
-						tool.chatBox.addEventListener('mouseup', makePopupStatic);
+						var removeStatic = function (e) {
+							if(tool.chatBox.contains(e.target) || tool.chatBox == e.target){
+								return;
+							}
+							tool.textChatBtn.parentNode.classList.remove('Streams_webrtc_hover');
+							tool.textChat.static = false;
+						}
+
+						window.addEventListener('click', removeStatic);
+						tool.chatBox.addEventListener('mouseup', makeStatic);
 
 						tool.chatBox.addEventListener('mouseenter', function (e) {
 

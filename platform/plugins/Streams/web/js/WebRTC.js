@@ -735,7 +735,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 
-							Q.activate(
+							/*Q.activate(
 								Q.Tool.setUpElement(
 									_controls.firstChild, // or pass an existing element
 									"Q/resize",
@@ -750,7 +750,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								function () {
 									if(_debug) console.log('controls movable')
 								}
-							);
+							);*/
 						}
 					);
 
