@@ -120,8 +120,8 @@
 	position: absolute;
 	left: 0;
 	bottom: 0;
-	width: 40px;
-	height: 40px;
+	width: 30px;
+	height: 30px;
 	background-repeat: no-repeat;
 	background-size: contain;
 	border-radius: 5px;
@@ -216,38 +216,31 @@
 	margin: 0 auto;
 	display: block;
 	padding: 6px;
-	margin-left: 45px;
+	margin-left: 35px;
 	height: 30px;
+	width: calc(100% - 35px);
 	color: black;
 	padding-right: 30px;
 }
-.Streams_chat_composer .Streams_chat_submit {
+.Streams_chat_composer .Streams_chat_submit,
+.Streams_chat_composer .Streams_chat_call {
 	cursor: pointer;
 	position: absolute;
-	right: -6px;
-	top: -3px;
+	right: 1px;
+	top: 2px;
 	background-size: contain;
-	background-image: url("../../img/chat/message-post.png");
 	background-repeat: no-repeat;
-	width: 40px;
-	height: 40px;
+	width: 27px;
+	height: 27px;
 	border: none;
 	margin: 0;
 	padding: 0;
 }
+.Streams_chat_composer .Streams_chat_submit {
+	background-image: url("../../img/chat/message-post.png");
+}
 .Streams_chat_composer .Streams_chat_call {
-	cursor: pointer;
-	position: absolute;
-	right: -6px;
-	top: -3px;
-	background-size: contain;
 	background-image: url("../../img/chat/call.png");
-	background-repeat: no-repeat;
-	width: 40px;
-	height: 40px;
-	border: none;
-	margin: 0;
-	padding: 0;
 }
 .Streams_chat_prevent {
 	text-align: center;
