@@ -16,14 +16,18 @@ class Users_Device_Web
 				'body' => $notification['alert']
 			);
 		}
-
-		return array(
+		$result = array(
 			'title' => Q::ifset($notification, 'alert', 'title', null),
 			'body' => Q::ifset($notification, 'alert', 'body', null),
 			'icon' => Q::ifset($notification, 'icon', ''),
-			'click_action' => Q::ifset($notification, 'url', null),
 			'sound' => Q::ifset($notification, 'sound', 'default')
 		);
+		foreach (array('url', 'click_action') as $f) {
+			if (isset($notification[$f])) {
+				$result[$f] = $notification[$f];
+			}
+		}
+		return $result;
 	}
 
 	static function send($device, $notifications)

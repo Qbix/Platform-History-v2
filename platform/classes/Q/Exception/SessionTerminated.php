@@ -13,4 +13,4 @@ class Q_Exception_SessionTerminated extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_SessionTerminated', 'This session has been terminated. Try logging in again.');
+Q_Exception::add('Q_Exception_SessionTerminated', 'This session has been terminated. Try logging in again.', 403);

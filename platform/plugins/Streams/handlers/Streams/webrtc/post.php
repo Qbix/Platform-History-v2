@@ -8,7 +8,7 @@ require STREAMS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
  */
 
 /**
- * Used to post a message to an existing stream.
+ * Used to start a new Streams/webrtc stream (a real time audio/video call)
  * @class HTTP Streams webrtc
  * @method post
  * @param {array} [$_REQUEST] Parameters that can come from the request
@@ -36,13 +36,13 @@ function Streams_webrtc_post($params = array())
 	//$quota = Users_Quota::check($loggedUserId, '', 'Streams/webrtc', true, 1, Users::roles());
 
 	$webrtc = new $className();
-	$roomStream = $webrtc->createOrJoinRoom($publisherId, $roomId);
-	$roomStream->stream->join();
+	$result = $webrtc->createOrJoinRoom($publisherId, $roomId);
+	$result['stream']->join();
 
 	// set quota
-	/*if ($quota instanceof Users_Quota) {
+	if ($result['created'] and $quota instanceof Users_Quota) {
 		$quota->used();
-	}*/
+	}
 
-	Q_Response::setSlot("room", $roomStream);
+	Q_Response::setSlot("room", $result);
 }

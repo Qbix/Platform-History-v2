@@ -14,4 +14,4 @@ class Q_Exception_WrongType extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_WrongType', '{{field}} is the wrong type, expecting {{type}}');
+Q_Exception::add('Q_Exception_WrongType', '{{field}} is the wrong type, expecting {{type}}', 400);
