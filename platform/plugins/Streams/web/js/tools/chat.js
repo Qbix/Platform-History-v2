@@ -696,7 +696,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		var sel1 = '.Streams_chat_composer textarea';
 		var sel2 = '.Streams_chat_composer input[type=text]';
 		var $input = tool.$(isTextarea ? sel1: sel2);
-		$input.plugin('Q/placeholders', {}, function () {
+		$input.plugin('Q/placeholders', null, function () {
 			if (isTextarea) {
 				this.plugin('Q/autogrow', {
 					maxWidth: $te.width()
