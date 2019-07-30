@@ -542,6 +542,7 @@
 
 						console.log('tool.textChatBtn', tool.textChatBtn)
 						tool.textChatBtn.addEventListener('click', function (e) {
+							if(tool.textChat.chatTool == null) initChat();
 							tool.textChat.toggle();
 						});
 
