@@ -561,8 +561,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 						$toolElement.attr('data-webrtc', true);
 						this.Q.beforeRemove.set(function () {
-							state.webrtc = null;
-							$toolElement.attr('data-webrtc', false);
+							_closeRoom();
 						}, this);
 
 						// this is duplicate to above approach
@@ -571,13 +570,20 @@ Q.Tool.define('Streams/chat', function(options) {
 								return;
 							}
 
-							$toolElement.attr('data-webrtc', false);
+							_closeRoom();
 						}, tool);
 					},
 					onWebRTCRoomCreated: function () {
 						state.webrtc = this;
+					},
+					onWebRTCRoomEnded: function () {
+						_closeRoom();
 					}
 				});
+			};
+			var _closeRoom = function () {
+				state.webrtc = null;
+				$toolElement.attr('data-webrtc', false);
 			};
 			if (stream && !stream.getAttribute('endTime')) {
 				if (!stream.testWriteLevel('join')) {
