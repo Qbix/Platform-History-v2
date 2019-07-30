@@ -2258,7 +2258,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						Q.alert('Unfortunatelly your browser doesn\'t support WebRTC')
 					}
 
-					_options = Q.extend({}, _options, options);
+					//_options = Q.extend({}, _options, options);
+					if(typeof options === 'object') {
+						for (var key in options) {
+							_options[key] = options.hasOwnProperty(key) && typeof options[key] !== 'undefined' ? options[key] : _options[key];
+						}
+					}
 
 					var roomId = _options.roomId != null ? _options.roomId : null;
 					if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
@@ -2394,7 +2399,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 			_roomStream.leave();
 			WebRTCconference.disconnect();
-
+			_options.streams = null;
 			if(_roomsMedia.parentNode != null) _roomsMedia.parentNode.removeChild(_roomsMedia);
 			if(_controls != null) {
 				var controlsTool = Q.Tool.from(_controls, "Streams/webrtc/controls");

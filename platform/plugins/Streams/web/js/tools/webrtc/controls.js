@@ -1813,7 +1813,6 @@
 
 				function maximizeLoudestScreen(mode) {
 					webRTClib.screensInterface.getLoudestScreen(mode, function (loudestScreen) {
-						console.log('loudestScreen', loudestScreen)
 						if(Q.info.isMobile)
 							tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(loudestScreen, 300);
 						else tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(loudestScreen, 300);
