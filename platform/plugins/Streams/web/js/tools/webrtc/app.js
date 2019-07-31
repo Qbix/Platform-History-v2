@@ -2037,9 +2037,21 @@ WebRTCconferenceLib = function app(options){
 					var disconnectTime = options.disconnectTime != null ? options.disconnectTime : 3000;
 
 					if(!participant.isLocal && participant.online && participant.online != 'checking' && participant.latestOnlineTime != null && performance.now() - participant.latestOnlineTime >= disconnectTime) {
-						if(_debug) console.log('checkOnlineStatus : remove', performance.now() - participant.latestOnlineTime, !participant.videoIsChanging)
+						if(_debug) {
+							console.log('checkOnlineStatus : remove', performance.now() - participant.latestOnlineTime, !participant.videoIsChanging);
+						}
 						let latestOnlineTime = participant.latestOnlineTime;
 						let participantSid = participant.sid;
+						let _disconnectParticipant = function () {
+							console.log(participantSid)
+							var participantToCheck = roomParticipants.filter(function (roomParticipant) {
+								return roomParticipant.sid === participantSid;
+							})[0];
+							if (Q.getObject("latestOnlineTime", participantToCheck) !== latestOnlineTime) {
+								return;
+							}
+							participantDisconnected(participantToCheck);
+						};
 						if(socket) {
 							socket.emit('confirmOnlineStatus', {
 								'type': 'request',
@@ -2048,20 +2060,10 @@ WebRTCconferenceLib = function app(options){
 
 							participant.online = 'checking';
 							setTimeout(function () {
-								console.log(participantSid)
-								var participantToCheck = roomParticipants.filter(function (roomParticipant) {
-									return roomParticipant.sid == participantSid;
-								})[0];
-								if (participantToCheck.latestOnlineTime != latestOnlineTime) return;
-								participantDisconnected(participantToCheck);
+								_disconnectParticipant();
 							}, 1000);
 						} else {
-							console.log(participantSid)
-							var participantToCheck = roomParticipants.filter(function (roomParticipant) {
-								return roomParticipant.sid == participantSid;
-							})[0];
-							if (participantToCheck.latestOnlineTime != latestOnlineTime) return;
-							participantDisconnected(participantToCheck);
+							_disconnectParticipant();
 						}
 					}
 				}
