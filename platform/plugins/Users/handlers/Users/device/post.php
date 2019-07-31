@@ -12,9 +12,7 @@
  */
 function Users_device_post ()
 {
-	if (Q_Request::requireFields(array('deviceId', 'appId'))) {
-		return false;
-	}
+	Q_Request::requireFields(array('deviceId', 'appId'), true);
 	$deviceId = $_REQUEST['deviceId'];
 	$appId = $_REQUEST['appId'];
 	$user = Users::loggedInUser(true);
