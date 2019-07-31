@@ -249,7 +249,7 @@ WebRTCconferenceLib = function app(options){
 			//if(this.trackEl.parentNode != null) this.trackEl.parentNode.removeChild(this.trackEl);
 		};
 	}
-	
+
 	/*This function was a part of standalone app; currently is not used */
 	app.views = (function () {
 		var _currentView;
@@ -815,14 +815,14 @@ WebRTCconferenceLib = function app(options){
 				} else {
 
 					//setTimeout(function(){
-						if(localParticipant.audioTracks().length > 1) {
-							if(_debug) console.log('attachTrack iosrtc PUBLISH A TRACK REPLACE');
+					if(localParticipant.audioTracks().length > 1) {
+						if(_debug) console.log('attachTrack iosrtc PUBLISH A TRACK REPLACE');
 
-							app.conferenceControl.replaceTrack(track.mediaStreamTrack);
-						} else {
-							if(_debug) console.log('attachTrack iosrtc PUBLISH A TRACK ADD');
-							app.conferenceControl.enableAudio();
-						}
+						app.conferenceControl.replaceTrack(track.mediaStreamTrack);
+					} else {
+						if(_debug) console.log('attachTrack iosrtc PUBLISH A TRACK ADD');
+						app.conferenceControl.enableAudio();
+					}
 					//}, 4000)
 
 				}
@@ -1394,7 +1394,7 @@ WebRTCconferenceLib = function app(options){
 				if (track.kind == 'audio') localParticipant.audioStream = stream;
 			}
 
-			
+
 
 			/*if(typeof cordova != 'undefined' && _isiOS) {
 				remoteStreamEl.style.width = '100%';
@@ -1989,8 +1989,8 @@ WebRTCconferenceLib = function app(options){
 				if(_debug) console.log('processDataTrackMessage service mic' + (app.conferenceControl.micIsEnabled()))
 
 				if(data.content.audioNotWork == true && app.conferenceControl.micIsEnabled())	{
-					app.conferenceControl.disableAudio();
-					app.conferenceControl.enableAudio();
+					//app.conferenceControl.disableAudio();
+					//app.conferenceControl.enableAudio();
 				}
 			}
 		}
@@ -2385,9 +2385,9 @@ WebRTCconferenceLib = function app(options){
 			socket.on('participantConnected', function (participant){
 				console.log('participantConnected', participant);
 
-					socketParticipantConnected().initPeerConnection(participant);
+				socketParticipantConnected().initPeerConnection(participant);
 
-					//iosrtcSocketParticipantConnected().initPeerConnection(participant);
+				//iosrtcSocketParticipantConnected().initPeerConnection(participant);
 
 			});
 
@@ -3032,7 +3032,7 @@ WebRTCconferenceLib = function app(options){
 					else return false;
 				});
 			}
-			
+
 			if(tracksToRemove.length == 0) return sdp;
 
 			if(tracks.length == tracksToRemove.length) {
@@ -3116,7 +3116,7 @@ WebRTCconferenceLib = function app(options){
 
 					if(_debug) console.log('onnegotiationneeded states', peerConnection.connectionState, peerConnection.iceConnectionState, peerConnection.iceGatheringState, peerConnection.signalingState)
 
-					if(peerConnection.connectionState == 'new' && peerConnection.iceConnectionState == 'new' && peerConnection.iceGatheringState == 'new') return;
+
 					senderParticipant.isNegotiating = true;
 					senderParticipant.RTCPeerConnection.createOffer({ 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true })
 						.then(function(offer) {
@@ -3174,6 +3174,8 @@ WebRTCconferenceLib = function app(options){
 					if(senderParticipant.isNegotiating) {
 						return;
 					}
+					if(newPeerConnection.connectionState == 'new' && newPeerConnection.iceConnectionState == 'new' && newPeerConnection.iceGatheringState == 'new') return;
+
 					createOffer(newPeerConnection);
 				};
 
@@ -3234,7 +3236,7 @@ WebRTCconferenceLib = function app(options){
 						for (let t in localTracks) {
 							console.log('offerReceived camera 3');
 							//if (localTracks[t].kind == 'video') newPeerConnection.addStream(localTracks[t].stream);
-							if (localTracks[t].kind == 'video') RTCPeerConnection.addTrack(localTracks[t].mediaStreamTrack, localTracks[t].stream);
+							if (localTracks[t].kind == 'video') RTCPeerConnection.addTrack(localTracks[t].mediaStreamTrack);
 						}
 
 					} else {
@@ -3254,13 +3256,18 @@ WebRTCconferenceLib = function app(options){
 				canvas.getContext('2d').fillRect(0, 0, width, height);
 				let stream = canvas.captureStream();
 				return Object.assign(stream.getVideoTracks()[0], {enabled: false});
-			}
 
+
+			}
 			function creteEmptyAudioTrack(width, height) {
-				let ctx = new AudioContext(), oscillator = ctx.createOscillator();
-				let dst = oscillator.connect(ctx.createMediaStreamDestination());
-				oscillator.start();
-				return Object.assign(dst.stream.getAudioTracks()[0], {enabled: false});
+				if(typeof width == 'undefined') width = 640;
+				if(typeof height == 'undefined') height = 480;
+
+				let canvas = Object.assign(document.createElement("canvas"), {width, height});
+				canvas.getContext('2d').fillRect(0, 0, width, height);
+				let stream = canvas.captureStream();
+				return Object.assign(stream.getVideoTracks()[0], {enabled: false});
+
 			}
 
 			function publishLocalMedia(RTCPeerConnection) {
@@ -3280,12 +3287,12 @@ WebRTCconferenceLib = function app(options){
 				if(_debug) console.log('offerReceived purpose: ' + message.purpose);
 				if(_debug) console.log('offerReceived', message, roomParticipants);
 				if(_debug) console.log(JSON.stringify(message));
-				var senderParticipant = roomParticipants.filter(function (localParticipant) {
-					return localParticipant.sid == message.fromSid;
+				var senderParticipant = roomParticipants.filter(function (existingParticipant) {
+					return existingParticipant.sid == message.fromSid && existingParticipant.RTCPeerConnection;
 				})[0];
 
-				var isVideoInOffer = message.sdp.indexOf('mid:video') != -1;
-				var isAudioInOffer = message.sdp.indexOf('mid:audio') != -1;
+				var isVideoInOffer = message.sdp.indexOf('m=video') != -1 || message.sdp.indexOf('mid:video') != -1;
+				var isAudioInOffer = message.sdp.indexOf('m=audio') != -1 || message.sdp.indexOf('mid:audio') != -1;
 
 				var firstTimeOffer = false;
 				if(_debug) console.log('offerReceived firstTimeOffer: ' + (senderParticipant == null));
@@ -3303,9 +3310,11 @@ WebRTCconferenceLib = function app(options){
 				}
 
 
-				if(senderParticipant.RTCPeerConnection == null) {
+
+				if(senderParticipant.RTCPeerConnection == null || senderParticipant.RTCPeerConnection.connectionState =='closed') {
 					senderParticipant.RTCPeerConnection = createPeerConnection(senderParticipant);
 
+					if(_debug) console.log('offerReceived createPeerConnection ' + senderParticipant.RTCPeerConnection.signalingState);
 					if(isVideoInOffer) publishLocalVideo(senderParticipant.RTCPeerConnection);
 					if(isAudioInOffer) publishLocalAudio(senderParticipant.RTCPeerConnection);
 
@@ -3788,11 +3797,11 @@ WebRTCconferenceLib = function app(options){
 			return;*/
 
 			//if(peerConnection.signalingState == 'stable') {
-				peerConnection.addIceCandidate(candidate)
-					.catch(function(e) {
-						console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOOOOOOOOORRRRRRRRRRRRRRR', JSON.stringify(message));
-						console.error(e);
-					});
+			peerConnection.addIceCandidate(candidate)
+				.catch(function(e) {
+					console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRROOOOOOOOOOOOOOOOOOOOOOOOOOORRRRRRRRRRRRRRR', JSON.stringify(message));
+					console.error(e);
+				});
 			/*} else {
 				senderParticipant.iceCandidatesQueue.push({
 					peerConnection: peerConnection,
@@ -4641,7 +4650,7 @@ WebRTCconferenceLib = function app(options){
 					if (callback != null) callback(audioStream);
 				}
 			}
-			
+
 			function error(err) {
 				console.error(err.name + ": " + err.message);
 				console.log(err.name + ": " + err.message);
@@ -5042,15 +5051,15 @@ WebRTCconferenceLib = function app(options){
 				for(let i = localParticipant.tracks.length - 1; i >= 0 ; i--){
 					localParticipant.tracks[i].mediaStreamTrack.stop();
 				}
-				
+
 				if(_isiOS) {
 					cameraIsDisabled = true;
 					app.eventBinding.sendDataTrackMessage('online', {cameraIsEnabled: false});
 					return;
 				}
-				
+
 				for (let p in roomParticipants) {
-					
+
 					if (!roomParticipants[p].isLocal && roomParticipants[p].RTCPeerConnection != null && roomParticipants[p].RTCPeerConnection.connectionState != 'closed') {
 						console.log('disableVideoTracks participants loop');
 
@@ -5170,52 +5179,52 @@ WebRTCconferenceLib = function app(options){
 				if('ontrack' in testPeerConnection && audioTracks.length == 0) {
 					console.log('ENABLING AUDIO if1');
 
-						var requestMicrophoneCallback = function (audioStream) {
-							var audioTrack = audioStream.getAudioTracks()[0];
-							if (typeof cordova != 'undefined' && _isiOS) {
-								var enableAudioTrack = function (e) {
-									if (e.track.mediaStreamTrack.id == audioTrack.id) {
-										enableAudioTracks();
-										if (_debug) console.log('enableAudioTracks CALLBACK END=' + micIsDisabled);
+					var requestMicrophoneCallback = function (audioStream) {
+						var audioTrack = audioStream.getAudioTracks()[0];
+						if (typeof cordova != 'undefined' && _isiOS) {
+							var enableAudioTrack = function (e) {
+								if (e.track.mediaStreamTrack.id == audioTrack.id) {
+									enableAudioTracks();
+									if (_debug) console.log('enableAudioTracks CALLBACK END=' + micIsDisabled);
 
-										micIsDisabled = false;
-										app.eventBinding.sendDataTrackMessage('online', {micIsEnabled: true});
-										app.event.dispatch('micEnabled');
-									}
-									app.event.off('trackAdded', enableAudioTrack);
+									micIsDisabled = false;
+									app.eventBinding.sendDataTrackMessage('online', {micIsEnabled: true});
+									app.event.dispatch('micEnabled');
 								}
-								app.event.dispatch('micIsBeingEnabled');
-								app.event.on('trackAdded', enableAudioTrack);
-
-							} else {
-								enableAudioTracks();
+								app.event.off('trackAdded', enableAudioTrack);
 							}
+							app.event.dispatch('micIsBeingEnabled');
+							app.event.on('trackAdded', enableAudioTrack);
+
+						} else {
+							enableAudioTracks();
 						}
+					}
 
-						app.conferenceControl.requestMicrophone(requestMicrophoneCallback, function (e) {
-							console.error(e.message);
+					app.conferenceControl.requestMicrophone(requestMicrophoneCallback, function (e) {
+						console.error(e.message);
 
-							if (failureCallback != null) failureCallback(e);
-						});
+						if (failureCallback != null) failureCallback(e);
+					});
 
 					return;
 				} else if(!('ontrack' in testPeerConnection) && 'onaddstream' in testPeerConnection && localParticipant.audioStream == null) {
-						app.conferenceControl.requestMicrophone(function (audioStream) {
-							for (let p in roomParticipants) {
-								if (!roomParticipants[p].isLocal && roomParticipants[p].RTCPeerConnection != null && roomParticipants[p].RTCPeerConnection.connectionState != 'closed') {
-									if('ontrack' in roomParticipants[p].RTCPeerConnection){
-										if (audioStream != null) roomParticipants[p].RTCPeerConnection.addTrack(audioStream.getAudioTracks()[0], audioStream);
-									} else {
-										if (audioStream != null) roomParticipants[p].RTCPeerConnection.addStream(audioStream);
-									}
-
-									//app.eventBinding.createOfferAndRenegotiate();
+					app.conferenceControl.requestMicrophone(function (audioStream) {
+						for (let p in roomParticipants) {
+							if (!roomParticipants[p].isLocal && roomParticipants[p].RTCPeerConnection != null && roomParticipants[p].RTCPeerConnection.connectionState != 'closed') {
+								if('ontrack' in roomParticipants[p].RTCPeerConnection){
+									if (audioStream != null) roomParticipants[p].RTCPeerConnection.addTrack(audioStream.getAudioTracks()[0], audioStream);
+								} else {
+									if (audioStream != null) roomParticipants[p].RTCPeerConnection.addStream(audioStream);
 								}
+
+								//app.eventBinding.createOfferAndRenegotiate();
 							}
-						}, function () {
-							alert('Unable access microphone');
-						});
-						return;
+						}
+					}, function () {
+						alert('Unable access microphone');
+					});
+					return;
 
 				}
 
@@ -5651,11 +5660,11 @@ WebRTCconferenceLib = function app(options){
 		}
 
 		function joinRoom(streams, mediaDevicesList) {
-				app.eventBinding.socketRoomJoined((streams != null ? streams : []));
-				console.log('initOrConnectWithNodeJs joinRoom mediaDevicesList ' + mediaDevicesList.length)
-				if(mediaDevicesList != null) app.conferenceControl.loadDevicesList(mediaDevicesList);
-				app.event.dispatch('joined');
-				if(callback != null) callback();
+			app.eventBinding.socketRoomJoined((streams != null ? streams : []));
+			console.log('initOrConnectWithNodeJs joinRoom mediaDevicesList ' + mediaDevicesList.length)
+			if(mediaDevicesList != null) app.conferenceControl.loadDevicesList(mediaDevicesList);
+			app.event.dispatch('joined');
+			if(callback != null) callback();
 		}
 
 		if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
@@ -6136,12 +6145,12 @@ WebRTCconferenceLib = function app(options){
 
 
 					var trackToAttach = new Track();
-						trackToAttach.sid = track.sid;
-						trackToAttach.kind = track.kind;
-						trackToAttach.mediaStreamTrack = track;
-						trackToAttach.isLocal = true;
-						trackToAttach.stream = stream;
-						//localParticipant.videoStream = stream;
+					trackToAttach.sid = track.sid;
+					trackToAttach.kind = track.kind;
+					trackToAttach.mediaStreamTrack = track;
+					trackToAttach.isLocal = true;
+					trackToAttach.stream = stream;
+					//localParticipant.videoStream = stream;
 
 					app.screensInterface.attachTrack(trackToAttach, localParticipant);
 
@@ -6160,7 +6169,7 @@ WebRTCconferenceLib = function app(options){
 					});
 				}
 
-					//}, 4000)
+				//}, 4000)
 
 
 				/*var stream = e.streams[0];
