@@ -31,7 +31,7 @@
  *         <li>"scroll" means new messages will be loaded when the scrollbar of the chat container reaches the top (for desktop) or whole document scrollbar reaches the top (android). On all other browsers it would use pull-to-refresh ... meaning, it will show "Pull to see earlier messages" (html configurable in Q.text.Streams.chat.loadMore.pull string) and as you pull "too far" you trigger the load. As for the indicator of "pulling too far", we will worry about that later, for now skip it. But remember to discuss it with me afterwards.</li>
  *         <li>null/false/etc. - no interface to load earlier messages</li>
  *     </ul>
- *   @param {Object} [options.startConference=false] If true, start webrtc once tool activated
+ *   @param {Object} [options.startCall=false] If true, start webrtc once tool activated
  *   @param {Q.Event} [options.onRefresh] Event for when an the chat has been updated
  *   @param {Q.Event} [options.onError] Event for when an error occurs, and the error is passed
  *   @param {Q.Event} [options.onClose] Event for when chat stream closed
@@ -145,7 +145,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		title: 'Message from {{displayName}}'
 	},
 	closeable: false,
-	startConference: false,
+	startCall: false,
 	onRefresh: new Q.Event(),
 	onClose: new Q.Event(function () {
 		// remove tool when chat stream closed
@@ -561,8 +561,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 						$toolElement.attr('data-webrtc', true);
 						this.Q.beforeRemove.set(function () {
-							state.webrtc = null;
-							$toolElement.attr('data-webrtc', false);
+							_closeRoom();
 						}, this);
 
 						// this is duplicate to above approach
@@ -571,13 +570,20 @@ Q.Tool.define('Streams/chat', function(options) {
 								return;
 							}
 
-							$toolElement.attr('data-webrtc', false);
+							_closeRoom();
 						}, tool);
 					},
 					onWebRTCRoomCreated: function () {
 						state.webrtc = this;
+					},
+					onWebRTCRoomEnded: function () {
+						_closeRoom();
 					}
 				});
+			};
+			var _closeRoom = function () {
+				state.webrtc = null;
+				$toolElement.attr('data-webrtc', false);
 			};
 			if (stream && !stream.getAttribute('endTime')) {
 				if (!stream.testWriteLevel('join')) {
@@ -696,7 +702,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		var sel1 = '.Streams_chat_composer textarea';
 		var sel2 = '.Streams_chat_composer input[type=text]';
 		var $input = tool.$(isTextarea ? sel1: sel2);
-		$input.plugin('Q/placeholders', {}, function () {
+		$input.plugin('Q/placeholders', null, function () {
 			if (isTextarea) {
 				this.plugin('Q/autogrow', {
 					maxWidth: $te.width()
@@ -992,8 +998,8 @@ Q.Tool.define('Streams/chat', function(options) {
 				
 				tool.scrollToBottom();
 
-				// if startConference is true, start webrtc
-				if (state.startConference) {
+				// if startCall is true, start webrtc
+				if (state.startCall) {
 					tool.startWebRTC();
 				}
 			});
