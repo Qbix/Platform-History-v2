@@ -519,29 +519,37 @@
 				function init() {
 					createPopup();
 
-					Q.activate(
-						tool.chatBox.appendChild(
-							Q.Tool.setUpElement(
-								"div", // or pass an existing element
-								"Streams/chat",
-								{
-									publisherId:webRTCclass.options().roomPublisherId,
-									streamName:'Streams/webrtc/' + webRTCclass.options().roomId,
-								}
-							)
-						)
-					);
+					var initChat = function() {
+						Q.activate(
+							tool.chatBox.appendChild(
+								Q.Tool.setUpElement(
+									"div", // or pass an existing element
+									"Streams/chat",
+									{
+										publisherId:webRTCclass.options().roomPublisherId,
+										streamName:'Streams/webrtc/' + webRTCclass.options().roomId,
+									}
+								)
+							),
+							{},
+							function () {
+								tool.textChat.chatTool = this;
+							}
+						);
+					}
 
 					if(Q.info.isMobile || Q.info.isTablet) {
 
 						console.log('tool.textChatBtn', tool.textChatBtn)
 						tool.textChatBtn.addEventListener('click', function (e) {
+							if(tool.textChat.chatTool == null) initChat();
 							tool.textChat.toggle();
 						});
 
 					} else {
 						console.log('text hat init', tool.textChatBtn)
 						tool.textChatBtn.addEventListener('mouseenter', function (e) {
+							if(tool.textChat.chatTool == null) initChat();
 							if (tool.hoverTimeout.textChatPopup != null) {
 								clearTimeout(tool.hoverTimeout.textChatPopup);
 								tool.hoverTimeout.textChatPopup = null;
@@ -562,29 +570,26 @@
 							}, 300)
 						});
 
-						var makePopupStatic = function (e) {
+
+						var makeStatic = function() {
 							if (tool.hoverTimeout.textChatPopup != null) {
 								clearTimeout(tool.hoverTimeout.textChatPopup);
 								tool.hoverTimeout.textChatPopup = null;
 							}
-							console.log('text hat hover')
 							tool.textChatBtn.parentNode.classList.add('Streams_webrtc_hover');
 							tool.textChat.static = true;
-
-							var removeStaticState = function (e) {
-								if(tool.chatBox.contains(e.target) || tool.chatBox == e.target) {
-									return;
-								}
-								tool.textChatBtn.parentNode.classList.remove('Streams_webrtc_hover');
-								tool.textChat.static = false;
-								window.removeEventListener('click', removeStaticState);
-							}
-
-							window.addEventListener('mousedown', removeStaticState);
 						}
 
-						tool.textChatBtn.addEventListener('mouseup', makePopupStatic);
-						tool.chatBox.addEventListener('mouseup', makePopupStatic);
+						var removeStatic = function (e) {
+							if(tool.chatBox.contains(e.target) || tool.chatBox == e.target){
+								return;
+							}
+							tool.textChatBtn.parentNode.classList.remove('Streams_webrtc_hover');
+							tool.textChat.static = false;
+						}
+
+						window.addEventListener('click', removeStatic);
+						tool.chatBox.addEventListener('mouseup', makeStatic);
 
 						tool.chatBox.addEventListener('mouseenter', function (e) {
 
@@ -1813,7 +1818,6 @@
 
 				function maximizeLoudestScreen(mode) {
 					webRTClib.screensInterface.getLoudestScreen(mode, function (loudestScreen) {
-						console.log('loudestScreen', loudestScreen)
 						if(Q.info.isMobile)
 							tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(loudestScreen, 300);
 						else tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(loudestScreen, 300);
