@@ -1848,9 +1848,9 @@ abstract class Streams extends Base_Streams
 			$toType = $category->type;
 			$toDisplayType = Streams_Stream::displayType($toType);
 			$parts = explode('/', $type);
-			$displayType = end($parts);
+			$relationDisplayType = end($parts);
 			if (substr(end($parts), -1) === 's') {
-				$displayType = substr($displayType, 0, -1);
+				$relationDisplayType = substr($relationDisplayType, 0, -1);
 			}
 			$categoryName = explode('/', $category->name);
 			$streamName = explode('/', $stream->name);
@@ -1881,13 +1881,15 @@ abstract class Streams extends Base_Streams
 				$toUrl = Q_Uri::url(Q_Handlebars::renderSource($u, $params));
 			}
 
+			$params['relationDisplayType'] = $relationDisplayType;
 			$description = Q_Handlebars::renderSource(
-				Streams_Stream::getConfigField($category->type,
+				Streams_Stream::getConfigField(
+					$category->type,
 					array('relatedTo', $type, 'description'),
 					Streams_Stream::getConfigField($category->type, array(
 						'relatedTo', '*', 'description'
-					), "New $fromDisplayType added"
-				)),
+					), "New {{relationDisplayType}} added")
+				),
 				$params
 			);
 
@@ -1908,10 +1910,13 @@ abstract class Streams extends Base_Streams
 			);
 
 			$description = Q_Handlebars::renderSource(
-				Streams_Stream::getConfigField($stream->type, array('relatedFrom', $type, 'description'),
+				Streams_Stream::getConfigField(
+					$stream->type,
+					array('relatedFrom', $type, 'description'),
 					Streams_Stream::getConfigField($stream->type, array('relatedFrom', '*', 'description'),
-						"Added to {{toDisplayType}} as $displayType"
-					)),
+						"Added to {{toDisplayType}} as {{relationDisplayType}}"
+					)
+				),
 				$params
 			);
 

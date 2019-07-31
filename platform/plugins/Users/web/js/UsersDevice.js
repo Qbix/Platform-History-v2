@@ -490,17 +490,17 @@
 			return;
 		}
 		navigator.serviceWorker.register(Q.url('{{Users}}/js/sw.js'))
-			.then(function (swReg) {
-				navigator.serviceWorker.addEventListener('message', function (event) {
-					Users.Device.onNotification.handle(event.data);
-				});
-				console.log('Service Worker is registered.');
-				Q.handle(callback, null, [null, swReg]);
-			})
-			.catch(function (error) {
-				Q.handle(callback, null, [error]);
-				console.error('Users.Device: Service Worker Error', error);
+		.then(function (swReg) {
+			navigator.serviceWorker.addEventListener('message', function (event) {
+				Users.Device.onNotification.handle(event.data);
 			});
+			console.log('Service Worker is registered.');
+			Q.handle(callback, null, [null, swReg]);
+		})
+		.catch(function (error) {
+			Q.handle(callback, null, [error]);
+			console.error('Users.Device: Service Worker Error', error);
+		});
 	}
 
 	function _registerDevice (deviceId, callback) {

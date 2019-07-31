@@ -175,7 +175,8 @@ class Users_Device extends Base_Users_Device
 	 *    and does not need to be stored anymore on the device.
 	 *    Pass -1 to ask the device not to store it at all.
 	 * @param {string} [$notification.priority="high"] Can be set to "normal" to make it lower priority
-	 * @param {string} [$notification.collapseId] A string under 64 bytes for collapsing notifications
+	 * @param {string} [$notification.collapseId] A string under 64 bytes for grouping and collapsing
+	 *    notifications, this is passed as "tag" in Web Push.
 	 * @param {string} [$notification.id] You can provide your own uuid for the notification
 	 * @param {array} [$options]
 	 * @param {boolean} [$options.scheduled=false] if true, doesn't send immediately.
