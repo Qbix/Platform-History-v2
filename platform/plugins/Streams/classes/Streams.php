@@ -1888,7 +1888,8 @@ abstract class Streams extends Base_Streams
 					array('relatedTo', $type, 'description'),
 					Streams_Stream::getConfigField($category->type, array(
 						'relatedTo', '*', 'description'
-					), "New {{relationDisplayType}} added")
+					), "New {{relationDisplayType}} added"),
+					false
 				),
 				$params
 			);
