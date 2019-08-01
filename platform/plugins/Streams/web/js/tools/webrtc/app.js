@@ -89,15 +89,24 @@ WebRTCconferenceLib = function app(options){
 	var testPeerConnection = new RTCPeerConnection(pc_config);
 
 	if(options.turnCredentials != null) {
-		pc_config['iceServers'].push(options.turnCredentials)
-		var testPeerConnection;
+		var testPeerConnection, changeToUrls;
 		try{
 			testPeerConnection = new RTCPeerConnection(pc_config);
 		} catch (e) {
-			options.turnCredentials[ 'urls' ] = options.turnCredentials[ 'url' ];
-			delete options.turnCredentials[ 'url' ];
+			changeToUrls = true;
 		}
 		if(testPeerConnection != null) testPeerConnection.close();
+
+		for(var t in options.turnCredentials) {
+			var turn = options.turnCredentials[t];
+			pc_config['iceServers'].push(turn)
+
+			if(changeToUrls) {
+				oturn['urls'] = turn['url'];
+				delete turn['url'];
+			}
+		}
+
 		console.log('pc_config', pc_config);
 	}
 
@@ -185,6 +194,7 @@ WebRTCconferenceLib = function app(options){
 		this.twilioInstance = null;
 		this.RTCPeerConnection = null;
 		this.iceCandidatesQueue = [];
+		this.candidates = [];
 		this.offersQueue = [];
 		this.isNegotiating = false;
 		//this.audioStream = null;
@@ -2293,7 +2303,6 @@ WebRTCconferenceLib = function app(options){
 				if(event.candidate.candidate.indexOf("relay")<0){ // if no relay address is found, assuming it means no TURN server
 					//return;
 				}
-				if(_debug) console.log('gotIceCandidate purpose ' + purpose)
 
 				if(_debug) console.log('gotIceCandidate existingParticipant', existingParticipant)
 				if(_debug) console.log('gotIceCandidate .candidate = ' + event.candidate.candidate)
@@ -2318,7 +2327,56 @@ WebRTCconferenceLib = function app(options){
 					targetSid: existingParticipant.sid
 				});
 			}
+
+			if (event.candidate && event.candidate.candidate.indexOf('srflx') !== -1) {
+				var cand = parseCandidate(event.candidate.candidate);
+				if (!existingParticipant.candidates[cand.relatedPort]) existingParticipant.candidates[cand.relatedPort] = [];
+				existingParticipant.candidates[cand.relatedPort].push(cand.port);
+			} else if (!event.candidate) {
+				if (Object.keys(existingParticipant.candidates).length === 1) {
+					var ports = existingParticipant.candidates[Object.keys(existingParticipant.candidates)[0]];
+					console.log(ports.length === 1 ? 'NAT TYPE: cool nat' : 'NAT TYPE: symmetric nat');
+				}
+			}
 		}
+
+		function parseCandidate(line) {
+			var parts;
+			// Parse both variants.
+			if (line.indexOf('a=candidate:') === 0) {
+				parts = line.substring(12).split(' ');
+			} else {
+				parts = line.substring(10).split(' ');
+			}
+
+			var candidate = {
+				foundation: parts[0],
+				component: parts[1],
+				protocol: parts[2].toLowerCase(),
+				priority: parseInt(parts[3], 10),
+				ip: parts[4],
+				port: parseInt(parts[5], 10),
+				// skip parts[6] == 'typ'
+				type: parts[7]
+			};
+
+			for (var i = 8; i < parts.length; i += 2) {
+				switch (parts[i]) {
+					case 'raddr':
+						candidate.relatedAddress = parts[i + 1];
+						break;
+					case 'rport':
+						candidate.relatedPort = parseInt(parts[i + 1], 10);
+						break;
+					case 'tcptype':
+						candidate.tcpType = parts[i + 1];
+						break;
+					default: // Unknown extensions are silently ignored.
+						break;
+				}
+			}
+			return candidate;
+		};
 
 		function rawTrackSubscribed(event, existingParticipant){
 			if(_debug) console.log("%c rawTrackSubscribed:", 'background:orange;color:white;', event);
@@ -4992,7 +5050,7 @@ WebRTCconferenceLib = function app(options){
 								console.log('enableVideoTracks pc state', pc.connectionState, pc.iceConnectionState, pc.iceGatheringState, pc.signalingState)
 
 								let sender = roomParticipants[p].RTCPeerConnection.addTrack(videoTracks[t].mediaStreamTrack);
-								var params = sender.getParameters();
+								/*var params = sender.getParameters();
 								console.log('enableVideoTracks params1 ' + JSON.stringify(params));
 
 								for (var i = 0; i < params.codecs.length; i++) {
@@ -5009,7 +5067,7 @@ WebRTCconferenceLib = function app(options){
 
 								sender.setParameters(params).catch(function(e){
 									console.error(e);
-								});
+								});*/
 							}
 
 						} else {
@@ -6535,6 +6593,108 @@ WebRTCconferenceLib = function app(options){
 		}())
 	}
 
+	function enableiOSDebug() {
+		var ua=navigator.userAgent;
+		if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
+			console.stdlog = console.log.bind(console);
+			console.log = function (txt) {
+
+				if(!socket || socket && !socket.connected) return;
+
+				try {
+					//originallog.apply(console, arguments);
+					var i, argument;
+					var argumentsString = '';
+					for (i = 1; argument = arguments[i]; i++){
+						if (typeof argument == 'object') {
+							argumentsString = argumentsString + ', OBJECT';
+						} else {
+							argumentsString = argumentsString + ', ' + argument;
+						}
+					}
+					socket.emit('log', txt + argumentsString + '\n');
+					console.stdlog.apply(console, arguments);
+					latestConsoleLog = txt + argumentsString + '\n';
+				} catch (e) {
+
+				}
+			}
+		}
+		console.stderror = console.error.bind(console);
+
+		console.error = function (txt) {
+
+			if(!socket || socket && !socket.connected) return;
+
+			try {
+				var err = (new Error);
+			} catch (e) {
+
+			}
+
+			try {
+				var i, argument;
+				var argumentsString = '';
+				for (i = 1; argument = arguments[i]; i++){
+					if (typeof argument == 'object') {
+						argumentsString = argumentsString + ', OBJECT';
+					} else {
+						argumentsString = argumentsString + ', ' + argument;
+					}
+				}
+
+				var today = new Date();
+				var dd = today.getDate();
+				var mm = today.getMonth() + 1;
+
+				var yyyy = today.getFullYear();
+				if (dd < 10) {
+					dd = '0' + dd;
+				}
+				if (mm < 10) {
+					mm = '0' + mm;
+				}
+				var today = dd + '/' + mm + '/' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+
+				var errorMessage = "\n\n" + today + " Error: " + txt + ', ' +  argumentsString + "\nurl: " + location.origin + "\nline: ";
+
+				if(typeof err != 'undefined' && typeof err.lineNumber != 'undefined') {
+					errorMessage = errorMessage + err.lineNumber + "\n " + ua+ "\n";
+				} else if(typeof err != 'undefined' && typeof err.stack != 'undefined')
+					errorMessage = errorMessage + err.stack + "\n " + ua+ "\n";
+				else errorMessage = errorMessage + "\n " + ua + "\n";
+				socket.emit('errorlog', errorMessage);
+				console.stderror.apply(console, arguments);
+			} catch (e) {
+				console.log(e.name + ' ' + e.message)
+			}
+		}
+
+		window.onerror = function(msg, url, line, col, error) {
+			if(socket == null) return;
+			var extra = !col ? '' : '\ncolumn: ' + col;
+			extra += !error ? '' : '\nerror: ' + error;
+
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth() + 1;
+
+			var yyyy = today.getFullYear();
+			if (dd < 10) {
+				dd = '0' + dd;
+			}
+			if (mm < 10) {
+				mm = '0' + mm;
+			}
+			var today = dd + '/' + mm + '/' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+
+			var errMessage = "\n\n" + today + " Error: " + msg + "\nurl: " + url + "\nline: " + line + extra + "\nline: " + ua;
+
+			socket.emit('errorlog', errMessage);
+		}
+
+	}
+
 	var initWithNodeJs = function(callback){
 		var ua=navigator.userAgent;
 		if(ua.indexOf('Android')!=-1||ua.indexOf('Windows Phone')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
@@ -6551,6 +6711,7 @@ WebRTCconferenceLib = function app(options){
 
 				socket = io.connect(options.nodeServer, {transports: ['websocket']});
 				socket.on('connect', function () {
+					if(_isiOS) enableiOSDebug();
 					if(_debug) console.log('CONNECTED', socket);
 					if(localParticipant != null) return;
 					localParticipant = new Participant();

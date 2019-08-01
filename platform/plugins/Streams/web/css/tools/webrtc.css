@@ -76,8 +76,12 @@
     padding: 15px;
     border-top-right-radius: 7px;
     border-top-left-radius: 7px;
-
 }
+
+.Streams_webrtc_desktop-screen .Streams_webrtc_controls_tool.isMoving .Streams_webrtc_conference-control-inner > div{
+    pointer-events: none;
+}
+
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_top{
     bottom: auto;
     border-radius: 0;
@@ -232,6 +236,10 @@
     display: flex;
     justify-content: center;
 }
+.Streams_webrtc_mobile-screen .Streams_webrtc_controls_tool.isMoving .Streams_webrtc_conference-control-inner > div{
+    pointer-events: none;
+}
+
 .Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner > div:last-child{
     margin-right: 0;
 }

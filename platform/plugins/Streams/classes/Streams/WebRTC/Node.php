@@ -41,12 +41,23 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
 		$stream->changed();
 
 		$socketServer = Q_Config::get('Streams', 'webrtc', 'socketServer', null);
+		$turnServers = Q_Config::get('Streams', 'webrtc', 'turnServers', []);
+		$useTwilioTurn = Q_Config::get('Streams', 'webrtc', 'useTwilioTurnServers', null);
+
+		if($useTwilioTurn) {
+			try {
+				$turnCredentials = $this->getTwilioTurnCredentials();
+				$turnServers[] = $turnCredentials;
+			} catch (Exception $e) {
+			}
+		}
 
         return array(
             'stream' => $stream,
 	        'created' => $created,
             'roomId' => $stream->name,
-            'socketServer' => $socketServer
+            'socketServer' => $socketServer,
+            'turnCredentials' => $turnServers
         );
     }
 
