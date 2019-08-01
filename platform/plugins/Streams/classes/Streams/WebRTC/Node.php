@@ -40,7 +40,12 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
 		$stream->setAttribute('startTime', time());
 		$stream->changed();
 
-		$socketServer = Q_Config::get('Streams', 'webrtc', 'socketServer', null);
+		$socketServerHost = Q_Config::get('Q', 'node', 'host', null);
+		$socketServerPort = Q_Config::get('Streams', 'webrtc', 'socketServerPort', null);
+		if(!empty($socketServerHost) && !empty($socketServerHost)){
+			$socketServer = $socketServerHost . ':' . $socketServerPort;
+		}
+
 		$turnServers = Q_Config::get('Streams', 'webrtc', 'turnServers', []);
 		$useTwilioTurn = Q_Config::get('Streams', 'webrtc', 'useTwilioTurnServers', null);
 
