@@ -1,26 +1,31 @@
 'use strict';
 
+self.addEventListener('activate', function (event) {
+	event.waitUntil(clients.claim());
+});
+
 self.addEventListener('push', function (event) {
 	let data = JSON.parse(event.data.text());
 	console.log('[Service Worker] Push received');
-	// SW force update via push
 	if (data.update) {
+		// force service worker to update via push
 		self.registration.update().then(() => console.log('[Service Worker] Updated'));
 		return;
 	}
-	const title = data.title;
-	let options = Object.assign({
-		body: data.body,
-		data: data
-	}, data);
 	if (options.requireInteraction === undefined) {
-		options.requireInteraction = true;
+		options.requireInteraction = false;
 	}
-	send_message_to_all_clients(data);
+	sendMessageToAllClients({
+		Q: {
+			notification: {
+				received: data
+			}
+		}
+	});
 	if (data.collapseId) {
 		options.tag = data.collapseId;
 	}
-	event.waitUntil(self.registration.showNotification(title, options));
+	event.waitUntil(self.registration.showNotification(data.title, data));
 });
 
 self.addEventListener('notificationclick', function (event) {
@@ -30,12 +35,21 @@ self.addEventListener('notificationclick', function (event) {
 	if (data.url) {
 		event.waitUntil(clients.openWindow(data.url));
 	}
-	data.wasClicked = true;
-	send_message_to_all_clients(event.notification.data);
+	var payload = Object.assign({}, event.notification.data, {
+		action: event.action
+	});
+	sendMessageToAllClients({
+		Q: {
+			notification: {
+				clicked: payload
+			}
+		}
+	});
 });
 
-function send_message_to_all_clients(msg) {
-	self.clients.matchAll({includeUncontrolled: true, type: 'window'}).then(function(all) {
+function sendMessageToAllClients(msg) {
+	self.clients.matchAll({includeUncontrolled: true, type: 'window'})
+	.then(function(all) {
 		all.forEach(function(client) {
 			client.postMessage(msg);
 		});

@@ -25,11 +25,24 @@ class Q_Handlebars {
 	 * Render source using Handlebars rendering engine
 	 * @method render
 	 * @static
-	 * @param {string} $source
+	 * @param {string|array} $source
+	 *   The source content of the Handlebars template, which can contain references to $data.
+	 *   You can also pass here array($textName, $pathArray) to load the $source using Q_Text::get()
 	 * @param {mixed} [$data=array()]
+	 * @param {array} [$options=array()]
+	 *  Pass any additional options to Q_Text::get() if it is called
 	 * @return {string} Rendered template
 	 */
-	static function renderSource($source, $data = array()) {
+	static function renderSource($source, $data = array(), $options = array()) {
+		if (is_array($source)) {
+			$name = $source[0];
+			$path = $source[1];
+			$text = Q_Text::get($name, $options);
+			$source = Q::getObject($text, $path, null);
+			if (!isset($source)) {
+				return null;
+			}
+		}
 		return self::handlebars($source)->loadString($source)->render($data);
 	}
 	

@@ -206,6 +206,16 @@
 						"subject": ["Streams/content", ["notifications", "Streams/closed"]]
 					}
 				},
+				"relatedTo": {
+					"*": {
+						"description": ["Streams/content", ["notifications", "Streams/relatedTo/*"]]
+					}
+				},
+				"relatedFrom": {
+					"*": {
+						"description": ["Streams/content", ["notifications", "Streams/relatedFrom/*"]]
+					}
+				},
 				"defaults": {
 					"type": "Streams/text",
 					"title": "Untitled",

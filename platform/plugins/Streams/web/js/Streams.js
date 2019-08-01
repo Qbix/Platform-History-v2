@@ -5790,7 +5790,7 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 	var publisherId = Q.getObject("fromPublisherId", instructions);
 	var streamName = Q.getObject("fromStreamName", instructions);
 	var toStreamName = Q.getObject("streamName", message) || "";
-	var conversationUrl = '/conversation/' + publisherId + '/' + toStreamName.split('/').pop();
+	var conversationUrl = '/conversation/' + message.publisherId + '/' + toStreamName.split('/').pop();
 	var toUrl = Q.baseUrl() + conversationUrl + '/webrtc';
 
 	// only relation type Streams/webrtc and not for myself

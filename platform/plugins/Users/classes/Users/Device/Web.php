@@ -22,7 +22,14 @@ class Users_Device_Web
 			'icon' => Q::ifset($notification, 'icon', ''),
 			'sound' => Q::ifset($notification, 'sound', 'default')
 		);
-		foreach (array('url', 'click_action') as $f) {
+		if (isset($notification['collapseId'])) {
+			$result['tag'] = $notification['collapseId'];
+		}
+		foreach (array(
+			'url', 'data', 'tag', 'actions', 'requireInteraction',
+			'icon', 'image', 'badge',
+			'sound', 'dir', 'tag'
+		) as $f) {
 			if (isset($notification[$f])) {
 				$result[$f] = $notification[$f];
 			}

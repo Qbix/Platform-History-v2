@@ -42,7 +42,9 @@
         "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
         "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
         "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message"
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+		"Streams\/relatedTo\/*": "New {{relationDisplayType}} added",
+		"Streams/relatedFrom/*": "Added to {{toDisplayType}} as {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} invited you to {{inviteUrl}}",

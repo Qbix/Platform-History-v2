@@ -36,8 +36,10 @@ Q.mixin(Users_Email, Q.require('Base/Users/Email'));
  * @method sendMessage
  * @static
  * @param {String} to Comma-separated list of emails
- * @param {String} subject The subject. May contain variable references to members
- *  of the $fields array.
+ * @param {String|Array} $subject
+ *  The subject. May contain variable references to members of the $fields array.
+ *  You can also pass an array like [source, [key1, ...]] to use Q_Text to obtain
+ *  the subject.
  * @param {String} view The name of a view for the body. Fields are passed to it.
  * @param {Object} [fields={}] The fields referenced in the subject and/or view
  * @param {Object} [options={}]
