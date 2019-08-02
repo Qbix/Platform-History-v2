@@ -48,17 +48,17 @@ function startServer(port, httpsCerts) {
 		socket.on('joined', function (identity) {
 			console.log('Got message: joined', identity, socket.id);
 			socket.username = identity.username;
-			socket.isiOS = identity.isiOS;
+			socket.info = identity.info;
 			room = identity.room;
 			socket.join(identity.room, function () {
-				console.log(socket.id + 'now in rooms: ', socket.rooms)
+				console.log(socket.id + 'now in rooms: ', socket.rooms);
 			})
 
 
 			socket.broadcast.to(identity.room).emit('participantConnected', {
 				username:identity.username,
 				sid:socket.id,
-				isiOS:identity.isiOS != null ? identity.isiOS : false
+				info:identity.info,
 			});
 
 
@@ -85,7 +85,7 @@ function startServer(port, httpsCerts) {
 		socket.on('signalling', function(message) {
 			console.log('SIGNALLING MESSAGE', message.type, message.name, message.targetSid, socket.id);
 			message.fromSid = socket.id;
-			message.isiOS = socket.isiOS;
+			if(message.type == 'offer') message.info = socket.info;
 			socket.to(message.targetSid).emit('signalling', message);
 		});
 

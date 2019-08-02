@@ -65,7 +65,10 @@ WebRTCconferenceLib = function app(options){
 
 	var _isMobile;
 	var _isiOS;
-	var _debug = true;
+	var _isAndroid;
+	var _usesUnifiedPlan =  RTCRtpTransceiver.prototype.hasOwnProperty('currentDirection');
+
+	var _debug = false;
 
 	var pc_config = {
 		"iceServers": [
@@ -82,7 +85,7 @@ WebRTCconferenceLib = function app(options){
 	};
 
 	var ua = navigator.userAgent;
-	if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
+	if(!_usesUnifiedPlan) {
 		pc_config.sdpSemantics = 'plan-b';
 	}
 
@@ -102,12 +105,29 @@ WebRTCconferenceLib = function app(options){
 			pc_config['iceServers'].push(turn)
 
 			if(changeToUrls) {
-				oturn['urls'] = turn['url'];
+				turn['urls'] = turn['url'];
 				delete turn['url'];
 			}
 		}
 
 		console.log('pc_config', pc_config);
+	}
+
+	if(ua.indexOf('Android')!=-1||ua.indexOf('Windows Phone')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPad')!=-1||ua.indexOf('iPod')!=-1) {
+		_isMobile = true;
+		if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
+			_isiOS = true;
+		} else if (/android/i.test(ua)) {
+			_isAndroid = true;
+		}
+	}
+	
+	var _localInfo = {
+		isMobile: _isMobile,
+		platform: _isiOS ? 'ios' : (_isAndroid ? 'android' : null),
+		usesUnifiedPlan: _usesUnifiedPlan,
+		isCordova: typeof cordova != 'undefined',
+		ua: navigator.userAgent
 	}
 
 
@@ -204,6 +224,7 @@ WebRTCconferenceLib = function app(options){
 		this.isLocal = false;
 		this.latestOnlineTime = null;
 		this.online = true;
+		this.localInfo = {};
 	}
 
 	var Track = function () {
@@ -2594,7 +2615,7 @@ WebRTCconferenceLib = function app(options){
 				if(_debug) console.log('socketParticipantConnected ', participant)
 
 				var config = pc_config;
-				if(participant.isiOS) config.sdpSemantics = "plan-b";
+				if(!participant.localInfo.usesUnifiedPlan) config.sdpSemantics = "plan-b";
 				if(_debug) console.log('socketParticipantConnected ', config);
 				var newPeerConnection = new RTCPeerConnection(config);
 
@@ -2751,7 +2772,7 @@ WebRTCconferenceLib = function app(options){
 				newParticipant.iosrtc = true;
 				newParticipant.sid = participantData.sid;
 				newParticipant.identity = participantData.username;
-				if(participantData.isiOS) newParticipant.isiOS = true;
+				newParticipant.localInfo = participantData.info;
 				participantConnected(newParticipant);
 				newParticipant.RTCPeerConnection = createPeerConnection(newParticipant);
 
@@ -3114,7 +3135,7 @@ WebRTCconferenceLib = function app(options){
 
 			function createPeerConnection(senderParticipant) {
 				var config = pc_config;
-				if(senderParticipant.isiOS) config.sdpSemantics = "plan-b";
+				if(!senderParticipant.localInfo.usesUnifiedPlan) config.sdpSemantics = "plan-b";
 				var newPeerConnection = new RTCPeerConnection(config);
 
 				if('ontrack' in newPeerConnection) {
@@ -3362,7 +3383,7 @@ WebRTCconferenceLib = function app(options){
 					senderParticipant = new Participant();
 					senderParticipant.sid = message.fromSid;
 					senderParticipant.identity = message.name;
-					if(message.isiOS != null) senderParticipant.isiOS = true;
+					senderParticipant.localInfo = message.info;
 					participantConnected(senderParticipant);
 				}
 
@@ -3922,7 +3943,7 @@ WebRTCconferenceLib = function app(options){
 			sendOnlineStatus();
 			checkOnlineStatus();
 			console.log('joined', {username:localParticipant.identity, sid:socket.id, room:options.roomName})
-			socket.emit('joined', {username:localParticipant.identity, sid:socket.id, room:options.roomName, isiOS: _isiOS});
+			socket.emit('joined', {username:localParticipant.identity, sid:socket.id, room:options.roomName, isiOS: _isiOS, info: _localInfo});
 
 			app.participantsList.loadList();
 			if(!_isMobile && !options.useAsLibrary) app.conferenceControl.createParticipantsList(app.participantsList.getParticipantsList());
@@ -4416,6 +4437,7 @@ WebRTCconferenceLib = function app(options){
 
 					}else*/
 					if(currentVideoTracks.length != 0) {
+						if(_debug) console.log("toggleCameras: if2 currentVideoTracks " + currentVideoTracks.length);
 						if(_debug) console.log("toggleCameras: if2 ");
 
 						if(!(typeof cordova != 'undefined' && _isiOS)) app.conferenceControl.replaceTrack(videoTrack);
@@ -6703,7 +6725,7 @@ WebRTCconferenceLib = function app(options){
 			app.views.updateOrientation();
 		} else app.views.isMobile(false);
 
-		if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) _isiOS = true;
+		//if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) _isiOS = true;
 
 		if(options.useAsLibrary) {
 			require(['https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'], function (io) {
@@ -6772,24 +6794,6 @@ WebRTCconferenceLib = function app(options){
 				if(_isMobile) app.views.updateOrientation();
 			}, 1500);
 		});
-	}
-
-	var start = function(user){
-		var ua=navigator.userAgent;
-		if(ua.indexOf('Android')!=-1||ua.indexOf('Windows Phone')!=-1||ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
-			_isMobile=true;
-			if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) _isiOS = true;
-			app.views.isMobile(true);
-			app.views.updateOrientation();
-		} else app.views.isMobile(false);
-
-
-		if(_debug) console.log('START', socket);
-		localParticipant = new Participant();
-		localParticipant.sid = user.sid;
-		localParticipant.identity = user.username;
-		roomParticipants.push(localParticipant);
-		initOrConnectWithNodeJs();
 	}
 
 	app.init = function(callback){
