@@ -2458,10 +2458,10 @@ Q.Contextual = {
 		Q.Contextual.makeShowHandler(events);
 		Q.Contextual.makeLifecycleHandlers();
 		
-		contextual.on('click', function (e) {
+		contextual.on('click touchmove mousemove wheel', function (e) {
 			e.preventDefault();
 		});
-		
+
 		return Q.Contextual.collection.length - 1;
 	},
 	
