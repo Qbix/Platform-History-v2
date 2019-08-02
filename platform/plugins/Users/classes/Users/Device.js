@@ -35,10 +35,10 @@ function Users_Device (fields) {
  * @param {Object} notification
  * @param {String|Object} [notification.alert] Either the text of an alert to show,
  *  or an object with the following fields:
- * @param {string|array} [notification.alert] Either the text of an alert to show,
- *  or an object with the following fields:
- * @param {String} [notification.alert.title] The title of the notification
- * @param {String} [notification.alert.body] The body of the notification
+ * @param {String|array} [notification.alert.title] The title of the notification
+ * You can also pass an [source, [$key1, ...]] to use Q.Text.get to obtain the title.
+ * @param {String|array} [notification.alert.body] The body of the notification
+ * You can also pass an [source, [$key1, ...]] to use Q.Text.get to obtain the body.
  * @param {String} [notification.alert.titleLocKey] Apple-only
  * @param {String} [notification.alert.titleLocArgs] Apple-only
  * @param {String} [notification.alert.actionLocKey] Apple-only
@@ -49,7 +49,9 @@ function Users_Device (fields) {
  * @param {String} [notification.sound] The name of the sound file in the app bundle or Library/Sounds folder
  * @param {String} [notification.icon] Url of icon, can be png any square size
  * @param {String} [notification.url] Url to which the notifiation will be linked
- * @param {array} [notification.actions] Array of up to two arrays with keys 'action' and 'title'.
+ * @param {array} [notification.actions] Array of up to two arrays with keys 'action', 'title' and optionally 'icon'.
+ * @param {string|array} [notification.actions.title] Action title
+ * You can also pass an array($source, array($key1, ...)) to use Q_Text to obtain the title.
  * @param {String} [notification.category] Apple-only. The name of the category for actions registered on the client side.
  * @param {Object} [notification.payload] Put all your custom notification fields here
  * @param {Object} [options]
@@ -81,14 +83,24 @@ Users_Device.prototype.pushNotification = function (notification, options, callb
 	if (o.collapseId) {
 		n.collapseId = o.collapseId;
 	}
-	if (n.alert && n.alert.title) {
-		// if subject is object - get subject from text file
-		if (Array.isArray(n.alert.title)) {
-			n.alert.title = Q.getObject(n.alert.title[1], Q.Text.get(n.alert.title[0], o.language));
-		}
 
-		n.alert.title = Q.Handlebars.renderSource(n.alert.title, o.fields);
-	}
+	// process title and body
+	['alert', 'actions'].forEach(function(item1){
+		['title', 'body'].forEach(function(item2){
+			if (!Q.getObject([item1, item2], n)) {
+				return;
+			}
+
+			// if item is object - get item from text file
+			if (Array.isArray(n[item1][item2])) {
+				n[item1][item2] = Q.getObject(n[item1][item2][1], Q.Text.get(n[item1][item2][0], o.language));
+			}
+
+			n[item1][item2] = Q.Handlebars.renderSource(n[item1][item2], o.fields);
+		});
+	});
+
+	// if view defined, it rewrite the body
 	if (o && o.view) {
 		var body = Q.view(o.view, o.fields, {language: o.language, source: o.isSource});
 		Q.setObject(['alert', 'body'], body, n);
