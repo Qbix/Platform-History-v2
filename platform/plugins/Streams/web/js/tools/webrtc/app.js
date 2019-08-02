@@ -65,7 +65,7 @@ WebRTCconferenceLib = function app(options){
 
 	var _isMobile;
 	var _isiOS;
-	var _debug = false;
+	var _debug = true;
 
 	var pc_config = {
 		"iceServers": [
@@ -739,13 +739,11 @@ WebRTCconferenceLib = function app(options){
 		function attachTrack(track, participant) {
 			if(_debug) console.log('attachTrack track', track);
 			if(_debug) console.log('attachTrack track kind', track.kind);
-			if(_debug) console.log('attachTrack track.stream instanceof MediaStream' + (track.stream instanceof MediaStream));
-			if(_debug) console.log('attachTrack track.stream instanceof MediaStream' + (typeof track.stream));
-			if(typeof cordova != 'undefined' && window.device.platform === 'iOS' && track.kind == 'video' && track.stream != null && track.stream.hasOwnProperty('_blobId')) {
+			if(typeof cordova != 'undefined' && _isiOS && track.kind == 'video' && track.stream != null && track.stream.hasOwnProperty('_blobId')) {
 				if(_debug) console.log('attachTrack iosrtc track video');
 				iosrtcLocalPeerConnection.addStream(track.stream);
 				return;
-			} else if(typeof cordova != 'undefined' && window.device.platform === 'iOS' && track.kind == 'audio' && track.stream != null && track.stream.hasOwnProperty('_blobId')) {
+			} else if(typeof cordova != 'undefined' && _isiOS && track.kind == 'audio' && track.stream != null && track.stream.hasOwnProperty('_blobId')) {
 				if(_debug) console.log('attachTrack iosrtc track audio');
 
 				iosrtcLocalPeerConnection.addStream(track.stream);
@@ -810,7 +808,7 @@ WebRTCconferenceLib = function app(options){
 			})[0];
 			if(trackExist == null) participant.tracks.push(track);
 
-			if(typeof cordova != 'undefined' && window.device.platform === 'iOS' && participant.isLocal) {
+			if(typeof cordova != 'undefined' && _isiOS && participant.isLocal) {
 				if(_debug) console.log('attachTrack iosrtc PUBLISH TRACK ' + (participant.videoStream != null));
 
 				if(track.kind =='video'){
@@ -1307,6 +1305,7 @@ WebRTCconferenceLib = function app(options){
 			var formats = {
 				ogg: 'video/ogg; codecs="theora"',
 				h264: 'video/mp4; codecs="avc1.42E01E"',
+				h264_2: 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"',
 				webm: 'video/webm; codecs="vp8, vorbis"',
 				vp9: 'video/webm; codecs="vp9"',
 				hls: 'application/x-mpegURL; codecs="avc1.42E01E"'
@@ -1319,7 +1318,7 @@ WebRTCconferenceLib = function app(options){
 			if(type) return video.canPlayType(formats[type] || type);
 
 			var supportabbleFormats = {};
-			for (var key in formats) {
+			for (let key in formats) {
 				if (formats.hasOwnProperty(key)) {
 					supportabbleFormats[key] = video.canPlayType(formats[key]);
 					console.log('supportsVideoType: ' + key + ' - ' + supportabbleFormats[key]);
@@ -1352,7 +1351,7 @@ WebRTCconferenceLib = function app(options){
 				remoteStreamEl = document.createElement(track.kind);
 
 				try{
-					if(typeof cordova != "undefined" && window.device.platform === 'iOS' && participant.isLocal && (participant.audioStream != null || participant.videoStream != null)) {
+					if(typeof cordova != "undefined" && _isiOS && participant.isLocal && (participant.audioStream != null || participant.videoStream != null)) {
 						if(_debug) console.log('createTrackElement 2 stream  does not exist')
 
 						stream = track.kind == 'audio' ? participant.audioStream : participant.videoStream
@@ -1418,8 +1417,8 @@ WebRTCconferenceLib = function app(options){
 				participant.videoStream = stream;
 			else if(track.kind == 'audio') participant.audioStream = stream;*/
 
-			//var supportableFormats = supportsVideoType(remoteStreamEl);
-			//console.log('supportsVideoType', supportableFormats)
+			var supportableFormats = supportsVideoType(remoteStreamEl);
+			console.log('supportsVideoType', supportableFormats)
 			//remoteStream.srcObject = track.twilioReference != null ? track.twilioReference.mediaStreamTrack : track.MediaStreamTrack;
 
 			if(track.kind == 'video') {
@@ -2453,7 +2452,7 @@ WebRTCconferenceLib = function app(options){
 				console.log('roomParticipants', participantsList);
 				/*for(var p in participantsList) {
 					var participantData = participantsList[p];
-					if(participantData.iosrtc == true || (typeof cordova != 'undefined' && window.device.platform === 'iOS')) {
+					if(participantData.iosrtc == true || (typeof cordova != 'undefined' && _isiOS)) {
 						/!*socketParticipantConnected(participantData, function (localDescription) {
 							sendMessage({
 								name: localParticipant.identity,
@@ -2687,7 +2686,7 @@ WebRTCconferenceLib = function app(options){
 
 							if(_isiOS){
 								console.log('offerReceived localDescription oldSdp: ' + localDescription.sdp);
-								localDescription.sdp = removeInactiveTracksFromSDP(localDescription.sdp);
+								//localDescription.sdp = removeInactiveTracksFromSDP(localDescription.sdp);
 								console.log('offerReceived localDescription newSdp: ' + localDescription.sdp);
 							}
 
@@ -3190,7 +3189,7 @@ WebRTCconferenceLib = function app(options){
 
 							if(_isiOS){
 								console.log('onnegotiationneeded createOffer oldSdp: ' + localDescription.sdp);
-								localDescription.sdp = removeInactiveTracksFromSDP(localDescription.sdp);
+								//localDescription.sdp = removeInactiveTracksFromSDP(localDescription.sdp);
 								console.log('onnegotiationneeded createOffer newSdp: ' + localDescription.sdp);
 							}
 
@@ -3422,7 +3421,7 @@ WebRTCconferenceLib = function app(options){
 
 							if(_isiOS){
 								console.log('offerReceived createAnswer oldSdp: ' + answer.sdp);
-								answer.sdp = removeInactiveTracksFromSDP(answer.sdp);
+								//answer.sdp = removeInactiveTracksFromSDP(answer.sdp);
 								console.log('offerReceived createAnswer newSdp: ' + answer.sdp);
 							}
 
@@ -3894,7 +3893,7 @@ WebRTCconferenceLib = function app(options){
 
 
 			for (var s in streams) {
-				//if(typeof cordova != 'undefined' && window.device.platform === 'iOS') localParticipant.iosrtcRTCPeerConnection.addStream(streams[s]);
+				//if(typeof cordova != 'undefined' && _isiOS) localParticipant.iosrtcRTCPeerConnection.addStream(streams[s]);
 				var localTracks = streams[s].getTracks();
 
 				for (var i in localTracks) {
@@ -3995,7 +3994,7 @@ WebRTCconferenceLib = function app(options){
 							if (_debug) console.log('loadDevicesList track label', mediaStreamTrack.id);
 
 							if (!(typeof cordova != 'undefined' && _isiOS)) {
-								if (mediaStreamTrack.enabled == true && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label || mediaStreamTrack.label == device.label)) {
+								if (mediaStreamTrack.enabled == true && ((typeof mediaStreamTrack.getSettings != 'undefined' && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label)) || mediaStreamTrack.label == device.label)) {
 									frontCameraDevice = currentCameraDevice = device;
 								}
 							}
@@ -4007,7 +4006,8 @@ WebRTCconferenceLib = function app(options){
 							var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
 
 							if (!(typeof cordova != 'undefined' && _isiOS)) {
-								if (mediaStreamTrack.enabled == true && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label || mediaStreamTrack.label == device.label)) {
+								if (mediaStreamTrack.enabled == true
+									&& ((typeof mediaStreamTrack.getSettings != 'undefined' && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label)) || mediaStreamTrack.label == device.label)) {
 									currentAudioDevice = device;
 								}
 							}
@@ -4389,7 +4389,7 @@ WebRTCconferenceLib = function app(options){
 			if(options.mode != 'twilio') {
 				var cameraId = cameraId != null ? cameraId : deviceToSwitch.deviceId;
 				var constrains = {deviceId: {exact: cameraId}};
-				if(typeof cordova != 'undefined' && window.device.platform === 'iOS') {
+				if(typeof cordova != 'undefined' && _isiOS) {
 					constrains = {deviceId: cameraId}
 				}
 				//TODO: make offers queue as this code makes offer twice - after disableVideo and after enableVideo
@@ -4411,7 +4411,7 @@ WebRTCconferenceLib = function app(options){
 					}*/
 
 					var currentVideoTracks = localParticipant.videoTracks();
-					/*if(typeof cordova != 'undefined' && window.device.platform === 'iOS') {
+					/*if(typeof cordova != 'undefined' && _isiOS) {
 						app.screensInterface.attachTrack(trackToAttach, localParticipant);
 
 					}else*/
@@ -4477,7 +4477,7 @@ WebRTCconferenceLib = function app(options){
 					localParticipant.tracks[i].mediaStreamTrack.stop();
 				}
 
-				if(typeof cordova != 'undefined' && window.device.platform === 'iOS') {
+				if(typeof cordova != 'undefined' && _isiOS) {
 					cordova.plugins.iosrtc.getUserMedia({
 						'audio': false,
 						'video': constrains
@@ -4641,7 +4641,7 @@ WebRTCconferenceLib = function app(options){
 				}
 			};
 
-			if(typeof cordova != 'undefined' && window.device.platform === 'iOS') {
+			if(typeof cordova != 'undefined' && _isiOS) {
 				cordova.plugins.iosrtc.getUserMedia({
 					'audio': false,
 					'video': {
@@ -4818,7 +4818,7 @@ WebRTCconferenceLib = function app(options){
 				});
 			} else {
 
-				/*if(typeof cordova != "undefined" && window.device.platform === 'iOS') {
+				/*if(typeof cordova != "undefined" && _isiOS) {
 					var RTCLocalStreams = localParticipant.iosrtcRTCPeerConnection.getLocalStreams();
 
 					var streamExist = RTCLocalStreams.filter(function (s) {
@@ -6002,7 +6002,7 @@ WebRTCconferenceLib = function app(options){
 
 	}
 
-	if(typeof cordova != 'undefined' && window.device.platform === 'iOS') {
+	if(typeof cordova != 'undefined' && (ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1)) {
 		var nativeLocalWebRTCPeerConnection = (function () {
 			var iceQueue = [];
 
@@ -6719,7 +6719,7 @@ WebRTCconferenceLib = function app(options){
 					localParticipant.isLocal = true;
 					roomParticipants.push(localParticipant);
 
-					if(typeof cordova != 'undefined' && window.device.platform === 'iOS') {
+					if(typeof cordova != 'undefined' && _isiOS) {
 						iosrtcLocalPeerConnection.create(function () {
 							nativeLocalWebRTCPeerConnection.create(function () {
 								iosrtcLocalPeerConnection.createOffer();

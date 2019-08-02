@@ -1,9 +1,21 @@
 "use strict";
 
 
-RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
-RTCIceCandidate = window.RTCIceCandidate || window.mozRTCIceCandidate;
-RTCSessionDescription = window.mozRTCSessionDescription || window.RTCSessionDescription;
+var RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+var RTCIceCandidate = window.RTCIceCandidate || window.mozRTCIceCandidate;
+var RTCSessionDescription = window.mozRTCSessionDescription || window.RTCSessionDescription;
+
+
+if(typeof DOMRect == 'undefined') {
+	window.DOMRect = function(x, y, width, height){
+		this.x = x;
+		this.y = y;
+		this.top = y;
+		this.left = x;
+		this.height = height;
+		this.width = width;
+	}
+}
 
 var promisifiedOldGUM = function(constraints, successCallback, errorCallback) {
 
@@ -2307,18 +2319,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						mainScreenSize.height = mainScreenSize.height + 50;
 
 						if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+							if(align == 'bottom') minY = count > 1 ? minY : parentHeight - elementToWrap.height;
 							y = (minY / 2) - mainScreenSize.height / 2;
 						} else if (align == 'top' || align == 'topleft' || align == 'topright') {
-							y = maxY + spaceBetween;
+							y = (count > 1 ? maxY : 0) + spaceBetween;
 						}
 
 						var maximizedRect = new DOMRect((parentWidth / 2) - mainScreenSize.width / 2, y, mainScreenSize.width, mainScreenSize.height);
-						console.log('maximizedRect', maximizedRect, maxY, minY, baseHeight, mainScreenSize.height)
 
 						rects.unshift({side: null, rect: maximizedRect});
 					}
 
-					console.log('rects raw', rects)
 					return rects.map(function(rectObj){
 						return rectObj.rect;
 					});
