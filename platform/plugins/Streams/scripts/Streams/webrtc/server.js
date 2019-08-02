@@ -18,7 +18,7 @@ function startServer(port, httpsCerts) {
 	if(typeof httpsCerts != "undefined") {
 		server = https.createServer(httpsCerts, app).listen(port);
 	} else {
-		server = https.createServer(function(){
+		server = http.createServer(function(){
 
 		}, app).listen(port);
 	}
