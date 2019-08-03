@@ -541,7 +541,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		$toolElement.attr('data-webrtc', 'loading');
 
-		Q.Streams.related(state.publisherId, state.streamName, 'Streams/webrtc', true, {limit: 1, stream: true}, function (err) {
+		Q.Streams.related.force(state.publisherId, state.streamName, 'Streams/webrtc', true, {limit: 1, stream: true}, function (err) {
 			if (err) {
 				return;
 			}
