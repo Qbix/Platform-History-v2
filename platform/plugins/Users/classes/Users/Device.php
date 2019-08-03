@@ -156,8 +156,10 @@ class Users_Device extends Base_Users_Device
 	 * @param {array} $notification
 	 * @param {string|array} [$notification.alert] Either the text of an alert to show,
 	 *  or an object with the following fields:
-	 * @param {string} [$notification.alert.title] The title of the notification
-	 * @param {string} [$notification.alert.body] The body of the notification
+	 * @param {string|array} [$notification.alert.title] The title of the notification
+	 * You can also pass an array($source, array($key1, ...)) to use Q_Text to obtain the title.
+	 * @param {string|array} [$notification.alert.body] The body of the notification
+	 * You can also pass an array($source, array($key1, ...)) to use Q_Text to obtain the body.
 	 * @param {string} [$notification.alert.titleLocKey] Apple-only
 	 * @param {string} [$notification.alert.titleLocArgs] Apple-only
 	 * @param {string} [$notification.alert.actionLocKey] Apple-only
@@ -168,7 +170,9 @@ class Users_Device extends Base_Users_Device
 	 * @param {string} [$notification.sound] The name of the sound file in the app bundle or Library/Sounds folder
 	 * @param {string} [$notification.icon] Url of icon, can be png any square size
 	 * @param {string} [$notification.url] Url to which the notifiation will be linked
-	 * @param {array} [$notification.actions] Array of up to two arrays with keys 'action' and 'title'.
+	 * @param {array} [$notification.actions] Array of up to two arrays with keys 'action', 'title' and optionally 'icon'.
+	 * @param {string|array} [$notification.actions.title] Action title
+	 * You can also pass an array($source, array($key1, ...)) to use Q_Text to obtain the title.
 	 * @param {string} [$notification.category] Apple-only. The name of the category for actions registered on the client side.
 	 * @param {array} [$notification.payload] Put all your custom notification fields here
 	 * @param {integer} [$notification.expiry=null] Number of seconds until notification expires
@@ -186,6 +190,23 @@ class Users_Device extends Base_Users_Device
 	 */
 	function pushNotification($notification, $options = array())
 	{
+		// if title or body are arrays, get texts from lang files
+		foreach (array('alert', 'actions') as $item1) {
+			foreach (array('title', 'body') as $item2) {
+				$subject = Q::ifset($notification, $item1, $item2, null);
+				if (!is_array($subject)) {
+					continue;
+				}
+				$source = $subject[0];
+				$keys = $subject[1];
+				$texts = Q_Text::get($source, array('language' => $options['language']));
+				$tree = new Q_Tree($texts);
+				$keyPath = implode('/', $keys);
+				$args = array_merge($keys, array("Missing $keyPath in $source"));
+				$notification[$item1][$item2] = $tree->get($args);
+			}
+		}
+
 		$this->handlePushNotification($notification, $options);
 	}
 	
