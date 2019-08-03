@@ -21,6 +21,8 @@
 
 		{
 			active: false,
+			resize: true,
+			move: true,
 			elementPosition: null,
 			snapToSidesOnly: false,
 			resizeByWheel: true,
@@ -101,21 +103,21 @@
 							var toggleClass = function (className) {
 								var classesArr = ['Q_resize_snapped_left', 'Q_resize_snapped_top', 'Q_resize_snapped_right', 'Q_resize_snapped_bottom'];
 								for (var c in classesArr) {
-									if(elementToMove.classList.contains(classesArr[c])) elementToMove.classList.remove(classesArr[c]);
+									if(classesArr[c] != className && elementToMove.classList.contains(classesArr[c])) elementToMove.classList.remove(classesArr[c]);
 								}
+
 								elementToMove.style.width = '';
 								elementToMove.style.height = '';
 								elementToMove.style.bottom = 'auto';
 								elementToMove.classList.add(className);
 
 								divTop = elementToMove.style.top,
-									divLeft = elementToMove.style.left,
+									divLeft = elementToMove.offsetLeft,
+									divTop = elementToMove.offsetTop,
 									eWi = parseInt(elementToMove.offsetWidth),
 									eHe = parseInt(elementToMove.offsetHeight),
 									cWi = parseInt(moveWithinEl.offsetWidth),
 									cHe = parseInt(moveWithinEl.offsetHeight);
-								divTop = divTop.replace('px','');
-								divLeft = divLeft.replace('px','');
 								diffX = posX - divLeft, diffY = posY - divTop;
 							}
 
@@ -166,7 +168,7 @@
 
 						if(!tool.state.active || evt.button == 1 || evt.button == 2) return;
 
-						if(!tool.state.movable || (Q.info.isTouchscreen && (tool.isScreenResizing || evt.targetTouches.length != 1))) return;
+						if(Q.info.isTouchscreen && (tool.isScreenResizing || evt.targetTouches.length != 1)) return;
 						var elRect = elementToMove.getBoundingClientRect();
 						if(elementToMove == elementToResize) {
 							elementToMove.style.width = elRect.width + 'px';
@@ -714,10 +716,13 @@
 
 				return {
 					bind: function () {
-						Q.addEventListener(activateOnElement, Q.Pointer.start, _dragElement.initMoving);
-						Q.addEventListener(window, Q.Pointer.end, _dragElement.stopMoving);
-
-						resizeElement.setHandler(elementToResize);
+						if(tool.state.move) {
+							Q.addEventListener(activateOnElement, Q.Pointer.start, _dragElement.initMoving, true, true);
+							Q.addEventListener(window, Q.Pointer.end, _dragElement.stopMoving, true, true);
+						}
+						if(tool.state.resize) {
+							resizeElement.setHandler(elementToResize);
+						}
 					}
 				}
 			},

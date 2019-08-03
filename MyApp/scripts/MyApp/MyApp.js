@@ -19,5 +19,8 @@ require('../Q.inc')(function(Q) {
 			Q.log('ROLLBACK', 'sql');
 		}
 	});
-	
+
+	var port = Q.Config.get(['Streams', 'webrtc', 'socketServerPort'], false);
+	var https = Q.Config.get(['Q', 'node', 'https'], false);
+	require(Q.pluginInfo.Streams.SCRIPTS_DIR + '/Streams/webrtc/server.js')(port, https);
 });
