@@ -3064,7 +3064,8 @@ Q.Contextual = {
 		if (Q.info.isTouchscreen)
 		{
 			var mask = Q.Masks.show('Q.screen.mask', {
-				'fadeIn': Q.Contextual.fadeTime
+				fadeIn: Q.Contextual.fadeTime,
+				zIndex: 'auto'
 			});
 			contextual.insertAfter(mask.element);
 		}
