@@ -1339,7 +1339,7 @@ function set_internal (query, updates) {
 }
 
 Query_Mysql.column = function _column(column) {
-	var len = column.length, part = c, pos = false, chars = ['.', '_', '-', '$'], i;
+	var len = column.length, part = column, pos = false, chars = ['.', '_', '-', '$'], i;
 	for (i=0; i<len; ++i) {
 		c = column[i];
 		if (
