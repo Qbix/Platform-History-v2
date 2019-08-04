@@ -419,6 +419,11 @@
 					"Streams/chat/edit": { "post": true },
 					"Streams/chat/remove": { "post": true }
 				},
+				"relatedTo": {
+					"Streams/webrtc": {
+						"description": ["Streams/content", ["notifications", "Streams/relatedTo/Streams/call"]]
+					}
+				},
 				"defaults": {
 					"title": "Conversation",
 					"icon": "Streams/chat"
