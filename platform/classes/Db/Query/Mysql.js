@@ -315,7 +315,7 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 		if (typeof fields === 'object') {
 			fields_list = [];
 			for (alias in fields) {
-				column = fields[alias];
+				column = Db.Query.Mysql(fields[alias]);
 				if (isNaN(alias))
 					fields_list.push(column + as + alias);
 				else
@@ -839,9 +839,12 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 				var value = updates[field];
 				if (value && value.typename === "Db.Expression") {
 					Q.extend(query.parameters, value.parameters);
-					updates_list.push(field + " = " + value);
+					updates_list.push(Query_Mysql.column(field) + " = " + value);
 				} else {
-					updates_list.push(field + " = :_dupUpd_"+onDuplicateKeyUpdate_internal.i);
+					updates_list.push(
+						Query_Mysql.column(field) + " = :_dupUpd_"
+						+onDuplicateKeyUpdate_internal.i
+					);
 					query.parameters["_dupUpd_"+onDuplicateKeyUpdate_internal.i] = value;
 					++ onDuplicateKeyUpdate_internal.i;
 				}
@@ -1212,10 +1215,10 @@ function criteria_internal (query, criteria) {
 				}
 				var columns = [];
 				for (k=0; k<pl; ++k) {
-					var column = parts[k];
-					columns.push(column);
-					if (!query.criteria[column]) {
-						query.criteria[column] = []; // sharding heuristics
+					var c = parts[k];
+					columns.push(Query_Mysql.column(c));
+					if (!query.criteria[c]) {
+						query.criteria[c] = []; // sharding heuristics
 					}
 				}
 				var list = [];
@@ -1256,9 +1259,9 @@ function criteria_internal (query, criteria) {
 			} else if (value && value.typename === "Db.Expression") {
 				Q.extend(query.parameters, value.parameters);
 				if (/\W/.test(expr.substr(-1))) {
-					criteria_list.push( "" + expr + "(" + value + ")" );
+					criteria_list.push( "" + Query_Mysql.column(expr) + "(" + value + ")" );
 				} else {
-					criteria_list.push( "" + expr + " = (" + value + ")");
+					criteria_list.push( "" + Query_Mysql.column(expr) + " = (" + value + ")");
 				}
 			} else if (Q.isArrayLike(value)) {
 				var valueList = '';
@@ -1276,24 +1279,24 @@ function criteria_internal (query, criteria) {
 				} else if (value.length === 0) {
 					criteria_list.push("FALSE"); // since value array is empty
 				} else {
-					criteria_list.push( "" + expr + " IN (" + valueList + ")");
+					criteria_list.push( "" + Query_Mysql.column(expr) + " IN (" + valueList + ")");
 				}
 			} else if (value && value.typename === 'Db.Range') {
 				if (value.min != null) {
 					var c_min = value.includeMin ? ' >= ' : ' > ';
-					criteria_list.push( "" + expr + c_min + ":_criteria_" + _valueCounter );
+					criteria_list.push( "" + Query_Mysql.column(expr) + c_min + ":_criteria_" + _valueCounter );
 					query.parameters["_criteria_" + _valueCounter] = value.min;
 					_valueCounter = (_valueCounter + 1) % 1000000;
 				}
 				if (value.max != null) {
 					var c_max = value.includeMax ? ' <= ' : ' < ';
-					criteria_list.push( "" + expr + c_max + ":_criteria_" + _valueCounter );
+					criteria_list.push( "" + Query_Mysql.column(expr) + c_max + ":_criteria_" + _valueCounter );
 					query.parameters["_criteria_" + _valueCounter] = value.max;
 					_valueCounter = (_valueCounter + 1) % 1000000;
 				}
 			} else {
 				var eq = /\W/.test(expr.substr(-1)) ? '' : ' = ';
-				criteria_list.push( "" + expr + eq + ":_criteria_" + _valueCounter );
+				criteria_list.push( "" + Query_Mysql.column(expr) + eq + ":_criteria_" + _valueCounter );
 				query.parameters["_criteria_" + _valueCounter] = value;
 				_valueCounter = (_valueCounter + 1) % 1000000;
 			}
@@ -1333,6 +1336,30 @@ function set_internal (query, updates) {
 		throw new Q.Exception("Db.Query.Mysql set_internal: The SET updates need to be specified correctly.");
 	}
 	return updates;
+}
+
+Query_Mysql.column = function _column(column) {
+	var len = column.length, part = c, pos = false, chars = ['.', '_', '-', '$'], i;
+	for (i=0; i<len; ++i) {
+		c = column[i];
+		if (
+			chars.indexOf(c) < 0
+			&& (c < 'a' || c > 'z')
+			&& (c < 'A' || c > 'Z')
+			&& (c < '0' || c > '9')
+		) {
+			pos = i;
+			part = column.substring(0, pos);
+			break;
+		}
+	}
+	parts = part.split('.');
+	quoted = [];
+	len = parts.length;
+	for (i=0; i<len; ++i) {
+		quoted.push('`' + parts[i] + '`');
+	}
+	return quoted.join('.') + (pos ? column.substring(pos) : '');
 }
 
 Q.mixin(Query_Mysql, Db.Query);

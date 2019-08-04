@@ -281,8 +281,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			case Db_Query::TYPE_UPDATE:
 				// UPDATE
 				if (empty($this->clauses['UPDATE']))
-					throw new Exception(
-						"Missing UPDATE tables clause in DB query.", -2);
+					throw new Exception("Missing UPDATE tables clause in DB query.", -2);
 				$update = $this->clauses['UPDATE'];
 				$update .= !isset($this->after['UPDATE']) ? '' : "\n".$this->after['UPDATE'];
 				if (empty($this->clauses['SET']))
@@ -1629,6 +1628,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			$c = $column[$i];
 			if ($c !== '.'
 			and $c !== '_'
+			and $c !== '-'
 			and $c !== '$'
 			and ($c < 'a' or $c > 'z')
 			and ($c < 'A' or $c > 'Z')
