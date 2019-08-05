@@ -756,6 +756,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 										move: true,
 										resize: false,
 										active: true,
+										ignoreOnElements: [_controlsTool.settingsPopupEl, _controlsTool.textChat.chatBox, _controlsTool.participantListEl],
 										elementPosition: 'fixed',
 										snapToSidesOnly: true,
 										onMovingStart: function () {

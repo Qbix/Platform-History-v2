@@ -8,12 +8,6 @@ var socket = require('socket.io');
 
 function startServer(port, httpsCerts) {
 
-	/*var options = {
-		key: fs.readFileSync('/etc/letsencrypt/live/www.demoproject.co.ua/privkey.pem'),
-		cert: fs.readFileSync('/etc/letsencrypt/live/www.demoproject.co.ua/cert.pem'),
-		ca: fs.readFileSync('/etc/letsencrypt/live/www.demoproject.co.ua/chain.pem')
-	};*/
-
 	var server;
 	if(typeof httpsCerts != "undefined") {
 		server = https.createServer(httpsCerts, app).listen(port);
@@ -107,10 +101,12 @@ module.exports = function (Q) {
 	if(port && host && host != '') {
 		console.log('Start WebRTC signaling server on localhost')
 		startServer(port);
+		return;
 	} else if(port && https){
 		console.log('Start WebRTC signaling server using https')
-
 		startServer(port, https);
-
+		return;
 	}
+
+	console.warn('WebRTC signalling server has not started. Please update "webrtc section in your local app.json"');
 }
