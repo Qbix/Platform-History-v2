@@ -12373,10 +12373,15 @@ Q.Masks = {
 	mask: function(key, options)
 	{
 		key = Q.calculateKey(key);
+		var mask;
 		if (key in Q.Masks.collection) {
-			return Q.Masks.collection[key];
+			mask = Q.Masks.collection[key];
+			if (options && options.zIndex) {
+				mask.element.style.zIndex = options.zIndex;
+			}
+			return mask;
 		}
-		var mask = Q.Masks.collection[key] = Q.extend({
+		mask = Q.Masks.collection[key] = Q.extend({
 			fadeIn: 0,
 			fadeOut: 0,
 			shouldCover: null

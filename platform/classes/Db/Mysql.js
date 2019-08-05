@@ -245,7 +245,7 @@ function Db_Mysql(connName, dsn) {
 		var values_list = [];
 		for (var column in fields) {
 			var value = fields[column];
-			columns_list.push(column);
+			columns_list.push(Db.Query.Mysql.column(column));
 			if (value && value.typename === 'Db.Expression') {
 				values_list.push(value.valueOf());
 			} else {
