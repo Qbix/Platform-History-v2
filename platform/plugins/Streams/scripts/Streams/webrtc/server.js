@@ -18,9 +18,11 @@ function startServer(port, httpsCerts) {
 	if(typeof httpsCerts != "undefined") {
 		server = https.createServer(httpsCerts, app).listen(port);
 	} else {
-		server = http.createServer(function(){
-
-		}, app).listen(port);
+		server = http.createServer(function(req, res){
+			res.writeHead(200, {'Content-Type': 'text/plain'});
+			res.write('WebRTC server is working');
+			res.end();
+		}).listen(port);
 	}
 
 	// socket setup
@@ -97,6 +99,18 @@ function startServer(port, httpsCerts) {
 	});
 }
 
-module.exports = function (port, httpsCerts) {
-	startServer(port, httpsCerts);
+module.exports = function (Q) {
+	var host = Q.Config.get(['Streams', 'webrtc', 'socketServerHost'], false);
+	var port = Q.Config.get(['Streams', 'webrtc', 'socketServerPort'], false);
+	var https = Q.Config.get(['Q', 'node', 'https'], false);
+
+	if(port && host && host != '') {
+		console.log('Start WebRTC signaling server on localhost')
+		startServer(port);
+	} else if(port && https){
+		console.log('Start WebRTC signaling server using https')
+
+		startServer(port, https);
+
+	}
 }

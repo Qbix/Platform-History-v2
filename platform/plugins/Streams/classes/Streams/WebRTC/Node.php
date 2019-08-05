@@ -40,7 +40,9 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
 		$stream->setAttribute('startTime', time());
 		$stream->changed();
 
-		$socketServerHost = Q_Config::get('Q', 'node', 'host', null);
+		$webrtcHost = Q_Config::get('Streams', 'webrtc', 'socketServerHost', null);
+		$appHost = Q_Config::get('Q', 'node', 'host', null);
+		$socketServerHost = $webrtcHost ? $webrtcHost : $appHost;
 		$socketServerPort = Q_Config::get('Streams', 'webrtc', 'socketServerPort', null);
 		if(!empty($socketServerHost) && !empty($socketServerHost)){
 			$socketServer = $socketServerHost . ':' . $socketServerPort;

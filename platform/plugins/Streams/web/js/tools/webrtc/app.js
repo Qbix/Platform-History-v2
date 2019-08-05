@@ -149,28 +149,71 @@ WebRTCconferenceLib = function app(options){
 		switchCameras: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <g>   <path fill="#FFFFFF" d="M50.037,43.904c-3.939,0-7.151,3.212-7.151,7.168c0,3.947,3.212,7.167,7.151,7.167    c3.947,0,7.152-3.22,7.152-7.167C57.189,47.116,53.984,43.904,50.037,43.904z M50.037,56.49c-2.988,0-5.402-2.431-5.402-5.417    c0-2.997,2.414-5.418,5.402-5.418c2.98,0,5.402,2.422,5.402,5.418C55.439,54.069,53.017,56.49,50.037,56.49z"/>   <path fill="#FFFFFF" d="M63.047,43.286c-0.596,0-1.084,0.487-1.084,1.091c0,0.604,0.488,1.091,1.084,1.091    c0.597,0,1.083-0.487,1.083-1.091C64.13,43.773,63.644,43.286,63.047,43.286z"/>   <path fill="#FFFFFF" d="M50,0C22.431,0,0,22.43,0,50c0,27.571,22.429,50,50,50c27.569,0,50-22.429,50-50C100,22.431,77.569,0,50,0z     M25.111,51.626c0.934-0.933,2.432-0.933,3.366,0c0.934,0.936,0.926,2.446-0.007,3.382l-6.642,6.634    c-0.448,0.451-1.058,0.703-1.692,0.703c-0.633,0-1.242-0.252-1.689-0.703l-6.639-6.634c-0.933-0.936-0.933-2.446,0-3.382    c0.934-0.933,2.365-0.931,3.299,0l2.477,2.563V50c0-17.784,14.551-32.255,32.336-32.255c1.321,0,2.427,1.071,2.427,2.389    c0,1.32-1.017,2.39-2.337,2.39C34.86,22.524,22.583,34.85,22.583,50v4.189L25.111,51.626z M33.583,59.54V43.897    c0-1.44,1.517-3.086,2.956-3.086h5.341l2.703-2.58v-0.008c1-0.518,1.5-1.412,2.258-1.412h6.502c0.711,0,1.338,0.578,1.804,1.043    l0.015,0.158c0.007,0,0.022-0.172,0.022-0.172l3.128,2.971h5.224c1.433,0,3.048,1.646,3.048,3.086V59.54    c0,1.439-1.615,3.271-3.048,3.271H36.538C35.099,62.811,33.583,60.979,33.583,59.54z M86.506,49.071    c-0.614,0-1.063-0.235-1.529-0.698l-2.395-2.56V50c0,17.787-14.631,32.255-32.419,32.255c-1.32,0-2.47-1.067-2.47-2.39    c0-1.32,1.08-2.388,2.399-2.388c15.151,0,27.489-12.329,27.489-27.478v-4.187l-2.611,2.56c-0.934,0.931-2.473,0.931-3.403,0    c-0.938-0.934-0.951-2.447-0.014-3.381l6.63-6.636c0.935-0.935,2.442-0.935,3.375,0l6.635,6.636    c0.936,0.934,0.935,2.447-0.001,3.381C87.728,48.836,87.116,49.071,86.506,49.071z"/>  </g>  </svg>',
 	}
 
+
+	/**
+	 * Contains information about participant
+	 * @class Participant
+	 * @constructor
+	 */
 	var Participant = function () {
+		/**
+		 * Participant's sid = socket.id
+		 *
+		 * @property sid
+		 * @type {String}
+		 */
 		this.sid = null;
+		/**
+		 * Is composed of Q.Users.loggedInUser and timestamp and is used by clients for outputing participant's name
+		 *
+		 * @property identity
+		 * @type {String}
+		 */
 		this.identity = null;
+		/**
+		 * Array of tracks that participant has
+		 *
+		 * @property tracks
+		 * @uses Track
+		 * @type {Array}
+		 */
 		this.tracks = [];
+		/**
+		 * Array of streams that participant has TODO:remove it as it is not used anymore
+		 *
+		 * @property streams
+		 * @type {Array}
+		 */
 		this.streams = [];
+		/**
+		 * Returns list of participant's video tracks
+		 *
+		 * @method videoTracks
+		 * @uses Track
+		 * @return {Array}
+		 */
 		this.videoTracks = function () {
 			return this.tracks.filter(function (trackObj) {
 				return trackObj.kind == 'video';
 			});
 		}
+		/**
+		 * Returns list of participant's audio tracks
+		 *
+		 * @method audioTracks
+		 * @uses Track
+		 * @return {Array}
+		 */
 		this.audioTracks = function () {
 			return this.tracks.filter(function (trackObj) {
 				return trackObj.kind == 'audio';
 			});
 		}
-		this.removeVideoTracks = function () {
-			for(var x in localParticipant.tracks) {
-				if(localParticipant.tracks[x].kind == 'audio') continue;
-				if(_debug) console.log('localParticipant.tracks', localParticipant.tracks)
-				localParticipant.tracks[x].remove();
-			}
-		}
+		/**
+		 * Removes track from participants tracks list and stops sending it to all participants
+		 *
+		 * @method remove
+		 */
 		this.remove = function () {
 			for(var i = roomScreens.length -1; i >= 0; i--){
 				var currentScreen = this;
@@ -191,6 +234,12 @@ WebRTCconferenceLib = function app(options){
 				}
 			}
 		}
+		/**
+		 * Audio analyzer of user's audio tracks. Is used for audio visualizations and "loudest screen" mode feature
+		 *
+		 * @property soundMeter
+		 * @type {Object}
+		 */
 		this.soundMeter = {
 			svg: null,
 			context: null,
@@ -210,20 +259,120 @@ WebRTCconferenceLib = function app(options){
 
 			},
 		}
+		/**
+		 * Array of participant's screens. Usually participant has only one screen with webcam video. Potentially there
+		 * could be several screens (e.g. webcam + screen sharing) in the future
+		 *
+		 * @property screens
+		 * @uses Screen
+		 * @type {Array}
+		 */
 		this.screens = [];
+		/**
+		 * Array of participant's screens. Usually participant has only one screen with webcam video. Potentially there
+		 * could be several screens (e.g. webcam + screen sharing) in the future
+		 *
+		 * @property screens
+		 * @uses Screen
+		 * @type {Array}
+		 */
+		this.screens = [];
+		/**
+		 * Reference to twilio instance of Participant (is used only in 'twilio' mode)
+		 *
+		 * @property twilioInstance
+		 * @type {Object}
+		 */
 		this.twilioInstance = null;
+		/**
+		 *  Instance of RTCPeerConnection interface that represents a WebRTC connection between the local participant
+		 *  and a remote peer
+		 *
+		 * @property RTCPeerConnection
+		 * @type {RTCPeerConnection}
+		 */
 		this.RTCPeerConnection = null;
+		/**
+		 *  Queue of ice remote candidates that is used when ice candidate is received but connection is still not
+		 *  established completely (signalling state is not stable). Gathered remote candidates are added to RTCPeerConnection on
+		 *  onsignallingstatechange event (currently iceCandidatesQueue is not used)
+		 *
+		 * @property iceCandidatesQueue
+		 * @type {Array}
+		 */
 		this.iceCandidatesQueue = [];
+		/**
+		 *  Array of local ice candidates. Is used for testing purpose TODO: remove
+		 *
+		 * @property candidates
+		 * @type {Array}
+		 */
 		this.candidates = [];
+		/**
+		 * Stores participant's offer(s) that will be send to remote participant when current negotiation process
+		 * will be completed. Is used to prevent glaring when two peers send offers at the same time. Feature
+		 * is not finished.
+		 *
+		 * @property offersQueue
+		 * @type {Array}
+		 */
 		this.offersQueue = [];
+		/**
+		 * Stores current negotiation state. Is "true" when offer received or new participant connected and is set
+		 * to "false" when connection is established (answer received or signallingState = stable)
+		 *
+		 * @property isNegotiating
+		 * @type {Boolean}
+		 */
 		this.isNegotiating = false;
 		//this.audioStream = null;
 		//this.videoStream = null;
+		/**
+		 * Property is used only for remote participants and shows whether local participant muted audio of another
+		 * participant
+		 *
+		 * @property audioIsMuted
+		 * @type {Boolean}
+		 */
 		this.audioIsMuted = false;
+		/**
+		 * Property shows whether remote participant's microphone is enabled. Is used in heartbeat feature: if local
+		 * participant doesn't hear remote peer and remoteMicIsEnabled=false, he sends service message to that peer,
+		 * who reenabled microphone if it really doesn't work.
+		 *
+		 * @property remoteMicIsEnabled
+		 * @type {Boolean}
+		 */
 		this.remoteMicIsEnabled = false;
+		/**
+		 * Represents whether participant is local
+		 *
+		 * @property isLocal
+		 * @type {Boolean}
+		 */
 		this.isLocal = false;
+		/**
+		 * Keeps latest received heartbeet from remote user. If it's more than 3+1s, participant's state will be set
+		 * to offline by hearbeat feature.
+		 *
+		 * @property latestOnlineTime
+		 * @type {Boolean}
+		 */
 		this.latestOnlineTime = null;
+		/**
+		 * Represents current participant's online state
+		 *
+		 * @property online
+		 * @type {Boolean}
+		 */
 		this.online = true;
+		/**
+		 * Stores information about participant's device/computer. Is used, for example, to detect if device of remote
+		 * participant supports unified plan;
+		 *
+		 * @property localInfo
+		 * @type {Object}
+		 */
 		this.localInfo = {};
 	}
 
@@ -2465,27 +2614,10 @@ WebRTCconferenceLib = function app(options){
 
 				socketParticipantConnected().initPeerConnection(participant);
 
-				//iosrtcSocketParticipantConnected().initPeerConnection(participant);
-
 			});
 
 			socket.on('roomParticipants', function (participantsList){
 				console.log('roomParticipants', participantsList);
-				/*for(var p in participantsList) {
-					var participantData = participantsList[p];
-					if(participantData.iosrtc == true || (typeof cordova != 'undefined' && _isiOS)) {
-						/!*socketParticipantConnected(participantData, function (localDescription) {
-							sendMessage({
-								name: localParticipant.identity,
-								targetSid: participantData.sid,
-								type: "offer",
-								sdp: localDescription
-							});
-						});*!/
-						iosrtcSocketParticipantConnected().initPeerConnection(participantData);
-					}
-				}*/
-
 			});
 
 			socket.on('participantDisconnected', function (sid){
@@ -2795,250 +2927,6 @@ WebRTCconferenceLib = function app(options){
 				processDataTrackMessage(e.data, participant);
 			};
 			dataChannel.onopen = function (e) {};
-		}
-
-		function iosrtcSocketParticipantConnected() {
-
-			function createPeerForSendingMedia(participant) {
-				if(_debug) console.log('iosrtcSocketParticipantConnected sendingPeerConnection', participant)
-
-				var sendingPeerConnection;
-				if(typeof cordova != 'undefined' && _isiOS) {
-					sendingPeerConnection = new cordova.plugins.iosrtc.RTCPeerConnection(pc_config);
-				} else sendingPeerConnection = new RTCPeerConnection(pc_config);
-
-				sendingPeerConnection.onicecandidate = function (e) {
-					gotIceCandidate(e, participant, 'forReceivingMedia');
-				};
-
-				sendingPeerConnection.onsignalingstatechange = function (e) {
-					if(sendingPeerConnection.signalingState == 'stable') {
-						for (var i = 0; i < participant.iceCandidatesQueue.length; i++) {
-							if(participant.iceCandidatesQueue[i] != null && sendingPeerConnection == participant.iceCandidatesQueue[i].peerConnection) {
-								sendingPeerConnection.addIceCandidate(participant.iceCandidatesQueue[i].candidate);
-								participant.iceCandidatesQueue[i] = null;
-							}
-						}
-					}
-					console.log('%c sendingPeerConnection onsignalingstatechange', 'background:red;color:white', sendingPeerConnection.signalingState, sendingPeerConnection.connectionState, sendingPeerConnection.iceConnectionState)
-				};
-
-
-				if('ontrack' in sendingPeerConnection) {
-					sendingPeerConnection.ontrack = function (e) {
-						console.log('%c sendingPeerConnection ontrack', 'background:red;color:white')
-						rawTrackSubscribed(e, participant);
-					};
-				} else {
-					sendingPeerConnection.onaddstream = function (e) {
-						console.log('%c sendingPeerConnection onaddstream', 'background:red;color:white')
-						rawStreamSubscribed(e, participant);
-					};
-				}
-
-				sendingPeerConnection.onnegotiationneeded = function (e) {
-					console.log('%c sendingPeerConnection onnegotiationneeded', 'background:red;color:white');
-					if(sendingPeerConnection.connectionState == 'new' && sendingPeerConnection.iceConnectionState == 'new' && sendingPeerConnection.iceGatheringState == 'new') return;
-
-					createOffer();
-				};
-
-				var localTracks = localParticipant.tracks;
-				console.log('%c sendingPeerConnection before adding tracks', 'background:red;color:white');
-
-				if(app.conferenceControl.cameraIsEnabled()){
-					console.log('%c sendingPeerConnection cameraIsEnabled', 'background:red;color:white');
-
-					if (typeof cordova != 'undefined' && _isiOS) {
-						console.log('%c sendingPeerConnection cameraIsEnabled cordova videoStream' + (localParticipant.videoStream != null), 'background:red;color:white');
-
-						if (localParticipant.videoStream != null) {
-							console.log('%c sendingPeerConnection addStream video', 'background:red;color:white');
-
-							//setTimeout(function () {
-							sendingPeerConnection.addStream(localParticipant.videoStream);
-
-							//}, 4000)
-						}
-						if (localParticipant.audioStream != null) {
-							console.log('%c sendingPeerConnection addStream audio', 'background:red;color:white');
-
-							sendingPeerConnection.addStream(localParticipant.audioStream);
-						}
-					} else {
-						console.log('%c sendingPeerConnection add local tracks', 'background:red;color:white');
-						//if(_debug) console.log('ANSWER onnegotiationneeded', sendingPeerConnection.connectionState, sendingPeerConnection.iceConnectionState, sendingPeerConnection.iceGatheringState, sendingPeerConnection.signalingState)
-
-						for (let t in localTracks) {
-							//if (localTracks[t].kind == 'video') sendingPeerConnection.addStream(localTracks[t].stream);
-							if (localTracks[t].kind == 'video') sendingPeerConnection.addTrack(localTracks[t].mediaStreamTrack, localTracks[t].stream);
-						}
-
-					}
-				}
-				if(app.conferenceControl.micIsEnabled()){
-					for (var t in localTracks) {
-						if(localTracks[t].kind == 'audio') sendingPeerConnection.addTrack(localTracks[t].mediaStreamTrack);
-					}
-				}
-
-				var dataChannel = sendingPeerConnection.createDataChannel('dataTrack', {reliable: true})
-				setChannelEvents(dataChannel, participant);
-				participant.dataTrack = dataChannel;
-
-				function createOffer(){
-					//if(_debug) console.log('createOffer', sendingPeerConnection.connectionState, sendingPeerConnection.iceConnectionState, sendingPeerConnection.iceGatheringState, sendingPeerConnection.signalingState)
-
-					//if (sendingPeerConnection._negotiating == true) return;
-					if(_debug) console.log('createOffer')
-
-					console.log('%c sendingPeerConnection before createOffer', 'background:red;color:white');
-					//sendingPeerConnection._negotiating = true;
-					sendingPeerConnection.createOffer({ 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true })
-						.then(function(offer) {
-							console.log('%c sendingPeerConnection createOffer', 'background:red;color:white', offer);
-							//offer.sdp = setH264AsPreffered(offer.sdp);
-							var localDescription;
-							if(typeof cordova != 'undefined' && _isiOS) {
-								//localDescription = new RTCSessionDescription(offer);
-								localDescription = new cordova.plugins.iosrtc.RTCSessionDescription(offer);
-							} else {
-								localDescription = offer;
-							}
-							return sendingPeerConnection.setLocalDescription(localDescription).then(function () {
-								if(_debug) console.log('createOffer sendingPeerConnection offer sendMessage ' + sendingPeerConnection.localDescription.sdp, 'background:red;color:white')
-								//var sdp = setH264AsPreffered(sendingPeerConnection.localDescription.sdp)
-								sendMessage({
-									name: localParticipant.identity,
-									targetSid: participant.sid,
-									type: "offer",
-									sdp: sendingPeerConnection.localDescription.sdp,
-									iosrtc: true,
-									purpose: "forReceivingMedia"
-								});
-								//sendingPeerConnection._negotiating = false;
-							});
-						})
-						.catch(function(error) {
-							console.error(error);
-							console.log('2450 EEEEEEERRRRRRRRROOOOOOOOOOOOOOOOOOOOOOOOOOOOORRRRRRRR: ' + error);
-						});
-				}
-
-				createOffer();
-
-				return sendingPeerConnection;
-
-			}
-
-			function createPeerForReceivingMedia(participant) {
-				if(_debug) console.log('socketParticipantConnected ', participant)
-
-				var newPeerConnection = new RTCPeerConnection(pc_config);
-
-				var localTracks = localParticipant.tracks;
-				if(_debug) console.log('socketParticipantConnected ', localTracks)
-
-
-				newPeerConnection.onicecandidate = function (e) {
-					gotIceCandidate(e, participant, 'forSendingMedia');
-				};
-				/*newPeerConnection.onconnectionstatechange = function (e) {
-					console.log('createPeerForReceivingMedia onconnectionstatechange', newPeerConnection.connectionState, newPeerConnection.iceConnectionState, newPeerConnection.iceGatheringState, newPeerConnection.signalingState)
-				};
-				newPeerConnection.onicegatheringstatechange = function (e) {
-					console.log('createPeerForReceivingMedia onicegatheringstatechange', newPeerConnection.iceGatheringState, newPeerConnection.connectionState, newPeerConnection.iceConnectionState, newPeerConnection.signalingState)
-				};
-				newPeerConnection.onsignalingstatechange = function (e) {
-					if(newPeerConnection.signalingState == 'stable') {
-						for (var i = 0; i < participant.iceCandidatesQueue.length; i++) {
-							if(participant.iceCandidatesQueue[i] != null && newPeerConnection == participant.iceCandidatesQueue[i].peerConnection) {
-								newPeerConnection.addIceCandidate(participant.iceCandidatesQueue[i].candidate);
-								participant.iceCandidatesQueue[i] = null;
-							}
-						}
-					}
-					console.log('createPeerForReceivingMedia onsignalingstatechange', newPeerConnection.signalingState, newPeerConnection.connectionState, newPeerConnection.iceConnectionState)
-				};*/
-				function createOffer(){
-					//if(_debug) console.log('createOffer', newPeerConnection.connectionState, newPeerConnection.iceConnectionState, newPeerConnection.iceGatheringState, newPeerConnection.signalingState)
-
-					//if (newPeerConnection._negotiating == true) return;
-					if(_debug) console.log('createOffer')
-
-					//newPeerConnection._negotiating = true;
-					newPeerConnection.createOffer()
-						.then(function(offer) {
-							if(_debug) console.log('newPeerConnection.setLocalDescription', offer)
-							//offer.sdp = setH264AsPreffered(offer.sdp);
-							var localDescription;
-							if(typeof cordova != 'undefined' && _isiOS) {
-								localDescription = new RTCSessionDescription(offer);
-							} else {
-								localDescription = offer;
-							}
-							return newPeerConnection.setLocalDescription(localDescription).then(function () {
-								if(_debug) console.log('createOffer newPeerConnection.sendMessage ' + newPeerConnection.localDescription.sdp)
-								//var sdp = setH264AsPreffered(newPeerConnection.localDescription.sdp)
-								sendMessage({
-									name: localParticipant.identity,
-									targetSid: participant.sid,
-									type: "offer",
-									sdp: newPeerConnection.localDescription.sdp,
-									iosrtc: true,
-									purpose: "forSendingMedia"
-								});								//newPeerConnection._negotiating = false;
-							});
-						})
-						.catch(function(error) {
-							console.error(error);
-							console.log('2450 EEEEEEERRRRRRRRROOOOOOOOOOOOOOOOOOOOOOOOOOOOORRRRRRRR: ' + error);
-						});
-				}
-
-				if('ontrack' in newPeerConnection) {
-					newPeerConnection.ontrack = function (e) {
-						rawTrackSubscribed(e, participant);
-					};
-				} else {
-					console.log('socketParticipantConnected onaddstream')
-					newPeerConnection.onaddstream = function (e) {
-						rawStreamSubscribed(e, participant);
-					};
-				}
-
-				//var dataChannel = newPeerConnection.createDataChannel('dataTrack', {reliable: true})
-				//setChannelEvents(dataChannel, participant);
-				//participant.dataTrack = dataChannel;
-
-				createOffer();
-				newPeerConnection.onnegotiationneeded = function (e) {
-					if(_debug) console.log('onnegotiationneeded 0')
-					if(newPeerConnection.connectionState == 'new' && newPeerConnection.iceConnectionState == 'new' && newPeerConnection.iceGatheringState == 'new') return;
-					if(_debug) console.log('onnegotiationneeded 1')
-
-					createOffer();
-				};
-
-				return newPeerConnection;
-			}
-
-			function init(participantData) {
-				console.log('%c sendingPeerConnection participantData', 'background:red;color:white');
-
-				var newParticipant = new Participant();
-				newParticipant.iosrtc = true;
-				newParticipant.sid = participantData.sid;
-				newParticipant.identity = participantData.username;
-				participantConnected(newParticipant);
-				newParticipant.RTCPeerConnection = createPeerForSendingMedia(newParticipant);
-				//newParticipant.receivingRTCPeerConnection = createPeerForReceivingMedia(newParticipant);
-
-			}
-
-			return {
-				initPeerConnection: init
-			}
 		}
 
 		function removeInactiveTracksFromSDP(sdp) {
@@ -3460,351 +3348,6 @@ WebRTCconferenceLib = function app(options){
 									//publishLocalMedia(senderParticipant.RTCPeerConnection);
 
 								}, 3000);
-								//callback(peerConnection.localDescription, senderParticipant);
-							});
-						})
-
-						.catch(function(error) {
-							console.error(error);
-							console.log('3090EEEEEEERRRRRRRRROOOOOOOOOOOOOOOOOOOOOOOOOOOOORRRRRRRR: ' + error);
-						});
-				});
-			}
-
-			return {
-				processOffer: process
-			}
-		}
-
-
-		function iosrtcOfferReceived() {
-
-			function createPeerForSendingMedia(senderParticipant) {
-				console.log('%c iosrtcOfferReceived sendingPeerConnection', 'background:red;color:white');
-
-				var sendingPeerConnection;
-				if(typeof cordova != 'undefined' && _isiOS) {
-					sendingPeerConnection = new RTCPeerConnection(pc_config);
-				} else sendingPeerConnection = new RTCPeerConnection(pc_config);
-
-				sendingPeerConnection.onconnectionstatechange = function (e) {
-					console.log('%c iosrtcOfferReceived sendingPeerConnection onconnectionstatechange', 'background:red;color:white');
-					if (sendingPeerConnection) console.log('onconnectionstatechange ' + sendingPeerConnection.connectionState);
-				}
-
-				sendingPeerConnection.onicecandidate = function (e) {
-					//console.log('%c iosrtcOfferReceived sendingPeerConnection onicecandidate', 'background:red;color:white');
-					gotIceCandidate(e, senderParticipant, 'forReceivingMedia');
-				};
-
-				/*sendingPeerConnection.onsignalingstatechange = function (e) {
-					if(sendingPeerConnection.signalingState == 'stable') {
-						for (var i = 0; i < senderParticipant.iceCandidatesQueue.length; i++) {
-							if(senderParticipant.iceCandidatesQueue[i] != null && sendingPeerConnection == senderParticipant.iceCandidatesQueue[i].peerConnection) {
-								sendingPeerConnection.addIceCandidate(senderParticipant.iceCandidatesQueue[i].candidate);
-								senderParticipant.iceCandidatesQueue[i] = null;
-							}
-						}
-					}
-					console.log('createPeerForReceivingMedia onsignalingstatechange', sendingPeerConnection.signalingState, sendingPeerConnection.connectionState, sendingPeerConnection.iceConnectionState)
-				};*/
-
-				var onNegotiationNeeded = function(peerConnection) {
-					if(_debug) console.log('onnegotiationneeded 1 ' + (peerConnection == senderParticipant.RTCPeerConnection))
-
-					//if(_debug) console.log('ANSWER onnegotiationneeded', e.target, e.target.connectionState, e.target.iceConnectionState, e.target.iceGatheringState, e.target.signalingState)
-
-
-					if(peerConnection.connectionState == 'new' && peerConnection.iceConnectionState == 'new' && peerConnection.iceGatheringState == 'new') return;
-					console.log('%c iosrtcOfferReceived sendingPeerConnection onnegotiationneeded before create offer', 'background:red;color:white');
-
-					senderParticipant.RTCPeerConnection.createOffer({ 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true })
-						.then(function(offer) {
-							console.log('%c iosrtcOfferReceived sendingPeerConnection onnegotiationneeded create offer', 'background:red;color:white');
-							//if(_debug) console.log(JSON.stringify(offer))
-							//offer.sdp = setH264AsPreffered(offer.sdp);
-							var localDescription;
-							if(typeof cordova != 'undefined' && _isiOS) {
-								localDescription = new cordova.plugins.iosrtc.RTCSessionDescription(offer);
-							} else {
-								localDescription = offer;
-							}
-
-							return peerConnection.setLocalDescription(localDescription).then(function () {
-								console.log('%c iosrtcOfferReceived sendingPeerConnection onnegotiationneeded send offer', 'background:red;color:white');
-
-								if(_debug) console.log('offer localDescription')
-								if(_debug) console.log(senderParticipant.RTCPeerConnection.localDescription.sdp)
-
-								sendMessage({
-									name: localParticipant.identity,
-									targetSid: senderParticipant.sid,
-									type: "offer",
-									sdp: senderParticipant.RTCPeerConnection.localDescription.sdp,
-									purpose: "forReceivingMedia"
-								});
-
-							});
-						})
-
-						.catch(function(error) {
-							console.error(error);
-							console.log('2578 EEEEEEERRRRRRRRROOOOOOOOOOOOOOOOOOOOOOOOOOOOORRRRRRRR: ' + error);
-						});
-
-				}
-				//setTimeout(function(){
-				var localTracks = localParticipant.tracks;
-
-				if(app.conferenceControl.cameraIsEnabled()){
-					console.log('iosrtcOfferReceived sendingPeerConnection camera');
-					if (typeof cordova != 'undefined' && _isiOS) {
-						if (localParticipant.videoStream != null) {
-							if (_debug) console.log('offerReceived localTracks add videoStream');
-
-							//setTimeout(function () {
-							sendingPeerConnection.addStream(localParticipant.videoStream);
-
-							//}, 4000)
-						}
-						if (localParticipant.audioStream != null) {
-							if (_debug) console.log('offerReceived localTracks add audioStream');
-
-							sendingPeerConnection.addStream(localParticipant.audioStream);
-						}
-					} else {
-						console.log('iosrtcOfferReceived sendingPeerConnection camera 2');
-						//if(_debug) console.log('ANSWER onnegotiationneeded', newPeerConnection.connectionState, newPeerConnection.iceConnectionState, newPeerConnection.iceGatheringState, newPeerConnection.signalingState)
-
-						for (let t in localTracks) {
-							console.log('iosrtcOfferReceived sendingPeerConnection camera 3');
-							//if (localTracks[t].kind == 'video') newPeerConnection.addStream(localTracks[t].stream);
-							if (localTracks[t].kind == 'video') sendingPeerConnection.addTrack(localTracks[t].mediaStreamTrack);
-						}
-
-					}
-				}
-				if(app.conferenceControl.micIsEnabled()){
-					for (var t in localTracks) {
-						if(localTracks[t].kind == 'audio') sendingPeerConnection.addTrack(localTracks[t].mediaStreamTrack);
-					}
-				}
-				//}, 4000)
-
-				sendingPeerConnection.onnegotiationneeded = function (e) {
-					console.log('%c iosrtcOfferReceived sendingPeerConnection onnegotiationneeded', 'background:red;color:white');
-
-					onNegotiationNeeded(sendingPeerConnection);
-				};
-
-
-
-
-
-				return sendingPeerConnection;
-
-			}
-
-			function createPeerForReceivingMedia(senderParticipant) {
-				var receivingPeerConnection = new RTCPeerConnection(pc_config);
-
-				receivingPeerConnection.onconnectionstatechange = function (e) {
-					console.log('%c iosrtcOfferReceived receivingPeerConnection onconnectionstatechange', 'background:green;color:white');
-					if (_debug) console.log('receivingPeerConnection onconnectionstatechange ' + receivingPeerConnection.connectionState);
-
-				}
-
-				console.log('check event ' + ('ontrack' in receivingPeerConnection))
-				console.log('check event 2' + ('onaddstream' in receivingPeerConnection))
-				//if(_isiOS && typeof Q.Cordova != 'undefined') {
-				if('ontrack' in receivingPeerConnection) {
-					receivingPeerConnection.ontrack = function (e) {
-						console.log('%c iosrtcOfferReceived receivingPeerConnection ontrack', 'background:green;color:white');
-						rawTrackSubscribed(e, senderParticipant);
-					};
-				} else {
-					console.log('createPeerForReceivingMedia onaddstream');
-					receivingPeerConnection.onaddstream = function (e) {
-						rawStreamSubscribed(e, senderParticipant);
-					};
-				}
-
-				receivingPeerConnection.onicecandidate = function (e) {
-					//console.log('%c iosrtcOfferReceived receivingPeerConnection onicecandidate', 'background:green;color:white');
-
-					gotIceCandidate(e, senderParticipant, 'forSendingMedia');
-				};
-
-				receivingPeerConnection.onsignalingstatechange = function (e) {
-					console.log('%c iosrtcOfferReceived receivingPeerConnection onsignalingstatechange', 'background:green;color:white');
-
-					if(receivingPeerConnection.signalingState == 'stable') {
-						for (var i = 0; i < senderParticipant.iceCandidatesQueue.length; i++) {
-							if(senderParticipant.iceCandidatesQueue[i] != null && receivingPeerConnection == senderParticipant.iceCandidatesQueue[i].peerConnection) {
-								receivingPeerConnection.addIceCandidate(senderParticipant.iceCandidatesQueue[i].candidate);
-								senderParticipant.iceCandidatesQueue[i] = null;
-							}
-						}
-					}
-					console.log('createPeerForReceivingMedia onsignalingstatechange', receivingPeerConnection.signalingState, receivingPeerConnection.connectionState, receivingPeerConnection.iceConnectionState)
-				};
-
-				var onNegotiationNeeded = function(peerConnection) {
-					if(_debug) console.log('onnegotiationneeded 1 ' + (peerConnection == senderParticipant.RTCPeerConnection))
-
-					//if(_debug) console.log('ANSWER onnegotiationneeded', e.target, e.target.connectionState, e.target.iceConnectionState, e.target.iceGatheringState, e.target.signalingState)
-
-
-					if(peerConnection.connectionState == 'new' && peerConnection.iceConnectionState == 'new' && peerConnection.iceGatheringState == 'new') return;
-					console.log('%c iosrtcOfferReceived receivingPeerConnection before createOffer', 'background:green;color:white');
-
-					senderParticipant.RTCPeerConnection.createOffer({ 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true })
-						.then(function(offer) {
-							console.log('%c iosrtcOfferReceived receivingPeerConnection createOffer', 'background:green;color:white');
-
-							if(_debug) console.log('onnegotiationneeded 2')
-							//if(_debug) console.log(JSON.stringify(offer))
-							//offer.sdp = setH264AsPreffered(offer.sdp);
-							var localDescription;
-							if(typeof cordova != 'undefined' && _isiOS) {
-								localDescription = new RTCSessionDescription(offer);
-							} else {
-								localDescription = offer;
-							}
-
-							return peerConnection.setLocalDescription(localDescription).then(function () {
-								console.log('%c iosrtcOfferReceived receivingPeerConnection createOffer send', 'background:green;color:white');
-
-								if(_debug) console.log('offer localDescription')
-								if(_debug) console.log(senderParticipant.RTCPeerConnection.localDescription.sdp)
-
-								sendMessage({
-									name: localParticipant.identity,
-									targetSid: senderParticipant.sid,
-									type: "offer",
-									sdp: senderParticipant.RTCPeerConnection.localDescription.sdp,
-									purpose: "forSendingMedia"
-								});
-
-							});
-						})
-
-						.catch(function(error) {
-							console.error(error);
-							console.log('2578 EEEEEEERRRRRRRRROOOOOOOOOOOOOOOOOOOOOOOOOOOOORRRRRRRR: ' + error);
-						});
-
-				}
-
-				receivingPeerConnection.onnegotiationneeded = function (e) {
-					console.log('%c iosrtcOfferReceived receivingPeerConnection onnegotiationneeded', 'background:green;color:white');
-
-					onNegotiationNeeded(receivingPeerConnection);
-				};
-
-				receivingPeerConnection.ondatachannel = function (evt) {
-					console.log('%c iosrtcOfferReceived receivingPeerConnection ondatachannel', 'background:green;color:white');
-
-					senderParticipant.dataTrack = evt.channel;
-					setChannelEvents(evt.channel, senderParticipant);
-				};
-
-				return receivingPeerConnection;
-			}
-
-			function initPeerConnection(message) {
-				var senderParticipant = new Participant();
-				senderParticipant.sid = message.fromSid;
-				senderParticipant.identity = message.name;
-				participantConnected(senderParticipant);
-				//senderParticipant.RTCPeerConnection = createPeerForSendingMedia(senderParticipant);
-				senderParticipant.receivingRTCPeerConnection = createPeerForReceivingMedia(senderParticipant);
-				return senderParticipant;
-			}
-
-			function process(message) {
-				console.log('%c iosrtcOfferReceived process', 'background:blue;color:white');
-
-				if(_debug) console.log('%c receivingPeerConnection purpose: ' + message.purpose, 'background:green;color:white');
-				if(_debug) console.log('%c receivingPeerConnection', 'background:green;color:white', message, roomParticipants);
-				if(_debug) console.log(JSON.stringify(message));
-				var senderParticipant = roomParticipants.filter(function (localParticipant) {
-					return localParticipant.sid == message.fromSid;
-				})[0];
-
-				var firstTimeOffer = senderParticipant == null;
-				if(senderParticipant == null && senderParticipant != localParticipant) {
-					console.log('%c iosrtcOfferReceived create new participant', 'background:blue;color:white');
-					var senderParticipant = new Participant();
-					senderParticipant.sid = message.fromSid;
-					senderParticipant.identity = message.name;
-					participantConnected(senderParticipant);
-				}
-
-				var peerConnection;
-				if(message.purpose == 'forSendingMedia') {
-					console.log('%c iosrtcOfferReceived forSendingMedia', 'background:red;color:white');
-					peerConnection = senderParticipant.RTCPeerConnection;
-				} else {
-					console.log('%c iosrtcOfferReceived forReceivingMedia', 'background:green;color:white');
-					peerConnection = senderParticipant.receivingRTCPeerConnection;
-				}
-
-				if(peerConnection == null) {
-					console.log('%c iosrtcOfferReceived create peerConnection', 'background:blue;color:white');
-					if(message.purpose == 'forSendingMedia') {
-						console.log('offerReceived.RTCPeerConnection forSendingMedia')
-						senderParticipant.RTCPeerConnection = peerConnection = createPeerForSendingMedia(senderParticipant);
-					} else senderParticipant.receivingRTCPeerConnection = peerConnection = createPeerForReceivingMedia(senderParticipant);
-				}
-				//if(_debug) console.log('offerReceived RTCPeerConnection', senderParticipant.RTCPeerConnection.connectionState, senderParticipant.RTCPeerConnection.iceConnectionState, senderParticipant.RTCPeerConnection.iceGatheringState, senderParticipant.RTCPeerConnection.signalingState)
-				var description;
-				//if(message.purpose == 'forSendingMedia') {
-				if(message.purpose == 'forSendingMedia' && typeof cordova != 'undefined' && _isiOS) {
-					description = new cordova.plugins.iosrtc.RTCSessionDescription({type: message.type, sdp:message.sdp});
-				} else if (message.purpose == 'forReceivingMedia' && typeof cordova != 'undefined' && _isiOS){
-					description = new RTCSessionDescription({type: message.type, sdp:message.sdp});
-				} else {
-					description = {type: message.type, sdp:message.sdp};
-				}
-
-
-
-				console.log('iosrtcOfferReceived.RTCPeerConnection ' + message.purpose)
-
-				peerConnection.setRemoteDescription(description).then(function () {
-					console.log('iosrtcOfferReceived setRemoteDescription ' + message.purpose);
-
-					peerConnection.createAnswer()
-						.then(function(answer) {
-							console.log('iosrtcOfferReceived createAnswer ' + message.purpose);
-							console.log('iosrtcOfferReceived createAnswer answer', answer);
-
-							//if(_debug) console.log('ANSWER0 createAnswer', senderParticipant.RTCPeerConnection.connectionState, senderParticipant.RTCPeerConnection.iceConnectionState, senderParticipant.RTCPeerConnection.iceGatheringState, senderParticipant.RTCPeerConnection.signalingState)
-							//offer.sdp = setH264AsPreffered(offer.sdp);
-							//answer.type = 'offer';
-							var localDescription;
-							if(message.purpose == 'forSendingMedia' && typeof cordova != 'undefined' && _isiOS) {
-								localDescription = new cordova.plugins.iosrtc.RTCSessionDescription(answer);
-							} else if(message.purpose == 'forReceivingMedia' && typeof cordova != 'undefined' && _isiOS){
-								localDescription = new RTCSessionDescription(answer);
-							} else {
-								localDescription = answer;
-							}
-
-							return peerConnection.setLocalDescription(localDescription).then(function () {
-								//if(_debug) console.log('ANSWER1 createAnswer', senderParticipant.RTCPeerConnection.connectionState, senderParticipant.RTCPeerConnection.iceConnectionState, senderParticipant.RTCPeerConnection.iceGatheringState, senderParticipant.RTCPeerConnection.signalingState)
-								console.log('iosrtcOfferReceived setLocalDescription ' + message.purpose)
-
-								sendMessage({
-									name: localParticipant.identity,
-									targetSid: message.fromSid,
-									type: "answer",
-									sdp: peerConnection.localDescription,
-									iosrtc: true,
-									purpose: message.purpose == 'forSendingMedia' ? 'forReceivingMedia' : 'forSendingMedia'
-								});
-
 								//callback(peerConnection.localDescription, senderParticipant);
 							});
 						})
