@@ -200,6 +200,25 @@
 		},
 		"froala": { 
 			"key": "TODO: GET FROALA KEY"
+		},
+		"twilio": {
+			"accountSid": null,
+			"apiKey": null,
+			"apiSecret": null,
+			"authToken": null
+		},
+		"webrtc": {
+			/*"socketServerHost": "localhost",*/
+			"socketServerPort": "8443",
+			"useTwilioTurnServers": false,
+			"turnServers": [
+		  		/*{
+					"url": "",
+					"username": "",
+					"urls": "",
+					"credential": ""
+				}*/
+			]
 		}
 	},
 	"Assets": {
