@@ -1,0 +1,58 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "inden for {{1}}"
+    },
+    "units": {
+        "meter": "måler",
+        "meters": "meter",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "mil",
+        "miles": "miles",
+        "mi": "mi",
+        "foot": "fod",
+        "feet": "fødder",
+        "inches": "inches"
+    },
+    "location": {
+        "interested": "Jeg er interesseret i ting, der finder sted inden for {{select}} af",
+        "update": "Opdater min placering",
+        "prompt": "{{ClickOrTap}} her til <br> sæt din <br> Beliggenhed",
+        "myCurrentLocation": "Min nuværende placering",
+        "enterAddress": "Indtast en adresse",
+        "enterPostcode": "Indtast venligst dit postnummer / postnummer",
+        "create": {
+            "action": "Tilføj placering",
+            "title": "Ny placering",
+            "nameYourLocation": "Navngiv din placering"
+        },
+        "confirm": {
+            "title": "Gem denne placering?",
+            "message": "Planlægger du at bruge denne placering igen i fremtiden?",
+            "ok": "Ja",
+            "cancel": "Ingen"
+        },
+        "add": {
+            "title": "Navngiv denne placering",
+            "placeholder": "Hjem, Arbejde mv.",
+            "ok": "Gemme"
+        },
+        "dialog": {
+            "title": "Vælg Placering"
+        },
+        "set": "Indstil Min placering"
+    },
+    "areas": {
+        "filterPlaceholder": "Ethvert område inden for denne placering?",
+        "newArea": "Nyt område",
+        "promptTitle": "Indtast et navn for området:",
+        "absent": "Indstil venligst område",
+        "error": "Fejl",
+        "exist": "Område eksisterer allerede",
+        "addNewArea": "Tilføj nyt område",
+        "add": "Tilføje"
+    }
+}

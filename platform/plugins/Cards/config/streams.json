@@ -1,0 +1,9 @@
+{
+	"Cards/businessCard": {
+		"type": "Cards/businessCard",
+		"title": "Saved Scaned Cards",
+		"readLevel": 40,
+		"writeLevel": 10,
+		"adminLevel": 20
+	}
+}

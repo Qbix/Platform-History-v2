@@ -1,0 +1,58 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "innerhalb von {{1}}"
+    },
+    "units": {
+        "meter": "Meter",
+        "meters": "Meter",
+        "kilometer": "Kilometer",
+        "kilometers": "Kiometer",
+        "km": "km",
+        "mile": "Meile",
+        "miles": "Meilen",
+        "mi": "mi",
+        "foot": "Fuß",
+        "feet": "Füße",
+        "inches": "Zoll"
+    },
+    "location": {
+        "interested": "Ich interessiere mich für Dinge, die innerhalb von {{select}} stattfinden",
+        "update": "Aktualisieren Sie meinen Standort",
+        "prompt": "{{ClickOrTap}} hier zu <br> setze deine <br> Standort",
+        "myCurrentLocation": "Mein aktueller Standort",
+        "enterAddress": "Gib eine Adresse ein",
+        "enterPostcode": "Bitte geben Sie Ihre Postleitzahl \/ Postleitzahl ein",
+        "create": {
+            "action": "Ort hinzufügen",
+            "title": "Neuer Standort",
+            "nameYourLocation": "Benennen Sie Ihren Standort"
+        },
+        "confirm": {
+            "title": "Diesen Ort speichern?",
+            "message": "Planen Sie, diesen Standort zukünftig wieder zu nutzen?",
+            "ok": "Ja",
+            "cancel": "Nein"
+        },
+        "add": {
+            "title": "Benennen Sie diesen Ort",
+            "placeholder": "Zuhause, Arbeit usw.",
+            "ok": "sparen"
+        },
+        "dialog": {
+            "title": "Ort wählen"
+        },
+        "set": "Meinen Standort festlegen"
+    },
+    "areas": {
+        "filterPlaceholder": "Irgendein Gebiet innerhalb dieses Ortes?",
+        "newArea": "Neues Gebiet",
+        "promptTitle": "Geben Sie einen Namen für das Gebiet ein:",
+        "absent": "Bitte Bereich einstellen",
+        "error": "Error",
+        "exist": "Bereich existiert bereits",
+        "addNewArea": "Neuen Bereich hinzufügen",
+        "add": "Hinzufügen"
+    }
+}

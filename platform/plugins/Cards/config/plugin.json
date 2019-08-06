@@ -1,0 +1,46 @@
+{
+	"Q": {
+		"pluginInfo": {
+			"Cards": {
+				"version": "0.1",
+				"compatible": "0.1",
+				"connections": ["Streams"],
+				"requires": {
+					"Streams": "1.0"
+				}
+			}
+		},
+		"handlersBeforeEvent": {
+			"Q/responseExtras": ["Cards/before/Q_responseExtras"]
+		},
+		"handlersAfterEvent": {
+			"Streams/interest/add": ["Places/after/Streams_interest_add"]
+		},
+		"web": {
+			"requireValidNonce": ["Cards"]
+		},
+		"bundle": {
+			"exclude": {
+				"Cards": ["img/squareflags"]
+			}
+		}
+	},
+	"Streams": {
+		"onInsert": {
+			"Users_User": [
+				"Cards/businessCard"
+			]
+		},
+		"userStreams": {
+			"Cards": "streams.json"
+		}
+	},
+	"Cards": {
+		"google": {
+			"keys": {
+				"server": null,
+				"web": null
+			}
+		}
+	}
+}

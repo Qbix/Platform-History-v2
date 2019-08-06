@@ -1,0 +1,58 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "trong {{1}}"
+    },
+    "units": {
+        "meter": "mét",
+        "meters": "mét",
+        "kilometer": "km",
+        "kilometers": "kiomet",
+        "km": "km",
+        "mile": "dặm",
+        "miles": "dặm",
+        "mi": "mi",
+        "foot": "chân",
+        "feet": "đôi chân",
+        "inches": "inch"
+    },
+    "location": {
+        "interested": "Tôi quan tâm đến những điều diễn ra trong {{select}} trong",
+        "update": "Cập nhật vị trí của tôi",
+        "prompt": "{{ClickOrTap}} tại đây để <br> đặt của bạn <br> vị trí",
+        "myCurrentLocation": "Vị trí hiện tại của tôi",
+        "enterAddress": "Nhập địa chỉ",
+        "enterPostcode": "Vui lòng nhập mã bưu điện / mã zip của bạn",
+        "create": {
+            "action": "Thêm vị trí",
+            "title": "Địa điểm mới",
+            "nameYourLocation": "Đặt tên cho vị trí của bạn"
+        },
+        "confirm": {
+            "title": "Lưu vị trí này?",
+            "message": "Bạn có kế hoạch sử dụng vị trí này một lần nữa trong tương lai?",
+            "ok": "Vâng",
+            "cancel": "Không"
+        },
+        "add": {
+            "title": "Đặt tên cho vị trí này",
+            "placeholder": "Nhà, nơi làm việc, vv",
+            "ok": "Tiết kiệm"
+        },
+        "dialog": {
+            "title": "Chọn địa điểm"
+        },
+        "set": "Đặt vị trí của tôi"
+    },
+    "areas": {
+        "filterPlaceholder": "Bất kỳ khu vực bên trong vị trí này?",
+        "newArea": "Khu vực mới",
+        "promptTitle": "Nhập tên cho khu vực:",
+        "absent": "Vui lòng đặt khu vực",
+        "error": "lỗi",
+        "exist": "Khu vực đã tồn tại",
+        "addNewArea": "Thêm khu vực mới",
+        "add": "Thêm vào"
+    }
+}

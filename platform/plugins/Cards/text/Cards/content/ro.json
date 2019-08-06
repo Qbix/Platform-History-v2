@@ -1,0 +1,58 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "în {{1}}"
+    },
+    "units": {
+        "meter": "metru",
+        "meters": "metri",
+        "kilometer": "kilometru",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "milă",
+        "miles": "mile",
+        "mi": "mi",
+        "foot": "picior",
+        "feet": "picioare",
+        "inches": "inch"
+    },
+    "location": {
+        "interested": "Sunt interesat de lucrurile care au loc în {{select}} de",
+        "update": "Actualizați locația mea",
+        "prompt": "{{ClickOrTap}} aici <br> setați-vă <br> Locație",
+        "myCurrentLocation": "Locația curentă",
+        "enterAddress": "Introduceți o adresă",
+        "enterPostcode": "Introduceți codul poștal \/ codul poștal",
+        "create": {
+            "action": "Adaugă locație",
+            "title": "Locație nouă",
+            "nameYourLocation": "Denumiți locația dvs."
+        },
+        "confirm": {
+            "title": "Salvați această locație?",
+            "message": "Aveți de gând să utilizați din nou această locație în viitor?",
+            "ok": "da",
+            "cancel": "Nu"
+        },
+        "add": {
+            "title": "Denumiți această locație",
+            "placeholder": "Acasă, Lucrare etc.",
+            "ok": "Salvați"
+        },
+        "dialog": {
+            "title": "Alegeți locația"
+        },
+        "set": "Setați Locația mea"
+    },
+    "areas": {
+        "filterPlaceholder": "Orice zonă din această locație?",
+        "newArea": "Noua zonă",
+        "promptTitle": "Introduceți un nume pentru zonă:",
+        "absent": "Vă rugăm să setați zona",
+        "error": "Eroare",
+        "exist": "Aria există deja",
+        "addNewArea": "Adăugați o zonă nouă",
+        "add": "Adăuga"
+    }
+}
