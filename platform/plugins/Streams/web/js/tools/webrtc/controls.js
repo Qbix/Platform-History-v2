@@ -1573,10 +1573,6 @@
 					disconnectBtn.dataset.touchlabel = 'Disconnect';
 					disconnectBtn.innerHTML = icons.disconnectIcon;
 
-
-					var viewModeSection = document.createElement('DIV');
-					viewModeSection.className = 'Streams_webrtc_toggle-view-mode-btns';
-
 					var floatingViewModeBtn = document.createElement('DIV');
 					floatingViewModeBtn.className = 'Streams_webrtc_floating-mode-btn';
 					floatingViewModeBtn.dataset.viewMode = 'floatingView';
@@ -1590,9 +1586,6 @@
 					tiledViewModeBtn.dataset.touchlabel = 'Tiled Screens';
 					var tiledViewModeBtnIcon = document.createElement('SPAN');
 					tiledViewModeBtnIcon.innerHTML = icons.tiledViewModeOff;
-
-					var loudestModeSection = document.createElement('DIV');
-					loudestModeSection.className = 'Streams_webrtc_toggle-loudest-mode';
 
 					var loudestExceptMeBtn = document.createElement('DIV');
 					loudestExceptMeBtn.className = 'Streams_webrtc_lem-mode-btn';
@@ -1642,17 +1635,15 @@
 
 					topBtns.appendChild(disconnectBtn);
 					floatingViewModeBtn.appendChild(floatingViewModeBtnIcon);
-					if(!Q.info.isMobile) viewModeSection.appendChild(floatingViewModeBtn);
+					if(!Q.info.isMobile) topBtns.appendChild(floatingViewModeBtn);
 					tiledViewModeBtn.appendChild(tiledViewModeBtnIcon);
-					viewModeSection.appendChild(tiledViewModeBtn);
-					topBtns.appendChild(viewModeSection);
+					topBtns.appendChild(tiledViewModeBtn);
 					loudestExceptMeBtn.appendChild(loudestExceptMeBtnIcon);
-					loudestModeSection.appendChild(loudestExceptMeBtn);
+					topBtns.appendChild(loudestExceptMeBtn);
 					loudestBtn.appendChild(loudestBtnIcon);
-					loudestModeSection.appendChild(loudestBtn);
+					topBtns.appendChild(loudestBtn);
 					maximizeStaticBtn.appendChild(maximizeStaticBtnIcon);
-					loudestModeSection.appendChild(maximizeStaticBtn);
-					topBtns.appendChild(loudestModeSection);
+					topBtns.appendChild(maximizeStaticBtn);
 					//topBtns.appendChild(loudestSelectCon);
 					participantsListCon.appendChild(topBtns)
 
