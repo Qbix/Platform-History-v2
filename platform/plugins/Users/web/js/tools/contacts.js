@@ -20,7 +20,7 @@ var Users = Q.Users;
  *  @param {Q.Event} [options.onInvited] occurs when the user invited.
  */
 Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
-	var tool = this
+	var tool = this;
 	var state = tool.state;
 
 	if (!state.communityId) {
@@ -90,9 +90,8 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 						return Q.alert(tool.text.selectLabel);
 					}
 
-					var $this = $(this);
+					Q.Dialogs.pop();
 
-					$this.addClass("Q_working");
 					Q.Streams.invite(state.communityId, 'Streams/experience/main', {
 						addLabel: selectedLabel,
 						alwaysSend: true
@@ -101,8 +100,6 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 						if (msg) {
 							return alert(msg);
 						}
-
-						$this.removeClass("Q_working");
 
 						Q.handle(state.onInvited, tool, [selectedLabel, info]);
 					});
