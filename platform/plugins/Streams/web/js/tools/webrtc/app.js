@@ -12,7 +12,8 @@ WebRTCconferenceLib = function app(options){
 		twilioAccessToken: null,
 		disconnectTime: 3000,
 		turnCredentials: null,
-		username: null
+		username: null,
+		debug: false
 	};
 
 	if(typeof options === 'object') {
@@ -64,8 +65,6 @@ WebRTCconferenceLib = function app(options){
 	var _isiOS;
 	var _isAndroid;
 	var _usesUnifiedPlan =  RTCRtpTransceiver.prototype.hasOwnProperty('currentDirection');
-
-	var _debug = false;
 
 	var pc_config = {
 		"iceServers": [
@@ -4802,7 +4801,7 @@ WebRTCconferenceLib = function app(options){
 	}())
 
 	function log(text, arg1, arg2, arg3, arg4) {
-		if(!_debug) return;
+		if(!options.debug) return;
 		var args = Array.prototype.slice.call(arguments);
 
 		var params = [];

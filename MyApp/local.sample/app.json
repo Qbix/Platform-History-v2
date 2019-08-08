@@ -218,7 +218,8 @@
 					"urls": "",
 					"credential": ""
 				}*/
-			]
+			],
+		  	"debug": false
 		}
 	},
 	"Assets": {

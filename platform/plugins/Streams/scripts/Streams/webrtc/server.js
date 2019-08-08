@@ -5,6 +5,7 @@ const mkdirp = require('mkdirp');
 const express = require('express');
 const app = express();
 var socket = require('socket.io');
+var _debug;
 
 function startServer(port, httpsCerts) {
 
@@ -23,10 +24,10 @@ function startServer(port, httpsCerts) {
 	var io = socket(server);
 
 	io.on('connection', function (socket) {
-		console.log('made sockets connection', socket.id);
+		if(_debug) console.log('made sockets connection', socket.id);
 
 		socket.on('log', function (message) {
-			console.log('CONSOLE.LOG', message);
+			if(_debug) console.log('CONSOLE.LOG', message);
 		});
 
 		socket.on('errorlog', function (message) {
@@ -36,18 +37,18 @@ function startServer(port, httpsCerts) {
 		});
 
 		socket.on('errorlog_timeout', function (message) {
-			console.log('CONSOLE.ERROR', message);
-			console.log('CONSOLE.ERROR DATE', (new Date().toISOString()));
+			if(_debug) console.log('CONSOLE.ERROR', message);
+			if(_debug) console.log('CONSOLE.ERROR DATE', (new Date().toISOString()));
 		});
 
 		var room;
 		socket.on('joined', function (identity) {
-			console.log('Got message: joined', identity, socket.id);
+			if(_debug) console.log('Got message: joined', identity, socket.id);
 			socket.username = identity.username;
 			socket.info = identity.info;
 			room = identity.room;
 			socket.join(identity.room, function () {
-				console.log(socket.id + 'now in rooms: ', socket.rooms);
+				if(_debug) console.log(socket.id + 'now in rooms: ', socket.rooms);
 			})
 
 
@@ -59,7 +60,7 @@ function startServer(port, httpsCerts) {
 
 
 			io.of('/').in(identity.room).clients(function (error, clients) {
-				console.log(clients);
+				if(_debug) console.log(clients);
 				var participantsList = [];
 				for (var i in clients) {
 					if (socket.id != clients[i]) {
@@ -72,21 +73,21 @@ function startServer(port, httpsCerts) {
 		});
 
 		socket.on('confirmOnlineStatus', function(message) {
-			console.log('confirmOnlineStatus', message);
+			if(_debug) console.log('confirmOnlineStatus', message);
 			message.fromSid = socket.id;
 			socket.to(message.targetSid).emit('confirmOnlineStatus', message);
 
 		});
 
 		socket.on('signalling', function(message) {
-			console.log('SIGNALLING MESSAGE', message.type, message.name, message.targetSid, socket.id);
+			if(_debug) console.log('SIGNALLING MESSAGE', message.type, message.name, message.targetSid, socket.id);
 			message.fromSid = socket.id;
 			if(message.type == 'offer') message.info = socket.info;
 			socket.to(message.targetSid).emit('signalling', message);
 		});
 
 		socket.on('disconnect', function() {
-			console.log('DISCONNECT', socket.id);
+			if(_debug) console.log('DISCONNECT', socket.id);
 			socket.broadcast.to(room).emit('participantDisconnected', socket.id);
 		});
 
@@ -97,6 +98,7 @@ module.exports = function (Q) {
 	var host = Q.Config.get(['Streams', 'webrtc', 'socketServerHost'], false);
 	var port = Q.Config.get(['Streams', 'webrtc', 'socketServerPort'], false);
 	var https = Q.Config.get(['Q', 'node', 'https'], false);
+	_debug = Q.Config.get(['Streams', 'webrtc', 'debug'], false);
 
 	if(port && host && host != '') {
 		console.log('Start WebRTC signaling server on localhost')

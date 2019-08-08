@@ -714,7 +714,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					video: false,
 					audio: false,
 					streams: _options.streams != null ? _options.streams : null,
-					turnCredentials: turnCredentials
+					turnCredentials: turnCredentials,
+					debug: _debug
 				});
 
 				bindConferenceEvents();
@@ -2500,6 +2501,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							roomId = (response.slots.room.roomId).replace('Streams/webrtc/', '');
 							var turnCredentials = response.slots.room.turnCredentials;
 							var socketServer = response.slots.room.socketServer;
+							_debug = response.slots.room.debug;
 
 							//var connectUrl = updateQueryStringParameter(location.href, 'Q.rid', roomId);
 							//connectUrl = updateQueryStringParameter(connectUrl, 'Q.pid', asPublisherId);
