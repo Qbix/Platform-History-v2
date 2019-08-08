@@ -560,7 +560,7 @@ WebRTCconferenceLib = function app(options){
 				screenToAttach.videoCon.appendChild(trackEl);
 				screenToAttach.videoTrack = trackEl;
 				screenToAttach.isActive = true;
-				createVideoCanvas(screenToAttach, track);
+				//createVideoCanvas(screenToAttach, track);
 				app.event.dispatch('videoTrackIsBeingAdded', screenToAttach);
 			} else if(track.kind == 'audio') {
 
@@ -1133,7 +1133,7 @@ WebRTCconferenceLib = function app(options){
 		}
 
 		function createVideoCanvas(screen, track) {
-			//return;
+			//return;7
 			log('createVideoCanvas');
 			var videoCanvas = document.createElement("CANVAS");
 			videoCanvas.className = "Streams_webrtc_video-stream-canvas";
@@ -1344,7 +1344,7 @@ WebRTCconferenceLib = function app(options){
 
 									})
 									.catch(function (e) {
-										console.error(e);
+										console.error(e.name + ': ' + e.message);
 									});
 							} else {*!/
 							/!*var trackToAttach = new Track();
@@ -1714,11 +1714,6 @@ WebRTCconferenceLib = function app(options){
 				app.screensInterface.detachTracks(tracks);
 			});
 
-			if(!options.useAsLibrary) app.views.switchTo(joinFormView);
-			app.conferenceControl.destroyControlBar();
-
-			if(!options.useAsLibrary) roomsMedia.innerHTML = '';
-
 			roomScreens = [];
 			roomParticipants = [];
 
@@ -1728,13 +1723,6 @@ WebRTCconferenceLib = function app(options){
 		function roomJoined(room, dataTrack) {
 			app.state = 'connected';
 			twilioRoom = room;
-			if(!options.useAsLibrary) {
-				app.views.switchTo(mainView);
-				if(!_isMobile ) {
-					app.conferenceControl.showControlBar();
-					app.conferenceControl.createSettingsPopup();
-				}
-			}
 
 			if(location.hash.trim() == '') {
 				if(!options.useAsLibrary) location.hash = '#' + room.name;
@@ -2640,7 +2628,7 @@ WebRTCconferenceLib = function app(options){
 			//if(peerConnection.signalingState == 'stable') {
 			peerConnection.addIceCandidate(candidate)
 				.catch(function(e) {
-					console.error(e);
+					console.error(e.name + ': ' + e.message);
 				});
 			/*} else {
 				senderParticipant.iceCandidatesQueue.push({
@@ -2708,27 +2696,16 @@ WebRTCconferenceLib = function app(options){
 	}
 
 	app.conferenceControl = (function () {
-		var controlBar;
-		var dropdownMenu;
-		var cameraBtn;
-		var cameraSwitcherBtn;
-		var speakerBtn;
-		var microphoneBtn;
-		var usersBtn;
-
 		var cameraIsDisabled = false;
 		var micIsDisabled = false;
 		var speakerIsDisabled = false;
 		var currentAudioOutputMode = 'speaker';
 
-		var mediaDevices;
 		var audioInputDevices = [];
 		var videoInputDevices = [];
 		var currentCameraDevice;
 		var currentAudioDevice;
 		var frontCameraDevice;
-
-		var hoverTimeout = {setttingsPopup:null, participantsPopup:null};
 
 		function loadDevicesList(mediaDevicesList, reload) {
 			log('loadDevicesList');
@@ -2869,7 +2846,7 @@ WebRTCconferenceLib = function app(options){
 										app.eventBinding.sendDataTrackMessage("afterCamerasToggle");
 									})
 									.catch(function (e) {
-										console.error(e);
+										console.error(e.name + ': ' + e.message);
 										app.eventBinding.sendDataTrackMessage("afterCamerasToggle");
 									});
 							}
@@ -3255,7 +3232,6 @@ WebRTCconferenceLib = function app(options){
 			var muted = speakerIsDisabled == true ? true : false;
 			switchSpeaker(muted)
 			speakerIsDisabled = !muted;
-			speakerBtn.innerHTML = speakerIsDisabled ? icons.disabledSpeaker : icons.enabledSpeaker;
 		}
 
 		function toggleVideo() {
@@ -3265,10 +3241,8 @@ WebRTCconferenceLib = function app(options){
 
 			if(cameraIsDisabled){
 				enableVideoTracks();
-				cameraBtn.innerHTML = icons.camera;
 			} else {
 				disableVideoTracks();
-				cameraBtn.innerHTML = icons.disabledCamera;
 			}
 		}
 
@@ -3279,10 +3253,8 @@ WebRTCconferenceLib = function app(options){
 
 			if(micIsDisabled){
 				enableAudioTracks();
-				microphoneBtn.innerHTML = icons.microphone;
 			} else {
 				disableAudioTracks();
-				microphoneBtn.innerHTML = icons.disabledMicrophone;
 			}
 		}
 
@@ -3408,7 +3380,7 @@ WebRTCconferenceLib = function app(options){
 								}
 
 								sender.setParameters(params).catch(function(e){
-									console.error(e);
+									console.error(e.name + ': ' + e.message);
 								});*/
 							}
 
@@ -4124,7 +4096,7 @@ WebRTCconferenceLib = function app(options){
 								app.event.dispatch('joined');
 								if (callback != null) callback();
 							} catch (e) {
-								console.error(e);
+								console.error(e.name + ': ' + e.message);
 							}
 						}, function (error) {
 							console.error(`Unable to connect to Room: ${error.message}`);
@@ -4151,7 +4123,7 @@ WebRTCconferenceLib = function app(options){
 			}
 
 		}, function (e) {
-			console.error(e)
+			console.error(e.name + ': ' + e.message)
 
 		});
 	}
@@ -4261,7 +4233,7 @@ WebRTCconferenceLib = function app(options){
 				});
 				localParticipant.RTCPeerConnection.addIceCandidate(candidate)
 					.catch(function (e) {
-						console.error(e);
+						console.error(e.name + ': ' + e.message);
 					});
 			}
 
@@ -4391,7 +4363,7 @@ WebRTCconferenceLib = function app(options){
 				});
 				localParticipant.iosrtcRTCPeerConnection.addIceCandidate(candidate)
 					.catch(function (e) {
-						console.error(e);
+						console.error(e.name + ': ' + e.message);
 					});
 			}
 
