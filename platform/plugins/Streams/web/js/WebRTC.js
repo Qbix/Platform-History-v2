@@ -748,6 +748,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 							if(Q.info.isMobile) return;
 
+							var elementsToIgnore = [_controlsTool.settingsPopupEl, _controlsTool.textChat.chatBox, _controlsTool.participantListEl.parentNode];
+							elementsToIgnore = elementsToIgnore.concat(Array.prototype.slice.call(_controls.querySelectorAll('SVG')));
 							Q.activate(
 								Q.Tool.setUpElement(
 									_controls.firstChild, // or pass an existing element
@@ -756,7 +758,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 										move: true,
 										resize: false,
 										active: true,
-										ignoreOnElements: [_controlsTool.settingsPopupEl, _controlsTool.textChat.chatBox, _controlsTool.participantListEl],
+										ignoreOnElements: elementsToIgnore,
 										elementPosition: 'fixed',
 										snapToSidesOnly: true,
 										onMovingStart: function () {
@@ -772,7 +774,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								),
 								{},
 								function () {
-									if(_debug) console.log('controls movable')
 								}
 							);
 						}
@@ -1982,7 +1983,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				 * @return {Array} List of DOMRects that will be passed to Q.layout.
 				 */
 				minimizedOrMaximizedScreenGrid: function (container, count, elementToWrap, maximized) {
-					console.log('minimizedOrMaximizedScreenGrid count', count)
 
 					var wrapElement = elementToWrap;
 
@@ -2008,15 +2008,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						align = 'bottom';
 					}
 
-					console.log('align', align)
-
-
-
 					var rectWidth = 90;
 					var rectHeight = 90;
 					var spaceBetween = 10;
 					var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
-					console.log('perRow', perRow);
 
 					var rectsOnLeftSide, rectsOnRightSide, rectsToTheTop
 					if(align == 'bottom' || align == 'top') {
@@ -2036,14 +2031,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						rectsToTheTop = Math.floor(parentHeight / (rectHeight + spaceBetween));
 					}
 
-					console.log('rectsToTheTop 0', rectsToTheTop);
-
 					if(rectsToTheTop == 0 && (rectsOnLeftSide != 0 || rectsOnRightSide != 0)) rectsToTheTop = 1;
 					var totalRectsOnSides = (rectsOnLeftSide * rectsToTheTop) + (rectsOnRightSide * rectsToTheTop);
-					console.log('rectsOnLeftSide', rectsOnLeftSide);
-					console.log('rectsOnRightSide', rectsOnRightSide);
-					console.log('rectsToTheTop', rectsToTheTop);
-					console.log('totalRectsOnSides', totalRectsOnSides);
 					if(count < totalRectsOnSides) totalRectsOnSides = count;
 
 
@@ -2071,7 +2060,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 								y = prevRect.y;
 								x = prevRect.x + (rectWidth + spaceBetween);
-								console.log('if 1', x, y);
 
 							} else if(createNewRowOnRight) {
 								if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
@@ -2087,14 +2075,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 									for (var a in rects) {
 										allRects = allRects.concat(rects[a]);
 									}
-									console.log('allRects', allRects)
 									x = allRects.filter(function(rect){
 										return rect.side == 'right';
 									}).reduce(function(prev, current) {
 										return (prev.rect.x < current.rect.x) ? prev : current;
 									}).rect.x
 								}
-								console.log('if 2', x, y);
 
 								createNewRowOnRight = false;
 							} else {
@@ -2110,7 +2096,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								} else {
 									x = (elementToWrap.left + elementToWrap.width + spaceBetween);
 								}
-								console.log('if 3', x, y);
 
 							}
 
@@ -2139,7 +2124,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 								y = prevRect.y;
 								x = prevRect.x - (rectWidth + spaceBetween);
-								console.log('else 1', x,  y);
 
 							} else if(createNewRowOnLeft) {
 								if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
@@ -2162,8 +2146,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 									}).rect.x;
 								}
 
-								console.log('else 2', x, y);
-
 								createNewRowOnLeft = false;
 							} else {
 								if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
@@ -2177,8 +2159,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								} else {
 									x = (elementToWrap.left - (rectWidth + spaceBetween));
 								}
-								console.log('else 3', x, y);
-
 							}
 
 							leftSideCounter++;
@@ -2203,7 +2183,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						}
 
 						if(i == perRow - 1 || i == totalRectsOnSides - 1) {
-							console.log('ROW ADD', currentRowRects)
 							rects.push(currentRowRects);
 							currentRowRects = [];
 						}
@@ -2216,27 +2195,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							var currentRowRects = rects[i];
 							var minX = Math.min.apply(Math, currentRowRects.map(function(o) { return o.rect.x; }));
 							var maxX = Math.max.apply(Math, currentRowRects.map(function(o) { return o.rect.x+o.rect.width; }));
-							console.log('currentRowRects', currentRowRects)
-							console.log('minX minX', minX, parentWidth - maxX)
 
 							var rowWidth = maxX - minX;
-							console.log('rowWidth', rowWidth)
 
 							var newMinX = parentWidth / 2 - rowWidth / 2;
-							console.log('newMinX', newMinX)
 
 							var fixOn = Math.abs(minX - newMinX);
-							console.log('fixON', fixOn, minX - newMinX)
 							for (var r = 0; r < currentRowRects.length; r++) {
-								console.log('currentRowRects[r].rect.x 0', currentRowRects[r].rect.x)
 								if(minX > parentWidth - maxX) {
 									currentRowRects[r].rect.x = currentRowRects[r].rect.x - fixOn;
 								} else {
 									currentRowRects[r].rect.x = currentRowRects[r].rect.x + fixOn;
 								}
-
-								console.log('currentRowRects[r].rect.x 2', currentRowRects[r].rect.x)
-
 							}
 						}
 
