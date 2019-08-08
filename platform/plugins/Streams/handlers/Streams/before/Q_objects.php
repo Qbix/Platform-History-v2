@@ -12,6 +12,12 @@ function Streams_before_Q_objects()
 	$alreadyExecuted = true;
 
 	$invite = Streams_Invite::fromToken($token, true);
+	if (!$invite) {
+		throw new Q_Exception_MissingRow(array(
+			'table' => 'invite',
+			'criteria' => "token=$token"
+		));
+	}
 	
 	// did invite expire?
 	$ts = Streams_Invite::db()->select("CURRENT_TIMESTAMP")->fetchAll(PDO::FETCH_NUM);
@@ -26,12 +32,12 @@ function Streams_before_Q_objects()
 	
 	// is invite still pending?
 	if ($invite->state !== 'pending') {
+		$exception = null;
 		switch ($invite->state) {
+		case 'accepted':
+			break;
 		case 'expired':
 			$exception = new Streams_Exception_AlreadyExpired(null, 'token');
-			break;
-		case 'accepted':
-			$exception = new Streams_Exception_AlreadyAccepted(null, 'token');
 			break;
 		case 'declined':
 			$exception = new Streams_Exception_AlreadyDeclined(null, 'token');
@@ -39,17 +45,22 @@ function Streams_before_Q_objects()
 		case 'forwarded':
 			$exception = new Streams_Exception_AlreadyForwarded(null, 'token');
 			break;
+		case 'claimed':
+			$exception = new Streams_Exception_AlreadyC(null, 'token');
+			break;
 		default:
 			$exception = new Q_Exception("This invite has already been " . $invite->state, 'token');
 			break;
 		}
-		$shouldThrow = Q::event('Streams/objects/inviteException', 
-			compact('invite', 'exception'), 'before'
-		);
-		if ($shouldThrow === null) {
-			Q_Response::setNotice('Streams/objects', $exception->getMessage(), true);
-		} else if ($shouldThrow === true) {
-			throw $exception;
+		if ($exception) {
+			$shouldThrow = Q::event('Streams/objects/inviteException', 
+				compact('invite', 'exception'), 'before'
+			);
+			if ($shouldThrow === null) {
+				Q_Response::setNotice('Streams/objects', $exception->getMessage());
+			} else if ($shouldThrow === true) {
+				throw $exception;
+			}
 		}
 	}
 	
@@ -70,6 +81,15 @@ function Streams_before_Q_objects()
 	if (!$liu and !$invite->userId) {
 		// schedule the invite to be accepted after the user logs in
 		$_SESSION['Streams']['invite']['token'] = $token;
+		// tell Users plugin we have an icon ready for a certain user
+		$splitId = Q_Utils::splitId($invite->invitingUserId);
+		$path = 'Q/uploads/Users';
+		$subpath = $splitId.'/invited/'.$token;
+		$pathToToken = APP_DIR.'/web/'.$path.DS.$subpath;
+		Q_Utils::normalizePath($pathToToken);
+		if (file_exists($pathToToken)) {
+			$_SESSION['Users']['register']['icon'] = Q_Html::themedUrl("$path/$subpath");
+		}
 		return;
 	}
 	

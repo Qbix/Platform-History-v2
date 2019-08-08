@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Zaplatíte"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: poplatek zpracován pro {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Děkujeme za platbu ve výši {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} se přihlásilo k odběru {{plan.title}}",
+        "YouSubscribedTo": "Byli jste přihlášeni k odběru {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Informace o objednávce",
+        "PaymentMethod": "Způsob platby",
+        "ContactInfo": "Kontaktní informace",
+        "Pay": "Platit"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Pozvání přijato {{1}}",
+        "YouHaveCreditsToStart": "Máte {{1}} kredity ke spuštění"
+    },
+    "history": {
+        "Date": "datum",
+        "Amount": "Množství",
+        "Description": "Popis",
+        "Client": "Klient",
+        "To": "na",
+        "From": "z",
+        "HistoryEmpty": "Zatím nemáte žádná data"
+    },
+    "subscriptions": {
+        "infoTitle": "Nastavte informace o platbě",
+        "confirm": {
+            "title": "Zahajte předplatné",
+            "message": "Chcete se přihlásit k odběru {{title}}?",
+            "ok": "OK",
+            "cancel": "zrušení"
+        }
+    },
+    "payments": {
+        "infoTitle": "Nastavte informace o platbě",
+        "confirm": {
+            "title": "Zaplatit",
+            "message": "Souhlasíte s tím, že zaplatíte {{symbol}} {{amount}}?",
+            "ok": "OK",
+            "cancel": "zrušení"
+        }
+    }
+}

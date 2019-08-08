@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Item novum"
+    },
+    "labels": {
+        "Streams\/invited": "Invitavit mihi populus",
+        "Streams\/invitedMe": "Quis praeter me"
+    },
+    "interests": {
+        "Filter": "Quid frui?",
+        "CanAdd": "Si tamen non id invenias quod petebas, te potest addere novam rem inferius:",
+        "TrySynonyms": "Non video? Try quidam non differunt.",
+        "AddUnderCategory": "Addere genus sub ...",
+        "Other": "alius",
+        "Unlisted": "audio"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Epistula vexillis benificia admin recensionem. Unflag rursus ad ICTUS.",
+        "noOneSaid": "Nemo dixit quid",
+        "closeChatButton": "prope chat",
+        "closeChatConfirmTitle": "Chat hac claudere?",
+        "closeChatConfirm": "Curabitur velit obstruere certus es?",
+        "closeChatConfirmYes": "Ita",
+        "closeChatConfirmNo": "nullum",
+        "earlierComments": "ante comments"
+    },
+    "notifications": {
+        "*": "Nuntium {{CMXCIX}} ad {{M}}",
+        "Streams\/chat\/message": "{{CMXCIX}} dixit:",
+        "Streams\/changed": "{{Mutationes in CMXCIX}}",
+        "Streams\/invite": "{{CMXCIX ad te invitavit}}",
+        "Streams\/announcement": "Nuntius CMXCIX} {in} {",
+        "Streams\/access": "{{CMXCIX obvius amnis mutata}}",
+        "Streams\/chat\/edit": "Chat nuntium edidit",
+        "Streams\/chat\/remove": "Chat remota nuntius",
+        "Streams\/closed": "{{Clausi sunt CMXCIX}}",
+        "Streams\/task\/progress": "{{Progressus est de CMXCIX}}",
+        "Streams\/task\/complete": "Opus complebitur: {{CMXCIX}}",
+        "Streams\/task\/error": "Error in {{CMXCIX}}",
+        "Streams\/incoming\/*": "{{CMXCIX}}: Reditus Nuntius"
+    },
+    "invite": {
+        "messageContent": "} {{CMXCIX te invitavit} {{M}}",
+        "dialog": {
+            "chooseFromContacts": "Elige ex Contactus",
+            "chooseAgainFromContacts": "Elige ex Iterum Contactus",
+            "inviteSelectedContacts": "Lego invitare Contactus",
+            "selectFromContacts": "Select a Contactus",
+            "photo": "Tolle a photo",
+            "photoInstruction": "QR code lustrabat vestris si quis coram te et accipies Photo",
+            "to": "Ut {{CMXCIX}}",
+            "go": "ad",
+            "title": "invitare",
+            "placeholder": "Et inscriptio inscriptio numerus mobile",
+            "orInvite": "Qui invite aut utendo,",
+            "QR": "{{CMXCIX}} ad QR code generate",
+            "QRtitle": "QR code Hoc scan",
+            "QRscanned": "Et lustrabat lumine est?",
+            "byEmail": "Email",
+            "byText": "text",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Nullam Lorem ista",
+            "PleaseVisitLink": "Placere visitare vinculo sequenti:",
+            "InvitingYou": "{{Ego sum invitamus ad CMXCIX}}",
+            "HasInvitedYou": "} {{CMXCIX} {{te invitavit M}}"
+        },
+        "sms": {
+            "content": "{{Vos adhibitus essem CMXCIX}}. {{Quaeso ICTUS M}}"
+        },
+        "notice": {
+            "text": "Vos invitatus ab eo. {{CMXCIX}} accipere et hic adiungere."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{CMXCIX} <em>{a} {missae M} {MI}<\/em> {ad}}"
+        },
+        "text": {
+            "body": "{{CMXCIX} {{in}} M} {{MI}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Mittatur nobis invitet qui nondum agnoscunt tuos. Post a velox apud se illud scire ad invitationem ergo a te factum est, rogabat ut click in link.",
+            "confirm": "Mittatur nobis invitet qui nondum agnoscunt tuos. Vis sequi cum illis sit velox ad textum invitationis scire a te factum est, rogabat ut click in link.",
+            "check": "Heus, sicut misit me ad vos an invite {{CMXCIX}} app. Please click SMS pagina vestra!"
+        },
+        "email": {
+            "alert": "Mittuntur de dominico invitet qui nondum agnoscunt tuos. Cum sit velox ad illud post invitationem ad illos quia venit a vobis orantes et postulantes ut click in link.",
+            "confirm": "Mittuntur de dominico invitet qui nondum agnoscunt tuos. Vis sequi cum illis sit velox ad textum invitationis scire a te factum est, rogabat ut click in link.",
+            "subject": "Nonne vos adepto an invitare?",
+            "body": "Heus, sicut misit me ad vos an invite {{CMXCIX}} app. Email reprehendo placere click in pagina illic"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Admitte Microphone",
+            "cameraTitle": "DE CAMERA activare",
+            "cameraAndMicrophoneTitle": "Admitte camera et microphone"
+        }
+    }
+}

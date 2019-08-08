@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tryck för att betala"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: laddning bearbetad för {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Tack för din betalning till {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} prenumererade på {{plan.title}}",
+        "YouSubscribedTo": "Du har prenumererat på {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Info om order",
+        "PaymentMethod": "Betalningsmetod",
+        "ContactInfo": "Kontaktinformation",
+        "Pay": "Betala"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Bjud in accepterad av {{1}}",
+        "YouHaveCreditsToStart": "Du har {{1}} krediter för att starta"
+    },
+    "history": {
+        "Date": "Datum",
+        "Amount": "Belopp",
+        "Description": "Beskrivning",
+        "Client": "Klient",
+        "To": "till",
+        "From": "från",
+        "HistoryEmpty": "Du har inga data ännu"
+    },
+    "subscriptions": {
+        "infoTitle": "Ställ in betalningsinformation",
+        "confirm": {
+            "title": "Starta prenumerationen",
+            "message": "Vill du prenumerera på {{title}}?",
+            "ok": "ok",
+            "cancel": "Annullera"
+        }
+    },
+    "payments": {
+        "infoTitle": "Ställ in betalningsinformation",
+        "confirm": {
+            "title": "Betala",
+            "message": "Håller du med att betala {{symbol}} {{amount}}?",
+            "ok": "ok",
+            "cancel": "Annullera"
+        }
+    }
+}

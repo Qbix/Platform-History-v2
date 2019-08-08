@@ -1,0 +1,41 @@
+{
+    "actions": {
+        "LogIn": "hyni në",
+        "LogOut": "shkyç"
+    },
+    "activate": {
+        "SetAsPrimary": "Set {{1}} si parësore {{2}}",
+        "ChoosePassPhrase": "Zgjidh një <strong>frazë kalimi<\/strong> për t&#39;u identifikuar. <br> Një frazë e thjeshtë që përbëhet nga disa fjalë që ju do të lehtë të mbani mend.",
+        "ChoosePassPhraseSeeSuggestions": "Zgjidhni një <strong>frazë<\/strong> të mirë të <strong>kalimit<\/strong> për të mbrojtur llogarinë tuaj. Shikoni sugjerimet për disa ide.",
+        "LogOutAndTryAgain": "Dilni dhe provoni përsëri",
+        "IfYouFeel": "Nëse ndjeni që diçka gaboi, mundeni",
+        "SetIdentifierButtonTitle": "filloje nga e para"
+    },
+    "session": {
+        "GetStarted": "Fillo"
+    },
+    "authorize": {
+        "GetStarted": "Fillo",
+        "Authorize": "Autorizoj",
+        "TermsLabel": "Kam lexuar dhe pajtohem <br> në {{link}}",
+        "TermsTitle": "Kushtet"
+    },
+    "register": {
+        "TermsLabel": "Unë pranoj {{link}}",
+        "TermsTitle": "Kushtet"
+    },
+    "notifications": {
+        "title": "leje",
+        "prompt": "Dëshiron të aktivizosh njoftimet? Ju do të merrni përditësime në kohë reale për gjërat që ju interesojnë.",
+        "yes": "po",
+        "no": "jo",
+        "WelcomePleaseVerifyEmail": "Mirë se vini! Ju lutemi verifikoni adresën tuaj të postës elektronike.",
+        "WelcomeVerifyEmail": "Mirë se vini! Verifikoni adresën tuaj të postës elektronike.",
+        "ForgetPass": "Hej, a keni harruar fjalëkalimin tuaj?"
+    },
+    "usersContacts": {
+        "selectLabel": "Ju lutemi zgjidhni etiketën.",
+        "inviteUser": "Fto Përdoruesin"
+    },
+    "invalidLanguageSelected": "Gjuhë e pavlefshme e zgjedhur"
+}

@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "Lowani muakaunti",
+        "LogOut": "tulukani"
+    },
+    "activate": {
+        "SetAsPrimary": "Ikani {{1}} monga wanga {{2}} wamkulu",
+        "ChoosePassPhrase": "Sankhani <strong>mawu okudutsa<\/strong> kuti mulowe nawo. <br> Mawu ophweka omwe ali ndi mau ochepa omwe mungakumbukire mosavuta.",
+        "ChoosePassPhraseSeeSuggestions": "Sankhani wabwino <strong>chikudutsa mawu<\/strong> kuteteza akaunti yanu. Onani malingaliro a malingaliro ena.",
+        "LogOutAndTryAgain": "Lowani ndi kuyesanso",
+        "IfYouFeel": "Ngati mukumva kuti chinachake chalakwika, mukhoza",
+        "SetIdentifierButtonTitle": "yambani"
+    },
+    "session": {
+        "GetStarted": "Yambani"
+    },
+    "authorize": {
+        "GetStarted": "Yambani",
+        "Authorize": "Vomerezani",
+        "TermsLabel": "Ndawerenga ndikuvomereza <br> ku {{link}}",
+        "TermsTitle": "Maganizo"
+    },
+    "register": {
+        "TermsLabel": "Ndikuvomereza {{link}}",
+        "TermsTitle": "Maganizo"
+    },
+    "notifications": {
+        "title": "Chilolezo",
+        "prompt": "Kodi mukufuna kuti zidziwitso zitheke? Mudzalandira zosintha zenizeni zenizeni za zinthu zomwe mumasamala.",
+        "yes": "Inde",
+        "no": "Ayi",
+        "WelcomePleaseVerifyEmail": "Landirani! Chonde onetsetsani imelo yanu.",
+        "WelcomeVerifyEmail": "Landirani! Tsimikizani imelo yanu.",
+        "ForgetPass": "Eya, kodi mwaiwala mawu anu ozembera?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Sankhani kukhudzana"
+        },
+        "select": {
+            "title": "Sankhani kukhudzana ndi {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Chonde sankhani chizindikiro.",
+        "inviteUser": "Pemphani Wophunzira"
+    },
+    "invalidLanguageSelected": "Chilankhulo chosasankhidwa"
+}

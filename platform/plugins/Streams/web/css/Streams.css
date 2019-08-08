@@ -163,7 +163,7 @@
 	font-size: 20px;
 }
 
-.Streams_photoSelector_tool_title:before {
+.Streams_photoSelector_tool_title::before {
 	content: '2.';
 	color: #FFA800;
 	margin-right: 5px;
@@ -180,7 +180,8 @@
 .Streams_participants_tool {
 	padding: 0 5px;
 	overflow: hidden;
-	height: 60px;
+	height: 70px;
+	text-align: left;
 }
 
 .Users_avatar_tool {
@@ -213,6 +214,10 @@
 	position: relative;
 }
 
+.Streams_invite_social_labels {
+	display: none;
+}
+
 .Streams_participants_invite img {
 	width: 40px;
 	height: 40px;
@@ -225,6 +230,8 @@
 
 .Streams_participants_tool .Users_avatar_icon {
 	box-shadow: #222 0 0 1px;
+	width: 40px;
+	height: 40px;
 }
 
 .Streams_participants_tool .Users_avatar_icon_blank {
@@ -318,10 +325,7 @@
 	width: 96%; padding: 2%;
 }
 
-#Users_login_username, #Streams_login_fullname
-{
-  width: 188px;
-}
+#Streams_login_identifierExists { font-size: 12px; color: green; text-align: center; font-weight: bold; }
 
 #Streams_login_password {
 	width: 210px;
@@ -338,7 +342,7 @@
 	vertical-align: middle;
 }
 
-.Streams_complete_user td:first-child {
+.Streams_complete_invitingUser td:first-child {
 	width: 1%;
 }
 
@@ -348,6 +352,7 @@
 
 .Streams_login_get_started {
 	text-align: center;
+	margin-top: 10px;
 }
 
 .Streams_login_appear table {
@@ -407,7 +412,7 @@
 }
 .Streams_preview .Streams_preview_title { margin: 0; padding: 0px; line-height: 24px; font-size: 16px; font-weight: normal; }
 .Streams_preview_tool, .Q_listing .Streams_preview_tool { overflow: visible; }
-.Streams_image_preview_tool,.Streams_album_preview_tool { text-align: center; display: inline-block; padding: 10px; margin: 4px;border: 1px solid #c5c0c0; }
+.Streams_image_preview_tool,.Streams_album_preview_tool { text-align: center; display: inline-block; }
 .Streams_preview_tool .Streams_preview_icon,
 .Streams_preview_tool .Streams_preview_add { margin-right: 3px; }
 
@@ -448,167 +453,6 @@
 	word-wrap:break-word;
 }
 
-/* Streams chat tool */
-.Streams_chat_tool {
-
-}
-.Streams_chat_tool h1 {
-	text-align: center;
-	width: 100%;
-}
-.Streams_chat_tool .Users_avatar_icon {
-	position: absolute;
-}
-.Streams_chat_avatar_icon {
-	float: left;
-}
-.Streams_chat_to_me .Streams_chat_bubble .Users_avatar_tool {
-	float: left;
-	font-weight: bold;
-}
-.Streams_chat_tool .Streams_chat_bubble .Users_avatar_name {
-	margin-right: 5px;
-	display: block;
-	color: #222;
-}
-.Streams_chat_message {
-	color: #222; 
-	max-height: 100px;
-	overflow: hidden;
-	word-wrap: break-word;
-	text-overflow: ellipsis;
-	cursor: default;
-}
-.Streams_chat_messages {
-	min-height: 70px;
-}
-.Streams_chat_messages button[name=close] {
-	display: block;
-	margin: 20px auto;
-}
-.Streams_chat_item {
-	font-size: 11pt;
-	margin: 10px 0;
-	position: relative;
-}
-.Streams_chat_noMessages {
-	color: gray;
-	font-size: 12pt;
-	text-align: center;
-	width: 100%;
-	display: block;
-	line-height: 50pt;
-}
-.Streams_chat_composer textarea {
-	font-size: 12pt;
-	margin: 0 auto;
-	display: block;
-	padding: 6px;
-	margin-left: 50px;
-	height: 30px;
-	color: black;
-}
-.Streams_chat_composer input {
-	font-size: 12pt;
-	margin: 0 auto;
-	display: block;
-	padding: 6px;
-	margin-left: 50px;
-	height: 30px;
-	color: black;
-}
-.Streams_chat_prevent {
-	text-align: center;
-	vertical-align: middle;
-	color: #555;
-	font-style: italic;
-}
-.Streams_chat_posting
-{
-	background: url('../../Q/img/throbbers/loading.gif') center no-repeat;
-}
-.Streams_chat_more {
-	cursor: pointer;
-	background-color: #eee;
-	color: #555;
-	text-align: center;
-	padding: 5px 0;
-	font-size: 11pt;
-}
-.Streams_chat_more:hover {
-	color: #fff;
-	background-color: #ccc;
-}
-.Streams_chat_more:active {
-	color: #fff;
-	background-color: #bbb;
-}
-.Streams_chat_timestamp {
-	margin-right: 15px;
-	text-align: right;
-	float: right;
-	cursor: default;
-	font-size: 0.8em;
-	color: gray;
-}
-.Streams_chat_bubble {
-	position: relative;
-	min-width: 30%;
-	margin-right: 15px;
-	padding: 10px;
-	border: 1px solid #D0D9E4;
-	clear: both;
-	font-size: 0.8em;
-}
-.Streams_chat_tick {
-	background: url('../../Streams/img/chat/message-tick.png');
-	width: 9px;
-	height: 13px;
-}
-.Streams_chat_to_me .Streams_chat_tick {
-	float: left;
-	margin: 0 0 0 -19px
-}
-.Streams_chat_to_me .Streams_chat_bubble {
-	border-radius: 13px;
-	margin-left: 50px;
-	background-color: #DAE3ED;
-	text-align: left;
-}
-.Streams_chat_from_me .Streams_chat_bubble {
-	border-radius: 13px;
-	margin-left: 50px;
-	background-color: #FFFFFF;
-	text-align: left;
-}
-.Streams_chat_from_me .Streams_chat_tick {
-	float: right;
-	margin: 0 -19px 0 0;
-	background-position: 0 13px;
-}
-.Streams_chat_from_me .Users_avatar_tool {
-	display: none;
-	float: left;
-}
-.Streams_chat_notification {
-	text-align: center;
-	color: gray;
-	font-size: 12pt;
-	font-style: italic;
-}
-/* phones */
-@media (min-width: 320px) and (max-width: 580px) {
-	.Streams_chat_date {
-		width: 100%;
-		float: right;
-		margin-bottom: 15px;
-	}
-}
-
-
-
-
-
 .Q_expandable_count,
 .Q_expandable_tool .Q_selected,
 .Streams_interests_unlisted .Q_selected {
@@ -619,6 +463,7 @@
 
 .Streams_interest_title,
 .Streams_new_interest_title {
+	display: inline-block;
 	font-size: 17px;
 	white-space: nowrap;
 	padding: 0 3px 0 3px;
@@ -689,7 +534,8 @@
 }
 
 
-.Streams_interests_subcategory {
+.Streams_interests_subcategory,
+.Streams_interests_other {
 	text-align: center;
 	opacity: 0.5;
 	font-weight: 200;
@@ -770,9 +616,15 @@
 	width: 100%;
 }
 
-.Streams_aspect_interests { color: #bf1118; border-color: #bf1118; }
-.Streams_aspect_chats { color: #0b94a9; border-color: #0b94a9; }
-.Streams_aspect_promote { color: #742e7f; border-color: #742e7f; }
+.Streams_aspect_interests, .Streams_aspect_interests::before {
+	color: #bf1118; border-color: #bf1118;
+}
+.Streams_aspect_chats, .Streams_aspect_chats::before {
+	color: #0b94a9; border-color: #0b94a9;
+}
+.Streams_aspect_promote, .Streams_aspect_promote::before {
+	color: #742e7f; border-color: #742e7f;
+}
 
 .Q_button.Streams_aspect_interests {
 	background-color: #bf1118; /* for non-css3 browsers */
@@ -900,4 +752,28 @@
 
 .Streams_photoSelector_container img {
 	margin: 5px !important;
+}
+
+.Streams_completeInvited_dialog {
+
+}
+
+.Streams_unseen_nonzero {
+	display: inline-block !important;
+}
+
+.Streams_complete_overlay .Q_dialog_content {
+	padding: 0;
+}
+
+.Streams_invite_QR .Q_buttons {
+	padding-bottom: 20px;
+}
+
+.Streams_invite_QR .Q_button {
+	padding: 10px;
+}
+
+.Streams_complete_overlay .Communities_onboarding_tool {
+	zoom: 0.8;
 }

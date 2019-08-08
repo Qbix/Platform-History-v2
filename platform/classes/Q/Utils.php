@@ -31,13 +31,13 @@ class Q_Utils
 	 * @method signature
 	 * @static
 	 * @param {array|string} $data
-	 * @param {string} $secret
+	 * @param {string} [$secret] A different secret to use for generating the signature
 	 * @return {string}
 	 */
-	static function signature($data, $secret)
+	static function signature($data, $secret = null)
 	{
 		if (!isset($secret)) {
-			throw new Q_Exception("Q_Utils::signature is expecting a \$secret");
+			$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		}
 		if (is_array($data)) {
 			ksort($data);
@@ -53,29 +53,34 @@ class Q_Utils
 	 * @static
 	 * @param {array} $data The array of data
 	 * @param {array|string} [$fieldKeys] Path of the key under which to save signature
-	 * @return {array}
+	 * @param {string} [$secret] Can pass a different secret to use for generating the signature
+	 *  than the one found in Q/internal/secret config.
+	 * @return {array} The data, with the signature added unless $secret is null
 	 */
-	static function sign($data, $fieldKeys = null) {
-		$secret = Q_Config::get('Q', 'internal', 'secret', null);
-		if (isset($secret)) {
-			if (!$fieldKeys) {
-				$sf = Q_Config::get('Q', 'internal', 'sigField', 'sig');
-				$fieldKeys = array("Q.$sf");
-			}
-			if (is_string($fieldKeys)) {
-				$fieldKeys = array($fieldKeys);
-			}
-			$ref = &$data;
-			for ($i=0, $c = count($fieldKeys); $i<$c-1; ++$i) {
-				if (!array_key_exists($fieldKeys[$i], $ref)) {
-					$ref[ $fieldKeys[$i] ] = array();
-				}
-				$ref = &$ref[ $fieldKeys[$i] ];
-			}
-			$ef = end($fieldKeys);
-			unset($ref[$ef]);
-			$ref[$ef] = Q_Utils::signature($data, $secret);
+	static function sign($data, $fieldKeys = null, $secret = null) {
+		if (!isset($secret)) {
+			$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		}
+		if (!isset($secret)) {
+			return $data;
+		}
+		if (!$fieldKeys) {
+			$sf = Q_Config::get('Q', 'internal', 'sigField', 'sig');
+			$fieldKeys = array("Q.$sf");
+		}
+		if (is_string($fieldKeys)) {
+			$fieldKeys = array($fieldKeys);
+		}
+		$ref = &$data;
+		for ($i=0, $c = count($fieldKeys); $i<$c-1; ++$i) {
+			if (!array_key_exists($fieldKeys[$i], $ref)) {
+				$ref[ $fieldKeys[$i] ] = array();
+			}
+			$ref = &$ref[ $fieldKeys[$i] ];
+		}
+		$ef = end($fieldKeys);
+		unset($ref[$ef]);
+		$ref[$ef] = Q_Utils::signature($data, $secret);
 		return $data;
 	}
 	
@@ -225,7 +230,7 @@ class Q_Utils
 		$keepCaseIntact = false)
 	{
 		if (!isset($characters)) {
-			$characters = '/[^A-Za-z0-9]+/';
+			$characters = '/[^\p{L}0-9]+/u';
 			if (class_exists('Q_Config')) {
 				$characters = Q_Config::get('Db', 'normalize', 'characters', $characters);
 			}
@@ -249,7 +254,35 @@ class Q_Utils
 		}
 		return $result;
 	}
-	
+	/**
+	 * Converts the first character of a string to upper case.
+	 * @method ucfirst
+	 * @static
+	 * @param {string} $string
+	 * @param {string} [$encoding='UTF-8']
+	 * @return {string}
+	 */
+	static function ucfirst($string, $encoding = 'UTF-8')
+	{
+		$strlen = mb_strlen($string, $encoding);
+		$firstChar = mb_substr($string, 0, 1, $encoding);
+		$then = mb_substr($string, 1, $strlen - 1, $encoding);
+		return mb_strtoupper($firstChar, $encoding) . $then;
+	}
+	/**
+	 * Converts to uppercase the first character of each word in the string.
+	 * @method ucwords
+	 * @static
+	 * @param {string} $string String
+	 * @param {string} [$encoding='UTF-8'] encoding
+	 * @return {string}
+	 */
+	static function ucwords($string, $encoding='UTF-8')
+	{
+
+		$string = mb_convert_case($string, MB_CASE_TITLE, $encoding);
+		return $string;
+	}
 	/**
 	 * Hashes text in a standard way. It uses md5, which is fast and irreversible,
 	 * so it's good for things like indexes, but not for obscuring information.
@@ -323,6 +356,7 @@ class Q_Utils
 	}
 
 	/**
+	 * A polyfill for hash_equals
 	 * @param string $a
 	 * @param string $b
 	 *
@@ -379,8 +413,8 @@ class Q_Utils
 		$result = array();
 		$lines = str_getcsv($input, "\r", $enclosure, $escape);
 		foreach ($lines as $line) {
-			if ($line and $line[0] === "\n") {
-				$line = substr($line, 1);
+			if ($line = trim($line)) {
+				$result[] = $line;
 			}
 		}
 		return $result;
@@ -559,17 +593,47 @@ class Q_Utils
 	 *  to a particular IP, while retaining the hostname and request URI
 	 * @param {array|string} $data The data content to post or an array of ($field => $value) pairs
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
-	 * @param {string} [$follow_redirects=true] Whether to follow redirects when getting a response.
+	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
 	 * @param {string} [$header=null] Optional string to replace the entire POST header
-	 * @return {string} The response.
+	 * @return {string|false} The response, or false if not received
 	 * 
 	 * **NOTE:** *The function waits for it, which might take a while!*
 	 */
-	static function post ($url, $data, $user_agent = null, $follow_redirects = true, $header = null, $conn_t = 120, $res_t = 120)
+	static function post (
+		$url,
+		$data,
+		$user_agent = null,
+		$curl_opts = array(),
+		$header = null,
+		$res_t = Q_UTILS_CONNECTION_TIMEOUT)
 	{
-		return Q_Utils::request('POST', $url, $data, $user_agent, $follow_redirects, $header, $conn_t, $res_t);
+		return self::request('POST', $url, $data, $user_agent, $curl_opts, $header, $res_t);
 	}
-
+	/**
+	 * Issues a PUT request, and returns the response
+	 * @method put
+	 * @static
+	 * @param {string|array} $url The URL to post to
+	 *  This can also be an array of ($url, $ip) to send the request
+	 *  to a particular IP, while retaining the hostname and request URI
+	 * @param {array|string} $data The data content to post or an array of ($field => $value) pairs
+	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
+	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
+	 * @param {string} [$header=null] Optional string to replace the entire POST header
+	 * @return {string|false} The response, or false if not received
+	 *
+	 * **NOTE:** *The function waits for it, which might take a while!*
+	 */
+	static function put (
+		$url,
+		$data,
+		$user_agent = null,
+		$curl_opts = array(),
+		$header = null,
+		$res_t = Q_UTILS_CONNECTION_TIMEOUT)
+	{
+		return self::request('PUT', $url, $data, $user_agent, $curl_opts, $header, $res_t);
+	}
 	/**
 	 * Issues a GET request, and returns the response
 	 * @method get
@@ -578,15 +642,15 @@ class Q_Utils
 	 *  This can also be an array of ($url, $ip) to send the request
 	 *  to a particular IP, while retaining the hostname and request URI
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
-	 * @param {string} [$follow_redirects=true] Whether to follow redirects when getting a response.
+	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
 	 * @param {string} [$header=null] Optional string to replace the entire GET header
-	 * @return {string} The response.
+	 * @return {string|false} The response, or false if not received
 	 * 
 	 * **NOTE:** *The function waits for it, which might take a while!*
 	 */
-	static function get ($url, $user_agent = null, $follow_redirects = true, $header = null)
+	static function get ($url, $user_agent = null, $curl_opts = array(), $header = null, $res_t = Q_UTILS_CONNECTION_TIMEOUT)
 	{
-		return Q_Utils::request('GET', $url, null, $user_agent, $follow_redirects, $header);
+		return self::request('GET', $url, null, $user_agent, $curl_opts, $header, $res_t);
 	}
 
 	/**
@@ -600,13 +664,13 @@ class Q_Utils
 	 *  to a particular IP, while retaining the hostname and request URI
 	 * @param {array|string} $data The data content to post or an array of ($field => $value) pairs
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
-	 * @param {string} [$follow_redirects=true] Whether to follow redirects when getting a response.
+	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
 	 * @param {string} [$header=null] Optional string to replace the entire header
-	 * @return {string} The response.
+	 * @return {string|false} The response, or false if not received
 	 * 
 	 * **NOTE:** *The function waits for it, which might take a while!*
 	 */
-	private static function request($method, $uri, $data, $user_agent = null, $follow_redirects = true, $header = null, $conn_t = 120, $res_t = 120)
+	private static function request($method, $uri, $data, $user_agent = null, $curl_opts = array(), $header = null, $res_t = Q_UTILS_CONNECTION_TIMEOUT)
 	{
 		$method = strtoupper($method);
 		if (!isset($user_agent))
@@ -615,8 +679,17 @@ class Q_Utils
 		$ip = null;
 		if (is_array($uri)) {
 			$url = $uri[0];
-			if (isset($uri[1])) $ip = $uri[1];
-		} else $url = $uri;
+			if (isset($uri[1])) {
+				$ip = $uri[1];
+			}
+		} else {
+			$url = $uri;
+		}
+
+		if (!is_array($curl_opts)) {
+			$curl_opts = array();
+		}
+
 		$parts = parse_url($url);		
 		$host = $parts['host'];
 		if (!isset($ip)) $ip = $host;
@@ -624,6 +697,9 @@ class Q_Utils
 //		if (!empty($parts['query'])) $request_uri .= "?".$parts['query'];
 		$port = isset($parts['port']) ? ':'.$parts['port'] : '';
 		$url = $parts['scheme']."://".$ip.$port.$request_uri;
+		if (!empty($parts['query'])) {
+			$url .= '?' . $parts['query'];
+		}
 
 		// NOTE: this works for http(s) only
 		$headers = array("Host: ".$host);
@@ -634,22 +710,39 @@ class Q_Utils
 		if (!is_string($data)) {
 			$data = '';
 		}
-
+		
+		if (!isset($header) or is_array($header)) {
+			$headers[] = "User-Agent: $user_agent";
+			if ($data) {
+				if ($method === 'GET') {
+					$url = Q_Uri::fixUrl("$url?$data");
+				} else {
+					$headers[] = "Content-type: application/x-www-form-urlencoded";
+					$headers[] = "Content-length: " . strlen($data);
+				}
+			}
+			if ($header) {
+				$headers = array_merge($headers, $header);
+			}
+			$header = implode("\r\n", $headers);
+		} else {
+			$headers = explode("\r\n", $header);
+		}
 		if (function_exists('curl_init')) {
 			// Use CURL if installed...
 			$ch = curl_init();
-			curl_setopt_array($ch, array(
+			$curl_opts = $curl_opts + array(
 				CURLOPT_USERAGENT => $user_agent,
-
 				CURLOPT_RETURNTRANSFER => true,	 // return web page
 				CURLOPT_HEADER		 => false,	// don't return headers
 				CURLOPT_FOLLOWLOCATION => true,	 // follow redirects
 				CURLOPT_ENCODING	   => "",	   // handle all encodings
 				CURLOPT_AUTOREFERER	=> true,	 // set referer on redirect
-				CURLOPT_CONNECTTIMEOUT => $conn_t,	  // timeout on connect
-				CURLOPT_TIMEOUT		=> $res_t,	  // timeout on response
+				CURLOPT_CONNECTTIMEOUT => Q_UTILS_CONNECTION_TIMEOUT,	  // timeout on connect
+				CURLOPT_TIMEOUT		=> Q_UTILS_CONNECTION_TIMEOUT,	  // timeout on response
 				CURLOPT_MAXREDIRS	  => 10,	   // stop after 10 redirects
-			));
+			);
+			curl_setopt_array($ch, $curl_opts);
 			switch ($method) {
 				case 'POST':
 					curl_setopt_array($ch, array(
@@ -660,10 +753,15 @@ class Q_Utils
 					break;
 				case 'GET':
 					// default method for cURL
-					curl_setopt($ch, CURLOPT_URL, "$url?$data");
+					curl_setopt($ch, CURLOPT_URL, $url);
 					break;
 				case 'PUT':
-					// not supported
+					curl_setopt_array($ch, array(
+						CURLOPT_URL => $url,
+						CURLOPT_POSTFIELDS => $data,
+						CURLOPT_CUSTOMREQUEST => 'PUT'
+					));
+					break;
 				case 'DELETE':
 					// not supported
 				default:
@@ -673,23 +771,26 @@ class Q_Utils
 				curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 			}
 			$result = curl_exec($ch);
+
+			if (!$result) {
+				$error = curl_error($ch);
+				if ($error) {
+					throw new Exception($error);
+				}
+			}
+
 			curl_close($ch);
 		} else {
 			// Non-CURL based version...
-			if (!isset($header)) {
-				if ($data) $headers[] = "Content-type: application/x-www-form-urlencoded";
-				$headers[] = "User-Agent: $user_agent";
-				if ($data) $headers[] = "Content-length: " . strlen($data);
-				$header = implode("\r\n", $headers);
-			}
 			$context = stream_context_create(array(
 				'http' => array(
 					'method' => $method,
 					'header' => $header,
 					'content' => $data,
 					'max_redirects' => 10,
-					'timeout'	   => $res_t
-			)));
+					'timeout' => $res_t
+				)
+			));
 			$sock = fopen($url, 'rb', false, $context);
 			if ($sock) {
 				$result = '';
@@ -702,7 +803,7 @@ class Q_Utils
 	}
 
 	/**
-	 * Queries a server externally to the specified handler. Expects json array with 
+	 * Queries an external server. Expects json object with 
 	 * either ['slots']['data'] or ['error'] fields filled
 	 * @method queryExternal
 	 * @static
@@ -730,7 +831,14 @@ class Q_Utils
 			$server = "$url/action.php/$handler";
 		}
 
-		$result = json_decode(self::post($server, self::sign($data)), null, true, null, Q_UTILS_CONNECTION_TIMEOUT, Q_UTILS_CONNECTION_TIMEOUT, true);
+		$response = self::post(
+			$server, self::sign($data), null, true, null, 
+			Q_UTILS_CONNECTION_TIMEOUT, Q_UTILS_CONNECTION_TIMEOUT
+		);
+		if (empty($result)) {
+			throw new Q_Exception("Utils::queryExternal: not sent");
+		}
+		$result = Q::json_decode($response, true);
 		
 		// TODO: check signature of returned data
 
@@ -774,10 +882,14 @@ class Q_Utils
 			$server = "$url/$handler";
 		}
 
-		$result = Q::json_decode(self::post(
+		$response = self::post(
 			$server, self::sign($data), null, true, null, 
-			Q_UTILS_INTERNAL_TIMEOUT, Q_UTILS_INTERNAL_TIMEOUT
-		), true);
+			Q_UTILS_CONNECTION_TIMEOUT, Q_UTILS_CONNECTION_TIMEOUT
+		);
+		if (empty($response)) {
+			throw new Q_Exception("Utils::queryInternal: not sent");
+		}
+		$result = Q::json_decode($response, true);
 
 		// TODO: check signature of returned data
 
@@ -977,7 +1089,7 @@ class Q_Utils
 			}
 		}
 		$paths = array(APP_FILES_DIR);
-		foreach (Q_Config::get('Q', 'plugins', array()) as $plugin) {
+		foreach (Q::plugins() as $plugin) {
 			$c = strtoupper($plugin).'_PLUGIN_FILES_DIR';
 			if (defined($c)) {
 				$paths[] = constant($c);
@@ -1099,7 +1211,7 @@ class Q_Utils
 
 		$is_win = (substr(strtolower(PHP_OS), 0, 3) === 'win');
 
-		if(is_dir($link) && !$is_win && !is_link($link)) {
+		if (is_dir($link) && !$is_win && !is_link($link)) {
 			echo Q_Utils::colored(
 				"[WARN] Symlink '$link' (target: '$target') was not created".PHP_EOL, 
 				'red', 'yellow'

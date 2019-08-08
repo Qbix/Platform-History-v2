@@ -13,11 +13,11 @@ function Streams_message_response_messages()
 	$publisherId = Streams::requestedPublisherId(true);
 	$streamName = Streams::requestedName(true);
 	$type = Streams::requestedMessageType();
-	$withTotals = Q::ifset($_REQUEST, 'withTotals', null);
-	if ($withTotals and !is_array($withTotals)) {
-		throw new Q_Exception_WrongType(array('withTotals' => 'array'));
+	$withMessageTotals = Q::ifset($_REQUEST, 'withMessageTotals', null);
+	if ($withMessageTotals and !is_array($withMessageTotals)) {
+		throw new Q_Exception_WrongType(array('withMessageTotals' => 'array'));
 	}
-	$o = $withTotals ? compact('withTotals') : array();
+	$o = $withMessageTotals ? compact('withMessageTotals') : array();
 	$stream = Q::ifset(Streams::$cache, 'stream', 
 		Streams::fetchOne(null, $publisherId, $streamName, true, $o)
 	);
@@ -38,8 +38,8 @@ function Streams_message_response_messages()
 		$ascending = $_REQUEST['ascending'];
 	}
 	
-	if ($withTotals) {
-		Q_Response::setSlot('totals', $stream->get('totals'));
+	if ($withMessageTotals) {
+		Q_Response::setSlot('messageTotals', $stream->get('messageTotals'));
 	}
 
 	$messages = $stream->getMessages(compact('type', 'min', 'max', 'limit', 'ascending'));

@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Nýtt atriði"
+    },
+    "labels": {
+        "Streams\/invited": "Fólk sem ég bauð",
+        "Streams\/invitedMe": "Hver bauð mér"
+    },
+    "interests": {
+        "Filter": "Hvað finnst þér gaman?",
+        "CanAdd": "Ef þú finnur ennþá ekki það sem þú ert að leita að getur þú bætt við nýjum áhuga hér að neðan:",
+        "TrySynonyms": "Sérðu það ekki? Prófaðu samheiti.",
+        "AddUnderCategory": "Bæta við undir flokki ...",
+        "Other": "Annað",
+        "Unlisted": "Óskráð"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Skilaboð hefur verið merkt til að fá umsjón með admin. Pikkaðu aftur til unflag.",
+        "noOneSaid": "Enginn hefur sagt neitt",
+        "closeChatButton": "Lokaðu spjalli",
+        "closeChatConfirmTitle": "Lokaðu þessu spjalli?",
+        "closeChatConfirm": "Ertu viss um að þú viljir loka þessu spjalli?",
+        "closeChatConfirmYes": "Já",
+        "closeChatConfirmNo": "Nr",
+        "earlierComments": "fyrri athugasemdir",
+        "Subscribed": "Þagga tilkynningar",
+        "Unsubscribed": "Fá tilkynningar",
+        "dontHavePermissionJoinConversation": "Þú hefur ekki leyfi til að taka þátt í þessu samtali.",
+        "startedConversation": "hóf samtal",
+        "RealTimeCall": "Rauntíma símtal"
+    },
+    "notifications": {
+        "*": "Skilaboð {{& message.fields.type}} til {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sagði:",
+        "Streams\/changed": "Breytingar á {{stream.fields.title}}",
+        "Streams\/invite": "Þú varst boðið að {{& stream.fields.title}}",
+        "Streams\/announcement": "Tilkynning í {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} breytt straumaðgangur",
+        "Streams\/chat\/edit": "Spjallskilaboð breytt",
+        "Streams\/chat\/remove": "Spjallskilaboð fjarlægð",
+        "Streams\/closed": "{{stream.fields.title}} hefur verið lokað",
+        "Streams\/task\/progress": "Framfarir gerðar á {{stream.fields.title}}",
+        "Streams\/task\/complete": "Verkefni lokið: {{stream.fields.title}}",
+        "Streams\/task\/error": "Villa við: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Innkomið skilaboð",
+        "ManageEmailSubscriptions": "stjórna tölvupósti áskriftunum þínum",
+        "IfUnsubscribe": "Ef þú vilt segja upp áskrift"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} bauð þér að {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Veldu úr tengiliðum þínum",
+            "selectFromContacts": "Veldu úr tengiliðum",
+            "photo": "Taktu mynd",
+            "photoInstruction": "Ef sá sem skannaði QR kóðann þinn er fyrir framan þig skaltu taka mynd af þeim",
+            "to": "Til: {{Stream Title}}",
+            "go": "Fara",
+            "title": "Bjóddu",
+            "placeholder": "Farsímanúmer eða netfang",
+            "orInvite": "Eða bjóðið fólki með því að nota:",
+            "QR": "{{ClickOrTap}} til að búa til QR kóða",
+            "QRtitle": "Skannaðu þetta QR kóða",
+            "byEmail": "Email",
+            "byText": "Texti",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Þeir skannaðu það!",
+            "chooseAgainFromContacts": "Veldu aftur úr tengiliðum",
+            "inviteSelectedContacts": "Bjóddu valdar tengiliðir"
+        },
+        "email": {
+            "subject": "Hey, athugaðu þetta út",
+            "PleaseVisitLink": "Vinsamlegast farðu á eftirfarandi tengil:",
+            "InvitingYou": "Ég býð þér að {{title}}",
+            "HasInvitedYou": "{{displayName}} hefur boðið þér að {{title}}"
+        },
+        "sms": {
+            "content": "Þú hefur verið boðið {{title}}. Vinsamlegast bankaðu á {{url}}"
+        },
+        "notice": {
+            "text": "Þú hefur verið boðið. {{ClickOrTap}} hér til að samþykkja og taka þátt."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} sendi <em>{{message.fields.type}}<\/em> skilaboð til {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} í {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Boð eru send frá númerinu okkar, sem vinir þínir þekkja ekki ennþá. Fylgdu með skjótum texta til að láta þá vita að boðið kom frá þér og biðja þá að smella á tengilinn.",
+            "confirm": "Boð eru send frá númerinu okkar, sem vinir þínir þekkja ekki ennþá. Viltu fylgja með stuttum texta til að láta þá vita að boðið kom frá þér og biðja þá að smella á tengilinn.",
+            "check": "Hey, ég sendi þér bara boð í {{app}} app. Vinsamlegast athugaðu sms og smelltu á tengilinn!"
+        },
+        "email": {
+            "alert": "Boð eru send frá léninu okkar, sem vinir þínir þekkja ekki ennþá. Fylgdu með skjótum texta til að láta þá vita að boðið kom frá þér og biðja þá að smella á tengilinn.",
+            "confirm": "Boð eru send frá léninu okkar, sem vinir þínir þekkja ekki ennþá. Viltu fylgja með stuttum texta til að láta þá vita að boðið kom frá þér og biðja þá að smella á tengilinn.",
+            "subject": "Fékkstu boð?",
+            "body": "Hey, ég sendi þér bara boð í {{app}} app. Vinsamlegast athugaðu netfangið þitt og smelltu á tengilinn þarna!"
+        }
+    },
+    "participating": {
+        "Title": "Titill",
+        "Subscribed": "Áskrifandi",
+        "Participants": "Þátttakendur"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Virkja hljóðnema",
+            "cameraTitle": "Virkja myndavél",
+            "cameraAndMicrophoneTitle": "Virkja myndavél og hljóðnema",
+            "dialogTitle": "Virkir samtal",
+            "microphoneBtn": "Virkja hljóðnemann",
+            "cameraBtn": "Virkja myndavél",
+            "cameraAndMicrophoneBtn": "Virkja myndavél og hljóðnema"
+        }
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "մուտք գործել",
+        "LogOut": "դուրս գալը"
+    },
+    "activate": {
+        "SetAsPrimary": "{{1}} - ը որպես առաջնային {{2}}",
+        "ChoosePassPhrase": "Մուտքագրեք <strong>անցակցական արտահայտություն<\/strong> `մուտք գործելու համար: <br> Պարզ արտահայտություն, որը բաղկացած է մի քանի բառից, որը հեշտությամբ հիշում եք:",
+        "ChoosePassPhraseSeeSuggestions": "Ընտրեք լավ նշում <strong>արտահայտություն<\/strong> , ձեր հաշիվը պաշտպանելու համար: Տեսեք որոշ գաղափարների վերաբերյալ առաջարկությունները:",
+        "LogOutAndTryAgain": "Դուրս գալ եւ կրկին փորձել",
+        "IfYouFeel": "Եթե կարծում եք, ինչ-որ բան սխալ է գնացել, կարող ես",
+        "SetIdentifierButtonTitle": "վերսկսել"
+    },
+    "session": {
+        "GetStarted": "Սկսել"
+    },
+    "authorize": {
+        "GetStarted": "Սկսել",
+        "Authorize": "Լիազորագրեք",
+        "TermsLabel": "Ես կարդացել եւ համաձայն եմ <br> {{link}} - ին",
+        "TermsTitle": "Պայմանները"
+    },
+    "register": {
+        "TermsLabel": "Ես ընդունում եմ {{link}}",
+        "TermsTitle": "Պայմանները"
+    },
+    "notifications": {
+        "title": "Թույլտվություն",
+        "prompt": "Ցանկանում եք ծանուցումներ կատարել: Դուք կստանաք իրական ժամանակի թարմացումները ձեր հետաքրքրությունների մասին:",
+        "yes": "Այո",
+        "no": "Ոչ",
+        "WelcomePleaseVerifyEmail": "Բարի գալուստ Խնդրում ենք ստուգել ձեր էլփոստի հասցեն:",
+        "WelcomeVerifyEmail": "Բարի գալուստ Ստուգեք ձեր էլփոստի հասցեն:",
+        "ForgetPass": "Hey, դու մոռացել ես ձեր անցագրերը:"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Ընտրեք կոնտակտ"
+        },
+        "select": {
+            "title": "Ընտրեք {{displayName}} - ի կոնտակտը"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Խնդրում ենք ընտրել պիտակը:",
+        "inviteUser": "Հրավիրեք օգտվողին"
+    },
+    "invalidLanguageSelected": "Ընտրված լեզուն սխալ է"
+}

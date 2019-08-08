@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Lien pour promouvoir",
+                "startDate": "Date de début",
+                "startTime": "Heure de début",
+                "endDate": "Date de fin",
+                "endTime": "Heure de fin",
+                "budget": "Budget"
+            },
+            "interests": {
+                "Title": "Filtrer par intérêt",
+                "FilterInterests": "Commencez à taper un intérêt ..."
+            },
+            "Interest": "Intérêt",
+            "Location": "Emplacement"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Aller",
+            "PasteLinkHere": "Collez un lien ici",
+            "BrowseTheWeb": "Feuilleter",
+            "WriteToStartConversation": "Ecrivez vos pensées pour commencer la conversation",
+            "StartConversation": "Démarrer la conversation",
+            "GotoConversation": "Aller à la conversation"
+        }
+    }
+}

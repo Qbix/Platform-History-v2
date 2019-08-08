@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Puudutage maksmiseks"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: tasu töödeldi {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Täname teid makse eest {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} tellis {{plan.title}}",
+        "YouSubscribedTo": "Olete tellinud {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Info tellimuse kohta",
+        "PaymentMethod": "Makseviis",
+        "ContactInfo": "Kontaktinfo",
+        "Pay": "Maksma"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Kutsu {{1}} poolt heaks kiidetud",
+        "YouHaveCreditsToStart": "Alustamiseks on teil {{1}} krediiti"
+    },
+    "history": {
+        "Date": "Kuupäev",
+        "Amount": "Summa",
+        "Description": "Kirjeldus",
+        "Client": "Klient",
+        "To": "kuni",
+        "From": "alates",
+        "HistoryEmpty": "Teil pole veel andmeid"
+    },
+    "subscriptions": {
+        "infoTitle": "Määrake makseteave",
+        "confirm": {
+            "title": "Alusta tellimust",
+            "message": "Kas soovite tellida {{title}}?",
+            "ok": "Okei",
+            "cancel": "Tühista"
+        }
+    },
+    "payments": {
+        "infoTitle": "Määrake makseteave",
+        "confirm": {
+            "title": "Makse sooritamine",
+            "message": "Kas nõustute maksma {{symbol}} {{amount}}?",
+            "ok": "Okei",
+            "cancel": "Tühista"
+        }
+    }
+}

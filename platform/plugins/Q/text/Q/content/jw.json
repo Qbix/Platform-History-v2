@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Kesalahan {{status}} sajrone panyuwunan",
+        "canceled": "Request dibatalake",
+        "500": "Server njero error",
+        "404": "Ora ditemokake: {{url}}",
+        "501": "Panjaluk disela"
+    },
+    "nonce": {
+        "sameDomain": "Sesi kadaluwarsa. Refresh kaca lan coba maneh.",
+        "otherDomain": "Panyusutan cross-domain sing dicenthang menyang domain manca ing {{baseUrl}}"
+    },
+    "words": {
+        "tap": "tunyuk",
+        "click": "klik",
+        "yes": "ya",
+        "no": "ora",
+        "Tap": "Tunyuk",
+        "Click": "Klik",
+        "Yes": "Ya",
+        "No": "Ora Ana"
+    },
+    "months": {
+        "1": "Januari",
+        "2": "Februari",
+        "3": "Maret",
+        "4": "April",
+        "5": "Mei",
+        "6": "Juni",
+        "7": "Juli",
+        "8": "Agustus",
+        "9": "September",
+        "10": "Oktober",
+        "11": "Nopember",
+        "12": "Desember"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Mangga ngidini akses menyang mikropon panjenengan",
+        "record": "Rekam",
+        "recording": "Ngrekam",
+        "remains": "tetep",
+        "maximum": "maksimal",
+        "playing": "Muter",
+        "recorded": "Ngrekam",
+        "clip": "klip",
+        "orupload": "Utawa Unggah",
+        "usethis": "Gunakake iki",
+        "discard": "Buang",
+        "encoding": "Ngodhe"
+    },
+    "alert": {
+        "title": "Tandha"
+    },
+    "confirm": {
+        "title": "Konfirmasi",
+        "ok": "Ya",
+        "cancel": "Ora Ana"
+    },
+    "prompt": {
+        "title": "Prompt",
+        "ok": "Tindak"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Kesalahan maca file",
+        "cameraCommands": {
+            "prompt": "Apa sampeyan pengin nggawe?",
+            "photo": "Njupuk foto anyar",
+            "library": "Pilih saka perpustakaan"
+        },
+        "tooSmall": "Mangga pilih gambar sing luwih gedhe.",
+        "cropping": {
+            "title": "Ngatur ukuran lan posisi",
+            "touchscreen": "Gunakake driji kanggo nggedhekake lan seret",
+            "notTouchscreen": "Gunakake mouse &amp; roda kanggo nggedhekake lan nyeret"
+        }
+    }
+}

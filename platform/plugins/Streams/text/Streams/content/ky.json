@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "жаңы сап"
+    },
+    "labels": {
+        "Streams\/invited": "Адамдар мен чакырды",
+        "Streams\/invitedMe": "Ким мени чакырды"
+    },
+    "interests": {
+        "Filter": "Сен эмне жагат?",
+        "CanAdd": "Эгер дагы эле издеп таппай жатасызбы мүмкүн эмес болсо, анда төмөндө жаңы кызыгуу кошо аласыз:",
+        "TrySynonyms": "Аны көрбөй жатасызбы? кээ бир синоним аракет кыл.",
+        "AddUnderCategory": "категориясы боюнча кошуу ...",
+        "Other": "башка",
+        "Unlisted": "Unlisted"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Билдирүү Администратордун карап чыгуусу үчүн белгиленди. Таптап unflag дагы бир жолу.",
+        "noOneSaid": "Эч ким эч нерсе мындай дейт:",
+        "closeChatButton": "Жабуу чат",
+        "closeChatConfirmTitle": "Бул маек жабуу?",
+        "closeChatConfirm": "Бул маек жабуу келеби?",
+        "closeChatConfirmYes": "Ооба",
+        "closeChatConfirmNo": "Жок",
+        "earlierComments": "мурда талкуулар"
+    },
+    "notifications": {
+        "*": "Message {{& message.fields.type}} үчүн {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} мындай деди:",
+        "Streams\/changed": "өзгөртүүлөр {{stream.fields.title}}",
+        "Streams\/invite": "Сиз чакырылган {{& stream.fields.title}}",
+        "Streams\/announcement": "жылы жарыя {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} агым мүмкүнчүлүк өзгөртүлдү",
+        "Streams\/chat\/edit": "Маектин билдирүүсү түзөтүлдү",
+        "Streams\/chat\/remove": "Chat кабар жок",
+        "Streams\/closed": "{{stream.fields.title}} жабылды",
+        "Streams\/task\/progress": "боюнча прогресс {{stream.fields.title}}",
+        "Streams\/task\/complete": "Тапшырма аяктады: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error учурунда: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Кириш сүйлөшүү"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} чакырды {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Байланыштар тандоо",
+            "chooseAgainFromContacts": "Байланыш кайра тандоо",
+            "inviteSelectedContacts": "Чакыруу Тандалган Байланыштар",
+            "selectFromContacts": "Тандоо From Байланыштар",
+            "photo": "Сүрөт тартуу",
+            "photoInstruction": "Сиздин QR кодун сканерден адам сенин алдында турган болсо, алардын Сүрөт тартуу",
+            "to": "Үчүн: {{Stream Title}}",
+            "go": "Мурунку",
+            "title": "чакыруу",
+            "placeholder": "Мобилдик номери же электрондук почта дареги",
+            "orInvite": "Же колдонуу менен адамдарды чакырат:",
+            "QR": "{{ClickOrTap}} QR кодун түзүү үчүн",
+            "QRtitle": "Бул QR кодун издөө",
+            "QRscanned": "Алар сканерден!",
+            "byEmail": "E-mail",
+            "byText": "текст",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Эй, бул текшерип",
+            "PleaseVisitLink": "төмөнкү шилтемени төмөнкү сайттан алууга болот:",
+            "InvitingYou": "Мен сени чакырып жатам {{title}}",
+            "HasInvitedYou": "{{displayName}} {{title}} сизди чакырды"
+        },
+        "sms": {
+            "content": "{{title}} Сиз чакырылган. Сураныч, таптап, {{url}}"
+        },
+        "notice": {
+            "text": "Сиз чакырылган. {{ClickOrTap}} бул жерде кабыл алууга жана кошулуу."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} <em>{{бир 1000}}<\/em> кат {{stream.fields.title}} жайгаштырылган"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} {{жылы 1000}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Чакыруу сиздин Досторду тааныган жок, биздин санына чейин берилет. шилтемени чыкылдатып, аларды сурап, аларды чакыруу сага келген билип алсын үчүн тез текст менен керек.",
+            "confirm": "Чакыруу сиздин Досторду тааныган жок, биздин санына чейин берилет. Эгер шилтемени чыкылдатканда, аларды сурап, аларды чакыруу сага келген билип алсын үчүн тез текст менен ылайык келет.",
+            "check": "Салам, мен сиз {{app}} колдонмосун чакыруу жиберди. Сураныч, SMS текшерип, шилтемени чыкылдатып!"
+        },
+        "email": {
+            "alert": "Чакыруу сиздин Досторду тааныган жок, биздин доменде жиберген жатышат. шилтемени чыкылдатып, аларды сурап, аларды чакыруу сага келген билип алсын үчүн тез текст менен керек.",
+            "confirm": "Чакыруу сиздин Досторду тааныган жок, биздин доменде жиберген жатышат. Эгер шилтемени чыкылдатканда, аларды сурап, аларды чакыруу сага келген билип алсын үчүн тез текст менен ылайык келет.",
+            "subject": "Эгер чакыруу ала беле?",
+            "body": "Салам, мен сиз {{app}} колдонмосун чакыруу жиберди. Сураныч, электрондук почта текшерип, ошол шилтемени чыкылдатып!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "иштетүү Наушник",
+            "cameraTitle": "иштетүү Камера",
+            "cameraAndMicrophoneTitle": "Камера жана Наушник иштетүү"
+        }
+    }
+}

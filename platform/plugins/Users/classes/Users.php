@@ -19,7 +19,41 @@ abstract class Users extends Base_Users
 	 * * * */
 	
 	/**
+	 * Determine whether a user id is that of a community
+	 * @method isCommunityId
+	 * @static
+	 * @param {string} $userId The user id to test 
+	 * @return {boolean}
+	 */
+	static function isCommunityId($userId)
+	{
+        if (in_array($userId, Q_Config::expect("Q", "plugins"))) {
+			return false;
+        }
+		$first = mb_substr($userId, 0, 1, "UTF-8");
+		return (mb_strtolower($first, "UTF-8") != $first);
+	}
+	
+	/**
+	 * Check if an icon is custom or whether it's been automatically generated
+	 * @method isCustomIcon
+	 * @static
+	 * @param {String} $icon
+	 * @return {boolean}
+	 */
+	static function isCustomIcon ($icon) {
+		if (!$icon) {
+			false;
+		}
+		return strpos($icon, 'imported') !== false
+		or strpos($icon, 'uploads') !== false
+		or preg_match("/\/icon\/[0-9]+/", $icon);
+	}
+
+	/**
 	 * Get the id of the main community from the config. Defaults to the app name.
+	 * @method communityId
+	 * @static
 	 * @return {string} The id of the main community for the installed app.
 	 */
 	static function communityId()
@@ -30,12 +64,22 @@ abstract class Users extends Base_Users
 	
 	/**
 	 * Get the name of the main community from the config. Defaults to the app name.
+	 * @method communityName
+	 * @static
+	 * @param {boolean} $includeSuffix Whether to include the community suffix
 	 * @return {string} The name of the main community for the installed app.
 	 */
-	static function communityName()
+	static function communityName($includeSuffix = false)
 	{
 		$communityName = Q_Config::get('Users', 'community', 'name', null);
-		return $communityName ? $communityName : Q::app();
+		$suffix = Q_Config::get('Users', 'community', 'suffix', null);
+		if (!$communityName) {
+			$communityName = Q::app();
+		}
+		if ($suffix) {
+			$communityName .= " $suffix";
+		}
+		return $communityName;
 	}
 	
 	/**
@@ -46,8 +90,22 @@ abstract class Users extends Base_Users
 	{
 		return Q_Config::get('Users', 'community', 'suffix', null);
 	}
-
 	/**
+	 * Get default user language from users_user table
+	 * @method getLanguage
+	 * @static
+	 * @param {string} $userId
+	 * @return {string}
+	 */
+	static function getLanguage($userId){
+		$user = self::fetch($userId, true);
+
+		return isset($user->preferredLanguage) ? $user->preferredLanguage : Q_Text::$language;
+	}
+	/**
+	 * Rturn an array of the user's roles relative to a publisher
+	 * @method roles
+	 * @static
 	 * @param string [$publisherId=Users::communityId()]
 	 *  The id of the publisher relative to whom to calculate the roles.
 	 *  Defaults to the community id.
@@ -84,7 +142,48 @@ abstract class Users extends Base_Users
 			->fetchDbRows(null, null, 'label');
 		return $contacts;
 	}
+	/**
+	 * Return an array of users_contact rows where user assigned by labels
+	 * @method byRoles
+	 * @static
+	 * @param {string|array|Db_Expression} [$filter=null]
+	 *  You can pass additional criteria here for the label field
+	 *  in the `Users_Contact::select`, such as an array or Db_Range
+	 * @param {array} [$options=array()] Any additional options to pass to the query, such as "ignoreCache"
+	 * @param {bool} [$options.onlyCommunities=false] Set this to true if you want to get only communities rows (userId - is community).
+	 * @param {string} [$userId=null] If not passed, the logged in user is used, if any
+	 * @return {array} An associative array of $roleName => $contactRow pairs
+	 * @throws {Users_Exception_NotLoggedIn}
+	 */
+	static function byRoles ($filter = null, $options = array(), $userId = null)
+	{
+		if (!isset($userId)) {
+			$user = Users::loggedInUser(false, false);
+			if (!$user) {
+				return array();
+			}
+			$userId = $user->id;
+		}
 
+		$contacts = Users_Contact::select()
+			->where(array(
+				'contactUserId' => $userId
+			))->andWhere($filter ? array('label' => $filter) : null)
+			->options($options)
+			->fetchDbRows(null, null, 'userId');
+
+		if (Q::ifset($options, "onlyCommunities", false)) {
+			foreach ($contacts as $i => $contact) {
+				if (Users::isCommunityId($contact->userId)) {
+					continue;
+				}
+
+				unset($contacts[$i]);
+			}
+		}
+
+		return $contacts;
+	}
 	/**
 	 * Intelligently retrieves user by id
 	 * @method fetch
@@ -109,6 +208,9 @@ abstract class Users extends Base_Users
 	 */
 	static function oAuth($platform, $appId = null)
 	{
+		return;
+		// TODO: REFACTOR TO USE oAuth 2
+		/*
 		$nativeuser = self::loggedInUser();
 
 		if(!$nativeuser)
@@ -123,16 +225,16 @@ abstract class Users extends Base_Users
 		$customOptions = Q_Config::get('Users', 'apps', $platform, $appId, 'options', null);
 
 		#If the user already has a token in our DB:
-		$app_user = new Users_AppUser();
-		$app_user->userId = $nativeuser->id;
-		$app_user->platform = $platform;
-		$app_user->appId = $appId;
+		$externalFrom = new Users_ExternalFrom();
+		$externalFrom->userId = $nativeuser->id;
+		$externalFrom->platform = $platform;
+		$externalFrom->appId = $appId;
 
-		if($app_user->retrieve())
+		if($externalFrom->retrieve())
 		{
 				$zt = new Zend_Oauth_Token_Access();
-				$zt->setToken($app_user->access_token);
-				$zt->setTokenSecret($app_user->session_secret);
+				$zt->setToken($externalFrom->access_token);
+				$zt->setTokenSecret($externalFrom->session_secret);
 
 				return $zt->getHttpClient($oauthOptions);
 		}
@@ -148,9 +250,9 @@ abstract class Users extends Base_Users
 			$_SESSION[$platform.'_request_token'] = null;
 
 			#Save tokens to database
-			$app_user->access_token = $token->getToken();
-			$app_user->session_secret = $token->getTokenSecret();
-			$app_user->save();
+			$externalFrom->accessToken = $token->getToken();
+			$externalFrom->setExtra('secret') = $token->getTokenSecret();
+			$externalFrom->save();
 
 			return $token->getHttpClient($oauthOptions);
 		}
@@ -164,6 +266,7 @@ abstract class Users extends Base_Users
 
 			return null;
 		}
+		*/
 
 	}
 
@@ -176,6 +279,9 @@ abstract class Users extends Base_Users
 	 */
 	static function oAuthClear($platform, $appId = null)
 	{
+		return;
+		// TODO: REFACTOR THIS
+		/*
 		$nativeuser = self::loggedInUser();
 
 		if(!$nativeuser)
@@ -187,12 +293,13 @@ abstract class Users extends Base_Users
 			$appId = Q_Config::expect('Users', 'apps', $platform, $app, 'appId');
 		}
 
-		$app_user = new Users_AppUser();
-		$app_user->userId = $nativeuser->id;
-		$app_user->platform = $platform;
-		$app_user->appId = $appId;
-		$app_user->retrieve();
-		$app_user->remove();
+		$externalFrom = new Users_ExternalFrom();
+		$externalFrom->userId = $nativeuser->id;
+		$externalFrom->platform = $platform;
+		$externalFrom->appId = $appId;
+		$externalFrom->retrieve();
+		$externalFrom->remove();
+		*/
 	}
 
 	/**
@@ -238,13 +345,13 @@ abstract class Users extends Base_Users
 			$appId = Q::app();
 		}
 		list($appId, $appInfo) = Users::appInfo($platform, $appId);
-		$appId = $appInfo['appId'];
-		if (!isset($appId)) {
+		if (!isset($appInfo['appId'])) {
 			throw new Q_Exception_WrongType(array(
 				'field' => 'appId', 
 				'type' => "a valid $platform app id"
 			));
 		}
+		$appId = $appInfo['appId'];
 		
 		$authenticated = null;
 		$during = 'authenticate';
@@ -278,51 +385,52 @@ abstract class Users extends Base_Users
 		$emailAddress = null;
 
 		// Try authenticating the user with the specified platform
-		$app_user = Users_AppUser::authenticate($platform, $appId);
-		if (!$app_user) {
+		$externalFrom = Users_ExternalFrom::authenticate($platform, $appId);
+		if (!$externalFrom) {
 			// no authentication happened
 			return $userWasLoggedIn ? $user : false;
 		}
-		$uid = $app_user->platform_uid;
+		$xid = $externalFrom->xid;
 		$authenticated = true;
+		$platformApp = "$platform\t$appId";
 		if ($retrieved) {
-			$user_uid = $user->getUid($platform);
-			if (!$user_uid) {
+			$user_xid = $user->getXid($platformApp);
+			if (!$user_xid) {
 				// this is a logged-in user who was never authenticated with this platform.
 				// First, let's find any other user who has authenticated with the
-				// authenticated uid, and set their $field to 0.
+				// authenticated xid, and set their $field to 0.
 				$authenticated = 'connected';
-				$ui = Users::identify($platform, $uid);
+				$ui = Users::identify($platformApp, $xid);
 				if ($ui) {
 					$u = new Users_User();
 					$u->id = $ui->userId;
 					if ($u->retrieve()) {
-						$u->clearUid($platform);
+						$u->clearXid($platformApp);
 						$u->save();
 					};
 					$ui->remove();
 				}
 
-				// Now, let's associate the current user's account with this platform uid.
+				// Now, let's associate the current user's account with this platform xid.
 				if (!$user->displayName()) {
 					// import some fields automatically from the platform
-					$imported = $app_user->import($import);
+					$imported = $externalFrom->import($import);
 				}
-				$user->setUid($platform, $uid);
+				$user->setXid($platformApp, $xid);
 				$user->save();
 
 				// Save the identifier in the quick lookup table
-				list($hashed, $ui_type) = self::hashing($uid, $platform);
+				list($hashed, $ui_type) = self::hashing($xid, $platformApp);
 				$ui = new Users_Identify();
 				$ui->identifier = "$ui_type:$hashed";
 				$ui->state = 'verified';
 				$ui->userId = $user->id;
 				$ui->save(true);
-			} else if ($user_uid !== $uid) {
+			} else if ($user_xid !== $xid) {
 				// The logged-in user was authenticated with the platform already,
-				// and associated with a different platform uid.
+				// and associated with a different platform xid.
 				// Most likely, a completely different person has logged into the platform
-				// at this computer. So rather than changing the associated plaform uid
+				// at this computer. So rather than changing the associated plaform xid
 				// for the logged-in user, simply log out and essentially run this function
 				// from the beginning again.
 				Users::logout();
@@ -332,19 +440,20 @@ abstract class Users extends Base_Users
 			}
 		}
 		if (!$retrieved) {
-			$ui = Users::identify($platform, $uid, null);
+			$ui = Users::identify($platformApp, $xid, null);
 			if ($ui) {
-				$user = new Users_User();
+				Users::$cache['user'] = $user = new Users_User();
 				$user->id = $ui->userId;
 				$exists = $user->retrieve();
 				if (!$exists) {
-					throw new Q_Exception("Users_Identify for $platform uid $uid exists but not user with id {$ui->userId}");
+					throw new Q_Exception("Users_Identify for $platform xid $xid exists but not user with id {$ui->userId}");
 				}
 				$retrieved = true;
 				if ($ui->state === 'future') {
 					$authenticated = 'adopted';
-					$user->setUid($platform, $uid);
-					$user->signedUpWith = $platform; // should have been "none" before this
+					$platformApp = "$platform\t$appId";
+					$user->setXid($platformApp, $xid);
+					$user->signedUpWith = $platformApp; // should have been "none" before this
 					/**
 					 * @event Users/adoptFutureUser {before}
 					 * @param {Users_User} user
@@ -355,7 +464,7 @@ abstract class Users extends Base_Users
 					if ($ret) {
 						$user = $ret;
 					}
-					$imported = $app_user->import($import);
+					$imported = $externalFrom->import($import);
 					$user->save();
 
 					$ui->state = 'verified';
@@ -370,16 +479,16 @@ abstract class Users extends Base_Users
 					Q::event('Users/adoptFutureUser', compact('user', 'links', 'during'), 'after');
 				} else {
 					// If we are here, that simply means that we already verified the
-					// $uid => $userId mapping for some existing user who signed up
+					// $xid => $userId mapping for some existing user who signed up
 					// and has been using the system. So there is nothing more to do besides
 					// setting this user as the logged-in user below.
 				}
 			} else {
-				// user is logged out and no user corresponding to $uid yet
+				// user is logged out and no user corresponding to $xid yet
 
 				$authenticated = 'registered';
 				
-				$imported = $app_user->import($import);
+				$imported = $externalFrom->import($import);
 				if (!empty($imported['email'])) {
 					$ui = Users::identify('email', $imported['email'], 'verified');
 					if ($ui) {
@@ -393,7 +502,8 @@ abstract class Users extends Base_Users
 					}
 				}
 
-				$user->setUid($platform, $uid);
+				$platformApp = "$platform\t$appId";
+				$user->setXid($platformApp, $xid);
 				/**
 				 * @event Users/insertUser {before}
 				 * @param {Users_User} user
@@ -412,7 +522,8 @@ abstract class Users extends Base_Users
 				$user->save();
 
 				// Save the identifier in the quick lookup table
-				list($hashed, $ui_type) = self::hashing($uid, $platform);
+				$platformApp = "$platform\t$appId";
+				list($hashed, $ui_type) = self::hashing($xid, $platformApp);
 				$ui = new Users_Identify();
 				$ui->identifier = "$ui_type:$hashed";
 				$ui->state = 'verified';
@@ -420,19 +531,19 @@ abstract class Users extends Base_Users
 				$ui->save(true);
 
 				// Download and save platform icon for the user
-				$sizes = Q_Config::expect('Users', 'icon', 'sizes');
+				$sizes = array_keys(Q_Image::getSizes('Users/icon'));
 				sort($sizes);
-				$icon = $app_user->icon($sizes, '.png');
+				$icon = $externalFrom->icon($sizes, '.png');
 				if (!Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)) {
 					self::importIcon($user, $icon);
 					$user->save();
 				}
 		 	}
 		}
-		$app_user->userId = $user->id;
+		$externalFrom->userId = $user->id;
 		Users::$cache['platformUserData'] = null; // in case some other user is saved later
-		Users::$cache['user'] = $user;
 		Users::$cache['authenticated'] = $authenticated;
+		Users::$cache['user'] = $user;
 
 		if (!empty($imported['email']) and empty($user->emailAddress)) {
 			$emailAddress = $imported['email'];
@@ -454,101 +565,98 @@ abstract class Users extends Base_Users
 			/**
 			 * @event Users/updateUser {after}
 			 * @param {Users_User} user
-			 * @param {Users_AppUser} 'app_user'
+			 * @param {Users_ExternalFrom} externalFrom
 			 * @param {string} during
 			 */
-			Q::event('Users/updateUser', compact('user', 'app_user', 'during'), 'after');
+			Q::event('Users/updateUser', compact('user', 'externalFrom', 'during'), 'after');
 		} else {
 			/**
 			 * @event Users/insertUser {after}
 			 * @param {Users_User} 'user'
-			 * @param {Users_AppUser} 'app_user'
+			 * @param {Users_ExternalFrom} externalFrom
 			 * @param {string} during
 			 */
-			Q::event('Users/insertUser', compact('user', 'app_user', 'during'), 'after');
+			Q::event('Users/insertUser', compact('user', 'externalFrom', 'during'), 'after');
 		}
 
 		// Now make sure our master session contains the
 		// session info for the platform app.
-		$accessToken = $app_user->access_token;
-		$sessionExpires = $app_user->session_expires;
+		$accessToken = $externalFrom->accessToken;
+		$sessionExpires = $externalFrom->expires;
 		$key = $platform.'_'.$appId;
 		if (isset($_SESSION['Users']['appUsers'][$key])) {
 			// Platform app user exists. Do we need to update it? (Probably not!)
 			$pk = $_SESSION['Users']['appUsers'][$key];
-			$au = Users_AppUser::select()->where($pk)->fetchDbRow();
-			if (empty($au)) {
-				// somehow this app_user disappeared from the database
+			$ef = Users_ExternalFrom::select()->where($pk)->fetchDbRow();
+			if (empty($ef)) {
+				// somehow this externalFrom disappeared from the database
 				throw new Q_Exception_MissingRow(array(
-					'table' => 'AppUser',
+					'table' => 'ExternalFrom',
 					'criteria' => http_build_query($pk, null, ' & ')
 				));
 			}
-			if (empty($au->state) or $au->state !== 'added') {
-				$au->state = 'added';
-			}
 
-			if (!isset($au->access_token)
-			or ($au->access_token != $app_user->access_token)) {
+			if (!isset($ef->accessToken)
+			or ($ef->accessToken != $externalFrom->accessToken)) {
 				/**
-				 * @event Users/authenticate/updateAppUser {before}
+				 * @event Users/authenticate/updateExternalFrom {before}
 				 * @param {Users_User} user
 				 */
-				Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'before');
-				$au->access_token = $accessToken;
-				$au->session_expires = $sessionExpires;
-				$au->save(); // update access_token in app_user
+				Q::event('Users/authenticate/updateExternalFrom', compact('user', 'externalFrom'), 'before');
+				$ef->accessToken = $accessToken;
+				$ef->expires = $sessionExpires;
+				$ef->save(); // update accessToken in externalFrom
 				/**
-				 * @event Users/authenticate/updateAppUser {after}
+				 * @event Users/authenticate/updateExternalFrom {after}
 				 * @param {Users_User} user
 				 */
-				Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'after');
+				Q::event('Users/authenticate/updateExternalFrom', compact('user', 'externalFrom'), 'after');
 			}
 		} else {
 			// We have to put the session info in
-			if ($app_user->retrieve(null, true)) {
+			if ($externalFrom->retrieve(null, true)) {
 				// App user exists in database. Do we need to update it?
-				if (!isset($app_user->access_token)
-				or $app_user->access_token != $accessToken) {
+				if (!isset($externalFrom->accessToken)
+				or $externalFrom->accessToken != $accessToken) {
 					/**
-					 * @event Users/authenticate/updateAppUser {before}
+					 * @event Users/authenticate/updateExternalFrom {before}
 					 * @param {Users_User} user
 					 */
-					Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'before');
-					$app_user->access_token = $accessToken;
-					$app_user->save(); // update access_token in app_user
+					Q::event('Users/authenticate/updateExternalFrom', compact('user', 'externalFrom'), 'before');
+					$externalFrom->accessToken = $accessToken;
+					$externalFrom->save(); // update accessToken in externalFrom
 					/**
-					 * @event Users/authenticate/updateAppUser {after}
+					 * @event Users/authenticate/updateExternalFrom {after}
 					 * @param {Users_User} user
 					 */
-					Q::event('Users/authenticate/updateAppUser', compact('user', 'app_user'), 'after');
+					Q::event('Users/authenticate/updateExternalFrom', compact('user', 'externalFrom'), 'after');
 				}
 			} else {
-				if (empty($app_user->state) or $app_user->state !== 'added') {
-					$app_user->state = 'added';
-				}
 				/**
-				 * @event Users/insertAppUser {before}
+				 * @event Users/insertExternalFrom {before}
 				 * @param {Users_User} user
 				 * @param {string} 'during'
 				 */
-				Q::event('Users/insertAppUser', compact('user', 'during'), 'before');
-				// The following may update an existing app_user row
+				Q::event('Users/insertExternalFrom', compact('user', 'during'), 'before');
+				// The following may update an existing externalFrom row
 				// in the rare event that someone tries to tie the same
 				// platform account to two different accounts.
 				// A platform app user can only be tied to one native user, so the
 				// old connection will be dropped, and the new connection saved.
-				$app_user->save(true);
+				$externalFrom->save(true);
 				/**
-				 * @event Users/authenticate/insertAppUser {after}
+				 * @event Users/authenticate/insertExternalFrom {after}
 				 * @param {Users_User} user
 				 */
-				Q::event('Users/authenticate/insertAppUser', compact('user'), 'after');
-				$authenticated = 'authorized';
+				Q::event('Users/authenticate/insertExternalFrom', compact('user'), 'after');
+
+				if (!isset($authenticated)){
+					$authenticated = 'authorized';
+				}
 			}
 		}
 
-		$_SESSION['Users']['appUsers'][$key] = $app_user->getPkValue();
+		$_SESSION['Users']['appUsers'][$key] = $externalFrom->getPkValue();
 
 		Users::$cache['authenticated'] = $authenticated;
 
@@ -623,14 +731,13 @@ abstract class Users extends Base_Users
 		}
 
 		// User exists in database. Now check the passphrase.
-		$passphraseHash = $user->computePassphraseHash($passphrase, $isHashed);
-		if ($passphraseHash[0] === '$') {
-			if (!password_verify($passphraseHash, $user->passphraseHash)) {
-				throw new Users_Exception_WrongPassphrase(compact('identifier'), 'passphrase');
-			}
+		if (!$user->passphraseHash or $user->passphraseHash[0] !== '$') {
+			throw new Users_Exception_WrongPassphrase(compact('identifier'), 'passphrase');
 		} else {
-			if (!Q_Utils::hashEquals($passphraseHash, $user->passphraseHash)) {
-				// Passphrases don't match!
+			if (!$isHashed) {
+				$passphrase = sha1($passphrase . "\t" . $user->id);
+			}
+			if (!Users::verifyPassphrase($passphrase, $user->passphraseHash)) {
 				throw new Users_Exception_WrongPassphrase(compact('identifier'), 'passphrase');
 			}
 		}
@@ -774,7 +881,8 @@ abstract class Users extends Base_Users
 		Q::event('Users/setLoggedInUser', compact('user', 'loggedInUserId'), 'before');
 		
 		if ($loggedInUserId) {
-			// always log out existing user, so their session data isn't carried over
+			// Always log out existing user, so their session data isn't carried over.
+			// This also removes the devices for this session, stopping notifications.
 			Users::logout();
 		} else {
 			// Otherwise the session data of the logged-out user is merged
@@ -838,7 +946,9 @@ abstract class Users extends Base_Users
 			$html = Q_Handlebars::renderSource($template, compact(
 				'user', 'displayName'
 			));
-			Q_Response::setNotice('Users::setLoggedInUser', $html, true);
+			Q_Response::setNotice('Users::setLoggedInUser', $html, array(
+				'timeout' => Q_Config::get('Users', 'notices', 'timeout', 5)
+			));
 		}
 
 		/**
@@ -862,14 +972,15 @@ abstract class Users extends Base_Users
 	 *   "deviceId", "platform", "appId", "version", "formFactor"
 	 *   to store in the Users_Device table for sending notifications
 	 * @param {array} [$identifier.app] an array with "platform" key, and optional "appId"
-	 * @param {array|string|true} [$icon=true] By default, the user icon is "default".
+	 * @param {array|string|true} [$icon=array()] By default, the user icon would be "default".
 	 *  But you can pass here an array of filename => url pairs, or a gravatar url to
 	 *  download the various sizes from gravatar. Finally, you can pass true to
 	 *  generate an icon instead of using the default icon.
-	 *  If $identifier['app']['platform'] is specified, and $icon==true, then
+	 *  If $identifier['app']['platform'] is specified, and $icon is empty, then
 	 *  an attempt will be made to download the icon from the user's account on the platform.
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
+	 * @param {string} [$options.skipIdentifier=false] Whether skip empty identifier
 	 * @return {Users_User}
 	 * @throws {Q_Exception_WrongType} If identifier is not e-mail or modile
 	 * @throws {Q_Exception} If user was already verified for someone else
@@ -925,7 +1036,7 @@ abstract class Users extends Base_Users
 						'type' => 'an array with entry named "device"'
 					));
 			}
-		} else if (!$identifier) {
+		} else if (!$identifier && !Q::ifset($options, 'skipIdentifier', false)) {
 			throw new Q_Exception_RequiredField(array('field' => 'identifier'));
 		}
 		$ui_identifier = null;
@@ -992,6 +1103,17 @@ abstract class Users extends Base_Users
 				));
 			}
 		}
+		$leaveDefaultIcon = Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false);
+		$user->set('leaveDefaultIcon', $leaveDefaultIcon);
+		if (!is_array($icon) and !empty($_SESSION['Users']['register']['icon'])) {
+			$icon = $_SESSION['Users']['register']['icon'];
+			unset($_SESSION['Users']['register']['icon']);
+		}
+		if (is_array($icon)) {
+			$user->set('skipIconSearch', $icon);
+		}
+
+		Users::$cache['user'] = $user;
 
 		if ($username) {
 			if ( ! preg_match('/^[A-Za-z0-9\-_]+$/', $username)) {
@@ -1003,16 +1125,19 @@ abstract class Users extends Base_Users
 		}
 		
 		// Insert a new user into the database, or simply modify an existing (adopted) user
+		$user->id = Users_User::db()->uniqueId(Users_User::table(), 'id', null, array(
+			'filter' => array('Users_User', 'idFilter')
+		));
 		$user->username = $username;
 		if (!isset($user->signedUpWith) or $user->signedUpWith == 'none') {
 			$user->signedUpWith = $signedUpWith;
 		}
-		$user->icon = '{{Users}}/img/icons/default';
+		$user->icon = is_string($icon) ? $icon : '{{Users}}/img/icons/default';
 		$user->passphraseHash = '';
 		$url_parts = parse_url(Q_Request::baseUrl());
 		if (isset($url_parts['host'])) {
 			// By default, the user's url would be this:
-			$user->url = $username ? "http://$username.".$url_parts['host'] : "";
+			$user->url = "http://".$user->id.'.'.$url_parts['host'];
 		}
 		/**
 		 * @event Users/insertUser {before}
@@ -1020,10 +1145,6 @@ abstract class Users extends Base_Users
 		 * @param {Users_User} user
 		 */
 		Q::event('Users/insertUser', compact('user', 'during'), 'before');
-
-		$user->id = Users_User::db()->uniqueId(Users_User::table(), 'id', null, array(
-			'filter' => array('Users_User', 'idFilter')
-		));
 
 		// the following code could throw exceptions
 		if (empty($user->emailAddress) and empty($user->mobileNumber)
@@ -1061,11 +1182,12 @@ abstract class Users extends Base_Users
 		 */
 		Q::event('Users/insertUser', compact('user', 'during'), 'after');
 
-		$sizes = Q_Config::expect('Users', 'icon', 'sizes');
+		$directory = null;
+		$sizes = array_keys(Q_Image::getSizes('Users/icon'));
 		sort($sizes);
-		if (!isset($icon)) {
-			if ($app_user = Users_AppUser::authenticate($platform, $appId)) {
-				$icon = $app_user->icon($sizes, '.png');
+		if (empty($icon)) {
+			if ($externalFrom = Users_ExternalFrom::authenticate($platform, $appId)) {
+				$icon = $externalFrom->icon($sizes, '.png');
 			}
 		} else {
 			// Import the user's icon and save it
@@ -1076,17 +1198,21 @@ abstract class Users extends Base_Users
 				foreach ($sizes as $size) {
 					$icon["$size.png"] = "$iconString&s=$size";
 				}
-			} else if ($icon === true) {
+			} else if ($icon === true) {				
 				// locally generated icons
+				$identifier = $identifier ?: microtime();
 				$hash = md5(strtolower(trim($identifier)));
 				$icon = array();
 				foreach ($sizes as $size) {
 					$icon["$size.png"] = array('hash' => $hash, 'size' => $size);
 				}
+				$app = Q::app();
+				$directory = APP_FILES_DIR.DS.$app.DS.'uploads'.DS.'Users'
+					.DS.Q_Utils::splitId($user->id).DS.'icon'.DS.'generated';
 			}
 		}
-		if (!Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)) {
-			self::importIcon($user, $icon);
+		if (!$leaveDefaultIcon and !Users::isCustomIcon($user->icon)) {
+			self::importIcon($user, $icon, $directory);
 			$user->save();
 		}
 
@@ -1102,16 +1228,15 @@ abstract class Users extends Base_Users
 		$return = Q::event('Users/register', compact(
 			'username', 'identifier', 'icon', 'user', 'platform', 'options', 'device'
 		), 'after');
-
-		// Shouldn't this be return $return not return $user?
-		return $user;
+		
+		return $return ? $return : $user;
 	}
 
 	/**
 	 * Returns a user in the database that corresponds to the contact info, if any.
 	 * @method userFromContactInfo
 	 * @static
-	 * @param {string} $type can be "email", "mobile",the name of a platform,
+	 * @param {string} $type can be "email", "mobile", "$platform\t$appId",
 	 *  or any of the above with optional "_hashed" suffix to indicate
 	 *  that the value has already been hashed.
 	 * @param {string} $value The value corresponding to the type. If $type is
@@ -1137,22 +1262,48 @@ abstract class Users extends Base_Users
 		$user->set('identify', $ui);
 		return $user;
 	}
+	
+	/**
+	 * Determines whether the identifier is an email address or mobile number
+	 * @method identifierType
+	 * @static
+	 * @param {string} $identifier The identifier
+	 * @param {&string} [$normalized=null] Will be filled with the string representing the normalized
+	 *   email address or mobile number
+	 * @return {string} The identifier type, either "mobile" or "email"
+	 * @throws {Q_Exception_WrongType} if the identifier is not a valid email or phone number
+	 */
+	static function identifierType($identifier, &$normalized = null)
+	{
+		if (Q_Valid::email($identifier, $normalized)) {
+			$identifierType = 'email';
+		} else if (Q_Valid::phone($identifier, $normalized)) {
+			$identifierType = 'mobile';
+		} else {
+			throw new Q_Exception_WrongType(array(
+				'field' => "identifier '$identifier",
+				'type' => 'email address or mobile number'
+			), array('identifier', 'emailAddress', 'mobileNumber'));
+		}
+		return $identifierType;
+	}
 
 	/**
 	 * Returns Users_Identifier rows that correspond to the identifier in the database, if any.
 	 * @method identify
 	 * @static
-	 * @param {string|array} $type can be "email", "mobile",the name of a platform,
+	 * @param {string|array} $type can be "email", "mobile", or "$platform\t$appId",
 	 *  or any of the above with optional "_hashed" suffix to indicate
 	 *  that the value has already been hashed.
-	 *   It could also be an array of ($type => $value) pairs. Then $state should be null.
+	 *  It could also be an array of ($type => $value) pairs.
+	 *  Then the second parameter should be null.
 	 * @param {string} $value The value corresponding to the type. If $type is
 	 *
 	 * * "email" - this is one of the user's email addresses
 	 * * "mobile" - this is one of the user's mobile numbers
 	 * * "email_hashed" - this is the standard hash of the user's email address
 	 * * "mobile_hashed" - this is the standard hash of the user's mobile number
-	 * * $platform - this is the user's id on that platform
+	 * * $platformApp - a string of the form "$platform\t$appId"
 	 *
 	 * @param {string} [$state='verified'] The state of the identifier => userId mapping.
 	 *  Could also be 'future' to find identifiers attached to a "future user",
@@ -1168,7 +1319,7 @@ abstract class Users extends Base_Users
 		$types = is_array($type) ? $type : array($type => $value);
 		foreach ($types as $type => $value) {
 			list($hashed, $ui_type) = self::hashing($value, $type);
-			$identifiers = "$ui_type:$hashed";
+			$identifiers[] = "$ui_type:$hashed";
 		}
 		$uis = Users_Identify::select()->where(array(
 			'identifier' => $identifiers,
@@ -1186,7 +1337,8 @@ abstract class Users extends Base_Users
 	 * Inserts a new user if one doesn't already exist.
 	 *
 	 * @method futureUser
-	 * @param {string} $type can be "email", "mobile",the name of a platform,
+	 * @param {string} $type can be "email", "mobile", 
+	 *  a string of the form "$platform\t$appId"
 	 *  or any of the above with optional "_hashed" suffix to indicate
 	 *  that the value has already been hashed.
 	 * @param {string} $value The value corresponding to the type. The type
@@ -1194,7 +1346,7 @@ abstract class Users extends Base_Users
 	 *  with optional "_hashed" suffix to indicate that the value has already been hashed.
 	 *  It can also be "none", in which case the type is ignored, no "identify" rows are
 	 *  inserted into the database at this time. Later, as the user adds an email address
-	 *  or platform uids, they will be inserted.
+	 *  or platform xids, they will be inserted.
 	 * <br><br>
 	 * NOTE: If the person we are representing here comes and registers the regular way,
 	 * and then later adds an email, mobile, or authenticates with a platform,
@@ -1229,18 +1381,18 @@ abstract class Users extends Base_Users
 
 		// Make a user row to represent a "future" user and give them an empty username
 		$user = new Users_User();
-		if ($type === 'email') {
-			$user->save();
-			$user->setEmailAddress($value, true);
-		} else if ($type === 'mobile') {
-			$user->save();
-			$user->setMobileNumber($value, true);
-		} else if (substr($type, -7) !== '_hashed') {
-			$user->setUid($type, $value, true);
-		}
 		$user->signedUpWith = 'none'; // this marks it as a future user for now
 		$user->username = "";
 		$user->icon = '{{Users}}/img/icons/future';
+		if ($type === 'email') {
+			$user->emailAddressPending = $value;
+			$user->save();
+		} else if ($type === 'mobile') {
+			$user->mobileNumberPending = $value;
+			$user->save();
+		} else if (substr($type, -7) !== '_hashed') {
+			$user->setXid($type, $value, true);
+		}
 		$during = 'future';
 		/**
 		 * @event Users/insertUser {before}
@@ -1309,69 +1461,118 @@ abstract class Users extends Base_Users
 	 * @method importIcon
 	 * @static
 	 * @param {array} $user The user for whom the icon should be downloaded
-	 * @param {array} [$urls=array()] Array of urls
+	 * @param {array} [$urls=array()] Array of $basename => $url to download from, or
+	 *   of $basename => arrays("hash"=>..., "size"=>...) for gravatar icons.
 	 * @param {string} [$directory=null] Defaults to APP/files/APP/uploads/Users/USERID/icon/imported
-	 * @return {string} the path to the icon directory
+	 * @param {string|array} [$cookies=null] The cookies to pass, if downloading from URLs
+	 * @return {string} the path to the icon directory, or false if files weren't created
 	 */
-	static function importIcon($user, $urls = array(), $directory = null)
+	static function importIcon($user, $urls = array(), $directory = null, $cookies = null)
 	{
+		$app = Q::app();
 		if (empty($directory)) {
-			$app = Q::app();
 			$directory = APP_FILES_DIR.DS.$app.DS.'uploads'.DS.'Users'
 				.DS.Q_Utils::splitId($user->id).DS.'icon'.DS.'imported';
 		}
 		if (empty($urls)) {
 			return $directory;
 		}
-		Q_Utils::canWriteToPath($directory, false, true);
-		$type = Q_Config::get('Users', 'login', 'iconType', 'wavatar');
-		$largestSize = 0;
+		Q_Utils::canWriteToPath($directory, null, true);
+		$largestWidth = 0;
+		$largestHeight = 0;
 		$largestUrl = null;
+		$largestCookie = null;
 		$largestImage = null;
+		$o = array();
+		// get image with largest width and height at the same time
 		foreach ($urls as $basename => $url) {
 			if (!is_string($url)) continue;
 			$filename = $directory.DS.$basename;
 			$info = pathinfo($filename);
-			$size = $info['filename'];
-			if ((string)(int)$size !== $size) continue;
-			if ($largestSize < (int)$size) {
-				$largestSize = (int)$size;
+			$parts = explode('x', $info['filename']);
+			if (count($parts) === 1) {
+				$width = $height = $parts[0];
+			} else if (!$parts[0]) {
+				$width = $height = $parts[1];
+			} else if (!$parts[1]) {
+				$width = $height = $parts[0];
+			}
+			if ($largestWidth < (int)$width
+			and $largestHeight < (int)$height) {
+				$largestWidth = (int)$width;
+				$largestHeight = (int)$height;
 				$largestUrl = $url;
+				$largestCookie = is_string($cookies) ? $cookies : Q::ifset($cookies, $basename, null);
+				$o = $largestCookie ? array("cookie: $largestCookie") : array();
 			}
 		}
-		if ($largestSize) {
-			$largestImage = imagecreatefromstring(file_get_contents($largestUrl));
+		if ($largestUrl) {
+			if (Q_Valid::url($largestUrl)) {
+				$data = Q_Utils::get($largestUrl, null, true, $o);
+			} else {
+				$data = file_get_contents($largestUrl);
+			}
+			if (pathinfo($url, PATHINFO_EXTENSION) == 'ico') {
+				require USERS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
+				$icoFileService = new Elphin\IcoFileLoader\IcoFileService;
+				$largestImage = $icoFileService->extractIcon($data, 32, 32);
+			} else {
+				$largestImage = imagecreatefromstring($data);
+			}
+			$sw = imagesx($largestImage);
+			$sh = imagesy($largestImage);
 		}
 		foreach ($urls as $basename => $url) {
+			$filename = $directory.DS.$basename;
 			if (is_string($url)) {
-				$filename = $directory.DS.$basename;
 				$info = pathinfo($filename);
-				$size = $info['filename'];
-				$success = false;
-				if ($largestImage and (string)(int)$size === $size) {
-					if ($size == $largestSize) {
-						$image = $largestImage;
-						$success = true;
+				if ($largestImage) {
+					$source = $largestImage;
+				} else {
+					$cookie = is_string($cookies) ? $cookies : Q::ifset($cookies, $basename, null);
+					$o = $cookie ? array("cookie: $largestCookie") : array();
+					if (Q_Valid::url($url)) {
+						$data = Q_Utils::get($url, null, true, $o);
 					} else {
-						$image = imagecreatetruecolor($size, $size);
-						imagealphablending($image, false);
-						$success = imagecopyresampled(
-							$image, $largestImage, 
-							0, 0, 
-							0, 0, 
-							$size, $size, 
-							$largestSize, $largestSize
-						);
+						$data = file_get_contents($url);
+					}
+					if (pathinfo($url, PATHINFO_EXTENSION) == 'ico') {
+						require USERS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
+						$icoFileService = new Elphin\IcoFileLoader\IcoFileService;
+						$source = $icoFileService->extractIcon($data, 32, 32);
+					} else {
+						$source = imagecreatefromstring($data);
+					}
+					$sw = imagesx($source);
+					$sh = imagesy($source);
+				}
+				$parts = explode('x', $info['filename']);
+				if (count($parts) === 1) {
+					$w = $h = $parts[0];
+				} else {
+					if (!$parts[0] and $parts[1]) {
+						$w = $sw;
+						$h = $sh;
+					} else if (!$parts[0]) {
+						$h = $parts[1];
+						$w = $h / $sh * $sw;
+					} else if (!$parts[1]) {
+						$w = $parts[0];
+						$h = $w / $sw * $sh;
 					}
 				}
-				if (!$success) {
-					$ch = curl_init();
-					curl_setopt($ch, CURLOPT_URL, $url);
-					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-					curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-					$data = curl_exec($ch);
-					curl_close($ch);
-					$image = imagecreatefromstring($data);
+				if ($sw == $w and $sh == $h) {
+					$image = $largestImage;
+					$success = true;
+				} else {
+					$min = min($sw / $w, $sh / $h);
+					$w2 = $w * $min;
+					$h2 = $h * $min;
+					$sx = round(($sw - $w2) / 2);
+					$sy = round(($sh - $h2) / 2);
+					$image = imagecreatetruecolor($w, $h);
+					imagealphablending($image, false);
+					$success = imagecopyresampled($image, $source, 0, 0, $sx, $sy, $w, $h, $w2, $h2);
 				}
 				$info = pathinfo($filename);
 				switch ($info['extension']) {
@@ -1390,13 +1591,17 @@ abstract class Users extends Base_Users
 				}
 				call_user_func($func, $image, $directory.DS.$info['filename'].'.png');
 			} else {
-				Q_Image::put(
-					$directory.DS.$basename,
-					$url['hash'],
-					$url['size'],
-					$type,
-					Q_Config::get('Users', 'login', 'gravatar', false)
-				);
+				$type = Q_Config::get('Users', 'login', 'iconType', 'wavatar');
+				$gravatar = Q_Config::get('Users', 'login', 'gravatar', false);
+				$data = Q_Image::avatar($url['hash'], $url['size'], $type, $gravatar);
+				if ($gravatar) {
+					file_put_contents($filename, $data); // downloaded				
+				} else {
+					imagepng($data, $filename); // locally generated
+				}
+			}
+			if (!file_exists($filename)) {
+				return null;
 			}
 		}
 		$head = APP_FILES_DIR.DS.$app.DS.'uploads';
@@ -1410,53 +1615,65 @@ abstract class Users extends Base_Users
 	 * @method hashPassphrase
 	 * @static
 	 * @param {string} $passphrase the passphrase to hash
-	 * @param {string} [$existing_hash=null] must provide when comparing with a passphrase
-	 * hash that has been already stored. It contains the salt for the passphrase.
 	 * @return {string} the hashed passphrase, or "" if the passphrase was ""
 	 */
-	static function hashPassphrase ($passphrase, $existing_hash = null)
+	static function hashPassphrase ($passphrase)
 	{
 		if ($passphrase === '') {
 			return '';
 		}
+		return password_hash($passphrase, PASSWORD_DEFAULT);
 
-		$hash_function = Q_Config::get(
-			'Users', 'passphrase', 'hashFunction', 'sha1'
-		);
-		$passphraseHash_iterations = Q_Config::get(
-			'Users', 'passphrase', 'hashIterations', 1103
-		);
-		$salt_length = Q_Config::set('Users', 'passphrase', 'saltLength', 0);
-
-		if ($salt_length > 0) {
-			if (empty($existing_hash)) {
-				$salt = substr(sha1(uniqid(mt_rand(), true)), 0,
-					$salt_length);
-			} else {
-				$salt = substr($existing_hash, - $salt_length);
-			}
-		}
-
-		$salt2 = isset($salt) ? '_'.$salt : '';
-		$result = $passphrase;
-
-		// custom hash function
-		if (!is_callable($hash_function)) {
-			throw new Q_Exception_MissingFunction(array(
-				'function_name' => $hash_function
-			));
-		}
-		$confounder = $passphrase . $salt2;
-		$confounder_len = strlen($confounder);
-		for ($i = 0; $i < $passphraseHash_iterations; ++$i) {
-			$result = call_user_func(
-				$hash_function,
-				$result . $confounder[$i % $confounder_len]
-			);
-		}
-		$result .= $salt2;
-
-		return $result;
+		// $hash_function = Q_Config::get(
+		// 	'Users', 'passphrase', 'hashFunction', 'sha1'
+		// );
+		// $passphraseHash_iterations = Q_Config::get(
+		// 	'Users', 'passphrase', 'hashIterations', 1103
+		// );
+		// $salt_length = Q_Config::set('Users', 'passphrase', 'saltLength', 0);
+		//
+		// if ($salt_length > 0) {
+		// 	if (empty($existing_hash)) {
+		// 		$salt = substr(sha1(uniqid(mt_rand(), true)), 0,
+		// 			$salt_length);
+		// 	} else {
+		// 		$salt = substr($existing_hash, - $salt_length);
+		// 	}
+		// }
+		//
+		// $salt2 = isset($salt) ? '_'.$salt : '';
+		// $result = $passphrase;
+		//
+		// // custom hash function
+		// if (!is_callable($hash_function)) {
+		// 	throw new Q_Exception_MissingFunction(array(
+		// 		'function_name' => $hash_function
+		// 	));
+		// }
+		// $confounder = $passphrase . $salt2;
+		// $confounder_len = strlen($confounder);
+		// for ($i = 0; $i < $passphraseHash_iterations; ++$i) {
+		// 	$result = call_user_func(
+		// 		$hash_function,
+		// 		$result . $confounder[$i % $confounder_len]
+		// 	);
+		// }
+		// $result .= $salt2;
+		//
+		// return $result;
+	}
+	
+	/**
+	 * Verifies a passphrase against a hash generated previously
+	 * @method hashPassphrase
+	 * @static
+	 * @param {string} $passphrase the passphrase to hash
+	 * @param {string} $existing_hash the hash that is was previously generated
+	 * @return {boolean} whether the password is verified to be correct, or not
+	 */
+	static function verifyPassphrase ($passphrase, $existing_hash)
+	{
+		return password_verify($passphrase, $existing_hash);
 	}
 	
 	/**
@@ -1465,9 +1682,11 @@ abstract class Users extends Base_Users
 	 * @static
 	 * @param {string} $platform The platform or platform for the app
 	 * @param {string} $appId Can be either an internal or external app id
-	 * @return {array} Returns array($appId, $appInfo)
+	 * @param {boolean} [$throwIfMissing=false] Whether to throw an exception if missing
+	 * @return {array} Returns array($appId, $appInfo) where $appId is internal app id
+	 * @throws Q_Exception_MissingConfig
 	 */
-	static function appInfo($platform, $appId)
+	static function appInfo($platform, $appId, $throwIfMissing = false)
 	{
 		$apps = Q_Config::get('Users', 'apps', $platform, array());
 		if (isset($apps[$appId])) {
@@ -1483,6 +1702,9 @@ abstract class Users extends Base_Users
 			}
 			$appId = $id;
 		}
+		if ($throwIfMissing and !$appInfo) {
+			throw new Q_Exception_MissingConfig("Users/apps/$platform/$appId");
+		}
 		return array($appId, $appInfo);
 	}
 
@@ -1491,7 +1713,7 @@ abstract class Users extends Base_Users
 	 * @method addLink
 	 * @static
 	 * @param {string} $address Could be email address, mobile number, etc.
-	 * @param {string} [$type=null] can be "email", "mobile",the name of a platform,
+	 * @param {string} [$type=null] can be "email", "mobile", "$platform/t$appId",
 	 *  or any of the above with optional "_hashed" suffix to indicate
 	 *  that the value has already been hashed.
 	 *  If null, the function tries to guess the $type by using Q_Valid functions.
@@ -1668,7 +1890,7 @@ abstract class Users extends Base_Users
 		$terms_link = Q_Html::a(
 			Q::interpolate($terms_uri, array('baseUrl' => Q_Request::baseUrl())),
 			array('target' => '_blank'),
-			$terms_title
+			Q::text($terms_title)
 		);
 		return Q::interpolate($terms_label, array('link' => $terms_link));
 	}
@@ -1808,7 +2030,7 @@ abstract class Users extends Base_Users
 				case 'twitter':
 					if (!is_numeric($identifier)) {
 						throw new Q_Exception_WrongValue(
-							array('field' => 'address', 'range' => 'numeric uid')
+							array('field' => 'address', 'range' => 'numeric xid')
 						);
 					}
 					$normalized = $identifier;
@@ -1817,12 +2039,13 @@ abstract class Users extends Base_Users
 				case 'android':
 					if (!is_string($identifier)) {
 						throw new Q_Exception_WrongValue(
-							array('field' => 'identifier', 'range' => 'string uid')
+							array('field' => 'identifier', 'range' => 'string xid')
 						);
 					}
 					$normalized = $identifier;
 					break;
 				default:
+					$normalized = null;
 					break;
 			}
 			$hashed = Q_Utils::hash($normalized);

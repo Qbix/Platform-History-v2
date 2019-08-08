@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Naujas daiktas"
+    },
+    "labels": {
+        "Streams\/invited": "Žmonės, kuriuos pakvietiau",
+        "Streams\/invitedMe": "Kas mane pakvietė"
+    },
+    "interests": {
+        "Filter": "Ką jums patinka?",
+        "CanAdd": "Jei vis dar negalite rasti to, ko ieškote, galite pridėti naują susidomėjimą toliau:",
+        "TrySynonyms": "Nežiūrėkite? Išbandykite keletą sinonimų.",
+        "AddUnderCategory": "Pridėti prie kategorijos ...",
+        "Other": "Kita",
+        "Unlisted": "Neįtraukta"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Pranešimas pažymėtas administratoriaus peržiūrai. Palieskite dar kartą, kad atlaisvintumėte.",
+        "noOneSaid": "Niekas nieko sakė",
+        "closeChatButton": "Uždaryti pokalbį",
+        "closeChatConfirmTitle": "Uždaryti šį pokalbį?",
+        "closeChatConfirm": "Ar tikrai norite uždaryti šį pokalbį?",
+        "closeChatConfirmYes": "Taip",
+        "closeChatConfirmNo": "Ne",
+        "earlierComments": "ankstesnes pastabas",
+        "Subscribed": "Nutildyti pranešimus",
+        "Unsubscribed": "Gauti pranešimus",
+        "dontHavePermissionJoinConversation": "Neturite leidimo prisijungti prie šio pokalbio.",
+        "startedConversation": "pradėjo pokalbį",
+        "RealTimeCall": "Skambinimas realiuoju laiku"
+    },
+    "notifications": {
+        "*": "Pranešimas {{& message.fields.type}} į {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sakė:",
+        "Streams\/changed": "Pakeitimai {{stream.fields.title}}",
+        "Streams\/invite": "Jus pakvietė į {{& stream.fields.title}}",
+        "Streams\/announcement": "Skelbimas {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} pakeitė srautą",
+        "Streams\/chat\/edit": "Redaguotas pokalbio pranešimas",
+        "Streams\/chat\/remove": "Pokalbio pranešimas pašalintas",
+        "Streams\/closed": "{{stream.fields.title}} buvo uždaryta",
+        "Streams\/task\/progress": "{{stream.fields.title}} pasiekta pažanga",
+        "Streams\/task\/complete": "Užduotis baigta: {{stream.fields.title}}",
+        "Streams\/task\/error": "Klaida: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: gaunamas pranešimas",
+        "ManageEmailSubscriptions": "tvarkykite el. pašto prenumeratas",
+        "IfUnsubscribe": "Jei norite atsisakyti prenumeratos"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} pakvietė jus į {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Pasirinkite iš savo kontaktų",
+            "selectFromContacts": "Pasirinkite Iš adresatų",
+            "photo": "Nufotografuoti",
+            "photoInstruction": "Jei asmuo, kuris nuskaito jūsų QR kodą, yra priešais jus, nufotografuokite juos",
+            "to": "Į: {{Stream Title}}",
+            "go": "Eik",
+            "title": "Pakviesti",
+            "placeholder": "Mobiliojo telefono numeris arba el. Pašto adresas",
+            "orInvite": "Arba pakvieskite žmones naudodami:",
+            "QR": "{{ClickOrTap}} generuoti QR kodą",
+            "QRtitle": "Nuskaitykite šį QR kodą",
+            "byEmail": "El. Paštas",
+            "byText": "Tekstas",
+            "byFacebook": "Facebook",
+            "byTwitter": "„Twitter“",
+            "QRscanned": "Jie nuskaito jį!",
+            "chooseAgainFromContacts": "Pasirinkite vėl iš „Contacts“",
+            "inviteSelectedContacts": "Pakviesti pasirinktus kontaktus"
+        },
+        "email": {
+            "subject": "Ei, patikrinkite tai",
+            "PleaseVisitLink": "Apsilankykite šioje nuorodoje:",
+            "InvitingYou": "Kviečiu jus {{title}}",
+            "HasInvitedYou": "{{displayName}} pakvietė jus į {{title}}"
+        },
+        "sms": {
+            "content": "Jūs esate pakviestas į {{title}}. Palieskite {{url}}"
+        },
+        "notice": {
+            "text": "Jūs esate pakviestas. {{ClickOrTap}} čia priimti ir prisijungti."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} paskelbė <em>{{message.fields.type}}<\/em> pranešimą {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Kvietimai siunčiami iš mūsų numerio, kurį jūsų draugai dar neatpažįsta. Atlikite greitą tekstą, kad jiems būtų žinoma, kad kvietimas buvo gautas iš jūsų, prašydamas jų spustelėti nuorodą.",
+            "confirm": "Kvietimai siunčiami iš mūsų numerio, kurį jūsų draugai dar neatpažįsta. Ar norėtumėte sužinoti greitą tekstą, kad jie žinotų, kad kvietimas buvo gautas iš jūsų, paprašydamas jų spustelėti nuorodą.",
+            "check": "Ei, aš tiesiog atsiuntė jums kvietimą į {{app}} programą. Patikrinkite SMS ir spustelėkite nuorodą!"
+        },
+        "email": {
+            "alert": "Kvietimai siunčiami iš mūsų domeno, kurį jūsų draugai dar neatpažįsta. Atlikite greitą tekstą, kad jiems būtų žinoma, kad kvietimas buvo gautas iš jūsų, prašydamas jų spustelėti nuorodą.",
+            "confirm": "Kvietimai siunčiami iš mūsų domeno, kurį jūsų draugai dar neatpažįsta. Ar norėtumėte sužinoti greitą tekstą, kad jie žinotų, kad kvietimas buvo gautas iš jūsų, paprašydamas jų spustelėti nuorodą.",
+            "subject": "Ar gavote kvietimą?",
+            "body": "Ei, aš tiesiog atsiuntė jums kvietimą į {{app}} programą. Patikrinkite el. Paštą ir spustelėkite ten esančią nuorodą!"
+        }
+    },
+    "participating": {
+        "Title": "Pavadinimas",
+        "Subscribed": "Prenumeruota",
+        "Participants": "Dalyviai"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Įjungti mikrofoną",
+            "cameraTitle": "Įgalinti kamerą",
+            "cameraAndMicrophoneTitle": "Įgalinti kamerą ir mikrofoną",
+            "dialogTitle": "Dialogo įgalinimas",
+            "microphoneBtn": "Įjungti mikrofoną",
+            "cameraBtn": "Įgalinti kamerą",
+            "cameraAndMicrophoneBtn": "Įgalinti kamerą ir mikrofoną"
+        }
+    }
+}

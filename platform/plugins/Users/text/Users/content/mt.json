@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "Idħol",
+        "LogOut": "Oħroġ"
+    },
+    "activate": {
+        "SetAsPrimary": "Issettja {{1}} bħala l-primarja tiegħi {{2}}",
+        "ChoosePassPhrase": "Agħżel <strong>frażi pass<\/strong> biex tidħol ma &#39;. <br> Frażi sempliċi li tikkonsisti fi ftit kliem li faċilment tiftakar.",
+        "ChoosePassPhraseSeeSuggestions": "Agħżel <strong>frażi<\/strong> tajba biex tipproteġi l-kont tiegħek. Ara s-suġġerimenti għal xi ideat.",
+        "LogOutAndTryAgain": "Oħroġ u Ipprova darb&#39;oħra",
+        "IfYouFeel": "Jekk tħoss li marret ħażin, tista &#39;",
+        "SetIdentifierButtonTitle": "Ibda mill-bidu"
+    },
+    "session": {
+        "GetStarted": "Ibda"
+    },
+    "authorize": {
+        "GetStarted": "Ibda",
+        "Authorize": "Tawtorizza",
+        "TermsLabel": "Jiena qrajt u naqbel <br> għall- {{link}}",
+        "TermsTitle": "Termini"
+    },
+    "register": {
+        "TermsLabel": "Naċċetta l- {{link}}",
+        "TermsTitle": "Termini"
+    },
+    "notifications": {
+        "title": "Permess",
+        "prompt": "Tixtieq li jippermettu n-notifiki? Int ser tirċievi aġġornamenti fil-ħin reali dwar affarijiet li tieħu ħsiebhom.",
+        "yes": "Iva",
+        "no": "Le",
+        "WelcomePleaseVerifyEmail": "Merħba! Jekk jogħġbok ivverifika l-indirizz elettroniku tiegħek.",
+        "WelcomeVerifyEmail": "Merħba! Ivverifika l-indirizz elettroniku tiegħek.",
+        "ForgetPass": "Ħej, insejt il-frażi passiva?"
+    },
+    "usersContacts": {
+        "selectLabel": "Jekk jogħġbok agħżel it-tikketta.",
+        "inviteUser": "Stieden l-Utent"
+    },
+    "invalidLanguageSelected": "Lingwa mhux valida magħżula",
+    "contacts": {
+        "dialog": {
+            "title": "Agħżel kuntatt"
+        },
+        "select": {
+            "title": "Agħżel kuntatt ta &#39;{{displayName}}"
+        }
+    }
+}

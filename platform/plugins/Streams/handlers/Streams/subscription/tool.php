@@ -83,7 +83,7 @@ function Streams_subscription_tool($options) {
 
 	$items = array();
 
-	$rules = Streams_Rule::select('deliver, filter')->where(array(
+	$rules = Streams_SubscriptionRule::select('deliver, filter')->where(array(
 		'ofUserId'    => $user->id,
 		'publisherId' => $publisherId,
 		'streamName'  => $streamName

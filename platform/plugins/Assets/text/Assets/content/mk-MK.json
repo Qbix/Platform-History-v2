@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Допрете за да платите"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: полнење обработено за {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Ви благодариме за плаќањето до {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} претплатени на {{plan.title}}",
+        "YouSubscribedTo": "Сте биле претплатени на {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Информации за нарачка",
+        "PaymentMethod": "Метод за плаќање",
+        "ContactInfo": "Контакт Инфо",
+        "Pay": "Плати"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Поканата прифатена од {{1}}",
+        "YouHaveCreditsToStart": "Имате {999}} кредити за да започнете"
+    },
+    "history": {
+        "Date": "Датум",
+        "Amount": "износ",
+        "Description": "Опис",
+        "Client": "Клиент",
+        "To": "до",
+        "From": "од",
+        "HistoryEmpty": "Сè уште немате податоци"
+    },
+    "subscriptions": {
+        "infoTitle": "Поставете информации за плаќање",
+        "confirm": {
+            "title": "Започнете претплата",
+            "message": "Дали сакате да се претплатите на 99 999}?",
+            "ok": "добро",
+            "cancel": "Откажи"
+        }
+    },
+    "payments": {
+        "infoTitle": "Поставете информации за плаќање",
+        "confirm": {
+            "title": "Направете исплата",
+            "message": "Дали се согласувате да платите 999 фунти {} {{1000?",
+            "ok": "добро",
+            "cancel": "Откажи"
+        }
+    }
+}

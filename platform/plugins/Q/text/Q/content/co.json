@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Errore {{status}} durante a richiesta",
+        "canceled": "Richiesta annullata",
+        "500": "Errore server interno",
+        "404": "Non truvatu: {{url}}",
+        "501": "A richiesta hè interrotta"
+    },
+    "nonce": {
+        "sameDomain": "A sessione hè scaduta. Refresh a pagina è pruvate dinò.",
+        "otherDomain": "A richiesta bloccata trà u campu à u duminiu stranariu à {{baseUrl}}"
+    },
+    "words": {
+        "tap": "toghjera",
+        "click": "cliccate",
+        "yes": "Iè",
+        "no": "Innò",
+        "Tap": "Tocca",
+        "Click": "Cliccate",
+        "Yes": "Iè",
+        "No": "Innò"
+    },
+    "months": {
+        "1": "Ghjinnaghju",
+        "2": "Febbraiu",
+        "3": "Marzu",
+        "4": "Aprile",
+        "5": "Maghju",
+        "6": "Ghjugnu",
+        "7": "Lugliu",
+        "8": "Aostu",
+        "9": "Sittembre",
+        "10": "Ottobre",
+        "11": "Nuvembre",
+        "12": "Dicembre"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Permettevate l&#39;accessu à u vostru microfunu",
+        "record": "Prisente",
+        "recording": "Registrazione",
+        "remains": "resti",
+        "maximum": "massimu",
+        "playing": "Playing",
+        "recorded": "Registratu",
+        "clip": "clip",
+        "orupload": "O Carica",
+        "usethis": "Usate stu",
+        "discard": "Scartate",
+        "encoding": "Codifica"
+    },
+    "alert": {
+        "title": "Alert"
+    },
+    "confirm": {
+        "title": "A cunfirmà",
+        "ok": "Iè",
+        "cancel": "Innò"
+    },
+    "prompt": {
+        "title": "Pronta",
+        "ok": "Vai"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Errore à leggere u schedariu",
+        "cameraCommands": {
+            "prompt": "Cosa vulete fà?",
+            "photo": "Piglia una nova foto",
+            "library": "Sceglite da a biblioteca"
+        },
+        "tooSmall": "Per piacè sceltu una maghjina più grande.",
+        "cropping": {
+            "title": "Aghjunghje a dimensione è a posizione",
+            "touchscreen": "Aduprà e vostru dita per allargà è trà",
+            "notTouchscreen": "Usate u vostru mouse &amp; rotella per zoomu è trascinarà"
+        }
+    }
+}

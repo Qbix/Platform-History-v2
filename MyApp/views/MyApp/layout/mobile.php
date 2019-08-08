@@ -34,7 +34,7 @@
 	<link rel="shortcut icon" href="<?php echo Q_Request::baseUrl() ?>/favicon.ico" type="image/x-icon">
 	
 	<script type="text/javascript">
-		document.getElementsByTagName('html')[0].className += ' Q_js'; // better than noscript
+		document.documentElement.className += ' Q_js'; // better than noscript
 	</script>
 
 	<!-- scripts have been moved to the bottom of the body -->
@@ -43,13 +43,13 @@
 </head>
 <body>
 	<div id="status_background" class="Q_dont_hide"></div>
-	<div id="dashboard_slot">
+	<div id="dashboard_slot" class="Q_fixed_top">
 <!-- - - - - - - - - - - - - begin dashboard slot- - - - - - - - - - - - - - - - -->
 <?php echo $dashboard ?> 
 <!-- - - - - - - - - - - - - - end dashboard slot- - - - - - - - - - - - - - - - -->
 	</div>
 	<div id="page">
-		<div id="notices_slot">
+		<div id="notices_slot" class="Q_fixed_top">
 <!-- - - - - - - - - - - - - - begin notices slot- - - - - - - - - - - - - - - - -->
 <?php echo $notices ?> 
 <!-- - - - - - - - - - - - - - end notices slot- - - - - - - - - - - - - - - - - -->

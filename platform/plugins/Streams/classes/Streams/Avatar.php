@@ -239,6 +239,306 @@ class Streams_Avatar extends Base_Streams_Avatar
 		));
 		return Users::iconUrl($icon, $basename);
 	}
+	
+	/**
+	 * Updates the publisher's avatar, as it appears to $toUserId
+	 * This function should be called during events that may cause the
+	 * publisher's avatar to change appearance for certain users viewing it.
+	 * These are usually rare events, and include things like:<br/>
+	 *   adding, removing or modifying a contact
+	 * @method updateAvatar
+	 * @static
+	 * @param {integer} $toUserId
+	 *  id of the user who will be viewing this avatar
+	 * @param {string} $publisherId
+	 *  id of the publisher whose avatar to update
+	 * @return {boolean}
+	 */
+	static function updateAvatar($toUserId, $publisherId)
+	{
+		$user = new Users_User();
+		$user->id = $publisherId;
+		if (!$user->retrieve(null, null, true)->ignoreCache()->resume()) {
+			return false;
+		}
+
+		// Fetch some streams as the contact user
+		$streams = Streams::fetch($toUserId, $publisherId, array(
+			'Streams/user/firstName', 'Streams/user/lastName', 'Streams/user/gender'
+		));
+		$firstName = Streams::take($streams, 'Streams/user/firstName', 'content');
+		$lastName = Streams::take($streams, 'Streams/user/lastName', 'content');
+		$gender = Streams::take($streams, 'Streams/user/gender', 'content');
+
+		// Update the Streams_avatar table
+		Streams_Avatar::update()->set(array(
+			'firstName' => $firstName,
+			'lastName' => $lastName,
+			'gender' => $gender,
+			'username' => $user->username,
+			'icon' => $user->icon
+		))->where(array(
+			'toUserId' => $toUserId,
+			'publisherId' => $publisherId
+		))->execute();
+
+		return true;
+	}
+	
+	/**
+	 * Updates the publisher's avatars, which may have changed with the taintedAccess.
+	 * This function should be called during rare events that may cause the
+	 * publisher's avatar to change appearance for certain users viewing it.<br/>
+	 *
+	 * You should rarely have to call this function. It is used internally by the model,
+	 * in two main situations:
+	 *
+	 * 1)  adding, removing or modifying a Streams_Access row for Streams/user/firstName or Streams/user/lastName or Streams/user/gender
+	 *	In this case, the function is able to update exactly the avatars that need updating.
+	 * 
+	 * 2) adding, removing or modifying a Stream row for Streams/user/firstName or Streams/user/lastName or Streams/user/gender
+	 *	In this case, there may be some avatars which this function will miss.
+	 *	These correspond to users which are reachable by the access array for one stream,
+	 *	but not the other. For example, if Streams/user/firstName is being updated, but
+	 *	a particular user is reachable only by the access array for Streams/user/lastName, then
+	 *	their avatar will not be updated and contain a stale value for firstName.
+	 *	To fix this, the Streams_Stream model passes true in the 4th parameter to this function.
+	 * @method updateAvatars
+	 * @static
+	 * @param {string} $publisherId
+	 *  id of the publisher whose avatar to update
+	 * @param {array} $taintedAccess
+	 *  array of Streams_Access objects representing access information that is either
+	 *  about to be saved, are about to be overwritten, or will be deleted
+	 * @param {string|Streams_Stream} $streamName
+	 *  pass the stream name here. You can also pass a Stream_Stream object here,
+	 *  in which case it will be used, instead of selecting that stream from the database.
+	 * @param {boolean} $updateToPublicValue=false
+	 *  if you want to first update all the avatars for this stream
+	 *  to the what the public would see, to avoid the situation described in 2).
+	 */
+	static function updateAvatars(
+		$publisherId, 
+		$taintedAccess, 
+		$streamName, 
+		$updateToPublicValue = false)
+	{
+		if (!isset($streamName)) {
+			$streamAccesses = array();
+			foreach ($taintedAccess as $access) {
+				$streamAccesses[$access->streamName][] = $access;
+			}
+			if (count($streamAccesses) > 1) {
+				foreach ($streamAccesses as $k => $v) {
+					Streams_Avatar::update($publisherId, $v, $k);
+				}
+				return false;
+			}
+		}
+		if ($streamName instanceof Streams_Stream) {
+			$stream = $streamName;
+			$streamName = $stream->name;
+		}
+
+		// If we are here, all the Stream_Access objects have the same streamName
+		if ($streamName !== 'Streams/user/firstName'
+		and $streamName !== 'Streams/user/lastName'
+		and $streamName !== 'Streams/user/username'
+		and $streamName !== 'Streams/user/gender') {
+			// we don't care about access to other streams being updated
+			return false;
+		}
+		$showToUserIds = array();
+
+		// Select the user corresponding to this publisher
+		$user = new Users_User();
+		$user->id = $publisherId;
+		if (!$user->retrieve(null, null, array('ignoreCache' => true))) {
+			throw new Q_Exception_MissingRow(array(
+				'table' => 'user',
+				'criteria' => 'id = '.$user->id
+			));
+		}
+
+		// Obtain the stream object to use
+		if (isset($stream)) {
+			if (!isset($stream->content)) {
+				$stream->content = '';
+			}
+		} else {
+			// If the $stream isn't already defined, select it
+			$stream = new Streams_Stream();
+			$stream->publisherId = $publisherId;
+			$stream->name = $streamName;
+			if (!$stream->retrieve()) {
+				// Strange, this stream doesn't exist.
+				// Well, we will just silently set the content to '' then
+				$stream->content = '';
+			}
+		}
+
+		$content_readLevel = Streams::$READ_LEVEL['content'];
+		$readLevels = array();
+		$label_readLevels = array();
+		$contact_label_list = array();
+		$removed_labels = array();
+
+		// First, assign all the readLevels that are directly set for specific users,
+		// and aggregate the contact_labels from the other accesses, for an upcoming select.
+		foreach ($taintedAccess as $access) {
+			if ($userId = $access->ofUserId) {
+				$readLevel = $access->readLevel;
+				$readLevels[$userId] = $readLevel;
+				if ($readLevel < 0) {
+					$showToUserIds[$userId] = null; // not determined yet
+				} else if ($readLevel >= $content_readLevel) {
+					$showToUserIds[$userId] = true;
+				} else {
+					$showToUserIds[$userId] = false;
+				}
+			} else if ($access->ofContactLabel) {
+				$ofContactLabel = $access->ofContactLabel;
+				$contact_label_list[] = $ofContactLabel;
+				if ($access->get('removed', false)) {
+					$removed_labels[$ofContactLabel] = true;
+				} else {
+					$label_readLevels[$ofContactLabel] = $access->readLevel;
+				}
+			}
+		}
+
+		// Now, get all the people affected by this change, and their readLevels
+		$readLevels2 = array();
+		if ($contact_label_list) {
+			$contact_label_list = array_unique($contact_label_list);
+			$contacts = Users_Contact::select()
+				->where(array(
+					'userId' => $publisherId,
+					'label' => $contact_label_list
+				))->fetchDbRows(null, '', 'contactUserId');
+			foreach ($contacts as $contact) {
+				$contactUserId = $contact->contactUserId;
+				if (isset($showToUserIds[$contactUserId])) {
+					// this user had their read level set directly by the access,
+					// which overrides read levels set by access using ofContactLabel
+					continue;
+				}
+				if (isset($removed_labels[$ofContactLabel])) {
+					// this label doesn't affect readLevels anymore, since it was deleted
+					// but put this contact's id on a list whose readLevels need to be determined
+					$showToUserIds[$contactUserId] = null;
+					continue;
+				}
+				if (!isset($label_readLevels[$contact->label])) {
+					continue;
+				}
+				$readLevel = $label_readLevels[$contact->label];
+				if (!isset($readLevels2[$contactUserId])) {
+					$readLevels2[$contactUserId] = $readLevel;
+				} else {
+					$readLevels2[$contactUserId] = max(
+						$readLevels2[$contactUserId],
+						$readLevel
+					);
+				}
+			}
+		}
+
+		// Now step through all the users we found who were found through ofContactLabel
+		// and make sure we update the avatar rows that were meant for them.
+		foreach ($readLevels2 as $userId => $rl) {
+			if ($rl >= $content_readLevel) {
+				$showToUserIds[$userId] = true;
+			} else {
+				// in order for this to happen, two things had to be true:
+				// 1) there was no access that directly set a readLevel >= $content_readLevel
+				// 2) there was no access that set a readLevel >= $content_readLevel for any label containing this user
+				// therefore, their view should be the public view
+				$showToUserIds[$userId] = 'public';
+			}
+		}
+
+		// Resolve all the undetermined readLevels
+		foreach ($showToUserIds as $userId => $v) {
+			if (!isset($v)) {
+				// if the readLevel hasn't been determined by now, it's the same as the public one
+				$showToUserIds[$userId] = 'public';
+			}
+		}
+		
+		// Set up the self avatar:
+		$showToUserIds[$publisherId] = true;
+
+		// Finally, set up the public avatar:
+		if (!isset($stream->readLevel)) {
+			$stream->readLevel = Streams_Stream::$DEFAULTS['readLevel'];
+		}
+		$showToUserIds[""] = ($stream->readLevel >= $content_readLevel);
+
+		// Now, we update the avatars:
+		$parts = explode('/', $streamName);
+		$field = end($parts);
+		$rows_that_show = array();
+		$rows_that_hide = array();
+		foreach ($showToUserIds as $userId => $show) {
+			if ($show === 'public') {
+				// If no show is explicitly specified, use the value used for the rest of the public
+				$show = $showToUserIds[""];
+			}
+			if ($show === true) {
+				$rows_that_show[] = array(
+					'publisherId' => $publisherId,
+					'toUserId' => $userId,
+					'username' => $user->username,
+					'icon' => $user->icon,
+					'updatedTime' => new Db_Expression("CURRENT_TIMESTAMP"),
+					$field => $stream->content
+				);
+			} else if ($show === false) {
+				$rows_that_hide[] = array(
+					'publisherId' => $publisherId,
+					'toUserId' => $userId,
+					'username' => $user->username,
+					'icon' => $user->icon,
+					'updatedTime' => new Db_Expression("CURRENT_TIMESTAMP"),
+					$field => ''
+				);
+			}
+		}
+		$updates_that_show = array(
+			'username' => $user->username,
+			'icon' => $user->icon,
+			'updatedTime' => new Db_Expression("CURRENT_TIMESTAMP"),
+			$field => $stream->content
+		);
+		$updates_that_hide = array(
+			'username' => $user->username,
+			'icon' => $user->icon,
+			'updatedTime' => new Db_Expression("CURRENT_TIMESTAMP"),
+			$field => ''
+		);
+
+		// We are now ready to make changes to the database.
+		if ($updateToPublicValue) {
+			Streams_Avatar::update()
+				->set(array($field => $showToUserIds[""] ? $stream->content : ''))
+				->where(compact('publisherId'))
+				->execute();
+		}
+		Streams_Avatar::insertManyAndExecute($rows_that_show, array('onDuplicateKeyUpdate' => $updates_that_show));
+		Streams_Avatar::insertManyAndExecute($rows_that_hide, array('onDuplicateKeyUpdate' => $updates_that_hide));
+	}
+	
+	static function streamNames()
+	{
+		return array(
+			'Streams/user/firstName',
+			'Streams/user/lastName', 
+			'Streams/user/icon', 
+			'Streams/user/username', 
+			'Streams/user/gender'
+		);
+	}
 
 	protected static $cache;
 

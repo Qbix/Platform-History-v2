@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Lidhje për të promovuar",
+                "startDate": "Data e fillimit",
+                "startTime": "Koha e nisjes",
+                "endDate": "Data e përfundimit",
+                "endTime": "Koha e mbarimit",
+                "budget": "buxhet"
+            },
+            "interests": {
+                "Title": "Filtro sipas interesit",
+                "FilterInterests": "Filloni të shtypni një interes ..."
+            },
+            "Interest": "interes",
+            "Location": "vend"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "shkoj",
+            "PasteLinkHere": "Ngjit një lidhje këtu",
+            "BrowseTheWeb": "shfletoj",
+            "WriteToStartConversation": "Shkruani mendimet tuaja për të nisur bisedën",
+            "StartConversation": "Filloni bisedën",
+            "GotoConversation": "Shkoni te Biseda"
+        }
+    }
+}

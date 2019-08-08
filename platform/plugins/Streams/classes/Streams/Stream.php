@@ -141,8 +141,9 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @static
 	 * @param {array} $who Array that can contain the following keys:
 	 * @param {string|array} [$who.userId] user id or an array of user ids
-	 * @param {string} [$who.platform] platform for which uids are passed
-	 * @param {string|array} [$who.uid]  platform uid or array of uids
+	 * @param {string} [$who.platform] platform for which xids are passed
+	 * @param {string} [$who.appId] id of platform app for which xids are passed
+	 * @param {string|array} [$who.xid]  platform xid or array of xids
 	 * @param {string|array} [$who.label]  label or an array of labels, or tab-delimited string
 	 * @param {string|array} [$who.identifier]  identifier or an array of identifiers, or tab-delimited string
 	 * @param {integer} [$who.newFutureUsers] the number of new Users_User objects to create via Users::futureUser in order to invite them to this stream. This typically is used in conjunction with passing the "html" option to this function.
@@ -165,7 +166,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @see Users::addLink()
 	 * @return {array} Returns array with keys 
 	 *  "success", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
-	 *  The userIds array contains userIds from "userId" first, then "identifiers", "uids", "label",
+	 *  The userIds array contains userIds from "userId" first, then "identifiers", "xids", "label",
 	 *  then "newFutureUsers". The statuses is an array of the same size and in the same order.
 	 *  The identifierTypes array is in the same order as well.
 	 *  If the "token" option was set to true, the array also contains the "invite"
@@ -327,6 +328,11 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 
 		if (!$this->retrieved) {
+			foreach (array('messageCount', 'invitedCount', 'participatingCount') as $f) {
+				if (!isset($this->$f)) {
+					$this->$f = 0;
+				}
+			}
 			// we don't want user to update private fields but will set initial values to them
 			$privateFieldNames = self::getConfigField($this->type, 'private', array());
 			// magic fields are handled by parent method
@@ -415,6 +421,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$fields = array(
 			'Streams/user/firstName' => false,
 			'Streams/user/lastName' => false,
+			'Streams/user/gender' => false,
 			'Streams/user/username' => 'username',
 			'Streams/user/icon' => 'icon'
 		);
@@ -452,7 +459,7 @@ class Streams_Stream extends Base_Streams_Stream
 					'publisherId' => $this->publisherId,
 					'streamName' => $this->name
 				))->fetchDbRows();
-			Streams::updateAvatars($this->publisherId, $taintedAccess, $this, true);
+			Streams_Avatar::updateAvatars($this->publisherId, $taintedAccess, $this, true);
 		}
 
 		return $result;
@@ -580,7 +587,8 @@ class Streams_Stream extends Base_Streams_Stream
 		Q::event("Streams/remove/{$stream->type}", compact('stream', 'result'), 'after');
 
 		if ($this->name !== 'Streams/user/firstName'
-		and $this->name !== 'Streams/user/lastName') {
+		and $this->name !== 'Streams/user/lastName'
+		and $this->name !== 'Streams/user/gender') {
 			return $result;
 		}
 		
@@ -590,7 +598,7 @@ class Streams_Stream extends Base_Streams_Stream
 				'publisherId' => $this->publisherId,
 				'streamName' => $this->name
 			))->fetchDbRows();
-		Streams::updateAvatars($this->publisherId, $taintedAccess, $this, true);
+		Streams_Avatar::updateAvatars($this->publisherId, $taintedAccess, $this, true);
 
 		return $result;
 	}
@@ -692,7 +700,7 @@ class Streams_Stream extends Base_Streams_Stream
 
 		return $this;
 	}
-	
+
 	/**
 	 * @method clearAttribute
 	 * @param {string} $attributeName The name of the attribute to remove
@@ -1512,7 +1520,8 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 	
 	/**
-	 * Returns array of fields allowed for user
+	 * Returns the fields and values we can export to clients.
+	 * Can also contain "messageTotals", "relatedToTotals" and "relatedFromTotals".
 	 * @method exportArray
 	 * @param {array} $options=array()
 	 * @param {string} [$options.asUserId] Defaults to the logged in user, or "" if not logged in
@@ -1582,8 +1591,14 @@ class Streams_Stream extends Base_Streams_Stream
 		if ($this->get('participant')) {
 			$result['participant'] = $this->get('participant')->exportArray();
 		}
-		if ($totals = $this->get('totals')) {
-			$result['totals'] = $totals;
+		if ($messageTotals = $this->get('messageTotals')) {
+			$result['messageTotals'] = $messageTotals;
+		}
+		if ($relatedToTotals = $this->get('relatedToTotals')) {
+			$result['relatedToTotals'] = $relatedToTotals;
+		}
+		if ($relatedFromTotals = $this->get('relatedFromTotals')) {
+			$result['relatedFromTotals'] = $relatedFromTotals;
 		}
 		return $result;
 	}
@@ -1604,7 +1619,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {boolean} [$recalculate=false]
 	 *  Pass true here to force recalculating access to streams for which access was already calculated
 	 * @param {string} [$actualPublisherId=null]
-	 *  For internal use only. Used by Streams::isAuthorizedToCreate function.
+	 *  For internal use only. Used by Streams::canCreateStreamType function.
 	 * @param {string} [$inheritAccess=true]
 	 *  Set to false to skip inheriting access from other streams, even if specified
 	 * @return {integer}
@@ -1770,6 +1785,18 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 	
 	/**
+	 * Get the directory to import the icon into, for a stream.
+	 * Use this with Users::importIcon().
+	 * @param {string} [$extra] You can pass time() here or something,
+	 *  if you don't want to overwrite old values.
+	 * @return {string}
+	 */
+	function iconDirectory($extra = null)
+	{
+		return Streams::iconDirectory($this->publisherId, $this->name, $extra);
+	}
+	
+	/**
 	 * A convenience method to get the URL of the streams-related action
 	 * @method register
 	 * @static
@@ -1829,7 +1856,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$bottom = call_user_func_array(array('Q_Config', 'get'), $args1);
 		$top = call_user_func_array(array('Q_Config', 'get'), $args2);
 		if ($merge and is_array($bottom) and is_array($top)) {
-			return array_merge($bottom, $top);
+			return Q_Tree::mergeArrays($bottom, $top);
 		}
 		return isset($top) ? $top : $bottom;
 	}
@@ -1870,7 +1897,7 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 	
 	/**
-	 * Returns the canonical uri of the stream, if any
+	 * Returns the canonical URI of the stream, if any
 	 * @param {integer} [$messageOrdinal] pass this to link to the message in the stream, e.g. to highlight it
 	 * @return {string|null|false}
 	 */
@@ -1987,6 +2014,47 @@ class Streams_Stream extends Base_Streams_Stream
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * @method metas
+	 * @param {array} $options You can use these to override the default places to look
+	 * @param {string} [$options.icon] The name of an attribute that contains the icon url prefix
+	 * @param {string} [$options.iconFile] The name of an attribute that contains the icon url prefix
+	 * @param {string} [$options.title] The name of an attribute that contains the title
+	 * @param {string} [$options.description] The name of an attribute that contains the description
+	 * @param {string} [$options.keywords] The name of an attribute that contains the title
+	 * @param {string} [$options.url] The name of an attribute that contains the url
+	 * @return {array} The metas to set
+	 */
+	function metas($options)
+	{
+		if (!empty($options['iconFile'])) {
+			$iconFile = '500x.png';
+		} else {
+			$sizes = Q_Image::getSizes('Streams/image', $maxStretch);
+			ksort($sizes);
+			$iconFile = end($sizes);
+		}
+		$maxLength = Q_Config::get('Streams', 'meta', 'description', 'maxLength', 150);
+		$description = substr($this->content, 0, $maxLength);
+		if (strlen($this->content) > $maxLength) {
+			$description .= '...';
+		}
+		$description = preg_replace("/(\r?\n){2,}/", " ", $description);
+		$image = Q::ifset($options, 'icon', $this->iconUrl($iconFile));
+		$title = Q::ifset($options, 'title', $this->title);
+		$description = Q::ifset($options, 'description', $description);
+		$keywords = $this->getAttribute('keywords');
+		$metas = compact('title', 'image', 'description', 'keywords');
+		$url = Q::ifset($options, 'url', $this->url());
+		foreach (array('og', 'twitter') as $prefix) {
+			foreach ($metas as $k => $v) {
+				$metas["$prefix:$k"] = $v;
+			}
+		}
+		$metas['twitter:card'] = 'summary';
+		return $metas;
 	}
 
 	/* * * */

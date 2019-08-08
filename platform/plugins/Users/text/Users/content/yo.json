@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "wo ile",
+        "LogOut": "wọle jade"
+    },
+    "activate": {
+        "SetAsPrimary": "Ṣeto {{1}} bi mi akọkọ {{2}}",
+        "ChoosePassPhrase": "Yan <strong>gbolohun ọrọ kan<\/strong> lati wọle pẹlu. <br> Ọrọ gbolohun kan ti o wa ninu awọn ọrọ diẹ ti o yoo ṣaima ṣe iranti.",
+        "ChoosePassPhraseSeeSuggestions": "Yan <strong>gbolohun ọrọ ti o<\/strong> dara lati dabobo àkọọlẹ rẹ. Wo awọn didaba fun diẹ ninu awọn ero.",
+        "LogOutAndTryAgain": "Jade ki o tun gbiyanju lẹẹkansi",
+        "IfYouFeel": "Ti o ba lero nkankan ti ko tọ, o le",
+        "SetIdentifierButtonTitle": "Lati ibere"
+    },
+    "session": {
+        "GetStarted": "Bẹrẹ Bibẹrẹ"
+    },
+    "authorize": {
+        "GetStarted": "Bẹrẹ Bibẹrẹ",
+        "Authorize": "Gba aṣẹ",
+        "TermsLabel": "Mo ti ka ati gba <br> si {{link}}",
+        "TermsTitle": "Awọn ofin"
+    },
+    "register": {
+        "TermsLabel": "Mo gba {{link}}",
+        "TermsTitle": "Awọn ofin"
+    },
+    "notifications": {
+        "title": "Gbigbanilaaye",
+        "prompt": "Ṣe o fẹ lati ṣe iwifunni? Iwọ yoo gba awọn imudojuiwọn gidi-akoko nipa awọn ohun ti o bikita nipa.",
+        "yes": "Bẹẹni",
+        "no": "Rara",
+        "WelcomePleaseVerifyEmail": "Kaabo! Jọwọ ṣayẹwo adiresi imeeli rẹ.",
+        "WelcomeVerifyEmail": "Kaabo! Daju adirẹsi imeeli rẹ.",
+        "ForgetPass": "Hey, ṣe o gbagbe ọrọigbaniwọle rẹ?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Yan olubasọrọ"
+        },
+        "select": {
+            "title": "Yan olubasọrọ ti {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Jowo yan aami.",
+        "inviteUser": "Olukọni Olukọni"
+    },
+    "invalidLanguageSelected": "Ainilẹjẹ ede ti a yan"
+}

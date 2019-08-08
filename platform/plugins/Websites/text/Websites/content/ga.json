@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Nasc le cur chun cinn",
+                "startDate": "Dáta tosaigh",
+                "startTime": "Am Tosaigh",
+                "endDate": "Dáta deiridh",
+                "endTime": "Am Deireadh",
+                "budget": "Buiséad"
+            },
+            "interests": {
+                "Title": "Scagaire le Leas",
+                "FilterInterests": "Tosaigh ag clóscríobh spéise ..."
+            },
+            "Interest": "Ús",
+            "Location": "Suíomh"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Téigh",
+            "PasteLinkHere": "Greamaigh nasc anseo",
+            "BrowseTheWeb": "Brabhsáil",
+            "WriteToStartConversation": "Scríobh do chuid smaointe chun tús a chur leis an gcomhrá",
+            "StartConversation": "Comhrá Tosaigh",
+            "GotoConversation": "Téigh go dtí an Comhrá"
+        }
+    }
+}

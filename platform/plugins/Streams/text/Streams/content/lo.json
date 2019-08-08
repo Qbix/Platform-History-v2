@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "New Item"
+    },
+    "labels": {
+        "Streams\/invited": "ປະຊາຊົນຂ້າພະເຈົ້າໄດ້ເຊື້ອເຊີນ",
+        "Streams\/invitedMe": "ຜູ້ທີ່ເຊື້ອເຊີນຂ້ອຍ"
+    },
+    "interests": {
+        "Filter": "ເຈົ້າຊອບສິ່ງໃດ?",
+        "CanAdd": "ຖ້າທ່ານຍັງບໍ່ສາມາດຊອກຫາສິ່ງທີ່ທ່ານກໍາລັງຊອກຫາ, ທ່ານສາມາດເພີ່ມຄວາມສົນໃຈໃຫມ່ຂ້າງລຸ່ມນີ້ໄດ້:",
+        "TrySynonyms": "ບໍ່ເບິ່ງມັນ? ພະຍາຍາມບາງຄໍາສັບຄ້າຍຄືກັນ.",
+        "AddUnderCategory": "ເພີ່ມໃນປະເພດ ...",
+        "Other": "ອື່ນໆ",
+        "Unlisted": "Unlisted"
+    },
+    "chat": {
+        "flaggedForAdminReview": "ຂໍ້ຄວາມໄດ້ຖືກສະແດງສໍາລັບການທົບທວນ admin. ແຕະອີກເທື່ອຫນຶ່ງເພື່ອ unflag.",
+        "noOneSaid": "ບໍ່ມີໃຜໄດ້ເວົ້າຫຍັງ",
+        "closeChatButton": "ປິດການສົນທະນາ",
+        "closeChatConfirmTitle": "ປິດການສົນທະນານີ້?",
+        "closeChatConfirm": "ທ່ານແນ່ໃຈວ່າທ່ານຕ້ອງການປິດການສົນທະນານີ້?",
+        "closeChatConfirmYes": "ແມ່ນແລ້ວ",
+        "closeChatConfirmNo": "ບໍ່ມີ",
+        "earlierComments": "comments earlier"
+    },
+    "notifications": {
+        "*": "ຂໍ້ຄວາມ {{& message.fields.type}} ກັບ {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ກ່າວວ່າ:",
+        "Streams\/changed": "ການປ່ຽນແປງໃນ {{stream.fields.title}}",
+        "Streams\/invite": "ທ່ານໄດ້ຖືກເຊີນໄປຫາ {{& stream.fields.title}}",
+        "Streams\/announcement": "ປະກາດໃນ {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} ໄດ້ປ່ຽນການເຂົ້າເຖິງລະບົບ",
+        "Streams\/chat\/edit": "ແກ້ໄຂຂໍ້ຄວາມສົນທະນາ",
+        "Streams\/chat\/remove": "ລຶບຂໍ້ຄວາມສົນທະນາອອກ",
+        "Streams\/closed": "{{stream.fields.title}} ໄດ້ຖືກປິດ",
+        "Streams\/task\/progress": "ຄວາມຄືບຫນ້າທີ່ດໍາເນີນຢູ່ {{stream.fields.title}}",
+        "Streams\/task\/complete": "ວຽກສໍາເລັດແລ້ວ: {{stream.fields.title}}",
+        "Streams\/task\/error": "ຂໍ້ຜິດພາດໃນລະຫວ່າງ: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: ຂໍ້ຄວາມທີ່ມາຮອດ"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} ເຊີນທ່ານໄປ {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "ເລືອກຈາກລາຍຊື່ຂອງທ່ານ",
+            "chooseAgainFromContacts": "ເລືອກອີກເທື່ອຫນຶ່ງຈາກລາຍຊື່ຜູ່ຕິດຕໍ່",
+            "inviteSelectedContacts": "ເຊີນຊວນ Contacts ທີ່ເລືອກ",
+            "selectFromContacts": "ເລືອກຈາກ Contacts",
+            "photo": "ຖ່າຍ​ຮູບ",
+            "photoInstruction": "ຖ້າຄົນທີ່ສະແກນລະຫັດ QR ຂອງທ່ານແມ່ນຢູ່ທາງຫນ້າຂອງທ່ານ, ເອົາຮູບຂອງພວກເຂົາ",
+            "to": "ໄປ: {{Stream Title}}",
+            "go": "ໄປ",
+            "title": "ເຊີນ",
+            "placeholder": "ເບີມືຖືຫຼືທີ່ຢູ່ອີເມວ",
+            "orInvite": "ຫຼືເຊື້ອເຊີນປະຊາຊົນໂດຍໃຊ້:",
+            "QR": "{{ClickOrTap}} ເພື່ອສ້າງລະຫັດ QR",
+            "QRtitle": "ສະແກນລະຫັດ QR ນີ້",
+            "QRscanned": "ພວກເຂົາໄດ້ສະແກນມັນ!",
+            "byEmail": "Email",
+            "byText": "ຂໍ້​ຄວາມ",
+            "byFacebook": "ເຟສບຸກ",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hey, ກວດເບິ່ງນີ້ອອກ",
+            "PleaseVisitLink": "ກະລຸນາໄປທີ່ລິ້ງຕໍ່ໄປນີ້:",
+            "InvitingYou": "ຂ້ອຍຂໍເຊີນທ່ານໃຫ້ {{title}}",
+            "HasInvitedYou": "{{displayName}} ໄດ້ເຊີນທ່ານໃຫ້ {{title}}"
+        },
+        "sms": {
+            "content": "ທ່ານໄດ້ຖືກເຊີນໄປຫາ {{title}}. ກະລຸນາແຕະ {{url}}"
+        },
+        "notice": {
+            "text": "ທ່ານໄດ້ຮັບເຊີນ. {{ClickOrTap}} ທີ່ນີ້ເພື່ອຍອມຮັບແລະເຂົ້າຮ່ວມ."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} ໄດ້ຂຽນຂໍ້ຄວາມ <em>{{message.fields.type}}<\/em> ກັບ {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} ໃນ {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "ການເຊີນທີ່ຖືກສົ່ງມາຈາກຈໍານວນຂອງພວກເຮົາ, ເຊິ່ງຫມູ່ເພື່ອນຂອງທ່ານຍັງບໍ່ໄດ້ຮັບຮູ້ເທື່ອ. ຕິດຕາມດ້ວຍຂໍ້ຄວາມໄວເພື່ອໃຫ້ພວກເຂົາຮູ້ວ່າການເຊີນມາຈາກທ່ານ, ຂໍໃຫ້ພວກເຂົາກົດການເຊື່ອມຕໍ່.",
+            "confirm": "ການເຊີນທີ່ຖືກສົ່ງມາຈາກຈໍານວນຂອງພວກເຮົາ, ເຊິ່ງຫມູ່ເພື່ອນຂອງທ່ານຍັງບໍ່ໄດ້ຮັບຮູ້ເທື່ອ. ທ່ານຢາກຕິດຕາມດ້ວຍຂໍ້ຄວາມໄວເພື່ອໃຫ້ພວກເຂົາຮູ້ວ່າການເຊີນມາຈາກທ່ານ, ຂໍໃຫ້ພວກເຂົາກົດການເຊື່ອມຕໍ່.",
+            "check": "Hey, ຂ້າພະເຈົ້າພຽງແຕ່ສົ່ງທ່ານໃຫ້ກັບແອັບຯ {{app}}. ກະລຸນາກວດເບິ່ງອີເມວຂອງທ່ານແລະຄລິກໃສ່ການເຊື່ອມຕໍ່!"
+        },
+        "email": {
+            "alert": "ການເຊີນທີ່ຖືກສົ່ງມາຈາກໂດເມນຂອງພວກເຮົາ, ເຊິ່ງຫມູ່ເພື່ອນຂອງທ່ານຍັງບໍ່ໄດ້ຮັບຮູ້ເທື່ອ. ຕິດຕາມດ້ວຍຂໍ້ຄວາມໄວເພື່ອໃຫ້ພວກເຂົາຮູ້ວ່າການເຊີນມາຈາກທ່ານ, ຂໍໃຫ້ພວກເຂົາກົດການເຊື່ອມຕໍ່.",
+            "confirm": "ການເຊີນທີ່ຖືກສົ່ງມາຈາກໂດເມນຂອງພວກເຮົາ, ເຊິ່ງຫມູ່ເພື່ອນຂອງທ່ານຍັງບໍ່ໄດ້ຮັບຮູ້ເທື່ອ. ທ່ານຢາກຕິດຕາມດ້ວຍຂໍ້ຄວາມໄວເພື່ອໃຫ້ພວກເຂົາຮູ້ວ່າການເຊີນມາຈາກທ່ານ, ຂໍໃຫ້ພວກເຂົາກົດການເຊື່ອມຕໍ່.",
+            "subject": "ທ່ານໄດ້ຮັບເຊີນບໍ?",
+            "body": "Hey, ຂ້າພະເຈົ້າພຽງແຕ່ສົ່ງທ່ານໃຫ້ກັບແອັບຯ {{app}}. ກະລຸນາກວດເບິ່ງອີເມວຂອງທ່ານແລະຄລິກໃສ່ການເຊື່ອມຕໍ່ໃນນັ້ນ!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "ເປີດ Microphone",
+            "cameraTitle": "ເປີດກ້ອງຖ່າຍຮູບ",
+            "cameraAndMicrophoneTitle": "ເປີດກ້ອງແລະໄມໂຄໂຟນ"
+        }
+    }
+}

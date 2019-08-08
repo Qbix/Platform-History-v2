@@ -82,7 +82,7 @@ abstract class Base_Streams_Message extends Db_Row
 	 * @property $content
 	 * @type string
 	 * @default ""
-	 * short human-readable content, like twitter and its 140 characters
+	 * store human-readable content here
 	 */
 	/**
 	 * @property $instructions
@@ -130,10 +130,11 @@ abstract class Base_Streams_Message extends Db_Row
 	 * @method table
 	 * @static
 	 * @param {boolean} [$with_db_name=true] Indicates wheather table name should contain the database name
+	 * @param {string} [$alias=null] You can optionally provide an alias for the table to be used in queries
  	 * @return {string|Db_Expression} The table name as string optionally without database name if no table sharding
 	 * was started or Db_Expression class with prefix and database name templates is table was sharded
 	 */
-	static function table($with_db_name = true)
+	static function table($with_db_name = true, $alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', 'Streams', 'indexes', 'Message', false)) {
 			return new Db_Expression(($with_db_name ? '{$dbname}.' : '').'{$prefix}'.'message');
@@ -144,7 +145,8 @@ abstract class Base_Streams_Message extends Db_Row
   			if (!$with_db_name)
   				return $table_name;
   			$db = Db::connect('Streams');
-  			return $db->dbName().'.'.$table_name;
+			$alias = isset($alias) ? ' '.$alias : '';
+  			return $db->dbName().'.'.$table_name.$alias;
 		}
 	}
 	/**
@@ -164,20 +166,21 @@ abstract class Base_Streams_Message extends Db_Row
 	 * @static
 	 * @param {string|array} [$fields=null] The fields as strings, or array of alias=>field.
 	 *   The default is to return all fields of the table.
-	 * @param {string|array} [$alias=null] The tables as strings, or array of alias=>table.
+	 * @param {string} [$alias=null] Table alias.
 	 * @return {Db_Query_Mysql} The generated query
 	 */
 	static function select($fields=null, $alias = null)
 	{
 		if (!isset($fields)) {
 			$fieldNames = array();
+			$a = isset($alias) ? $alias.'.' : '';
 			foreach (self::fieldNames() as $fn) {
-				$fieldNames[] = $fn;
+				$fieldNames[] = $a .  $fn;
 			}
 			$fields = implode(',', $fieldNames);
 		}
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->select($fields, self::table().' '.$alias);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->select($fields, self::table(true, $alias));
 		$q->className = 'Streams_Message';
 		return $q;
 	}
@@ -191,8 +194,8 @@ abstract class Base_Streams_Message extends Db_Row
 	 */
 	static function update($alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->update(self::table().' '.$alias);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->update(self::table(true, $alias));
 		$q->className = 'Streams_Message';
 		return $q;
 	}
@@ -207,8 +210,8 @@ abstract class Base_Streams_Message extends Db_Row
 	 */
 	static function delete($table_using = null, $alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->delete(self::table().' '.$alias, $table_using);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->delete(self::table(true, $alias), $table_using);
 		$q->className = 'Streams_Message';
 		return $q;
 	}
@@ -223,8 +226,8 @@ abstract class Base_Streams_Message extends Db_Row
 	 */
 	static function insert($fields = array(), $alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->insert(self::table().' '.$alias, $fields);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->insert(self::table(true, $alias), $fields);
 		$q->className = 'Streams_Message';
 		return $q;
 	}
@@ -734,7 +737,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".content");
-		if (strlen($value) > 1023)
+		if (strlen($value) > 4095)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".content");
 		return array('content', $value);			
 	}
@@ -746,7 +749,7 @@ return array (
 	function maxSize_content()
 	{
 
-		return 1023;			
+		return 4095;			
 	}
 
 	/**
@@ -760,7 +763,7 @@ return array (
   0 => 
   array (
     0 => 'varchar',
-    1 => '1023',
+    1 => '4095',
     2 => '',
     3 => false,
   ),
@@ -788,7 +791,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".instructions");
-		if (strlen($value) > 4092)
+		if (strlen($value) > 8191)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".instructions");
 		return array('instructions', $value);			
 	}
@@ -800,7 +803,7 @@ return array (
 	function maxSize_instructions()
 	{
 
-		return 4092;			
+		return 8191;			
 	}
 
 	/**
@@ -814,7 +817,7 @@ return array (
   0 => 
   array (
     0 => 'varchar',
-    1 => '4092',
+    1 => '8191',
     2 => '',
     3 => false,
   ),

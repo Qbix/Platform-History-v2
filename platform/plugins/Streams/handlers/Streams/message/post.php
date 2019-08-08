@@ -34,8 +34,14 @@ function Streams_message_post () {
 	}
 
 	$type = $_REQUEST['type'];
-	if (!Q_Config::get("Streams", "types", $stream->type, "messages", $type, 'post', false)) {
+	if (!Streams_Stream::getConfigField($stream->type, "messages", $type, 'post', false)) {
 		throw new Q_Exception("This app doesn't support directly posting messages of type '$type' for streams of type '{$stream->type}'");
+	}
+	
+	if (Streams_Stream::getConfigField(
+		$stream->type, "messages", "$type", 'autosubscribe', false
+	)) {
+		$stream->subscribe();
 	}
 
 	$result = Streams_Message::post(

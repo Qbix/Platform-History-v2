@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "اضغط للدفع"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: تمت معالجة النفقات لـ {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "شكرًا لك على دفعتك إلى {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} مشترك في {{plan.title}}",
+        "YouSubscribedTo": "لقد اشتركت في {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "معلومات عن النظام",
+        "PaymentMethod": "طريقة الدفع او السداد",
+        "ContactInfo": "معلومات الاتصال",
+        "Pay": "دفع"
+    },
+    "credits": {
+        "InviteAcceptedBy": "تم قبول الدعوة بواسطة {{1}}",
+        "YouHaveCreditsToStart": "لديك {{1}} ائتمانات للبدء"
+    },
+    "history": {
+        "Date": "تاريخ",
+        "Amount": "كمية",
+        "Description": "وصف",
+        "Client": "عميل",
+        "To": "إلى",
+        "From": "من عند",
+        "HistoryEmpty": "لا يوجد لديك بيانات حتى الآن"
+    },
+    "subscriptions": {
+        "infoTitle": "ضبط معلومات الدفع",
+        "confirm": {
+            "title": "بدء الاشتراك",
+            "message": "هل ترغب في الاشتراك في {{title}}؟",
+            "ok": "حسنا",
+            "cancel": "إلغاء"
+        }
+    },
+    "payments": {
+        "infoTitle": "ضبط معلومات الدفع",
+        "confirm": {
+            "title": "أتم عملية الدفع",
+            "message": "هل توافق على الدفع {{symbol}} {{amount}}؟",
+            "ok": "حسنا",
+            "cancel": "إلغاء"
+        }
+    }
+}

@@ -38,11 +38,7 @@ UPDATE {$prefix}related_to
 SET toStreamName = REPLACE(toStreamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE toStreamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}rule
-SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
-WHERE streamName LIKE "Places/timeslot/%";
-
-UPDATE {$prefix}sent
+UPDATE {$prefix}subscription_rule
 SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE streamName LIKE "Places/timeslot/%";
 
@@ -58,6 +54,6 @@ UPDATE {$prefix}subscription
 SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE streamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}total
+UPDATE {$prefix}message_total
 SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE streamName LIKE "Places/timeslot/%";

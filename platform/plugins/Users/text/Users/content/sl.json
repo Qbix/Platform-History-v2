@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "Vpiši se",
+        "LogOut": "izpisati"
+    },
+    "activate": {
+        "SetAsPrimary": "Nastavite {{1}} kot moj primarni {{2}}",
+        "ChoosePassPhrase": "Izberite <strong>geslo, s katerim se<\/strong> želite prijaviti. <br> Preprosta fraza, sestavljena iz nekaj besed, ki jih boste zlahka zapomnili.",
+        "ChoosePassPhraseSeeSuggestions": "Izberite dobro <strong>geslo,<\/strong> da zaščitite svoj račun. Oglejte si predloge za nekaj idej.",
+        "LogOutAndTryAgain": "Odjavite se in poskusite znova",
+        "IfYouFeel": "Če menite, da se je nekaj zgodilo, lahko",
+        "SetIdentifierButtonTitle": "začeti znova"
+    },
+    "session": {
+        "GetStarted": "Začeti"
+    },
+    "authorize": {
+        "GetStarted": "Začeti",
+        "Authorize": "Odobri",
+        "TermsLabel": "Prebral sem in se strinjam <br> do {{link}}",
+        "TermsTitle": "Pogoji"
+    },
+    "register": {
+        "TermsLabel": "Sprejemam {{link}}",
+        "TermsTitle": "Pogoji"
+    },
+    "notifications": {
+        "title": "Dovoljenje",
+        "prompt": "Ali želite omogočiti obvestila? Prejeli boste posodobitve v realnem času o stvareh, ki vas zanimajo.",
+        "yes": "Da",
+        "no": "Ne",
+        "WelcomePleaseVerifyEmail": "Dobrodošli! Preverite svoj e-poštni naslov.",
+        "WelcomeVerifyEmail": "Dobrodošli! Preverite svoj e-poštni naslov.",
+        "ForgetPass": "Hej, ste pozabili geslo?"
+    },
+    "usersContacts": {
+        "selectLabel": "Izberite oznako.",
+        "inviteUser": "Povabi uporabnika"
+    },
+    "invalidLanguageSelected": "Izbran je bil neveljaven jezik",
+    "contacts": {
+        "dialog": {
+            "title": "Izberite stik"
+        },
+        "select": {
+            "title": "Izberite stik osebe {{displayName}}"
+        }
+    }
+}

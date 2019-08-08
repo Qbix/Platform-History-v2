@@ -52,6 +52,11 @@ class Users_Contact extends Base_Users_Contact
 		$asUserId = null,
 		$unlessExists = false)
 	{
+		Q::event('Users/Contact/addContact',
+			compact('userId', 'asUserId', 'contactUserId', 'label'),
+			'before'
+		);
+
 		foreach (array('userId', 'label', 'contactUserId') as $field) {
 			if (empty($$field)) {
 				throw new Q_Exception_RequiredField($field);
@@ -149,6 +154,11 @@ class Users_Contact extends Base_Users_Contact
 	 */
 	static function removeContact($userId, $label, $contactUserId, $asUserId = null)
 	{
+		Q::event('Users/Contact/removeContact',
+			compact('userId', 'contactUserId', 'label'),
+			'before'
+		);
+
 		foreach (array('userId', 'label', 'contactUserId') as $field) {
 			if (empty($$field)) {
 				throw new Q_Exception_RequiredField(array(

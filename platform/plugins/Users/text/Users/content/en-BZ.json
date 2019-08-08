@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "log in",
+        "LogOut": "log out"
+    },
+    "activate": {
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase</strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase</strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
+    },
+    "session": {
+        "GetStarted": "Get Started"
+    },
+    "authorize": {
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms"
+    },
+    "register": {
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
+    },
+    "notifications": {
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?"
+    },
+    "usersContacts": {
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite User"
+    },
+    "invalidLanguageSelected": "Invalid language selected",
+    "contacts": {
+        "dialog": {
+            "title": "Choose contact"
+        },
+        "select": {
+            "title": "Select contact of {{displayName}}"
+        }
+    }
+}

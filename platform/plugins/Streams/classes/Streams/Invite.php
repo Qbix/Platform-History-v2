@@ -24,6 +24,15 @@ class Streams_Invite extends Base_Streams_Invite
 	}
 	
 	/**
+	 * Returns the shareable URL corresponding to the invite
+	 * @return {string}
+	 */
+	function url()
+	{
+		return Streams::inviteUrl($this->token);
+	}
+	
+	/**
 	 * Get the invites that have been left for one or more users in some stream.
 	 * This is useful for auto-accepting them or presenting the user with a
 	 * button to accept the invite when the stream is rendered on their client.
@@ -32,31 +41,82 @@ class Streams_Invite extends Base_Streams_Invite
 	 * @param {string} $publisherId
 	 * @param {string|array|Db_Expression} $streamName
 	 * @param {string|array|Db_Expression} $userId
-	 * @return {array|Streams_Invite|null} an array of Streams_Invite objects,
-	 *  or if $streamName and $userId are strings, just returns Streams_Invite or null.
+	 * @return {array} an array of Streams_Invite objects
 	 */
-	static function forStream($publisherId, $streamName, $userId)
+	static function forStream($publisherId, $streamName, $userId = null)
 	{
-		$rows = Streams_Invite::select()->where(
+		if (!isset($userId)) {
+			$user = Users::loggedInUser()->id;
+			if ($user) {
+				return null;
+			}
+			$userId = $user->id;
+		}
+		return Streams_Invite::select()->where(
 			compact('publisherId', 'streamName', 'userId')
 		)->fetchDbRows();
-		if (!is_string($streamName) || !is_string($userId)) {
-			return $rows;
-		}
-		$row = reset($rows);
-		return $row ? $row : null;
 	}
 	
 	/**
-	 * Accept the invite and set up user's access levels
+	 * Call this to check if the user is not yet participating in the stream,
+	 * and has an invite pending. If so, a notice is set, with a button to accept
+	 * the invite.
+	 * @param {Streams_Stream} $stream The stream to check
+	 * @param {array} [$options=array()] Options to pass to Q_Response::setNotice(),
+	 *  and also these:
+	 * @param {string|array} [$options.notice] Information for the notice
+	 * @param {string|array} [$options.notice.html] HTML to display in the notice.
+	 *  This is a handlebars template which receives the fields
+	 *  {{stream...}}, {{clickOrTap}} and {{ClickOrTap}}.
+	 *  Defaults to the array("Streams/content", array("invite", "notice", "html"))
+	 * @param {array} [$options.userId=Users::loggedInUser()->id] The user to check
+	 * @return {boolean} Whether the notice was set
+	 */
+	static function possibleNotice($stream, $options = array())
+	{
+		$userId = Q::ifset($options, 'userId', null);
+		if (!$userId) {
+			$user = Users::loggedInUser(false, false);
+			if (!$user) {
+				return false;
+			}
+			$userId = $user->id;
+		}
+		if ($stream->participant()) {
+			return false;
+		}
+		$invites = Streams_Invite::forStream($stream->publisherId, $stream->name, $userId);
+		$invite = reset($invites); // for now just take the first one you find
+		if (!$invite or $invite->state !== 'pending') {
+			return false;
+		}
+		$defaultHtml = array("Streams/content", array("invite", "notice", "html"));
+		$html = Q::ifset($options, 'notice', 'html', null, $defaultHtml);
+		$button = '<button class="Streams_possibleNotice_button">';
+		$clickOrTap = Q_Text::clickOrTap(false);
+		$ClickOrTap = Q_Text::clickOrTap(true);
+		$buttonClass = 'Streams_invite_accept_button';
+		$html = Q_Handlebars::render($html, compact(
+			'stream', 'clickOrTap', 'ClickOrTap'
+		));
+		$key = 'Streams_Invite_possibleNotice';
+		$options['handler'] = $invite->url();
+		Q_Response::setNotice($key, $html, $options);
+		return true;
+	}
+	
+	/**
+	 * Accept the invite and set up the user's access levels
 	 * If invite was already accepted, this function simply returns null
 	 * @method accept
-	 * @param {array} $options Things to do with the logged-in user
+	 * @param {array} $options
+	 *  These options are passed to stream->subscribe() and stream->join()
+	 *  but can also include the following:
 	 * @param {boolean} [$options.subscribe=false]
 	 *  Whether to auto-subscribe them to the stream if not already subscribed.
 	 *  If the subscribe() call throws an exception, it is swallowed.
 	 * @param {boolean} [$options.access=true]
-	 *  Whether to upgrade their access to the stream
+	 *  Whether to upgrade the user's access to the stream, based on the invite
 	 * @return {Streams_Participant|false|null}
 	 * @throws {Users_Exception_NotLoggedIn}
 	 *  If the $this->userId is false and user is not logged in
@@ -74,12 +134,18 @@ class Streams_Invite extends Base_Streams_Invite
 			$invited->token = $this->token;
 			$invited->userId = $userId;
 			if (!$invited->retrieve() or $invited->state !== 'accepted') {
+				$quotaName = "Streams/invite";
+				$roles = Users::roles($this->publisherId, null, null, $userId);
+				$quota = Users_Quota::check($userId, $this->token, $quotaName, true, 1, $roles);
+				
 				$invited2 = new Streams_Invited();
 				$invited2->token = $invited->token;
 				$invited2->userId = $invited->userId;
 				$invited2->state = 'accepted';
 				$invited2->expireTime = $this->expireTime;
 				$invited2->save();
+
+				$quota->used(1);
 			}
 		}
 		
@@ -157,7 +223,13 @@ class Streams_Invite extends Base_Streams_Invite
 		
 		if (!empty($options['subscribe']) and !$stream->subscription($userId)) {
 			try {
-				$stream->subscribe();
+				$extra = Q::ifset($options, 'extra', array());
+				$configExtra = Streams_Stream::getConfigField($stream->type, array(
+					'invite', 'extra'
+				), array());
+				$extra = array_merge($configExtra, $extra);
+				$options['extra'] = $extra;
+				$stream->subscribe($options);
 			} catch (Exception $e) {
 				// Swallow this exception. If the caller wanted to catch
 				// this exception, hey could have written this code block themselves.

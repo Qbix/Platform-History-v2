@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "log in",
+        "LogOut": "kubuda"
+    },
+    "activate": {
+        "SetAsPrimary": "Isa {{1}} sechangu chikuru {{2}}",
+        "ChoosePassPhrase": "Sarudza <strong>mutsara wekupfuura<\/strong> kuti upinde nawo. <br> Mutsara wakajeka unoumbwa nemashoko mashomanana auchayeuka nyore nyore.",
+        "ChoosePassPhraseSeeSuggestions": "Sarudza mutsara wakanaka <strong>wokutumira<\/strong> akaunti yako. Ona mazano kune mamwe mazano.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "Kana iwe uchinzwa chimwe chinhu chakakanganisika, unogona",
+        "SetIdentifierButtonTitle": "tanga patsva"
+    },
+    "session": {
+        "GetStarted": "Tanga"
+    },
+    "authorize": {
+        "GetStarted": "Tanga",
+        "Authorize": "Authorize",
+        "TermsLabel": "Ndakaverenga uye ndinobvumirana <br> kuna Jehovha,",
+        "TermsTitle": "Mitemo"
+    },
+    "register": {
+        "TermsLabel": "Ndinogamuchira {{link}}",
+        "TermsTitle": "Mitemo"
+    },
+    "notifications": {
+        "title": "Chirevo",
+        "prompt": "Unoda here kugonesa maziso? Iwe uchagamuchira zororo-nguva chaiyo pamusoro pezvinhu zvaunofarira.",
+        "yes": "Ehe",
+        "no": "Aihwa",
+        "WelcomePleaseVerifyEmail": "Mauya! Ndapota chengetedza email yako.",
+        "WelcomeVerifyEmail": "Mauya! Tsirirai email yako kero.",
+        "ForgetPass": "Hei, makakanganwa your passphrase?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Sarudza"
+        },
+        "select": {
+            "title": "Sarudza mutauro we {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Ndapota sarudza shanduro.",
+        "inviteUser": "Kumbira Umushandi"
+    },
+    "invalidLanguageSelected": "Mutauro usina kukodzera wakasarudzwa"
+}

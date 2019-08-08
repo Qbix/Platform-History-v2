@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "accesso",
+        "LogOut": "disconnettersi"
+    },
+    "activate": {
+        "SetAsPrimary": "Imposta {{1}} come principale {{2}}",
+        "ChoosePassPhrase": "Scegli una <strong>passphrase<\/strong> per accedere con. <br> Una semplice frase composta da poche parole che ricorderai facilmente.",
+        "ChoosePassPhraseSeeSuggestions": "Scegli una buona <strong>pass phrase<\/strong> per proteggere il tuo account. Vedi i suggerimenti per alcune idee.",
+        "LogOutAndTryAgain": "Disconnettiti e riprova",
+        "IfYouFeel": "Se senti che qualcosa è andato storto, puoi farlo",
+        "SetIdentifierButtonTitle": "ricominciare"
+    },
+    "session": {
+        "GetStarted": "Iniziare"
+    },
+    "authorize": {
+        "GetStarted": "Iniziare",
+        "Authorize": "Autorizzare",
+        "TermsLabel": "Ho letto e sono d&#39;accordo <br> al {{link}}",
+        "TermsTitle": "condizioni"
+    },
+    "register": {
+        "TermsLabel": "Accetto {{link}}",
+        "TermsTitle": "condizioni"
+    },
+    "notifications": {
+        "title": "Autorizzazione",
+        "prompt": "Vuoi abilitare le notifiche? Riceverai aggiornamenti in tempo reale sulle cose che ti interessano.",
+        "yes": "sì",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Benvenuto! Per cortesia verifichi il suo indirizzo email.",
+        "WelcomeVerifyEmail": "Benvenuto! Verifica il tuo indirizzo email.",
+        "ForgetPass": "Ehi, hai dimenticato la passphrase?"
+    },
+    "usersContacts": {
+        "selectLabel": "Si prega di selezionare l&#39;etichetta.",
+        "inviteUser": "Invita utente"
+    },
+    "invalidLanguageSelected": "Lingua selezionata non valida",
+    "contacts": {
+        "dialog": {
+            "title": "Scegli un contatto"
+        },
+        "select": {
+            "title": "Seleziona un contatto di {{displayName}}"
+        }
+    }
+}

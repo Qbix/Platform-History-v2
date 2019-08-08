@@ -2,11 +2,14 @@
 
 function Users_device_delete($params = array())
 {
-	if (Q_Request::requireFields(array('deviceId', 'appId'))) {
+	$user = Users::loggedInUser();
+	if (!$user) {
 		return false;
 	}
+
+	$userId = $user->id;
+	Q_Request::requireFields(array('deviceId'), true);
 	$req = array_merge($_REQUEST, $params);
-	$userId = Users::loggedInUser(true)->id;
 	$deviceId = Q::ifset($req, 'deviceId', '');
 	Db::connect('Users')
 		->delete('users_device')

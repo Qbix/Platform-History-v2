@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Mea hou"
+    },
+    "labels": {
+        "Streams\/invited": "Ka poʻe i konoʻia au",
+        "Streams\/invitedMe": "ʻO wai ka mea i kono iaʻu"
+    },
+    "interests": {
+        "Filter": "He aha kāu mea hauʻoli?",
+        "CanAdd": "Inā hikiʻole iāʻoe keʻimi i kāu mea eʻimi nei, hiki iāʻoe ke hoʻonui i kahi makemake hou ma lalo nei:",
+        "TrySynonyms": "ʻAʻoleʻoe eʻike? E ho&#39;āʻo i kekahi mau&#39;ōlelo like.",
+        "AddUnderCategory": "Hoʻohui ma lalo o ka papa ...",
+        "Other": "ʻO kekahi",
+        "Unlisted": "He mea helu"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Ua kauʻia ka leka no ka loiloi mana. Hoʻopili hou i kahi hoʻokuʻu.",
+        "noOneSaid": "ʻAʻohe mea i&#39;ōlelo",
+        "closeChatButton": "Kūkākūkā pili",
+        "closeChatConfirmTitle": "Kūkā i kēia kūkākūkā?",
+        "closeChatConfirm": "Makemakeʻoe e pani i kēia kūkākūkāʻana?",
+        "closeChatConfirmYes": "Ae",
+        "closeChatConfirmNo": "Aʻole",
+        "earlierComments": "nā&#39;ōlelo mua"
+    },
+    "notifications": {
+        "*": "Kākauʻia {{& message.fields.type}} i {{& stream.fields.title}}",
+        "Streams\/chat\/message": "&#39;Ōlelo maiʻo {{&call 'avatar.displayName'}}:",
+        "Streams\/changed": "Hoʻololi i {{stream.fields.title}}",
+        "Streams\/invite": "Ua konoʻiaʻoe e [999}}",
+        "Streams\/announcement": "Hoʻolahaʻia ma {{& streams.fields.title}}",
+        "Streams\/access": "&#39;{999}} ke komo i ka awa",
+        "Streams\/chat\/edit": "Hoʻonohonohoʻia ka memo memo",
+        "Streams\/chat\/remove": "Hoʻokuʻuʻia ka memo kelepona",
+        "Streams\/closed": "Ua paniʻiaʻo {{stream.fields.title}}",
+        "Streams\/task\/progress": "Ua holomua i ka {{stream.fields.title}}",
+        "Streams\/task\/complete": "Ua pau ka hana: {{stream.fields.title}}",
+        "Streams\/task\/error": "Kuhi hewa ma: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Karere e komo"
+    },
+    "invite": {
+        "messageContent": "ʻIke &#39;{{displayName}} iāʻoe i {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "E koho i kāu mau leka",
+            "chooseAgainFromContacts": "E koho hou i nā Hoala",
+            "inviteSelectedContacts": "E koho i nā Hoala i koho",
+            "selectFromContacts": "E koho Mai nā Hoala",
+            "photo": "E kiʻi i kiʻi",
+            "photoInstruction": "Inā hiki ke kanaka i kānana i kāu QR code i mua o kāu, e kiʻi i kiʻi",
+            "to": "Ki: {{Stream Title}}",
+            "go": "E hele",
+            "title": "Kāhea",
+            "placeholder": "Ka helu inoa a iʻole ka leka uila",
+            "orInvite": "E hōʻuluʻulu i nā poʻe ma ka hoʻohanaʻana i:",
+            "QR": "{{ClickOrTap}} e hana i ka QR code",
+            "QRtitle": "E nānā i kēia QR code",
+            "QRscanned": "Ua nānā lākou iā ia!",
+            "byEmail": "Email",
+            "byText": "Kākau",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "E nānā, e nānā i kēia",
+            "PleaseVisitLink": "Eʻoluʻolu e nānā i kēia loulou:",
+            "InvitingYou": "Ke kono nei au iāʻoe i {{title}}",
+            "HasInvitedYou": "Ua konoʻo {{displayName}} iāʻoe i {{title}}"
+        },
+        "sms": {
+            "content": "Ua konoʻiaʻoe e [999}}. Eʻoluʻolu e paʻi {{url}}"
+        },
+        "notice": {
+            "text": "Ua konoʻiaʻoe. {{ClickOrTap}} maʻaneʻi eʻae a hoʻohui."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "Ua hoʻohanaʻo {{call 'avatar.displayName'}} i ka leka <em>{{message.fields.type}}<\/em> i {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} i {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Hoʻounaʻia nā kono mai kā mākou helu, nā mea iʻikeʻoleʻia e kou mau hoaaloha. E hahai i kahi wikiwiki e hoʻomaopopo iā lākou ua hoʻouna mai ka kono mai iāʻoe, e noi ana iā lākou e kaomi i ka loulou.",
+            "confirm": "Hoʻounaʻia nā kono mai kā mākou helu, nā mea iʻikeʻoleʻia e kou mau hoaaloha. Makemakeʻoe e hoʻomau i kahi wikiwiki e hoʻomaopopo iā lākou ua hele mai ka kono mai iāʻoe, e noi ana iā lākou e kaomi i ka loulou.",
+            "check": "ʻAe, ua hoʻouna wale aku wau iāʻoe i kahi&#39;āpana i ka {{app}} taupānga. Eʻoluʻolu e nānā i kāu sms a kaomi i ka loulou!"
+        },
+        "email": {
+            "alert": "Kāheaʻia nā leka mai ko mākou kaiaulu, nā mea iʻikeʻoleʻia e kou mau hoaaloha. E hahai i kahi wikiwiki e hoʻomaopopo iā lākou ua hoʻouna mai ka kono mai iāʻoe, e noi ana iā lākou e kaomi i ka loulou.",
+            "confirm": "Kāheaʻia nā leka mai ko mākou kaiaulu, nā mea iʻikeʻoleʻia e kou mau hoaaloha. Makemakeʻoe e hoʻomau i kahi wikiwiki e hoʻomaopopo iā lākou ua hele mai ka kono mai iāʻoe, e noi ana iā lākou e kaomi i ka loulou.",
+            "subject": "Loaʻa iāʻoe kahi kono?",
+            "body": "ʻAe, ua hoʻouna wale aku wau iāʻoe i kahi&#39;āpana i ka {{app}} taupānga. Eʻoluʻolu e paʻi i kāu leka uila a kāomi i ka loulou i laila!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "E ho&#39;āla i kahi kani",
+            "cameraTitle": "E ho&#39;āla i ka kamera",
+            "cameraAndMicrophoneTitle": "E ho&#39;āla i ka kamera a me ke kani"
+        }
+    }
+}

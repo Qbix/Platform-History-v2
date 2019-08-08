@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "entrar",
+        "LogOut": "sair"
+    },
+    "activate": {
+        "SetAsPrimary": "Defina {{1}} como meu principal {{2}}",
+        "ChoosePassPhrase": "Escolha uma <strong>frase secreta<\/strong> para <strong>efetuar<\/strong> login. <br> Uma frase simples que consiste em algumas palavras que você irá lembrar facilmente.",
+        "ChoosePassPhraseSeeSuggestions": "Escolha uma boa <strong>frase secreta<\/strong> para proteger sua conta. Veja as sugestões para algumas ideias.",
+        "LogOutAndTryAgain": "Sair e tentar novamente",
+        "IfYouFeel": "Se você sente que algo deu errado, você pode",
+        "SetIdentifierButtonTitle": "recomeçar"
+    },
+    "session": {
+        "GetStarted": "Iniciar"
+    },
+    "authorize": {
+        "GetStarted": "Iniciar",
+        "Authorize": "Autorizar",
+        "TermsLabel": "eu li e concordo <br> para o {{link}}",
+        "TermsTitle": "Termos"
+    },
+    "register": {
+        "TermsLabel": "Eu aceito o {{link}}",
+        "TermsTitle": "Termos"
+    },
+    "notifications": {
+        "title": "Permissão",
+        "prompt": "Você quer ativar as notificações? Você receberá atualizações em tempo real sobre as coisas de que gosta.",
+        "yes": "sim",
+        "no": "Não",
+        "WelcomePleaseVerifyEmail": "Bem vinda! Por favor verifique seu endereço de email.",
+        "WelcomeVerifyEmail": "Bem vinda! Verifique seu endereço de e-mail.",
+        "ForgetPass": "Ei, esqueceu sua senha?"
+    },
+    "usersContacts": {
+        "selectLabel": "Por favor, selecione o rótulo.",
+        "inviteUser": "Convidar Usuário"
+    },
+    "invalidLanguageSelected": "Idioma inválido selecionado",
+    "contacts": {
+        "dialog": {
+            "title": "Escolha contato"
+        },
+        "select": {
+            "title": "Selecione o contato de {{displayName}}"
+        }
+    }
+}

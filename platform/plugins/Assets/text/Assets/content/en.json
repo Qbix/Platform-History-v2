@@ -1,6 +1,49 @@
 {
-  "browsertab": {
-    "html": "{{button}}",
-    "button": "Tap to pay"
-  }
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tap to pay"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Info about order",
+        "PaymentMethod": "Payment method",
+        "ContactInfo": "Contact info",
+        "Pay": "Pay"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Invite accepted by {{1}}",
+        "YouHaveCreditsToStart": "You have {{1}} credits to start"
+    },
+    "history": {
+        "Date": "Date",
+        "Amount": "Amount",
+        "Description": "Description",
+        "Client": "Client",
+        "To": "to",
+        "From": "from",
+        "HistoryEmpty": "You have no data yet"
+    },
+    "subscriptions": {
+        "infoTitle": "Set Payment Information",
+        "confirm": {
+            "title": "Start Subscription",
+            "message": "Would you like to subscribe to {{title}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
+        }
+    },
+    "payments": {
+        "infoTitle": "Set Payment Information",
+        "confirm": {
+            "title": "Make a Payment",
+            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
+        }
+    }
 }

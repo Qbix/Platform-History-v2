@@ -20,6 +20,7 @@
  * @param {String} [options.top='middle'] top is a Vertical position of the overlay. May have 'middle' value to be centered vertically or have a percentage or absolute (pixels) value of offset from the top border of 'alignParent'. Optional
  * @param {DOMElement} [options.alignParent]  Can be DOM element, jQuery object or jQuery selector.
  * If provided overlay will be positioned relatively to that element. If null, overlay will be positioned considering window dimensions. Optional.
+ * @param {DOMElement} [options.adjustPositionMs=500] How many milliseconds between adjusting position interval
  * @param {Object} [options.loadUrl={}] options to override for the call to Q.loadUrl
  * @param {Q.Event} [options.beforeLoad] beforeLoad Q.Event or function which is called before overlay is loaded (shown).
  * @param {Q.Event} [options.onLoad] onLoad occurs when overlay has been loaded (shown).
@@ -44,16 +45,20 @@ Q.Tool.jQuery('Q/overlay',
 
 			var ap = o.alignParent && (o.alignParent[0] || o.alignParent);
 			var apr = ap && ap.getBoundingClientRect();
-			var br = document.body.getBoundingClientRect();
+			var br = {
+				left: 0,
+				top: 0,
+				right: Q.Pointer.windowWidth(),
+				bottom: Q.Pointer.windowHeight()
+			};
 			var sl = ap ? apr.left : -br.left;
-
 			var st = ap ? apr.top : -br.top;
 			// if dialog element have position=fixed - it means it positioned related to viewport
 			// It means that position independent of scrolls of all ancestors.
 			st = $this.css("position") === "fixed" ? 0 : st;
 
-			var sw = ap ? apr.right - apr.left : Q.Pointer.windowWidth();
-			var sh = ap ? apr.bottom - apr.top : Q.Pointer.windowHeight();
+			var sw = ap ? apr.right - apr.left : br.right - br.left;
+			var sh = ap ? apr.bottom - apr.top : br.bottom - br.top;
 
 			var diff = 2;
 			if (($this.previousWidth === undefined) || (Math.abs(width - $this.previousWidth) > diff)) {
@@ -121,17 +126,26 @@ Q.Tool.jQuery('Q/overlay',
 					left: $body.css('left'),
 					top: $body.css('top')
 				};
-				var hs = document.documentElement.style;
-				var sl = (hs.width === '100%' && hs.overflowX === 'hidden')
-					? 0
-					: Q.Pointer.scrollLeft();
-				var st = (hs.height === '100%' && hs.overflowY === 'hidden')
-					? 0
-					: Q.Pointer.scrollTop();
-				$body.css({
-					left: -sl + 'px',
-					top: -st + 'px'
-				}).addClass('Q_preventScroll');
+				setTimeout(function _fixBody() {
+					$body.addClass('Q_preventScroll')
+					var isInput = $(document.activeElement).is(":input");
+					if (isInput) {
+						// keyboard is visible or not applicable, do nothing for now
+						setTimeout(_fixBody, 300);
+						return;
+					}
+					var hs = document.documentElement.style;
+					var sl = (hs.width === '100%' && hs.overflowX === 'hidden')
+						? 0
+						: Q.Pointer.scrollLeft();
+					var st = (hs.height === '100%' && hs.overflowY === 'hidden')
+						? 0
+						: Q.Pointer.scrollTop();
+					$body.css({
+						left: -sl + 'px',
+						top: -st + 'px'
+					});
+				}, 100);
 				var oom = data.options.mask;
 				var mcn = (typeof oom === 'string') ? ' ' + oom : '';
 				if (data.options.fadeInOut)
@@ -199,13 +213,20 @@ Q.Tool.jQuery('Q/overlay',
 			},
 			close: function(e)
 			{
+				if (e) {
+					$.Event(e).preventDefault();
+				}
+				Q.Pointer.stopHints($this[0]);
+				Q.Pointer.cancelClick();
 				dialogs.pop();
 				var data = $this.data('Q/overlay');
 				var $html = $('html');
 				if (data.options.htmlClass && !data.htmlHadClass) {
 					$html.removeClass(data.options.htmlClass);
 				}
-				$('body').removeClass('Q_preventScroll').css(data.bodyStyle);
+				setTimeout(function () {
+					$('body').removeClass('Q_preventScroll').css(data.bodyStyle);	
+				}, 500);
 				$('html,body').scrollTop(data.documentScrollTop)
 					.scrollLeft(data.documentScrollLeft);
 				if (!data.options.noClose) {
@@ -240,9 +261,6 @@ Q.Tool.jQuery('Q/overlay',
 					}
 					Q.handle(data.options.onClose, $this, [$this]);
 				}
-				if (e) $.Event(e).preventDefault();
-				Q.Pointer.stopHints($this[0]);
-				Q.Pointer.cancelClick();
 			},
 			calculatePosition: function () {
 				calculatePosition($this);
@@ -564,24 +582,19 @@ function _loadUrl(o, cb) {
 function _handlePosAndScroll(o)
 {
 	var $this = this;
-	var ots = $('.Q_title_slot', $this);
-	var ods = $('.Q_dialog_slot', $this);
 	var parent = $this.parent();
 	var topMargin = 0, bottomMargin = 0, parentHeight = 0;
 	var wasVertical = null; // for touch devices
 	var inputWasFocused = false;
 
-	var contentsWrapper = null, contentsLength = 0;
-
 	if (interval) {
 		clearInterval(interval);
 	}
 
-	interval = setInterval(_adjustPosition, 100);
+	interval = setInterval(_adjustPosition, o.adjustPositionMs || 500);
 	_adjustPosition();
 
 	function _adjustPosition() {
-		var maxContentsHeight;
 		var isInput = $(document.activeElement).is(":input");
 		if (isInput) {
 			inputWasFocused = true;
@@ -589,62 +602,64 @@ function _handlePosAndScroll(o)
 				inputWasFocused = false;
 			}, 400);
 		}
-		if ($this.css('display') === 'block')
-		{
-			topMargin = o.topMargin || 0;
-			parentHeight = (!o.alignByParent || parent[0] === document.body)
-				? Q.Pointer.windowHeight()
-				: parent.height();
-			if (typeof(topMargin) === 'string') // percentage
-				topMargin = Math.round(parseInt(topMargin) / 100 * parentHeight);
-			bottomMargin = o.bottomMargin || 0;
-			if (typeof(bottomMargin) === 'string') // percentage
-				bottomMargin = Math.round(parseInt(bottomMargin) / 100 * parentHeight);
-
-			var rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
-			var outerWidth = $this.outerWidth();
-			if (!o.noCalculatePosition
-				&& (!Q.info.isTouchscreen || !inputWasFocused)) {
-				$this.data('Q/overlay').calculatePosition();
-			}
-
-			if (!o.fullscreen && o.topMargin !== undefined) {
-				var maxHeight = parentHeight - topMargin - bottomMargin;
-				var $ts = $this.find('.Q_title_slot');
-				if ($ts.is(":visible")) {
-					maxHeight -= $ts.height();
-				}
-				var $ds = $this.find('.Q_dialog_slot');
-				var atBottom = ($ds.scrollTop() >= $ds[0].scrollHeight - $ds[0].clientHeight);
-				$ds.css('max-height', maxHeight + 'px');
-				if ($ds.hasClass('Q_scrollToBottom') && atBottom) {
-					$ds.scrollTop($ds[0].scrollHeight - $ds[0].clientHeight);
-				}
-			}
-
-			// also considering orientation
-			if (Q.info.isTouchscreen)
-			{
-				if (!wasVertical)
-					wasVertical = Q.info.isVertical;
-				if (Q.info.isVertical !== wasVertical)
-				{
-					wasVertical = Q.info.isVertical;
-					var topPos = o.topMargin;
-					if (topPos.indexOf('%') !== -1) {
-						topPos = parseInt(topPos) / 100 * Q.Pointer.windowHeight();
-					}
-					var noticeSlot = $('#notices_slot');
-					if (noticeSlot.length && noticeSlot.outerHeight() >= topPos) {
-						topPos += noticeSlot.outerHeight();
-					}
-					var curTop = parseInt($this.css('top'));
-					if (curTop !== 0)
-						$this.css({ 'top': Q.Pointer.scrollTop() + topPos + 'px' });
-				}
-			}
-		} else {
+		if ($this.css('display') !== 'block') {
 			clearInterval(interval);
+			$this.css('visibility', 'visible');
+			return;
+		}
+		if (isInput) {
+			$this.css('visibility', 'visible');
+			return;
+		}
+		topMargin = o.topMargin || 0;
+		parentHeight = (!o.alignByParent || parent[0] === document.body)
+			? Q.Pointer.windowHeight()
+			: parent.height();
+		if (typeof(topMargin) === 'string') // percentage
+			topMargin = Math.round(parseInt(topMargin) / 100 * parentHeight);
+		bottomMargin = o.bottomMargin || 0;
+		if (typeof(bottomMargin) === 'string') // percentage
+			bottomMargin = Math.round(parseInt(bottomMargin) / 100 * parentHeight);
+
+		if (!o.noCalculatePosition
+			&& (!Q.info.isTouchscreen || !inputWasFocused)) {
+			$this.data('Q/overlay').calculatePosition();
+		}
+
+		if (!o.fullscreen && o.topMargin !== undefined) {
+			var maxHeight = parentHeight - topMargin - bottomMargin;
+			var $ts = $this.find('.Q_title_slot');
+			if ($ts.is(":visible")) {
+				maxHeight -= $ts.height();
+			}
+			var $ds = $this.find('.Q_dialog_slot');
+			var atBottom = ($ds.scrollTop() >= $ds[0].scrollHeight - $ds[0].clientHeight);
+			$ds.css('max-height', maxHeight + 'px');
+			if ($ds.hasClass('Q_scrollToBottom') && atBottom) {
+				$ds.scrollTop($ds[0].scrollHeight - $ds[0].clientHeight);
+			}
+		}
+
+		// also considering orientation
+		if (Q.info.isTouchscreen)
+		{
+			if (!wasVertical)
+				wasVertical = Q.info.isVertical;
+			if (Q.info.isVertical !== wasVertical)
+			{
+				wasVertical = Q.info.isVertical;
+				var topPos = o.topMargin;
+				if (topPos.indexOf('%') !== -1) {
+					topPos = parseInt(topPos) / 100 * Q.Pointer.windowHeight();
+				}
+				var noticeSlot = $('#notices_slot');
+				if (noticeSlot.length && noticeSlot.outerHeight() >= topPos) {
+					topPos += noticeSlot.outerHeight();
+				}
+				var curTop = parseInt($this.css('top'));
+				if (curTop !== 0)
+					$this.css({ 'top': Q.Pointer.scrollTop() + topPos + 'px' });
+			}
 		}
 		$this.css('visibility', 'visible');
 	}
@@ -654,4 +669,4 @@ var interval;
 var bgLoaded;
 var dialogs = [];
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

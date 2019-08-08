@@ -1,0 +1,58 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "binne {{1}}"
+    },
+    "units": {
+        "meter": "meter",
+        "meters": "meter",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "myl",
+        "miles": "myl",
+        "mi": "mi",
+        "foot": "voet",
+        "feet": "voete",
+        "inches": "duim"
+    },
+    "location": {
+        "interested": "Ek stel belang in dinge wat plaasvind binne {{select}} van",
+        "update": "Dateer my ligging op",
+        "prompt": "{{ClickOrTap}} hier na <br> stel jou <br> plek",
+        "myCurrentLocation": "My huidige ligging",
+        "enterAddress": "Voer &#39;n adres in",
+        "enterPostcode": "Voer asseblief u poskode / poskode in",
+        "create": {
+            "action": "Voeg ligging by",
+            "title": "Nuwe Plek",
+            "nameYourLocation": "Noem jou plek"
+        },
+        "confirm": {
+            "title": "Stoor hierdie plek?",
+            "message": "Het jy van plan om hierdie plek weer in die toekoms te gebruik?",
+            "ok": "Ja",
+            "cancel": "Geen"
+        },
+        "add": {
+            "title": "Noem hierdie plek",
+            "placeholder": "Huis, Werk, ens.",
+            "ok": "Save"
+        },
+        "dialog": {
+            "title": "Kies Ligging"
+        },
+        "set": "Stel my ligging in"
+    },
+    "areas": {
+        "filterPlaceholder": "Enige area binne hierdie plek?",
+        "newArea": "Nuwe area",
+        "promptTitle": "Voer &#39;n naam vir die area in:",
+        "absent": "Stel asseblief die area in",
+        "error": "fout",
+        "exist": "Area bestaan reeds",
+        "addNewArea": "Voeg nuwe area by",
+        "add": "Voeg"
+    }
+}

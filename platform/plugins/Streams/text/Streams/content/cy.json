@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Eitem Newydd"
+    },
+    "labels": {
+        "Streams\/invited": "Pobl a wahoddais",
+        "Streams\/invitedMe": "Pwy a&#39;m gwahoddodd"
+    },
+    "interests": {
+        "Filter": "Beth ydych chi&#39;n ei fwynhau?",
+        "CanAdd": "Os na allwch ddod o hyd i&#39;r hyn rydych chi&#39;n chwilio amdano, gallwch ychwanegu llog newydd isod:",
+        "TrySynonyms": "Peidiwch â&#39;i weld? Rhowch gynnig ar rai cyfystyron.",
+        "AddUnderCategory": "Ychwanegu dan y categori ...",
+        "Other": "Arall",
+        "Unlisted": "Heb ei restru"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Mae&#39;r neges wedi&#39;i nodi ar gyfer adolygiad gweinyddol. Tapiwch eto i anfflag.",
+        "noOneSaid": "Nid oes neb wedi dweud dim",
+        "closeChatButton": "Sgwrs agos",
+        "closeChatConfirmTitle": "Caewch y sgwrs hon?",
+        "closeChatConfirm": "Ydych chi&#39;n siŵr eich bod am gau&#39;r sgwrs hon?",
+        "closeChatConfirmYes": "Ydw",
+        "closeChatConfirmNo": "Na",
+        "earlierComments": "sylwadau cynharach",
+        "Subscribed": "Hysbysiadau Munud",
+        "Unsubscribed": "Cael Hysbysiadau",
+        "dontHavePermissionJoinConversation": "Nid oes gennych ganiatâd i ymuno â&#39;r sgwrs hon.",
+        "startedConversation": "cychwyn sgwrs",
+        "RealTimeCall": "Galwad Amser Real"
+    },
+    "notifications": {
+        "*": "Neges {{& message.fields.type}} i {{& stream.fields.title}}",
+        "Streams\/chat\/message": "Dywedodd {{&call 'avatar.displayName'}}:",
+        "Streams\/changed": "Newidiadau yn {{stream.fields.title}}",
+        "Streams\/invite": "Fe&#39;ch gwahoddwyd i {{& stream.fields.title}}",
+        "Streams\/announcement": "Cyhoeddiad yn {{& streams.fields.title}}",
+        "Streams\/access": "Newidiodd {{&call 'avatar.displayName'}} fynediad i nentydd",
+        "Streams\/chat\/edit": "Golygu neges sgwrsio",
+        "Streams\/chat\/remove": "Dileu neges sgwrsio",
+        "Streams\/closed": "Mae {{stream.fields.title}} wedi cau",
+        "Streams\/task\/progress": "Cynnydd wedi&#39;i wneud ar {{stream.fields.title}}",
+        "Streams\/task\/complete": "Cwblhawyd y dasg: {{stream.fields.title}}",
+        "Streams\/task\/error": "Gwall yn ystod: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Neges sy&#39;n dod i mewn",
+        "ManageEmailSubscriptions": "rheoli eich tanysgrifiadau e-bost",
+        "IfUnsubscribe": "Os ydych chi eisiau dad-danysgrifio"
+    },
+    "invite": {
+        "messageContent": "Gwahoddwyd {{displayName}} i {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Dewiswch o&#39;ch Cysylltiadau",
+            "selectFromContacts": "Dewiswch O&#39;r Cysylltiadau",
+            "photo": "Tynnu llun",
+            "photoInstruction": "Os yw&#39;r person a sganiodd eich cod QR o&#39;ch blaen, cymerwch lun ohonynt",
+            "to": "I: {{Stream Title}}",
+            "go": "Ewch",
+            "title": "Gwahodd",
+            "placeholder": "Rhif symudol neu gyfeiriad e-bost",
+            "orInvite": "Neu gwahoddwch bobl trwy ddefnyddio:",
+            "QR": "{{ClickOrTap}} i gynhyrchu cod QR",
+            "QRtitle": "Sganiwch y cod QR hwn",
+            "byEmail": "E-bost",
+            "byText": "Testun",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Roedden nhw&#39;n ei sganio!",
+            "chooseAgainFromContacts": "Dewiswch eto o gysylltiadau",
+            "inviteSelectedContacts": "Gwahodd Cysylltiadau Dethol"
+        },
+        "email": {
+            "subject": "Hey, gwiriwch hyn",
+            "PleaseVisitLink": "Ewch i&#39;r ddolen ganlynol:",
+            "InvitingYou": "Rwy&#39;n eich gwahodd i {{title}}",
+            "HasInvitedYou": "Mae {{displayName}} wedi eich gwahodd i {{title}}"
+        },
+        "sms": {
+            "content": "Fe&#39;ch gwahoddwyd i {{title}}. Defnyddiwch tap {{url}}"
+        },
+        "notice": {
+            "text": "Fe&#39;ch gwahoddwyd. {{ClickOrTap}} yma i dderbyn ac ymuno."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} postio neges <em>{{message.fields.type}}<\/em> i {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} yn {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Anfonir gwahoddiadau o&#39;n rhif ni, nad yw&#39;ch ffrindiau yn eu hadnabod eto. Dilynwch chi gyda thestun cyflym i roi gwybod iddynt y daeth y gwahoddiad atoch chi, gan ofyn iddynt glicio ar y ddolen.",
+            "confirm": "Anfonir gwahoddiadau o&#39;n rhif ni, nad yw&#39;ch ffrindiau yn eu hadnabod eto. Hoffech chi ddilyn i fyny gyda thestun cyflym i roi gwybod iddynt y daeth y gwahoddiad gennych chi, gan ofyn iddynt glicio ar y ddolen.",
+            "check": "Hey, anfonais wahoddiad atoch chi i&#39;r ap {{app}}. Gwiriwch eich sms a chliciwch ar y ddolen!"
+        },
+        "email": {
+            "alert": "Anfonir gwahoddiadau o&#39;n parth, nad yw&#39;ch ffrindiau yn eu hadnabod eto. Dilynwch chi gyda thestun cyflym i roi gwybod iddynt y daeth y gwahoddiad atoch chi, gan ofyn iddynt glicio ar y ddolen.",
+            "confirm": "Anfonir gwahoddiadau o&#39;n parth, nad yw&#39;ch ffrindiau yn eu hadnabod eto. Hoffech chi ddilyn i fyny gyda thestun cyflym i roi gwybod iddynt y daeth y gwahoddiad gennych chi, gan ofyn iddynt glicio ar y ddolen.",
+            "subject": "A gawsoch wahoddiad?",
+            "body": "Hey, anfonais wahoddiad atoch chi i&#39;r ap {{app}}. Gwiriwch eich e-bost a chliciwch ar y ddolen yno!"
+        }
+    },
+    "participating": {
+        "Title": "Teitl",
+        "Subscribed": "Tanysgrifio",
+        "Participants": "Cyfranogwyr"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Galluogi Meicroffon",
+            "cameraTitle": "Galluogi Camera",
+            "cameraAndMicrophoneTitle": "Galluogi Camera a Meicroffon",
+            "dialogTitle": "Deialog Galluogi",
+            "microphoneBtn": "Galluogi Meicroffon",
+            "cameraBtn": "Galluogi Camera",
+            "cameraAndMicrophoneBtn": "Galluogi Camera a Meicroffon"
+        }
+    }
+}

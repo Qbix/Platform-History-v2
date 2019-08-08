@@ -38,6 +38,9 @@ class Users_Email extends Base_Users_Email
 	 * @param {array} [$options.name] A human-readable name in addition to the address to send to.
 	 * @param {array} [$options.from] An array of (emailAddress, humanReadableName)
 	 * @param {array} [$options.delay] A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
+	 * @param {string} [$options.language] Preferred language
+	 * @throws Q_Exception_WrongType
+	 * @return {bool} True if success or throw exception
 	 */
 	function sendMessage(
 		$subject, 
@@ -54,13 +57,18 @@ class Users_Email extends Base_Users_Email
 		}
 		
 		if (!isset($options['html'])) {
-			$options['html'] = Q_Config::get('Q', 'views', $view, 'html', false);
+			$options['html'] = Q_Config::get('Q', 'views', $view, 'html', true);
 		}
-		
+
+		// set language if didn't defined yet
+		if (!isset($options['language'])) {
+			$options['language'] = isset($this->userId) ? Users::getLanguage($this->userId) : null;
+		}
+
 		if (is_array($subject)) {
 			$source = $subject[0];
 			$keys = $subject[1];
-			$texts = Q_Text::get($source);
+			$texts = Q_Text::get($source, array('language' => $options['language']));
 			$tree = new Q_Tree($texts);
 			$keyPath = implode('/', $keys);
 			$args = array_merge($keys, array("Missing $keyPath in $source"));
@@ -69,7 +77,7 @@ class Users_Email extends Base_Users_Email
 		
 		$app = Q::app();
 		$subject = Q_Handlebars::renderSource($subject, $fields);
-		$body = Q::view($view, $fields);
+		$body = Q::view($view, $fields, array('language' => $options['language']));
 
 		$from = Q::ifset($options, 'from', Q_Config::get('Users', 'email', 'from', null));
 		if (!isset($from)) {

@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Yam Tshiab"
+    },
+    "labels": {
+        "Streams\/invited": "Cov neeg kuv tau caw",
+        "Streams\/invitedMe": "Leej twg caw kuv"
+    },
+    "interests": {
+        "Filter": "Koj nyiam dab tsi?",
+        "CanAdd": "Yog tias koj tseem tsis pom qhov koj tab tom nrhiav, koj tuaj yeem ntxiv cov paj xyeem tshiab hauv qab no:",
+        "TrySynonyms": "Tsis pom nws? Sim qee cov lus.",
+        "AddUnderCategory": "Ntxiv rau hauv qeb ...",
+        "Other": "Lwm yam",
+        "Unlisted": "Unlisted"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Xov xwm tau flagged rau admin ntsuam xyuas. Kais ntxiv mus unflag.",
+        "noOneSaid": "Tsis muaj leej twg tau hais dab tsi",
+        "closeChatButton": "Kaw sib tham",
+        "closeChatConfirmTitle": "Kaw qhov kev sib tham no?",
+        "closeChatConfirm": "Koj puas paub tseeb tias koj xav kaw qhov kev sib tham no?",
+        "closeChatConfirmYes": "Muaj",
+        "closeChatConfirmNo": "Tsis yog",
+        "earlierComments": "ua ntej cov lus"
+    },
+    "notifications": {
+        "*": "Tsuag {{& message.fields.type}} rau {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} hais tias:",
+        "Streams\/changed": "Hloov hauv {{stream.fields.title}}",
+        "Streams\/invite": "Koj tau caw kom {{& stream.fields.title}}",
+        "Streams\/announcement": "Tshaj tawm hauv {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} hloov hloov kev nkag",
+        "Streams\/chat\/edit": "Tshaj xov edited",
+        "Streams\/chat\/remove": "Tsham xov tawm",
+        "Streams\/closed": "{{stream.fields.title}} tau kaw lawm",
+        "Streams\/task\/progress": "Kev kawm tau ntawm {{stream.fields.title}}",
+        "Streams\/task\/complete": "Tus neeg ua haujlwm tiav: {{stream.fields.title}}",
+        "Streams\/task\/error": "Yuam kev thaum: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Yav tag los lus"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} tau caw koj tuaj rau {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Xaiv los ntawm koj Tus Xov Tooj",
+            "chooseAgainFromContacts": "Xaiv dua los ntawm Cov Neeg",
+            "inviteSelectedContacts": "Caw Tej Yam Ntxim Saib Ntxim Ua",
+            "selectFromContacts": "Xaiv Los Ntawm Tus Xov Tooj",
+            "photo": "Siv yees duab",
+            "photoInstruction": "Yog hais tias tus neeg uas luam koj daim QR chaws nyob ntawm koj xub ntiag, coj ib daim duab ntawm lawv",
+            "to": "Rau: {{Stream Title}}",
+            "go": "Mus",
+            "title": "Caw",
+            "placeholder": "Txawb xov tooj lossis email chaw nyob",
+            "orInvite": "Los yog caw neeg los ntawm kev siv:",
+            "QR": "{{ClickOrTap}} kom tsim QR code",
+            "QRtitle": "Luam theej duab QR no",
+            "QRscanned": "Lawv ntaus nws!",
+            "byEmail": "Email",
+            "byText": "Cov ntawv nyeem",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hav, kos qhov no",
+            "PleaseVisitLink": "Thov mus saib qhov txuas nram no:",
+            "InvitingYou": "Kuv tabtom caw koj mus rau {{title}}",
+            "HasInvitedYou": "{{displayName}} tau caw koj tuaj rau {{title}}"
+        },
+        "sms": {
+            "content": "Koj tau caw kom {{title}}. Thov coj mus {{url}}"
+        },
+        "notice": {
+            "text": "Koj tau raug caw tuaj lawm. {{ClickOrTap}} nov los txais thiab koom nrog."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} muab lo lus <em>{{message.fields.type}}<\/em> rau {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} hauv {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Caw raug xa tawm ntawm peb tus xov tooj, uas koj cov phooj ywg tsis tau pom dua. Ua raws li cov ntawv ceev cia qhia rau lawv paub tias qhov kev caw tuaj ntawm koj, kom lawv nias qhov txuas.",
+            "confirm": "Caw raug xa tawm ntawm peb tus xov tooj, uas koj cov phooj ywg tsis tau pom dua. Koj puas xav kom ua raws li cov ntawv ceev los qhia rau lawv paub qhov kev caw tuaj ntawm koj, kom lawv nias qhov txuas.",
+            "check": "Lus hauv no teb Hav, kuv cia li xa koj ib qho kev caw rau lub {{app}} app. Thov kos koj cov sms thiab nias qhov txuas!"
+        },
+        "email": {
+            "alert": "Caw raug xa mus los ntawm peb lub npe, uas koj cov phooj ywg tsis tau pom dua. Ua raws li cov ntawv ceev cia qhia rau lawv paub tias qhov kev caw tuaj ntawm koj, kom lawv nias qhov txuas.",
+            "confirm": "Caw raug xa mus los ntawm peb lub npe, uas koj cov phooj ywg tsis tau pom dua. Koj puas xav kom ua raws li cov ntawv ceev los qhia rau lawv paub qhov kev caw tuaj ntawm koj, kom lawv nias qhov txuas.",
+            "subject": "Koj puas tau txais ib qho kev caw?",
+            "body": "Lus hauv no teb Hav, kuv cia li xa koj ib qho kev caw rau lub {{app}} app. Thov kos koj lub email thiab nias qhov txuas hauv ntawd!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Pab kom muaj Microphone",
+            "cameraTitle": "Pab kom lub koob yees duab",
+            "cameraAndMicrophoneTitle": "Pab kom lub koob yees duab thiab lub tshuab hlwb hlau"
+        }
+    }
+}

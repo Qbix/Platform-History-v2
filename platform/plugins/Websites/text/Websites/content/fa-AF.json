@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "پیوند به ترویج",
+                "startDate": "تاریخ شروع",
+                "startTime": "زمان شروع",
+                "endDate": "تاریخ پایان",
+                "endTime": "زمان پایان",
+                "budget": "بودجه"
+            },
+            "interests": {
+                "Title": "فیلتر با علاقه",
+                "FilterInterests": "شروع به تایپ کردن علاقه ..."
+            },
+            "Interest": "علاقه",
+            "Location": "محل"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "برو",
+            "PasteLinkHere": "یک پیوند را در اینجا بگذارید",
+            "BrowseTheWeb": "مرور کردن",
+            "WriteToStartConversation": "افکار خود را برای شروع گفتگو بنویسید",
+            "StartConversation": "شروع مکالمه",
+            "GotoConversation": "برو به مکالمه"
+        }
+    }
+}

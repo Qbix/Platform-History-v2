@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Докоснете, за да платите"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: таксата, обработена за {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Благодарим Ви за плащането до {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} се абонира за {{plan.title}}",
+        "YouSubscribedTo": "Абонирани сте за {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Информация за поръчката",
+        "PaymentMethod": "Начин на плащане",
+        "ContactInfo": "Информация за контакт",
+        "Pay": "плащам"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Покана, приета от {{1}}",
+        "YouHaveCreditsToStart": "Имате {{1}} кредити за започване"
+    },
+    "history": {
+        "Date": "Дата",
+        "Amount": "Количество",
+        "Description": "описание",
+        "Client": "клиент",
+        "To": "да се",
+        "From": "от",
+        "HistoryEmpty": "Все още нямате данни"
+    },
+    "subscriptions": {
+        "infoTitle": "Задайте информация за плащане",
+        "confirm": {
+            "title": "Стартирайте абонамента",
+            "message": "Искате ли да се абонирате за {{title}}?",
+            "ok": "Добре",
+            "cancel": "Отказ"
+        }
+    },
+    "payments": {
+        "infoTitle": "Задайте информация за плащане",
+        "confirm": {
+            "title": "Направете плащане",
+            "message": "Съгласни ли сте да платите {{symbol}} {{amount}}?",
+            "ok": "Добре",
+            "cancel": "Отказ"
+        }
+    }
+}

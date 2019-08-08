@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Gabim {{status}} gjatë kërkesës",
+        "canceled": "Kërkesa është anuluar",
+        "500": "Gabim i brendshëm i serverit",
+        "404": "Nuk u gjet: {{url}}",
+        "501": "Kërkesa është ndërprerë"
+    },
+    "nonce": {
+        "sameDomain": "Sesioni skadoi. Rifresko faqen dhe provo përsëri.",
+        "otherDomain": "Kërkesa ndër-domain e bllokuar në domenin e huaj në {{baseUrl}}"
+    },
+    "words": {
+        "tap": "trokitje e lehtë",
+        "click": "click",
+        "yes": "po",
+        "no": "jo",
+        "Tap": "trokitje e lehtë",
+        "Click": "Kliko",
+        "Yes": "po",
+        "No": "jo"
+    },
+    "months": {
+        "1": "janar",
+        "2": "shkurt",
+        "3": "marsh",
+        "4": "prill",
+        "5": "Mund",
+        "6": "qershor",
+        "7": "korrik",
+        "8": "gusht",
+        "9": "shtator",
+        "10": "tetor",
+        "11": "nëntor",
+        "12": "dhjetor"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Ju lutemi të lejoni qasje në mikrofonin tuaj",
+        "record": "rekord",
+        "recording": "regjistrimi",
+        "remains": "Mbetet",
+        "maximum": "maksimal",
+        "playing": "Duke luajtur",
+        "recorded": "Recorded",
+        "clip": "kapëse",
+        "orupload": "Ose Ngarko",
+        "usethis": "Përdor këtë",
+        "discard": "heq dorë nga",
+        "encoding": "encoding"
+    },
+    "alert": {
+        "title": "vigjilent"
+    },
+    "confirm": {
+        "title": "konfirmoj",
+        "ok": "po",
+        "cancel": "jo"
+    },
+    "prompt": {
+        "title": "i menjëhershëm",
+        "ok": "shkoj"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Gabim gjatë leximit të skedarit",
+        "cameraCommands": {
+            "prompt": "Çfarë do të dëshironit të bënit?",
+            "photo": "Merrni foto të reja",
+            "library": "Zgjidh nga biblioteka"
+        },
+        "tooSmall": "Zgjidh një imazh më të madh.",
+        "cropping": {
+            "title": "Rregullo madhësinë dhe pozicionin",
+            "touchscreen": "Përdorni gishtat për të zmadhuar dhe zvarritur",
+            "notTouchscreen": "Përdorni miun dhe timonin për të zmadhuar dhe zvarritur"
+        }
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Tengill til að kynna",
+                "startDate": "Upphafsdagur",
+                "startTime": "Byrjunartími",
+                "endDate": "Loka dagsetning",
+                "endTime": "Lokatími",
+                "budget": "Fjárhagsáætlun"
+            },
+            "interests": {
+                "Title": "Sía eftir vexti",
+                "FilterInterests": "Byrjaðu að slá inn áhuga ..."
+            },
+            "Interest": "Vextir",
+            "Location": "Staðsetning"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Fara",
+            "PasteLinkHere": "Límdu tengil hér",
+            "BrowseTheWeb": "Skoða",
+            "WriteToStartConversation": "Skrifaðu hugsanir þínar til að hefja samtalið",
+            "StartConversation": "Byrjaðu samtal",
+            "GotoConversation": "Farðu í Samtöl"
+        }
+    }
+}

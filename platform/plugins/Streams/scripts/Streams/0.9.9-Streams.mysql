@@ -3,9 +3,9 @@ ADD COLUMN permissions varchar(255) DEFAULT NULL COMMENT 'JSON array of permissi
 AFTER adminLevel;
 
 CREATE TABLE {$prefix}request (
-  userId varbinary(31) NOT NULL COMMENT 'id of user who is requesting access to the stream',
   publisherId varbinary(31) NOT NULL COMMENT 'id of user who publishes the stream',
   streamName varbinary(255) NOT NULL COMMENT 'local to shard of publisherId',
+  userId varbinary(31) NOT NULL COMMENT 'id of user who is requesting access to the stream',
   readLevel int(11) DEFAULT NULL COMMENT '0=none, 10=''see'', 20=''content'', 30=''participants'', 40=''messages''',
   writeLevel int(11) DEFAULT NULL COMMENT '0=none, 10=join, 13=vote, 15=postPending, 20=post, 23=relate',
   adminLevel int(11) DEFAULT NULL COMMENT '0=none, 10=''publish'', 20=''invite'', 30=''manage'', 40=''own''',
@@ -15,4 +15,4 @@ CREATE TABLE {$prefix}request (
   insertedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on shard of publisherId',
   expireTime timestamp NULL DEFAULT NULL,
   PRIMARY KEY (publisherId,streamName,userId)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='stores requests for access to the stream on publisher id server';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='stores requests for access to the stream on publisher id server';

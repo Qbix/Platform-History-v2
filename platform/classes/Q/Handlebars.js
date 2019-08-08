@@ -88,8 +88,21 @@ handlebars.registerHelper('toCapitalized', function(text) {
 	return text.charAt(0).toUpperCase() + text.slice(1);
 });
 
-handlebars.registerHelper('interpolate', function(expression, fields) {
-	return expression.interpolate(fields);
+handlebars.registerHelper('json', function(context) {
+	if (typeof context == "object") {
+		return JSON.stringify(context);
+	}
+	return context;
+});
+
+handlebars.registerHelper('interpolate', function(expression) {
+	if (arguments.length < 2) {
+		return '';
+	}
+	var arr = Array.prototype.slice.call(arguments, 0);
+	var last = arr.pop();
+	arr.shift();
+	return expression.interpolate(Q.isEmpty(last.hash) ? arr : last.hash);
 });
 
 handlebars.registerHelper('option', function(value, html, selectedValue) {
@@ -127,11 +140,11 @@ module.exports = {
 	 * Render handlebars template
 	 * @method render
 	 * @param {string} template The template name
-	 * @param {object} data Optional. The data to render
+	 * @param {object} [fields] Optional. The fields to pass to the template.
 	 * @param {Array} partials Optional. The names of partials to load and use for rendering.
 	 * @return {string|null}
 	 */
-	render: function(tPath, data, partials) {
+	render: function(tPath, fields, partials) {
 		try {
 			if (!tPath) return null;
 			var i, tpl = this.template(tPath), part = {}, path;
@@ -148,7 +161,7 @@ module.exports = {
 					}
 				}
 			}
-			return handlebars.compile(tpl)(data, {partials: part});
+			return handlebars.compile(tpl)(fields, {partials: part});
 		} catch(e) {
 			console.warn(e);
 			throw e;
@@ -159,11 +172,11 @@ module.exports = {
 	 * Render handlebars literal source string
 	 * @method render
 	 * @param {string} content The source content
-	 * @param {object} data Optional. The data to render
+	 * @param {object} [fields] Optional. The fields to pass to the template
 	 * @param {Array} partials Optional. The names of partials to load and use for rendering.
 	 * @return {string|null}
 	 */
-	renderSource: function(content, data, partials) {
+	renderSource: function(content, fields, partials) {
 		var i, j, path, part = {};
 
 		if (partials) {
@@ -177,6 +190,6 @@ module.exports = {
 				}
 			}
 		}
-		return handlebars.compile(content)(data, {partials: part});
+		return handlebars.compile(content)(fields, {partials: part});
 	}
 };

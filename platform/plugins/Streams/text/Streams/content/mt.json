@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Punt ġdid"
+    },
+    "labels": {
+        "Streams\/invited": "Nies li stiedejt",
+        "Streams\/invitedMe": "Min stiedenni"
+    },
+    "interests": {
+        "Filter": "Xi tħobb?",
+        "CanAdd": "Jekk xorta ma tistax issib dak li qed tfittex, tista &#39;żżid interess ġdid hawn taħt:",
+        "TrySynonyms": "Ma narahiex? Ipprova xi sinonimi.",
+        "AddUnderCategory": "Żid taħt il-kategorija ...",
+        "Other": "Oħrajn",
+        "Unlisted": "Mhux elenkati"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Messaġġ ġie mmarkat għal reviżjoni admin. Tektek għal darb&#39;oħra biex toħroġ.",
+        "noOneSaid": "Ħadd ma qal xejn",
+        "closeChatButton": "Chat mill-qrib",
+        "closeChatConfirmTitle": "Agħlaq dan iċ-chat?",
+        "closeChatConfirm": "Inti żgur li trid tagħlaq dan iċ-chat?",
+        "closeChatConfirmYes": "Iva",
+        "closeChatConfirmNo": "Le",
+        "earlierComments": "kummenti preċedenti",
+        "Subscribed": "Mute Notifiki",
+        "Unsubscribed": "Ikseb Notifiki",
+        "dontHavePermissionJoinConversation": "M&#39;għandekx permess biex tissieħeb f&#39;din il-konversazzjoni.",
+        "startedConversation": "bdiet konverżazzjoni",
+        "RealTimeCall": "Sejħa f&#39;ħin Reali"
+    },
+    "notifications": {
+        "*": "Messaġġ {{& message.fields.type}} lil {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} qal:",
+        "Streams\/changed": "Bidliet f &#39;{{stream.fields.title}}",
+        "Streams\/invite": "Ġejt mistiedna għal {{& stream.fields.title}}",
+        "Streams\/announcement": "Avviż f &#39;{{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} biddel l-aċċess għan-nixxiegħa",
+        "Streams\/chat\/edit": "Messaġġ taċ-chat editjat",
+        "Streams\/chat\/remove": "Messaġġ taċ-chat jitneħħa",
+        "Streams\/closed": "{{stream.fields.title}} ingħalaq",
+        "Streams\/task\/progress": "Progress magħmul fi {{stream.fields.title}}",
+        "Streams\/task\/complete": "Kompitu komplut: {{stream.fields.title}}",
+        "Streams\/task\/error": "Żball waqt: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Messaġġ li Jidħol",
+        "ManageEmailSubscriptions": "immaniġġja l-abbonamenti bl-email tiegħek",
+        "IfUnsubscribe": "Jekk trid tabbona"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} stiednek biex {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Agħżel mill-Kuntatti tiegħek",
+            "selectFromContacts": "Agħżel Minn Kuntatti",
+            "photo": "Ħu ritratt",
+            "photoInstruction": "Jekk il-persuna li skannjat il-kodiċi QR tiegħek tkun quddiemek, ħu ritratt tagħhom",
+            "to": "Lil: {{Stream Title}}",
+            "go": "Mur",
+            "title": "Tistieden",
+            "placeholder": "Numru tal-mobile jew indirizz tal-email",
+            "orInvite": "Jew tistieden lin-nies billi tuża:",
+            "QR": "{{ClickOrTap}} biex jiġġenera kodiċi QR",
+            "QRtitle": "Scan dan il-kodiċi QR",
+            "byEmail": "Email",
+            "byText": "Test",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Huma skannjati!",
+            "chooseAgainFromContacts": "Agħżel darb&#39;oħra mill-Kuntatti",
+            "inviteSelectedContacts": "Stieden Kuntatti Magħżula"
+        },
+        "email": {
+            "subject": "Ħej, iċċekkja dan",
+            "PleaseVisitLink": "Jekk jogħġbok żur il-link li ġejja:",
+            "InvitingYou": "Qed nistiednek għal {{title}}",
+            "HasInvitedYou": "{{displayName}} stiednek biex {{title}}"
+        },
+        "sms": {
+            "content": "Int ġejt mistiedna għal {{title}}. Jekk jogħġbok vit {{url}}"
+        },
+        "notice": {
+            "text": "Int ġejt mistiedna. {{ClickOrTap}} hawn biex taċċetta u tissieħeb."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} bagħat messaġġ <em>{{message.fields.type}}<\/em> lil {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} f &#39;{{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "L-istediniet jintbagħtu min-numru tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Segwitu b&#39;test rapidu biex tgħarrafhom mill-istedina ġiet mingħandek, u titlobhom ikklikkja l-link.",
+            "confirm": "L-istediniet jintbagħtu min-numru tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Tixtieq issegwi test rapidu biex tgħarrafhom dwar l-istedina ġiet mingħandek, u titlobhom ikklikkja l-link.",
+            "check": "Ħej, jien bgħattlek biss invit għall-app {{app}}. Jekk jogħġbok iċċekkja l-sms tiegħek u kklikkja l-link!"
+        },
+        "email": {
+            "alert": "L-istediniet jintbagħtu mid-dominju tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Segwitu b&#39;test rapidu biex tgħarrafhom mill-istedina ġiet mingħandek, u titlobhom ikklikkja l-link.",
+            "confirm": "L-istediniet jintbagħtu mid-dominju tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Tixtieq issegwi test rapidu biex tgħarrafhom dwar l-istedina ġiet mingħandek, u titlobhom ikklikkja l-link.",
+            "subject": "Irċivejt stedina?",
+            "body": "Ħej, jien bgħattlek biss invit għall-app {{app}}. Jekk jogħġbok iċċekkja l-email tiegħek u kklikkja l-link hemm!"
+        }
+    },
+    "participating": {
+        "Title": "Titolu",
+        "Subscribed": "Sottoskritt",
+        "Participants": "Parteċipanti"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Enable Mikrofonu",
+            "cameraTitle": "Ikteb il-Kamera",
+            "cameraAndMicrophoneTitle": "Enable il-Kamera u l-Mikrofonu",
+            "dialogTitle": "Jippermetti djalogu",
+            "microphoneBtn": "Agħti Mikrofonu",
+            "cameraBtn": "Jippermetti l-Kamera",
+            "cameraAndMicrophoneBtn": "Agħti Kamera u Mikrofonu"
+        }
+    }
+}

@@ -8,7 +8,7 @@
 	<link rel="shortcut icon" href="<?php echo Q_Request::proxyBaseUrl(); ?>/favicon.ico" type="image/x-icon">
 	
 	<script type="text/javascript">
-		document.getElementsByTagName('html')[0].className += ' Q_js'; // better than noscript
+		document.documentElement.className += ' Q_js'; // better than noscript
 	</script>
 	
 	<!-- scripts have been moved to the bottom of the body -->
@@ -22,7 +22,7 @@
 <!-- - - - - - - - - - - - - - end dashboard slot- - - - - - - - - - - - - - - - -->
 	</div>
 	<div id="page">
-		<div id="notices_slot">
+		<div id="notices_slot" class="Q_fixed_top">
 <!-- - - - - - - - - - - - - - begin notices slot- - - - - - - - - - - - - - - - -->
 <?php echo $notices ?> 
 <!-- - - - - - - - - - - - - - end notices slot- - - - - - - - - - - - - - - - - -->

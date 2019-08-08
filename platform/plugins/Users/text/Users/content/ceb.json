@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "sulod",
+        "LogOut": "paggawas"
+    },
+    "activate": {
+        "SetAsPrimary": "Ibutang ang {{1}} isip akong pangunang {{2}}",
+        "ChoosePassPhrase": "Pagpili og usa ka <strong>hugpong<\/strong> sa pasword nga mag-log in. <br> Usa ka yano nga hugpong sa pulong nga naglangkob sa pipila ka mga pulong nga daling mahinumduman nimo.",
+        "ChoosePassPhraseSeeSuggestions": "Pagpili sa usa ka maayo <strong>nga hugpong<\/strong> sa mga <strong>pulong<\/strong> aron mapanalipdan ang imong account Tan-awa ang mga sugyot alang sa pipila ka mga ideya.",
+        "LogOutAndTryAgain": "Paggawas ug Sulayi Pag-usab",
+        "IfYouFeel": "Kon may gibati ka nga sayop, mahimo nimo",
+        "SetIdentifierButtonTitle": "magsugod"
+    },
+    "session": {
+        "GetStarted": "Pagsugod"
+    },
+    "authorize": {
+        "GetStarted": "Pagsugod",
+        "Authorize": "Pagtugot",
+        "TermsLabel": "Akong nabasa ug nagkauyon <br> ngadto sa {{link}}",
+        "TermsTitle": "Mga Termino"
+    },
+    "register": {
+        "TermsLabel": "Akong gidawat ang {{link}}",
+        "TermsTitle": "Mga Termino"
+    },
+    "notifications": {
+        "title": "Pagtugot",
+        "prompt": "Buot ka ba nga makapahimo sa mga pahibalo? Makadawat ka og mga update sa tinuod nga panahon mahitungod sa mga butang nga imong gimahal.",
+        "yes": "Oo",
+        "no": "Dili",
+        "WelcomePleaseVerifyEmail": "Maayo! Palihug i-verify ang imong email address.",
+        "WelcomeVerifyEmail": "Maayo! Tinoa ang imong email address.",
+        "ForgetPass": "Hoy, nakalimot ka ba sa imong passphrase?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Pilia ang kontak"
+        },
+        "select": {
+            "title": "Pagpili sa kontak sa {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Palihug pagpili og label.",
+        "inviteUser": "Pagdapit sa Gumagamit"
+    },
+    "invalidLanguageSelected": "Walay bakak nga piniling pinulongan"
+}

@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "нэвтрэн орно",
+        "LogOut": "гарах"
+    },
+    "activate": {
+        "SetAsPrimary": "Миний үндсэн {{2}} {{1}} {{1}}",
+        "ChoosePassPhrase": "Нэвтрэхийн тулд <strong>нэвтрэх хэллэгийг<\/strong> сонгоно уу. <br> Энгийн өгүүлбэр нь амархан санаж байх хэдэн үгээс бүрдэнэ.",
+        "ChoosePassPhraseSeeSuggestions": "Өөрийн акаунтаа хамгаалахын тулд сайн <strong>нэвтрэлтийн хэллэгийг<\/strong> сонгоно уу. Зарим санаануудын талаар саналыг харна уу.",
+        "LogOutAndTryAgain": "Гарах ба дахин оролдоно уу",
+        "IfYouFeel": "Хэрэв та ямар нэг зүйл буруу болсныг мэдэрч байвал та чадна",
+        "SetIdentifierButtonTitle": "эхнээс нь эхлэх"
+    },
+    "session": {
+        "GetStarted": "Эхэлцгээе"
+    },
+    "authorize": {
+        "GetStarted": "Эхэлцгээе",
+        "Authorize": "Зөвшөөрөлтэй",
+        "TermsLabel": "Би уншиж, зөвшөөрч байна <br> {{link}}",
+        "TermsTitle": "Нэр томъёо"
+    },
+    "register": {
+        "TermsLabel": "{{link}} би хүлээн зөвшөөрч байна",
+        "TermsTitle": "Нэр томъёо"
+    },
+    "notifications": {
+        "title": "Зөвшөөрөл",
+        "prompt": "Та мэдэгдлийг идэвхжүүлэхийг хүсч байна уу? Та сонирхож буй зүйлсийнхээ тухай бодит цагийн шинэчлэлийг хүлээн авах болно.",
+        "yes": "Тиймээ",
+        "no": "Үгүй",
+        "WelcomePleaseVerifyEmail": "Тавтай морил! Имэйл хаягаа баталгаажуулна уу.",
+        "WelcomeVerifyEmail": "Тавтай морил! Имэйл хаягаа баталгаажуулна уу.",
+        "ForgetPass": "Хөөе, та нэвтрэх үгээ мартсан уу?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Харилцагчийг сонгоно уу"
+        },
+        "select": {
+            "title": "{{displayName}} -г сонгох"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Шошго сонгоно уу.",
+        "inviteUser": "Хэрэглэгчийг урих"
+    },
+    "invalidLanguageSelected": "Буруу хэл сонгогдсон"
+}

@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Нова точка"
+    },
+    "labels": {
+        "Streams/invited": "Луѓе што ги поканив",
+        "Streams/invitedMe": "Кој ме покани"
+    },
+    "interests": {
+        "Filter": "Што уживате?",
+        "CanAdd": "Ако сè уште не можете да го најдете она што го барате, можете да додадете нов интерес подолу:",
+        "TrySynonyms": "Не го гледате? Пробајте некои синоними.",
+        "AddUnderCategory": "Додај под категорија ...",
+        "Other": "Друго",
+        "Unlisted": "Не се на списокот"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Пораката е обележана за административна проверка. Повторно допрете за да се ослободите.",
+        "noOneSaid": "Никој не рече ништо",
+        "closeChatButton": "Затвори разговор",
+        "closeChatConfirmTitle": "Затвори го овој разговор?",
+        "closeChatConfirm": "Дали сте сигурни дека сакате да го затворите овој разговор?",
+        "closeChatConfirmYes": "Да",
+        "closeChatConfirmNo": "Не",
+        "earlierComments": "претходни коментари",
+        "Subscribed": "Без известувања",
+        "Unsubscribed": "Добива известувања",
+        "dontHavePermissionJoinConversation": "Немате дозвола да се приклучите на овој разговор.",
+        "startedConversation": "започна разговор",
+        "RealTimeCall": "Повик во реално време"
+    },
+    "notifications": {
+        "*": "Порака {{& message.fields.type}} до {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} рече:",
+        "Streams/changed": "Промени во {{stream.fields.title}}",
+        "Streams/invite": "Бевте поканети на {{& stream.fields.title}}",
+        "Streams/announcement": "Најава во {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} променетиот прилив на пристап",
+        "Streams/chat/edit": "Обработена порака за чет",
+        "Streams/chat/remove": "Испратена порака за разговор",
+        "Streams/closed": "{{stream.fields.title}} е затворен",
+        "Streams/task/progress": "Напредок направен на {{stream.fields.title}}",
+        "Streams/task/complete": "Задача завршена: {{stream.fields.title}}",
+        "Streams/task/error": "Грешка во текот: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Дојдовна порака",
+        "ManageEmailSubscriptions": "управувајте со претплатите за е-пошта",
+        "IfUnsubscribe": "Ако сакате да се откажете"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} ве покани да {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Изберете од вашите контакти",
+            "selectFromContacts": "Изберете од контактите",
+            "photo": "Фотографирај",
+            "photoInstruction": "Ако лицето кое го скенира вашиот QR код е пред вас, земете слика од нив",
+            "to": "За: {{Stream Title}}",
+            "go": "Оди",
+            "title": "Покани",
+            "placeholder": "Мобилен број или адреса за е-пошта",
+            "orInvite": "Или покани луѓе со користење:",
+            "QR": "{{ClickOrTap}} за да генерирате QR код",
+            "QRtitle": "Скенирајте го овој QR-код",
+            "byEmail": "Е-пошта",
+            "byText": "Текст",
+            "byFacebook": "Фејсбук",
+            "byTwitter": "Твитер",
+            "QRscanned": "Тие го скенираа!",
+            "chooseAgainFromContacts": "Изберете Повторно од Контакти",
+            "inviteSelectedContacts": "Поканете ги избраните контакти"
+        },
+        "email": {
+            "subject": "Еј, провери го ова",
+            "PleaseVisitLink": "Ве молиме посетете ја следнава врска:",
+            "InvitingYou": "Ве повикувам да {{title}}",
+            "HasInvitedYou": "{{displayName}} ве покани да {{title}}"
+        },
+        "sms": {
+            "content": "Сте биле поканети на {{title}}. Те молам допрете {{url}}"
+        },
+        "notice": {
+            "text": "Сте биле поканети. {{ClickOrTap}} овде за да прифатите и да се придружите."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} испратени <em>{{message.fields.type}}</em> порака до {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} во {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Поканите се испраќаат од нашиот број, кој вашите пријатели сеуште не ги препознаваат. Следете со брз текст за да ги известите дека поканата дојде од вас, барајќи од нив да кликнат на врската.",
+            "confirm": "Поканите се испраќаат од нашиот број, кој вашите пријатели сеуште не ги препознаваат. Дали сакате да продолжите со брз текст за да ги известите дека поканата дојде од вас, барајќи од нив да кликнат на врската.",
+            "check": "Еј, ти испратив покана до апликацијата {{app}}. Ве молиме проверете ја вашата смс и кликнете на врската!"
+        },
+        "email": {
+            "alert": "Поканите се праќаат од нашиот домен, кој вашите пријатели сеуште не ги препознаваат. Следете со брз текст за да ги известите дека поканата дојде од вас, барајќи од нив да кликнат на врската.",
+            "confirm": "Поканите се праќаат од нашиот домен, кој вашите пријатели сеуште не ги препознаваат. Дали сакате да продолжите со брз текст за да ги известите дека поканата дојде од вас, барајќи од нив да кликнат на врската.",
+            "subject": "Дали добивте покана?",
+            "body": "Еј, ти испратив покана до апликацијата {{app}}. Ве молиме проверете ја вашата е-пошта и кликнете на врската таму!"
+        }
+    },
+    "participating": {
+        "Title": "Наслов",
+        "Subscribed": "Претплатени",
+        "Participants": "Учесници"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Овозможи микрофон",
+            "cameraTitle": "Овозможи камера",
+            "cameraAndMicrophoneTitle": "Овозможи камера и микрофон",
+            "dialogTitle": "Овозможување дијалог",
+            "microphoneBtn": "Овозможи микрофон",
+            "cameraBtn": "Овозможи камера",
+            "cameraAndMicrophoneBtn": "Овозможете камера и микрофон"
+        }
+    }
+}

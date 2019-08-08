@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Atingeți pentru a plăti"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: taxa procesată pentru {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Vă mulțumim pentru plata dvs. la {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} sa abonat la {{plan.title}}",
+        "YouSubscribedTo": "Ați fost abonat la {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Informații despre comandă",
+        "PaymentMethod": "Modalitate de plată",
+        "ContactInfo": "Informatii de contact",
+        "Pay": "A plati"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Invitație acceptată de {{1}}",
+        "YouHaveCreditsToStart": "Aveți la dispoziție {{1}} credite pentru a începe"
+    },
+    "history": {
+        "Date": "Data",
+        "Amount": "Cantitate",
+        "Description": "Descriere",
+        "Client": "Client",
+        "To": "la",
+        "From": "din",
+        "HistoryEmpty": "Încă nu aveți date"
+    },
+    "subscriptions": {
+        "infoTitle": "Setați informații de plată",
+        "confirm": {
+            "title": "Începe abonamentul",
+            "message": "Doriți să vă abonați la {{title}}?",
+            "ok": "O.K",
+            "cancel": "Anulare"
+        }
+    },
+    "payments": {
+        "infoTitle": "Setați informații de plată",
+        "confirm": {
+            "title": "Fa o plata",
+            "message": "Sunteți de acord să plătiți {{symbol}} {{amount}}?",
+            "ok": "O.K",
+            "cancel": "Anulare"
+        }
+    }
+}

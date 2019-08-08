@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Връзка за популяризиране",
+                "startDate": "Начална дата",
+                "startTime": "Начален час",
+                "endDate": "Крайна дата",
+                "endTime": "Крайно време",
+                "budget": "бюджет"
+            },
+            "interests": {
+                "Title": "Филтриране по интерес",
+                "FilterInterests": "Започнете да въвеждате интерес ..."
+            },
+            "Interest": "интерес",
+            "Location": "местоположение"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Отивам",
+            "PasteLinkHere": "Поставете връзка тук",
+            "BrowseTheWeb": "паса",
+            "WriteToStartConversation": "Напишете мислите си, за да започнете разговора",
+            "StartConversation": "Започнете разговор",
+            "GotoConversation": "Отидете в Разговор"
+        }
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "đăng nhập",
+        "LogOut": "đăng xuất"
+    },
+    "activate": {
+        "SetAsPrimary": "Đặt {{1}} làm {{2}} chính của tôi",
+        "ChoosePassPhrase": "Chọn một <strong>cụm từ<\/strong> để đăng nhập với. <br> Một cụm từ đơn giản bao gồm một vài từ mà bạn sẽ dễ nhớ.",
+        "ChoosePassPhraseSeeSuggestions": "Chọn một <strong>cụm từ<\/strong> tốt để bảo vệ tài khoản của bạn. Xem các đề xuất cho một số ý tưởng.",
+        "LogOutAndTryAgain": "Đăng xuất và thử lại",
+        "IfYouFeel": "Nếu bạn cảm thấy có gì đó không ổn, bạn có thể",
+        "SetIdentifierButtonTitle": "bắt đầu lại"
+    },
+    "session": {
+        "GetStarted": "Bắt đầu"
+    },
+    "authorize": {
+        "GetStarted": "Bắt đầu",
+        "Authorize": "Ủy quyền",
+        "TermsLabel": "tôi đã đọc và đồng ý <br> tới {{link}}",
+        "TermsTitle": "Điều kiện"
+    },
+    "register": {
+        "TermsLabel": "Tôi chấp nhận {{link}}",
+        "TermsTitle": "Điều kiện"
+    },
+    "notifications": {
+        "title": "Giấy phép",
+        "prompt": "Bạn có muốn bật thông báo không? Bạn sẽ nhận được cập nhật theo thời gian thực về những điều bạn quan tâm.",
+        "yes": "Vâng",
+        "no": "Không",
+        "WelcomePleaseVerifyEmail": "Chào mừng bạn Vui lòng xác nhận địa chỉ email.",
+        "WelcomeVerifyEmail": "Chào mừng bạn Xác nhận địa chỉ email của bạn.",
+        "ForgetPass": "Này, bạn đã quên mật khẩu của bạn?"
+    },
+    "usersContacts": {
+        "selectLabel": "Vui lòng chọn nhãn.",
+        "inviteUser": "Mời người dùng"
+    },
+    "invalidLanguageSelected": "Đã chọn ngôn ngữ không hợp lệ",
+    "contacts": {
+        "dialog": {
+            "title": "Chọn liên hệ"
+        },
+        "select": {
+            "title": "Chọn liên hệ của {{displayName}}"
+        }
+    }
+}

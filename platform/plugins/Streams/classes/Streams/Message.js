@@ -178,7 +178,7 @@ Streams_Message.post = function (fields, callback)
 	+"			?, ?, ?, ?, CURRENT_TIMESTAMP,"
 	+"			?, ?, ?, ?, @Streams_messageCount+1"
 	+"		);"
-	+"		INSERT INTO {$prefix}total("
+	+"		INSERT INTO {$prefix}message_total("
 	+"			publisherId, streamName, messageType, messageCount"
 	+"		)"
 	+"		VALUES("
@@ -224,7 +224,7 @@ Streams_Message.post = function (fields, callback)
 
 /**
  * Delivers the message posted to stream according to particular
- * delivery method (see: Streams_Rule.deliver). Message template is taken from views/{message.type} folder -
+ * delivery method (see: Streams_SubscriptionRule.deliver). Message template is taken from views/{message.type} folder -
  * 'email.handlebars' or 'mobile.handlebars' or 'device.handlebars' depending on delivery
  * @method deliver
  * @param {Streams.Stream} stream
@@ -244,7 +244,7 @@ Streams_Message.post = function (fields, callback)
 Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, callback) {
 	var instructions = this.getAllInstructions();
 	var fields = {
-		app: Q.app,
+		app: Q.app.name,
 		communityName: Users.communityName(),
 		stream: stream,
 		message: this,
@@ -252,6 +252,8 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		avatar: avatar,
 		config: Q.Config.getAll()
 	};
+	// set baseUrl
+	fields.baseUrl = Q.getObject("config.Q.web.appRootUrl", fields);
 	var message = this;
 	var messageType = this.fields.type;
 	var subject = Streams.Stream.getConfigField(
@@ -265,6 +267,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 	if (typeof deliver === 'string') {
 		deliver = {to: deliver};
 	}
+
 	Users.fetch(toUserId, function (err) {
 		var to = Q.Config.get(
 			['Streams', 'rules', 'deliver', deliver.to],
@@ -279,6 +282,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			deliver: deliver,
 			stream: stream,
 			streamUrl: streamUrl,
+			message: message,
 			url: message.getInstruction("url") || streamUrl,
 			icon: stream.iconUrl(80),
 			user: this,
@@ -286,6 +290,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			callback: callback
 		};
 		var result = [];
+
 		/**
 		 * @event "Streams/deliver/:messageType"
 		 * @param {Object} options for the notification delivery
@@ -298,6 +303,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		} else {
 			_afterTransform();
 		}
+
 		function _afterTransform() {
 			var w1 = [];
 			var e, m, d;
@@ -392,7 +398,10 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				viewPath = 'Streams/message/email.handlebars';
 			}
 			Users.Email.sendMessage(
-				emailAddress, o.subject, viewPath, o.fields, {html: true}, callback
+				emailAddress, o.subject, viewPath, o.fields, {
+					html: true, 
+					language: uf.preferredLanguage
+				}, callback
 			);
 			result.push({'email': emailAddress});
 		}
@@ -404,7 +413,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/mobile.handlebars';
 			}
-			Users.Mobile.sendMessage(mobileNumber, viewPath, o.fields, {}, callback);
+			Users.Mobile.sendMessage(mobileNumber, viewPath, o.fields, {language: uf.preferredLanguage}, callback);
 			result.push({'mobile': mobileNumber});
 		}
 		function _device(deviceId, callback) {
@@ -415,6 +424,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			if (!Q.Handlebars.template(viewPath)) {
 				viewPath = 'Streams/message/device.handlebars';
 			}
+
 			Users.pushNotifications(
 				toUserId, 
 				{
@@ -424,7 +434,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 					icon: o.icon
 				},
 				callback, 
-				{ view: viewPath, fields: o.fields },
+				{view: viewPath, fields: o.fields, language: uf.preferredLanguage},
 				function (device) {
 					if (deviceId && device.deviceId !== deviceId) {
 					return false;
@@ -434,24 +444,24 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		}
 		function _platform(platform, callback) {
 			var appId = Users.appInfo(platform).appId;
-			Users.AppUser.SELECT('*').WHERE({
+			Users.ExternalFrom.SELECT('*').WHERE({
 				userId: toUserId,
 				platform: platform,
 				appId: appId
-			}).execute(function (err, appusers) {
+			}).execute(function (err, externals) {
 				if (err) {
 					return callback(err);
 				}
-				var appuser = appusers[0];
+				var e = externals[0];
 				var notification = {
 					alert: o.subject,
 					href: o.url,
 					ref: message.fields.type
 				};
-				if (appuser) {
-					appuser.pushNotification(notification);
+				if (e) {
+					e.pushNotification(notification);
 				}
-				Q.handle(callback, Users, [null, appuser, notification]);
+				Q.handle(callback, Users, [null, e, notification]);
 			});
 		}
 	});

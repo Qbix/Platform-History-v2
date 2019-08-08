@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Rabta għall-promozzjoni",
+                "startDate": "Data tal-bidu",
+                "startTime": "Ħin tal-bidu",
+                "endDate": "Data tat-Tmiem",
+                "endTime": "Ħin tat-Tmiem",
+                "budget": "Baġit"
+            },
+            "interests": {
+                "Title": "Iffiltra Skond l-Interess",
+                "FilterInterests": "Ibda ittajpja interess ..."
+            },
+            "Interest": "Interess",
+            "Location": "Post"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Mur",
+            "PasteLinkHere": "Paste link hawn",
+            "BrowseTheWeb": "Fittex",
+            "WriteToStartConversation": "Ikteb il-ħsibijiet tiegħek biex tibda l-konversazzjoni",
+            "StartConversation": "Ibda l-Konversazzjoni",
+            "GotoConversation": "Mur fil-Konversazzjoni"
+        }
+    }
+}

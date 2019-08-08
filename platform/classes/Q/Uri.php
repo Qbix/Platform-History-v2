@@ -313,6 +313,24 @@ class Q_Uri
 	{
 		return isset($this->fields[$field_name]);
 	}
+
+	/**
+	 * Get the routes that should be tried in the order returned.
+	 * Merges routes from Q/routes@start, Q/routes and Q/routes@end.
+	 * Within each one, routes are sorted in reverse order,
+	 * so that later plugins can override earlier ones.
+	 * The earlier plugins can use "routes@start" and "routes@end"
+	 * to declare the priority of their routes.
+	 * @return {array} The array of $route => $info pairs.
+	 */
+	static function getRoutes()
+	{
+		$config = Q_Config::get('Q', array());
+		$routesStart = Q::reverseOrder(Q::ifset($config, 'routes@start', array()));
+		$routes = Q::reverseOrder(Q::ifset($config, 'routes', array()));
+		$routesEnd = Q::reverseOrder(Q::ifset($config, 'routes@end', array()));
+		return array_merge($routesStart, $routes, $routesEnd);
+	}
 	
 	//
 	// Internal
@@ -353,7 +371,7 @@ class Q_Uri
 			$routed_cache[$url] = $uri;
 			return $uri;
 		}
-		$routes = Q_Config::get('Q', 'routes', array());
+		$routes = self::getRoutes();
 		if (empty($routes)) {
 			return self::fromArray(array(
 				'module' => 'Q', 
@@ -390,9 +408,21 @@ class Q_Uri
 		$segments = $path ? explode('/', $path) : array();
 		$uri_fields = null;
 
+		if (substr($base_url, -11) === '/action.php') {
+			if (count($segments) < 2) {
+				return Q_Uri::fromArray(array());
+			} else {
+				return Q_Uri::fromArray(array(
+					'module' => $segments[0],
+					'action' => $segments[1]
+				));
+			}
+		}
+
 		if ($route) {
-			if (! array_key_exists($route, $routes))
+			if (! array_key_exists($route, $routes)) {
 				throw new Q_Exception_MissingRoute(compact('route'));
+			}
 			$uri_fields = self::matchSegments($route, $segments);
 		} else {
 			foreach ($routes as $pattern => $fields) {
@@ -478,7 +508,7 @@ class Q_Uri
 			return null;
 		}
 		
-		$routes = Q_Config::get('Q', 'routes', array());
+		$routes = self::getRoutes();
 		if (empty($routes)) {
 			$url = Q_Request::baseUrl($controller);
 		} else if ($route) {
@@ -892,6 +922,9 @@ class Q_Uri
 	}
 	
 	/**
+	 * May append a "Q.cacheBust" parameter to URL's querystring, and also
+	 * returns the content digest hash for that particular URL, 
+	 * if it corresponds to a file processed by the urls.php script.
 	 * This function is very useful to use with clients like PhoneGap which can
 	 * intercept URLs and load whatever locally cached files are stored in their bundle.
 	 * The urls for these files will be relative to the cache base url.
@@ -906,23 +939,51 @@ class Q_Uri
 	 * $url is used instead.
 	 * Otherwise, the url relative to cacheBaseUrl is used, making the client
 	 * load the locally cached version.
+	 * @param {string} $url The url to get the cached URL and hash for
+	 * @param {array} [$options=array()]
+	 * @param {boolean} [$options.skipCacheBaseUrl=false] If true, skips the cacheBaseUrl transformations
+	 * @return {array} array($urlWithCacheBust, $hash)
 	 */
-	static function cachedUrl($url) {
-		$timestamp = Q_Request::cacheTimestamp();
-		if (empty($timestamp)) {
-			return $url;
+	static function cachedUrlAndHash($url, $options = array()) {
+		$cacheTimestamp = Q_Request::cacheTimestamp();
+		$environment = Q_Config::get('Q', 'environment', '');
+		$config = Q_Config::get('Q', 'environments', $environment, 'urls', array());
+		if (empty(Q_Uri::$urls)) {
+			return array($url, null);
 		}
-		$urlRelativeToBase = substr($url, strlen(Q_Request::baseUrl(false)));
-		$parts = explode('/', $urlRelativeToBase);
-		$parts[] = null;
-		$tree = new Q_Tree(Q_Uri::$urls);
-		$fileTimestamp = call_user_func_array(array($tree, 'get'), $parts);
-		if (isset($fileTimestamp)
-		and $fileTimestamp <= $timestamp
+		$fileTimestamp = null;
+		$fileSHA1 = null;
+		if (!empty($config['caching']) or !empty($config['integrity'])) {
+			$parts = explode('?', $url);
+			$head = $parts[0];
+			$tail = (count($parts) > 1 ? $parts[1] : '');
+			$urlRelativeToBase = substr($head, strlen(Q_Request::baseUrl(false)));
+			$parts = explode('/', $urlRelativeToBase);
+			array_shift($parts);
+			$parts[] = null;
+			$tree = new Q_Tree(Q_Uri::$urls);
+			$info = call_user_func_array(array($tree, 'get'), $parts);
+			if (!empty($config['caching'])) {
+				$fileTimestamp = Q::ifset($info, 't', null);
+			}
+			if (!empty($config['integrity'])) {
+				$fileSHA1 = Q::ifset($info, 'h', null);
+			}
+		}
+		if ($cacheTimestamp
+		and isset($fileTimestamp)
+		and $fileTimestamp <= $cacheTimestamp
 		and self::$cacheBaseUrl) {
-			return self::$cacheBaseUrl . $urlRelativeToBase;
+			return array(self::$cacheBaseUrl . $urlRelativeToBase, $fileSHA1);
 		}
-		return $url;
+		if ($fileTimestamp) {
+			$field = Q_Config::get(Q::app(), 'response', 'cacheBustField', 'Q.cacheBust');
+			$fields = parse_str($tail);
+			$fields[$field] = $fileTimestamp;
+			$qs = http_build_query($fields);
+			return array(Q_Uri::fixUrl("$head?$qs"), $fileSHA1);
+		}
+		return array($url, $fileSHA1);
 	}
 	
 	/**

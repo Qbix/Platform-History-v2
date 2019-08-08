@@ -24,7 +24,7 @@
  * @param {string} [$fields.passphraseHash] defaults to null
  * @param {string} [$fields.emailAddress] defaults to null
  * @param {string} [$fields.mobileNumber] defaults to null
- * @param {string} [$fields.uids] defaults to "{}"
+ * @param {string} [$fields.xids] defaults to "{}"
  * @param {string} [$fields.emailAddressPending] defaults to ""
  * @param {string} [$fields.mobileNumberPending] defaults to ""
  * @param {string} [$fields.signedUpWith] defaults to ""
@@ -32,6 +32,7 @@
  * @param {string} [$fields.icon] defaults to ""
  * @param {string} [$fields.url] defaults to null
  * @param {string} [$fields.pincodeHash] defaults to null
+ * @param {string} [$fields.preferredLanguage] defaults to "en"
  */
 abstract class Base_Users_User extends Db_Row
 {
@@ -84,10 +85,10 @@ abstract class Base_Users_User extends Db_Row
 	 * 
 	 */
 	/**
-	 * @property $uids
+	 * @property $xids
 	 * @type string
 	 * @default "{}"
-	 * JSON of {platformName: [uid1, ...]}
+	 * JSON of {platformName: [xid1, ...]}
 	 */
 	/**
 	 * @property $emailAddressPending
@@ -132,6 +133,12 @@ abstract class Base_Users_User extends Db_Row
 	 * a smaller security code for when user is already logged in
 	 */
 	/**
+	 * @property $preferredLanguage
+	 * @type string
+	 * @default "en"
+	 * 
+	 */
+	/**
 	 * The setUp() method is called the first time
 	 * an object of this class is constructed.
 	 * @method setUp
@@ -163,10 +170,11 @@ abstract class Base_Users_User extends Db_Row
 	 * @method table
 	 * @static
 	 * @param {boolean} [$with_db_name=true] Indicates wheather table name should contain the database name
+	 * @param {string} [$alias=null] You can optionally provide an alias for the table to be used in queries
  	 * @return {string|Db_Expression} The table name as string optionally without database name if no table sharding
 	 * was started or Db_Expression class with prefix and database name templates is table was sharded
 	 */
-	static function table($with_db_name = true)
+	static function table($with_db_name = true, $alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', 'Users', 'indexes', 'User', false)) {
 			return new Db_Expression(($with_db_name ? '{$dbname}.' : '').'{$prefix}'.'user');
@@ -177,7 +185,8 @@ abstract class Base_Users_User extends Db_Row
   			if (!$with_db_name)
   				return $table_name;
   			$db = Db::connect('Users');
-  			return $db->dbName().'.'.$table_name;
+			$alias = isset($alias) ? ' '.$alias : '';
+  			return $db->dbName().'.'.$table_name.$alias;
 		}
 	}
 	/**
@@ -197,20 +206,21 @@ abstract class Base_Users_User extends Db_Row
 	 * @static
 	 * @param {string|array} [$fields=null] The fields as strings, or array of alias=>field.
 	 *   The default is to return all fields of the table.
-	 * @param {string|array} [$alias=null] The tables as strings, or array of alias=>table.
+	 * @param {string} [$alias=null] Table alias.
 	 * @return {Db_Query_Mysql} The generated query
 	 */
 	static function select($fields=null, $alias = null)
 	{
 		if (!isset($fields)) {
 			$fieldNames = array();
+			$a = isset($alias) ? $alias.'.' : '';
 			foreach (self::fieldNames() as $fn) {
-				$fieldNames[] = $fn;
+				$fieldNames[] = $a .  $fn;
 			}
 			$fields = implode(',', $fieldNames);
 		}
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->select($fields, self::table().' '.$alias);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->select($fields, self::table(true, $alias));
 		$q->className = 'Users_User';
 		return $q;
 	}
@@ -224,8 +234,8 @@ abstract class Base_Users_User extends Db_Row
 	 */
 	static function update($alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->update(self::table().' '.$alias);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->update(self::table(true, $alias));
 		$q->className = 'Users_User';
 		return $q;
 	}
@@ -240,8 +250,8 @@ abstract class Base_Users_User extends Db_Row
 	 */
 	static function delete($table_using = null, $alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->delete(self::table().' '.$alias, $table_using);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->delete(self::table(true, $alias), $table_using);
 		$q->className = 'Users_User';
 		return $q;
 	}
@@ -256,8 +266,8 @@ abstract class Base_Users_User extends Db_Row
 	 */
 	static function insert($fields = array(), $alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->insert(self::table().' '.$alias, $fields);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->insert(self::table(true, $alias), $fields);
 		$q->className = 'Users_User';
 		return $q;
 	}
@@ -616,7 +626,8 @@ return array (
 	 */
 	function maxSize_passphraseHash()
 	{
-		return 255;
+
+		return 255;			
 	}
 
 	/**
@@ -625,17 +636,19 @@ return array (
 	 */
 	static function column_passphraseHash()
 	{
-		return array (
-			0 => array (
-				0 => 'varchar',
-				1 => '255',
-				2 => '',
-				3 => false
-			),
-			1 => true,
-			2 => '',
-			3 => NULL
-		);
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
 	}
 
 	/**
@@ -749,41 +762,41 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_uids
+	 * @method beforeSet_xids
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_uids($value)
+	function beforeSet_xids($value)
 	{
 		if (!isset($value)) {
 			$value='';
 		}
 		if ($value instanceof Db_Expression) {
-			return array('uids', $value);
+			return array('xids', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".uids");
+			throw new Exception('Must pass a string to '.$this->getTable().".xids");
 		if (strlen($value) > 1023)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".uids");
-		return array('uids', $value);			
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".xids");
+		return array('xids', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the uids field
+	 * Returns the maximum string length that can be assigned to the xids field
 	 * @return {integer}
 	 */
-	function maxSize_uids()
+	function maxSize_xids()
 	{
 
 		return 1023;			
 	}
 
 	/**
-	 * Returns schema information for uids column
+	 * Returns schema information for xids column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_uids()
+	static function column_xids()
 	{
 
 return array (
@@ -1178,6 +1191,60 @@ return array (
 );			
 	}
 
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_preferredLanguage
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_preferredLanguage($value)
+	{
+		if (!isset($value)) {
+			return array('preferredLanguage', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('preferredLanguage', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".preferredLanguage");
+		if (strlen($value) > 3)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".preferredLanguage");
+		return array('preferredLanguage', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the preferredLanguage field
+	 * @return {integer}
+	 */
+	function maxSize_preferredLanguage()
+	{
+
+		return 3;			
+	}
+
+	/**
+	 * Returns schema information for preferredLanguage column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_preferredLanguage()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '3',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => 'en',
+);			
+	}
+
 	function beforeSave($value)
 	{
 						
@@ -1196,7 +1263,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('id', 'insertedTime', 'updatedTime', 'sessionId', 'sessionCount', 'passphraseHash', 'emailAddress', 'mobileNumber', 'uids', 'emailAddressPending', 'mobileNumberPending', 'signedUpWith', 'username', 'icon', 'url', 'pincodeHash');
+		$field_names = array('id', 'insertedTime', 'updatedTime', 'sessionId', 'sessionCount', 'passphraseHash', 'emailAddress', 'mobileNumber', 'xids', 'emailAddressPending', 'mobileNumberPending', 'signedUpWith', 'username', 'icon', 'url', 'pincodeHash', 'preferredLanguage');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

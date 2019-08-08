@@ -34,5 +34,6 @@ function Streams_userChooser_tool($options)
 	return Q_Html::input('query', '', array(
 		'class' => 'text Streams_userChooser_input', 
 		'placeholder' => $placeholder,
+		'autocomplete' => 'off'
 	));
 }

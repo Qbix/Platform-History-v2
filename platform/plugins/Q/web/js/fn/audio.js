@@ -395,18 +395,18 @@
 				}
 			},
 			text: {
-				allowMicrophoneAccess: Q.text.Users.audio.allowMicrophoneAccess,
-				record: Q.text.Users.audio.record,
-				recording: Q.text.Users.audio.recording,
-				remains: Q.text.Users.audio.remains,
-				maximum: Q.text.Users.audio.maximum,
-				playing: Q.text.Users.audio.playing,
-				recorded: Q.text.Users.audio.recorded,
-				clip: Q.text.Users.audio.clip,
-				orupload: Q.text.Users.audio.orupload,
-				usethis: Q.text.Users.audio.usethis,
-				discard: Q.text.Users.audio.discard,
-				encoding: Q.text.Users.audio.encoding
+				allowMicrophoneAccess: Q.text.Q.audio.allowMicrophoneAccess,
+				record: Q.text.Q.audio.record,
+				recording: Q.text.Q.audio.recording,
+				remains: Q.text.Q.audio.remains,
+				maximum: Q.text.Q.audio.maximum,
+				playing: Q.text.Q.audio.playing,
+				recorded: Q.text.Q.audio.recorded,
+				clip: Q.text.Q.audio.clip,
+				orupload: Q.text.Q.audio.orupload,
+				usethis: Q.text.Q.audio.usethis,
+				discard: Q.text.Q.audio.discard,
+				encoding: Q.text.Q.audio.encoding
 			}
 		},
 
@@ -675,4 +675,4 @@
 		+ '</div>'
 	);
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

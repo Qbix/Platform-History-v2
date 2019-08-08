@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Vật phẩm mới"
+    },
+    "labels": {
+        "Streams\/invited": "Những người tôi mời",
+        "Streams\/invitedMe": "Ai mời tôi"
+    },
+    "interests": {
+        "Filter": "Bạn thích gì?",
+        "CanAdd": "Nếu bạn vẫn không thể tìm thấy những gì bạn đang tìm kiếm, bạn có thể thêm một sở thích mới bên dưới:",
+        "TrySynonyms": "Đừng nhìn thấy nó? Hãy thử một số từ đồng nghĩa.",
+        "AddUnderCategory": "Thêm vào mục ...",
+        "Other": "Khác",
+        "Unlisted": "Chưa niêm yết"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Tin nhắn đã được gắn cờ để xem xét quản trị viên. Nhấn một lần nữa để unflag.",
+        "noOneSaid": "Không ai nói gì",
+        "closeChatButton": "Đóng trò chuyện",
+        "closeChatConfirmTitle": "Đóng cuộc trò chuyện này?",
+        "closeChatConfirm": "Bạn có chắc chắn muốn đóng cuộc trò chuyện này?",
+        "closeChatConfirmYes": "Vâng",
+        "closeChatConfirmNo": "Không",
+        "earlierComments": "ý kiến trước đó",
+        "Subscribed": "Thông báo tắt tiếng",
+        "Unsubscribed": "Nhận thông báo",
+        "dontHavePermissionJoinConversation": "Bạn không được phép tham gia cuộc trò chuyện này.",
+        "startedConversation": "bắt đầu một cuộc trò chuyện",
+        "RealTimeCall": "Cuộc gọi thời gian thực"
+    },
+    "notifications": {
+        "*": "Tin nhắn {{& message.fields.type}} đến {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} đã nói:",
+        "Streams\/changed": "Thay đổi trong {{stream.fields.title}}",
+        "Streams\/invite": "Bạn đã được mời tham gia {{& stream.fields.title}}",
+        "Streams\/announcement": "Thông báo trong {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} đã thay đổi quyền truy cập luồng",
+        "Streams\/chat\/edit": "Tin nhắn trò chuyện được chỉnh sửa",
+        "Streams\/chat\/remove": "Tin nhắn trò chuyện đã bị xóa",
+        "Streams\/closed": "{{stream.fields.title}} đã bị đóng",
+        "Streams\/task\/progress": "Tiến trình thực hiện vào {{stream.fields.title}}",
+        "Streams\/task\/complete": "Nhiệm vụ đã hoàn thành: {{stream.fields.title}}",
+        "Streams\/task\/error": "Lỗi trong: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Tin nhắn đến",
+        "ManageEmailSubscriptions": "quản lý đăng ký email của bạn",
+        "IfUnsubscribe": "Nếu bạn muốn hủy đăng ký"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} đã mời bạn đến {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Chọn từ Danh bạ của bạn",
+            "selectFromContacts": "Chọn từ danh bạ",
+            "photo": "Chụp một tấm",
+            "photoInstruction": "Nếu người đã quét mã QR của bạn ở trước mặt bạn, hãy chụp ảnh họ",
+            "to": "Tới: {{Stream Title}}",
+            "go": "Đi",
+            "title": "Mời gọi",
+            "placeholder": "Số điện thoại di động hoặc địa chỉ email",
+            "orInvite": "Hoặc mời mọi người bằng cách sử dụng:",
+            "QR": "{{ClickOrTap}} để tạo mã QR",
+            "QRtitle": "Quét mã QR này",
+            "byEmail": "E-mail",
+            "byText": "Bản văn",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Họ đã quét nó!",
+            "chooseAgainFromContacts": "Chọn lại từ Danh bạ",
+            "inviteSelectedContacts": "Mời các địa chỉ liên lạc được chọn"
+        },
+        "email": {
+            "subject": "Này, kiểm tra cái này",
+            "PleaseVisitLink": "Vui lòng truy cập liên kết sau:",
+            "InvitingYou": "Tôi mời bạn {{title}}",
+            "HasInvitedYou": "{{displayName}} đã mời bạn tham gia {{title}}"
+        },
+        "sms": {
+            "content": "Bạn đã được mời tham gia {{title}}. Vui lòng nhấn {{url}}"
+        },
+        "notice": {
+            "text": "Bạn đã được mời. {{ClickOrTap}} tại đây để chấp nhận và tham gia."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} đã đăng một thông báo <em>{{message.fields.type}}<\/em> lên {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} trong {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Lời mời được gửi từ số của chúng tôi, mà bạn bè của bạn chưa nhận ra. Theo dõi với một văn bản nhanh chóng để cho họ biết lời mời đến từ bạn, yêu cầu họ nhấp vào liên kết.",
+            "confirm": "Lời mời được gửi từ số của chúng tôi, mà bạn bè của bạn chưa nhận ra. Bạn có muốn theo dõi với một văn bản nhanh chóng để cho họ biết lời mời đến từ bạn, yêu cầu họ nhấp vào liên kết.",
+            "check": "Xin chào, tôi vừa gửi cho bạn lời mời đến ứng dụng {{app}}. Vui lòng kiểm tra tin nhắn của bạn và nhấp vào liên kết!"
+        },
+        "email": {
+            "alert": "Lời mời được gửi từ miền của chúng tôi mà bạn bè của bạn chưa nhận ra. Theo dõi với một văn bản nhanh chóng để cho họ biết lời mời đến từ bạn, yêu cầu họ nhấp vào liên kết.",
+            "confirm": "Lời mời được gửi từ miền của chúng tôi mà bạn bè của bạn chưa nhận ra. Bạn có muốn theo dõi với một văn bản nhanh chóng để cho họ biết lời mời đến từ bạn, yêu cầu họ nhấp vào liên kết.",
+            "subject": "Bạn đã nhận được một lời mời?",
+            "body": "Xin chào, tôi vừa gửi cho bạn lời mời đến ứng dụng {{app}}. Vui lòng kiểm tra email của bạn và nhấp vào liên kết trong đó!"
+        }
+    },
+    "participating": {
+        "Title": "Chức vụ",
+        "Subscribed": "Đã đăng ký",
+        "Participants": "Người tham gia"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Kích hoạt micrô",
+            "cameraTitle": "Kích hoạt camera",
+            "cameraAndMicrophoneTitle": "Bật máy ảnh và micrô",
+            "dialogTitle": "Kích hoạt hộp thoại",
+            "microphoneBtn": "Kích hoạt micrô",
+            "cameraBtn": "Kích hoạt camera",
+            "cameraAndMicrophoneBtn": "Bật máy ảnh và micrô"
+        }
+    }
+}

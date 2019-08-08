@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "mlebu log",
+        "LogOut": "metu"
+    },
+    "activate": {
+        "SetAsPrimary": "Setel {{1}} minangka utamaku {{2}}",
+        "ChoosePassPhrase": "Milih <strong>frasa sandhi<\/strong> kanggo mlebu. <br> Ukara sing prasaja kasebut kalebu sawetara tembung sing bakal gampang dielingake.",
+        "ChoosePassPhraseSeeSuggestions": "Pilih <strong>pass tembung<\/strong> apik kanggo nglindhungi akun. Waca saran kanggo sawetara gagasan.",
+        "LogOutAndTryAgain": "Mlebu lan Coba Maneh",
+        "IfYouFeel": "Yen sampeyan rumangsa salah, sampeyan bisa",
+        "SetIdentifierButtonTitle": "mbaleni"
+    },
+    "session": {
+        "GetStarted": "Miwiti"
+    },
+    "authorize": {
+        "GetStarted": "Miwiti",
+        "Authorize": "Panguwasa",
+        "TermsLabel": "Aku wis maca lan setuju <br> menyang {{link}}",
+        "TermsTitle": "Sarat"
+    },
+    "register": {
+        "TermsLabel": "Aku nampa {{link}}",
+        "TermsTitle": "Sarat"
+    },
+    "notifications": {
+        "title": "Ijin",
+        "prompt": "Apa sampeyan pengin mbisakake kabar? Sampeyan bakal nampa nganyari wektu nyata babagan bab sing sampeyan tresnani.",
+        "yes": "Ya",
+        "no": "Ora Ana",
+        "WelcomePleaseVerifyEmail": "Sambutan! Mangga verifikasi alamat email sampeyan.",
+        "WelcomeVerifyEmail": "Sambutan! Verifikasi alamat email sampeyan.",
+        "ForgetPass": "Hei, kowe lali sandi passphrase?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Pilih kontak"
+        },
+        "select": {
+            "title": "Pilih kontak saka {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Pilih label.",
+        "inviteUser": "Ngundang Panganggo"
+    },
+    "invalidLanguageSelected": "Basa sing ora bener dipilih"
+}

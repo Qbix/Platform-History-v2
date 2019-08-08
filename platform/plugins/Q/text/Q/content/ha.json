@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Kuskure {{status}} yayin buƙatar",
+        "canceled": "An soke umarnin soke",
+        "500": "Kuskuren na Cikin Saba",
+        "404": "Ba&#39;a samo: {{url}}",
+        "501": "Nemi katsewa"
+    },
+    "nonce": {
+        "sameDomain": "Zama ya ƙare. Sabunta shafin kuma sake gwadawa.",
+        "otherDomain": "An goge bayanan yankin guiye zuwa yankin waje a {{baseUrl}}"
+    },
+    "words": {
+        "tap": "tap",
+        "click": "danna",
+        "yes": "eh",
+        "no": "babu",
+        "Tap": "Matsa",
+        "Click": "Danna",
+        "Yes": "Ee",
+        "No": "A&#39;a"
+    },
+    "months": {
+        "1": "Janairu",
+        "2": "Fabrairu",
+        "3": "Maris",
+        "4": "Afrilu",
+        "5": "Mayu",
+        "6": "Yuni",
+        "7": "Yuli",
+        "8": "Agusta",
+        "9": "Satumba",
+        "10": "Oktoba",
+        "11": "Nuwamba",
+        "12": "Disamba"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Da fatan a bada izinin samun dama ga microphone",
+        "record": "Record",
+        "recording": "Rikodi",
+        "remains": "ya kasance",
+        "maximum": "matsakaicin",
+        "playing": "Kunna",
+        "recorded": "An yi rikodi",
+        "clip": "shirin",
+        "orupload": "Ko Upload",
+        "usethis": "Yi amfani da wannan",
+        "discard": "Zubar da",
+        "encoding": "Encoding"
+    },
+    "alert": {
+        "title": "Alert"
+    },
+    "confirm": {
+        "title": "Tabbatar",
+        "ok": "Ee",
+        "cancel": "A&#39;a"
+    },
+    "prompt": {
+        "title": "Gyarawa",
+        "ok": "Ku tafi"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Kuskuren karanta fayil",
+        "cameraCommands": {
+            "prompt": "Me kake son yi?",
+            "photo": "Ɗauki sabon hoto",
+            "library": "Zaɓi daga ɗakin karatu"
+        },
+        "tooSmall": "Da fatan a zaɓi babban hoto.",
+        "cropping": {
+            "title": "Daidaita girman da matsayi",
+            "touchscreen": "Yi amfani da yatsunsu don zuƙowa da jawo",
+            "notTouchscreen": "Yi amfani da linzamin kwamfuta &amp; motarka don zuƙowa da ja"
+        }
+    }
+}

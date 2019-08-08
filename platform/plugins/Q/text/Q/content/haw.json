@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Kuʻia [{999}} i ka manawa noi",
+        "canceled": "Ua hoʻopauʻia ka noi",
+        "500": "Kuhi hewa pūnaewele",
+        "404": "&#39;Aʻole i loaʻa: {{url}}",
+        "501": "Hoʻopilikiaʻia ka noi"
+    },
+    "nonce": {
+        "sameDomain": "Ua pau ka manawa. Hōhana hou i kaʻaoʻao a e ho&#39;āʻo hou.",
+        "otherDomain": "Ke kākoʻoʻana i kahi&#39;āpana&#39;āina cross-domain i ka&#39;āina&#39;ē ma {{baseUrl}}"
+    },
+    "words": {
+        "tap": "e pā",
+        "click": "kaomi",
+        "yes": "Ae",
+        "no": "aʻole",
+        "Tap": "Pāpā",
+        "Click": "Kaomi",
+        "Yes": "Ae",
+        "No": "Aʻole"
+    },
+    "months": {
+        "1": "Ianuali",
+        "2": "Pepeluali",
+        "3": "Malaki",
+        "4": "Apelila",
+        "5": "Mei",
+        "6": "Iune",
+        "7": "Iulai",
+        "8": "Aukake",
+        "9": "Kepakemapa",
+        "10": "Okakopa",
+        "11": "Nowemapa",
+        "12": "Kekemapa"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Eʻoluʻolu eʻae i ka hiki i kāu kani",
+        "record": "Kakau kope",
+        "recording": "Hoʻomanaʻo",
+        "remains": "koe",
+        "maximum": "maximum",
+        "playing": "Pāʻani",
+        "recorded": "Hoʻopukaʻia",
+        "clip": "kiʻi",
+        "orupload": "A iʻole hoʻouka",
+        "usethis": "E hoʻohana i kēia",
+        "discard": "E hoʻolei",
+        "encoding": "Hoʻopā&#39;ālua"
+    },
+    "alert": {
+        "title": "Alert"
+    },
+    "confirm": {
+        "title": "E hōʻoia",
+        "ok": "Ae",
+        "cancel": "Aʻole"
+    },
+    "prompt": {
+        "title": "Kūkala",
+        "ok": "E hele"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Pākuʻi helu heluhelu",
+        "cameraCommands": {
+            "prompt": "He aha kau i makemake ai e hana?",
+            "photo": "E kiʻi i kiʻi hou",
+            "library": "E koho i ka waihona"
+        },
+        "tooSmall": "Eʻoluʻolu e koho i kahi kiʻi nui aʻe.",
+        "cropping": {
+            "title": "Hoʻoholo i ka nui a me ke kūlana",
+            "touchscreen": "E hoʻohana i kou mau manamana lima e kiʻi a huki",
+            "notTouchscreen": "E hoʻohana i kāuʻiole a me ka huila e hoʻoulu a huki"
+        }
+    }
+}

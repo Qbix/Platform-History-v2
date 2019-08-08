@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Ödəniş üçün dokunun"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} üçün işlənilən ödəniş",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} üçün ödəniş etdiyiniz üçün təşəkkür edirik",
+        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} səhifəsinə abunə",
+        "YouSubscribedTo": "{{plan.title}} səhifəsinə abunə oldunuz"
+    },
+    "payment": {
+        "AboutOrder": "Sifariş haqqında məlumat",
+        "PaymentMethod": "Ödəniş üsulu",
+        "ContactInfo": "Əlaqə məlumatı",
+        "Pay": "Ödəniş"
+    },
+    "credits": {
+        "InviteAcceptedBy": "{{1}} tərəfindən qəbul edilən dəvət",
+        "YouHaveCreditsToStart": "Başlamaq üçün {{1}} kreditiniz var"
+    },
+    "history": {
+        "Date": "Tarix",
+        "Amount": "Miqdarı",
+        "Description": "Təsvir",
+        "Client": "Müştəri",
+        "To": "üçün",
+        "From": "dən",
+        "HistoryEmpty": "Hələ məlumatınız yoxdur"
+    },
+    "subscriptions": {
+        "infoTitle": "Ödəniş məlumatlarını təyin edin",
+        "confirm": {
+            "title": "Abunəliyə başlayın",
+            "message": "{{title}} səhifəsinə abunə olmaq istərdinizmi?",
+            "ok": "tamam",
+            "cancel": "Ləğv et"
+        }
+    },
+    "payments": {
+        "infoTitle": "Ödəniş məlumatlarını təyin edin",
+        "confirm": {
+            "title": "Ödəniş edin",
+            "message": "{{symbol}} {{amount}} ödəməyə razısınız?",
+            "ok": "tamam",
+            "cancel": "Ləğv et"
+        }
+    }
+}

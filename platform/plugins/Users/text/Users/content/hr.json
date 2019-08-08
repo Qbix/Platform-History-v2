@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "prijaviti se",
+        "LogOut": "odjaviti se"
+    },
+    "activate": {
+        "SetAsPrimary": "Postavi {{1}} kao moju primarnu {{2}}",
+        "ChoosePassPhrase": "Odaberite <strong>lozinku<\/strong> za prijavu. <br> Jednostavna fraza koja se sastoji od nekoliko riječi koje ćete lako zapamtiti.",
+        "ChoosePassPhraseSeeSuggestions": "Odaberite dobru <strong>frazu<\/strong> za zaštitu svog računa. Pogledajte prijedloge za neke ideje.",
+        "LogOutAndTryAgain": "Odjavite se i pokušajte ponovno",
+        "IfYouFeel": "Ako osjećate da je nešto pošlo po zlu, možete",
+        "SetIdentifierButtonTitle": "početi ispočetka"
+    },
+    "session": {
+        "GetStarted": "Započnite"
+    },
+    "authorize": {
+        "GetStarted": "Započnite",
+        "Authorize": "Odobriti",
+        "TermsLabel": "Pročitao sam i slažem se <br> do {{link}}",
+        "TermsTitle": "Pojmovi"
+    },
+    "register": {
+        "TermsLabel": "Prihvaćam {{link}}",
+        "TermsTitle": "Pojmovi"
+    },
+    "notifications": {
+        "title": "Dopuštenje",
+        "prompt": "Želite li omogućiti obavijesti? Dobivat ćete ažuriranja u stvarnom vremenu o stvarima do kojih vam je stalo.",
+        "yes": "Da",
+        "no": "Ne",
+        "WelcomePleaseVerifyEmail": "Dobrodošli! Potvrdite svoju adresu e-pošte.",
+        "WelcomeVerifyEmail": "Dobrodošli! Potvrdite svoju email adresu.",
+        "ForgetPass": "Hej, jeste li zaboravili svoju zaporku?"
+    },
+    "usersContacts": {
+        "selectLabel": "Odaberite oznaku.",
+        "inviteUser": "Pozovi korisnika"
+    },
+    "invalidLanguageSelected": "Odabran je nevažeći jezik",
+    "contacts": {
+        "dialog": {
+            "title": "Odaberite kontakt"
+        },
+        "select": {
+            "title": "Odaberite kontakt osobe {{displayName}}"
+        }
+    }
+}

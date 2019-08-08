@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Hadisoana {{status}} nandritra ny fangatahana",
+        "canceled": "Request canceled",
+        "500": "Olana amin&#39;ny servera anatiny",
+        "404": "Tsy hita: {{url}}",
+        "501": "Request not interrupted"
+    },
+    "nonce": {
+        "sameDomain": "Nivoaka ny fotoam-pitsarana. Hamafiso ilay pejy ary andramo indray.",
+        "otherDomain": "Zavatra tsy ampy \/ fanononana tsy ampy amin&#39;ny teny alemaina"
+    },
+    "words": {
+        "tap": "paompy",
+        "click": "Click",
+        "yes": "Eny",
+        "no": "tsy misy",
+        "Tap": "paompy",
+        "Click": "Tsindrio",
+        "Yes": "Eny",
+        "No": "No"
+    },
+    "months": {
+        "1": "Janoary",
+        "2": "Febroary",
+        "3": "March",
+        "4": "Aprily",
+        "5": "Mey",
+        "6": "Jona",
+        "7": "Jolay",
+        "8": "Aogositra",
+        "9": "Septambra",
+        "10": "Oktobra",
+        "11": "Novambra",
+        "12": "Desambra"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Azafady azafady azafady amin&#39;ny mikrôfao",
+        "record": "Record",
+        "recording": "peo",
+        "remains": "sisa tavela",
+        "maximum": "faratampony",
+        "playing": "milalao",
+        "recorded": "voarakitra",
+        "clip": "Clip",
+        "orupload": "Or Upload",
+        "usethis": "Ampiasao ity",
+        "discard": "hanary",
+        "encoding": "Encoding"
+    },
+    "alert": {
+        "title": "Alert"
+    },
+    "confirm": {
+        "title": "Hamarino",
+        "ok": "Eny",
+        "cancel": "No"
+    },
+    "prompt": {
+        "title": "avy hatrany",
+        "ok": "Mandehana"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Hadisoana namaky ny rakitra",
+        "cameraCommands": {
+            "prompt": "Inona no tianao atao?",
+            "photo": "Haka sary vaovao",
+            "library": "Misafidiana avy amin&#39;ny tranomboky"
+        },
+        "tooSmall": "Alefaso azafady sary lehibe kokoa.",
+        "cropping": {
+            "title": "Amboary ny habe sy ny toerana",
+            "touchscreen": "Ampiasao ny rantsan-tànanao mba hampitomboana sy hamindrana",
+            "notTouchscreen": "Ampiasao ny totozy sy ny kodiaranao mba hampitomboana sy hisintonana"
+        }
+    }
+}

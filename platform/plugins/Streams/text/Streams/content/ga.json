@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Mír Nua"
+    },
+    "labels": {
+        "Streams\/invited": "Daoine a thug cuireadh dom",
+        "Streams\/invitedMe": "Cé a thug cuireadh dom"
+    },
+    "interests": {
+        "Filter": "Cad é a thaitníonn leat?",
+        "CanAdd": "Mura féidir leat teacht ar na rudaí atá uait, is féidir leas nua a chur leis thíos:",
+        "TrySynonyms": "Ná féach air? Bain triail as roinnt comhchiallaigh.",
+        "AddUnderCategory": "Cuir faoi chatagóir ...",
+        "Other": "Eile",
+        "Unlisted": "Neamhliostaithe"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Cuireadh an teachtaireacht in iúl le haghaidh athbhreithnithe riaracháin. Tapáil arís go neamhshuim.",
+        "noOneSaid": "Ní dhearna aon duine rud ar bith",
+        "closeChatButton": "Dún comhrá",
+        "closeChatConfirmTitle": "Dún an comhrá seo?",
+        "closeChatConfirm": "An bhfuil tú cinnte gur mian leat an comhrá seo a dhúnadh?",
+        "closeChatConfirmYes": "Is féidir",
+        "closeChatConfirmNo": "Níl",
+        "earlierComments": "tuairimí níos luaithe",
+        "Subscribed": "Fógraí Mute",
+        "Unsubscribed": "Faigh Fógraí",
+        "dontHavePermissionJoinConversation": "Níl cead agat an comhrá seo a dhéanamh.",
+        "startedConversation": "thosaigh comhrá",
+        "RealTimeCall": "Glao Ama Fíor-Ama"
+    },
+    "notifications": {
+        "*": "Teachtaireacht {{& message.fields.type}} go {{& stream.fields.title}}",
+        "Streams\/chat\/message": "Dúirt {{&call 'avatar.displayName'}}:",
+        "Streams\/changed": "Athruithe i {{stream.fields.title}}",
+        "Streams\/invite": "Tugadh cuireadh duit {{& stream.fields.title}}",
+        "Streams\/announcement": "Fógra i {{& streams.fields.title}}",
+        "Streams\/access": "D&#39;athraigh {{&call 'avatar.displayName'}} rochtain srutha",
+        "Streams\/chat\/edit": "Eagarthóireacht ar an teachtaireacht chainte",
+        "Streams\/chat\/remove": "Cuireadh an teachtaireacht comhrá",
+        "Streams\/closed": "Dúnadh {{stream.fields.title}}",
+        "Streams\/task\/progress": "Dul chun cinn déanta ar {{stream.fields.title}}",
+        "Streams\/task\/complete": "Tasc críochnaithe: {{stream.fields.title}}",
+        "Streams\/task\/error": "Earráid le linn: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Teachtaireacht Isteach",
+        "ManageEmailSubscriptions": "bainistíonn tú do shíntiúis ríomhphoist",
+        "IfUnsubscribe": "Más mian leat díliostáil"
+    },
+    "invite": {
+        "messageContent": "Thug {{displayName}} cuireadh duit {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Roghnaigh ó do Teagmhálacha",
+            "selectFromContacts": "Roghnaigh Ó Teagmhálacha",
+            "photo": "Tóg grianghraf",
+            "photoInstruction": "Má tá an duine a rinne scanadh ar do chód QR os do chomhair, tóg grianghraf díobh",
+            "to": "Go: {{Stream Title}}",
+            "go": "Téigh",
+            "title": "Tabhair cuireadh duit",
+            "placeholder": "Uimhir ghutháin nó seoladh ríomhphoist",
+            "orInvite": "Nó cuir cuireadh ar dhaoine trí:",
+            "QR": "{{ClickOrTap}} chun cód QR a ghiniúint",
+            "QRtitle": "Scan an cód QR seo",
+            "byEmail": "Ríomhphost",
+            "byText": "Téacs",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Scanadh siad é!",
+            "chooseAgainFromContacts": "Roghnaigh Arís ó Teagmhálacha",
+            "inviteSelectedContacts": "Tabhair cuireadh do Teagmhálacha Roghnaithe"
+        },
+        "email": {
+            "subject": "Hey, seiceáil seo amach",
+            "PleaseVisitLink": "Tabhair cuairt ar an nasc seo a leanas:",
+            "InvitingYou": "Táim ag tabhairt cuireadh duit {{title}}",
+            "HasInvitedYou": "Thug {{displayName}} cuireadh duit {{title}}"
+        },
+        "sms": {
+            "content": "Tugadh cuireadh duit {{title}}. Le do thoil bain úsáid as {{url}}"
+        },
+        "notice": {
+            "text": "Tugadh cuireadh duit. {{ClickOrTap}} anseo chun glacadh agus páirt a ghlacadh."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "Cuireadh {{call 'avatar.displayName'}} teachtaireacht <em>{{message.fields.type}}<\/em> chuig {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} i {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Seoltar cuireadhí ónár n-uimhir, nach n-aithníonn do chairde go fóill iad. Lean ort le téacs tapaidh chun a chur in iúl dóibh gur tháinig an cuireadh uait, ag iarraidh orthu cliceáil ar an nasc.",
+            "confirm": "Seoltar cuireadhí ónár n-uimhir, nach n-aithníonn do chairde go fóill iad. Ar mhaith leat téacs tapaidh a leanúint chun a chur in iúl dóibh gur tháinig an cuireadh uait, ag iarraidh orthu cliceáil ar an nasc.",
+            "check": "Hey, chuir mé cuireadh chugat chuig an aip {{app}}. Seiceáil le do thoil do chuid SMS agus cliceáil ar an nasc!"
+        },
+        "email": {
+            "alert": "Seoltar cuireadhí ónár bhfearann, nach n-aithníonn do chairde go fóill iad. Lean ort le téacs tapaidh chun a chur in iúl dóibh gur tháinig an cuireadh uait, ag iarraidh orthu an nasc a chliceáil.",
+            "confirm": "Seoltar cuireadhí ónár bhfearann, nach n-aithníonn do chairde go fóill iad. Ar mhaith leat téacs tapaidh a leanúint chun a chur in iúl dóibh gur tháinig an cuireadh uait, ag iarraidh orthu cliceáil ar an nasc.",
+            "subject": "An bhfuair tú cuireadh?",
+            "body": "Hey, chuir mé cuireadh chugat chuig an aip {{app}}. Seiceáil do ríomhphost agus cliceáil ar an nasc ann!"
+        }
+    },
+    "participating": {
+        "Title": "Teideal",
+        "Subscribed": "Suibscríofa",
+        "Participants": "Rannpháirtithe"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Cumasaigh Micreafón",
+            "cameraTitle": "Cumasaigh an Ceamara",
+            "cameraAndMicrophoneTitle": "Cumasaigh an Ceamara agus an Micreafón",
+            "dialogTitle": "Cumasú Dialóg",
+            "microphoneBtn": "Cumasaigh Micreafón",
+            "cameraBtn": "Cumasaigh an Ceamara",
+            "cameraAndMicrophoneBtn": "Cumasaigh an Ceamara agus an Micreafón"
+        }
+    }
+}

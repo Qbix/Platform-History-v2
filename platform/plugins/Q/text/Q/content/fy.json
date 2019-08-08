@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Flater {{status}} by fersyk",
+        "canceled": "Fersyk annulearre",
+        "500": "Ynterne server error",
+        "404": "Net fûn: {{url}}",
+        "501": "Fersyk ûnderbrekke"
+    },
+    "nonce": {
+        "sameDomain": "Sesje ferrûn. Ferfarskje de side en besykje it nochris.",
+        "otherDomain": "Blokkearre cross-domain request nei bûtenlânske domein by {{baseUrl}}"
+    },
+    "words": {
+        "tap": "taap",
+        "click": "klikke",
+        "yes": "Ja",
+        "no": "Nee",
+        "Tap": "Taap",
+        "Click": "Klik op",
+        "Yes": "Ja",
+        "No": "Nee"
+    },
+    "months": {
+        "1": "jannewaris",
+        "2": "febrewaris",
+        "3": "maart",
+        "4": "april",
+        "5": "Meie",
+        "6": "juny",
+        "7": "july",
+        "8": "augustus",
+        "9": "spetimber",
+        "10": "oktober",
+        "11": "novimber",
+        "12": "desimber"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Meitsje tagong ta jo mikrofoan",
+        "record": "Opnimme",
+        "recording": "Opname",
+        "remains": "oerbliuwsel",
+        "maximum": "maksimum",
+        "playing": "Spylje",
+        "recorded": "Opnommen",
+        "clip": "klip",
+        "orupload": "Of upload",
+        "usethis": "Brûk dit",
+        "discard": "Untwerp",
+        "encoding": "Kodearring"
+    },
+    "alert": {
+        "title": "Alarmearje"
+    },
+    "confirm": {
+        "title": "Befêstigje",
+        "ok": "Ja",
+        "cancel": "Nee"
+    },
+    "prompt": {
+        "title": "Prompt",
+        "ok": "Rinne"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Flater by lêzen fan triem",
+        "cameraCommands": {
+            "prompt": "Wat soesto dwaan wolle?",
+            "photo": "Nim nije foto",
+            "library": "Selektearje út bibleteek"
+        },
+        "tooSmall": "Kies in gruttere ôfbylding.",
+        "cropping": {
+            "title": "Grutte en posysje oanpasse",
+            "touchscreen": "Brûk jo fingeren om te ferpleatsen en te ferpleatsen",
+            "notTouchscreen": "Brûk jo mûs &amp; rol om te ferpleatsen en te ferpleatsen"
+        }
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "برای پرداخت هزینه ضربه بزنید"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: اتهام پردازش برای {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "از پرداخت شما به {{call 'publisher.displayName'}} متشکریم",
+        "SubscribedTo": "{{call 'user.displayName'}} در {{plan.title}} مشترک شد",
+        "YouSubscribedTo": "شما به {{plan.title}} مشترک شده اید"
+    },
+    "payment": {
+        "AboutOrder": "اطلاعات در مورد سفارش",
+        "PaymentMethod": "روش پرداخت",
+        "ContactInfo": "اطلاعات تماس",
+        "Pay": "پرداخت"
+    },
+    "credits": {
+        "InviteAcceptedBy": "دعوت پذیرفته شده توسط {{1}}",
+        "YouHaveCreditsToStart": "شما باید اعتبار {{1}} را برای شروع بگذارید"
+    },
+    "history": {
+        "Date": "تاریخ",
+        "Amount": "میزان",
+        "Description": "شرح",
+        "Client": "مشتری",
+        "To": "به",
+        "From": "از جانب",
+        "HistoryEmpty": "شما هنوز داده ای ندارید"
+    },
+    "subscriptions": {
+        "infoTitle": "اطلاعات پرداخت را تنظیم کنید",
+        "confirm": {
+            "title": "اشتراک را شروع کنید",
+            "message": "آیا می خواهید در {999} subs مشترک شوید؟",
+            "ok": "خوب",
+            "cancel": "لغو"
+        }
+    },
+    "payments": {
+        "infoTitle": "اطلاعات پرداخت را تنظیم کنید",
+        "confirm": {
+            "title": "ایجاد یک پرداخت",
+            "message": "آیا قبول دارید مبلغ 999 {}} {{1000} pay بپردازید؟",
+            "ok": "خوب",
+            "cancel": "لغو"
+        }
+    }
+}

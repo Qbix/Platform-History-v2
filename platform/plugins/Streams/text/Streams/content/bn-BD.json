@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "যথোপযুক্ত সৃষ্টিকর্তা"
+    },
+    "labels": {
+        "Streams/invited": "আমি আমন্ত্রিত মানুষ",
+        "Streams/invitedMe": "কে আমাকে আমন্ত্রণ জানিয়েছে"
+    },
+    "interests": {
+        "Filter": "তুমি কি উপভোগ কর?",
+        "CanAdd": "আপনি যা খুজছেন তা যদি আপনি এখনও খুঁজে পান না তবে আপনি নীচের একটি নতুন আগ্রহ যুক্ত করতে পারেন:",
+        "TrySynonyms": "এটা দেখতে পাচ্ছেন না? কিছু প্রতিশব্দ চেষ্টা করুন।",
+        "AddUnderCategory": "বিভাগের অধীনে যোগ করুন ...",
+        "Other": "অন্যান্য",
+        "Unlisted": "অতালিকাভুক্ত"
+    },
+    "chat": {
+        "flaggedForAdminReview": "বার্তা অ্যাডমিন পর্যালোচনা জন্য পতাকাঙ্কিত করা হয়েছে। Unflag করতে আবার আলতো চাপুন।",
+        "noOneSaid": "কেউ কিছু বলেনি",
+        "closeChatButton": "চ্যাট বন্ধ করুন",
+        "closeChatConfirmTitle": "এই চ্যাট বন্ধ?",
+        "closeChatConfirm": "আপনি এই চ্যাট বন্ধ করতে চান আপনি কি নিশ্চিত?",
+        "closeChatConfirmYes": "হাঁ",
+        "closeChatConfirmNo": "না",
+        "earlierComments": "আগে মন্তব্য",
+        "Subscribed": "বিজ্ঞপ্তি নিঃশব্দ করুন",
+        "Unsubscribed": "বিজ্ঞপ্তি পেতে",
+        "dontHavePermissionJoinConversation": "আপনার এই কথোপকথনে যোগদানের অনুমতি নেই।",
+        "startedConversation": "একটি কথোপকথন শুরু",
+        "RealTimeCall": "রিয়েল টাইম কল"
+    },
+    "notifications": {
+        "*": "বার্তা {{& message.fields.type}} থেকে {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} বলেছেন:",
+        "Streams/changed": "{{stream.fields.title}} এ পরিবর্তন",
+        "Streams/invite": "আপনি {{& stream.fields.title}} এ আমন্ত্রিত ছিলেন",
+        "Streams/announcement": "{{& streams.fields.title}} এ ঘোষণা",
+        "Streams/access": "{{&call 'avatar.displayName'}} স্ট্রিম অ্যাক্সেস পরিবর্তন",
+        "Streams/chat/edit": "চ্যাট বার্তা সম্পাদনা",
+        "Streams/chat/remove": "চ্যাট বার্তা মুছে ফেলা হয়েছে",
+        "Streams/closed": "{{stream.fields.title}} বন্ধ করা হয়েছে",
+        "Streams/task/progress": "{{stream.fields.title}} এ অগ্রগতি",
+        "Streams/task/complete": "টাস্ক সম্পন্ন: {{stream.fields.title}}",
+        "Streams/task/error": "সময় ত্রুটি: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: আসন্ন বার্তা",
+        "ManageEmailSubscriptions": "আপনার ইমেইল সাবস্ক্রিপশন পরিচালনা করুন",
+        "IfUnsubscribe": "আপনি আনসাবস্ক্রাইব করতে চান"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} আপনাকে {{inviteUrl}} এ আমন্ত্রণ জানিয়েছে",
+        "dialog": {
+            "chooseFromContacts": "আপনার পরিচিতি থেকে চয়ন করুন",
+            "selectFromContacts": "পরিচিতি থেকে নির্বাচন করুন",
+            "photo": "একটি ছবি তুলুন",
+            "photoInstruction": "যদি আপনার QR কোড স্ক্যান করা ব্যক্তি আপনার সামনে থাকে তবে তাদের একটি ফটো নিন",
+            "to": "এতে: {{Stream Title}}",
+            "go": "যাওয়া",
+            "title": "আমন্ত্রণ করা",
+            "placeholder": "মোবাইল নম্বর বা ইমেইল ঠিকানা",
+            "orInvite": "বা ব্যবহার করে মানুষকে আমন্ত্রণ জানান:",
+            "QR": "{{ClickOrTap}} QR কোড তৈরি করতে",
+            "QRtitle": "এই QR কোড স্ক্যান করুন",
+            "byEmail": "ইমেইল",
+            "byText": "পাঠ",
+            "byFacebook": "ফেসবুক",
+            "byTwitter": "টুইটার",
+            "QRscanned": "তারা এটা স্ক্যান!",
+            "chooseAgainFromContacts": "পরিচিতি থেকে আবার চয়ন করুন",
+            "inviteSelectedContacts": "নির্বাচিত পরিচিতি আমন্ত্রণ জানান"
+        },
+        "email": {
+            "subject": "আরে, এই চেক আউট",
+            "PleaseVisitLink": "নিচের লিঙ্কে যান দয়া করে:",
+            "InvitingYou": "আমি আপনাকে {{title}} এ আমন্ত্রণ জানাচ্ছি",
+            "HasInvitedYou": "{{displayName}} আপনাকে {{title}} এ আমন্ত্রণ জানিয়েছে"
+        },
+        "sms": {
+            "content": "আপনি {{title}} এ আমন্ত্রিত হয়েছেন। অনুগ্রহ করে {{url}} ট্যাপ করুন"
+        },
+        "notice": {
+            "text": "আপনি আমন্ত্রিত হয়েছে। {{ClickOrTap}} এখানে গ্রহণ এবং যোগ দিতে।"
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} {{stream.fields.title}} এ একটি <em>{{message.fields.type}}</em> বার্তা পোস্ট করেছেন"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "আমন্ত্রণ আমাদের নম্বর থেকে পাঠানো হয়, যা আপনার বন্ধুদের এখনও চিনতে না। তাদের কাছ থেকে আমন্ত্রণ জানানোর জন্য একটি দ্রুত পাঠ্য অনুসরণ করুন, তাদেরকে লিঙ্কটিতে ক্লিক করার জন্য জিজ্ঞাসা করুন।",
+            "confirm": "আমন্ত্রণ আমাদের নম্বর থেকে পাঠানো হয়, যা আপনার বন্ধুদের এখনও চিনতে না। আপনি তাদের কাছ থেকে আমন্ত্রণ জানানোর জন্য একটি দ্রুত পাঠ্য অনুসরণ করতে চান, লিঙ্কটি ক্লিক করতে তাদের জিজ্ঞাসা করুন।",
+            "check": "আরে, আমি আপনাকে {{app}} অ্যাপ্লিকেশনে একটি আমন্ত্রণ পাঠিয়েছি। আপনার এসএমএস চেক করুন এবং লিঙ্ক ক্লিক করুন!"
+        },
+        "email": {
+            "alert": "আমন্ত্রণগুলি আমাদের ডোমেন থেকে পাঠানো হয়, যা আপনার বন্ধুদের এখনও চিনতে পারে না। তাদের কাছ থেকে আমন্ত্রণ জানানোর জন্য একটি দ্রুত পাঠ্য অনুসরণ করুন, তাদেরকে লিঙ্কটিতে ক্লিক করার জন্য জিজ্ঞাসা করুন।",
+            "confirm": "আমন্ত্রণগুলি আমাদের ডোমেন থেকে পাঠানো হয়, যা আপনার বন্ধুদের এখনও চিনতে পারে না। আপনি তাদের কাছ থেকে আমন্ত্রণ জানানোর জন্য একটি দ্রুত পাঠ্য অনুসরণ করতে চান, লিঙ্কটি ক্লিক করতে তাদের জিজ্ঞাসা করুন।",
+            "subject": "আপনি একটি আমন্ত্রণ পেয়েছিলাম?",
+            "body": "আরে, আমি আপনাকে {{app}} অ্যাপ্লিকেশনে একটি আমন্ত্রণ পাঠিয়েছি। আপনার ইমেইল চেক করুন এবং সেখানে লিঙ্ক ক্লিক করুন!"
+        }
+    },
+    "participating": {
+        "Title": "খেতাব",
+        "Subscribed": "সাবস্ক্রাইব",
+        "Participants": "অংশগ্রহণকারীরা"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "মাইক্রোফোন সক্রিয় করুন",
+            "cameraTitle": "ক্যামেরা সক্রিয় করুন",
+            "cameraAndMicrophoneTitle": "ক্যামেরা এবং মাইক্রোফোন সক্রিয় করুন",
+            "dialogTitle": "সংলাপ সক্ষম করা হচ্ছে",
+            "microphoneBtn": "মাইক্রোফোন সক্ষম করুন",
+            "cameraBtn": "ক্যামেরা সক্ষম করুন",
+            "cameraAndMicrophoneBtn": "ক্যামেরা এবং মাইক্রোফোন সক্ষম করুন"
+        }
+    }
+}

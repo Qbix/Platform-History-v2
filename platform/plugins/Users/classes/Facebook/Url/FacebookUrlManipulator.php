@@ -44,7 +44,7 @@ class FacebookUrlManipulator
 
         $query = '';
         if (isset($parts['query'])) {
-            $params = [];
+            $params = array();
             parse_str($parts['query'], $params);
 
             // Remove query params
@@ -110,7 +110,7 @@ class FacebookUrlManipulator
         if (!$query) {
             return [];
         }
-        $params = [];
+        $params = array();
         parse_str($query, $params);
 
         return $params;

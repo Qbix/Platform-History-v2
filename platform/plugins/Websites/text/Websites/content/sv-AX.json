@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Länk för att marknadsföra",
+                "startDate": "Start datum",
+                "startTime": "Starttid",
+                "endDate": "Slutdatum",
+                "endTime": "Sluttid",
+                "budget": "Budget"
+            },
+            "interests": {
+                "Title": "Filtrera efter intresse",
+                "FilterInterests": "Börja skriva ett intresse ..."
+            },
+            "Interest": "Intressera",
+            "Location": "Plats"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Gå",
+            "PasteLinkHere": "Klistra in en länk här",
+            "BrowseTheWeb": "Bläddra",
+            "WriteToStartConversation": "Skriv dina tankar för att starta samtalet",
+            "StartConversation": "Starta konversationen",
+            "GotoConversation": "Gå till konversation"
+        }
+    }
+}

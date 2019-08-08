@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Dodirnite za plaćanje"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: naplaćena naknada za {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Zahvaljujemo na uplati do {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} pretplaćeni ste na {{plan.title}}",
+        "YouSubscribedTo": "Pretplaćeni ste na {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Informacije o narudžbi",
+        "PaymentMethod": "Način plaćanja",
+        "ContactInfo": "Informacije o kontaktu",
+        "Pay": "Platiti"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Poziv je prihvatio {{1}}",
+        "YouHaveCreditsToStart": "Imate {{1}} kredita za početak"
+    },
+    "history": {
+        "Date": "Datum",
+        "Amount": "Iznos",
+        "Description": "Opis",
+        "Client": "Klijent",
+        "To": "do",
+        "From": "iz",
+        "HistoryEmpty": "Još nemate podataka"
+    },
+    "subscriptions": {
+        "infoTitle": "Postavite podatke o plaćanju",
+        "confirm": {
+            "title": "Pokrenite pretplatu",
+            "message": "Želite li se pretplatiti na {{title}}?",
+            "ok": "u redu",
+            "cancel": "Otkazati"
+        }
+    },
+    "payments": {
+        "infoTitle": "Postavite podatke o plaćanju",
+        "confirm": {
+            "title": "Platiti",
+            "message": "Slažete li se s plaćanjem {{symbol}} {{amount}}?",
+            "ok": "u redu",
+            "cancel": "Otkazati"
+        }
+    }
+}

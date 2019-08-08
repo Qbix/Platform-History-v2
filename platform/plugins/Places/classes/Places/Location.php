@@ -1,17 +1,45 @@
 <?php
-	
-class Places_Location
+/**
+ * @module Places
+ */
+/**
+ * Class representing 'Location' rows in the 'Places' database
+ * You can create an object of this class either to
+ * access its non-static methods, or to actually
+ * represent a location row in the Places database.
+ *
+ * @class Places_Location
+ * @extends Base_Places_Location
+ */
+class Places_Location extends Base_Places_Location
 {
+	/**
+	 * The setUp() method is called the first time
+	 * an object of this class is constructed.
+	 * @method setUp
+	 */
+	function setUp()
+	{
+		parent::setUp();
+		// INSERT YOUR CODE HERE
+		// e.g. $this->hasMany(...) and stuff like that.
+	}
+
+	/*
+	 * Add any Places_Location methods here, whether public or not
+	 */
 	/**
 	 * Get the logged-in user's location stream
 	 * @method userStream
 	 * @param {boolean} [$throwIfNotLoggedIn=false]
 	 *   Whether to throw a Users_Exception_NotLoggedIn if no user is logged in.
+	 * @param {boolean} [$created] Optional reference to a variable that
+	 *   will be set to true if the stream was created, or false otherwise.
 	 * @return {Streams_Stream|null}
 	 * @throws {Users_Exception_NotLoggedIn} If user is not logged in and
 	 *   $throwIfNotLoggedIn is true
 	 */
-	static function userStream($throwIfNotLoggedIn = false)
+	static function userStream($throwIfNotLoggedIn = false, &$created = null)
 	{
 		$user = Users::loggedInUser($throwIfNotLoggedIn);
 		if (!$user) {
@@ -24,17 +52,20 @@ class Places_Location
 				'name' => $streamName
 			));
 			$stream->join();
+			$created = true;
+		} else {
+			$created = false;
 		}
 		return $stream;
 	}
-	
+
 	/**
 	 * Get a Places/location stream published by a publisher for a given placeId.
 	 * This is used to cache information from the Google Places API.
 	 * @method stream
 	 * @static
-	 * @param {string} $asUserId
-	 * @param {string} $publisherId
+	 * @param {string} $asUserId The user to fetch as
+	 * @param {string} $publisherId The user publishing the stream
 	 * @param {string} $placeId The id of the place in Google Places
 	 * @param {boolean} $throwIfBadValue
 	 *  Whether to throw Q_Exception if the result contains a bad value
@@ -49,11 +80,11 @@ class Places_Location
 			}
 			return null;
 		}
-		
+
 		// sanitize the ID
 		$characters = '/[^A-Za-z0-9]+/';
 		$result = preg_replace($characters, '_', $placeId);
-		
+
 		// see if it's already in the system
 		$streamName = "Places/location/$result";
 		$location = Streams::fetchOne($asUserId, $publisherId, $streamName);
@@ -70,7 +101,7 @@ class Places_Location
 				}
 			}
 		}
-		
+
 		$key = Q_Config::expect('Places', 'google', 'keys', 'server');
 		$query = http_build_query(array('key' => $key, 'placeid' => $placeId));
 		$url = "https://maps.googleapis.com/maps/api/place/details/json?$query";
@@ -83,10 +114,12 @@ class Places_Location
 			throw new Q_Exception("Places_Location::stream: ".$response['error_message']);
 		}
 		$result = $response['result'];
+		$latitude = $result['geometry']['location']['lat'];
+		$longitude = $result['geometry']['location']['lng'];
 		$attributes = array(
 			'title' => $result['name'],
-			'latitude' => $result['geometry']['location']['lat'],
-			'longitude' => $result['geometry']['location']['lng'],
+			'latitude' => $latitude,
+			'longitude' => $longitude,
 			'viewport' => $result['geometry']['viewport'],
 			// 'icon' => $result['icon'],
 			'phoneNumber' => Q::ifset($result, 'international_phone_number', null),
@@ -97,6 +130,7 @@ class Places_Location
 			'website' => Q::ifset($result, 'website', null),
 			'placeId' => $placeId
 		);
+		$geohash = Places_Geohash::encode($latitude, $longitude);
 		if ($location) {
 			$location->title = $result['name'];
 			$location->setAttribute($attributes);
@@ -105,19 +139,28 @@ class Places_Location
 			$location = Streams::create($asUserId, $publisherId, 'Places/location', array(
 				'name' => $streamName,
 				'title' => $result['name'],
-				'attributes' => Q::json_encode($attributes)
+				'attributes' => Q::json_encode($attributes),
+				'skipAccess' => true
+			), array(
+				'publisherId' => $publisherId,
+				'streamName' => 'Places/user/locations',
+				'type' => 'Places/locations'
 			));
+			$pl = new Places_Location(compact(
+				'geohash', 'publisherId','streamName'
+			));
+			$pl->save(true);
 		}
 		return $location;
 	}
-	
+
 	/**
 	 * Adds a stream to represent an area within a location.
 	 * Also may add streams to represent the floor and column.
 	 * @method addArea
 	 * @static
 	 * @param {Streams_Stream} $location The location stream
-	 * @param {string} $title The title of the area 
+	 * @param {string} $title The title of the area
 	 * @param {string} [$floor] The number of the floor on which the area is located
 	 * @param {string} [$column] The name of the column on which the area is located
 	 * @param {array} [$options=array()] Any options to pass to Streams::create. Also can include:
@@ -154,7 +197,7 @@ class Places_Location
 			$area = Streams::create($asUserId, $publisherId, 'Places/area',
 				compact('name', 'title', 'skipAccess', 'attributes')
 			);
-			$area->relateTo($location, 'Places/location', $asUserId, $options);
+			$area->relateTo($location, 'Places/areas', $asUserId, $options);
 			if ($floorName) {
 				$name = $floorName;
 				$title = $location->title." floor $floor";
@@ -185,4 +228,58 @@ class Places_Location
 		}
 		return array($area, $floor, $column);
 	}
-}
+
+	/**
+	 * Get location from stream in some standard way
+	 * @method getLocation
+	 * @static
+	 * @param Streams_Stream $stream Some stream
+	 * @return array
+	 */
+	static function fromStream($stream)
+	{
+		$location = $stream->getAttribute('location');
+
+		// new approach
+		if (is_array($location)) {
+			return $location;
+		}
+
+		// old approach
+		$communityId = $stream->getAttribute("communityId");
+		$res = array(
+			'publisherId' => $communityId,
+			'name' => $location,
+			'venue' => $stream->getAttribute("venue"),
+			'address' => $stream->getAttribute("address"),
+			'latitude' => $stream->getAttribute("latitude"),
+			'longitude' => $stream->getAttribute("longitude")
+		);
+
+		$area = $stream->getAttribute("area");
+		if ($area) {
+			$res['area'] = array(
+				'publisherId' => $communityId,
+				'name' => $area,
+				'title' => $stream->getAttribute("areaSelected")
+			);
+		}
+
+		return $res;
+	}
+	 
+	/**
+	 * Implements the __set_state method, so it can work with
+	 * with var_export and be re-imported successfully.
+	 * @method __set_state
+	 * @static
+	 * @param {array} $array
+	 * @return {Places_Location} Class instance
+	 */
+	static function __set_state(array $array) {
+		$result = new Places_Location();
+		foreach($array as $k => $v)
+			$result->$k = $v;
+		return $result;
+	}
+};

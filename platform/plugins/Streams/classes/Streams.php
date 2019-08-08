@@ -326,9 +326,17 @@ abstract class Streams extends Base_Streams
 	 *  @param {boolean} [$options.withParticipant=false]
 	 *   Additionally call ->set('participant', $p) on the stream objects,
 	 *   with the participant object corresponding to $asUserId, if any.
-	 *  @param {array} [$options.withTotals]
+	 *  @param {array} [$options.withMessageTotals]
 	 *   Pass an array of ($streamName => $messageTypes) here
-	 *   to additionally call ->set('totals', $t) on the stream objects.
+	 *   to additionally call ->set('messageTotals', $t) on the stream objects.
+	 *  @param {array} [$options.withRelatedToTotals]
+	 *	 pass array('withRelatedFromTotals' => array($streamName => true)) for all rows
+	 *	 pass array('withRelatedFromTotals' => array($streamName => array($relationType$, ...))) for particular rows
+	 *   to additionally call ->set('relatedToTotals', $t) on the stream objects.
+	 *  @param {array} [$options.withRelatedFromTotals]
+	 *	 pass array('withRelatedFromTotals' => array($streamName => true)) for all rows
+	 *	 pass array('withRelatedFromTotals' => array($streamName => array('relationType', ...))) for particular rows
+	 *   to additionally call ->set('relatedFromTotals', $t) on the stream objects.
 	 * @return {array}
 	 *  Returns an array of Streams_Stream objects with access info calculated
 	 *  specifically for $asUserId . Make sure to call the methods 
@@ -396,8 +404,21 @@ abstract class Streams extends Base_Streams
 				'streamName' => $namesToFetch,
 				'userId' => $asUserId
 			))->fetchDbRows(null, '', 'streamName');
+
+			$ssr_rows = Streams_SubscriptionRule::select()->where(array(
+				'publisherId' => $publisherId,
+				'streamName' => $namesToFetch,
+				'ofUserId' => $asUserId
+			))->fetchDbRows(null, '', 'streamName');
+
 			foreach ($allRetrieved as $s) {
-				$s->set('participant', Q::ifset($prows, $s->name, null));
+				$participant = Q::ifset($prows, $s->name, null);
+
+				if (gettype($participant) == 'object' && !empty($participant)) {
+					$participant->subscriptionRules = Q::ifset($ssr_rows, $s->name, null);
+				}
+
+				$s->set('participant', $participant);
 			}
 		}
 
@@ -405,50 +426,9 @@ abstract class Streams extends Base_Streams
 
 		Streams::calculateAccess($asUserId, $publisherId, $streams, false);
 		
-		if (!empty($options['withTotals'])) {
-			$infoForTotals = array();
-			if (isset($options['withTotals']['*'])) {
-				$trows = Streams_Total::select()->where(array(
-					'publisherId' => $publisherId,
-					'streamName' => $name,
-					'messageType' => $options['withTotals']['*']
-				))->fetchDbRows();
-				unset($options['withTotals']['*']);
-			} else {
-				$trows = array();
-			}
-			foreach ($options['withTotals'] as $n => $mt) {
-				if (!$mt) {
-					continue;
-				}
-				if (!is_array($mt)) {
-					$mt = array($mt);
-				}
-				ksort($mt);
-				$j = json_encode($mt);
-				$infoForTotals[$j] = array($n, $mt);
-			}
-			foreach ($infoForTotals as $info) {
-				$frows = Streams_Total::select()->where(array(
-					'publisherId' => $publisherId,
-					'streamName' => $info[0],
-					'messageType' => $info[1]
-				))->fetchDbRows();
-				$trows = array_merge($trows, $frows);
-			}
-			foreach ($streams as $s) {
-				if (!$s->testReadLevel('messages')) {
-					return;
-				}
-				$totals = array();
-				foreach ($trows as $row) {
-					if ($row->streamName === $s->name) {
-						$totals[$row->messageType] = $row->messageCount;
-					}
-				}
-				$s->set('totals', $totals);
-			}
-		}
+		$streams = self::messageTotals($publisherId, $name, $options, $streams);
+		$streams = self::relatedToTotals($publisherId, $name, $options, $streams);
+		$streams = self::relatedFromTotals($publisherId, $name, $options, $streams);
 
 		if (is_array($name) and count($name) > 1) {
 			// put the streams back in the same internal PHP array order
@@ -546,14 +526,23 @@ abstract class Streams extends Base_Streams
 	 *   fetching the streams
 	 *  @param {boolean} [$options.withParticipant] Additionally call ->set('participant', $p)
 	 *   on the stream object, with the participant object corresponding to $asUserId, if any.
-	 *  @param {array} [$options.withTotals]
+	 *  @param {array} [$options.withMessageTotals]
 	 *   Pass an array of arrays ($streamName => $messageTypes) here
-	 *   to additionally call ->set('totals', $t) on the stream objects.
+	 *   to additionally call ->set('messageTotals', $t) on the stream objects.
+	 *  @param {array} [$options.withRelatedToTotals]
+	 *	 pass array('withRelatedToTotals' => array('streamName' => true)) for all rows
+	 *	 pass array('withRelatedToTotals' => array('streamName' => array('relationType', ...))) for particular rows
+	 *   to additionally call ->set('relatedToTotals', $t) on the stream objects.
+	 *  @param {array} [$options.withRelatedFromTotals]
+	 *	 pass array('withRelatedFromTotals' => array('streamName' => true)) for all rows
+	 *	 pass array('withRelatedFromTotals' => array('streamName' => array('relationType', ...))) for particular rows
+	 *   to additionally call ->set('relatedFromTotals', $t) on the stream objects.
 	 * @return {Streams_Stream|null}
 	 *  Returns a Streams_Stream object with access info calculated
 	 *  specifically for $asUserId . Make sure to call the methods 
 	 *  testReadLevel(), testWriteLevel() and testAdminLevel()
 	 *  on these streams before using them on the user's behalf.
+	 * @throws {Q_Exception_MissingRow} If the stream is missing
 	 */
 	static function fetchOne(
 		$asUserId,
@@ -601,7 +590,7 @@ abstract class Streams extends Base_Streams
 	 * @param {boolean} [$recalculate=false]
 	 *  Pass true here to force recalculating access to streams for which access was already calculated
 	 * @param {string} [$actualPublisherId=null]
-	 *  For internal use only. Used by Streams::isAuthorizedToCreate function.
+	 *  For internal use only. Used by Streams::canCreateStreamType function.
 	 * @param {string} [$inheritAccess=true]
 	 *  Set to false to skip inheriting access from other streams, even if specified
 	 * @return {integer}
@@ -806,9 +795,9 @@ abstract class Streams extends Base_Streams
 	}
 	
 	/**
-	 * Calculates whether a given user is authorized by a specific publisher
-	 * to create a particular type of stream.
-	 * @method isAuthorizedToCreate
+	 * Calculates whether a given user is authorized by a given publisher
+	 * to create a type of stream.
+	 * @method canCreateStreamType
 	 * @static
 	 * @param {string} $userId The user who would be creating the stream.
 	 * @param {string} $publisherId The id of the user who would be publishing the stream.
@@ -825,7 +814,7 @@ abstract class Streams extends Base_Streams
 	 * @return {Streams_Stream|boolean} Returns a stream template the user must use,
 	 *  otherwise a boolean true/false to indicate a yes or no regardless of template.
 	 */
-	static function isAuthorizedToCreate(
+	static function canCreateStreamType(
 		$userId,
 		$publisherId,
 		$streamType,
@@ -965,7 +954,7 @@ abstract class Streams extends Base_Streams
 		if (!isset($stream->type)) {
 			$stream->type = $type;
 		}
-		$authorized = self::isAuthorizedToCreate(
+		$authorized = self::canCreateStreamType(
 			$asUserId, $publisherId, $stream->type, $relate
 		);
 		if (!$authorized and !$skipAccess) {
@@ -1034,6 +1023,114 @@ abstract class Streams extends Base_Streams
 		self::$fetch[$asUserId][$publisherId][$stream->name] = array('*' => $stream);
 
 		return $stream;
+	}
+	
+	/**
+	 * Creates multiple streams in the system. Skips access control checks.
+	 * @method createStreams
+	 * @static
+	 * @param {string} $asUserId The user who is attempting to create the stream.
+	 * @param {string} $publisherId The id of the user to publish the streams.
+	 * @param {array} $fields Each stream's fields are a sub-array in this array
+	 * @return {array} Returns Streams_Stream objects representing streams
+	 *  that were created, but really they were saved using insertManyAndExecute.
+	 * @throws {Users_Exception_NotAuthorized}
+	 */
+	static function createStreams(
+		$asUserId,
+		$publisherId, 
+		$fields = array())
+	{
+		if (empty($fields)) {
+			return array();
+		}
+		if (!isset($publisherId)) {
+			foreach ($fields as $f) {
+				if (!isset($f['publisherId'])) {
+					throw new Q_Exception_RequiredField(array('name' => 'publisherId'));
+				}
+				$pid = $f['publisherId'];
+				$arr[$pid] = $f;
+			}
+			$ret = array();
+			foreach ($arr as $pid => $f) {
+				$ret[$pid] = array_merge($ret, Streams::createStreams($asUserId, $pid, $f));
+			}
+			return $ret;
+		}
+
+		$streamFieldNames = Base_Streams_Stream::fieldNames();
+		
+		$toCreate = array();
+		$p = Streams::userStreamsTree();
+		$streams = array();
+		$messages = array();
+		foreach ($fields as $k => &$f) {
+			if (!isset($f['type'])) {
+				throw new Q_Exception_RequiredField(array('name' => 'type'));
+			}
+			$a = isset($f['attributes']) ? $f['attributes'] : null;
+			if (is_array($a) and !empty($a)) {
+				$a = Q::json_encode($a);
+				$f['attributes'] = $a;
+			} else {
+				$f['attributes'] = null;
+			}
+			$a = isset($f['inheritAccess']) ? $f['inheritAccess'] : '';
+			if (is_array($a)) {
+				$a = Q::json_encode($a);
+				$f['inheritAccess'] = $a;
+			}
+			$tc = compact('publisherId');
+			if ($name = isset($f['name']) ? $f['name'] : null) {
+				if ($info = $p->get($name, array())) {
+					foreach ($streamFieldNames as $fn) {
+						if (isset($info[$fn])) {
+							$tc[$fn] = $info[$fn];
+						}
+					}
+				}
+			}
+
+			// extend with any config defaults for this stream type
+			$fieldNames = Streams::getExtendFieldNames($f['type']);
+			$fieldNames[] = 'name';
+			foreach ($fieldNames as $fn) {
+				if (isset($f[$fn])) {
+					$tc[$fn] = $f[$fn];
+				}
+			}
+			
+			// simulate calls to beforeSave, to update avatars and do other stuff
+			$s = new Streams_Stream($tc);
+			$s->beforeSave($tc);
+			$s->fields['insertedTime'] = new Db_Expression('CURRENT_TIMESTAMP');
+			$toCreate[$s->name] = $s->fields;
+			$streams[$s->name] = $s;
+			
+			$messages[$publisherId][$s->name][] = array(
+				'type' => 'Streams/created',
+				'content' => '',
+				'instructions' => $s->fields
+			);
+		}
+
+		Streams_Stream::insertManyAndExecute($toCreate, array('columns' => $streamFieldNames));
+
+		if (!empty($messages)) {
+			Streams_Message::postMessages($asUserId, $messages, true);
+		}
+
+		foreach ($streams as $name => $s) {
+			$modifiedFields = $s->fields;
+			foreach ($modifiedFields as $fn => $wasModified) {
+				$s->notModified($fn);
+				$s->wasRetrieved(true);
+			}
+			$s->afterSaveExecute(null, null, $modifiedFields, $s->getPKValue());
+		}
+		
+		return $streams;
 	}
 
 	/**
@@ -1394,292 +1491,6 @@ abstract class Streams extends Base_Streams
 	}
 
 	/**
-	 * Updates the publisher's avatar, as it appears to $toUserId
-	 * This function should be called during events that may cause the
-	 * publisher's avatar to change appearance for certain users viewing it.
-	 * These are usually rare events, and include things like:<br/>
-	 *   adding, removing or modifying a contact
-	 * @method updateAvatar
-	 * @static
-	 * @param {integer} $toUserId
-	 *  id of the user who will be viewing this avatar
-	 * @param {string} $publisherId
-	 *  id of the publisher whose avatar to update
-	 * @return {boolean}
-	 */
-	static function updateAvatar($toUserId, $publisherId)
-	{
-		$user = new Users_User();
-		$user->id = $publisherId;
-		if (!$user->retrieve(null, null, true)->ignoreCache()->resume()) {
-			return false;
-		}
-
-		// Fetch some streams as the contact user
-		$streams = Streams::fetch($toUserId, $publisherId, array(
-			'Streams/user/firstName', 'Streams/user/lastName'
-		));
-		$firstName = Streams::take($streams, 'Streams/user/firstName', 'content');
-		$lastName = Streams::take($streams, 'Streams/user/lastName', 'content');
-
-		// Update the Streams_avatar table
-		Streams_Avatar::update()->set(array(
-			'firstName' => $firstName,
-			'lastName' => $lastName,
-			'username' => $user->username,
-			'icon' => $user->icon
-		))->where(array(
-			'toUserId' => $toUserId,
-			'publisherId' => $publisherId
-		))->execute();
-
-		return true;
-	}
-
-	/**
-	 * Updates the publisher's avatars, which may have changed with the taintedAccess.
-	 * This function should be called during rare events that may cause the
-	 * publisher's avatar to change appearance for certain users viewing it.<br/>
-	 *
-	 * You should rarely have to call this function. It is used internally by the model,
-	 * in two main situations:
-	 *
-	 * 1)  adding, removing or modifying a Streams_Access row for Streams/user/firstName or Streams/user/lastName
-	 *	In this case, the function is able to update exactly the avatars that need updating.
-	 * 
-	 * 2) adding, removing or modifying a Stream row for Streams/user/firstName or Streams/user/lastName
-	 *	In this case, there may be some avatars which this function will miss.
-	 *	These correspond to users which are reachable by the access array for one stream,
-	 *	but not the other. For example, if Streams/user/firstName is being updated, but
-	 *	a particular user is reachable only by the access array for Streams/user/lastName, then
-	 *	their avatar will not be updated and contain a stale value for firstName.
-	 *	To fix this, the Streams_Stream model passes true in the 4th parameter to this function.
-	 * @method updateAvatars
-	 * @static
-	 * @param {string} $publisherId
-	 *  id of the publisher whose avatar to update
-	 * @param {array} $taintedAccess
-	 *  array of Streams_Access objects representing access information that is either
-	 *  about to be saved, are about to be overwritten, or will be deleted
-	 * @param {string|Streams_Stream} $streamName
-	 *  pass the stream name here. You can also pass a Stream_Stream object here,
-	 *  in which case it will be used, instead of selecting that stream from the database.
-	 * @param {boolean} $updateToPublicValue=false
-	 *  if you want to first update all the avatars for this stream
-	 *  to the what the public would see, to avoid the situation described in 2).
-	 */
-	static function updateAvatars(
-		$publisherId, 
-		$taintedAccess, 
-		$streamName, 
-		$updateToPublicValue = false)
-	{
-		if (!isset($streamName)) {
-			$streamAccesses = array();
-			foreach ($taintedAccess as $access) {
-				$streamAccesses[$access->streamName][] = $access;
-			}
-			if (count($streamAccesses) > 1) {
-				foreach ($streamAccesses as $k => $v) {
-					self::updateAvatars($publisherId, $v, $k);
-				}
-				return false;
-			}
-		}
-		if ($streamName instanceof Streams_Stream) {
-			$stream = $streamName;
-			$streamName = $stream->name;
-		}
-
-		// If we are here, all the Stream_Access objects have the same streamName
-		if ($streamName !== 'Streams/user/firstName'
-		and $streamName !== 'Streams/user/lastName'
-		and $streamName !== 'Streams/user/username') {
-			// we don't care about access to other streams being updated
-			return false;
-		}
-		$showToUserIds = array();
-
-		// Select the user corresponding to this publisher
-		$user = new Users_User();
-		$user->id = $publisherId;
-		if (!$user->retrieve(null, null, array('ignoreCache' => true))) {
-			throw new Q_Exception_MissingRow(array(
-				'table' => 'user',
-				'criteria' => 'id = '.$user->id
-			));
-		}
-
-		// Obtain the stream object to use
-		if (isset($stream)) {
-			if (!isset($stream->content)) {
-				$stream->content = '';
-			}
-		} else {
-			// If the $stream isn't already defined, select it
-			$stream = new Streams_Stream();
-			$stream->publisherId = $publisherId;
-			$stream->name = $streamName;
-			if (!$stream->retrieve()) {
-				// Strange, this stream doesn't exist.
-				// Well, we will just silently set the content to '' then
-				$stream->content = '';
-			}
-		}
-
-		$content_readLevel = Streams::$READ_LEVEL['content'];
-		$readLevels = array();
-		$label_readLevels = array();
-		$contact_label_list = array();
-		$removed_labels = array();
-
-		// First, assign all the readLevels that are directly set for specific users,
-		// and aggregate the contact_labels from the other accesses, for an upcoming select.
-		foreach ($taintedAccess as $access) {
-			if ($userId = $access->ofUserId) {
-				$readLevel = $access->readLevel;
-				$readLevels[$userId] = $readLevel;
-				if ($readLevel < 0) {
-					$showToUserIds[$userId] = null; // not determined yet
-				} else if ($readLevel >= $content_readLevel) {
-					$showToUserIds[$userId] = true;
-				} else {
-					$showToUserIds[$userId] = false;
-				}
-			} else if ($access->ofContactLabel) {
-				$ofContactLabel = $access->ofContactLabel;
-				$contact_label_list[] = $ofContactLabel;
-				if ($access->get('removed', false)) {
-					$removed_labels[$ofContactLabel] = true;
-				} else {
-					$label_readLevels[$ofContactLabel] = $access->readLevel;
-				}
-			}
-		}
-
-		// Now, get all the people affected by this change, and their readLevels
-		$readLevels2 = array();
-		if ($contact_label_list) {
-			$contact_label_list = array_unique($contact_label_list);
-			$contacts = Users_Contact::select()
-				->where(array(
-					'userId' => $publisherId,
-					'label' => $contact_label_list
-				))->fetchDbRows(null, '', 'contactUserId');
-			foreach ($contacts as $contact) {
-				$contactUserId = $contact->contactUserId;
-				if (isset($showToUserIds[$contactUserId])) {
-					// this user had their read level set directly by the access,
-					// which overrides read levels set by access using ofContactLabel
-					continue;
-				}
-				if (isset($removed_labels[$ofContactLabel])) {
-					// this label doesn't affect readLevels anymore, since it was deleted
-					// but put this contact's id on a list whose readLevels need to be determined
-					$showToUserIds[$contactUserId] = null;
-					continue;
-				}
-				if (!isset($label_readLevels[$contact->label])) {
-					continue;
-				}
-				$readLevel = $label_readLevels[$contact->label];
-				if (!isset($readLevels2[$contactUserId])) {
-					$readLevels2[$contactUserId] = $readLevel;
-				} else {
-					$readLevels2[$contactUserId] = max(
-						$readLevels2[$contactUserId],
-						$readLevel
-					);
-				}
-			}
-		}
-
-		// Now step through all the users we found who were found through ofContactLabel
-		// and make sure we update the avatar rows that were meant for them.
-		foreach ($readLevels2 as $userId => $rl) {
-			if ($rl >= $content_readLevel) {
-				$showToUserIds[$userId] = true;
-			} else {
-				// in order for this to happen, two things had to be true:
-				// 1) there was no access that directly set a readLevel >= $content_readLevel
-				// 2) there was no access that set a readLevel >= $content_readLevel for any label containing this user
-				// therefore, their view should be the public view
-				$showToUserIds[$userId] = 'public';
-			}
-		}
-
-		// Resolve all the undetermined readLevels
-		foreach ($showToUserIds as $userId => $v) {
-			if (!isset($v)) {
-				// if the readLevel hasn't been determined by now, it's the same as the public one
-				$showToUserIds[$userId] = 'public';
-			}
-		}
-		
-		// Set up the self avatar:
-		$showToUserIds[$publisherId] = true;
-
-		// Finally, set up the public avatar:
-		if (!isset($stream->readLevel)) {
-			$stream->readLevel = Streams_Stream::$DEFAULTS['readLevel'];
-		}
-		$showToUserIds[""] = ($stream->readLevel >= $content_readLevel);
-
-		// Now, we update the avatars:
-		$parts = explode('/', $streamName);
-		$field = end($parts);
-		$rows_that_show = array();
-		$rows_that_hide = array();
-		foreach ($showToUserIds as $userId => $show) {
-			if ($show === 'public') {
-				// If no show is explicitly specified, use the value used for the rest of the public
-				$show = $showToUserIds[""];
-			}
-			if ($show === true) {
-				$rows_that_show[] = array(
-					'publisherId' => $publisherId,
-					'toUserId' => $userId,
-					'username' => $user->username,
-					'icon' => $user->icon,
-					'updatedTime' => new Db_Expression("CURRENT_TIMESTAMP"),
-					$field => $stream->content
-				);
-			} else if ($show === false) {
-				$rows_that_hide[] = array(
-					'publisherId' => $publisherId,
-					'toUserId' => $userId,
-					'username' => $user->username,
-					'icon' => $user->icon,
-					'updatedTime' => new Db_Expression("CURRENT_TIMESTAMP"),
-					$field => ''
-				);
-			}
-		}
-		$updates_that_show = array(
-			'username' => $user->username,
-			'icon' => $user->icon,
-			'updatedTime' => new Db_Expression("CURRENT_TIMESTAMP"),
-			$field => $stream->content
-		);
-		$updates_that_hide = array(
-			'username' => $user->username,
-			'icon' => $user->icon,
-			'updatedTime' => new Db_Expression("CURRENT_TIMESTAMP"),
-			$field => ''
-		);
-
-		// We are now ready to make changes to the database.
-		if ($updateToPublicValue) {
-			Streams_Avatar::update()
-				->set(array($field => $showToUserIds[""] ? $stream->content : ''))
-				->where(compact('publisherId'))
-				->execute();
-		}
-		Streams_Avatar::insertManyAndExecute($rows_that_show, array('onDuplicateKeyUpdate' => $updates_that_show));
-		Streams_Avatar::insertManyAndExecute($rows_that_hide, array('onDuplicateKeyUpdate' => $updates_that_hide));
-	}
-
-	/**
 	 * Gets relations. At most one of toStreamName, toStreamName can be an array.
 	 * @method getRelations
 	 * @private
@@ -1880,14 +1691,13 @@ abstract class Streams extends Base_Streams
 			if (isset($relatedToArray[$sn])) {
 				continue;
 			}
-			if (!isset($relatedToArray[$sn])) {
-				// at least one new relation will be inserted
-				if (isset($options['weight'])) {
-					$parts = explode('+', "$options[weight]");
-					if (count($parts) > 1) {
-						$calculateWeights = $parts[1];
-						break;
-					}
+
+			// at least one new relation will be inserted
+			if (isset($options['weight'])) {
+				$parts = explode('+', "$options[weight]");
+				if (count($parts) > 1) {
+					$calculateWeights = $parts[1];
+					break;
 				}
 			}
 		}
@@ -1911,6 +1721,8 @@ abstract class Streams extends Base_Streams
 		
 		$newRT = array();
 		$newRF = array();
+		$newRTT = array();
+		$newRFT = array();
 		$weights2 = array();
 		foreach ($$arrayField as $sn) {
 			if (isset($relatedToArray[$sn])) {
@@ -1975,15 +1787,42 @@ abstract class Streams extends Base_Streams
 			foreach (array('toStreamName', 'fromStreamName') as $f) {
 				$newRT[$sn][$f] = $newRF[$sn][$f] = ($f === $arrayField) ? $sn : $$f;
 			}
+			$newRTT[] = array(
+				'toPublisherId' => $category->publisherId,
+				'toStreamName' => $category->name,
+				'relationType' => $type,
+				'fromStreamType' => $stream->type,
+				'relationCount' => 1
+			);
+			$newRFT[] = array(
+				'fromPublisherId' => $stream->publisherId,
+				'fromStreamName' => $stream->name,
+				'relationType' => $type,
+				'toStreamType' => $category->type,
+				'relationCount' => 1
+			);
 		}
-		// Save all the relatedTo
+		// Insert/update all the relatedTo and relatedFrom rows
 		Streams_RelatedTo::insertManyAndExecute($newRT);
 		Streams_RelatedFrom::insertManyAndExecute($newRF);
-
+		// Insert/update all the corresponding totals
+		Streams_RelatedToTotal::insertManyAndExecute($newRTT, array(
+			'onDuplicateKeyUpdate' => array(
+				'relationCount' => new Db_Expression('relationCount + 1')
+			)
+		));
+		Streams_RelatedFromTotal::insertManyAndExecute($newRFT, array(
+			'onDuplicateKeyUpdate' => array(
+				'relationCount' => new Db_Expression('relationCount + 1')
+			)
+		));
 		$relatedFrom_messages = array();
 		$relatedTo_messages = array();
 		foreach ($$arrayField as $sn) {
-			
+			if (isset($relatedToArray[$sn])) {
+				continue;
+			}
+
 			$category = ($arrayField === 'toStreamName') ? $categories[$sn] : reset($categories);
 			$stream = ($arrayField === 'fromStreamName') ? $streams[$sn] : reset($streams);
 			$weight = (isset($options['weight']) && is_numeric($options['weight']))
@@ -2009,9 +1848,9 @@ abstract class Streams extends Base_Streams
 			$toType = $category->type;
 			$toDisplayType = Streams_Stream::displayType($toType);
 			$parts = explode('/', $type);
-			$displayType = end($parts);
+			$relationDisplayType = end($parts);
 			if (substr(end($parts), -1) === 's') {
-				$displayType = substr($displayType, 0, -1);
+				$relationDisplayType = substr($relationDisplayType, 0, -1);
 			}
 			$categoryName = explode('/', $category->name);
 			$streamName = explode('/', $stream->name);
@@ -2042,13 +1881,16 @@ abstract class Streams extends Base_Streams
 				$toUrl = Q_Uri::url(Q_Handlebars::renderSource($u, $params));
 			}
 
+			$params['relationDisplayType'] = $relationDisplayType;
 			$description = Q_Handlebars::renderSource(
-				Streams_Stream::getConfigField($category->type,
+				Streams_Stream::getConfigField(
+					$category->type,
 					array('relatedTo', $type, 'description'),
 					Streams_Stream::getConfigField($category->type, array(
 						'relatedTo', '*', 'description'
-					), "New $fromDisplayType added"
-				)),
+					), "New {{relationDisplayType}} added"),
+					false
+				),
 				$params
 			);
 
@@ -2069,10 +1911,13 @@ abstract class Streams extends Base_Streams
 			);
 
 			$description = Q_Handlebars::renderSource(
-				Streams_Stream::getConfigField($stream->type, array('relatedFrom', $type, 'description'),
+				Streams_Stream::getConfigField(
+					$stream->type,
+					array('relatedFrom', $type, 'description'),
 					Streams_Stream::getConfigField($stream->type, array('relatedFrom', '*', 'description'),
-						"Added to {{toDisplayType}} as $displayType"
-					)),
+						"Added to {{toDisplayType}} as {{relationDisplayType}}"
+					)
+				),
 				$params
 			);
 
@@ -2102,7 +1947,7 @@ abstract class Streams extends Base_Streams
 			 * @param {Streams_Stream} stream
 			 */
 			Q::event(
-				"Streams/relate/{$stream->type}",
+				"Streams/relateFrom/{$stream->type}",
 				compact('relatedTo', 'relatedFrom', 'asUserId', 'category', 'stream', 'extra'),
 				'after'
 			);
@@ -2247,6 +2092,15 @@ abstract class Streams extends Base_Streams
 				))->where($criteria)->execute();
 			}
 			
+			Streams_RelatedToTotal::update()->set(array(
+				'relationCount' => new Db_Expression('relationCount - 1')
+			))->where(array(
+				'toPublisherId' => $category->publisherId,
+				'toStreamName' => $category->name,
+				'relationType' => $type,
+				'fromStreamType' => $stream->type,
+			))->execute();
+			
 			// Send Streams/unrelatedTo message to a stream
 			// node server will be notified by Streams_Message::post
 			if (empty($options['skipMessageTo'])) {
@@ -2260,6 +2114,15 @@ abstract class Streams extends Base_Streams
 		}
 
 		if ($relatedFrom && $relatedFrom->remove()) {
+			Streams_RelatedFromTotal::update()->set(array(
+				'relationCount' => new Db_Expression('relationCount - 1')
+			))->where(array(
+				'fromPublisherId' => $stream->publisherId,
+				'fromStreamName' => $stream->name,
+				'relationType' => $type,
+				'toStreamType' => $category->type,
+			))->execute();
+			
 			if (empty($options['skipMessageFrom'])) {
 				// Send Streams/unrelatedFrom message to a stream
 				// node server will be notified by Streams_Message::post
@@ -2717,6 +2580,9 @@ abstract class Streams extends Base_Streams
 		$streams,
 		$options = array())
 	{
+		if (empty($streams)) {
+			return array();
+		}
 		$streams2 = self::_getStreams($asUserId, $publisherId, $streams);
 		$streamNames = array();
 		foreach ($streams2 as $s) {
@@ -2754,7 +2620,7 @@ abstract class Streams extends Base_Streams
 			if (isset($options['posted'])) {
 				$changedFields['posted'] = $participant->posted = 'yes';
 			}
-			if (isset($options['extra'])) {
+			if (!empty($options['extra'])) {
 				$extra = Q::json_decode($participant->extra, true);
 				$tree = new Q_Tree($extra);
 				$tree->merge($options['extra']);
@@ -2850,7 +2716,7 @@ abstract class Streams extends Base_Streams
 		foreach ($relateStreams as $pn => $streamTypes) {
 			foreach ($streamTypes as $streamType => $streamNames) {
 				if (!Streams::fetchOne($asUserId, $asUserId, $pn)) {
-					Streams::create($asUserId, $asUserId, 'Streams/participating/', array('name' => $pn));
+					Streams::create($asUserId, $asUserId, 'Streams/participating', array('name' => $pn));
 				}
 				$extraArray = array();
 				foreach ($streamNames as $sn) {
@@ -3052,6 +2918,9 @@ abstract class Streams extends Base_Streams
 		$streams, 
 		$options = array())
 	{
+		if (empty($streams)) {
+			return array();
+		}
 		$streams2 = self::_getStreams($asUserId, $publisherId, $streams);
 		$streamNames = array();
 		foreach ($streams2 as $s) {
@@ -3075,17 +2944,18 @@ abstract class Streams extends Base_Streams
 			$untilTime = $db->toDateTime($options['untilTime']);
 			$shouldUpdate = true;
 		}
-		$subscriptions = array();
-		$rows = Streams_Subscription::select()
-		->where(array(
-			'publisherId' => $publisherId,
-			'streamName' => $streamNames,
-			'ofUserId' => $asUserId
-		))->fetchAll(PDO::FETCH_ASSOC);
-		foreach ($rows as $row) {
-			$sn = $row['streamName'];
-			$subscriptions[$sn] = $row;
+		if (isset($o['rule'])) {
+			$rule = $o['rule']; // we aren't updating rules like this though
 		}
+		$subscriptions = Streams_Subscription::select('*', 'a')
+		->where(array(
+				'a.publisherId' => $publisherId,
+				'a.streamName' => $streamNames,
+				'a.ofUserId' => $asUserId
+		))->join(Streams_Stream::table(true, 'b'), array(
+			'a.publisherId' => 'b.publisherId',
+			'a.streamName' => 'b.name'
+		))->fetchDbRows(null, '', 'streamName');
 		$messages = array();
 		$streamNamesMissing = array();
 		$streamNamesUpdate = array();
@@ -3109,11 +2979,28 @@ abstract class Streams extends Base_Streams
 			))->execute();
 		}
 		$rules = array();
+		$userStreamsTree = Streams::userStreamsTree();
 		if ($streamNamesMissing) {
 			$types = array();
-			foreach ($streamNamesMissing as $sn) {
-				$stream = $streams2[$sn];
-				$types[$stream->type][] = $sn;
+			$rows = Streams_Stream::select(array('name', 'type'))->where(array(
+				'publisherId' => $publisherId,
+				'name' => $streamNamesMissing
+			))->fetchAll(PDO::FETCH_ASSOC);
+			foreach ($rows as $row) {
+				$name = $row['name'];
+				$types[$row['type']][] = $row['name'];
+			}
+			$o = $userStreamsTree->get($name, "subscribe", array());
+			if ($o) {
+				if (isset($o['filter'])) {
+					$filter = Q::json_encode($o['filter']);
+				}
+				if (isset($o['untilTime'])) {
+					$untilTime = $db->toDateTime($o['untilTime']);
+				}
+				if (isset($o['rule'])) {
+					$rule = $o['rule'];
+				}
 			}
 			$subscriptionRows = array();
 			$ruleRows = array();
@@ -3171,9 +3058,7 @@ abstract class Streams extends Base_Streams
 				}
 
 				// insert up to one rule per subscription
-				$rule = null;
-				if (isset($options['rule'])) {
-					$rule = $options['rule'];
+				if (isset($rule)) {
 					if (isset($rule['readyTime'])) {
 						$rule['readyTime'] = $db->toDateTime($rule['readyTime']);
 					}
@@ -3185,7 +3070,7 @@ abstract class Streams extends Base_Streams
 					}
 				}
 				if (!isset($rule)) {
-					$templates = Streams_Rule::select()
+					$templates = Streams_SubscriptionRule::select()
 						->where(array(
 							'ofUserId' => array('', $asUserId),
 							'publisherId' => array('', $publisherId),
@@ -3225,7 +3110,7 @@ abstract class Streams extends Base_Streams
 				}
 			}
 			Streams_Subscription::insertManyAndExecute($subscriptionRows);
-			Streams_Rule::insertManyAndExecute($ruleRows);
+			Streams_SubscriptionRule::insertManyAndExecute($ruleRows);
 		}
 
 		$streams5 = Q::take($streams, $streamNames);
@@ -3431,14 +3316,16 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $streamName The name of the stream the user will be invited to
 	 * @param {array} $who Array that can contain the following keys:
 	 * @param {string|array} [$who.userId] user id or an array of user ids
-	 * @param {string} [$who.platform] platform for which uids are passed
-	 * @param {string|array} [$who.uid]  platform uid or array of uids
+	 * @param {string} [$who.platform] platform for which xids are passed
+	 * @param {string} [$who.appId] id of platform app for which xids are passed
+	 * @param {string|array} [$who.xid] platform xid or array of xids
 	 * @param {string|array} [$who.label]  label or an array of labels, or tab-delimited string
 	 * @param {string|array} [$who.identifier] identifier such as an email or mobile number, or an array of identifiers, or tab-delimited string
 	 * @param {integer} [$who.newFutureUsers] the number of new Users_User objects to create via Users::futureUser in order to invite them to this stream. This typically is used in conjunction with passing the "html" option to this function.
 	 * @param {boolean} [$who.token=false] pass true here to save a Streams_Invite row
-	 *  with empty userId, which is used whenever someone shows up with the token
-	 *  and presents it via "Q.Streams.token" querystring parameter.
+	 *  with empty userId, which is used whenever someone makes a request with the
+	 *  "Q.Streams.token" querystring parameter containing the token.
+	 *  This row is exported under "invite" key of the returned data.
 	 *  See the Streams/before/Q_objects.php hook for more information.
 	 * @param {array} [$options=array()]
 	 *  @param {string|array} [$options.addLabel] label or an array of ($label => array($title, $icon)) for adding publisher's contacts
@@ -3451,11 +3338,17 @@ abstract class Streams extends Base_Streams
 	 *  @param {string} [$options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
 	 *	@param {array} [$options.html] an array of ($template, $batchName) such as ("MyApp/foo.handlebars", "foo") for generating html snippets which can then be viewed from and printed via the action Streams/invitations?batchName=$batchName&invitingUserId=$asUserId&limit=$limit&offset=$offset
 	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] Invite as this user id, defaults to logged-in user
+	 * @param {boolean} [$options.alwaysSend=false] Send invitation message even if already sent.
 	 * @param {boolean} [$options.skipAccess] whether to skip access checks when adding labels and contacts
+	 * @param {string} [$options.baseUrl] Override the base url when making the invite url
 	 * @see Users::addLink()
-	 * @return {array} Returns array with keys 
-	 *  "success", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
-	 *  The userIds array contains userIds from "userId" first, then "identifiers", "uids", "label",
+	 * @throws Users_Exception_NotAuthorized
+	 * @throws Q_Exception_WrongType
+	 * @throws Q_Exception_MissingFile
+	 * @throws Q_Exception_WrongValue
+	 * @return {array} Returns array with keys
+	 *  "success", "invite", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
+	 *  The userIds array contains userIds from "userId" first, then "identifiers", "xids", "label",
 	 *  then "newFutureUsers". The statuses is an array of the same size and in the same order.
 	 *  The identifierTypes array is in the same order as well.
 	 *  If the "token" option was set to true, the array also contains the "invite"
@@ -3464,6 +3357,11 @@ abstract class Streams extends Base_Streams
 	 */
 	static function invite($publisherId, $streamName, $who, $options = array())
 	{
+		$options = Q::take($options, array(
+			'readLevel', 'writeLevel', 'adminLevel', 'permissions',
+			'addLabel', 'addMyLabel', 'displayName', 'appUrl', 'alwaysSend', 'skipAccess'
+		));
+		
 		if (isset($options['asUserId'])) {
 			$asUserId = $options['asUserId'];
 			$asUser = Users_User::fetch($asUserId);
@@ -3518,7 +3416,7 @@ abstract class Streams extends Base_Streams
 			}
 			$users = Users::fetch($userIds, true);
 			$raw_userIds = array_keys($users);
-			foreach ($users as $uid => $user) {
+			foreach ($users as $xid => $user) {
 				$identifierTypes[] = 'userId';
 				$statuses[] = $user->sessionCount ? 'verified' : 'future';
 			}
@@ -3535,20 +3433,21 @@ abstract class Streams extends Base_Streams
 			$statuses = array_merge($statuses, $statuses1);
 			$identifierTypes = array_merge($identifierTypes, $identifierTypes1);
 		}
-		if (!empty($who['platform']) and !empty($who['uid'])) {
-			// merge users from platform uids
+		if (!empty($who['platform']) and !empty($who['appId']) and !empty($who['xid'])) {
+			// merge users from platform xids
 			$platform = $who['platform'];
-			$uids = $who['uid'];
-			if (is_string($uids)) {
-				$uids = array_map('trim', explode("\t", $uids)) ;
+			$appId = $who['appId'];
+			$xids = $who['xid'];
+			if (is_string($xids)) {
+				$xids = array_map('trim', explode("\t", $xids)) ;
 			}
 			$statuses2 = array();
 			$raw_userIds = array_merge(
 				$raw_userIds, 
-				Users_User::idsFromPlatformUids($platform, $uids, $statuses2)
+				Users_User::idsFromPlatformXids($platform, $appId, $xids, $statuses2)
 			);
 			$statuses = array_merge($statuses, $statuses2);
-			$identifiers = array_merge($identifiers, $uids);
+			$identifiers = array_merge($identifiers, $xids);
 			$identifierTypes2 = array_fill(0, count($statuses2), $platform);
 			$identifierTypes = array_merge($identifierTypes, $identifierTypes2);
 		}
@@ -3574,19 +3473,21 @@ abstract class Streams extends Base_Streams
 			}
 		}
 		// ensure that each userId is included only once
-		// and remove already participating users
 		$userIds = array_unique($raw_userIds);
 		$alreadyParticipating = Streams_Participant::filter(
 			$userIds, $stream->publisherId, $stream->name, null
 		);
-		$userIds = array_diff($raw_userIds, $alreadyParticipating);
 
-		$appUrl = !empty($options['appUrl'])
-			? $options['appUrl']
-			: Q_Request::baseUrl().'/'.Q_Config::get(
-				"Streams", "types", $stream->type, 
-				"invite", "url", "{{Streams}}/stream"
-			);
+		// remove already participating users if alwaysSend=false
+		if (!Q::ifset($options, 'alwaysSend', false)) {
+			$userIds = array_diff($raw_userIds, $alreadyParticipating);
+		}
+
+		if (!empty($options['appUrl'])) {
+			$appUrl = $options['appUrl'];
+		} else {
+			$appUrl = $stream->url();
+		}
 
 		// now check and define levels for invited user
 		$readLevel = isset($options['readLevel']) ? $options['readLevel'] : null;
@@ -3687,7 +3588,12 @@ abstract class Streams extends Base_Streams
 			$params['template'] = $template;
 			$params['batchName'] = $batchName;
 		}
-		$result = Q_Utils::queryInternal('Q/node', $params);
+		try {
+			$result = Q_Utils::queryInternal('Q/node', $params);
+		} catch (Exception $e) {
+			// just suppress it
+			$result = null;
+		}
 
 		$return = array(
 			'success' => $result,
@@ -3711,7 +3617,8 @@ abstract class Streams extends Base_Streams
 			$invite->adminLevel = $adminLevel;
 			$invite->state = 'pending';
 			$invite->save();
-			$return['invite'] = $invite;
+			$return['invite'] = $invite->exportArray();
+			$return['url'] = $invite->url();
 		}
 		
 		$instructions = array_merge($who, $options, compact(
@@ -3959,7 +3866,7 @@ abstract class Streams extends Base_Streams
 			$parts = explode(' ', $fullName);
 			if ($capitalize) {
 				foreach ($parts as $k => $v) {
-					$parts[$k] = ucfirst($v);
+					$parts[$k] = Q_Utils::ucfirst($v);
 				}
 			}
 			$last = join(' ', array_slice($parts, 1));
@@ -4187,6 +4094,98 @@ abstract class Streams extends Base_Streams
 		return $result[$type] = $classes;
 	}
 	
+	/**
+	 * Use this function to save a template for a specific stream type and publisher.
+	 * @method saveTemplate
+	 * @static
+	 * @param {string} $streamType
+	 * @param {string} $publisherId=''
+	 * @param {array} [$overrides=array()]
+	 * @param {array} [$overrides.readLevel]
+	 * @param {array} [$overrides.writeLevel]
+	 * @param {array} [$overrides.adminLevel]
+	 * @param {array} [$accessLabels=null] Pass labels for which to save access rows.
+	 *  Otherwise tries to look in Streams/types/$streamType/admins
+	 * @param {array} [$accessLevels=array('max','max','max')]
+	 *  Pass here the array of readLevel, writeLevel, adminLevel to save in access rows
+	 *  (can include strings or numbers, including -1 to not affect the type of access)
+	 * @return {Streams_Stream} The template stream
+	 */
+	static function saveTemplate(
+		$streamType,
+		$publisherId='',
+		$overrides = array(),
+		$accessLabels = null,
+		$accessLevels = array(40, 40, 40))
+	{
+		if (!isset($accessLabels)) {
+			$accessLabels = Streams_Stream::getConfigField($streamType, 'admins', array());
+		}
+		$defaults = Streams_Stream::getConfigField($streamType, 'defaults', Streams_Stream::$DEFAULTS);
+		$templateName = $streamType . '/';
+		$template = new Streams_Stream();
+		$template->publisherId = $publisherId;
+		$template->name = $templateName;
+		$template->type = "Streams/template";
+		$template->retrieve();
+		$template->title = $defaults['title'];
+		$template->icon = $defaults['icon'];
+		$template->readLevel = Q::ifset($overrides, 'readLevel', $defaults['readLevel']);
+		$template->writeLevel = Q::ifset($overrides, 'writeLevel', $defaults['writeLevel']);
+		$template->adminLevel = Q::ifset($overrides, 'adminLevel', $defaults['adminLevel']);
+		$template->save();
+		foreach ($accessLabels as $label) {
+			$label = Q::interpolate($label, array('app' => Q::app()));
+			$access = new Streams_Access();
+			$access->publisherId = $publisherId;
+			$access->streamName = $templateName;
+			$access->ofContactLabel = $label;
+			$access->retrieve();
+			$access->readLevel = $numeric = Streams_Stream::numericReadLevel($accessLevels[0]);
+			$access->writeLevel = Streams_Stream::numericWriteLevel($accessLevels[1]);
+			$access->adminLevel = Streams_Stream::numericAdminLevel($accessLevels[2]);
+			$access->save();
+		}
+		return $template;
+	}
+	
+	/**
+	 * Use this function to save mutable access for a specific stream type and publisher.
+	 * @method saveMutable
+	 * @static
+	 * @param {string} $streamType
+	 * @param {string} $publisherId=''
+	 * @param {array} [$accessLabels=null] Pass labels for which to save access rows.
+	 *    Otherwise we try to look in Streams/types/$streamType/admins
+	 * @param {array} [$accessLevels=array('max','max','max')]
+	 *  Pass here the array of readLevel, writeLevel, adminLevel to save in access rows
+	 *  (can include strings or numbers, including -1 to not affect the type of access)
+	 * @return {Streams_Stream} The template stream
+	 */
+	static function saveMutable(
+		$streamType,
+		$publisherId='',
+		$accessLabels = null,
+		$accessLevels = array(40, 40, 40))
+	{
+		if (!isset($accessLabels)) {
+			$accessLabels = Streams_Stream::getConfigField($streamType, 'admins', array());
+		}
+		foreach ($accessLabels as $label) {
+			$label = Q::interpolate($label, array('app' => Q::app()));
+			$access = new Streams_Access();
+			$access->publisherId = $publisherId;
+			$access->streamName = $streamType . '*';
+			$access->ofContactLabel = $label;
+			$access->retrieve();
+			$access->readLevel = $numeric = Streams_Stream::numericReadLevel($accessLevels[0]);
+			$access->writeLevel = Streams_Stream::numericWriteLevel($accessLevels[1]);
+			$access->adminLevel = Streams_Stream::numericAdminLevel($accessLevels[2]);
+			$access->save();
+		}
+		return $access;
+	}
+	
 	static function getExtendFieldNames($type, $asOwner = true)
 	{
 		$classes = Streams::getExtendClasses($type);
@@ -4204,7 +4203,7 @@ abstract class Streams extends Base_Streams
 		return $fieldNames;
 	}
 	
-	static function invitedUrl ($token) {
+	static function inviteUrl ($token) {
 		$baseUrl = Q_Config::get(array('Streams', 'invites', 'baseUrl'), "i");
 		return Q_Html::themedUrl("$baseUrl/$token");
 	}
@@ -4232,6 +4231,52 @@ abstract class Streams extends Base_Streams
 			$p->load($path.DS.$v);
 		}
 		return $p;
+	}
+	
+	/**
+	 * Generate an invite URL that can be transmitted by QR codes or NFC tags,
+	 * containing additional querystring fields such as "userId", "expires"
+	 * and "sig" which is a signature truncated to have length specified in config
+	 * Streams/userInviteUrl/signature/length.
+	 * The "sig" may be missing if the Q/internal/secret config is empty.
+	 * @param {string} $userId The id of the user for whom to generate this url
+	 * @param {string} $appUrl The url to bring the user to
+	 * @param {string} [$streamName=null] Optional stream
+	 * @param {Streams_Invite} [&$invite=null] You can pass a variable reference here
+	 *  to be filled with the Streams_Invite object.
+	 * @return {string}
+	 */
+	static function userInviteUrl(
+		$userId, 
+		$appUrl, 
+		$streamName = 'Streams/user/profile',
+		&$invite = null)
+	{
+		$expires = time() + Q_Config::get('Streams', 'invites', 'expires', 86400);
+		$fields = array(
+			'u' => $userId,
+			'e' => $expires
+		);
+		$len = Q_Config::get('Streams', 'invites', 'signature', 'length', 10);
+		$fields = Q_Utils::sign($fields, array('s'));
+		if (!empty($fields['s'])) {
+			$fields['s'] = substr($fields['s'], 0, $len);
+		}
+		$streamName = 'Streams/user/profile';
+		$stream = Streams::fetchOne($userId, $userId, $streamName);
+		if (!$stream) {
+			$stream = Streams::create($userId, $userId, 'Streams/resource', array(
+				'name' => $streamName
+			));
+			$ret = $stream->invite(array('token' => true, 'appUrl' => $appUrl));
+			$invite = $ret['invite'];
+			$userInviteUrl = $ret['url'];
+			$stream->setAttribute('userInviteUrl', $userInviteUrl);
+			$stream->changed();
+		} else {
+			$userInviteUrl = $stream->getAttribute('userInviteUrl');
+		}
+		return $userInviteUrl . '?' . http_build_query($fields, null, '&');
 	}
 	
 	protected static function afterFetchExtended($publisherId, $streams)
@@ -4274,6 +4319,373 @@ abstract class Streams extends Base_Streams
 				$stream->set($className, $row);
 			}
 		}
+	}
+	
+	private static function messageTotals($publisherId, $name, $options, $streams)
+	{
+		if (empty($options['withMessageTotals'])) {
+			return $streams;
+		}
+		$infoForTotals = array();
+		if (isset($options['withMessageTotals']['*'])) {
+			$trows = Streams_MessageTotal::select()->where(array(
+				'publisherId' => $publisherId,
+				'streamName' => $name,
+				'messageType' => $options['withMessageTotals']['*']
+			))->fetchDbRows();
+			unset($options['withMessageTotals']['*']);
+		} else {
+			$trows = array();
+		}
+		foreach ($options['withMessageTotals'] as $n => $mt) {
+			if (!$mt) {
+				continue;
+			}
+			if (!is_array($mt)) {
+				$mt = array($mt);
+			}
+			ksort($mt);
+			$j = json_encode($mt);
+			$infoForTotals[$j] = array($n, $mt);
+		}
+		foreach ($infoForTotals as $info) {
+			$frows = Streams_MessageTotal::select()->where(array(
+				'publisherId' => $publisherId,
+				'streamName' => $info[0],
+				'messageType' => $info[1]
+			))->fetchDbRows();
+			$trows = array_merge($trows, $frows);
+		}
+		foreach ($streams as $s) {
+			if (!$s->testReadLevel('messages')) {
+				continue;
+			}
+			$messageTotals = array();
+			foreach ($trows as $row) {
+				if ($row->streamName === $s->name) {
+					$messageTotals[$row->messageType] = $row->messageCount;
+				}
+			}
+			$s->set('messageTotals', $messageTotals);
+		}
+		return $streams;
+	}
+
+	/**
+	 * Get info about relations TO streams
+	 * @method relatedToTotals
+	 * @static
+	 * @param {string} $publisherId Stream publisher id
+	 * @param {string|array} $name Stream name or array of names
+	 * @param {array} $options Can be:
+	 *	 array('withRelatedToTotals' => array('streamName' => true)) for all rows
+	 *	 array('withRelatedToTotals' => array('streamName' => array('relationType', ...))) for particular rows
+	 * @return {array} Returns array('relationType_1' => array('fromStreamType' => relationCount), 'relationType_2' => ...)
+	*/
+	private static function relatedToTotals($publisherId, $name, $options, $streams)
+	{
+		$options = Q::ifset($options, 'withRelatedToTotals', null);
+		if (empty($options) || !is_array($options)) {
+			return $streams;
+		}
+
+		$infoForTotals = array();
+		if ($options === true){
+			$trows = Streams_RelatedToTotal::select()->where(array(
+				'toPublisherId' => $publisherId,
+				'toStreamName' => $name
+			))->fetchDbRows();
+		} elseif (isset($options['*'])) {
+			$trows = Streams_RelatedToTotal::select()->where(array(
+				'toPublisherId' => $publisherId,
+				'toStreamName' => $name,
+				'relationType' => $options['*']
+			))->fetchDbRows();
+			unset($options['*']);
+		} else {
+			$trows = array();
+		}
+		foreach ($options as $n => $mt) {
+			if (!$mt) {
+				continue;
+			}
+			if (!is_array($mt)) {
+				$mt = array($mt);
+			}
+			ksort($mt);
+			$j = json_encode($mt);
+			$infoForTotals[$j] = array($n, $mt);
+		}
+		foreach ($infoForTotals as $info) {
+			if ($info[1] === array(true)) { // all relations
+				$frows = Streams_RelatedToTotal::select()->where(array(
+					'toPublisherId' => $publisherId,
+					'toStreamName' => $info[0]
+				))->fetchDbRows();
+			} else { // particular relations
+				$frows = Streams_RelatedToTotal::select()->where(array(
+					'toPublisherId' => $publisherId,
+					'toStreamName' => $info[0],
+					'relationType' => $info[1]
+				))->fetchDbRows();
+			}
+			$trows = array_merge($trows, $frows);
+		}
+
+		foreach ($streams as $s) {
+			if (!$s->testReadLevel('relations')) {
+				continue;
+			}
+			$relatedToTotals = array();
+			foreach ($trows as $row) {
+				if ($row->toStreamName !== $s->name) {
+					continue;
+				}
+
+				$relatedToTotals[$row->relationType][$row->fromStreamType] = $row->relationCount;
+			}
+			$s->set('relatedToTotals', $relatedToTotals);
+		}
+		return $streams;
+	}
+
+	/**
+	 * Get info about relations FROM streams
+	 * @method relatedFromTotals
+	 * @static
+	 * @param {string} $publisherId Stream publisher id
+	 * @param {array} $options Can be:
+	 *	 array('withRelatedFromTotals' => array('streamName' => true)) for all rows
+	 *	 array('withRelatedFromTotals' => array('streamName' => array('relationType', ...))) for particular rows
+	 * @return {array} Returns array('relationType_1' => array('fromStreamType' => relationCount), 'relationType_2' => ...)
+	*/
+	private static function relatedFromTotals($publisherId, $name, $options, $streams)
+	{
+		$options = Q::ifset($options, 'withRelatedFromTotals', null);
+		if (empty($options) || !is_array($options)) {
+			return $streams;
+		}
+
+		$infoForTotals = array();
+		if ($options === true){
+			$trows = Streams_RelatedFromTotal::select()->where(array(
+				'fromPublisherId' => $publisherId,
+				'fromStreamName' => $name
+			))->fetchDbRows();
+		} elseif (isset($options['*'])) {
+			$trows = Streams_RelatedFromTotal::select()->where(array(
+				'fromPublisherId' => $publisherId,
+				'fromStreamName' => $name,
+				'relationType' => $options['*']
+			))->fetchDbRows();
+			unset($options['*']);
+		} else {
+			$trows = array();
+		}
+		foreach ($options as $n => $mt) {
+			if (!$mt) {
+				continue;
+			}
+			if (!is_array($mt)) {
+				$mt = array($mt);
+			}
+			ksort($mt);
+			$j = json_encode($mt);
+			$infoForTotals[$j] = array($n, $mt);
+		}
+		foreach ($infoForTotals as $info) {
+			if ($info[1] === array(true)) { // all relations
+				$frows = Streams_RelatedFromTotal::select()->where(array(
+					'fromPublisherId' => $publisherId,
+					'fromStreamName' => $info[0]
+				))->fetchDbRows();
+			} else { // particular relations
+				$frows = Streams_RelatedFromTotal::select()->where(array(
+					'fromPublisherId' => $publisherId,
+					'fromStreamName' => $info[0],
+					'relationType' => $info[1]
+				))->fetchDbRows();
+			}
+			$trows = array_merge($trows, $frows);
+		}
+
+		foreach ($streams as $s) {
+			if (!$s->testReadLevel('relations')) {
+				continue;
+			}
+			$relatedFromTotals = array();
+			foreach ($trows as $row) {
+				if ($row->fromStreamName !== $s->name) {
+					continue;
+				}
+
+				$relatedFromTotals[$row->relationType][$row->toStreamType] = $row->relationCount;
+			}
+			$s->set('relatedFromTotals', $relatedFromTotals);
+		}
+		return $streams;
+	}
+	/**
+	 * Get or create interest stream
+	 * @method getInterest
+	 * @static
+	 * @param {string} $title Stream title which will convert to stream name
+	 * @param {string} $publisherId If null, set to main community id Users::communityId()
+	 * @return {Streams_Stream}
+	 */
+	static function getInterest ($title, $publisherId = null) {
+		$streamName = 'Streams/interest/' . Q_Utils::normalize($title);
+		$publisherId = $publisherId ?: Users::communityId();
+
+		$stream = Streams::fetchOne(null, $publisherId, $streamName);
+		if (!$stream) {
+			$stream = Streams::create($publisherId, $publisherId, 'Streams/interest', array(
+				'name' => $streamName,
+				'title' => $title
+			));
+			if (is_dir(APP_WEB_DIR.DS."plugins".DS."Streams".DS."img".DS."icons".DS.$streamName)) {
+				$stream->icon = $streamName;
+			} else {
+				$parts = explode(': ', $title, 2);
+				$keywords = implode(' ', $parts);
+				$tries = array($keywords, $parts[1]);
+				$data = null;
+				foreach ($tries as $t) {
+					try {
+						$data = Q_Image::pixabay($t, array(
+							'orientation' => 'horizontal',
+							'min_width' => '500',
+							'safesearch' => 'true',
+							'image_type' => 'photo'
+						), true);
+					} catch (Exception $e) {
+						Q::log("Exception during Streams/interest post: " . $e->getMessage());
+						$data = null;
+					}
+					if ($data) {
+						break;
+					}
+				}
+				if ($data) {
+					$params = array(
+						'data' => $data,
+						'path' => "{{Streams}}/img/icons",
+						'subpath' => $streamName,
+						'save' => 'Streams/interest',
+						'skipAccess' => true
+					);
+					Q_Image::save($params);
+					$stream->icon = $streamName;
+				}
+			}
+			$stream->save();
+		}
+
+		return $stream;
+	}
+
+	/**
+	 * Get the directory to import the icon into, for a stream.
+	 * Use this with Users::importIcon().
+	 * @param {string} $publisherId
+	 * @param {string} $streamName
+	 * @param {string} [$extra] You can pass time() here or something,
+	 *  if you don't want to overwrite old values.
+	 * @return {string}
+	 */
+	static function iconDirectory($publisherId, $streamName, $extra = null)
+	{
+		$splitId = Q_Utils::splitId($publisherId);
+		$sn = implode(DS, explode('/', $streamName));
+		$path = APP_WEB_DIR . DS . 'Q' . DS . 'uploads' . DS . 'Streams';
+		if ($realpath = realpath($path)) {
+			$path = $realpath;
+		}
+		$subpath = $splitId . DS . $sn . DS . 'icon';
+		if ($extra) {
+			$subpath .= DS . $extra;
+		}
+		return $realpath . DS . $subpath;
+	}
+
+	/**
+	 * Remove streams from system
+	 * @method removeStream
+	 * @static
+	 * @param {Streams_Stream|array} $stream Data about stream to remove.
+	 * Can be Streams_Stream object or array('publisherId' => ..., 'name' => ...)
+	 * Or array of these values.
+	 */
+	static function removeStream ($stream) {
+		if (is_array($stream)) {
+			if (isset($stream['name']) && isset($stream['publisherId'])) {
+				$stream = (object)$stream;
+			} else {
+				foreach ($stream as $item) {
+					self::removeStream($item);
+				}
+
+				return;
+			}
+		}
+
+		Streams_RelatedTo::delete()
+			->where(array('toPublisherId' => $stream->publisherId, 'toStreamName' => $stream->name))
+			->orWhere(array('fromPublisherId' => $stream->publisherId, 'fromStreamName' => $stream->name))
+			->execute();
+
+		Streams_RelatedFrom::delete()
+			->where(array('toPublisherId' => $stream->publisherId, 'toStreamName' => $stream->name))
+			->orWhere(array('fromPublisherId' => $stream->publisherId, 'fromStreamName' => $stream->name))
+			->execute();
+
+		Streams_Message::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_MessageTotal::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Participant::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Access::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Subscription::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_SubscriptionRule::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Invite::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Notification::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_RelatedFromTotal::delete()
+			->where(array('fromPublisherId' => $stream->publisherId, 'fromStreamName' => $stream->name))
+			->execute();
+
+		Streams_RelatedToTotal::delete()
+			->where(array('toPublisherId' => $stream->publisherId, 'toStreamName' => $stream->name))
+			->execute();
+
+		Streams_Task::delete()
+			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->execute();
+
+		Streams_Stream::delete()
+			->where(array('publisherId' => $stream->publisherId, 'name' => $stream->name))
+			->execute();
 	}
 
 	/**

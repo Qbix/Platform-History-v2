@@ -21,11 +21,16 @@ var Row = Q.require('Db/Row');
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.publisherId] defaults to ""
+ * @param {string} [$fields.platform] defaults to ""
+ * @param {string} [$fields.appId] defaults to ""
  * @param {string} [$fields.xid] defaults to ""
- * @param {string} [$fields.userId] defaults to ""
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
- * @param {string} [$fields.nickname] defaults to ""
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.userId] defaults to ""
+ * @param {string} [$fields.responseType] defaults to null
+ * @param {string} [$fields.accessToken] defaults to null
+ * @param {string|Db_Expression} [$fields.expires] defaults to null
+ * @param {string} [$fields.extra] defaults to "{}"
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -34,22 +39,22 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property publisherId
+ * @property platform
  * @type String|Buffer
  * @default ""
- * 
+ * A platform like facebook or github or web
+ */
+/**
+ * @property appId
+ * @type String|Buffer
+ * @default ""
+ * An ID in the local/app.json config for the app
  */
 /**
  * @property xid
  * @type String|Buffer
  * @default ""
- * The external user id
- */
-/**
- * @property userId
- * @type String|Buffer
- * @default ""
- * 
+ * The user's external id
  */
 /**
  * @property insertedTime
@@ -58,10 +63,40 @@ Q.mixin(Base, Row);
  * 
  */
 /**
- * @property nickname
+ * @property updatedTime
+ * @type String|Db.Expression
+ * @default null
+ * 
+ */
+/**
+ * @property userId
  * @type String
  * @default ""
- * 
+ * The native user id in our platform
+ */
+/**
+ * @property responseType
+ * @type String
+ * @default null
+ * The type of oAuth 2 response
+ */
+/**
+ * @property accessToken
+ * @type String
+ * @default null
+ * Bearer token given to the client to access resources
+ */
+/**
+ * @property expires
+ * @type String|Db.Expression
+ * @default null
+ * When the token expires
+ */
+/**
+ * @property extra
+ * @type String
+ * @default "{}"
+ * JSON with any extra attributes
  */
 
 /**
@@ -250,7 +285,8 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
-		"publisherId",
+		"platform",
+		"appId",
 		"xid"
 	];
 };
@@ -272,50 +308,93 @@ Base.prototype.fieldNames = function () {
  */
 Base.fieldNames = function () {
 	return [
-		"publisherId",
+		"platform",
+		"appId",
 		"xid",
-		"userId",
 		"insertedTime",
-		"nickname"
+		"updatedTime",
+		"userId",
+		"responseType",
+		"accessToken",
+		"expires",
+		"extra"
 	];
 };
 
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_publisherId
+ * @method beforeSet_platform
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_publisherId = function (value) {
+Base.prototype.beforeSet_platform = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".publisherId");
+			throw new Error('Must pass a String or Buffer to '+this.table()+".platform");
 		if (typeof value === "string" && value.length > 31)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".platform");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the publisherId field
+	 * Returns the maximum string length that can be assigned to the platform field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_publisherId = function () {
+Base.prototype.maxSize_platform = function () {
 
 		return 31;
 };
 
 	/**
-	 * Returns schema information for publisherId column
+	 * Returns schema information for platform column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_publisherId = function () {
+Base.column_platform = function () {
 
-return [["varbinary","31","",false],false,"PRI",null];
+return [["varbinary","31","",false],false,"PRI",""];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_appId
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_appId = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".appId");
+		if (typeof value === "string" && value.length > 200)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".appId");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the appId field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_appId = function () {
+
+		return 200;
+};
+
+	/**
+	 * Returns schema information for appId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_appId = function () {
+
+return [["varbinary","200","",false],false,"PRI",""];
 };
 
 /**
@@ -333,7 +412,7 @@ Base.prototype.beforeSet_xid = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
 			throw new Error('Must pass a String or Buffer to '+this.table()+".xid");
-		if (typeof value === "string" && value.length > 31)
+		if (typeof value === "string" && value.length > 200)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".xid");
 		return value;
 };
@@ -344,7 +423,7 @@ Base.prototype.beforeSet_xid = function (value) {
 	 */
 Base.prototype.maxSize_xid = function () {
 
-		return 31;
+		return 200;
 };
 
 	/**
@@ -353,7 +432,59 @@ Base.prototype.maxSize_xid = function () {
 	 */
 Base.column_xid = function () {
 
-return [["varbinary","31","",false],false,"PRI",null];
+return [["varbinary","200","",false],false,"PRI",""];
+};
+
+/**
+ * Method is called before setting the field
+ * @method beforeSet_insertedTime
+ * @param {String} value
+ * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
+ */
+Base.prototype.beforeSet_insertedTime = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== 'object' && !isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
+		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
+		return value;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_insertedTime = function () {
+
+return [["timestamp","200","",false],true,"","CURRENT_TIMESTAMP"];
+};
+
+/**
+ * Method is called before setting the field
+ * @method beforeSet_updatedTime
+ * @param {String} value
+ * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
+ */
+Base.prototype.beforeSet_updatedTime = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== 'object' && !isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
+		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
+		return value;
+};
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_updatedTime = function () {
+
+return [["timestamp","200","",false],true,"",null];
 };
 
 /**
@@ -369,8 +500,8 @@ Base.prototype.beforeSet_userId = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".userId");
 		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
 		return value;
@@ -391,16 +522,77 @@ Base.prototype.maxSize_userId = function () {
 	 */
 Base.column_userId = function () {
 
-return [["varbinary","31","",false],false,"",null];
+return [["varchar","31","",false],false,"",""];
+};
+
+/**
+ * Method is called before setting the field and verifies if value belongs to enum values list
+ * @method beforeSet_responseType
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' does not belong to enum values list
+ */
+Base.prototype.beforeSet_responseType = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (['token','code'].indexOf(value) < 0)
+			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".responseType");
+		return value;
+};
+
+	/**
+	 * Returns schema information for responseType column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_responseType = function () {
+
+return [["enum","'token','code'","",false],true,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_accessToken
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_accessToken = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".accessToken");
+		if (typeof value === "string" && value.length > 1023)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".accessToken");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the accessToken field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_accessToken = function () {
+
+		return 1023;
+};
+
+	/**
+	 * Returns schema information for accessToken column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_accessToken = function () {
+
+return [["varchar","1023","",false],true,"",null];
 };
 
 /**
  * Method is called before setting the field
- * @method beforeSet_insertedTime
+ * @method beforeSet_expires
  * @param {String} value
  * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
  */
-Base.prototype.beforeSet_insertedTime = function (value) {
+Base.prototype.beforeSet_expires = function (value) {
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== 'object' && !isNaN(value)) {
 			value = parseInt(value);
@@ -411,70 +603,54 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 };
 
 	/**
-	 * Returns schema information for insertedTime column
+	 * Returns schema information for expires column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_insertedTime = function () {
+Base.column_expires = function () {
 
-return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","1023","",false],true,"",null];
 };
 
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_nickname
+ * @method beforeSet_extra
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_nickname = function (value) {
-		if (value == null) {
-			value='';
-		}
+Base.prototype.beforeSet_extra = function (value) {
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".nickname");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".nickname");
+			throw new Error('Must pass a String to '+this.table()+".extra");
+		if (typeof value === "string" && value.length > 1023)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".extra");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the nickname field
+	 * Returns the maximum string length that can be assigned to the extra field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_nickname = function () {
+Base.prototype.maxSize_extra = function () {
 
-		return 255;
+		return 1023;
 };
 
 	/**
-	 * Returns schema information for nickname column
+	 * Returns schema information for extra column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_nickname = function () {
+Base.column_extra = function () {
 
-return [["varchar","255","",false],false,"",null];
+return [["varchar","1023","",false],true,"","{}"];
 };
 
-/**
- * Check if mandatory fields are set and updates 'magic fields' with appropriate values
- * @method beforeSave
- * @param {Object} value The object of fields
- * @param {Function} callback Call this callback if you return null
- * @return {Object|null} Return the fields, modified if necessary. If you return null, then you should call the callback(err, modifiedFields)
- * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
- */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['publisherId','xid'], i;
-	if (!this._retrieved) {
-		var table = this.table();
-		for (i=0; i<fields.length; i++) {
-			if (this.fields[fields[i]] === undefined) {
-				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
-			}
-		}
-	}
+
+	// convention: we'll have updatedTime = insertedTime if just created.
+	this['updatedTime'] = value['updatedTime'] = new Db.Expression('CURRENT_TIMESTAMP');
 	return value;
 };
 

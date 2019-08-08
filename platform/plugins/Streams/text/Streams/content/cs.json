@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Nový předmět"
+    },
+    "labels": {
+        "Streams\/invited": "Lidé, které jsem pozval",
+        "Streams\/invitedMe": "Kdo mě pozval"
+    },
+    "interests": {
+        "Filter": "Co vás baví?",
+        "CanAdd": "Pokud stále nemůžete najít to, co hledáte, můžete přidat nový zájem níže:",
+        "TrySynonyms": "Nevidíš to? Vyzkoušejte některá synonyma.",
+        "AddUnderCategory": "Přidat do kategorie ...",
+        "Other": "jiný",
+        "Unlisted": "Nevyplněno"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Zpráva byla pro kontrolu uživatele označena příznakem. Opětovným ťuknutím znovu rozbalíte.",
+        "noOneSaid": "Nikdo nic neřekl",
+        "closeChatButton": "Zavřete chat",
+        "closeChatConfirmTitle": "Zavřete tento chat?",
+        "closeChatConfirm": "Opravdu chcete tento chat zavřít?",
+        "closeChatConfirmYes": "Ano",
+        "closeChatConfirmNo": "Ne",
+        "earlierComments": "dřívějších připomínek",
+        "Subscribed": "Ztlumit oznámení",
+        "Unsubscribed": "Získejte oznámení",
+        "dontHavePermissionJoinConversation": "K této konverzaci nemáte povolení.",
+        "startedConversation": "zahájil konverzaci",
+        "RealTimeCall": "Volání v reálném čase"
+    },
+    "notifications": {
+        "*": "Zpráva {{& message.fields.type}} až {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} řekl:",
+        "Streams\/changed": "Změny v {{stream.fields.title}}",
+        "Streams\/invite": "Byli jste pozváni na adresu {{& stream.fields.title}}",
+        "Streams\/announcement": "Oznámení v {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} změnil přístup k datům",
+        "Streams\/chat\/edit": "Zpráva chatu byla upravena",
+        "Streams\/chat\/remove": "Zpráva chatu byla odstraněna",
+        "Streams\/closed": "{{stream.fields.title}} bylo zavřeno",
+        "Streams\/task\/progress": "Pokrok provedený {{stream.fields.title}}",
+        "Streams\/task\/complete": "Úkol dokončen: {{stream.fields.title}}",
+        "Streams\/task\/error": "Chyba během: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Příchozí zpráva",
+        "ManageEmailSubscriptions": "spravovat odběry e-mailů",
+        "IfUnsubscribe": "Pokud se chcete odhlásit"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} vás pozvalo na {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Vyberte si z kontaktů",
+            "selectFromContacts": "Vyberte možnost Z kontaktů",
+            "photo": "Vyfoť",
+            "photoInstruction": "Pokud je osoba, která naskenovala váš QR kód, před vámi, pořiďte si je",
+            "to": "Komu: {{Stream Title}}",
+            "go": "Jít",
+            "title": "Pozvat",
+            "placeholder": "Mobilní číslo nebo e-mailová adresa",
+            "orInvite": "Nebo pozvat lidi pomocí:",
+            "QR": "{{ClickOrTap}} pro generování QR kódu",
+            "QRtitle": "Naskenujte tento QR kód",
+            "byEmail": "E-mailem",
+            "byText": "Text",
+            "byFacebook": "Facebook",
+            "byTwitter": "Cvrlikání",
+            "QRscanned": "Prohledali to!",
+            "chooseAgainFromContacts": "Znovu vyberte možnost Kontakty",
+            "inviteSelectedContacts": "Pozvěte vybrané kontakty"
+        },
+        "email": {
+            "subject": "Hej, podívejte se na to",
+            "PleaseVisitLink": "Navštivte následující odkaz:",
+            "InvitingYou": "Zvu vás na {{title}}",
+            "HasInvitedYou": "{{displayName}} vás pozvalo na {{title}}"
+        },
+        "sms": {
+            "content": "Byli jste pozváni na adresu {{title}}. Klepněte na {{url}}"
+        },
+        "notice": {
+            "text": "Byli jste pozváni. {{ClickOrTap}} zde přijměte a připojte se."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} odeslala <em>{{message.fields.type}}<\/em> zprávu {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} v {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Pozvánky jsou zasílány z našeho čísla, které vaši přátelé ještě nepoznají. Následujte rychlý text a dejte jim vědět, že pozvání přišlo od vás, a požádejte je, aby klikli na odkaz.",
+            "confirm": "Pozvánky jsou zasílány z našeho čísla, které vaši přátelé ještě nepoznají. Chcete následovat rychlý text a informovat je, že pozvání přišlo od vás, a požádat je, aby klikli na odkaz.",
+            "check": "Hej, právě jsem vám poslal pozvánku do aplikace {{app}}. Zkontrolujte prosím sms a klikněte na odkaz!"
+        },
+        "email": {
+            "alert": "Pozvánky jsou odesílány z naší domény, kterou vaši přátelé ještě nepoznají. Následujte rychlý text a dejte jim vědět, že pozvání přišlo od vás, a požádejte je, aby klikli na odkaz.",
+            "confirm": "Pozvánky jsou odesílány z naší domény, kterou vaši přátelé ještě nepoznají. Chcete následovat rychlý text a informovat je, že pozvání přišlo od vás, a požádat je, aby klikli na odkaz.",
+            "subject": "Dostali jste pozvání?",
+            "body": "Hej, právě jsem vám poslal pozvánku do aplikace {{app}}. Zkontrolujte prosím svůj e-mail a klikněte na odkaz!"
+        }
+    },
+    "participating": {
+        "Title": "Titul",
+        "Subscribed": "Přihlásit se",
+        "Participants": "Účastníci"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Povolit mikrofon",
+            "cameraTitle": "Povolit kameru",
+            "cameraAndMicrophoneTitle": "Zapněte fotoaparát a mikrofon",
+            "dialogTitle": "Povolení dialogu",
+            "microphoneBtn": "Povolit mikrofon",
+            "cameraBtn": "Povolit kameru",
+            "cameraAndMicrophoneBtn": "Povolit kameru a mikrofon"
+        }
+    }
+}

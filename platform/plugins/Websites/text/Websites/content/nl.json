@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link om te promoten",
+                "startDate": "Begin datum",
+                "startTime": "Starttijd",
+                "endDate": "Einddatum",
+                "endTime": "Eindtijd",
+                "budget": "Begroting"
+            },
+            "interests": {
+                "Title": "Filteren op interesse",
+                "FilterInterests": "Begin een interesse te typen ..."
+            },
+            "Interest": "Interesseren",
+            "Location": "Plaats"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Gaan",
+            "PasteLinkHere": "Plak hier een link",
+            "BrowseTheWeb": "Blader",
+            "WriteToStartConversation": "Schrijf je gedachten om het gesprek te starten",
+            "StartConversation": "Begin een gesprek",
+            "GotoConversation": "Ga naar gesprek"
+        }
+    }
+}

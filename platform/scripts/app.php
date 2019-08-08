@@ -17,8 +17,21 @@ $usage
 
 Options:
 
---all Will install plugins listed in Q/app/plugins in \$APP_DIR/config/app.json
-  All connections/schemas listed in Q/pluginInfo and Q/appInfo will be installed also.
+--all This option is the same as doing install.php --app --plugins --composer --npm
+  It will install plugins listed in Q/app/plugins in \$APP_DIR/config/app.json
+  followed by installing the app. The plugins and app will be installed on all
+  connections/schemas listed in Q/pluginInfo and Q/appInfo, and each plugin and app
+  will install any composer or npm package that is specified for it.
+
+--app If true, installs the app
+
+--plugins This option installs all the plugins
+
+--composer Run PHP composer when encountered
+
+--npm Run Node.js Package Manager when encountered
+
+-p \$NAME Can be used repeatedly to install one or more plugins
 
 -s \$CONN_NAME
   This will execute app's install/upgrade sql scripts for connections \$CONN_NAME.
@@ -41,6 +54,7 @@ Options:
 --trace
   Print stacktraces on errors 
 
+
 EOT;
 
 $help = <<<EOT
@@ -59,7 +73,7 @@ if (isset($argv[1]) and in_array($argv[1], array('--help', '/?', '-h', '-?', '/h
 	die($help);
 
 #Check primary arguments count: 1 if running /app/scripts/Q/install.php, 2 if running /framework/scripts/app.php
-if ($count < ($FROM_APP ? 1 : 2))
+if ($count < ($FROM_APP ? 2 : 3))
 	die($usage);
 
 #Read primary arguments
@@ -86,7 +100,7 @@ try {
 }
 
 #Parse secondary arguments -sql, -sql-user-pass, -auto-install-prerequisites
-$auto_plugins = $noapp = false;
+$auto_plugins = $do_app = false;
 $sql_array = $plugins = array();
 $options = array(
 	'filemode' => 0666,
@@ -107,10 +121,6 @@ for ($i = ($FROM_APP ? 1 : 2); $i < $count; ++$i) {
 				'password' => true //$argv[$i + 2]
 			);
 			$i = $i + 1;
-			$mode = '';
-			break;
-		case 'plugin':
-			$plugins[] = $argv[$i];
 			$mode = '';
 			break;
 		case 'group':
@@ -145,8 +155,16 @@ for ($i = ($FROM_APP ? 1 : 2); $i < $count; ++$i) {
 				case '-all':
 				case '--all':
 					$auto_plugins = true;
+					$do_app = true;
+					$options['composer'] = true;
+					$options['npm'] = true;
+					break;
+				case '-plugins':
+				case '--plugins':
+					$auto_plugins = true;
 					break;
 				case '-p':
+				case '--plugin':
 					if ($i + 1 > $count - 1) {
 						echo "Not enough parameters to $argv[$i] option\n$usage";
 						exit;
@@ -164,11 +182,8 @@ for ($i = ($FROM_APP ? 1 : 2); $i < $count; ++$i) {
 					}
 					$mode = 'group';
 					break;
-				case '--noapp':
-					$noapp = true;
-					break;
-				case '--noinit':
-					$noInit = true;
+				case '--app':
+					$do_app = true;
 					break;
 				case '--composer':
 					$options['composer'] = true;
@@ -184,13 +199,14 @@ for ($i = ($FROM_APP ? 1 : 2); $i < $count; ++$i) {
 $options['sql'] = $sql_array;
 $is_win = (substr(strtolower(PHP_OS), 0, 3) === 'win');
 
-echo 'Q Platform app installer'.PHP_EOL;
-
 $app = Q::app();
+echo "Q Platform installer for $app app".PHP_EOL;
+
 $uploads_dir = APP_FILES_DIR.DS.$app.DS.'uploads';
 if (is_dir($uploads_dir)) {
 	$web_uploads_path = APP_WEB_DIR.DS.'Q'.DS.'uploads';
-	if (!file_exists($web_uploads_path)) {
+	if (!file_exists($web_uploads_path)
+	and !is_link($web_uploads_path)) {
 		Q_Utils::symlink($uploads_dir, $web_uploads_path);
 	}
 }
@@ -198,7 +214,8 @@ if (is_dir($uploads_dir)) {
 $text_dir = APP_TEXT_DIR;
 if (is_dir($text_dir)) {
 	$web_text_path = APP_WEB_DIR.DS.'Q'.DS.'text';
-	if (!file_exists($web_text_path)) {
+	if (!file_exists($web_text_path)
+	and !is_link($web_text_path)) {
 		Q_Utils::symlink($text_dir, $web_text_path);
 	}
 }
@@ -209,10 +226,7 @@ if (!file_exists($web_views_path)) {
 }
 
 if ($auto_plugins) {
-	$plugins = Q_Config::get('Q', 'plugins', array());
-	if (!in_array("Q", $plugins)) {
-		array_unshift($plugins, "Q");
-	}
+	$plugins = Q::plugins();
 }
 
 if (in_array('Q', $plugins) !== false) {
@@ -237,8 +251,8 @@ if (empty($plugins)) {
 	Q_Bootstrap::configure(true);
 }
 
-if (!$noapp) {
-	// if application is installed/updated, it's schema is always installed/updated
+if ($do_app) {
+	// if application is installed/updated, its schema is always installed/updated
 	$cons = Q_Config::get('Q', 'appInfo', 'connections', array());
 	foreach ($cons as $con) {
 		if (empty($options['sql'][$con])) {
@@ -248,8 +262,4 @@ if (!$noapp) {
 
 	$options['deep'] = true;
 	Q_Plugin::installApp($options);
-	if (empty($noInit) && file_exists($LOCAL_DIR.DS.'scripts'.DS.'init.php')) {
-		echo 'Running initialization script'.PHP_EOL;
-		include($LOCAL_DIR.DS.'scripts'.DS.'init.php');
-	}
 }

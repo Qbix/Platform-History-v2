@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "செலுத்த தட்டவும்"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} க்கான கட்டணம்",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} க்கான உங்கள் கட்டணத்திற்கு நன்றி",
+        "SubscribedTo": "{{plan.title}} க்கு சந்தாதாரராக {{call 'user.displayName'}}",
+        "YouSubscribedTo": "நீங்கள் {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "ஒழுங்கு பற்றிய தகவல்",
+        "PaymentMethod": "கட்டணம் செலுத்தும் முறை",
+        "ContactInfo": "தொடர்பு தகவல்",
+        "Pay": "செலுத்த"
+    },
+    "credits": {
+        "InviteAcceptedBy": "ஏற்றுக்கொள்ளப்பட்ட அழைப்பை {{999} by",
+        "YouHaveCreditsToStart": "தொடங்க உங்களுக்கு {{1}} வரவு உள்ளது"
+    },
+    "history": {
+        "Date": "தேதி",
+        "Amount": "தொகை",
+        "Description": "விளக்கம்",
+        "Client": "வாடிக்கையாளர்",
+        "To": "க்கு",
+        "From": "இருந்து",
+        "HistoryEmpty": "உங்களிடம் இன்னும் தரவு இல்லை"
+    },
+    "subscriptions": {
+        "infoTitle": "கட்டணத் தகவலை அமைக்கவும்",
+        "confirm": {
+            "title": "சந்தாவைத் தொடங்குங்கள்",
+            "message": "{{999} to க்கு குழுசேர விரும்புகிறீர்களா?",
+            "ok": "சரி",
+            "cancel": "ரத்து"
+        }
+    },
+    "payments": {
+        "infoTitle": "கட்டணத் தகவலை அமைக்கவும்",
+        "confirm": {
+            "title": "பணம் செலுத்துங்கள்",
+            "message": "{{symbol}} {{1000} pay செலுத்த ஒப்புக்கொள்கிறீர்களா?",
+            "ok": "சரி",
+            "cancel": "ரத்து"
+        }
+    }
+}

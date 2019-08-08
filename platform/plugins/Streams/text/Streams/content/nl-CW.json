@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Nieuw item"
+    },
+    "labels": {
+        "Streams/invited": "Mensen die ik heb uitgenodigd",
+        "Streams/invitedMe": "Wie heeft mij uitgenodigd"
+    },
+    "interests": {
+        "Filter": "Wat vind je leuk?",
+        "CanAdd": "Als je nog steeds niet kunt vinden wat je zoekt, kun je hieronder een nieuwe interesse toevoegen:",
+        "TrySynonyms": "Zie je het niet? Probeer enkele synoniemen.",
+        "AddUnderCategory": "Voeg toe onder categorie ...",
+        "Other": "anders",
+        "Unlisted": "geheim"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Bericht is gemarkeerd voor beoordeling door beheerder. Tik nogmaals om te ontslaan.",
+        "noOneSaid": "Niemand heeft iets gezegd",
+        "closeChatButton": "Chat sluiten",
+        "closeChatConfirmTitle": "Sluit deze chat?",
+        "closeChatConfirm": "Weet je zeker dat je deze chat wilt sluiten?",
+        "closeChatConfirmYes": "Ja",
+        "closeChatConfirmNo": "Nee",
+        "earlierComments": "eerdere opmerkingen",
+        "Subscribed": "Meldingen dempen",
+        "Unsubscribed": "Krijg meldingen",
+        "dontHavePermissionJoinConversation": "Je hebt geen toestemming om aan dit gesprek deel te nemen.",
+        "startedConversation": "begon een gesprek",
+        "RealTimeCall": "Real Time Call"
+    },
+    "notifications": {
+        "*": "Bericht {{& message.fields.type}} tot {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} zei:",
+        "Streams/changed": "Wijzigingen in {{stream.fields.title}}",
+        "Streams/invite": "U bent uitgenodigd voor {{& stream.fields.title}}",
+        "Streams/announcement": "Aankondiging in {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} heeft toegang tot de stream gewijzigd",
+        "Streams/chat/edit": "Chatbericht bewerkt",
+        "Streams/chat/remove": "Chatbericht verwijderd",
+        "Streams/closed": "{{stream.fields.title}} is gesloten",
+        "Streams/task/progress": "Voortgang gemaakt op {{stream.fields.title}}",
+        "Streams/task/complete": "Taak voltooid: {{stream.fields.title}}",
+        "Streams/task/error": "Fout tijdens: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: inkomend bericht",
+        "ManageEmailSubscriptions": "beheer uw e-mailabonnementen",
+        "IfUnsubscribe": "Als u zich wilt afmelden"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} heeft je uitgenodigd voor {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Kies uit je contacten",
+            "selectFromContacts": "Selecteer uit contacten",
+            "photo": "Maak een foto",
+            "photoInstruction": "Als de persoon die uw QR-code heeft gescand voor u ligt, maak dan een foto van hen",
+            "to": "Aan: {{Stream Title}}",
+            "go": "Gaan",
+            "title": "Nodig uit",
+            "placeholder": "Mobiel nummer of e-mailadres",
+            "orInvite": "Of nodig mensen uit door gebruik te maken van:",
+            "QR": "{{ClickOrTap}} om QR-code te genereren",
+            "QRtitle": "Scan deze QR-code",
+            "byEmail": "E-mail",
+            "byText": "Tekst",
+            "byFacebook": "Facebook",
+            "byTwitter": "tjilpen",
+            "QRscanned": "Ze hebben het gescand!",
+            "chooseAgainFromContacts": "Kies opnieuw uit contacten",
+            "inviteSelectedContacts": "Nodig geselecteerde contactpersonen uit"
+        },
+        "email": {
+            "subject": "Hé, kijk hier eens",
+            "PleaseVisitLink": "Ga naar de volgende link:",
+            "InvitingYou": "Ik nodig u uit voor {{title}}",
+            "HasInvitedYou": "{{displayName}} heeft u uitgenodigd voor {{title}}"
+        },
+        "sms": {
+            "content": "U bent uitgenodigd voor {{title}}. Tik op {{url}}"
+        },
+        "notice": {
+            "text": "Je bent uitgenodigd. {{ClickOrTap}} hier om te accepteren en deel te nemen."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} heeft een <em>{{message.fields.type}}</em> bericht gepost naar {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} in {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Uitnodigingen worden verzonden vanuit ons nummer, dat je vrienden nog niet herkennen. Volg een korte tekst om hen te laten weten dat de uitnodiging van jou afkomstig was, en vraag hen om op de link te klikken.",
+            "confirm": "Uitnodigingen worden verzonden vanuit ons nummer, dat je vrienden nog niet herkennen. Wil je een korte tekst volgen om hen te laten weten dat de uitnodiging van jou afkomstig was, en hen vragen op de link te klikken.",
+            "check": "Hallo, ik heb je zojuist een uitnodiging gestuurd naar de app {{app}}. Controleer je sms en klik op de link!"
+        },
+        "email": {
+            "alert": "Uitnodigingen worden verzonden vanuit ons domein, die uw vrienden nog niet herkennen. Volg een korte tekst om hen te laten weten dat de uitnodiging van jou afkomstig was, en vraag hen om op de link te klikken.",
+            "confirm": "Uitnodigingen worden verzonden vanuit ons domein, die uw vrienden nog niet herkennen. Wil je een korte tekst volgen om hen te laten weten dat de uitnodiging van jou afkomstig was, en hen vragen op de link te klikken.",
+            "subject": "Heb je een uitnodiging ontvangen?",
+            "body": "Hallo, ik heb je zojuist een uitnodiging gestuurd naar de app {{app}}. Controleer uw e-mail en klik op de link daar!"
+        }
+    },
+    "participating": {
+        "Title": "Titel",
+        "Subscribed": "geabonneerd",
+        "Participants": "Deelnemers"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Microfoon inschakelen",
+            "cameraTitle": "Camera inschakelen",
+            "cameraAndMicrophoneTitle": "Camera en microfoon inschakelen",
+            "dialogTitle": "Dialoogvenster inschakelen",
+            "microphoneBtn": "Microfoon inschakelen",
+            "cameraBtn": "Camera inschakelen",
+            "cameraAndMicrophoneBtn": "Camera en microfoon inschakelen"
+        }
+    }
+}

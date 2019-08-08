@@ -26,41 +26,20 @@ function Streams_promote_post()
 	$experienceId = Q::ifset($_REQUEST, 'experienceId', 'main');
 	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
 
-	$roles = Users::roles($communityId);
-	$app = Q::app();
-	if (empty($roles["$app/admins"])) {
+	$roles = Users::roles($communityId, Q_Config::get('Communities', 'promote', 'labels', 'none'));
+	if (empty($roles)) {
 		throw new Users_Exception_NotAuthorized();
 	}
 
 	$o = array('weight' => $stream->getAttribute('startTime'), 'skipAccess' => true);
 
-	$latitude = $longitude = null;
-
 	$relations = array();
-	if ($locationName = $stream->getAttribute('location', null)
-	and $cid = $stream->getAttribute('communityId', null)) {
-		$location = new Streams_Stream();
-		$location->publisherId = $cid;
-		$location->name = $locationName;
-		if ($location->retrieve()) {
-			$parts = explode('/', $locationName);
-			$placeId = end($parts);
-			$location = Places_Location::stream(null, $communityId, $placeId, true);
-			$relations['location'] = $stream->relateTo($location, $relationType, null, $o);
-			$latitude = $location->getAttribute('latitude');
-			$longitude = $location->getAttribute('longitude');
-		}
-	}
+	$location = Places_Location::fromStream($stream);
+	$latitude = $location['latitude'];
+	$longitude = $location['longitude'];
 
 	// NOTE: we need a way to add interests automatically
-	if ($interestName = $stream->getAttribute('interest', null)) {
-		$interest = new Streams_Stream();
-		$interest->publisherId = $communityId;
-		$interest->name = $interestName;
-		if ($interest->retrieve()) {
-			$relations['interest'] = $stream->relateTo($interest, $relationType, null, $o);
-		}
-	}
+	$interests = Calendars_Event::getInterests($stream);
 
 	$experience = Streams::fetchOne(
 		null, $communityId, "Streams/experience/$experienceId", true
@@ -70,13 +49,16 @@ function Streams_promote_post()
 		$stream->relateTo($experience, $relationType, null, $o);
 	}
 	$streamNames = array();
-	if (isset($latitude) and isset($longitude)) {
-		if ($interestTitle = $stream->getAttribute('interestTitle', null)) {
+	if (isset($latitude) && isset($longitude)) {
+		foreach ($interests as $interest) {
+			$interest = (object)$interest;
+			$relations['interest'] = $stream->relateTo($interest, $relationType, null, $o);
+
 			Places_Interest::streams(
 				$communityId,
 				$latitude,
 				$longitude,
-				$interestTitle,
+				$interest->title,
 				$co,
 				$streamNames
 			);

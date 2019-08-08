@@ -391,11 +391,13 @@ Sp.updateParticipantCounts = function (newState, prevState, callback) {
  * @param {String} event The type of Streams event, such as "Streams/post" or "Streams/remove"
  * @param {String} userId User who initiated the event
  * @param {Streams_Message} message 
- * @param {Boolean} dontNotifyObservers 
+ * @param {Boolean} dontNotifyObservers
+ * @return {Boolean} Whether the system went on to get and notify participants
  */
 Sp.notifyParticipants = function (event, userId, message, dontNotifyObservers) {
 	var fields = this.fields;
 	var stream = this;
+
 	Streams.getParticipants(fields.publisherId, fields.name, function (participants) {
 		message.fields.streamType = fields.type;
 		for (var userId in participants) {
@@ -413,6 +415,7 @@ Sp.notifyParticipants = function (event, userId, message, dontNotifyObservers) {
 			stream.notifyObservers(event, userId, message);
 		}
 	});
+	return true;
 };
 
 /**
@@ -1045,7 +1048,7 @@ Sp.subscribe = function(options, callback) {
 							}
 							_insertRule(rule);
 						} else {
-							stream.getSubscriptionTemplate('Rule', userId,
+							stream.getSubscriptionTemplate('SubscriptionRule', userId,
 							function (err, template) {
 								if (err) return callback.call(stream, err);
 								if (template && template.templateType !== 0) {
@@ -1056,7 +1059,7 @@ Sp.subscribe = function(options, callback) {
 							});
 						}
 						function _insertRule(fields) {
-							new Streams.Rule(fields).save(function(err) {
+							new Streams.SubscriptionRule(fields).save(function(err) {
 								if (err) {
 									return callback.call(stream, err);
 								}
@@ -1129,20 +1132,25 @@ Sp.notify = function(participant, event, userId, message, callback) {
 		
 		// 1) check for socket clients which are online
 		var only = Q.Config.get(['Streams', 'notifications', 'onlyIfAllClientsOffline'], true);
-		var clients;
 		if (only) {
+			// check if message send even if client online
+			var evenIfOnline = Streams.Stream.getConfigField(stream.fields.type, ['messages', message.fields.type, 'evenIfOnline'], false);
 			// check if any socket clients are online
-			clients = Users.User.clientsOnline(userId);
-			_continue(!Q.isEmpty(clients));
+			var clients = Users.User.clientsOnline(userId);
+
+			_continue(!Q.isEmpty(clients), evenIfOnline);
 		} else {
 			// check if any socket clients associated to any device sessions are online
 			_devices(_continue);
 		}
-		function _continue(online) {
+		function _continue(online, evenIfOnline) {
 			// 2) if user has socket connected - emit socket message and quit
 			if (online) {
 				Users.Socket.emitToUser(userId, event, message.getFields());
-				return callback && callback();
+
+				if (!evenIfOnline) {
+					return callback && callback();
+				}
 			}
 			// 3) if user has no socket connected, send offline notifications
 			//      to users who subscribed and filters match
@@ -1150,8 +1158,14 @@ Sp.notify = function(participant, event, userId, message, callback) {
 				return; // no need to notify the user of their own actions
 			}
 			if (participant.fields.subscribed !== 'yes') {
-				callback && callback(null, []);
+				return callback && callback(null, []);
 			}
+
+			// don't send offline notifications if paused
+			if (Streams.Notification.paused) {
+				return false;
+			}
+
 			Streams.Subscription.test(userId, stream, message.fields.type, _continue2);
 		}
 		function _continue2(err, deliveries) {
@@ -1313,7 +1327,7 @@ Sp.url = function (messageOrdinal, baseUrl)
 };
 
 /**
- * Returns the canonical url of the stream, if any
+ * Returns the canonical URI of the stream, if any
  * @param {Integer} [messageOrdinal] pass this to link to a message in the stream, e.g. to highlight it
  * @return {String|null|false}
  */

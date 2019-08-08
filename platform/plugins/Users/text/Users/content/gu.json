@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "પ્રવેશ કરો",
+        "LogOut": "લૉગ આઉટ"
+    },
+    "activate": {
+        "SetAsPrimary": "{{1}} ને મારા પ્રાથમિક {{2}} તરીકે સેટ કરો",
+        "ChoosePassPhrase": "સાથે લૉગ ઇન કરવા માટે <strong>પાસ શબ્દસમૂહ<\/strong> પસંદ કરો. <br> એક સરળ શબ્દસમૂહ જે થોડા શબ્દોનો સમાવેશ કરે છે જે તમને સરળતાથી યાદ રહેશે.",
+        "ChoosePassPhraseSeeSuggestions": "તમારા ખાતાને સુરક્ષિત રાખવા માટે સારો <strong>પાસ શબ્દસમૂહ<\/strong> પસંદ કરો. કેટલાક વિચારો માટે સૂચનો જુઓ.",
+        "LogOutAndTryAgain": "લૉગ આઉટ કરો અને ફરી પ્રયત્ન કરો",
+        "IfYouFeel": "જો તમને કંઇક ખોટું થયું હોય, તો તમે કરી શકો છો",
+        "SetIdentifierButtonTitle": "પ્રારંભ"
+    },
+    "session": {
+        "GetStarted": "શરૂ કરો"
+    },
+    "authorize": {
+        "GetStarted": "શરૂ કરો",
+        "Authorize": "અધિકૃત કરો",
+        "TermsLabel": "મેં વાંચ્યું છે અને સંમત છું <br> {{link}} સુધી",
+        "TermsTitle": "શરતો"
+    },
+    "register": {
+        "TermsLabel": "હું {{link}} સ્વીકારું છું",
+        "TermsTitle": "શરતો"
+    },
+    "notifications": {
+        "title": "પરવાનગી",
+        "prompt": "શું તમે સૂચનાઓ સક્ષમ કરવા માંગો છો? તમે જે વસ્તુઓની કાળજી લો છો તેના વિશે તમને રીઅલ-ટાઇમ અપડેટ્સ મળશે.",
+        "yes": "હા",
+        "no": "ના",
+        "WelcomePleaseVerifyEmail": "સ્વાગત છે! કૃપા કરીને તમારું ઇમેઇલ સરનામું ચકાસો.",
+        "WelcomeVerifyEmail": "સ્વાગત છે! તમારું ઇમેઇલ સરનામું ચકાસો.",
+        "ForgetPass": "અરે, તમે તમારો પાસફ્રેઝ ભૂલી ગયા છો?"
+    },
+    "usersContacts": {
+        "selectLabel": "કૃપા કરીને લેબલ પસંદ કરો.",
+        "inviteUser": "વપરાશકર્તા આમંત્રિત કરો"
+    },
+    "invalidLanguageSelected": "અમાન્ય ભાષા પસંદ કરી",
+    "contacts": {
+        "dialog": {
+            "title": "સંપર્ક પસંદ કરો"
+        },
+        "select": {
+            "title": "{{displayName}} નો સંપર્ક પસંદ કરો"
+        }
+    }
+}

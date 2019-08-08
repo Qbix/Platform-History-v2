@@ -29,7 +29,7 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.passphraseHash] defaults to null
  * @param {string} [$fields.emailAddress] defaults to null
  * @param {string} [$fields.mobileNumber] defaults to null
- * @param {string} [$fields.uids] defaults to "{}"
+ * @param {string} [$fields.xids] defaults to "{}"
  * @param {string} [$fields.emailAddressPending] defaults to ""
  * @param {string} [$fields.mobileNumberPending] defaults to ""
  * @param {string} [$fields.signedUpWith] defaults to ""
@@ -37,6 +37,7 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.icon] defaults to ""
  * @param {string} [$fields.url] defaults to null
  * @param {string} [$fields.pincodeHash] defaults to null
+ * @param {string} [$fields.preferredLanguage] defaults to "en"
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -93,10 +94,10 @@ Q.mixin(Base, Row);
  * 
  */
 /**
- * @property uids
+ * @property xids
  * @type String
  * @default "{}"
- * JSON of {platformName: [uid1, ...]}
+ * JSON of {platformName: [xid1, ...]}
  */
 /**
  * @property emailAddressPending
@@ -139,6 +140,12 @@ Q.mixin(Base, Row);
  * @type String|Buffer
  * @default null
  * a smaller security code for when user is already logged in
+ */
+/**
+ * @property preferredLanguage
+ * @type String
+ * @default "en"
+ * 
  */
 
 /**
@@ -356,14 +363,15 @@ Base.fieldNames = function () {
 		"passphraseHash",
 		"emailAddress",
 		"mobileNumber",
-		"uids",
+		"xids",
 		"emailAddressPending",
 		"mobileNumberPending",
 		"signedUpWith",
 		"username",
 		"icon",
 		"url",
-		"pincodeHash"
+		"pincodeHash",
+		"preferredLanguage"
 	];
 };
 
@@ -540,7 +548,7 @@ Base.prototype.beforeSet_passphraseHash = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".passphraseHash");
-		if (typeof value === "string" && value.length > 64)
+		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".passphraseHash");
 		return value;
 };
@@ -551,7 +559,7 @@ Base.prototype.beforeSet_passphraseHash = function (value) {
 	 */
 Base.prototype.maxSize_passphraseHash = function () {
 
-		return 64;
+		return 255;
 };
 
 	/**
@@ -560,7 +568,7 @@ Base.prototype.maxSize_passphraseHash = function () {
 	 */
 Base.column_passphraseHash = function () {
 
-return [["varchar","64","",false],true,"",null];
+return [["varchar","255","",false],true,"",null];
 };
 
 /**
@@ -638,37 +646,37 @@ return [["varbinary","255","",false],true,"",null];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_uids
+ * @method beforeSet_xids
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_uids = function (value) {
+Base.prototype.beforeSet_xids = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".uids");
+			throw new Error('Must pass a String to '+this.table()+".xids");
 		if (typeof value === "string" && value.length > 1023)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".uids");
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".xids");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the uids field
+	 * Returns the maximum string length that can be assigned to the xids field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_uids = function () {
+Base.prototype.maxSize_xids = function () {
 
 		return 1023;
 };
 
 	/**
-	 * Returns schema information for uids column
+	 * Returns schema information for xids column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_uids = function () {
+Base.column_xids = function () {
 
 return [["varchar","1023","",false],false,"","{}"];
 };
@@ -933,6 +941,42 @@ Base.prototype.maxSize_pincodeHash = function () {
 Base.column_pincodeHash = function () {
 
 return [["varbinary","255","",false],true,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_preferredLanguage
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_preferredLanguage = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".preferredLanguage");
+		if (typeof value === "string" && value.length > 3)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".preferredLanguage");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the preferredLanguage field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_preferredLanguage = function () {
+
+		return 3;
+};
+
+	/**
+	 * Returns schema information for preferredLanguage column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_preferredLanguage = function () {
+
+return [["varchar","3","",false],true,"","en"];
 };
 
 Base.prototype.beforeSave = function (value) {

@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "ورود",
+        "LogOut": "خروج"
+    },
+    "activate": {
+        "SetAsPrimary": "{{1}} را به عنوان {{2}} اصلی من تنظیم کنید",
+        "ChoosePassPhrase": "یک <strong>عبارت عبور<\/strong> برای ورود به سیستم انتخاب کنید <br> یک عبارت ساده متشکل از چند کلمه است که شما به راحتی می توانید به یاد داشته باشید.",
+        "ChoosePassPhraseSeeSuggestions": "یک <strong>عبارت عبور<\/strong> خوب برای حفاظت از حساب کاربری خود انتخاب کنید. پیشنهادات برای برخی ایده ها را ببینید.",
+        "LogOutAndTryAgain": "خروج و دوباره امتحان کنید",
+        "IfYouFeel": "اگر احساس می کنید چیزی اشتباه برطرف شده، می توانید",
+        "SetIdentifierButtonTitle": "شروع کن"
+    },
+    "session": {
+        "GetStarted": "شروع کنید"
+    },
+    "authorize": {
+        "GetStarted": "شروع کنید",
+        "Authorize": "مجاز",
+        "TermsLabel": "من خواندن و توافق دارم <br> به {{link}}",
+        "TermsTitle": "مقررات"
+    },
+    "register": {
+        "TermsLabel": "من قبول {{link}}",
+        "TermsTitle": "مقررات"
+    },
+    "notifications": {
+        "title": "اجازه",
+        "prompt": "میخواهید اعلانها را فعال کنید؟ شما بهروزرسانیهای زمان واقعی را در مورد مواردی که مورد توجه شماست، دریافت خواهید کرد.",
+        "yes": "بله",
+        "no": "نه",
+        "WelcomePleaseVerifyEmail": "خوش آمدی! لطفا آدرس ایمیل خود را تایید کنید.",
+        "WelcomeVerifyEmail": "خوش آمدی! آدرس ایمیل خود را تأیید کنید",
+        "ForgetPass": "سلام، آیا کلمه عبور خود را فراموش کرده اید؟"
+    },
+    "usersContacts": {
+        "selectLabel": "لطفا برچسب را انتخاب کنید",
+        "inviteUser": "دعوت کاربر"
+    },
+    "invalidLanguageSelected": "زبان نامعتبر انتخاب شده است",
+    "contacts": {
+        "dialog": {
+            "title": "تماس را انتخاب کنید"
+        },
+        "select": {
+            "title": "تماس با {{displayName}} را انتخاب کنید"
+        }
+    }
+}

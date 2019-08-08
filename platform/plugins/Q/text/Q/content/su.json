@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Kasalahan {{status}} nalika pamundut",
+        "canceled": "Pamundut dibatalkeun",
+        "500": "Kasalahan Sérver Internal",
+        "404": "Henteu kapendak: {{url}}",
+        "501": "Pamundutna kaganggu"
+    },
+    "nonce": {
+        "sameDomain": "Sidang kadaluwarsa. Refresh kaca sareng cobian deui.",
+        "otherDomain": "Pamundut parantos domain diblokir ka domain luar nagri dina {{baseUrl}}"
+    },
+    "words": {
+        "tap": "toél",
+        "click": "klik",
+        "yes": "enya",
+        "no": "teu",
+        "Tap": "Tepok",
+        "Click": "Klik",
+        "Yes": "Enya",
+        "No": "Entong"
+    },
+    "months": {
+        "1": "Januari",
+        "2": "Pebruari",
+        "3": "Maret",
+        "4": "April",
+        "5": "Mei",
+        "6": "Juni",
+        "7": "Juli",
+        "8": "Agustus",
+        "9": "September",
+        "10": "Oktober",
+        "11": "Nopémber",
+        "12": "Désémber"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Mangga ngidinan aksés ka mikropon anjeun",
+        "record": "Rékam",
+        "recording": "Rekaman",
+        "remains": "sesa",
+        "maximum": "maksimal",
+        "playing": "Puter",
+        "recorded": "Rékaman",
+        "clip": "klip",
+        "orupload": "Atawa Unggah",
+        "usethis": "Paké ieu",
+        "discard": "Piceun",
+        "encoding": "Encoding"
+    },
+    "alert": {
+        "title": "Ngageter"
+    },
+    "confirm": {
+        "title": "Pastikeun",
+        "ok": "Enya",
+        "cancel": "Entong"
+    },
+    "prompt": {
+        "title": "Gancang",
+        "ok": "Buka"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Kasalahan maca file",
+        "cameraCommands": {
+            "prompt": "Naon anu anjeun pikahoyong?",
+            "photo": "Candak poto anyar",
+            "library": "Pilih ti perpustakaan"
+        },
+        "tooSmall": "Mangga pilih gambar anu leuwih ageung.",
+        "cropping": {
+            "title": "Saluyukeun ukuran sareng posisi",
+            "touchscreen": "Paké ramo anjeun pikeun ngazum séred",
+            "notTouchscreen": "Pigunakeun mouse sareng kabayang pikeun ngazum séred"
+        }
+    }
+}

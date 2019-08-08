@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "teken aan",
+        "LogOut": "teken uit"
+    },
+    "activate": {
+        "SetAsPrimary": "Stel {{1}} as my primêre {{2}}",
+        "ChoosePassPhrase": "Kies &#39;n <strong>pasfrase<\/strong> om in te loggen met. <br> &#39;N Eenvoudige frase wat bestaan uit &#39;n paar woorde wat jy maklik sal onthou.",
+        "ChoosePassPhraseSeeSuggestions": "Kies &#39;n goeie <strong>paswoord<\/strong> om jou rekening te beskerm. Sien die voorstelle vir &#39;n paar idees.",
+        "LogOutAndTryAgain": "Teken uit en probeer weer",
+        "IfYouFeel": "As jy voel, het iets verkeerd gegaan, kan jy",
+        "SetIdentifierButtonTitle": "oorbegin"
+    },
+    "session": {
+        "GetStarted": "Begin"
+    },
+    "authorize": {
+        "GetStarted": "Begin",
+        "Authorize": "Magtig",
+        "TermsLabel": "Ek het gelees en stem saam <br> na die {{link}}",
+        "TermsTitle": "terme"
+    },
+    "register": {
+        "TermsLabel": "Ek aanvaar die {{link}}",
+        "TermsTitle": "terme"
+    },
+    "notifications": {
+        "title": "toestemming",
+        "prompt": "Wil jy kennisgewings aktiveer? Jy sal real-time updates ontvang oor dinge waarvoor jy omgee.",
+        "yes": "Ja",
+        "no": "Geen",
+        "WelcomePleaseVerifyEmail": "Welkom! Verifieer asseblief jou e-posadres.",
+        "WelcomeVerifyEmail": "Welkom! Bevestig jou e-pos adres.",
+        "ForgetPass": "Hey, het jy jou wagwoord vergeet?"
+    },
+    "usersContacts": {
+        "selectLabel": "Kies asseblief die etiket.",
+        "inviteUser": "Nooi gebruiker"
+    },
+    "invalidLanguageSelected": "Ongeldige taal gekies",
+    "contacts": {
+        "dialog": {
+            "title": "Kies kontak"
+        },
+        "select": {
+            "title": "Kies kontak van {{displayName}}"
+        }
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "لاگ ان ۾",
+        "LogOut": "ڪم ڇڏڻ"
+    },
+    "activate": {
+        "SetAsPrimary": "سيکاريو {{1}} جيئن منهنجي شروعاتي {{2}}",
+        "ChoosePassPhrase": "سان لاگ ان ڪرڻ لاء ھڪڙو <strong>جملو<\/strong> چونڊيو. <br> ڪجھ لفظن تي مشتمل ھڪ سادي جملي آھي جنھن کي توھان کي آسان طرح ياد اچي ويندو.",
+        "ChoosePassPhraseSeeSuggestions": "پنهنجو اڪائونٽ محفوظ ڪرڻ لاء سٺو <strong>پاسورڊ<\/strong> چونڊيو. ڏسو ڪجھ خيالن لاء صلاحون.",
+        "LogOutAndTryAgain": "ٻاهر وڃو ۽ ٻيهر ڪوشش ڪريو",
+        "IfYouFeel": "جيڪڏهن توهان محسوس ڪيو ته ڪجهه غلط ٿي ويا، توهان ڪري سگهو ٿا",
+        "SetIdentifierButtonTitle": "ٻيهر شروع"
+    },
+    "session": {
+        "GetStarted": "شروع ڪر"
+    },
+    "authorize": {
+        "GetStarted": "شروع ڪر",
+        "Authorize": "اختيار ڏيڻ",
+        "TermsLabel": "مون پڙهيو آهي ۽ متفق آهيان <br> تائين {{link}}",
+        "TermsTitle": "ضابطا"
+    },
+    "register": {
+        "TermsLabel": "مون کي {{link}} قبول ڪيو",
+        "TermsTitle": "ضابطا"
+    },
+    "notifications": {
+        "title": "اجازت",
+        "prompt": "ڇا توهان اطلاعن کي فعال ڪرڻ چاهيو ٿا؟ توهان انهن شين جي باري ۾ حقيقي وقت نوٽس وصول ڪندا.",
+        "yes": "ها",
+        "no": "نه",
+        "WelcomePleaseVerifyEmail": "ڀلي ڪري آيا! مهرباني ڪري پنهنجي اي ميل ايڊريس جي تصديق ڪريو.",
+        "WelcomeVerifyEmail": "ڀلي ڪري آيا! پنهنجي اي ميل ايڊريس جي تصديق ڪريو.",
+        "ForgetPass": "افسوس، توهان پنهنجي پاسرفيس کي وساري ڇڏيو؟"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "رابطو چونڊيو"
+        },
+        "select": {
+            "title": "{{displayName}} مان رابطو ڪريو"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "مهرباني ڪري ليبل چونڊيو.",
+        "inviteUser": "دعوت نامي استعمال ڪندڙ"
+    },
+    "invalidLanguageSelected": "غلط ٻولي منتخب ٿيل"
+}

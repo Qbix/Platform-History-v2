@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "Log på",
+        "LogOut": "Log ud"
+    },
+    "activate": {
+        "SetAsPrimary": "Indstil {{1}} som min primære {{2}}",
+        "ChoosePassPhrase": "Vælg en <strong>passord<\/strong> til at logge ind med. <br> En simpel sætning bestående af et par ord, som du nemt kan huske.",
+        "ChoosePassPhraseSeeSuggestions": "Vælg en god <strong>passord for<\/strong> at beskytte din konto. Se forslag til nogle ideer.",
+        "LogOutAndTryAgain": "Log ud og prøv igen",
+        "IfYouFeel": "Hvis du føler, at noget gik galt, kan du",
+        "SetIdentifierButtonTitle": "start forfra"
+    },
+    "session": {
+        "GetStarted": "Kom igang"
+    },
+    "authorize": {
+        "GetStarted": "Kom igang",
+        "Authorize": "Bemyndige",
+        "TermsLabel": "Jeg har læst og accepteret <br> til {{link}}",
+        "TermsTitle": "Betingelser"
+    },
+    "register": {
+        "TermsLabel": "Jeg accepterer {{link}}",
+        "TermsTitle": "Betingelser"
+    },
+    "notifications": {
+        "title": "Tilladelse",
+        "prompt": "Vil du aktivere underretninger? Du modtager opdateringer i realtid om ting, du er interesseret i.",
+        "yes": "Ja",
+        "no": "Ingen",
+        "WelcomePleaseVerifyEmail": "Velkommen! Bekræft venligst din email-adresse.",
+        "WelcomeVerifyEmail": "Velkommen! Bekræft din e-mail-adresse.",
+        "ForgetPass": "Hej, har du glemt din adgangskode?"
+    },
+    "usersContacts": {
+        "selectLabel": "Vælg venligst etiket.",
+        "inviteUser": "Inviter bruger"
+    },
+    "invalidLanguageSelected": "Ugyldigt sprog valgt",
+    "contacts": {
+        "dialog": {
+            "title": "Vælg kontakt"
+        },
+        "select": {
+            "title": "Vælg kontakt af {{displayName}}"
+        }
+    }
+}

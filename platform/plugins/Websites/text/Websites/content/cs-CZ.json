@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Odkaz na podporu",
+                "startDate": "Počáteční datum",
+                "startTime": "Doba spuštění",
+                "endDate": "Datum ukončení",
+                "endTime": "Čas ukončení",
+                "budget": "Rozpočet"
+            },
+            "interests": {
+                "Title": "Filtrovat podle zájmu",
+                "FilterInterests": "Začněte psát zájem ..."
+            },
+            "Interest": "Zájem",
+            "Location": "Umístění"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Jít",
+            "PasteLinkHere": "Vložte odkaz zde",
+            "BrowseTheWeb": "Procházet",
+            "WriteToStartConversation": "Napište své myšlenky a začněte konverzaci",
+            "StartConversation": "Spusťte konverzaci",
+            "GotoConversation": "Přejít na konverzaci"
+        }
+    }
+}

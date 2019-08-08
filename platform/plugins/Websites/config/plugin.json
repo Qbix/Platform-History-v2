@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Websites": {
-				"version": "1.0",
+				"version": "1.0.1",
 				"compatible": "0.8",
 				"requires": {"Streams": "1.0"},
 				"connections": ["Users", "Streams", "Websites"]
@@ -18,8 +18,18 @@
 		"web": {
 			"requireValidNonce": ["Websites"]
 		},
-		"routes": {
+		"routes@start": {
 			"Websites/:action/:articleId": {"module": "Websites"}
+		}
+	},
+	"Users": {
+		"quotas": {
+			"Websites/webpage": {
+				"86400": {
+					"": 5,
+					"Users/admins": 1000
+				}
+			}
 		}
 	},
 	"Streams": {
@@ -126,6 +136,32 @@
 					"readLevel": 0,
 					"writeLevel": 0,
 					"adminLevel": 0
+				}
+			},
+			"Websites/webpage": {
+				"description": "Represents a website whose metadata was scraped",
+				"create": false, /* only PHP scrape method can create it */
+				"edit": ["title", "content"], /* cannot edit everything */
+				"participating": ["Websites/participating/webpages"],
+				"relatedFrom": {
+					"Websites/webpage": {
+						"url": "{{fromUrl}}"
+					}
+				},
+				"defaults": {
+					"title": "Web page",
+					"icon": "{{Websites}}/img/icons/Websites/webpage",
+					"writeLevel": 23
+				},
+				"messages": {
+					"Streams/chat/message": {
+						"post": true
+					}
+				},
+				"relatedTo": {
+					"Streams/webrtc": {
+						"description": ["Streams/content", ["notifications", "Streams/relatedTo/Streams/call"]]
+					}
 				}
 			}
 		}

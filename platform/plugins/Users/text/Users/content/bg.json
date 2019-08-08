@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "Влизам",
+        "LogOut": "излез от профила си"
+    },
+    "activate": {
+        "SetAsPrimary": "Задайте {{1}} като основна {{2}}",
+        "ChoosePassPhrase": "Изберете <strong>парола, с която<\/strong> да влезете. <br> Една проста фраза, състояща се от няколко думи, които лесно ще запомните.",
+        "ChoosePassPhraseSeeSuggestions": "Изберете добра <strong>парола, за<\/strong> да защитите профила си. Вижте предложенията за някои идеи.",
+        "LogOutAndTryAgain": "Излезте и опитайте отново",
+        "IfYouFeel": "Ако почувствате, че нещо се обърка, можете",
+        "SetIdentifierButtonTitle": "Започни отначало"
+    },
+    "session": {
+        "GetStarted": "Първи стъпки"
+    },
+    "authorize": {
+        "GetStarted": "Първи стъпки",
+        "Authorize": "Упълномощаване",
+        "TermsLabel": "Прочетох и съм съгласен <br> до {{link}}",
+        "TermsTitle": "условия"
+    },
+    "register": {
+        "TermsLabel": "Приемам {{link}}",
+        "TermsTitle": "условия"
+    },
+    "notifications": {
+        "title": "разрешение",
+        "prompt": "Искате ли да активирате известията? Ще получавате актуализации в реално време за нещата, които ви интересуват.",
+        "yes": "да",
+        "no": "Не",
+        "WelcomePleaseVerifyEmail": "Добре дошли! Моля, потвърдете имейл адреса си.",
+        "WelcomeVerifyEmail": "Добре дошли! Потвърдете имейл адреса си.",
+        "ForgetPass": "Хей, забравихте ли пропуска си?"
+    },
+    "usersContacts": {
+        "selectLabel": "Моля, изберете етикет.",
+        "inviteUser": "Поканете потребител"
+    },
+    "invalidLanguageSelected": "Избран е невалиден език",
+    "contacts": {
+        "dialog": {
+            "title": "Изберете контакт"
+        },
+        "select": {
+            "title": "Изберете контакт на {{displayName}}"
+        }
+    }
+}

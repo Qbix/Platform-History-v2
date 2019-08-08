@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "ادا کرنے کے لئے ٹپ"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} کے لئے عملدرآمد چارج",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} کی ادائیگی کے لئے آپ کا شکریہ",
+        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} کو سبسکرائب کیا",
+        "YouSubscribedTo": "آپ {{plan.title}} کو سبسکرائب کیا گیا ہے"
+    },
+    "payment": {
+        "AboutOrder": "آرڈر کے بارے میں معلومات",
+        "PaymentMethod": "ادائیگی کا طریقہ",
+        "ContactInfo": "رابطہ کی معلومات",
+        "Pay": "ادائیگی کریں"
+    },
+    "credits": {
+        "InviteAcceptedBy": "{{1}} کی جانب سے قبول کیا مدعو",
+        "YouHaveCreditsToStart": "آپ {{1}} کریڈٹ شروع کرنے کے لئے ہیں"
+    },
+    "history": {
+        "Date": "تاریخ",
+        "Amount": "رقم۔",
+        "Description": "تفصیل",
+        "Client": "مؤکل۔",
+        "To": "کرنے کے لئے",
+        "From": "سے",
+        "HistoryEmpty": "آپ کے پاس ابھی تک کوئی ڈیٹا نہیں ہے۔"
+    },
+    "subscriptions": {
+        "infoTitle": "ادائیگی کی معلومات مرتب کریں۔",
+        "confirm": {
+            "title": "سبسکرپشن شروع کریں۔",
+            "message": "کیا آپ {{999} subs کو سبسکرائب کرنا چاہیں گے؟",
+            "ok": "ٹھیک ہے",
+            "cancel": "منسوخ کریں"
+        }
+    },
+    "payments": {
+        "infoTitle": "ادائیگی کی معلومات مرتب کریں۔",
+        "confirm": {
+            "title": "رقم ادا کریں",
+            "message": "کیا آپ pay {999}} {{1000} pay ادا کرنے پر راضی ہیں؟",
+            "ok": "ٹھیک ہے",
+            "cancel": "منسوخ کریں"
+        }
+    }
+}

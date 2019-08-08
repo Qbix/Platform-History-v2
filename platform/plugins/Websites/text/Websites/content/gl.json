@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Ligazón para promocionar",
+                "startDate": "Data de inicio",
+                "startTime": "Hora de inicio",
+                "endDate": "Data de finalización",
+                "endTime": "Hora de finalización",
+                "budget": "Orzamento"
+            },
+            "interests": {
+                "Title": "Filtrar por intereses",
+                "FilterInterests": "Comece a escribir un interese ..."
+            },
+            "Interest": "Interese",
+            "Location": "Localización"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Vaia",
+            "PasteLinkHere": "Pegue unha ligazón aquí",
+            "BrowseTheWeb": "Navega",
+            "WriteToStartConversation": "Escribe os teus pensamentos para comezar a conversa",
+            "StartConversation": "Iniciar conversa",
+            "GotoConversation": "Va a Conversa"
+        }
+    }
+}

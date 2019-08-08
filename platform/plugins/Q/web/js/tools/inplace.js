@@ -598,8 +598,9 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 			}
 		}
 	});
-	fieldinput.closest('form').submit(function () {
+	fieldinput.closest('form').submit(function (e) {
 		onSave();
+		e.preventDefault();
 	});
 	fieldinput.on(Q.Pointer.end, function (event) {
 		Q.Pointer.cancelClick(event, null, true);
@@ -666,4 +667,4 @@ Q.Template.set('Q/inplace/tool',
 +"</div>"
 );
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

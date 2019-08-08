@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Nì Ùr"
+    },
+    "labels": {
+        "Streams\/invited": "Daoine a dh ’iarr mi",
+        "Streams\/invitedMe": "Cò a thug cuireadh dhomh"
+    },
+    "interests": {
+        "Filter": "Dè a tha a ’còrdadh riut?",
+        "CanAdd": "Mura h-urrainn dhut fhathast na tha thu a ’lorg a lorg, is urrainn dhut ùidh ùr a chur ris:",
+        "TrySynonyms": "Na faic e? Feuch cuid de na co-fhacail.",
+        "AddUnderCategory": "Cuir ris fo roinn ...",
+        "Other": "Eile",
+        "Unlisted": "Neo-chlàraichte"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Chaidh brath a chomharrachadh airson ath-sgrùdadh rianachd. Thoir air ais a-rithist gu falach.",
+        "noOneSaid": "Chan eil duine air a ràdh",
+        "closeChatButton": "Bruidhinn mu dheidhinn",
+        "closeChatConfirmTitle": "Dùin an còmhradh seo?",
+        "closeChatConfirm": "A bheil thu cinnteach gu bheil thu airson an còmhradh seo a dhùnadh?",
+        "closeChatConfirmYes": "tha",
+        "closeChatConfirmNo": "Chan eil",
+        "earlierComments": "beachdan roimhe seo"
+    },
+    "notifications": {
+        "*": "Brath {{& message.fields.type}} gu {{& stream.fields.title}}",
+        "Streams\/chat\/message": "Thuirt {{&call 'avatar.displayName'}}:",
+        "Streams\/changed": "Atharrachaidhean ann an {{stream.fields.title}}",
+        "Streams\/invite": "Fhuair thu cuireadh gu {{& stream.fields.title}}",
+        "Streams\/announcement": "Fios ann an {{& streams.fields.title}}",
+        "Streams\/access": "Dh&#39;atharraich {{&call 'avatar.displayName'}} slighe a-steach sruthan",
+        "Streams\/chat\/edit": "Chaidh an teachdaireachd deasachaidh a dheasachadh",
+        "Streams\/chat\/remove": "Chaidh brath còmhraidh a thoirt às",
+        "Streams\/closed": "Chaidh {{stream.fields.title}} a dhùnadh",
+        "Streams\/task\/progress": "Adhartas air {{stream.fields.title}}",
+        "Streams\/task\/complete": "Obair dèante: {{stream.fields.title}}",
+        "Streams\/task\/error": "Mearachd rè: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Brath a ’tighinn a-steach"
+    },
+    "invite": {
+        "messageContent": "Thug {{displayName}} cuireadh dhut gu {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Tagh bho na Caraidean agad",
+            "chooseAgainFromContacts": "Tagh a-rithist bho Caraidean",
+            "inviteSelectedContacts": "Thoir cuireadh do charaidean taghte",
+            "selectFromContacts": "Tagh bho Caraidean",
+            "photo": "Gabh dealbh",
+            "photoInstruction": "Ma tha an neach a sganadh an còd QR agad romhad, gabhaidh dealbh dhiubh",
+            "to": "Gu: {{Stream Title}}",
+            "go": "Rach",
+            "title": "Thoir cuireadh",
+            "placeholder": "Àireamh fòn-làimhe no seòladh puist-d",
+            "orInvite": "No thoir cuireadh do dhaoine le bhith:",
+            "QR": "{{ClickOrTap}} gus còd QR a ghineadh",
+            "QRtitle": "Cuir a-steach an còd QR seo",
+            "QRscanned": "Scan iad e!",
+            "byEmail": "Post-d",
+            "byText": "Teacsa",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Tha Hey, thoir sùil air seo",
+            "PleaseVisitLink": "Tadhail air a ’cheangal a leanas:",
+            "InvitingYou": "Tha mi a ’toirt cuireadh dhut gu {{title}}",
+            "HasInvitedYou": "Thug {{displayName}} cuireadh dhut gu {{title}}"
+        },
+        "sms": {
+            "content": "Fhuair thu cuireadh gu {{title}}. Thoir gnogag air {{url}}"
+        },
+        "notice": {
+            "text": "Fhuair thu cuireadh. {{ClickOrTap}} an seo gus gabhail ris agus gabhail ris."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} air postadh <em>{{message.fields.type}}<\/em> teachdaireachd gu {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} ann an {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Bidh cuiridhean air an cur bhon àireimh againn, nach eil do charaidean ag aithneachadh fhathast. Lean ri teacsa luath gus innse dhaibh gun tàinig an cuireadh thugad, ag iarraidh orra briogadh air a ’cheangal.",
+            "confirm": "Bidh cuiridhean air an cur bhon àireimh againn, nach eil do charaidean ag aithneachadh fhathast. A bheil thu airson leantainn le teacsa luath gus innse dhaibh gun tàinig an cuireadh thugad, ag iarraidh orra briogadh air a ’cheangal.",
+            "check": "Hey, chuir mi cuireadh thugad don aplacaid {{app}}. Thoir sùil air na sms agad agus briog air a ’cheangal!"
+        },
+        "email": {
+            "alert": "Thèid cuiridhean a chur bhon àrainn againn, rud nach eil do charaidean ag aithneachadh fhathast. Lean ri teacsa luath gus innse dhaibh gun tàinig an cuireadh thugad, ag iarraidh orra briogadh air a ’cheangal.",
+            "confirm": "Thèid cuiridhean a chur bhon àrainn againn, rud nach eil do charaidean ag aithneachadh fhathast. A bheil thu airson leantainn le teacsa luath gus innse dhaibh gun tàinig an cuireadh thugad, ag iarraidh orra briogadh air a ’cheangal.",
+            "subject": "An d ’fhuair thu cuireadh?",
+            "body": "Hey, chuir mi cuireadh thugad don aplacaid {{app}}. Thoir sùil air a ’phost-d agad agus briog air a’ cheangal ann!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Cuir air chomas Microfòn",
+            "cameraTitle": "Cuir an comas air Camara",
+            "cameraAndMicrophoneTitle": "Cuir air chomas camara agus microfòn"
+        }
+    }
+}

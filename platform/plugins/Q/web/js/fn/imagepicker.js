@@ -6,9 +6,22 @@ Q.setObject('Q.text.Q.imagepicker', {
 		prompt: "What would you like to do?",
 		photo: "Take new photo",
 		library: "Select from library"
+	},
+	tooSmall: 'Please choose a larger image.',
+	cropping: {
+		title: 'Adjust size and position',
+		touchscreen: 'Use your fingers to zoom and drag',
+		notTouchscreen: 'Use your mouse & wheel to zoom and drag'
 	}
 });
-Q.setObject("Q.text_en.Q.imagepicker", Q.text.Q.imagepicker);
+
+var qtqi = Q.text.Q.imagepicker;
+
+Q.onInit.add(function () {
+	Q.Text.get('Q/content', function (err, text) {
+		Q.extend(Q.text.Q.imagepicker, 10, Q.getObject('Q.imagepicker', text));
+	});
+});
 
 /**
  * Q Tools
@@ -23,7 +36,8 @@ Q.setObject("Q.text_en.Q.imagepicker", Q.text.Q.imagepicker);
  * @class Q imagepicker
  * @constructor
  * @param {Object} [options] options is an Object that contains parameters for function
- * @param {Object} options.saveSizeName Required hash where key is the preferred image size and value is the image name. Several key-value pairs may be given and image will be generated and saved in different files.
+ * @param {Object} options.saveSizeName Required object where key is the preferred image size and value is the image name. Several key-value pairs may be given and image will be generated and saved in different files.
+ * @param {Object} [options.maxStretch=1] What scaling factor can be tolerated, for images smaller than the largest size required
 *   Key may be just one number, e.g. '100' which means square image 100x100 or in format '<width>x<height>', e.g. '80x120' to make non-square image.
  *  You can have one of <width> or <height> be empty, and then it will automatically keep the proportions.
  *  Or you can pass 'x' and then it will keep the original width and height of the image.
@@ -44,6 +58,12 @@ Q.setObject("Q.text_en.Q.imagepicker", Q.text.Q.imagepicker);
  * Its "this" object will be a jQuery of the imagepicker element
  * The first parameter is a callback, which should be called with an optional
  * hash of overrides, which can include "data", "path", "subpath", "save", "url", "loader" and "crop"
+ * @param {String} [options.save='x'] name of server config under Q/image/sizes, which
+ *  are an array of {size: basename} pairs
+ *  where the size is of the format "WxH", and either W or H can be empty.
+ *  These are stored in the config for various types of images, 
+ *  and you pass the name of the config, so that e.g. clients can't simply
+ *  specify their own sizes.
  * @param {Array} [options.cameraCommands] cameraCommands the commands that pop up to take a photo
  * @param {Array} [options.cameraCommands.photo]
  * @param {Array} [options.cameraCommands.library]
@@ -116,7 +136,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				return false;
 			}
 			Q.confirm(state.cameraCommands.prompt, function(result) {
-				if (result == null) return;
+				if (result === null) return;
 				var source = Camera.PictureSourceType[result ? "CAMERA" : "PHOTOLIBRARY"];
 				navigator.camera.getPicture(function(data){
 					$this.plugin('Q/imagepicker', 'pick', "data:image/jpeg;base64," + data);
@@ -129,6 +149,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 			}, {
 				ok: state.cameraCommands.photo,
 				cancel: state.cameraCommands.library,
+				className: 'Q_confirm Q_dialog_cameraCommands',
 				noClose: false
 			});
 			e.preventDefault();
@@ -177,14 +198,15 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 {
 	path: 'Q/uploads',
 	subpath: '',
+	save: 'x',
 	saveSizeName: {},
 	showSize: null,
 	useAnySize: false,
 	crop: null,
 	cropping: true,
-	croppingTitle: 'Adjust size and position',
-	croppingTouchscreen: 'Use your fingers to zoom and drag',
-	croppingNotTouchscreen: 'Use your mouse & wheel to zoom and drag',
+	croppingTitle: qtqi.cropping.title,
+	croppingTouchscreen: qtqi.cropping.touchscreen,
+	croppingNotTouchscreen: qtqi.cropping.notTouchscreen,
 	url: Q.action("Q/image"),
 	cacheBust: 1000,
 	throbber: null,
@@ -196,7 +218,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		alert('Image upload error' + (message ? ': ' + message : '') + '.');
 	}, 'Q/imagepicker'),
 	onTooSmall: new Q.Event(function (requiredSize, imageSize) {
-		alert('Please choose a larger image.');
+		alert(qtqi.tooSmall);
 		return false;
 	}, 'Q/imagepicker'),
 	onFinish: new Q.Event(),
@@ -266,8 +288,9 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 					if (state.useAnySize) {
 						return true;
 					}
-					if (requiredSize.width > imageSize.width
-					 || requiredSize.height > imageSize.height) {
+					var ms = state.maxStretch || 1;
+					if (requiredSize.width > imageSize.width * ms
+					 || requiredSize.height > imageSize.height * ms) {
 						var result = Q.handle(
 							[state.onTooSmall, state.onFinish], state, 
 							[requiredSize, imageSize]
@@ -285,7 +308,8 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		            }
 		            var result = {};
 		            if ( requiredSize.width && requiredSize.height ) {
-		//              if specified two dimensions - we should remove small size to avoid double reductions
+						// if specified both dimensions - we should remove
+						// smaller size to avoid double reductions
 		                if ( requiredSize.width > requiredSize.height ) {
 		                    requiredSize.height = null;
 		                } else {
@@ -417,8 +441,8 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 			                            "Q/imagepicker": function ($dialog) {
 											var w = requiredSize.width / isw;
 											var h = requiredSize.height / ish;
-											var rsw1 = rsw2 = requiredSize.width;
-											var rsh1 = rsh2 = requiredSize.height;
+											var rsw1 = rsw2 = Math.min(requiredSize.width, isw);
+											var rsh1 = rsh2 = Math.min(requiredSize.height, ish);
 											var dw = this.width();
 											var dh = this.height();
 											if (rsw2 != dw) {
@@ -456,12 +480,8 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 					                        requiredSize: requiredSize,
 					                        left: result.left * isw,
 					                        top: result.top * ish,
-					                        width: Math.max(
-												result.width * isw, requiredSize.width
-											),
-					                        height: Math.max(
-												result.height * ish, requiredSize.height
-											)
+					                        width: result.width * isw,
+					                        height: result.height * ish
 					                    };
 					                    if (!_checkRequiredSize(requiredSize, bounds)) {
 					                    	return _revert();
@@ -541,19 +561,18 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				'data': data,
 				'path': path,
 				'subpath': subpath,
-				'save': state.saveSizeName,
 				'url': state.url,
 				'loader': state.loader,
 				'crop': null
 			};
+			if (state.save) {
+				params.save = state.save;
+			}
 			Q.extend(params, override);
 			if (Q.isEmpty(params.crop)) {
 				delete params.crop;
 			}
-			if (params.save && !params.save[state.showSize]) {
-				throw new Q.Error("Q/imagepicker tool: no size found corresponding to showSize");
-			}
-		
+
 			if (params.loader) {
 				var callable = params.loader;
 				delete params.loader;
@@ -585,6 +604,9 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		}
 	
 	   function detectVerticalSquash(img) {
+		   if (Q.info.platform !== 'ios') {
+			   return 1;
+		   }
 	       var iw = img.naturalWidth, ih = img.naturalHeight;
 	       var canvas = document.createElement('canvas');
 	       canvas.width = 1;
@@ -635,4 +657,4 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	}
 });
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

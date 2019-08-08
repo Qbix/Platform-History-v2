@@ -21,20 +21,22 @@ function Streams_batch_response_batch()
 
 	// Gather the publisher ids and stream names to fetch
 	$toFetch = array();
-	$withTotals = array();
+	$withExtra = array();
+	$wNames = array('withMessageTotals', 'withRelatedToTotals', 'withRelatedFromTotals');
 	foreach ($batch['args'] as $args) {
 		if (count($args) < 4) {
 			continue;
 		}
 		list($action, $slots, $publisherId, $name) = $args;
 		$toFetch[$publisherId][] = $name;
-		if ($args[0] === 'message' and isset($args[4]['withTotals'])) {
-			$wt = $args[4]['withTotals'];
-		} else if ($args[0] === 'totals' and isset($args[4])) {
-			$wt = $args[4];
+		foreach ($wNames as $wn) {
+			if (($args[0] === 'stream' and isset($args[4][$wn]))
+			or ($args[0] === 'message' and isset($args[4][$wn]))) {
+				$withExtra[$wn][$publisherId][$name] = $args[4][$wn];
+			}
 		}
-		if (isset($wt)) {
-			$withTotals[$publisherId][$name] = $wt;
+		if ($args[0] === 'messageTotals' and isset($args[4])) {
+			$withExtra['messageTotals'][$publisherId][$name] = $args[4];
 		}
 	}
 	$user = Users::loggedInUser();
@@ -47,8 +49,10 @@ function Streams_batch_response_batch()
 			$streams[$publisherId] = array();
 		}
 		$options = array('withParticipant' => true);
-		if (!empty($withTotals[$publisherId])) {
-			$options['withTotals'] = $withTotals[$publisherId];
+		foreach ($wNames as $wn) {
+			if (!empty($withExtra[$wn][$publisherId])) {
+				$options[$wn] = $withExtra[$wn][$publisherId];
+			}
 		}
 		$streams[$publisherId] = array_merge(
 			$streams[$publisherId],
@@ -76,7 +80,7 @@ function Streams_batch_response_batch()
 					$_REQUEST['ordinal'] = $extra;
 				}
 				break;
-			case 'total':
+			case 'messageTotal':
 				$_REQUEST['messageType'] = $extra;
 				break;
 			case 'participant':

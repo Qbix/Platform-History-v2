@@ -2,4 +2,4 @@
 
 
 
-})(Q, jQuery, window);
+})(Q, Q.$, window);

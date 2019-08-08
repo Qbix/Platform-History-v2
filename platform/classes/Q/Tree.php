@@ -62,7 +62,7 @@ class Q_Tree
 				// $keys = '["' . implode('"]["', $key_array) . '"]';
 				// throw new Q_Exception_NotArray(compact('keys', 'key'));
 			}
-			if (!isset($key) or !array_key_exists($key, $result)) {
+			if (!isset($key) || !(is_string($key) || is_integer($key)) || !array_key_exists($key, $result)) {
 				return $default;
 			}
 			if ($i == $args_count - 2) {
@@ -130,6 +130,108 @@ class Q_Tree
 			$result[] = $value;
 		}
 		return $value;
+	}
+	
+	/**
+	 * Traverse the tree depth-first and call the callback
+	 * @method depthFirst
+	 * @param {callable} $callback Will receive ($path, $value, $array, $context)
+	 * @param {mixed} [$context=null] To propagate some context to the callback
+	 */
+	function depthFirst($callback, $context = null)
+	{
+		$this->_depthFirst(array(), $this->parameters, $callback, $context);
+	}
+	
+	private function _depthFirst($subpath, $arr, $callback, $context)
+	{
+		foreach ($arr as $k => $a) {
+			$path = array_merge($subpath, array($k));
+			if (false === call_user_func($callback, $path, $a, $arr, $context)) {
+				continue;
+			}
+			if (Q::isAssociative($a)) {
+				$this->_depthFirst($path, $a, $callback, $context);
+			}
+		}
+	}
+	
+	/**
+	 * Traverse the tree breadth-first and call the callback
+	 * @method breadthFirst
+	 * @param {callable} $callback Will receive ($path, $value, $array, $context)
+	 * @param {mixed} [$context=null] To propagate some context to the callback
+	 */
+	function breadthFirst($callback, $context = null)
+	{
+		call_user_func($callback, array(), $this->parameters, $this->parameters, $context);
+		$this->_breadthFirst(array(), $this->parameters, $callback, $context);
+	}
+	
+	private function _breadthFirst($subpath, $arr, $callback, $context)
+	{
+		foreach ($arr as $k => $a) {
+			$path = array_merge($subpath, array($k));
+			if (false === call_user_func($callback, $path, $a, $arr, $context)) {
+				break;
+			}
+		}
+		foreach ($arr as $k => $a) {
+			if (Q::isAssociative($a)) {
+				$path = array_merge($subpath, array($k));
+				$this->_breadthFirst($path, $a, $callback);
+			}
+		}
+	}
+	
+	/**
+	 * Calculates a diff between this tree and another tree
+	 * @method diff
+	 * @param {Q_Tree} $tree
+	 * @return {Q_Tree} This tree holds the results of the diff
+	 */
+	function diff($tree)
+	{
+		$context = new StdClass();
+		$context->from = $this;
+		$context->to = $tree;
+		$context->diff = new Q_Tree();
+		$this->depthFirst(array($this, '_diffTo'), $context);
+		$tree->depthFirst(array($tree, '_diffFrom'), $context);
+		return $context->diff;
+	}
+	
+	private function _diffTo($path, $value, $array, $context)
+	{
+		$args1 = $path;
+		$args1[] = null;
+		$valueTo = call_user_func_array(array($context->to, 'get'), $args1);
+		if ((!Q::isAssociative($value) or !Q::isAssociative($valueTo))
+		and $valueTo !== $value) {  // including if $value2 === null
+			if (is_array($value) and !Q::isAssociative($value)
+			and is_array($valueTo) and !Q::isAssociative($valueTo)) {
+				$valueTo = array('replace' => $valueTo);
+			}
+			$args2 = $path;
+			$args2[] = $valueTo;
+			call_user_func_array(array($context->diff, 'set'), $args2);
+		}
+		if (!isset($valueTo)) {
+			return false;
+		}
+	}
+	
+	private function _diffFrom($path, $value, $array, $context)
+	{
+		$args1 = $path;
+		$args1[] = null;
+		$valueFrom = call_user_func_array(array($context->from, 'get'), $args1);
+		if (!isset($valueFrom)) {
+			$args2 = $path;
+			$args2[] = $value;
+			call_user_func_array(array($context->diff, 'set'), $args2);
+			return false;
+		}
 	}
 	
 	/**
@@ -244,12 +346,14 @@ class Q_Tree
 	 * @method save
 	 * @param {string} $filename Name of file to save to. If tree was loaded, you can leave this blank to update that file.
 	 * @param {array} [$array_path=array()] Array of keys identifying the path of the config subtree to save
+	 * @param {integer} [$flags=0] Any additional flags for json_encode, such as JSON_PRETTY_PRINT
 	 * @return {boolean} Returns true if saved, otherwise false;
 	 **/
 	function save (
 		$filename = null, 
 		$array_path = array(),
-		$prefix_path = null)
+		$prefix_path = null,
+		$flags = 0)
 	{
 		if (empty($filename) and !empty($this->filename)) {
 			$filename = $this->filename;
@@ -279,10 +383,11 @@ class Q_Tree
 		}
 
 		$mask = umask(Q_Config::get('Q', 'internal','umask' , 0000));
+		$flags = JSON_UNESCAPED_SLASHES | $flags;
 		$success = file_put_contents(
 			$filename2, 
 			!empty($toSave) 
-				? Q::json_encode($toSave, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
+				? Q::json_encode($toSave, $flags)
 				: '{}',
 			LOCK_EX);
 		clearstatcache(true, $filename2);
@@ -344,6 +449,27 @@ class Q_Tree
 		return $result;
 	}
 	
+	/**
+	 * Pass two or more arrays to merge recursively in a tree.
+	 * You can pass null instead of an array and it will be fine.
+	 * @method mergeArrays
+	 * @static
+	 * @param {array} $first The first array
+	 * @param {array} $second The second array
+	 * @param {array} [$third] The second array
+	 * @return {array} The array that resulted from the merge
+	 */
+	static function mergeArrays ($arr1, $arr2) {
+		$args = func_get_args();
+		$count = func_num_args();
+		$arr = reset($args);
+		$tree = new Q_Tree($arr);
+		for ($i=1; $i<$count; ++$i) {
+			$tree->merge($args[$i]);
+		}
+		return $tree->getAll();
+	}
+	
 	/*
 	 * We consider array1/array2 to be arrays. no scalars shall be passes
 	 * @method merge_internal
@@ -355,25 +481,12 @@ class Q_Tree
 	 */
 	protected static function merge_internal ($array1 = array(), $array2 = array())
 	{
-		$first_is_json_array = $second_is_json_array = true;
-		foreach ($array1 as $key => $value) {
-			if (!is_int($key)) {
-				$first_is_json_array = false;
-				break;
-			}
-		}
-		if ($first_is_json_array and isset($array2['replace'])) {
+		if (!Q::isAssociative($array1) and isset($array2['replace'])) {
 			return $array2['replace'];
-		}
-		foreach ($array2 as $key => $value) {
-			if (!is_int($key)) {
-				$second_is_json_array = false;
-				break;
-			}
 		}
 		$result = $array1;
 		foreach ($array2 as $key => $value) {
-			if ($second_is_json_array) {
+			if (!Q::isAssociative($array2)) {
 				// merge in values if they are not in array yet
 				// if array contains scalar values only unique values are kept
 				if (!in_array($value, $result)) {

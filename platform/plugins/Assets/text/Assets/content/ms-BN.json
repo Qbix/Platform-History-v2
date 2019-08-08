@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Ketik untuk membayar"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: caj diproses untuk {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Terima kasih atas bayaran anda kepada {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} melanggan {{plan.title}}",
+        "YouSubscribedTo": "Anda telah dilanggan ke {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Maklumat mengenai pesanan",
+        "PaymentMethod": "Kaedah pembayaran",
+        "ContactInfo": "Maklumat kenalan",
+        "Pay": "Bayar"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Jemput diterima oleh {{1}}",
+        "YouHaveCreditsToStart": "Anda mempunyai kredit {{1}} untuk bermula"
+    },
+    "history": {
+        "Date": "Tarikh",
+        "Amount": "Jumlah",
+        "Description": "Penerangan",
+        "Client": "Pelanggan",
+        "To": "kepada",
+        "From": "dari",
+        "HistoryEmpty": "Anda belum mempunyai data lagi"
+    },
+    "subscriptions": {
+        "infoTitle": "Tetapkan Maklumat Pembayaran",
+        "confirm": {
+            "title": "Mula Langganan",
+            "message": "Adakah anda ingin melanggan {{title}}?",
+            "ok": "okey",
+            "cancel": "Batalkan"
+        }
+    },
+    "payments": {
+        "infoTitle": "Tetapkan Maklumat Pembayaran",
+        "confirm": {
+            "title": "Membuat pembayaran",
+            "message": "Adakah anda bersetuju membayar {{symbol}} {{amount}}?",
+            "ok": "okey",
+            "cancel": "Batalkan"
+        }
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "Kirish",
+        "LogOut": "chiqish"
+    },
+    "activate": {
+        "SetAsPrimary": "{{2}} asosiy {{1}}",
+        "ChoosePassPhrase": "Tizimga kirish uchun <strong>parolni<\/strong> tanlang. <br> Osonlik bilan eslab qolishingiz mumkin bo&#39;lgan bir necha so&#39;zdan tashkil topgan sodda ibora.",
+        "ChoosePassPhraseSeeSuggestions": "Hisobingizni himoya qilish uchun yaxshi <strong>pass iborani<\/strong> tanlang. Ba&#39;zi fikrlar uchun takliflarni ko&#39;ring.",
+        "LogOutAndTryAgain": "Chiqish va qayta urinib ko&#39;ring",
+        "IfYouFeel": "Agar biror narsa noto&#39;g&#39;ri ketgan deb hisoblasangiz, mumkin",
+        "SetIdentifierButtonTitle": "boshlamoq"
+    },
+    "session": {
+        "GetStarted": "Boshlang"
+    },
+    "authorize": {
+        "GetStarted": "Boshlang",
+        "Authorize": "Yetkilendir",
+        "TermsLabel": "Men o&#39;qidim va rozi bo&#39;ldim <br> {{link}} uchun",
+        "TermsTitle": "Shartlar"
+    },
+    "register": {
+        "TermsLabel": "{{link}}}",
+        "TermsTitle": "Shartlar"
+    },
+    "notifications": {
+        "title": "Ruxsat",
+        "prompt": "Bildirishnomalarni yoqmoqchimisiz? Sizga g&#39;amxo&#39;rlik qilayotgan narsalar haqida real vaqtda yangiliklarni qabul qilasiz.",
+        "yes": "Ha",
+        "no": "Yo&#39;q",
+        "WelcomePleaseVerifyEmail": "Xush kelibsiz! E-pochta manzilingizni tasdiqlang.",
+        "WelcomeVerifyEmail": "Xush kelibsiz! E-pochta manzilingizni tasdiqlang.",
+        "ForgetPass": "Hey, parolingizni unutdingizmi?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Kontaktni tanlang"
+        },
+        "select": {
+            "title": "{{displayName}} kontaktini tanlang"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Yorliqni tanlang.",
+        "inviteUser": "Foydalanuvchini taklif qiling"
+    },
+    "invalidLanguageSelected": "Til noto&#39;g&#39;ri tanlandi"
+}

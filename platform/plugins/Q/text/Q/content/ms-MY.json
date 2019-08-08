@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Ralat {{status}} semasa permintaan",
+        "canceled": "Permintaan dibatalkan",
+        "500": "Kesilapan pelayan dalaman",
+        "404": "Tidak dijumpai: {{url}}",
+        "501": "Permintaan terganggu"
+    },
+    "nonce": {
+        "sameDomain": "Sesi tamat tempoh. Muat semula halaman dan cuba lagi.",
+        "otherDomain": "Permintaan silang domain untuk disekat ke domain asing di {{baseUrl}}"
+    },
+    "words": {
+        "tap": "ketik",
+        "click": "klik",
+        "yes": "ya",
+        "no": "tidak",
+        "Tap": "Ketik",
+        "Click": "Klik",
+        "Yes": "Ya",
+        "No": "Tidak"
+    },
+    "months": {
+        "1": "Januari",
+        "2": "Februari",
+        "3": "Mac",
+        "4": "April",
+        "5": "Mungkin",
+        "6": "Jun",
+        "7": "Julai",
+        "8": "Ogos",
+        "9": "September",
+        "10": "Oktober",
+        "11": "November",
+        "12": "Disember"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Sila benarkan akses ke mikrofon anda",
+        "record": "Rekod",
+        "recording": "Rakaman",
+        "remains": "kekal",
+        "maximum": "maksimum",
+        "playing": "Bermain",
+        "recorded": "Dirakam",
+        "clip": "klip",
+        "orupload": "Atau Muat naik",
+        "usethis": "Guna ini",
+        "discard": "Buang",
+        "encoding": "Pengekodan"
+    },
+    "alert": {
+        "title": "Amaran"
+    },
+    "confirm": {
+        "title": "Sahkan",
+        "ok": "Ya",
+        "cancel": "Tidak"
+    },
+    "prompt": {
+        "title": "Prompt",
+        "ok": "Pergi"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Ralat membaca fail",
+        "cameraCommands": {
+            "prompt": "Apa yang anda ingin lakukan?",
+            "photo": "Ambil foto baru",
+            "library": "Pilih dari perpustakaan"
+        },
+        "tooSmall": "Sila pilih imej yang lebih besar.",
+        "cropping": {
+            "title": "Laraskan saiz dan kedudukan",
+            "touchscreen": "Gunakan jari anda untuk zum dan seret",
+            "notTouchscreen": "Gunakan tetikus &amp; roda anda untuk zum dan seret"
+        }
+    }
+}

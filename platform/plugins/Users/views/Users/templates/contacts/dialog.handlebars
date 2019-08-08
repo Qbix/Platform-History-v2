@@ -1,0 +1,17 @@
+<div class="Users_contacts_dialog">
+{{#each contacts}}
+	<div class="tr" data-rawId={{this.rawId}}>
+		<div class="td" data-phone={{json this.phoneNumbers}}>
+			<div class="Users_contacts_dialog_buttons Users_contacts_dialog_phone">
+				<i class="qp-communities-mobile"></i>
+			</div>
+		</div>
+		<div class="td" data-email={{json this.emails}}>
+			<div class="Users_contacts_dialog_buttons Users_contacts_dialog_email">
+				<i class="qp-communities-email"></i>
+			</div>
+		</div>
+		<div class="td Users_contacts_dialog_name">{{this.displayName}}</div>
+	</div>
+{{/each}}
+</div>

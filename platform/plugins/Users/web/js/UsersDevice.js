@@ -3,20 +3,6 @@
 
 	var Users = Q.plugins.Users;
 
-	Q.onReady.add(function () {
-		if (Q.info.isCordova && (window.FCMPlugin || window.PushNotification)) {
-			Users.Device.appId = Q.cookie('Q_appId');
-			if (!Users.Device.appId) {
-				return console.warn("appId is not defined");
-			}
-		}
-		Users.Device.init(function () {
-			// Device adapter was initialized
-			Q.handle(Users.Device.onInit);
-			console.log('Users.Device adapter init: ' + Users.Device.adapter.adapterName);
-		});
-	}, 'Users.Device');
-
 	/**
 	 * @class Users.Device
 	 */
@@ -45,10 +31,16 @@
 				Users.Device.notificationGranted(function (granted) {
 					// if user refuses notifications - do nothing
 					if (granted === false) {
+						Q.handle(Users.Device.beforeSubscribe, Users.Device, [
+							options, granted, false
+						]);
 						return Q.handle(callback, null, [null, null]);
 					}
 					// check if the device is subscribed
 					Users.Device.subscribed(function (err, subscribed) {
+						Q.handle(Users.Device.beforeSubscribe, Users.Device, [
+							options, granted, subscribed
+						]);
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -60,34 +52,56 @@
 						// device without any confirmation dialog
 						if (granted === true) {
 							return adapter.subscribe(function (err, subscribed) {
+								Q.handle(Users.Device.onSubscribe, Users.Device, [
+									options, granted, subscribed
+								]);
 								Q.handle(callback, null, [err, subscribed]);
 							}, options);
 						}
 						// if the user is undecided with notifications then do call the confirmation
 						var userId = Q.Users.loggedInUserId();
-						var cache = Q.Cache.local('Users.Permissions.notifications');
-						var requested = cache.get(userId);
+						var cache = Q.Cache.session('Users.Permissions.notifications');
+						var requested = Q.getObject(['cbpos'], cache.get(userId));
+
 						// if permissions already requested - don't request it again
-						if (Q.getObject(['cbpos'], requested) === true) {
+						if (requested !== undefined && requested !== null) {
 							return Q.handle(callback, null, [null, null]);
 						}
+
 						Q.Text.get('Users/content', function (err, text) {
-							text = Q.getObject(["notifications"], text);
+							text = Q.copy(Q.getObject(["notifications"], text));
 							if (!text) {
 								console.warn('Notifications confirmations texts not found');
 							}
 							// if not - ask
+							Q.handle(Users.Device.beforeSubscribeConfirm, Users.Device, [
+								options, granted, subscribed, text
+							]);
+
+							// set this to avoid duplicated notices
+							cache.set(userId, 'in progress');
+
 							Q.confirm(text.prompt, function (res) {
+								// set cache to null before device subscription
+								cache.set(userId, null);
+
 								if (!res) {
 									// save to cache that notifications requested
 									// only if user refused, because otherwise - notifications has granted
-									cache.set(userId, true);
+									cache.set(userId, false);
 									return Q.handle(callback, null, [null, null]);
 								}
+
 								adapter.subscribe(function (err, subscribed) {
+									// if device subscribed set cache to true to avoid duplicate questions
+									if (subscribed) {
+										cache.set(userId, true);
+									}
+
+									Q.handle(Users.Device.onSubscribe, [options, granted, subscribed]);
 									Q.handle(callback, null, [err, subscribed]);
 								}, options);
-							}, { ok: text.yes, cancel: text.no });
+							}, { ok: text.yes, cancel: text.no, title: text.title });
 						});
 					});
 				});
@@ -155,6 +169,39 @@
 		 * @event onNotification
 		 */
 		onNotification: new Q.Event(),
+		
+		/**
+		 * Occurrs when Users.Device.subscribe() is called,
+	     * but before a subscription is possibly granted
+		 * @event beforeSubscribe
+		 */
+		beforeSubscribe: new Q.Event(),
+		
+		/**
+		 * Occurrs when Users.Device.subscribe() is called,
+	     * but after a subscription is possibly granted
+		 * @event onSubscribe
+		 */
+		onSubscribe: new Q.Event(),
+		
+		/**
+		 * Occurrs when Users.Device.subscribe() is called,
+		 * right before Q.confirm() is shown in some cases
+		 * @event beforeSubscribeConfirm
+		 */
+		beforeSubscribeConfirm: new Q.Event(),
+		
+		/**
+		 * Occurrs when Users.Device.unsubscribe() is called, but before action is taken
+		 * @event beforeUnsubscribe
+		 */
+		beforeUnsubscribe: new Q.Event(),
+		
+		/**
+		 * Occurrs when Users.Device.unsubscribe() is called, but before action is taken
+		 * @event onUnsubscribe
+		 */
+		onUnsubscribe: new Q.Event(),
 
 		/**
 		 * Event occurs when the device adapter was initialized.
@@ -193,10 +240,12 @@
 
 		getAdapter: function (callback) {
 			if (!this.adapter) {
-				Q.handle(callback, null, [new Error('There is no suitable adapter for this type of device')]);
+				Q.handle(callback, null, [new Error(
+					'There is no suitable adapter for this type of device'
+				)]);
 				return;
 			}
-			callback(null, this.adapter);
+			Q.handle(callback, null, [null, this.adapter]);
 		},
 
 		adapter: null,
@@ -230,66 +279,75 @@
 		},
 
 		subscribe: function (callback, options) {
-			var self = this;
-			this.getServiceWorkerRegistration(function (err, sw) {
-				if (err)
-					callback(err);
-				else {
-					var userVisibleOnly = true;
-					if (options && !options.userVisibleOnly) {
-						userVisibleOnly = false;
-					}
-					sw.pushManager.subscribe({
-						userVisibleOnly: userVisibleOnly,
-						applicationServerKey: _urlB64ToUint8Array(self.appConfig.publicKey)
-					}).then(function (subscription) {
-						_saveSubscription(subscription, self.appConfig, function (err, res) {
-							callback(err, res);
-						});
-					}).catch(function (err) {
-						Users.Device.notificationGranted(function (granted) {
-							if (granted) {
-								console.error('Users.Device: Unable to subscribe to push.', err);
-							} else {
-								console.error('Users.Device: Permission for Notifications was denied');
-							}
-						});
+			var appConfig = this.appConfig;
 
-						Q.handle(callback, null, [err]);
-					});
+			if (!appConfig) {
+				console.warn('Unable to init adapter. App config is not defined.');
+				return Q.handle(callback, null);
+			}
+
+			this.getServiceWorkerRegistration(function (err, sw) {
+				if (err) {
+					return Q.handle(callback, null, [err]);
 				}
+				var userVisibleOnly = true;
+				if (options && !options.userVisibleOnly) {
+					userVisibleOnly = false;
+				}
+				sw.pushManager.subscribe({
+					userVisibleOnly: userVisibleOnly,
+					applicationServerKey: _urlB64ToUint8Array(appConfig.publicKey)
+				}).then(function (subscription) {
+					_saveSubscription(subscription, appConfig, function (err, res) {
+						Q.handle(callback, null, [err, res]);
+					});
+				}).catch(function (err) {
+					Users.Device.notificationGranted(function (granted) {
+						if (granted) {
+							console.error('Users.Device: Unable to subscribe to push.', err);
+						} else {
+							console.error('Users.Device: Permission for Notifications was denied');
+						}
+					});
+
+					Q.handle(callback, null, [err]);
+				});
 			});
 		},
 
 		unsubscribe: function (callback) {
+			if (false === Q.handle(Users.Device.beforeUnsubscribe, Users.Device, [])) {
+				return false;
+			}
 			this.getServiceWorkerRegistration(function (err, sw) {
-				if (err)
-					callback(err);
-				else {
-					sw.pushManager.getSubscription()
-						.then(function (subscription) {
-							if (subscription) {
-								_deleteSubscription(subscription.endpoint, function (err, res) {
-									callback(err, res);
-								});
-								subscription.unsubscribe();
-								console.log('Users.Device: User is unsubscribed.');
-							}
-						});
+				if (err) {
+					return Q.handle(callback, null, [err]);
 				}
+				sw.pushManager.getSubscription()
+				.then(function (subscription) {
+					if (!subscription) {
+						return;
+					}
+					_deleteSubscription(subscription.endpoint, function (err, res) {
+						Q.handle(callback, null, [err, res]);
+					});
+					subscription.unsubscribe();
+					console.log('Users.Device: User is unsubscribed.');
+					Q.handle(Users.Device.onUnsubscribe, Users.Device, [subscription]);
+				});
 			});
 		},
 
 		subscribed: function (callback) {
 			this.getServiceWorkerRegistration(function (err, sw) {
 				if (err)
-					callback(err);
+					Q.handle(callback, null, [err]);
 				else {
 					sw.pushManager.getSubscription()
 						.then(function (subscription) {
-							callback(null, subscription);
+							Q.handle(callback, null, [null, subscription]);
 						}).catch(function (err) {
-						callback(err);
+						Q.handle(callback, null, [err]);
 					});
 				}
 			});
@@ -312,20 +370,20 @@
 				}
 				return Q.handle(callback, window.Notification, [permission]);
 			}
-			callback(false);
+			Q.handle(callback, null, [false]);
 		},
 
 		getServiceWorkerRegistration: function (callback) {
 			var self = this;
 			if (this.serviceWorkerRegistration) {
-				return callback(null, this.serviceWorkerRegistration);
+				return Q.handle(callback, null, [null, this.serviceWorkerRegistration]);
 			}
 			_registerServiceWorker.bind(this)(function (err, sw) {
 				if (err)
-					return callback(err);
+					return Q.handle(callback, null, [err]);
 				else {
 					self.serviceWorkerRegistration = sw;
-					return callback(null, sw);
+					return Q.handle(callback, null, [null, sw]);
 				}
 			});
 		},
@@ -363,20 +421,20 @@
 			var deviceId = _getFromStorage('deviceId');
 			_removeFromStorage('deviceId');
 			_deleteSubscription(deviceId, function (err, res) {
-				callback(err, res);
+				Q.handle(callback, null, [err, res]);
 			});
 		},
 
 		subscribed: function (callback) {
 			if (_getFromStorage('deviceId')) {
-				callback(null, true);
+				Q.handle(callback, null, [null, true]);
 			} else {
-				callback(null, false);
+				Q.handle(callback, null, [null, false]);
 			}
 		},
 
 		notificationGranted: function (callback) {
-			callback(true);
+			Q.handle(callback, null, [true]);
 		}
 
 	};
@@ -402,21 +460,21 @@
 			var deviceId = _getFromStorage('deviceId');
 			_removeFromStorage('deviceId');
 			_deleteSubscription(deviceId, function (err, res) {
-				callback(err, res);
+				Q.handle(callback, null, [err, res]);
 			});
 		},
 
 		subscribed: function (callback) {
 			if (_getFromStorage('deviceId')) {
-				callback(null, true);
+				Q.handle(callback, null, [null, true]);
 			} else {
-				callback(null, false);
+				Q.handle(callback, null, [null, false]);
 			}
 		},
 
 		notificationGranted: function (callback) {
 			PushNotification.hasPermission(function (data) {
-				data.isEnabled ? callback(true) : callback('default');
+				data.isEnabled ? Q.handle(callback, null, [true]) : Q.handle(callback, null, ['default']);
 			});
 		}
 
@@ -431,27 +489,27 @@
 			Q.handle(callback, null, [new Error("Push messaging is not supported")]);
 			return;
 		}
-		navigator.serviceWorker.register('/Q/plugins/Users/js/sw.js')
-			.then(function (swReg) {
-				navigator.serviceWorker.addEventListener('message', function (event) {
-					Users.Device.onNotification.handle(event.data);
-				});
-				console.log('Service Worker is registered.');
-				Q.handle(callback, null, [null, swReg]);
-			})
-			.catch(function (error) {
-				callback(error);
-				console.error('Users.Device: Service Worker Error', error);
+		navigator.serviceWorker.register(Q.url('{{Users}}/js/sw.js'))
+		.then(function (swReg) {
+			navigator.serviceWorker.addEventListener('message', function (event) {
+				Users.Device.onNotification.handle(event.data);
 			});
+			console.log('Service Worker is registered.');
+			Q.handle(callback, null, [null, swReg]);
+		})
+		.catch(function (error) {
+			Q.handle(callback, null, [error]);
+			console.error('Users.Device: Service Worker Error', error);
+		});
 	}
 
 	function _registerDevice (deviceId, callback) {
 		if (!deviceId || !Q.Users.loggedInUser) {
-			return callback(new Error('Error while registering device. User must be logged in and deviceId must be set.'))
+			return Q.handle(callback, null, [new Error('Error while registering device. User must be logged in and deviceId must be set.')]);
 		}
 		var appId = Users.Device.appId;
 		if (!appId) {
-			return callback(new Error('Error while registering device. AppId must be must be set.'));
+			return Q.handle(callback, null, [new Error('Error while registering device. AppId must be must be set.')]);
 		}
 
 		Q.req('Users/device', function (err, response) {
@@ -485,14 +543,14 @@
 
 	function _saveSubscription (subscription, appConfig, callback) {
 		if (!subscription) {
-			return callback(new Error('No subscription data'));
+			return Q.handle(callback, null, [new Error('No subscription data')]);
 		}
 		subscription = JSON.parse(JSON.stringify(subscription));
 		Q.req('Users/device', function (err, response) {
 			if (!err) {
 				Q.handle(Users.onDevice, [response.data]);
 			}
-			callback(err, response);
+			Q.handle(callback, null, [err, response]);
 		}, {
 			method: 'post',
 			fields: {
@@ -564,16 +622,44 @@
 	}
 
 	function _getFromStorage (type) {
-		return localStorage.getItem("Q\tUsers.Device." + type);
+		return localStorage.getItem("Q.Users.Device." + type);
 	}
 
 	function _setToStorage (type, value) {
-		localStorage.setItem("Q\tUsers.Device." + type, value);
+		localStorage.setItem("Q.Users.Device." + type, value);
 	}
 
 	function _removeFromStorage (type) {
-		localStorage.removeItem("Q\tUsers.Device." + type);
+		localStorage.removeItem("Q.Users.Device." + type);
 	}
+
+	Q.onReady.add(function () {
+		if (Q.info.isCordova && (window.FCMPlugin || window.PushNotification)) {
+			Users.Device.appId = Q.cookie('Q_appId');
+			if (!Users.Device.appId) {
+				return console.warn("appId is not defined");
+			}
+		}
+
+		Users.Device.onInit.set(function () {
+			// update device id if device subscribed
+			Users.Device.subscribed(function (err, subscribed) {
+				if (!subscribed) {
+					return;
+				}
+
+				// resubscribe device
+				Users.Device.unsubscribe(Users.Device.subscribe);
+			});
+		}, 'Users.Device');
+
+		Users.Device.init(function () {
+			// Device adapter was initialized
+			Q.handle(Users.Device.onInit);
+			console.log('Users.Device adapter init: ' + Users.Device.adapter.adapterName);
+		});
+
+	}, 'Users.Device');
 
 	// remove device info from localStorage when user logout
 	Users.onLogout.set(function () {

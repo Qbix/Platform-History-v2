@@ -26,7 +26,7 @@ function Websites_seo_tool($options)
 			$options['skip'] = true;
 		}
 		if (!$stream
-		and !Streams::isAuthorizedToCreate($user->id, $websitesUserId, 'Websites/seo')) {
+		and !Streams::canCreateStreamType(Q::ifset($user, "id", null), $websitesUserId, 'Websites/seo')) {
 			$options['skip'] = true;
 		}
 	}

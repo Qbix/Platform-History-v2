@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Mearachd {{status}} rè iarrtas",
+        "canceled": "Chaidh iarrtas a chuir dheth",
+        "500": "Mearachd am frithealaiche air an taobh a-staigh",
+        "404": "Cha deach a lorg: {{url}}",
+        "501": "Chuir sinn stad air an iarrtas"
+    },
+    "nonce": {
+        "sameDomain": "Dh&#39;fhalbh an ùine air an t-seisean. Ùraich an duilleag agus feuch ris a-rithist.",
+        "otherDomain": "Iarrtas thairis-raoin le bacadh air àrainn choigreach aig {{baseUrl}}"
+    },
+    "words": {
+        "tap": "tap",
+        "click": "cliog",
+        "yes": "tha",
+        "no": "Chan eil",
+        "Tap": "Briog",
+        "Click": "Cliog",
+        "Yes": "tha",
+        "No": "Chan eil"
+    },
+    "months": {
+        "1": "Am Faoilleach",
+        "2": "An Gearran",
+        "3": "Am Màrt",
+        "4": "A &#39;Ghiblean",
+        "5": "A &#39;Chèitean",
+        "6": "An t-Ògmhios",
+        "7": "An t-Iuchar",
+        "8": "An Lùnastal",
+        "9": "An t-Sultain",
+        "10": "An Dàmhair",
+        "11": "An t-Samhain",
+        "12": "An Dùbhlachd"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Cuir air dòigh gum faigh thu cothrom air a ’mhicreofon agad",
+        "record": "Clàraich",
+        "recording": "Clàradh",
+        "remains": "fuigheall",
+        "maximum": "as motha",
+        "playing": "A ’cluiche",
+        "recorded": "Air a chlàradh",
+        "clip": "cliopa",
+        "orupload": "No Upload",
+        "usethis": "Cleachd seo",
+        "discard": "Cuir air chùl",
+        "encoding": "Còdachadh"
+    },
+    "alert": {
+        "title": "Alert"
+    },
+    "confirm": {
+        "title": "Dearbhaich",
+        "ok": "tha",
+        "cancel": "Chan eil"
+    },
+    "prompt": {
+        "title": "Cumail e",
+        "ok": "Rach"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Mearachd le leughadh an fhaidhle",
+        "cameraCommands": {
+            "prompt": "Dè a bu mhath leat a dhèanamh?",
+            "photo": "Gabh dealbh ùr",
+            "library": "Tagh bhon leabharlann"
+        },
+        "tooSmall": "Tagh dealbh nas motha.",
+        "cropping": {
+            "title": "Atharraich meud agus suidheachadh",
+            "touchscreen": "Cleachd na corragan agad airson gluasad agus slaodadh",
+            "notTouchscreen": "Cleachd an luchag &amp; roth agad gus gluasad agus slaodadh"
+        }
+    }
+}

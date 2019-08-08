@@ -36,8 +36,10 @@ Q.mixin(Users_Email, Q.require('Base/Users/Email'));
  * @method sendMessage
  * @static
  * @param {String} to Comma-separated list of emails
- * @param {String} subject The subject. May contain variable references to members
- *  of the $fields array.
+ * @param {String|Array} $subject
+ *  The subject. May contain variable references to members of the $fields array.
+ *  You can also pass an array like [source, [key1, ...]] to use Q_Text to obtain
+ *  the subject.
  * @param {String} view The name of a view for the body. Fields are passed to it.
  * @param {Object} [fields={}] The fields referenced in the subject and/or view
  * @param {Object} [options={}]
@@ -73,14 +75,27 @@ Users_Email.sendMessage = function (to, subject, view, fields, options, callback
 	}
 	if (typeof from === "string") from = [from, Q.Config.expect(['Q', 'app'])];
 
+	// if subject is object - get subject from text file
+	if (typeof subject === 'object') {
+		var fileData = Q.Text.get(subject[0], options.language);
+		subject = Q.getObject(subject[1], fileData);
+	}
+
+	subject = subject ? Q.view(subject, fields, {
+		language: options.language,
+		source: true
+	}) : '';
+	var body = Q.view(view, fields, {
+		language: options.language,
+		source: options.isSource
+	});
+
 	var mailOptions = {
 		from: from[1]+' <'+from[0]+'>',
 		to: to,
-		subject: subject ? Q.Handlebars.renderSource(subject, fields) : ''
+		subject: subject
 	};
-	mailOptions[options.html ? 'html' : 'text'] = options.isSource
-		? Q.Handlebars.renderSource(view, fields)
-		: Q.Handlebars.render(view, fields);
+	mailOptions[options.html ? 'html' : 'text'] = body;
 
 	var smtp = Q.Config.get(['Users', 'email', 'smtp'], {host: 'sendmail'});
 	if (!_transport && smtp) {

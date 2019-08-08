@@ -23,6 +23,20 @@ class Streams_Notification extends Base_Streams_Notification
 		parent::setUp();
 	}
 
+	static function pause()
+	{
+		Q_Utils::sendToNode(array(
+			"Q/method" => "Streams/Notification/pause"
+		));
+	}
+
+	static function resume()
+	{
+		Q_Utils::sendToNode(array(
+			"Q/method" => "Streams/Notification/resume"
+		));
+	}
+
 	/**
 	 * Implements the __set_state method, so it can work with
 	 * with var_export and be re-imported successfully.

@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "Zaloguj Się",
+        "LogOut": "Wyloguj"
+    },
+    "activate": {
+        "SetAsPrimary": "Ustaw {{1}} jako mój podstawowy {{2}}",
+        "ChoosePassPhrase": "Wybierz <strong>hasło,<\/strong> aby się zalogować. <br> Prosta fraza składająca się z kilku słów, które łatwo zapamiętasz.",
+        "ChoosePassPhraseSeeSuggestions": "Wybierz dobre <strong>hasło,<\/strong> aby chronić swoje konto. Zobacz sugestie dotyczące niektórych pomysłów.",
+        "LogOutAndTryAgain": "Wyloguj się i spróbuj ponownie",
+        "IfYouFeel": "Jeśli uważasz, że coś poszło nie tak, możesz",
+        "SetIdentifierButtonTitle": "zacząć od nowa"
+    },
+    "session": {
+        "GetStarted": "Zaczynać"
+    },
+    "authorize": {
+        "GetStarted": "Zaczynać",
+        "Authorize": "Autoryzować",
+        "TermsLabel": "Przeczytałem i zgadzam się <br> do {{link}}",
+        "TermsTitle": "Warunki"
+    },
+    "register": {
+        "TermsLabel": "Akceptuję {{link}}",
+        "TermsTitle": "Warunki"
+    },
+    "notifications": {
+        "title": "Pozwolenie",
+        "prompt": "Czy chcesz włączyć powiadomienia? Otrzymasz aktualizacje w czasie rzeczywistym dotyczące rzeczy, na których Ci zależy.",
+        "yes": "tak",
+        "no": "Nie",
+        "WelcomePleaseVerifyEmail": "Witamy! Sprawdź swój adres e-mail.",
+        "WelcomeVerifyEmail": "Witamy! Zweryfikuj swój adres email.",
+        "ForgetPass": "Hej, zapomniałeś hasła?"
+    },
+    "usersContacts": {
+        "selectLabel": "Wybierz etykietę.",
+        "inviteUser": "Zaproś użytkownika"
+    },
+    "invalidLanguageSelected": "Wybrano nieprawidłowy język",
+    "contacts": {
+        "dialog": {
+            "title": "Wybierz kontakt"
+        },
+        "select": {
+            "title": "Wybierz kontakt {{displayName}}"
+        }
+    }
+}

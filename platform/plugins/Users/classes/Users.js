@@ -195,7 +195,24 @@ function Users_request_handler(req, res, next) {
     if (!parsed || !parsed['Q/method']) {
 		return next();
 	}
+	var userId = parsed.userId;
+	var sessionId = parsed.sessionId;
     switch (parsed['Q/method']) {
+		case 'Users/device':
+			break;
+		case 'Users/logout':
+			if (userId && sessionId) {
+				var clients = Users.clients[userId];
+				for (var cid in clients) {
+					if (clients[cid].sessionId === sessionId) {
+						clients[cid].disconnect();
+					}
+				}
+			}
+			Users.pushNotifications(userId, {
+				badge: 0
+			});
+			break;
 		case 'Users/session':
             var sid = parsed.sessionId;
             var content = parsed.content ? JSON.parse(parsed.content) : null;
@@ -289,6 +306,16 @@ Users.Socket = {
 					}
 				});
 			});
+			client.on('Users/online', function (options, callback) {
+				var ret = {};
+				for (var userId in Users.clients) {
+					ret[userId] = {};
+					for (var clientId in Users.clients[userId]) {
+						ret[userId][clientId] = true;
+					}
+				}
+				callback(Users.clients);
+			});
 			client.on('disconnect', function(){
 				var userId = client.userId;
 				var i;
@@ -381,4 +408,4 @@ Users.Socket = {
 
 /* * * */
 
-Q.require('Users/AppUser/Facebook');
+Q.require('Users/ExternalFrom/Facebook');

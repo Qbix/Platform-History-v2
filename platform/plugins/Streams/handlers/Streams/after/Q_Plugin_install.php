@@ -7,12 +7,15 @@ function Streams_after_Q_Plugin_install($params)
 		->fetchAll(PDO::FETCH_NUM);
 	$c = $result[0][0];
 
-	echo "$plugin_name inserting streams for users...".PHP_EOL;
+	echo "$plugin_name: inserting streams for users...";
 
 	// get stream names need to install
 	$streamsToInstall = Q_Config::get('Streams', 'onInsert', 'Users_User', array());
 	// get stream names already installed
-	$streamsInstalled = Q_Plugin::getUsersStreams();
+    $key = "Streams/User/onInsert";
+    $extra = Q_Plugin::extra('Streams', 'plugin', 'Streams');
+    $extra[$key] = Q::ifset($extra, $key, array());
+    $streamsInstalled = $extra[$key];
 
 	$streamsNeedToInstall = array();
 	foreach ($streamsToInstall as $streamToInstall) {
@@ -23,9 +26,11 @@ function Streams_after_Q_Plugin_install($params)
 
 	// if all streams already inserted - exit
 	if (!count($streamsNeedToInstall)) {
-		echo "$plugin_name all streams for users already inserted".PHP_EOL;
+		echo " already inserted".PHP_EOL;
 		return;
 	}
+	
+	echo PHP_EOL;
 
 	$offset = 0;
 	$batch = 1000;
@@ -48,15 +53,19 @@ function Streams_after_Q_Plugin_install($params)
 			$user->set('Streams', 'skipExistingOnInsert', true);
 			Q::event('Db/Row/Users_User/saveExecute', $simulated, 'after');
 			echo "\033[100D";
-			echo "$plugin_name processed streams for ".($j + 1)." of $c users                          ".PHP_EOL;
+			echo "$plugin_name: processed streams for ".($j + 1)." of $c users                          ";
 		}
 	}
+	
+	echo PHP_EOL;
 
 	// if new streams installed
 	if (count($streamsToInstall)) {
 		// save installed streams to table [plugin_name]_q_plugin extra field
-		Q_Plugin::setUsersStreams($streamsToInstall);
+	    $key = "Streams/User/onInsert";
+	    $extra = Q_Plugin::extra('Streams', 'plugin', 'Streams');
+	    $extra[$key] = is_array($extra[$key]) ? $extra[$key] : array();
+	    $extra[$key] = array_values(array_unique(array_merge($extra[$key], $streamsToInstall)));
+	    return Q_Plugin::extra('Streams', 'plugin', 'Streams', compact('extra'));
 	}
-
-	echo PHP_EOL;
 }

@@ -27,7 +27,13 @@ class Users_Quota extends Base_Users_Quota
 	
 	/**
 	 * Check whether the given user can use some more units of the quota.
-	 * For APIs, you might call this once for an app user, and once for a person user.
+	 * For APIs, you might call this once for a client app user,
+	 * and once for a client person user.
+	 * It will look in the config under "Users"/"quotas"/$name
+	 * and expect to find {"duration": info} where info can be either an integer quota,
+	 * or a hash of {privilegeName: quotaForPrivilege} which should have at least the key ""
+	 * for default quota with no privileges.
+	 * Please pay attention to "begin" argument!
 	 * @param {string} $userId the user that will be using the quota
 	 * @param {string} $resourceId pass an empty string for global resource check, or for example a string beginning with Users::communityId()
 	 * @param {string} $name the name of the quota to check
@@ -35,7 +41,7 @@ class Users_Quota extends Base_Users_Quota
 	 * @param {integer} [$units=1] how many units of the quota you expect the user will use
 	 * @param {array} [$privileges=array()] any strings naming privileges the user has with respect to the resourceId that might increase the max of the quota
 	 * @param {boolean} [$begin=true] whether to begin a database transaction, in which case you must call $quota->used($used) to commit the transaction.
-	 * @return {Users_Quota|array} if no quotas were exceeded, this object is returned and you can call ->used($units) on it later. But if some quotas were exceeded, the function returns the array of corresponding durations, sorted by smallest first.
+	 * @return {Users_Quota|array} if no quotas were exceeded, this object is returned and you can call ->used($units) on it later. But if some quotas were exceeded, the function returns the array of corresponding durations, sorted by smallest first. So use is_array() with the return value to find out if any quotas were exceeded.
 	 */
 	static function check(
 		$userId, 
@@ -87,7 +93,7 @@ class Users_Quota extends Base_Users_Quota
 			'userId' => $userId,
 			'resourceId' => $resourceId,
 			'insertedTime' => new Db_Range($expr, true, false, null)
-		))->groupBy('c');
+		))->groupBy('c')->orderBy('c', false);
 		$queries = $query->shard();
 		if ($begin) {
 			$query = $query->begin();
@@ -104,14 +110,15 @@ class Users_Quota extends Base_Users_Quota
 		$exceeded = array();
 		sort($durations);
 		foreach ($durations as $d) {
-			if (is_array($q[$d])) {
-				if (!isset($q[$d][''])) {
+			$info = $q[$d];
+			if (is_array($info)) {
+				if (!isset($info[''])) {
 					throw new Q_Exception_MissingConfig(array(
 						'fieldpath' => "Users/quotas/$name/$d/" . '""'
 					));
 				}
-				$max = $q[$d][''];
-				foreach ($q[$d] as $k => $v) {
+				$max = $info[''];
+				foreach ($info as $k => $v) {
 					if (!is_numeric($v)) {
 						throw new Q_Exception_BadValue(array(
 							'internal' => "Users/quotas/$name/$d/$k",
@@ -123,7 +130,7 @@ class Users_Quota extends Base_Users_Quota
 					}
 				}
 			} else {
-				$max = $q[$d];
+				$max = $info;
 				if (!is_numeric($max)) {
 					throw new Q_Exception_BadValue(array(
 						'internal' => "Users/quotas/$name/$d",
@@ -152,12 +159,11 @@ class Users_Quota extends Base_Users_Quota
 	}
 	
 	/**
-	 * Insert a record of the user using some units of the quota
-	 * For APIs, you might call this once for an app user, and once for a person user.
+	 * Insert a record of the user using some units of the quota,
+	 * after preparing this object and its fields.
+	 * For APIs, you might call this once for a client app user,
+	 * and once for a client person user.
 	 * You must call this to commit the transaction.
-	 * @param {string} $userId the user that will be using the quota
-	 * @param {string} $resourceId pass an empty string for global resource check, or for example a string beginning with Users::communityId()
-	 * @param {string|array} $name the name of the quota, or you can pass the names of several quotas to record at once
 	 * @param {integer} [$units=1] how many units of the quota the user has used
 	 * @return {boolean} whether the quota record was inserted successfully
 	 */
@@ -169,6 +175,7 @@ class Users_Quota extends Base_Users_Quota
 			$shards = array_keys($this->get('shards'));
 			Users_Quota::commit()->execute(false, $shards);
 		}
+		return true;
 	}
 
 	/*

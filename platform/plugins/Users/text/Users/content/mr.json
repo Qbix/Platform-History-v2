@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "लॉग इन",
+        "LogOut": "बाहेर पडणे"
+    },
+    "activate": {
+        "SetAsPrimary": "माझे प्राथमिक {{2}} म्हणून {{1}} सेट करा",
+        "ChoosePassPhrase": "लॉग इन करण्यासाठी <strong>पास वाक्यांश<\/strong> निवडा. <br> थोड्या शब्दांचा एक सोपा वाक्यांश जो आपल्याला सहज लक्षात ठेवेल.",
+        "ChoosePassPhraseSeeSuggestions": "आपल्या खात्याचे रक्षण करण्यासाठी एक चांगले <strong>पास वाक्यांश<\/strong> निवडा. काही कल्पनांसाठी सूचना पहा.",
+        "LogOutAndTryAgain": "लॉग आउट करा आणि पुन्हा प्रयत्न करा",
+        "IfYouFeel": "आपल्याला काहीतरी चूक झाल्याचे वाटत असल्यास, आपण हे करू शकता",
+        "SetIdentifierButtonTitle": "प्रारंभ"
+    },
+    "session": {
+        "GetStarted": "सुरु करूया"
+    },
+    "authorize": {
+        "GetStarted": "सुरु करूया",
+        "Authorize": "अधिकृत करा",
+        "TermsLabel": "मी वाचले आणि सहमत आहे <br> {{link}}",
+        "TermsTitle": "अटी"
+    },
+    "register": {
+        "TermsLabel": "मी {{link}} स्वीकारतो",
+        "TermsTitle": "अटी"
+    },
+    "notifications": {
+        "title": "परवानगी",
+        "prompt": "आपण अधिसूचना सक्षम करू इच्छिता? आपल्यास महत्वाच्या असलेल्या गोष्टींबद्दल आपल्याला रिअल-टाइम अद्यतने मिळतील.",
+        "yes": "हो",
+        "no": "नाही",
+        "WelcomePleaseVerifyEmail": "स्वागत आहे! कृपया तुमचा ईमेल पत्ता सत्यापित करा.",
+        "WelcomeVerifyEmail": "स्वागत आहे! तुमचा ई - मेल पत्त्याची खात्री करा.",
+        "ForgetPass": "अरे, आपण आपला सांकेतिक वाक्यांश विसरला?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "संपर्क निवडा"
+        },
+        "select": {
+            "title": "{{displayName}} चा संपर्क निवडा"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "कृपया लेबल निवडा.",
+        "inviteUser": "वापरकर्त्यास आमंत्रित करा"
+    },
+    "invalidLanguageSelected": "अवैध भाषा निवडली"
+}

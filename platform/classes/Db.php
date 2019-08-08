@@ -565,8 +565,14 @@ abstract class Db
 	 * @param {array} $driver_options Driver options
 	 * @return {PDO}
 	 */
-	static function pdo ($dsn, $username, $password, $driver_options)
-	{
+	static function pdo (
+		$dsn,
+		$username,
+		$password,
+		$driver_options,
+		$connection = null,
+		$shard_name = null
+	) {
 		$key = $dsn . $username . $password . serialize($driver_options);
 		if (isset(self::$pdo_array[$key])) {
 			return self::$pdo_array[$key];
@@ -574,11 +580,18 @@ abstract class Db
 		// Make a new connection to a database!
 		try {
 			self::$pdo_array[$key] = @new PDO($dsn, $username, $password, $driver_options);
+			if (!isset($driver_options['exec'])) {
+				$driver_options['exec'] = 'set names utf8mb4';
+			}
+			if (empty($driver_options['exec'])) {
+				self::$pdo_array[$key]->exec($driver_options['exec']);
+			}
 		} catch (Exception $e) {
 			if (class_exists('Q_Config') and Q_Config::get('Db', 'exceptions', 'log', true)) {
 				Q::log($e);
 			}
-			throw $e;
+			$exception = new Db_Exception_Connect(compact('connection', 'shard_name'));
+			throw $exception; // so we don't reveal connection details in some PHP instances
 		}
 		return self::$pdo_array[$key];
 	}
@@ -653,19 +666,14 @@ abstract class Db
 	 * @static
 	 * @param {string} $datetime
 	 *  The DateTime string that comes from the db
+	 * @param {string} [$timezone='GMT']
 	 * @return {string}
 	 *  The timestamp
 	 */
-	static function fromDateTime ($datetime)
+	static function fromDateTime ($datetime, $timezone = 'GMT')
 	{
-		$year = substr($datetime, 0, 4);
-		$month = substr($datetime, 5, 2);
-		$day = substr($datetime, 8, 2);
-		$hour = substr($datetime, 11, 2);
-		$min = substr($datetime, 14, 2);
-		$sec = substr($datetime, 17, 2);
-		
-		return mktime($hour, $min, $sec, $month, $day, $year);
+		$date = new DateTime($datetime, new DateTimeZone($timezone));
+		return $date->getTimestamp();
 	}
 
 	/**
@@ -677,11 +685,15 @@ abstract class Db
 	 * @static
 	 * @param {string} $timestamp
 	 *  The UNIX timestamp, e.g. from strtotime function
+	 * @param {string} [$timezone='GMT']
 	 * @return {string}
 	 */
-	static function toDateTime ($timestamp)
+	static function toDateTime ($timestamp, $timezone = 'GMT')
 	{
-		return date('Y-m-d H:i:s', $timestamp);
+		$date = new DateTime();
+		$date->setTimestamp($timestamp);
+		$date->setTimezone(new DateTimeZone($timezone));
+		return $date->format('Y-m-d H:i:s');
 	}
 	
 	/**

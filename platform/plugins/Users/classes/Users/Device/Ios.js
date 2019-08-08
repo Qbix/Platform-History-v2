@@ -58,8 +58,8 @@ module.exports = Users_Device.Ios = Users_Device_Ios;
  */
 Users_Device_Ios.prototype.handlePushNotification = function (notification, options, callback) {
 	var device = this;
-	var appId = this.fields.appId || Q.Config.expect(['Q', 'app']);
-	notification.topic = Q.Config.expect(['Users', 'apps', 'ios', Q.Config.expect(['Q', 'app']), 'appId']);
+	var appId = Q.Config.expect(['Q', 'app']);
+	notification.topic = this.fields.appId || Q.Config.expect(['Users', 'apps', 'ios', appId, 'appId']);
 	if (notification && notification.url) {
 		notification.payload = notification.payload || {};
  		notification.payload.url = notification.url;
@@ -108,7 +108,7 @@ Users_Device_Ios.provider = function (appId, providerOptions) {
  	var fs = require('fs');
  	var apn = require('apn');
  	var path = require('path');
- 	var o = Q.Config.expect(['Users', 'apps', 'ios', Q.app.name]);
+ 	var o = Q.Config.expect(['Users', 'apps', 'ios', appId]);
  	var sandbox = o.sandbox || false;
  	var token = o.token;
  	var ssl = o.ssl;

@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "დააგროვეთ გადახდა"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: დამუშავებული {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "გმადლობთ, რომ გადაიხადოთ {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{9}} {{plan.title}}",
+        "YouSubscribedTo": "თქვენ გამოწერილი ხართ {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "ინფორმაცია წესრიგის შესახებ",
+        "PaymentMethod": "Გადახდის საშუალება",
+        "ContactInfo": "Საკონტაქტო ინფორმაცია",
+        "Pay": "გადაიხადე"
+    },
+    "credits": {
+        "InviteAcceptedBy": "მოიწვიეთ მიღებული {{1}}",
+        "YouHaveCreditsToStart": "თქვენ გაქვთ {{1}} კრედიტების დაწყება"
+    },
+    "history": {
+        "Date": "თარიღი",
+        "Amount": "თანხა",
+        "Description": "აღწერა",
+        "Client": "კლიენტი",
+        "To": "რომ",
+        "From": "დან",
+        "HistoryEmpty": "თქვენ ჯერ არ გაქვთ მონაცემები"
+    },
+    "subscriptions": {
+        "infoTitle": "დააყენეთ გადახდის ინფორმაცია",
+        "confirm": {
+            "title": "ხელმოწერის დაწყება",
+            "message": "გსურთ გამოიწეროთ 99 999} subs?",
+            "ok": "კარგი",
+            "cancel": "გაუქმება"
+        }
+    },
+    "payments": {
+        "infoTitle": "დააყენეთ გადახდის ინფორმაცია",
+        "confirm": {
+            "title": "Გადაიხადეთ",
+            "message": "თანახმა ხართ გადაიხადოთ 999 {}}} {} 1000}}?",
+            "ok": "კარგი",
+            "cancel": "გაუქმება"
+        }
+    }
+}

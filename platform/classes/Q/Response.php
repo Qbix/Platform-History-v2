@@ -203,14 +203,31 @@ class Q_Response
 	 * Adds a notice
 	 * @method setNotice
 	 * @static
-	 * @param {string} $key
-	 * @param {string} $notice
-	 * @param {boolean} [$transient=false] If true, doesn't save notice in the session.
+	 * @param {string} $key The key for the notices
+	 * @param {string} $notice The HTML content of the notice
+	 * @param {array} [$options=array] Different options
+	 * @param {boolean} [$options.persistent=false] If false, save notice in the session to show again if page reloaded.
+	 * @param {boolean} [$options.closeable=true] If true, add cross icon to close notice.
+	 * @param {boolean} [$options.handler=null] URL to redirect to, or name of function to call, when notice is clicked.
+	 * @param {Boolean|Number} [$options.timeout=false] Time in seconds after which to remove notice.
+	 * @param {Boolean|Number} [$options.persistent=false] Whether to save this notice to session to show after page refresh.
 	 */
-	static function setNotice($key, $notice, $transient = false)
+	static function setNotice($key, $notice, $options = array())
 	{
+		if (empty($notice)) {
+			return;
+		}
+
+		if (!is_array($options)) {
+			$options = array();
+		}
+
+		if (!isset($options['closeable'])) {
+			$options['closeable'] = true;
+		}
+		$notice = compact('notice', 'options');
 		self::$notices[$key] = $notice;
-		if (!$transient and Q_Session::id()) {
+		if (!empty($options['persistent']) and Q_Session::id()) {
 			$_SESSION['Q']['notices'][$key] = Q::t($notice);
 		}
 		unset(self::$removedNotices[$key]);
@@ -427,12 +444,20 @@ class Q_Response
 	 * Sets a particular meta tag
 	 * @method setMeta
 	 * @static
-	 * @param {string} $name The name of the meta tag
+	 * @param {string|array} $name The name of the meta tag, or an array of key=>value pairs of metas
 	 * @param {mixed} $content The content of the meta tag
 	 * @param {string} [$slotName=null]
 	 */
-	static function setMeta($name, $content, $slotName = null)
+	static function setMeta($name, $content = null, $slotName = null)
 	{
+		if (is_array($name)) {
+			foreach ($name as $k => $v) {
+				if (isset($v)) {
+					self::setMeta($k, $v, $slotName);
+				}
+			}
+			return;
+		}
 		self::$metas[$name] = $content;
 
 		// Now, for the slot
@@ -1078,7 +1103,9 @@ class Q_Response
 		$result = array();
 		foreach ($scripts as $k => $b) {
 			if ($urls) {
-				$b['src'] = Q_Html::themedUrl($b['src']);
+				list($src, $filename, $hash) = Q_Html::themedUrlFilenameAndHash($b['src']);
+				$b['src'] = $src;
+				$b['hash'] = $hash;
 			}
 			if (!empty($srcs[ $b['src'] ])) {
 				continue;
@@ -1113,7 +1140,7 @@ class Q_Response
 					include($src);
 				} catch (Exception $e) {}
 			} else {
-				list ($src, $filename) = Q_Html::themedUrlAndFilename($src);
+				list ($src, $filename) = Q_Html::themedUrlFilenameAndHash($src);
 				try {
 					Q::includeFile($filename);
 				} catch (Exception $e) {}
@@ -1148,10 +1175,13 @@ class Q_Response
 			$src = '';
 			// $media = 'screen,print';
 			$type = 'text/css';
+			$hash = null;
 			extract($script, EXTR_IF_EXISTS);
 			$tags[] = Q_Html::tag(
 				'script',
-				array('type' => $type, 'src' => $src, 'data-slot' => $script['slot'])
+				array('type' => $type, 'src' => $src, 'data-slot' => $script['slot']),
+				null,
+				compact('hash')
 			) . '</script>';
 		}
 		return implode($between, $tags);
@@ -1256,7 +1286,9 @@ class Q_Response
 		$saw = array();
 		foreach ($sheets as $b)  {
 			if ($urls) {
-				$b['href'] = Q_Html::themedUrl($b['href']);
+				list($href, $filename, $hash) = Q_Html::themedUrlFilenameAndHash($b['href']);
+				$b['href'] = $href;
+				$b['hash'] = $hash;
 			}
 			$key = $b['href'].' '.$b['media'];
 			if (!empty($saw[$key])) {
@@ -1298,7 +1330,7 @@ class Q_Response
 						include($href);
 					} catch (Exception $e) {}
 				} else {
-					list ($href, $filename) = Q_Html::themedUrlAndFilename($href);
+					list ($href, $filename) = Q_Html::themedUrlFilenameAndHash($href);
 					try {
 						Q::includeFile($filename);
 					} catch (Exception $e) {}
@@ -1333,10 +1365,11 @@ class Q_Response
 			$href = '';
 			$media = 'screen,print';
 			$type = 'text/css';
+			$hash = null;
 			extract($stylesheet, EXTR_IF_EXISTS);
 			$attributes = compact('rel', 'type', 'href', 'media');
 			$attributes['data-slot'] = $stylesheet['slot'];
-			$tags[] = Q_Html::tag('link', $attributes);
+			$tags[] = Q_Html::tag('link', $attributes, null, compact('hash'));
 		}
 		return implode($between, $tags);
 	}
@@ -1460,7 +1493,8 @@ class Q_Response
 	 * @param {boolean} [$options.loop=false] If false, and current URL is the same as the new one, skips setting the redirect header and just returns false.
 	 * @param {boolean} [$options.permanently=false] If true, sets response code as 304 instead of 302
 	 * @param {boolean} [$options.noProxy=false] If true, doesn't use the proxy mapping to determine URL
-	 * @param {boolean} [$noProxy=false]
+	 * @param {boolean} [$options.querystring=true] If true, attach all existing GET params to redirect url.
+	 * @throws Q_Exception_BadValue
 	 * @return {boolean}
  	 *  Return whether the redirect header was set.
 	 */
@@ -1496,6 +1530,9 @@ class Q_Response
 		}
 		if (!empty($loop) and Q_Request::url() === $url) {
 			return false;
+		}
+		if (!empty($querystring) and !empty($_SERVER['QUERY_STRING'])) {
+			$url = Q_Uri::fixUrl($url . '? ' . $_SERVER['QUERY_STRING']);
 		}
 		if (!Q_Request::isAjax()) {
 			if (!empty($permanently)) {
@@ -1585,15 +1622,28 @@ class Q_Response
 			list($value, $expires, $path) = $args;
 			self::_cookie($name, $value, $expires, $path);
 		}
-		// A reasonable P3P policy for old IE to allow 3rd party cookies.
-		// Consider overriding it with a real P3P policy for your app.
-		$header = 'P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"';
-		$header = Q::event('Q/Response/setCookie',
+		$header = '';
+		$header = Q::event('Q/Response/sendCookieHeaders',
 			compact('name', 'value', 'expires', 'path', 'header'),
 			'before', false, $header
 		);
 		header($header);
 		self::$cookies = array();
+	}
+
+	static function flushAndContinue($timeLimit = 30)
+	{
+		self::setIgnoreUserAbort(true);
+		set_time_limit($timeLimit);
+		ob_start();
+		header('Connection: close');
+		header('Content-Length: '.ob_get_length());
+		ob_end_flush();
+		$level = ob_get_level();
+		while (--$level >= 0) {
+			ob_flush();
+		}
+		flush();
 	}
 	
 	protected static function _cookie($name, $value, $expires, $path)
@@ -1814,4 +1864,66 @@ class Q_Response
 	 * @type string
 	 */
 	public static $language = "en";
+}
+
+
+// http_response_code shim for PHP < 5.4
+if (!function_exists('http_response_code')) {
+    function http_response_code($code = NULL) {    
+        $prev_code = (isset($GLOBALS['http_response_code']) ? $GLOBALS['http_response_code'] : 200);
+
+        if ($code === NULL) {
+            return $prev_code;
+        }
+
+        switch ($code) {
+            case 100: $text = 'Continue'; break;
+            case 101: $text = 'Switching Protocols'; break;
+            case 200: $text = 'OK'; break;
+            case 201: $text = 'Created'; break;
+            case 202: $text = 'Accepted'; break;
+            case 203: $text = 'Non-Authoritative Information'; break;
+            case 204: $text = 'No Content'; break;
+            case 205: $text = 'Reset Content'; break;
+            case 206: $text = 'Partial Content'; break;
+            case 300: $text = 'Multiple Choices'; break;
+            case 301: $text = 'Moved Permanently'; break;
+            case 302: $text = 'Moved Temporarily'; break;
+            case 303: $text = 'See Other'; break;
+            case 304: $text = 'Not Modified'; break;
+            case 305: $text = 'Use Proxy'; break;
+            case 400: $text = 'Bad Request'; break;
+            case 401: $text = 'Unauthorized'; break;
+            case 402: $text = 'Payment Required'; break;
+            case 403: $text = 'Forbidden'; break;
+            case 404: $text = 'Not Found'; break;
+            case 405: $text = 'Method Not Allowed'; break;
+            case 406: $text = 'Not Acceptable'; break;
+            case 407: $text = 'Proxy Authentication Required'; break;
+            case 408: $text = 'Request Time-out'; break;
+            case 409: $text = 'Conflict'; break;
+            case 410: $text = 'Gone'; break;
+            case 411: $text = 'Length Required'; break;
+            case 412: $text = 'Precondition Failed'; break;
+            case 413: $text = 'Request Entity Too Large'; break;
+            case 414: $text = 'Request-URI Too Large'; break;
+            case 415: $text = 'Unsupported Media Type'; break;
+            case 500: $text = 'Internal Server Error'; break;
+            case 501: $text = 'Not Implemented'; break;
+            case 502: $text = 'Bad Gateway'; break;
+            case 503: $text = 'Service Unavailable'; break;
+            case 504: $text = 'Gateway Time-out'; break;
+            case 505: $text = 'HTTP Version not supported'; break;
+            default:
+                trigger_error('Unknown http status code ' . $code, E_USER_ERROR); // exit('Unknown http status code "' . htmlentities($code) . '"');
+                return $prev_code;
+        }
+
+        $protocol = (isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0');
+        header($protocol . ' ' . $code . ' ' . $text);
+        $GLOBALS['http_response_code'] = $code;
+
+        // original function always returns the previous or current code
+        return $prev_code;
+    }
 }

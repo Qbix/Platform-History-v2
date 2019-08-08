@@ -14,17 +14,16 @@
 function Assets_payment_post($params = array())
 {
     $req = array_merge($_REQUEST, $params);
-	Q_Valid::requireFields(array('payments', 'amount'), $req, true);
+	Q_Valid::requireFields(array('payments', 'token', 'amount'), $req, true);
 	// to be safe, we only start subscriptions from existing plans
 	$publisherId = Q::ifset($req, 'publisherId', Users::communityId());
 	$streamName = Q::ifset($req, 'streamName', null);
 	if ($publisherId and $streamName) {
 		$stream = Streams::fetchOne($publisherId, $publisherId, $streamName, true);
 	}
-	
+
 	// the currency will always be assumed to be "USD" for now
 	// and the amount will always be assumed to be in dollars, for now
-	Q_Valid::requireFields(array('token'), $req, true);
 	$token = $req['token'];
 	$currency = Q::ifset($req, 'currency', 'USD');
 	$user = Users::fetch(Q::ifset($req, 'userId', null));

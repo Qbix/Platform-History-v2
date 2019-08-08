@@ -13,6 +13,7 @@ function Q_before_Q_responseExtras()
 	$uri = Q_Dispatcher::uri();
 	$url = Q_Request::url(true);
 	$base_url = Q_Request::baseUrl();
+	$cache_base_url = Q_Config::get('Q', 'response', 'cacheBaseUrl', null);
 	$ajax = Q_Request::isAjax();
 	if (!$uri) {
 		return;
@@ -35,6 +36,7 @@ function Q_before_Q_responseExtras()
 				'proxies' => Q_Config::get('Q', 'proxies', array()),
 				'baseUrl' => $base_url,
 				'proxyBaseUrl' => Q_Uri::url($base_url),
+				'cacheBaseUrl' => Q_Uri::url($cache_base_url),
 				'proxyUrl' => Q_Uri::url($url),
 				'text' => $text,
 				'sessionName' => Q_Session::name(),
@@ -76,4 +78,11 @@ function Q_before_Q_responseExtras()
 		}
 		Q_Response::addStylesheet($src, 'Q', $media);
 	}
+	
+	// We may want to set the initial URL and updateTimestamp cookie
+	$environment = Q_Config::get('Q', 'environment', '');
+	$config = Q_Config::get('Q', 'environments', $environment, 'urls', array());
+	$config['updateBeforeInit'] = (!empty($config['integrity']) or !empty($config['caching']));
+	Q_Response::setScriptData('Q.info.urls', $config);
+	Q_Response::setScriptData('Q.info.cookies', array('Q_cordova', 'Q_nonce', 'Q_dpr'));
 }

@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Napsauta maksamaan"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: maksun käsittely {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Kiitos maksustasi {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} tilasi {{plan.title}}",
+        "YouSubscribedTo": "Olet tilannut {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Tietoa tilasta",
+        "PaymentMethod": "Maksutapa",
+        "ContactInfo": "Yhteystiedot",
+        "Pay": "Maksaa"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Kutsu {{1}} hyväksyi kutsun",
+        "YouHaveCreditsToStart": "Sinulla on {{1}} luottoja aloittaa"
+    },
+    "history": {
+        "Date": "Treffi",
+        "Amount": "Määrä",
+        "Description": "Kuvaus",
+        "Client": "Asiakas",
+        "To": "että",
+        "From": "alkaen",
+        "HistoryEmpty": "Sinulla ei ole vielä tietoja"
+    },
+    "subscriptions": {
+        "infoTitle": "Aseta maksutiedot",
+        "confirm": {
+            "title": "Aloita tilaus",
+            "message": "Haluatko tilata {{title}}?",
+            "ok": "kunnossa",
+            "cancel": "Peruuttaa"
+        }
+    },
+    "payments": {
+        "infoTitle": "Aseta maksutiedot",
+        "confirm": {
+            "title": "Suorita maksu",
+            "message": "Oletteko samaa mieltä {{symbol}} {{amount}} maksamisesta?",
+            "ok": "kunnossa",
+            "cancel": "Peruuttaa"
+        }
+    }
+}

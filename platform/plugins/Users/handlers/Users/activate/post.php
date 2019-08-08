@@ -23,8 +23,11 @@ function Users_activate_post()
 
 		// Save the pass phrase even if there may be a problem adding an email later.
 		// At least the user will be able to log in.
-		$user->passphraseHash = $user->computePassphraseHash($_REQUEST['passphrase'], $isHashed);
-		Q_Response::setNotice("Users/activate/passphrase", "Your pass phrase has been saved.", true);
+		$passphrase = $user->preparePassphrase($_REQUEST['passphrase'], $isHashed);
+		$user->passphraseHash = Users::hashPassphrase($passphrase, $user->passphraseHash);
+		Q_Response::setNotice("Users/activate/passphrase", "Your pass phrase has been saved.", array(
+			'timeout' => Q_Config::get('Users', 'notices', 'timeout', 5)
+		));
 		// Log the user in, since they were able to set the passphrase
 		Users::setLoggedInUser($user); // This also saves the user.
 
@@ -35,14 +38,16 @@ function Users_activate_post()
 
 	if ($type) {
 		if ($type == 'email address') {
-			$user->setEmailAddress($email->address); // may throw exception	
+			$user->setEmailAddress($email->address, true); // may throw exception	
 		} else if ($type == 'mobile number') {
-			$user->setMobileNumber($mobile->number); // may throw exception
+			$user->setMobileNumber($mobile->number, true); // may throw exception
 		}
 		// Log the user in, since they have just added an email to their account
 		Users::setLoggedInUser($user); // This also saves the user.
 		Q_Response::removeNotice('Users/activate/objects');
-		Q_Response::setNotice("Users/activate/activated", "Your $type has been activated.", true);
+		Q_Response::setNotice("Users/activate/activated", "Your $type has been activated.", array(
+			'timeout' => Q_Config::get('Users', 'notices', 'timeout', 5)
+		));
 	}
 	
 	Users::$cache['passphrase_set'] = true;

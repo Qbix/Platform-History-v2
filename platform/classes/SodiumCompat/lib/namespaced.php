@@ -18,7 +18,7 @@ if (PHP_VERSION_ID < 50300) {
  *
  * $x = Compat::crypto_aead_xchacha20poly1305_encrypt(...$args);
  */
-spl_autoload_register(function ($class) {
+function Sodiumcompat_lib_autoload($class) {
     if ($class[0] === '\\') {
         $class = substr($class, 1);
     }
@@ -43,4 +43,6 @@ spl_autoload_register(function ($class) {
         return true;
     }
     return false;
-});
+}
+
+spl_autoload_register('Sodiumcompat_lib_autoload');

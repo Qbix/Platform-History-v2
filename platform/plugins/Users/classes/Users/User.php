@@ -40,9 +40,9 @@ class Users_User extends Base_Users_User
 				->where(array('id' => $userId))
 				->fetchDbRows('id');
 			if ($throwIfMissing) {
-				foreach ($userId as $uid) {
-					if (!isset($users[$uid])) {
-						$missing[] = $uid;
+				foreach ($userId as $xid) {
+					if (!isset($users[$xid])) {
+						$missing[] = $xid;
 					}
 				}
 				if ($missing) {
@@ -87,9 +87,11 @@ class Users_User extends Base_Users_User
 	}
 
 	/**
+	 * Returns the fields and values we can export to clients.
+	 * Can also contain "messageTotals", "relatedToTotals" and "relatedFromTotals".
 	 * @method exportArray
 	 * @param {$array} [$options=null] can include the following:
-	 *  "asAvatar": set to true if only the avatar fields should be exported
+	 * @param {string} [$options.asAvatar] set to true if only the avatar fields should be exported
 	 * @return {array}
 	 */
 	function exportArray($options = null)
@@ -103,8 +105,8 @@ class Users_User extends Base_Users_User
 				$u[$field] = $this->$field;
 			}
 		}
-		if (isset($u['uids'])) {
-			$u['uids'] = $this->getAllUids();
+		if (isset($u['xids'])) {
+			$u['xids'] = $this->getAllXids();
 		}
 		return $u;
 	}
@@ -137,22 +139,25 @@ class Users_User extends Base_Users_User
  		$name = Q::event('Users/User/displayName', compact('user', 'options'), 'before');
 		return isset($name) ? $name : $this->username;
 	}
-	
+
 	/**
-	 * Use this function to compute the hash of a passphrase
+	 * Call this to prepare the passphrase before passing it to
+	 * Users::hashPassphrase() and Users::verifyPassphrase()
 	 * @param {array} $passphrase The value to be checked depends on value of isHashed.
-	 * @param {integer} $isHashed You can pass 0 if this is actually the passphrase, 1 if it has been hashed using sha1("$realPassphrase\t$userId")
+	 * @param {integer} $isHashed You can pass 0 if this is actually the passphrase,
+	 *   1 if it has been hashed using sha1("$realPassphrase\t$userId")
 	 */
-	function computePassphraseHash($passphrase, $isHashed)
+	function preparePassphrase($passphrase, $isHashed)
 	{
-		$user = $this;
-		if ($result = Q::event("Users/computePassphraseHash", compact('passphrase', 'isHashed', 'user'), 'before')) {
+		if ($result = Q::event("Users/preparePassphraseHash", compact(
+			'passphrase', 'isHashed', 'user'), 'before'
+		)) {
 			return $result;
 		}
-		if (!$isHashed) {
-			return password_hash($passphrase, PASSWORD_DEFAULT);
+		if (!$isHashed and $passphrase) {
+			$passphrase = sha1($passphrase . "\t" . $this->id);
 		}
-		return Users::hashPassphrase($passphrase, $this->passphraseHash);
+		return $passphrase;
 	}
 	
 	/**
@@ -272,8 +277,15 @@ class Users_User extends Base_Users_User
 	{
 		$user = $this;
 		if ($inserted) {
-			$labels = Q_Config::get('Users', 'onInsert', 'labels', array());
-			Users_Label::addLabel($labels, $this->id, null, null, $this->id, true);
+			if (Users::isCommunityId($user->id)) {
+				if ($roles = Q_Config::get('Users', 'onInsert', 'roles', array())) {
+					Users_Label::addLabel($roles, $this->id, null, null, false, true);
+				}
+			} else {
+				if ($labels = Q_Config::get('Users', 'onInsert', 'labels', array())) {
+					Users_Label::addLabel($labels, $this->id, null, null, false, true);
+				}
+			}
 		}
 		Q::event(
 			'Users/User/save', 
@@ -522,7 +534,8 @@ class Users_User extends Base_Users_User
 	 * @method setEmailAddress
 	 * @param {string} $emailAddress
 	 * @param {boolean} [$verified=false]
-	 *  Whether to force the email address to be marked verified for this user
+	 *  Whether to force the email address to be marked verified for this user,
+	 *  even if it was verified for someone else or wasn't even saved in the database.
 	 * @param {Users_Email} [&$email] Optional reference to be filled
 	 * @throws {Q_Exception_MissingRow}
 	 *	If e-mail address is missing
@@ -542,9 +555,7 @@ class Users_User extends Base_Users_User
 			$email->activationCodeExpires = null;
 		}
 		$email->authCode = sha1(microtime() . mt_rand());
-		if ($verified) {
-			$email->userId = $this->id;
-		} else {
+		if (!$verified) {
 			if (!$retrieved) {
 				throw new Q_Exception_MissingRow(array(
 					'table' => "an email",
@@ -569,6 +580,7 @@ class Users_User extends Base_Users_User
 		}
 
 		// Everything is okay. Assign it!
+		$email->userId = $this->id;
 		$email->state = 'active';
 		$email->save();
 		
@@ -717,7 +729,8 @@ class Users_User extends Base_Users_User
 	 * @method setMobileNumber
 	 * @param {string} $mobileNumber
 	 * @param {boolean} [$verified=false]
-	 *  Whether to force the mobile number to be marked verified for this user
+	 *  Whether to force the mobile number to be marked verified for this user,
+	 *  even if it was verified for someone else or wasn't even saved in the database.
 	 * @param {Users_Mobile} [&$mobile] Optional reference to be filled
 	 * @throws {Q_Exception_MissingRow}
 	 *	If mobile number is missing
@@ -737,9 +750,7 @@ class Users_User extends Base_Users_User
 			$mobile->activationCodeExpires = null;
 		}
 		$mobile->authCode = sha1(microtime() . mt_rand());
-		if ($verified) {
-			$mobile->userId = $this->id;
-		} else if ($retrieved) {
+		if (!$verified) {
 			if (!$retrieved) {
 				throw new Q_Exception_MissingRow(array(
 					'table' => "a mobile phone",
@@ -764,6 +775,7 @@ class Users_User extends Base_Users_User
 		}
 
 		// Everything is okay. Assign it!
+		$mobile->userId = $this->id;
 		$mobile->state = 'active';
 		$mobile->save();
 		
@@ -823,15 +835,19 @@ class Users_User extends Base_Users_User
 		}
 		// Import the user's icon and save it
 		if (empty($this->icon)
-		|| substr($this->icon, 0, 7) === 'default'
-		|| substr($this->icon, 0, 6) === 'future') {
+		or Q::startsWith($this->icon, 'default')
+		or Q::startsWith($this->icon, 'future')) {
+			// Download icon from gravatar or another service
 			$hash = md5(strtolower(trim($identifier)));
 			$icon = array(
 				'40.png' => array('hash' => $hash, 'size' => 40),
 				'50.png' => array('hash' => $hash, 'size' => 50),
 				'80.png' => array('hash' => $hash, 'size' => 80)
 			);
-			Users::importIcon($this, $icon);
+			$app = Q::app();
+			$directory = APP_FILES_DIR.DS.$app.DS.'uploads'.DS.'Users'
+				.DS.Q_Utils::splitId($this->id).DS.'icon'.DS.'generated';
+			Users::importIcon($this, $icon, $directory);
 		}
 		return true;
 	}
@@ -867,64 +883,64 @@ class Users_User extends Base_Users_User
 	}
 	
 	/**
-	 * @method getAllUids
-	 * @return {array} An array of ($platform => $uid) pairs
+	 * @method getAllXids
+	 * @return {array} An array of ($platform => $xid) pairs
 	 */
-	function getAllUids()
+	function getAllXids()
 	{
-		return empty($this->uids) 
+		return empty($this->xids) 
 			? array()
-			: json_decode($this->uids, true);
+			: json_decode($this->xids, true);
 	}
 	
 	/**
-	 * @method getUid
-	 * @param {string} $platform The name of the platform
-	 * @param {string|null} $default The value to return if the uid is missing
-	 * @return {string|null} The value of the uid, or the default value, or null
+	 * @method getXid
+	 * @param {string} $platformApp String of the form "$platform\t$appId"
+	 * @param {string|null} $default The value to return if the xid is missing
+	 * @return {string|null} The value of the xid, or the default value, or null
 	 */
-	function getUid($platform, $default = null)
+	function getXid($platformApp, $default = null)
 	{
-		$uids = $this->getAllUids();
-		return isset($uids[$platform]) ? $uids[$platform] : $default;
+		$xids = $this->getAllXids();
+		return isset($xids[$platformApp]) ? $xids[$platformApp] : $default;
 	}
 	
 	/**
-	 * @method setUid
-	 * @param {string|array} $platform The name of the platform,
-	 *  or an array of $platform => $uid pairs
-	 * @param {string} $uid The value to set the uid to
+	 * @method setXid
+	 * @param {string|array} $platformApp String of the form "$platform\t$appId"
+	 *  or an array of $platformApp => $xid pairs
+	 * @param {string} $xid The value to set the xid to
 	 */
-	function setUid($platform, $uid = null)
+	function setXid($platformApp, $xid = null)
 	{
-		$uids = $this->getAllUids();
-		if (is_array($platform)) {
-			foreach ($platform as $k => $v) {
-				$uids[$k] = $v;
+		$xids = $this->getAllXids();
+		if (is_array($platformApp)) {
+			foreach ($platformApp as $k => $v) {
+				$xids[$k] = $v;
 			}
 		} else {
-			$uids[$platform] = $uid;
+			$xids[$platformApp] = $xid;
 		}
-		$this->uids = Q::json_encode($uids);
+		$this->xids = Q::json_encode($xids);
 	}
 	
 	/**
-	 * @method clearUid
-	 * @param {string} $platform The name of the platform
+	 * @method clearXid
+	 * @param {string} $platform String of the form "$platform\t$appId"
 	 */
-	function clearUid($platform)
+	function clearXid($platformApp)
 	{
-		$uids = $this->getAllUids();
-		unset($uids[$platform]);
-		$this->uids = Q::json_encode($uids);
+		$xids = $this->getAllXids();
+		unset($xids[$platformApp]);
+		$this->xids = Q::json_encode($xids);
 	}
 	
 	/**
-	 * @method clearAllUids
+	 * @method clearAllXids
 	 */
-	function clearAllUids()
+	function clearAllXids()
 	{
-		$this->uids = '{}';
+		$this->xids = '{}';
 	}
 	
 	/**
@@ -989,19 +1005,8 @@ class Users_User extends Base_Users_User
 			$identifiers = array_map('trim', explode("\t", $identifiers));
 		}
 		$users = array();
-		foreach ($identifiers as $identifier) {
-			if (Q_Valid::email($identifier, $emailAddress)) {
-				$ui_identifier = $emailAddress; 
-				$identifierType = 'email';
-			} else if (Q_Valid::phone($identifier, $mobileNumber)) {
-				$ui_identifier = $mobileNumber; 
-				$identifierType = 'mobile';
-			} else {
-				throw new Q_Exception_WrongType(array(
-					'field' => "identifier '$identifier",
-					'type' => 'email address or mobile number'
-				), array('identifier', 'emailAddress', 'mobileNumber'));
-			}
+		foreach ($identifiers as $i => $identifier) {
+			$identifierType = Users::identifierType($identifier, $ui_identifier);
 			$status = null;
 			$users[] = $user = Users::futureUser($identifierType, $ui_identifier, $status);
 			$statuses[] = $status;
@@ -1011,28 +1016,31 @@ class Users_User extends Base_Users_User
 	}
 	
 	/**
-	 * Check platform uids or array of uids and return users - existing or future
-	 * @method idsFromPlatformUids
+	 * Check platform xids or array of xids and return users - existing or future
+	 * @method idsFromPlatformXids
 	 * @static
 	 * @param {string} $platform The name of the platform
-	 * @param {array|string} $uids An array of facebook user ids, or a comma-delimited string
+	 * @param {string} $appId The id of an app on the platform
+	 * @param {array|string} $xids An array of facebook user ids, or a comma-delimited string
 	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
 	 * @return {array} The array of user ids
 	 */
-	static function idsFromPlatformUids (
-		$platform, 
-		$uids, 
+	static function idsFromPlatformXids (
+		$platform,
+		$appId,
+		$xids, 
 		&$statuses = array()
 	) {
-		if (empty($uids)) {
+		if (empty($xids)) {
 			return array();
 		}
-		if (!is_array($uids)) {
-			$uids = array_map('trim', explode(',', $uids));
+		if (!is_array($xids)) {
+			$xids = array_map('trim', explode(',', $xids));
 		}
+		$platformApp = "$platform\t$appId";
 		$users = array();
-		foreach ($uids as $uid) {
-			$users[] = Users::futureUser($platform, $uid, $status);
+		foreach ($xids as $xid) {
+			$users[] = Users::futureUser($platformApp, $xid, $status);
 			$statuses[] = $status;
 		}
 		return array_map(array('Users_User', '_getId'), $users);
@@ -1071,6 +1079,125 @@ class Users_User extends Base_Users_User
 			}
 		}
 		return $users;
+	}
+
+	/**
+	 * Remove users from system
+	 * @method removeUser
+	 * @static
+	 * @param {string|array} $userId Array of id's or single id
+	 */
+	static function removeUser($userIds) {
+		if (is_array($userIds)) {
+			foreach ($userIds as $userId) {
+				self::removeUser($userId);
+			}
+
+			return;
+		}
+
+		Streams_RelatedTo::delete()
+			->where(array('toPublisherId' => $userIds))
+			->orWhere(array('fromPublisherId' => $userIds))
+			->execute();
+
+		Streams_RelatedFrom::delete()
+			->where(array('toPublisherId' => $userIds))
+			->orWhere(array('fromPublisherId' => $userIds))
+			->execute();
+
+		Streams_Message::delete()
+			->where(array('publisherId' => $userIds))
+			->orWhere(array('byUserId' => $userIds))
+			->execute();
+
+		Streams_Avatar::delete()
+			->where(array('publisherId' => $userIds))
+			->orWhere(array('toUserId' => $userIds))
+			->execute();
+
+		Streams_Participant::delete()
+			->where(array('publisherId' => $userIds))
+			->orWhere(array('userId' => $userIds))
+			->execute();
+
+		Streams_Notification::delete()
+			->where(array('publisherId' => $userIds))
+			->orWhere(array('userId' => $userIds))
+			->execute();
+
+		Streams_Subscription::delete()
+			->where(array('publisherId' => $userIds))
+			->orWhere(array('ofUserId' => $userIds))
+			->execute();
+
+		Streams_SubscriptionRule::delete()
+			->where(array('ofUserId' => $userIds))
+			->orWhere(array('publisherId' => $userIds))
+			->execute();
+
+		Streams_MessageTotal::delete()
+			->where(array('publisherId' => $userIds))
+			->execute();
+
+		Streams_RelatedFromTotal::delete()
+			->where(array('fromPublisherId' => $userIds))
+			->execute();
+
+		Streams_RelatedToTotal::delete()
+			->where(array('toPublisherId' => $userIds))
+			->execute();
+
+		Streams_Access::delete()
+			->where(array('publisherId' => $userIds))
+			->orWhere(array('grantedByUserId' => $userIds))
+			->execute();
+
+		Streams_Stream::delete()
+			->where(array('publisherId' => $userIds))
+			->execute();
+
+		Streams_Invite::delete()
+			->where(array('userId' => $userIds))
+			->orWhere(array('invitingUserId' => $userIds))
+			->execute();
+
+		Users_Vote::delete()
+			->where(array('userId' => $userIds))
+			->execute();
+
+		Users_Session::delete()
+			->where(array('userId' => $userIds))
+			->execute();
+
+		Users_Mobile::delete()
+			->where(array('userId' => $userIds))
+			->execute();
+
+		Users_Email::delete()
+			->where(array('userId' => $userIds))
+			->execute();
+
+		Users_Identify::delete()
+			->where(array('userId' => $userIds))
+			->execute();
+
+		Users_Device::delete()
+			->where(array('userId' => $userIds))
+			->execute();
+
+		Users_Contact::delete()
+			->where(array('userId' => $userIds))
+			->orWhere(array('contactUserId' => $userIds))
+			->execute();
+
+		Users_Label::delete()
+			->where(array('userId' => $userIds))
+			->execute();
+
+		Users_User::delete()
+			->where(array('id' => $userIds))
+			->execute();
 	}
 
 	/* * * */

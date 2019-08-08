@@ -320,4 +320,4 @@ Q.Tool.define("Streams/html", function (options) {
 
 );
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

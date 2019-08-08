@@ -13,3 +13,5 @@ syntax: regexp
 ^web/Q/uploads
 ^web/Q/plugins
 ^web/Q/text
+^web/Q/views
+^config/Q/urls/

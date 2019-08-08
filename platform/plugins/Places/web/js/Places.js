@@ -9,7 +9,9 @@
 
 var Places = Q.Places = Q.plugins.Places = {
 	
-	metric: true, // whether to display things using the metric system units
+	// whether to display things using the metric system units
+	metric: (['en-US', 'en-GB', 'my-MM', 'en-LR']
+		.indexOf(Q.Text.language + '-' + Q.Text.locale) < 0),
 	
 	options: {
 		platform: 'google'
@@ -93,13 +95,26 @@ var Places = Q.Places = Q.plugins.Places = {
 			var kmr = Math.abs(meters/1000 - Math.round(meters/1000));
 			units = milesr < kmr ? 'miles' : 'km';
 		}
+		var displayUnits = Places.units[units];
 		switch (units) {
+		case 'mi':
 		case 'miles':
-			return Math.round(meters/1609.34*10)/10+" miles";
+			var mi = Math.round(meters/1609.34*10)/10;
+			if (mi === 1 && units === 'miles') {
+				units = 'mile';
+			}
+			return mi+' '+displayUnits;
 		case 'km':
 		case 'kilometers':
 		default:
-			return meters % 100 == 0 ? (meters/1000)+' '+units : Math.ceil(meters)+" meters";
+			var km = (meters/1000);
+			var m = Math.ceil(meters);
+			if (km === 1 && units === 'kilometers') {
+				units = 'kilometer';
+			}
+			return meters % 100 == 0
+				? km +' '+displayUnits
+				: m+' '+Places.units.meters;
 		}
 	},
 
@@ -166,34 +181,22 @@ var Places = Q.Places = Q.plugins.Places = {
 	closest: function(point, polyline) {
 		var x = point.x;
 		var y = point.y;
-		var a, b, c, d, e, f, i, l, n, n1, n2, frac, dist, distance, closest;
-
-		// calculation of the first point
-		a = polyline[0].x;
-		b = polyline[0].y;
-		distance = Math.sqrt((x-a)*(x-a) + (y-b)*(y-b));
-		closest = {
-			index: 0,
-			x: a,
-			y: b,
-			distance: distance,
-			fraction: 0
-		};
+		var a, b, c, d, e, f, i, l, n, n1, n2, frac, dist;
+		var distance = null;
+		var closest = null;
 
 		for (i = 1, l = polyline.length; i < l; i++) {
 			a = polyline[i-1].x;
 			b = polyline[i-1].y;
 			c = polyline[i].x;
 			d = polyline[i].y;
-			n1 = Math.sqrt((x-a)*(x-a) + (y-b)*(y-b));
-			n2 = Math.sqrt((c-a)*(c-a) + (d-b)*(d-b));
-			n = n1 * n2;
+			n = (c-a)*(c-a) + (d-b)*(d-b);
 			frac = n ? ((x-a)*(c-a) + (y-b)*(d-b)) / n : 0;
 			frac = Math.max(0, Math.min(1, frac));
 			e = a + (c-a)*frac;
 			f = b + (d-b)*frac;
 			dist = Math.sqrt((x-e)*(x-e) + (y-f)*(y-f));
-			if (distance > dist) {
+			if (distance === null || distance > dist) {
 				distance = dist;
 				closest = {
 					index: i,
@@ -372,8 +375,6 @@ Places.Coordinates.from = function (data, callback) {
 	var c = (data instanceof Places.Coordinates)
 		? Q.copy(data)
 		: new Places.Coordinates(true);
-	c.onUpdated = new Q.Event();
-	c.onReady = new Q.Event();
 	if (!data) {
 		throw new Q.Error("Places.Coordinates.from: data is required");
 	}
@@ -403,6 +404,8 @@ Places.Coordinates.from = function (data, callback) {
 		_geocode(callback);
 	}
 	function _geocode(callback) {
+		c.onUpdated = new Q.Event();
+		c.onReady = new Q.Event();
 		if (!callback) {
 			return;
 		}
@@ -411,6 +414,60 @@ Places.Coordinates.from = function (data, callback) {
 		}, data));
 	}
 };
+
+
+/**
+ * Operates with dialogs.
+ * @class Streams.Dialogs
+ */
+
+Places.Dialogs = {
+	/**
+	 * Show a dialog that lets the user choose a location.
+	 * @static
+	 * @method location
+	 * @param {Function} callback First parameter is a Places.Coordinates object,
+	 *   or null if dialog was closed without selecting anything.
+	 * @param {Object} [dialogOptions] For Q.Dialogs.push()
+	 * @param {Object} [toolOptions] For the Places/location tool
+	 */
+	location: function (callback, dialogOptions, toolOptions) {
+		var called = true;
+		var coordinates = null;
+		var element = Q.Tool.setUpElement('div', 'Places/location', Q.extend({
+			onChoose: function (c) {
+				coordinates = c;
+			}
+		}, toolOptions));
+		Q.Text.get('Places/content', function (err, text) {
+			Q.Dialogs.push(Q.extend({
+				title: text.location.dialog.title,
+				content: element,
+				onClose: function () {
+					callback(coordinates);
+				},
+				apply: true,
+				className: 'Places_location_dialog'
+			}, dialogOptions));
+		});
+	}
+};
+
+Places.units = {
+	meters: "meters",
+	kilometers: "kiometers",
+	km: "km",
+	miles: "miles"
+};
+
+Q.onInit.add(function () {
+	Q.Text.get('Places/content', function (err, text) {
+		if (!text) {
+			return;
+		}
+		Places.units = text.units;
+	});
+}, 'Q.Places');
 
 var Cp = Places.Coordinates.prototype;
 	
@@ -445,7 +502,7 @@ Cp.geocode = function (callback, options) {
 
 	Places.loadGoogleMaps(function () {
 		var param = {};
-		var p = "Places.Location.geocode: ";
+		var p = "Places.Coordinates.geocode: ";
 		if (c.placeId) {
 			param.placeId = c.placeId;
 		} else if (c.latitude || c.longitude) {
@@ -482,11 +539,17 @@ Cp.geocode = function (callback, options) {
 		if (param) {
 			var geocoder = new google.maps.Geocoder;
 			geocoder.geocode(param, function (results, status) {
-				var json, err;
+				var json, err, d;
 				if (status !== 'OK') {
-					json = JSON.stringify(c);
-					err = p + "can't geocode " + json;
+					d = Q.copy(c);
+					delete d.onReady;
+					delete d.onUpdated;
+					json = JSON.stringify(d);
+					err = p + "can't geocode (" + status + ") " + json;
 				} else if (!results[0]) {
+					d = Q.copy(c);
+					delete d.onReady;
+					delete d.onUpdated;
 					json = JSON.stringify(c);
 					err = p + "no place matched " + json;
 				} else {
@@ -507,6 +570,45 @@ Cp.geocode = function (callback, options) {
 Cp.geocode.options = {
 	platform: Places.options.platform,
 	basic: false
+};
+
+Places.Location = {
+	/**
+	 * Get location from some stream (for back compatibility)
+	 * @method getLocation
+	 * @static
+	 * @param {Streams_Stream} stream
+	 */
+	fromStream: function(stream){
+		var location = stream.getAttribute('location');
+
+		// new approach
+		if (Q.isPlainObject(location)) {
+			return location;
+		}
+
+		// old approach
+		var communityId = stream.getAttribute("communityId");
+		var res = {
+			publisherId: communityId,
+			name: location,
+			venue: stream.getAttribute("venue"),
+			address: stream.getAttribute("address"),
+			latitude: stream.getAttribute("latitude"),
+			longitude: stream.getAttribute("longitude")
+		};
+
+		var area = stream.getAttribute("area");
+		if (area) {
+			res.area = {
+				publisherId: communityId,
+				name: area,
+				title: stream.getAttribute("areaSelected")
+			};
+		}
+
+		return res;
+	}
 };
 
 var _geocodeCache = new Q.Cache({max: 100});
@@ -532,7 +634,6 @@ Q.Streams.Message.shouldRefreshStream("Places/location/updated", true);
 
 Q.text.Places = {
 
-
 };
 
 Q.Tool.define({
@@ -541,7 +642,8 @@ Q.Tool.define({
 	"Places/countries": "Q/plugins/Places/js/tools/countries.js",
 	"Places/user/location": "Q/plugins/Places/js/tools/user/location.js",
 	"Places/location": "Q/plugins/Places/js/tools/location.js",
+	"Places/location/preview": "Q/plugins/Places/js/tools/location/preview.js",
 	"Places/areas": "Q/plugins/Places/js/tools/areas.js"
 });
 
-})(Q, jQuery, window);
+})(Q, Q.$, window);

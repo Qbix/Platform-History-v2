@@ -23,6 +23,19 @@ class Q
 	}
 	
 	/**
+	 * Returns the names of all the plugins, including "Q" at the beginning
+	 * @return {string}
+	 */
+	static function plugins()
+	{
+		$plugins = Q_Config::expect('Q', 'plugins');
+		if (!in_array("Q", $plugins)) {
+			array_unshift($plugins, "Q");
+		}
+		return $plugins;
+	}
+	
+	/**
 	 * Used for shorthand for avoiding when you don't want to write
 	 * (isset($some_long_expression) ? $some_long_expression: null)
 	 * when you want to avoid possible "undefined variable" errors.
@@ -47,16 +60,41 @@ class Q
 			return isset($ref) ? $ref : $def;
 		}
 		$args = func_get_args();
-		$ref2 = $ref;
 		$def = end($args);
-		for ($i=1; $i<$count-1; ++$i) {
-			$key = $args[$i];
+		$path = array_slice($args, 1, -1);
+		return self::getObject($ref, $path, $def);
+	}
+	
+	/**
+	 * Used for shorthand for avoiding when you don't want to write
+	 * (isset($some_long_expression) ? $some_long_expression: null)
+	 * when you want to avoid possible "undefined variable" errors.
+	 * @method ifset
+	 * @param {&mixed} $ref
+	 *  The reference to test. Only lvalues can be passed.
+	 * @param {array} $path
+	 *  An array of one or more strings or numbers, which will be used to
+	 *  index deeper into the contained arrays or objects.
+	 *  You can also pass arrays instead of the strings and numbers,
+	 *  which will then widen the search to try all combinations
+	 *  of the strings and numbers in all the arrays, before returning
+	 *  the default.
+	 * @param {mixed} $def=null
+	 *  The default, if the reference isn't set
+	 * @return {mixed}
+	 */
+	static function getObject(& $ref, $path, $def=null)
+	{
+		$ref2 = $ref;
+		$count = count($path);
+		for ($i=0; $i<$count; ++$i) {
+			$key = $path[$i];
 			if (!is_array($key)) {
 				$key = array($key);
 			}
 			if (is_array($ref2)) {
 				foreach ($key as $k) {
-					if (array_key_exists($k, $ref2)) {
+					if (isset($ref2[$k])) {
 						$ref2 = $ref2[$k];
 						continue 2;
 					}
@@ -77,6 +115,20 @@ class Q
 		return $ref2;
 	}
 
+	/**
+	 * Reverse the order of the keys
+	 * @method reverseOrder
+	 * @static
+	 * @param {array} $what The array to reverse
+	 * @return {array} The reversed array
+	 */
+	static function reverseOrder(array $what)
+	{
+		return array_combine(
+		   array_reverse(array_keys($what)),
+		   array_reverse(array_values($what))
+		);
+	}
 
 	/**
 	 * Returns the number of milliseconds since the
@@ -146,7 +198,8 @@ class Q
 	        // This error code is not included in error_reporting
 			// just continue on with execution, if possible.
 			// this situation can also happen when
-			// someone has used the @ operator.
+			//
+		    // someone has used the @ operator.
 	        return;
 	    }
 		switch ($errno) {
@@ -159,7 +212,10 @@ class Q
 					$errstr, $errfile, $errline, $context
 				);
 				Q::log("PHP Error($errno): \n\n$dump", null, null, array(
-					'maxLength' => 10000
+					'maxLength' => 1000
+				));
+				Q::log("PHP Error($errno): \n\n$dump", 'error', null, array(
+					'maxLength' => 100000
 				));
 				$type = 'warning';
 				break;
@@ -210,9 +266,10 @@ class Q
 	 * However, dollar signs prefixed with backslashes will not be replaced.
 	 * @method interpolate
 	 * @static
-	 * @param {string} $expression
+	 * @param {string|array} $expression
 	 *  The string containing possible references to interpolate values for.
-	 * @param {array|string} $params=array()
+	 *  Can also be array($textName, $pathArray) to load expression using Q_Text::get()
+	 * @param {array|string} [$params=array()]
 	 *  An array of parameters to the expression.
 	 *  Variable names in the expression can refer to them.
 	 *  You can also pass an indexed array, in which case the expression's
@@ -220,13 +277,25 @@ class Q
 	 *  corresponding strings.
 	 *  If the expression is missing {{0}} and $0, then {{1}} or $1 is replaced
 	 *  by the first string, {{2}} or $2 by the second string, and so on.
+	 * @param {array} [$options=array()]
+	 *  Pass any additional options to Q_Text::get() if it is called
 	 * @return {string}
 	 *  The result of the interpolation
 	 */
 	static function interpolate(
 		$expression,
-		$params = array())
+		$params = array(),
+		$options = array())
 	{
+		if (is_array($expression)) {
+			$name = $expression[0];
+			$path = $expression[1];
+			$text = Q_Text::get($name, $options);
+			$expression = Q::getObject($text, $path, null);
+			if (!isset($expression)) {
+				return null;
+			}
+		}
 		$a = (
 			strpos($expression, '{{0}}') === false
 			and strpos($expression, '$0') === false
@@ -249,9 +318,25 @@ class Q
 	}
 	
 	/**
-	 * Evaluates a string containing an expression,
+	 * A convenience method to use in your PHP templates.
+	 * It is short for Q_Html::text(Q::interpolate($expression, ...)).
+	 * In Handlebars templates, you just use {{interpolate expression ...}}
+	 * @method text
+	 * @static
+	 * @param {string} $expression Same as in Q::interpolate()
+	 * @param {array} $params Same as in Q::interpolate()
+	 * @param {string} [$convert=array()] Same as in Q_Html::text().
+	 * @param {string} [$unconvert=array()] Same as in Q_Html::text().
+	 */
+	static function text($expression, $params = array(), $convert = array(), $unconvert = array())
+	{
+		return Q_Html::text(Q::interpolate($expression, $params), $convert, $unconvert);
+	}
+	
+	/**
+	 * Evaluates a string containing a PHP expression,
 	 * with possible references to parameters.
-	 * CAUTION: make sure the expression is safe!!
+	 * CAUTION: uses PHP eval, so make sure the expression is safe!!
 	 * @method evalExpression
 	 * @static
 	 * @param {string} $expression
@@ -269,14 +354,15 @@ class Q
 		if (is_array($params)) {
 			extract($params);
 		}
-		@eval('$value = ' . $expression . ';');
+		@eval('$_valueToReturn = ' . $expression . ';');
 		extract($params);
 		/**
-		 * @var $value
+		 * @var $_valueToReturn
 		 */
-		return $value;
+		return $_valueToReturn;
 	}
-
+	
+	
 	/**
 	 * Use for surrounding text, so it can later be processed throughout.
 	 * @method t
@@ -292,22 +378,6 @@ class Q
 		 */
 		$text = Q::event('Q/t', array(), 'before', false, $text);
 		return $text;
-	}
-	
-	/**
-	 * A convenience method to use in your PHP templates.
-	 * It is short for Q_Html::text(Q::interpolate($expression, ...)).
-	 * In Handlebars templates, you just use {{interpolate expression ...}}
-	 * @method text
-	 * @static
-	 * @param {string} $expression Same as in Q::interpolate()
-	 * @param {array} $params Same as in Q::interpolate()
-	 * @param {string} [$convert=array()] Same as in Q_Html::text().
-	 * @param {string} [$unconvert=array()] Same as in Q_Html::text().
-	 */
-	static function text($expression, $params = array(), $convert = array(), $unconvert = array())
-	{
-		return Q_Html::text(Q::interpolate($expression, $params), $convert, $unconvert);
 	}
 
 	/**
@@ -583,13 +653,16 @@ class Q
 	 *  The full name of the view
 	 * @param {array} $params=array()
 	 *  Parameters to pass to the view
+	 * @param {array} $options Some options
+	 * @param {string|null} $options.language Preferred language
 	 * @return {string}
 	 *  The rendered content of the view
 	 * @throws {Q_Exception_MissingFile}
 	 */
 	static function view(
 	 $viewName,
-	 $params = array())
+	 $params = array(),
+	 $options = array())
 	{
 		require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'MissingFile.php');
 
@@ -602,7 +675,11 @@ class Q
 		if ($fields = Q_Config::get('Q', 'views', 'fields', null)) {
 			$params = array_merge($fields, $params);
 		}
-		$params = array_merge(Q_Text::params($parts), $params);
+
+		// set options
+		$options['language'] = isset($options['language']) ? $options['language'] : null;
+
+		$params = array_merge(Q_Text::params($parts, array('language' => $options['language'])), $params);
 
 		/**
 		 * @event {before} Q/view
@@ -660,12 +737,23 @@ class Q
 	 * @param {boolean} [$extra.cache=false]
 	 *    If true, then the Qbix front end will not replace existing tools with same id
 	 *    during Q.loadUrl when this tool appears in the rendered HTML
+	 * @param {string} [$extra.classes]
+	 *    You can pass this to add any additional CSS classes to the tool's element
+	 * @param {string} [$extra.attributes]
+	 *    You can pass this to add any additional HTML attributes to the tool's element
+	 * @param {boolean} [$extra.retain]
+	 *    Pass true to retain the tool when HTML is being replaced in the future,
+	 *    so it's not replaced by any incoming rendered tools unless they have replace=true
+	 * @param {boolean} [$extra.replace]
+	 *    Pass true to tell Q.js to replace any previously rendered tool tool
+	 *    even if it was marked to be retained.
 	 * @param {boolean} [$extra.merge=false]
 	 *    If true, the element for this tool is merged with the element of the tool
-	 *    already being rendered (if any), producing one element with markup
-	 *    for both tools and their options. This can be used more than once, merging
-	 *    multiple tools in one element.
-	 *    As part of the mege, the content this tool (if any) is prepended
+	 *    already being rendered when this function is called (if any),
+	 *    producing one element with markup for both tools and their options.
+	 *    This can be used more than once, merging multiple tools in one element
+	 *    through nested function calls.
+	 *    As part of the merge, the content this tool (if any) is prepended
 	 *    to the content of the tool which is already being rendered.
 	 * @throws {Q_Exception_WrongType}
 	 * @throws {Q_Exception_MissingFile}
@@ -1020,6 +1108,7 @@ class Q
 	
 	/**
 	 * @method take
+	 * @static
 	 * @param {array|object} $source An array or object from which to take things.
 	 * @param {array} $fields An array of fields to take or an associative array of fieldname => default pairs
 	 * @param {array|object} &$dest Optional reference to an array or object in which we will set values.
@@ -1172,7 +1261,7 @@ class Q
 			$timestamp = true;
 		}
 		if (false === Q::event('Q/log', compact(
-			'message', 'timestamp', 'error_log_arguments'
+			'message', 'timestamp'
 		), 'before')) {
 			return;
 		}
@@ -1388,22 +1477,26 @@ class Q
 			$var_2 = addslashes($var);
 			return "'$var_2'";
 		} elseif (is_array($var)) {
+			$len = 0;
 			$indexed_values_quoted = array();
 			$keyed_values_quoted = array();
 			foreach ($var as $key => $value) {
 				$value = self::var_export($value);
-				if (is_string($key)) {
-					$keyed_values_quoted[] = "'" . addslashes($key) . "' => $value";
-				} else {
+				if ($key === $len) {
 					$indexed_values_quoted[] = $value;
+				} else {
+					$keyed_values_quoted[] = "'" . addslashes($key) . "' => $value";
 				}
+				++$len;
 			}
 			$parts = array();
-			if (! empty($indexed_values_quoted))
+			if (!empty($indexed_values_quoted)) {
 				$parts['indexed'] = implode(', ', $indexed_values_quoted);
-			if (! empty($keyed_values_quoted))
+			}
+			if (!empty($keyed_values_quoted)) {
 				$parts['keyed'] = implode(', ', $keyed_values_quoted);
-			$exported = 'array(' . implode(", ".PHP_EOL, $parts) . ')';
+			}
+			$exported = '[' . implode(", ".PHP_EOL, $parts) . ']';
 			return $exported;
 		} else {
 			return var_export($var, true);

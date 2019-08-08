@@ -7,7 +7,7 @@ function Websites_0_8_4_Streams_mysql()
 	
 	// allow inserting images in articles
 	$r = new Streams_RelatedTo();
-	$r->toPublisherId = $communityId;
+	$r->toPublisherId = '';
 	$r->toStreamName = 'Websites/article/';
 	$r->type = 'Streams/images';
 	$r->fromPublisherId = $communityId;

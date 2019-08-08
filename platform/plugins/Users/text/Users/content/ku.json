@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "têketin",
+        "LogOut": "derkeve"
+    },
+    "activate": {
+        "SetAsPrimary": "Set {{1}} wekî sereke {{2}}",
+        "ChoosePassPhrase": "Vebijêrkek <strong>derbasî<\/strong> hilbijêre ku bi navnîşan re têkevin. <br> Peyvek hêsan a çend peyvan ku hûn bi hêsanî bibînin.",
+        "ChoosePassPhraseSeeSuggestions": "A <strong>pêşkêş pass<\/strong> baş ji bo parastina hesabê xwe hilbijêre. Pêşniyarên hin fikrên xwe bibînin.",
+        "LogOutAndTryAgain": "Bikin û Biceribîne",
+        "IfYouFeel": "Heke hûn difikirin tiştek xerab bû, hûn dikarin",
+        "SetIdentifierButtonTitle": "dest pê bikin"
+    },
+    "session": {
+        "GetStarted": "Destpêk"
+    },
+    "authorize": {
+        "GetStarted": "Destpêk",
+        "Authorize": "Ercdan",
+        "TermsLabel": "Min xwendin û mikûlim <br> ji {{link}}",
+        "TermsTitle": "Şertên"
+    },
+    "register": {
+        "TermsLabel": "Ez qebûl dikim {{link}}",
+        "TermsTitle": "Şertên"
+    },
+    "notifications": {
+        "title": "Destûr",
+        "prompt": "Ma hûn dixwazin agahdariyên çalak bikin? Hûn tiştên ku hûn hewce dikin di navnîşên rast-rojan de agahdar bikin.",
+        "yes": "Erê",
+        "no": "Na",
+        "WelcomePleaseVerifyEmail": "Bi xêr hatî! Ji kerema xwe ji navnîşana e-nameya xwe bişîne",
+        "WelcomeVerifyEmail": "Bi xêr hatî! Navnîşana nameya xwe ya Verîteyê bikin.",
+        "ForgetPass": "Hey, ji we re şîfreyê xwe bibîr kir?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Têkiliyê hilbijêre"
+        },
+        "select": {
+            "title": "Têkilî hilbijêre {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Ji kerema xwe vegotinê hilbijêr",
+        "inviteUser": "Invite User"
+    },
+    "invalidLanguageSelected": "Zimanek çewt e"
+}

@@ -21,8 +21,9 @@
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  * @param {string} [$fields.username] defaults to ""
  * @param {string} [$fields.firstName] defaults to ""
- * @param {string} [$fields.lastName] defaults to ""
+ * @param {string} [$fields.lastName] defaults to null
  * @param {string} [$fields.icon] defaults to ""
+ * @param {string} [$fields.gender] defaults to null
  */
 abstract class Base_Streams_Avatar extends Db_Row
 {
@@ -59,14 +60,20 @@ abstract class Base_Streams_Avatar extends Db_Row
 	/**
 	 * @property $lastName
 	 * @type string
-	 * @default ""
-	 * if not empty, the user can see this last name
+	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $icon
 	 * @type string
 	 * @default ""
 	 * the icon to display
+	 */
+	/**
+	 * @property $gender
+	 * @type string
+	 * @default null
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -101,10 +108,11 @@ abstract class Base_Streams_Avatar extends Db_Row
 	 * @method table
 	 * @static
 	 * @param {boolean} [$with_db_name=true] Indicates wheather table name should contain the database name
+	 * @param {string} [$alias=null] You can optionally provide an alias for the table to be used in queries
  	 * @return {string|Db_Expression} The table name as string optionally without database name if no table sharding
 	 * was started or Db_Expression class with prefix and database name templates is table was sharded
 	 */
-	static function table($with_db_name = true)
+	static function table($with_db_name = true, $alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', 'Streams', 'indexes', 'Avatar', false)) {
 			return new Db_Expression(($with_db_name ? '{$dbname}.' : '').'{$prefix}'.'avatar');
@@ -115,7 +123,8 @@ abstract class Base_Streams_Avatar extends Db_Row
   			if (!$with_db_name)
   				return $table_name;
   			$db = Db::connect('Streams');
-  			return $db->dbName().'.'.$table_name;
+			$alias = isset($alias) ? ' '.$alias : '';
+  			return $db->dbName().'.'.$table_name.$alias;
 		}
 	}
 	/**
@@ -135,20 +144,21 @@ abstract class Base_Streams_Avatar extends Db_Row
 	 * @static
 	 * @param {string|array} [$fields=null] The fields as strings, or array of alias=>field.
 	 *   The default is to return all fields of the table.
-	 * @param {string|array} [$alias=null] The tables as strings, or array of alias=>table.
+	 * @param {string} [$alias=null] Table alias.
 	 * @return {Db_Query_Mysql} The generated query
 	 */
 	static function select($fields=null, $alias = null)
 	{
 		if (!isset($fields)) {
 			$fieldNames = array();
+			$a = isset($alias) ? $alias.'.' : '';
 			foreach (self::fieldNames() as $fn) {
-				$fieldNames[] = $fn;
+				$fieldNames[] = $a .  $fn;
 			}
 			$fields = implode(',', $fieldNames);
 		}
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->select($fields, self::table().' '.$alias);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->select($fields, self::table(true, $alias));
 		$q->className = 'Streams_Avatar';
 		return $q;
 	}
@@ -162,8 +172,8 @@ abstract class Base_Streams_Avatar extends Db_Row
 	 */
 	static function update($alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->update(self::table().' '.$alias);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->update(self::table(true, $alias));
 		$q->className = 'Streams_Avatar';
 		return $q;
 	}
@@ -178,8 +188,8 @@ abstract class Base_Streams_Avatar extends Db_Row
 	 */
 	static function delete($table_using = null, $alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->delete(self::table().' '.$alias, $table_using);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->delete(self::table(true, $alias), $table_using);
 		$q->className = 'Streams_Avatar';
 		return $q;
 	}
@@ -194,8 +204,8 @@ abstract class Base_Streams_Avatar extends Db_Row
 	 */
 	static function insert($fields = array(), $alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->insert(self::table().' '.$alias, $fields);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->insert(self::table(true, $alias), $fields);
 		$q->className = 'Streams_Avatar';
 		return $q;
 	}
@@ -544,7 +554,7 @@ return array (
 	function beforeSet_lastName($value)
 	{
 		if (!isset($value)) {
-			$value='';
+			return array('lastName', $value);
 		}
 		if ($value instanceof Db_Expression) {
 			return array('lastName', $value);
@@ -581,9 +591,9 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => false,
+  1 => true,
   2 => '',
-  3 => '',
+  3 => NULL,
 );			
 	}
 
@@ -642,6 +652,60 @@ return array (
 	}
 
 	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_gender
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_gender($value)
+	{
+		if (!isset($value)) {
+			return array('gender', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('gender', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".gender");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".gender");
+		return array('gender', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the gender field
+	 * @return {integer}
+	 */
+	function maxSize_gender()
+	{
+
+		return 31;			
+	}
+
+	/**
+	 * Returns schema information for gender column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_gender()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Check if mandatory fields are set and updates 'magic fields' with appropriate values
 	 * @method beforeSave
 	 * @param {array} $value The array of fields
@@ -673,7 +737,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('toUserId', 'publisherId', 'updatedTime', 'username', 'firstName', 'lastName', 'icon');
+		$field_names = array('toUserId', 'publisherId', 'updatedTime', 'username', 'firstName', 'lastName', 'icon', 'gender');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

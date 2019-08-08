@@ -44,11 +44,12 @@
 			resendClose: "Close",
 			noPassphrase: "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
 			notVerified: "You must send yourself an activation message in order to log in.",
-			emailExists: "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend'>Click to re-send the message</a>.",
-			mobileExists: "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend'>Click to re-send the message</a>.",
+			emailExists: "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message</a>",
+			mobileExists: "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message</a>",
 			usingOther: "or you can ",
 			facebookSrc: null,
 			prompt: "Choose a username:",
+			newUser: "or create a new account",
 			placeholders: {
 				identifier: "your mobile # or email",
 				mobile: "enter your mobile #",
@@ -77,30 +78,15 @@
 		},
 
 		prompt: {
-			title: "{$Platform} Account",
-			areUsing: "You are using {$platform} as",
-			noLongerUsing: "You are no longer connected to {$platform} as",
+			title: "{{Platform}} Account",
+			areUsing: "You are using {{platform}} as",
+			noLongerUsing: "You are no longer connected to {{platform}} as",
 			doAuth: "Log in with this account",
 			doSwitch: "Switch to this account"
 		},
 
 		authorize: {
 			mustAgree: "First you must agree to the terms."
-		},
-
-		audio: {
-			allowMicrophoneAccess: "Please allow access to your microphone",
-			record: "Record",
-			recording: "Recording",
-			remains: "remains",
-			maximum: "maximum",
-			playing: "Playing",
-			recorded: "Recorded",
-			clip: "clip",
-			orupload: "Or Upload",
-			usethis: "Use This",
-			discard: "Discard",
-			encoding: "Encoding"
 		}
 
 	};
@@ -187,6 +173,36 @@
 	};
 
 	/**
+	 * Check whether string is community id
+	 * @method isCommunityId
+	 * @static
+	 * @param {String} id
+	 * @return {boolean}
+	 */
+	Users.isCommunityId = function (id) {
+		if (id[0] !== id[0].toUpperCase()) {
+			return false;
+		}
+
+		return true;
+	};
+	
+	/**
+	 * Check if an icon is custom or whether it's been automatically generated
+	 * @method isCustomIcon
+	 * @static
+	 * @param {String} id
+	 * @return {boolean}
+	 */
+	Users.isCustomIcon = function (icon) {
+		if (!icon) {
+			return false;
+		}
+		return (icon.indexOf('imported') >= 0
+		|| icon.match(/\/icon\/[0-9]+/));
+	};
+
+	/**
 	 * You can wrap all uses of FB object with this
 	 * @method initFacebook.ready
 	 * @param {String} [appId=Q.info.app] only specify this if you have multiple facebook apps
@@ -266,40 +282,36 @@
 		Users.initFacebook(function () {
 			// check if user is connected to facebook
 			Users.Facebook.getLoginStatus(function (response) {
-				function __doCancel(x) {
-					_doCancel.call(this, x, platform, onSuccess, onCancel, options);
-				}
-
 				if (response.status === 'connected') {
-					var fb_uid = parseInt(response.authResponse.userID);
-					var ignoreUid = parseInt(Q.cookie('Users_ignorePlatformUid'));
+					var fb_xid = parseInt(response.authResponse.userID);
+					var ignoreXid = parseInt(Q.cookie('Users_ignorePlatformXid'));
 					// the following line prevents multiple prompts for the same user,
 					// which can be a problem especially if the authenticate() is called
 					// multiple times on the same page, or because the page is reloaded
-					Q.cookie('Users_ignorePlatformUid', fb_uid);
+					Q.cookie('Users_ignorePlatformXid', fb_xid);
 
-					if (Users.loggedInUser && Users.loggedInUser.uids.facebook === fb_uid) {
+					if (Users.loggedInUser && Users.loggedInUser.xids.facebook === fb_xid) {
 						// The correct user is already logged in.
 						// Call onSuccess but do not pass a user object -- the user didn't change.
 						_doSuccess(null, platform, onSuccess, onCancel, options);
 						return;
 					}
 					if (options.prompt === undefined || options.prompt === null) {
-						// show prompt only if we aren't ignoring this facebook uid
-						if (fb_uid === ignoreUid) {
+						// show prompt only if we aren't ignoring this facebook xid
+						if (fb_xid === ignoreXid) {
 							_doCancel(null, platform, onSuccess, onCancel, options);
 						} else {
-							Users.prompt('facebook', fb_uid, __doAuthenticate, __doCancel);
+							Users.prompt('facebook', fb_xid, __doAuthenticate, __doCancel);
 						}
 					} else if (options.prompt === false) {
 						// authenticate without prompting
 						__doAuthenticate();
 					} else if (options.prompt === true) {
 						// show the usual prompt no matter what
-						Users.prompt('facebook', fb_uid, __doAuthenticate, __doCancel);
+						Users.prompt('facebook', fb_xid, __doAuthenticate, __doCancel);
 					} else if (typeof options.prompt === 'function') {
 						// custom prompt
-						options.prompt('facebook', fb_uid, __doAuthenticate, __doCancel);
+						options.prompt('facebook', fb_xid, __doAuthenticate, __doCancel);
 					} else {
 						Users.authenticate.occurring = false;
 						throw new Q.Error("Users.authenticate: options.prompt is the wrong type");
@@ -348,9 +360,9 @@
 		Users.authenticate.occurring = false;
 	}
 
-	function _doCancel(ignoreUid, platform, onSuccess, onCancel, options) {
-		if (ignoreUid) {
-			// NOTE: the following line makes us ignore this uid
+	function _doCancel(ignoreXid, platform, onSuccess, onCancel, options) {
+		if (ignoreXid) {
+			// NOTE: the following line makes us ignore this xid
 			// until the user explicitly wants to connect.
 			// This usually has the right effect -- because the user
 			// doesn't want to see the prompt all the time.
@@ -358,7 +370,7 @@
 			// and then the javascript discovers that the platform connection was lost,
 			// the user will not be prompted to restore it when it becomes available again.
 			// They will have to do it explicitly (calling Users.authenticate with prompt: true)
-			Q.cookie('Users_ignorePlatformUid', ignoreUid);
+			Q.cookie('Users_ignorePlatformXid', ignoreXid);
 		}
 		delete Users.connected[platform];
 		Users.onConnectionLost.handle.call(Users, platform, options);
@@ -394,7 +406,7 @@
 	 * Shows prompt asking if user wants to log in to the app as platform user.
 	 * @method prompt
 	 * @param {String} platform For now, only "facebook" is supported
-	 * @param {String} uid The platform uid
+	 * @param {String} xid The platform xid
 	 * @param {Function} authCallback , this function will be called after user authentication
 	 * @param {Function} cancelCallback , this function will be called if user closed social platform login window
 	 * @param {object} options
@@ -402,74 +414,82 @@
 	 * @param {Object} options
 	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
 	 */
-	Users.prompt = function (platform, uid, authCallback, cancelCallback, options) {
+	Users.prompt = function (platform, xid, authCallback, cancelCallback, options) {
 		if (platform !== 'facebook') {
 			throw new Q.Error("Users.authenticate prompt: The only supported platform for now is facebook");
 		}
 
 		var appId = (options && options.appId) || Q.info.app;
 		var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+		var platformCapitalized = platform.toCapitalized();
 
 		if (!Users.prompt.overlay) {
 			Q.addStylesheet(Q.url('{{Users}}/css/Users.css'), {slotName: 'Users'});
 			var o = Q.extend({}, Users.prompt.options, options);
-			var title = Q.text.Users.prompt.title
-				.replace(/{\$platform}/g, platform)
-				.replace(/{\$Platform}/g, platform.toCapitalized());
-			var areUsing = Q.text.Users.prompt.areUsing
-				.replace(/{\$platform}/g, platform)
-				.replace(/{\$Platform}/g, platform.toCapitalized());
-			var noLongerUsing = Q.text.Users.prompt.noLongerUsing
-				.replace(/{\$platform}/g, platform)
-				.replace(/{\$Platform}/g, platform.toCapitalized());
+			var title = Q.text.Users.prompt.title.interpolate({
+				'platform': platform,
+				'Platform': platformCapitalized
+			});
+			var areUsing = Q.text.Users.prompt.areUsing.interpolate({
+				'platform': platform,
+				'Platform': platformCapitalized
+			});
+			var noLongerUsing = Q.text.Users.prompt.noLongerUsing.interpolate({
+				'platform': platform,
+				'Platform': platformCapitalized
+			});
 			var caption;
 			var tookAction = false;
 
 			var content_div = $('<div />');
-			var fb_uid;
-			if (fb_uid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users)) {
-				content_div.append(_usingInformation(fb_uid, noLongerUsing));
-				caption = Q.text.Users.prompt.doSwitch
-					.replace(/{\$platform}/, platform)
-					.replace(/{\$Platform}/, platform.toCapitalized());
+			var fb_xid;
+			if (fb_xid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users)) {
+				content_div.append(_usingInformation(fb_xid, noLongerUsing));
+				caption = Q.text.Users.prompt.doSwitch.interpolate({
+					'platform': platform,
+					'Platform': platformCapitalized
+				});
 			} else {
-				caption = Q.text.Users.prompt.doAuth
-					.replace(/{\$platform}/, platform)
-					.replace(/{\$Platform}/, platform.toCapitalized());
+				caption = Q.text.Users.prompt.doAuth.interpolate({
+					'platform': platform,
+					'Platform': platformCapitalized
+				});
 			}
 		}
-
-		var appId = (options && options.appId) || Q.info.app;
-		var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 
 		if (!Users.prompt.overlay) {
 			Q.addStylesheet(Q.url('{{Users}}/css/Users.css'));
 			var o = Q.extend({}, Users.prompt.options, options);
-			var title = Q.text.Users.prompt.title
-				.replace(/{\$platform}/g, platform)
-				.replace(/{\$Platform}/g, platform.toCapitalized());
-			var areUsing = Q.text.Users.prompt.areUsing
-				.replace(/{\$platform}/g, platform)
-				.replace(/{\$Platform}/g, platform.toCapitalized());
-			var noLongerUsing = Q.text.Users.prompt.noLongerUsing
-				.replace(/{\$platform}/g, platform)
-				.replace(/{\$Platform}/g, platform.toCapitalized());
+			var title = Q.text.Users.prompt.title.interpolate({
+				'platform': platform,
+				'Platform': platformCapitalized
+			});
+			var areUsing = Q.text.Users.prompt.areUsing.interpolate({
+				'platform': platform,
+				'Platform': platformCapitalized
+			});
+			var noLongerUsing = Q.text.Users.prompt.noLongerUsing.interpolate({
+				'platform': platform,
+				'Platform': platformCapitalized
+			});
 			var caption;
 			var tookAction = false;
 
 			var content_div = $('<div />');
-			var fb_uid;
-			if (fb_uid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users)) {
-				content_div.append(_usingInformation(fb_uid, noLongerUsing));
-				caption = Q.text.Users.prompt.doSwitch
-					.replace(/{\$platform}/, platform)
-					.replace(/{\$Platform}/, platform.toCapitalized());
+			var fb_xid;
+			if (fb_xid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users)) {
+				content_div.append(_usingInformation(fb_xid, noLongerUsing));
+				caption = Q.text.Users.prompt.doSwitch.interpolate({
+					'platform': platform,
+					'Platform': platformCapitalized
+				});
 			} else {
-				caption = Q.text.Users.prompt.doAuth
-					.replace(/{\$platform}/, platform)
-					.replace(/{\$Platform}/, platform.toCapitalized());
+				caption = Q.text.Users.prompt.doAuth.interpolate({
+					'platform': platform,
+					'Platform': platformCapitalized
+				});
 			}
-			content_div.append(_usingInformation(uid, areUsing))
+			content_div.append(_usingInformation(xid, areUsing))
 				.append(_authenticateActions(caption));
 
 			Users.prompt.overlay = $('<div id="Users_prompt_overlay" class="Users_prompt_overlay" />');
@@ -482,7 +502,7 @@
 		}
 		Q.Dialogs.push({
 			dialog: Users.prompt.overlay,
-			alignByParent: true,
+			alignByParent: false,
 			doNotRemove: true,
 			onActivate: function () {
 				Users.initFacebook(function () {
@@ -493,23 +513,23 @@
 			},
 			onClose: function () {
 				if (!tookAction) {
-					if (cancelCallback) cancelCallback(uid);
+					if (cancelCallback) cancelCallback(xid);
 				}
 				tookAction = false;
 			}
 		});
 
-		function _usingInformation(uid, explanation) {
+		function _usingInformation(xid, explanation) {
 			return $("<table />").append(
 				$("<tr />").append(
 					$("<td class='Users_profile_pic' />").html(
-						"<fb:profile-pic uid='" + uid + "' linked='false' size='square' class='fb_profile_pic'></fb:profile-pic>"
+						"<fb:profile-pic uid='" + xid + "' linked='false' size='square' class='fb_profile_pic'></fb:profile-pic>"
 					)
 				).append(
 					$("<td class='Users_explanation_name' />").append(
 						$("<div class='Users_explanation' />").html(explanation)
 					).append(
-						"<fb:name uid='" + uid + "' useyou='false' linked='false' size='square' class='fb_name'>user id " + uid + "</fb:name>"
+						"<fb:name xid='" + xid + "' useyou='false' linked='false' size='square' class='fb_name'>user id " + xid + "</fb:name>"
 					)
 				)
 			);
@@ -591,7 +611,7 @@
 	 *  @param {String} [options.using] can be "native", "facebook" or "native,facebook"
 	 *  @param {Boolean} [options.tryQuietly] if true, this is same as Users.authenticate, with platform = "using" option
 	 *  @param {Boolean} [options.unlessLoggedIn] if true, this only proceeds with the login flow if the user isn't already logged in. Can be combined with tryQuietly option.
-	 *  @param {Array} [options.scope=['email','public_profile','user_friends'] permissions to request from the authentication platform
+	 *  @param {Array} [options.scope=['email','public_profile'] permissions to request from the authentication platform
 	 *  @param {String} [options.identifierType="email,mobile"] the type of the identifier, which could be "mobile" or "email" or "email,mobile"
 	 *  @param {Object} [options.appIds={}] Can be used to set custom {platform: appId} pairs
 	 */
@@ -831,11 +851,11 @@
 				});
 			} else {
 				// if we log out without logging out of facebook,
-				// then we should ignore the logged-in user's fb_uid
+				// then we should ignore the logged-in user's fb_xid
 				// when authenticating, until it is forced
-				var fb_uid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users);
-				if (fb_uid) {
-					Q.cookie('Users_ignorePlatformUid', fb_uid);
+				var fb_xid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users);
+				if (fb_xid) {
+					Q.cookie('Users_ignorePlatformXid', fb_xid);
 				}
 				Users.loggedInUser = null;
 				Q.nonce = Q.cookie('Q_nonce');
@@ -973,7 +993,9 @@
 	Users.batchFunction.functions = {};
 
 	Q.onActivate.set(function (elem) {
-		$(elem || document).off('click.Users').on('click.Users', 'a', function (e) {
+		$(elem || document)
+		.off('click.Users', 'a')
+		.on('click.Users', 'a', function (e) {
 			var href = $(this).attr('href');
 			if (!Users.requireLogin || !Users.requireLogin[href]) {
 				return;
@@ -1016,6 +1038,8 @@
 	 */
 	Users.setIdentifier = function (options) {
 		var o = Q.extend({}, Users.setIdentifier.options, options);
+		var identifierType = Q.getObject("identifierType", o);
+		var identifier = Q.getObject("Q.Users.loggedInUser." + identifierType) || null;
 
 		function onSuccess(user) {
 			if (false !== Q.handle(o.onResult, this, [user])) {
@@ -1033,12 +1057,13 @@
 		priv.setIdentifier_onCancel = onCancel;
 
 		$.fn.plugin.load(['Q/dialog', 'Q/placeholders'], function () {
-			setIdentifier_setupDialog(o.identifierType, o);
+			setIdentifier_setupDialog(identifierType, o);
 			var d = setIdentifier_setupDialog.dialog;
-			if (d.css('display') == 'none') {
+			if (d.css('display') === 'none') {
 				d.data('Q/dialog').load();
 			}
-			$('#Users_setIdentifier_type').val(o.identifierType);
+			$('input[name="identifierType"]', d).val(identifierType);
+			$('input[name="identifier"]', d).val(identifier);
 		});
 	};
 
@@ -1101,7 +1126,7 @@
 			// check password
 			step2_form = setupLoginForm();
 		} else if (json.verified) {
-			// let the user gain access by resending an activation message
+			// var the user gain access by resending an activation message
 			step2_form = setupResendForm(true);
 		} else {
 			// remind to activate -- this is probably a futureUser created using an invite
@@ -1285,26 +1310,20 @@
 			}
 			var $img = $('<img />').attr('src', src)
 				.attr('title', Q.text.Streams.login.picTooltip);
-			var td, table = $('<table />').append(
-				$('<tr />').append(
-					$('<td class="Users_login_picture" />').append($img)
-				).append(
-					td = $('<td class="Users_login_username_block" />').append(
-						$('<label for="Users_login_username" />').html(Q.text.Users.login.prompt)
-					).append(
-						$('<input id="Users_login_username" name="username" type="text" class="text" />')
-							.attr('maxlength', Q.text.Users.login.maxlengths.username)
-							.attr('placeholder', Q.text.Users.login.placeholders.username)
-							.val(username)
-							.width($('#Users_login_identifier').width() - 30)
-					)
-				)
+			var $formContent = $('<div class="Users_login_username_block" />').append(
+				$('<label for="Users_login_username" />').html(Q.text.Users.login.prompt)
+			).append(
+				$('<input id="Users_login_username" name="username" type="text" class="text" />')
+					.attr('maxlength', Q.text.Users.login.maxlengths.username)
+					.attr('placeholder', Q.text.Users.login.placeholders.username)
+					.val(username)
+					.width($('#Users_login_identifier').width() - 30)
 			);
 			var register_form = $('<form method="post" class="Users_register_form" />')
 				.attr('action', Q.action("Users/register"))
 				.data('form-type', 'register')
 				//.append($('<div class="Users_login_appear" />'))
-				.append(table)
+				.append($formContent)
 				.append($('<input type="hidden" name="identifier" />').val(identifier))
 				.append($('<input type="hidden" name="icon[40.png]" />').val(src40))
 				.append($('<input type="hidden" name="icon[50.png]" />').val(src50))
@@ -1317,11 +1336,12 @@
 					var $this = $(this);
 					$this.removeData('cancelSubmit');
 					document.activeElement.blur();
-					if (!$('#Users_agree').is(':checked')) {
+					if ($('#Users_agree').length && !$('#Users_agree').is(':checked')) {
 						$this.data('cancelSubmit', true);
 						setTimeout(function () {
 							if (confirm(Q.text.Users.login.confirmTerms)) {
 								$('#Users_agree').attr('checked', 'checked');
+								$('#Users_agree')[0].checked = true;
 								$this.submit();
 							}
 						}, 300);
@@ -1333,7 +1353,7 @@
 			}
 
 			if (json.termsLabel) {
-				td.append(
+				$formContent.append(
 					$('<div />').attr("id", "Users_register_terms")
 						.append($('<input type="checkbox" name="agree" id="Users_agree" value="yes">'))
 						.append($('<label for="Users_agree" />').html(json.termsLabel))
@@ -1382,7 +1402,10 @@
 					);
 					return false;
 				});
-				register_form.append(p);
+				register_form.prepend(p);
+				if (Q.text.Users.login.newUser) {
+					$formContent.prepend($('<div />').html(Q.text.Streams.login.newUser));
+				}
 			}
 			return register_form;
 		}
@@ -1396,10 +1419,7 @@
 			var $dc = step2.closest('.Q_dialog_content');
 			if (Q.info && Q.info.isTouchscreen) {
 				step2.show();
-				$dc.scrollTop($dc[0].scrollHeight - $dc[0].clientHeight);
-				if (!Q.info.isAndroid()) {
-					step2_form.plugin('Q/placeholders');
-				}
+				step2_form.plugin('Q/placeholders');
 				$('input', step2_form).eq(0).plugin('Q/clickfocus').select();
 				_centerIt();
 			} else {
@@ -1479,7 +1499,7 @@
 			identifierInput.attr('name', 'phone');
 		}
 
-		var $a = $('<a class="Q_button Users_login_go Q_main_button" />')
+		var $a = $('<a id="Users_login_go" class="Q_button Q_main_button" />')
 			.append(
 				$('<span id="Users_login_go_span">' + Q.text.Users.login.goButton + '</span>')
 			).on(Q.Pointer.touchclick, function () {
@@ -1496,12 +1516,12 @@
 		).append('<br />').append(
 			identifierInput
 		).append(
-			$('<input id="Users_login_identifierType" type="hidden" name="identifierType" />').val(identifierType)
-		).append('&nbsp;')
-			.append($a)
-			.append(
-				$('<div id="Users_login_explanation" />').html(Q.text.Users.login.explanation)
-			).submit(function (event) {
+			$('<input id="Users_login_identifierType" type="hidden" name="identifierType" />')
+			.val(identifierType)
+		).append($a)
+		.append(
+			$('<div id="Users_login_explanation" />').html(Q.text.Users.login.explanation)
+		).submit(function (event) {
 			$('#Users_login_identifier').attr('name', 'identifier');
 			if (!$(this).is(':visible')) {
 				event.preventDefault();
@@ -1599,7 +1619,7 @@
 			.append(dialogSlot)
 			.prependTo(dialogContainer)
 			.plugin('Q/dialog', {
-				alignByParent: true,
+				alignByParent: false,
 				fullscreen: false,
 				beforeLoad: function () {
 					$('#Users_login_step1').css('opacity', 1).nextAll().hide();
@@ -1734,7 +1754,7 @@
 		var dialogSlot = $('<div class="Q_dialog_slot Q_dialog_content">').append(step1_div);
 		dialog.append(titleSlot).append(dialogSlot).prependTo(options.dialogContainer);
 		dialog.plugin('Q/dialog', {
-			alignByParent: true,
+			alignByParent: false,
 			fullscreen: false,
 			beforeLoad: function () {
 				$('input[type!=hidden]', dialog).val('');
@@ -1771,18 +1791,10 @@
 	/**
 	 * Votes for something
 	 * @static
-	 * @method hint
+	 * @method vote
 	 * @param {String} forType The type of thing to vote for
 	 * @param {String} forId The id of thing to vote for
 	 * @param {Number} [value=1] the value the user has voted for, such as a rating etc.
-	 * @param {Element|Object} elementOrPoint Indicates where to display the hint. A point should contain properties "x" and "y".
-	 * @param {Object} [options] possible options, which can include:
-	 * @param {String} [options.src] the url of the image
-	 * @param {Point} [options.hotspot={x:0.5,y:0.4}] "x" and "y" represent the location of the hotspot within the image, using fractions between 0 and 1
-	 * @param {String} [options.width="200px"]
-	 * @param {String} [options.height="200px"]
-	 * @param {Number} [options.zIndex=99999]
-	 * @return {Boolean} Returns true if the hint with will be shown, or false if a hint with this key was already shown before.
 	 */
 	Users.vote = function (forType, forId, value) {
 		var fields = {
@@ -1811,7 +1823,7 @@
 	 * @param {String} [options.width="200px"]
 	 * @param {String} [options.height="200px"]
 	 * @param {Integer} [options.zIndex=99999]
-	 * @param {boolean} [option.dontStopBeforeShown=false] Don't let Q.Pointer.stopHints stop this hint before it's shown.
+	 * @param {boolean} [option.dontStopBeforeShown=false] Don't var Q.Pointer.stopHints stop this hint before it's shown.
 	 * @param {Boolean} [options.dontRemove=false] Pass true to keep current hints displayed
 	 * @param {String} [options.audio.src] Can be used to play an audio file.
 	 * @param {String} [options.audio.from=0] Number of seconds inside the audio to start playing the audio from. Make sure audio is longer than this.
@@ -1832,6 +1844,59 @@
 		Users.hinted.push(key);
 		Users.vote('Users/hinted', key);
 		return true;
+	};
+	
+	/**
+	 * Shows the next hint for an event
+	 * @static
+	 * @method nextHint
+	 * @param {String} eventName Pass the name of an event, previously set with
+	 *  Q.Users.addHint(), and the function will show the next unshown hint for that event.
+	 * @return {Boolean} whether a hint was shown or not
+	 */
+	Users.nextHint = function (eventName) {
+		var key, info, index, targets, options;
+		info = Q.Users.nextHint.hints[eventName];
+		if (!info || !Q.isArrayLike(info)) {
+			return false;
+		}
+		Q.each(info, function (hintIndex) {
+			var k = [eventName, hintIndex].join('/');
+			if (Q.Users.hinted.indexOf(k) < 0) {
+				index = hintIndex;
+				key = k;
+				return false;
+			}
+		});
+		if (!key) {
+			return false; // all hints have been shown
+		}
+		targets = info[index][0];
+		options = info[index][1];
+		Users.hint(key, targets, options);
+		return true;
+	};
+	
+	Q.Users.nextHint.hints = {};
+	
+	/**
+	 * Adds the hint information for use with Q.Users.nextHint() function.
+	 * @static
+	 * @method setHint
+	 * @param {String} eventName Pass the name of an event, previously set with
+	 *  Q.Users.setHint(), and the function will show the next unshown hint for that event.
+	 * @param {Element|Object|String|Array} targets see Q.Pointer.hint()
+	 * @param {Object} [options] see Q.Pointer.hint()
+	 * @param {Number} [hintHindex] You can specify this to override an existing hint,
+	 *  otherwise it just adds this hint as the next in the queue.
+	 */
+	Users.addHint = function (eventName, targets, options, hintIndex) {
+		var h = Q.Users.nextHint.hints[eventName] = Q.Users.nextHint.hints[eventName] || [];
+		if (hintIndex >= 0) {
+			h[hintIndex] = [targets, options];
+		} else {
+			h.push([targets, options]);
+		}
 	};
 
 	/**
@@ -2178,10 +2243,12 @@
 		"Users/list": "{{Users}}/js/tools/list.js",
 		"Users/pile": "{{Users}}/js/tools/pile.js",
 		"Users/labels": "{{Users}}/js/tools/labels.js",
+		"Users/contacts": "{{Users}}/js/tools/contacts.js",
 		"Users/status": "{{Users}}/js/tools/status.js",
 		"Users/friendSelector": "{{Users}}/js/tools/friendSelector.js",
 		"Users/getintouch": "{{Users}}/js/tools/getintouch.js",
-		"Users/sessions": "{{Users}}/js/tools/sessions.js"
+		"Users/sessions": "{{Users}}/js/tools/sessions.js",
+		"Users/language": "{{Users}}/js/tools/language.js"
 	});
 
 	Q.beforeInit.add(function _Users_beforeInit() {
@@ -2224,7 +2291,7 @@
 			accountStatusUrl: null,
 			tryQuietly: false,
 			using: 'native', // can also be a platform name like 'facebook'
-			scope: ['email', 'public_profile', 'user_friends'], // the permissions to ask for
+			scope: ['public_profile', 'email'], // the permissions to ask for
 			linkToken: null,
 			dialogContainer: 'body',
 			setupRegisterForm: null,
@@ -2257,6 +2324,12 @@
 	}, 'Users');
 
 	Q.onInit.add(function () {
+		Q.Text.get('Users/content', function (err, text) {
+			if (!text) {
+				return;
+			}
+			Q.extend(Q.text.Users, 10, text);
+		});
 		if (Q.Users.loggedInUser
 			&& Q.typeOf(Q.Users.loggedInUser) !== 'Q.Users.User') {
 			Q.Users.loggedInUser = new Users.User(Q.Users.loggedInUser);
@@ -2279,23 +2352,55 @@
 				Q.plugins.Users.setIdentifier();
 				return false;
 			});
-		if (!location.hash.queryField('Q.Users.oAuth')) {
+		if (!location.hash.queryField('Q.Users.newSessionId')) {
 			return;
 		}
 		var fieldNames = [
-			'response_type', 'token_type', 'access_token',
-			'expires_in', 'scope', 'state', 'Q.deviceId', 'Q.Users.oAuth'
+			'Q.Users.appId', 'Q.Users.newSessionId',
+			'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.signature'
 		];
 		var fields = location.hash.queryField(fieldNames);
-		var storedDeviceId = localStorage.getItem("Q\tUsers.Device.deviceId");
-		fields.deviceId = storedDeviceId || fields.deviceId;
-		Q.req('Users/oAuth', function () {
-			// user was redirected from Users/authorize or some similar flow
-		}, {
-			method: 'post',
-			fields: fields
-		});
+		var storedDeviceId = localStorage.getItem("Q.Users.Device.deviceId");
+		fields['Q.Users.deviceId'] = fields['Q.Users.deviceId'] || storedDeviceId;
+		if (fields['Q.Users.newSessionId']) {
+			Q.req('Users/session', function () {
+				// user was redirected from Users/session
+			}, {
+				method: 'post',
+				fields: fields
+			});
+		}
 	}, 'Users');
+
+	// handoff action
+	Q.onHandleOpenUrl.set(function (url) {
+		window.cordova.plugins.browsertab.close();
+		if (url.includes('Q.Users.newSessionId')) { // handoff action
+			var fields = _getParams(url.split('#')[1]);
+			if (fields['Q.Users.newSessionId']) {
+				Q.cookie('Q_sessionId', fields['Q.Users.newSessionId']);
+				document.location.reload();
+			}
+		}
+
+		function _getParams(url) {
+			var res = {};
+			try {
+				var pieces = url.split('&');
+				for (var i = 0; i < pieces.length; i++) {
+					var val = pieces[i].split('=');
+					if (val.length !== 2) {
+						continue;
+					}
+					res[val[0]] = val[1];
+				}
+			} catch (err) {
+				console.warn('Error parsing params');
+				return null;
+			}
+			return res;
+		}
+	}, 'Users.handoff');
 
 	Q.beforeActivate.add(function (elem) {
 		// Every time before anything is activated,
@@ -2366,6 +2471,235 @@
 	});
 	Users.onConnected = new Q.Event();
 	Users.onConnectionLost = new Q.Event();
+	
+	Q.Socket.onConnect('Users').set(function (socket, ns, url) {
+		Q.loadNonce(function () {
+			socket.emit('Users/session', Q.sessionId(), Q.clientId(), function () {
+				Q.handle(Users.Socket.onSession);
+			});
+		});
+	}, 'Users');
+
+	/**
+	 * Operates with dialogs.
+	 * @class Users.Dialogs
+	 */
+	Users.Dialogs = {
+		/**
+	 	* Show a dialog with contacts.
+	 	* @static
+	 	* @method contacts
+	 	* @param {Function} [callback] The function to call after dialog is activated
+	 	*/
+		contacts: function(options, callback) {
+			if (!Q.info.isCordova || !navigator.contacts) {
+				throw new Error("Users.Dialogs.contacts: supported only in Cordova");
+			}
+			var contacts = null;
+			var text = null;
+			var o = Q.extend({}, Users.Dialogs.contacts.options, options);
+
+			var pipe = Q.pipe(['contacts', 'text'], function () {
+				Q.Template.render(o.templateName, {
+					contacts: contacts
+				}, function (err, html) {
+					if (err) {
+						return;
+					}
+					var selectedContacts = {};
+					Q.Dialogs.push({
+						title: text.title,
+						content: html,
+						stylesheet: '{{Users}}/css/Users/contacts.css',
+						apply: true,
+						onActivate: function (dialog) {
+							function _addContact(id, name, contact, contactType) {
+								var c = {
+									id: id,
+									name: name,
+									prefix: contactType
+								};
+								c[contactType] = contact;
+								selectedContacts[id] = c;
+							}
+							function _removeContact(id) {
+								$('[data-rawid='+ id +']', dialog)
+									.find(".Users_contacts_dialog_" + selectedContacts[id].prefix)
+									.removeClass("checked");
+								delete selectedContacts[id];
+							}
+
+							if (o.data) {
+								selectedContacts = o.data;
+								for(var i in selectedContacts) {
+									$('[data-rawid='+ selectedContacts[i].id +']', dialog)
+										.find(".Users_contacts_dialog_" + selectedContacts[i].prefix)
+										.addClass("checked");
+								}
+							}
+							$('.Users_contacts_dialog_buttons', dialog)
+								.on(Q.Pointer.fastclick, function () {
+									var $this = $(this);
+									var $row = $this.closest(".tr");
+									var rawid = $row.data("rawid");
+									var name = $row.find(".Users_contacts_dialog_name").text();
+									var contact = $this.closest(".td").data();
+									var contactType = Object.keys(contact)[0];
+									contact = Q.getObject(contactType, contact);
+									if (!contact || $this.hasClass("checked")) {
+										return _removeContact(rawid);
+									}
+
+									$row.find(".checked").removeClass("checked");
+									$this.addClass("checked");
+
+									if (contact.length > 1) {
+										Users.Dialogs.select({
+											displayName: name,
+											contacts: contact
+										}, function (data) {
+											if (!data) {
+												$this.removeClass("checked");
+												return;
+											}
+											_addContact(rawid, name, data.value, contactType);
+										})
+									} else {
+										_addContact(rawid, name, contact[0].value, contactType);
+									}
+								});
+							$('.Users_contacts_dialog_name', dialog)
+								.on(Q.Pointer.fastclick, function () {
+									var $this = $(this);
+									var $row = $this.closest(".tr");
+									var $email = $row.find(".Users_contacts_dialog_email");
+									var $phone = $row.find(".Users_contacts_dialog_phone");
+									var emailContact = $email.closest(".td").data("email");
+									var phoneContact = $phone.closest(".td").data("phone");
+									var name = $row.find(".Users_contacts_dialog_name").text();
+									var rawid = $row.data("rawid");
+
+									$row.addClass("Users_contacts_flash");
+									setTimeout(function () {
+										$row.removeClass("Users_contacts_flash");
+									}, 1000);
+
+									if ($row.find(".checked").length) {
+										return _removeContact(rawid);
+									}
+
+									if (Q.getObject('length', phoneContact)) {
+										if (phoneContact.length > 1) {
+											Users.Dialogs.select({
+												displayName: name,
+												contacts: phoneContact
+											}, function (data) {
+												if (!data) {
+													$this.removeClass("checked");
+													return;
+												}
+												$phone.addClass("checked");
+												_addContact(rawid, name, data.value, "phone");
+											})
+										} else if (phoneContact.length === 1) {
+											$phone.addClass("checked");
+											_addContact(rawid, name, phoneContact[0].value, "phone");
+										}
+									} else if (Q.getObject('length', emailContact)) {
+										if (emailContact.length > 1) {
+											Users.Dialogs.select({
+												displayName: name,
+												contacts: emailContact
+											}, function (data) {
+												if (!data) {
+													$this.removeClass("checked");
+													return;
+												}
+												$email.addClass("checked");
+												_addContact(rawid, name, data.value, "email");
+											})
+										} else if (emailContact.length === 1) {
+											$email.addClass("checked");
+											_addContact(rawid, name, emailContact[0].value, "email");
+										}
+									}
+								});
+						},
+						onClose: function () {
+							Q.handle(callback, Users, [selectedContacts]);
+						}
+					});
+				});
+			});
+
+			Q.Text.get("Users/content", function (err, result) {
+				text = Q.getObject(["contacts", "dialog"], result);
+				pipe.fill('text')();
+			})
+
+			var options = new ContactFindOptions();
+			options.filter = "";
+			options.multiple = true;
+			var fields = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+			navigator.contacts.find(fields, function (data) {
+				contacts = data;
+				pipe.fill('contacts')();
+			}, function (err) {
+				throw new Error("Users.Dialogs.contacts: " + err);
+			}, options);
+		},
+		/**
+		 * Show a select dialog with several emails/phones.
+		 * @static
+		 * @method contacts
+		 * @param {Function} [callback] The function to call after dialog is activated
+		 */
+		select: function (options, callback) {
+			var o = Q.extend({}, Users.Dialogs.select.options, options);
+			if (!o.contacts) return;
+			Q.Text.get("Users/content", function (err, result) {
+				var text = Q.getObject(["contacts", "select"], result);
+				Q.Template.render(o.templateName, {
+					contacts: o.contacts
+				}, function (err, html) {
+					if (err) {
+						return;
+					}
+					var selectedContact = null;
+					Q.Dialogs.push({
+						title: text.title.interpolate({
+							displayName: o.displayName
+						}),
+						content: html,
+						stylesheet: '{{Users}}/css/Users/contacts.css',
+						apply: true,
+						onActivate: function (dialog) {
+							$('.Users_contacts_dialog_buttons', dialog)
+								.on(Q.Pointer.fastclick, function () {
+									if($(this).hasClass('checked')) {
+										return;
+									}
+									$(dialog).find(".checked").removeClass("checked");
+									$(this).addClass("checked");
+									selectedContact = $(this).closest("td").data("contact");
+								});
+						},
+						onClose: function () {
+							Q.handle(callback, Users, [selectedContact]);
+						}
+					})
+				});
+			});
+		}
+	};
+	Users.Dialogs.contacts.options = {
+		templateName: "Users/templates/contacts/dialog",
+		prefix: "Users"
+	};
+
+	Users.Dialogs.select.options = {
+		templateName: "Users/templates/contacts/select"
+	}
 
 	/**
 	 * Some replacements for Q.Socket methods, use these instead.
@@ -2384,11 +2718,18 @@
 		 * @param {Function} callback When a connection is made, receives the socket object
 		 */
 		connect: function _Users_Socket_connect(nodeUrl, callback) {
-			Q.Socket.connect('Users', nodeUrl, function (socket) {
-				Q.loadNonce(function () {
-					socket.socket.emit('Users/session', Q.sessionId(), Q.clientId());
+			var qs = Q.Socket.get('Users', nodeUrl);
+			if (qs && qs.socket &&
+			(qs.socket.io.connected || !Q.isEmpty(qs.socket.io.connecting))) {
+				_waitForSession.call(qs.socket, 'Users', nodeUrl);
+			}
+			Q.Socket.connect('Users', nodeUrl, _waitForSession);
+			function _waitForSession() {
+				var t = this, a = arguments;
+				Users.Socket.onSession.addOnce(function (socket, ns, url) {
+					callback && callback(socket, ns, url);
 				});
-			});
+			}
 		},
 
 		/**
@@ -2401,6 +2742,15 @@
 		get: function _Users_Socket_get(url) {
 			return Q.Socket.get('Users', url);
 		},
+		
+		/**
+		 * Returns Q.Event that occurs on some socket event coming from socket.io
+		 * through the Users namespace
+		 * @event onEvent
+		 * @param {String} name the name of the event
+		 * @return {Q.Event}
+		 */
+		onSession: new Q.Event(),
 
 		/**
 		 * Returns Q.Event that occurs on some socket event coming from socket.io
@@ -2439,20 +2789,20 @@
 				Users.Facebook.scheme = Users.Facebook.scheme && Users.Facebook.scheme.replace('://', '');
 				Q.onHandleOpenUrl.set(function (url) {
 					window.cordova.plugins.browsertab.close();
-					var params = _getParams(url);
-					Users.Facebook.accessToken = params.access_token;
-					Users.Facebook.doLogin({
-						status: 'connected',
-						authResponse: {
-							accessToken: params.access_token
-						}
-					});
+					Users.Facebook.accessToken = Q.getObject(["access_token"], _getParams(url.split('?')[1]));
+					if (Users.Facebook.accessToken) {
+						Users.Facebook.doLogin({
+							status: 'connected',
+							authResponse: {
+								accessToken: Users.Facebook.accessToken
+							}
+						});
+					}
 
 					function _getParams(url) {
 						var res = {};
 						try {
-							var str = url.split('?')[1];
-							var pieces = str.split('&');
+							var pieces = url.split('&');
 							for (var i = 0; i < pieces.length; i++) {
 								var val = pieces[i].split('=');
 								if (val.length !== 2) {
@@ -2462,11 +2812,11 @@
 							}
 						} catch (err) {
 							console.warn('Error parsing params');
-							throw(err);
+							return null;
 						}
 						return res;
 					}
-				}, 'Users');
+				}, 'Users.facebook');
 				Users.Facebook.type = 'oauth';
 				if (Q.info.platform === 'ios') {
 					// ios
@@ -2507,10 +2857,11 @@
 					'&redirect_uri=' + Q.baseUrl() + '/login/facebook%3Fscheme%3D' + Users.Facebook.scheme +
 					'&state=' + _stringGen(10) +
 					'&response_type=token&scope=email,public_profile';
-				// todo: replace hardcoded app name
-				cordova.plugins.browsertab.openUrl(url, {schema: Users.Facebook.scheme + '://'},
-					function(success){ console.log(success); },
-					function(err){ console.log(err); });
+				cordova.plugins.browsertab.openUrl(url,
+					{scheme: Users.Facebook.scheme + '://'},
+					function(success) { console.log(success); },
+					function(err) { console.log(err); }
+				);
 			}
 
 			function _stringGen(len) {

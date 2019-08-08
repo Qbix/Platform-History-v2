@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Yeni Mövzu"
+    },
+    "labels": {
+        "Streams/invited": "Mən dəvət etdiyim insanlar",
+        "Streams/invitedMe": "Kim məni dəvət etdi"
+    },
+    "interests": {
+        "Filter": "Nə xoşunuza gəlir?",
+        "CanAdd": "Aradığınız şeyi hələ də tapa bilmirsəniz, yeni bir maraq əlavə edə bilərsiniz:",
+        "TrySynonyms": "Görmürsənmi? Bəzi sinonimlər cəhd edin.",
+        "AddUnderCategory": "Kateqoriya daxil edin ...",
+        "Other": "Digərləri",
+        "Unlisted": "Listelenmemiş"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Mesaj administrator baxış üçün qeyd olundu. Sürüşmək üçün yenidən vurun.",
+        "noOneSaid": "Heç kim heç nə demədi",
+        "closeChatButton": "Çatdırın",
+        "closeChatConfirmTitle": "Bu söhbəti bağlayın?",
+        "closeChatConfirm": "Bu söhbəti bağlamaq istəyirsiniz?",
+        "closeChatConfirmYes": "Bəli",
+        "closeChatConfirmNo": "Yox",
+        "earlierComments": "əvvəllər şərhlər",
+        "Subscribed": "Səssiz bildirişlər",
+        "Unsubscribed": "Bildirişlər al",
+        "dontHavePermissionJoinConversation": "Bu söhbətə qoşulmaq üçün icazəniz yoxdur.",
+        "startedConversation": "söhbətə başladı",
+        "RealTimeCall": "Real vaxt zəng"
+    },
+    "notifications": {
+        "*": "{{& message.fields.type}} - {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} dedi:",
+        "Streams/changed": "{{stream.fields.title}} səhifəsində dəyişikliklər",
+        "Streams/invite": "{{& stream.fields.title}} üçün dəvət olunmuşdunuz",
+        "Streams/announcement": "{{& streams.fields.title}} səhifəsində elan",
+        "Streams/access": "{{&call 'avatar.displayName'}} axının dəyişməsi",
+        "Streams/chat/edit": "Sohbet mesajı redaktə edildi",
+        "Streams/chat/remove": "Sohbet mesajı silindi",
+        "Streams/closed": "{{stream.fields.title}} bağlanıb",
+        "Streams/task/progress": "{{stream.fields.title}} səhifəsində edilən tərəqqi",
+        "Streams/task/complete": "Task tamamlandı: {{stream.fields.title}}",
+        "Streams/task/error": "Hata: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Daxil olan mesaj",
+        "ManageEmailSubscriptions": "E-poçt abunəliyinizi idarə edin",
+        "IfUnsubscribe": "Siz imtina etmək istəsəniz"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} sizi {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Əlaqələrinizdən seçin",
+            "selectFromContacts": "Əlaqələrdən seçin",
+            "photo": "Bir şəkil çəkin",
+            "photoInstruction": "QR kodunuzu skanladığınız şəxs qarşınızda olsa, onlardan bir şəkil çəkin",
+            "to": "Kimə: {{Stream Title}}",
+            "go": "Gedin",
+            "title": "Davet et",
+            "placeholder": "Mobil nömrəniz və ya e-poçt ünvanı",
+            "orInvite": "Və ya istifadə edərək insanları dəvət edin:",
+            "QR": "QR kodu yaratmaq üçün {{ClickOrTap}}",
+            "QRtitle": "Bu QR kodu tarayın",
+            "byEmail": "E-poçt",
+            "byText": "Mətn",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Onlar bunu skanladılar!",
+            "chooseAgainFromContacts": "Əlaqələrdən təkrar seçin",
+            "inviteSelectedContacts": "Seçilmiş kontaktları dəvət edin"
+        },
+        "email": {
+            "subject": "Hey, bunu yoxlayın",
+            "PleaseVisitLink": "Xahiş edirik aşağıdakı linkə müraciət edin:",
+            "InvitingYou": "{{title}} səhifəsinə dəvət edirəm",
+            "HasInvitedYou": "{{displayName}} sizi {{title}} səhifəsinə dəvət etdi"
+        },
+        "sms": {
+            "content": "{{title}} dəvət olunmuşdunuz. Xahiş edirik, {{url}}"
+        },
+        "notice": {
+            "text": "Siz dəvət olundu. {{ClickOrTap}} burada qəbul etmək və qoşulmaq."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} üçün <em>{{message.fields.type}}</em> mesaj nümayiş {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& url}} &#39;da {{& call 'avatar.displayName'}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Arkadaşlarınız hələ tanımadığınız nömrələrimizdən dəvət göndərilir. Dəvətin sizə gəldiklərini bildirmək üçün onlara tez bir mətnlə baxın və linkdən istifadə etmələrini xahiş edin.",
+            "confirm": "Arkadaşlarınız hələ tanımadığınız nömrələrimizdən dəvət göndərilir. Sizdən dəvətnaməni göndərdiyini bildirmək üçün onlara tez bir mətn ilə baxın və onlara link basın.",
+            "check": "Hey, yalnız sizə {{app}} tətbiqinə dəvət göndərdim. Xahiş edirik SMS-lərinizi yoxlayın və linki vurun!"
+        },
+        "email": {
+            "alert": "Dostlarınız hələ tanış olmayan domenlərdən dəvət göndərilir. Dəvətin sizə gəldiklərini bildirmək üçün onlara tez bir mətnlə baxın və linkdən istifadə etmələrini xahiş edin.",
+            "confirm": "Dostlarınız hələ tanış olmayan domenlərdən dəvət göndərilir. Sizdən dəvətnaməni göndərdiyini bildirmək üçün onlara tez bir mətn ilə baxın və onlara link basın.",
+            "subject": "Bir dəvət aldınız mı?",
+            "body": "Hey, yalnız sizə {{app}} tətbiqinə dəvət göndərdim. E-poçtunuzu yoxlayın və orada olan linki vurun!"
+        }
+    },
+    "participating": {
+        "Title": "Başlıq",
+        "Subscribed": "Abunə olundu",
+        "Participants": "İştirakçılar"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Mikrofonu aktiv edin",
+            "cameraTitle": "Kameranı aktiv edin",
+            "cameraAndMicrophoneTitle": "Kamera və Mikrofonu aktiv edin",
+            "dialogTitle": "Dialogu aktivləşdirir",
+            "microphoneBtn": "Mikrofonu işə salın",
+            "cameraBtn": "Kameranı aktivləşdirin",
+            "cameraAndMicrophoneBtn": "Kamera və Mikrofonu aktivləşdirin"
+        }
+    }
+}

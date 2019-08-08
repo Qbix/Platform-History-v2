@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "ඇතුල් වන්න",
+        "LogOut": "ඉවත් වන්න"
+    },
+    "activate": {
+        "SetAsPrimary": "Primary {999} my මගේ ප්‍රාථමික {{1000} Set ලෙස සකසන්න",
+        "ChoosePassPhrase": "පුරනය වීමට <strong>පාස් වාක්‍යයක්<\/strong> තෝරන්න. <br> ඔබට පහසුවෙන් මතක තබා ගත හැකි වචන කිහිපයකින් සමන්විත සරල වාක්‍ය ඛණ්ඩයකි.",
+        "ChoosePassPhraseSeeSuggestions": "ඔබගේ ගිණුම ආරක්ෂා කිරීම සඳහා හොඳ <strong>පාස් වාක්‍යයක්<\/strong> තෝරන්න. සමහර අදහස් සඳහා යෝජනා බලන්න.",
+        "LogOutAndTryAgain": "ඉවත් වී නැවත උත්සාහ කරන්න",
+        "IfYouFeel": "යමක් වැරදී ඇති බව ඔබට දැනේ නම්, ඔබට හැකිය",
+        "SetIdentifierButtonTitle": "නැවත ආරම්භ කරන්න"
+    },
+    "session": {
+        "GetStarted": "ආරම්භ කරන්න"
+    },
+    "authorize": {
+        "GetStarted": "ආරම්භ කරන්න",
+        "Authorize": "අවසරලත්",
+        "TermsLabel": "මම කියවා එකඟ වී සිටිමි <br> {{999} to වෙත",
+        "TermsTitle": "කොන්දේසි"
+    },
+    "register": {
+        "TermsLabel": "මම පිළිගන්නේ {{link}}",
+        "TermsTitle": "කොන්දේසි"
+    },
+    "notifications": {
+        "title": "අවසර",
+        "prompt": "ඔබට දැනුම්දීම් සක්‍රීය කිරීමට අවශ්‍යද? ඔබ සැලකිලිමත් වන දේවල් පිළිබඳ තත්‍ය කාලීන යාවත්කාලීන කිරීම් ඔබට ලැබෙනු ඇත.",
+        "yes": "ඔව්",
+        "no": "නොමැත",
+        "WelcomePleaseVerifyEmail": "සාදරයෙන් පිළිගනිමු! කරුණාකර ඔබගේ විද්‍යුත් තැපැල් ලිපිනය සත්‍යාපනය කරන්න.",
+        "WelcomeVerifyEmail": "සාදරයෙන් පිළිගනිමු! ඔබගේ විද්‍යුත් තැපැල් ලිපිනය සත්‍යාපනය කරන්න.",
+        "ForgetPass": "හේයි, ඔබේ මුරපදය ඔබට අමතකද?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "සම්බන්ධතා තෝරන්න"
+        },
+        "select": {
+            "title": "Contact {999} contact හි සම්බන්ධතාවය තෝරන්න"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "කරුණාකර ලේබලය තෝරන්න.",
+        "inviteUser": "පරිශීලකයාට ආරාධනා කරන්න"
+    },
+    "invalidLanguageSelected": "අවලංගු භාෂාව තෝරා ඇත"
+}

@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Πατήστε για να πληρώσετε"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: χρέωση που υποβλήθηκε σε επεξεργασία για {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Σας ευχαριστούμε για την πληρωμή σας στην {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} εγγραφεί στο {{plan.title}}",
+        "YouSubscribedTo": "Έχετε εγγραφεί στο {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Πληροφορίες σχετικά με την παραγγελία",
+        "PaymentMethod": "Μέθοδος πληρωμής",
+        "ContactInfo": "Πληροφορίες επαφής",
+        "Pay": "Πληρωμή"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Η πρόσκληση έγινε αποδεκτή από την {{1}}",
+        "YouHaveCreditsToStart": "Έχετε {{1}} πιστώσεις για να ξεκινήσετε"
+    },
+    "history": {
+        "Date": "Ημερομηνία",
+        "Amount": "Ποσό",
+        "Description": "Περιγραφή",
+        "Client": "Πελάτης",
+        "To": "προς το",
+        "From": "από",
+        "HistoryEmpty": "Δεν έχετε ακόμα δεδομένα"
+    },
+    "subscriptions": {
+        "infoTitle": "Ορίστε τις πληροφορίες πληρωμής",
+        "confirm": {
+            "title": "Ξεκινήστε τη συνδρομή",
+            "message": "Θα θέλατε να εγγραφείτε στο {{title}};",
+            "ok": "Εντάξει",
+            "cancel": "Ματαίωση"
+        }
+    },
+    "payments": {
+        "infoTitle": "Ορίστε τις πληροφορίες πληρωμής",
+        "confirm": {
+            "title": "Κάνω μια πληρωμή",
+            "message": "Συμφωνείτε να πληρώσετε {{symbol}} {{amount}};",
+            "ok": "Εντάξει",
+            "cancel": "Ματαίωση"
+        }
+    }
+}

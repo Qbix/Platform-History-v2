@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Eraro {{status}} dum peto",
+        "canceled": "Peto nuligita",
+        "500": "Interna servila eraro",
+        "404": "Ne trovita: {{url}}",
+        "501": "Peto interrompita"
+    },
+    "nonce": {
+        "sameDomain": "Sesio eksvalidiĝis. Refreŝigi la paĝon kaj provu denove.",
+        "otherDomain": "Blokita interdomena peto al fremda domajno ĉe {999}}"
+    },
+    "words": {
+        "tap": "frapeti",
+        "click": "alklaku",
+        "yes": "jes",
+        "no": "ne",
+        "Tap": "Frapu",
+        "Click": "Alklaku",
+        "Yes": "Jes",
+        "No": "Ne"
+    },
+    "months": {
+        "1": "Januaro",
+        "2": "Februaro",
+        "3": "Marto",
+        "4": "Aprilo",
+        "5": "Majo",
+        "6": "junio",
+        "7": "Julio",
+        "8": "Aŭgusto",
+        "9": "Septembro",
+        "10": "Oktobro",
+        "11": "Novembro",
+        "12": "Decembro"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Bonvolu permesi aliron al via mikrofono",
+        "record": "Rekordo",
+        "recording": "Registrado",
+        "remains": "restas",
+        "maximum": "maksimumo",
+        "playing": "Ludanta",
+        "recorded": "Registrita",
+        "clip": "klipo",
+        "orupload": "Aŭ Alŝuti",
+        "usethis": "Uzu Ĉi",
+        "discard": "Forĵeti",
+        "encoding": "Kodado"
+    },
+    "alert": {
+        "title": "Atentu"
+    },
+    "confirm": {
+        "title": "Konfirmu",
+        "ok": "Jes",
+        "cancel": "Ne"
+    },
+    "prompt": {
+        "title": "Rapida",
+        "ok": "Iru"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Eraro dum legado de dosiero",
+        "cameraCommands": {
+            "prompt": "Kion vi volus fari?",
+            "photo": "Prenu novan foton",
+            "library": "Elektu el biblioteko"
+        },
+        "tooSmall": "Bonvolu elekti pli grandan bildon.",
+        "cropping": {
+            "title": "Alĝustigu grandecon kaj pozicion",
+            "touchscreen": "Uzu viajn fingrojn por zomi kaj treni",
+            "notTouchscreen": "Uzu vian muson por movi kaj treni"
+        }
+    }
+}

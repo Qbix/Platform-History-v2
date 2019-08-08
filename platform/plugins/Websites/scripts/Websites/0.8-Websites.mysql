@@ -4,4 +4,4 @@ CREATE TABLE `{$prefix}article` (
   `userId` varbinary(31) NOT NULL COMMENT 'article author or the user to get in touch with about it',
   `article` text NOT NULL COMMENT 'the html of the article',
   PRIMARY KEY (`publisherId`,`streamName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Websites/article stream type extension';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Websites/article stream type extension';

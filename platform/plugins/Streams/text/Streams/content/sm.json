@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "Mea fou"
+    },
+    "labels": {
+        "Streams\/invited": "Tagata na ou valaauliaina",
+        "Streams\/invitedMe": "O ai na valaauliaina au"
+    },
+    "interests": {
+        "Filter": "O a mea e te fiafia i ai?",
+        "CanAdd": "Afai e le mafai ona e maua le mea o loʻo e sailia, e mafai ona e faaopoopoina se fiafia fou i lalo:",
+        "TrySynonyms": "Aua le vaai i ai? Taumafai nisi synonyms.",
+        "AddUnderCategory": "Faʻaopoopo i lalo o le vaega ...",
+        "Other": "Isi",
+        "Unlisted": "Faʻamaumauga"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Ua maeʻa le feʻau mo le iloiloga a le suʻega. Toe toe faʻaulu i tua.",
+        "noOneSaid": "E leai se isi na fai mai se mea",
+        "closeChatButton": "Katalata talatalanoa",
+        "closeChatConfirmTitle": "Katia lenei talatalanoaga?",
+        "closeChatConfirm": "E te mautinoa e te manaʻo e tapuni lenei talatalanoaga?",
+        "closeChatConfirmYes": "ioe",
+        "closeChatConfirmNo": "leai",
+        "earlierComments": "faamatalaga muamua"
+    },
+    "notifications": {
+        "*": "Savali {{& message.fields.type}} i {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} na fai mai:",
+        "Streams\/changed": "Suiga i {{stream.fields.title}}",
+        "Streams\/invite": "Na valaaulia oe i {{& stream.fields.title}}",
+        "Streams\/announcement": "Faasilasila i {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} suia le avanoa i le laina",
+        "Streams\/chat\/edit": "Faʻataʻitaʻitele le feau tautala",
+        "Streams\/chat\/remove": "Faʻalēaogāina le feʻau faʻaulu",
+        "Streams\/closed": "{{stream.fields.title}} ua tapunia",
+        "Streams\/task\/progress": "Alualu i luma o le alualu i luma {{stream.fields.title}}",
+        "Streams\/task\/complete": "Ua maeʻa galuega: {{stream.fields.title}}",
+        "Streams\/task\/error": "Laʻasaga i le taimi: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Savali o loʻo i totonu"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} valaaulia oe i {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Filifili mai lau Fesootaiga",
+            "chooseAgainFromContacts": "Filifili Faalua mai Faʻamatalaga",
+            "inviteSelectedContacts": "Valaaulia Filifilia Filifilia",
+            "selectFromContacts": "Filifili mai Faʻamatalaga",
+            "photo": "Ave se ata",
+            "photoInstruction": "Afai o le tagata na siaki lau QR code o loʻo i ou luma, ave se ata o ia mea",
+            "to": "I: {{Stream Title}}",
+            "go": "Alu",
+            "title": "Valaaulia",
+            "placeholder": "Telefoni poʻo tuatusi imeli",
+            "orInvite": "Pe valaaulia tagata e ala i le faʻaaoga:",
+            "QR": "{{ClickOrTap}} e gaosia QR code",
+            "QRtitle": "Siaki lenei QR code",
+            "QRscanned": "Sa latou suʻeina!",
+            "byEmail": "Imeli",
+            "byText": "Tusitusiga",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hey, siaki le mea lenei",
+            "PleaseVisitLink": "Faamolemole asiasi i le sootaga lenei:",
+            "InvitingYou": "O loʻo ou valaauliaina oe i {{title}}",
+            "HasInvitedYou": "{{displayName}} ua valaauliaina oe i {{title}}"
+        },
+        "sms": {
+            "content": "Ua valaaulia oe i {{title}}. Faamolemole tap {{url}}"
+        },
+        "notice": {
+            "text": "Ua valaaulia oe. {{ClickOrTap}} iinei e talia ma auai."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} i le savali <em>{{message.fields.type}}<\/em> i {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} i {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "O valaaulia e auina mai le numera, lea e leʻi iloa e au uo. Suʻe faʻatasi ma se faʻamatalaga vave e taʻu atu ia i latou o le valaaulia na sau mai ia te oe, fai atu ia i latou e kiliki le sootaga.",
+            "confirm": "O valaaulia e auina mai le numera, lea e leʻi iloa e au uo. Mata e te manaʻo e tulitatao i se faʻamatalaga vave e taʻu atu ia i latou o le valaaulia na sau mai ia te oe, fai atu ia i latou e kiliki le sootaga.",
+            "check": "Hey, faatoa ou auina atu ia te oe se valaaulia i le {{app}} app. Faamolemole siaki lau sms ma kiliki le sootaga!"
+        },
+        "email": {
+            "alert": "O valaaulia e auina atu mai la tatou itu, lea e leʻi iloa e au uo. Suʻe faʻatasi ma se faʻamatalaga vave e taʻu atu ia i latou o le valaaulia na sau mai ia te oe, fai atu ia i latou e kiliki le sootaga.",
+            "confirm": "O valaaulia e auina atu mai la tatou itu, lea e leʻi iloa e au uo. Mata e te manaʻo e tulitatao i se faʻamatalaga vave e taʻu atu ia i latou o le valaaulia na sau mai ia te oe, fai atu ia i latou e kiliki le sootaga.",
+            "subject": "Na e mauaina se valaaulia?",
+            "body": "Hey, faatoa ou auina atu ia te oe se valaaulia i le {{app}} app. Faamolemole siaki lau imeli ma kiliki le sootaga i totonu!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Faʻaliliu le Microphone",
+            "cameraTitle": "Enable Camera",
+            "cameraAndMicrophoneTitle": "Faʻamaonia le Kamera ma le Masini"
+        }
+    }
+}

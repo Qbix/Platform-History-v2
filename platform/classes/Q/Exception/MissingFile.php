@@ -13,4 +13,4 @@ class Q_Exception_MissingFile extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_MissingFile', 'missing file {{filename}}');
+Q_Exception::add('Q_Exception_MissingFile', 'missing file {{filename}}', 424);

@@ -993,12 +993,16 @@ class Q_Html
 	 *  If a string, also inserts the contents and generates a closing tag.
 	 *  If you want to do escaping on the contents, you must do it yourself.
 	 *  If true, auto-closes the tag.
+	 * @param {array} [$options=array()]
+	 * @param {boolean} [$options.ignoreEnvironment=false] If true, doesn't apply environment transformations
+	 * @param {string} [$options.hash=null] If URL was already processed with cachedUrlAndCache, set hash here to avoid calling it again
 	 * @return {string}
 	 */
 	static function tag (
 		$tag, 
 		$attributes = array(), 
-		$contents = null)
+		$contents = null,
+		$options = array())
 	{
 		if (!is_string($tag)) {
 			throw new Exception('tag name is not a string');
@@ -1012,7 +1016,7 @@ class Q_Html
 		}
 			
 		$attributes = self::attributes(
-			$attributes, ' ', true, $tag
+			$attributes, ' ', true, $tag, $options
 		);
 		if (is_numeric($contents)) {
 			$contents = (string)$contents;
@@ -1107,13 +1111,17 @@ class Q_Html
 	 * @param {string} [$between=' '] The text to insert between the attribute="value"
 	 * @param {string} [$escape=true] Whether to escape the attribute names and values.
 	 * @param {string} [$tag=null]
+	 * @param {array} [$options=array()]
+	 * @param {boolean} [$options.ignoreEnvironment=false] If true, doesn't apply environment transformations
+	 * @param {string} [$options.hash=null] If URL was already processed with cachedUrlAndCache, set hash here to avoid calling it again
 	 * @return {string}
 	 */
 	public static function attributes (
 		array $attributes, 
 		$between = ' ', 
 		$escape = true, 
-		$tag = null)
+		$tag = null,
+		$options = array())
 	{
 		$cacheBust = null;
 		if (isset($attributes['cacheBust'])) {
@@ -1183,10 +1191,12 @@ class Q_Html
 				continue; // skip null attributes
 			}
 			$name2 = $name;
-			if (strpos(strtolower($tag), 'frame') !== false and strtolower($name) == 'src') {
+			$ltag = strtolower($tag);
+			$lname = strtolower($name);
+			if (strpos($ltag, 'frame') !== false and $lname == 'src') {
 				$name2 = 'href'; // treat the src as href
 			}
-			if (strtolower($tag) == 'link' and strtolower($name) == 'href') {
+			if ($ltag == 'link' and $lname == 'href') {
 				$name2 = 'src'; // treat the href as src
 			}
 
@@ -1202,7 +1212,7 @@ class Q_Html
 					$isUrl = true;
 					break;
 				case 'src': // Automatically prefixes theme url if any
-					list ($value, $filename) = self::themedUrlAndFilename($value);
+					list ($value, $filename, $hash) = self::themedUrlFilenameAndHash($value, $options);
 					$isUrl = true;
 					break;
 				case 'id': // Automatic prefixing of this attribute
@@ -1222,6 +1232,9 @@ class Q_Html
 			}
 			$result .= ($i > 0 ? $between : '') . $name . '="' . $value . '"';
 			++ $i;
+		}
+		if (!empty($hash) and ($ltag === 'link' or $ltag === 'script')) {
+			$result .= ' integrity="sha256-' . $hash . '"';
 		}
 		return $result;
 	}
@@ -1355,28 +1368,30 @@ class Q_Html
 	
 	/**
 	 * Gets the url and filename of a themed file
-	 * @method themedUrlAndFilename
+	 * @method themedUrlFilenameAndHash
 	 * @static
 	 * @param {string} $filePath  Basically the subpath of the file underneath the web or theme directory
-	 * @param {boolean} [$ignoreEnvironment=false] If true, doesn't apply environment transformations
-	 * @return {array} A two-element array containing the url and filename
+	 * @param {array} [$options=array()]
+	 * @param {boolean} [$options.ignoreEnvironment=false] If true, doesn't apply environment transformations
+	 * @param {string} [$options.hash=null] If URL was already processed with cachedUrlAndCache, set hash here to avoid calling it again
+	 * @return {array} A three-element array containing the url, filename, hash
 	 */
-	static function themedUrlAndFilename ($filePath, $ignoreEnvironment = false)
+	static function themedUrlFilenameAndHash ($filePath, $options = array())
 	{
 		/**
-		 * @event Q/themedUrlAndFilename {before}
+		 * @event Q/themedUrlFilenameAndHash {before}
 		 * @param {string} file_path
 		 * @return {array}
 		 */
-		$result = Q::event('Q/themedUrlAndFilename', compact('file_path'), 'before');
+		$result = Q::event('Q/themedUrlFilenameAndHash', compact('file_path'), 'before');
 		if ($result) {
 			return $result;
 		}
 		
 		$filePath2 = Q_Uri::interpolateUrl($filePath);
 		
-		if (!$ignoreEnvironment
-		and $environment = Q_Config::get('Q', 'environment', false)) {
+		if (empty($options['ignoreEnvironment'])
+		and $environment = Q_Config::get('Q', 'environment', '')) {
 			if ($info = Q_Config::get('Q', 'environments', $environment, false)) {
 				if (!empty($info['files'][$filePath])) {
 					$filePath2 = $info['files'][$filePath];
@@ -1413,16 +1428,19 @@ class Q_Html
 			$url = $theme . ($filePath2 ? '/'.$filePath2 : $filePath2);
 		}
 		
-		if (empty($filename)) {
-			try {
-				$filename = Q_Uri::filenameFromUrl($url);	
-			} catch (Exception $e) {
-				$filename = null;
+		if (!empty($options['hash'])) {
+			$hash = $options['hash'];
+		} else {
+			if (empty($filename)) {
+				try {
+					$filename = Q_Uri::filenameFromUrl($url);	
+				} catch (Exception $e) {
+					$filename = null;
+				}
 			}
+			list($url, $hash) = Q_Uri::cachedUrlAndHash($url);
 		}
-		
-		$url = Q_Uri::cachedUrl($url);
-		return array($url, $filename);
+		return array($url, $filename, $hash);
 	}
 	
 	/**
@@ -1430,12 +1448,17 @@ class Q_Html
 	 * @method themedUrl
 	 * @static
 	 * @param {string} $filePath Basically the subpath of the file underneath the web or theme directory
-	 * @param {boolean} [$ignoreEnvironment=false] If true, doesn't apply environment transformations
+	 * @param {array} [$options=array()]
+	 * @param {boolean} [$options.ignoreEnvironment=false] If true, doesn't apply environment transformations
+	 * @param {string} [$options.hash=null] If URL was already processed with cachedUrlAndCache, set hash here to avoid calling it again
 	 * @return {string} The themed url.
 	 */
-	static function themedUrl($filePath, $ignoreEnvironment = false)
+	static function themedUrl($filePath, $options = array())
 	{
-		list($url, $filename) = self::themedUrlAndFilename($filePath, $ignoreEnvironment);
+		if ($options === true) { // for backwards compatibility
+			$options = array('ignoreEnvironment' => true);
+		}
+		list($url, $filename) = self::themedUrlFilenameAndHash($filePath, $options);
 		return $url;
 	}
 	
@@ -1444,11 +1467,13 @@ class Q_Html
 	 * @method themedFilename
 	 * @static
 	 * @param {string} $filePath Basically the subpath of the file underneath the web or theme directory
-	 * @param {boolean} [$ignoreEnvironment=false] If true, doesn't apply environment transformations
+	 * @param {array} [$options=array()]
+	 * @param {boolean} [$options.ignoreEnvironment=false] If true, doesn't apply environment transformations
+	 * @param {string} [$options.hash=null] If URL was already processed with cachedUrlAndCache, set hash here to avoid calling it again
 	 */
-	static function themedFilename($filePath, $ignoreEnvironment = false)
+	static function themedFilename($filePath, $options = array())
 	{
-		list($url, $filename) = self::themedUrlAndFilename($filePath, $ignoreEnvironment);
+		list($url, $filename) = self::themedUrlFilenameAndHash($filePath, $options);
 		return $filename;
 	}
 	

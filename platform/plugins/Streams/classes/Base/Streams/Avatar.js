@@ -26,8 +26,9 @@ var Row = Q.require('Db/Row');
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  * @param {string} [$fields.username] defaults to ""
  * @param {string} [$fields.firstName] defaults to ""
- * @param {string} [$fields.lastName] defaults to ""
+ * @param {string} [$fields.lastName] defaults to null
  * @param {string} [$fields.icon] defaults to ""
+ * @param {string} [$fields.gender] defaults to null
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -68,14 +69,20 @@ Q.mixin(Base, Row);
 /**
  * @property lastName
  * @type String
- * @default ""
- * if not empty, the user can see this last name
+ * @default null
+ * 
  */
 /**
  * @property icon
  * @type String|Buffer
  * @default ""
  * the icon to display
+ */
+/**
+ * @property gender
+ * @type String
+ * @default null
+ * 
  */
 
 /**
@@ -292,7 +299,8 @@ Base.fieldNames = function () {
 		"username",
 		"firstName",
 		"lastName",
-		"icon"
+		"icon",
+		"gender"
 	];
 };
 
@@ -483,9 +491,7 @@ return [["varchar","255","",false],false,"",""];
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_lastName = function (value) {
-		if (value == null) {
-			value='';
-		}
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".lastName");
@@ -509,7 +515,7 @@ Base.prototype.maxSize_lastName = function () {
 	 */
 Base.column_lastName = function () {
 
-return [["varchar","255","",false],false,"",""];
+return [["varchar","255","",false],true,"",null];
 };
 
 /**
@@ -548,6 +554,42 @@ Base.prototype.maxSize_icon = function () {
 Base.column_icon = function () {
 
 return [["varbinary","255","",false],false,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_gender
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_gender = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".gender");
+		if (typeof value === "string" && value.length > 31)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".gender");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the gender field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_gender = function () {
+
+		return 31;
+};
+
+	/**
+	 * Returns schema information for gender column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_gender = function () {
+
+return [["varchar","31","",false],true,"",null];
 };
 
 /**

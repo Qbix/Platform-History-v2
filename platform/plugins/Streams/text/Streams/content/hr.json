@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Nova stvar"
+    },
+    "labels": {
+        "Streams\/invited": "Ljudi koje sam pozvao",
+        "Streams\/invitedMe": "Tko me pozvao"
+    },
+    "interests": {
+        "Filter": "Što uživate?",
+        "CanAdd": "Ako i dalje ne možete pronaći ono što tražite, u nastavku možete dodati novi interes:",
+        "TrySynonyms": "Ne vidite ga? Isprobajte neke sinonime.",
+        "AddUnderCategory": "Dodaj pod kategoriju ...",
+        "Other": "drugo",
+        "Unlisted": "nenabrojen"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Poruka je označena za pregled administratora. Ponovno dodirnite za brisanje.",
+        "noOneSaid": "Nitko nije ništa rekao",
+        "closeChatButton": "Zatvori razgovor",
+        "closeChatConfirmTitle": "Zatvori ovaj razgovor?",
+        "closeChatConfirm": "Jeste li sigurni da želite zatvoriti ovaj chat?",
+        "closeChatConfirmYes": "Da",
+        "closeChatConfirmNo": "Ne",
+        "earlierComments": "raniji komentari",
+        "Subscribed": "Utišaj obavijesti",
+        "Unsubscribed": "Dobiti obavijesti",
+        "dontHavePermissionJoinConversation": "Nemate dozvolu pridružiti se ovom razgovoru.",
+        "startedConversation": "započeo razgovor",
+        "RealTimeCall": "Poziv u stvarnom vremenu"
+    },
+    "notifications": {
+        "*": "Poruka {{& message.fields.type}} do {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} rekao je:",
+        "Streams\/changed": "Promjene u {{stream.fields.title}}",
+        "Streams\/invite": "Pozvani ste na {{& stream.fields.title}}",
+        "Streams\/announcement": "Obavijest u {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} promijenio je pristup struji",
+        "Streams\/chat\/edit": "Uređena poruka za chat",
+        "Streams\/chat\/remove": "Poruka za chat uklonjena",
+        "Streams\/closed": "{{stream.fields.title}} je zatvoren",
+        "Streams\/task\/progress": "Napredak postignut {{stream.fields.title}}",
+        "Streams\/task\/complete": "Zadatak je dovršen: {{stream.fields.title}}",
+        "Streams\/task\/error": "Pogreška tijekom: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Dolazna poruka",
+        "ManageEmailSubscriptions": "upravljajte svojim pretplatama e-pošte",
+        "IfUnsubscribe": "Ako želite otkazati pretplatu"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} pozvao vas je na {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Odaberite iz svojih kontakata",
+            "selectFromContacts": "Odaberite Iz kontakata",
+            "photo": "Slikaj",
+            "photoInstruction": "Ako je osoba koja je skenirala vaš QR kôd ispred vas, fotografirajte ih",
+            "to": "Za: {{Stream Title}}",
+            "go": "Ići",
+            "title": "Pozvati",
+            "placeholder": "Broj mobilnog telefona ili adresa e-pošte",
+            "orInvite": "Ili pozovite osobe pomoću:",
+            "QR": "{{ClickOrTap}} za generiranje QR koda",
+            "QRtitle": "Skenirajte ovaj QR kôd",
+            "byEmail": "E-mail",
+            "byText": "Tekst",
+            "byFacebook": "Facebook",
+            "byTwitter": "Cvrkut",
+            "QRscanned": "Skenirali su ga!",
+            "chooseAgainFromContacts": "Odaberite Ponovno iz Kontakata",
+            "inviteSelectedContacts": "Pozovi odabrane kontakte"
+        },
+        "email": {
+            "subject": "Hej, vidi ovo",
+            "PleaseVisitLink": "Posjetite sljedeću vezu:",
+            "InvitingYou": "Pozivam vas na {{title}}",
+            "HasInvitedYou": "{{displayName}} pozvao vas je na {{title}}"
+        },
+        "sms": {
+            "content": "Pozvani ste na {{title}}. Dodirnite {{url}}"
+        },
+        "notice": {
+            "text": "Pozvani ste. {{ClickOrTap}} ovdje da prihvatite i pridružite se."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} je postavio <em>{{message.fields.type}}<\/em> poruku na {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} u {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Pozivnice se šalju s našeg broja, koje vaši prijatelji još ne prepoznaju. Nastavite s brzim tekstom kako biste im javili da je poziv stigao od vas i zamolite ih da kliknu na vezu.",
+            "confirm": "Pozivnice se šalju s našeg broja, koje vaši prijatelji još ne prepoznaju. Želite li nastaviti s brzim tekstom da biste saznali da je poziv stigao od vas, zamolivši ih da kliknu vezu.",
+            "check": "Hej, upravo sam ti poslao pozivnicu u aplikaciju {{app}}. Provjerite sms i kliknite vezu!"
+        },
+        "email": {
+            "alert": "Pozivnice se šalju s naše domene, koju vaši prijatelji još ne prepoznaju. Nastavite s brzim tekstom kako biste im javili da je poziv stigao od vas i zamolite ih da kliknu na vezu.",
+            "confirm": "Pozivnice se šalju s naše domene, koju vaši prijatelji još ne prepoznaju. Želite li nastaviti s brzim tekstom da biste saznali da je poziv stigao od vas, zamolivši ih da kliknu vezu.",
+            "subject": "Jeste li dobili pozivnicu?",
+            "body": "Hej, upravo sam ti poslao pozivnicu u aplikaciju {{app}}. Provjerite svoju e-poštu i kliknite vezu tamo!"
+        }
+    },
+    "participating": {
+        "Title": "Titula",
+        "Subscribed": "pretplaćen",
+        "Participants": "sudionici"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Omogući mikrofon",
+            "cameraTitle": "Omogući fotoaparat",
+            "cameraAndMicrophoneTitle": "Omogući kameru i mikrofon",
+            "dialogTitle": "Omogućivanje dijaloga",
+            "microphoneBtn": "Omogući mikrofon",
+            "cameraBtn": "Omogući kameru",
+            "cameraAndMicrophoneBtn": "Omogući kameru i mikrofon"
+        }
+    }
+}

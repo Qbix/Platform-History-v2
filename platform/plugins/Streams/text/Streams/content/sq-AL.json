@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Artikulli i ri"
+    },
+    "labels": {
+        "Streams/invited": "Njerëzit që kam ftuar",
+        "Streams/invitedMe": "Kush më ftoi"
+    },
+    "interests": {
+        "Filter": "Çfarë gëzon?",
+        "CanAdd": "Nëse ende nuk mund të gjesh atë që kërkon, mund të shtosh një interes të ri më poshtë:",
+        "TrySynonyms": "Mos e shihni? Provoni disa sinonime.",
+        "AddUnderCategory": "Shto nën kategorinë ...",
+        "Other": "tjetër",
+        "Unlisted": "Unlisted"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Mesazhi është shënuar për shqyrtim nga admin. Trokit sërish për të zhvendosur.",
+        "noOneSaid": "Askush nuk ka thënë asgjë",
+        "closeChatButton": "Mbyll chat",
+        "closeChatConfirmTitle": "Mbyll këtë chat?",
+        "closeChatConfirm": "Jeni i sigurt se doni ta mbyllni këtë chat?",
+        "closeChatConfirmYes": "po",
+        "closeChatConfirmNo": "jo",
+        "earlierComments": "Komentet e mëhershme",
+        "Subscribed": "Njoftime për heshtje",
+        "Unsubscribed": "Merrni Njoftimet",
+        "dontHavePermissionJoinConversation": "Ju nuk keni leje për t&#39;u bashkuar me këtë bisedë.",
+        "startedConversation": "filloi një bisedë",
+        "RealTimeCall": "Thirrje në kohë reale"
+    },
+    "notifications": {
+        "*": "Mesazhi {{& message.fields.type}} në {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} ka thënë:",
+        "Streams/changed": "Ndryshimet në {{stream.fields.title}}",
+        "Streams/invite": "Ju u ftuat te {{& stream.fields.title}}",
+        "Streams/announcement": "Njoftim në {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} ndryshoi qasjen e transmetimit",
+        "Streams/chat/edit": "Mesazhi i mesazhit u ndryshua",
+        "Streams/chat/remove": "Mesazhi i bisedës u hoq",
+        "Streams/closed": "{{stream.fields.title}} është mbyllur",
+        "Streams/task/progress": "Progresi i bërë në {{stream.fields.title}}",
+        "Streams/task/complete": "Detyra e përfunduar: {{stream.fields.title}}",
+        "Streams/task/error": "Gabim gjatë: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Mesazhi i ardhur",
+        "ManageEmailSubscriptions": "menaxho abonimet tuaja me email",
+        "IfUnsubscribe": "Nëse dëshironi të abonoheni"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} ju ftoi për të {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Zgjidhni nga Kontaktet tuaja",
+            "selectFromContacts": "Zgjidhni Nga Kontaktet",
+            "photo": "Bej nje foto",
+            "photoInstruction": "Nëse personi që skanon kodin tuaj QR është para jush, merrni një fotografi prej tyre",
+            "to": "Për: {{Stream Title}}",
+            "go": "shkoj",
+            "title": "ftoj",
+            "placeholder": "Numri i celularit ose adresa e postës elektronike",
+            "orInvite": "Ose ftoj njerëzit duke përdorur:",
+            "QR": "{{ClickOrTap}} për të gjeneruar kodin QR",
+            "QRtitle": "Skano këtë QR kod",
+            "byEmail": "Email",
+            "byText": "tekst",
+            "byFacebook": "Facebook",
+            "byTwitter": "Cicëroj",
+            "QRscanned": "Ata e skanuan atë!",
+            "chooseAgainFromContacts": "Zgjidhni përsëri nga Kontaktet",
+            "inviteSelectedContacts": "Fto kontaktet e zgjedhura"
+        },
+        "email": {
+            "subject": "Hej, shiko këtë",
+            "PleaseVisitLink": "Ju lutemi vizitoni lidhjen e mëposhtme:",
+            "InvitingYou": "Unë jam duke ju ftuar për të {{title}}",
+            "HasInvitedYou": "{{displayName}} ju ka ftuar për të {{title}}"
+        },
+        "sms": {
+            "content": "Ju jeni ftuar për {{title}}. Përzgjidhni {{url}}"
+        },
+        "notice": {
+            "text": "Ju keni qenë të ftuar. {{ClickOrTap}} këtu për të pranuar dhe për t&#39;u bashkuar."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} ka postuar një <em>{{message.fields.type}}</em> mesazhe për {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} në {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Ftesat janë dërguar nga numri ynë, të cilin miqtë tuaj ende nuk e njohin. Ndiqni me një tekst të shpejtë për t&#39;u bërë të ditur se ftesa erdhi nga ju, duke u kërkuar atyre të klikonin lidhjen.",
+            "confirm": "Ftesat janë dërguar nga numri ynë, të cilin miqtë tuaj ende nuk e njohin. Do të dëshironit të përcillni me një tekst të shpejtë për t&#39;u bërë të ditur se ftesa erdhi nga ju, duke u kërkuar atyre të klikonin lidhjen.",
+            "check": "Hej, sapo kam dërguar një ftesë në aplikacionin {{app}}. Ju lutemi kontrolloni sms-in tuaj dhe klikoni lidhjen!"
+        },
+        "email": {
+            "alert": "Ftesat dërgohen nga domenin tonë, të cilin miqtë tuaj ende nuk e njohin. Ndiqni me një tekst të shpejtë për t&#39;u bërë të ditur se ftesa erdhi nga ju, duke u kërkuar atyre të klikonin lidhjen.",
+            "confirm": "Ftesat dërgohen nga domenin tonë, të cilin miqtë tuaj ende nuk e njohin. Do të dëshironit të përcillni me një tekst të shpejtë për t&#39;u bërë të ditur se ftesa erdhi nga ju, duke u kërkuar atyre të klikonin lidhjen.",
+            "subject": "A keni marrë një ftesë?",
+            "body": "Hej, sapo kam dërguar një ftesë në aplikacionin {{app}}. Ju lutemi kontrolloni email-in tuaj dhe klikoni lidhjen atje!"
+        }
+    },
+    "participating": {
+        "Title": "titull",
+        "Subscribed": "regjistruar",
+        "Participants": "pjesëmarrësit"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Aktivizo mikrofonin",
+            "cameraTitle": "Aktivizo kamerën",
+            "cameraAndMicrophoneTitle": "Aktivizo kamerën dhe mikrofonin",
+            "dialogTitle": "Mundësimi i Dialogut",
+            "microphoneBtn": "Aktivizoni mikrofonin",
+            "cameraBtn": "Aktivizo kamerën",
+            "cameraAndMicrophoneBtn": "Aktivizo kamerën dhe mikrofonin"
+        }
+    }
+}

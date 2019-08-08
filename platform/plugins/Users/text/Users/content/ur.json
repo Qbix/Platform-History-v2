@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "میں لاگ ان کریں",
+        "LogOut": "لاگ آوٹ"
+    },
+    "activate": {
+        "SetAsPrimary": "{{1}} کو اپنے بنیادی {{2}} کے طور پر مقرر کریں",
+        "ChoosePassPhrase": "لاگ ان کرنے کے لئے ایک <strong>پاس ورڈ کا<\/strong> انتخاب کریں. <br> ایک سادہ فقرہ جس میں چند الفاظ شامل ہیں جنہیں آپ آسانی سے یاد رکھیں گے.",
+        "ChoosePassPhraseSeeSuggestions": "اپنے اکاؤنٹ کی حفاظت کے لئے ایک اچھا <strong>پاس ورڈ<\/strong> منتخب کریں. کچھ خیالات کے بارے میں مشورہ دیکھیں.",
+        "LogOutAndTryAgain": "لاگ آؤٹ کریں اور دوبارہ کوشش کریں",
+        "IfYouFeel": "اگر آپ محسوس کرتے ہیں کہ کچھ غلط ہوا تو آپ کر سکتے ہیں",
+        "SetIdentifierButtonTitle": "پھر سے شروع"
+    },
+    "session": {
+        "GetStarted": "شروع کرنے کے"
+    },
+    "authorize": {
+        "GetStarted": "شروع کرنے کے",
+        "Authorize": "اختیار",
+        "TermsLabel": "میں نے پڑھا اور اتفاق کیا ہے <br> {{link}}",
+        "TermsTitle": "شرائط"
+    },
+    "register": {
+        "TermsLabel": "میں {{link}} قبول کرتا ہوں",
+        "TermsTitle": "شرائط"
+    },
+    "notifications": {
+        "title": "اجازت",
+        "prompt": "کیا آپ اطلاعات کو فعال کرنا چاہتے ہیں؟ آپ ان چیزوں کے بارے میں اصل وقت کی اپ ڈیٹس وصول کریں گے جنہیں آپ دیکھتے ہیں.",
+        "yes": "جی ہاں",
+        "no": "نہیں",
+        "WelcomePleaseVerifyEmail": "خوش آمدید! براہ کرم اپنے ای میل ایڈریس کی توثیق کریں.",
+        "WelcomeVerifyEmail": "خوش آمدید! اپنا ای میل ایڈریس کی تصدیق کریں.",
+        "ForgetPass": "ارے، کیا آپ اپنا پاس ورڈ بھول گئے؟"
+    },
+    "usersContacts": {
+        "selectLabel": "براہ کرم لیبل منتخب کریں.",
+        "inviteUser": "صارف کو مدعو کریں"
+    },
+    "invalidLanguageSelected": "غلط زبان منتخب",
+    "contacts": {
+        "dialog": {
+            "title": "رابطہ منتخب کریں"
+        },
+        "select": {
+            "title": "{{displayName}} کا رابطہ منتخب کریں"
+        }
+    }
+}

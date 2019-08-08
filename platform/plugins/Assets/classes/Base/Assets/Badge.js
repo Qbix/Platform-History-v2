@@ -385,7 +385,7 @@ Base.prototype.beforeSet_name = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".name");
-		if (typeof value === "string" && value.length > 255)
+		if (typeof value === "string" && value.length > 63)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".name");
 		return value;
 };
@@ -396,7 +396,7 @@ Base.prototype.beforeSet_name = function (value) {
 	 */
 Base.prototype.maxSize_name = function () {
 
-		return 255;
+		return 63;
 };
 
 	/**
@@ -405,7 +405,7 @@ Base.prototype.maxSize_name = function () {
 	 */
 Base.column_name = function () {
 
-return [["varchar","255","",false],false,"PRI",null];
+return [["varchar","63","",false],false,"PRI",null];
 };
 
 /**

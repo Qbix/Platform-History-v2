@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "הקש כדי לשלם"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: החיוב בוצע עבור {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "תודה על התשלום שלך ל- {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} נרשם ל- {{plan.title}}",
+        "YouSubscribedTo": "נרשמת ל- {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "מידע על הזמנה",
+        "PaymentMethod": "אמצעי תשלום",
+        "ContactInfo": "פרטים ליצירת קשר",
+        "Pay": "שלם"
+    },
+    "credits": {
+        "InviteAcceptedBy": "הזמן את ההזמנה על ידי {{1}}",
+        "YouHaveCreditsToStart": "יש לך {{1}} זיכויים כדי להתחיל"
+    },
+    "history": {
+        "Date": "תאריך",
+        "Amount": "כמות",
+        "Description": "תיאור",
+        "Client": "לקוח",
+        "To": "ל",
+        "From": "מ",
+        "HistoryEmpty": "אין לך עדיין נתונים"
+    },
+    "subscriptions": {
+        "infoTitle": "הגדר פרטי תשלום",
+        "confirm": {
+            "title": "התחל מנוי",
+            "message": "האם תרצה להירשם ל {{title}}?",
+            "ok": "בסדר",
+            "cancel": "בטל"
+        }
+    },
+    "payments": {
+        "infoTitle": "הגדר פרטי תשלום",
+        "confirm": {
+            "title": "לבצע תשלום",
+            "message": "האם אתה מסכים לשלם {{symbol}} {{amount}}?",
+            "ok": "בסדר",
+            "cancel": "בטל"
+        }
+    }
+}

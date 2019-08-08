@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Njehie {{status}} n&#39;oge arịrịọ",
+        "canceled": "Arịrịọ kagburu",
+        "500": "Mperi Sava Ime",
+        "404": "Achọghị: {{url}}",
+        "501": "Arịrịọ amachibidoro"
+    },
+    "nonce": {
+        "sameDomain": "Oge gwụchara. Tinyegharịa peeji nke ma gbalịa ọzọ.",
+        "otherDomain": "Ngalaba a na-agbanye na mpaghara cross-domain ka ọ bụrụ mba {{baseUrl}}"
+    },
+    "words": {
+        "tap": "kpatụ",
+        "click": "pịa",
+        "yes": "ee",
+        "no": "Ee e",
+        "Tap": "Pịa",
+        "Click": "Pịa",
+        "Yes": "Ee",
+        "No": "Ee e"
+    },
+    "months": {
+        "1": "Jenụwarị",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "Ike",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Biko nye ohere ịnweta igwe okwu gị",
+        "record": "Dekọọ",
+        "recording": "Ịdekọ",
+        "remains": "anọgide",
+        "maximum": "oke",
+        "playing": "Na-egwu egwu",
+        "recorded": "E dekọrọ",
+        "clip": "clip",
+        "orupload": "Ma ọ bụ bulite",
+        "usethis": "Jiri nke a",
+        "discard": "Ntufu",
+        "encoding": "Ngbanwe"
+    },
+    "alert": {
+        "title": "Aka"
+    },
+    "confirm": {
+        "title": "Kwenye",
+        "ok": "Ee",
+        "cancel": "Ee e"
+    },
+    "prompt": {
+        "title": "Mee ngwa ngwa",
+        "ok": "Gaa"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Ejighi ede faịlụ",
+        "cameraCommands": {
+            "prompt": "Kedu ihe ị ga - achọ ime?",
+            "photo": "Were foto ọhụrụ",
+            "library": "Họrọ site na ọbá akwụkwọ"
+        },
+        "tooSmall": "Biko họrọ nnukwu ihe oyiyi.",
+        "cropping": {
+            "title": "Gbanwee nha na ọkwa",
+            "touchscreen": "Jiri mkpịsị aka gị mee ka ịbịgharịa na dọrọ",
+            "notTouchscreen": "Jiri ntan &amp; ugboelu gị ka ịbịgharịa na dọrọ"
+        }
+    }
+}

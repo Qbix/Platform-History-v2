@@ -1,12 +1,22 @@
 <?php
 
 function Streams_after_Q_objects () {
-	$user = Users::loggedInUser();
-	if (!$user) return;
 	$invite = Streams::$followedInvite;
-	if (!$invite) return;
-	$displayName = $user->displayName(array('show' => 'flu'));
-	$showDialog = !$displayName;
+	if (!$invite) {
+		return;
+	}
+	$nameIsMissing = true;
+	if ($user = Users::loggedInUser()) {
+		$displayName = $user->displayName(array('show' => 'flu'));
+		$showDialog = !$displayName;	
+		$avatar = Streams_Avatar::fetch($user->id, $user->id);
+		if (Q::ifset($avatar, 'username', null) || Q::ifset($avatar, 'firstName', null) || Q::ifset($avatar, 'lastName', null)) {
+			$nameIsMissing = false;
+		}
+	} else {
+		$displayName = '';
+		$showDialog = true;
+	}
 	
 	$p = compact('user', 'invite', 'displayName');
 	Q::event('Streams/inviteDialog', $p, 'before', false, $showDialog);
@@ -26,24 +36,27 @@ function Streams_after_Q_objects () {
 
 	// Prepare the complete invite dialog
 	$invitingUser = Users_User::fetch($invite->invitingUserId);
-	list($relations, $related) = Streams::related(
-		$user->id,
-		$stream->publisherId,
-		$stream->name,
-		false
-	);
-	
+	if ($user) {
+		list($relations, $related) = Streams::related(
+			$user->id,
+			$stream->publisherId,
+			$stream->name,
+			false
+		);
+	}
+
 	$templateName = Streams_Stream::getConfigField(
 		$stream->type,
-		array('invite', 'dialog', 'templateName'),
-		'Streams/invite/complete'
+		array('invited', 'dialog', 'templateName'),
+		'Streams/invited/complete'
 	);
 	$params = array(
 		'displayName' => $displayName,
+		'nameIsMissing' => $nameIsMissing,
 		'action' => 'Streams/basic',
-		'icon' => $user->iconUrl(),
+		'icon' => $user && $user->iconUrl(),
 		'token' => $invite->token,
-		'user' => array(
+		'invitingUser' => array(
 			'icon' => $invitingUser->iconUrl(),
 			'displayName' => $invitingUser->displayName(array(
 				'fullAccess' => true,
@@ -52,8 +65,8 @@ function Streams_after_Q_objects () {
 		),
 		'templateName' => $templateName,
 		'stream' => $stream->exportArray(),
-		'relations' => Db::exportArray($relations),
-		'related' => Db::exportArray($related)
+		'relations' => !empty($relations) ? Db::exportArray($relations) : array(),
+		'related' => !empty($related) ? Db::exportArray($related) : array()
 	);
 
 	$config = Streams_Stream::getConfigField($stream->type, 'invite', array());
@@ -62,7 +75,7 @@ function Streams_after_Q_objects () {
 	if ($tree->merge($params)) {
 		$dialogData = $tree->getAll();
 		if ($dialogData) {
-			Q_Response::setScriptData('Q.plugins.Streams.invite.dialog', $dialogData);
+			Q_Response::setScriptData('Q.plugins.Streams.invited.dialog', $dialogData);
 			Q_Response::addTemplate($templateName);
 		}
 	}

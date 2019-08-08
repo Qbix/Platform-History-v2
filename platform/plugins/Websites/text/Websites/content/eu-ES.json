@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Sustatzeko esteka",
+                "startDate": "Hasiera data",
+                "startTime": "Hasi ordua",
+                "endDate": "Amaiera data",
+                "endTime": "Amaierako ordua",
+                "budget": "Aurrekontua"
+            },
+            "interests": {
+                "Title": "Iragazi interesak",
+                "FilterInterests": "Interes bat idazten hasi ..."
+            },
+            "Interest": "Interes",
+            "Location": "Kokalekua"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "joan",
+            "PasteLinkHere": "Itsatsi esteka hemen",
+            "BrowseTheWeb": "arakatu",
+            "WriteToStartConversation": "Idatzi zure pentsamenduak elkarrizketa hasteko",
+            "StartConversation": "Hasi elkarrizketa",
+            "GotoConversation": "Joan hizketaldia"
+        }
+    }
+}

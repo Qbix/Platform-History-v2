@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "বেতন দিতে আলতো চাপুন"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} এর জন্য প্রক্রিয়াকৃত চার্জ",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} এ আপনার প্রদানের জন্য আপনাকে ধন্যবাদ",
+        "SubscribedTo": "{{call 'user.displayName'}} সাবস্ক্রাইব {{plan.title}}",
+        "YouSubscribedTo": "আপনি {{plan.title}} সাবস্ক্রাইব করেছেন"
+    },
+    "payment": {
+        "AboutOrder": "আদেশ সম্পর্কে তথ্য",
+        "PaymentMethod": "মূল্যপরিশোধ পদ্ধতি",
+        "ContactInfo": "যোগাযোগের তথ্য",
+        "Pay": "বেতন"
+    },
+    "credits": {
+        "InviteAcceptedBy": "আমন্ত্রিত আমন্ত্রণ {{1}}",
+        "YouHaveCreditsToStart": "আপনার {{1}} ক্রেডিট শুরু করার আছে"
+    },
+    "history": {
+        "Date": "তারিখ",
+        "Amount": "পরিমাণ",
+        "Description": "বিবরণ",
+        "Client": "মক্কেল",
+        "To": "থেকে",
+        "From": "থেকে",
+        "HistoryEmpty": "আপনার কাছে এখনও কোনও ডেটা নেই"
+    },
+    "subscriptions": {
+        "infoTitle": "অর্থ প্রদানের তথ্য সেট করুন",
+        "confirm": {
+            "title": "সাবস্ক্রিপশন শুরু করুন",
+            "message": "আপনি কি {{999} to সাবস্ক্রাইব করতে চান?",
+            "ok": "ঠিক আছে",
+            "cancel": "বাতিল"
+        }
+    },
+    "payments": {
+        "infoTitle": "অর্থ প্রদানের তথ্য সেট করুন",
+        "confirm": {
+            "title": "মূল্য পরিশোধ কর",
+            "message": "আপনি কি pay {999}} {{1000} pay দিতে সম্মত হন?",
+            "ok": "ঠিক আছে",
+            "cancel": "বাতিল"
+        }
+    }
+}

@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "نئی چیز"
+    },
+    "labels": {
+        "Streams/invited": "میں نے مدعو کیا",
+        "Streams/invitedMe": "کون نے مجھے مدعو کیا"
+    },
+    "interests": {
+        "Filter": "تم کیا لطف اندوز ہو",
+        "CanAdd": "اگر آپ ابھی تک تلاش نہیں کرسکتے ہیں، آپ ذیل میں ایک نئی دلچسپی شامل کرسکتے ہیں:",
+        "TrySynonyms": "یہ نہیں دیکھا؟ کچھ متفقہ کوشش کریں.",
+        "AddUnderCategory": "زمرے کے تحت شامل کریں ...",
+        "Other": "دیگر",
+        "Unlisted": "غیر فہرست شدہ"
+    },
+    "chat": {
+        "flaggedForAdminReview": "منتظم جائزہ لینے کے لئے پیغام پرچم لگایا گیا ہے. غیر منحصر کرنے کے لئے دوبارہ ٹیپ کریں.",
+        "noOneSaid": "کسی نے کچھ نہیں کہا ہے",
+        "closeChatButton": "چیٹ بند کریں",
+        "closeChatConfirmTitle": "اس چیٹ کو بند کرو؟",
+        "closeChatConfirm": "کیا آپ واقعی یہ چیٹ بند کرنا چاہتے ہیں؟",
+        "closeChatConfirmYes": "جی ہاں",
+        "closeChatConfirmNo": "نہیں",
+        "earlierComments": "پہلے تبصرے",
+        "Subscribed": "نوٹیفیکیشن خاموش کریں۔",
+        "Unsubscribed": "اطلاعات حاصل کریں۔",
+        "dontHavePermissionJoinConversation": "آپ کو اس گفتگو میں شامل ہونے کی اجازت نہیں ہے۔",
+        "startedConversation": "گفتگو شروع کی۔",
+        "RealTimeCall": "ریئل ٹائم کال"
+    },
+    "notifications": {
+        "*": "پیغام {{& message.fields.type}} {{& stream.fields.title}} تک",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} نے کہا:",
+        "Streams/changed": "{9 9}} میں تبدیلی",
+        "Streams/invite": "آپ {{& stream.fields.title}} کو مدعو کیا گیا تھا",
+        "Streams/announcement": "{{& streams.fields.title}} میں اعلان",
+        "Streams/access": "{999}} سلسلہ تک رسائی تبدیل ہوگئی",
+        "Streams/chat/edit": "چیٹ پیغام میں ترمیم",
+        "Streams/chat/remove": "چیٹ پیغام ہٹا دیا گیا",
+        "Streams/closed": "{{stream.fields.title}} بند کر دیا گیا ہے",
+        "Streams/task/progress": "{9 9}} پر تیار کی گئی",
+        "Streams/task/complete": "ٹاسک مکمل ہوگیا: {{stream.fields.title}}",
+        "Streams/task/error": "دوران غلطی: {{stream.fields.title}}",
+        "Streams/incoming/*": "{999}}: آنے والے پیغام",
+        "ManageEmailSubscriptions": "اپنا ای میل سبسکرائب کریں",
+        "IfUnsubscribe": "اگر آپ سبسکرائب کرنا چاہتے ہیں"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} آپ کو {{inviteUrl}} میں مدعو کیا",
+        "dialog": {
+            "chooseFromContacts": "اپنے رابطوں سے منتخب کریں",
+            "selectFromContacts": "رابطوں سے منتخب کریں",
+            "photo": "تصویر اتارو",
+            "photoInstruction": "اگر آپ کے QR کوڈ کو اسکین کرنے والے شخص آپ کے سامنے ہے تو ان کی تصویر لیں",
+            "to": ": {{Stream Title}}",
+            "go": "جاؤ",
+            "title": "مدعو کریں",
+            "placeholder": "موبائل نمبر یا ای میل ایڈریس",
+            "orInvite": "یا استعمال کرکے لوگوں کو مدعو کریں:",
+            "QR": "QR کوڈ پیدا کرنے کے لئے {{ClickOrTap}}",
+            "QRtitle": "اس QR کوڈ کو اسکین کریں",
+            "byEmail": "ای میل",
+            "byText": "متن",
+            "byFacebook": "فیس بک",
+            "byTwitter": "ٹویٹر",
+            "QRscanned": "انہوں نے اسے سکین کیا!",
+            "chooseAgainFromContacts": "رابطہ سے دوبارہ منتخب کریں",
+            "inviteSelectedContacts": "منتخب رابطوں کو مدعو کریں"
+        },
+        "email": {
+            "subject": "ارے، اسے چیک کرو",
+            "PleaseVisitLink": "مندرجہ ذیل لنک ملاحظہ کریں:",
+            "InvitingYou": "میں آپ کو {{title}} میں مدعو کر رہا ہوں",
+            "HasInvitedYou": "{{displayName}} نے آپ {{title}} کو مدعو کیا ہے"
+        },
+        "sms": {
+            "content": "آپ {{title}} کو مدعو کیا گیا ہے. برائے کرم {{url}}"
+        },
+        "notice": {
+            "text": "آپ کو مدعو کیا گیا ہے. {{ClickOrTap}} یہاں قبول اور شامل ہونے کے لئے یہاں."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} نے ایک <em>{{message.fields.type}}</em> پیغام {{stream.fields.title}} کو پوسٹ کیا"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} میں {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "مدعو ہمارے نمبر سے بھیجے جاتے ہیں، جو آپ کے دوست ابھی تک تسلیم نہیں کرتے ہیں. ایک فوری ٹیکسٹ کے ساتھ عمل کریں کہ وہ ان سے رابطہ کریں جو آپ سے آتے ہیں انہیں بتائیں کہ لنک پر کلک کرنے کے لئے پوچھیں.",
+            "confirm": "مدعو ہمارے نمبر سے بھیجے جاتے ہیں، جو آپ کے دوست ابھی تک تسلیم نہیں کرتے ہیں. کیا آپ ایک فوری ٹیکسٹ کے ساتھ عمل کرنا چاہیں گے کہ انہیں بتائیں کہ دعوت نامہ آپ سے آیا ہے، اور وہ لنک پر کلک کرنے کے لئے پوچھتے ہیں.",
+            "check": "ارے، میں نے صرف آپ {{app}} اپلی کیشن میں ایک دعوت نامہ بھیجی ہے. براہ کرم اپنا ایس ایم ایس چیک کریں اور لنک پر کلک کریں!"
+        },
+        "email": {
+            "alert": "مدعو ہمارے ڈومین سے بھیجی جاتی ہیں، جو آپ کے دوست ابھی تک تسلیم نہیں کرتے ہیں. ایک فوری ٹیکسٹ کے ساتھ عمل کریں کہ وہ ان سے رابطہ کریں جو آپ سے آتے ہیں انہیں بتائیں کہ لنک پر کلک کرنے کے لئے پوچھیں.",
+            "confirm": "مدعو ہمارے ڈومین سے بھیجی جاتی ہیں، جو آپ کے دوست ابھی تک تسلیم نہیں کرتے ہیں. کیا آپ ایک فوری ٹیکسٹ کے ساتھ عمل کرنا چاہیں گے کہ انہیں بتائیں کہ دعوت نامہ آپ سے آیا ہے، اور وہ لنک پر کلک کرنے کے لئے پوچھتے ہیں.",
+            "subject": "کیا آپ نے مدعو کیا؟",
+            "body": "ارے، میں نے صرف آپ {{app}} اپلی کیشن میں ایک دعوت نامہ بھیجی ہے. براہ کرم اپنا ای میل چیک کریں اور اس لنک پر کلک کریں!"
+        }
+    },
+    "participating": {
+        "Title": "عنوان",
+        "Subscribed": "سبسکرائب",
+        "Participants": "امیدوار"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "مائیکروفون کو فعال کریں",
+            "cameraTitle": "کیمرے کو فعال کریں",
+            "cameraAndMicrophoneTitle": "کیمرے اور مائیکروفون کو فعال کریں",
+            "dialogTitle": "مکالمہ کو فعال کرنا۔",
+            "microphoneBtn": "مائکروفون کو فعال کریں۔",
+            "cameraBtn": "کیمرہ کو فعال کریں۔",
+            "cameraAndMicrophoneBtn": "کیمرا اور مائکروفون کو فعال کریں۔"
+        }
+    }
+}

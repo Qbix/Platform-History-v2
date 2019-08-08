@@ -12,11 +12,6 @@ class Q_Translate_Google {
 		list($fromLang, $locale) = preg_split("/(_|-)/", $this->parent->options['source']);
 		$in = $this->parent->getSrc($fromLang, $locale, true);
 		foreach ($this->parent->locales as $toLang => $localeNames) {
-			if (!empty($this->parent->options['in']) && !empty($this->parent->options['out'])) {
-				if (($fromLang == $toLang) && ($this->parent->options['in'] === $this->parent->options['out'])) {
-					continue;
-				}
-			}
 			if (($toLang === $fromLang) && $this->parent->options['out']) {
 				$res = $in;
 			}
@@ -25,16 +20,41 @@ class Q_Translate_Google {
 				echo "Processing $fromLang->$toLang".PHP_EOL;
 				$res = $this->translate($fromLang, $toLang, $in, $out);
 			}
-			$files = $this->saveJson($toLang, $res);
-			foreach ($localeNames as $localeName) {
-				foreach ($files as $file) {
-					copy($file, dirname($file) . DS . $toLang . '-' . $localeName . '.json');
+			$this->saveJson($toLang, $res, $jsonFiles);
+			if (!empty($this->parent->options['in']) && !empty($this->parent->options['out'])) {
+				if (($fromLang == $toLang)
+					&& ($this->parent->options['in'] === $this->parent->options['out'])) {
+					foreach ($localeNames as $localeName) {
+						$this->saveLocale($toLang, $localeName, $res, $jsonFiles);
+					}
+					continue;
 				}
+			}
+			foreach ($localeNames as $localeName) {
+				$this->saveLocale($toLang, $localeName, $res, $jsonFiles);
+			}
+		}
+	}
+	
+	private function saveLocale($lang, $locale, $res, $jsonFiles)
+	{
+		foreach ($jsonFiles as $dirname => $content) {
+			$directory = $this->parent->createDirectory($dirname);
+			$langFile = $directory . DS . "$lang.json";
+			$localeFile = $directory . DS . "$lang-$locale.json";
+			if (file_exists($localeFile)) {
+				$arr = $content;
+				$tree = new Q_Tree();
+				$tree->load($localeFile);
+				$tree->merge($arr);
+				$tree->save($localeFile, array(), null, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+			} else {
+				copy($langFile, $localeFile);
 			}
 		}
 	}
 
-	private function saveJson($lang, $data)
+	private function saveJson($lang, $data, &$jsonFiles)
 	{
 		$jsonFiles = array();
 		foreach ($data as $d) {
@@ -44,7 +64,8 @@ class Q_Translate_Google {
 				$arr = array();
 			}
 			array_push($d['key'], $d['value']);
-			$jsonFiles[$dirname] = array_merge_recursive($arr, $this->parent->arrayToBranch($d['key']));
+			$tree = new Q_Tree($arr);
+			$tree->merge($this->parent->arrayToBranch($d['key']));
 		}
 		$filenames = array();
 		foreach ($jsonFiles as $dirname => $content) {
@@ -139,7 +160,7 @@ class Q_Translate_Google {
 			}
 			if ($response['error']) {
 				$more = "Make sure you have Q/translate/google/key specified.";
-				throw new Q_Exception($response['error']['message'] . $more);
+				throw new Q_Exception($response['error']['message'] . ' ' . $more);
 			}
 			$count += sizeof($chunk);
 			echo "Translated " . $count . " queries of " . $toLang . "\n";

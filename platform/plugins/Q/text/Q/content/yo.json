@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Aṣiṣe {{status}} nigba ìbéèrè",
+        "canceled": "Bere fagile",
+        "500": "Asa",
+        "404": "A ko ri: {{url}}",
+        "501": "Bere fun idilọwọ"
+    },
+    "nonce": {
+        "sameDomain": "Igbin naa pari. Tun oju-iwe naa pada ki o tun gbiyanju lẹẹkansi.",
+        "otherDomain": "Agbegbe agbelebu-ašẹ-ašẹ si ilẹ ajeji ni {{baseUrl}}"
+    },
+    "words": {
+        "tap": "tẹ ni kia kia",
+        "click": "tẹ",
+        "yes": "bẹẹni",
+        "no": "rara",
+        "Tap": "Tẹ ni kia kia",
+        "Click": "Tẹ",
+        "Yes": "Bẹẹni",
+        "No": "Rara"
+    },
+    "months": {
+        "1": "January",
+        "2": "Kínní",
+        "3": "Oṣù",
+        "4": "Kẹrin",
+        "5": "Ṣe",
+        "6": "Okudu",
+        "7": "Keje",
+        "8": "Oṣù Kẹjọ",
+        "9": "Oṣu Kẹsan",
+        "10": "Oṣu Kẹwa",
+        "11": "Kọkànlá Oṣù",
+        "12": "Oṣù Kejìlá"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Jowo gba wiwọle si gbohungbohun rẹ",
+        "record": "Gba silẹ",
+        "recording": "Gbigbasilẹ",
+        "remains": "maa wa",
+        "maximum": "o pọju",
+        "playing": "Ti n ṣiṣẹ",
+        "recorded": "Ti gba silẹ",
+        "clip": "agekuru",
+        "orupload": "Tabi gberanṣẹ",
+        "usethis": "Lo Eleyi",
+        "discard": "Ṣabọ",
+        "encoding": "Iyipada"
+    },
+    "alert": {
+        "title": "Itaniji"
+    },
+    "confirm": {
+        "title": "Jẹrisi",
+        "ok": "Bẹẹni",
+        "cancel": "Rara"
+    },
+    "prompt": {
+        "title": "Gbigbe",
+        "ok": "Lọ"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Faili kika faili",
+        "cameraCommands": {
+            "prompt": "Kí l&#39;ó wù ẹ láti ṣe?",
+            "photo": "Ya fọto titun",
+            "library": "Yan lati inu iwe-ikawe"
+        },
+        "tooSmall": "Jọwọ yan aworan ti o tobi.",
+        "cropping": {
+            "title": "Ṣatunṣe iwọn ati ipo",
+            "touchscreen": "Lo awọn ika rẹ lati sun-un ati fa",
+            "notTouchscreen": "Lo asin &amp; kẹkẹ rẹ lati sun-un ati fa"
+        }
+    }
+}

@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "banye",
+        "LogOut": "abanye"
+    },
+    "activate": {
+        "SetAsPrimary": "Setị {{1}} dị ka isi m {{2}}",
+        "ChoosePassPhrase": "Họrọ <strong>ahịrịokwu ahịrị<\/strong> iji abanye na. <br> Okwu ahịrịokwu dị mfe nke gụnyere okwu ole na ole ị ga-echeta ngwa ngwa.",
+        "ChoosePassPhraseSeeSuggestions": "Họrọ <strong>ahịrịokwu dị mma<\/strong> iji kpuchie akaụntụ gị. Lee aro maka ụfọdụ echiche.",
+        "LogOutAndTryAgain": "Gbanye ma gbalịa ọzọ",
+        "IfYouFeel": "Ọ bụrụ na ị chere na ọ dị njọ, i nwere ike",
+        "SetIdentifierButtonTitle": "malite"
+    },
+    "session": {
+        "GetStarted": "Malite"
+    },
+    "authorize": {
+        "GetStarted": "Malite",
+        "Authorize": "Kwenye",
+        "TermsLabel": "Agụrụ m ma kwenye <br> na {{link}}",
+        "TermsTitle": "Usoro"
+    },
+    "register": {
+        "TermsLabel": "Ana m anabata {{link}}",
+        "TermsTitle": "Usoro"
+    },
+    "notifications": {
+        "title": "Nkwekọrịta",
+        "prompt": "Ịchọrọ ime ka ịmara ọkwa? Ị ga-enweta mmelite ozugbo banyere ihe ị na-eche banyere.",
+        "yes": "Ee",
+        "no": "Ee e",
+        "WelcomePleaseVerifyEmail": "Nabata! Biko nyochaa adreesị email gị.",
+        "WelcomeVerifyEmail": "Nabata! Chọpụta adreesị email gị.",
+        "ForgetPass": "Hey, ị chefuola paspọsọ gị?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Họrọ kọntaktị"
+        },
+        "select": {
+            "title": "Họrọ nchọta nke {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Biko họrọ akara ngosi.",
+        "inviteUser": "Onye na-enyocha Onye ọrụ"
+    },
+    "invalidLanguageSelected": "Asụsụ a na-ejighị n&#39;aka họrọ"
+}

@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Ny vare"
+    },
+    "labels": {
+        "Streams/invited": "Folk jeg inviterede",
+        "Streams/invitedMe": "Hvem inviterede mig"
+    },
+    "interests": {
+        "Filter": "Hvad nyder du?",
+        "CanAdd": "Hvis du stadig ikke kan finde det, du leder efter, kan du tilføje en ny interesse nedenfor:",
+        "TrySynonyms": "Kan du ikke se det? Prøv nogle synonymer.",
+        "AddUnderCategory": "Tilføj under kategori ...",
+        "Other": "Andet",
+        "Unlisted": "Unoterede"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Meddelelsen er blevet markeret til admin review. Tryk igen til unflag.",
+        "noOneSaid": "Ingen har sagt noget",
+        "closeChatButton": "Luk chat",
+        "closeChatConfirmTitle": "Luk denne chat?",
+        "closeChatConfirm": "Er du sikker på, at du vil lukke denne chat?",
+        "closeChatConfirmYes": "Ja",
+        "closeChatConfirmNo": "Ingen",
+        "earlierComments": "tidligere kommentarer",
+        "Subscribed": "Lydløs meddelelser",
+        "Unsubscribed": "Få notifikationer",
+        "dontHavePermissionJoinConversation": "Du har ikke tilladelse til at deltage i denne samtale.",
+        "startedConversation": "startede en samtale",
+        "RealTimeCall": "Realtidsopkald"
+    },
+    "notifications": {
+        "*": "Meddelelse {{& message.fields.type}} til {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} sagde:",
+        "Streams/changed": "Ændringer i {{stream.fields.title}}",
+        "Streams/invite": "Du blev inviteret til {{& stream.fields.title}}",
+        "Streams/announcement": "Meddelelse i {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} ændret strømadgang",
+        "Streams/chat/edit": "Chat besked redigeret",
+        "Streams/chat/remove": "Chat besked fjernet",
+        "Streams/closed": "{{stream.fields.title}} er blevet lukket",
+        "Streams/task/progress": "Fremskridt lavet den {{stream.fields.title}}",
+        "Streams/task/complete": "Opgave udført: {{stream.fields.title}}",
+        "Streams/task/error": "Fejl under: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Indgående meddelelse",
+        "ManageEmailSubscriptions": "Administrer dine e-mail abonnementer",
+        "IfUnsubscribe": "Hvis du vil afmelde abonnementet"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} inviterede dig til {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Vælg fra dine kontakter",
+            "selectFromContacts": "Vælg Fra Kontakter",
+            "photo": "Tag et billede",
+            "photoInstruction": "Hvis den person, der scannede din QR-kode, er foran dig, skal du tage et billede af dem",
+            "to": "Til: {{Stream Title}}",
+            "go": "Gå",
+            "title": "Invitere",
+            "placeholder": "Mobilnummer eller e-mail-adresse",
+            "orInvite": "Eller invitere folk ved at bruge:",
+            "QR": "{{ClickOrTap}} for at generere QR-kode",
+            "QRtitle": "Scan denne QR kode",
+            "byEmail": "E-mail",
+            "byText": "Tekst",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "De scannede det!",
+            "chooseAgainFromContacts": "Vælg igen fra kontakter",
+            "inviteSelectedContacts": "Inviter valgte kontakter"
+        },
+        "email": {
+            "subject": "Hej, tjek dette ud",
+            "PleaseVisitLink": "Besøg venligst følgende link:",
+            "InvitingYou": "Jeg inviterer dig til {{title}}",
+            "HasInvitedYou": "{{displayName}} har inviteret dig til {{title}}"
+        },
+        "sms": {
+            "content": "Du er blevet inviteret til {{title}}. Tryk venligst på {{url}}"
+        },
+        "notice": {
+            "text": "Du er blevet inviteret. {{ClickOrTap}} her for at acceptere og deltage."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} sendte en <em>{{message.fields.type}}</em> besked til {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} i {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invitationer sendes fra vores nummer, som dine venner endnu ikke genkender. Følg med en hurtig tekst for at fortælle dem, at invitationen kom fra dig og bede dem om at klikke på linket.",
+            "confirm": "Invitationer sendes fra vores nummer, som dine venner endnu ikke genkender. Vil du følge med med en hurtig tekst for at fortælle dem, at invitationen kom fra dig, og bede dem om at klikke på linket.",
+            "check": "Hej, jeg har lige sendt dig en invitation til appen {{app}}. Tjek venligst dine sms og klik på linket!"
+        },
+        "email": {
+            "alert": "Invitationer sendes fra vores domæne, som dine venner endnu ikke genkender. Følg med en hurtig tekst for at fortælle dem, at invitationen kom fra dig og bede dem om at klikke på linket.",
+            "confirm": "Invitationer sendes fra vores domæne, som dine venner endnu ikke genkender. Vil du følge med med en hurtig tekst for at fortælle dem, at invitationen kom fra dig, og bede dem om at klikke på linket.",
+            "subject": "Fik du en invitation?",
+            "body": "Hej, jeg har lige sendt dig en invitation til appen {{app}}. Tjek venligst din email og klik på linket derinde!"
+        }
+    },
+    "participating": {
+        "Title": "Titel",
+        "Subscribed": "Abonneret",
+        "Participants": "Deltagere"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Aktivér mikrofon",
+            "cameraTitle": "Aktivér kamera",
+            "cameraAndMicrophoneTitle": "Aktivér kamera og mikrofon",
+            "dialogTitle": "Aktiverer dialog",
+            "microphoneBtn": "Aktivér mikrofon",
+            "cameraBtn": "Aktivér kamera",
+            "cameraAndMicrophoneBtn": "Aktivér kamera og mikrofon"
+        }
+    }
+}

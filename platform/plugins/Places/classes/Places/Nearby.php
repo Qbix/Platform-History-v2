@@ -71,7 +71,7 @@ class Places_Nearby
 
 		$metersArray = Q_Config::expect('Places', 'nearby', 'meters');
 		if (!in_array($meters, $metersArray)) {
-			throw new Q_Exception("The meters value needs to be in Places/nearby/meters config.");
+			throw new Q_Exception("The $meters meters value needs to be in Places/nearby/meters config.");
 		}
 		
 		$result = array();
@@ -159,7 +159,35 @@ class Places_Nearby
 		$streams = Places_Nearby::streams($publisherId, $latitude, $longitude, $options);
 		return Streams::subscribe($user->id, $publisherId, $streams, $options);
 	}
-	
+	/**
+	 * Call this function to join to streams on which messages are posted
+	 * related to things happening the given number of $meters around the given location.
+	 * @method join
+	 * @static
+	 * @param {string} $publisherId The id of the publisher publishing these streams.
+	 * @param {double} $latitude The latitude of the coordinates to subscribe around
+	 * @param {double} $longitude The longitude of the coordinates to subscribe around
+	 * @param {double} $meters The radius, in meters, around this location.
+	 *  Should be one of the array values in the Places/nearby/meters config.
+	 * @param {array} [$options=array()]
+	 *  The options to pass to the streams() and subscribe() functions
+	 * @return {Array} Returns an array of up to four arrays of ($publisherId, $streamName)
+	 *  of streams that were subscribed to.
+	 */
+	static function join(
+		$publisherId = null,
+		$latitude,
+		$longitude,
+		$meters,
+		$options = array())
+	{
+		$user = Users::loggedInUser(true);
+		$options['forSubscribers'] = true;
+		$options['meters'] = $meters;
+		$streams = Places_Nearby::streams($publisherId, $latitude, $longitude, $options);
+		return Streams::join($user->id, $publisherId, $streams, $options);
+	}
+
 	/**
 	 * Call this function to unsubscribe from streams you previously subscribed to
 	 * using Places_Nearby::subscribe.
@@ -328,8 +356,10 @@ class Places_Nearby
 		$lat = sprintf("%0.1f", $latitude);
 		$lng = sprintf("%0.1f", $longitude);
 		$content = Q_Text::get('Places/content', $options);
+		$placeName = Q::ifSet($postcode, "placeName", null);
+		$postCode = Q::ifSet($postcode, "postcode", null);
 		$postcodeLabel = Q::interpolate(
-			$content['nearby']['PostcodeLabel'], array($postcode->placeName, $postcode->postcode)
+			$content['nearby']['PostcodeLabel'], array($placeName, $postCode)
 		);
 		$latLng = Q::interpolate($content['LatLng'], array($lat, $lng));
 		$title = Q::interpolate(
@@ -421,7 +451,7 @@ class Places_Nearby
 	 * @param {string} $relationType The type of the relation
 	 * @param {integer} $fromTime A unix timestamp, in either seconds or milliseconds
 	 * @param {integer} $toTime A unix timestamp, in either seconds or milliseconds
-	 * @param {string} [$experienceId="main"] The id of a community experience, the last part of its stream name
+	 * @param {string} [$streamName="Streams/experience/main"] The stream name of a community experience
 	 * @param {array} [$options] Options to pass to Places_Nearby::related(). Also can contain:
 	 * @param {double} [$options.latitude] The latitude of the point to search around
 	 * @param {double} [$options.longitude] The longitude of the point to search around
@@ -435,7 +465,7 @@ class Places_Nearby
 		$relationType,
 		$fromTime, 
 		$toTime, 
-		$experienceId = 'main',
+		$streamName = "Streams/experience/main",
 		$options = array())
 	{
 		$fromTime = Q_Utils::timestamp($fromTime);
@@ -446,7 +476,7 @@ class Places_Nearby
 		if (!isset($latitude) or !isset($longitude) or !isset($meters)) {
 			$o = compact('weight');
 			return Streams_RelatedTo::fetchAll(
-				$publisherId, array("Streams/experience/$experienceId"), $relationType, $o
+				$publisherId, array($streamName), $relationType, $o
 			);
 		}
 		$categories = array('Places_Nearby', '_categories');

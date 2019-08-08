@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Nowy przedmiot"
+    },
+    "labels": {
+        "Streams\/invited": "Ludzie, których zaprosiłem",
+        "Streams\/invitedMe": "Kto mnie zaprosił"
+    },
+    "interests": {
+        "Filter": "Co lubisz?",
+        "CanAdd": "Jeśli nadal nie możesz znaleźć tego, czego szukasz, możesz dodać nowe zainteresowanie poniżej:",
+        "TrySynonyms": "Nie widzisz tego? Wypróbuj kilka synonimów.",
+        "AddUnderCategory": "Dodaj w kategorii ...",
+        "Other": "Inny",
+        "Unlisted": "Nie katalogowany"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Wiadomość została oflagowana do sprawdzenia przez administratora. Stuknij ponownie, aby odznaczyć.",
+        "noOneSaid": "Nikt nic nie powiedział",
+        "closeChatButton": "Zamknij czat",
+        "closeChatConfirmTitle": "Zamknij ten czat?",
+        "closeChatConfirm": "Czy na pewno chcesz zamknąć ten czat?",
+        "closeChatConfirmYes": "tak",
+        "closeChatConfirmNo": "Nie",
+        "earlierComments": "wcześniejsze komentarze",
+        "Subscribed": "Wycisz powiadomienia",
+        "Unsubscribed": "Dostawać powiadomienia",
+        "dontHavePermissionJoinConversation": "Nie masz uprawnień do dołączenia do tej rozmowy.",
+        "startedConversation": "rozpoczął rozmowę",
+        "RealTimeCall": "Połączenie w czasie rzeczywistym"
+    },
+    "notifications": {
+        "*": "Wiadomość {{& message.fields.type}} do {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} powiedział:",
+        "Streams\/changed": "Zmiany w {{stream.fields.title}}",
+        "Streams\/invite": "Zostałeś zaproszony na {{& stream.fields.title}}",
+        "Streams\/announcement": "Ogłoszenie w {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} zmienił dostęp do strumienia",
+        "Streams\/chat\/edit": "Edytowano wiadomość czatu",
+        "Streams\/chat\/remove": "Usunięto wiadomość czatu",
+        "Streams\/closed": "{{stream.fields.title}} został zamknięty",
+        "Streams\/task\/progress": "Postęp dokonany w {{stream.fields.title}}",
+        "Streams\/task\/complete": "Zadanie zakończone: {{stream.fields.title}}",
+        "Streams\/task\/error": "Błąd podczas: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Wiadomość przychodząca",
+        "ManageEmailSubscriptions": "zarządzaj subskrypcjami e-mail",
+        "IfUnsubscribe": "Jeśli chcesz się wypisać"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} zaprosił Cię na {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Wybierz ze swoich kontaktów",
+            "selectFromContacts": "Wybierz Z kontaktów",
+            "photo": "Robić zdjęcie",
+            "photoInstruction": "Jeśli osoba, która skanowała twój kod QR, jest przed tobą, zrób zdjęcie",
+            "to": "Do: {{Stream Title}}",
+            "go": "Udać się",
+            "title": "Zapraszam",
+            "placeholder": "Numer telefonu komórkowego lub adres e-mail",
+            "orInvite": "Lub zaproś ludzi, używając:",
+            "QR": "{{ClickOrTap}}, aby wygenerować kod QR",
+            "QRtitle": "Zeskanuj ten kod QR",
+            "byEmail": "E-mail",
+            "byText": "Tekst",
+            "byFacebook": "Facebook",
+            "byTwitter": "Świergot",
+            "QRscanned": "Zeskanowali to!",
+            "chooseAgainFromContacts": "Wybierz ponownie z kontaktów",
+            "inviteSelectedContacts": "Zaproś wybrane kontakty"
+        },
+        "email": {
+            "subject": "Hej, sprawdź to",
+            "PleaseVisitLink": "Odwiedź następujący link:",
+            "InvitingYou": "Zapraszam Cię na {{title}}",
+            "HasInvitedYou": "{{displayName}} zaprosił Cię na {{title}}"
+        },
+        "sms": {
+            "content": "Zostałeś zaproszony do {{title}}. Wybierz {{url}}"
+        },
+        "notice": {
+            "text": "Zostałeś zaproszony. {{ClickOrTap}} tutaj, aby zaakceptować i dołączyć."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} opublikował wiadomość <em>{{message.fields.type}}<\/em> na {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} w {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Zaproszenia są wysyłane z naszego numeru, którego Twoi znajomi jeszcze nie rozpoznają. Wykonaj szybki tekst, aby poinformować ich, że zaproszenie pochodzi od Ciebie, prosząc o kliknięcie linku.",
+            "confirm": "Zaproszenia są wysyłane z naszego numeru, którego Twoi znajomi jeszcze nie rozpoznają. Czy chcesz śledzić szybki tekst, aby poinformować ich, że zaproszenie pochodzi od Ciebie, prosząc o kliknięcie linku.",
+            "check": "Hej, właśnie wysłałem Ci zaproszenie do aplikacji {{app}}. Sprawdź swoje smsy i kliknij link!"
+        },
+        "email": {
+            "alert": "Zaproszenia są wysyłane z naszej domeny, której Twoi znajomi jeszcze nie rozpoznają. Wykonaj szybki tekst, aby poinformować ich, że zaproszenie pochodzi od Ciebie, prosząc ich o kliknięcie linku.",
+            "confirm": "Zaproszenia są wysyłane z naszej domeny, której Twoi znajomi jeszcze nie rozpoznają. Czy chcesz śledzić szybki tekst, aby poinformować ich, że zaproszenie pochodzi od Ciebie, prosząc o kliknięcie linku.",
+            "subject": "Czy dostałeś zaproszenie?",
+            "body": "Hej, właśnie wysłałem Ci zaproszenie do aplikacji {{app}}. Sprawdź swój adres e-mail i kliknij link tam!"
+        }
+    },
+    "participating": {
+        "Title": "Tytuł",
+        "Subscribed": "Subskrybowane",
+        "Participants": "Uczestnicy"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Włącz mikrofon",
+            "cameraTitle": "Włącz kamerę",
+            "cameraAndMicrophoneTitle": "Włącz kamerę i mikrofon",
+            "dialogTitle": "Włączanie okna dialogowego",
+            "microphoneBtn": "Włącz mikrofon",
+            "cameraBtn": "Włącz kamerę",
+            "cameraAndMicrophoneBtn": "Włącz kamerę i mikrofon"
+        }
+    }
+}

@@ -59,6 +59,9 @@ class Q_Exception extends Exception
 			: $className;
 		$code = isset($code) ? $code : 
 			(isset(self::$codes[$className]) ? self::$codes[$className] : 1);
+		$this->header = isset(self::$headers[$className])
+			? self::$headers[$className]
+			: 412; // our catch-all HTTP error code
 		parent::__construct($message, $code);
 	}
 	
@@ -126,6 +129,8 @@ class Q_Exception extends Exception
 	 * @param {string} $className The name of the exception class.
 	 * @param {string} $message The description of the error. Will be eval()-ed before rendering,
 	 *  so it can include references to parameters, such as $my_param.
+	 * @param {number|string} $header Any HTTP response code to set, such as 404,
+	 *  or a string header to set with ehader()
 	 * @param {array} [$rethrowDestClasses=array()] The name of the class that should handle this exception,
 	 * @param {string} [$baseClassName=null] Here you can pass the name of different base class than Q_Exception
 	 *  should it be thrown. Almost all catch() blocks in your code should use
@@ -135,12 +140,16 @@ class Q_Exception extends Exception
 	static function add(
 	 $className,
 	 $message,
+	 $header = null,
 	 $rethrowDestClasses = array(),
 	 $baseClassName = null)
 	{
 		if (is_string($rethrowDestClasses)) {
 			$baseClassName = $rethrowDestClasses;
 			$rethrowDestClasses = array();
+		}
+		if (isset($header)) {
+			self::$headers[$className] = $header;
 		}
 		static $exception_code = 10000;
 		++$exception_code; // TODO: improve this somehow
@@ -325,17 +334,17 @@ class Q_Exception extends Exception
 	
 	/**
 	 * @property $params
-	 * @protected
+	 * @public
 	 * @type array
 	 */
 	public $params = array();
 	/**
 	 * @property $inputFields
-	 * @protected
+	 * @public
 	 * @type array
 	 */
 	public $inputFields = array();
-	
+
 	/**
 	 * @property $codes
 	 * @protected
@@ -348,6 +357,12 @@ class Q_Exception extends Exception
 	 * @type array
 	 */
 	protected static $messages = array();
+	/**
+	 * @property $headers
+	 * @protected
+	 * @type array
+	 */
+	protected static $headers = array();
 	/**
 	 * @property $rethrowDestClasses
 	 * @protected

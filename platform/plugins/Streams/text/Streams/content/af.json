@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Nuwe item"
+    },
+    "labels": {
+        "Streams\/invited": "Mense wat ek genooi het",
+        "Streams\/invitedMe": "Wie het my genooi"
+    },
+    "interests": {
+        "Filter": "Wat geniet jy?",
+        "CanAdd": "As jy steeds nie kan kry wat jy soek nie, kan jy hieronder &#39;n nuwe belangstelling byvoeg:",
+        "TrySynonyms": "Sien dit nie? Probeer sommige sinonieme.",
+        "AddUnderCategory": "Voeg onder kategorie ... by",
+        "Other": "ander",
+        "Unlisted": "ongenoteerde"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Boodskap is gemerk vir admin review. Tik weer aan unflag.",
+        "noOneSaid": "Niemand het iets gesê nie",
+        "closeChatButton": "Sluit klets",
+        "closeChatConfirmTitle": "Sluit hierdie klets?",
+        "closeChatConfirm": "Is jy seker jy wil hierdie klets sluit?",
+        "closeChatConfirmYes": "Ja",
+        "closeChatConfirmNo": "Geen",
+        "earlierComments": "vorige kommentaar",
+        "Subscribed": "Demp kennisgewings",
+        "Unsubscribed": "Kry kennisgewings",
+        "dontHavePermissionJoinConversation": "U het nie toestemming om aan hierdie gesprek deel te neem nie.",
+        "startedConversation": "&#39;n gesprek begin",
+        "RealTimeCall": "Intydse oproep"
+    },
+    "notifications": {
+        "*": "Boodskap {{& message.fields.type}} na {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} het gesê:",
+        "Streams\/changed": "Wysigings in {{stream.fields.title}}",
+        "Streams\/invite": "U is genooi na {{& stream.fields.title}}",
+        "Streams\/announcement": "Aankondiging in {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} verander stroom toegang",
+        "Streams\/chat\/edit": "Kletsboodskap gewysig",
+        "Streams\/chat\/remove": "Kletsboodskap verwyder",
+        "Streams\/closed": "{{stream.fields.title}} is gesluit",
+        "Streams\/task\/progress": "Vordering gemaak op {{stream.fields.title}}",
+        "Streams\/task\/complete": "Taak voltooi: {{stream.fields.title}}",
+        "Streams\/task\/error": "Fout tydens: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Inkomende Boodskap",
+        "ManageEmailSubscriptions": "Bestuur jou e-pos intekeninge",
+        "IfUnsubscribe": "As jy wil uitteken"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} het jou genooi na {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Kies uit jou kontakte",
+            "selectFromContacts": "Kies Van Kontakte",
+            "photo": "Neem &#39;n foto",
+            "photoInstruction": "As die persoon wat jou QR-kode geskaam het voor jou is, neem &#39;n foto van hulle",
+            "to": "Aan: {{Stream Title}}",
+            "go": "Gaan",
+            "title": "nooi",
+            "placeholder": "Mobiele nommer of e-pos adres",
+            "orInvite": "Of nooi mense uit deur van:",
+            "QR": "{{ClickOrTap}} om QR-kode te genereer",
+            "QRtitle": "Scan hierdie QR-kode",
+            "byEmail": "e-pos",
+            "byText": "teks",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Hulle het dit geskandeer!",
+            "chooseAgainFromContacts": "Kies weer uit kontakte",
+            "inviteSelectedContacts": "Nooi geselekteerde kontakte uit"
+        },
+        "email": {
+            "subject": "Hey, check dit uit",
+            "PleaseVisitLink": "Besoek gerus die volgende skakel:",
+            "InvitingYou": "Ek nooi jou uit na {{title}}",
+            "HasInvitedYou": "{{displayName}} het jou genooi om {{title}}"
+        },
+        "sms": {
+            "content": "U is genooi na {{title}}. Tik asseblief {{url}}"
+        },
+        "notice": {
+            "text": "U is genooi. {{ClickOrTap}} hier om te aanvaar en aan te sluit."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} het &#39;n <em>{{message.fields.type}}<\/em> boodskap na {{stream.fields.title}} geplaas."
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} in {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Uitnodigings word van ons nommer gestuur, wat u vriende nog nie erken nie. Volg met &#39;n vinnige teks om hulle te laat weet dat die uitnodiging van jou gekom het, en vra hulle om die skakel te klik.",
+            "confirm": "Uitnodigings word van ons nommer gestuur, wat u vriende nog nie erken nie. Wil jy opvolg met &#39;n vinnige teks om te laat weet dat die uitnodiging van jou gekom het, en vra hulle om die skakel te klik.",
+            "check": "Haai, ek het jou net &#39;n uitnodiging na die {{app}} -program gestuur. Gaan asseblief jou sms en klik op die skakel!"
+        },
+        "email": {
+            "alert": "Uitnodigings word gestuur vanaf ons domein, wat u vriende nog nie erken nie. Volg met &#39;n vinnige teks om hulle te laat weet dat die uitnodiging van jou gekom het, en vra hulle om die skakel te klik.",
+            "confirm": "Uitnodigings word gestuur vanaf ons domein, wat u vriende nog nie erken nie. Wil jy opvolg met &#39;n vinnige teks om te laat weet dat die uitnodiging van jou gekom het, en vra hulle om die skakel te klik.",
+            "subject": "Het jy &#39;n uitnodiging gekry?",
+            "body": "Haai, ek het jou net &#39;n uitnodiging na die {{app}} -program gestuur. Gaan asseblief jou e-pos en klik die skakel daar in!"
+        }
+    },
+    "participating": {
+        "Title": "Titel",
+        "Subscribed": "ingeskryf",
+        "Participants": "deelnemers"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Aktiveer mikrofoon",
+            "cameraTitle": "Aktiveer kamera",
+            "cameraAndMicrophoneTitle": "Aktiveer kamera en mikrofoon",
+            "dialogTitle": "Aktiveer dialoog",
+            "microphoneBtn": "Aktiveer mikrofoon",
+            "cameraBtn": "Aktiveer kamera",
+            "cameraAndMicrophoneBtn": "Aktiveer kamera en mikrofoon"
+        }
+    }
+}

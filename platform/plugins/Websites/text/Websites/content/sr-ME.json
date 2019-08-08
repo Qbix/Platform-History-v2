@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Линк то промотер",
+                "startDate": "Датум почетка",
+                "startTime": "Почетно време",
+                "endDate": "Крајњи датум",
+                "endTime": "Време завршетка",
+                "budget": "Буџет"
+            },
+            "interests": {
+                "Title": "Филтрирај по интересу",
+                "FilterInterests": "Почните да куцате интересовање ..."
+            },
+            "Interest": "Интерес",
+            "Location": "Локација"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Иди",
+            "PasteLinkHere": "Налепите линк овде",
+            "BrowseTheWeb": "Бровсе",
+            "WriteToStartConversation": "Напишите своје мисли да бисте започели разговор",
+            "StartConversation": "Старт Цонверсатион",
+            "GotoConversation": "Идите на Разговор"
+        }
+    }
+}

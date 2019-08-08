@@ -73,7 +73,7 @@ class Q_Valid
 					$domain_array[$i]))
 					return false;
 			}
-			if (! preg_match("/^[A-Za-z]{2,4}$/", $domain_array[$count - 1]))
+			if (! preg_match("/^[A-Za-z]{2,10}$/", $domain_array[$count - 1]))
 				return false;
 		}
 		
@@ -278,19 +278,7 @@ class Q_Valid
 			if (!$throwIfInvalid) {
 				return false;
 			}
-			$sameDomain = true;
-			$baseUrl = Q_Request::baseUrl();
-			$message = Q_Config::get('Q', 'session', 'nonceMessages', 'sameDomain', null);
-			if (!empty($_SERVER['HTTP_REFERER'])) {
-				$host1 = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_HOST);
-				$host2 = parse_url($baseUrl, PHP_URL_HOST);
-				if ($host1 !== $host2) {
-					$message = Q_Config::get('Q', 'session', 'nonceMessages', 'otherDomain', null);
-				}
-			}
-			$message = Q::interpolate($message, compact('baseUrl'));
-			$field = 'nonce';
-			throw new Q_Exception_FailedValidation(compact('message', 'field'), 'Q.nonce');
+			Q_Session::throwInvalidSession();
 		}
 		return true;
 	}
@@ -301,16 +289,23 @@ class Q_Valid
 	 * @static
 	 * @param {boolean} [$throwIfInvalid=false] If true, throws an exception if the nonce is invalid.
 	 * @param {array} [$data=$_REQUEST] The data to check the signature of
-	 * @param {array|string} [$fieldKeys] Path of the key under which to save signature
+	 * @param {array|string} [$fieldKeys] Path of the key under which signature is stored
+	 * @param {string} [$secret] A different secret to use for generating the signature
 	 * @return {boolean} Whether the phone number seems like it could be valid
 	 * @throws {Q_Exception_FailedValidation}
 	 */
-	static function signature ($throwIfInvalid = false, $data = null, $fieldKeys = null)
+	static function signature (
+		$throwIfInvalid = false, 
+		$data = null, 
+		$fieldKeys = null, 
+		$secret = null)
 	{
 		if (!isset($data)) {
 			$data = $_REQUEST;
 		}
-		$secret = Q_Config::get('Q', 'internal', 'secret', null);
+		if (!isset($secret)) {
+			$secret = Q_Config::get('Q', 'internal', 'secret', null);
+		}
 		if (!isset($secret)) {
 			return true;
 		}

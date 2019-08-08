@@ -13,4 +13,4 @@ class Q_Exception_MissingPlugin extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_MissingPlugin', 'missing plugin {{plugin}}');
+Q_Exception::add('Q_Exception_MissingPlugin', 'missing plugin {{plugin}}', 424);

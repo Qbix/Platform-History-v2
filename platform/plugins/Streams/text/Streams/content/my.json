@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "နယူး Item"
+    },
+    "labels": {
+        "Streams\/invited": "ငါကိုဖိတ်ကြားပြည်သူ့",
+        "Streams\/invitedMe": "ငါ့ကိုရန်ဖိတ်ခေါ်အဘယ်သူသည်"
+    },
+    "interests": {
+        "Filter": "သငျသညျအဘယျသို့ပျော်မွေ့သလဲ?",
+        "CanAdd": "သင်ဆဲသင်တို့အဘို့အရှာနေတာမတှေ့နိုငျလြှငျ, သငျသညျအောကျဖျောပွအသစ်တစ်ခုကိုစိတ်ဝင်စားမှုကိုထည့်သွင်းနိုင်သည်",
+        "TrySynonyms": "ဒါကြောင့်မမြင်ရပါသလား အချို့သော synonym တွေဟာကြိုးစားပါ။",
+        "AddUnderCategory": "အမျိုးအစားအောက်မှာ Add ...",
+        "Other": "အခြား",
+        "Unlisted": "စာရင်းမသွင်းထားသော"
+    },
+    "chat": {
+        "flaggedForAdminReview": "မက်ဆေ့ခ်ျကိုစီမံအုပ်ချုပ်သူပြန်လည်သုံးသပ်အလံခဲ့တာဖြစ်ပါတယ်။ unflag တဖန်ထိပုတ်ပါ။",
+        "noOneSaid": "အဘယ်သူမျှမဘာမှပြောပါတယ်",
+        "closeChatButton": "အနီးကပ်ချက်တင်",
+        "closeChatConfirmTitle": "ဤချတ်ပိတ်ပြီး?",
+        "closeChatConfirm": "သငျသညျဤချတ်ကိုပိတ်လိုက်ချင်သင်သေချာပါသလား?",
+        "closeChatConfirmYes": "ဟုတ်ကဲ့",
+        "closeChatConfirmNo": "အဘယ်သူမျှမ",
+        "earlierComments": "အစောပိုင်းကမှတ်ချက်များ"
+    },
+    "notifications": {
+        "*": "မက်ဆေ့ခ်ျကို {{& message.fields.type}} {{& stream.fields.title}} မှ",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said:",
+        "Streams\/changed": "{{stream.fields.title}} အတွက်အပြောင်းအလဲများ",
+        "Streams\/invite": "သငျသညျ {{& stream.fields.title}} ရန်ဖိတ်ခေါ်ခဲ့သည်",
+        "Streams\/announcement": "{{& streams.fields.title}} အတွက်ကြေညာချက်",
+        "Streams\/access": "{{&call 'avatar.displayName'}} စီး access ကိုပြောင်းလဲသွားတယ်",
+        "Streams\/chat\/edit": "chat မက်ဆေ့ခ်ျကို edited",
+        "Streams\/chat\/remove": "chat မက်ဆေ့ခ်ျကိုဖယ်ရှား",
+        "Streams\/closed": "{{stream.fields.title}} ပိတ်ပစ်ခဲ့ပြီး",
+        "Streams\/task\/progress": "တိုးတက်မှုကို {{stream.fields.title}} အပေါ်လုပ်",
+        "Streams\/task\/complete": "Task ကိုပြီးစီး: {{stream.fields.title}}",
+        "Streams\/task\/error": "{{stream.fields.title}}: စဉ်အတွင်းမှားယွင်းနေသည်",
+        "Streams\/incoming\/*": "{{app}}: ဝင်လာသောမက်ဆေ့ဂ်ျ"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} {{inviteUrl}} ရန်သင့်အားဖိတ်ခေါ်ခဲ့သည်",
+        "dialog": {
+            "chooseFromContacts": "သင့်ရဲ့ Contacts မှ Choose",
+            "chooseAgainFromContacts": "Contacts မှတဖန် Choose",
+            "inviteSelectedContacts": "Selected ဆက်သွယ်ရန်ဖိတ်ခေါ်",
+            "selectFromContacts": "ဆက်သွယ်ရန် မှစ. ကို Select လုပ်ပါ",
+            "photo": "ဓာတ်ပုံတစ်ပုံကိုယူ",
+            "photoInstruction": "သင့်ရဲ့ QR ကုဒ်ကိုစကင်ဖတ်စစ်ဆေးနေသူသငျသညျများ၏ရှေ့မှောက်၌ဖြစ်တယ်ဆိုရင်, သူတို့ထဲကတစ်ဦးဓာတ်ပုံကိုယူ",
+            "to": "ရန်: {{Stream Title}}",
+            "go": "Go ကို",
+            "title": "ဖိတ်ခေါ်",
+            "placeholder": "မိုဘိုင်းနံပါတ်သို့မဟုတ်အီးမေးလ်လိပ်စာ",
+            "orInvite": "သို့မဟုတ်အသုံးပြုခြင်းအားဖြင့်လူဦးဖိတ်ခေါ်:",
+            "QR": "{{ClickOrTap}} QR ကုဒ်ကိုထုတ်လုပ်ဖို့",
+            "QRtitle": "ဒီ QR ကုဒ်ကိုစကင်ဖတ်စစ်ဆေး",
+            "QRscanned": "သူတို့ကစကင်ဖတ်စစ်ဆေးနေ!",
+            "byEmail": "အီးမေးလ်ပို့ရန်",
+            "byText": "စာသားမ",
+            "byFacebook": "Facebook က",
+            "byTwitter": "တွစ်တာ"
+        },
+        "email": {
+            "subject": "ဟေ့, ဒီထုတ်စစ်ဆေး",
+            "PleaseVisitLink": "အောက်ပါ link ကိုသွားရောက်ကြည့်ရှုပေးပါ:",
+            "InvitingYou": "ငါ {{title}} ရန်သင့်အားဖိတ်ခေါ်နေပါတယ်",
+            "HasInvitedYou": "{{displayName}} {{title}} ရန်သင့်အားဖိတ်ခေါ်ခဲ့သည်"
+        },
+        "sms": {
+            "content": "သငျသညျ {{title}} ရန်ဖိတ်ခေါ်ခဲ့ကြသည်။ ကိုအသာပုတ် ကျေးဇူးပြု. {{url}}"
+        },
+        "notice": {
+            "text": "သငျသညျဖိတ်ကြားထားသည်။ {{ClickOrTap}} ကဒီမှာကိုလက်မခံခြင်းနှင့်ပူးပေါင်းရန်ဖြစ်သည်။"
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} {{stream.fields.title}} တစ်ခု <em>{{message.fields.type}}<\/em> မက်ဆေ့ခ်ျကို posted"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} {{& url}} အတွက်: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "ဖိတ်ခေါ်မှုသင်၏မိတ်ဆွေများသေးအသိအမှတ်မပြုကြဘူးငါတို့အရေအတွက်ကနေပေးပို့နေကြသည်။ သူတို့ကိုဖိတ်ကြားချက်ကို link ကို click နှိပ်ပြီးသူတို့ကိုတောငျးဆိုန, သင်မှ လာ. သိစေရန်အမြန်စာသားကိုအတူတက်လိုက်နာပါ။",
+            "confirm": "ဖိတ်ခေါ်မှုသင်၏မိတ်ဆွေများသေးအသိအမှတ်မပြုကြဘူးငါတို့အရေအတွက်ကနေပေးပို့နေကြသည်။ သူတို့ကိုသင်ဖိတ်ကြားချက်ကို link ကို click နှိပ်ပြီးသူတို့ကိုတောငျးဆိုန, သင်မှ လာ. သိစေရန်အမြန်စာသားကိုအတူတက်အတိုင်းလိုက်နာချင်ပါတယ်။",
+            "check": "ဟေ့ငါပဲသင်တစ်ဦးဟာ {{app}} app ကိုမှဖိတ်ခေါ်စေလွှတ်ခဲ့သည်။ သင့်ရဲ့ sms ကိုစစ်ဆေး link ကို click နှိပ်ပြီးပါ"
+        },
+        "email": {
+            "alert": "ဖိတ်ခေါ်မှုသင်၏မိတ်ဆွေများသေးအသိအမှတ်မပြုကြဘူးငါတို့ဒိုမိန်းကနေလှေတျတျောမူနေကြသည်။ သူတို့ကိုဖိတ်ကြားချက်ကို link ကို click နှိပ်ပြီးသူတို့ကိုတောငျးဆိုန, သင်မှ လာ. သိစေရန်အမြန်စာသားကိုအတူတက်လိုက်နာပါ။",
+            "confirm": "ဖိတ်ခေါ်မှုသင်၏မိတ်ဆွေများသေးအသိအမှတ်မပြုကြဘူးငါတို့ဒိုမိန်းကနေလှေတျတျောမူနေကြသည်။ သူတို့ကိုသင်ဖိတ်ကြားချက်ကို link ကို click နှိပ်ပြီးသူတို့ကိုတောငျးဆိုန, သင်မှ လာ. သိစေရန်အမြန်စာသားကိုအတူတက်အတိုင်းလိုက်နာချင်ပါတယ်။",
+            "subject": "သင်တစ်ဦးကိုဖိတ်ခေါ်ရခဲ့သလား",
+            "body": "ဟေ့ငါပဲသင်တစ်ဦးဟာ {{app}} app ကိုမှဖိတ်ခေါ်စေလွှတ်ခဲ့သည်။ သင့်အီးမေးလ်စစ်ဆေးအဲဒီမှာအတွက် link ကို click နှိပ်ပြီးပါ"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "မိုက်ခရိုဖုန်းကို Enable",
+            "cameraTitle": "ကင်မရာ Enable",
+            "cameraAndMicrophoneTitle": "ကင်မရာနှင့်မိုက်ခရိုဖုန်းကို Enable"
+        }
+    }
+}

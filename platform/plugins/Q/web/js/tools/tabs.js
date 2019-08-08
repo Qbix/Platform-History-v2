@@ -5,7 +5,9 @@
 	 */
 
 	/**
-	 * This tool renders a nice set of tabs that adapts to different environments
+	 * This tool renders a nice set of tabs that adapts to different environments.
+	 * It automatically tries to figure out what tab should be selecte, but you can
+	 * set the beforeRefresh handler to help it along.
 	 * @class Q tabs
 	 * @constructor
 	 * @param {Object} [options] This object contains properties for this function
@@ -26,9 +28,11 @@
 	 *  @param {Q.Event} [options.onClick] Event when a tab was clicked, with arguments (name, element). Returning false cancels the tab switching.
 	 *  @param {Q.Event} [options.beforeSwitch] Event when tab switching begins. Returning false cancels the switching.
 	 *  @param {Function} [options.beforeScripts] Name of the function to execute after tab is loaded but before its javascript is executed.
-	 *  @param {Function} [options.onCurrent] Event after a tab has been selected. Note that this is in the view layer, so your handlers would trigger recursion if they call Q.layout().
-	 *  @param {Function} [options.onActivate] Event after a tab has been activated. Note that this is in the view layer, so your handlers would trigger recursion if they call Q.layout().
-	 *  @param {Function} [options.beforeRefresh] Event before tabs are going to be refreshed
+	 *  @param {Function} [options.onCurrent] Event after a tab has been visually selected. Note that this is in the view layer, so your handlers would trigger recursion if they call Q.layout().
+	 *  @param {Function} [options.onActivate] Event after a tab's linked content has been loaded and activated.
+	 *  @param {Function} [options.beforeRefresh] Event before tabs are going to be refreshed.
+	 *   The first parameter is a callback you can call and pass the name of the tab
+	 *   to display as being selected, otherwise the tool tries to figure it out on its own.
 	 *  @param {Function} [options.onRefresh] Event after tabs have been refreshed
 	 * @return {Q.Tool}
 	 */
@@ -39,6 +43,13 @@
 			var $te = $(tool.element);
 
 			Q.addStylesheet('{{Q}}/css/tabs.css');
+			
+			if (state.contextualHandler == null) {
+				state.contextualHandler = function ($jq) {
+					var element = $jq[0];
+					tool.switchTo([element.getAttribute('data-name'), element]);
+				}
+			}
 
 			var refresh = function () {
 				tool.refresh();
@@ -64,6 +75,7 @@
 			slot: 'content,title',
 			selectors: { content: '#content_slot' },
 			checkQueryString: false,
+			contextualHandler: null,
 			overflow: {
 				content: '<span><span>{{count}} more</span></span>',
 				glyph: '&#9662;',
@@ -96,6 +108,13 @@
 				var tool = this;
 				var state = this.state;
 				var tab;
+				if (tool.switching) {
+					return;
+				}
+				tool.switching = true;
+				setTimeout(function () {
+					tool.switching = false;
+				}, 300);
 				if (Q.typeOf(name) === 'array') {
 					tab = name[1];
 					name = name[0];
@@ -176,6 +195,8 @@
 			},
 
 			/**
+			 * Visually indicate the current tab.
+			 * Triggers the onCurrent event
 			 * @method indicateCurrent
 			 * @param {String} [tab] a possible tab the caller requested to indicate as current
 			 */
@@ -188,7 +209,7 @@
 					var slashed = (name + '')
 						.replace(/[\\"']/g, '\\$&')
 						.replace(/\u0000/g, '\\0');
-					tab = tool.$('[data-name="'+slashed+'"]')[0];
+					tab = tool.$tabs.filter('[data-name="'+slashed+'"]')[0];
 				}
 				if (!$(tool.element).closest('body').length) {
 					// the replaced html probably included the tool's own element,
@@ -234,6 +255,7 @@
 				var state = tool.state;
 				var $tabs = tool.$tabs;
 				var name = tool.getName(tab);
+				name = name || state.tabName;
 				var url = location.hash.queryField('url');
 				if (url === undefined) {
 					url = window.location.href.split('#')[0];
@@ -306,7 +328,12 @@
 				var w = $te.find('.Q_tabs_tabs').width();
 				var w2 = 0, w3 = 0, index = -10;
 				var $o = $('.Q_tabs_overflow', $te);
-				Q.handle(state.beforeRefresh, tool);
+				state.tabName = null;
+				Q.handle(state.beforeRefresh, tool, [function (tabName) {
+					if (tabName) {
+						tool.state.tabName = tabName;
+					}
+				}]);
 				tool.indicateCurrent();
 				if ($o.length) {
 					var cs = $o.state('Q/contextual');
@@ -386,6 +413,7 @@
 					$overflow.plugin("Q/contextual", {
 						elements: elements,
 						className: "Q_tabs_contextual",
+						defaultHandler: state.contextualHandler,
 						onConstruct: function ($contextual) {
 							_addListeners(tool, $contextual);
 							tool.$tabs.css('visibility', 'visible');
@@ -429,7 +457,8 @@
 
 	function _addListeners(tool, $jq) {
 		var selector = '.Q_tabs_tab';
-		$jq.off(Q.Pointer.fastclick, selector).on(Q.Pointer.fastclick, selector, function (event) {
+		$jq.off(Q.Pointer.fastclick, selector)
+		.on(Q.Pointer.fastclick, selector, function (event) {
 			if (false === tool.state.onClick.handle.call(tool, this.getAttribute('data-name'), this)) {
 				return;
 			}

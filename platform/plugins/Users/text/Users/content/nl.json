@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "Log in",
+        "LogOut": "uitloggen"
+    },
+    "activate": {
+        "SetAsPrimary": "Stel {{1}} in als mijn primaire {{2}}",
+        "ChoosePassPhrase": "Kies een <strong>wachtwoordzin<\/strong> om in te loggen met. <br> Een eenvoudige zin bestaande uit een paar woorden die u gemakkelijk zult onthouden.",
+        "ChoosePassPhraseSeeSuggestions": "Kies een goede <strong>wachtwoordzin<\/strong> om uw account te beschermen. Bekijk de suggesties voor enkele ideeën.",
+        "LogOutAndTryAgain": "Uitloggen en opnieuw proberen",
+        "IfYouFeel": "Als je denkt dat er iets fout is gegaan, kan dat",
+        "SetIdentifierButtonTitle": "begin opnieuw"
+    },
+    "session": {
+        "GetStarted": "Begin"
+    },
+    "authorize": {
+        "GetStarted": "Begin",
+        "Authorize": "Toestemming geven",
+        "TermsLabel": "Ik heb het gelezen en ga hiermee akkoord <br> naar de {{link}}",
+        "TermsTitle": "Voorwaarden"
+    },
+    "register": {
+        "TermsLabel": "Ik accepteer de {{link}}",
+        "TermsTitle": "Voorwaarden"
+    },
+    "notifications": {
+        "title": "Toestemming",
+        "prompt": "Wilt u meldingen inschakelen? U ontvangt realtime updates over dingen waar u om geeft.",
+        "yes": "Ja",
+        "no": "Nee",
+        "WelcomePleaseVerifyEmail": "Welkom! Verifieer uw email adres alstublieft.",
+        "WelcomeVerifyEmail": "Welkom! Verifieer je e-mailadres.",
+        "ForgetPass": "Hé, ben je je wachtwoordzin vergeten?"
+    },
+    "usersContacts": {
+        "selectLabel": "Selecteer een label.",
+        "inviteUser": "Gebruiker uitnodigen"
+    },
+    "invalidLanguageSelected": "Ongeldige taal geselecteerd",
+    "contacts": {
+        "dialog": {
+            "title": "Kies contact"
+        },
+        "select": {
+            "title": "Selecteer contact van {{displayName}}"
+        }
+    }
+}

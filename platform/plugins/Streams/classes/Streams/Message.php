@@ -120,7 +120,11 @@ class Streams_Message extends Base_Streams_Message
 		if ($asUserId instanceof Users_User) {
 			$asUserId = $asUserId->id;
 		}
-		
+
+		if (!is_array($messages)) {
+			return null;
+		}
+
 		// Build arrays we will need
 		foreach ($messages as $publisherId => $arr) {
 			if (!is_array($arr)) {
@@ -162,7 +166,7 @@ class Streams_Message extends Base_Streams_Message
 		$posted = array();
 		$streams = array();
 		$messages2 = array();
-		$totals2 = array();
+		$messageTotals2 = array();
 		$updates = array();
 		$clientId = Q_Request::special('clientId', '');
 		$sendToNode = true;
@@ -277,7 +281,7 @@ class Streams_Message extends Base_Streams_Message
 				}
 				foreach ($counts as $type => $count) {
 					$key = implode("\t", array($publisherId, $streamName, $type));
-					$totals2[$count][$key] = array(
+					$messageTotals2[$count][$key] = array(
 						'publisherId' => $publisherId,
 						'streamName' => $streamName,
 						'messageType' => $type,
@@ -287,8 +291,8 @@ class Streams_Message extends Base_Streams_Message
 			}
 		}
 
-		foreach ($totals2 as $count => $rows) {
-			Streams_Total::insertManyAndExecute($rows, array(
+		foreach ($messageTotals2 as $count => $rows) {
+			Streams_MessageTotal::insertManyAndExecute($rows, array(
 				'onDuplicateKeyUpdate' => array(
 					'messageCount' => new Db_Expression("messageCount + $count")
 				)

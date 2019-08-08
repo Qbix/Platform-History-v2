@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "促進するためのリンク",
+                "startDate": "開始日",
+                "startTime": "始まる時間",
+                "endDate": "終了日",
+                "endTime": "終了時間",
+                "budget": "予算"
+            },
+            "interests": {
+                "Title": "関心で絞り込む",
+                "FilterInterests": "興味を入力してください..."
+            },
+            "Interest": "興味",
+            "Location": "ロケーション"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "行く",
+            "PasteLinkHere": "ここにリンクを貼り付けてください",
+            "BrowseTheWeb": "ブラウズ",
+            "WriteToStartConversation": "会話を始めるためにあなたの考えを書きなさい",
+            "StartConversation": "会話を開始",
+            "GotoConversation": "会話へ"
+        }
+    }
+}

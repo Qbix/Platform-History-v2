@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "새로운 물품"
+    },
+    "labels": {
+        "Streams/invited": "내가 초대 한 사람들",
+        "Streams/invitedMe": "누가 나를 초대 했어?"
+    },
+    "interests": {
+        "Filter": "당신은 무엇을 즐기시나요?",
+        "CanAdd": "여전히 원하는 것을 찾을 수없는 경우 아래에 새로운 관심 분야를 추가 할 수 있습니다.",
+        "TrySynonyms": "보지 마? 동의어를 사용해보십시오.",
+        "AddUnderCategory": "카테고리 아래에 추가 ...",
+        "Other": "다른",
+        "Unlisted": "비공개"
+    },
+    "chat": {
+        "flaggedForAdminReview": "관리자 검토를 위해 메시지가 표시되었습니다. 알림을 해제하려면 다시 살짝 누르십시오.",
+        "noOneSaid": "아무도 아무 말도하지 않았다.",
+        "closeChatButton": "채팅 종료",
+        "closeChatConfirmTitle": "채팅을 닫으시겠습니까?",
+        "closeChatConfirm": "채팅을 닫으시겠습니까?",
+        "closeChatConfirmYes": "예",
+        "closeChatConfirmNo": "아니",
+        "earlierComments": "이전 댓글",
+        "Subscribed": "알림 음소거",
+        "Unsubscribed": "알림을 받다",
+        "dontHavePermissionJoinConversation": "이 대화에 참여할 수있는 권한이 없습니다.",
+        "startedConversation": "대화를 시작했다.",
+        "RealTimeCall": "실시간 통화"
+    },
+    "notifications": {
+        "*": "메시지 {{& message.fields.type}} ~ {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}}이 (가) 말했다 :",
+        "Streams/changed": "{{stream.fields.title}}의 변화",
+        "Streams/invite": "{{& stream.fields.title}}에 초대되었습니다.",
+        "Streams/announcement": "{{& streams.fields.title}}에 발표",
+        "Streams/access": "{{&call 'avatar.displayName'}} 스트림 액세스가 변경되었습니다.",
+        "Streams/chat/edit": "채팅 메시지가 수정되었습니다.",
+        "Streams/chat/remove": "채팅 메시지가 삭제되었습니다.",
+        "Streams/closed": "{{stream.fields.title}}이 폐쇄되었습니다.",
+        "Streams/task/progress": "{{stream.fields.title}}에 진행됨",
+        "Streams/task/complete": "완료된 작업 : {{stream.fields.title}}",
+        "Streams/task/error": "동안 오류 : {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}} : 수신 메시지",
+        "ManageEmailSubscriptions": "이메일 구독 관리",
+        "IfUnsubscribe": "구독을 취소하려면"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} 님이 {{inviteUrl}}에 당신을 초대했습니다.",
+        "dialog": {
+            "chooseFromContacts": "연락처에서 선택하십시오.",
+            "selectFromContacts": "연락처에서 선택",
+            "photo": "사진을 찍다",
+            "photoInstruction": "QR 코드를 스캔 한 사람이 앞에 있으면 사진을 찍으십시오.",
+            "to": "받는 사람 : {{Stream Title}}",
+            "go": "가기",
+            "title": "초대",
+            "placeholder": "휴대 전화 번호 또는 이메일 주소",
+            "orInvite": "또는 다음을 사용하여 사람들을 초대하십시오.",
+            "QR": "QR 코드 생성을위한 {{ClickOrTap}}",
+            "QRtitle": "이 QR 코드 스캔",
+            "byEmail": "이메일",
+            "byText": "본문",
+            "byFacebook": "페이스 북",
+            "byTwitter": "지저귀다",
+            "QRscanned": "그들은 그것을 스캔!",
+            "chooseAgainFromContacts": "연락처에서 다시 선택",
+            "inviteSelectedContacts": "선택한 연락처 초대"
+        },
+        "email": {
+            "subject": "헤이, 이것 좀 봐.",
+            "PleaseVisitLink": "다음 링크를 방문하십시오 :",
+            "InvitingYou": "{{title}}에 초대합니다.",
+            "HasInvitedYou": "{{displayName}} 님이 {{title}}에 초대했습니다."
+        },
+        "sms": {
+            "content": "당신은 {{title}}에 초대되었습니다. {{url}}을 탭하십시오."
+        },
+        "notice": {
+            "text": "초대되었습니다. {{ClickOrTap}} 여기에 동의하고 참여하십시오."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}}이 (가) <em>{{message.fields.type}}</em> 메시지를 {{stream.fields.title}}에 게시했습니다."
+        },
+        "text": {
+            "body": "{{& url}}의 {{& call 'avatar.displayName'}} : {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "초대장은 귀하의 친구가 아직 인식하지 못하는 번호에서 전송됩니다. 빠른 텍스트를 통해 초대장이 귀하에게서 왔음을 알리고 링크를 클릭하도록 요청하십시오.",
+            "confirm": "초대장은 귀하의 친구가 아직 인식하지 못하는 번호에서 전송됩니다. 빠른 텍스트로 후속 조치하여 초대장이 귀하에게서 왔음을 알리고 링크를 클릭하도록 요청 하시겠습니까?",
+            "check": "방금 {{app}} 앱에 초대장을 보냈습니다. 귀하의 SMS를 확인하고 링크를 클릭하십시오!"
+        },
+        "email": {
+            "alert": "친구가 아직 알지 못하는 도메인에서 초대장을 보냅니다. 빠른 텍스트를 통해 초대장이 귀하에게서 왔음을 알리고 링크를 클릭하도록 요청하십시오.",
+            "confirm": "친구가 아직 알지 못하는 도메인에서 초대장을 보냅니다. 빠른 텍스트로 후속 조치하여 초대장이 귀하에게서 왔음을 알리고 링크를 클릭하도록 요청 하시겠습니까?",
+            "subject": "초대 받았어?",
+            "body": "방금 {{app}} 앱에 초대장을 보냈습니다. 이메일을 확인하고 거기에있는 링크를 클릭하십시오!"
+        }
+    },
+    "participating": {
+        "Title": "표제",
+        "Subscribed": "구독 됨",
+        "Participants": "참가자"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "마이크 사용",
+            "cameraTitle": "카메라 사용",
+            "cameraAndMicrophoneTitle": "카메라 및 마이크 사용",
+            "dialogTitle": "대화 상자 사용",
+            "microphoneBtn": "마이크 사용",
+            "cameraBtn": "카메라 사용",
+            "cameraAndMicrophoneBtn": "카메라 및 마이크 사용"
+        }
+    }
+}

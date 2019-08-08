@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "Logáil isteach",
+        "LogOut": "Logáil Amach"
+    },
+    "activate": {
+        "SetAsPrimary": "Socraigh {{1}} mar mo bhunscoil {{2}}",
+        "ChoosePassPhrase": "Roghnaigh <strong>pas pas<\/strong> le logáil isteach leis. <br> Frása simplí ina bhfuil cúpla focal ar cuimhin leat go héasca.",
+        "ChoosePassPhraseSeeSuggestions": "Roghnaigh <strong>frása pas<\/strong> maith chun do chuntas a chosaint. Féach na moltaí le haghaidh roinnt smaointe.",
+        "LogOutAndTryAgain": "Logáil Amach agus Bain triail as Arís",
+        "IfYouFeel": "Má bhraitheann tú go ndeachaigh rud éigin mícheart, is féidir leat",
+        "SetIdentifierButtonTitle": "thosaigh arís"
+    },
+    "session": {
+        "GetStarted": "Tosaigh"
+    },
+    "authorize": {
+        "GetStarted": "Tosaigh",
+        "Authorize": "Údarú",
+        "TermsLabel": "Léigh mé agus aontaím <br> chuig an {{link}}",
+        "TermsTitle": "Téarmaí"
+    },
+    "register": {
+        "TermsLabel": "Glacaim leis an {{link}}",
+        "TermsTitle": "Téarmaí"
+    },
+    "notifications": {
+        "title": "Cead",
+        "prompt": "Ar mhaith leat fógraí a chumasú? Gheobhaidh tú nuashonruithe fíor-ama faoi na rudaí atá faoi do chúram.",
+        "yes": "Is féidir",
+        "no": "Níl",
+        "WelcomePleaseVerifyEmail": "Fáilte! Fíoraigh do sheoladh ríomhphoist le do thoil.",
+        "WelcomeVerifyEmail": "Fáilte! Deimhnigh do sheoladh ríomhphoist.",
+        "ForgetPass": "Hey, an ndearna tú dearmad ar do fhocal faire?"
+    },
+    "usersContacts": {
+        "selectLabel": "Roghnaigh lipéad le do thoil.",
+        "inviteUser": "Tabhair cuireadh don Úsáideoir"
+    },
+    "invalidLanguageSelected": "Teanga neamhbhailí roghnaithe",
+    "contacts": {
+        "dialog": {
+            "title": "Roghnaigh teagmháil"
+        },
+        "select": {
+            "title": "Roghnaigh teagmháil le {{displayName}}"
+        }
+    }
+}

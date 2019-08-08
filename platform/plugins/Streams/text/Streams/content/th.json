@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "ไอเท็มใหม่"
+    },
+    "labels": {
+        "Streams\/invited": "คนที่ฉันเชิญ",
+        "Streams\/invitedMe": "ใครเชิญฉัน"
+    },
+    "interests": {
+        "Filter": "คุณชอบอะไร",
+        "CanAdd": "หากคุณยังไม่พบสิ่งที่คุณต้องการคุณสามารถเพิ่มความสนใจใหม่ด้านล่าง:",
+        "TrySynonyms": "ไม่เห็นเหรอ ลองคำพ้องความหมาย",
+        "AddUnderCategory": "เพิ่มภายใต้หมวดหมู่ ...",
+        "Other": "อื่น ๆ",
+        "Unlisted": "ไม่แสดง"
+    },
+    "chat": {
+        "flaggedForAdminReview": "ข้อความถูกตั้งค่าสถานะเพื่อให้ผู้ดูแลระบบตรวจสอบ แตะอีกครั้งเพื่อยกเลิกการติดธง",
+        "noOneSaid": "ไม่มีใครพูดอะไรเลย",
+        "closeChatButton": "ปิดการแชท",
+        "closeChatConfirmTitle": "ปิดการแชทนี้ไหม",
+        "closeChatConfirm": "คุณแน่ใจหรือว่าต้องการปิดการแชทนี้?",
+        "closeChatConfirmYes": "ใช่",
+        "closeChatConfirmNo": "ไม่",
+        "earlierComments": "ความคิดเห็นก่อนหน้า",
+        "Subscribed": "ปิดการแจ้งเตือน",
+        "Unsubscribed": "รับการแจ้งเตือน",
+        "dontHavePermissionJoinConversation": "คุณไม่ได้รับอนุญาตให้เข้าร่วมการสนทนานี้",
+        "startedConversation": "เริ่มการสนทนา",
+        "RealTimeCall": "โทรตามเวลาจริง"
+    },
+    "notifications": {
+        "*": "ข้อความ {{& message.fields.type}} ถึง {{1,000}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} พูดว่า:",
+        "Streams\/changed": "การเปลี่ยนแปลงใน {{stream.fields.title}}",
+        "Streams\/invite": "คุณได้รับเชิญให้ {{& stream.fields.title}}",
+        "Streams\/announcement": "ประกาศใน {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} เปลี่ยนการเข้าถึงสตรีม",
+        "Streams\/chat\/edit": "แก้ไขข้อความแชทแล้ว",
+        "Streams\/chat\/remove": "ลบข้อความแชทแล้ว",
+        "Streams\/closed": "{{stream.fields.title}} ปิดแล้ว",
+        "Streams\/task\/progress": "ความคืบหน้าเมื่อวันที่ {{stream.fields.title}}",
+        "Streams\/task\/complete": "ภารกิจเสร็จสิ้น: {{stream.fields.title}}",
+        "Streams\/task\/error": "ข้อผิดพลาดระหว่าง: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: ข้อความที่เข้ามา",
+        "ManageEmailSubscriptions": "จัดการการสมัครอีเมลของคุณ",
+        "IfUnsubscribe": "หากคุณต้องการยกเลิกการสมัคร"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} เชิญคุณเข้าร่วม {{1,000}}",
+        "dialog": {
+            "chooseFromContacts": "เลือกจากผู้ติดต่อของคุณ",
+            "selectFromContacts": "เลือกจากผู้ติดต่อ",
+            "photo": "ถ่ายรูป",
+            "photoInstruction": "หากบุคคลที่สแกนรหัส QR ของคุณอยู่ข้างหน้าคุณให้ถ่ายรูปพวกเขา",
+            "to": "ถึง: {{Stream Title}}",
+            "go": "ไป",
+            "title": "เชิญ",
+            "placeholder": "หมายเลขโทรศัพท์หรือที่อยู่อีเมล",
+            "orInvite": "หรือเชิญผู้คนโดยใช้:",
+            "QR": "{{ClickOrTap}} เพื่อสร้างรหัส QR",
+            "QRtitle": "สแกนรหัส QR นี้",
+            "byEmail": "อีเมล์",
+            "byText": "ข้อความ",
+            "byFacebook": "Facebook",
+            "byTwitter": "พูดเบาและรวดเร็ว",
+            "QRscanned": "พวกเขาสแกนมัน!",
+            "chooseAgainFromContacts": "เลือกอีกครั้งจากที่อยู่ติดต่อ",
+            "inviteSelectedContacts": "เชิญผู้ติดต่อที่เลือกไว้"
+        },
+        "email": {
+            "subject": "เฮ้ลองดูนี่สิ",
+            "PleaseVisitLink": "กรุณาเยี่ยมชมลิงค์ต่อไปนี้:",
+            "InvitingYou": "ฉันเชิญคุณให้ {{title}}",
+            "HasInvitedYou": "{{displayName}} เชิญคุณให้ {{title}}"
+        },
+        "sms": {
+            "content": "คุณได้รับเชิญให้ {{title}} กรุณาแตะ {{1,000}}"
+        },
+        "notice": {
+            "text": "คุณได้รับเชิญ {{ClickOrTap}} ที่นี่เพื่อยอมรับและเข้าร่วม"
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} โพสต์ข้อความ <em>{{message.fields.type}}<\/em> ไปที่ {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} ใน {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "คำเชิญจะถูกส่งจากหมายเลขของเราซึ่งเพื่อนของคุณยังจำไม่ได้ ติดตามด้วยข้อความด่วนเพื่อให้พวกเขารู้ว่าคำเชิญมาจากคุณขอให้พวกเขาคลิกที่ลิงค์",
+            "confirm": "คำเชิญจะถูกส่งจากหมายเลขของเราซึ่งเพื่อนของคุณยังจำไม่ได้ คุณต้องการติดตามข้อความสั้น ๆ เพื่อให้พวกเขาทราบว่าข้อความเชิญมาจากคุณขอให้พวกเขาคลิกลิงก์",
+            "check": "สวัสดีฉันเพิ่งส่งคำเชิญให้คุณไปยังแอป {{app}} กรุณาตรวจสอบ sms ของคุณแล้วคลิกที่ลิงค์!"
+        },
+        "email": {
+            "alert": "คำเชิญจะถูกส่งจากโดเมนของเราซึ่งเพื่อนของคุณยังจำไม่ได้ ติดตามด้วยข้อความด่วนเพื่อให้พวกเขารู้ว่าคำเชิญมาจากคุณขอให้พวกเขาคลิกที่ลิงค์",
+            "confirm": "คำเชิญจะถูกส่งจากโดเมนของเราซึ่งเพื่อนของคุณยังจำไม่ได้ คุณต้องการติดตามข้อความสั้น ๆ เพื่อให้พวกเขาทราบว่าข้อความเชิญมาจากคุณขอให้พวกเขาคลิกลิงก์",
+            "subject": "คุณได้รับคำเชิญหรือไม่",
+            "body": "สวัสดีฉันเพิ่งส่งคำเชิญให้คุณไปยังแอป {{app}} โปรดตรวจสอบอีเมลของคุณและคลิกลิงก์ในนั้น!"
+        }
+    },
+    "participating": {
+        "Title": "หัวข้อ",
+        "Subscribed": "สมัครเป็นสมาชิก",
+        "Participants": "ผู้เข้าร่วม"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "เปิดใช้งานไมโครโฟน",
+            "cameraTitle": "เปิดใช้งานกล้อง",
+            "cameraAndMicrophoneTitle": "เปิดใช้งานกล้องและไมโครโฟน",
+            "dialogTitle": "เปิดใช้งานกล่องโต้ตอบ",
+            "microphoneBtn": "เปิดใช้งานไมโครโฟน",
+            "cameraBtn": "เปิดใช้งานกล้อง",
+            "cameraAndMicrophoneBtn": "เปิดใช้งานกล้องและไมโครโฟน"
+        }
+    }
+}

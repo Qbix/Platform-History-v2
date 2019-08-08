@@ -157,4 +157,4 @@ Q.Template.set('Streams/category/preview/edit',
 	+ '</div></div>'
 );
 
-})(Q, jQuery, window);
+})(Q, Q.$, window);

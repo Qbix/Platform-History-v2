@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tryk for at betale"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: gebyr behandlet for {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Tak for din betaling til {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} abonnerer på {{plan.title}}",
+        "YouSubscribedTo": "Du er blevet abonneret på {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Info om bestilling",
+        "PaymentMethod": "Betalingsmetode",
+        "ContactInfo": "Kontaktoplysninger",
+        "Pay": "Betale"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Invitér accepteret af {{1}}",
+        "YouHaveCreditsToStart": "Du har {{1}} kreditter til at starte"
+    },
+    "history": {
+        "Date": "Dato",
+        "Amount": "Beløb",
+        "Description": "Beskrivelse",
+        "Client": "Klient",
+        "To": "til",
+        "From": "fra",
+        "HistoryEmpty": "Du har endnu ingen data"
+    },
+    "subscriptions": {
+        "infoTitle": "Angiv betalingsoplysninger",
+        "confirm": {
+            "title": "Start abonnement",
+            "message": "Vil du gerne abonnere på {{title}}?",
+            "ok": "Okay",
+            "cancel": "Afbestille"
+        }
+    },
+    "payments": {
+        "infoTitle": "Angiv betalingsoplysninger",
+        "confirm": {
+            "title": "Foretage en betaling",
+            "message": "Er du enig i at betale {{symbol}} {{amount}}?",
+            "ok": "Okay",
+            "cancel": "Afbestille"
+        }
+    }
+}

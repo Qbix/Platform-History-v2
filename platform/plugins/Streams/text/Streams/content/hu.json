@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Új elem"
+    },
+    "labels": {
+        "Streams\/invited": "Emberek, akit meghívtam",
+        "Streams\/invitedMe": "Ki meghívott engem"
+    },
+    "interests": {
+        "Filter": "Mit élvezel?",
+        "CanAdd": "Ha még mindig nem találja, amit keres, az alábbi új érdeklődést teheti fel:",
+        "TrySynonyms": "Nem látod? Próbáljon ki néhány szinonimát.",
+        "AddUnderCategory": "Hozzáadás kategóriában ...",
+        "Other": "Más",
+        "Unlisted": "Nem nyilvános"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Az üzenetet az adminisztrátori felülvizsgálat jelzi. Érintse meg ismét a gombot.",
+        "noOneSaid": "Senki sem mondott semmit",
+        "closeChatButton": "Csevegés bezárása",
+        "closeChatConfirmTitle": "Zárja be ezt a beszélgetést?",
+        "closeChatConfirm": "Biztosan bezárja ezt a csevegést?",
+        "closeChatConfirmYes": "Igen",
+        "closeChatConfirmNo": "Nem",
+        "earlierComments": "korábbi megjegyzések",
+        "Subscribed": "Értesítések némítása",
+        "Unsubscribed": "Értesítéseket kapni",
+        "dontHavePermissionJoinConversation": "Nincs engedélye a beszélgetéshez.",
+        "startedConversation": "beszélgetést kezdett",
+        "RealTimeCall": "Valós idejű hívás"
+    },
+    "notifications": {
+        "*": "Üzenet {{& message.fields.type}} {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} mondta:",
+        "Streams\/changed": "A {{stream.fields.title}}",
+        "Streams\/invite": "Meghívást kapott a {{& stream.fields.title}}",
+        "Streams\/announcement": "Hirdetés {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} megváltoztatta az adatfolyam-hozzáférést",
+        "Streams\/chat\/edit": "A csevegésüzenet szerkesztve",
+        "Streams\/chat\/remove": "A csevegésüzenet eltávolítva",
+        "Streams\/closed": "{{stream.fields.title}} lezárult",
+        "Streams\/task\/progress": "A {{stream.fields.title}}",
+        "Streams\/task\/complete": "Feladat kész: {{stream.fields.title}}",
+        "Streams\/task\/error": "Hiba történt a következővel: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Bejövő üzenet",
+        "ManageEmailSubscriptions": "kezelje az e-mail előfizetéseit",
+        "IfUnsubscribe": "Ha le szeretné szüntetni a feliratkozást"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} meghívta Önt a {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Válasszon a Névjegyek közül",
+            "selectFromContacts": "Válasszon a Névjegyek közül",
+            "photo": "Fotózni",
+            "photoInstruction": "Ha a QR-kódot beolvasó személy előtted van, készíts egy fotót",
+            "to": "Címzett: {{Stream Title}}",
+            "go": "Megy",
+            "title": "Meghívás",
+            "placeholder": "Mobilszám vagy e-mail cím",
+            "orInvite": "Vagy hívja meg az embereket a következők használatával:",
+            "QR": "{{ClickOrTap}} QR kód létrehozásához",
+            "QRtitle": "A QR-kód beolvasása",
+            "byEmail": "Email",
+            "byText": "Szöveg",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Szkennelték!",
+            "chooseAgainFromContacts": "Válasszon újra a Névjegyek közül",
+            "inviteSelectedContacts": "Meghívott partnerek meghívása"
+        },
+        "email": {
+            "subject": "Hé, nézd meg ezt",
+            "PleaseVisitLink": "Kérjük, látogasson el a következő linkre:",
+            "InvitingYou": "Meghívom Önt {{title}}",
+            "HasInvitedYou": "{{displayName}} meghívta Önt a {{title}}"
+        },
+        "sms": {
+            "content": "Meghívást kapott a {{title}} -ra. Kérjük, érintse meg a {{url}}"
+        },
+        "notice": {
+            "text": "Meghívtak. {{ClickOrTap}} itt, hogy elfogadja és csatlakozzon."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} <em>{{message.fields.type}}<\/em> üzenetet küldött {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "A meghívókat a mi számunkból küldjük, melyeket a barátaid még nem ismernek fel. Kövesse nyomon egy gyors szöveget, hogy tudassa velük a meghívást, és kéri őket, hogy kattintson a linkre.",
+            "confirm": "A meghívókat a mi számunkból küldjük, melyeket a barátaid még nem ismernek fel. Gyors szöveggel szeretne nyomon követni, hogy tudja, hogy a meghívó tőled érkezett, és kéri őket, hogy kattintson a linkre.",
+            "check": "Hé, csak küldött neked egy meghívót a {{app}} alkalmazásra. Kérjük, ellenőrizze az SMS-t és kattintson a linkre!"
+        },
+        "email": {
+            "alert": "A meghívókat a mi domainünkről küldjük, melyeket a barátok még nem ismernek fel. Kövesse nyomon egy gyors szöveget, hogy tudassa velük a meghívást, és kéri őket, hogy kattintson a linkre.",
+            "confirm": "A meghívókat a mi domainünkről küldjük, melyeket a barátok még nem ismernek fel. Gyors szöveggel szeretne nyomon követni, hogy tudja, hogy a meghívó tőled érkezett, és kéri őket, hogy kattintson a linkre.",
+            "subject": "Meghívást kapott?",
+            "body": "Hé, csak küldött neked egy meghívót a {{app}} alkalmazásra. Kérjük, ellenőrizze e-mailjét, és kattintson az ott található linkre!"
+        }
+    },
+    "participating": {
+        "Title": "Cím",
+        "Subscribed": "Jegyzett",
+        "Participants": "résztvevők"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Mikrofon engedélyezése",
+            "cameraTitle": "Kamera engedélyezése",
+            "cameraAndMicrophoneTitle": "Kamera és mikrofon engedélyezése",
+            "dialogTitle": "A párbeszédablak engedélyezése",
+            "microphoneBtn": "Mikrofon engedélyezése",
+            "cameraBtn": "Kamera engedélyezése",
+            "cameraAndMicrophoneBtn": "Kamera és mikrofon engedélyezése"
+        }
+    }
+}

@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Kasala {{status}} sa hangyo",
+        "canceled": "Gihangyo nga kanselahon",
+        "500": "Internal nga sayup nga server",
+        "404": "Dili makita: {{url}}",
+        "501": "Ang hangyo nahunong"
+    },
+    "nonce": {
+        "sameDomain": "Nag-expire na ang sesyon. Papresyaha ang panid ug sulayi pag-usab.",
+        "otherDomain": "Giparehistro nga cross-domain request ngadto sa langyaw nga domain sa {{baseUrl}}"
+    },
+    "words": {
+        "tap": "i-tap",
+        "click": "i-klik",
+        "yes": "oo",
+        "no": "dili",
+        "Tap": "Tapik",
+        "Click": "I-klik",
+        "Yes": "Oo",
+        "No": "Dili"
+    },
+    "months": {
+        "1": "Enero",
+        "2": "Pebrero",
+        "3": "Marso",
+        "4": "Abril",
+        "5": "Mayo",
+        "6": "Hunyo",
+        "7": "Hulyo",
+        "8": "Agosto",
+        "9": "Septyembre",
+        "10": "Oktubre",
+        "11": "Nobyembre",
+        "12": "Disyembre"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Palihug tugoti ang pag-access sa imong mikropono",
+        "record": "Irekord",
+        "recording": "Pagrekord",
+        "remains": "nagpabilin",
+        "maximum": "maximum",
+        "playing": "Nagdula",
+        "recorded": "Natala",
+        "clip": "clip",
+        "orupload": "O Pag-upload",
+        "usethis": "Gamita ni",
+        "discard": "Isalikway",
+        "encoding": "Pag-encode"
+    },
+    "alert": {
+        "title": "Alert"
+    },
+    "confirm": {
+        "title": "Sa pagmatuod sa",
+        "ok": "Oo",
+        "cancel": "Dili"
+    },
+    "prompt": {
+        "title": "Gipangayo",
+        "ok": "Lakaw"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Sayop nga pagbasa sa file",
+        "cameraCommands": {
+            "prompt": "Unsa ang gusto nimo nga buhaton?",
+            "photo": "Pagdala og bag-o nga litrato",
+            "library": "Pagpili gikan sa librarya"
+        },
+        "tooSmall": "Palihog pilia ang mas dako nga larawan.",
+        "cropping": {
+            "title": "Usba ang gidak-on ug posisyon",
+            "touchscreen": "Gamita ang imong mga tudlo aron sa pag-zoom ug pag-drag",
+            "notTouchscreen": "Gamita ang imong mouse &amp; ligid aron sa pag-zoom ug pag-drag"
+        }
+    }
+}

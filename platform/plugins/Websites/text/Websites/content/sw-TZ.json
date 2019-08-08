@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Unganisha kuendeleza",
+                "startDate": "Tarehe ya Mwanzo",
+                "startTime": "Anza Muda",
+                "endDate": "Tarehe ya mwisho",
+                "endTime": "Muda wa Mwisho",
+                "budget": "Bajeti"
+            },
+            "interests": {
+                "Title": "Futa kwa Nia",
+                "FilterInterests": "Anza kuandika maslahi ..."
+            },
+            "Interest": "Hamu",
+            "Location": "Eneo"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Nenda",
+            "PasteLinkHere": "Weka kiungo hapa",
+            "BrowseTheWeb": "Vinjari",
+            "WriteToStartConversation": "Andika mawazo yako ili uanze mazungumzo",
+            "StartConversation": "Anza Majadiliano",
+            "GotoConversation": "Nenda kwenye Mazungumzo"
+        }
+    }
+}

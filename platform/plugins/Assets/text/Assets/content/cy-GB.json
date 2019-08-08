@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tap i dalu"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: prosesu tâl am {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Diolch i chi am eich taliad i {{call 'publisher.displayName'}}",
+        "SubscribedTo": "Tanysgrifiwyd {{call 'user.displayName'}} i {{plan.title}}",
+        "YouSubscribedTo": "Rydych wedi tanysgrifio i {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Gwybodaeth am drefn",
+        "PaymentMethod": "Dull talu",
+        "ContactInfo": "Manylion cyswllt",
+        "Pay": "Cyflog"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Gwahoddwyd gwahoddiad gan {{1}}",
+        "YouHaveCreditsToStart": "Mae gennych chi {{1}} credydau i ddechrau"
+    },
+    "history": {
+        "Date": "Dyddiad",
+        "Amount": "Swm",
+        "Description": "Disgrifiad",
+        "Client": "Cleient",
+        "To": "i",
+        "From": "o",
+        "HistoryEmpty": "Nid oes gennych unrhyw ddata eto"
+    },
+    "subscriptions": {
+        "infoTitle": "Gosod Gwybodaeth Taliad",
+        "confirm": {
+            "title": "Dechreuwch Danysgrifiad",
+            "message": "Hoffech chi danysgrifio i {{title}}?",
+            "ok": "iawn",
+            "cancel": "Canslo"
+        }
+    },
+    "payments": {
+        "infoTitle": "Gosod Gwybodaeth Taliad",
+        "confirm": {
+            "title": "Gwneud Taliad",
+            "message": "Ydych chi&#39;n cytuno i dalu {{symbol}} {{amount}}?",
+            "ok": "iawn",
+            "cancel": "Canslo"
+        }
+    }
+}

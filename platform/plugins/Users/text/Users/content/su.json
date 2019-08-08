@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "lebet",
+        "LogOut": "kaluar"
+    },
+    "activate": {
+        "SetAsPrimary": "Set {{1}} salaku primér abdi {{2}}",
+        "ChoosePassPhrase": "Milih <strong>frase pass<\/strong> asup pikeun. <br> Frase saderhana anu diwangun ku sawatara kalimah anu anjeun bakal diinget.",
+        "ChoosePassPhraseSeeSuggestions": "Milih <strong>frase lolos anu saur<\/strong> pikeun ngajaga akun anjeun. Tingali saran kanggo sababaraha gagasan.",
+        "LogOutAndTryAgain": "Kaluar na Coba deui",
+        "IfYouFeel": "Mun anjeun ngarasa hal anu salah, anjeun tiasa",
+        "SetIdentifierButtonTitle": "mimitian deui"
+    },
+    "session": {
+        "GetStarted": "Meunangkeun"
+    },
+    "authorize": {
+        "GetStarted": "Meunangkeun",
+        "Authorize": "Ngahijikeun",
+        "TermsLabel": "Kuring geus maca jeung satuju <br> ka {{link}}",
+        "TermsTitle": "Sarat"
+    },
+    "register": {
+        "TermsLabel": "Kuring nampi {{link}}",
+        "TermsTitle": "Sarat"
+    },
+    "notifications": {
+        "title": "Ijin",
+        "prompt": "Naha anjeun hoyong ngaktipkeun bewara? Anjeun bakal nampa apdet real-time ngeunaan hal anjeun ngeunaan miara.",
+        "yes": "Enya",
+        "no": "Entong",
+        "WelcomePleaseVerifyEmail": "Wilujeng sumping! Punten pariksa alamat email anjeun.",
+        "WelcomeVerifyEmail": "Wilujeng sumping! Pariksa alamat surélék anjeun.",
+        "ForgetPass": "Héy, anjeun hilap kalimah?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Milih kontak"
+        },
+        "select": {
+            "title": "Pilih kontak tina {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Mangga pilih labél.",
+        "inviteUser": "Diondang pamaké"
+    },
+    "invalidLanguageSelected": "Basa salah dipilih"
+}

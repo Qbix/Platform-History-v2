@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "Logi sisse",
+        "LogOut": "Logi välja"
+    },
+    "activate": {
+        "SetAsPrimary": "Määra {{1}} minu esmane {{2}}",
+        "ChoosePassPhrase": "Vali <strong>Pääsufraas<\/strong> sisse logida. <br> Lihtne fraas, mis koosneb mõnest sõnast, mida sa lihtsalt mäletad.",
+        "ChoosePassPhraseSeeSuggestions": "Valige oma konto kaitsmiseks hea <strong>pass-lause<\/strong> . Vaadake mõnede ideede soovitusi.",
+        "LogOutAndTryAgain": "Logi välja ja proovige uuesti",
+        "IfYouFeel": "Kui tunnete, et midagi läks valesti, saate seda teha",
+        "SetIdentifierButtonTitle": "Alusta uuesti"
+    },
+    "session": {
+        "GetStarted": "Alustama"
+    },
+    "authorize": {
+        "GetStarted": "Alustama",
+        "Authorize": "Luba",
+        "TermsLabel": "Olen lugenud ja nõus <br> {{link}}",
+        "TermsTitle": "Tingimused"
+    },
+    "register": {
+        "TermsLabel": "Nõustun {{link}}",
+        "TermsTitle": "Tingimused"
+    },
+    "notifications": {
+        "title": "Luba",
+        "prompt": "Kas soovite teatised lubada? Saate reaalajas värskendusi asjade kohta, mida sa hoolid.",
+        "yes": "Jah",
+        "no": "Ei",
+        "WelcomePleaseVerifyEmail": "Tere tulemast! Kinnitage oma e-posti aadress.",
+        "WelcomeVerifyEmail": "Tere tulemast! Kinnita oma e-posti aadress.",
+        "ForgetPass": "Hei, kas sa unustasid oma parooli?"
+    },
+    "usersContacts": {
+        "selectLabel": "Palun valige silt.",
+        "inviteUser": "Kutsu kasutaja"
+    },
+    "invalidLanguageSelected": "Valitud keel on vale",
+    "contacts": {
+        "dialog": {
+            "title": "Valige kontakt"
+        },
+        "select": {
+            "title": "Valige kontakt {{displayName}}"
+        }
+    }
+}

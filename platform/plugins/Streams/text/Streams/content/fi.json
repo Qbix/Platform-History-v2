@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Uusi kohde"
+    },
+    "labels": {
+        "Streams\/invited": "Ihmiset, joita olen kutsunut",
+        "Streams\/invitedMe": "Kuka kutsui minut"
+    },
+    "interests": {
+        "Filter": "Mistä nautit?",
+        "CanAdd": "Jos et vieläkään löydä etsimääsi, voit lisätä alla olevan uuden kiinnostuksen:",
+        "TrySynonyms": "Älä näe sitä? Kokeile synonyymejä.",
+        "AddUnderCategory": "Lisää luokkaan ...",
+        "Other": "muut",
+        "Unlisted": "noteeraamaton"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Viesti on merkitty järjestelmänvalvojan tarkistukseen. Napauta uudelleen, jos haluat avata.",
+        "noOneSaid": "Kukaan ei ole sanonut mitään",
+        "closeChatButton": "Sulje keskustelu",
+        "closeChatConfirmTitle": "Sulje tämä keskustelu?",
+        "closeChatConfirm": "Haluatko varmasti sulkea tämän chatin?",
+        "closeChatConfirmYes": "Joo",
+        "closeChatConfirmNo": "Ei",
+        "earlierComments": "aiemmat huomautukset",
+        "Subscribed": "Ohita ilmoitukset",
+        "Unsubscribed": "Saa ilmoituksia",
+        "dontHavePermissionJoinConversation": "Sinulla ei ole lupaa liittyä tähän keskusteluun.",
+        "startedConversation": "aloitti keskustelun",
+        "RealTimeCall": "Reaaliaikainen puhelu"
+    },
+    "notifications": {
+        "*": "Viesti {{& message.fields.type}} kohtaan {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sanoi:",
+        "Streams\/changed": "Muutokset {{stream.fields.title}}",
+        "Streams\/invite": "Sinut kutsuttiin {{& stream.fields.title}}",
+        "Streams\/announcement": "Ilmoitus {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} muutti virrankäyttöoikeutta",
+        "Streams\/chat\/edit": "Chat-viesti muokattu",
+        "Streams\/chat\/remove": "Chat-viesti poistettu",
+        "Streams\/closed": "{{stream.fields.title}} on suljettu",
+        "Streams\/task\/progress": "Edistyminen {{stream.fields.title}}",
+        "Streams\/task\/complete": "Tehtävä on valmis: {{stream.fields.title}}",
+        "Streams\/task\/error": "Virhe aikana: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Saapuva viesti",
+        "ManageEmailSubscriptions": "hallitse sähköpostiosoitteitasi",
+        "IfUnsubscribe": "Jos haluat peruuttaa tilauksen"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} kutsui sinut {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Valitse yhteystiedoista",
+            "selectFromContacts": "Valitse yhteystiedoista",
+            "photo": "Ottaa valokuva",
+            "photoInstruction": "Jos QR-koodisi skannannut henkilö on edessäsi, ota valokuva niistä",
+            "to": "Vastaanottaja: {{Stream Title}}",
+            "go": "Mennä",
+            "title": "kutsu",
+            "placeholder": "Matkapuhelinnumero tai sähköpostiosoite",
+            "orInvite": "Tai kutsua ihmisiä käyttämällä:",
+            "QR": "{{ClickOrTap}} luoda QR-koodi",
+            "QRtitle": "Skannaa tämä QR-koodi",
+            "byEmail": "Sähköposti",
+            "byText": "Teksti",
+            "byFacebook": "Facebook",
+            "byTwitter": "Viserrys",
+            "QRscanned": "He skannasi sen!",
+            "chooseAgainFromContacts": "Valitse Yhteystiedot-sovelluksesta uudelleen",
+            "inviteSelectedContacts": "Kutsu valitut yhteystiedot"
+        },
+        "email": {
+            "subject": "Hei, tarkista tämä",
+            "PleaseVisitLink": "Käy seuraavassa linkissä:",
+            "InvitingYou": "Kutsun sinut {{title}}",
+            "HasInvitedYou": "{{displayName}} on kutsunut sinut {{title}}"
+        },
+        "sms": {
+            "content": "Sinut on kutsuttu {{title}}. Napauta {{url}}"
+        },
+        "notice": {
+            "text": "Sinut on kutsuttu. {{ClickOrTap}} täällä hyväksyä ja liittyä."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} julkaisi <em>{{message.fields.type}}<\/em> -viestin osoitteeseen {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Kutsut lähetetään numerostamme, jota ystäväsi eivät vielä tunnista. Seuraa nopeaa tekstiä, jotta he tietävät, että kutsu tuli sinulta, pyytäen heitä napsauttamaan linkkiä.",
+            "confirm": "Kutsut lähetetään numerostamme, jota ystäväsi eivät vielä tunnista. Haluatko seurata nopeaa tekstiä, jotta he tietävät, että kutsu tuli sinulta, pyytäen heitä napsauttamaan linkkiä.",
+            "check": "Lähetin juuri sinulle kutsun {{app}} -sovellukseen. Tarkista sms ja napsauta linkkiä!"
+        },
+        "email": {
+            "alert": "Kutsut lähetetään verkkotunnuksestamme, jota ystäväsi eivät vielä tunnista. Seuraa nopeaa tekstiä, jotta he tietävät, että kutsu tuli sinulta, pyytäen heitä napsauttamaan linkkiä.",
+            "confirm": "Kutsut lähetetään verkkotunnuksestamme, jota ystäväsi eivät vielä tunnista. Haluatko seurata nopeaa tekstiä, jotta he tietävät, että kutsu tuli sinulta, pyytäen heitä napsauttamaan linkkiä.",
+            "subject": "Saitko kutsun?",
+            "body": "Lähetin juuri sinulle kutsun {{app}} -sovellukseen. Tarkista sähköpostiosoitteesi ja napsauta siellä olevaa linkkiä!"
+        }
+    },
+    "participating": {
+        "Title": "otsikko",
+        "Subscribed": "Tilatut",
+        "Participants": "osallistujien"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Ota mikrofoni käyttöön",
+            "cameraTitle": "Ota kamera käyttöön",
+            "cameraAndMicrophoneTitle": "Ota kamera ja mikrofoni käyttöön",
+            "dialogTitle": "Ota valintaikkuna käyttöön",
+            "microphoneBtn": "Ota mikrofoni käyttöön",
+            "cameraBtn": "Ota kamera käyttöön",
+            "cameraAndMicrophoneBtn": "Ota kamera ja mikrofoni käyttöön"
+        }
+    }
+}

@@ -15,6 +15,14 @@
 		"writeLevel": 0,
 		"adminLevel": 0
 	},
+	"Streams/user/profile": {
+		"type": "Streams/user/profile",
+		"title": "User Profile",
+		"icon": "Streams/profile",
+		"readLevel": 40,
+		"writeLevel": 0,
+		"adminLevel": 0
+	},
 	"Streams/invited": {
 		"type": "Streams/invited",
 		"title": "Invited",
@@ -151,15 +159,15 @@
 			"facebook": "link"
 		}
 	},
-	"Streams/user/facebook/uid": {
-		"type": "Streams/uid",
+	"Streams/user/facebook/xid": {
+		"type": "Streams/xid",
 		"title": "Facebook UserID",
 		"icon": "",
 		"platforms": {
 			"facebook": "id"
 		}
 	},
-	"Streams/user/twitter/uid": {
+	"Streams/user/twitter/xid": {
 		"type": "Streams/text/url",
 		"title": "Twitter UserID",
 		"icon": "",
@@ -240,6 +248,11 @@
 	"Streams/user/quotes": {
 		"type": "Streams/category",
 		"title": "Quotes",
+		"icon": ""
+	},
+	"Streams/user/urls": {
+		"type": "Streams/category",
+		"title": "User URLs",
 		"icon": ""
 	},
 	"Streams/image/album": {

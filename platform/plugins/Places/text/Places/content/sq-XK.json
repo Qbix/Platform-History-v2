@@ -1,0 +1,58 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "brenda {{1}}"
+    },
+    "units": {
+        "meter": "metër",
+        "meters": "metra",
+        "kilometer": "kilometër",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "milje",
+        "miles": "milje",
+        "mi": "mi",
+        "foot": "këmbë",
+        "feet": "këmbët",
+        "inches": "inç"
+    },
+    "location": {
+        "interested": "Unë jam i interesuar për gjërat që ndodhin brenda {{select}} të",
+        "update": "Përditëso vendndodhjen time",
+        "prompt": "{{ClickOrTap}} këtu <br> vendosur tuaj <br> vend",
+        "myCurrentLocation": "Vendndodhja ime aktuale",
+        "enterAddress": "Futni një adresë",
+        "enterPostcode": "Ju lutemi shkruani kodin postar / zipcode",
+        "create": {
+            "action": "Shto vendndodhjen",
+            "title": "Vendndodhja e re",
+            "nameYourLocation": "Emërtoni vendndodhjen tuaj"
+        },
+        "confirm": {
+            "title": "Ruaj këtë vendndodhje?",
+            "message": "A planifikoni të përdorni këtë vend përsëri në të ardhmen?",
+            "ok": "po",
+            "cancel": "jo"
+        },
+        "add": {
+            "title": "Emërtoni këtë vend",
+            "placeholder": "Shtëpi, Puna etj.",
+            "ok": "Save"
+        },
+        "dialog": {
+            "title": "Zgjidhni vendndodhjen"
+        },
+        "set": "Caktoni vendndodhjen time"
+    },
+    "areas": {
+        "filterPlaceholder": "Çdo zonë brenda këtij vendi?",
+        "newArea": "Zona e re",
+        "promptTitle": "Fut një emër për zonën:",
+        "absent": "Vendoseni zonën",
+        "error": "gabim",
+        "exist": "Zona tashmë ekziston",
+        "addNewArea": "Shto një zonë të re",
+        "add": "shtoj"
+    }
+}

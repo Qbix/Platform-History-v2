@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "လော့ဂ်အင်",
+        "LogOut": "နေ log out"
+    },
+    "activate": {
+        "SetAsPrimary": "ငါ၏အမူလတန်း {{2}} အဖြစ်သတ်မှတ်ရန် {{1}}",
+        "ChoosePassPhrase": "အတူဝငျရောကျဖို့ <strong>pass ထားသောစာပိုဒ်တိုများရွေးချယ်ပါ။<\/strong> <br> သင်အလွယ်တကူမှတ်မိလိမ့်မည်ဟုစကားအနည်းငယ်ပါဝင်သောတစ်ဦးကရိုးရှင်းတဲ့ထားသောစာပိုဒ်တိုများ။",
+        "ChoosePassPhraseSeeSuggestions": "<strong>သင့်အကောင့်ကိုကာကွယ်ရန်ကောင်းတစ်ဦးဖြတ်သန်းထားသောစာပိုဒ်တိုများရွေးချယ်ပါ။<\/strong> အချို့အတွေးအခေါ်များများအတွက်အကြံပြုချက်များကိုကြည့်ပါ။",
+        "LogOutAndTryAgain": "အထဲက Log နှင့်တဖန်ကြိုးစားပါ",
+        "IfYouFeel": "သငျသညျအရာတစ်ခုခုမှားသွားတယ်ခံစားရလျှင်, သင်လုပ်နိုင်သည်",
+        "SetIdentifierButtonTitle": "ကျော်စတင်ရန်"
+    },
+    "session": {
+        "GetStarted": "Started Get"
+    },
+    "authorize": {
+        "GetStarted": "Started Get",
+        "Authorize": "ခွင့်ပြု",
+        "TermsLabel": "ကျွန်မဖတ်ပါနှင့်သဘောတူခဲ့ကြ <br> အဆိုပါ {{link}} မှ",
+        "TermsTitle": "စည်းမျဉ်းစည်းကမ်းများ"
+    },
+    "register": {
+        "TermsLabel": "ငါ {{link}} ကိုလက်ခံ",
+        "TermsTitle": "စည်းမျဉ်းစည်းကမ်းများ"
+    },
+    "notifications": {
+        "title": "အခွင့်",
+        "prompt": "သငျသညျအသိပေးချက်များကိုဖွင့်လိုပါသလား သင်ဂရုစိုက်သောအရာတို့ကိုအကြောင်းကို Real-time updates များကိုလက်ခံရရှိပါလိမ့်မယ်။",
+        "yes": "ဟုတ်ကဲ့",
+        "no": "အဘယ်သူမျှမ",
+        "WelcomePleaseVerifyEmail": "ကြိုဆိုပါတယ်! သင့်အီးမေးလ်လိပ်စာအတည်ပြုရန်ပေးပါ။",
+        "WelcomeVerifyEmail": "ကြိုဆိုပါတယ်! သင့်အီးမေးလ်လိပ်စာ Verify ။",
+        "ForgetPass": "ဟေ့, သင်သည်သင်၏ passphrase ကိုမေ့လျော့ခဲ့တာလဲ"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "အဆက်အသွယ်ကိုရွေးချယ်ပါ"
+        },
+        "select": {
+            "title": "{{displayName}} ၏အဆက်အသွယ်ကိုရွေးချယ်ပါ"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "တံဆိပ်ရွေးချယ်ပါ။",
+        "inviteUser": "အသုံးပြုသူ Invite"
+    },
+    "invalidLanguageSelected": "မှားနေသောဘာသာစကားမရွေး"
+}

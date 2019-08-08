@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "קישור לקידום",
+                "startDate": "תאריך התחלה",
+                "startTime": "שעת התחלה",
+                "endDate": "תאריך סיום",
+                "endTime": "שעת סיום",
+                "budget": "תקציב"
+            },
+            "interests": {
+                "Title": "סינון לפי עניין",
+                "FilterInterests": "התחל להקליד עניין ..."
+            },
+            "Interest": "ריבית",
+            "Location": "מקום"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "ללכת",
+            "PasteLinkHere": "הדבק קישור כאן",
+            "BrowseTheWeb": "עיון",
+            "WriteToStartConversation": "כתוב את המחשבות שלך כדי להתחיל את השיחה",
+            "StartConversation": "התחל שיחה",
+            "GotoConversation": "עבור אל שיחה"
+        }
+    }
+}

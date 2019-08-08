@@ -71,4 +71,4 @@ class Q_Exception_PhpError extends Q_Exception
 	protected $fixTrace = false;
 };
 
-Q_Exception::add('Q_Exception_PhpError', '(PHP error) {{errstr}}');
+Q_Exception::add('Q_Exception_PhpError', '(PHP error) {{errstr}}', 500);

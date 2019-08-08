@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Pikkaðu til að borga"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: gjaldfærður fyrir {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Takk fyrir greiðslu þína til {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} áskrifandi að {{plan.title}}",
+        "YouSubscribedTo": "Þú hefur verið áskrifandi að {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Upplýsingar um pöntun",
+        "PaymentMethod": "Greiðslumáti",
+        "ContactInfo": "Hafa samband",
+        "Pay": "Borga"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Bjóddu samþykkt af {{1}}",
+        "YouHaveCreditsToStart": "Þú hefur {{1}} einingar til að byrja"
+    },
+    "history": {
+        "Date": "Dagsetning",
+        "Amount": "Magn",
+        "Description": "Lýsing",
+        "Client": "Viðskiptavinur",
+        "To": "að",
+        "From": "frá",
+        "HistoryEmpty": "Þú hefur engin gögn ennþá"
+    },
+    "subscriptions": {
+        "infoTitle": "Stilltu greiðsluupplýsingar",
+        "confirm": {
+            "title": "Byrjaðu áskrift",
+            "message": "Viltu gerast áskrifandi að {{title}}?",
+            "ok": "OK",
+            "cancel": "Hætta við"
+        }
+    },
+    "payments": {
+        "infoTitle": "Stilltu greiðsluupplýsingar",
+        "confirm": {
+            "title": "Greiða",
+            "message": "Ertu sammála um að greiða {{symbol}} {{amount}}?",
+            "ok": "OK",
+            "cancel": "Hætta við"
+        }
+    }
+}

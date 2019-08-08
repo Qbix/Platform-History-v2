@@ -24,6 +24,7 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.publisherId] defaults to ""
  * @param {string} [$fields.streamName] defaults to ""
  * @param {string} [$fields.instructions] defaults to null
+ * @param {string} [$fields.errors] defaults to null
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -48,6 +49,12 @@ Q.mixin(Base, Row);
  * @type String|Buffer
  * @default null
  * instructions for the task, encoded in binary, for workers to access
+ */
+/**
+ * @property errors
+ * @type String|Buffer
+ * @default null
+ * here we store all errors that occurred during the task
  */
 
 /**
@@ -260,7 +267,8 @@ Base.fieldNames = function () {
 	return [
 		"publisherId",
 		"streamName",
-		"instructions"
+		"instructions",
+		"errors"
 	];
 };
 
@@ -372,6 +380,42 @@ Base.prototype.maxSize_instructions = function () {
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
 Base.column_instructions = function () {
+
+return [["longblob",4294967296,"",false],true,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_errors
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_errors = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".errors");
+		if (typeof value === "string" && value.length > 4294967296)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".errors");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the errors field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_errors = function () {
+
+		return 4294967296;
+};
+
+	/**
+	 * Returns schema information for errors column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_errors = function () {
 
 return [["longblob",4294967296,"",false],true,"",null];
 };

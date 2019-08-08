@@ -1,0 +1,130 @@
+.Websites_webpage_preview_tool {
+	white-space: nowrap;
+	margin: 2px 2px 10px 0;
+	padding: 0;
+	position: relative;
+	border-radius: 7px;
+	border: none;
+}
+.Websites_webpage_preview_tool[data-mode=title] {
+	margin: 0;
+	box-shadow: none;
+}
+.Websites_webpage_preview_tool[data-mode=title] {
+	cursor: pointer;
+}
+.Websites_webpage_preview_tool[data-mode=title] .Users_pile_tool,
+.Websites_webpage_preview_tool[data-mode=title] .streams_chat_unseen {
+	display: none;
+}
+.Websites_webpage_preview_tool.Streams_chat_preview_noParticipants {
+	display: none;
+}
+.Websites_webpage_preview_tool .streams_chat_unseen {
+	display: none;
+	position: absolute;
+	border-radius: 50%;
+	font-size: 16px;
+	color: #fff;
+	font-weight: bold;
+	text-align: center;
+	height: 30px;
+	min-width: 30px;
+	line-height: 30px;
+	vertical-align: middle;
+	background-color: #cc5555;
+	top: 10px;
+	right: 10px;
+}
+.Websites_webpage_preview_tool .streams_chat_unseen.Streams_preview_nonzero {
+	display: block;
+}
+.Websites_webpage_preview_tool[data-participants] .streams_chat_unseen {
+	top: 23px;
+	right: 2px;
+	height: 25px;
+	min-width: 25px;
+	line-height: 25px;
+	font-size: 14px;
+	font-weight: normal;
+}
+.Websites_webpage_preview_tool .Users_pile_tool {
+	position: absolute;
+	right: 10px;
+	top: 2px;
+}
+.Websites_webpage_preview_tool {
+	cursor: pointer;
+}
+.Websites_webpage_preview_tool .Streams_aspect_url a:link,
+.Websites_webpage_preview_tool .Streams_aspect_url a:visited,
+.Websites_webpage_preview_tool .Streams_aspect_url a:focus {
+	color: blue;
+	text-decoration: underline;
+	font-size: 14px;
+}
+.Websites_webpage_preview_tool .Streams_preview_contents {
+	width: calc(100% - 60px);
+}
+.Websites_webpage_preview_tool[data-participants] .Streams_preview_contents {
+	width: calc(100% - 110px);
+}
+.Websites_webpage_preview_tool .Streams_preview_contents,
+.Websites_webpage_preview_tool .Streams_preview_contents > * {
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+.Websites_webpage_preview_tool .Streams_preview_contents,
+.Websites_webpage_preview_tool .Streams_preview_contents > * {
+	overflow: hidden;
+	text-overflow:ellipsis;
+}
+.Websites_webpage_preview_tool .Streams_preview_contents > .Users_pile_tool {
+	overflow: visible;
+}
+.Websites_webpage_preview_tool h3.Streams_preview_title {
+	font-size: 16px;
+	height: 24px;
+}
+.Websites_webpage_preview_tool .Streams_aspect_description {
+	font-size: 12px;
+}
+.Websites_webpage_preview_tool .Streams_aspect_interests a:link,
+.Websites_webpage_preview_tool .Streams_aspect_interests a:visited {
+	color: blue;
+}
+.Websites_webpage_preview_tool .Streams_aspect_interests {
+	font-size: 12px;
+	font-weight: normal;
+	white-space: nowrap;
+	line-height: 20px;
+}
+.Websites_webpage_preview_tool[data-mode=title] .Streams_aspect_interests {
+	background: #ccccee;
+	border-radius: 5px;
+	padding: 2px;
+}
+.Websites_webpage_preview_tool .Streams_aspect_interests img {
+	width: auto;
+	height: 16px;
+}
+.Websites_webpage_preview_tool ._Streams_aspect_interests::before {
+	font-family: 'qplatform-communities' !important;
+	content: "\e90d";
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 15px;
+	position: relative;
+	top: -1px;
+	vertical-align: middle;
+}
+.Websites_webpage_preview_tool .Streams_preview_icon {
+	margin: 0 10px 0 0;
+	vertical-align: top;
+}

@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Nou article"
+    },
+    "labels": {
+        "Streams/invited": "Persones que he convidat",
+        "Streams/invitedMe": "Qui em va convidar"
+    },
+    "interests": {
+        "Filter": "Què us agrada?",
+        "CanAdd": "Si encara no trobeu el que busqueu, podeu afegir un nou interès a continuació:",
+        "TrySynonyms": "No ho veieu? Proveu alguns sinònims.",
+        "AddUnderCategory": "Afegeix a la categoria ...",
+        "Other": "Altres",
+        "Unlisted": "Sense llista"
+    },
+    "chat": {
+        "flaggedForAdminReview": "S&#39;ha marcat el missatge per a la revisió de l’administrador. Toqueu de nou per desfer-se.",
+        "noOneSaid": "Ningú ha dit res",
+        "closeChatButton": "Tanca el xat",
+        "closeChatConfirmTitle": "Tanca aquest xat?",
+        "closeChatConfirm": "Esteu segur que voleu tancar aquest xat?",
+        "closeChatConfirmYes": "Sí",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "comentaris anteriors",
+        "Subscribed": "Notificacions de silenci",
+        "Unsubscribed": "Rebre notificacions",
+        "dontHavePermissionJoinConversation": "No teniu permís per unir-vos a aquesta conversa.",
+        "startedConversation": "va iniciar una conversa",
+        "RealTimeCall": "Trucada en temps real"
+    },
+    "notifications": {
+        "*": "Missatge {{& message.fields.type}} a {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} va dir:",
+        "Streams/changed": "Canvis a {{stream.fields.title}}",
+        "Streams/invite": "Us han convidat a {{& stream.fields.title}}",
+        "Streams/announcement": "Anunci en {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} ha canviat l’accés al flux",
+        "Streams/chat/edit": "S&#39;ha editat un missatge de xat",
+        "Streams/chat/remove": "S&#39;ha eliminat el missatge de xat",
+        "Streams/closed": "{{stream.fields.title}} s&#39;ha tancat",
+        "Streams/task/progress": "Progrés realitzat a {{stream.fields.title}}",
+        "Streams/task/complete": "Tasca completada: {{stream.fields.title}}",
+        "Streams/task/error": "Error durant: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Missatge entrant",
+        "ManageEmailSubscriptions": "gestiona les vostres subscripcions de correu electrònic",
+        "IfUnsubscribe": "Si voleu donar-vos de baixa"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} t&#39;ha convidat a {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Trieu un dels vostres contactes",
+            "selectFromContacts": "Seleccioneu De contactes",
+            "photo": "Fer una foto",
+            "photoInstruction": "Si la persona que va escanejar el seu codi QR és davant vostre, feu una foto",
+            "to": "A: {{Stream Title}}",
+            "go": "Vagi",
+            "title": "Convidar",
+            "placeholder": "Número de mòbil o adreça de correu electrònic",
+            "orInvite": "O convideu persones utilitzant:",
+            "QR": "{{ClickOrTap}} per generar codi QR",
+            "QRtitle": "Escaneja aquest codi QR",
+            "byEmail": "Correu electrònic",
+            "byText": "Text",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "El van escanejar!",
+            "chooseAgainFromContacts": "Trieu de nou els contactes",
+            "inviteSelectedContacts": "Convida a contactes seleccionats"
+        },
+        "email": {
+            "subject": "Hola, comprova-ho",
+            "PleaseVisitLink": "Visiteu l’enllaç següent:",
+            "InvitingYou": "Us convido a {{title}}",
+            "HasInvitedYou": "{{displayName}} t&#39;ha convidat a {{title}}"
+        },
+        "sms": {
+            "content": "Heu estat convidat a {{title}}. Toqueu {{url}}"
+        },
+        "notice": {
+            "text": "Has estat convidat. {{ClickOrTap}} aquí per acceptar i unir-se."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} ha publicat un missatge <em>{{message.fields.type}}</em> a {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} a {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Les invitacions s&#39;envien des del nostre número, que els teus amics encara no reconeixen. Feu un seguiment amb un text ràpid per fer-los saber que la vostra invitació va venir, demanant-los que facin clic a l&#39;enllaç.",
+            "confirm": "Les invitacions s&#39;envien des del nostre número, que els teus amics encara no reconeixen. Voleu fer un seguiment amb un text ràpid per fer-los saber que la vostra invitació va venir, demanant-los que faci clic a l’enllaç.",
+            "check": "Hola, acabo de enviar-te una invitació a l&#39;aplicació {{app}}. Comproveu els vostres sms i feu clic a l’enllaç."
+        },
+        "email": {
+            "alert": "Les invitacions s&#39;envien des del nostre domini, que els teus amics encara no reconeixen. Feu un seguiment amb un text ràpid per fer-los saber que la vostra invitació va venir, demanant-los que facin clic a l&#39;enllaç.",
+            "confirm": "Les invitacions s&#39;envien des del nostre domini, que els teus amics encara no reconeixen. Voleu fer un seguiment amb un text ràpid per fer-los saber que la vostra invitació va venir, demanant-los que faci clic a l’enllaç.",
+            "subject": "Heu rebut una invitació?",
+            "body": "Hola, acabo de enviar-te una invitació a l&#39;aplicació {{app}}. Comproveu el vostre correu electrònic i feu clic a l’enllaç allà."
+        }
+    },
+    "participating": {
+        "Title": "Títol",
+        "Subscribed": "Subscrit",
+        "Participants": "Participants"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Activa el micròfon",
+            "cameraTitle": "Habilita la càmera",
+            "cameraAndMicrophoneTitle": "Activa la càmera i el micròfon",
+            "dialogTitle": "Habilitació del diàleg",
+            "microphoneBtn": "Activa el micròfon",
+            "cameraBtn": "Habilita la càmera",
+            "cameraAndMicrophoneBtn": "Activa la càmera i el micròfon"
+        }
+    }
+}

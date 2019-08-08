@@ -2126,10 +2126,10 @@ class Db_Row implements Iterator
 		}
 		$query->limit(1); // get at most one
 		$rows = $query->fetchDbRows(get_class($this));
-		
+
 		// Return one db row, as per function description
-		if (isset($rows[0])) {
-			$this->copyFromRow($rows[0], '', true);
+		if (!empty($rows)) {
+			$this->copyFromRow(reset($rows), '', true);
 			if (class_exists('Q')) {
 				$params = array(
 					'row' => $this,
@@ -2269,12 +2269,12 @@ class Db_Row implements Iterator
 		if ($source instanceof Db_Row)
 			return $this->copyFromRow($source, $stripPrefix, $suppressHooks, $markModified);
 			
-		if (!empty($stripPrefix)) {
+		if ($stripPrefix) {
 			$prefix_len = strlen($stripPrefix);
 		}
 		
 		foreach ($source as $key => $value) {
-			if (!empty($stripPrefix)) {
+			if ($stripPrefix) {
 				if (strncmp($key, $stripPrefix, $prefix_len) != 0)
 					continue;
 				$stripped_key = substr($key, $prefix_len);

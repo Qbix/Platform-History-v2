@@ -16,9 +16,9 @@
  *
  * @param {array} [$fields=array()] The fields values to initialize table row as 
  * an associative array of $column => $value pairs
- * @param {string} [$fields.userId] defaults to ""
  * @param {string} [$fields.publisherId] defaults to ""
  * @param {string} [$fields.streamName] defaults to ""
+ * @param {string} [$fields.userId] defaults to ""
  * @param {integer} [$fields.readLevel] defaults to 0
  * @param {integer} [$fields.writeLevel] defaults to 0
  * @param {integer} [$fields.adminLevel] defaults to 0
@@ -31,12 +31,6 @@
 abstract class Base_Streams_Request extends Db_Row
 {
 	/**
-	 * @property $userId
-	 * @type string
-	 * @default ""
-	 * id of user who is requesting access to the stream
-	 */
-	/**
 	 * @property $publisherId
 	 * @type string
 	 * @default ""
@@ -47,6 +41,12 @@ abstract class Base_Streams_Request extends Db_Row
 	 * @type string
 	 * @default ""
 	 * local to shard of publisherId
+	 */
+	/**
+	 * @property $userId
+	 * @type string
+	 * @default ""
+	 * id of user who is requesting access to the stream
 	 */
 	/**
 	 * @property $readLevel
@@ -107,9 +107,9 @@ abstract class Base_Streams_Request extends Db_Row
 		$this->setTable(self::table());
 		$this->setPrimaryKey(
 			array (
-			  0 => 'userId',
-			  1 => 'publisherId',
-			  2 => 'streamName',
+			  0 => 'publisherId',
+			  1 => 'streamName',
+			  2 => 'userId',
 			)
 		);
 	}
@@ -130,10 +130,11 @@ abstract class Base_Streams_Request extends Db_Row
 	 * @method table
 	 * @static
 	 * @param {boolean} [$with_db_name=true] Indicates wheather table name should contain the database name
+	 * @param {string} [$alias=null] You can optionally provide an alias for the table to be used in queries
  	 * @return {string|Db_Expression} The table name as string optionally without database name if no table sharding
 	 * was started or Db_Expression class with prefix and database name templates is table was sharded
 	 */
-	static function table($with_db_name = true)
+	static function table($with_db_name = true, $alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', 'Streams', 'indexes', 'Request', false)) {
 			return new Db_Expression(($with_db_name ? '{$dbname}.' : '').'{$prefix}'.'request');
@@ -144,7 +145,8 @@ abstract class Base_Streams_Request extends Db_Row
   			if (!$with_db_name)
   				return $table_name;
   			$db = Db::connect('Streams');
-  			return $db->dbName().'.'.$table_name;
+			$alias = isset($alias) ? ' '.$alias : '';
+  			return $db->dbName().'.'.$table_name.$alias;
 		}
 	}
 	/**
@@ -164,20 +166,21 @@ abstract class Base_Streams_Request extends Db_Row
 	 * @static
 	 * @param {string|array} [$fields=null] The fields as strings, or array of alias=>field.
 	 *   The default is to return all fields of the table.
-	 * @param {string|array} [$alias=null] The tables as strings, or array of alias=>table.
+	 * @param {string} [$alias=null] Table alias.
 	 * @return {Db_Query_Mysql} The generated query
 	 */
 	static function select($fields=null, $alias = null)
 	{
 		if (!isset($fields)) {
 			$fieldNames = array();
+			$a = isset($alias) ? $alias.'.' : '';
 			foreach (self::fieldNames() as $fn) {
-				$fieldNames[] = $fn;
+				$fieldNames[] = $a .  $fn;
 			}
 			$fields = implode(',', $fieldNames);
 		}
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->select($fields, self::table().' '.$alias);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->select($fields, self::table(true, $alias));
 		$q->className = 'Streams_Request';
 		return $q;
 	}
@@ -191,8 +194,8 @@ abstract class Base_Streams_Request extends Db_Row
 	 */
 	static function update($alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->update(self::table().' '.$alias);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->update(self::table(true, $alias));
 		$q->className = 'Streams_Request';
 		return $q;
 	}
@@ -207,8 +210,8 @@ abstract class Base_Streams_Request extends Db_Row
 	 */
 	static function delete($table_using = null, $alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->delete(self::table().' '.$alias, $table_using);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->delete(self::table(true, $alias), $table_using);
 		$q->className = 'Streams_Request';
 		return $q;
 	}
@@ -223,8 +226,8 @@ abstract class Base_Streams_Request extends Db_Row
 	 */
 	static function insert($fields = array(), $alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->insert(self::table().' '.$alias, $fields);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->insert(self::table(true, $alias), $fields);
 		$q->className = 'Streams_Request';
 		return $q;
 	}
@@ -297,60 +300,6 @@ abstract class Base_Streams_Request extends Db_Row
 		return $q;
 	}
 	
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_userId
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_userId($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('userId', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".userId");
-		if (strlen($value) > 31)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".userId");
-		return array('userId', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the userId field
-	 * @return {integer}
-	 */
-	function maxSize_userId()
-	{
-
-		return 31;			
-	}
-
-	/**
-	 * Returns schema information for userId column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_userId()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varbinary',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);			
-	}
-
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
@@ -450,6 +399,60 @@ return array (
   array (
     0 => 'varbinary',
     1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_userId
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_userId($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('userId', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".userId");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".userId");
+		return array('userId', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the userId field
+	 * @return {integer}
+	 */
+	function maxSize_userId()
+	{
+
+		return 31;			
+	}
+
+	/**
+	 * Returns schema information for userId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_userId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '31',
     2 => '',
     3 => false,
   ),
@@ -882,7 +885,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('userId','publisherId','streamName') as $name) {
+			foreach (array('publisherId','streamName','userId') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
@@ -901,7 +904,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('userId', 'publisherId', 'streamName', 'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'state', 'actions', 'insertedTime', 'expireTime');
+		$field_names = array('publisherId', 'streamName', 'userId', 'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'state', 'actions', 'insertedTime', 'expireTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

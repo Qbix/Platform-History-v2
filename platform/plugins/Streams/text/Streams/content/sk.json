@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Nová vec"
+    },
+    "labels": {
+        "Streams\/invited": "Ľudia, ktorých som pozval",
+        "Streams\/invitedMe": "Kto ma pozval"
+    },
+    "interests": {
+        "Filter": "Čo vás baví?",
+        "CanAdd": "Ak stále nemôžete nájsť to, čo hľadáte, môžete pridať nový záujem nižšie:",
+        "TrySynonyms": "Nevidíte to? Vyskúšajte niektoré synonymá.",
+        "AddUnderCategory": "Pridať do kategórie ...",
+        "Other": "ostatné",
+        "Unlisted": "neregistrovaný"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Správa bola označená správcom na posúdenie správcom. Opätovným ťuknutím znovu rozviňte.",
+        "noOneSaid": "Nikto nič nepovedal",
+        "closeChatButton": "Zatvorte chat",
+        "closeChatConfirmTitle": "Zatvorte tento chat?",
+        "closeChatConfirm": "Naozaj chcete ukončiť tento rozhovor?",
+        "closeChatConfirmYes": "Áno",
+        "closeChatConfirmNo": "žiadny",
+        "earlierComments": "predchádzajúce pripomienky",
+        "Subscribed": "Ignorovať upozornenia",
+        "Unsubscribed": "Dostať upozornenia",
+        "dontHavePermissionJoinConversation": "Nemáte povolenie na pripojenie sa k tejto konverzácii.",
+        "startedConversation": "začal konverzáciu",
+        "RealTimeCall": "Hovor v reálnom čase"
+    },
+    "notifications": {
+        "*": "Správa {{& message.fields.type}} až {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} povedal:",
+        "Streams\/changed": "Zmeny v {{stream.fields.title}}",
+        "Streams\/invite": "Boli ste pozvaní na {{& stream.fields.title}}",
+        "Streams\/announcement": "Oznámenie v {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} zmenil prístup k prúdom",
+        "Streams\/chat\/edit": "Správa chatu bola upravená",
+        "Streams\/chat\/remove": "Správa chatu bola odstránená",
+        "Streams\/closed": "{{stream.fields.title}} bolo zatvorené",
+        "Streams\/task\/progress": "Pokrok dosiahnutý {{stream.fields.title}}",
+        "Streams\/task\/complete": "Úloha bola dokončená: {{stream.fields.title}}",
+        "Streams\/task\/error": "Chyba počas: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Prichádzajúca správa",
+        "ManageEmailSubscriptions": "spravovať odbery e-mailov",
+        "IfUnsubscribe": "Ak sa chcete odhlásiť"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} vás pozvalo na {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Vyberte si z kontaktov",
+            "selectFromContacts": "Vyberte položku Z kontaktov",
+            "photo": "Odfoť",
+            "photoInstruction": "Ak osoba, ktorá naskenovala váš kód QR, je pred vami, odfotografujte ich",
+            "to": "Komu: {{Stream Title}}",
+            "go": "ísť",
+            "title": "vyzvať",
+            "placeholder": "Mobilné číslo alebo e-mailová adresa",
+            "orInvite": "Alebo pozvať ľudí pomocou:",
+            "QR": "{{ClickOrTap}} na generovanie QR kódu",
+            "QRtitle": "Naskenujte tento QR kód",
+            "byEmail": "e-mail",
+            "byText": "text",
+            "byFacebook": "Facebook",
+            "byTwitter": "cvrlikání",
+            "QRscanned": "Skenovali to!",
+            "chooseAgainFromContacts": "Znova zvoľte možnosť Kontakty",
+            "inviteSelectedContacts": "Pozvať vybraných kontaktov"
+        },
+        "email": {
+            "subject": "Hej, pozrite sa na to",
+            "PleaseVisitLink": "Navštívte nasledujúci odkaz:",
+            "InvitingYou": "Pozývam vás na adresu {{title}}",
+            "HasInvitedYou": "{{displayName}} vás pozvalo na {{title}}"
+        },
+        "sms": {
+            "content": "Boli ste pozvaní na {{title}}. Kliknite na {{url}}"
+        },
+        "notice": {
+            "text": "Boli ste pozvaní. {{ClickOrTap}} tu prijať a pripojiť sa."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} uverejnil <em>{{message.fields.type}}<\/em> správu pre {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} v {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Pozvánky sa odosielajú z nášho čísla, ktoré vaši priatelia ešte nepoznajú. Nasledujte rýchly text, aby ste vedeli, že pozvanie prišlo od vás, a požiadajte ich, aby klikli na odkaz.",
+            "confirm": "Pozvánky sa odosielajú z nášho čísla, ktoré vaši priatelia ešte nepoznajú. Chceli by ste nadviazať rýchly text, aby ste vedeli, že pozvanie prišlo od vás a požiadali ich, aby klikli na odkaz.",
+            "check": "Hej, práve som vám poslal pozvánku na aplikáciu {{app}}. Skontrolujte svoje SMS a kliknite na odkaz!"
+        },
+        "email": {
+            "alert": "Pozvánky sa odosielajú z našej domény, ktorú vaši priatelia ešte nepoznajú. Nasledujte rýchly text, aby ste vedeli, že pozvanie prišlo od vás, a požiadajte ich, aby klikli na odkaz.",
+            "confirm": "Pozvánky sa odosielajú z našej domény, ktorú vaši priatelia ešte nepoznajú. Chceli by ste nadviazať rýchly text, aby ste vedeli, že pozvanie prišlo od vás a požiadali ich, aby klikli na odkaz.",
+            "subject": "Dostali ste pozvanie?",
+            "body": "Hej, práve som vám poslal pozvánku na aplikáciu {{app}}. Skontrolujte svoj e-mail a kliknite na odkaz."
+        }
+    },
+    "participating": {
+        "Title": "nadpis",
+        "Subscribed": "upísaný",
+        "Participants": "účastníci"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Povoliť mikrofón",
+            "cameraTitle": "Povoliť kameru",
+            "cameraAndMicrophoneTitle": "Povoliť kameru a mikrofón",
+            "dialogTitle": "Povolenie dialógu",
+            "microphoneBtn": "Povoliť mikrofón",
+            "cameraBtn": "Povoliť kameru",
+            "cameraAndMicrophoneBtn": "Povoliť fotoaparát a mikrofón"
+        }
+    }
+}

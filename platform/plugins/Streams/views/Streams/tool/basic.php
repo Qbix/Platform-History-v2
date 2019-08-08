@@ -61,7 +61,7 @@ $prefix = Q_Html::getIdPrefix();
 		<td class="Q_field_input">
 			<select name="gender" class="select" id="<?php echo $prefix ?>gender">
 				<?php echo Q_Html::options(
-					array('male' => 'male', 'female' => 'female'),
+					array('male' => 'male', 'female' => 'female', 'other' => 'other'),
 					'', Streams::my('Streams/user/gender'), '', "\n\t\t\t\t"
 				) ?> 
 			</select>

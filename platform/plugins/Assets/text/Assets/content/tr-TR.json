@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Ödemek için hafifçe vurun"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} için ücret işlendi",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} tutarındaki ödemeniz için teşekkür ederiz.",
+        "SubscribedTo": "{{call 'user.displayName'}} abone oldu {{plan.title}}",
+        "YouSubscribedTo": "{{plan.title}} adlı kullanıcıya abone oldunuz."
+    },
+    "payment": {
+        "AboutOrder": "Sipariş hakkında bilgi",
+        "PaymentMethod": "Ödeme şekli",
+        "ContactInfo": "İletişim bilgileri",
+        "Pay": "ödeme"
+    },
+    "credits": {
+        "InviteAcceptedBy": "{{1}} tarafından kabul edilen davet",
+        "YouHaveCreditsToStart": "Başlamak için {{1}} krediniz var"
+    },
+    "history": {
+        "Date": "tarih",
+        "Amount": "Miktar",
+        "Description": "Açıklama",
+        "Client": "müşteri",
+        "To": "için",
+        "From": "itibaren",
+        "HistoryEmpty": "Henüz hiçbir bilginiz yok"
+    },
+    "subscriptions": {
+        "infoTitle": "Ödeme Bilgilerini Ayarla",
+        "confirm": {
+            "title": "Aboneliği Başlat",
+            "message": "{{title}} abonesi olmak ister misiniz?",
+            "ok": "tamam",
+            "cancel": "İptal etmek"
+        }
+    },
+    "payments": {
+        "infoTitle": "Ödeme Bilgilerini Ayarla",
+        "confirm": {
+            "title": "Bir ödeme yapmak",
+            "message": "{{symbol}} {{amount}} ödemeyi kabul ediyor musun?",
+            "ok": "tamam",
+            "cancel": "İptal etmek"
+        }
+    }
+}

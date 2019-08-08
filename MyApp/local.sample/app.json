@@ -1,9 +1,9 @@
 {
 	"Q": {
-		"localNotYetConfigured": "REMOVE THIS ENTRY WHEN YOU ARE DONE WITH THE LOCAL CONFIGURATION",
+		"localNotYetConfigured": "TODO: REMOVE THIS ENTRY WHEN YOU ARE DONE WITH THE LOCAL CONFIGURATION",
 		"web": {
-			"appRootUrl": "https://myapp.local",
-			"controllerSuffix": "" /* "or index.php if no URL rewriting on webserver" */
+			"appRootUrl": "http://gmba.local/Coinect",
+			"controllerSuffix": ""
 		},
 		"node" : {
 			"host": "MyApp.loc",
@@ -21,23 +21,17 @@
 			"host": "127.0.0.1",
 			"port": "10501"
 		},
+		"internal": {
+			"secret": "TODO: CHANGE TO SOME RANDOM STRING, FOR SIGNING DATA TO BE SENT BACK TO US"
+		},
 		"images": {
 			"pixabay": null /* {
-				"username": "YOUR USERNAME HERE",
-				"key": "YOUR SECRET KEY HERE"
+				"username": "TODO: YOUR USERNAME HERE",
+				"key": "TODO: YOUR SECRET KEY HERE"
 			} */
-		},
-		"external": {
-			"secret": "CHANGE TO SOME RANDOM STRING, FOR SIGNING DATA FOR EXTERNAL CLIENTS"
-		},
-		"internal": {
-			"secret": "CHANGE TO SOME RANDOM STRING, FOR SIGNING INTERNAL MESSAGES"
 		},
 		"environment": "",
 		/* "scriptFiles": ["config/Q/urls.php"], */
-		"session": {
-			"allowHijack": true /* set to false in production */
-		},
 		"javascript": {
 			"prettyPrintData": true
 		}
@@ -45,21 +39,17 @@
 	"Db": {
 		"connections": {
 			"*": {
-				"dsn": "mysql:host=localhost;dbname=DBNAME;charset=utf8",
-				"username": "USERNAME",
-				"password": "PASSWORD",
+				"dsn": "mysql:host=127.0.0.1;dbname=Coinect",
+				"username": "Coinect",
+				"password": "0wdzLx0_rp2rV62yKknC",
 				"driver_options": { "3": 2 }	
 			},
-			"Users": {
-				"prefix": "users_",
-				"shards": {}
-			},
-			"Streams": {
-				"prefix": "streams_",
-				"shards": {}
-			}
-		},
-		"logging": true
+			"Users": { "prefix": "users_" },
+			"Streams": { "prefix": "streams_" },
+			"Assets": { "prefix": "assets_" },
+			"Places": { "prefix": "places_" },
+			"Websites": { "prefix": "websites_" }
+		}
 	},
 	"Users": {
 		"community": {
@@ -109,12 +99,15 @@
 		"apps": {
 			"platforms": ["facebook", "ios", "android"],
 			"export": ["facebook"],
+			/* TODO: set up your external apps on external services */
 			"facebook": {
 				"MyApp": {
 					"name": "FACEBOOK APP NAME HERE",
 					"appId": "FACEBOOK APP ID HERE",
 					"secret": "PUT SECRET HERE",
 					"url": "http://apps.facebook.com/YOURAPP",
+					"baseUrl": "https://myapp.local",
+					"paths": [""],
 					"domains": ["THE BASE DOMAINS YOU SET IN FACEBOOK, USED FOR AUTH COOKIE"]
 				}
 			},
@@ -122,22 +115,28 @@
 				"MyApp": {
 					"appId": "com.mycompany.myapp",
 					"url": "https://itunes.apple.com/us/app/keynote/id361285480?mt=8",
+					"baseUrl": "https://myapp.local",
 					"scheme": "myapp://",
+					"paths": [""],
+					"customUserAgentString": "myapp.ios",
 					"sandbox": true,
 					"logging": "ios",
 					"device": {
-						"added": "Notifications have been enabled"
+						"added": ["MyApp/content", ["notifications", "Enabled"]]
 					},
 					"secret": "SHARED SECRET HERE",
 					"token": { /* see https://github.com/node-apn/node-apn/blob/master/doc/provider.markdown */
 						"key": "local/Users/certs/MyApp/token/cert.p8",
-						"keyId": "Find it at https://developer.apple.com/account/ios/certificate/",
+						"keyId": "TODO: Find it at https://developer.apple.com/account/ios/certificate/",
 						"passphrase": null,
-						"teamId": "Find it at https://developer.apple.com/account/#/membership"
+						"teamId": "TODO: Find it at https://developer.apple.com/account/#/membership"
 					},
 					"ssl": { /* see https://developer.apple.com/library/content/documentation/IDEs/Conceptual/AppDistributionGuide/AddingCapabilities/AddingCapabilities.html#//apple_ref/doc/uid/TP40012582-CH26-SW11 */
 						"cert": "local/Users/certs/MyApp/sandbox/bundle.pem",
 						"passphrase": null
+					},
+					"authorize": {
+						"automatic": false
 					}
 				}
 			},
@@ -145,15 +144,24 @@
 				"MyApp": {
 					"appId": "com.mycompany.myapp",
 					"url": "https://play.google.com/store/apps/details?id=com.mycompany.myapp",
+					"baseUrl": "https://myapp.local",
 					"scheme": "myapp://",
+					"paths": ["/"],
+					"custom": "myapp.android",
 					"key": "AUTHORIZATION KEY HERE",
-					"senderID": "YOUR SENDER ID HERE"
+					"senderID": "YOUR SENDER ID HERE",
+					"authorize": {
+						"automatic": false
+					}
 				}
 			},
 			"amazon": {
 				"MyApp": {
 					"appId": "B01MQTS32B",
 					"url": "http://www.amazon.com/gp/mas/dl/android?asin=B01MQTS32B",
+					"baseUrl": "https://myapp.local",
+					"paths": ["/"],
+					"customUserAgentString": "myapp.amazon",
 					"clientId": "ADM CLIENT ID HERE",
 					"secret": "SHARED SECRET HERE"
 				}
@@ -162,20 +170,25 @@
 				"MyApp": {
 					"appId": "9nblggh2s4gt",
 					"url": "https://www.microsoft.com/en-us/store/p/monster-go/9nblggh2s4gt",
+					"baseUrl": "https://myapp.local",
+					"paths": ["/"],
+					"customUserAgentString": "myapp.windows",
 					"clientId": "PACKAGE SECURITY IDENTIFIER",
 					"secret": "SHARED SECRET HERE"
 				}
 			},
 			"web": {
 				"MyApp": {
-					"appId": "com.mycompany.myapp",
-					"privateKey": "RELATIVE TO MyApp/local",
+					"appId": "myapp.local",
+					"baseUrl": "https://myapp.local",
+					"paths": ["/"],
+					"privateKey": "FILENAME RELATIVE TO MyApp/local",
 					"publicKey": "THE LITERAL PUBLIC KEY"
 				}
 			}
 		},
 		"newsapi": {
-			"key": "GET A NEWSAPI.ORG KEY FOR Users/activate suggestions"
+			"key": "TODO: GET A NEWSAPI.ORG KEY FOR Users/activate SUGGESTIONS"
 		}
 	},
 	"Streams": {
@@ -184,17 +197,20 @@
 				"facebook": ["FACEBOOK APP ID HERE"],
 				"ios": ["361285480"]
 			*/ }
+		},
+		"froala": { 
+			"key": "TODO: GET FROALA KEY"
 		}
 	},
 	"Assets": {
 		"payments":  {
 			"stripe": null, /* {
-				"secret": "XXXXX",
-				"publishableKey": "XXXXX"
+				"secret": "TODO: CAN GET STRIPE SECRET",
+				"publishableKey": "TODO: CAN GET STRIPE PUBLISHABLE KEY"
 			}, */
 			"authnet": null /* {
-				"name": "XXXXX",
-				"transactionKey": "XXXXX",
+				"name": "TODO: CAN GET AUTHNET NAME",
+				"transactionKey": "TODO: CAN GET AUTHNET TRANSACTION KEY",
 				"testing": false
 			} */
 		}
@@ -202,8 +218,8 @@
 	"Places": {
 		"google": {
 			"keys": {
-				"server": "GET A GOOGLE API KEY for server API calls",
-				"web": "GET A GOOGLE API KEY for website calls"
+				"server": "TODO: GET SERVER KEY",
+				"web": "TODO: GET WEB KEY"
 			}
 		}
 	},

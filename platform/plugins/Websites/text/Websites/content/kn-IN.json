@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "ಪ್ರಚಾರಕ್ಕಾಗಿ ಲಿಂಕ್",
+                "startDate": "ಪ್ರಾರಂಭ ದಿನಾಂಕ",
+                "startTime": "ಆರಂಭವಾಗುವ",
+                "endDate": "ಅಂತಿಮ ದಿನಾಂಕ",
+                "endTime": "ಎಂಡ್ ಟೈಮ್",
+                "budget": "ಬಜೆಟ್"
+            },
+            "interests": {
+                "Title": "ಬಡ್ಡಿ ಮೂಲಕ ಫಿಲ್ಟರ್ ಮಾಡಿ",
+                "FilterInterests": "ಆಸಕ್ತಿಯನ್ನು ಟೈಪ್ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿ ..."
+            },
+            "Interest": "ಆಸಕ್ತಿ",
+            "Location": "ಸ್ಥಳ"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "ಹೋಗಿ",
+            "PasteLinkHere": "ಲಿಂಕ್ ಅನ್ನು ಇಲ್ಲಿ ಅಂಟಿಸಿ",
+            "BrowseTheWeb": "ಬ್ರೌಸ್",
+            "WriteToStartConversation": "ಸಂಭಾಷಣೆಯನ್ನು ಪ್ರಾರಂಭಿಸಲು ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಬರೆಯಿರಿ",
+            "StartConversation": "ಸಂವಾದವನ್ನು ಪ್ರಾರಂಭಿಸಿ",
+            "GotoConversation": "ಸಂಭಾಷಣೆಗೆ ಹೋಗಿ"
+        }
+    }
+}

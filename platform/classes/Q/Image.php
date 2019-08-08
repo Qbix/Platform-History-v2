@@ -25,6 +25,106 @@ define('Q_SPRITE_Z',			128);
  */
 class Q_Image
 {
+	/**
+	 * Gets an array of "WxH" => "$filename.png" pairs from the
+	 * "Q"/"images"/$type/"sizes" config. These are stored in the config
+	 * for various types of images, so that e.g. clients can't simply
+	 * specify their own sizes.
+	 * Call array_keys() on the returned value to get just an array of sizes.
+	 * @method getSizes
+	 * @static
+	 * @param {string} $type The type of image
+	 * @param {number} [$maxStretch=null] Can pass reference to a variable that will be filled
+	 *   with a number from the config, or 1 if nothing is found
+	 * @return {array} 
+	 * @throws {Q_Exception_MissingConfig} if the config field is missing.
+	 */
+	static function getSizes($type, &$maxStretch = null)
+	{
+		$sizes = Q_Config::expect("Q", "images", $type, 'sizes');
+		$maxStretch = Q_Config::get("Q", "images", $type, 'maxStretch', 1);
+		if (Q::isAssociative($sizes)) {
+			return $sizes;
+		}
+
+		$sizes2 = array();
+		foreach ($sizes as $size) {
+			$sizes2[$size] = "$size.png";
+		}
+
+		return $sizes2;
+	}
+
+	/**
+	 * Gets an array of "$filename.png" => $url pairs using the
+	 * "Q"/"images"/$type/"sizes" config. These are stored in the config
+	 * for various types of images, so that e.g. clients can't simply
+	 * specify their own sizes.
+	 * Call array_keys() on the returned value to get just an array of sizes.
+	 * @method iconArrayWithUrl
+	 * @static
+	 * @param {string} $url The url of the image to fill the array with.
+	 * @param {string} $type The type of image
+	 * @param {number} [$maxStretch=null] Can pass reference to a variable that will be filled
+	 *   with a number from the config, or 1 if nothing is found
+	 * @return {array}
+	 * @throws {Q_Exception_MissingConfig} if the config field is missing.
+	 */
+	static function iconArrayWithUrl($url, $type, &$maxStretch = null)
+	{
+		$sizes = Q_Image::getSizes($type, $maxStretch);
+		$icon = array();
+		foreach ($sizes as $size) {
+			$icon[$size] = $url;
+		}
+		return $icon;
+	}
+
+	/**
+	 * Gets the value of the the "Q"/"images"/$type/"defaultSize" config.
+	 * It should be a key in the "Q"/"images"/$type/"sizes" config array.
+	 * @method getDefaultSize
+	 * @static
+	 * @param {string} $type The type of image
+	 * @return {array} 
+	 * @throws {Q_Exception_MissingConfig} if the config field is missing.
+	 */
+	static function getDefaultSize($type)
+	{
+		return Q_Config::expect('Q', 'images', $type, 'defaultSize');
+	}
+	
+	/**
+	 * Returns the name of the image size that should be used
+	 * based on the device pixel ratio in Q_dpr cookie, if any.
+	 * @method calculateSize
+	 * @static
+	 * @param {double} $size
+	 * @param {array} [$sizes=array()] The array of possible sizes for this image
+	 * @return {string} The index in the "sizes" array, like "200" or "200x"
+	 */
+	static function calculateSize($size, $sizes = array())
+	{
+		$dpr = Q::ifset($_COOKIE, 'Q_dpr', 1);
+		$scaled = $size * $dpr;
+		$closest = $max = 100000000;
+		$index = null;
+		foreach ($sizes as $k => $s) {
+			$parts = explode('x', $k);
+			if (empty($parts[1])) {
+				$parts[1] = $parts[0];
+			}
+			if (!$parts[0]) {
+				$parts[0] = $parts[1];
+			}
+			$diff = $scaled - min($parts[0], $parts[1]);
+			if ($diff >= 0 and $diff < $closest) {
+				$closest = $diff;
+				$index = $k;
+			}
+		}
+		return isset($index) ? $index : "$k"; // take the last key by default
+	}
 
 	/**
 	 * Returns png avatar image. Can check gravatar.com for avatar
@@ -77,7 +177,7 @@ class Q_Image
 	}
 	
 	/**
-	 * Download an image from pixabay
+	 * Get an image from pixabay search
 	 * @param {string} $keywords Specify some string to search images on pixabay
 	 * @param {array} [$options=array()] Any additional options for pixabay api as per its documentation
 	 * @param {boolean} [$returnFirstImage=false] If true, downloads and returns the first image as data
@@ -85,11 +185,7 @@ class Q_Image
 	 */
 	static function pixabay($keywords, $options = array(), $returnFirstImage = false)
 	{
-		$info = Q_Config::get('Q', 'images', 'pixabay', null);
-		if (!$info['key']) {
-			throw new Q_Exception_MissingConfig(array('fieldpath' => 'Q/images/pixabay/key'));
-		}
-		$key = $info['key'];
+		$key = Q_Config::expect('Q', 'images', 'pixabay', 'key');
 		$defaults = array();
 		$options = array_merge($defaults, $options);
 		$optionString = http_build_query($options, '', '&');
@@ -104,30 +200,68 @@ class Q_Image
 			return null;
 		}
 		$webformatUrl = $data['hits'][0]['webformatURL'];
-		$data = @file_get_contents($webformatUrl);
-		return $data;
+		return @file_get_contents($webformatUrl);
 	}
-
+	
 	/**
-	 * Saves an avatar image, in a certain size. Can check gravatar.com for avatar
-	 * @method put
-	 * @static
-	 * @param {string} $filename The name of image file
-	 * @param {string} $hash The md5 hash to build avatar
-	 * @param {integer} [$size=Q_AVATAR_SIZE] Avatar size in pixels
-	 * @param {string} [$type='wavatar'] Type of avatar - one of 'wavatar', 'monster', 'imageid'
-	 * @param {boolean} [$gravatar=false]
-	 * @return {GDImageLink}
-     * @throws {Q_Exception} If GD is not supported
-     * @throws {Q_Exception_WrongValue} If avatar type is not supported
+	 * Get an image from facebook search
+	 * @param {string} $keywords Specify some string to search people on facebook
+	 * @param {array} [$options=array()] Any additional options for pixabay api as per its documentation
+	 * @param {boolean} [$returnFirstImage=false] If true, downloads and returns the first image as data
+	 * @return {array} An array of image URLs representing large photos
 	 */
-	static function put($filename, $hash, $size = Q_AVATAR_SIZE, $type = 'wavatar', $gravatar = false) {
-		$result = self::avatar($hash, $size, $type, $gravatar);
-		if ($gravatar) {
-			file_put_contents($filename, $result);
-		} else {
-			imagepng($result, $filename);
+	static function facebook($keywords, $options = array(), $returnFirstImage = false)
+	{
+		$cookie = Q_Config::expect('Q', 'images', 'facebook', 'cookie');
+		$url = 'https://mbasic.facebook.com/search/top/?q='.urlencode($keywords);
+		$html = Q_Utils::get($url, null, true, array("cookie: $cookie"));
+		$pattern = '/\\<img src=\\"([^\\"]*?)\\" class=\\".*\\" alt=\\"'.$keywords.'\\"/i';
+		$matches = array();
+		preg_match_all($pattern, $html, $matches);
+		$results = array();
+		if (!empty($matches[1])) {
+			foreach ($matches[1] as $src) {
+				$results[] = htmlspecialchars_decode($src);
+			}
 		}
+		if (!$returnFirstImage) {
+			return $results;
+		}
+		return empty($results) ? null : @file_get_contents(reset($results));
+	}
+	
+	/**
+	 * Get an image from google image search
+	 * @param {string} $keywords Specify some string to search people on facebook
+	 * @param {array} [$options=array()] Any additional options for pixabay api as per its documentation
+	 * @param {boolean} [$returnFirstImage=false] If true, downloads and returns the first image as data
+	 * @return {array} An array of image URLs representing large photos
+	 */
+	static function google($keywords, $options = array(), $returnFirstImage = false)
+	{
+		$key = Q_Config::expect('Q', 'images', 'google', 'key');
+		$url = 'https://www.googleapis.com/customsearch/v1?'
+		. http_build_query(array(
+			'imgType' => 'face',
+			'searchType' => 'image',
+			'imgSize' => 'medium',
+			'num' => 3,
+			'cx' => '009593684493750256938:4qicgdisydu',
+			'key' => $key,
+			'q' => $keywords
+		));
+		$json = Q_Utils::get($url);
+		$result = Q::json_decode($json, true);
+		$results = array();
+		if (!empty($result['items'])) {
+			foreach ($result['items'] as $item) {
+				$results[] = $item['link'];
+			}
+		}
+		if (!$returnFirstImage) {
+			return $results;
+		}
+		return empty($results) ? null : @file_get_contents(reset($results));
 	}
 	
 	/**
@@ -140,8 +274,12 @@ class Q_Image
 	 * @param {string} [$params.subpath=""] subpath that should follow the path, to save the image under
 	 * @param {string} [$params.merge=""] path under web dir for an optional image to use as a background
 	 * @param {string} [$params.crop] array with keys "x", "y", "w", "h" to crop the original image
-	 * @param {string} [$params.save=array("x" => "")] array of $size => $basename pairs
+	 * @param {string} [$params.save='x'] name of config under Q/image/sizes, which
+	 *  are an array of $size => $basename pairs
 	 *  where the size is of the format "WxH", and either W or H can be empty.
+	 *  These are stored in the config for various types of images, 
+	 *  and you pass the name of the config, so that e.g. clients can't simply
+	 *  specify their own sizes.
 	 * @param {string} [$params.skipAccess=false] if true, skips the check for authorization to write files there
 	 * @return {array} an array of ($size => $fullImagePath) pairs
 	 */
@@ -205,13 +343,14 @@ class Q_Image
 			}
 		}
 		$crop = isset($params['crop']) ? $params['crop'] : array();
-		$save = !empty($params['save']) ? $params['save'] : array('x' => '');
-		if (!Q::isAssociative($save)) {
+		$save = !empty($params['save']) ? $params['save'] : 'x';
+		if (!is_string($save)) {
 			throw new Q_Exception_WrongType(array(
 				'field' => 'save',
-				'type' => 'associative array'
+				'type' => 'string'
 			));
 		}
+		$sizes = Q_Image::getSizes($save);
 		// crop parameters - size of source image
 		$isw = isset($crop['w']) ? $crop['w'] : $iw;
 		$ish = isset($crop['h']) ? $crop['h'] : $ih;
@@ -229,7 +368,7 @@ class Q_Image
 				$mh = imagesy($merge);
 			}
 		}
-		foreach ($save as $size => $name) {
+		foreach ($sizes as $size => $name) {
 			if (empty($name)) {
 				// generate a filename
 				do {
@@ -269,21 +408,15 @@ class Q_Image
 				}
 				// calculate the origin point of source image
 				// we have a cropped image of dimension $sw, $sh and need to make new with dimension $dw, $dh
-				if ($dw/$sw < $dh/$sh) {
-					// source is wider then destination
-					$new = $dw/$dh * $sh;
-					$sx += round(($sw - $new)/2);
-					$sw = round($new);
-				} else {
-					// source is narrower then destination
-					$new = $dh/$dw * $sw;
-					$sy += round(($sh - $new)/2);
-					$sh = round($new);
-				}
+				$min = min($sw / $dw, $sh / $dh);
+				$w2 = round($dw * $min);
+				$h2 = round($dh * $min);
+				$sx = round($sx + ($sw - $w2) / 2);
+				$sy = round($sy + ($sh - $h2) / 2);
 			} else {
 				$size = '';
-				$dw = $sw;
-				$dh = $sh;
+				$dw = $w2 = $sw;
+				$dh = $h2 = $sh;
 			}
 			// create destination image
 			$maxWidth = Q_Config::get('Q', 'images', 'maxWidth', null);
@@ -297,9 +430,9 @@ class Q_Image
 			$thumb = imagecreatetruecolor($dw, $dh);
 			imagesavealpha($thumb, true);
 			imagealphablending($thumb, false);
-			$res = ($sw === $dw && $sh === $dh)
-				? imagecopy($thumb, $image, 0, 0, $sx, $sy, $sw, $sh)
-				: imagecopyresampled($thumb, $image, 0, 0, $sx, $sy, $dw, $dh, $sw, $sh);
+			$res = ($w2 === $dw && $h2 === $dh)
+				? imagecopy($thumb, $image, 0, 0, $sx, $sy, $w2, $h2)
+				: imagecopyresampled($thumb, $image, 0, 0, $sx, $sy, $dw, $dh, $w2, $h2);
 			if (!$res) {
 				throw new Q_Exception("Failed to save image file of type '$ext'");
 			}
@@ -829,12 +962,12 @@ class Q_Image
 		// restore random seed
 		srand();
 		// resize if needed, then output
-		if($size && $size < Q_AVATAR_SIZE){
+		if ($size && $size < Q_AVATAR_SIZE){
 			$out = imagecreatetruecolor($size,$size);
 			imagecopyresampled($out,$monster,0,0,0,0,$size,$size,Q_AVATAR_SIZE,Q_AVATAR_SIZE);
 			imagedestroy($monster);
 			return $out;
-		}else{
+		} else{
 			return $monster;
 		}
 	}

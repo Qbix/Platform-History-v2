@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "Логирај Се",
+        "LogOut": "се одјавите"
+    },
+    "activate": {
+        "SetAsPrimary": "Постави {{1}} како примарна {{2}}",
+        "ChoosePassPhrase": "Изберете <strong>фраза<\/strong> за влез за да се најавите. <br> Едноставна фраза која се состои од неколку зборови кои лесно ќе ги паметите.",
+        "ChoosePassPhraseSeeSuggestions": "Изберете добра <strong>фраза за<\/strong> да ја заштитите вашата сметка. Погледнете ги предлозите за некои идеи.",
+        "LogOutAndTryAgain": "Одјавете се и обидете се повторно",
+        "IfYouFeel": "Ако мислите дека нешто не е во ред, можете",
+        "SetIdentifierButtonTitle": "почнете со работа"
+    },
+    "session": {
+        "GetStarted": "Почни"
+    },
+    "authorize": {
+        "GetStarted": "Почни",
+        "Authorize": "Овластете",
+        "TermsLabel": "Прочитав и се согласувам <br> до {{link}}",
+        "TermsTitle": "Услови"
+    },
+    "register": {
+        "TermsLabel": "Го прифаќам {{link}}",
+        "TermsTitle": "Услови"
+    },
+    "notifications": {
+        "title": "Дозвола",
+        "prompt": "Дали сакате да овозможите известувања? Ќе добивате ажурирања во реално време за работи за кои се грижите.",
+        "yes": "Да",
+        "no": "Не",
+        "WelcomePleaseVerifyEmail": "Добредојдовте! Ве молиме потврдете ја вашата е-адреса.",
+        "WelcomeVerifyEmail": "Добредојдовте! Потврди ја вашата e-mail адреса.",
+        "ForgetPass": "Еј, ја заборавивте вашата тајна фраза?"
+    },
+    "usersContacts": {
+        "selectLabel": "Изберете етикета.",
+        "inviteUser": "Поканете го корисникот"
+    },
+    "invalidLanguageSelected": "Невалиден јазик избран",
+    "contacts": {
+        "dialog": {
+            "title": "Изберете контакт"
+        },
+        "select": {
+            "title": "Изберете контакт од {{displayName}}"
+        }
+    }
+}

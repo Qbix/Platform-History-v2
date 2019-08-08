@@ -87,7 +87,8 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	
 		if (state.userId === '') {
 			var fields = Q.extend({}, state.templates.contents.fields, {
-				name: ''
+				name: '',
+				state: state
 			});
 			Q.Template.render('Users/avatar/icon/blank', fields, function (err, html) {
 				p.fill('icon')(html);
@@ -138,10 +139,10 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 
 );
 
-Q.Template.set('Users/avatar/loading', '<img src="{{& src}}" alt="{{alt}}" class="Users_avatar_loading Users_avatar_icon Users_avatar_icon_{{size}}">');
+Q.Template.set('Users/avatar/loading', '{{#if state.icon}}<img src="{{& src}}" alt="{{alt}}" class="Users_avatar_loading Users_avatar_icon Users_avatar_icon_{{size}}">{{else}}...{{/if}}');
 Q.Template.set('Users/avatar/icon', '<img src="{{& src}}" alt="{{alt}}" class="Users_avatar_icon Users_avatar_icon_{{size}}">');
 Q.Template.set('Users/avatar/contents', '<{{tag}} class="Users_avatar_name">{{& name}}</{{tag}}>');
 Q.Template.set('Users/avatar/icon/blank', '<div class="Users_avatar_icon Users_avatar_icon_blank"></div>');
 Q.Template.set('Users/avatar/contents/blank', '<div class="Users_avatar_name Users_avatar_name_blank">&nbsp;</div>');
 
-})(Q, jQuery, window);
+})(Q, Q.$, window);

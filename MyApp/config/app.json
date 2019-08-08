@@ -6,13 +6,13 @@
 			"compatible": "0.1",
 			"requires": {
 				"Q": "1.0",
-				"Users": "1.0",
-				"Streams": "1.0"
+				"Users": "1.0.4",
+				"Streams": "1.0.5"
 			},
 			"recognizes": {
 				"Q": "1.0",
-				"Users": "1.0",
-				"Streams": "1.0"
+				"Users": "1.0.4",
+				"Streams": "1.0.5"
 			},
 			"connections": []
 		},
@@ -24,9 +24,9 @@
 			"Q/configure": ["MyApp/after/Q_configure"]
 		},
 		"routes": {
-			"": {"module": "MyApp", "action": "welcome"},
+			"facebook/:action": {"module": "MyApp", "facebook": 1},
 			":action": {"module": "MyApp"},
-			"facebook/:action": {"module": "MyApp", "facebook": 1}
+			"": {"module": "MyApp", "action": "welcome"}
 		},
 		"response": {
 			"slotNames": ["dashboard", "content", "dialogs", "title", "notices"],
@@ -74,11 +74,20 @@
 					"{{Users}}/js/Users.js": "js/all.js",
 					"{{Streams}}/js/Streams.js": "js/all.js",
 					"js/MyApp.js": "js/all.js"
+				},
+				"urls": {
+					"caching": true,
+					"integrity": true
+				}
+			},
+			"test": {
+				"urls": {
+					"caching": true
 				}
 			}
 		},
 		"text": {
-			"useLocale": false,
+			"useLocale": false, /* run translate.php script first */
 			"MyApp": {
 				"dashboard.php": ["MyApp/content"],
 				"content": {
@@ -127,30 +136,26 @@
 		"login": {
 			"identifierType": "email,mobile"
 		},
-		"authorize": {
-			"clients": {
-				"MyApp-ios": {
-					"paths": null,
-					"scopes": {
-						"all": "give this app full access"
-					},
-					"automatic": true
-				},
-				"MyApp-android": {
-					"paths": null,
-					"scopes": {
-						"all": "give this app full access"
-					},
-					"automatic": true
-				}
-			}
-		},
 		"onInsert": {
 			"labels": {
 				"Users/friends": ["Friends", "labels/Users/friends"],
 				"Users/family": ["Family", "labels/Users/family"],
 				"Users/business": ["Business", "labels/Users/business"],
 				"Users/dating": ["Dating", "labels/Users/dating"]
+			},
+			"roles": {
+				"Users/owners": ["Owners", "labels/Users/owners"],
+				"Users/admins": ["Admins", "labels/Users/admins"],
+				"Users/members": ["Members", "labels/Users/members"],
+				"Users/guests": ["Guests", "labels/Users/guests"]
+			}
+		},
+		"quotas": {
+			"Streams/invite": {
+				"604800": {
+					"": 50,
+					"Users/admins": 10000
+				}
 			}
 		}
 	},
@@ -167,22 +172,22 @@
 	"Assets": {
 		"transactional": {
 			"charge": {
-				"subject": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+				"subject": {"replace": ["MyApp/content", ["notifications", "ChargeProcessedFor"]]},
 				"body": "MyApp/email/charge.php",
 				"sms": "MyApp/sms/charge.php"
 			},
 			"charged": {
-				"subject": "Thank you for your payment to {{call 'publisher.displayName'}}",
+				"subject": {"replace": ["MyApp/content", ["notifications", "ThankForPayment"]]},
 				"body": "MyApp/email/charged.php",
 				"sms": "MyApp/sms/charged.php"
 			},
 			"startSubscription": {
-				"subject": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+				"subject": {"replace": ["MyApp/content", ["notifications", "SubscribedToPlan"]]},
 				"body": "MyApp/email/startSubscription.php",
 				"sms": "MyApp/sms/startSubscription.php"
 			},
 			"startedSubscription": {
-				"subject": "You have been subscribed to {{plan.title}}",
+				"subject": {"replace": ["MyApp/content", ["notifications", "YouSubscribedToPlan"]]},
 				"body": "MyApp/email/startedSubscription.php",
 				"sms": "MyApp/sms/startedSubscription.php"
 			}

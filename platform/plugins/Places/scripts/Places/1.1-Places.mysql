@@ -1,0 +1,7 @@
+CREATE TABLE {$prefix}location (
+  `geohash` varchar(31) NOT NULL COMMENT 'the geohash of a real-world location',
+  `publisherId` varbinary(31) NOT NULL COMMENT 'publisher of a stream with this location',
+  `streamName` varbinary(255) NOT NULL COMMENT 'the name of the stream',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY (`geohash`)
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

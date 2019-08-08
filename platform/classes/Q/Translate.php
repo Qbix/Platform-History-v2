@@ -20,7 +20,7 @@ class Q_Translate
 		$this->adapter->saveAll();
 	}
 
-	function getSrc($lang, $locale, $throwIfMissing = false, &$objects)
+	function getSrc($lang, $locale, $throwIfMissing = false, &$objects = null)
 	{
 		$arr = array();
 		if (!is_dir($this->options['in'])) {
@@ -85,7 +85,9 @@ class Q_Translate
 		$appConfig = APP_CONFIG_DIR . DS . 'locales.json';
 		$platformConfig = Q_CONFIG_DIR . DS . 'Q' . DS . 'locales.json';
 		$config = null;
-		if (file_exists($appLocalConfig)) {
+		if ($this->options['locales']) {
+			$config = $tree->load($this->options['locales']);
+		} else if (file_exists($appLocalConfig)) {
 			$config = $tree->load($appLocalConfig);
 		} elseif (file_exists($appConfig)) {
 			$config = $tree->load($appConfig);

@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "ouvri sesyon an",
+        "LogOut": "Dekonekte"
+    },
+    "activate": {
+        "SetAsPrimary": "Mete {{1}} kòm prensipal mwen {{2}}",
+        "ChoosePassPhrase": "Chwazi yon <strong>fraz pas<\/strong> pou konekte. <br> Yon fraz senp ki gen ladan kèk mo ke ou pral fasil sonje.",
+        "ChoosePassPhraseSeeSuggestions": "Chwazi yon <strong>fraz pas<\/strong> bon pou pwoteje kont ou. Gade sijesyon yo pou kèk ide.",
+        "LogOutAndTryAgain": "Log out epi eseye ankò",
+        "IfYouFeel": "Si ou santi yon bagay ale mal, ou kapab",
+        "SetIdentifierButtonTitle": "rekomanse"
+    },
+    "session": {
+        "GetStarted": "Kòmanse"
+    },
+    "authorize": {
+        "GetStarted": "Kòmanse",
+        "Authorize": "Otorize",
+        "TermsLabel": "Mwen te li epi mwen dakò <br> nan {{link}}",
+        "TermsTitle": "Tèm yo"
+    },
+    "register": {
+        "TermsLabel": "Mwen aksepte {{link}}",
+        "TermsTitle": "Tèm yo"
+    },
+    "notifications": {
+        "title": "Pèmisyon",
+        "prompt": "Èske w vle pèmèt notifikasyon yo? Ou pral resevwa dènye enfòmasyon an tan reyèl sou bagay ou pran swen.",
+        "yes": "Wi",
+        "no": "Non",
+        "WelcomePleaseVerifyEmail": "Byenveni! Tanpri verifye adrès imèl ou.",
+        "WelcomeVerifyEmail": "Byenveni! Verify adrès imel ou.",
+        "ForgetPass": "Hey, ou te bliye pasfraz ou a?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Chwazi kontak"
+        },
+        "select": {
+            "title": "Chwazi kontak nan {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Tanpri chwazi etikèt.",
+        "inviteUser": "Envite Itilizatè a"
+    },
+    "invalidLanguageSelected": "Lang valab chwazi"
+}

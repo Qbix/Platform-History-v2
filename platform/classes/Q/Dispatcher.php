@@ -436,6 +436,9 @@ class Q_Dispatcher
 		if (!empty($_GET['Q_ct'])) {
 			Q_Response::setCookie('Q_ct', $_GET['Q_ct']);
 		}
+		if (!empty($_GET['Q_ut'])) {
+			Q_Response::setCookie('Q_ut', $_GET['Q_ut']);
+		}
 		if (!empty($_GET['Q_cordova'])) {
 			Q_Response::setCookie('Q_cordova', $_GET['Q_cordova']);
 		}
@@ -499,6 +502,13 @@ class Q_Dispatcher
 				return;
 			}
 			self::$handlingErrors = true;
+			
+			$header = isset($exception->header) ? $exception->header : 412;
+			if (is_numeric($header)) {
+				http_response_code($header);
+			} else if (is_string($header)) {
+				header($header);
+			}
 		
 			if (Q::canHandle("$module/errors")) {
 				/**

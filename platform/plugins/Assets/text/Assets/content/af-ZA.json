@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tik om te betaal"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: koste verwerk vir {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Dankie vir jou betaling aan {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} ingeteken op {{plan.title}}",
+        "YouSubscribedTo": "Jy is ingeteken op {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Inligting oor bestelling",
+        "PaymentMethod": "Betalings metode",
+        "ContactInfo": "Kontakbesonderhede",
+        "Pay": "betaal"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Uitnodiging aanvaar deur {{1}}",
+        "YouHaveCreditsToStart": "Jy het {{1}} krediete om te begin"
+    },
+    "history": {
+        "Date": "datum",
+        "Amount": "bedrag",
+        "Description": "beskrywing",
+        "Client": "kliënt",
+        "To": "om",
+        "From": "van",
+        "HistoryEmpty": "U het nog geen data nie"
+    },
+    "subscriptions": {
+        "infoTitle": "Stel betalinginligting op",
+        "confirm": {
+            "title": "Begin intekening",
+            "message": "Wil u inteken op {{title}}?",
+            "ok": "OK",
+            "cancel": "kanselleer"
+        }
+    },
+    "payments": {
+        "infoTitle": "Stel betalinginligting op",
+        "confirm": {
+            "title": "Maak n betaling",
+            "message": "Stem u in om {{symbol}} {{amount}} te betaal?",
+            "ok": "OK",
+            "cancel": "kanselleer"
+        }
+    }
+}

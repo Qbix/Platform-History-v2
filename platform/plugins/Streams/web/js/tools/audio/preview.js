@@ -199,4 +199,4 @@
 	//Q.Template.set('Streams/audio/preview/edit',
 	//	'<audio controls autoplay src="{{baseUrl}}{{src}}" style="margin: 20px">'
 	//);
-})(Q, jQuery, window);
+})(Q, Q.$, window);

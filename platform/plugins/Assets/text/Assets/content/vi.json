@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Nhấn để thanh toán"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: phí được xử lý cho {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Cảm ơn bạn đã thanh toán cho {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} đã đăng ký {{plan.title}}",
+        "YouSubscribedTo": "Bạn đã đăng ký {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Thông tin về đơn hàng",
+        "PaymentMethod": "Phương thức thanh toán",
+        "ContactInfo": "Thông tin liên lạc",
+        "Pay": "Trả"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Mời được chấp nhận bởi {{1}}",
+        "YouHaveCreditsToStart": "Bạn có {{1}} tín dụng để bắt đầu"
+    },
+    "history": {
+        "Date": "Ngày",
+        "Amount": "Số tiền",
+        "Description": "Sự miêu tả",
+        "Client": "Khách hàng",
+        "To": "đến",
+        "From": "từ",
+        "HistoryEmpty": "Bạn chưa có dữ liệu"
+    },
+    "subscriptions": {
+        "infoTitle": "Đặt thông tin thanh toán",
+        "confirm": {
+            "title": "Bắt đầu đăng ký",
+            "message": "Bạn có muốn đăng ký {{title}} không?",
+            "ok": "được",
+            "cancel": "Hủy bỏ"
+        }
+    },
+    "payments": {
+        "infoTitle": "Đặt thông tin thanh toán",
+        "confirm": {
+            "title": "Thực hiện thanh toán",
+            "message": "Bạn có đồng ý trả {{symbol}} {{amount}} không?",
+            "ok": "được",
+            "cancel": "Hủy bỏ"
+        }
+    }
+}

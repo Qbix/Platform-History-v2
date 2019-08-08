@@ -96,4 +96,4 @@ Q.Template.set("Websites/seo",
 	"{{& url}}{{& title}}{{& keywords}}{{& description}}"
 );
 
-})(Q, jQuery, window, document);
+})(Q, Q.$, window, document);

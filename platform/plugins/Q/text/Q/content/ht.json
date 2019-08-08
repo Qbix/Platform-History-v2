@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Erè {{status}} pandan demann lan",
+        "canceled": "Demann anile",
+        "500": "Erè sèvè entèn yo",
+        "404": "Pa jwenn: {{url}}",
+        "501": "Demann koupe"
+    },
+    "nonce": {
+        "sameDomain": "Sesyon ekspire. Refresh paj la epi eseye ankò.",
+        "otherDomain": "Bloke kwa-domèn demann nan domèn etranje nan {{baseUrl}}"
+    },
+    "words": {
+        "tap": "tape",
+        "click": "klike sou",
+        "yes": "wi",
+        "no": "non",
+        "Tap": "Tap",
+        "Click": "Klike",
+        "Yes": "Wi",
+        "No": "Non"
+    },
+    "months": {
+        "1": "Janvye",
+        "2": "fevriye",
+        "3": "Mas",
+        "4": "Avril",
+        "5": "Me",
+        "6": "Jen",
+        "7": "Jiyè",
+        "8": "Out",
+        "9": "Septanm",
+        "10": "Oktòb",
+        "11": "Novanm",
+        "12": "Desanm"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Tanpri pèmèt aksè nan mikwofòn ou",
+        "record": "Ekri",
+        "recording": "Anrejistreman",
+        "remains": "rete",
+        "maximum": "maksimòm",
+        "playing": "Jwe",
+        "recorded": "Anrejistre",
+        "clip": "clip",
+        "orupload": "Oswa Voye",
+        "usethis": "Sèvi ak sa a",
+        "discard": "Jete",
+        "encoding": "Encoding"
+    },
+    "alert": {
+        "title": "Alèt"
+    },
+    "confirm": {
+        "title": "Konfime",
+        "ok": "Wi",
+        "cancel": "Non"
+    },
+    "prompt": {
+        "title": "Èd",
+        "ok": "Ale"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Erè li dosye ...",
+        "cameraCommands": {
+            "prompt": "Ki sa ou ta renmen fè?",
+            "photo": "Pran nouvo foto",
+            "library": "Chwazi nan bibliyotèk la"
+        },
+        "tooSmall": "Tanpri chwazi yon imaj pi gwo.",
+        "cropping": {
+            "title": "Ajiste gwosè ak pozisyon",
+            "touchscreen": "Sèvi ak dwèt ou pou rale ak trennen",
+            "notTouchscreen": "Sèvi ak sourit ou &amp; wou rale ak trennen"
+        }
+    }
+}

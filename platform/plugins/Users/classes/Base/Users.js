@@ -27,7 +27,6 @@ module.exports = Base;
  * @type array
  */
 Base.tableClasses = [
-	"Users_AppUser",
 	"Users_Contact",
 	"Users_Device",
 	"Users_Email",
@@ -37,7 +36,6 @@ Base.tableClasses = [
 	"Users_Label",
 	"Users_Link",
 	"Users_Mobile",
-	"Users_OAuth",
 	"Users_Quota",
 	"Users_Session",
 	"Users_Total",
@@ -63,13 +61,6 @@ Base.db = function () {
 Base.connectionName = function() {
 	return 'Users';
 };
-
-/**
- * Link to Users.AppUser model
- * @property AppUser
- * @type Users.AppUser
- */
-Base.AppUser = Q.require('Users/AppUser');
 
 /**
  * Link to Users.Contact model
@@ -133,13 +124,6 @@ Base.Link = Q.require('Users/Link');
  * @type Users.Mobile
  */
 Base.Mobile = Q.require('Users/Mobile');
-
-/**
- * Link to Users.OAuth model
- * @property OAuth
- * @type Users.OAuth
- */
-Base.OAuth = Q.require('Users/OAuth');
 
 /**
  * Link to Users.Quota model

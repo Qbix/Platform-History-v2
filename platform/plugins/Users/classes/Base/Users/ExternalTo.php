@@ -16,36 +16,78 @@
  *
  * @param {array} [$fields=array()] The fields values to initialize table row as 
  * an associative array of $column => $value pairs
- * @param {string} [$fields.publisherId] defaults to ""
  * @param {string} [$fields.userId] defaults to ""
- * @param {string} [$fields.xid] defaults to ""
+ * @param {string} [$fields.platform] defaults to ""
+ * @param {string} [$fields.appId] defaults to ""
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {string} [$fields.xid] defaults to ""
+ * @param {string} [$fields.responseType] defaults to null
+ * @param {string} [$fields.accessToken] defaults to null
+ * @param {string|Db_Expression} [$fields.expires] defaults to null
+ * @param {string} [$fields.extra] defaults to "{}"
  */
 abstract class Base_Users_ExternalTo extends Db_Row
 {
 	/**
-	 * @property $publisherId
-	 * @type string
-	 * @default ""
-	 * 
-	 */
-	/**
 	 * @property $userId
 	 * @type string
 	 * @default ""
-	 * 
+	 * The native user id in our platform
 	 */
 	/**
-	 * @property $xid
+	 * @property $platform
 	 * @type string
 	 * @default ""
-	 * The external user id
+	 * A platform like facebook or github or web
+	 */
+	/**
+	 * @property $appId
+	 * @type string
+	 * @default ""
+	 * An ID in the local/app.json config for the app
 	 */
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 * 
+	 */
+	/**
+	 * @property $updatedTime
+	 * @type string|Db_Expression
+	 * @default null
+	 * 
+	 */
+	/**
+	 * @property $xid
+	 * @type string
+	 * @default ""
+	 * The user's external id
+	 */
+	/**
+	 * @property $responseType
+	 * @type string
+	 * @default null
+	 * The type of oAuth 2 response
+	 */
+	/**
+	 * @property $accessToken
+	 * @type string
+	 * @default null
+	 * Bearer token given to the client to access resources
+	 */
+	/**
+	 * @property $expires
+	 * @type string|Db_Expression
+	 * @default null
+	 * When the token expires
+	 */
+	/**
+	 * @property $extra
+	 * @type string
+	 * @default "{}"
+	 * JSON with any extra attributes
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -58,8 +100,9 @@ abstract class Base_Users_ExternalTo extends Db_Row
 		$this->setTable(self::table());
 		$this->setPrimaryKey(
 			array (
-			  0 => 'publisherId',
-			  1 => 'userId',
+			  0 => 'userId',
+			  1 => 'platform',
+			  2 => 'appId',
 			)
 		);
 	}
@@ -80,10 +123,11 @@ abstract class Base_Users_ExternalTo extends Db_Row
 	 * @method table
 	 * @static
 	 * @param {boolean} [$with_db_name=true] Indicates wheather table name should contain the database name
+	 * @param {string} [$alias=null] You can optionally provide an alias for the table to be used in queries
  	 * @return {string|Db_Expression} The table name as string optionally without database name if no table sharding
 	 * was started or Db_Expression class with prefix and database name templates is table was sharded
 	 */
-	static function table($with_db_name = true)
+	static function table($with_db_name = true, $alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', 'Users', 'indexes', 'ExternalTo', false)) {
 			return new Db_Expression(($with_db_name ? '{$dbname}.' : '').'{$prefix}'.'external_to');
@@ -94,7 +138,8 @@ abstract class Base_Users_ExternalTo extends Db_Row
   			if (!$with_db_name)
   				return $table_name;
   			$db = Db::connect('Users');
-  			return $db->dbName().'.'.$table_name;
+			$alias = isset($alias) ? ' '.$alias : '';
+  			return $db->dbName().'.'.$table_name.$alias;
 		}
 	}
 	/**
@@ -114,20 +159,21 @@ abstract class Base_Users_ExternalTo extends Db_Row
 	 * @static
 	 * @param {string|array} [$fields=null] The fields as strings, or array of alias=>field.
 	 *   The default is to return all fields of the table.
-	 * @param {string|array} [$alias=null] The tables as strings, or array of alias=>table.
+	 * @param {string} [$alias=null] Table alias.
 	 * @return {Db_Query_Mysql} The generated query
 	 */
 	static function select($fields=null, $alias = null)
 	{
 		if (!isset($fields)) {
 			$fieldNames = array();
+			$a = isset($alias) ? $alias.'.' : '';
 			foreach (self::fieldNames() as $fn) {
-				$fieldNames[] = $fn;
+				$fieldNames[] = $a .  $fn;
 			}
 			$fields = implode(',', $fieldNames);
 		}
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->select($fields, self::table().' '.$alias);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->select($fields, self::table(true, $alias));
 		$q->className = 'Users_ExternalTo';
 		return $q;
 	}
@@ -141,8 +187,8 @@ abstract class Base_Users_ExternalTo extends Db_Row
 	 */
 	static function update($alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->update(self::table().' '.$alias);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->update(self::table(true, $alias));
 		$q->className = 'Users_ExternalTo';
 		return $q;
 	}
@@ -157,8 +203,8 @@ abstract class Base_Users_ExternalTo extends Db_Row
 	 */
 	static function delete($table_using = null, $alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->delete(self::table().' '.$alias, $table_using);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->delete(self::table(true, $alias), $table_using);
 		$q->className = 'Users_ExternalTo';
 		return $q;
 	}
@@ -173,8 +219,8 @@ abstract class Base_Users_ExternalTo extends Db_Row
 	 */
 	static function insert($fields = array(), $alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->insert(self::table().' '.$alias, $fields);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->insert(self::table(true, $alias), $fields);
 		$q->className = 'Users_ExternalTo';
 		return $q;
 	}
@@ -250,60 +296,6 @@ abstract class Base_Users_ExternalTo extends Db_Row
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_publisherId
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_publisherId($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('publisherId', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".publisherId");
-		if (strlen($value) > 31)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".publisherId");
-		return array('publisherId', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the publisherId field
-	 * @return {integer}
-	 */
-	function maxSize_publisherId()
-	{
-
-		return 31;			
-	}
-
-	/**
-	 * Returns schema information for publisherId column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_publisherId()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varbinary',
-    1 => '31',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_userId
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -351,48 +343,48 @@ return array (
   ),
   1 => false,
   2 => 'PRI',
-  3 => NULL,
+  3 => '',
 );			
 	}
 
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_xid
+	 * @method beforeSet_platform
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_xid($value)
+	function beforeSet_platform($value)
 	{
 		if (!isset($value)) {
 			$value='';
 		}
 		if ($value instanceof Db_Expression) {
-			return array('xid', $value);
+			return array('platform', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".xid");
+			throw new Exception('Must pass a string to '.$this->getTable().".platform");
 		if (strlen($value) > 31)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".xid");
-		return array('xid', $value);			
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".platform");
+		return array('platform', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the xid field
+	 * Returns the maximum string length that can be assigned to the platform field
 	 * @return {integer}
 	 */
-	function maxSize_xid()
+	function maxSize_platform()
 	{
 
 		return 31;			
 	}
 
 	/**
-	 * Returns schema information for xid column
+	 * Returns schema information for platform column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_xid()
+	static function column_platform()
 	{
 
 return array (
@@ -404,8 +396,62 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => '',
-  3 => NULL,
+  2 => 'PRI',
+  3 => '',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_appId
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_appId($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('appId', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".appId");
+		if (strlen($value) > 200)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".appId");
+		return array('appId', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the appId field
+	 * @return {integer}
+	 */
+	function maxSize_appId()
+	{
+
+		return 200;			
+	}
+
+	/**
+	 * Returns schema information for appId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_appId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '200',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => '',
 );			
 	}
 
@@ -418,6 +464,9 @@ return array (
 	 */
 	function beforeSet_insertedTime($value)
 	{
+		if (!isset($value)) {
+			return array('insertedTime', $value);
+		}
 		if ($value instanceof Db_Expression) {
 			return array('insertedTime', $value);
 		}
@@ -445,33 +494,322 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '31',
+    1 => '200',
     2 => '',
     3 => false,
   ),
-  1 => false,
+  1 => true,
   2 => '',
   3 => 'CURRENT_TIMESTAMP',
 );			
 	}
 
 	/**
-	 * Check if mandatory fields are set and updates 'magic fields' with appropriate values
-	 * @method beforeSave
-	 * @param {array} $value The array of fields
-	 * @return {array}
-	 * @throws {Exception} If mandatory field is not set
+	 * Method is called before setting the field and normalize the DateTime string
+	 * @method beforeSet_updatedTime
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
 	 */
+	function beforeSet_updatedTime($value)
+	{
+		if (!isset($value)) {
+			return array('updatedTime', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('updatedTime', $value);
+		}
+		if ($value instanceof DateTime) {
+			$value = $value->getTimestamp();
+		}
+		if (is_numeric($value)) {
+			$newDateTime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
+		$value = $datetime->format("Y-m-d H:i:s");
+		return array('updatedTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_updatedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '200',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_xid
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_xid($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('xid', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".xid");
+		if (strlen($value) > 200)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".xid");
+		return array('xid', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the xid field
+	 * @return {integer}
+	 */
+	function maxSize_xid()
+	{
+
+		return 200;			
+	}
+
+	/**
+	 * Returns schema information for xid column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_xid()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '200',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value belongs to enum values list
+	 * @method beforeSet_responseType
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value does not belong to enum values list
+	 */
+	function beforeSet_responseType($value)
+	{
+		if (!isset($value)) {
+			return array('responseType', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('responseType', $value);
+		}
+		if (!in_array($value, array('token','code')))
+			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".responseType");
+		return array('responseType', $value);			
+	}
+
+	/**
+	 * Returns schema information for responseType column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_responseType()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'enum',
+    1 => '\'token\',\'code\'',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_accessToken
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_accessToken($value)
+	{
+		if (!isset($value)) {
+			return array('accessToken', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('accessToken', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".accessToken");
+		if (strlen($value) > 1023)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".accessToken");
+		return array('accessToken', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the accessToken field
+	 * @return {integer}
+	 */
+	function maxSize_accessToken()
+	{
+
+		return 1023;			
+	}
+
+	/**
+	 * Returns schema information for accessToken column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_accessToken()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and normalize the DateTime string
+	 * @method beforeSet_expires
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
+	 */
+	function beforeSet_expires($value)
+	{
+		if (!isset($value)) {
+			return array('expires', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('expires', $value);
+		}
+		if ($value instanceof DateTime) {
+			$value = $value->getTimestamp();
+		}
+		if (is_numeric($value)) {
+			$newDateTime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
+		$value = $datetime->format("Y-m-d H:i:s");
+		return array('expires', $value);			
+	}
+
+	/**
+	 * Returns schema information for expires column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_expires()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_extra
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_extra($value)
+	{
+		if (!isset($value)) {
+			return array('extra', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('extra', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".extra");
+		if (strlen($value) > 1023)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".extra");
+		return array('extra', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the extra field
+	 * @return {integer}
+	 */
+	function maxSize_extra()
+	{
+
+		return 1023;			
+	}
+
+	/**
+	 * Returns schema information for extra column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_extra()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => '{}',
+);			
+	}
+
 	function beforeSave($value)
 	{
-		if (!$this->retrieved) {
-			$table = $this->getTable();
-			foreach (array('publisherId','userId') as $name) {
-				if (!isset($value[$name])) {
-					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
-				}
-			}
-		}
+						
+		// convention: we'll have updatedTime = insertedTime if just created.
+		$this->updatedTime = $value['updatedTime'] = new Db_Expression('CURRENT_TIMESTAMP');
 		return $value;			
 	}
 
@@ -485,7 +823,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('publisherId', 'userId', 'xid', 'insertedTime');
+		$field_names = array('userId', 'platform', 'appId', 'insertedTime', 'updatedTime', 'xid', 'responseType', 'accessToken', 'expires', 'extra');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

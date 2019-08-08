@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "masuk",
+        "LogOut": "keluar"
+    },
+    "activate": {
+        "SetAsPrimary": "Tetapkan {{1}} sebagai utama saya {{2}}",
+        "ChoosePassPhrase": "Pilih <strong>frasa sandi<\/strong> untuk login. <br> Frasa sederhana yang terdiri dari beberapa kata yang mudah Anda ingat.",
+        "ChoosePassPhraseSeeSuggestions": "Pilih <strong>frasa sandi yang baik<\/strong> untuk melindungi akun Anda. Lihat saran untuk beberapa ide.",
+        "LogOutAndTryAgain": "Logout dan Coba Lagi",
+        "IfYouFeel": "Jika Anda merasa ada yang salah, Anda bisa",
+        "SetIdentifierButtonTitle": "mulai lagi dari awal"
+    },
+    "session": {
+        "GetStarted": "Memulai"
+    },
+    "authorize": {
+        "GetStarted": "Memulai",
+        "Authorize": "Mengizinkan",
+        "TermsLabel": "Saya sudah membaca dan setuju <br> ke {{link}}",
+        "TermsTitle": "Ketentuan"
+    },
+    "register": {
+        "TermsLabel": "Saya menerima {{link}}",
+        "TermsTitle": "Ketentuan"
+    },
+    "notifications": {
+        "title": "Izin",
+        "prompt": "Apakah Anda ingin mengaktifkan notifikasi? Anda akan menerima pembaruan waktu-nyata tentang hal-hal yang Anda pedulikan.",
+        "yes": "iya nih",
+        "no": "Tidak",
+        "WelcomePleaseVerifyEmail": "Selamat datang! Harap verifikasi alamat email Anda.",
+        "WelcomeVerifyEmail": "Selamat datang! Verifikasi alamat email Anda.",
+        "ForgetPass": "Hei, apakah Anda lupa kata sandi Anda?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Pilih kontak"
+        },
+        "select": {
+            "title": "Pilih kontak dari {{displayName}}"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Silakan pilih label.",
+        "inviteUser": "Undang Pengguna"
+    },
+    "invalidLanguageSelected": "Bahasa yang dipilih tidak valid"
+}

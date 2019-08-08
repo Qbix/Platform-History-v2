@@ -19,6 +19,7 @@
  * @param {string} [$fields.publisherId] defaults to ""
  * @param {string} [$fields.streamName] defaults to ""
  * @param {string} [$fields.instructions] defaults to null
+ * @param {string} [$fields.errors] defaults to null
  */
 abstract class Base_Streams_Task extends Db_Row
 {
@@ -39,6 +40,12 @@ abstract class Base_Streams_Task extends Db_Row
 	 * @type string
 	 * @default null
 	 * instructions for the task, encoded in binary, for workers to access
+	 */
+	/**
+	 * @property $errors
+	 * @type string
+	 * @default null
+	 * here we store all errors that occurred during the task
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -73,10 +80,11 @@ abstract class Base_Streams_Task extends Db_Row
 	 * @method table
 	 * @static
 	 * @param {boolean} [$with_db_name=true] Indicates wheather table name should contain the database name
+	 * @param {string} [$alias=null] You can optionally provide an alias for the table to be used in queries
  	 * @return {string|Db_Expression} The table name as string optionally without database name if no table sharding
 	 * was started or Db_Expression class with prefix and database name templates is table was sharded
 	 */
-	static function table($with_db_name = true)
+	static function table($with_db_name = true, $alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', 'Streams', 'indexes', 'Task', false)) {
 			return new Db_Expression(($with_db_name ? '{$dbname}.' : '').'{$prefix}'.'task');
@@ -87,7 +95,8 @@ abstract class Base_Streams_Task extends Db_Row
   			if (!$with_db_name)
   				return $table_name;
   			$db = Db::connect('Streams');
-  			return $db->dbName().'.'.$table_name;
+			$alias = isset($alias) ? ' '.$alias : '';
+  			return $db->dbName().'.'.$table_name.$alias;
 		}
 	}
 	/**
@@ -107,20 +116,21 @@ abstract class Base_Streams_Task extends Db_Row
 	 * @static
 	 * @param {string|array} [$fields=null] The fields as strings, or array of alias=>field.
 	 *   The default is to return all fields of the table.
-	 * @param {string|array} [$alias=null] The tables as strings, or array of alias=>table.
+	 * @param {string} [$alias=null] Table alias.
 	 * @return {Db_Query_Mysql} The generated query
 	 */
 	static function select($fields=null, $alias = null)
 	{
 		if (!isset($fields)) {
 			$fieldNames = array();
+			$a = isset($alias) ? $alias.'.' : '';
 			foreach (self::fieldNames() as $fn) {
-				$fieldNames[] = $fn;
+				$fieldNames[] = $a .  $fn;
 			}
 			$fields = implode(',', $fieldNames);
 		}
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->select($fields, self::table().' '.$alias);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->select($fields, self::table(true, $alias));
 		$q->className = 'Streams_Task';
 		return $q;
 	}
@@ -134,8 +144,8 @@ abstract class Base_Streams_Task extends Db_Row
 	 */
 	static function update($alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->update(self::table().' '.$alias);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->update(self::table(true, $alias));
 		$q->className = 'Streams_Task';
 		return $q;
 	}
@@ -150,8 +160,8 @@ abstract class Base_Streams_Task extends Db_Row
 	 */
 	static function delete($table_using = null, $alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->delete(self::table().' '.$alias, $table_using);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->delete(self::table(true, $alias), $table_using);
 		$q->className = 'Streams_Task';
 		return $q;
 	}
@@ -166,8 +176,8 @@ abstract class Base_Streams_Task extends Db_Row
 	 */
 	static function insert($fields = array(), $alias = null)
 	{
-		if (!isset($alias)) $alias = '';
-		$q = self::db()->insert(self::table().' '.$alias, $fields);
+		$alias = isset($alias) ? ' '.$alias : '';
+		$q = self::db()->insert(self::table(true, $alias), $fields);
 		$q->className = 'Streams_Task';
 		return $q;
 	}
@@ -402,6 +412,59 @@ return array (
 	}
 
 	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_errors
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_errors($value)
+	{
+		if (!isset($value)) {
+			return array('errors', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('errors', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".errors");
+
+		return array('errors', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the errors field
+	 * @return {integer}
+	 */
+	function maxSize_errors()
+	{
+
+		return 4294967296;			
+	}
+
+	/**
+	 * Returns schema information for errors column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_errors()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'longblob',
+    1 => 4294967296,
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Check if mandatory fields are set and updates 'magic fields' with appropriate values
 	 * @method beforeSave
 	 * @param {array} $value The array of fields
@@ -431,7 +494,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('publisherId', 'streamName', 'instructions');
+		$field_names = array('publisherId', 'streamName', 'instructions', 'errors');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

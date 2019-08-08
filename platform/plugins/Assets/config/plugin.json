@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0",
+				"version": "1.0.1",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets"]
@@ -14,11 +14,13 @@
 		"handlersAfterEvent": {
 			"Users/insertUser": ["Assets/after/Users_insertUser"],
 			"Assets/charge": ["Assets/after/Assets_charge"],
-			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"]
+			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
+			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
+			"Communities/community/create": ["Assets/after/Community_create"]
 		},
-		"routes": {
-			"Q/plugins/Assets/:action": {"module": "Assets"},
-			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"}
+		"routes@start": {
+			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
+			"Q/plugins/Assets/:action": {"module": "Assets"}
 		},
 		"web": {
 			"requireValidNonce": ["Assets"]
@@ -98,9 +100,20 @@
 		}	
 	},
 	"Assets": {
+		"payments": {
+			"stripe": {
+				"preloadAPI": true,
+				"jsLibrary": "https://js.stripe.com/v2/"
+			}
+		},
 		"credits": {
 			"amounts": {
-				"Users/insertUser": 20
+				"Users/insertUser": 20,
+				"Users/inviteUser": 10,
+				"createCommunity": 20
+			},
+			"earn": {
+				"acceptedInvite": 10
 			}
 		},
 		"currencies": {
@@ -118,28 +131,29 @@
 		},
 		"transactional": {
 			"charge": {
-				"subject": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+				"subject": ["Assets/content", ["notifications", "ChargeProcessedFor"]],
 				"body": "Assets/email/charge.php",
 				"sms": "Assets/sms/charge.php"
 			},
 			"charged": {
-				"subject": "Thank you for your payment to {{call 'publisher.displayName'}}",
+				"subject": ["Assets/content", ["notifications", "ThankYouForYourPayment"]],
 				"body": "Assets/email/charged.php",
 				"sms": "Assets/sms/charged.php"
 			},
 			"startSubscription": {
-				"subject": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+				"subject": ["Assets/content", ["notifications", "SubscribedTo"]],
 				"body": "Assets/email/startSubscription.php",
 				"sms": "Assets/sms/startSubscription.php"
 			},
 			"startedSubscription": {
-				"subject": "You have been subscribed to {{plan.title}}",
+				"subject": ["Assets/content", ["notifications", "YouSubscribedTo"]],
 				"body": "Assets/email/startedSubscription.php",
 				"sms": "Assets/sms/startedSubscription.php"
 			}
 		},
 		"browsertab": {
 			"css": []
-		}
+		},
+		"canCheckPaid": ["Users/admoins", "Assets/admins"]
 	}
 }

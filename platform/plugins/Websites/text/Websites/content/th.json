@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "ลิงค์เพื่อโปรโมต",
+                "startDate": "วันที่เริ่มต้น",
+                "startTime": "เวลาเริ่มต้น",
+                "endDate": "วันที่สิ้นสุด",
+                "endTime": "เวลาสิ้นสุด",
+                "budget": "งบ"
+            },
+            "interests": {
+                "Title": "กรองตามความสนใจ",
+                "FilterInterests": "เริ่มพิมพ์ความสนใจ ..."
+            },
+            "Interest": "ดอกเบี้ย",
+            "Location": "ที่ตั้ง"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "ไป",
+            "PasteLinkHere": "วางลิงค์ที่นี่",
+            "BrowseTheWeb": "หมวด",
+            "WriteToStartConversation": "เขียนความคิดของคุณเพื่อเริ่มการสนทนา",
+            "StartConversation": "เริ่มการสนทนา",
+            "GotoConversation": "ไปที่การสนทนา"
+        }
+    }
+}

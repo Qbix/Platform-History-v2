@@ -14,6 +14,85 @@
 class Users_ExternalTo extends Base_Users_ExternalTo
 {
 	/**
+	 * @method getAllExtras
+	 * @return {array} The array of all extras set in the stream
+	 */
+	function getAllExtras()
+	{
+		return empty($this->extra) 
+			? array()
+			: json_decode($this->extra, true);
+	}
+	
+	/**
+	 * @method getExtra
+	 * @param {string} $extraName The name of the extra to get
+	 * @param {mixed} $default The value to return if the extra is missing
+	 * @return {mixed} The value of the extra, or the default value, or null
+	 */
+	function getExtra($extraName, $default = null)
+	{
+		$attr = $this->getAllExtras();
+		return isset($attr[$extraName]) ? $attr[$extraName] : $default;
+	}
+	
+	/**
+	 * @method setExtra
+	 * @param {string} $extraName The name of the extra to set,
+	 *  or an array of $extraName => $extraValue pairs
+	 * @param {mixed} $value The value to set the extra to
+	 * @return Users_ExternalTo
+	 */
+	function setExtra($extraName, $value = null)
+	{
+		$attr = $this->getAllExtras();
+		if (is_array($extraName)) {
+			foreach ($extraName as $k => $v) {
+				$attr[$k] = $v;
+			}
+		} else {
+			$attr[$extraName] = $value;
+		}
+		$this->extra = Q::json_encode($attr);
+
+		return $this;
+	}
+	
+	/**
+	 * @method clearExtra
+	 * @param {string} $extraName The name of the extra to remove
+	 */
+	function clearExtra($extraName)
+	{
+		$attr = $this->getAllExtras();
+		unset($attr[$extraName]);
+		$this->extra = Q::json_encode($attr);
+	}
+	
+	/**
+	 * @method clearAllExtras
+	 */
+	function clearAllExtras()
+	{
+		$this->extra = '{}';
+	}
+	
+	/**
+	 * Called by various Db methods to get a custom row object
+	 * @param {array} $fields Any fields to set in the row
+	 * @param {string} [$stripPrefix=null] Any prefix to strip from the fields
+	 * @return Users_Device
+	 */
+	static function newRow($fields, $stripPrefix = null)
+	{
+		Q_Valid::requireFields(array('platform', 'appId'), $fields, true);
+		$platform = ucfirst(strtolower($fields['platform']));
+		$className = "Users_ExternalTo_$platform";
+		$row = new $className();
+		return $row->copyFrom($fields, $stripPrefix, false, false);
+	}
+	
+	/**
 	 * The setUp() method is called the first time
 	 * an object of this class is constructed.
 	 * @method setUp
@@ -37,6 +116,20 @@ class Users_ExternalTo extends Base_Users_ExternalTo
 			}
 		}
 		return parent::beforeSave($updatedFields);
+	}
+	
+	/**
+	 * Inserts or updates a corresponding Users_ExternalFrom row
+	 * @method afterSaveExecute
+	 * @param {Db_Result} $result
+	 * @return {array}
+	 */
+	function afterSaveExecute($result)
+	{
+		Users_ExternalFrom::insert($this->fields)
+			->onDuplicateKeyUpdate($this->fields)
+			->execute();
+		return $result;
 	}
 
 	/* * * */

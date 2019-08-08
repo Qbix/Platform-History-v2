@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "تسجيل الدخول",
+        "LogOut": "الخروج"
+    },
+    "activate": {
+        "SetAsPrimary": "عيّن {{1}} كـ {{2}} الأساسي",
+        "ChoosePassPhrase": "اختر <strong>عبارة مرور<\/strong> لتسجيل الدخول. <br> عبارة بسيطة تتكون من بضع كلمات سوف تتذكرها بسهولة.",
+        "ChoosePassPhraseSeeSuggestions": "اختر <strong>عبارة مرور<\/strong> جيدة لحماية حسابك. انظر الاقتراحات لبعض الأفكار.",
+        "LogOutAndTryAgain": "تسجيل الخروج وحاول مرة أخرى",
+        "IfYouFeel": "إذا شعرت أن هناك خطأ ما ، يمكنك ذلك",
+        "SetIdentifierButtonTitle": "ابدأ من جديد"
+    },
+    "session": {
+        "GetStarted": "البدء"
+    },
+    "authorize": {
+        "GetStarted": "البدء",
+        "Authorize": "يأذن",
+        "TermsLabel": "لقد قرأت وأوافق <br> إلى {{link}}",
+        "TermsTitle": "شروط"
+    },
+    "register": {
+        "TermsLabel": "أقبل {{link}}",
+        "TermsTitle": "شروط"
+    },
+    "notifications": {
+        "title": "الإذن",
+        "prompt": "هل تريد تمكين الإشعارات؟ ستتلقى تحديثات في الوقت الفعلي حول الأشياء التي تهتم بها.",
+        "yes": "نعم فعلا",
+        "no": "لا",
+        "WelcomePleaseVerifyEmail": "أهلا بك! يرجى التحقق من عنوان البريد الإلكتروني الخاص بك.",
+        "WelcomeVerifyEmail": "أهلا بك! تحقق من عنوان بريدك الإلكتروني",
+        "ForgetPass": "مهلا ، هل نسيت عبارة المرور الخاصة بك؟"
+    },
+    "usersContacts": {
+        "selectLabel": "يرجى اختيار التسمية.",
+        "inviteUser": "دعوة المستخدم"
+    },
+    "invalidLanguageSelected": "تم تحديد لغة غير صالحة",
+    "contacts": {
+        "dialog": {
+            "title": "اختيار الاتصال"
+        },
+        "select": {
+            "title": "اختر جهة اتصال {{displayName}}"
+        }
+    }
+}

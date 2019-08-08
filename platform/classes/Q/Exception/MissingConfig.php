@@ -13,4 +13,4 @@ class Q_Exception_MissingConfig extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_MissingConfig', 'missing configuration field {{fieldpath}}');
+Q_Exception::add('Q_Exception_MissingConfig', 'missing configuration field {{fieldpath}}', 424);

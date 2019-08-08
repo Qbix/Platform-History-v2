@@ -1,0 +1,77 @@
+{
+    "request": {
+        "error": "Di dema daxwaza çewtiyê {{status}} de",
+        "canceled": "Daxwaza betalkirinê",
+        "500": "Çewtiyek servera hundur",
+        "404": "Nehat dîtin: {{url}}",
+        "501": "Serdanek asteng kirin"
+    },
+    "nonce": {
+        "sameDomain": "Session dest pê kir. Rûpelê nû bike û dîsa biceribîne.",
+        "otherDomain": "Daxuyaniya cross-domain ji bo daveroka biyanî ya li derve {{baseUrl}}"
+    },
+    "words": {
+        "tap": "dîk",
+        "click": "bitikîne",
+        "yes": "Erê",
+        "no": "na",
+        "Tap": "Dîk",
+        "Click": "Bitikîne",
+        "Yes": "Erê",
+        "No": "Na"
+    },
+    "months": {
+        "1": "Rêbendan",
+        "2": "Reşemî",
+        "3": "Adar",
+        "4": "Avrêl",
+        "5": "Gulan",
+        "6": "Pûşper",
+        "7": "Tîrmeh",
+        "8": "Tebax",
+        "9": "Îlon",
+        "10": "Cotmeh",
+        "11": "Mijdar",
+        "12": "Berfanbar"
+    },
+    "audio": {
+        "allowMicrophoneAccess": "Ji kerema xwe veguhestina mîkrofonê xwe bide dest",
+        "record": "Rekor",
+        "recording": "Girtinî",
+        "remains": "jibermayî",
+        "maximum": "zêdetir",
+        "playing": "Playing",
+        "recorded": "Tomar kirin",
+        "clip": "clip",
+        "orupload": "Or Upload",
+        "usethis": "Vê bikar bînin",
+        "discard": "Bistînin",
+        "encoding": "Encoding"
+    },
+    "alert": {
+        "title": "Hişyar"
+    },
+    "confirm": {
+        "title": "Tesdîqkirin",
+        "ok": "Erê",
+        "cancel": "Na"
+    },
+    "prompt": {
+        "title": "Derhal",
+        "ok": "Çûyin"
+    },
+    "imagepicker": {
+        "errorReadingFile": "Çewtiya pelê xwendin",
+        "cameraCommands": {
+            "prompt": "Tu dixwazî çi bikî?",
+            "photo": "Wêne nû nû bike",
+            "library": "Ji pirtûkxaneyê hilbijêre"
+        },
+        "tooSmall": "Ji kerema xwe wêneyê mezintir hilbijêre.",
+        "cropping": {
+            "title": "Pîv û pozê biguhînin",
+            "touchscreen": "Tulên xwe bikar bînin ku zoom û vekin",
+            "notTouchscreen": "Ji bo zoom û vekişîna xwe ya çepê û bişkoka xwe bikar bînin"
+        }
+    }
+}

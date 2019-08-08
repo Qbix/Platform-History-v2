@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "Kirjaudu sisään",
+        "LogOut": "kirjautua ulos"
+    },
+    "activate": {
+        "SetAsPrimary": "Aseta {{1}} ensisijaiseksi {{2}}",
+        "ChoosePassPhrase": "Valitse <strong>pass-lause, jos<\/strong> haluat kirjautua sisään. <br> Yksinkertainen lause, joka koostuu muutamasta sanasta, jonka muistat helposti.",
+        "ChoosePassPhraseSeeSuggestions": "Valitse hyvä <strong>passi-lause<\/strong> tilisi suojaamiseksi. Katso joitakin ideoita koskevia ehdotuksia.",
+        "LogOutAndTryAgain": "Kirjaudu ulos ja yritä uudelleen",
+        "IfYouFeel": "Jos sinusta tuntuu, että jotain meni pieleen, voit",
+        "SetIdentifierButtonTitle": "aloittaa alusta"
+    },
+    "session": {
+        "GetStarted": "Aloittaa"
+    },
+    "authorize": {
+        "GetStarted": "Aloittaa",
+        "Authorize": "valtuuttaa",
+        "TermsLabel": "Olen lukenut ja hyväksynyt <br> {{link}}",
+        "TermsTitle": "ehdot"
+    },
+    "register": {
+        "TermsLabel": "Hyväksyn {{link}}",
+        "TermsTitle": "ehdot"
+    },
+    "notifications": {
+        "title": "Lupa",
+        "prompt": "Haluatko ottaa ilmoitukset käyttöön? Saat reaaliaikaisia päivityksiä asioista, joista välität.",
+        "yes": "Joo",
+        "no": "Ei",
+        "WelcomePleaseVerifyEmail": "Tervetuloa! Vahvista sähköpostiosoitteesi.",
+        "WelcomeVerifyEmail": "Tervetuloa! Vahvista sähköpostiosoitteesi.",
+        "ForgetPass": "Hei, unohditko salasanasi?"
+    },
+    "usersContacts": {
+        "selectLabel": "Valitse etiketti.",
+        "inviteUser": "Kutsu käyttäjä"
+    },
+    "invalidLanguageSelected": "Valittu kieli on virheellinen",
+    "contacts": {
+        "dialog": {
+            "title": "Valitse yhteystieto"
+        },
+        "select": {
+            "title": "Valitse yhteystieto {{displayName}}"
+        }
+    }
+}

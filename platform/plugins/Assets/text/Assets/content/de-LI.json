@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tippen Sie auf, um zu bezahlen"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: Gebühr für {{call 'user.displayName'}} verarbeitet",
+        "ThankYouForYourPayment": "Vielen Dank für Ihre Zahlung an {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} hat {{plan.title}} abonniert.",
+        "YouSubscribedTo": "Sie wurden abonniert für {{plan.title}}."
+    },
+    "payment": {
+        "AboutOrder": "Infos zur Bestellung",
+        "PaymentMethod": "Zahlungsmethode",
+        "ContactInfo": "Kontaktinformation",
+        "Pay": "Zahlen"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Einladung von {{1}} angenommen",
+        "YouHaveCreditsToStart": "Sie haben {{1}} Startguthaben"
+    },
+    "history": {
+        "Date": "Datum",
+        "Amount": "Menge",
+        "Description": "Beschreibung",
+        "Client": "Klient",
+        "To": "zu",
+        "From": "von",
+        "HistoryEmpty": "Sie haben noch keine Daten"
+    },
+    "subscriptions": {
+        "infoTitle": "Legen Sie die Zahlungsinformationen fest",
+        "confirm": {
+            "title": "Abonnement starten",
+            "message": "Möchten Sie {{title}} abonnieren?",
+            "ok": "OK",
+            "cancel": "Stornieren"
+        }
+    },
+    "payments": {
+        "infoTitle": "Legen Sie die Zahlungsinformationen fest",
+        "confirm": {
+            "title": "Eine Zahlung tätigen",
+            "message": "Sind Sie damit einverstanden, {{symbol}} {{amount}} zu zahlen?",
+            "ok": "OK",
+            "cancel": "Stornieren"
+        }
+    }
+}

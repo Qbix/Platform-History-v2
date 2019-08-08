@@ -1,0 +1,49 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Gonga ili kulipa"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: malipo yaliyotumiwa kwa {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Asante kwa malipo yako kwa {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} imesajiliwa {{plan.title}}",
+        "YouSubscribedTo": "Umejisajiliwa {{plan.title}}"
+    },
+    "payment": {
+        "AboutOrder": "Maelezo kuhusu utaratibu",
+        "PaymentMethod": "Njia ya malipo",
+        "ContactInfo": "Maelezo ya mawasiliano",
+        "Pay": "Kulipa"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Paribisha kukubaliwa na {{1}}",
+        "YouHaveCreditsToStart": "Una mikopo ya {{1}} kuanza"
+    },
+    "history": {
+        "Date": "Tarehe",
+        "Amount": "Kiasi",
+        "Description": "Maelezo",
+        "Client": "Mteja",
+        "To": "kwa",
+        "From": "kutoka",
+        "HistoryEmpty": "Bado haujapata data"
+    },
+    "subscriptions": {
+        "infoTitle": "Weka Habari ya Malipo",
+        "confirm": {
+            "title": "Anza Usajili",
+            "message": "Je! Ungependa kujisajili kwa {{title}}?",
+            "ok": "sawa",
+            "cancel": "Ghairi"
+        }
+    },
+    "payments": {
+        "infoTitle": "Weka Habari ya Malipo",
+        "confirm": {
+            "title": "Fanya malipo",
+            "message": "Je! Unakubali kulipa {{symbol}} {{amount}}?",
+            "ok": "sawa",
+            "cancel": "Ghairi"
+        }
+    }
+}

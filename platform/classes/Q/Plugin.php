@@ -55,12 +55,12 @@ class Q_Plugin
 	 * @param {string} $name The name of application or plugin
 	 * @param {string} $type One of 'app' or 'plugin'
 	 * @param {string} $conn_name The name of the connection to affect
-	 * @param {array} $options Contain data parsed from command line
-	 * @param {array} $options.extra
+	 * @param {array} $options
+	 * @param {array} $options.extra The information to store in the extra field
 	 * @throws {Exception} If cannot connect to database
 	 * @return array List of installed stream names
 	 */
-	static function handleExtra($name, $type, $conn_name, $options = array())
+	static function extra($name, $type, $conn_name, $options = array())
 	{
 		// Get SQL connection for currently installed schema
 		// Is schema connection information provided?
@@ -113,8 +113,7 @@ class Q_Plugin
 			}
 		}
 
-		// if defined $options['streamsList'] - add these streams to extra
-		if (is_array($options['extra'])) {
+		if (is_array(Q::ifset($options, 'extra', null))) {
 			// update extra
 			$db->update($tableName)
 				->set(array('extra' => Q::json_encode($options['extra'])))
@@ -134,46 +133,6 @@ class Q_Plugin
 		}
 
 		return $extra;
-	}
-	/**
-	 * Get list of users specified streams (Streams/onInsert/Users_User) installed.
-	 * To compare with config data and decide whether need to install new streams.
-	 * @method getUsersStreams
-	 * @static
-	 * @throws {Exception} If cannot connect to database
-	 * @return array
-	 */
-	static function getUsersStreams()
-	{
-		// under this key we save streams names
-		$key = "Streams/User/onInsert";
-
-		$extra = self::handleExtra('Streams', 'plugin', 'Streams');
-
-		$extra[$key] = is_array($extra[$key]) ? $extra[$key] : array();
-
-		return $extra[$key];
-	}
-	/**
-	 * Set list of users specified streams (Streams/onInsert/Users_User) installed.
-	 * @method setUsersStreams
-	 * @static
-	 * @param {array} $streamsList array of streams list installed.
-	 * @throws {Exception} If cannot connect to database
-	 * @return array Result extra
-	 */
-	static function setUsersStreams($streamsList)
-	{
-		// under this key we save streams names
-		$key = "Streams/User/onInsert";
-
-		$extra = self::handleExtra('Streams', 'plugin', 'Streams');
-
-		$extra[$key] = is_array($extra[$key]) ? $extra[$key] : array();
-
-		$extra[$key] = array_values(array_unique(array_merge($extra[$key], $streamsList)));
-
-		return self::handleExtra('Streams', 'plugin', 'Streams', compact('extra'));
 	}
 	/**
 	 * Install or update schema for app or plugin
@@ -248,10 +207,10 @@ class Q_Plugin
 						->execute()->fetchAll(PDO::FETCH_ASSOC);
 				} catch (Exception $e) {
 					$db->rawQuery("CREATE TABLE IF NOT EXISTS `$tableName` (
-						`{$type}` VARCHAR(255) NOT NULL,
+						`{$type}` VARCHAR(63) NOT NULL,
 						`version` VARCHAR( 255 ) NOT NULL,
 						`versionPHP` VARCHAR (255) NOT NULL,
-						PRIMARY KEY (`{$type}`)) ENGINE = InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+						PRIMARY KEY (`{$type}`)) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 					")->execute();
 				}
 				if ($cols) {
@@ -274,8 +233,8 @@ class Q_Plugin
 			}
 
 			$res = $db->select('version, versionPHP', "{$prefix}Q_{$type}")
-						->where(array($type => $name))
-						->fetchAll(PDO::FETCH_ASSOC);
+				->where(array($type => $name))
+				->fetchAll(PDO::FETCH_ASSOC);
 
 			// If we have version in the db then this is upgrade
 			if (!empty($res)) {
@@ -283,7 +242,7 @@ class Q_Plugin
 				$current_versionPHP = $res[0]['versionPHP'];
 				echo ucfirst($type)." '$name' schema on '$conn_name'$shard_text (SQL $current_version, PHP $current_versionPHP) is already installed" . PHP_EOL;
 				if (Q::compareVersion($current_version, $version) < 0
-				or Q::compareVersion($current_versionPHP, $version) < 0) {
+					or Q::compareVersion($current_versionPHP, $version) < 0) {
 					echo "Upgrading '$name' on '$conn_name'$shard_text schema to version: SQL $version" . PHP_EOL;
 				}
 			} else {
@@ -307,7 +266,7 @@ class Q_Plugin
 				if (count($parts) < 2) continue;
 				list($sqlver, $tail) = $parts;
 				if ($tail !== "$conn_name.$dbms"
-				and $tail !== "$conn_name.$dbms.php") {
+					and $tail !== "$conn_name.$dbms.php") {
 					continue; // not schema file or php script
 				}
 
@@ -318,10 +277,10 @@ class Q_Plugin
 
 				// we shall install this script!
 				if ($tail === "$conn_name.$dbms"
-				and Q::compareVersion($sqlver, $current_version) > 0) {
+					and Q::compareVersion($sqlver, $current_version) > 0) {
 					$scriptsSQL["$sqlver"] = $entry;
 				} else if ($tail === "$conn_name.$dbms.php"
-				and Q::compareVersion($sqlver, $current_versionPHP) > 0) {
+					and Q::compareVersion($sqlver, $current_versionPHP) > 0) {
 					$scriptsPHP["$sqlver"] = $entry;
 				}
 			}
@@ -335,7 +294,7 @@ class Q_Plugin
 			if (!empty($scripts)) {
 				echo "Running SQL scripts for $type $name on $conn_name ($dbms)".PHP_EOL;
 			}
-			
+
 			$scripts = array();
 			foreach ($scriptsSQL as $s) {
 				$scripts[] = $s;
@@ -351,7 +310,7 @@ class Q_Plugin
 
 			// Process script files
 			foreach ($scripts as $script) {
-				
+
 				try {
 					list($new_version) = preg_split('/(-|__)/', $script, 2);
 					if (substr($script, -4) === '.php') {
@@ -403,8 +362,8 @@ class Q_Plugin
 					// Update plugin db version
 					if ($dbms === 'mysql') {
 						$fields = array(
-							$type => $name, 
-							'version' => $new_version, 
+							$type => $name,
+							'version' => $new_version,
 							'versionPHP' => 0
 						);
 						$db->insert("{$prefix}Q_{$type}", $fields)
@@ -441,10 +400,10 @@ class Q_Plugin
 			}
 			try {
 				if (Q::compareVersion($version, $current_version) > 0
-				or Q::compareVersion($version, $current_versionPHP) > 0) {
+					or Q::compareVersion($version, $current_versionPHP) > 0) {
 					echo '+ ' . ucfirst($type) . " '$name' schema on '$conn_name'$shard_text (v. $original_version -> $version) installed".PHP_EOL;
 					$db->insert("{$prefix}Q_{$type}", array(
-						$type => $name, 
+						$type => $name,
 						'version' => $version,
 						'versionPHP' => $version
 					))->onDuplicateKeyUpdate(array(
@@ -614,7 +573,7 @@ class Q_Plugin
 			throw new Exception("Can not write to ".dirname($app_installed_file));
 
 		if (file_exists($app_installed_file)) {
-		  Q_Config::load($app_installed_file);
+			Q_Config::load($app_installed_file);
 		}
 
 		// Check access to $files_dir
@@ -636,6 +595,8 @@ class Q_Plugin
 
 		// Check and fix permissions
 		self::checkPermissions(APP_FILES_DIR, $options);
+
+		// Use package managers
 		self::npmInstall(APP_DIR, !empty($options['npm']));
 		self::composerInstall(APP_DIR, !empty($options['composer']));
 
@@ -720,13 +681,16 @@ EOT;
 		// Check access to $app_web_plugins_dir
 		$dirs = array($app_web_plugins_dir, $app_web_text_dir);
 		foreach ($dirs as $dir) {
-			if(!file_exists($dir))
-				if(!@mkdir($dir, 0755, true))
+			if(!file_exists($dir)) {
+				if(!@mkdir($dir, 0755, true)) {
 					throw new Exception("Could not create $dir");
-			if(!is_dir($dir))
+				}
+			}
+			if (!is_dir($dir)) {
 				throw new Exception("$dir exists, but is not a directory");
-			elseif(!is_writable($dir))
+			} else if(!is_writable($dir)) {
 				throw new Exception("Can not write to $dir");
+			}
 		}
 
 		// Check access to $app_plugins_file
@@ -765,7 +729,7 @@ EOT;
 				echo "Upgrading '$plugin_name' to version: $plugin_version" . PHP_EOL;
 			}
 		}
-		
+
 		// Check and fix permissions
 		self::checkPermissions($files_dir, $options);
 		if (isset($plugin_conf['permissions'])) {
@@ -773,7 +737,8 @@ EOT;
 				self::checkPermissions($files_dir.DS.$perm, $options);
 			}
 		}
-		
+
+		// Use package managers
 		self::npmInstall($plugin_dir, !empty($options['npm']));
 		self::composerInstall($plugin_dir, !empty($options['composer']));
 
@@ -784,7 +749,7 @@ EOT;
 			echo '  '.$p.PHP_EOL;
 			Q_Utils::symlink($plugin_dir.DS.'web', $p);
 		}
-		
+
 		if (!file_exists($app_text_plugin_dir) and file_exists($plugin_text_dir)) {
 			$p = $app_text_plugin_dir;
 			echo '  '.$p.PHP_EOL;
@@ -798,7 +763,7 @@ EOT;
 		}
 
 		// Push plugin name into Q/plugins array
-		if (!in_array($plugin_name, $current_plugins = Q_Config::get('Q', 'plugins', array()))) {
+		if (!in_array($plugin_name, $current_plugins = Q::plugins())) {
 			$current_plugins[] = $plugin_name;
 			Q_Config::set('Q', 'plugins', $current_plugins); //TODO: When do we save Q/plugins to disk?
 		}
@@ -807,7 +772,7 @@ EOT;
 		echo 'Registering plugin'.PHP_EOL;
 		Q_Config::set('Q', 'pluginLocal', $plugin_name, $plugin_conf);
 		Q_Config::save($app_plugins_file, array('Q', 'pluginLocal'));
-		
+
 		/**
 		 * @event Q/Plugin/install {after}
 		 * @param {string} $app_dir the directory where the app is installed
@@ -818,10 +783,10 @@ EOT;
 
 		echo Q_Utils::colored("Plugin '$plugin_name' successfully installed".PHP_EOL, 'green');
 	}
-	
-	static function npmInstall($dir, $exists = false)
+
+	static function npmInstall($dir, $doIt = false)
 	{
-		$exists = $exists || self::commandExists('npm');
+		$exists = $doIt && self::commandExists('npm');
 		if (!file_exists($dir . DS . 'package.json') or !$exists) {
 			return false;
 		}
@@ -832,11 +797,10 @@ EOT;
 		chdir($cwd);
 		return true;
 	}
-	
-	static function composerInstall($dir, $exists = false)
+
+	static function composerInstall($dir, $doIt = false)
 	{
-		return true;
-		$exists = $exists || self::commandExists('composer');
+		$exists = $doIt && self::commandExists('composer');
 		if (!file_exists($dir . DS . 'composer.json') or !$exists) {
 			return false;
 		}
@@ -847,10 +811,18 @@ EOT;
 		chdir($cwd);
 		return true;
 	}
-	
+
 	static function commandExists($cmd) {
-	    $return = shell_exec(sprintf("which %s", escapeshellarg($cmd)));
-	    return !empty($return);
+		// check which command exist "which" (linux) or "where" (win)
+		$is_win = (substr(strtolower(PHP_OS), 0, 3) === 'win');
+		$command = $is_win ? "where" : "which";
+
+		if (!$command) {
+			return false;
+		}
+
+		$return = shell_exec(sprintf("%s %s", $command, escapeshellarg($cmd)));
+		return !empty($return);
 	}
 
 	/**

@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "кіру",
+        "LogOut": "шығу"
+    },
+    "activate": {
+        "SetAsPrimary": "{{1}} менің басты {{2}} ретінде орнату",
+        "ChoosePassPhrase": "Кіру үшін <strong>фразаны<\/strong> таңдаңыз. <br> Қарапайым сөз тіркесі бірнеше сөзден тұрады, бұл сіз оңай есте сақтаңыз.",
+        "ChoosePassPhraseSeeSuggestions": "Есептік жазбаңызды қорғау үшін жақсы <strong>үзінді фразаны<\/strong> таңдаңыз. Кейбір идеялар туралы ұсыныстарды қараңыз.",
+        "LogOutAndTryAgain": "Шығыңыз және қайталап көріңіз",
+        "IfYouFeel": "Егер сіз бір нәрсе дұрыс емес деп ойласаңыз, сіз аласыз",
+        "SetIdentifierButtonTitle": "бастаңыз"
+    },
+    "session": {
+        "GetStarted": "Бастау"
+    },
+    "authorize": {
+        "GetStarted": "Бастау",
+        "Authorize": "Рұқсат ету",
+        "TermsLabel": "Мен оқып, келісемін <br> {{link}} белгісіне",
+        "TermsTitle": "Шарттар"
+    },
+    "register": {
+        "TermsLabel": "Мен {{link}}}",
+        "TermsTitle": "Шарттар"
+    },
+    "notifications": {
+        "title": "Рұқсат",
+        "prompt": "Хабарландыруларды қосқыңыз келе ме? Сіз өзіңізге қатысты нәрселер туралы нақты уақыттағы жаңартуларды аласыз.",
+        "yes": "Иә",
+        "no": "Жоқ",
+        "WelcomePleaseVerifyEmail": "Қош келдіңіз! Электрондық пошта мекенжайыңызды тексеріңіз.",
+        "WelcomeVerifyEmail": "Қош келдіңіз! Электрондық пошта мекенжайыңызды тексеріңіз.",
+        "ForgetPass": "Hey, парольдерді ұмыдыңыз ба?"
+    },
+    "contacts": {
+        "dialog": {
+            "title": "Контактіні таңдаңыз"
+        },
+        "select": {
+            "title": "{{displayName}}} контактісін таңдаңыз"
+        }
+    },
+    "usersContacts": {
+        "selectLabel": "Таңбаны таңдаңыз.",
+        "inviteUser": "Пайдаланушыны шақыру"
+    },
+    "invalidLanguageSelected": "Жарамсыз тіл таңдалды"
+}

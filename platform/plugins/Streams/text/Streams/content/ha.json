@@ -1,0 +1,105 @@
+{
+    "preview": {
+        "NewItemTitle": "New Item"
+    },
+    "labels": {
+        "Streams\/invited": "Mutane da na kira su",
+        "Streams\/invitedMe": "Wane ne ya gayyace ni"
+    },
+    "interests": {
+        "Filter": "Me kuke jin dadi?",
+        "CanAdd": "Idan har yanzu ba za ka iya samun abin da kake nema ba, za ka iya ƙara sabon sha&#39;awa a ƙasa:",
+        "TrySynonyms": "Shin ba ku gani ba? Gwada wasu alamu.",
+        "AddUnderCategory": "Ƙara a ƙarƙashin category ...",
+        "Other": "Sauran",
+        "Unlisted": "Sako"
+    },
+    "chat": {
+        "flaggedForAdminReview": "An tayi sakon da aka yi don dubawa. Matsa sake zuwa unflag.",
+        "noOneSaid": "Babu wanda ya faɗi kome",
+        "closeChatButton": "Kusa taɗi",
+        "closeChatConfirmTitle": "Rufe wannan hira?",
+        "closeChatConfirm": "Shin kuna tabbatar kuna so ku rufe wannan hira?",
+        "closeChatConfirmYes": "Ee",
+        "closeChatConfirmNo": "A&#39;a",
+        "earlierComments": "baya comments"
+    },
+    "notifications": {
+        "*": "Message {{& message.fields.type}} zuwa {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ya ce:",
+        "Streams\/changed": "Canje-canje a {{stream.fields.title}}",
+        "Streams\/invite": "An kira ku zuwa [{999}}",
+        "Streams\/announcement": "Sanarwa a {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} canza canjin canji",
+        "Streams\/chat\/edit": "An shirya hoton saƙon",
+        "Streams\/chat\/remove": "An cire saƙon sako",
+        "Streams\/closed": "{{stream.fields.title}} an rufe",
+        "Streams\/task\/progress": "An cigaba da cigaba a [{999}}",
+        "Streams\/task\/complete": "An kammala aikin: {{stream.fields.title}}",
+        "Streams\/task\/error": "Kuskure a lokacin: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Saƙon shiga"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} ya gayyatar ku zuwa {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Zaɓa daga Lambobinka",
+            "chooseAgainFromContacts": "Zaɓi Again daga Lambobi",
+            "inviteSelectedContacts": "Yi kira ga Lambobin Zaɓi",
+            "selectFromContacts": "Zaɓi Daga Lambobi",
+            "photo": "Ɗauki hoto",
+            "photoInstruction": "Idan mutumin da ya bincika QR code yana gaban ku, ɗauki hoto daga gare su",
+            "to": "To: {{Stream Title}}",
+            "go": "Ku tafi",
+            "title": "Gayyata",
+            "placeholder": "Lambar wayar ko adireshin imel",
+            "orInvite": "Ko kuma kiran mutane ta amfani da:",
+            "QR": "{{ClickOrTap}} don samar da QR code",
+            "QRtitle": "Duba wannan QR code",
+            "QRscanned": "Sun duba shi!",
+            "byEmail": "Imel",
+            "byText": "Rubutu",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
+        },
+        "email": {
+            "subject": "Hey, duba wannan",
+            "PleaseVisitLink": "Da fatan a ziyarci mahaɗin da ke biyowa:",
+            "InvitingYou": "Ina kiran ku zuwa [{999}}",
+            "HasInvitedYou": "{{displayName}} ya gayyatar ku zuwa {{title}}"
+        },
+        "sms": {
+            "content": "An gayyace ku zuwa {{title}}. Da fatan a latsa {{url}}"
+        },
+        "notice": {
+            "text": "An gayyatar ku. {{ClickOrTap}} nan don karɓa da shiga."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} ya aika saƙon <em>{{message.fields.type}}<\/em> zuwa {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} a {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "An aiko da kira daga lambarmu, wanda abokanka ba su gane ba tukuna. Biyo tare da rubutun sauri don sanar da su gayyatar ya zo daga gare ku, ya umarce su su danna mahaɗin.",
+            "confirm": "An aiko da kira daga lambarmu, wanda abokanka ba su gane ba tukuna. Kuna so ku bi ta hanyar rubutun sauri don sanar da su cewa gayyatar ya zo daga gare ku, yana tambayar su su danna mahaɗin.",
+            "check": "Hakanan, na aika muku da kira ga {{app}} app. Da fatan a duba sms dinku kuma danna mahadar!"
+        },
+        "email": {
+            "alert": "Ana aika da kira daga yankinmu, wanda abokanka ba su gane ba tukuna. Biyo tare da rubutun sauri don sanar da su gayyatar ya zo daga gare ku, ya umarce su su danna mahaɗin.",
+            "confirm": "Ana aika da kira daga yankinmu, wanda abokanka ba su gane ba tukuna. Kuna so ku bi ta hanyar rubutun sauri don sanar da su cewa gayyatar ya zo daga gare ku, yana tambayar su su danna mahaɗin.",
+            "subject": "Shin kun samo kira?",
+            "body": "Hakanan, na aika muku da kira ga {{app}} app. Da fatan a duba adireshin imel ku kuma danna mahadar a can!"
+        }
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Yi amfani da Microphone",
+            "cameraTitle": "Enable Kamara",
+            "cameraAndMicrophoneTitle": "Enable Kamara da Kira"
+        }
+    }
+}

@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Ახალი ნივთი"
+    },
+    "labels": {
+        "Streams/invited": "მე მოწვეული ხალხი",
+        "Streams/invitedMe": "ვინ მიმიწვია"
+    },
+    "interests": {
+        "Filter": "რა სარგებლობ?",
+        "CanAdd": "თუ მაინც ვერ პოულობთ რას ეძებთ, შეგიძლიათ დაამატოთ ახალი ინტერესი:",
+        "TrySynonyms": "ვერ ვხედავ მას? სცადეთ გარკვეული სინონიმები.",
+        "AddUnderCategory": "დამატება კატეგორიაში ...",
+        "Other": "სხვა",
+        "Unlisted": "ჩამოთვლილი"
+    },
+    "chat": {
+        "flaggedForAdminReview": "შეტყობინება ადმინისტრატორისთვის გადამოწმებული იქნა. შეხვიდეთ კვლავ unflag.",
+        "noOneSaid": "არავის არაფერი უთქვამს",
+        "closeChatButton": "დახურვა სტატისტიკა",
+        "closeChatConfirmTitle": "ამ ჩეთის დახურვა?",
+        "closeChatConfirm": "ნამდვილად გსურთ ამ ჩეთის დახურვა?",
+        "closeChatConfirmYes": "დიახ",
+        "closeChatConfirmNo": "არა",
+        "earlierComments": "ადრე კომენტარი",
+        "Subscribed": "მდუმარე შეტყობინებები",
+        "Unsubscribed": "Შეტყობინებების მიღება",
+        "dontHavePermissionJoinConversation": "თქვენ არ გაქვთ ამ საუბარში მონაწილეობის უფლება.",
+        "startedConversation": "დაიწყო საუბარი",
+        "RealTimeCall": "რეალურ დროში ზარი"
+    },
+    "notifications": {
+        "*": "შეტყობინება {{& message.fields.type}} {{& stream.fields.title}}",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} განაცხადა:",
+        "Streams/changed": "ცვლილებები {999}}",
+        "Streams/invite": "თქვენ მოწვეული იყავით {{& stream.fields.title}}",
+        "Streams/announcement": "განცხადება {{& streams.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} შეიცვალა ნაკადი",
+        "Streams/chat/edit": "ჩეთის გაგზავნა რედაქტირებულია",
+        "Streams/chat/remove": "ჩეთის გაგზავნა წაიშალა",
+        "Streams/closed": "{{stream.fields.title}} დაიხურა",
+        "Streams/task/progress": "{{stream.fields.title}}",
+        "Streams/task/complete": "სამუშაო დასრულდა: {{stream.fields.title}}",
+        "Streams/task/error": "შეცდომა დროს: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: შემომავალი შეტყობინება",
+        "ManageEmailSubscriptions": "თქვენი ელფოსტის გამოწერის მართვა",
+        "IfUnsubscribe": "თუ გსურთ გაუქმება"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} მოიწვია თქვენ {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "აირჩიეთ თქვენი კონტაქტები",
+            "selectFromContacts": "აირჩიეთ კონტაქტები",
+            "photo": "Გადაიღეთ სურათი",
+            "photoInstruction": "თუ თქვენი QR კოდი სკანირებული პირი თქვენს წინაშეა, გადაიღეთ ფოტო",
+            "to": "დან: {{Stream Title}}",
+            "go": "წადი",
+            "title": "მოიწვიე",
+            "placeholder": "მობილური ტელეფონის ნომერი ან ელექტრონული ფოსტის მისამართი",
+            "orInvite": "ან მოიწვიოს ადამიანი გამოყენებით:",
+            "QR": "{{ClickOrTap}} QR კოდის გენერირება",
+            "QRtitle": "ამ QR კოდის სკანირება",
+            "byEmail": "ელ.ფოსტა",
+            "byText": "ტექსტი",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "ისინი დასკანერებულნი იყვნენ!",
+            "chooseAgainFromContacts": "აირჩიეთ კონტაქტებისგან",
+            "inviteSelectedContacts": "მოიწვიე შერჩეული კონტაქტები"
+        },
+        "email": {
+            "subject": "ჰეი, შეამოწმეთ ეს",
+            "PleaseVisitLink": "გთხოვთ ეწვიოთ შემდეგ ბმულს:",
+            "InvitingYou": "მე გიწვევთ {999}}",
+            "HasInvitedYou": "{{displayName}} მოიწვია თქვენ {{title}}"
+        },
+        "sms": {
+            "content": "თქვენ მოწვეული იყავით {{title}}. გთხოვთ {{url}}"
+        },
+        "notice": {
+            "text": "მიწვეული ხართ {{ClickOrTap}} აქ მიიღოს და შეუერთდება."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} <em>{{100}}</em> - ზე {{1001}"
+        },
+        "text": {
+            "body": "{{9}} {{& url}} - ში: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "გამოგზავნილია ჩვენი ნომერი, რომელიც თქვენს მეგობრებს ჯერ არ ცნობენ. დაიცავით სწრაფი ტექსტი, რათა მათ იცოდნენ, რომ მოწვევა მოვიდა თქვენგან, სთხოვეთ მათ დააკავშირონ ბმული.",
+            "confirm": "გამოგზავნილია ჩვენი ნომერი, რომელიც თქვენს მეგობრებს ჯერ არ ცნობენ. გსურთ სწრაფი ტექსტით მიყევით, რათა მათ იცოდნენ, რომ მოწვევა მოვიდა თქვენგან, დააკითხეთ ბმულს.",
+            "check": "ჰეი, მე უბრალოდ გამოგიგზავნეთ ნომერზე {999}}. შეამოწმეთ თქვენი SMS და დააჭირეთ ბმულს!"
+        },
+        "email": {
+            "alert": "გამოგზავნილია ჩვენი დომენიდან გამოგზავნილი გზავნილები, რომლებიც ჯერ არ ცნობენ თქვენს მეგობრებს. დაიცავით სწრაფი ტექსტი, რათა მათ იცოდნენ, რომ მოწვევა მოვიდა თქვენგან, სთხოვეთ მათ დააკავშირონ ბმული.",
+            "confirm": "გამოგზავნილია ჩვენი დომენიდან გამოგზავნილი გზავნილები, რომლებიც ჯერ არ ცნობენ თქვენს მეგობრებს. გსურთ სწრაფი ტექსტით მიყევით, რათა მათ იცოდნენ, რომ მოწვევა მოვიდა თქვენგან, დააკითხეთ ბმულს.",
+            "subject": "მოიწვიე?",
+            "body": "ჰეი, მე უბრალოდ გამოგიგზავნეთ ნომერზე {999}}. გთხოვთ, შეამოწმოთ ელ.ფოსტა და დააჭირეთ ბმულს აქ!"
+        }
+    },
+    "participating": {
+        "Title": "სათაური",
+        "Subscribed": "გამოწერილია",
+        "Participants": "Მონაწილეები"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "მიკროფონის ჩართვა",
+            "cameraTitle": "კამერის ჩართვა",
+            "cameraAndMicrophoneTitle": "კამერისა და მიკროფონის ჩართვა",
+            "dialogTitle": "დიალოგის ჩართვა",
+            "microphoneBtn": "მიკროფონის ჩართვა",
+            "cameraBtn": "ჩართეთ კამერა",
+            "cameraAndMicrophoneBtn": "ჩართეთ კამერა და მიკროფონი"
+        }
+    }
+}

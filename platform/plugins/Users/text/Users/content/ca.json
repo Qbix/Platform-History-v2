@@ -1,0 +1,49 @@
+{
+    "actions": {
+        "LogIn": "iniciar Sessió",
+        "LogOut": "tancar sessió"
+    },
+    "activate": {
+        "SetAsPrimary": "Configureu {{1}} com el meu {{2}} principal",
+        "ChoosePassPhrase": "Trieu una <strong>frase de pas<\/strong> per iniciar la sessió. <br> Una frase senzilla que consisteix en unes poques paraules que recordareu fàcilment.",
+        "ChoosePassPhraseSeeSuggestions": "Trieu una bona <strong>frase de pas<\/strong> per protegir el vostre compte. Vegeu els suggeriments d’unes idees.",
+        "LogOutAndTryAgain": "Tanca la sessió i torna-ho a provar",
+        "IfYouFeel": "Si sentiu que alguna cosa va sortir malament, podeu",
+        "SetIdentifierButtonTitle": "començar de nou"
+    },
+    "session": {
+        "GetStarted": "Començar"
+    },
+    "authorize": {
+        "GetStarted": "Començar",
+        "Authorize": "Autoritzar",
+        "TermsLabel": "He llegit i estic d&#39;acord <br> al {{link}}",
+        "TermsTitle": "Termes"
+    },
+    "register": {
+        "TermsLabel": "Accepto el {{link}}",
+        "TermsTitle": "Termes"
+    },
+    "notifications": {
+        "title": "Permís",
+        "prompt": "Voleu habilitar les notificacions? Rebreu actualitzacions en temps real sobre les coses que us interessen.",
+        "yes": "Sí",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Benvinguda! Verifiqueu la vostra adreça de correu electrònic.",
+        "WelcomeVerifyEmail": "Benvinguda! Comproveu la vostra adreça de correu electrònic.",
+        "ForgetPass": "Heu oblidat la vostra contrasenya?"
+    },
+    "usersContacts": {
+        "selectLabel": "Seleccioneu l’etiqueta.",
+        "inviteUser": "Convida l&#39;usuari"
+    },
+    "invalidLanguageSelected": "S&#39;ha seleccionat un idioma no vàlid",
+    "contacts": {
+        "dialog": {
+            "title": "Trieu el contacte"
+        },
+        "select": {
+            "title": "Seleccioneu el contacte de {{displayName}}"
+        }
+    }
+}

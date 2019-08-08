@@ -26,14 +26,13 @@ function Users_before_Q_responseExtras()
 		$setIdentifierOptions = Q::take($loginOptions, array('identifierType'));
 		Q_Response::setScriptData('Q.plugins.Users.setIdentifier.serverOptions', $setIdentifierOptions);
 	}
-	if ($node_server_url = Q_Config::get('Users', 'nodeServer', 'url', null)) {
-		Q_Response::setScriptData("Q.plugins.Users.nodeServer", parse_url($node_server_url));
-	}
 	if (Q_Config::get('Users', 'showLoggedInUser', true)) {
 		$user = Q_Session::id() ? Users::loggedInUser() : null;
 		if ($user) {
 			$u = $user->exportArray();
 			$u['sessionCount'] = $user->sessionCount;
+			$u['email'] = $user->emailAddress;
+			$u['mobile'] = $user->mobileNumber;
 			Q_Response::setScriptData("Q.plugins.Users.loggedInUser", $u);
 			Q_Response::addScriptLine("Q.plugins.Users.loggedInUser = new Q.plugins.Users.User(Q.plugins.Users.loggedInUser);");
 		}
@@ -45,17 +44,19 @@ function Users_before_Q_responseExtras()
 		'Q.plugins.Users.hinted',
 		Q::ifset($_SESSION, 'Users', 'hinted', array())
 	);
-	if ($sizes = Q_Config::expect('Users', 'icon', 'sizes')) {
-		sort($sizes);
+	if ($sizes = Q_Image::getSizes('Users/icon', $maxStretch)) {
+		ksort($sizes);
 		Q_Response::setScriptData('Q.plugins.Users.icon.sizes', $sizes);
+		Q_Response::setScriptData('Q.plugins.Users.icon.maxStretch', $maxStretch);
 	}
-	$defaultSize = Q_Config::get('Users', 'icon', 'defaultSize', 40);
+	$defaultSize = Q_Image::getDefaultSize('Users/icon');
 	Q_Response::setScriptData('Q.plugins.Users.icon.defaultSize', $defaultSize);
 	Q_Response::addStylesheet("{{Users}}/css/Users.css", 'Users');
 	$platforms = array(Q_Request::platform());
 	foreach (Q_Config::get('Users', 'apps', 'export', array()) as $platform) {
 		$platforms[] = $platform;
 	}
+	$platforms = array_unique($platforms);
 	$browsers = array(Q_Request::browser());
 	foreach (array('apps' => $platforms, 'browserApps' => $browsers) as $k => $arr) {
 		$apps = array();
@@ -75,8 +76,6 @@ function Users_before_Q_responseExtras()
 				}
 			}
 		}
-		//exit;
 		Q_Response::setScriptData("Q.plugins.Users.$k", $apps);
 	}
-
 }

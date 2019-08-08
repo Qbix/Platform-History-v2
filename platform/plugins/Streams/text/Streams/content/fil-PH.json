@@ -1,0 +1,118 @@
+{
+    "preview": {
+        "NewItemTitle": "Bagong Item"
+    },
+    "labels": {
+        "Streams/invited": "Mga taong inanyayahan ko",
+        "Streams/invitedMe": "Sino ang nag-imbita sa akin"
+    },
+    "interests": {
+        "Filter": "Ano ang iyong kinaliligayahan?",
+        "CanAdd": "Kung hindi mo pa rin mahanap ang iyong hinahanap, maaari kang magdagdag ng bagong interes sa ibaba:",
+        "TrySynonyms": "Hindi mo ba nakikita ito? Subukan ang ilang mga kasingkahulugan.",
+        "AddUnderCategory": "Idagdag sa ilalim ng kategorya ...",
+        "Other": "Iba pa",
+        "Unlisted": "Hindi nai-lista"
+    },
+    "chat": {
+        "flaggedForAdminReview": "Na-flag ang mensahe para sa pagsusuri ng admin. I-tap muli upang i-unlop.",
+        "noOneSaid": "Walang nagsabi ng anumang bagay",
+        "closeChatButton": "Isara ang chat",
+        "closeChatConfirmTitle": "Isara ang chat na ito?",
+        "closeChatConfirm": "Sigurado ka bang gusto mong isara ang chat na ito?",
+        "closeChatConfirmYes": "Oo",
+        "closeChatConfirmNo": "Hindi",
+        "earlierComments": "Mga naunang komento",
+        "Subscribed": "Mga Abiso sa I-mute",
+        "Unsubscribed": "Kumuha ng Mga Abiso",
+        "dontHavePermissionJoinConversation": "Wala kang pahintulot na sumali sa pag-uusap na ito.",
+        "startedConversation": "nagsimula ng usapan",
+        "RealTimeCall": "Tunay na Panawagan ng Oras"
+    },
+    "notifications": {
+        "*": "Mensahe {{& message.fields.type}} sa {{& stream.fields.title}}",
+        "Streams/chat/message": "Sinabi ni {{&call 'avatar.displayName'}}:",
+        "Streams/changed": "Ang mga pagbabago sa {{stream.fields.title}}",
+        "Streams/invite": "Inanyayahan ka sa {{& stream.fields.title}}",
+        "Streams/announcement": "Anunsyo sa {{& streams.fields.title}}",
+        "Streams/access": "Ang {{&call 'avatar.displayName'}} ay nagbago ng access sa stream",
+        "Streams/chat/edit": "Na-edit ang mensahe ng chat",
+        "Streams/chat/remove": "Inalis ang mensahe ng chat",
+        "Streams/closed": "Isinara ang {{stream.fields.title}}",
+        "Streams/task/progress": "Ang pag-unlad na ginawa sa {{stream.fields.title}}",
+        "Streams/task/complete": "Tapos na ang gawain: {{stream.fields.title}}",
+        "Streams/task/error": "Error sa panahon ng: {{stream.fields.title}}",
+        "Streams/incoming/*": "{{app}}: Papasok na Mensahe",
+        "ManageEmailSubscriptions": "pamahalaan ang iyong mga subscription sa email",
+        "IfUnsubscribe": "Kung nais mong mag-unsubscribe"
+    },
+    "invite": {
+        "messageContent": "Inimbitahan ka ni {{displayName}} na {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Pumili mula sa iyong Mga Contact",
+            "selectFromContacts": "Piliin ang Mula sa Mga Contact",
+            "photo": "Kumuha ng litrato",
+            "photoInstruction": "Kung ang taong nag-scan sa iyong QR code ay nasa harap mo, kumuha ng larawan ng mga ito",
+            "to": "Upang: {{Stream Title}}",
+            "go": "Pumunta",
+            "title": "Mag-anyaya",
+            "placeholder": "Numero ng mobile o email address",
+            "orInvite": "O mag-imbita ng mga tao sa pamamagitan ng paggamit ng:",
+            "QR": "{{ClickOrTap}} upang makabuo ng QR code",
+            "QRtitle": "I-scan ang QR code na ito",
+            "byEmail": "Email",
+            "byText": "Teksto",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Ini-scan nila ito!",
+            "chooseAgainFromContacts": "Pumili Muli mula sa Mga Contact",
+            "inviteSelectedContacts": "Anyayahan ang Mga Napiling Mga contact"
+        },
+        "email": {
+            "subject": "Uy, tingnan mo ito",
+            "PleaseVisitLink": "Pakibisita ang sumusunod na link:",
+            "InvitingYou": "Inaanyayahan ko kayo sa {{title}}",
+            "HasInvitedYou": "Inimbitahan ka ni {{displayName}} sa {{title}}"
+        },
+        "sms": {
+            "content": "Inanyayahan ka sa {{title}}. Mangyaring i-tap ang {{url}}"
+        },
+        "notice": {
+            "text": "Inanyayahan ka. {{ClickOrTap}} dito upang tanggapin at sumali."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} nai-post ang isang <em>{{message.fields.type}} na</em> mensahe sa {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} sa {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Ang mga paanyaya ay ipinadala mula sa aming numero, na hindi pa nakikilala ng iyong mga kaibigan. Sundin ang isang mabilis na teksto upang ipaalam sa kanila na ang imbitasyon ay nagmula sa iyo, na hinihiling sa kanila na i-click ang link.",
+            "confirm": "Ang mga paanyaya ay ipinadala mula sa aming numero, na hindi pa nakikilala ng iyong mga kaibigan. Gusto mo bang mag-follow up gamit ang isang mabilis na teksto upang ipaalam sa kanila na ang imbitasyon ay nagmula sa iyo, na hinihiling sa kanila na i-click ang link.",
+            "check": "Hey, naipadala ko lang sa iyo ang isang imbitasyon sa {{app}} app. Mangyaring suriin ang iyong sms at i-click ang link!"
+        },
+        "email": {
+            "alert": "Ang mga paanyaya ay ipinadala mula sa aming domain, na hindi pa nakikilala ng iyong mga kaibigan. Sundin ang isang mabilis na teksto upang ipaalam sa kanila na ang imbitasyon ay nagmula sa iyo, na hinihiling sa kanila na i-click ang link.",
+            "confirm": "Ang mga paanyaya ay ipinadala mula sa aming domain, na hindi pa nakikilala ng iyong mga kaibigan. Gusto mo bang mag-follow up gamit ang isang mabilis na teksto upang ipaalam sa kanila na ang imbitasyon ay nagmula sa iyo, na hinihiling sa kanila na i-click ang link.",
+            "subject": "Nakatanggap ka ba ng isang imbitasyon?",
+            "body": "Hey, naipadala ko lang sa iyo ang isang imbitasyon sa {{app}} app. Mangyaring suriin ang iyong email at i-click ang link sa doon!"
+        }
+    },
+    "participating": {
+        "Title": "Pamagat",
+        "Subscribed": "Nag-subscribe",
+        "Participants": "Mga kalahok"
+    },
+    "webrtc": {
+        "allow": {
+            "dialogTitle": "Paganahin ang Dialog",
+            "microphoneBtn": "Paganahin ang Mikropono",
+            "cameraBtn": "Paganahin ang Camera",
+            "cameraAndMicrophoneBtn": "Paganahin ang Camera at Mikropono"
+        }
+    }
+}

@@ -13,4 +13,4 @@ class Q_Exception_PlatformNotSupported extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_PlatformNotSupported', 'the {{platform}} platform is not supported');
+Q_Exception::add('Q_Exception_PlatformNotSupported', 'the {{platform}} platform is not supported', 405);

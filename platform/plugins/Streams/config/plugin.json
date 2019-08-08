@@ -2,9 +2,9 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "1.0.1",
+				"version": "1.0.8",
 				"compatible": "0.9",
-				"requires": {"Users": "1.0"},
+				"requires": {"Users": "1.0.4"},
 				"permissions": ["Streams/icons"],
 				"connections": ["Streams"]
 			}
@@ -37,11 +37,12 @@
 			"Streams/message/Streams/updateRelateTo": ["Streams/after/Streams_message_Streams_updateRelateTo"],
 			"Streams/Stream/save/Streams/greeting": ["Streams/after/Streams_Stream_save_Streams_greeting"]
 		},
-		"routes": {
-			"Q/plugins/Streams/:action": {"module": "Streams"},
-			"Q/plugins/Streams/invite/:token": {"module": "Streams", "action": "invite"},
+		"routes@start": {
+			"s/:publisherId/:streamName[]": {"module": "Streams", "action": "stream"},
 			"i/:token": {"module": "Streams", "action": "invited"},
-			"s/:publisherId/:streamName[]": {"module": "Streams", "action": "stream"}
+			"Streams/participating": {"module": "Streams", "action": "participating"},
+			"Q/plugins/Streams/invite/:token": {"module": "Streams", "action": "invite"},
+			"Q/plugins/Streams/:action": {"module": "Streams"}
 		},
 		"web": {
 			"requireValidNonce": ["Streams"]
@@ -50,15 +51,59 @@
 			"exclude": {
 				"Streams": ["img/icons/Streams/interest", "img/icons/files"]
 			}
+		},
+		"images": {
+			"Streams/image": {
+				"sizes": ["40", "50", "80", "200", "400", "x400", "400x"],
+				"defaultSize": "400",
+				"maxStretch": 2
+			},
+			"Streams/album": {
+				"sizes": ["40", "50", "80", "200", "400"],
+				"defaultSize": "400",
+				"maxStretch": 2
+			},
+			"Streams/interest": {
+				"sizes": {
+					"40": "40.png",
+					"50": "50.png",
+					"80": "80.png",
+					"200": "200.png",
+					"400": "400.png",
+					"400x": "400x.png",
+					"x400": "x400.png",
+					"150x100": "x100.png",
+					"500x333": "500x.png"
+				},
+				"defaultSize": "400",
+				"defaultCacheBust": 1000,
+				"maxStretch": 2
+			}
+		},
+		"text": {
+			"Streams": {
+				"*": ["Streams/content"]
+			}
 		}
 	},
 	"Users": {
-		"login": {
-			"userQueryUri": "Streams/user"
-		},
 		"paths": {
 			"uploads": {
 				"files/{{app}}/uploads/Streams": true
+			}
+		},
+		"quotas": {
+			"Streams/invite": {
+				"86400": {
+					"": 10,
+					"Users/admins": 1000
+				}
+			},
+			"Streams/webrtc": {
+				"86400": {
+					"": 10,
+					"Users/admins": 1000
+				}
 			}
 		}
 	},
@@ -82,7 +127,13 @@
 					"participatingCount",
 					"leftCount"
 				],
+				"admins": ["Users/owners", "Users/admins"],
 				"invite": {
+					"dialog": {
+						"templateName": "Streams/invite"
+					}
+				},
+				"invited": {
 					"dialog": {
 						"title": "You've been invited",
 						"user": {
@@ -92,7 +143,7 @@
 						},
 						"prompt": "Let friends recognize you:",
 						"button": "Get Started",
-						"templateName": "Streams/invite/complete"
+						"templateName": "Streams/invited/complete"
 					},
 					"duration": 2592000
 				},
@@ -110,19 +161,20 @@
 				"getParticipantsLimit": 100,
 				"messages": {
 					"*": {
-						"subject": "Message \"{{& message.fields.type}}\" to \"{{& stream.fields.title}}\""
+						"subject": ["Streams/content", ["notifications", "*"]]
 					},
 					"Streams/changed": {
 						"description": "Fields or attributes of the stream have changed",
-						"subject": "Changes in {{stream.fields.title}}"
+						"subject": ["Streams/content", ["notifications", "Streams/changed"]]
 					},
 					"Streams/invite": {
 						"description": "You were invited",
-						"subject": "You were invited to {{& stream.fields.title}}"
+						"subject": ["Streams/content", ["notifications", "Streams/invite"]],
+						"evenIfOnline": true
 					},
 					"Streams/announcement": {
 						"description": "Announcement for everyone in the stream",
-						"subject": "Announcement in {{& streams.fields.title}}"
+						"subject": ["Streams/content", ["notifications", "Streams/announcement"]]
 					},
 					"Streams/relatedTo": {
 						"description": "Some other stream has been related to this one",
@@ -134,23 +186,34 @@
 					},
 					"Streams/access": {
 						"description": "Access to stream has changed",
-						"subject": "{{&call 'avatar.displayName'}} changed stream access"
+						"subject": ["Streams/content", ["notifications", "Streams/access"]]
 					},
 					"Streams/chat/message": {
 						"description": "A chat message was posted",
-						"subject": "Chat in {{stream.fields.title}}"
+						"subject": ["Streams/content", ["notifications", "Streams/chat/message"]],
+						"autosubscribe": true
 					},
 					"Streams/chat/edit": {
 						"description": "A chat message was edited",
-						"title": "Chat message edited"
+						"subject": ["Streams/content", ["notifications", "Streams/chat/edit"]]
 					},
 					"Streams/chat/remove": {
 						"description": "A chat message was removed",
-						"title": "Chat message removed"
+						"subject": ["Streams/content", ["notifications", "Streams/chat/remove"]]
 					},
 					"Streams/closed": {
 						"description": "The stream has been closed",
-						"subject": "{{stream.fields.title}} has been closed"
+						"subject": ["Streams/content", ["notifications", "Streams/closed"]]
+					}
+				},
+				"relatedTo": {
+					"*": {
+						"description": ["Streams/content", ["notifications", "Streams/relatedTo/*"]]
+					}
+				},
+				"relatedFrom": {
+					"*": {
+						"description": ["Streams/content", ["notifications", "Streams/relatedFrom/*"]]
 					}
 				},
 				"defaults": {
@@ -168,6 +231,7 @@
 					"leftCount": 0
 				},
 				"url": "{{baseUrl}}/s/{{publisherId}}/{{name}}",
+				"uri": "Streams/stream publisherId={{publisherId}} streamName={{name}}",
 				"participating": ["Streams/participating"]
 			},
 			"Streams/invited": {
@@ -186,11 +250,15 @@
 				"messages": {
 					"Streams/task/progress": {
 						"description": "Progress has been made",
-						"subject": "Progress made on {{stream.fields.title}}"
+						"subject": ["Streams/content", ["notifications", "Streams/task/progress"]]
 					},
 					"Streams/task/complete": {
 						"description": "Task has been completed",
-						"subject": "Task completed: {{stream.fields.title}}"
+						"subject": ["Streams/content", ["notifications", "Streams/task/complete"]]
+					},
+					"Streams/task/error": {
+						"description": "Error during task",
+						"subject": ["Streams/content", ["notifications", "Streams/task/error"]]
 					}
 				},
 				"attributes": {
@@ -241,7 +309,6 @@
 				"description": "visual image",
 				"create": true,
 				"edit": true,
-				"sizes": ["40", "50", "80", "200", "x200", "200x"],
 				"defaults": {
 					"title": "Untitled Image",
 					"icon": "Streams/image"
@@ -259,28 +326,10 @@
 				"description": "",
 				"create": true,
 				"edit": true,
-				"sizes": [
-					"40",
-					"50",
-					"80",
-					"200",
-					"x200",
-					"200x"
-				],
 				"defaults": {
 					"icon": "Streams/image",
 					"title": "Untitled Image"
 				}
-			},
-			"Streams/audio": {
-				"description": "audio clip",
-				"create": true,
-				"edit": true,
-				"defaults": {
-					"icon": "Streams/audio",
-					"title": "Untitled Audio Clip"
-				},
-				"updateTitle": true
 			},
 			"Streams/file": {
 				"description": "uploaded file",
@@ -292,6 +341,36 @@
 				},
 				"updateTitle": true,
 				"updateIcon": true
+			},
+			"Streams/audio": {
+				"description": "audio clip",
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"icon": "Streams/audio",
+					"title": "Untitled Audio Clip"
+				},
+				"updateTitle": true
+			},
+			"Streams/video": {
+				"description": "video clip",
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"icon": "Streams/video",
+					"title": "Untitled Video Clip"
+				},
+				"updateTitle": true
+			},
+			"Streams/live": {
+				"description": "live video or audio",
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"icon": "Streams/live",
+					"title": "Untitled Live Audio/Video"
+				},
+				"updateTitle": true
 			},
 			"Streams/category": {
 				"description": "category to which other things can be related",
@@ -327,7 +406,7 @@
 				"messages": {
 					"Streams/incoming/message": {"post": true},
 					"*": {
-						"subject": "{{app}}: Incoming Message"
+						"subject": ["Streams/content", ["notifications", "Streams/incoming/*"]]
 					}
 				}
 			},
@@ -340,9 +419,24 @@
 					"Streams/chat/edit": { "post": true },
 					"Streams/chat/remove": { "post": true }
 				},
+				"relatedTo": {
+					"Streams/webrtc": {
+						"description": ["Streams/content", ["notifications", "Streams/relatedTo/Streams/call"]]
+					}
+				},
 				"defaults": {
 					"title": "Conversation",
 					"icon": "Streams/chat"
+				}
+			},
+			"Streams/webrtc": {
+				"description": "real time video/audio conference",
+				"defaults": {
+					"title": "Real Time Conference",
+					"icon": "Streams/webrtc"
+				},
+				"messages": {
+					"Streams/webrtc/joined": {}
 				}
 			},
 			"Streams/experience": {
@@ -357,8 +451,9 @@
 			}
 		},
 		"categorize": {
-			"relationTypes": ["Streams/interests"],
-			"streamTypes": ["Streams/category"]
+			"Streams/category": {
+				"Streams/interests": true
+			}
 		},
 		"lookup": {
 			"limit": 10,
@@ -378,6 +473,10 @@
 			"layout": {
 				"default": "Streams/layout/invitations.php"
 			},
+			"signature": {
+				"length": 10
+			},
+			"expires": 86400,
 			"subpath": "{{app}}/uploads/Streams/invitations",
 			"sort": {}
 		},
@@ -435,17 +534,6 @@
 				"mobileNumber": "Streams/user/mobileNumber"
 			}
 		}, 
-		"icons": {
-			"sizes": {
-				"40": "40.png",
-				"50": "50.png",
-				"80": "80.png",
-				"67x100": "x100.png",
-				"500x333": "500x.png"
-			},
-			"defaultSize": "40",
-			"defaultCacheBust": "1000"
-		},
 		"rules": {
 			"deliver": {
 				"default": ["devices", "email", "mobile"],
@@ -454,10 +542,28 @@
 		},
 		"notifications": {
 			"onlyIfAllClientsOffline": true,
-			"debug": true
+			"debug": true,
+			"notices": {
+				"Streams/chat/message": {
+					"timeout": 10
+				},
+				"Streams/invite": {
+					"persistent": true,
+					"closeable": false,
+					"showSubject": false
+				}
+			}
 		},
 		"import": {
-			"timeLimit": 100000
+			"timeLimit": 100000,
+			"task": {
+				"title": "Importing members into {{communityName}}"
+			}
+		},
+		"meta": {
+			"description": {
+				"maxLength": 150
+			}
 		}
 	}
 }

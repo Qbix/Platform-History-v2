@@ -1,0 +1,121 @@
+{
+    "preview": {
+        "NewItemTitle": "Novo elemento"
+    },
+    "labels": {
+        "Streams\/invited": "Persoas que invitou",
+        "Streams\/invitedMe": "Quen me convidou?"
+    },
+    "interests": {
+        "Filter": "Que che gusta?",
+        "CanAdd": "Se aínda non atopas o que buscas, podes engadir un novo interese a continuación:",
+        "TrySynonyms": "Non o ves? Proba algúns sinónimos.",
+        "AddUnderCategory": "Engadir baixo categoría ...",
+        "Other": "Outra",
+        "Unlisted": "Non listado"
+    },
+    "chat": {
+        "flaggedForAdminReview": "A mensaxe foi marcada para a revisión do administrador. Toque de novo para desabrochar.",
+        "noOneSaid": "Ninguén dixo nada",
+        "closeChatButton": "Pechar o chat",
+        "closeChatConfirmTitle": "Pechar este chat?",
+        "closeChatConfirm": "Está seguro de que quere pechar este chat?",
+        "closeChatConfirmYes": "Si",
+        "closeChatConfirmNo": "Non",
+        "earlierComments": "comentarios anteriores",
+        "Subscribed": "Notificacións de silencio",
+        "Unsubscribed": "Obter notificacións",
+        "dontHavePermissionJoinConversation": "Non tes permiso para unirse a esta conversa.",
+        "startedConversation": "iniciou unha conversa",
+        "RealTimeCall": "Chamada en tempo real"
+    },
+    "notifications": {
+        "*": "Mensaxe {{& message.fields.type}} para {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} dixo:",
+        "Streams\/changed": "Cambios en {{stream.fields.title}}",
+        "Streams\/invite": "Foi invitado a {{& stream.fields.title}}",
+        "Streams\/announcement": "Anuncio en {{& streams.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} cambiou o acceso ao fluxo",
+        "Streams\/chat\/edit": "Editaron un mensaje de chat",
+        "Streams\/chat\/remove": "Eliminouse a mensaxe de chat",
+        "Streams\/closed": "Pechouse {{stream.fields.title}}",
+        "Streams\/task\/progress": "Avances realizados en {{stream.fields.title}}",
+        "Streams\/task\/complete": "Tarefa completada: {{stream.fields.title}}",
+        "Streams\/task\/error": "Erro durante: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Mensaxe de entrada",
+        "ManageEmailSubscriptions": "xestiona as túas subscricións de correo electrónico",
+        "IfUnsubscribe": "Se queres cancelar a subscrición"
+    },
+    "invite": {
+        "messageContent": "{{displayName}} invitoute a {{inviteUrl}}",
+        "dialog": {
+            "chooseFromContacts": "Elixe entre os teus contactos",
+            "selectFromContacts": "Seleccione Entre os contactos",
+            "photo": "Sacar unha foto",
+            "photoInstruction": "Se a persoa que explorou o código QR está diante de ti, fai unha foto delas",
+            "to": "Para: {{Stream Title}}",
+            "go": "Vaia",
+            "title": "Invitar",
+            "placeholder": "Número de teléfono móbil ou enderezo de correo electrónico",
+            "orInvite": "Ou invitar á xente a usar:",
+            "QR": "{{ClickOrTap}} para xerar código QR",
+            "QRtitle": "Escanear este código QR",
+            "byEmail": "Correo electrónico",
+            "byText": "Texto",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Dixitalizáronse!",
+            "chooseAgainFromContacts": "Escolla de novo desde os contactos",
+            "inviteSelectedContacts": "Invitar a contactos seleccionados"
+        },
+        "email": {
+            "subject": "Oe, mira isto",
+            "PleaseVisitLink": "Visite a seguinte ligazón:",
+            "InvitingYou": "Estou invitado a {{title}}",
+            "HasInvitedYou": "{{displayName}} convidoute a {{title}}"
+        },
+        "sms": {
+            "content": "Foi invitado a {{title}}. Toca {{url}}"
+        },
+        "notice": {
+            "text": "Foi invitado. {{ClickOrTap}} aquí para aceptar e unirse."
+        }
+    },
+    "message": {
+        "html": {
+            "posted": "{{call 'avatar.displayName'}} publicou unha mensaxe <em>{{message.fields.type}}<\/em> en {{stream.fields.title}}"
+        },
+        "text": {
+            "body": "{{& call 'avatar.displayName'}} en {{& url}}: {{& message.fields.content}}"
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "As invitacións son enviadas a partir do noso número, que os teus amigos aínda non recoñecen. Fai un seguimento cun texto rápido para que saiban de que che veu a invitación, pedíndolles que fagan clic na ligazón.",
+            "confirm": "As invitacións son enviadas a partir do noso número, que os teus amigos aínda non recoñecen. Quere facer un seguimento cun texto rápido para que saiban que a invitación chegou de ti, pedíndolles que fagan clic na ligazón.",
+            "check": "Hey, acabo de enviarte unha invitación á aplicación {{app}}. Comproba o teu sms e fai clic na ligazón."
+        },
+        "email": {
+            "alert": "As invitacións son enviadas desde o noso dominio, que os teus amigos aínda non recoñecen. Fai un seguimento cun texto rápido para que saiban de que che veu a invitación, pedíndolles que fagan clic na ligazón.",
+            "confirm": "As invitacións son enviadas desde o noso dominio, que os teus amigos aínda non recoñecen. Quere facer un seguimento cun texto rápido para que saiban que a invitación chegou de ti, pedíndolles que fagan clic na ligazón.",
+            "subject": "¿Recibiu unha invitación?",
+            "body": "Hey, acabo de enviarte unha invitación á aplicación {{app}}. Comproba o teu correo electrónico e fai clic na ligazón alí."
+        }
+    },
+    "participating": {
+        "Title": "Título",
+        "Subscribed": "Subscrito",
+        "Participants": "Participantes"
+    },
+    "webrtc": {
+        "allow": {
+            "microphoneTitle": "Activar o micrófono",
+            "cameraTitle": "Activar a cámara",
+            "cameraAndMicrophoneTitle": "Activar cámara e micrófono",
+            "dialogTitle": "Habilitando o diálogo",
+            "microphoneBtn": "Activar o micrófono",
+            "cameraBtn": "Activar a cámara",
+            "cameraAndMicrophoneBtn": "Activar cámara e micrófono"
+        }
+    }
+}

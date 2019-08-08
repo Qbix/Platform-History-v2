@@ -1,0 +1,30 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Linkki edistämiseksi",
+                "startDate": "Aloituspäivämäärä",
+                "startTime": "Aloitusaika",
+                "endDate": "Päättymispäivä",
+                "endTime": "Loppu aika",
+                "budget": "talousarvio"
+            },
+            "interests": {
+                "Title": "Suodata koron mukaan",
+                "FilterInterests": "Aloita kirjoittamalla kiinnostuksen ..."
+            },
+            "Interest": "Kiinnostuksen kohde",
+            "Location": "Sijainti"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Mennä",
+            "PasteLinkHere": "Liitä linkki tähän",
+            "BrowseTheWeb": "selailla",
+            "WriteToStartConversation": "Kirjoita ajatuksesi keskustelun aloittamiseksi",
+            "StartConversation": "Aloita keskustelu",
+            "GotoConversation": "Siirry keskusteluun"
+        }
+    }
+}

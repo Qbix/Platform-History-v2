@@ -1,11 +1,12 @@
 {
-	"name": "Q_Users",
+	"name": "qbix/users",
 	"authors": [
 		{
 			"name": "Qbix"
 		}
 	],
 	"require": {
-		"minishlink/web-push": "^1.4"
+		"minishlink/web-push": "^1.4",
+		"lordelph/icofileloader": "1.*"
 	}
 }
