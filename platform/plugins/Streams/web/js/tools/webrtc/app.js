@@ -560,7 +560,7 @@ WebRTCconferenceLib = function app(options){
 				screenToAttach.videoCon.appendChild(trackEl);
 				screenToAttach.videoTrack = trackEl;
 				screenToAttach.isActive = true;
-				//createVideoCanvas(screenToAttach, track);
+				createVideoCanvas(screenToAttach, track);
 				app.event.dispatch('videoTrackIsBeingAdded', screenToAttach);
 			} else if(track.kind == 'audio') {
 
@@ -1232,10 +1232,6 @@ WebRTCconferenceLib = function app(options){
 			chatParticipantEl.appendChild(chatParticipantVideoCon);
 			participantNameTextCon.appendChild(participantNameText);
 			chatParticipantName.appendChild(participantNameTextCon);
-			if(isLocal && isMainOfLocal && _isMobile) {
-				var conferenceControlBtns = app.conferenceControl.getControlBar();
-				chatParticipantName.appendChild(conferenceControlBtns);
-			}
 			chatParticipantEl.appendChild(chatParticipantName);
 
 			var newScreen = new Screen();
