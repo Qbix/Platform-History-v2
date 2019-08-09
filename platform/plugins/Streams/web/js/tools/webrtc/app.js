@@ -1,4 +1,4 @@
-WebRTCconferenceLib = function app(options){
+window.WebRTCconferenceLib = function app(options){
 	var app = {};
 	var defaultOptions = {
 		mode: 'node',
@@ -2031,7 +2031,7 @@ WebRTCconferenceLib = function app(options){
 							});
 						})
 						.catch(function(error) {
-							console.error(error);
+							console.error(error.name + ': ' + error.message);
 						});
 				}
 			}
@@ -2145,7 +2145,7 @@ WebRTCconferenceLib = function app(options){
 							});
 						})
 						.catch(function(error) {
-							console.error(error);
+							console.error(error.name + ': ' + error.message);
 						});
 				}
 
@@ -2198,7 +2198,7 @@ WebRTCconferenceLib = function app(options){
 
 		function setChannelEvents(dataChannel, participant) {
 			dataChannel.onerror = function (err) {
-				console.error(err);
+				console.error(err.name + ': ' + err.message);
 			};
 			dataChannel.onclose = function () {
 				log('dataChannel closed');
@@ -2384,7 +2384,7 @@ WebRTCconferenceLib = function app(options){
 						})
 
 						.catch(function(error) {
-							console.error(error);
+							console.error(error.name + ': ' + error.message);
 						});
 				}
 
@@ -2569,7 +2569,7 @@ WebRTCconferenceLib = function app(options){
 							});
 						})
 						.catch(function(error) {
-							console.error(error);
+							console.error(error.name + ': ' + error.message);
 						});
 				});
 			}
@@ -2874,7 +2874,7 @@ WebRTCconferenceLib = function app(options){
 
 						toggleCamera(videoStream);
 					}, function (error) {
-						console.error(error);
+						console.error(error.name + ': ' + error.message);
 						if(failureCallback != null) failureCallback(error);
 					});
 				} else {
@@ -2888,7 +2888,7 @@ WebRTCconferenceLib = function app(options){
 
 					})
 						.catch(function (error) {
-							console.error(error);
+							console.error(error.name + ': ' + error.message);
 							if(failureCallback != null) failureCallback(error);
 						});
 				}
@@ -4191,7 +4191,7 @@ WebRTCconferenceLib = function app(options){
 						})
 
 						.catch(function (error) {
-							console.error(error);
+							console.error(error.name + ': ' + error.message);
 						});
 				});
 			}
@@ -4221,7 +4221,7 @@ WebRTCconferenceLib = function app(options){
 						});
 					})
 					.catch(function (error) {
-						console.error(error);
+						console.error(error.name + ': ' + error.message);
 					});
 			}
 
@@ -4414,7 +4414,7 @@ WebRTCconferenceLib = function app(options){
 						});
 					})
 					.catch(function (error) {
-						console.error(error);
+						console.error(error.name + ': ' + error.message);
 					});
 			}
 
@@ -4436,7 +4436,7 @@ WebRTCconferenceLib = function app(options){
 						})
 
 						.catch(function (error) {
-							console.error(error);
+							console.error(error.name + ': ' + error.message);
 						});
 				});
 			}
