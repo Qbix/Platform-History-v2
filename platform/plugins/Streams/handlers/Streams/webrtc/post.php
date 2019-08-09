@@ -33,7 +33,7 @@ function Streams_webrtc_post($params = array())
 	$className = "Streams_WebRTC_".ucfirst($adapter);
 
 	// check quota
-	//$quota = Users_Quota::check($loggedUserId, '', 'Streams/webrtc', true, 1, Users::roles());
+	$quota = Users_Quota::check($loggedUserId, '', 'Streams/webrtc', true, 1, Users::roles());
 
 	$webrtc = new $className();
 	$result = $webrtc->createOrJoinRoom($publisherId, $roomId);

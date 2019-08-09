@@ -6859,7 +6859,7 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
 		if (obj == undefined) {
 			return;
 		}
-		if (Q.typeOf(obj) === "array") {
+		if (Q.isArrayLike(obj)) {
 			// Serialize array item.
 			Q.each(obj, function _Q_param_each(i, value) {
 				if (/\[\]$/.test(prefix)) {
