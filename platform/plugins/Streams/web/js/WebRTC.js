@@ -141,10 +141,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 		/**
 		 * Show snipped with particular message
-		 * @method log
+		 * @method notice
 		 * @param {String} [message] Notice to show
 		 */
-		function log(message) {
+		function notice(message) {
 			var noticeDiv = document.querySelector('.notice-container');
 			noticeDiv.innerHTML = message;
 			noticeDiv.classList.add('shown');
@@ -162,18 +162,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			var tool = this;
 
 			stream.onMessage('Streams/join').set(function (stream, message) {
-				if(_debug) console.log('%c STREAMS: ANOTHER USER JOINED', 'background:blue;color:white;', stream, message);
-				var userId = message.getInstruction('byUserId');
 
 			}, 'Streams/webrtc');
+
 			stream.onMessage('Streams/connected').set(function (stream, message) {
-				if(_debug) console.log('%c STREAMS: ANOTHER USER JOINED', 'background:blue;color:white;', stream, message);
+
 			}, 'Streams/webrtc');
 
 			stream.onMessage("Streams/leave").set(function (stream, message) {
-				var userId = message.getInstruction('byUserId');
 
-				if(_debug) console.log('%c STREAMS: USER DISCONNECTED', 'background:blue;color:white;', message);
 			}, 'Streams/webrtc');
 		}
 
@@ -189,57 +186,55 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			});
 
 			WebRTCconference.event.on('participantConnected', function (participant) {
-				if(_debug) console.log('%c ANOTHER USER JOINED', 'background:blue;color:white;', participant)
+				log('user joined',  participant);
 
 				var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
 
 				if(userId != null){
 					Q.Streams.get(userId, 'Streams/user/firstName', function () {
 						var firstName = this.fields.content;
-						log("Joining: " + firstName);
+						notice("Joining: " + firstName);
 					});
 				}
 
 				screensRendering.updateLayout();
 			});
 			WebRTCconference.event.on('participantDisconnected', function (participant) {
-				if(_debug) console.log('%c ANOTHER USER DISCONNECTED', 'background:blue;color:white;', participant)
+				log('user disconnected',  participant);
 				var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
 
 
 				if(userId != null){
 					Q.Streams.get(userId, 'Streams/user/firstName', function () {
 						var firstName = this.fields.content;
-						log(firstName + " left the room");
+						notice(firstName + " left the room");
 					});
 				}
 				screensRendering.updateLayout();
 			});
 			WebRTCconference.event.on('localParticipantDisconnected', function (participant) {
-				if(_debug) console.log('%c ANOTHER USER DISCONNECTED', 'background:blue;color:white;', participant)
-
-				log('You left the room');
-
+				log('you left the room')
+				notice('You left the room');
 				screensRendering.updateLayout();
 			});
 			WebRTCconference.event.on('screenAdded', function (participant) {
-				if(_debug) console.log('%c SCREEN ADDED', 'background:blue;color:white;', participant)
+				log('screen added', participant)
 				//screensRendering.updateLayout();
 			});
 			WebRTCconference.event.on('trackAdded', function (e) {
-				if(_debug) console.log('%c TRACK ADDED', 'background:blue;color:white;', e)
+				log('track added', e)
 				if(e.track.kind == 'video') e.screen.isActive = true;
 				screensRendering.updateLayout();
 			});
 
 			WebRTCconference.event.on('videoTrackIsBeingAdded', function (screen) {
-				if(_debug) console.log('%c TRACK videoTrackIsBeingAdded', 'background:blue;color:white;')
+				log('video track is being added', screen)
 				screensRendering.updateLayout();
 				screensRendering.showLoader('videoTrackIsBeingAdded', screen.participant);
 			});
 
 			WebRTCconference.event.on('videoTrackLoaded', function (e) {
-				if(_debug) console.log('%c TRACK videoTrackLoaded', 'background:blue;color:white;')
+				log('video track loaded', e)
 				screensRendering.updateLayout();
 
 				screensRendering.hideLoader('videoTrackLoaded', e.screen.participant);
@@ -250,7 +245,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			});
 
 			WebRTCconference.event.on('screensharingStarting', function (data) {
-				if(_debug) console.log('%c TRACK screensharingStarting', 'background:blue;color:white;')
+				log('screen sharing is being started', data)
 
 				screensRendering.showLoader('screensharingStarting', data.participant);
 			});
@@ -262,10 +257,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				screensRendering.showLoader('beforeCamerasToggle', e.participant);
 			});
 			WebRTCconference.event.on('screensharingStarted', function (data) {
+				log('screen sharing started')
+
 				//screensRendering.hideLoader('screensharingStarting', data.participant);
 			});
 			WebRTCconference.event.on('screensharingFailed', function (e) {
-				if(_debug) console.log('screensharingFailed')
+				log('screen sharing failed')
 				screensRendering.hideLoader('screensharingFailed', e.participant);
 			});
 		}
@@ -340,7 +337,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				var audioDevices = 0;
 				for(var i in mediaDevices) {
 					if (mediaDevices[i].kind === 'videoinput' || mediaDevices[i].kind === 'video') {
-						if(_debug) console.log('initOrConnectConversation mediaDevices[i]', mediaDevices[i].deviceId);
 						videoDevices++;
 					} else if (mediaDevices[i].kind === 'audioinput' || mediaDevices[i].kind === 'audio') {
 						audioDevices++;
@@ -402,7 +398,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		 * @method publishMediaTracks
 		 */
 		function publishMediaTracks() {
-			if(_debug) console.log('publishMediaTracks: ' + _options.startWith.video + ' ' + _options.startWith.audio)
+			log('publishMediaTracks: video = ' + _options.startWith.video + ', audio = ' + _options.startWith.audio)
 
 			if(Q.info.isCordova && Q.info.platform === 'ios') {
 				cordova.plugins.iosrtc.enumerateDevices(function(mediaDevicesList) {
@@ -412,10 +408,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					var audioDevices = 0;
 					for (var i in mediaDevices) {
 						if (mediaDevices[i].kind.indexOf('video') != -1) {
-							if (_debug) console.log('publishMediaTracks mediaDevices[i]', mediaDevices[i].deviceId);
 							videoDevices++;
 						} else if (mediaDevices[i].kind.indexOf('audio') != -1) {
-							if (_debug) console.log('publishMediaTracks mediaDevices[i]', mediaDevices[i].deviceId);
 							audioDevices++;
 						}
 					}
@@ -458,12 +452,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							}
 
 							if (WebRTCconference.state == 'connected') {
-								if(_debug) console.log('publishMediaTracks: got stream: publishTracks');
+								log('publishMediaTracks: got stream: publishTracks');
 
 								publishTracks();
 								if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
 							} else {
-								if(_debug) console.log('publishMediaTracks: got stream: delay publish');
+								log('publishMediaTracks: got stream: delay publishing');
 
 								WebRTCconference.event.on('joined', function () {
 									publishTracks();
@@ -471,7 +465,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								});
 							}
 						} else if (_options.streams == null) {
-							if(_debug) console.log('publishMediaTracks: got stream: add to options');
+							log('publishMediaTracks: got stream: add to options');
 
 							_options.streams = streams;
 							window.sstream = streams;
@@ -486,13 +480,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								audio: false
 							},
 							function (stream) {
-								if(_debug) console.log('requestVideoStream: got stream');
+								log('requestVideoStream: got stream');
 								if(callback != null) callback(stream);
 							},
 							function (error) {
 								showInstructionsDialogIos('Camera');
-								console.error('EEEEEEEEEEERRRRRRROOOOOOOOOOORRRRRRRRR requestVideoStream failed: ', error);
-								if(_debug) console.log('EEEEEEEEEEERRRRRRROOOOOOOOOOORRRRRRRRR requestVideoStream failed: ', error);
+								console.error(error);
 							}
 						);
 					}
@@ -504,13 +497,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								audio: true
 							},
 							function (stream) {
-								if(_debug) console.log('publishMediaTracks: got stream');
+								log('publishMediaTracks: got stream');
 								if(callback != null) callback(stream);
 							},
 							function (error) {
 								showInstructionsDialogIos('Microphone');
-								console.error('EEEEEEEEEEERRRRRRROOOOOOOOOOORRRRRRRRR publishmediaTracks failed: ', error);
-								if(_debug) console.log('EEEEEEEEEEERRRRRRROOOOOOOOOOORRRRRRRRR publishMediaTracks failed: ', error);
+								console.error(error);
 							}
 						);
 					}
@@ -541,7 +533,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				var audioDevices = 0;
 				for(var i in mediaDevices) {
 					if (mediaDevices[i].kind === 'videoinput' || mediaDevices[i].kind === 'video') {
-						if(_debug) console.log('initOrConnectConversation mediaDevices[i]', mediaDevices[i].deviceId);
 						videoDevices++;
 					} else if (mediaDevices[i].kind === 'audioinput' || mediaDevices[i].kind === 'audio') {
 						audioDevices++;
@@ -550,15 +541,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				navigator.mediaDevices.getUserMedia({video: _options.startWith.video && videoDevices != 0, audio:_options.startWith.audio && audioDevices != 0})
 					.then(function (stream) {
-						if(_debug) console.log('publishMediaTracks: stream ', stream);
-
 						if(_options.streams != null) return;
 						//Q.Dialogs.pop();
 						if(WebRTCconference != null){
 							_options.streams = [stream];
 							var publishTracks = function() {
 								var tracks = stream.getTracks();
-								if(_debug) console.log('publishMediaTracks: addTrack ', tracks);
+								log('publishMediaTracks: addTrack ', tracks);
 
 								for(var t in tracks) {
 									WebRTCconference.conferenceControl.addTrack(tracks[t], stream);
@@ -581,7 +570,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								});
 							}
 						} else if (_options.streams == null) {
-							if(_debug) console.log('publishMediaTracks: _options.streams ', stream);
+							log('publishMediaTracks: stream is added to options', stream);
 							_options.streams = [stream];
 						}
 					}).catch(function(err) {
@@ -615,9 +604,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 				var twilioRoomName = _roomStream.getAttribute('twilioRoomName');
-
-				if(_debug) console.log('twilioRoomName', twilioRoomName)
-				if(_debug) console.log('startTwilioRoom _options.startWith',_options.startWith)
 				WebRTCconference = window.WebRTCconferenceLib({
 					mode:'twilio',
 					roomName:twilioRoomName,
@@ -636,7 +622,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					hidePageLoader();
 					Q.handle(_options.onWebRTCRoomCreated, webRTCInstance);
 					_debugTimer.loadEnd = performance.now();
-					log("You joined the room");
+					notice("You joined the room");
 
 					Q.activate(
 						document.body.appendChild(
@@ -695,7 +681,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		 * @param {String} [turnCredentials.username] Username
 		 */
 		function initWithNodeServer(socketServer, turnCredentials) {
-			if(_debug) console.log('initWithNodeServer');
+			log('initWithNodeServer');
 
 			Q.addScript([
 				"https://requirejs.org/docs/release/2.2.0/minified/require.js",
@@ -703,7 +689,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			], function () {
 
 				var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
-				if(_debug) console.log('roomId', roomId)
+				log('initWithNodeServer: roomId = ' + roomId)
 				WebRTCconference = window.WebRTCconferenceLib({
 					mode:'nodejs',
 					useAsLibrary: true,
@@ -714,7 +700,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					video: false,
 					audio: false,
 					streams: _options.streams != null ? _options.streams : null,
-					turnCredentials: turnCredentials
+					turnCredentials: turnCredentials,
+					debug: _debug
 				});
 
 				bindConferenceEvents();
@@ -748,6 +735,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 							if(Q.info.isMobile) return;
 
+							var elementsToIgnore = [_controlsTool.settingsPopupEl, _controlsTool.textChat.chatBox, _controlsTool.participantListEl.parentNode];
+							elementsToIgnore = elementsToIgnore.concat(Array.prototype.slice.call(_controls.querySelectorAll('SVG')));
 							Q.activate(
 								Q.Tool.setUpElement(
 									_controls.firstChild, // or pass an existing element
@@ -756,6 +745,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 										move: true,
 										resize: false,
 										active: true,
+										ignoreOnElements: elementsToIgnore,
 										elementPosition: 'fixed',
 										snapToSidesOnly: true,
 										onMovingStart: function () {
@@ -771,7 +761,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								),
 								{},
 								function () {
-									if(_debug) console.log('controls movable')
 								}
 							);
 						}
@@ -929,7 +918,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					}
 				);
 
-				if(_debug) console.log('WebRTCconference.screensInterface.audioVisualization().build');
 				WebRTCconference.screensInterface.audioVisualization().build({
 					name:'participantScreen',
 					participant: screen.participant,
@@ -1206,8 +1194,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			 * @method moveScreenFront
 			 */
 			function moveScreenFront() {
-				if(_debug) console.log('moveScreenFront');
-
 				var screenEl = this;
 				var screens = WebRTCconference.screens();
 				var currentHighestZIndex = Math.max.apply(Math, screens.map(function(o) { return o.screenEl != null && o.screenEl.style.zIndex != '' ? o.screenEl.style.zIndex : 1000; }))
@@ -1215,9 +1201,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				if(Q.info.isCordova && Q.info.platform === 'ios') {
 					var video = screenEl.querySelector('video');
-					if(_debug){
-						console.log('moveScreenFront video ' + (video != null));
-					}
 
 					if(video != null) {
 						video.style.zIndex = currentHighestZIndex+1;
@@ -1241,14 +1224,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				}).filter(function (el) {return el != null;}))
 
 				screenEl.style.zIndex = currentLowestZIndex-1;
-
-				if(Q.info.isCordova && Q.info.platform === 'ios') {
-					var video = screenEl.querySelector('video');
-					if(video != null) {
-						video.style.zIndex = currentLowestZIndex-1;
-					}
-					cordova.plugins.iosrtc.refreshVideos();
-				}
 			}
 
 			/**
@@ -1258,11 +1233,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			 * @param {Object} [participant] Participant on whose screen loader should be displayed.
 			 */
 			function showLoader(loaderName, participant) {
-				if(_debug) console.log('showLoader')
 				var screen = participant.screens[0];
 				if(screen != null) screen.videoIsChanging = true;
 				participant.videoIsChanging = true;
-				if(_debug) console.log('showLoader screen', screen)
 
 				if(loaderName == 'videoTrackIsBeingAdded' || loaderName == 'beforeCamerasToggle') {
 					var loader = screen.screenEl.querySelector('.spinner-load');
@@ -1313,7 +1286,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			 * @param {Object} [participant] Participant on whose screen loader should be displayed.
 			 */
 			function hideLoader(loaderName, participant) {
-				if(_debug) console.log('hideLoader', participant)
 				var screen = participant.screens[0];
 				screen.videoIsChanging = false;
 				participant.videoIsChanging = false;
@@ -1337,7 +1309,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			 * @param {Object} [e] Click/tap event.
 			 */
 			function toggleViewModeByScreenClick(e) {
-				if(_debug) console.log('toggleViewModeByScreenClick')
 				e.stopImmediatePropagation();
 				e.preventDefault();
 				var roomScreens = WebRTCconference.screens();
@@ -1414,9 +1385,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					}
 				};
 
-
-
-				if(_debug) console.log('toggleViewMode', modeToSwitch)
 				if(modeToSwitch == null || modeToSwitch == 'regular') {
 					renderDesktopScreensGrid();
 				} else if(modeToSwitch == 'minimized') {
@@ -1445,7 +1413,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			 * @return {Array} Sreens (HTML elements) to render
 			 */
 			function toggleScreensClass(layout) {
-				if(_debug) console.log('toggleScreensClass', layout);
 				var gridClasses = [
 					'Streams_webrtc_tiled-screens-grid',
 					'Streams_webrtc_maximized-screens-grid',
@@ -1636,7 +1603,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			 * @method renderTiledScreenGridMobile
 			 */
 			function renderTiledScreenGridDesktop() {
-				if(_debug) console.log('renderTiledScreenGridDesktop')
+				log('renderTiledScreenGridDesktop')
 				if(window.innerHeight > window.innerWidth) {
 					//_roomsMedia.className = 'Streams_webrtc_tiled-vertical-grid';
 					var elements = toggleScreensClass('tiledVertical');
@@ -1681,7 +1648,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			 * @method renderMinimizedScreensGrid
 			 */
 			function renderMinimizedScreensGrid() {
-				if(_debug) console.log('renderMinimizedScreensGrid')
+				log('renderMinimizedScreensGrid')
 				if(_layoutTool == null || _controls == null) return;
 
 				activeScreen = null;
@@ -1704,7 +1671,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			 */
 			function renderMaximizedScreensGrid(screenToMaximize, duration) {
 				if(typeof duration == 'undefined') duration = 500;
-				if(_debug) console.log('renderMaximizedScreensGrid', screenToMaximize)
+				log('renderMaximizedScreensGrid', screenToMaximize)
 				if(_layoutTool == null || _controls == null || (screenToMaximize != null && screenToMaximize == activeScreen)) return;
 				var roomScreens = WebRTCconference.screens();
 				if(screenToMaximize != null) activeScreen = screenToMaximize;
@@ -1745,7 +1712,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			 * @param {Object} [screenToMaximize] Screen that has tapped in order to maximize.
 			 */
 			function renderMaximizedScreensGridMobile(screenToMaximize) {
-				if(_debug) console.log('renderMaximizedScreensGridMobile')
+				log('renderMaximizedScreensGridMobile')
 				if(_layoutTool == null || _controls == null || (screenToMaximize != null && screenToMaximize == activeScreen)) return;
 				var roomScreens = WebRTCconference.screens();
 				if(screenToMaximize != null) activeScreen = screenToMaximize;
@@ -1981,7 +1948,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				 * @return {Array} List of DOMRects that will be passed to Q.layout.
 				 */
 				minimizedOrMaximizedScreenGrid: function (container, count, elementToWrap, maximized) {
-					console.log('minimizedOrMaximizedScreenGrid count', count)
 
 					var wrapElement = elementToWrap;
 
@@ -2007,15 +1973,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						align = 'bottom';
 					}
 
-					console.log('align', align)
-
-
-
 					var rectWidth = 90;
 					var rectHeight = 90;
 					var spaceBetween = 10;
 					var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
-					console.log('perRow', perRow);
 
 					var rectsOnLeftSide, rectsOnRightSide, rectsToTheTop
 					if(align == 'bottom' || align == 'top') {
@@ -2035,14 +1996,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						rectsToTheTop = Math.floor(parentHeight / (rectHeight + spaceBetween));
 					}
 
-					console.log('rectsToTheTop 0', rectsToTheTop);
-
 					if(rectsToTheTop == 0 && (rectsOnLeftSide != 0 || rectsOnRightSide != 0)) rectsToTheTop = 1;
 					var totalRectsOnSides = (rectsOnLeftSide * rectsToTheTop) + (rectsOnRightSide * rectsToTheTop);
-					console.log('rectsOnLeftSide', rectsOnLeftSide);
-					console.log('rectsOnRightSide', rectsOnRightSide);
-					console.log('rectsToTheTop', rectsToTheTop);
-					console.log('totalRectsOnSides', totalRectsOnSides);
 					if(count < totalRectsOnSides) totalRectsOnSides = count;
 
 
@@ -2070,7 +2025,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 								y = prevRect.y;
 								x = prevRect.x + (rectWidth + spaceBetween);
-								console.log('if 1', x, y);
 
 							} else if(createNewRowOnRight) {
 								if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
@@ -2086,14 +2040,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 									for (var a in rects) {
 										allRects = allRects.concat(rects[a]);
 									}
-									console.log('allRects', allRects)
 									x = allRects.filter(function(rect){
 										return rect.side == 'right';
 									}).reduce(function(prev, current) {
 										return (prev.rect.x < current.rect.x) ? prev : current;
 									}).rect.x
 								}
-								console.log('if 2', x, y);
 
 								createNewRowOnRight = false;
 							} else {
@@ -2109,7 +2061,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								} else {
 									x = (elementToWrap.left + elementToWrap.width + spaceBetween);
 								}
-								console.log('if 3', x, y);
 
 							}
 
@@ -2138,7 +2089,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 								y = prevRect.y;
 								x = prevRect.x - (rectWidth + spaceBetween);
-								console.log('else 1', x,  y);
 
 							} else if(createNewRowOnLeft) {
 								if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
@@ -2161,8 +2111,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 									}).rect.x;
 								}
 
-								console.log('else 2', x, y);
-
 								createNewRowOnLeft = false;
 							} else {
 								if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
@@ -2176,8 +2124,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								} else {
 									x = (elementToWrap.left - (rectWidth + spaceBetween));
 								}
-								console.log('else 3', x, y);
-
 							}
 
 							leftSideCounter++;
@@ -2202,7 +2148,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						}
 
 						if(i == perRow - 1 || i == totalRectsOnSides - 1) {
-							console.log('ROW ADD', currentRowRects)
 							rects.push(currentRowRects);
 							currentRowRects = [];
 						}
@@ -2215,27 +2160,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							var currentRowRects = rects[i];
 							var minX = Math.min.apply(Math, currentRowRects.map(function(o) { return o.rect.x; }));
 							var maxX = Math.max.apply(Math, currentRowRects.map(function(o) { return o.rect.x+o.rect.width; }));
-							console.log('currentRowRects', currentRowRects)
-							console.log('minX minX', minX, parentWidth - maxX)
 
 							var rowWidth = maxX - minX;
-							console.log('rowWidth', rowWidth)
 
 							var newMinX = parentWidth / 2 - rowWidth / 2;
-							console.log('newMinX', newMinX)
 
 							var fixOn = Math.abs(minX - newMinX);
-							console.log('fixON', fixOn, minX - newMinX)
 							for (var r = 0; r < currentRowRects.length; r++) {
-								console.log('currentRowRects[r].rect.x 0', currentRowRects[r].rect.x)
 								if(minX > parentWidth - maxX) {
 									currentRowRects[r].rect.x = currentRowRects[r].rect.x - fixOn;
 								} else {
 									currentRowRects[r].rect.x = currentRowRects[r].rect.x + fixOn;
 								}
-
-								console.log('currentRowRects[r].rect.x 2', currentRowRects[r].rect.x)
-
 							}
 						}
 
@@ -2369,14 +2305,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				createInfoSnippet()
 				//showPageLoader();
-				if(_debug) console.log('module.start');
+				log('Start WebRTC conference room');
 
 				_debugTimer.loadStart = performance.now();
 
 				onConnect();
 
 				function onConnect() {
-					if(_debug) console.log('module.start load time ' + (performance.now() - _debugTimer.loadStart));
+					log('start: load time ' + (performance.now() - _debugTimer.loadStart));
 
 					var ua = navigator.userAgent;
 					var startWith = _options.startWith || {};
@@ -2410,15 +2346,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 											if(!result.hasPermission) {
 												showInstructions('audio');
 											} else {
-												if(_debug) console.log(arguments)
 												if(callback != null) callback();
 											}
-										}, function(){console.log("error");console.log(arguments)})
+										}, function(){console.error("Permission is not granted");})
 									} else {
-										console.log(arguments)
 										if(callback != null) callback();
 									}
-								}, function(){console.log("error");console.log(arguments)})
+								}, function(){console.error("Permission is not granted");})
 							}
 
 							var requestCameraPermission = function (callback) {
@@ -2428,16 +2362,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 											if(!result.hasPermission) {
 												showInstructions('video');
 											} else {
-												console.log(arguments)
 												if(callback != null) callback();
 											}
-										}, function(){console.log("error");console.log(arguments)})
+										}, function(){console.error("Permission is not granted");})
 									} else {
-										console.log(arguments)
 										//Permission granted
 										if(callback != null) callback();
 									}
-								}, function(){console.log("error");console.log(arguments)})
+								}, function(){console.error("Permission is not granted");})
 							}
 
 							if(startWith.audio && startWith.video) {
@@ -2517,7 +2449,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 					var createOrJoinRoomStream = function (roomId, asPublisherId) {
-						if(_debug) console.log('createRoomStream')
+						log('createRoomStream')
 
 						Q.req("Streams/webrtc", ["room"], function (err, response) {
 							var msg = Q.firstErrorMessage(err, response && response.errors);
@@ -2529,14 +2461,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							roomId = (response.slots.room.roomId).replace('Streams/webrtc/', '');
 							var turnCredentials = response.slots.room.turnCredentials;
 							var socketServer = response.slots.room.socketServer;
+							_debug = response.slots.room.debug;
 
 							//var connectUrl = updateQueryStringParameter(location.href, 'Q.rid', roomId);
 							//connectUrl = updateQueryStringParameter(connectUrl, 'Q.pid', asPublisherId);
 							Q.Streams.get(asPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
 								_roomStream = stream;
 								window.roomStream = _roomStream;
-								if(_debug) console.log('_roomStream', _roomStream)
-								if(_debug) console.log('_options.mode', _options.mode)
+								log('start: createOrJoinRoomStream: mode' + _options.mode)
 								bindStreamsEvents(stream);
 								if(_options.mode === 'twilio') {
 									startTwilioRoom(roomId, response.slots.room.accessToken);
@@ -2573,13 +2505,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		 * @param {function} callback executed when all actions done.
 		 */
 		function stop(callback) {
-			if(_debug) console.log('disconnect');
-			try {
-				var err = (new Error);
-				console.log(err.stack);
-			} catch (e) {
-
-			}
+			log('WebRTC.stop');
 
 			if (!Streams.isStream(_roomStream)) {
 				return Q.handle(callback);
@@ -2587,13 +2513,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 			WebRTCconference.localParticipant().online = false;
-			console.log('WebRTCconference.roomParticipants()', WebRTCconference.roomParticipants().length);
 
 			if(WebRTCconference.roomParticipants().length === 0) {
-				console.log('stop endRoom');
 
 				Q.req("Streams/webrtc", ["endRoom"], function (err, response) {
-					console.log('stop endRoom response', response);
+					log('stop: room closed');
 
 					var msg = Q.firstErrorMessage(err, response && response.errors);
 
@@ -2628,6 +2552,29 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 			window.removeEventListener('beforeunload', webRTCInstance.stop);
 			Q.handle(_options.onWebRTCRoomEnded, webRTCInstance);
+		}
+
+		function log(text, arg1, arg2, arg3, arg4) {
+			if(!_debug) return;
+			var args = Array.prototype.slice.call(arguments);
+
+			var params = [];
+			for(var a in args) {
+				if(a == 0 && typeof text == 'string') continue;
+				params.push(args[a]);
+			}
+
+			if (window.performance) {
+				var now = (window.performance.now() / 1000).toFixed(3);
+				if(args.length > 1) {
+					console.log(now + ": " + text, params);
+				} else {
+					console.log(now + ": " + text);
+				}
+
+			} else {
+				console.log(text);
+			}
 		}
 
 		var webRTCInstance = {

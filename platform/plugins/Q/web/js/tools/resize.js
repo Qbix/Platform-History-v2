@@ -26,6 +26,7 @@
 			elementPosition: null,
 			snapToSidesOnly: false,
 			resizeByWheel: true,
+			ignoreOnElements: [],
 			activateOnElement: null,
 			keepRatioBasedOnElement: null,
 			appliedRecently: false,
@@ -165,7 +166,14 @@
 					}
 
 					var initMoving = function(evt){
-
+						if(tool.state.ignoreOnElements.length != 0) {
+							var ignoreEls = tool.state.ignoreOnElements;
+							for(var e in ignoreEls) {
+								if (evt.target == ignoreEls[e] || ignoreEls[e].contains(evt.target)) {
+									return;
+								}
+							}
+						}
 						if(!tool.state.active || evt.button == 1 || evt.button == 2) return;
 
 						if(Q.info.isTouchscreen && (tool.isScreenResizing || evt.targetTouches.length != 1)) return;
