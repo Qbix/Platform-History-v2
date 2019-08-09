@@ -4623,7 +4623,8 @@ window.WebRTCconferenceLib = function app(options){
 		require(['https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'], function (io) {
 
 
-			socket = io.connect(options.nodeServer, {transports: ['websocket']});
+			var secure = options.nodeServer.indexOf('https://')
+			socket = io.connect(options.nodeServer, {transports: ['websocket'], secure:secure});
 			socket.on('connect', function () {
 				if(_isiOS) enableiOSDebug();
 				log('initWithNodeJs: socket: connected');
