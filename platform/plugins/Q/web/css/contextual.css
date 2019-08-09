@@ -150,3 +150,7 @@
 .Q_contextual .Q_listing_wrapper {
 	overflow: auto;
 }
+
+html.Q_contextual_shown body {
+	overflow: hidden;
+}

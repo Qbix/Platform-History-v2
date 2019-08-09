@@ -3079,6 +3079,8 @@ Q.Contextual = {
 			});
 			info.ellipsissed = true;
 		}
+
+		$('html').addClass('Q_contextual_shown');
 	},
 
 	/**
@@ -3118,6 +3120,8 @@ Q.Contextual = {
 
 		Q.Contextual.current = -1;
 		Q.Contextual.outOfBounds = false;
+
+		$('html').removeClass('Q_contextual_shown');
 	},
 	
 	/**
