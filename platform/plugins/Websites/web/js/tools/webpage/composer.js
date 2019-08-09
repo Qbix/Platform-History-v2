@@ -50,31 +50,31 @@
 			}, function (err, html) {
 				$te.html(html);
 				var $url = tool.$('input').plugin('Q/placeholders');
-				var $browse = tool.$('.Websites_webpage_composer_input a');
 				var $goButton = tool.$('button[name=go]');
 				var $startButton = tool.$('button[name=startConversation]');
 				var $message = tool.$('textarea[name=message]').plugin('Q/placeholders').plugin('Q/autogrow');
 
-				$url.on('change keyup keydown input paste', function () {
-					setTimeout(function () {
-						if (tool.validUrl($url.val())) {
-							$browse.show();
-							$url.removeClass('Q_error');
-						} else {
-							$browse.hide();
-						}
-					}, 100);
-				});
-
-				$browse.on(Q.Pointer.fastclick, function () {
-					var url = $url.val();
-
-					if (Q.info.isCordova) {
-						cordova.plugins.browsertab.openUrl(url);
-					} else {
-						window.open(url, '_blank');
-					}
-				});
+				// beowse button only for cordova
+				if (Q.info.isCordova) {
+					var $browse = tool.$('.Websites_webpage_composer_input a');
+					$url.on('change keyup keydown input paste', function () {
+						setTimeout(function () {
+							if (tool.validUrl($url.val())) {
+								//$browse.show();
+								$url.removeClass('Q_error');
+							} else {
+								$browse.hide();
+							}
+						}, 100);
+					});
+					$browse.on(Q.Pointer.fastclick, function () {
+						Q.Cordova.chooseLink($url.val(), false, function () {
+							console.log("Success: ", arguments);
+						}, null, function () {
+							console.log("Error: ", arguments);
+						});
+					});
+				}
 
 				$startButton.on(Q.Pointer.fastclick, function () {
 					$startButton.addClass('Q_working');
