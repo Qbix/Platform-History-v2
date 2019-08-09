@@ -315,7 +315,7 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 		if (typeof fields === 'object') {
 			fields_list = [];
 			for (alias in fields) {
-				column = Db.Query.Mysql(fields[alias]);
+				column = Db.Query.Mysql.column(fields[alias]);
 				if (isNaN(alias))
 					fields_list.push(column + as + alias);
 				else
@@ -1213,9 +1213,9 @@ function criteria_internal (query, criteria) {
 				if (!Q.isArrayLike(value)) {
 					throw new Q.Exception("Db.Query.Mysql: The value should be an array of arrays");
 				}
-				var columns = [];
+				var columns = [], c;
 				for (k=0; k<pl; ++k) {
-					var c = parts[k];
+					c = parts[k];
 					columns.push(Query_Mysql.column(c));
 					if (!query.criteria[c]) {
 						query.criteria[c] = []; // sharding heuristics
@@ -1339,7 +1339,7 @@ function set_internal (query, updates) {
 }
 
 Query_Mysql.column = function _column(column) {
-	var len = column.length, part = column, pos = false, chars = ['.', '_', '-', '$'], i;
+	var len = column.length, part = column, pos = false, chars = ['.', '_', '-', '$'], i, c;
 	for (i=0; i<len; ++i) {
 		c = column[i];
 		if (
@@ -1353,8 +1353,8 @@ Query_Mysql.column = function _column(column) {
 			break;
 		}
 	}
-	parts = part.split('.');
-	quoted = [];
+	var parts = part.split('.');
+	var quoted = [];
 	len = parts.length;
 	for (i=0; i<len; ++i) {
 		quoted.push('`' + parts[i] + '`');
