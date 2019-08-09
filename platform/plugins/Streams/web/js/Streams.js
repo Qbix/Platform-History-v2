@@ -5798,9 +5798,9 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 	}
 
 	// allowed stream types
-	if ($.inArray(message.streamType, ['Streams/chat', 'Websites/webpage']) >= 0) {
+	if (['Streams/chat', 'Websites/webpage'].indexOf(message.streamType) >= 0) {
 		conversationUrl = '/conversation/' + message.publisherId + '/' + toStreamName.split('/').pop();
-	} else if ($.inArray(message.streamType, ['Streams/live']) >= 0) {
+	} else if (message.streamType === 'Streams/live') {
 		conversationUrl = '/s/' + message.publisherId + '/' + toStreamName;
 	} else {
 		return;
