@@ -199,11 +199,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			});
 		},
 		beforeRemove: function () {
-			var state = this.state;
 
-			if (state.webrtc) {
-				Q.handle(state.webrtc.stop);
-			}
 		}
 	},
 	/**
