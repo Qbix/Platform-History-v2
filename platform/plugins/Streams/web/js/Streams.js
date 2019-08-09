@@ -5790,8 +5790,7 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 	var publisherId = Q.getObject("fromPublisherId", instructions);
 	var streamName = Q.getObject("fromStreamName", instructions);
 	var toStreamName = Q.getObject("streamName", message) || "";
-	var conversationUrl = '/conversation/' + message.publisherId + '/' + toStreamName.split('/').pop();
-	var toUrl = Q.baseUrl() + conversationUrl + '/webrtc';
+	var conversationUrl;
 
 	// only relation type Streams/webrtc and not for myself
 	if (relationType !== 'Streams/webrtc' || publisherId === Q.Users.loggedInUserId()) {
@@ -5799,9 +5798,15 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 	}
 
 	// allowed stream types
-	if ($.inArray(message.streamType, ['Streams/chat', 'Websites/webpage']) < 0) {
+	if ($.inArray(message.streamType, ['Streams/chat', 'Websites/webpage']) >= 0) {
+		conversationUrl = '/conversation/' + message.publisherId + '/' + toStreamName.split('/').pop();
+	} else if ($.inArray(message.streamType, ['Streams/live']) >= 0) {
+		conversationUrl = '/s/' + message.publisherId + '/' + toStreamName;
+	} else {
 		return;
 	}
+
+	var toUrl = Q.baseUrl() + conversationUrl + '?startWebRTC';
 
 	Q.Text.get("Streams/content", function (err, text) {
 		Q.Template.render('Streams/chat/webrtc/available', {
