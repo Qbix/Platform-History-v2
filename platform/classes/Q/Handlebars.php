@@ -43,7 +43,7 @@ class Q_Handlebars {
 				return null;
 			}
 		}
-		return self::handlebars($source)->loadString($source)->render($data);
+		return self::handlebars()->loadString($source)->render($data);
 	}
 	
 	static function handlebars()

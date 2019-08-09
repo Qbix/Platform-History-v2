@@ -157,11 +157,6 @@
 					"Streams/chat/message": {
 						"post": true
 					}
-				},
-				"relatedTo": {
-					"Streams/webrtc": {
-						"description": ["Streams/content", ["notifications", "Streams/relatedTo/Streams/call"]]
-					}
 				}
 			}
 		}
