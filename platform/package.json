@@ -13,7 +13,7 @@
 		"express": "3.x.x",
 		"handlebars": "4.1.x",
 		"moment-timezone": "0.5.x",
-		"mysql": "2.9.x",
+		"mysql": "2.14.x",
 		"nodemailer": "^4.4.2",
 		"nodemailer-smtp-transport": "^2.7.4",
 		"request": "2.x.x",
