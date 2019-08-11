@@ -5144,6 +5144,7 @@ Q.onInit.add(function _Streams_onInit() {
 
 		Users.Socket.onEvent('Streams/post').set(function (message) {
 			message = Streams.Message.construct(message);
+			var messageType = message.type;
 			var messageUrl = message.getInstruction('inviteUrl') || message.getInstruction('url');
 			var noticeOptions = notificationsAsNotice[messageType];
 			var pluginName = messageType.split('/')[0];
@@ -5161,7 +5162,7 @@ Q.onInit.add(function _Streams_onInit() {
 			Q.Text.get(pluginName + '/content', function (err, text) {
 				text = Q.getObject(["notifications", messageType], text);
 				if (!text || typeof text !== 'string') {
-					return console.warn('notificationsAsNotice: no text for ' + messageType);
+					return console.warn('Streams.notifications.notices: no text for ' + messageType);
 				}
 
 				Streams.showNoticeIfSubscribed(message.publisherId, message.streamName, message.type,
