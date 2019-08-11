@@ -77,13 +77,11 @@ Users_Email.sendMessage = function (to, subject, view, fields, options, callback
 
 	// if subject is object - get subject from text file
 	if (typeof subject === 'object') {
-		var fileData = Q.Text.get(subject[0], options.language);
-		subject = Q.getObject(subject[1], fileData);
+		var text = Q.Text.get(subject[0], options.language);
+		subject = Q.getObject(subject[1], text);
 	}
 
-	subject = options.isSource
-		? Q.Handlebars.renderSource(subject, fields)
-		: Q.view(subject, fields, { language: options.language });
+	subject = Q.Handlebars.renderSource(subject, fields);
 	var body = options.isSource
 		? Q.Handlebars.renderSource(view, fields)
 		: Q.view(view, fields, { language: options.language });
