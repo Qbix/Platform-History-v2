@@ -6602,7 +6602,7 @@ Q.request = function (url, slotNames, callback, options) {
 		function _onCancel (status, msg) {
 			status = Q.isInteger(status) ? status : null;
 			if (this.response) {
-				var data = JSON.parse(response);
+				var data = JSON.parse(this.response);
 				if (data.message) {
 					msg = data.message;
 				}
