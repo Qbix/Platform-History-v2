@@ -25,7 +25,7 @@
         "earlierComments": "komen awal",
         "Subscribed": "Pemberitahuan Bisu",
         "Unsubscribed": "Dapatkan notifikasi",
-        "dontHavePermissionJoinConversation": "Anda tidak mempunyai kebenaran untuk menyertai perbualan ini.",
+        "notAllowedToJoinCall": "Anda tidak mempunyai kebenaran untuk menyertai perbualan ini.",
         "startedConversation": "memulakan perbualan",
         "RealTimeCall": "Panggilan Masa Nyata"
     },

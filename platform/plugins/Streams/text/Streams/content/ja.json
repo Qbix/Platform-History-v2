@@ -25,7 +25,7 @@
         "earlierComments": "以前のコメント",
         "Subscribed": "通知をミュート",
         "Unsubscribed": "通知を受け取る",
-        "dontHavePermissionJoinConversation": "この会話に参加する権限がありません。",
+        "notAllowedToJoinCall": "この会話に参加する権限がありません。",
         "startedConversation": "会話を始めた",
         "RealTimeCall": "リアルタイム通話"
     },

@@ -25,7 +25,7 @@
         "earlierComments": "больш раннія каментары",
         "Subscribed": "Адключэнне гуку апавяшчэнняў",
         "Unsubscribed": "Атрымаць апавяшчэнні",
-        "dontHavePermissionJoinConversation": "Вы не маеце дазволу далучыцца да гэтай размовы.",
+        "notAllowedToJoinCall": "Вы не маеце дазволу далучыцца да гэтай размовы.",
         "startedConversation": "пачаў размову",
         "RealTimeCall": "Званок у рэжыме рэальнага часу"
     },

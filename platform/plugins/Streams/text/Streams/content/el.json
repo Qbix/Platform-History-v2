@@ -25,7 +25,7 @@
         "earlierComments": "προηγούμενες παρατηρήσεις",
         "Subscribed": "Σίγαση ειδοποιήσεων",
         "Unsubscribed": "Λαμβάνετε ειδοποιήσεις",
-        "dontHavePermissionJoinConversation": "Δεν έχετε δικαίωμα να συμμετάσχετε σε αυτήν τη συζήτηση.",
+        "notAllowedToJoinCall": "Δεν έχετε δικαίωμα να συμμετάσχετε σε αυτήν τη συζήτηση.",
         "startedConversation": "ξεκίνησε μια συνομιλία",
         "RealTimeCall": "Κλήση σε πραγματικό χρόνο"
     },

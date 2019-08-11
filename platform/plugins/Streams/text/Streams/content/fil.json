@@ -25,7 +25,7 @@
         "earlierComments": "Mga naunang komento",
         "Subscribed": "Mga Abiso sa I-mute",
         "Unsubscribed": "Kumuha ng Mga Abiso",
-        "dontHavePermissionJoinConversation": "Wala kang pahintulot na sumali sa pag-uusap na ito.",
+        "notAllowedToJoinCall": "Wala kang pahintulot na sumali sa pag-uusap na ito.",
         "startedConversation": "nagsimula ng usapan",
         "RealTimeCall": "Tunay na Panawagan ng Oras"
     },

@@ -25,7 +25,7 @@
         "earlierComments": "lehenago egindako iruzkinak",
         "Subscribed": "Mutu jakinarazpenak",
         "Unsubscribed": "Lortu jakinarazpenak",
-        "dontHavePermissionJoinConversation": "Ez duzu elkarrizketetan sartzeko baimenik.",
+        "notAllowedToJoinCall": "Ez duzu elkarrizketetan sartzeko baimenik.",
         "startedConversation": "elkarrizketa bat hasi zuen",
         "RealTimeCall": "Denbora errealeko deia"
     },

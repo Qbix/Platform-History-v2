@@ -25,7 +25,7 @@
         "earlierComments": "முந்தைய கருத்துகள்",
         "Subscribed": "அறிவிப்புகளை முடக்கு",
         "Unsubscribed": "அறிவிப்புகள் பெற",
-        "dontHavePermissionJoinConversation": "இந்த உரையாடலில் சேர உங்களுக்கு அனுமதி இல்லை.",
+        "notAllowedToJoinCall": "இந்த உரையாடலில் சேர உங்களுக்கு அனுமதி இல்லை.",
         "startedConversation": "உரையாடலைத் தொடங்கினார்",
         "RealTimeCall": "நிகழ் நேர அழைப்பு"
     },

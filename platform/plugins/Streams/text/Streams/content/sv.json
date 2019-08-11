@@ -25,7 +25,7 @@
         "earlierComments": "tidigare kommentarer",
         "Subscribed": "Stäng aviseringar",
         "Unsubscribed": "Få aviseringar",
-        "dontHavePermissionJoinConversation": "Du har inte behörighet att gå med i den här konversationen.",
+        "notAllowedToJoinCall": "Du har inte behörighet att gå med i den här konversationen.",
         "startedConversation": "inledde en konversation",
         "RealTimeCall": "Realtidssamtal"
     },

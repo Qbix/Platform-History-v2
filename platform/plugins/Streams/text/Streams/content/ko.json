@@ -25,7 +25,7 @@
         "earlierComments": "이전 댓글",
         "Subscribed": "알림 음소거",
         "Unsubscribed": "알림을 받다",
-        "dontHavePermissionJoinConversation": "이 대화에 참여할 수있는 권한이 없습니다.",
+        "notAllowedToJoinCall": "이 대화에 참여할 수있는 권한이 없습니다.",
         "startedConversation": "대화를 시작했다.",
         "RealTimeCall": "실시간 통화"
     },

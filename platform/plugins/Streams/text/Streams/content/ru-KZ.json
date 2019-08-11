@@ -25,7 +25,7 @@
         "earlierComments": "предыдущие комментарии",
         "Subscribed": "Отключить уведомления",
         "Unsubscribed": "Получать уведомления",
-        "dontHavePermissionJoinConversation": "У вас нет разрешения присоединиться к этому разговору.",
+        "notAllowedToJoinCall": "У вас нет разрешения присоединиться к этому разговору.",
         "startedConversation": "завел разговор",
         "RealTimeCall": "Звонок в реальном времени"
     },

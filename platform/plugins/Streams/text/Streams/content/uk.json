@@ -25,7 +25,7 @@
         "earlierComments": "попередні коментарі",
         "Subscribed": "Вимкнення сповіщень",
         "Unsubscribed": "Отримати повідомлення",
-        "dontHavePermissionJoinConversation": "Ви не маєте дозволу приєднатися до цієї розмови.",
+        "notAllowedToJoinCall": "Ви не маєте дозволу приєднатися до цієї розмови.",
         "startedConversation": "почав розмову",
         "RealTimeCall": "Дзвінок у режимі реального часу"
     },

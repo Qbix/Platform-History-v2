@@ -25,7 +25,7 @@
         "earlierComments": "הערות מוקדמות יותר",
         "Subscribed": "השתק התראות",
         "Unsubscribed": "לקבל התראות",
-        "dontHavePermissionJoinConversation": "אין לך הרשאה להצטרף לשיחה זו.",
+        "notAllowedToJoinCall": "אין לך הרשאה להצטרף לשיחה זו.",
         "startedConversation": "פתח שיחה",
         "RealTimeCall": "שיחה בזמן אמת"
     },

@@ -25,7 +25,7 @@
         "earlierComments": "fyrri athugasemdir",
         "Subscribed": "Þagga tilkynningar",
         "Unsubscribed": "Fá tilkynningar",
-        "dontHavePermissionJoinConversation": "Þú hefur ekki leyfi til að taka þátt í þessu samtali.",
+        "notAllowedToJoinCall": "Þú hefur ekki leyfi til að taka þátt í þessu samtali.",
         "startedConversation": "hóf samtal",
         "RealTimeCall": "Rauntíma símtal"
     },

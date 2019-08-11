@@ -25,7 +25,7 @@
         "earlierComments": "Komentet e mëhershme",
         "Subscribed": "Njoftime për heshtje",
         "Unsubscribed": "Merrni Njoftimet",
-        "dontHavePermissionJoinConversation": "Ju nuk keni leje për t&#39;u bashkuar me këtë bisedë.",
+        "notAllowedToJoinCall": "Ju nuk keni leje për t&#39;u bashkuar me këtë bisedë.",
         "startedConversation": "filloi një bisedë",
         "RealTimeCall": "Thirrje në kohë reale"
     },

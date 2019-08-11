@@ -25,7 +25,7 @@
         "earlierComments": "نظرات قبلی",
         "Subscribed": "اعلان های بی صدا",
         "Unsubscribed": "دریافت اعلان ها",
-        "dontHavePermissionJoinConversation": "شما اجازه پیوستن به این گفتگو را ندارید.",
+        "notAllowedToJoinCall": "شما اجازه پیوستن به این گفتگو را ندارید.",
         "startedConversation": "مکالمه ای را شروع کرد",
         "RealTimeCall": "تماس در زمان واقعی"
     },

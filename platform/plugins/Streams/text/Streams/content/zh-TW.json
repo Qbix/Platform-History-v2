@@ -25,7 +25,7 @@
         "earlierComments": "早先的评论",
         "Subscribed": "静音通知",
         "Unsubscribed": "收到通知",
-        "dontHavePermissionJoinConversation": "您无权加入此对话。",
+        "notAllowedToJoinCall": "您无权加入此对话。",
         "startedConversation": "开始了对话",
         "RealTimeCall": "实时通话"
     },

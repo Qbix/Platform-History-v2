@@ -25,7 +25,7 @@
         "earlierComments": "претходни коментари",
         "Subscribed": "Без известувања",
         "Unsubscribed": "Добива известувања",
-        "dontHavePermissionJoinConversation": "Немате дозвола да се приклучите на овој разговор.",
+        "notAllowedToJoinCall": "Немате дозвола да се приклучите на овој разговор.",
         "startedConversation": "започна разговор",
         "RealTimeCall": "Повик во реално време"
     },

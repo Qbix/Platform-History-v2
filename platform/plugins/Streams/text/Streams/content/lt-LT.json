@@ -25,7 +25,7 @@
         "earlierComments": "ankstesnes pastabas",
         "Subscribed": "Nutildyti pranešimus",
         "Unsubscribed": "Gauti pranešimus",
-        "dontHavePermissionJoinConversation": "Neturite leidimo prisijungti prie šio pokalbio.",
+        "notAllowedToJoinCall": "Neturite leidimo prisijungti prie šio pokalbio.",
         "startedConversation": "pradėjo pokalbį",
         "RealTimeCall": "Skambinimas realiuoju laiku"
     },

@@ -25,7 +25,7 @@
         "earlierComments": "по-ранни коментари",
         "Subscribed": "Заглуши известията",
         "Unsubscribed": "Получаване на известия",
-        "dontHavePermissionJoinConversation": "Нямате разрешение да се присъедините към този разговор.",
+        "notAllowedToJoinCall": "Нямате разрешение да се присъедините към този разговор.",
         "startedConversation": "започна разговор",
         "RealTimeCall": "Обаждане в реално време"
     },

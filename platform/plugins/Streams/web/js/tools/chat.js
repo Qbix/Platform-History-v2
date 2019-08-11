@@ -587,7 +587,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			};
 			if (stream && !stream.getAttribute('endTime')) {
 				if (!stream.testWriteLevel('join')) {
-					return Q.alert(tool.text.dontHavePermissionJoinConversation);
+					return Q.alert(tool.text.notAllowedToJoinCall);
 				}
 
 				_createRoom(stream.fields.publisherId, stream.fields.name);

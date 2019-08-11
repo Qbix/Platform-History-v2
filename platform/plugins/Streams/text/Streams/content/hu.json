@@ -25,7 +25,7 @@
         "earlierComments": "korábbi megjegyzések",
         "Subscribed": "Értesítések némítása",
         "Unsubscribed": "Értesítéseket kapni",
-        "dontHavePermissionJoinConversation": "Nincs engedélye a beszélgetéshez.",
+        "notAllowedToJoinCall": "Nincs engedélye a beszélgetéshez.",
         "startedConversation": "beszélgetést kezdett",
         "RealTimeCall": "Valós idejű hívás"
     },

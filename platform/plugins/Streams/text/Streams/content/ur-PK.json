@@ -25,7 +25,7 @@
         "earlierComments": "پہلے تبصرے",
         "Subscribed": "نوٹیفیکیشن خاموش کریں۔",
         "Unsubscribed": "اطلاعات حاصل کریں۔",
-        "dontHavePermissionJoinConversation": "آپ کو اس گفتگو میں شامل ہونے کی اجازت نہیں ہے۔",
+        "notAllowedToJoinCall": "آپ کو اس گفتگو میں شامل ہونے کی اجازت نہیں ہے۔",
         "startedConversation": "گفتگو شروع کی۔",
         "RealTimeCall": "ریئل ٹائم کال"
     },

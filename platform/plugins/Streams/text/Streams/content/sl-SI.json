@@ -25,7 +25,7 @@
         "earlierComments": "prejšnjih pripomb",
         "Subscribed": "Prezri obvestila",
         "Unsubscribed": "Dobi obvestila",
-        "dontHavePermissionJoinConversation": "Nimate dovoljenja za pridružitev temu pogovoru.",
+        "notAllowedToJoinCall": "Nimate dovoljenja za pridružitev temu pogovoru.",
         "startedConversation": "začel pogovor",
         "RealTimeCall": "Klic v realnem času"
     },

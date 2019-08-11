@@ -25,7 +25,7 @@
         "earlierComments": "మునుపటి వ్యాఖ్యలు",
         "Subscribed": "నోటిఫికేషన్లను మ్యూట్ చేయండి",
         "Unsubscribed": "నోటిఫికేషన్‌లను పొందండి",
-        "dontHavePermissionJoinConversation": "ఈ సంభాషణలో చేరడానికి మీకు అనుమతి లేదు.",
+        "notAllowedToJoinCall": "ఈ సంభాషణలో చేరడానికి మీకు అనుమతి లేదు.",
         "startedConversation": "సంభాషణను ప్రారంభించారు",
         "RealTimeCall": "రియల్ టైమ్ కాల్"
     },

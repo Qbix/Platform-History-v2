@@ -25,7 +25,7 @@
         "earlierComments": "eerdere opmerkingen",
         "Subscribed": "Meldingen dempen",
         "Unsubscribed": "Krijg meldingen",
-        "dontHavePermissionJoinConversation": "Je hebt geen toestemming om aan dit gesprek deel te nemen.",
+        "notAllowedToJoinCall": "Je hebt geen toestemming om aan dit gesprek deel te nemen.",
         "startedConversation": "begon een gesprek",
         "RealTimeCall": "Real Time Call"
     },

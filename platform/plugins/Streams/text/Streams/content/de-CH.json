@@ -25,7 +25,7 @@
         "earlierComments": "frühere Kommentare",
         "Subscribed": "Benachrichtigungen stumm schalten",
         "Unsubscribed": "Erhalten Sie Benachrichtigungen",
-        "dontHavePermissionJoinConversation": "Sie haben keine Berechtigung, an dieser Unterhaltung teilzunehmen.",
+        "notAllowedToJoinCall": "Sie haben keine Berechtigung, an dieser Unterhaltung teilzunehmen.",
         "startedConversation": "hat ein Gespräch begonnen",
         "RealTimeCall": "Echtzeitanruf"
     },

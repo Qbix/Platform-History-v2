@@ -25,7 +25,7 @@
         "closeChatConfirmYes": "Yes",
         "closeChatConfirmNo": "No",
         "earlierComments": "earlier comments",
-        "dontHavePermissionJoinConversation": "You don't have permission to join this conversation.",
+        "notAllowedToJoinCall": "You don't have permission to join this conversation.",
         "startedConversation": "started a conversation",
         "RealTimeCall": "Real Time Call"
     },

@@ -25,7 +25,7 @@
         "earlierComments": "maoni mapema",
         "Subscribed": "Arifa za Tuliza",
         "Unsubscribed": "Pata Arifa",
-        "dontHavePermissionJoinConversation": "Huna ruhusa ya kujiunga na mazungumzo haya.",
+        "notAllowedToJoinCall": "Huna ruhusa ya kujiunga na mazungumzo haya.",
         "startedConversation": "alianza mazungumzo",
         "RealTimeCall": "Simu ya Wakati wa kweli"
     },

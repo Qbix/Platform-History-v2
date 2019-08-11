@@ -25,7 +25,7 @@
         "earlierComments": "predchádzajúce pripomienky",
         "Subscribed": "Ignorovať upozornenia",
         "Unsubscribed": "Dostať upozornenia",
-        "dontHavePermissionJoinConversation": "Nemáte povolenie na pripojenie sa k tejto konverzácii.",
+        "notAllowedToJoinCall": "Nemáte povolenie na pripojenie sa k tejto konverzácii.",
         "startedConversation": "začal konverzáciu",
         "RealTimeCall": "Hovor v reálnom čase"
     },

@@ -25,7 +25,7 @@
         "earlierComments": "dřívějších připomínek",
         "Subscribed": "Ztlumit oznámení",
         "Unsubscribed": "Získejte oznámení",
-        "dontHavePermissionJoinConversation": "K této konverzaci nemáte povolení.",
+        "notAllowedToJoinCall": "K této konverzaci nemáte povolení.",
         "startedConversation": "zahájil konverzaci",
         "RealTimeCall": "Volání v reálném čase"
     },

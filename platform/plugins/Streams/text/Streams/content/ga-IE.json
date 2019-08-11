@@ -25,7 +25,7 @@
         "earlierComments": "tuairimí níos luaithe",
         "Subscribed": "Fógraí Mute",
         "Unsubscribed": "Faigh Fógraí",
-        "dontHavePermissionJoinConversation": "Níl cead agat an comhrá seo a dhéanamh.",
+        "notAllowedToJoinCall": "Níl cead agat an comhrá seo a dhéanamh.",
         "startedConversation": "thosaigh comhrá",
         "RealTimeCall": "Glao Ama Fíor-Ama"
     },

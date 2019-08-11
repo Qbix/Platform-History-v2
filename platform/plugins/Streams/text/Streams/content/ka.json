@@ -25,7 +25,7 @@
         "earlierComments": "ადრე კომენტარი",
         "Subscribed": "მდუმარე შეტყობინებები",
         "Unsubscribed": "Შეტყობინებების მიღება",
-        "dontHavePermissionJoinConversation": "თქვენ არ გაქვთ ამ საუბარში მონაწილეობის უფლება.",
+        "notAllowedToJoinCall": "თქვენ არ გაქვთ ამ საუბარში მონაწილეობის უფლება.",
         "startedConversation": "დაიწყო საუბარი",
         "RealTimeCall": "რეალურ დროში ზარი"
     },

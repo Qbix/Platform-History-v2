@@ -25,7 +25,7 @@
         "earlierComments": "komentar sebelumnya",
         "Subscribed": "Bisukan Notifikasi",
         "Unsubscribed": "Dapatkan Notifikasi",
-        "dontHavePermissionJoinConversation": "Anda tidak memiliki izin untuk bergabung dengan percakapan ini.",
+        "notAllowedToJoinCall": "Anda tidak memiliki izin untuk bergabung dengan percakapan ini.",
         "startedConversation": "memulai percakapan",
         "RealTimeCall": "Panggilan Waktu Nyata"
     },

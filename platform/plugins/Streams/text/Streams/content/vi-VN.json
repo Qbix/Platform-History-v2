@@ -25,7 +25,7 @@
         "earlierComments": "ý kiến trước đó",
         "Subscribed": "Thông báo tắt tiếng",
         "Unsubscribed": "Nhận thông báo",
-        "dontHavePermissionJoinConversation": "Bạn không được phép tham gia cuộc trò chuyện này.",
+        "notAllowedToJoinCall": "Bạn không được phép tham gia cuộc trò chuyện này.",
         "startedConversation": "bắt đầu một cuộc trò chuyện",
         "RealTimeCall": "Cuộc gọi thời gian thực"
     },

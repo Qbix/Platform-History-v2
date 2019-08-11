@@ -25,7 +25,7 @@
         "earlierComments": "kummenti preċedenti",
         "Subscribed": "Mute Notifiki",
         "Unsubscribed": "Ikseb Notifiki",
-        "dontHavePermissionJoinConversation": "M&#39;għandekx permess biex tissieħeb f&#39;din il-konversazzjoni.",
+        "notAllowedToJoinCall": "M&#39;għandekx permess biex tissieħeb f&#39;din il-konversazzjoni.",
         "startedConversation": "bdiet konverżazzjoni",
         "RealTimeCall": "Sejħa f&#39;ħin Reali"
     },

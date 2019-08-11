@@ -25,7 +25,7 @@
         "earlierComments": "ранији коментари",
         "Subscribed": "Муте Нотифицатионс",
         "Unsubscribed": "Добити обавештења",
-        "dontHavePermissionJoinConversation": "Немате дозволу да се придружите овом разговору.",
+        "notAllowedToJoinCall": "Немате дозволу да се придружите овом разговору.",
         "startedConversation": "је започео разговор",
         "RealTimeCall": "Позив у реалном времену"
     },

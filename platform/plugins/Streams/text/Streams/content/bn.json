@@ -25,7 +25,7 @@
         "earlierComments": "আগে মন্তব্য",
         "Subscribed": "বিজ্ঞপ্তি নিঃশব্দ করুন",
         "Unsubscribed": "বিজ্ঞপ্তি পেতে",
-        "dontHavePermissionJoinConversation": "আপনার এই কথোপকথনে যোগদানের অনুমতি নেই।",
+        "notAllowedToJoinCall": "আপনার এই কথোপকথনে যোগদানের অনুমতি নেই।",
         "startedConversation": "একটি কথোপকথন শুরু",
         "RealTimeCall": "রিয়েল টাইম কল"
     },

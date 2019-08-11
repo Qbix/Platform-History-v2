@@ -25,7 +25,7 @@
         "earlierComments": "iepriekšējie komentāri",
         "Subscribed": "Izslēgt paziņojumus",
         "Unsubscribed": "Saņemt paziņojumus",
-        "dontHavePermissionJoinConversation": "Jums nav atļaujas pievienoties šai sarunai.",
+        "notAllowedToJoinCall": "Jums nav atļaujas pievienoties šai sarunai.",
         "startedConversation": "sāka sarunu",
         "RealTimeCall": "Reāllaika zvans"
     },

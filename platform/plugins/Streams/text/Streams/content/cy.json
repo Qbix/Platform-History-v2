@@ -25,7 +25,7 @@
         "earlierComments": "sylwadau cynharach",
         "Subscribed": "Hysbysiadau Munud",
         "Unsubscribed": "Cael Hysbysiadau",
-        "dontHavePermissionJoinConversation": "Nid oes gennych ganiatâd i ymuno â&#39;r sgwrs hon.",
+        "notAllowedToJoinCall": "Nid oes gennych ganiatâd i ymuno â&#39;r sgwrs hon.",
         "startedConversation": "cychwyn sgwrs",
         "RealTimeCall": "Galwad Amser Real"
     },

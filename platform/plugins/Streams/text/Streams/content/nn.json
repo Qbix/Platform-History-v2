@@ -25,7 +25,7 @@
         "earlierComments": "tidligere kommentarer",
         "Subscribed": "Skru av varsler",
         "Unsubscribed": "Få varsler",
-        "dontHavePermissionJoinConversation": "Du har ikke tillatelse til å delta i denne samtalen.",
+        "notAllowedToJoinCall": "Du har ikke tillatelse til å delta i denne samtalen.",
         "startedConversation": "startet en samtale",
         "RealTimeCall": "Sanntids samtale"
     },

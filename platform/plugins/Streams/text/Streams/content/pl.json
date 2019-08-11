@@ -25,7 +25,7 @@
         "earlierComments": "wcześniejsze komentarze",
         "Subscribed": "Wycisz powiadomienia",
         "Unsubscribed": "Dostawać powiadomienia",
-        "dontHavePermissionJoinConversation": "Nie masz uprawnień do dołączenia do tej rozmowy.",
+        "notAllowedToJoinCall": "Nie masz uprawnień do dołączenia do tej rozmowy.",
         "startedConversation": "rozpoczął rozmowę",
         "RealTimeCall": "Połączenie w czasie rzeczywistym"
     },

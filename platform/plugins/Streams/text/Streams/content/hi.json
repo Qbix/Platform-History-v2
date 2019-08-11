@@ -25,7 +25,7 @@
         "earlierComments": "पहले की टिप्पणियाँ",
         "Subscribed": "सूचनाएं म्यूट करें",
         "Unsubscribed": "सूचनाएं प्राप्त करें",
-        "dontHavePermissionJoinConversation": "आपको इस वार्तालाप में शामिल होने की अनुमति नहीं है।",
+        "notAllowedToJoinCall": "आपको इस वार्तालाप में शामिल होने की अनुमति नहीं है।",
         "startedConversation": "बातचीत शुरू की",
         "RealTimeCall": "रियल टाइम कॉल"
     },

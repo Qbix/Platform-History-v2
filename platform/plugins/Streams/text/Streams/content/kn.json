@@ -25,7 +25,7 @@
         "earlierComments": "ಹಿಂದಿನ ಕಾಮೆಂಟ್ಗಳು",
         "Subscribed": "ಅಧಿಸೂಚನೆಗಳನ್ನು ಮ್ಯೂಟ್ ಮಾಡಿ",
         "Unsubscribed": "ಅಧಿಸೂಚನೆ ಪಡೆ",
-        "dontHavePermissionJoinConversation": "ಈ ಸಂವಾದಕ್ಕೆ ಸೇರಲು ನಿಮಗೆ ಅನುಮತಿ ಇಲ್ಲ.",
+        "notAllowedToJoinCall": "ಈ ಸಂವಾದಕ್ಕೆ ಸೇರಲು ನಿಮಗೆ ಅನುಮತಿ ಇಲ್ಲ.",
         "startedConversation": "ಸಂವಾದವನ್ನು ಪ್ರಾರಂಭಿಸಿದೆ",
         "RealTimeCall": "ರಿಯಲ್ ಟೈಮ್ ಕರೆ"
     },

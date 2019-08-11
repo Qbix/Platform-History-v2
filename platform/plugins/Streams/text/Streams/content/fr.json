@@ -25,7 +25,7 @@
         "earlierComments": "commentaires précédents",
         "Subscribed": "Notifications muettes",
         "Unsubscribed": "Avoir des notifications",
-        "dontHavePermissionJoinConversation": "Vous n&#39;avez pas la permission de rejoindre cette conversation.",
+        "notAllowedToJoinCall": "Vous n&#39;avez pas la permission de rejoindre cette conversation.",
         "startedConversation": "a commencé une conversation",
         "RealTimeCall": "Appel en temps réel"
     },

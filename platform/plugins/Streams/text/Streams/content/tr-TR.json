@@ -25,7 +25,7 @@
         "earlierComments": "önceki yorumlar",
         "Subscribed": "Bildirimleri Kapat",
         "Unsubscribed": "Bildirim almak",
-        "dontHavePermissionJoinConversation": "Bu sohbete katılma izniniz yok.",
+        "notAllowedToJoinCall": "Bu sohbete katılma izniniz yok.",
         "startedConversation": "bir konuşma başlattı",
         "RealTimeCall": "Gerçek Zamanlı Çağrı"
     },

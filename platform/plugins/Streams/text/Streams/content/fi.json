@@ -25,7 +25,7 @@
         "earlierComments": "aiemmat huomautukset",
         "Subscribed": "Ohita ilmoitukset",
         "Unsubscribed": "Saa ilmoituksia",
-        "dontHavePermissionJoinConversation": "Sinulla ei ole lupaa liittyä tähän keskusteluun.",
+        "notAllowedToJoinCall": "Sinulla ei ole lupaa liittyä tähän keskusteluun.",
         "startedConversation": "aloitti keskustelun",
         "RealTimeCall": "Reaaliaikainen puhelu"
     },

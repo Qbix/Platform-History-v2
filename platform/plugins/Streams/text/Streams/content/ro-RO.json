@@ -25,7 +25,7 @@
         "earlierComments": "comentariile anterioare",
         "Subscribed": "Mute Notifications",
         "Unsubscribed": "Primiți notificări",
-        "dontHavePermissionJoinConversation": "Nu aveți permisiunea de a vă alătura acestei conversații.",
+        "notAllowedToJoinCall": "Nu aveți permisiunea de a vă alătura acestei conversații.",
         "startedConversation": "a început o conversație",
         "RealTimeCall": "Apel în timp real"
     },

@@ -25,7 +25,7 @@
         "earlierComments": "التعليقات السابقة",
         "Subscribed": "كتم الإخطارات",
         "Unsubscribed": "الحصول على الإشعارات",
-        "dontHavePermissionJoinConversation": "ليس لديك إذن للانضمام إلى هذه المحادثة.",
+        "notAllowedToJoinCall": "ليس لديك إذن للانضمام إلى هذه المحادثة.",
         "startedConversation": "بدأت محادثة",
         "RealTimeCall": "نداء الوقت الحقيقي"
     },

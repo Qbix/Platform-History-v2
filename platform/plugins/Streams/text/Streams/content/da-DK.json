@@ -25,7 +25,7 @@
         "earlierComments": "tidligere kommentarer",
         "Subscribed": "Lydløs meddelelser",
         "Unsubscribed": "Få notifikationer",
-        "dontHavePermissionJoinConversation": "Du har ikke tilladelse til at deltage i denne samtale.",
+        "notAllowedToJoinCall": "Du har ikke tilladelse til at deltage i denne samtale.",
         "startedConversation": "startede en samtale",
         "RealTimeCall": "Realtidsopkald"
     },

@@ -25,7 +25,7 @@
         "earlierComments": "ความคิดเห็นก่อนหน้า",
         "Subscribed": "ปิดการแจ้งเตือน",
         "Unsubscribed": "รับการแจ้งเตือน",
-        "dontHavePermissionJoinConversation": "คุณไม่ได้รับอนุญาตให้เข้าร่วมการสนทนานี้",
+        "notAllowedToJoinCall": "คุณไม่ได้รับอนุญาตให้เข้าร่วมการสนทนานี้",
         "startedConversation": "เริ่มการสนทนา",
         "RealTimeCall": "โทรตามเวลาจริง"
     },

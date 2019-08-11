@@ -25,7 +25,7 @@
         "earlierComments": "vorige kommentaar",
         "Subscribed": "Demp kennisgewings",
         "Unsubscribed": "Kry kennisgewings",
-        "dontHavePermissionJoinConversation": "U het nie toestemming om aan hierdie gesprek deel te neem nie.",
+        "notAllowedToJoinCall": "U het nie toestemming om aan hierdie gesprek deel te neem nie.",
         "startedConversation": "&#39;n gesprek begin",
         "RealTimeCall": "Intydse oproep"
     },

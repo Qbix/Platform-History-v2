@@ -25,7 +25,7 @@
         "earlierComments": "əvvəllər şərhlər",
         "Subscribed": "Səssiz bildirişlər",
         "Unsubscribed": "Bildirişlər al",
-        "dontHavePermissionJoinConversation": "Bu söhbətə qoşulmaq üçün icazəniz yoxdur.",
+        "notAllowedToJoinCall": "Bu söhbətə qoşulmaq üçün icazəniz yoxdur.",
         "startedConversation": "söhbətə başladı",
         "RealTimeCall": "Real vaxt zəng"
     },

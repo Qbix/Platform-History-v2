@@ -25,7 +25,7 @@
         "earlierComments": "અગાઉની ટિપ્પણીઓ",
         "Subscribed": "સૂચનાઓ મ્યૂટ કરો",
         "Unsubscribed": "સૂચનાઓ મેળવો",
-        "dontHavePermissionJoinConversation": "તમને આ વાતચીતમાં જોડાવાની પરવાનગી નથી.",
+        "notAllowedToJoinCall": "તમને આ વાતચીતમાં જોડાવાની પરવાનગી નથી.",
         "startedConversation": "વાતચીત શરૂ કરી",
         "RealTimeCall": "રીઅલ ટાઇમ ક Callલ"
     },

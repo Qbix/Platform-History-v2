@@ -25,7 +25,7 @@
         "earlierComments": "varasemad märkused",
         "Subscribed": "Mute teated",
         "Unsubscribed": "Hankige teateid",
-        "dontHavePermissionJoinConversation": "Teil pole sellel vestlusel luba.",
+        "notAllowedToJoinCall": "Teil pole sellel vestlusel luba.",
         "startedConversation": "alustas vestlust",
         "RealTimeCall": "Real Time Call"
     },

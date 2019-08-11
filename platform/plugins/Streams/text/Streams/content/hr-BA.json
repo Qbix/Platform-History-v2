@@ -25,7 +25,7 @@
         "earlierComments": "raniji komentari",
         "Subscribed": "Utišaj obavijesti",
         "Unsubscribed": "Dobiti obavijesti",
-        "dontHavePermissionJoinConversation": "Nemate dozvolu pridružiti se ovom razgovoru.",
+        "notAllowedToJoinCall": "Nemate dozvolu pridružiti se ovom razgovoru.",
         "startedConversation": "započeo razgovor",
         "RealTimeCall": "Poziv u stvarnom vremenu"
     },
