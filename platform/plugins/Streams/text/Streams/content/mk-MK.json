@@ -44,7 +44,10 @@
         "Streams/task/error": "Грешка во текот: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Дојдовна порака",
         "ManageEmailSubscriptions": "управувајте со претплатите за е-пошта",
-        "IfUnsubscribe": "Ако сакате да се откажете"
+        "IfUnsubscribe": "Ако сакате да се откажете",
+        "Streams/relatedTo/Streams/call": "Новиот повик започна во {{toTitle}}",
+        "Streams/relatedTo/*": "Нови {{relationDisplayType}} за {{1000}",
+        "Streams/relatedFrom/*": "Додадено на 99 999}} како}} 1000}"
     },
     "invite": {
         "messageContent": "{{displayName}} ве покани да {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} испратени <em>{{message.fields.type}}</em> порака до {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} испратени <em>{{message.fields.type}}</em> порака до {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} во {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} во {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "е објавено на",
+                "byAvatar": "од {999}}"
+            },
+            "relatedTo": {
+                "hasANew": "има нов 99 999}",
+                "byAvatar": "додаде од {999}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Овозможи микрофон",
             "cameraBtn": "Овозможи камера",
             "cameraAndMicrophoneBtn": "Овозможете камера и микрофон"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "Поканети",
+            "description": "Инбокс за покани"
+        },
+        "Streams/resource": {
+            "displayType": "Ресурси",
+            "description": "поток за управување со пристап до ресурс и објавување пораки за ажурирања"
+        },
+        "Streams/task": {
+            "displayType": "Задача",
+            "description": "задача да ја вршат луѓето или машините"
+        },
+        "Streams/number": {
+            "displayType": "Број",
+            "description": "математички број"
+        },
+        "Streams/date": {
+            "displayType": "Датум",
+            "description": "датум"
+        },
+        "Streams/text": {
+            "displayType": "Текст",
+            "description": "тело на текст"
+        },
+        "Streams/text/small": {
+            "displayType": "Текст",
+            "description": "мало тело на текст"
+        },
+        "Streams/text/medium": {
+            "displayType": "Текст",
+            "description": "средно тело на текст"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "И-мејл адреса",
+            "description": "и-мејл адреса"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Телефонски број",
+            "description": "телефонски број"
+        },
+        "Streams/text/url": {
+            "displayType": "URL-то",
+            "description": "линк на веб"
+        },
+        "Streams/image": {
+            "displayType": "Слика",
+            "description": "визуелна слика"
+        },
+        "Streams/images": {
+            "displayType": "Галерија со слики",
+            "description": "галерија на слики"
+        },
+        "Streams/album": {
+            "displayType": "Албум",
+            "description": "албум на кој се поврзани разни медиуми"
+        },
+        "Streams/file": {
+            "displayType": "Датотека",
+            "description": "поставена датотека"
+        },
+        "Streams/audio": {
+            "displayType": "Аудио клип",
+            "description": "аудио клип"
+        },
+        "Streams/video": {
+            "displayType": "Видео клипот",
+            "description": "Видео клипот"
+        },
+        "Streams/live": {
+            "displayType": "Пренос во живо",
+            "description": "аудио или видео во живо"
+        },
+        "Streams/category": {
+            "displayType": "Категорија",
+            "description": "категорија со која може да се поврзани други потоци"
+        },
+        "Streams/participating": {
+            "displayType": "Индекс на учество",
+            "description": "потоците се поврзани / немаат врска со ова кога корисникот се придружува / заминува"
+        },
+        "Streams/interest": {
+            "displayType": "Интерес",
+            "description": "претставува интерес на корисникот за одредена тема"
+        },
+        "Streams/incoming": {
+            "displayType": "Дојдовни",
+            "description": "дестинација за пораки испратени од други корисници"
+        },
+        "Streams/chat": {
+            "displayType": "Разговор",
+            "description": "разговор помеѓу корисниците, со историја"
+        },
+        "Streams/webrtc": {
+            "displayType": "Повик во реално време",
+            "description": "видео / аудио повик во реално време"
         }
     }
 }

@@ -3,8 +3,8 @@
         "NewItemTitle": "ធាតុថ្មី"
     },
     "labels": {
-        "Streams\/invited": "មនុស្សដែលខ្ញុំបានអញ្ជើញ",
-        "Streams\/invitedMe": "តើអ្នកណាបានអញ្ជើញខ្ញុំ"
+        "Streams/invited": "មនុស្សដែលខ្ញុំបានអញ្ជើញ",
+        "Streams/invitedMe": "តើអ្នកណាបានអញ្ជើញខ្ញុំ"
     },
     "interests": {
         "Filter": "តើអ្នកចូលចិត្តអ្វី?",
@@ -76,10 +76,10 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} បានបង្ហោះសារ <em>{{message.fields.type}}<\/em> មួយទៅកាន់ {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} បានបង្ហោះសារ <em>{{message.fields.type}}<\/em> មួយទៅកាន់ {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} នៅក្នុង {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} នៅក្នុង {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

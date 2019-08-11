@@ -44,7 +44,10 @@
         "Streams/task/error": "Pogreška tijekom: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Dolazna poruka",
         "ManageEmailSubscriptions": "upravljajte svojim pretplatama e-pošte",
-        "IfUnsubscribe": "Ako želite otkazati pretplatu"
+        "IfUnsubscribe": "Ako želite otkazati pretplatu",
+        "Streams/relatedTo/Streams/call": "Novi poziv započeo u {{toTitle}}",
+        "Streams/relatedTo/*": "Novo {{relationDisplayType}} u {{toTitle}}",
+        "Streams/relatedFrom/*": "Dodano u {{toTitle}} kao {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} pozvao vas je na {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} je postavio <em>{{message.fields.type}}</em> poruku na {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} je postavio <em>{{message.fields.type}}</em> poruku na {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} u {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} u {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "objavljeno je u",
+                "byAvatar": "do {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ima novi {{message.instructions.fromDisplayType}}",
+                "byAvatar": "dodao {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Omogući mikrofon",
             "cameraBtn": "Omogući kameru",
             "cameraAndMicrophoneBtn": "Omogući kameru i mikrofon"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "pozvan",
+            "description": "Inbox za pozivnice"
+        },
+        "Streams/resource": {
+            "displayType": "Resurs",
+            "description": "stream za upravljanje pristupom resursu i objavljivanje poruka o ažuriranjima"
+        },
+        "Streams/task": {
+            "displayType": "Zadatak",
+            "description": "zadatak koji moraju obavljati ljudi ili strojevi"
+        },
+        "Streams/number": {
+            "displayType": "Broj",
+            "description": "matematički broj"
+        },
+        "Streams/date": {
+            "displayType": "Datum",
+            "description": "datum"
+        },
+        "Streams/text": {
+            "displayType": "Tekst",
+            "description": "tijelo teksta"
+        },
+        "Streams/text/small": {
+            "displayType": "Tekst",
+            "description": "mali tekst teksta"
+        },
+        "Streams/text/medium": {
+            "displayType": "Tekst",
+            "description": "srednji dio teksta"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "Email adresa",
+            "description": "email adresa"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Broj telefona",
+            "description": "broj telefona"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "vezu na webu"
+        },
+        "Streams/image": {
+            "displayType": "Slika",
+            "description": "vizualna slika"
+        },
+        "Streams/images": {
+            "displayType": "Galerija slika",
+            "description": "galerija slika"
+        },
+        "Streams/album": {
+            "displayType": "Album",
+            "description": "album na koji se odnose razni mediji"
+        },
+        "Streams/file": {
+            "displayType": "Datoteka",
+            "description": "prenesena datoteka"
+        },
+        "Streams/audio": {
+            "displayType": "Audio isječak",
+            "description": "audioisječak"
+        },
+        "Streams/video": {
+            "displayType": "Video isječak",
+            "description": "video isječak"
+        },
+        "Streams/live": {
+            "displayType": "Uživo prijenos",
+            "description": "audio ili video zapis uživo"
+        },
+        "Streams/category": {
+            "displayType": "Kategorija",
+            "description": "kategoriju na koju se mogu povezati drugi tokovi"
+        },
+        "Streams/participating": {
+            "displayType": "Indeks sudjelovanja",
+            "description": "potoci su povezani / nevezani za to kada se korisnik pridruži / napusti"
+        },
+        "Streams/interest": {
+            "displayType": "Interes",
+            "description": "predstavlja interes korisnika za određenu temu"
+        },
+        "Streams/incoming": {
+            "displayType": "dolazni",
+            "description": "odredište za poruke koje su poslali drugi korisnici"
+        },
+        "Streams/chat": {
+            "displayType": "Razgovor",
+            "description": "razgovor između korisnika, s poviješću"
+        },
+        "Streams/webrtc": {
+            "displayType": "Poziv u stvarnom vremenu",
+            "description": "video / audio poziv u stvarnom vremenu"
         }
     }
 }

@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Virhe aikana: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Saapuva viesti",
         "ManageEmailSubscriptions": "hallitse sähköpostiosoitteitasi",
-        "IfUnsubscribe": "Jos haluat peruuttaa tilauksen"
+        "IfUnsubscribe": "Jos haluat peruuttaa tilauksen",
+        "Streams\/relatedTo\/Streams\/call": "Uusi puhelu aloitettiin {{toTitle}}",
+        "Streams\/relatedTo\/*": "Uusi {{relationDisplayType}} {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Lisätty kansioon {{toTitle}} nimellä {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} kutsui sinut {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} julkaisi <em>{{message.fields.type}}<\/em> -viestin osoitteeseen {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} julkaisi <em>{{message.fields.type}}<\/em> -viestin osoitteeseen {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "on lähetetty",
+                "byAvatar": "lähettäjä {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "on uusi {{message.instructions.fromDisplayType}}",
+                "byAvatar": "lisännyt {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Ota mikrofoni käyttöön",
             "cameraBtn": "Ota kamera käyttöön",
             "cameraAndMicrophoneBtn": "Ota kamera ja mikrofoni käyttöön"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Kutsuttu",
+            "description": "Saapuneet kutsut"
+        },
+        "Streams\/resource": {
+            "displayType": "Resurssi",
+            "description": "stream resurssien käyttöoikeuksien hallintaa ja päivityksiä koskevien viestien lähettämistä varten"
+        },
+        "Streams\/task": {
+            "displayType": "Tehtävä",
+            "description": "ihmisten tai koneiden tehtävä"
+        },
+        "Streams\/number": {
+            "displayType": "Määrä",
+            "description": "matemaattinen luku"
+        },
+        "Streams\/date": {
+            "displayType": "Treffi",
+            "description": "Treffi"
+        },
+        "Streams\/text": {
+            "displayType": "Teksti",
+            "description": "tekstiosa"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Teksti",
+            "description": "pieni tekstiosa"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Teksti",
+            "description": "keskikokoinen teksti"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Sähköpostiosoite",
+            "description": "sähköpostiosoite"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Puhelinnumero",
+            "description": "puhelinnumero"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL-",
+            "description": "linkki verkossa"
+        },
+        "Streams\/image": {
+            "displayType": "Kuva",
+            "description": "visuaalinen kuva"
+        },
+        "Streams\/images": {
+            "displayType": "kuvagalleria",
+            "description": "kuvagalleria"
+        },
+        "Streams\/album": {
+            "displayType": "Albumi",
+            "description": "albumi, johon eri mediat liittyvät"
+        },
+        "Streams\/file": {
+            "displayType": "tiedosto",
+            "description": "ladattu tiedosto"
+        },
+        "Streams\/audio": {
+            "displayType": "Äänileike",
+            "description": "äänileike"
+        },
+        "Streams\/video": {
+            "displayType": "Videoleike",
+            "description": "videoleike"
+        },
+        "Streams\/live": {
+            "displayType": "livestream",
+            "description": "suora ääni tai video"
+        },
+        "Streams\/category": {
+            "displayType": "Kategoria",
+            "description": "luokka, johon muut virrat voidaan liittää"
+        },
+        "Streams\/participating": {
+            "displayType": "Osallistuva hakemisto",
+            "description": "virrat liittyvät \/ eivät liity tähän, kun käyttäjä liittyy \/ poistuu"
+        },
+        "Streams\/interest": {
+            "displayType": "Kiinnostuksen kohde",
+            "description": "edustaa käyttäjän kiinnostusta tiettyyn aiheeseen"
+        },
+        "Streams\/incoming": {
+            "displayType": "saapuva",
+            "description": "kohde muiden käyttäjien lähettämille viesteille"
+        },
+        "Streams\/chat": {
+            "displayType": "Keskustelu",
+            "description": "keskustelu käyttäjien välillä, historian kanssa"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Reaaliaikainen puhelu",
+            "description": "reaaliaikainen video- \/ äänipuhelu"
         }
     }
 }

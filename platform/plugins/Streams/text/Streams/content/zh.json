@@ -44,7 +44,10 @@
         "Streams\/task\/error": "错误期间：{{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}：传入消息",
         "ManageEmailSubscriptions": "管理您的电子邮件订阅",
-        "IfUnsubscribe": "如果你想取消订阅"
+        "IfUnsubscribe": "如果你想取消订阅",
+        "Streams\/relatedTo\/Streams\/call": "{{toTitle}}中的新来电启动",
+        "Streams\/relatedTo\/*": "{{toTitle}}中的新{{relationDisplayType}}",
+        "Streams\/relatedFrom\/*": "添加到{{toTitle}}为{{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}}邀请您{{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}}向{{stream.fields.title}}发布了<em>{{message.fields.type}}条<\/em>消息"
+            "posted": "{{avatar.displayName}}向{{stream.fields.title}}发布了<em>{{message.fields.type}}条<\/em>消息"
         },
         "text": {
-            "body": "{{& url}}中的{{& call 'avatar.displayName'}}：{{& message.fields.content}}"
+            "body": "{{& url}}中的{{& call 'avatar.displayName'}}：{{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "已发布到",
+                "byAvatar": "{{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "有一个新的{{message.instructions.fromDisplayType}}",
+                "byAvatar": "由{{avatar.displayName}}添加"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "启用麦克风",
             "cameraBtn": "启用相机",
             "cameraAndMicrophoneBtn": "启用相机和麦克风"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "邀请",
+            "description": "收件箱的邀请"
+        },
+        "Streams\/resource": {
+            "displayType": "资源",
+            "description": "用于管理对资源的访问和发布有关更新的消息的流"
+        },
+        "Streams\/task": {
+            "displayType": "任务",
+            "description": "任务由人或机器完成"
+        },
+        "Streams\/number": {
+            "displayType": "数",
+            "description": "数学数字"
+        },
+        "Streams\/date": {
+            "displayType": "日期",
+            "description": "日期"
+        },
+        "Streams\/text": {
+            "displayType": "文本",
+            "description": "文本正文"
+        },
+        "Streams\/text\/small": {
+            "displayType": "文本",
+            "description": "小体文"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "文本",
+            "description": "中等文本"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "电子邮件地址",
+            "description": "电子邮件地址"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "电话号码",
+            "description": "电话号码"
+        },
+        "Streams\/text\/url": {
+            "displayType": "网址",
+            "description": "链接在网络上"
+        },
+        "Streams\/image": {
+            "displayType": "图片",
+            "description": "视觉形象"
+        },
+        "Streams\/images": {
+            "displayType": "图库",
+            "description": "图库"
+        },
+        "Streams\/album": {
+            "displayType": "专辑",
+            "description": "与各种媒体相关的专辑"
+        },
+        "Streams\/file": {
+            "displayType": "文件",
+            "description": "上传的文件"
+        },
+        "Streams\/audio": {
+            "displayType": "音频剪辑",
+            "description": "音频剪辑"
+        },
+        "Streams\/video": {
+            "displayType": "录像片段",
+            "description": "录像片段"
+        },
+        "Streams\/live": {
+            "displayType": "现场直播",
+            "description": "现场音频或视频"
+        },
+        "Streams\/category": {
+            "displayType": "类别",
+            "description": "其他流可以关联的类别"
+        },
+        "Streams\/participating": {
+            "displayType": "参与指数",
+            "description": "当用户加入\/离开时，流与此相关\/无关"
+        },
+        "Streams\/interest": {
+            "displayType": "利益",
+            "description": "表示用户对某个主题的兴趣"
+        },
+        "Streams\/incoming": {
+            "displayType": "来",
+            "description": "其他用户发送的消息的目标"
+        },
+        "Streams\/chat": {
+            "displayType": "会话",
+            "description": "用户之间的对话，历史记录"
+        },
+        "Streams\/webrtc": {
+            "displayType": "实时通话",
+            "description": "实时视频\/音频通话"
         }
     }
 }

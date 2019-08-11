@@ -3,8 +3,8 @@
         "NewItemTitle": "Шинэ зүйл"
     },
     "labels": {
-        "Streams\/invited": "Миний урьсан хүмүүс",
-        "Streams\/invitedMe": "Хэн намайг урьсан юм бэ?"
+        "Streams/invited": "Миний урьсан хүмүүс",
+        "Streams/invitedMe": "Хэн намайг урьсан юм бэ?"
     },
     "interests": {
         "Filter": "Та юунд дуртай вэ?",
@@ -76,10 +76,10 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} <em>{{message.fields.type}}<\/em> мессеж {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} <em>{{message.fields.type}}<\/em> мессеж {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

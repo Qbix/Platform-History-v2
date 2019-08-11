@@ -44,7 +44,10 @@
         "Streams/task/error": "Earráid le linn: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Teachtaireacht Isteach",
         "ManageEmailSubscriptions": "bainistíonn tú do shíntiúis ríomhphoist",
-        "IfUnsubscribe": "Más mian leat díliostáil"
+        "IfUnsubscribe": "Más mian leat díliostáil",
+        "Streams/relatedTo/Streams/call": "Glao Nua Glactha i {{toTitle}}",
+        "Streams/relatedTo/*": "Nua {{relationDisplayType}} i {{toTitle}}",
+        "Streams/relatedFrom/*": "Curtha le {{toTitle}} mar {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "Thug {{displayName}} cuireadh duit {{inviteUrl}}",
@@ -86,7 +89,15 @@
             "posted": "Cuireadh {{call 'avatar.displayName'}} teachtaireacht <em>{{message.fields.type}}</em> chuig {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} i {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} i {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "curtha chuig",
+                "byAvatar": "le {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "a bhfuil {{message.instructions.fromDisplayType}} nua aige",
+                "byAvatar": "le {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Cumasaigh Micreafón",
             "cameraBtn": "Cumasaigh an Ceamara",
             "cameraAndMicrophoneBtn": "Cumasaigh an Ceamara agus an Micreafón"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "Cuireadh",
+            "description": "Bosca isteach le haghaidh cuirí"
+        },
+        "Streams/resource": {
+            "displayType": "Acmhainn",
+            "description": "sruth chun rochtain ar acmhainn a bhainistiú agus teachtaireachtaí faoi nuashonruithe a phostáil"
+        },
+        "Streams/task": {
+            "displayType": "Tasc",
+            "description": "an tasc atá le déanamh ag daoine nó ag meaisíní"
+        },
+        "Streams/number": {
+            "displayType": "Uimhir",
+            "description": "uimhir matamaitice"
+        },
+        "Streams/date": {
+            "displayType": "Dáta",
+            "description": "dáta"
+        },
+        "Streams/text": {
+            "displayType": "Téacs",
+            "description": "corp an téacs"
+        },
+        "Streams/text/small": {
+            "displayType": "Téacs",
+            "description": "corp beag téacs"
+        },
+        "Streams/text/medium": {
+            "displayType": "Téacs",
+            "description": "comhlacht meánach téacs"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "Seoladh ríomhphoist",
+            "description": "seoladh ríomhphoist"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Uimhir teileafón",
+            "description": "uimhir teileafón"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "nasc ar an ngréasán"
+        },
+        "Streams/image": {
+            "displayType": "Íomha",
+            "description": "íomhá amhairc"
+        },
+        "Streams/images": {
+            "displayType": "Gailearaí Íomhá",
+            "description": "gailearaí na n-íomhánna"
+        },
+        "Streams/album": {
+            "displayType": "Albam",
+            "description": "albam lena mbaineann meáin éagsúla"
+        },
+        "Streams/file": {
+            "displayType": "Comhad",
+            "description": "comhad uaslódáilte"
+        },
+        "Streams/audio": {
+            "displayType": "Clip Fuaime",
+            "description": "gearrthóg fuaime"
+        },
+        "Streams/video": {
+            "displayType": "Clip Físeáin",
+            "description": "gearrthóg físe"
+        },
+        "Streams/live": {
+            "displayType": "Sruth beo",
+            "description": "fuaime beo nó físeáin"
+        },
+        "Streams/category": {
+            "displayType": "Catagóir",
+            "description": "catagóir ar féidir le sruthanna eile a bheith bainteach léi"
+        },
+        "Streams/participating": {
+            "displayType": "Innéacs Rannpháirteach",
+            "description": "tá sruthanna gaolmhar / neamhghaolmhar leis seo nuair a théann úsáideoir isteach / a fhágann"
+        },
+        "Streams/interest": {
+            "displayType": "Ús",
+            "description": "léiríonn suim an úsáideora i dtopaic áirithe"
+        },
+        "Streams/incoming": {
+            "displayType": "Teacht isteach",
+            "description": "ceann scríbe le haghaidh teachtaireachtaí a sheolann úsáideoirí eile"
+        },
+        "Streams/chat": {
+            "displayType": "Comhrá",
+            "description": "comhrá idir úsáideoirí, le stair"
+        },
+        "Streams/webrtc": {
+            "displayType": "Glao Fíor-Ama",
+            "description": "glao físe / fuaime fíor-ama"
         }
     }
 }

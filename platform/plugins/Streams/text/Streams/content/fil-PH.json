@@ -44,7 +44,10 @@
         "Streams/task/error": "Error sa panahon ng: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Papasok na Mensahe",
         "ManageEmailSubscriptions": "pamahalaan ang iyong mga subscription sa email",
-        "IfUnsubscribe": "Kung nais mong mag-unsubscribe"
+        "IfUnsubscribe": "Kung nais mong mag-unsubscribe",
+        "Streams/relatedTo/Streams/call": "Nagsimula ang Bagong Tawag sa {{toTitle}}",
+        "Streams/relatedTo/*": "Bagong {{relationDisplayType}} sa {{toTitle}}",
+        "Streams/relatedFrom/*": "Idinagdag sa {{toTitle}} bilang {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "Inimbitahan ka ni {{displayName}} na {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} nai-post ang isang <em>{{message.fields.type}} na</em> mensahe sa {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} nai-post ang isang <em>{{message.fields.type}} na</em> mensahe sa {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} sa {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} sa {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "nai-post sa",
+                "byAvatar": "sa pamamagitan ng {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ay may isang bagong {{message.instructions.fromDisplayType}}",
+                "byAvatar": "idinagdag ni {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -113,6 +124,104 @@
             "microphoneBtn": "Paganahin ang Mikropono",
             "cameraBtn": "Paganahin ang Camera",
             "cameraAndMicrophoneBtn": "Paganahin ang Camera at Mikropono"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "Inimbitahan",
+            "description": "Inbox para sa mga imbitasyon"
+        },
+        "Streams/resource": {
+            "displayType": "Mapagkukunan",
+            "description": "stream para sa pamamahala ng pag-access sa isang mapagkukunan at pag-post ng mga mensahe tungkol sa mga update"
+        },
+        "Streams/task": {
+            "displayType": "Gawain",
+            "description": "gawain na dapat gawin ng mga tao o makina"
+        },
+        "Streams/number": {
+            "displayType": "Bilang",
+            "description": "bilang ng matematika"
+        },
+        "Streams/date": {
+            "displayType": "Petsa",
+            "description": "petsa"
+        },
+        "Streams/text": {
+            "displayType": "Teksto",
+            "description": "katawan ng teksto"
+        },
+        "Streams/text/small": {
+            "displayType": "Teksto",
+            "description": "maliit na katawan ng teksto"
+        },
+        "Streams/text/medium": {
+            "displayType": "Teksto",
+            "description": "katamtamang katawan ng teksto"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "Email Address",
+            "description": "email address"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Numero ng telepono",
+            "description": "numero ng telepono"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "link sa web"
+        },
+        "Streams/image": {
+            "displayType": "Imahe",
+            "description": "biswal na imahe"
+        },
+        "Streams/images": {
+            "displayType": "Gallery ng Larawan",
+            "description": "gallery ng mga imahe"
+        },
+        "Streams/album": {
+            "displayType": "Album",
+            "description": "isang album kung saan nauugnay ang iba&#39;t ibang media"
+        },
+        "Streams/file": {
+            "displayType": "File",
+            "description": "nai-upload na file"
+        },
+        "Streams/audio": {
+            "displayType": "Klip ng Audio",
+            "description": "audio clip"
+        },
+        "Streams/video": {
+            "displayType": "Klip ng Video",
+            "description": "clip ng video"
+        },
+        "Streams/live": {
+            "displayType": "Livestream",
+            "description": "live na audio o video"
+        },
+        "Streams/category": {
+            "displayType": "Kategorya",
+            "description": "isang kategorya na maaaring maiugnay ang iba pang mga sapa"
+        },
+        "Streams/participating": {
+            "displayType": "Mga Indibidwal na Pakikilahok",
+            "description": "ang mga stream ay nauugnay / walang kaugnayan sa ito kapag ang isang gumagamit ay sumali / umalis"
+        },
+        "Streams/interest": {
+            "displayType": "Interes",
+            "description": "kumakatawan sa interes ng isang gumagamit sa isang tiyak na paksa"
+        },
+        "Streams/incoming": {
+            "displayType": "Papasok",
+            "description": "patutunguhan para sa mga mensahe na ipinadala ng iba pang mga gumagamit"
+        },
+        "Streams/chat": {
+            "displayType": "Pag-uusap",
+            "description": "isang pag-uusap sa pagitan ng mga gumagamit, na may kasaysayan"
+        },
+        "Streams/webrtc": {
+            "displayType": "Real-Time Call",
+            "description": "isang real time na tawag sa video / audio"
         }
     }
 }

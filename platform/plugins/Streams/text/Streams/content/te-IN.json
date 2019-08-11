@@ -44,7 +44,10 @@
         "Streams/task/error": "లోపం: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: ఇన్కమింగ్ మెసేజ్",
         "ManageEmailSubscriptions": "మీ ఇమెయిల్ సభ్యత్వాలను నిర్వహించండి",
-        "IfUnsubscribe": "మీరు చందాను తొలగించాలనుకుంటే"
+        "IfUnsubscribe": "మీరు చందాను తొలగించాలనుకుంటే",
+        "Streams/relatedTo/Streams/call": "కొత్త కాల్ {99 999} in లో ప్రారంభమైంది",
+        "Streams/relatedTo/*": "{{toTitle}} లో క్రొత్త {{relationDisplayType}}",
+        "Streams/relatedFrom/*": "{{999} to కు {{1000} as గా జోడించబడింది"
     },
     "invite": {
         "messageContent": "{{displayName}} మిమ్మల్ని {{inviteUrl}} కి ఆహ్వానించారు",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} {{stream.fields.title}} కు {{ <em>1000}}</em> సందేశాన్ని పోస్ట్ చేశారు"
+            "posted": "{{avatar.displayName}} {{stream.fields.title}} కు {{ <em>1000}}</em> సందేశాన్ని పోస్ట్ చేశారు"
         },
         "text": {
-            "body": "{{& url}} లో {{& message.fields.content}}"
+            "body": "{{& url}} లో {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "కు పోస్ట్ చేయబడింది",
+                "byAvatar": "{{999} by ద్వారా"
+            },
+            "relatedTo": {
+                "hasANew": "క్రొత్త {{999} has కలిగి ఉంది",
+                "byAvatar": "by {999 by by చే జోడించబడింది"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "మైక్రోఫోన్‌ను ప్రారంభించండి",
             "cameraBtn": "కెమెరాను ప్రారంభించండి",
             "cameraAndMicrophoneBtn": "కెమెరా మరియు మైక్రోఫోన్‌ను ప్రారంభించండి"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "ఆహ్వానించారు",
+            "description": "ఆహ్వానాల కోసం ఇన్‌బాక్స్"
+        },
+        "Streams/resource": {
+            "displayType": "రిసోర్స్",
+            "description": "వనరుకి ప్రాప్యతను నిర్వహించడానికి మరియు నవీకరణల గురించి సందేశాలను పోస్ట్ చేయడానికి ప్రసారం"
+        },
+        "Streams/task": {
+            "displayType": "టాస్క్",
+            "description": "మానవులు లేదా యంత్రాలు చేయవలసిన పని"
+        },
+        "Streams/number": {
+            "displayType": "సంఖ్య",
+            "description": "గణిత సంఖ్య"
+        },
+        "Streams/date": {
+            "displayType": "తేదీ",
+            "description": "తేదీ"
+        },
+        "Streams/text": {
+            "displayType": "టెక్స్ట్",
+            "description": "టెక్స్ట్ యొక్క శరీరం"
+        },
+        "Streams/text/small": {
+            "displayType": "టెక్స్ట్",
+            "description": "టెక్స్ట్ యొక్క చిన్న శరీరం"
+        },
+        "Streams/text/medium": {
+            "displayType": "టెక్స్ట్",
+            "description": "టెక్స్ట్ యొక్క మీడియం బాడీ"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "ఇమెయిల్ చిరునామా",
+            "description": "ఇమెయిల్ చిరునామా"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "ఫోను నంబరు",
+            "description": "ఫోను నంబరు"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "వెబ్‌లో లింక్"
+        },
+        "Streams/image": {
+            "displayType": "చిత్రం",
+            "description": "దృశ్య చిత్రం"
+        },
+        "Streams/images": {
+            "displayType": "చిత్ర గ్యాలరీ",
+            "description": "చిత్రాల గ్యాలరీ"
+        },
+        "Streams/album": {
+            "displayType": "ఆల్బమ్",
+            "description": "వివిధ మీడియాకు సంబంధించిన ఆల్బమ్"
+        },
+        "Streams/file": {
+            "displayType": "ఫైలు",
+            "description": "అప్‌లోడ్ చేసిన ఫైల్"
+        },
+        "Streams/audio": {
+            "displayType": "ఆడియో క్లిప్",
+            "description": "ఆడియో క్లిప్"
+        },
+        "Streams/video": {
+            "displayType": "వీడియో క్లిప్",
+            "description": "వీడియో క్లిప్"
+        },
+        "Streams/live": {
+            "displayType": "అంతర్జాలం ద్వారా ప్రత్యక్ష ప్రసారం",
+            "description": "ప్రత్యక్ష ఆడియో లేదా వీడియో"
+        },
+        "Streams/category": {
+            "displayType": "వర్గం",
+            "description": "ఇతర ప్రవాహాలకు సంబంధించిన వర్గం"
+        },
+        "Streams/participating": {
+            "displayType": "పాల్గొనే సూచిక",
+            "description": "ఒక వినియోగదారు చేరినప్పుడు / వెళ్లినప్పుడు ప్రవాహాలు దీనికి సంబంధించినవి / సంబంధం కలిగి ఉండవు"
+        },
+        "Streams/interest": {
+            "displayType": "వడ్డీ",
+            "description": "ఒక నిర్దిష్ట అంశంపై వినియోగదారు ఆసక్తిని సూచిస్తుంది"
+        },
+        "Streams/incoming": {
+            "displayType": "ఇన్కమింగ్",
+            "description": "ఇతర వినియోగదారులు పంపిన సందేశాల గమ్యం"
+        },
+        "Streams/chat": {
+            "displayType": "సంభాషణ",
+            "description": "చరిత్రతో వినియోగదారుల మధ్య సంభాషణ"
+        },
+        "Streams/webrtc": {
+            "displayType": "రియల్ టైమ్ కాల్",
+            "description": "రియల్ టైమ్ వీడియో / ఆడియో కాల్"
         }
     }
 }

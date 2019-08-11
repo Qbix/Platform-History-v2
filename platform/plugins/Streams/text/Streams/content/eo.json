@@ -3,8 +3,8 @@
         "NewItemTitle": "Nova ero"
     },
     "labels": {
-        "Streams\/invited": "Homoj, kiujn mi invitis",
-        "Streams\/invitedMe": "Kiu invitis min"
+        "Streams/invited": "Homoj, kiujn mi invitis",
+        "Streams/invitedMe": "Kiu invitis min"
     },
     "interests": {
         "Filter": "Kion vi ĝuas?",
@@ -76,10 +76,10 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} afiŝis <em>{{message.fields.type}}<\/em> mesaĝon al {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} afiŝis <em>{{message.fields.type}}<\/em> mesaĝon al {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} en {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} en {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

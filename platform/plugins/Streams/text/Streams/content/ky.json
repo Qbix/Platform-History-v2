@@ -3,8 +3,8 @@
         "NewItemTitle": "жаңы сап"
     },
     "labels": {
-        "Streams\/invited": "Адамдар мен чакырды",
-        "Streams\/invitedMe": "Ким мени чакырды"
+        "Streams/invited": "Адамдар мен чакырды",
+        "Streams/invitedMe": "Ким мени чакырды"
     },
     "interests": {
         "Filter": "Сен эмне жагат?",
@@ -76,10 +76,10 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} <em>{{бир 1000}}<\/em> кат {{stream.fields.title}} жайгаштырылган"
+            "posted": "{{avatar.displayName}} <em>{{бир 1000}}<\/em> кат {{stream.fields.title}} жайгаштырылган"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} {{жылы 1000}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} {{жылы 1000}}: {{& message.fields.content}}"
         }
     },
     "followup": {

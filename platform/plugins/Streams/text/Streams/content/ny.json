@@ -3,8 +3,8 @@
         "NewItemTitle": "Chinthu Chatsopano"
     },
     "labels": {
-        "Streams\/invited": "Anthu omwe ndinawaitana",
-        "Streams\/invitedMe": "Ndani anandiitana"
+        "Streams/invited": "Anthu omwe ndinawaitana",
+        "Streams/invitedMe": "Ndani anandiitana"
     },
     "interests": {
         "Filter": "Kodi mumakonda chiyani?",
@@ -76,10 +76,10 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} atumiza uthenga <em>{{message.fields.type}}<\/em> kwa {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} atumiza uthenga <em>{{message.fields.type}}<\/em> kwa {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} mu {{}}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} mu {{}}}: {{& message.fields.content}}"
         }
     },
     "followup": {

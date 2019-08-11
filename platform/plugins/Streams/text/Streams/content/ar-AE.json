@@ -44,7 +44,10 @@
         "Streams/task/error": "خطأ أثناء: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: رسالة واردة",
         "ManageEmailSubscriptions": "إدارة اشتراكات البريد الإلكتروني الخاص بك",
-        "IfUnsubscribe": "إذا كنت ترغب في إلغاء الاشتراك"
+        "IfUnsubscribe": "إذا كنت ترغب في إلغاء الاشتراك",
+        "Streams/relatedTo/Streams/call": "تم بدء مكالمة جديدة في {{toTitle}}",
+        "Streams/relatedTo/*": "الجديد {{relationDisplayType}} في {{toTitle}}",
+        "Streams/relatedFrom/*": "تمت الإضافة إلى {{toTitle}} كـ {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} دعاك إلى {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} نشر رسالة <em>{{message.fields.type}}</em> إلى {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} نشر رسالة <em>{{message.fields.type}}</em> إلى {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} في {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} في {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "تم نشر إلى",
+                "byAvatar": "بواسطة {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "لديه {{message.instructions.fromDisplayType}} جديد",
+                "byAvatar": "أضيفت بواسطة {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "تمكين الميكروفون",
             "cameraBtn": "قم بتفعيل الكاميرا",
             "cameraAndMicrophoneBtn": "تمكين الكاميرا والميكروفون"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "دعوة",
+            "description": "البريد الوارد للدعوات"
+        },
+        "Streams/resource": {
+            "displayType": "مورد",
+            "description": "دفق لإدارة الوصول إلى مورد ونشر رسائل حول التحديثات"
+        },
+        "Streams/task": {
+            "displayType": "مهمة",
+            "description": "المهمة التي يتعين القيام بها من قبل البشر أو الآلات"
+        },
+        "Streams/number": {
+            "displayType": "رقم",
+            "description": "رقم رياضي"
+        },
+        "Streams/date": {
+            "displayType": "تاريخ",
+            "description": "تاريخ"
+        },
+        "Streams/text": {
+            "displayType": "نص",
+            "description": "نص النص"
+        },
+        "Streams/text/small": {
+            "displayType": "نص",
+            "description": "نص صغير من النص"
+        },
+        "Streams/text/medium": {
+            "displayType": "نص",
+            "description": "النص المتوسط للنص"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "عنوان بريد الكتروني",
+            "description": "عنوان بريد الكتروني"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "رقم الهاتف",
+            "description": "رقم الهاتف"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "رابط على شبكة الإنترنت"
+        },
+        "Streams/image": {
+            "displayType": "صورة",
+            "description": "الصورة المرئية"
+        },
+        "Streams/images": {
+            "displayType": "معرض الصور",
+            "description": "معرض للصور"
+        },
+        "Streams/album": {
+            "displayType": "الألبوم",
+            "description": "ألبوم يرتبط به وسائط متعددة"
+        },
+        "Streams/file": {
+            "displayType": "ملف",
+            "description": "ملف تم الرفع"
+        },
+        "Streams/audio": {
+            "displayType": "مقطع صوتي",
+            "description": "مقطع صوتي"
+        },
+        "Streams/video": {
+            "displayType": "مقطع فيديو",
+            "description": "مقطع فيديو"
+        },
+        "Streams/live": {
+            "displayType": "البث المباشر",
+            "description": "الصوت المباشر أو الفيديو"
+        },
+        "Streams/category": {
+            "displayType": "الفئة",
+            "description": "فئة يمكن أن ترتبط بها التدفقات الأخرى"
+        },
+        "Streams/participating": {
+            "displayType": "مؤشر المشاركة",
+            "description": "ترتبط التدفقات / غير مرتبطة بهذا عندما ينضم مستخدم / يترك"
+        },
+        "Streams/interest": {
+            "displayType": "فائدة",
+            "description": "يمثل مصلحة المستخدم في موضوع معين"
+        },
+        "Streams/incoming": {
+            "displayType": "الوارد",
+            "description": "وجهة للرسائل المرسلة من قبل المستخدمين الآخرين"
+        },
+        "Streams/chat": {
+            "displayType": "محادثة",
+            "description": "محادثة بين المستخدمين ، مع التاريخ"
+        },
+        "Streams/webrtc": {
+            "displayType": "دعوة في الوقت الحقيقي",
+            "description": "في الوقت الحقيقي مكالمة فيديو / الصوت"
         }
     }
 }

@@ -44,7 +44,10 @@
         "Streams\/task\/error": "इस दौरान त्रुटि: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: आने वाला संदेश",
         "ManageEmailSubscriptions": "अपने ईमेल सदस्यता का प्रबंधन करें",
-        "IfUnsubscribe": "यदि आप सदस्यता समाप्त करना चाहते हैं"
+        "IfUnsubscribe": "यदि आप सदस्यता समाप्त करना चाहते हैं",
+        "Streams\/relatedTo\/Streams\/call": "{{toTitle}} में नई कॉल शुरू हुई",
+        "Streams\/relatedTo\/*": "{{toTitle}} में नया {{relationDisplayType}}",
+        "Streams\/relatedFrom\/*": "{{toTitle}} को {{relationDisplayType}} के रूप में जोड़ा गया"
     },
     "invite": {
         "messageContent": "{{displayName}} ने आपको {{inviteUrl}} आमंत्रित किया",
@@ -86,7 +89,15 @@
             "posted": "{{१ ९९९}} ने <em>{{१०००}} को {{१०००}}<\/em> संदेश पोस्ट किया"
         },
         "text": {
-            "body": "{{१ ९९९}} में {{१०००}}: {{१००१}}"
+            "body": "{{१ ९९९}} में {{१०००}}: {{१००१}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "पोस्ट किया गया है",
+                "byAvatar": "{{avatar.displayName}} से"
+            },
+            "relatedTo": {
+                "hasANew": "एक नया {{message.instructions.fromDisplayType}} है",
+                "byAvatar": "{{avatar.displayName}} द्वारा जोड़ा गया"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "माइक्रोफोन सक्षम करें",
             "cameraBtn": "कैमरा सक्षम करें",
             "cameraAndMicrophoneBtn": "कैमरा और माइक्रोफोन सक्षम करें"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "आमंत्रित",
+            "description": "निमंत्रण के लिए इनबॉक्स"
+        },
+        "Streams\/resource": {
+            "displayType": "संसाधन",
+            "description": "किसी संसाधन तक पहुंच का प्रबंधन करने और अपडेट के बारे में संदेश पोस्ट करने के लिए स्ट्रीम"
+        },
+        "Streams\/task": {
+            "displayType": "कार्य",
+            "description": "मनुष्यों या मशीनों द्वारा किया जाने वाला कार्य"
+        },
+        "Streams\/number": {
+            "displayType": "संख्या",
+            "description": "गणितीय संख्या"
+        },
+        "Streams\/date": {
+            "displayType": "दिनांक",
+            "description": "दिनांक"
+        },
+        "Streams\/text": {
+            "displayType": "टेक्स्ट",
+            "description": "पाठ का शरीर"
+        },
+        "Streams\/text\/small": {
+            "displayType": "टेक्स्ट",
+            "description": "पाठ का छोटा शरीर"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "टेक्स्ट",
+            "description": "पाठ का माध्यम शरीर"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "ईमेल पता",
+            "description": "ईमेल पता"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "फ़ोन नंबर",
+            "description": "फ़ोन नंबर"
+        },
+        "Streams\/text\/url": {
+            "displayType": "यूआरएल",
+            "description": "वेब पर लिंक"
+        },
+        "Streams\/image": {
+            "displayType": "छवि",
+            "description": "दृश्य छवि"
+        },
+        "Streams\/images": {
+            "displayType": "छवि गैलरी",
+            "description": "छवियों की गैलरी"
+        },
+        "Streams\/album": {
+            "displayType": "एल्बम",
+            "description": "एक एल्बम जिससे विभिन्न मीडिया संबंधित हैं"
+        },
+        "Streams\/file": {
+            "displayType": "फ़ाइल",
+            "description": "अपलोड की गई फ़ाइल"
+        },
+        "Streams\/audio": {
+            "displayType": "ऑडियो क्लिप",
+            "description": "ऑडियो क्लिप"
+        },
+        "Streams\/video": {
+            "displayType": "वीडियो क्लिप",
+            "description": "वीडियो क्लिप"
+        },
+        "Streams\/live": {
+            "displayType": "लाइव स्ट्रीम",
+            "description": "लाइव ऑडियो या वीडियो"
+        },
+        "Streams\/category": {
+            "displayType": "वर्ग",
+            "description": "एक ऐसी श्रेणी जिससे अन्य धाराएँ संबंधित हो सकती हैं"
+        },
+        "Streams\/participating": {
+            "displayType": "भाग लेने वाला सूचकांक",
+            "description": "जब उपयोगकर्ता इसमें शामिल होता है, तो धाराएँ संबंधित \/ असंबंधित होती हैं"
+        },
+        "Streams\/interest": {
+            "displayType": "ब्याज",
+            "description": "एक निश्चित विषय में उपयोगकर्ता की रुचि का प्रतिनिधित्व करता है"
+        },
+        "Streams\/incoming": {
+            "displayType": "आने वाली",
+            "description": "अन्य उपयोगकर्ताओं द्वारा भेजे गए संदेशों के लिए गंतव्य"
+        },
+        "Streams\/chat": {
+            "displayType": "बातचीत",
+            "description": "इतिहास के साथ, उपयोगकर्ताओं के बीच एक वार्तालाप"
+        },
+        "Streams\/webrtc": {
+            "displayType": "रियल-टाइम कॉल",
+            "description": "एक वास्तविक समय वीडियो \/ ऑडियो कॉल"
         }
     }
 }

@@ -44,7 +44,10 @@
         "Streams\/task\/error": "সময় ত্রুটি: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: আসন্ন বার্তা",
         "ManageEmailSubscriptions": "আপনার ইমেইল সাবস্ক্রিপশন পরিচালনা করুন",
-        "IfUnsubscribe": "আপনি আনসাবস্ক্রাইব করতে চান"
+        "IfUnsubscribe": "আপনি আনসাবস্ক্রাইব করতে চান",
+        "Streams\/relatedTo\/Streams\/call": "Call {999} in এ নতুন কল শুরু হয়েছিল",
+        "Streams\/relatedTo\/*": "{{toTitle}} এ নতুন {9 999}",
+        "Streams\/relatedFrom\/*": "{{10009} হিসাবে {{999} to এ যুক্ত হয়েছে"
     },
     "invite": {
         "messageContent": "{{displayName}} আপনাকে {{inviteUrl}} এ আমন্ত্রণ জানিয়েছে",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} {{stream.fields.title}} এ একটি <em>{{message.fields.type}}<\/em> বার্তা পোস্ট করেছেন"
+            "posted": "{{avatar.displayName}} {{stream.fields.title}} এ একটি <em>{{message.fields.type}}<\/em> বার্তা পোস্ট করেছেন"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "পোস্ট করা হয়েছে",
+                "byAvatar": "{{999} by দ্বারা"
+            },
+            "relatedTo": {
+                "hasANew": "একটি নতুন {{999} has আছে",
+                "byAvatar": "{{999} by দ্বারা যুক্ত"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "মাইক্রোফোন সক্ষম করুন",
             "cameraBtn": "ক্যামেরা সক্ষম করুন",
             "cameraAndMicrophoneBtn": "ক্যামেরা এবং মাইক্রোফোন সক্ষম করুন"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "আমন্ত্রিত",
+            "description": "আমন্ত্রণের জন্য ইনবক্স"
+        },
+        "Streams\/resource": {
+            "displayType": "সংস্থান",
+            "description": "একটি সংস্থান অ্যাক্সেস পরিচালনা এবং আপডেট সম্পর্কে বার্তা পোস্ট করার জন্য স্ট্রিম"
+        },
+        "Streams\/task": {
+            "displayType": "কার্য",
+            "description": "মানুষ বা মেশিন দ্বারা করা কাজ"
+        },
+        "Streams\/number": {
+            "displayType": "সংখ্যা",
+            "description": "গাণিতিক সংখ্যা"
+        },
+        "Streams\/date": {
+            "displayType": "তারিখ",
+            "description": "তারিখ"
+        },
+        "Streams\/text": {
+            "displayType": "পাঠ",
+            "description": "পাঠ্য শরীর"
+        },
+        "Streams\/text\/small": {
+            "displayType": "পাঠ",
+            "description": "পাঠ্য ছোট বডি"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "পাঠ",
+            "description": "পাঠ্যের মাঝারি অংশ"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "ইমেল ঠিকানা",
+            "description": "ইমেল ঠিকানা"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "ফোন নম্বর",
+            "description": "ফোন নম্বর"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL টি",
+            "description": "ওয়েবে লিঙ্ক"
+        },
+        "Streams\/image": {
+            "displayType": "ভাবমূর্তি",
+            "description": "দৃষ্টি নির্ভর ছবি"
+        },
+        "Streams\/images": {
+            "displayType": "ছবির গ্যালারি",
+            "description": "ইমেজ গ্যালারী"
+        },
+        "Streams\/album": {
+            "displayType": "অ্যালবাম",
+            "description": "একটি অ্যালবাম যার সাথে বিভিন্ন মিডিয়া সম্পর্কিত"
+        },
+        "Streams\/file": {
+            "displayType": "ফাইল",
+            "description": "আপলোড করা ফাইল"
+        },
+        "Streams\/audio": {
+            "displayType": "অডিও ক্লিপ",
+            "description": "অডিও ক্লিপ"
+        },
+        "Streams\/video": {
+            "displayType": "ভিডিও ক্লিপ",
+            "description": "ভিডিও ক্লিপ"
+        },
+        "Streams\/live": {
+            "displayType": "সরাসরি সম্প্রচার",
+            "description": "লাইভ অডিও বা ভিডিও"
+        },
+        "Streams\/category": {
+            "displayType": "বিভাগ",
+            "description": "অন্যান্য বিভাগগুলি সম্পর্কিত হতে পারে এমন একটি বিভাগ"
+        },
+        "Streams\/participating": {
+            "displayType": "অংশীদার সূচক",
+            "description": "স্ট্রিমগুলি এর সাথে সম্পর্কিত \/ সম্পর্কিত নয় যখন কোনও ব্যবহারকারী যোগ দেয় \/ চলে যায়"
+        },
+        "Streams\/interest": {
+            "displayType": "স্বার্থ",
+            "description": "একটি নির্দিষ্ট বিষয়ে ব্যবহারকারীর আগ্রহের প্রতিনিধিত্ব করে"
+        },
+        "Streams\/incoming": {
+            "displayType": "ইনকামিং",
+            "description": "অন্যান্য ব্যবহারকারীদের দ্বারা প্রেরিত বার্তাগুলির জন্য গন্তব্য"
+        },
+        "Streams\/chat": {
+            "displayType": "কথোপকথন",
+            "description": "ইতিহাসের সাথে ব্যবহারকারীদের মধ্যে একটি কথোপকথন"
+        },
+        "Streams\/webrtc": {
+            "displayType": "রিয়েল-টাইম কল",
+            "description": "একটি বাস্তব সময়ের ভিডিও \/ অডিও কল"
         }
     }
 }

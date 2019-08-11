@@ -44,7 +44,10 @@
         "Streams/task/error": "Hata: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Daxil olan mesaj",
         "ManageEmailSubscriptions": "E-poçt abunəliyinizi idarə edin",
-        "IfUnsubscribe": "Siz imtina etmək istəsəniz"
+        "IfUnsubscribe": "Siz imtina etmək istəsəniz",
+        "Streams/relatedTo/Streams/call": "{{999} }&#39;da yeni zəng başladı",
+        "Streams/relatedTo/*": "{{toTitle}} yeni {{relationDisplayType}}",
+        "Streams/relatedFrom/*": "{{toTitle}} -a {{relationDisplayType}} olaraq əlavə edildi"
     },
     "invite": {
         "messageContent": "{{displayName}} sizi {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} üçün <em>{{message.fields.type}}</em> mesaj nümayiş {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} üçün <em>{{message.fields.type}}</em> mesaj nümayiş {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& url}} &#39;da {{& call 'avatar.displayName'}}: {{& message.fields.content}}"
+            "body": "{{& url}} &#39;da {{& call 'avatar.displayName'}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "göndərilib",
+                "byAvatar": "tərəfindən {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "yeni {{message.instructions.fromDisplayType}} var",
+                "byAvatar": "əlavə edilmiş {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Mikrofonu işə salın",
             "cameraBtn": "Kameranı aktivləşdirin",
             "cameraAndMicrophoneBtn": "Kamera və Mikrofonu aktivləşdirin"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "Dəvət",
+            "description": "Dəvətlər üçün qutu"
+        },
+        "Streams/resource": {
+            "displayType": "Resurs",
+            "description": "bir mənbəyə girişi idarə etmək və yeniləmələr barədə mesaj göndərmək üçün axın"
+        },
+        "Streams/task": {
+            "displayType": "Tapşırıq",
+            "description": "insanlar və ya maşınlar tərəfindən ediləcək tapşırıq"
+        },
+        "Streams/number": {
+            "displayType": "Nömrə",
+            "description": "riyazi nömrə"
+        },
+        "Streams/date": {
+            "displayType": "Tarix",
+            "description": "Tarix"
+        },
+        "Streams/text": {
+            "displayType": "Mətn",
+            "description": "mətn orqanı"
+        },
+        "Streams/text/small": {
+            "displayType": "Mətn",
+            "description": "kiçik mətn orqanı"
+        },
+        "Streams/text/medium": {
+            "displayType": "Mətn",
+            "description": "orta mətn orqanı"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "Elektron poçt ünvanı",
+            "description": "e-poçt ünvanı"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Telefon nömrəsi",
+            "description": "telefon nömrəsi"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "İnternetdə link"
+        },
+        "Streams/image": {
+            "displayType": "Şəkil",
+            "description": "vizual görüntü"
+        },
+        "Streams/images": {
+            "displayType": "Şəkil Qalereyası",
+            "description": "şəkillər qalereyası"
+        },
+        "Streams/album": {
+            "displayType": "Albom",
+            "description": "müxtəlif medianın əlaqəli olduğu bir albom"
+        },
+        "Streams/file": {
+            "displayType": "Fayl",
+            "description": "yüklənmiş faylı"
+        },
+        "Streams/audio": {
+            "displayType": "Audio klip",
+            "description": "audio klip"
+        },
+        "Streams/video": {
+            "displayType": "Video Klip",
+            "description": "videoklip"
+        },
+        "Streams/live": {
+            "displayType": "Canlı yayım",
+            "description": "canlı səs və ya video"
+        },
+        "Streams/category": {
+            "displayType": "Kateqoriya",
+            "description": "digər axınların əlaqələndirilə biləcəyi bir kateqoriya"
+        },
+        "Streams/participating": {
+            "displayType": "İştirak indeksi",
+            "description": "bir istifadəçi qoşulduqda / tərk edərkən axınlar bununla əlaqəli / əlaqəsizdir"
+        },
+        "Streams/interest": {
+            "displayType": "Maraq",
+            "description": "istifadəçinin müəyyən bir mövzuya olan marağını təmsil edir"
+        },
+        "Streams/incoming": {
+            "displayType": "Gələn",
+            "description": "digər istifadəçilər tərəfindən göndərilən mesajlar üçün təyinat"
+        },
+        "Streams/chat": {
+            "displayType": "Söhbət",
+            "description": "istifadəçilər arasında tarixi olan bir söhbət"
+        },
+        "Streams/webrtc": {
+            "displayType": "Real vaxt zəng",
+            "description": "real vaxt video / audio zəng"
         }
     }
 }

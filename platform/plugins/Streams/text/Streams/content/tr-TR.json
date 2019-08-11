@@ -44,7 +44,10 @@
         "Streams/task/error": "Hata sırasında: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Gelen Mesaj",
         "ManageEmailSubscriptions": "e-posta aboneliklerinizi yönetin",
-        "IfUnsubscribe": "Abonelikten çıkmak istiyorsanız"
+        "IfUnsubscribe": "Abonelikten çıkmak istiyorsanız",
+        "Streams/relatedTo/Streams/call": "Yeni arama {{toTitle}} &#39;da başladı",
+        "Streams/relatedTo/*": "{{toTitle}} içindeki {{relationDisplayType}} yeni",
+        "Streams/relatedFrom/*": "{{toTitle}} &#39;a {{relationDisplayType}} olarak eklendi"
     },
     "invite": {
         "messageContent": "{{displayName}} seni {{inviteUrl}} davet etti",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}}, {{stream.fields.title}} adresine {{ <em>1000}} bir</em> mesaj gönderdi."
+            "posted": "{{avatar.displayName}}, {{stream.fields.title}} adresine {{ <em>1000}} bir</em> mesaj gönderdi."
         },
         "text": {
-            "body": "{{& url}} {{& call 'avatar.displayName'}}: {{& message.fields.content}}"
+            "body": "{{& url}} {{& call 'avatar.displayName'}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "adresine gönderildi",
+                "byAvatar": "{{avatar.displayName}} tarafından"
+            },
+            "relatedTo": {
+                "hasANew": "yeni bir {{message.instructions.fromDisplayType}} var",
+                "byAvatar": "{{avatar.displayName}} tarafından eklendi"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Mikrofonu Etkinleştir",
             "cameraBtn": "Kamerayı Etkinleştir",
             "cameraAndMicrophoneBtn": "Kamera ve Mikrofonu Etkinleştir"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "Davetli",
+            "description": "Davetiyeler için gelen kutusu"
+        },
+        "Streams/resource": {
+            "displayType": "Kaynak",
+            "description": "bir kaynağa erişimi yönetmek ve güncellemeler hakkında mesaj göndermek için akış"
+        },
+        "Streams/task": {
+            "displayType": "Görev",
+            "description": "insanlar veya makineler tarafından yapılacak görev"
+        },
+        "Streams/number": {
+            "displayType": "Numara",
+            "description": "matematiksel sayı"
+        },
+        "Streams/date": {
+            "displayType": "tarih",
+            "description": "tarih"
+        },
+        "Streams/text": {
+            "displayType": "Metin",
+            "description": "metin gövdesi"
+        },
+        "Streams/text/small": {
+            "displayType": "Metin",
+            "description": "metnin küçük gövdesi"
+        },
+        "Streams/text/medium": {
+            "displayType": "Metin",
+            "description": "orta boy metin"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "E",
+            "description": "e"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Telefon numarası",
+            "description": "telefon numarası"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "web’deki bağlantı"
+        },
+        "Streams/image": {
+            "displayType": "görüntü",
+            "description": "görsel imge"
+        },
+        "Streams/images": {
+            "displayType": "Resim Galerisi",
+            "description": "resim galerisi"
+        },
+        "Streams/album": {
+            "displayType": "Albüm",
+            "description": "çeşitli medyanın ilgili olduğu bir albüm"
+        },
+        "Streams/file": {
+            "displayType": "Dosya",
+            "description": "yüklenen dosya"
+        },
+        "Streams/audio": {
+            "displayType": "Ses klibi",
+            "description": "Ses klibi"
+        },
+        "Streams/video": {
+            "displayType": "Video klip",
+            "description": "video klip"
+        },
+        "Streams/live": {
+            "displayType": "Canlı yayın",
+            "description": "canlı ses veya video"
+        },
+        "Streams/category": {
+            "displayType": "Kategori",
+            "description": "diğer akışların ilişkili olabileceği bir kategori"
+        },
+        "Streams/participating": {
+            "displayType": "Katılan Dizin",
+            "description": "Bir kullanıcı katıldığında / ayrıldığında akışlar buna / ilgisizdir"
+        },
+        "Streams/interest": {
+            "displayType": "Faiz",
+            "description": "Bir kullanıcının belirli bir konuya ilgisini gösterir."
+        },
+        "Streams/incoming": {
+            "displayType": "Gelen",
+            "description": "diğer kullanıcılar tarafından gönderilen mesajlar için hedef"
+        },
+        "Streams/chat": {
+            "displayType": "konuşma",
+            "description": "geçmiş kullanıcılar ile bir konuşma"
+        },
+        "Streams/webrtc": {
+            "displayType": "Gerçek Zamanlı Çağrı",
+            "description": "gerçek zamanlı video / sesli arama"
         }
     }
 }

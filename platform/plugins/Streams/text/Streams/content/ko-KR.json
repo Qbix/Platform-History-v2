@@ -44,7 +44,10 @@
         "Streams/task/error": "동안 오류 : {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}} : 수신 메시지",
         "ManageEmailSubscriptions": "이메일 구독 관리",
-        "IfUnsubscribe": "구독을 취소하려면"
+        "IfUnsubscribe": "구독을 취소하려면",
+        "Streams/relatedTo/Streams/call": "{{toTitle}}에서 새로운 전화가 시작되었습니다",
+        "Streams/relatedTo/*": "{{toTitle}}의 새로운 {{relationDisplayType}}",
+        "Streams/relatedFrom/*": "{{toTitle}}에 {{relationDisplayType}}으로 추가됨"
     },
     "invite": {
         "messageContent": "{{displayName}} 님이 {{inviteUrl}}에 당신을 초대했습니다.",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}}이 (가) <em>{{message.fields.type}}</em> 메시지를 {{stream.fields.title}}에 게시했습니다."
+            "posted": "{{avatar.displayName}}이 (가) <em>{{message.fields.type}}</em> 메시지를 {{stream.fields.title}}에 게시했습니다."
         },
         "text": {
-            "body": "{{& url}}의 {{& call 'avatar.displayName'}} : {{& message.fields.content}}"
+            "body": "{{& url}}의 {{& call 'avatar.displayName'}} : {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "에 게시되었습니다",
+                "byAvatar": "{{avatar.displayName}}까지"
+            },
+            "relatedTo": {
+                "hasANew": "새로운 {{message.instructions.fromDisplayType}}",
+                "byAvatar": "{{avatar.displayName}} 님이 추가 함"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "마이크 사용",
             "cameraBtn": "카메라 사용",
             "cameraAndMicrophoneBtn": "카메라 및 마이크 사용"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "초대",
+            "description": "초대받은 편지함"
+        },
+        "Streams/resource": {
+            "displayType": "의지",
+            "description": "리소스에 대한 액세스를 관리하고 업데이트에 대한 메시지를 게시하기위한 스트림"
+        },
+        "Streams/task": {
+            "displayType": "태스크",
+            "description": "사람이나 기계가해야 할 일"
+        },
+        "Streams/number": {
+            "displayType": "번호",
+            "description": "수학 숫자"
+        },
+        "Streams/date": {
+            "displayType": "날짜",
+            "description": "날짜"
+        },
+        "Streams/text": {
+            "displayType": "본문",
+            "description": "본문"
+        },
+        "Streams/text/small": {
+            "displayType": "본문",
+            "description": "작은 본문"
+        },
+        "Streams/text/medium": {
+            "displayType": "본문",
+            "description": "중간 본문"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "이메일 주소",
+            "description": "이메일 주소"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "전화 번호",
+            "description": "전화 번호"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "웹 링크"
+        },
+        "Streams/image": {
+            "displayType": "영상",
+            "description": "시각적 이미지"
+        },
+        "Streams/images": {
+            "displayType": "이미지 갤러리",
+            "description": "이미지 갤러리"
+        },
+        "Streams/album": {
+            "displayType": "앨범",
+            "description": "다양한 미디어가 관련된 앨범"
+        },
+        "Streams/file": {
+            "displayType": "파일",
+            "description": "업로드 된 파일"
+        },
+        "Streams/audio": {
+            "displayType": "오디오 클립",
+            "description": "오디오 클립"
+        },
+        "Streams/video": {
+            "displayType": "비디오 클립",
+            "description": "비디오 클립"
+        },
+        "Streams/live": {
+            "displayType": "라이브 스트림",
+            "description": "라이브 오디오 또는 비디오"
+        },
+        "Streams/category": {
+            "displayType": "범주",
+            "description": "다른 스트림과 관련 될 수있는 카테고리"
+        },
+        "Streams/participating": {
+            "displayType": "참여 지수",
+            "description": "사용자가 참여하거나 떠날 때 스트림은 이와 관련되거나 관련이 없습니다."
+        },
+        "Streams/interest": {
+            "displayType": "관심",
+            "description": "특정 주제에 대한 사용자의 관심을 나타냅니다"
+        },
+        "Streams/incoming": {
+            "displayType": "들어오는",
+            "description": "다른 사용자가 보낸 메시지의 대상"
+        },
+        "Streams/chat": {
+            "displayType": "대화",
+            "description": "역사를 가진 사용자들 간의 대화"
+        },
+        "Streams/webrtc": {
+            "displayType": "실시간 통화",
+            "description": "실시간 화상 / 음성 통화"
         }
     }
 }

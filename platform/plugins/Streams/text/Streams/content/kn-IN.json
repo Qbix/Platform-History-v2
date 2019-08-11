@@ -44,7 +44,10 @@
         "Streams/task/error": "ಈ ಸಮಯದಲ್ಲಿ ದೋಷ: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: ಒಳಬರುವ ಸಂದೇಶ",
         "ManageEmailSubscriptions": "ನಿಮ್ಮ ಇಮೇಲ್ ಚಂದಾದಾರಿಕೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
-        "IfUnsubscribe": "ನೀವು ಅನ್ಸಬ್ಸ್ಕ್ರೈಬ್ ಮಾಡಲು ಬಯಸಿದರೆ"
+        "IfUnsubscribe": "ನೀವು ಅನ್ಸಬ್ಸ್ಕ್ರೈಬ್ ಮಾಡಲು ಬಯಸಿದರೆ",
+        "Streams/relatedTo/Streams/call": "ಹೊಸ ಕರೆ {{999} in ನಲ್ಲಿ ಪ್ರಾರಂಭವಾಗಿದೆ",
+        "Streams/relatedTo/*": "{{toTitle}} ನಲ್ಲಿ ಹೊಸ {{relationDisplayType}}",
+        "Streams/relatedFrom/*": "{{999} to ಗೆ {{1000} as ಗೆ ಸೇರಿಸಲಾಗಿದೆ"
     },
     "invite": {
         "messageContent": "{{displayName}} ನಿಮ್ಮನ್ನು {{inviteUrl}} ಗೆ ಆಹ್ವಾನಿಸಿದ್ದಾರೆ",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} ಒಂದು <em>{{message.fields.type}}</em> ಸಂದೇಶವನ್ನು {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} ಒಂದು <em>{{message.fields.type}}</em> ಸಂದೇಶವನ್ನು {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& url}} ನಲ್ಲಿ {{& call 'avatar.displayName'}}: {{& message.fields.content}}"
+            "body": "{{& url}} ನಲ್ಲಿ {{& call 'avatar.displayName'}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ಗೆ ಪೋಸ್ಟ್ ಮಾಡಲಾಗಿದೆ",
+                "byAvatar": "{{999} by ನಿಂದ"
+            },
+            "relatedTo": {
+                "hasANew": "ಹೊಸ {{999} has ಅನ್ನು ಹೊಂದಿದೆ",
+                "byAvatar": "by {999 by by ನಿಂದ ಸೇರಿಸಲಾಗಿದೆ"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "ಮೈಕ್ರೊಫೋನ್ ಸಕ್ರಿಯಗೊಳಿಸಿ",
             "cameraBtn": "ಕ್ಯಾಮೆರಾವನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ",
             "cameraAndMicrophoneBtn": "ಕ್ಯಾಮೆರಾ ಮತ್ತು ಮೈಕ್ರೊಫೋನ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "ಆಹ್ವಾನಿಸಲಾಗಿದೆ",
+            "description": "ಆಮಂತ್ರಣಗಳಿಗಾಗಿ ಇನ್‌ಬಾಕ್ಸ್"
+        },
+        "Streams/resource": {
+            "displayType": "ಸಂಪನ್ಮೂಲ",
+            "description": "ಸಂಪನ್ಮೂಲಕ್ಕೆ ಪ್ರವೇಶವನ್ನು ನಿರ್ವಹಿಸಲು ಮತ್ತು ನವೀಕರಣಗಳ ಕುರಿತು ಸಂದೇಶಗಳನ್ನು ಪೋಸ್ಟ್ ಮಾಡಲು ಸ್ಟ್ರೀಮ್ ಮಾಡಿ"
+        },
+        "Streams/task": {
+            "displayType": "ಕಾರ್ಯ",
+            "description": "ಮಾನವರು ಅಥವಾ ಯಂತ್ರಗಳಿಂದ ಮಾಡಬೇಕಾದ ಕಾರ್ಯ"
+        },
+        "Streams/number": {
+            "displayType": "ಸಂಖ್ಯೆ",
+            "description": "ಗಣಿತ ಸಂಖ್ಯೆ"
+        },
+        "Streams/date": {
+            "displayType": "ದಿನಾಂಕ",
+            "description": "ದಿನಾಂಕ"
+        },
+        "Streams/text": {
+            "displayType": "ಪಠ್ಯ",
+            "description": "ಪಠ್ಯದ ದೇಹ"
+        },
+        "Streams/text/small": {
+            "displayType": "ಪಠ್ಯ",
+            "description": "ಪಠ್ಯದ ಸಣ್ಣ ದೇಹ"
+        },
+        "Streams/text/medium": {
+            "displayType": "ಪಠ್ಯ",
+            "description": "ಪಠ್ಯದ ಮಧ್ಯಮ ದೇಹ"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "ಇಮೇಲ್ ವಿಳಾಸ",
+            "description": "ಇಮೇಲ್ ವಿಳಾಸ"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "ದೂರವಾಣಿ ಸಂಖ್ಯೆ",
+            "description": "ದೂರವಾಣಿ ಸಂಖ್ಯೆ"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "ವೆಬ್‌ನಲ್ಲಿ ಲಿಂಕ್ ಮಾಡಿ"
+        },
+        "Streams/image": {
+            "displayType": "ಚಿತ್ರ",
+            "description": "ದೃಶ್ಯ ಚಿತ್ರ"
+        },
+        "Streams/images": {
+            "displayType": "ಚಿತ್ರ ಗ್ಯಾಲರಿ",
+            "description": "ಚಿತ್ರಗಳ ಗ್ಯಾಲರಿ"
+        },
+        "Streams/album": {
+            "displayType": "ಆಲ್ಬಮ್",
+            "description": "ವಿವಿಧ ಮಾಧ್ಯಮಗಳಿಗೆ ಸಂಬಂಧಿಸಿದ ಆಲ್ಬಮ್"
+        },
+        "Streams/file": {
+            "displayType": "ಫೈಲ್",
+            "description": "ಅಪ್‌ಲೋಡ್ ಮಾಡಿದ ಫೈಲ್"
+        },
+        "Streams/audio": {
+            "displayType": "ಆಡಿಯೋ ಕ್ಲಿಪ್",
+            "description": "ಆಡಿಯೋ ಕ್ಲಿಪ್"
+        },
+        "Streams/video": {
+            "displayType": "ವೀಡಿಯೊ ಕ್ಲಿಪ್",
+            "description": "ವೀಡಿಯೊ ಕ್ಲಿಪ್"
+        },
+        "Streams/live": {
+            "displayType": "ನಿರಂತರ ಪ್ರಸಾರ",
+            "description": "ಲೈವ್ ಆಡಿಯೋ ಅಥವಾ ವಿಡಿಯೋ"
+        },
+        "Streams/category": {
+            "displayType": "ವರ್ಗ",
+            "description": "ಇತರ ಸ್ಟ್ರೀಮ್‌ಗಳಿಗೆ ಸಂಬಂಧಿಸಿರುವ ವರ್ಗ"
+        },
+        "Streams/participating": {
+            "displayType": "ಭಾಗವಹಿಸುವ ಸೂಚ್ಯಂಕ",
+            "description": "ಬಳಕೆದಾರರು ಸೇರಿದಾಗ / ತೊರೆದಾಗ ಸ್ಟ್ರೀಮ್‌ಗಳು ಇದಕ್ಕೆ ಸಂಬಂಧಿಸಿವೆ / ಸಂಬಂಧವಿಲ್ಲ"
+        },
+        "Streams/interest": {
+            "displayType": "ಆಸಕ್ತಿ",
+            "description": "ನಿರ್ದಿಷ್ಟ ವಿಷಯದಲ್ಲಿ ಬಳಕೆದಾರರ ಆಸಕ್ತಿಯನ್ನು ಪ್ರತಿನಿಧಿಸುತ್ತದೆ"
+        },
+        "Streams/incoming": {
+            "displayType": "ಒಳಬರುವ",
+            "description": "ಇತರ ಬಳಕೆದಾರರು ಕಳುಹಿಸಿದ ಸಂದೇಶಗಳ ಗಮ್ಯಸ್ಥಾನ"
+        },
+        "Streams/chat": {
+            "displayType": "ಸಂಭಾಷಣೆ",
+            "description": "ಇತಿಹಾಸದೊಂದಿಗೆ ಬಳಕೆದಾರರ ನಡುವಿನ ಸಂಭಾಷಣೆ"
+        },
+        "Streams/webrtc": {
+            "displayType": "ರಿಯಲ್-ಟೈಮ್ ಕರೆ",
+            "description": "ನೈಜ ಸಮಯದ ವೀಡಿಯೊ / ಆಡಿಯೊ ಕರೆ"
         }
     }
 }

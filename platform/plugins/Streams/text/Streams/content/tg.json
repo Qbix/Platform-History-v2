@@ -3,8 +3,8 @@
         "NewItemTitle": "Қисми нав"
     },
     "labels": {
-        "Streams\/invited": "Мардон даъват карданд",
-        "Streams\/invitedMe": "Ки маро даъват кард"
+        "Streams/invited": "Мардон даъват карданд",
+        "Streams/invitedMe": "Ки маро даъват кард"
     },
     "interests": {
         "Filter": "Шумо аз чӣ истифода мекунед?",
@@ -76,10 +76,10 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} мактубро <em>{{message.fields.type}}<\/em> ба {{stream.fields.title}} фиристод"
+            "posted": "{{avatar.displayName}} мактубро <em>{{message.fields.type}}<\/em> ба {{stream.fields.title}} фиристод"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} дар {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} дар {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

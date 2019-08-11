@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Gabim gjatë: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Mesazhi i ardhur",
         "ManageEmailSubscriptions": "menaxho abonimet tuaja me email",
-        "IfUnsubscribe": "Nëse dëshironi të abonoheni"
+        "IfUnsubscribe": "Nëse dëshironi të abonoheni",
+        "Streams\/relatedTo\/Streams\/call": "Thirrja e re Filloi në 99 99 999}}",
+        "Streams\/relatedTo\/*": "New 999 të reja} në {{1000}",
+        "Streams\/relatedFrom\/*": "Shtuar në 99 999 si {{1000}"
     },
     "invite": {
         "messageContent": "{{displayName}} ju ftoi për të {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} ka postuar një <em>{{message.fields.type}}<\/em> mesazhe për {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} ka postuar një <em>{{message.fields.type}}<\/em> mesazhe për {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} në {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} në {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "eshte postuar ne",
+                "byAvatar": "nga {99 999}}"
+            },
+            "relatedTo": {
+                "hasANew": "ka një new 999 të reja",
+                "byAvatar": "shtuar nga {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Aktivizoni mikrofonin",
             "cameraBtn": "Aktivizo kamerën",
             "cameraAndMicrophoneBtn": "Aktivizo kamerën dhe mikrofonin"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "të ftuar",
+            "description": "Inbox për ftesa"
+        },
+        "Streams\/resource": {
+            "displayType": "burime",
+            "description": "lumë për menaxhimin e qasjes në një burim dhe postimin e mesazheve në lidhje me azhurnimet"
+        },
+        "Streams\/task": {
+            "displayType": "detyrë",
+            "description": "detyrë që duhet të bëhet nga njerëzit ose makinat"
+        },
+        "Streams\/number": {
+            "displayType": "numër",
+            "description": "numri matematikor"
+        },
+        "Streams\/date": {
+            "displayType": "data",
+            "description": "data"
+        },
+        "Streams\/text": {
+            "displayType": "tekst",
+            "description": "trupi i tekstit"
+        },
+        "Streams\/text\/small": {
+            "displayType": "tekst",
+            "description": "trup i vogël i tekstit"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "tekst",
+            "description": "trup i mesëm i tekstit"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Adresa e postës elektronike",
+            "description": "adresa e postës elektronike"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Numri i telefonit",
+            "description": "Numri i telefonit"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "lidhje në internet"
+        },
+        "Streams\/image": {
+            "displayType": "imazh",
+            "description": "imazh vizual"
+        },
+        "Streams\/images": {
+            "displayType": "Galeria e Imazheve",
+            "description": "galeri e imazheve"
+        },
+        "Streams\/album": {
+            "displayType": "album",
+            "description": "një album me të cilin lidhen media të ndryshme"
+        },
+        "Streams\/file": {
+            "displayType": "skedar",
+            "description": "skedar i ngarkuar"
+        },
+        "Streams\/audio": {
+            "displayType": "Klip audio",
+            "description": "klip audio"
+        },
+        "Streams\/video": {
+            "displayType": "Klip video",
+            "description": "videoklip"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "audio ose video live"
+        },
+        "Streams\/category": {
+            "displayType": "kategori",
+            "description": "një kategori me të cilën mund të lidhen rrjedhat e tjera"
+        },
+        "Streams\/participating": {
+            "displayType": "Indeksi i Pjesëmarrjes",
+            "description": "rrjedhjet janë të lidhura \/ nuk lidhen me këtë kur një përdorues bashkohet \/ largohet"
+        },
+        "Streams\/interest": {
+            "displayType": "interes",
+            "description": "përfaqëson interesin e përdoruesit për një temë të caktuar"
+        },
+        "Streams\/incoming": {
+            "displayType": "hyrje",
+            "description": "destinacioni për mesazhet e dërguara nga përdoruesit e tjerë"
+        },
+        "Streams\/chat": {
+            "displayType": "bisedë",
+            "description": "një bisedë midis përdoruesve, me histori"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Thirrje në kohë reale",
+            "description": "një thirrje video \/ audio në kohë reale"
         }
     }
 }

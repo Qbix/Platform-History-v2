@@ -3,8 +3,8 @@
         "NewItemTitle": "Mea hou"
     },
     "labels": {
-        "Streams\/invited": "Ka poʻe i konoʻia au",
-        "Streams\/invitedMe": "ʻO wai ka mea i kono iaʻu"
+        "Streams/invited": "Ka poʻe i konoʻia au",
+        "Streams/invitedMe": "ʻO wai ka mea i kono iaʻu"
     },
     "interests": {
         "Filter": "He aha kāu mea hauʻoli?",
@@ -79,7 +79,7 @@
             "posted": "Ua hoʻohanaʻo {{call 'avatar.displayName'}} i ka leka <em>{{message.fields.type}}<\/em> i {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} i {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} i {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

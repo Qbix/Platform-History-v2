@@ -3,8 +3,8 @@
         "NewItemTitle": "Նոր նյութեր"
     },
     "labels": {
-        "Streams\/invited": "Մարդիկ հրավիրեցի",
-        "Streams\/invitedMe": "Ով է ինձ հրավիրել"
+        "Streams/invited": "Մարդիկ հրավիրեցի",
+        "Streams/invitedMe": "Ով է ինձ հրավիրել"
     },
     "interests": {
         "Filter": "Ինչ եք վայելում:",
@@ -76,10 +76,10 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} - <em>{{message.fields.type}}<\/em> հաղորդագրություն է ուղարկվել {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} - <em>{{message.fields.type}}<\/em> հաղորդագրություն է ուղարկվել {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} {{& url}} - ում {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} {{& url}} - ում {{& message.fields.content}}"
         }
     },
     "followup": {

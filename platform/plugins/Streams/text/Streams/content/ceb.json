@@ -3,8 +3,8 @@
         "NewItemTitle": "Bag-ong Butang"
     },
     "labels": {
-        "Streams\/invited": "Mga tawo nga akong gidapit",
-        "Streams\/invitedMe": "Kinsa ang nagdapit kanako"
+        "Streams/invited": "Mga tawo nga akong gidapit",
+        "Streams/invitedMe": "Kinsa ang nagdapit kanako"
     },
     "interests": {
         "Filter": "Unsay imong natagamtam?",
@@ -76,10 +76,10 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} ang usa ka <em>{{message.fields.type}} nga<\/em> mensahe ngadto sa {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} ang usa ka <em>{{message.fields.type}} nga<\/em> mensahe ngadto sa {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} sa {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} sa {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

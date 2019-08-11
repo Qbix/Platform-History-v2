@@ -3,8 +3,8 @@
         "NewItemTitle": "Nouvo atik"
     },
     "labels": {
-        "Streams\/invited": "Moun mwen envite",
-        "Streams\/invitedMe": "Ki moun ki envite m &#39;"
+        "Streams/invited": "Moun mwen envite",
+        "Streams/invitedMe": "Ki moun ki envite m &#39;"
     },
     "interests": {
         "Filter": "Kisa ou renmen?",
@@ -76,10 +76,10 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} afiche yon <em>{{message.fields.type}}<\/em> mesaj bay {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} afiche yon <em>{{message.fields.type}}<\/em> mesaj bay {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} nan {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} nan {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

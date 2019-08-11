@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Kesalahan saat: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Pesan Masuk",
         "ManageEmailSubscriptions": "kelola langganan email Anda",
-        "IfUnsubscribe": "Jika Anda ingin berhenti berlangganan"
+        "IfUnsubscribe": "Jika Anda ingin berhenti berlangganan",
+        "Streams\/relatedTo\/Streams\/call": "Panggilan Baru Dimulai pada {{toTitle}}",
+        "Streams\/relatedTo\/*": "Baru {{relationDisplayType}} di {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Ditambahkan ke {{toTitle}} sebagai {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} mengundang Anda ke {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} mengeposkan pesan <em>{{message.fields.type}}<\/em> ke {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} mengeposkan pesan <em>{{message.fields.type}}<\/em> ke {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} dalam {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} dalam {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "telah diposkan ke",
+                "byAvatar": "oleh {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "memiliki {{message.instructions.fromDisplayType}} baru",
+                "byAvatar": "ditambahkan oleh {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -113,6 +124,104 @@
             "microphoneBtn": "Aktifkan Mikrofon",
             "cameraBtn": "Aktifkan Kamera",
             "cameraAndMicrophoneBtn": "Aktifkan Kamera dan Mikrofon"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Diundang",
+            "description": "Kotak masuk untuk undangan"
+        },
+        "Streams\/resource": {
+            "displayType": "Sumber",
+            "description": "streaming untuk mengelola akses ke sumber daya dan memposting pesan tentang pembaruan"
+        },
+        "Streams\/task": {
+            "displayType": "Tugas",
+            "description": "tugas yang harus dilakukan oleh manusia atau mesin"
+        },
+        "Streams\/number": {
+            "displayType": "Jumlah",
+            "description": "angka matematika"
+        },
+        "Streams\/date": {
+            "displayType": "Tanggal",
+            "description": "tanggal"
+        },
+        "Streams\/text": {
+            "displayType": "Teks",
+            "description": "badan teks"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Teks",
+            "description": "teks kecil"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Teks",
+            "description": "badan teks sedang"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Alamat email",
+            "description": "alamat email"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Nomor telepon",
+            "description": "nomor telepon"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "tautan di web"
+        },
+        "Streams\/image": {
+            "displayType": "Gambar",
+            "description": "gambar visual"
+        },
+        "Streams\/images": {
+            "displayType": "Galeri Gambar",
+            "description": "galeri gambar"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "sebuah album yang terkait dengan berbagai media"
+        },
+        "Streams\/file": {
+            "displayType": "Mengajukan",
+            "description": "file yang diunggah"
+        },
+        "Streams\/audio": {
+            "displayType": "Klip Audio",
+            "description": "klip audio"
+        },
+        "Streams\/video": {
+            "displayType": "Klip video",
+            "description": "klip video"
+        },
+        "Streams\/live": {
+            "displayType": "Siaran langsung",
+            "description": "audio atau video langsung"
+        },
+        "Streams\/category": {
+            "displayType": "Kategori",
+            "description": "kategori yang dapat dihubungkan dengan aliran lain"
+        },
+        "Streams\/participating": {
+            "displayType": "Indeks yang Berpartisipasi",
+            "description": "stream terkait \/ tidak terkait dengan ini ketika pengguna bergabung \/ pergi"
+        },
+        "Streams\/interest": {
+            "displayType": "Bunga",
+            "description": "mewakili minat pengguna dalam topik tertentu"
+        },
+        "Streams\/incoming": {
+            "displayType": "Masuk",
+            "description": "tujuan untuk pesan yang dikirim oleh pengguna lain"
+        },
+        "Streams\/chat": {
+            "displayType": "Percakapan",
+            "description": "percakapan antara pengguna, dengan riwayat"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Panggilan Real-Time",
+            "description": "panggilan video \/ audio real time"
         }
     }
 }

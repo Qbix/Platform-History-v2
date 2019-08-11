@@ -3,8 +3,8 @@
         "NewItemTitle": "Itsva Item"
     },
     "labels": {
-        "Streams\/invited": "Vanhu vandakakokwa",
-        "Streams\/invitedMe": "Ndiani akandidana"
+        "Streams/invited": "Vanhu vandakakokwa",
+        "Streams/invitedMe": "Ndiani akandidana"
     },
     "interests": {
         "Filter": "Unofarira chii?",

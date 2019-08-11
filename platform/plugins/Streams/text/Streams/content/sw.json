@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Hitilafu wakati: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Ujumbe usioingia",
         "ManageEmailSubscriptions": "kudhibiti usajili wako wa barua pepe",
-        "IfUnsubscribe": "Ikiwa unataka kujiondoa"
+        "IfUnsubscribe": "Ikiwa unataka kujiondoa",
+        "Streams\/relatedTo\/Streams\/call": "Simu mpya imeanza katika {{toTitle}}",
+        "Streams\/relatedTo\/*": "Mpya {{relationDisplayType}} katika {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Imeongezwa kwa {{toTitle}} kama {{1000]}"
     },
     "invite": {
         "messageContent": "{{displayName}} alikualika {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} imesa ujumbe <em>{{message.fields.type}}<\/em> kwa {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} imesa ujumbe <em>{{message.fields.type}}<\/em> kwa {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} katika {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} katika {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "imetumwa kwa",
+                "byAvatar": "na {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ina mpya {{message.instructions.fromDisplayType}}",
+                "byAvatar": "imeongezwa na {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Washa kipaza sauti",
             "cameraBtn": "Washa Kamera",
             "cameraAndMicrophoneBtn": "Washa Kamera na kipaza sauti"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Imealikwa",
+            "description": "Kikasha kwa mialiko"
+        },
+        "Streams\/resource": {
+            "displayType": "Rasilimali",
+            "description": "mtiririko wa kudhibiti ufikiaji wa rasilimali na kutuma ujumbe kuhusu sasisho"
+        },
+        "Streams\/task": {
+            "displayType": "Kazi",
+            "description": "jukumu la kufanywa na wanadamu au mashine"
+        },
+        "Streams\/number": {
+            "displayType": "Nambari",
+            "description": "nambari ya kihesabu"
+        },
+        "Streams\/date": {
+            "displayType": "Tarehe",
+            "description": "tarehe"
+        },
+        "Streams\/text": {
+            "displayType": "Maandishi",
+            "description": "mwili wa maandishi"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Maandishi",
+            "description": "mwili mdogo wa maandishi"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Maandishi",
+            "description": "mwili wa kati wa maandishi"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Barua pepe",
+            "description": "barua pepe"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Nambari ya simu",
+            "description": "nambari ya simu"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "kiunga kwenye wavuti"
+        },
+        "Streams\/image": {
+            "displayType": "Picha",
+            "description": "picha ya kuona"
+        },
+        "Streams\/images": {
+            "displayType": "Picha ya sanaa",
+            "description": "nyumba ya sanaa ya picha"
+        },
+        "Streams\/album": {
+            "displayType": "Albamu",
+            "description": "Albamu ambayo media anuwai inahusiana"
+        },
+        "Streams\/file": {
+            "displayType": "Faili",
+            "description": "faili iliyopakiwa"
+        },
+        "Streams\/audio": {
+            "displayType": "Kipande cha Sauti",
+            "description": "kipande cha sauti"
+        },
+        "Streams\/video": {
+            "displayType": "Kipande cha picha ya video",
+            "description": "kipande cha picha ya video"
+        },
+        "Streams\/live": {
+            "displayType": "Maisha ya moja kwa moja",
+            "description": "sauti ya moja kwa moja au video"
+        },
+        "Streams\/category": {
+            "displayType": "Jamii",
+            "description": "jamii ambayo mito mingine inaweza kuhusishwa"
+        },
+        "Streams\/participating": {
+            "displayType": "Index ya Kushiriki",
+            "description": "mito inahusiana \/ haihusiani na hii wakati mtumiaji anajiunga \/ kuondoka"
+        },
+        "Streams\/interest": {
+            "displayType": "Hamu",
+            "description": "inawakilisha shauku ya mtumiaji katika mada fulani"
+        },
+        "Streams\/incoming": {
+            "displayType": "Inayoingia",
+            "description": "marudio ya ujumbe uliotumwa na watumiaji wengine"
+        },
+        "Streams\/chat": {
+            "displayType": "Mazungumzo",
+            "description": "mazungumzo kati ya watumiaji, na historia"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Simu ya Wakati wa kweli",
+            "description": "simu ya video ya wakati \/ sauti ya sauti"
         }
     }
 }

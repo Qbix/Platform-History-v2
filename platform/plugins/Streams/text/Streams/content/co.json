@@ -3,8 +3,8 @@
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "E persone ch&#39;e aghju invitato",
-        "Streams\/invitedMe": "Chi mi ha invitatu"
+        "Streams/invited": "E persone ch&#39;e aghju invitato",
+        "Streams/invitedMe": "Chi mi ha invitatu"
     },
     "interests": {
         "Filter": "Cosa ti piace?",
@@ -76,10 +76,10 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} ha inviatu un messaggio <em>{{message.fields.type}}<\/em> a {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} ha inviatu un messaggio <em>{{message.fields.type}}<\/em> a {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} in {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} in {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

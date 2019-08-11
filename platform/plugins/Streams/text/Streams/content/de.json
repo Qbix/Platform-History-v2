@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Fehler während: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Eingehende Nachricht",
         "ManageEmailSubscriptions": "Verwalten Sie Ihre E-Mail-Abonnements",
-        "IfUnsubscribe": "Wenn Sie sich abmelden möchten"
+        "IfUnsubscribe": "Wenn Sie sich abmelden möchten",
+        "Streams\/relatedTo\/Streams\/call": "Neuer Anruf gestartet in {{toTitle}}",
+        "Streams\/relatedTo\/*": "Neu {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Zu {{toTitle}} hinzugefügt als {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} hat Sie zu {{inviteUrl}} eingeladen",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} hat eine Nachricht <em>{{message.fields.type}}<\/em> an {{stream.fields.title}} gesendet."
+            "posted": "{{avatar.displayName}} hat eine Nachricht <em>{{message.fields.type}}<\/em> an {{stream.fields.title}} gesendet."
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} in {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} in {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "wurde gepostet in",
+                "byAvatar": "von {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "hat eine neue {{message.instructions.fromDisplayType}}",
+                "byAvatar": "hinzugefügt von {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Mikrofon aktivieren",
             "cameraBtn": "Kamera aktivieren",
             "cameraAndMicrophoneBtn": "Kamera und Mikrofon aktivieren"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Eingeladen",
+            "description": "Posteingang für Einladungen"
+        },
+        "Streams\/resource": {
+            "displayType": "Ressource",
+            "description": "Stream zum Verwalten des Zugriffs auf eine Ressource und zum Posten von Nachrichten zu Updates"
+        },
+        "Streams\/task": {
+            "displayType": "Aufgabe",
+            "description": "Aufgabe, die von Menschen oder Maschinen zu erledigen ist"
+        },
+        "Streams\/number": {
+            "displayType": "Nummer",
+            "description": "mathematische Zahl"
+        },
+        "Streams\/date": {
+            "displayType": "Datum",
+            "description": "Datum"
+        },
+        "Streams\/text": {
+            "displayType": "Text",
+            "description": "Textkörper"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Text",
+            "description": "kleiner Textkörper"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Text",
+            "description": "mittlerer Textkörper"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "E-Mail-Addresse",
+            "description": "E-Mail-Addresse"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Telefonnummer",
+            "description": "Telefonnummer"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "Link im Web"
+        },
+        "Streams\/image": {
+            "displayType": "Bild",
+            "description": "visuelles Bild"
+        },
+        "Streams\/images": {
+            "displayType": "Bildergalerie",
+            "description": "Galerie von Bildern"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "ein album, auf das sich verschiedene medien beziehen"
+        },
+        "Streams\/file": {
+            "displayType": "Datei",
+            "description": "hochgeladene Datei"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio clip",
+            "description": "Audio clip"
+        },
+        "Streams\/video": {
+            "displayType": "Videoclip",
+            "description": "Videoclip"
+        },
+        "Streams\/live": {
+            "displayType": "Liveübertragung",
+            "description": "Live Audio oder Video"
+        },
+        "Streams\/category": {
+            "displayType": "Kategorie",
+            "description": "Eine Kategorie, mit der andere Streams verknüpft werden können"
+        },
+        "Streams\/participating": {
+            "displayType": "Teilnehmender Index",
+            "description": "Streams sind damit verbunden \/ nicht verbunden, wenn ein Benutzer beitritt \/ verlässt"
+        },
+        "Streams\/interest": {
+            "displayType": "Interesse",
+            "description": "repräsentiert das Interesse eines Benutzers an einem bestimmten Thema"
+        },
+        "Streams\/incoming": {
+            "displayType": "Eingehend",
+            "description": "Ziel für Nachrichten, die von anderen Benutzern gesendet wurden"
+        },
+        "Streams\/chat": {
+            "displayType": "Konversation",
+            "description": "ein Gespräch zwischen Benutzern mit Geschichte"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Echtzeitanruf",
+            "description": "Ein Video- \/ Audioanruf in Echtzeit"
         }
     }
 }

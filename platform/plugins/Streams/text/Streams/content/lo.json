@@ -3,8 +3,8 @@
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "ປະຊາຊົນຂ້າພະເຈົ້າໄດ້ເຊື້ອເຊີນ",
-        "Streams\/invitedMe": "ຜູ້ທີ່ເຊື້ອເຊີນຂ້ອຍ"
+        "Streams/invited": "ປະຊາຊົນຂ້າພະເຈົ້າໄດ້ເຊື້ອເຊີນ",
+        "Streams/invitedMe": "ຜູ້ທີ່ເຊື້ອເຊີນຂ້ອຍ"
     },
     "interests": {
         "Filter": "ເຈົ້າຊອບສິ່ງໃດ?",
@@ -76,10 +76,10 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} ໄດ້ຂຽນຂໍ້ຄວາມ <em>{{message.fields.type}}<\/em> ກັບ {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} ໄດ້ຂຽນຂໍ້ຄວາມ <em>{{message.fields.type}}<\/em> ກັບ {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} ໃນ {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} ໃນ {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

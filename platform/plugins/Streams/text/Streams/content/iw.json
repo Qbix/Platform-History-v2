@@ -3,8 +3,8 @@
         "NewItemTitle": "פריט חדש"
     },
     "labels": {
-        "Streams\/invited": "אנשים שהזמנתי",
-        "Streams\/invitedMe": "מי הזמין אותי"
+        "Streams/invited": "אנשים שהזמנתי",
+        "Streams/invitedMe": "מי הזמין אותי"
     },
     "interests": {
         "Filter": "ממה אתה נהנה?",
@@ -76,10 +76,10 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} פרסם הודעה <em>{{message.fields.type}}<\/em> ל- {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} פרסם הודעה <em>{{message.fields.type}}<\/em> ל- {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} ב- {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} ב- {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

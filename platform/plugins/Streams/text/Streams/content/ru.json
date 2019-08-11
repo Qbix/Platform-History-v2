@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Ошибка во время: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: входящее сообщение",
         "ManageEmailSubscriptions": "управлять подписками на электронную почту",
-        "IfUnsubscribe": "Если вы хотите отписаться"
+        "IfUnsubscribe": "Если вы хотите отписаться",
+        "Streams\/relatedTo\/Streams\/call": "Новый вызов начался в {{toTitle}}",
+        "Streams\/relatedTo\/*": "Новый {{relationDisplayType}} в {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Добавлено в {{toTitle}} как {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} пригласил вас на {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} опубликовал сообщение <em>{{message.fields.type}}<\/em> для {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} опубликовал сообщение <em>{{message.fields.type}}<\/em> для {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} в {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} в {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "был размещен на",
+                "byAvatar": "{{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "есть новый {{message.instructions.fromDisplayType}}",
+                "byAvatar": "добавлено {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Включить микрофон",
             "cameraBtn": "Включить камеру",
             "cameraAndMicrophoneBtn": "Включить камеру и микрофон"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "приглашенный",
+            "description": "Входящие для приглашений"
+        },
+        "Streams\/resource": {
+            "displayType": "Ресурс",
+            "description": "поток для управления доступом к ресурсу и размещения сообщений об обновлениях"
+        },
+        "Streams\/task": {
+            "displayType": "задача",
+            "description": "задача, которую должны выполнять люди или машины"
+        },
+        "Streams\/number": {
+            "displayType": "Число",
+            "description": "математическое число"
+        },
+        "Streams\/date": {
+            "displayType": "Дата",
+            "description": "Дата"
+        },
+        "Streams\/text": {
+            "displayType": "Текст",
+            "description": "основная часть текста"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Текст",
+            "description": "небольшая часть текста"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Текст",
+            "description": "средняя часть текста"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Адрес электронной почты",
+            "description": "адрес электронной почты"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Номер телефона",
+            "description": "номер телефона"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "ссылка в Интернете"
+        },
+        "Streams\/image": {
+            "displayType": "Образ",
+            "description": "визуальный образ"
+        },
+        "Streams\/images": {
+            "displayType": "Галерея",
+            "description": "галерея изображений"
+        },
+        "Streams\/album": {
+            "displayType": "Альбом",
+            "description": "альбом, с которым связаны различные медиа"
+        },
+        "Streams\/file": {
+            "displayType": "файл",
+            "description": "загруженный файл"
+        },
+        "Streams\/audio": {
+            "displayType": "Аудио клип",
+            "description": "аудиоклип"
+        },
+        "Streams\/video": {
+            "displayType": "Видеоклип",
+            "description": "видеоклип"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "живое аудио или видео"
+        },
+        "Streams\/category": {
+            "displayType": "категория",
+            "description": "категория, с которой могут быть связаны другие потоки"
+        },
+        "Streams\/participating": {
+            "displayType": "Индекс участия",
+            "description": "потоки связаны \/ не связаны с этим, когда пользователь присоединяется \/ покидает"
+        },
+        "Streams\/interest": {
+            "displayType": "Интерес",
+            "description": "представляет интерес пользователя к определенной теме"
+        },
+        "Streams\/incoming": {
+            "displayType": "вступающий",
+            "description": "назначение для сообщений, отправленных другими пользователями"
+        },
+        "Streams\/chat": {
+            "displayType": "разговор",
+            "description": "разговор между пользователями, с историей"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Звонок в реальном времени",
+            "description": "видео \/ аудио звонок в реальном времени"
         }
     }
 }

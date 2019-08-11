@@ -3,8 +3,8 @@
         "NewItemTitle": "አዲስ ንጥል"
     },
     "labels": {
-        "Streams\/invited": "የጋበዝኳቸው ሰዎች",
-        "Streams\/invitedMe": "ማን እንደጋበዘኝ"
+        "Streams/invited": "የጋበዝኳቸው ሰዎች",
+        "Streams/invitedMe": "ማን እንደጋበዘኝ"
     },
     "interests": {
         "Filter": "ምን ደስ ይልዎታል?",
@@ -76,10 +76,10 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} አንድ <em>{{message.fields.type}}<\/em> መልዕክት ወደ {{stream.fields.title}} አውጥቷል"
+            "posted": "{{avatar.displayName}} አንድ <em>{{message.fields.type}}<\/em> መልዕክት ወደ {{stream.fields.title}} አውጥቷል"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} በ {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} በ {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

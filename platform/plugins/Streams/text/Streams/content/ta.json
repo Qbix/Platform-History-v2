@@ -44,7 +44,10 @@
         "Streams\/task\/error": "போது பிழை: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: உள்வரும் செய்தி",
         "ManageEmailSubscriptions": "உங்கள் மின்னஞ்சல் சந்தாக்களை நிர்வகிக்கவும்",
-        "IfUnsubscribe": "நீங்கள் குழுவிலக விரும்பினால்"
+        "IfUnsubscribe": "நீங்கள் குழுவிலக விரும்பினால்",
+        "Streams\/relatedTo\/Streams\/call": "புதிய அழைப்பு {{999} in இல் தொடங்கப்பட்டது",
+        "Streams\/relatedTo\/*": "{{toTitle}} இல் புதிய {{relationDisplayType}}",
+        "Streams\/relatedFrom\/*": "{{999} to இல் {{1000} as ஆக சேர்க்கப்பட்டது"
     },
     "invite": {
         "messageContent": "{{9}} {{inviteUrl}}",
@@ -86,7 +89,15 @@
             "posted": "{{stream.fields.title}} க்கு {{ <em>1000}} ஒரு<\/em> செய்தியை இடுகையிடப்பட்டது."
         },
         "text": {
-            "body": "{{& url}} இல் {{& message.fields.content}}"
+            "body": "{{& url}} இல் {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "இடுகையிடப்பட்டது",
+                "byAvatar": "வழங்கியவர் {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "புதிய {99 999 has has ஐக் கொண்டுள்ளது",
+                "byAvatar": "by {999 by by ஆல் சேர்க்கப்பட்டது"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "மைக்ரோஃபோனை இயக்கு",
             "cameraBtn": "கேமராவை இயக்கு",
             "cameraAndMicrophoneBtn": "கேமரா மற்றும் மைக்ரோஃபோனை இயக்கு"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "அழைப்பு",
+            "description": "அழைப்புகளுக்கான இன்பாக்ஸ்"
+        },
+        "Streams\/resource": {
+            "displayType": "வள",
+            "description": "ஆதாரத்திற்கான அணுகலை நிர்வகிப்பதற்கும் புதுப்பிப்புகளைப் பற்றிய செய்திகளை இடுகையிடுவதற்கும் ஸ்ட்ரீம்"
+        },
+        "Streams\/task": {
+            "displayType": "டாஸ்க்",
+            "description": "மனிதர்கள் அல்லது இயந்திரங்களால் செய்ய வேண்டிய பணி"
+        },
+        "Streams\/number": {
+            "displayType": "எண்",
+            "description": "கணித எண்"
+        },
+        "Streams\/date": {
+            "displayType": "தேதி",
+            "description": "தேதி"
+        },
+        "Streams\/text": {
+            "displayType": "உரை",
+            "description": "உரையின் உடல்"
+        },
+        "Streams\/text\/small": {
+            "displayType": "உரை",
+            "description": "உரையின் சிறிய உடல்"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "உரை",
+            "description": "உரையின் நடுத்தர உடல்"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "மின்னஞ்சல் முகவரி",
+            "description": "மின்னஞ்சல் முகவரி"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "தொலைபேசி எண்",
+            "description": "தொலைபேசி எண்"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL ஐ",
+            "description": "இணையத்தில் இணைப்பு"
+        },
+        "Streams\/image": {
+            "displayType": "பட",
+            "description": "காட்சி படம்"
+        },
+        "Streams\/images": {
+            "displayType": "பட தொகுப்பு",
+            "description": "படங்களின் தொகுப்பு"
+        },
+        "Streams\/album": {
+            "displayType": "ஆல்பம்",
+            "description": "பல்வேறு ஊடகங்கள் தொடர்புடைய ஆல்பம்"
+        },
+        "Streams\/file": {
+            "displayType": "கோப்பு",
+            "description": "பதிவேற்றிய கோப்பு"
+        },
+        "Streams\/audio": {
+            "displayType": "ஆடியோ கிளிப்",
+            "description": "ஆடியோ கிளிப்"
+        },
+        "Streams\/video": {
+            "displayType": "வீடியோ கிளிப்",
+            "description": "வீடியோ கிளிப்"
+        },
+        "Streams\/live": {
+            "displayType": "லைவ்ஸ்டிரீமில்",
+            "description": "நேரடி ஆடியோ அல்லது வீடியோ"
+        },
+        "Streams\/category": {
+            "displayType": "வகை",
+            "description": "பிற நீரோடைகள் தொடர்புடைய ஒரு வகை"
+        },
+        "Streams\/participating": {
+            "displayType": "பங்கேற்பு அட்டவணை",
+            "description": "ஒரு பயனர் சேரும்போது \/ வெளியேறும்போது நீரோடைகள் இதனுடன் தொடர்புடையவை \/ தொடர்பில்லாதவை"
+        },
+        "Streams\/interest": {
+            "displayType": "ஆர்வம்",
+            "description": "ஒரு குறிப்பிட்ட தலைப்பில் பயனரின் ஆர்வத்தை குறிக்கிறது"
+        },
+        "Streams\/incoming": {
+            "displayType": "வருகை",
+            "description": "பிற பயனர்கள் அனுப்பிய செய்திகளுக்கான இலக்கு"
+        },
+        "Streams\/chat": {
+            "displayType": "உரையாடல்",
+            "description": "பயனர்களுடன் ஒரு உரையாடல், வரலாற்றுடன்"
+        },
+        "Streams\/webrtc": {
+            "displayType": "நிகழ்நேர அழைப்பு",
+            "description": "நிகழ்நேர வீடியோ \/ ஆடியோ அழைப்பு"
         }
     }
 }

@@ -3,8 +3,8 @@
         "NewItemTitle": "പുതിയ സാധനം"
     },
     "labels": {
-        "Streams\/invited": "ഞാൻ ക്ഷണിച്ച ആളുകൾ",
-        "Streams\/invitedMe": "ആരാണ് എന്നെ ക്ഷണിച്ചത്"
+        "Streams/invited": "ഞാൻ ക്ഷണിച്ച ആളുകൾ",
+        "Streams/invitedMe": "ആരാണ് എന്നെ ക്ഷണിച്ചത്"
     },
     "interests": {
         "Filter": "നിങ്ങൾ എന്താണ് ആസ്വദിക്കുന്നത്?",
@@ -76,7 +76,7 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} {{1001} to എന്നതിലേക്ക് {{ <em>1000}}<\/em> സന്ദേശം പോസ്റ്റുചെയ്‌തു."
+            "posted": "{{avatar.displayName}} {{1001} to എന്നതിലേക്ക് {{ <em>1000}}<\/em> സന്ദേശം പോസ്റ്റുചെയ്‌തു."
         },
         "text": {
             "body": "{{& url}} ലെ {{& call 'avatar.displayName'}}: {{& message.fields.content}}"

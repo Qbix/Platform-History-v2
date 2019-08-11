@@ -44,7 +44,10 @@
         "Streams/task/error": "Erreur pendant: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Message entrant",
         "ManageEmailSubscriptions": "gérer vos abonnements email",
-        "IfUnsubscribe": "Si vous souhaitez vous désabonner"
+        "IfUnsubscribe": "Si vous souhaitez vous désabonner",
+        "Streams/relatedTo/Streams/call": "Nouvel appel lancé dans {{toTitle}}",
+        "Streams/relatedTo/*": "Nouveau {{relationDisplayType}} dans {{toTitle}}",
+        "Streams/relatedFrom/*": "Ajouté à {{toTitle}} en tant que {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} vous a invité à {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} a envoyé un message <em>{{message.fields.type}}</em> à {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} a envoyé un message <em>{{message.fields.type}}</em> à {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} dans {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} dans {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "a été posté à",
+                "byAvatar": "par {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "a un nouveau {{message.instructions.fromDisplayType}}",
+                "byAvatar": "ajouté par {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Activer le microphone",
             "cameraBtn": "Activer la caméra",
             "cameraAndMicrophoneBtn": "Activer la caméra et le microphone"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "Invité",
+            "description": "Boîte de réception pour les invitations"
+        },
+        "Streams/resource": {
+            "displayType": "Ressource",
+            "description": "flux pour gérer l&#39;accès à une ressource et publier des messages sur les mises à jour"
+        },
+        "Streams/task": {
+            "displayType": "Tâche",
+            "description": "tâche à faire par des humains ou des machines"
+        },
+        "Streams/number": {
+            "displayType": "Nombre",
+            "description": "nombre mathématique"
+        },
+        "Streams/date": {
+            "displayType": "Rendez-vous amoureux",
+            "description": "rendez-vous amoureux"
+        },
+        "Streams/text": {
+            "displayType": "Texte",
+            "description": "corps du texte"
+        },
+        "Streams/text/small": {
+            "displayType": "Texte",
+            "description": "petit corps de texte"
+        },
+        "Streams/text/medium": {
+            "displayType": "Texte",
+            "description": "corps de texte moyen"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "Adresse électronique",
+            "description": "adresse électronique"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Numéro de téléphone",
+            "description": "numéro de téléphone"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "lien sur le web"
+        },
+        "Streams/image": {
+            "displayType": "Image",
+            "description": "image visuelle"
+        },
+        "Streams/images": {
+            "displayType": "Galerie d&#39;images",
+            "description": "galerie d&#39;images"
+        },
+        "Streams/album": {
+            "displayType": "Album",
+            "description": "un album auquel différents médias sont liés"
+        },
+        "Streams/file": {
+            "displayType": "Fichier",
+            "description": "fichier téléchargé"
+        },
+        "Streams/audio": {
+            "displayType": "Clip audio",
+            "description": "clip audio"
+        },
+        "Streams/video": {
+            "displayType": "Clip vidéo",
+            "description": "Clip vidéo"
+        },
+        "Streams/live": {
+            "displayType": "Direct",
+            "description": "audio ou vidéo en direct"
+        },
+        "Streams/category": {
+            "displayType": "Catégorie",
+            "description": "une catégorie à laquelle d&#39;autres flux peuvent être liés"
+        },
+        "Streams/participating": {
+            "displayType": "Indice participant",
+            "description": "les flux sont liés / non liés à cela lorsqu&#39;un utilisateur rejoint / quitte"
+        },
+        "Streams/interest": {
+            "displayType": "Intérêt",
+            "description": "représente l&#39;intérêt d&#39;un utilisateur pour un certain sujet"
+        },
+        "Streams/incoming": {
+            "displayType": "Entrant",
+            "description": "destination des messages envoyés par d&#39;autres utilisateurs"
+        },
+        "Streams/chat": {
+            "displayType": "Conversation",
+            "description": "une conversation entre les utilisateurs, avec l&#39;histoire"
+        },
+        "Streams/webrtc": {
+            "displayType": "Appel en temps réel",
+            "description": "un appel vidéo / audio en temps réel"
         }
     }
 }

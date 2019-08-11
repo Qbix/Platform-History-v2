@@ -3,8 +3,8 @@
         "NewItemTitle": "Into entsha"
     },
     "labels": {
-        "Streams\/invited": "Abantu engimemile",
-        "Streams\/invitedMe": "Ngubani ongimemile"
+        "Streams/invited": "Abantu engimemile",
+        "Streams/invitedMe": "Ngubani ongimemile"
     },
     "interests": {
         "Filter": "Yini oyithandayo?",
@@ -79,7 +79,7 @@
             "posted": "{@}} Ithumele umlayezo <em>{{}}<\/em> {{}} {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

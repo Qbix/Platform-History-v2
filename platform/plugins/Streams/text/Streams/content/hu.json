@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Hiba történt a következővel: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Bejövő üzenet",
         "ManageEmailSubscriptions": "kezelje az e-mail előfizetéseit",
-        "IfUnsubscribe": "Ha le szeretné szüntetni a feliratkozást"
+        "IfUnsubscribe": "Ha le szeretné szüntetni a feliratkozást",
+        "Streams\/relatedTo\/Streams\/call": "Az új felhívás {{toTitle}} -én kezdődött",
+        "Streams\/relatedTo\/*": "Új {{relationDisplayType}} a {{toTitle}} -ben",
+        "Streams\/relatedFrom\/*": "Hozzáadva a következőhöz: {{toTitle}}, mint {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} meghívta Önt a {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} <em>{{message.fields.type}}<\/em> üzenetet küldött {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} <em>{{message.fields.type}}<\/em> üzenetet küldött {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "kiküldve a következőhöz:",
+                "byAvatar": "írta: {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "van egy új {{message.instructions.fromDisplayType}}",
+                "byAvatar": "hozzáadta: {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Mikrofon engedélyezése",
             "cameraBtn": "Kamera engedélyezése",
             "cameraAndMicrophoneBtn": "Kamera és mikrofon engedélyezése"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Meghívott",
+            "description": "Beérkező levelek a meghívókhoz"
+        },
+        "Streams\/resource": {
+            "displayType": "Forrás",
+            "description": "adatfolyam az erőforrásokhoz való hozzáférés kezeléséhez és a frissítésekről szóló üzenetek küldéséhez"
+        },
+        "Streams\/task": {
+            "displayType": "Feladat",
+            "description": "az emberek vagy gépek feladata"
+        },
+        "Streams\/number": {
+            "displayType": "Szám",
+            "description": "matematikai szám"
+        },
+        "Streams\/date": {
+            "displayType": "Dátum",
+            "description": "dátum"
+        },
+        "Streams\/text": {
+            "displayType": "Szöveg",
+            "description": "szöveg szöveg"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Szöveg",
+            "description": "kis szövegtest"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Szöveg",
+            "description": "közepes méretű szöveg"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Email cím",
+            "description": "email cím"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Telefonszám",
+            "description": "telefonszám"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "link az interneten"
+        },
+        "Streams\/image": {
+            "displayType": "Kép",
+            "description": "vizuális kép"
+        },
+        "Streams\/images": {
+            "displayType": "Képgaléria",
+            "description": "képek galéria"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "egy album, amelyhez a különféle médiumok kapcsolódnak"
+        },
+        "Streams\/file": {
+            "displayType": "fájl",
+            "description": "feltöltött fájl"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio klip",
+            "description": "audio klip"
+        },
+        "Streams\/video": {
+            "displayType": "Videoklip",
+            "description": "Videoklip"
+        },
+        "Streams\/live": {
+            "displayType": "Élő adás",
+            "description": "élő hang vagy videó"
+        },
+        "Streams\/category": {
+            "displayType": "Kategória",
+            "description": "egy kategória, amelyhez más patakok kapcsolódhatnak"
+        },
+        "Streams\/participating": {
+            "displayType": "Résztvevő index",
+            "description": "a folyamok ehhez kapcsolódnak \/ nem kapcsolódnak össze, amikor a felhasználó csatlakozik \/ távozik"
+        },
+        "Streams\/interest": {
+            "displayType": "Érdeklődés",
+            "description": "képviseli a felhasználó érdeklődését egy adott téma iránt"
+        },
+        "Streams\/incoming": {
+            "displayType": "Beérkező",
+            "description": "más felhasználók által küldött üzenetek rendeltetési helye"
+        },
+        "Streams\/chat": {
+            "displayType": "Beszélgetés",
+            "description": "beszélgetés a felhasználók között, a történelemmel"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Valós idejű hívás",
+            "description": "valós idejű video \/ audio hívás"
         }
     }
 }

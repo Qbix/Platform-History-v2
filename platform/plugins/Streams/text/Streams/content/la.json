@@ -3,8 +3,8 @@
         "NewItemTitle": "Item novum"
     },
     "labels": {
-        "Streams\/invited": "Invitavit mihi populus",
-        "Streams\/invitedMe": "Quis praeter me"
+        "Streams/invited": "Invitavit mihi populus",
+        "Streams/invitedMe": "Quis praeter me"
     },
     "interests": {
         "Filter": "Quid frui?",

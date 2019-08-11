@@ -3,8 +3,8 @@
         "NewItemTitle": "နယူး Item"
     },
     "labels": {
-        "Streams\/invited": "ငါကိုဖိတ်ကြားပြည်သူ့",
-        "Streams\/invitedMe": "ငါ့ကိုရန်ဖိတ်ခေါ်အဘယ်သူသည်"
+        "Streams/invited": "ငါကိုဖိတ်ကြားပြည်သူ့",
+        "Streams/invitedMe": "ငါ့ကိုရန်ဖိတ်ခေါ်အဘယ်သူသည်"
     },
     "interests": {
         "Filter": "သငျသညျအဘယျသို့ပျော်မွေ့သလဲ?",
@@ -76,10 +76,10 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} {{stream.fields.title}} တစ်ခု <em>{{message.fields.type}}<\/em> မက်ဆေ့ခ်ျကို posted"
+            "posted": "{{avatar.displayName}} {{stream.fields.title}} တစ်ခု <em>{{message.fields.type}}<\/em> မက်ဆေ့ခ်ျကို posted"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} {{& url}} အတွက်: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} {{& url}} အတွက်: {{& message.fields.content}}"
         }
     },
     "followup": {

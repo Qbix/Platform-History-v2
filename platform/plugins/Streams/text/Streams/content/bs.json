@@ -3,8 +3,8 @@
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Ljudi koje sam pozvao",
-        "Streams\/invitedMe": "Ko me je pozvao"
+        "Streams/invited": "Ljudi koje sam pozvao",
+        "Streams/invitedMe": "Ko me je pozvao"
     },
     "interests": {
         "Filter": "Šta uživate?",
@@ -76,10 +76,10 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} je postavio <em>{{message.fields.type}}<\/em> poruku na {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} je postavio <em>{{message.fields.type}}<\/em> poruku na {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} u {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} u {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

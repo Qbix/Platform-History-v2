@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Kļūda laikā: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Ienākošais ziņojums",
         "ManageEmailSubscriptions": "pārvaldiet e-pasta abonementus",
-        "IfUnsubscribe": "Ja vēlaties atcelt abonēšanu"
+        "IfUnsubscribe": "Ja vēlaties atcelt abonēšanu",
+        "Streams\/relatedTo\/Streams\/call": "Jauns uzaicinājums sākās {{toTitle}}",
+        "Streams\/relatedTo\/*": "Jauns {{relationDisplayType}} {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Pievienots mapei {{toTitle}} kā {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} uzaicināja jūs uz {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} publicēja <em>{{message.fields.type}}<\/em> ziņojumu uz {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} publicēja <em>{{message.fields.type}}<\/em> ziņojumu uz {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ir nosūtīts uz",
+                "byAvatar": "autors: {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ir jauns {{message.instructions.fromDisplayType}}",
+                "byAvatar": "pievienoja {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Iespējot mikrofonu",
             "cameraBtn": "Iespējot kameru",
             "cameraAndMicrophoneBtn": "Iespējot kameru un mikrofonu"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Aicināti",
+            "description": "Iesūtne ielūgumiem"
+        },
+        "Streams\/resource": {
+            "displayType": "Resurss",
+            "description": "straume, lai pārvaldītu piekļuvi resursam un nosūtītu ziņas par atjauninājumiem"
+        },
+        "Streams\/task": {
+            "displayType": "Uzdevums",
+            "description": "uzdevums, kas jāveic cilvēkiem vai mašīnām"
+        },
+        "Streams\/number": {
+            "displayType": "Skaits",
+            "description": "matemātiskais skaitlis"
+        },
+        "Streams\/date": {
+            "displayType": "Datums",
+            "description": "datums"
+        },
+        "Streams\/text": {
+            "displayType": "Teksts",
+            "description": "teksta pamatteksts"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Teksts",
+            "description": "mazs teksta fragments"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Teksts",
+            "description": "vidējs teksts"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Epasta adrese",
+            "description": "epasta adrese"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Telefona numurs",
+            "description": "telefona numurs"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "saite tīmeklī"
+        },
+        "Streams\/image": {
+            "displayType": "Attēls",
+            "description": "vizuālais tēls"
+        },
+        "Streams\/images": {
+            "displayType": "Attēlu galerija",
+            "description": "attēlu galerija"
+        },
+        "Streams\/album": {
+            "displayType": "Albums",
+            "description": "albums, ar kuru saistīti dažādi mediji"
+        },
+        "Streams\/file": {
+            "displayType": "Fails",
+            "description": "augšupielādēts fails"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio klips",
+            "description": "audio klips"
+        },
+        "Streams\/video": {
+            "displayType": "Videoklips",
+            "description": "videoklips"
+        },
+        "Streams\/live": {
+            "displayType": "Tiešraide",
+            "description": "dzīvs audio vai video"
+        },
+        "Streams\/category": {
+            "displayType": "Kategorija",
+            "description": "kategorija, ar kuru var saistīt citas straumes"
+        },
+        "Streams\/participating": {
+            "displayType": "Iesaistītais indekss",
+            "description": "straumes ir saistītas \/ nav saistītas ar to, kad lietotājs pievienojas \/ aiziet"
+        },
+        "Streams\/interest": {
+            "displayType": "Interese",
+            "description": "atspoguļo lietotāja interesi par noteiktu tēmu"
+        },
+        "Streams\/incoming": {
+            "displayType": "Ienākošie",
+            "description": "citu lietotāju nosūtīto ziņojumu mērķis"
+        },
+        "Streams\/chat": {
+            "displayType": "Saruna",
+            "description": "lietotāju saruna ar vēsturi"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Zvana reāllaikā",
+            "description": "reālā laika video \/ audio zvans"
         }
     }
 }

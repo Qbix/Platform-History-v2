@@ -44,7 +44,10 @@
         "Streams/task/error": "Помилка під час: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Вхідне повідомлення",
         "ManageEmailSubscriptions": "керувати підписками електронною поштою",
-        "IfUnsubscribe": "Якщо ви хочете скасувати підписку"
+        "IfUnsubscribe": "Якщо ви хочете скасувати підписку",
+        "Streams/relatedTo/Streams/call": "Новий дзвінок розпочався з {{toTitle}}",
+        "Streams/relatedTo/*": "Новий {{relationDisplayType}} в {{toTitle}}",
+        "Streams/relatedFrom/*": "Додано до {{toTitle}} як {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} запросив вас до {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} опублікував повідомлення <em>{{message.fields.type}}</em> до {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} опублікував повідомлення <em>{{message.fields.type}}</em> до {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} у {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} у {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "було опубліковано в",
+                "byAvatar": "від {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "має новий {{message.instructions.fromDisplayType}}",
+                "byAvatar": "додав {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Увімкнути мікрофон",
             "cameraBtn": "Увімкнути камеру",
             "cameraAndMicrophoneBtn": "Увімкнути камеру та мікрофон"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "Запрошені",
+            "description": "Вхідні для запрошень"
+        },
+        "Streams/resource": {
+            "displayType": "Ресурс",
+            "description": "потік для управління доступом до ресурсу та розміщення повідомлень про оновлення"
+        },
+        "Streams/task": {
+            "displayType": "Завдання",
+            "description": "завдання, яке має виконати людина чи машини"
+        },
+        "Streams/number": {
+            "displayType": "Номер",
+            "description": "математичне число"
+        },
+        "Streams/date": {
+            "displayType": "Дата",
+            "description": "дата"
+        },
+        "Streams/text": {
+            "displayType": "Текст",
+            "description": "текст тексту"
+        },
+        "Streams/text/small": {
+            "displayType": "Текст",
+            "description": "невеликий текст тексту"
+        },
+        "Streams/text/medium": {
+            "displayType": "Текст",
+            "description": "середній корпус тексту"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "Адреса електронної пошти",
+            "description": "адреса електронної пошти"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Номер телефону",
+            "description": "номер телефону"
+        },
+        "Streams/text/url": {
+            "displayType": "URL-адреса",
+            "description": "посилання в Інтернеті"
+        },
+        "Streams/image": {
+            "displayType": "Зображення",
+            "description": "візуальне зображення"
+        },
+        "Streams/images": {
+            "displayType": "Галерея зображень",
+            "description": "галерея образів"
+        },
+        "Streams/album": {
+            "displayType": "Альбом",
+            "description": "альбом, до якого пов’язані різні ЗМІ"
+        },
+        "Streams/file": {
+            "displayType": "Файл",
+            "description": "завантажений файл"
+        },
+        "Streams/audio": {
+            "displayType": "Аудіокліп",
+            "description": "аудіокліп"
+        },
+        "Streams/video": {
+            "displayType": "Відео кліп",
+            "description": "відео кліп"
+        },
+        "Streams/live": {
+            "displayType": "Наживо",
+            "description": "аудіо чи відео в прямому ефірі"
+        },
+        "Streams/category": {
+            "displayType": "Категорія",
+            "description": "категорія, до якої можуть бути пов’язані інші потоки"
+        },
+        "Streams/participating": {
+            "displayType": "Індекс участі",
+            "description": "потоки пов&#39;язані / не пов&#39;язані з цим, коли користувач приєднується / залишає"
+        },
+        "Streams/interest": {
+            "displayType": "Інтерес",
+            "description": "представляє інтерес користувача до певної теми"
+        },
+        "Streams/incoming": {
+            "displayType": "Вхідний",
+            "description": "призначення повідомлень, надісланих іншими користувачами"
+        },
+        "Streams/chat": {
+            "displayType": "Бесіда",
+            "description": "розмова між користувачами, з історією"
+        },
+        "Streams/webrtc": {
+            "displayType": "Дзвінок у режимі реального часу",
+            "description": "відео / аудіодзвінок у режимі реального часу"
         }
     }
 }

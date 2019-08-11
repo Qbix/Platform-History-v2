@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Gwall yn ystod: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Neges sy&#39;n dod i mewn",
         "ManageEmailSubscriptions": "rheoli eich tanysgrifiadau e-bost",
-        "IfUnsubscribe": "Os ydych chi eisiau dad-danysgrifio"
+        "IfUnsubscribe": "Os ydych chi eisiau dad-danysgrifio",
+        "Streams\/relatedTo\/Streams\/call": "Galwad Newydd Dechreuwyd yn {{toTitle}}",
+        "Streams\/relatedTo\/*": "Newydd {{relationDisplayType}} yn {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Ychwanegwyd at {{toTitle}} fel {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "Gwahoddwyd {{displayName}} i {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} postio neges <em>{{message.fields.type}}<\/em> i {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} postio neges <em>{{message.fields.type}}<\/em> i {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} yn {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} yn {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "wedi ei bostio i",
+                "byAvatar": "gan {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "mae ganddo {{message.instructions.fromDisplayType}} newydd",
+                "byAvatar": "ychwanegwyd gan {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Galluogi Meicroffon",
             "cameraBtn": "Galluogi Camera",
             "cameraAndMicrophoneBtn": "Galluogi Camera a Meicroffon"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Gwahoddwyd",
+            "description": "Blwch derbyn ar gyfer gwahoddiadau"
+        },
+        "Streams\/resource": {
+            "displayType": "Adnodd",
+            "description": "ffrwd ar gyfer rheoli mynediad at adnodd a phostio negeseuon am ddiweddariadau"
+        },
+        "Streams\/task": {
+            "displayType": "Tasg",
+            "description": "tasg i&#39;w gwneud gan fodau dynol neu beiriannau"
+        },
+        "Streams\/number": {
+            "displayType": "Rhif",
+            "description": "rhif mathemategol"
+        },
+        "Streams\/date": {
+            "displayType": "Dyddiad",
+            "description": "dyddiad"
+        },
+        "Streams\/text": {
+            "displayType": "Testun",
+            "description": "corff o destun"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Testun",
+            "description": "corff bach o destun"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Testun",
+            "description": "corff canolig o destun"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Cyfeiriad ebost",
+            "description": "cyfeiriad ebost"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Rhif ffôn",
+            "description": "rhif ffôn"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "dolen ar y we"
+        },
+        "Streams\/image": {
+            "displayType": "Delwedd",
+            "description": "delwedd weledol"
+        },
+        "Streams\/images": {
+            "displayType": "Oriel Delweddau",
+            "description": "oriel o ddelweddau"
+        },
+        "Streams\/album": {
+            "displayType": "Albwm",
+            "description": "albwm y mae cyfryngau amrywiol yn gysylltiedig ag ef"
+        },
+        "Streams\/file": {
+            "displayType": "Ffeil",
+            "description": "ffeil wedi&#39;i llwytho i fyny"
+        },
+        "Streams\/audio": {
+            "displayType": "Clip Sain",
+            "description": "clip sain"
+        },
+        "Streams\/video": {
+            "displayType": "Clip Fideo",
+            "description": "clip fideo"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "sain neu fideo byw"
+        },
+        "Streams\/category": {
+            "displayType": "Categori",
+            "description": "categori y gall ffrydiau eraill fod yn gysylltiedig ag ef"
+        },
+        "Streams\/participating": {
+            "displayType": "Mynegai Cyfranogi",
+            "description": "mae ffrydiau&#39;n gysylltiedig \/ heb gysylltiad â hyn pan fydd defnyddiwr yn ymuno \/ gadael"
+        },
+        "Streams\/interest": {
+            "displayType": "Llog",
+            "description": "yn cynrychioli diddordeb defnyddiwr mewn pwnc penodol"
+        },
+        "Streams\/incoming": {
+            "displayType": "Yn dod i mewn",
+            "description": "cyrchfan ar gyfer negeseuon a anfonir gan ddefnyddwyr eraill"
+        },
+        "Streams\/chat": {
+            "displayType": "Sgwrs",
+            "description": "sgwrs rhwng defnyddwyr, gyda hanes"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Galwad Amser Real",
+            "description": "galwad fideo \/ sain amser real"
         }
     }
 }

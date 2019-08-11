@@ -3,8 +3,8 @@
         "NewItemTitle": "नयाँ वस्तु"
     },
     "labels": {
-        "Streams\/invited": "मैले आमन्त्रित गरे",
-        "Streams\/invitedMe": "कसले मलाई निम्तायो"
+        "Streams/invited": "मैले आमन्त्रित गरे",
+        "Streams/invitedMe": "कसले मलाई निम्तायो"
     },
     "interests": {
         "Filter": "तपाई के मज्जा लिनुहुन्छ?",
@@ -76,10 +76,10 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} को एक <em>{{message.fields.type}}<\/em> संदेश को {{stream.fields.title}} मा पोस्ट गरियो"
+            "posted": "{{avatar.displayName}} को एक <em>{{message.fields.type}}<\/em> संदेश को {{stream.fields.title}} मा पोस्ट गरियो"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} मा {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} मा {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

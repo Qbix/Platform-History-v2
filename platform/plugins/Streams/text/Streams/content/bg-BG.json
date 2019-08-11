@@ -44,7 +44,10 @@
         "Streams/task/error": "Грешка по време на: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Входящо съобщение",
         "ManageEmailSubscriptions": "управлявайте абонаментите си за имейли",
-        "IfUnsubscribe": "Ако искате да се отпишете"
+        "IfUnsubscribe": "Ако искате да се отпишете",
+        "Streams/relatedTo/Streams/call": "Ново повикване започна от {{toTitle}}",
+        "Streams/relatedTo/*": "Ново {{relationDisplayType}} в {{toTitle}}",
+        "Streams/relatedFrom/*": "Добавено към {{toTitle}} като {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} ви покани на {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} публикува <em>{{message.fields.type}}</em> съобщение до {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} публикува <em>{{message.fields.type}}</em> съобщение до {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} в {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} в {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "е публикувано до",
+                "byAvatar": "от {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "има нов {{message.instructions.fromDisplayType}}",
+                "byAvatar": "добавено от {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Активиране на микрофона",
             "cameraBtn": "Активиране на камерата",
             "cameraAndMicrophoneBtn": "Активиране на камерата и микрофона"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "Поканени",
+            "description": "Входяща кутия за покани"
+        },
+        "Streams/resource": {
+            "displayType": "средство",
+            "description": "поток за управление на достъпа до ресурс и публикуване на съобщения за актуализации"
+        },
+        "Streams/task": {
+            "displayType": "задача",
+            "description": "задача, която трябва да се изпълни от хора или машини"
+        },
+        "Streams/number": {
+            "displayType": "номер",
+            "description": "математическо число"
+        },
+        "Streams/date": {
+            "displayType": "Дата",
+            "description": "дата"
+        },
+        "Streams/text": {
+            "displayType": "Текст",
+            "description": "текст на текста"
+        },
+        "Streams/text/small": {
+            "displayType": "Текст",
+            "description": "малък текст на текста"
+        },
+        "Streams/text/medium": {
+            "displayType": "Текст",
+            "description": "средно тяло на текста"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "Имейл адрес",
+            "description": "имейл адрес"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Телефонен номер",
+            "description": "телефонен номер"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "връзка в мрежата"
+        },
+        "Streams/image": {
+            "displayType": "Изображение",
+            "description": "визуално изображение"
+        },
+        "Streams/images": {
+            "displayType": "Галерия с изображения",
+            "description": "галерия от изображения"
+        },
+        "Streams/album": {
+            "displayType": "албум",
+            "description": "албум, към който са свързани различни медии"
+        },
+        "Streams/file": {
+            "displayType": "досие",
+            "description": "качен файл"
+        },
+        "Streams/audio": {
+            "displayType": "Аудио клип",
+            "description": "аудио клип"
+        },
+        "Streams/video": {
+            "displayType": "Видеоклип",
+            "description": "видеоклип"
+        },
+        "Streams/live": {
+            "displayType": "Livestream",
+            "description": "аудио или видео на живо"
+        },
+        "Streams/category": {
+            "displayType": "категория",
+            "description": "категория, към която могат да бъдат свързани други потоци"
+        },
+        "Streams/participating": {
+            "displayType": "Участващ индекс",
+            "description": "потоците са свързани / несвързани с това, когато потребителят се присъедини / напусне"
+        },
+        "Streams/interest": {
+            "displayType": "интерес",
+            "description": "представлява интерес на потребителя към определена тема"
+        },
+        "Streams/incoming": {
+            "displayType": "входящ",
+            "description": "местоназначение за съобщения, изпратени от други потребители"
+        },
+        "Streams/chat": {
+            "displayType": "разговор",
+            "description": "разговор между потребители, с история"
+        },
+        "Streams/webrtc": {
+            "displayType": "Обаждане в реално време",
+            "description": "видео / аудио разговор в реално време"
         }
     }
 }

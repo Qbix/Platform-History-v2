@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Lỗi trong: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Tin nhắn đến",
         "ManageEmailSubscriptions": "quản lý đăng ký email của bạn",
-        "IfUnsubscribe": "Nếu bạn muốn hủy đăng ký"
+        "IfUnsubscribe": "Nếu bạn muốn hủy đăng ký",
+        "Streams\/relatedTo\/Streams\/call": "Cuộc gọi mới bắt đầu trong {{toTitle}}",
+        "Streams\/relatedTo\/*": "Mới {{relationDisplayType}} trong {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Đã thêm vào {{toTitle}} dưới dạng {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} đã mời bạn đến {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} đã đăng một thông báo <em>{{message.fields.type}}<\/em> lên {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} đã đăng một thông báo <em>{{message.fields.type}}<\/em> lên {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} trong {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} trong {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "đã được đăng lên",
+                "byAvatar": "bởi {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "có {{message.instructions.fromDisplayType}} mới",
+                "byAvatar": "được thêm bởi {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Kích hoạt micrô",
             "cameraBtn": "Kích hoạt camera",
             "cameraAndMicrophoneBtn": "Bật máy ảnh và micrô"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Đã mời",
+            "description": "Hộp thư đến cho lời mời"
+        },
+        "Streams\/resource": {
+            "displayType": "Nguồn",
+            "description": "luồng để quản lý quyền truy cập vào tài nguyên và đăng thông báo về các bản cập nhật"
+        },
+        "Streams\/task": {
+            "displayType": "Bài tập",
+            "description": "nhiệm vụ được thực hiện bởi con người hoặc máy móc"
+        },
+        "Streams\/number": {
+            "displayType": "Con số",
+            "description": "số toán học"
+        },
+        "Streams\/date": {
+            "displayType": "Ngày",
+            "description": "ngày"
+        },
+        "Streams\/text": {
+            "displayType": "Bản văn",
+            "description": "thân văn bản"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Bản văn",
+            "description": "cơ thể nhỏ của văn bản"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Bản văn",
+            "description": "cơ thể vừa của văn bản"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Địa chỉ email",
+            "description": "địa chỉ email"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Số điện thoại",
+            "description": "số điện thoại"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "liên kết trên web"
+        },
+        "Streams\/image": {
+            "displayType": "Hình ảnh",
+            "description": "hình ảnh trực quan"
+        },
+        "Streams\/images": {
+            "displayType": "thư viện hình ảnh",
+            "description": "bộ sưu tập hình ảnh"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "một album mà các phương tiện truyền thông khác nhau có liên quan"
+        },
+        "Streams\/file": {
+            "displayType": "Tập tin",
+            "description": "tập tin tải lên"
+        },
+        "Streams\/audio": {
+            "displayType": "Clip âm thanh",
+            "description": "clip âm thanh"
+        },
+        "Streams\/video": {
+            "displayType": "Video Clip",
+            "description": "video clip"
+        },
+        "Streams\/live": {
+            "displayType": "Phát trực tiếp",
+            "description": "âm thanh hoặc video trực tiếp"
+        },
+        "Streams\/category": {
+            "displayType": "thể loại",
+            "description": "một danh mục mà các luồng khác có thể liên quan"
+        },
+        "Streams\/participating": {
+            "displayType": "Chỉ số tham gia",
+            "description": "các luồng có liên quan \/ không liên quan đến điều này khi người dùng tham gia \/ rời khỏi"
+        },
+        "Streams\/interest": {
+            "displayType": "Quan tâm",
+            "description": "thể hiện sự quan tâm của người dùng trong một chủ đề nhất định"
+        },
+        "Streams\/incoming": {
+            "displayType": "Sắp có",
+            "description": "đích đến cho tin nhắn được gửi bởi người dùng khác"
+        },
+        "Streams\/chat": {
+            "displayType": "Cuộc hội thoại",
+            "description": "một cuộc trò chuyện giữa những người dùng, với lịch sử"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Cuộc gọi thời gian thực",
+            "description": "một cuộc gọi video \/ âm thanh thời gian thực"
         }
     }
 }

@@ -44,7 +44,10 @@
         "Streams/task/error": "Error durant: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Missatge entrant",
         "ManageEmailSubscriptions": "gestiona les vostres subscripcions de correu electrònic",
-        "IfUnsubscribe": "Si voleu donar-vos de baixa"
+        "IfUnsubscribe": "Si voleu donar-vos de baixa",
+        "Streams/relatedTo/Streams/call": "La nova trucada va començar a {{toTitle}}",
+        "Streams/relatedTo/*": "Nou {{relationDisplayType}} a {{toTitle}}",
+        "Streams/relatedFrom/*": "Afegit a {{toTitle}} com a {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} t&#39;ha convidat a {{inviteUrl}}",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} ha publicat un missatge <em>{{message.fields.type}}</em> a {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} ha publicat un missatge <em>{{message.fields.type}}</em> a {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} a {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} a {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "s&#39;ha publicat a",
+                "byAvatar": "per {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "té un {{message.instructions.fromDisplayType}} nou",
+                "byAvatar": "afegit per {{avatar.displayName}}"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "Activa el micròfon",
             "cameraBtn": "Habilita la càmera",
             "cameraAndMicrophoneBtn": "Activa la càmera i el micròfon"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "Convidat",
+            "description": "Bústia d&#39;entrada per a invitacions"
+        },
+        "Streams/resource": {
+            "displayType": "Recurs",
+            "description": "flux per gestionar l&#39;accés a un recurs i publicar missatges sobre actualitzacions"
+        },
+        "Streams/task": {
+            "displayType": "Tasca",
+            "description": "tasca a realitzar per humans o màquines"
+        },
+        "Streams/number": {
+            "displayType": "Número",
+            "description": "número matemàtic"
+        },
+        "Streams/date": {
+            "displayType": "Data",
+            "description": "data"
+        },
+        "Streams/text": {
+            "displayType": "Text",
+            "description": "cos de text"
+        },
+        "Streams/text/small": {
+            "displayType": "Text",
+            "description": "petit cos de text"
+        },
+        "Streams/text/medium": {
+            "displayType": "Text",
+            "description": "cos mitjà de text"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "Correu electrònic",
+            "description": "correu electrònic"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Número de telèfon",
+            "description": "número de telèfon"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "enllaç al web"
+        },
+        "Streams/image": {
+            "displayType": "Imatge",
+            "description": "imatge visual"
+        },
+        "Streams/images": {
+            "displayType": "Galeria d’Imatges",
+            "description": "galeria d’imatges"
+        },
+        "Streams/album": {
+            "displayType": "Àlbum",
+            "description": "un àlbum amb el qual es relacionen diversos mitjans"
+        },
+        "Streams/file": {
+            "displayType": "Dossier",
+            "description": "fitxer penjat"
+        },
+        "Streams/audio": {
+            "displayType": "Clip d&#39;àudio",
+            "description": "clip d’àudio"
+        },
+        "Streams/video": {
+            "displayType": "Clip de vídeo",
+            "description": "Clip de vídeo"
+        },
+        "Streams/live": {
+            "displayType": "Corrent en directe",
+            "description": "àudio o vídeo en directe"
+        },
+        "Streams/category": {
+            "displayType": "Categoria",
+            "description": "una categoria a la qual es poden relacionar altres fluxos"
+        },
+        "Streams/participating": {
+            "displayType": "Índex de participació",
+            "description": "els fluxos estan relacionats / no tenen relació amb això quan un usuari s&#39;uneix / surt"
+        },
+        "Streams/interest": {
+            "displayType": "Interès",
+            "description": "representa l’interès d’un usuari en un tema determinat"
+        },
+        "Streams/incoming": {
+            "displayType": "Entrant",
+            "description": "destinació dels missatges enviats per altres usuaris"
+        },
+        "Streams/chat": {
+            "displayType": "Conversa",
+            "description": "una conversa entre usuaris, amb història"
+        },
+        "Streams/webrtc": {
+            "displayType": "Trucada en temps real",
+            "description": "una trucada de vídeo / àudio en temps real"
         }
     }
 }

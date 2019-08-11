@@ -3,8 +3,8 @@
         "NewItemTitle": "නව අයිතමය"
     },
     "labels": {
-        "Streams\/invited": "මම ආරාධනා කළ අය",
-        "Streams\/invitedMe": "කවුද මට ආරාධනා කළේ"
+        "Streams/invited": "මම ආරාධනා කළ අය",
+        "Streams/invitedMe": "කවුද මට ආරාධනා කළේ"
     },
     "interests": {
         "Filter": "ඔබ භුක්ති විඳින්නේ කුමක්ද?",
@@ -76,7 +76,7 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} <em>{{message.fields.type}}<\/em> පණිවිඩයක් {{1001} to ට පළ කළේය."
+            "posted": "{{avatar.displayName}} <em>{{message.fields.type}}<\/em> පණිවිඩයක් {{1001} to ට පළ කළේය."
         },
         "text": {
             "body": "{{& url}} හි {{& call 'avatar.displayName'}}: {{& message.fields.content}}"

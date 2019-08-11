@@ -44,7 +44,10 @@
         "Streams/task/error": "દરમિયાન ભૂલ: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: આવનારી સંદેશ",
         "ManageEmailSubscriptions": "તમારા ઇમેઇલ સબ્સ્ક્રિપ્શન્સ મેનેજ કરો",
-        "IfUnsubscribe": "જો તમે અનસબ્સ્ક્રાઇબ કરવા માંગો છો"
+        "IfUnsubscribe": "જો તમે અનસબ્સ્ક્રાઇબ કરવા માંગો છો",
+        "Streams/relatedTo/Streams/call": "નવો ક Callલ {{999} in માં પ્રારંભ થયો",
+        "Streams/relatedTo/*": "New {1000}} માં નવું {999}",
+        "Streams/relatedFrom/*": "{{relationDisplayType}} તરીકે {9 999} to માં ઉમેર્યું"
     },
     "invite": {
         "messageContent": "{{displayName}} તમને {{inviteUrl}} માં આમંત્રિત કર્યા છે",
@@ -83,10 +86,18 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} એ <em>{{message.fields.type}}</em> સંદેશ {{stream.fields.title}} પર પોસ્ટ કર્યો"
+            "posted": "{{avatar.displayName}} એ <em>{{message.fields.type}}</em> સંદેશ {{stream.fields.title}} પર પોસ્ટ કર્યો"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} માં {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} માં {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "પર પોસ્ટ કરાઈ છે",
+                "byAvatar": "{{999} by દ્વારા"
+            },
+            "relatedTo": {
+                "hasANew": "નવું {9 999} has છે",
+                "byAvatar": "{{999} by દ્વારા ઉમેર્યું"
+            }
         }
     },
     "followup": {
@@ -116,6 +127,104 @@
             "microphoneBtn": "માઇક્રોફોનને સક્ષમ કરો",
             "cameraBtn": "ક Cameraમેરો સક્ષમ કરો",
             "cameraAndMicrophoneBtn": "કેમેરા અને માઇક્રોફોનને સક્ષમ કરો"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "આમંત્રિત",
+            "description": "આમંત્રણો માટે ઇનબોક્સ"
+        },
+        "Streams/resource": {
+            "displayType": "સાધન",
+            "description": "કોઈ સંસાધનમાં manક્સેસ મેનેજ કરવા અને અપડેટ્સ વિશે સંદેશા પોસ્ટ કરવા માટે સ્ટ્રીમ"
+        },
+        "Streams/task": {
+            "displayType": "કાર્ય",
+            "description": "મનુષ્ય અથવા મશીનો દ્વારા કરવાનું કાર્ય"
+        },
+        "Streams/number": {
+            "displayType": "નંબર",
+            "description": "ગાણિતિક સંખ્યા"
+        },
+        "Streams/date": {
+            "displayType": "તારીખ",
+            "description": "તારીખ"
+        },
+        "Streams/text": {
+            "displayType": "ટેક્સ્ટ",
+            "description": "લખાણ મુખ્ય ભાગ"
+        },
+        "Streams/text/small": {
+            "displayType": "ટેક્સ્ટ",
+            "description": "લખાણ નાના ભાગ"
+        },
+        "Streams/text/medium": {
+            "displayType": "ટેક્સ્ટ",
+            "description": "લખાણ માધ્યમ મુખ્ય ભાગ"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "ઈ - મેઈલ સરનામું",
+            "description": "ઈ - મેઈલ સરનામું"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "ફોન નંબર",
+            "description": "ફોન નંબર"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "વેબ પર કડી"
+        },
+        "Streams/image": {
+            "displayType": "છબી",
+            "description": "દ્રશ્ય છબી"
+        },
+        "Streams/images": {
+            "displayType": "છબી ગેલેરી",
+            "description": "છબીઓ ગેલેરી"
+        },
+        "Streams/album": {
+            "displayType": "આલ્બમ",
+            "description": "આલ્બમ જેમાં વિવિધ માધ્યમો સંબંધિત છે"
+        },
+        "Streams/file": {
+            "displayType": "ફાઇલ",
+            "description": "અપલોડ કરેલી ફાઇલ"
+        },
+        "Streams/audio": {
+            "displayType": "Audioડિઓ ક્લિપ",
+            "description": "audioડિઓ ક્લિપ"
+        },
+        "Streams/video": {
+            "displayType": "વિડિઓ ક્લિપ",
+            "description": "વિડિઓ ક્લિપ"
+        },
+        "Streams/live": {
+            "displayType": "જીવંત પ્રવાહ",
+            "description": "જીવંત audioડિઓ અથવા વિડિઓ"
+        },
+        "Streams/category": {
+            "displayType": "કેટેગરી",
+            "description": "એવી કેટેગરી કે જેમાં અન્ય પ્રવાહો સંબંધિત હોઈ શકે"
+        },
+        "Streams/participating": {
+            "displayType": "સહભાગી અનુક્રમણિકા",
+            "description": "જ્યારે વપરાશકર્તા જોડાય છે / પાંદડા આવે છે ત્યારે સ્ટ્રીમ્સ આ સાથે સંબંધિત / અસંબંધિત હોય છે"
+        },
+        "Streams/interest": {
+            "displayType": "વ્યાજ",
+            "description": "ચોક્કસ વિષયમાં વપરાશકર્તાની રુચિ રજૂ કરે છે"
+        },
+        "Streams/incoming": {
+            "displayType": "ઇનકમિંગ",
+            "description": "અન્ય વપરાશકર્તાઓ દ્વારા મોકલેલા સંદેશા માટેની ગંતવ્ય"
+        },
+        "Streams/chat": {
+            "displayType": "વાતચીત",
+            "description": "ઇતિહાસ સાથે વપરાશકર્તાઓ વચ્ચે વાતચીત"
+        },
+        "Streams/webrtc": {
+            "displayType": "રીઅલ-ટાઇમ ક Callલ",
+            "description": "એક રીઅલ ટાઇમ વિડિઓ / audioડિઓ ક callલ"
         }
     }
 }

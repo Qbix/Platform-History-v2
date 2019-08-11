@@ -3,8 +3,8 @@
         "NewItemTitle": "Sehlooho se secha"
     },
     "labels": {
-        "Streams\/invited": "Batho bao ke ba memileng",
-        "Streams\/invitedMe": "Ke mang ea nketselitseng"
+        "Streams/invited": "Batho bao ke ba memileng",
+        "Streams/invitedMe": "Ke mang ea nketselitseng"
     },
     "interests": {
         "Filter": "U thabela eng?",
@@ -76,10 +76,10 @@
     },
     "message": {
         "html": {
-            "posted": "{{call 'avatar.displayName'}} e rometse <em>{{message.fields.type}}<\/em> molaetsa ho {{stream.fields.title}}"
+            "posted": "{{avatar.displayName}} e rometse <em>{{message.fields.type}}<\/em> molaetsa ho {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& call 'avatar.displayName'}} ka {{& url}}: {{& message.fields.content}}"
+            "body": "{{& avatar.displayName}} ka {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {
