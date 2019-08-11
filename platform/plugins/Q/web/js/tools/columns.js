@@ -660,16 +660,6 @@ Q.Tool.define("Q/columns", function(options) {
 						});
 					} else {
 						$cs.addClass('Q_overflow');
-						if (Q.info.isTouchscreen) {
-							Q.ensure(
-								window.overthrow, 
-								"{{Q}}/js/overthrow.js",
-								function () {
-									overthrow.scrollIndicatorClassName = 'Q_overflow';
-									overthrow.set();
-								}
-							)
-						}
 					}
 				} else if (o.scrollbarsAutoHide) {
 					$cs.plugin('Q/scrollbarsAutoHide', o.scrollbarsAutoHide);
