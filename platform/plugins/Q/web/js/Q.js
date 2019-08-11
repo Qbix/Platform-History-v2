@@ -6603,10 +6603,9 @@ Q.request = function (url, slotNames, callback, options) {
 			status = Q.isInteger(status) ? status : null;
 			if (this.response) {
 				var data = JSON.parse(this.response);
-				if (data.message) {
-					msg = data.message;
-				}
-			} else {
+				msg = Q.getObject(['errors', 0, 'message'], data);
+			}
+			if (!msg) {
 				var defaultError = status ? Q.text.Q.request.error : Q.text.Q.request.canceled;
 				msg = (msg || Q.text.Q.request[status] || defaultError)
 					.interpolate({'status': status, 'url': url})
