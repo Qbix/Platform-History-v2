@@ -74,14 +74,6 @@
             "text": "تاسو ته بلنه ورکړل شوې ده. {{ClickOrTap}} دلته د منلو او ګډون لپاره دلته."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} يو <em>{{message.fields.type}}<\/em> پېغام وليکئ {{stream.fields.title}} ته"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} په {{& url}} کې: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "دعوت زموږ د شمیرې څخه لیږل کیږي، کوم چې ستاسو ملګري لا تر اوسه پیژني. د چټک متن سره تعقیب کړئ چې دوی ته اجازه درکړي چې تاسو ته بلنه درکړل شي، او له هغوی څخه یې غوښتنه وکړه چې دا لینک کلیک وکړئ.",

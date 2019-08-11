@@ -74,14 +74,6 @@
             "text": "Mwapitanidwa. {{ClickOrTap}} apa kulandira ndi kujowina."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} atumiza uthenga <em>{{message.fields.type}}<\/em> kwa {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} mu {{}}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Oitanidwa akutumizidwa kuchokera ku chiwerengero chathu, chomwe anzanu sadziwa. Tsatirani ndi malemba ofulumira kuti awadziwitse kuyitanidwa kukuchokera kwa inu, kuwapempha kuti asindikize kulumikizana.",

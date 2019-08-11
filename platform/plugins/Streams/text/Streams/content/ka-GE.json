@@ -84,22 +84,6 @@
             "text": "მიწვეული ხართ {{ClickOrTap}} აქ მიიღოს და შეუერთდება."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} <em>{{100}}</em> - ზე {{1001}"
-        },
-        "text": {
-            "body": "{{9}} {{& url}} - ში: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "გამოქვეყნებულია",
-                "byAvatar": "მიერ 99 999}}"
-            },
-            "relatedTo": {
-                "hasANew": "აქვს ახალი {999}}",
-                "byAvatar": "დაამატა {999}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "გამოგზავნილია ჩვენი ნომერი, რომელიც თქვენს მეგობრებს ჯერ არ ცნობენ. დაიცავით სწრაფი ტექსტი, რათა მათ იცოდნენ, რომ მოწვევა მოვიდა თქვენგან, სთხოვეთ მათ დააკავშირონ ბმული.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "რეალურ დროში ზარი",
             "description": "რეალურ დროში ვიდეო / აუდიო ზარი"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "99 99 999}} გამოქვეყნდა <em>{{message.fields.type}}</em> შეტყობინება} 1 1001 {}"
+        },
+        "text": {
+            "commentedOn": "დააკომენტარა",
+            "in": "შიგნით",
+            "body": "99 99 999}} in {{& url}}: {1001}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "გამოქვეყნებულია",
+                "byAvatar": "მიერ 99 999}}"
+            },
+            "relatedTo": {
+                "hasANew": "აქვს ახალი {999}}",
+                "byAvatar": "დაამატა {999}}"
+            }
         }
     }
 }

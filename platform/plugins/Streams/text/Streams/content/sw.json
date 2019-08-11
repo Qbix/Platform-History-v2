@@ -84,22 +84,6 @@
             "text": "Umealikwa. {{ClickOrTap}} hapa kukubali na kujiunga."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} imesa ujumbe <em>{{message.fields.type}}<\/em> kwa {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} katika {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "imetumwa kwa",
-                "byAvatar": "na {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "ina mpya {{message.instructions.fromDisplayType}}",
-                "byAvatar": "imeongezwa na {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Mwaliko hutumwa kutoka kwa nambari yetu, ambayo marafiki wako bado hawajui. Fuatilia na maandishi ya haraka ili kuwawezesha kujua mwaliko ulikuja kutoka kwako, ukawaomba kubofya kiungo.",
@@ -225,6 +209,24 @@
         "Streams\/webrtc": {
             "displayType": "Simu ya Wakati wa kweli",
             "description": "simu ya video ya wakati \/ sauti ya sauti"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "alitumia ujumbe <em>{{message.fields.type}}<\/em> kwa {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "alitoa maoni juu ya",
+            "in": "ndani",
+            "body": "katika {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "imetumwa kwa",
+                "byAvatar": "na {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ina mpya {{message.instructions.fromDisplayType}}",
+                "byAvatar": "imeongezwa na {{avatar.displayName}}"
+            }
         }
     }
 }

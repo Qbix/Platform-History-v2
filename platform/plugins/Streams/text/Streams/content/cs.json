@@ -84,22 +84,6 @@
             "text": "Byli jste pozváni. {{ClickOrTap}} zde přijměte a připojte se."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} odeslala <em>{{message.fields.type}}<\/em> zprávu {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} v {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "byl přidán do",
-                "byAvatar": "o {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "má nový {{message.instructions.fromDisplayType}}",
-                "byAvatar": "přidal {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Pozvánky jsou zasílány z našeho čísla, které vaši přátelé ještě nepoznají. Následujte rychlý text a dejte jim vědět, že pozvání přišlo od vás, a požádejte je, aby klikli na odkaz.",
@@ -225,6 +209,24 @@
         "Streams\/webrtc": {
             "displayType": "Hovor v reálném čase",
             "description": "video \/ audio volání v reálném čase"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "zveřejnil <em>{{message.fields.type}}<\/em> zprávu na {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "okomentoval",
+            "in": "v",
+            "body": "v {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "byl přidán do",
+                "byAvatar": "o {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "má nový {{message.instructions.fromDisplayType}}",
+                "byAvatar": "přidal {{avatar.displayName}}"
+            }
         }
     }
 }

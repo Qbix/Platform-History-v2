@@ -84,22 +84,6 @@
             "text": "你被邀请了。 {{ClickOrTap}}在这里接受并加入。"
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}}向{{stream.fields.title}}发布了<em>{{message.fields.type}}条</em>消息"
-        },
-        "text": {
-            "body": "{{& url}}中的{{& call 'avatar.displayName'}}：{{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "已发布到",
-                "byAvatar": "{{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "有一个新的{{message.instructions.fromDisplayType}}",
-                "byAvatar": "由{{avatar.displayName}}添加"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "邀请是从我们的号码发送的，您的朋友尚未认出。跟进一个快速文本，让他们知道您的邀请，要求他们点击链接。",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "实时通话",
             "description": "实时视频/音频通话"
+        }
+    },
+    "messages": {
+        "html": {
+            "body": "向{{stream.fields.title}}发布了<em>{{message.fields.type}}条</em>消息"
+        },
+        "text": {
+            "commentedOn": "评论说",
+            "in": "在",
+            "body": "{{& url}}中的{{& avatar.displayName}}：{{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "已发布到",
+                "byAvatar": "{{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "有一个新的{{message.instructions.fromDisplayType}}",
+                "byAvatar": "由{{avatar.displayName}}添加"
+            }
         }
     }
 }

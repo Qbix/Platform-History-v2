@@ -74,14 +74,6 @@
             "text": "Vos invitatus ab eo. {{CMXCIX}} accipere et hic adiungere."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{CMXCIX} <em>{a} {missae M} {MI}<\/em> {ad}}"
-        },
-        "text": {
-            "body": "{{CMXCIX} {{in}} M} {{MI}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Mittatur nobis invitet qui nondum agnoscunt tuos. Post a velox apud se illud scire ad invitationem ergo a te factum est, rogabat ut click in link.",

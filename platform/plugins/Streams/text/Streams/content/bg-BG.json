@@ -84,22 +84,6 @@
             "text": "Бяхте поканени. {{ClickOrTap}} тук, за да приеме и да се присъедини."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} публикува <em>{{message.fields.type}}</em> съобщение до {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} в {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "е публикувано до",
-                "byAvatar": "от {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "има нов {{message.instructions.fromDisplayType}}",
-                "byAvatar": "добавено от {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Поканите се изпращат от нашия номер, които вашите приятели все още не познават. Следвайте бърз текст, за да знаете, че поканата дойде от вас, като ги помолите да кликнат върху връзката.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "Обаждане в реално време",
             "description": "видео / аудио разговор в реално време"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "публикува <em>{{message.fields.type}}</em> съобщение до {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "коментира",
+            "in": "в",
+            "body": "в {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "е публикувано до",
+                "byAvatar": "от {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "има нов {{message.instructions.fromDisplayType}}",
+                "byAvatar": "добавено от {{avatar.displayName}}"
+            }
         }
     }
 }

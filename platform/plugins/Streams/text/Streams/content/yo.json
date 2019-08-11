@@ -74,14 +74,6 @@
             "text": "O ti pe. {{ClickOrTap}} nibi lati gba ati darapo."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} firanṣẹ ifiranṣẹ <em>{{message.fields.type}}<\/em> si {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} ni {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Awọn ipe ni a fi ranṣẹ lati inu nọmba wa, ti awọn ọrẹ rẹ ko iti mọ. Tẹle pẹlu ọrọ ti o yara lati jẹ ki wọn mọ pe pipe si lati ọdọ rẹ, pe wọn lati tẹ ọna asopọ naa.",

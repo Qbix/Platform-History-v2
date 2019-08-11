@@ -84,22 +84,6 @@
             "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} posted a <em>{{message.fields.type}}</em> message to {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} in {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "has a new {{message.instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
@@ -222,6 +206,24 @@
         "Streams/webrtc": {
             "displayType": "Real-Time Call",
             "description": "a real time video/audio call"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "posted a <em>{{message.fields.type}}</em> message to {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "commented on",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "has a new {{message.instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
         }
     }
 }

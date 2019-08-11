@@ -74,14 +74,6 @@
             "text": "Iwe wakokwa. Ikozvino kugamuchira nekubatana."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{}} <em>{}}<\/em> {}} <em>{}}<\/em> {}"
-        },
-        "text": {
-            "body": "1000 1000 1000 1000,"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Kukokwa kunotumirwa kubva kunhamba yedu, iyo shamwari dzako dzisati dzaziva. Dzokorora nemagwaro matsva kuitira kuti vazive kukokwa kwakabva kwamuri, vachivakumbira kuti vakanise kubatanidza.",

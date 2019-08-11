@@ -84,22 +84,6 @@
             "text": "הוזמנת. {{ClickOrTap}} כאן כדי לקבל ולהצטרף."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} פרסם הודעה <em>{{message.fields.type}}<\/em> ל- {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} ב- {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "פורסם ב-",
-                "byAvatar": "מאת {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "יש {{message.instructions.fromDisplayType}} חדש",
-                "byAvatar": "נוסף על ידי {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "ההזמנות נשלחות מהמספר שלנו, שהחברים שלך עדיין לא מזהים. עקוב אחר טקסט קצר כדי להודיע להם על ההזמנה שהגיעה ממך, ולבקש מהם ללחוץ על הקישור.",
@@ -222,6 +206,24 @@
         "Streams\/webrtc": {
             "displayType": "שיחה בזמן אמת",
             "description": "שיחת וידאו \/ שמע בזמן אמת"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "פרסמה הודעה <em>{{message.fields.type}}<\/em> ל- {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "הגיב על",
+            "in": "בתוך",
+            "body": "ב- {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "פורסם ב-",
+                "byAvatar": "מאת {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "יש {{message.instructions.fromDisplayType}} חדש",
+                "byAvatar": "נוסף על ידי {{avatar.displayName}}"
+            }
         }
     }
 }

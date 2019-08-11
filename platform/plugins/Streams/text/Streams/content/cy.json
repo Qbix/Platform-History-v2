@@ -84,22 +84,6 @@
             "text": "Fe&#39;ch gwahoddwyd. {{ClickOrTap}} yma i dderbyn ac ymuno."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} postio neges <em>{{message.fields.type}}<\/em> i {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} yn {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "wedi ei bostio i",
-                "byAvatar": "gan {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "mae ganddo {{message.instructions.fromDisplayType}} newydd",
-                "byAvatar": "ychwanegwyd gan {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Anfonir gwahoddiadau o&#39;n rhif ni, nad yw&#39;ch ffrindiau yn eu hadnabod eto. Dilynwch chi gyda thestun cyflym i roi gwybod iddynt y daeth y gwahoddiad atoch chi, gan ofyn iddynt glicio ar y ddolen.",
@@ -225,6 +209,24 @@
         "Streams\/webrtc": {
             "displayType": "Galwad Amser Real",
             "description": "galwad fideo \/ sain amser real"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "Postiodd {{avatar.displayName}} neges <em>{{message.fields.type}}<\/em> i {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "sylwadau ar",
+            "in": "yn",
+            "body": "yn {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "wedi ei bostio i",
+                "byAvatar": "gan {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "mae ganddo {{message.instructions.fromDisplayType}} newydd",
+                "byAvatar": "ychwanegwyd gan {{avatar.displayName}}"
+            }
         }
     }
 }

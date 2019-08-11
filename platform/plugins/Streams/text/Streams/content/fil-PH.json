@@ -84,22 +84,6 @@
             "text": "Inanyayahan ka. {{ClickOrTap}} dito upang tanggapin at sumali."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} nai-post ang isang <em>{{message.fields.type}} na</em> mensahe sa {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} sa {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "nai-post sa",
-                "byAvatar": "sa pamamagitan ng {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "ay may isang bagong {{message.instructions.fromDisplayType}}",
-                "byAvatar": "idinagdag ni {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Ang mga paanyaya ay ipinadala mula sa aming numero, na hindi pa nakikilala ng iyong mga kaibigan. Sundin ang isang mabilis na teksto upang ipaalam sa kanila na ang imbitasyon ay nagmula sa iyo, na hinihiling sa kanila na i-click ang link.",
@@ -222,6 +206,24 @@
         "Streams/webrtc": {
             "displayType": "Real-Time Call",
             "description": "isang real time na tawag sa video / audio"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "Ang {{avatar.displayName}} ay nag-post ng isang <em>{{message.fields.type}} na</em> mensahe sa {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "nagkomento sa",
+            "in": "sa",
+            "body": "sa {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "nai-post sa",
+                "byAvatar": "sa pamamagitan ng {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ay may isang bagong {{message.instructions.fromDisplayType}}",
+                "byAvatar": "idinagdag ni {{avatar.displayName}}"
+            }
         }
     }
 }

@@ -84,22 +84,6 @@
             "text": "Pozvani ste. {{ClickOrTap}} ovdje da prihvatite i pridružite se."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} je postavio <em>{{message.fields.type}}<\/em> poruku na {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} u {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "objavljeno je u",
-                "byAvatar": "do {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "ima novi {{message.instructions.fromDisplayType}}",
-                "byAvatar": "dodao {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Pozivnice se šalju s našeg broja, koje vaši prijatelji još ne prepoznaju. Nastavite s brzim tekstom kako biste im javili da je poziv stigao od vas i zamolite ih da kliknu na vezu.",
@@ -225,6 +209,24 @@
         "Streams\/webrtc": {
             "displayType": "Poziv u stvarnom vremenu",
             "description": "video \/ audio poziv u stvarnom vremenu"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "objavio je <em>{{message.fields.type}}<\/em> poruku na {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "komentirao na",
+            "in": "u",
+            "body": "u {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "objavljeno je u",
+                "byAvatar": "do {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ima novi {{message.instructions.fromDisplayType}}",
+                "byAvatar": "dodao {{avatar.displayName}}"
+            }
         }
     }
 }

@@ -74,14 +74,6 @@
             "text": "Koj tau raug caw tuaj lawm. {{ClickOrTap}} nov los txais thiab koom nrog."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} muab lo lus <em>{{message.fields.type}}<\/em> rau {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} hauv {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Caw raug xa tawm ntawm peb tus xov tooj, uas koj cov phooj ywg tsis tau pom dua. Ua raws li cov ntawv ceev cia qhia rau lawv paub tias qhov kev caw tuaj ntawm koj, kom lawv nias qhov txuas.",

@@ -80,7 +80,7 @@ if (empty($options['format'])) {
 if (!empty($options['google-format'])) {
 	$options['google-format'] = in_array($options['google-format'], array('text', 'html')) ? $options['google-format'] : 'html';
 } else {
-	$options['google-format'] = 'html';
+	$options['google-format']) = 'html';
 };
 $app = isset($options['app']) || isset($options['all']);
 if (isset($options['plugins']) or isset($options['all'])) {
@@ -95,7 +95,7 @@ foreach ($plugins as $plugin) {
 	$PLUGIN_DIR = constant($PLUGIN . '_PLUGIN_DIR');
 	foreach (glob($PLUGIN_DIR . DS . 'text' . DS . '*') as $textFolder) {
 		$options['in'] = $options['out'] = $textFolder;
-		echo "Translating $textFolder\n";
+		echo PHP_EOL . PHP_EOL . "Translating $textFolder" . PHP_EOL;
 		$translate = new Q_Translate($options);
 		$translate->saveAll();
 	}

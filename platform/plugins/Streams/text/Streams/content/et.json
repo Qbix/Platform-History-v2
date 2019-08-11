@@ -84,22 +84,6 @@
             "text": "Teid on kutsutud. {{ClickOrTap}} siin, et nõustuda ja liituda."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} postitas <em>{{message.fields.type}}<\/em> sõnumi {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "on postitatud",
-                "byAvatar": "autor: {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "omab uut {{message.instructions.fromDisplayType}}",
-                "byAvatar": "lisas {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Kutsed saadetakse meie numbrist, mida teie sõbrad veel ei tunne. Jälgige kiiret teksti, et teada saada, et kutse tuli sinult, paludes neil linki klõpsata.",
@@ -225,6 +209,24 @@
         "Streams\/webrtc": {
             "displayType": "Reaalajas kõne",
             "description": "reaalajas video- \/ helikõne"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "postitas <em>{{message.fields.type}}<\/em> teate {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "kommenteeris",
+            "in": "sisse",
+            "body": "asukohas {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "on postitatud",
+                "byAvatar": "autor: {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "omab uut {{message.instructions.fromDisplayType}}",
+                "byAvatar": "lisas {{avatar.displayName}}"
+            }
         }
     }
 }

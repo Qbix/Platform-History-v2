@@ -84,22 +84,6 @@
             "text": "Foi invitado. {{ClickOrTap}} aquí para aceptar e unirse."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} publicou unha mensaxe <em>{{message.fields.type}}</em> en {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} en {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "foi publicado en",
-                "byAvatar": "por {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "ten un novo {{message.instructions.fromDisplayType}}",
-                "byAvatar": "engadido por {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "As invitacións son enviadas a partir do noso número, que os teus amigos aínda non recoñecen. Fai un seguimento cun texto rápido para que saiban de que che veu a invitación, pedíndolles que fagan clic na ligazón.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "Chamada en tempo real",
             "description": "unha videochamada en tempo real"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "publicou unha mensaxe de <em>{{message.fields.type}}</em> en {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "comentou",
+            "in": "en",
+            "body": "en {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "foi publicado en",
+                "byAvatar": "por {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ten un novo {{message.instructions.fromDisplayType}}",
+                "byAvatar": "engadido por {{avatar.displayName}}"
+            }
         }
     }
 }

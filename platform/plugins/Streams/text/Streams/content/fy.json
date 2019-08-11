@@ -74,14 +74,6 @@
             "text": "Jo binne oanmeld. {{ClickOrTap}} hjir te akseptearjen en te gean."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} brocht in <em>{{message.fields.type}}<\/em> berjocht nei {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} yn {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Untfongen wurde út ús nûmere stjoerd, dy&#39;t jo freonen net werkenne. Folgje mei in fluchste tekst om se te wite litten hoe&#39;t de útnoeging fan jo kaam, en freegje har om de link te klikken.",

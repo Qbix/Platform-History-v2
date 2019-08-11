@@ -84,22 +84,6 @@
             "text": "మీరు ఆహ్వానించబడ్డారు. {{ClickOrTap}} ఇక్కడ అంగీకరించి చేరడానికి."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} {{stream.fields.title}} కు {{ <em>1000}}</em> సందేశాన్ని పోస్ట్ చేశారు"
-        },
-        "text": {
-            "body": "{{& url}} లో {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "కు పోస్ట్ చేయబడింది",
-                "byAvatar": "{{999} by ద్వారా"
-            },
-            "relatedTo": {
-                "hasANew": "క్రొత్త {{999} has కలిగి ఉంది",
-                "byAvatar": "by {999 by by చే జోడించబడింది"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "మీ స్నేహితులు ఇంకా గుర్తించని మా నంబర్ నుండి ఆహ్వానాలు పంపబడతాయి. లింక్ను క్లిక్ చేయమని వారిని అడుగుతూ, మీ నుండి వచ్చిన ఆహ్వానాన్ని మీకు తెలియజేయడానికి త్వరిత వచనాన్ని అనుసరించండి.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "రియల్ టైమ్ కాల్",
             "description": "రియల్ టైమ్ వీడియో / ఆడియో కాల్"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "<em>{{message.fields.type}}</em> సందేశాన్ని {{1001} to కు పోస్ట్ చేసింది"
+        },
+        "text": {
+            "commentedOn": "వ్యాఖ్యానించారు",
+            "in": "లో",
+            "body": "{{& url}} లో {{& avatar.displayName}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "కు పోస్ట్ చేయబడింది",
+                "byAvatar": "{{999} by ద్వారా"
+            },
+            "relatedTo": {
+                "hasANew": "క్రొత్త {{999} has కలిగి ఉంది",
+                "byAvatar": "by {999 by by చే జోడించబడింది"
+            }
         }
     }
 }

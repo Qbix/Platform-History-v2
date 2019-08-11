@@ -74,14 +74,6 @@
             "text": "ທ່ານໄດ້ຮັບເຊີນ. {{ClickOrTap}} ທີ່ນີ້ເພື່ອຍອມຮັບແລະເຂົ້າຮ່ວມ."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} ໄດ້ຂຽນຂໍ້ຄວາມ <em>{{message.fields.type}}<\/em> ກັບ {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} ໃນ {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "ການເຊີນທີ່ຖືກສົ່ງມາຈາກຈໍານວນຂອງພວກເຮົາ, ເຊິ່ງຫມູ່ເພື່ອນຂອງທ່ານຍັງບໍ່ໄດ້ຮັບຮູ້ເທື່ອ. ຕິດຕາມດ້ວຍຂໍ້ຄວາມໄວເພື່ອໃຫ້ພວກເຂົາຮູ້ວ່າການເຊີນມາຈາກທ່ານ, ຂໍໃຫ້ພວກເຂົາກົດການເຊື່ອມຕໍ່.",

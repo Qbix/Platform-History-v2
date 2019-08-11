@@ -84,22 +84,6 @@
             "text": "Sinut on kutsuttu. {{ClickOrTap}} täällä hyväksyä ja liittyä."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} julkaisi <em>{{message.fields.type}}<\/em> -viestin osoitteeseen {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "on lähetetty",
-                "byAvatar": "lähettäjä {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "on uusi {{message.instructions.fromDisplayType}}",
-                "byAvatar": "lisännyt {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Kutsut lähetetään numerostamme, jota ystäväsi eivät vielä tunnista. Seuraa nopeaa tekstiä, jotta he tietävät, että kutsu tuli sinulta, pyytäen heitä napsauttamaan linkkiä.",
@@ -225,6 +209,24 @@
         "Streams\/webrtc": {
             "displayType": "Reaaliaikainen puhelu",
             "description": "reaaliaikainen video- \/ äänipuhelu"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "lähetti <em>{{message.fields.type}}<\/em> -viestin {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "kommentoi",
+            "in": "sisään",
+            "body": "{{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "on lähetetty",
+                "byAvatar": "lähettäjä {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "on uusi {{message.instructions.fromDisplayType}}",
+                "byAvatar": "lisännyt {{avatar.displayName}}"
+            }
         }
     }
 }

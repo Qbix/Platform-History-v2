@@ -74,14 +74,6 @@
             "text": "Anda telah diundang. {{ClickOrTap}} di sini untuk menerima dan bergabung."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} mengeposkan pesan <em>{{message.fields.type}}<\/em> ke {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} dalam {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Undangan dikirim dari nomor kami, yang belum dikenali teman Anda. Tindak lanjuti dengan teks cepat untuk memberi tahu mereka bahwa undangan datang dari Anda, minta mereka mengklik tautan.",

@@ -84,22 +84,6 @@
             "text": "あなたが招待されました。ここで{{ClickOrTap}}を受け入れて参加してください。"
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}}が{{stream.fields.title}}に<em>{{message.fields.type}}<\/em>メッセージを投稿しました"
-        },
-        "text": {
-            "body": "{{& url}}の{{& call 'avatar.displayName'}}：{{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "に投稿されました",
-                "byAvatar": "{{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "新しい{{message.instructions.fromDisplayType}}があります",
-                "byAvatar": "{{avatar.displayName}}によって追加されました"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "招待状は私たちの番号から送信されます。あなたの友達はまだ認識していません。リンクをクリックするように依頼して、あなたからの招待状が届いたことを簡単なテキストでフォローアップします。",
@@ -225,6 +209,24 @@
         "Streams\/webrtc": {
             "displayType": "リアルタイム通話",
             "description": "リアルタイムのビデオ\/オーディオコール"
+        }
+    },
+    "messages": {
+        "html": {
+            "body": "が{{stream.fields.title}}に<em>{{message.fields.type}}<\/em>メッセージを投稿しました"
+        },
+        "text": {
+            "commentedOn": "コメントした",
+            "in": "に",
+            "body": "{{& url}}の{{& avatar.displayName}}：{{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "に投稿されました",
+                "byAvatar": "{{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "新しい{{message.instructions.fromDisplayType}}があります",
+                "byAvatar": "{{avatar.displayName}}によって追加されました"
+            }
         }
     }
 }

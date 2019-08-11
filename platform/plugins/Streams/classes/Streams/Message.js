@@ -250,7 +250,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		stream: stream,
 		message: this,
 		instructions: instructions,
-		avatar: a,
+		avatar: avatar,
 		config: Q.Config.getAll()
 	};
 	// set baseUrl

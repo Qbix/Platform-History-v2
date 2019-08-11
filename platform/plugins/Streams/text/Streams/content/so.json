@@ -74,14 +74,6 @@
             "text": "Waxaa lagugu casuumey. {{ClickOrTap}} halkan si aad u aqbalo una biirto."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} fariin <em>{{1000}<\/em> fariin {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Soo-casuumaad ayaa laga soo diraa lambarkayaga, kuwaas oo saaxiibadaa aysan weli aqoonsan. La soco qoraal deg-deg ah si aad ugu sheegto martiqaadku inuu kaa yimid, adoo waydiinaya inay isku xiraan link.",

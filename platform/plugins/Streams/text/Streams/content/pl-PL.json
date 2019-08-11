@@ -84,22 +84,6 @@
             "text": "Zostałeś zaproszony. {{ClickOrTap}} tutaj, aby zaakceptować i dołączyć."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} opublikował wiadomość <em>{{message.fields.type}}</em> na {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} w {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "został wysłany do",
-                "byAvatar": "autor: {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "ma nowy {{message.instructions.fromDisplayType}}",
-                "byAvatar": "dodane przez {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Zaproszenia są wysyłane z naszego numeru, którego Twoi znajomi jeszcze nie rozpoznają. Wykonaj szybki tekst, aby poinformować ich, że zaproszenie pochodzi od Ciebie, prosząc o kliknięcie linku.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "Połączenie w czasie rzeczywistym",
             "description": "połączenie wideo / audio w czasie rzeczywistym"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "opublikował wiadomość <em>{{message.fields.type}}</em> na {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "skomentował",
+            "in": "w",
+            "body": "w {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "został wysłany do",
+                "byAvatar": "autor: {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ma nowy {{message.instructions.fromDisplayType}}",
+                "byAvatar": "dodane przez {{avatar.displayName}}"
+            }
         }
     }
 }

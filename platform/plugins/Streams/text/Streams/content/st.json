@@ -74,14 +74,6 @@
             "text": "U memetsoe. {{ClickOrTap}} mona ho amohela le ho ikopanya."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} e rometse <em>{{message.fields.type}}<\/em> molaetsa ho {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} ka {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Memo e romeloa ho tloha palo ea rona, eo metsoalle ea hau e sa e tsebeng. Latela ka temana e potlakileng ho ba tsebisa memo eo e tsoa ho uena, u ba kōpe hore ba tobetse konteraka.",

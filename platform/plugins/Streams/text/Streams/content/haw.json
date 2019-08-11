@@ -74,14 +74,6 @@
             "text": "Ua konoʻiaʻoe. {{ClickOrTap}} maʻaneʻi eʻae a hoʻohui."
         }
     },
-    "message": {
-        "html": {
-            "posted": "Ua hoʻohanaʻo {{call 'avatar.displayName'}} i ka leka <em>{{message.fields.type}}<\/em> i {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} i {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Hoʻounaʻia nā kono mai kā mākou helu, nā mea iʻikeʻoleʻia e kou mau hoaaloha. E hahai i kahi wikiwiki e hoʻomaopopo iā lākou ua hoʻouna mai ka kono mai iāʻoe, e noi ana iā lākou e kaomi i ka loulou.",

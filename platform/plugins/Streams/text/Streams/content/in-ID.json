@@ -84,22 +84,6 @@
             "text": "Anda telah diundang. {{ClickOrTap}} di sini untuk menerima dan bergabung."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} mengeposkan pesan <em>{{message.fields.type}}</em> ke {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} dalam {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "telah diposkan ke",
-                "byAvatar": "oleh {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "memiliki {{message.instructions.fromDisplayType}} baru",
-                "byAvatar": "ditambahkan oleh {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Undangan dikirim dari nomor kami, yang belum dikenali teman Anda. Tindak lanjuti dengan teks cepat untuk memberi tahu mereka bahwa undangan datang dari Anda, meminta mereka mengklik tautan.",
@@ -222,6 +206,24 @@
         "Streams/webrtc": {
             "displayType": "Panggilan Real-Time",
             "description": "panggilan video / audio real time"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "mengeposkan pesan <em>{{message.fields.type}}</em> ke {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "berkomentar pada",
+            "in": "di",
+            "body": "dalam {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "telah diposkan ke",
+                "byAvatar": "oleh {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "memiliki {{message.instructions.fromDisplayType}} baru",
+                "byAvatar": "ditambahkan oleh {{avatar.displayName}}"
+            }
         }
     }
 }

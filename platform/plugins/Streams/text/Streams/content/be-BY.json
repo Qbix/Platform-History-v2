@@ -84,22 +84,6 @@
             "text": "Вы былі запрошаны. {{ClickOrTap}} тут, каб прыняць і далучыцца."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} размясціў <em>{{message.fields.type}}</em> паведамленне для {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} у {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "быў апублікаваны ў",
-                "byAvatar": "па {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "мае новы {{message.instructions.fromDisplayType}}",
-                "byAvatar": "дадаў {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Прапаную адсылаецца з нашага колькасці, якія вашыя сябры яшчэ не прызнаюць. Наступны з хуткім тэкстам, каб паведаміць ім прыйшло запрашэнне ад вас, з просьбай націснуць на спасылку.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "Выклік у рэжыме рэальнага часу",
             "description": "відэа / аўдыязванок у рэжыме рэальнага часу"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "адправіў паведамленне <em>{{message.fields.type}} на</em> паведамленне {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "пракаментаваў",
+            "in": "ў",
+            "body": "ў {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "быў апублікаваны ў",
+                "byAvatar": "па {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "мае новы {{message.instructions.fromDisplayType}}",
+                "byAvatar": "дадаў {{avatar.displayName}}"
+            }
         }
     }
 }

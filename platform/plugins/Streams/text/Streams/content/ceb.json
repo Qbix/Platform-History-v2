@@ -74,14 +74,6 @@
             "text": "Gidapit ka. {{ClickOrTap}} dinhi aron dawaton ug apilan."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} ang usa ka <em>{{message.fields.type}} nga<\/em> mensahe ngadto sa {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} sa {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Ang mga imbitasyon gipadala gikan sa among numero, nga wala pa mailhi sa imong mga higala. Susiha ang usa ka dali nga teksto aron mahibal-an nila nga ang imbitasyon gikan kanimo, naghangyo kanila sa pag-klik sa link.",

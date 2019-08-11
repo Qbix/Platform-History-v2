@@ -84,22 +84,6 @@
             "text": "Davet edildin. Kabul etmek ve katılmak için {{ClickOrTap}} burada."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}}, {{stream.fields.title}} adresine {{ <em>1000}} bir</em> mesaj gönderdi."
-        },
-        "text": {
-            "body": "{{& url}} {{& call 'avatar.displayName'}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "adresine gönderildi",
-                "byAvatar": "{{avatar.displayName}} tarafından"
-            },
-            "relatedTo": {
-                "hasANew": "yeni bir {{message.instructions.fromDisplayType}} var",
-                "byAvatar": "{{avatar.displayName}} tarafından eklendi"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Davetiyeler, arkadaşlarınızın henüz tanımadığı numaramızdan gönderilir. Davetiyenin sizden geldiğini bildirmek için hızlı bir metinle takip edin ve bağlantıyı tıklatmalarını isteyin.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "Gerçek Zamanlı Çağrı",
             "description": "gerçek zamanlı video / sesli arama"
+        }
+    },
+    "messages": {
+        "html": {
+            "body": ", {{stream.fields.title}} adresine {{ <em>1000}} bir</em> mesaj gönderdi."
+        },
+        "text": {
+            "commentedOn": "hakkında yorum yaptı",
+            "in": "içinde",
+            "body": "{{& url}} içindeki {{& avatar.displayName}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "adresine gönderildi",
+                "byAvatar": "{{avatar.displayName}} tarafından"
+            },
+            "relatedTo": {
+                "hasANew": "yeni bir {{message.instructions.fromDisplayType}} var",
+                "byAvatar": "{{avatar.displayName}} tarafından eklendi"
+            }
         }
     }
 }

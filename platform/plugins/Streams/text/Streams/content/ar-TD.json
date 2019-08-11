@@ -84,22 +84,6 @@
             "text": "لقد تمت دعوتك. {{ClickOrTap}} هنا للقبول والانضمام."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} نشر رسالة <em>{{message.fields.type}}</em> إلى {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} في {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "تم نشر إلى",
-                "byAvatar": "بواسطة {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "لديه {{message.instructions.fromDisplayType}} جديد",
-                "byAvatar": "أضيفت بواسطة {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "يتم إرسال الدعوات من رقمنا ، والتي لم يتعرف عليها أصدقاؤك بعد. تابع بنص سريع لإعلامهم بأن الدعوة جاءت منك ، واطلب منهم النقر على الرابط.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "دعوة في الوقت الحقيقي",
             "description": "في الوقت الحقيقي مكالمة فيديو / الصوت"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "نشر رسالة <em>{{message.fields.type}}</em> على {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "علق على",
+            "in": "في",
+            "body": "في {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "تم نشر إلى",
+                "byAvatar": "بواسطة {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "لديه {{message.instructions.fromDisplayType}} جديد",
+                "byAvatar": "أضيفت بواسطة {{avatar.displayName}}"
+            }
         }
     }
 }

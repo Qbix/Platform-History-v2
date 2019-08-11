@@ -74,14 +74,6 @@
             "text": "Fhuair thu cuireadh. {{ClickOrTap}} an seo gus gabhail ris agus gabhail ris."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} air postadh <em>{{message.fields.type}}<\/em> teachdaireachd gu {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} ann an {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Bidh cuiridhean air an cur bhon àireimh againn, nach eil do charaidean ag aithneachadh fhathast. Lean ri teacsa luath gus innse dhaibh gun tàinig an cuireadh thugad, ag iarraidh orra briogadh air a ’cheangal.",

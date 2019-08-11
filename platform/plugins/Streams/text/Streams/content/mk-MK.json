@@ -84,22 +84,6 @@
             "text": "Сте биле поканети. {{ClickOrTap}} овде за да прифатите и да се придружите."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} испратени <em>{{message.fields.type}}</em> порака до {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} во {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "е објавено на",
-                "byAvatar": "од {999}}"
-            },
-            "relatedTo": {
-                "hasANew": "има нов 99 999}",
-                "byAvatar": "додаде од {999}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Поканите се испраќаат од нашиот број, кој вашите пријатели сеуште не ги препознаваат. Следете со брз текст за да ги известите дека поканата дојде од вас, барајќи од нив да кликнат на врската.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "Повик во реално време",
             "description": "видео / аудио повик во реално време"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "{99 999}} испрати порака од <em>{{1000}</em> to до 1 1001}}"
+        },
+        "text": {
+            "commentedOn": "коментираше",
+            "in": "во",
+            "body": "во {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "е објавено на",
+                "byAvatar": "од {999}}"
+            },
+            "relatedTo": {
+                "hasANew": "има нов 99 999}",
+                "byAvatar": "додаде од {999}}"
+            }
         }
     }
 }

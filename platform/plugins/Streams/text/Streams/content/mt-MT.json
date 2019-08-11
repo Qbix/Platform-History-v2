@@ -84,22 +84,6 @@
             "text": "Int ġejt mistiedna. {{ClickOrTap}} hawn biex taċċetta u tissieħeb."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} bagħat messaġġ <em>{{message.fields.type}}</em> lil {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} f &#39;{{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "ġie stazzjonat fuq",
-                "byAvatar": "minn {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "għandu {{message.instructions.fromDisplayType}} ġdid",
-                "byAvatar": "miżjud minn {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "L-istediniet jintbagħtu min-numru tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Segwitu b&#39;test rapidu biex tgħarrafhom mill-istedina ġiet mingħandek, u titlobhom ikklikkja l-link.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "Sejħa f&#39;ħin Reali",
             "description": "sejħa bil-vidjo / awdjo f&#39;ħin reali"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "bagħtu messaġġ <em>{{message.fields.type}}</em> lil {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "ikkummenta dwarha",
+            "in": "fi",
+            "body": "f&#39;{{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ġie stazzjonat fuq",
+                "byAvatar": "minn {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "għandu {{message.instructions.fromDisplayType}} ġdid",
+                "byAvatar": "miżjud minn {{avatar.displayName}}"
+            }
         }
     }
 }

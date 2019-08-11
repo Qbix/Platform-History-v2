@@ -82,12 +82,14 @@
             "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
-    "message": {
+    "messages": {
         "html": {
-            "posted": "{{avatar.displayName}} posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "body": "{{& avatar.displayName}} in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "has been posted to",
                 "byAvatar": "by {{avatar.displayName}}"

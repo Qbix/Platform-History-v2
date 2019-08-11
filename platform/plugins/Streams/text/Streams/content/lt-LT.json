@@ -84,22 +84,6 @@
             "text": "Jūs esate pakviestas. {{ClickOrTap}} čia priimti ir prisijungti."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} paskelbė <em>{{message.fields.type}}</em> pranešimą {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "buvo paskelbtas",
-                "byAvatar": "pateikė {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "turi naują {{message.instructions.fromDisplayType}}",
-                "byAvatar": "pridėjo {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Kvietimai siunčiami iš mūsų numerio, kurį jūsų draugai dar neatpažįsta. Atlikite greitą tekstą, kad jiems būtų žinoma, kad kvietimas buvo gautas iš jūsų, prašydamas jų spustelėti nuorodą.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "Skambinimas realiuoju laiku",
             "description": "realaus laiko vaizdo / garso skambutis"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "paskelbė <em>{{message.fields.type}}</em> pranešimą {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "pakomentavo",
+            "in": "į",
+            "body": "{{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "buvo paskelbtas",
+                "byAvatar": "pateikė {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "turi naują {{message.instructions.fromDisplayType}}",
+                "byAvatar": "pridėjo {{avatar.displayName}}"
+            }
         }
     }
 }

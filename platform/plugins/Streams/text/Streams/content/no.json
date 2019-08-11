@@ -74,14 +74,6 @@
             "text": "Du har blitt invitert. {{ClickOrTap}} her for å godta og bli med."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} postet en <em>{{message.fields.type}}<\/em> melding til {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} på {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Invitasjoner sendes fra vårt nummer, som vennene dine ikke kjenner igjen. Følg med en rask tekst for å fortelle dem at invitasjonen kom fra deg, og be dem om å klikke på linken.",

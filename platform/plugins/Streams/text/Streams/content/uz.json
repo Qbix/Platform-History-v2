@@ -74,14 +74,6 @@
             "text": "Sizni taklif qilishdi. {{ClickOrTap}} bu erda qabul va qo&#39;shilish uchun."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} uchun <em>{{message.fields.type}}<\/em> xabar chop {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& url}} da {{& call 'avatar.displayName'}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Do&#39;stlaringiz hali tanish bo&#39;lmagan raqamlarimizdan takliflar yuboriladi. Sizdan kelgan taklifnomani ularga havola etishni so&#39;rash uchun tezkor matn bilan kuzatib boring.",

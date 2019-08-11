@@ -74,14 +74,6 @@
             "text": "Դուք հրավիրվել եք: {{ClickOrTap}} այստեղ ընդունելու եւ միանալու համար:"
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} - <em>{{message.fields.type}}<\/em> հաղորդագրություն է ուղարկվել {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} {{& url}} - ում {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Հրավիրատոմսերը ուղարկվում են մեր թվից, որոնք ձեր ընկերները դեռեւս չեն ճանաչում: Հետեւեք արագ տեքստին, որպեսզի նրանք իմանան, որ հրավերն եկել է ձեզանից, խնդրելով սեղմել հղումը:",

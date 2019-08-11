@@ -74,14 +74,6 @@
             "text": "Pozvani ste. {{ClickOrTap}} ovde da prihvatim i pridružim se."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} je postavio <em>{{message.fields.type}}<\/em> poruku na {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} u {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Pozivi se šalju iz našeg broja, koje vaši prijatelji još ne prepoznaju. Nastavite sa kratkim tekstom da biste saznali da je poziv stigao od vas, tražeći od njih da kliknu na vezu.",

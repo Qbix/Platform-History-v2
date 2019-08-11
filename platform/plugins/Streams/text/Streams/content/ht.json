@@ -74,14 +74,6 @@
             "text": "Ou te envite. {{ClickOrTap}} isit la pou aksepte ak rantre nan."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} afiche yon <em>{{message.fields.type}}<\/em> mesaj bay {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} nan {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Envite yo voye soti nan nimewo nou an, ki zanmi ou pa ankò rekonèt. Swiv avèk yon tèks rapid fè yo konnen envitasyon an te soti nan ou, mande yo klike sou lyen an.",

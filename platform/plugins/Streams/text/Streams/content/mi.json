@@ -74,14 +74,6 @@
             "text": "Kua karangatia koe. {{ClickOrTap}} konei hei whakaae me te whakauru mai."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} te tuku i te <em>{{message.fields.type}}<\/em> karere ki {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} i {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Ka tukuna mai nga tono mai i to maatau nama, kaore i mohiohia e ou hoa. Whakamahia he korero tere kia mohio ai ratou kua tae mai te awhina mai ia koe, me te tono ia ratou ki te patene i te hononga.",

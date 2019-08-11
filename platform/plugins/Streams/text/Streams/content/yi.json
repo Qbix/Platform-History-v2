@@ -74,14 +74,6 @@
             "text": "איר האָט שוין פארבעטן. {{ClickOrTap}} דאָ צו אָננעמען און פאַרבינדן."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} האָט אַ <em>{{message.fields.type}}<\/em> אָנזאָג צו {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} אין {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "ינווייץ זענען געשיקט פון אונדזער נומער, וואָס דיין פריינט טאָן ניט נאָך דערקענען. גיי אַרויף מיט אַ שנעל טעקסט צו לאָזן זיי וויסן די ינווייטינג געקומען פון איר, אַסקינג זיי צו גיט די לינק.",

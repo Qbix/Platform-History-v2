@@ -84,22 +84,6 @@
             "text": "ನಿಮ್ಮನ್ನು ಆಹ್ವಾನಿಸಲಾಗಿದೆ. {{ClickOrTap}} ಇಲ್ಲಿ ಸ್ವೀಕರಿಸಲು ಮತ್ತು ಸೇರಲು."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} ಒಂದು <em>{{message.fields.type}}</em> ಸಂದೇಶವನ್ನು {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& url}} ನಲ್ಲಿ {{& call 'avatar.displayName'}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "ಗೆ ಪೋಸ್ಟ್ ಮಾಡಲಾಗಿದೆ",
-                "byAvatar": "{{999} by ನಿಂದ"
-            },
-            "relatedTo": {
-                "hasANew": "ಹೊಸ {{999} has ಅನ್ನು ಹೊಂದಿದೆ",
-                "byAvatar": "by {999 by by ನಿಂದ ಸೇರಿಸಲಾಗಿದೆ"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "ನಿಮ್ಮ ಸ್ನೇಹಿತರು ಇನ್ನೂ ಗುರುತಿಸದ ನಮ್ಮ ಸಂಖ್ಯೆಯಿಂದ ಆಹ್ವಾನಗಳನ್ನು ಕಳುಹಿಸಲಾಗುತ್ತದೆ. ಆಮಂತ್ರಣವು ನಿಮ್ಮಿಂದ ಬಂದಿದೆಯೆಂದು ತಿಳಿಸಲು ತ್ವರಿತ ಲಿಂಕ್ನೊಂದಿಗೆ ಅನುಸರಿಸಿ, ಲಿಂಕ್ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಲು ಅವರನ್ನು ಕೇಳಿಕೊಳ್ಳಿ.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "ರಿಯಲ್-ಟೈಮ್ ಕರೆ",
             "description": "ನೈಜ ಸಮಯದ ವೀಡಿಯೊ / ಆಡಿಯೊ ಕರೆ"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "<em>{{message.fields.type}}</em> ಸಂದೇಶವನ್ನು {{1001} to ಗೆ ಪೋಸ್ಟ್ ಮಾಡಿದೆ"
+        },
+        "text": {
+            "commentedOn": "ಕಾಮೆಂಟ್ ಮಾಡಿದ್ದಾರೆ",
+            "in": "ಸೈನ್ ಇನ್",
+            "body": "{{& url}} ನಲ್ಲಿ {{& avatar.displayName}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ಗೆ ಪೋಸ್ಟ್ ಮಾಡಲಾಗಿದೆ",
+                "byAvatar": "{{999} by ನಿಂದ"
+            },
+            "relatedTo": {
+                "hasANew": "ಹೊಸ {{999} has ಅನ್ನು ಹೊಂದಿದೆ",
+                "byAvatar": "by {999 by by ನಿಂದ ಸೇರಿಸಲಾಗಿದೆ"
+            }
         }
     }
 }

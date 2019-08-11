@@ -74,14 +74,6 @@
             "text": "Nasaina ianao. {{ClickOrTap}} eto mba hanaiky sy hiaraka."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} dia nandefa hafatra <em>{{message.fields.type}}<\/em> ho an&#39;ny {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} amin&#39;ny {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Ny fanasana dia alefa amin&#39;ny isa misy anay, izay mbola tsy fantatrao ireo namanao. Araho amin&#39;ny lahatsoratra haingana mba hamela azy ireo fa ny fanasana dia avy aminao ary mangataka azy ireo mba hanindry ny rohy.",

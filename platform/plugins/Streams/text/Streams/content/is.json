@@ -84,22 +84,6 @@
             "text": "Þú hefur verið boðið. {{ClickOrTap}} hér til að samþykkja og taka þátt."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} sendi <em>{{message.fields.type}}<\/em> skilaboð til {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} í {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "hefur verið sent til",
-                "byAvatar": "eftir {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "er með nýjan {{message.instructions.fromDisplayType}}",
-                "byAvatar": "bætt við af {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Boð eru send frá númerinu okkar, sem vinir þínir þekkja ekki ennþá. Fylgdu með skjótum texta til að láta þá vita að boðið kom frá þér og biðja þá að smella á tengilinn.",
@@ -225,6 +209,24 @@
         "Streams\/webrtc": {
             "displayType": "Rauntíma símtal",
             "description": "rauntíma vídeó \/ hljóð símtal"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "sendi <em>{{message.fields.type}}<\/em> skilaboð á {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "gerði athugasemdir við",
+            "in": "í",
+            "body": "í {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "hefur verið sent til",
+                "byAvatar": "eftir {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "er með nýjan {{message.instructions.fromDisplayType}}",
+                "byAvatar": "bætt við af {{avatar.displayName}}"
+            }
         }
     }
 }

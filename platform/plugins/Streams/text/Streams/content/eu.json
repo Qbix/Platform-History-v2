@@ -84,22 +84,6 @@
             "text": "Gonbidatu zaitu. {{ClickOrTap}} hemen onartzeko eta elkartzeko."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} -ek <em>{{message.fields.type}}<\/em> mezu {{stream.fields.title}}-ri bidali dio"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} {{& url}} zerbitzuan: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "bidali da",
-                "byAvatar": "egilea: {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "{{message.instructions.fromDisplayType}} berri bat du",
-                "byAvatar": "{{avatar.displayName}} (e) k gehituta"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Zure lagunek oraindik ez dute ezagutzen gonbidatuak bidaltzen dira. Jarrai ezazu testu azkar batekin, gonbidapena zuretzako etorri zitzaizun jakin dezaten, estekan klik eginez.",
@@ -225,6 +209,24 @@
         "Streams\/webrtc": {
             "displayType": "Denbora errealeko deia",
             "description": "denbora errealeko bideo \/ audio dei"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "mezuak <em>{{message.fields.type}}<\/em> bidali du {{stream.fields.title}} helbidean"
+        },
+        "text": {
+            "commentedOn": "komentatu zuen",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "bidali da",
+                "byAvatar": "egilea: {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "{{message.instructions.fromDisplayType}} berri bat du",
+                "byAvatar": "{{avatar.displayName}} (e) k gehituta"
+            }
         }
     }
 }

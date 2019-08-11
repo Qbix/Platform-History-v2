@@ -84,22 +84,6 @@
             "text": "Вы были приглашены. {{ClickOrTap}} здесь, чтобы принять и присоединиться."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} опубликовал сообщение <em>{{message.fields.type}}<\/em> для {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} в {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "был размещен на",
-                "byAvatar": "{{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "есть новый {{message.instructions.fromDisplayType}}",
-                "byAvatar": "добавлено {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Приглашения отправляются с нашего номера, который ваши друзья еще не узнали. Получите быстрый текст, чтобы сообщить им, что приглашение пришло от вас, и попросите их щелкнуть ссылку.",
@@ -225,6 +209,24 @@
         "Streams\/webrtc": {
             "displayType": "Звонок в реальном времени",
             "description": "видео \/ аудио звонок в реальном времени"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "опубликовал сообщение <em>{{message.fields.type}}<\/em> для {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "прокомментировал",
+            "in": "в",
+            "body": "в {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "был размещен на",
+                "byAvatar": "{{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "есть новый {{message.instructions.fromDisplayType}}",
+                "byAvatar": "добавлено {{avatar.displayName}}"
+            }
         }
     }
 }

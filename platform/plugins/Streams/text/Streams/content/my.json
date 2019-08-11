@@ -74,14 +74,6 @@
             "text": "သငျသညျဖိတ်ကြားထားသည်။ {{ClickOrTap}} ကဒီမှာကိုလက်မခံခြင်းနှင့်ပူးပေါင်းရန်ဖြစ်သည်။"
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} {{stream.fields.title}} တစ်ခု <em>{{message.fields.type}}<\/em> မက်ဆေ့ခ်ျကို posted"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} {{& url}} အတွက်: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "ဖိတ်ခေါ်မှုသင်၏မိတ်ဆွေများသေးအသိအမှတ်မပြုကြဘူးငါတို့အရေအတွက်ကနေပေးပို့နေကြသည်။ သူတို့ကိုဖိတ်ကြားချက်ကို link ကို click နှိပ်ပြီးသူတို့ကိုတောငျးဆိုန, သင်မှ လာ. သိစေရန်အမြန်စာသားကိုအတူတက်လိုက်နာပါ။",

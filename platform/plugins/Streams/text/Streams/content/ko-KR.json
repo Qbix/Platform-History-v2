@@ -84,22 +84,6 @@
             "text": "초대되었습니다. {{ClickOrTap}} 여기에 동의하고 참여하십시오."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}}이 (가) <em>{{message.fields.type}}</em> 메시지를 {{stream.fields.title}}에 게시했습니다."
-        },
-        "text": {
-            "body": "{{& url}}의 {{& call 'avatar.displayName'}} : {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "에 게시되었습니다",
-                "byAvatar": "{{avatar.displayName}}까지"
-            },
-            "relatedTo": {
-                "hasANew": "새로운 {{message.instructions.fromDisplayType}}",
-                "byAvatar": "{{avatar.displayName}} 님이 추가 함"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "초대장은 귀하의 친구가 아직 인식하지 못하는 번호에서 전송됩니다. 빠른 텍스트를 통해 초대장이 귀하에게서 왔음을 알리고 링크를 클릭하도록 요청하십시오.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "실시간 통화",
             "description": "실시간 화상 / 음성 통화"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "님이 {{stream.fields.title}}에 <em>{{message.fields.type}}</em> 메시지를 게시했습니다"
+        },
+        "text": {
+            "commentedOn": "댓글을 달았습니다",
+            "in": "...에서",
+            "body": "{{& url}}의 {{& avatar.displayName}} : {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "에 게시되었습니다",
+                "byAvatar": "{{avatar.displayName}}까지"
+            },
+            "relatedTo": {
+                "hasANew": "새로운 {{message.instructions.fromDisplayType}}",
+                "byAvatar": "{{avatar.displayName}} 님이 추가 함"
+            }
         }
     }
 }

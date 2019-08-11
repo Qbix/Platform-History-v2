@@ -84,22 +84,6 @@
             "text": "Έχετε προσκληθεί. {{ClickOrTap}} εδώ για να δεχτείτε και να συμμετάσχετε."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} δημοσίευσε ένα <em>{{message.fields.type}}<\/em> μήνυμα στην {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} στις {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "έχει αναρτηθεί στο",
-                "byAvatar": "από {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "έχει ένα νέο {{message.instructions.fromDisplayType}}",
-                "byAvatar": "προστέθηκε από {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Οι προσκλήσεις αποστέλλονται από τον αριθμό μας, τον οποίο οι φίλοι σας δεν αναγνωρίζουν ακόμα. Συνεχίστε με ένα γρήγορο κείμενο για να τους ενημερώσετε ότι η πρόσκληση ήρθε από εσάς, ζητώντας τους να κάνουν κλικ στον σύνδεσμο.",
@@ -225,6 +209,24 @@
         "Streams\/webrtc": {
             "displayType": "Κλήση σε πραγματικό χρόνο",
             "description": "μια κλήση βίντεο \/ ήχου σε πραγματικό χρόνο"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "δημοσίευσε ένα <em>{{message.fields.type}}<\/em> μήνυμα στην {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "σχολίασε",
+            "in": "σε",
+            "body": "στις {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "έχει αναρτηθεί στο",
+                "byAvatar": "από {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "έχει ένα νέο {{message.instructions.fromDisplayType}}",
+                "byAvatar": "προστέθηκε από {{avatar.displayName}}"
+            }
         }
     }
 }

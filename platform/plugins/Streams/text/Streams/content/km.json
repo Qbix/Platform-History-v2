@@ -74,14 +74,6 @@
             "text": "អ្នកត្រូវបានអញ្ជើញ។ {{ClickOrTap}} នៅទីនេះដើម្បីទទួលយកនិងចូលរួម។"
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} បានបង្ហោះសារ <em>{{message.fields.type}}<\/em> មួយទៅកាន់ {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} នៅក្នុង {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "ការអញ្ជើញត្រូវបានផ្ញើចេញពីលេខរបស់យើងដែលមិត្ដភក្ដិរបស់អ្នកមិនទាន់ស្គាល់។ តាមដានជាមួយអត្ថបទរហ័សដើម្បីឱ្យពួកគេដឹងថាការអញ្ជើញបានមកពីអ្នកដោយប្រាប់ពួកគេឱ្យចុចតំណ។",

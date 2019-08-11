@@ -74,14 +74,6 @@
             "text": "Umenyiwe. {Here} lapha ukwamukela nokujoyina."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{@}} Ithumele umlayezo <em>{{}}<\/em> {{}} {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Izimemo zithunyelwa kusuka enombolweni yethu, abangani bakho abangakaboni. Landela ngombhalo osheshayo ukuze ubazise isimemo esivela kuwe, ubacele ukuba uchofoze isixhumanisi.",

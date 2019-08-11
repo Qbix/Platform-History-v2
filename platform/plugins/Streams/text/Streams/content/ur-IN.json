@@ -84,22 +84,6 @@
             "text": "آپ کو مدعو کیا گیا ہے. {{ClickOrTap}} یہاں قبول اور شامل ہونے کے لئے یہاں."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} نے ایک <em>{{message.fields.type}}</em> پیغام {{stream.fields.title}} کو پوسٹ کیا"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} میں {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "میں پوسٹ کیا گیا ہے۔",
-                "byAvatar": "بذریعہ {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "ایک نیا {{999} has ہے",
-                "byAvatar": "by {999} by کے ذریعہ شامل کردہ"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "مدعو ہمارے نمبر سے بھیجے جاتے ہیں، جو آپ کے دوست ابھی تک تسلیم نہیں کرتے ہیں. ایک فوری ٹیکسٹ کے ساتھ عمل کریں کہ وہ ان سے رابطہ کریں جو آپ سے آتے ہیں انہیں بتائیں کہ لنک پر کلک کرنے کے لئے پوچھیں.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "ریئل ٹائم کال",
             "description": "ایک ریئل ٹائم ویڈیو / آڈیو کال۔"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "{{999} نے {{1001} to کو ایک <em>{{message.fields.type}}</em> پیغام شائع کیا"
+        },
+        "text": {
+            "commentedOn": "پر تبصرہ کیا۔",
+            "in": "میں",
+            "body": "{9 999}} میں {{& url}}: {{1001}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "میں پوسٹ کیا گیا ہے۔",
+                "byAvatar": "بذریعہ {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ایک نیا {{999} has ہے",
+                "byAvatar": "by {999} by کے ذریعہ شامل کردہ"
+            }
         }
     }
 }

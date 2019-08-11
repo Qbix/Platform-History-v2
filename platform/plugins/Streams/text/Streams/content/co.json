@@ -74,14 +74,6 @@
             "text": "Avete invitu. {{ClickOrTap}} quì per accettà è riunitevi."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} ha inviatu un messaggio <em>{{message.fields.type}}<\/em> a {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} in {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "L&#39;invite hè inviata da u nostru numeru, chì i vostri amichi ùn ricanùvanu micca. Fate una prova à un testu rapidu per dà li sapete chì l&#39;invitazione hè venuta da voi, dumandanduli di cliccà u ligame.",

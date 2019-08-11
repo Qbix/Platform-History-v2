@@ -84,22 +84,6 @@
             "text": "Ai fost invitat. {{ClickOrTap}} aici să accepți și să vă alăturați."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} a trimis un mesaj <em>{{message.fields.type}}</em> la {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} în {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "a fost postat pe",
-                "byAvatar": "de {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "are un nou {{message.instructions.fromDisplayType}}",
-                "byAvatar": "adăugat de {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Invitațiile sunt trimise de la numărul nostru, pe care prietenii dvs. încă nu îl recunosc. Urmăriți cu un text rapid pentru a le spune că invitația a venit de la dvs., cerându-i să facă clic pe link.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "Apel în timp real",
             "description": "un apel video / audio în timp real"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "au postat un mesaj <em>{{message.fields.type}}</em> la {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "comentat",
+            "in": "în",
+            "body": "în {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "a fost postat pe",
+                "byAvatar": "de {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "are un nou {{message.instructions.fromDisplayType}}",
+                "byAvatar": "adăugat de {{avatar.displayName}}"
+            }
         }
     }
 }

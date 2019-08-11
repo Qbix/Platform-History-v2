@@ -84,22 +84,6 @@
             "text": "Tugadh cuireadh duit. {{ClickOrTap}} anseo chun glacadh agus páirt a ghlacadh."
         }
     },
-    "message": {
-        "html": {
-            "posted": "Cuireadh {{call 'avatar.displayName'}} teachtaireacht <em>{{message.fields.type}}<\/em> chuig {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} i {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "curtha chuig",
-                "byAvatar": "le {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "a bhfuil {{message.instructions.fromDisplayType}} nua aige",
-                "byAvatar": "le {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Seoltar cuireadhí ónár n-uimhir, nach n-aithníonn do chairde go fóill iad. Lean ort le téacs tapaidh chun a chur in iúl dóibh gur tháinig an cuireadh uait, ag iarraidh orthu cliceáil ar an nasc.",
@@ -225,6 +209,24 @@
         "Streams\/webrtc": {
             "displayType": "Glao Fíor-Ama",
             "description": "glao físe \/ fuaime fíor-ama"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "Cuireadh {{avatar.displayName}} teachtaireacht <em>{{message.fields.type}}<\/em> chuig {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "trácht air",
+            "in": "isteach",
+            "body": "i {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "curtha chuig",
+                "byAvatar": "le {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "a bhfuil {{message.instructions.fromDisplayType}} nua aige",
+                "byAvatar": "le {{avatar.displayName}}"
+            }
         }
     }
 }

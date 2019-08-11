@@ -74,14 +74,6 @@
             "text": "ተጋብዘዋል. ለመቀበል እና ለመቀላቀል እዚህ ላይ {{ClickOrTap}} እዚህ."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} አንድ <em>{{message.fields.type}}<\/em> መልዕክት ወደ {{stream.fields.title}} አውጥቷል"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} በ {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "ግብዣዎች ጓደኞችዎ እስካላወቁት ድረስ ከእኛ ቁጥር ይላካሉ. ግብዣው የመጣው ከእርስዎ የመጣ መሆኑን እንዲያውቁ እና አገናኙን ጠቅ እንዲያደርጉላቸው በፍጥነት የሚገልጽ ጽሑፍ ይከታተሉ.",

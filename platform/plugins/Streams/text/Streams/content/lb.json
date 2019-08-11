@@ -74,14 +74,6 @@
             "text": "Dir hutt invitéiert. {{ClickOrTap}} hei fir ze akzeptéieren a matzemaachen."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} publizéiert eng <em>{{message.fields.type}}<\/em> Noriicht op {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} an {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Invitatioune gi vun eiser Zuel geschéckt, déi Är Frënn net erkenne kënnen. Follegt mat engem schnellen Text, fir se ze wëssen, datt d&#39;Invitatioun vun Iech komm ass a se gefrot huet fir op de Link ze klicken.",

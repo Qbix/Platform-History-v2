@@ -74,14 +74,6 @@
             "text": "An gayyatar ku. {{ClickOrTap}} nan don karɓa da shiga."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} ya aika saƙon <em>{{message.fields.type}}<\/em> zuwa {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} a {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "An aiko da kira daga lambarmu, wanda abokanka ba su gane ba tukuna. Biyo tare da rubutun sauri don sanar da su gayyatar ya zo daga gare ku, ya umarce su su danna mahaɗin.",

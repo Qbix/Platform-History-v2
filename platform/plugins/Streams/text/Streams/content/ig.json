@@ -74,14 +74,6 @@
             "text": "A kpọrọ gị òkù. {{ClickOrTap}} ebe a iji nabata ma sonye."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} zitere ozi <em>{{message.fields.type}}<\/em> na {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} na {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "A na-ezitere ndị na-akpọ òkù site n&#39;aka ọnụ ọgụgụ anyị, nke ndị enyi gị na-amatabeghị. Soro ngwa ngwa mee ka ha mara na òkù ahụ sitere n&#39;aka gị, na-agwa ha ka ha pịa njikọ ahụ.",

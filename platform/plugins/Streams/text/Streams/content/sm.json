@@ -74,14 +74,6 @@
             "text": "Ua valaaulia oe. {{ClickOrTap}} iinei e talia ma auai."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} i le savali <em>{{message.fields.type}}<\/em> i {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} i {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "O valaaulia e auina mai le numera, lea e leʻi iloa e au uo. Suʻe faʻatasi ma se faʻamatalaga vave e taʻu atu ia i latou o le valaaulia na sau mai ia te oe, fai atu ia i latou e kiliki le sootaga.",

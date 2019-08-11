@@ -84,22 +84,6 @@
             "text": "Siz dəvət olundu. {{ClickOrTap}} burada qəbul etmək və qoşulmaq."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} üçün <em>{{message.fields.type}}<\/em> mesaj nümayiş {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& url}} &#39;da {{& call 'avatar.displayName'}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "göndərilib",
-                "byAvatar": "tərəfindən {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "yeni {{message.instructions.fromDisplayType}} var",
-                "byAvatar": "əlavə edilmiş {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Arkadaşlarınız hələ tanımadığınız nömrələrimizdən dəvət göndərilir. Dəvətin sizə gəldiklərini bildirmək üçün onlara tez bir mətnlə baxın və linkdən istifadə etmələrini xahiş edin.",
@@ -225,6 +209,24 @@
         "Streams\/webrtc": {
             "displayType": "Real vaxt zəng",
             "description": "real vaxt video \/ audio zəng"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "{{stream.fields.title}} -ə {{ <em>1000}}<\/em> mesaj göndərdi."
+        },
+        "text": {
+            "commentedOn": "şərh etdi",
+            "in": "içində",
+            "body": ": {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "göndərilib",
+                "byAvatar": "tərəfindən {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "yeni {{message.instructions.fromDisplayType}} var",
+                "byAvatar": "əlavə edilmiş {{avatar.displayName}}"
+            }
         }
     }
 }

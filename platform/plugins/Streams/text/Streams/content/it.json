@@ -84,22 +84,6 @@
             "text": "Sei stato invitato. {{ClickOrTap}} qui per accettare e partecipare."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} ha pubblicato un messaggio <em>{{message.fields.type}}<\/em> su {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} in {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "è stato pubblicato su",
-                "byAvatar": "di {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "ha un nuovo {{message.instructions.fromDisplayType}}",
-                "byAvatar": "aggiunto da {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Gli inviti vengono inviati dal nostro numero, che i tuoi amici non riconoscono ancora. Segui un breve testo per far loro sapere che l&#39;invito è arrivato da te, chiedendo loro di fare clic sul link.",
@@ -225,6 +209,24 @@
         "Streams\/webrtc": {
             "displayType": "Chiamata in tempo reale",
             "description": "una chiamata video \/ audio in tempo reale"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "ha pubblicato un messaggio <em>{{message.fields.type}}<\/em> a {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "commentato su",
+            "in": "nel",
+            "body": "in {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "è stato pubblicato su",
+                "byAvatar": "di {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ha un nuovo {{message.instructions.fromDisplayType}}",
+                "byAvatar": "aggiunto da {{avatar.displayName}}"
+            }
         }
     }
 }

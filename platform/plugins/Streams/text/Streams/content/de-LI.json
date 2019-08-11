@@ -84,22 +84,6 @@
             "text": "Du bist eingeladen. {{ClickOrTap}} hier zum Annehmen und Mitmachen."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} hat eine Nachricht <em>{{message.fields.type}}</em> an {{stream.fields.title}} gesendet."
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} in {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "wurde gepostet in",
-                "byAvatar": "von {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "hat eine neue {{message.instructions.fromDisplayType}}",
-                "byAvatar": "hinzugefügt von {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Einladungen werden von unserer Nummer gesendet, die Ihre Freunde noch nicht kennen. Folgen Sie einem kurzen Text, um sie darüber zu informieren, dass die Einladung von Ihnen stammt, und bitten Sie, auf den Link zu klicken.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "Echtzeitanruf",
             "description": "Ein Video- / Audioanruf in Echtzeit"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "hat eine <em>{{message.fields.type}}</em> Nachricht an {{stream.fields.title}} gesendet."
+        },
+        "text": {
+            "commentedOn": "kommentiert",
+            "in": "im",
+            "body": "in {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "wurde gepostet in",
+                "byAvatar": "von {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "hat eine neue {{message.instructions.fromDisplayType}}",
+                "byAvatar": "hinzugefügt von {{avatar.displayName}}"
+            }
         }
     }
 }

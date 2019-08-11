@@ -74,14 +74,6 @@
             "text": "توھان کي دعوت ڏنو ويو آھي. {{ClickOrTap}} هتي قبول ڪرڻ ۽ شامل ٿيڻ لاء."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} ھڪڙي ھڪڙي <em>{{message.fields.type}}<\/em> نياپو {{stream.fields.title}} تي"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} ۾ {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "دعوت اسان جي نمبر تان موڪليا ويا آهن، جيڪي توهان جي دوستن کي اڃان تائين نه سڃاڻندا آهن. جلدي متن سان گڏ پوئتي رکو ته انهن کي اهو دعوت ڏيو ته توهان کان دعوت آيا آهيو، انهن کي لنڪ تي ڪلڪ ڪرڻ لاء پڇڻ.",

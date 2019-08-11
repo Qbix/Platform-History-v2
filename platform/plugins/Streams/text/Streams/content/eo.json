@@ -74,14 +74,6 @@
             "text": "Vi estis invitita. {{ClickOrTap}} ĉi tie por akcepti kaj aliĝi."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} afiŝis <em>{{message.fields.type}}<\/em> mesaĝon al {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} en {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Invitoj estas senditaj de nia numero, kiun viaj amikoj ankoraŭ ne rekonas. Sekvu rapidan tekston por sciigi al ili, ke la invito venis de vi, petante ilin alklaki la ligon.",

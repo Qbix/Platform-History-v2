@@ -84,22 +84,6 @@
             "text": "Povabljeni ste bili. {{ClickOrTap}} tukaj, da sprejmete in se pridružite."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} je objavil sporočilo <em>{{message.fields.type}}</em> za {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} v {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "je bil objavljen v",
-                "byAvatar": "do {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "ima novo {{message.instructions.fromDisplayType}}",
-                "byAvatar": "dodal {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Povabila so poslana iz naše številke, ki jih vaši prijatelji še ne prepoznajo. Nadaljujte s hitrim besedilom, da jim sporočite, da je povabilo prišlo od vas, in jih prosili, da kliknejo povezavo.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "Klic v realnem času",
             "description": "video / zvočni klic v realnem času"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "je objavil <em>{{message.fields.type}}</em> sporočilo {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "komentiral",
+            "in": "v",
+            "body": "v {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "je bil objavljen v",
+                "byAvatar": "do {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ima novo {{message.instructions.fromDisplayType}}",
+                "byAvatar": "dodal {{avatar.displayName}}"
+            }
         }
     }
 }

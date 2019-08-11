@@ -74,14 +74,6 @@
             "text": "הוזמנת. {{ClickOrTap}} כאן כדי לקבל ולהצטרף."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} פרסם הודעה <em>{{message.fields.type}}<\/em> ל- {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} ב- {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "ההזמנות נשלחות מהמספר שלנו, שהחברים שלך עדיין לא מזהים. עקוב אחר טקסט קצר כדי להודיע להם על ההזמנה שהגיעה ממך, ולבקש מהם ללחוץ על הקישור.",

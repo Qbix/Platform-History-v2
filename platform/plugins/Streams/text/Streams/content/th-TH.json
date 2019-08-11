@@ -84,22 +84,6 @@
             "text": "คุณได้รับเชิญ {{ClickOrTap}} ที่นี่เพื่อยอมรับและเข้าร่วม"
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} โพสต์ข้อความ <em>{{message.fields.type}}</em> ไปที่ {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} ใน {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "ถูกโพสต์ไปที่",
-                "byAvatar": "โดย {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "มี {{message.instructions.fromDisplayType}} ใหม่",
-                "byAvatar": "เพิ่มโดย {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "คำเชิญจะถูกส่งจากหมายเลขของเราซึ่งเพื่อนของคุณยังจำไม่ได้ ติดตามด้วยข้อความด่วนเพื่อให้พวกเขารู้ว่าคำเชิญมาจากคุณขอให้พวกเขาคลิกที่ลิงค์",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "โทรตามเวลาจริง",
             "description": "การสนทนาทางวิดีโอ / เสียงแบบเรียลไทม์"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "โพสต์ข้อความ <em>{{message.fields.type}}</em> ไปที่ {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "แสดงความคิดเห็นใน",
+            "in": "ใน",
+            "body": "ใน {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ถูกโพสต์ไปที่",
+                "byAvatar": "โดย {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "มี {{message.instructions.fromDisplayType}} ใหม่",
+                "byAvatar": "เพิ่มโดย {{avatar.displayName}}"
+            }
         }
     }
 }

@@ -84,22 +84,6 @@
             "text": "Você foi convidado. {{ClickOrTap}} aqui para aceitar e participar."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} postou uma mensagem <em>{{message.fields.type}}</em> para {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} em {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "foi postado para",
-                "byAvatar": "por {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "tem um novo {{message.instructions.fromDisplayType}}",
-                "byAvatar": "adicionado por {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Convites são enviados do nosso número, que seus amigos ainda não reconhecem. Faça um acompanhamento com um texto rápido para que eles saibam que o convite veio de você, pedindo que eles cliquem no link.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "Chamada em Tempo Real",
             "description": "uma chamada de vídeo / áudio em tempo real"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "postou uma mensagem <em>{{message.fields.type}}</em> para {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "comentou sobre",
+            "in": "em",
+            "body": "em {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "foi postado para",
+                "byAvatar": "por {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "tem um novo {{message.instructions.fromDisplayType}}",
+                "byAvatar": "adicionado por {{avatar.displayName}}"
+            }
         }
     }
 }

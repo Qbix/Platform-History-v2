@@ -74,14 +74,6 @@
             "text": "Сізді шақырды. {{ClickOrTap}} мұнда қабылдау және қосылу үшін."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} <em>{{message.fields.type}}<\/em> хабарын {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& url}} ішіндегі {{& call 'avatar.displayName'}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Шақырулар біздің достарымыз әлі танымайтын біздің нөмірімізден жіберіледі. Сізден алынған шақыруды білу үшін сілтеме бойынша басуды сұрайтын жылдам мәтінмен танысыңыз.",

@@ -84,22 +84,6 @@
             "text": "Вас запросили. {{ClickOrTap}} тут, щоб прийняти і приєднатися."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} опублікував повідомлення <em>{{message.fields.type}}</em> до {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} у {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "було опубліковано в",
-                "byAvatar": "від {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "має новий {{message.instructions.fromDisplayType}}",
-                "byAvatar": "додав {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Запрошення надсилаються з нашого номера, який ваші друзі ще не розпізнають. Слідкуйте за швидким текстом, щоб повідомити про те, що запрошення прийшло від вас, просивши їх натиснути на посилання.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "Дзвінок у режимі реального часу",
             "description": "відео / аудіодзвінок у режимі реального часу"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "опублікував повідомлення <em>{{message.fields.type}}</em> на адресу {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "прокоментував",
+            "in": "в",
+            "body": "в {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "було опубліковано в",
+                "byAvatar": "від {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "має новий {{message.instructions.fromDisplayType}}",
+                "byAvatar": "додав {{avatar.displayName}}"
+            }
         }
     }
 }

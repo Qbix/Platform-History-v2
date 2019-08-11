@@ -84,22 +84,6 @@
             "text": "Du har blivit inbjuden. {{ClickOrTap}} här för att acceptera och gå med."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} skickade ett <em>{{message.fields.type}}<\/em> meddelande till {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} i {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "har skickats till",
-                "byAvatar": "av {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "har en ny {{message.instructions.fromDisplayType}}",
-                "byAvatar": "tillagd av {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Inbjudningar skickas från vårt nummer, som dina vänner ännu inte känner igen. Följ upp med en snabb text för att låta dem veta att inbjudan kom från dig och be dem att klicka på länken.",
@@ -225,6 +209,24 @@
         "Streams\/webrtc": {
             "displayType": "Realtidssamtal",
             "description": "ett realtidsvideo \/ ljudsamtal"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "publicerade ett <em>{{message.fields.type}}<\/em> meddelande till {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "kommenterade",
+            "in": "i",
+            "body": "i {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "har skickats till",
+                "byAvatar": "av {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "har en ny {{message.instructions.fromDisplayType}}",
+                "byAvatar": "tillagd av {{avatar.displayName}}"
+            }
         }
     }
 }

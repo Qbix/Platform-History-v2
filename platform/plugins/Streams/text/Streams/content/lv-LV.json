@@ -84,22 +84,6 @@
             "text": "Jūs esat uzaicināts. {{ClickOrTap}} šeit, lai pieņemtu un pievienotos."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} publicēja <em>{{message.fields.type}}</em> ziņojumu uz {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "ir nosūtīts uz",
-                "byAvatar": "autors: {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "ir jauns {{message.instructions.fromDisplayType}}",
-                "byAvatar": "pievienoja {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Uzaicinājumi tiek nosūtīti no mūsu numura, ko jūsu draugi vēl neatpazīst. Sekojiet līdzi ātram tekstam, lai ļautu viņiem uzzināt, ka ielūgums ir no jums, lūdzot tos noklikšķināt uz saites.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "Zvana reāllaikā",
             "description": "reālā laika video / audio zvans"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "nosūtīja <em>{{message.fields.type}}</em> ziņojumu uz {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "komentēja",
+            "in": "iekšā",
+            "body": "{{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ir nosūtīts uz",
+                "byAvatar": "autors: {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ir jauns {{message.instructions.fromDisplayType}}",
+                "byAvatar": "pievienoja {{avatar.displayName}}"
+            }
         }
     }
 }

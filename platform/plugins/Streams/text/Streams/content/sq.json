@@ -84,22 +84,6 @@
             "text": "Ju keni qenë të ftuar. {{ClickOrTap}} këtu për të pranuar dhe për t&#39;u bashkuar."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} ka postuar një <em>{{message.fields.type}}<\/em> mesazhe për {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} në {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "eshte postuar ne",
-                "byAvatar": "nga {99 999}}"
-            },
-            "relatedTo": {
-                "hasANew": "ka një new 999 të reja",
-                "byAvatar": "shtuar nga {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Ftesat janë dërguar nga numri ynë, të cilin miqtë tuaj ende nuk e njohin. Ndiqni me një tekst të shpejtë për t&#39;u bërë të ditur se ftesa erdhi nga ju, duke u kërkuar atyre të klikonin lidhjen.",
@@ -225,6 +209,24 @@
         "Streams\/webrtc": {
             "displayType": "Thirrje në kohë reale",
             "description": "një thirrje video \/ audio në kohë reale"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "99 99 999}} postoi një mesazh <em>{{1000}<\/em> to tek {1001}"
+        },
+        "text": {
+            "commentedOn": "komentohet",
+            "in": "në",
+            "body": "{99 999}} në {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "eshte postuar ne",
+                "byAvatar": "nga {99 999}}"
+            },
+            "relatedTo": {
+                "hasANew": "ka një new 999 të reja",
+                "byAvatar": "shtuar nga {{avatar.displayName}}"
+            }
         }
     }
 }

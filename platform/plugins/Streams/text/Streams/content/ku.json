@@ -74,14 +74,6 @@
             "text": "Te vexwendin. Li vir {{ClickOrTap}} li vir bipejirîne û tevlî bibin."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} peyamek <em>{{message.fields.type}}<\/em> ji bo {{stream.fields.title}} nivîsand"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} di {{& url}} de: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Invite ji me hejmarek şandin, ku hevalên we ne nas dikin. Bi nivîskî zûtirîn bişopînin da ku ew bizanin ku vexwendina we ji we re hat, ji wan re ji wan re dipirsin ku li girêdana navnîşê.",

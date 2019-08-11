@@ -84,22 +84,6 @@
             "text": "شما دعوت شده اید {{ClickOrTap}} اینجا برای پذیرش و پیوستن به"
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} یک پیام <em>{{message.fields.type}}</em> را به {{stream.fields.title}} ارسال کرد"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} در {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "ارسال شده است به",
-                "byAvatar": "توسط 99 999}"
-            },
-            "relatedTo": {
-                "hasANew": "999 پوند جدید دارد",
-                "byAvatar": "اضافه شده توسط {999}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "دعوت نامه ها از شماره ما ارسال می شود، که دوستان شما هنوز شناسایی نکرده اند. دنبال کردن با یک متن سریع برای اطلاع از دعوت نامه از طرف شما، از آنها بخواهید روی لینک کلیک کنید.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "تماس در زمان واقعی",
             "description": "تماس ویدیویی / صوتی در زمان واقعی"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "99 999}} پیام <em>{1000 {}</em> ارسال شده به to 1001}}"
+        },
+        "text": {
+            "commentedOn": "در مورد اظهار نظر",
+            "in": "که در",
+            "body": "99 999}} در {1000}}:} 1001}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ارسال شده است به",
+                "byAvatar": "توسط 99 999}"
+            },
+            "relatedTo": {
+                "hasANew": "999 پوند جدید دارد",
+                "byAvatar": "اضافه شده توسط {999}}"
+            }
         }
     }
 }

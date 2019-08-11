@@ -74,14 +74,6 @@
             "text": "Umenywe. {{ClickOrTap}} apha ukuba wamkele kwaye ujoyine."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} ithumele <em>{{message.fields.type}}<\/em> umyalezo kwi {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} kwi {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Izimemo zithunyelwa ukusuka kwinani lethu, abahlobo bakho abangaziqondi. Landela ngokubhaliweyo okubhaliweyo ukuba ubazise isimemo esivela kuwe, ubacele ukuba banqakraze ikhonkco.",

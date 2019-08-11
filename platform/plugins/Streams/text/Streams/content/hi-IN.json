@@ -84,22 +84,6 @@
             "text": "आपको आमंत्रित किया गया है। {{ClickOrTap}} यहां स्वीकार करने और शामिल होने के लिए।"
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{१ ९९९}} ने <em>{{१०००}} को {{१०००}}</em> संदेश पोस्ट किया"
-        },
-        "text": {
-            "body": "{{१ ९९९}} में {{१०००}}: {{१००१}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "पोस्ट किया गया है",
-                "byAvatar": "{{avatar.displayName}} से"
-            },
-            "relatedTo": {
-                "hasANew": "एक नया {{message.instructions.fromDisplayType}} है",
-                "byAvatar": "{{avatar.displayName}} द्वारा जोड़ा गया"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "हमारे नंबर से आमंत्रण भेजे जाते हैं, जिन्हें आपके मित्र अभी तक नहीं पहचानते हैं। एक त्वरित पाठ के साथ पालन करें ताकि उन्हें पता चल सके कि निमंत्रण आपके पास आया है, उन्हें लिंक पर क्लिक करने के लिए कहें।",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "रियल-टाइम कॉल",
             "description": "एक वास्तविक समय वीडियो / ऑडियो कॉल"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "{{१ ९९९}} ने <em>{{१०००}} को {{१०००}}</em> संदेश पोस्ट किया"
+        },
+        "text": {
+            "commentedOn": "पर टिप्पणी की है",
+            "in": "में",
+            "body": "{{१ ९९९}} में {{१०००}}: {{१००१}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "पोस्ट किया गया है",
+                "byAvatar": "{{avatar.displayName}} से"
+            },
+            "relatedTo": {
+                "hasANew": "एक नया {{message.instructions.fromDisplayType}} है",
+                "byAvatar": "{{avatar.displayName}} द्वारा जोड़ा गया"
+            }
         }
     }
 }

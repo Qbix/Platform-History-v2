@@ -84,22 +84,6 @@
             "text": "Bạn đã được mời. {{ClickOrTap}} tại đây để chấp nhận và tham gia."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} đã đăng một thông báo <em>{{message.fields.type}}</em> lên {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} trong {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "đã được đăng lên",
-                "byAvatar": "bởi {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "có {{message.instructions.fromDisplayType}} mới",
-                "byAvatar": "được thêm bởi {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Lời mời được gửi từ số của chúng tôi, mà bạn bè của bạn chưa nhận ra. Theo dõi với một văn bản nhanh chóng để cho họ biết lời mời đến từ bạn, yêu cầu họ nhấp vào liên kết.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "Cuộc gọi thời gian thực",
             "description": "một cuộc gọi video / âm thanh thời gian thực"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "đã đăng một thông báo <em>{{message.fields.type}}</em> lên {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "Bình luận về",
+            "in": "trong",
+            "body": "trong {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "đã được đăng lên",
+                "byAvatar": "bởi {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "có {{message.instructions.fromDisplayType}} mới",
+                "byAvatar": "được thêm bởi {{avatar.displayName}}"
+            }
         }
     }
 }

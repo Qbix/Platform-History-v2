@@ -84,22 +84,6 @@
             "text": "Has estat convidat. {{ClickOrTap}} aquí per acceptar i unir-se."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} ha publicat un missatge <em>{{message.fields.type}}</em> a {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} a {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "s&#39;ha publicat a",
-                "byAvatar": "per {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "té un {{message.instructions.fromDisplayType}} nou",
-                "byAvatar": "afegit per {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Les invitacions s&#39;envien des del nostre número, que els teus amics encara no reconeixen. Feu un seguiment amb un text ràpid per fer-los saber que la vostra invitació va venir, demanant-los que facin clic a l&#39;enllaç.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "Trucada en temps real",
             "description": "una trucada de vídeo / àudio en temps real"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "va publicar un missatge de {{ <em>1000}}</em> a {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "va comentar",
+            "in": "a",
+            "body": "a {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "s&#39;ha publicat a",
+                "byAvatar": "per {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "té un {{message.instructions.fromDisplayType}} nou",
+                "byAvatar": "afegit per {{avatar.displayName}}"
+            }
         }
     }
 }

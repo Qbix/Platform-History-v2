@@ -84,22 +84,6 @@
             "text": "நீங்கள் அழைக்கப்பட்டுள்ளீர்கள். {{ClickOrTap}} இங்கு ஏற்கவும் சேரவும்."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{stream.fields.title}} க்கு {{ <em>1000}} ஒரு</em> செய்தியை இடுகையிடப்பட்டது."
-        },
-        "text": {
-            "body": "{{& url}} இல் {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "இடுகையிடப்பட்டது",
-                "byAvatar": "வழங்கியவர் {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "புதிய {99 999 has has ஐக் கொண்டுள்ளது",
-                "byAvatar": "by {999 by by ஆல் சேர்க்கப்பட்டது"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "உங்கள் நண்பர்கள் இதுவரை அறியாத எண்களிலிருந்து அழைப்புகள் அனுப்பப்படுகின்றன. இணைப்பைக் கிளிக் செய்யும்படி அவர்களிடம் கேட்டு, அவர்களிடம் இருந்து அழைப்பு வந்தது என்பதை அவர்களுக்குத் தெரியப்படுத்த விரைவான உரையுடன் தொடருங்கள்.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "நிகழ்நேர அழைப்பு",
             "description": "நிகழ்நேர வீடியோ / ஆடியோ அழைப்பு"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "<em>{{message.fields.type}}</em> செய்தியை {{1001} to க்கு இடுகையிட்டது"
+        },
+        "text": {
+            "commentedOn": "கருத்து தெரிவித்தார்",
+            "in": "இல்",
+            "body": "{{& url}} இல் {{& avatar.displayName}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "இடுகையிடப்பட்டது",
+                "byAvatar": "வழங்கியவர் {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "புதிய {99 999 has has ஐக் கொண்டுள்ளது",
+                "byAvatar": "by {999 by by ஆல் சேர்க்கப்பட்டது"
+            }
         }
     }
 }

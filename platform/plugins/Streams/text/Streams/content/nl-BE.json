@@ -84,22 +84,6 @@
             "text": "Je bent uitgenodigd. {{ClickOrTap}} hier om te accepteren en deel te nemen."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{avatar.displayName}} heeft een <em>{{message.fields.type}}</em> bericht gepost naar {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& avatar.displayName}} in {{& url}}: {{& message.fields.content}}",
-            "relatedFrom": {
-                "hasBeenPostedTo": "is gepost op",
-                "byAvatar": "door {{avatar.displayName}}"
-            },
-            "relatedTo": {
-                "hasANew": "heeft een nieuwe {{message.instructions.fromDisplayType}}",
-                "byAvatar": "toegevoegd door {{avatar.displayName}}"
-            }
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Uitnodigingen worden verzonden vanuit ons nummer, dat je vrienden nog niet herkennen. Volg een korte tekst om hen te laten weten dat de uitnodiging van jou afkomstig was, en vraag hen om op de link te klikken.",
@@ -225,6 +209,24 @@
         "Streams/webrtc": {
             "displayType": "Realtime oproep",
             "description": "een realtime video / audio-oproep"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "heeft een <em>{{message.fields.type}}</em> bericht op {{stream.fields.title}} geplaatst"
+        },
+        "text": {
+            "commentedOn": "Gereageerd op",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "is gepost op",
+                "byAvatar": "door {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "heeft een nieuwe {{message.instructions.fromDisplayType}}",
+                "byAvatar": "toegevoegd door {{avatar.displayName}}"
+            }
         }
     }
 }
