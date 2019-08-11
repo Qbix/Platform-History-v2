@@ -6600,10 +6600,12 @@ Q.request = function (url, slotNames, callback, options) {
 		}
 		
 		function _onCancel (status, msg) {
+			var code;
 			status = Q.isInteger(status) ? status : null;
 			if (this.response) {
 				var data = JSON.parse(this.response);
 				msg = Q.getObject(['errors', 0, 'message'], data);
+				code = Q.getObject(['errors', 0, 'code'], data);
 			}
 			if (!msg) {
 				var defaultError = status ? Q.text.Q.request.error : Q.text.Q.request.canceled;
@@ -6613,7 +6615,11 @@ Q.request = function (url, slotNames, callback, options) {
 			t.cancelled = true;
 			_onResponse();
 			var errors = {
-				errors: [{message: msg || "Request was canceled", code: status}]
+				errors: [{
+					message: msg || "Request was canceled",
+					code: code || status,
+					httpStatus: status
+				}]
 			};
 			o.onCancel.handle.call(this, errors, o);
 			_Q_request_callback.call(this, errors, errors);

@@ -393,4 +393,10 @@ class Q_Exception extends Exception
 	 * @type string
 	 */
 	protected $code = null;
+	/**
+	 * @property $header
+	 * @public
+	 * @type integer|string
+	 */
+	public $header = null;
 }
