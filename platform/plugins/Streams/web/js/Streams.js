@@ -5144,13 +5144,8 @@ Q.onInit.add(function _Streams_onInit() {
 
 		Users.Socket.onEvent('Streams/post').set(function (message) {
 			message = Streams.Message.construct(message);
-			var publisherId = Q.getObject(["publisherId"], message);
-			var streamName = Q.getObject(["streamName"], message);
-			var messageType = Q.getObject(["type"], message);
-			var byUserId = Q.getObject(["byUserId"], message);
-			var content = Q.getObject(["content"], message);
 			var messageUrl = message.getInstruction('inviteUrl') || message.getInstruction('url');
-			var noticeOptions = Q.getObject([messageType], notificationsAsNotice);
+			var noticeOptions = notificationsAsNotice[messageType];
 			var pluginName = messageType.split('/')[0];
 
 			// if this message type absent in config
@@ -5159,7 +5154,7 @@ Q.onInit.add(function _Streams_onInit() {
 			}
 
 			// skip myself messages
-			if (byUserId === userId) {
+			if (message.byUserId === userId) {
 				return;
 			}
 
@@ -5169,43 +5164,30 @@ Q.onInit.add(function _Streams_onInit() {
 					return console.warn('notificationsAsNotice: no text for ' + messageType);
 				}
 
-				Streams.showNoticeIfSubscribed(publisherId, streamName, messageType,
+				Streams.showNoticeIfSubscribed(message.publisherId, message.streamName, message.type,
 					function () {
 						var stream = this;
 
-						Streams.Avatar.get(byUserId, function (err, avatar) {
-							var templateName;
-
-							if (Q.getObject("showSubject", noticeOptions) !== false) {
-								templateName = text + content;
-							} else {
-								templateName = content;
-							}
-
-							if (!templateName) {
+						Streams.Avatar.get(message.byUserId, function (err, avatar) {
+							var description = (noticeOptions.showSubject !== false ? text : '')
+								+ message.content;
+							if (!description) {
 								return;
 							}
-
-							Q.Template.set(templateName, templateName);
-							Q.Template.render(templateName, {
-								stream: stream,
-								avatar: avatar,
-								message: message
-							}, function (err, html) {
-								var msg;
-								if (msg = Q.firstErrorMessage(err)) {
-									return console.error(msg);
-								}
-
-								if (!html) {
-									return;
-								}
-
+							try {
+								var template = Q.Template.compile(description, 'handlebars');
+								var html = template({
+									stream: stream,
+									avatar: avatar,
+									message: message
+								});
 								Q.Notices.add(Q.extend(noticeOptions, {
 									content: html,
 									handler: messageUrl || stream.url()
 								}));
-							});
+							} catch (e) {
+								console.warn(e);
+							}
 						});
 					});
 			});
