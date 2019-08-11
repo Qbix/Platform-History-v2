@@ -80,7 +80,7 @@ if (empty($options['format'])) {
 if (!empty($options['google-format'])) {
 	$options['google-format'] = in_array($options['google-format'], array('text', 'html')) ? $options['google-format'] : 'html';
 } else {
-	$options['google-format']) = 'html';
+	$options['google-format'] = 'html';
 };
 $app = isset($options['app']) || isset($options['all']);
 if (isset($options['plugins']) or isset($options['all'])) {
