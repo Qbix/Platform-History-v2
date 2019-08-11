@@ -81,14 +81,12 @@ Users_Email.sendMessage = function (to, subject, view, fields, options, callback
 		subject = Q.getObject(subject[1], fileData);
 	}
 
-	subject = subject ? Q.view(subject, fields, {
-		language: options.language,
-		source: true
-	}) : '';
-	var body = Q.view(view, fields, {
-		language: options.language,
-		source: options.isSource
-	});
+	subject = options.isSource
+		? Q.Handlebars.renderSource(subject, fields)
+		: Q.view(subject, fields, { language: options.language });
+	var body = options.isSource
+		? Q.Handlebars.renderSource(view, fields)
+		: Q.view(view, fields, { language: options.language });
 
 	var mailOptions = {
 		from: from[1]+' <'+from[0]+'>',

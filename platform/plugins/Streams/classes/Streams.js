@@ -688,14 +688,27 @@ function Streams_request_handler (req, res, next) {
 	
 		Q.each(userIds, function (i, userId) {
 			var token = null;
-							
+			var user = null;
+			
 		    // TODO: Change this to a getter, so that we can do throttling in case there are too many userIds
-			(new Streams.Participant({
-				"publisherId": stream.fields.publisherId,
-				"streamName": stream.fields.name,
-				"userId": userId,
-				"state": "participating"
-			})).retrieve(_participant);
+			
+			(new Users.User({
+				"userId": userId
+			})).retrieve(_user);
+			
+			function _user(err, rows) {	
+				if (!rows || !rows.length) {
+					// User wan't found in the dtabase
+					return;
+				}
+				user = rows[0];
+				(new Streams.Participant({
+					"publisherId": stream.fields.publisherId,
+					"streamName": stream.fields.name,
+					"userId": userId,
+					"state": "participating"
+				})).retrieve(_participant);
+			}
 			
 			function _participant(err, rows) {
 				if (rows && rows.length) {
@@ -807,7 +820,9 @@ function Streams_request_handler (req, res, next) {
 				}
 				var inviteUrl = Streams.inviteUrl(token);
 				displayName = displayName || "Someone";
-				var text = Q.Text.get('Streams/content');
+				var text = Q.Text.get('Streams/content', { 
+					language: user.fields.preferredLanguage
+				});
 				var msg = {
 					publisherId: invited.fields.publisherId,
 					streamName: invited.fields.name,

@@ -2292,16 +2292,10 @@ Sp.removePermission = function (permission) {
  * @param {String} [baseUrl] you can override the default found in "Q"/"web"/"appRootUrl" config
  * @return {String|null|false}
  */
-Sp.url = function (messageOrdinal, baseUrl)
-{
+Sp.url = function (messageOrdinal, baseUrl) {
 	var urls = Q.plugins.Streams.urls;
-	if (!urls) {
-		return null;
-	}
-	var url = urls[this.fields.type] || urls['*'];
-	if (!url) {
-		return null;
-	}
+	var url = urls && (urls[this.fields.type] || urls['*']);
+	url = url || "{{baseUrl}}/s/{{publisherId}}/{{name}}";
 
 	var urlString = '';
 
@@ -5146,6 +5140,7 @@ Q.onInit.add(function _Streams_onInit() {
 			message = Streams.Message.construct(message);
 			var messageType = message.type;
 			var messageUrl = message.getInstruction('inviteUrl') || message.getInstruction('url');
+			var description = message.getInstruction('description');
 			var noticeOptions = notificationsAsNotice[messageType];
 			var pluginName = messageType.split('/')[0];
 
@@ -5170,14 +5165,17 @@ Q.onInit.add(function _Streams_onInit() {
 						var stream = this;
 
 						Streams.Avatar.get(message.byUserId, function (err, avatar) {
-							var description = (noticeOptions.showSubject !== false ? text : '')
-								+ message.content;
-							if (!description) {
+							var source = (noticeOptions.showSubject !== false ? text : '');
+							source = (source ? source + ': ' : '')
+								+ (description || message.content);
+							if (!source) {
 								return;
 							}
 							try {
-								var template = Q.Template.compile(description, 'handlebars');
+								var template = Q.Template.compile(source, 'handlebars');
 								var html = template({
+									app: Q.info.app,
+									info: Q.info,
 									stream: stream,
 									avatar: avatar,
 									message: message

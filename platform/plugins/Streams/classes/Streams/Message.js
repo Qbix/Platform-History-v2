@@ -243,13 +243,14 @@ Streams_Message.post = function (fields, callback)
  */
 Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, callback) {
 	var instructions = this.getAllInstructions();
+	var a = Q.extend({ displayName: avatar.displayName() }, avatar);
 	var fields = {
 		app: Q.app.name,
 		communityName: Users.communityName(),
 		stream: stream,
 		message: this,
 		instructions: instructions,
-		avatar: avatar,
+		avatar: a,
 		config: Q.Config.getAll()
 	};
 	// set baseUrl
@@ -413,7 +414,9 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/mobile.handlebars';
 			}
-			Users.Mobile.sendMessage(mobileNumber, viewPath, o.fields, {language: uf.preferredLanguage}, callback);
+			Users.Mobile.sendMessage(mobileNumber, viewPath, o.fields, {
+				language: uf.preferredLanguage
+			}, callback);
 			result.push({'mobile': mobileNumber});
 		}
 		function _device(deviceId, callback) {

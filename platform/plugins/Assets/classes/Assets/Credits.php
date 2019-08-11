@@ -160,7 +160,8 @@ class Assets_Credits
 			'instructions' => Q::json_encode(array_merge(
 				array(
 					'app' => Q::app(),
-					'operation' => '+'
+					'operation' => '+',
+					'amount' => $amount
 				),
 				$more
 			))

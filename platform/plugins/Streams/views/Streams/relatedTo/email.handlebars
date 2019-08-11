@@ -5,13 +5,16 @@
 	<h2>{{stream.fields.title}}</h2>
 {{/if}}
 <div>
-has a new {{call 'message.getInstruction' 'fromDisplayType'}}:
+{{message.text.relatedTo.hasANew}} {{call 'message.getInstruction' 'fromDisplayType'}}:
 </div>
 {{#if (call 'message.getInstruction' 'fromUrl')}}
 	<h2><a href="{{call 'message.getInstruction' 'fromUrl'}}">{{call 'message.getInstruction' 'fromTitle'}}</a></h2>
 {{else}}
 	<h2>{{call 'message.getInstruction' 'fromTitle'}}</h2>
 {{/if}}
+<div>
+	{{interpolate message.text.relatedTo.byAvatar this}}
+</div>
 <hr>
 <p>{{notifications.IfUnsubscribe}}, <a href="{{baseUrl}}/Streams/participating">{{notifications.ManageEmailSubscriptions}}</a></p>
 </html>

@@ -1882,6 +1882,8 @@ abstract class Streams extends Base_Streams
 			}
 
 			$params['relationDisplayType'] = $relationDisplayType;
+			
+			// Related TO description
 			$description = Streams_Stream::getConfigField(
 				$category->type,
 				array('relatedTo', $type, 'description'),
@@ -1904,9 +1906,11 @@ abstract class Streams extends Base_Streams
 			$instructions['fromStreamName'] = $stream->name;
 			$relatedTo_messages[$toPublisherId][$category->name][] = array(
 				'type' => 'Streams/relatedTo',
+				'content' => $description,
 				'instructions' => $instructions
 			);
 
+			// Related FROM description
 			$description = Q_Handlebars::renderSource(
 				Streams_Stream::getConfigField(
 					$stream->type,
@@ -1931,6 +1935,7 @@ abstract class Streams extends Base_Streams
 			$instructions['toStreamName'] = $category->name;
 			$relatedFrom_messages[$fromPublisherId][$stream->name][] = array(
 				'type' => 'Streams/relatedFrom',
+				'content' => $description,
 				'instructions' => $instructions
 			);
 
@@ -3569,6 +3574,7 @@ abstract class Streams extends Base_Streams
 			"Q/method" => "Streams/Stream/invite",
 			"invitingUserId" => $asUserId,
 			"username" => $asUser->username,
+			"preferredLanguage" => $asUser->preferredLanguage,
 			"userIds" => Q::json_encode($userIds),
 			"stream" => Q::json_encode($stream->toArray()),
 			"appUrl" => $appUrl,

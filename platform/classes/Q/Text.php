@@ -25,14 +25,14 @@ class Q_Text
 	 */
 	static function basename($options = array())
 	{
+		$locale = Q_Config::get('Q', 'text', 'useLocale', false)
+			? self::$locale
+			: '';
 		if (isset($options['language'])) {
 			$language = $options['language'];
-			$locale = Q::ifset($options, 'locale', '');
+			$locale = Q::ifset($options, 'locale', $locale);
 		} else {
 			$language = self::$language;
-			$locale = Q_Config::get('Q', 'text', 'useLocale', false)
-				? self::$locale
-				: '';
 		}
 		return $locale ? "$language-$locale" : $language;
 	}

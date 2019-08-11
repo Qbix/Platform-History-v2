@@ -9275,8 +9275,6 @@ Q.Text = {
 	 * @param {Object} [options] Options to use for Q.request . May also include:
 	 * @param {Boolean} [options.ignoreCache=false] If true, reloads the text source even if it's been already cached.
 	 * @param {Boolean} [options.merge=false] For Q.Text.set if content is loaded
-	 * @param {String} [options.language=null] Override language
-	 * @param {String} [options.locale=null] Override locale
 	 * @return {Boolean|Q.Request} Returns true if content was already loaded,
 	 *   otherwise calls the result of Q.request
 	 */

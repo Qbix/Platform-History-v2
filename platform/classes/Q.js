@@ -26,7 +26,7 @@ QConstructor.prototype = new events.EventEmitter();
 var Q = new QConstructor();
 module.exports = Q;
 
-Q.VERSION = 0.9;
+Q.VERSION = 1.1;
 
 /**
  * @class Q.Error
@@ -2376,12 +2376,12 @@ Q.init = function _Q_init(app, notListen) {
  * @param {array} [params=array] Parameters to pass to the view
  * @param {array} [options=array] Some options
  * @param {string|null} [options.language=null] Preferred language
- * @param {string|null} [options.source=false]
  * @return {string} The rendered content of the view
  */
 Q.view = function _Q_view(viewName, params, options) {
-	params = params || [];
-	options = options || [];
+	
+	params = params || {};
+	options = options || {};
 
 	var parts = viewName.split('/');
 	var viewPath = parts.join(Q.DS);
@@ -2395,12 +2395,8 @@ Q.view = function _Q_view(viewName, params, options) {
 	params.language = options.language;
 
 	var textParams = Q.Text.params(parts, {'language': options.language});
-	params = Q.extend(textParams, params);
-
-	if (options.source) {
-		return Q.Handlebars.renderSource(viewName, params);
-	}
-
+	params = Q.extend({}, textParams, params);
+	
 	return Q.Handlebars.render(viewPath, params);
 };
 /**
@@ -3100,6 +3096,8 @@ Sp.decodeHTML = function _String_prototype_decodeHTML(unconvert) {
  * @param {Object|Array} fields Can be an object with field names and values,
  *   or an array corresponding to {{0}}, {{1}}, etc. If the string is missing
  *   {{0}} then {{1}} is mapped to the first element of the array.
+ *   If the placeholder names contain dots, e.g. "{{foo.bar.baz}}" or "{{0.bar.baz}}",
+ *   we use Q.getObject to dig deeper into the fields.
  * @return {String}
  */
 Sp.interpolate = function _String_prototype_interpolate(fields) {
@@ -3112,7 +3110,7 @@ Sp.interpolate = function _String_prototype_interpolate(fields) {
 		return result;
 	}
 	return this.replace(/\{\{([^{}]*)\}\}/g, function (a, b) {
-		var r = fields[b];
+		var r = Q.getObject(b, fields);
 		return (typeof r === 'string' || typeof r === 'number') ? r : a;
 	});
 };
@@ -3398,6 +3396,21 @@ if (!Array.prototype.indexOf) {
 		return -1;
 	};
 }
+
+/**
+ * This function is useful for debugging, e.g. calling it in breakpoint conditions
+ * @method stackTrack
+ * @static
+ */
+Q.stackTrace = function() {
+	var obj = {};
+	if (Error.captureStackTrace) {
+		Error.captureStackTrace(obj, Q.stackTrace);
+	} else {
+		obj = new Error();
+	}
+	return obj.stack;
+};
 
 Q.globalNames = Object.keys(root); // to find stray globals
 

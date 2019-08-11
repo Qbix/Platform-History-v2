@@ -66,10 +66,8 @@ class Q
 	}
 	
 	/**
-	 * Used for shorthand for avoiding when you don't want to write
-	 * (isset($some_long_expression) ? $some_long_expression: null)
-	 * when you want to avoid possible "undefined variable" errors.
-	 * @method ifset
+	 * Used to get information depeer inside arrarys and objects
+	 * @method getObject
 	 * @param {&mixed} $ref
 	 *  The reference to test. Only lvalues can be passed.
 	 * @param {array} $path
@@ -277,6 +275,8 @@ class Q
 	 *  corresponding strings.
 	 *  If the expression is missing {{0}} and $0, then {{1}} or $1 is replaced
 	 *  by the first string, {{2}} or $2 by the second string, and so on.
+	 *  If the placeholder names contain dots, e.g. "{{foo.bar.baz}}" or "{{0.bar.baz}}",
+	 *  we use Q::getObject to dig deeper into the fields.
 	 * @param {array} [$options=array()]
 	 *  Pass any additional options to Q_Text::get() if it is called
 	 * @return {string}
@@ -304,9 +304,11 @@ class Q
 		usort($keys, array(__CLASS__, 'reverseLengthCompare'));
 		$expression = str_replace('\\$', '\\REAL_DOLLAR_SIGN\\', $expression);
 		foreach ($keys as $key) {
-			$p = (is_array($params[$key]) or is_object($params[$key]))
-				? substr(Q::json_encode($params[$key]), 0, 100)
-				: (string)$params[$key];
+			$parts = explode('.', $key);
+			$p = Q::getObject($params, $parts, '');
+			$p = (is_array($p) or is_object($p))
+				? substr(Q::json_encode($p), 0, 100)
+				: (string)$p;
 			if (is_numeric($key) and floor($key) == ceil($key)) {
 				$key = $key + $a;
 			}
@@ -1107,6 +1109,7 @@ class Q
 	}
 	
 	/**
+	 * Get a subset of data stored in an array or object
 	 * @method take
 	 * @static
 	 * @param {array|object} $source An array or object from which to take things.
