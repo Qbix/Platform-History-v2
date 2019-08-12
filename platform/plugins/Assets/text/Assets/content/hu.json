@@ -45,5 +45,27 @@
             "ok": "rendben",
             "cancel": "Megszünteti"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Credits",
+            "description": "nyomon követi a hiteleket és a kifizetéseket"
+        },
+        "Assets\/plan": {
+            "displayType": "Előfizetési terv",
+            "description": "előfizetési terv"
+        },
+        "Assets\/subscription": {
+            "displayType": "Előfizetés",
+            "description": "előfizetés"
+        },
+        "Assets\/product": {
+            "displayType": "Termék",
+            "description": "eladott termék"
+        },
+        "Assets\/service": {
+            "displayType": "Szolgáltatás",
+            "description": "szolgáltatást kínálnak"
+        }
     }
 }

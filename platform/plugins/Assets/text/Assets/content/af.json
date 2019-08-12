@@ -45,5 +45,27 @@
             "ok": "OK",
             "cancel": "kanselleer"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "krediete",
+            "description": "hou krediete en betalings dop"
+        },
+        "Assets\/plan": {
+            "displayType": "Onttrekkingsplan",
+            "description": "intekeningplan"
+        },
+        "Assets\/subscription": {
+            "displayType": "inskrywing",
+            "description": "inskrywing"
+        },
+        "Assets\/product": {
+            "displayType": "produk",
+            "description": "produk verkoop word"
+        },
+        "Assets\/service": {
+            "displayType": "diens",
+            "description": "diens wat aangebied word"
+        }
     }
 }

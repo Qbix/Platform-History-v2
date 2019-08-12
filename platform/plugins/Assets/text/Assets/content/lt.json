@@ -45,5 +45,27 @@
             "ok": "Gerai",
             "cancel": "Atšaukti"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Kreditai",
+            "description": "seka kreditus ir mokėjimus"
+        },
+        "Assets\/plan": {
+            "displayType": "Prenumeratos planas",
+            "description": "abonemento planas"
+        },
+        "Assets\/subscription": {
+            "displayType": "Prenumerata",
+            "description": "prenumerata"
+        },
+        "Assets\/product": {
+            "displayType": "Produktas",
+            "description": "parduodamas produktas"
+        },
+        "Assets\/service": {
+            "displayType": "Aptarnavimas",
+            "description": "siūlomos paslaugos"
+        }
     }
 }

@@ -45,5 +45,27 @@
             "ok": "好",
             "cancel": "取消"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "积分",
+            "description": "跟踪信用和付款"
+        },
+        "Assets\/plan": {
+            "displayType": "订购计划",
+            "description": "订阅计划"
+        },
+        "Assets\/subscription": {
+            "displayType": "订阅",
+            "description": "订阅"
+        },
+        "Assets\/product": {
+            "displayType": "产品",
+            "description": "正在出售的产品"
+        },
+        "Assets\/service": {
+            "displayType": "服务",
+            "description": "提供服务"
+        }
     }
 }

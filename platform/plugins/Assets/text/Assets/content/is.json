@@ -45,5 +45,27 @@
             "ok": "OK",
             "cancel": "Hætta við"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Einingar",
+            "description": "heldur utan um inneignir og greiðslur"
+        },
+        "Assets\/plan": {
+            "displayType": "Niðurgreiðsluáætlun",
+            "description": "áskriftaráætlun"
+        },
+        "Assets\/subscription": {
+            "displayType": "Áskrift",
+            "description": "Áskrift"
+        },
+        "Assets\/product": {
+            "displayType": "Vara",
+            "description": "vara sem seld er"
+        },
+        "Assets\/service": {
+            "displayType": "Þjónusta",
+            "description": "þjónusta í boði"
+        }
     }
 }

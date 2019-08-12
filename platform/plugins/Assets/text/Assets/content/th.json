@@ -45,5 +45,27 @@
             "ok": "ตกลง",
             "cancel": "ยกเลิก"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "เครดิต",
+            "description": "ติดตามเครดิตและการชำระเงิน"
+        },
+        "Assets\/plan": {
+            "displayType": "แผนการสมัครสมาชิก",
+            "description": "แผนการสมัครสมาชิก"
+        },
+        "Assets\/subscription": {
+            "displayType": "การสมัครสมาชิก",
+            "description": "การสมัครสมาชิก"
+        },
+        "Assets\/product": {
+            "displayType": "สินค้า",
+            "description": "สินค้าถูกขาย"
+        },
+        "Assets\/service": {
+            "displayType": "บริการ",
+            "description": "บริการถูกนำเสนอ"
+        }
     }
 }

@@ -45,5 +45,27 @@
             "ok": "ಸರಿ",
             "cancel": "ರದ್ದುಮಾಡಿ"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "ಸಾಲಗಳು",
+            "description": "ಸಾಲಗಳು ಮತ್ತು ಪಾವತಿಗಳನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡುತ್ತದೆ"
+        },
+        "Assets\/plan": {
+            "displayType": "ಚಂದಾದಾರಿಕೆ ಯೋಜನೆ",
+            "description": "ಚಂದಾದಾರಿಕೆ ಯೋಜನೆ"
+        },
+        "Assets\/subscription": {
+            "displayType": "ಚಂದಾದಾರಿಕೆ",
+            "description": "ಚಂದಾದಾರಿಕೆ"
+        },
+        "Assets\/product": {
+            "displayType": "ಉತ್ಪನ್ನ",
+            "description": "ಉತ್ಪನ್ನವನ್ನು ಮಾರಾಟ ಮಾಡಲಾಗುತ್ತಿದೆ"
+        },
+        "Assets\/service": {
+            "displayType": "ಸೇವೆ",
+            "description": "ಸೇವೆಯನ್ನು ನೀಡಲಾಗುತ್ತಿದೆ"
+        }
     }
 }

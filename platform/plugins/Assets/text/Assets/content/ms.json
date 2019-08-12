@@ -45,5 +45,27 @@
             "ok": "okey",
             "cancel": "Batalkan"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Kredit",
+            "description": "menjejaki kredit dan pembayaran"
+        },
+        "Assets\/plan": {
+            "displayType": "Pelan Subskription",
+            "description": "pelan langganan"
+        },
+        "Assets\/subscription": {
+            "displayType": "Langganan",
+            "description": "langganan"
+        },
+        "Assets\/product": {
+            "displayType": "Produk",
+            "description": "produk yang dijual"
+        },
+        "Assets\/service": {
+            "displayType": "Perkhidmatan",
+            "description": "perkhidmatan yang ditawarkan"
+        }
     }
 }

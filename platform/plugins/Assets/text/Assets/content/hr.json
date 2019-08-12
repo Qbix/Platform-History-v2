@@ -45,5 +45,27 @@
             "ok": "u redu",
             "cancel": "Otkazati"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "krediti",
+            "description": "prati kredite i isplate"
+        },
+        "Assets\/plan": {
+            "displayType": "Plan subvencioniranja",
+            "description": "pretplatni plan"
+        },
+        "Assets\/subscription": {
+            "displayType": "Pretplata",
+            "description": "pretplata"
+        },
+        "Assets\/product": {
+            "displayType": "Proizvod",
+            "description": "proizvod koji se prodaje"
+        },
+        "Assets\/service": {
+            "displayType": "Servis",
+            "description": "usluga koja se nudi"
+        }
     }
 }

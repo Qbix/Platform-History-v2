@@ -45,5 +45,27 @@
             "ok": "добро",
             "cancel": "Откажи"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Кредити",
+            "description": "води сметка за кредити и плаќања"
+        },
+        "Assets\/plan": {
+            "displayType": "План за субвенционирање",
+            "description": "план за претплата"
+        },
+        "Assets\/subscription": {
+            "displayType": "Претплата",
+            "description": "претплата"
+        },
+        "Assets\/product": {
+            "displayType": "Производ",
+            "description": "производ се продава"
+        },
+        "Assets\/service": {
+            "displayType": "Сервис",
+            "description": "услугата што се нуди"
+        }
     }
 }

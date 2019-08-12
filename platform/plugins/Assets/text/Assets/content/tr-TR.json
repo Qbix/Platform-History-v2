@@ -45,5 +45,27 @@
             "ok": "tamam",
             "cancel": "İptal etmek"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "Kredi",
+            "description": "kredileri ve ödemeleri takip eder"
+        },
+        "Assets/plan": {
+            "displayType": "Abonelik Planı",
+            "description": "abonelik planı"
+        },
+        "Assets/subscription": {
+            "displayType": "abone",
+            "description": "abone"
+        },
+        "Assets/product": {
+            "displayType": "Ürün",
+            "description": "satılan ürün"
+        },
+        "Assets/service": {
+            "displayType": "Hizmet",
+            "description": "sunulan hizmet"
+        }
     }
 }

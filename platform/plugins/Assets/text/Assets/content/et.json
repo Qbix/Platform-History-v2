@@ -45,5 +45,27 @@
             "ok": "Okei",
             "cancel": "Tühista"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Autorid",
+            "description": "jälgib krediite ja makseid"
+        },
+        "Assets\/plan": {
+            "displayType": "Liitumisplaan",
+            "description": "liitumisplaan"
+        },
+        "Assets\/subscription": {
+            "displayType": "Tellimine",
+            "description": "tellimine"
+        },
+        "Assets\/product": {
+            "displayType": "Toode",
+            "description": "toode müüakse"
+        },
+        "Assets\/service": {
+            "displayType": "Teenindus",
+            "description": "pakutav teenus"
+        }
     }
 }

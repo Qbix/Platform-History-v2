@@ -45,5 +45,27 @@
             "ok": "Хорошо",
             "cancel": "отменить"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "кредиты",
+            "description": "отслеживает кредиты и платежи"
+        },
+        "Assets/plan": {
+            "displayType": "План подписки",
+            "description": "план подписки"
+        },
+        "Assets/subscription": {
+            "displayType": "Подписка",
+            "description": "подписка"
+        },
+        "Assets/product": {
+            "displayType": "Товар",
+            "description": "продукт продается"
+        },
+        "Assets/service": {
+            "displayType": "обслуживание",
+            "description": "предлагаемая услуга"
+        }
     }
 }

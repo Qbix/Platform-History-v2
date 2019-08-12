@@ -45,5 +45,27 @@
             "ok": "OK",
             "cancel": "Pagkansela"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "Mga Kredito",
+            "description": "subaybayan ang mga kredito at pagbabayad"
+        },
+        "Assets/plan": {
+            "displayType": "Plano ng Subsription",
+            "description": "plano ng subscription"
+        },
+        "Assets/subscription": {
+            "displayType": "Suskrisyon",
+            "description": "subscription"
+        },
+        "Assets/product": {
+            "displayType": "Produkto",
+            "description": "ibinebenta ang produkto"
+        },
+        "Assets/service": {
+            "displayType": "Serbisyo",
+            "description": "inaalok ang serbisyo"
+        }
     }
 }

@@ -45,5 +45,27 @@
             "ok": "Добре",
             "cancel": "Отказ"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "Кредити",
+            "description": "следи кредитите и плащанията"
+        },
+        "Assets/plan": {
+            "displayType": "План за субсидиране",
+            "description": "абонаментен план"
+        },
+        "Assets/subscription": {
+            "displayType": "абонамент",
+            "description": "абонамент"
+        },
+        "Assets/product": {
+            "displayType": "продукт",
+            "description": "продукт, който се продава"
+        },
+        "Assets/service": {
+            "displayType": "Обслужване",
+            "description": "предлагана услуга"
+        }
     }
 }

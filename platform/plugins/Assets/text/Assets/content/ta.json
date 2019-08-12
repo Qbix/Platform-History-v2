@@ -45,5 +45,27 @@
             "ok": "சரி",
             "cancel": "ரத்து"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "வரவுகளை",
+            "description": "வரவுகளையும் கொடுப்பனவுகளையும் கண்காணிக்கும்"
+        },
+        "Assets\/plan": {
+            "displayType": "சந்தா திட்டம்",
+            "description": "சந்தா திட்டம்"
+        },
+        "Assets\/subscription": {
+            "displayType": "சந்தா",
+            "description": "சந்தா"
+        },
+        "Assets\/product": {
+            "displayType": "தயாரிப்பு",
+            "description": "தயாரிப்பு விற்கப்படுகிறது"
+        },
+        "Assets\/service": {
+            "displayType": "சேவை",
+            "description": "சேவை வழங்கப்படுகிறது"
+        }
     }
 }

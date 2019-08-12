@@ -45,5 +45,27 @@
             "ok": "OK",
             "cancel": "Cealaigh"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "Creidmheasanna",
+            "description": "coimeádann sé súil ar chreidmheasanna agus ar íocaíochtaí"
+        },
+        "Assets/plan": {
+            "displayType": "Plean Fóirdheontais",
+            "description": "plean suibscríofa"
+        },
+        "Assets/subscription": {
+            "displayType": "Sintiús",
+            "description": "sintiús"
+        },
+        "Assets/product": {
+            "displayType": "Táirge",
+            "description": "táirge á dhíol"
+        },
+        "Assets/service": {
+            "displayType": "Seirbhís",
+            "description": "seirbhís á tairiscint"
+        }
     }
 }

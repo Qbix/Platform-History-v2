@@ -45,5 +45,27 @@
             "ok": "в порядку",
             "cancel": "Скасувати"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "Кредити",
+            "description": "веде облік кредитів та платежів"
+        },
+        "Assets/plan": {
+            "displayType": "План субсидії",
+            "description": "план передплати"
+        },
+        "Assets/subscription": {
+            "displayType": "Підписка",
+            "description": "підписка"
+        },
+        "Assets/product": {
+            "displayType": "Товар",
+            "description": "товар, що продається"
+        },
+        "Assets/service": {
+            "displayType": "Сервіс",
+            "description": "послуги, що пропонуються"
+        }
     }
 }

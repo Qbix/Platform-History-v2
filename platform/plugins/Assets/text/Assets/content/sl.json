@@ -45,5 +45,27 @@
             "ok": "v redu",
             "cancel": "Prekliči"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Krediti",
+            "description": "spremlja kredite in plačila"
+        },
+        "Assets\/plan": {
+            "displayType": "Načrtovalni načrt",
+            "description": "naročniški načrt"
+        },
+        "Assets\/subscription": {
+            "displayType": "Naročnina",
+            "description": "naročnina"
+        },
+        "Assets\/product": {
+            "displayType": "Izdelek",
+            "description": "izdelek, ki se prodaja"
+        },
+        "Assets\/service": {
+            "displayType": "Storitev",
+            "description": "storitev, ki se ponuja"
+        }
     }
 }

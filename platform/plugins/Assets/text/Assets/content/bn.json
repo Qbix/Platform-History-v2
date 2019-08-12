@@ -45,5 +45,27 @@
             "ok": "ঠিক আছে",
             "cancel": "বাতিল"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "ক্রেডিট",
+            "description": "ক্রেডিট এবং পেমেন্ট ট্র্যাক রাখে"
+        },
+        "Assets\/plan": {
+            "displayType": "সাবস্ক্রিপশন প্ল্যান",
+            "description": "সাবস্ক্রিপশন পরিকল্পনা"
+        },
+        "Assets\/subscription": {
+            "displayType": "চাঁদা",
+            "description": "চাঁদা"
+        },
+        "Assets\/product": {
+            "displayType": "প্রোডাক্ট",
+            "description": "পণ্য বিক্রি হচ্ছে"
+        },
+        "Assets\/service": {
+            "displayType": "সেবা",
+            "description": "পরিষেবা দেওয়া হচ্ছে"
+        }
     }
 }

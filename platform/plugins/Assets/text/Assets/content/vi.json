@@ -45,5 +45,27 @@
             "ok": "được",
             "cancel": "Hủy bỏ"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Tín dụng",
+            "description": "theo dõi các khoản tín dụng và thanh toán"
+        },
+        "Assets\/plan": {
+            "displayType": "Kế hoạch thuê bao",
+            "description": "gói thuê bao"
+        },
+        "Assets\/subscription": {
+            "displayType": "Đăng ký",
+            "description": "đăng ký"
+        },
+        "Assets\/product": {
+            "displayType": "Sản phẩm",
+            "description": "sản phẩm đang được bán"
+        },
+        "Assets\/service": {
+            "displayType": "Dịch vụ",
+            "description": "dịch vụ đang được cung cấp"
+        }
     }
 }

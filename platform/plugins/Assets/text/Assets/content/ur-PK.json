@@ -45,5 +45,27 @@
             "ok": "ٹھیک ہے",
             "cancel": "منسوخ کریں"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "کریڈٹ",
+            "description": "کریڈٹ اور ادائیگیوں پر نظر رکھتا ہے۔"
+        },
+        "Assets/plan": {
+            "displayType": "سبسکریپشن پلان۔",
+            "description": "خریداری کا منصوبہ"
+        },
+        "Assets/subscription": {
+            "displayType": "سب سکریپشن۔",
+            "description": "رکنیت"
+        },
+        "Assets/product": {
+            "displayType": "پروڈکٹ",
+            "description": "پروڈکٹ فروخت کی جارہی ہے۔"
+        },
+        "Assets/service": {
+            "displayType": "خدمت۔",
+            "description": "پیش کردہ خدمت"
+        }
     }
 }

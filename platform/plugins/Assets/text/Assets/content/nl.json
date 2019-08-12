@@ -45,5 +45,27 @@
             "ok": "OK",
             "cancel": "annuleren"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "credits",
+            "description": "houdt credits en betalingen bij"
+        },
+        "Assets\/plan": {
+            "displayType": "Abonnement Plan",
+            "description": "abonnement plan"
+        },
+        "Assets\/subscription": {
+            "displayType": "Abonnement",
+            "description": "abonnement"
+        },
+        "Assets\/product": {
+            "displayType": "Artikel",
+            "description": "product wordt verkocht"
+        },
+        "Assets\/service": {
+            "displayType": "Service",
+            "description": "service wordt aangeboden"
+        }
     }
 }

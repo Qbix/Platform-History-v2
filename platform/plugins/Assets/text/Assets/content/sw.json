@@ -45,5 +45,27 @@
             "ok": "sawa",
             "cancel": "Ghairi"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Mikopo",
+            "description": "hufuata kumbukumbu ya malipo na malipo"
+        },
+        "Assets\/plan": {
+            "displayType": "Mpango wa Usaidizi",
+            "description": "mpango wa usajili"
+        },
+        "Assets\/subscription": {
+            "displayType": "Usajili",
+            "description": "usajili"
+        },
+        "Assets\/product": {
+            "displayType": "Bidhaa",
+            "description": "bidhaa inauzwa"
+        },
+        "Assets\/service": {
+            "displayType": "Huduma",
+            "description": "huduma inayotolewa"
+        }
     }
 }

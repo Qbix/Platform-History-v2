@@ -45,5 +45,27 @@
             "ok": "OK",
             "cancel": "Stornieren"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "Credits",
+            "description": "Verfolgt Kredite und Zahlungen"
+        },
+        "Assets/plan": {
+            "displayType": "Abo-Plan",
+            "description": "Abo-Plan"
+        },
+        "Assets/subscription": {
+            "displayType": "Abonnement",
+            "description": "Abonnement"
+        },
+        "Assets/product": {
+            "displayType": "Produkt",
+            "description": "Produkt wird verkauft"
+        },
+        "Assets/service": {
+            "displayType": "Bedienung",
+            "description": "Service angeboten wird"
+        }
     }
 }
