@@ -3349,7 +3349,7 @@ abstract class Streams extends Base_Streams
 	 * @throws Q_Exception_MissingFile
 	 * @throws Q_Exception_WrongValue
 	 * @return {array} Returns array with keys
-	 *  "success", "invite", "cout", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
+	 *  "success", "invite", "count", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
 	 *  The userIds array contains userIds from "userId" first, then "identifiers", "xids", "label",
 	 *  then "newFutureUsers". The statuses is an array of the same size and in the same order.
 	 *  The identifierTypes array is in the same order as well.
