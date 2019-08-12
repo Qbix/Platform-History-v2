@@ -34,7 +34,7 @@ Text.basename = function(options) {
 	} else {
 		language = Text.language;
 	}
-	return locale ? language + '-' + locale : language;
+	return locale ? language.toLowerCase() + '-' + locale.toUpperCase() : language.toLowerCase();
 };
 
 /**
@@ -42,10 +42,10 @@ Text.basename = function(options) {
  * @method get
  * @param {string} filename The filename of the file to load.
  * @param {object} [options]
- * @param {string} [options.language=Q.Text.language] Preferred language, can be of the form "en" or "en-US"
- * @param {string} [options.language=Q.Text.language] Preferred language, can be of the form "en" or "en-US"
+ * @param {string} [options.language=Q.Text.language] Preferred language, e.g. "en"
+ * @param {string} [options.locale=Q.Text.locale] Preferred locale, e.g. "US"
  * @param {boolean} [options.reload=false] Whether to reload the file even if it was already loaded before
- * @return {object} JSON object
+ * @return {object} the object containing text tree data
  */
 Text.get = function (filename, options) {
 	var o = options || {};
@@ -78,15 +78,17 @@ Text.get.results = {};
  * Get parameters merged from all the text sources corresponding to a view template
  * @method params
  * @param {string} viewPath The view name, such as "Module/cool/view.handlebars"
- * @param {string} [language] Preferred language
- * @param {boolean} [reload=false] Whether to reload the files even if they was already loaded before
- * @return {array} The merged parameters that come from the text
+ * @param {object} options
+ * @param {string} [options.language=Q.Text.language] Preferred language
+ * @param {boolean} [options.reload=false] Whether to reload the files even if they was already loaded before
+ * @return {array} The merged tree that comes from the text files
  */
-Text.params = function (viewPath, language, reload) {
+Text.params = function (viewPath, options) {
+	options = options || {};
 	if(typeof viewPath === 'string') {
 		viewPath = viewPath.split('/');
 	}
-	var language = language || Text.language;
+	var language = options.language || Text.language;
 	var key = viewPath + '/' + language;
 	if (Text.params.results[key]) {
 		return Text.params.results[key];
@@ -109,9 +111,9 @@ Text.params = function (viewPath, language, reload) {
 		p = ['Q', 'text'].concat(_try[j].slice(0));
 		if (text = Q.Config.get(p, null)) {
 			if (Array.isArray(text)) {
-				// options2 = options;
+				options2 = options;
 			} else if (typeof text === 'object') {
-				// options2 = Q.extend(options, text);
+				options2 = Q.extend({}, options, text);
 				if (!text.sources) {
 					continue;
 				}
@@ -120,7 +122,7 @@ Text.params = function (viewPath, language, reload) {
 				continue;
 			}
 
-			tree.merge(Text.get(text, language, reload));
+			tree.merge(Text.get(text, options2));
 		}
 	}
 	return Text.params.results[key] = tree.getAll();
