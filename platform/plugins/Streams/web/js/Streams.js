@@ -1354,13 +1354,18 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			var emailAddresses = [];
 			var mobileNumbers = [];
 			var fb_xids = [];
-			Q.each(rsd.userIds, function (i, userId) {
-				if (rsd.alreadyParticipating.indexOf(userId) >= 0) {
-					return;
-				}
-				var status = rsd.statuses[i];
+			// The invite mechanism allows clients to know whether
+			// certain identifiers are verified with the site or not,
+			// but will not let clients know which userIds they correspond to.
+			Q.each(rsd.statuses, function (i, s) {
+				// The invite mechanism no longer leak participant userIds to clients,
+				// so you can't match external identifiers to userIds
+				// That is why rsd.alreadyParticipating is no longer returned:
+				// if (rsd.alreadyParticipating.indexOf(userId) >= 0) {
+				// 	return;
+				// }
 				var shouldFollowup = (o.followup === true)
-					|| (o.followup !== false && status === 'future');
+					|| (o.followup !== false && s === 'future');
 				if (!shouldFollowup) {
 					return; // next one
 				}

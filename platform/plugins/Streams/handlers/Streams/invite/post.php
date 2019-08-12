@@ -34,8 +34,12 @@ function Streams_invite_post()
 	));
 
 	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
-	Streams::$cache['invite'] = Streams::invite($publisherId, $streamName, $r, $r);
+	Streams::$cache['invite'] = $data = Streams::invite($publisherId, $streamName, $r, $r);
+	
+	// do not give the clients an easy to way to find userIds by identifiers and xids
+	unset($data['userIds']);
+	unset($data['alreadyParticipating']);
 	
 	Q_Response::setSlot('stream', $stream->exportArray());
-	Q_Response::setSlot('data', Streams::$cache['invite']);
+	Q_Response::setSlot('data', $data);
 }
