@@ -67,5 +67,19 @@
             "displayType": "Service",
             "description": "service being offered"
         }
-    }
+    },
+	"messages": {
+		"Assets\/credits\/earned": {
+			"displayType": "Earned {{amount}} credits"
+		},
+		"Assets\/credits\/spent": {
+			"displayType": "Spent {{amount}} credits"
+		},
+		"Assets\/credits\/sent": {
+			"displayType": "Sent {{amount}} credits"
+		},
+		"Assets\/credits\/received": {
+			"displayType": "Received {{amount}} credits"
+		}
+	}
 }

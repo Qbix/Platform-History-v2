@@ -114,9 +114,12 @@ class Assets_Credits
 			),
 			$more
 		));
+		$text = Q_Text::get('Assets/content');
+		$type = 'Assets/credits/spent';
+		$content = Q::ifset($text, 'messages', $type, "Spent {{amount}} credits");
 		$stream->post($userId, array(
-			'type' => 'Assets/credits/spent',
-			'content' => $amount,
+			'type' => $type,
+			'content' => $content,
 			'byClientId' => Q::ifset($more, 'publisherId', null),
 			'instructions' => $instructions_json
 		));
@@ -153,9 +156,12 @@ class Assets_Credits
 		$stream->save();
 		
 		// Post that this user earned $amount credits by $reason
+		$text = Q_Text::get('Assets/content');
+		$type = 'Assets/credits/earned';
+		$content = Q::ifset($text, 'messages', $type, "Earned {{amount}} credits");
 		$stream->post($userId, array(
-			'type' => 'Assets/credits/earned',
-			'content' => $amount,
+			'type' => $type,
+			'content' => Q::interpolate($content, compact('amount')),
 			'byClientId' => Q::ifset($more, 'publisherId', null),
 			'instructions' => Q::json_encode(array_merge(
 				array(
@@ -209,10 +215,13 @@ class Assets_Credits
 		$from_stream->save();
 
 		$instructions['operation'] = '-';
+		$text = Q_Text::get('Assets/content');
+		$type = 'Assets/credits/sent';
+		$content = Q::ifset($text, 'messages', $type, "Sent {{amount}} credits");
 		$from_stream->post($fromUserId, array(
-			'type' => 'Assets/credits/sent',
+			'type' => $type,
 			'byClientId' => $toUserId,
-			'content' => $amount,
+			'content' => $content,
 			'instructions' => Q::json_encode($instructions)
 		));
 		
@@ -223,10 +232,13 @@ class Assets_Credits
 		$to_stream->setAttribute('amount', $to_stream->getAttribute('amount') + $amount);
 		$to_stream->save();
 		$instructions['operation'] = '+';
+		$text = Q_Text::get('Assets/content');
+		$type = 'Assets/credits/received';
+		$content = Q::ifset($text, 'messages', $type, "Received {{amount}} credits");
 		$to_stream->post($toUserId, array(
-			'type' => 'Assets/credits/received',
+			'type' => $type,
 			'byClientId' => $fromUserId,
-			'content' => $amount,
+			'content' => $content,
 			'instructions' => Q::json_encode($instructions)
 		));
 	}

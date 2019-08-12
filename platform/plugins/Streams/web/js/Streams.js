@@ -5140,7 +5140,7 @@ Q.onInit.add(function _Streams_onInit() {
 			message = Streams.Message.construct(message);
 			var messageType = message.type;
 			var messageUrl = message.getInstruction('inviteUrl') || message.getInstruction('url');
-			var description = message.getInstruction('description');
+			var content = message.getInstruction('content');
 			var noticeOptions = notificationsAsNotice[messageType];
 			var pluginName = messageType.split('/')[0];
 
@@ -5166,8 +5166,7 @@ Q.onInit.add(function _Streams_onInit() {
 
 						Streams.Avatar.get(message.byUserId, function (err, avatar) {
 							var source = (noticeOptions.showSubject !== false ? text : '');
-							source = (source ? source + ': ' : '')
-								+ (description || message.content);
+							source = (source ? source + ': ' : '') + (content || message.content);
 							if (!source) {
 								return;
 							}
