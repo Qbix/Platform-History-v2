@@ -18,7 +18,8 @@
         "GetStarted": "Kom igang",
         "Authorize": "Bemyndige",
         "TermsLabel": "Jeg har læst og accepteret <br> til {{link}}",
-        "TermsTitle": "Betingelser"
+        "TermsTitle": "Betingelser",
+        "mustAgree": "Først skal du acceptere betingelserne."
     },
     "register": {
         "TermsLabel": "Jeg accepterer {{link}}",
@@ -45,5 +46,52 @@
         "select": {
             "title": "Vælg kontakt af {{displayName}}"
         }
+    },
+    "login": {
+        "title": "Velkommen",
+        "directions": "Opret en konto, eller log ind.",
+        "directionsNoRegister": "Log ind, hvis du har en konto.",
+        "goButton": "Gå",
+        "passphrase": "Indtast din adgangssætning:",
+        "loginButton": "Kom igang",
+        "registerButton": "Kom igang",
+        "resendButton": "Send aktiveringsmeddelelse",
+        "forgot": "Glemte det?",
+        "resendConfirm": "Vil du sende en besked for at nulstille din adgangskode?",
+        "resendSuccess": "Kontroller, om der er en meddelelse, der nulstiller din adgangskode",
+        "resendClose": "Tæt",
+        "noPassphrase": "Inden du kan logge ind, skal du indstille en adgangssætning ved at klikke på linket i din aktiveringsmeddelelse.",
+        "notVerified": "Du skal sende dig selv en aktiveringsmeddelelse for at logge ind.",
+        "emailExists": "Forsøgte du at registrere dig med denne e-mail før? I så fald skal du kontrollere din indbakke for at aktivere din konto. <a href='#resend' class='Q_button Users_activation_resend'>Klik for at sende beskeden igen<\/a>",
+        "mobileExists": "Forsøgte du at registrere dig med dette mobilnummer før? I så fald skal du kontrollere din SMS for at aktivere din konto. <a href='#resend' class='Q_button Users_activation_resend'>Klik for at sende beskeden igen<\/a>",
+        "usingOther": "eller du kan",
+        "prompt": "Vælg et brugernavn:",
+        "newUser": "eller opret en ny konto",
+        "placeholders": {
+            "identifier": "din mobilnummer eller e-mail",
+            "mobile": "indtast din mobil #",
+            "email": "Indtast din e-mailadresse",
+            "username": "brugernavn"
+        },
+        "confirmTerms": "Accepterer du servicevilkårene?",
+        "facebookNoEmail": "Din facebook-konto mangler en bekræftet e-mail-adresse. Log ind på den oprindelige måde.",
+        "picTooltip": "Du kan ændre dette billede senere"
+    },
+    "setIdentifier": {
+        "title": "Tilføj en måde at logge ind på",
+        "sendMessage": "Send aktiveringsmeddelelse",
+        "placeholders": {
+            "identifier": "indtast din mobilnummer eller e-mail",
+            "mobile": "Skriv dit telefonnummer",
+            "email": "Indtast din e-mailadresse",
+            "username": "brugernavn"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} -konto",
+        "areUsing": "Du bruger {{platform}} som",
+        "noLongerUsing": "Du er ikke længere tilsluttet {{platform}} som",
+        "doAuth": "Log ind med denne konto",
+        "doSwitch": "Skift til denne konto"
     }
 }

@@ -18,7 +18,8 @@
         "GetStarted": "Pradėti",
         "Authorize": "Įgalioti",
         "TermsLabel": "Aš perskaičiau ir sutinku <br> iki {{link}}",
-        "TermsTitle": "Sąlygos"
+        "TermsTitle": "Sąlygos",
+        "mustAgree": "Pirmiausia turite sutikti su sąlygomis."
     },
     "register": {
         "TermsLabel": "Sutinku su {{link}}",
@@ -45,5 +46,52 @@
         "select": {
             "title": "Pasirinkite {{displayName}} kontaktą"
         }
+    },
+    "login": {
+        "title": "Sveiki",
+        "directions": "Sukurkite sąskaitą arba prisijunkite.",
+        "directionsNoRegister": "Prisijunkite, jei turite sąskaitą.",
+        "goButton": "Eik",
+        "passphrase": "Įveskite savo leidimo frazę:",
+        "loginButton": "Pradėti",
+        "registerButton": "Pradėti",
+        "resendButton": "Siųsti aktyvinimo pranešimą",
+        "forgot": "Pamiršau?",
+        "resendConfirm": "Ar norite nusiųsti pranešimą, kad iš naujo nustatytumėte slaptafrazę?",
+        "resendSuccess": "Patikrinkite, ar nėra slaptažodžio slaptažodžio iš naujo",
+        "resendClose": "Uždaryti",
+        "noPassphrase": "Prieš prisijungdami, turite nustatyti slaptafrazę spustelėdami nuorodą aktyvavimo pranešime.",
+        "notVerified": "Norėdami prisijungti, turite išsiųsti sau aktyvinimo pranešimą.",
+        "emailExists": "Ar bandėte anksčiau registruotis šiuo el. Laišku? Jei taip, patikrinkite gautuosius, kad suaktyvintumėte savo sąskaitą. <a href='#resend' class='Q_button Users_activation_resend'>Spustelėkite, jei norite dar kartą išsiųsti pranešimą<\/a>",
+        "mobileExists": "Ar bandėte anksčiau registruotis šiuo mobiliojo telefono numeriu? Jei taip, patikrinkite SMS, kad suaktyvintumėte savo sąskaitą. <a href='#resend' class='Q_button Users_activation_resend'>Spustelėkite, jei norite dar kartą išsiųsti pranešimą<\/a>",
+        "usingOther": "ar galite",
+        "prompt": "Pasirinkite vartotojo vardą:",
+        "newUser": "arba sukurkite naują paskyrą",
+        "placeholders": {
+            "identifier": "savo mobiliajame telefone arba el",
+            "mobile": "įveskite savo mobiliojo telefono numerį",
+            "email": "Įveskite savo elektroninio pašto adresą",
+            "username": "Vartotojo vardas"
+        },
+        "confirmTerms": "Sutikti su paslaugų teikimo sąlygomis?",
+        "facebookNoEmail": "Jūsų „Facebook“ paskyroje nėra patvirtinto el. Pašto adreso. Tiesiog prisijunkite savo būdu.",
+        "picTooltip": "Vėliau galėsite pakeisti šį paveikslėlį"
+    },
+    "setIdentifier": {
+        "title": "Pridėkite prisijungimo būdą",
+        "sendMessage": "Siųsti aktyvinimo pranešimą",
+        "placeholders": {
+            "identifier": "įveskite savo mobiliojo telefono numerį arba el. pašto adresą",
+            "mobile": "įveskite savo mobiliojo telefono numerį",
+            "email": "Įveskite savo elektroninio pašto adresą",
+            "username": "Vartotojo vardas"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} sąskaita",
+        "areUsing": "Jūs naudojate {{platform}} kaip",
+        "noLongerUsing": "Jūs nebesate prisijungę prie {{platform}} kaip",
+        "doAuth": "Prisijunkite naudodami šią sąskaitą",
+        "doSwitch": "Perjungti į šią sąskaitą"
     }
 }

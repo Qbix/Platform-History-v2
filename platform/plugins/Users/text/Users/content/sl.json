@@ -18,7 +18,8 @@
         "GetStarted": "Začeti",
         "Authorize": "Odobri",
         "TermsLabel": "Prebral sem in se strinjam <br> do {{link}}",
-        "TermsTitle": "Pogoji"
+        "TermsTitle": "Pogoji",
+        "mustAgree": "Najprej se morate strinjati s pogoji."
     },
     "register": {
         "TermsLabel": "Sprejemam {{link}}",
@@ -45,5 +46,52 @@
         "select": {
             "title": "Izberite stik osebe {{displayName}}"
         }
+    },
+    "login": {
+        "title": "Dobrodošli",
+        "directions": "Ustvarite račun ali se prijavite.",
+        "directionsNoRegister": "Če imate račun, se prijavite.",
+        "goButton": "Pojdi",
+        "passphrase": "Vnesite svoj izraz:",
+        "loginButton": "Začeti",
+        "registerButton": "Začeti",
+        "resendButton": "Pošlji aktivacijsko sporočilo",
+        "forgot": "Ste pozabili?",
+        "resendConfirm": "Ali želite poslati sporočilo, da ponastavite geslo?",
+        "resendSuccess": "Preverite sporočilo za ponastavitev gesla",
+        "resendClose": "Zapri",
+        "noPassphrase": "Preden se lahko prijavite, morate določiti prehodno frazo s klikom na povezavo v svojem aktivacijskem sporočilu.",
+        "notVerified": "Če se želite prijaviti, morate poslati sporočilo o aktivaciji.",
+        "emailExists": "Ste se že poskusili registrirati s tem e-poštnim sporočilom? V tem primeru preverite prejeto pošto, da aktivirate svoj račun. <a href='#resend' class='Q_button Users_activation_resend'>Kliknite, če želite sporočilo ponovno poslati<\/a>",
+        "mobileExists": "Ste se že poskusili registrirati s to mobilno številko? Če je tako, preverite svoj SMS, da aktivirate svoj račun. <a href='#resend' class='Q_button Users_activation_resend'>Kliknite, če želite sporočilo ponovno poslati<\/a>",
+        "usingOther": "ali lahko",
+        "prompt": "Izberi uporabniško ime:",
+        "newUser": "ali ustvarite nov račun",
+        "placeholders": {
+            "identifier": "vaš mobilni # ali e-poštni naslov",
+            "mobile": "vnesite svoj mobilni #",
+            "email": "Vnesi svoj elektronski naslov",
+            "username": "uporabniško ime"
+        },
+        "confirmTerms": "Sprejmete pogoje storitve?",
+        "facebookNoEmail": "V vašem facebook računu manjka potrjen e-poštni naslov. Preprosto se prijavite na domač način.",
+        "picTooltip": "To sliko lahko spremenite pozneje"
+    },
+    "setIdentifier": {
+        "title": "Dodajte način za prijavo",
+        "sendMessage": "Pošlji aktivacijsko sporočilo",
+        "placeholders": {
+            "identifier": "vnesite svoj mobilni # ali e-poštni naslov",
+            "mobile": "vnesite svojo mobilno številko",
+            "email": "Vnesi svoj elektronski naslov",
+            "username": "uporabniško ime"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Račun",
+        "areUsing": "Uporabljate {{platform}} kot",
+        "noLongerUsing": "Niste več povezani z {{platform}} kot",
+        "doAuth": "Prijavite se s tem računom",
+        "doSwitch": "Preklopite na ta račun"
     }
 }

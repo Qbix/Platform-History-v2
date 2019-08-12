@@ -18,7 +18,8 @@
         "GetStarted": "Začať",
         "Authorize": "Povoliť",
         "TermsLabel": "Čítal som a súhlasím <br> do {{link}}",
-        "TermsTitle": "podmienky"
+        "TermsTitle": "podmienky",
+        "mustAgree": "Najprv musíte súhlasiť s podmienkami."
     },
     "register": {
         "TermsLabel": "Súhlasím s {{link}}",
@@ -45,5 +46,52 @@
         "select": {
             "title": "Vyberte kontakt používateľa {{displayName}}"
         }
+    },
+    "login": {
+        "title": "vitajte",
+        "directions": "Vytvorte si účet alebo sa prihláste.",
+        "directionsNoRegister": "Prihláste sa, ak máte účet.",
+        "goButton": "ísť",
+        "passphrase": "Zadajte svoju prístupovú frázu:",
+        "loginButton": "Začať",
+        "registerButton": "Začať",
+        "resendButton": "Poslať aktivačnú správu",
+        "forgot": "Zabudol som?",
+        "resendConfirm": "Chcete poslať správu s cieľom obnoviť prístupovú frázu?",
+        "resendSuccess": "Vyhľadajte správu, aby ste obnovili prístupovú frázu",
+        "resendClose": "Zavrieť",
+        "noPassphrase": "Pred prihlásením musíte nastaviť prístupovú frázu kliknutím na odkaz v aktivačnej správe.",
+        "notVerified": "Aby ste sa mohli prihlásiť, musíte si poslať aktivačnú správu.",
+        "emailExists": "Skúsili ste sa predtým zaregistrovať v tomto e-maile? Ak áno, aktivujte svoj účet v doručenej pošte. <a href='#resend' class='Q_button Users_activation_resend'>Kliknutím správu znova odošlete<\/a>",
+        "mobileExists": "Skúsili ste sa predtým zaregistrovať v tomto mobilnom čísle? Ak je to tak, skontrolujte svoju SMS a aktivujte svoj účet. <a href='#resend' class='Q_button Users_activation_resend'>Kliknutím správu znova odošlete<\/a>",
+        "usingOther": "alebo môžete",
+        "prompt": "Zvoľ si používateľské meno:",
+        "newUser": "alebo si vytvorte nový účet",
+        "placeholders": {
+            "identifier": "váš mobilný telefón alebo e-mail",
+            "mobile": "zadajte svoj mobilný telefón #",
+            "email": "Vložte svoju e-mailovú adresu",
+            "username": "užívateľské meno"
+        },
+        "confirmTerms": "Prijímate zmluvné podmienky?",
+        "facebookNoEmail": "Vo vašom facebookovom účte chýba potvrdená e-mailová adresa. Jednoducho sa prihláste natívnym spôsobom.",
+        "picTooltip": "Tento obrázok môžete neskôr zmeniť"
+    },
+    "setIdentifier": {
+        "title": "Pridajte spôsob prihlásenia",
+        "sendMessage": "Poslať aktivačnú správu",
+        "placeholders": {
+            "identifier": "zadajte svoj mobilný telefón alebo e-mail",
+            "mobile": "Zadajte svoje telefonné číslo",
+            "email": "Vložte svoju e-mailovú adresu",
+            "username": "užívateľské meno"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Účet",
+        "areUsing": "Používate {{platform}} ako",
+        "noLongerUsing": "Už nie ste pripojení k {{platform}} ako",
+        "doAuth": "Prihláste sa pomocou tohto účtu",
+        "doSwitch": "Prepnite na tento účet"
     }
 }

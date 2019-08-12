@@ -213,7 +213,8 @@
     },
     "messages": {
         "html": {
-            "body": "が{{stream.fields.title}}に<em>{{message.fields.type}}</em>メッセージを投稿しました"
+            "body": "が{{stream.fields.title}}に<em>{{message.fields.type}}</em>メッセージを投稿しました",
+            "posted": "{{stream.fields.title}}に<em>{{message.fields.type}}</em>メッセージを投稿しました"
         },
         "text": {
             "commentedOn": "コメントした",

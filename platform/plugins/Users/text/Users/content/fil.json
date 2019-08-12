@@ -18,7 +18,8 @@
         "GetStarted": "Magsimula",
         "Authorize": "Pahintulutan",
         "TermsLabel": "Nabasa at sumasang-ayon ako <br> sa {{link}}",
-        "TermsTitle": "Mga Tuntunin"
+        "TermsTitle": "Mga Tuntunin",
+        "mustAgree": "Una kailangan mong sumang-ayon sa mga term."
     },
     "register": {
         "TermsLabel": "Tinatanggap ko ang {{link}}",
@@ -45,5 +46,52 @@
         "select": {
             "title": "Piliin ang contact ng {{displayName}}"
         }
+    },
+    "login": {
+        "title": "Maligayang pagdating",
+        "directions": "Lumikha ng isang account, o mag-log in.",
+        "directionsNoRegister": "Mag-log in kung mayroon kang isang account.",
+        "goButton": "Pumunta",
+        "passphrase": "Ipasok ang iyong pariralang pass:",
+        "loginButton": "Magsimula",
+        "registerButton": "Magsimula",
+        "resendButton": "Magpadala ng Mensahe ng Pag-activate",
+        "forgot": "Nakalimutan mo?",
+        "resendConfirm": "Nais mo bang magpadala ng isang mensahe upang mai-reset ang iyong passphrase?",
+        "resendSuccess": "Suriin para sa isang mensahe upang mai-reset ang iyong passphrase",
+        "resendClose": "Isara",
+        "noPassphrase": "Bago ka makapag-log in, dapat kang magtakda ng isang parirala sa pamamagitan ng pag-click sa link sa iyong mensahe ng pag-activate.",
+        "notVerified": "Dapat mong ipadala ang iyong sarili ng isang mensahe ng pag-activate upang mag-log in.",
+        "emailExists": "Sinubukan mo bang magparehistro sa email na ito bago? Kung gayon, suriin ang iyong inbox upang maisaaktibo ang iyong account. <a href='#resend' class='Q_button Users_activation_resend'>Mag-click upang ipadala ang mensahe<\/a>",
+        "mobileExists": "Sinubukan mo bang magparehistro sa numero ng mobile na ito bago? Kung gayon, suriin ang iyong SMS upang maisaaktibo ang iyong account. <a href='#resend' class='Q_button Users_activation_resend'>Mag-click upang ipadala ang mensahe<\/a>",
+        "usingOther": "o kaya mo",
+        "prompt": "Pumili ng isang username:",
+        "newUser": "o lumikha ng isang bagong account",
+        "placeholders": {
+            "identifier": "iyong mobile # o email",
+            "mobile": "ipasok ang iyong mobile #",
+            "email": "ilagay ang iyong email address",
+            "username": "username"
+        },
+        "confirmTerms": "Tanggapin ang Mga Tuntunin ng Serbisyo?",
+        "facebookNoEmail": "Kulang ang iyong facebook account ng isang nakumpirma na email address. Mag-log in lamang sa katutubong paraan.",
+        "picTooltip": "Maaari mong baguhin ang larawang ito mamaya"
+    },
+    "setIdentifier": {
+        "title": "Magdagdag ng isang paraan upang mag-log in",
+        "sendMessage": "Magpadala ng Mensahe ng Pag-activate",
+        "placeholders": {
+            "identifier": "ipasok ang iyong mobile # o email",
+            "mobile": "ipasok ang iyong mobile number",
+            "email": "ilagay ang iyong email address",
+            "username": "username"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Account",
+        "areUsing": "Gumagamit ka ng {{platform}} bilang",
+        "noLongerUsing": "Hindi ka na nakakonekta sa {{platform}} bilang",
+        "doAuth": "Mag-log in gamit ang account na ito",
+        "doSwitch": "Lumipat sa account na ito"
     }
 }

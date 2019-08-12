@@ -213,7 +213,8 @@
     },
     "messages": {
         "html": {
-            "body": "向{{stream.fields.title}}发布了<em>{{message.fields.type}}条</em>消息"
+            "body": "向{{stream.fields.title}}发布了<em>{{message.fields.type}}条</em>消息",
+            "posted": "向{{stream.fields.title}}发布了<em>{{message.fields.type}}条</em>消息"
         },
         "text": {
             "commentedOn": "评论说",

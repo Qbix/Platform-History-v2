@@ -18,7 +18,8 @@
         "GetStarted": "Bắt đầu",
         "Authorize": "Ủy quyền",
         "TermsLabel": "tôi đã đọc và đồng ý <br> tới {{link}}",
-        "TermsTitle": "Điều kiện"
+        "TermsTitle": "Điều kiện",
+        "mustAgree": "Đầu tiên bạn phải đồng ý với các điều khoản."
     },
     "register": {
         "TermsLabel": "Tôi chấp nhận {{link}}",
@@ -45,5 +46,52 @@
         "select": {
             "title": "Chọn liên hệ của {{displayName}}"
         }
+    },
+    "login": {
+        "title": "Chào mừng bạn",
+        "directions": "Tạo một tài khoản, hoặc đăng nhập.",
+        "directionsNoRegister": "Đăng nhập nếu bạn có tài khoản.",
+        "goButton": "Đi",
+        "passphrase": "Nhập cụm từ của bạn:",
+        "loginButton": "Bắt đầu",
+        "registerButton": "Bắt đầu",
+        "resendButton": "Gửi tin nhắn kích hoạt",
+        "forgot": "Quên nó?",
+        "resendConfirm": "Bạn có muốn gửi tin nhắn để đặt lại cụm mật khẩu của mình không?",
+        "resendSuccess": "Kiểm tra tin nhắn để đặt lại cụm mật khẩu của bạn",
+        "resendClose": "Gần",
+        "noPassphrase": "Trước khi bạn có thể đăng nhập, bạn phải đặt cụm từ thông qua bằng cách nhấp vào liên kết trong thông báo kích hoạt của bạn.",
+        "notVerified": "Bạn phải gửi cho mình một tin nhắn kích hoạt để đăng nhập.",
+        "emailExists": "Bạn đã thử đăng ký với email này trước đây? Nếu vậy, hãy kiểm tra hộp thư đến của bạn để kích hoạt tài khoản của bạn. <a href='#resend' class='Q_button Users_activation_resend'>Nhấn vào đây để gửi lại tin nhắn<\/a>",
+        "mobileExists": "Bạn đã thử đăng ký với số điện thoại di động này trước? Nếu vậy, hãy kiểm tra SMS của bạn để kích hoạt tài khoản của bạn. <a href='#resend' class='Q_button Users_activation_resend'>Nhấn vào đây để gửi lại tin nhắn<\/a>",
+        "usingOther": "hoặc bạn có thể",
+        "prompt": "Chọn tên người dùng:",
+        "newUser": "hoặc tạo một tài khoản mới",
+        "placeholders": {
+            "identifier": "số điện thoại di động hoặc email của bạn",
+            "mobile": "nhập số điện thoại di động của bạn",
+            "email": "nhập địa chỉ email của bạn",
+            "username": "tên người dùng"
+        },
+        "confirmTerms": "Chấp nhận Điều khoản dịch vụ?",
+        "facebookNoEmail": "Tài khoản facebook của bạn đang thiếu một địa chỉ email được xác nhận. Đơn giản chỉ cần đăng nhập theo cách bản địa.",
+        "picTooltip": "Bạn có thể thay đổi hình ảnh này sau"
+    },
+    "setIdentifier": {
+        "title": "Thêm một cách để đăng nhập",
+        "sendMessage": "Gửi tin nhắn kích hoạt",
+        "placeholders": {
+            "identifier": "nhập số điện thoại di động hoặc email của bạn",
+            "mobile": "Nhập sô điện thoại di động của bạn",
+            "email": "nhập địa chỉ email của bạn",
+            "username": "tên người dùng"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Tài khoản",
+        "areUsing": "Bạn đang sử dụng {{platform}} là",
+        "noLongerUsing": "Bạn không còn kết nối với {{platform}} như",
+        "doAuth": "Đăng nhập bằng tài khoản này",
+        "doSwitch": "Chuyển sang tài khoản này"
     }
 }

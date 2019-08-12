@@ -213,7 +213,8 @@
     },
     "messages": {
         "html": {
-            "body": ", {{stream.fields.title}} adresine {{ <em>1000}} bir</em> mesaj gönderdi."
+            "body": ", {{stream.fields.title}} adresine {{ <em>1000}} bir</em> mesaj gönderdi.",
+            "posted": "{{stream.fields.title}} adresine bir <em>{{message.fields.type}}</em> mesajı gönderdi"
         },
         "text": {
             "commentedOn": "hakkında yorum yaptı",

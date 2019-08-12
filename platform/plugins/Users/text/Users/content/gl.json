@@ -18,7 +18,8 @@
         "GetStarted": "Comezar",
         "Authorize": "Autorizar",
         "TermsLabel": "Lin e estou de acordo <br> ao {{link}}",
-        "TermsTitle": "Termos"
+        "TermsTitle": "Termos",
+        "mustAgree": "Primeiro debes aceptar os termos."
     },
     "register": {
         "TermsLabel": "Acepto o {{link}}",
@@ -45,5 +46,52 @@
         "select": {
             "title": "Seleccione o contacto de {{displayName}}"
         }
+    },
+    "login": {
+        "title": "Benvido",
+        "directions": "Crear unha conta ou iniciar sesión.",
+        "directionsNoRegister": "Inicia sesión se tes unha conta.",
+        "goButton": "Vaia",
+        "passphrase": "Insira a súa frase de paso:",
+        "loginButton": "Comezar",
+        "registerButton": "Comezar",
+        "resendButton": "Enviar mensaxe de activación",
+        "forgot": "Esqueciches?",
+        "resendConfirm": "¿Quere enviar unha mensaxe para restablecer a súa contraseña?",
+        "resendSuccess": "Asegúrese de que unha mensaxe poida restablecer a súa contraseña",
+        "resendClose": "Pechar",
+        "noPassphrase": "Antes de poder iniciar sesión, debes definir unha frase facendo clic na ligazón da mensaxe de activación.",
+        "notVerified": "Para iniciar sesión ten que enviar unha mensaxe de activación.",
+        "emailExists": "¿Intentaches rexistrar con este correo antes? En caso afirmativo, comproba a túa caixa de entrada para activar a túa conta. <a href='#resend' class='Q_button Users_activation_resend'>Fai clic para volver enviar a mensaxe<\/a>",
+        "mobileExists": "¿Intentaches rexistrar con este número de móbil antes? Se é así, comproba o teu SMS para activar a túa conta. <a href='#resend' class='Q_button Users_activation_resend'>Fai clic para volver enviar a mensaxe<\/a>",
+        "usingOther": "ou pode",
+        "prompt": "Escolle un nome de usuario:",
+        "newUser": "ou crear unha nova conta",
+        "placeholders": {
+            "identifier": "o teu número de teléfono ou correo electrónico",
+            "mobile": "introduce o teu móbil",
+            "email": "introduza o teu enderezo de correo electrónico",
+            "username": "nome de usuario"
+        },
+        "confirmTerms": "¿Acepta os termos de servizo?",
+        "facebookNoEmail": "A súa conta de Facebook carece dun enderezo de correo electrónico confirmado. Basta con iniciar sesión na forma nativa.",
+        "picTooltip": "Máis tarde podes cambiar esta foto"
+    },
+    "setIdentifier": {
+        "title": "Engade un xeito de iniciar sesión",
+        "sendMessage": "Enviar mensaxe de activación",
+        "placeholders": {
+            "identifier": "introduce o teu número de teléfono ou correo electrónico",
+            "mobile": "introduce o teu número de móbil",
+            "email": "introduza o teu enderezo de correo electrónico",
+            "username": "nome de usuario"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} conta",
+        "areUsing": "Está a usar {{platform}} como",
+        "noLongerUsing": "Xa non estás conectado a {{platform}} como",
+        "doAuth": "Inicie sesión con esta conta",
+        "doSwitch": "Cambia a esta conta"
     }
 }

@@ -1884,7 +1884,7 @@ abstract class Streams extends Base_Streams
 			$params['relationDisplayType'] = $relationDisplayType;
 			
 			// Related TO description
-			$description = Streams_Stream::getConfigField(
+			$content = Streams_Stream::getConfigField(
 				$category->type,
 				array('relatedTo', $type, 'description'),
 				Streams_Stream::getConfigField($category->type, array(
@@ -1900,18 +1900,18 @@ abstract class Streams extends Base_Streams
 			$instructions = compact(
 				'fromPublisherId', 'type', 'weight', 'displayType',
 				'fromUrl', 'toUrl',
-				'fromIcon', 'fromTitle', 'fromType', 'fromDisplayType', 'description'
+				'fromIcon', 'fromTitle', 'fromType', 'fromDisplayType'
 			);
 			$instructions['url'] = $instructions['fromUrl'];
 			$instructions['fromStreamName'] = $stream->name;
 			$relatedTo_messages[$toPublisherId][$category->name][] = array(
 				'type' => 'Streams/relatedTo',
-				'content' => $description,
+				'content' => $content,
 				'instructions' => $instructions
 			);
 
 			// Related FROM description
-			$description = Q_Handlebars::renderSource(
+			$content = Q_Handlebars::renderSource(
 				Streams_Stream::getConfigField(
 					$stream->type,
 					array('relatedFrom', $type, 'description'),
@@ -1929,13 +1929,13 @@ abstract class Streams extends Base_Streams
 			$instructions = compact(
 				'toPublisherId', 'type', 'weight', 'displayType',
 				'fromUrl', 'toUrl', 'fromUri', 'toUri', 
-				'toIcon', 'toTitle', 'toType', 'toDisplayType', 'description'
+				'toIcon', 'toTitle', 'toType', 'toDisplayType', 'content'
 			);
 			$instructions['url'] = $instructions['toUrl'];
 			$instructions['toStreamName'] = $category->name;
 			$relatedFrom_messages[$fromPublisherId][$stream->name][] = array(
 				'type' => 'Streams/relatedFrom',
-				'content' => $description,
+				'content' => $content,
 				'instructions' => $instructions
 			);
 

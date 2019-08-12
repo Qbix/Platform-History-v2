@@ -18,7 +18,8 @@
         "GetStarted": "Fogj neki",
         "Authorize": "engedélyez",
         "TermsLabel": "Elolvastam és egyetértek <br> a {{link}}",
-        "TermsTitle": "feltételek"
+        "TermsTitle": "feltételek",
+        "mustAgree": "Először el kell fogadnia a feltételeket."
     },
     "register": {
         "TermsLabel": "Elfogadom a {{link}}",
@@ -45,5 +46,52 @@
         "select": {
             "title": "Kapcsolat kiválasztása a {{displayName}}"
         }
+    },
+    "login": {
+        "title": "Üdvözöljük",
+        "directions": "Hozzon létre egy fiókot, vagy jelentkezzen be.",
+        "directionsNoRegister": "Jelentkezzen be, ha van fiókja.",
+        "goButton": "Megy",
+        "passphrase": "Írja be jelszavát:",
+        "loginButton": "Fogj neki",
+        "registerButton": "Fogj neki",
+        "resendButton": "Aktiválási üzenet küldése",
+        "forgot": "Felejtsd el?",
+        "resendConfirm": "Szeretne üzenetet küldeni a jelmondat visszaállításához?",
+        "resendSuccess": "Keressen üzenetet a jelszó visszaállításához",
+        "resendClose": "Bezárás",
+        "noPassphrase": "Mielőtt be tud jelentkezni, be kell állítania egy jelmondatot az aktiválási üzenetben található linkre kattintva.",
+        "notVerified": "A bejelentkezéshez el kell küldenie magának egy aktiválási üzenetet.",
+        "emailExists": "Próbáltál már korábban regisztrálni ezzel az e-maillel? Ha igen, ellenőrizze a beérkező levelek mappát a fiók aktiválásához. <a href='#resend' class='Q_button Users_activation_resend'>Kattintson az üzenet újbóli elküldéséhez<\/a>",
+        "mobileExists": "Próbáltad már regisztrálni erre a mobilszámra? Ha igen, ellenőrizze az SMS-t a fiók aktiválásához. <a href='#resend' class='Q_button Users_activation_resend'>Kattintson az üzenet újbóli elküldéséhez<\/a>",
+        "usingOther": "vagy tudsz",
+        "prompt": "Válasszon felhasználói nevet:",
+        "newUser": "vagy hozzon létre egy új fiókot",
+        "placeholders": {
+            "identifier": "a mobil # vagy e-mail",
+            "mobile": "írja be a mobilszámát",
+            "email": "írd be az email címed",
+            "username": "felhasználónév"
+        },
+        "confirmTerms": "Elfogadja a Szolgáltatási feltételeket?",
+        "facebookNoEmail": "A facebook-fiókodból hiányzik egy megerősített e-mail cím. Egyszerűen jelentkezzen be natív módon.",
+        "picTooltip": "Ezt a képet később megváltoztathatja"
+    },
+    "setIdentifier": {
+        "title": "Adjon hozzá egy módot a bejelentkezéshez",
+        "sendMessage": "Aktiválási üzenet küldése",
+        "placeholders": {
+            "identifier": "írja be mobiltelefonszámát vagy e-mail címét",
+            "mobile": "írja be a mobilszámát",
+            "email": "írd be az email címed",
+            "username": "felhasználónév"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} fiók",
+        "areUsing": "A (z) {{platform}} felhasználót használja",
+        "noLongerUsing": "Ön már nem kapcsolódik a (z) {{platform}} -hez",
+        "doAuth": "Jelentkezzen be ezzel a fiókkal",
+        "doSwitch": "Váltás erre a fiókra"
     }
 }

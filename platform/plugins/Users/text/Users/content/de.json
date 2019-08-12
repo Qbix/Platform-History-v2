@@ -18,7 +18,8 @@
         "GetStarted": "Loslegen",
         "Authorize": "Genehmigen",
         "TermsLabel": "Ich habe gelesen und stimme zu <br> zum {{link}}",
-        "TermsTitle": "Bedingungen"
+        "TermsTitle": "Bedingungen",
+        "mustAgree": "Zuerst müssen Sie den Bedingungen zustimmen."
     },
     "register": {
         "TermsLabel": "Ich akzeptiere die {{link}}",
@@ -45,5 +46,52 @@
         "select": {
             "title": "Kontakt auswählen von {{displayName}}"
         }
+    },
+    "login": {
+        "title": "Herzlich willkommen",
+        "directions": "Erstellen Sie ein Konto oder melden Sie sich an.",
+        "directionsNoRegister": "Melden Sie sich an, wenn Sie ein Konto haben.",
+        "goButton": "Gehen",
+        "passphrase": "Geben Sie Ihre Passphrase ein:",
+        "loginButton": "Loslegen",
+        "registerButton": "Loslegen",
+        "resendButton": "Aktivierungsnachricht senden",
+        "forgot": "Hab&#39;s vergessen?",
+        "resendConfirm": "Möchten Sie eine Nachricht senden, um Ihre Passphrase zurückzusetzen?",
+        "resendSuccess": "Suchen Sie nach einer Nachricht, um Ihre Passphrase zurückzusetzen",
+        "resendClose": "Schließen",
+        "noPassphrase": "Bevor Sie sich anmelden können, müssen Sie eine Passphrase festlegen, indem Sie auf den Link in Ihrer Aktivierungsnachricht klicken.",
+        "notVerified": "Sie müssen sich selbst eine Aktivierungsnachricht senden, um sich anmelden zu können.",
+        "emailExists": "Haben Sie bereits versucht, sich mit dieser E-Mail zu registrieren? Wenn ja, überprüfen Sie Ihren Posteingang, um Ihr Konto zu aktivieren. <a href='#resend' class='Q_button Users_activation_resend'>Klicken Sie hier, um die Nachricht erneut zu senden<\/a>",
+        "mobileExists": "Haben Sie schon einmal versucht, sich mit dieser Handynummer zu registrieren? Wenn ja, überprüfen Sie Ihre SMS, um Ihr Konto zu aktivieren. <a href='#resend' class='Q_button Users_activation_resend'>Klicken Sie hier, um die Nachricht erneut zu senden<\/a>",
+        "usingOther": "oder du kannst",
+        "prompt": "Wähle einen Benutzernamen:",
+        "newUser": "oder ein neues Konto erstellen",
+        "placeholders": {
+            "identifier": "Ihre Handynummer oder E-Mail",
+            "mobile": "Geben Sie Ihre Handynummer ein",
+            "email": "Geben sie ihre E-Mailadresse ein",
+            "username": "Nutzername"
+        },
+        "confirmTerms": "Nutzungsbedingungen akzeptieren?",
+        "facebookNoEmail": "In Ihrem Facebook-Konto fehlt eine bestätigte E-Mail-Adresse. Einfach auf native Weise einloggen.",
+        "picTooltip": "Sie können dieses Bild später ändern"
+    },
+    "setIdentifier": {
+        "title": "Füge eine Möglichkeit hinzu, sich anzumelden",
+        "sendMessage": "Aktivierungsnachricht senden",
+        "placeholders": {
+            "identifier": "Geben Sie Ihre Handynummer oder E-Mail-Adresse ein",
+            "mobile": "Geben sie Ihre Mobilfunknummer ein",
+            "email": "Geben sie ihre E-Mailadresse ein",
+            "username": "Nutzername"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Konto",
+        "areUsing": "Sie verwenden {{platform}} als",
+        "noLongerUsing": "Sie sind nicht mehr mit {{platform}} verbunden als",
+        "doAuth": "Melden Sie sich mit diesem Konto an",
+        "doSwitch": "Wechseln Sie zu diesem Konto"
     }
 }
