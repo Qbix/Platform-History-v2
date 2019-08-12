@@ -1884,13 +1884,16 @@ abstract class Streams extends Base_Streams
 			$params['relationDisplayType'] = $relationDisplayType;
 			
 			// Related TO description
-			$content = Streams_Stream::getConfigField(
-				$category->type,
-				array('relatedTo', $type, 'description'),
-				Streams_Stream::getConfigField($category->type, array(
-					'relatedTo', '*', 'description'
-				), "New {{relationDisplayType}} added"),
-				false
+			$content = Q_Handlebars::renderSource(
+				Streams_Stream::getConfigField(
+					$category->type,
+					array('relatedTo', $type, 'description'),
+					Streams_Stream::getConfigField($category->type, array(
+						'relatedTo', '*', 'description'
+					), "New {{relationDisplayType}} added"),
+					false
+				),
+				$params
 			);
 
 			// Send Streams/relatedTo message to a stream
