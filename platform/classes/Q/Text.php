@@ -92,11 +92,11 @@ class Q_Text
 			}
 			return $result->getAll();
 		}
+		$basename = self::basename($options);
+		$filename = "text/$name/$basename.json";
 		if (self::$get[$filename]) {
 			return self::$get[$filename];
 		}
-		$basename = self::basename($options);
-		$filename = "text/$name/$basename.json";
 		$config = Q_Config::get('Q', 'text', '*', array());
         $json = Q::readFile($filename, Q::take($config, array(
 			'ignoreCache' => true,
