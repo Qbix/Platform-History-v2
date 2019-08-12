@@ -362,9 +362,9 @@ Streams.define = function (type, ctor, methods) {
  * @method listen
  * @static
  * @param {Object} options={} So far no options are implemented.
- * @return {Boolean} Whether the server has started
+ * @return {Object} Object with any servers that have been started, "internal" or "socket"
  */
-Streams.listen = function (options) {
+Streams.listen = function (options, servers) {
 
 	// Start internal server
 	var server = Q.listen();
@@ -411,7 +411,6 @@ Streams.listen = function (options) {
 	});
 
 	socket.io.of('/Users').on('connection', function(client) {
-		Q.log("Socket.IO client connected " + client.id);
 		if (client.alreadyListeningStreams) {
 			return;
 		}
@@ -496,7 +495,10 @@ Streams.listen = function (options) {
 			delete Streams.observing[client.id];
 		});
 	});
-	return true;
+	return {
+		internal: server,
+		socket: socket
+	};
 };
 
 /**
@@ -1104,6 +1106,8 @@ Streams.invitationsPath = function _Streams_invitationsPath(userId) {
 Streams.isStream = function (testing) {
 	return Q.typeOf(testing) === "Q.Streams.Stream";
 };
+
+Streams.WebRTC = require('Streams/WebRTC');
 
 /**
  * @property _messageHandlers
