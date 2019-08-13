@@ -238,6 +238,7 @@
 				"participating": ["Streams/participating"]
 			},
 			"Streams/invited": {
+				"create": false,
 				"subscriptions": {
 					"filter": {
 						"types": ["Streams/invite"],
@@ -246,7 +247,8 @@
 				}
 			},
 			"Streams/resource": {
-				"description": "for managing access to a resource and posting messages about updates"
+				"create": false,
+				"edit": false
 			},
 			"Streams/task": {
 				"description": "for receiving updates about progress on a certain task",
@@ -294,7 +296,9 @@
 				"create": true, 
 				"edit": true
 			},
-			"Streams/text/small": {"create": true, "edit": true,
+			"Streams/text/small": {
+				"create": true,
+				"edit": true,
 				"messages": {
 					"Streams/chat/message": {
 						"post": true
@@ -309,7 +313,6 @@
 			"Streams/date": {"create": true, "edit": true},
 			"Streams/number": {"create": true, "edit": true},
 			"Streams/image": {
-				"description": "visual image",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -318,7 +321,6 @@
 				}
 			},
 			"Streams/images": {
-				"description": "gallery of images",
 				"create": true,
 				"edit": true,
 				"defaults": { 
@@ -326,7 +328,6 @@
 				}
 			},
 			"Streams/album": {
-				"description": "",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -335,7 +336,6 @@
 				}
 			},
 			"Streams/file": {
-				"description": "uploaded file",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -346,7 +346,6 @@
 				"updateIcon": true
 			},
 			"Streams/audio": {
-				"description": "audio clip",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -356,7 +355,6 @@
 				"updateTitle": true
 			},
 			"Streams/video": {
-				"description": "video clip",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -366,7 +364,6 @@
 				"updateTitle": true
 			},
 			"Streams/live": {
-				"description": "live video or audio",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -376,7 +373,6 @@
 				"updateTitle": true
 			},
 			"Streams/category": {
-				"description": "category to which other things can be related",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -386,7 +382,6 @@
 				"see": ["relatedTo"]
 			},
 			"Streams/participating": {
-				"description": "streams are related/unrelated to this when a user joins/leaves",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -395,7 +390,6 @@
 				}
 			},
 			"Streams/interest": {
-				"description": "represents a user's interest in a certain topic",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -404,7 +398,6 @@
 				}
 			},
 			"Streams/incoming": {
-				"description": "destination for messages sent by other users",
 				"create": true,
 				"messages": {
 					"Streams/incoming/message": {"post": true},
@@ -414,7 +407,6 @@
 				}
 			},
 			"Streams/chat": {
-				"description": "conversation",
 				"create": true,
 				"edit": ["icon", "title", "content"],
 				"messages": {
@@ -428,9 +420,8 @@
 				}
 			},
 			"Streams/webrtc": {
-				"description": "real time video/audio conference",
 				"defaults": {
-					"title": "Real Time Conference",
+					"title": "Real-Time Call",
 					"icon": "Streams/webrtc"
 				},
 				"messages": {

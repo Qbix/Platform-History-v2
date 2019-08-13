@@ -25,7 +25,7 @@
         "earlierComments": "ankstesnes pastabas",
         "Subscribed": "Nutildyti pranešimus",
         "Unsubscribed": "Gauti pranešimus",
-        "dontHavePermissionJoinConversation": "Neturite leidimo prisijungti prie šio pokalbio.",
+        "notAllowedToJoinCall": "Neturite leidimo prisijungti prie šio pokalbio.",
         "startedConversation": "pradėjo pokalbį",
         "RealTimeCall": "Skambinimas realiuoju laiku"
     },
@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Klaida: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: gaunamas pranešimas",
         "ManageEmailSubscriptions": "tvarkykite el. pašto prenumeratas",
-        "IfUnsubscribe": "Jei norite atsisakyti prenumeratos"
+        "IfUnsubscribe": "Jei norite atsisakyti prenumeratos",
+        "Streams\/relatedTo\/Streams\/call": "Naujas kvietimas prasidėjo {{toTitle}}",
+        "Streams\/relatedTo\/*": "Naujas {{relationDisplayType}} {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Pridėta prie {{toTitle}} kaip {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} pakvietė jus į {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "Jūs esate pakviestas. {{ClickOrTap}} čia priimti ir prisijungti."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} paskelbė <em>{{message.fields.type}}<\/em> pranešimą {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Kvietimai siunčiami iš mūsų numerio, kurį jūsų draugai dar neatpažįsta. Atlikite greitą tekstą, kad jiems būtų žinoma, kad kvietimas buvo gautas iš jūsų, prašydamas jų spustelėti nuorodą.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "Įjungti mikrofoną",
             "cameraBtn": "Įgalinti kamerą",
             "cameraAndMicrophoneBtn": "Įgalinti kamerą ir mikrofoną"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Pakviestas",
+            "description": "Kvietimų gautieji"
+        },
+        "Streams\/resource": {
+            "displayType": "Šaltinis",
+            "description": "srautas, skirtas valdyti prieigą prie šaltinio ir siųsti pranešimus apie naujinius"
+        },
+        "Streams\/task": {
+            "displayType": "Užduotis",
+            "description": "užduotis, kurią turi atlikti žmonės ar mašinos"
+        },
+        "Streams\/number": {
+            "displayType": "Skaičius",
+            "description": "matematinis skaičius"
+        },
+        "Streams\/date": {
+            "displayType": "Data",
+            "description": "data"
+        },
+        "Streams\/text": {
+            "displayType": "Tekstas",
+            "description": "teksto tekstas"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Tekstas",
+            "description": "mažas teksto tekstas"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Tekstas",
+            "description": "vidutinis teksto tekstas"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Elektroninio pašto adresas",
+            "description": "elektroninio pašto adresas"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Telefono numeris",
+            "description": "telefono numeris"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "nuorodą internete"
+        },
+        "Streams\/image": {
+            "displayType": "Vaizdas",
+            "description": "vaizdinis vaizdas"
+        },
+        "Streams\/images": {
+            "displayType": "Vaizdo galerija",
+            "description": "vaizdų galerija"
+        },
+        "Streams\/album": {
+            "displayType": "Albumas",
+            "description": "albumas, su kuriuo susijusios įvairios laikmenos"
+        },
+        "Streams\/file": {
+            "displayType": "Byla",
+            "description": "įkeltas failas"
+        },
+        "Streams\/audio": {
+            "displayType": "Garso įrašas",
+            "description": "garso klipas"
+        },
+        "Streams\/video": {
+            "displayType": "Vaizdo įrašas",
+            "description": "vaizdo įrašas"
+        },
+        "Streams\/live": {
+            "displayType": "Tiesiogiai",
+            "description": "tiesioginis garso ar vaizdo įrašas"
+        },
+        "Streams\/category": {
+            "displayType": "Kategorija",
+            "description": "kategorija, su kuria gali būti susieti kiti srautai"
+        },
+        "Streams\/participating": {
+            "displayType": "Dalyvaujanti rodyklė",
+            "description": "srautai yra susiję \/ nesusiję su tuo, kai vartotojas prisijungia \/ išeina"
+        },
+        "Streams\/interest": {
+            "displayType": "Palūkanos",
+            "description": "reiškia vartotojo susidomėjimą tam tikra tema"
+        },
+        "Streams\/incoming": {
+            "displayType": "Įeinantis",
+            "description": "kitų vartotojų siunčiamų pranešimų paskirties vieta"
+        },
+        "Streams\/chat": {
+            "displayType": "Pokalbis",
+            "description": "pokalbis tarp vartotojų, su istorija"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Skambinimas realiuoju laiku",
+            "description": "realaus laiko vaizdo \/ garso skambutis"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "paskelbė <em>{{message.fields.type}}<\/em> pranešimą {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "pakomentavo",
+            "in": "į",
+            "body": "{{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "buvo paskelbtas",
+                "byAvatar": "pateikė {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "turi naują {{message.instructions.fromDisplayType}}",
+                "byAvatar": "pridėjo {{avatar.displayName}}"
+            }
         }
     }
 }

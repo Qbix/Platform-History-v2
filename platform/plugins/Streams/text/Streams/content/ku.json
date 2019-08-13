@@ -3,8 +3,8 @@
         "NewItemTitle": "Pirtûka nû"
     },
     "labels": {
-        "Streams\/invited": "Mirovên ku ez vexwendin",
-        "Streams\/invitedMe": "Yê ku min vexwendin"
+        "Streams/invited": "Mirovên ku ez vexwendin",
+        "Streams/invitedMe": "Yê ku min vexwendin"
     },
     "interests": {
         "Filter": "Hûn bi kêfê dikin?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "Te vexwendin. Li vir {{ClickOrTap}} li vir bipejirîne û tevlî bibin."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} peyamek <em>{{message.fields.type}}<\/em> ji bo {{stream.fields.title}} nivîsand"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} di {{& url}} de: {{& message.fields.content}}"
         }
     },
     "followup": {

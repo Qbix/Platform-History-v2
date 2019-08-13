@@ -208,16 +208,6 @@ Q.Tool.define('Q/filter', function (options) {
 			state.oldBodyOverflow = $body.css('overflow');
 			$body.css('overflow', 'auto')
 				.addClass('Q_overflow');
-			if (Q.info.isTouchscreen) {
-				Q.ensure(
-					window.overthrow, 
-					"{{Q}}/js/overthrow.js",
-					function () {
-						overthrow.scrollIndicatorClassName = 'Q_overflow';
-						overthrow.set();
-					}
-				)
-			}
 			tool.suspended = true;
 			Q.Pointer.cancelClick();
 			tool.$placeholder = $('<div class="Q_filter_placeholder" />')

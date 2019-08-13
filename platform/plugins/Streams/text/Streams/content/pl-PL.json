@@ -25,7 +25,7 @@
         "earlierComments": "wcześniejsze komentarze",
         "Subscribed": "Wycisz powiadomienia",
         "Unsubscribed": "Dostawać powiadomienia",
-        "dontHavePermissionJoinConversation": "Nie masz uprawnień do dołączenia do tej rozmowy.",
+        "notAllowedToJoinCall": "Nie masz uprawnień do dołączenia do tej rozmowy.",
         "startedConversation": "rozpoczął rozmowę",
         "RealTimeCall": "Połączenie w czasie rzeczywistym"
     },
@@ -44,7 +44,10 @@
         "Streams/task/error": "Błąd podczas: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Wiadomość przychodząca",
         "ManageEmailSubscriptions": "zarządzaj subskrypcjami e-mail",
-        "IfUnsubscribe": "Jeśli chcesz się wypisać"
+        "IfUnsubscribe": "Jeśli chcesz się wypisać",
+        "Streams/relatedTo/Streams/call": "Rozpoczęto nowe połączenie za {{toTitle}}",
+        "Streams/relatedTo/*": "Nowy {{relationDisplayType}} w {{toTitle}}",
+        "Streams/relatedFrom/*": "Dodano do {{toTitle}} jako {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} zaprosił Cię na {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "Zostałeś zaproszony. {{ClickOrTap}} tutaj, aby zaakceptować i dołączyć."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} opublikował wiadomość <em>{{message.fields.type}}</em> na {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} w {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Zaproszenia są wysyłane z naszego numeru, którego Twoi znajomi jeszcze nie rozpoznają. Wykonaj szybki tekst, aby poinformować ich, że zaproszenie pochodzi od Ciebie, prosząc o kliknięcie linku.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "Włącz mikrofon",
             "cameraBtn": "Włącz kamerę",
             "cameraAndMicrophoneBtn": "Włącz kamerę i mikrofon"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "Zaproszony",
+            "description": "Skrzynka odbiorcza na zaproszenia"
+        },
+        "Streams/resource": {
+            "displayType": "Ratunek",
+            "description": "strumień do zarządzania dostępem do zasobu i publikowania wiadomości o aktualizacjach"
+        },
+        "Streams/task": {
+            "displayType": "Zadanie",
+            "description": "zadanie do wykonania przez ludzi lub maszyny"
+        },
+        "Streams/number": {
+            "displayType": "Numer",
+            "description": "liczba matematyczna"
+        },
+        "Streams/date": {
+            "displayType": "Data",
+            "description": "data"
+        },
+        "Streams/text": {
+            "displayType": "Tekst",
+            "description": "treść tekstu"
+        },
+        "Streams/text/small": {
+            "displayType": "Tekst",
+            "description": "mały fragment tekstu"
+        },
+        "Streams/text/medium": {
+            "displayType": "Tekst",
+            "description": "średni tekst"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "Adres e-mail",
+            "description": "adres e-mail"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Numer telefonu",
+            "description": "numer telefonu"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "link w sieci"
+        },
+        "Streams/image": {
+            "displayType": "Obraz",
+            "description": "obraz wzrokowy"
+        },
+        "Streams/images": {
+            "displayType": "Galeria obrazów",
+            "description": "galeria zdjęć"
+        },
+        "Streams/album": {
+            "displayType": "Album",
+            "description": "album, z którym powiązane są różne media"
+        },
+        "Streams/file": {
+            "displayType": "Plik",
+            "description": "przesłany plik"
+        },
+        "Streams/audio": {
+            "displayType": "Klip audio",
+            "description": "klip audio"
+        },
+        "Streams/video": {
+            "displayType": "Klip wideo",
+            "description": "klip wideo"
+        },
+        "Streams/live": {
+            "displayType": "Transmisja na żywo",
+            "description": "audio lub wideo na żywo"
+        },
+        "Streams/category": {
+            "displayType": "Kategoria",
+            "description": "kategoria, z którą mogą być powiązane inne strumienie"
+        },
+        "Streams/participating": {
+            "displayType": "Indeks uczestnictwa",
+            "description": "strumienie są powiązane / niezwiązane z tym, gdy użytkownik dołącza / wychodzi"
+        },
+        "Streams/interest": {
+            "displayType": "Zainteresowanie",
+            "description": "reprezentuje zainteresowanie użytkownika określonym tematem"
+        },
+        "Streams/incoming": {
+            "displayType": "Przychodzące",
+            "description": "miejsce docelowe wiadomości wysyłanych przez innych użytkowników"
+        },
+        "Streams/chat": {
+            "displayType": "Rozmowa",
+            "description": "rozmowa między użytkownikami, z historią"
+        },
+        "Streams/webrtc": {
+            "displayType": "Połączenie w czasie rzeczywistym",
+            "description": "połączenie wideo / audio w czasie rzeczywistym"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "opublikował wiadomość <em>{{message.fields.type}}</em> na {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "skomentował",
+            "in": "w",
+            "body": "w {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "został wysłany do",
+                "byAvatar": "autor: {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ma nowy {{message.instructions.fromDisplayType}}",
+                "byAvatar": "dodane przez {{avatar.displayName}}"
+            }
         }
     }
 }

@@ -3,8 +3,8 @@
         "NewItemTitle": "Ny gjenstand"
     },
     "labels": {
-        "Streams\/invited": "Folk jeg inviterte",
-        "Streams\/invitedMe": "Hvem inviterte meg"
+        "Streams/invited": "Folk jeg inviterte",
+        "Streams/invitedMe": "Hvem inviterte meg"
     },
     "interests": {
         "Filter": "Hva liker du?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "Du har blitt invitert. {{ClickOrTap}} her for å godta og bli med."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} postet en <em>{{message.fields.type}}<\/em> melding til {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} på {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

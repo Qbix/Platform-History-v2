@@ -25,7 +25,7 @@
         "earlierComments": "predchádzajúce pripomienky",
         "Subscribed": "Ignorovať upozornenia",
         "Unsubscribed": "Dostať upozornenia",
-        "dontHavePermissionJoinConversation": "Nemáte povolenie na pripojenie sa k tejto konverzácii.",
+        "notAllowedToJoinCall": "Nemáte povolenie na pripojenie sa k tejto konverzácii.",
         "startedConversation": "začal konverzáciu",
         "RealTimeCall": "Hovor v reálnom čase"
     },
@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Chyba počas: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Prichádzajúca správa",
         "ManageEmailSubscriptions": "spravovať odbery e-mailov",
-        "IfUnsubscribe": "Ak sa chcete odhlásiť"
+        "IfUnsubscribe": "Ak sa chcete odhlásiť",
+        "Streams\/relatedTo\/Streams\/call": "Nový hovor sa začal o {{toTitle}}",
+        "Streams\/relatedTo\/*": "Nové {{relationDisplayType}} o {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Pridané do {{toTitle}} ako {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} vás pozvalo na {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "Boli ste pozvaní. {{ClickOrTap}} tu prijať a pripojiť sa."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} uverejnil <em>{{message.fields.type}}<\/em> správu pre {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} v {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Pozvánky sa odosielajú z nášho čísla, ktoré vaši priatelia ešte nepoznajú. Nasledujte rýchly text, aby ste vedeli, že pozvanie prišlo od vás, a požiadajte ich, aby klikli na odkaz.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "Povoliť mikrofón",
             "cameraBtn": "Povoliť kameru",
             "cameraAndMicrophoneBtn": "Povoliť fotoaparát a mikrofón"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "pozvaný",
+            "description": "Doručená pošta pre pozvánky"
+        },
+        "Streams\/resource": {
+            "displayType": "prostriedky",
+            "description": "stream na správu prístupu k prostriedku a uverejňovanie správ o aktualizáciách"
+        },
+        "Streams\/task": {
+            "displayType": "úloha",
+            "description": "úloha, ktorú majú vykonať ľudia alebo stroje"
+        },
+        "Streams\/number": {
+            "displayType": "číslo",
+            "description": "matematické číslo"
+        },
+        "Streams\/date": {
+            "displayType": "dátum",
+            "description": "dátum"
+        },
+        "Streams\/text": {
+            "displayType": "text",
+            "description": "text"
+        },
+        "Streams\/text\/small": {
+            "displayType": "text",
+            "description": "malý text"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "text",
+            "description": "stredná časť textu"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Emailová adresa",
+            "description": "emailová adresa"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Telefónne číslo",
+            "description": "telefónne číslo"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "odkaz na webe"
+        },
+        "Streams\/image": {
+            "displayType": "obraz",
+            "description": "vizuálny obrázok"
+        },
+        "Streams\/images": {
+            "displayType": "Galéria obrázkov",
+            "description": "galéria obrázkov"
+        },
+        "Streams\/album": {
+            "displayType": "album",
+            "description": "album, na ktorý sa vzťahujú rôzne médiá"
+        },
+        "Streams\/file": {
+            "displayType": "súbor",
+            "description": "nahraný súbor"
+        },
+        "Streams\/audio": {
+            "displayType": "Zvukový klip",
+            "description": "zvukový klip"
+        },
+        "Streams\/video": {
+            "displayType": "Videoklip",
+            "description": "videoklip"
+        },
+        "Streams\/live": {
+            "displayType": "Živý prenos",
+            "description": "živý zvuk alebo video"
+        },
+        "Streams\/category": {
+            "displayType": "kategórie",
+            "description": "kategória, s ktorou môžu súvisieť ďalšie toky"
+        },
+        "Streams\/participating": {
+            "displayType": "Účastnícky index",
+            "description": "prúdy s tým súvisia \/ nesúvisia, keď sa používateľ pripojí \/ odíde"
+        },
+        "Streams\/interest": {
+            "displayType": "záujem",
+            "description": "predstavuje záujem používateľa o určitú tému"
+        },
+        "Streams\/incoming": {
+            "displayType": "prichádzajúce",
+            "description": "cieľ pre správy odoslané ostatnými používateľmi"
+        },
+        "Streams\/chat": {
+            "displayType": "konverzácia",
+            "description": "konverzácia medzi používateľmi s históriou"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Hovor v reálnom čase",
+            "description": "video \/ audio hovor v reálnom čase"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "uverejnil <em>{{message.fields.type}}<\/em> správu pre {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "komentoval",
+            "in": "v",
+            "body": "v {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "bol uverejnený na",
+                "byAvatar": "do {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "má nový {{message.instructions.fromDisplayType}}",
+                "byAvatar": "pridal {{avatar.displayName}}"
+            }
         }
     }
 }

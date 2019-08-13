@@ -25,7 +25,7 @@
         "earlierComments": "prejšnjih pripomb",
         "Subscribed": "Prezri obvestila",
         "Unsubscribed": "Dobi obvestila",
-        "dontHavePermissionJoinConversation": "Nimate dovoljenja za pridružitev temu pogovoru.",
+        "notAllowedToJoinCall": "Nimate dovoljenja za pridružitev temu pogovoru.",
         "startedConversation": "začel pogovor",
         "RealTimeCall": "Klic v realnem času"
     },
@@ -44,7 +44,10 @@
         "Streams/task/error": "Napaka med: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Dohodno sporočilo",
         "ManageEmailSubscriptions": "upravljate svoje e-poštne naročnine",
-        "IfUnsubscribe": "Če se želite odjaviti"
+        "IfUnsubscribe": "Če se želite odjaviti",
+        "Streams/relatedTo/Streams/call": "Nov klic se je začel {{toTitle}}",
+        "Streams/relatedTo/*": "Novo {{relationDisplayType}} v {{toTitle}}",
+        "Streams/relatedFrom/*": "Dodano {{toTitle}} kot {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} vas je povabil na {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "Povabljeni ste bili. {{ClickOrTap}} tukaj, da sprejmete in se pridružite."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} je objavil sporočilo <em>{{message.fields.type}}</em> za {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} v {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Povabila so poslana iz naše številke, ki jih vaši prijatelji še ne prepoznajo. Nadaljujte s hitrim besedilom, da jim sporočite, da je povabilo prišlo od vas, in jih prosili, da kliknejo povezavo.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "Omogoči mikrofon",
             "cameraBtn": "Omogoči fotoaparat",
             "cameraAndMicrophoneBtn": "Omogoči kamero in mikrofon"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "Vabljeni",
+            "description": "Prejeto za povabila"
+        },
+        "Streams/resource": {
+            "displayType": "Vir",
+            "description": "tok za upravljanje dostopa do vira in objavljanje sporočil o posodobitvah"
+        },
+        "Streams/task": {
+            "displayType": "Naloga",
+            "description": "naloge, ki jih morajo opraviti ljudje ali stroji"
+        },
+        "Streams/number": {
+            "displayType": "Številka",
+            "description": "matematično število"
+        },
+        "Streams/date": {
+            "displayType": "Datum",
+            "description": "datum"
+        },
+        "Streams/text": {
+            "displayType": "Besedilo",
+            "description": "besedilo"
+        },
+        "Streams/text/small": {
+            "displayType": "Besedilo",
+            "description": "majhen del besedila"
+        },
+        "Streams/text/medium": {
+            "displayType": "Besedilo",
+            "description": "srednje besedilo"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "Email naslov",
+            "description": "email naslov"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Telefonska številka",
+            "description": "telefonska številka"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "povezava na spletu"
+        },
+        "Streams/image": {
+            "displayType": "Slika",
+            "description": "vizualna podoba"
+        },
+        "Streams/images": {
+            "displayType": "Galerija slik",
+            "description": "galerija slik"
+        },
+        "Streams/album": {
+            "displayType": "Album",
+            "description": "album, na katerega so povezani različni mediji"
+        },
+        "Streams/file": {
+            "displayType": "mapa",
+            "description": "naložena datoteka"
+        },
+        "Streams/audio": {
+            "displayType": "Avdio posnetek",
+            "description": "avdio posnetek"
+        },
+        "Streams/video": {
+            "displayType": "Video posnetek",
+            "description": "video posnetek"
+        },
+        "Streams/live": {
+            "displayType": "Livestream",
+            "description": "avdio ali video v živo"
+        },
+        "Streams/category": {
+            "displayType": "Kategorija",
+            "description": "kategorijo, na katero se lahko nanašajo drugi tokovi"
+        },
+        "Streams/participating": {
+            "displayType": "Indeks udeležbe",
+            "description": "tokovi so povezani / nepovezani s tem, ko se uporabnik pridruži / zapusti"
+        },
+        "Streams/interest": {
+            "displayType": "Obresti",
+            "description": "predstavlja zanimanje uporabnika za določeno temo"
+        },
+        "Streams/incoming": {
+            "displayType": "Dohodni",
+            "description": "cilj za sporočila, ki jih pošljejo drugi uporabniki"
+        },
+        "Streams/chat": {
+            "displayType": "Pogovor",
+            "description": "pogovor med uporabniki, z zgodovino"
+        },
+        "Streams/webrtc": {
+            "displayType": "Klic v realnem času",
+            "description": "video / zvočni klic v realnem času"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "je objavil <em>{{message.fields.type}}</em> sporočilo {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "komentiral",
+            "in": "v",
+            "body": "v {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "je bil objavljen v",
+                "byAvatar": "do {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ima novo {{message.instructions.fromDisplayType}}",
+                "byAvatar": "dodal {{avatar.displayName}}"
+            }
         }
     }
 }

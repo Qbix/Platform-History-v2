@@ -45,5 +45,27 @@
             "ok": "అలాగే",
             "cancel": "రద్దు"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "క్రెడిట్స్",
+            "description": "క్రెడిట్స్ మరియు చెల్లింపులను ట్రాక్ చేస్తుంది"
+        },
+        "Assets\/plan": {
+            "displayType": "సబ్‌స్క్రిప్షన్ ప్లాన్",
+            "description": "చందా ప్రణాళిక"
+        },
+        "Assets\/subscription": {
+            "displayType": "సభ్యత్వ",
+            "description": "చందా"
+        },
+        "Assets\/product": {
+            "displayType": "ఉత్పత్తి",
+            "description": "ఉత్పత్తి అమ్మబడుతోంది"
+        },
+        "Assets\/service": {
+            "displayType": "సర్వీస్",
+            "description": "సేవ అందిస్తున్నారు"
+        }
     }
 }

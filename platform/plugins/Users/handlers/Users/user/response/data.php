@@ -23,14 +23,15 @@ function Users_user_response_data($params)
 	if ($user = Users::userFromContactInfo($type, $identifier)) {
 		$displayname = $user->displayName();
 		$verified = !!Users::identify($type, $identifier);
+		// NOTE: Do not return anything that would identify the user on the system
 		return array(
-			'exists' => $user->id,
+			'exists' => hash('sha256', $userId),
 			'verified' => $verified,
-			'username' => $user->username,
-			'displayName' => $displayname,
-			'icon' => $verified ? $icon : $user->icon,
+			// 'username' => $user->username,
+			// 'displayName' => $displayname,
+			// 'icon' => $verified ? $icon : $user->icon,
 			'passphrase_set' => !empty($user->passphraseHash),
-			'xids' => $user->getAllXids()
+			// 'xids' => $user->getAllXids()
 		);
 	}
 	if ($type === 'email') {

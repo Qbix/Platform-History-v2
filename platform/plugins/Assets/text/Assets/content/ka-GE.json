@@ -45,5 +45,27 @@
             "ok": "კარგი",
             "cancel": "გაუქმება"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "კრედიტები",
+            "description": "აკონტროლებს კრედიტებს და გადახდებს"
+        },
+        "Assets/plan": {
+            "displayType": "სუბსიდირების გეგმა",
+            "description": "გამოწერის გეგმა"
+        },
+        "Assets/subscription": {
+            "displayType": "გამოწერა",
+            "description": "გამოწერა"
+        },
+        "Assets/product": {
+            "displayType": "პროდუქტი",
+            "description": "პროდუქტი იყიდება"
+        },
+        "Assets/service": {
+            "displayType": "მომსახურება",
+            "description": "მომსახურებას სთავაზობენ"
+        }
     }
 }

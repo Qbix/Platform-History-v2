@@ -3,8 +3,8 @@
         "NewItemTitle": "Itsva Item"
     },
     "labels": {
-        "Streams\/invited": "Vanhu vandakakokwa",
-        "Streams\/invitedMe": "Ndiani akandidana"
+        "Streams/invited": "Vanhu vandakakokwa",
+        "Streams/invitedMe": "Ndiani akandidana"
     },
     "interests": {
         "Filter": "Unofarira chii?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "Iwe wakokwa. Ikozvino kugamuchira nekubatana."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{}} <em>{}}<\/em> {}} <em>{}}<\/em> {}"
-        },
-        "text": {
-            "body": "1000 1000 1000 1000,"
         }
     },
     "followup": {

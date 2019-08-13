@@ -41,7 +41,7 @@ Q.mixin(Users_Mobile, Q.require('Base/Users/Mobile'));
  * @param {Array} [fields={}] The fields referenced in the subject and/or view
  * @param {Object} [options]
  * @param {String} [options.from] A phone number acceptable by twilio.
- * @param {Boolean} [options.isSource] If true, uses Q.Handlebars.renderSource instead of render
+ * @param {Boolean} [options.isSource] If true, uses Q.Handlebars.renderSource instead of Q.view()
  * @param {Function} callback Receives error, method used and and response objects after complete
  */
 var twilioClient = null;
@@ -70,7 +70,9 @@ Users_Mobile.sendMessage = function (to, view, fields, options, callback) {
 		}
 	}
 	
-	var content = Q.view(view, fields, {language: options.language, source: options.isSource});
+	var content = options.isSource
+		? Q.Handlebars.renderSource(view, fields)
+		: Q.view(view, fields, { language: options.language });
 	
 	if (twilioClient
 	&& (from = options.from || Q.Config.get(['Users', 'mobile', 'from'], null))) {

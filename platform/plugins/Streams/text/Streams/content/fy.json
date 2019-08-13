@@ -3,8 +3,8 @@
         "NewItemTitle": "Nij item"
     },
     "labels": {
-        "Streams\/invited": "Minsken dy&#39;t ik útnoege",
-        "Streams\/invitedMe": "Wa hat my frege"
+        "Streams/invited": "Minsken dy&#39;t ik útnoege",
+        "Streams/invitedMe": "Wa hat my frege"
     },
     "interests": {
         "Filter": "Wat wolle jo?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "Jo binne oanmeld. {{ClickOrTap}} hjir te akseptearjen en te gean."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} brocht in <em>{{message.fields.type}}<\/em> berjocht nei {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} yn {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

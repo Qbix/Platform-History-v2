@@ -95,7 +95,7 @@ foreach ($plugins as $plugin) {
 	$PLUGIN_DIR = constant($PLUGIN . '_PLUGIN_DIR');
 	foreach (glob($PLUGIN_DIR . DS . 'text' . DS . '*') as $textFolder) {
 		$options['in'] = $options['out'] = $textFolder;
-		echo "Translating $textFolder\n";
+		echo PHP_EOL . PHP_EOL . "Translating $textFolder" . PHP_EOL;
 		$translate = new Q_Translate($options);
 		$translate->saveAll();
 	}

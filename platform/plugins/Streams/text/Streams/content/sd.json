@@ -3,8 +3,8 @@
         "NewItemTitle": "نئين شيء"
     },
     "labels": {
-        "Streams\/invited": "اتي مون کي دعوت ڏني",
-        "Streams\/invitedMe": "مون کي دعوت ڏني"
+        "Streams/invited": "اتي مون کي دعوت ڏني",
+        "Streams/invitedMe": "مون کي دعوت ڏني"
     },
     "interests": {
         "Filter": "توهان ڪهڙو مزو آهيو؟",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "توھان کي دعوت ڏنو ويو آھي. {{ClickOrTap}} هتي قبول ڪرڻ ۽ شامل ٿيڻ لاء."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} ھڪڙي ھڪڙي <em>{{message.fields.type}}<\/em> نياپو {{stream.fields.title}} تي"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} ۾ {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

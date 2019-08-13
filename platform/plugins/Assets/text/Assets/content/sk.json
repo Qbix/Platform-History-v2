@@ -45,5 +45,27 @@
             "ok": "OK",
             "cancel": "Zrušiť"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Credits",
+            "description": "sleduje kredity a platby"
+        },
+        "Assets\/plan": {
+            "displayType": "Plán predplatenia",
+            "description": "plán predplatného"
+        },
+        "Assets\/subscription": {
+            "displayType": "predplatné",
+            "description": "predplatné"
+        },
+        "Assets\/product": {
+            "displayType": "výrobok",
+            "description": "predávaný produkt"
+        },
+        "Assets\/service": {
+            "displayType": "služba",
+            "description": "ponúkaná služba"
+        }
     }
 }

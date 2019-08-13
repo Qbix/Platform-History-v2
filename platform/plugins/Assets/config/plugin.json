@@ -45,7 +45,6 @@
 	"Streams": {
 		"types": {
 			"Assets/credits": {
-				"description": "Keeps track of credits and payments",
 				"defaults": {
 					"title": "Subscription plan",
 					"readLevel": 0,
@@ -54,7 +53,6 @@
 				}
 			},
 			"Assets/plan": {
-				"description": "Subscription plan",
 				"create": true, 
 				"edit": true,
 				"defaults": {
@@ -65,7 +63,6 @@
 				}
 			},
 			"Assets/subscription": {
-				"description": "Subscription",
 				"create": false, 
 				"edit": false,
 				"defaults": {
@@ -76,7 +73,6 @@
 				}
 			},
 			"Assets/product": {
-				"description": "Product",
 				"create": false, 
 				"edit": false,
 				"defaults": {
@@ -87,7 +83,6 @@
 				}
 			},
 			"Assets/service": {
-				"description": "Service",
 				"create": false, 
 				"edit": false,
 				"defaults": {

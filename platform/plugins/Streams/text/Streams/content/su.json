@@ -3,8 +3,8 @@
         "NewItemTitle": "Item anyar"
     },
     "labels": {
-        "Streams\/invited": "Jalma Kuring diondang",
-        "Streams\/invitedMe": "Anu diondang kuring"
+        "Streams/invited": "Jalma Kuring diondang",
+        "Streams/invitedMe": "Anu diondang kuring"
     },
     "interests": {
         "Filter": "Naon anu anjeun resep?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "Anjeun geus diondang. {{ClickOrTap}} di dieu pikeun nampa sareng ngiringan."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} dipasang ka <em>{{message.fields.type}}<\/em> pesen ka {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} di {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

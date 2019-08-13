@@ -25,7 +25,7 @@
         "earlierComments": "vorige kommentaar",
         "Subscribed": "Demp kennisgewings",
         "Unsubscribed": "Kry kennisgewings",
-        "dontHavePermissionJoinConversation": "U het nie toestemming om aan hierdie gesprek deel te neem nie.",
+        "notAllowedToJoinCall": "U het nie toestemming om aan hierdie gesprek deel te neem nie.",
         "startedConversation": "&#39;n gesprek begin",
         "RealTimeCall": "Intydse oproep"
     },
@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Fout tydens: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Inkomende Boodskap",
         "ManageEmailSubscriptions": "Bestuur jou e-pos intekeninge",
-        "IfUnsubscribe": "As jy wil uitteken"
+        "IfUnsubscribe": "As jy wil uitteken",
+        "Streams\/relatedTo\/Streams\/call": "Nuwe oproep begin in {{toTitle}}",
+        "Streams\/relatedTo\/*": "Nuwe {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "By {{toTitle}} as {{relationDisplayType}} gevoeg"
     },
     "invite": {
         "messageContent": "{{displayName}} het jou genooi na {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "U is genooi. {{ClickOrTap}} hier om te aanvaar en aan te sluit."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} het &#39;n <em>{{message.fields.type}}<\/em> boodskap na {{stream.fields.title}} geplaas."
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} in {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Uitnodigings word van ons nommer gestuur, wat u vriende nog nie erken nie. Volg met &#39;n vinnige teks om hulle te laat weet dat die uitnodiging van jou gekom het, en vra hulle om die skakel te klik.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "Aktiveer mikrofoon",
             "cameraBtn": "Aktiveer kamera",
             "cameraAndMicrophoneBtn": "Aktiveer kamera en mikrofoon"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "genooi",
+            "description": "Inbox vir uitnodigings"
+        },
+        "Streams\/resource": {
+            "displayType": "hulpbron",
+            "description": "stroom om toegang tot &#39;n hulpbron te bestuur en boodskappe oor opdaterings te plaas"
+        },
+        "Streams\/task": {
+            "displayType": "taak",
+            "description": "taak wat deur mense of masjiene gedoen moet word"
+        },
+        "Streams\/number": {
+            "displayType": "aantal",
+            "description": "wiskundige getal"
+        },
+        "Streams\/date": {
+            "displayType": "datum",
+            "description": "datum"
+        },
+        "Streams\/text": {
+            "displayType": "teks",
+            "description": "liggaam van teks"
+        },
+        "Streams\/text\/small": {
+            "displayType": "teks",
+            "description": "klein teksgedeelte"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "teks",
+            "description": "medium liggaam van teks"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "E-pos adres",
+            "description": "e-pos adres"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Telefoon nommer",
+            "description": "telefoon nommer"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "skakel op die web"
+        },
+        "Streams\/image": {
+            "displayType": "Image",
+            "description": "visuele beeld"
+        },
+        "Streams\/images": {
+            "displayType": "Prentgalery",
+            "description": "gallery van beelde"
+        },
+        "Streams\/album": {
+            "displayType": "album",
+            "description": "&#39;n album waarop verskillende media verband hou"
+        },
+        "Streams\/file": {
+            "displayType": "lêer",
+            "description": "opgelaaide lêer"
+        },
+        "Streams\/audio": {
+            "displayType": "Klankgreep",
+            "description": "klankgreep"
+        },
+        "Streams\/video": {
+            "displayType": "Videoklip",
+            "description": "video clip"
+        },
+        "Streams\/live": {
+            "displayType": "Lewendige stroom",
+            "description": "lewendige klank of video"
+        },
+        "Streams\/category": {
+            "displayType": "kategorie",
+            "description": "&#39;n kategorie waaraan ander strome verband hou"
+        },
+        "Streams\/participating": {
+            "displayType": "Deelnemende indeks",
+            "description": "strome is verwant \/ hou nie hiermee verband as &#39;n gebruiker aansluit \/ vertrek nie"
+        },
+        "Streams\/interest": {
+            "displayType": "belangstelling",
+            "description": "stel die belangstelling van die gebruiker in &#39;n sekere onderwerp voor"
+        },
+        "Streams\/incoming": {
+            "displayType": "inkomende",
+            "description": "bestemming vir boodskappe wat deur ander gebruikers gestuur is"
+        },
+        "Streams\/chat": {
+            "displayType": "gesprek",
+            "description": "&#39;n gesprek tussen gebruikers, met die geskiedenis"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Intydse oproep",
+            "description": "&#39;n intydse video \/ klankoproep"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "het &#39;n <em>{{message.fields.type}}<\/em> boodskap gepos aan {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "kommentaar gelewer het",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "is gepos aan",
+                "byAvatar": "deur {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "het &#39;n nuwe {{message.instructions.fromDisplayType}}",
+                "byAvatar": "bygevoeg deur {{avatar.displayName}}"
+            }
         }
     }
 }

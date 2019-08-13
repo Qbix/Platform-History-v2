@@ -25,7 +25,7 @@
         "earlierComments": "varasemad märkused",
         "Subscribed": "Mute teated",
         "Unsubscribed": "Hankige teateid",
-        "dontHavePermissionJoinConversation": "Teil pole sellel vestlusel luba.",
+        "notAllowedToJoinCall": "Teil pole sellel vestlusel luba.",
         "startedConversation": "alustas vestlust",
         "RealTimeCall": "Real Time Call"
     },
@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Viga: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Sissetulev sõnum",
         "ManageEmailSubscriptions": "hallake oma e-posti tellimusi",
-        "IfUnsubscribe": "Kui soovite tellimuse lõpetada"
+        "IfUnsubscribe": "Kui soovite tellimuse lõpetada",
+        "Streams\/relatedTo\/Streams\/call": "Uus hange algas {{toTitle}}",
+        "Streams\/relatedTo\/*": "Uus {{relationDisplayType}} asukohas {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Lisatud saidile {{toTitle}} kui {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} kutsus teid {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "Teid on kutsutud. {{ClickOrTap}} siin, et nõustuda ja liituda."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} postitas <em>{{message.fields.type}}<\/em> sõnumi {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Kutsed saadetakse meie numbrist, mida teie sõbrad veel ei tunne. Jälgige kiiret teksti, et teada saada, et kutse tuli sinult, paludes neil linki klõpsata.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "Luba mikrofon",
             "cameraBtn": "Luba kaamera",
             "cameraAndMicrophoneBtn": "Luba kaamera ja mikrofon"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Kutsutud",
+            "description": "Kutsete postkast"
+        },
+        "Streams\/resource": {
+            "displayType": "Allikas",
+            "description": "voog ressursile juurdepääsu haldamiseks ja värskenduste kohta sõnumite postitamiseks"
+        },
+        "Streams\/task": {
+            "displayType": "Ülesanne",
+            "description": "ülesanne, mille peavad täitma inimesed või masinad"
+        },
+        "Streams\/number": {
+            "displayType": "Arv",
+            "description": "matemaatiline arv"
+        },
+        "Streams\/date": {
+            "displayType": "Kuupäev",
+            "description": "kuupäev"
+        },
+        "Streams\/text": {
+            "displayType": "Tekst",
+            "description": "tekstiosa"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Tekst",
+            "description": "väike tekstiosa"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Tekst",
+            "description": "keskmine tekstiosa"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "E-posti aadress",
+            "description": "e-posti aadress"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Telefoninumber",
+            "description": "telefoninumber"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "link veebis"
+        },
+        "Streams\/image": {
+            "displayType": "Pilt",
+            "description": "visuaalne pilt"
+        },
+        "Streams\/images": {
+            "displayType": "Pildigalerii",
+            "description": "pildigalerii"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "album, millega on seotud erinevad meediumid"
+        },
+        "Streams\/file": {
+            "displayType": "Toimik",
+            "description": "üles laaditud fail"
+        },
+        "Streams\/audio": {
+            "displayType": "Heliklipp",
+            "description": "heliklipp"
+        },
+        "Streams\/video": {
+            "displayType": "Videoklipp",
+            "description": "videoklipp"
+        },
+        "Streams\/live": {
+            "displayType": "Otseülekanne",
+            "description": "reaalajas heli või video"
+        },
+        "Streams\/category": {
+            "displayType": "Kategooria",
+            "description": "kategooria, millega saab teisi vooge seostada"
+        },
+        "Streams\/participating": {
+            "displayType": "Osalev register",
+            "description": "vood on kasutajaga liitumisel \/ lahkumisel sellega seotud või sellega mitteseotud"
+        },
+        "Streams\/interest": {
+            "displayType": "Huvi",
+            "description": "esindab kasutaja huvi teatud teema vastu"
+        },
+        "Streams\/incoming": {
+            "displayType": "Sissetulev",
+            "description": "teiste kasutajate saadetud sõnumite sihtkoht"
+        },
+        "Streams\/chat": {
+            "displayType": "Vestlus",
+            "description": "vestlus kasutajate vahel ajalooga"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Reaalajas kõne",
+            "description": "reaalajas video- \/ helikõne"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "postitas <em>{{message.fields.type}}<\/em> teate {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "kommenteeris",
+            "in": "sisse",
+            "body": "asukohas {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "on postitatud",
+                "byAvatar": "autor: {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "omab uut {{message.instructions.fromDisplayType}}",
+                "byAvatar": "lisas {{avatar.displayName}}"
+            }
         }
     }
 }

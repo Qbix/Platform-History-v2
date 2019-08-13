@@ -18,7 +18,8 @@
         "GetStarted": "Begin",
         "Authorize": "Toestemming geven",
         "TermsLabel": "Ik heb het gelezen en ga hiermee akkoord <br> naar de {{link}}",
-        "TermsTitle": "Voorwaarden"
+        "TermsTitle": "Voorwaarden",
+        "mustAgree": "Eerst moet u akkoord gaan met de voorwaarden."
     },
     "register": {
         "TermsLabel": "Ik accepteer de {{link}}",
@@ -45,5 +46,52 @@
         "select": {
             "title": "Selecteer contact van {{displayName}}"
         }
+    },
+    "login": {
+        "title": "Welkom",
+        "directions": "Maak een account aan of log in.",
+        "directionsNoRegister": "Log in als u een account hebt.",
+        "goButton": "Gaan",
+        "passphrase": "Voer uw wachtwoordzin in:",
+        "loginButton": "Begin",
+        "registerButton": "Begin",
+        "resendButton": "Stuur activeringsbericht",
+        "forgot": "Vergeet het?",
+        "resendConfirm": "Wilt u een bericht verzenden om uw wachtwoordzin opnieuw in te stellen?",
+        "resendSuccess": "Controleer op een bericht om uw wachtwoordzin opnieuw in te stellen",
+        "resendClose": "Dichtbij",
+        "noPassphrase": "Voordat u kunt inloggen, moet u een wachtwoordzin instellen door op de link in uw activeringsbericht te klikken.",
+        "notVerified": "U moet uzelf een activeringsbericht sturen om in te loggen.",
+        "emailExists": "Heb je eerder geprobeerd je met deze e-mail te registreren? Controleer dan uw inbox om uw account te activeren. <a href='#resend' class='Q_button Users_activation_resend'>Klik om het bericht opnieuw te verzenden<\/a>",
+        "mobileExists": "Heb je eerder geprobeerd je met dit mobiele nummer te registreren? Controleer dan uw sms om uw account te activeren. <a href='#resend' class='Q_button Users_activation_resend'>Klik om het bericht opnieuw te verzenden<\/a>",
+        "usingOther": "of je kan",
+        "prompt": "Kies een gebruikersnaam:",
+        "newUser": "of maak een nieuw account",
+        "placeholders": {
+            "identifier": "uw mobiele nummer of e-mailadres",
+            "mobile": "voer je mobiel in #",
+            "email": "Vul je e-mailadres in",
+            "username": "gebruikersnaam"
+        },
+        "confirmTerms": "Accepteer de Servicevoorwaarden?",
+        "facebookNoEmail": "Er ontbreekt een bevestigd e-mailadres in je Facebook-account. Log gewoon in op de native manier.",
+        "picTooltip": "U kunt deze afbeelding later wijzigen"
+    },
+    "setIdentifier": {
+        "title": "Een manier toevoegen om in te loggen",
+        "sendMessage": "Stuur activeringsbericht",
+        "placeholders": {
+            "identifier": "voer uw mobiele nummer of e-mailadres in",
+            "mobile": "voer uw mobiele nummer in",
+            "email": "Vul je e-mailadres in",
+            "username": "gebruikersnaam"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} account",
+        "areUsing": "U gebruikt {{platform}} als",
+        "noLongerUsing": "U bent niet langer verbonden met {{platform}} als",
+        "doAuth": "Log in met dit account",
+        "doSwitch": "Schakel over naar dit account"
     }
 }

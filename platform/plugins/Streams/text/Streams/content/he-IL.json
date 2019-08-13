@@ -25,7 +25,7 @@
         "earlierComments": "הערות מוקדמות יותר",
         "Subscribed": "השתק התראות",
         "Unsubscribed": "לקבל התראות",
-        "dontHavePermissionJoinConversation": "אין לך הרשאה להצטרף לשיחה זו.",
+        "notAllowedToJoinCall": "אין לך הרשאה להצטרף לשיחה זו.",
         "startedConversation": "פתח שיחה",
         "RealTimeCall": "שיחה בזמן אמת"
     },
@@ -44,7 +44,10 @@
         "Streams/task/error": "שגיאה במהלך: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: הודעה נכנסת",
         "ManageEmailSubscriptions": "לנהל את מינויי הדוא&quot;ל שלך",
-        "IfUnsubscribe": "אם אתה רוצה לבטל את המנוי"
+        "IfUnsubscribe": "אם אתה רוצה לבטל את המנוי",
+        "Streams/relatedTo/Streams/call": "שיחה חדשה החלה ב- {{toTitle}}",
+        "Streams/relatedTo/*": "{{relationDisplayType}} חדש ב- {{toTitle}}",
+        "Streams/relatedFrom/*": "נוסף ל- {{toTitle}} בתור {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} הזמין אותך ל {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "הוזמנת. {{ClickOrTap}} כאן כדי לקבל ולהצטרף."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} פרסם הודעה <em>{{message.fields.type}}</em> ל- {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} ב- {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "ההזמנות נשלחות מהמספר שלנו, שהחברים שלך עדיין לא מזהים. עקוב אחר טקסט קצר כדי להודיע להם על ההזמנה שהגיעה ממך, ולבקש מהם ללחוץ על הקישור.",
@@ -113,6 +108,122 @@
             "microphoneBtn": "אפשר מיקרופון",
             "cameraBtn": "אפשר מצלמה",
             "cameraAndMicrophoneBtn": "אפשר מצלמה ומיקרופון"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "מוזמנים",
+            "description": "תיבת הדואר הנכנס להזמנות"
+        },
+        "Streams/resource": {
+            "displayType": "משאב",
+            "description": "זרם לניהול גישה למשאב ופרסום הודעות על עדכונים"
+        },
+        "Streams/task": {
+            "displayType": "משימה",
+            "description": "משימה שתתבצע על ידי בני אדם או מכונות"
+        },
+        "Streams/number": {
+            "displayType": "מספר",
+            "description": "מספר מתמטי"
+        },
+        "Streams/date": {
+            "displayType": "תאריך",
+            "description": "תאריך"
+        },
+        "Streams/text": {
+            "displayType": "טקסט",
+            "description": "גוף טקסט"
+        },
+        "Streams/text/small": {
+            "displayType": "טקסט",
+            "description": "גוף טקסט קטן"
+        },
+        "Streams/text/medium": {
+            "displayType": "טקסט",
+            "description": "גוף טקסט בינוני"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "כתובת דוא&quot;ל",
+            "description": "כתובת דוא&quot;ל"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "מספר טלפון",
+            "description": "מספר טלפון"
+        },
+        "Streams/text/url": {
+            "displayType": "כתובת אתר",
+            "description": "קישור באינטרנט"
+        },
+        "Streams/image": {
+            "displayType": "תמונה",
+            "description": "תמונה חזותית"
+        },
+        "Streams/images": {
+            "displayType": "גלריית תמונות",
+            "description": "גלריית תמונות"
+        },
+        "Streams/album": {
+            "displayType": "אלבום",
+            "description": "אלבום שאליו קשורים מדיות שונות"
+        },
+        "Streams/file": {
+            "displayType": "קובץ",
+            "description": "הקובץ שהועלה"
+        },
+        "Streams/audio": {
+            "displayType": "קליפ שמע",
+            "description": "קליפ שמע"
+        },
+        "Streams/video": {
+            "displayType": "סרטון וידאו",
+            "description": "סרטון וידאו"
+        },
+        "Streams/live": {
+            "displayType": "שידור חי",
+            "description": "שמע או וידאו חי"
+        },
+        "Streams/category": {
+            "displayType": "קטגוריה",
+            "description": "קטגוריה שאליה ניתן יהיה להזרים זרמים אחרים"
+        },
+        "Streams/participating": {
+            "displayType": "אינדקס משתתף",
+            "description": "זרמים קשורים / לא קשורים לזה כאשר משתמש מצטרף / עוזב"
+        },
+        "Streams/interest": {
+            "displayType": "ריבית",
+            "description": "מייצג את העניין של המשתמש בנושא מסוים"
+        },
+        "Streams/incoming": {
+            "displayType": "נכנסת",
+            "description": "יעד להודעות שנשלחו על ידי משתמשים אחרים"
+        },
+        "Streams/chat": {
+            "displayType": "שיחה",
+            "description": "שיחה בין משתמשים, עם היסטוריה"
+        },
+        "Streams/webrtc": {
+            "displayType": "שיחה בזמן אמת",
+            "description": "שיחת וידאו / שמע בזמן אמת"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "פרסמה הודעה <em>{{message.fields.type}}</em> ל- {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "הגיב על",
+            "in": "בתוך",
+            "body": "ב- {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "פורסם ב-",
+                "byAvatar": "מאת {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "יש {{message.instructions.fromDisplayType}} חדש",
+                "byAvatar": "נוסף על ידי {{avatar.displayName}}"
+            }
         }
     }
 }

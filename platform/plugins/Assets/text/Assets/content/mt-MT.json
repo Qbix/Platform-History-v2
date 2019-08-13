@@ -45,5 +45,27 @@
             "ok": "kollox sew",
             "cancel": "Ikkanċella"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "Krediti",
+            "description": "iżomm rekord tal-krediti u l-pagamenti"
+        },
+        "Assets/plan": {
+            "displayType": "Pjan tas-sottoskrizzjoni",
+            "description": "pjan ta &#39;abbonament"
+        },
+        "Assets/subscription": {
+            "displayType": "Abbonament",
+            "description": "abbonament"
+        },
+        "Assets/product": {
+            "displayType": "Prodott",
+            "description": "prodott li qed jinbiegħ"
+        },
+        "Assets/service": {
+            "displayType": "Servizz",
+            "description": "servizz li qed jiġi offrut"
+        }
     }
 }

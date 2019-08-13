@@ -25,14 +25,14 @@ class Q_Text
 	 */
 	static function basename($options = array())
 	{
+		$locale = Q_Config::get('Q', 'text', 'useLocale', false)
+			? self::$locale
+			: '';
 		if (isset($options['language'])) {
 			$language = $options['language'];
-			$locale = Q::ifset($options, 'locale', '');
+			$locale = Q::ifset($options, 'locale', $locale);
 		} else {
 			$language = self::$language;
-			$locale = Q_Config::get('Q', 'text', 'useLocale', false)
-				? self::$locale
-				: '';
 		}
 		return $locale ? "$language-$locale" : $language;
 	}
@@ -79,6 +79,7 @@ class Q_Text
 	 * @param {boolean} [$options.merge=false] For Q_Text::set if content is loaded
 	 * @param {string} [$options.language=null] Override language
 	 * @param {string} [$options.locale=null] Override locale
+	 * @param {boolean} [$options.reload=false] Whether to reload the files even if they was already loaded before
 	 * @return {array} Returns the (merged) content of the text source(s)
 	 */
 	static function get($name, $options = array())
@@ -93,6 +94,9 @@ class Q_Text
 		}
 		$basename = self::basename($options);
 		$filename = "text/$name/$basename.json";
+		if (self::$get[$filename]) {
+			return self::$get[$filename];
+		}
 		$config = Q_Config::get('Q', 'text', '*', array());
         $json = Q::readFile($filename, Q::take($config, array(
 			'ignoreCache' => true,
@@ -103,7 +107,7 @@ class Q_Text
 			$content = Q::json_decode($json, true);
 			self::set($name, $content, Q::ifset($options, 'merge', false));
 		}
-		return $content ? $content : array();
+		return self::$get[$filename] = $content ? $content : array();
 	}
 
 	/**
@@ -205,4 +209,6 @@ class Q_Text
 		$text = Q_Text::get('Q/content');
 		return Q::ifset($text, 'words', $word, $word);
 	}
+	
+	protected static $get = array();
 }

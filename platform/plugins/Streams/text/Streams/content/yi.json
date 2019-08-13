@@ -3,8 +3,8 @@
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "מענטשן איך פארבעטן",
-        "Streams\/invitedMe": "ווער געבעטן מיר"
+        "Streams/invited": "מענטשן איך פארבעטן",
+        "Streams/invitedMe": "ווער געבעטן מיר"
     },
     "interests": {
         "Filter": "וואָס טאָן דו הנאה?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "איר האָט שוין פארבעטן. {{ClickOrTap}} דאָ צו אָננעמען און פאַרבינדן."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} האָט אַ <em>{{message.fields.type}}<\/em> אָנזאָג צו {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} אין {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

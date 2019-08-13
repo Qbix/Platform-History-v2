@@ -45,5 +45,27 @@
             "ok": "OK",
             "cancel": "キャンセル"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "クレジット",
+            "description": "クレジットと支払いを追跡します"
+        },
+        "Assets\/plan": {
+            "displayType": "サブスクリプション計画",
+            "description": "サブスクリプションプラン"
+        },
+        "Assets\/subscription": {
+            "displayType": "定期購読",
+            "description": "サブスクリプション"
+        },
+        "Assets\/product": {
+            "displayType": "製品",
+            "description": "販売中の製品"
+        },
+        "Assets\/service": {
+            "displayType": "サービス",
+            "description": "提供されているサービス"
+        }
     }
 }

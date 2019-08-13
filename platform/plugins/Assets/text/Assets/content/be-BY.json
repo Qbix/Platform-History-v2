@@ -45,5 +45,27 @@
             "ok": "добра",
             "cancel": "Адмяніць"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "Крэдыты",
+            "description": "адсочвае крэдыты і плацяжы"
+        },
+        "Assets/plan": {
+            "displayType": "План субсідыі",
+            "description": "план падпіскі"
+        },
+        "Assets/subscription": {
+            "displayType": "Падпіска",
+            "description": "падпіска"
+        },
+        "Assets/product": {
+            "displayType": "Прадукт",
+            "description": "тавар прадаецца"
+        },
+        "Assets/service": {
+            "displayType": "Служба",
+            "description": "прапануецца паслуга"
+        }
     }
 }

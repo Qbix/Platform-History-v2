@@ -45,5 +45,27 @@
             "ok": "O.K",
             "cancel": "Anulare"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "credite",
+            "description": "ține evidența creditelor și plăților"
+        },
+        "Assets/plan": {
+            "displayType": "Planul de subsemnare",
+            "description": "plan de abonament"
+        },
+        "Assets/subscription": {
+            "displayType": "Abonament",
+            "description": "abonament"
+        },
+        "Assets/product": {
+            "displayType": "Produs",
+            "description": "produs vândut"
+        },
+        "Assets/service": {
+            "displayType": "Serviciu",
+            "description": "serviciul oferit"
+        }
     }
 }

@@ -45,5 +45,27 @@
             "ok": "Okay",
             "cancel": "Afbestille"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "credits",
+            "description": "holder styr på kreditter og betalinger"
+        },
+        "Assets/plan": {
+            "displayType": "Subsription Plan",
+            "description": "abonnementsplan"
+        },
+        "Assets/subscription": {
+            "displayType": "Abonnement",
+            "description": "abonnement"
+        },
+        "Assets/product": {
+            "displayType": "Produkt",
+            "description": "produkt, der sælges"
+        },
+        "Assets/service": {
+            "displayType": "Service",
+            "description": "service der tilbydes"
+        }
     }
 }

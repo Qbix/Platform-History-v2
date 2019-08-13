@@ -3,8 +3,8 @@
         "NewItemTitle": "Anyar Item"
     },
     "labels": {
-        "Streams\/invited": "Wong sing diundang",
-        "Streams\/invitedMe": "Sapa sing ngajak aku"
+        "Streams/invited": "Wong sing diundang",
+        "Streams/invitedMe": "Sapa sing ngajak aku"
     },
     "interests": {
         "Filter": "Apa sampeyan seneng?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "Sampeyan wis diundang. {{ClickOrTap}} ing kene kanggo nampa lan gabung."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} dikirim pesen <em>{{message.fields.type}}<\/em> menyang {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} ing {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

@@ -25,7 +25,7 @@
         "earlierComments": "больш раннія каментары",
         "Subscribed": "Адключэнне гуку апавяшчэнняў",
         "Unsubscribed": "Атрымаць апавяшчэнні",
-        "dontHavePermissionJoinConversation": "Вы не маеце дазволу далучыцца да гэтай размовы.",
+        "notAllowedToJoinCall": "Вы не маеце дазволу далучыцца да гэтай размовы.",
         "startedConversation": "пачаў размову",
         "RealTimeCall": "Званок у рэжыме рэальнага часу"
     },
@@ -44,7 +44,10 @@
         "Streams/task/error": "Памылка пры: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Уваходныя паведамленні",
         "ManageEmailSubscriptions": "кіраваць падпіскамі на электронную пошту",
-        "IfUnsubscribe": "Калі вы хочаце, каб адпісацца"
+        "IfUnsubscribe": "Калі вы хочаце, каб адпісацца",
+        "Streams/relatedTo/Streams/call": "Новы званок пачаўся ў {{toTitle}}",
+        "Streams/relatedTo/*": "Новы {{relationDisplayType}} у {{toTitle}}",
+        "Streams/relatedFrom/*": "Дададзена ў {{toTitle}} як {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} запрасіў вас {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "Вы былі запрошаны. {{ClickOrTap}} тут, каб прыняць і далучыцца."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} размясціў <em>{{message.fields.type}}</em> паведамленне для {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} у {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Прапаную адсылаецца з нашага колькасці, якія вашыя сябры яшчэ не прызнаюць. Наступны з хуткім тэкстам, каб паведаміць ім прыйшло запрашэнне ад вас, з просьбай націснуць на спасылку.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "Уключыць мікрафон",
             "cameraBtn": "Уключыць камеру",
             "cameraAndMicrophoneBtn": "Уключыць камеру і мікрафон"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "Запрашаюць",
+            "description": "Уваходныя паведамленні для запрашэнняў"
+        },
+        "Streams/resource": {
+            "displayType": "Рэсурс",
+            "description": "паток для кіравання доступам да рэсурсу і размяшчэння паведамленняў аб абнаўленнях"
+        },
+        "Streams/task": {
+            "displayType": "Заданне",
+            "description": "заданне, якое трэба зрабіць людзям ці машынам"
+        },
+        "Streams/number": {
+            "displayType": "Нумар",
+            "description": "матэматычны лік"
+        },
+        "Streams/date": {
+            "displayType": "Дата",
+            "description": "даты"
+        },
+        "Streams/text": {
+            "displayType": "Тэкст",
+            "description": "цела тэксту"
+        },
+        "Streams/text/small": {
+            "displayType": "Тэкст",
+            "description": "невялікі тэкст"
+        },
+        "Streams/text/medium": {
+            "displayType": "Тэкст",
+            "description": "сярэдняя частка тэксту"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "Адрас электроннай пошты",
+            "description": "адрас электроннай пошты"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Нумар тэлефона",
+            "description": "нумар тэлефона"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "спасылка ў Інтэрнэце"
+        },
+        "Streams/image": {
+            "displayType": "Выява",
+            "description": "візуальны вобраз"
+        },
+        "Streams/images": {
+            "displayType": "Галерэя малюнкаў",
+            "description": "галерэя малюнкаў"
+        },
+        "Streams/album": {
+            "displayType": "Альбом",
+            "description": "альбом, да якога звязаныя розныя сродкі масавай інфармацыі"
+        },
+        "Streams/file": {
+            "displayType": "Файл",
+            "description": "загружаны файл"
+        },
+        "Streams/audio": {
+            "displayType": "Аўдыёкліп",
+            "description": "аўдыёкліп"
+        },
+        "Streams/video": {
+            "displayType": "Відэа кліп",
+            "description": "відэа кліп"
+        },
+        "Streams/live": {
+            "displayType": "Livestream",
+            "description": "жывое аўдыё ці відэа"
+        },
+        "Streams/category": {
+            "displayType": "Катэгорыя",
+            "description": "катэгорыя, да якой могуць быць звязаны іншыя патокі"
+        },
+        "Streams/participating": {
+            "displayType": "Індэкс удзелу",
+            "description": "Калі карыстальнік далучаецца / выходзіць, патокі звязаныя / не звязаныя з гэтым"
+        },
+        "Streams/interest": {
+            "displayType": "Цікавасць",
+            "description": "уяўляе цікавасць карыстальніка да пэўнай тэмы"
+        },
+        "Streams/incoming": {
+            "displayType": "Уваходны",
+            "description": "прызначэнне для паведамленняў, адпраўленых іншымі карыстальнікамі"
+        },
+        "Streams/chat": {
+            "displayType": "Размова",
+            "description": "размова паміж карыстальнікамі, з гісторыяй"
+        },
+        "Streams/webrtc": {
+            "displayType": "Выклік у рэжыме рэальнага часу",
+            "description": "відэа / аўдыязванок у рэжыме рэальнага часу"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "адправіў паведамленне <em>{{message.fields.type}} на</em> паведамленне {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "пракаментаваў",
+            "in": "ў",
+            "body": "ў {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "быў апублікаваны ў",
+                "byAvatar": "па {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "мае новы {{message.instructions.fromDisplayType}}",
+                "byAvatar": "дадаў {{avatar.displayName}}"
+            }
         }
     }
 }

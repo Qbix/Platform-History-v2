@@ -3,8 +3,8 @@
         "NewItemTitle": "Item novum"
     },
     "labels": {
-        "Streams\/invited": "Invitavit mihi populus",
-        "Streams\/invitedMe": "Quis praeter me"
+        "Streams/invited": "Invitavit mihi populus",
+        "Streams/invitedMe": "Quis praeter me"
     },
     "interests": {
         "Filter": "Quid frui?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "Vos invitatus ab eo. {{CMXCIX}} accipere et hic adiungere."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{CMXCIX} <em>{a} {missae M} {MI}<\/em> {ad}}"
-        },
-        "text": {
-            "body": "{{CMXCIX} {{in}} M} {{MI}}"
         }
     },
     "followup": {

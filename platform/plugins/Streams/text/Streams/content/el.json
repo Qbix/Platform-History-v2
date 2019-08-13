@@ -25,7 +25,7 @@
         "earlierComments": "προηγούμενες παρατηρήσεις",
         "Subscribed": "Σίγαση ειδοποιήσεων",
         "Unsubscribed": "Λαμβάνετε ειδοποιήσεις",
-        "dontHavePermissionJoinConversation": "Δεν έχετε δικαίωμα να συμμετάσχετε σε αυτήν τη συζήτηση.",
+        "notAllowedToJoinCall": "Δεν έχετε δικαίωμα να συμμετάσχετε σε αυτήν τη συζήτηση.",
         "startedConversation": "ξεκίνησε μια συνομιλία",
         "RealTimeCall": "Κλήση σε πραγματικό χρόνο"
     },
@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Σφάλμα κατά τη διάρκεια: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Εισερχόμενο μήνυμα",
         "ManageEmailSubscriptions": "διαχείριση των συνδρομών ηλεκτρονικού ταχυδρομείου σας",
-        "IfUnsubscribe": "Αν θέλετε να καταργήσετε την εγγραφή σας"
+        "IfUnsubscribe": "Αν θέλετε να καταργήσετε την εγγραφή σας",
+        "Streams\/relatedTo\/Streams\/call": "Νέα Κλήση ξεκίνησε στις {{toTitle}}",
+        "Streams\/relatedTo\/*": "Νέο {{relationDisplayType}} στο {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Προστέθηκε στις {{toTitle}} ως {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} σε προσκάλεσε σε {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "Έχετε προσκληθεί. {{ClickOrTap}} εδώ για να δεχτείτε και να συμμετάσχετε."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} δημοσίευσε ένα <em>{{message.fields.type}}<\/em> μήνυμα στην {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} στις {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Οι προσκλήσεις αποστέλλονται από τον αριθμό μας, τον οποίο οι φίλοι σας δεν αναγνωρίζουν ακόμα. Συνεχίστε με ένα γρήγορο κείμενο για να τους ενημερώσετε ότι η πρόσκληση ήρθε από εσάς, ζητώντας τους να κάνουν κλικ στον σύνδεσμο.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "Ενεργοποίηση μικροφώνου",
             "cameraBtn": "Ενεργοποιήστε τη φωτογραφική μηχανή",
             "cameraAndMicrophoneBtn": "Ενεργοποιήστε τη φωτογραφική μηχανή και το μικρόφωνο"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Καλεσμένος",
+            "description": "Εισερχόμενα για προσκλήσεις"
+        },
+        "Streams\/resource": {
+            "displayType": "Πόρος",
+            "description": "ροής για τη διαχείριση της πρόσβασης σε έναν πόρο και την ανάρτηση μηνυμάτων σχετικά με ενημερώσεις"
+        },
+        "Streams\/task": {
+            "displayType": "Εργο",
+            "description": "καθήκον που πρέπει να επιτελείται από ανθρώπους ή μηχανές"
+        },
+        "Streams\/number": {
+            "displayType": "Αριθμός",
+            "description": "μαθηματικό αριθμό"
+        },
+        "Streams\/date": {
+            "displayType": "Ημερομηνία",
+            "description": "ημερομηνία"
+        },
+        "Streams\/text": {
+            "displayType": "Κείμενο",
+            "description": "σώμα κειμένου"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Κείμενο",
+            "description": "μικρό σώμα κειμένου"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Κείμενο",
+            "description": "μεσαίο σώμα κειμένου"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Διεύθυνση ηλεκτρονικού ταχυδρομείου",
+            "description": "διεύθυνση ηλεκτρονικού ταχυδρομείου"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Τηλεφωνικό νούμερο",
+            "description": "τηλεφωνικό νούμερο"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "στο διαδίκτυο"
+        },
+        "Streams\/image": {
+            "displayType": "Εικόνα",
+            "description": "οπτική εικόνα"
+        },
+        "Streams\/images": {
+            "displayType": "Συλλογή εικόνων",
+            "description": "γκαλερί εικόνων"
+        },
+        "Streams\/album": {
+            "displayType": "Αλμπουμ",
+            "description": "ένα άλμπουμ στο οποίο σχετίζονται διάφορα μέσα ενημέρωσης"
+        },
+        "Streams\/file": {
+            "displayType": "Αρχείο",
+            "description": "φορτωμένο αρχείο"
+        },
+        "Streams\/audio": {
+            "displayType": "Κλιπ ήχου",
+            "description": "κλιπ ήχου"
+        },
+        "Streams\/video": {
+            "displayType": "Βίντεο κλιπ",
+            "description": "βίντεο κλιπ"
+        },
+        "Streams\/live": {
+            "displayType": "Ζωντανή μετάδοση",
+            "description": "ζωντανό ήχο ή βίντεο"
+        },
+        "Streams\/category": {
+            "displayType": "Κατηγορία",
+            "description": "μια κατηγορία στην οποία μπορούν να συνδεθούν άλλα ρεύματα"
+        },
+        "Streams\/participating": {
+            "displayType": "Συμμετέχων Δείκτης",
+            "description": "τα ρεύματα σχετίζονται \/ δεν σχετίζονται με αυτό όταν ένας χρήστης συνδέεται \/ φεύγει"
+        },
+        "Streams\/interest": {
+            "displayType": "Ενδιαφέρον",
+            "description": "αντιπροσωπεύει το ενδιαφέρον ενός χρήστη για ένα συγκεκριμένο θέμα"
+        },
+        "Streams\/incoming": {
+            "displayType": "Εισερχόμενος",
+            "description": "προορισμού για μηνύματα που αποστέλλονται από άλλους χρήστες"
+        },
+        "Streams\/chat": {
+            "displayType": "Συνομιλία",
+            "description": "μια συνομιλία μεταξύ χρηστών, με ιστορικό"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Κλήση σε πραγματικό χρόνο",
+            "description": "μια κλήση βίντεο \/ ήχου σε πραγματικό χρόνο"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "δημοσίευσε ένα <em>{{message.fields.type}}<\/em> μήνυμα στην {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "σχολίασε",
+            "in": "σε",
+            "body": "στις {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "έχει αναρτηθεί στο",
+                "byAvatar": "από {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "έχει ένα νέο {{message.instructions.fromDisplayType}}",
+                "byAvatar": "προστέθηκε από {{avatar.displayName}}"
+            }
         }
     }
 }

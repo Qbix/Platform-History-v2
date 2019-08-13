@@ -45,5 +45,27 @@
             "ok": "승인",
             "cancel": "취소"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "크레딧",
+            "description": "크레딧 및 지불을 추적합니다"
+        },
+        "Assets\/plan": {
+            "displayType": "가입 계획",
+            "description": "가입 계획"
+        },
+        "Assets\/subscription": {
+            "displayType": "신청",
+            "description": "신청"
+        },
+        "Assets\/product": {
+            "displayType": "생성물",
+            "description": "판매중인 제품"
+        },
+        "Assets\/service": {
+            "displayType": "서비스",
+            "description": "제공되는 서비스"
+        }
     }
 }

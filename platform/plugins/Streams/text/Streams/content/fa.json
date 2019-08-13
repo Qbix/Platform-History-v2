@@ -25,7 +25,7 @@
         "earlierComments": "نظرات قبلی",
         "Subscribed": "اعلان های بی صدا",
         "Unsubscribed": "دریافت اعلان ها",
-        "dontHavePermissionJoinConversation": "شما اجازه پیوستن به این گفتگو را ندارید.",
+        "notAllowedToJoinCall": "شما اجازه پیوستن به این گفتگو را ندارید.",
         "startedConversation": "مکالمه ای را شروع کرد",
         "RealTimeCall": "تماس در زمان واقعی"
     },
@@ -44,7 +44,10 @@
         "Streams\/task\/error": "خطا در طول {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: پیام ورودی",
         "ManageEmailSubscriptions": "اشتراک های ایمیل خود را مدیریت کنید",
-        "IfUnsubscribe": "اگر میخواهید اشتراک را لغو کنید"
+        "IfUnsubscribe": "اگر میخواهید اشتراک را لغو کنید",
+        "Streams\/relatedTo\/Streams\/call": "تماس جدید در 99 999} ed شروع شد",
+        "Streams\/relatedTo\/*": "99 999 New} {{1000",
+        "Streams\/relatedFrom\/*": "به 99 999} به عنوان {1000} Added اضافه شد"
     },
     "invite": {
         "messageContent": "{{displayName}} شما را به {{inviteUrl}} دعوت کرد",
@@ -81,14 +84,6 @@
             "text": "شما دعوت شده اید {{ClickOrTap}} اینجا برای پذیرش و پیوستن به"
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} یک پیام <em>{{message.fields.type}}<\/em> را به {{stream.fields.title}} ارسال کرد"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} در {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "دعوت نامه ها از شماره ما ارسال می شود، که دوستان شما هنوز شناسایی نکرده اند. دنبال کردن با یک متن سریع برای اطلاع از دعوت نامه از طرف شما، از آنها بخواهید روی لینک کلیک کنید.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "میکروفون را فعال کنید",
             "cameraBtn": "دوربین را فعال کنید",
             "cameraAndMicrophoneBtn": "دوربین و میکروفون را فعال کنید"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "دعوت کرد",
+            "description": "صندوق ورودی برای دعوت نامه"
+        },
+        "Streams\/resource": {
+            "displayType": "منبع",
+            "description": "جریان برای مدیریت دسترسی به یک منبع و ارسال پیام درباره به روزرسانی ها"
+        },
+        "Streams\/task": {
+            "displayType": "وظیفه",
+            "description": "وظیفه ای که توسط انسان یا ماشین انجام شود"
+        },
+        "Streams\/number": {
+            "displayType": "عدد",
+            "description": "شماره ریاضی"
+        },
+        "Streams\/date": {
+            "displayType": "تاریخ",
+            "description": "تاریخ"
+        },
+        "Streams\/text": {
+            "displayType": "متن",
+            "description": "متن متن"
+        },
+        "Streams\/text\/small": {
+            "displayType": "متن",
+            "description": "متن کوچک متن"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "متن",
+            "description": "متن متوسط متن"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "آدرس ایمیل",
+            "description": "آدرس ایمیل"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "شماره تلفن",
+            "description": "شماره تلفن"
+        },
+        "Streams\/text\/url": {
+            "displayType": "آدرس اینترنتی",
+            "description": "پیوند در وب"
+        },
+        "Streams\/image": {
+            "displayType": "تصویر",
+            "description": "تصویر بصری"
+        },
+        "Streams\/images": {
+            "displayType": "گالری عکس",
+            "description": "گالری تصاویر"
+        },
+        "Streams\/album": {
+            "displayType": "آلبوم",
+            "description": "آلبومی که رسانه های مختلف به آن مربوط می شوند"
+        },
+        "Streams\/file": {
+            "displayType": "فایل",
+            "description": "پرونده بارگذاری شده"
+        },
+        "Streams\/audio": {
+            "displayType": "کلیپ صوتی",
+            "description": "کلیپ صوتی"
+        },
+        "Streams\/video": {
+            "displayType": "کلیپ ویدیویی",
+            "description": "کلیپ ویدیویی"
+        },
+        "Streams\/live": {
+            "displayType": "پخش زنده",
+            "description": "صوتی یا تصویری زنده"
+        },
+        "Streams\/category": {
+            "displayType": "دسته بندی",
+            "description": "مقوله ای که دیگر جریانات با آنها ارتباط دارند"
+        },
+        "Streams\/participating": {
+            "displayType": "فهرست مشارکت",
+            "description": "وقتی کاربر به کاربر \/ عضو می شود ، جریان ها با این موضوع مرتبط نیستند"
+        },
+        "Streams\/interest": {
+            "displayType": "علاقه",
+            "description": "نمایانگر علاقه کاربر به موضوع خاص است"
+        },
+        "Streams\/incoming": {
+            "displayType": "ورودی",
+            "description": "مقصد برای پیام های ارسال شده توسط کاربران دیگر"
+        },
+        "Streams\/chat": {
+            "displayType": "گفتگو",
+            "description": "گفتگو بین کاربران ، با سابقه"
+        },
+        "Streams\/webrtc": {
+            "displayType": "تماس در زمان واقعی",
+            "description": "تماس ویدیویی \/ صوتی در زمان واقعی"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "99 999}} پیام <em>{1000 {}<\/em> ارسال شده به to 1001}}"
+        },
+        "text": {
+            "commentedOn": "در مورد اظهار نظر",
+            "in": "که در",
+            "body": "99 999}} در {1000}}:} 1001}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ارسال شده است به",
+                "byAvatar": "توسط 99 999}"
+            },
+            "relatedTo": {
+                "hasANew": "999 پوند جدید دارد",
+                "byAvatar": "اضافه شده توسط {999}}"
+            }
         }
     }
 }

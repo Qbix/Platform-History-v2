@@ -25,7 +25,7 @@
         "earlierComments": "comentarios anteriores",
         "Subscribed": "Notificacións de silencio",
         "Unsubscribed": "Obter notificacións",
-        "dontHavePermissionJoinConversation": "Non tes permiso para unirse a esta conversa.",
+        "notAllowedToJoinCall": "Non tes permiso para unirse a esta conversa.",
         "startedConversation": "iniciou unha conversa",
         "RealTimeCall": "Chamada en tempo real"
     },
@@ -44,7 +44,10 @@
         "Streams/task/error": "Erro durante: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Mensaxe de entrada",
         "ManageEmailSubscriptions": "xestiona as túas subscricións de correo electrónico",
-        "IfUnsubscribe": "Se queres cancelar a subscrición"
+        "IfUnsubscribe": "Se queres cancelar a subscrición",
+        "Streams/relatedTo/Streams/call": "Nova chamada comezou en {{toTitle}}",
+        "Streams/relatedTo/*": "Novo {{relationDisplayType}} en {{toTitle}}",
+        "Streams/relatedFrom/*": "Engadiuse a {{toTitle}} como {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} invitoute a {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "Foi invitado. {{ClickOrTap}} aquí para aceptar e unirse."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} publicou unha mensaxe <em>{{message.fields.type}}</em> en {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} en {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "As invitacións son enviadas a partir do noso número, que os teus amigos aínda non recoñecen. Fai un seguimento cun texto rápido para que saiban de que che veu a invitación, pedíndolles que fagan clic na ligazón.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "Activar o micrófono",
             "cameraBtn": "Activar a cámara",
             "cameraAndMicrophoneBtn": "Activar cámara e micrófono"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "Invitado",
+            "description": "Caixa de entrada para invitacións"
+        },
+        "Streams/resource": {
+            "displayType": "Recurso",
+            "description": "fluxo para xestionar o acceso a un recurso e publicar mensaxes sobre actualizacións"
+        },
+        "Streams/task": {
+            "displayType": "Tarefa",
+            "description": "tarefa que deben facer humanos ou máquinas"
+        },
+        "Streams/number": {
+            "displayType": "Número",
+            "description": "número matemático"
+        },
+        "Streams/date": {
+            "displayType": "Data",
+            "description": "data"
+        },
+        "Streams/text": {
+            "displayType": "Texto",
+            "description": "corpo de texto"
+        },
+        "Streams/text/small": {
+            "displayType": "Texto",
+            "description": "pequeno corpo de texto"
+        },
+        "Streams/text/medium": {
+            "displayType": "Texto",
+            "description": "corpo medio de texto"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "Enderezo electrónico",
+            "description": "Enderezo electrónico"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Número de teléfono",
+            "description": "número de teléfono"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "ligazón na web"
+        },
+        "Streams/image": {
+            "displayType": "Imaxe",
+            "description": "imaxe visual"
+        },
+        "Streams/images": {
+            "displayType": "Galería de imaxes",
+            "description": "galería de imaxes"
+        },
+        "Streams/album": {
+            "displayType": "Álbum",
+            "description": "un álbum co que están relacionados varios soportes"
+        },
+        "Streams/file": {
+            "displayType": "Arquivo",
+            "description": "arquivo subido"
+        },
+        "Streams/audio": {
+            "displayType": "Clip de audio",
+            "description": "clip de audio"
+        },
+        "Streams/video": {
+            "displayType": "Videoclip",
+            "description": "videoclip"
+        },
+        "Streams/live": {
+            "displayType": "Transmisión en directo",
+            "description": "audio ou vídeo en directo"
+        },
+        "Streams/category": {
+            "displayType": "Categoría",
+            "description": "unha categoría coa que se poden relacionar outros fluxos"
+        },
+        "Streams/participating": {
+            "displayType": "Índice de participación",
+            "description": "os fluxos están relacionados / non relacionados con isto cando un usuario se xunta / sae"
+        },
+        "Streams/interest": {
+            "displayType": "Interese",
+            "description": "representa o interese dun usuario nun determinado tema"
+        },
+        "Streams/incoming": {
+            "displayType": "De entrada",
+            "description": "destino das mensaxes enviadas por outros usuarios"
+        },
+        "Streams/chat": {
+            "displayType": "Conversa",
+            "description": "unha conversa entre usuarios, con historia"
+        },
+        "Streams/webrtc": {
+            "displayType": "Chamada en tempo real",
+            "description": "unha videochamada en tempo real"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "publicou unha mensaxe de <em>{{message.fields.type}}</em> en {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "comentou",
+            "in": "en",
+            "body": "en {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "foi publicado en",
+                "byAvatar": "por {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ten un novo {{message.instructions.fromDisplayType}}",
+                "byAvatar": "engadido por {{avatar.displayName}}"
+            }
         }
     }
 }

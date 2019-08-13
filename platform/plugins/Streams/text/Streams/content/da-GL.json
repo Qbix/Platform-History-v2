@@ -25,7 +25,7 @@
         "earlierComments": "tidligere kommentarer",
         "Subscribed": "Lydløs meddelelser",
         "Unsubscribed": "Få notifikationer",
-        "dontHavePermissionJoinConversation": "Du har ikke tilladelse til at deltage i denne samtale.",
+        "notAllowedToJoinCall": "Du har ikke tilladelse til at deltage i denne samtale.",
         "startedConversation": "startede en samtale",
         "RealTimeCall": "Realtidsopkald"
     },
@@ -44,7 +44,10 @@
         "Streams/task/error": "Fejl under: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Indgående meddelelse",
         "ManageEmailSubscriptions": "Administrer dine e-mail abonnementer",
-        "IfUnsubscribe": "Hvis du vil afmelde abonnementet"
+        "IfUnsubscribe": "Hvis du vil afmelde abonnementet",
+        "Streams/relatedTo/Streams/call": "Nyt opkald startede i {{toTitle}}",
+        "Streams/relatedTo/*": "Nyt {{relationDisplayType}} om {{toTitle}}",
+        "Streams/relatedFrom/*": "Føjet til {{toTitle}} som {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} inviterede dig til {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "Du er blevet inviteret. {{ClickOrTap}} her for at acceptere og deltage."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} sendte en <em>{{message.fields.type}}</em> besked til {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} i {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Invitationer sendes fra vores nummer, som dine venner endnu ikke genkender. Følg med en hurtig tekst for at fortælle dem, at invitationen kom fra dig og bede dem om at klikke på linket.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "Aktivér mikrofon",
             "cameraBtn": "Aktivér kamera",
             "cameraAndMicrophoneBtn": "Aktivér kamera og mikrofon"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "inviteret",
+            "description": "Indbakke til invitationer"
+        },
+        "Streams/resource": {
+            "displayType": "ressource",
+            "description": "stream til styring af adgang til en ressource og indsendelse af meddelelser om opdateringer"
+        },
+        "Streams/task": {
+            "displayType": "Opgave",
+            "description": "opgave, der skal udføres af mennesker eller maskiner"
+        },
+        "Streams/number": {
+            "displayType": "Nummer",
+            "description": "matematisk antal"
+        },
+        "Streams/date": {
+            "displayType": "Dato",
+            "description": "dato"
+        },
+        "Streams/text": {
+            "displayType": "Tekst",
+            "description": "krop af tekst"
+        },
+        "Streams/text/small": {
+            "displayType": "Tekst",
+            "description": "lille krop af tekst"
+        },
+        "Streams/text/medium": {
+            "displayType": "Tekst",
+            "description": "medium krop af tekst"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "Email adresse",
+            "description": "email adresse"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Telefonnummer",
+            "description": "telefonnummer"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "link på nettet"
+        },
+        "Streams/image": {
+            "displayType": "Billede",
+            "description": "visuelt billede"
+        },
+        "Streams/images": {
+            "displayType": "Billedgalleri",
+            "description": "galleri med billeder"
+        },
+        "Streams/album": {
+            "displayType": "Album",
+            "description": "et album, som forskellige medier er relateret til"
+        },
+        "Streams/file": {
+            "displayType": "Fil",
+            "description": "uploadet fil"
+        },
+        "Streams/audio": {
+            "displayType": "Lydklip",
+            "description": "lydklip"
+        },
+        "Streams/video": {
+            "displayType": "Videoklip",
+            "description": "videoklip"
+        },
+        "Streams/live": {
+            "displayType": "Live stream",
+            "description": "live lyd eller video"
+        },
+        "Streams/category": {
+            "displayType": "Kategori",
+            "description": "en kategori, som andre streams kan relateres til"
+        },
+        "Streams/participating": {
+            "displayType": "Deltagende indeks",
+            "description": "streams er relateret / ikke forbundet med dette, når en bruger tilslutter / forlader"
+        },
+        "Streams/interest": {
+            "displayType": "Interesse",
+            "description": "repræsenterer en brugers interesse i et bestemt emne"
+        },
+        "Streams/incoming": {
+            "displayType": "Indgående",
+            "description": "destination for meddelelser sendt af andre brugere"
+        },
+        "Streams/chat": {
+            "displayType": "Samtale",
+            "description": "en samtale mellem brugere med historie"
+        },
+        "Streams/webrtc": {
+            "displayType": "Realtidsopkald",
+            "description": "et video- / lydopkald i realtid"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "sendte en <em>{{message.fields.type}}</em> besked til {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "kommenterede",
+            "in": "i",
+            "body": "i {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "er blevet sendt til",
+                "byAvatar": "af {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "har en ny {{message.instructions.fromDisplayType}}",
+                "byAvatar": "tilføjet af {{avatar.displayName}}"
+            }
         }
     }
 }

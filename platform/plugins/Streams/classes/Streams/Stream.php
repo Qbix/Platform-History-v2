@@ -1983,14 +1983,19 @@ class Streams_Stream extends Base_Streams_Stream
 	/**
 	 * Returns the type name to display from a stream type
 	 * @method displayType
+	 * @param {string} [$options.language=null] Override language
+	 * @param {string} [$options.locale=null] Override locale
 	 * @static
 	 * @return {string}
 	 */
-	static function displayType($streamType)
+	static function displayType($streamType, $options = array())
 	{
 		$parts = explode('/', $streamType);
+		$module = reset($parts);
 		$default = end($parts);
-		return self::getConfigField($streamType, 'displayType', $default);
+		$text = Q_Text::get("$module/content", $options);
+		$displayType = Q::ifset($text, 'Streams', 'types', $streamType, 'displayType', null);
+		return $displayType ? $displayType : $default;
 	}
 	
 	/**

@@ -362,9 +362,9 @@ Streams.define = function (type, ctor, methods) {
  * @method listen
  * @static
  * @param {Object} options={} So far no options are implemented.
- * @return {Boolean} Whether the server has started
+ * @return {Object} Object with any servers that have been started, "internal" or "socket"
  */
-Streams.listen = function (options) {
+Streams.listen = function (options, servers) {
 
 	// Start internal server
 	var server = Q.listen();
@@ -411,7 +411,6 @@ Streams.listen = function (options) {
 	});
 
 	socket.io.of('/Users').on('connection', function(client) {
-		Q.log("Socket.IO client connected " + client.id);
 		if (client.alreadyListeningStreams) {
 			return;
 		}
@@ -496,7 +495,10 @@ Streams.listen = function (options) {
 			delete Streams.observing[client.id];
 		});
 	});
-	return true;
+	return {
+		internal: server,
+		socket: socket
+	};
 };
 
 /**
@@ -688,14 +690,27 @@ function Streams_request_handler (req, res, next) {
 	
 		Q.each(userIds, function (i, userId) {
 			var token = null;
-							
+			var user = null;
+			
 		    // TODO: Change this to a getter, so that we can do throttling in case there are too many userIds
-			(new Streams.Participant({
-				"publisherId": stream.fields.publisherId,
-				"streamName": stream.fields.name,
-				"userId": userId,
-				"state": "participating"
-			})).retrieve(_participant);
+			
+			(new Users.User({
+				"userId": userId
+			})).retrieve(_user);
+			
+			function _user(err, rows) {	
+				if (!rows || !rows.length) {
+					// User wan't found in the dtabase
+					return;
+				}
+				user = rows[0];
+				(new Streams.Participant({
+					"publisherId": stream.fields.publisherId,
+					"streamName": stream.fields.name,
+					"userId": userId,
+					"state": "participating"
+				})).retrieve(_participant);
+			}
 			
 			function _participant(err, rows) {
 				if (rows && rows.length) {
@@ -807,7 +822,9 @@ function Streams_request_handler (req, res, next) {
 				}
 				var inviteUrl = Streams.inviteUrl(token);
 				displayName = displayName || "Someone";
-				var text = Q.Text.get('Streams/content');
+				var text = Q.Text.get('Streams/content', { 
+					language: user.fields.preferredLanguage
+				});
 				var msg = {
 					publisherId: invited.fields.publisherId,
 					streamName: invited.fields.name,
@@ -1089,6 +1106,8 @@ Streams.invitationsPath = function _Streams_invitationsPath(userId) {
 Streams.isStream = function (testing) {
 	return Q.typeOf(testing) === "Q.Streams.Stream";
 };
+
+Streams.WebRTC = require('Streams/WebRTC');
 
 /**
  * @property _messageHandlers

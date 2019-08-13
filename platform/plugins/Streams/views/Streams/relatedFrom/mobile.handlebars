@@ -1,1 +1,3 @@
-{{stream.fields.title}} has been posted to: {{call "message.getInstruction" "toUrl"}}
+{{stream.fields.title}} {{messages.text.relatedFrom.hasBeenPostedTo}}: {{call "message.getInstruction" "toUrl"}}
+
+{{interpolate Streams.relatedFrom.text.body this}}

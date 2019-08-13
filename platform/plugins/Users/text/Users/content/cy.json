@@ -18,7 +18,8 @@
         "GetStarted": "Dechrau",
         "Authorize": "Awdurdodi",
         "TermsLabel": "Rwyf wedi darllen a chytuno <br> i&#39;r {{link}}",
-        "TermsTitle": "Telerau"
+        "TermsTitle": "Telerau",
+        "mustAgree": "Yn gyntaf rhaid i chi gytuno i&#39;r telerau."
     },
     "register": {
         "TermsLabel": "Rwy&#39;n derbyn y {{link}}",
@@ -45,5 +46,52 @@
         "select": {
             "title": "Dewiswch gyswllt o {{displayName}}"
         }
+    },
+    "login": {
+        "title": "Croeso",
+        "directions": "Creu cyfrif, neu fewngofnodi.",
+        "directionsNoRegister": "Mewngofnodi os oes gennych gyfrif.",
+        "goButton": "Ewch",
+        "passphrase": "Rhowch eich ymadrodd pasio:",
+        "loginButton": "Dechrau",
+        "registerButton": "Dechrau",
+        "resendButton": "Anfon Neges Actifadu",
+        "forgot": "Wedi anghofio amdano?",
+        "resendConfirm": "Ydych chi am anfon neges i ailosod eich cyfrinair?",
+        "resendSuccess": "Gwiriwch am neges i ailosod eich cyfrinair",
+        "resendClose": "Caewch",
+        "noPassphrase": "Cyn y gallwch fewngofnodi, rhaid i chi osod ymadrodd pasio trwy glicio ar y ddolen yn eich neges actifadu.",
+        "notVerified": "Rhaid i chi anfon neges actifadu atoch chi&#39;ch hun er mwyn mewngofnodi.",
+        "emailExists": "A wnaethoch chi geisio cofrestru gyda&#39;r e-bost hwn o&#39;r blaen? Os felly, gwiriwch eich blwch derbyn i actifadu eich cyfrif. <a href='#resend' class='Q_button Users_activation_resend'>Cliciwch i ail-anfon y neges<\/a>",
+        "mobileExists": "A wnaethoch chi geisio cofrestru gyda&#39;r rhif ffôn symudol hwn o&#39;r blaen? Os felly, gwiriwch eich SMS i actifadu eich cyfrif. <a href='#resend' class='Q_button Users_activation_resend'>Cliciwch i ail-anfon y neges<\/a>",
+        "usingOther": "neu gallwch chi",
+        "prompt": "Dewiswch enw defnyddiwr:",
+        "newUser": "neu greu cyfrif newydd",
+        "placeholders": {
+            "identifier": "eich # symudol neu e-bost",
+            "mobile": "nodwch eich ffôn symudol #",
+            "email": "nodwch eich cyfeiriad e-bost",
+            "username": "enw defnyddiwr"
+        },
+        "confirmTerms": "Derbyn y Telerau Gwasanaeth?",
+        "facebookNoEmail": "Mae eich cyfrif facebook ar goll cyfeiriad e-bost wedi&#39;i gadarnhau. Mewngofnodwch yn y ffordd frodorol.",
+        "picTooltip": "Gallwch chi newid y llun hwn yn nes ymlaen"
+    },
+    "setIdentifier": {
+        "title": "Ychwanegwch ffordd i fewngofnodi",
+        "sendMessage": "Anfon Neges Actifadu",
+        "placeholders": {
+            "identifier": "nodwch eich ffôn symudol # neu e-bost",
+            "mobile": "nodwch eich rhif ffôn symudol",
+            "email": "nodwch eich cyfeiriad e-bost",
+            "username": "enw defnyddiwr"
+        }
+    },
+    "prompt": {
+        "title": "Cyfrif {{Platform}}",
+        "areUsing": "Rydych chi&#39;n defnyddio {{platform}} fel",
+        "noLongerUsing": "Nid ydych bellach wedi&#39;ch cysylltu â {{platform}} fel",
+        "doAuth": "Mewngofnodi gyda&#39;r cyfrif hwn",
+        "doSwitch": "Newid i&#39;r cyfrif hwn"
     }
 }

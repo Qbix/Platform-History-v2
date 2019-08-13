@@ -3,8 +3,8 @@
         "NewItemTitle": "פריט חדש"
     },
     "labels": {
-        "Streams\/invited": "אנשים שהזמנתי",
-        "Streams\/invitedMe": "מי הזמין אותי"
+        "Streams/invited": "אנשים שהזמנתי",
+        "Streams/invitedMe": "מי הזמין אותי"
     },
     "interests": {
         "Filter": "ממה אתה נהנה?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "הוזמנת. {{ClickOrTap}} כאן כדי לקבל ולהצטרף."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} פרסם הודעה <em>{{message.fields.type}}<\/em> ל- {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} ב- {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

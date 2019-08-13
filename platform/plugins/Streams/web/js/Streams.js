@@ -1354,13 +1354,18 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			var emailAddresses = [];
 			var mobileNumbers = [];
 			var fb_xids = [];
-			Q.each(rsd.userIds, function (i, userId) {
-				if (rsd.alreadyParticipating.indexOf(userId) >= 0) {
-					return;
-				}
-				var status = rsd.statuses[i];
+			// The invite mechanism allows clients to know whether
+			// certain identifiers are verified with the site or not,
+			// but will not let clients know which userIds they correspond to.
+			Q.each(rsd.statuses, function (i, s) {
+				// The invite mechanism no longer leak participant userIds to clients,
+				// so you can't match external identifiers to userIds
+				// That is why rsd.alreadyParticipating is no longer returned:
+				// if (rsd.alreadyParticipating.indexOf(userId) >= 0) {
+				// 	return;
+				// }
 				var shouldFollowup = (o.followup === true)
-					|| (o.followup !== false && status === 'future');
+					|| (o.followup !== false && s === 'future');
 				if (!shouldFollowup) {
 					return; // next one
 				}
@@ -2292,16 +2297,10 @@ Sp.removePermission = function (permission) {
  * @param {String} [baseUrl] you can override the default found in "Q"/"web"/"appRootUrl" config
  * @return {String|null|false}
  */
-Sp.url = function (messageOrdinal, baseUrl)
-{
+Sp.url = function (messageOrdinal, baseUrl) {
 	var urls = Q.plugins.Streams.urls;
-	if (!urls) {
-		return null;
-	}
-	var url = urls[this.fields.type] || urls['*'];
-	if (!url) {
-		return null;
-	}
+	var url = urls && (urls[this.fields.type] || urls['*']);
+	url = url || "{{baseUrl}}/s/{{publisherId}}/{{name}}";
 
 	var urlString = '';
 
@@ -5144,13 +5143,10 @@ Q.onInit.add(function _Streams_onInit() {
 
 		Users.Socket.onEvent('Streams/post').set(function (message) {
 			message = Streams.Message.construct(message);
-			var publisherId = Q.getObject(["publisherId"], message);
-			var streamName = Q.getObject(["streamName"], message);
-			var messageType = Q.getObject(["type"], message);
-			var byUserId = Q.getObject(["byUserId"], message);
-			var content = Q.getObject(["content"], message);
+			var messageType = message.type;
 			var messageUrl = message.getInstruction('inviteUrl') || message.getInstruction('url');
-			var noticeOptions = Q.getObject([messageType], notificationsAsNotice);
+			var content = message.getInstruction('content');
+			var noticeOptions = notificationsAsNotice[messageType];
 			var pluginName = messageType.split('/')[0];
 
 			// if this message type absent in config
@@ -5159,53 +5155,42 @@ Q.onInit.add(function _Streams_onInit() {
 			}
 
 			// skip myself messages
-			if (byUserId === userId) {
+			if (message.byUserId === userId) {
 				return;
 			}
 
 			Q.Text.get(pluginName + '/content', function (err, text) {
 				text = Q.getObject(["notifications", messageType], text);
 				if (!text || typeof text !== 'string') {
-					return console.warn('notificationsAsNotice: no text for ' + messageType);
+					return console.warn('Streams.notifications.notices: no text for ' + messageType);
 				}
 
-				Streams.showNoticeIfSubscribed(publisherId, streamName, messageType,
+				Streams.showNoticeIfSubscribed(message.publisherId, message.streamName, message.type,
 					function () {
 						var stream = this;
 
-						Streams.Avatar.get(byUserId, function (err, avatar) {
-							var templateName;
-
-							if (Q.getObject("showSubject", noticeOptions) !== false) {
-								templateName = text + content;
-							} else {
-								templateName = content;
-							}
-
-							if (!templateName) {
+						Streams.Avatar.get(message.byUserId, function (err, avatar) {
+							var source = (noticeOptions.showSubject !== false ? text : '');
+							source = (source ? source + ': ' : '') + (content || message.content);
+							if (!source) {
 								return;
 							}
-
-							Q.Template.set(templateName, templateName);
-							Q.Template.render(templateName, {
-								stream: stream,
-								avatar: avatar,
-								message: message
-							}, function (err, html) {
-								var msg;
-								if (msg = Q.firstErrorMessage(err)) {
-									return console.error(msg);
-								}
-
-								if (!html) {
-									return;
-								}
-
+							try {
+								var template = Q.Template.compile(source, 'handlebars');
+								var html = template({
+									app: Q.info.app,
+									info: Q.info,
+									stream: stream,
+									avatar: avatar,
+									message: message
+								});
 								Q.Notices.add(Q.extend(noticeOptions, {
 									content: html,
 									handler: messageUrl || stream.url()
 								}));
-							});
+							} catch (e) {
+								console.warn(e);
+							}
 						});
 					});
 			});

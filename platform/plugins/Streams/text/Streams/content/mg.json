@@ -3,8 +3,8 @@
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Ny olona nasaina",
-        "Streams\/invitedMe": "Izay nanasa ahy"
+        "Streams/invited": "Ny olona nasaina",
+        "Streams/invitedMe": "Izay nanasa ahy"
     },
     "interests": {
         "Filter": "Inona no tianao?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "Nasaina ianao. {{ClickOrTap}} eto mba hanaiky sy hiaraka."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} dia nandefa hafatra <em>{{message.fields.type}}<\/em> ho an&#39;ny {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} amin&#39;ny {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

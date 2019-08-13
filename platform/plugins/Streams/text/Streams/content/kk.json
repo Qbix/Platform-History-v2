@@ -3,8 +3,8 @@
         "NewItemTitle": "Жаңа элемент"
     },
     "labels": {
-        "Streams\/invited": "Мен шақырған адамдар",
-        "Streams\/invitedMe": "Маған кім шақырды"
+        "Streams/invited": "Мен шақырған адамдар",
+        "Streams/invitedMe": "Маған кім шақырды"
     },
     "interests": {
         "Filter": "Сізге не ұнайды?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "Сізді шақырды. {{ClickOrTap}} мұнда қабылдау және қосылу үшін."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} <em>{{message.fields.type}}<\/em> хабарын {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& url}} ішіндегі {{& call 'avatar.displayName'}}: {{& message.fields.content}}"
         }
     },
     "followup": {

@@ -25,7 +25,7 @@
         "earlierComments": "ความคิดเห็นก่อนหน้า",
         "Subscribed": "ปิดการแจ้งเตือน",
         "Unsubscribed": "รับการแจ้งเตือน",
-        "dontHavePermissionJoinConversation": "คุณไม่ได้รับอนุญาตให้เข้าร่วมการสนทนานี้",
+        "notAllowedToJoinCall": "คุณไม่ได้รับอนุญาตให้เข้าร่วมการสนทนานี้",
         "startedConversation": "เริ่มการสนทนา",
         "RealTimeCall": "โทรตามเวลาจริง"
     },
@@ -44,7 +44,10 @@
         "Streams\/task\/error": "ข้อผิดพลาดระหว่าง: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: ข้อความที่เข้ามา",
         "ManageEmailSubscriptions": "จัดการการสมัครอีเมลของคุณ",
-        "IfUnsubscribe": "หากคุณต้องการยกเลิกการสมัคร"
+        "IfUnsubscribe": "หากคุณต้องการยกเลิกการสมัคร",
+        "Streams\/relatedTo\/Streams\/call": "เริ่มการโทรใหม่ใน {{toTitle}}",
+        "Streams\/relatedTo\/*": "ใหม่ {{relationDisplayType}} ใน {{1,000}}",
+        "Streams\/relatedFrom\/*": "เพิ่มไปที่ {{toTitle}} เป็น {{1,000}}"
     },
     "invite": {
         "messageContent": "{{displayName}} เชิญคุณเข้าร่วม {{1,000}}",
@@ -81,14 +84,6 @@
             "text": "คุณได้รับเชิญ {{ClickOrTap}} ที่นี่เพื่อยอมรับและเข้าร่วม"
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} โพสต์ข้อความ <em>{{message.fields.type}}<\/em> ไปที่ {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} ใน {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "คำเชิญจะถูกส่งจากหมายเลขของเราซึ่งเพื่อนของคุณยังจำไม่ได้ ติดตามด้วยข้อความด่วนเพื่อให้พวกเขารู้ว่าคำเชิญมาจากคุณขอให้พวกเขาคลิกที่ลิงค์",
@@ -116,6 +111,122 @@
             "microphoneBtn": "เปิดใช้งานไมโครโฟน",
             "cameraBtn": "เปิดใช้งานกล้อง",
             "cameraAndMicrophoneBtn": "เปิดใช้งานกล้องและไมโครโฟน"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "ได้รับเชิญ",
+            "description": "กล่องจดหมายสำหรับคำเชิญ"
+        },
+        "Streams\/resource": {
+            "displayType": "ทรัพยากร",
+            "description": "สตรีมสำหรับจัดการการเข้าถึงทรัพยากรและโพสต์ข้อความเกี่ยวกับการอัปเดต"
+        },
+        "Streams\/task": {
+            "displayType": "งาน",
+            "description": "งานที่ต้องทำโดยมนุษย์หรือเครื่องจักร"
+        },
+        "Streams\/number": {
+            "displayType": "จำนวน",
+            "description": "จำนวนทางคณิตศาสตร์"
+        },
+        "Streams\/date": {
+            "displayType": "วันที่",
+            "description": "วันที่"
+        },
+        "Streams\/text": {
+            "displayType": "ข้อความ",
+            "description": "เนื้อความของข้อความ"
+        },
+        "Streams\/text\/small": {
+            "displayType": "ข้อความ",
+            "description": "ข้อความเล็ก ๆ"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "ข้อความ",
+            "description": "เนื้อความกลางของข้อความ"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "ที่อยู่อีเมล",
+            "description": "ที่อยู่อีเมล"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "หมายเลขโทรศัพท์",
+            "description": "หมายเลขโทรศัพท์"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "ลิงค์บนเว็บ"
+        },
+        "Streams\/image": {
+            "displayType": "ภาพ",
+            "description": "ภาพภาพ"
+        },
+        "Streams\/images": {
+            "displayType": "คลังภาพ",
+            "description": "คลังภาพ"
+        },
+        "Streams\/album": {
+            "displayType": "อัลบั้ม",
+            "description": "อัลบั้มที่เกี่ยวข้องกับสื่อต่าง ๆ"
+        },
+        "Streams\/file": {
+            "displayType": "ไฟล์",
+            "description": "อัพโหลดไฟล์"
+        },
+        "Streams\/audio": {
+            "displayType": "คลิปเสียง",
+            "description": "คลิปเสียง"
+        },
+        "Streams\/video": {
+            "displayType": "คลิปวิดีโอ",
+            "description": "คลิปวิดีโอ"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "เสียงสดหรือวิดีโอ"
+        },
+        "Streams\/category": {
+            "displayType": "ประเภท",
+            "description": "หมวดหมู่ที่สตรีมอื่นสามารถเกี่ยวข้อง"
+        },
+        "Streams\/participating": {
+            "displayType": "ดัชนีที่เข้าร่วม",
+            "description": "สตรีมเกี่ยวข้อง \/ ไม่เกี่ยวข้องกับสิ่งนี้เมื่อผู้ใช้เข้าร่วม \/ ออกจาก"
+        },
+        "Streams\/interest": {
+            "displayType": "ดอกเบี้ย",
+            "description": "แสดงถึงความสนใจของผู้ใช้ในบางหัวข้อ"
+        },
+        "Streams\/incoming": {
+            "displayType": "ขาเข้า",
+            "description": "ปลายทางสำหรับข้อความที่ส่งโดยผู้ใช้รายอื่น"
+        },
+        "Streams\/chat": {
+            "displayType": "การสนทนา",
+            "description": "การสนทนาระหว่างผู้ใช้ที่มีประวัติ"
+        },
+        "Streams\/webrtc": {
+            "displayType": "โทรตามเวลาจริง",
+            "description": "การสนทนาทางวิดีโอ \/ เสียงแบบเรียลไทม์"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "โพสต์ข้อความ <em>{{message.fields.type}}<\/em> ไปที่ {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "แสดงความคิดเห็นใน",
+            "in": "ใน",
+            "body": "ใน {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ถูกโพสต์ไปที่",
+                "byAvatar": "โดย {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "มี {{message.instructions.fromDisplayType}} ใหม่",
+                "byAvatar": "เพิ่มโดย {{avatar.displayName}}"
+            }
         }
     }
 }

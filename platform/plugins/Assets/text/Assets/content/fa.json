@@ -45,5 +45,27 @@
             "ok": "خوب",
             "cancel": "لغو"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "وام",
+            "description": "اعتبار و پرداخت را پیگیری می کند"
+        },
+        "Assets\/plan": {
+            "displayType": "برنامه اشتراک",
+            "description": "برنامه اشتراک"
+        },
+        "Assets\/subscription": {
+            "displayType": "اشتراک، ابونمان",
+            "description": "اشتراک، ابونمان"
+        },
+        "Assets\/product": {
+            "displayType": "تولید - محصول",
+            "description": "محصول فروخته می شود"
+        },
+        "Assets\/service": {
+            "displayType": "سرویس",
+            "description": "خدمات ارائه شده"
+        }
     }
 }

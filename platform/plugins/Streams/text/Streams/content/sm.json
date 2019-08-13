@@ -3,8 +3,8 @@
         "NewItemTitle": "Mea fou"
     },
     "labels": {
-        "Streams\/invited": "Tagata na ou valaauliaina",
-        "Streams\/invitedMe": "O ai na valaauliaina au"
+        "Streams/invited": "Tagata na ou valaauliaina",
+        "Streams/invitedMe": "O ai na valaauliaina au"
     },
     "interests": {
         "Filter": "O a mea e te fiafia i ai?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "Ua valaaulia oe. {{ClickOrTap}} iinei e talia ma auai."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} i le savali <em>{{message.fields.type}}<\/em> i {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} i {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

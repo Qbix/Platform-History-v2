@@ -155,7 +155,7 @@ class Users_User extends Base_Users_User
 			return $result;
 		}
 		if (!$isHashed and $passphrase) {
-			$passphrase = sha1($passphrase . "\t" . $this->id);
+			$passphrase = sha1($passphrase . "\t" . hash('sha256', $this->id));
 		}
 		return $passphrase;
 	}

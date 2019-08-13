@@ -537,14 +537,17 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		$toolElement.attr('data-webrtc', 'loading');
 
-		Q.Streams.related.force(state.publisherId, state.streamName, 'Streams/webrtc', true, {limit: 1, stream: true}, function (err) {
+		Q.Streams.related.force(
+		state.publisherId,  state.streamName,  'Streams/webrtc',  true, 
+		{limit: 1, stream: true}, 
+		function (err) {
 			if (err) {
 				return;
 			}
 
 			// get first property from relatedStreams (actually it should be only one)
-			var stream = this.relatedStreams[Object.keys(this.relatedStreams)[0]];
-			var _createRoom = function (publisherId, streamName) {
+			var stream = Q.first(this.relatedStreams);
+			function _createRoom(publisherId, streamName) {
 				// connect to this particular conversation
 				WebRTC.start({
 					element: document.body,
@@ -583,7 +586,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			};
 			if (stream && !stream.getAttribute('endTime')) {
 				if (!stream.testWriteLevel('join')) {
-					return Q.alert(tool.text.dontHavePermissionJoinConversation);
+					return Q.alert(tool.text.notAllowedToJoinCall);
 				}
 
 				_createRoom(stream.fields.publisherId, stream.fields.name);

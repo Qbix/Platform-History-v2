@@ -45,5 +45,27 @@
             "ok": "kunnossa",
             "cancel": "Peruuttaa"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Laajuus",
+            "description": "pitää kirjaa luotoista ja maksuista"
+        },
+        "Assets\/plan": {
+            "displayType": "Tilaussuunnitelma",
+            "description": "liittymissuunnitelma"
+        },
+        "Assets\/subscription": {
+            "displayType": "tilaus",
+            "description": "tilaus"
+        },
+        "Assets\/product": {
+            "displayType": "Tuote",
+            "description": "myytävä tuote"
+        },
+        "Assets\/service": {
+            "displayType": "palvelu",
+            "description": "palvelu tarjotaan"
+        }
     }
 }

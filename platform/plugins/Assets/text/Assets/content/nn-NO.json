@@ -45,5 +45,27 @@
             "ok": "OK",
             "cancel": "Avbryt"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "studiepoeng",
+            "description": "holder oversikt over kreditter og betalinger"
+        },
+        "Assets/plan": {
+            "displayType": "Subsriksjonsplan",
+            "description": "abonnementsplan"
+        },
+        "Assets/subscription": {
+            "displayType": "Abonnement",
+            "description": "abonnement"
+        },
+        "Assets/product": {
+            "displayType": "Produkt",
+            "description": "produkt som selges"
+        },
+        "Assets/service": {
+            "displayType": "Service",
+            "description": "tjenesten som tilbys"
+        }
     }
 }

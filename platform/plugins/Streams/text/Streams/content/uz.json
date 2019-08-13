@@ -3,8 +3,8 @@
         "NewItemTitle": "Yangi element"
     },
     "labels": {
-        "Streams\/invited": "Men taklif qilingan odamlar",
-        "Streams\/invitedMe": "Meni kim taklif qildi?"
+        "Streams/invited": "Men taklif qilingan odamlar",
+        "Streams/invitedMe": "Meni kim taklif qildi?"
     },
     "interests": {
         "Filter": "Siz nimani yoqtirasiz?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "Sizni taklif qilishdi. {{ClickOrTap}} bu erda qabul va qo&#39;shilish uchun."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} uchun <em>{{message.fields.type}}<\/em> xabar chop {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& url}} da {{& call 'avatar.displayName'}}: {{& message.fields.content}}"
         }
     },
     "followup": {

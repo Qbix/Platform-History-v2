@@ -45,5 +45,27 @@
             "ok": "ઠીક છે",
             "cancel": "રદ કરો"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "ક્રેડિટ્સ",
+            "description": "ક્રેડિટ અને ચુકવણીનો ટ્ર trackક રાખે છે"
+        },
+        "Assets\/plan": {
+            "displayType": "સબસ્ક્રિપ્શન પ્લાન",
+            "description": "ઉમેદવારી યોજના"
+        },
+        "Assets\/subscription": {
+            "displayType": "સબ્સ્ક્રિપ્શન",
+            "description": "લવાજમ"
+        },
+        "Assets\/product": {
+            "displayType": "ઉત્પાદન",
+            "description": "ઉત્પાદન વેચવામાં આવે છે"
+        },
+        "Assets\/service": {
+            "displayType": "સેવા",
+            "description": "સેવા ઓફર કરવામાં આવી રહી છે"
+        }
     }
 }

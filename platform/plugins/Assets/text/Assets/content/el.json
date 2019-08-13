@@ -45,5 +45,27 @@
             "ok": "Εντάξει",
             "cancel": "Ματαίωση"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Πιστώσεις",
+            "description": "παρακολουθεί τις πιστώσεις και τις πληρωμές"
+        },
+        "Assets\/plan": {
+            "displayType": "Σχέδιο υποδιαίρεσης",
+            "description": "σχέδιο εγγραφής"
+        },
+        "Assets\/subscription": {
+            "displayType": "Συνδρομή",
+            "description": "συνδρομή"
+        },
+        "Assets\/product": {
+            "displayType": "Προϊόν",
+            "description": "προϊόν που πωλείται"
+        },
+        "Assets\/service": {
+            "displayType": "Υπηρεσία",
+            "description": "υπηρεσία που προσφέρεται"
+        }
     }
 }

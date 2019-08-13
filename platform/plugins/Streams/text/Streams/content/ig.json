@@ -3,8 +3,8 @@
         "NewItemTitle": "Ihe ọhụrụ"
     },
     "labels": {
-        "Streams\/invited": "Ndị m kpọrọ",
-        "Streams\/invitedMe": "Ònye kpọrọ m"
+        "Streams/invited": "Ndị m kpọrọ",
+        "Streams/invitedMe": "Ònye kpọrọ m"
     },
     "interests": {
         "Filter": "Kedu ihe na-atọ gị ụtọ?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "A kpọrọ gị òkù. {{ClickOrTap}} ebe a iji nabata ma sonye."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} zitere ozi <em>{{message.fields.type}}<\/em> na {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} na {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

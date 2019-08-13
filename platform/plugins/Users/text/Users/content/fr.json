@@ -18,7 +18,8 @@
         "GetStarted": "Commencer",
         "Authorize": "Autoriser",
         "TermsLabel": "J&#39;ai lu et accepté <br> au {{link}}",
-        "TermsTitle": "termes"
+        "TermsTitle": "termes",
+        "mustAgree": "D&#39;abord, vous devez accepter les conditions."
     },
     "register": {
         "TermsLabel": "J&#39;accepte les {{link}}",
@@ -45,5 +46,52 @@
         "select": {
             "title": "Sélectionnez le contact de {{displayName}}"
         }
+    },
+    "login": {
+        "title": "Bienvenue",
+        "directions": "Créez un compte ou connectez-vous.",
+        "directionsNoRegister": "Connectez-vous si vous avez un compte.",
+        "goButton": "Aller",
+        "passphrase": "Entrez votre phrase secrète:",
+        "loginButton": "Commencer",
+        "registerButton": "Commencer",
+        "resendButton": "Envoyer un message d&#39;activation",
+        "forgot": "Oublié ça?",
+        "resendConfirm": "Voulez-vous envoyer un message pour réinitialiser votre phrase secrète?",
+        "resendSuccess": "Recherchez un message pour réinitialiser votre phrase secrète",
+        "resendClose": "Fermer",
+        "noPassphrase": "Avant de pouvoir vous connecter, vous devez définir une phrase secrète en cliquant sur le lien figurant dans votre message d&#39;activation.",
+        "notVerified": "Vous devez vous envoyer un message d&#39;activation pour pouvoir vous connecter.",
+        "emailExists": "Avez-vous déjà essayé de vous inscrire avec cet email? Si tel est le cas, consultez votre boîte de réception pour activer votre compte. <a href='#resend' class='Q_button Users_activation_resend'>Cliquez pour renvoyer le message<\/a>",
+        "mobileExists": "Avez-vous déjà essayé de vous enregistrer avec ce numéro de téléphone mobile? Si tel est le cas, consultez votre SMS pour activer votre compte. <a href='#resend' class='Q_button Users_activation_resend'>Cliquez pour renvoyer le message<\/a>",
+        "usingOther": "ou tu peux",
+        "prompt": "Choisissez un nom d&#39;utilisateur:",
+        "newUser": "ou créer un nouveau compte",
+        "placeholders": {
+            "identifier": "votre numéro de téléphone ou email",
+            "mobile": "entrez votre numéro de portable",
+            "email": "Entrez votre adresse email",
+            "username": "Nom d&#39;utilisateur"
+        },
+        "confirmTerms": "Accepter les conditions d&#39;utilisation?",
+        "facebookNoEmail": "Il manque une adresse email confirmée à votre compte facebook. Connectez-vous simplement à la manière native.",
+        "picTooltip": "Vous pouvez changer cette image plus tard"
+    },
+    "setIdentifier": {
+        "title": "Ajouter un moyen de se connecter",
+        "sendMessage": "Envoyer un message d&#39;activation",
+        "placeholders": {
+            "identifier": "entrez votre numéro de téléphone ou email",
+            "mobile": "Entrez votre numéro de mobile",
+            "email": "Entrez votre adresse email",
+            "username": "Nom d&#39;utilisateur"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} compte",
+        "areUsing": "Vous utilisez {{platform}} comme",
+        "noLongerUsing": "Vous n&#39;êtes plus connecté à {{platform}} en tant que",
+        "doAuth": "Connectez-vous avec ce compte",
+        "doSwitch": "Basculer vers ce compte"
     }
 }

@@ -3,8 +3,8 @@
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Mutane da na kira su",
-        "Streams\/invitedMe": "Wane ne ya gayyace ni"
+        "Streams/invited": "Mutane da na kira su",
+        "Streams/invitedMe": "Wane ne ya gayyace ni"
     },
     "interests": {
         "Filter": "Me kuke jin dadi?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "An gayyatar ku. {{ClickOrTap}} nan don karɓa da shiga."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} ya aika saƙon <em>{{message.fields.type}}<\/em> zuwa {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} a {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

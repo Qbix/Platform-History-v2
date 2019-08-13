@@ -45,5 +45,27 @@
             "ok": "Ok",
             "cancel": "Cancelar"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "Créditos",
+            "description": "fai un seguimento de créditos e pagamentos"
+        },
+        "Assets/plan": {
+            "displayType": "Plan de subscrición",
+            "description": "plan de subscrición"
+        },
+        "Assets/subscription": {
+            "displayType": "Subscrición",
+            "description": "subscrición"
+        },
+        "Assets/product": {
+            "displayType": "Produto",
+            "description": "produto vendido"
+        },
+        "Assets/service": {
+            "displayType": "Servizo",
+            "description": "servizo ofrecido"
+        }
     }
 }

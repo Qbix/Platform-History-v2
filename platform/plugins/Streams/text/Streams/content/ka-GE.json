@@ -25,7 +25,7 @@
         "earlierComments": "ადრე კომენტარი",
         "Subscribed": "მდუმარე შეტყობინებები",
         "Unsubscribed": "Შეტყობინებების მიღება",
-        "dontHavePermissionJoinConversation": "თქვენ არ გაქვთ ამ საუბარში მონაწილეობის უფლება.",
+        "notAllowedToJoinCall": "თქვენ არ გაქვთ ამ საუბარში მონაწილეობის უფლება.",
         "startedConversation": "დაიწყო საუბარი",
         "RealTimeCall": "რეალურ დროში ზარი"
     },
@@ -44,7 +44,10 @@
         "Streams/task/error": "შეცდომა დროს: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: შემომავალი შეტყობინება",
         "ManageEmailSubscriptions": "თქვენი ელფოსტის გამოწერის მართვა",
-        "IfUnsubscribe": "თუ გსურთ გაუქმება"
+        "IfUnsubscribe": "თუ გსურთ გაუქმება",
+        "Streams/relatedTo/Streams/call": "ახალი ზარი დაიწყო 999 {}} – ში",
+        "Streams/relatedTo/*": "ახალი {999}} in {{1000}",
+        "Streams/relatedFrom/*": "დაამატა 99 999}} როგორც}} 1000}"
     },
     "invite": {
         "messageContent": "{{displayName}} მოიწვია თქვენ {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "მიწვეული ხართ {{ClickOrTap}} აქ მიიღოს და შეუერთდება."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} <em>{{100}}</em> - ზე {{1001}"
-        },
-        "text": {
-            "body": "{{9}} {{& url}} - ში: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "გამოგზავნილია ჩვენი ნომერი, რომელიც თქვენს მეგობრებს ჯერ არ ცნობენ. დაიცავით სწრაფი ტექსტი, რათა მათ იცოდნენ, რომ მოწვევა მოვიდა თქვენგან, სთხოვეთ მათ დააკავშირონ ბმული.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "მიკროფონის ჩართვა",
             "cameraBtn": "ჩართეთ კამერა",
             "cameraAndMicrophoneBtn": "ჩართეთ კამერა და მიკროფონი"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "მოწვეული",
+            "description": "ყუთში მოსაწვევები"
+        },
+        "Streams/resource": {
+            "displayType": "რესურსი",
+            "description": "ნაკადი რესურსზე წვდომის მართვისთვის და შეტყობინებების განთავსება განახლებების შესახებ"
+        },
+        "Streams/task": {
+            "displayType": "დავალება",
+            "description": "ამოცანა უნდა შეასრულოს ადამიანებმა ან მანქანებმა"
+        },
+        "Streams/number": {
+            "displayType": "რიცხვი",
+            "description": "მათემატიკური ნომერი"
+        },
+        "Streams/date": {
+            "displayType": "თარიღი",
+            "description": "თარიღი"
+        },
+        "Streams/text": {
+            "displayType": "ტექსტი",
+            "description": "ტექსტის სხეული"
+        },
+        "Streams/text/small": {
+            "displayType": "ტექსტი",
+            "description": "ტექსტის მცირე ტანი"
+        },
+        "Streams/text/medium": {
+            "displayType": "ტექსტი",
+            "description": "ტექსტის საშუალო ორგანო"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "Ელექტრონული მისამართი",
+            "description": "ელექტრონული მისამართი"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Ტელეფონის ნომერი",
+            "description": "ტელეფონის ნომერი"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "ბმული ინტერნეტში"
+        },
+        "Streams/image": {
+            "displayType": "გამოსახულება",
+            "description": "ვიზუალური სურათი"
+        },
+        "Streams/images": {
+            "displayType": "სურათების გალერეა",
+            "description": "სურათების გალერეა"
+        },
+        "Streams/album": {
+            "displayType": "ალბომი",
+            "description": "ალბომი, რომელთანაც დაკავშირებულია სხვადასხვა მედია"
+        },
+        "Streams/file": {
+            "displayType": "ფაილი",
+            "description": "ატვირთული ფაილი"
+        },
+        "Streams/audio": {
+            "displayType": "აუდიო კლიპი",
+            "description": "აუდიო კლიპი"
+        },
+        "Streams/video": {
+            "displayType": "ვიდეოკლიპი",
+            "description": "ვიდეოკლიპი"
+        },
+        "Streams/live": {
+            "displayType": "Პირდაპირი ეთერი",
+            "description": "ცოცხალი აუდიო ან ვიდეო"
+        },
+        "Streams/category": {
+            "displayType": "კატეგორია",
+            "description": "კატეგორია, რომელთანაც შეიძლება დაკავშირებული იყოს სხვა ნაკადები"
+        },
+        "Streams/participating": {
+            "displayType": "მონაწილეობის ინდექსი",
+            "description": "ნაკადები უკავშირდება / არ არის დაკავშირებული ამასთან ერთად, როდესაც მომხმარებელი უერთდება / ტოვებს"
+        },
+        "Streams/interest": {
+            "displayType": "ინტერესი",
+            "description": "წარმოადგენს მომხმარებლის ინტერესს გარკვეული თემის მიმართ"
+        },
+        "Streams/incoming": {
+            "displayType": "შემომავალი",
+            "description": "დანიშნულება სხვა მომხმარებლების მიერ გაგზავნილ შეტყობინებებზე"
+        },
+        "Streams/chat": {
+            "displayType": "Საუბარი",
+            "description": "საუბარი მომხმარებლებს შორის, ისტორიასთან"
+        },
+        "Streams/webrtc": {
+            "displayType": "რეალურ დროში ზარი",
+            "description": "რეალურ დროში ვიდეო / აუდიო ზარი"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "99 99 999}} გამოქვეყნდა <em>{{message.fields.type}}</em> შეტყობინება} 1 1001 {}"
+        },
+        "text": {
+            "commentedOn": "დააკომენტარა",
+            "in": "შიგნით",
+            "body": "99 99 999}} in {{& url}}: {1001}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "გამოქვეყნებულია",
+                "byAvatar": "მიერ 99 999}}"
+            },
+            "relatedTo": {
+                "hasANew": "აქვს ახალი {999}}",
+                "byAvatar": "დაამატა {999}}"
+            }
         }
     }
 }

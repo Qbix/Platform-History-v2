@@ -102,7 +102,9 @@ Users_Device.prototype.pushNotification = function (notification, options, callb
 
 	// if view defined, it rewrite the body
 	if (o && o.view) {
-		var body = Q.view(o.view, o.fields, {language: o.language, source: o.isSource});
+		var body = o.isSource
+			? Q.Handlebars.renderSource(o.view, fields)
+			: Q.view(o.view, o.fields, { language: o.language });
 		Q.setObject(['alert', 'body'], body, n);
 	}
 	return this.handlePushNotification(n, o, callback);

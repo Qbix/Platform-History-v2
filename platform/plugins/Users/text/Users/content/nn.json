@@ -18,7 +18,8 @@
         "GetStarted": "Kom i gang",
         "Authorize": "Autorisere",
         "TermsLabel": "Jeg har lest og er enig <br> til {{link}}",
-        "TermsTitle": "Vilkår"
+        "TermsTitle": "Vilkår",
+        "mustAgree": "Først må du godta vilkårene."
     },
     "register": {
         "TermsLabel": "Jeg aksepterer {{link}}",
@@ -45,5 +46,52 @@
         "select": {
             "title": "Velg kontakt fra {{displayName}}"
         }
+    },
+    "login": {
+        "title": "Velkommen",
+        "directions": "Opprett en konto, eller logg inn.",
+        "directionsNoRegister": "Logg inn hvis du har en konto.",
+        "goButton": "Gå",
+        "passphrase": "Skriv passordet ditt:",
+        "loginButton": "Kom i gang",
+        "registerButton": "Kom i gang",
+        "resendButton": "Send aktiveringsmelding",
+        "forgot": "Glemte det?",
+        "resendConfirm": "Vil du sende en melding for å tilbakestille passordfrasen?",
+        "resendSuccess": "Se etter en melding for å tilbakestille passordfrasen",
+        "resendClose": "Lukk",
+        "noPassphrase": "Før du kan logge inn, må du angi en passordfrase ved å klikke på lenken i aktiveringsmeldingen.",
+        "notVerified": "Du må sende deg en aktiveringsmelding for å logge inn.",
+        "emailExists": "Prøvde du å registrere deg med denne e-posten før? I så fall, sjekk innboksen for å aktivere kontoen din. <a href='#resend' class='Q_button Users_activation_resend'>Klikk for å sende meldingen på nytt<\/a>",
+        "mobileExists": "Prøvde du å registrere deg med dette mobilnummeret før? I så fall, sjekk SMS-en for å aktivere kontoen din. <a href='#resend' class='Q_button Users_activation_resend'>Klikk for å sende meldingen på nytt<\/a>",
+        "usingOther": "eller det kan du",
+        "prompt": "Velg et brukernavn:",
+        "newUser": "eller opprett en ny konto",
+        "placeholders": {
+            "identifier": "mobilnummeret ditt eller e-post",
+            "mobile": "skriv inn mobilen din #",
+            "email": "Skriv inn din epostadresse",
+            "username": "brukernavn"
+        },
+        "confirmTerms": "Godta vilkårene for bruk?",
+        "facebookNoEmail": "Facebook-kontoen din mangler en bekreftet e-postadresse. Bare logg inn på den opprinnelige måten.",
+        "picTooltip": "Du kan endre dette bildet senere"
+    },
+    "setIdentifier": {
+        "title": "Legg til en måte å logge på",
+        "sendMessage": "Send aktiveringsmelding",
+        "placeholders": {
+            "identifier": "skriv inn mobilnummeret eller e-postadressen din",
+            "mobile": "skriv inn mobilnummeret ditt",
+            "email": "Skriv inn din epostadresse",
+            "username": "brukernavn"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} -konto",
+        "areUsing": "Du bruker {{platform}} som",
+        "noLongerUsing": "Du er ikke lenger koblet til {{platform}} som",
+        "doAuth": "Logg inn med denne kontoen",
+        "doSwitch": "Bytt til denne kontoen"
     }
 }

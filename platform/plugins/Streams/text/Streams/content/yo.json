@@ -3,8 +3,8 @@
         "NewItemTitle": "Ohun Titun"
     },
     "labels": {
-        "Streams\/invited": "Awọn eniyan Mo pe",
-        "Streams\/invitedMe": "Tani o pe mi"
+        "Streams/invited": "Awọn eniyan Mo pe",
+        "Streams/invitedMe": "Tani o pe mi"
     },
     "interests": {
         "Filter": "Kini o ni igbadun?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "O ti pe. {{ClickOrTap}} nibi lati gba ati darapo."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} firanṣẹ ifiranṣẹ <em>{{message.fields.type}}<\/em> si {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} ni {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

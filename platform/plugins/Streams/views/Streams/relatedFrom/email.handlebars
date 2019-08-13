@@ -5,13 +5,16 @@
 	<h2>{{stream.fields.title}}</h2>
 {{/if}}
 <div>
-has been posted to:
+{{messages.text.relatedFrom.hasBeenPostedTo}}
 </div>
 {{#if (call 'message.getInstruction' 'toUrl')}}
 	<h2><a href="{{call 'message.getInstruction' 'toUrl'}}">{{call 'message.getInstruction' 'toTitle'}}</a></h2>
 {{else}}
 	<h2>{{call 'message.getInstruction' 'toTitle'}}</h2>
 {{/if}}
+<div>
+	{{interpolate messages.text.relatedFrom.byAvatar this}}
+</div>
 <hr>
 <p>{{notifications.IfUnsubscribe}}, <a href="{{baseUrl}}/Streams/participating">{{notifications.ManageEmailSubscriptions}}</a></p>
 </html>

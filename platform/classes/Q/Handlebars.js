@@ -118,6 +118,8 @@ handlebars.registerHelper('option', function(value, html, selectedValue) {
  * @namespace Q
  */
 module.exports = {
+	
+	handlebars: handlebars,
 
 	/**
 	 * Load and return the content of a handlebars template (synchronously)

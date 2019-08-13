@@ -45,5 +45,27 @@
             "ok": "iawn",
             "cancel": "Canslo"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Credydau",
+            "description": "yn cadw golwg ar gredydau a thaliadau"
+        },
+        "Assets\/plan": {
+            "displayType": "Cynllun Is-droseddu",
+            "description": "cynllun tanysgrifio"
+        },
+        "Assets\/subscription": {
+            "displayType": "Tanysgrifiad",
+            "description": "tanysgrifiad"
+        },
+        "Assets\/product": {
+            "displayType": "Cynnyrch",
+            "description": "cynnyrch yn cael ei werthu"
+        },
+        "Assets\/service": {
+            "displayType": "Gwasanaeth",
+            "description": "gwasanaeth yn cael ei gynnig"
+        }
     }
 }

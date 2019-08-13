@@ -3,8 +3,8 @@
         "NewItemTitle": "Bagong Item"
     },
     "labels": {
-        "Streams\/invited": "Mga taong inanyayahan ko",
-        "Streams\/invitedMe": "Sino ang nag-imbita sa akin"
+        "Streams/invited": "Mga taong inanyayahan ko",
+        "Streams/invitedMe": "Sino ang nag-imbita sa akin"
     },
     "interests": {
         "Filter": "Ano ang iyong kinaliligayahan?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "Inanyayahan ka. {{ClickOrTap}} dito upang tanggapin at sumali."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} nai-post ang isang <em>{{message.fields.type}} na<\/em> mensahe sa {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} sa {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

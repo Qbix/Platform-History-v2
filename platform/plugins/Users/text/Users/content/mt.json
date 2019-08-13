@@ -18,7 +18,8 @@
         "GetStarted": "Ibda",
         "Authorize": "Tawtorizza",
         "TermsLabel": "Jiena qrajt u naqbel <br> għall- {{link}}",
-        "TermsTitle": "Termini"
+        "TermsTitle": "Termini",
+        "mustAgree": "L-ewwel trid taqbel mat-termini."
     },
     "register": {
         "TermsLabel": "Naċċetta l- {{link}}",
@@ -45,5 +46,52 @@
         "select": {
             "title": "Agħżel kuntatt ta &#39;{{displayName}}"
         }
+    },
+    "login": {
+        "title": "Merħba",
+        "directions": "Oħloq kont, jew idħol.",
+        "directionsNoRegister": "Idħol jekk għandek kont.",
+        "goButton": "Mur",
+        "passphrase": "Daħħal il-frażi tal-pass tiegħek:",
+        "loginButton": "Ibda",
+        "registerButton": "Ibda",
+        "resendButton": "Ibgħat Messaġġ ta &#39;Attivazzjoni",
+        "forgot": "Insejtha?",
+        "resendConfirm": "Trid tibgħat messaġġ biex terġa &#39;tissettja l-passphrase tiegħek?",
+        "resendSuccess": "Iċċekkja jekk hemmx messaġġ biex terġa &#39;tpoġġi l-passfrażi tiegħek",
+        "resendClose": "Qrib",
+        "noPassphrase": "Qabel ma tkun tista &#39;tidħol, trid tissettja frażi li tgħaddi billi tikklikkja l-link fil-messaġġ ta&#39; attivazzjoni tiegħek.",
+        "notVerified": "Int trid tibgħat lilek innifsek messaġġ ta &#39;attivazzjoni biex tidħol.",
+        "emailExists": "Kont ippruvajt tirreġistra ma &#39;dan l-email qabel? Jekk iva, iċċekkja l-inbox tiegħek biex tattiva l-kont tiegħek. <a href='#resend' class='Q_button Users_activation_resend'>Ikklikkja biex terġa &#39;tibgħat il-messaġġ<\/a>",
+        "mobileExists": "Kont ippruvajt tirreġistra ma &#39;dan in-numru tal-mowbajl qabel? Jekk iva, iċċekkja l-SMS tiegħek biex tattiva l-kont tiegħek. <a href='#resend' class='Q_button Users_activation_resend'>Ikklikkja biex terġa &#39;tibgħat il-messaġġ<\/a>",
+        "usingOther": "jew tista &#39;",
+        "prompt": "Għażel Username:",
+        "newUser": "jew toħloq kont ġdid",
+        "placeholders": {
+            "identifier": "# jew email mobbli tiegħek",
+            "mobile": "daħħal il-mobile tiegħek #",
+            "email": "daħħal l-indirizz tal-email tiegħek",
+            "username": "username"
+        },
+        "confirmTerms": "Taċċetta t-Termini tas-Servizz?",
+        "facebookNoEmail": "Il-kont ta ’facebook tiegħek għandu nieqes indirizz elettroniku kkonfermat. Sempliċement idħol fil-mod indiġenu.",
+        "picTooltip": "Tista &#39;tbiddel din l-istampa aktar tard"
+    },
+    "setIdentifier": {
+        "title": "Żid mod kif tidħol",
+        "sendMessage": "Ibgħat Messaġġ ta &#39;Attivazzjoni",
+        "placeholders": {
+            "identifier": "daħħal il-mobile # jew l-email tiegħek",
+            "mobile": "daħħal in-numru tal-mowbajl tiegħek",
+            "email": "daħħal l-indirizz tal-email tiegħek",
+            "username": "username"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Kont",
+        "areUsing": "Int qed tuża {{platform}} bħala",
+        "noLongerUsing": "M&#39;għadekx konness ma &#39;{{platform}} bħala",
+        "doAuth": "Idħol ma &#39;dan il-kont",
+        "doSwitch": "Aqleb għal dan il-kont"
     }
 }

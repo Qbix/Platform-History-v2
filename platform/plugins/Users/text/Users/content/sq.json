@@ -18,7 +18,8 @@
         "GetStarted": "Fillo",
         "Authorize": "Autorizoj",
         "TermsLabel": "Kam lexuar dhe pajtohem <br> në {{link}}",
-        "TermsTitle": "Kushtet"
+        "TermsTitle": "Kushtet",
+        "mustAgree": "Së pari duhet të pajtoheni me kushtet."
     },
     "register": {
         "TermsLabel": "Unë pranoj {{link}}",
@@ -45,5 +46,52 @@
         "select": {
             "title": "Përzgjidh kontaktin e {{displayName}}"
         }
+    },
+    "login": {
+        "title": "i mirëpritur",
+        "directions": "Krijoni një llogari ose regjistrohuni.",
+        "directionsNoRegister": "Hyni nëse keni një llogari.",
+        "goButton": "shkoj",
+        "passphrase": "Vendosni frazën tuaj të kalimit:",
+        "loginButton": "Fillo",
+        "registerButton": "Fillo",
+        "resendButton": "Dërgoni mesazh aktivizimi",
+        "forgot": "E harrova?",
+        "resendConfirm": "A doni të dërgoni një mesazh për të rivendosur frazën tuaj?",
+        "resendSuccess": "Kontrolloni për një mesazh për të rivendosur frazën tuaj",
+        "resendClose": "afër",
+        "noPassphrase": "Para se të regjistroheni, duhet të vendosni një frazë kalimi duke klikuar lidhjen në mesazhin tuaj të aktivizimit.",
+        "notVerified": "Ju duhet të dërgoni vetes një mesazh aktivizimi për t&#39;u regjistruar.",
+        "emailExists": "A u përpoqët të regjistrohesh më parë me këtë email? Nëse po, kontrolloni kutinë tuaj për të aktivizuar llogarinë tuaj. <a href='#resend' class='Q_button Users_activation_resend'>Klikoni për të dërguar mesazhin<\/a>",
+        "mobileExists": "A u përpoqët të regjistrohesh më parë me këtë numër celular? Nëse është kështu, kontrolloni SMS-në tuaj për të aktivizuar llogarinë tuaj. <a href='#resend' class='Q_button Users_activation_resend'>Klikoni për të dërguar mesazhin<\/a>",
+        "usingOther": "ose mundeni",
+        "prompt": "Zgjidhni një emër përdoruesi:",
+        "newUser": "ose krijoni një llogari të re",
+        "placeholders": {
+            "identifier": "# ose emaili juaj celular",
+            "mobile": "shkruani celularin #",
+            "email": "shkruani adresën tuaj të emailit",
+            "username": "Emri i përdoruesit"
+        },
+        "confirmTerms": "Pranoni Kushtet e Shërbimit?",
+        "facebookNoEmail": "Në llogarinë tuaj në facebook mungon një adresë e konfirmuar e-mail. Thjesht futuni në mënyrën amtare.",
+        "picTooltip": "Ju mund ta ndryshoni këtë pamje më vonë"
+    },
+    "setIdentifier": {
+        "title": "Shtoni një mënyrë për t&#39;u regjistruar",
+        "sendMessage": "Dërgoni mesazh aktivizimi",
+        "placeholders": {
+            "identifier": "shkruani numrin tuaj celular ose emailin tuaj",
+            "mobile": "shkruani numrin tuaj celular",
+            "email": "shkruani adresën tuaj të emailit",
+            "username": "Emri i përdoruesit"
+        }
+    },
+    "prompt": {
+        "title": "Llogari {999",
+        "areUsing": "Ju jeni duke përdorur 99 99 999} si",
+        "noLongerUsing": "Ju nuk jeni më të lidhur me 99 999}} si",
+        "doAuth": "Identifikohu me këtë llogari",
+        "doSwitch": "Kalo te kjo llogari"
     }
 }

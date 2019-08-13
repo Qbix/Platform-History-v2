@@ -25,7 +25,7 @@
         "earlierComments": "comentariile anterioare",
         "Subscribed": "Mute Notifications",
         "Unsubscribed": "Primiți notificări",
-        "dontHavePermissionJoinConversation": "Nu aveți permisiunea de a vă alătura acestei conversații.",
+        "notAllowedToJoinCall": "Nu aveți permisiunea de a vă alătura acestei conversații.",
         "startedConversation": "a început o conversație",
         "RealTimeCall": "Apel în timp real"
     },
@@ -44,7 +44,10 @@
         "Streams/task/error": "Eroare în timpul: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: mesajul primit",
         "ManageEmailSubscriptions": "gestionați abonamentele dvs. prin e-mail",
-        "IfUnsubscribe": "Dacă doriți să vă dezabonați"
+        "IfUnsubscribe": "Dacă doriți să vă dezabonați",
+        "Streams/relatedTo/Streams/call": "Apel nou început în {{toTitle}}",
+        "Streams/relatedTo/*": "Nou {{relationDisplayType}} în {{toTitle}}",
+        "Streams/relatedFrom/*": "Adăugat la {{toTitle}} ca {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} te-a invitat la {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "Ai fost invitat. {{ClickOrTap}} aici să accepți și să vă alăturați."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} a trimis un mesaj <em>{{message.fields.type}}</em> la {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} în {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Invitațiile sunt trimise de la numărul nostru, pe care prietenii dvs. încă nu îl recunosc. Urmăriți cu un text rapid pentru a le spune că invitația a venit de la dvs., cerându-i să facă clic pe link.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "Activați microfonul",
             "cameraBtn": "Activați Camera",
             "cameraAndMicrophoneBtn": "Activați aparatul foto și microfonul"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "invitat",
+            "description": "Inbox pentru invitații"
+        },
+        "Streams/resource": {
+            "displayType": "Resursă",
+            "description": "flux pentru gestionarea accesului la o resursă și postarea de mesaje despre actualizări"
+        },
+        "Streams/task": {
+            "displayType": "Sarcină",
+            "description": "sarcină care trebuie făcută de oameni sau mașini"
+        },
+        "Streams/number": {
+            "displayType": "Număr",
+            "description": "număr matematic"
+        },
+        "Streams/date": {
+            "displayType": "Data",
+            "description": "Data"
+        },
+        "Streams/text": {
+            "displayType": "Text",
+            "description": "corp de text"
+        },
+        "Streams/text/small": {
+            "displayType": "Text",
+            "description": "mic corp de text"
+        },
+        "Streams/text/medium": {
+            "displayType": "Text",
+            "description": "corp mediu de text"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "Adresa de email",
+            "description": "adresa de email"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Numar de telefon",
+            "description": "numar de telefon"
+        },
+        "Streams/text/url": {
+            "displayType": "URL-",
+            "description": "link pe web"
+        },
+        "Streams/image": {
+            "displayType": "Imagine",
+            "description": "Imagine vizuală"
+        },
+        "Streams/images": {
+            "displayType": "Galerie de imagini",
+            "description": "galerie de imagini"
+        },
+        "Streams/album": {
+            "displayType": "Album",
+            "description": "un album la care sunt legate diverse media"
+        },
+        "Streams/file": {
+            "displayType": "Fişier",
+            "description": "fișier încărcat"
+        },
+        "Streams/audio": {
+            "displayType": "Clip audio",
+            "description": "clip audio"
+        },
+        "Streams/video": {
+            "displayType": "Clip video",
+            "description": "clip video"
+        },
+        "Streams/live": {
+            "displayType": "Transmitere live",
+            "description": "audio sau video în direct"
+        },
+        "Streams/category": {
+            "displayType": "Categorie",
+            "description": "o categorie la care pot fi legate și alte fluxuri"
+        },
+        "Streams/participating": {
+            "displayType": "Index de participare",
+            "description": "fluxurile sunt legate / nu au legătură cu acest lucru când un utilizator se alătură / pleacă"
+        },
+        "Streams/interest": {
+            "displayType": "Interes",
+            "description": "reprezintă interesul utilizatorului pentru un anumit subiect"
+        },
+        "Streams/incoming": {
+            "displayType": "care sosește",
+            "description": "destinație pentru mesajele trimise de alți utilizatori"
+        },
+        "Streams/chat": {
+            "displayType": "Conversaţie",
+            "description": "o conversație între utilizatori, cu istoric"
+        },
+        "Streams/webrtc": {
+            "displayType": "Apel în timp real",
+            "description": "un apel video / audio în timp real"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "au postat un mesaj <em>{{message.fields.type}}</em> la {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "comentat",
+            "in": "în",
+            "body": "în {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "a fost postat pe",
+                "byAvatar": "de {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "are un nou {{message.instructions.fromDisplayType}}",
+                "byAvatar": "adăugat de {{avatar.displayName}}"
+            }
         }
     }
 }

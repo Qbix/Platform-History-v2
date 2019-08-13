@@ -25,7 +25,7 @@
         "earlierComments": "kummenti preċedenti",
         "Subscribed": "Mute Notifiki",
         "Unsubscribed": "Ikseb Notifiki",
-        "dontHavePermissionJoinConversation": "M&#39;għandekx permess biex tissieħeb f&#39;din il-konversazzjoni.",
+        "notAllowedToJoinCall": "M&#39;għandekx permess biex tissieħeb f&#39;din il-konversazzjoni.",
         "startedConversation": "bdiet konverżazzjoni",
         "RealTimeCall": "Sejħa f&#39;ħin Reali"
     },
@@ -44,7 +44,10 @@
         "Streams/task/error": "Żball waqt: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Messaġġ li Jidħol",
         "ManageEmailSubscriptions": "immaniġġja l-abbonamenti bl-email tiegħek",
-        "IfUnsubscribe": "Jekk trid tabbona"
+        "IfUnsubscribe": "Jekk trid tabbona",
+        "Streams/relatedTo/Streams/call": "Sejħa Ġdida Beda f &#39;{{toTitle}}",
+        "Streams/relatedTo/*": "Ġdid {{relationDisplayType}} f &#39;{{toTitle}}",
+        "Streams/relatedFrom/*": "Miżjud ma &#39;{{toTitle}} bħala {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} stiednek biex {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "Int ġejt mistiedna. {{ClickOrTap}} hawn biex taċċetta u tissieħeb."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} bagħat messaġġ <em>{{message.fields.type}}</em> lil {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} f &#39;{{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "L-istediniet jintbagħtu min-numru tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Segwitu b&#39;test rapidu biex tgħarrafhom mill-istedina ġiet mingħandek, u titlobhom ikklikkja l-link.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "Agħti Mikrofonu",
             "cameraBtn": "Jippermetti l-Kamera",
             "cameraAndMicrophoneBtn": "Agħti Kamera u Mikrofonu"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "Mistiedna",
+            "description": "Inbox għall-istediniet"
+        },
+        "Streams/resource": {
+            "displayType": "Riżors",
+            "description": "fluss għall-immaniġġjar tal-aċċess għal riżors u l-istazzjonar ta &#39;messaġġi dwar aġġornamenti"
+        },
+        "Streams/task": {
+            "displayType": "Kompitu",
+            "description": "kompitu li għandu jsir mill-bnedmin jew mill-magni"
+        },
+        "Streams/number": {
+            "displayType": "Numru",
+            "description": "numru matematika"
+        },
+        "Streams/date": {
+            "displayType": "Data",
+            "description": "id-data"
+        },
+        "Streams/text": {
+            "displayType": "Test",
+            "description": "korp tat-test"
+        },
+        "Streams/text/small": {
+            "displayType": "Test",
+            "description": "Korp żgħir ta &#39;test"
+        },
+        "Streams/text/medium": {
+            "displayType": "Test",
+            "description": "korp medju tat-test"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "Indirizz tal-Email",
+            "description": "indirizz elettroniku"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Numru tat-telefon",
+            "description": "numru tat-telefon"
+        },
+        "Streams/text/url": {
+            "displayType": "URL",
+            "description": "link fuq il-web"
+        },
+        "Streams/image": {
+            "displayType": "Immaġni",
+            "description": "immaġni viżwali"
+        },
+        "Streams/images": {
+            "displayType": "Gallerija tal-Immaġini",
+            "description": "gallerija ta &#39;stampi"
+        },
+        "Streams/album": {
+            "displayType": "Album",
+            "description": "album li miegħu huma relatati diversi media"
+        },
+        "Streams/file": {
+            "displayType": "Fajl",
+            "description": "fajl imtella &#39;"
+        },
+        "Streams/audio": {
+            "displayType": "Kliem tal-awdjo",
+            "description": "klip awdjo"
+        },
+        "Streams/video": {
+            "displayType": "Clip tal-Vidjow",
+            "description": "filmat"
+        },
+        "Streams/live": {
+            "displayType": "Livestream",
+            "description": "awdjo jew vidjo ħajjin"
+        },
+        "Streams/category": {
+            "displayType": "Kategorija",
+            "description": "kategorija li magħha jistgħu jiġu relatati xmajjar oħra"
+        },
+        "Streams/participating": {
+            "displayType": "Indiċi Parteċipanti",
+            "description": "il-flussi huma relatati / mhux relatati ma &#39;dan meta utent jingħaqad / jitlaq"
+        },
+        "Streams/interest": {
+            "displayType": "Interess",
+            "description": "jirrappreżenta l-interess ta &#39;l-utent f&#39;ċertu suġġett"
+        },
+        "Streams/incoming": {
+            "displayType": "Dieħla",
+            "description": "destinazzjoni għal messaġġi mibgħuta minn utenti oħra"
+        },
+        "Streams/chat": {
+            "displayType": "Konversazzjoni",
+            "description": "konverżazzjoni bejn l-utenti, bi storja"
+        },
+        "Streams/webrtc": {
+            "displayType": "Sejħa f&#39;ħin Reali",
+            "description": "sejħa bil-vidjo / awdjo f&#39;ħin reali"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "bagħtu messaġġ <em>{{message.fields.type}}</em> lil {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "ikkummenta dwarha",
+            "in": "fi",
+            "body": "f&#39;{{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ġie stazzjonat fuq",
+                "byAvatar": "minn {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "għandu {{message.instructions.fromDisplayType}} ġdid",
+                "byAvatar": "miżjud minn {{avatar.displayName}}"
+            }
         }
     }
 }

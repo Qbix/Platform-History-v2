@@ -3,8 +3,8 @@
         "NewItemTitle": "Yam Tshiab"
     },
     "labels": {
-        "Streams\/invited": "Cov neeg kuv tau caw",
-        "Streams\/invitedMe": "Leej twg caw kuv"
+        "Streams/invited": "Cov neeg kuv tau caw",
+        "Streams/invitedMe": "Leej twg caw kuv"
     },
     "interests": {
         "Filter": "Koj nyiam dab tsi?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "Koj tau raug caw tuaj lawm. {{ClickOrTap}} nov los txais thiab koom nrog."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} muab lo lus <em>{{message.fields.type}}<\/em> rau {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} hauv {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

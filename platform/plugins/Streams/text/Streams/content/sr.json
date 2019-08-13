@@ -25,7 +25,7 @@
         "earlierComments": "ранији коментари",
         "Subscribed": "Муте Нотифицатионс",
         "Unsubscribed": "Добити обавештења",
-        "dontHavePermissionJoinConversation": "Немате дозволу да се придружите овом разговору.",
+        "notAllowedToJoinCall": "Немате дозволу да се придружите овом разговору.",
         "startedConversation": "је започео разговор",
         "RealTimeCall": "Позив у реалном времену"
     },
@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Грешка током: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Долазна порука",
         "ManageEmailSubscriptions": "управљајте својим претплатама е-поште",
-        "IfUnsubscribe": "Ако желите да се одјавите"
+        "IfUnsubscribe": "Ако желите да се одјавите",
+        "Streams\/relatedTo\/Streams\/call": "Нови позив започео у {{toTitle}}",
+        "Streams\/relatedTo\/*": "Ново {{relationDisplayType}} у {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Додато у {{toTitle}} као {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} вас је позвао на {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "Позвани сте. {{ClickOrTap}} овде да прихватим и придружим се."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} је поставио <em>{{message.fields.type}}<\/em> поруку на {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} у {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Позиви се шаљу из нашег броја, које ваши пријатељи још не препознају. Наставите са кратким текстом да бисте сазнали да је позив стигао од вас, тражећи од њих да кликну на везу.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "Омогући микрофон",
             "cameraBtn": "Омогући камеру",
             "cameraAndMicrophoneBtn": "Омогући камеру и микрофон"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Позвани",
+            "description": "Инбок за позивнице"
+        },
+        "Streams\/resource": {
+            "displayType": "Ресурс",
+            "description": "стреам за управљање приступом ресурсу и објављивање порука о исправкама"
+        },
+        "Streams\/task": {
+            "displayType": "Задатак",
+            "description": "задатак који треба да ураде људи или машине"
+        },
+        "Streams\/number": {
+            "displayType": "Број",
+            "description": "математички број"
+        },
+        "Streams\/date": {
+            "displayType": "Датум",
+            "description": "датум"
+        },
+        "Streams\/text": {
+            "displayType": "Текст",
+            "description": "тело текста"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Текст",
+            "description": "мали текст текста"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Текст",
+            "description": "средњи део текста"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Адреса Е-поште",
+            "description": "адреса Е-поште"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Број телефона",
+            "description": "Број телефона"
+        },
+        "Streams\/text\/url": {
+            "displayType": "УРЛ адреса",
+            "description": "линк на вебу"
+        },
+        "Streams\/image": {
+            "displayType": "Слика",
+            "description": "визуелна слика"
+        },
+        "Streams\/images": {
+            "displayType": "Галерија слика",
+            "description": "галерија слика"
+        },
+        "Streams\/album": {
+            "displayType": "Албум",
+            "description": "албум са којим су повезани различити медији"
+        },
+        "Streams\/file": {
+            "displayType": "Филе",
+            "description": "отпремљена датотека"
+        },
+        "Streams\/audio": {
+            "displayType": "Аудио клип",
+            "description": "аудио снимак"
+        },
+        "Streams\/video": {
+            "displayType": "Видео клип",
+            "description": "видео клип"
+        },
+        "Streams\/live": {
+            "displayType": "Ливестреам",
+            "description": "аудио или видео запис уживо"
+        },
+        "Streams\/category": {
+            "displayType": "Категорија",
+            "description": "категорија на коју се могу повезати и други токови"
+        },
+        "Streams\/participating": {
+            "displayType": "Индекс учешћа",
+            "description": "потоци су повезани \/ невезани за то када се корисник придружи \/ напусти"
+        },
+        "Streams\/interest": {
+            "displayType": "Камата",
+            "description": "представља интересовање корисника за одређену тему"
+        },
+        "Streams\/incoming": {
+            "displayType": "Долазни",
+            "description": "одредиште за поруке које су послали други корисници"
+        },
+        "Streams\/chat": {
+            "displayType": "Разговор",
+            "description": "разговор између корисника, са историјом"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Позив у реалном времену",
+            "description": "видео \/ аудио позив у стварном времену"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "објавио је <em>{{message.fields.type}}<\/em> поруку {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "коментарисао",
+            "in": "ин",
+            "body": "у {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "објављено је у",
+                "byAvatar": "до {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "има нови {{message.instructions.fromDisplayType}}",
+                "byAvatar": "додао {999}}"
+            }
         }
     }
 }

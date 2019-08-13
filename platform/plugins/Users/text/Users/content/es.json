@@ -18,7 +18,8 @@
         "GetStarted": "Empezar",
         "Authorize": "Autorizar",
         "TermsLabel": "He leído y estoy de acuerdo <br> al {{link}}",
-        "TermsTitle": "Condiciones"
+        "TermsTitle": "Condiciones",
+        "mustAgree": "Primero debes aceptar los términos."
     },
     "register": {
         "TermsLabel": "Acepto el {{link}}",
@@ -45,5 +46,52 @@
         "select": {
             "title": "Seleccione contacto de {{displayName}}"
         }
+    },
+    "login": {
+        "title": "Bienvenido",
+        "directions": "Crea una cuenta o inicia sesión.",
+        "directionsNoRegister": "Inicia sesión si tienes una cuenta.",
+        "goButton": "Ir",
+        "passphrase": "Ingrese su frase de paso:",
+        "loginButton": "Empezar",
+        "registerButton": "Empezar",
+        "resendButton": "Enviar mensaje de activación",
+        "forgot": "¿Lo olvidó?",
+        "resendConfirm": "¿Quieres enviar un mensaje para restablecer tu frase de contraseña?",
+        "resendSuccess": "Busca un mensaje para restablecer tu frase de contraseña",
+        "resendClose": "Cerca",
+        "noPassphrase": "Antes de poder iniciar sesión, debe establecer una frase de contraseña haciendo clic en el enlace en su mensaje de activación.",
+        "notVerified": "Debe enviarse un mensaje de activación para iniciar sesión.",
+        "emailExists": "¿Intentaste registrarte con este correo electrónico antes? Si es así, revise su bandeja de entrada para activar su cuenta. <a href='#resend' class='Q_button Users_activation_resend'>Haga clic para volver a enviar el mensaje.<\/a>",
+        "mobileExists": "¿Intentaste registrarte con este número de móvil antes? Si es así, revise su SMS para activar su cuenta. <a href='#resend' class='Q_button Users_activation_resend'>Haga clic para volver a enviar el mensaje.<\/a>",
+        "usingOther": "o tu puedes",
+        "prompt": "Elige un nombre de usuario:",
+        "newUser": "o crea una cuenta nueva",
+        "placeholders": {
+            "identifier": "su número de móvil o correo electrónico",
+            "mobile": "ingrese su número de móvil",
+            "email": "ingrese su dirección de correo electrónico",
+            "username": "nombre de usuario"
+        },
+        "confirmTerms": "¿Acepta los términos del servicio?",
+        "facebookNoEmail": "A su cuenta de Facebook le falta una dirección de correo electrónico confirmada. Simplemente inicie sesión de forma nativa.",
+        "picTooltip": "Puedes cambiar esta imagen más tarde"
+    },
+    "setIdentifier": {
+        "title": "Agregar una forma de iniciar sesión",
+        "sendMessage": "Enviar mensaje de activación",
+        "placeholders": {
+            "identifier": "ingrese su número de teléfono móvil o correo electrónico",
+            "mobile": "Ingrese su numero celular",
+            "email": "ingrese su dirección de correo electrónico",
+            "username": "nombre de usuario"
+        }
+    },
+    "prompt": {
+        "title": "Cuenta {{Platform}}",
+        "areUsing": "Estás utilizando {{platform}} como",
+        "noLongerUsing": "Ya no estás conectado a {{platform}} como",
+        "doAuth": "Inicia sesión con esta cuenta",
+        "doSwitch": "Cambiar a esta cuenta"
     }
 }

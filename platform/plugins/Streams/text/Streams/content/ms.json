@@ -25,7 +25,7 @@
         "earlierComments": "komen awal",
         "Subscribed": "Pemberitahuan Bisu",
         "Unsubscribed": "Dapatkan notifikasi",
-        "dontHavePermissionJoinConversation": "Anda tidak mempunyai kebenaran untuk menyertai perbualan ini.",
+        "notAllowedToJoinCall": "Anda tidak mempunyai kebenaran untuk menyertai perbualan ini.",
         "startedConversation": "memulakan perbualan",
         "RealTimeCall": "Panggilan Masa Nyata"
     },
@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Ralat semasa: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Mesej Masuk",
         "ManageEmailSubscriptions": "uruskan langganan e-mel anda",
-        "IfUnsubscribe": "Sekiranya anda mahu berhenti berlangganan"
+        "IfUnsubscribe": "Sekiranya anda mahu berhenti berlangganan",
+        "Streams\/relatedTo\/Streams\/call": "Panggilan Baru Dimulakan dalam {{toTitle}}",
+        "Streams\/relatedTo\/*": "Baru {{relationDisplayType}} dalam {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Ditambah pada {{toTitle}} sebagai {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} menjemput anda ke {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "Anda telah dijemput. {{ClickOrTap}} di sini untuk menerima dan menyertai."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} menyiarkan mesej <em>{{message.fields.type}}<\/em> kepada {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} dalam {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Undangan dihantar dari nombor kami, yang rakan anda belum mengenali. Ikuti dengan teks pantas untuk memberitahu mereka bahawa jemputan datang daripada anda, meminta mereka untuk mengklik pautan.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "Dayakan Mikrofon",
             "cameraBtn": "Dayakan Kamera",
             "cameraAndMicrophoneBtn": "Dayakan Kamera dan Mikrofon"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Dijemput",
+            "description": "Peti masuk untuk jemputan"
+        },
+        "Streams\/resource": {
+            "displayType": "Sumber",
+            "description": "aliran untuk menguruskan akses kepada sumber dan menyiarkan mesej mengenai kemas kini"
+        },
+        "Streams\/task": {
+            "displayType": "Tugas",
+            "description": "tugas yang perlu dilakukan oleh manusia atau mesin"
+        },
+        "Streams\/number": {
+            "displayType": "Nombor",
+            "description": "nombor matematik"
+        },
+        "Streams\/date": {
+            "displayType": "Tarikh",
+            "description": "Tarikh"
+        },
+        "Streams\/text": {
+            "displayType": "Teks",
+            "description": "badan teks"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Teks",
+            "description": "badan teks kecil"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Teks",
+            "description": "badan teks sederhana"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Alamat emel",
+            "description": "alamat emel"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Nombor telefon",
+            "description": "nombor telefon"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "pautan di web"
+        },
+        "Streams\/image": {
+            "displayType": "Gambar",
+            "description": "imej visual"
+        },
+        "Streams\/images": {
+            "displayType": "Galeri Imej",
+            "description": "galeri imej"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "album yang mana pelbagai media berkaitan"
+        },
+        "Streams\/file": {
+            "displayType": "Fail",
+            "description": "fail yang dimuat naik"
+        },
+        "Streams\/audio": {
+            "displayType": "Klip Audio",
+            "description": "klip audio"
+        },
+        "Streams\/video": {
+            "displayType": "Klip video",
+            "description": "klip video"
+        },
+        "Streams\/live": {
+            "displayType": "Siaran langsung",
+            "description": "hidup audio atau video"
+        },
+        "Streams\/category": {
+            "displayType": "Kategori",
+            "description": "kategori yang mana aliran lain boleh dikaitkan"
+        },
+        "Streams\/participating": {
+            "displayType": "Indeks Penyertaan",
+            "description": "aliran berkaitan \/ tidak berkaitan dengan ini apabila pengguna menyertai \/ pergi"
+        },
+        "Streams\/interest": {
+            "displayType": "Faedah",
+            "description": "mewakili minat pengguna dalam topik tertentu"
+        },
+        "Streams\/incoming": {
+            "displayType": "Masuk",
+            "description": "destinasi untuk mesej yang dihantar oleh pengguna lain"
+        },
+        "Streams\/chat": {
+            "displayType": "Perbualan",
+            "description": "perbualan antara pengguna, dengan sejarah"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Panggilan Masa Nyata",
+            "description": "panggilan video \/ audio masa nyata"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "menyiarkan mesej <em>{{message.fields.type}}<\/em> kepada {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "mengulas mengenai",
+            "in": "dalam",
+            "body": "dalam {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "telah diposkan",
+                "byAvatar": "oleh {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "mempunyai {{message.instructions.fromDisplayType}} baru",
+                "byAvatar": "ditambah oleh {{avatar.displayName}}"
+            }
         }
     }
 }

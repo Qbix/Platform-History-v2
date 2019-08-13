@@ -45,5 +45,27 @@
             "ok": "בסדר",
             "cancel": "בטל"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "נקודות זכות",
+            "description": "עוקב אחר זיכויים ותשלומים"
+        },
+        "Assets/plan": {
+            "displayType": "תכנית המינוי",
+            "description": "תוכנית מנוי"
+        },
+        "Assets/subscription": {
+            "displayType": "מנוי",
+            "description": "מנוי"
+        },
+        "Assets/product": {
+            "displayType": "מוצר",
+            "description": "מוצר שנמכר"
+        },
+        "Assets/service": {
+            "displayType": "שירות",
+            "description": "השירות המוצע"
+        }
     }
 }

@@ -25,7 +25,7 @@
         "earlierComments": "fyrri athugasemdir",
         "Subscribed": "Þagga tilkynningar",
         "Unsubscribed": "Fá tilkynningar",
-        "dontHavePermissionJoinConversation": "Þú hefur ekki leyfi til að taka þátt í þessu samtali.",
+        "notAllowedToJoinCall": "Þú hefur ekki leyfi til að taka þátt í þessu samtali.",
         "startedConversation": "hóf samtal",
         "RealTimeCall": "Rauntíma símtal"
     },
@@ -44,7 +44,10 @@
         "Streams/task/error": "Villa við: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Innkomið skilaboð",
         "ManageEmailSubscriptions": "stjórna tölvupósti áskriftunum þínum",
-        "IfUnsubscribe": "Ef þú vilt segja upp áskrift"
+        "IfUnsubscribe": "Ef þú vilt segja upp áskrift",
+        "Streams/relatedTo/Streams/call": "Nýtt símtal byrjað {{toTitle}}",
+        "Streams/relatedTo/*": "Nýtt {{relationDisplayType}} í {{toTitle}}",
+        "Streams/relatedFrom/*": "Bætt við {{toTitle}} sem {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} bauð þér að {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "Þú hefur verið boðið. {{ClickOrTap}} hér til að samþykkja og taka þátt."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} sendi <em>{{message.fields.type}}</em> skilaboð til {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} í {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Boð eru send frá númerinu okkar, sem vinir þínir þekkja ekki ennþá. Fylgdu með skjótum texta til að láta þá vita að boðið kom frá þér og biðja þá að smella á tengilinn.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "Virkja hljóðnemann",
             "cameraBtn": "Virkja myndavél",
             "cameraAndMicrophoneBtn": "Virkja myndavél og hljóðnema"
+        }
+    },
+    "types": {
+        "Streams/invited": {
+            "displayType": "Boðið",
+            "description": "Innhólf fyrir boð"
+        },
+        "Streams/resource": {
+            "displayType": "Auðlind",
+            "description": "straumur til að stjórna aðgangi að auðlind og senda póst um uppfærslur"
+        },
+        "Streams/task": {
+            "displayType": "Verkefni",
+            "description": "verkefni sem menn eða vélar eiga að gera"
+        },
+        "Streams/number": {
+            "displayType": "Fjöldi",
+            "description": "stærðfræðileg tala"
+        },
+        "Streams/date": {
+            "displayType": "Dagsetning",
+            "description": "dagsetning"
+        },
+        "Streams/text": {
+            "displayType": "Texti",
+            "description": "meginmál texta"
+        },
+        "Streams/text/small": {
+            "displayType": "Texti",
+            "description": "lítill meginhluti texta"
+        },
+        "Streams/text/medium": {
+            "displayType": "Texti",
+            "description": "miðlungs meginmál texta"
+        },
+        "Streams/text/emailAddress": {
+            "displayType": "Netfang",
+            "description": "Netfang"
+        },
+        "Streams/text/phoneNumber": {
+            "displayType": "Símanúmer",
+            "description": "símanúmer"
+        },
+        "Streams/text/url": {
+            "displayType": "Vefslóð",
+            "description": "hlekkur á vefnum"
+        },
+        "Streams/image": {
+            "displayType": "Mynd",
+            "description": "sjónræn mynd"
+        },
+        "Streams/images": {
+            "displayType": "Myndasafn",
+            "description": "myndasafn"
+        },
+        "Streams/album": {
+            "displayType": "Albúm",
+            "description": "plötu sem ýmsir miðlar tengjast"
+        },
+        "Streams/file": {
+            "displayType": "Skrá",
+            "description": "hlaðið skrá"
+        },
+        "Streams/audio": {
+            "displayType": "Hljóðinnskot",
+            "description": "hljóðinnskot"
+        },
+        "Streams/video": {
+            "displayType": "Myndskeið",
+            "description": "myndskeið"
+        },
+        "Streams/live": {
+            "displayType": "Bein útsending",
+            "description": "lifandi hljóð eða myndband"
+        },
+        "Streams/category": {
+            "displayType": "Flokkur",
+            "description": "flokkur sem aðrir lækir geta tengst"
+        },
+        "Streams/participating": {
+            "displayType": "Þátttakendavísitala",
+            "description": "straumar eru tengdir / ótengdir þessu þegar notandi er með / fer"
+        },
+        "Streams/interest": {
+            "displayType": "Vextir",
+            "description": "táknar áhuga notanda á ákveðnu efni"
+        },
+        "Streams/incoming": {
+            "displayType": "Komandi",
+            "description": "ákvörðunarstaður fyrir skilaboð sem eru send af öðrum notendum"
+        },
+        "Streams/chat": {
+            "displayType": "Samtal",
+            "description": "samtal milli notenda, með sögu"
+        },
+        "Streams/webrtc": {
+            "displayType": "Rauntíma símtal",
+            "description": "rauntíma vídeó / hljóð símtal"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "sendi <em>{{message.fields.type}}</em> skilaboð á {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "gerði athugasemdir við",
+            "in": "í",
+            "body": "í {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "hefur verið sent til",
+                "byAvatar": "eftir {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "er með nýjan {{message.instructions.fromDisplayType}}",
+                "byAvatar": "bætt við af {{avatar.displayName}}"
+            }
         }
     }
 }

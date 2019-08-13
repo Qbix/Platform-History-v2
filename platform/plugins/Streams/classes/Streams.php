@@ -1882,13 +1882,18 @@ abstract class Streams extends Base_Streams
 			}
 
 			$params['relationDisplayType'] = $relationDisplayType;
-			$description = Streams_Stream::getConfigField(
-				$category->type,
-				array('relatedTo', $type, 'description'),
-				Streams_Stream::getConfigField($category->type, array(
-					'relatedTo', '*', 'description'
-				), "New {{relationDisplayType}} added"),
-				false
+			
+			// Related TO description
+			$content = Q_Handlebars::renderSource(
+				Streams_Stream::getConfigField(
+					$category->type,
+					array('relatedTo', $type, 'description'),
+					Streams_Stream::getConfigField($category->type, array(
+						'relatedTo', '*', 'description'
+					), "New {{relationDisplayType}} added"),
+					false
+				),
+				$params
 			);
 
 			// Send Streams/relatedTo message to a stream
@@ -1898,16 +1903,18 @@ abstract class Streams extends Base_Streams
 			$instructions = compact(
 				'fromPublisherId', 'type', 'weight', 'displayType',
 				'fromUrl', 'toUrl',
-				'fromIcon', 'fromTitle', 'fromType', 'fromDisplayType', 'description'
+				'fromIcon', 'fromTitle', 'fromType', 'fromDisplayType'
 			);
 			$instructions['url'] = $instructions['fromUrl'];
 			$instructions['fromStreamName'] = $stream->name;
 			$relatedTo_messages[$toPublisherId][$category->name][] = array(
 				'type' => 'Streams/relatedTo',
+				'content' => $content,
 				'instructions' => $instructions
 			);
 
-			$description = Q_Handlebars::renderSource(
+			// Related FROM description
+			$content = Q_Handlebars::renderSource(
 				Streams_Stream::getConfigField(
 					$stream->type,
 					array('relatedFrom', $type, 'description'),
@@ -1925,12 +1932,13 @@ abstract class Streams extends Base_Streams
 			$instructions = compact(
 				'toPublisherId', 'type', 'weight', 'displayType',
 				'fromUrl', 'toUrl', 'fromUri', 'toUri', 
-				'toIcon', 'toTitle', 'toType', 'toDisplayType', 'description'
+				'toIcon', 'toTitle', 'toType', 'toDisplayType', 'content'
 			);
 			$instructions['url'] = $instructions['toUrl'];
 			$instructions['toStreamName'] = $category->name;
 			$relatedFrom_messages[$fromPublisherId][$stream->name][] = array(
 				'type' => 'Streams/relatedFrom',
+				'content' => $content,
 				'instructions' => $instructions
 			);
 
@@ -3344,7 +3352,7 @@ abstract class Streams extends Base_Streams
 	 * @throws Q_Exception_MissingFile
 	 * @throws Q_Exception_WrongValue
 	 * @return {array} Returns array with keys
-	 *  "success", "invite", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
+	 *  "success", "invite", "count", "userIds", "statuses", "identifierTypes", "alreadyParticipating".
 	 *  The userIds array contains userIds from "userId" first, then "identifiers", "xids", "label",
 	 *  then "newFutureUsers". The statuses is an array of the same size and in the same order.
 	 *  The identifierTypes array is in the same order as well.
@@ -3569,6 +3577,7 @@ abstract class Streams extends Base_Streams
 			"Q/method" => "Streams/Stream/invite",
 			"invitingUserId" => $asUserId,
 			"username" => $asUser->username,
+			"preferredLanguage" => $asUser->preferredLanguage,
 			"userIds" => Q::json_encode($userIds),
 			"stream" => Q::json_encode($stream->toArray()),
 			"appUrl" => $appUrl,
@@ -3594,6 +3603,7 @@ abstract class Streams extends Base_Streams
 
 		$return = array(
 			'success' => $result,
+			'count' => count($raw_userIds),
 			'userIds' => $raw_userIds,
 			'statuses' => $statuses,
 			'identifiers' => $identifiers,

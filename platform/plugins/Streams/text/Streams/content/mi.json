@@ -3,8 +3,8 @@
         "NewItemTitle": "Tuhinga Hou"
     },
     "labels": {
-        "Streams\/invited": "Nga tangata i karangatia",
-        "Streams\/invitedMe": "Ko wai i kii mai ki ahau"
+        "Streams/invited": "Nga tangata i karangatia",
+        "Streams/invitedMe": "Ko wai i kii mai ki ahau"
     },
     "interests": {
         "Filter": "He aha koe e koa ana?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "Kua karangatia koe. {{ClickOrTap}} konei hei whakaae me te whakauru mai."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} te tuku i te <em>{{message.fields.type}}<\/em> karere ki {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} i {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

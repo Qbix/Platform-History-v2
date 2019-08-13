@@ -3,8 +3,8 @@
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Leit, déi ech invitéiert hunn",
-        "Streams\/invitedMe": "Wien huet mech invitéiert"
+        "Streams/invited": "Leit, déi ech invitéiert hunn",
+        "Streams/invitedMe": "Wien huet mech invitéiert"
     },
     "interests": {
         "Filter": "Wat Iech gutt?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "Dir hutt invitéiert. {{ClickOrTap}} hei fir ze akzeptéieren a matzemaachen."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} publizéiert eng <em>{{message.fields.type}}<\/em> Noriicht op {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} an {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

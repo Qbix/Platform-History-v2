@@ -5,8 +5,8 @@
     },
     "activate": {
         "SetAsPrimary": "Iestatiet {{1}} kā manu galveno {{2}}",
-        "ChoosePassPhrase": "Izvēlieties pieteikšanās <strong>frāzi,<\/strong> lai pieteiktos. <br> Vienkārša frāze, kas sastāv no dažiem vārdiem, ko jūs viegli atceraties.",
-        "ChoosePassPhraseSeeSuggestions": "Lai aizsargātu savu kontu, izvēlieties labas <strong>caurlaides frāzi<\/strong> . Skatiet ieteikumus dažām idejām.",
+        "ChoosePassPhrase": "Izvēlieties pieteikšanās <strong>frāzi,</strong> lai pieteiktos. <br> Vienkārša frāze, kas sastāv no dažiem vārdiem, ko jūs viegli atceraties.",
+        "ChoosePassPhraseSeeSuggestions": "Lai aizsargātu savu kontu, izvēlieties labas <strong>caurlaides frāzi</strong> . Skatiet ieteikumus dažām idejām.",
         "LogOutAndTryAgain": "Iziet un mēģiniet vēlreiz",
         "IfYouFeel": "Ja jūtaties, ka kaut kas noiet greizi, varat",
         "SetIdentifierButtonTitle": "sākt"
@@ -18,7 +18,8 @@
         "GetStarted": "Sāc",
         "Authorize": "Autorizēt",
         "TermsLabel": "Es izlasīju un piekrītu <br> līdz {{link}}",
-        "TermsTitle": "Noteikumi"
+        "TermsTitle": "Noteikumi",
+        "mustAgree": "Vispirms jums jāpiekrīt noteikumiem."
     },
     "register": {
         "TermsLabel": "Es piekrītu {{link}}",
@@ -37,5 +38,60 @@
         "selectLabel": "Lūdzu, atlasiet etiķeti.",
         "inviteUser": "Uzaicināt lietotāju"
     },
-    "invalidLanguageSelected": "Izvēlēta nederīga valoda"
+    "invalidLanguageSelected": "Izvēlēta nederīga valoda",
+    "contacts": {
+        "dialog": {
+            "title": "Izvēlieties kontaktu"
+        },
+        "select": {
+            "title": "Atlasiet kontaktpersonu {{displayName}}"
+        }
+    },
+    "login": {
+        "title": "Laipni lūdzam",
+        "directions": "Izveidojiet kontu vai piesakieties.",
+        "directionsNoRegister": "Piesakieties, ja jums ir konts.",
+        "goButton": "Ej",
+        "passphrase": "Ievadiet savu caurlaides frāzi:",
+        "loginButton": "Sāc",
+        "registerButton": "Sāc",
+        "resendButton": "Sūtīt aktivizācijas ziņojumu",
+        "forgot": "Aizmirsāt to?",
+        "resendConfirm": "Vai vēlaties nosūtīt ziņojumu, lai atiestatītu ieejas frāzi?",
+        "resendSuccess": "Pārbaudiet, vai nav ziņojuma paroles frāzes atiestatīšanai",
+        "resendClose": "Aizveriet",
+        "noPassphrase": "Lai varētu pieteikties, jāiestata ieejas frāze, aktivizācijas ziņojumā noklikšķinot uz saites.",
+        "notVerified": "Lai pieteiktos, jums jānosūta sev aktivizācijas ziņojums.",
+        "emailExists": "Vai jūs iepriekš mēģinājāt reģistrēties šajā e-pastā? Ja tā, pārbaudiet iesūtni, lai aktivizētu kontu. <a href='#resend' class='Q_button Users_activation_resend'>Noklikšķiniet, lai atkārtoti nosūtītu ziņojumu</a>",
+        "mobileExists": "Vai jūs iepriekš mēģinājāt reģistrēties ar šo mobilā tālruņa numuru? Ja tā, pārbaudiet SMS, lai aktivizētu kontu. <a href='#resend' class='Q_button Users_activation_resend'>Noklikšķiniet, lai atkārtoti nosūtītu ziņojumu</a>",
+        "usingOther": "vai arī jūs varat",
+        "prompt": "Izvēlies lietotājvārdu:",
+        "newUser": "vai izveidojiet jaunu kontu",
+        "placeholders": {
+            "identifier": "jūsu mobilais # vai e-pasts",
+            "mobile": "ievadiet savu mobilo nr.",
+            "email": "ievadiet savu e-pasta adresi",
+            "username": "lietotājvārds"
+        },
+        "confirmTerms": "Vai piekrītat pakalpojumu sniegšanas noteikumiem?",
+        "facebookNoEmail": "Jūsu facebook kontā nav apstiprinātas e-pasta adreses. Vienkārši piesakieties dabiskā veidā.",
+        "picTooltip": "Šo attēlu var mainīt vēlāk"
+    },
+    "setIdentifier": {
+        "title": "Pievienojiet pieteikšanās veidu",
+        "sendMessage": "Sūtīt aktivizācijas ziņojumu",
+        "placeholders": {
+            "identifier": "ievadiet mobilo tālruni vai e-pastu",
+            "mobile": "ievadiet savu mobilā tālruņa numuru",
+            "email": "ievadiet savu e-pasta adresi",
+            "username": "lietotājvārds"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} konts",
+        "areUsing": "Jūs izmantojat {{platform}} kā",
+        "noLongerUsing": "Jūs vairs neesat izveidojis savienojumu ar {{platform}} kā",
+        "doAuth": "Piesakieties, izmantojot šo kontu",
+        "doSwitch": "Pārslēgties uz šo kontu"
+    }
 }

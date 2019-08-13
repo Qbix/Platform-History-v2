@@ -1133,7 +1133,7 @@
 			step2_form = setupResendForm(false);
 		}
 
-		var userId = response.slots.data.exists;
+		var userIdHash = response.slots.data.exists;
 
 		function onFormSubmit(event) {
 			var $this = $(this);
@@ -1158,7 +1158,7 @@
 				var v = p.val();
 				if (v) {
 					if (!/^[0-9a-f]{40}$/i.test(v)) {
-						p.val(CryptoJS.SHA1(p.val() + "\t" + userId));
+						p.val(CryptoJS.SHA1(p.val() + "\t" + userIdHash));
 					}
 					$('#Users_login_isHashed').attr('value', 1);
 				} else {

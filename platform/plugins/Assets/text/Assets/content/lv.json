@@ -45,5 +45,27 @@
             "ok": "labi",
             "cancel": "Atcelt"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Kredīti",
+            "description": "seko kredītiem un maksājumiem"
+        },
+        "Assets\/plan": {
+            "displayType": "Abonēšanas plāns",
+            "description": "abonēšanas plāns"
+        },
+        "Assets\/subscription": {
+            "displayType": "Abonēšana",
+            "description": "abonēšana"
+        },
+        "Assets\/product": {
+            "displayType": "Produkts",
+            "description": "produkts tiek pārdots"
+        },
+        "Assets\/service": {
+            "displayType": "apkalpošana",
+            "description": "tiek piedāvāts pakalpojums"
+        }
     }
 }

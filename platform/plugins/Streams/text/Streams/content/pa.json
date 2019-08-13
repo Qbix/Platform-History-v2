@@ -3,8 +3,8 @@
         "NewItemTitle": "ਨਵਾਂ ਆਈਟਮ"
     },
     "labels": {
-        "Streams\/invited": "ਜਿਨ੍ਹਾਂ ਲੋਕਾਂ ਨੂੰ ਮੈਂ ਸੱਦੇ ਦਿੱਤਾ",
-        "Streams\/invitedMe": "ਕੌਣ ਮੈਨੂੰ ਸੱਦਾ ਦਿੱਤਾ"
+        "Streams/invited": "ਜਿਨ੍ਹਾਂ ਲੋਕਾਂ ਨੂੰ ਮੈਂ ਸੱਦੇ ਦਿੱਤਾ",
+        "Streams/invitedMe": "ਕੌਣ ਮੈਨੂੰ ਸੱਦਾ ਦਿੱਤਾ"
     },
     "interests": {
         "Filter": "ਤੁਸੀਂ ਕੀ ਮਾਣਦੇ ਹੋ?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "ਤੁਹਾਨੂੰ ਸੱਦਾ ਦਿੱਤਾ ਗਿਆ ਹੈ {{ClickOrTap}} ਇੱਥੇ ਪ੍ਰਵਾਨ ਕਰਨ ਅਤੇ ਜੁਆਇਨ ਕਰਨ ਲਈ."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} ਨੇ <em>{{message.fields.type}}<\/em> ਸੁਨੇਹੇ ਨੂੰ {{stream.fields.title}} ਤੇ ਭੇਜਿਆ ਹੈ."
-        },
-        "text": {
-            "body": "{{& url}} ਵਿੱਚ {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

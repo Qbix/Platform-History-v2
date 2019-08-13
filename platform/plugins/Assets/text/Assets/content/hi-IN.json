@@ -45,5 +45,27 @@
             "ok": "ठीक",
             "cancel": "रद्द करना"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "क्रेडिट",
+            "description": "क्रेडिट और भुगतान का ट्रैक रखता है"
+        },
+        "Assets/plan": {
+            "displayType": "अनुब ध योजना",
+            "description": "सदस्यता योजना"
+        },
+        "Assets/subscription": {
+            "displayType": "अंशदान",
+            "description": "अंशदान"
+        },
+        "Assets/product": {
+            "displayType": "उत्पाद",
+            "description": "उत्पाद बेचा जा रहा है"
+        },
+        "Assets/service": {
+            "displayType": "सर्विस",
+            "description": "सेवा की पेशकश की जा रही है"
+        }
     }
 }

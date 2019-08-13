@@ -3,8 +3,8 @@
         "NewItemTitle": "نوی توکي"
     },
     "labels": {
-        "Streams\/invited": "هغه کسان چې ما بلنه کړې وه",
-        "Streams\/invitedMe": "چا چا ته بلنه ورکړه؟"
+        "Streams/invited": "هغه کسان چې ما بلنه کړې وه",
+        "Streams/invitedMe": "چا چا ته بلنه ورکړه؟"
     },
     "interests": {
         "Filter": "تاسو څه خوند اخلئ؟",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "تاسو ته بلنه ورکړل شوې ده. {{ClickOrTap}} دلته د منلو او ګډون لپاره دلته."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} يو <em>{{message.fields.type}}<\/em> پېغام وليکئ {{stream.fields.title}} ته"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} په {{& url}} کې: {{& message.fields.content}}"
         }
     },
     "followup": {

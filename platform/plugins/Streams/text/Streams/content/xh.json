@@ -3,8 +3,8 @@
         "NewItemTitle": "Into entsha"
     },
     "labels": {
-        "Streams\/invited": "Abantu ndiwameme",
-        "Streams\/invitedMe": "Ngubani owamemileyo"
+        "Streams/invited": "Abantu ndiwameme",
+        "Streams/invitedMe": "Ngubani owamemileyo"
     },
     "interests": {
         "Filter": "Uyakuthanda ntoni?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "Umenywe. {{ClickOrTap}} apha ukuba wamkele kwaye ujoyine."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} ithumele <em>{{message.fields.type}}<\/em> umyalezo kwi {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} kwi {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

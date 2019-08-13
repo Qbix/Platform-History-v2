@@ -18,7 +18,8 @@
         "GetStarted": "はじめに",
         "Authorize": "承認する",
         "TermsLabel": "読んで同意します<br> {{link}}へ",
-        "TermsTitle": "条項"
+        "TermsTitle": "条項",
+        "mustAgree": "まず、条件に同意する必要があります。"
     },
     "register": {
         "TermsLabel": "{{link}}を受け入れます",
@@ -45,5 +46,52 @@
         "select": {
             "title": "{{displayName}}の連絡先を選択"
         }
+    },
+    "login": {
+        "title": "ようこそ",
+        "directions": "アカウントを作成するか、ログインします。",
+        "directionsNoRegister": "アカウントをお持ちの場合はログインしてください。",
+        "goButton": "行く",
+        "passphrase": "パスフレーズを入力してください：",
+        "loginButton": "始めましょう",
+        "registerButton": "始めましょう",
+        "resendButton": "アクティベーションメッセージを送信",
+        "forgot": "忘れた？",
+        "resendConfirm": "パスフレーズをリセットするメッセージを送信しますか？",
+        "resendSuccess": "パスフレーズをリセットするメッセージを確認してください",
+        "resendClose": "閉じる",
+        "noPassphrase": "ログインする前に、アクティベーションメッセージのリンクをクリックしてパスフレーズを設定する必要があります。",
+        "notVerified": "ログインするには、アクティベーションメッセージを自分で送信する必要があります。",
+        "emailExists": "以前にこのメールで登録しようとしましたか？その場合は、受信ボックスをチェックしてアカウントを有効にします。 <a href='#resend' class='Q_button Users_activation_resend'>クリックしてメッセージを再送信します<\/a>",
+        "mobileExists": "以前にこの携帯電話番号で登録しようとしましたか？その場合は、SMSを確認してアカウントを有効にしてください。 <a href='#resend' class='Q_button Users_activation_resend'>クリックしてメッセージを再送信します<\/a>",
+        "usingOther": "またはあなたはできます",
+        "prompt": "ユーザー名を選択：",
+        "newUser": "または新しいアカウントを作成します",
+        "placeholders": {
+            "identifier": "携帯番号またはメール",
+            "mobile": "携帯番号を入力してください",
+            "email": "メールアドレスを入力してください",
+            "username": "ユーザー名"
+        },
+        "confirmTerms": "利用規約に同意しますか？",
+        "facebookNoEmail": "Facebookアカウントに確認済みのメールアドレスがありません。ネイティブの方法でログインするだけです。",
+        "picTooltip": "この写真は後で変更できます"
+    },
+    "setIdentifier": {
+        "title": "ログインする方法を追加する",
+        "sendMessage": "アクティベーションメッセージを送信",
+        "placeholders": {
+            "identifier": "携帯番号またはメールアドレスを入力してください",
+            "mobile": "携帯番号を入力してください",
+            "email": "メールアドレスを入力してください",
+            "username": "ユーザー名"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}}アカウント",
+        "areUsing": "{{platform}}を使用しています",
+        "noLongerUsing": "次のように{{platform}}に接続していません",
+        "doAuth": "このアカウントでログイン",
+        "doSwitch": "このアカウントに切り替える"
     }
 }

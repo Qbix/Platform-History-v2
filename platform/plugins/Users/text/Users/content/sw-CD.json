@@ -5,8 +5,8 @@
     },
     "activate": {
         "SetAsPrimary": "Weka {{1}} kama msingi wangu {{2}}",
-        "ChoosePassPhrase": "Chagua <strong>maneno ya kupitisha<\/strong> kuingia na. <br> Maneno rahisi ambayo yana maneno machache ambayo utakumbuka kwa urahisi.",
-        "ChoosePassPhraseSeeSuggestions": "Chagua <strong>maneno<\/strong> mazuri ya <strong>kupitisha<\/strong> kulinda akaunti yako. Tazama mapendekezo ya mawazo mengine.",
+        "ChoosePassPhrase": "Chagua <strong>maneno ya kupitisha</strong> kuingia na. <br> Maneno rahisi ambayo yana maneno machache ambayo utakumbuka kwa urahisi.",
+        "ChoosePassPhraseSeeSuggestions": "Chagua <strong>maneno</strong> mazuri ya <strong>kupitisha</strong> kulinda akaunti yako. Tazama mapendekezo ya mawazo mengine.",
         "LogOutAndTryAgain": "Ingia na Jaribu tena",
         "IfYouFeel": "Ikiwa unasikia kitu fulani kikienda vibaya, unaweza",
         "SetIdentifierButtonTitle": "anza tena"
@@ -18,7 +18,8 @@
         "GetStarted": "Fungua",
         "Authorize": "Thibitisha",
         "TermsLabel": "Nimesoma na kukubaliana <br> kwa {{link}}",
-        "TermsTitle": "Masharti"
+        "TermsTitle": "Masharti",
+        "mustAgree": "Kwanza lazima ukubali masharti."
     },
     "register": {
         "TermsLabel": "Nakubali {{link}}",
@@ -37,5 +38,60 @@
         "selectLabel": "Tafadhali chagua lebo.",
         "inviteUser": "Paribisha Mtumiaji"
     },
-    "invalidLanguageSelected": "Lugha batili iliyochaguliwa"
+    "invalidLanguageSelected": "Lugha batili iliyochaguliwa",
+    "contacts": {
+        "dialog": {
+            "title": "Chagua wasiliana"
+        },
+        "select": {
+            "title": "Chagua wasiliana na {{displayName}}"
+        }
+    },
+    "login": {
+        "title": "Karibu",
+        "directions": "Unda akaunti, au ingia.",
+        "directionsNoRegister": "Ingia ikiwa una akaunti.",
+        "goButton": "Nenda",
+        "passphrase": "Ingiza kifungu chako cha kupita:",
+        "loginButton": "Anzisha",
+        "registerButton": "Anzisha",
+        "resendButton": "Tuma Ujumbe wa Uanzishaji",
+        "forgot": "Umesahau?",
+        "resendConfirm": "Je! Unataka kutuma ujumbe wa kuweka upya manukuu yako?",
+        "resendSuccess": "Angalia ujumbe ili kuweka tena manukuu yako",
+        "resendClose": "Karibu",
+        "noPassphrase": "Kabla ya kuingia, lazima uweke kifungu cha kupitisha kwa kubonyeza kiunga kwenye ujumbe wako wa uanzishaji.",
+        "notVerified": "Lazima ujitumie wewe mwenyewe ujumbe wa uanzishaji ili uingie.",
+        "emailExists": "Je! Ulijaribu kujiandikisha na barua pepe hii hapo awali? Ikiwa ni hivyo, angalia kikasha chako ili kuamsha akaunti yako. <a href='#resend' class='Q_button Users_activation_resend'>Bonyeza kutuma tena ujumbe</a>",
+        "mobileExists": "Je! Ulijaribu kujiandikisha na nambari hii ya simu hapo awali? Ikiwa ni hivyo, angalia SMS yako ili kuamsha akaunti yako. <a href='#resend' class='Q_button Users_activation_resend'>Bonyeza kutuma tena ujumbe</a>",
+        "usingOther": "au unaweza",
+        "prompt": "Chagua jina la mtumiaji:",
+        "newUser": "au unda akaunti mpya",
+        "placeholders": {
+            "identifier": "# yako ya rununu au barua pepe",
+            "mobile": "ingiza simu yako ya rununu #",
+            "email": "ingiza anwani yako ya barua pepe",
+            "username": "jina la mtumiaji"
+        },
+        "confirmTerms": "Kukubali Masharti ya Huduma?",
+        "facebookNoEmail": "Akaunti yako ya facebook inakosa anwani ya barua pepe iliyothibitishwa. Ingia tu kwa njia ya asili.",
+        "picTooltip": "Unaweza kubadilisha picha hii baadaye"
+    },
+    "setIdentifier": {
+        "title": "Ongeza njia ya kuingia",
+        "sendMessage": "Tuma Ujumbe wa Uanzishaji",
+        "placeholders": {
+            "identifier": "ingiza simu yako ya rununu # au barua pepe",
+            "mobile": "ingiza nambari yako ya rununu",
+            "email": "ingiza anwani yako ya barua pepe",
+            "username": "jina la mtumiaji"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Akaunti",
+        "areUsing": "Unatumia {{platform}} kama",
+        "noLongerUsing": "Haujaunganishwa tena na {{platform}} kama",
+        "doAuth": "Ingia na akaunti hii",
+        "doSwitch": "Badilisha kwenye akaunti hii"
+    }
 }

@@ -3,8 +3,8 @@
         "NewItemTitle": "नवीन आयटम"
     },
     "labels": {
-        "Streams\/invited": "मी आमंत्रित लोक",
-        "Streams\/invitedMe": "मला कोण आमंत्रित केले"
+        "Streams/invited": "मी आमंत्रित लोक",
+        "Streams/invitedMe": "मला कोण आमंत्रित केले"
     },
     "interests": {
         "Filter": "तुम्हाला काय आवडते?",
@@ -72,14 +72,6 @@
         },
         "notice": {
             "text": "आपल्याला आमंत्रित केले गेले आहे. {{99 9}} स्वीकारण्यासाठी आणि सामील होण्यासाठी येथे."
-        }
-    },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} ने {{100}}} वर एक <em>{{message.fields.type}}<\/em> संदेश पोस्ट केला"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} मध्ये {{& url}}: {{& message.fields.content}}"
         }
     },
     "followup": {

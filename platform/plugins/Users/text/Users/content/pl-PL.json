@@ -5,8 +5,8 @@
     },
     "activate": {
         "SetAsPrimary": "Ustaw {{1}} jako mój podstawowy {{2}}",
-        "ChoosePassPhrase": "Wybierz <strong>hasło,<\/strong> aby się zalogować. <br> Prosta fraza składająca się z kilku słów, które łatwo zapamiętasz.",
-        "ChoosePassPhraseSeeSuggestions": "Wybierz dobre <strong>hasło,<\/strong> aby chronić swoje konto. Zobacz sugestie dotyczące niektórych pomysłów.",
+        "ChoosePassPhrase": "Wybierz <strong>hasło,</strong> aby się zalogować. <br> Prosta fraza składająca się z kilku słów, które łatwo zapamiętasz.",
+        "ChoosePassPhraseSeeSuggestions": "Wybierz dobre <strong>hasło,</strong> aby chronić swoje konto. Zobacz sugestie dotyczące niektórych pomysłów.",
         "LogOutAndTryAgain": "Wyloguj się i spróbuj ponownie",
         "IfYouFeel": "Jeśli uważasz, że coś poszło nie tak, możesz",
         "SetIdentifierButtonTitle": "zacząć od nowa"
@@ -18,7 +18,8 @@
         "GetStarted": "Zaczynać",
         "Authorize": "Autoryzować",
         "TermsLabel": "Przeczytałem i zgadzam się <br> do {{link}}",
-        "TermsTitle": "Warunki"
+        "TermsTitle": "Warunki",
+        "mustAgree": "Najpierw musisz wyrazić zgodę na warunki."
     },
     "register": {
         "TermsLabel": "Akceptuję {{link}}",
@@ -37,5 +38,60 @@
         "selectLabel": "Wybierz etykietę.",
         "inviteUser": "Zaproś użytkownika"
     },
-    "invalidLanguageSelected": "Wybrano nieprawidłowy język"
+    "invalidLanguageSelected": "Wybrano nieprawidłowy język",
+    "contacts": {
+        "dialog": {
+            "title": "Wybierz kontakt"
+        },
+        "select": {
+            "title": "Wybierz kontakt {{displayName}}"
+        }
+    },
+    "login": {
+        "title": "Witamy",
+        "directions": "Utwórz konto lub zaloguj się.",
+        "directionsNoRegister": "Zaloguj się, jeśli masz konto.",
+        "goButton": "Iść",
+        "passphrase": "Wpisz hasło:",
+        "loginButton": "Zaczynać",
+        "registerButton": "Zaczynać",
+        "resendButton": "Wyślij wiadomość aktywacyjną",
+        "forgot": "Zapomniałem?",
+        "resendConfirm": "Czy chcesz wysłać wiadomość, aby zresetować hasło?",
+        "resendSuccess": "Sprawdź komunikat o zresetowaniu hasła",
+        "resendClose": "Blisko",
+        "noPassphrase": "Przed zalogowaniem się musisz ustawić hasło, klikając link w wiadomości aktywacyjnej.",
+        "notVerified": "Musisz wysłać sobie wiadomość aktywacyjną, aby się zalogować.",
+        "emailExists": "Czy próbowałeś wcześniej zarejestrować się przy użyciu tego e-maila? Jeśli tak, sprawdź skrzynkę odbiorczą, aby aktywować konto. <a href='#resend' class='Q_button Users_activation_resend'>Kliknij, aby ponownie wysłać wiadomość</a>",
+        "mobileExists": "Czy próbowałeś wcześniej zarejestrować się przy użyciu tego numeru telefonu komórkowego? Jeśli tak, sprawdź SMS, aby aktywować konto. <a href='#resend' class='Q_button Users_activation_resend'>Kliknij, aby ponownie wysłać wiadomość</a>",
+        "usingOther": "lub możesz",
+        "prompt": "Wybierz nazwę użytkownika:",
+        "newUser": "lub utwórz nowe konto",
+        "placeholders": {
+            "identifier": "Twój numer telefonu komórkowego lub adres e-mail",
+            "mobile": "wpisz swój numer telefonu komórkowego",
+            "email": "wpisz swój adres e-mail",
+            "username": "Nazwa Użytkownika"
+        },
+        "confirmTerms": "Zaakceptować warunki usługi?",
+        "facebookNoEmail": "Twoje konto na Facebooku nie ma potwierdzonego adresu e-mail. Po prostu zaloguj się w natywny sposób.",
+        "picTooltip": "Możesz zmienić to zdjęcie później"
+    },
+    "setIdentifier": {
+        "title": "Dodaj sposób logowania",
+        "sendMessage": "Wyślij wiadomość aktywacyjną",
+        "placeholders": {
+            "identifier": "wprowadź numer telefonu komórkowego lub adres e-mail",
+            "mobile": "Wprowadź swój numer telefonu komórkowego",
+            "email": "wpisz swój adres e-mail",
+            "username": "Nazwa Użytkownika"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Konto",
+        "areUsing": "Używasz {{platform}} jako",
+        "noLongerUsing": "Nie jesteś już połączony z {{platform}} as",
+        "doAuth": "Zaloguj się za pomocą tego konta",
+        "doSwitch": "Przełącz się na to konto"
+    }
 }

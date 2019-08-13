@@ -6543,8 +6543,8 @@ Q.request = function (url, slotNames, callback, options) {
 	
 		function _Q_request_callback(err, content, wasJsonP) {
 			if (err) {
-				callback(err);
-				Q.handle(o.onProcessed, this, [err]);
+				callback(err, content, false);
+				Q.handle(o.onProcessed, this, [err, content, false]);
 				return;
 			}
 			var data = content;
@@ -6600,14 +6600,26 @@ Q.request = function (url, slotNames, callback, options) {
 		}
 		
 		function _onCancel (status, msg) {
+			var code;
 			status = Q.isInteger(status) ? status : null;
-			var defaultError = status ? Q.text.Q.request.error : Q.text.Q.request.canceled;
-			msg = (msg || Q.text.Q.request[status] || defaultError)
-				.interpolate({'status': status, 'url': url})
+			if (this.response) {
+				var data = JSON.parse(this.response);
+				msg = Q.getObject(['errors', 0, 'message'], data);
+				code = Q.getObject(['errors', 0, 'code'], data);
+			}
+			if (!msg) {
+				var defaultError = status ? Q.text.Q.request.error : Q.text.Q.request.canceled;
+				msg = (msg || Q.text.Q.request[status] || defaultError)
+					.interpolate({'status': status, 'url': url})
+			}
 			t.cancelled = true;
 			_onResponse();
 			var errors = {
-				errors: [{message: msg || "Request was canceled", code: status}]
+				errors: [{
+					message: msg || "Request was canceled",
+					code: code || status,
+					httpStatus: status
+				}]
 			};
 			o.onCancel.handle.call(this, errors, o);
 			_Q_request_callback.call(this, errors, errors);
@@ -9263,8 +9275,6 @@ Q.Text = {
 	 * @param {Object} [options] Options to use for Q.request . May also include:
 	 * @param {Boolean} [options.ignoreCache=false] If true, reloads the text source even if it's been already cached.
 	 * @param {Boolean} [options.merge=false] For Q.Text.set if content is loaded
-	 * @param {String} [options.language=null] Override language
-	 * @param {String} [options.locale=null] Override locale
 	 * @return {Boolean|Q.Request} Returns true if content was already loaded,
 	 *   otherwise calls the result of Q.request
 	 */

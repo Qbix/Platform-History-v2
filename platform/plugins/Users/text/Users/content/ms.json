@@ -18,7 +18,8 @@
         "GetStarted": "Bermula",
         "Authorize": "Kebenaran",
         "TermsLabel": "Saya telah membaca dan bersetuju <br> kepada {{link}}",
-        "TermsTitle": "Terma"
+        "TermsTitle": "Terma",
+        "mustAgree": "Pertama anda mesti bersetuju dengan terma."
     },
     "register": {
         "TermsLabel": "Saya menerima {{link}}",
@@ -45,5 +46,52 @@
         "select": {
             "title": "Pilih kenalan {{displayName}}"
         }
+    },
+    "login": {
+        "title": "Selamat datang",
+        "directions": "Buat akaun, atau log masuk.",
+        "directionsNoRegister": "Log masuk jika anda mempunyai akaun.",
+        "goButton": "Pergi",
+        "passphrase": "Masukkan frasa lulus anda:",
+        "loginButton": "Bermula",
+        "registerButton": "Bermula",
+        "resendButton": "Hantar Mesej Pengaktifan",
+        "forgot": "Terlupa?",
+        "resendConfirm": "Adakah anda mahu menghantar mesej untuk menetapkan semula frasa laluan anda?",
+        "resendSuccess": "Semak mesej untuk menetapkan semula frasa laluan anda",
+        "resendClose": "Tutup",
+        "noPassphrase": "Sebelum anda boleh log masuk, anda mesti menetapkan frasa lulus dengan mengklik pautan dalam mesej pengaktifan anda.",
+        "notVerified": "Anda mesti menghantar sendiri mesej pengaktifan untuk log masuk.",
+        "emailExists": "Adakah anda cuba mendaftar dengan e-mel ini sebelum ini? Jika ya, periksa peti masuk anda untuk mengaktifkan akaun anda. <a href='#resend' class='Q_button Users_activation_resend'>Klik untuk menghantar semula mesej<\/a>",
+        "mobileExists": "Adakah anda cuba mendaftar dengan nombor telefon bimbit ini sebelum ini? Jika ya, periksa SMS anda untuk mengaktifkan akaun anda. <a href='#resend' class='Q_button Users_activation_resend'>Klik untuk menghantar semula mesej<\/a>",
+        "usingOther": "atau anda boleh",
+        "prompt": "Pilih nama pengguna:",
+        "newUser": "atau buat akaun baru",
+        "placeholders": {
+            "identifier": "# atau e-mel mudah alih anda",
+            "mobile": "masukkan # telefon bimbit anda",
+            "email": "Masukkan alamat emel anda",
+            "username": "nama pengguna"
+        },
+        "confirmTerms": "Terima Syarat Perkhidmatan?",
+        "facebookNoEmail": "Akaun facebook anda tiada alamat e-mel yang disahkan. Hanya log masuk dengan cara yang asli.",
+        "picTooltip": "Anda boleh menukar gambar ini kemudian"
+    },
+    "setIdentifier": {
+        "title": "Tambah cara untuk log masuk",
+        "sendMessage": "Hantar Mesej Pengaktifan",
+        "placeholders": {
+            "identifier": "masukkan # mudah alih atau e-mel anda",
+            "mobile": "masukkan nombor mudah alih anda",
+            "email": "Masukkan alamat emel anda",
+            "username": "nama pengguna"
+        }
+    },
+    "prompt": {
+        "title": "Akaun {{Platform}}",
+        "areUsing": "Anda menggunakan {{platform}} sebagai",
+        "noLongerUsing": "Anda tidak lagi berhubung dengan {{platform}} sebagai",
+        "doAuth": "Log masuk dengan akaun ini",
+        "doSwitch": "Beralih ke akaun ini"
     }
 }

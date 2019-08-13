@@ -25,7 +25,7 @@
         "earlierComments": "پہلے تبصرے",
         "Subscribed": "نوٹیفیکیشن خاموش کریں۔",
         "Unsubscribed": "اطلاعات حاصل کریں۔",
-        "dontHavePermissionJoinConversation": "آپ کو اس گفتگو میں شامل ہونے کی اجازت نہیں ہے۔",
+        "notAllowedToJoinCall": "آپ کو اس گفتگو میں شامل ہونے کی اجازت نہیں ہے۔",
         "startedConversation": "گفتگو شروع کی۔",
         "RealTimeCall": "ریئل ٹائم کال"
     },
@@ -44,7 +44,10 @@
         "Streams\/task\/error": "دوران غلطی: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{999}}: آنے والے پیغام",
         "ManageEmailSubscriptions": "اپنا ای میل سبسکرائب کریں",
-        "IfUnsubscribe": "اگر آپ سبسکرائب کرنا چاہتے ہیں"
+        "IfUnsubscribe": "اگر آپ سبسکرائب کرنا چاہتے ہیں",
+        "Streams\/relatedTo\/Streams\/call": "نیا کال {{999} New میں شروع ہوا",
+        "Streams\/relatedTo\/*": "{{toTitle}} میں نیا {9 999}",
+        "Streams\/relatedFrom\/*": "بطور {{10009} {{999} to میں شامل"
     },
     "invite": {
         "messageContent": "{{displayName}} آپ کو {{inviteUrl}} میں مدعو کیا",
@@ -81,14 +84,6 @@
             "text": "آپ کو مدعو کیا گیا ہے. {{ClickOrTap}} یہاں قبول اور شامل ہونے کے لئے یہاں."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} نے ایک <em>{{message.fields.type}}<\/em> پیغام {{stream.fields.title}} کو پوسٹ کیا"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} میں {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "مدعو ہمارے نمبر سے بھیجے جاتے ہیں، جو آپ کے دوست ابھی تک تسلیم نہیں کرتے ہیں. ایک فوری ٹیکسٹ کے ساتھ عمل کریں کہ وہ ان سے رابطہ کریں جو آپ سے آتے ہیں انہیں بتائیں کہ لنک پر کلک کرنے کے لئے پوچھیں.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "مائکروفون کو فعال کریں۔",
             "cameraBtn": "کیمرہ کو فعال کریں۔",
             "cameraAndMicrophoneBtn": "کیمرا اور مائکروفون کو فعال کریں۔"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "مدعو کیا گیا۔",
+            "description": "دعوت نامے کے لئے ان باکس۔"
+        },
+        "Streams\/resource": {
+            "displayType": "وسیلہ",
+            "description": "کسی وسیلہ تک رسائی کا نظم و نسق اور اپ ڈیٹس کے بارے میں پیغامات شائع کرنے کیلئے سلسلہ۔"
+        },
+        "Streams\/task": {
+            "displayType": "ٹاسک",
+            "description": "کام انسانوں یا مشینوں کے ذریعہ کیا جائے۔"
+        },
+        "Streams\/number": {
+            "displayType": "نمبر",
+            "description": "حسابی نمبر"
+        },
+        "Streams\/date": {
+            "displayType": "تاریخ",
+            "description": "تاریخ"
+        },
+        "Streams\/text": {
+            "displayType": "متن",
+            "description": "متن کا باڈی"
+        },
+        "Streams\/text\/small": {
+            "displayType": "متن",
+            "description": "متن کا چھوٹا سا جسم"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "متن",
+            "description": "متن کا درمیانی حصہ"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "ای میل اڈریس",
+            "description": "ای میل اڈریس"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "فون نمبر",
+            "description": "فون نمبر"
+        },
+        "Streams\/text\/url": {
+            "displayType": "یو آر ایل",
+            "description": "ویب پر لنک"
+        },
+        "Streams\/image": {
+            "displayType": "تصویر",
+            "description": "بصری تصویر"
+        },
+        "Streams\/images": {
+            "displayType": "تصویری گیلری۔",
+            "description": "تصاویر کی گیلری"
+        },
+        "Streams\/album": {
+            "displayType": "البم",
+            "description": "ایک البم جس سے مختلف میڈیا سے وابستہ ہے۔"
+        },
+        "Streams\/file": {
+            "displayType": "فائل۔",
+            "description": "اپ لوڈ فائل"
+        },
+        "Streams\/audio": {
+            "displayType": "آڈیو کلپ",
+            "description": "آڈیو کلپ"
+        },
+        "Streams\/video": {
+            "displayType": "ویڈیو کلپ",
+            "description": "ویڈیو کلپ"
+        },
+        "Streams\/live": {
+            "displayType": "لائیو سٹریم",
+            "description": "براہ راست آڈیو یا ویڈیو"
+        },
+        "Streams\/category": {
+            "displayType": "قسم",
+            "description": "ایک زمرہ جس سے دیگر سلسلوں کا تعلق ہوسکتا ہے۔"
+        },
+        "Streams\/participating": {
+            "displayType": "حصہ لینے والا انڈیکس۔",
+            "description": "جب صارف شامل ہوتا \/ پتی ہوجاتا ہے تو نہریں اس سے وابستہ \/ غیر متعلق ہوتی ہیں۔"
+        },
+        "Streams\/interest": {
+            "displayType": "دلچسپی",
+            "description": "کسی خاص عنوان میں صارف کی دلچسپی کی نمائندگی کرتا ہے۔"
+        },
+        "Streams\/incoming": {
+            "displayType": "آنے والی۔",
+            "description": "دوسرے صارفین کے ذریعہ بھیجے گئے پیغامات کی منزل۔"
+        },
+        "Streams\/chat": {
+            "displayType": "گفتگو۔",
+            "description": "تاریخ کے ساتھ صارفین کے درمیان گفتگو۔"
+        },
+        "Streams\/webrtc": {
+            "displayType": "ریئل ٹائم کال",
+            "description": "ایک ریئل ٹائم ویڈیو \/ آڈیو کال۔"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "{{999} نے {{1001} to کو ایک <em>{{message.fields.type}}<\/em> پیغام شائع کیا"
+        },
+        "text": {
+            "commentedOn": "پر تبصرہ کیا۔",
+            "in": "میں",
+            "body": "{9 999}} میں {{& url}}: {{1001}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "میں پوسٹ کیا گیا ہے۔",
+                "byAvatar": "بذریعہ {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ایک نیا {{999} has ہے",
+                "byAvatar": "by {999} by کے ذریعہ شامل کردہ"
+            }
         }
     }
 }

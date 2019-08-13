@@ -25,7 +25,7 @@
         "earlierComments": "tidligere kommentarer",
         "Subscribed": "Skru av varsler",
         "Unsubscribed": "Få varsler",
-        "dontHavePermissionJoinConversation": "Du har ikke tillatelse til å delta i denne samtalen.",
+        "notAllowedToJoinCall": "Du har ikke tillatelse til å delta i denne samtalen.",
         "startedConversation": "startet en samtale",
         "RealTimeCall": "Sanntids samtale"
     },
@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Feil under: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Innkommende melding",
         "ManageEmailSubscriptions": "administrer epostabonnementene dine",
-        "IfUnsubscribe": "Hvis du vil avslutte abonnementet"
+        "IfUnsubscribe": "Hvis du vil avslutte abonnementet",
+        "Streams\/relatedTo\/Streams\/call": "Ny samtale startet {{toTitle}}",
+        "Streams\/relatedTo\/*": "Ny {{relationDisplayType}} på {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Lagt til {{toTitle}} som {{relationDisplayType}}"
     },
     "invite": {
         "messageContent": "{{displayName}} inviterte deg til {{inviteUrl}}",
@@ -81,14 +84,6 @@
             "text": "Du har blitt invitert. {{ClickOrTap}} her for å godta og bli med."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} postet en <em>{{message.fields.type}}<\/em> melding til {{stream.fields.title}}"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} på {{& url}}: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Invitasjoner sendes fra vårt nummer, som vennene dine ikke kjenner igjen. Følg med en rask tekst for å fortelle dem at invitasjonen kom fra deg, og be dem om å klikke på linken.",
@@ -113,6 +108,122 @@
             "microphoneBtn": "Aktiver mikrofon",
             "cameraBtn": "Aktiver kamera",
             "cameraAndMicrophoneBtn": "Aktiver kamera og mikrofon"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "invitert",
+            "description": "Innboks for invitasjoner"
+        },
+        "Streams\/resource": {
+            "displayType": "Ressurs",
+            "description": "strøm for å administrere tilgang til en ressurs og legge ut meldinger om oppdateringer"
+        },
+        "Streams\/task": {
+            "displayType": "Oppgave",
+            "description": "oppgave som skal utføres av mennesker eller maskiner"
+        },
+        "Streams\/number": {
+            "displayType": "Nummer",
+            "description": "matematisk antall"
+        },
+        "Streams\/date": {
+            "displayType": "Dato",
+            "description": "Dato"
+        },
+        "Streams\/text": {
+            "displayType": "Tekst",
+            "description": "tekstdel"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Tekst",
+            "description": "liten tekstdel"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Tekst",
+            "description": "middels tekstdel"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Epostadresse",
+            "description": "epostadresse"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Telefonnummer",
+            "description": "telefonnummer"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "lenke på nettet"
+        },
+        "Streams\/image": {
+            "displayType": "Bilde",
+            "description": "visuelt bilde"
+        },
+        "Streams\/images": {
+            "displayType": "bildegalleri",
+            "description": "galleri med bilder"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "et album som forskjellige medier er relatert til"
+        },
+        "Streams\/file": {
+            "displayType": "Fil",
+            "description": "lastet opp fil"
+        },
+        "Streams\/audio": {
+            "displayType": "Lydklipp",
+            "description": "lydklipp"
+        },
+        "Streams\/video": {
+            "displayType": "Videoklipp",
+            "description": "videoklipp"
+        },
+        "Streams\/live": {
+            "displayType": "Direktestrømming",
+            "description": "live lyd eller video"
+        },
+        "Streams\/category": {
+            "displayType": "Kategori",
+            "description": "en kategori som andre strømmer kan relateres til"
+        },
+        "Streams\/participating": {
+            "displayType": "Deltakende indeks",
+            "description": "strømmer er relatert \/ ikke relatert til dette når en bruker blir \/ forlater"
+        },
+        "Streams\/interest": {
+            "displayType": "Renter",
+            "description": "representerer en brukers interesse for et bestemt emne"
+        },
+        "Streams\/incoming": {
+            "displayType": "innkommende",
+            "description": "destinasjon for meldinger sendt av andre brukere"
+        },
+        "Streams\/chat": {
+            "displayType": "Samtale",
+            "description": "en samtale mellom brukere, med historikk"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Sanntids samtale",
+            "description": "en video- \/ lydanrop i sanntid"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "postet en <em>{{message.fields.type}}<\/em> melding til {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "kommenterte på",
+            "in": "i",
+            "body": "om {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "har blitt postet til",
+                "byAvatar": "av {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "har en ny {{message.instructions.fromDisplayType}}",
+                "byAvatar": "lagt til av {{avatar.displayName}}"
+            }
         }
     }
 }

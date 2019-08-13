@@ -45,5 +45,41 @@
             "ok": "OK",
             "cancel": "Cancel"
         }
-    }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Credits",
+            "description": "keeps track of credits and payments"
+        },
+        "Assets\/plan": {
+            "displayType": "Subsription Plan",
+            "description": "subscription plan"
+        },
+        "Assets\/subscription": {
+            "displayType": "Subscription",
+            "description": "subscription"
+        },
+        "Assets\/product": {
+            "displayType": "Product",
+            "description": "product being sold"
+        },
+        "Assets\/service": {
+            "displayType": "Service",
+            "description": "service being offered"
+        }
+    },
+	"messages": {
+		"Assets\/credits\/earned": {
+			"displayType": "Earned {{amount}} credits"
+		},
+		"Assets\/credits\/spent": {
+			"displayType": "Spent {{amount}} credits"
+		},
+		"Assets\/credits\/sent": {
+			"displayType": "Sent {{amount}} credits"
+		},
+		"Assets\/credits\/received": {
+			"displayType": "Received {{amount}} credits"
+		}
+	}
 }

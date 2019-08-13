@@ -25,7 +25,7 @@
         "earlierComments": "lehenago egindako iruzkinak",
         "Subscribed": "Mutu jakinarazpenak",
         "Unsubscribed": "Lortu jakinarazpenak",
-        "dontHavePermissionJoinConversation": "Ez duzu elkarrizketetan sartzeko baimenik.",
+        "notAllowedToJoinCall": "Ez duzu elkarrizketetan sartzeko baimenik.",
         "startedConversation": "elkarrizketa bat hasi zuen",
         "RealTimeCall": "Denbora errealeko deia"
     },
@@ -44,7 +44,10 @@
         "Streams\/task\/error": "Errorea: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Sarrerako mezua",
         "ManageEmailSubscriptions": "kudeatu zure posta elektronikoaren harpidetzak",
-        "IfUnsubscribe": "Harpidetza kendu nahi baduzu"
+        "IfUnsubscribe": "Harpidetza kendu nahi baduzu",
+        "Streams\/relatedTo\/Streams\/call": "Deia berria {{toTitle}} hasi da",
+        "Streams\/relatedTo\/*": "{{relationDisplayType}} berria {{toTitle}} zerbitzuan",
+        "Streams\/relatedFrom\/*": "{{toTitle}} (e) ra {{relationDisplayType}} gisa gehitu da"
     },
     "invite": {
         "messageContent": "{{displayName}} gonbidatu zaitu {{inviteUrl}} zerbitzura",
@@ -81,14 +84,6 @@
             "text": "Gonbidatu zaitu. {{ClickOrTap}} hemen onartzeko eta elkartzeko."
         }
     },
-    "message": {
-        "html": {
-            "posted": "{{call 'avatar.displayName'}} -ek <em>{{message.fields.type}}<\/em> mezu {{stream.fields.title}}-ri bidali dio"
-        },
-        "text": {
-            "body": "{{& call 'avatar.displayName'}} {{& url}} zerbitzuan: {{& message.fields.content}}"
-        }
-    },
     "followup": {
         "mobile": {
             "alert": "Zure lagunek oraindik ez dute ezagutzen gonbidatuak bidaltzen dira. Jarrai ezazu testu azkar batekin, gonbidapena zuretzako etorri zitzaizun jakin dezaten, estekan klik eginez.",
@@ -116,6 +111,122 @@
             "microphoneBtn": "Gaitu mikrofonoa",
             "cameraBtn": "Gaitu kamera",
             "cameraAndMicrophoneBtn": "Gaitu Kamera eta Mikrofonoa"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Gonbidatuak",
+            "description": "Gonbidapenerako sarrerako ontzia"
+        },
+        "Streams\/resource": {
+            "displayType": "Baliabideen",
+            "description": "baliabideetarako sarbidea kudeatzeko eta eguneratzeei buruzko mezuak bidaltzeko fluxua"
+        },
+        "Streams\/task": {
+            "displayType": "Zeregin-",
+            "description": "gizakiek edo makinek egin beharreko zeregina"
+        },
+        "Streams\/number": {
+            "displayType": "zenbakia",
+            "description": "zenbaki matematikoa"
+        },
+        "Streams\/date": {
+            "displayType": "data",
+            "description": "data"
+        },
+        "Streams\/text": {
+            "displayType": "Testua",
+            "description": "testu-gorputza"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Testua",
+            "description": "testu txikia"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Testua",
+            "description": "testu-gorputz ertaina"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Posta elektroniko helbidea",
+            "description": "posta elektroniko helbidea"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Telefono zenbakia",
+            "description": "telefono zenbakia"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "esteka sarean"
+        },
+        "Streams\/image": {
+            "displayType": "Image",
+            "description": "ikusizko irudia"
+        },
+        "Streams\/images": {
+            "displayType": "Irudi galeria",
+            "description": "irudi galeria"
+        },
+        "Streams\/album": {
+            "displayType": "Bilduma",
+            "description": "hainbat euskarrirekin lotutako album bat"
+        },
+        "Streams\/file": {
+            "displayType": "file",
+            "description": "kargatutako fitxategia"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio Klip",
+            "description": "audio bideoa"
+        },
+        "Streams\/video": {
+            "displayType": "Bideoklipa",
+            "description": "bideoklipa"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "zuzeneko audio edo bideoa"
+        },
+        "Streams\/category": {
+            "displayType": "Kategoria",
+            "description": "beste korronte batzuekin erlazionatutako kategoria"
+        },
+        "Streams\/participating": {
+            "displayType": "Parte-hartzaileen aurkibidea",
+            "description": "korronteak horrekin erlazionatuta \/ zerikusirik ez du erabiltzaile bat sartu \/ uzten denean"
+        },
+        "Streams\/interest": {
+            "displayType": "Interes",
+            "description": "gai batek erabiltzailearen interesa adierazten du"
+        },
+        "Streams\/incoming": {
+            "displayType": "Sarrerako",
+            "description": "helmuga beste erabiltzaileek bidalitako mezuetarako"
+        },
+        "Streams\/chat": {
+            "displayType": "Elkarrizketen",
+            "description": "erabiltzaileen arteko elkarrizketa, historiarekin"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Denbora errealeko deia",
+            "description": "denbora errealeko bideo \/ audio dei"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "mezuak <em>{{message.fields.type}}<\/em> bidali du {{stream.fields.title}} helbidean"
+        },
+        "text": {
+            "commentedOn": "komentatu zuen",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "bidali da",
+                "byAvatar": "egilea: {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "{{message.instructions.fromDisplayType}} berri bat du",
+                "byAvatar": "{{avatar.displayName}} (e) k gehituta"
+            }
         }
     }
 }

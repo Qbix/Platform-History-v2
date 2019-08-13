@@ -45,5 +45,27 @@
             "ok": "Ados",
             "cancel": "Utzi"
         }
+    },
+    "types": {
+        "Assets/credits": {
+            "displayType": "kredituak",
+            "description": "kredituak eta ordainketak kontrolatzen ditu"
+        },
+        "Assets/plan": {
+            "displayType": "Dirulaguntza Plana",
+            "description": "harpidetza plana"
+        },
+        "Assets/subscription": {
+            "displayType": "harpidetza",
+            "description": "harpidetza"
+        },
+        "Assets/product": {
+            "displayType": "Produktuen",
+            "description": "saltzen ari den produktua"
+        },
+        "Assets/service": {
+            "displayType": "zerbitzua",
+            "description": "zerbitzua eskaintzen ari da"
+        }
     }
 }

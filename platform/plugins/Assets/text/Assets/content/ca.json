@@ -45,5 +45,27 @@
             "ok": "D&#39;acord",
             "cancel": "Cancel · lar"
         }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Crèdits",
+            "description": "fa un seguiment de crèdits i pagaments"
+        },
+        "Assets\/plan": {
+            "displayType": "Pla de subscripció",
+            "description": "pla de subscripció"
+        },
+        "Assets\/subscription": {
+            "displayType": "Subscripció",
+            "description": "subscripció"
+        },
+        "Assets\/product": {
+            "displayType": "Producte",
+            "description": "producte que es ven"
+        },
+        "Assets\/service": {
+            "displayType": "Servei",
+            "description": "servei que s’ofereix"
+        }
     }
 }
