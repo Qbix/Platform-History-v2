@@ -54,5 +54,35 @@
         "exist": "Area already exist",
         "addNewArea": "Add new area",
         "add": "Add"
-    }
+    },
+	"types": {
+		"Places/locations": {
+			"description": "a collection of locations",
+			"displayType": "Locations"
+		},
+		"Places/location": {
+			"description": "Represents a building, venue, ship, park, etc.",
+			"displayType": "Location"
+		},
+		"Places/area": {
+			"description": "Represents an area within a location, such as a room or suite",
+			"displayType": "Area"
+		},
+		"Places/floor": {
+			"description": "Represents a floor in a building or ship",
+			"displayType": "Floor"
+		},
+		"Places/column": {
+			"description": "Represents a column in a building or ship",
+			"displayType": "Column"
+		},
+		"Places/nearby": {
+			"description": "Category for things within a certain distance of a geohash",
+			"displayType": "Near by places"
+		},
+		"Places/interest": {
+			"description": "Category for things within a certain distance of a geohash, matching an interest",
+			"displayType": "Places interest"
+		}
+	}
 }

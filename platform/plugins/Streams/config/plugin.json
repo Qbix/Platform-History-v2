@@ -251,7 +251,6 @@
 				"edit": false
 			},
 			"Streams/task": {
-				"description": "for receiving updates about progress on a certain task",
 				"messages": {
 					"Streams/task/progress": {
 						"description": "Progress has been made",
@@ -283,7 +282,6 @@
 				"participating": ["Streams/participating/tasks"]
 			},
 			"Streams/tasks": {
-				"description": "category for tasks",
 				"attributes": {
 					"completed": "double"
 				},
@@ -428,11 +426,7 @@
 					"Streams/webrtc/joined": {}
 				}
 			},
-			"Streams/experience": {
-				"description": "a common experience for members of a community"
-			},
 			"Streams/greeting": {
-				"description": "greeting with which a user can introduce themselves",
 				"edit": true,
 				"defaults": {
 					"title": "Community Greeting"
