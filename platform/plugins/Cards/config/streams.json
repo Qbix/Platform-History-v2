@@ -1,6 +1,6 @@
 {
-	"Cards/businessCard": {
-		"type": "Cards/businessCard",
+	"Cards/businessCards": {
+		"type": "Streams/category",
 		"title": "Saved Scaned Cards",
 		"readLevel": 40,
 		"writeLevel": 10,

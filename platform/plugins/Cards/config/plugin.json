@@ -13,22 +13,24 @@
 		"handlersBeforeEvent": {
 			"Q/responseExtras": ["Cards/before/Q_responseExtras"]
 		},
-		"handlersAfterEvent": {
-			"Streams/interest/add": ["Places/after/Streams_interest_add"]
-		},
 		"web": {
 			"requireValidNonce": ["Cards"]
-		},
-		"bundle": {
-			"exclude": {
-				"Cards": ["img/squareflags"]
-			}
 		}
 	},
 	"Streams": {
+		"types": {
+			"Cards/businessCard": {
+				"description": "",
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"title": "Business Card"
+				}
+			}
+		},
 		"onInsert": {
 			"Users_User": [
-				"Cards/businessCard"
+				"Cards/businessCards"
 			]
 		},
 		"userStreams": {
