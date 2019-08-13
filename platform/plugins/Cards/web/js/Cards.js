@@ -1,67 +1,78 @@
 /**
- * Cards plugin 's front end code
- *
+ * Cards plugin's front end code
+ * 
  * @module Cards
  * @class Cards
  */
 
-(function (Q, $, w) {
+(function (Q, $, undefined) {
 
 	var Cards = Q.Cards = Q.plugins.Cards = {
 
-		// whether to display things using the metric system units
-		metric: (['en-US', 'en-GB', 'my-MM', 'en-LR']
-			.indexOf(Q.Text.language + '-' + Q.Text.locale) < 0),
-
-		options: {
-			platform: 'google'
-		},
-
-		google: {
-			key: "AIzaSyB31kQt8Ro1NB6looAPSkIwV_yQyZ4a33M"
-		},
-
 		/**
-		 *This is used for set the webcam with fixed width and height.
-		 *
-		 * @method businessCards
-		 * @return {string} Returns Set the WebCam 
-		 */
-		businessCard: function () {
-			Webcam.set({
-				width: 320,
-				height: 240,
-				image_format: 'jpeg',
-				jpeg_quality: 90,
-				debug: function (type, string) {
-					console.log(type + ": " + string);
-				}
-			});
-		},
-
-		/**
-		 *This is used for attach the webcam with Perticular element like <div>.
+		 *This is used for attach the getUserMedia with Perticular element like <div>.
 		 *
 		 * @method setCamera
-		 * @param {String} cameraid element id
-		 * @return {string} Returns attach the WebCam 
+		 * @param {String} options.videoPlayer element id
+		 * @param {String} options.canvasElement element id
+		 * @param {String} options.captureButton element id
+		 * @param {object} options.tool tool object 
+		 * @return {string} Returns attach the getUserMedia 
 		 */
-		setCamera: function (cameraid) {
-			Webcam.attach(cameraid);
+		scan: function (options) {
+			if (!('mediaDevices' in navigator)) {
+				navigator.mediaDevices = {};
+			}
+
+			if (!('getUserMedia' in navigator.mediaDevices)) {
+				navigator.mediaDevices.getUserMedia = (constraints) => {
+					const getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+					if (!getUserMedia) {
+						return Promise.reject(new Error('getUserMedia is not supported'));
+					} else {
+						return new Promise((resolve, reject) => getUserMedia.call(navigator, constraints, resolve, reject));
+					}
+				};
+			}
+
+			navigator.mediaDevices.getUserMedia({
+					video: true
+				})
+				.then((stream) => {
+					options.videoPlayer.srcObject = stream;
+					options.videoPlayer.style.display = 'inline-block';
+				})
+				.catch((err) => {
+					Q.alert(text.businessCard.error.notConnectedWebcam);
+				});
+
+			this.recognize(options);
 		},
 
 		/**
-		 *This is used for capture picture using webcam and return the data_uri and display as image format .
+		 *This is used for capture picture using getUserMedia and return the data_uri and display as image format .
 		 *
 		 * @method recognize
+		 * @param {String} options.videoPlayer element id
+		 * @param {String} options.canvasElement element id
+		 * @param {String} options.captureButton element id
+		 * @param {object} options.tool tool object 
 		 * @return {string} Returns append image card in perticular results <div>.
 		 */
-		recognize: function (tool) {
-			Webcam.snap(function (data_uri) {
-				// display results in page
-				console.log("Scanned Card...", tool);
-				var node = '<div class="image-card"><div><img src="' + data_uri + '" style="width:100%" class="image_source"/></div></div>';
-				$(tool.element).append(node);
+		recognize: function (options) {
+			// Capture the image, save it and show it in the page
+			options.captureButton.addEventListener('click', (event) => {
+				// Draw the image from the video player on the canvas
+				options.canvasElement.style.display = 'none';
+				const context = options.canvasElement.getContext('2d');
+				context.drawImage(options.videoPlayer, 0, 0, canvas.width, canvas.height);
+
+				// Convert the data so it can be saved as a file
+				let picture = options.canvasElement.toDataURL();
+
+				var newNode = $('<div class="image-card"></div>').html($('<img />').attr('src', picture).attr('style', "width:100%").attr('class', 'image_source'));
+				$(options.tool.element).append(newNode);
 			});
 		},
 
@@ -69,17 +80,20 @@
 		 *This is used Validation for Email id in the contents.
 		 *
 		 * @method formFill
+		 * @param {object} options.tool tool object 
 		 * @param {string} sourceData image source data
 		 * @return {string} Returns True or False for validate email addrees on the card details.
 		 */
 		formFill: function (tool, sourceData) {
 			var text = sourceData.split(",");
 			var data = '{ "requests": [{"image": {"content":"' + text[1] + '" },"features": [{"maxResults": 1,"type": "TEXT_DETECTION"}]}]}';
+			// get the google vision API key from local app config file.
+			var googleVisionKey = (Q.getObject("Q.Cards.keys.web") != undefined) ? Q.getObject("Q.Cards.keys.web") : Q.alert(tool.text.error.keyNotFound);
 
 			var settings = {
 				"async": true,
 				"crossDomain": true,
-				"url": "https://vision.googleapis.com/v1/images:annotate?key=" + this.google.key,
+				"url": "https://vision.googleapis.com/v1/images:annotate?key=" + googleVisionKey,
 				"method": "POST",
 				"headers": {
 					"Content-Type": "application/json",
@@ -93,15 +107,23 @@
 				var response = JSON.parse(JSON.stringify(response));
 
 				var str = response.responses[0].fullTextAnnotation.text;
-
+				var formData = null;
+				formData = {
+					"email": null,
+					"phone": null,
+					"twitter": null,
+					"webSite": null,
+					"extra": null
+				};
 				var form_html = "<table class='fillform'><form>";
 				form_html += "<tr><td> Email : </td>";
 
 				var emailaddress = Cards.validateExtraWithEmail(str, true);
 				if (emailaddress != undefined) {
 					form_html += "<td><input type='text' value='" + emailaddress + "'/></td></tr>";
+					// save email address data in formData object;
+					formData.email = emailaddress;
 					str = str.replace(emailaddress, "");
-
 				} else {
 					form_html += "<td><input type='text'/></td></tr>";
 				}
@@ -110,6 +132,8 @@
 				var websiteurl = Cards.validateURLWithText(str, true);
 				if (websiteurl != undefined) {
 					form_html += "<td><input type='text' value='" + websiteurl + "'/></td></tr>";
+					// save website data in formData object;
+					formData.website = websiteurl;
 					str = str.replace(websiteurl, "");
 				} else {
 					form_html += "<td><input type='text'/></td></tr>";
@@ -117,23 +141,28 @@
 
 				var phoneno = Cards.validatePhone(str, true);
 				var obj = JSON.parse(phoneno);
-				console.log(obj.count);
+				var countNum = 0;
+				var phoneNos = {};
 
 				$.each(obj, function (index, value) {
 					if (Cards.validatePhoneRegex(value)) {
 						form_html += "<tr><td> Phone no : </td>";
 						form_html += "<td><input type='text' value='" + value + "'/></td></tr>";
+						// save phone data in formData object;
+						phoneNos[countNum] = value;
+						formData.phone = phoneNos;
+						countNum = countNum + 1;
 						str = str.replace(value, "");
 					}
-
 				});
 
 				form_html += "<tr><td> Twitter ID : </td>";
 				var twitter = Cards.validateTwitterWithText(str, true);
 				if (twitter != undefined) {
 					form_html += "<td><input type='text' value='" + twitter + "'/></td></tr>";
+					// save twitter Id data in formData object;
+					formData.twitter = twitter;
 					str = str.replace(twitter, "");
-
 				} else {
 					form_html += "<td><input type='text'/></td></tr>";
 				}
@@ -142,6 +171,8 @@
 
 				form_html += "<tr><td> Extra Label : </td>";
 				form_html += "<td><textarea rows='5' cols='30'>" + str + "</textarea></td></tr>";
+				// save Extra data in formData object;
+				formData.extra = str;
 
 				form_html += "</form></table>";
 				form_html += "<div class='row'> <input type='button' class='invite_user' name='inviteUser' data-value='" + emailaddress + "' value='Invite User'/> </div>";
@@ -156,18 +187,30 @@
 						onActivate: function () {
 							// Click on Invite User button to open Invitation popup.
 							$('input[name="inviteUser"]').on(Q.Pointer.click, function () {
-								// Extends the options of Streams.invite.option to update custom dialog template.
-								Q.Streams.invite(Q.Users.loggedInUser.id, "Cards/businessCard", {
-									followup: false,
-									defaultValue: $(this).attr("data-value") || null,
-									alwaysSend: true
-								}, function (err, info) {
-									var msg = Q.firstErrorMessage(err);
-									if (msg) {
-										return Q.alert(msg);
+								// Register the new user and send them a activation email.
+								console.log(tool);
+								Q.req('Cards/businessCard', 'registeruser', function (err, data) {
+									Q.Dialogs.pop();
+									var fem = Q.firstErrorMessage(err, data);
+									if (fem) {
+										return Q.alert("Error posting event: " + fem);
 									}
-									console.log(arguments);
+								}, {
+									method: 'post',
+									fields: {
+										communityId: tool.state.communityId,
+										publisherId: tool.state.publisherId,
+										formData: formData
+									}
 								});
+								// Extends the options of Streams.invite.option to update custom dialog template.
+								// Q.Streams.invite(Q.Users.loggedInUser.id, "Cards/businessCard", {
+								// 	followup: false,
+								// 	defaultValue: $(this).attr("data-value") || null,
+								// 	alwaysSend: true
+								// }, function () {
+								// 	Q.alert("Successfully invited the user");
+								// });
 							});
 						},
 						onClose: function () {
@@ -186,7 +229,6 @@
 		 * @param {string} email email id string data
 		 * @return {string} Returns True or False for validate email addrees on the card details.
 		 */
-
 		validateEmail: function (email) {
 			var re = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9 ](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
 			return re.test(String(email).toLowerCase())
@@ -260,7 +302,6 @@
 		 * @param {String} strPhone content of string phone
 		 * @return {string} Returns True or False for validate email addrees on the card details.
 		 */
-
 		validatePhoneRegex: function (strPhone) {
 			var re = /((?:\+|00)[17](?: |\-)?|(?:\+|00)[1-9]\d{0,2}(?: |\-)?|(?:\+|00)1\-\d{3}(?: |\-)?)?(0\d|\([0-9]{3}\)|[1-9]{0,3})(?:((?: |\-)[0-9]{2}){4}|((?:[0-9]{2}){4})|((?: |\-)[0-9]{3}(?: |\-)[0-9]{4})|([0-9]{7}))/;
 			return re.test(strPhone);

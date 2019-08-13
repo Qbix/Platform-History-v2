@@ -6,10 +6,14 @@
             "cardDetails": "Card Details"
         },
         "button": {
-            "label": "Scan Business Cards"
+            "label": "Scan Next Business Card",
+            "label_scan_back": "Scan Back of Card",
+            "label_photos": "Take Photo of Person"
         },
         "error": {
-            "userLoginMust": "User need to login first!"
+            "userLoginMust": "User need to login first!",
+            "notConnectedWebcam": "Webcam not found.",
+            "keyNotFound": "Google vision api key not found."
         }
     }
 }
