@@ -1,4 +1,4 @@
-(function (Q, $, window, document) {
+(function (Q, $, window, document, undefined) {
 
 	/**
 	 * Cards Tools
@@ -28,7 +28,7 @@
 			}
 			var msg = Q.firstErrorMessage(err);
 			if (msg) {
-				console.warn(msg);
+
 			}
 		});
 		if (Q.getObject(Q.Users.loggedInUser)) {
@@ -53,6 +53,7 @@
 				//call popup on dialog box
 				Dialogs.push({
 					title: text.businessCard.dialog.title,
+					className: "Cards_businessCard_dialog",
 					apply: true,
 					alignByParent: true,
 					doNotRemove: true,
@@ -78,7 +79,6 @@
 						Cards.scan(options);
 					},
 					onClose: function () {
-						console.log("closed Camera");
 						//to using form fillup
 						tool.$('img.image_source').on(Q.Pointer.click, function () {
 							Cards.formFill(tool, $(this).attr('src'));

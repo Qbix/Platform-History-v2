@@ -175,11 +175,12 @@
 				formData.extra = str;
 
 				form_html += "</form></table>";
-				form_html += "<div class='row'> <input type='button' class='invite_user' name='inviteUser' data-value='" + emailaddress + "' value='Invite User'/> </div>";
+				form_html += "<div class='row'> <input type='button' class='invite_user btn' name='inviteUser' data-value='" + emailaddress + "' value='Invite User'/> </div>";
 
 				Q.Text.get('Cards/content', function (err, text) {
 					Q.Dialogs.push({
 						title: text.businessCard.dialog.cardDetails,
+						className: "Cards_businessCard_dialog",
 						content: form_html,
 						alignByParent: true,
 						doNotRemove: true,
@@ -188,7 +189,6 @@
 							// Click on Invite User button to open Invitation popup.
 							$('input[name="inviteUser"]').on(Q.Pointer.click, function () {
 								// Register the new user and send them a activation email.
-								console.log(tool);
 								Q.req('Cards/businessCard', 'registeruser', function (err, data) {
 									Q.Dialogs.pop();
 									var fem = Q.firstErrorMessage(err, data);
@@ -214,7 +214,7 @@
 							});
 						},
 						onClose: function () {
-							console.log("Card Details Close");
+
 						}
 					});
 				});
@@ -246,7 +246,6 @@
 			var oldstr = str;
 
 			if (Cards.validateEmail(str)) {
-				//console.log("ok");
 				var str = str.trim();
 
 				var emailaddress = '';
@@ -331,7 +330,6 @@
 					if (num.length >= 10) {
 						validNumbers.push(num);
 						num = '';
-						console.log(validNumbers);
 						return JSON.stringify(validNumbers);
 					}
 				} else {

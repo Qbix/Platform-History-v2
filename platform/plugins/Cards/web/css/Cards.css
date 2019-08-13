@@ -1,33 +1,37 @@
-.card {
+.Cards_businessCard_block .card {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	transition: 0.3s;
 	width: 40%;
 	border-radius: 5px;
 }
 
-.card:hover {
+.Cards_businessCard_block .card:hover {
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-img {
+.Cards_businessCard_block img {
 	border-radius: 5px 5px 0 0;
 }
 
-.container {
+.Cards_businessCard_block .container {
 	padding: 2px 16px;
 }
 
-.image-card {
+.Cards_businessCard_tool .image-card {
 	width: 20%;
 	display: inline-block;
 	margin: 10px;
 }
 
-.image-card img {
+.Cards_businessCard_tool .image-card img {
 	border-radius: 10px;
 }
 
-#resultData {
+.Cards_businessCard_tool .image-card img:hover {
+	cursor: pointer;
+}
+
+#Cards_resultData {
 	margin: 40px;
 }
 
@@ -35,16 +39,22 @@ img {
 	text-align: center;
 }
 
-#resultData video {
+#Cards_resultData video {
 	border-radius: 4px;
 }
 
-#snapshot,
-.invite_user {
-	padding: 9px 30px;
+.Cards_businessCard_block {
+	width: 340px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.Cards_businessCard_dialog .btn:hover,
+.Cards_businessCard_block .btn {
+	padding: 9px 10px;
 	background-color: #0099e5;
 	color: #fff;
-	margin: 0 0 30px 0;
+	margin: 0 5px 30px 5px;
 	text-align: center;
 	font-size: 14px;
 	box-shadow: none;
@@ -53,32 +63,58 @@ img {
 	border: 0;
 }
 
-#snapshot:hover,
-.invite_user:hover {
+.Cards_businessCard_dialog .btn:hover,
+.Cards_businessCard_block .btn:hover {
 	background-color: #00a4e4;
 	cursor: pointer;
+}
+
+.Cards_businessCard_block .btn.photos {
+	float: left;
 }
 
 .Q_dialog_content::-webkit-scrollbar {
 	width: 0 !important
 }
 
-.image_source {
+.Cards_businessCard_block .image_source {
 	cursor: pointer;
 }
 
-.fillform {
+.Cards_businessCard_dialog .fillform {
 	margin: 40px;
 }
 
-.fillform tr td input {
+.Cards_businessCard_dialog .fillform tr td input {
 	height: 40px;
 	width: 100%;
 	padding: 0 10px;
 	font-size: 14px;
 }
 
-.fillform tr td {
+.Cards_businessCard_dialog .fillform tr td {
 	padding: 5px;
 	text-align: left;
+}
+
+.Cards_businessCard_block video {
+	border: 1px solid #333;
+	width: 320px;
+	height: 240px;
+	display: block;
+	margin: 10px auto;
+}
+
+.Cards_businessCard_block canvas {
+	width: 320px;
+	height: 240px;
+	margin: 10px auto;
+	display: none;
+}
+
+.Cards_businessCard_block .scanedCards {
+	display: flex;
+	width: 150px;
+	height: 35px;
+	background: #fdfdfd;
 }
