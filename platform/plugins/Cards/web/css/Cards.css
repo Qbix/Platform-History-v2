@@ -31,15 +31,11 @@
 	cursor: pointer;
 }
 
-#Cards_resultData {
-	margin: 40px;
-}
-
-.Q_dialog_content {
+.Cards_businessCard_dialog .Q_dialog_content {
 	text-align: center;
 }
 
-#Cards_resultData video {
+.Cards_businessCard_block video {
 	border-radius: 4px;
 }
 
@@ -73,7 +69,7 @@
 	float: left;
 }
 
-.Q_dialog_content::-webkit-scrollbar {
+.Cards_businessCard_dialog .Q_dialog_content::-webkit-scrollbar {
 	width: 0 !important
 }
 
