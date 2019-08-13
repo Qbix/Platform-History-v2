@@ -15,8 +15,12 @@
 			tool.state = Q.extend({}, tool.state, options);
 			this.eventBinding().bind();
 
-			Q.addStylesheet('{{Q}}/css/resize.css');
+			tool.pointerInfo = {
+				prevY: 0,
+				prevX: 0,
+			};
 
+			Q.addStylesheet('{{Q}}/css/resize.css');
 		},
 
 		{
@@ -35,7 +39,8 @@
 			onMovingStart: new Q.Event(),
 			onMovingStop: new Q.Event(),
 			onUpdate: new Q.Event(),
-			onRefresh: new Q.Event()
+			onRefresh: new Q.Event(),
+			isMoving: false
 		},
 
 
@@ -148,7 +153,7 @@
 								aX = posX - diffX;
 								aY = 0;
 								if(snappedTo != 'top') {
-									toggleClass('Q_resize_snapped_top');
+									toggleClass('Q_resi07: WebRTC.stopze_snapped_top');
 								}
 								snappedTo = 'top';
 
@@ -166,17 +171,24 @@
 					}
 
 					var initMoving = function(evt){
+						console.log('evt.type', evt.type)
 						if(tool.state.ignoreOnElements.length != 0) {
 							var ignoreEls = tool.state.ignoreOnElements;
 							for(var e in ignoreEls) {
-								if (evt.target == ignoreEls[e] || ignoreEls[e].contains(evt.target)) {
+								if (evt.type != "mousemove" && (evt.target == ignoreEls[e] || ignoreEls[e].contains(evt.target))) {
 									return;
 								}
 							}
 						}
+						console.log('initMoving 2')
+
 						if(!tool.state.active || evt.button == 1 || evt.button == 2) return;
 
 						if(Q.info.isTouchscreen && (tool.isScreenResizing || evt.targetTouches.length != 1)) return;
+						console.log('initMoving 3')
+
+						tool.state.isMoving = true;
+
 						var elRect = elementToMove.getBoundingClientRect();
 						if(elementToMove == elementToResize) {
 							elementToMove.style.width = elRect.width + 'px';
@@ -212,12 +224,14 @@
 						diffX = posX - divLeft, diffY = posY - divTop;
 
 						tool.state.onMovingStart.handle.call(tool);
+
 						if(Q.info.isTouchscreen) {
 							window.addEventListener('touchmove', drag, { passive: false });
 						} else window.addEventListener('mousemove', drag, { passive: false });
 					}
 
 					var stopMoving = function(container){
+						console.log('stopMoving')
 						if(Q.info.isTouchscreen) {
 							window.removeEventListener('touchmove', drag, { passive: false });
 						} else window.removeEventListener('mousemove', drag, { passive: false });
@@ -227,7 +241,7 @@
 						tool.element.style.boxShadow = '';
 
 						tool.state.onMovingStop.handle.call(tool);
-
+						tool.state.isMoving = false;
 						if (tool.state.appliedRecently) {
 							tool.state.onMoved.handle.call(tool);
 
@@ -722,18 +736,82 @@
 					}
 				})();
 
+				function distance(x1,y1,x2,y2) {
+					return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
+				}
+				function capturePointer(e) {
+					if (e.type == 'touchstart' || e.type == 'mousedown') {
+						tool.pointerInfo.mouseIsPressed = true;
+						tool.pointerInfo.startX = Q.info.isTouchscreen ? e.touches[0].clientX : e.clientX;
+						tool.pointerInfo.startY = Q.info.isTouchscreen ? e.touches[0].clientY : e.clientY;
+						return;
+					}
+
+					if (e.type == 'touchmove' || e.type == 'mousemove') {
+						tool.pointerInfo.prevX = Q.info.isTouchscreen ? e.changedTouches[0].clientX : e.clientX;
+						tool.pointerInfo.prevY = Q.info.isTouchscreen ? e.changedTouches[0].clientY : e.clientY;
+						return;
+					}
+
+					if (e.type == 'touchend' || e.type == 'mouseup') {
+						console.log("TOUCH END")
+						tool.pointerInfo.mouseIsPressed = false;
+						tool.pointerInfo.endX = Q.info.isTouchscreen ? e.changedTouches[0].clientX : e.clientX;
+						tool.pointerInfo.endY = Q.info.isTouchscreen ? e.changedTouches[0].clientY : e.clientY;
+						return;
+					}
+
+				}
+
 				return {
 					bind: function () {
+
+						Q.addEventListener(activateOnElement, Q.Pointer.start, function (e) {
+							capturePointer(e);
+							Q.addEventListener(window, Q.Pointer.move, capturePointer);
+							Q.addEventListener(window, Q.Pointer.end, function (e) {
+								capturePointer(e);
+								Q.removeEventListener(window, Q.Pointer.move, capturePointer);
+							});
+						});
+						
+						
 						if(tool.state.move) {
+
+							Q.addEventListener(activateOnElement, Q.Pointer.move, function (e) {
+								console.log('!tool.state.isMoving && tool.pointerInfo.mouseIsPressed', !tool.state.isMoving, tool.pointerInfo.mouseIsPressed)
+								if(!tool.state.isMoving && tool.pointerInfo.mouseIsPressed && distance(tool.pointerInfo.startX, tool.pointerInfo.startY, tool.pointerInfo.prevX, tool.pointerInfo.prevY) > 10){
+									_dragElement.initMoving(e);
+								}
+							});
 							Q.addEventListener(activateOnElement, Q.Pointer.start, _dragElement.initMoving, true, true);
 							Q.addEventListener(window, Q.Pointer.end, _dragElement.stopMoving, true, true);
 						}
+
+
 						if(tool.state.resize) {
 							resizeElement.setHandler(elementToResize);
 						}
 					}
 				}
 			},
+			pointerEvent: function() {
+				var tool = this;
+				tool.pointerInfo = {};
+				tool.pointerInfo.startY = null;
+				tool.pointerInfo.startX = null;
+				tool.pointerInfo.prevX = null;
+				tool.pointerInfo.prevY = null;
+				tool.pointerInfo.endX = null;
+				tool.pointerInfo.endY = null;
+
+
+
+				return {
+					capture: capture
+				}
+
+			}
 		}
 
 	);

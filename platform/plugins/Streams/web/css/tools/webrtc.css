@@ -124,6 +124,7 @@
     position: relative;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_left .Streams_webrtc_conference-control-inner > div,
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control.Q_resize_snapped_right .Streams_webrtc_conference-control-inner > div{

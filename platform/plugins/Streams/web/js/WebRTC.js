@@ -734,9 +734,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 							if(Q.info.isMobile) return;
-
+							var btnsToIgnore = Array.prototype.slice.call(_controls.querySelectorAll('.Streams_webrtc_conference-control-inner > div'));
 							var elementsToIgnore = [_controlsTool.settingsPopupEl, _controlsTool.textChat.chatBox, _controlsTool.participantListEl.parentNode];
-							elementsToIgnore = elementsToIgnore.concat(Array.prototype.slice.call(_controls.querySelectorAll('SVG')));
+							elementsToIgnore = elementsToIgnore.concat(btnsToIgnore);
 							Q.activate(
 								Q.Tool.setUpElement(
 									_controls.firstChild, // or pass an existing element
@@ -781,7 +781,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			var viewMode;
 			if(Q.info.isMobile){
 				viewMode = 'maximizedMobile';
-			} else viewMode = 'maximized';
+			} else viewMode = 'tiled';
 
 
 			/**
@@ -1490,9 +1490,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				if(layout == 'minimizedScreensGrid' || layout == 'maximizedScreensGrid' || layout == 'maximizedVerticalMobile' || layout == 'maximizedHorizontalMobile') {
 					var screenClass = 'Streams_webrtc_minimized-small-screen';
 					var maximizedScreenClass = 'Streams_webrtc_maximized-main-screen';
-					var elements = roomScreens.map(function (screen) {
+
+					var elements = []
+					for(var s in roomScreens) {
+						screen = roomScreens[s];
 						if(screen.excludeFromRendering == true) {
-							return null;
+							continue;
 						}
 
 						for (var o in screenClasses) {
@@ -1512,10 +1515,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						/*if(Q.info.isCordova && Q.info.platform === 'ios') {
 							return screen != activeScreen ? (screen.videoTrack != null ? screen.videoTrack : null) : null;
 						}*/
-						return screen != activeScreen ? screen.screenEl : null;
-					}).filter(function (e) {
-						return e != null;
-					});
+						if(screen != activeScreen) elements.unshift(screen.screenEl);
+					}
+
 
 					if((layout == 'maximizedScreensGrid' || layout == 'maximizedVerticalMobile' || layout == 'maximizedHorizontalMobile') && activeScreen){
 						/*if(Q.info.isCordova && Q.info.platform === 'ios') {
@@ -1663,6 +1665,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				viewMode = 'minimized';
 				updateScreensButtons();
 				resetAudioVisualization();
+				if(_controlsTool != null) {
+					_controlsTool.participantsPopup().disableLoudesScreenMode();
+					_controlsTool.updateViewModeBtns();
+				}
 			}
 
 			/**
@@ -1692,11 +1698,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				});
 
 				var elements = toggleScreensClass('maximizedScreensGrid');
-				if(Q.info.isCordova && Q.info.platform === 'ios') {
-					setTimeout(function () {
-						cordova.plugins.iosrtc.refreshVideos();
-					}, duration+100);
-				}
 
 				_layoutTool.animate('maximizedScreensGrid', elements, duration, true);
 
@@ -2271,6 +2272,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					});
 				},
 			}
+			window.customLayouts = customLayouts;
 
 			return {
 				updateLayout:updateLayout,
