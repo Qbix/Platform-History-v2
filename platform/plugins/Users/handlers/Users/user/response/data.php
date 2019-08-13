@@ -25,7 +25,7 @@ function Users_user_response_data($params)
 		$verified = !!Users::identify($type, $identifier);
 		// NOTE: Do not return anything that would identify the user on the system
 		return array(
-			'exists' => hash('sha256', $userId),
+			'exists' => hash('sha256', $user->id),
 			'verified' => $verified,
 			// 'username' => $user->username,
 			// 'displayName' => $displayname,
