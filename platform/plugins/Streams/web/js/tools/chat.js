@@ -535,6 +535,10 @@ Q.Tool.define('Streams/chat', function(options) {
 		var state = this.state;
 		var $toolElement = $(this.element);
 
+		if (state.webrtc) {
+			return;
+		}
+
 		$toolElement.attr('data-webrtc', 'loading');
 
 		Q.Streams.related.force(
@@ -998,7 +1002,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				tool.scrollToBottom();
 
 				// if startWebRTC is true, start webrtc
-				if (state.startWebRTC || window.location.href.indexOf('startWebRTC') > 0) {
+				if (state.startWebRTC || (location.href.includes(state.stream.url()) && location.href.includes('startWebRTC'))) {
 					tool.startWebRTC();
 				}
 			});

@@ -9,14 +9,13 @@ function Streams_webrtc_put($params = array()) {
     $participantSid = Q::ifset($params, 'participantSid', null);
 
     if(Q_Request::slotName('updateParticipantSid')) {
+		Q_Response::setSlot('updateParticipantSid', true);
 		if ($publisherId && $streamName) {
 			$stream = Streams::fetchOne($loggedUserId, $publisherId, $streamName);
 			$meAsParticipant = $stream->participant();
 			if ($meAsParticipant) {
 				$meAsParticipant->setExtra('participantSid', $participantSid);
 				$meAsParticipant->save();
-
-				Q_Response::setSlot('updateParticipantSid', $meAsParticipant);
 			}
 		}
 	} else if(Q_Request::slotName('endRoom')) {
