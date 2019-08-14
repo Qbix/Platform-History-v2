@@ -1,0 +1,2 @@
+ALTER TABLE {$prefix}user
+ADD COLUMN salt varbinary(63) NULL DEFAULT NULL AFTER pincodeHash;

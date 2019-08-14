@@ -924,11 +924,7 @@ class Q_Session
 		}
 		self::start(!$startNewSession);
 		if ($overwrite or !isset($_SESSION['Q']['nonce'])) {
-			if (is_callable('random_bytes')) {
-				$_SESSION['Q']['nonce'] = bin2hex(random_bytes(32));
-			} else {
-				$_SESSION['Q']['nonce'] = sha1(mt_rand().microtime());
-			}
+			$_SESSION['Q']['nonce'] = Q_Utils::randomHexString(64);
 		}
 		if (!empty($_SERVER['HTTP_HOST'])) {
 			$durationName = self::durationName();

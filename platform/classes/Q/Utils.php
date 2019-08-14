@@ -17,13 +17,37 @@ class Q_Utils
 	/**
 	 * Converts timestamps to standard UNIX timestamp with seconds.
 	 * Accepts timestamps with seconds or milliseconds.
+	 * @method timestamp
+	 * @static
 	 * @param $timestamp
-	 * @return float
+	 * @return {float}
 	 */
 	static function timestamp($timestamp)
 	{
 		$timestamp = intval($timestamp);
 		return $timestamp > 10000000000 ? round($timestamp / 1000) : $timestamp;
+	}
+	
+	/**
+	 * Returns a random hexadecimal string of the specified length
+	 * @method randomHexString
+	 * @static
+	 * @param {integer} $length Any length up to 
+	 * @return {string}
+	 */
+	static function randomHexString($length)
+	{
+		if (is_callable('random_bytes')) {
+			$temp = bin2hex(random_bytes($length));
+		} else {
+			if (!Q_Config::get('Q', 'random', 'dontRandomize', false)) {
+				srand();
+			}
+			for ($i=0; $i<$length; $i += 40) {
+				$temp .= sha1(mt_rand().microtime());
+			}
+		}
+		return substr($temp, 0, $length);
 	}
 
 	/**

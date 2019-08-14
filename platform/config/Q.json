@@ -159,6 +159,9 @@
 			"pixabay": null,
 			"facebook": null,
 			"google": null
+		},
+		"random": {
+			"dontRandomize": false
 		}
 	},
 	"Db": {

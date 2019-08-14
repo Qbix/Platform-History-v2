@@ -155,7 +155,7 @@ class Users_User extends Base_Users_User
 			return $result;
 		}
 		if (!$isHashed and $passphrase) {
-			$passphrase = sha1($passphrase . "\t" . hash('sha256', $this->id));
+			$passphrase = sha1($passphrase . "\t" . $this->salt);
 		}
 		return $passphrase;
 	}
@@ -235,6 +235,9 @@ class Users_User extends Base_Users_User
 				self::db()->uniqueId(self::table(), 'id', null, array(
 					'filter' => array('Users_User', 'idFilter')
 				));
+			}
+			if (!isset($updatedFields['salt'])) {
+				$this->id = $updatedFields['salt'] = Q_Utils::randomHexString(64);
 			}
 			if (!isset($updatedFields['username'])) {
 				// put an empty username for now
