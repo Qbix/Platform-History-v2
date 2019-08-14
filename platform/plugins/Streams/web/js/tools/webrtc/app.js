@@ -1129,7 +1129,7 @@ window.WebRTCconferenceLib = function app(options){
 			if(!socket || !socket.connected) return;
 
 			//var data = JSON.stringify(data);
-			socket.emit('videoData', data, options.roomName, mediaStreamId);
+			socket.emit('Streams/webrtc/videoData', data, options.roomName, mediaStreamId);
 		}
 
 		function createVideoCanvas(screen, track) {
@@ -1160,7 +1160,7 @@ window.WebRTCconferenceLib = function app(options){
 				// get pixel data from input canvas
 				var pixelData = inputCtx.getImageData( 0, 0, videoWidth, videoHeight );
 				//sendVideoDataToServer(pixelData, mediaStreamId);
-				//if(socket && socket.connected) socket.emit('videoData', txt + argumentsString + '\n');;
+				//if(socket && socket.connected) socket.emit('Streams/webrtc/videoData', txt + argumentsString + '\n');;
 				/*var avg, i;
 
 				// simple greyscale transformation
@@ -1590,7 +1590,7 @@ window.WebRTCconferenceLib = function app(options){
 						if(audioTracks.length != 0 && enabledAudioTracks.length == 0 && participant.remoteMicIsEnabled) {
 							log('checkOnlineStatus: MIC DOESN\'T WORK');
 							sendDataTrackMessage('service', {audioNotWork: true});
-							if(socket != null) socket.emit('errorlog', "checkOnlineStatus MIC DOESN'T WORK'");
+							if(socket != null) socket.emit('Streams/webrtc/errorlog', "checkOnlineStatus MIC DOESN'T WORK'");
 						}
 					}
 
@@ -1615,7 +1615,7 @@ window.WebRTCconferenceLib = function app(options){
 						if(socket) {
 							log('checkOnlineStatus : confirm whether user is inactive');
 
-							socket.emit('confirmOnlineStatus', {
+							socket.emit('Streams/webrtc/confirmOnlineStatus', {
 								'type': 'request',
 								'targetSid': participant.sid
 							});
@@ -1912,16 +1912,16 @@ window.WebRTCconferenceLib = function app(options){
 		}
 
 		function socketEventBinding() {
-			socket.on('participantConnected', function (participant){
+			socket.on('Streams/webrtc/participantConnected', function (participant){
 				log('socket: participantConnected', participant);
 				socketParticipantConnected().initPeerConnection(participant);
 			});
 
-			socket.on('roomParticipants', function (participantsList){
+			socket.on('Streams/webrtc/roomParticipants', function (participantsList){
 				log('roomParticipants', participantsList);
 			});
 
-			socket.on('participantDisconnected', function (sid){
+			socket.on('Streams/webrtc/participantDisconnected', function (sid){
 				var existingParticipant = roomParticipants.filter(function (roomParticipant) {
 					return roomParticipant.sid == sid;
 				})[0];
@@ -1935,7 +1935,7 @@ window.WebRTCconferenceLib = function app(options){
 			});
 
 
-			socket.on('signalling', function (message){
+			socket.on('Streams/webrtc/signalling', function (message){
 				log('signalling message: ' + message.type)
 				if (message.type === 'offer') {
 
@@ -1949,12 +1949,12 @@ window.WebRTCconferenceLib = function app(options){
 				}
 			});
 
-			socket.on('confirmOnlineStatus', function (message){
+			socket.on('Streams/webrtc/confirmOnlineStatus', function (message){
 
 				if(message.type == 'request') {
 					log('confirmOnlineStatus REQUEST')
 
-					socket.emit('confirmOnlineStatus', {
+					socket.emit('Streams/webrtc/confirmOnlineStatus', {
 						'type': 'answer',
 						'targetSid': message.fromSid
 					});
@@ -2672,7 +2672,7 @@ window.WebRTCconferenceLib = function app(options){
 			sendOnlineStatus();
 			checkOnlineStatus();
 			log('joined', {username:localParticipant.identity, sid:socket.id, room:options.roomName})
-			socket.emit('joined', {username:localParticipant.identity, sid:socket.id, room:options.roomName, isiOS: _isiOS, info: _localInfo});
+			socket.emit('Streams/webrtc/joined', {username:localParticipant.identity, sid:socket.id, room:options.roomName, isiOS: _isiOS, info: _localInfo});
 		}
 
 		return {
@@ -2692,7 +2692,7 @@ window.WebRTCconferenceLib = function app(options){
 
 	function sendMessage(message){
 		log('sendMessage', message)
-		socket.emit('signalling', message);
+		socket.emit('Streams/webrtc/signalling', message);
 	}
 
 	app.conferenceControl = (function () {
@@ -4528,7 +4528,7 @@ window.WebRTCconferenceLib = function app(options){
 							argumentsString = argumentsString + ', ' + argument;
 						}
 					}
-					socket.emit('log', txt + argumentsString + '\n');
+					socket.emit('Streams/webrtc/log', txt + argumentsString + '\n');
 					console.stdlog.apply(console, arguments);
 					latestConsoleLog = txt + argumentsString + '\n';
 				} catch (e) {
@@ -4579,7 +4579,7 @@ window.WebRTCconferenceLib = function app(options){
 				} else if(typeof err != 'undefined' && typeof err.stack != 'undefined')
 					errorMessage = errorMessage + err.stack + "\n " + ua+ "\n";
 				else errorMessage = errorMessage + "\n " + ua + "\n";
-				socket.emit('errorlog', errorMessage);
+				socket.emit('Streams/webrtc/errorlog', errorMessage);
 				console.stderror.apply(console, arguments);
 			} catch (e) {
 				console.error(e.name + ' ' + e.message)
@@ -4606,7 +4606,7 @@ window.WebRTCconferenceLib = function app(options){
 
 			var errMessage = "\n\n" + today + " Error: " + msg + "\nurl: " + url + "\nline: " + line + extra + "\nline: " + ua;
 
-			socket.emit('errorlog', errMessage);
+			socket.emit('Streams/webrtc/errorlog', errMessage);
 		}
 
 	}
