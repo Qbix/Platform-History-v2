@@ -4580,7 +4580,7 @@ Streams.isStream = function (value) {
  * @param {function} callback Function which called to show notice if all fine.
  */
 Streams.showNoticeIfSubscribed = function (publisherId, streamName, messageType, callback) {
-	Streams.get(publisherId, streamName, function () {
+	Streams.get.force(publisherId, streamName, function () {
 		// return if user doesn't subscribed to stream
 		if (Q.getObject("participant.subscribed", this) !== 'yes') {
 			return;
@@ -5775,6 +5775,7 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 	var publisherId = Q.getObject("fromPublisherId", instructions);
 	var streamName = Q.getObject("fromStreamName", instructions);
 	var toStreamName = Q.getObject("streamName", message) || "";
+	var toPublisherId = Q.getObject("publisherId", message) || "";
 	var conversationUrl;
 
 	// only relation type Streams/webrtc and not for myself
@@ -5784,9 +5785,9 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 
 	// allowed stream types
 	if (['Streams/chat', 'Websites/webpage'].indexOf(message.streamType) >= 0) {
-		conversationUrl = '/conversation/' + message.publisherId + '/' + toStreamName.split('/').pop();
+		conversationUrl = '/conversation/' + toPublisherId + '/' + toStreamName.split('/').pop();
 	} else if (message.streamType === 'Streams/live') {
-		conversationUrl = '/s/' + message.publisherId + '/' + toStreamName;
+		conversationUrl = '/s/' + toPublisherId + '/' + toStreamName;
 	} else {
 		return;
 	}
@@ -5794,31 +5795,33 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 	var toUrl = Q.baseUrl() + conversationUrl + '?startWebRTC';
 
 	Q.Text.get("Streams/content", function (err, text) {
-		Q.Template.render('Streams/chat/webrtc/available', {
-			avatar: Q.Tool.setUpElementHTML('div', 'Users/avatar', {
-				userId: publisherId,
-				icon: true,
-				short: true
-			}),
-			text: text.chat.startedConversation
-		}, function (err, html) {
-			if (err) {
-				return;
-			}
-
-			Q.Notices.add({
-				content: html,
-				handler: function () {
-					if (window.location.href.includes(conversationUrl)) {
-						var tool = Q.Tool.from($(".Q_tool.Streams_chat_tool[data-streams-chat*='" + toStreamName + "']"), "Streams/chat");
-
-						if (tool) {
-							return tool.startWebRTC();
-						}
-					}
-
-					Q.handle(toUrl);
+		Streams.showNoticeIfSubscribed(toPublisherId, toStreamName, message.type, function () {
+			Q.Template.render('Streams/chat/webrtc/available', {
+				avatar: Q.Tool.setUpElementHTML('div', 'Users/avatar', {
+					userId: publisherId,
+					icon: true,
+					short: true
+				}),
+				text: text.chat.startedConversation
+			}, function (err, html) {
+				if (err) {
+					return;
 				}
+
+				Q.Notices.add({
+					content: html,
+					handler: function () {
+						if (window.location.href.includes(conversationUrl)) {
+							var tool = Q.Tool.from($(".Q_tool.Streams_chat_tool[data-streams-chat*='" + toStreamName + "']"), "Streams/chat");
+
+							if (tool) {
+								return tool.startWebRTC();
+							}
+						}
+
+						Q.handle(toUrl);
+					}
+				});
 			});
 		});
 	});

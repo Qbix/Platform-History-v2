@@ -26,5 +26,39 @@
             "StartConversation": "Start Conversation",
             "GotoConversation": "Go to Conversation"
         }
-    }
+    },
+	"types": {
+		"Websites/article": {
+			"description": "An HTML document that various users can view and edit",
+			"displayType": "Article"
+		},
+		"Websites/slide": {
+			"description": "A slide in a presentation, can include HTML, audio etc.",
+			"displayType": "Slide"
+		},
+		"Websites/presentation": {
+			"description": "A presentation consisting of various slides",
+			"displayType": "Presentation"
+		},
+		"Websites/advert/unit": {
+			"description": "An advertising unit on a website",
+			"displayType": "Advert unit"
+		},
+		"Websites/advert/placement": {
+			"description": "A way of grouping advertising units under a name",
+			"displayType": "Advert placement"
+		},
+		"Websites/advert/creative": {
+			"description": "Content for an advertisement",
+			"displayType": "Advert creative"
+		},
+		"Websites/advert/campaign": {
+			"description": "An advertising campaign",
+			"displayType": "Advert campaign"
+		},
+		"Websites/webpage": {
+			"description": "Represents a website whose metadata was scraped",
+			"displayType": "Web page"
+		}
+	}
 }
