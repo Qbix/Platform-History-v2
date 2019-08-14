@@ -237,7 +237,7 @@ class Users_User extends Base_Users_User
 				));
 			}
 			if (!isset($updatedFields['salt'])) {
-				$this->id = $updatedFields['salt'] = Q_Utils::randomHexString(64);
+				$this->salt = $updatedFields['salt'] = Q_Utils::randomHexString(64);
 			}
 			if (!isset($updatedFields['username'])) {
 				// put an empty username for now
