@@ -70,16 +70,16 @@
     },
 	"messages": {
 		"Assets\/credits\/earned": {
-			"displayType": "Earned {{amount}} credits"
+			"content": "Earned {{amount}} credits"
 		},
 		"Assets\/credits\/spent": {
-			"displayType": "Spent {{amount}} credits"
+			"content": "Spent {{amount}} credits"
 		},
 		"Assets\/credits\/sent": {
-			"displayType": "Sent {{amount}} credits"
+			"content": "Sent {{amount}} credits"
 		},
 		"Assets\/credits\/received": {
-			"displayType": "Received {{amount}} credits"
+			"content": "Received {{amount}} credits"
 		}
 	}
 }

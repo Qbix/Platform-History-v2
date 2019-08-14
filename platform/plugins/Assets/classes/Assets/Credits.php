@@ -116,7 +116,7 @@ class Assets_Credits
 		));
 		$text = Q_Text::get('Assets/content');
 		$type = 'Assets/credits/spent';
-		$content = Q::ifset($text, 'messages', $type, "Spent {{amount}} credits");
+		$content = Q::ifset($text, 'messages', $type, 'content', "Spent {{amount}} credits");
 		$stream->post($userId, array(
 			'type' => $type,
 			'content' => $content,
@@ -158,7 +158,7 @@ class Assets_Credits
 		// Post that this user earned $amount credits by $reason
 		$text = Q_Text::get('Assets/content');
 		$type = 'Assets/credits/earned';
-		$content = Q::ifset($text, 'messages', $type, "Earned {{amount}} credits");
+		$content = Q::ifset($text, 'messages', $type, "content", "Earned {{amount}} credits");
 		$stream->post($userId, array(
 			'type' => $type,
 			'content' => Q::interpolate($content, compact('amount')),
@@ -217,7 +217,7 @@ class Assets_Credits
 		$instructions['operation'] = '-';
 		$text = Q_Text::get('Assets/content');
 		$type = 'Assets/credits/sent';
-		$content = Q::ifset($text, 'messages', $type, "Sent {{amount}} credits");
+		$content = Q::ifset($text, 'messages', $type, 'content', "Sent {{amount}} credits");
 		$from_stream->post($fromUserId, array(
 			'type' => $type,
 			'byClientId' => $toUserId,
@@ -234,7 +234,7 @@ class Assets_Credits
 		$instructions['operation'] = '+';
 		$text = Q_Text::get('Assets/content');
 		$type = 'Assets/credits/received';
-		$content = Q::ifset($text, 'messages', $type, "Received {{amount}} credits");
+		$content = Q::ifset($text, 'messages', $type, 'content', "Received {{amount}} credits");
 		$to_stream->post($toUserId, array(
 			'type' => $type,
 			'byClientId' => $fromUserId,
