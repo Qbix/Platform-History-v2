@@ -2011,7 +2011,8 @@ abstract class Users extends Base_Users
 			$hashed = $identifier;
 			$ui_type = $type;
 		} else {
-			switch ($type) {
+			$parts = explode("\t", $type);
+			switch ($parts[0]) {
 				case 'email':
 					if (!Q_Valid::email($identifier, $normalized)) {
 						throw new Q_Exception_WrongValue(

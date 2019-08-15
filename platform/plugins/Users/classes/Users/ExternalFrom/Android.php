@@ -18,7 +18,7 @@ class Users_ExternalFrom_Android extends Users_ExternalFrom implements Users_Ext
 	 * @constructor
 	 * @static
 	 * @param {string} [$appId=Q::app()] Can either be an interal appId or an Android appId.
-	 * @param {boolean} [$setCookie=true] Whether to set fbsr_$appId cookie
+	 * @param {boolean} [$setCookie=true] Whether to set the Q_udid cookie
 	 * @param {boolean} [$longLived=true] Get a long-lived access token, if necessary
 	 * @return {Users_ExternalFrom_Android|null}
 	 *  May return null if no such user is authenticated.
@@ -29,10 +29,16 @@ class Users_ExternalFrom_Android extends Users_ExternalFrom implements Users_Ext
 		$platformAppId = (isset($appInfo['appId']) && isset($appInfo['secret']))
 			? $appInfo['appId']
 			: '';
-		
-		$udid = Q::ifset($_COOKIE, 'Q_udid', null);
+
+		$udid = Q::ifset($_REQUEST, 'Q_udid', null);
 		if (!$udid) {
-			return null;
+			$udid = Q::ifset($_COOKIE, 'Q_udid', null);
+			if (!$udid) {
+				return null;
+			}
+		}
+		if ($setCookie) {
+			Q_Response::setCookie("Q_udid", $udid, 0);
 		}
 		$ef = new Users_ExternalFrom_Android();
 		// note that $ef->userId was not set
