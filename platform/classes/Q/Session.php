@@ -543,7 +543,7 @@ class Q_Session
 				$row = new $class();
 				$row->$id_field = $id;
 				if ($row->retrieve()) {
-					$sessionExists = true;
+					self::$sessionExists = $sessionExists = true;
 				}
 				self::$session_db_row = $row;
 			}
@@ -558,7 +558,7 @@ class Q_Session
 				$result = '';
 			} else {
 				$result = (string) file_get_contents($sess_file);
-				$sessionExists = true;
+				self::$sessionExists = $sessionExists = true;
 			}
 		}
 		self::$sess_data = $result;
