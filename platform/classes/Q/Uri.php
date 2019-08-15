@@ -329,7 +329,15 @@ class Q_Uri
 		$routesStart = Q::reverseOrder(Q::ifset($config, 'routes@start', array()));
 		$routes = Q::reverseOrder(Q::ifset($config, 'routes', array()));
 		$routesEnd = Q::reverseOrder(Q::ifset($config, 'routes@end', array()));
-		return array_merge($routesStart, $routes, $routesEnd);
+		$result = array();
+		foreach (array($routesStart, $routes, $routesEnd) as $source) {
+			foreach ($source as $k => $v) {
+				if (!isset($result[$k])) {
+					$result[$k] = $v;
+				}
+			}
+		}
+		return $result;
 	}
 	
 	//
