@@ -937,7 +937,7 @@ class Q_Session
 			$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
 			Q_Response::setCookie(
 				'Q_nonce', $_SESSION['Q']['nonce'], $duration ? time()+$duration : 0,
-				null, null, true, true
+				null, null, false, false
 			);
 		}
 		Q_Session::$nonceWasSet = true;
