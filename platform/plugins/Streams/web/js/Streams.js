@@ -3329,10 +3329,10 @@ Stream.close.onError = new Q.Event();
  * @param {Function} [callback] Any socket.io acknowledgement callback
  * @return {Q.Socket} returns null if request wasn't sent, otherwise returns the socket
  */
-Streams.socketRequest = function (event, publisherId, streamName) {
-	if (!Q.sessionId()) {
-		throw new Error("Stream.observe: a valid session id is required");
-	}
+Streams.socketRequest = function (event, publisherId, streamName, callback) {
+	// if (!Q.sessionId()) {
+	// 	throw new Error("Stream.observe: a valid session is required");
+	// }
 	var nodeUrl = Q.nodeUrl({
 		publisherId: publisherId,
 		streamName: streamName
@@ -3342,7 +3342,7 @@ Streams.socketRequest = function (event, publisherId, streamName) {
 		return null;
 	}
 	var args = Array.prototype.slice.call(arguments, 0);
-	args.splice(1, 0, Q.sessionId(), Q.clientId());
+	args.splice(1, 0, Q.clientId(), Q.getObject('Q.Streams.public.capability'));
 	socket.socket.emit.apply(socket.socket, args);
 	return socket;
 };

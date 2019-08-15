@@ -117,6 +117,10 @@
 			"Streams/user/username": true,
 			"Streams/user/icon": true
 		},
+		"public": {
+			"duration": 3600, /* one hour */
+			"permissions": ["observe"]
+		},
 		"types": {
 			"*": {
 				"private": [

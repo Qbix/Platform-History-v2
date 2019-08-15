@@ -9485,7 +9485,7 @@ Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, callback2) {
 		_qsockets[ns][url] = null; // pending
 	}
 	// check if socket already connected, or reconnect
-	_connectSocketNS(ns, url, callback, callback2, true);
+	_connectSocketNS(ns, url, callback, callback2, false);
 };
 
 /**

@@ -1608,6 +1608,7 @@ Q.instanceOf = function (testing, Constructor) {
  * or levels > 0, it recursively calls that method to copy the property.
  * @static
  * @method copy
+ * @param {Mixed} x the object to copy
  * @param {Array} fields
  *  Optional array of fields to copy. Otherwise copy all that we can.
  * @param {number} levels
@@ -2138,7 +2139,7 @@ Q.listen = function _Q_listen(options, callback) {
 			res.header(headers);
 		}
 		if (internalHost == host && internalPort == port) {
-			Q.Utils.validate(req, res, _requested);
+			Q.Utils.validateRequest(req, res, _requested);
 		} else {
 			_requested();
 		}
