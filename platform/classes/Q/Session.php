@@ -446,11 +446,6 @@ class Q_Session
 				self::name(), $sid, $duration ? time()+$duration : 0,
 				null, null, true, true
 			);
-			$token = self::generateId();
-			Q_Response::setCookie(
-				self::token(), $sid, $duration ? time()+$duration : 0,
-				null, null, true, true
-			);
 		}
 		$_SESSION = $old_SESSION; // restore $_SESSION, which will be saved when session closes
 
