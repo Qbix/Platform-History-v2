@@ -285,14 +285,15 @@ class Q_Session
 		try {
 			if ($id) {
 				self::processDbInfo();
-				self::readHandler($id, $sessionExists);
-				if (!$sessionExists) {
+				self::id($id);
+				session_start();
+				$started = true;
+				if (!self::$sessionExists) {
 					if ($throwIfMissingOrInvalid) {
 						self::throwInvalidSession();
 					}
 					self::writeHandler($id, '');
 				}
-				self::id($id);
 				if (!empty($_SERVER['HTTP_HOST'])) {
 					// TODO: Think about session fixation attacks, require nonce.
 					$durationName = self::durationName();
@@ -305,7 +306,9 @@ class Q_Session
 			}
 			ini_set('session.use_cookies', 0); // we are gonna handle the cookies, thanks
 			session_cache_limiter(''); // don't send the cache limiter headers either
-			session_start();
+			if (!$started) {
+				session_start();
+			}
 		} catch (Q_Exception_MissingRow $e) {
 			throw $e;
 		} catch (Q_Exception_FailedValidation $e) {
@@ -530,7 +533,7 @@ class Q_Session
 		if (empty(self::$session_save_path)) {
 			self::$session_save_path = self::savePath();
 		}
-		$sessionExists = false;
+		self::$sessionExists = $sessionExists = false;
 		if (! empty(self::$session_db_connection)) {
 			$id_field = self::$session_db_id_field;
 			$data_field = self::$session_db_data_field;
@@ -699,12 +702,11 @@ class Q_Session
 						$existing_data = '';
 					}
 				}
-				$_SESSION = self::unserialize($existing_data);
 				$t = new Q_Tree($_SESSION);
 				$t->merge($our_SESSION);
 				$_SESSION = $t->getAll();
 				$params['existing_data'] = $existing_data;
-				$params['merged_data'] = $merged_data = session_encode();
+				$params['merged_data'] = $merged_data = session_id() ? session_encode() : '';
 				/**
 				 * @event Q/session/save {before}
 				 * @param {string} sess_data
@@ -717,7 +719,7 @@ class Q_Session
 				 */
 				Q::event('Q/session/save', $params, 'before');
 				if (! empty(self::$session_db_connection)) {
-					$row->$data_field = $merged_data;
+					$row->$data_field = $merged_data ? $merged_data : '';
 					$row->$duration_field = Q_Config::get(
 						'Q', 'session', 'durations', Q_Request::formFactor(),
 						Q_Config::expect('Q', 'session', 'durations', 'session')
@@ -1221,4 +1223,6 @@ class Q_Session
 	 * @public
 	 */
 	public static $preventWrite = false;
+	
+	protected static $sessionExists = null;
 }
