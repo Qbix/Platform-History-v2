@@ -12,8 +12,8 @@ self.addEventListener('push', function (event) {
 		self.registration.update().then(() => console.log('[Service Worker] Updated'));
 		return;
 	}
-	if (options.requireInteraction === undefined) {
-		options.requireInteraction = false;
+	if (data.requireInteraction === undefined) {
+		data.requireInteraction = false;
 	}
 	sendMessageToAllClients({
 		Q: {
@@ -23,7 +23,7 @@ self.addEventListener('push', function (event) {
 		}
 	});
 	if (data.collapseId) {
-		options.tag = data.collapseId;
+		data.tag = data.collapseId;
 	}
 	event.waitUntil(self.registration.showNotification(data.title, data));
 });
