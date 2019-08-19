@@ -1,6 +1,6 @@
 (function (Q, $) {
 
-	var WebRTC = Q.Streams.WebRTC();
+	var WebRTC = Q.Streams.WebRTC;
 
 	/**
  * Streams Tools
@@ -553,7 +553,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			var stream = Q.first(this.relatedStreams);
 			function _createRoom(publisherId, streamName) {
 				// connect to this particular conversation
-				WebRTC.start({
+				WebRTC().start({
 					element: document.body,
 					roomId: streamName.split('/').pop(),
 					roomPublisherId: publisherId,
