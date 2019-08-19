@@ -432,8 +432,7 @@ class Q_Utils
 
 		if ($mbstring === null) {
 			$mbstring = extension_loaded('mbstring')
-			&&
-			(ini_get('mbstring.func_overload') & MB_OVERLOAD_STRING);
+			&& (ini_get('mbstring.func_overload') & MB_OVERLOAD_STRING);
 		}
 		/** @var bool $mbstring */
 		return $mbstring;

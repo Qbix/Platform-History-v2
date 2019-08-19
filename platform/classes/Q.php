@@ -209,10 +209,10 @@ class Q
 				$dump = Q_Exception::coloredString(
 					$errstr, $errfile, $errline, $context
 				);
-				Q::log("PHP Error($errno): \n\n$dump", null, null, array(
+				Q::log("PHP Error($errno): \n\n$dump", null, true, array(
 					'maxLength' => 1000
 				));
-				Q::log("PHP Error($errno): \n\n$dump", 'error', null, array(
+				Q::log("PHP Error($errno): \n\n$dump", 'error', true, array(
 					'maxLength' => 100000
 				));
 				$type = 'warning';

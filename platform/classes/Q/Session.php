@@ -284,6 +284,7 @@ class Q_Session
 		}
 
 		try {
+			$started = false;
 			if ($id) {
 				self::processDbInfo();
 				self::id($id);
