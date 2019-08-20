@@ -79,7 +79,7 @@ Utils.validate = function(data, fieldKeys) {
 		var sf = Q.Config.get(['Q', 'internal', 'sigField'], 'sig');
 		fieldKeys = ['Q.'+sf];
 	}
-	var ref = data;
+	var ref = temp;
 	for (var i=0, l=fieldKeys.length; i<l-1; ++i) {
 		if (!(fieldKeys[i] in ref)) {
 			ref[ fieldKeys[i] ] = {};
@@ -88,7 +88,7 @@ Utils.validate = function(data, fieldKeys) {
 	}
 	var sig = ref [ fieldKeys[fieldKeys.length-1] ];
 	delete ref [ fieldKeys[fieldKeys.length-1] ];
-	return (sig === Utils.signature(data, secret));
+	return (sig === Utils.signature(temp, secret));
 };
 
 /**
