@@ -60,7 +60,7 @@
 					$url.on('change keyup keydown input paste', function () {
 						setTimeout(function () {
 							if (tool.validUrl($url.val())) {
-								//$browse.show();
+								$browse.show();
 								$url.removeClass('Q_error');
 							} else {
 								$browse.hide();
@@ -68,10 +68,11 @@
 						}, 100);
 					});
 					$browse.on(Q.Pointer.fastclick, function () {
-						Q.Cordova.chooseLink($url.val(), false, function () {
-							console.log("Success: ", arguments);
+						Q.Cordova.chooseLink($url.val(), false, function (selectedUrl) {
+							$url.val(selectedUrl);
 						}, null, function () {
-							console.log("Error: ", arguments);
+							$url.focus();
+							console.warn("Error: ", arguments);
 						});
 					});
 				}
