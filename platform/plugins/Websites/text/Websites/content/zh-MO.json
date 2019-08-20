@@ -26,5 +26,39 @@
             "StartConversation": "开始对话",
             "GotoConversation": "转到对话"
         }
+    },
+    "types": {
+        "Websites/article": {
+            "description": "各种用户可以查看和编辑的HTML文档",
+            "displayType": "文章"
+        },
+        "Websites/slide": {
+            "description": "演示文稿中的幻灯片可以包含HTML，音频等。",
+            "displayType": "滑动"
+        },
+        "Websites/presentation": {
+            "description": "由各种幻灯片组成的演示文稿",
+            "displayType": "介绍"
+        },
+        "Websites/advert/unit": {
+            "description": "网站上的广告单元",
+            "displayType": "广告单位"
+        },
+        "Websites/advert/placement": {
+            "description": "一种在名称下对广告单元进行分组的方法",
+            "displayType": "广告位置"
+        },
+        "Websites/advert/creative": {
+            "description": "广告的内容",
+            "displayType": "广告创意"
+        },
+        "Websites/advert/campaign": {
+            "description": "广告活动",
+            "displayType": "广告活动"
+        },
+        "Websites/webpage": {
+            "description": "表示其元数据已被删除的网站",
+            "displayType": "网页"
+        }
     }
 }

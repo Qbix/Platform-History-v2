@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "Reaaliaikainen puhelu",
             "description": "reaaliaikainen video- \/ äänipuhelu"
+        },
+        "Streams\/tasks": {
+            "description": "tehtäväluokka",
+            "displayType": "tehtävät"
+        },
+        "Streams\/experience": {
+            "description": "yhteinen kokemus yhteisön jäsenille",
+            "displayType": "Yhteinen kokemus yhteisön jäsenille"
+        },
+        "Streams\/greeting": {
+            "description": "tervehdys, jonka avulla käyttäjä voi esitellä itsensä",
+            "displayType": "Tervehdys"
         }
     },
     "messages": {

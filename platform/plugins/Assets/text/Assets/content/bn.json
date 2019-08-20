@@ -67,5 +67,19 @@
             "displayType": "সেবা",
             "description": "পরিষেবা দেওয়া হচ্ছে"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "{999}} ক্রেডিট অর্জন করেছেন"
+        },
+        "Assets\/credits\/spent": {
+            "content": "{9 999}} ক্রেডিট ব্যয় করেছেন"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{9 999}} জমা দেওয়া"
+        },
+        "Assets\/credits\/received": {
+            "content": "{999}} ক্রেডিট প্রাপ্ত হয়েছে"
+        }
     }
 }

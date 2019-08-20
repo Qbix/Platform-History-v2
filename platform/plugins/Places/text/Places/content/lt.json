@@ -54,5 +54,35 @@
         "exist": "Teritorija jau egzistuoja",
         "addNewArea": "Pridėti naują sritį",
         "add": "Papildyti"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "vietų kolekcija",
+            "displayType": "Vietos"
+        },
+        "Places\/location": {
+            "description": "Pateikia pastatą, vietą, laivą, parką ir kt.",
+            "displayType": "Vieta"
+        },
+        "Places\/area": {
+            "description": "Pateikia vietovę, pavyzdžiui, kambarį ar komplektą",
+            "displayType": "Plotas"
+        },
+        "Places\/floor": {
+            "description": "Pateikia pastato ar laivo grindis",
+            "displayType": "Aukštas"
+        },
+        "Places\/column": {
+            "description": "Atvaizduoja koloną pastate ar laive",
+            "displayType": "Stulpelis"
+        },
+        "Places\/nearby": {
+            "description": "Daiktų, esančių tam tikru atstumu nuo geohash, kategorija",
+            "displayType": "Netoli vietų"
+        },
+        "Places\/interest": {
+            "description": "Daiktų, esančių tam tikru geohash atstumu, kategorija, atitinkanti pomėgį",
+            "displayType": "Vietos susidomėjimas"
+        }
     }
 }

@@ -26,5 +26,39 @@
             "StartConversation": "Sgwrs Dechrau",
             "GotoConversation": "Ewch i&#39;r Sgwrs"
         }
+    },
+    "types": {
+        "Websites/article": {
+            "description": "Dogfen HTML y gall amrywiol ddefnyddwyr ei gweld a&#39;i golygu",
+            "displayType": "Erthygl"
+        },
+        "Websites/slide": {
+            "description": "Gall sleid mewn cyflwyniad gynnwys HTML, sain ac ati.",
+            "displayType": "Sleid"
+        },
+        "Websites/presentation": {
+            "description": "Cyflwyniad yn cynnwys sleidiau amrywiol",
+            "displayType": "Cyflwyniad"
+        },
+        "Websites/advert/unit": {
+            "description": "Uned hysbysebu ar wefan",
+            "displayType": "Uned hysbysebu"
+        },
+        "Websites/advert/placement": {
+            "description": "Ffordd o grwpio unedau hysbysebu o dan enw",
+            "displayType": "Lleoliad hysbysebu"
+        },
+        "Websites/advert/creative": {
+            "description": "Cynnwys ar gyfer hysbyseb",
+            "displayType": "Hysbysebu&#39;n greadigol"
+        },
+        "Websites/advert/campaign": {
+            "description": "Ymgyrch hysbysebu",
+            "displayType": "Ymgyrch hysbysebu"
+        },
+        "Websites/webpage": {
+            "description": "Yn cynrychioli gwefan y cafodd ei metadata ei sgrapio",
+            "displayType": "tudalen we"
+        }
     }
 }

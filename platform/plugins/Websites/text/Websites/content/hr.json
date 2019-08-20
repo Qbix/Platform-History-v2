@@ -26,5 +26,39 @@
             "StartConversation": "Pokreni razgovor",
             "GotoConversation": "Idite na Razgovor"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "HTML dokument koji različiti korisnici mogu pregledati i uređivati",
+            "displayType": "Članak"
+        },
+        "Websites\/slide": {
+            "description": "Slajd u prezentaciji, može sadržavati HTML, audio itd.",
+            "displayType": "klizanje"
+        },
+        "Websites\/presentation": {
+            "description": "Prezentacija koja se sastoji od različitih dijapozitiva",
+            "displayType": "prezentacija"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Reklamna jedinica na web mjestu",
+            "displayType": "Oglasna jedinica"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Način grupiranja reklamnih jedinica pod nazivom",
+            "displayType": "Položaj oglasa"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Sadržaj za oglas",
+            "displayType": "Oglas oglas"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Reklamna kampanja",
+            "displayType": "Oglasna kampanja"
+        },
+        "Websites\/webpage": {
+            "description": "Predstavlja web mjesto čiji su metapodaci zapisani",
+            "displayType": "Web stranica"
+        }
     }
 }

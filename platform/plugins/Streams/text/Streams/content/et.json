@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "Reaalajas kõne",
             "description": "reaalajas video- \/ helikõne"
+        },
+        "Streams\/tasks": {
+            "description": "ülesannete kategooria",
+            "displayType": "Ülesanded"
+        },
+        "Streams\/experience": {
+            "description": "kogukonna liikmetele ühine kogemus",
+            "displayType": "Ühiskonna liikmete ühine kogemus"
+        },
+        "Streams\/greeting": {
+            "description": "tervitus, millega kasutaja saab ennast tutvustada",
+            "displayType": "Tervitus"
         }
     },
     "messages": {

@@ -54,5 +54,35 @@
         "exist": "Območje že obstaja",
         "addNewArea": "Dodaj novo področje",
         "add": "Dodaj"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "zbirka lokacij",
+            "displayType": "Lokacije"
+        },
+        "Places\/location": {
+            "description": "Predstavlja zgradbo, kraj, ladjo, park itd.",
+            "displayType": "Lokacija"
+        },
+        "Places\/area": {
+            "description": "Predstavlja območje znotraj lokacije, kot je soba ali apartma",
+            "displayType": "Območje"
+        },
+        "Places\/floor": {
+            "description": "Predstavlja tla v zgradbi ali ladji",
+            "displayType": "Nadstropje"
+        },
+        "Places\/column": {
+            "description": "Predstavlja stolpec v zgradbi ali ladji",
+            "displayType": "Stolpec"
+        },
+        "Places\/nearby": {
+            "description": "Kategorija za stvari na določeni razdalji geohash",
+            "displayType": "V bližini krajev"
+        },
+        "Places\/interest": {
+            "description": "Kategorija za stvari na določeni razdalji od geohash, ki ustreza zanimanju",
+            "displayType": "Zanima me"
+        }
     }
 }

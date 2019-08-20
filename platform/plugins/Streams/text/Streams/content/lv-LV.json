@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Zvana reāllaikā",
             "description": "reālā laika video / audio zvans"
+        },
+        "Streams/tasks": {
+            "description": "kategorija uzdevumiem",
+            "displayType": "Uzdevumi"
+        },
+        "Streams/experience": {
+            "description": "kopīga pieredze kopienas locekļiem",
+            "displayType": "Kopīga pieredze kopienas locekļiem"
+        },
+        "Streams/greeting": {
+            "description": "sveiciens, ar kuru lietotājs var iepazīstināt sevi",
+            "displayType": "Sveiciens"
         }
     },
     "messages": {

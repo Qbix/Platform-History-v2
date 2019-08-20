@@ -26,5 +26,39 @@
             "StartConversation": "התחל שיחה",
             "GotoConversation": "עבור אל שיחה"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "מסמך HTML שמשתמשים שונים יכולים להציג ולערוך",
+            "displayType": "מאמר"
+        },
+        "Websites\/slide": {
+            "description": "שקופית במצגת, יכולה לכלול HTML, שמע וכו &#39;.",
+            "displayType": "שקופית"
+        },
+        "Websites\/presentation": {
+            "description": "מצגת הכוללת שקופיות שונות",
+            "displayType": "מצגת"
+        },
+        "Websites\/advert\/unit": {
+            "description": "יחידת פרסום באתר אינטרנט",
+            "displayType": "יחידת מודעות"
+        },
+        "Websites\/advert\/placement": {
+            "description": "דרך לקבץ יחידות פרסום תחת שם",
+            "displayType": "מיקום מודעות"
+        },
+        "Websites\/advert\/creative": {
+            "description": "תוכן לפרסומת",
+            "displayType": "קריאייטיב לפרסום"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "קמפיין פרסומי",
+            "displayType": "קמפיין פרסומות"
+        },
+        "Websites\/webpage": {
+            "description": "מייצג אתר אינטרנט שהמטא נתונים שלו נחרטו",
+            "displayType": "עמוד אינטרנט"
+        }
     }
 }

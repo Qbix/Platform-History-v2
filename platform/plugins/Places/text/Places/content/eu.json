@@ -54,5 +54,35 @@
         "exist": "Area dagoeneko existitzen da",
         "addNewArea": "Gehitu eremu berria",
         "add": "Gehitu"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "kokapenen bilduma",
+            "displayType": "Kokalekuak"
+        },
+        "Places\/location": {
+            "description": "Eraikina, egoitza, ontzia, parkea eta abar adierazten ditu.",
+            "displayType": "Kokalekua"
+        },
+        "Places\/area": {
+            "description": "Kokapen bateko eremua adierazten du, hala nola gela edo suite bat",
+            "displayType": "Area"
+        },
+        "Places\/floor": {
+            "description": "Eraikin edo ontzi bateko zorua adierazten du",
+            "displayType": "solairua"
+        },
+        "Places\/column": {
+            "description": "Eraikin edo ontzi bateko zutabe bat adierazten du",
+            "displayType": "Zutabe"
+        },
+        "Places\/nearby": {
+            "description": "Geohash baten distantzia jakin batera dauden gauzak egiteko kategoria",
+            "displayType": "Lekuetatik gertu"
+        },
+        "Places\/interest": {
+            "description": "Kategoria bat geohash baten distantzia jakin batera, interesak bat datozenentzako",
+            "displayType": "Leku interesgarriak"
+        }
     }
 }

@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "Intydse oproep",
             "description": "&#39;n intydse video \/ klankoproep"
+        },
+        "Streams\/tasks": {
+            "description": "kategorie vir take",
+            "displayType": "take"
+        },
+        "Streams\/experience": {
+            "description": "&#39;n algemene ervaring vir lede van &#39;n gemeenskap",
+            "displayType": "Algemene ervaring vir lede van &#39;n gemeenskap"
+        },
+        "Streams\/greeting": {
+            "description": "groet waarmee &#39;n gebruiker hulself kan voorstel",
+            "displayType": "groet"
         }
     },
     "messages": {

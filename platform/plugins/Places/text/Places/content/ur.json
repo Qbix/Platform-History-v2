@@ -54,5 +54,35 @@
         "exist": "علاقے پہلے ہی موجود ہے",
         "addNewArea": "نیا علاقہ شامل کریں",
         "add": "شامل کریں"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "مقامات کا ایک مجموعہ۔",
+            "displayType": "مقامات"
+        },
+        "Places\/location": {
+            "description": "ایک عمارت ، پنڈال ، جہاز ، پارک ، وغیرہ کی نمائندگی کرتا ہے۔",
+            "displayType": "مقام۔"
+        },
+        "Places\/area": {
+            "description": "ایک مقام کے اندر ایسے علاقے کی نمائندگی کرتا ہے ، جیسے کمرے یا سویٹ۔",
+            "displayType": "رقبہ"
+        },
+        "Places\/floor": {
+            "description": "کسی عمارت یا جہاز میں فرش کی نمائندگی کرتا ہے۔",
+            "displayType": "فرش"
+        },
+        "Places\/column": {
+            "description": "کسی عمارت یا جہاز میں کالم کی نمائندگی کرتا ہے۔",
+            "displayType": "کالم۔"
+        },
+        "Places\/nearby": {
+            "description": "جیوہاش کے کچھ مقررہ فاصلے کے اندر چیزوں کے لئے زمرہ۔",
+            "displayType": "مقامات کے قریب۔"
+        },
+        "Places\/interest": {
+            "description": "کسی دلچسپی کے مطابق جیوہاش کے کچھ فاصلے کے اندر چیزوں کے لئے زمرہ۔",
+            "displayType": "مقامات کی دلچسپی۔"
+        }
     }
 }

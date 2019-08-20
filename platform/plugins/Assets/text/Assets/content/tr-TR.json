@@ -67,5 +67,19 @@
             "displayType": "Hizmet",
             "description": "sunulan hizmet"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "{{amount}} kredi kazandı"
+        },
+        "Assets/credits/spent": {
+            "content": "Harcanan {{amount}} kredi"
+        },
+        "Assets/credits/sent": {
+            "content": "{{amount}} kredi gönderdi"
+        },
+        "Assets/credits/received": {
+            "content": "{{amount}} kredi aldı"
+        }
     }
 }

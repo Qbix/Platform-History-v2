@@ -67,5 +67,19 @@
             "displayType": "Dịch vụ",
             "description": "dịch vụ đang được cung cấp"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Kiếm được {{amount}} tín dụng"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Tín dụng {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Đã gửi {{amount}} tín dụng"
+        },
+        "Assets\/credits\/received": {
+            "content": "Đã nhận được {{amount}} tín dụng"
+        }
     }
 }

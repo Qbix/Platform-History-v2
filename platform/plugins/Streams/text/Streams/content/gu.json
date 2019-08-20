@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "રીઅલ-ટાઇમ ક Callલ",
             "description": "એક રીઅલ ટાઇમ વિડિઓ \/ audioડિઓ ક callલ"
+        },
+        "Streams\/tasks": {
+            "description": "કાર્યો માટે વર્ગ",
+            "displayType": "કાર્યો"
+        },
+        "Streams\/experience": {
+            "description": "સમુદાયના સભ્યો માટે એક સામાન્ય અનુભવ",
+            "displayType": "સમુદાયના સભ્યો માટે સામાન્ય અનુભવ"
+        },
+        "Streams\/greeting": {
+            "description": "અભિવાદન જેની સાથે વપરાશકર્તા પોતાનો પરિચય આપી શકે",
+            "displayType": "અભિવાદન"
         }
     },
     "messages": {

@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "நிகழ்நேர அழைப்பு",
             "description": "நிகழ்நேர வீடியோ / ஆடியோ அழைப்பு"
+        },
+        "Streams/tasks": {
+            "description": "பணிகளுக்கான வகை",
+            "displayType": "பணிகள்"
+        },
+        "Streams/experience": {
+            "description": "ஒரு சமூகத்தின் உறுப்பினர்களுக்கு ஒரு பொதுவான அனுபவம்",
+            "displayType": "ஒரு சமூகத்தின் உறுப்பினர்களுக்கு பொதுவான அனுபவம்"
+        },
+        "Streams/greeting": {
+            "description": "ஒரு பயனர் தங்களை அறிமுகப்படுத்தக்கூடிய வாழ்த்து",
+            "displayType": "வாழ்த்து"
         }
     },
     "messages": {

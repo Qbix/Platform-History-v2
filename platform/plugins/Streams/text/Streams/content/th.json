@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "โทรตามเวลาจริง",
             "description": "การสนทนาทางวิดีโอ \/ เสียงแบบเรียลไทม์"
+        },
+        "Streams\/tasks": {
+            "description": "หมวดหมู่สำหรับงาน",
+            "displayType": "งาน"
+        },
+        "Streams\/experience": {
+            "description": "ประสบการณ์ทั่วไปสำหรับสมาชิกของชุมชน",
+            "displayType": "ประสบการณ์ทั่วไปสำหรับสมาชิกของชุมชน"
+        },
+        "Streams\/greeting": {
+            "description": "คำทักทายที่ผู้ใช้สามารถแนะนำตัวเอง",
+            "displayType": "คำอวยพร"
         }
     },
     "messages": {

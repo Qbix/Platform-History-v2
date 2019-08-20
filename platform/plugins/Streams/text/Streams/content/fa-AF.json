@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "تماس در زمان واقعی",
             "description": "تماس ویدیویی / صوتی در زمان واقعی"
+        },
+        "Streams/tasks": {
+            "description": "دسته بندی برای کارها",
+            "displayType": "وظایف"
+        },
+        "Streams/experience": {
+            "description": "یک تجربه مشترک برای اعضای یک جامعه",
+            "displayType": "تجربه مشترک برای اعضای یک جامعه"
+        },
+        "Streams/greeting": {
+            "description": "با سلام که کاربر می تواند خود را معرفی کند",
+            "displayType": "تبریک"
         }
     },
     "messages": {

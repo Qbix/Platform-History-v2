@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Połączenie w czasie rzeczywistym",
             "description": "połączenie wideo / audio w czasie rzeczywistym"
+        },
+        "Streams/tasks": {
+            "description": "kategoria zadań",
+            "displayType": "Zadania"
+        },
+        "Streams/experience": {
+            "description": "wspólne doświadczenie członków społeczności",
+            "displayType": "Wspólne doświadczenie członków społeczności"
+        },
+        "Streams/greeting": {
+            "description": "powitanie, z którym użytkownik może się przedstawić",
+            "displayType": "Powitanie"
         }
     },
     "messages": {

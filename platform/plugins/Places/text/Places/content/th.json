@@ -54,5 +54,35 @@
         "exist": "มีพื้นที่อยู่แล้ว",
         "addNewArea": "เพิ่มพื้นที่ใหม่",
         "add": "เพิ่ม"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "ชุดของสถานที่",
+            "displayType": "สถานที่"
+        },
+        "Places\/location": {
+            "description": "แสดงถึงอาคารสถานที่เรือสวนสาธารณะ ฯลฯ",
+            "displayType": "ที่ตั้ง"
+        },
+        "Places\/area": {
+            "description": "แสดงให้เห็นถึงพื้นที่ภายในสถานที่เช่นห้องหรือห้องสวีท",
+            "displayType": "พื้นที่"
+        },
+        "Places\/floor": {
+            "description": "แสดงถึงพื้นในอาคารหรือเรือ",
+            "displayType": "ชั้น"
+        },
+        "Places\/column": {
+            "description": "แสดงให้เห็นถึงคอลัมน์ในอาคารหรือเรือ",
+            "displayType": "คอลัมน์"
+        },
+        "Places\/nearby": {
+            "description": "หมวดหมู่สำหรับสิ่งต่าง ๆ ภายในระยะทางที่กำหนดของ geohash",
+            "displayType": "ใกล้สถานที่"
+        },
+        "Places\/interest": {
+            "description": "หมวดหมู่สำหรับสิ่งต่าง ๆ ในระยะทางที่กำหนดของ geohash โดยจับคู่ความสนใจ",
+            "displayType": "สถานที่น่าสนใจ"
+        }
     }
 }

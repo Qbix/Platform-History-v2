@@ -67,5 +67,19 @@
             "displayType": "Serbisyo",
             "description": "inaalok ang serbisyo"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Nakakuha ng mga kredito {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Gumastos ng {{amount}} credits"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Ipinadala ang {{amount}} credits"
+        },
+        "Assets\/credits\/received": {
+            "content": "Natanggap ang {{amount}} credits"
+        }
     }
 }

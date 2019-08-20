@@ -206,6 +206,18 @@
         "Streams\/webrtc": {
             "displayType": "Sanntids samtale",
             "description": "en video- \/ lydanrop i sanntid"
+        },
+        "Streams\/tasks": {
+            "description": "kategori for oppgaver",
+            "displayType": "oppgaver"
+        },
+        "Streams\/experience": {
+            "description": "en vanlig opplevelse for medlemmer av et samfunn",
+            "displayType": "Vanlig erfaring for medlemmer av et samfunn"
+        },
+        "Streams\/greeting": {
+            "description": "hilsen som en bruker kan presentere seg med",
+            "displayType": "Hilsen"
         }
     },
     "messages": {

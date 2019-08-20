@@ -206,6 +206,18 @@
         "Streams\/webrtc": {
             "displayType": "Real-Time Call",
             "description": "isang real time na tawag sa video \/ audio"
+        },
+        "Streams\/tasks": {
+            "description": "kategorya para sa mga gawain",
+            "displayType": "Mga Gawain"
+        },
+        "Streams\/experience": {
+            "description": "isang karaniwang karanasan para sa mga miyembro ng isang komunidad",
+            "displayType": "Karaniwang karanasan para sa mga miyembro ng isang komunidad"
+        },
+        "Streams\/greeting": {
+            "description": "pagbati kung saan maaaring ipakilala ng isang gumagamit ang kanilang mga sarili",
+            "displayType": "Pagbati"
         }
     },
     "messages": {

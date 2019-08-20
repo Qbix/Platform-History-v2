@@ -26,5 +26,39 @@
             "StartConversation": "Byrjaðu samtal",
             "GotoConversation": "Farðu í Samtöl"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "HTML skjal sem ýmsir notendur geta skoðað og breytt",
+            "displayType": "Grein"
+        },
+        "Websites\/slide": {
+            "description": "Rennibraut í kynningu, getur innihaldið HTML, hljóð o.s.frv.",
+            "displayType": "Renndu"
+        },
+        "Websites\/presentation": {
+            "description": "Erindi sem samanstendur af ýmsum glærum",
+            "displayType": "Erindi"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Auglýsingareining á vefsíðu",
+            "displayType": "Auglýsingareining"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Leið til að flokka auglýsingareiningar undir nafni",
+            "displayType": "Auglýsingastaðsetning"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Innihald auglýsinga",
+            "displayType": "Auglýsing skapandi"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Auglýsingaherferð",
+            "displayType": "Auglýsingaherferð"
+        },
+        "Websites\/webpage": {
+            "description": "Er fulltrúi vefsíðu þar sem lýsigögn voru skafa",
+            "displayType": "Vefsíða"
+        }
     }
 }

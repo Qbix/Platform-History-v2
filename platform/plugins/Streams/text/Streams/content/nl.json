@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "Realtime oproep",
             "description": "een realtime video \/ audio-oproep"
+        },
+        "Streams\/tasks": {
+            "description": "categorie voor taken",
+            "displayType": "taken"
+        },
+        "Streams\/experience": {
+            "description": "een gemeenschappelijke ervaring voor leden van een gemeenschap",
+            "displayType": "Gemeenschappelijke ervaring voor leden van een gemeenschap"
+        },
+        "Streams\/greeting": {
+            "description": "begroeting waarmee een gebruiker zichzelf kan voorstellen",
+            "displayType": "Groet"
         }
     },
     "messages": {

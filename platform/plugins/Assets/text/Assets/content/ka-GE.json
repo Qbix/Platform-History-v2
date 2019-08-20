@@ -67,5 +67,19 @@
             "displayType": "მომსახურება",
             "description": "მომსახურებას სთავაზობენ"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "იშოვა {999}} კრედიტი"
+        },
+        "Assets/credits/spent": {
+            "content": "დახარჯული {999}} კრედიტი"
+        },
+        "Assets/credits/sent": {
+            "content": "გაგზავნილია 999 {} კრედიტი"
+        },
+        "Assets/credits/received": {
+            "content": "მიიღო 99 999}} კრედიტი"
+        }
     }
 }

@@ -26,5 +26,39 @@
             "StartConversation": "Begin een gesprek",
             "GotoConversation": "Ga naar gesprek"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Een HTML-document dat verschillende gebruikers kunnen bekijken en bewerken",
+            "displayType": "Artikel"
+        },
+        "Websites\/slide": {
+            "description": "Een dia in een presentatie, kan HTML, audio etc. bevatten",
+            "displayType": "glijbaan"
+        },
+        "Websites\/presentation": {
+            "description": "Een presentatie bestaande uit verschillende dia&#39;s",
+            "displayType": "Presentatie"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Een advertentie-eenheid op een website",
+            "displayType": "Advertentie-eenheid"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Een manier om advertentie-eenheden onder een naam te groeperen",
+            "displayType": "Advertentie plaatsing"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Inhoud voor een advertentie",
+            "displayType": "Advertentie creatief"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Een reclamecampagne",
+            "displayType": "Advertentie campagne"
+        },
+        "Websites\/webpage": {
+            "description": "Vertegenwoordigt een website waarvan de metagegevens zijn geschraapt",
+            "displayType": "webpagina"
+        }
     }
 }

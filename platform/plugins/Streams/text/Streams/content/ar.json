@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "دعوة في الوقت الحقيقي",
             "description": "في الوقت الحقيقي مكالمة فيديو \/ الصوت"
+        },
+        "Streams\/tasks": {
+            "description": "فئة للمهام",
+            "displayType": "مهام"
+        },
+        "Streams\/experience": {
+            "description": "تجربة مشتركة لأعضاء المجتمع",
+            "displayType": "تجربة مشتركة لأفراد المجتمع"
+        },
+        "Streams\/greeting": {
+            "description": "التحية التي يمكن للمستخدم تقديم أنفسهم",
+            "displayType": "تحية"
         }
     },
     "messages": {

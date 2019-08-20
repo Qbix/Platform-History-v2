@@ -26,5 +26,39 @@
             "StartConversation": "Sāciet sarunu",
             "GotoConversation": "Dodieties uz Sarunu"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "HTML dokuments, kuru var apskatīt un rediģēt dažādi lietotāji",
+            "displayType": "Raksts"
+        },
+        "Websites\/slide": {
+            "description": "Prezentācijas slaids, var ietvert HTML, audio utt.",
+            "displayType": "Slidkalniņš"
+        },
+        "Websites\/presentation": {
+            "description": "Prezentācija, kas sastāv no dažādiem slaidiem",
+            "displayType": "Prezentācija"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Reklāmas vienība vietnē",
+            "displayType": "Reklāmas vienība"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Reklāmas vienību grupēšanas veids zem nosaukuma",
+            "displayType": "Sludinājumu izvietošana"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Reklāmas saturs",
+            "displayType": "Reklāma radoša"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Reklāmas kampaņa",
+            "displayType": "Reklāmas kampaņa"
+        },
+        "Websites\/webpage": {
+            "description": "Pārstāv vietni, kuras metadati tika nokasīti",
+            "displayType": "Web lapa"
+        }
     }
 }

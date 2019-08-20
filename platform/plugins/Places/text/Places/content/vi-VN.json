@@ -54,5 +54,35 @@
         "exist": "Khu vực đã tồn tại",
         "addNewArea": "Thêm khu vực mới",
         "add": "Thêm vào"
+    },
+    "types": {
+        "Places/locations": {
+            "description": "một bộ sưu tập các địa điểm",
+            "displayType": "Địa điểm"
+        },
+        "Places/location": {
+            "description": "Đại diện cho một tòa nhà, địa điểm, tàu, công viên, vv",
+            "displayType": "Vị trí"
+        },
+        "Places/area": {
+            "description": "Đại diện cho một khu vực trong một vị trí, chẳng hạn như một căn phòng hoặc bộ",
+            "displayType": "Khu vực"
+        },
+        "Places/floor": {
+            "description": "Đại diện cho một tầng trong một tòa nhà hoặc tàu",
+            "displayType": "Sàn nhà"
+        },
+        "Places/column": {
+            "description": "Đại diện cho một cột trong tòa nhà hoặc tàu",
+            "displayType": "Cột"
+        },
+        "Places/nearby": {
+            "description": "Danh mục cho những thứ trong một khoảng cách nhất định của geohash",
+            "displayType": "Những nơi gần đó"
+        },
+        "Places/interest": {
+            "description": "Danh mục cho những thứ trong một khoảng cách nhất định của geohash, phù hợp với sở thích",
+            "displayType": "Địa điểm quan tâm"
+        }
     }
 }

@@ -26,5 +26,39 @@
             "StartConversation": "సంభాషణను ప్రారంభించండి",
             "GotoConversation": "సంభాషణకు వెళ్లండి"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "వివిధ వినియోగదారులు వీక్షించగల మరియు సవరించగల ఒక HTML పత్రం",
+            "displayType": "వ్యాసం"
+        },
+        "Websites\/slide": {
+            "description": "ప్రదర్శనలో ఒక స్లయిడ్, HTML, ఆడియో మొదలైన వాటిని కలిగి ఉంటుంది.",
+            "displayType": "స్లయిడ్"
+        },
+        "Websites\/presentation": {
+            "description": "వివిధ స్లైడ్‌లతో కూడిన ప్రదర్శన",
+            "displayType": "ప్రదర్శన"
+        },
+        "Websites\/advert\/unit": {
+            "description": "వెబ్‌సైట్‌లో ప్రకటనల యూనిట్",
+            "displayType": "ప్రకటన యూనిట్"
+        },
+        "Websites\/advert\/placement": {
+            "description": "ప్రకటనల యూనిట్లను పేరుతో సమూహపరిచే మార్గం",
+            "displayType": "ప్రకటన ప్లేస్‌మెంట్"
+        },
+        "Websites\/advert\/creative": {
+            "description": "ప్రకటన కోసం కంటెంట్",
+            "displayType": "సృజనాత్మకంగా ప్రకటన చేయండి"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "ప్రకటనల ప్రచారం",
+            "displayType": "ప్రచారాన్ని ప్రచారం చేయండి"
+        },
+        "Websites\/webpage": {
+            "description": "మెటాడేటా స్క్రాప్ చేయబడిన వెబ్‌సైట్‌ను సూచిస్తుంది",
+            "displayType": "వెబ్ పేజీ"
+        }
     }
 }

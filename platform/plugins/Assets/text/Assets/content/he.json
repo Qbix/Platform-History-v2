@@ -67,5 +67,19 @@
             "displayType": "שירות",
             "description": "השירות המוצע"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "הרווחו {{amount}} נקודות זכות"
+        },
+        "Assets\/credits\/spent": {
+            "content": "הוצא קרדיט {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "נשלחו {{amount}} זיכויים"
+        },
+        "Assets\/credits\/received": {
+            "content": "קיבלו זיכוי של {{amount}}"
+        }
     }
 }

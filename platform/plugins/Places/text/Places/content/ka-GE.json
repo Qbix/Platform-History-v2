@@ -54,5 +54,35 @@
         "exist": "ფართობი უკვე არსებობს",
         "addNewArea": "ახალი ფართობი დამატება",
         "add": "დამატება"
+    },
+    "types": {
+        "Places/locations": {
+            "description": "ადგილმდებარეობების კოლექცია",
+            "displayType": "ადგილები"
+        },
+        "Places/location": {
+            "description": "წარმოადგენს შენობას, ადგილს, გემს, პარკს და ა.შ.",
+            "displayType": "ადგილმდებარეობა"
+        },
+        "Places/area": {
+            "description": "წარმოადგენს ადგილს, როგორიცაა ოთახი ან ლუქსი",
+            "displayType": "ფართობი"
+        },
+        "Places/floor": {
+            "description": "წარმოადგენს იატაკს შენობაში ან გემში",
+            "displayType": "სართული"
+        },
+        "Places/column": {
+            "description": "წარმოადგენს სვეტს შენობაში ან გემში",
+            "displayType": "სვეტი"
+        },
+        "Places/nearby": {
+            "description": "კატეგორიისთვის geohash– ის გარკვეულ მანძილზე",
+            "displayType": "ადგილების მახლობლად"
+        },
+        "Places/interest": {
+            "description": "კატეგორიისთვის geohash– ის გარკვეულ მანძილზე, ინტერესის შესაბამისი",
+            "displayType": "ინტერესს იწვევს"
+        }
     }
 }

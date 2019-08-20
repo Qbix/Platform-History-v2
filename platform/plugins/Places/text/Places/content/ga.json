@@ -54,5 +54,35 @@
         "exist": "Tá an limistéar ann cheana féin",
         "addNewArea": "Cuir limistéar nua leis",
         "add": "Cuir leis"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "bailiúchán suíomhanna",
+            "displayType": "Suíomhanna"
+        },
+        "Places\/location": {
+            "description": "Is foirgneamh, ionad, long, páirc, etc.",
+            "displayType": "Suíomh"
+        },
+        "Places\/area": {
+            "description": "Is ionann é agus limistéar laistigh de shuíomh, mar sheomra nó seomra",
+            "displayType": "Achar"
+        },
+        "Places\/floor": {
+            "description": "Is ionann é agus urlár in fhoirgneamh nó i long",
+            "displayType": "Urlár"
+        },
+        "Places\/column": {
+            "description": "Is colún é i bhfoirgneamh nó i long",
+            "displayType": "Colún"
+        },
+        "Places\/nearby": {
+            "description": "Catagóir le haghaidh rudaí laistigh de achar áirithe geohash",
+            "displayType": "In aice le háiteanna"
+        },
+        "Places\/interest": {
+            "description": "Catagóir le haghaidh rudaí laistigh de achar áirithe geo-shash, ag teacht le leas",
+            "displayType": "Suíonn sé suim"
+        }
     }
 }

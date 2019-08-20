@@ -54,5 +54,35 @@
         "exist": "المنطقة موجودة بالفعل",
         "addNewArea": "أضف منطقة جديدة",
         "add": "إضافة"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "مجموعة من المواقع",
+            "displayType": "مواقع"
+        },
+        "Places\/location": {
+            "description": "يمثل مبنى ، مكان ، سفينة ، حديقة ، إلخ.",
+            "displayType": "موقعك"
+        },
+        "Places\/area": {
+            "description": "يمثل منطقة داخل الموقع ، مثل الغرفة أو الجناح",
+            "displayType": "منطقة"
+        },
+        "Places\/floor": {
+            "description": "يمثل أرضية في مبنى أو سفينة",
+            "displayType": "أرضية"
+        },
+        "Places\/column": {
+            "description": "يمثل عمودًا في مبنى أو سفينة",
+            "displayType": "عمود"
+        },
+        "Places\/nearby": {
+            "description": "فئة للأشياء ضمن مسافة معينة من geohash",
+            "displayType": "الاماكن المجاورة"
+        },
+        "Places\/interest": {
+            "description": "فئة للأشياء ضمن مسافة معينة من geohash ، مطابقة الاهتمام",
+            "displayType": "مصلحة الأماكن"
+        }
     }
 }

@@ -67,5 +67,19 @@
             "displayType": "apkalpošana",
             "description": "tiek piedāvāts pakalpojums"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "Nopelnīti {{amount}} kredīti"
+        },
+        "Assets/credits/spent": {
+            "content": "Izlietoti {{amount}} kredīti"
+        },
+        "Assets/credits/sent": {
+            "content": "Nosūtītie {{amount}} kredīti"
+        },
+        "Assets/credits/received": {
+            "content": "Saņemti {{amount}} kredīti"
+        }
     }
 }

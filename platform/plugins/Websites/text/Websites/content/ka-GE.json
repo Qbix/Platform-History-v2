@@ -26,5 +26,39 @@
             "StartConversation": "დაიწყეთ საუბარი",
             "GotoConversation": "გადადით საუბარში"
         }
+    },
+    "types": {
+        "Websites/article": {
+            "description": "HTML დოკუმენტი, რომელსაც სხვადასხვა მომხმარებელს შეუძლია ნახოს და შეცვალოს",
+            "displayType": "მუხლი"
+        },
+        "Websites/slide": {
+            "description": "პრეზენტაციის სლაიდი, შეიძლება შეიცავდეს HTML, აუდიო და ა.შ.",
+            "displayType": "სლაიდი"
+        },
+        "Websites/presentation": {
+            "description": "პრეზენტაცია, რომელიც შედგება სხვადასხვა სლაიდებისგან",
+            "displayType": "პრეზენტაცია"
+        },
+        "Websites/advert/unit": {
+            "description": "ვებ – გვერდზე სარეკლამო განყოფილება",
+            "displayType": "სარეკლამო განყოფილება"
+        },
+        "Websites/advert/placement": {
+            "description": "სარეკლამო ერთეულების დასახელების მეთოდი",
+            "displayType": "რეკლამის განთავსება"
+        },
+        "Websites/advert/creative": {
+            "description": "შინაარსის რეკლამა",
+            "displayType": "რეკლამა კრეატიული"
+        },
+        "Websites/advert/campaign": {
+            "description": "სარეკლამო კამპანია",
+            "displayType": "სარეკლამო კამპანია"
+        },
+        "Websites/webpage": {
+            "description": "წარმოადგენს ვებსაიტს, რომლის მეტამონაცემებიც დაიშალა",
+            "displayType": "ვებ გვერდი"
+        }
     }
 }

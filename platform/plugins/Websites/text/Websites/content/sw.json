@@ -26,5 +26,39 @@
             "StartConversation": "Anza Majadiliano",
             "GotoConversation": "Nenda kwenye Mazungumzo"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Hati ya HTML ambayo watumiaji mbalimbali wanaweza kutazama na kuhariri",
+            "displayType": "Kifungu"
+        },
+        "Websites\/slide": {
+            "description": "Slaidi katika uwasilishaji, inaweza kujumuisha HTML, sauti nk.",
+            "displayType": "Slide"
+        },
+        "Websites\/presentation": {
+            "description": "Uwasilishaji unaojumuisha slaidi kadhaa",
+            "displayType": "Uwasilishaji"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Sehemu ya matangazo kwenye wavuti",
+            "displayType": "Kitengo cha matangazo"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Njia ya kuweka vikundi vya matangazo chini ya jina",
+            "displayType": "Kuwekwa kwa matangazo"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Yaliyomo kwa tangazo",
+            "displayType": "Matangazo ya ubunifu"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Kampeni ya matangazo",
+            "displayType": "Kampeni ya matangazo"
+        },
+        "Websites\/webpage": {
+            "description": "Inarudisha tovuti ambayo metadata yake ilichorwa",
+            "displayType": "Ukurasa wa wavuti"
+        }
     }
 }

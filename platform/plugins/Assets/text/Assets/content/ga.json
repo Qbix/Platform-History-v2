@@ -67,5 +67,19 @@
             "displayType": "Seirbhís",
             "description": "seirbhís á tairiscint"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Creidmheasanna tuillte {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Creidmheasanna a caitheadh {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Seolta {{amount}} creidmheasanna"
+        },
+        "Assets\/credits\/received": {
+            "content": "Creidmheasanna faighte {{amount}}"
+        }
     }
 }

@@ -67,5 +67,19 @@
             "displayType": "Teenindus",
             "description": "pakutav teenus"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "Teenitud {{amount}} krediiti"
+        },
+        "Assets/credits/spent": {
+            "content": "Kulutatud {{amount}} krediiti"
+        },
+        "Assets/credits/sent": {
+            "content": "Saadetud {{amount}} krediiti"
+        },
+        "Assets/credits/received": {
+            "content": "Saanud {{amount}} krediiti"
+        }
     }
 }

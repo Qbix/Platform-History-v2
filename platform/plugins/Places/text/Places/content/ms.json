@@ -54,5 +54,35 @@
         "exist": "Kawasan sudah ada",
         "addNewArea": "Tambah kawasan baru",
         "add": "Tambah"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "koleksi lokasi",
+            "displayType": "Lokasi"
+        },
+        "Places\/location": {
+            "description": "Mewakili bangunan, tempat, kapal, taman, dll.",
+            "displayType": "Lokasi"
+        },
+        "Places\/area": {
+            "description": "Mewakili kawasan dalam lokasi, seperti bilik atau suite",
+            "displayType": "Kawasan"
+        },
+        "Places\/floor": {
+            "description": "Mewakili lantai di dalam bangunan atau kapal",
+            "displayType": "Lantai"
+        },
+        "Places\/column": {
+            "description": "Merupakan lajur dalam bangunan atau kapal",
+            "displayType": "Kolum"
+        },
+        "Places\/nearby": {
+            "description": "Kategori untuk perkara dalam jarak tertentu geohash",
+            "displayType": "Berhampiran dengan tempat"
+        },
+        "Places\/interest": {
+            "description": "Kategori untuk perkara dalam jarak tertentu geohash, sepadan dengan minat",
+            "displayType": "Kepentingan tempat"
+        }
     }
 }

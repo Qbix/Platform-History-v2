@@ -54,5 +54,35 @@
         "exist": "Obszar już istnieje",
         "addNewArea": "Dodaj nowy obszar",
         "add": "Dodaj"
+    },
+    "types": {
+        "Places/locations": {
+            "description": "zbiór lokalizacji",
+            "displayType": "Lokalizacje"
+        },
+        "Places/location": {
+            "description": "Reprezentuje budynek, miejsce, statek, park itp.",
+            "displayType": "Lokalizacja"
+        },
+        "Places/area": {
+            "description": "Reprezentuje obszar w danej lokalizacji, taki jak pokój lub apartament",
+            "displayType": "Powierzchnia"
+        },
+        "Places/floor": {
+            "description": "Reprezentuje podłogę w budynku lub statku",
+            "displayType": "Podłoga"
+        },
+        "Places/column": {
+            "description": "Reprezentuje kolumnę w budynku lub statku",
+            "displayType": "Kolumna"
+        },
+        "Places/nearby": {
+            "description": "Kategoria dla rzeczy w pewnej odległości od geohash",
+            "displayType": "Miejsca w pobliżu"
+        },
+        "Places/interest": {
+            "description": "Kategoria dla rzeczy w pewnej odległości od geohash, pasujących do zainteresowań",
+            "displayType": "Miejsca zainteresowania"
+        }
     }
 }

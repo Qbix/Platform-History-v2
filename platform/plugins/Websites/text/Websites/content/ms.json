@@ -26,5 +26,39 @@
             "StartConversation": "Mula Perbualan",
             "GotoConversation": "Pergi ke Perbualan"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Dokumen HTML yang boleh dilihat dan diedit oleh pelbagai pengguna",
+            "displayType": "Artikel"
+        },
+        "Websites\/slide": {
+            "description": "Slaid dalam persembahan, boleh menyertakan HTML, audio dan sebagainya.",
+            "displayType": "Gelongsor"
+        },
+        "Websites\/presentation": {
+            "description": "Persembahan yang terdiri daripada pelbagai slaid",
+            "displayType": "Persembahan"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Unit pengiklanan di laman web",
+            "displayType": "Unit iklan"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Cara mengumpul unit pengiklanan di bawah nama",
+            "displayType": "Penempatan iklan"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Kandungan untuk iklan",
+            "displayType": "Kreatif iklan"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Kempen pengiklanan",
+            "displayType": "Kempen iklan"
+        },
+        "Websites\/webpage": {
+            "description": "Merangkumi laman web yang metadata dikikis",
+            "displayType": "laman sesawang"
+        }
     }
 }

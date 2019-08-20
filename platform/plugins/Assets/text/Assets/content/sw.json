@@ -67,5 +67,19 @@
             "displayType": "Huduma",
             "description": "huduma inayotolewa"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Amepata mikopo {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Alitumia mikopo {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Imetumwa {{amount}} mikopo"
+        },
+        "Assets\/credits\/received": {
+            "content": "Imepokea mikopo ya {{amount}}"
+        }
     }
 }

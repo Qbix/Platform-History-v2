@@ -67,5 +67,19 @@
             "displayType": "Servei",
             "description": "servei que s’ofereix"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Obtinguts {{amount}} crèdits"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Es van gastar {{amount}} crèdits"
+        },
+        "Assets\/credits\/sent": {
+            "content": "S&#39;han enviat {{amount}} crèdits"
+        },
+        "Assets\/credits\/received": {
+            "content": "S&#39;han rebut {{amount}} crèdits"
+        }
     }
 }

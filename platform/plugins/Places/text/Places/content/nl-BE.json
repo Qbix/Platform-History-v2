@@ -54,5 +54,35 @@
         "exist": "Gebied bestaat al",
         "addNewArea": "Voeg een nieuw gebied toe",
         "add": "Toevoegen"
+    },
+    "types": {
+        "Places/locations": {
+            "description": "een verzameling locaties",
+            "displayType": "locaties"
+        },
+        "Places/location": {
+            "description": "Vertegenwoordigt een gebouw, locatie, schip, park, etc.",
+            "displayType": "Plaats"
+        },
+        "Places/area": {
+            "description": "Vertegenwoordigt een gebied binnen een locatie, zoals een kamer of suite",
+            "displayType": "Gebied"
+        },
+        "Places/floor": {
+            "description": "Vertegenwoordigt een vloer in een gebouw of schip",
+            "displayType": "Verdieping"
+        },
+        "Places/column": {
+            "description": "Vertegenwoordigt een kolom in een gebouw of schip",
+            "displayType": "Kolom"
+        },
+        "Places/nearby": {
+            "description": "Categorie voor dingen binnen een bepaalde afstand van een geohash",
+            "displayType": "Plaatsen in de buurt"
+        },
+        "Places/interest": {
+            "description": "Categorie voor dingen binnen een bepaalde afstand van een geohash, die overeenkomen met een interesse",
+            "displayType": "Plaatsen interesseren"
+        }
     }
 }

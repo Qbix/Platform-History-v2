@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Realtidssamtal",
             "description": "ett realtidsvideo / ljudsamtal"
+        },
+        "Streams/tasks": {
+            "description": "kategori för uppgifter",
+            "displayType": "uppgifter"
+        },
+        "Streams/experience": {
+            "description": "en gemensam upplevelse för medlemmar i ett samhälle",
+            "displayType": "Vanlig erfarenhet för medlemmar i ett samhälle"
+        },
+        "Streams/greeting": {
+            "description": "hälsning som en användare kan presentera sig med",
+            "displayType": "Hälsning"
         }
     },
     "messages": {

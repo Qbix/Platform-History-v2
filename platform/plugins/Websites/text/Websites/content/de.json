@@ -26,5 +26,39 @@
             "StartConversation": "Konversation starten",
             "GotoConversation": "Gehe zum Gespräch"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Ein HTML-Dokument, das verschiedene Benutzer anzeigen und bearbeiten können",
+            "displayType": "Artikel"
+        },
+        "Websites\/slide": {
+            "description": "Eine Folie in einer Präsentation kann HTML, Audio usw. enthalten.",
+            "displayType": "Rutschen"
+        },
+        "Websites\/presentation": {
+            "description": "Eine Präsentation bestehend aus verschiedenen Folien",
+            "displayType": "Präsentation"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Eine Werbeeinheit auf einer Website",
+            "displayType": "Anzeigeeinheit"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Eine Möglichkeit, Werbeeinheiten unter einem Namen zu gruppieren",
+            "displayType": "Anzeigenplatzierung"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Inhalt für eine Anzeige",
+            "displayType": "Werbekreativ"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Eine Werbekampagne",
+            "displayType": "Werbekampagne"
+        },
+        "Websites\/webpage": {
+            "description": "Stellt eine Website dar, deren Metadaten erfasst wurden",
+            "displayType": "Website"
+        }
     }
 }

@@ -67,5 +67,19 @@
             "displayType": "సర్వీస్",
             "description": "సేవ అందిస్తున్నారు"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "{{amount}} క్రెడిట్‌లను సంపాదించింది"
+        },
+        "Assets\/credits\/spent": {
+            "content": "{{amount}} క్రెడిట్‌లను ఖర్చు చేశారు"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{{amount}} క్రెడిట్‌లను పంపారు"
+        },
+        "Assets\/credits\/received": {
+            "content": "{{amount}} క్రెడిట్‌లను అందుకున్నారు"
+        }
     }
 }
