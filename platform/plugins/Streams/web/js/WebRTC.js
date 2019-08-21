@@ -764,11 +764,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						}
 					);
 				});
-				//WebRTCconference = webRTC
-				console.log('WebRTCconference', WebRTCconference)
-				window.WebConf = WebRTCconference;
-				window.webRTCInstance = webRTCInstance;
-				window.WebRTCconferencee = WebRTCconference;
 			}
 
 			var findScript = function (src) {
@@ -1655,7 +1650,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				activeScreen = null;
 
 				var elements = toggleScreensClass('regularScreensGrid');
-				console.log('renderDesktopScreensGrid typeof', typeof _layoutTool.getLayoutGenerator('regularScreensGrid') == 'undefined')
 				if(!_layoutTool.getLayoutGenerator('regularScreensGrid')) {
 					_layoutTool.setLayoutGenerator('regularScreensGrid', function (container, count) {
 						return customLayouts.regularScreensGrid(document.body, WebRTCconference.screens());
@@ -2460,7 +2454,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					_options.element.appendChild(roomsMedia);
 					_roomsMedia = roomsMedia;
 					if(_options.element != document.body)_options.element.dataset.webrtcContainer = true;
-					console.log('latoutTool', _layoutTool)
 					Q.activate(
 						Q.Tool.setUpElement(
 							_roomsMedia, // or pass an existing element

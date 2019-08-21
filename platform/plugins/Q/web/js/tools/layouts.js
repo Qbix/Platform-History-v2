@@ -15,18 +15,22 @@ Q.Tool.define('Q/layouts', function (options) {
 
 	var tool = this;
 	var state = this.state;
-
 },
 
 {
 	elementToWrap: null,
 	alternativeContainer: null,
+	customGenerators: [],
 	filter: null,
 	key: null,
 	onLayout: new Q.Event()
 }, 
 
 {
+	Q:{
+		beforeRemove: function () {
+		}
+	},
 	/**
 	 * Sets a function to generate a layout
 	 * @method setLayoutGenerator
@@ -35,6 +39,7 @@ Q.Tool.define('Q/layouts', function (options) {
 	 */
 	setLayoutGenerator: function (key, generator) {
 		_generators[key] = generator;
+		this.state.customGenerators.push(key);
 	},
 	/**
 	 * Gets a layout generator that was added
@@ -42,6 +47,17 @@ Q.Tool.define('Q/layouts', function (options) {
 	 */
 	getLayoutGenerator: function (key) {
 		return _generators[key];
+	},
+	/**
+	 * Clears custom generators of current tool instance when it is being removed from page
+	 * @method clearCustomGenerators
+	 */
+	clearCustomGenerators: function(){
+		for(var i in this.state.customGenerators) {
+			var name = this.state.customGenerators[i];
+			delete _generators[name];
+		}
+		this.state.customGenerators = [];
 	},
 	/**
 	 * Applies a layout
