@@ -54,5 +54,35 @@
         "exist": "Alue on jo olemassa",
         "addNewArea": "Lisää uusi alue",
         "add": "Lisätä"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "kokoelma sijainteja",
+            "displayType": "Toimipaikat"
+        },
+        "Places\/location": {
+            "description": "Edustaa rakennusta, tapahtumapaikkaa, laivaa, puistoa jne.",
+            "displayType": "Sijainti"
+        },
+        "Places\/area": {
+            "description": "Esittää alueen tietyn alueen, kuten huone tai sviitti",
+            "displayType": "alue"
+        },
+        "Places\/floor": {
+            "description": "Esittää rakennuksen tai laivan lattian",
+            "displayType": "Lattia"
+        },
+        "Places\/column": {
+            "description": "Esittää sarakkeen rakennuksessa tai aluksessa",
+            "displayType": "sarake"
+        },
+        "Places\/nearby": {
+            "description": "Luokka asioille, jotka sijaitsevat tietyllä etäisyydellä geohashista",
+            "displayType": "Lähellä paikkoja"
+        },
+        "Places\/interest": {
+            "description": "Luokka asioille, jotka sijaitsevat tietyllä etäisyydellä geohashista ja vastaavat kiinnostuksen kohteita",
+            "displayType": "Paikat mielenkiintoa"
+        }
     }
 }

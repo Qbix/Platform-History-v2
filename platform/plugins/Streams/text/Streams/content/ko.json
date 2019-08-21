@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "실시간 통화",
             "description": "실시간 화상 \/ 음성 통화"
+        },
+        "Streams\/tasks": {
+            "description": "작업 카테고리",
+            "displayType": "작업"
+        },
+        "Streams\/experience": {
+            "description": "공동체 구성원들에게 공통된 경험",
+            "displayType": "커뮤니티 회원을위한 공통 경험"
+        },
+        "Streams\/greeting": {
+            "description": "사용자가 자신을 소개 할 수있는 인사말",
+            "displayType": "인사"
         }
     },
     "messages": {

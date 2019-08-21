@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "రియల్ టైమ్ కాల్",
             "description": "రియల్ టైమ్ వీడియో / ఆడియో కాల్"
+        },
+        "Streams/tasks": {
+            "description": "పనుల కోసం వర్గం",
+            "displayType": "పనులు"
+        },
+        "Streams/experience": {
+            "description": "సంఘం సభ్యులకు ఒక సాధారణ అనుభవం",
+            "displayType": "సంఘం సభ్యులకు సాధారణ అనుభవం"
+        },
+        "Streams/greeting": {
+            "description": "ఒక వినియోగదారు తమను తాము పరిచయం చేసుకోగలిగే గ్రీటింగ్",
+            "displayType": "గ్రీటింగ్"
         }
     },
     "messages": {

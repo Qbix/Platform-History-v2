@@ -32,6 +32,7 @@
  * @param {string} [$fields.icon] defaults to ""
  * @param {string} [$fields.url] defaults to null
  * @param {string} [$fields.pincodeHash] defaults to null
+ * @param {string} [$fields.salt] defaults to null
  * @param {string} [$fields.preferredLanguage] defaults to "en"
  */
 abstract class Base_Users_User extends Db_Row
@@ -131,6 +132,12 @@ abstract class Base_Users_User extends Db_Row
 	 * @type string
 	 * @default null
 	 * a smaller security code for when user is already logged in
+	 */
+	/**
+	 * @property $salt
+	 * @type string
+	 * @default null
+	 * 
 	 */
 	/**
 	 * @property $preferredLanguage
@@ -1194,6 +1201,60 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_salt
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_salt($value)
+	{
+		if (!isset($value)) {
+			return array('salt', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('salt', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".salt");
+		if (strlen($value) > 63)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".salt");
+		return array('salt', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the salt field
+	 * @return {integer}
+	 */
+	function maxSize_salt()
+	{
+
+		return 63;			
+	}
+
+	/**
+	 * Returns schema information for salt column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_salt()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '63',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_preferredLanguage
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -1263,7 +1324,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('id', 'insertedTime', 'updatedTime', 'sessionId', 'sessionCount', 'passphraseHash', 'emailAddress', 'mobileNumber', 'xids', 'emailAddressPending', 'mobileNumberPending', 'signedUpWith', 'username', 'icon', 'url', 'pincodeHash', 'preferredLanguage');
+		$field_names = array('id', 'insertedTime', 'updatedTime', 'sessionId', 'sessionCount', 'passphraseHash', 'emailAddress', 'mobileNumber', 'xids', 'emailAddressPending', 'mobileNumberPending', 'signedUpWith', 'username', 'icon', 'url', 'pincodeHash', 'salt', 'preferredLanguage');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

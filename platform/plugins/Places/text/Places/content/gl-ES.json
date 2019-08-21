@@ -54,5 +54,35 @@
         "exist": "A área xa existe",
         "addNewArea": "Engadir nova área",
         "add": "Engadir"
+    },
+    "types": {
+        "Places/locations": {
+            "description": "unha colección de localizacións",
+            "displayType": "Localizacións"
+        },
+        "Places/location": {
+            "description": "Representa un edificio, sede, nave, parque, etc.",
+            "displayType": "Localización"
+        },
+        "Places/area": {
+            "description": "Representa unha área dentro dunha localización, como unha habitación ou suite",
+            "displayType": "Area"
+        },
+        "Places/floor": {
+            "description": "Representa un piso nun edificio ou nave",
+            "displayType": "Piso"
+        },
+        "Places/column": {
+            "description": "Representa unha columna nun edificio ou nave",
+            "displayType": "Columna"
+        },
+        "Places/nearby": {
+            "description": "Categoría de cousas a unha certa distancia dun xeohash",
+            "displayType": "Cerca de lugares"
+        },
+        "Places/interest": {
+            "description": "Categoría de cousas a unha certa distancia dun xeohash, correspondendo a un interese",
+            "displayType": "Lugares de interese"
+        }
     }
 }

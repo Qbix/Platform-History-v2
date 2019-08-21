@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "রিয়েল-টাইম কল",
             "description": "একটি বাস্তব সময়ের ভিডিও / অডিও কল"
+        },
+        "Streams/tasks": {
+            "description": "কাজের জন্য বিভাগ",
+            "displayType": "কাজ"
+        },
+        "Streams/experience": {
+            "description": "একটি সম্প্রদায়ের সদস্যদের জন্য একটি সাধারণ অভিজ্ঞতা",
+            "displayType": "কোনও সম্প্রদায়ের সদস্যদের জন্য সাধারণ অভিজ্ঞতা"
+        },
+        "Streams/greeting": {
+            "description": "অভিবাদন যা দিয়ে একজন ব্যবহারকারী তাদের পরিচয় দিতে পারে",
+            "displayType": "অভিবাদন"
         }
     },
     "messages": {

@@ -1133,7 +1133,7 @@
 			step2_form = setupResendForm(false);
 		}
 
-		var userIdHash = response.slots.data.exists;
+		var salt = response.slots.data.salt;
 
 		function onFormSubmit(event) {
 			var $this = $(this);
@@ -1158,7 +1158,7 @@
 				var v = p.val();
 				if (v) {
 					if (!/^[0-9a-f]{40}$/i.test(v)) {
-						p.val(CryptoJS.SHA1(p.val() + "\t" + userIdHash));
+						p.val(CryptoJS.SHA1(p.val() + "\t" + salt));
 					}
 					$('#Users_login_isHashed').attr('value', 1);
 				} else {
@@ -2474,7 +2474,7 @@
 	
 	Q.Socket.onConnect('Users').set(function (socket, ns, url) {
 		Q.loadNonce(function () {
-			socket.emit('Users/session', Q.sessionId(), Q.clientId(), function () {
+			socket.emit('Users/user', Q.Users.loggedInUserId(), Q.clientId(), function () {
 				Q.handle(Users.Socket.onSession);
 			});
 		});

@@ -54,5 +54,35 @@
         "exist": "Zone existe déjà",
         "addNewArea": "Ajouter une nouvelle zone",
         "add": "Ajouter"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "une collection de lieux",
+            "displayType": "Emplacements"
+        },
+        "Places\/location": {
+            "description": "Représente un bâtiment, un lieu, un bateau, un parc, etc.",
+            "displayType": "Emplacement"
+        },
+        "Places\/area": {
+            "description": "Représente une zone au sein d&#39;un emplacement, telle qu&#39;une chambre ou une suite",
+            "displayType": "Zone"
+        },
+        "Places\/floor": {
+            "description": "Représente un étage dans un bâtiment ou un navire",
+            "displayType": "Sol"
+        },
+        "Places\/column": {
+            "description": "Représente une colonne dans un bâtiment ou un navire",
+            "displayType": "Colonne"
+        },
+        "Places\/nearby": {
+            "description": "Catégorie d&#39;objets situés à une certaine distance d&#39;un geohash",
+            "displayType": "Lieux à proximité"
+        },
+        "Places\/interest": {
+            "description": "Catégorie pour les objets situés à une certaine distance d&#39;un geohash, correspondant à un intérêt",
+            "displayType": "Lieux d&#39;intérêt"
+        }
     }
 }

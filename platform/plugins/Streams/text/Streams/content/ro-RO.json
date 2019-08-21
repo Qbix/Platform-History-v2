@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Apel în timp real",
             "description": "un apel video / audio în timp real"
+        },
+        "Streams/tasks": {
+            "description": "categoria pentru sarcini",
+            "displayType": "Sarcini"
+        },
+        "Streams/experience": {
+            "description": "o experiență comună pentru membrii unei comunități",
+            "displayType": "Experiență comună pentru membrii unei comunități"
+        },
+        "Streams/greeting": {
+            "description": "salut cu care un utilizator se poate prezenta",
+            "displayType": "Salut"
         }
     },
     "messages": {

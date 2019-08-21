@@ -67,5 +67,19 @@
             "displayType": "Service",
             "description": "service der tilbydes"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Optjent {{amount}} credits"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Brugte {{amount}} kreditter"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Sendte {{amount}} kreditter"
+        },
+        "Assets\/credits\/received": {
+            "content": "Modtaget {{amount}} kreditter"
+        }
     }
 }

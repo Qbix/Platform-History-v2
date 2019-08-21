@@ -67,5 +67,19 @@
             "displayType": "சேவை",
             "description": "சேவை வழங்கப்படுகிறது"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "{{amount}} வரவுகளை சம்பாதித்தார்"
+        },
+        "Assets/credits/spent": {
+            "content": "{{amount}} வரவுகளை செலவிட்டார்"
+        },
+        "Assets/credits/sent": {
+            "content": "{{amount}} வரவுகளை அனுப்பியது"
+        },
+        "Assets/credits/received": {
+            "content": "{{amount}} வரவுகளைப் பெற்றது"
+        }
     }
 }

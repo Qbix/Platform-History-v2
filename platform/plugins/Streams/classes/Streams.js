@@ -415,10 +415,19 @@ Streams.listen = function (options, servers) {
 			return;
 		}
 		client.alreadyListeningStreams = true;
+
 		client.on('Streams/observe',
-		function (sessionId, clientId, publisherId, streamName, fn) {
-			if (!_validateSessionId(sessionId, fn)) {
-				return;
+		function (clientId, capability, publisherId, streamName, fn) {
+			var now = Date.now() / 1000;
+			if (!capability || !Q.Utils.validate(capability)
+			|| Q.isEmpty(capability.permissions)
+			|| capability.startTime > now
+			|| capability.endTime < now
+			|| capability.permissions.indexOf('observe') < 0) {
+				return fn && fn({
+					type: 'Users.Exception.NotAuthorized',
+					message: 'Not Authorized'
+				});
 			}
 			if (typeof publisherId !== 'string'
 			|| typeof streamName !== 'string') {
@@ -469,10 +478,8 @@ Streams.listen = function (options, servers) {
 			});
 		});
 		client.on('Streams/neglect',
-		function (sessionId, clientId, publisherId, streamName, fn) {
-			if (!_validateSessionId(sessionId, fn)) {
-				return;
-			}
+		function (clientId, capability, publisherId, streamName, fn) {
+			console.log(arguments);
 			var o = Streams.observers;
 			if (!Q.getObject([publisherId, streamName, client.id], o)) {
 				return fn && fn(null, false);

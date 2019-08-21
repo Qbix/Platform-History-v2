@@ -54,5 +54,35 @@
         "exist": "منطقه در حال حاضر وجود دارد",
         "addNewArea": "اضافه کردن منطقه جدید",
         "add": "اضافه کردن"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "مجموعه ای از مکان ها",
+            "displayType": "مکانها"
+        },
+        "Places\/location": {
+            "description": "نمایندگی یک ساختمان ، محل برگزاری ، کشتی ، پارک و غیره",
+            "displayType": "محل"
+        },
+        "Places\/area": {
+            "description": "یک منطقه در یک مکان ، مانند یک اتاق یا مجموعه را نشان می دهد",
+            "displayType": "حوزه"
+        },
+        "Places\/floor": {
+            "description": "یک طبقه در یک ساختمان یا کشتی را نشان می دهد",
+            "displayType": "کف"
+        },
+        "Places\/column": {
+            "description": "ستونی را در یک ساختمان یا کشتی نشان می دهد",
+            "displayType": "ستون"
+        },
+        "Places\/nearby": {
+            "description": "طبقه بندی چیزهایی که در فاصله مشخصی از geohash قرار دارند",
+            "displayType": "نزدیک مکانها"
+        },
+        "Places\/interest": {
+            "description": "طبقه بندی چیزهایی که در فاصله مشخصی از geohash قرار می گیرند ، با یک علاقه مطابقت دارند",
+            "displayType": "مکانهای مورد علاقه"
+        }
     }
 }

@@ -54,5 +54,35 @@
         "exist": "Żona diġà teżisti",
         "addNewArea": "Żid żona ġdida",
         "add": "Żid"
+    },
+    "types": {
+        "Places/locations": {
+            "description": "ġabra ta &#39;lokalitajiet",
+            "displayType": "Lokalitajiet"
+        },
+        "Places/location": {
+            "description": "Jirrappreżenta bini, post, vapur, park, eċċ.",
+            "displayType": "Post"
+        },
+        "Places/area": {
+            "description": "Jirrappreżenta żona f&#39;post, bħal kamra jew suite",
+            "displayType": "Qasam"
+        },
+        "Places/floor": {
+            "description": "Jirrappreżenta sular f&#39;bini jew vapur",
+            "displayType": "Sular"
+        },
+        "Places/column": {
+            "description": "Jirrappreżenta kolonna f&#39;bini jew vapur",
+            "displayType": "Kolonna"
+        },
+        "Places/nearby": {
+            "description": "Kategorija għal affarijiet f&#39;ċerta distanza ta &#39;ġeohash",
+            "displayType": "Postijiet viċin"
+        },
+        "Places/interest": {
+            "description": "Kategorija għal affarijiet f&#39;ċerta distanza ta &#39;ġeohash, li taqbel ma&#39; interess",
+            "displayType": "Postijiet ta &#39;interess"
+        }
     }
 }

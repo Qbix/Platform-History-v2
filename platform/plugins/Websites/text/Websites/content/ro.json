@@ -26,5 +26,39 @@
             "StartConversation": "Porniți conversația",
             "GotoConversation": "Accesați conversația"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Un document HTML pe care diverși utilizatori îl pot vizualiza și edita",
+            "displayType": "Articol"
+        },
+        "Websites\/slide": {
+            "description": "Un diapozitiv într-o prezentare, poate include HTML, audio etc.",
+            "displayType": "diapozitiv"
+        },
+        "Websites\/presentation": {
+            "description": "Prezentare formată din diverse diapozitive",
+            "displayType": "Prezentare"
+        },
+        "Websites\/advert\/unit": {
+            "description": "O unitate de publicitate de pe un site web",
+            "displayType": "Unitate de reclamă"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Un mod de a grupa unități publicitare sub un nume",
+            "displayType": "Plasare la reclamă"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Conținut pentru o reclamă",
+            "displayType": "Publicitate creativă"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "O campanie publicitară",
+            "displayType": "Campania de publicitate"
+        },
+        "Websites\/webpage": {
+            "description": "Reprezintă un site web ale cărui metadate au fost razuite",
+            "displayType": "pagină web"
+        }
     }
 }

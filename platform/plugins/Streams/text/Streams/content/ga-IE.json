@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Glao Fíor-Ama",
             "description": "glao físe / fuaime fíor-ama"
+        },
+        "Streams/tasks": {
+            "description": "catagóir le haghaidh tascanna",
+            "displayType": "Tascanna"
+        },
+        "Streams/experience": {
+            "description": "taithí choiteann do bhaill an phobail",
+            "displayType": "Taithí choiteann do bhaill an phobail"
+        },
+        "Streams/greeting": {
+            "description": "beannú ar féidir le húsáideoir iad féin a thabhairt isteach",
+            "displayType": "Beannacht"
         }
     },
     "messages": {

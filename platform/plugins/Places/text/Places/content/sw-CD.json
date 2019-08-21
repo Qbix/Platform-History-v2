@@ -54,5 +54,35 @@
         "exist": "Eneo tayari lipo",
         "addNewArea": "Ongeza eneo jipya",
         "add": "Ongeza"
+    },
+    "types": {
+        "Places/locations": {
+            "description": "mkusanyiko wa maeneo",
+            "displayType": "Maeneo"
+        },
+        "Places/location": {
+            "description": "Inarudisha jengo, ukumbi, meli, mbuga, nk.",
+            "displayType": "Mahali"
+        },
+        "Places/area": {
+            "description": "Inarudisha eneo katika eneo, kama chumba au chumba",
+            "displayType": "Eneo"
+        },
+        "Places/floor": {
+            "description": "Inarudisha sakafu katika jengo au meli",
+            "displayType": "Sakafu"
+        },
+        "Places/column": {
+            "description": "Inarudisha safu katika jengo au meli",
+            "displayType": "Safu"
+        },
+        "Places/nearby": {
+            "description": "Jamii ya vitu katika umbali fulani wa geohash",
+            "displayType": "Karibu na maeneo"
+        },
+        "Places/interest": {
+            "description": "Jamii ya vitu katika umbali fulani wa geohashi, inayolingana na riba",
+            "displayType": "Sehemu za riba"
+        }
     }
 }

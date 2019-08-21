@@ -94,7 +94,7 @@ class Q_Text
 		}
 		$basename = self::basename($options);
 		$filename = "text/$name/$basename.json";
-		if (self::$get[$filename]) {
+		if (!empty(self::$get[$filename])) {
 			return self::$get[$filename];
 		}
 		$config = Q_Config::get('Q', 'text', '*', array());

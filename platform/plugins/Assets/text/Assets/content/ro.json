@@ -67,5 +67,19 @@
             "displayType": "Serviciu",
             "description": "serviciul oferit"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Câștigat {{amount}} credite"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Au cheltuit {{amount}} credite"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Trimise {{amount}} credite"
+        },
+        "Assets\/credits\/received": {
+            "content": "A primit {{amount}} credite"
+        }
     }
 }

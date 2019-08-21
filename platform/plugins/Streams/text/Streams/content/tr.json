@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "Gerçek Zamanlı Çağrı",
             "description": "gerçek zamanlı video \/ sesli arama"
+        },
+        "Streams\/tasks": {
+            "description": "görevler için kategori",
+            "displayType": "Görevler"
+        },
+        "Streams\/experience": {
+            "description": "Bir topluluğun üyeleri için ortak bir deneyim",
+            "displayType": "Bir topluluğun üyeleri için ortak deneyim"
+        },
+        "Streams\/greeting": {
+            "description": "Bir kullanıcının kendini tanıtabileceği karşılama",
+            "displayType": "Tebrik"
         }
     },
     "messages": {

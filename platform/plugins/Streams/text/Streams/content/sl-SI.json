@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Klic v realnem času",
             "description": "video / zvočni klic v realnem času"
+        },
+        "Streams/tasks": {
+            "description": "kategorija za naloge",
+            "displayType": "Naloge"
+        },
+        "Streams/experience": {
+            "description": "skupna izkušnja članov skupnosti",
+            "displayType": "Skupne izkušnje za člane skupnosti"
+        },
+        "Streams/greeting": {
+            "description": "pozdrav, s katerim se lahko uporabnik predstavi",
+            "displayType": "Lep pozdrav"
         }
     },
     "messages": {

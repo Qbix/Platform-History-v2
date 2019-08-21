@@ -26,5 +26,39 @@
             "StartConversation": "بدء المحادثة",
             "GotoConversation": "اذهب إلى المحادثة"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "مستند HTML يمكن للعديد من المستخدمين عرضه وتعديله",
+            "displayType": "مقالة - سلعة"
+        },
+        "Websites\/slide": {
+            "description": "شريحة في عرض تقديمي ، يمكن أن تتضمن HTML ، صوت إلخ.",
+            "displayType": "الانزلاق"
+        },
+        "Websites\/presentation": {
+            "description": "عرض تقديمي يتكون من عدة شرائح",
+            "displayType": "عرض"
+        },
+        "Websites\/advert\/unit": {
+            "description": "وحدة إعلانية على موقع الويب",
+            "displayType": "وحدة الإعلان"
+        },
+        "Websites\/advert\/placement": {
+            "description": "طريقة لتجميع الوحدات الإعلانية تحت اسم",
+            "displayType": "الإعلان التنسيب"
+        },
+        "Websites\/advert\/creative": {
+            "description": "محتوى الإعلان",
+            "displayType": "الإعلان الإبداعي"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "حملة إعلانية",
+            "displayType": "أعلن الحملة"
+        },
+        "Websites\/webpage": {
+            "description": "يمثل موقع ويب تم إلغاء بيانات التعريف الخاصة به",
+            "displayType": "صفحة ويب"
+        }
     }
 }

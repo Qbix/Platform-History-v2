@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Звонок в реальном времени",
             "description": "видео / аудио звонок в реальном времени"
+        },
+        "Streams/tasks": {
+            "description": "категория для задач",
+            "displayType": "Задачи"
+        },
+        "Streams/experience": {
+            "description": "общий опыт для членов сообщества",
+            "displayType": "Общий опыт для членов сообщества"
+        },
+        "Streams/greeting": {
+            "description": "приветствие, с которым пользователь может представиться",
+            "displayType": "Приветствие"
         }
     },
     "messages": {

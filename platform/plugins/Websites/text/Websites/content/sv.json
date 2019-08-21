@@ -26,5 +26,39 @@
             "StartConversation": "Starta konversationen",
             "GotoConversation": "Gå till konversation"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Ett HTML-dokument som olika användare kan visa och redigera",
+            "displayType": "Artikel"
+        },
+        "Websites\/slide": {
+            "description": "En bild i en presentation kan innehålla HTML, ljud etc.",
+            "displayType": "Glida"
+        },
+        "Websites\/presentation": {
+            "description": "En presentation bestående av olika bilder",
+            "displayType": "Presentation"
+        },
+        "Websites\/advert\/unit": {
+            "description": "En annonseringsenhet på en webbplats",
+            "displayType": "Annonsenhet"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Ett sätt att gruppera annonseringsenheter under ett namn",
+            "displayType": "Annonsplacering"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Innehåll för en annons",
+            "displayType": "Annons kreativ"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "En reklamkampanj",
+            "displayType": "Annonskampanj"
+        },
+        "Websites\/webpage": {
+            "description": "Representerar en webbplats vars metadata har skrapats",
+            "displayType": "webbsida"
+        }
     }
 }

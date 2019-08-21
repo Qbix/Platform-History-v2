@@ -26,5 +26,39 @@
             "StartConversation": "உரையாடலைத் தொடங்குங்கள்",
             "GotoConversation": "உரையாடலுக்குச் செல்லவும்"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "பல்வேறு பயனர்கள் பார்க்க மற்றும் திருத்தக்கூடிய ஒரு HTML ஆவணம்",
+            "displayType": "கட்டுரை"
+        },
+        "Websites\/slide": {
+            "description": "விளக்கக்காட்சியில் ஒரு ஸ்லைடு, HTML, ஆடியோ போன்றவற்றை சேர்க்கலாம்.",
+            "displayType": "ஸ்லைடு"
+        },
+        "Websites\/presentation": {
+            "description": "பல்வேறு ஸ்லைடுகளைக் கொண்ட விளக்கக்காட்சி",
+            "displayType": "வழங்கல்"
+        },
+        "Websites\/advert\/unit": {
+            "description": "ஒரு வலைத்தளத்தில் ஒரு விளம்பர அலகு",
+            "displayType": "விளம்பர அலகு"
+        },
+        "Websites\/advert\/placement": {
+            "description": "விளம்பர அலகுகளை ஒரு பெயரில் தொகுக்கும் ஒரு வழி",
+            "displayType": "விளம்பரம்"
+        },
+        "Websites\/advert\/creative": {
+            "description": "விளம்பரத்திற்கான உள்ளடக்கம்",
+            "displayType": "ஆக்கப்பூர்வமாக விளம்பரம் செய்யுங்கள்"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "ஒரு விளம்பர பிரச்சாரம்",
+            "displayType": "விளம்பர பிரச்சாரம்"
+        },
+        "Websites\/webpage": {
+            "description": "மெட்டாடேட்டா ஸ்கிராப் செய்யப்பட்ட வலைத்தளத்தை குறிக்கிறது",
+            "displayType": "வலைப்பக்கம்"
+        }
     }
 }

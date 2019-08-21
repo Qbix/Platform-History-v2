@@ -67,5 +67,19 @@
             "displayType": "Usługa",
             "description": "oferowana usługa"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "Zdobył {{amount}} punktów"
+        },
+        "Assets/credits/spent": {
+            "content": "Wydano {{amount}} kredytów"
+        },
+        "Assets/credits/sent": {
+            "content": "Wysłano {{amount}} kredytów"
+        },
+        "Assets/credits/received": {
+            "content": "Otrzymał {{amount}} kredytów"
+        }
     }
 }

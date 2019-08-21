@@ -67,5 +67,19 @@
             "displayType": "Servis",
             "description": "usluga koja se nudi"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "Zarađeno {{amount}} kredita"
+        },
+        "Assets/credits/spent": {
+            "content": "Potrošite {{amount}} kredita"
+        },
+        "Assets/credits/sent": {
+            "content": "Poslano {{amount}} kredita"
+        },
+        "Assets/credits/received": {
+            "content": "Primljeno je {{amount}} kredita"
+        }
     }
 }

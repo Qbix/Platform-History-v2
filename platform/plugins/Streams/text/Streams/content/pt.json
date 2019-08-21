@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "Chamada em Tempo Real",
             "description": "uma chamada de vídeo \/ áudio em tempo real"
+        },
+        "Streams\/tasks": {
+            "description": "categoria para tarefas",
+            "displayType": "Tarefas"
+        },
+        "Streams\/experience": {
+            "description": "uma experiência comum para os membros de uma comunidade",
+            "displayType": "Experiência comum para membros de uma comunidade"
+        },
+        "Streams\/greeting": {
+            "description": "saudação com a qual um usuário pode se apresentar",
+            "displayType": "Cumprimento"
         }
     },
     "messages": {

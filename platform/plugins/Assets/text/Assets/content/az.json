@@ -67,5 +67,19 @@
             "displayType": "Xidmət",
             "description": "xidmət təklif olunur"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Qazanılmış {{amount}} kredit"
+        },
+        "Assets\/credits\/spent": {
+            "content": "{{amount}} kreditləri sərf etdi"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{{amount}} kredit göndərdi"
+        },
+        "Assets\/credits\/received": {
+            "content": "{{amount}} kredit aldı"
+        }
     }
 }

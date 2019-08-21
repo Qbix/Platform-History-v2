@@ -1573,11 +1573,16 @@ class Q_Response
 	 * @param {string} $name The name of the cookie
 	 * @param {string} $value The value of the cookie
 	 * @param {string} [$expires=0] The number of seconds since the epoch, 0 means expire when browser session ends
-	 * @param {string} [$path=false] You can specify a path on the server here for the cookie
+	 * @param {string} [$path=null] You can specify a path on the server here for the cookie
+	 * @param {boolean} [$secure=false] Making the cookie secure
+	 * @param {boolean} [$httponly=false] Make the cookie http only
 	 * @return {string}
 	 */
-	static function setCookie($name, $value, $expires = 0, $path = false)
-	{
+	static function setCookie(
+		$name, $value, $expires = 0,
+		$path = null, $domain = null,
+		$secure = false, $httponly = false
+	) {
 		if (empty($_SERVER['HTTP_HOST'])) {
 			Q::log('Warning: Ignoring call to Q_Response::setCookie() without $_SERVER["HTTP_HOST"]'.PHP_EOL);
 			return false;
@@ -1589,7 +1594,7 @@ class Q_Response
 			throw new Q_Exception("Q_Response::setCookie must be called before Q/response event");
 		}
 		// see https://bugs.php.net/bug.php?id=38104
-		self::$cookies[$name] = array($value, $expires, $path);
+		self::$cookies[$name] = array($value, $expires, $path, $domain, $secure, $httponly);
 		$_COOKIE[$name] = $value;
 		return $value;
 	}
@@ -1619,8 +1624,8 @@ class Q_Response
 			return;
 		}
 		foreach (self::$cookies as $name => $args) {
-			list($value, $expires, $path) = $args;
-			self::_cookie($name, $value, $expires, $path);
+			list($value, $expires, $path, $domain, $secure, $httponly) = $args;
+			self::_cookie($name, $value, $expires, $path, $domain, $secure, $httponly);
 		}
 		$header = '';
 		$header = Q::event('Q/Response/sendCookieHeaders',
@@ -1646,12 +1651,12 @@ class Q_Response
 		flush();
 	}
 	
-	protected static function _cookie($name, $value, $expires, $path)
+	protected static function _cookie($name, $value, $expires, $path, $domain, $secure, $httponly)
 	{
 		$parts = parse_url(Q_Request::baseUrl());
 		$path = $path ? $path : (!empty($parts['path']) ? $parts['path'] : '/');
-		$domain = (strpos($parts['host'], '.') !== false ? '.' : '').$parts['host'];
-		setcookie($name, $value, $expires, $path, $domain);
+		$domain2 = $domain ? $domain : (strpos($parts['host'], '.') !== false ? '.' : '').$parts['host'];
+		setcookie($name, $value, $expires, $path, $domain2, $secure, $httponly);
 	}
 
 	/**

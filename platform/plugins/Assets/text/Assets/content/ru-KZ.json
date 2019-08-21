@@ -67,5 +67,19 @@
             "displayType": "обслуживание",
             "description": "предлагаемая услуга"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "Заработанные {{amount}} кредиты"
+        },
+        "Assets/credits/spent": {
+            "content": "Потрачено {{amount}} кредитов"
+        },
+        "Assets/credits/sent": {
+            "content": "Отправлено {{amount}} кредитов"
+        },
+        "Assets/credits/received": {
+            "content": "Получено {{amount}} кредитов"
+        }
     }
 }

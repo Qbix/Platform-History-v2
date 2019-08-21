@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "Κλήση σε πραγματικό χρόνο",
             "description": "μια κλήση βίντεο \/ ήχου σε πραγματικό χρόνο"
+        },
+        "Streams\/tasks": {
+            "description": "κατηγορία για εργασίες",
+            "displayType": "Καθήκοντα"
+        },
+        "Streams\/experience": {
+            "description": "μια κοινή εμπειρία για μέλη μιας κοινότητας",
+            "displayType": "Κοινή εμπειρία για μέλη μιας κοινότητας"
+        },
+        "Streams\/greeting": {
+            "description": "χαιρετισμό με τον οποίο ο χρήστης μπορεί να παρουσιαστεί",
+            "displayType": "Χαιρετισμός"
         }
     },
     "messages": {

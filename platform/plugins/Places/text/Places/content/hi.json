@@ -54,5 +54,35 @@
         "exist": "क्षेत्र पहले से मौजूद है",
         "addNewArea": "नया क्षेत्र जोड़ें",
         "add": "जोड़ना"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "स्थानों का एक संग्रह",
+            "displayType": "स्थान"
+        },
+        "Places\/location": {
+            "description": "एक इमारत, स्थल, जहाज, पार्क, आदि का प्रतिनिधित्व करता है।",
+            "displayType": "स्थान"
+        },
+        "Places\/area": {
+            "description": "एक स्थान के भीतर एक क्षेत्र का प्रतिनिधित्व करता है, जैसे कि एक कमरा या सुइट",
+            "displayType": "क्षेत्र"
+        },
+        "Places\/floor": {
+            "description": "एक इमारत या जहाज में एक फर्श का प्रतिनिधित्व करता है",
+            "displayType": "मंज़िल"
+        },
+        "Places\/column": {
+            "description": "एक इमारत या जहाज में एक स्तंभ का प्रतिनिधित्व करता है",
+            "displayType": "स्तंभ"
+        },
+        "Places\/nearby": {
+            "description": "एक जियोश की निश्चित दूरी के भीतर चीजों के लिए श्रेणी",
+            "displayType": "निकटवर्ती स्थान"
+        },
+        "Places\/interest": {
+            "description": "एक ब्याज के साथ एक जियोहश की एक निश्चित दूरी के भीतर चीजों के लिए श्रेणी",
+            "displayType": "ब्याज देता है"
+        }
     }
 }

@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Valós idejű hívás",
             "description": "valós idejű video / audio hívás"
+        },
+        "Streams/tasks": {
+            "description": "feladatok kategóriája",
+            "displayType": "feladatok"
+        },
+        "Streams/experience": {
+            "description": "közös élmény a közösség tagjai számára",
+            "displayType": "Közös tapasztalat a közösség tagjai számára"
+        },
+        "Streams/greeting": {
+            "description": "üdvözlet, amellyel a felhasználó bemutathatja magát",
+            "displayType": "Üdvözlet"
         }
     },
     "messages": {

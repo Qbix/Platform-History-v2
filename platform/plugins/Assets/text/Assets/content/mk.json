@@ -67,5 +67,19 @@
             "displayType": "Сервис",
             "description": "услугата што се нуди"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Заработени {99 999 its кредити"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Потрошени кредити од 99 999"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Испрати {999 кредити"
+        },
+        "Assets\/credits\/received": {
+            "content": "Доби кредити од 99 999 99"
+        }
     }
 }

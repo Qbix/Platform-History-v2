@@ -67,5 +67,19 @@
             "displayType": "บริการ",
             "description": "บริการถูกนำเสนอ"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "รับ {{amount}} หน่วยกิต"
+        },
+        "Assets/credits/spent": {
+            "content": "ใช้ไป {{amount}} หน่วยกิต"
+        },
+        "Assets/credits/sent": {
+            "content": "ส่ง {{amount}} หน่วยกิต"
+        },
+        "Assets/credits/received": {
+            "content": "รับ {{amount}} หน่วยกิต"
+        }
     }
 }

@@ -26,5 +26,39 @@
             "StartConversation": "شروع مکالمه",
             "GotoConversation": "برو به مکالمه"
         }
+    },
+    "types": {
+        "Websites/article": {
+            "description": "یک سند HTML که کاربران مختلف می توانند آن را مشاهده و ویرایش کنند",
+            "displayType": "مقاله"
+        },
+        "Websites/slide": {
+            "description": "اسلایدها در یک ارائه ، می تواند شامل HTML ، صوتی و غیره باشد.",
+            "displayType": "اسلاید"
+        },
+        "Websites/presentation": {
+            "description": "ارائه ای متشکل از اسلایدهای مختلف",
+            "displayType": "ارائه"
+        },
+        "Websites/advert/unit": {
+            "description": "یک واحد تبلیغاتی در وب سایت",
+            "displayType": "واحد تبلیغات"
+        },
+        "Websites/advert/placement": {
+            "description": "راهی برای گروه بندی واحدهای تبلیغاتی تحت یک نام",
+            "displayType": "قرار دادن آگهی"
+        },
+        "Websites/advert/creative": {
+            "description": "محتوای یک آگهی",
+            "displayType": "تبلیغات خلاقانه"
+        },
+        "Websites/advert/campaign": {
+            "description": "یک تبلیغات تبلیغاتی",
+            "displayType": "تبلیغات تبلیغاتی"
+        },
+        "Websites/webpage": {
+            "description": "وب سایتی را نشان می دهد که ابرداده های آن حذف شده است",
+            "displayType": "صفحه وب"
+        }
     }
 }

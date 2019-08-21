@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "リアルタイム通話",
             "description": "リアルタイムのビデオ/オーディオコール"
+        },
+        "Streams/tasks": {
+            "description": "タスクのカテゴリ",
+            "displayType": "タスク"
+        },
+        "Streams/experience": {
+            "description": "コミュニティのメンバーに共通の経験",
+            "displayType": "コミュニティのメンバーの一般的な経験"
+        },
+        "Streams/greeting": {
+            "description": "ユーザーが自己紹介できる挨拶",
+            "displayType": "挨拶"
         }
     },
     "messages": {

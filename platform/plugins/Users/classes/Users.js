@@ -37,7 +37,7 @@ Q.makeEventEmitter(Users);
  * @property sessions
  * @type {Object}
  */
-Users.sessions = {};
+// Users.sessions = {};
 
 /**
  * Store clients
@@ -72,40 +72,40 @@ Users.communitySuffix = function() {
 	return Q.Config.get(['Users', 'community', 'suffix'], null);
 };
 
-/**
- * Gets a user (from database if needed) associated with sessionId and passes it to callback.
- * @method userFromSession
- * @param sessionId {string}
- *	User's session Id
- * @param callback {function}
- *  Passes a Users.User object, or null if the the user wasn't found
- */
-Users.userFromSession = function (sessionId, callback) {
-	if (Users.sessions[sessionId]) {
-		var user = Q.getObject([sessionId, 'Users', 'loggedInUser'], Users.sessions) || null;
-		callback && callback(user);
-	} else {
-		Users.Session.SELECT('*').where({
-			id: sessionId
-		}).execute(function(err, results){
-			if (!results || results.length === 0) {
-				return callback(null, null);
-			}
-			if (results[0].fields.content === undefined) {
-				Q.log(err, results);
-				throw new Q.Error("Users.userFromSession session.fields.content is undefined");
-			}
-			var sess = JSON.parse(results[0].fields.content);
-			
-			if (!Q.isSet(sess, ['Users', 'loggedInUser'])) {
-				callback(null);
-			} else {
-				Users.sessions[sessionId] = { Users: sess.Users };
-				callback(sess.Users.loggedInUser, sess.Q && sess.Q.nonce);
-			}
-		});
-	}
-};
+// /**
+//  * Gets a user (from database if needed) associated with sessionId and passes it to callback.
+//  * @method userFromSession
+//  * @param sessionId {string}
+//  *	User's session Id
+//  * @param callback {function}
+//  *  Passes a Users.User object, or null if the the user wasn't found
+//  */
+// Users.userFromSession = function (sessionId, callback) {
+// 	if (Users.sessions[sessionId]) {
+// 		var user = Q.getObject([sessionId, 'Users', 'loggedInUser'], Users.sessions) || null;
+// 		callback && callback(user);
+// 	} else {
+// 		Users.Session.SELECT('*').where({
+// 			id: sessionId
+// 		}).execute(function(err, results){
+// 			if (!results || results.length === 0) {
+// 				return callback(null, null);
+// 			}
+// 			if (results[0].fields.content === undefined) {
+// 				Q.log(err, results);
+// 				throw new Q.Error("Users.userFromSession session.fields.content is undefined");
+// 			}
+// 			var sess = JSON.parse(results[0].fields.content);
+//
+// 			if (!Q.isSet(sess, ['Users', 'loggedInUser'])) {
+// 				callback(null);
+// 			} else {
+// 				Users.sessions[sessionId] = { Users: sess.Users };
+// 				callback(sess.Users.loggedInUser, sess.Q && sess.Q.nonce);
+// 			}
+// 		});
+// 	}
+// };
 
 /**
  * Start internal listener for Users plugin and open socket<br/>
@@ -213,17 +213,17 @@ function Users_request_handler(req, res, next) {
 				badge: 0
 			});
 			break;
-		case 'Users/session':
-            var sid = parsed.sessionId;
-            var content = parsed.content ? JSON.parse(parsed.content) : null;
-			if (content !== null) {
-				console.log((Users.sessions[sid] ? "Update" : "New") + " session from PHP: " + sid);
-				Users.sessions[sid] = content;
-			} else {
-				delete Users.sessions[sid];
-				console.log("Deleted session from PHP: " + sid);
-			}
-			break;
+		// case 'Users/session':
+		//             var sid = parsed.sessionId;
+		//             var content = parsed.content ? JSON.parse(parsed.content) : null;
+		// 	if (content !== null) {
+		// 		console.log((Users.sessions[sid] ? "Update" : "New") + " session from PHP: " + sid);
+		// 		Users.sessions[sid] = content;
+		// 	} else {
+		// 		delete Users.sessions[sid];
+		// 		console.log("Deleted session from PHP: " + sid);
+		// 	}
+		// 	break;
 		case 'Users/sendMessage':
 			/*
 			 * Required: view, emailAddress or mobile number
@@ -269,20 +269,23 @@ Users.Socket = {
 				return;
 			}
 			client.alreadyListening = true;
-			client.on('Users/session', function (sessionId, clientId) {
-				Users.userFromSession(sessionId, function (user) {
+			client.on('Users/user', function (userId, clientId) {
+				if (!userId) {
+					// force disconnect
+					client.disconnect();
+				}
+				Users.fetch(userId, function (err) {
+					var user = this;
 					if (!user) {
 						// force disconnect
 						client.disconnect();
 						return;
 					}
-					var userId = user.id;
 					if (!Users.clients[userId]) {
 						Users.clients[userId] = {};
 					}
 					var wasOnline = !Q.isEmpty(Users.User.clientsOnline(userId));
 					client.userId = userId;
-					client.sessionId = sessionId;
 					client.clientId = clientId;
 					Users.clients[userId][client.id] = client;
 					if (timeouts[userId]) {
@@ -294,7 +297,7 @@ Users.Socket = {
 					 * Reconnections before disconnect timeout don't count.
 					 * @event connected
 					 * @param {Socket} client
-					 *	The connecting client. Contains userId, sessionId, clientId
+					 *	The connecting client. Contains userId, clientId
 					 * @param {Boolean} online
 					 *	Whether any other clients were online for the user before this
 					 */
@@ -353,22 +356,16 @@ Users.Socket = {
 	 * @param {String} userId The id of the user
 	 * @param {String} event The name of the event the socket client should emit
 	 * @param {Object} data Any data to accompany this event name
-	 * @param {Object} excludeSessionIds={}
-	 *	Optional object containing {sessionId: true} for any session ids to skip
-	 *  while emitting the event.
 	 * @return {Boolean} Whether any socket clients were connected at all
 	 */
-	emitToUser: function(userId, event, data, excludeSessionIds) {
+	emitToUser: function(userId, event, data) {
 		var clients = Users.User.clientsOnline(userId);
 		if (Q.isEmpty(clients)) {
 			return false;
 		}
 		for (var cid in clients) {
 			var client = clients[cid];
-			if (excludeSessionIds && excludeSessionIds[client.sessionId]) {
-				continue;
-			}
-			client.emit(event, data);
+			client && client.emit(event, data);
 		}
 		return true;
 	},

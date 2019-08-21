@@ -1,0 +1,5 @@
+ALTER TABLE {$prefix}user
+ADD COLUMN salt varbinary(63) NULL DEFAULT NULL AFTER pincodeHash;
+
+UPDATE {$prefix}user
+SET salt = (SELECT LEFT(MD5(id), 32));

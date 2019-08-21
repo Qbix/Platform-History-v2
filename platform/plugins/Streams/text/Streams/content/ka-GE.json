@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "რეალურ დროში ზარი",
             "description": "რეალურ დროში ვიდეო / აუდიო ზარი"
+        },
+        "Streams/tasks": {
+            "description": "დავალებების კატეგორია",
+            "displayType": "Დავალებები"
+        },
+        "Streams/experience": {
+            "description": "საერთო გამოცდილება საზოგადოების წევრებისთვის",
+            "displayType": "საზოგადოების გამოცდილება საზოგადოების წევრებისთვის"
+        },
+        "Streams/greeting": {
+            "description": "მისალოცი, რომელზეც მომხმარებელს შეუძლია გააცნოს საკუთარი თავი",
+            "displayType": "მისალმება"
         }
     },
     "messages": {

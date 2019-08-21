@@ -30,9 +30,15 @@ class Users_ExternalFrom_Ios extends Users_ExternalFrom implements Users_Externa
 			? $appInfo['appId']
 			: '';
 
-		$udid = Q::ifset($_COOKIE, 'Q_udid', null);
+		$udid = Q::ifset($_REQUEST, 'Q_udid', null);
 		if (!$udid) {
-			return null;
+			$udid = Q::ifset($_COOKIE, 'Q_udid', null);
+			if (!$udid) {
+				return null;
+			}
+		}
+		if ($setCookie) {
+			Q_Response::setCookie("Q_udid", $udid, 0);
 		}
 		$ef = new Users_ExternalFrom_Ios();
 		// note that $ef->userId was not set

@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Panggilan Masa Nyata",
             "description": "panggilan video / audio masa nyata"
+        },
+        "Streams/tasks": {
+            "description": "kategori untuk tugas",
+            "displayType": "Tugas"
+        },
+        "Streams/experience": {
+            "description": "pengalaman biasa untuk ahli komuniti",
+            "displayType": "Pengalaman biasa untuk ahli komuniti"
+        },
+        "Streams/greeting": {
+            "description": "salam dengan mana pengguna boleh memperkenalkan diri mereka",
+            "displayType": "Salam"
         }
     },
     "messages": {

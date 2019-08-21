@@ -54,5 +54,35 @@
         "exist": "Platība jau pastāv",
         "addNewArea": "Pievienot jaunu apgabalu",
         "add": "Pievienot"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "vietu kolekcija",
+            "displayType": "Vietas"
+        },
+        "Places\/location": {
+            "description": "Attēlo ēku, norises vietu, kuģi, parku utt.",
+            "displayType": "Atrašanās vieta"
+        },
+        "Places\/area": {
+            "description": "Apzīmē apgabalu noteiktā vietā, piemēram, istabu vai komplektu",
+            "displayType": "Apgabals"
+        },
+        "Places\/floor": {
+            "description": "Attēlo grīdu ēkā vai kuģī",
+            "displayType": "Stāvs"
+        },
+        "Places\/column": {
+            "description": "Apzīmē kolonnu ēkā vai kuģī",
+            "displayType": "Sleja"
+        },
+        "Places\/nearby": {
+            "description": "Kategorija lietām, kas atrodas noteiktā attālumā no ģeoša",
+            "displayType": "Netālu no vietām"
+        },
+        "Places\/interest": {
+            "description": "Kategorija lietām, kas atrodas noteiktā ģeogrāfiskās atrašanās vietas attālumā un atbilst interesēm",
+            "displayType": "Vietas interese"
+        }
     }
 }

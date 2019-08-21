@@ -54,5 +54,35 @@
         "exist": "Area bestaan reeds",
         "addNewArea": "Voeg nuwe area by",
         "add": "Voeg"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "&#39;n versameling plekke",
+            "displayType": "plekke"
+        },
+        "Places\/location": {
+            "description": "Verteenwoordig &#39;n gebou, lokaal, skip, park, ens.",
+            "displayType": "plek"
+        },
+        "Places\/area": {
+            "description": "Verteenwoordig &#39;n gebied op &#39;n plek, soos &#39;n kamer of suite",
+            "displayType": "gebied"
+        },
+        "Places\/floor": {
+            "description": "Stel &#39;n vloer in &#39;n gebou of skip voor",
+            "displayType": "vloer"
+        },
+        "Places\/column": {
+            "description": "Stel &#39;n kolom in &#39;n gebou of skip voor",
+            "displayType": "kolom"
+        },
+        "Places\/nearby": {
+            "description": "Kategorie vir dinge binne &#39;n sekere afstand van &#39;n geohash",
+            "displayType": "Naby plekke"
+        },
+        "Places\/interest": {
+            "description": "Kategorie vir dinge binne &#39;n sekere afstand van &#39;n geohash, wat ooreenstem met &#39;n belangstelling",
+            "displayType": "Plaas belangstelling"
+        }
     }
 }

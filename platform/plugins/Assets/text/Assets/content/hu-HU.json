@@ -67,5 +67,19 @@
             "displayType": "Szolgáltatás",
             "description": "szolgáltatást kínálnak"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "Keressen {{amount}} kredit"
+        },
+        "Assets/credits/spent": {
+            "content": "Kihasznált {{amount}} kredit"
+        },
+        "Assets/credits/sent": {
+            "content": "Elküldött {{amount}} kredit"
+        },
+        "Assets/credits/received": {
+            "content": "Kapott {{amount}} kredit"
+        }
     }
 }

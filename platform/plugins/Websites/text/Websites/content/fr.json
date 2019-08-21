@@ -26,5 +26,39 @@
             "StartConversation": "Démarrer la conversation",
             "GotoConversation": "Aller à la conversation"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Un document HTML que différents utilisateurs peuvent voir et éditer",
+            "displayType": "Article"
+        },
+        "Websites\/slide": {
+            "description": "Une diapositive dans une présentation peut inclure HTML, audio, etc.",
+            "displayType": "Faire glisser"
+        },
+        "Websites\/presentation": {
+            "description": "Une présentation composée de différentes diapositives",
+            "displayType": "Présentation"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Une unité de publicité sur un site web",
+            "displayType": "Unité d&#39;annonce"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Une façon de regrouper des unités publicitaires sous un nom",
+            "displayType": "Placement d&#39;annonce"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Contenu d&#39;une publicité",
+            "displayType": "Création publicitaire"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Une campagne publicitaire",
+            "displayType": "Campagne publicitaire"
+        },
+        "Websites\/webpage": {
+            "description": "Représente un site Web dont les métadonnées ont été supprimées.",
+            "displayType": "page Web"
+        }
     }
 }

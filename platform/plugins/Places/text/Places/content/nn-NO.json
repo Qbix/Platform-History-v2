@@ -54,5 +54,35 @@
         "exist": "Området eksisterer allerede",
         "addNewArea": "Legg til nytt område",
         "add": "Legg til"
+    },
+    "types": {
+        "Places/locations": {
+            "description": "en samling steder",
+            "displayType": "steder"
+        },
+        "Places/location": {
+            "description": "Representerer et bygg, sted, skip, park osv.",
+            "displayType": "plassering"
+        },
+        "Places/area": {
+            "description": "Representerer et område på et sted, for eksempel et rom eller suite",
+            "displayType": "Område"
+        },
+        "Places/floor": {
+            "description": "Representerer en etasje i en bygning eller et skip",
+            "displayType": "Gulv"
+        },
+        "Places/column": {
+            "description": "Representerer en kolonne i en bygning eller et skip",
+            "displayType": "Kolonne"
+        },
+        "Places/nearby": {
+            "description": "Kategori for ting innenfor en viss avstand fra en geohash",
+            "displayType": "I nærheten av steder"
+        },
+        "Places/interest": {
+            "description": "Kategori for ting innenfor en viss avstand fra en geohash, som samsvarer med en interesse",
+            "displayType": "Steder interesse"
+        }
     }
 }

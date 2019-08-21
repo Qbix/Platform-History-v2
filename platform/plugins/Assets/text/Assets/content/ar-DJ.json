@@ -67,5 +67,19 @@
             "displayType": "الخدمات",
             "description": "الخدمة المقدمة"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "حصل على {{amount}} ائتمانات"
+        },
+        "Assets/credits/spent": {
+            "content": "الاعتمادات المستهلكة {{amount}}"
+        },
+        "Assets/credits/sent": {
+            "content": "أرسلت {{amount}} ائتمانات"
+        },
+        "Assets/credits/received": {
+            "content": "تلقى {{amount}} ائتمانات"
+        }
     }
 }

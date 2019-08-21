@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "ریئل ٹائم کال",
             "description": "ایک ریئل ٹائم ویڈیو \/ آڈیو کال۔"
+        },
+        "Streams\/tasks": {
+            "description": "کاموں کے لئے زمرہ۔",
+            "displayType": "ٹاسک"
+        },
+        "Streams\/experience": {
+            "description": "معاشرے کے ممبروں کے لئے ایک مشترکہ تجربہ۔",
+            "displayType": "معاشرے کے ممبروں کے لئے مشترکہ تجربہ۔"
+        },
+        "Streams\/greeting": {
+            "description": "سلام ہے جس کے ساتھ کوئی صارف اپنا تعارف کروا سکتا ہے۔",
+            "displayType": "سلام۔"
         }
     },
     "messages": {

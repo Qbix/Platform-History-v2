@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Chamada en tempo real",
             "description": "unha videochamada en tempo real"
+        },
+        "Streams/tasks": {
+            "description": "categoría para tarefas",
+            "displayType": "Tarefas"
+        },
+        "Streams/experience": {
+            "description": "unha experiencia común para os membros dunha comunidade",
+            "displayType": "Experiencia común para membros dunha comunidade"
+        },
+        "Streams/greeting": {
+            "description": "saúdo co que un usuario pode presentarse",
+            "displayType": "Saúdo"
         }
     },
     "messages": {

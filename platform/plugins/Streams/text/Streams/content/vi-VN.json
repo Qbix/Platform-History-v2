@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Cuộc gọi thời gian thực",
             "description": "một cuộc gọi video / âm thanh thời gian thực"
+        },
+        "Streams/tasks": {
+            "description": "thể loại cho các nhiệm vụ",
+            "displayType": "Nhiệm vụ"
+        },
+        "Streams/experience": {
+            "description": "một kinh nghiệm chung cho các thành viên của một cộng đồng",
+            "displayType": "Kinh nghiệm chung cho các thành viên của cộng đồng"
+        },
+        "Streams/greeting": {
+            "description": "chào người dùng có thể tự giới thiệu",
+            "displayType": "Lời chào"
         }
     },
     "messages": {

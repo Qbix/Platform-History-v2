@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "ರಿಯಲ್-ಟೈಮ್ ಕರೆ",
             "description": "ನೈಜ ಸಮಯದ ವೀಡಿಯೊ \/ ಆಡಿಯೊ ಕರೆ"
+        },
+        "Streams\/tasks": {
+            "description": "ಕಾರ್ಯಗಳಿಗಾಗಿ ವರ್ಗ",
+            "displayType": "ಕಾರ್ಯಗಳು"
+        },
+        "Streams\/experience": {
+            "description": "ಸಮುದಾಯದ ಸದಸ್ಯರಿಗೆ ಸಾಮಾನ್ಯ ಅನುಭವ",
+            "displayType": "ಸಮುದಾಯದ ಸದಸ್ಯರಿಗೆ ಸಾಮಾನ್ಯ ಅನುಭವ"
+        },
+        "Streams\/greeting": {
+            "description": "ಬಳಕೆದಾರರು ತಮ್ಮನ್ನು ಪರಿಚಯಿಸಿಕೊಳ್ಳಬಹುದಾದ ಶುಭಾಶಯ",
+            "displayType": "ಶುಭಾಶಯ"
         }
     },
     "messages": {

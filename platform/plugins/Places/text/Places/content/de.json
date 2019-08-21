@@ -54,5 +54,35 @@
         "exist": "Bereich existiert bereits",
         "addNewArea": "Neuen Bereich hinzufügen",
         "add": "Hinzufügen"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "eine Sammlung von Standorten",
+            "displayType": "Standorte"
+        },
+        "Places\/location": {
+            "description": "Repräsentiert ein Gebäude, einen Veranstaltungsort, ein Schiff, einen Park usw.",
+            "displayType": "Ort"
+        },
+        "Places\/area": {
+            "description": "Stellt einen Bereich innerhalb eines Standorts dar, z. B. ein Zimmer oder eine Suite",
+            "displayType": "Bereich"
+        },
+        "Places\/floor": {
+            "description": "Stellt eine Etage in einem Gebäude oder Schiff dar",
+            "displayType": "Fußboden"
+        },
+        "Places\/column": {
+            "description": "Stellt eine Spalte in einem Gebäude oder Schiff dar",
+            "displayType": "Säule"
+        },
+        "Places\/nearby": {
+            "description": "Kategorie für Dinge innerhalb einer bestimmten Entfernung von einer Geohash",
+            "displayType": "Orte in der Nähe"
+        },
+        "Places\/interest": {
+            "description": "Kategorie für Dinge innerhalb einer bestimmten Entfernung von einer Geohash, passend zu einem Interesse",
+            "displayType": "Setzt Interesse"
+        }
     }
 }

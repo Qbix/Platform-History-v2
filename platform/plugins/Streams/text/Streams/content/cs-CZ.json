@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Hovor v reálném čase",
             "description": "video / audio volání v reálném čase"
+        },
+        "Streams/tasks": {
+            "description": "kategorie pro úkoly",
+            "displayType": "Úkoly"
+        },
+        "Streams/experience": {
+            "description": "společná zkušenost členů komunity",
+            "displayType": "Společná zkušenost členů komunity"
+        },
+        "Streams/greeting": {
+            "description": "pozdrav, kterým se uživatel může představit",
+            "displayType": "Pozdrav"
         }
     },
     "messages": {

@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "Выклік у рэжыме рэальнага часу",
             "description": "відэа \/ аўдыязванок у рэжыме рэальнага часу"
+        },
+        "Streams\/tasks": {
+            "description": "катэгорыя для заданняў",
+            "displayType": "Заданні"
+        },
+        "Streams\/experience": {
+            "description": "агульны досвед для членаў супольнасці",
+            "displayType": "Агульны досвед удзельнікаў супольнасці"
+        },
+        "Streams\/greeting": {
+            "description": "прывітанне, з якім карыстальнік можа прадставіць сябе",
+            "displayType": "Прывітанне"
         }
     },
     "messages": {

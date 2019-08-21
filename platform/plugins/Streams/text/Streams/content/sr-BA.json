@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Позив у реалном времену",
             "description": "видео / аудио позив у стварном времену"
+        },
+        "Streams/tasks": {
+            "description": "категорија за задатке",
+            "displayType": "Задаци"
+        },
+        "Streams/experience": {
+            "description": "заједничко искуство за чланове заједнице",
+            "displayType": "Уобичајено искуство за чланове заједнице"
+        },
+        "Streams/greeting": {
+            "description": "поздрав којим се корисник може представити",
+            "displayType": "Поздрав"
         }
     },
     "messages": {

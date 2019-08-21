@@ -26,5 +26,39 @@
             "StartConversation": "Alustage vestlust",
             "GotoConversation": "Avage vestlus"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "HTML-dokument, mida erinevad kasutajad saavad vaadata ja redigeerida",
+            "displayType": "Artikkel"
+        },
+        "Websites\/slide": {
+            "description": "Slaid esitluses, võib sisaldada HTML-i, heli jne.",
+            "displayType": "Libisema"
+        },
+        "Websites\/presentation": {
+            "description": "Erinevatest slaididest koosnev esitlus",
+            "displayType": "Ettekanne"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Veebisaidi reklaamiüksus",
+            "displayType": "Kuulutusüksus"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Reklaamüksuste nime all grupeerimise viis",
+            "displayType": "Kuulutuse paigutamine"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Kuulutuse sisu",
+            "displayType": "Kuulutus loominguline"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Reklaamikampaania",
+            "displayType": "Reklaamikampaania"
+        },
+        "Websites\/webpage": {
+            "description": "Esindab veebisaiti, mille metaandmed olid kraabitud",
+            "displayType": "veebileht"
+        }
     }
 }

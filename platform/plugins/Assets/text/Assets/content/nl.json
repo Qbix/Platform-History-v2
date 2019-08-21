@@ -67,5 +67,19 @@
             "displayType": "Service",
             "description": "service wordt aangeboden"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Verdiende {{amount}} credits"
+        },
+        "Assets\/credits\/spent": {
+            "content": "{{amount}} credits uitgegeven"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{{amount}} credits verzonden"
+        },
+        "Assets\/credits\/received": {
+            "content": "Ontvangen {{amount}} credits"
+        }
     }
 }

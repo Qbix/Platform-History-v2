@@ -67,5 +67,19 @@
             "displayType": "Service",
             "description": "tjänsten som erbjuds"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "Tjäna {{amount}} högskolepoäng"
+        },
+        "Assets/credits/spent": {
+            "content": "Tillbringade {{amount}} krediter"
+        },
+        "Assets/credits/sent": {
+            "content": "Skickade {{amount}} krediter"
+        },
+        "Assets/credits/received": {
+            "content": "Fått {{amount}} krediter"
+        }
     }
 }

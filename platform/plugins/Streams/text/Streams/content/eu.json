@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "Denbora errealeko deia",
             "description": "denbora errealeko bideo \/ audio dei"
+        },
+        "Streams\/tasks": {
+            "description": "zereginetarako kategoria",
+            "displayType": "zereginak"
+        },
+        "Streams\/experience": {
+            "description": "komunitate bateko kideentzako esperientzia arrunta",
+            "displayType": "Erkidego bateko kideentzako esperientzia arrunta"
+        },
+        "Streams\/greeting": {
+            "description": "erabiltzaile batek bere burua aurkez dezakezun agurra",
+            "displayType": "Agurra"
         }
     },
     "messages": {

@@ -54,5 +54,35 @@
         "exist": "Oblasť už existuje",
         "addNewArea": "Pridať novú oblasť",
         "add": "pridať"
+    },
+    "types": {
+        "Places/locations": {
+            "description": "zbierka miest",
+            "displayType": "miesta"
+        },
+        "Places/location": {
+            "description": "Predstavuje budovu, miesto konania, loď, park atď.",
+            "displayType": "umiestnenia"
+        },
+        "Places/area": {
+            "description": "Predstavuje oblasť na určitom mieste, napríklad izbu alebo apartmán",
+            "displayType": "rozloha"
+        },
+        "Places/floor": {
+            "description": "Predstavuje podlahu v budove alebo na lodi",
+            "displayType": "podlaha"
+        },
+        "Places/column": {
+            "description": "Predstavuje stĺp v budove alebo na lodi",
+            "displayType": "stĺp"
+        },
+        "Places/nearby": {
+            "description": "Kategória pre veci v určitej vzdialenosti od geohash",
+            "displayType": "Blízko miest"
+        },
+        "Places/interest": {
+            "description": "Kategória pre veci v určitej vzdialenosti od geohashu, zodpovedajúca záujmom",
+            "displayType": "Zaujímavosti miest"
+        }
     }
 }

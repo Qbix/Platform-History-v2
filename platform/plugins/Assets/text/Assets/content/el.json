@@ -67,5 +67,19 @@
             "displayType": "Υπηρεσία",
             "description": "υπηρεσία που προσφέρεται"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Κερδισμένα {{amount}} πιστώσεις"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Χρησιμοποιήθηκαν πιστώσεις {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Έστειλε {{amount}} πιστώσεις"
+        },
+        "Assets\/credits\/received": {
+            "content": "Λήφθηκαν {{amount}} πιστώσεις"
+        }
     }
 }

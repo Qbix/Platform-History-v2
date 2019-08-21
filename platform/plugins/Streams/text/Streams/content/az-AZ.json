@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Real vaxt zəng",
             "description": "real vaxt video / audio zəng"
+        },
+        "Streams/tasks": {
+            "description": "vəzifələr üçün kateqoriya",
+            "displayType": "Tapşırıqlar"
+        },
+        "Streams/experience": {
+            "description": "bir cəmiyyət üzvləri üçün ortaq bir təcrübə",
+            "displayType": "Bir cəmiyyətin üzvləri üçün ümumi təcrübə"
+        },
+        "Streams/greeting": {
+            "description": "bir istifadəçinin özlərini tanıda biləcəyi təbrik",
+            "displayType": "Salamlayiram"
         }
     },
     "messages": {

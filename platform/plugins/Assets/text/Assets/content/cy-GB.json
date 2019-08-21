@@ -67,5 +67,19 @@
             "displayType": "Gwasanaeth",
             "description": "gwasanaeth yn cael ei gynnig"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "Credydau {{amount}} a enillwyd"
+        },
+        "Assets/credits/spent": {
+            "content": "Credydau a dreuliwyd {{amount}}"
+        },
+        "Assets/credits/sent": {
+            "content": "Anfonwyd {{amount}} credyd"
+        },
+        "Assets/credits/received": {
+            "content": "Wedi derbyn {{amount}} credyd"
+        }
     }
 }

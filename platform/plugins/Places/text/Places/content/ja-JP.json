@@ -54,5 +54,35 @@
         "exist": "エリアはすでに存在します",
         "addNewArea": "新しいエリアを追加",
         "add": "追加する"
+    },
+    "types": {
+        "Places/locations": {
+            "description": "場所のコレクション",
+            "displayType": "場所"
+        },
+        "Places/location": {
+            "description": "建物、会場、船、公園などを表します。",
+            "displayType": "ロケーション"
+        },
+        "Places/area": {
+            "description": "部屋やスイートなど、場所内のエリアを表します",
+            "displayType": "エリア"
+        },
+        "Places/floor": {
+            "description": "建物または船の床を表します",
+            "displayType": "床"
+        },
+        "Places/column": {
+            "description": "建物または船の列を表します",
+            "displayType": "カラム"
+        },
+        "Places/nearby": {
+            "description": "ジオハッシュから一定の距離内にあるもののカテゴリ",
+            "displayType": "場所の近く"
+        },
+        "Places/interest": {
+            "description": "関心に一致する、ジオハッシュから一定の距離内にあるもののカテゴリ",
+            "displayType": "興味のある場所"
+        }
     }
 }
