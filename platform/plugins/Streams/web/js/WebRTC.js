@@ -1143,7 +1143,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				var frontCameraDevice = WebRTCconference.conferenceControl.frontCameraDevice();
 				var currentCameraDevice = WebRTCconference.conferenceControl.currentCameraDevice();
-				if(!screen.screensharing && currentCameraDevice == frontCameraDevice) {
+				if(!screen.screensharing && (currentCameraDevice == frontCameraDevice || Q.info.isTouchscreen == false)) {
 					if(screen.videoCon != null && !screen.videoCon.classList.contains('flipped')) screen.videoCon.classList.add('flipped');
 					if(screen.screenEl.classList.contains('screensharing')) screen.screenEl.classList.remove('screensharing');
 				} else if(screen.videoCon) {
