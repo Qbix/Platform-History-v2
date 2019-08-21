@@ -17,6 +17,7 @@
 			"Q/Utils/canWriteToPath": ["Users/before/Q_Utils_canWriteToPath"]
 		},
 		"handlersAfterEvent": {
+			"Q/init": ["Users/after/Q_init"],
 			"Q/session/write": ["Users/after/Q_session_write"],
 			"Q/session/destroy": ["Users/after/Q_session_destroy"],
 			"Q/reroute": ["Users/after/Q_reroute"],

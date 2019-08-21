@@ -14,7 +14,8 @@
 				"Users": "1.0.4",
 				"Streams": "1.0.5"
 			},
-			"connections": []
+			"connections": [],
+			"previewMode": false
 		},
 		"plugins": ["Users", "Streams"],
 		"handlersBeforeEvent": {
