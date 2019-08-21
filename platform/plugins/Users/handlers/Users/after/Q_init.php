@@ -3,7 +3,7 @@
 function Users_after_Q_init()
 {
 	// if app in preview mode
-	if (!Q_Config::get('Q', 'appInfo', 'previewMode', false)) {
+	if (!Q_Config::get('Users', 'previewMode', false)) {
 		return;
 	}
 
