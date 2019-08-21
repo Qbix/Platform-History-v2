@@ -225,7 +225,7 @@
 					});
 					return;
 				}
-				
+
 				var enabledVideoTracks = webRTClib.localParticipant().tracks.filter(function (t) {
 					return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 				}).length;
@@ -1617,12 +1617,17 @@
 							offIcon: icons.staticMaximizeOff,
 							handler: function(){
 								toggleLoudesScreenMode('disabled');
+								var maximize = function(loudestScreen) {
+									if(Q.info.isMobile)
+										tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(loudestScreen, 300);
+									else tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(loudestScreen, 300);
+								}
 								var activeScreen = tool.state.webrtcClass.screenRendering.getActiveSreen();
 								if(activeScreen != null) {
-									tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(activeScreen, 300);
+									maximize(activeScreen);
 								} else {
 									var screens = webRTClib.screens();
-									if(screens[0] != null) tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(screens[0], 300);
+									maximize(screens[0]);
 								}
 							}
 						}

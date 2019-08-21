@@ -1842,7 +1842,7 @@ webrtc_tool_popup-settings.Streams_webrtc_popup-box > div {
 .Streams_webrtc_regular-screen .Q_resize_resize-handler[data-position="topright"] {
     cursor: nesw-resize;
     right: -7% !important;
-    top: 50px !important;
+    top: 0 !important;
     z-index: 2000;
 }
 .Streams_webrtc_maximized-main-screen .Q_resize_resize-handler[data-position="topleft"],

@@ -102,7 +102,7 @@ WebRTC.listen = function () {
 			socket.to(message.targetSid).emit('Streams/webrtc/signalling', message);
 		});
 
-		socket.on('Streams/webrtc/disconnect', function() {
+		socket.on('disconnect', function() {
 			if(_debug) console.log('DISCONNECT', socket.id);
 			socket.broadcast.to(room).emit('Streams/webrtc/participantDisconnected', socket.id);
 		});
