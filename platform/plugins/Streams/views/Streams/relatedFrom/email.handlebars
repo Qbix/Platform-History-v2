@@ -1,6 +1,6 @@
 <html>
 {{#if (call 'message.getInstruction' 'fromUrl')}}
-	<h2><a href="{{call 'message.getInstruction' 'fromUrl'}}">{{stream.fields.title}}</a></h2>
+	<h2><a href="{{fromUrl}}">{{stream.fields.title}}</a></h2>
 {{else}}
 	<h2>{{stream.fields.title}}</h2>
 {{/if}}
@@ -8,9 +8,9 @@
 {{messages.text.relatedFrom.hasBeenPostedTo}}
 </div>
 {{#if (call 'message.getInstruction' 'toUrl')}}
-	<h2><a href="{{call 'message.getInstruction' 'toUrl'}}">{{call 'message.getInstruction' 'toTitle'}}</a></h2>
+	<h2><a href="{{toUrl}}">{{toTitle}}</a></h2>
 {{else}}
-	<h2>{{call 'message.getInstruction' 'toTitle'}}</h2>
+	<h2>{{toTitle}}</h2>
 {{/if}}
 <div>
 	{{interpolate messages.text.relatedFrom.byAvatar this}}
