@@ -26,5 +26,39 @@
             "StartConversation": "Simulan ang Pag-uusap",
             "GotoConversation": "Pumunta sa Pag-uusap"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Isang dokumento na HTML na maaaring tingnan at mai-edit ng iba&#39;t ibang mga gumagamit",
+            "displayType": "Artikulo"
+        },
+        "Websites\/slide": {
+            "description": "Ang isang slide sa isang pagtatanghal, ay maaaring magsama ng HTML, audio atbp.",
+            "displayType": "Slide"
+        },
+        "Websites\/presentation": {
+            "description": "Isang presentasyon na binubuo ng iba&#39;t ibang mga slide",
+            "displayType": "Paglalahad"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Isang yunit ng advertising sa isang website",
+            "displayType": "Advert unit"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Isang paraan ng pagpangkat ng mga yunit ng advertising sa ilalim ng isang pangalan",
+            "displayType": "Paglalagay ng ad"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Nilalaman para sa isang ad",
+            "displayType": "Mag-advertise ng malikhaing"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Isang kampanya sa advertising",
+            "displayType": "Kampanya sa advertising"
+        },
+        "Websites\/webpage": {
+            "description": "Kinakatawan ang isang website na ang metadata ay na-scrap",
+            "displayType": "Pahina ng web"
+        }
     }
 }

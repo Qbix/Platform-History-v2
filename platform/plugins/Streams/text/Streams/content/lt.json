@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "Skambinimas realiuoju laiku",
             "description": "realaus laiko vaizdo \/ garso skambutis"
+        },
+        "Streams\/tasks": {
+            "description": "užduočių kategorija",
+            "displayType": "Užduotys"
+        },
+        "Streams\/experience": {
+            "description": "bendra patirtis bendruomenės nariams",
+            "displayType": "Bendra bendruomenės narių patirtis"
+        },
+        "Streams\/greeting": {
+            "description": "sveikinimas, kuriuo vartotojas gali prisistatyti",
+            "displayType": "Sveikinimai"
         }
     },
     "messages": {

@@ -51,6 +51,66 @@ class Q_Utils
 	}
 
 	/**
+	 * Encodes some data in base64
+	 * @method encodeToken
+	 * @static
+	 * @param {array|string} $data
+	 * @return {string}
+	 */
+	static function toBase64($data)
+	{
+		if (!is_string($data)) {
+			$data = Q::json_encode($data);
+		}
+		$data = base64_encode(pack('H*', $data));
+		return str_replace(
+			array('z', '+', '/', '='),
+			array('zz', 'za', 'zb', 'zc'),
+			$data
+		);
+	}
+	
+	/**
+	 * Decodes some data from base64
+	 * @method encodeToken
+	 * @static
+	 * @param {array|string} $encoded
+	 * @return {string}
+	 */
+	static function fromBase64($encoded)
+	{
+		if (!$encoded) {
+			return '';
+		}
+		$result = '';
+		$len = strlen($encoded);
+		$i = 0;
+		$replacements = array(
+			'z' => 'z',
+			'a' => '+',
+			'b' => '/',
+			'c' => '='
+		);
+		while ($i < $len-1) {
+			$r = $encoded[$i];
+			$c1 = $encoded[$i];
+			++$i;
+			if ($c1 == 'z') {
+				$c2 = $encoded[$i];
+				if (isset($replacements[$c2])) {
+					$r = $replacements[$c2];
+					++$i;
+				}
+			}
+			$result .= $r;
+		}
+		if ($i < $len) {
+			$result .= $encoded[$i];
+		}
+		return base64_decode($result);
+	}
+
+	/**
 	 * Generates signature for the data
 	 * @method signature
 	 * @static
@@ -65,8 +125,9 @@ class Q_Utils
 		}
 		if (is_array($data)) {
 			ksort($data);
-			$data = http_build_query($data);
+			$data = http_build_query($data, null, '&', PHP_QUERY_RFC3986);
 			$data = str_replace('+', '%20', $data);
+			file_put_contents('/projects/qbix/Yang/temp.txt', $data);
 		}
 		return self::hmac('sha1', $data, $secret);
 	}
@@ -372,8 +433,7 @@ class Q_Utils
 
 		if ($mbstring === null) {
 			$mbstring = extension_loaded('mbstring')
-			&&
-			(ini_get('mbstring.func_overload') & MB_OVERLOAD_STRING);
+			&& (ini_get('mbstring.func_overload') & MB_OVERLOAD_STRING);
 		}
 		/** @var bool $mbstring */
 		return $mbstring;

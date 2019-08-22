@@ -67,5 +67,19 @@
             "displayType": "サービス",
             "description": "提供されているサービス"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "{{amount}}クレジットを獲得しました"
+        },
+        "Assets/credits/spent": {
+            "content": "{{amount}}クレジットを使い果たしました"
+        },
+        "Assets/credits/sent": {
+            "content": "{{amount}}クレジットを送信しました"
+        },
+        "Assets/credits/received": {
+            "content": "{{amount}}クレジットを受け取りました"
+        }
     }
 }

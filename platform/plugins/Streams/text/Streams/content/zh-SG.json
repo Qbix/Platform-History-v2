@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "实时通话",
             "description": "实时视频/音频通话"
+        },
+        "Streams/tasks": {
+            "description": "任务类别",
+            "displayType": "任务"
+        },
+        "Streams/experience": {
+            "description": "社区成员的共同经历",
+            "displayType": "社区成员的共同经历"
+        },
+        "Streams/greeting": {
+            "description": "用户可以自我介绍的问候语",
+            "displayType": "欢迎"
         }
     },
     "messages": {

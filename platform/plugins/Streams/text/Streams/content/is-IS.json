@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Rauntíma símtal",
             "description": "rauntíma vídeó / hljóð símtal"
+        },
+        "Streams/tasks": {
+            "description": "flokkur fyrir verkefni",
+            "displayType": "Verkefni"
+        },
+        "Streams/experience": {
+            "description": "sameiginleg reynsla fyrir meðlimi samfélagsins",
+            "displayType": "Algeng reynsla fyrir meðlimi samfélagsins"
+        },
+        "Streams/greeting": {
+            "description": "kveðju sem notandi getur kynnt sér",
+            "displayType": "Kveðjur"
         }
     },
     "messages": {

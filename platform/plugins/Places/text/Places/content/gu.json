@@ -54,5 +54,35 @@
         "exist": "ક્ષેત્ર પહેલેથી હાજર છે",
         "addNewArea": "નવું ક્ષેત્ર ઉમેરો",
         "add": "ઉમેરો"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "સ્થાનો સંગ્રહ",
+            "displayType": "સ્થાનો"
+        },
+        "Places\/location": {
+            "description": "બિલ્ડિંગ, સ્થળ, શિપ, પાર્ક, વગેરેનું પ્રતિનિધિત્વ કરે છે.",
+            "displayType": "સ્થાન"
+        },
+        "Places\/area": {
+            "description": "રૂમ અથવા સ્યુટ જેવા સ્થાનની અંદરના વિસ્તારને રજૂ કરે છે",
+            "displayType": "વિસ્તાર"
+        },
+        "Places\/floor": {
+            "description": "બિલ્ડિંગ અથવા શિપમાં ફ્લોરનું પ્રતિનિધિત્વ કરે છે",
+            "displayType": "ફ્લોર"
+        },
+        "Places\/column": {
+            "description": "બિલ્ડિંગ અથવા શિપમાં ક columnલમ રજૂ કરે છે",
+            "displayType": "કumnલમ"
+        },
+        "Places\/nearby": {
+            "description": "કોઈ જિઓહshશના અંતરની અંદરની વસ્તુઓ માટેની કેટેગરી",
+            "displayType": "સ્થાનો દ્વારા નજીક"
+        },
+        "Places\/interest": {
+            "description": "કોઈ રસ સાથે મેળ ખાતા ભૌગોલિકના ચોક્કસ અંતરની વસ્તુઓ માટેની કેટેગરી",
+            "displayType": "રસ સ્થાનો"
+        }
     }
 }

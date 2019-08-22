@@ -67,5 +67,19 @@
             "displayType": "સેવા",
             "description": "સેવા ઓફર કરવામાં આવી રહી છે"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "{9 999}} કમાણી"
+        },
+        "Assets/credits/spent": {
+            "content": "{9 999}} ક્રેડિટ્સ ખર્ચ્યા"
+        },
+        "Assets/credits/sent": {
+            "content": "{9 999}} ક્રેડિટ્સ મોકલી"
+        },
+        "Assets/credits/received": {
+            "content": "{9 999}} ક્રેડિટ્સ પ્રાપ્ત થઈ"
+        }
     }
 }

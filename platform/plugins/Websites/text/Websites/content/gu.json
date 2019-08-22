@@ -26,5 +26,39 @@
             "StartConversation": "વાતચીત શરૂ કરો",
             "GotoConversation": "વાતચીતમાં જાઓ"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "એક HTML દસ્તાવેજ જે વિવિધ વપરાશકર્તાઓ જોઈ અને સંપાદિત કરી શકે છે",
+            "displayType": "લેખ"
+        },
+        "Websites\/slide": {
+            "description": "પ્રસ્તુતિની સ્લાઇડ, એચટીએમએલ, audioડિઓ વગેરે શામેલ કરી શકે છે.",
+            "displayType": "સ્લાઇડ"
+        },
+        "Websites\/presentation": {
+            "description": "વિવિધ સ્લાઇડ્સ સમાવતું પ્રસ્તુતિ",
+            "displayType": "પ્રસ્તુતિ"
+        },
+        "Websites\/advert\/unit": {
+            "description": "વેબસાઇટ પર એક જાહેરાત એકમ",
+            "displayType": "જાહેરાત એકમ"
+        },
+        "Websites\/advert\/placement": {
+            "description": "નામ હેઠળ જાહેરાત એકમોને જૂથ બનાવવાની રીત",
+            "displayType": "જાહેરાત પ્લેસમેન્ટ"
+        },
+        "Websites\/advert\/creative": {
+            "description": "એક જાહેરાત માટે સામગ્રી",
+            "displayType": "સર્જનાત્મક જાહેરાત"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "એક જાહેરાત ઝુંબેશ",
+            "displayType": "જાહેરાત અભિયાન"
+        },
+        "Websites\/webpage": {
+            "description": "કોઈ વેબસાઇટની રજૂઆત કરે છે જેના મેટાડેટાને સ્ક્રેપ કરવામાં આવ્યો હતો",
+            "displayType": "વેબ પેજ"
+        }
     }
 }

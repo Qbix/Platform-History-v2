@@ -54,5 +54,35 @@
         "exist": "Ang lugar ay umiiral na",
         "addNewArea": "Magdagdag ng bagong lugar",
         "add": "Magdagdag"
+    },
+    "types": {
+        "Places/locations": {
+            "description": "isang koleksyon ng mga lokasyon",
+            "displayType": "Mga lokasyon"
+        },
+        "Places/location": {
+            "description": "Kinakatawan ng isang gusali, lugar, barko, parke, atbp.",
+            "displayType": "Lokasyon"
+        },
+        "Places/area": {
+            "description": "Kinakatawan ang isang lugar sa loob ng isang lokasyon, tulad ng isang silid o suite",
+            "displayType": "Lugar"
+        },
+        "Places/floor": {
+            "description": "Kinakatawan ang isang sahig sa isang gusali o barko",
+            "displayType": "Palapag"
+        },
+        "Places/column": {
+            "description": "Kinakatawan ng isang haligi sa isang gusali o barko",
+            "displayType": "Hanay"
+        },
+        "Places/nearby": {
+            "description": "Mga kategorya para sa mga bagay sa loob ng isang tiyak na distansya ng isang geohash",
+            "displayType": "Malapit sa mga lugar"
+        },
+        "Places/interest": {
+            "description": "Mga kategorya para sa mga bagay sa loob ng isang tiyak na distansya ng isang geohash, na tumutugma sa isang interes",
+            "displayType": "Mga interes sa lugar"
+        }
     }
 }

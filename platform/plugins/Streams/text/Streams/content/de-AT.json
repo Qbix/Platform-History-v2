@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Echtzeitanruf",
             "description": "Ein Video- / Audioanruf in Echtzeit"
+        },
+        "Streams/tasks": {
+            "description": "Kategorie für Aufgaben",
+            "displayType": "Aufgaben"
+        },
+        "Streams/experience": {
+            "description": "eine gemeinsame Erfahrung für Mitglieder einer Gemeinschaft",
+            "displayType": "Gemeinsame Erfahrung für Mitglieder einer Community"
+        },
+        "Streams/greeting": {
+            "description": "Begrüßung, mit der sich ein Benutzer vorstellen kann",
+            "displayType": "Gruß"
         }
     },
     "messages": {

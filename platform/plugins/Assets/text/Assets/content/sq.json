@@ -67,5 +67,19 @@
             "displayType": "shërbim",
             "description": "shërbimi që ofrohet"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Fituar kredi {999"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Kredi Sp 999 kredite"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Dërguar kredi {999"
+        },
+        "Assets\/credits\/received": {
+            "content": "Mori kredi 99 999"
+        }
     }
 }

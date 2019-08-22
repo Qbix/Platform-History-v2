@@ -26,5 +26,39 @@
             "StartConversation": "เริ่มการสนทนา",
             "GotoConversation": "ไปที่การสนทนา"
         }
+    },
+    "types": {
+        "Websites/article": {
+            "description": "เอกสาร HTML ที่ผู้ใช้หลายคนสามารถดูและแก้ไข",
+            "displayType": "บทความ"
+        },
+        "Websites/slide": {
+            "description": "สไลด์ในงานนำเสนอสามารถรวม HTML เสียงและอื่น ๆ",
+            "displayType": "สไลด์"
+        },
+        "Websites/presentation": {
+            "description": "งานนำเสนอประกอบด้วยสไลด์ต่างๆ",
+            "displayType": "การเสนอ"
+        },
+        "Websites/advert/unit": {
+            "description": "หน่วยโฆษณาบนเว็บไซต์",
+            "displayType": "หน่วยโฆษณา"
+        },
+        "Websites/advert/placement": {
+            "description": "วิธีการจัดกลุ่มหน่วยโฆษณาภายใต้ชื่อ",
+            "displayType": "โฆษณาตำแหน่ง"
+        },
+        "Websites/advert/creative": {
+            "description": "เนื้อหาสำหรับการโฆษณา",
+            "displayType": "โฆษณาสร้างสรรค์"
+        },
+        "Websites/advert/campaign": {
+            "description": "แคมเปญโฆษณา",
+            "displayType": "แคมเปญโฆษณา"
+        },
+        "Websites/webpage": {
+            "description": "แสดงถึงเว็บไซต์ที่มีการคัดลอกข้อมูลเมตา",
+            "displayType": "หน้าเว็บ"
+        }
     }
 }

@@ -374,6 +374,10 @@ function _Q_clickable(o) {
 			if (state.stopPropagation) {
 				evt.stopPropagation();
 			}
+		}).on('focus', function (evt) {
+			if (state.stopPropagation) {
+				evt.stopPropagation();
+			}
 		});
 		
 		if (timing.renderingInterval) {
@@ -447,7 +451,7 @@ function _Q_clickable(o) {
 	allowCallout: false,
 	cancelDistance: 15,
 	preventDefault: false,
-	stopPropagation: false,
+	stopPropagation: true,
 	onPress: new Q.Event(),
 	onRelease: new Q.Event(),
 	afterRelease: new Q.Event()

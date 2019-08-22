@@ -67,5 +67,19 @@
             "displayType": "Bedienung",
             "description": "Service angeboten wird"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Verdiente {{amount}} Credits"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Verbrauchte {{amount}} Credits"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Gesendete {{amount}} Gutschriften"
+        },
+        "Assets\/credits\/received": {
+            "content": "{{amount}} Credits erhalten"
+        }
     }
 }

@@ -54,5 +54,35 @@
         "exist": "Територія вже існує",
         "addNewArea": "Додати нову область",
         "add": "Додати"
+    },
+    "types": {
+        "Places/locations": {
+            "description": "колекція локацій",
+            "displayType": "Місцеположення"
+        },
+        "Places/location": {
+            "description": "Представляє будівлю, місце проведення, корабель, парк тощо.",
+            "displayType": "Розташування"
+        },
+        "Places/area": {
+            "description": "Представляє зону в межах локації, наприклад, кімнату або номер",
+            "displayType": "Площа"
+        },
+        "Places/floor": {
+            "description": "Уособлює підлогу в будівлі або кораблі",
+            "displayType": "Підлога"
+        },
+        "Places/column": {
+            "description": "Представляє стовпчик у будівлі чи кораблі",
+            "displayType": "Стовпчик"
+        },
+        "Places/nearby": {
+            "description": "Категорія речей на певній відстані від геогашу",
+            "displayType": "Поруч місця"
+        },
+        "Places/interest": {
+            "description": "Категорія речей, що знаходяться на певній відстані від геогашу, що відповідає інтересам",
+            "displayType": "Визначні місця"
+        }
     }
 }

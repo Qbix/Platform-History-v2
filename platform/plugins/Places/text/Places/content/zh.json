@@ -54,5 +54,35 @@
         "exist": "区域已经存在",
         "addNewArea": "添加新区域",
         "add": "加"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "一系列地点",
+            "displayType": "地点"
+        },
+        "Places\/location": {
+            "description": "代表建筑物，场地，船舶，公园等。",
+            "displayType": "地点"
+        },
+        "Places\/area": {
+            "description": "表示某个位置内的区域，例如房间或套房",
+            "displayType": "区域"
+        },
+        "Places\/floor": {
+            "description": "代表建筑物或船舶的地板",
+            "displayType": "地板"
+        },
+        "Places\/column": {
+            "description": "表示建筑物或船舶中的列",
+            "displayType": "柱"
+        },
+        "Places\/nearby": {
+            "description": "在geohash的特定距离内的事物的类别",
+            "displayType": "靠近地方"
+        },
+        "Places\/interest": {
+            "description": "在geohash的特定距离内的事物的类别，匹配兴趣",
+            "displayType": "地方利益"
+        }
     }
 }

@@ -40,53 +40,70 @@ Utils.signature = function (data, secret) {
  * @method sign
  * @param {object} data The data to sign
  * @param {array} fieldKeys Optionally specify the array key path for the signature field
- * @return {object}
+ * @return {object} The data object is mutated and returned
  */
 Utils.sign = function (data, fieldKeys) {
 	var secret = Q.Config.get(['Q', 'internal', 'secret'], null);
 	if (!secret) {
-		if (!fieldKeys || !fieldKeys.length) {
-			var sf = Q.Config.get(['Q', 'internal', 'sigField'], 'sig');
-			fieldKeys = ['Q.'+sf];
-		}
-		var ref = data;
-		for (var i=0, l=fieldKeys.length; i<l-1; ++i) {
-			if (!(fieldKeys[i] in ref)) {
-				ref[ fieldKeys[i] ] = {};
-			}
-			ref = ref[ fieldKeys[i] ];
-		}
-		ref [ fieldKeys[fieldKeys.length-1] ] = Utils.signature(data, secret);
+		return data
 	}
+	if (!fieldKeys || !fieldKeys.length) {
+		var sf = Q.Config.get(['Q', 'internal', 'sigField'], 'sig');
+		fieldKeys = ['Q.'+sf];
+	}
+	var ref = data;
+	for (var i=0, l=fieldKeys.length; i<l-1; ++i) {
+		if (!(fieldKeys[i] in ref)) {
+			ref[ fieldKeys[i] ] = {};
+		}
+		ref = ref[ fieldKeys[i] ];
+	}
+	ref [ fieldKeys[fieldKeys.length-1] ] = Utils.signature(data, secret);
 	return data;
+};
+
+/**
+ * Validate some signed data.
+ * @method validate
+ * @param {object} data the signed data to validate
+ * @param {array} fieldKeys Optionally specify the array key path for the isgnature field
+ * @return {boolean} Whether the signature is valid. Returns true if secret is empty.
+ */
+Utils.validate = function(data, fieldKeys) {
+	var temp = Q.copy(data, null, 100);
+	var secret = Q.Config.get(['Q', 'internal', 'secret'], null);
+	if (!secret) {
+		return true;
+	}
+	if (!fieldKeys || !fieldKeys.length) {
+		var sf = Q.Config.get(['Q', 'internal', 'sigField'], 'sig');
+		fieldKeys = ['Q.'+sf];
+	}
+	var ref = temp;
+	for (var i=0, l=fieldKeys.length; i<l-1; ++i) {
+		if (!(fieldKeys[i] in ref)) {
+			ref[ fieldKeys[i] ] = {};
+		}
+		ref = ref[ fieldKeys[i] ];
+	}
+	var sig = ref [ fieldKeys[fieldKeys.length-1] ];
+	delete ref [ fieldKeys[fieldKeys.length-1] ];
+	return (sig === Utils.signature(temp, secret));
 };
 
 /**
  * express server middleware validate signature of internal request
  * @method validate
  */
-Utils.validate = function (req, res, next) {
+Utils.validateRequest = function (req, res, next) {
 	// merge in GET data
 	if (req.body) Q.extend(req.body, req.query);
 	else req.body = req.query;
 	// validate signature
-	var secret = Q.Config.get(['Q', 'internal', 'secret'], null);
-	if (secret === null) {
-		return next();
-	}
-	var sgf = "Q."+Q.Config.get(['Q', 'internal', 'sigField'], 'sig'),
-		data = req.body, signature;
-	if (data[sgf]) {
-		signature = data[sgf];
-		delete data[sgf];
-	} else {
-		signature = null;
-	}
-	if (signature === Q.Utils.signature(data, secret)) {
+	if (Utils.validate(req.body)) {
 		next();
 	} else {
-		console.log(signature);
-		console.log(data, secret);
+		console.log(req.body);
 		console.log("Request validation failed");
 		res.send(JSON.stringify({errors: "Invalid signature"}), 403); // forbidden
 	}

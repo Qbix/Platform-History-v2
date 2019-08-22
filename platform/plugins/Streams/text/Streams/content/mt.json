@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "Sejħa f&#39;ħin Reali",
             "description": "sejħa bil-vidjo \/ awdjo f&#39;ħin reali"
+        },
+        "Streams\/tasks": {
+            "description": "kategorija għal kompiti",
+            "displayType": "Kompiti"
+        },
+        "Streams\/experience": {
+            "description": "esperjenza komuni għall-membri ta &#39;komunità",
+            "displayType": "Esperjenza komuni għal membri ta &#39;komunità"
+        },
+        "Streams\/greeting": {
+            "description": "tislima li biha utent jista &#39;jintroduċi ruħu",
+            "displayType": "Tislijiet"
         }
     },
     "messages": {

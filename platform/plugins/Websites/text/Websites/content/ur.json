@@ -26,5 +26,39 @@
             "StartConversation": "بات چیت شروع کریں",
             "GotoConversation": "گفتگو پر جائیں۔"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "ایک HTML دستاویز جسے مختلف صارفین دیکھ اور ترمیم کرسکتے ہیں۔",
+            "displayType": "آرٹیکل۔"
+        },
+        "Websites\/slide": {
+            "description": "پریزنٹیشن کی ایک سلائڈ ، HTML ، آڈیو وغیرہ شامل کرسکتی ہے۔",
+            "displayType": "سلائیڈ"
+        },
+        "Websites\/presentation": {
+            "description": "مختلف سلائڈز پر مشتمل ایک پریزنٹیشن۔",
+            "displayType": "پیش کش۔"
+        },
+        "Websites\/advert\/unit": {
+            "description": "کسی ویب سائٹ پر ایک اشتہاری یونٹ۔",
+            "displayType": "ایڈورٹائزنگ یونٹ۔"
+        },
+        "Websites\/advert\/placement": {
+            "description": "کسی نام کے تحت اشتہاری اکائیوں کو گروپ بنانے کا ایک طریقہ۔",
+            "displayType": "ایڈورٹائزنگ پلیسمنٹ۔"
+        },
+        "Websites\/advert\/creative": {
+            "description": "اشتہار کے لئے مشمولات۔",
+            "displayType": "تخلیقی اشتہار"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "ایک اشتہاری مہم۔",
+            "displayType": "اشتہاری مہم۔"
+        },
+        "Websites\/webpage": {
+            "description": "ایک ایسی ویب سائٹ کی نمائندگی کرتا ہے جس کا میٹا ڈیٹا ختم ہو گیا تھا۔",
+            "displayType": "ویب صفحہ"
+        }
     }
 }

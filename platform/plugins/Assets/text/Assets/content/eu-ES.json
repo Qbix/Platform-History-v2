@@ -67,5 +67,19 @@
             "displayType": "zerbitzua",
             "description": "zerbitzua eskaintzen ari da"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "Irabazitako {{amount}} kredituak"
+        },
+        "Assets/credits/spent": {
+            "content": "{{amount}} kreditu igorri dira"
+        },
+        "Assets/credits/sent": {
+            "content": "{{amount}} kreditu bidali dira"
+        },
+        "Assets/credits/received": {
+            "content": "{{amount}} kredituak jaso dira"
+        }
     }
 }

@@ -121,7 +121,7 @@
         },
         "Streams/task": {
             "displayType": "Task",
-            "description": "task to be done by humans or machines"
+            "description": "for receiving updates about progress on a certain task"
         },
         "Streams/number": {
             "displayType": "Number",
@@ -206,6 +206,18 @@
         "Streams/webrtc": {
             "displayType": "Real-Time Call",
             "description": "a real time video/audio call"
+        },
+        "Streams/tasks": {
+            "description": "category for tasks",
+            "displayType": "Tasks"
+        },
+        "Streams/experience": {
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
+        },
+        "Streams/greeting": {
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
         }
     },
     "messages": {

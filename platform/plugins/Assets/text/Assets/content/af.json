@@ -67,5 +67,19 @@
             "displayType": "diens",
             "description": "diens wat aangebied word"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "{{amount}} krediete verdien"
+        },
+        "Assets\/credits\/spent": {
+            "content": "{{amount}} krediete bestee"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{{amount}} krediete gestuur"
+        },
+        "Assets\/credits\/received": {
+            "content": "Het {{amount}} krediete ontvang"
+        }
     }
 }

@@ -54,5 +54,35 @@
         "exist": "השטח כבר קיים",
         "addNewArea": "הוסף אזור חדש",
         "add": "הוסף"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "אוסף של מיקומים",
+            "displayType": "מיקומים"
+        },
+        "Places\/location": {
+            "description": "מייצג בניין, מקום, ספינה, פארק וכו &#39;.",
+            "displayType": "מקום"
+        },
+        "Places\/area": {
+            "description": "מייצג אזור בתוך מיקום, למשל חדר או סוויטה",
+            "displayType": "אזור"
+        },
+        "Places\/floor": {
+            "description": "מייצג רצפה בבניין או בספינה",
+            "displayType": "קומה"
+        },
+        "Places\/column": {
+            "description": "מייצג טור בבניין או בספינה",
+            "displayType": "טור"
+        },
+        "Places\/nearby": {
+            "description": "קטגוריה לדברים שנמצאים במרחק מסוים מגיאוש",
+            "displayType": "מקומות קרובים"
+        },
+        "Places\/interest": {
+            "description": "קטגוריה לדברים שנמצאים במרחק מסוים מגאוש, התואמים עניין",
+            "displayType": "מקומות מעניינים"
+        }
     }
 }

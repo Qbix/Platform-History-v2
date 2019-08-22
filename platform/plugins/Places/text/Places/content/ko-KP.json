@@ -54,5 +54,35 @@
         "exist": "이미 존재하는 지역",
         "addNewArea": "새 영역 추가",
         "add": "더하다"
+    },
+    "types": {
+        "Places/locations": {
+            "description": "위치 모음",
+            "displayType": "위치"
+        },
+        "Places/location": {
+            "description": "건물, 장소, 선박, 공원 등을 나타냅니다.",
+            "displayType": "위치"
+        },
+        "Places/area": {
+            "description": "객실 또는 스위트와 같은 위치 내의 영역을 나타냅니다.",
+            "displayType": "지역"
+        },
+        "Places/floor": {
+            "description": "건물 또는 선박의 바닥을 나타냅니다.",
+            "displayType": "바닥"
+        },
+        "Places/column": {
+            "description": "건물이나 선박의 기둥을 나타냅니다.",
+            "displayType": "기둥"
+        },
+        "Places/nearby": {
+            "description": "지오 해시의 특정 거리 내 사물 카테고리",
+            "displayType": "장소 근처"
+        },
+        "Places/interest": {
+            "description": "관심거리와 일치하는 지오 해시의 특정 거리 내 사물 카테고리",
+            "displayType": "관심 장소"
+        }
     }
 }

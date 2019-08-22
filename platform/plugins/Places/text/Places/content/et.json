@@ -54,5 +54,35 @@
         "exist": "Piirkond on juba olemas",
         "addNewArea": "Lisage uus ala",
         "add": "Lisama"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "asukohtade kogum",
+            "displayType": "Asukohad"
+        },
+        "Places\/location": {
+            "description": "Esindab ehitist, toimumiskohta, laeva, parki jne.",
+            "displayType": "Asukoht"
+        },
+        "Places\/area": {
+            "description": "Esindab piirkonnas asuvat piirkonda, näiteks tuba või sviiti",
+            "displayType": "Pindala"
+        },
+        "Places\/floor": {
+            "description": "Kujutab ehitise või laeva põrandat",
+            "displayType": "Korrus"
+        },
+        "Places\/column": {
+            "description": "Kujutab kolonni hoones või laevas",
+            "displayType": "Veerg"
+        },
+        "Places\/nearby": {
+            "description": "Kategooria asjadele, mis asuvad geohasest teatud kaugusel",
+            "displayType": "Kohtade lähedal"
+        },
+        "Places\/interest": {
+            "description": "Kategooria asjadele, mis asuvad geohasest teatud kaugusel ja vastavad huvile",
+            "displayType": "Kohad huvi"
+        }
     }
 }

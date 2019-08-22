@@ -67,5 +67,19 @@
             "displayType": "خدمت۔",
             "description": "پیش کردہ خدمت"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "حاصل کردہ {9 999} its کریڈٹ۔"
+        },
+        "Assets/credits/spent": {
+            "content": "{9 999}} کریڈٹ خرچ کیا۔"
+        },
+        "Assets/credits/sent": {
+            "content": "{9 999}} کریڈٹ بھیجے گئے۔"
+        },
+        "Assets/credits/received": {
+            "content": "{9 999}} کریڈٹ موصول ہوئے۔"
+        }
     }
 }

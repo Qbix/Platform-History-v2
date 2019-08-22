@@ -54,5 +54,35 @@
         "exist": "Svæði er þegar til",
         "addNewArea": "Bæta við nýju svæði",
         "add": "Bæta við"
+    },
+    "types": {
+        "Places/locations": {
+            "description": "safn staða",
+            "displayType": "Staðsetningar"
+        },
+        "Places/location": {
+            "description": "Táknar byggingu, vettvang, skip, almenningsgarð osfrv.",
+            "displayType": "Staðsetning"
+        },
+        "Places/area": {
+            "description": "Táknar svæði á stað, svo sem herbergi eða föruneyti",
+            "displayType": "Svæði"
+        },
+        "Places/floor": {
+            "description": "Táknar hæð í byggingu eða skipi",
+            "displayType": "Gólf"
+        },
+        "Places/column": {
+            "description": "Táknar súlu í byggingu eða skipi",
+            "displayType": "Súlan"
+        },
+        "Places/nearby": {
+            "description": "Flokkaðu hluti eftir ákveðinni fjarlægð frá geohash",
+            "displayType": "Nálægt eftir stöðum"
+        },
+        "Places/interest": {
+            "description": "Flokkaðu hluti eftir ákveðinni fjarlægð frá geohash, sem samsvarar áhuga",
+            "displayType": "Staðir vekja áhuga"
+        }
     }
 }

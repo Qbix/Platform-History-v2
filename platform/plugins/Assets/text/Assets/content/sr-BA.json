@@ -67,5 +67,19 @@
             "displayType": "Услуга",
             "description": "услуга која се нуди"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "Зарадио {{amount}} кредита"
+        },
+        "Assets/credits/spent": {
+            "content": "Потрошите {{amount}} кредита"
+        },
+        "Assets/credits/sent": {
+            "content": "Послано {{amount}} кредита"
+        },
+        "Assets/credits/received": {
+            "content": "Примљено је {{amount}} кредита"
+        }
     }
 }

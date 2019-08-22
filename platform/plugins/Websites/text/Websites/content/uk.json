@@ -26,5 +26,39 @@
             "StartConversation": "Почати розмову",
             "GotoConversation": "Перейдіть до розмови"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "HTML-документ, який можуть переглядати та редагувати різні користувачі",
+            "displayType": "Стаття"
+        },
+        "Websites\/slide": {
+            "description": "Слайд презентації, може включати HTML, аудіо тощо.",
+            "displayType": "Слайд"
+        },
+        "Websites\/presentation": {
+            "description": "Презентація, що складається з різних слайдів",
+            "displayType": "Презентація"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Рекламний блок на веб-сайті",
+            "displayType": "Рекламний блок"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Спосіб групування рекламних підрозділів під назвою",
+            "displayType": "Розміщення реклами"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Вміст для реклами",
+            "displayType": "Рекламне оголошення"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Рекламна кампанія",
+            "displayType": "Рекламна кампанія"
+        },
+        "Websites\/webpage": {
+            "description": "Представляє веб-сайт, метадані якого були скреблені",
+            "displayType": "веб-сторінка"
+        }
     }
 }

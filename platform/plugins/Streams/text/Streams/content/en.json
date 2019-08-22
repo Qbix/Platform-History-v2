@@ -3,8 +3,8 @@
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams/invited": "People I invited",
-        "Streams/invitedMe": "Who invited me"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me"
     },
     "interests": {
         "Filter": "What do you enjoy?",
@@ -43,8 +43,8 @@
         "Streams/task/complete": "Task completed: {{stream.fields.title}}",
         "Streams/task/error": "Error during: {{stream.fields.title}}",
         "Streams/incoming/*": "{{app}}: Incoming Message",
-        "Streams/relatedTo/Streams/call": "New Call Started in {{call 'message.getInstruction' 'toTitle'}}",
-        "Streams/relatedTo/*": "New {{relationDisplayType}} in {{call 'message.getInstruction' 'toTitle'}}",
+        "Streams/relatedTo/Streams/call": "New Call Started in {{toTitle}}",
+        "Streams/relatedTo/*": "New {{relationDisplayType}} in {{toTitle}}",
         "Streams/relatedFrom/*": "Added to {{toTitle}} as {{relationDisplayType}}"
     },
     "invite": {
@@ -84,7 +84,7 @@
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}</em> message to {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
             "commentedOn": "commented on",
@@ -122,113 +122,113 @@
         }
     },
     "types": {
-        "Streams/invited": {
+        "Streams\/invited": {
             "displayType": "Invited",
             "description": "Inbox for invitations"
         },
-        "Streams/resource": {
+        "Streams\/resource": {
             "displayType": "Resource",
             "description": "stream for managing access to a resource and posting messages about updates"
         },
-        "Streams/task": {
-			"description": "for receiving updates about progress on a certain task",
+        "Streams\/task": {
+            "description": "for receiving updates about progress on a certain task",
             "displayType": "Task"
         },
-		"Streams/tasks": {
-			"description": "category for tasks",
-			"displayType": "Tasks"
-		},
-		"Streams/experience": {
-			"description": "a common experience for members of a community",
-			"displayType": "Common experience for members of a community"
-		},
-		"Streams/greeting": {
-			"description": "greeting with which a user can introduce themselves",
-			"displayType": "Greeting"
-		},
-        "Streams/number": {
+        "Streams\/tasks": {
+            "description": "category for tasks",
+            "displayType": "Tasks"
+        },
+        "Streams\/experience": {
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
+        },
+        "Streams\/greeting": {
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
+        },
+        "Streams\/number": {
             "displayType": "Number",
             "description": "mathematical number"
         },
-        "Streams/date": {
+        "Streams\/date": {
             "displayType": "Date",
             "description": "date"
         },
-        "Streams/text": {
+        "Streams\/text": {
             "displayType": "Text",
             "description": "body of text"
         },
-        "Streams/text/small": {
+        "Streams\/text\/small": {
             "displayType": "Text",
             "description": "small body of text"
         },
-        "Streams/text/medium": {
+        "Streams\/text\/medium": {
             "displayType": "Text",
             "description": "medium body of text"
         },
-        "Streams/text/emailAddress": {
+        "Streams\/text\/emailAddress": {
             "displayType": "Email Address",
             "description": "email address"
         },
-        "Streams/text/phoneNumber": {
+        "Streams\/text\/phoneNumber": {
             "displayType": "Phone Number",
             "description": "phone number"
         },
-        "Streams/text/url": {
+        "Streams\/text\/url": {
             "displayType": "URL",
             "description": "link on the web"
         },
-        "Streams/image": {
+        "Streams\/image": {
             "displayType": "Image",
             "description": "visual image"
         },
-        "Streams/images": {
+        "Streams\/images": {
             "displayType": "Image Gallery",
             "description": "gallery of images"
         },
-        "Streams/album": {
+        "Streams\/album": {
             "displayType": "Album",
             "description": "an album to which various media is related"
         },
-        "Streams/file": {
+        "Streams\/file": {
             "displayType": "File",
             "description": "uploaded file"
         },
-        "Streams/audio": {
+        "Streams\/audio": {
             "displayType": "Audio Clip",
             "description": "audio clip"
         },
-        "Streams/video": {
+        "Streams\/video": {
             "displayType": "Video Clip",
             "description": "video clip"
         },
-        "Streams/live": {
+        "Streams\/live": {
             "displayType": "Livestream",
             "description": "live audio or video"
         },
-        "Streams/category": {
+        "Streams\/category": {
             "displayType": "Category",
             "description": "a category to which other streams can be related"
         },
-        "Streams/participating": {
+        "Streams\/participating": {
             "displayType": "Participating Index",
-            "description": "streams are related/unrelated to this when a user joins/leaves"
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
         },
-        "Streams/interest": {
+        "Streams\/interest": {
             "displayType": "Interest",
             "description": "represents a user's interest in a certain topic"
         },
-        "Streams/incoming": {
+        "Streams\/incoming": {
             "displayType": "Incoming",
             "description": "destination for messages sent by other users"
         },
-        "Streams/chat": {
+        "Streams\/chat": {
             "displayType": "Conversation",
             "description": "a conversation between users, with history"
         },
-        "Streams/webrtc": {
+        "Streams\/webrtc": {
             "displayType": "Real-Time Call",
-            "description": "a real time video/audio call"
+            "description": "a real time video\/audio call"
         }
     }
 }

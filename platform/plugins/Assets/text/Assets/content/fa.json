@@ -67,5 +67,19 @@
             "displayType": "سرویس",
             "description": "خدمات ارائه شده"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "اعتبار 99 999 کسب کرده است"
+        },
+        "Assets\/credits\/spent": {
+            "content": "اعتبار {999 صرف کرد"
+        },
+        "Assets\/credits\/sent": {
+            "content": "اعتبار {999 ارسال شده است"
+        },
+        "Assets\/credits\/received": {
+            "content": "اعتبار 999 {دریافت کرد"
+        }
     }
 }

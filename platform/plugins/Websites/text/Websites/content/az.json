@@ -26,5 +26,39 @@
             "StartConversation": "Söhbətə başlayın",
             "GotoConversation": "Söhbətə gedin"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Müxtəlif istifadəçilərin baxa və düzəldə biləcəyi HTML sənəd",
+            "displayType": "Məqalə"
+        },
+        "Websites\/slide": {
+            "description": "Təqdimatdakı slayd, HTML, audio və s. Daxil ola bilər.",
+            "displayType": "Sürüşdürün"
+        },
+        "Websites\/presentation": {
+            "description": "Müxtəlif slaydlardan ibarət təqdimat",
+            "displayType": "Təqdimat"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Bir veb saytında bir reklam vahidi",
+            "displayType": "Reklam vahidi"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Reklam bölmələrini bir ad altında qruplaşdırmağın bir yolu",
+            "displayType": "Reklam yerləşdirmə"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Bir reklam üçün məzmun",
+            "displayType": "Yaradıcı reklam edin"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Reklam kampaniyası",
+            "displayType": "Reklam kampaniyası"
+        },
+        "Websites\/webpage": {
+            "description": "Metadata zədələnmiş bir veb sayt təqdim edir",
+            "displayType": "veb səhifə"
+        }
     }
 }

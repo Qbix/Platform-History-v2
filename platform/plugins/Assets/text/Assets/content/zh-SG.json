@@ -67,5 +67,19 @@
             "displayType": "服务",
             "description": "提供服务"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "获得{{amount}}学分"
+        },
+        "Assets/credits/spent": {
+            "content": "花了{{amount}}学分"
+        },
+        "Assets/credits/sent": {
+            "content": "已发送{{amount}}个学分"
+        },
+        "Assets/credits/received": {
+            "content": "收到{{amount}}个学分"
+        }
     }
 }

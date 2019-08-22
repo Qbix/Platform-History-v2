@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "Thirrje në kohë reale",
             "description": "një thirrje video \/ audio në kohë reale"
+        },
+        "Streams\/tasks": {
+            "description": "kategori për detyra",
+            "displayType": "detyrat"
+        },
+        "Streams\/experience": {
+            "description": "një përvojë e zakonshme për anëtarët e një komuniteti",
+            "displayType": "Përvojë e përbashkët për anëtarët e një komuniteti"
+        },
+        "Streams\/greeting": {
+            "description": "përshëndetje me të cilën një përdorues mund të prezantojë veten e tyre",
+            "displayType": "përshëndetje"
         }
     },
     "messages": {

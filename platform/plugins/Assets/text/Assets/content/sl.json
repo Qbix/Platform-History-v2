@@ -67,5 +67,19 @@
             "displayType": "Storitev",
             "description": "storitev, ki se ponuja"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Zaslužen {{amount}} kreditov"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Potrošite {{amount}} kreditov"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Poslano {{amount}} kreditov"
+        },
+        "Assets\/credits\/received": {
+            "content": "Prejel {{amount}} kreditov"
+        }
     }
 }

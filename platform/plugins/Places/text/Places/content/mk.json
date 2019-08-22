@@ -54,5 +54,35 @@
         "exist": "Областа веќе постои",
         "addNewArea": "Додај нова област",
         "add": "Додај"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "збирка на локации",
+            "displayType": "Локации"
+        },
+        "Places\/location": {
+            "description": "Претставува зграда, место, брод, парк, итн.",
+            "displayType": "Локација"
+        },
+        "Places\/area": {
+            "description": "Претставува област на некоја локација, како што е просторија или пакет",
+            "displayType": "Област"
+        },
+        "Places\/floor": {
+            "description": "Претставува кат во зграда или брод",
+            "displayType": "Подот"
+        },
+        "Places\/column": {
+            "description": "Претставува колона во зграда или брод",
+            "displayType": "Колона"
+        },
+        "Places\/nearby": {
+            "description": "Категорија за работи на одредено растојание од геохаш",
+            "displayType": "Во близина на места"
+        },
+        "Places\/interest": {
+            "description": "Категорија за работи на одредено растојание од геоаш, што одговара на интерес",
+            "displayType": "Места интересира"
+        }
     }
 }

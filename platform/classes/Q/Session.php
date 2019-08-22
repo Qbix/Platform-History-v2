@@ -116,6 +116,7 @@ class Q_Session
 	}
 
 	/**
+	 * Get or set the session id
 	 * @method id
 	 * @static
 	 * @param {string} [$id=null] Pass a new session id, if you want to change it
@@ -283,6 +284,7 @@ class Q_Session
 		}
 
 		try {
+			$started = false;
 			if ($id) {
 				self::processDbInfo();
 				self::id($id);
@@ -441,7 +443,10 @@ class Q_Session
 			if (is_string($duration)) {
 				$duration = Q_Config::get('Q', 'session', 'durations', $duration, 0);
 			};
-			Q_Response::setCookie(self::name(), $sid, $duration ? time()+$duration : 0);
+			Q_Response::setCookie(
+				self::name(), $sid, $duration ? time()+$duration : 0,
+				null, null, true, true
+			);
 		}
 		$_SESSION = $old_SESSION; // restore $_SESSION, which will be saved when session closes
 
@@ -931,7 +936,10 @@ class Q_Session
 		if (!empty($_SERVER['HTTP_HOST'])) {
 			$durationName = self::durationName();
 			$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
-			Q_Response::setCookie('Q_nonce', $_SESSION['Q']['nonce'], $duration ? time()+$duration : 0);
+			Q_Response::setCookie(
+				'Q_nonce', $_SESSION['Q']['nonce'], $duration ? time()+$duration : 0,
+				null, null, false, false
+			);
 		}
 		Q_Session::$nonceWasSet = true;
 	}
@@ -1070,23 +1078,15 @@ class Q_Session
 	 */
 	static function generateId()
 	{
-		if (is_callable('random_bytes')) {
-			$id = bin2hex(random_bytes(16));
-		} else {
-			$id = str_replace('-', '', Q_Utils::uuid());
-		}
+		$id = Q_Utils::randomHexString(32);
 		$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		if (isset($secret)) {
 			$sig = Q_Utils::signature($id, "$secret");
 			$id .= substr($sig, 0, 32);
 		}
-		$id = base64_encode(pack('H*', $id));
-		return str_replace(
-			array('z', '+', '/', '='),
-			array('zz', 'za', 'zb', 'zc'),
-			$id
-		);
+		return Q_Utils::toBase64($id);
 	}
+	
 	/**
 	 * @param string $id
 	 *
@@ -1096,35 +1096,8 @@ class Q_Session
 	*/
 	protected static function decodeId($id)
 	{
-		if (!$id) {
-			return array(false, '', '');
-		}
-		$result = '';
-		$len = strlen($id);
-		$i = 0;
-		$replacements = array(
-			'z' => 'z',
-			'a' => '+',
-			'b' => '/',
-			'c' => '='
-		);
-		while ($i < $len-1) {
-			$r = $id[$i];
-			$c1 = $id[$i];
-			++$i;
-			if ($c1 == 'z') {
-				$c2 = $id[$i];
-				if (isset($replacements[$c2])) {
-					$r = $replacements[$c2];
-					++$i;
-				}
-			}
-			$result .= $r;
-		}
-		if ($i < $len) {
-			$result .= $id[$i];
-		}
-		$result = bin2hex(base64_decode($result));
+		$data = Q_Utils::fromBase64($id);
+		$result = bin2hex($data);
 		$a = substr($result, 0, 32);
 		$b = substr($result, 32, 32);
 		$secret = Q_Config::get('Q', 'internal', 'secret', null);

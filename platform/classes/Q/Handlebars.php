@@ -60,6 +60,7 @@ class Q_Handlebars {
 				}
 			));
 			self::$handlebars->addHelper('call', array('Q_Handlebars', 'helperCall'));
+			self::$handlebars->addHelper('lookup', array('Q_Handlebars', 'helperLookup'));
 			self::$handlebars->addHelper('tool', array('Q_Handlebars', 'helperTool'));
 			self::$handlebars->addHelper('idPrefix', array('Q_Handlebars', 'helperIdPrefix'));
 			self::$handlebars->addHelper('toUrl', array('Q_Handlebars', 'helperToUrl'));
@@ -161,6 +162,32 @@ class Q_Handlebars {
 			}
 		}
 		return Q::tool($name, $o, compact('id'));
+	}
+
+	static function helperLookup($template, $context, $args, $source)
+	{
+		$args2 = explode(' ', $args);
+		$vars = $context->lastSpecialVariables();
+		if (empty($args[0])) {
+			return "";
+		}
+		$segments = array($args2[0]);
+		$first = true;
+		foreach ($args2 as $arg) {
+			if ($first) {
+				$first = false;
+				continue;
+			}
+			if ($arg === '.') {
+				$arg = '@value';
+			}
+			if (isset($vars[$arg])) {
+				$arg = $vars[$arg];
+			}
+			$segments[] = '[' . $arg . ']';
+		}
+		$path = implode('.', $segments);
+		return $context->get($path);
 	}
 	
 	static function helperIdPrefix($template, $context, $args, $source)

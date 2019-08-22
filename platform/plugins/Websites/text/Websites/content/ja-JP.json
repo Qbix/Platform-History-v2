@@ -26,5 +26,39 @@
             "StartConversation": "会話を開始",
             "GotoConversation": "会話へ"
         }
+    },
+    "types": {
+        "Websites/article": {
+            "description": "さまざまなユーザーが表示および編集できるHTMLドキュメント",
+            "displayType": "記事"
+        },
+        "Websites/slide": {
+            "description": "プレゼンテーションのスライドには、HTML、オーディオなどを含めることができます。",
+            "displayType": "滑り台"
+        },
+        "Websites/presentation": {
+            "description": "さまざまなスライドで構成されるプレゼンテーション",
+            "displayType": "プレゼンテーション"
+        },
+        "Websites/advert/unit": {
+            "description": "ウェブサイト上の広告ユニット",
+            "displayType": "広告ユニット"
+        },
+        "Websites/advert/placement": {
+            "description": "名前の下に広告ユニットをグループ化する方法",
+            "displayType": "広告の配置"
+        },
+        "Websites/advert/creative": {
+            "description": "広告のコンテンツ",
+            "displayType": "広告クリエイティブ"
+        },
+        "Websites/advert/campaign": {
+            "description": "広告キャンペーン",
+            "displayType": "広告キャンペーン"
+        },
+        "Websites/webpage": {
+            "description": "メタデータがスクレイピングされたWebサイトを表します",
+            "displayType": "ウェブページ"
+        }
     }
 }

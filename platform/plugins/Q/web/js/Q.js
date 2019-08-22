@@ -4106,10 +4106,22 @@ Tp.stateChanged = function Q_Tool_prototype_stateChanged(names) {
  * When implementing tools, use this to implement rendering markup that can vary
  * as a function of the tool's state (with no additional side effects).
  * @method rendering
- * @param {Array|String} fields The names of fields to watch for, either as an array or comma-separated string. When stateChanged is called, if one of the fields named here really changed, the callback will be called.
- * @param {Function} callback The callback, which receives (changed, previous, timestamp). By default, Qbix defers the execution of your rendering handler until the next animation frame. If several calls to tool.stateChanged</span> occurred in the meantime, Qbix aggregates all the changes and reports them to the rendering handler. If a field in the state was changed several times in the meantime, those intermediate values aren't given to the rendering handler, since the assumption is that the view depends on the state without any side effects. However, if the field was changed, even if it later went back to its original value, it will show up in the list of changed fields.
+ * @param {Array|String} fields The names of fields to watch for, either as an array or 
+ *  comma-separated string. When stateChanged is called, if one of the fields named here really changed,
+ *  the callback will be called.
+ * @param {Function} callback The callback, which receives (changed, previous, timestamp). 
+ *  By default, Qbix defers the execution of your rendering handler until the next animation frame.
+ *  If several calls to tool.stateChanged</span> occurred in the meantime, 
+ *  Qbix aggregates all the changes and reports them to the rendering handler. 
+ *  If a field in the state was changed several times in the meantime, 
+ *  those intermediate values aren't given to the rendering handler, 
+ *  since the assumption is that the view depends on the state without any side effects.
+ *  However, if the field was changed, even if it later went back to its original value,
+ *  it will show up in the list of changed fields.
  * @param {String} [key=""] Optional key used when attaching event handlers to tool.Q.onStateChanged events.
- * @param {boolean} [dontWaitForAnimationFrame=false] Pass true here if you really don't want to wait for the next animation frame to do rendering (for example, if you insist on reading the DOM and will use a library like FastDOM to manage DOM thrashing)
+ * @param {boolean} [dontWaitForAnimationFrame=false] Pass true here if you really don't want to 
+ *  wait for the next animation frame to do rendering (for example, 
+ *  if you insist on reading the DOM and will use a library like FastDOM to manage DOM thrashing)
  */
 Tp.rendering = function (fields, callback, key, dontWaitForAnimationFrame) {
 	var tool = this;
@@ -9485,7 +9497,7 @@ Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, callback2) {
 		_qsockets[ns][url] = null; // pending
 	}
 	// check if socket already connected, or reconnect
-	_connectSocketNS(ns, url, callback, callback2, true);
+	_connectSocketNS(ns, url, callback, callback2, false);
 };
 
 /**

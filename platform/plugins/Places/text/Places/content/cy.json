@@ -54,5 +54,35 @@
         "exist": "Mae&#39;r ardal eisoes yn bodoli",
         "addNewArea": "Ychwanegu ardal newydd",
         "add": "Ychwanegwch"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "casgliad o leoliadau",
+            "displayType": "Lleoliadau"
+        },
+        "Places\/location": {
+            "description": "Yn cynrychioli adeilad, lleoliad, llong, parc, ac ati.",
+            "displayType": "Lleoliad"
+        },
+        "Places\/area": {
+            "description": "Yn cynrychioli ardal mewn lleoliad, fel ystafell neu ystafell",
+            "displayType": "Ardal"
+        },
+        "Places\/floor": {
+            "description": "Yn cynrychioli llawr mewn adeilad neu long",
+            "displayType": "Llawr"
+        },
+        "Places\/column": {
+            "description": "Yn cynrychioli colofn mewn adeilad neu long",
+            "displayType": "Colofn"
+        },
+        "Places\/nearby": {
+            "description": "Categori ar gyfer pethau o fewn pellter penodol i geohash",
+            "displayType": "Gerllaw lleoedd"
+        },
+        "Places\/interest": {
+            "description": "Categori ar gyfer pethau o fewn pellter penodol i geohash, sy&#39;n cyfateb i ddiddordeb",
+            "displayType": "Lleoedd diddordeb"
+        }
     }
 }

@@ -67,5 +67,19 @@
             "displayType": "Perkhidmatan",
             "description": "perkhidmatan yang ditawarkan"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Memperoleh kredit {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Pulih {{amount}} kredit"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Hantar {{amount}} kredit"
+        },
+        "Assets\/credits\/received": {
+            "content": "Menerima kredit {{amount}}"
+        }
     }
 }

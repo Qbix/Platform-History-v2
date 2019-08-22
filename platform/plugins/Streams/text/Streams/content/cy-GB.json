@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Galwad Amser Real",
             "description": "galwad fideo / sain amser real"
+        },
+        "Streams/tasks": {
+            "description": "categori ar gyfer tasgau",
+            "displayType": "Tasgau"
+        },
+        "Streams/experience": {
+            "description": "profiad cyffredin i aelodau cymuned",
+            "displayType": "Profiad cyffredin i aelodau cymuned"
+        },
+        "Streams/greeting": {
+            "description": "cyfarch y gall defnyddiwr gyflwyno ei hun gydag ef",
+            "displayType": "Cyfarch"
         }
     },
     "messages": {

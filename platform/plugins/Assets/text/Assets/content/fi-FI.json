@@ -67,5 +67,19 @@
             "displayType": "palvelu",
             "description": "palvelu tarjotaan"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "Ansainnut {{amount}} hyvitystä"
+        },
+        "Assets/credits/spent": {
+            "content": "Käytetty {{amount}} hyvitystä"
+        },
+        "Assets/credits/sent": {
+            "content": "Lähetetty {{amount}} hyvitystä"
+        },
+        "Assets/credits/received": {
+            "content": "Saanut {{amount}} hyvitystä"
+        }
     }
 }

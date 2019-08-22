@@ -67,5 +67,19 @@
             "displayType": "ಸೇವೆ",
             "description": "ಸೇವೆಯನ್ನು ನೀಡಲಾಗುತ್ತಿದೆ"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "{{amount}} ಸಾಲಗಳನ್ನು ಗಳಿಸಿದೆ"
+        },
+        "Assets/credits/spent": {
+            "content": "{{amount}} ಸಾಲಗಳನ್ನು ಕಳೆದರು"
+        },
+        "Assets/credits/sent": {
+            "content": "{{amount}} ಸಾಲಗಳನ್ನು ಕಳುಹಿಸಲಾಗಿದೆ"
+        },
+        "Assets/credits/received": {
+            "content": "{{amount}} ಸಾಲಗಳನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ"
+        }
     }
 }

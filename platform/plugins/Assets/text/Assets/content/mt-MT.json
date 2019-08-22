@@ -67,5 +67,19 @@
             "displayType": "Servizz",
             "description": "servizz li qed jiġi offrut"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "Kiseb {{amount}} kredti"
+        },
+        "Assets/credits/spent": {
+            "content": "Intnefqu {{amount}} kredti"
+        },
+        "Assets/credits/sent": {
+            "content": "Intbagħtu {{amount}} kredti"
+        },
+        "Assets/credits/received": {
+            "content": "Irċevejt {{amount}} kredti"
+        }
     }
 }

@@ -26,5 +26,39 @@
             "StartConversation": "Mulai Percakapan",
             "GotoConversation": "Pergi ke Percakapan"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Dokumen HTML yang dapat dilihat dan diedit oleh berbagai pengguna",
+            "displayType": "Artikel"
+        },
+        "Websites\/slide": {
+            "description": "Slide dalam presentasi, dapat menyertakan HTML, audio, dll.",
+            "displayType": "Meluncur"
+        },
+        "Websites\/presentation": {
+            "description": "Presentasi yang terdiri dari berbagai slide",
+            "displayType": "Presentasi"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Unit iklan di situs web",
+            "displayType": "Unit iklan"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Cara mengelompokkan unit iklan dengan nama",
+            "displayType": "Iklankan penempatan"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Konten untuk iklan",
+            "displayType": "Iklan kreatif"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Kampanye iklan",
+            "displayType": "Iklankan kampanye"
+        },
+        "Websites\/webpage": {
+            "description": "Merupakan situs web yang metadata-nya telah dikikis",
+            "displayType": "halaman web"
+        }
     }
 }

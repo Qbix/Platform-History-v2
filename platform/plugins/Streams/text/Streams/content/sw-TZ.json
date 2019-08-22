@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Simu ya Wakati wa kweli",
             "description": "simu ya video ya wakati / sauti ya sauti"
+        },
+        "Streams/tasks": {
+            "description": "jamii kwa kazi",
+            "displayType": "Kazi"
+        },
+        "Streams/experience": {
+            "description": "uzoefu wa kawaida kwa wanajumuiya",
+            "displayType": "Uzoefu wa kawaida kwa wanajumuiya"
+        },
+        "Streams/greeting": {
+            "description": "salamu ambayo mtumiaji anaweza kujitambulisha",
+            "displayType": "Salamu"
         }
     },
     "messages": {

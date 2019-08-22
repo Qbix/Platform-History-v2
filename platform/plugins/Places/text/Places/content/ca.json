@@ -54,5 +54,35 @@
         "exist": "L&#39;àrea ja existeix",
         "addNewArea": "Afegeix una àrea nova",
         "add": "Afegeix"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "una col·lecció d’ubicacions",
+            "displayType": "Ubicacions"
+        },
+        "Places\/location": {
+            "description": "Representa un edifici, seu, nau, parc, etc.",
+            "displayType": "Ubicació"
+        },
+        "Places\/area": {
+            "description": "Representa una zona dins d’una ubicació, com ara una habitació o suite",
+            "displayType": "Àrea"
+        },
+        "Places\/floor": {
+            "description": "Representa un pis en un edifici o nau",
+            "displayType": "Sòl"
+        },
+        "Places\/column": {
+            "description": "Representa una columna en un edifici o nau",
+            "displayType": "Columna"
+        },
+        "Places\/nearby": {
+            "description": "Categoria de coses a una certa distància d’un geohash",
+            "displayType": "A prop de llocs"
+        },
+        "Places\/interest": {
+            "description": "Categoria per a coses que es trobin a una certa distància d&#39;un geohash, que coincideixi amb un interès",
+            "displayType": "Llocs d&#39;interès"
+        }
     }
 }

@@ -67,5 +67,19 @@
             "displayType": "सर्विस",
             "description": "सेवा की पेशकश की जा रही है"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "अर्जित {{amount}} क्रेडिट"
+        },
+        "Assets/credits/spent": {
+            "content": "{{amount}} क्रेडिट खर्च किया"
+        },
+        "Assets/credits/sent": {
+            "content": "भेजा गया {{amount}} क्रेडिट"
+        },
+        "Assets/credits/received": {
+            "content": "प्राप्त {{amount}} क्रेडिट"
+        }
     }
 }

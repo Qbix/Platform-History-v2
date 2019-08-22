@@ -26,5 +26,39 @@
             "StartConversation": "Старт Цонверсатион",
             "GotoConversation": "Идите на Разговор"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "ХТМЛ документ који различити корисници могу да прегледају и измене",
+            "displayType": "Члан"
+        },
+        "Websites\/slide": {
+            "description": "Слајд у презентацији, може да садржи ХТМЛ, аудио итд.",
+            "displayType": "Тобоган"
+        },
+        "Websites\/presentation": {
+            "description": "Презентација која се састоји од различитих слајдова",
+            "displayType": "Презентација"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Рекламна јединица на веб локацији",
+            "displayType": "Огласна јединица"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Начин груписања рекламних јединица под именом",
+            "displayType": "Положај огласа"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Садржај за рекламу",
+            "displayType": "Оглас оглас"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Рекламна кампања",
+            "displayType": "Огласна кампања"
+        },
+        "Websites\/webpage": {
+            "description": "Представља веб локацију чији су метаподаци избрисани",
+            "displayType": "веб страна"
+        }
     }
 }

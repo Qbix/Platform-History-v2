@@ -54,5 +54,35 @@
         "exist": "A terület már létezik",
         "addNewArea": "Új terület hozzáadása",
         "add": "hozzáad"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "helyek gyűjteménye",
+            "displayType": "Helyszínek"
+        },
+        "Places\/location": {
+            "description": "Épületet, helyszínt, hajót, parkot ábrázol",
+            "displayType": "Elhelyezkedés"
+        },
+        "Places\/area": {
+            "description": "Egy adott területen belüli területet képvisel, például egy szobát vagy lakosztályt",
+            "displayType": "Terület"
+        },
+        "Places\/floor": {
+            "description": "Egy épület vagy hajó padlóját ábrázolja",
+            "displayType": "Padló"
+        },
+        "Places\/column": {
+            "description": "Egy épület vagy hajó oszlopát ábrázolja",
+            "displayType": "Oszlop"
+        },
+        "Places\/nearby": {
+            "description": "Kategória azokra a dolgokra, amelyek egy geohash-tól bizonyos távolságra vannak",
+            "displayType": "Helyek közelében"
+        },
+        "Places\/interest": {
+            "description": "Kategória azokra a dolgokra, amelyek egy geohash-tól egy bizonyos távolságra vannak, egy érdeklődésnek megfelelnek",
+            "displayType": "Helyek érdeklődés"
+        }
     }
 }

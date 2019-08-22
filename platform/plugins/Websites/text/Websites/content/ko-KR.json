@@ -26,5 +26,39 @@
             "StartConversation": "대화 시작",
             "GotoConversation": "대화로 이동"
         }
+    },
+    "types": {
+        "Websites/article": {
+            "description": "다양한 사용자가보고 편집 할 수있는 HTML 문서",
+            "displayType": "조"
+        },
+        "Websites/slide": {
+            "description": "프리젠 테이션의 슬라이드에는 HTML, 오디오 등이 포함될 수 있습니다.",
+            "displayType": "슬라이드"
+        },
+        "Websites/presentation": {
+            "description": "다양한 슬라이드로 구성된 프레젠테이션",
+            "displayType": "표시"
+        },
+        "Websites/advert/unit": {
+            "description": "웹 사이트의 광고 단위",
+            "displayType": "광고 단위"
+        },
+        "Websites/advert/placement": {
+            "description": "이름으로 광고 단위를 그룹화하는 방법",
+            "displayType": "광고 게재 위치"
+        },
+        "Websites/advert/creative": {
+            "description": "광고 내용",
+            "displayType": "광고 소재"
+        },
+        "Websites/advert/campaign": {
+            "description": "광고 캠페인",
+            "displayType": "광고 캠페인"
+        },
+        "Websites/webpage": {
+            "description": "메타 데이터가 스크랩 된 웹 사이트를 나타냅니다",
+            "displayType": "웹 페이지"
+        }
     }
 }

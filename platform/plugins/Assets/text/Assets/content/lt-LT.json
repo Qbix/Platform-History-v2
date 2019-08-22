@@ -67,5 +67,19 @@
             "displayType": "Aptarnavimas",
             "description": "siūlomos paslaugos"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "Uždirbti {{amount}} kreditai"
+        },
+        "Assets/credits/spent": {
+            "content": "Panaudoti {{amount}} kreditai"
+        },
+        "Assets/credits/sent": {
+            "content": "Išsiųsti {{amount}} kreditai"
+        },
+        "Assets/credits/received": {
+            "content": "Gavo {{amount}} kreditų"
+        }
     }
 }

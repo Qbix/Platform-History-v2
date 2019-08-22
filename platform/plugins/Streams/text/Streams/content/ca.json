@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "Trucada en temps real",
             "description": "una trucada de vídeo \/ àudio en temps real"
+        },
+        "Streams\/tasks": {
+            "description": "categoria per a tasques",
+            "displayType": "Tasques"
+        },
+        "Streams\/experience": {
+            "description": "una experiència comuna per a membres d’una comunitat",
+            "displayType": "Experiència comuna per a membres d’una comunitat"
+        },
+        "Streams\/greeting": {
+            "description": "salutació amb la qual un usuari es pot presentar",
+            "displayType": "Salutació"
         }
     },
     "messages": {

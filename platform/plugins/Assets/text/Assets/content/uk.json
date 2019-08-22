@@ -67,5 +67,19 @@
             "displayType": "Сервіс",
             "description": "послуги, що пропонуються"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Зароблено {{amount}} кредитів"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Витрачено {{amount}} кредитів"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Надіслано {{amount}} кредитів"
+        },
+        "Assets\/credits\/received": {
+            "content": "Отримано {{amount}} кредитів"
+        }
     }
 }

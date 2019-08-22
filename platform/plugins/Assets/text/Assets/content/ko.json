@@ -67,5 +67,19 @@
             "displayType": "서비스",
             "description": "제공되는 서비스"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "{{amount}} 크레딧 획득"
+        },
+        "Assets\/credits\/spent": {
+            "content": "사용한 {{amount}} 크레딧"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{{amount}} 크레딧을 보냈습니다."
+        },
+        "Assets\/credits\/received": {
+            "content": "{{amount}} 크레딧을 받았습니다"
+        }
     }
 }

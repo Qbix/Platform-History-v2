@@ -67,5 +67,19 @@
             "displayType": "Þjónusta",
             "description": "þjónusta í boði"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Aflað {{amount}} eininga"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Eytt {{amount}} einingum"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Send {{amount}} ein"
+        },
+        "Assets\/credits\/received": {
+            "content": "Fékk {{amount}} einingar"
+        }
     }
 }

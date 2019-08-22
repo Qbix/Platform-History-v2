@@ -209,6 +209,18 @@
         "Streams/webrtc": {
             "displayType": "Realtidsopkald",
             "description": "et video- / lydopkald i realtid"
+        },
+        "Streams/tasks": {
+            "description": "kategori til opgaver",
+            "displayType": "Opgaver"
+        },
+        "Streams/experience": {
+            "description": "en fælles oplevelse for medlemmer af et samfund",
+            "displayType": "Almindelig oplevelse for medlemmer af et samfund"
+        },
+        "Streams/greeting": {
+            "description": "hilsen, som en bruger kan introducere sig selv med",
+            "displayType": "Hilsen"
         }
     },
     "messages": {

@@ -26,5 +26,39 @@
             "StartConversation": "Bắt đầu hội thoại",
             "GotoConversation": "Đi tới hội thoại"
         }
+    },
+    "types": {
+        "Websites/article": {
+            "description": "Một tài liệu HTML mà nhiều người dùng có thể xem và chỉnh sửa",
+            "displayType": "Bài báo"
+        },
+        "Websites/slide": {
+            "description": "Một slide trong một bài thuyết trình, có thể bao gồm HTML, âm thanh, v.v.",
+            "displayType": "Trượt"
+        },
+        "Websites/presentation": {
+            "description": "Một bài thuyết trình bao gồm nhiều slide khác nhau",
+            "displayType": "Trình bày"
+        },
+        "Websites/advert/unit": {
+            "description": "Một đơn vị quảng cáo trên một trang web",
+            "displayType": "Đơn vị quảng cáo"
+        },
+        "Websites/advert/placement": {
+            "description": "Một cách nhóm các đơn vị quảng cáo dưới một tên",
+            "displayType": "Vị trí quảng cáo"
+        },
+        "Websites/advert/creative": {
+            "description": "Nội dung cho một quảng cáo",
+            "displayType": "Quảng cáo sáng tạo"
+        },
+        "Websites/advert/campaign": {
+            "description": "Một chiến dịch quảng cáo",
+            "displayType": "Chiến dịch quảng cáo"
+        },
+        "Websites/webpage": {
+            "description": "Đại diện cho một trang web có siêu dữ liệu bị loại bỏ",
+            "displayType": "trang web"
+        }
     }
 }

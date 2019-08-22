@@ -67,5 +67,19 @@
             "displayType": "Servicio",
             "description": "servicio ofrecido"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Ganó {{amount}} créditos"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Pasó {{amount}} créditos"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Enviado {{amount}} créditos"
+        },
+        "Assets\/credits\/received": {
+            "content": "Recibió {{amount}} créditos"
+        }
     }
 }

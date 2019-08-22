@@ -26,5 +26,39 @@
             "StartConversation": "Spustite konverzáciu",
             "GotoConversation": "Prejdite na konverzáciu"
         }
+    },
+    "types": {
+        "Websites/article": {
+            "description": "Dokument HTML, ktorý môžu rôzni používatelia prezerať a upravovať",
+            "displayType": "článok"
+        },
+        "Websites/slide": {
+            "description": "Snímka v prezentácii môže obsahovať HTML, audio atď.",
+            "displayType": "Šmykľavka"
+        },
+        "Websites/presentation": {
+            "description": "Prezentácia pozostávajúca z rôznych snímok",
+            "displayType": "predstavenie"
+        },
+        "Websites/advert/unit": {
+            "description": "Reklamná jednotka na webovej stránke",
+            "displayType": "Reklamná jednotka"
+        },
+        "Websites/advert/placement": {
+            "description": "Spôsob zoskupovania reklamných jednotiek pod menom",
+            "displayType": "Umiestnenie reklamy"
+        },
+        "Websites/advert/creative": {
+            "description": "Obsah pre reklamu",
+            "displayType": "Reklamná kreatíva"
+        },
+        "Websites/advert/campaign": {
+            "description": "Reklamná kampaň",
+            "displayType": "Reklamná kampaň"
+        },
+        "Websites/webpage": {
+            "description": "Predstavuje webovú stránku, ktorej metadáta boli zoškrabané",
+            "displayType": "webstránka"
+        }
     }
 }

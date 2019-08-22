@@ -209,6 +209,18 @@
         "Streams\/webrtc": {
             "displayType": "Дзвінок у режимі реального часу",
             "description": "відео \/ аудіодзвінок у режимі реального часу"
+        },
+        "Streams\/tasks": {
+            "description": "категорія завдань",
+            "displayType": "Завдання"
+        },
+        "Streams\/experience": {
+            "description": "загальний досвід для членів громади",
+            "displayType": "Загальний досвід для членів громади"
+        },
+        "Streams\/greeting": {
+            "description": "привітання, з яким користувач може представити себе",
+            "displayType": "Привітання"
         }
     },
     "messages": {

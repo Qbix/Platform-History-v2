@@ -54,5 +54,35 @@
         "exist": "ప్రాంతం ఇప్పటికే ఉనికిలో ఉంది",
         "addNewArea": "క్రొత్త ప్రాంతాన్ని జోడించండి",
         "add": "చేర్చు"
+    },
+    "types": {
+        "Places/locations": {
+            "description": "స్థానాల సేకరణ",
+            "displayType": "స్థానాలు"
+        },
+        "Places/location": {
+            "description": "భవనం, వేదిక, ఓడ, ఉద్యానవనం మొదలైనవాటిని సూచిస్తుంది.",
+            "displayType": "స్థానం"
+        },
+        "Places/area": {
+            "description": "గది లేదా సూట్ వంటి ప్రదేశంలో ఒక ప్రాంతాన్ని సూచిస్తుంది",
+            "displayType": "ప్రాంతం"
+        },
+        "Places/floor": {
+            "description": "భవనం లేదా ఓడలో ఒక అంతస్తును సూచిస్తుంది",
+            "displayType": "అంతస్తు"
+        },
+        "Places/column": {
+            "description": "భవనం లేదా ఓడలోని కాలమ్‌ను సూచిస్తుంది",
+            "displayType": "కాలమ్"
+        },
+        "Places/nearby": {
+            "description": "జియోహాష్ యొక్క నిర్దిష్ట దూరంలోని విషయాల కోసం వర్గం",
+            "displayType": "స్థలాల దగ్గర"
+        },
+        "Places/interest": {
+            "description": "జియోహాష్ యొక్క నిర్దిష్ట దూరంలోని విషయాల కోసం వర్గం, ఆసక్తికి సరిపోతుంది",
+            "displayType": "స్థలాల ఆసక్తి"
+        }
     }
 }

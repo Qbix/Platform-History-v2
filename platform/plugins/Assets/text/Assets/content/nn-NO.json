@@ -67,5 +67,19 @@
             "displayType": "Service",
             "description": "tjenesten som tilbys"
         }
+    },
+    "messages": {
+        "Assets/credits/earned": {
+            "content": "Opptjent {{amount}} studiepoeng"
+        },
+        "Assets/credits/spent": {
+            "content": "Brukte {{amount}} studiepoeng"
+        },
+        "Assets/credits/sent": {
+            "content": "Sendte {{amount}} studiepoeng"
+        },
+        "Assets/credits/received": {
+            "content": "Mottatt {{amount}} studiepoeng"
+        }
     }
 }

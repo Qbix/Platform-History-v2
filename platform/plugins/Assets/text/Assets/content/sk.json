@@ -67,5 +67,19 @@
             "displayType": "služba",
             "description": "ponúkaná služba"
         }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Získané kredity {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Strávil {{amount}} kreditov"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Odoslané {{amount}} kredity"
+        },
+        "Assets\/credits\/received": {
+            "content": "Prijaté kredity {{amount}}"
+        }
     }
 }

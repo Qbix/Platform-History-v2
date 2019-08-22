@@ -54,5 +54,35 @@
         "exist": "Alan artıq mövcuddur",
         "addNewArea": "Yeni sahə əlavə edin",
         "add": "Əlavə et"
+    },
+    "types": {
+        "Places/locations": {
+            "description": "yerlər toplusu",
+            "displayType": "Yerlər"
+        },
+        "Places/location": {
+            "description": "Bir bina, məkan, gəmi, park və s.",
+            "displayType": "Yer"
+        },
+        "Places/area": {
+            "description": "Bir otaq və ya suite kimi bir məkanda bir ərazini təmsil edir",
+            "displayType": "Sahə"
+        },
+        "Places/floor": {
+            "description": "Bir binada və ya gəmidə bir mərtəbə təqdim edir",
+            "displayType": "Mərtəbə"
+        },
+        "Places/column": {
+            "description": "Bir bina və ya gəmidə bir sütunu təmsil edir",
+            "displayType": "Sütun"
+        },
+        "Places/nearby": {
+            "description": "Bir geohash müəyyən bir məsafədəki əşyalar üçün kateqoriya",
+            "displayType": "Yerlərə yaxın"
+        },
+        "Places/interest": {
+            "description": "Bir marağınıza uyğun bir geohaş məsafəsində olan şeylər üçün kateqoriya",
+            "displayType": "Yerlər maraq"
+        }
     }
 }

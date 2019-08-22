@@ -26,5 +26,39 @@
             "StartConversation": "Sohbeti Başlat",
             "GotoConversation": "Konuşmaya Git"
         }
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Çeşitli kullanıcıların görüntüleyebileceği ve düzenleyebileceği bir HTML belgesi",
+            "displayType": "makale"
+        },
+        "Websites\/slide": {
+            "description": "Sunumdaki bir slayt, HTML, ses vb. İçerebilir.",
+            "displayType": "Kaymak"
+        },
+        "Websites\/presentation": {
+            "description": "Çeşitli slaytlardan oluşan bir sunum",
+            "displayType": "Sunum"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Bir web sitesinde bir reklam birimi",
+            "displayType": "İlan birimi"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Reklam ünitelerini bir isim altında gruplamanın bir yolu",
+            "displayType": "İlan yerleşimi"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Bir reklamın içeriği",
+            "displayType": "İlan reklamı"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Bir reklam kampanyası",
+            "displayType": "İlan kampanyası"
+        },
+        "Websites\/webpage": {
+            "description": "Meta verileri kazınmış bir web sitesini temsil eder.",
+            "displayType": "internet sayfası"
+        }
     }
 }

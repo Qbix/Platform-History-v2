@@ -68,18 +68,18 @@
             "description": "service being offered"
         }
     },
-	"messages": {
-		"Assets\/credits\/earned": {
-			"content": "Earned {{amount}} credits"
-		},
-		"Assets\/credits\/spent": {
-			"content": "Spent {{amount}} credits"
-		},
-		"Assets\/credits\/sent": {
-			"content": "Sent {{amount}} credits"
-		},
-		"Assets\/credits\/received": {
-			"content": "Received {{amount}} credits"
-		}
-	}
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Earned {{amount}} credits"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Spent {{amount}} credits"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Sent {{amount}} credits"
+        },
+        "Assets\/credits\/received": {
+            "content": "Received {{amount}} credits"
+        }
+    }
 }
