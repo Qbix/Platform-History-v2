@@ -26,7 +26,7 @@ function Users_before_Q_objects(&$params)
 	}
 
 	// if app in preview mode and not loggedin
-	if (Q_Config::get('Users', 'previewMode', false) && !Users::loggedInUser()) {
+	if (Q_Config::get('Users', 'previewMode', false) && !Users::loggedInUser(false, false)) {
 		// find first valid user and login
 		$users = Users_User::select()
 			->where(array(
