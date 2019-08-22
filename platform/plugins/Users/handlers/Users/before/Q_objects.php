@@ -24,4 +24,24 @@ function Users_before_Q_objects(&$params)
 	if (Q_Dispatcher::uri()->facebook) {
 		Q_Dispatcher::skip('Q/post');
 	}
+
+	// if app in preview mode and not loggedin
+	if (Q_Config::get('Users', 'previewMode', false) && !Users::loggedInUser()) {
+		// find first valid user and login
+		$users = Users_User::select()
+			->where(array(
+				'signedUpWith !=' => 'none'
+			))
+			->orderBy('insertedTime', false)
+			->limit(1000, 0)
+			->fetchDbRows();
+		foreach ($users as $user) {
+			if (Users::isCommunityId($user->id)) {
+				continue;
+			}
+
+			Users::setLoggedInUser($user);
+			break;
+		}
+	}
 }
