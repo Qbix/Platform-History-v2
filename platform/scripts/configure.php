@@ -42,30 +42,37 @@ $is_win = (substr(strtolower(PHP_OS), 0, 3) === 'win');
 
 do {
 	$go_again = false;
-	foreach (
-		$iterator = new RecursiveIteratorIterator(
-			new RecursiveDirectoryIterator(
-				APP_DIR, 
-				RecursiveDirectoryIterator::SKIP_DOTS
-			),
-			RecursiveIteratorIterator::SELF_FIRST
-		) as $filename => $splFileInfo
-	) {
+	$iteratorDir = new RecursiveDirectoryIterator(
+		APP_DIR, 
+		RecursiveDirectoryIterator::SKIP_DOTS
+	);
+	$iterator = new RecursiveIteratorIterator(
+		$iteratorDir,
+		RecursiveIteratorIterator::SELF_FIRST
+	);
+	foreach ($iterator as $filename => $splFileInfo) {
 		$pi = pathinfo($filename);
 		$pif = $pi['filename'];
 		if ($pif === $AppName) {
 			$pif = $Desired;
+		}
+		$parts = explode(DS, $filename);
+		foreach ($parts as $p) {
+			if (substr($p, 0, 1) === '.') {
+				continue 2;
+			}
 		}
 		// fixed / to DIRECTORY_SEPARATOR
 		$filename2 = $pi['dirname'] . DIRECTORY_SEPARATOR . $pif
 			. (empty($pi['extension']) ? '' : '.' . $pi['extension']);
 		if ($filename != $filename2) {
 			if (file_exists($filename2)) {
-				throw new Q_Exception("Cannot overwrite existing path $filename2");
+				echo "Cannot overwrite existing path $filename2" . PHP_EOL;
+			} else {
+				rename($filename, $filename2);
+				$go_again = true;
+				break;
 			}
-			rename($filename, $filename2);
-			$go_again = true;
-			break;
 		}
 	}
 } while($go_again);
