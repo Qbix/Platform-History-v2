@@ -46,9 +46,9 @@ Q.mixin(Streams_Avatar, Q.require('Base/Streams/Avatar'));
  * @return {String}
  */
 Streams_Avatar.prototype.displayName = function _Avatar_prototype_displayName (options, fallback) {
-	var fn = this.fields.firstName;
-	var ln = this.fields.lastName;
-	var u = this.fields.username;
+	var fn = Q.getObject("fields.firstName", this);
+	var ln = Q.getObject("fields.lastName", this);
+	var u = Q.getObject("fields.username", this);
 	var fn2, ln2, u2, f2;
 	fallback = fallback || 'Someone';
 	if (options && (options.escape || options.html)) {
