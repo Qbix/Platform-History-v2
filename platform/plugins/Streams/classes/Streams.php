@@ -1884,17 +1884,15 @@ abstract class Streams extends Base_Streams
 			$params['relationDisplayType'] = $relationDisplayType;
 			
 			// Related TO description
-			$content = Q_Handlebars::renderSource(
-				Streams_Stream::getConfigField(
-					$category->type,
-					array('relatedTo', $type, 'description'),
-					Streams_Stream::getConfigField($category->type, array(
-						'relatedTo', '*', 'description'
-					), "New {{relationDisplayType}} added"),
-					false
-				),
-				$params
+			$description = Streams_Stream::getConfigField(
+				$category->type,
+				array('relatedTo', $type, 'description'),
+				Streams_Stream::getConfigField($category->type, array(
+					'relatedTo', '*', 'description'
+				), "New {{relationDisplayType}} added"),
+				false
 			);
+			$content = Q_Handlebars::renderSource($description, $params);
 
 			// Send Streams/relatedTo message to a stream
 			// node server will be notified by Streams_Message::post
@@ -1902,8 +1900,8 @@ abstract class Streams extends Base_Streams
 			// so posting this message may require internet communication.
 			$instructions = compact(
 				'fromPublisherId', 'type', 'weight', 'displayType',
-				'fromUrl', 'toUrl',
-				'fromIcon', 'fromTitle', 'fromType', 'fromDisplayType'
+				'fromUrl', 'toUrl', 'toTitle',
+				'fromIcon', 'fromTitle', 'fromType', 'fromDisplayType', 'description'
 			);
 			$instructions['url'] = $instructions['fromUrl'];
 			$instructions['fromStreamName'] = $stream->name;
@@ -1914,16 +1912,14 @@ abstract class Streams extends Base_Streams
 			);
 
 			// Related FROM description
-			$content = Q_Handlebars::renderSource(
-				Streams_Stream::getConfigField(
-					$stream->type,
-					array('relatedFrom', $type, 'description'),
-					Streams_Stream::getConfigField($stream->type, array('relatedFrom', '*', 'description'),
-						"Added to {{toDisplayType}} as {{relationDisplayType}}"
-					)
-				),
-				$params
+			$description = Streams_Stream::getConfigField(
+				$stream->type,
+				array('relatedFrom', $type, 'description'),
+				Streams_Stream::getConfigField($stream->type, array('relatedFrom', '*', 'description'),
+					"Added to {{toDisplayType}} as {{relationDisplayType}}"
+				)
 			);
+			$content = Q_Handlebars::renderSource($description, $params);
 
 			// Send Streams/relatedFrom message to a stream
 			// node server will be notified by Streams_Message::post
@@ -1932,7 +1928,7 @@ abstract class Streams extends Base_Streams
 			$instructions = compact(
 				'toPublisherId', 'type', 'weight', 'displayType',
 				'fromUrl', 'toUrl', 'fromUri', 'toUri', 
-				'toIcon', 'toTitle', 'toType', 'toDisplayType', 'content'
+				'toIcon', 'toTitle', 'toType', 'toDisplayType', 'content', 'description'
 			);
 			$instructions['url'] = $instructions['toUrl'];
 			$instructions['toStreamName'] = $category->name;

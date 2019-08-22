@@ -27,7 +27,9 @@ platform/plugins/Streams/web/img/icons/*
 !platform/plugins/Streams/files/Streams/icons/labels
 platform/plugins/Awards/classes/Composer/vendor
 platform/plugins/Communities/
+platform/plugins/Cards/
 platform/plugins/Calendars/
+platform/plugins/Cards/
 platform/node_modules
 platform/vendor
 MyApp/local/*

@@ -12,9 +12,20 @@ self.addEventListener('push', function (event) {
 		self.registration.update().then(() => console.log('[Service Worker] Updated'));
 		return;
 	}
+
+	let options = Object.assign({
+		body: data.body,
+		data: data
+	}, data);
+
 	if (options.requireInteraction === undefined) {
 		options.requireInteraction = false;
 	}
+
+	if (data.collapseId) {
+		options.tag = data.collapseId;
+	}
+
 	sendMessageToAllClients({
 		Q: {
 			notification: {
@@ -22,10 +33,8 @@ self.addEventListener('push', function (event) {
 			}
 		}
 	});
-	if (data.collapseId) {
-		options.tag = data.collapseId;
-	}
-	event.waitUntil(self.registration.showNotification(data.title, data));
+
+	event.waitUntil(self.registration.showNotification(data.title, options));
 });
 
 self.addEventListener('notificationclick', function (event) {
