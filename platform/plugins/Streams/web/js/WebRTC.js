@@ -591,7 +591,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			Q.addScript([
 				/*"https://cdn.trackjs.com/agent/v3/latest/t.js",*/
 				"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-				"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+Date.now())
+				"{{Streams}}/js/tools/webrtc/app.js"
 			], function () {
 				var ua=navigator.userAgent;
 				//if (Q.info.isCordova && Q.info.platform === 'ios') {
@@ -782,7 +782,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			} else {
 				Q.addScript([
 					"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-					"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+Date.now())
+					"{{Streams}}/js/tools/webrtc/app.js"
 				], function () {
 					initConference();
 				});
