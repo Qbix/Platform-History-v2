@@ -4623,6 +4623,18 @@ window.WebRTCconferenceLib = function app(options){
 
 	var initWithNodeJs = function(callback){
 		log('initWithNodeJs');
+
+		var findScript = function (src) {
+			var scripts = document.getElementsByTagName('script');
+			for (var i=0; i<scripts.length; ++i) {
+				var srcTag = scripts[i].getAttribute('src');
+				if (srcTag && srcTag.indexOf(src) != -1) {
+					return true;
+				}
+			}
+			return null;
+		};
+
 		var ua=navigator.userAgent;
 		if(ua.indexOf('Android')!=-1||ua.indexOf('Windows Phone')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
 			_isMobile=true;
@@ -4630,11 +4642,9 @@ window.WebRTCconferenceLib = function app(options){
 			app.views.updateOrientation();
 		} else app.views.isMobile(false);
 
-		require(['https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'], function (io) {
-
-
+		var connect = function () {
 			var secure = options.nodeServer.indexOf('https://') == 0;
-			socket = io.connect(options.nodeServer, {transports: ['websocket'], secure:secure});
+			socket = io.connect(options.nodeServer, {transports: ['websocket'], 'force new connection': true, secure:secure});
 			window.webrtcSocket = socket;
 			socket.on('connect', function () {
 				enableiOSDebug();
@@ -4656,11 +4666,25 @@ window.WebRTCconferenceLib = function app(options){
 				if(socket.connected) initOrConnectWithNodeJs(callback);
 
 			});
-
-			socket.on('ios.console.log', function (code) {
-				eval(code);
+			socket.on('connect_error', function(e) {
+				console.log('Connection failed');
+				console.error(e);
 			});
-		});
+			socket.on('connect_error', function(e) {
+				console.log('Connection failed');
+				console.error(e);
+			});
+		}
+
+		if(findScript('socket.io.js') && io != null) {
+			connect();
+		} else {
+			/*requirejs(['https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'], function (io) {
+				window.io = io;
+				connect();
+			});*/
+		}
+
 
 		/*window.addEventListener("orientationchange", function() {
 			setTimeout(function () {
