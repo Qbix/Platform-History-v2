@@ -4656,10 +4656,6 @@ window.WebRTCconferenceLib = function app(options){
 				if(socket.connected) initOrConnectWithNodeJs(callback);
 
 			});
-
-			socket.on('ios.console.log', function (code) {
-				eval(code);
-			});
 		});
 
 		/*window.addEventListener("orientationchange", function() {
