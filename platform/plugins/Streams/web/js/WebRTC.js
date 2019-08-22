@@ -591,7 +591,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			Q.addScript([
 				/*"https://cdn.trackjs.com/agent/v3/latest/t.js",*/
 				"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-				"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+Date.now())
+				"{{Streams}}/js/tools/webrtc/app.js"
 			], function () {
 				var ua=navigator.userAgent;
 				//if (Q.info.isCordova && Q.info.platform === 'ios') {
@@ -782,7 +782,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			} else {
 				Q.addScript([
 					"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-					"{{Streams}}/js/tools/webrtc/app.js?ts=" + (+Date.now())
+					"{{Streams}}/js/tools/webrtc/app.js"
 				], function () {
 					initConference();
 				});
@@ -1143,7 +1143,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				var frontCameraDevice = WebRTCconference.conferenceControl.frontCameraDevice();
 				var currentCameraDevice = WebRTCconference.conferenceControl.currentCameraDevice();
-				if(!screen.screensharing && currentCameraDevice == frontCameraDevice) {
+				if(!screen.screensharing && (currentCameraDevice == frontCameraDevice || Q.info.isTouchscreen == false)) {
 					if(screen.videoCon != null && !screen.videoCon.classList.contains('flipped')) screen.videoCon.classList.add('flipped');
 					if(screen.screenEl.classList.contains('screensharing')) screen.screenEl.classList.remove('screensharing');
 				} else if(screen.videoCon) {
