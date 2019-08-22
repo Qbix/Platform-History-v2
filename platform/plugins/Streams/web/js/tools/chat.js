@@ -1,6 +1,6 @@
 (function (Q, $) {
 
-	var WebRTC = Q.Streams.WebRTC();
+	var WebRTC = Q.Streams.WebRTC;
 
 	/**
  * Streams Tools
@@ -199,14 +199,10 @@ Q.Tool.define('Streams/chat', function(options) {
 			});
 		},
 		beforeRemove: function () {
-			var state = this.state;
 
-			if (state.webrtc) {
-				Q.handle(state.webrtc.stop);
-			}
 		}
 	},
-	/**
+	/**causes
 	 * @method prevent
 	 * Disables the textarea, preventing the user from writing
 	 * a message using the provided interface. They are still able to POST
@@ -535,11 +531,14 @@ Q.Tool.define('Streams/chat', function(options) {
 	 * If WebRTC stream doesn't exist, try to create one.
 	 */
 	startWebRTC: function () {
+		console.log('startWebRTC')
+
 		var tool = this;
 		var state = this.state;
 		var $toolElement = $(this.element);
 
 		if (state.webrtc) {
+			console.log('startWebRTC state.webrtc')
 			return;
 		}
 
@@ -557,7 +556,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			var stream = Q.first(this.relatedStreams);
 			function _createRoom(publisherId, streamName) {
 				// connect to this particular conversation
-				WebRTC.start({
+				Q.Streams.WebRTC().start({
 					element: document.body,
 					roomId: streamName.split('/').pop(),
 					roomPublisherId: publisherId,

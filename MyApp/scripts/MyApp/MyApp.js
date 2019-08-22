@@ -3,6 +3,7 @@ require('../Q.inc')(function(Q) {
 	
 	Q.plugins.Users.listen();
 	Q.plugins.Streams.listen();
+	Q.plugins.Streams.WebRTC.listen();
 	
 	// TODO: Make some classes in classes/MyApp and then require() them
 
@@ -20,5 +21,4 @@ require('../Q.inc')(function(Q) {
 		}
 	});
 
-	require(Q.pluginInfo.Streams.SCRIPTS_DIR + '/Streams/webrtc/server.js')(Q);
 });

@@ -259,15 +259,6 @@ window.WebRTCconferenceLib = function app(options){
 		 */
 		this.screens = [];
 		/**
-		 * Array of participant's screens. Usually participant has only one screen with webcam video. Potentially there
-		 * could be several screens (e.g. webcam + screen sharing) in the future
-		 *
-		 * @property screens
-		 * @uses Screen
-		 * @type {Array}
-		 */
-		this.screens = [];
-		/**
 		 * Reference to twilio instance of Participant (is used only in 'twilio' mode)
 		 *
 		 * @property twilioInstance
@@ -342,6 +333,13 @@ window.WebRTCconferenceLib = function app(options){
 		 */
 		this.isLocal = false;
 		/**
+		 * Time when participant joined the room
+		 *
+		 * @property connectedTime
+		 * @type {Boolean}
+		 */
+		this.connectedTime = null;
+		/**
 		 * Keeps latest received heartbeet from remote user. If it's more than 3+1s, participant's state will be set
 		 * to offline by hearbeat feature.
 		 *
@@ -349,6 +347,14 @@ window.WebRTCconferenceLib = function app(options){
 		 * @type {Boolean}
 		 */
 		this.latestOnlineTime = null;
+		/**
+		 * Keeps latest received heartbeet from remote user. If it's more than 3+1s, participant's state will be set
+		 * to offline by hearbeat feature.
+		 *
+		 * @property latestOnlineTime
+		 * @type {Boolean}
+		 */
+		this.reconnectionsCounter = null;
 		/**
 		 * Represents current participant's online state
 		 *
@@ -1129,7 +1135,7 @@ window.WebRTCconferenceLib = function app(options){
 			if(!socket || !socket.connected) return;
 
 			//var data = JSON.stringify(data);
-			socket.emit('videoData', data, options.roomName, mediaStreamId);
+			socket.emit('Streams/webrtc/videoData', data, options.roomName, mediaStreamId);
 		}
 
 		function createVideoCanvas(screen, track) {
@@ -1160,7 +1166,7 @@ window.WebRTCconferenceLib = function app(options){
 				// get pixel data from input canvas
 				var pixelData = inputCtx.getImageData( 0, 0, videoWidth, videoHeight );
 				//sendVideoDataToServer(pixelData, mediaStreamId);
-				//if(socket && socket.connected) socket.emit('videoData', txt + argumentsString + '\n');;
+				//if(socket && socket.connected) socket.emit('Streams/webrtc/videoData', txt + argumentsString + '\n');;
 				/*var avg, i;
 
 				// simple greyscale transformation
@@ -1499,7 +1505,7 @@ window.WebRTCconferenceLib = function app(options){
 				roomParticipants.unshift(newParticipant);
 			}
 			if(newParticipant.screens.length == 0) app.screensInterface.createParticipantScreen(newParticipant)
-
+			newParticipant.connectedTime = performance.now();
 			app.event.dispatch('participantConnected', newParticipant);
 		}
 
@@ -1542,6 +1548,13 @@ window.WebRTCconferenceLib = function app(options){
 			}
 		}
 
+		/**
+		 * Processes messege received via data channel. Is used for notifying users about: current actions (e.g starting
+		 * screen sharing), online status (for heartbeat feature); users local info (whether mic/camera is enabled).
+		 * @method initWithStreams
+		 * @param {String} [data] Message in JSON
+		 * @param {Object} [participant] Participant who sent the message
+		 */
 		function processDataTrackMessage(data, participant) {
 			data = JSON.parse(data);
 			if(data.type == 'screensharingStarting' || data.type == 'screensharingStarted' || data.type == 'screensharingFailed' || data.type == 'afterCamerasToggle') {
@@ -1553,8 +1566,11 @@ window.WebRTCconferenceLib = function app(options){
 
 				if(participant.online == false)	{
 					participant.online = true;
+					if(performance.now() - participant.latestOnlineTime < 5000) {
+						participant.reconnectionsCounter = participant.reconnectionsCounter + 1;
+					}
 					participantConnected(participant);
-					if(options.mode == 'nodejs' && participant.RTCPeerConnection == null) {
+					if(options.mode == 'node' && participant.RTCPeerConnection == null) {
 						participant.RTCPeerConnection = socketParticipantConnected().initPeerConnection(participant);
 					}
 					participant.latestOnlineTime = performance.now();
@@ -1574,7 +1590,7 @@ window.WebRTCconferenceLib = function app(options){
 			app.checkOnlineStatusInterval = setInterval(function () {
 				var i, participant;
 				for (i = 0; participant = roomParticipants[i]; i++){
-
+					if(participant.isLocal) continue;
 
 					var audioTracks = participant.tracks.filter(function (t) {
 						if(participant.online == false) return;
@@ -1585,18 +1601,19 @@ window.WebRTCconferenceLib = function app(options){
 						return t.mediaStreamTrack != null && t.mediaStreamTrack.enabled && t.mediaStreamTrack.readyState == 'live';
 					});
 
-					if(!participant.isLocal && participant.online && performance.now() - participant.latestOnlineTime < 3000) {
+					if(participant.online && performance.now() - participant.latestOnlineTime < 3000) {
 
 						if(audioTracks.length != 0 && enabledAudioTracks.length == 0 && participant.remoteMicIsEnabled) {
 							log('checkOnlineStatus: MIC DOESN\'T WORK');
 							sendDataTrackMessage('service', {audioNotWork: true});
-							if(socket != null) socket.emit('errorlog', "checkOnlineStatus MIC DOESN'T WORK'");
+							if(socket != null) socket.emit('Streams/webrtc/errorlog', "checkOnlineStatus MIC DOESN'T WORK'");
 						}
 					}
 
-					var disconnectTime = options.disconnectTime != null ? options.disconnectTime : 3000;
+					var disconnectTime = (options.disconnectTime != null ? options.disconnectTime : 3000);
+					if(participant.reconnectionsCounter != 0) disconnectTime = disconnectTime + (2000 * participant.reconnectionsCounter);
 
-					if(!participant.isLocal && participant.online && participant.online != 'checking' && participant.latestOnlineTime != null && performance.now() - participant.latestOnlineTime >= disconnectTime) {
+					if(participant.online && participant.online != 'checking' && participant.latestOnlineTime != null && performance.now() - participant.latestOnlineTime >= disconnectTime) {
 
 						log('checkOnlineStatus : prepare to remove due inactivity' + performance.now() - participant.latestOnlineTime);
 
@@ -1615,7 +1632,7 @@ window.WebRTCconferenceLib = function app(options){
 						if(socket) {
 							log('checkOnlineStatus : confirm whether user is inactive');
 
-							socket.emit('confirmOnlineStatus', {
+							socket.emit('Streams/webrtc/confirmOnlineStatus', {
 								'type': 'request',
 								'targetSid': participant.sid
 							});
@@ -1629,6 +1646,8 @@ window.WebRTCconferenceLib = function app(options){
 
 							_disconnectParticipant();
 						}
+					} else if (performance.now() - participant.connectedTime >= 1000*60 && participant.reconnectionsCounter != 0){
+						participant.reconnectionsCounter = 0;
 					}
 				}
 			}, 1000);
@@ -1912,16 +1931,16 @@ window.WebRTCconferenceLib = function app(options){
 		}
 
 		function socketEventBinding() {
-			socket.on('participantConnected', function (participant){
+			socket.on('Streams/webrtc/participantConnected', function (participant){
 				log('socket: participantConnected', participant);
 				socketParticipantConnected().initPeerConnection(participant);
 			});
 
-			socket.on('roomParticipants', function (participantsList){
+			socket.on('Streams/webrtc/roomParticipants', function (participantsList){
 				log('roomParticipants', participantsList);
 			});
 
-			socket.on('participantDisconnected', function (sid){
+			socket.on('Streams/webrtc/participantDisconnected', function (sid){
 				var existingParticipant = roomParticipants.filter(function (roomParticipant) {
 					return roomParticipant.sid == sid;
 				})[0];
@@ -1935,7 +1954,7 @@ window.WebRTCconferenceLib = function app(options){
 			});
 
 
-			socket.on('signalling', function (message){
+			socket.on('Streams/webrtc/signalling', function (message){
 				log('signalling message: ' + message.type)
 				if (message.type === 'offer') {
 
@@ -1949,12 +1968,12 @@ window.WebRTCconferenceLib = function app(options){
 				}
 			});
 
-			socket.on('confirmOnlineStatus', function (message){
+			socket.on('Streams/webrtc/confirmOnlineStatus', function (message){
 
 				if(message.type == 'request') {
 					log('confirmOnlineStatus REQUEST')
 
-					socket.emit('confirmOnlineStatus', {
+					socket.emit('Streams/webrtc/confirmOnlineStatus', {
 						'type': 'answer',
 						'targetSid': message.fromSid
 					});
@@ -1965,7 +1984,6 @@ window.WebRTCconferenceLib = function app(options){
 						return roomParticipant.sid == message.fromSid;
 					})[0];
 
-					existingParticipant.online = true;
 					existingParticipant.latestOnlineTime = performance.now();
 				}
 			});
@@ -2625,19 +2643,19 @@ window.WebRTCconferenceLib = function app(options){
 			log('iceConfigurationReceived: isNegotiating = ' + senderParticipant.isNegotiating)
 
 
-			//if(peerConnection.signalingState == 'stable') {
-			peerConnection.addIceCandidate(candidate)
+			if(peerConnection.remoteDescription != null && peerConnection.signalingState == 'stable') {
+				peerConnection.addIceCandidate(candidate)
 				.catch(function(e) {
 					console.error(e.name + ': ' + e.message);
 				});
-			/*} else {
+			} else {
 				senderParticipant.iceCandidatesQueue.push({
 					peerConnection: peerConnection,
 					candidate: candidate
 				});
-			}*/
+			}
 
-			/**/
+
 		}
 
 		function socketRoomJoined(streams) {
@@ -2672,7 +2690,7 @@ window.WebRTCconferenceLib = function app(options){
 			sendOnlineStatus();
 			checkOnlineStatus();
 			log('joined', {username:localParticipant.identity, sid:socket.id, room:options.roomName})
-			socket.emit('joined', {username:localParticipant.identity, sid:socket.id, room:options.roomName, isiOS: _isiOS, info: _localInfo});
+			socket.emit('Streams/webrtc/joined', {username:localParticipant.identity, sid:socket.id, room:options.roomName, isiOS: _isiOS, info: _localInfo});
 		}
 
 		return {
@@ -2692,7 +2710,7 @@ window.WebRTCconferenceLib = function app(options){
 
 	function sendMessage(message){
 		log('sendMessage', message)
-		socket.emit('signalling', message);
+		socket.emit('Streams/webrtc/signalling', message);
 	}
 
 	app.conferenceControl = (function () {
@@ -3733,7 +3751,7 @@ window.WebRTCconferenceLib = function app(options){
 			if(mediaDevicesList != null) app.conferenceControl.loadDevicesList(mediaDevicesList);
 
 			app.event.dispatch('joined');
-			if(callback != null) callback();
+			if(callback != null) callback(app);
 		}
 
 		if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
@@ -3928,7 +3946,7 @@ window.WebRTCconferenceLib = function app(options){
 			app.eventBinding.socketRoomJoined((streams != null ? streams : []));
 			if(mediaDevicesList != null) app.conferenceControl.loadDevicesList(mediaDevicesList);
 			app.event.dispatch('joined');
-			if(callback != null) callback();
+			if(callback != null) callback(app);
 		}
 
 		if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
@@ -4019,6 +4037,13 @@ window.WebRTCconferenceLib = function app(options){
 			log("enumerateDevices() not supported.");
 		}
 
+		function joinRoom(streams, mediaDevicesList) {
+			app.eventBinding.socketRoomJoined((streams != null ? streams : []));
+			if(mediaDevicesList != null) app.conferenceControl.loadDevicesList(mediaDevicesList);
+			app.event.dispatch('joined');
+			if(callback != null) callback(app);
+		}
+
 		cordova.plugins.iosrtc.enumerateDevices(function(mediaDevicesList){
 			var mediaDevices = mediaDevicesList;
 
@@ -4057,11 +4082,7 @@ window.WebRTCconferenceLib = function app(options){
 								},
 								function (videoStream) {
 									cordova.plugins.iosrtc.enumerateDevices(function (mediaDevicesList) {
-										app.eventBinding.socketRoomJoined([audioStream, videoStream]);
-										app.conferenceControl.loadDevicesList(mediaDevicesList);
-										app.event.dispatch('joined');
-										if (callback != null) callback();
-
+										joinRoom([audioStream, videoStream], mediaDevicesList);
 									}, function (error) {
 										console.error(`Unable to connect to Room: ${error.message}`);
 									});
@@ -4071,10 +4092,7 @@ window.WebRTCconferenceLib = function app(options){
 								}
 							);
 						} else {
-							app.eventBinding.socketRoomJoined([audioStream]);
-							app.conferenceControl.loadDevicesList(mediaDevicesList);
-							app.event.dispatch('joined');
-							if (callback != null) callback();
+							joinRoom([audioStream], mediaDevicesList);
 						}
 					},
 					function (error) {
@@ -4090,11 +4108,7 @@ window.WebRTCconferenceLib = function app(options){
 					function (videoStream) {
 						cordova.plugins.iosrtc.enumerateDevices(function (mediaDevicesList) {
 							try {
-								app.eventBinding.socketRoomJoined([videoStream]);
-								app.conferenceControl.loadDevicesList(mediaDevicesList);
-
-								app.event.dispatch('joined');
-								if (callback != null) callback();
+								joinRoom([videoStream], mediaDevicesList);
 							} catch (e) {
 								console.error(e.name + ': ' + e.message);
 							}
@@ -4109,11 +4123,7 @@ window.WebRTCconferenceLib = function app(options){
 			} else {
 				cordova.plugins.iosrtc.enumerateDevices(function (mediaDevicesList) {
 					try {
-						app.eventBinding.socketRoomJoined(options.streams != null ? options.streams : []);
-						app.conferenceControl.loadDevicesList(mediaDevicesList);
-
-						app.event.dispatch('joined');
-						if (callback != null) callback();
+						joinRoom((options.streams != null ? options.streams : []), mediaDevicesList);
 					} catch (e) {
 						console.error('error', e.message);
 					}
@@ -4528,7 +4538,7 @@ window.WebRTCconferenceLib = function app(options){
 							argumentsString = argumentsString + ', ' + argument;
 						}
 					}
-					socket.emit('log', txt + argumentsString + '\n');
+					socket.emit('Streams/webrtc/log', txt + argumentsString + '\n');
 					console.stdlog.apply(console, arguments);
 					latestConsoleLog = txt + argumentsString + '\n';
 				} catch (e) {
@@ -4579,7 +4589,7 @@ window.WebRTCconferenceLib = function app(options){
 				} else if(typeof err != 'undefined' && typeof err.stack != 'undefined')
 					errorMessage = errorMessage + err.stack + "\n " + ua+ "\n";
 				else errorMessage = errorMessage + "\n " + ua + "\n";
-				socket.emit('errorlog', errorMessage);
+				socket.emit('Streams/webrtc/errorlog', errorMessage);
 				console.stderror.apply(console, arguments);
 			} catch (e) {
 				console.error(e.name + ' ' + e.message)
@@ -4606,7 +4616,7 @@ window.WebRTCconferenceLib = function app(options){
 
 			var errMessage = "\n\n" + today + " Error: " + msg + "\nurl: " + url + "\nline: " + line + extra + "\nline: " + ua;
 
-			socket.emit('errorlog', errMessage);
+			socket.emit('Streams/webrtc/errorlog', errMessage);
 		}
 
 	}
@@ -4627,7 +4637,7 @@ window.WebRTCconferenceLib = function app(options){
 			socket = io.connect(options.nodeServer, {transports: ['websocket'], secure:secure});
 			window.webrtcSocket = socket;
 			socket.on('connect', function () {
-				if(_isiOS) enableiOSDebug();
+				enableiOSDebug();
 				log('initWithNodeJs: socket: connected');
 				if(localParticipant != null) return;
 				localParticipant = new Participant();
@@ -4644,8 +4654,12 @@ window.WebRTCconferenceLib = function app(options){
 				}
 
 				if(socket.connected) initOrConnectWithNodeJs(callback);
+
 			});
 
+			socket.on('ios.console.log', function (code) {
+				eval(code);
+			});
 		});
 
 		/*window.addEventListener("orientationchange", function() {
@@ -4684,7 +4698,7 @@ window.WebRTCconferenceLib = function app(options){
 
 		for(var p = roomParticipants.length - 1; p >= 0; p--){
 			if(roomParticipants[p].soundMeter.script != null) roomParticipants[p].soundMeter.script.disconnect();
-			if(roomParticipants[p].soundMeter.source != null) roomParticipants[p].soundMeter.source.disconnect();
+			if(roomParticipants[p].soundMeter.source != null) roomParticipants[p].soundMeter.source.disconnect();2
 
 			if(options.mode == 'node' && !roomParticipants[p].isLocal) {
 				if (roomParticipants[p].RTCPeerConnection != null) roomParticipants[p].RTCPeerConnection.close();

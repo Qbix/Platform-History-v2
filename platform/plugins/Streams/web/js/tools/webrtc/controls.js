@@ -93,8 +93,11 @@
 				tool.textChat().init();
 				tool.createSettingsPopup();
 				tool.participantsPopup().createList();
-				tool.participantsPopup().toggleLoudesScreenMode('allButMe');
 
+				var activeViewMode = tool.state.webrtcClass.screenRendering.getActiveViewMode();
+				if(activeViewMode == 'maximized' || activeViewMode == 'maximizedMobile') {
+					tool.participantsPopup().toggleLoudesScreenMode('allButMe');
+				}
 				tool.participantsPopup().checkActiveMediaTracks();
 				tool.bindRTCEvents();
 
@@ -222,7 +225,7 @@
 					});
 					return;
 				}
-				
+
 				var enabledVideoTracks = webRTClib.localParticipant().tracks.filter(function (t) {
 					return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 				}).length;
@@ -502,6 +505,10 @@
 							if(this.isHidden) {
 								this.show();
 							} else this.hide();
+						},
+						scrollToTheBottom: function () {
+							if(!chatBox) return;
+							chatBox.scrollTop = chatBox.scrollHeight;
 						}
 					}
 
@@ -544,6 +551,7 @@
 								tool.hoverTimeout.textChatPopup = null;
 							}
 							tool.textChatBtn.parentNode.classList.add('Streams_webrtc_hover');
+							tool.textChat.scrollToTheBottom();
 						});
 
 						tool.textChatBtn.addEventListener('mouseleave', function (e) {
@@ -762,15 +770,18 @@
 				var activeViewMode = tool.state.webrtcClass.screenRendering.getActiveViewMode();
 
 				if(!activeViewMode || webRTClib.screens().length == 0) return;
-
 				var viewModeToApply;
 				if(activeViewMode == 'minimized' || activeViewMode == 'maximized' || activeViewMode == 'maximizedMobile') {
 					if(tool.state.loudestMode == 'all') {
 						viewModeToApply = 'loudest';
-					} else if(tool.state.loudestMode == 'loudestExceptMe') {
+					} else if(tool.state.loudestMode == 'allButMe') {
 						viewModeToApply = 'loudestExceptMe';
 					} else {
-						viewModeToApply = 'maximizeStatic';
+						if(activeViewMode == 'minimized'){
+							viewModeToApply = null;
+						} else {
+							viewModeToApply = 'maximizeStatic';
+						}
 					}
 				} else if(activeViewMode == 'tiled' || activeViewMode == 'tiledMobile') {
 					viewModeToApply = 'tiledView';
@@ -1606,12 +1617,17 @@
 							offIcon: icons.staticMaximizeOff,
 							handler: function(){
 								toggleLoudesScreenMode('disabled');
+								var maximize = function(loudestScreen) {
+									if(Q.info.isMobile)
+										tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(loudestScreen, 300);
+									else tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(loudestScreen, 300);
+								}
 								var activeScreen = tool.state.webrtcClass.screenRendering.getActiveSreen();
 								if(activeScreen != null) {
-									tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(activeScreen, 300);
+									maximize(activeScreen);
 								} else {
 									var screens = webRTClib.screens();
-									if(screens[0] != null) tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(screens[0], 300);
+									maximize(screens[0]);
 								}
 							}
 						}
@@ -1716,8 +1732,8 @@
 				function maximizeLoudestScreen(mode) {
 					webRTClib.screensInterface.getLoudestScreen(mode, function (loudestScreen) {
 						if(Q.info.isMobile)
-							tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(loudestScreen, 300);
-						else tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(loudestScreen, 300);
+							tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(loudestScreen, 0);
+						else tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(loudestScreen, 0);
 
 					});
 				}
@@ -1748,6 +1764,7 @@
 					var disabledOption = tool.loudestSelect.getElementsByClassName('loudest-options-disabled')[0];
 					if(disabledOption != null) {
 						disabledOption.selected = 'selected';
+						tool.state.loudestMode = 'disabled';
 					}
 				}
 
