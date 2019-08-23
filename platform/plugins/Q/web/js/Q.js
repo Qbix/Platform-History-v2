@@ -1732,17 +1732,19 @@ Q.take = function _Q_take(source, fields) {
  * @method shuffle
  * @param {Array} arr
  *  The array that gets passed here is shuffled in place
+ * @return {Array} returns the array
  */
 Q.shuffle = function _Q_shuffle( arr ) {
 	var i = arr.length;
 	if ( !i ) return false;
-		while ( --i ) {
+	while ( --i ) {
 		var j = Math.floor( Math.random() * ( i + 1 ) );
 		var tempi = arr[i];
 		var tempj = arr[j];
 		arr[i] = tempj;
 		arr[j] = tempi;
 	}
+	return arr;
 };
 
 /**
@@ -4563,14 +4565,27 @@ Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptio
  *  Optional id of the tool, such as "Q_tabs_2"
  * @param {String} [prefix]
  *  Optional prefix to prepend to the tool's id
+ * @param {Object} [attributes]
+ *  You can pass extra attributes to the element here
  * @return {String}
  *  Returns HTML that you can include in templates, etc.
  */
-Q.Tool.setUpElementHTML = function _Q_Tool_setUpElementHTML(element, toolName, toolOptions, id, prefix) {
+Q.Tool.setUpElementHTML = function _Q_Tool_setUpElementHTML(
+	element, toolName, toolOptions, id, prefix, attributes
+) {
 	var e = Q.Tool.setUpElement(element, toolName, null, id, prefix);
 	var ntt = toolName.replace(/\//g, '_');
 	if (toolOptions) {
 		e.setAttribute('data-'+ntt.replace(/_/g, '-'), JSON.stringify(toolOptions));
+	}
+	if (attributes) {
+		for (var k in attributes) {
+			if (k === 'class') {
+				e.addClass(attributes[k]);
+			} else {
+				e.setAttribute(k, attributes[k]);
+			}
+		}
 	}
 	return e.outerHTML;
 };
@@ -4608,11 +4623,13 @@ Tp.setUpElement = function (element, toolName, toolOptions, id) {
  *  The options for the tool
  * @param {String} id
  *  Optional id of the tool, such as "_2_Q_tabs"
+ * @param {Object} [attributes]
+ *  You can pass extra attributes to the element here
  * @return {String}
  *  Returns HTML that you can include in templates, etc.
  */
-Tp.setUpElementHTML = function (element, toolName, toolOptions, id) {
-	return Q.Tool.setUpElementHTML(element, toolName, toolOptions, id, this.prefix);
+Tp.setUpElementHTML = function (element, toolName, toolOptions, id, attributes) {
+	return Q.Tool.setUpElementHTML(element, toolName, toolOptions, id, this.prefix, attributes);
 };
 
 /**
@@ -10015,7 +10032,8 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 	 */
 	$.fn.activate = function _jQuery_fn_activate(options, callback) {
 		if (!this.length) {
-			return Q.handle(callback, null, options, []);
+			Q.handle(callback, null, options, []);
+			return this;
 		}
 		return this.each(function _jQuery_fn_activate_each(index, element) {
 			Q.activate(element, options, callback);
@@ -12754,9 +12772,14 @@ function _addHandlebarsHelpers() {
 			var prefix = (ba ? ba.prefix : '');
 			var o = {};
 			var hash = (options && options.hash);
+			var className;
 			if (hash) {
 				for (var k in hash) {
-					Q.setObject(k, hash[k], o, '-');
+					if (k === 'class') {
+						className = hash[k];
+					} else {
+						Q.setObject(k, hash[k], o, '-');
+					}
 				}
 			}
 			if (this && this[name]) {
@@ -12768,7 +12791,7 @@ function _addHandlebarsHelpers() {
 					Q.extend(o, this['id:'+id]);
 				}
 			}
-			return Q.Tool.setUpElementHTML(tag, name, o, id, prefix);
+			return Q.Tool.setUpElementHTML(tag, name, o, id, prefix, {'class': className});
 		});
 	}
 	if (!Handlebars.helpers.url) {

@@ -1387,7 +1387,7 @@ class Q_Html
 		if ($result) {
 			return $result;
 		}
-		
+
 		$filePath2 = Q_Uri::interpolateUrl($filePath);
 		
 		if (empty($options['ignoreEnvironment'])
@@ -1405,6 +1405,9 @@ class Q_Html
 		if (Q_Valid::url($filePath2)) {
 			$url = $filePath2;
 		} else {
+			if (Q::startsWith($filePath2, APP_WEB_DIR)) {
+				$filePath2 = substr($filePath2, strlen(APP_WEB_DIR . DS));
+			}
 			$theme = Q_Uri::url(self::themeUrl());
 			$themes = self::$themes;
 			$c = count($themes);
@@ -1425,7 +1428,7 @@ class Q_Html
 					}
 				}
 			}
-			$url = $theme . ($filePath2 ? '/'.$filePath2 : $filePath2);
+			$url = $theme . ($filePath2 ? '/'.$filePath2 : '');
 		}
 		
 		if (!empty($options['hash'])) {

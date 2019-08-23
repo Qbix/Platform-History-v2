@@ -505,10 +505,11 @@ class Q_Response
 	 * @static
 	 * @param {string} [$slotName=null] If provided, returns only the metas set while filling this slot.
 	 * @param {string} [$between=''] Optional text to insert between the &lt;meta&gt; tags or blocks of text.
-	 * @param {string} [$alsoAsProperty='og'] Also output this meta tag as a meta "property", see ogp.me
+	 * @param {string} [$alsoAsProperty=nul] Pass "og" for example to also output this meta tag
+	 *   as a meta "property", see ogp.me
 	 * @return {string}
 	 */
-	static function metas($slotName = null, $between = "\n", $alsoAsProperty='og')
+	static function metas($slotName = null, $between = "\n", $alsoAsProperty=null)
 	{
 		$metas = self::metasArray($slotName);
 		if (!is_array($metas)) {
@@ -518,11 +519,25 @@ class Q_Response
 		$tags = array();
 		foreach ($metas as $sn => $m) {
 			foreach ($m as $name => $content) {
-				$tags[] = Q_Html::tag('meta', array(
-					'name' => $name, 
-					'content' => $content, 
-					'data-slot' => $sn
-				));	
+				$equiv = array(
+					'content-type', 'expires', 'set-cookie', 'content-encoding',
+					'allow', 'date', 'last-modified', 'location', 'window-target',
+					'www-authenticate', 'pics-label', 'pragma', 'content-language',
+					'content-script-type', 'page-enter'
+				);
+				if (in_array(strtolower($name), $equiv)) {
+					$tags[] = Q_Html::tag('meta', array(
+						'http-equiv' => $name, 
+						'content' => $content, 
+						'data-slot' => $sn
+					));
+				} else {
+					$tags[] = Q_Html::tag('meta', array(
+						'name' => $name, 
+						'content' => $content, 
+						'data-slot' => $sn
+					));	
+				}
 			}
 		}
 		if ($alsoAsProperty === 'og') {

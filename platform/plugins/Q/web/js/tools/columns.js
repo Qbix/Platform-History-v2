@@ -927,16 +927,26 @@ function presentColumn(tool, $column, fullscreen) {
 	var $controls = $column.find('.Q_controls_slot');
 	var cth = $ct.is(":visible") ? $ct.height() : 0;
 	var controlsh = $controls.is(":visible") ? $controls.height() : 0;
+	var index = parseInt($column.attr('data-index'));
 	if (Q.info.isMobile) {
-		var heightToBottom = Q.Pointer.windowHeight()
-			- $cs.offset().top
+		var $sc = $(tool.state.container);
+		var expandTop = index > 0 && state.expandOnMobile && state.expandOnMobile.top;
+		var expandBottom = index > 0 && state.expandOnMobile && state.expandOnMobile.bottom;
+		var containerRect = $sc[0].getBoundingClientRect();
+		if (!fullscreen && expandTop) {
+			var top = expandTop ? -containerRect.top : 0;
+			$column.css('top', top + 'px');
+		}
+		var columnRect = $cs[0].getBoundingClientRect();
+		var heightToBottom = (expandBottom ? Q.Pointer.windowHeight() : containerRect.bottom)
+			- columnRect.top
 			- parseInt($cs.css('padding-top'))
 			- parseInt($cs.css('padding-bottom'))
 			- controlsh;
 		if (fullscreen) {
 			$cs.add($div).css('height', 'auto');
 			$cs.css('min-height', heightToBottom);
-		} else if (Q.info.isMobile && state.expandOnMobile && state.expandOnMobile.bottom) {
+		} else {
 			$cs.height(heightToBottom);
 			$column.css('height', 'auto');
 		}

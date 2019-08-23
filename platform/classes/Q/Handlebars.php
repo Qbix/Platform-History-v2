@@ -161,7 +161,11 @@ class Q_Handlebars {
 				$o = array_merge($o, $fields["id:$id2"]);
 			}
 		}
-		return Q::tool($name, $o, compact('id'));
+		if ($o['class']) {
+			$classes = $o['class'];
+			unset($o['class']);
+		}
+		return Q::tool($name, $o, compact('id', 'classes'));
 	}
 
 	static function helperLookup($template, $context, $args, $source)

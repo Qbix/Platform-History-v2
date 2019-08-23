@@ -392,7 +392,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 					}
 				}},
 				onLoad: { "Q/dialog": function() {
-					Q.handle(o.onLoad, this);
+					Q.handle(o.onLoad, this, [this]);
 				}},
 				beforeClose: o.beforeClose,
 				onClose: { "Q/dialog": function () {
