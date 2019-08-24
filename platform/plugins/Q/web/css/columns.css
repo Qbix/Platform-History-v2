@@ -127,6 +127,7 @@ html.Q_ios.Q_standalone .Q_columns_title {
 
 .Q_column_slot {
 	z-index: 10;
+	width: 100%;
 }
 
 .Q_columns_column .Q_columns_title {

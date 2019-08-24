@@ -244,7 +244,7 @@ Streams_Message.post = function (fields, callback)
 Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, callback) {
 	var instructions = this.getAllInstructions();
 	var a = Q.extend({ displayName: avatar.displayName() }, avatar);
-	var fields = {
+	var fields = Q.extend(this.getAllInstructions(), {
 		app: Q.app.name,
 		communityName: Users.communityName(),
 		stream: stream,
@@ -252,7 +252,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		instructions: instructions,
 		avatar: avatar,
 		config: Q.Config.getAll()
-	};
+	});
 	// set baseUrl
 	fields.baseUrl = Q.getObject("config.Q.web.appRootUrl", fields);
 	var message = this;

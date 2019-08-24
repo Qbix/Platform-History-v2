@@ -325,7 +325,7 @@ class Q
 	 * In Handlebars templates, you just use {{interpolate expression ...}}
 	 * @method text
 	 * @static
-	 * @param {string} $expression Same as in Q::interpolate()
+	 * @param {string|array} $expression Same as in Q::interpolate()
 	 * @param {array} $params Same as in Q::interpolate()
 	 * @param {string} [$convert=array()] Same as in Q_Html::text().
 	 * @param {string} [$unconvert=array()] Same as in Q_Html::text().
