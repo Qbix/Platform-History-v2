@@ -203,7 +203,7 @@ class Q_Handlebars {
 	{
 		$args = self::parseArgs($template, $context, $args);
 		$url = isset($args[0]) ? $args[0] : $context->get('toUrl');
-		if (empty()) {
+		if (empty($url)) {
 			return "{{url missing}}";
 		}
 		return Q_Html::themedUrl($url);
