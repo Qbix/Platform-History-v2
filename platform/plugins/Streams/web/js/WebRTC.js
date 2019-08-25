@@ -603,7 +603,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 				var twilioRoomName = _roomStream.getAttribute('twilioRoomName');
-				var webRTC = window.WebRTCconferenceLib({
+				WebRTCconference = window.WebRTCconferenceLib({
 					mode:'twilio',
 					roomName:twilioRoomName,
 					twilioAccessToken: accessToken,
@@ -612,10 +612,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					audio: false,
 					streams: _options.streams != null ? _options.streams : null
 				});
-				window.WebConf = webRTC;
 
 				bindConferenceEvents();
-				webRTC.init(function () {
+				WebRTCconference.init(function () {
 					screensRendering.updateLayout();
 					updateParticipantData();
 					hidePageLoader();
