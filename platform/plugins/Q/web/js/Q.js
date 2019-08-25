@@ -1852,7 +1852,7 @@ function _getProp (/*Array*/parts, /*Boolean*/create, /*Object*/context){
 			if (p === '*') {
 				p = Q.firstKey(context);
 			}
-			context = (p in context) ? context[p] : (create ? context[p] = {} : undefined);
+			context = (context[p] !== undefined) ? context[p] : (create ? context[p] = {} : undefined);
 		} catch (e) {
 			if (create) {
 				throw new Q.Error("Q.setObject cannot set property of " + typeof(context) + " " + JSON.stringify(context));
@@ -5979,7 +5979,7 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 			throw new Q.Error("Custom $.fn.on handler: need to set params.eventName");
 		}
 		eventHandler.Q_wrapper = wrapper;
-		eventName = wrapper.eventName = params.eventName;
+		eventName = params.eventName;
 		eventHandler = wrapper;
 	}
 	if (!eventName) {
@@ -10073,7 +10073,6 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 				if (!('eventName' in params)) {
 					throw new Q.Error("Custom $.fn.on handler: need to set params.eventName");
 				}
-				args[0].eventName = params.eventName;
 				args[0] = params.eventName;
 			}
 			if (namespace) {

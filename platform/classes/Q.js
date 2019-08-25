@@ -119,7 +119,7 @@ function _getProp (/*Array*/parts, /*Boolean*/create, /*Object*/context){
 	context = context || null;
 	if(!parts.length) return context;
 	while(context && (p = parts[i++]) !== undefined){
-		context = (typeof context === 'object') && (p in context) 
+		context = (typeof context === 'object') && (context[p] !== undefined)
 			? context[p] 
 			: (create ? context[p] = {} : undefined);
 	}
