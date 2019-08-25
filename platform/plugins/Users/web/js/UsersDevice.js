@@ -52,6 +52,7 @@
 						// device without any confirmation dialog
 						if (granted === true) {
 							return adapter.subscribe(function (err, subscribed) {
+								console.log('Users.Device: User is subscribed.');
 								Q.handle(Users.Device.onSubscribe, Users.Device, [
 									options, granted, subscribed
 								]);
