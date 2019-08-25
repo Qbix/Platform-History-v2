@@ -148,7 +148,7 @@ Object.getPrototypeOf = function (obj) {
 	if (obj.constructor && obj.constructor.prototype) {
 		return obj.constructor.prototype;
 	}
-	return null;
+	return undefined;
 };
 
 if (!Object.keys)
@@ -610,7 +610,7 @@ if (!Elp.Q)
 */
 Elp.Q = function (toolName) {
 	// this method is overridden by the tool constructor on specific elements
-	return null;
+	return undefined;
 };
 
 if (!Elp.contains)
@@ -1328,7 +1328,7 @@ Q.first = function _Q_first(container, options) {
  */
 Q.firstKey = function _Q_firstKey(container, options) {
 	if (!container) {
-		return null;
+		return undefined;
 	}
 	switch (typeof container) {
 		case 'array':
@@ -1353,7 +1353,7 @@ Q.firstKey = function _Q_firstKey(container, options) {
 		default:
 			throw new Q.Error("Q.first: container has to be an array, object or string");
 	}
-	return null;
+	return undefined;
 };
 
 /**
@@ -1934,13 +1934,15 @@ Q.getObject = function _Q_getObject(name, context, delimiter, create) {
  *  If a string, this is interpreted as the URL of a javascript to load.
  *  If a function, this is called with the callback as the first argument.
  *  If an event, the callback is added to it.
+ *  The loader must call the callback and pass the property as the first parameter.
  * @param {Function} callback
  *  The callback to call when the loader has been executed.
+ *  The first parameter should be the property (object, string, etc.) that's now defined.
  *  This is where you would put the code that relies on the property being defined.
  */
 Q.ensure = function _Q_ensure(property, loader, callback) {
 	if (property !== undefined) {
-		Q.handle(callback);
+		Q.handle(callback, null, [property]);
 		return;
 	}
 	if (typeof loader === 'string') {
@@ -2118,7 +2120,7 @@ Evp.occurring = false;
  * @return {String|null} The key under which the handler was set, or null if handler is empty
  */
 Evp.set = function _Q_Event_prototype_set(handler, key, prepend) {
-	if (!handler) return null;
+	if (!handler) return undefined;
 	var isTool = (Q.typeOf(key) === 'Q.Tool');
 	if (key === true || (key === undefined && Q.Page.beingActivated)) {
 		Q.Event.forPage.push(this);
@@ -2161,7 +2163,7 @@ Evp.set = function _Q_Event_prototype_set(handler, key, prepend) {
  * @return {String|null} The key under which the handler was set, or null if handler is empty
  */
 Evp.add = function _Q_Event_prototype_add(handler, key, prepend) {
-	if (!handler) return null;
+	if (!handler) return undefined;
 	var event = this;
 	var ret = this.set(handler, key, prepend);
 	if (this.occurred || this.occurring) {
@@ -2183,7 +2185,7 @@ Evp.add = function _Q_Event_prototype_add(handler, key, prepend) {
  * @return {String} The key under which the handler was set
  */
 Evp.setOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
-	if (!handler) return null;
+	if (!handler) return undefined;
 	var event = this;
 	return key = event.set(function _setOnce() {
 		handler.apply(this, arguments);
@@ -2204,7 +2206,7 @@ Evp.setOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
  * @return {String} The key under which the handler was set
  */
 Evp.addOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
-	if (!handler) return null;
+	if (!handler) return undefined;
 	var event = this;
 	return key = event.add(function _addOnce() {
 		handler.apply(this, arguments);
@@ -4218,7 +4220,7 @@ Tp.child = function Q_Tool_prototype_child(append, name) {
 			}
 		}
 	}
-	return null;
+	return undefined;
 };
 
 /**
@@ -4292,7 +4294,7 @@ Tp.ancestor = function Q_Tool_prototype_parent(name) {
 			}
 		}
 	}
-	return null;
+	return undefined;
 };
 
 /**
@@ -4506,6 +4508,7 @@ Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
  */
 Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptions, id, prefix) {
 	if (typeof toolOptions === 'string') {
+		prefix = id;
 		id = toolOptions;
 		toolOptions = undefined;
 	}
@@ -4667,7 +4670,7 @@ Q.Tool.byId = function _Q_Tool_byId(id, name) {
 	}
 	var tool = Q.Tool.active[id] ? Q.first(Q.Tool.active[id]) : null;
 	if (!tool) {
-		return null;
+		return undefined;
 	}
 	var q = tool.element.Q;
 	return q.tools[q.toolNames[q.toolNames.length-1]];
@@ -6772,7 +6775,7 @@ Q.request.callbacks = []; // used by Q.request
  * @return {String|null} The first error message found, or null
  */
 Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
-	var error = null;
+	var error = undefined;
 	for (var i=0; i<arguments.length; ++i) {
 		var d = arguments[i];
 		if (Q.isEmpty(d)) {
@@ -6792,7 +6795,7 @@ Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
 		}
 	}
 	if (!error) {
-		return null;
+		return undefined;
 	}
 	return (typeof error === 'string')
 		? error
@@ -7834,7 +7837,7 @@ Q.find = function _Q_find(elem, filter, callbackBefore, callbackAfter, options, 
  *  This will get called when the content has been completely activated.
  *  That is, after all the files, if any, have been loaded and all the
  *  constructors have run.
- *  It receives (elem, options, tools) as arguments, and the last tool to be
+ *  It receives (elem, tools, options) as arguments, and the last tool to be
  *  activated as "this".
  * @return {Q.Promise} Returns a promise with an extra .cancel() method to cancel the action
  */
@@ -7892,7 +7895,7 @@ Q.activate = function _Q_activate(elem, options, callback) {
 			throw new Q.Error("Q.activate: tool " + shared.firstToolId + " not found.");
 		}
 		if (callback) {
-			Q.handle(callback, tool, [elem, options, shared.tools]);
+			Q.handle(callback, tool, [elem, shared.tools, options]);
 		}
 		_resolve && _resolve({
 			element: elem, options: options, tools: shared.tools
