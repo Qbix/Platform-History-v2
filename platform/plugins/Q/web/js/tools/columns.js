@@ -336,6 +336,7 @@ Q.Tool.define("Q/columns", function(options) {
 		}
 		if (url) {
 			$div.attr('data-url', url);
+			$div.attr('data-prevUrl', location.href);
 		}
 		if (o && o.columnClass) {
 			$div.addClass(o.columnClass);
@@ -447,6 +448,7 @@ Q.Tool.define("Q/columns", function(options) {
 					Q.instanceOf(o.title, Element) ? $(o.title) : o.title
 				);
 				$div.attr('data-title', $titleSlot.text());
+				$div.attr('data-prevTitle', document.title);
 			}
 			if (o.column != undefined) {
 				$columnSlot.empty().append(
@@ -788,8 +790,8 @@ Q.Tool.define("Q/columns", function(options) {
 			presentColumn(tool);
 			Q.handle(callback, tool, [index, div]);
 			state.onClose.handle.call(tool, index, div, data);
-			var url = $prev.attr('data-url');
-			var title = $prev.attr('data-title');
+			var url = $prev.attr('data-url') || $div.attr('data-prevUrl');
+			var title = $prev.attr('data-title') || $div.attr('data-prevTitle');
 			if (o.pagePushUrl && url && url !== location.href) {
 				Q.Page.push(url, title);
 			}
