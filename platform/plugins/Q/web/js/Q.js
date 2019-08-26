@@ -12410,6 +12410,7 @@ Q.Masks = {
 	 * @param {number} [options.zIndex] You can override the mask's default z-index here
 	 * @param {String} [options.html=''] Any HTML to insert into the mask.
 	 * @param {HTMLElement} [options.shouldCover=null] Optional element in the DOM to cover.
+	 * @param {HTMLElement} [options.behind=null] Optional element in the DOM to be right behind in zIndex
 	 * @return {Object} the mask info
 	 */
 	mask: function(key, options)
@@ -12426,7 +12427,8 @@ Q.Masks = {
 		mask = Q.Masks.collection[key] = Q.extend({
 			fadeIn: 0,
 			fadeOut: 0,
-			shouldCover: null
+			shouldCover: null,
+			behind: null
 		}, Q.Masks.options[key], options);
 		var me = mask.element = document.createElement('div');
 		me.addClass('Q_mask ' + (mask.className || ''));
@@ -12438,6 +12440,11 @@ Q.Masks = {
 		mask.counter = 0;
 		if (options && options.zIndex) {
 			me.style.zIndex = options.zIndex;
+		} else if (options && options.behind) {
+			var zIndex = options.behind.computedStyle().zIndex;
+			if (zIndex) {
+				me.style.zIndex = zIndex - 1;
+			}
 		}
 		return Q.Masks.collection[key] = mask;
 	},
@@ -12471,6 +12478,8 @@ Q.Masks = {
 					me.style.opacity = y * opacity;
 				}, mask.fadeIn);
 				me.style.opacity = 0;
+			} else {
+				me.style.opacity = 1;
 			}
 		}
 		++mask.counter;
