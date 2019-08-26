@@ -117,7 +117,7 @@ table { table-layout: fixed; }
 	vertical-align: middle;
 }
 
-.Q_columns {
+.Q_columns_tool {
 	z-index: 99999;
 }
 

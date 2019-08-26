@@ -55,10 +55,9 @@ Q.Tool.define("Q/columns", function(options) {
 	options = options || {};
 
 	//state.triggers = [];
+	prepareColumns(tool);
 	
 	Q.addStylesheet('{{Q}}/css/columns.css', function () {
-		prepareColumns(tool);
-
 		if (state.title === undefined) {
 			state.title = '<img class="Q_columns_loading" src="' + Q.url('{{Q}}/img/throbbers/loading.gif') +'" alt="">';
 		}
