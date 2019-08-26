@@ -79,7 +79,9 @@ function Q_before_Q_responseExtras()
 		Q_Response::addStylesheet($src, 'Q', $media);
 	}
 	
+	// Language and texts
 	Q_Response::setMeta('Content-Language', Q_Text::basename());
+	Q_Response::setScriptData('Q.info.text', Q_Config::get('Q', 'text', array()));
 	
 	// We may want to set the initial URL and updateTimestamp cookie
 	$environment = Q_Config::get('Q', 'environment', '');

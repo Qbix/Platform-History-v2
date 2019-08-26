@@ -7384,7 +7384,7 @@ Q.currentScript = function (stackLevels) {
 	}
 	for (i=0, l=lines.length; i<l; ++i) {
 		if (lines[i].match(/http[s]?:\/\//)) {
-			index = i + 2 + (stackLevels || 0);
+			index = i + 1 + (stackLevels || 0);
 			break;
 		}
 	}
