@@ -366,6 +366,10 @@ Streams.define = function (type, ctor, methods) {
  */
 Streams.listen = function (options, servers) {
 
+	if (Streams.listen.result) {
+		return Streams.listen.result;
+	}
+	
 	// Start internal server
 	var server = Q.listen();
 	server.attached.express.post('/Q/node', Streams_request_handler);
@@ -502,7 +506,7 @@ Streams.listen = function (options, servers) {
 			delete Streams.observing[client.id];
 		});
 	});
-	return {
+	return Streams.listen.result = {
 		internal: server,
 		socket: socket
 	};
