@@ -2827,48 +2827,16 @@ window.WebRTCconferenceLib = function app(options){
 					trackToAttach.stream = videoStream;
 
 
-					/*for (let i = localParticipant.tracks.length - 1; i >= 0; i--) {
-						if (localParticipant.tracks[i].kind == 'video') {
-							localParticipant.tracks.splice(i, 1);
-						}
-					}*/
+					var currentVideoTracks = localParticipant.tracks.filter(function (t) {
+						return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
+					});
 
-					var currentVideoTracks = localParticipant.videoTracks();
-					/*if(typeof cordova != 'undefined' && _isiOS) {
-						app.screensInterface.attachTrack(trackToAttach, localParticipant);
-
-					}else*/
-					if(currentVideoTracks.length != 0) {
+					if(app.conferenceControl.cameraIsEnabled() && currentVideoTracks.length != 0) {
 						if(!(typeof cordova != 'undefined' && _isiOS)) app.conferenceControl.replaceTrack(videoTrack);
 						app.screensInterface.attachTrack(trackToAttach, localParticipant);
 					} else {
 						app.screensInterface.attachTrack(trackToAttach, localParticipant);
 						app.conferenceControl.enableVideo();
-
-
-						/*for (var p in roomParticipants) {
-							if (!roomParticipants[p].isLocal && roomParticipants[p].RTCPeerConnection != null) {
-
-								var videoSender = roomParticipants[p].RTCPeerConnection.getSenders().filter(function (sender) {
-									return sender.track.kind == 'video';
-								})[0];
-
-
-								videoSender.replaceTrack(stream.getVideoTracks()[0])
-									.then(function() {
-										var videoSender = localParticipant.videoTracks().filter(function (sender) {
-											return sender.track && sender.track.kind == 'video';
-										})[0];
-										if(callback != null) callback();
-
-										app.eventBinding.sendDataTrackMessage("afterCamerasToggle");
-									})
-									.catch(function (e) {
-										console.error(e.name + ': ' + e.message);
-										app.eventBinding.sendDataTrackMessage("afterCamerasToggle");
-									});
-							}
-						}*/
 
 						app.event.dispatch('cameraToggled');
 					}
@@ -4644,7 +4612,15 @@ window.WebRTCconferenceLib = function app(options){
 
 		var connect = function () {
 			var secure = options.nodeServer.indexOf('https://') == 0;
-			socket = io.connect(options.nodeServer, {transports: ['websocket'], 'force new connection': true, secure:secure});
+			socket = io.connect(options.nodeServer, {
+				transports: ['websocket'],
+				'force new connection': true,
+				secure:secure,
+				reconnection: true,
+				reconnectionDelay: 1000,
+				reconnectionDelayMax: 5000,
+				reconnectionAttempts: 5
+			});
 			window.webrtcSocket = socket;
 			socket.on('connect', function () {
 				enableiOSDebug();
@@ -4667,16 +4643,19 @@ window.WebRTCconferenceLib = function app(options){
 
 			});
 			socket.on('connect_error', function(e) {
+				//socket.connect();
+				app.event.dispatch('connectError');
 				console.log('Connection failed');
 				console.error(e);
 			});
-			socket.on('connect_error', function(e) {
-				console.log('Connection failed');
-				console.error(e);
+
+			socket.on('reconnect_failed', function(e) {
+				console.log(e)
+				app.event.dispatch('reconnectError');
 			});
 		}
 
-		if(findScript('socket.io.js') && io != null) {
+		if(findScript('socket.io.js') && typeof io != 'undefined') {
 			connect();
 		} else {
 			/*requirejs(['https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'], function (io) {

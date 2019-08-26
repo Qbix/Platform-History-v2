@@ -264,6 +264,76 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				log('screen sharing failed')
 				screensRendering.hideLoader('screensharingFailed', e.participant);
 			});
+
+			WebRTCconference.event.on('connectError', function () {
+				log('Server connection failed')
+				showConnectionFailedError.show();
+			});
+			WebRTCconference.event.on('reconnectError', function () {
+				log('Server reconnection failed')
+				showConnectionFailedError.updateStatus('reconnection failed');
+			});
+		}
+
+		/**
+		 * Show dialog with insturctions in case when it's impossible to access microphone or camera.
+		 * @method showInstructionsDialog
+		 * @param {String} [kind] Name of device that is not accessible.
+		 */
+		var showConnectionFailedError = (function (kind) {
+			var dialogue = document.createElement('DIV');
+			dialogue.className = 'Streams_webrtc_devices_dialog_inner';
+			var dialogContent = document.createElement('H2');
+			dialogContent.className = 'Streams_webrtc_instructions_dialog';
+			var dialogContentText = document.createElement('SPAN');
+			dialogContentText.innerHTML = 'Server connection failed: '
+			var stateEl = document.createElement('SPAN');
+			stateEl.innerHTML = 'reconnecting...';
+
+			dialogContent.appendChild(dialogContentText);
+			dialogContent.appendChild(stateEl);
+			dialogue.appendChild(dialogContent);
+
+			function show() {
+				Q.Dialogs.push({
+					title: 'Error',
+					className: 'Streams_webrtc_devices_dialog',
+					content: dialogue,
+					apply: true,
+				});
+			}
+
+			function updateStatus(state) {
+				stateEl.innerHTML = state;
+			}
+
+			return {
+				show:show,
+				updateStatus:updateStatus
+			}
+
+		}());
+
+		/**
+		 * Show dialog with insturctions in case when it's impossible to access microphone or camera.
+		 * @method showInstructionsDialog
+		 * @param {String} [kind] Name of device that is not accessible.
+		 */
+		function showInstructionsDialog(kind) {
+			var instructionsPermissionDialog = document.createElement('DIV');
+			instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
+			var dialogList = document.createElement('OL');
+			dialogList.className = 'Streams_webrtc_instructions_dialog';
+			dialogList.innerHTML = `<div>Permission for ` + kind + ` denied. To use it please follow these steps:</div>
+									<li>Go to "Settings" -> "Advanced" -> "Privacy and security" -> "Site Settings" -> "Camera" or "Site Settings" -> "Microphone"</li>
+									<li>Remove ` + location.hostname + ` from "Block" list</li>`;
+			instructionsPermissionDialog.appendChild(dialogList);
+			Q.Dialogs.push({
+				title: 'Instructions',
+				className: 'Streams_webrtc_devices_dialog',
+				content: instructionsPermissionDialog,
+				apply: true,
+			});
 		}
 
 		/**
@@ -276,8 +346,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
 			var dialogList = document.createElement('OL');
 			dialogList.className = 'Streams_webrtc_instructions_dialog';
-			dialogList.innerHTML = `<div>Permission for "` + kind + `" denied. To use it please follow these steps:</div><li>Reload this page</li>
-									<li>` + (Q.info.isTouchscreen ? 'Tap' : 'Click') + ` "Allow" when dialogue will appear asking for access to your microphone/camera</li>`;
+			dialogList.innerHTML = `<div>Permission for ` + kind + ` denied. To use it please follow these steps:</div>
+									<li>Go to "Settings" -> "Advanced" -> "Privacy and security" -> "Site Settings" -> "Camera" or "Site Settings" -> "Microphone"</li>
+									<li>Remove ` + location.hostname + ` from "Block" list</li>`;
 			instructionsPermissionDialog.appendChild(dialogList);
 			Q.Dialogs.push({
 				title: 'Instructions',
@@ -373,7 +444,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							.then(function (stream) {
 								addStreamToRoom(stream);
 							}).catch(function (err) {
-							if(err.name == "NotAllowedError") showInstructionsDialog();
+							if(err.name == "NotAllowedError") showInstructionsDialog('camera or microphone');
 							console.error(err.name + ": " + err.message);
 						});
 					});
@@ -574,6 +645,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						}
 					}).catch(function(err) {
 					console.error(err.name + ": " + err.message);
+					if(err.name == 'NotAllowedError') showInstructionsDialog('camera or microphone');
 				});
 			}).catch(function (e) {
 				console.error('ERROR: cannot get device info: ' + e.message);
