@@ -337,7 +337,7 @@ abstract class Users extends Base_Users
 		if (!in_array($platform, $platforms)) {
 			throw new Q_Exception_WrongValue(array(
 				'field' => 'platform',
-				'fieldpath' => 'One of the platforms named in Users/apps/platforms config'
+				'range' => 'One of the platforms named in Users/apps/platforms config'
 			));
 		}
 		

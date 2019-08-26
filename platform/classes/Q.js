@@ -119,7 +119,7 @@ function _getProp (/*Array*/parts, /*Boolean*/create, /*Object*/context){
 	context = context || null;
 	if(!parts.length) return context;
 	while(context && (p = parts[i++]) !== undefined){
-		context = (typeof context === 'object') && (p in context) 
+		context = (typeof context === 'object') && (context[p] !== undefined)
 			? context[p] 
 			: (create ? context[p] = {} : undefined);
 	}
@@ -1437,7 +1437,7 @@ Q.first = function _Q_first(container, options) {
  */
 Q.firstKey = function _Q_firstKey(container, options) {
 	if (!container) {
-		return null;
+		return undefined;
 	}
 	switch (typeof container) {
 		case 'array':
@@ -1462,7 +1462,7 @@ Q.firstKey = function _Q_firstKey(container, options) {
 		default:
 			throw new Q.Exception("Q.first: container has to be an array, object or string");
 	}
-	return null;
+	return undefined;
 };
 
 /**
@@ -2841,7 +2841,7 @@ Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
 		}
 	}
 	if (!error) {
-		return null;
+		return undefined;
 	}
 	return (typeof error === 'string')
 		? error
@@ -2990,13 +2990,13 @@ if (!Object.getPrototypeOf) {
 		if (obj.constructor && obj.constructor.prototype) {
 			return obj.constructor.prototype;
 		}
-		return null;
+		return undefined;
 	};
 }
 
 Date.fromTimestamp = function (timestamp) {
 	if (isNaN(timestamp)) {
-		return null;
+		return undefined;
 	}
 	timestamp = parseFloat(timestamp);
 	return new Date(timestamp < 10000000000 ? timestamp * 1000 : timestamp);

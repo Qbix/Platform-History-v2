@@ -52,6 +52,7 @@
 						// device without any confirmation dialog
 						if (granted === true) {
 							return adapter.subscribe(function (err, subscribed) {
+								console.log('Users.Device: User is subscribed.');
 								Q.handle(Users.Device.onSubscribe, Users.Device, [
 									options, granted, subscribed
 								]);
@@ -61,7 +62,7 @@
 						// if the user is undecided with notifications then do call the confirmation
 						var userId = Q.Users.loggedInUserId();
 						var cache = Q.Cache.session('Users.Permissions.notifications');
-						var requested = Q.getObject(['cbpos'], cache.get(userId));
+						var requested = Q.getObject(['subject'], cache.get(userId));
 
 						// if permissions already requested - don't request it again
 						if (requested !== undefined && requested !== null) {
@@ -79,7 +80,7 @@
 							]);
 
 							// set this to avoid duplicated notices
-							cache.set(userId, 'in progress');
+							cache.set(userId, 0, 'in progress');
 
 							Q.confirm(text.prompt, function (res) {
 								// set cache to null before device subscription

@@ -77,13 +77,21 @@ handlebars.registerHelper('call', function(path) {
 });
 
 handlebars.registerHelper('toUrl', function(url) {
+	if (Q.isPlainObject(url)) {
+		// we meant to pass a variable, not call a helper
+		url = Q.getObject('data.root.toUrl', url);
+	}
 	if (!url) {
 		return "{{url missing}}";
 	}
-	return Q.url(url);
+	return Q.url(Q.getObject('data.root.toUrl', url) || url);
 });
 
 handlebars.registerHelper('toCapitalized', function(text) {
+	if (Q.isPlainObject(text)) {
+		// we meant to pass a variable, not call a helper
+		text = Q.getObject('data.root.toCapitalized', text);
+	}
 	text = text || '';
 	return text.charAt(0).toUpperCase() + text.slice(1);
 });

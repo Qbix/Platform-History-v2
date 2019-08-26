@@ -371,9 +371,6 @@ function _Q_clickable(o) {
 			if (state.preventDefault) {
 				evt.preventDefault();
 			}
-			if (state.stopPropagation) {
-				evt.stopPropagation();
-			}
 		}).on('focus', function (evt) {
 			if (state.stopPropagation) {
 				evt.stopPropagation();

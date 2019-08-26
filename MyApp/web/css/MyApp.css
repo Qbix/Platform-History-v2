@@ -117,6 +117,10 @@ table { table-layout: fixed; }
 	vertical-align: middle;
 }
 
+.Q_columns_tool {
+	z-index: 99999;
+}
+
 /* Dashboard contents */
 #dashboard>* { margin: 0; padding: 0; line-height: 40px; text-align: center; }
 #dashboard>h1 { float: left; padding: 5px; width: auto; }

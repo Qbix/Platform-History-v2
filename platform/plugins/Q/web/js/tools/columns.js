@@ -55,10 +55,9 @@ Q.Tool.define("Q/columns", function(options) {
 	options = options || {};
 
 	//state.triggers = [];
+	prepareColumns(tool);
 	
 	Q.addStylesheet('{{Q}}/css/columns.css', function () {
-		prepareColumns(tool);
-
 		if (state.title === undefined) {
 			state.title = '<img class="Q_columns_loading" src="' + Q.url('{{Q}}/img/throbbers/loading.gif') +'" alt="">';
 		}
@@ -164,7 +163,7 @@ Q.Tool.define("Q/columns", function(options) {
 
 {
 	max: function () {
-		return this.state.max;
+		return this.state.max || 0;
 	},
 	
 	/**
@@ -211,7 +210,7 @@ Q.Tool.define("Q/columns", function(options) {
 		var state = this.state;
 		var max = tool.max();
 		if (index === undefined) {
-			index = max + 1;
+			index = parseInt(max) + 1;
 		}
 		if (typeof options === 'number') {
 			options = {};
@@ -337,6 +336,7 @@ Q.Tool.define("Q/columns", function(options) {
 		}
 		if (url) {
 			$div.attr('data-url', url);
+			$div.attr('data-prevUrl', location.href);
 		}
 		if (o && o.columnClass) {
 			$div.addClass(o.columnClass);
@@ -371,7 +371,9 @@ Q.Tool.define("Q/columns", function(options) {
 			$close.hide();
 		}
 		
-		if ($div.css('position') === 'static') {
+		if (Q.info.isMobile) {
+			$div.css('position', 'absolute');
+		} else if ($div.css('position') === 'static') {
 			$div.css('position', 'relative');
 		}
 		var _position = $div.css('position');
@@ -446,6 +448,7 @@ Q.Tool.define("Q/columns", function(options) {
 					Q.instanceOf(o.title, Element) ? $(o.title) : o.title
 				);
 				$div.attr('data-title', $titleSlot.text());
+				$div.attr('data-prevTitle', document.title);
 			}
 			if (o.column != undefined) {
 				$columnSlot.empty().append(
@@ -517,8 +520,9 @@ Q.Tool.define("Q/columns", function(options) {
 			var expandTop = index > 0 && Q.info.isMobile && state.expandOnMobile && state.expandOnMobile.top;
 			var expandBottom = index > 0 && Q.info.isMobile && state.expandOnMobile && state.expandOnMobile.bottom;
 			var $sc = $(state.container);
+			var containerRect = $sc[0].getBoundingClientRect();
 			var top = expandTop
-				? -$sc.offset().top
+				? -containerRect.top
 				: 0;
 			var show = {
 				opacity: 1,
@@ -529,7 +533,7 @@ Q.Tool.define("Q/columns", function(options) {
 			$div.css('position', 'absolute');
 			if (Q.info.isMobile) {
 				var h = expandBottom
-					? Q.Pointer.windowHeight() - top
+					? Q.Pointer.windowHeight() - containerRect.top - top
 					: state.container.clientHeight;
 				show.width = tool.element.clientWidth;
 				show.height = h;
@@ -551,12 +555,15 @@ Q.Tool.define("Q/columns", function(options) {
 			if (lastShow) {
 				show = lastShow;
 			}
+			if (hide.top[hide.top.length-1] === '%') {
+				hide.top = show.top + show.height * parseFloat(hide.top) / 100;
+			}
 			$div.data(dataKey_hide, hide);
 			
 			if (expandTop || expandBottom) {
 				var $parents = $(tool.element).parents();
-				$parents.addClass('Q_columns_containsExpanded');
-				$parents.siblings().addClass('Q_columns_siblingContainsExpanded');
+				$parents.not('body,html').addClass('Q_columns_containsExpanded');
+				$parents.siblings().not('body,html').addClass('Q_columns_siblingContainsExpanded');
 			}
 			
 			state.locked = true;
@@ -565,7 +572,6 @@ Q.Tool.define("Q/columns", function(options) {
 			function openAnimation(){
 				// open animation
 				var duration = o.animation.duration;
-				var $sc = $(state.container);
 				var $cs = $('.Q_column_slot', $div);
 				var $ct = $('.Q_columns_title', $div);
 				
@@ -751,7 +757,7 @@ Q.Tool.define("Q/columns", function(options) {
 					max = i;
 				}
 			});
-			state.max = max;
+			state.max = parseInt(max);
 		}
 		
 		Q.Pointer.cancelClick();
@@ -784,8 +790,8 @@ Q.Tool.define("Q/columns", function(options) {
 			presentColumn(tool);
 			Q.handle(callback, tool, [index, div]);
 			state.onClose.handle.call(tool, index, div, data);
-			var url = $prev.attr('data-url');
-			var title = $prev.attr('data-title');
+			var url = $prev.attr('data-url') || $div.attr('data-prevUrl');
+			var title = $prev.attr('data-title') || $div.attr('data-prevTitle');
 			if (o.pagePushUrl && url && url !== location.href) {
 				Q.Page.push(url, title);
 			}
@@ -995,7 +1001,7 @@ function prepareColumns(tool) {
 			$this.data(dataKey_index, index)
 				.data(dataKey_scrollTop, Q.Pointer.scrollTop());
 			if (index > 0) {
-				state.max = index;
+				state.max = parseInt(index);
 			}
 			if (!$this.hasClass('Q_columns_opened')
 			 && !$this.hasClass('Q_columns_opening')) {

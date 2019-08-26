@@ -148,7 +148,7 @@ Object.getPrototypeOf = function (obj) {
 	if (obj.constructor && obj.constructor.prototype) {
 		return obj.constructor.prototype;
 	}
-	return null;
+	return undefined;
 };
 
 if (!Object.keys)
@@ -610,7 +610,7 @@ if (!Elp.Q)
 */
 Elp.Q = function (toolName) {
 	// this method is overridden by the tool constructor on specific elements
-	return null;
+	return undefined;
 };
 
 if (!Elp.contains)
@@ -1328,7 +1328,7 @@ Q.first = function _Q_first(container, options) {
  */
 Q.firstKey = function _Q_firstKey(container, options) {
 	if (!container) {
-		return null;
+		return undefined;
 	}
 	switch (typeof container) {
 		case 'array':
@@ -1353,7 +1353,7 @@ Q.firstKey = function _Q_firstKey(container, options) {
 		default:
 			throw new Q.Error("Q.first: container has to be an array, object or string");
 	}
-	return null;
+	return undefined;
 };
 
 /**
@@ -1852,7 +1852,7 @@ function _getProp (/*Array*/parts, /*Boolean*/create, /*Object*/context){
 			if (p === '*') {
 				p = Q.firstKey(context);
 			}
-			context = (p in context) ? context[p] : (create ? context[p] = {} : undefined);
+			context = (context[p] !== undefined) ? context[p] : (create ? context[p] = {} : undefined);
 		} catch (e) {
 			if (create) {
 				throw new Q.Error("Q.setObject cannot set property of " + typeof(context) + " " + JSON.stringify(context));
@@ -1934,13 +1934,15 @@ Q.getObject = function _Q_getObject(name, context, delimiter, create) {
  *  If a string, this is interpreted as the URL of a javascript to load.
  *  If a function, this is called with the callback as the first argument.
  *  If an event, the callback is added to it.
+ *  The loader must call the callback and pass the property as the first parameter.
  * @param {Function} callback
  *  The callback to call when the loader has been executed.
+ *  The first parameter should be the property (object, string, etc.) that's now defined.
  *  This is where you would put the code that relies on the property being defined.
  */
 Q.ensure = function _Q_ensure(property, loader, callback) {
 	if (property !== undefined) {
-		Q.handle(callback);
+		Q.handle(callback, null, [property]);
 		return;
 	}
 	if (typeof loader === 'string') {
@@ -2118,7 +2120,7 @@ Evp.occurring = false;
  * @return {String|null} The key under which the handler was set, or null if handler is empty
  */
 Evp.set = function _Q_Event_prototype_set(handler, key, prepend) {
-	if (!handler) return null;
+	if (!handler) return undefined;
 	var isTool = (Q.typeOf(key) === 'Q.Tool');
 	if (key === true || (key === undefined && Q.Page.beingActivated)) {
 		Q.Event.forPage.push(this);
@@ -2161,7 +2163,7 @@ Evp.set = function _Q_Event_prototype_set(handler, key, prepend) {
  * @return {String|null} The key under which the handler was set, or null if handler is empty
  */
 Evp.add = function _Q_Event_prototype_add(handler, key, prepend) {
-	if (!handler) return null;
+	if (!handler) return undefined;
 	var event = this;
 	var ret = this.set(handler, key, prepend);
 	if (this.occurred || this.occurring) {
@@ -2183,7 +2185,7 @@ Evp.add = function _Q_Event_prototype_add(handler, key, prepend) {
  * @return {String} The key under which the handler was set
  */
 Evp.setOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
-	if (!handler) return null;
+	if (!handler) return undefined;
 	var event = this;
 	return key = event.set(function _setOnce() {
 		handler.apply(this, arguments);
@@ -2204,7 +2206,7 @@ Evp.setOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
  * @return {String} The key under which the handler was set
  */
 Evp.addOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
-	if (!handler) return null;
+	if (!handler) return undefined;
 	var event = this;
 	return key = event.add(function _addOnce() {
 		handler.apply(this, arguments);
@@ -4218,7 +4220,7 @@ Tp.child = function Q_Tool_prototype_child(append, name) {
 			}
 		}
 	}
-	return null;
+	return undefined;
 };
 
 /**
@@ -4292,7 +4294,7 @@ Tp.ancestor = function Q_Tool_prototype_parent(name) {
 			}
 		}
 	}
-	return null;
+	return undefined;
 };
 
 /**
@@ -4506,6 +4508,7 @@ Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
  */
 Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptions, id, prefix) {
 	if (typeof toolOptions === 'string') {
+		prefix = id;
 		id = toolOptions;
 		toolOptions = undefined;
 	}
@@ -4667,7 +4670,7 @@ Q.Tool.byId = function _Q_Tool_byId(id, name) {
 	}
 	var tool = Q.Tool.active[id] ? Q.first(Q.Tool.active[id]) : null;
 	if (!tool) {
-		return null;
+		return undefined;
 	}
 	var q = tool.element.Q;
 	return q.tools[q.toolNames[q.toolNames.length-1]];
@@ -5979,7 +5982,7 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 			throw new Q.Error("Custom $.fn.on handler: need to set params.eventName");
 		}
 		eventHandler.Q_wrapper = wrapper;
-		eventName = wrapper.eventName = params.eventName;
+		eventName = params.eventName;
 		eventHandler = wrapper;
 	}
 	if (!eventName) {
@@ -6772,7 +6775,7 @@ Q.request.callbacks = []; // used by Q.request
  * @return {String|null} The first error message found, or null
  */
 Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
-	var error = null;
+	var error = undefined;
 	for (var i=0; i<arguments.length; ++i) {
 		var d = arguments[i];
 		if (Q.isEmpty(d)) {
@@ -6792,7 +6795,7 @@ Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
 		}
 	}
 	if (!error) {
-		return null;
+		return undefined;
 	}
 	return (typeof error === 'string')
 		? error
@@ -7381,7 +7384,7 @@ Q.currentScript = function (stackLevels) {
 	}
 	for (i=0, l=lines.length; i<l; ++i) {
 		if (lines[i].match(/http[s]?:\/\//)) {
-			index = i + 2 + (stackLevels || 0);
+			index = i + 1 + (stackLevels || 0);
 			break;
 		}
 	}
@@ -7834,7 +7837,7 @@ Q.find = function _Q_find(elem, filter, callbackBefore, callbackAfter, options, 
  *  This will get called when the content has been completely activated.
  *  That is, after all the files, if any, have been loaded and all the
  *  constructors have run.
- *  It receives (elem, options, tools) as arguments, and the last tool to be
+ *  It receives (elem, tools, options) as arguments, and the last tool to be
  *  activated as "this".
  * @return {Q.Promise} Returns a promise with an extra .cancel() method to cancel the action
  */
@@ -7892,7 +7895,7 @@ Q.activate = function _Q_activate(elem, options, callback) {
 			throw new Q.Error("Q.activate: tool " + shared.firstToolId + " not found.");
 		}
 		if (callback) {
-			Q.handle(callback, tool, [elem, options, shared.tools]);
+			Q.handle(callback, tool, [elem, shared.tools, options]);
 		}
 		_resolve && _resolve({
 			element: elem, options: options, tools: shared.tools
@@ -10073,7 +10076,6 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 				if (!('eventName' in params)) {
 					throw new Q.Error("Custom $.fn.on handler: need to set params.eventName");
 				}
-				args[0].eventName = params.eventName;
 				args[0] = params.eventName;
 			}
 			if (namespace) {
@@ -12408,6 +12410,7 @@ Q.Masks = {
 	 * @param {number} [options.zIndex] You can override the mask's default z-index here
 	 * @param {String} [options.html=''] Any HTML to insert into the mask.
 	 * @param {HTMLElement} [options.shouldCover=null] Optional element in the DOM to cover.
+	 * @param {HTMLElement} [options.behind=null] Optional element in the DOM to be right behind in zIndex
 	 * @return {Object} the mask info
 	 */
 	mask: function(key, options)
@@ -12424,7 +12427,8 @@ Q.Masks = {
 		mask = Q.Masks.collection[key] = Q.extend({
 			fadeIn: 0,
 			fadeOut: 0,
-			shouldCover: null
+			shouldCover: null,
+			behind: null
 		}, Q.Masks.options[key], options);
 		var me = mask.element = document.createElement('div');
 		me.addClass('Q_mask ' + (mask.className || ''));
@@ -12436,6 +12440,11 @@ Q.Masks = {
 		mask.counter = 0;
 		if (options && options.zIndex) {
 			me.style.zIndex = options.zIndex;
+		} else if (options && options.behind) {
+			var zIndex = options.behind.computedStyle().zIndex;
+			if (zIndex) {
+				me.style.zIndex = zIndex - 1;
+			}
 		}
 		return Q.Masks.collection[key] = mask;
 	},
@@ -12469,6 +12478,8 @@ Q.Masks = {
 					me.style.opacity = y * opacity;
 				}, mask.fadeIn);
 				me.style.opacity = 0;
+			} else {
+				me.style.opacity = 1;
 			}
 		}
 		++mask.counter;
@@ -12796,6 +12807,10 @@ function _addHandlebarsHelpers() {
 	}
 	if (!Handlebars.helpers.url) {
 		Handlebars.registerHelper('toUrl', function (url) {
+			if (Q.isPlainObject(url)) {
+				// we meant to pass a variable, not call a helper
+				url = Q.getObject('data.root.toUrl', url);
+			}
 			if (!url) {
 				return "{{url missing}}";
 			}
@@ -12804,6 +12819,10 @@ function _addHandlebarsHelpers() {
 	}
 	if (!Handlebars.helpers.toCapitalized) {
 		Handlebars.registerHelper('toCapitalized', function(text) {
+			if (Q.isPlainObject(text)) {
+				// we meant to pass a variable, not call a helper
+				text = Q.getObject('data.root.toCapitalized', text);
+			}
 			text = text || '';
 			return text.charAt(0).toUpperCase() + text.slice(1);
 		});

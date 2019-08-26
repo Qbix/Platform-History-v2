@@ -202,16 +202,18 @@ class Q_Handlebars {
 	static function helperToUrl($template, $context, $args, $source)
 	{
 		$args = self::parseArgs($template, $context, $args);
-		if (empty($args[0])) {
+		$url = isset($args[0]) ? $args[0] : $context->get('toUrl');
+		if (empty($url)) {
 			return "{{url missing}}";
 		}
-		return Q_Html::themedUrl($args[0]);
+		return Q_Html::themedUrl($url);
 	}
 	
 	static function helperToCapitalized($template, $context, $args, $source)
 	{
 		$args = self::parseArgs($template, $context, $args);
-		return isset($args[0]) ? Q_Utils::ucfirst($args[0]) : '';
+		$text = isset($args[0]) ? $args[0] : $context->get('toCapitalized');
+		return isset($text) ? Q_Utils::ucfirst($text) : '';
 	}
 	
 	static function helperInterpolate($template, $context, $args, $source)

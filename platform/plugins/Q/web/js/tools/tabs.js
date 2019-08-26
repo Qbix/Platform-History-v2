@@ -247,7 +247,8 @@
 			 * Called by indicateCurrent. You can override this function to provide your
 			 * own mechanisms for indicating the current tab and returning it.
 			 * @method getCurrentTab
-			 * @param {String} [tab] a possible tab the caller requested to indicate as current
+			 * @param {String} [tab] a possible tab the caller requested to indicate as current,
+			 *  as a fallback if no other tab was designated as current.
 			 * @return {Element} The current tab element.
 			 */
 			getCurrentTab: function (tab) {
@@ -272,8 +273,8 @@
 						var tdn = tool.getName(t);
 						var tu = tool.getUrl(t);
 						if ((tdn && tdn === name)
-							|| (!name && tu === url)
-							|| (!name && !state.field && tu === url.split('?')[0])) {
+						|| (!name && tu === url)
+						|| (!name && !state.field && tu === url.split('?')[0])) {
 							tab = t;
 							return false;
 						}
@@ -330,7 +331,14 @@
 				var $o = $('.Q_tabs_overflow', $te);
 				state.tabName = null;
 				Q.handle(state.beforeRefresh, tool, [function (tabName) {
-					if (tabName) {
+					var found = false;
+					tool.$tabs.each(function () {
+						var name = $(this).attr('data-name');
+						if (name === tabName) {
+							found = true;
+						}
+					});
+					if (found && tabName) {
 						tool.state.tabName = tabName;
 					}
 				}]);
