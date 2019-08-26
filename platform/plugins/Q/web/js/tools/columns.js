@@ -164,7 +164,7 @@ Q.Tool.define("Q/columns", function(options) {
 
 {
 	max: function () {
-		return this.state.max;
+		return this.state.max || 0;
 	},
 	
 	/**
