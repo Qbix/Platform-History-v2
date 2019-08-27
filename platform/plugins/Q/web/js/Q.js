@@ -6891,7 +6891,7 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
 		var result = '';
 		Q.each(fields.querySelectorAll('input, textarea, select'), function () {
 			var value = (this.tagName.toUpperCase() === 'SELECT')
-				? this.options[this.selectedIndex].text
+				? this.options[this.selectedIndex].value
 				: this.value;
 			result += (result ? '&' : '') + this.getAttribute('name')
 				+ '=' + encodeURIComponent(value);

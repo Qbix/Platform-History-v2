@@ -405,6 +405,9 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 				newval = response.slots.Q_inplace;
 			}
 		}
+		if (state.type === 'select') {
+			newval = String(state.options[newval] || '').encodeHTML();
+		}
 		_restoreZ();
 		if (newval) {
 			static_span.html(newval);
@@ -654,7 +657,7 @@ Q.Template.set('Q/inplace/tool',
 +		"{{#if isSelect}}"
 +			"<select name='{{field}}'>"
 +			"{{#each options}}"
-+				"<option value='{{@key}}'>{{this}}</option>"
++				"<option value='{{@key}}' {{#if @first}}selected='selected'{{/if}}>{{this}}</option>"
 +			"{{/each}}"
 +			"</select>"
 +		"{{/if}}"
