@@ -439,7 +439,7 @@
 								),
 								{},
 								function () {
-									var tool = this;
+
 								}
 							);
 						}, 3000)
@@ -475,7 +475,7 @@
 						show: function () {
 							if(this.chatDialogue.classList.contains('Streams_webrtc_hidden')) {
 								this.chatDialogue.classList.remove('Streams_webrtc_hidden');
-								this.chatBox.scrollTop = this.chatBox.scrollHeight;
+								this.scrollToTheBottom();
 								this.isHidden = false;
 
 								tool.newMessagesCounter.innerHTML = '0';
@@ -507,8 +507,8 @@
 							} else this.hide();
 						},
 						scrollToTheBottom: function () {
-							if(!chatBox) return;
-							chatBox.scrollTop = chatBox.scrollHeight;
+							if(!Q.getObject(['textChat', 'chatTool', 'element'], tool)) return;
+							tool.textChat.chatTool.element.scrollTop = tool.textChat.chatTool.element.scrollHeight;
 						}
 					}
 

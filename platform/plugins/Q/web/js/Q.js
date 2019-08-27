@@ -882,6 +882,10 @@ Elp.removeClass = function (className) {
  * @return {Element} returns this, for chaining
  */
 Elp.addClass = function (className) {
+	if (Q.typeOf(className) !== 'string') {
+		className = '';
+	}
+
 	var classNames = className.split(' ');
 	var l = classNames.length;
 	for (var i=0; i<l; ++i) {
