@@ -149,7 +149,7 @@ module.exports = {
 	/**
 	 * Render handlebars template
 	 * @method render
-	 * @param {string} template The template name
+	 * @param {string} tPath Path to template
 	 * @param {object} [fields] Optional. The fields to pass to the template.
 	 * @param {Array} partials Optional. The names of partials to load and use for rendering.
 	 * @return {string|null}
@@ -163,7 +163,7 @@ module.exports = {
 
 			if (partials) {
 				for (path in partials) {
-					var path = partials[i];
+					path = partials[i];
 					for (j=0; j<_partials.length; j++) {
 						if (part[path] = _partials[j](path)) {
 							break;
