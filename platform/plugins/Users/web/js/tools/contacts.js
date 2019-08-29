@@ -15,6 +15,7 @@ var Users = Q.Users;
  * @param {Object} [options] options for the tool
  *   @param {String} options.communityId Id of community where to need to invite user
  *   @param {String} [options.prefix="Users/"] Pass any prefix here, to filter labels by this prefix
+ *  @param {Q.Event} [options.followup=true] this option for Streams.invite
  *  @param {Q.Event} [options.onRefresh] occurs after the tool is refreshed
  *  @param {Q.Event} [options.onClick] occurs when the user clicks or taps a label. Is passed (element, label, title, wasSelected). Handlers may return false to cancel the default behavior of toggling the label.
  *  @param {Q.Event} [options.onInvited] occurs when the user invited.
@@ -38,6 +39,7 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 	prefix: 'Users/',
 	communityId: null,
 	canAdd: true,
+	followup: true,
 	onRefresh: new Q.Event(),
 	onClick: new Q.Event(),
 	onInvited: new Q.Event()
@@ -94,6 +96,7 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 
 					Q.Streams.invite(state.communityId, 'Streams/experience/main', {
 						addLabel: selectedLabel,
+						followup: state.followup,
 						alwaysSend: true
 					}, function (err, info) {
 						var msg = Q.firstErrorMessage(err);
