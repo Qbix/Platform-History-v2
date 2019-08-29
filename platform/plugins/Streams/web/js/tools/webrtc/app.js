@@ -1297,6 +1297,216 @@ window.WebRTCconferenceLib = function app(options){
 
 		}
 
+		var videoComposer = (function () {
+			var _rects = [];
+			var _streams = [];
+			var _size = {width:640, height: 480};
+			var _canvas = null;
+			var _inputCtx = null;
+			var _outputCtx = null;
+
+			var _canvasMediStream = null;
+
+			var _streamingSocket;
+
+			var _fbApiInited;
+			var _fbStreamUrl;
+
+
+			function initFBApi() {
+				window.fbAsyncInit = function() {
+					FB.init({
+						app_id: '460379074807409',
+						version: 'v2.8'
+					});
+
+					FB.getLoginStatus(function(response){
+						_fbApiInited = true;
+					});
+
+				};
+
+
+			}
+			initFBApi();
+
+
+			function goLiveDialog() {
+				FB.ui({
+					display: 'popup',
+					method: 'live_broadcast',
+					phase: 'create'
+				}, (createRes) => {
+					console.log(createRes);
+
+					FB.ui({
+						display: 'popup',
+						method: 'live_broadcast',
+						phase: 'publish',
+						broadcast_data: createRes
+					}, (publishRes) => {
+						console.log(publishRes);
+					});
+
+					connect(createRes.secure_stream_url, captureStreamAndSend);
+				});
+			}
+
+			function connect(streamUrl, callback) {
+				if(typeof io == 'undefined') return;
+				var secure = options.nodeServer.indexOf('https://') == 0;
+				_streamingSocket = io.connect(options.nodeServer, {
+					query: {
+						rtmp: streamUrl
+					},
+					transports: ['websocket'],
+					'force new connection': true,
+					secure:secure,
+					reconnection: true,
+					reconnectionDelay: 1000,
+					reconnectionDelayMax: 5000,
+					reconnectionAttempts: 5
+				});
+				_streamingSocket.on('connect', function () {
+					console.log('_streamingSocket', _streamingSocket.connected)
+					if(callback != null) callback();
+				});
+				window.streamingSocket = _streamingSocket;
+			}
+
+			function captureStreamAndSend() {
+				_canvasMediStream = document.querySelector('canvas').captureStream(30); // 30 FPS
+				var mediaRecorder = new MediaRecorder(_canvasMediStream, {
+					mimeType: 'video/webm;codecs=h264',
+					videoBitsPerSecond : 3 * 1024 * 1024
+				});
+
+				mediaRecorder.addEventListener('dataavailable', function(e) {
+					_streamingSocket.emit('Streams/webrtc/videoData', e.data);
+				});
+
+				//mediaRecorder.addEventListener('stop', _streamingSocket.disconnect());
+
+				mediaRecorder.start(1000); // Start recording, and dump data every second
+
+				_streamingSocket.on('close', function () {
+					alert('disconnected')
+					mediaRecorder.stop();
+				});
+			}
+
+
+			function createCanvas() {
+				var videoCanvas = document.createElement("CANVAS");
+				videoCanvas.className = "Streams_webrtc_video-stream-canvas";
+				videoCanvas.style.position = 'absolute';
+				videoCanvas.style.top = '0';
+				videoCanvas.style.left = '0';
+				videoCanvas.style.zIndex = '9999';
+				videoCanvas.width = _size.width;
+				videoCanvas.height = _size.height;
+
+				_inputCtx = videoCanvas.getContext('2d');
+				_outputCtx = videoCanvas.getContext('2d');
+
+				document.body.appendChild(videoCanvas);
+				_canvas = videoCanvas;
+			}
+			createCanvas();
+
+			function updateCanvasLayout() {
+				var layoutRects = getLayoutRects(roomScreens.length);
+
+				for(var i in roomScreens) {
+					let rect = layoutRects[i];
+					let screen = roomScreens[i];
+					let mediaStream = screen.videoTrack.srcObject;
+					let htmlVideoEl = screen.videoTrack;
+
+					var videoAlreadyExist = _streams.filter(function (s) {
+						return s.mediaStream.id == mediaStream.id;
+					})[0];
+
+					if(videoAlreadyExist != null) {
+						videoAlreadyExist.rect = rect;
+					} else {
+						var videoToAdd = {
+							rect: rect,
+							htmlVideoEl:htmlVideoEl,
+							mediaStream:mediaStream
+						};
+
+						_streams.push(videoToAdd);
+
+						putVideoOnCanvas(videoToAdd);
+					}
+
+
+				}
+			}
+
+			function getLayoutRects(count) {
+				return [{width: 640, height: 480, x: 0, y: 0}];
+			}
+
+			function putVideoOnCanvas(data) {
+				//return;7
+				log('createVideoCanvas');
+
+				var mediaStreamId = 0;
+				//var localVideo = screen.videoTrack;
+				var canvasWidth;
+				var canvasHeight;
+				var videoWidth;
+				var videoHeight;
+
+				function drawVideoToCanvas(localVideo, mediaStreamId, canvasWidth, canvasHeight, videoWidth, videoHeight) {
+
+
+
+					_inputCtx.drawImage( localVideo, 0, 0, canvasWidth, canvasHeight);
+
+					var pixelData = _inputCtx.getImageData( 0, 0, videoWidth, videoHeight );
+
+					_outputCtx.putImageData( pixelData, 0, 0);
+
+					requestAnimationFrame( function () {
+						drawVideoToCanvas(localVideo, mediaStreamId, canvasWidth, canvasHeight, videoWidth, videoHeight);
+					} );
+				}
+
+				function start() {
+					var waitingVideoTimer = setInterval(function () {
+						if(document.documentElement.contains(data.htmlVideoEl)) {
+
+							videoWidth = data.htmlVideoEl.videoWidth;
+							videoHeight = data.htmlVideoEl.videoHeight;
+							drawVideoToCanvas(data.htmlVideoEl, mediaStreamId, _size.width, _size.height, videoWidth, videoHeight);
+
+							clearInterval(waitingVideoTimer);
+							waitingVideoTimer = null;
+						}
+
+					}, 3000);
+				}
+
+
+				if(data.htmlVideoEl.videoWidth != null && data.htmlVideoEl.videoHeight) {
+					start();
+				} else {
+					data.htmlVideoEl.addEventListener('loadedmetadata', function () {
+						start();
+					})
+				}
+			}
+
+			return {
+				goLiveDialog: goLiveDialog,
+				updateCanvasLayout: updateCanvasLayout,
+				captureStreamAndSend: captureStreamAndSend,
+			}
+		}());
+
 		return {
 			attachTrack: attachTrack,
 			detachTracks: detachTracks,
@@ -1306,6 +1516,7 @@ window.WebRTCconferenceLib = function app(options){
 			removeScreensByParticipant: removeScreensByParticipant,
 			getLoudestScreen: getLoudestScreen,
 			audioVisualization: audioVisualization,
+			videoComposer: videoComposer
 		}
 	}())
 
@@ -3004,7 +3215,11 @@ window.WebRTCconferenceLib = function app(options){
 			} else {
 				navigator.mediaDevices.getUserMedia({
 					'audio': false,
-					'video': true
+					'video': {
+						width: { min: 320, max: 1280 },
+						height: { min: 240, max: 720 },
+						frameRate: 30
+					}
 				}).then(function (videoStream) {
 					gotCameraStream(videoStream);
 				})
@@ -4622,6 +4837,7 @@ window.WebRTCconferenceLib = function app(options){
 				reconnectionAttempts: 5
 			});
 			window.webrtcSocket = socket;
+			window.webConf = app;
 			socket.on('connect', function () {
 				enableiOSDebug();
 				log('initWithNodeJs: socket: connected');
