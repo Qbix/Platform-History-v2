@@ -12482,8 +12482,6 @@ Q.Masks = {
 					me.style.opacity = y * opacity;
 				}, mask.fadeIn);
 				me.style.opacity = 0;
-			} else {
-				me.style.opacity = 1;
 			}
 		}
 		++mask.counter;
