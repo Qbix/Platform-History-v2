@@ -882,6 +882,10 @@ Elp.removeClass = function (className) {
  * @return {Element} returns this, for chaining
  */
 Elp.addClass = function (className) {
+	if (Q.typeOf(className) !== 'string') {
+		className = '';
+	}
+
 	var classNames = className.split(' ');
 	var l = classNames.length;
 	for (var i=0; i<l; ++i) {
@@ -6891,7 +6895,7 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
 		var result = '';
 		Q.each(fields.querySelectorAll('input, textarea, select'), function () {
 			var value = (this.tagName.toUpperCase() === 'SELECT')
-				? this.options[this.selectedIndex].text
+				? this.options[this.selectedIndex].value
 				: this.value;
 			result += (result ? '&' : '') + this.getAttribute('name')
 				+ '=' + encodeURIComponent(value);

@@ -31,7 +31,8 @@ var Streams = Q.Streams;
  *   @param {Function} [options.tabs] Function for interacting with any parent "Q/tabs" tool. Format is function (previewTool, tabsTool) { return urlOrTabKey; }
  *   @param {Object} [options.updateOptions] Options for onUpdate such as duration of the animation, etc.
  *   @param {Q.Event} [options.onUpdate] Event that receives parameters "data", "entering", "exiting", "updating"
- *   @param {Q.Event} [options.onRefresh] Event that occurs when the tool is completely refreshed, the "this" is the tool
+ *   @param {Q.Event} [options.onRefresh] Event that occurs when the tool is completely refreshed, the "this" is the tool.
+ *      Parameters are (previews, map, entering, exiting, updating).
  */
 Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	// check for required options
@@ -204,20 +205,34 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		var previews = [];
 		var map = {};
 		var i=0;
+		var batchSize = state.activate.batchSize.start;
 		setTimeout(function _activatePreview() {
-			var element = elements[i++];
-			if (!element) {
-				if (tool.tabs) {
-					tool.tabs.refresh();
+			var elementsToActivate = [];
+			var _done = false;
+			for (var j=0; j<batchSize; ++j) {
+				var element = elements[i++];
+				if (element) {
+					elementsToActivate.push(element);
+				} else {
+					_done = true;
+					break;
 				}
-				tool.state.onRefresh.handle.call(tool, previews, map, entering, exiting, updating);
-				return;
 			}
-			Q.activate(element, null, function () {
-				var index = previews.push(this) - 1;
-				var key = Streams.key(this.state.publisherId, this.state.streamName);
-				map[key] = index;
+			batchSize *= state.activate.batchSize.grow;
+			Q.activate(elementsToActivate, null, function (elem, tools, options) {
+				Q.each(tools, function () {
+					var index = previews.push(this) - 1;
+					var key = Streams.key(this.state.publisherId, this.state.streamName);
+					map[key] = index;
+				});
 				tool.integrateWithTabs([element], true);
+				if (_done) {
+					if (tool.tabs) {
+						tool.tabs.refresh();
+					}
+					tool.state.onRefresh.handle.call(tool, previews, map, entering, exiting, updating);
+					return;
+				}
 				setTimeout(_activatePreview, 0);
 			});
 		}, 0);

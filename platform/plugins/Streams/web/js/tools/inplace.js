@@ -58,8 +58,11 @@ Q.Tool.define("Streams/inplace", function (options) {
 			Q.Streams.get(state.publisherId, state.streamName, function () {
 				var placeholder = tool.inplace && tool.inplace.state.placeholder
 					&& String(tool.inplace.state.placeholder).encodeHTML();
-				var $e, html = String(content || '').encodeHTML()
-					|| '<span class="Q_placeholder">'+placeholder+'</div>';
+				var $e, html = (
+					(state.inplaceType === 'select')
+					?  String(state.inplace.options[content] || '').encodeHTML()
+					: String(content || '').encodeHTML()
+				) || '<span class="Q_placeholder">'+placeholder+'</div>';
 					
 				if (state.inplaceType === 'textarea') {
 					var convert = {};
