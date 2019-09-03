@@ -1505,7 +1505,6 @@ window.WebRTCconferenceLib = function app(options){
 							if (currentWidth < data.rect.width) {
 								widthToGet = currentWidth;
 								heightToGet = widthToGet / ratio;
-								console.log('drawVideoToCanvas else', widthToGet, heightToGet)
 							} else {
 								widthToGet = data.rect.width;
 							}
