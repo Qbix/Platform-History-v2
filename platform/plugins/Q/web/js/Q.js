@@ -3622,7 +3622,9 @@ Q.Tool = function _Q_Tool(element, options) {
 	
 	if (Q.Tool.byId(this.id, this.name)) {
 		var toolName = Q.Tool.names[this.name];
-		throw new Q.Error("A " + toolName + " tool with id " + this.id + " is already active");
+		var errMsg = "A " + toolName + " tool with id " + this.id + " is already active";
+		//throw new Q.Error(errMsg);
+		return console.warn(errMsg);
 	}
 
 	// for later use
@@ -12482,8 +12484,6 @@ Q.Masks = {
 					me.style.opacity = y * opacity;
 				}, mask.fadeIn);
 				me.style.opacity = 0;
-			} else {
-				me.style.opacity = 1;
 			}
 		}
 		++mask.counter;

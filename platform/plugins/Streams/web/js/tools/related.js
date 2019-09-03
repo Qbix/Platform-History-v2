@@ -29,6 +29,7 @@ var Streams = Q.Streams;
  *   @param {Boolean} [options.realtime=false] Whether to refresh every time a relation is added, removed or updated by anyone
  *   @param {Object} [options.sortable] Options for "Q/sortable" jQuery plugin. Pass false here to disable sorting interface. If streamName is not a String, this interface is not shown.
  *   @param {Function} [options.tabs] Function for interacting with any parent "Q/tabs" tool. Format is function (previewTool, tabsTool) { return urlOrTabKey; }
+ *   @param {Object} [options.activate] Options for activating the preview tools that are loaded inside
  *   @param {Object} [options.updateOptions] Options for onUpdate such as duration of the animation, etc.
  *   @param {Q.Event} [options.onUpdate] Event that receives parameters "data", "entering", "exiting", "updating"
  *   @param {Q.Event} [options.onRefresh] Event that occurs when the tool is completely refreshed, the "this" is the tool.
@@ -62,6 +63,12 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	isCategory: true,
 	relationType: null,
 	realtime: false,
+	activate: {
+		batchSize: {
+			start: 20,
+			grow: 1.5
+		}
+	},
 	editable: true,
 	closeable: true,
 	creatable: {},
