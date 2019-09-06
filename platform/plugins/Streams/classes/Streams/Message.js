@@ -243,7 +243,6 @@ Streams_Message.post = function (fields, callback)
  */
 Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, callback) {
 	var instructions = this.getAllInstructions();
-	var a = Q.extend({ displayName: avatar.displayName() }, avatar);
 	var fields = Q.extend(this.getAllInstructions(), {
 		app: Q.app.name,
 		communityName: Users.communityName(),
