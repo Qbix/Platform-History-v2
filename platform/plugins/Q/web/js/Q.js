@@ -11250,12 +11250,12 @@ Q.Pointer = {
 			var x = Q.Pointer.getX(e);
 			var y = Q.Pointer.getY(e);
 			var t = document.elementFromPoint(x, y);
+			if (_suppress) {
+				return;
+			}
 			while (t) {
 				if (!t.hasAttribute || !t.hasAttribute('data-touchlabel')) {
 					t = t.parentNode
-					continue;
-				}
-				if (_suppress) {
 					continue;
 				}
 				div.innerHTML = t.getAttribute('data-touchlabel');
