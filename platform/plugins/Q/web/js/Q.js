@@ -11237,10 +11237,10 @@ Q.Pointer = {
 		if (onlyTouchscreen && !Q.info.isTouchscreen) {
 			return;
 		}
-		if (element.activatedTouchscreens) {
+		if (element.activatedTouchlabels) {
 			return;
 		}
-		element.activatedTouchscreens = true;
+		element.activatedTouchlabels = true;
 		var _suppress = false;
 		element = element || document.body;
 		var div = document.createElement('div');
