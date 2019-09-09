@@ -36,7 +36,8 @@
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact"
+            "title": "Choose contact",
+			"SearchByName": "Search by name"
         },
         "select": {
             "title": "Select contact of {{displayName}}"
