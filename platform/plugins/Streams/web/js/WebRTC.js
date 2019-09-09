@@ -1359,6 +1359,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					screen.screenEl.appendChild(loaderCon);
 					screen.screensharing = true;
 					_controlsTool.participantsPopup().showScreen(screen);
+					Q.Pointer.activateTouchlabels(document.body);
 
 					if(Q.info.isMobile){
 						renderMaximizedScreensGridMobile(screen);

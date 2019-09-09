@@ -11237,6 +11237,11 @@ Q.Pointer = {
 		if (onlyTouchscreen && !Q.info.isTouchscreen) {
 			return;
 		}
+		if (element.activatedTouchscreens) {
+			return;
+		}
+		element.activatedTouchscreens = true;
+		var _suppress = false;
 		element = element || document.body;
 		var div = document.createElement('div');
 		div.addClass('Q_touchlabel');
@@ -11248,6 +11253,9 @@ Q.Pointer = {
 			while (t) {
 				if (!t.hasAttribute || !t.hasAttribute('data-touchlabel')) {
 					t = t.parentNode
+					continue;
+				}
+				if (_suppress) {
 					continue;
 				}
 				div.innerHTML = t.getAttribute('data-touchlabel');
@@ -11265,6 +11273,10 @@ Q.Pointer = {
 				div.style.left = Math.max(erect.left, left1) + 'px';
 				div.style.top = Math.max(erect.top, top1) + 'px';
 				div.addClass('Q_touchlabel_show');
+				_suppress = true;
+				setTimeout(function () {
+					_suppress = false;
+				}, 10);
 				return;
 			}
 			// if we are here, nothing matched
@@ -11321,7 +11333,7 @@ Q.Pointer = {
 	 * @static
 	 * @method elementFromPoint
 	 * @param {Q.Event} e Some mouse or touch event from the DOM
-	 * @return {number}
+	 * @return {HTMLElement}
 	 */
 	elementFromPoint: function (pageX, pageY) {
 		return document.elementFromPoint(
