@@ -10,33 +10,54 @@
 }
 .Users_contacts_dialog {
     width: 100%;
+	padding-right: 25px;
+	padding-top: 40px;
 }
-
+.Users_contacts_dialog .tr.Users_contacts_dialog_letter {
+	font-weight: bold;
+}
+.Users_contacts_dialog:not(.Users_contacts_select) .tr.Users_contacts_dialog_letter:not(:last-child) {
+	border-bottom: none;
+	background: #d8d8d8;
+}
 .Users_contacts_dialog:not(.Users_contacts_select) .tr:not(:last-child) {
-    border-bottom: 2px solid #444;
+    border-bottom: 1px solid #a3a3a3;
 }
-
+.Users_contacts_dialog .tr:not(.Users_contacts_dialog_letter) {
+	margin-left: 20px;
+	padding-right: 5px;
+}
 .Users_contacts_dialog .tr {
     font-size: 20px;
 	white-space: nowrap;
 }
-
+.Users_contacts_dialog .tr[data-rawid] {
+	height: 55px;
+}
 .Users_contacts_dialog .tr.Users_contacts_flash {
     animation: flash 1s;
 }
-
 .Users_contacts_dialog .td {
-    padding: 10px 0 10px 5px;
+    padding: 5px 0 5px 5px;
 	display: inline-block;
 }
-.Users_contacts_dialog .Users_contacts_dialog_name {
-	width: 100%;
+.Users_contacts_dialog .td[data-email] {
+	padding-left: 0;
 }
-
+.Users_contacts_dialog .Users_contacts_dialog_name {
+	line-height: 45px;
+	width: calc(100% - 100px);
+	float: left;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
 .Users_contacts_dialog.Users_contacts_select .td {
     padding: 10px;
 }
-
+.Users_contacts_dialog .td[data-email],
+.Users_contacts_dialog .td[data-phone] {
+	float: right;
+}
 .Users_contacts_dialog .td[data-email=null],
 .Users_contacts_dialog .td[data-phone=null] {
 	display: none;
@@ -44,7 +65,6 @@
 .Users_contacts_select .Users_contacts_dialog_buttons {
     margin-right: 10px;
 }
-
 .Users_contacts_dialog .Users_contacts_dialog_buttons {
     text-align: center;
     border: 2px solid #444;
@@ -54,35 +74,50 @@
     width: 45px;
     cursor: pointer;
 }
-
 .Users_contacts_dialog .Users_contacts_dialog_buttons.checked {
     background: #394ad5;
     border-color: #253584;
 }
-
 .Users_contacts_dialog .td[data-email="[]"] .Users_contacts_dialog_email,
 .Users_contacts_dialog .td[data-phone="[]"] .Users_contacts_dialog_phone {
     border-color: #848484;
 }
-
 .Users_contacts_dialog .td[data-email="[]"] .Users_contacts_dialog_email i,
 .Users_contacts_dialog .td[data-phone="[]"] .Users_contacts_dialog_phone i {
     color: #bbbbbb;
 }
-
 .Users_contacts_dialog .Users_contacts_dialog_buttons.checked i {
     color: #ffffff;
 }
-
 .Users_contacts_dialog .Users_contacts_dialog_email i {
     margin-top: 4px;
 }
-
 .Users_contacts_dialog .Users_contacts_dialog_phone i {
     margin-top: 3px;
 }
-
 @keyframes flash {
     from { background-color: #b6b6b6; }
     to { background-color: inherit; }
+}
+.Users_contacts_sticky {
+	position: sticky;
+	float: right;
+	right: 0;
+	top: 0;
+	background-color: #fff;
+	width: 25px;
+}
+.Users_contacts_sticky > div {
+	color: #1585ff;
+	padding: 0;
+	text-align: center;
+	font-size: 20px;
+}
+.Users_contacts_input {
+	position: sticky;
+	float: left;
+	width: calc(100% - 25px);;
+	height: 40px;
+	padding: 0 4px;
+	top: 0;
 }
