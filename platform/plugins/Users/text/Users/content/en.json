@@ -45,7 +45,9 @@
     },
     "usersContacts": {
         "selectLabel": "Please select label.",
-        "inviteUser": "Invite User"
+        "inviteUser": "Invite Users",
+		"selectRole": "Select Role",
+		"inviteRole": "Invite {{role}}"
     },
     "invalidLanguageSelected": "Invalid language selected",
     "login": {

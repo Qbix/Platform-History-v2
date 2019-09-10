@@ -1051,6 +1051,7 @@ Streams.Dialogs = {
 	 * @param {String} publisherId id of publisher which is publishing the stream
 	 * @param {String} streamName the stream's name
 	 * @param {Function} [callback] The function to call after dialog is activated
+	 * @param {string} [options.title] Custom dialog title
 	 */
 	invite: function(publisherId, streamName, callback, options) {
 		var stream = null;
@@ -1076,7 +1077,7 @@ Streams.Dialogs = {
 					return;
 				}
 				Q.Dialogs.push({
-					title: text.title,
+					title: o.title || text.title,
 					content: html,
 					stylesheet: '{{Streams}}/css/Streams/invite.css',
 					className: 'Streams_invite_dialog',
@@ -1087,7 +1088,6 @@ Streams.Dialogs = {
 							var $this = $(this);
 							var $eContacts = $(".Streams_invite_contacts", dialog);
 							$eContacts.empty();
-							//$eContacts.data("contacts", null);
 
 							var options = {
 								prefix: "Users",
@@ -1318,6 +1318,7 @@ Streams.release = function (key) {
  * @param {String} [options.callback] Also can be used to provide callbacks, which are called before the followup.
  * @param {Boolean} [options.followup="future"] Whether to set up a followup email or sms for the user to send. Set to true to always send followup, or false to never send it. Set to "future" to send followups only to users who haven't registered yet.
  * @param {String} [options.uri] If you need to hit a custom "Module/action" endpoint
+ * @param {String} [options.title] Custom dialog title.
  * @param {Function} callback Called with (err, result) .
  *   In this way you can obtain the invite token, email addresses, etc.
  *   See Streams::invite on the PHP side for the possible return values.
@@ -1546,6 +1547,8 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		} else {
 			_request();
 		}
+	}, {
+		title: o.title
 	});
 	return null;
 };
