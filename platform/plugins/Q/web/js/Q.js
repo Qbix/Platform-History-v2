@@ -3624,7 +3624,7 @@ Q.Tool = function _Q_Tool(element, options) {
 		var toolName = Q.Tool.names[this.name];
 		var errMsg = "A " + toolName + " tool with id " + this.id + " is already active";
 		//throw new Q.Error(errMsg);
-		return console.warn(errMsg);
+		console.warn(errMsg);
 	}
 
 	// for later use
