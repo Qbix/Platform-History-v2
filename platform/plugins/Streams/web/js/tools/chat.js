@@ -19,6 +19,7 @@
  *   @param {Stream} [options.inputType="text"] Can be either "text" or "textarea"
  *   @param {String} [options.messagesToLoad] The number of "Streams/chat" messages to load at a time.
  *   @param {String} [options.messageMaxHeight] The maximum height, in pixels, of a rendered message
+ *   @param {Stream} [options.seen] Whether the tool should mark rendered chat messages as seen
  *   @param {String} [options.animations] Options for animations, which can include:
  *   @param {String} [options.animations.duration=300] The duration of the animation
  *   @param {Object} [options.controls={}] Controls to show next to each chat message
@@ -202,11 +203,33 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		}
 	},
-	/**causes
-	 * @method prevent
+	/**
+	 * Call this method to set whether the tool will mark rendered Streams/chat/message
+	 * messages as seen.
+	 * @method seen
+	 * @param {Boolean} value
+	 *  Pass true to enable the tool to mark rendered messages as seen.
+	 *  Pass false to pause the tool from marking rendered messages as seen.
+	 *  Or pass nothing to get the current value.
+	 * @return {Boolean} The new value
+	 */
+	seen: function (value) {
+		var state = this.state;
+		if (state.seen = value) {
+			Q.Streams.Message.Total.seen(
+				state.publisherId, 
+				state.streamName, 
+				'Streams/chat/message',
+				true
+			);
+		}
+		return state.seen;
+	},
+	/**
 	 * Disables the textarea, preventing the user from writing
 	 * a message using the provided interface. They are still able to POST
 	 * to the server, however, e.g. manually.
+	 * @method prevent
 	 * @param {String|false} message
 	 *  The text to display in the placeholder of the textarea while input is prevented.
 	 *  Pass false here to re-enable the textarea.
@@ -414,12 +437,14 @@ Q.Tool.define('Streams/chat', function(options) {
 			callback(items, messages);
 		}).run();
 		
-		Q.Streams.Message.Total.seen(
-			state.publisherId, 
-			state.streamName, 
-			'Streams/chat/message',
-			true
-		);
+		if (state.seen) {
+			Q.Streams.Message.Total.seen(
+				state.publisherId, 
+				state.streamName, 
+				'Streams/chat/message',
+				true
+			);
+		}
 	},
 
 	renderNotification: function(message){
@@ -828,11 +853,14 @@ Q.Tool.define('Streams/chat', function(options) {
 						$this.blur();
 					}
 					state.hadFocus = false;
-					Q.Streams.Message.Total.seen(
-						state.publisherId, 
-						state.streamName, 
-						'Streams/chat/message', 
-						true);
+					if (state.seen) {
+						Q.Streams.Message.Total.seen(
+							state.publisherId, 
+							state.streamName, 
+							'Streams/chat/message',
+							true
+						);
+					}
 				});
 			}
 		}
