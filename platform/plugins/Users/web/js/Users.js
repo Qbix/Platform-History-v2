@@ -2659,7 +2659,7 @@
 							});
 
 							// filter users by name
-							$(".Users_contacts_input", $parent).outerWidth($parent.innerWidth() - $sticky.outerWidth()).on('change keyup input paste', function () {
+							$(".Users_contacts_input", $parent).on('change keyup input paste', function () {
 								var filter = $(this).val();
 								if (filter) {
 									$parent.addClass('Users_contacts_filtering');
@@ -2685,6 +2685,21 @@
 									} else {
 										$(this).removeClass('Users_contacts_filter_match');
 									}
+								});
+							});
+
+							// create new contact
+							$(".Users_contacts_create", $parent).on(Q.Pointer.fastclick, function () {
+								var method = Q.getObject("Cordova.UI.create", Users);
+
+								if (!method) {
+									return Q.alert(text.CreateAccountNotFound);
+								}
+
+								method(function(contactId){
+
+								}, function(err){
+
 								});
 							});
 						},

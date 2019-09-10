@@ -1,4 +1,7 @@
-<input name="query" value="" type="text" class="Users_contacts_input" placeholder="{{text.SearchByName}}">
+<div class="Users_contacts_header">
+	<input name="query" value="" type="text" class="Users_contacts_input" placeholder="{{text.SearchByName}}">
+	<button class="Users_contacts_create">{{text.CreateAccount}}</button>
+</div>
 <div class="Users_contacts_sticky">
 {{#each contacts}}
 	<div>{{@key}}</div>

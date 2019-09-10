@@ -37,7 +37,9 @@
     "contacts": {
         "dialog": {
             "title": "Choose contact",
-			"SearchByName": "Search by name"
+			"SearchByName": "Search by name",
+			"CreateAccount": "+ New Contact",
+			"CreateAccountNotFound": "Q.Users.Cordova.UI.create not found"
         },
         "select": {
             "title": "Select contact of {{displayName}}"
