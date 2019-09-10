@@ -16,11 +16,11 @@
 .Users_contacts_dialog .tr.Users_contacts_dialog_letter {
 	font-weight: bold;
 }
-.Users_contacts_dialog:not(.Users_contacts_select) .tr.Users_contacts_dialog_letter:not(:last-child) {
+.Users_contacts_dialog:not(.Users_contacts_select) .tr.Users_contacts_dialog_letter {
 	border-bottom: none;
 	background: #d8d8d8;
 }
-.Users_contacts_dialog:not(.Users_contacts_select) .tr:not(:last-child) {
+.Users_contacts_dialog:not(.Users_contacts_select) > div:not(:last-child) > .tr:not(:last-child) {
     border-bottom: 1px solid #a3a3a3;
 }
 .Users_contacts_dialog .tr:not(.Users_contacts_dialog_letter) {
@@ -120,4 +120,14 @@
 	height: 40px;
 	padding: 0 4px;
 	top: 0;
+}
+
+.Users_contacts_filtering .tr.Users_contacts_dialog_letter,
+.Users_contacts_filtering .Users_contacts_sticky,
+.Users_contacts_filtering .tr[data-rawId] {
+	display: none;
+}
+.Users_contacts_filtering .tr.Users_contacts_filter_match[data-rawId] {
+	display: block;
+	border-bottom: 1px solid #a3a3a3;
 }

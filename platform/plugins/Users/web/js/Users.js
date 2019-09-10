@@ -2628,10 +2628,11 @@
 								}
 							});
 
+							var $parent = $(".Q_dialog_content", dialog);
+							var $sticky = $(".Users_contacts_sticky", $parent);
+
 							// adjust letters size to fit all letters to column
 							var _adjustHeight = function () {
-								var $parent = $(".Q_dialog_content", dialog);
-								var $sticky = $(".Users_contacts_sticky", $parent);
 								var $letters = $("div", $sticky);
 								var totalHeight = 0;
 
@@ -2655,6 +2656,36 @@
 								$(".Q_dialog_content", dialog).animate({
 									scrollTop: $parent.scrollTop() - 40 + $offsetElement.position().top
 								}, 1000);
+							});
+
+							// filter users by name
+							$(".Users_contacts_input", $parent).outerWidth($parent.innerWidth() - $sticky.outerWidth()).on('change keyup input paste', function () {
+								var filter = $(this).val();
+								if (filter) {
+									$parent.addClass('Users_contacts_filtering');
+								} else {
+									$parent.removeClass('Users_contacts_filtering');
+								}
+
+								Q.each($(".tr[data-rawId]", $parent), function () {
+									var $name = $(".td.Users_contacts_dialog_name", this);
+									var text = $name.html().replace(/\<(\/)?b\>/gi, '');
+
+									$name.html(text);
+
+									if (!filter) {
+										return;
+									}
+
+									if (text.toUpperCase().indexOf(filter.toUpperCase()) >= 0) {
+										$name.html(text.replace(new RegExp(filter,'gi'), function(match) {
+											return '<b>' + match + '</b>'
+										}));
+										$(this).addClass('Users_contacts_filter_match');
+									} else {
+										$(this).removeClass('Users_contacts_filter_match');
+									}
+								});
 							});
 						},
 						onClose: function () {
