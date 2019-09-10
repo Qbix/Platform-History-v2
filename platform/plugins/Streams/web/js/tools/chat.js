@@ -139,6 +139,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			activeSrc: '{{Streams}}/img/chat/vote-flag-active.png'
 		}
 	},
+	seen: true,
 	scrollToBottom: true,
 	overflowed: {
 		srcToMe: '{{Streams}}/img/chat/message-overflowed-to-me.png',
