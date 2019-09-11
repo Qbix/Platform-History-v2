@@ -598,16 +598,16 @@ class Q_Session
 		try {
 			// if the request is AJAX request that came without session cookie, then do not write session, ignore it
 			if (Q_Request::isAjax() && !isset($_COOKIE[self::name()])) {
-				return false;
+				return true;
 			}
 
 			// don't save sessions when running from command-line (cli)
 			if(php_sapi_name() == 'cli') {
-				return false;
+				return true;
 			}
 
 			if (self::$preventWrite) {
-				return false;
+				return true;
 			}
 
 			$our_SESSION = isset($_SESSION) ? $_SESSION : null;
@@ -628,7 +628,7 @@ class Q_Session
 				compact('id', 'sess_data', 'old_data', 'changed'),
 				'before'
 			)) {
-				return false;
+				return true;
 			}
 			if (empty(self::$session_save_path)) {
 				self::$session_save_path = self::savePath();
@@ -1115,6 +1115,9 @@ class Q_Session
 	 */
 	static function isValidId($id)
 	{
+		if (!$id) {
+			return false;
+		}
 		$results = self::decodeId($id);
 		return $results[0];
 	}
