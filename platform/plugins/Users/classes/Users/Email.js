@@ -46,6 +46,7 @@ Q.mixin(Users_Email, Q.require('Base/Users/Email'));
  * @param {String} [options.html=false] Whether to send as HTML email.
  * @param {String} [options.name] A human-readable name in addition to the address to send to.
  * @param {Array} [options.from] An array of [emailAddress, humanReadableName].
+ * @param {String} [options.language] Preferred language to be used for the view
  * @param {Boolean} [options.isSource] If true, the view parameter contains the exact source, not the path of the template
  * @param {function} callback Receives error, method used and response objects after complete
  */
