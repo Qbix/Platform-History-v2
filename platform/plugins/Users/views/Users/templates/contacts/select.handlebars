@@ -1,10 +1,12 @@
 <table class="Users_contacts_dialog Users_contacts_select">
-    {{#each contacts}}
-        <tr>
-            <td data-contact={{json this}}>
-                <div class="Users_contacts_dialog_buttons"></div>
-            </td>
-            <td class="Users_contacts_dialog_name">{{this.value}}</td>
-        </tr>
-    {{/each}}
+{{#each contacts}}
+	<tr>
+		<td data-contact='{{{json this}}}'>
+			<div class="Users_contacts_dialog_buttons Users_contacts_dialog_{{../prefix}}">
+				<i class="qp-communities-{{../prefix}}"></i>
+			</div>
+		</td>
+		<td class="Users_contacts_dialog_name">{{this.value}}</td>
+	</tr>
+{{/each}}
 </table>

@@ -1059,116 +1059,114 @@ Streams.Dialogs = {
 		var o = Q.extend({}, Streams.Dialogs.invite.options, options);
 
 		var pipe = Q.pipe(['stream', 'text'], function () {
-			Q.Template.render(o.templateName, {
-				isCordova: Q.info.isCordova,
-				chooseFromContacts: text.chooseFromContacts,
-				photo: (o.photo)? text.photo: o.photo,
-				to: text.to.interpolate({"Stream Title": stream.fields.title}),
-				go: text.go,
-				placeholder: text.placeholder,
-				orInvite: text.orInvite,
-				QR: text.QR.interpolate({ClickOrTap: Q.getObject("Q.info.isTouchscreen") ? 'Tap' : 'Click'}),
-				email: text.byEmail,
-				text: text.byText,
-				facebook: text.byFacebook,
-				twitter: text.byTwitter,
-			}, function (err, html) {
-				if (err) {
-					return;
-				}
-				Q.Dialogs.push({
-					title: o.title || text.title,
-					content: html,
-					stylesheet: '{{Streams}}/css/Streams/invite.css',
-					className: 'Streams_invite_dialog',
-					onActivate: function (dialog) {
+			Q.Dialogs.push({
+				title: o.title || text.title,
+				template: {
+					name: o.templateName,
+					fields: {
+						isCordova: Q.info.isCordova,
+						chooseFromContacts: text.chooseFromContacts,
+						photo: (o.photo)? text.photo: o.photo,
+						to: text.to.interpolate({"Stream Title": stream.fields.title}),
+						go: text.go,
+						placeholder: text.placeholder,
+						orInvite: text.orInvite,
+						QR: text.QR.interpolate({ClickOrTap: Q.getObject("Q.info.isTouchscreen") ? 'Tap' : 'Click'}),
+						email: text.byEmail,
+						text: text.byText,
+						facebook: text.byFacebook,
+						twitter: text.byTwitter,
+					}
+				},
+				stylesheet: '{{Streams}}/css/Streams/invite.css',
+				className: 'Streams_invite_dialog',
+				onActivate: function (dialog) {
 
-						// handle "choose from contacts" button
-						$('.Streams_invite_choose_contact', dialog).on(Q.Pointer.fastclick, function () {
-							var $this = $(this);
-							var $eContacts = $(".Streams_invite_contacts", dialog);
-							$eContacts.empty();
+					// handle "choose from contacts" button
+					$('.Streams_invite_choose_contact', dialog).on(Q.Pointer.fastclick, function () {
+						var $this = $(this);
+						var $eContacts = $(".Streams_invite_contacts", dialog);
+						$eContacts.empty();
 
-							var options = {
-								prefix: "Users",
-								data: $eContacts.data("contacts") || null
-							};
+						var options = {
+							prefix: "Users",
+							data: $eContacts.data("contacts") || null
+						};
 
-							Users.Dialogs.contacts(options, function (contacts) {
-								$eContacts.data("contacts", contacts);
+						Users.Dialogs.contacts(options, function (contacts) {
+							$eContacts.data("contacts", contacts);
 
-								if (!contacts || Object.keys(contacts).length <= 0) {
+							if (!contacts || Object.keys(contacts).length <= 0) {
+								return;
+							}
+
+							var aContacts = [];
+							for(var i in contacts) {
+								aContacts.push(contacts[i]);
+							}
+
+							Q.Template.render("Users/templates/contacts/display", {
+								contacts: aContacts,
+								text: text
+							}, function (err, html) {
+								if (err) {
 									return;
 								}
 
-								var aContacts = [];
-								for(var i in contacts) {
-									aContacts.push(contacts[i]);
-								}
+								$eContacts.html(html);
 
-								Q.Template.render("Users/templates/contacts/display", {
-									contacts: aContacts,
-									text: text
-								}, function (err, html) {
-									if (err) {
-										return;
+								$("button.Streams_invite_submit_contact", $eContacts).on(Q.Pointer.fastclick, function () {
+									for(var i in contacts) {
+										Q.handle(callback, Streams, [{
+											identifier: contacts[i][contacts[i].prefix]
+										}]);
 									}
-
-									$eContacts.html(html);
-
-									$("button.Streams_invite_submit_contact", $eContacts).on(Q.Pointer.fastclick, function () {
-										for(var i in contacts) {
-											Q.handle(callback, Streams, [{
-												identifier: contacts[i][contacts[i].prefix]
-											}]);
-										}
-										Q.Dialogs.pop(); // close the Dialog
-									});
-
-									$(".qp-communities-close", $eContacts).on(Q.Pointer.fastclick, function () {
-										var $this = $(this);
-										var id = $this.attr('data-id');
-										$this.closest("tr").remove();
-										delete contacts[id];
-
-										$eContacts.data("contacts", contacts);
-
-										if ($.isEmptyObject(contacts)) {
-											$("button.Streams_invite_submit_contact", $eContacts).remove();
-										}
-									});
+									Q.Dialogs.pop(); // close the Dialog
 								});
 
-								$this.text(text.chooseAgainFromContacts).addClass("");
-							})
-						});
+								$(".qp-communities-close", $eContacts).on(Q.Pointer.fastclick, function () {
+									var $this = $(this);
+									var id = $this.attr('data-id');
+									$this.closest("tr").remove();
+									delete contacts[id];
 
-						if (!Q.info.isTouchscreen) {
-							$('.Streams_invite_submit input[type=text]').focus();
+									$eContacts.data("contacts", contacts);
+
+									if ($.isEmptyObject(contacts)) {
+										$("button.Streams_invite_submit_contact", $eContacts).remove();
+									}
+								});
+							});
+
+							$this.text(text.chooseAgainFromContacts).addClass("");
+						})
+					});
+
+					if (!Q.info.isTouchscreen) {
+						$('.Streams_invite_submit input[type=text]').focus();
+					}
+					// handle go button
+					$('.Streams_invite_submit').on('submit', function (e) {
+						Q.handle(callback, Streams, [{
+							identifier: $("input[type=text]", this).val()
+						}]);
+						Q.Dialogs.pop(); // close the Dialog
+						e.preventDefault();
+					});
+
+					// handle social buttons
+					$('.Streams_invite_social_buttons button, .Streams_invite_QR', dialog)
+					.on(Q.Pointer.fastclick, function () {
+						var sendBy = $(this).data('sendby');
+						var result = {
+							token: 1,
+							identifier: null,
+							sendBy: sendBy
 						}
-						// handle go button
-						$('.Streams_invite_submit').on('submit', function (e) {
-							Q.handle(callback, Streams, [{
-								identifier: $("input[type=text]", this).val()
-							}]);
-							Q.Dialogs.pop(); // close the Dialog
-							e.preventDefault();
-						});
-
-						// handle social buttons
-						$('.Streams_invite_social_buttons button, .Streams_invite_QR', dialog)
-						.on(Q.Pointer.fastclick, function () {
-							var sendBy = $(this).data('sendby');
-							var result = {
-								token: 1,
-								identifier: null,
-								sendBy: sendBy
-							}
-							Q.Dialogs.pop(); // close the Dialog
-							Q.handle(callback, Streams, [result]);
-						});
-					},
-				});
+						Q.Dialogs.pop(); // close the Dialog
+						Q.handle(callback, Streams, [result]);
+					});
+				},
 			});
 		});
 

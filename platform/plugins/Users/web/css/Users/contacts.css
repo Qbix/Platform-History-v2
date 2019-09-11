@@ -11,7 +11,7 @@
 .Users_contacts_dialog {
     width: 100%;
 	padding-right: 25px;
-	padding-top: 40px;
+	padding-top: 80px;
 }
 .Users_contacts_dialog .tr.Users_contacts_dialog_letter {
 	font-weight: bold;
@@ -60,6 +60,9 @@
 .Users_contacts_dialog .td[data-email=null],
 .Users_contacts_dialog .td[data-phone=null] {
 	display: none;
+}
+.Users_contacts_select {
+	margin: 5px;
 }
 .Users_contacts_select .Users_contacts_dialog_buttons {
     margin-right: 10px;
@@ -114,10 +117,10 @@
 }
 .Q_overlay_apply .Q_dialog_content .Users_contacts_header {
 	position: sticky;
-	float: left;
-	width: calc(100% - 25px);;
-	height: 40px;
 	top: 0;
+	float: left;
+	width: calc(100% - 25px);
+	overflow: hidden;
 }
 .Q_overlay_apply .Q_dialog_content .Users_contacts_header .Users_contacts_input {
 	width: 100%;
@@ -126,9 +129,8 @@
 	border: 5px solid #d8d8d8;
 }
 .Q_overlay_apply .Q_dialog_content .Users_contacts_header .Users_contacts_create {
-	position: absolute;
-	right: 0;
 	height: 40px;
+	width: 100%;
 }
 
 .Users_contacts_filtering .tr.Users_contacts_dialog_letter,
