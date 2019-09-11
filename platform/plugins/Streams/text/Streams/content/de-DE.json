@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "Sie haben es gescannt!",
             "chooseAgainFromContacts": "Wählen Sie Erneut aus den Kontakten",
-            "inviteSelectedContacts": "Ausgewählte Kontakte einladen"
+            "inviteSelectedContacts": "Ausgewählte Kontakte einladen",
+            "scannedQR": "{{ClickOrTap}} wenn der Code gescannt wurde"
         },
         "email": {
             "subject": "Hey, schau dir das mal an",

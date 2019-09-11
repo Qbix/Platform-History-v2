@@ -32,7 +32,11 @@
         "no": "Tidak",
         "WelcomePleaseVerifyEmail": "Selamat datang! Harap verifikasi alamat email Anda.",
         "WelcomeVerifyEmail": "Selamat datang! Verifikasi alamat email Anda.",
-        "ForgetPass": "Hei, apakah Anda lupa kata sandi Anda?"
+        "ForgetPass": "Hei, apakah Anda lupa kata sandi Anda?",
+        "PassphraseSaved": "Frasa pass Anda telah disimpan.",
+        "IdentifierActivated": "{{type}} Anda telah diaktifkan.",
+        "CompletedActivation": "Anda telah menyelesaikan aktivasi pengguna.",
+        "CompletedActivationLogIn": "Anda telah menyelesaikan aktivasi pengguna. Coba masuk sekarang."
     },
     "usersContacts": {
         "selectLabel": "Silakan pilih label.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "Bahasa yang dipilih tidak valid",
     "contacts": {
         "dialog": {
-            "title": "Pilih kontak"
+            "title": "Pilih kontak",
+            "SearchByName": "Cari berdasarkan nama"
         },
         "select": {
             "title": "Pilih kontak dari {{displayName}}"

@@ -69,7 +69,8 @@
             "byTwitter": "推特",
             "QRscanned": "他们扫描了一下！",
             "chooseAgainFromContacts": "从联系人中再次选择",
-            "inviteSelectedContacts": "邀请选定的联系人"
+            "inviteSelectedContacts": "邀请选定的联系人",
+            "scannedQR": "{{ClickOrTap}}如果扫描了代码"
         },
         "email": {
             "subject": "嘿，看看这个",

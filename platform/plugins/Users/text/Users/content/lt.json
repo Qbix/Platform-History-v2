@@ -32,7 +32,11 @@
         "no": "Ne",
         "WelcomePleaseVerifyEmail": "Sveiki! Patvirtinkite savo el. Pašto adresą.",
         "WelcomeVerifyEmail": "Sveiki! Patvirtinkite savo elektroninį paštą.",
-        "ForgetPass": "Ei, ar pamiršote savo slaptafrazę?"
+        "ForgetPass": "Ei, ar pamiršote savo slaptafrazę?",
+        "PassphraseSaved": "Jūsų frazė išsaugota.",
+        "IdentifierActivated": "Jūsų {{type}} suaktyvintas.",
+        "CompletedActivation": "Baigėte aktyvuoti vartotoją.",
+        "CompletedActivationLogIn": "Baigėte aktyvuoti vartotoją. Pabandykite prisijungti dabar."
     },
     "usersContacts": {
         "selectLabel": "Pasirinkite etiketę.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "Pasirinkta netinkama kalba",
     "contacts": {
         "dialog": {
-            "title": "Pasirinkite kontaktą"
+            "title": "Pasirinkite kontaktą",
+            "SearchByName": "Paieška pagal pavadinimą"
         },
         "select": {
             "title": "Pasirinkite {{displayName}} kontaktą"

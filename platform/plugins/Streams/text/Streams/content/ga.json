@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "Scanadh siad é!",
             "chooseAgainFromContacts": "Roghnaigh Arís ó Teagmhálacha",
-            "inviteSelectedContacts": "Tabhair cuireadh do Teagmhálacha Roghnaithe"
+            "inviteSelectedContacts": "Tabhair cuireadh do Teagmhálacha Roghnaithe",
+            "scannedQR": "{{ClickOrTap}} má scanadh an cód"
         },
         "email": {
             "subject": "Hey, seiceáil seo amach",

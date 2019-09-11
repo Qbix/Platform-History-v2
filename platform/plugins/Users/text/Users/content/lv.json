@@ -32,7 +32,11 @@
         "no": "Nē",
         "WelcomePleaseVerifyEmail": "Laipni lūdzam! Lūdzu, apstipriniet savu e-pasta adresi.",
         "WelcomeVerifyEmail": "Laipni lūdzam! Pārbaudiet savu e-pasta adresi.",
-        "ForgetPass": "Hei, vai esat aizmirsis savu ieejas frāzi?"
+        "ForgetPass": "Hei, vai esat aizmirsis savu ieejas frāzi?",
+        "PassphraseSaved": "Jūsu ieejas frāze ir saglabāta.",
+        "IdentifierActivated": "Jūsu {{type}} ir aktivizēts.",
+        "CompletedActivation": "Jūs esat pabeidzis lietotāja aktivizēšanu.",
+        "CompletedActivationLogIn": "Jūs esat pabeidzis lietotāja aktivizēšanu. Mēģiniet pieteikties tūlīt."
     },
     "usersContacts": {
         "selectLabel": "Lūdzu, atlasiet etiķeti.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "Izvēlēta nederīga valoda",
     "contacts": {
         "dialog": {
-            "title": "Izvēlieties kontaktu"
+            "title": "Izvēlieties kontaktu",
+            "SearchByName": "Meklēt pēc vārda"
         },
         "select": {
             "title": "Atlasiet kontaktpersonu {{displayName}}"

@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "De scannede det!",
             "chooseAgainFromContacts": "Vælg igen fra kontakter",
-            "inviteSelectedContacts": "Inviter valgte kontakter"
+            "inviteSelectedContacts": "Inviter valgte kontakter",
+            "scannedQR": "{{ClickOrTap}} hvis koden blev scannet"
         },
         "email": {
             "subject": "Hej, tjek dette ud",

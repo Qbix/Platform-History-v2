@@ -32,7 +32,11 @@
         "no": "Yok hayır",
         "WelcomePleaseVerifyEmail": "Hoşgeldiniz! Lütfen email adresini doğrula.",
         "WelcomeVerifyEmail": "Hoşgeldiniz! Email adresinizi doğrulayın.",
-        "ForgetPass": "Hey, parolanızı unuttun mu?"
+        "ForgetPass": "Hey, parolanızı unuttun mu?",
+        "PassphraseSaved": "Şifreniz cümle kaydedildi.",
+        "IdentifierActivated": "{{type}} cihazınız aktifleştirildi.",
+        "CompletedActivation": "Kullanıcı aktivasyonunu tamamladınız.",
+        "CompletedActivationLogIn": "Kullanıcı aktivasyonunu tamamladınız. Şimdi giriş yapmayı deneyin."
     },
     "usersContacts": {
         "selectLabel": "Lütfen bir etiket seçiniz.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "Geçersiz dil seçildi",
     "contacts": {
         "dialog": {
-            "title": "Kişi seç"
+            "title": "Kişi seç",
+            "SearchByName": "İsme göre ara"
         },
         "select": {
             "title": "{{displayName}} kişisini seçin"

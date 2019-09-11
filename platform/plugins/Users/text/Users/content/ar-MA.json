@@ -32,7 +32,11 @@
         "no": "لا",
         "WelcomePleaseVerifyEmail": "أهلا بك! يرجى التحقق من عنوان البريد الإلكتروني الخاص بك.",
         "WelcomeVerifyEmail": "أهلا بك! تحقق من عنوان بريدك الإلكتروني",
-        "ForgetPass": "مهلا ، هل نسيت عبارة المرور الخاصة بك؟"
+        "ForgetPass": "مهلا ، هل نسيت عبارة المرور الخاصة بك؟",
+        "PassphraseSaved": "تم حفظ عبارة المرور الخاصة بك.",
+        "IdentifierActivated": "تم تفعيل {{type}} الخاص بك.",
+        "CompletedActivation": "لقد أكملت تنشيط المستخدم.",
+        "CompletedActivationLogIn": "لقد أكملت تنشيط المستخدم. حاول تسجيل الدخول الآن."
     },
     "usersContacts": {
         "selectLabel": "يرجى اختيار التسمية.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "تم تحديد لغة غير صالحة",
     "contacts": {
         "dialog": {
-            "title": "اختيار الاتصال"
+            "title": "اختيار الاتصال",
+            "SearchByName": "البحث عن طريق الإسم"
         },
         "select": {
             "title": "اختر جهة اتصال {{displayName}}"

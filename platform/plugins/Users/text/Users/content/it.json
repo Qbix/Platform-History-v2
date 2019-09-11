@@ -32,7 +32,11 @@
         "no": "No",
         "WelcomePleaseVerifyEmail": "Benvenuto! Per cortesia verifichi il suo indirizzo email.",
         "WelcomeVerifyEmail": "Benvenuto! Verifica il tuo indirizzo email.",
-        "ForgetPass": "Ehi, hai dimenticato la passphrase?"
+        "ForgetPass": "Ehi, hai dimenticato la passphrase?",
+        "PassphraseSaved": "La tua passphrase è stata salvata.",
+        "IdentifierActivated": "Il tuo {{type}} è stato attivato.",
+        "CompletedActivation": "Hai completato l&#39;attivazione dell&#39;utente.",
+        "CompletedActivationLogIn": "Hai completato l&#39;attivazione dell&#39;utente. Prova ad accedere ora."
     },
     "usersContacts": {
         "selectLabel": "Si prega di selezionare l&#39;etichetta.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "Lingua selezionata non valida",
     "contacts": {
         "dialog": {
-            "title": "Scegli un contatto"
+            "title": "Scegli un contatto",
+            "SearchByName": "Ricerca per nome"
         },
         "select": {
             "title": "Seleziona un contatto di {{displayName}}"

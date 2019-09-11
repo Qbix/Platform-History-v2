@@ -69,7 +69,8 @@
             "byTwitter": "Kericau",
             "QRscanned": "Mereka memindainya!",
             "chooseAgainFromContacts": "Pilih Lagi dari Kontak",
-            "inviteSelectedContacts": "Undang Kontak yang Dipilih"
+            "inviteSelectedContacts": "Undang Kontak yang Dipilih",
+            "scannedQR": "{{ClickOrTap}} jika kode telah dipindai"
         },
         "email": {
             "subject": "Hei, lihat ini",

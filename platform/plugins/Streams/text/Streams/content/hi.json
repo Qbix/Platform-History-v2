@@ -69,7 +69,8 @@
             "byTwitter": "ट्विटर",
             "QRscanned": "उन्होंने इसे स्कैन किया!",
             "chooseAgainFromContacts": "फिर से संपर्क से चुनें",
-            "inviteSelectedContacts": "चयनित संपर्कों को आमंत्रित करें"
+            "inviteSelectedContacts": "चयनित संपर्कों को आमंत्रित करें",
+            "scannedQR": "{{ClickOrTap}} यदि कोड स्कैन किया गया था"
         },
         "email": {
             "subject": "अरे, यह देखो",

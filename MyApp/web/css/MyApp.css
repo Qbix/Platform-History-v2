@@ -109,7 +109,7 @@ table { table-layout: fixed; }
 	margin-left: 6px;
 	box-shadow: none;
 }
-#notices_slot ul li span {
+#notices_slot ul li .Q_field_name {
 	font-size: 12px;
 	line-height: 26px;
 }

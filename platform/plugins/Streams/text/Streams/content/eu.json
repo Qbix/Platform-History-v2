@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "Eskaneatu zuten!",
             "chooseAgainFromContacts": "Aukeratu berriro Kontaktuak",
-            "inviteSelectedContacts": "Hautatutako kontaktuak gonbidatu"
+            "inviteSelectedContacts": "Hautatutako kontaktuak gonbidatu",
+            "scannedQR": "{{ClickOrTap}} kodea eskaneatu bada"
         },
         "email": {
             "subject": "Hey, begiratu hau",

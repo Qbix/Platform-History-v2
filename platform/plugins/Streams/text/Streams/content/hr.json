@@ -69,7 +69,8 @@
             "byTwitter": "Cvrkut",
             "QRscanned": "Skenirali su ga!",
             "chooseAgainFromContacts": "Odaberite Ponovno iz Kontakata",
-            "inviteSelectedContacts": "Pozovi odabrane kontakte"
+            "inviteSelectedContacts": "Pozovi odabrane kontakte",
+            "scannedQR": "{{ClickOrTap}} ako je kôd skeniran"
         },
         "email": {
             "subject": "Hej, vidi ovo",

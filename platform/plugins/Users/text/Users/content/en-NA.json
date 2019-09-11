@@ -32,7 +32,11 @@
         "no": "No",
         "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
         "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?"
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "usersContacts": {
         "selectLabel": "Please select label.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "Invalid language selected",
     "contacts": {
         "dialog": {
-            "title": "Choose contact"
+            "title": "Choose contact",
+            "SearchByName": "Search by name"
         },
         "select": {
             "title": "Select contact of {{displayName}}"

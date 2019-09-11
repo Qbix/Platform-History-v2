@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "Nad skaneerisid seda!",
             "chooseAgainFromContacts": "Valige uuesti kontaktidest",
-            "inviteSelectedContacts": "Kutsu valitud kontaktid"
+            "inviteSelectedContacts": "Kutsu valitud kontaktid",
+            "scannedQR": "{{ClickOrTap}}, kui kood skaneeriti"
         },
         "email": {
             "subject": "Hei, vaata seda",

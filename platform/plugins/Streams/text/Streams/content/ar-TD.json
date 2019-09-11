@@ -69,7 +69,8 @@
             "byTwitter": "تغريد",
             "QRscanned": "قاموا بمسحها ضوئيًا!",
             "chooseAgainFromContacts": "اختر مرة أخرى من جهات الاتصال",
-            "inviteSelectedContacts": "دعوة جهات الاتصال المحددة"
+            "inviteSelectedContacts": "دعوة جهات الاتصال المحددة",
+            "scannedQR": "{{ClickOrTap}} إذا تم مسح الرمز"
         },
         "email": {
             "subject": "مهلا ، تحقق من ذلك",

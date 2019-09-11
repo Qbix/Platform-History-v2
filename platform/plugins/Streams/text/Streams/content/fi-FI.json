@@ -69,7 +69,8 @@
             "byTwitter": "Viserrys",
             "QRscanned": "He skannasi sen!",
             "chooseAgainFromContacts": "Valitse Yhteystiedot-sovelluksesta uudelleen",
-            "inviteSelectedContacts": "Kutsu valitut yhteystiedot"
+            "inviteSelectedContacts": "Kutsu valitut yhteystiedot",
+            "scannedQR": "{{ClickOrTap}}, jos koodi skannattiin"
         },
         "email": {
             "subject": "Hei, tarkista tämä",

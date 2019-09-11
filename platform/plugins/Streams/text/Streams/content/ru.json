@@ -69,7 +69,8 @@
             "byTwitter": "щебет",
             "QRscanned": "Они сканировали это!",
             "chooseAgainFromContacts": "Выберите снова из контактов",
-            "inviteSelectedContacts": "Пригласить выбранные контакты"
+            "inviteSelectedContacts": "Пригласить выбранные контакты",
+            "scannedQR": "{{ClickOrTap}} если код был отсканирован"
         },
         "email": {
             "subject": "Эй, проверь это",

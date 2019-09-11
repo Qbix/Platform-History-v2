@@ -69,7 +69,8 @@
             "byTwitter": "توییتر",
             "QRscanned": "آنها آن را اسکن کردند!",
             "chooseAgainFromContacts": "دوباره از مخاطبین را انتخاب کنید",
-            "inviteSelectedContacts": "دعوت از مخاطبین انتخابی"
+            "inviteSelectedContacts": "دعوت از مخاطبین انتخابی",
+            "scannedQR": "the 99 999}} اگر کد اسکن شد"
         },
         "email": {
             "subject": "هی، این را چک کن",

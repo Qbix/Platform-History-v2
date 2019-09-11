@@ -32,7 +32,11 @@
         "no": "Hapana",
         "WelcomePleaseVerifyEmail": "Karibu! Tafadhali thibitisha anwani yako ya barua pepe.",
         "WelcomeVerifyEmail": "Karibu! Thibitisha anwani yako ya barua pepe.",
-        "ForgetPass": "Hey, uliisahau usahihi wako?"
+        "ForgetPass": "Hey, uliisahau usahihi wako?",
+        "PassphraseSaved": "Kifungu chako cha kupita kimehifadhiwa.",
+        "IdentifierActivated": "Yako {{type}} imeamilishwa.",
+        "CompletedActivation": "Umekamilisha uanzishaji wa watumiaji.",
+        "CompletedActivationLogIn": "Umekamilisha uanzishaji wa watumiaji. Jaribu kuingia sasa."
     },
     "usersContacts": {
         "selectLabel": "Tafadhali chagua lebo.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "Lugha batili iliyochaguliwa",
     "contacts": {
         "dialog": {
-            "title": "Chagua wasiliana"
+            "title": "Chagua wasiliana",
+            "SearchByName": "Tafuta kwa jina"
         },
         "select": {
             "title": "Chagua wasiliana na {{displayName}}"

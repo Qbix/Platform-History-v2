@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "Roedden nhw&#39;n ei sganio!",
             "chooseAgainFromContacts": "Dewiswch eto o gysylltiadau",
-            "inviteSelectedContacts": "Gwahodd Cysylltiadau Dethol"
+            "inviteSelectedContacts": "Gwahodd Cysylltiadau Dethol",
+            "scannedQR": "{{ClickOrTap}} os sganiwyd y cod"
         },
         "email": {
             "subject": "Hey, gwiriwch hyn",

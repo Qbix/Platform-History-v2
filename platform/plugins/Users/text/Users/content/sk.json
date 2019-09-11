@@ -32,7 +32,11 @@
         "no": "žiadny",
         "WelcomePleaseVerifyEmail": "Vitajte! Overte svoju e-mailovú adresu.",
         "WelcomeVerifyEmail": "Vitajte! Overte svoju e-mailovú adresu.",
-        "ForgetPass": "Hej, zabudli ste na svoju prístupovú frázu?"
+        "ForgetPass": "Hej, zabudli ste na svoju prístupovú frázu?",
+        "PassphraseSaved": "Vaša prístupová fráza bola uložená.",
+        "IdentifierActivated": "Váš {{type}} bol aktivovaný.",
+        "CompletedActivation": "Dokončili ste aktiváciu používateľa.",
+        "CompletedActivationLogIn": "Dokončili ste aktiváciu používateľa. Skúste sa prihlásiť teraz."
     },
     "usersContacts": {
         "selectLabel": "Vyberte menovku.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "Vybrali ste neplatný jazyk",
     "contacts": {
         "dialog": {
-            "title": "Vyberte kontakt"
+            "title": "Vyberte kontakt",
+            "SearchByName": "Vyhľadávanie podľa mena"
         },
         "select": {
             "title": "Vyberte kontakt používateľa {{displayName}}"

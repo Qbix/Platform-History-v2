@@ -32,7 +32,11 @@
         "no": "いいえ",
         "WelcomePleaseVerifyEmail": "ようこそ！火事もおきました。",
         "WelcomeVerifyEmail": "ようこそ！あなたのメールアドレスを確認してください。",
-        "ForgetPass": "こんにちは、パスフレーズを忘れましたか？"
+        "ForgetPass": "こんにちは、パスフレーズを忘れましたか？",
+        "PassphraseSaved": "パスフレーズが保存されました。",
+        "IdentifierActivated": "{{type}}が有効になりました。",
+        "CompletedActivation": "ユーザーのアクティベーションが完了しました。",
+        "CompletedActivationLogIn": "ユーザーのアクティベーションが完了しました。今すぐログインしてみてください。"
     },
     "usersContacts": {
         "selectLabel": "ラベルを選択してください。",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "無効な言語が選択されました",
     "contacts": {
         "dialog": {
-            "title": "連絡先を選択"
+            "title": "連絡先を選択",
+            "SearchByName": "名前で検索"
         },
         "select": {
             "title": "{{displayName}}の連絡先を選択"

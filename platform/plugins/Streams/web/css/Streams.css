@@ -777,3 +777,8 @@
 .Streams_complete_overlay .Communities_onboarding_tool {
 	zoom: 0.8;
 }
+
+.Streams_invite_QR .Q_button {
+	width: 90%;
+	padding: 10px;
+}

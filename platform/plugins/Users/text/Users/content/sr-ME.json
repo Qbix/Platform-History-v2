@@ -32,7 +32,11 @@
         "no": "Не",
         "WelcomePleaseVerifyEmail": "Добродошли! Потврдите своју адресу е-поште.",
         "WelcomeVerifyEmail": "Добродошли! Потврдите Вашу емаил адресу.",
-        "ForgetPass": "Хеј, јеси ли заборавио своју лозинку?"
+        "ForgetPass": "Хеј, јеси ли заборавио своју лозинку?",
+        "PassphraseSaved": "Ваша пропусна фраза је сачувана.",
+        "IdentifierActivated": "Ваш {{type}} је активиран.",
+        "CompletedActivation": "Завршили сте активацију корисника.",
+        "CompletedActivationLogIn": "Завршили сте активацију корисника. Покушајте се пријавити сада."
     },
     "usersContacts": {
         "selectLabel": "Изаберите ознаку.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "Изабран је неважећи језик",
     "contacts": {
         "dialog": {
-            "title": "Изаберите контакт"
+            "title": "Изаберите контакт",
+            "SearchByName": "Тражи по имену"
         },
         "select": {
             "title": "Изаберите контакт корисника {{displayName}}"

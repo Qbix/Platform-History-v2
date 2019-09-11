@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "Skenirali so ga!",
             "chooseAgainFromContacts": "Ponovno izberite iz imenika",
-            "inviteSelectedContacts": "Povabi izbrane stike"
+            "inviteSelectedContacts": "Povabi izbrane stike",
+            "scannedQR": "{{ClickOrTap}} če je bila koda skenirana"
         },
         "email": {
             "subject": "Hej, poglej to",

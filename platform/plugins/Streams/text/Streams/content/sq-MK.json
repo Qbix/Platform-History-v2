@@ -69,7 +69,8 @@
             "byTwitter": "Cicëroj",
             "QRscanned": "Ata e skanuan atë!",
             "chooseAgainFromContacts": "Zgjidhni përsëri nga Kontaktet",
-            "inviteSelectedContacts": "Fto kontaktet e zgjedhura"
+            "inviteSelectedContacts": "Fto kontaktet e zgjedhura",
+            "scannedQR": "99 99 999}} nëse kodi ishte skanuar"
         },
         "email": {
             "subject": "Hej, shiko këtë",

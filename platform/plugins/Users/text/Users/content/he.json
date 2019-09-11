@@ -32,7 +32,11 @@
         "no": "לא",
         "WelcomePleaseVerifyEmail": "ברוך הבא! אמת את כתובת האימייל שלך.",
         "WelcomeVerifyEmail": "ברוך הבא! אמת את כתובת הדוא&quot;ל שלך.",
-        "ForgetPass": "היי, האם שכחת את משפט הסיסמה שלך?"
+        "ForgetPass": "היי, האם שכחת את משפט הסיסמה שלך?",
+        "PassphraseSaved": "משפט הביטוי שלך נשמר.",
+        "IdentifierActivated": "{{type}} שלך הופעל.",
+        "CompletedActivation": "השלמת את הפעלת המשתמש.",
+        "CompletedActivationLogIn": "השלמת את הפעלת המשתמש. נסה להתחבר עכשיו."
     },
     "usersContacts": {
         "selectLabel": "בחר תווית.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "נבחרה שפה לא חוקית",
     "contacts": {
         "dialog": {
-            "title": "בחר איש קשר"
+            "title": "בחר איש קשר",
+            "SearchByName": "חפש לפי שם"
         },
         "select": {
             "title": "בחר איש קשר של {{displayName}}"

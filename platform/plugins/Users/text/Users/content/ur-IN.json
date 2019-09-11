@@ -32,7 +32,11 @@
         "no": "نہیں",
         "WelcomePleaseVerifyEmail": "خوش آمدید! براہ کرم اپنے ای میل ایڈریس کی توثیق کریں.",
         "WelcomeVerifyEmail": "خوش آمدید! اپنا ای میل ایڈریس کی تصدیق کریں.",
-        "ForgetPass": "ارے، کیا آپ اپنا پاس ورڈ بھول گئے؟"
+        "ForgetPass": "ارے، کیا آپ اپنا پاس ورڈ بھول گئے؟",
+        "PassphraseSaved": "آپ کا پاس جملہ محفوظ ہوگیا ہے۔",
+        "IdentifierActivated": "آپ کا {{999} ated کو چالو کردیا گیا ہے۔",
+        "CompletedActivation": "آپ نے صارف کی ایکٹیویشن مکمل کرلی ہے۔",
+        "CompletedActivationLogIn": "آپ نے صارف کی ایکٹیویشن مکمل کرلی ہے۔ ابھی لاگ ان کرنے کی کوشش کریں۔"
     },
     "usersContacts": {
         "selectLabel": "براہ کرم لیبل منتخب کریں.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "غلط زبان منتخب",
     "contacts": {
         "dialog": {
-            "title": "رابطہ منتخب کریں"
+            "title": "رابطہ منتخب کریں",
+            "SearchByName": "نام سے تلاش کریں۔"
         },
         "select": {
             "title": "{{displayName}} کا رابطہ منتخب کریں"

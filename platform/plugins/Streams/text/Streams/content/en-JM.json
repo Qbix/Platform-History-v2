@@ -69,7 +69,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts"
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned"
         },
         "email": {
             "subject": "Hey, check this out",

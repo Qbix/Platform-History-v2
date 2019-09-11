@@ -69,7 +69,8 @@
             "byTwitter": "지저귀다",
             "QRscanned": "그들은 그것을 스캔!",
             "chooseAgainFromContacts": "연락처에서 다시 선택",
-            "inviteSelectedContacts": "선택한 연락처 초대"
+            "inviteSelectedContacts": "선택한 연락처 초대",
+            "scannedQR": "코드가 스캔 된 경우 {{ClickOrTap}}"
         },
         "email": {
             "subject": "헤이, 이것 좀 봐.",
