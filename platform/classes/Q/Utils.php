@@ -147,7 +147,6 @@ class Q_Utils
 			ksort($data);
 			$data = http_build_query($data, null, '&', PHP_QUERY_RFC3986);
 			$data = str_replace('+', '%20', $data);
-			file_put_contents('/projects/qbix/Yang/temp.txt', $data);
 		}
 		return self::hmac('sha1', $data, $secret);
 	}
