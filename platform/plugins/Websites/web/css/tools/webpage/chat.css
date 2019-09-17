@@ -1,0 +1,17 @@
+.Streams_chat_tool .Websites_webpage_preview_tool {
+	position: absolute;
+	bottom: 40px;
+	background-color: #efefef;
+	border: 1px solid #000;
+	border-radius: 5px;
+	padding: 5px;
+}
+.Streams_chat_tool .Websites_webpage_preview_tool .Q_close {
+	background-image: url(../../../img/close.png);
+	position: absolute;
+	right: -15px;
+	top: -15px;
+	cursor: pointer;
+	height: 35px;
+	width: 35px;
+}

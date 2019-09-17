@@ -224,6 +224,8 @@ class Websites_Webpage
 			}
 		}
 
+		$result['bigIcon'] = Q::ifset($result, 'bigIcon', Q_Uri::interpolateUrl("{{baseUrl}}/{{Websites}}/img/icons/Websites/webpage/80.png"));
+		$result['smallIcon'] = Q::ifset($result, 'smallIcon', Q_Uri::interpolateUrl("{{baseUrl}}/{{Websites}}/img/icons/Websites/webpage/40.png"));
 		$result['host'] = $parsedUrl['host'];
 
 		return $result;

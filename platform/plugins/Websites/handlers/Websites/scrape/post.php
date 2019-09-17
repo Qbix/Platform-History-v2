@@ -9,13 +9,19 @@ function Websites_scrape_post($params)
 
 	$fields = Q::take($r, array('url'));
 
+	$url = $fields['url'];
+
+	if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+		$url = "http://" . $url;
+	}
+
 	// if stream for this URL already exist, return it
-	$streamExist = Websites_scrape_fetchStream($fields['url']);
+	$streamExist = Websites_scrape_fetchStream($url);
 	if ($streamExist) {
 		return Q_Response::setSlot('result', $streamExist);
 	}
 
-	$result = Websites_Webpage::scrape($fields['url']);
+	$result = Websites_Webpage::scrape($url);
 
 	// if stream for this URL already exist, return it
 	$streamExist = Websites_scrape_fetchStream($result['url']);

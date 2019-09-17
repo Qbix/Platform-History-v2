@@ -118,9 +118,14 @@ Q.Tool.define({
 	"Websites/slide": "{{Websites}}/js/tools/slide.js",
 	"Websites/webpage/composer": "{{Websites}}/js/tools/webpage/composer.js",
 	"Websites/webpage/preview": "{{Websites}}/js/tools/webpage/preview.js",
+	"Websites/webpage/chat": "{{Websites}}/js/tools/webpage/chat.js",
 	"Websites/advert/campaign/preview": "{{Websites}}/js/tools/advert/campaign/preview.js",
 	"Websites/advert/campaigns": function () {}
 });
+
+Q.Tool.onActivate("Streams/chat").set(function () {
+	$(this.element).tool('Websites/webpage/chat').activate();
+}, 'Websites');
 
 Q.page('', function () {
 	var streamName = Websites.seoStreamName;

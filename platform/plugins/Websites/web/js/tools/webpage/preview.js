@@ -6,16 +6,27 @@
 	 *   @param {array} [options.editable=["title"]] Array of editable fields (by default only title). Can be ["title", "description"]
 	 *   @param {string} [options.mode=document] This option regulates tool layout. Can be 'title' and 'document'.
 	 *   @param {Q.Event} [options.onInvoke] fires when the user click on preview element
+	 *   @param {string} [options.title] title for preview
+	 *   @param {string} [options.description] description for preview
+	 *   @param {string} [options.keywords] keywords for preview
+	 *   @param {string} [options.interest.title] title of interest for preview
+	 *   @param {string} [options.interest.icon] icon of interest for preview
+	 *   @param {string} [options.src] src for preview icon
+	 *   @param {string} [options.url] url for preview
 	 */
-	Q.Tool.define("Websites/webpage/preview", "Streams/preview", function (options, preview) {
+	Q.Tool.define("Websites/webpage/preview", function (options) {
 		var tool = this;
-		tool.preview = preview;
+		tool.preview = Q.Tool.from(this.element, "Streams/preview");
 
 		$(tool.element).attr('data-mode', this.state.mode);
 
 		// wait when styles and texts loaded and then run refresh
 		var pipe = Q.pipe(['styles', 'text'], function () {
-			preview.state.onRefresh.add(tool.refresh.bind(tool));
+			if (tool.preview) {
+				tool.preview.state.onRefresh.add(tool.refresh.bind(tool));
+			} else {
+				tool.refreshLight();
+			}
 		});
 
 		// loading styles
@@ -39,7 +50,17 @@
 		mode: 'document',
 		onInvoke: new Q.Event(),
 		onRender: new Q.Event(),
-		hideIfNoParticipants: false
+		hideIfNoParticipants: false,
+		// light mode params
+		title: null,
+		description: null,
+		keywords: null,
+		interest: {
+			title: null,
+			icon: null,
+		},
+		src: null,
+		url: null
 	},
 
 	{
@@ -189,6 +210,29 @@
 					}
 
 					pipe.fill('interest')(this);
+				});
+			});
+		},
+		refreshLight: function () {
+			var tool = this;
+			var state = this.state;
+
+			Q.Template.render('Websites/webpage/preview', {
+				title: state.title,
+				description: state.description,
+				keywords: state.keywords || '',
+				interest: state.interest,
+				src: state.src,
+				url: state.url
+			}, function (err, html) {
+				if (err) {
+					return;
+				}
+
+				$(tool.element).html(html);
+
+				Q.activate(tool.element, function () {
+					Q.handle(tool.state.onRender, tool);
 				});
 			});
 		}
