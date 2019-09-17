@@ -11,17 +11,16 @@
 .Users_contacts_dialog {
     width: 100%;
 	padding-right: 25px;
-	padding-top: 40px;
+	padding-top: 80px;
 }
 .Users_contacts_dialog .tr.Users_contacts_dialog_letter {
 	font-weight: bold;
 }
-.Users_contacts_dialog:not(.Users_contacts_select) .tr.Users_contacts_dialog_letter:not(:last-child) {
-	border-bottom: none;
-	background: #d8d8d8;
+.Users_contacts_dialog:not(.Users_contacts_select) .tr.Users_contacts_dialog_letter {
+	border-bottom: 1px solid #a3a3a3;
 }
-.Users_contacts_dialog:not(.Users_contacts_select) .tr:not(:last-child) {
-    border-bottom: 1px solid #a3a3a3;
+.Users_contacts_dialog:not(.Users_contacts_select) > div:not(:last-child) > .tr:not(:last-child) {
+    border-bottom: 1px solid #d8d8d8;
 }
 .Users_contacts_dialog .tr:not(.Users_contacts_dialog_letter) {
 	margin-left: 20px;
@@ -61,6 +60,9 @@
 .Users_contacts_dialog .td[data-email=null],
 .Users_contacts_dialog .td[data-phone=null] {
 	display: none;
+}
+.Users_contacts_select {
+	margin: 5px;
 }
 .Users_contacts_select .Users_contacts_dialog_buttons {
     margin-right: 10px;
@@ -113,11 +115,30 @@
 	text-align: center;
 	font-size: 20px;
 }
-.Users_contacts_input {
+.Q_overlay_apply .Q_dialog_content .Users_contacts_header {
 	position: sticky;
+	top: 0;
 	float: left;
-	width: calc(100% - 25px);;
+	width: calc(100% - 25px);
+	overflow: hidden;
+}
+.Q_overlay_apply .Q_dialog_content .Users_contacts_header .Users_contacts_input {
+	width: 100%;
 	height: 40px;
 	padding: 0 4px;
-	top: 0;
+	border: 5px solid #d8d8d8;
+}
+.Q_overlay_apply .Q_dialog_content .Users_contacts_header .Users_contacts_create {
+	height: 40px;
+	width: 100%;
+}
+
+.Users_contacts_filtering .tr.Users_contacts_dialog_letter,
+.Users_contacts_filtering .Users_contacts_sticky,
+.Users_contacts_filtering .tr[data-rawId] {
+	display: none;
+}
+.Users_contacts_filtering .tr.Users_contacts_filter_match[data-rawId] {
+	display: block;
+	border-bottom: 1px solid #a3a3a3;
 }
