@@ -69,7 +69,8 @@
             "byTwitter": "Świergot",
             "QRscanned": "Zeskanowali to!",
             "chooseAgainFromContacts": "Wybierz ponownie z kontaktów",
-            "inviteSelectedContacts": "Zaproś wybrane kontakty"
+            "inviteSelectedContacts": "Zaproś wybrane kontakty",
+            "scannedQR": "{{ClickOrTap}} jeśli kod został zeskanowany"
         },
         "email": {
             "subject": "Hej, sprawdź to",

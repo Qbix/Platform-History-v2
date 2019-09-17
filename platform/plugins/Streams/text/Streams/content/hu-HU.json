@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "Szkennelték!",
             "chooseAgainFromContacts": "Válasszon újra a Névjegyek közül",
-            "inviteSelectedContacts": "Meghívott partnerek meghívása"
+            "inviteSelectedContacts": "Meghívott partnerek meghívása",
+            "scannedQR": "{{ClickOrTap}}, ha a kódot beszkennelték"
         },
         "email": {
             "subject": "Hé, nézd meg ezt",

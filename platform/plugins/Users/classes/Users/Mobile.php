@@ -230,7 +230,7 @@ class Users_Mobile extends Base_Users_Mobile
 			}
 		}
 		$minutes = Q_Config::get('Users', 'activation', 'expires', 60*24*7);
-		$this->activationCode = strtolower(Q_Utils::unique(7));
+		$this->activationCode = strtolower(Q_Utils::randomString(7));
 		$this->activationCodeExpires = new Db_Expression(
 			"CURRENT_TIMESTAMP + INTERVAL $minutes MINUTE"
 		);

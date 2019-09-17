@@ -69,7 +69,8 @@
             "byTwitter": "heyecan",
             "QRscanned": "Taradılar!",
             "chooseAgainFromContacts": "Kişilerden Tekrar Seçin",
-            "inviteSelectedContacts": "Seçilen Kişileri Davet Et"
+            "inviteSelectedContacts": "Seçilen Kişileri Davet Et",
+            "scannedQR": "Kod tarandıysa {{ClickOrTap}}"
         },
         "email": {
             "subject": "Hey, şuna bir bak",

@@ -69,7 +69,8 @@
             "byTwitter": "cinguettio",
             "QRscanned": "Lo hanno scannerizzato!",
             "chooseAgainFromContacts": "Scegli di nuovo dai contatti",
-            "inviteSelectedContacts": "Invita i contatti selezionati"
+            "inviteSelectedContacts": "Invita i contatti selezionati",
+            "scannedQR": "{{ClickOrTap}} se il codice è stato scansionato"
         },
         "email": {
             "subject": "Ehi, dai un&#39;occhiata",

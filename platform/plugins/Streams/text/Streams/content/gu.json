@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "તેઓ તેને સ્કેન કરે છે!",
             "chooseAgainFromContacts": "સંપર્કોમાંથી ફરીથી પસંદ કરો",
-            "inviteSelectedContacts": "પસંદ કરેલા સંપર્કોને આમંત્રિત કરો"
+            "inviteSelectedContacts": "પસંદ કરેલા સંપર્કોને આમંત્રિત કરો",
+            "scannedQR": "Scan 9 999}} જો કોડ સ્કેન કરવામાં આવ્યો હતો"
         },
         "email": {
             "subject": "અરે, આ તપાસો",

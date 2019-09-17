@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "Вони сканували його!",
             "chooseAgainFromContacts": "Виберіть &quot;Знову&quot; у списку &quot;Контакти&quot;",
-            "inviteSelectedContacts": "Запросити вибрані контакти"
+            "inviteSelectedContacts": "Запросити вибрані контакти",
+            "scannedQR": "{{ClickOrTap}}, якщо код був відсканований"
         },
         "email": {
             "subject": "Ей, перевірте це",

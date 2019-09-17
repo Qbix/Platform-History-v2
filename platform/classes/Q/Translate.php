@@ -85,7 +85,7 @@ class Q_Translate
 		$appConfig = APP_CONFIG_DIR . DS . 'locales.json';
 		$platformConfig = Q_CONFIG_DIR . DS . 'Q' . DS . 'locales.json';
 		$config = null;
-		if ($this->options['locales']) {
+		if (!empty($this->options['locales'])) {
 			$config = $tree->load($this->options['locales']);
 		} else if (file_exists($appLocalConfig)) {
 			$config = $tree->load($appLocalConfig);

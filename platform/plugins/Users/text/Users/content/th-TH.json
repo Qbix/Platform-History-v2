@@ -32,7 +32,11 @@
         "no": "ไม่",
         "WelcomePleaseVerifyEmail": "ยินดีต้อนรับ! โปรดยืนยันที่อยู่อีเมลของคุณ",
         "WelcomeVerifyEmail": "ยินดีต้อนรับ! ยืนยันที่อยู่อีเมลของคุณ.",
-        "ForgetPass": "เฮ้คุณลืมข้อความรหัสผ่านของคุณหรือไม่"
+        "ForgetPass": "เฮ้คุณลืมข้อความรหัสผ่านของคุณหรือไม่",
+        "PassphraseSaved": "บันทึกวลีรหัสผ่านของคุณแล้ว",
+        "IdentifierActivated": "{{type}} ของคุณเปิดใช้งานแล้ว",
+        "CompletedActivation": "คุณเปิดใช้งานผู้ใช้เสร็จแล้ว",
+        "CompletedActivationLogIn": "คุณเปิดใช้งานผู้ใช้เสร็จแล้ว ลองเข้าสู่ระบบทันที"
     },
     "usersContacts": {
         "selectLabel": "โปรดเลือกป้ายกำกับ",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "เลือกภาษาไม่ถูกต้อง",
     "contacts": {
         "dialog": {
-            "title": "เลือกผู้ติดต่อ"
+            "title": "เลือกผู้ติดต่อ",
+            "SearchByName": "ค้นหาตามชื่อ"
         },
         "select": {
             "title": "เลือกผู้ติดต่อของ {{displayName}}"

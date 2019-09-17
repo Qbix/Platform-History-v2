@@ -32,7 +32,11 @@
         "no": "Ez",
         "WelcomePleaseVerifyEmail": "Ongi etorri! Mesedez, egiaztatu zure helbide elektronikoa.",
         "WelcomeVerifyEmail": "Ongi etorri! Egiaztatu zure helbide elektronikoa.",
-        "ForgetPass": "Hey, ahaztu egin duzu zure pasaesaldia?"
+        "ForgetPass": "Hey, ahaztu egin duzu zure pasaesaldia?",
+        "PassphraseSaved": "Zure pasahitz esaldia gorde da.",
+        "IdentifierActivated": "Zure {{type}} aktibatuta dago.",
+        "CompletedActivation": "Erabiltzaileen aktibazioa amaitu duzu.",
+        "CompletedActivationLogIn": "Erabiltzaileen aktibazioa amaitu duzu. Saiatu saioa hasten orain."
     },
     "usersContacts": {
         "selectLabel": "Hautatu etiketa.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "Hizkuntza baliogabea hautatu da",
     "contacts": {
         "dialog": {
-            "title": "Aukeratu kontaktua"
+            "title": "Aukeratu kontaktua",
+            "SearchByName": "Bilatu izenaren arabera"
         },
         "select": {
             "title": "{{displayName}} zerbitzuko kontaktu aukeratu"

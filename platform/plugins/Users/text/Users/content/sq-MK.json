@@ -32,7 +32,11 @@
         "no": "jo",
         "WelcomePleaseVerifyEmail": "Mirë se vini! Ju lutemi verifikoni adresën tuaj të postës elektronike.",
         "WelcomeVerifyEmail": "Mirë se vini! Verifikoni adresën tuaj të postës elektronike.",
-        "ForgetPass": "Hej, a keni harruar fjalëkalimin tuaj?"
+        "ForgetPass": "Hej, a keni harruar fjalëkalimin tuaj?",
+        "PassphraseSaved": "Fraza juaj e kalimit është ruajtur.",
+        "IdentifierActivated": "99 999 juaj u aktivizua.",
+        "CompletedActivation": "Ju keni përfunduar aktivizimin e përdoruesit.",
+        "CompletedActivationLogIn": "Ju keni përfunduar aktivizimin e përdoruesit. Provoni të regjistroheni tani."
     },
     "usersContacts": {
         "selectLabel": "Ju lutemi zgjidhni etiketën.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "Gjuhë e pavlefshme e zgjedhur",
     "contacts": {
         "dialog": {
-            "title": "Zgjidhni kontaktin"
+            "title": "Zgjidhni kontaktin",
+            "SearchByName": "Kërkoni sipas emrit"
         },
         "select": {
             "title": "Përzgjidh kontaktin e {{displayName}}"

@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "Þeir skannaðu það!",
             "chooseAgainFromContacts": "Veldu aftur úr tengiliðum",
-            "inviteSelectedContacts": "Bjóddu valdar tengiliðir"
+            "inviteSelectedContacts": "Bjóddu valdar tengiliðir",
+            "scannedQR": "{{ClickOrTap}} ef kóðinn var skannaður"
         },
         "email": {
             "subject": "Hey, athugaðu þetta út",

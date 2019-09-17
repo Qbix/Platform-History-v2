@@ -69,7 +69,8 @@
             "byTwitter": "Κελάδημα",
             "QRscanned": "Το έλεγξαν!",
             "chooseAgainFromContacts": "Επιλέξτε ξανά από τις Επαφές",
-            "inviteSelectedContacts": "Πρόσκληση επιλεγμένων επαφών"
+            "inviteSelectedContacts": "Πρόσκληση επιλεγμένων επαφών",
+            "scannedQR": "{{ClickOrTap}} αν ο κώδικας έχει σαρωθεί"
         },
         "email": {
             "subject": "Ελέγξτε αυτό",

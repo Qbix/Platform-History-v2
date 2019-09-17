@@ -32,7 +32,11 @@
         "no": "नहीं",
         "WelcomePleaseVerifyEmail": "स्वागत हे! अपना ईमेल एड्रेस सुनिश्चित करें।",
         "WelcomeVerifyEmail": "स्वागत हे! अपने ईमेल पते की पुष्टि करें।",
-        "ForgetPass": "अरे, क्या आप अपना पासफ़्रेज़ भूल गए?"
+        "ForgetPass": "अरे, क्या आप अपना पासफ़्रेज़ भूल गए?",
+        "PassphraseSaved": "आपका पास वाक्यांश सहेज लिया गया है।",
+        "IdentifierActivated": "आपका {{type}} सक्रिय हो गया है।",
+        "CompletedActivation": "आपने उपयोगकर्ता सक्रियण पूरा कर लिया है।",
+        "CompletedActivationLogIn": "आपने उपयोगकर्ता सक्रियण पूरा कर लिया है। अब लॉग इन करने का प्रयास करें।"
     },
     "usersContacts": {
         "selectLabel": "कृपया लेबल का चयन करें।",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "अमान्य भाषा चयनित",
     "contacts": {
         "dialog": {
-            "title": "संपर्क चुनें"
+            "title": "संपर्क चुनें",
+            "SearchByName": "नाम से खोजें"
         },
         "select": {
             "title": "{{displayName}} के संपर्क का चयन करें"

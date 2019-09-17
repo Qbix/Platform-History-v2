@@ -32,7 +32,11 @@
         "no": "Níl",
         "WelcomePleaseVerifyEmail": "Fáilte! Fíoraigh do sheoladh ríomhphoist le do thoil.",
         "WelcomeVerifyEmail": "Fáilte! Deimhnigh do sheoladh ríomhphoist.",
-        "ForgetPass": "Hey, an ndearna tú dearmad ar do fhocal faire?"
+        "ForgetPass": "Hey, an ndearna tú dearmad ar do fhocal faire?",
+        "PassphraseSaved": "Sábháladh an frása pas.",
+        "IdentifierActivated": "Tá do {{type}} curtha i ngníomh.",
+        "CompletedActivation": "Tá gníomhachtú úsáideora comhlánaithe agat.",
+        "CompletedActivationLogIn": "Tá gníomhachtú úsáideora comhlánaithe agat. Déan iarracht logáil isteach anois."
     },
     "usersContacts": {
         "selectLabel": "Roghnaigh lipéad le do thoil.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "Teanga neamhbhailí roghnaithe",
     "contacts": {
         "dialog": {
-            "title": "Roghnaigh teagmháil"
+            "title": "Roghnaigh teagmháil",
+            "SearchByName": "Cuardaigh de réir ainm"
         },
         "select": {
             "title": "Roghnaigh teagmháil le {{displayName}}"

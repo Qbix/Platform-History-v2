@@ -69,7 +69,8 @@
             "byTwitter": "Čivināt",
             "QRscanned": "Viņi skenēja to!",
             "chooseAgainFromContacts": "Izvēlieties no kontaktiem vēlreiz",
-            "inviteSelectedContacts": "Uzaicināt atlasītos kontaktus"
+            "inviteSelectedContacts": "Uzaicināt atlasītos kontaktus",
+            "scannedQR": "{{ClickOrTap}}, ja kods tika skenēts"
         },
         "email": {
             "subject": "Hei, pārbaudiet to",

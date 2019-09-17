@@ -32,7 +32,11 @@
         "no": "아니",
         "WelcomePleaseVerifyEmail": "환영! 이메일 주소를 확인하십시오.",
         "WelcomeVerifyEmail": "환영! 이메일 주소를 확인.",
-        "ForgetPass": "패스 프레이즈를 잊었 니?"
+        "ForgetPass": "패스 프레이즈를 잊었 니?",
+        "PassphraseSaved": "비밀번호 문구가 저장되었습니다.",
+        "IdentifierActivated": "귀하의 {{type}}이 (가) 활성화되었습니다.",
+        "CompletedActivation": "사용자 활성화를 완료했습니다.",
+        "CompletedActivationLogIn": "사용자 활성화를 완료했습니다. 지금 로그인하십시오."
     },
     "usersContacts": {
         "selectLabel": "라벨을 선택하십시오.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "잘못된 언어가 선택되었습니다.",
     "contacts": {
         "dialog": {
-            "title": "연락처 선택"
+            "title": "연락처 선택",
+            "SearchByName": "이름으로 검색"
         },
         "select": {
             "title": "{{displayName}}의 연락처 선택"

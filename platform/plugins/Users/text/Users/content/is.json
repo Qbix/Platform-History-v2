@@ -32,7 +32,11 @@
         "no": "Nr",
         "WelcomePleaseVerifyEmail": "Velkominn! Vinsamlegast staðfestu netfangið þitt.",
         "WelcomeVerifyEmail": "Velkominn! Staðfestu netfangið þitt.",
-        "ForgetPass": "Hey, hefur þú gleymt lykilorðinu þínu?"
+        "ForgetPass": "Hey, hefur þú gleymt lykilorðinu þínu?",
+        "PassphraseSaved": "Lykilorð þitt hefur verið vistað.",
+        "IdentifierActivated": "{{type}} þín hefur verið virkjuð.",
+        "CompletedActivation": "Þú hefur lokið við að virkja notendur.",
+        "CompletedActivationLogIn": "Þú hefur lokið við að virkja notendur. Prófaðu að skrá þig inn núna."
     },
     "usersContacts": {
         "selectLabel": "Vinsamlegast veldu merkið.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "Ógilt tungumál valið",
     "contacts": {
         "dialog": {
-            "title": "Veldu tengilið"
+            "title": "Veldu tengilið",
+            "SearchByName": "Leitaðu með nafni"
         },
         "select": {
             "title": "Veldu tengilið af {{displayName}}"

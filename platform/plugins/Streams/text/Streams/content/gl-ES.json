@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "Dixitalizáronse!",
             "chooseAgainFromContacts": "Escolla de novo desde os contactos",
-            "inviteSelectedContacts": "Invitar a contactos seleccionados"
+            "inviteSelectedContacts": "Invitar a contactos seleccionados",
+            "scannedQR": "{{ClickOrTap}} se o código foi dixitalizado"
         },
         "email": {
             "subject": "Oe, mira isto",

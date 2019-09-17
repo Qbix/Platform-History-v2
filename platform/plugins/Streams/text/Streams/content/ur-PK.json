@@ -69,7 +69,8 @@
             "byTwitter": "ٹویٹر",
             "QRscanned": "انہوں نے اسے سکین کیا!",
             "chooseAgainFromContacts": "رابطہ سے دوبارہ منتخب کریں",
-            "inviteSelectedContacts": "منتخب رابطوں کو مدعو کریں"
+            "inviteSelectedContacts": "منتخب رابطوں کو مدعو کریں",
+            "scannedQR": "اگر کوڈ اسکین ہوا تو. 999 {.۔"
         },
         "email": {
             "subject": "ارے، اسے چیک کرو",

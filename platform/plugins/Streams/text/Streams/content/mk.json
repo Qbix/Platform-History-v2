@@ -69,7 +69,8 @@
             "byTwitter": "Твитер",
             "QRscanned": "Тие го скенираа!",
             "chooseAgainFromContacts": "Изберете Повторно од Контакти",
-            "inviteSelectedContacts": "Поканете ги избраните контакти"
+            "inviteSelectedContacts": "Поканете ги избраните контакти",
+            "scannedQR": "{99 999}} ако кодот е скениран"
         },
         "email": {
             "subject": "Еј, провери го ова",

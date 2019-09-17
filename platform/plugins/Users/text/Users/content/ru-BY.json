@@ -32,7 +32,11 @@
         "no": "нет",
         "WelcomePleaseVerifyEmail": "Добро пожаловать! Пожалуйста, подтвердите ваш адрес электронной почты.",
         "WelcomeVerifyEmail": "Добро пожаловать! Проверьте свой адрес электронной почты.",
-        "ForgetPass": "Эй, ты забыл свой пароль?"
+        "ForgetPass": "Эй, ты забыл свой пароль?",
+        "PassphraseSaved": "Ваша пароль был сохранен.",
+        "IdentifierActivated": "Ваш {{type}} активирован.",
+        "CompletedActivation": "Вы завершили активацию пользователя.",
+        "CompletedActivationLogIn": "Вы завершили активацию пользователя. Попробуйте войти в систему сейчас."
     },
     "usersContacts": {
         "selectLabel": "Пожалуйста, выберите ярлык.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "Выбран неверный язык",
     "contacts": {
         "dialog": {
-            "title": "Выберите контакт"
+            "title": "Выберите контакт",
+            "SearchByName": "Поиск по имени"
         },
         "select": {
             "title": "Выберите контакт из {{displayName}}"

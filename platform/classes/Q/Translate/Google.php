@@ -9,7 +9,9 @@ class Q_Translate_Google {
 	}
 
 	function saveAll() {
-		list($fromLang, $locale) = preg_split("/(_|-)/", $this->parent->options['source']);
+		$parts = preg_split("/(_|-)/", $this->parent->options['source']);
+		$fromLang = $parts[0];
+		$locale = count($parts) > 1 ? $parts[1] : null;
 		$in = $this->parent->getSrc($fromLang, $locale, true);
 		foreach ($this->parent->locales as $toLang => $localeNames) {
 			if (($toLang === $fromLang) && $this->parent->options['out']) {

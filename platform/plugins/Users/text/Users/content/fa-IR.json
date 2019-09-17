@@ -32,7 +32,11 @@
         "no": "نه",
         "WelcomePleaseVerifyEmail": "خوش آمدی! لطفا آدرس ایمیل خود را تایید کنید.",
         "WelcomeVerifyEmail": "خوش آمدی! آدرس ایمیل خود را تأیید کنید",
-        "ForgetPass": "سلام، آیا کلمه عبور خود را فراموش کرده اید؟"
+        "ForgetPass": "سلام، آیا کلمه عبور خود را فراموش کرده اید؟",
+        "PassphraseSaved": "عبارت عبور شما ذخیره شده است",
+        "IdentifierActivated": "99 999 Your شما فعال شده است.",
+        "CompletedActivation": "شما فعال سازی کاربر را انجام دادید.",
+        "CompletedActivationLogIn": "شما فعال سازی کاربر را انجام دادید. اکنون وارد سیستم شوید."
     },
     "usersContacts": {
         "selectLabel": "لطفا برچسب را انتخاب کنید",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "زبان نامعتبر انتخاب شده است",
     "contacts": {
         "dialog": {
-            "title": "تماس را انتخاب کنید"
+            "title": "تماس را انتخاب کنید",
+            "SearchByName": "جستجو براساس نام"
         },
         "select": {
             "title": "تماس با {{displayName}} را انتخاب کنید"

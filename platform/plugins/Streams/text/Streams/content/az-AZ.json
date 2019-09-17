@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "Onlar bunu skanladılar!",
             "chooseAgainFromContacts": "Əlaqələrdən təkrar seçin",
-            "inviteSelectedContacts": "Seçilmiş kontaktları dəvət edin"
+            "inviteSelectedContacts": "Seçilmiş kontaktları dəvət edin",
+            "scannedQR": "Kodu skan edilmişsə {{ClickOrTap}}"
         },
         "email": {
             "subject": "Hey, bunu yoxlayın",

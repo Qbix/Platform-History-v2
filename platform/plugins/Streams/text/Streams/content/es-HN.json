@@ -69,7 +69,8 @@
             "byTwitter": "Gorjeo",
             "QRscanned": "¡Lo escanearon!",
             "chooseAgainFromContacts": "Elegir de nuevo desde Contactos",
-            "inviteSelectedContacts": "Invitar contactos seleccionados"
+            "inviteSelectedContacts": "Invitar contactos seleccionados",
+            "scannedQR": "{{ClickOrTap}} si el código fue escaneado"
         },
         "email": {
             "subject": "Oye mira esto",

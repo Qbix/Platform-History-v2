@@ -32,7 +32,11 @@
         "no": "Le",
         "WelcomePleaseVerifyEmail": "Merħba! Jekk jogħġbok ivverifika l-indirizz elettroniku tiegħek.",
         "WelcomeVerifyEmail": "Merħba! Ivverifika l-indirizz elettroniku tiegħek.",
-        "ForgetPass": "Ħej, insejt il-frażi passiva?"
+        "ForgetPass": "Ħej, insejt il-frażi passiva?",
+        "PassphraseSaved": "Il-frażi tal-pass tiegħek ġiet salvata.",
+        "IdentifierActivated": "{{type}} tiegħek ġie attivat.",
+        "CompletedActivation": "Imxejt attivazzjoni mill-utent.",
+        "CompletedActivationLogIn": "Imxejt attivazzjoni mill-utent. Ipprova dħalt issa."
     },
     "usersContacts": {
         "selectLabel": "Jekk jogħġbok agħżel it-tikketta.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "Lingwa mhux valida magħżula",
     "contacts": {
         "dialog": {
-            "title": "Agħżel kuntatt"
+            "title": "Agħżel kuntatt",
+            "SearchByName": "Fittex bl-isem"
         },
         "select": {
             "title": "Agħżel kuntatt ta &#39;{{displayName}}"

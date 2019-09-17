@@ -32,7 +32,11 @@
         "no": "არა",
         "WelcomePleaseVerifyEmail": "გამარჯობა! გთხოვთ, შეამოწმოთ თქვენი ელექტრონული ფოსტის მისამართი.",
         "WelcomeVerifyEmail": "გამარჯობა! თქვენი ელ.ფოსტის მისამართის შემოწმება.",
-        "ForgetPass": "ჰეი, დაივიწყეთ პაროლი?"
+        "ForgetPass": "ჰეი, დაივიწყეთ პაროლი?",
+        "PassphraseSaved": "თქვენი ფრაზის ფრაზა შენახულია.",
+        "IdentifierActivated": "თქვენი {999}} გააქტიურებულია.",
+        "CompletedActivation": "თქვენ დაასრულეთ მომხმარებლის გააქტიურება.",
+        "CompletedActivationLogIn": "თქვენ დაასრულეთ მომხმარებლის გააქტიურება. სცადეთ ახლა შესვლა."
     },
     "usersContacts": {
         "selectLabel": "აირჩიეთ ლეიბლი.",
@@ -41,7 +45,8 @@
     "invalidLanguageSelected": "არჩეული არასწორი ენა",
     "contacts": {
         "dialog": {
-            "title": "კონტაქტის არჩევა"
+            "title": "კონტაქტის არჩევა",
+            "SearchByName": "ძებნა სახელით"
         },
         "select": {
             "title": "აირჩიეთ {{displayName}}"

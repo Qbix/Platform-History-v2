@@ -69,7 +69,8 @@
             "byTwitter": "טוויטר",
             "QRscanned": "הם סרקו את זה!",
             "chooseAgainFromContacts": "בחר שוב מאנשי קשר",
-            "inviteSelectedContacts": "הזמן אנשי קשר שנבחרו"
+            "inviteSelectedContacts": "הזמן אנשי קשר שנבחרו",
+            "scannedQR": "{{ClickOrTap}} אם הקוד נסרק"
         },
         "email": {
             "subject": "ללא שם: היי, לבדוק את זה",
