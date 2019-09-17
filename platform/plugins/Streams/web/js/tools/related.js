@@ -229,7 +229,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			Q.activate(elementsToActivate, null, function (elem, tools, options) {
 				Q.each(tools, function () {
 					var index = previews.push(this) - 1;
-					var key = Streams.key(this.state.publisherId, this.state.streamName);
+					var key = Streams.key(this.preview.state.publisherId, this.preview.state.streamName);
 					map[key] = index;
 				});
 				tool.integrateWithTabs([element], true);
