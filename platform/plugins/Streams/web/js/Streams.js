@@ -1996,6 +1996,8 @@ Stream.release = function _Stream_release (publisherId, streamName) {
  * If your app server script is running, then calling this manually is largely unnecessary because messages arrive via push using socket.io .
  * @static
  * @method refresh
+ * @param {string} publisherId publisher of a stream
+ * @param {string} streamName name of a stream
  * @param {Function} callback This is called when the stream has been refreshed.
  *   If the first argument is not false or null, then "this" is the stream.
  *   The arguments are different depending on the options.
@@ -2012,8 +2014,13 @@ Stream.release = function _Stream_release (publisherId, streamName) {
  */
 Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, options) {
 	var notRetained = !_retainedByStream[Streams.key(publisherId, streamName)];
+	var callbackCalled = false;
+
 	if ((notRetained && !(options && options.evenIfNotRetained))) {
-		callback && callback.call(this, false);
+		if (!callbackCalled) {
+			Q.handle(callback, this, [false]);
+			callbackCalled = true;
+		}
 		Streams.get.cache.removeEach([publisherId, streamName]);
 		return false;
 	}
@@ -2024,20 +2031,23 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 		var result = Message.wait(publisherId, streamName, -1,
 			function (ordinals) {
 				Q.Streams.get(publisherId, streamName, function (err) {
-					callback && callback.apply(this, [err, ordinals]);
+					if (!callbackCalled) {
+						Q.handle(callback, this, [err, ordinals]);
+						callbackCalled = true;
+					}
 				});
 			}, options);
-		if (result == null || result instanceof Q.Pipe) {
+		if (result === null || result instanceof Q.Pipe) {
 			// We didn't even try to wait for messages,
 			// The socket will deliver them.
-			callback && callback.call(this, null);
+			if (!callbackCalled) {
+				Q.handle(callback, this, [null]);
+				callbackCalled = true;
+			}
 		}
 		return result;
 	}
-	var nodeUrl = Q.nodeUrl({
-		publisherId: publisherId,
-		streamName: streamName
-	});
+
 	// We sent a request to get the latest messages.
 	// But we will also force-get the stream, to trigger any handlers
 	// set for the stream's onRefresh event
@@ -2055,7 +2065,11 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 			if (o.extra) {
 				params.concat(extra);
 			}
-			callback && callback.apply(this, params);
+
+			if (!callbackCalled) {
+				Q.handle(callback, this, params);
+				callbackCalled = true;
+			}
 		}
 	});
 	_retain = undefined;
