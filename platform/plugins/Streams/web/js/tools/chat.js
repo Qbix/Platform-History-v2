@@ -153,6 +153,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		// remove tool when chat stream closed
 		this.remove();
 	}),
+	onMessagePost: new Q.Event(),
 	templates: {
 		main: {
 			dir: '{{Streams}}/views',
@@ -841,7 +842,13 @@ Q.Tool.define('Streams/chat', function(options) {
 						tool.scrollToBottom();
 						return;
 					}
-					state.stream.refresh(null, {
+					state.stream.refresh(function (err, ordinal) {
+						if (err) {
+							return;
+						}
+
+						Q.handle(state.onMessagePost, tool, [ordinal]);
+					}, {
 						messages: true, 
 						unlessSocket: true,
 						evenIfNotRetained: true
