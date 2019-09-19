@@ -427,13 +427,16 @@ Q.Tool.define("Q/columns", function(options) {
 				params.handler = function _handler(response) {
 					var elementsToActivate = {};
 					if ('title' in response.slots) {
+						Q.Tool.remove(titleSlot);
 						$(titleSlot).html(response.slots.title);
 						elementsToActivate['title'] = titleSlot;
 					}
 					if ('controls' in response.slots) {
+						Q.Tool.remove(controlsSlot);
 						$(controlsSlot).html(response.slots.controls);
 						elementsToActivate['controls'] = controlsSlot;
 					}
+					Q.Tool.remove(columnSlot);
 					columnSlot.innerHTML = response.slots.column;
 					elementsToActivate['column'] = columnSlot;
 					return elementsToActivate;
