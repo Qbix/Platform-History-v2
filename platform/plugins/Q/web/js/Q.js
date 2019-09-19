@@ -477,6 +477,53 @@ Sp.splitId = function(lengths, delimiter) {
 	}
 	return segments.join(delimiter);
 };
+/**
+ * Used to split ids into one or more segments, in order to store millions
+ * of files under a directory, without running into limits of various filesystems
+ * on the number of files in a directory.
+ * Consider using Amazon S3 or another service for uploading files in production.
+ * @method matchTypes
+ * @param {string|array} types type or types to detect. Can be "url", "email", "phone", "twitter"
+ * if omitted, all types processed
+  * @return {object}
+ */
+Sp.matchTypes = function (types) {
+	var string = this;
+
+	if (typeof types === 'string') {
+		types = [types];
+	}
+
+	if (!Array.isArray(types)) {
+		types = ["url", "email", "phone", "twitter"];
+	}
+
+	var res = {};
+	types.forEach(function(type) {
+		if (type === 'url') {
+			res.url = string.match(/(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+/gi);
+			res.url = Array.isArray(res.url) ? res.url : [];
+		}
+		if (type === 'email') {
+			res.email = string.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+			res.email = Array.isArray(res.email) ? res.email : [];
+		}
+		if (type === 'phone') {
+			res.phone = string.match(/\+[0-9]{1,2}?(-|\s|\.)?[0-9]{3,5}(-|\s|\.)?([0-9]{3,5}(-|\s|\.)?)?([0-9]{4,5})/gi);
+			res.phone = Array.isArray(res.phone) ? res.phone : [];
+		}
+		if (type === 'twitter') {
+			res.twitter = string.match(/\+[0-9]{1,2}?(-|\s|\.)?[0-9]{3,5}(-|\s|\.)?([0-9]{3,5}(-|\s|\.)?)?([0-9]{4,5})/gi);
+			res.twitter = Array.isArray(res.twitter) ? res.twitter : [];
+		}
+	});
+
+	if (types.length === 1) {
+		return res[Object.keys(res)[0]];
+	}
+
+	return res;
+};
 
 /**
  * @class Function
