@@ -19,7 +19,7 @@
 		}, 500));
 
 		// on message posted
-		tool.chatTool.state.onMessagePost.set(function (ordinal) {
+		tool.chatTool.state.onMessageRender.set(function (ordinal) {
 			var $preview = tool.getActivePreview();
 
 			if ($preview) {

@@ -36,6 +36,7 @@
  *   @param {Q.Event} [options.onRefresh] Event for when an the chat has been updated
  *   @param {Q.Event} [options.onError] Event for when an error occurs, and the error is passed
  *   @param {Q.Event} [options.onClose] Event for when chat stream closed
+ *   @param {Q.Event} [options.onMessageRender] Event for when message rendered
  */
 Q.Tool.define('Streams/chat', function(options) {		
 	var tool = this;
@@ -153,7 +154,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		// remove tool when chat stream closed
 		this.remove();
 	}),
-	onMessagePost: new Q.Event(),
+	onMessageRender: new Q.Event(),
 	templates: {
 		main: {
 			dir: '{{Streams}}/views',
@@ -847,7 +848,7 @@ Q.Tool.define('Streams/chat', function(options) {
 							return;
 						}
 
-						Q.handle(state.onMessagePost, tool, [ordinal]);
+						Q.handle(state.onMessageRender, tool, [ordinal]);
 					}, {
 						messages: true, 
 						unlessSocket: true,
