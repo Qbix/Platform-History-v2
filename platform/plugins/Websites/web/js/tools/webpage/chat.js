@@ -45,7 +45,7 @@
 			var $input = $(input);
 			var $form = $input.closest("form");
 			var websitesPreview = this.state.websitesPreview;
-			var urls = tool.getURLsFromText($input.val());
+			var urls = $input.val().matchTypes('url');
 
 			Q.each(urls, function (i, url) {
 				if (tool.getActivePreview() || url in websitesPreview) {
@@ -122,18 +122,6 @@
 			}
 
 			return null;
-		},
-		/**
-		 *	This is used Validation for Website URL Text in the contents.
-		 *
-		 * @method validateURLWithText
-		 * @param {String} str content of string url
-		 * @return {array} Returns Website url in the card details content.
-		 */
-		getURLsFromText: function (str) {
-			var urls = str.match(/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi);
-
-			return Array.isArray(urls) ? urls : [];
 		}
 	});
 
