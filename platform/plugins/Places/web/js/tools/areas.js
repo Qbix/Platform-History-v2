@@ -71,7 +71,7 @@
 					}, 'Q_filter')
 						.appendTo($container)
 						.activate(function(){
-							tool.filterTool = Q.Tool.from(this.element, "Q/filter");
+							tool.filterTool = this;
 
 							// filtering Streams/related tool results
 							tool.filterTool.state.onFilter.set(function (query, element) {
@@ -91,7 +91,7 @@
 
 							// set selected Places/area stream
 							tool.filterTool.state.onChoose.set(function (element, details) {
-								var previewTool = Q.Tool.from($(element).closest(".Streams_preview_tool"), "Streams/preview");
+								var previewTool = Q.Tool.from(element, "Streams/preview");
 
 								if (!previewTool) {
 									return false;
@@ -145,7 +145,7 @@
 						editable: false,
 						onRefresh: function(){
 							// add Q_filter_result class to each preview tool except composer
-							$(".Streams_preview_container", $(".Streams_preview_tool", this.element).not(".Streams_preview_composer")).addClass("Q_filter_result");
+							$(".Streams_preview_tool:not(.Streams_related_composer)", this.element).addClass("Q_filter_result");
 						},
 						creatable: {
 							"Places/area": {
