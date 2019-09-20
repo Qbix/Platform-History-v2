@@ -8753,10 +8753,11 @@ function _activateTools(toolElement, options, shared) {
 			_constructors[toolName] = function Q_Tool(element, options) {
 				// support re-entrancy of Q.activate
 				var tool = Q.getObject(['Q', 'tools', toolName], element);
-				if (this.activated || tool) {
+				if (this.activating || this.activated || tool) {
 					tool = tool || this;
 					return _activateTools.alreadyActivated;
 				}
+				this.activating = true
 				this.activated = false;
 				this.initialized = false;
 				try {
@@ -8806,6 +8807,7 @@ function _activateTools(toolElement, options, shared) {
 					console.warn(e);
 					Q.Tool.beingActivated = prevTool;
 				}
+				this.activating = false;
 				this.activated = true;
 			};
 			Q.mixin(toolConstructor, Q.Tool);
