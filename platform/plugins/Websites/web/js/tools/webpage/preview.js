@@ -3,6 +3,8 @@
 	 * @class Websites/webpage/preview
 	 * @constructor
 	 * @param {Object} [options] this is an object that contains parameters for this function
+	 *   @param {string} [options.publisherId] publisherId of Websites/webpage stream
+	 *   @param {string} [options.streamName] name of Websites/webpage stream
 	 *   @param {array} [options.editable=["title"]] Array of editable fields (by default only title). Can be ["title", "description"]
 	 *   @param {string} [options.mode=document] This option regulates tool layout. Can be 'title' and 'document'.
 	 *   @param {Q.Event} [options.onInvoke] fires when the user click on preview element
@@ -16,14 +18,22 @@
 	 */
 	Q.Tool.define("Websites/webpage/preview", function (options) {
 		var tool = this;
-		tool.preview = Q.Tool.from(this.element, "Streams/preview");
+		var state = this.state;
+		var preview = Q.Tool.from(this.element, "Streams/preview");
+
+		state.publisherId = state.publisherId || Q.getObject("state.publisherId", preview);
+		state.streamName = state.streamName || Q.getObject("state.streamName", preview);
 
 		$(tool.element).attr('data-mode', this.state.mode);
 
 		// wait when styles and texts loaded and then run refresh
 		var pipe = Q.pipe(['styles', 'text'], function () {
-			if (tool.preview) {
-				tool.preview.state.onRefresh.add(tool.refresh.bind(tool));
+			if (state.publisherId && state.streamName) {
+				if (preview) {
+					preview.state.onRefresh.add(tool.refresh.bind(tool));
+				} else {
+					tool.refresh();
+				}
 			} else {
 				tool.refreshLight();
 			}
@@ -46,6 +56,8 @@
 	},
 
 	{
+		publisherId: null,
+		streamName: null,
 		editable: ['title'],
 		mode: 'document',
 		onInvoke: new Q.Event(),
@@ -64,22 +76,22 @@
 	},
 
 	{
-		refresh: function (stream) {
+		refresh: function () {
 			var tool = this;
 			var state = this.state;
 			var $te = $(tool.element);
 
-			if (state.hideIfNoParticipants
-				&& stream.fields.participatingCount === 0) {
-				$te.addClass('Streams_chat_preview_noParticipants');
-			} else {
-				$te.removeClass('Streams_chat_preview_noParticipants');
-			}
-
 			var pipe = new Q.Pipe(['interest', 'webpage'], function (params) {
 				var interestStream = params.interest[0];
 				var webpageStream = params.webpage[0];
-				var url = webpageStream.getAttribute("url");
+				state.url = webpageStream.getAttribute("url");
+
+				if (state.hideIfNoParticipants
+					&& webpageStream.fields.participatingCount === 0) {
+					$te.addClass('Streams_chat_preview_noParticipants');
+				} else {
+					$te.removeClass('Streams_chat_preview_noParticipants');
+				}
 
 				Q.Template.render('Websites/webpage/preview', {
 					title: state.editable && state.editable.indexOf('title') >= 0
@@ -100,7 +112,7 @@
 						icon: interestStream.iconUrl(interestStream.getAttribute('iconSize')),
 					},
 					src: webpageStream.iconUrl('80'),
-					url: url,
+					url: state.url,
 					text: tool.text.webpage
 				}, function (err, html) {
 
@@ -131,7 +143,7 @@
 						if ($te.closest('.Websites_webpage_composer_tool').length) {
 							return;
 						}
-						Q.handle(state.onInvoke, tool, [tool.preview]);
+						Q.handle(state.onInvoke, tool);
 					});
 
 					// setup unseen element
@@ -187,7 +199,7 @@
 				});
 			});
 
-			Q.Streams.get(stream.fields.publisherId, stream.fields.name, function (err) {
+			Q.Streams.get(state.publisherId, state.streamName, function (err) {
 				var msg = Q.firstErrorMessage(err);
 				if (msg) {
 					return Q.alert(msg);

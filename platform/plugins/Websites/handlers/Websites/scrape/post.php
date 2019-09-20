@@ -60,6 +60,9 @@ function Websites_scrape_fetchStream($url) {
 		}
 	}
 
+	Q_Response::setSlot('publisherId', $stream->publisherId);
+	Q_Response::setSlot('streamName', $stream->name);
+
 	return array(
 		'title' => $stream->title,
 		'description' => $stream->content,

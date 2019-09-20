@@ -1,17 +1,43 @@
 .Streams_chat_tool .Websites_webpage_preview_tool {
-	position: absolute;
-	bottom: 40px;
-	background-color: #efefef;
-	border: 1px solid #000;
+	background-color: #fff;
+	border: 1px solid #c8c8c8;
 	border-radius: 5px;
-	padding: 5px;
+	padding: 2px;
+	margin-bottom: 5px;
 }
 .Streams_chat_tool .Websites_webpage_preview_tool .Q_close {
 	background-image: url(../../../img/close.png);
 	position: absolute;
-	right: -15px;
-	top: -15px;
+	right: -13px;
+	top: -13px;
 	cursor: pointer;
-	height: 35px;
-	width: 35px;
+	height: 30px;
+	width: 30px;
+	background-size: contain;
+}
+.Streams_chat_tool .Streams_chat_messages .Websites_webpage_preview_tool .Q_close {
+	display: none;
+}
+.Streams_chat_tool .Websites_webpage_preview_tool .Streams_preview_icon {
+	width: 40px;
+	height: 40px;
+}
+.Streams_chat_tool .Websites_webpage_preview_tool h3.Streams_preview_title {
+	font-size: 14px;
+	line-height: 20px;
+	height: 20px;
+	color: black;
+}
+.Streams_chat_tool .Streams_chat_item .Websites_webpage_preview_tool .Streams_preview_contents {
+	width: calc(100% - 20px);
+}
+.Streams_chat_tool .Streams_chat_item .Websites_webpage_preview_tool .Streams_preview_icon {
+	width: 20px;
+	height: auto;
+	margin-right: 5px;
+}
+.Streams_chat_tool .Websites_webpage_preview_tool .Streams_aspect_interests img,
+.Streams_chat_tool .Websites_webpage_preview_tool .streams_chat_unseen,
+.Streams_chat_tool .Websites_webpage_preview_tool .streams_chat_participants {
+	display: none;
 }

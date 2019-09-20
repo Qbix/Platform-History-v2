@@ -36,6 +36,8 @@
  *   @param {Q.Event} [options.onRefresh] Event for when an the chat has been updated
  *   @param {Q.Event} [options.onError] Event for when an error occurs, and the error is passed
  *   @param {Q.Event} [options.onClose] Event for when chat stream closed
+ *   @param {Q.Event} [options.onMessageRender] Event for when message rendered
+ *   @param {Q.Event} [options.onBeforePost] Execute before message post (before calling Q.Message.post). Pass fields as argument.
  */
 Q.Tool.define('Streams/chat', function(options) {		
 	var tool = this;
@@ -153,6 +155,8 @@ Q.Tool.define('Streams/chat', function(options) {
 		// remove tool when chat stream closed
 		this.remove();
 	}),
+	onMessageRender: new Q.Event(),
+	onBeforePost: new Q.Event(),
 	templates: {
 		main: {
 			dir: '{{Streams}}/views',
@@ -379,7 +383,10 @@ Q.Tool.define('Streams/chat', function(options) {
 			Q.Template.render(
 				'Streams/chat/message/bubble',
 				fields,
-				p.fill(ordinal)
+				function (err, html) {
+					Q.handle(state.onMessageRender, tool, [fields, html]);
+					p.fill(ordinal)(err, fields.html || html);
+				}
 			);
 			ordinals.push(ordinal);
 		}
@@ -828,12 +835,16 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 
 			function _postMessage() {
-				Q.Streams.Message.post({
-					'publisherId': state.publisherId,
-					'streamName' : state.streamName,
-					'type'       : 'Streams/chat/message',
-					'content'    : content
-				}, function(err, args) {
+				var fields = {
+					'publisherId' : state.publisherId,
+					'streamName'  : state.streamName,
+					'type'        : 'Streams/chat/message',
+					'content'	  : content
+				};
+
+				Q.handle(state.onBeforePost, tool, [fields]);
+
+				Q.Streams.Message.post(fields, function(err, args) {
 					blocked = false;
 					$this.removeAttr('disabled');
 					if (err) {
