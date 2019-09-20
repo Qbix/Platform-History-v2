@@ -14,19 +14,55 @@
 
 		Q.addStylesheet('{{Websites}}/css/tools/webpage/chat.css');
 
-		$(tool.chatTool.element).on('change input', '.Streams_chat_composer :input', Q.debounce(function () {
+		$(tool.chatTool.element).on('input', '.Streams_chat_composer :input', Q.debounce(function () {
 			tool.process(this);
 		}, 500));
 
-		// on message posted
-		tool.chatTool.state.onMessageRender.set(function (ordinal) {
+		// on before message post
+		tool.chatTool.state.onBeforePost.set(function (fields) {
 			var $preview = tool.getActivePreview();
-
-			if ($preview) {
-				$preview.insertAfter($(".Streams_chat_item.Streams_chat_from_me:last-child", tool.chatTool.element));
-				tool.state.websitesPreview = {};
+			if (!$preview) {
+				return;
 			}
+
+			var previewTool = Q.Tool.from($preview, "Websites/webpage/preview");
+
+			fields.instructions = Q.extend({}, fields.instructions, {
+				'Websites/webpages': {
+					publisherId: previewTool.state.publisherId,
+					streamName: previewTool.state.streamName
+				}
+			});
+
+			Q.Tool.remove(previewTool.element, true, true);
+			tool.state.websitesPreview = {};
 		}, tool);
+
+		// on new message render
+		tool.chatTool.state.onMessageRender.set(function (fields, html) {
+			var instructions = Q.getObject('Websites/webpages', JSON.parse(fields.instructions || null));
+
+			if (!instructions) {
+				return;
+			}
+
+			var $html = $(html);
+
+			$(Q.Tool.setUpElementHTML('div', 'Websites/webpage/preview', instructions)).appendTo($(".Streams_chat_bubble", $html));
+
+			fields.html = $html[0].outerHTML;
+		}, tool);
+
+		Q.Tool.onActivate('Websites/webpage/preview').add(function () {
+			var previewTool = this;
+			var $te = $(this.element);
+
+			if ($te.closest('.Streams_chat_item').length) {
+				$te.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
+					window.open(previewTool.state.url, '_blank');
+				});
+			}
+		}, true);
 	},
 
 	{
@@ -73,19 +109,10 @@
 						}
 
 						var siteData = response.slots.result;
-						var publisherId = response.slots.publisherId;
-						var streamName = response.slots.streamName;
 
 						websitesPreview[url].tool("Websites/webpage/preview", {
-							title: siteData.title,
-							description: siteData.description,
-							keywords: siteData.keywords || '',
-							interest: {
-								title: ' ' + siteData.host,
-								icon: siteData.smallIcon,
-							},
-							src: siteData.bigIcon,
-							url: siteData.url
+							publisherId: response.slots.publisherId,
+							streamName: response.slots.streamName
 						}, Date.now()).activate(function () {
 							var previewTool = this;
 							var $te = $(previewTool.element);
