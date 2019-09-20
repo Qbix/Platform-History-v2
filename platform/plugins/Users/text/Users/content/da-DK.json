@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Vælg venligst etiket.",
-        "inviteUser": "Inviter bruger"
+        "inviteUser": "Inviter bruger",
+        "selectRole": "Vælg rolle",
+        "inviteRole": "Inviter {{role}}"
     },
     "invalidLanguageSelected": "Ugyldigt sprog valgt",
     "contacts": {
         "dialog": {
             "title": "Vælg kontakt",
-            "SearchByName": "Søg efter navn"
+            "SearchByName": "Søg efter navn",
+            "CreateAccount": "+ Ny kontakt",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ikke fundet"
         },
         "select": {
             "title": "Vælg kontakt af {{displayName}}"

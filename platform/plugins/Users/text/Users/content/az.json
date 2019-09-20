@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Xahiş edirik etiket seçin.",
-        "inviteUser": "İstifadəçiləri dəvət edin"
+        "inviteUser": "İstifadəçiləri dəvət edin",
+        "selectRole": "Rol seçin",
+        "inviteRole": "Dəvət edin {{role}}"
     },
     "invalidLanguageSelected": "Yanlış dil seçildi",
     "contacts": {
         "dialog": {
             "title": "Əlaqə seçin",
-            "SearchByName": "Adı ilə axtarın"
+            "SearchByName": "Adı ilə axtarın",
+            "CreateAccount": "+ Yeni Əlaqə",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create tapılmadı"
         },
         "select": {
             "title": "{{displayName}}} kontaktını seçin"

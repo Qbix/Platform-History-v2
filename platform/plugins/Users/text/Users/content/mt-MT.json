@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Jekk jogħġbok agħżel it-tikketta.",
-        "inviteUser": "Stieden l-Utent"
+        "inviteUser": "Stieden l-Utent",
+        "selectRole": "Agħżel ir-Rwol",
+        "inviteRole": "Stieden {{role}}"
     },
     "invalidLanguageSelected": "Lingwa mhux valida magħżula",
     "contacts": {
         "dialog": {
             "title": "Agħżel kuntatt",
-            "SearchByName": "Fittex bl-isem"
+            "SearchByName": "Fittex bl-isem",
+            "CreateAccount": "+ Kuntatt Ġdid",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ma nstabx"
         },
         "select": {
             "title": "Agħżel kuntatt ta &#39;{{displayName}}"

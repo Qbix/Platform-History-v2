@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "يرجى اختيار التسمية.",
-        "inviteUser": "دعوة المستخدم"
+        "inviteUser": "دعوة المستخدم",
+        "selectRole": "اختر الدور",
+        "inviteRole": "دعوة {{role}}"
     },
     "invalidLanguageSelected": "تم تحديد لغة غير صالحة",
     "contacts": {
         "dialog": {
             "title": "اختيار الاتصال",
-            "SearchByName": "البحث عن طريق الإسم"
+            "SearchByName": "البحث عن طريق الإسم",
+            "CreateAccount": "+ اتصال جديد",
+            "CreateAccountNotFound": "لم يتم العثور على Q.Users.Cordova.UI.Create"
         },
         "select": {
             "title": "اختر جهة اتصال {{displayName}}"

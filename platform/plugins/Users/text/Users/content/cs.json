@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Vyberte prosím popisek.",
-        "inviteUser": "Pozvěte uživatele"
+        "inviteUser": "Pozvěte uživatele",
+        "selectRole": "Vyberte roli",
+        "inviteRole": "Pozvat {{role}}"
     },
     "invalidLanguageSelected": "Byl vybrán neplatný jazyk",
     "contacts": {
         "dialog": {
             "title": "Vyberte kontakt",
-            "SearchByName": "Hledat podle jména"
+            "SearchByName": "Hledat podle jména",
+            "CreateAccount": "+ Nový kontakt",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nebyl nalezen"
         },
         "select": {
             "title": "Vyberte kontakt {{displayName}}"

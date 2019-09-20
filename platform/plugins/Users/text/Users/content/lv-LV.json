@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Lūdzu, atlasiet etiķeti.",
-        "inviteUser": "Uzaicināt lietotāju"
+        "inviteUser": "Uzaicināt lietotāju",
+        "selectRole": "Atlasiet Loma",
+        "inviteRole": "Uzaicināt {{role}}"
     },
     "invalidLanguageSelected": "Izvēlēta nederīga valoda",
     "contacts": {
         "dialog": {
             "title": "Izvēlieties kontaktu",
-            "SearchByName": "Meklēt pēc vārda"
+            "SearchByName": "Meklēt pēc vārda",
+            "CreateAccount": "+ Jauns kontakts",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nav atrasts"
         },
         "select": {
             "title": "Atlasiet kontaktpersonu {{displayName}}"

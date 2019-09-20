@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Vinsamlegast veldu merkið.",
-        "inviteUser": "Bjóddu notanda"
+        "inviteUser": "Bjóddu notanda",
+        "selectRole": "Veldu hlutverk",
+        "inviteRole": "Bjóddu {{role}}"
     },
     "invalidLanguageSelected": "Ógilt tungumál valið",
     "contacts": {
         "dialog": {
             "title": "Veldu tengilið",
-            "SearchByName": "Leitaðu með nafni"
+            "SearchByName": "Leitaðu með nafni",
+            "CreateAccount": "+ Nýr tengiliður",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create fannst ekki"
         },
         "select": {
             "title": "Veldu tengilið af {{displayName}}"

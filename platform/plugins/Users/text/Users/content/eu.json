@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Hautatu etiketa.",
-        "inviteUser": "Gonbidatu erabiltzailea"
+        "inviteUser": "Gonbidatu erabiltzailea",
+        "selectRole": "Hautatu Rola",
+        "inviteRole": "Gonbidatu {{role}}"
     },
     "invalidLanguageSelected": "Hizkuntza baliogabea hautatu da",
     "contacts": {
         "dialog": {
             "title": "Aukeratu kontaktua",
-            "SearchByName": "Bilatu izenaren arabera"
+            "SearchByName": "Bilatu izenaren arabera",
+            "CreateAccount": "+ Kontaktu berria",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ez da aurkitu"
         },
         "select": {
             "title": "{{displayName}} zerbitzuko kontaktu aukeratu"

@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "لطفا برچسب را انتخاب کنید",
-        "inviteUser": "دعوت کاربر"
+        "inviteUser": "دعوت کاربر",
+        "selectRole": "نقش را انتخاب کنید",
+        "inviteRole": "دعوت {999}"
     },
     "invalidLanguageSelected": "زبان نامعتبر انتخاب شده است",
     "contacts": {
         "dialog": {
             "title": "تماس را انتخاب کنید",
-            "SearchByName": "جستجو براساس نام"
+            "SearchByName": "جستجو براساس نام",
+            "CreateAccount": "+ تماس جدید",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create یافت نشد"
         },
         "select": {
             "title": "تماس با {{displayName}} را انتخاب کنید"

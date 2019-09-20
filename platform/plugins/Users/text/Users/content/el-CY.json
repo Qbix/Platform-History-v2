@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Επιλέξτε ετικέτα.",
-        "inviteUser": "Πρόσκληση χρήστη"
+        "inviteUser": "Πρόσκληση χρήστη",
+        "selectRole": "Επιλέξτε Ρόλος",
+        "inviteRole": "Πρόσκληση {{role}}"
     },
     "invalidLanguageSelected": "Επιλέχθηκε μη έγκυρη γλώσσα",
     "contacts": {
         "dialog": {
             "title": "Επιλέξτε επαφή",
-            "SearchByName": "Αναζήτηση βάσει ονόματος"
+            "SearchByName": "Αναζήτηση βάσει ονόματος",
+            "CreateAccount": "+ Νέα επαφή",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create δεν βρέθηκε"
         },
         "select": {
             "title": "Επιλέξτε επαφή του {{displayName}}"

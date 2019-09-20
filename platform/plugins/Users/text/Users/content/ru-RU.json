@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Пожалуйста, выберите ярлык.",
-        "inviteUser": "Пригласить пользователя"
+        "inviteUser": "Пригласить пользователя",
+        "selectRole": "Выберите роль",
+        "inviteRole": "Пригласить {{role}}"
     },
     "invalidLanguageSelected": "Выбран неверный язык",
     "contacts": {
         "dialog": {
             "title": "Выберите контакт",
-            "SearchByName": "Поиск по имени"
+            "SearchByName": "Поиск по имени",
+            "CreateAccount": "+ Новый контакт",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.создать не найдено"
         },
         "select": {
             "title": "Выберите контакт из {{displayName}}"

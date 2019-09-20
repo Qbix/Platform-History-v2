@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "ದಯವಿಟ್ಟು ಲೇಬಲ್ ಆಯ್ಕೆಮಾಡಿ.",
-        "inviteUser": "ಬಳಕೆದಾರರನ್ನು ಆಹ್ವಾನಿಸಿ"
+        "inviteUser": "ಬಳಕೆದಾರರನ್ನು ಆಹ್ವಾನಿಸಿ",
+        "selectRole": "ಪಾತ್ರವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+        "inviteRole": "ಆಹ್ವಾನಿಸಿ {{role}}"
     },
     "invalidLanguageSelected": "ಅಮಾನ್ಯವಾದ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ",
     "contacts": {
         "dialog": {
             "title": "ಸಂಪರ್ಕವನ್ನು ಆರಿಸಿ",
-            "SearchByName": "ಹೆಸರಿನಿಂದ ಹುಡುಕಿ"
+            "SearchByName": "ಹೆಸರಿನಿಂದ ಹುಡುಕಿ",
+            "CreateAccount": "+ ಹೊಸ ಸಂಪರ್ಕ",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ಕಂಡುಬಂದಿಲ್ಲ"
         },
         "select": {
             "title": "Contact {999} contact ನ ಸಂಪರ್ಕವನ್ನು ಆರಿಸಿ"

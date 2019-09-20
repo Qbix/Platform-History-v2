@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Bitte Label auswählen.",
-        "inviteUser": "Benutzer einladen"
+        "inviteUser": "Benutzer einladen",
+        "selectRole": "Wählen Sie Rolle",
+        "inviteRole": "{{role}} einladen"
     },
     "invalidLanguageSelected": "Ungültige Sprache ausgewählt",
     "contacts": {
         "dialog": {
             "title": "Kontakt auswählen",
-            "SearchByName": "Suche mit Name"
+            "SearchByName": "Suche mit Name",
+            "CreateAccount": "+ Neuer Kontakt",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nicht gefunden"
         },
         "select": {
             "title": "Kontakt auswählen von {{displayName}}"

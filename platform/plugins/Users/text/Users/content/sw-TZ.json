@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Tafadhali chagua lebo.",
-        "inviteUser": "Paribisha Mtumiaji"
+        "inviteUser": "Paribisha Mtumiaji",
+        "selectRole": "Chagua Jukumu",
+        "inviteRole": "Alika {{role}}"
     },
     "invalidLanguageSelected": "Lugha batili iliyochaguliwa",
     "contacts": {
         "dialog": {
             "title": "Chagua wasiliana",
-            "SearchByName": "Tafuta kwa jina"
+            "SearchByName": "Tafuta kwa jina",
+            "CreateAccount": "+ Mawasiliano Mpya",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create haipatikani"
         },
         "select": {
             "title": "Chagua wasiliana na {{displayName}}"

@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Odaberite oznaku.",
-        "inviteUser": "Pozovi korisnika"
+        "inviteUser": "Pozovi korisnika",
+        "selectRole": "Odaberite Ulogu",
+        "inviteRole": "Pozovite {{role}}"
     },
     "invalidLanguageSelected": "Odabran je nevažeći jezik",
     "contacts": {
         "dialog": {
             "title": "Odaberite kontakt",
-            "SearchByName": "Traži po imenu"
+            "SearchByName": "Traži po imenu",
+            "CreateAccount": "+ Novi kontakt",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nije pronađen"
         },
         "select": {
             "title": "Odaberite kontakt osobe {{displayName}}"

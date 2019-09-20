@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "దయచేసి లేబుల్ ఎంచుకోండి.",
-        "inviteUser": "యూజర్ని ఆహ్వానించండి"
+        "inviteUser": "యూజర్ని ఆహ్వానించండి",
+        "selectRole": "పాత్రను ఎంచుకోండి",
+        "inviteRole": "{{999} invite ఆహ్వానించండి"
     },
     "invalidLanguageSelected": "చెల్లని భాష ఎంచుకోబడింది",
     "contacts": {
         "dialog": {
             "title": "పరిచయాన్ని ఎంచుకోండి",
-            "SearchByName": "పేరు ద్వారా శోధించండి"
+            "SearchByName": "పేరు ద్వారా శోధించండి",
+            "CreateAccount": "+ క్రొత్త పరిచయం",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create కనుగొనబడలేదు"
         },
         "select": {
             "title": "Contact {999} contact యొక్క పరిచయాన్ని ఎంచుకోండి"

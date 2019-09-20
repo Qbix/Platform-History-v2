@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Виберіть позначку.",
-        "inviteUser": "Запросити користувача"
+        "inviteUser": "Запросити користувача",
+        "selectRole": "Виберіть роль",
+        "inviteRole": "Запросити {{role}}"
     },
     "invalidLanguageSelected": "Вибрано недійсну мову",
     "contacts": {
         "dialog": {
             "title": "Виберіть контакт",
-            "SearchByName": "Пошук по імені"
+            "SearchByName": "Пошук по імені",
+            "CreateAccount": "+ Новий контакт",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create не знайдено"
         },
         "select": {
             "title": "Виберіть контакт користувача {{displayName}}"

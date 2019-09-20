@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Dewiswch y label.",
-        "inviteUser": "Gwahodd y Defnyddiwr"
+        "inviteUser": "Gwahodd y Defnyddiwr",
+        "selectRole": "Dewiswch Rôl",
+        "inviteRole": "Gwahodd {{role}}"
     },
     "invalidLanguageSelected": "Dewis iaith annilys",
     "contacts": {
         "dialog": {
             "title": "Dewiswch gyswllt",
-            "SearchByName": "Chwilio yn ôl enw"
+            "SearchByName": "Chwilio yn ôl enw",
+            "CreateAccount": "+ Cyswllt Newydd",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create heb ei ddarganfod"
         },
         "select": {
             "title": "Dewiswch gyswllt o {{displayName}}"

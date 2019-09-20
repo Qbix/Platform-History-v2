@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Моля, изберете етикет.",
-        "inviteUser": "Поканете потребител"
+        "inviteUser": "Поканете потребител",
+        "selectRole": "Изберете Роля",
+        "inviteRole": "Поканете {{role}}"
     },
     "invalidLanguageSelected": "Избран е невалиден език",
     "contacts": {
         "dialog": {
             "title": "Изберете контакт",
-            "SearchByName": "Търсене по име"
+            "SearchByName": "Търсене по име",
+            "CreateAccount": "+ Нов контакт",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create не е намерен"
         },
         "select": {
             "title": "Изберете контакт на {{displayName}}"

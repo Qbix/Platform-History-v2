@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Pasirinkite etiketę.",
-        "inviteUser": "Pakviesti vartotoją"
+        "inviteUser": "Pakviesti vartotoją",
+        "selectRole": "Pasirinkite Vaidmuo",
+        "inviteRole": "Pakvieskite {{role}}"
     },
     "invalidLanguageSelected": "Pasirinkta netinkama kalba",
     "contacts": {
         "dialog": {
             "title": "Pasirinkite kontaktą",
-            "SearchByName": "Paieška pagal pavadinimą"
+            "SearchByName": "Paieška pagal pavadinimą",
+            "CreateAccount": "+ Naujas kontaktas",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nerastas"
         },
         "select": {
             "title": "Pasirinkite {{displayName}} kontaktą"

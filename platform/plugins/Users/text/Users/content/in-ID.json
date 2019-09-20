@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Silakan pilih label.",
-        "inviteUser": "Undang Pengguna"
+        "inviteUser": "Undang Pengguna",
+        "selectRole": "Pilih Peran",
+        "inviteRole": "Undang {{role}}"
     },
     "invalidLanguageSelected": "Bahasa yang dipilih tidak valid",
     "contacts": {
         "dialog": {
             "title": "Pilih kontak",
-            "SearchByName": "Cari berdasarkan nama"
+            "SearchByName": "Cari berdasarkan nama",
+            "CreateAccount": "+ Kontak Baru",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create tidak ditemukan"
         },
         "select": {
             "title": "Pilih kontak dari {{displayName}}"

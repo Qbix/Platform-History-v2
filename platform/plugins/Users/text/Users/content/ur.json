@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "براہ کرم لیبل منتخب کریں.",
-        "inviteUser": "صارف کو مدعو کریں"
+        "inviteUser": "صارف کو مدعو کریں",
+        "selectRole": "کردار منتخب کریں۔",
+        "inviteRole": "مدعو کریں {{role}}"
     },
     "invalidLanguageSelected": "غلط زبان منتخب",
     "contacts": {
         "dialog": {
             "title": "رابطہ منتخب کریں",
-            "SearchByName": "نام سے تلاش کریں۔"
+            "SearchByName": "نام سے تلاش کریں۔",
+            "CreateAccount": "+ نیا رابطہ",
+            "CreateAccountNotFound": "Q.User.Cordova.UI.create نہیں ملا۔"
         },
         "select": {
             "title": "{{displayName}} کا رابطہ منتخب کریں"

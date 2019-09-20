@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Selecteer een label.",
-        "inviteUser": "Gebruiker uitnodigen"
+        "inviteUser": "Gebruiker uitnodigen",
+        "selectRole": "Selecteer rol",
+        "inviteRole": "Uitnodigen {{role}}"
     },
     "invalidLanguageSelected": "Ongeldige taal geselecteerd",
     "contacts": {
         "dialog": {
             "title": "Kies contact",
-            "SearchByName": "Zoek op naam"
+            "SearchByName": "Zoek op naam",
+            "CreateAccount": "+ Nieuw contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create niet gevonden"
         },
         "select": {
             "title": "Selecteer contact van {{displayName}}"

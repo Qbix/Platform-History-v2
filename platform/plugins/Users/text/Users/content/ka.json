@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "აირჩიეთ ლეიბლი.",
-        "inviteUser": "მოიწვიეთ მომხმარებელი"
+        "inviteUser": "მოიწვიეთ მომხმარებელი",
+        "selectRole": "აირჩიეთ როლი",
+        "inviteRole": "მოიწვიე {999}"
     },
     "invalidLanguageSelected": "არჩეული არასწორი ენა",
     "contacts": {
         "dialog": {
             "title": "კონტაქტის არჩევა",
-            "SearchByName": "ძებნა სახელით"
+            "SearchByName": "ძებნა სახელით",
+            "CreateAccount": "+ ახალი კონტაქტი",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI. შექმნა ვერ მოიძებნა"
         },
         "select": {
             "title": "აირჩიეთ {{displayName}}"

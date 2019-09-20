@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Mangyaring piliin ang label.",
-        "inviteUser": "Anyayahan ang Gumagamit"
+        "inviteUser": "Anyayahan ang Gumagamit",
+        "selectRole": "Piliin ang Papel",
+        "inviteRole": "Imbitahan ang {{role}}"
     },
     "invalidLanguageSelected": "Napili ang di-wastong wika",
     "contacts": {
         "dialog": {
             "title": "Pumili ng contact",
-            "SearchByName": "Paghahanap ayon sa pangalan"
+            "SearchByName": "Paghahanap ayon sa pangalan",
+            "CreateAccount": "+ Bagong Makipag-ugnay",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create hindi nahanap"
         },
         "select": {
             "title": "Piliin ang contact ng {{displayName}}"

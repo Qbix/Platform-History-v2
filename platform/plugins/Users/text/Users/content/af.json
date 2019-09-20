@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Kies asseblief die etiket.",
-        "inviteUser": "Nooi gebruiker"
+        "inviteUser": "Nooi gebruiker",
+        "selectRole": "Kies rol",
+        "inviteRole": "Nooi {{role}} uit"
     },
     "invalidLanguageSelected": "Ongeldige taal gekies",
     "contacts": {
         "dialog": {
             "title": "Kies kontak",
-            "SearchByName": "Soek op naam"
+            "SearchByName": "Soek op naam",
+            "CreateAccount": "+ Nuwe kontak",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nie gevind nie"
         },
         "select": {
             "title": "Kies kontak van {{displayName}}"

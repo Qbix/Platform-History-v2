@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Valitse etiketti.",
-        "inviteUser": "Kutsu käyttäjä"
+        "inviteUser": "Kutsu käyttäjä",
+        "selectRole": "Valitse Rooli",
+        "inviteRole": "Kutsu {{role}}"
     },
     "invalidLanguageSelected": "Valittu kieli on virheellinen",
     "contacts": {
         "dialog": {
             "title": "Valitse yhteystieto",
-            "SearchByName": "Etsi nimen mukaan"
+            "SearchByName": "Etsi nimen mukaan",
+            "CreateAccount": "+ Uusi yhteyshenkilö",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.coreate ei löytynyt"
         },
         "select": {
             "title": "Valitse yhteystieto {{displayName}}"

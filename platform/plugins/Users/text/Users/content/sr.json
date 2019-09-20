@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Изаберите ознаку.",
-        "inviteUser": "Позови корисника"
+        "inviteUser": "Позови корисника",
+        "selectRole": "Изаберите Улога",
+        "inviteRole": "Позовите {{role}}"
     },
     "invalidLanguageSelected": "Изабран је неважећи језик",
     "contacts": {
         "dialog": {
             "title": "Изаберите контакт",
-            "SearchByName": "Тражи по имену"
+            "SearchByName": "Тражи по имену",
+            "CreateAccount": "+ Нови контакт",
+            "CreateAccountNotFound": "К.Усерс.Цордова.УИ.цреате није пронађен"
         },
         "select": {
             "title": "Изаберите контакт корисника {{displayName}}"

@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Ju lutemi zgjidhni etiketën.",
-        "inviteUser": "Fto Përdoruesin"
+        "inviteUser": "Fto Përdoruesin",
+        "selectRole": "Zgjidhni rolin",
+        "inviteRole": "Ftoni {999}"
     },
     "invalidLanguageSelected": "Gjuhë e pavlefshme e zgjedhur",
     "contacts": {
         "dialog": {
             "title": "Zgjidhni kontaktin",
-            "SearchByName": "Kërkoni sipas emrit"
+            "SearchByName": "Kërkoni sipas emrit",
+            "CreateAccount": "+ Kontakt i ri",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.krijoni nuk u gjet"
         },
         "select": {
             "title": "Përzgjidh kontaktin e {{displayName}}"

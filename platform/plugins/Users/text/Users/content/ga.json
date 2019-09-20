@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Roghnaigh lipéad le do thoil.",
-        "inviteUser": "Tabhair cuireadh don Úsáideoir"
+        "inviteUser": "Tabhair cuireadh don Úsáideoir",
+        "selectRole": "Roghnaigh Ról",
+        "inviteRole": "Tabhair cuireadh do {{role}}"
     },
     "invalidLanguageSelected": "Teanga neamhbhailí roghnaithe",
     "contacts": {
         "dialog": {
             "title": "Roghnaigh teagmháil",
-            "SearchByName": "Cuardaigh de réir ainm"
+            "SearchByName": "Cuardaigh de réir ainm",
+            "CreateAccount": "+ Teagmháil Nua",
+            "CreateAccountNotFound": "Ní aimsíodh Q.Users.Cordova.UI.cre"
         },
         "select": {
             "title": "Roghnaigh teagmháil le {{displayName}}"

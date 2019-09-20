@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Vui lòng chọn nhãn.",
-        "inviteUser": "Mời người dùng"
+        "inviteUser": "Mời người dùng",
+        "selectRole": "Chọn vai trò",
+        "inviteRole": "Mời {{role}}"
     },
     "invalidLanguageSelected": "Đã chọn ngôn ngữ không hợp lệ",
     "contacts": {
         "dialog": {
             "title": "Chọn liên hệ",
-            "SearchByName": "Tìm kiếm theo tên"
+            "SearchByName": "Tìm kiếm theo tên",
+            "CreateAccount": "+ Liên hệ mới",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create không tìm thấy"
         },
         "select": {
             "title": "Chọn liên hệ của {{displayName}}"

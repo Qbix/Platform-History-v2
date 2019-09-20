@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "请选择标签。",
-        "inviteUser": "邀请用户"
+        "inviteUser": "邀请用户",
+        "selectRole": "选择角色",
+        "inviteRole": "邀请{{role}}"
     },
     "invalidLanguageSelected": "选择的语言无效",
     "contacts": {
         "dialog": {
             "title": "选择联系人",
-            "SearchByName": "按名称搜索"
+            "SearchByName": "按名称搜索",
+            "CreateAccount": "+新联络人",
+            "CreateAccountNotFound": "找不到Q.Users.Cordova.UI.create"
         },
         "select": {
             "title": "选择{{displayName}}的联系人"

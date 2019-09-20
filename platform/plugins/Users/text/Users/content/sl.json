@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Izberite oznako.",
-        "inviteUser": "Povabi uporabnika"
+        "inviteUser": "Povabi uporabnika",
+        "selectRole": "Izberite Vloga",
+        "inviteRole": "Povabi {{role}}"
     },
     "invalidLanguageSelected": "Izbran je bil neveljaven jezik",
     "contacts": {
         "dialog": {
             "title": "Izberite stik",
-            "SearchByName": "Iščite po imenu"
+            "SearchByName": "Iščite po imenu",
+            "CreateAccount": "+ Nov stik",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ni mogoče najti"
         },
         "select": {
             "title": "Izberite stik osebe {{displayName}}"

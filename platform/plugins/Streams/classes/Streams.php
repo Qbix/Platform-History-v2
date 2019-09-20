@@ -2415,7 +2415,7 @@ abstract class Streams extends Base_Streams
 	 *  This should be a positive number - the direction of the shift is determined automatically.
 	 *  Or, set to 0 to prevent moving the other weights.
 	 * @param {array} $options=array()
-	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just unrelates the stream from the category
+	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just updates the relation
 	 * @param {string|array} [$options.extra] Any info to save in the "extra" field.
 	 * @return {array|boolean}
 	 *  Returns false if the operation was canceled by a hook

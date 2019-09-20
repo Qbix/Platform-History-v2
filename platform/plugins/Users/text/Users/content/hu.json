@@ -40,13 +40,17 @@
     },
     "usersContacts": {
         "selectLabel": "Kérjük, válassza ki a címkét.",
-        "inviteUser": "Felhasználó meghívása"
+        "inviteUser": "Felhasználó meghívása",
+        "selectRole": "Válassza a Szerep lehetőséget",
+        "inviteRole": "Meghívó: {{role}}"
     },
     "invalidLanguageSelected": "Érvénytelen nyelv van kiválasztva",
     "contacts": {
         "dialog": {
             "title": "Válassza ki a kapcsolatot",
-            "SearchByName": "Keresés név szerint"
+            "SearchByName": "Keresés név szerint",
+            "CreateAccount": "+ Új kapcsolattartó",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nem található"
         },
         "select": {
             "title": "Kapcsolat kiválasztása a {{displayName}}"
