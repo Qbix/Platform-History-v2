@@ -37,7 +37,7 @@
  *   @param {Q.Event} [options.onError] Event for when an error occurs, and the error is passed
  *   @param {Q.Event} [options.onClose] Event for when chat stream closed
  *   @param {Q.Event} [options.onMessageRender] Event for when message rendered
- *   @param {Q.Event} [options.onBeforePost] Execute before message post (before calling Q.Message.post). Pass fields as argument.
+ *   @param {Q.Event} [options.beforePost] Execute before message post (before calling Q.Message.post). Pass fields as argument.
  */
 Q.Tool.define('Streams/chat', function(options) {		
 	var tool = this;
@@ -156,7 +156,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		this.remove();
 	}),
 	onMessageRender: new Q.Event(),
-	onBeforePost: new Q.Event(),
+	beforePost: new Q.Event(),
 	templates: {
 		main: {
 			dir: '{{Streams}}/views',
@@ -842,7 +842,7 @@ Q.Tool.define('Streams/chat', function(options) {
 					'content'	  : content
 				};
 
-				Q.handle(state.onBeforePost, tool, [fields]);
+				Q.handle(state.beforePost, tool, [fields]);
 
 				Q.Streams.Message.post(fields, function(err, args) {
 					blocked = false;

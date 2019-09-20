@@ -19,7 +19,7 @@
 		}, 500));
 
 		// on before message post
-		tool.chatTool.state.onBeforePost.set(function (fields) {
+		tool.chatTool.state.beforePost.set(function (fields) {
 			var $preview = tool.getActivePreview();
 			if (!$preview) {
 				return;
