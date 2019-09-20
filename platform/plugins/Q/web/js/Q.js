@@ -483,46 +483,43 @@ Sp.splitId = function(lengths, delimiter) {
  * on the number of files in a directory.
  * Consider using Amazon S3 or another service for uploading files in production.
  * @method matchTypes
- * @param {string|array} types type or types to detect. Can be "url", "email", "phone", "twitter"
- * if omitted, all types processed
-  * @return {object}
+ * @param {String|Array} [types] type or types to detect. Can be "url", "email", "phone", "twitter".
+ *  If omitted, all types are processed.
+ * @return {object}
  */
 Sp.matchTypes = function (types) {
 	var string = this;
-
 	if (typeof types === 'string') {
 		types = [types];
 	}
-
-	if (!Array.isArray(types)) {
-		types = ["url", "email", "phone", "twitter"];
+	if (!Q.isArrayLike(types)) {
+		types = Object.keys(Sp.matchTypes.adapters);
 	}
-
 	var res = {};
-	types.forEach(function(type) {
-		if (type === 'url') {
-			res.url = string.match(/(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+/gi);
-			res.url = Array.isArray(res.url) ? res.url : [];
-		}
-		if (type === 'email') {
-			res.email = string.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
-			res.email = Array.isArray(res.email) ? res.email : [];
-		}
-		if (type === 'phone') {
-			res.phone = string.match(/\+[0-9]{1,2}?(-|\s|\.)?[0-9]{3,5}(-|\s|\.)?([0-9]{3,5}(-|\s|\.)?)?([0-9]{4,5})/gi);
-			res.phone = Array.isArray(res.phone) ? res.phone : [];
-		}
-		if (type === 'twitter') {
-			res.twitter = string.match(/\+[0-9]{1,2}?(-|\s|\.)?[0-9]{3,5}(-|\s|\.)?([0-9]{3,5}(-|\s|\.)?)?([0-9]{4,5})/gi);
-			res.twitter = Array.isArray(res.twitter) ? res.twitter : [];
+	Q.each(types, function (type) {
+		if (Sp.matchTypes.adapters[type]) {
+			res[type] = Sp.matchTypes.adapters[type].call(this);
 		}
 	});
-
 	if (types.length === 1) {
 		return res[Object.keys(res)[0]];
 	}
-
 	return res;
+};
+
+Sp.matchTypes.adapters = {
+	url: function () {
+		return this.match(/(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+/gi);
+	},
+	email: function () {
+		return this.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+	},
+	phone: function () {
+		return this.match(/\+[0-9]{1,2}?(-|\s|\.)?[0-9]{3,5}(-|\s|\.)?([0-9]{3,5}(-|\s|\.)?)?([0-9]{4,5})/gi);
+	},
+	twitter: function () {
+		return this.match(/\+[0-9]{1,2}?(-|\s|\.)?[0-9]{3,5}(-|\s|\.)?([0-9]{3,5}(-|\s|\.)?)?([0-9]{4,5})/gi);
+	}
 };
 
 /**
