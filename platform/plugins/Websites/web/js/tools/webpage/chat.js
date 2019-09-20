@@ -66,13 +66,15 @@
 						websitesPreview[url] = null;
 					});
 
-					Q.req('Websites/scrape', ['result'], function (err, response) {
+					Q.req('Websites/scrape', ['result', 'publisherId', 'streamName'], function (err, response) {
 						var msg = Q.firstErrorMessage(err, response && response.errors);
 						if (msg || !websitesPreview[url]) {
 							return;
 						}
 
 						var siteData = response.slots.result;
+						var publisherId = response.slots.publisherId;
+						var streamName = response.slots.streamName;
 
 						websitesPreview[url].tool("Websites/webpage/preview", {
 							title: siteData.title,
