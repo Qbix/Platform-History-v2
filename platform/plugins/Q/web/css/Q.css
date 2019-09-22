@@ -734,11 +734,12 @@ html.Q_scanning body > .Q_scanning_code {
 }
 .Q_disabled {
 	background-color: gray;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-	filter: alpha(opacity=90);
-	-moz-opacity: 0.9;
-	opacity: 0.9;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+	filter: alpha(opacity=80);
+	-moz-opacity: 0.8;
+	opacity: 0.8;
 	pointer-events: none;
+	transition: all 1s linear;
 }
 
 .Q_columns_containsExpanded {

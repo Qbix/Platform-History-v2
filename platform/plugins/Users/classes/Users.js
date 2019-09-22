@@ -190,6 +190,38 @@ Users.pushNotifications = function (userIds, notifications, callback, options, f
 	});
 };
 
+/**
+ * Get the internal app id and info
+ * @method appId
+ * @static
+ * @param {String} platform The platform or platform for the app
+ * @param {String} appId Can be either an internal or external app id
+ * @return {Object} Has keys "appId" and "appInfo"
+ */
+Users.appInfo = function (platform, appId)
+{
+	var apps = Q_Config.get(['Users', 'apps', platform], []);
+	var appInfo, id;
+	if (apps[appId]) {
+		appInfo = apps[appId];
+	} else {
+		id = null;
+		for (var k in apps) {
+			var v = apps[k];
+			if (v.appId === appId) {
+				appInfo = v;
+				id = k;
+				break;
+			}
+		}
+		appId = id;
+	}
+	return {
+		appId: appId,
+		appInfo: appInfo
+	};
+};
+
 function Users_request_handler(req, res, next) {
 	var parsed = req.body;
     if (!parsed || !parsed['Q/method']) {
@@ -368,38 +400,6 @@ Users.Socket = {
 			client && client.emit(event, data);
 		}
 		return true;
-	},
-	
-	/**
-	 * Get the internal app id and info
-	 * @method appId
-	 * @static
-	 * @param {String} platform The platform or platform for the app
-	 * @param {String} appId Can be either an internal or external app id
-	 * @return {Object} Has keys "appId" and "appInfo"
-	 */
-	appInfo: function (platform, appId)
-	{
-		var apps = Q_Config.get(['Users', 'apps', platform], []);
-		var appInfo, id;
-		if (apps[appId]) {
-			appInfo = apps[appId];
-		} else {
-			id = null;
-			for (var k in apps) {
-				var v = apps[k];
-				if (v.appId === appId) {
-					appInfo = v;
-					id = k;
-					break;
-				}
-			}
-			appId = id;
-		}
-		return {
-			appId: appId,
-			appInfo: appInfo
-		};
 	}
 };
 
