@@ -59,7 +59,7 @@ module.exports = Users_Device.Ios = Users_Device_Ios;
 Users_Device_Ios.prototype.handlePushNotification = function (notification, options, callback) {
 	var device = this;
 	var appId = this.fields.appId || Q.app.name;
-	notification.topic = Users.appInfo(this.fields.platform, appId).appId;
+	notification.topic = Users.appInfo(this.fields.platform, appId).appInfo.appId;
 	if (notification && notification.url) {
 		notification.payload = notification.payload || {};
  		notification.payload.url = notification.url;
