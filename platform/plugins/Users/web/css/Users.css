@@ -422,7 +422,7 @@ a.Users_activation_resend:active {
 .Users_labels_tool ul,
 .Users_contacts_tool ul { list-style-type: none; padding: 0; }
 .Users_labels_tool li,
-.Users_contacts_tool li { list-style-type: none; padding: 0px 10px 0px 10px; margin: 5px; border-radius: 5px; }
+.Users_contacts_tool li { list-style-type: none; padding: 0px 10px 0px 10px; margin: 0; border-radius: 5px; }
 .Users_labels_icon { width: 40px; height: 40px; }
 .Users_labels_active .Users_labels_label,
 .Users_labels_action button { margin-top: 10px; width: 100%; }
@@ -431,7 +431,6 @@ a.Users_activation_resend:active {
 	display: inline-block;
 	vertical-align: middle;
 	padding: 10px;
-	margin: 0;
 	font-weight: bold;
 }
 .Users_labels_tool .Users_labels_label,
