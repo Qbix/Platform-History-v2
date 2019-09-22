@@ -431,6 +431,7 @@ a.Users_activation_resend:active {
 	display: inline-block;
 	vertical-align: middle;
 	padding: 10px;
+	margin: 0;
 	font-weight: bold;
 }
 .Users_labels_tool .Users_labels_label,
