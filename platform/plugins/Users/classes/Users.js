@@ -200,7 +200,7 @@ Users.pushNotifications = function (userIds, notifications, callback, options, f
  */
 Users.appInfo = function (platform, appId)
 {
-	var apps = Q_Config.get(['Users', 'apps', platform], []);
+	var apps = Q.Config.get(['Users', 'apps', platform], []);
 	var appInfo, id;
 	if (apps[appId]) {
 		appInfo = apps[appId];
