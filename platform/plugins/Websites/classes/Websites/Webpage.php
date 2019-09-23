@@ -295,11 +295,11 @@ class Websites_Webpage
 	 * @param {string} [$params.smallIcon]
 	 * @param {array} [$params.headers] array with key "Content-Type"
 	 * @param {string} [$params.lang] two-letter code
-	 * @param {bool} [$skipAccess=false] Whether to skip access in Streams::create and quota checking.
+	 * @param {bool} [$skipAccess=true] Whether to skip access in Streams::create and quota checking.
 	 * @throws Exception
 	 * @return Streams_Stream
 	 */
-	static function createStream ($params, $skipAccess=false) {
+	static function createStream ($params, $skipAccess=true) {
 		$url = Q::ifset($params, 'url', null);
 		if (!Q_Valid::url($url)) {
 			throw new Exception("Invalid URL");

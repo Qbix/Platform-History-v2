@@ -496,9 +496,9 @@ Sp.matchTypes = function (types) {
 		types = Object.keys(Sp.matchTypes.adapters);
 	}
 	var res = {};
-	Q.each(types, function (type) {
+	Q.each(types, function (i, type) {
 		if (Sp.matchTypes.adapters[type]) {
-			res[type] = Sp.matchTypes.adapters[type].call(this);
+			res[type] = Sp.matchTypes.adapters[type].call(string);
 		}
 	});
 	if (types.length === 1) {
@@ -509,16 +509,16 @@ Sp.matchTypes = function (types) {
 
 Sp.matchTypes.adapters = {
 	url: function () {
-		return this.match(/(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+/gi);
+		return this.match(/(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+/gi) || [];
 	},
 	email: function () {
-		return this.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi);
+		return this.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi) || [];
 	},
 	phone: function () {
-		return this.match(/\+[0-9]{1,2}?(-|\s|\.)?[0-9]{3,5}(-|\s|\.)?([0-9]{3,5}(-|\s|\.)?)?([0-9]{4,5})/gi);
+		return this.match(/\+[0-9]{1,2}?(-|\s|\.)?[0-9]{3,5}(-|\s|\.)?([0-9]{3,5}(-|\s|\.)?)?([0-9]{4,5})/gi) || [];
 	},
 	twitter: function () {
-		return this.match(/\+[0-9]{1,2}?(-|\s|\.)?[0-9]{3,5}(-|\s|\.)?([0-9]{3,5}(-|\s|\.)?)?([0-9]{4,5})/gi);
+		return this.match(/\+[0-9]{1,2}?(-|\s|\.)?[0-9]{3,5}(-|\s|\.)?([0-9]{3,5}(-|\s|\.)?)?([0-9]{4,5})/gi) || [];
 	}
 };
 
