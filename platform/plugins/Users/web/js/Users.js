@@ -2759,9 +2759,11 @@
 				contactOptions.multiple = true;
 				var fields = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
 				navigator.contacts.find(fields, function (data) {
-					data = data.sort((a,b) => (a.displayName > b.displayName) ? 1 : ((b.displayName > a.displayName) ? -1 : 0));
+					data = data.sort((a,b) => (a.name.formatted > b.name.formatted) ? 1 : ((b.name.formatted > a.name.formatted) ? -1 : 0));
 					var contacts = {};
 					Q.each(data, function (i, obj) {
+						obj.displayName = obj.displayName || obj.name.formatted;
+
 						if (!obj.displayName) {
 							return;
 						}
