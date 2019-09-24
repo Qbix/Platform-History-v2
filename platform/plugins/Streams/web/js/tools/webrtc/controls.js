@@ -149,15 +149,18 @@
 				});
 
 				var roomStream = webRTCclass.roomStream();
-				roomStream.onMessage('Streams/chat/message').set(function () {
+
+				Q.Streams.onMessageUnseen.add(function (stream, message) {
+
+					if(stream.fields.name != roomStream.fields.name || stream.fields.publisherId != roomStream.fields.publisherId) return;
+
 					if(tool.textChat.isHidden) {
 						var msgCounterBadge = tool.newMessagesCounter.parentNode;
 						if(msgCounterBadge.classList.contains('Streams_webrtc_hidden')) msgCounterBadge.classList.remove('Streams_webrtc_hidden');
-
-						var currentMsgNum = tool.newMessagesCounter.innerHTML != '' ? parseInt(tool.newMessagesCounter.innerHTML, 10) : 0;
-						tool.newMessagesCounter.innerHTML = currentMsgNum + 1;
 					}
+
 				}, tool);
+
 			},
 
 			showIosPermissionsInstructions: function(kind) {
@@ -365,6 +368,9 @@
 				tool.usersCounter = counterBadge;
 				tool.newMessagesCounter = textChatCounterBadgeSpan;
 
+				var roomStream = webRTCclass.roomStream();
+
+				Q.Streams.Message.Total.setUpElement(textChatCounterBadgeSpan, roomStream.fields.publisherId, roomStream.fields.name, 'Streams/chat/message', tool);
 
 
 				cameraBtn.addEventListener('touchend', function () {
@@ -470,12 +476,16 @@
 							if(!this.chatDialogue.classList.contains('Streams_webrtc_hidden')){
 								this.chatDialogue.classList.add('Streams_webrtc_hidden');
 								this.isHidden = true;
+								this.static = false;
+								if(this.chatTool != null) this.chatTool.seen(false);
 							}
 						},
 						show: function () {
 							if(this.chatDialogue.classList.contains('Streams_webrtc_hidden')) {
 								this.chatDialogue.classList.remove('Streams_webrtc_hidden');
 								this.scrollToTheBottom();
+								if(this.chatTool != null) this.chatTool.seen(true);
+
 								this.isHidden = false;
 
 								tool.newMessagesCounter.innerHTML = '0';
@@ -532,6 +542,8 @@
 							{},
 							function () {
 								tool.textChat.chatTool = this;
+								tool.textChat.chatTool.seen(true);
+
 							}
 						);
 					}
@@ -552,6 +564,12 @@
 							}
 							tool.textChatBtn.parentNode.classList.add('Streams_webrtc_hover');
 							tool.textChat.scrollToTheBottom();
+							tool.textChat.isHidden = false;
+
+							if(tool.textChat.chatTool != null) tool.textChat.chatTool.seen(true);
+							var msgCounterBadge = tool.newMessagesCounter.parentNode;
+							if(!msgCounterBadge.classList.contains('Streams_webrtc_hidden')) msgCounterBadge.classList.add('Streams_webrtc_hidden');
+
 						});
 
 						tool.textChatBtn.addEventListener('mouseleave', function (e) {
@@ -564,6 +582,8 @@
 							}
 							tool.hoverTimeout.textChatPopup = setTimeout(function () {
 								tool.textChatBtn.parentNode.classList.remove('Streams_webrtc_hover');
+								tool.textChat.chatTool.seen(false);
+								tool.textChat.isHidden = true;
 							}, 300)
 						});
 
@@ -583,6 +603,8 @@
 							}
 							tool.textChatBtn.parentNode.classList.remove('Streams_webrtc_hover');
 							tool.textChat.static = false;
+							tool.textChat.chatTool.seen(false);
+							tool.textChat.isHidden = true;
 						}
 
 						window.addEventListener('click', removeStatic);
@@ -601,6 +623,8 @@
 							}
 							setTimeout(function () {
 								tool.textChatBtn.parentNode.classList.remove('Streams_webrtc_hover');
+								tool.textChat.chatTool.seen(false);
+								tool.textChat.isHidden = true;
 							}, 300)
 
 						});
