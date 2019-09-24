@@ -295,11 +295,14 @@ class Websites_Webpage
 	 * @param {string} [$params.smallIcon]
 	 * @param {array} [$params.headers] array with key "Content-Type"
 	 * @param {string} [$params.lang] two-letter code
-	 * @param {bool} [$skipAccess=true] Whether to skip access in Streams::create and quota checking.
+	 * @param {string} [quotaName='Websites/webpage/chat'] Default quota name. Can be:
+	 * 	Websites/webpage/conversation - create Websites/webpage stream for conversation about webpage
+	 * 	Websites/webpage/chat - create Websites/webpage stream from chat to cache webpage.
+	 * @param {bool} [$skipAccess=false] Whether to skip access in Streams::create and quota checking.
 	 * @throws Exception
 	 * @return Streams_Stream
 	 */
-	static function createStream ($params, $skipAccess=true) {
+	static function createStream ($params, $quotaName='Websites/webpage/chat', $skipAccess=false) {
 		$url = Q::ifset($params, 'url', null);
 		if (!Q_Valid::url($url)) {
 			throw new Exception("Invalid URL");
@@ -374,7 +377,6 @@ class Websites_Webpage
 			return $webpageStream;
 		}
 
-		$quotaName = "Websites/webpage";
 		$quota = null;
 
 		if (!$skipAccess) {
