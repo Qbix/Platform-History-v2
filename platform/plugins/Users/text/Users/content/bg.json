@@ -32,16 +32,25 @@
         "no": "Не",
         "WelcomePleaseVerifyEmail": "Добре дошли! Моля, потвърдете имейл адреса си.",
         "WelcomeVerifyEmail": "Добре дошли! Потвърдете имейл адреса си.",
-        "ForgetPass": "Хей, забравихте ли пропуска си?"
+        "ForgetPass": "Хей, забравихте ли пропуска си?",
+        "PassphraseSaved": "Вашата пропускна фраза е запазена.",
+        "IdentifierActivated": "Вашият {{type}} е активиран.",
+        "CompletedActivation": "Завършихте активирането на потребителя.",
+        "CompletedActivationLogIn": "Завършихте активирането на потребителя. Опитайте да влезете сега."
     },
     "usersContacts": {
         "selectLabel": "Моля, изберете етикет.",
-        "inviteUser": "Поканете потребител"
+        "inviteUser": "Поканете потребител",
+        "selectRole": "Изберете Роля",
+        "inviteRole": "Поканете {{role}}"
     },
     "invalidLanguageSelected": "Избран е невалиден език",
     "contacts": {
         "dialog": {
-            "title": "Изберете контакт"
+            "title": "Изберете контакт",
+            "SearchByName": "Търсене по име",
+            "CreateAccount": "+ Нов контакт",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create не е намерен"
         },
         "select": {
             "title": "Изберете контакт на {{displayName}}"

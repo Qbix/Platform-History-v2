@@ -38,9 +38,7 @@ function Streams_message_post () {
 		throw new Q_Exception("This app doesn't support directly posting messages of type '$type' for streams of type '{$stream->type}'");
 	}
 	
-	if (Streams_Stream::getConfigField(
-		$stream->type, "messages", "$type", 'autosubscribe', false
-	)) {
+	if (Streams_Stream::getConfigField($stream->type, "messages", "$type", 'autosubscribe', false)) {
 		$stream->subscribe();
 	}
 

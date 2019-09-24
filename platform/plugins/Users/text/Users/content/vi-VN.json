@@ -32,16 +32,25 @@
         "no": "Không",
         "WelcomePleaseVerifyEmail": "Chào mừng bạn Vui lòng xác nhận địa chỉ email.",
         "WelcomeVerifyEmail": "Chào mừng bạn Xác nhận địa chỉ email của bạn.",
-        "ForgetPass": "Này, bạn đã quên mật khẩu của bạn?"
+        "ForgetPass": "Này, bạn đã quên mật khẩu của bạn?",
+        "PassphraseSaved": "Cụm từ vượt qua của bạn đã được lưu.",
+        "IdentifierActivated": "{{type}} của bạn đã được kích hoạt.",
+        "CompletedActivation": "Bạn đã hoàn thành kích hoạt người dùng.",
+        "CompletedActivationLogIn": "Bạn đã hoàn thành kích hoạt người dùng. Hãy thử đăng nhập ngay bây giờ."
     },
     "usersContacts": {
         "selectLabel": "Vui lòng chọn nhãn.",
-        "inviteUser": "Mời người dùng"
+        "inviteUser": "Mời người dùng",
+        "selectRole": "Chọn vai trò",
+        "inviteRole": "Mời {{role}}"
     },
     "invalidLanguageSelected": "Đã chọn ngôn ngữ không hợp lệ",
     "contacts": {
         "dialog": {
-            "title": "Chọn liên hệ"
+            "title": "Chọn liên hệ",
+            "SearchByName": "Tìm kiếm theo tên",
+            "CreateAccount": "+ Liên hệ mới",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create không tìm thấy"
         },
         "select": {
             "title": "Chọn liên hệ của {{displayName}}"

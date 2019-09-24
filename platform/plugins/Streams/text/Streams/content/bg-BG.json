@@ -69,7 +69,8 @@
             "byTwitter": "кикотене",
             "QRscanned": "Те го сканираха!",
             "chooseAgainFromContacts": "Изберете Отново от Контакти",
-            "inviteSelectedContacts": "Покана за избрани контакти"
+            "inviteSelectedContacts": "Покана за избрани контакти",
+            "scannedQR": "{{ClickOrTap}} ако кодът е сканиран"
         },
         "email": {
             "subject": "Хей, провери това",

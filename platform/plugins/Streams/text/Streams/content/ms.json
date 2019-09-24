@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "Mereka mengimbasnya!",
             "chooseAgainFromContacts": "Pilih Lagi dari Kenalan",
-            "inviteSelectedContacts": "Undang Kenalan Terpilih"
+            "inviteSelectedContacts": "Undang Kenalan Terpilih",
+            "scannedQR": "{{ClickOrTap}} jika kod tersebut diimbas"
         },
         "email": {
             "subject": "Hei, periksa ini",

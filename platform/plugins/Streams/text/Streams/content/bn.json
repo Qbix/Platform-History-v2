@@ -69,7 +69,8 @@
             "byTwitter": "টুইটার",
             "QRscanned": "তারা এটা স্ক্যান!",
             "chooseAgainFromContacts": "পরিচিতি থেকে আবার চয়ন করুন",
-            "inviteSelectedContacts": "নির্বাচিত পরিচিতি আমন্ত্রণ জানান"
+            "inviteSelectedContacts": "নির্বাচিত পরিচিতি আমন্ত্রণ জানান",
+            "scannedQR": "কোডটি স্ক্যান করা থাকলে {9 999}।"
         },
         "email": {
             "subject": "আরে, এই চেক আউট",

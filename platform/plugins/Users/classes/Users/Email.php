@@ -38,7 +38,7 @@ class Users_Email extends Base_Users_Email
 	 * @param {array} [$options.name] A human-readable name in addition to the address to send to.
 	 * @param {array} [$options.from] An array of (emailAddress, humanReadableName)
 	 * @param {array} [$options.delay] A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
-	 * @param {string} [$options.language] Preferred language
+	 * @param {string} [$options.language] Preferred language to be used for the view
 	 * @throws Q_Exception_WrongType
 	 * @return {bool} True if success or throw exception
 	 */
@@ -236,7 +236,7 @@ class Users_Email extends Base_Users_Email
 			}
 		}
 		$minutes = Q_Config::get('Users', 'activation', 'expires', 60*24*7);
-		$this->activationCode = strtolower(Q_Utils::unique(7));
+		$this->activationCode = strtolower(Q_Utils::randomString(7));
 		$this->activationCodeExpires = new Db_Expression(
 			"CURRENT_TIMESTAMP + INTERVAL $minutes MINUTE"
 		);

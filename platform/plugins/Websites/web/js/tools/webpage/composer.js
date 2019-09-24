@@ -124,7 +124,13 @@
 
 						$te.removeClass('Websites_webpage_loading');
 
-						Q.Template.render('Websites/webpage/composer/preview', {
+						if (state.siteData.alreadyExist) {
+							$message.hide();
+							$message.closest(".Q_autogrow_container").hide();
+							$startButton.html(tool.text.webpage.composer.GotoConversation);
+						}
+
+						tool.$(".Websites_webpage_composer").tool("Websites/webpage/preview", {
 							title: state.siteData.title,
 							description: state.siteData.description,
 							keywords: state.siteData.keywords || '',
@@ -133,17 +139,8 @@
 								icon: state.siteData.smallIcon,
 							},
 							src: state.siteData.bigIcon,
-							url: state.siteData.url,
-							text: tool.text.webpage
-						}, function (err, html) {
-							if (state.siteData.alreadyExist) {
-								$message.hide();
-								$message.closest(".Q_autogrow_container").hide();
-								$startButton.html(tool.text.webpage.composer.GotoConversation);
-							}
-
-							tool.$(".Websites_webpage_composer").html(html);
-						});
+							url: state.siteData.url
+						}, Date.now()).activate();
 
 						$startButton.removeClass('Q_disabled');
 
@@ -169,7 +166,7 @@
 	});
 
 	Q.Template.set('Websites/webpage/composer',
-		'<div class="Websites_webpage_composer Websites_webpage_preview_tool" data-type="document">' +
+		'<div class="Websites_webpage_composer">' +
 		'	<div class="Websites_webpage_composer_input">' +
 		'		<input name="url" autocomplete="off" placeholder="{{text.composer.PasteLinkHere}}">' +
 		'		<a><span>{{text.composer.BrowseTheWeb}}</span></a>' +
@@ -178,17 +175,5 @@
 		'</div>' +
 		'<textarea name="message" class="Q_disabled" placeholder="{{text.composer.WriteToStartConversation}}"></textarea>' +
 		'<button name="startConversation" class="Q_button Q_disabled">{{text.composer.StartConversation}}</button>'
-	);
-
-	Q.Template.set('Websites/webpage/composer/preview',
-		'<img alt="icon" class="Streams_preview_icon" src="{{& src}}">' +
-		'<div class="Streams_preview_contents">' +
-		'	<h3 class="Streams_preview_title Streams_preview_view">{{& title}}</h3>' +
-		//'	<div class="Streams_aspect_url">{{& url}}</div>' +
-		//'	<div class="Streams_aspect_description">{{& description}}</div>' +
-		'	<div class="Streams_aspect_interests"><img src="{{& interest.icon}}"><a href="{{& url}}" target="_blank">{{& interest.title}}</a></div>' +
-		'	<div class="streams_chat_participants"></div>' +
-		'	<div class="streams_chat_unseen"></div>' +
-		'</div>'
 	);
 })(Q, Q.$, window);

@@ -32,16 +32,25 @@
         "no": "Οχι",
         "WelcomePleaseVerifyEmail": "Καλως ΗΡΘΑΤΕ! Επαληθεύστε τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας.",
         "WelcomeVerifyEmail": "Καλως ΗΡΘΑΤΕ! Επιβεβαιώστε τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας.",
-        "ForgetPass": "Γεια σου, ξεχάσατε τη φράση πρόσβασης;"
+        "ForgetPass": "Γεια σου, ξεχάσατε τη φράση πρόσβασης;",
+        "PassphraseSaved": "Η φράση που χρησιμοποιείτε έχει αποθηκευτεί.",
+        "IdentifierActivated": "Το {{type}} σας έχει ενεργοποιηθεί.",
+        "CompletedActivation": "Έχετε ολοκληρώσει την ενεργοποίηση του χρήστη.",
+        "CompletedActivationLogIn": "Έχετε ολοκληρώσει την ενεργοποίηση του χρήστη. Δοκιμάστε να συνδεθείτε τώρα."
     },
     "usersContacts": {
         "selectLabel": "Επιλέξτε ετικέτα.",
-        "inviteUser": "Πρόσκληση χρήστη"
+        "inviteUser": "Πρόσκληση χρήστη",
+        "selectRole": "Επιλέξτε Ρόλος",
+        "inviteRole": "Πρόσκληση {{role}}"
     },
     "invalidLanguageSelected": "Επιλέχθηκε μη έγκυρη γλώσσα",
     "contacts": {
         "dialog": {
-            "title": "Επιλέξτε επαφή"
+            "title": "Επιλέξτε επαφή",
+            "SearchByName": "Αναζήτηση βάσει ονόματος",
+            "CreateAccount": "+ Νέα επαφή",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create δεν βρέθηκε"
         },
         "select": {
             "title": "Επιλέξτε επαφή του {{displayName}}"

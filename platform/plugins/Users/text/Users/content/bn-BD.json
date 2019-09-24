@@ -32,16 +32,25 @@
         "no": "না",
         "WelcomePleaseVerifyEmail": "স্বাগত! আপনার ইমেল ঠিকানা যাচাই করুন.",
         "WelcomeVerifyEmail": "স্বাগত! আপনার ইমেল ঠিকানা যাচাই করুন.",
-        "ForgetPass": "আরে, আপনি কি আপনার পাসফ্রেজ ভুলে গেছেন?"
+        "ForgetPass": "আরে, আপনি কি আপনার পাসফ্রেজ ভুলে গেছেন?",
+        "PassphraseSaved": "আপনার পাসের বাক্যাংশটি সংরক্ষণ করা হয়েছে।",
+        "IdentifierActivated": "আপনার {{999} activ সক্রিয় করা হয়েছে।",
+        "CompletedActivation": "আপনি ব্যবহারকারীর অ্যাক্টিভেশন সম্পন্ন করেছেন।",
+        "CompletedActivationLogIn": "আপনি ব্যবহারকারীর অ্যাক্টিভেশন সম্পন্ন করেছেন। এখনই লগ ইন করার চেষ্টা করুন।"
     },
     "usersContacts": {
         "selectLabel": "লেবেল নির্বাচন করুন।",
-        "inviteUser": "ব্যবহারকারীকে আমন্ত্রণ জানান"
+        "inviteUser": "ব্যবহারকারীকে আমন্ত্রণ জানান",
+        "selectRole": "ভূমিকা নির্বাচন করুন",
+        "inviteRole": "আমন্ত্রণ করুন {{999}"
     },
     "invalidLanguageSelected": "অবৈধ ভাষা নির্বাচিত",
     "contacts": {
         "dialog": {
-            "title": "যোগাযোগ চয়ন করুন"
+            "title": "যোগাযোগ চয়ন করুন",
+            "SearchByName": "নাম দ্বারা অনুসন্ধান",
+            "CreateAccount": "+ নতুন যোগাযোগ",
+            "CreateAccountNotFound": "Q.User.Cordova.UI.create পাওয়া যায় নি"
         },
         "select": {
             "title": "{{displayName}} এর যোগাযোগ নির্বাচন করুন"

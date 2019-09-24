@@ -1051,6 +1051,7 @@ Streams.Dialogs = {
 	 * @param {String} publisherId id of publisher which is publishing the stream
 	 * @param {String} streamName the stream's name
 	 * @param {Function} [callback] The function to call after dialog is activated
+	 * @param {string} [options.title] Custom dialog title
 	 */
 	invite: function(publisherId, streamName, callback, options) {
 		var stream = null;
@@ -1058,110 +1059,114 @@ Streams.Dialogs = {
 		var o = Q.extend({}, Streams.Dialogs.invite.options, options);
 
 		var pipe = Q.pipe(['stream', 'text'], function () {
-			Q.Template.render(o.templateName, {
-				isCordova: Q.info.isCordova,
-				chooseFromContacts: text.chooseFromContacts,
-				photo: (o.photo)? text.photo: o.photo,
-				to: text.to.interpolate({"Stream Title": stream.fields.title}),
-				go: text.go,
-				placeholder: text.placeholder,
-				orInvite: text.orInvite,
-				QR: text.QR.interpolate({ClickOrTap: Q.getObject("Q.info.isTouchscreen") ? 'Tap' : 'Click'}),
-				email: text.byEmail,
-				text: text.byText,
-				facebook: text.byFacebook,
-				twitter: text.byTwitter,
-			}, function (err, html) {
-				if (err) {
-					return;
-				}
-				Q.Dialogs.push({
-					title: text.title,
-					content: html,
-					stylesheet: '{{Streams}}/css/Streams/invite.css',
-					className: 'Streams_invite_dialog',
-					onActivate: function (dialog) {
+			Q.Dialogs.push({
+				title: o.title || text.title,
+				template: {
+					name: o.templateName,
+					fields: {
+						isCordova: Q.info.isCordova,
+						chooseFromContacts: text.chooseFromContacts,
+						photo: (o.photo)? text.photo: o.photo,
+						to: text.to.interpolate({"Stream Title": stream.fields.title}),
+						go: text.go,
+						placeholder: text.placeholder,
+						orInvite: text.orInvite,
+						QR: text.QR.interpolate({ClickOrTap: Q.getObject("Q.info.isTouchscreen") ? 'Tap' : 'Click'}),
+						email: text.byEmail,
+						text: text.byText,
+						facebook: text.byFacebook,
+						twitter: text.byTwitter,
+					}
+				},
+				stylesheet: '{{Streams}}/css/Streams/invite.css',
+				className: 'Streams_invite_dialog',
+				onActivate: function (dialog) {
 
-						// handle "choose from contacts" button
-						$('.Streams_invite_choose_contact', dialog)
-							.on(Q.Pointer.fastclick, function () {
-								var $this = $(this);
-								var $eContacts = $(".Streams_invite_contacts", dialog);
-								$eContacts.empty();
-								$eContacts.data("contacts", null);
+					// handle "choose from contacts" button
+					$('.Streams_invite_choose_contact', dialog).on(Q.Pointer.fastclick, function () {
+						var $this = $(this);
+						var $eContacts = $(".Streams_invite_contacts", dialog);
+						$eContacts.empty();
 
-								var options = {
-									prefix: "Users",
-									data: $eContacts.data("contacts") || null
-								};
+						var options = {
+							prefix: "Users",
+							data: $eContacts.data("contacts") || null
+						};
 
-								Users.Dialogs.contacts(options, function (contacts) {
-									if (!contacts || Object.keys(contacts).length <= 0) {
-										return;
-									}
+						Users.Dialogs.contacts(options, function (contacts) {
+							$eContacts.data("contacts", contacts);
 
-									var aContacts = [];
+							if (!contacts || Object.keys(contacts).length <= 0) {
+								return;
+							}
+
+							var aContacts = [];
+							for(var i in contacts) {
+								aContacts.push(contacts[i]);
+							}
+
+							Q.Template.render("Users/templates/contacts/display", {
+								contacts: aContacts,
+								text: text
+							}, function (err, html) {
+								if (err) {
+									return;
+								}
+
+								$eContacts.html(html);
+
+								$("button.Streams_invite_submit_contact", $eContacts).on(Q.Pointer.fastclick, function () {
 									for(var i in contacts) {
-										aContacts.push(contacts[i]);
+										Q.handle(callback, Streams, [{
+											identifier: contacts[i][contacts[i].prefix]
+										}]);
 									}
+									Q.Dialogs.pop(); // close the Dialog
+								});
 
-									Q.Template.render("Users/templates/contacts/display", {
-										contacts: aContacts,
-										text: text
-									}, function (err, html) {
-										if (err) {
-											return;
-										}
+								$(".qp-communities-close", $eContacts).on(Q.Pointer.fastclick, function () {
+									var $this = $(this);
+									var id = $this.attr('data-id');
+									$this.closest("tr").remove();
+									delete contacts[id];
 
-										$eContacts.html(html);
-
-										$("button.Streams_invite_submit_contact", $eContacts).on(Q.Pointer.fastclick, function () {
-											for(var i in contacts) {
-												Q.handle(callback, Streams, [{
-													identifier: contacts[i][contacts[i].prefix]
-												}]);
-											}
-											Q.Dialogs.pop(); // close the Dialog
-										});
-
-										$(".qp-communities-close", $eContacts).on(Q.Pointer.fastclick, function () {
-											var $this = $(this);
-											var id = $this.attr('data-id');
-											$this.closest("tr").remove();
-											delete contacts[id];
-										});
-									});
 									$eContacts.data("contacts", contacts);
-									$this.text(text.chooseAgainFromContacts);
-								})
+
+									if ($.isEmptyObject(contacts)) {
+										$("button.Streams_invite_submit_contact", $eContacts).remove();
+									}
+								});
 							});
 
-						if (!Q.info.isTouchscreen) {
-							$('.Streams_invite_submit input[type=text]').focus();
-						}
-						// handle go button
-						$('.Streams_invite_submit').on('submit', function (e) {
-							Q.handle(callback, Streams, [{
-								identifier: $("input[type=text]", this).val()
-							}]);
-							Q.Dialogs.pop(); // close the Dialog
-							e.preventDefault();
-						});
+							$this.text(text.chooseAgainFromContacts).addClass("");
+						})
+					});
 
-						// handle social buttons
-						$('.Streams_invite_social_buttons button, .Streams_invite_QR', dialog)
-						.on(Q.Pointer.fastclick, function () {
-							var sendBy = $(this).data('sendby');
-							var result = {
-								token: 1,
-								identifier: null,
-								sendBy: sendBy
-							}
-							Q.Dialogs.pop(); // close the Dialog
-							Q.handle(callback, Streams, [result]);
-						});
-					},
-				});
+					if (!Q.info.isTouchscreen) {
+						$('.Streams_invite_submit input[type=text]').focus();
+					}
+					// handle go button
+					$('.Streams_invite_submit').on('submit', function (e) {
+						Q.handle(callback, Streams, [{
+							identifier: $("input[type=text]", this).val()
+						}]);
+						Q.Dialogs.pop(); // close the Dialog
+						e.preventDefault();
+					});
+
+					// handle social buttons
+					$('.Streams_invite_social_buttons button, .Streams_invite_QR', dialog)
+					.on(Q.Pointer.fastclick, function () {
+						var sendBy = $(this).data('sendby');
+						var result = {
+							token: 1,
+							identifier: null,
+							sendBy: sendBy
+						}
+						Q.Dialogs.pop(); // close the Dialog
+						Q.handle(callback, Streams, [result]);
+					});
+				},
 			});
 		});
 
@@ -1311,6 +1316,7 @@ Streams.release = function (key) {
  * @param {String} [options.callback] Also can be used to provide callbacks, which are called before the followup.
  * @param {Boolean} [options.followup="future"] Whether to set up a followup email or sms for the user to send. Set to true to always send followup, or false to never send it. Set to "future" to send followups only to users who haven't registered yet.
  * @param {String} [options.uri] If you need to hit a custom "Module/action" endpoint
+ * @param {String} [options.title] Custom dialog title.
  * @param {Function} callback Called with (err, result) .
  *   In this way you can obtain the invite token, email addresses, etc.
  *   See Streams::invite on the PHP side for the possible return values.
@@ -1458,12 +1464,12 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 					case "QR":
 						if (err) return;
 						Q.Dialogs.push({
-							htmlClass: 'Streams_invite_QR',
+							className: 'Streams_invite_QR',
 							title: Q.getObject(['invite', 'dialog', 'QRtitle'], text),
 							content: '<div class="Streams_invite_QR_content"></div>'
 								+ '<div class="Q_buttons">'
 								+ '<button class="Q_button">'
-								+ text.invite.dialog.QRscanned
+								+ text.invite.dialog.scannedQR.interpolate(Q.text.Q.words)
 								+'</button>'
 								+ '</div>',
 							onActivate: function (dialog) {
@@ -1480,39 +1486,36 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 									});
 									$('.Q_button', dialog).plugin('Q/clickable')
 									.on(Q.Pointer.click, function () {
-										Q.Dialogs.pop();
-									});
-								});
-							},
-							onClose: function () {
-								Q.Dialogs.push({
-									title: Q.getObject(['invite', 'dialog', 'photo'], text),
-									apply: true,
-									content:
-									'<div class="Streams_invite_photo_dialog">' +
-									'<p>'+ Q.getObject(['invite', 'dialog', 'photoInstruction'], text) +'</p>' +
-									'<div class="Streams_invite_photo_camera">' +
-									'<img src="' + Q.url('{{Streams}}/img/invitations/camera.svg') + '" class="Streams_invite_photo Streams_invite_photo_pulsate"></img>' +
-									'</div>' +
-									'</div>',
-									onActivate: function (dialog) {
-										// handle "photo" button
-										var photo = null;
-										var saveSizeName = {};
-										Q.each(Users.icon.sizes, function (k, v) {
-											saveSizeName[k] = v;
-										});
-										var o = {
-											path: 'Q/uploads/Users',
-											save: 'Users/icon',
-											subpath: loggedUserId.splitId() + '/invited/' + rsd.invite.token,
-											saveSizeName: saveSizeName,
-											onFinish: function () {
-												Q.Dialogs.pop();
+										Q.Dialogs.push({
+											title: Q.getObject(['invite', 'dialog', 'photo'], text),
+											apply: true,
+											content:
+											'<div class="Streams_invite_photo_dialog">' +
+											'<p>'+ Q.getObject(['invite', 'dialog', 'photoInstruction'], text) +'</p>' +
+											'<div class="Streams_invite_photo_camera">' +
+											'<img src="' + Q.url('{{Streams}}/img/invitations/camera.svg') + '" class="Streams_invite_photo Streams_invite_photo_pulsate"></img>' +
+											'</div>' +
+											'</div>',
+											onActivate: function (dialog) {
+												// handle "photo" button
+												var photo = null;
+												var saveSizeName = {};
+												Q.each(Users.icon.sizes, function (k, v) {
+													saveSizeName[k] = v;
+												});
+												var o = {
+													path: 'Q/uploads/Users',
+													save: 'Users/icon',
+													subpath: loggedUserId.splitId() + '/invited/' + rsd.invite.token,
+													saveSizeName: saveSizeName,
+													onFinish: function () {
+														Q.Dialogs.pop();
+													}
+												};
+												$('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
 											}
-										};
-										$('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
-									}
+										});
+									});
 								});
 							}
 						});
@@ -1539,6 +1542,8 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		} else {
 			_request();
 		}
+	}, {
+		title: o.title
 	});
 	return null;
 };
@@ -1991,6 +1996,8 @@ Stream.release = function _Stream_release (publisherId, streamName) {
  * If your app server script is running, then calling this manually is largely unnecessary because messages arrive via push using socket.io .
  * @static
  * @method refresh
+ * @param {string} publisherId publisher of a stream
+ * @param {string} streamName name of a stream
  * @param {Function} callback This is called when the stream has been refreshed.
  *   If the first argument is not false or null, then "this" is the stream.
  *   The arguments are different depending on the options.
@@ -2007,8 +2014,13 @@ Stream.release = function _Stream_release (publisherId, streamName) {
  */
 Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, options) {
 	var notRetained = !_retainedByStream[Streams.key(publisherId, streamName)];
+	var callbackCalled = false;
+
 	if ((notRetained && !(options && options.evenIfNotRetained))) {
-		callback && callback.call(this, false);
+		if (!callbackCalled) {
+			Q.handle(callback, this, [false]);
+			callbackCalled = true;
+		}
 		Streams.get.cache.removeEach([publisherId, streamName]);
 		return false;
 	}
@@ -2019,20 +2031,23 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 		var result = Message.wait(publisherId, streamName, -1,
 			function (ordinals) {
 				Q.Streams.get(publisherId, streamName, function (err) {
-					callback && callback.apply(this, [err, ordinals]);
+					if (!callbackCalled) {
+						Q.handle(callback, this, [err, ordinals]);
+						callbackCalled = true;
+					}
 				});
 			}, options);
-		if (result == null || result instanceof Q.Pipe) {
+		if (result === null || result instanceof Q.Pipe) {
 			// We didn't even try to wait for messages,
 			// The socket will deliver them.
-			callback && callback.call(this, null);
+			if (!callbackCalled) {
+				Q.handle(callback, this, [null]);
+				callbackCalled = true;
+			}
 		}
 		return result;
 	}
-	var nodeUrl = Q.nodeUrl({
-		publisherId: publisherId,
-		streamName: streamName
-	});
+
 	// We sent a request to get the latest messages.
 	// But we will also force-get the stream, to trigger any handlers
 	// set for the stream's onRefresh event
@@ -2050,7 +2065,11 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 			if (o.extra) {
 				params.concat(extra);
 			}
-			callback && callback.apply(this, params);
+
+			if (!callbackCalled) {
+				Q.handle(callback, this, params);
+				callbackCalled = true;
+			}
 		}
 	});
 	_retain = undefined;

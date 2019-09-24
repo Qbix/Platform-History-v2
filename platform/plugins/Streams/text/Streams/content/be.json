@@ -69,7 +69,8 @@
             "byTwitter": "шчэбет",
             "QRscanned": "Яны сканавалі яго!",
             "chooseAgainFromContacts": "Абярыце зноў з кантактаў",
-            "inviteSelectedContacts": "Запрасіце выбраныя кантакты"
+            "inviteSelectedContacts": "Запрасіце выбраныя кантакты",
+            "scannedQR": "{{ClickOrTap}}, калі код быў адсканаваны"
         },
         "email": {
             "subject": "Эй, праверыць гэта",

@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "Họ đã quét nó!",
             "chooseAgainFromContacts": "Chọn lại từ Danh bạ",
-            "inviteSelectedContacts": "Mời các địa chỉ liên lạc được chọn"
+            "inviteSelectedContacts": "Mời các địa chỉ liên lạc được chọn",
+            "scannedQR": "{{ClickOrTap}} nếu mã được quét"
         },
         "email": {
             "subject": "Này, kiểm tra cái này",

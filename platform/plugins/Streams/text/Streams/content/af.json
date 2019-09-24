@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "Hulle het dit geskandeer!",
             "chooseAgainFromContacts": "Kies weer uit kontakte",
-            "inviteSelectedContacts": "Nooi geselekteerde kontakte uit"
+            "inviteSelectedContacts": "Nooi geselekteerde kontakte uit",
+            "scannedQR": "{{ClickOrTap}} as die kode geskandeer is"
         },
         "email": {
             "subject": "Hey, check dit uit",

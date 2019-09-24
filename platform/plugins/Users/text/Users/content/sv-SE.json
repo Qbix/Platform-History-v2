@@ -32,16 +32,25 @@
         "no": "Nej",
         "WelcomePleaseVerifyEmail": "Välkommen! Vänligen verifiera din email adress.",
         "WelcomeVerifyEmail": "Välkommen! Verifiera din e-postadress.",
-        "ForgetPass": "Hej, glömde du ditt lösenord?"
+        "ForgetPass": "Hej, glömde du ditt lösenord?",
+        "PassphraseSaved": "Din lösenfras har sparats.",
+        "IdentifierActivated": "Din {{type}} har aktiverats.",
+        "CompletedActivation": "Du har slutfört användaraktivering.",
+        "CompletedActivationLogIn": "Du har slutfört användaraktivering. Prova att logga in nu."
     },
     "usersContacts": {
         "selectLabel": "Var god välj etikett.",
-        "inviteUser": "Bjud in användaren"
+        "inviteUser": "Bjud in användaren",
+        "selectRole": "Välj roll",
+        "inviteRole": "Bjud in {{role}}"
     },
     "invalidLanguageSelected": "Ogiltigt språk valt",
     "contacts": {
         "dialog": {
-            "title": "Välj kontakt"
+            "title": "Välj kontakt",
+            "SearchByName": "Sök efter namn",
+            "CreateAccount": "+ Ny kontakt",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found"
         },
         "select": {
             "title": "Välj kontakt för {{displayName}}"

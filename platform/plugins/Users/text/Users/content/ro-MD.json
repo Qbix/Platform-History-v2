@@ -32,16 +32,25 @@
         "no": "Nu",
         "WelcomePleaseVerifyEmail": "Bine ati venit! Vă rog să vă verificați adresa de email.",
         "WelcomeVerifyEmail": "Bine ati venit! Verifică-ți adresa de email.",
-        "ForgetPass": "Hei, ai uitat expresia ta de acces?"
+        "ForgetPass": "Hei, ai uitat expresia ta de acces?",
+        "PassphraseSaved": "Fraza dvs. de trecere a fost salvată.",
+        "IdentifierActivated": "{{type}} a fost activat.",
+        "CompletedActivation": "Ați finalizat activarea utilizatorului.",
+        "CompletedActivationLogIn": "Ați finalizat activarea utilizatorului. Încercați să vă autentificați acum."
     },
     "usersContacts": {
         "selectLabel": "Selectați eticheta.",
-        "inviteUser": "Invitați utilizatorul"
+        "inviteUser": "Invitați utilizatorul",
+        "selectRole": "Selectați rolul",
+        "inviteRole": "Invitați {{role}}"
     },
     "invalidLanguageSelected": "Limba nevalidă selectată",
     "contacts": {
         "dialog": {
-            "title": "Alegeți o persoană de contact"
+            "title": "Alegeți o persoană de contact",
+            "SearchByName": "Cauta dupa nume",
+            "CreateAccount": "+ Contact nou",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nu a fost găsit"
         },
         "select": {
             "title": "Selectați persoana de contact din {{displayName}}"

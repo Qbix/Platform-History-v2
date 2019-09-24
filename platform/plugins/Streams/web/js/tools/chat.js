@@ -19,6 +19,7 @@
  *   @param {Stream} [options.inputType="text"] Can be either "text" or "textarea"
  *   @param {String} [options.messagesToLoad] The number of "Streams/chat" messages to load at a time.
  *   @param {String} [options.messageMaxHeight] The maximum height, in pixels, of a rendered message
+ *   @param {Stream} [options.seen] Whether the tool should mark rendered chat messages as seen
  *   @param {String} [options.animations] Options for animations, which can include:
  *   @param {String} [options.animations.duration=300] The duration of the animation
  *   @param {Object} [options.controls={}] Controls to show next to each chat message
@@ -35,6 +36,8 @@
  *   @param {Q.Event} [options.onRefresh] Event for when an the chat has been updated
  *   @param {Q.Event} [options.onError] Event for when an error occurs, and the error is passed
  *   @param {Q.Event} [options.onClose] Event for when chat stream closed
+ *   @param {Q.Event} [options.onMessageRender] Event for when message rendered
+ *   @param {Q.Event} [options.beforePost] Execute before message post (before calling Q.Message.post). Pass fields as argument.
  */
 Q.Tool.define('Streams/chat', function(options) {		
 	var tool = this;
@@ -138,6 +141,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			activeSrc: '{{Streams}}/img/chat/vote-flag-active.png'
 		}
 	},
+	seen: true,
 	scrollToBottom: true,
 	overflowed: {
 		srcToMe: '{{Streams}}/img/chat/message-overflowed-to-me.png',
@@ -151,6 +155,8 @@ Q.Tool.define('Streams/chat', function(options) {
 		// remove tool when chat stream closed
 		this.remove();
 	}),
+	onMessageRender: new Q.Event(),
+	beforePost: new Q.Event(),
 	templates: {
 		main: {
 			dir: '{{Streams}}/views',
@@ -202,11 +208,33 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		}
 	},
-	/**causes
-	 * @method prevent
+	/**
+	 * Call this method to set whether the tool will mark rendered Streams/chat/message
+	 * messages as seen.
+	 * @method seen
+	 * @param {Boolean} value
+	 *  Pass true to enable the tool to mark rendered messages as seen.
+	 *  Pass false to pause the tool from marking rendered messages as seen.
+	 *  Or pass nothing to get the current value.
+	 * @return {Boolean} The new value
+	 */
+	seen: function (value) {
+		var state = this.state;
+		if (state.seen = value) {
+			Q.Streams.Message.Total.seen(
+				state.publisherId, 
+				state.streamName, 
+				'Streams/chat/message',
+				true
+			);
+		}
+		return state.seen;
+	},
+	/**
 	 * Disables the textarea, preventing the user from writing
 	 * a message using the provided interface. They are still able to POST
 	 * to the server, however, e.g. manually.
+	 * @method prevent
 	 * @param {String|false} message
 	 *  The text to display in the placeholder of the textarea while input is prevented.
 	 *  Pass false here to re-enable the textarea.
@@ -355,7 +383,10 @@ Q.Tool.define('Streams/chat', function(options) {
 			Q.Template.render(
 				'Streams/chat/message/bubble',
 				fields,
-				p.fill(ordinal)
+				function (err, html) {
+					Q.handle(state.onMessageRender, tool, [fields, html]);
+					p.fill(ordinal)(err, fields.html || html);
+				}
 			);
 			ordinals.push(ordinal);
 		}
@@ -414,12 +445,14 @@ Q.Tool.define('Streams/chat', function(options) {
 			callback(items, messages);
 		}).run();
 		
-		Q.Streams.Message.Total.seen(
-			state.publisherId, 
-			state.streamName, 
-			'Streams/chat/message',
-			true
-		);
+		if (state.seen) {
+			Q.Streams.Message.Total.seen(
+				state.publisherId, 
+				state.streamName, 
+				'Streams/chat/message',
+				true
+			);
+		}
 	},
 
 	renderNotification: function(message){
@@ -802,12 +835,16 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 
 			function _postMessage() {
-				Q.Streams.Message.post({
-					'publisherId': state.publisherId,
-					'streamName' : state.streamName,
-					'type'       : 'Streams/chat/message',
-					'content'    : content
-				}, function(err, args) {
+				var fields = {
+					'publisherId' : state.publisherId,
+					'streamName'  : state.streamName,
+					'type'        : 'Streams/chat/message',
+					'content'	  : content
+				};
+
+				Q.handle(state.beforePost, tool, [fields]);
+
+				Q.Streams.Message.post(fields, function(err, args) {
 					blocked = false;
 					$this.removeAttr('disabled');
 					if (err) {
@@ -828,11 +865,14 @@ Q.Tool.define('Streams/chat', function(options) {
 						$this.blur();
 					}
 					state.hadFocus = false;
-					Q.Streams.Message.Total.seen(
-						state.publisherId, 
-						state.streamName, 
-						'Streams/chat/message', 
-						true);
+					if (state.seen) {
+						Q.Streams.Message.Total.seen(
+							state.publisherId, 
+							state.streamName, 
+							'Streams/chat/message',
+							true
+						);
+					}
 				});
 			}
 		}

@@ -229,6 +229,11 @@
 	text-align: center;
 }
 
+.Q_admin_pane #activate_passphrase {
+	width: 100%;
+	margin-bottom: 10px;
+}
+
 .Q_extra_pane #suggestions
 {
 	list-style-type: none;
@@ -238,7 +243,7 @@
 .Q_extra_pane #suggestions li
 {
 	list-style-type: none;
-	border-top: solid 1px #aaa;
+	border-bottom: solid 1px #aaa;
 }
 
 .Q_admin_pane
@@ -250,13 +255,20 @@
 .Q_extra_pane
 {
 	float: right;
-	padding: 10px 0 10px 0;
+	margin-right: 50px;
+	background: rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	padding: 20px;
 }
 
 .Q_mobile .Q_extra_pane
 {
-	float: right;
-	padding: 0 0 10px 10px;
+	text-align: center;
+	float: none;
+	margin: auto;
+    clear: both;
+    width: 75%;
+    padding: 20px;
 }
 
 .Users_avatar_icon, .Users_avatar_name
@@ -410,10 +422,10 @@ a.Users_activation_resend:active {
 .Users_labels_tool ul,
 .Users_contacts_tool ul { list-style-type: none; padding: 0; }
 .Users_labels_tool li,
-.Users_contacts_tool li { list-style-type: none; padding: 0px 10px 0px 10px; margin: 5px; border-radius: 5px; }
+.Users_contacts_tool li { list-style-type: none; padding: 0px 10px 0px 10px; margin: 0; border-radius: 5px; }
 .Users_labels_icon { width: 40px; height: 40px; }
 .Users_labels_active .Users_labels_label,
-.Users_labels_action { cursor: pointer; }
+.Users_labels_action button { margin-top: 10px; width: 100%; }
 .Users_labels_tool .Users_labels_title,
 .Users_contacts_tool .Users_labels_title {
 	display: inline-block;

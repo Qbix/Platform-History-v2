@@ -32,16 +32,25 @@
         "no": "არა",
         "WelcomePleaseVerifyEmail": "გამარჯობა! გთხოვთ, შეამოწმოთ თქვენი ელექტრონული ფოსტის მისამართი.",
         "WelcomeVerifyEmail": "გამარჯობა! თქვენი ელ.ფოსტის მისამართის შემოწმება.",
-        "ForgetPass": "ჰეი, დაივიწყეთ პაროლი?"
+        "ForgetPass": "ჰეი, დაივიწყეთ პაროლი?",
+        "PassphraseSaved": "თქვენი ფრაზის ფრაზა შენახულია.",
+        "IdentifierActivated": "თქვენი {999}} გააქტიურებულია.",
+        "CompletedActivation": "თქვენ დაასრულეთ მომხმარებლის გააქტიურება.",
+        "CompletedActivationLogIn": "თქვენ დაასრულეთ მომხმარებლის გააქტიურება. სცადეთ ახლა შესვლა."
     },
     "usersContacts": {
         "selectLabel": "აირჩიეთ ლეიბლი.",
-        "inviteUser": "მოიწვიეთ მომხმარებელი"
+        "inviteUser": "მოიწვიეთ მომხმარებელი",
+        "selectRole": "აირჩიეთ როლი",
+        "inviteRole": "მოიწვიე {999}"
     },
     "invalidLanguageSelected": "არჩეული არასწორი ენა",
     "contacts": {
         "dialog": {
-            "title": "კონტაქტის არჩევა"
+            "title": "კონტაქტის არჩევა",
+            "SearchByName": "ძებნა სახელით",
+            "CreateAccount": "+ ახალი კონტაქტი",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI. შექმნა ვერ მოიძებნა"
         },
         "select": {
             "title": "აირჩიეთ {{displayName}}"

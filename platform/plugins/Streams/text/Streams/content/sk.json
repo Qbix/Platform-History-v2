@@ -69,7 +69,8 @@
             "byTwitter": "cvrlikání",
             "QRscanned": "Skenovali to!",
             "chooseAgainFromContacts": "Znova zvoľte možnosť Kontakty",
-            "inviteSelectedContacts": "Pozvať vybraných kontaktov"
+            "inviteSelectedContacts": "Pozvať vybraných kontaktov",
+            "scannedQR": "{{ClickOrTap}}, ak bol kód naskenovaný"
         },
         "email": {
             "subject": "Hej, pozrite sa na to",

@@ -69,7 +69,8 @@
             "byTwitter": "ట్విట్టర్",
             "QRscanned": "వారు దానిని స్కాన్ చేశారు!",
             "chooseAgainFromContacts": "పరిచయాల నుండి మళ్ళీ ఎంచుకోండి",
-            "inviteSelectedContacts": "ఎంచుకున్న పరిచయాలను ఆహ్వానించండి"
+            "inviteSelectedContacts": "ఎంచుకున్న పరిచయాలను ఆహ్వానించండి",
+            "scannedQR": "కోడ్ స్కాన్ చేయబడితే {{ClickOrTap}}"
         },
         "email": {
             "subject": "హే, ఈ తనిఖీ",

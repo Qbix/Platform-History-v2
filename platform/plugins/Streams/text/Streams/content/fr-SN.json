@@ -69,7 +69,8 @@
             "byTwitter": "Gazouillement",
             "QRscanned": "Ils l&#39;ont scanné!",
             "chooseAgainFromContacts": "Choisissez à nouveau dans Contacts",
-            "inviteSelectedContacts": "Inviter des contacts sélectionnés"
+            "inviteSelectedContacts": "Inviter des contacts sélectionnés",
+            "scannedQR": "{{ClickOrTap}} si le code a été scanné"
         },
         "email": {
             "subject": "Hé, regarde ça",

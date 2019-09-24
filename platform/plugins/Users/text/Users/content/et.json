@@ -32,16 +32,25 @@
         "no": "Ei",
         "WelcomePleaseVerifyEmail": "Tere tulemast! Kinnitage oma e-posti aadress.",
         "WelcomeVerifyEmail": "Tere tulemast! Kinnita oma e-posti aadress.",
-        "ForgetPass": "Hei, kas sa unustasid oma parooli?"
+        "ForgetPass": "Hei, kas sa unustasid oma parooli?",
+        "PassphraseSaved": "Teie parool on salvestatud.",
+        "IdentifierActivated": "Teie {{type}} on aktiveeritud.",
+        "CompletedActivation": "Olete lõpetanud kasutaja aktiveerimise.",
+        "CompletedActivationLogIn": "Olete lõpetanud kasutaja aktiveerimise. Proovige kohe sisse logida."
     },
     "usersContacts": {
         "selectLabel": "Palun valige silt.",
-        "inviteUser": "Kutsu kasutaja"
+        "inviteUser": "Kutsu kasutaja",
+        "selectRole": "Valige roll",
+        "inviteRole": "Kutsu {{role}}"
     },
     "invalidLanguageSelected": "Valitud keel on vale",
     "contacts": {
         "dialog": {
-            "title": "Valige kontakt"
+            "title": "Valige kontakt",
+            "SearchByName": "Otsige nime järgi",
+            "CreateAccount": "+ Uus kontakt",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ei leitud"
         },
         "select": {
             "title": "Valige kontakt {{displayName}}"

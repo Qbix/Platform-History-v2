@@ -32,16 +32,25 @@
         "no": "Ne",
         "WelcomePleaseVerifyEmail": "Vítejte! Zkontrolujte prosím svou e-mailovou adresu.",
         "WelcomeVerifyEmail": "Vítejte! Ověřte svou e-mailovou adresu.",
-        "ForgetPass": "Hej, zapomněl jsi na své heslo?"
+        "ForgetPass": "Hej, zapomněl jsi na své heslo?",
+        "PassphraseSaved": "Vaše přístupová fráze byla uložena.",
+        "IdentifierActivated": "Vaše {{type}} byla aktivována.",
+        "CompletedActivation": "Dokončili jste aktivaci uživatele.",
+        "CompletedActivationLogIn": "Dokončili jste aktivaci uživatele. Zkuste se přihlásit hned."
     },
     "usersContacts": {
         "selectLabel": "Vyberte prosím popisek.",
-        "inviteUser": "Pozvěte uživatele"
+        "inviteUser": "Pozvěte uživatele",
+        "selectRole": "Vyberte roli",
+        "inviteRole": "Pozvat {{role}}"
     },
     "invalidLanguageSelected": "Byl vybrán neplatný jazyk",
     "contacts": {
         "dialog": {
-            "title": "Vyberte kontakt"
+            "title": "Vyberte kontakt",
+            "SearchByName": "Hledat podle jména",
+            "CreateAccount": "+ Nový kontakt",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nebyl nalezen"
         },
         "select": {
             "title": "Vyberte kontakt {{displayName}}"

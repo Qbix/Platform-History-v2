@@ -32,16 +32,25 @@
         "no": "няма",
         "WelcomePleaseVerifyEmail": "Сардэчна запрашаем! Калі ласка, пацвердзіце свой адрас электроннай пошты.",
         "WelcomeVerifyEmail": "Сардэчна запрашаем! Праверце свой адрас электроннай пошты.",
-        "ForgetPass": "Эй, вы забыліся кодавую фразу?"
+        "ForgetPass": "Эй, вы забыліся кодавую фразу?",
+        "PassphraseSaved": "Ваша пропускная фраза была захавана.",
+        "IdentifierActivated": "Ваш {{type}} быў актываваны.",
+        "CompletedActivation": "Вы завяршылі актывацыю карыстальніка.",
+        "CompletedActivationLogIn": "Вы завяршылі актывацыю карыстальніка. Паспрабуйце ўвайсці зараз."
     },
     "usersContacts": {
         "selectLabel": "Калі ласка, абярыце ярлык.",
-        "inviteUser": "запрасіць карыстальніка"
+        "inviteUser": "запрасіць карыстальніка",
+        "selectRole": "Выберыце ролю",
+        "inviteRole": "Запрасіць {{role}}"
     },
     "invalidLanguageSelected": "Няправільны абраны мова",
     "contacts": {
         "dialog": {
-            "title": "Абярыце кантакт"
+            "title": "Абярыце кантакт",
+            "SearchByName": "Пошук па імені",
+            "CreateAccount": "+ Новы кантакт",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create не знойдзены"
         },
         "select": {
             "title": "Выберыце кантакт {{displayName}}"

@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "ისინი დასკანერებულნი იყვნენ!",
             "chooseAgainFromContacts": "აირჩიეთ კონტაქტებისგან",
-            "inviteSelectedContacts": "მოიწვიე შერჩეული კონტაქტები"
+            "inviteSelectedContacts": "მოიწვიე შერჩეული კონტაქტები",
+            "scannedQR": "99 99 999}} თუ კოდი დასკანერებული იყო"
         },
         "email": {
             "subject": "ჰეი, შეამოწმეთ ეს",

@@ -4,11 +4,11 @@ function Users_before_Q_response_notices()
 {
 	$from_parts = explode(' ', Q_Request::special('fromSuccess', false));
 	$from = reset($from_parts);
+	$text = Q_Text::get('Users/content');
 	if ($from === 'Users/activate') {
 		$user = Q_Session::id() ? Users::loggedInUser() : null;
-		$notice = $user
-			? "You've completed the activation."
-			: "You've completed the activation. Try logging in now.";
+		$key = 'CompletedActivation' . ($user ? '' : 'LogIn');
+		$notice = $text['notifications'][$key];
 		Q_Response::setNotice('Users/activate', $notice, array(
 			'timeout' => Q_Config::get('Users', 'notices', 'timeout', 5)
 		));

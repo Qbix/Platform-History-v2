@@ -32,16 +32,25 @@
         "no": "Ei",
         "WelcomePleaseVerifyEmail": "Tervetuloa! Vahvista sähköpostiosoitteesi.",
         "WelcomeVerifyEmail": "Tervetuloa! Vahvista sähköpostiosoitteesi.",
-        "ForgetPass": "Hei, unohditko salasanasi?"
+        "ForgetPass": "Hei, unohditko salasanasi?",
+        "PassphraseSaved": "Tunnuslauseesi on tallennettu.",
+        "IdentifierActivated": "Sinun {{type}} on aktivoitu.",
+        "CompletedActivation": "Olet suorittanut käyttäjän aktivoinnin loppuun.",
+        "CompletedActivationLogIn": "Olet suorittanut käyttäjän aktivoinnin loppuun. Kokeile kirjautua sisään nyt."
     },
     "usersContacts": {
         "selectLabel": "Valitse etiketti.",
-        "inviteUser": "Kutsu käyttäjä"
+        "inviteUser": "Kutsu käyttäjä",
+        "selectRole": "Valitse Rooli",
+        "inviteRole": "Kutsu {{role}}"
     },
     "invalidLanguageSelected": "Valittu kieli on virheellinen",
     "contacts": {
         "dialog": {
-            "title": "Valitse yhteystieto"
+            "title": "Valitse yhteystieto",
+            "SearchByName": "Etsi nimen mukaan",
+            "CreateAccount": "+ Uusi yhteyshenkilö",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.coreate ei löytynyt"
         },
         "select": {
             "title": "Valitse yhteystieto {{displayName}}"

@@ -32,16 +32,25 @@
         "no": "Ne",
         "WelcomePleaseVerifyEmail": "Dobrodošli! Potvrdite svoju adresu e-pošte.",
         "WelcomeVerifyEmail": "Dobrodošli! Potvrdite svoju email adresu.",
-        "ForgetPass": "Hej, jeste li zaboravili svoju zaporku?"
+        "ForgetPass": "Hej, jeste li zaboravili svoju zaporku?",
+        "PassphraseSaved": "Vaša je prolazna fraza spremljena.",
+        "IdentifierActivated": "Vaš {{type}} je aktiviran.",
+        "CompletedActivation": "Završili ste aktivaciju korisnika.",
+        "CompletedActivationLogIn": "Završili ste aktivaciju korisnika. Pokušajte se prijaviti sada."
     },
     "usersContacts": {
         "selectLabel": "Odaberite oznaku.",
-        "inviteUser": "Pozovi korisnika"
+        "inviteUser": "Pozovi korisnika",
+        "selectRole": "Odaberite Ulogu",
+        "inviteRole": "Pozovite {{role}}"
     },
     "invalidLanguageSelected": "Odabran je nevažeći jezik",
     "contacts": {
         "dialog": {
-            "title": "Odaberite kontakt"
+            "title": "Odaberite kontakt",
+            "SearchByName": "Traži po imenu",
+            "CreateAccount": "+ Novi kontakt",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nije pronađen"
         },
         "select": {
             "title": "Odaberite kontakt osobe {{displayName}}"

@@ -32,16 +32,25 @@
         "no": "いいえ",
         "WelcomePleaseVerifyEmail": "ようこそ！火事もおきました。",
         "WelcomeVerifyEmail": "ようこそ！あなたのメールアドレスを確認してください。",
-        "ForgetPass": "こんにちは、パスフレーズを忘れましたか？"
+        "ForgetPass": "こんにちは、パスフレーズを忘れましたか？",
+        "PassphraseSaved": "パスフレーズが保存されました。",
+        "IdentifierActivated": "{{type}}が有効になりました。",
+        "CompletedActivation": "ユーザーのアクティベーションが完了しました。",
+        "CompletedActivationLogIn": "ユーザーのアクティベーションが完了しました。今すぐログインしてみてください。"
     },
     "usersContacts": {
         "selectLabel": "ラベルを選択してください。",
-        "inviteUser": "ユーザーを招待"
+        "inviteUser": "ユーザーを招待",
+        "selectRole": "役割を選択",
+        "inviteRole": "{{role}}を招待"
     },
     "invalidLanguageSelected": "無効な言語が選択されました",
     "contacts": {
         "dialog": {
-            "title": "連絡先を選択"
+            "title": "連絡先を選択",
+            "SearchByName": "名前で検索",
+            "CreateAccount": "+新しい連絡先",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.createが見つかりません"
         },
         "select": {
             "title": "{{displayName}}の連絡先を選択"

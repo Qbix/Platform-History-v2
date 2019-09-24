@@ -32,16 +32,25 @@
         "no": "Tidak",
         "WelcomePleaseVerifyEmail": "Selamat datang! Sila sahkan alamat e-mel anda.",
         "WelcomeVerifyEmail": "Selamat datang! Mengesahkan alamat e-mel anda.",
-        "ForgetPass": "Hei, adakah anda melupakan frasa laluan anda?"
+        "ForgetPass": "Hei, adakah anda melupakan frasa laluan anda?",
+        "PassphraseSaved": "Frasa laluan anda telah disimpan.",
+        "IdentifierActivated": "{{type}} anda telah diaktifkan.",
+        "CompletedActivation": "Anda telah melengkapkan pengaktifan pengguna.",
+        "CompletedActivationLogIn": "Anda telah melengkapkan pengaktifan pengguna. Cuba log masuk sekarang."
     },
     "usersContacts": {
         "selectLabel": "Sila pilih label.",
-        "inviteUser": "Jemput Pengguna"
+        "inviteUser": "Jemput Pengguna",
+        "selectRole": "Pilih Peranan",
+        "inviteRole": "Undang {{role}}"
     },
     "invalidLanguageSelected": "Bahasa tidak sah dipilih",
     "contacts": {
         "dialog": {
-            "title": "Pilih kenalan"
+            "title": "Pilih kenalan",
+            "SearchByName": "Cari mengikut nama",
+            "CreateAccount": "+ Kenalan baru",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create tidak dijumpai"
         },
         "select": {
             "title": "Pilih kenalan {{displayName}}"

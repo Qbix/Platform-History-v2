@@ -84,19 +84,19 @@
 
 							Q.confirm(text.prompt, function (res) {
 								// set cache to null before device subscription
-								cache.set(userId, null);
+								cache.set(userId, 0, null);
 
 								if (!res) {
 									// save to cache that notifications requested
 									// only if user refused, because otherwise - notifications has granted
-									cache.set(userId, false);
+									cache.set(userId, 0, false);
 									return Q.handle(callback, null, [null, null]);
 								}
 
 								adapter.subscribe(function (err, subscribed) {
 									// if device subscribed set cache to true to avoid duplicate questions
 									if (subscribed) {
-										cache.set(userId, true);
+										cache.set(userId, 0, true);
 									}
 
 									Q.handle(Users.Device.onSubscribe, [options, granted, subscribed]);

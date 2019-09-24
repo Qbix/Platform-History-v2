@@ -25,8 +25,7 @@ class Db_Utils
 		if (empty($field_name))
 			throw new Exception('Must supply field name to compare by');
 		self::$compare_field_name = $field_name;
-		usort($dbRows, array('Db_Utils', 'compare_dbRows'
-		));
+		usort($dbRows, array('Db_Utils', 'compare_dbRows'));
 	}
 
 	/**

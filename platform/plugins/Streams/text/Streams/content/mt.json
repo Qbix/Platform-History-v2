@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "Huma skannjati!",
             "chooseAgainFromContacts": "Agħżel darb&#39;oħra mill-Kuntatti",
-            "inviteSelectedContacts": "Stieden Kuntatti Magħżula"
+            "inviteSelectedContacts": "Stieden Kuntatti Magħżula",
+            "scannedQR": "{{ClickOrTap}} jekk il-kodiċi kien skannjat"
         },
         "email": {
             "subject": "Ħej, iċċekkja dan",

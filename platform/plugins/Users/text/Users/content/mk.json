@@ -32,16 +32,25 @@
         "no": "Не",
         "WelcomePleaseVerifyEmail": "Добредојдовте! Ве молиме потврдете ја вашата е-адреса.",
         "WelcomeVerifyEmail": "Добредојдовте! Потврди ја вашата e-mail адреса.",
-        "ForgetPass": "Еј, ја заборавивте вашата тајна фраза?"
+        "ForgetPass": "Еј, ја заборавивте вашата тајна фраза?",
+        "PassphraseSaved": "Твојата фраза е зачувана.",
+        "IdentifierActivated": "Вашата активна Your 999} been е активирана.",
+        "CompletedActivation": "Вие завршивте со активирање на корисници.",
+        "CompletedActivationLogIn": "Вие завршивте со активирање на корисници. Обидете се да се најавите сега."
     },
     "usersContacts": {
         "selectLabel": "Изберете етикета.",
-        "inviteUser": "Поканете го корисникот"
+        "inviteUser": "Поканете го корисникот",
+        "selectRole": "Изберете улога",
+        "inviteRole": "Поканете {999}"
     },
     "invalidLanguageSelected": "Невалиден јазик избран",
     "contacts": {
         "dialog": {
-            "title": "Изберете контакт"
+            "title": "Изберете контакт",
+            "SearchByName": "Пребарувајте по име",
+            "CreateAccount": "+ Нов контакт",
+            "CreateAccountNotFound": "П. Корисници.Кордова.UI.сака не е пронајдена"
         },
         "select": {
             "title": "Изберете контакт од {{displayName}}"

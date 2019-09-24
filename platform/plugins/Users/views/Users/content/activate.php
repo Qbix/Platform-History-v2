@@ -44,6 +44,7 @@
 						<input type="hidden" id="activate_identifier" name="<?php echo $t ?>"
 							value="<?php echo Q_Html::text($identifier) ?>">
 						<input type="hidden" name="code" value="<?php echo Q_Html::text($code) ?>">
+						<input type="hidden" name="isHashed" value="0" id="Users_login_isHashed">
 						<?php if (!empty($_REQUEST['p'])): ?>
 							<input type="hidden" name="p" value="1">
 						<?php endif; ?>
@@ -88,6 +89,25 @@
 	)})
 	$('#activate_login').click(function() { Q.plugins.Users.login(); });
 	$('#activate_passphrase').val('').focus();
+	
+	Q.addScript('{{Q}}/js/sha1.js');
+	$('form').on('submit', function () {
+		var salt = $salt_json;
+		if (!window.CryptoJS || !salt) {
+			return;
+		}
+		var p = $('#activate_passphrase');
+		var v = p.val();
+		if (v) {
+			if (!/^[0-9a-f]{40}$/i.test(v)) {
+				p.val(CryptoJS.SHA1(p.val() + '\\t' + salt));
+			}
+			$('#Users_login_isHashed').attr('value', 1);
+		} else {
+			$('#Users_login_isHashed').attr('value', 0);
+		}
+		 
+	});
 	
 	// Get the suggestions from YAHOO, if possible
 	

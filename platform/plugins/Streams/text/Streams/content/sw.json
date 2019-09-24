@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "Walichunguza!",
             "chooseAgainFromContacts": "Chagua tena kutoka kwa wasiliana",
-            "inviteSelectedContacts": "Paribisha Mawasiliano Wachaguliwa"
+            "inviteSelectedContacts": "Paribisha Mawasiliano Wachaguliwa",
+            "scannedQR": "{{ClickOrTap}} ikiwa nambari hiyo ilikaguliwa"
         },
         "email": {
             "subject": "Hey, angalia hii nje",

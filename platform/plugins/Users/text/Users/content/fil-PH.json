@@ -32,16 +32,25 @@
         "no": "Hindi",
         "WelcomePleaseVerifyEmail": "Maligayang pagdating! Mangyaring i-verify ang iyong email address.",
         "WelcomeVerifyEmail": "Maligayang pagdating! I-verify ang iyong email address.",
-        "ForgetPass": "Hey, nakalimutan mo ba ang iyong passphrase?"
+        "ForgetPass": "Hey, nakalimutan mo ba ang iyong passphrase?",
+        "PassphraseSaved": "Ang iyong pass parirala ay nai-save na.",
+        "IdentifierActivated": "Ang iyong {{type}} ay na-aktibo.",
+        "CompletedActivation": "Nakumpleto mo na ang activation ng gumagamit.",
+        "CompletedActivationLogIn": "Nakumpleto mo na ang activation ng gumagamit. Subukan ang pag-log in ngayon."
     },
     "usersContacts": {
         "selectLabel": "Mangyaring piliin ang label.",
-        "inviteUser": "Anyayahan ang Gumagamit"
+        "inviteUser": "Anyayahan ang Gumagamit",
+        "selectRole": "Piliin ang Papel",
+        "inviteRole": "Imbitahan ang {{role}}"
     },
     "invalidLanguageSelected": "Napili ang di-wastong wika",
     "contacts": {
         "dialog": {
-            "title": "Pumili ng contact"
+            "title": "Pumili ng contact",
+            "SearchByName": "Paghahanap ayon sa pangalan",
+            "CreateAccount": "+ Bagong Makipag-ugnay",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create hindi nahanap"
         },
         "select": {
             "title": "Piliin ang contact ng {{displayName}}"

@@ -74,11 +74,12 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 			}, function (err, html) {
 				tool.element.removeClass('Q_loading');
 				tool.element.innerHTML = html;
+				var labelTitle = null;
 
 				$('.Users_labels_label', tool.element).on(Q.Pointer.fastclick, function () {
 					var $this = $(this);
 					selectedLabel = $this.attr('data-label');
-					var labelTitle = $(".Users_labels_title", $this).text();
+					labelTitle = $(".Users_labels_title", $this).text();
 
 					if (false === Q.handle(state.onClick, tool, [selectedLabel, labelTitle])) {
 						return;
@@ -87,7 +88,7 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 					$this.addClass('Q_selected').siblings().removeClass('Q_selected');
 				});
 
-				$('.Users_labels_add', tool.element).on(Q.Pointer.fastclick, function () {
+				$('.Users_labels_add button', tool.element).on(Q.Pointer.fastclick, function () {
 					if(!selectedLabel) {
 						return Q.alert(tool.text.selectLabel);
 					}
@@ -97,7 +98,8 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 					Q.Streams.invite(state.communityId, 'Streams/experience/main', {
 						addLabel: selectedLabel,
 						followup: state.followup,
-						alwaysSend: true
+						alwaysSend: true,
+						title: tool.text.inviteRole.interpolate({role: labelTitle})
 					}, function (err, info) {
 						var msg = Q.firstErrorMessage(err);
 						if (msg) {
@@ -132,8 +134,7 @@ Q.Template.set('Users/labels', ''
 + '{{/each}}'
 + '{{#if canAdd}}'
 + '<li class="Users_labels_action Users_labels_add Q/clickable">'
-+   '<img class="Users_labels_icon" src="{{canAddIcon}}">'
-+   '<div class="Users_labels_title">{{canAddText}}</div>'
++   '<button class="Q_button">{{canAddText}}</button>'
 + '</li>'
 + '{{/if}}'
 + '<ul>');

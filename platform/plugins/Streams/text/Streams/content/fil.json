@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "Ini-scan nila ito!",
             "chooseAgainFromContacts": "Pumili Muli mula sa Mga Contact",
-            "inviteSelectedContacts": "Anyayahan ang Mga Napiling Mga contact"
+            "inviteSelectedContacts": "Anyayahan ang Mga Napiling Mga contact",
+            "scannedQR": "{{ClickOrTap}} kung na-scan ang code"
         },
         "email": {
             "subject": "Uy, tingnan mo ito",

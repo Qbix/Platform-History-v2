@@ -32,16 +32,25 @@
         "no": "Ne",
         "WelcomePleaseVerifyEmail": "Sveiki! Patvirtinkite savo el. Pašto adresą.",
         "WelcomeVerifyEmail": "Sveiki! Patvirtinkite savo elektroninį paštą.",
-        "ForgetPass": "Ei, ar pamiršote savo slaptafrazę?"
+        "ForgetPass": "Ei, ar pamiršote savo slaptafrazę?",
+        "PassphraseSaved": "Jūsų frazė išsaugota.",
+        "IdentifierActivated": "Jūsų {{type}} suaktyvintas.",
+        "CompletedActivation": "Baigėte aktyvuoti vartotoją.",
+        "CompletedActivationLogIn": "Baigėte aktyvuoti vartotoją. Pabandykite prisijungti dabar."
     },
     "usersContacts": {
         "selectLabel": "Pasirinkite etiketę.",
-        "inviteUser": "Pakviesti vartotoją"
+        "inviteUser": "Pakviesti vartotoją",
+        "selectRole": "Pasirinkite Vaidmuo",
+        "inviteRole": "Pakvieskite {{role}}"
     },
     "invalidLanguageSelected": "Pasirinkta netinkama kalba",
     "contacts": {
         "dialog": {
-            "title": "Pasirinkite kontaktą"
+            "title": "Pasirinkite kontaktą",
+            "SearchByName": "Paieška pagal pavadinimą",
+            "CreateAccount": "+ Naujas kontaktas",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nerastas"
         },
         "select": {
             "title": "Pasirinkite {{displayName}} kontaktą"

@@ -32,16 +32,25 @@
         "no": "Nē",
         "WelcomePleaseVerifyEmail": "Laipni lūdzam! Lūdzu, apstipriniet savu e-pasta adresi.",
         "WelcomeVerifyEmail": "Laipni lūdzam! Pārbaudiet savu e-pasta adresi.",
-        "ForgetPass": "Hei, vai esat aizmirsis savu ieejas frāzi?"
+        "ForgetPass": "Hei, vai esat aizmirsis savu ieejas frāzi?",
+        "PassphraseSaved": "Jūsu ieejas frāze ir saglabāta.",
+        "IdentifierActivated": "Jūsu {{type}} ir aktivizēts.",
+        "CompletedActivation": "Jūs esat pabeidzis lietotāja aktivizēšanu.",
+        "CompletedActivationLogIn": "Jūs esat pabeidzis lietotāja aktivizēšanu. Mēģiniet pieteikties tūlīt."
     },
     "usersContacts": {
         "selectLabel": "Lūdzu, atlasiet etiķeti.",
-        "inviteUser": "Uzaicināt lietotāju"
+        "inviteUser": "Uzaicināt lietotāju",
+        "selectRole": "Atlasiet Loma",
+        "inviteRole": "Uzaicināt {{role}}"
     },
     "invalidLanguageSelected": "Izvēlēta nederīga valoda",
     "contacts": {
         "dialog": {
-            "title": "Izvēlieties kontaktu"
+            "title": "Izvēlieties kontaktu",
+            "SearchByName": "Meklēt pēc vārda",
+            "CreateAccount": "+ Jauns kontakts",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nav atrasts"
         },
         "select": {
             "title": "Atlasiet kontaktpersonu {{displayName}}"

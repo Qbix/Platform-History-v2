@@ -69,7 +69,8 @@
             "byTwitter": "Stare de nervozitate",
             "QRscanned": "Au scanat-o!",
             "chooseAgainFromContacts": "Alegeți din nou din Contacte",
-            "inviteSelectedContacts": "Invitați contactele selectate"
+            "inviteSelectedContacts": "Invitați contactele selectate",
+            "scannedQR": "{{ClickOrTap}} dacă codul a fost scanat"
         },
         "email": {
             "subject": "Hei, verifică asta",

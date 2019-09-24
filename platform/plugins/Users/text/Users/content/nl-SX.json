@@ -32,16 +32,25 @@
         "no": "Nee",
         "WelcomePleaseVerifyEmail": "Welkom! Verifieer uw email adres alstublieft.",
         "WelcomeVerifyEmail": "Welkom! Verifieer je e-mailadres.",
-        "ForgetPass": "Hé, ben je je wachtwoordzin vergeten?"
+        "ForgetPass": "Hé, ben je je wachtwoordzin vergeten?",
+        "PassphraseSaved": "Uw wachtwoordzin is opgeslagen.",
+        "IdentifierActivated": "Uw {{type}} is geactiveerd.",
+        "CompletedActivation": "U hebt de activering van de gebruiker voltooid.",
+        "CompletedActivationLogIn": "U hebt de activering van de gebruiker voltooid. Probeer nu in te loggen."
     },
     "usersContacts": {
         "selectLabel": "Selecteer een label.",
-        "inviteUser": "Gebruiker uitnodigen"
+        "inviteUser": "Gebruiker uitnodigen",
+        "selectRole": "Selecteer rol",
+        "inviteRole": "Uitnodigen {{role}}"
     },
     "invalidLanguageSelected": "Ongeldige taal geselecteerd",
     "contacts": {
         "dialog": {
-            "title": "Kies contact"
+            "title": "Kies contact",
+            "SearchByName": "Zoek op naam",
+            "CreateAccount": "+ Nieuw contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create niet gevonden"
         },
         "select": {
             "title": "Selecteer contact van {{displayName}}"

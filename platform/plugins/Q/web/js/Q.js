@@ -477,6 +477,50 @@ Sp.splitId = function(lengths, delimiter) {
 	}
 	return segments.join(delimiter);
 };
+/**
+ * Used to split ids into one or more segments, in order to store millions
+ * of files under a directory, without running into limits of various filesystems
+ * on the number of files in a directory.
+ * Consider using Amazon S3 or another service for uploading files in production.
+ * @method matchTypes
+ * @param {String|Array} [types] type or types to detect. Can be "url", "email", "phone", "twitter".
+ *  If omitted, all types are processed.
+ * @return {object}
+ */
+Sp.matchTypes = function (types) {
+	var string = this;
+	if (typeof types === 'string') {
+		types = [types];
+	}
+	if (!Q.isArrayLike(types)) {
+		types = Object.keys(Sp.matchTypes.adapters);
+	}
+	var res = {};
+	Q.each(types, function (i, type) {
+		if (Sp.matchTypes.adapters[type]) {
+			res[type] = Sp.matchTypes.adapters[type].call(string);
+		}
+	});
+	if (types.length === 1) {
+		return res[Object.keys(res)[0]];
+	}
+	return res;
+};
+
+Sp.matchTypes.adapters = {
+	url: function () {
+		return this.match(/(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+/gi) || [];
+	},
+	email: function () {
+		return this.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi) || [];
+	},
+	phone: function () {
+		return this.match(/\+[0-9]{1,2}?(-|\s|\.)?[0-9]{3,5}(-|\s|\.)?([0-9]{3,5}(-|\s|\.)?)?([0-9]{4,5})/gi) || [];
+	},
+	twitter: function () {
+		return this.match(/\+[0-9]{1,2}?(-|\s|\.)?[0-9]{3,5}(-|\s|\.)?([0-9]{3,5}(-|\s|\.)?)?([0-9]{4,5})/gi) || [];
+	}
+};
 
 /**
  * @class Function
@@ -3624,7 +3668,7 @@ Q.Tool = function _Q_Tool(element, options) {
 		var toolName = Q.Tool.names[this.name];
 		var errMsg = "A " + toolName + " tool with id " + this.id + " is already active";
 		//throw new Q.Error(errMsg);
-		return console.warn(errMsg);
+		console.warn(errMsg);
 	}
 
 	// for later use
@@ -8753,10 +8797,11 @@ function _activateTools(toolElement, options, shared) {
 			_constructors[toolName] = function Q_Tool(element, options) {
 				// support re-entrancy of Q.activate
 				var tool = Q.getObject(['Q', 'tools', toolName], element);
-				if (this.activated || tool) {
+				if (this.activating || this.activated || tool) {
 					tool = tool || this;
 					return _activateTools.alreadyActivated;
 				}
+				this.activating = true
 				this.activated = false;
 				this.initialized = false;
 				try {
@@ -8806,6 +8851,7 @@ function _activateTools(toolElement, options, shared) {
 					console.warn(e);
 					Q.Tool.beingActivated = prevTool;
 				}
+				this.activating = false;
 				this.activated = true;
 			};
 			Q.mixin(toolConstructor, Q.Tool);
@@ -11237,6 +11283,11 @@ Q.Pointer = {
 		if (onlyTouchscreen && !Q.info.isTouchscreen) {
 			return;
 		}
+		if (element.activatedTouchlabels) {
+			return;
+		}
+		element.activatedTouchlabels = true;
+		var _suppress = false;
 		element = element || document.body;
 		var div = document.createElement('div');
 		div.addClass('Q_touchlabel');
@@ -11245,6 +11296,9 @@ Q.Pointer = {
 			var x = Q.Pointer.getX(e);
 			var y = Q.Pointer.getY(e);
 			var t = document.elementFromPoint(x, y);
+			if (_suppress) {
+				return;
+			}
 			while (t) {
 				if (!t.hasAttribute || !t.hasAttribute('data-touchlabel')) {
 					t = t.parentNode
@@ -11265,6 +11319,10 @@ Q.Pointer = {
 				div.style.left = Math.max(erect.left, left1) + 'px';
 				div.style.top = Math.max(erect.top, top1) + 'px';
 				div.addClass('Q_touchlabel_show');
+				_suppress = true;
+				setTimeout(function () {
+					_suppress = false;
+				}, 10);
 				return;
 			}
 			// if we are here, nothing matched
@@ -11321,7 +11379,7 @@ Q.Pointer = {
 	 * @static
 	 * @method elementFromPoint
 	 * @param {Q.Event} e Some mouse or touch event from the DOM
-	 * @return {number}
+	 * @return {HTMLElement}
 	 */
 	elementFromPoint: function (pageX, pageY) {
 		return document.elementFromPoint(

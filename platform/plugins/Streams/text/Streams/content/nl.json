@@ -69,7 +69,8 @@
             "byTwitter": "tjilpen",
             "QRscanned": "Ze hebben het gescand!",
             "chooseAgainFromContacts": "Kies opnieuw uit contacten",
-            "inviteSelectedContacts": "Nodig geselecteerde contactpersonen uit"
+            "inviteSelectedContacts": "Nodig geselecteerde contactpersonen uit",
+            "scannedQR": "{{ClickOrTap}} als de code is gescand"
         },
         "email": {
             "subject": "Hé, kijk hier eens",

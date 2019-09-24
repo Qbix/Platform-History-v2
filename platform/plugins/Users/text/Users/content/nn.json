@@ -32,16 +32,25 @@
         "no": "Nei",
         "WelcomePleaseVerifyEmail": "Velkommen! Vennligst bekreft e-postadressen din.",
         "WelcomeVerifyEmail": "Velkommen! Bekreft e-postadressen din.",
-        "ForgetPass": "Hei, har du glemt passordet ditt?"
+        "ForgetPass": "Hei, har du glemt passordet ditt?",
+        "PassphraseSaved": "Passfrasen din er lagret.",
+        "IdentifierActivated": "{{type}} er blitt aktivert.",
+        "CompletedActivation": "Du har fullført brukeraktivering.",
+        "CompletedActivationLogIn": "Du har fullført brukeraktivering. Prøv å logge på nå."
     },
     "usersContacts": {
         "selectLabel": "Vennligst velg etikett.",
-        "inviteUser": "Inviter bruker"
+        "inviteUser": "Inviter bruker",
+        "selectRole": "Velg rolle",
+        "inviteRole": "Inviter {{role}}"
     },
     "invalidLanguageSelected": "Ugyldig språk valgt",
     "contacts": {
         "dialog": {
-            "title": "Velg kontakt"
+            "title": "Velg kontakt",
+            "SearchByName": "Søk etter navn",
+            "CreateAccount": "+ Ny kontakt",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ikke funnet"
         },
         "select": {
             "title": "Velg kontakt fra {{displayName}}"

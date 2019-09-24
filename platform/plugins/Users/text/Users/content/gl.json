@@ -32,16 +32,25 @@
         "no": "Non",
         "WelcomePleaseVerifyEmail": "Benvido! Verifica o teu enderezo de correo electrónico.",
         "WelcomeVerifyEmail": "Benvido! Verifique o seu enderezo de correo electrónico.",
-        "ForgetPass": "Ei, esqueciches o teu contrasinal?"
+        "ForgetPass": "Ei, esqueciches o teu contrasinal?",
+        "PassphraseSaved": "Gardouse a frase de paso.",
+        "IdentifierActivated": "Activouse o teu {{type}}.",
+        "CompletedActivation": "Remataches a activación do usuario.",
+        "CompletedActivationLogIn": "Remataches a activación do usuario. Proba a iniciar sesión agora."
     },
     "usersContacts": {
         "selectLabel": "Seleccione a etiqueta.",
-        "inviteUser": "Invitar ao usuario"
+        "inviteUser": "Invitar ao usuario",
+        "selectRole": "Selecciona papel",
+        "inviteRole": "Invitar {{role}}"
     },
     "invalidLanguageSelected": "Idioma seleccionado non válido",
     "contacts": {
         "dialog": {
-            "title": "Escolla o contacto"
+            "title": "Escolla o contacto",
+            "SearchByName": "Busca por nome",
+            "CreateAccount": "+ Novo contacto",
+            "CreateAccountNotFound": "Non se atopou Q.Users.Cordova.UI.create"
         },
         "select": {
             "title": "Seleccione o contacto de {{displayName}}"

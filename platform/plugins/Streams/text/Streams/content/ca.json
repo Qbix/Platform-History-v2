@@ -69,7 +69,8 @@
             "byTwitter": "Twitter",
             "QRscanned": "El van escanejar!",
             "chooseAgainFromContacts": "Trieu de nou els contactes",
-            "inviteSelectedContacts": "Convida a contactes seleccionats"
+            "inviteSelectedContacts": "Convida a contactes seleccionats",
+            "scannedQR": "{{ClickOrTap}} si es va escanejar el codi"
         },
         "email": {
             "subject": "Hola, comprova-ho",

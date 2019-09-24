@@ -372,7 +372,7 @@ class Q_Image
 			if (empty($name)) {
 				// generate a filename
 				do {
-					$name = Q_Utils::unique(8).'.png';
+					$name = Q_Utils::randomString(8).'.png';
 				} while (file_exists($writePath.$name));
 			}
 			if (strrpos($name, '.') === false) {

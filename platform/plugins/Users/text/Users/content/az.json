@@ -32,16 +32,25 @@
         "no": "Yox",
         "WelcomePleaseVerifyEmail": "Xoş gəldiniz! E-poçt ünvanınızı təsdiqləyin.",
         "WelcomeVerifyEmail": "Xoş gəldiniz! E-poçt ünvanınızı təsdiqləyin.",
-        "ForgetPass": "Hey, parolunuzu unutdun mu?"
+        "ForgetPass": "Hey, parolunuzu unutdun mu?",
+        "PassphraseSaved": "Keçid ifadəniz yadda qalıb.",
+        "IdentifierActivated": "{{type}} aktivləşdirildi.",
+        "CompletedActivation": "İstifadəçinin aktivləşdirilməsini başa vurdunuz.",
+        "CompletedActivationLogIn": "İstifadəçinin aktivləşdirilməsini başa vurdunuz. İndi daxil olmağa çalışın."
     },
     "usersContacts": {
         "selectLabel": "Xahiş edirik etiket seçin.",
-        "inviteUser": "İstifadəçiləri dəvət edin"
+        "inviteUser": "İstifadəçiləri dəvət edin",
+        "selectRole": "Rol seçin",
+        "inviteRole": "Dəvət edin {{role}}"
     },
     "invalidLanguageSelected": "Yanlış dil seçildi",
     "contacts": {
         "dialog": {
-            "title": "Əlaqə seçin"
+            "title": "Əlaqə seçin",
+            "SearchByName": "Adı ilə axtarın",
+            "CreateAccount": "+ Yeni Əlaqə",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create tapılmadı"
         },
         "select": {
             "title": "{{displayName}}} kontaktını seçin"

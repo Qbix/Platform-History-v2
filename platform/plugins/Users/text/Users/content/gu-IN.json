@@ -32,16 +32,25 @@
         "no": "ના",
         "WelcomePleaseVerifyEmail": "સ્વાગત છે! કૃપા કરીને તમારું ઇમેઇલ સરનામું ચકાસો.",
         "WelcomeVerifyEmail": "સ્વાગત છે! તમારું ઇમેઇલ સરનામું ચકાસો.",
-        "ForgetPass": "અરે, તમે તમારો પાસફ્રેઝ ભૂલી ગયા છો?"
+        "ForgetPass": "અરે, તમે તમારો પાસફ્રેઝ ભૂલી ગયા છો?",
+        "PassphraseSaved": "તમારું પાસ વાક્ય સાચવવામાં આવ્યું છે.",
+        "IdentifierActivated": "તમારું {{999}. સક્રિય કરવામાં આવ્યું છે.",
+        "CompletedActivation": "તમે વપરાશકર્તા સક્રિયકરણ પૂર્ણ કર્યું છે.",
+        "CompletedActivationLogIn": "તમે વપરાશકર્તા સક્રિયકરણ પૂર્ણ કર્યું છે. હમણાં લ inગ ઇન કરવાનો પ્રયાસ કરો."
     },
     "usersContacts": {
         "selectLabel": "કૃપા કરીને લેબલ પસંદ કરો.",
-        "inviteUser": "વપરાશકર્તા આમંત્રિત કરો"
+        "inviteUser": "વપરાશકર્તા આમંત્રિત કરો",
+        "selectRole": "ભૂમિકા પસંદ કરો",
+        "inviteRole": "Ite {999} ite ને આમંત્રિત કરો"
     },
     "invalidLanguageSelected": "અમાન્ય ભાષા પસંદ કરી",
     "contacts": {
         "dialog": {
-            "title": "સંપર્ક પસંદ કરો"
+            "title": "સંપર્ક પસંદ કરો",
+            "SearchByName": "નામ દ્વારા શોધો",
+            "CreateAccount": "+ નવો સંપર્ક",
+            "CreateAccountNotFound": "Q.User.Cordova.UI.create મળ્યું નથી"
         },
         "select": {
             "title": "{{displayName}} નો સંપર્ક પસંદ કરો"

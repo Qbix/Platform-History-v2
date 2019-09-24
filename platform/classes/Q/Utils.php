@@ -29,6 +29,26 @@ class Q_Utils
 	}
 	
 	/**
+	 * Generates random letter sequence
+	 * @method randomString
+	 * @static
+	 * @param {integer} [$len=8]
+	 * @param {string} [$characters='abcdefghijklmnopqrstuvwxyz'] All the characters from which to construct possible ids
+	 * @return {string}
+	 */
+	static function randomString(
+		$len = 8, 
+		$characters = 'abcdefghijklmnopqrstuvwxyz')
+	{
+		$characters_len = strlen($characters);
+		$result = str_repeat(' ', $len);
+		for ($i=0; $i<$len; ++$i) {
+			$result[$i] = $characters[mt_rand(0, $characters_len-1)];
+		}
+		return $result;
+	}
+	
+	/**
 	 * Returns a random hexadecimal string of the specified length
 	 * @method randomHexString
 	 * @static
@@ -127,7 +147,6 @@ class Q_Utils
 			ksort($data);
 			$data = http_build_query($data, null, '&', PHP_QUERY_RFC3986);
 			$data = str_replace('+', '%20', $data);
-			file_put_contents('/projects/qbix/Yang/temp.txt', $data);
 		}
 		return self::hmac('sha1', $data, $secret);
 	}
@@ -204,26 +223,6 @@ class Q_Utils
 		);
 
 		return ($raw_output) ? pack($pack, $output) : $output;
-	}
-
-	/**
-	 * Generates random letter sequence
-	 * @method unique
-	 * @static
-	 * @param {integer} [$len=8]
-	 * @param {string} [$characters='abcdefghijklmnopqrstuvwxyz'] All the characters from which to construct possible ids
-	 * @return {string}
-	 */
-	static function unique(
-		$len = 8, 
-		$characters = 'abcdefghijklmnopqrstuvwxyz')
-	{
-		$characters_len = strlen($characters);
-		$result = str_repeat(' ', $len);
-		for ($i=0; $i<$len; ++$i) {
-			$result[$i] = $characters[mt_rand(0, $characters_len-1)];
-		}
-		return $result;
 	}
 
 	/**
