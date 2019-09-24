@@ -1,6 +1,6 @@
 (function (Q, $, window, undefined) {
 	/**
-	 * This tool create Websites/webpage/preview tools above urls in chat messages.
+	 * This tool create Websites/webpage/chat tools above urls in chat messages.
 	 * @class Websites/webpage/chat
 	 * @constructor
 	 * @param {Object} [options] this is an object that contains parameters for this function
