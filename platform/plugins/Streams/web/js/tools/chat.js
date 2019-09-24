@@ -1136,10 +1136,10 @@ Q.Template.set('Streams/chat/main',
 		'<!-- messages -->'+
 	'</div>'+
 	'<form class="Streams_chat_composer" action="" method="post">'+
+		'<button class="Streams_chat_subscription"></button>' +
 		'{{#if textarea}}' +
 			'<textarea placeholder="{{placeholder}}"></textarea>'+
 		'{{else}}' +
-			'<button class="Streams_chat_subscription"></button>' +
 			'<input type="text" placeholder="{{placeholder}}">'+
 		'{{/if}}' +
 		'<div class="Streams_chat_submit Q_disappear"></div>' +
