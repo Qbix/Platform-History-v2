@@ -48,7 +48,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	var _debug = false;
 	var _debugTimer = {};
 
-
 	/**
 	 * Manages UI of WebRTC conference
 	 * @class Streams.WebRTC
@@ -614,6 +613,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						if(_options.streams != null) return;
 						//Q.Dialogs.pop();
 						if(WebRTCconference != null){
+							log('publishMediaTracks: stream is being added the room', stream);
+
 							_options.streams = [stream];
 							var publishTracks = function() {
 								var tracks = stream.getTracks();
@@ -2403,6 +2404,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				function onConnect() {
 					log('start: load time ' + (performance.now() - _debugTimer.loadStart));
+					log('start: onConnect');
 
 					var ua = navigator.userAgent;
 					var startWith = _options.startWith || {};
@@ -2558,7 +2560,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							Q.Streams.get(asPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
 								_roomStream = stream;
 								window.roomStream = _roomStream;
-								log('start: createOrJoinRoomStream: mode' + _options.mode)
+								log('start: createOrJoinRoomStream: mode ' + _options.mode)
 								bindStreamsEvents(stream);
 								if(_options.mode === 'twilio') {
 									startTwilioRoom(roomId, response.slots.room.accessToken);
