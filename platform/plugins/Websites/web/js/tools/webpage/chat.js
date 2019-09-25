@@ -44,7 +44,7 @@
 
 		// on new message render
 		tool.chatTool.state.onMessageRender.set(function (fields, html) {
-			var $html = $(html);
+			var $html = $(fields.html || html);
 
 			// parse all links in message
 			var $chatMessageContent = $(".Streams_chat_message_content", $html);

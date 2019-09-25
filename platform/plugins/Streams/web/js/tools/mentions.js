@@ -7,27 +7,49 @@
 	 */
 	Q.Tool.define("Streams/mentions/chat", ["Streams/chat"], function (options) {
 		var tool = this;
-		var state = this.state;
 		var chatTool = Q.Tool.from(this.element, "Streams/chat");
-
-		// preload throbber
-		$('<img/>')[0].src = Q.url("{{Q}}/img/throbbers/loading.gif");
 
 		Q.addStylesheet('{{Streams}}/css/tools/mentions.css');
 
-		$(chatTool.element).on('keyup', '.Streams_chat_composer input, .Streams_chat_composer textarea', function (e) {
+		Q.Text.get('Streams/content', function (err, text) {
+			tool.text = text;
+		});
+
+		var selector = '.Streams_chat_composer input, .Streams_chat_composer textarea';
+
+		$(chatTool.element).on('keyup', selector, function (e) {
+			if ($(this).closest(".Streams_mentions_chat").length) {
+				return;
+			}
+
 			if (e.keyCode === 50) {
 				tool.process(this);
 			}
 		});
 
+		$(chatTool.element).on('focus', selector, function (e) {
+			if ($(this).closest(".Streams_mentions_chat").length) {
+				return;
+			}
+
+			tool.close(true);
+		});
+
 		// on new message render
 		chatTool.state.onMessageRender.set(function (fields, html) {
-			var $html = $(html);
+			var $html = $(fields.html || html);
 
 			// parse all links in message
 			var $chatMessageContent = $(".Streams_chat_message_content", $html);
 			var chatMessageContent = $chatMessageContent.html();
+			Q.each(chatMessageContent.matchTypes('qbixUserId'), function (i, string) {
+				var avatarTool = Q.Tool.setUpElementHTML('div', 'Users/avatar', {
+					userId: string.replace('@', ''),
+					short: true,
+					icon: false
+				});
+				chatMessageContent = chatMessageContent.replace(string, avatarTool);
+			});
 			$chatMessageContent.html(chatMessageContent);
 
 			fields.html = $html[0].outerHTML;
@@ -58,34 +80,51 @@
 			var $input = state.input = $(input);
 			var $form = $input.closest("form");
 
-			$input.hide();
-			$("<div><input></div>")
-			.prependTo($form)
-			.tool("Streams/userChooser", {
-				position: 'top',
-				onChoose: function (userId, avatar) {
-					$input.val($input.val() + userId);
-					tool.close();
+			$input.blur();
+
+			Q.Template.render('Streams/mentions/chat', {
+				text: tool.text
+			}, function (err, html) {
+				if (err) {
+					return;
 				}
-			}).activate(function () {
-				state.userChooserTool = this;
-				$("input", this.element).focus();
+
+				var $element = $(html).prependTo($form);
+
+				$element
+				.css('top', -1 * $element.outerHeight())
+				.tool("Streams/userChooser", {
+					position: 'top',
+					onChoose: function (userId, avatar) {
+						$input.val($input.val() + userId);
+						tool.close();
+					}
+				}).activate(function () {
+					state.userChooserTool = this;
+					$("input", this.element).plugin('Q/placeholders').focus();
+				});
 			});
 		},
 		/**
 		 * @method close
 		 */
-		close: function () {
+		close: function (skipFocus) {
 			var input = this.state.input;
+
+			if (!skipFocus && input instanceof jQuery) {
+				input.focus();
+			}
 
 			if (Q.typeOf(this.state.userChooserTool) === 'Q.Tool') {
 				Q.Tool.remove(this.state.userChooserTool.element, true, true);
 				this.state.userChooserTool = null;
 			}
-
-			if (input instanceof jQuery) {
-				input.show().focus();
-			}
 		}
 	});
+
+	Q.Template.set('Streams/mentions/chat',
+		'<div class="Streams_mentions_chat">' +
+		'	<input placeholder="{{text.chat.SearchByName}}">' +
+		'</div>'
+	);
 })(Q, Q.$, window);

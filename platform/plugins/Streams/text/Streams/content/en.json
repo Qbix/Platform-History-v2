@@ -27,7 +27,8 @@
         "earlierComments": "earlier comments",
         "notAllowedToJoinCall": "You don't have permission to join this conversation.",
         "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call"
+        "RealTimeCall": "Real Time Call",
+		"SearchByName": "Search by name"
     },
     "notifications": {
         "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",

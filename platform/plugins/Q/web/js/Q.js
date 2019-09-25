@@ -519,6 +519,9 @@ Sp.matchTypes.adapters = {
 	},
 	twitter: function () {
 		return this.match(/\+[0-9]{1,2}?(-|\s|\.)?[0-9]{3,5}(-|\s|\.)?([0-9]{3,5}(-|\s|\.)?)?([0-9]{4,5})/gi) || [];
+	},
+	qbixUserId: function () {
+		return this.match(/(@[a-z]{8})/gi) || [];
 	}
 };
 
