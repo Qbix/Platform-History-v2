@@ -603,7 +603,7 @@
 							}
 							tool.textChatBtn.parentNode.classList.remove('Streams_webrtc_hover');
 							tool.textChat.static = false;
-							tool.textChat.chatTool.seen(false);
+							if(tool.textChat.chatTool != null) tool.textChat.chatTool.seen(false);
 							tool.textChat.isHidden = true;
 						}
 
