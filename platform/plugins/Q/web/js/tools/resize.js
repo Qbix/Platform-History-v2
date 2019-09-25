@@ -89,92 +89,117 @@
 					var move = function(xpos,ypos){
 						var currentTop = parseInt(elementToMove.style.top, 10)
 						var currentLeft = parseInt(elementToMove.style.left, 10)
-						elementToMove.style.left = xpos + 'px';
-						elementToMove.style.top = ypos + 'px';
+						if(tool.state.snapToSidesOnly){
+							if(snappedTo == 'right') {
+								elementToMove.style.top = ypos + 'px';
+							} else if(snappedTo == 'bottom') {
+								elementToMove.style.left = xpos + 'px';
+							} else if(snappedTo == 'left') {
+								elementToMove.style.top = ypos + 'px';
+							} else if(snappedTo == 'top') {
+								elementToMove.style.left = xpos + 'px';
+							}
+						} else {
+							elementToMove.style.left = xpos + 'px';
+							elementToMove.style.top = ypos + 'px';
+						}
 
 						if(currentTop != parseInt(ypos, 10) || currentLeft != parseInt(xpos, 10) ) tool.state.appliedRecently = true;
-						if(typeof cordova != "undefined" && window.device.platform === 'iOS') cordova.plugins.iosrtc.refreshVideos();
 					}
 
 					var drag = function(evt){
 						if(tool.isScreenResizing || (Q.info.isTouchscreen && (tool.isScreenResizing || evt.touches.length != 1 || evt.changedTouches.length != 1 || evt.targetTouches.length != 1))) return;
-
 						evt = evt || window.event;
 						evt.preventDefault();
 
-						var posX = Q.info.isTouchscreen ? evt.changedTouches[0].clientX : evt.clientX;
-						var	posY = Q.info.isTouchscreen ? evt.changedTouches[0].clientY : evt.clientY;
+						posX = Q.info.isTouchscreen ? evt.changedTouches[0].clientX : evt.clientX;
+						posY = Q.info.isTouchscreen ? evt.changedTouches[0].clientY : evt.clientY;
+
 						var aX, aY;
-						if(!Q.info.isMobile && tool.state.snapToSidesOnly){
-							var toggleClass = function (className) {
-								var classesArr = ['Q_resize_snapped_left', 'Q_resize_snapped_top', 'Q_resize_snapped_right', 'Q_resize_snapped_bottom'];
-								for (var c in classesArr) {
-									if(classesArr[c] != className && elementToMove.classList.contains(classesArr[c])) elementToMove.classList.remove(classesArr[c]);
-								}
 
-								elementToMove.style.width = '';
-								elementToMove.style.height = '';
-								elementToMove.style.bottom = 'auto';
-								elementToMove.classList.add(className);
-
-								divTop = elementToMove.style.top,
-									divLeft = elementToMove.offsetLeft,
-									divTop = elementToMove.offsetTop,
-									eWi = parseInt(elementToMove.offsetWidth),
-									eHe = parseInt(elementToMove.offsetHeight),
-									cWi = parseInt(moveWithinEl.offsetWidth),
-									cHe = parseInt(moveWithinEl.offsetHeight);
-								diffX = posX - divLeft, diffY = posY - divTop;
-							}
-
-							if(((cWi - posX) < (cHe - posY)) && ((cWi - posX) < posY) && ((cWi - posX) < posX)) {
-								aX = cWi - eWi
-								aY = posY - diffY;
-								if(snappedTo != 'right') {
-									toggleClass('Q_resize_snapped_right');
-								}
-								snappedTo = 'right';
-							} else if(((cHe - posY) < (cWi - posX)) && ((cHe - posY) < posY) && ((cHe - posY) < posX)) {
-								aX = posX - diffX;
-								aY = cHe - eHe;
-								if(snappedTo != 'bottom') {
-									toggleClass('Q_resize_snapped_bottom');
-								}
-								snappedTo = 'bottom';
-							} else if((posX < (cWi - posX)) && (posX < posY) && (posX < (cHe - posY))) {
-								aX = 0;
-								aY = posY - diffY;
-								if(snappedTo != 'left') {
-									toggleClass('Q_resize_snapped_left');
-								}
-								snappedTo = 'left';
-
-							} else if((posY < (cWi - posX)) && (posY < posX) && (posY < (cHe - posY))) {
-								aX = posX - diffX;
-								aY = 0;
-								if(snappedTo != 'top') {
-									toggleClass('Q_resi07: WebRTC.stopze_snapped_top');
-								}
-								snappedTo = 'top';
-
-							}
-						} else {
-							aX = posX - diffX;
-							aY = posY - diffY;
+						if(tool.state.snapToSidesOnly){
+							snapToSides();
 						}
+
+						aX = posX - diffX;
+						aY = posY - diffY;
+
 						if (aX < 0) aX = 0;
 						if (aY < 0) aY = 0;
 						if (aX + eWi > cWi) aX = cWi - eWi;
 
 						if (aY + eHe > cHe) aY = cHe - eHe;
+
 						move(aX,aY);
+					}
+
+					var snapToSides = function () {
+						var toggleClass = function (className) {
+							var classesArr = ['Q_resize_snapped_left', 'Q_resize_snapped_top', 'Q_resize_snapped_right', 'Q_resize_snapped_bottom'];
+							for (var c in classesArr) {
+								if(classesArr[c] != className && elementToMove.classList.contains(classesArr[c])) elementToMove.classList.remove(classesArr[c]);
+							}
+
+							if(className == 'Q_resize_snapped_bottom') {
+								elementToMove.style.top = '';
+								elementToMove.style.bottom = '';
+							} else if(className == 'Q_resize_snapped_right') {
+								elementToMove.style.left = '';
+								elementToMove.style.right = '';
+							} else if(className == 'Q_resize_snapped_top') {
+								elementToMove.style.bottom = '';
+								elementToMove.style.top = '';
+							} else if(className == 'Q_resize_snapped_left') {
+								elementToMove.style.right = '';
+								elementToMove.style.left = '';
+							}
+
+							elementToMove.style.height = '';
+							elementToMove.style.width = '';
+
+							elementToMove.classList.add(className);
+							diffY = 0;
+
+							eWi = parseInt(elementToMove.offsetWidth);
+							eHe = parseInt(elementToMove.offsetHeight);
+
+						}
+
+						if(((cWi - posX) < (cHe - posY)) && ((cWi - posX) < posY) && ((cWi - posX) < posX)) {
+
+							if(snappedTo != 'right') {
+								toggleClass('Q_resize_snapped_right');
+							}
+							snappedTo = 'right';
+
+						} else if(((cHe - posY) < (cWi - posX)) && ((cHe - posY) < posY) && ((cHe - posY) < posX)) {
+							if(snappedTo != 'bottom') {
+								toggleClass('Q_resize_snapped_bottom');
+							}
+							snappedTo = 'bottom';
+
+						} else if((posX < (cWi - posX)) && (posX < posY) && (posX < (cHe - posY))) {
+
+							if(snappedTo != 'left') {
+								toggleClass('Q_resize_snapped_left');
+							}
+							snappedTo = 'left';
+
+						} else if((posY < (cWi - posX)) && (posY < posX) && (posY < (cHe - posY))) {
+
+							if(snappedTo != 'top') {
+								toggleClass('Q_resize_snapped_top');
+							}
+							snappedTo = 'top';
+
+						}
 					}
 
 					var initMoving = function(evt){
 						if(tool.state.ignoreOnElements.length != 0) {
 							var ignoreEls = tool.state.ignoreOnElements;
 							for(var e in ignoreEls) {
-								if (evt.type != "mousemove" && (evt.target == ignoreEls[e] || ignoreEls[e].contains(evt.target))) {
+								if ((evt.type != "mousemove" && evt.type != "touchmove") && (evt.target == ignoreEls[e] || ignoreEls[e].contains(evt.target))) {
 									return;
 								}
 							}
@@ -208,16 +233,15 @@
 						tool.element.style.boxShadow = '10px -10px 60px 0 rgba(0,0,0,0.5)';
 
 						evt = evt || window.event;
+
 						posX = Q.info.isTouchscreen ? evt.touches[0].clientX : evt.clientX,
 							posY = Q.info.isTouchscreen ? evt.touches[0].clientY : evt.clientY,
-							divTop = elementToMove.style.top,
-							divLeft = elementToMove.style.left,
+							divTop = elementToMove.offsetTop,
+							divLeft = elementToMove.offsetLeft,
 							eWi = parseInt(elementToMove.offsetWidth),
 							eHe = parseInt(elementToMove.offsetHeight),
 							cWi = parseInt(moveWithinEl.offsetWidth),
 							cHe = parseInt(moveWithinEl.offsetHeight);
-						divTop = divTop.replace('px','');
-						divLeft = divLeft.replace('px','');
 						diffX = posX - divLeft, diffY = posY - divTop;
 
 						tool.state.onMovingStart.handle.call(tool);
@@ -783,23 +807,6 @@
 					}
 				}
 			},
-			pointerEvent: function() {
-				var tool = this;
-				tool.pointerInfo = {};
-				tool.pointerInfo.startY = null;
-				tool.pointerInfo.startX = null;
-				tool.pointerInfo.prevX = null;
-				tool.pointerInfo.prevY = null;
-				tool.pointerInfo.endX = null;
-				tool.pointerInfo.endY = null;
-
-
-
-				return {
-					capture: capture
-				}
-
-			}
 		}
 
 	);
