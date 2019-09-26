@@ -3194,6 +3194,7 @@ window.WebRTCconferenceLib = function app(options){
 						}
 					}
 				}
+				console.log('frontCameraDevice', frontCameraDevice)
 				app.event.dispatch('deviceListUpdated');
 
 			} else if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
@@ -3275,7 +3276,11 @@ window.WebRTCconferenceLib = function app(options){
 						app.event.dispatch('cameraToggled');
 					}
 
-
+					if(cameraId != null) {
+						currentCameraDevice = videoInputDevices.filter(function (d) {
+							return d.deviceId == cameraId;
+						})[0];
+					} else currentCameraDevice = deviceToSwitch;
 				}
 
 				var i;
