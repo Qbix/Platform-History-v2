@@ -39,21 +39,15 @@
 		chatTool.state.onMessageRender.set(function (fields, html) {
 			var $html = $(fields.html || html);
 
-			// parse all links in message
-			var $chatMessageContent = $(".Streams_chat_message_content", $html);
-			var chatMessageContent = $chatMessageContent.html();
-			Q.each(chatMessageContent.matchTypes('qbixUserId'), function (i, string) {
-				var avatarTool = Q.Tool.setUpElementHTML('div', 'Users/avatar', {
-					userId: string.replace('@', ''),
-					short: true,
-					icon: false
-				});
-				chatMessageContent = chatMessageContent.replace(string, avatarTool);
-			});
-			$chatMessageContent.html(chatMessageContent);
+			tool.parseChatMessage($html);
 
 			fields.html = $html[0].outerHTML;
 		}, tool);
+
+		// parse old messages
+		Q.each($(".Streams_chat_item", chatTool.element), function (i, element) {
+			tool.parseChatMessage(this);
+		});
 
 		$(document).keyup(function (e) {
 			if (e.keyCode === 13 || e.keyCode === 27) {
@@ -119,6 +113,39 @@
 				Q.Tool.remove(this.state.userChooserTool.element, true, true);
 				this.state.userChooserTool = null;
 			}
+		},
+		/**
+		 *	Add Streams/mentions/chat tools to chat messages
+		 *
+		 * @method parseChatMessage
+		 * @return {jQuery|HTMLElement} element Chat message element (Streams_chat_item)
+		 */
+		parseChatMessage: function (element) {
+			if (!(element instanceof jQuery)) {
+				element = $(element);
+			}
+
+			if (element.attr('data-mentionsProcessed')) {
+				return;
+			}
+
+			// parse all links in message
+			var $chatMessageContent = $(".Streams_chat_message_content", element);
+			var chatMessageContent = $chatMessageContent.html();
+			Q.each(chatMessageContent.matchTypes('qbixUserId'), function (i, string) {
+				var avatarTool = Q.Tool.setUpElementHTML('div', 'Users/avatar', {
+					userId: string.replace('@', ''),
+					short: true,
+					icon: false
+				});
+				chatMessageContent = chatMessageContent.replace(string, avatarTool);
+			});
+			$chatMessageContent.html(chatMessageContent);
+
+			// mark element as processed
+			element.attr('data-mentionsProcessed', 1);
+
+			return element;
 		}
 	});
 

@@ -46,26 +46,7 @@
 		tool.chatTool.state.onMessageRender.set(function (fields, html) {
 			var $html = $(fields.html || html);
 
-			// parse all links in message
-			var $chatMessageContent = $(".Streams_chat_message_content", $html);
-			var chatMessageContent = $chatMessageContent.html();
-			Q.each(chatMessageContent.matchTypes('url'), function (i, url) {
-				var href = url;
-				if (href.indexOf('//') === -1) {
-					href = '//' + href;
-				}
-
-				chatMessageContent = chatMessageContent.replace(url, "<a href='" + href + "' target='_blank'>" + url + "</a>");
-			});
-			$chatMessageContent.html(chatMessageContent);
-
-			var instructions = Q.getObject('Websites/webpages', JSON.parse(fields.instructions || null));
-
-			if (instructions) {
-				var elementToAppend = state.appendTo === 'bubble' ? $(".Streams_chat_bubble", $html) : $html;
-				instructions.editable = false;
-				$(Q.Tool.setUpElementHTML('div', 'Websites/webpage/preview', instructions)).appendTo(elementToAppend);
-			}
+			$html = tool.parseChatMessage($html, fields.instructions);
 
 			fields.html = $html[0].outerHTML;
 		}, tool);
@@ -80,6 +61,12 @@
 				});
 			}
 		}, tool);
+
+		// parse old messages
+		Q.each($(".Streams_chat_item", tool.chatTool.element), function (i, element) {
+			var $this = $(this);
+			tool.parseChatMessage($this, $this.attr('data-instructions'));
+		});
 	},
 
 	{
@@ -152,6 +139,48 @@
 					});
 				});
 			});
+		},
+		/**
+		 *	Add Websites/webpage/preview tools to chat messages
+		 *
+		 * @method parseChatMessage
+		 * @return {jQuery|HTMLElement} element Chat message element (Streams_chat_item)
+		 */
+		parseChatMessage: function (element, instructions) {
+			if (!(element instanceof jQuery)) {
+				element = $(element);
+			}
+
+			if (element.attr('data-webpageProcessed')) {
+				return;
+			}
+
+			var state = this.state;
+
+			// parse all links in message
+			var $chatMessageContent = $(".Streams_chat_message_content", element);
+			var chatMessageContent = $chatMessageContent.html();
+			Q.each(chatMessageContent.matchTypes('url'), function (i, url) {
+				var href = url;
+				if (href.indexOf('//') === -1) {
+					href = '//' + href;
+				}
+
+				chatMessageContent = chatMessageContent.replace(url, "<a href='" + href + "' target='_blank'>" + url + "</a>");
+			});
+			$chatMessageContent.html(chatMessageContent);
+
+			instructions = Q.getObject('Websites/webpages', JSON.parse(instructions || null));
+			if (instructions) {
+				var elementToAppend = state.appendTo === 'bubble' ? $(".Streams_chat_bubble", element) : element;
+				instructions.editable = false;
+				$(Q.Tool.setUpElementHTML('div', 'Websites/webpage/preview', instructions)).appendTo(elementToAppend);
+			}
+
+			// mark element as processed
+			element.attr('data-webpageProcessed', 1);
+
+			return element;
 		},
 		/**
 		 *	This is used Validation for Website URL Text in the contents.
