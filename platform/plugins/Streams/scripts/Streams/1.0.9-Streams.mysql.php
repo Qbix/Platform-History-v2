@@ -1,23 +1,33 @@
 <?php
 	
-function Streams_0_1_7_Streams()
+function Streams_0_1_9_Streams()
 {
-	$from = STREAMS_PLUGIN_VIEWS_DIR.DS.'Streams'.DS.'templates';
-	$dir = APP_WEB_DIR.DS.'Q'.DS.'views'.DS.'Streams';
-	$to = $dir.DS.'templates';
-	if (!file_exists($to)) {
-		if (!file_exists($dir)) {
-			mkdir($dir, 0777, true);
+	$offset = 0;
+	$i = 0;
+	echo "Creating Streams/mentioned streams".PHP_EOL;
+	while (1) {
+		$users = Users_User::select()
+			->limit(100, $offset)
+			->fetchDbRows();
+		if (!$users) {
+			break;
 		}
-		Q_Utils::symlink($from, $to);
-	}
-
-	// symlink the icons folder
-	/*Q_Utils::symlink(
-		STREAMS_PLUGIN_FILES_DIR.DS.'Streams'.DS.'icons',
-		STREAMS_PLUGIN_WEB_DIR.DS.'img'.DS.'icons',
-		true
-	);*/
+		foreach ($users as $user) {
+			$stream = Streams::fetchOne($user->id, $user->id, 'Streams/mentioned');
+			if ($stream) {
+				continue;
+			}
+			Streams::create($user->id, $user->id, 'Streams/mentioned', array(
+				'name' => "Streams/mentioned",
+				'skipAccess' => true
+			))->subscribe(array('userId' => $user->id));
+			++$i;
+			echo "\033[100D";
+			echo "Created $i streams";
+		}
+		$offset += 100;
+	};
+	echo PHP_EOL;
 }
 
-Streams_0_1_7_Streams();
+Streams_0_1_9_Streams();
