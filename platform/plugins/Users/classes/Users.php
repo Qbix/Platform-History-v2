@@ -1507,7 +1507,7 @@ abstract class Users extends Base_Users
 			}
 		}
 		if ($largestUrl) {
-			if (Q_Valid::url($largestUrl, true)) {
+			if (filter_var($largestUrl, FILTER_VALIDATE_URL)) {
 				$data = Q_Utils::get($largestUrl, null, true, $o);
 			} else {
 				$data = file_get_contents($largestUrl);
