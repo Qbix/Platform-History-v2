@@ -214,9 +214,15 @@ window.WebRTCconferenceLib = function app(options){
 			}
 
 			for(var t = this.tracks.length - 1; t >= 0; t--){
-				if(this.tracks[t].mediaStreamTrack != null) this.tracks[t].mediaStreamTrack.stop()
-			}
 
+				if(this.tracks[t].mediaStreamTrack != null) {
+					this.tracks[t].mediaStreamTrack.stop();
+				}
+				if(typeof cordova != 'undefined' && _isiOS && this.tracks[t].stream != null) {
+					this.tracks[t].stream.getTracks()[0].stop();
+				}
+			}
+			if(typeof cordova != 'undefined' && _isiOS) iosrtcLocalPeerConnection.removeLocalNativeStreams();
 			for(var p = roomParticipants.length - 1; p >= 0; p--){
 				if(roomParticipants[p].sid == this.sid) {
 					roomParticipants.splice(p, 1);
@@ -4739,7 +4745,7 @@ window.WebRTCconferenceLib = function app(options){
 				var localTracks = localParticipant.tracks;
 				for (var t in localTracks) {
 					if(localTracks[t].stream != null) {
-						localTracks[t].medaStreamTrack.stop();
+						localTracks[t].mediaStreamTrack.stop();
 						localParticipant.RTCPeerConnection.removeStream(localTracks[t].stream);
 					}
 				}
@@ -4762,6 +4768,7 @@ window.WebRTCconferenceLib = function app(options){
 			var iceQueue = [];
 			var _negotiating = false;
 			var _offerQueue = null;
+			var _nativeStreams = [];
 
 			function setAnswer(message) {
 
@@ -4872,20 +4879,7 @@ window.WebRTCconferenceLib = function app(options){
 					newStreamKind = 'video';
 				else if (audioTracks.length != 0 && videoTracks.length == 0) newStreamKind = 'audio';
 
-				var RTCLocalStreams = localParticipant.iosrtcRTCPeerConnection.getLocalStreams()
-				for (var t in RTCLocalStreams) {
-					let videoTracks = RTCLocalStreams[t].getVideoTracks();
-					let audioTracks = RTCLocalStreams[t].getAudioTracks();
-					var currentStreamkind;
-					if (videoTracks.length != 0 && audioTracks.length == 0)
-						currentStreamkind = 'video';
-					else if (audioTracks.length != 0 && videoTracks.length == 0)
-						currentStreamkind = 'audio';
-
-					if(currentStreamkind != newStreamKind) continue;
-					RTCLocalStreams[t].stop();
-					localParticipant.iosrtcRTCPeerConnection.removeStream(RTCLocalStreams[t]);
-				}
+				removeLocalNativeStreams(newStreamKind);
 
 				if(_negotiating){
 					_offerQueue = function () {
@@ -4893,8 +4887,27 @@ window.WebRTCconferenceLib = function app(options){
 					}
 				} else localParticipant.iosrtcRTCPeerConnection.addStream(stream);
 
+				_nativeStreams.push(stream);
+			}
 
+			function removeLocalNativeStreams(kind) {
+				var RTCLocalStreams = localParticipant.iosrtcRTCPeerConnection.getLocalStreams();
+				for (var t in RTCLocalStreams) {
+					if(kind != null) {
+						let videoTracks = RTCLocalStreams[t].getVideoTracks();
+						let audioTracks = RTCLocalStreams[t].getAudioTracks();
+						var currentStreamkind;
+						if (videoTracks.length != 0 && audioTracks.length == 0)
+							currentStreamkind = 'video';
+						else if (audioTracks.length != 0 && videoTracks.length == 0)
+							currentStreamkind = 'audio';
 
+						if (currentStreamkind != kind) continue;
+					}
+
+					RTCLocalStreams[t].stop();
+					localParticipant.iosrtcRTCPeerConnection.removeStream(RTCLocalStreams[t]);
+				}
 			}
 
 			function createIosrtcLocalPeerConnection(callback) {
@@ -4925,7 +4938,8 @@ window.WebRTCconferenceLib = function app(options){
 				setAnswer: setAnswer,
 				setOffer: setOffer,
 				addIceCandidate: addIceCandidate,
-				addStream: addStream
+				addStream: addStream,
+				removeLocalNativeStreams: removeLocalNativeStreams
 			}
 		}())
 	}
@@ -5136,6 +5150,7 @@ window.WebRTCconferenceLib = function app(options){
 		}
 	}
 	app.disconnect = function () {
+
 		if(app.checkOnlineStatusInterval != null) {
 			clearInterval(app.checkOnlineStatusInterval);
 			app.checkOnlineStatusInterval = null;
@@ -5147,7 +5162,7 @@ window.WebRTCconferenceLib = function app(options){
 
 		for(var p = roomParticipants.length - 1; p >= 0; p--){
 			if(roomParticipants[p].soundMeter.script != null) roomParticipants[p].soundMeter.script.disconnect();
-			if(roomParticipants[p].soundMeter.source != null) roomParticipants[p].soundMeter.source.disconnect();2
+			if(roomParticipants[p].soundMeter.source != null) roomParticipants[p].soundMeter.source.disconnect();
 
 			if(options.mode == 'node' && !roomParticipants[p].isLocal) {
 				if (roomParticipants[p].RTCPeerConnection != null) roomParticipants[p].RTCPeerConnection.close();
