@@ -774,14 +774,14 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		// when virtual keyboard appear, trying to scroll body to input element position
 		$input.on('focus', function () {
+			var originalHeight = window.innerHeight;
 			setTimeout(function () {
-				var $body = $("body");
-				$body[0].scrollTo(0, $body.height());
+				document.body.scrollTo(0, $input.offset().top - window.innerHeight);
 
 				setTimeout(function () {
 					tool.scrollToBottom();
 				}, 200);
-			}, 1000);
+			}, 500);
 		});
 
 		// submit button handler
