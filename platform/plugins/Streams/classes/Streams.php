@@ -2989,29 +2989,23 @@ abstract class Streams extends Base_Streams
 			))->fetchAll(PDO::FETCH_ASSOC);
 			foreach ($rows as $row) {
 				$name = $row['name'];
-				$types[$row['type']][] = $row['name'];
-			}
-			$o = $userStreamsTree->get($name, "subscribe", array());
-			if ($o) {
-				if (isset($o['filter'])) {
-					$filter = Q::json_encode($o['filter']);
+				$type = $row['type'];
+				if ($o = $userStreamsTree->get($name, "subscribe", array())) {
+					if (isset($o['filter'])) {
+						$filter = Q::json_encode($o['filter']);
+					}
+					if (isset($o['untilTime'])) {
+						$untilTime = $db->toDateTime($o['untilTime']);
+					}
+					if (isset($o['rule'])) {
+						$rule = $o['rule'];
+					}
 				}
-				if (isset($o['untilTime'])) {
-					$untilTime = $db->toDateTime($o['untilTime']);
-				}
-				if (isset($o['rule'])) {
-					$rule = $o['rule'];
-				}
-			}
-			$subscriptionRows = array();
-			$ruleRows = array();
-			foreach ($types as $type => $sns) {
-				// insert subscriptions
 				if (!isset($filter) or !isset($untilTime)) {
 					$templates = Streams_Subscription::select()
 						->where(array(
 							'publisherId' => array('', $publisherId),
-							'streamName' => $type.'/',
+							'streamName' => "$type/",
 							'ofUserId' => array('', $asUserId)
 						))->fetchAll(PDO::FETCH_ASSOC);
 					$template = null;
@@ -3044,67 +3038,74 @@ abstract class Streams extends Base_Streams
 						? new Db_Expression("CURRENT_TIMESTAMP + INTERVAL $template[duration] SECOND")
 						: null;
 				}
-				foreach ($sns as $sn) {
-					$subscriptions[$sn] = $subscriptionRows[] = new Streams_Subscription(array(
+				$types[$type][] = array($name, $filter, $untilTime, $rule);
+			}
+			// prepare subscriptions and rules to be batch-inserted
+			$subscriptionRows = array();
+			$ruleRows = array();
+			foreach ($types as $type => $infos) {
+				foreach ($infos as $info) {
+					list($name, $filter, $untilTime, $rule) = $info;
+					$subscriptions[$name] = $subscriptionRows[] = new Streams_Subscription(array(
 						'publisherId' => $publisherId,
-						'streamName' => $sn,
+						'streamName' => $name,
 						'ofUserId' => $asUserId,
 						'untilTime' => $untilTime,
 						'filter' => $filter
 					));
-				}
+					if (!empty($options['skipRules'])) {
+						continue;
+					}
 
-				if (!empty($options['skipRules'])) {
-					continue;
-				}
-
-				// insert up to one rule per subscription
-				if (isset($rule)) {
-					if (isset($rule['readyTime'])) {
-						$rule['readyTime'] = $db->toDateTime($rule['readyTime']);
-					}
-					if (isset($rule['filter']) and is_array($rule['filter'])) {
-						$rule['filter'] = Q::json_encode($rule['filter']);
-					}
-					if (isset($rule['deliver']) and is_array($rule['deliver'])) {
-						$rule['deliver'] = Q::json_encode($rule['deliver']);
-					}
-				}
-				if (!isset($rule)) {
-					$templates = Streams_SubscriptionRule::select()
-						->where(array(
-							'ofUserId' => array('', $asUserId),
-							'publisherId' => array('', $publisherId),
-							'streamName' => $type.'/',
-							'ordinal' => 1
-						))->fetchAll(PDO::FETCH_ASSOC);
-					foreach ($templates as $t) {
-						if (!$rule
-						or ($rule['userId'] == '' and $t['userId'] !== '')
-						or ($rule['publisherId'] == '' and $t['publisherId'] !== '')) {
-							$rule = $t;
+					// insert up to one rule per subscription
+					if (isset($rule)) {
+						if (isset($rule['readyTime'])) {
+							$rule['readyTime'] = $db->toDateTime($rule['readyTime']);
+						}
+						if (isset($rule['filter']) and is_array($rule['filter'])) {
+							$rule['filter'] = Q::json_encode($rule['filter']);
+						}
+						if (isset($rule['deliver']) and is_array($rule['deliver'])) {
+							$rule['deliver'] = Q::json_encode($rule['deliver']);
 						}
 					}
-				}
-				if (!isset($rule)) {
-					$rule = array(
-						'deliver' => '{"to": "default"}',
-						'filter' => '{"types": [], "labels": []}'
-					);
-				}
-				if ($rule) {
-					$rule['ofUserId'] = $asUserId;
-					$rule['publisherId'] = $publisherId;
-					if (empty($rule['readyTime'])) {
-						$rule['readyTime'] = new Db_Expression("CURRENT_TIMESTAMP");
+					if (!isset($rule)) {
+						// the following statement uses cache, so it happens once per type
+						$templates = Streams_SubscriptionRule::select()
+							->where(array(
+								'ofUserId' => array('', $asUserId),
+								'publisherId' => array('', $publisherId),
+								'streamName' => $type.'/',
+								'ordinal' => 1
+							))->fetchAll(PDO::FETCH_ASSOC);
+						foreach ($templates as $t) {
+							if (!$rule
+							or ($rule['userId'] == '' and $t['userId'] !== '')
+							or ($rule['publisherId'] == '' and $t['publisherId'] !== '')) {
+								$rule = $t;
+							}
+						}
 					}
-					foreach ($sns as $sn) {
+					if (!isset($rule)) {
+						$rule = array(
+							'deliver' => '{"to": "default"}',
+							'filter' => '{"types": [], "labels": []}'
+						);
+					}
+					if ($rule) {
+						$rule['ofUserId'] = $asUserId;
+						$rule['publisherId'] = $publisherId;
+						if (empty($rule['readyTime'])) {
+							$rule['readyTime'] = new Db_Expression("CURRENT_TIMESTAMP");
+						}
 						$row = $rule;
-						$row['streamName'] = $sn;
+						$row['streamName'] = $name;
 						$row['ordinal'] = 1;
-						$row['filter'] = '';
-						$rules[$sn] = $ruleRows[] = $row;
-						$messages[$publisherId][$sn]['instructions'] = Q::json_encode(array(
+						if (!isset($row['filter'])) {
+							$row['filter'] = '';
+						}
+						$rules[$name] = $ruleRows[] = $row;
+						$messages[$publisherId][$name]['instructions'] = Q::json_encode(array(
 							'rule' => $row
 						));
 					}
