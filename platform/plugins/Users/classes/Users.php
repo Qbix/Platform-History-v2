@@ -43,10 +43,9 @@ abstract class Users extends Base_Users
 	 */
 	static function isCustomIcon ($icon) {
 		if (!$icon) {
-			false;
+			return false;
 		}
 		return strpos($icon, 'imported') !== false
-		or strpos($icon, 'uploads') !== false
 		or preg_match("/\/icon\/[0-9]+/", $icon);
 	}
 
@@ -981,6 +980,7 @@ abstract class Users extends Base_Users
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
 	 * @param {string} [$options.skipIdentifier=false] Whether skip empty identifier
+	 * @param {string} [$options.leaveGeneratedIcon=false] Whether to leave generated icon and don't replace it with some icon finded with FB/google or random faces.
 	 * @return {Users_User}
 	 * @throws {Q_Exception_WrongType} If identifier is not e-mail or modile
 	 * @throws {Q_Exception} If user was already verified for someone else
@@ -1507,7 +1507,7 @@ abstract class Users extends Base_Users
 			}
 		}
 		if ($largestUrl) {
-			if (Q_Valid::url($largestUrl)) {
+			if (Q_Valid::url($largestUrl, true)) {
 				$data = Q_Utils::get($largestUrl, null, true, $o);
 			} else {
 				$data = file_get_contents($largestUrl);
