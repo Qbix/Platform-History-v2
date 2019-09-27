@@ -27,7 +27,8 @@
         "earlierComments": "earlier comments",
         "notAllowedToJoinCall": "You don't have permission to join this conversation.",
         "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call"
+        "RealTimeCall": "Real Time Call",
+		"SearchByName": "Search by name"
     },
     "notifications": {
         "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
@@ -45,7 +46,8 @@
         "Streams\/incoming\/*": "{{app}}: Incoming Message",
         "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
         "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}"
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+		"Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment"
     },
     "invite": {
         "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
@@ -74,7 +76,8 @@
             "subject": "Hey, check this out",
             "PleaseVisitLink": "Please visit the following link:",
             "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}"
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+			"HasMentionedYou": "{{displayName}} has mentioned you in {{title}}"
         },
         "sms": {
             "content": "You have been invited to {{title}}. Please tap {{url}}"

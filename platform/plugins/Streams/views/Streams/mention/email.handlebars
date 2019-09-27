@@ -1,0 +1,9 @@
+<p>
+	{{interpolate invite.email.HasMentionedYou displayName=(call "message.getInstruction" "displayName") title=(call "message.getInstruction" "title")}}
+</p>
+<p>
+	{{invite.email.PleaseVisitLink}}
+	<a href="{{call "message.getInstruction" "mentionUrl"}}">
+    	{{call "message.getInstruction" "mentionUrl"}}
+    </a>
+</p>

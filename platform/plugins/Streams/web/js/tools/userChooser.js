@@ -19,6 +19,7 @@
  *   @param {Object} [options.exclude] hash of {userId: true},
  *    where userId are the ids of the users to exclude from the results.
  *    Defaults to id of logged-in user, if logged in.
+ *   @param {string} [options.position=bottom] Vertical position of results related to input. Can be 'top', 'bottom'
  */
 Q.Tool.define("Streams/userChooser", function(o) {
 	Q.plugins.Streams.cache = Q.plugins.Streams.cache || {};
@@ -178,9 +179,22 @@ Q.Tool.define("Streams/userChooser", function(o) {
 			if (show) {
 				tool.$results.css({
 					left: tool.$input.offset().left + 'px',
-					top: tool.$input.offset().top + tool.$input.outerHeight() + 'px',
 					width: tool.$input.outerWidth()
 				}).appendTo('body').show();
+
+				var position = tool.$input.offset().top + tool.$input.outerHeight();
+				var height = 300 - tool.$input.outerHeight();
+				if (tool.state.position === 'top') {
+					tool.$results.css({
+						top: position - 300 + 'px',
+						height: height,
+						overflow: 'auto',
+					});
+				} else {
+					tool.$results.css({
+						top: position + 'px',
+					});
+				}
 			} else {
 				tool.$results.remove();
 			}
@@ -200,6 +214,11 @@ Q.Tool.define("Streams/userChooser", function(o) {
 	end: function () {
 		this.$input.blur().trigger('Q_refresh');
 		this.$results.remove();
+	},
+	Q: {
+		beforeRemove: function () {
+			this.end();
+		}
 	}
 }
 

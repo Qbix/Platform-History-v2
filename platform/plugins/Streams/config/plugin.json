@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "1.0.8",
+				"version": "1.0.9",
 				"compatible": "0.9",
 				"requires": {"Users": "1.0.4"},
 				"permissions": ["Streams/icons"],
@@ -247,6 +247,21 @@
 					"filter": {
 						"types": ["Streams/invite"],
 						"notifications": 0
+					}
+				}
+			},
+			"Streams/mentioned": {
+				"create": false,
+				"subscriptions": {
+					"filter": {
+						"types": ["Streams/mention"],
+						"notifications": 0
+					}
+				},
+				"messages": {
+					"Streams/mentioned": {
+						"description": "User was mentioned",
+						"subject": ["Streams/content", ["notifications", "Streams/mention"]]
 					}
 				}
 			},
@@ -501,6 +516,7 @@
 			"Users_User": [
 				"Streams/participating",
 				"Streams/invited",
+				"Streams/mentioned",
 				"Streams/user/username",
 				"Streams/user/icon",
 				"Streams/user/firstName",
@@ -524,7 +540,8 @@
 		"rules": {
 			"deliver": {
 				"default": ["devices", "email", "mobile"],
-				"invited": ["devices", "mobile+pending", "email+pending"]
+				"invited": ["devices", "mobile+pending", "email+pending"],
+				"mention": ["devices", "mobile+pending", "email+pending"]
 			}
 		},
 		"notifications": {

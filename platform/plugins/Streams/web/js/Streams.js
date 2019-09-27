@@ -547,6 +547,7 @@ Streams.actionUrl = function(publisherId, streamName, what) {
 Q.Tool.define({
 	"Users/avatar"		 : "{{Streams}}/js/tools/avatar.js", // override for Users/avatar tool
 	"Streams/chat"		 : "{{Streams}}/js/tools/chat.js",
+	"Streams/mentions/chat": "{{Streams}}/js/tools/mentions.js",
 	"Streams/comments"	 : "{{Streams}}/js/tools/comments.js",
 	"Streams/photoSelector": "{{Streams}}/js/tools/photoSelector.js",
 	"Streams/userChooser"  : "{{Streams}}/js/tools/userChooser.js",
@@ -579,6 +580,10 @@ Q.Tool.define({
 	"Streams/album/preview": "{{Streams}}/js/tools/album/preview.js",
 	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js"
 });
+
+Q.Tool.onActivate("Streams/chat").set(function () {
+	$(this.element).tool('Streams/mentions/chat').activate();
+}, 'Streams');
 
 /**
  * Streams batch getter.
