@@ -764,6 +764,7 @@ Q.Tool.define("Q/columns", function(options) {
 		}
 		
 		Q.Pointer.cancelClick();
+		Q.Masks.show('Q.click.mask');
 		
 		var expandTop = index > 0 && Q.info.isMobile && state.expandOnMobile && state.expandOnMobile.top;
 		var expandBottom = index > 0 && Q.info.isMobile && state.expandOnMobile && state.expandOnMobile.bottom;
@@ -798,6 +799,7 @@ Q.Tool.define("Q/columns", function(options) {
 			if (o.pagePushUrl && url && url !== location.href) {
 				Q.Page.push(url, title);
 			}
+			Q.Masks.hide('Q.click.mask');
 		}
 	},
 
