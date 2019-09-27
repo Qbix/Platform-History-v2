@@ -775,13 +775,11 @@ Q.Tool.define('Streams/chat', function(options) {
 		// when virtual keyboard appear, trying to scroll body to input element position
 		$input.on('focus', function () {
 			var originalHeight = window.innerHeight;
-			setTimeout(function () {
-				setTimeout(function () {
-					tool.scrollToBottom(function () {
-						document.body.scrollTo(0, $input.offset().top + 100);
-					});
-				}, 200);
-			}, 500);
+			var p = Q.pipe(['scroll', 'keyboard'], function () {
+				document.body.scrollTo(0, $input.offset().top - 150);
+			});
+			tool.scrollToBottom(p.fill('scroll'));
+			setTimeout(p.fill('keyboard'), 500);
 		});
 
 		// submit button handler
