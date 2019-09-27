@@ -18,7 +18,7 @@
 
 		Q.addStylesheet('{{Websites}}/css/tools/webpage/chat.css');
 
-		$(tool.chatTool.element).on('input', '.Streams_chat_composer input', Q.debounce(function () {
+		$(tool.chatTool.element).on('input', '.Streams_chat_composer input, .Streams_chat_composer textarea', Q.debounce(function () {
 			tool.process(this);
 		}, 500));
 

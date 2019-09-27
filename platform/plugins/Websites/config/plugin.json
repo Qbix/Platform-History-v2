@@ -24,9 +24,15 @@
 	},
 	"Users": {
 		"quotas": {
-			"Websites/webpage": {
+			"Websites/webpage/conversation": {
 				"86400": {
 					"": 5,
+					"Users/admins": 1000
+				}
+			},
+			"Websites/webpage/chat": {
+				"86400": {
+					"": 10,
 					"Users/admins": 1000
 				}
 			}
