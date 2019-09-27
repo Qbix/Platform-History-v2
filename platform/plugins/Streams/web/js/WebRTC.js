@@ -48,7 +48,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	var _debug = false;
 	var _debugTimer = {};
 
-
 	/**
 	 * Manages UI of WebRTC conference
 	 * @class Streams.WebRTC
@@ -614,6 +613,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						if(_options.streams != null) return;
 						//Q.Dialogs.pop();
 						if(WebRTCconference != null){
+							log('publishMediaTracks: stream is being added the room', stream);
+
 							_options.streams = [stream];
 							var publishTracks = function() {
 								var tracks = stream.getTracks();
@@ -802,7 +803,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							screensRendering.updateLayout();
 
 
-							if(Q.info.isMobile) return;
 							var btnsToIgnore = Array.prototype.slice.call(_controls.querySelectorAll('.Streams_webrtc_conference-control-inner > div'));
 							var elementsToIgnore = [_controlsTool.settingsPopupEl, _controlsTool.textChat.chatBox, _controlsTool.participantListEl.parentNode];
 							elementsToIgnore = elementsToIgnore.concat(btnsToIgnore);
@@ -1387,12 +1387,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				if(loaderName == 'screensharingFailed'){
 					screen.screensharng = false;
 				}
-
-				if(Q.info.isCordova && Q.info.platform === 'ios') {
-					cordova.plugins.iosrtc.refreshVideos();
-				}
 			}
 
+			var viewModeToSwitchBack;
 			/**
 			 * Toggle view mode (Maximized, minimized etc) on screen click.
 			 * @method toggleViewModeByScreenClick
@@ -1401,6 +1398,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			function toggleViewModeByScreenClick(e) {
 				e.stopImmediatePropagation();
 				e.preventDefault();
+
+				if(viewMode == 'tiled' || viewMode == 'regular' || viewMode == 'tiledMobile' || viewMode == 'maximizedMobile') {
+					viewModeToSwitchBack = viewMode;
+				}
+
 				var roomScreens = WebRTCconference.screens();
 
 				var tappedScreen = roomScreens.filter(function (obj) {
@@ -1426,8 +1428,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				if(_controlsTool != null) _controlsTool.participantsPopup().disableLoudesScreenMode();
 
+				console.log('activeScreen', activeScreen);
+				console.log('viewMode', viewMode);
+				console.log('viewModeToSwitchBack', viewModeToSwitchBack);
 				if(activeScreen && !activeScreen.screenEl.contains(e.target)) {
-
+					console.log('toggleViewModeByScreenClick 1');
 					enableAllScreenToRender();
 
 					tappedScreen.screenEl.style.zIndex = '';
@@ -1437,7 +1442,42 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					} else renderMaximizedScreensGrid(tappedScreen);
 
 					return;
+				} else if(activeScreen && (activeScreen.screenEl.contains(e.target) || activeScreen.screenEl == e.target)) {
+					console.log('toggleViewModeByScreenClick 2');
+					enableAllScreenToRender();
+
+					tappedScreen.screenEl.style.zIndex = '';
+
+					if(Q.info.isMobile){
+						renderMinimizedScreensGridMobile(tappedScreen);
+					} else renderMinimizedScreensGrid(tappedScreen);
+
+					return;
+				} else if (activeScreen == null && (viewMode == 'tiled' || viewMode == 'tiledMobile')) {
+					console.log('toggleViewModeByScreenClick 3');
+					enableAllScreenToRender();
+
+					tappedScreen.screenEl.style.zIndex = '';
+
+					if(Q.info.isMobile){
+						renderMaximizedScreensGridMobile(tappedScreen);
+					} else renderMaximizedScreensGrid(tappedScreen);
+
+					return;
+				} else if (activeScreen == null && (viewMode == 'minimized' || viewMode == 'minimizedMobile')) {
+					console.log('toggleViewModeByScreenClick 4');
+					enableAllScreenToRender();
+
+					tappedScreen.screenEl.style.zIndex = '';
+					if(viewModeToSwitchBack == 'tiled' || viewModeToSwitchBack == 'tiledMobile' || viewModeToSwitchBack == 'maximizedMobile' || viewModeToSwitchBack == 'regular') {
+						console.log('viewModeToSwitchBack', viewModeToSwitchBack)
+						if(viewModeToSwitchBack == 'maximizedMobile') viewModeToSwitchBack = 'tiledMobile';
+						toggleViewMode(viewModeToSwitchBack);
+					}
+
+					return;
 				} else if (activeScreen && activeScreen.excludeFromRendering && (activeScreen.screenEl.contains(e.target) || activeScreen.screenEl == e.target)) {
+					console.log('toggleViewModeByScreenClick 5');
 
 					enableAllScreenToRender();
 
@@ -1447,9 +1487,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 					return;
 				}
+				console.log('toggleViewModeByScreenClick 6');
 
 				enableAllScreenToRender();
-				toggleViewMode(tappedScreen);
+				toggleViewMode(null, tappedScreen);
 				bindScreensEvents();
 			}
 
@@ -1458,22 +1499,25 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			 * @method toggleViewMode
 			 * @param {Object} [tappedScreen] Screen that has tapped/clicked in order to maximize it
 			 */
-			function toggleViewMode(tappedScreen) {
+			function toggleViewMode(modeToSwitch, tappedScreen) {
 				var modes;
 				if(Q.info.isMobile)
 					modes = ['tiledMobile', 'maximizedMobile'];
 				else modes = ['regular', 'maximized', 'tiled'];
 
-				var i, mode, modeToSwitch;
+				if(typeof modeToSwitch == 'undefined' || modeToSwitch == null) {
+					var i, mode;
 
-				for(i = 0; mode = modes[i]; i++){
-					if(mode == viewMode || viewMode == null) {
-						if(i != modes.length-1){
-							modeToSwitch = modes[i+1];
-						} else modeToSwitch = modes[0];
-						break;
+					for (i = 0; mode = modes[i]; i++) {
+						if (mode == viewMode || viewMode == null) {
+							if (i != modes.length - 1) {
+								modeToSwitch = modes[i + 1];
+							} else modeToSwitch = modes[0];
+							break;
+						}
 					}
-				};
+					;
+				}
 
 				if(modeToSwitch == null || modeToSwitch == 'regular') {
 					renderDesktopScreensGrid();
@@ -1485,6 +1529,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					renderTiledScreenGridMobile();
 				} else if(modeToSwitch == 'maximizedMobile') {
 					renderMaximizedScreensGridMobile(tappedScreen);
+				} else if(modeToSwitch == 'minimizedMobile') {
+					renderMinimizedScreensGridMobile();
 				} else if(modeToSwitch == 'tiled') {
 					var roomScreens = WebRTCconference.screens();
 					if(roomScreens.length == 1) {
@@ -1577,7 +1623,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				}
 
-				if(layout == 'minimizedScreensGrid' || layout == 'maximizedScreensGrid' || layout == 'maximizedVerticalMobile' || layout == 'maximizedHorizontalMobile') {
+				if(layout == 'minimizedScreensGrid' || layout == 'maximizedScreensGrid'
+					|| layout == 'maximizedVerticalMobile' || layout == 'maximizedHorizontalMobile'
+					|| layout == 'minimizedVerticalMobile' || layout == 'minimizedHorizontalMobile') {
 					var screenClass = 'Streams_webrtc_minimized-small-screen';
 					var maximizedScreenClass = 'Streams_webrtc_maximized-main-screen';
 
@@ -1829,6 +1877,28 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				}
 
 				viewMode = 'maximizedMobile';
+				if(_controlsTool) _controlsTool.updateViewModeBtns();
+				resetAudioVisualization();
+			}
+
+			/**
+			 * Minimize all screens.
+			 * @method renderMinimizedScreensGridMobile
+			 */
+			function renderMinimizedScreensGridMobile() {
+				log('renderMinimizedScreensGridMobile')
+				if(_layoutTool == null || _controls == null) return;
+				activeScreen = null;
+
+				if(window.innerHeight > window.innerWidth) {
+					var elements = toggleScreensClass('minimizedVerticalMobile');
+					_layoutTool.animate('minimizedVerticalMobile', elements, 100, true);
+				} else {
+					var elements = toggleScreensClass('minimizedHorizontalMobile');
+					_layoutTool.animate('minimizedHorizontalMobile', elements, 100, true);
+				}
+
+				viewMode = 'minimizedMobile';
 				if(_controlsTool) _controlsTool.updateViewModeBtns();
 				resetAudioVisualization();
 			}
@@ -2404,6 +2474,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				function onConnect() {
 					log('start: load time ' + (performance.now() - _debugTimer.loadStart));
+					log('start: onConnect');
 
 					var ua = navigator.userAgent;
 					var startWith = _options.startWith || {};
@@ -2559,7 +2630,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							Q.Streams.get(asPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
 								_roomStream = stream;
 								window.roomStream = _roomStream;
-								log('start: createOrJoinRoomStream: mode' + _options.mode)
+								log('start: createOrJoinRoomStream: mode ' + _options.mode)
 								bindStreamsEvents(stream);
 								if(_options.mode === 'twilio') {
 									startTwilioRoom(roomId, response.slots.room.accessToken);

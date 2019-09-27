@@ -188,9 +188,13 @@ var _generators = {
         }
 	},
 	tiledHorizontalMobile: function (container, count) {
-		var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
-        var size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
-
+		var size;
+		if(container.width != null && container.height != null) {
+			size = {parentWidth:container.width, parentHeight:container.height};
+		} else {
+			var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
+			size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
+		}
         switch (count) {
             case 1:
                 return simpleGrid(count, size, 1);
@@ -213,25 +217,41 @@ var _generators = {
 		var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
         var size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
 
-        return maximizedMobile(count, size);
+        return minimizedOrMaximizedMobile(count, size, true);
         },
 
 	maximizedHorizontalMobile: function (container, count) {
 		var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
         var size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
 
-        return maximizedHorizontalMobile(count, size);
+        return minimizedOrMaximizedHorizontalMobile(count, size);
+	},
+	minimizedVerticalMobile: function (container, count) {
+		console.log('minimizeVerticalMobile')
+		var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
+        var size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
+
+        return minimizedOrMaximizedMobile(count, size);
+        },
+
+	minimizedHorizontalMobile: function (container, count) {
+		var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
+        var size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
+
+        return minimizedOrMaximizedHorizontalMobile(count, size);
 	}
 };
 
 
-    function maximizedMobile(count, size) {
+    function minimizedOrMaximizedMobile(count, size, maximized) {
 
         var rects = [];
 
+        if(maximized) {
+	        var mainScreenRect = new DOMRect(0, 0, size.parentWidth, size.parentHeight);
+	        rects.push(mainScreenRect);
+        }
 
-	    var mainScreenRect = new DOMRect(0, 0, size.parentWidth, size.parentHeight);
-	    rects.push(mainScreenRect);
 
 	    var rectWidth = 100;
 	    var rectHeight = 139;
@@ -319,12 +339,14 @@ var _generators = {
     }
 
 
-    function maximizedHorizontalMobile(count, size) {
+    function minimizedOrMaximizedHorizontalMobile(count, size, maximized) {
 
         var rects = [];
 
-	    var mainScreenRect = new DOMRect(0, 0, size.parentWidth, size.parentHeight);
-	    rects.push(mainScreenRect);
+        if(maximized) {
+	        var mainScreenRect = new DOMRect(0, 0, size.parentWidth, size.parentHeight);
+	        rects.push(mainScreenRect);
+        }
 
 	    var rectWidth = 100;
 	    var rectHeight = 100;

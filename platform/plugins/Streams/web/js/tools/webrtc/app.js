@@ -2508,7 +2508,7 @@ window.WebRTCconferenceLib = function app(options){
 						for (var t in localTracks) {
 							log('createPeerConnection: add track ' + localTracks[t].kind)
 
-							if (localTracks[t].kind == 'video') newPeerConnection.addTrack(localTracks[t].mediaStreamTrack);
+							if (localTracks[t].kind == 'video') newPeerConnection.addTrack(localTracks[t].mediaStreamTrack, localTracks[t].stream);
 						}
 
 					} else {
@@ -2523,7 +2523,7 @@ window.WebRTCconferenceLib = function app(options){
 						for (var t in localTracks) {
 							log('createPeerConnection: add track ' + localTracks[t].kind)
 
-							if(localTracks[t].kind == 'audio') newPeerConnection.addTrack(localTracks[t].mediaStreamTrack);
+							if(localTracks[t].kind == 'audio') newPeerConnection.addTrack(localTracks[t].mediaStreamTrack, localTracks[t].stream);
 						}
 
 					} else {
@@ -2882,7 +2882,7 @@ window.WebRTCconferenceLib = function app(options){
 					if ('ontrack' in RTCPeerConnection) {
 						for (let t in localTracks) {
 							log('offerReceived: publishLocalAudio: add audioTrack');
-							if(localTracks[t].kind == 'audio') RTCPeerConnection.addTrack(localTracks[t].mediaStreamTrack);
+							if(localTracks[t].kind == 'audio') RTCPeerConnection.addTrack(localTracks[t].mediaStreamTrack, localTracks[t].stream);
 						}
 					} else {
 						if (localParticipant.audioStream != null) {
@@ -2902,7 +2902,7 @@ window.WebRTCconferenceLib = function app(options){
 					if ('ontrack' in RTCPeerConnection) {
 						for (let t in localTracks) {
 							log('offerReceived: publishLocalAudio: add videoTrack');
-							if (localTracks[t].kind == 'video') RTCPeerConnection.addTrack(localTracks[t].mediaStreamTrack);
+							if (localTracks[t].kind == 'video') RTCPeerConnection.addTrack(localTracks[t].mediaStreamTrack, localTracks[t].stream);
 						}
 
 					} else {
@@ -3194,6 +3194,7 @@ window.WebRTCconferenceLib = function app(options){
 						}
 					}
 				}
+				console.log('frontCameraDevice', frontCameraDevice)
 				app.event.dispatch('deviceListUpdated');
 
 			} else if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
@@ -3275,7 +3276,11 @@ window.WebRTCconferenceLib = function app(options){
 						app.event.dispatch('cameraToggled');
 					}
 
-
+					if(cameraId != null) {
+						currentCameraDevice = videoInputDevices.filter(function (d) {
+							return d.deviceId == cameraId;
+						})[0];
+					} else currentCameraDevice = deviceToSwitch;
 				}
 
 				var i;
@@ -3790,7 +3795,7 @@ window.WebRTCconferenceLib = function app(options){
 							for (var t in videoTracks) {
 								log('enableVideoTracks: addTrack: id = ' + (videoTracks[t].mediaStreamTrack.id));
 
-								roomParticipants[p].RTCPeerConnection.addTrack(videoTracks[t].mediaStreamTrack);
+								roomParticipants[p].RTCPeerConnection.addTrack(videoTracks[t].mediaStreamTrack, videoTracks[t].stream);
 								/*var params = sender.getParameters();
 
 								for (var i = 0; i < params.codecs.length; i++) {
@@ -4015,7 +4020,7 @@ window.WebRTCconferenceLib = function app(options){
 						for (var t in audioTracks) {
 							log('enableAudioTracks: add track: enabled = ' + audioTracks[t].mediaStreamTrack.enabled)
 							log('enableAudioTracks: add track: muted = ' + audioTracks[t].mediaStreamTrack.muted)
-							roomParticipants[p].RTCPeerConnection.addTrack(audioTracks[t].mediaStreamTrack);
+							roomParticipants[p].RTCPeerConnection.addTrack(audioTracks[t].mediaStreamTrack, audioTracks[t].stream);
 						}
 
 					} else {

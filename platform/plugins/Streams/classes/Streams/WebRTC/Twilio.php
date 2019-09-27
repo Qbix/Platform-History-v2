@@ -63,11 +63,14 @@ class Streams_WebRTC_Twilio extends Streams_WebRTC implements Streams_WebRTC_Int
 
         }
 
-        return array(
+		$debug = Q_Config::get('Streams', 'webrtc', 'debug', false);
+
+		return array(
             'stream' => $stream,
 	        'created' => $created,
             'roomId' => $stream->name,
             'accessToken' => $accessToken,
+            'debug' => $debug,
         );
     }
 
