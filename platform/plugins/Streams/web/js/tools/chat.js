@@ -776,10 +776,10 @@ Q.Tool.define('Streams/chat', function(options) {
 		$input.on('focus', function () {
 			var originalHeight = window.innerHeight;
 			setTimeout(function () {
-				document.body.scrollTo(0, $input.offset().top - window.innerHeight);
-
 				setTimeout(function () {
-					tool.scrollToBottom();
+					tool.scrollToBottom(function () {
+						document.body.scrollTo(0, $input.offset().top + 100);
+					});
 				}, 200);
 			}, 500);
 		});
@@ -965,7 +965,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		return null;
 	},
 
-	scrollToBottom: function() {
+	scrollToBottom: function(callback) {
 		var state = this.state;
 		var $scm = this.$('.Streams_chat_messages');
 		var overflow = $scm.css('overflow-y');
@@ -978,7 +978,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		var top = $scm.offset().top - state.$scrolling.offset().top;
 		state.$scrolling.animate({ 
 			scrollTop: state.$scrolling[0].scrollHeight
-		}, this.state.animations.duration);
+		}, this.state.animations.duration, callback);
 	},
 
 	scrollToTop: function() {
