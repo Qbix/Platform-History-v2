@@ -31,10 +31,13 @@
 		"writeLevel": 20,
 		"adminLevel": 0,
 		"subscribe": {
+			"filter": {
+				"types": ["Streams/invite"],
+				"notifications": 0
+			},
 			"rule": {
 				"deliver": {
-					"to": "invited",
-					"filter": "{\"types\":[\"Streams/invite\"],\"notifications\":0}"
+					"to": "invited"
 				}
 			}
 		}
@@ -47,10 +50,13 @@
 		"writeLevel": 20,
 		"adminLevel": 0,
 		"subscribe": {
+			"filter": {
+				"types": ["Streams/mention"],
+				"notifications": 0
+			},
 			"rule": {
 				"deliver": {
-					"to": "mentioned",
-					"filter": "{\"types\":[\"Streams/mention\"],\"notifications\":0}"
+					"to": "mentioned"
 				}
 			}
 		}

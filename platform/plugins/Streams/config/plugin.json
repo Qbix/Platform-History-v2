@@ -541,7 +541,7 @@
 			"deliver": {
 				"default": ["devices", "email", "mobile"],
 				"invited": ["devices", "mobile+pending", "email+pending"],
-				"mention": ["devices", "mobile+pending", "email+pending"]
+				"mentioned": ["devices", "mobile+pending", "email+pending"]
 			}
 		},
 		"notifications": {

@@ -42,7 +42,7 @@ WebRTC.listen = function () {
 	var io = socket.io;
 	io.on('connection', function(socket) {
 
-		console.log('REQUESTED URLLLLLLLL', socket.request.url)
+		if (_debug) console.log('REQUESTED URLLLLLLLL', socket.request.url)
 		let rtmpUrl = socket.handshake.query.rtmp
 		if ( rtmpUrl != null ) {
 			//return;
