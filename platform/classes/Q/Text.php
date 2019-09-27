@@ -172,7 +172,6 @@ class Q_Text
 			$p = array_merge(array('Q', 'text'), $try[$j], array(null));
 			if ($text = call_user_func_array(array('Q_Config', 'get'), $p)) {
 				if (Q::isAssociative($text)) { 
-					$options2 = array_merge($options, $text);
 					if (empty($options2['sources'])) {
 						continue;
 					}
@@ -181,7 +180,7 @@ class Q_Text
 					$options2 = $options;
 					$sources = array_merge($sources, $text);
 				}
-				
+				break; // just take whatever is there, no merging
 			}
 		}
 		$sources = array_unique($sources);

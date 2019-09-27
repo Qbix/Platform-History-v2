@@ -107,13 +107,12 @@ Text.params = function (viewPath, options) {
 	count = _try.length;
 	var tree = new Q.Tree();
 	var p, text;
-	for (j=0; j < count; ++j) {
+	for (j=0; j<count; ++j) {
 		p = ['Q', 'text'].concat(_try[j].slice(0));
 		if (text = Q.Config.get(p, null)) {
 			if (Array.isArray(text)) {
 				options2 = options;
 			} else if (typeof text === 'object') {
-				options2 = Q.extend({}, options, text);
 				if (!text.sources) {
 					continue;
 				}
@@ -121,8 +120,8 @@ Text.params = function (viewPath, options) {
 			} else {
 				continue;
 			}
-
 			tree.merge(Text.get(text, options2));
+			break; // just take whatever is there, no merging
 		}
 	}
 	return Text.params.results[key] = tree.getAll();

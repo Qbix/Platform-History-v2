@@ -78,7 +78,7 @@
 			contextualHandler: null,
 			overflow: {
 				content: '<span><span>{{count}} more</span></span>',
-				glyph: '&#9662;',
+				glyph: '&#9776;',
 				defaultText: '...',
 				defaultHtml: '...'
 			},
