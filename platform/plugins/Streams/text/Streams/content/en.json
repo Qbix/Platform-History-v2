@@ -77,7 +77,7 @@
             "PleaseVisitLink": "Please visit the following link:",
             "InvitingYou": "I am inviting you to {{title}}",
             "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-			"HasMentionedYou": "{{displayName}} has mentioned you in {{title}}"
+			"HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\""
         },
         "sms": {
             "content": "You have been invited to {{title}}. Please tap {{url}}"

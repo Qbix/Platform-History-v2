@@ -13,6 +13,10 @@ function Streams_0_1_9_Streams()
 			break;
 		}
 		foreach ($users as $user) {
+			if (Users::isCommunityId($user->id)) {
+				continue;
+			}
+
 			$stream = Streams::fetchOne($user->id, $user->id, 'Streams/mentioned');
 			if ($stream) {
 				continue;
