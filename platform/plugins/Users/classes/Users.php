@@ -102,6 +102,26 @@ abstract class Users extends Base_Users
 
 		return isset($user->preferredLanguage) ? $user->preferredLanguage : Q_Text::$language;
 	}
+	
+	/**
+	 * Generates a capability to start a user socket session with node.js
+	 * @method capability
+	 * @static
+	 * @param {array} [$permissions=array('socket')] Leave this alone for now
+	 */
+	static function capability()
+	{
+		$duration = Q_Config::expect('Users', 'session', 'socket', 'duration');
+		$time = time();
+		$data = array(
+			'userId' => $user->id,
+			'permissions' => array('socket'),
+			'startTime' => $time,
+			'endTime' => $time + $duration
+		);
+		return Q_Utils::sign($data);
+	}
+	
 	/**
 	 * Rturn an array of the user's roles relative to a publisher
 	 * @method roles

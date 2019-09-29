@@ -423,11 +423,7 @@ Streams.listen = function (options, servers) {
 		client.on('Streams/observe',
 		function (clientId, capability, publisherId, streamName, fn) {
 			var now = Date.now() / 1000;
-			if (!capability || !Q.Utils.validate(capability)
-			|| Q.isEmpty(capability.permissions)
-			|| capability.startTime > now
-			|| capability.endTime < now
-			|| capability.permissions.indexOf('observe') < 0) {
+			if (!Q.Utils.validateCapability(capability, 'observe')) {
 				return fn && fn({
 					type: 'Users.Exception.NotAuthorized',
 					message: 'Not Authorized'
@@ -483,7 +479,6 @@ Streams.listen = function (options, servers) {
 		});
 		client.on('Streams/neglect',
 		function (clientId, capability, publisherId, streamName, fn) {
-			console.log(arguments);
 			var o = Streams.observers;
 			if (!Q.getObject([publisherId, streamName, client.id], o)) {
 				return fn && fn(null, false);

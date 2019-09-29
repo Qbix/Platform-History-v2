@@ -93,7 +93,11 @@ Utils.validate = function(data, fieldKeys) {
 
 /**
  * express server middleware validate signature of internal request
- * @method validate
+ * @method validateRequest
+ * @static
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
  */
 Utils.validateRequest = function (req, res, next) {
 	// merge in GET data
@@ -107,6 +111,33 @@ Utils.validateRequest = function (req, res, next) {
 		console.log("Request validation failed");
 		res.send(JSON.stringify({errors: "Invalid signature"}), 403); // forbidden
 	}
+};
+
+/**
+ * Validates a capability signed by our own server's secret key.
+ * The capability must have "startTime", "endTime" in milliseconds since UNIX epoch,
+ * and must also be signed with Q.Utils.sign() or equivalent implementation.
+ * @method validateCapability
+ * @static
+ * @param {Array|String} permissions
+ */
+Utils.validateCapability = function (capability, permissions) {
+	var now = Date.now() / 1000;
+	if (!capability || !Utils.validate(capability)
+	|| Q.isEmpty(capability.permissions)
+	|| capability.startTime > now
+	|| capability.endTime < now) {
+		return false;
+	}
+	if (typeof permissions === 'string') {
+		permissions = [permissions];
+	}
+	for (var i=0, l=permissions.length; i<l; ++i) {
+		if (capability.permissions.indexOf(permissions[i]) < 0) {
+			return false;
+		}
+	}
+	return true;
 };
 	
 function ksort(obj) {
