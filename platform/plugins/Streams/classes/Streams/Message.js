@@ -340,22 +340,26 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				var mobileNumber = (d.indexOf('mobile') >= 0 && uf.mobileNumber)
 					|| (d === 'mobile+pending' && uf.mobileNumberPending);
 				// Give the app an opportunity to modify the fields or anything else
-				Streams_Message.emit('deliver/before', o);
-				if (emailAddress) {
-					_email(emailAddress, p2.fill('email'));
-					waitFor.push('email');
-				}
-				if (mobileNumber) {
-					_mobile(mobileNumber, p2.fill('mobile'));
-					waitFor.push('mobile');
-				}
-				if (d === 'devices') {
-					_device(null, p2.fill(d));
-					waitFor.push(d);
-				}
-				if (platforms.indexOf(d) >= 0) {
-					_platform(p2.fill(d));
-					waitFor.push(d);
+				var handlers = Q.getObject([streamType, messageType], Streams_Message);
+				var chain = Q.chain(handlers.concat([_proceed]));
+				chain(o);
+				function _proceed(o) {
+					if (emailAddress) {
+						_email(emailAddress, p2.fill('email'));
+						waitFor.push('email');
+					}
+					if (mobileNumber) {
+						_mobile(mobileNumber, p2.fill('mobile'));
+						waitFor.push('mobile');
+					}
+					if (d === 'devices') {
+						_device(null, p2.fill(d));
+						waitFor.push(d);
+					}
+					if (platforms.indexOf(d) >= 0) {
+						_platform(p2.fill(d));
+						waitFor.push(d);
+					}
 				}
 			});
 			p2.add(waitFor, function (params) {
@@ -392,7 +396,6 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		function _email(emailAddress, callback) {
 			o.destination = 'email';
 			o.emailAddress = emailAddress;
-			Streams_Message.emit('deliver/before', o);  // app may modify some fields
 			var viewPath = messageType+'/email.handlebars';
 			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/email.handlebars';
@@ -408,7 +411,6 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		function _mobile(mobileNumber, callback) {
 			o.destination = 'mobile';
 			o.mobileNumber = mobileNumber;
-			Streams_Message.emit('deliver/before', o); // app may modify some fields
 			var viewPath = messageType+'/mobile.handlebars';
 			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/mobile.handlebars';
@@ -421,7 +423,6 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		function _device(deviceId, callback) {
 			o.destination = 'devices';
 			o.deviceId = deviceId;
-			Streams_Message.emit('deliver/before', o); // app may modify some fields
 			var viewPath = messageType+'/device.handlebars';
 			if (!Q.Handlebars.template(viewPath)) {
 				viewPath = 'Streams/message/device.handlebars';
@@ -468,5 +469,46 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		}
 	});
 };
+
+/**
+ * Call this function to add a handler before a message is delivered
+ * @method addHandler
+ * @static
+ * @param {String} streamType
+ * @param {String} messageType
+ * @param {Function} handler
+ */
+Streams.Message.addHandler = function (streamType, messageType, handler) {
+	var handlers = Q.getObject([streamType, messageType], Streams_Message);
+	if (handlers) {
+		handlers.push(handler);
+	} else {
+		Q.setObject([streamType, messageType], handler, Streams_Message);
+	}
+};
+
+/**
+ * Call this function to remove a handler before a message is delivered
+ * @method removeHandler
+ * @static
+ * @param {String} streamType
+ * @param {String} messageType
+ * @param {String} key
+ * @param {Function} handler accepts (data, callback), must call callback and pass modified data to it
+ */
+Streams_Message.removeHandler = function (streamType, messageType, handler) {
+	var handlers = Q.getObject([streamType, messageType], Streams_Message.handlers);
+	if (handlers) {
+		for (var i=0, l=handlers.length; i<l; ++i) {
+			if (handlers[i] === handler) {
+				handlers.splice(i, 1);
+				return true;
+			}
+		}
+	}
+	return false;
+};
+
+Streams_Message.handlers = {};
 
 module.exports = Streams_Message;

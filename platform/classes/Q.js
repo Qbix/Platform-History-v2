@@ -52,6 +52,15 @@ Q.assert = function (condition, complaint) {
 };
 
 /**
+ * By default this is set to the root Promise object, which may be undefined
+ * in browsers such as Internet Explorer.
+ * You can load a Promises library and set Q.Promise to the Promise constructor
+ * before including Q.js, to ensure Promises are used by Q.getter and other functions.
+ * @property {Function} Promise
+ */
+Q.Promise = root.Promise;
+
+/**
  * Returns the type of a value
  * @method typeOf
  * @param {mixed} value The value to test type
@@ -860,6 +869,83 @@ Q.getter.CACHED = 0;
 Q.getter.REQUESTING = 1;
 Q.getter.WAITING = 2;
 Q.getter.THROTTLING = 3;
+
+/**
+ * Chains an array of callbacks together into a function that can be called with arguments
+ * 
+ * @static
+ * @method chain
+ * @param {Array} callbacks An array of callbacks, each taking another callback at the end
+ * @return {Function} The wrapper function
+ */
+Q.chain = function (callbacks) {
+	var result = null;
+	handlers.forEach(function (callback) {
+		if (!result) {
+			return result = callback;
+		}
+		var prevResult = result;
+		result = function () {
+			var args = Array.prototype.slice.call(arguments, 0);
+			args.push(prevResult);
+			return callback.apply(this, args);
+		};
+	}, {ascending: false, numeric: true});
+	return result;
+};
+
+/**
+ * Takes a function and returns a version that returns a promise
+ * @method promisify
+ * @static
+ * @param  {Function} getter A function that takes one callback and passes err as the first parameter to it
+ * @param {Boolean} useSecondArgument whether to resolve the promise with the second argument instead of with "this"
+ * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
+ */
+Q.promisify = function (getter, useSecondArgument) {
+	function _promisifier() {
+		if (!Q.Promise) {
+			return getter.apply(this, args);
+		}
+		var args = [], resolve, reject, found = false;
+		for (var i=0, l=arguments.length; i<l; ++i) {
+			var ai = arguments[i];
+			if (typeof ai === 'function') {
+				found = true;
+				ai = function _promisified(err, second) {
+					if (err) {
+						return reject(err);
+					}
+					try {
+						ai.apply(this, arguments);
+					} catch (e) {
+						err = e;
+					}
+					if (err) {
+						return reject(err);
+					}
+					resolve(useSecondArgument ? second : this);
+				}
+			}
+			args.push(ai);
+			break; // only one callback, expect err as first argument
+		}
+		if (!found) {
+			args.push(function _defaultCallback(err, second) {
+				if (err) {
+					return reject(err);
+				}
+				resolve(useSecondArgument ? second : this);
+			});
+		}
+		var promise = new Q.Promise(function (r1, r2) {
+			resolve = r1;
+			reject = r2;
+		});
+		return Q.extend(promise, getter.apply(this, args));
+	}
+	return Q.extend(_promisifier, getter);
+};
 
 /**
  * Wraps a function and returns a wrapper that will call the function at most once.

@@ -3416,6 +3416,30 @@ Q.getter.WAITING = 2;
 Q.getter.THROTTLING = 3;
 
 /**
+ * Chains an array of callbacks together into a function that can be called with arguments
+ * 
+ * @static
+ * @method chain
+ * @param {Array} callbacks An array of callbacks, each taking another callback at the end
+ * @return {Function} The wrapper function
+ */
+Q.chain = function (callbacks) {
+	var result = null;
+	handlers.forEach(function (callback) {
+		if (!result) {
+			return result = callback;
+		}
+		var prevResult = result;
+		result = function () {
+			var args = Array.prototype.slice.call(arguments, 0);
+			args.push(prevResult);
+			return callback.apply(this, args);
+		};
+	}, {ascending: false, numeric: true});
+	return result;
+};
+
+/**
  * Takes a function and returns a version that returns a promise
  * @method promisify
  * @static
