@@ -348,6 +348,7 @@ Streams.iconUrl = function(icon, basename) {
 
 var _socket = null;
 var _messageHandlers = {};
+var _ephemeralHandlers = {};
 var _seenHandlers = {};
 var _avatarHandlers = {};
 var _constructHandlers = {};
@@ -355,6 +356,7 @@ var _refreshHandlers = {};
 var _beforeSetHandlers = {};
 var _beforeSetAttributeHandlers = {};
 var _streamMessageHandlers = {};
+var _streamEphemeralHandlers = {};
 var _streamFieldChangedHandlers = {};
 var _streamAttributeHandlers = {};
 var _streamClosedHandlers = {};
@@ -402,6 +404,15 @@ Streams.onError = new Q.Event(function (err, data) {
 }, 'Streams.onError');
 
 /**
+ * Returns Q.Event that occurs after the system learns of a new ephemeral payload came in on a stream.
+ * @event onMessage
+ * @static
+ * @param {String} [streamType] id of publisher which is publishing the stream
+ * @param {String} [payloadType] type of the message, or its ordinal, pass "" for all types
+ */
+Streams.onEphemeral = Q.Event.factory(_ephemeralHandlers, ["", ""]);
+
+/**
  * Returns Q.Event that occurs after the system learns of a new message that was posted.
  * The platform makes sure the ordinals come in the right order, for each stream.
  * So you just have to handle the messages to update your tools, pages, etc.
@@ -409,7 +420,7 @@ Streams.onError = new Q.Event(function (err, data) {
  * for standard events such as "Streams/join", etc. so the stream and all caches
  * are up-to-date, e.g. the participants include the newly joined participant, etc.
  * @event onMessage
- * @param {String} type type of the stream to which a message is posted, pass "" for all types
+ * @param {String} streamType type of the stream to which a message is posted, pass "" for all types
  * @param {String} messageType type of the message, pass "" for all types
  * @return {Q.Event}
  */
@@ -2478,6 +2489,16 @@ Sp.getParticipant = function _Stream_prototype_getParticipant (userId, callback)
 };
 
 /**
+ * Returns Q.Event that occurs after the system learns of a new ephemeral payload came in on a stream.
+ * @event onMessage
+ * @static
+ * @param {String} [publisherId] id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which the message is posted to
+ * @param {String} [payloadType] type of the message, or its ordinal, pass "" for all types
+ */
+Stream.onEphemeral = Q.Event.factory(_streamEphemeralHandlers, ["", "", ""]);
+
+/**
  * Returns Q.Event that occurs after the system learns of a new message that was posted.
  * The platform makes sure the ordinals come in the right order, for each stream.
  * So you just have to handle the messages to update your tools, pages, etc.
@@ -2841,6 +2862,22 @@ Sp.observe = function _Stream_prototype_observe (callback) {
 Sp.neglect = function _Stream_prototype_neglect (callback) {
 	return Stream.neglect(this.fields.publisherId, this.fields.name, callback);
 };
+
+/**
+ * Send some payload which is not saved as a message in the stream's history,
+ * but is broadcast to everyone curently connected by a socket and participating
+ * or observing the stream.
+ * This can be used for read receipts, "typing..." indicators, cursor movements and more.
+ *
+ * @method ephemeral
+ * @param {Object} payload the payload to send, should have at least "type" specified
+ * @param {Boolean} [dontNotifyObservers] whether to skip notifying observers who aren't registered users
+ * @param {Function} [callback] receives (err, result) as parameters
+ */
+Sp.ephemeral = function _Stream_ephemeral (payload, dontNotifyObservers, callback) {
+	return Stream.neglect(this.fields.publisherId, this.fields.name, payload, dontNotifyObservers, callback);
+};
+
 
 /**
  * Test whether the user has enough access rights when it comes to reading from the stream
@@ -3299,10 +3336,35 @@ Stream.neglect = function _Stream_neglect (publisherId, streamName, callback) {
 };
 
 /**
+ * Send some payload which is not saved as a message in the stream's history,
+ * but is broadcast to everyone curently connected by a socket and participating
+ * or observing the stream.
+ * This can be used for read receipts, "typing..." indicators, cursor movements and more.
+ *
+ * @static
+ * @method ephemeral
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} streamName name of stream to observe
+ * @param {Object} payload the payload to send. It must have "type" set at least.
+ * @param {Boolean} [dontNotifyObservers] whether to skip notifying observers who aren't registered users
+ * @param {Function} [callback] receives (err, result) as parameters
+ */
+Stream.ephemeral = function _Stream_ephemeral (
+	publisherId, streamName, payload, dontNotifyObservers, callback
+) {
+	payload.publisherId = publisherId;
+	payload.streamName = streamName;
+	Streams.socketRequest(
+		'Streams/ephemeral', Users.capability, 
+		publisherId, streamName, dontNotifyObservers, callback
+	);
+};
+
+/**
  * Closes a stream in the database, and marks it for removal unless it is required.
  *
  * @static
- * @method remove
+ * @method close
  * @param {String} publisherId
  * @param {String} streamName
  * @param {Function} callback Receives (err, result) as parameters
@@ -5165,7 +5227,7 @@ Q.onInit.add(function _Streams_onInit() {
 			return;
 		}
 
-		Users.Socket.onEvent('Streams/post').set(function (message) {
+		Users.Socket.onEvent('Streams/post').set(function (message, byUserId) {
 			message = Streams.Message.construct(message);
 			var messageType = message.type;
 			var messageUrl = message.getInstruction('inviteUrl') || message.getInstruction('url');
@@ -5393,6 +5455,21 @@ Q.onInit.add(function _Streams_onInit() {
 			0, p, [null, p]
 		);
 	});
+	
+	Users.Socket.onEvent('Streams/ephemeral').set(function (payload, byUserId) {
+		Streams.get(payload.publisherId, payload.streamName, function (err) {
+			if (err) {
+				console.warn(Q.firstErrorMessage(err));
+				return;
+			}
+			var streamType = stream.fields.type;
+			var params = [stream, payload, 'ephemeral', latest];
+			var event = Streams.onEphemeral(streamType, payload.type);
+			Q.handle(event, stream, [payload]);
+			event = Streams.Stream.onEphemeral(payload.publisherId, payload.streamName, payload.type);
+			Q.handle(event, stream, [payload]);
+		});
+	});
 
 	Users.Socket.onEvent('Streams/post').set(function _Streams_post_handler (msg, messages) {
 		if (!msg) {
@@ -5538,41 +5615,7 @@ Q.onInit.add(function _Streams_onInit() {
 						break;
 				}
 
-				_messageHandlers[streamType] &&
-				_messageHandlers[streamType][msg.type] &&
-				Q.handle(_messageHandlers[streamType][msg.type], Streams, params);
-
-				_messageHandlers[''] &&
-				_messageHandlers[''][msg.type] &&
-				Q.handle(_messageHandlers[''][msg.type], Streams, params);
-
-				_messageHandlers[streamType] &&
-				_messageHandlers[streamType][''] &&
-				Q.handle(_messageHandlers[streamType][''], Streams, params);
-
-				_messageHandlers[''] &&
-				_messageHandlers[''][''] &&
-				Q.handle(_messageHandlers[''][''], Streams, params);
-
-				Q.each([msg.publisherId, ''], function (ordinal, publisherId) {
-					Q.each([msg.streamName, ''], function (ordinal, streamName) {
-						Q.handle(
-							Q.getObject([publisherId, streamName, ordinal], _streamMessageHandlers),
-							Streams,
-							params
-						);
-						Q.handle(
-							Q.getObject([publisherId, streamName, msg.type], _streamMessageHandlers),
-							Streams,
-							params
-						);
-						Q.handle(
-							Q.getObject([publisherId, streamName, ''], _streamMessageHandlers),
-							Streams,
-							params
-						);
-					});
-				});
+				_handlers(streamType, msg);
 
 				if (usingCached && _messageShouldRefreshStream[msg.type]) {
 					_debouncedRefresh(
@@ -5599,6 +5642,44 @@ Q.onInit.add(function _Streams_onInit() {
 			});
 		}
 	}, 'Streams');
+	
+	function _handlers(streamType, msg, params) {
+		_messageHandlers[streamType] &&
+		_messageHandlers[streamType][msg.type] &&
+		Q.handle(_messageHandlers[streamType][msg.type], Streams, params);
+
+		_messageHandlers[''] &&
+		_messageHandlers[''][msg.type] &&
+		Q.handle(_messageHandlers[''][msg.type], Streams, params);
+
+		_messageHandlers[streamType] &&
+		_messageHandlers[streamType][''] &&
+		Q.handle(_messageHandlers[streamType][''], Streams, params);
+
+		_messageHandlers[''] &&
+		_messageHandlers[''][''] &&
+		Q.handle(_messageHandlers[''][''], Streams, params);
+
+		Q.each([msg.publisherId, ''], function (ordinal, publisherId) {
+			Q.each([msg.streamName, ''], function (ordinal, streamName) {
+				Q.handle(
+					Q.getObject([publisherId, streamName, ordinal], _streamMessageHandlers),
+					Streams,
+					params
+				);
+				Q.handle(
+					Q.getObject([publisherId, streamName, msg.type], _streamMessageHandlers),
+					Streams,
+					params
+				);
+				Q.handle(
+					Q.getObject([publisherId, streamName, ''], _streamMessageHandlers),
+					Streams,
+					params
+				);
+			});
+		});
+	}
 
 	Q.beforeActivate.add(_preloadedStreams, 'Streams');
 	Q.loadUrl.options.onResponse.add(_preloadedStreams, 'Streams');

@@ -389,12 +389,13 @@ Sp.updateParticipantCounts = function (newState, prevState, callback) {
  * Also sends it to observers unless dontNotifyObservers is true.
  * @method notifyParticipants
  * @param {String} event The type of Streams event, such as "Streams/post" or "Streams/remove"
- * @param {String} userId User who initiated the event
+ * @param {String} byUserId User who initiated the event
  * @param {Streams_Message} message 
- * @param {Boolean} dontNotifyObservers
+ * @param {Boolean} [dontNotifyObservers] whether to skip notifying observers who aren't registered users
+ * @param {Function} [callback] Optional, receives receives (err, participants)
  * @return {Boolean} Whether the system went on to get and notify participants
  */
-Sp.notifyParticipants = function (event, userId, message, dontNotifyObservers) {
+Sp.notifyParticipants = function (event, byUserId, message, dontNotifyObservers, callback) {
 	var fields = this.fields;
 	var stream = this;
 
@@ -402,7 +403,8 @@ Sp.notifyParticipants = function (event, userId, message, dontNotifyObservers) {
 		message.fields.streamType = fields.type;
 		for (var userId in participants) {
 			var participant = participants[userId];
-			stream.notify(participant, event, userId, message, function(err) {
+			stream.notify(participant.fields.userId, event, message, byUserId, function(err) {
+				callback && callback(err, participants);
 				if (!err) return;
 				var debug = Q.Config.get(['Streams', 'notifications', 'debug'], false);
 				if (debug) {
@@ -1120,8 +1122,8 @@ Sp.unsubscribe = function(options, callback) {
  * @param {Streams_Message} message  Message on 'post' event or stream on other events
  * @param {Function} [callback] This would be called after all the notifying was done
  */
-Sp.notify = function(participant, event, userId, message, callback) {
-	var userId = participant.fields.userId, stream = this;
+Sp.notify = function(userId, event, message, byUserId, callback) {
+	var stream = this;
 	function _notify(err, access) {
 		if (err) {
 		    return callback && callback(err);
@@ -1146,7 +1148,7 @@ Sp.notify = function(participant, event, userId, message, callback) {
 		function _continue(online, evenIfOnline) {
 			// 2) if user has socket connected - emit socket message and quit
 			if (online) {
-				Users.Socket.emitToUser(userId, event, message.getFields());
+				Users.Socket.emitToUser(userId, event, message.getFields(), byUserId);
 
 				if (!evenIfOnline) {
 					return callback && callback();

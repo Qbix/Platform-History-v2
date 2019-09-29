@@ -488,12 +488,23 @@ Streams.listen = function (options, servers) {
 			return fn && fn(null, true);
 		});
 		client.on('Streams/ephemeral',
-		function (capability, publisherId, streamName, fn) {
+		function (capability, payload, dontNotifyObservers, fn) {
 			var now = Date.now() / 1000;
-			if (!Q.Utils.validateCapability(capability, 'Users/socket')) {
-				fn && fn(false);
+			if (!payload || !payload.publisherId || !payload.streamName || !payload.type) {
+				return fn && fn("Payload must have publisherId and streamName and type set");
 			}
-			stream.notifyParticipants('Streams/ephemeral', byUserId, msg);
+			if (!Q.Utils.validateCapability(capability, 'Users/socket')) {
+				return fn && fn("Capability not valid", null);
+			}
+			var byUserId = capability.userId;
+			Streams.fetchOne(byUserId, payload.publisherId, payload.streamName, function (err) {
+				if (err) {
+					return fn && fn(err, false);
+				}
+				this.notifyParticipants(
+					'Streams/ephemeral', byUserId, payload, dontNotifyObservers, fn
+				);
+			});
 		});
 		client.on('disconnect', function () {
 			var observing = Streams.observing[client.id];
