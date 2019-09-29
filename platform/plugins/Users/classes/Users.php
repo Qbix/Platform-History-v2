@@ -107,15 +107,15 @@ abstract class Users extends Base_Users
 	 * Generates a capability to start a user socket session with node.js
 	 * @method capability
 	 * @static
-	 * @param {array} [$permissions=array('socket')] Leave this alone for now
+	 * @param {array} [$permissions=array('Users/socket')] Leave this alone for now
 	 */
-	static function capability()
+	static function capability($permissions = array('Users/socket'))
 	{
 		$duration = Q_Config::expect('Users', 'session', 'socket', 'duration');
 		$time = time();
 		$data = array(
 			'userId' => $user->id,
-			'permissions' => array('socket'),
+			'permissions' => $permissions,
 			'startTime' => $time,
 			'endTime' => $time + $duration
 		);

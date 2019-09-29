@@ -423,7 +423,7 @@ Streams.listen = function (options, servers) {
 		client.on('Streams/observe',
 		function (clientId, capability, publisherId, streamName, fn) {
 			var now = Date.now() / 1000;
-			if (!Q.Utils.validateCapability(capability, 'observe')) {
+			if (!Q.Utils.validateCapability(capability, 'Streams/observe')) {
 				return fn && fn({
 					type: 'Users.Exception.NotAuthorized',
 					message: 'Not Authorized'
@@ -486,6 +486,14 @@ Streams.listen = function (options, servers) {
 			delete o[publisherId][streamName][client.id];
 			delete Streams.observing[client.id][publisherId][streamName];
 			return fn && fn(null, true);
+		});
+		client.on('Streams/ephemeral',
+		function (capability, publisherId, streamName, fn) {
+			var now = Date.now() / 1000;
+			if (!Q.Utils.validateCapability(capability, 'Users/socket')) {
+				fn && fn(false);
+			}
+			stream.notifyParticipants('Streams/ephemeral', byUserId, msg);
 		});
 		client.on('disconnect', function () {
 			var observing = Streams.observing[client.id];

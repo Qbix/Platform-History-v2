@@ -119,7 +119,7 @@
 		},
 		"public": {
 			"duration": 3600, /* one hour */
-			"permissions": ["observe"]
+			"permissions": ["Streams/observe"]
 		},
 		"types": {
 			"*": {
