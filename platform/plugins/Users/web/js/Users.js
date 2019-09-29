@@ -2474,7 +2474,8 @@
 	
 	Q.Socket.onConnect('Users').set(function (socket, ns, url) {
 		Q.loadNonce(function () {
-			socket.emit('Users/user', Q.Users.loggedInUserId(), Q.clientId(), function () {
+			socket.emit('Users/user', Q.Users.loggedInUserId(), Q.clientId(), Q.info.Users.signed,
+			function () {
 				Q.handle(Users.Socket.onSession);
 			});
 		});

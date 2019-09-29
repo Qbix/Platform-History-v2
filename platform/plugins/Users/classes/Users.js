@@ -296,13 +296,18 @@ Users.Socket = {
 	listen: function (options) {
 		var socket = Q.Socket.listen(options);
 		socket.io.of('/Users').on('connection', function(client) {
+			var duration = Q.Config.expect('Users', 'session', 'socket', 'duration');
 			Q.log("Socket.IO client connected " + client.id);
 			if (client.alreadyListening) {
 				return;
 			}
 			client.alreadyListening = true;
-			client.on('Users/user', function (userId, clientId) {
-				if (!userId) {
+			client.on('Users/user', function (signed, clientId) {
+				var now = Date.now() / 1000;
+				if (!signed || !Q.Utils.validate(signed)
+				|| !signed.userId
+				|| !signed.timestamp || signed.timestamp > now
+				|| signed.timestamp < now - duration) {
 					// force disconnect
 					client.disconnect();
 				}
