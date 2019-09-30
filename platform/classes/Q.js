@@ -880,7 +880,7 @@ Q.getter.THROTTLING = 3;
  */
 Q.chain = function (callbacks) {
 	var result = null;
-	handlers.forEach(function (callback) {
+	callbacks.forEach(function (callback) {
 		if (!result) {
 			return result = callback;
 		}
