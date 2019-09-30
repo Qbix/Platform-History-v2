@@ -478,7 +478,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
  * @param {String} messageType
  * @param {Function} handler
  */
-Streams.Message.addHandler = function (streamType, messageType, handler) {
+Streams_Message.addHandler = function (streamType, messageType, handler) {
 	var handlers = Q.getObject([streamType, messageType], Streams_Message);
 	if (handlers) {
 		handlers.push(handler);
