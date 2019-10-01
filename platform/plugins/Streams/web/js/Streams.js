@@ -5615,7 +5615,7 @@ Q.onInit.add(function _Streams_onInit() {
 						break;
 				}
 
-				_handlers(streamType, msg);
+				_handlers(streamType, msg, params);
 
 				if (usingCached && _messageShouldRefreshStream[msg.type]) {
 					_debouncedRefresh(

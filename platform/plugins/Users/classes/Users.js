@@ -302,7 +302,6 @@ Users.Socket = {
 			}
 			client.alreadyListening = true;
 			client.on('Users/user', function (capability, clientId) {
-				var now = Date.now() / 1000;
 				if (!Q.Utils.validateCapability(capability, 'Users/socket')) {
 					client.disconnect(); // force disconnect
 					return;
