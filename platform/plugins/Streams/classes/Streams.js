@@ -1133,6 +1133,7 @@ Streams.isStream = function (testing) {
 };
 
 Streams.WebRTC = require('Streams/WebRTC');
+Streams.Mentions = require('Streams/Mentions');
 
 /**
  * @property _messageHandlers

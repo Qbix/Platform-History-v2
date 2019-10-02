@@ -37,6 +37,7 @@ function Streams_Message (fields) {
 Q.mixin(Streams_Message, Base_Streams_Message);
 
 Streams_Message.defined = {};
+Streams_Message.handlers = {};
 
 Streams_Message.construct = function Streams_Message_construct(fields, retrieved) {
 	if (Q.isEmpty(fields)) {
@@ -333,17 +334,17 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			}
 			var platforms = Q.Config.get('Users', 'apps', 'platforms', []);
 			var p2 = new Q.Pipe();
-			var waitFor = [];
+			var waitFor = ['proceed'];
 			Q.each(destinations, function (i, d) {
 				var emailAddress = (d.indexOf('email') >= 0 && uf.emailAddress)
 					|| (d === 'email+pending' && uf.emailAddressPending);
 				var mobileNumber = (d.indexOf('mobile') >= 0 && uf.mobileNumber)
 					|| (d === 'mobile+pending' && uf.mobileNumberPending);
 				// Give the app an opportunity to modify the fields or anything else
-				var handlers = Q.getObject([stream.fields.type, messageType], Streams_Message) || [];
+				var handlers = Q.getObject([stream.fields.type, messageType], Streams_Message.handlers) || [];
 				var chain = Q.chain(handlers.concat([_proceed]));
 				chain(o);
-				function _proceed(o) {
+				function _proceed() {
 					if (emailAddress) {
 						_email(emailAddress, p2.fill('email'));
 						waitFor.push('email');
@@ -360,12 +361,14 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 						_platform(p2.fill(d));
 						waitFor.push(d);
 					}
+					p2.fill('proceed')();
 				}
 			});
 			p2.add(waitFor, function (params) {
+				delete params.proceed;
 				var success = false;
 				for (var k in params) {
-					if (params[k][0]) {
+					if (k === 'proceed' || params[k][0]) {
 						continue;
 					}
 					if (k === 'email' && params[k][1] === 'log') {
@@ -479,11 +482,11 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
  * @param {Function} handler
  */
 Streams_Message.addHandler = function (streamType, messageType, handler) {
-	var handlers = Q.getObject([streamType, messageType], Streams_Message);
+	var handlers = Q.getObject([streamType, messageType], Streams_Message.handlers);
 	if (handlers) {
 		handlers.push(handler);
 	} else {
-		Q.setObject([streamType, messageType], handler, Streams_Message);
+		Q.setObject([streamType, messageType], [handler], Streams_Message.handlers);
 	}
 };
 
@@ -508,7 +511,5 @@ Streams_Message.removeHandler = function (streamType, messageType, handler) {
 	}
 	return false;
 };
-
-Streams_Message.handlers = {};
 
 module.exports = Streams_Message;
