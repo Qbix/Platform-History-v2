@@ -774,12 +774,10 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		// when virtual keyboard appear, trying to scroll body to input element position
 		$input.on('focus', function () {
-			var originalHeight = window.innerHeight;
-			var p = Q.pipe(['scroll', 'keyboard'], function () {
-				document.body.scrollTo(0, $input.offset().top - 150);
-			});
-			tool.scrollToBottom(p.fill('scroll'));
-			setTimeout(p.fill('keyboard'), 500);
+			tool.scrollToBottom();
+			setTimeout(function () {
+				tool.scrollToBottom();
+			}, 500);
 		});
 
 		// submit button handler
@@ -973,8 +971,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		if (!state.$scrolling) {
 			state.$scrolling = $($scm[0].scrollingParent());
 		}
-		var top = $scm.offset().top - state.$scrolling.offset().top;
-		state.$scrolling.animate({ 
+		state.$scrolling.animate({
 			scrollTop: state.$scrolling[0].scrollHeight
 		}, this.state.animations.duration, callback);
 	},
