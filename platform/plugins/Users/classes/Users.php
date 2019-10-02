@@ -113,7 +113,7 @@ abstract class Users extends Base_Users
 		$duration = Q_Config::expect('Users', 'session', 'socket', 'duration');
 		$time = time();
 		$data = array(
-			'userId' => $user->id,
+			'userId' => Users::loggedInUser(true)->id,
 			'permissions' => $permissions,
 			'startTime' => $time,
 			'endTime' => $time + $duration

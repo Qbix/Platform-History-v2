@@ -340,7 +340,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				var mobileNumber = (d.indexOf('mobile') >= 0 && uf.mobileNumber)
 					|| (d === 'mobile+pending' && uf.mobileNumberPending);
 				// Give the app an opportunity to modify the fields or anything else
-				var handlers = Q.getObject([streamType, messageType], Streams_Message);
+				var handlers = Q.getObject([stream.fields.type, messageType], Streams_Message) || [];
 				var chain = Q.chain(handlers.concat([_proceed]));
 				chain(o);
 				function _proceed(o) {
@@ -478,7 +478,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
  * @param {String} messageType
  * @param {Function} handler
  */
-Streams.Message.addHandler = function (streamType, messageType, handler) {
+Streams_Message.addHandler = function (streamType, messageType, handler) {
 	var handlers = Q.getObject([streamType, messageType], Streams_Message);
 	if (handlers) {
 		handlers.push(handler);

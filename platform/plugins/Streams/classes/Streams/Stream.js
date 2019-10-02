@@ -403,7 +403,7 @@ Sp.notifyParticipants = function (event, byUserId, message, dontNotifyObservers,
 		message.fields.streamType = fields.type;
 		for (var userId in participants) {
 			var participant = participants[userId];
-			stream.notify(participant.fields.userId, event, message, byUserId, function(err) {
+			stream.notify(participant, event, message, byUserId, function(err) {
 				callback && callback(err, participants);
 				if (!err) return;
 				var debug = Q.Config.get(['Streams', 'notifications', 'debug'], false);
@@ -1118,12 +1118,13 @@ Sp.unsubscribe = function(options, callback) {
  * @method notify
  * @param {Streams_Participant} participant The stream participant to notify
  * @param {String} event The type of Streams event, such as "post" or "remove"
- * @param {String} userId The user who initiated the message
+ * @param {String} byUserId The user who initiated the message
  * @param {Streams_Message} message  Message on 'post' event or stream on other events
  * @param {Function} [callback] This would be called after all the notifying was done
  */
-Sp.notify = function(userId, event, message, byUserId, callback) {
+Sp.notify = function(participant, event, message, byUserId, callback) {
 	var stream = this;
+	var userId = participant.fields.userId;
 	function _notify(err, access) {
 		if (err) {
 		    return callback && callback(err);
@@ -1253,7 +1254,7 @@ Sp.notify = function(userId, event, message, byUserId, callback) {
 					appIds[platform] = [platformAppId];
 				});
 			}
-			Users.User.devices(participant.fields.userId, appIds, function (devices) {
+			Users.User.devices(userId, appIds, function (devices) {
 				for (var platform in devices) {
 					for (var i=0; i<devices[platform].length; i++) {
 						var d = devices[platform][i];

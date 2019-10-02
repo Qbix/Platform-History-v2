@@ -880,15 +880,17 @@ Q.getter.THROTTLING = 3;
  */
 Q.chain = function (callbacks) {
 	var result = null;
-	handlers.forEach(function (callback) {
-		if (!result) {
-			return result = callback;
-		}
+	Q.each(callbacks, function (i, callback) {
 		var prevResult = result;
 		result = function () {
 			var args = Array.prototype.slice.call(arguments, 0);
 			args.push(prevResult);
-			return callback.apply(this, args);
+			callback.apply(this, args);
+
+			var lastArgument = args[args.length - 1];
+			if (Q.typeOf(lastArgument) === 'function') {
+				lastArgument.apply(this, args);
+			}
 		};
 	}, {ascending: false, numeric: true});
 	return result;
