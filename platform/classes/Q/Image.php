@@ -368,6 +368,7 @@ class Q_Image
 				$mh = imagesy($merge);
 			}
 		}
+		ksort($sizes); // to make sure square sizes get listed before others
 		foreach ($sizes as $size => $name) {
 			if (empty($name)) {
 				// generate a filename
@@ -378,7 +379,8 @@ class Q_Image
 			if (strrpos($name, '.') === false) {
 				$name .= '.png';
 			}
-			list($n, $ext) = explode('.', $name);
+			$parts = explode('.', $name);
+			$ext = end($parts);
 			$sw = $isw;
 			$sh = $ish;
 			$sx = $isx;
@@ -386,7 +388,10 @@ class Q_Image
 			// determine destination image size
 			if (!empty($size)) {
 				$sa = explode('x', $size);
-				if (count($sa) > 1) {
+				$square = (count($sa) == 1);
+				if ($square) {
+					$dw = $dh = intval($sa[0]);
+				} else {
 					if ($sa[0] === '') {
 						if ($sa[1] === '') {
 							$dw = $sw;
@@ -403,8 +408,6 @@ class Q_Image
 							$dh = intval($sa[1]);
 						}
 					}
-				} else {
-					$dw = $dh = intval($sa[0]);
 				}
 				// calculate the origin point of source image
 				// we have a cropped image of dimension $sw, $sh and need to make new with dimension $dw, $dh
@@ -435,6 +438,15 @@ class Q_Image
 				: imagecopyresampled($thumb, $image, 0, 0, $sx, $sy, $dw, $dh, $w2, $h2);
 			if (!$res) {
 				throw new Q_Exception("Failed to save image file of type '$ext'");
+			}
+			
+			if ($dw === $dh and !$square) {
+				// save symlinks when possible, instead of copying large images
+				$squarefilename = $writePath.DS."$dw.$ext";
+				if (file_exists($squarefilename)) {
+					Q_Utils::symlink($squarefilename, $writePath.DS.$name);
+				}
+				continue;
 			}
 			if ($merge) {
 				$mergethumb = imagecreatetruecolor($mw, $mh);
