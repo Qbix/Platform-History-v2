@@ -186,9 +186,12 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				var height = 300 - tool.$input.outerHeight();
 				if (tool.state.position === 'top') {
 					tool.$results.css({
-						top: position - 300 + 'px',
-						height: height,
-						overflow: 'auto',
+						'max-height': height,
+						'overflow-y': 'auto',
+						'overflow-x': 'hidden',
+					});
+					tool.$results.css({
+						top: tool.$input.offset().top - tool.$results.outerHeight() + 'px',
 					});
 				} else {
 					tool.$results.css({
