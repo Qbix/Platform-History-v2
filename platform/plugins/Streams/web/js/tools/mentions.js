@@ -23,7 +23,7 @@
 				return;
 			}
 
-			if (e.keyCode === 50) {
+			if (this.value.slice(-1) === '@') {
 				tool.process(this);
 			}
 		});
