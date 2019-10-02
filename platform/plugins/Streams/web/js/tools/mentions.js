@@ -7,6 +7,7 @@
 	 */
 	Q.Tool.define("Streams/mentions/chat", ["Streams/chat"], function (options) {
 		var tool = this;
+		var state = this.state;
 		var chatTool = Q.Tool.from(this.element, "Streams/chat");
 
 		Q.addStylesheet('{{Streams}}/css/tools/mentions.css');
@@ -39,15 +40,29 @@
 		chatTool.state.onMessageRender.set(function (fields, html) {
 			var $html = $(fields.html || html);
 
-			tool.parseChatMessage($html);
+			tool.parseChatMessage($html, fields.instructions);
 
 			fields.html = $html[0].outerHTML;
 		}, tool);
 
 		// parse old messages
 		Q.each($(".Streams_chat_item", chatTool.element), function (i, element) {
-			tool.parseChatMessage(this);
+			tool.parseChatMessage(this, this.getAttribute('data-instructions'));
 		});
+
+		// on before message post
+		chatTool.state.beforePost.set(function (fields) {
+			var selectedIds = state.selectedIds;
+			if (!selectedIds.length) {
+				return;
+			}
+
+			fields.instructions = Q.extend({}, fields.instructions, {
+				'Streams/mentions': selectedIds
+			});
+
+			state.selectedIds = [];
+		}, tool);
 
 		$(document).keyup(function (e) {
 			if (e.keyCode === 13 || e.keyCode === 27) {
@@ -57,7 +72,7 @@
 	},
 
 	{
-
+		selectedIds: []
 	},
 
 	{
@@ -91,6 +106,7 @@
 					position: 'top',
 					onChoose: function (userId, avatar) {
 						$input.val($input.val() + userId);
+						state.selectedIds.push(userId);
 						tool.close();
 					}
 				}).activate(function () {
@@ -120,7 +136,12 @@
 		 * @method parseChatMessage
 		 * @return {jQuery|HTMLElement} element Chat message element (Streams_chat_item)
 		 */
-		parseChatMessage: function (element) {
+		parseChatMessage: function (element, instructions) {
+			instructions = Q.getObject('Streams/mentions', JSON.parse(instructions || null)) || [];
+			if (!instructions.length) {
+				return;
+			}
+
 			if (!(element instanceof jQuery)) {
 				element = $(element);
 			}
@@ -133,8 +154,14 @@
 			var $chatMessageContent = $(".Streams_chat_message_content", element);
 			var chatMessageContent = $chatMessageContent.html();
 			Q.each(chatMessageContent.matchTypes('qbixUserId'), function (i, string) {
+				var userId = string.replace('@', '');
+
+				if (instructions.indexOf(userId) === -1) {
+					return;
+				}
+
 				var avatarTool = Q.Tool.setUpElementHTML('div', 'Users/avatar', {
-					userId: string.replace('@', ''),
+					userId: userId,
 					short: true,
 					icon: false
 				});
