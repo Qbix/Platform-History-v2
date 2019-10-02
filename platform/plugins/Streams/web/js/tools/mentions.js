@@ -8,7 +8,7 @@
 	Q.Tool.define("Streams/mentions/chat", ["Streams/chat"], function (options) {
 		var tool = this;
 		var state = this.state;
-		var chatTool = Q.Tool.from(this.element, "Streams/chat");
+		state.chatTool = Q.Tool.from(this.element, "Streams/chat");
 
 		Q.addStylesheet('{{Streams}}/css/tools/mentions.css');
 
@@ -18,7 +18,7 @@
 
 		var selector = '.Streams_chat_composer input, .Streams_chat_composer textarea';
 
-		$(chatTool.element).on('keyup', selector, function (e) {
+		$(state.chatTool.element).on('keyup', selector, function (e) {
 			if ($(this).closest(".Streams_mentions_chat").length) {
 				return;
 			}
@@ -28,7 +28,7 @@
 			}
 		});
 
-		$(chatTool.element).on('focus', selector, function (e) {
+		$(state.chatTool.element).on('focus', selector, function (e) {
 			if ($(this).closest(".Streams_mentions_chat").length) {
 				return;
 			}
@@ -37,7 +37,7 @@
 		});
 
 		// on new message render
-		chatTool.state.onMessageRender.set(function (fields, html) {
+		state.chatTool.state.onMessageRender.set(function (fields, html) {
 			var $html = $(fields.html || html);
 
 			tool.parseChatMessage($html, fields.instructions);
@@ -46,12 +46,12 @@
 		}, tool);
 
 		// parse old messages
-		Q.each($(".Streams_chat_item", chatTool.element), function (i, element) {
+		Q.each($(".Streams_chat_item", state.chatTool.element), function (i, element) {
 			tool.parseChatMessage(this, this.getAttribute('data-instructions'));
 		});
 
 		// on before message post
-		chatTool.state.beforePost.set(function (fields) {
+		state.chatTool.state.beforePost.set(function (fields) {
 			var selectedIds = state.selectedIds;
 			if (!selectedIds.length) {
 				return;
@@ -109,9 +109,18 @@
 						state.selectedIds.push(userId);
 						tool.close();
 					}
+				}).on('focus', "input", function () {
+					setTimeout(function () {
+						state.chatTool.scrollToBottom();
+					}, 500);
+				}).on('blur', "input", function () {
+					setTimeout(function () {
+						$element.remove();
+					}, 100);
 				}).activate(function () {
 					state.userChooserTool = this;
 					$("input", this.element).plugin('Q/placeholders').focus();
+
 				});
 			});
 		},
