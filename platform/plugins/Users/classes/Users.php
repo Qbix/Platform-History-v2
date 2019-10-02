@@ -1000,7 +1000,6 @@ abstract class Users extends Base_Users
 	 * @param {array} [$options=array()] An array of options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
 	 * @param {string} [$options.skipIdentifier=false] Whether skip empty identifier
-	 * @param {string} [$options.leaveGeneratedIcon=false] Whether to leave generated icon and don't replace it with some icon finded with FB/google or random faces.
 	 * @return {Users_User}
 	 * @throws {Q_Exception_WrongType} If identifier is not e-mail or modile
 	 * @throws {Q_Exception} If user was already verified for someone else
@@ -1220,7 +1219,7 @@ abstract class Users extends Base_Users
 				}
 			} else if ($icon === true) {				
 				// locally generated icons
-				$identifier = $identifier ?: microtime();
+				$identifier = $identifier ? $identifier : microtime();
 				$hash = md5(strtolower(trim($identifier)));
 				$icon = array();
 				foreach ($sizes as $size) {

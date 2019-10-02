@@ -32,12 +32,11 @@ function Streams_register_post()
 	if (empty($fullName)) {
 		throw new Q_Exception("Please enter your name", 'name');
 	}
-	$leaveGeneratedIcon = true;
 	$user = Streams::register(
 		Streams::splitFullName($fullName), 
 		Users::requestedIdentifier(), 
 		true,
-		compact('activation', 'leaveGeneratedIcon')
+		compact('activation')
 	);
 	Users::setLoggedInUser($user);
 	
