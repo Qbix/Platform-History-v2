@@ -30,6 +30,10 @@
 				"trace": []
 			}
 		},
+		"log": {
+			"pattern": "{{key}}-{{day}}.log",
+			"removeAfterDays": 10
+		},
 		"web": {
 			"ignoreUserAbort": true,
 			"requireValidNonce": []
@@ -63,7 +67,8 @@
 				"url": null,
 				"internal": false,
 				"interval": 60
-			}
+			},
+			"logsDirectory": "logs"
 		},
 		"configFiles": ["Q/config/bootstrap.json"],
 		"install": {

@@ -2628,11 +2628,58 @@ Q.require = function _Q_require(what) {
 	return require(realPath);
 };
 
-var getLogStream = Q.getter(function (name, callback) {
-	var path = ((Q.app && Q.app.FILES_DIR)
+/**
+ * Removes all log files older than Q.Config.get('[Q', 'log', 'removeAfterDays'], null)
+ * @method removeOldLogs
+ * @private
+ * @static
+ * @return {integer} The number of log files removed
+ */
+function _removeOldLogs()
+{
+	var days = parseInt(Q.Config.get('[Q', 'logs', 'removeAfterDays'], null));
+	if (!days) {
+		return 0;
+	}
+	var path = _logsDirectory();
+	const fs = require('fs');
+
+	var count = 0;
+	fs.readdir(path, function (err, files) {
+		files.forEach(function (filename) {
+			var basename = filename.split('.').pop().join('.');
+			var parts = basename.split('-');
+			if (parts.length <= 3) {
+				return;
+			}
+			var d = parts.pop();
+			var m = parts.pop();
+			var y = parts.pop();
+			var timestamp = (new Date(y, m+1, d)).getTime() / 1000;
+			var now = Date.now() / 1000;
+			var today = now - now % 86400;
+			if (today - timestamp > days * 86400) {
+				fs.unlink(path + Q.DS + filename);
+				++count;
+			}
+		});
+	});
+	return count;
+}
+
+function _logsDirectory() {
+	var filesDirectory = ((Q.app && Q.app.FILES_DIR)
 		? Q.app.FILES_DIR
-		: Q.FILES_DIR)+Q.DS+'Q'+Q.DS+Q.Config.get(['Q', 'internal', 'logDir'], 'logs');
-	var filename = path+Q.DS+name+'_node.log';
+		: Q.FILES_DIR);
+	var logsDirectory = Q.Config.get(['Q', 'internal', 'logDirectory'], 'Q/logs')
+		.replace('/', Q.DS);
+	return filesDirectory+Q.DS+logsDirectory;
+}
+
+var getLogStream = Q.getter(function (name, callback) {
+	var path = _logsDirectory();
+	var suffix = Db.toDateTime(new Date());
+	var filename = path+Q.DS+name+'_node'+'-'+suffix+'.log';
 	Q.Utils.preparePath(filename, function (err) {
 		if (err) {
 			console.error("Failed to create directory '"+path+"', Error:", err.message);
@@ -2641,10 +2688,16 @@ var getLogStream = Q.getter(function (name, callback) {
 		try {
 			var stats = fs.statSync(filename);
 		} catch (err) {
-			if (err && err.code !== 'ENOENT') {
-				err.message = "Could not stat '"+filename+"', Error:", err.message;
-				callback && callback(err);
-				return;
+			if (err) {
+				if (err.code === 'ENOENT') {
+					// about to create a new file, remove old log files
+					_removeOldLogs();
+				} else {
+					// any error other than "file doesn't exist"
+					err.message = "Could not stat '"+filename+"', Error:", err.message;
+					callback && callback(err);
+					return;
+				}
 			}
 		}
 		if (stats && !stats.isFile()) {
@@ -2986,6 +3039,7 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
 			return;
 		}
 		stream.write(message);
+		_removeOldLogs();
 	});
 };
 

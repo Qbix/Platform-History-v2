@@ -1285,8 +1285,7 @@ class Q
 		$max_len = Q::ifset($options, 'maxLength', 
 			Q_Config::get('Q', 'log', 'maxLength', ini_get('log_errors_max_len'))
 		);
-		$path = (defined('APP_FILES_DIR') ? APP_FILES_DIR : Q_FILES_DIR)
-			.DS.'Q'.DS.Q_Config::get('Q', 'internal', 'logDir', 'logs');
+		$path = self::logsDirectory();
 
 		$mask = umask(0000);
 		if (!($realPath = Q::realPath($path))
@@ -1296,10 +1295,63 @@ class Q
 			}
 			$realPath = Q::realPath($path, true);
 		}
-		$filename = (isset($key) ? $key : $app).'.log';
+		if (!isset($key)) {
+			$key = $app;
+		}
+		$day = date("Y-m-d");
+		$filename = Q_Config::get('Q', 'log', 'pattern', '{{key}}-{{day}}.log');
+		$filename = Q::interpolate($filename, compact('key', 'day'));
 		$toSave = "\n".($timestamp ? '['.date('Y-m-d H:i:s') . '] ' : '') .substr($message, 0, $max_len);
+		if (!file_exists($realPath.DS.$filename)) {
+			// about to create a new file, remove any old logs
+			self::removeOldLogs();
+		}
 		file_put_contents($realPath.DS.$filename, $toSave, FILE_APPEND);
 		umask($mask);
+	}
+	
+
+	/**
+	 * Removes all log files older than Q_Config::get('Q', 'log', 'removeAfterDays', null)
+	 * @method removeOldLogs
+	 * @private
+	 * @static
+	 * @return {integer} The number of log files removed
+	 */
+	private static function removeOldLogs()
+	{
+		$days = Q_Config::get('Q', 'logs', 'removeAfterDays', null);
+		if (!$days or !is_numeric($days)) {
+			return 0;
+		}
+		$count = 0;
+		$days = floor($days);
+		$path = self::logsDirectory();
+		foreach (glob($path.DS.'*') as $filename) {
+			$basename = pathinfo($filename, PATHINFO_BASENAME);
+			$parts = explode('-', $basename);
+			if (count($parts) <= 3) {
+				continue;
+			}
+			$d = end($parts);
+			$m = prev($parts);
+			$y = prev($parts);
+			if (strtotime("$y-$m-$d +$days day") <= strtotime(date("Y-m-d")) {
+				unlink($filename);
+				++$count;
+			}
+		}
+		return $count;
+	}
+	
+	/**
+	 * Get the directory where logs should be stored
+	 * @return {string}
+	 */
+	private static function logsDirectory()
+	{
+		$logsDirectory = str_replace('/', DS, Q_Config::get('Q', 'internal', 'logsDirectory', 'Q/logs'));
+		return (defined('APP_FILES_DIR') ? APP_FILES_DIR : Q_FILES_DIR).DS.$logsDirectory;
 	}
 
 	/**
