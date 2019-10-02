@@ -1336,7 +1336,7 @@ class Q
 			$d = end($parts);
 			$m = prev($parts);
 			$y = prev($parts);
-			if (strtotime("$y-$m-$d +$days day") <= strtotime(date("Y-m-d")) {
+			if (strtotime("$y-$m-$d +$days day") <= strtotime(date("Y-m-d"))) {
 				unlink($filename);
 				++$count;
 			}
