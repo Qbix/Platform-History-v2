@@ -2637,7 +2637,7 @@ Q.require = function _Q_require(what) {
  */
 function _removeOldLogs()
 {
-	var days = parseInt(Q.Config.get('[Q', 'logs', 'removeAfterDays'], null));
+	var days = parseInt(Q.Config.get(['Q', 'logs', 'removeAfterDays'], null));
 	if (!days) {
 		return 0;
 	}
