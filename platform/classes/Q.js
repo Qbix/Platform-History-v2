@@ -2677,8 +2677,9 @@ function _logsDirectory() {
 }
 
 var getLogStream = Q.getter(function (name, callback) {
+	var Db = Q.require('Db');
 	var path = _logsDirectory();
-	var suffix = Db.toDateTime(new Date());
+	var suffix = Db.toDate(new Date());
 	var filename = path+Q.DS+name+'_node'+'-'+suffix+'.log';
 	Q.Utils.preparePath(filename, function (err) {
 		if (err) {
