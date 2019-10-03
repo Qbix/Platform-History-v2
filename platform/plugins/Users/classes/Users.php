@@ -2016,9 +2016,7 @@ abstract class Users extends Base_Users
 		if (!isset($c)) {
 			$duration = Q_Config::expect('Users', 'capability', 'duration');
 			$time = time();
-			$user = Users::loggedInUser();
-			$userId = Q::ifset($user, 'id', null);
-			$c = new Q_Capability(array(), $time, $time + $duration, $userId);
+			$c = new Q_Capability(array(), $time, $time + $duration);
 		}
 		return $c;
 	}

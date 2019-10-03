@@ -12,14 +12,12 @@ class Q_Capability
 	 * @param {array} $permissions Array of strings
 	 * @param {integer} $startTime a timestamp
 	 * @param {integer} $endTime a timestamp
-	 * @param {string} $userId id of logged in user (null if not logged in)
 	 */
-	function __construct($permissions, $startTime, $endTime, $userId)
+	function __construct($permissions, $startTime, $endTime)
 	{
 		$this->permissions = $permissions;
 		$this->startTime = $startTime;
 		$this->endTime = $endTime;
-		$this->userId = $userId;
 	}
 	
 	function addPermission($permission)
@@ -30,6 +28,7 @@ class Q_Capability
 			$this->permissions[] = $permission;
 		}
 		$this->permissions = array_unique($this->permissions);
+		return $this;
 	}
 	
 	function removePermission($permission)
@@ -44,12 +43,11 @@ class Q_Capability
 	
 	function exportArray()
 	{
-		return Q_Utils::sign(array(
+		return Q_Utils::sign(array_merge(array(
 			'permissions' => $this->permissions,
 			'startTime' => $this->startTime,
-			'endTime' => $this->endTime,
-			'userId' => $this->userId
-		));
+			'endTime' => $this->endTime
+		), $this->data));
 	}
 	
 	public $permissions = array();
