@@ -13,22 +13,21 @@ class Q_Capability
 	 * @param {integer} $startTime a timestamp
 	 * @param {integer} $endTime a timestamp
 	 */
-	function __construct($permissions, $startTime, $endTime)
+	function __construct($permissions, $startTime, $endTime, $userId)
 	{
 		$this->permissions = $permissions;
 		$this->startTime = $startTime;
 		$this->endTime = $endTime;
+		$this->userId = $userId;
 	}
 	
 	function addPermission($permission)
 	{
-		var_export($this->permissions);
 		if (is_array($permission)) {
 			$this->permissions = $b = array_merge($this->permissions, $permission);
 		} else {
 			$this->permissions[] = $permission;
 		}
-		var_export($this->permissions);
 		$this->permissions = array_unique($this->permissions);
 	}
 	
@@ -47,11 +46,13 @@ class Q_Capability
 		return Q_Utils::sign(array(
 			'permissions' => $this->permissions,
 			'startTime' => $this->startTime,
-			'endTime' => $this->endTime
+			'endTime' => $this->endTime,
+			'userId' => $this->userId
 		));
 	}
 	
 	public $permissions = array();
 	public $startTime = null;
 	public $endTime = null;
+	public $data = array();
 }

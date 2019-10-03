@@ -1294,7 +1294,7 @@ Sp.post = function (asUserId, fields, callback) {
 	if (typeof asUserId !== 'string') {
 		callback = fields;
 		fields = asUserId;
-		asUserId = fields.byUserId;
+		asUserId = Q.getObject('byUserId', fields);
 		if (!asUserId) {
 			throw new Q.Exception("Streams.Stream.prototype.post needs asUserId");
 		}
