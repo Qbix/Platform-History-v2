@@ -12,6 +12,7 @@ class Q_Capability
 	 * @param {array} $permissions Array of strings
 	 * @param {integer} $startTime a timestamp
 	 * @param {integer} $endTime a timestamp
+	 * @param {string} $userId id of logged in user (null if not logged in)
 	 */
 	function __construct($permissions, $startTime, $endTime, $userId)
 	{
