@@ -35,7 +35,8 @@ function Users_before_Q_responseExtras()
 			$u['mobile'] = $user->mobileNumber;
 			Q_Response::setScriptData("Q.plugins.Users.loggedInUser", $u);
 			Q_Response::addScriptLine("Q.plugins.Users.loggedInUser = new Q.plugins.Users.User(Q.plugins.Users.loggedInUser);");
-			Q_Response::setScriptData("Q.plugins.Users.capability", Users::capability());
+			Users::capability()->addPermission('Users/socket');
+			Users::capability()->setData('userId', $user->id);
 		}
 	}
 	Q_Response::setScriptData('Q.plugins.Users.communityId', Users::communityId());

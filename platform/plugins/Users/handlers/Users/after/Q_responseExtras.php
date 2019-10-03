@@ -12,5 +12,6 @@ function Users_after_Q_responseExtras() {
 		Q_Response::setScriptData('Q.plugins.Users.roles.'.$label, $role);
 	}
 	$user = Users::loggedInUser(false, false);
+	Q_Response::setScriptData("Q.plugins.Users.capability", Users::capability()->exportArray());
 	Q_Response::addHtmlCssClass($user ? 'Users_loggedIn' : 'Users_loggedOut');
 }

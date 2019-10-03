@@ -96,33 +96,14 @@ abstract class Users extends Base_Users
 	 * @param {string} $userId
 	 * @return {string}
 	 */
-	static function getLanguage($userId){
+	static function getLanguage($userId)
+	{
 		$user = self::fetch($userId, true);
-
 		return isset($user->preferredLanguage) ? $user->preferredLanguage : Q_Text::$language;
 	}
 	
 	/**
-	 * Generates a capability to start a user socket session with node.js
-	 * @method capability
-	 * @static
-	 * @param {array} [$permissions=array('Users/socket')] Leave this alone for now
-	 */
-	static function capability($permissions = array('Users/socket'))
-	{
-		$duration = Q_Config::expect('Users', 'session', 'socket', 'duration');
-		$time = time();
-		$data = array(
-			'userId' => Users::loggedInUser(true)->id,
-			'permissions' => $permissions,
-			'startTime' => $time,
-			'endTime' => $time + $duration
-		);
-		return Q_Utils::sign($data);
-	}
-	
-	/**
-	 * Rturn an array of the user's roles relative to a publisher
+	 * Return an array of the user's roles relative to a publisher
 	 * @method roles
 	 * @static
 	 * @param string [$publisherId=Users::communityId()]
@@ -2020,6 +2001,24 @@ abstract class Users extends Base_Users
 			throw new Users_Exception_NotAuthorized();
 		}
 		return $authorized;
+	}
+	
+	/**
+	 * Get the capability object that will be sent in "Q.plugins.Users.capability" 
+	 * It will be signed and used in some requests.
+	 * @method capability
+	 * @static
+	 * @return Q_Capability
+	 */
+	static function capability()
+	{
+		static $c = null;
+		if (!isset($c)) {
+			$duration = Q_Config::expect('Users', 'capability', 'duration');
+			$time = time();
+			$c = new Q_Capability(array(), $time, $time + $duration);
+		}
+		return $c;
 	}
 	
 	protected static function hashing($identifier, $type = null)

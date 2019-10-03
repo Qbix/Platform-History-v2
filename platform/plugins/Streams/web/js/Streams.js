@@ -3307,9 +3307,8 @@ Stream.unsubscribe = function _Stream_unsubscribe (publisherId, streamName, call
 Stream.unsubscribe.onError = new Q.Event();
 
 /**
- * Start observing a stream as an anonymous observer,
- * so you get realtime messages through socket events
- * but you don't join as a participant.
+ * Start observing a stream, to get realtime messages through socket events.
+ * You can do this either as a logged-in user or as an anonymous observer.
  *
  * @static
  * @method observe
@@ -3318,7 +3317,7 @@ Stream.unsubscribe.onError = new Q.Event();
  * @param {Function} [callback] receives (err, result) as parameters
  */
 Stream.observe = function _Stream_observe (publisherId, streamName, callback) {
-	Streams.socketRequest('Streams/observe', publisherId, streamName, callback);
+	Streams.socketRequest('Streams/observe',  publisherId, streamName, callback);
 };
 
 /**
@@ -3354,10 +3353,7 @@ Stream.ephemeral = function _Stream_ephemeral (
 ) {
 	payload.publisherId = publisherId;
 	payload.streamName = streamName;
-	Streams.socketRequest(
-		'Streams/ephemeral', Users.capability, 
-		publisherId, streamName, dontNotifyObservers, callback
-	);
+	Streams.socketRequest('Streams/ephemeral', publisherId, streamName, dontNotifyObservers, callback);
 };
 
 /**
@@ -3428,7 +3424,7 @@ Streams.socketRequest = function (event, publisherId, streamName, callback) {
 		return null;
 	}
 	var args = Array.prototype.slice.call(arguments, 0);
-	args.splice(1, 0, Q.clientId(), Q.getObject('Q.Streams.public.capability'));
+	args.splice(1, 0, Q.clientId(), Q.getObject('Q.Users.capability'));
 	socket.socket.emit.apply(socket.socket, args);
 	return socket;
 };

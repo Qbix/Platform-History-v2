@@ -174,10 +174,10 @@
 			"delaySMS": 30000
 		},
 		"session": {
-			"redirectSecondsMax" : 300,
-			"socket": {
-				"duration": 86400
-			}
+			"redirectSecondsMax" : 300
+		},
+		"capability": {
+			"duration": 86400
 		},
 		"passphrase": {
 			"hashFunction": "sha1",
