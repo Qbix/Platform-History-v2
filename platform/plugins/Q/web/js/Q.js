@@ -217,7 +217,7 @@ Sp.toCapitalized = function _String_prototype_toCapitalized() {
  * @return {boolean}
  */
 Sp.isUrl = function _String_prototype_isUrl () {
-	return !!this.matchTypes('url', {withScheme: true}).length;
+	return !!this.matchTypes('url', {requireScheme: true}).length;
 };
 
 /**
@@ -486,7 +486,7 @@ Sp.splitId = function(lengths, delimiter) {
  * @param {String|Array} [types] type or types to detect. Can be "url", "email", "phone", "twitter".
  *  If omitted, all types are processed.
  * @param {object} [options]
- * @param {boolean} [options.withScheme=false] If true, return only urls with protocol
+ * @param {boolean} [options.requireScheme=false] If true, return only urls with protocol
  * @return {object}
  */
 Sp.matchTypes = function (types, options) {
@@ -518,7 +518,7 @@ Sp.matchTypes.adapters = {
 		var parts = this.split(' ');
 		var res = [];
 		var regexp = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gm;
-		if (Q.getObject('withScheme', options)) {
+		if (Q.getObject('requireScheme', options)) {
 			regexp = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gm;
 		}
 		for (var i=0; i<parts.length; i++) {
