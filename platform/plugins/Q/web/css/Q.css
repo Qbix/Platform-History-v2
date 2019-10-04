@@ -242,6 +242,7 @@ body.Q_preventScroll {
 	height: 35px;
 	width: 35px;
 	background-image: url(../img/ui/swap_big.png);
+	background-size: contain;
 	cursor: pointer;
 }
 .Q_fullscreen_dialog .Q_title_slot {
