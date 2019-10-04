@@ -217,7 +217,7 @@ Sp.toCapitalized = function _String_prototype_toCapitalized() {
  * @return {boolean}
  */
 Sp.isUrl = function _String_prototype_isUrl () {
-	return !!this.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{2,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/);
+	return !!this.matchTypes('url', {withScheme: true}).length;
 };
 
 /**
@@ -485,12 +485,18 @@ Sp.splitId = function(lengths, delimiter) {
  * @method matchTypes
  * @param {String|Array} [types] type or types to detect. Can be "url", "email", "phone", "twitter".
  *  If omitted, all types are processed.
+ * @param {object} [options]
+ * @param {boolean} [options.withScheme=false] If true, return only urls with protocol
  * @return {object}
  */
-Sp.matchTypes = function (types) {
+Sp.matchTypes = function (types, options) {
 	var string = this;
 	if (typeof types === 'string') {
 		types = [types];
+	}
+	if (Q.typeOf(types) === 'object') {
+		options = types;
+		types = null;
 	}
 	if (!Q.isArrayLike(types)) {
 		types = Object.keys(Sp.matchTypes.adapters);
@@ -498,7 +504,7 @@ Sp.matchTypes = function (types) {
 	var res = {};
 	Q.each(types, function (i, type) {
 		if (Sp.matchTypes.adapters[type]) {
-			res[type] = Sp.matchTypes.adapters[type].call(string);
+			res[type] = Sp.matchTypes.adapters[type].call(string, options);
 		}
 	});
 	if (types.length === 1) {
@@ -508,8 +514,20 @@ Sp.matchTypes = function (types) {
 };
 
 Sp.matchTypes.adapters = {
-	url: function () {
-		return this.match(/(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+/gi) || [];
+	url: function (options) {
+		var parts = this.split(' ');
+		var res = [];
+		var regexp = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gm;
+		if (Q.getObject('withScheme', options)) {
+			regexp = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/gm;
+		}
+		for (var i=0; i<parts.length; i++) {
+			if (!parts[i].match(regexp)) {
+				continue;
+			}
+			res.push(parts[i]);
+		}
+		return res;
 	},
 	email: function () {
 		return this.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi) || [];
