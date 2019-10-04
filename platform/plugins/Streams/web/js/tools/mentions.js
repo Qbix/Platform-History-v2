@@ -100,6 +100,10 @@
 
 				var $element = $(html).prependTo($form);
 
+				$('a.Q_close', $element).on(Q.Pointer.fastclick, function () {
+					tool.close();
+				});
+
 				$element
 				.css('top', -1 * $element.outerHeight())
 				.tool("Streams/userChooser", {
@@ -188,6 +192,7 @@
 	Q.Template.set('Streams/mentions/chat',
 		'<div class="Streams_mentions_chat">' +
 		'	<input placeholder="{{text.chat.SearchByName}}">' +
+		'	<a class="Q_close"></a>' +
 		'</div>'
 	);
 })(Q, Q.$, window);
