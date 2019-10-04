@@ -217,7 +217,7 @@ Sp.toCapitalized = function _String_prototype_toCapitalized() {
  * @return {boolean}
  */
 Sp.isUrl = function _String_prototype_isUrl () {
-	return !!this.matchTypes('url');
+	return !!this.match(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{2,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/);
 };
 
 /**
