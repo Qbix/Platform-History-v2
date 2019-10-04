@@ -634,9 +634,9 @@ abstract class Db
 	 */
 	static function fromDate ($datetime)
 	{
-		$year = substr($datetime, 0, 4);
-		$month = substr($datetime, 5, 2);
-		$day = substr($datetime, 8, 2);
+		$year = (int)substr($datetime, 0, 4);
+		$month = (int)substr($datetime, 5, 2);
+		$day = (int)substr($datetime, 8, 2);
 		
 		return mktime(0, 0, 0, $month, $day, $year);
 	}
