@@ -36,7 +36,8 @@
 			"Streams/message/Streams/relatedTo": ["Streams/after/Streams_message_Streams_relatedTo"],
 			"Streams/message/Streams/unrelatedTo": ["Streams/after/Streams_message_Streams_unrelatedTo"],
 			"Streams/message/Streams/updateRelateTo": ["Streams/after/Streams_message_Streams_updateRelateTo"],
-			"Streams/Stream/save/Streams/greeting": ["Streams/after/Streams_Stream_save_Streams_greeting"]
+			"Streams/Stream/save/Streams/greeting": ["Streams/after/Streams_Stream_save_Streams_greeting"],
+			"Streams/relateTo/Streams/chat": ["Streams/after/Streams_relateTo_Streams_chat"]
 		},
 		"routes@start": {
 			"s/:publisherId/:streamName[]": {"module": "Streams", "action": "stream"},
@@ -426,10 +427,20 @@
 			"Streams/chat": {
 				"create": true,
 				"edit": ["icon", "title", "content"],
+				"subscriptions": {
+					"filter": {
+						"types": ["Streams/call"],
+						"notifications": 0
+					}
+				},
 				"messages": {
 					"Streams/chat/message": { "post": true },
 					"Streams/chat/edit": { "post": true },
-					"Streams/chat/remove": { "post": true }
+					"Streams/chat/remove": { "post": true },
+					"Streams/call": {
+						"description": "Video call started",
+						"subject": ["Streams/content", ["notifications", "Streams/call"]]
+					}
 				},
 				"defaults": {
 					"title": "Conversation",

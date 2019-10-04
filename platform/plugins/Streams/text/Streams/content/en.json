@@ -47,7 +47,8 @@
         "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
         "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
         "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-		"Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment"
+		"Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+		"Streams\/call": "{{displayName}} is calling you"
     },
     "invite": {
         "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
