@@ -68,7 +68,7 @@
 				"internal": false,
 				"interval": 60
 			},
-			"logsDirectory": "logs"
+			"logsDirectory": "Q/logs"
 		},
 		"configFiles": ["Q/config/bootstrap.json"],
 		"install": {
