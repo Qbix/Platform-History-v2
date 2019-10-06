@@ -1350,7 +1350,7 @@ class Q
 	 */
 	private static function logsDirectory()
 	{
-		$logsDirectory = str_replace('/', DS, Q_Config::get('Q', 'internal', 'logsDirectory', 'Q/logs'));
+		$logsDirectory = str_replace('/', DS, Q_Config::get('Q', 'logs', 'directory', 'Q/logs'));
 		return (defined('APP_FILES_DIR') ? APP_FILES_DIR : Q_FILES_DIR).DS.$logsDirectory;
 	}
 

@@ -2671,7 +2671,7 @@ function _logsDirectory() {
 	var filesDirectory = ((Q.app && Q.app.FILES_DIR)
 		? Q.app.FILES_DIR
 		: Q.FILES_DIR);
-	var logsDirectory = Q.Config.get(['Q', 'internal', 'logDirectory'], 'Q/logs')
+	var logsDirectory = Q.Config.get(['Q', 'logs', 'directory'], 'Q/logs')
 		.replace('/', Q.DS);
 	return filesDirectory+Q.DS+logsDirectory;
 }

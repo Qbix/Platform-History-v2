@@ -67,8 +67,11 @@
 				"url": null,
 				"internal": false,
 				"interval": 60
-			},
-			"logsDirectory": "Q/logs"
+			}
+		},
+		"logs": {
+			"directory": "Q/logs",
+			"removeAfterDays": "10"
 		},
 		"configFiles": ["Q/config/bootstrap.json"],
 		"install": {
