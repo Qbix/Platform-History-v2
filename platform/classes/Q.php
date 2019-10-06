@@ -1329,6 +1329,8 @@ class Q
 		$path = self::logsDirectory();
 		foreach (glob($path.DS.'*') as $filename) {
 			$basename = pathinfo($filename, PATHINFO_BASENAME);
+			$parts = explode('.', $basename);
+			$basename = reset($parts);
 			$parts = explode('-', $basename);
 			if (count($parts) <= 3) {
 				continue;
