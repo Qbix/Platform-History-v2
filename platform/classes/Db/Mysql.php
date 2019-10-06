@@ -722,9 +722,9 @@ class Db_Mysql implements Db_Interface
 	 */
 	function fromDate ($date)
 	{
-		$year = substr($date, 0, 4);
-		$month = substr($date, 5, 2);
-		$day = substr($date, 8, 2);
+		$year = (int)substr($date, 0, 4);
+		$month = (int)substr($date, 5, 2);
+		$day = (int)substr($date, 8, 2);
 
 		return mktime(0, 0, 0, $month, $day, $year);
 	}
@@ -740,12 +740,12 @@ class Db_Mysql implements Db_Interface
 		if (is_numeric($datetime)) {
 			return $datetime;
 		}
-		$year = substr($datetime, 0, 4);
-		$month = substr($datetime, 5, 2);
-		$day = substr($datetime, 8, 2);
-		$hour = substr($datetime, 11, 2);
-		$min = substr($datetime, 14, 2);
-		$sec = substr($datetime, 17, 2);
+		$year = (int)substr($datetime, 0, 4);
+		$month = (int)substr($datetime, 5, 2);
+		$day = (int)substr($datetime, 8, 2);
+		$hour = (int)substr($datetime, 11, 2);
+		$min = (int)substr($datetime, 14, 2);
+		$sec = (int)substr($datetime, 17, 2);
 
 		return mktime($hour, $min, $sec, $month, $day, $year);
 	}

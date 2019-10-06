@@ -24,15 +24,11 @@ class Q_Valid
 	 $check_domain = false,
 	 &$fixed_url = null)
 	{
-		if (!is_string($url)) {
-			return false;
-		}
-		$url_parts = parse_url($url);
-		if (empty($url_parts['scheme'])
-		and substr($url, 0, 2) !== '//') {
+		if (!filter_var($url, FILTER_VALIDATE_URL)) {
 			return false;
 		}
 		if ($check_domain) {
+			$url_parts = parse_url($url);
 			if (!self::domain($url_parts['host'])) {
 				return false;
 			}

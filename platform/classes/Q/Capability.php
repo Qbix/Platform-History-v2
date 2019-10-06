@@ -22,14 +22,13 @@ class Q_Capability
 	
 	function addPermission($permission)
 	{
-		var_export($this->permissions);
 		if (is_array($permission)) {
 			$this->permissions = $b = array_merge($this->permissions, $permission);
 		} else {
 			$this->permissions[] = $permission;
 		}
-		var_export($this->permissions);
 		$this->permissions = array_unique($this->permissions);
+		return $this;
 	}
 	
 	function removePermission($permission)
@@ -44,14 +43,15 @@ class Q_Capability
 	
 	function exportArray()
 	{
-		return Q_Utils::sign(array(
+		return Q_Utils::sign(array_merge(array(
 			'permissions' => $this->permissions,
 			'startTime' => $this->startTime,
 			'endTime' => $this->endTime
-		));
+		), $this->data));
 	}
 	
 	public $permissions = array();
 	public $startTime = null;
 	public $endTime = null;
+	public $data = array();
 }

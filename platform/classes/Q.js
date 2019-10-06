@@ -2637,7 +2637,7 @@ Q.require = function _Q_require(what) {
  */
 function _removeOldLogs()
 {
-	var days = parseInt(Q.Config.get('[Q', 'logs', 'removeAfterDays'], null));
+	var days = parseInt(Q.Config.get(['Q', 'logs', 'removeAfterDays'], null));
 	if (!days) {
 		return 0;
 	}
@@ -2677,8 +2677,9 @@ function _logsDirectory() {
 }
 
 var getLogStream = Q.getter(function (name, callback) {
+	var Db = Q.require('Db');
 	var path = _logsDirectory();
-	var suffix = Db.toDateTime(new Date());
+	var suffix = Db.toDate(new Date());
 	var filename = path+Q.DS+name+'_node'+'-'+suffix+'.log';
 	Q.Utils.preparePath(filename, function (err) {
 		if (err) {
