@@ -2901,8 +2901,8 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.filter] optional array with two keys
 	 * @param {array} [$options.filter.types] array of message types, if this is empty then subscribes to all types
 	 * @param {array} [$options.filter.notifications=0] limit number of notifications, 0 means no limit
-	 * @param {datetime} [$options.untilTime=null] time limit, if any for subscription
-	 * @param {array} [$options.rule=array()] optionally override the rule for new subscriptions
+	 * @param {datetime} [$options.untilTime=null] optionally custom time limit, if subscriptions
+	 * @param {array} [$options.rule=array()] optionally set custom rule for subscriptions
 	 * @param {array} [$options.rule.deliver=array('to'=>'default')] under "to" key,
 	 *   named the field under Streams/rules/deliver config, which will contain the names of destinations,
 	 *   which can include "email", "mobile", "email+pending", "mobile+pending"
@@ -2945,8 +2945,8 @@ abstract class Streams extends Base_Streams
 			$untilTime = $db->toDateTime($options['untilTime']);
 			$shouldUpdate = true;
 		}
-		if (isset($o['rule'])) {
-			$rule = $o['rule']; // we aren't updating rules like this though
+		if (isset($options['rule'])) {
+			$rule = $options['rule']; // we aren't updating rules like this though
 		}
 		$subscriptions = Streams_Subscription::select('*', 'a')
 		->where(array(
@@ -3037,6 +3037,9 @@ abstract class Streams extends Base_Streams
 					$untilTime = ($template and $template['duration'] > 0)
 						? new Db_Expression("CURRENT_TIMESTAMP + INTERVAL $template[duration] SECOND")
 						: null;
+				}
+				if (!isset($rule)) {
+					$rule = null;
 				}
 				$types[$type][] = array($name, $filter, $untilTime, $rule);
 			}
