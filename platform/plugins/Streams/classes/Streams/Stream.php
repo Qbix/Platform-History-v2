@@ -2051,14 +2051,21 @@ class Streams_Stream extends Base_Streams_Stream
 		$title = Q::ifset($options, 'title', $this->title);
 		$description = Q::ifset($options, 'description', $description);
 		$keywords = $this->getAttribute('keywords');
-		$metas = compact('title', 'image', 'description', 'keywords');
+		$metas = array(
+			array('attrName' => 'name', 'attrValue' => 'title', 'content' => $title),
+			array('attrName' => 'name', 'attrValue' => 'image', 'content' => $image),
+			array('attrName' => 'name', 'attrValue' => 'description', 'content' => $description),
+			array('attrName' => 'name', 'attrValue' => 'keywords', 'content' => $keywords)
+		);
 		$url = Q::ifset($options, 'url', $this->url());
 		foreach (array('og', 'twitter') as $prefix) {
-			foreach ($metas as $k => $v) {
-				$metas["$prefix:$k"] = $v;
-			}
+			$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':title', 'content' => $title);
+			$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':image', 'content' => $image);
+			$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':description', 'content' => $description);
+			$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':keywords', 'content' => $keywords);
+			$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':url', 'content' => $url);
 		}
-		$metas['twitter:card'] = 'summary';
+		$metas[] = array('attrName' => 'property', 'attrValue' => "twitter:card", 'content' => $image);
 		return $metas;
 	}
 
