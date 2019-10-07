@@ -2647,15 +2647,15 @@ function _removeOldLogs()
 	var count = 0;
 	fs.readdir(path, function (err, files) {
 		files.forEach(function (filename) {
-			var basename = filename.split('.').pop().join('.');
+			var basename = filename.split('.').shift();
 			var parts = basename.split('-');
 			if (parts.length <= 3) {
 				return;
 			}
-			var d = parts.pop();
-			var m = parts.pop();
-			var y = parts.pop();
-			var timestamp = (new Date(y, m+1, d)).getTime() / 1000;
+			var d = parseInt(parts.pop());
+			var m = parseInt(parts.pop());
+			var y = parseInt(parts.pop());
+			var timestamp = (new Date(y, m-1, d+1)).getTime() / 1000;
 			var now = Date.now() / 1000;
 			var today = now - now % 86400;
 			if (today - timestamp > days * 86400) {
@@ -2695,7 +2695,7 @@ var getLogStream = Q.getter(function (name, callback) {
 					_removeOldLogs();
 				} else {
 					// any error other than "file doesn't exist"
-					err.message = "Could not stat '"+filename+"', Error:", err.message;
+					err.message = "Could not stat '"+filename+"', Error:" + err.message;
 					callback && callback(err);
 					return;
 				}
@@ -3022,7 +3022,7 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
 			var error = message;
 			message = error.name + ": " + error.message
 				+ "\n" + "in " + error.fileName
-					+ " at (" + error.lineNumber + ":" + error.columnNumber + ")"
+				+ " at (" + error.lineNumber + ":" + error.columnNumber + ")"
 				+ "\n" + error.stack;
 		} else {
 			message = 'inspecting '+Q.typeOf(message)+':\n'+util.inspect(message, false, Q.Config.get('Q', 'var_dump_max_levels', 5));
