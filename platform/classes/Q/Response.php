@@ -444,27 +444,42 @@ class Q_Response
 	 * Sets a particular meta tag
 	 * @method setMeta
 	 * @static
-	 * @param {string|array} $name The name of the meta tag, or an array of key=>value pairs of metas
-	 * @param {mixed} $content The content of the meta tag
-	 * @param {string} [$slotName=null]
+	 * @param {array} $params
+	 * @param {string} [$params.attrName=name] Attribute name of the meta tag
+	 * @param {string} $params.attrValue Attribute value of the meta tag
+	 * @param {mixed} [$params.content=null] The content of the meta tag
+	 * @param {mixed} [$params.slotName=null]
 	 */
-	static function setMeta($name, $content = null, $slotName = null)
+	static function setMeta($params)
 	{
-		if (is_array($name)) {
-			foreach ($name as $k => $v) {
-				if (isset($v)) {
-					self::setMeta($k, $v, $slotName);
+		$argList = func_get_args();
+		if (count($argList) > 1) { // backward compatibility
+			$params = array(
+				'attrName' => 'name',
+				'attrValue' => $argList[0],
+				'content' => $argList[1],
+				'slotName' => $argList[2]
+			);
+		} elseif (is_array($params[0])) {
+			foreach ($params as $v) {
+				if (is_array($v)) {
+					self::setMeta($v);
 				}
 			}
 			return;
 		}
-		self::$metas[$name] = $content;
+
+		$params = array_merge(array(
+			'attrName' => 'name',
+			'content' => null,
+			'slotName' => null
+		), $params);
+
+		self::$metas[] = $params;
 
 		// Now, for the slot
-		if (!$slotName) {
-			$slotName = isset(self::$slotName) ? self::$slotName : '';
-		}
-		self::$metasForSlot[$slotName][$name] = $content;
+		$slotName = Q::ifset($params, 'slotName', isset(self::$slotName) ? self::$slotName : '');
+		self::$metasForSlot[$slotName][] = $params;
 	}
 
 	/**
@@ -505,11 +520,9 @@ class Q_Response
 	 * @static
 	 * @param {string} [$slotName=null] If provided, returns only the metas set while filling this slot.
 	 * @param {string} [$between=''] Optional text to insert between the &lt;meta&gt; tags or blocks of text.
-	 * @param {string} [$alsoAsProperty=nul] Pass "og" for example to also output this meta tag
-	 *   as a meta "property", see ogp.me
 	 * @return {string}
 	 */
-	static function metas($slotName = null, $between = "\n", $alsoAsProperty=null)
+	static function metas($slotName = null, $between = "\n")
 	{
 		$metas = self::metasArray($slotName);
 		if (!is_array($metas)) {
@@ -518,37 +531,12 @@ class Q_Response
 
 		$tags = array();
 		foreach ($metas as $sn => $m) {
-			foreach ($m as $name => $content) {
-				$equiv = array(
-					'content-type', 'expires', 'set-cookie', 'content-encoding',
-					'allow', 'date', 'last-modified', 'location', 'window-target',
-					'www-authenticate', 'pics-label', 'pragma', 'content-language',
-					'content-script-type', 'page-enter'
-				);
-				if (in_array(strtolower($name), $equiv)) {
-					$tags[] = Q_Html::tag('meta', array(
-						'http-equiv' => $name, 
-						'content' => $content, 
-						'data-slot' => $sn
-					));
-				} else {
-					$tags[] = Q_Html::tag('meta', array(
-						'name' => $name, 
-						'content' => $content, 
-						'data-slot' => $sn
-					));	
-				}
-			}
-		}
-		if ($alsoAsProperty === 'og') {
-			foreach ($metas as $sn => $m) {
-				foreach ($m as $name => $content) {
-					$tags[] = Q_Html::tag('meta', array(
-						'property' => "og:$name", 
-						'content' => $content, 
-						'data-slot' => $sn
-					));	
-				}
+			foreach ($m as $meta) {
+				$tags[] = Q_Html::tag('meta', array(
+					$meta['attrName'] => $meta['attrValue'],
+					'content' => $meta['content'],
+					'data-slot' => $sn
+				));
 			}
 		}
 		return implode($between, $tags);
