@@ -79,20 +79,22 @@
 
 				$startButton.on(Q.Pointer.fastclick, function () {
 					$startButton.addClass('Q_working');
-					Q.req("Websites/webpage", "start", function (err, response) {
+					Q.req("Websites/webpage", ["data"], function (err, response) {
 						$startButton.removeClass('Q_working');
 						var msg = Q.firstErrorMessage(err, response && response.errors);
 						if (msg) {
 							return Q.alert(msg);
 						}
 
-						var slot = response.slots.start;
+						var slot = response.slots.data;
 						state.publisherId = slot.publisherId;
 						state.streamName = slot.streamName;
 
 						Q.handle(state.onCreate, tool);
 					}, {
+						method: 'post',
 						fields: {
+							action: 'start',
 							data: state.siteData,
 							message: $message.val()
 						}

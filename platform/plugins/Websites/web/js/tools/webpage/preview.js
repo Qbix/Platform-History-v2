@@ -108,8 +108,8 @@
 						inplaceType: 'textarea'
 					}) : webpageStream.fields.content,
 					interest: {
-						title: Q.getObject(['fields', 'title'], interestStream).replace('Websites:',''),
-						icon: interestStream.iconUrl(interestStream.getAttribute('iconSize')),
+						title: (Q.getObject(['fields', 'title'], interestStream) || '').replace('Websites:',''),
+						icon: Q.Streams.isStream(interestStream) ? interestStream.iconUrl(interestStream.getAttribute('iconSize')) : null,
 					},
 					src: webpageStream.iconUrl('80'),
 					url: state.url,
@@ -207,11 +207,12 @@
 
 				pipe.fill('webpage')(this);
 
-				var interestPublisherId = Q.getObject(["publisherId"], this.getAttribute('interest'));
-				var interestStreamName = Q.getObject(["streamName"], this.getAttribute('interest'));
+				var interest = JSON.parse(Q.getObject(["fields", "interest"], this) || null);
+				var interestPublisherId = Q.getObject(["publisherId"], this.getAttribute('interest')) || Q.getObject(['publisherId'], interest);
+				var interestStreamName = Q.getObject(["streamName"], this.getAttribute('interest')) || Q.getObject(['streamName'], interest);
 
 				if (!interestPublisherId || !interestStreamName) {
-					pipe.fill('interest')(null);
+					return pipe.fill('interest')(null);
 				}
 
 				// get interest stream

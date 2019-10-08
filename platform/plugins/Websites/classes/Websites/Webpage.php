@@ -392,11 +392,6 @@ class Websites_Webpage
 			'attributes' => array(
 				'url' => $url,
 				'urlParsed' => $urlParsed,
-				'interestTitle' => $interestTitle,
-				'interest' => array(
-					'publisherId' => $interestPublisherId,
-					'streamName' => $interestStreamName,
-				),
 				'icon' => $bigIcon,
 				'copyright' => $copyright,
 				'contentType' =>$contentType,
@@ -407,7 +402,7 @@ class Websites_Webpage
 		), array(
 			'publisherId' => $interestPublisherId,
 			'streamName' => $interestStreamName,
-			'type' => 'Websites/webpage'
+			'type' => 'Websites/webpage/interest'
 		));
 
 		// grant access to this stream for logged user
@@ -440,7 +435,7 @@ class Websites_Webpage
 			foreach (explode($delimiter, $keywords) as $keyword) {
 				$keywordInterestStream = Streams::getInterest($keyword);
 				if ($keywordInterestStream instanceof Streams_Stream) {
-					$webpageStream->relateTo($keywordInterestStream, $webpageStream->type, $webpageStream->publisherId, array(
+					$webpageStream->relateTo($keywordInterestStream, $webpageStream->type.'/keyword', $webpageStream->publisherId, array(
 						'skipAccess' => true
 					));
 				}
@@ -453,5 +448,63 @@ class Websites_Webpage
 		}
 
 		return $webpageStream;
+	}
+	/**
+	 * Get stream interests in one array
+	 * return should be
+	[
+	{publisherId: "...", streamName: "...", title: "..."},
+	{publisherId: "...", streamName: "...", title: "..."},
+	...
+	]
+	 * @method getInterests
+	 * @static
+	 * @param Streams_Stream $stream Websites/webpage stream
+	 * @return array
+	 */
+	static function getInterests($stream)
+	{
+		$rows = Streams_Stream::select('ss.publisherId, ss.name as streamName, ss.title', 'ss')
+			->join(Streams_relatedTo::table(true, 'srt'), array(
+				'srt.toStreamName' => 'ss.name',
+				'srt.toPublisherId' => 'ss.publisherId'
+			))->where(array(
+				'srt.fromPublisherId' => $stream->publisherId,
+				'srt.fromStreamName' => $stream->name,
+				'srt.type' => $stream->type.'/interest'
+			))
+			->orderBy('srt.weight', false)
+			->fetchDbRows();
+
+		return $rows[0];
+	}
+	/**
+	 * Get stream keywords in one array
+	 * return should be
+	[
+	{publisherId: "...", streamName: "...", title: "..."},
+	{publisherId: "...", streamName: "...", title: "..."},
+	...
+	]
+	 * @method getKeywords
+	 * @static
+	 * @param Streams_Stream $stream Websites/webpage stream
+	 * @return array
+	 */
+	static function getKeywords($stream)
+	{
+		$rows = Streams_Stream::select('ss.publisherId, ss.name, ss.title', 'ss')
+			->join(Streams_relatedTo::table(true, 'srt'), array(
+				'srt.toStreamName' => 'ss.name',
+				'srt.toPublisherId' => 'ss.publisherId'
+			))->where(array(
+				'srt.fromPublisherId' => $stream->publisherId,
+				'srt.fromStreamName' => $stream->name,
+				'srt.type' => $stream->type.'/keyword'
+			))
+			->orderBy('srt.weight', false)
+			->fetchDbRows();
+
+		return $rows;
 	}
 }
