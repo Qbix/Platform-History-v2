@@ -3447,12 +3447,7 @@ Q.chain = function (callbacks) {
 		result = function () {
 			var args = Array.prototype.slice.call(arguments, 0);
 			args.push(prevResult);
-			callback.apply(this, args);
-
-			var lastArgument = args[args.length - 1];
-			if (Q.typeOf(lastArgument) === 'function') {
-				lastArgument.apply(this, args);
-			}
+			return callback.apply(this, args);
 		};
 	}, {ascending: false, numeric: true});
 	return result;
