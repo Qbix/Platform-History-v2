@@ -1532,7 +1532,7 @@ webrtc_tool_popup-settings.Streams_webrtc_popup-box > div {
 .dialog-box .Streams_webrtc_choose-device .Streams_webrtc_radio-checkmark svg path {
     fill:#8c8c8c;
 }
-.Streams_webrtc_popup-box .Streams_webrtc_choose-device input:checked ~ .Streams_webrtc_radio-checkmark svg path,
+.Streams_webrtc_popup-box .Streams_webrtc_choose-device label:not([data-device-id="anotherScreen"]) input:checked ~ .Streams_webrtc_radio-checkmark svg path,
 .dialog-box .Streams_webrtc_choose-device input:checked ~ .Streams_webrtc_radio-checkmark svg path {
     fill:green;
 }

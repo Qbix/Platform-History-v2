@@ -60,6 +60,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				audio: true,
 				video: false
 			},
+			minimizeOnPageSwitching: true,
+			leaveAnotherActiveRooms: false,
 			onWebRTCRoomCreated: new Q.Event(),
 			onWebRTCRoomEnded: new Q.Event(),
 			onWebrtcControlsCreated: new Q.Event()
@@ -185,7 +187,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 			WebRTCconference.event.on('participantConnected', function (participant) {
 				log('user joined',  participant);
-
 				var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
 
 				if(userId != null){
@@ -664,7 +665,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			Q.addScript([
 				/*"https://cdn.trackjs.com/agent/v3/latest/t.js",*/
 				"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-				"{{Streams}}/js/tools/webrtc/app.js"
+				"{{Streams}}/js/tools/webrtc/app.js?ts=" + Date.now()
 			], function () {
 				var ua=navigator.userAgent;
 				//if (Q.info.isCordova && Q.info.platform === 'ios') {
@@ -871,6 +872,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			if(Q.info.isMobile){
 				viewMode = 'maximizedMobile';
 			} else viewMode = 'tiled';
+
+			if(_options.minimizeOnPageSwitching) {
+				Q.Page.onActivate('').set(function(){
+					if(viewMode == 'minimized' || viewMode == 'minimizedMobile') return;
+					if(Q.info.isMobile){
+						renderMinimizedScreensGridMobile();
+					} else renderMinimizedScreensGrid();
+				}, 'Streams.WebRTC');
+			}
 
 
 			/**
@@ -2567,6 +2577,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						}
 					}
 
+					if(_options.leaveAnotherActiveRooms) {
+						if(Q.Streams.WebRTCRooms != null && Q.Streams.WebRTCRooms.length != 0) {
+							for(var r in Q.Streams.WebRTCRooms) {
+								Q.Streams.WebRTCRooms[r].stop();
+							}
+						}
+					}
+
 					var roomId = _options.roomId != null ? _options.roomId : null;
 					if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
 					if(roomId != null) _options.roomId = roomId;
@@ -2621,6 +2639,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							Q.Streams.get(asPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
 								_roomStream = stream;
 								window.roomStream = _roomStream;
+								if(Q.Streams.WebRTCRooms == null){
+									Q.Streams.WebRTCRooms = [];
+								}
+
+								Q.Streams.WebRTCRooms.push(webRTCInstance);
 								log('start: createOrJoinRoomStream: mode ' + _options.mode)
 								bindStreamsEvents(stream);
 								if(_options.mode === 'twilio') {
@@ -2742,6 +2765,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			stop: stop,
 			screenRendering: screensRendering,
 			currentConferenceLibInstance: currentConferenceLibInstance,
+			controls: function () {
+				return _controlsTool;
+			},
 			roomsMediaContainer: function () {
 				return _roomsMedia;
 			},
