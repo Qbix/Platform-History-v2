@@ -60,6 +60,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				audio: true,
 				video: false
 			},
+			minimizeOnPageSwitching: true,
+			leaveAnotherActiveRooms: false,
 			onWebRTCRoomCreated: new Q.Event(),
 			onWebRTCRoomEnded: new Q.Event(),
 			onWebrtcControlsCreated: new Q.Event()
@@ -185,7 +187,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 			WebRTCconference.event.on('participantConnected', function (participant) {
 				log('user joined',  participant);
-
 				var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
 
 				if(userId != null){
@@ -664,7 +665,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			Q.addScript([
 				/*"https://cdn.trackjs.com/agent/v3/latest/t.js",*/
 				"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-				"{{Streams}}/js/tools/webrtc/app.js"
+				"{{Streams}}/js/tools/webrtc/app.js?ts=" + Date.now()
 			], function () {
 				var ua=navigator.userAgent;
 				//if (Q.info.isCordova && Q.info.platform === 'ios') {
@@ -853,7 +854,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			} else {
 				Q.addScript([
 					"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-					"{{Streams}}/js/tools/webrtc/app.js"
+					"{{Streams}}/js/tools/webrtc/app.js?ts=" + Date.now()
 				], function () {
 					initConference();
 				});
@@ -871,6 +872,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			if(Q.info.isMobile){
 				viewMode = 'maximizedMobile';
 			} else viewMode = 'tiled';
+
+			if(_options.minimizeOnPageSwitching) {
+				Q.Page.onActivate('').set(function(){
+					if(viewMode == 'minimized' || viewMode == 'minimizedMobile') return;
+					if(Q.info.isMobile){
+						renderMinimizedScreensGridMobile();
+					} else renderMinimizedScreensGrid();
+				}, 'Streams.WebRTC');
+			}
 
 
 			/**
@@ -924,6 +934,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						}
 
 						renderMaximizedScreensGridMobile();
+					} else if(viewMode == 'minimizedMobile') {
+						renderMinimizedScreensGridMobile();
 					}
 
 					doPlayTracks()
@@ -1076,11 +1088,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					e.preventDefault();
 				});
 				if(Q.info.isTouchscreen) {
-					window.addEventListener('touchend', function (e) {
-						var target = e.target;
-						if (target == chatParticipantEl || chatParticipantEl.contains(target)) {
-							toggleViewModeByScreenClick(e);
-						}
+					chatParticipantEl.addEventListener('touchend', function (e) {
+						var resizeTool = Q.Tool.from(chatParticipantEl, "Q/resize");
+						if(resizeTool.isScreenResizing) return;
+						toggleViewModeByScreenClick(e);
 					}, false);
 				} else chatParticipantEl.addEventListener('click', toggleViewModeByScreenClick);
 
@@ -1428,11 +1439,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				if(_controlsTool != null) _controlsTool.participantsPopup().disableLoudesScreenMode();
 
-				console.log('activeScreen', activeScreen);
-				console.log('viewMode', viewMode);
-				console.log('viewModeToSwitchBack', viewModeToSwitchBack);
 				if(activeScreen && !activeScreen.screenEl.contains(e.target)) {
-					console.log('toggleViewModeByScreenClick 1');
 					enableAllScreenToRender();
 
 					tappedScreen.screenEl.style.zIndex = '';
@@ -1443,7 +1450,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 					return;
 				} else if(activeScreen && (activeScreen.screenEl.contains(e.target) || activeScreen.screenEl == e.target)) {
-					console.log('toggleViewModeByScreenClick 2');
 					enableAllScreenToRender();
 
 					tappedScreen.screenEl.style.zIndex = '';
@@ -1453,8 +1459,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					} else renderMinimizedScreensGrid(tappedScreen);
 
 					return;
-				} else if (activeScreen == null && (viewMode == 'tiled' || viewMode == 'tiledMobile')) {
-					console.log('toggleViewModeByScreenClick 3');
+				} else if (activeScreen == null && (viewMode == 'tiled' || viewMode == 'tiledMobile') && viewModeToSwitchBack != null) {
 					enableAllScreenToRender();
 
 					tappedScreen.screenEl.style.zIndex = '';
@@ -1464,20 +1469,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					} else renderMaximizedScreensGrid(tappedScreen);
 
 					return;
-				} else if (activeScreen == null && (viewMode == 'minimized' || viewMode == 'minimizedMobile')) {
-					console.log('toggleViewModeByScreenClick 4');
+				} else if (activeScreen == null && (viewMode == 'minimized' || viewMode == 'minimizedMobile') && viewModeToSwitchBack != null) {
 					enableAllScreenToRender();
 
 					tappedScreen.screenEl.style.zIndex = '';
 					if(viewModeToSwitchBack == 'tiled' || viewModeToSwitchBack == 'tiledMobile' || viewModeToSwitchBack == 'maximizedMobile' || viewModeToSwitchBack == 'regular') {
-						console.log('viewModeToSwitchBack', viewModeToSwitchBack)
 						if(viewModeToSwitchBack == 'maximizedMobile') viewModeToSwitchBack = 'tiledMobile';
 						toggleViewMode(viewModeToSwitchBack);
 					}
 
 					return;
 				} else if (activeScreen && activeScreen.excludeFromRendering && (activeScreen.screenEl.contains(e.target) || activeScreen.screenEl == e.target)) {
-					console.log('toggleViewModeByScreenClick 5');
 
 					enableAllScreenToRender();
 
@@ -1487,7 +1489,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 					return;
 				}
-				console.log('toggleViewModeByScreenClick 6');
 
 				enableAllScreenToRender();
 				toggleViewMode(null, tappedScreen);
@@ -2576,6 +2577,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						}
 					}
 
+					if(_options.leaveAnotherActiveRooms) {
+						if(Q.Streams.WebRTCRooms != null && Q.Streams.WebRTCRooms.length != 0) {
+							for(var r in Q.Streams.WebRTCRooms) {
+								Q.Streams.WebRTCRooms[r].stop();
+							}
+						}
+					}
+
 					var roomId = _options.roomId != null ? _options.roomId : null;
 					if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
 					if(roomId != null) _options.roomId = roomId;
@@ -2630,6 +2639,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							Q.Streams.get(asPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
 								_roomStream = stream;
 								window.roomStream = _roomStream;
+								if(Q.Streams.WebRTCRooms == null){
+									Q.Streams.WebRTCRooms = [];
+								}
+
+								Q.Streams.WebRTCRooms.push(webRTCInstance);
 								log('start: createOrJoinRoomStream: mode ' + _options.mode)
 								bindStreamsEvents(stream);
 								if(_options.mode === 'twilio') {
@@ -2751,6 +2765,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			stop: stop,
 			screenRendering: screensRendering,
 			currentConferenceLibInstance: currentConferenceLibInstance,
+			controls: function () {
+				return _controlsTool;
+			},
 			roomsMediaContainer: function () {
 				return _roomsMedia;
 			},

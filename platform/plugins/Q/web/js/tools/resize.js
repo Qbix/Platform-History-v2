@@ -40,7 +40,7 @@
 			onMovingStop: new Q.Event(),
 			onUpdate: new Q.Event(),
 			onRefresh: new Q.Event(),
-			isMoving: false
+			isMoving: false,
 		},
 
 
@@ -519,11 +519,12 @@
 					function resizeByPinchGesture(element) {
 						_elementToResize = element;
 
-						Q.addEventListener(element, 'touchstart', function () {
-							_startResizingByPinch();
+						Q.addEventListener(element, 'touchstart', function (e) {
+							_startResizingByPinch(e);
 						});
 					}
 
+					var currentActiveTouches = 0;
 					function _startResizingByPinch(e) {
 						_elementPosition = _elementToResize.style.position;
 						var elementRect = _elementToResize.getBoundingClientRect();
@@ -539,23 +540,27 @@
 						} else if (_elementPosition == 'absolute') {
 							_centerPositionFromTop = _elementToResize.offsetTop + elementRect.height / 2;
 						}
-
+						currentActiveTouches = e.touches.length;
 						ratio = _elementToResize.offsetWidth / _elementToResize.offsetHeight;
-						Q.addEventListener(window, 'touchend', _stopResizingByPinch);
-						Q.addEventListener(window, 'touchmove', resizeByPinch);
+						window.addEventListener('touchend', _stopResizingByPinch);
+						window.addEventListener('touchmove', resizeByPinch);
 					}
 
-					function _stopResizingByPinch() {
-						tool.isScreenResizing = false;
+					function _stopResizingByPinch(e) {
+						if(currentActiveTouches != e.changedTouches.length) {
+							currentActiveTouches = currentActiveTouches - e.changedTouches.length;
+							return;
+						}
+						currentActiveTouches = 0;
 						touch1 = touch2 = prevPosOfTouch1 = prevPosOfTouch2 = _latestHeightValue = _latestWidthValue = ratio = null;
-						Q.removeEventListener(window, 'touchend', _stopResizingByPinch);
-						Q.removeEventListener(window, 'touchmove', resizeByPinch);
+						window.removeEventListener('touchend', _stopResizingByPinch);
+						window.removeEventListener('touchmove', resizeByPinch);
 						tool.state.onMoved.handle.call(tool);
+						tool.isScreenResizing = false;
 					}
 
 					var touch1, touch2, prevPosOfTouch1, prevPosOfTouch2, ratio;
 					function resizeByPinch(e) {
-
 						if(e.touches.length != 2) return;
 						tool.isScreenResizing = true;
 
@@ -634,7 +639,8 @@
 						prevPosOfTouch1.x = touch1.clientX;
 						prevPosOfTouch1.y = touch1.clientY;
 						prevPosOfTouch2.x = touch2.clientX;
-						prevPosOfTouch2.y = touch2.clientY;
+						prevPosOfTouch2.y = touch2.clientY
+
 					}
 
 					function onWheel(e) {
