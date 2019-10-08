@@ -24,6 +24,9 @@ class Q_Valid
 	 $check_domain = false,
 	 &$fixed_url = null)
 	{
+		if (!is_string($url)) {
+			return false;
+		}
 		if (!filter_var($url, FILTER_VALIDATE_URL)) {
 			return false;
 		}
