@@ -518,7 +518,7 @@ Sp.matchTypes.adapters = {
 		var parts = this.split(' ');
 		var res = [];
 		var regexp = (options && options.requireScheme)
-			? /^([A-Za-z]*:|)\/\//
+			? /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}(:[0-9]{1,5})?(\/.*)?$/gm
 			: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}(:[0-9]{1,5})?(\/.*)?$/gm;
 		for (var i=0; i<parts.length; i++) {
 			if (!parts[i].match(regexp)) {

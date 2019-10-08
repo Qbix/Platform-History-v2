@@ -1481,6 +1481,7 @@ class Q
 	static function json_encode($value, $options = 0, $depth = 512)
 	{
 		$args = func_get_args();
+		$value = self::utf8ize($value);
 		$args[0] = self::toArrays($value);
 		$result = call_user_func_array('json_encode', $args);
 		if ($result === false) {
@@ -1496,7 +1497,19 @@ class Q
 		return str_replace("\\/", '/', $result);
 	}
 
-
+	/* Use it for json_encode some corrupt UTF-8 chars
+ 	* useful for = malformed utf-8 characters possibly incorrectly encoded by json_encode
+	*/
+	static function utf8ize($mixed) {
+		if (is_array($mixed)) {
+			foreach ($mixed as $key => $value) {
+				$mixed[$key] = self::utf8ize($value);
+			}
+		} elseif (is_string($mixed)) {
+			return mb_convert_encoding($mixed, "UTF-8", "UTF-8");
+		}
+		return $mixed;
+	}
 	/**
 	 * A wrapper for json_decode
 	 */
