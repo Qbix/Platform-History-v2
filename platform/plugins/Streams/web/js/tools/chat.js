@@ -774,14 +774,10 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		// when virtual keyboard appear, trying to scroll body to input element position
 		$input.on('focus', function () {
+			tool.scrollToBottom();
 			setTimeout(function () {
-				var $body = $("body");
-				$body[0].scrollTo(0, $body.height());
-
-				setTimeout(function () {
-					tool.scrollToBottom();
-				}, 200);
-			}, 1000);
+				tool.scrollToBottom();
+			}, 500);
 		});
 
 		// submit button handler
@@ -965,7 +961,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		return null;
 	},
 
-	scrollToBottom: function() {
+	scrollToBottom: function(callback) {
 		var state = this.state;
 		var $scm = this.$('.Streams_chat_messages');
 		var overflow = $scm.css('overflow-y');
@@ -975,10 +971,9 @@ Q.Tool.define('Streams/chat', function(options) {
 		if (!state.$scrolling) {
 			state.$scrolling = $($scm[0].scrollingParent());
 		}
-		var top = $scm.offset().top - state.$scrolling.offset().top;
-		state.$scrolling.animate({ 
+		state.$scrolling.animate({
 			scrollTop: state.$scrolling[0].scrollHeight
-		}, this.state.animations.duration);
+		}, this.state.animations.duration, callback);
 	},
 
 	scrollToTop: function() {
@@ -1072,7 +1067,8 @@ Q.Tool.define('Streams/chat', function(options) {
 Q.Template.set('Streams/chat/message/bubble',
 	'<div class="Streams_chat_item {{classes}}" '+
 			'data-byUserId="{{byUserId}}" '+
-			'data-ordinal="{{ordinal}}">'+
+			'data-ordinal="{{ordinal}}" ' +
+			'data-instructions="{{instructions}}">'+
 		'<div class="Streams_chat_avatar_icon" data-byUserId="{{byUserId}}"></div>'+
 		'<div class="Streams_chat_bubble">'+
 			'<div class="Streams_chat_tick"></div>'+
@@ -1136,10 +1132,10 @@ Q.Template.set('Streams/chat/main',
 		'<!-- messages -->'+
 	'</div>'+
 	'<form class="Streams_chat_composer" action="" method="post">'+
+		'<button class="Streams_chat_subscription"></button>' +
 		'{{#if textarea}}' +
 			'<textarea placeholder="{{placeholder}}"></textarea>'+
 		'{{else}}' +
-			'<button class="Streams_chat_subscription"></button>' +
 			'<input type="text" placeholder="{{placeholder}}">'+
 		'{{/if}}' +
 		'<div class="Streams_chat_submit Q_disappear"></div>' +

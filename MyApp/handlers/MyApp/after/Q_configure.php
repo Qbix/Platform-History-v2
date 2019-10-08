@@ -4,7 +4,7 @@ function MyApp_after_Q_configure()
 {
 	if (Q_Config::get('Db', 'logging', true)) {
 		// logging database queries
-		Q::log("\n-----");
+		Q::log(PHP_EOL."-----");
 		Q_Config::set(
 			'Q', 'handlersAfterEvent', 'Db/query/execute',
 			array('MyApp_log_shard_query'));

@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "1.0.8",
+				"version": "1.0.9",
 				"compatible": "0.9",
 				"requires": {"Users": "1.0.4"},
 				"permissions": ["Streams/icons"],
@@ -32,10 +32,12 @@
 			"Db/Row/Users_Label/removeExecute": ["Streams/after/Users_Label_removeExecute"],
 			"Users/saveContactsFromLinks": ["Streams/after/Users_saveContactsFromLinks"],
 			"Users/setLoggedInUser": ["Streams/after/Users_setLoggedInUser"],
+			"Streams/message/Streams/chat/message": ["Streams/after/Streams_message_Streams_chat_message"],
 			"Streams/message/Streams/relatedTo": ["Streams/after/Streams_message_Streams_relatedTo"],
 			"Streams/message/Streams/unrelatedTo": ["Streams/after/Streams_message_Streams_unrelatedTo"],
 			"Streams/message/Streams/updateRelateTo": ["Streams/after/Streams_message_Streams_updateRelateTo"],
-			"Streams/Stream/save/Streams/greeting": ["Streams/after/Streams_Stream_save_Streams_greeting"]
+			"Streams/Stream/save/Streams/greeting": ["Streams/after/Streams_Stream_save_Streams_greeting"],
+			"Streams/relateTo/Streams/chat": ["Streams/after/Streams_relateTo_Streams_chat"]
 		},
 		"routes@start": {
 			"s/:publisherId/:streamName[]": {"module": "Streams", "action": "stream"},
@@ -118,8 +120,7 @@
 			"Streams/user/icon": true
 		},
 		"public": {
-			"duration": 3600, /* one hour */
-			"permissions": ["observe"]
+			"permissions": ["Streams/observe"]
 		},
 		"types": {
 			"*": {
@@ -247,6 +248,21 @@
 					"filter": {
 						"types": ["Streams/invite"],
 						"notifications": 0
+					}
+				}
+			},
+			"Streams/mentioned": {
+				"create": false,
+				"subscriptions": {
+					"filter": {
+						"types": ["Streams/mention"],
+						"notifications": 0
+					}
+				},
+				"messages": {
+					"Streams/mention": {
+						"description": "User was mentioned",
+						"subject": ["Streams/content", ["notifications", "Streams/mention"]]
 					}
 				}
 			},
@@ -411,10 +427,20 @@
 			"Streams/chat": {
 				"create": true,
 				"edit": ["icon", "title", "content"],
+				"subscriptions": {
+					"filter": {
+						"types": ["Streams/call"],
+						"notifications": 0
+					}
+				},
 				"messages": {
 					"Streams/chat/message": { "post": true },
 					"Streams/chat/edit": { "post": true },
-					"Streams/chat/remove": { "post": true }
+					"Streams/chat/remove": { "post": true },
+					"Streams/call": {
+						"description": "Video call started",
+						"subject": ["Streams/content", ["notifications", "Streams/call"]]
+					}
 				},
 				"defaults": {
 					"title": "Conversation",
@@ -501,6 +527,7 @@
 			"Users_User": [
 				"Streams/participating",
 				"Streams/invited",
+				"Streams/mentioned",
 				"Streams/user/username",
 				"Streams/user/icon",
 				"Streams/user/firstName",
@@ -524,7 +551,8 @@
 		"rules": {
 			"deliver": {
 				"default": ["devices", "email", "mobile"],
-				"invited": ["devices", "mobile+pending", "email+pending"]
+				"invited": ["devices", "mobile+pending", "email+pending"],
+				"mentioned": ["devices", "mobile+pending", "email+pending"]
 			}
 		},
 		"notifications": {

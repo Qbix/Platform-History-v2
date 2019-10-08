@@ -176,6 +176,9 @@
 		"session": {
 			"redirectSecondsMax" : 300
 		},
+		"capability": {
+			"duration": 86400
+		},
 		"passphrase": {
 			"hashFunction": "sha1",
 			"hashIterations": 1103,

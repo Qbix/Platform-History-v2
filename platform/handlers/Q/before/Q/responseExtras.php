@@ -80,7 +80,11 @@ function Q_before_Q_responseExtras()
 	}
 	
 	// Language and texts
-	Q_Response::setMeta('Content-Language', Q_Text::basename());
+	Q_Response::setMeta(array(
+		'attrName' => 'http-equiv',
+		'attrValue' => 'Content-Language',
+		'content' => Q_Text::basename()
+	));
 	Q_Response::setScriptData('Q.info.text', Q_Config::get('Q', 'text', array()));
 	
 	// We may want to set the initial URL and updateTimestamp cookie

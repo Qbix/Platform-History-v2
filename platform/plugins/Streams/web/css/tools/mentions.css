@@ -1,0 +1,15 @@
+.Streams_chat_composer .Streams_userChooser_tool {
+	position: absolute;
+	width: 100%;
+	z-index: 1;
+}
+.Streams_mentions_chat a.Q_close {
+	background-image: url(../../../Q/img/close.png);
+	position: absolute;
+	right: -13px;
+	top: -13px;
+	cursor: pointer;
+	height: 30px;
+	width: 30px;
+	background-size: contain;
+}

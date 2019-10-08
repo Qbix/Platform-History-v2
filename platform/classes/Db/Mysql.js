@@ -359,10 +359,7 @@ function Db_Mysql(connName, dsn) {
 	 * @return {integer} The timestamp
 	 */
 	dbm.fromDate = function(date) {
-		var year = date.substr(0, 4),
-		    month = date.substr(5, 2),
-		    day = date.substr(8, 2);
-		return (new Date(year, month, day).getTime());
+		return Db.fromDate(date);
 	};
     
 	/**
@@ -372,16 +369,7 @@ function Db_Mysql(connName, dsn) {
 	 * @return {integer} The timestamp
 	 */
 	dbm.fromDateTime = function(datetime) {
-		if (datetime.constructor === Date) {
-			return datetime.getTime();
-		}
-		var year = datetime.substr(0, 4),
-		    month = datetime.substr(5, 2),
-		    day = datetime.substr(8, 2),
-		    hour = datetime.substr(11, 2),
-		    min = datetime.substr(14, 2),
-		    sec = datetime.substr(17, 2);
-		return (new Date(year, month, day, hour, min, sec, 0).getTime());
+		return Db.fromDateTime(datetime);
 	};
 
 	/**
@@ -391,13 +379,7 @@ function Db_Mysql(connName, dsn) {
 	 * @return {String} in "yyyy-mm-dd hh:mm:ss" format
 	 */
 	dbm.toDate = function(input) {
-		var date = Date.from(input);
-		var year = date.getFullYear();
-		var month = date.getMonth();
-		var day = date.getDate();
-		month = month < 10 ? '0'+month : month;
-		day = day < 10 ? '0'+day : day;
-		return year + '-' + month + '-' + day;
+		return Db.toDate(input);
 	};
 
 	/**
@@ -407,19 +389,7 @@ function Db_Mysql(connName, dsn) {
 	 * @return {String} in "yyyy-mm-dd hh:mm:ss" format
 	 */
 	dbm.toDateTime = function(input) {
-		var date = Date.from(input);
-		var year = date.getFullYear();
-		var month = date.getMonth()+1;
-		var day = date.getDate();
-		var hours = date.getHours();
-		var minutes = date.getMinutes();
-		var seconds = date.getSeconds();
-		month = month < 10 ? '0'+month : month;
-		day = day < 10 ? '0'+day : day;
-		hours = hours < 10 ? '0'+hours : hours;
-		minutes = minutes < 10 ? '0'+minutes : minutes;
-		seconds = seconds < 10 ? '0'+seconds : seconds;
-		return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+		return Db.toDateTime(input);
 	};
 	
 	var _dbtime = null,

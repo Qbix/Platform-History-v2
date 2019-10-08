@@ -389,12 +389,13 @@ Sp.updateParticipantCounts = function (newState, prevState, callback) {
  * Also sends it to observers unless dontNotifyObservers is true.
  * @method notifyParticipants
  * @param {String} event The type of Streams event, such as "Streams/post" or "Streams/remove"
- * @param {String} userId User who initiated the event
+ * @param {String} byUserId User who initiated the event
  * @param {Streams_Message} message 
- * @param {Boolean} dontNotifyObservers
+ * @param {Boolean} [dontNotifyObservers] whether to skip notifying observers who aren't registered users
+ * @param {Function} [callback] Optional, receives receives (err, participants)
  * @return {Boolean} Whether the system went on to get and notify participants
  */
-Sp.notifyParticipants = function (event, userId, message, dontNotifyObservers) {
+Sp.notifyParticipants = function (event, byUserId, message, dontNotifyObservers, callback) {
 	var fields = this.fields;
 	var stream = this;
 
@@ -402,7 +403,8 @@ Sp.notifyParticipants = function (event, userId, message, dontNotifyObservers) {
 		message.fields.streamType = fields.type;
 		for (var userId in participants) {
 			var participant = participants[userId];
-			stream.notify(participant, event, userId, message, function(err) {
+			stream.notify(participant, event, message, byUserId, function(err) {
+				callback && callback(err, participants);
 				if (!err) return;
 				var debug = Q.Config.get(['Streams', 'notifications', 'debug'], false);
 				if (debug) {
@@ -1116,12 +1118,13 @@ Sp.unsubscribe = function(options, callback) {
  * @method notify
  * @param {Streams_Participant} participant The stream participant to notify
  * @param {String} event The type of Streams event, such as "post" or "remove"
- * @param {String} userId The user who initiated the message
+ * @param {String} byUserId The user who initiated the message
  * @param {Streams_Message} message  Message on 'post' event or stream on other events
  * @param {Function} [callback] This would be called after all the notifying was done
  */
-Sp.notify = function(participant, event, userId, message, callback) {
-	var userId = participant.fields.userId, stream = this;
+Sp.notify = function(participant, event, message, byUserId, callback) {
+	var stream = this;
+	var userId = participant.fields.userId;
 	function _notify(err, access) {
 		if (err) {
 		    return callback && callback(err);
@@ -1131,7 +1134,10 @@ Sp.notify = function(participant, event, userId, message, callback) {
 		}
 		
 		// 1) check for socket clients which are online
-		var only = Q.Config.get(['Streams', 'notifications', 'onlyIfAllClientsOffline'], true);
+		var only = stream.getAttribute('Streams/onlyIfAllClientsOffline');
+		if (only == undefined) {
+			only = Q.Config.get(['Streams', 'notifications', 'onlyIfAllClientsOffline'], true);
+		}
 		if (only) {
 			// check if message send even if client online
 			var evenIfOnline = Streams.Stream.getConfigField(stream.fields.type, ['messages', message.fields.type, 'evenIfOnline'], false);
@@ -1146,7 +1152,7 @@ Sp.notify = function(participant, event, userId, message, callback) {
 		function _continue(online, evenIfOnline) {
 			// 2) if user has socket connected - emit socket message and quit
 			if (online) {
-				Users.Socket.emitToUser(userId, event, message.getFields());
+				Users.Socket.emitToUser(userId, event, message.getFields(), byUserId);
 
 				if (!evenIfOnline) {
 					return callback && callback();
@@ -1251,7 +1257,7 @@ Sp.notify = function(participant, event, userId, message, callback) {
 					appIds[platform] = [platformAppId];
 				});
 			}
-			Users.User.devices(participant.fields.userId, appIds, function (devices) {
+			Users.User.devices(userId, appIds, function (devices) {
 				for (var platform in devices) {
 					for (var i=0; i<devices[platform].length; i++) {
 						var d = devices[platform][i];
@@ -1291,7 +1297,7 @@ Sp.post = function (asUserId, fields, callback) {
 	if (typeof asUserId !== 'string') {
 		callback = fields;
 		fields = asUserId;
-		asUserId = fields.byUserId;
+		asUserId = Q.getObject('byUserId', fields);
 		if (!asUserId) {
 			throw new Q.Exception("Streams.Stream.prototype.post needs asUserId");
 		}

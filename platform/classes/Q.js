@@ -52,6 +52,15 @@ Q.assert = function (condition, complaint) {
 };
 
 /**
+ * By default this is set to the root Promise object, which may be undefined
+ * in browsers such as Internet Explorer.
+ * You can load a Promises library and set Q.Promise to the Promise constructor
+ * before including Q.js, to ensure Promises are used by Q.getter and other functions.
+ * @property {Function} Promise
+ */
+Q.Promise = root.Promise;
+
+/**
  * Returns the type of a value
  * @method typeOf
  * @param {mixed} value The value to test type
@@ -116,12 +125,19 @@ Q.isSet = function _Q_isSet(parent, keys, delimiter) {
 function _getProp (/*Array*/parts, /*Boolean*/create, /*Object*/context){
 	var p, i = 0;
 	if (context === null) return undefined;
-	context = context || null;
-	if(!parts.length) return context;
+	context = context || root;
+	if (!parts.length) return context;
 	while(context && (p = parts[i++]) !== undefined){
-		context = (typeof context === 'object') && (context[p] !== undefined)
-			? context[p] 
-			: (create ? context[p] = {} : undefined);
+		try {
+			if (p === '*') {
+				p = Q.firstKey(context);
+			}
+			context = (context[p] !== undefined) ? context[p] : (create ? context[p] = {} : undefined);
+		} catch (e) {
+			if (create) {
+				throw new Q.Error("Q.setObject cannot set property of " + typeof(context) + " " + JSON.stringify(context));
+			}
+		}
 	}
 	return context; // mixed
 };
@@ -860,6 +876,80 @@ Q.getter.CACHED = 0;
 Q.getter.REQUESTING = 1;
 Q.getter.WAITING = 2;
 Q.getter.THROTTLING = 3;
+
+/**
+ * Chains an array of callbacks together into a function that can be called with arguments
+ * 
+ * @static
+ * @method chain
+ * @param {Array} callbacks An array of callbacks, each taking another callback at the end
+ * @return {Function} The wrapper function
+ */
+Q.chain = function (callbacks) {
+	var result = null;
+	Q.each(callbacks, function (i, callback) {
+		var prevResult = result;
+		result = function () {
+			var args = Array.prototype.slice.call(arguments, 0);
+			args.push(prevResult);
+			return callback.apply(this, args);
+		};
+	}, {ascending: false, numeric: true});
+	return result;
+};
+
+/**
+ * Takes a function and returns a version that returns a promise
+ * @method promisify
+ * @static
+ * @param  {Function} getter A function that takes one callback and passes err as the first parameter to it
+ * @param {Boolean} useSecondArgument whether to resolve the promise with the second argument instead of with "this"
+ * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
+ */
+Q.promisify = function (getter, useSecondArgument) {
+	function _promisifier() {
+		if (!Q.Promise) {
+			return getter.apply(this, args);
+		}
+		var args = [], resolve, reject, found = false;
+		for (var i=0, l=arguments.length; i<l; ++i) {
+			var ai = arguments[i];
+			if (typeof ai === 'function') {
+				found = true;
+				ai = function _promisified(err, second) {
+					if (err) {
+						return reject(err);
+					}
+					try {
+						ai.apply(this, arguments);
+					} catch (e) {
+						err = e;
+					}
+					if (err) {
+						return reject(err);
+					}
+					resolve(useSecondArgument ? second : this);
+				}
+			}
+			args.push(ai);
+			break; // only one callback, expect err as first argument
+		}
+		if (!found) {
+			args.push(function _defaultCallback(err, second) {
+				if (err) {
+					return reject(err);
+				}
+				resolve(useSecondArgument ? second : this);
+			});
+		}
+		var promise = new Q.Promise(function (r1, r2) {
+			resolve = r1;
+			reject = r2;
+		});
+		return Q.extend(promise, getter.apply(this, args));
+	}
+	return Q.extend(_promisifier, getter);
+};
 
 /**
  * Wraps a function and returns a wrapper that will call the function at most once.
@@ -2540,11 +2630,59 @@ Q.require = function _Q_require(what) {
 	return require(realPath);
 };
 
-var getLogStream = Q.getter(function (name, callback) {
-	var path = ((Q.app && Q.app.FILES_DIR)
+/**
+ * Removes all log files older than Q.Config.get('[Q', 'log', 'removeAfterDays'], null)
+ * @method removeOldLogs
+ * @private
+ * @static
+ * @return {integer} The number of log files removed
+ */
+function _removeOldLogs()
+{
+	var days = parseInt(Q.Config.get(['Q', 'logs', 'removeAfterDays'], null));
+	if (!days) {
+		return 0;
+	}
+	var path = _logsDirectory();
+	const fs = require('fs');
+
+	var count = 0;
+	fs.readdir(path, function (err, files) {
+		files.forEach(function (filename) {
+			var basename = filename.split('.').shift();
+			var parts = basename.split('-');
+			if (parts.length <= 3) {
+				return;
+			}
+			var d = parseInt(parts.pop());
+			var m = parseInt(parts.pop());
+			var y = parseInt(parts.pop());
+			var timestamp = (new Date(y, m-1, d+1)).getTime() / 1000;
+			var now = Date.now() / 1000;
+			var today = now - now % 86400;
+			if (today - timestamp > days * 86400) {
+				fs.unlink(path + Q.DS + filename);
+				++count;
+			}
+		});
+	});
+	return count;
+}
+
+function _logsDirectory() {
+	var filesDirectory = ((Q.app && Q.app.FILES_DIR)
 		? Q.app.FILES_DIR
-		: Q.FILES_DIR)+Q.DS+'Q'+Q.DS+Q.Config.get(['Q', 'internal', 'logDir'], 'logs');
-	var filename = path+Q.DS+name+'_node.log';
+		: Q.FILES_DIR);
+	var logsDirectory = Q.Config.get(['Q', 'logs', 'directory'], 'Q/logs')
+		.replace('/', Q.DS);
+	return filesDirectory+Q.DS+logsDirectory;
+}
+
+var getLogStream = Q.getter(function (name, callback) {
+	var Db = Q.require('Db');
+	var path = _logsDirectory();
+	var suffix = Db.toDate(new Date());
+	var filename = path+Q.DS+name+'_node'+'-'+suffix+'.log';
 	Q.Utils.preparePath(filename, function (err) {
 		if (err) {
 			console.error("Failed to create directory '"+path+"', Error:", err.message);
@@ -2553,10 +2691,16 @@ var getLogStream = Q.getter(function (name, callback) {
 		try {
 			var stats = fs.statSync(filename);
 		} catch (err) {
-			if (err && err.code !== 'ENOENT') {
-				err.message = "Could not stat '"+filename+"', Error:", err.message;
-				callback && callback(err);
-				return;
+			if (err) {
+				if (err.code === 'ENOENT') {
+					// about to create a new file, remove old log files
+					_removeOldLogs();
+				} else {
+					// any error other than "file doesn't exist"
+					err.message = "Could not stat '"+filename+"', Error:" + err.message;
+					callback && callback(err);
+					return;
+				}
 			}
 		}
 		if (stats && !stats.isFile()) {
@@ -2880,7 +3024,7 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
 			var error = message;
 			message = error.name + ": " + error.message
 				+ "\n" + "in " + error.fileName
-					+ " at (" + error.lineNumber + ":" + error.columnNumber + ")"
+				+ " at (" + error.lineNumber + ":" + error.columnNumber + ")"
 				+ "\n" + error.stack;
 		} else {
 			message = 'inspecting '+Q.typeOf(message)+':\n'+util.inspect(message, false, Q.Config.get('Q', 'var_dump_max_levels', 5));
@@ -2898,6 +3042,7 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
 			return;
 		}
 		stream.write(message);
+		_removeOldLogs();
 	});
 };
 
@@ -3328,6 +3473,54 @@ Sp.quote = function _String_prototype_quote() {
 		}
 	}
 	return o + '"';
+};
+
+/**
+ * Used to split ids into one or more segments, in order to store millions
+ * of files under a directory, without running into limits of various filesystems
+ * on the number of files in a directory.
+ * Consider using Amazon S3 or another service for uploading files in production.
+ * @method matchTypes
+ * @param {String|Array} [types] type or types to detect. Can be "url", "email", "phone", "twitter".
+ *  If omitted, all types are processed.
+ * @return {object}
+ */
+Sp.matchTypes = function (types) {
+	var string = this;
+	if (typeof types === 'string') {
+		types = [types];
+	}
+	if (!Q.isArrayLike(types)) {
+		types = Object.keys(Sp.matchTypes.adapters);
+	}
+	var res = {};
+	Q.each(types, function (i, type) {
+		if (Sp.matchTypes.adapters[type]) {
+			res[type] = Sp.matchTypes.adapters[type].call(string);
+		}
+	});
+	if (types.length === 1) {
+		return res[Object.keys(res)[0]];
+	}
+	return res;
+};
+
+Sp.matchTypes.adapters = {
+	url: function () {
+		return this.match(/(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+/gi) || [];
+	},
+	email: function () {
+		return this.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi) || [];
+	},
+	phone: function () {
+		return this.match(/\+[0-9]{1,2}?(-|\s|\.)?[0-9]{3,5}(-|\s|\.)?([0-9]{3,5}(-|\s|\.)?)?([0-9]{4,5})/gi) || [];
+	},
+	twitter: function () {
+		return this.match(/\+[0-9]{1,2}?(-|\s|\.)?[0-9]{3,5}(-|\s|\.)?([0-9]{3,5}(-|\s|\.)?)?([0-9]{4,5})/gi) || [];
+	},
+	qbixUserId: function () {
+		return this.match(/(@[a-z]{8})/gi) || [];
+	}
 };
 
 /**

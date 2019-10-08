@@ -38,7 +38,7 @@ Q.Tool.define("Assets/payment", function (options) {
 	}
 
 	if (!state.userId) {
-		throw new Q.Error("Assets/payment: Don't render tool when user is not logged in");
+		// throw new Q.Error("Assets/payment: Don't render tool when user is not logged in");
 	}
 
 	if (!state.amount) {

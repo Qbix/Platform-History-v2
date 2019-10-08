@@ -423,11 +423,7 @@ Streams.listen = function (options, servers) {
 		client.on('Streams/observe',
 		function (clientId, capability, publisherId, streamName, fn) {
 			var now = Date.now() / 1000;
-			if (!capability || !Q.Utils.validate(capability)
-			|| Q.isEmpty(capability.permissions)
-			|| capability.startTime > now
-			|| capability.endTime < now
-			|| capability.permissions.indexOf('observe') < 0) {
+			if (!Q.Utils.validateCapability(capability, 'Streams/observe')) {
 				return fn && fn({
 					type: 'Users.Exception.NotAuthorized',
 					message: 'Not Authorized'
@@ -483,7 +479,6 @@ Streams.listen = function (options, servers) {
 		});
 		client.on('Streams/neglect',
 		function (clientId, capability, publisherId, streamName, fn) {
-			console.log(arguments);
 			var o = Streams.observers;
 			if (!Q.getObject([publisherId, streamName, client.id], o)) {
 				return fn && fn(null, false);
@@ -491,6 +486,25 @@ Streams.listen = function (options, servers) {
 			delete o[publisherId][streamName][client.id];
 			delete Streams.observing[client.id][publisherId][streamName];
 			return fn && fn(null, true);
+		});
+		client.on('Streams/ephemeral',
+		function (clientId, capability, payload, dontNotifyObservers, fn) {
+			var now = Date.now() / 1000;
+			if (!payload || !payload.publisherId || !payload.streamName || !payload.type) {
+				return fn && fn("Payload must have publisherId and streamName and type set");
+			}
+			if (!Q.Utils.validateCapability(capability, 'Users/socket')) {
+				return fn && fn("Capability not valid", null);
+			}
+			var byUserId = capability.userId;
+			Streams.fetchOne(byUserId, payload.publisherId, payload.streamName, function (err) {
+				if (err) {
+					return fn && fn(err, false);
+				}
+				this.notifyParticipants(
+					'Streams/ephemeral', byUserId, payload, dontNotifyObservers, fn
+				);
+			});
 		});
 		client.on('disconnect', function () {
 			var observing = Streams.observing[client.id];
@@ -1119,6 +1133,7 @@ Streams.isStream = function (testing) {
 };
 
 Streams.WebRTC = require('Streams/WebRTC');
+Streams.Mentions = require('Streams/Mentions');
 
 /**
  * @property _messageHandlers

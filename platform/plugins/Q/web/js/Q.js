@@ -217,7 +217,7 @@ Sp.toCapitalized = function _String_prototype_toCapitalized() {
  * @return {boolean}
  */
 Sp.isUrl = function _String_prototype_isUrl () {
-	return !!this.match(/^([A-Za-z]*:|)\/\//);
+	return !!this.matchTypes('url', {requireScheme: true}).length;
 };
 
 /**
@@ -485,12 +485,18 @@ Sp.splitId = function(lengths, delimiter) {
  * @method matchTypes
  * @param {String|Array} [types] type or types to detect. Can be "url", "email", "phone", "twitter".
  *  If omitted, all types are processed.
+ * @param {object} [options]
+ * @param {boolean} [options.requireScheme=false] If true, return only urls with protocol
  * @return {object}
  */
-Sp.matchTypes = function (types) {
+Sp.matchTypes = function (types, options) {
 	var string = this;
 	if (typeof types === 'string') {
 		types = [types];
+	}
+	if (Q.typeOf(types) === 'object') {
+		options = types;
+		types = null;
 	}
 	if (!Q.isArrayLike(types)) {
 		types = Object.keys(Sp.matchTypes.adapters);
@@ -498,7 +504,7 @@ Sp.matchTypes = function (types) {
 	var res = {};
 	Q.each(types, function (i, type) {
 		if (Sp.matchTypes.adapters[type]) {
-			res[type] = Sp.matchTypes.adapters[type].call(string);
+			res[type] = Sp.matchTypes.adapters[type].call(string, options);
 		}
 	});
 	if (types.length === 1) {
@@ -508,8 +514,19 @@ Sp.matchTypes = function (types) {
 };
 
 Sp.matchTypes.adapters = {
-	url: function () {
-		return this.match(/(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+/gi) || [];
+	url: function (options) {
+		var parts = this.split(' ');
+		var res = [];
+		var regexp = (options && options.requireScheme)
+			? /^([A-Za-z]*:|)\/\//
+			: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}(:[0-9]{1,5})?(\/.*)?$/gm;
+		for (var i=0; i<parts.length; i++) {
+			if (!parts[i].match(regexp)) {
+				continue;
+			}
+			res.push(parts[i]);
+		}
+		return res;
 	},
 	email: function () {
 		return this.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi) || [];
@@ -519,6 +536,9 @@ Sp.matchTypes.adapters = {
 	},
 	twitter: function () {
 		return this.match(/\+[0-9]{1,2}?(-|\s|\.)?[0-9]{3,5}(-|\s|\.)?([0-9]{3,5}(-|\s|\.)?)?([0-9]{4,5})/gi) || [];
+	},
+	qbixUserId: function () {
+		return this.match(/(@[a-z]{8})/gi) || [];
 	}
 };
 
@@ -3411,6 +3431,27 @@ Q.getter.CACHED = 0;
 Q.getter.REQUESTING = 1;
 Q.getter.WAITING = 2;
 Q.getter.THROTTLING = 3;
+
+/**
+ * Chains an array of callbacks together into a function that can be called with arguments
+ * 
+ * @static
+ * @method chain
+ * @param {Array} callbacks An array of callbacks, each taking another callback at the end
+ * @return {Function} The wrapper function
+ */
+Q.chain = function (callbacks) {
+	var result = null;
+	Q.each(callbacks, function (i, callback) {
+		var prevResult = result;
+		result = function () {
+			var args = Array.prototype.slice.call(arguments, 0);
+			args.push(prevResult);
+			return callback.apply(this, args);
+		};
+	}, {ascending: false, numeric: true});
+	return result;
+};
 
 /**
  * Takes a function and returns a version that returns a promise
@@ -11283,12 +11324,12 @@ Q.Pointer = {
 		if (onlyTouchscreen && !Q.info.isTouchscreen) {
 			return;
 		}
+		element = element || document.body;
 		if (element.activatedTouchlabels) {
 			return;
 		}
 		element.activatedTouchlabels = true;
 		var _suppress = false;
-		element = element || document.body;
 		var div = document.createElement('div');
 		div.addClass('Q_touchlabel');
 		document.body.appendChild(div);

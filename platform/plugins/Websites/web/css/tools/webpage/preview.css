@@ -89,6 +89,7 @@
 .Websites_webpage_preview_tool .Streams_aspect_description {
 	font-size: 12px;
 	color: #000;
+	line-height: normal;
 }
 .Websites_webpage_preview_tool .Streams_aspect_interests a:link,
 .Websites_webpage_preview_tool .Streams_aspect_interests a:visited {

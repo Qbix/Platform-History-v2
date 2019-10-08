@@ -43,10 +43,9 @@ abstract class Users extends Base_Users
 	 */
 	static function isCustomIcon ($icon) {
 		if (!$icon) {
-			false;
+			return false;
 		}
 		return strpos($icon, 'imported') !== false
-		or strpos($icon, 'uploads') !== false
 		or preg_match("/\/icon\/[0-9]+/", $icon);
 	}
 
@@ -97,13 +96,14 @@ abstract class Users extends Base_Users
 	 * @param {string} $userId
 	 * @return {string}
 	 */
-	static function getLanguage($userId){
+	static function getLanguage($userId)
+	{
 		$user = self::fetch($userId, true);
-
 		return isset($user->preferredLanguage) ? $user->preferredLanguage : Q_Text::$language;
 	}
+	
 	/**
-	 * Rturn an array of the user's roles relative to a publisher
+	 * Return an array of the user's roles relative to a publisher
 	 * @method roles
 	 * @static
 	 * @param string [$publisherId=Users::communityId()]
@@ -1200,7 +1200,7 @@ abstract class Users extends Base_Users
 				}
 			} else if ($icon === true) {				
 				// locally generated icons
-				$identifier = $identifier ?: microtime();
+				$identifier = $identifier ? $identifier : microtime();
 				$hash = md5(strtolower(trim($identifier)));
 				$icon = array();
 				foreach ($sizes as $size) {
@@ -2001,6 +2001,24 @@ abstract class Users extends Base_Users
 			throw new Users_Exception_NotAuthorized();
 		}
 		return $authorized;
+	}
+	
+	/**
+	 * Get the capability object that will be sent in "Q.plugins.Users.capability" 
+	 * It will be signed and used in some requests.
+	 * @method capability
+	 * @static
+	 * @return Q_Capability
+	 */
+	static function capability()
+	{
+		static $c = null;
+		if (!isset($c)) {
+			$duration = Q_Config::expect('Users', 'capability', 'duration');
+			$time = time();
+			$c = new Q_Capability(array(), $time, $time + $duration);
+		}
+		return $c;
 	}
 	
 	protected static function hashing($identifier, $type = null)

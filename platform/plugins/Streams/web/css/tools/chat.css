@@ -166,6 +166,15 @@
 	float: left;
 	font-weight: bold;
 }
+.Streams_chat_from_me .Users_avatar_tool {
+	display: none;
+	float: left;
+}
+.Streams_chat_from_me .Streams_chat_bubble .Streams_chat_message_content .Users_avatar_tool,
+.Streams_chat_to_me .Streams_chat_bubble .Streams_chat_message_content .Users_avatar_tool {
+	display: inline-block;
+	float: none;
+}
 .Streams_chat_tool .Streams_chat_bubble .Users_avatar_name {
 	margin-right: 5px;
 	display: block;
@@ -324,10 +333,6 @@
 	margin: 0 -19px 0 0;
 	background-position: 0 13px;
 }
-.Streams_chat_from_me .Users_avatar_tool {
-	display: none;
-	float: left;
-}
 .Streams_chat_notification {
 	text-align: center;
 	color: gray;
@@ -347,3 +352,4 @@
 		float: right;
 		margin-bottom: 15px;
 	}
+}

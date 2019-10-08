@@ -301,16 +301,16 @@ Users.Socket = {
 				return;
 			}
 			client.alreadyListening = true;
-			client.on('Users/user', function (userId, clientId) {
-				if (!userId) {
-					// force disconnect
-					client.disconnect();
+			client.on('Users/user', function (capability, clientId) {
+				if (!Q.Utils.validateCapability(capability, 'Users/socket')) {
+					client.disconnect(); // force disconnect
+					return;
 				}
+				var userId = capability.userId;
 				Users.fetch(userId, function (err) {
 					var user = this;
 					if (!user) {
-						// force disconnect
-						client.disconnect();
+						client.disconnect(); // force disconnect
 						return;
 					}
 					if (!Users.clients[userId]) {
