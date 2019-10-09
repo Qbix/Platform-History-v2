@@ -2059,19 +2059,17 @@ class Streams_Stream extends Base_Streams_Stream
 		);
 		$url = Q::ifset($options, 'url', $this->url());
 		foreach (array('og', 'twitter') as $prefix) {
-			$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':title', 'content' => $title);
-			$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':image', 'content' => $image);
-			$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':description', 'content' => $description);
-			$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':keywords', 'content' => $keywords);
-			$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':url', 'content' => $url);
+			foreach (array('title', 'image', 'description', 'keywords', 'url') as $prop) {
+				$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':'.$prop, 'content' => $$prop);
+			}
 		}
 
 		$attrUrl = $this->getAttribute('url');
 		if (is_string($attrUrl) && strpos($attrUrl, 'youtube.com')) {
-			$metas[] = array('attrName' => 'property', 'attrValue' => "og:video", 'content' => $attrUrl);
-			$metas[] = array('attrName' => 'property', 'attrValue' => "twitter:card", 'content' => "player");
+			$metas[] = array('attrName' => 'property', 'attrValue' => 'og:video', 'content' => $attrUrl);
+			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:card', 'content' => 'player');
 		} else {
-			$metas[] = array('attrName' => 'property', 'attrValue' => "twitter:card", 'content' => "summary");
+			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:card', 'content' => 'summary');
 		}
 		return $metas;
 	}

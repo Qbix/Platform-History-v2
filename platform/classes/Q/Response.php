@@ -488,11 +488,12 @@ class Q_Response
 			}
 		}
 
-		self::$metas[] = $params;
+		$key = $params['attrName'].':'.$params['attrValue'];
+		self::$metas[$key] = $params;
 
 		// Now, for the slot
 		$slotName = Q::ifset($params, 'slotName', isset(self::$slotName) ? self::$slotName : '');
-		self::$metasForSlot[$slotName][] = $params;
+		self::$metasForSlot[$slotName][$key] = $params;
 	}
 
 	/**
