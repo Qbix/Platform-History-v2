@@ -2066,9 +2066,14 @@ class Streams_Stream extends Base_Streams_Stream
 
 		$attrUrl = $this->getAttribute('url');
 		if (is_string($attrUrl) && strpos($attrUrl, 'youtube.com')) {
-			//$metas[] = array('attrName' => 'property', 'attrValue' => 'og:video', 'content' => $attrUrl);
+			$parsedUrl = parse_url($attrUrl);
+			parse_str($parsedUrl['query'], $parsedQuery);
+			if (Q::ifset($parsedQuery, 'v', null)) {
+				$metas[] = array('attrName' => 'property', 'attrValue' => 'og:video', 'content' => $parsedUrl['scheme'].'://'.$parsedUrl['host'].'/v/'.$parsedQuery['v']);
+			} else {
+				$metas[] = array('attrName' => 'property', 'attrValue' => 'og:url', 'content' => $attrUrl);
+			}
 			$metas[] = array('attrName' => 'property', 'attrValue' => 'og:type', 'content' => 'video');
-			$metas[] = array('attrName' => 'property', 'attrValue' => 'og:url', 'content' => $attrUrl);
 			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:card', 'content' => 'player');
 		} else {
 			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:card', 'content' => 'summary');
