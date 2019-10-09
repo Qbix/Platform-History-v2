@@ -2035,7 +2035,7 @@ class Streams_Stream extends Base_Streams_Stream
 	function metas($options)
 	{
 		if (!empty($options['iconFile'])) {
-			$iconFile = '500x.png';
+			$iconFile = $options['iconFile'];
 		} else {
 			$sizes = Q_Image::getSizes('Streams/image', $maxStretch);
 			ksort($sizes);
