@@ -10,6 +10,8 @@
 		"SetEmailAddress": "Set Email Address"
 	},
 	"welcome": {
+		"Title": "{{1}}: welcome",
+		"Description": "Welcome to {{1}} application.",
 		"Welcome": "Welcome!",
 		"ToStart": "To start a new app, you should follow the instructions <a href='{{1}}'>here</a>.",
 		"RenderedInMs": "Oh, and by the way, this rendered in {{1}} ms.",
