@@ -483,7 +483,9 @@ class Q_Response
 			if (is_array($size) && !empty($size[0]) && !empty($size[1])) {
 				self::setMeta(array(
 					array('attrName' => 'property', 'attrValue' => 'og:image:width', 'content' => $size[0]),
-					array('attrName' => 'property', 'attrValue' => 'og:image:height', 'content' => $size[1])
+					array('attrName' => 'property', 'attrValue' => 'og:image:height', 'content' => $size[1]),
+					array('attrName' => 'property', 'attrValue' => 'og:image:secure_url', 'content' => $params['content']),
+					array('attrName' => 'property', 'attrValue' => 'og:image:type', 'content' => $size['mime'])
 				));
 			}
 		}
@@ -1439,7 +1441,8 @@ class Q_Response
 		}
 		$language = self::language();
 		return 'lang="' . $language . '" '
-			. 'prefix="og: http://ogp.me/ns# object: http://ogp.me/ns/object#" '
+			. 'prefix="og:http://ogp.me/ns# object:http://ogp.me/ns/object# website:http://ogp.me/ns/website# fb:http://ogp.me/ns/fb#" '
+			. 'itemscope itemtype="https://schema.org/WebPage" '
 			. "class='$touchscreen $mobile $cordova $platform $ie $ie8 $classes'";
 	}
 
