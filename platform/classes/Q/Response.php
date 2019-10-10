@@ -456,11 +456,11 @@ class Q_Response
 		if (count($argList) > 1) { // backward compatibility
 			$params = array(
 				'attrName' => 'name',
-				'attrValue' => $argList[0],
-				'content' => $argList[1],
-				'slotName' => $argList[2]
+				'attrValue' => Q::ifset($argList, 0, ''),
+				'content' => Q::ifset($argList, 1, ''),
+				'slotName' => Q::ifset($argList, 2, '')
 			);
-		} elseif (is_array($params[0])) {
+		} elseif (isset($params[0]) && is_array($params[0])) {
 			foreach ($params as $v) {
 				if (is_array($v)) {
 					self::setMeta($v);
