@@ -2075,6 +2075,9 @@ class Streams_Stream extends Base_Streams_Stream
 			}
 			$metas[] = array('attrName' => 'property', 'attrValue' => 'og:type', 'content' => 'video');
 			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:card', 'content' => 'player');
+			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:player', 'content' => $attrUrl);
+			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:player:width', 'content' => "360");
+			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:player:height', 'content' => "200");
 		} else {
 			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:card', 'content' => 'summary');
 		}
