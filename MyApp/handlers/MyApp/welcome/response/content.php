@@ -26,7 +26,8 @@ function MyApp_welcome_response_content($params)
 		array('attrName' => 'property', 'attrValue' => 'og:image', 'content' => $communityIcon),
 		array('attrName' => 'property', 'attrValue' => 'twitter:image', 'content' => $communityIcon),
 		array('attrName' => 'property', 'attrValue' => 'og:url', 'content' => $url),
-		array('attrName' => 'property', 'attrValue' => 'twitter:url', 'content' => $url)
+		array('attrName' => 'property', 'attrValue' => 'twitter:url', 'content' => $url),
+		array('attrName' => 'property', 'attrValue' => 'twitter:card', 'content' => 'summary')
 	));
 
 	return Q::view('MyApp/content/welcome.php', compact('tabs', 'description'));
