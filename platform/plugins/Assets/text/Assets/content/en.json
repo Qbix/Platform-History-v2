@@ -35,7 +35,10 @@
             "message": "Would you like to subscribe to {{title}}?",
             "ok": "OK",
             "cancel": "Cancel"
-        }
+        },
+		"CreditOrDebitCard": "Credit or debit card",
+		"SubscribePayment": "Subscribe Payment",
+		"ImmediatePayment": "Immediate Payment"
     },
     "payments": {
         "infoTitle": "Set Payment Information",

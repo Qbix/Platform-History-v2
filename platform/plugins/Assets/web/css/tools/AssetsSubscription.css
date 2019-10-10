@@ -1,0 +1,38 @@
+.Assets_subscription_stripe {
+	width: 337px;
+}
+.Assets_subscription_stripe .Assets_subscription_stripe_box {
+	margin-bottom: 10px;
+}
+.Assets_subscription_stripe .StripeElement {
+	box-sizing: border-box;
+
+	height: 40px;
+
+	padding: 10px 12px;
+
+	border: 1px solid transparent;
+	border-radius: 4px;
+	background-color: white;
+
+	box-shadow: 0 1px 3px 0 #e6ebf1;
+	-webkit-transition: box-shadow 150ms ease;
+	transition: box-shadow 150ms ease;
+}
+
+.Assets_subscription_stripe .StripeElement--focus {
+	box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.Assets_subscription_stripe .StripeElement--invalid {
+	border-color: #fa755a;
+}
+
+.Assets_subscription_stripe .StripeElement--webkit-autofill {
+	background-color: #fefde5 !important;
+}
+
+.Assets_subscription_stripe button[name=subscribe] {
+	display: block;
+	margin: 10px auto;
+}

@@ -7568,7 +7568,7 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	if (typeof media === 'function') {
 		options = onload; onload = media; media = undefined;
 	} else if (Q.isPlainObject(media) && !(media instanceof Q.Event)) {
-		options = media; media = onload = null;
+		options = media; media = null;
 	}
 	options = options || {};
 	if (!onload) {
