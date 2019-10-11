@@ -13228,7 +13228,7 @@ Q.Camera = {
 				var $closeIcon = $('<a href="#" class="Q_scanning_close">')
 					.on(Q.Pointer.fastclick, _close)
 					.appendTo("body");
-				sQ.addEventListener(document, 'deviceready', function () {
+				Q.addEventListener(document, 'deviceready', function () {
 					QRScanner.prepare(function(err, status){
 						if (err) {
 							Q.handle(_close, $closeIcon);
