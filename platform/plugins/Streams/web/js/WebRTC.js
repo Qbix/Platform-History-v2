@@ -382,7 +382,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				} else if (_options.streams == null) {
 					if(_options.startWith.video == true || _options.startWith.audio == true) _options.streams = [stream];
-					if(Q.info.isMobile && !Q.info.isCordova && _options.startWith.video == false && _options.startWith.audio == false) {
+					if((Q.info.isMobile || Q.info.isTablet) && !Q.info.isCordova && _options.startWith.video == false && _options.startWith.audio == false) {
 						if(callback != null) callback();
 						return;
 					}
@@ -635,7 +635,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						} else if (_options.streams == null) {
 							log('publishMediaTracks: stream is added to options', stream);
 							_options.streams = [stream];
-							if(Q.info.isMobile && !Q.info.isCordova && _options.startWith.video == false && _options.startWith.audio == false) {
+							if((Q.info.isMobile || Q.info.isTablet) && !Q.info.isCordova && _options.startWith.video == false && _options.startWith.audio == false) {
 								if(callback != null) callback();
 								return;
 							}
@@ -2630,7 +2630,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 					} else if(Q.info.isCordova && Q.info.platform === 'ios'){
 						publishMediaTracks();
-					} else if(!(Q.info.isMobile && !Q.info.isCordova)) {
+					} else if(!((Q.info.isMobile || Q.info.isTablet) && !Q.info.isCordova)) {
 						publishMediaTracks({video: startWith.video, audio: startWith.audio});
 						if(_options.mediaDevicesDialog != null && (startWith.audio || startWith.video)) {
 							setTimeout(function () {
@@ -2739,7 +2739,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 					if(roomId != null && _options.roomPublisherId != null) {
-						if(Q.info.isMobile && !Q.info.isCordova) {
+						if((Q.info.isMobile || Q.info.isTablet)  && !Q.info.isCordova) {
 							var permissionPopupTimeout;
 							var premissionGrantedCallback = function () {
 								if(permissionPopupTimeout != null) clearTimeout(permissionPopupTimeout);
