@@ -471,9 +471,22 @@ class Q_Response
 
 		$params = array_merge(array(
 			'attrName' => 'name',
-			'content' => null,
+			'content' => '',
 			'slotName' => null
 		), $params);
+
+		// remove from content new lines and html tags
+		$params['content'] = preg_replace("/\r|\n/", "", strip_tags($params['content']));
+
+		if ($params['attrValue'] == 'og:image') {
+			$size = getimagesize(str_replace(Q_Request::baseUrl().'/Q', APP_FILES_DIR.DS.Q::app(), $params['content']));
+			if (is_array($size) && !empty($size[0]) && !empty($size[1])) {
+				self::setMeta(array(
+					array('attrName' => 'property', 'attrValue' => 'og:image:width', 'content' => $size[0]),
+					array('attrName' => 'property', 'attrValue' => 'og:image:height', 'content' => $size[1])
+				));
+			}
+		}
 
 		self::$metas[] = $params;
 

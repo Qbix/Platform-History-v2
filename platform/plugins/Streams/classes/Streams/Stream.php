@@ -2042,7 +2042,7 @@ class Streams_Stream extends Base_Streams_Stream
 			$iconFile = end($sizes);
 		}
 		$maxLength = Q_Config::get('Streams', 'meta', 'description', 'maxLength', 150);
-		$description = substr($this->content, 0, $maxLength);
+		$description = mb_substr($this->content, 0, $maxLength);
 		if (strlen($this->content) > $maxLength) {
 			$description .= '...';
 		}
@@ -2050,7 +2050,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$image = Q::ifset($options, 'icon', $this->iconUrl($iconFile));
 		$title = Q::ifset($options, 'title', $this->title);
 		$description = Q::ifset($options, 'description', $description);
-		$keywords = $this->getAttribute('keywords');
+		$keywords = $this->getAttribute('keywords') ?: Q::ifset($this, 'keywords', null);
 		$metas = array(
 			array('attrName' => 'name', 'attrValue' => 'title', 'content' => $title),
 			array('attrName' => 'name', 'attrValue' => 'image', 'content' => $image),
@@ -2065,7 +2065,14 @@ class Streams_Stream extends Base_Streams_Stream
 			$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':keywords', 'content' => $keywords);
 			$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':url', 'content' => $url);
 		}
-		$metas[] = array('attrName' => 'property', 'attrValue' => "twitter:card", 'content' => $image);
+
+		$attrUrl = $this->getAttribute('url');
+		if (is_string($attrUrl) && strpos($attrUrl, 'youtube.com')) {
+			$metas[] = array('attrName' => 'property', 'attrValue' => "og:video", 'content' => $attrUrl);
+			$metas[] = array('attrName' => 'property', 'attrValue' => "twitter:card", 'content' => "player");
+		} else {
+			$metas[] = array('attrName' => 'property', 'attrValue' => "twitter:card", 'content' => "summary");
+		}
 		return $metas;
 	}
 
