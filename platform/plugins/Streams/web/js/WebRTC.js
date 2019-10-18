@@ -103,15 +103,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				var loader = document.createElement('DIV');
 				loader.className = 'Streams_webrtc_page-loader-con';
 				loader.innerHTML = `<div class="Streams_webrtc_loader">
-										<div class="Streams_webrtc_loader_square"></div>
-										<div class="Streams_webrtc_loader_square"></div>
-										<div class="Streams_webrtc_loader_square Streams_webrtc_loader_last"></div>
-										<div class="Streams_webrtc_loader_square Streams_webrtc_loader_clear"></div>
-										<div class="Streams_webrtc_loader_square"></div>
-										<div class="Streams_webrtc_loader_square Streams_webrtc_loader_last"></div>
-										<div class="Streams_webrtc_loader_square Streams_webrtc_loader_clear"></div>
-										<div class="Streams_webrtc_loader_square"></div>
-										<div class="Streams_webrtc_loader_square Streams_webrtc_loader_last"></div>
+										<span class="Q_working">Connecting...</span>
 									</div>`;
 				document.body.appendChild(loader);
 			}
@@ -657,12 +649,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		 * @param {accessToken} Access token retrieved via Twilio API
 		 */
 		function startTwilioRoom(roomId, accessToken) {
+			showPageLoader();
 
-			Q.addScript([
-				/*"https://cdn.trackjs.com/agent/v3/latest/t.js",*/
-				"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-				"{{Streams}}/js/tools/webrtc/app.js?ts=" + Date.now()
-			], function () {
+			var initConference = function() {
 				var ua=navigator.userAgent;
 				//if (Q.info.isCordova && Q.info.platform === 'ios') {
 				/*window.TrackJS && TrackJS.install({
@@ -714,8 +703,29 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						}
 					);
 				});
+			}
 
-			});
+			var findScript = function (src) {
+				var scripts = document.getElementsByTagName('script');
+				var src = Q.url(src);
+				for (var i=0; i<scripts.length; ++i) {
+					var srcTag = scripts[i].getAttribute('src');
+					if (srcTag && srcTag.indexOf(src) != -1) {
+						return true;
+					}
+				}
+				return null;
+			};
+			if(findScript('{{Streams}}/js/tools/webrtc/app.js')) {
+				initConference();
+			} else {
+				Q.addScript([
+					"https://requirejs.org/docs/release/2.2.0/minified/require.js",
+					"{{Streams}}/js/tools/webrtc/app.js?ts=" + Date.now()
+				], function () {
+					initConference();
+				});
+			}
 		}
 
 		/**
@@ -750,7 +760,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		 */
 		function initWithNodeServer(socketServer, turnCredentials) {
 			log('initWithNodeServer');
-
+			showPageLoader();
 			var initConference = function(){
 				if(typeof window.WebRTCconferenceLib == 'undefined') return;
 				var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
