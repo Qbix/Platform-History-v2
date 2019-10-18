@@ -441,6 +441,7 @@
 .Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list {
     margin:0;
     padding: 0;
+    overflow: hidden;
 }
 .Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list li {
     display: flex;
@@ -561,7 +562,12 @@
     text-overflow: ellipsis;
     overflow: hidden;
 }
-
+@media only screen
+and (max-device-width : 320px) {
+    .Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity .Users_avatar_icon {
+        display: none;
+    }
+}
 .Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_chat-participant,
 .Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_chat-participant {
     display: block;
@@ -1307,7 +1313,7 @@
 }
 .Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn.Streams_webrtc_isLocal .camera-icon path,
 .Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-audio-btn.Streams_webrtc_isLocal .microphone-icon path {
-    fill: #C12337;
+    fill: #4AAA4E;
 }
 .Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity {
     flex: 1;
@@ -1481,6 +1487,10 @@
 }
 .Streams_webrtc_popup-box {
     background: white;
+    overflow: hidden;
+}
+.Q_dialog_content {
+    overflow: hidden;
 }
 .Streams_webrtc_popup-box .Streams_webrtc_choose-device,
 .dialog-box .Streams_webrtc_choose-device {

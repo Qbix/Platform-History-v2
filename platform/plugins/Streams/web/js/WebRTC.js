@@ -598,7 +598,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					}
 				}
 
-				//if((!constrains.video || videoDevices == 0) && (!constrains.audio || audioDevices != 0)) return;
+				if(!Q.info.isMobile && !Q.info.isTablet && (!constrains.video || videoDevices == 0) && (!constrains.audio || audioDevices != 0)) return;
 
 				navigator.mediaDevices.getUserMedia({video:constrains.video && videoDevices != 0, audio:constrains.audio && audioDevices != 0})
 					.then(function (stream) {

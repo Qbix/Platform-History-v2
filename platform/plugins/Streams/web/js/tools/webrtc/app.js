@@ -1132,23 +1132,26 @@ window.WebRTCconferenceLib = function app(options){
 			remoteStreamEl.onload = function () {
 				log('createTrackElement: onload', remoteStreamEl)
 			}
-			remoteStreamEl.oncanplay = function () {
+			remoteStreamEl.oncanplay = function (e) {
 				log('createTrackElement: oncanplay', remoteStreamEl);
-				if(participant.isLocal) return;
 				log('createTrackElement: oncanplay: paused befor = ' + remoteStreamEl.paused);
 
-				remoteStreamEl.play();
+				if(!participant.isLocal) remoteStreamEl.play();
 				log('createTrackElement: oncanplay: paused after = ' + remoteStreamEl.paused);
+
+				if(track.kind == 'audio') {
+					log('createTrackElement: dispatch audioTrackLoaded');
+
+					app.event.dispatch('audioTrackLoaded', {
+						screen: track.parentScreen,
+						trackEl: e.target,
+						track:track
+					});
+				}
 
 			}
 			remoteStreamEl.onloadedmetadata = function () {
 				log('createTrackElement: onloadedmetadata', remoteStreamEl)
-			}
-			remoteStreamEl.onpause = function () {
-				log('createTrackElement: onpause', remoteStreamEl)
-			}
-			remoteStreamEl.srcObject.onactive = function () {
-				log('createTrackElement: .srcObjectonactive', remoteStreamEl)
 			}
 			if(track.kind == 'video') {
 				remoteStreamEl.addEventListener('loadedmetadata', function (e) {
@@ -1350,6 +1353,7 @@ window.WebRTCconferenceLib = function app(options){
 			console.log('fbLive');
 			var _streamingSocket;
 			var _canvasMediStream = null;
+			var _mediaRecorder = null;
 			var videoComposer = (function () {
 				var _streams = [];
 				var _size = {width:640, height: 480};
@@ -1451,24 +1455,32 @@ window.WebRTCconferenceLib = function app(options){
 				}
 
 				function captureStreamAndSend() {
-					_canvasMediStream = document.querySelector('canvas').captureStream(30); // 30 FPS
+					_canvasMediStream = _canvas.captureStream(30); // 30 FPS
+
 					audioComposer.mix();
 
-					var mediaRecorder = new MediaRecorder(_canvasMediStream, {
+					_mediaRecorder = new MediaRecorder(_canvasMediStream, {
 						mimeType: 'video/webm;codecs=h264',
 						videoBitsPerSecond : 3 * 1024 * 1024
 					});
 
-					mediaRecorder.addEventListener('dataavailable', function(e) {
+					_mediaRecorder.onerror = function(e) {
+						console.error(e);
+					}
+
+					console.log('captureStreamAndSend mediaRecorder', _mediaRecorder);
+
+					_mediaRecorder.addEventListener('dataavailable', function(e) {
+						console.log('captureStreamAndSend send', e);
 						_streamingSocket.emit('Streams/webrtc/videoData', e.data);
 					});
-					//mediaRecorder.addEventListener('stop', _streamingSocket.disconnect());
+					//_mediaRecorder.addEventListener('stop', _streamingSocket.disconnect());
 
-					mediaRecorder.start(1000); // Start recording, and dump data every second
+					_mediaRecorder.start(1000); // Start recording, and dump data every second
 
 					_streamingSocket.on('close', function () {
 						alert('disconnected')
-						mediaRecorder.stop();
+						_mediaRecorder.stop();
 					});
 				}
 
@@ -1477,8 +1489,7 @@ window.WebRTCconferenceLib = function app(options){
 					var videoCanvas = document.createElement("CANVAS");
 					videoCanvas.className = "Streams_webrtc_video-stream-canvas";
 					videoCanvas.style.position = 'absolute';
-					//videoCanvas.style.top = '-999999999px';
-					videoCanvas.style.top = '0';
+					videoCanvas.style.top = '-999999999px';
 					videoCanvas.style.left = '0';
 					videoCanvas.style.zIndex = '9999999999999999999';
 					videoCanvas.width = _size.width;
@@ -1767,6 +1778,15 @@ window.WebRTCconferenceLib = function app(options){
 					return layouts[layoutName]({width: _size.width, height: _size.height}, app.screens().length);
 				}
 
+				function stopAndRemove() {
+					if(_canvas != null) {
+						if(_canvas.parentNode != null) _canvas.parentNode.removeChild(_canvas);
+						_canvas == null;
+					}
+
+					if(_canvasMediStream != null) _canvasMediStream.stop();
+				}
+
 				function isActive() {
 					return _isActive;
 				}
@@ -1775,7 +1795,8 @@ window.WebRTCconferenceLib = function app(options){
 					goLiveDialog: goLiveDialog,
 					updateCanvasLayout: updateCanvasLayout,
 					captureStreamAndSend: captureStreamAndSend,
-					isActive: isActive
+					stop: stopAndRemove,
+					isActive: isActive,
 				}
 			}());
 
@@ -1783,15 +1804,63 @@ window.WebRTCconferenceLib = function app(options){
 				var audio = new AudioContext();
 
 				function mix() {
-					const dest = audio.createMediaStreamDestination();
+					var dest = audio.createMediaStreamDestination();
+					window.dest = dest;
 					let participants = app.roomParticipants();
-					participants.forEach(participant => {
+					let tracksNum = 0;
+					participants.forEach(function(participant) {
 						let audiotracks = participant.audioTracks();
-						const source = audio.createMediaStreamSource(audiotracks[0].stream);
-						source.connect(dest);
+						console.log('audioComposer audiotracks', audiotracks);
+						if(audiotracks.length != 0) {
+							console.log('audioComposer add stream', audiotracks);
+
+							const source = audio.createMediaStreamSource(audiotracks[0].stream);
+							source.connect(dest);
+							tracksNum++;
+						}
 					});
 
-					_canvasMediStream.addTrack(dest.stream.getTracks()[0]);
+					console.log('audioComposer dest.stream.getTracks()', dest.stream.getTracks());
+					let silence = () => {
+						let ctx = new AudioContext(), oscillator = ctx.createOscillator();
+						let dst = oscillator.connect(ctx.createMediaStreamDestination());
+						oscillator.start();
+						return Object.assign(dst.stream.getAudioTracks()[0], {enabled: false});
+					}
+
+					if(tracksNum != 0){
+						_canvasMediStream.addTrack(dest.stream.getTracks()[0]);
+					} else {
+						var silentTrack = silence();
+						var silentStream = new MediaStream();
+						silentStream.addTrack(silentTrack);
+						let source = audio.createMediaStreamSource(silentStream);
+						source.connect(window.dest);
+						_canvasMediStream.addTrack(dest.stream.getTracks()[0]);
+
+					}
+
+					console.log('audioComposer mix')
+					app.event.on('audioTrackLoaded', function(e) {
+
+						var audiotracks = _canvasMediStream.getAudioTracks();
+						console.log('audioTrackLoaded audioTrackLoaded audiotracks', audiotracks);
+						console.log('audioTrackLoaded audioTrackLoaded e.track.mediaStreamTrack', e.track.mediaStreamTrack);
+
+
+						console.log('audioTrackLoaded dest trackd', dest.stream.getTracks());
+
+						let source = audio.createMediaStreamSource(e.track.stream);
+						source.connect(window.dest);
+
+						//_canvasMediStream.removeTrack(audiotracks[0]);
+						//_mediaRecorder.pause()
+						//_canvasMediStream.addTrack(window.dest.stream.getTracks()[0]);
+						//_mediaRecorder.resume()
+
+						//_canvasMediStream.addTrack(e.track.mediaStreamTrack);
+					})
+
 
 				}
 
@@ -1807,6 +1876,11 @@ window.WebRTCconferenceLib = function app(options){
 					videoComposer.updateCanvasLayout(function () {
 						videoComposer.goLiveDialog();
 					});
+				},
+				endStreaming: function () {
+					videoComposer.stop();
+					if(_streamingSocket != null) _streamingSocket.disconnect();
+					_streamingSocket = null;
 				}
 			}
 		}())
