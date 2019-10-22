@@ -245,27 +245,14 @@ class Places_Location extends Base_Places_Location
 			return $location;
 		}
 
-		// old approach
-		$communityId = $stream->getAttribute("communityId");
-		$res = array(
-			'publisherId' => $communityId,
-			'name' => $location,
-			'venue' => $stream->getAttribute("venue"),
-			'address' => $stream->getAttribute("address"),
-			'latitude' => $stream->getAttribute("latitude"),
-			'longitude' => $stream->getAttribute("longitude")
-		);
-
-		$area = $stream->getAttribute("area");
-		if ($area) {
-			$res['area'] = array(
-				'publisherId' => $communityId,
-				'name' => $area,
-				'title' => $stream->getAttribute("areaSelected")
-			);
+		// trying to get location from fields. These fields filled in hook Calendars_after_Streams_fetch_Calendars_event.
+		$location = json_decode(Q::ifset($stream, 'location', null));
+		if (json_last_error() == JSON_ERROR_NONE) {
+			return (array)$location;
 		}
 
-		return $res;
+		// old approach
+		return array();
 	}
 	 
 	/**
