@@ -54,7 +54,11 @@ var MyApp = (function (Q, $) {
 				});
 			}
 		}).css('cursor', 'pointer');
-		
+
+		// iOS related code
+		if (navigator.splashscreen) {
+			navigator.splashscreen.hide();
+		}
 	}, 'MyApp');
 	
 	// example stream
