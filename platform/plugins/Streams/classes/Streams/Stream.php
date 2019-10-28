@@ -2035,7 +2035,7 @@ class Streams_Stream extends Base_Streams_Stream
 	function metas($options)
 	{
 		if (!empty($options['iconFile'])) {
-			$iconFile = '500x.png';
+			$iconFile = $options['iconFile'];
 		} else {
 			$sizes = Q_Image::getSizes('Streams/image', $maxStretch);
 			ksort($sizes);
@@ -2059,19 +2059,27 @@ class Streams_Stream extends Base_Streams_Stream
 		);
 		$url = Q::ifset($options, 'url', $this->url());
 		foreach (array('og', 'twitter') as $prefix) {
-			$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':title', 'content' => $title);
-			$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':image', 'content' => $image);
-			$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':description', 'content' => $description);
-			$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':keywords', 'content' => $keywords);
-			$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':url', 'content' => $url);
+			foreach (array('title', 'image', 'description', 'keywords', 'url') as $prop) {
+				$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':'.$prop, 'content' => $$prop);
+			}
 		}
 
 		$attrUrl = $this->getAttribute('url');
 		if (is_string($attrUrl) && strpos($attrUrl, 'youtube.com')) {
-			$metas[] = array('attrName' => 'property', 'attrValue' => "og:video", 'content' => $attrUrl);
-			$metas[] = array('attrName' => 'property', 'attrValue' => "twitter:card", 'content' => "player");
+			$parsedUrl = parse_url($attrUrl);
+			parse_str($parsedUrl['query'], $parsedQuery);
+			if (Q::ifset($parsedQuery, 'v', null)) {
+				$metas[] = array('attrName' => 'property', 'attrValue' => 'og:video', 'content' => $parsedUrl['scheme'].'://'.$parsedUrl['host'].'/v/'.$parsedQuery['v']);
+			} else {
+				$metas[] = array('attrName' => 'property', 'attrValue' => 'og:url', 'content' => $attrUrl);
+			}
+			$metas[] = array('attrName' => 'property', 'attrValue' => 'og:type', 'content' => 'video');
+			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:card', 'content' => 'player');
+			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:player', 'content' => $attrUrl);
+			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:player:width', 'content' => "360");
+			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:player:height', 'content' => "200");
 		} else {
-			$metas[] = array('attrName' => 'property', 'attrValue' => "twitter:card", 'content' => "summary");
+			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:card', 'content' => 'summary');
 		}
 		return $metas;
 	}

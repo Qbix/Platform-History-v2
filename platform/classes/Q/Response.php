@@ -456,11 +456,11 @@ class Q_Response
 		if (count($argList) > 1) { // backward compatibility
 			$params = array(
 				'attrName' => 'name',
-				'attrValue' => $argList[0],
-				'content' => $argList[1],
-				'slotName' => $argList[2]
+				'attrValue' => Q::ifset($argList, 0, ''),
+				'content' => Q::ifset($argList, 1, ''),
+				'slotName' => Q::ifset($argList, 2, '')
 			);
-		} elseif (is_array($params[0])) {
+		} elseif (isset($params[0]) && is_array($params[0])) {
 			foreach ($params as $v) {
 				if (is_array($v)) {
 					self::setMeta($v);
@@ -483,16 +483,19 @@ class Q_Response
 			if (is_array($size) && !empty($size[0]) && !empty($size[1])) {
 				self::setMeta(array(
 					array('attrName' => 'property', 'attrValue' => 'og:image:width', 'content' => $size[0]),
-					array('attrName' => 'property', 'attrValue' => 'og:image:height', 'content' => $size[1])
+					array('attrName' => 'property', 'attrValue' => 'og:image:height', 'content' => $size[1]),
+					array('attrName' => 'property', 'attrValue' => 'og:image:secure_url', 'content' => $params['content']),
+					array('attrName' => 'property', 'attrValue' => 'og:image:type', 'content' => $size['mime'])
 				));
 			}
 		}
 
-		self::$metas[] = $params;
+		$key = $params['attrName'].':'.$params['attrValue'];
+		self::$metas[$key] = $params;
 
 		// Now, for the slot
 		$slotName = Q::ifset($params, 'slotName', isset(self::$slotName) ? self::$slotName : '');
-		self::$metasForSlot[$slotName][] = $params;
+		self::$metasForSlot[$slotName][$key] = $params;
 	}
 
 	/**
@@ -1438,7 +1441,8 @@ class Q_Response
 		}
 		$language = self::language();
 		return 'lang="' . $language . '" '
-			. 'prefix="og: http://ogp.me/ns# object: http://ogp.me/ns/object#" '
+			. 'prefix="og:http://ogp.me/ns# object:http://ogp.me/ns/object# website:http://ogp.me/ns/website# fb:http://ogp.me/ns/fb#" '
+			. 'itemscope itemtype="https://schema.org/WebPage" '
 			. "class='$touchscreen $mobile $cordova $platform $ie $ie8 $classes'";
 	}
 
