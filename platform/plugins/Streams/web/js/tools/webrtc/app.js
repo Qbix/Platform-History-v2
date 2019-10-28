@@ -141,6 +141,82 @@ window.WebRTCconferenceLib = function app(options){
 		switchCameras: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <g>   <path fill="#FFFFFF" d="M50.037,43.904c-3.939,0-7.151,3.212-7.151,7.168c0,3.947,3.212,7.167,7.151,7.167    c3.947,0,7.152-3.22,7.152-7.167C57.189,47.116,53.984,43.904,50.037,43.904z M50.037,56.49c-2.988,0-5.402-2.431-5.402-5.417    c0-2.997,2.414-5.418,5.402-5.418c2.98,0,5.402,2.422,5.402,5.418C55.439,54.069,53.017,56.49,50.037,56.49z"/>   <path fill="#FFFFFF" d="M63.047,43.286c-0.596,0-1.084,0.487-1.084,1.091c0,0.604,0.488,1.091,1.084,1.091    c0.597,0,1.083-0.487,1.083-1.091C64.13,43.773,63.644,43.286,63.047,43.286z"/>   <path fill="#FFFFFF" d="M50,0C22.431,0,0,22.43,0,50c0,27.571,22.429,50,50,50c27.569,0,50-22.429,50-50C100,22.431,77.569,0,50,0z     M25.111,51.626c0.934-0.933,2.432-0.933,3.366,0c0.934,0.936,0.926,2.446-0.007,3.382l-6.642,6.634    c-0.448,0.451-1.058,0.703-1.692,0.703c-0.633,0-1.242-0.252-1.689-0.703l-6.639-6.634c-0.933-0.936-0.933-2.446,0-3.382    c0.934-0.933,2.365-0.931,3.299,0l2.477,2.563V50c0-17.784,14.551-32.255,32.336-32.255c1.321,0,2.427,1.071,2.427,2.389    c0,1.32-1.017,2.39-2.337,2.39C34.86,22.524,22.583,34.85,22.583,50v4.189L25.111,51.626z M33.583,59.54V43.897    c0-1.44,1.517-3.086,2.956-3.086h5.341l2.703-2.58v-0.008c1-0.518,1.5-1.412,2.258-1.412h6.502c0.711,0,1.338,0.578,1.804,1.043    l0.015,0.158c0.007,0,0.022-0.172,0.022-0.172l3.128,2.971h5.224c1.433,0,3.048,1.646,3.048,3.086V59.54    c0,1.439-1.615,3.271-3.048,3.271H36.538C35.099,62.811,33.583,60.979,33.583,59.54z M86.506,49.071    c-0.614,0-1.063-0.235-1.529-0.698l-2.395-2.56V50c0,17.787-14.631,32.255-32.419,32.255c-1.32,0-2.47-1.067-2.47-2.39    c0-1.32,1.08-2.388,2.399-2.388c15.151,0,27.489-12.329,27.489-27.478v-4.187l-2.611,2.56c-0.934,0.931-2.473,0.931-3.403,0    c-0.938-0.934-0.951-2.447-0.014-3.381l6.63-6.636c0.935-0.935,2.442-0.935,3.375,0l6.635,6.636    c0.936,0.934,0.935,2.447-0.001,3.381C87.728,48.836,87.116,49.071,86.506,49.071z"/>  </g>  </svg>',
 	}
 
+	/**
+	 * Event system of app
+	 *
+	 * @method app.event
+	 * @return {Object}
+	 */
+	app.event = (function(){
+
+		var events = {};
+
+		var CustomEvent = function (eventName) {
+
+			this.eventName = eventName;
+			this.callbacks = [];
+
+			this.registerCallback = function(callback) {
+				this.callbacks.push(callback);
+			}
+
+			this.unregisterCallback = function(callback) {
+				const index = this.callbacks.indexOf(callback);
+				if (index > -1) {
+					this.callbacks.splice(index, 1);
+				}
+			}
+
+			this.fire = function(data) {
+				const callbacks = this.callbacks.slice(0);
+				callbacks.forEach((callback) => {
+					callback(data);
+				});
+			}
+		}
+
+		var dispatch = function(eventName, data) {
+			if(!doesHandlerExist(eventName)) {
+				return;
+			}
+
+			const event = events[eventName];
+			if (event) {
+				event.fire(data);
+			}
+		}
+
+		var on = function(eventName, callback) {
+			let event = events[eventName];
+			if (!event) {
+				event = new CustomEvent(eventName);
+				events[eventName] = event;
+			}
+			event.registerCallback(callback);
+		}
+
+		var off = function(eventName, callback) {
+			const event = events[eventName];
+			if (event && event.callbacks.indexOf(callback) > -1) {
+				event.unregisterCallback(callback);
+				if (event.callbacks.length === 0) {
+					delete events[eventName];
+				}
+			}
+		}
+
+		var doesHandlerExist = function (eventName) {
+			if(events[eventName] != null && events[eventName].callbacks.length != 0) return true;
+			return false;
+		}
+
+		return {
+			dispatch:dispatch,
+			on:on,
+			off:off,
+			doesHandlerExist:doesHandlerExist,
+		}
+	}())
 
 	/**
 	 * Contains information about participant
@@ -1354,6 +1430,7 @@ window.WebRTCconferenceLib = function app(options){
 			var _streamingSocket;
 			var _canvasMediStream = null;
 			var _mediaRecorder = null;
+			var _fbUserId = null;
 			var videoComposer = (function () {
 				var _streams = [];
 				var _size = {width:640, height: 480};
@@ -1362,54 +1439,56 @@ window.WebRTCconferenceLib = function app(options){
 				var _outputCtx = null;
 				var _isActive = null;
 
+				var _background = new Image();
+				_background.src = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80";
+
+				var _backgroundVideo = document.createElement('VIDEO');
+				_backgroundVideo.src = 'https://www.w3schools.com/html/mov_bbb.mp4';
+				_backgroundVideo.muted = true;
+				_backgroundVideo.loop = true;
+
 				var _fbApiInited;
 				var _fbStreamUrl;
 
-				function initFBApi() {
-					window.fbAsyncInit = function() {
-						/*FB.init({
-							app_id: '460379074807409',
-							version: 'v2.8'
-						});*/
-
-						FB.getLoginStatus(function(response){
-							console.log('getLoginStatus', response)
-							if (response.status === 'connected') {
-								_fbApiInited = true;
-							} else {
-								FB.login(function(response) {
-									if (response.authResponse) {
-										//user just authorized your app
-
-									}
-								}, {scope: 'email,public_profile'});
-
-							}
-
-						});
-
-					};
-
-
-				}
-				initFBApi();
-
 				function goLiveDialog() {
+					console.log('goLiveDialog')
+					//return connect('123', captureStreamAndSend);
 					var goLive = function() {
 						FB.ui({
-							display: 'popup',
+							display: 'touch',
 							method: 'live_broadcast',
 							phase: 'create'
 						}, (createRes) => {
 
 							FB.ui({
-								display: 'popup',
+								display: 'touch',
 								method: 'live_broadcast',
 								phase: 'publish',
 								broadcast_data: createRes
 							}, (publishRes) => {
+								console.log('goLiveDialog', publishRes);
+								if(publishRes == null || typeof publishRes == 'undefined') {
+									app.screensInterface.fbLive.endStreaming();
+								} else {
+									var videoLink = 'https://www.facebook.com/' + _fbUserId + '/videos/' +  publishRes.id;
+									var videoPlayerLink = 'https://www.facebook.com/plugins/video.php?href=' + encodeURI(videoLink) + '&show_text=0&width=560';
+									app.event.dispatch('facebookLiveStreamingStarted',{
+										'videoId': publishRes.id,
+										'userId': _fbUserId,
+										'link': videoLink,
+										'videoPlayerLink': videoPlayerLink
+									});
+
+									FB.api('/me', function(response) {
+
+
+										console.log('fbinfo', response)
+									});
+
+								}
 							});
 
+							console.log('goLiveDialog', createRes);
 							connect(createRes.secure_stream_url, captureStreamAndSend);
 						});
 					}
@@ -1418,14 +1497,16 @@ window.WebRTCconferenceLib = function app(options){
 						console.log('getLoginStatus', response)
 						if (response.status === 'connected') {
 							_fbApiInited = true;
+							_fbUserId = response.authResponse.userID;
 							goLive();
 						} else {
 							FB.login(function(response) {
 								if (response.authResponse) {
 									_fbApiInited = true;
+									_fbUserId = response.authResponse.userID;
 									goLive();
 								}
-							}, {scope: 'email,public_profile'});
+							}, {scope: 'email,public_profile,publish_video'});
 
 						}
 
@@ -1472,6 +1553,7 @@ window.WebRTCconferenceLib = function app(options){
 
 					_mediaRecorder.addEventListener('dataavailable', function(e) {
 						console.log('captureStreamAndSend send', e);
+
 						_streamingSocket.emit('Streams/webrtc/videoData', e.data);
 					});
 					//_mediaRecorder.addEventListener('stop', _streamingSocket.disconnect());
@@ -1482,6 +1564,62 @@ window.WebRTCconferenceLib = function app(options){
 						alert('disconnected')
 						_mediaRecorder.stop();
 					});
+
+					///playCanvasStream();
+				}
+
+				function playCanvasStream(){
+
+					var canvasVideo = document.createElement("VIDEO");
+					canvasVideo.style.position = 'absolute';
+					canvasVideo.style.top = '0';
+					canvasVideo.style.left = '0';
+					canvasVideo.style.zIndex = '9999999999999999999';
+					canvasVideo.style.width = '300px';
+					canvasVideo.style.height = '300px';
+
+					document.body.appendChild(canvasVideo);
+					canvasVideo.oncanplay = function (e) {
+						canvasVideo.play();
+					}
+					canvasVideo.play();
+					var mediaSource = new MediaSource();
+					canvasVideo.src = URL.createObjectURL(mediaSource);
+					var sourceBuffer;
+					window.segments = [];
+					mediaSource.addEventListener('sourceopen', function (e) {
+						console.log("sourceopen");
+						sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="opus,h264"');
+						window.sourceBuffer = sourceBuffer;
+					}, false);
+					mediaSource.addEventListener('error', function (e) {
+						console.log("error", e)
+					}, false);
+
+					_mediaRecorder.addEventListener('dataavailable', function(e) {
+						console.log('captureStreamAndSend send', e);
+
+						var reader = new FileReader();
+						reader.addEventListener("loadend", function () {
+							var arr = new Uint8Array(reader.result);
+							console.log('reader.result',arr)
+							window.segments.push(arr);
+
+							console.log('mediaSource.readyState', mediaSource.readyState, sourceBuffer.updating)
+							if (
+								mediaSource.readyState === "open" &&
+								sourceBuffer &&
+								sourceBuffer.updating === false
+							)
+							{
+								//sourceBuffer.appendBuffer(arrayOfBlobs.shift());
+								window.sourceBuffer.appendBuffer(window.segments.shift());
+								canvasVideo.play();
+
+							}
+						});
+						reader.readAsArrayBuffer(e.data);
+					});
 				}
 
 
@@ -1490,8 +1628,11 @@ window.WebRTCconferenceLib = function app(options){
 					videoCanvas.className = "Streams_webrtc_video-stream-canvas";
 					videoCanvas.style.position = 'absolute';
 					videoCanvas.style.top = '-999999999px';
+					//videoCanvas.style.top = '0';
 					videoCanvas.style.left = '0';
 					videoCanvas.style.zIndex = '9999999999999999999';
+					videoCanvas.style.backgroundColor = 'transparent';
+					//videoCanvas.style.background = 'url("https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80")';
 					videoCanvas.width = _size.width;
 					videoCanvas.height = _size.height;
 
@@ -1499,12 +1640,16 @@ window.WebRTCconferenceLib = function app(options){
 					_outputCtx = videoCanvas.getContext('2d');
 
 					_canvas = videoCanvas;
+
+					app.event.on('facebookLiveStreamingStarted', function () {
+
+					});
 				}
 				createCanvas();
 
 				function updateCanvasLayout(callback) {
-					if(!document.body.contains(_canvas)) document.body.appendChild(_canvas);
 					var layoutRects = layoutGenerator('tiledHorizontalMobile');
+					console.log('updateCanvasLayout');
 
 					var screens = app.screens();
 					for(var i in screens) {
@@ -1524,28 +1669,207 @@ window.WebRTCconferenceLib = function app(options){
 
 						if(videoAlreadyExist != false) {
 							if(videoAlreadyExist.participant.online == false) {
+								_inputCtx.clearRect(_streams[r].rect.x, _streams[r].rect.y, _streams[r].rect.width, _streams[r].rect.height);
 								_streams[r] = null;
 								_streams.splice(r, 1);
 								continue;
 							}
+							console.log('updateCanvasLayout videoAlreadyExist');
+							let newRect = new DOMRect(_streams[r].rect.x, _streams[r].rect.y, _streams[r].rect.width, _streams[r].rect.height);
+							_streams[r].rect = newRect;
 
-							_streams[r].rect = rect;
+							/*_streams[r].rect.x = rect.x;
+							_streams[r].rect.y = rect.y;
+							_streams[r].rect.width = rect.width;
+							_streams[r].rect.height = rect.height;*/
+
+							requestAnimationFrame(function(timestamp){
+								let starttime = timestamp || new Date().getTime()
+								moveit(timestamp, newRect, rect, {y:newRect.y, x:newRect.x, width:newRect.width,height:newRect.height}, 300, starttime, 'up');
+							})
 
 						} else {
-							var videoToAdd = {
-								rect: rect,
+							console.log('updateCanvasLayout new video', rect);
+
+							var startRect = new DOMRect(0, 0, 0, 0);
+							let videoToAdd = {
+								rect: startRect,
 								htmlVideoEl: htmlVideoEl,
 								mediaStream: mediaStream,
 								participant: screen.participant,
+								name: screen.nameEl.innerText,
 							}
+
+							requestAnimationFrame(function(timestamp){
+								let starttime = timestamp || new Date().getTime()
+								moveit(timestamp, videoToAdd.rect, rect, {y:startRect.y, x:startRect.x, width:startRect.width,height:startRect.height}, 300, starttime, 'add');
+							})
 
 							_streams.push(videoToAdd);
 
-							putVideoOnCanvas(videoToAdd, callback);
+							//putVideoOnCanvas(videoToAdd, callback);
 						}
 
 
 					}
+				}
+
+
+				function moveit(timestamp, rectToUpdate, distRect, startPositionRect, duration, starttime, a){
+					var timestamp = timestamp || new Date().getTime()
+					var runtime = timestamp - starttime
+					var progress = runtime / duration;
+					progress = Math.min(progress, 1);
+
+					console.log('moveit progress', a, distRect.x, rectToUpdate.x, startPositionRect.x + (distRect.x - startPositionRect.x) * progress)
+
+					rectToUpdate.y = startPositionRect.y + (distRect.y - startPositionRect.y) * progress;
+					rectToUpdate.x = startPositionRect.x + (distRect.x - startPositionRect.x) * progress;
+					rectToUpdate.width = startPositionRect.width + (distRect.width - startPositionRect.width) * progress;
+					rectToUpdate.height = startPositionRect.height + (distRect.height - startPositionRect.height) * progress;
+					if (runtime < duration){
+						requestAnimationFrame(function(timestamp){
+							moveit(timestamp, rectToUpdate, distRect, startPositionRect, duration, starttime, a)
+						})
+					} else {
+						rectToUpdate.y = distRect.y;
+						rectToUpdate.x = distRect.x;
+						rectToUpdate.width = distRect.width;
+						rectToUpdate.height = distRect.height;
+					}
+				}
+
+				function drawVideosOnCanvas() {
+					_inputCtx.clearRect(0, 0, _size.width, _size.height);
+					//_inputCtx.drawImage(_background,0,0);
+					//drawBackground(_background)
+					for(let i in _streams) {
+						let streamData = _streams[i];
+
+						if(streamData.htmlVideoEl.videoWidth == null || streamData.htmlVideoEl.videoHeight == null) continue;
+						drawSingleVideoOnCanvas(streamData.htmlVideoEl, streamData, _size.width, _size.height, streamData.htmlVideoEl.videoWidth, streamData.htmlVideoEl.videoHeight);
+					}
+
+					requestAnimationFrame(function(){
+						drawVideosOnCanvas();
+					})
+				}
+
+				function drawBackground(videoOrImg) {
+					var width, height;
+					if(typeof videoOrImg.controls != 'undefined') {
+						videoOrImg.play();
+						videoOrImg.volume = 0;
+
+						width = videoOrImg.videoWidth;
+						height = videoOrImg.videoHeight;
+					} else {
+						width = videoOrImg.width;
+						height = videoOrImg.height;
+					}
+
+					var scale = Math.max(_size.width / width, _size.height / height);
+					// get the top left position of the image
+					var x = (_size.width / 2) - (width / 2) * scale;
+					var y = (_size.height / 2) - (height / 2) * scale;
+					_inputCtx.drawImage(videoOrImg,
+						x, y,
+						width * scale, height * scale);
+
+				}
+
+				function drawSingleVideoOnCanvas(localVideo, data, canvasWidth, canvasHeight, videoWidth, videoHeight) {
+					if(data.participant.online == false) return;
+					//_inputCtx.translate(data.rect.x, data.rect.y);
+
+
+					var currentWidth = data.htmlVideoEl.videoWidth;
+					var currentHeight = data.htmlVideoEl.videoHeight;
+					var rectWidth, rectHeight;
+					var wrh = currentWidth / currentHeight;
+					rectWidth = data.rect.width;
+					rectHeight = rectWidth / wrh;
+					if (rectHeight > data.rect.height) {
+						rectHeight = data.rect.height;
+						rectWidth = rectHeight * wrh;
+					}
+
+					if(data.widthLog != null && data.heightLog != null) {
+						if(data.widthLog !=currentWidth || data.heightLog != currentHeight) {
+							//alert('dimensions changed');
+							console.log('dimensions changed width: ' + data.widthLog + ' -> ' + currentWidth);
+							console.log('dimensions changed height: ' + data.heightLog + ' -> ' + currentHeight);
+						}
+					}
+					//console.log('drawImage',  data.rect.width,  data.rect.height);
+
+					data.widthLog = currentWidth;
+					data.heightLog = currentHeight;
+					data.widthLog = currentWidth;
+					data.heightLog = currentHeight;
+
+					var widthToGet = data.rect.width, heightToGet = data.rect.height, ratio = data.rect.width / data.rect.height;
+					var x, y;
+
+					var scale = Math.max( data.rect.width / currentWidth, (data.rect.height / currentHeight));
+
+					widthToGet =  data.rect.width / scale;
+					heightToGet = currentHeight;
+
+					if(widthToGet / heightToGet != data.rect.width / data.rect.height) {
+						widthToGet = currentWidth;
+						heightToGet = data.rect.height / scale;
+
+						x = 0;
+						y = ((currentHeight / 2) - (heightToGet / 2));
+					} else {
+						x = ((currentWidth / 2) - (widthToGet / 2));
+						y = 0;
+					}
+
+					/* if size is smaller than rect widthToGet = data.rect.width / scale;
+					heightToGet = data.rect.height / scale;*/
+
+					_inputCtx.drawImage( localVideo,
+						x, y,
+						widthToGet, heightToGet,
+						data.rect.x, data.rect.y,
+						data.rect.width, data.rect.height);
+
+
+					//(currentWidth/2) - (widthToGet / 2), (currentHeight/2) - (heightToGet / 2),
+					_inputCtx.fillStyle = "black";
+					_inputCtx.fillRect(data.rect.x,  data.rect.y, data.rect.width, 36);
+
+					_inputCtx.font = "16px Arial";
+					_inputCtx.fillStyle = "white";
+					_inputCtx.fillText(data.name, data.rect.x + 10, data.rect.y + 36 + 16 - 18 - 8);
+
+					//_inputCtx.translate(-data.rect.x, -data.rect.y);
+
+					//var pixelData = _inputCtx.getImageData( 0, 0, videoWidth, videoHeight );
+
+					//_outputCtx.putImageData( pixelData, 0, 0);
+
+				}
+
+				function compositeVideosAndDraw() {
+					if(!document.body.contains(_canvas)) document.body.appendChild(_canvas);
+
+					updateCanvasLayout();
+					drawVideosOnCanvas();
+					_isActive = true;
+
+					app.event.on('videoTrackLoaded', function () {
+						if(_isActive == true) {
+							updateCanvasLayout();
+						}
+					});
+					app.event.on('participantDisconnected', function () {
+						if(_isActive == true) {
+							updateCanvasLayout();
+						}
+					});
 				}
 
 				function putVideoOnCanvas(data, callback) {
@@ -1559,11 +1883,17 @@ window.WebRTCconferenceLib = function app(options){
 					var videoWidth;
 					var videoHeight;
 
+
+					var background = new Image();
+					background.src = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80";
+
+
 					function drawVideoToCanvas(localVideo, data, canvasWidth, canvasHeight, videoWidth, videoHeight) {
+						//_inputCtx.translate(data.rect.x, data.rect.y);
+
 
 						var currentWidth = data.htmlVideoEl.videoWidth;
 						var currentHeight = data.htmlVideoEl.videoHeight;
-
 						var rectWidth, rectHeight;
 						var wrh = currentWidth / currentHeight;
 						rectWidth = data.rect.width;
@@ -1582,6 +1912,8 @@ window.WebRTCconferenceLib = function app(options){
 						}
 						//console.log('drawImage',  data.rect.width,  data.rect.height);
 
+						data.widthLog = currentWidth;
+						data.heightLog = currentHeight;
 						data.widthLog = currentWidth;
 						data.heightLog = currentHeight;
 
@@ -1608,6 +1940,15 @@ window.WebRTCconferenceLib = function app(options){
 							widthToGet, heightToGet,
 							data.rect.x, data.rect.y,
 							data.rect.width, data.rect.height);
+
+						_inputCtx.fillStyle = "black";
+						_inputCtx.fillRect(0,  0, data.rect.width, 36);
+
+						_inputCtx.font = "16px Arial";
+						_inputCtx.fillStyle = "white";
+						_inputCtx.fillText(data.name, 10, 36 + 16 - 18 - 8);
+
+						//_inputCtx.translate(-data.rect.x, -data.rect.y);
 
 						//var pixelData = _inputCtx.getImageData( 0, 0, videoWidth, videoHeight );
 
@@ -1781,10 +2122,17 @@ window.WebRTCconferenceLib = function app(options){
 				function stopAndRemove() {
 					if(_canvas != null) {
 						if(_canvas.parentNode != null) _canvas.parentNode.removeChild(_canvas);
-						_canvas == null;
 					}
 
-					if(_canvasMediStream != null) _canvasMediStream.stop();
+					if(_canvasMediStream != null) {
+						/*var streamTracks = _canvasMediStream.getTracks();
+						for(var t in streamTracks) {
+							streamTracks[t].stop();
+						}*/
+					}
+
+					_isActive = false;
+					_streams = [];
 				}
 
 				function isActive() {
@@ -1794,6 +2142,7 @@ window.WebRTCconferenceLib = function app(options){
 				return {
 					goLiveDialog: goLiveDialog,
 					updateCanvasLayout: updateCanvasLayout,
+					compositeVideosAndDraw: compositeVideosAndDraw,
 					captureStreamAndSend: captureStreamAndSend,
 					stop: stopAndRemove,
 					isActive: isActive,
@@ -1873,14 +2222,31 @@ window.WebRTCconferenceLib = function app(options){
 				videoComposer: videoComposer,
 				audioComposer: audioComposer,
 				goLive: function () {
-					videoComposer.updateCanvasLayout(function () {
+					console.log('goLiveDialog goLive');
+
+					try {
+
+						videoComposer.compositeVideosAndDraw();
 						videoComposer.goLiveDialog();
-					});
+					} catch (e) {
+						console.error(e);
+					}
 				},
 				endStreaming: function () {
+					console.log('goLiveDialog end streaming');
+
+					if(_mediaRecorder != null) _mediaRecorder.stop();
+
 					videoComposer.stop();
+
 					if(_streamingSocket != null) _streamingSocket.disconnect();
 					_streamingSocket = null;
+
+					app.event.dispatch('facebookLiveStreamingEnded');
+				},
+				isStreaming: function () {
+					if(_mediaRecorder != null && _streamingSocket != null) return true;
+					return false;
 				}
 			}
 		}())
@@ -4224,16 +4590,17 @@ window.WebRTCconferenceLib = function app(options){
 
 				var i;
 				var tracksNum = localParticipant.tracks.length - 1;
-				for (i = tracksNum; i >= 0; i--) {
+				for (i = tracksNum; i != -1; i--) {
+
 					if (localParticipant.tracks[i].kind == 'video') continue;
 
+					twilioTracks.push(localParticipant.tracks[i].twilioReference);
+
 					if(!(_isiOS && typeof cordova == 'undefined')) {
-						twilioTracks.push(localParticipant.tracks[i].twilioReference);
 						localParticipant.tracks[i].mediaStreamTrack.stop();
 						localParticipant.tracks[i].mediaStreamTrack.enabled = false;
 
-						for(let t = localParticipant.tracks.length - 1; t >= 0 ; t--){
-
+						for(let t = localParticipant.tracks.length - 1; t != -1 ; t--){
 							if(localParticipant.tracks[t].mediaStreamTrack.id == localParticipant.tracks[i].mediaStreamTrack.id) {
 								localParticipant.tracks.splice(t, 1);
 							}
@@ -4442,11 +4809,13 @@ window.WebRTCconferenceLib = function app(options){
 				var connect = Twilio.connect;
 
 				if(options.streams != null) {
-					log('initOrConnectConversation: streams passed as param');
+					log('initOrConnectConversation streams', (app.conferenceControl.micIsEnabled()), (app.conferenceControl.cameraIsEnabled()));
+
 					var tracks = [];
 					for(var t in options.streams) {
 						var mediaStreamTracks = options.streams[t].getTracks();
 						for(var s in mediaStreamTracks) {
+							if((mediaStreamTracks[s].kind == 'audio' && app.conferenceControl.micIsEnabled()) || (mediaStreamTracks[s].kind == 'video' && app.conferenceControl.cameraIsEnabled()))
 							tracks.push(mediaStreamTracks[s]);
 						}
 					}
@@ -5248,6 +5617,8 @@ window.WebRTCconferenceLib = function app(options){
 		} else app.views.isMobile(false);
 
 		var connect = function () {
+			log('initWithNodeJs: connect');
+
 			var secure = options.nodeServer.indexOf('https://') == 0;
 			socket = io.connect(options.nodeServer, {
 				transports: ['websocket'],
@@ -5261,8 +5632,10 @@ window.WebRTCconferenceLib = function app(options){
 			window.webrtcSocket = socket;
 			window.webConf = app;
 			socket.on('connect', function () {
+				app.event.dispatch('connected');
+
 				enableiOSDebug();
-				log('initWithNodeJs: socket: connected');
+				log('initWithNodeJs: socket: connected: ' + socket.connected);
 				if(localParticipant != null) return;
 				localParticipant = new Participant();
 				localParticipant.sid = socket.id;
@@ -5293,15 +5666,28 @@ window.WebRTCconferenceLib = function app(options){
 				console.log(e)
 				app.event.dispatch('reconnectError');
 			});
+			socket.on('reconnect_attempt', function(e) {
+				console.log('reconnect_attempt', e)
+				app.event.dispatch('reconnectAttempt', e);
+			});
 		}
 
 		if(findScript('socket.io.js') && typeof io != 'undefined') {
+			console.log('initWithNodeJs 1');
+
 			connect();
 		} else {
-			/*requirejs(['https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'], function (io) {
-				window.io = io;
-				connect();
-			});*/
+			var script = document.createElement('script');
+			script.onload = function () {
+				requirejs(['https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'], function (io) {
+					window.io = io;
+					connect();
+				});
+			};
+			script.src = 'https://requirejs.org/docs/release/2.2.0/minified/require.js';
+
+			document.head.appendChild(script); //or something of the likes
+
 		}
 
 
@@ -5357,77 +5743,6 @@ window.WebRTCconferenceLib = function app(options){
 
 		if(twilioRoom != null) twilioRoom.disconnect();
 	}
-
-	app.event = (function(){
-
-		var events = {};
-
-		var CustomEvent = function (eventName) {
-
-			this.eventName = eventName;
-			this.callbacks = [];
-
-			this.registerCallback = function(callback) {
-				this.callbacks.push(callback);
-			}
-
-			this.unregisterCallback = function(callback) {
-				const index = this.callbacks.indexOf(callback);
-				if (index > -1) {
-					this.callbacks.splice(index, 1);
-				}
-			}
-
-			this.fire = function(data) {
-				const callbacks = this.callbacks.slice(0);
-				callbacks.forEach((callback) => {
-					callback(data);
-				});
-			}
-		}
-
-		var dispatch = function(eventName, data) {
-			if(!doesHandlerExist(eventName)) {
-				return;
-			}
-
-			const event = events[eventName];
-			if (event) {
-				event.fire(data);
-			}
-		}
-
-		var on = function(eventName, callback) {
-			let event = events[eventName];
-			if (!event) {
-				event = new CustomEvent(eventName);
-				events[eventName] = event;
-			}
-			event.registerCallback(callback);
-		}
-
-		var off = function(eventName, callback) {
-			const event = events[eventName];
-			if (event && event.callbacks.indexOf(callback) > -1) {
-				event.unregisterCallback(callback);
-				if (event.callbacks.length === 0) {
-					delete events[eventName];
-				}
-			}
-		}
-
-		var doesHandlerExist = function (eventName) {
-			if(events[eventName] != null && events[eventName].callbacks.length != 0) return true;
-			return false;
-		}
-
-		return {
-			dispatch:dispatch,
-			on:on,
-			off:off,
-			doesHandlerExist:doesHandlerExist,
-		}
-	}())
 
 	function log(text, arg1, arg2, arg3, arg4) {
 		if(!options.debug) return;

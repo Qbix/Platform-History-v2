@@ -257,13 +257,28 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				screensRendering.hideLoader('screensharingFailed', e.participant);
 			});
 
+			WebRTCconference.event.on('connected', function () {
+				log('Connected to server')
+				connectionState.updateStatus('connected');
+				connectionState.show();
+
+				setTimeout(function () {
+					connectionState.hide();
+
+				}, 1000);
+			});
 			WebRTCconference.event.on('connectError', function () {
 				log('Server connection failed')
-				showConnectionFailedError.show();
+				connectionState.show();
+				//connectionState.updateStatus('reconnecting', 'Server connection failed: ');
 			});
 			WebRTCconference.event.on('reconnectError', function () {
 				log('Server reconnection failed')
-				showConnectionFailedError.updateStatus('reconnection failed');
+				connectionState.updateStatus('reconnection failed', 'Server connection failed: ');
+			});
+			WebRTCconference.event.on('reconnectAttempt', function (n) {
+				log('Server reconnection attempt ' + n)
+				connectionState.updateStatus('reconnection attempt ' + n, 'Server connection failed: ');
 			});
 		}
 
@@ -272,36 +287,58 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		 * @method showInstructionsDialog
 		 * @param {String} [kind] Name of device that is not accessible.
 		 */
-		var showConnectionFailedError = (function (kind) {
-			var dialogue = document.createElement('DIV');
-			dialogue.className = 'Streams_webrtc_devices_dialog_inner';
-			var dialogContent = document.createElement('H2');
-			dialogContent.className = 'Streams_webrtc_instructions_dialog';
-			var dialogContentText = document.createElement('SPAN');
-			dialogContentText.innerHTML = 'Server connection failed: '
-			var stateEl = document.createElement('SPAN');
-			stateEl.innerHTML = 'reconnecting...';
+		var connectionState = (function () {
 
-			dialogContent.appendChild(dialogContentText);
-			dialogContent.appendChild(stateEl);
-			dialogue.appendChild(dialogContent);
+			var loader = document.createElement('DIV');
+			loader.className = 'Streams_webrtc_page-loader-con';
+			var loaderInner = document.createElement('DIV');
+			loaderInner.className = 'Streams_webrtc_loader';
+			var statusText = document.createElement('SPAN');
+			var currentState = document.createElement('DIV');
+			currentState.className = 'Q_working';
+			currentState.innerHTML = 'reconnecting...';
 
-			function show() {
-				Q.Dialogs.push({
-					title: 'Error',
-					className: 'Streams_webrtc_devices_dialog',
-					content: dialogue,
-					apply: true,
-				});
+			//loaderInner.appendChild(statusText);
+			loaderInner.appendChild(currentState);
+			loader.appendChild(loaderInner);
+
+			function show(state) {
+				if(state != null) updateStatus(state);
+				if(document.body.contains(loader)) return;
+				document.body.appendChild(loader);
 			}
 
-			function updateStatus(state) {
-				stateEl.innerHTML = state;
+			function hide() {
+				if(!document.body.contains(loader)) return;
+				document.body.removeChild(loader);
+			}
+
+			function updateStatus(state, text) {
+				currentState.innerHTML = state;
+
+				if(text != null) {
+					if(!loaderInner.contains(statusText)) {
+						loaderInner.insertBefore(statusText, currentState);
+					}
+
+					statusText.innerHTML = text;
+				} else {
+					if(loaderInner.contains(statusText)) {
+						loaderInner.removeChild(statusText);
+					}
+				}
+
+				if(state == 'reconnection failed' && currentState.classList.contains('Q_working')) {
+					currentState.classList.remove('Q_working')
+				} else if (!currentState.classList.contains('Q_working')) {
+					currentState.classList.add('Q_working');
+				}
 			}
 
 			return {
 				show:show,
-				updateStatus:updateStatus
+				hide:hide,
+				updateStatus:updateStatus,
 			}
 
 		}());
@@ -590,14 +627,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					}
 				}
 
-				if(!Q.info.isMobile && !Q.info.isTablet && (!constrains.video || videoDevices == 0) && (!constrains.audio || audioDevices != 0)) return;
+				if(!Q.info.isMobile && !Q.info.isTablet && (!constrains.video || videoDevices == 0) && (!constrains.audio || audioDevices == 0)) return;
 
 				navigator.mediaDevices.getUserMedia({video:constrains.video && videoDevices != 0, audio:constrains.audio && audioDevices != 0})
 					.then(function (stream) {
 						if(_options.streams != null) return;
 						Q.Dialogs.pop();
 						if(WebRTCconference != null){
-							log('publishMediaTracks: stream is being added the room', stream);
+							console.log('publishMediaTracks: stream is being added the room', stream);
 
 							_options.streams = [stream];
 							var publishTracks = function() {
@@ -625,7 +662,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								});
 							}
 						} else if (_options.streams == null) {
-							log('publishMediaTracks: stream is added to options', stream);
+							console.log('publishMediaTracks: stream is added to options', stream);
 							_options.streams = [stream];
 							if((Q.info.isMobile || Q.info.isTablet) && !Q.info.isCordova && _options.startWith.video == false && _options.startWith.audio == false) {
 								if(callback != null) callback();
@@ -669,7 +706,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					useAsLibrary: true,
 					video: false,
 					audio: false,
-					streams: _options.streams != null ? _options.streams : null
+					startWith: _options.startWith,
+					streams: _options.streams != null ? _options.streams : null,
+					debug: _debug
 				});
 
 				bindConferenceEvents();
@@ -760,7 +799,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		 */
 		function initWithNodeServer(socketServer, turnCredentials) {
 			log('initWithNodeServer');
-			showPageLoader();
+			connectionState.show('connecting...');
 			var initConference = function(){
 				if(typeof window.WebRTCconferenceLib == 'undefined') return;
 				var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
@@ -781,12 +820,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					debug: _debug
 				});
 
+				bindConferenceEvents();
+
 				WebRTCconference.init(function (app) {
 					updateParticipantData();
-					hidePageLoader();
+					connectionState.hide();
 					_debugTimer.loadEnd = performance.now();
 
-					bindConferenceEvents();
 					screensRendering.updateLayout();
 					Q.handle(_options.onWebRTCRoomCreated, webRTCInstance);
 					Q.activate(
@@ -2471,7 +2511,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		 * @param {Object} [options.mode] Technology that is used to start conference (Twilio OR own Node.js server)
 		 */
 		function start(options) {
-
+			console.log('options', _options.startWith.audio)
 			Q.addStylesheet('{{Streams}}/css/tools/webrtc.css?ts=' + performance.now(), function () {
 
 				createInfoSnippet()
@@ -2485,6 +2525,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						_options[key] = options.hasOwnProperty(key) && typeof options[key] !== 'undefined' ? options[key] : _options[key];
 					}
 				}
+				console.log('options', _options)
 
 				onConnect();
 
