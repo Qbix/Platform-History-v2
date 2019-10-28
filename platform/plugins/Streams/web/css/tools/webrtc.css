@@ -1650,6 +1650,15 @@ webrtc_tool_popup-settings.Streams_webrtc_popup-box > div {
 .participants-list-btns button{
     box-shadow: 0 5px 20px -5px #0048b5;
 }
+.participants-list-btns .Streams_webrtc_facebook-live-btn.Q_working {
+    cursor: pointer;
+}
+.participants-list-btns .Streams_webrtc_facebook-live-btn.Q_working svg path[fill="#4373B9"]{
+    fill: #C12236;
+}
+.participants-list-btns .Streams_webrtc_facebook-live-btn.Q_working svg circle[fill="#4373B9"]{
+    fill: #C12236;
+}
 .Streams_webrtc_devices_dialog .Streams_webrtc_devices_dialog_inner{
     display: flex;
     flex-direction: row;
@@ -1679,6 +1688,12 @@ webrtc_tool_popup-settings.Streams_webrtc_popup-box > div {
     font-weight: bold;
     padding: 3px 8px;
     border-radius: 3px;
+}
+.Streams_webrtc_fblive_dialog_inner {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .Streams_webrtc_enable-microphone-btn,
 .Q_touchscreen .Q_button.Streams_webrtc_enable-microphone-btn {

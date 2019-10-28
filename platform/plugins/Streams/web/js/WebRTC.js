@@ -382,7 +382,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 			var addStreamToRoom = function(stream) {
-				if(_options.streams != null) return;
 
 				if(WebRTCconference != null){
 
@@ -458,6 +457,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 					mediaDevicesDialog.appendChild(turnOnBtn);
 					mediaDevicesDialog.addEventListener('mouseup', function (e) {
+						if(_options.streams != null && _options.streams.length != 0) return;
 						navigator.mediaDevices.getUserMedia({video: constrains.video && videoDevices != 0, audio:constrains.audio && audioDevices != 0})
 							.then(function (stream) {
 								addStreamToRoom(stream);
@@ -634,7 +634,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						if(_options.streams != null) return;
 						Q.Dialogs.pop();
 						if(WebRTCconference != null){
-							console.log('publishMediaTracks: stream is being added the room', stream);
+							log('publishMediaTracks: stream is being added the room', stream);
 
 							_options.streams = [stream];
 							var publishTracks = function() {
@@ -662,7 +662,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								});
 							}
 						} else if (_options.streams == null) {
-							console.log('publishMediaTracks: stream is added to options', stream);
+							log('publishMediaTracks: stream is added to options', stream);
 							_options.streams = [stream];
 							if((Q.info.isMobile || Q.info.isTablet) && !Q.info.isCordova && _options.startWith.video == false && _options.startWith.audio == false) {
 								if(callback != null) callback();
@@ -2511,7 +2511,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		 * @param {Object} [options.mode] Technology that is used to start conference (Twilio OR own Node.js server)
 		 */
 		function start(options) {
-			console.log('options', _options.startWith.audio)
 			Q.addStylesheet('{{Streams}}/css/tools/webrtc.css?ts=' + performance.now(), function () {
 
 				createInfoSnippet()
@@ -2525,7 +2524,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						_options[key] = options.hasOwnProperty(key) && typeof options[key] !== 'undefined' ? options[key] : _options[key];
 					}
 				}
-				console.log('options', _options)
 
 				onConnect();
 
