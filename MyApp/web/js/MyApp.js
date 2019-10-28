@@ -54,7 +54,6 @@ var MyApp = (function (Q, $) {
 				});
 			}
 		}).css('cursor', 'pointer');
-		
 	}, 'MyApp');
 	
 	// example stream

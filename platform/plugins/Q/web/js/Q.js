@@ -12736,6 +12736,11 @@ Q.onInit.add(function () {
 	Q.onReady.set(function () {
 		// renew sockets when reverting to online
 		Q.onOnline.set(Q.Socket.reconnectAll, 'Q.Socket');
+
+		// iOS related code. Hide black screen on app start.
+		if (navigator.splashscreen) {
+			navigator.splashscreen.hide();
+		}
 	}, 'Q.Socket');
 	var info = Q.first(Q.info.languages);
 	if (info) {
