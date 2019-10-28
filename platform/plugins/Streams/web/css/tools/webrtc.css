@@ -441,6 +441,7 @@
 .Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list {
     margin:0;
     padding: 0;
+    overflow: hidden;
 }
 .Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list li {
     display: flex;
@@ -561,7 +562,12 @@
     text-overflow: ellipsis;
     overflow: hidden;
 }
-
+@media only screen
+and (max-device-width : 320px) {
+    .Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity .Users_avatar_icon {
+        display: none;
+    }
+}
 .Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_chat-participant,
 .Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_chat-participant {
     display: block;
@@ -1307,7 +1313,7 @@
 }
 .Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn.Streams_webrtc_isLocal .camera-icon path,
 .Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-audio-btn.Streams_webrtc_isLocal .microphone-icon path {
-    fill: #C12337;
+    fill: #4AAA4E;
 }
 .Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity {
     flex: 1;
@@ -1481,6 +1487,10 @@
 }
 .Streams_webrtc_popup-box {
     background: white;
+    overflow: hidden;
+}
+.Q_dialog_content {
+    overflow: hidden;
 }
 .Streams_webrtc_popup-box .Streams_webrtc_choose-device,
 .dialog-box .Streams_webrtc_choose-device {
@@ -1640,6 +1650,15 @@ webrtc_tool_popup-settings.Streams_webrtc_popup-box > div {
 .participants-list-btns button{
     box-shadow: 0 5px 20px -5px #0048b5;
 }
+.participants-list-btns .Streams_webrtc_facebook-live-btn.Q_working {
+    cursor: pointer;
+}
+.participants-list-btns .Streams_webrtc_facebook-live-btn.Q_working svg path[fill="#4373B9"]{
+    fill: #C12236;
+}
+.participants-list-btns .Streams_webrtc_facebook-live-btn.Q_working svg circle[fill="#4373B9"]{
+    fill: #C12236;
+}
 .Streams_webrtc_devices_dialog .Streams_webrtc_devices_dialog_inner{
     display: flex;
     flex-direction: row;
@@ -1669,6 +1688,12 @@ webrtc_tool_popup-settings.Streams_webrtc_popup-box > div {
     font-weight: bold;
     padding: 3px 8px;
     border-radius: 3px;
+}
+.Streams_webrtc_fblive_dialog_inner {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .Streams_webrtc_enable-microphone-btn,
 .Q_touchscreen .Q_button.Streams_webrtc_enable-microphone-btn {
@@ -1935,204 +1960,9 @@ webrtc_tool_popup-settings.Streams_webrtc_popup-box > div {
 }
 .Streams_webrtc_loader {
     position: absolute;
-    left: 50%;
-    margin-left: -37.5px;
-    margin-top: -37.5px;
-}
-
-.Streams_webrtc_loader_square {
-    background: rgb(31,190,202);
-    width: 21px;
-    height: 21px;
-    float: left;
-    top: -14px;
-    margin-right: 7px;
-    margin-top: 7px;
-    position: relative;
-    opacity: 0;
-    animation: Streams_webrtc_loader_enter 5.7s infinite;
-    -o-animation: Streams_webrtc_loader_enter 5.7s infinite;
-    -ms-animation: Streams_webrtc_loader_enter 5.7s infinite;
-    -webkit-animation: Streams_webrtc_loader_enter 5.7s infinite;
-    -moz-animation: Streams_webrtc_loader_enter 5.7s infinite;
-}
-
-.Streams_webrtc_loader_enter {
-    top: 0px;
-    opacity: 1;
-}
-
-.Streams_webrtc_loader_square:nth-child(1) {
-    animation-delay: 1.71s;
-    -o-animation-delay: 1.71s;
-    -ms-animation-delay: 1.71s;
-    -webkit-animation-delay: 1.71s;
-    -moz-animation-delay: 1.71s;
-}
-
-.Streams_webrtc_loader_square:nth-child(2) {
-    animation-delay: 1.995s;
-    -o-animation-delay: 1.995s;
-    -ms-animation-delay: 1.995s;
-    -webkit-animation-delay: 1.995s;
-    -moz-animation-delay: 1.995s;
-}
-
-.Streams_webrtc_loader_square:nth-child(3) {
-    animation-delay: 2.28s;
-    -o-animation-delay: 2.28s;
-    -ms-animation-delay: 2.28s;
-    -webkit-animation-delay: 2.28s;
-    -moz-animation-delay: 2.28s;
-    background: rgb(31,191,202);
-}
-
-.Streams_webrtc_loader_square:nth-child(4) {
-    animation-delay: 0.855s;
-    -o-animation-delay: 0.855s;
-    -ms-animation-delay: 0.855s;
-    -webkit-animation-delay: 0.855s;
-    -moz-animation-delay: 0.855s;
-    animation-delay: 0.855s;
-}
-
-.Streams_webrtc_loader_square:nth-child(5) {
-    animation-delay: 1.14s;
-    -o-animation-delay: 1.14s;
-    -ms-animation-delay: 1.14s;
-    -webkit-animation-delay: 1.14s;
-    -moz-animation-delay: 1.14s;
-    animation-delay: 1.14s;
-}
-
-.Streams_webrtc_loader_square:nth-child(6) {
-    animation-delay: 1.425s;
-    -o-animation-delay: 1.425s;
-    -ms-animation-delay: 1.425s;
-    -webkit-animation-delay: 1.425s;
-    -moz-animation-delay: 1.425s;
-    animation-delay: 1.425s;
-}
-
-.Streams_webrtc_loader_square:nth-child(8) {
-    animation-delay: 0.285s;
-    -o-animation-delay: 0.285s;
-    -ms-animation-delay: 0.285s;
-    -webkit-animation-delay: 0.285s;
-    -moz-animation-delay: 0.285s;
-    animation-delay: 0.285s;
-}
-
-.Streams_webrtc_loader_square:nth-child(9) {
-    animation-delay: 0.57s;
-    -o-animation-delay: 0.57s;
-    -ms-animation-delay: 0.57s;
-    -webkit-animation-delay: 0.57s;
-    -moz-animation-delay: 0.57s;
-    animation-delay: 0.57s;
-}
-
-.Streams_webrtc_loader_clear {
-    clear: both;
-}
-
-.Streams_webrtc_loader_last {
-    margin-right: 0;
-}
-
-
-
-@keyframes Streams_webrtc_loader_enter {
-    0% {
-        opacity: 0;
-        top: -14px;
-    }
-    5% {
-        opacity: 1;
-        top: 0px;
-    }
-    50.9% {
-        opacity: 1;
-        top: 0px;
-    }
-    55.9% {
-        opacity: 0;
-        top: 14px;
-    }
-}
-
-@-o-keyframes Streams_webrtc_loader_enter {
-    0% {
-        opacity: 0;
-        top: -14px;
-    }
-    5% {
-        opacity: 1;
-        top: 0px;
-    }
-    50.9% {
-        opacity: 1;
-        top: 0px;
-    }
-    55.9% {
-        opacity: 0;
-        top: 14px;
-    }
-}
-
-@-ms-keyframes Streams_webrtc_loader_enter {
-    0% {
-        opacity: 0;
-        top: -14px;
-    }
-    5% {
-        opacity: 1;
-        top: 0px;
-    }
-    50.9% {
-        opacity: 1;
-        top: 0px;
-    }
-    55.9% {
-        opacity: 0;
-        top: 14px;
-    }
-}
-
-@-webkit-keyframes Streams_webrtc_loader_enter {
-    0% {
-        opacity: 0;
-        top: -14px;
-    }
-    5% {
-        opacity: 1;
-        top: 0px;
-    }
-    50.9% {
-        opacity: 1;
-        top: 0px;
-    }
-    55.9% {
-        opacity: 0;
-        top: 14px;
-    }
-}
-
-@-moz-keyframes Streams_webrtc_loader_enter {
-    0% {
-        opacity: 0;
-        top: -14px;
-    }
-    5% {
-        opacity: 1;
-        top: 0px;
-    }
-    50.9% {
-        opacity: 1;
-        top: 0px;
-    }
-    55.9% {
-        opacity: 0;
-        top: 14px;
-    }
+    font-size: 2em;
+    text-align: center;
+    font-family:"Roboto", sans-serif;
+    overflow: hidden;
+    line-height: 1.2;
 }
