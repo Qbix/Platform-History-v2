@@ -39,7 +39,7 @@ abstract class Base_Places_Location extends Db_Row
 	 * @property $streamName
 	 * @type string
 	 * @default ""
-	 * the name of the stream, can be more than one
+	 * the name of the stream
 	 */
 	/**
 	 * @property $insertedTime

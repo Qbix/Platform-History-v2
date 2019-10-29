@@ -458,9 +458,9 @@ class Q_Response
 				'attrName' => 'name',
 				'attrValue' => Q::ifset($argList, 0, ''),
 				'content' => Q::ifset($argList, 1, ''),
-				'slotName' => Q::ifset($argList, 2, '')
+				'slotName' => Q::ifset($argList, 2, null)
 			);
-		} elseif (isset($params[0]) && is_array($params[0])) {
+		} elseif (isset($params[0]) and is_array($params[0])) {
 			foreach ($params as $v) {
 				if (is_array($v)) {
 					self::setMeta($v);
