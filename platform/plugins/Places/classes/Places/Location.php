@@ -238,18 +238,23 @@ class Places_Location extends Base_Places_Location
 	 */
 	static function fromStream($stream)
 	{
-		$location = $stream->getAttribute('location');
+		if ($stream instanceof Streams_Stream) {
+			$location = $stream->getAttribute('location');
 
-		// new approach
-		if (is_array($location)) {
-			return $location;
+			// new approach
+			if (is_array($location)) {
+				return $location;
+			}
 		}
 
 		// trying to get location from fields. These fields filled in hook Calendars_after_Streams_fetch_Calendars_event.
-		$location = json_decode(Q::ifset($stream, 'location', null));
-		if (json_last_error() == JSON_ERROR_NONE) {
-			return (array)$location;
-		}
+		try {
+			$location = Q::json_decode(Q::ifset($stream, 'location', null), true);
+
+			if (is_array($location)) {
+				return $location;
+			}
+		} catch (Exception $e) {}
 
 		// old approach
 		return array();
