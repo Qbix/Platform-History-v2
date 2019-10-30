@@ -753,6 +753,9 @@ html.Q_scanning body > .Q_scanning_code {
 #notices_slot.Q_columns_siblingContainsExpanded {
 	z-index: 5000 !important;
 }
+#status_background {
+	width: 100%;
+}
 
 input[type=text],
 input[type=password] {
