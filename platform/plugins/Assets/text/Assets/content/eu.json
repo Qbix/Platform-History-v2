@@ -35,7 +35,10 @@
             "message": "{{title}} (e) k harpidetu nahi al duzu?",
             "ok": "Ados",
             "cancel": "Utzi"
-        }
+        },
+        "CreditOrDebitCard": "Kreditu edo zordunketa txartela",
+        "SubscribePayment": "Harpidetu Ordainketa",
+        "ImmediatePayment": "Berehalako ordainketa"
     },
     "payments": {
         "infoTitle": "Ezarri ordainketa informazioa",

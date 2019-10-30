@@ -27,7 +27,8 @@
         "Unsubscribed": "Λαμβάνετε ειδοποιήσεις",
         "notAllowedToJoinCall": "Δεν έχετε δικαίωμα να συμμετάσχετε σε αυτήν τη συζήτηση.",
         "startedConversation": "ξεκίνησε μια συνομιλία",
-        "RealTimeCall": "Κλήση σε πραγματικό χρόνο"
+        "RealTimeCall": "Κλήση σε πραγματικό χρόνο",
+        "SearchByName": "Αναζήτηση βάσει ονόματος"
     },
     "notifications": {
         "*": "Μήνυμα {{& message.fields.type}} έως {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Αν θέλετε να καταργήσετε την εγγραφή σας",
         "Streams\/relatedTo\/Streams\/call": "Νέα Κλήση ξεκίνησε στις {{toTitle}}",
         "Streams\/relatedTo\/*": "Νέο {{relationDisplayType}} στο {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Προστέθηκε στις {{toTitle}} ως {{relationDisplayType}}"
+        "Streams\/relatedFrom\/*": "Προστέθηκε στις {{toTitle}} ως {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} σας ανέφερε σε ένα σχόλιο",
+        "Streams\/call": "{{displayName}} σας καλεί"
     },
     "invite": {
         "messageContent": "{{displayName}} σε προσκάλεσε σε {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Ελέγξτε αυτό",
             "PleaseVisitLink": "Επισκεφθείτε τον ακόλουθο σύνδεσμο:",
             "InvitingYou": "Σας καλώ να {{title}}",
-            "HasInvitedYou": "{{displayName}} σάς προσκάλεσε να {{title}}"
+            "HasInvitedYou": "{{displayName}} σάς προσκάλεσε να {{title}}",
+            "HasMentionedYou": "{{displayName}} σας ανέφερε σε &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Έχετε λάβει πρόσκληση στο {{title}}. Πατήστε {{url}}"

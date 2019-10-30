@@ -35,7 +35,10 @@
             "message": "Vai vēlaties abonēt {{title}}?",
             "ok": "labi",
             "cancel": "Atcelt"
-        }
+        },
+        "CreditOrDebitCard": "Kredītkarte vai debetkarte",
+        "SubscribePayment": "Abonēt maksājumu",
+        "ImmediatePayment": "Tūlītējs maksājums"
     },
     "payments": {
         "infoTitle": "Iestatiet maksājumu informāciju",

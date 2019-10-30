@@ -35,7 +35,10 @@
             "message": "คุณต้องการสมัครรับ {{title}} หรือไม่",
             "ok": "ตกลง",
             "cancel": "ยกเลิก"
-        }
+        },
+        "CreditOrDebitCard": "บัตรเครดิตหรือบัตรเดบิต",
+        "SubscribePayment": "สมัครสมาชิกชำระเงิน",
+        "ImmediatePayment": "ชำระเงินทันที"
     },
     "payments": {
         "infoTitle": "ตั้งค่าข้อมูลการชำระเงิน",

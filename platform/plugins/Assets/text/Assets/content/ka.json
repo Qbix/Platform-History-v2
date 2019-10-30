@@ -35,7 +35,10 @@
             "message": "გსურთ გამოიწეროთ 99 999} subs?",
             "ok": "კარგი",
             "cancel": "გაუქმება"
-        }
+        },
+        "CreditOrDebitCard": "საკრედიტო ან სადებეტო ბარათი",
+        "SubscribePayment": "გამოიწერეთ გადახდა",
+        "ImmediatePayment": "დაუყოვნებელი გადახდა"
     },
     "payments": {
         "infoTitle": "დააყენეთ გადახდის ინფორმაცია",

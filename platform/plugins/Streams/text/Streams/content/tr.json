@@ -27,7 +27,8 @@
         "Unsubscribed": "Bildirim almak",
         "notAllowedToJoinCall": "Bu sohbete katılma izniniz yok.",
         "startedConversation": "bir konuşma başlattı",
-        "RealTimeCall": "Gerçek Zamanlı Çağrı"
+        "RealTimeCall": "Gerçek Zamanlı Çağrı",
+        "SearchByName": "İsme göre ara"
     },
     "notifications": {
         "*": "{{& message.fields.type}} mesajına {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Abonelikten çıkmak istiyorsanız",
         "Streams\/relatedTo\/Streams\/call": "Yeni arama {{toTitle}} &#39;da başladı",
         "Streams\/relatedTo\/*": "{{toTitle}} içindeki {{relationDisplayType}} yeni",
-        "Streams\/relatedFrom\/*": "{{toTitle}} &#39;a {{relationDisplayType}} olarak eklendi"
+        "Streams\/relatedFrom\/*": "{{toTitle}} &#39;a {{relationDisplayType}} olarak eklendi",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} bir yorumda sizden bahsetti",
+        "Streams\/call": "{{displayName}} seni çağırıyor"
     },
     "invite": {
         "messageContent": "{{displayName}} seni {{inviteUrl}} davet etti",
@@ -76,7 +79,8 @@
             "subject": "Hey, şuna bir bak",
             "PleaseVisitLink": "Lütfen aşağıdaki bağlantıyı ziyaret edin:",
             "InvitingYou": "Seni {{title}} davet ediyorum",
-            "HasInvitedYou": "{{displayName}} seni {{title}} davet etti"
+            "HasInvitedYou": "{{displayName}} seni {{title}} davet etti",
+            "HasMentionedYou": "&quot;{{title}}&quot; içinde {{displayName}} sizden bahsetti"
         },
         "sms": {
             "content": "{{title}} adlı kişiye davet edildiniz. Lütfen {{url}} simgesine dokunun."

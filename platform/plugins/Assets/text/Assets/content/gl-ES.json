@@ -35,7 +35,10 @@
             "message": "¿Quere subscribirse a {{title}}?",
             "ok": "Ok",
             "cancel": "Cancelar"
-        }
+        },
+        "CreditOrDebitCard": "Tarxeta de crédito ou débito",
+        "SubscribePayment": "Subscribir o pago",
+        "ImmediatePayment": "Pagamento inmediato"
     },
     "payments": {
         "infoTitle": "Establecer información de pago",

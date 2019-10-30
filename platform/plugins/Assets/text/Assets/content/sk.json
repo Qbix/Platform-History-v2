@@ -35,7 +35,10 @@
             "message": "Chcete sa prihlásiť na odber {{title}}?",
             "ok": "OK",
             "cancel": "Zrušiť"
-        }
+        },
+        "CreditOrDebitCard": "Kreditná alebo debetná karta",
+        "SubscribePayment": "Prihláste sa na odber platby",
+        "ImmediatePayment": "Okamžitá platba"
     },
     "payments": {
         "infoTitle": "Nastavte informácie o platbe",

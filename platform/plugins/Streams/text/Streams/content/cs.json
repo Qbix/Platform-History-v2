@@ -27,7 +27,8 @@
         "Unsubscribed": "Získejte oznámení",
         "notAllowedToJoinCall": "K této konverzaci nemáte povolení.",
         "startedConversation": "zahájil konverzaci",
-        "RealTimeCall": "Volání v reálném čase"
+        "RealTimeCall": "Volání v reálném čase",
+        "SearchByName": "Hledat podle jména"
     },
     "notifications": {
         "*": "Zpráva {{& message.fields.type}} až {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Pokud se chcete odhlásit",
         "Streams\/relatedTo\/Streams\/call": "Nový hovor byl zahájen v {{toTitle}}",
         "Streams\/relatedTo\/*": "Nový {{relationDisplayType}} v {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Přidáno do {{toTitle}} jako {{relationDisplayType}}"
+        "Streams\/relatedFrom\/*": "Přidáno do {{toTitle}} jako {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} se o vás zmínil v komentáři",
+        "Streams\/call": "{{displayName}} vás volá"
     },
     "invite": {
         "messageContent": "{{displayName}} vás pozvalo na {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hej, podívejte se na to",
             "PleaseVisitLink": "Navštivte následující odkaz:",
             "InvitingYou": "Zvu vás na {{title}}",
-            "HasInvitedYou": "{{displayName}} vás pozvalo na {{title}}"
+            "HasInvitedYou": "{{displayName}} vás pozvalo na {{title}}",
+            "HasMentionedYou": "{{displayName}} se o vás zmínil v &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Byli jste pozváni na adresu {{title}}. Klepněte na {{url}}"

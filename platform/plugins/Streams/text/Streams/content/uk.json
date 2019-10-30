@@ -27,7 +27,8 @@
         "Unsubscribed": "Отримати повідомлення",
         "notAllowedToJoinCall": "Ви не маєте дозволу приєднатися до цієї розмови.",
         "startedConversation": "почав розмову",
-        "RealTimeCall": "Дзвінок у режимі реального часу"
+        "RealTimeCall": "Дзвінок у режимі реального часу",
+        "SearchByName": "Пошук по імені"
     },
     "notifications": {
         "*": "Повідомлення {{& message.fields.type}} до {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Якщо ви хочете скасувати підписку",
         "Streams\/relatedTo\/Streams\/call": "Новий дзвінок розпочався з {{toTitle}}",
         "Streams\/relatedTo\/*": "Новий {{relationDisplayType}} в {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Додано до {{toTitle}} як {{relationDisplayType}}"
+        "Streams\/relatedFrom\/*": "Додано до {{toTitle}} як {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} згадав вас у коментарі",
+        "Streams\/call": "{{displayName}} телефонує вам"
     },
     "invite": {
         "messageContent": "{{displayName}} запросив вас до {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Ей, перевірте це",
             "PleaseVisitLink": "Перейдіть за таким посиланням:",
             "InvitingYou": "Я запрошую вас до {{title}}",
-            "HasInvitedYou": "{{displayName}} запросив вас до {{title}}"
+            "HasInvitedYou": "{{displayName}} запросив вас до {{title}}",
+            "HasMentionedYou": "{{displayName}} згадав вас у &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Вас запрошено до {{title}}. Натисніть {{url}}"

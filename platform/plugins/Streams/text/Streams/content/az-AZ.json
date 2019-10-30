@@ -27,7 +27,8 @@
         "Unsubscribed": "Bildirişlər al",
         "notAllowedToJoinCall": "Bu söhbətə qoşulmaq üçün icazəniz yoxdur.",
         "startedConversation": "söhbətə başladı",
-        "RealTimeCall": "Real vaxt zəng"
+        "RealTimeCall": "Real vaxt zəng",
+        "SearchByName": "Adı ilə axtarın"
     },
     "notifications": {
         "*": "{{& message.fields.type}} - {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Siz imtina etmək istəsəniz",
         "Streams/relatedTo/Streams/call": "{{999} }&#39;da yeni zəng başladı",
         "Streams/relatedTo/*": "{{toTitle}} yeni {{relationDisplayType}}",
-        "Streams/relatedFrom/*": "{{toTitle}} -a {{relationDisplayType}} olaraq əlavə edildi"
+        "Streams/relatedFrom/*": "{{toTitle}} -a {{relationDisplayType}} olaraq əlavə edildi",
+        "Streams/mention": "{{&call 'avatar.displayName'}} sizi şərhdə qeyd etdi",
+        "Streams/call": "{{displayName}} sizi axtarır"
     },
     "invite": {
         "messageContent": "{{displayName}} sizi {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hey, bunu yoxlayın",
             "PleaseVisitLink": "Xahiş edirik aşağıdakı linkə müraciət edin:",
             "InvitingYou": "{{title}} səhifəsinə dəvət edirəm",
-            "HasInvitedYou": "{{displayName}} sizi {{title}} səhifəsinə dəvət etdi"
+            "HasInvitedYou": "{{displayName}} sizi {{title}} səhifəsinə dəvət etdi",
+            "HasMentionedYou": "{{displayName}} sizi &quot;{{title}}&quot; da qeyd etdi"
         },
         "sms": {
             "content": "{{title}} dəvət olunmuşdunuz. Xahiş edirik, {{url}}"

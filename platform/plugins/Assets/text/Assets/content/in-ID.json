@@ -35,7 +35,10 @@
             "message": "Apakah Anda ingin berlangganan {{title}}?",
             "ok": "baik",
             "cancel": "Membatalkan"
-        }
+        },
+        "CreditOrDebitCard": "Kartu kredit atau debit",
+        "SubscribePayment": "Berlangganan Pembayaran",
+        "ImmediatePayment": "Pembayaran langsung"
     },
     "payments": {
         "infoTitle": "Tetapkan Informasi Pembayaran",

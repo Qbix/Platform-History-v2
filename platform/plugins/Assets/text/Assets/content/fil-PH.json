@@ -35,7 +35,10 @@
             "message": "Nais mo bang mag-subscribe sa {{title}}?",
             "ok": "OK",
             "cancel": "Pagkansela"
-        }
+        },
+        "CreditOrDebitCard": "Credit o debit card",
+        "SubscribePayment": "Mag-subscribe sa Pagbabayad",
+        "ImmediatePayment": "Agarang Pagbabayad"
     },
     "payments": {
         "infoTitle": "Itakda ang Impormasyon sa Pagbabayad",

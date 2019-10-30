@@ -27,7 +27,8 @@
         "Unsubscribed": "دریافت اعلان ها",
         "notAllowedToJoinCall": "شما اجازه پیوستن به این گفتگو را ندارید.",
         "startedConversation": "مکالمه ای را شروع کرد",
-        "RealTimeCall": "تماس در زمان واقعی"
+        "RealTimeCall": "تماس در زمان واقعی",
+        "SearchByName": "جستجو براساس نام"
     },
     "notifications": {
         "*": "پیام {{& message.fields.type}} به {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "اگر میخواهید اشتراک را لغو کنید",
         "Streams/relatedTo/Streams/call": "تماس جدید در 99 999} ed شروع شد",
         "Streams/relatedTo/*": "99 999 New} {{1000",
-        "Streams/relatedFrom/*": "به 99 999} به عنوان {1000} Added اضافه شد"
+        "Streams/relatedFrom/*": "به 99 999} به عنوان {1000} Added اضافه شد",
+        "Streams/mention": "99 999} you شما را در یک نظر ذکر کرد",
+        "Streams/call": "99 999 you با شما تماس می گیرد"
     },
     "invite": {
         "messageContent": "{{displayName}} شما را به {{inviteUrl}} دعوت کرد",
@@ -76,7 +79,8 @@
             "subject": "هی، این را چک کن",
             "PleaseVisitLink": "لطفا از لینک زیر دیدن کنید:",
             "InvitingYou": "من از شما دعوت می کنم {{title}}",
-            "HasInvitedYou": "{{displayName}} شما را به {{title}} دعوت کرده است"
+            "HasInvitedYou": "{{displayName}} شما را به {{title}} دعوت کرده است",
+            "HasMentionedYou": "99 99 999} you شما را در &quot;{{title}}&quot; ذکر کرده است"
         },
         "sms": {
             "content": "شما به {{title}} دعوت شدهاید. لطفا شیر {{url}}"

@@ -27,7 +27,8 @@
         "Unsubscribed": "Rebre notificacions",
         "notAllowedToJoinCall": "No teniu permís per unir-vos a aquesta conversa.",
         "startedConversation": "va iniciar una conversa",
-        "RealTimeCall": "Trucada en temps real"
+        "RealTimeCall": "Trucada en temps real",
+        "SearchByName": "Cerca pel seu nom"
     },
     "notifications": {
         "*": "Missatge {{& message.fields.type}} a {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Si voleu donar-vos de baixa",
         "Streams/relatedTo/Streams/call": "La nova trucada va començar a {{toTitle}}",
         "Streams/relatedTo/*": "Nou {{relationDisplayType}} a {{toTitle}}",
-        "Streams/relatedFrom/*": "Afegit a {{toTitle}} com a {{relationDisplayType}}"
+        "Streams/relatedFrom/*": "Afegit a {{toTitle}} com a {{relationDisplayType}}",
+        "Streams/mention": "{{&call 'avatar.displayName'}} t&#39;ha mencionat en un comentari",
+        "Streams/call": "{{displayName}} us truca"
     },
     "invite": {
         "messageContent": "{{displayName}} t&#39;ha convidat a {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hola, comprova-ho",
             "PleaseVisitLink": "Visiteu l’enllaç següent:",
             "InvitingYou": "Us convido a {{title}}",
-            "HasInvitedYou": "{{displayName}} t&#39;ha convidat a {{title}}"
+            "HasInvitedYou": "{{displayName}} t&#39;ha convidat a {{title}}",
+            "HasMentionedYou": "{{displayName}} t&#39;ha mencionat a &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Heu estat convidat a {{title}}. Toqueu {{url}}"

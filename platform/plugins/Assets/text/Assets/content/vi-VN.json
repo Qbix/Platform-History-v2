@@ -35,7 +35,10 @@
             "message": "Bạn có muốn đăng ký {{title}} không?",
             "ok": "được",
             "cancel": "Hủy bỏ"
-        }
+        },
+        "CreditOrDebitCard": "Thẻ tín dụng hoặc thẻ ghi nợ",
+        "SubscribePayment": "Theo dõi thanh toán",
+        "ImmediatePayment": "Thanh toán ngay"
     },
     "payments": {
         "infoTitle": "Đặt thông tin thanh toán",

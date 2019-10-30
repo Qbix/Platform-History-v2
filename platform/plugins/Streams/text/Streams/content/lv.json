@@ -27,7 +27,8 @@
         "Unsubscribed": "Saņemt paziņojumus",
         "notAllowedToJoinCall": "Jums nav atļaujas pievienoties šai sarunai.",
         "startedConversation": "sāka sarunu",
-        "RealTimeCall": "Reāllaika zvans"
+        "RealTimeCall": "Reāllaika zvans",
+        "SearchByName": "Meklēt pēc vārda"
     },
     "notifications": {
         "*": "Ziņojums {{& message.fields.type}} uz {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Ja vēlaties atcelt abonēšanu",
         "Streams\/relatedTo\/Streams\/call": "Jauns uzaicinājums sākās {{toTitle}}",
         "Streams\/relatedTo\/*": "Jauns {{relationDisplayType}} {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Pievienots mapei {{toTitle}} kā {{relationDisplayType}}"
+        "Streams\/relatedFrom\/*": "Pievienots mapei {{toTitle}} kā {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} pieminēja jūs komentārā",
+        "Streams\/call": "{{displayName}} zvana jums"
     },
     "invite": {
         "messageContent": "{{displayName}} uzaicināja jūs uz {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hei, pārbaudiet to",
             "PleaseVisitLink": "Lūdzu, apmeklējiet šo saiti:",
             "InvitingYou": "Es aicinu jūs uz {{title}}",
-            "HasInvitedYou": "{{displayName}} uzaicināja jūs uz {{title}}"
+            "HasInvitedYou": "{{displayName}} uzaicināja jūs uz {{title}}",
+            "HasMentionedYou": "{{displayName}} ir pieminējis jūs žurnālā “{{title}}”"
         },
         "sms": {
             "content": "Jūs esat uzaicināts uz {{title}}. Lūdzu, pieskarieties {{url}}"

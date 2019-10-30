@@ -27,7 +27,8 @@
         "Unsubscribed": "Hankige teateid",
         "notAllowedToJoinCall": "Teil pole sellel vestlusel luba.",
         "startedConversation": "alustas vestlust",
-        "RealTimeCall": "Real Time Call"
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Otsige nime järgi"
     },
     "notifications": {
         "*": "Sõnum {{& message.fields.type}} {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Kui soovite tellimuse lõpetada",
         "Streams/relatedTo/Streams/call": "Uus hange algas {{toTitle}}",
         "Streams/relatedTo/*": "Uus {{relationDisplayType}} asukohas {{toTitle}}",
-        "Streams/relatedFrom/*": "Lisatud saidile {{toTitle}} kui {{relationDisplayType}}"
+        "Streams/relatedFrom/*": "Lisatud saidile {{toTitle}} kui {{relationDisplayType}}",
+        "Streams/mention": "{{&call 'avatar.displayName'}} mainis teid oma kommentaaris",
+        "Streams/call": "{{displayName}} helistab teile"
     },
     "invite": {
         "messageContent": "{{displayName}} kutsus teid {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hei, vaata seda",
             "PleaseVisitLink": "Palun külastage järgmist linki:",
             "InvitingYou": "Kutsun teid {{title}}",
-            "HasInvitedYou": "{{displayName}} kutsus teid {{title}}"
+            "HasInvitedYou": "{{displayName}} kutsus teid {{title}}",
+            "HasMentionedYou": "{{displayName}} on maininud teid teemal &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Teid kutsuti {{title}}. Palun puudutage {{url}}"

@@ -27,7 +27,8 @@
         "Unsubscribed": "Kumuha ng Mga Abiso",
         "notAllowedToJoinCall": "Wala kang pahintulot na sumali sa pag-uusap na ito.",
         "startedConversation": "nagsimula ng usapan",
-        "RealTimeCall": "Tunay na Panawagan ng Oras"
+        "RealTimeCall": "Tunay na Panawagan ng Oras",
+        "SearchByName": "Paghahanap ayon sa pangalan"
     },
     "notifications": {
         "*": "Mensahe {{& message.fields.type}} sa {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Kung nais mong mag-unsubscribe",
         "Streams/relatedTo/Streams/call": "Nagsimula ang Bagong Tawag sa {{toTitle}}",
         "Streams/relatedTo/*": "Bagong {{relationDisplayType}} sa {{toTitle}}",
-        "Streams/relatedFrom/*": "Idinagdag sa {{toTitle}} bilang {{relationDisplayType}}"
+        "Streams/relatedFrom/*": "Idinagdag sa {{toTitle}} bilang {{relationDisplayType}}",
+        "Streams/mention": "Binanggit ka ng {{&call 'avatar.displayName'}} sa isang puna",
+        "Streams/call": "Tinatawag ka ng {{displayName}}"
     },
     "invite": {
         "messageContent": "Inimbitahan ka ni {{displayName}} na {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Uy, tingnan mo ito",
             "PleaseVisitLink": "Pakibisita ang sumusunod na link:",
             "InvitingYou": "Inaanyayahan ko kayo sa {{title}}",
-            "HasInvitedYou": "Inimbitahan ka ni {{displayName}} sa {{title}}"
+            "HasInvitedYou": "Inimbitahan ka ni {{displayName}} sa {{title}}",
+            "HasMentionedYou": "Binanggit ka ng {{displayName}} sa &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Inanyayahan ka sa {{title}}. Mangyaring i-tap ang {{url}}"

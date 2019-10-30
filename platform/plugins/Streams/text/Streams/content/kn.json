@@ -27,7 +27,8 @@
         "Unsubscribed": "ಅಧಿಸೂಚನೆ ಪಡೆ",
         "notAllowedToJoinCall": "ಈ ಸಂವಾದಕ್ಕೆ ಸೇರಲು ನಿಮಗೆ ಅನುಮತಿ ಇಲ್ಲ.",
         "startedConversation": "ಸಂವಾದವನ್ನು ಪ್ರಾರಂಭಿಸಿದೆ",
-        "RealTimeCall": "ರಿಯಲ್ ಟೈಮ್ ಕರೆ"
+        "RealTimeCall": "ರಿಯಲ್ ಟೈಮ್ ಕರೆ",
+        "SearchByName": "ಹೆಸರಿನಿಂದ ಹುಡುಕಿ"
     },
     "notifications": {
         "*": "{{& stream.fields.title}} ಗೆ {{& message.fields.type}} ಸಂದೇಶ",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "ನೀವು ಅನ್ಸಬ್ಸ್ಕ್ರೈಬ್ ಮಾಡಲು ಬಯಸಿದರೆ",
         "Streams\/relatedTo\/Streams\/call": "ಹೊಸ ಕರೆ {{999} in ನಲ್ಲಿ ಪ್ರಾರಂಭವಾಗಿದೆ",
         "Streams\/relatedTo\/*": "{{toTitle}} ನಲ್ಲಿ ಹೊಸ {{relationDisplayType}}",
-        "Streams\/relatedFrom\/*": "{{999} to ಗೆ {{1000} as ಗೆ ಸೇರಿಸಲಾಗಿದೆ"
+        "Streams\/relatedFrom\/*": "{{999} to ಗೆ {{1000} as ಗೆ ಸೇರಿಸಲಾಗಿದೆ",
+        "Streams\/mention": "{{999} a ನಿಮ್ಮನ್ನು ಕಾಮೆಂಟ್‌ನಲ್ಲಿ ಉಲ್ಲೇಖಿಸಿದ್ದಾರೆ",
+        "Streams\/call": "{{999} you ನಿಮ್ಮನ್ನು ಕರೆಯುತ್ತಿದೆ"
     },
     "invite": {
         "messageContent": "{{displayName}} ನಿಮ್ಮನ್ನು {{inviteUrl}} ಗೆ ಆಹ್ವಾನಿಸಿದ್ದಾರೆ",
@@ -76,7 +79,8 @@
             "subject": "ಹೇ, ಇದನ್ನು ಪರಿಶೀಲಿಸಿ",
             "PleaseVisitLink": "ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಲಿಂಕ್ಗೆ ಭೇಟಿ ನೀಡಿ:",
             "InvitingYou": "ನಾನು ನಿಮ್ಮನ್ನು {{title}} ಗೆ ಆಹ್ವಾನಿಸುತ್ತಿದ್ದೇನೆ",
-            "HasInvitedYou": "{{displayName}} ನಿಮ್ಮನ್ನು {{title}} ಗೆ ಆಹ್ವಾನಿಸಿದ್ದಾರೆ."
+            "HasInvitedYou": "{{displayName}} ನಿಮ್ಮನ್ನು {{title}} ಗೆ ಆಹ್ವಾನಿಸಿದ್ದಾರೆ.",
+            "HasMentionedYou": "{{999} you ನಿಮ್ಮನ್ನು &quot;{{1000} in&quot; ನಲ್ಲಿ ಉಲ್ಲೇಖಿಸಿದೆ"
         },
         "sms": {
             "content": "ನಿಮ್ಮನ್ನು {{title}} ಗೆ ಆಹ್ವಾನಿಸಲಾಗಿದೆ. ದಯವಿಟ್ಟು {{url}} ಅನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ"

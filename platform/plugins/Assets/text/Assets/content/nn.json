@@ -35,7 +35,10 @@
             "message": "Vil du abonnere på {{title}}?",
             "ok": "OK",
             "cancel": "Avbryt"
-        }
+        },
+        "CreditOrDebitCard": "Kreditt- eller debetkort",
+        "SubscribePayment": "Abonner betaling",
+        "ImmediatePayment": "Umiddelbar betaling"
     },
     "payments": {
         "infoTitle": "Angi betalingsinformasjon",

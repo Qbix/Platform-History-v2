@@ -35,7 +35,10 @@
             "message": "{{999} to க்கு குழுசேர விரும்புகிறீர்களா?",
             "ok": "சரி",
             "cancel": "ரத்து"
-        }
+        },
+        "CreditOrDebitCard": "கடன் அல்லது பற்று அட்டை",
+        "SubscribePayment": "கட்டணத்தை குழுசேரவும்",
+        "ImmediatePayment": "உடனடி கட்டணம்"
     },
     "payments": {
         "infoTitle": "கட்டணத் தகவலை அமைக்கவும்",

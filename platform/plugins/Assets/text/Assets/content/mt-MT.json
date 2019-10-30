@@ -35,7 +35,10 @@
             "message": "Tixtieq tabbona għal {{title}}?",
             "ok": "kollox sew",
             "cancel": "Ikkanċella"
-        }
+        },
+        "CreditOrDebitCard": "Karta ta &#39;kreditu jew debitu",
+        "SubscribePayment": "Abbona għall-Ħlas",
+        "ImmediatePayment": "Ħlas Immedjat"
     },
     "payments": {
         "infoTitle": "Twaqqaf Informazzjoni ta &#39;Ħlas",

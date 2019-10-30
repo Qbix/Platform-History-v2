@@ -35,7 +35,10 @@
             "message": "Wil u inteken op {{title}}?",
             "ok": "OK",
             "cancel": "kanselleer"
-        }
+        },
+        "CreditOrDebitCard": "Krediet- of debietkaart",
+        "SubscribePayment": "Teken betaling in",
+        "ImmediatePayment": "Onmiddellike betaling"
     },
     "payments": {
         "infoTitle": "Stel betalinginligting op",

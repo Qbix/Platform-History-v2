@@ -35,7 +35,10 @@
             "message": "您要订阅{{title}}吗？",
             "ok": "好",
             "cancel": "取消"
-        }
+        },
+        "CreditOrDebitCard": "信用卡或借记卡",
+        "SubscribePayment": "订阅付款",
+        "ImmediatePayment": "立即付款"
     },
     "payments": {
         "infoTitle": "设置付款信息",

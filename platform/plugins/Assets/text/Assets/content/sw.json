@@ -35,7 +35,10 @@
             "message": "Je! Ungependa kujisajili kwa {{title}}?",
             "ok": "sawa",
             "cancel": "Ghairi"
-        }
+        },
+        "CreditOrDebitCard": "Kadi ya mkopo au deni",
+        "SubscribePayment": "Sajili Malipo",
+        "ImmediatePayment": "Malipo ya Mara Moja"
     },
     "payments": {
         "infoTitle": "Weka Habari ya Malipo",

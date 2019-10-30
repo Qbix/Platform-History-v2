@@ -35,7 +35,10 @@
             "message": "Ali se želite naročiti na {{title}}?",
             "ok": "v redu",
             "cancel": "Prekliči"
-        }
+        },
+        "CreditOrDebitCard": "Kreditna ali debetna kartica",
+        "SubscribePayment": "Naročite plačilo",
+        "ImmediatePayment": "Takojšnje plačilo"
     },
     "payments": {
         "infoTitle": "Nastavite podatke o plačilu",

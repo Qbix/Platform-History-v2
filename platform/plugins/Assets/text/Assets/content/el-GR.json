@@ -35,7 +35,10 @@
             "message": "Θα θέλατε να εγγραφείτε στο {{title}};",
             "ok": "Εντάξει",
             "cancel": "Ματαίωση"
-        }
+        },
+        "CreditOrDebitCard": "Πιστωτική ή χρεωστική κάρτα",
+        "SubscribePayment": "Εγγραφή πληρωμής",
+        "ImmediatePayment": "Άμεση Πληρωμή"
     },
     "payments": {
         "infoTitle": "Ορίστε τις πληροφορίες πληρωμής",

@@ -35,7 +35,10 @@
             "message": "Хочете підписатися на {{title}}?",
             "ok": "в порядку",
             "cancel": "Скасувати"
-        }
+        },
+        "CreditOrDebitCard": "Кредитна чи дебетова картка",
+        "SubscribePayment": "Підписатися на оплату",
+        "ImmediatePayment": "Негайний платіж"
     },
     "payments": {
         "infoTitle": "Встановити платіжну інформацію",

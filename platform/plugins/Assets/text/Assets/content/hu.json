@@ -35,7 +35,10 @@
             "message": "Szeretne feliratkozni a {{title}} -ra?",
             "ok": "rendben",
             "cancel": "Megszünteti"
-        }
+        },
+        "CreditOrDebitCard": "Hitel- vagy bankkártya",
+        "SubscribePayment": "Feliratkozás fizetésre",
+        "ImmediatePayment": "Azonnali fizetés"
     },
     "payments": {
         "infoTitle": "Állítsa be a fizetési információkat",

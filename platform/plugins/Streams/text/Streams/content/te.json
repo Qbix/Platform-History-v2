@@ -27,7 +27,8 @@
         "Unsubscribed": "నోటిఫికేషన్‌లను పొందండి",
         "notAllowedToJoinCall": "ఈ సంభాషణలో చేరడానికి మీకు అనుమతి లేదు.",
         "startedConversation": "సంభాషణను ప్రారంభించారు",
-        "RealTimeCall": "రియల్ టైమ్ కాల్"
+        "RealTimeCall": "రియల్ టైమ్ కాల్",
+        "SearchByName": "పేరు ద్వారా శోధించండి"
     },
     "notifications": {
         "*": "{{& stream.fields.title}} కి సందేశం {{& message.fields.type}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "మీరు చందాను తొలగించాలనుకుంటే",
         "Streams\/relatedTo\/Streams\/call": "కొత్త కాల్ {99 999} in లో ప్రారంభమైంది",
         "Streams\/relatedTo\/*": "{{toTitle}} లో క్రొత్త {{relationDisplayType}}",
-        "Streams\/relatedFrom\/*": "{{999} to కు {{1000} as గా జోడించబడింది"
+        "Streams\/relatedFrom\/*": "{{999} to కు {{1000} as గా జోడించబడింది",
+        "Streams\/mention": "{{999} you మిమ్మల్ని వ్యాఖ్యలో పేర్కొన్నారు",
+        "Streams\/call": "{{999} you మిమ్మల్ని పిలుస్తోంది"
     },
     "invite": {
         "messageContent": "{{displayName}} మిమ్మల్ని {{inviteUrl}} కి ఆహ్వానించారు",
@@ -76,7 +79,8 @@
             "subject": "హే, ఈ తనిఖీ",
             "PleaseVisitLink": "దయచేసి క్రింది లింక్ను సందర్శించండి:",
             "InvitingYou": "నేను మిమ్మల్ని {{title}}",
-            "HasInvitedYou": "{{9}} {{title}} కు మిమ్మల్ని ఆహ్వానించారు"
+            "HasInvitedYou": "{{9}} {{title}} కు మిమ్మల్ని ఆహ్వానించారు",
+            "HasMentionedYou": "{{999} you మిమ్మల్ని &quot;{{1000} in&quot; లో పేర్కొంది"
         },
         "sms": {
             "content": "మీరు {{title}} కు ఆహ్వానించబడ్డారు. దయచేసి {{url}} నొక్కండి"

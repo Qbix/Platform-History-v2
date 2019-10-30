@@ -35,7 +35,10 @@
             "message": "Vuoi iscriverti a {{title}}?",
             "ok": "ok",
             "cancel": "Annulla"
-        }
+        },
+        "CreditOrDebitCard": "Carta di credito o debito",
+        "SubscribePayment": "Abbonati Pagamento",
+        "ImmediatePayment": "Pagamento immediato"
     },
     "payments": {
         "infoTitle": "Imposta le informazioni di pagamento",

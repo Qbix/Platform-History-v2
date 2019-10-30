@@ -27,7 +27,8 @@
         "Unsubscribed": "Saa ilmoituksia",
         "notAllowedToJoinCall": "Sinulla ei ole lupaa liittyä tähän keskusteluun.",
         "startedConversation": "aloitti keskustelun",
-        "RealTimeCall": "Reaaliaikainen puhelu"
+        "RealTimeCall": "Reaaliaikainen puhelu",
+        "SearchByName": "Etsi nimen mukaan"
     },
     "notifications": {
         "*": "Viesti {{& message.fields.type}} kohtaan {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Jos haluat peruuttaa tilauksen",
         "Streams/relatedTo/Streams/call": "Uusi puhelu aloitettiin {{toTitle}}",
         "Streams/relatedTo/*": "Uusi {{relationDisplayType}} {{toTitle}}",
-        "Streams/relatedFrom/*": "Lisätty kansioon {{toTitle}} nimellä {{relationDisplayType}}"
+        "Streams/relatedFrom/*": "Lisätty kansioon {{toTitle}} nimellä {{relationDisplayType}}",
+        "Streams/mention": "{{&call 'avatar.displayName'}} mainitsi sinut kommentissa",
+        "Streams/call": "{{displayName}} soittaa sinulle"
     },
     "invite": {
         "messageContent": "{{displayName}} kutsui sinut {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hei, tarkista tämä",
             "PleaseVisitLink": "Käy seuraavassa linkissä:",
             "InvitingYou": "Kutsun sinut {{title}}",
-            "HasInvitedYou": "{{displayName}} on kutsunut sinut {{title}}"
+            "HasInvitedYou": "{{displayName}} on kutsunut sinut {{title}}",
+            "HasMentionedYou": "{{displayName}} on maininnut sinut &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Sinut on kutsuttu {{title}}. Napauta {{url}}"

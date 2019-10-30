@@ -27,7 +27,8 @@
         "Unsubscribed": "Merrni Njoftimet",
         "notAllowedToJoinCall": "Ju nuk keni leje për t&#39;u bashkuar me këtë bisedë.",
         "startedConversation": "filloi një bisedë",
-        "RealTimeCall": "Thirrje në kohë reale"
+        "RealTimeCall": "Thirrje në kohë reale",
+        "SearchByName": "Kërkoni sipas emrit"
     },
     "notifications": {
         "*": "Mesazhi {{& message.fields.type}} në {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Nëse dëshironi të abonoheni",
         "Streams/relatedTo/Streams/call": "Thirrja e re Filloi në 99 99 999}}",
         "Streams/relatedTo/*": "New 999 të reja} në {{1000}",
-        "Streams/relatedFrom/*": "Shtuar në 99 999 si {{1000}"
+        "Streams/relatedFrom/*": "Shtuar në 99 999 si {{1000}",
+        "Streams/mention": "99 99 999}} ju përmenda në një koment",
+        "Streams/call": "99 999 po ju thërret"
     },
     "invite": {
         "messageContent": "{{displayName}} ju ftoi për të {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hej, shiko këtë",
             "PleaseVisitLink": "Ju lutemi vizitoni lidhjen e mëposhtme:",
             "InvitingYou": "Unë jam duke ju ftuar për të {{title}}",
-            "HasInvitedYou": "{{displayName}} ju ka ftuar për të {{title}}"
+            "HasInvitedYou": "{{displayName}} ju ka ftuar për të {{title}}",
+            "HasMentionedYou": "99 {999}} ju ka përmendur në &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Ju jeni ftuar për {{title}}. Përzgjidhni {{url}}"

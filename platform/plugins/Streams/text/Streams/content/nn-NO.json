@@ -27,7 +27,8 @@
         "Unsubscribed": "Få varsler",
         "notAllowedToJoinCall": "Du har ikke tillatelse til å delta i denne samtalen.",
         "startedConversation": "startet en samtale",
-        "RealTimeCall": "Sanntids samtale"
+        "RealTimeCall": "Sanntids samtale",
+        "SearchByName": "Søk etter navn"
     },
     "notifications": {
         "*": "Melding {{& message.fields.type}} til {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Hvis du vil avslutte abonnementet",
         "Streams/relatedTo/Streams/call": "Ny samtale startet {{toTitle}}",
         "Streams/relatedTo/*": "Ny {{relationDisplayType}} på {{toTitle}}",
-        "Streams/relatedFrom/*": "Lagt til {{toTitle}} som {{relationDisplayType}}"
+        "Streams/relatedFrom/*": "Lagt til {{toTitle}} som {{relationDisplayType}}",
+        "Streams/mention": "{{&call 'avatar.displayName'}} nevnte deg i en kommentar",
+        "Streams/call": "{{displayName}} ringer deg"
     },
     "invite": {
         "messageContent": "{{displayName}} inviterte deg til {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hei, sjekk dette ut",
             "PleaseVisitLink": "Vennligst besøk følgende lenke:",
             "InvitingYou": "Jeg inviterer deg til {{title}}",
-            "HasInvitedYou": "{{displayName}} har invitert deg til {{title}}"
+            "HasInvitedYou": "{{displayName}} har invitert deg til {{title}}",
+            "HasMentionedYou": "{{displayName}} har nevnt deg i &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Du har blitt invitert til {{title}}. Vennligst trykk på {{url}}"

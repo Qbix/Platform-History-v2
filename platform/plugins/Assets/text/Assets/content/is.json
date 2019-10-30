@@ -35,7 +35,10 @@
             "message": "Viltu gerast áskrifandi að {{title}}?",
             "ok": "OK",
             "cancel": "Hætta við"
-        }
+        },
+        "CreditOrDebitCard": "Kredit- eða debetkort",
+        "SubscribePayment": "Gerast áskrifandi að greiðslu",
+        "ImmediatePayment": "Strax greiðsla"
     },
     "payments": {
         "infoTitle": "Stilltu greiðsluupplýsingar",

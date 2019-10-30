@@ -35,7 +35,10 @@
             "message": "{{title}}を購読しますか？",
             "ok": "OK",
             "cancel": "キャンセル"
-        }
+        },
+        "CreditOrDebitCard": "クレジットカードまたはデビットカード",
+        "SubscribePayment": "購読支払い",
+        "ImmediatePayment": "即時支払い"
     },
     "payments": {
         "infoTitle": "支払い情報を設定する",

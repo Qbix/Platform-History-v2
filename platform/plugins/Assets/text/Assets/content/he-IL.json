@@ -35,7 +35,10 @@
             "message": "האם תרצה להירשם ל {{title}}?",
             "ok": "בסדר",
             "cancel": "בטל"
-        }
+        },
+        "CreditOrDebitCard": "כרטיס אשראי או חיוב",
+        "SubscribePayment": "הרשמו לתשלום",
+        "ImmediatePayment": "תשלום מיידי"
     },
     "payments": {
         "infoTitle": "הגדר פרטי תשלום",

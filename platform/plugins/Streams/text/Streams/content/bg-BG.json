@@ -27,7 +27,8 @@
         "Unsubscribed": "Получаване на известия",
         "notAllowedToJoinCall": "Нямате разрешение да се присъедините към този разговор.",
         "startedConversation": "започна разговор",
-        "RealTimeCall": "Обаждане в реално време"
+        "RealTimeCall": "Обаждане в реално време",
+        "SearchByName": "Търсене по име"
     },
     "notifications": {
         "*": "Съобщение {{& message.fields.type}} до {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Ако искате да се отпишете",
         "Streams/relatedTo/Streams/call": "Ново повикване започна от {{toTitle}}",
         "Streams/relatedTo/*": "Ново {{relationDisplayType}} в {{toTitle}}",
-        "Streams/relatedFrom/*": "Добавено към {{toTitle}} като {{relationDisplayType}}"
+        "Streams/relatedFrom/*": "Добавено към {{toTitle}} като {{relationDisplayType}}",
+        "Streams/mention": "{{&call 'avatar.displayName'}} ви спомена в коментар",
+        "Streams/call": "{{displayName}} ви се обажда"
     },
     "invite": {
         "messageContent": "{{displayName}} ви покани на {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Хей, провери това",
             "PleaseVisitLink": "Моля, посетете следната връзка:",
             "InvitingYou": "Каня ви на {{title}}",
-            "HasInvitedYou": "{{displayName}} ви покани на {{title}}"
+            "HasInvitedYou": "{{displayName}} ви покани на {{title}}",
+            "HasMentionedYou": "{{displayName}} ви спомена в &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Поканени сте в {{title}}. Моля, докоснете {{url}}"

@@ -27,7 +27,8 @@
         "Unsubscribed": "Dobiti obavijesti",
         "notAllowedToJoinCall": "Nemate dozvolu pridružiti se ovom razgovoru.",
         "startedConversation": "započeo razgovor",
-        "RealTimeCall": "Poziv u stvarnom vremenu"
+        "RealTimeCall": "Poziv u stvarnom vremenu",
+        "SearchByName": "Traži po imenu"
     },
     "notifications": {
         "*": "Poruka {{& message.fields.type}} do {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Ako želite otkazati pretplatu",
         "Streams/relatedTo/Streams/call": "Novi poziv započeo u {{toTitle}}",
         "Streams/relatedTo/*": "Novo {{relationDisplayType}} u {{toTitle}}",
-        "Streams/relatedFrom/*": "Dodano u {{toTitle}} kao {{relationDisplayType}}"
+        "Streams/relatedFrom/*": "Dodano u {{toTitle}} kao {{relationDisplayType}}",
+        "Streams/mention": "{{&call 'avatar.displayName'}} spomenuo vas je u komentaru",
+        "Streams/call": "{{displayName}} zove vas"
     },
     "invite": {
         "messageContent": "{{displayName}} pozvao vas je na {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hej, vidi ovo",
             "PleaseVisitLink": "Posjetite sljedeću vezu:",
             "InvitingYou": "Pozivam vas na {{title}}",
-            "HasInvitedYou": "{{displayName}} pozvao vas je na {{title}}"
+            "HasInvitedYou": "{{displayName}} pozvao vas je na {{title}}",
+            "HasMentionedYou": "{{displayName}} spomenuo vas je u &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Pozvani ste na {{title}}. Dodirnite {{url}}"

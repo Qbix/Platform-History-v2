@@ -27,7 +27,8 @@
         "Unsubscribed": "Få aviseringar",
         "notAllowedToJoinCall": "Du har inte behörighet att gå med i den här konversationen.",
         "startedConversation": "inledde en konversation",
-        "RealTimeCall": "Realtidssamtal"
+        "RealTimeCall": "Realtidssamtal",
+        "SearchByName": "Sök efter namn"
     },
     "notifications": {
         "*": "Meddelande {{& message.fields.type}} till {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Om du vill avsluta prenumerationen",
         "Streams\/relatedTo\/Streams\/call": "Nytt samtal påbörjades {{toTitle}}",
         "Streams\/relatedTo\/*": "Nytt {{relationDisplayType}} i {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Tillagd till {{toTitle}} som {{relationDisplayType}}"
+        "Streams\/relatedFrom\/*": "Tillagd till {{toTitle}} som {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} nämnde dig i en kommentar",
+        "Streams\/call": "{{displayName}} ringer dig"
     },
     "invite": {
         "messageContent": "{{displayName}} bjöd in dig till {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hej, kolla här",
             "PleaseVisitLink": "Vänligen besök följande länk:",
             "InvitingYou": "Jag uppmanar dig att {{title}}",
-            "HasInvitedYou": "{{displayName}} har bjudit in dig till {{title}}"
+            "HasInvitedYou": "{{displayName}} har bjudit in dig till {{title}}",
+            "HasMentionedYou": "{{displayName}} har nämnt dig i &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Du har blivit inbjuden till {{title}}. Var god och tryck på {{url}}"

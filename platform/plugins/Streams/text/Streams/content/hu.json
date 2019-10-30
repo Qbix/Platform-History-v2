@@ -27,7 +27,8 @@
         "Unsubscribed": "Értesítéseket kapni",
         "notAllowedToJoinCall": "Nincs engedélye a beszélgetéshez.",
         "startedConversation": "beszélgetést kezdett",
-        "RealTimeCall": "Valós idejű hívás"
+        "RealTimeCall": "Valós idejű hívás",
+        "SearchByName": "Keresés név szerint"
     },
     "notifications": {
         "*": "Üzenet {{& message.fields.type}} {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Ha le szeretné szüntetni a feliratkozást",
         "Streams\/relatedTo\/Streams\/call": "Az új felhívás {{toTitle}} -én kezdődött",
         "Streams\/relatedTo\/*": "Új {{relationDisplayType}} a {{toTitle}} -ben",
-        "Streams\/relatedFrom\/*": "Hozzáadva a következőhöz: {{toTitle}}, mint {{relationDisplayType}}"
+        "Streams\/relatedFrom\/*": "Hozzáadva a következőhöz: {{toTitle}}, mint {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} megemlített egy megjegyzésben",
+        "Streams\/call": "{{displayName}} hív téged"
     },
     "invite": {
         "messageContent": "{{displayName}} meghívta Önt a {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hé, nézd meg ezt",
             "PleaseVisitLink": "Kérjük, látogasson el a következő linkre:",
             "InvitingYou": "Meghívom Önt {{title}}",
-            "HasInvitedYou": "{{displayName}} meghívta Önt a {{title}}"
+            "HasInvitedYou": "{{displayName}} meghívta Önt a {{title}}",
+            "HasMentionedYou": "{{displayName}} megemlített téged a &quot;{{title}}&quot; -ben"
         },
         "sms": {
             "content": "Meghívást kapott a {{title}} -ra. Kérjük, érintse meg a {{url}}"

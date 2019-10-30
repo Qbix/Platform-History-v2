@@ -27,7 +27,8 @@
         "Unsubscribed": "Добива известувања",
         "notAllowedToJoinCall": "Немате дозвола да се приклучите на овој разговор.",
         "startedConversation": "започна разговор",
-        "RealTimeCall": "Повик во реално време"
+        "RealTimeCall": "Повик во реално време",
+        "SearchByName": "Пребарувајте по име"
     },
     "notifications": {
         "*": "Порака {{& message.fields.type}} до {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Ако сакате да се откажете",
         "Streams\/relatedTo\/Streams\/call": "Новиот повик започна во {{toTitle}}",
         "Streams\/relatedTo\/*": "Нови {{relationDisplayType}} за {{1000}",
-        "Streams\/relatedFrom\/*": "Додадено на 99 999}} како}} 1000}"
+        "Streams\/relatedFrom\/*": "Додадено на 99 999}} како}} 1000}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} ве спомнав во коментар",
+        "Streams\/call": ". Ви се јавува 999"
     },
     "invite": {
         "messageContent": "{{displayName}} ве покани да {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Еј, провери го ова",
             "PleaseVisitLink": "Ве молиме посетете ја следнава врска:",
             "InvitingYou": "Ве повикувам да {{title}}",
-            "HasInvitedYou": "{{displayName}} ве покани да {{title}}"
+            "HasInvitedYou": "{{displayName}} ве покани да {{title}}",
+            "HasMentionedYou": "99 {999}} ве спомна во „{{title}}“"
         },
         "sms": {
             "content": "Сте биле поканети на {{title}}. Те молам допрете {{url}}"

@@ -27,7 +27,8 @@
         "Unsubscribed": "收到通知",
         "notAllowedToJoinCall": "您无权加入此对话。",
         "startedConversation": "开始了对话",
-        "RealTimeCall": "实时通话"
+        "RealTimeCall": "实时通话",
+        "SearchByName": "按名称搜寻"
     },
     "notifications": {
         "*": "消息{{& message.fields.type}}至{{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "如果你想取消订阅",
         "Streams/relatedTo/Streams/call": "{{toTitle}}中的新来电启动",
         "Streams/relatedTo/*": "{{toTitle}}中的新{{relationDisplayType}}",
-        "Streams/relatedFrom/*": "添加到{{toTitle}}为{{relationDisplayType}}"
+        "Streams/relatedFrom/*": "添加到{{toTitle}}为{{relationDisplayType}}",
+        "Streams/mention": "{{&call 'avatar.displayName'}}在评论中提及了您",
+        "Streams/call": "{{displayName}}正在给您打电话"
     },
     "invite": {
         "messageContent": "{{displayName}}邀请您{{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "嘿，看看这个",
             "PleaseVisitLink": "请访问以下链接：",
             "InvitingYou": "我邀请你{{title}}",
-            "HasInvitedYou": "{{displayName}}已邀请您{{title}}"
+            "HasInvitedYou": "{{displayName}}已邀请您{{title}}",
+            "HasMentionedYou": "{{displayName}}在“ {{title}}”中提到了您"
         },
         "sms": {
             "content": "您已受邀{{title}}。请点按{{url}}"

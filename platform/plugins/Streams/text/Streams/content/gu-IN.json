@@ -27,7 +27,8 @@
         "Unsubscribed": "સૂચનાઓ મેળવો",
         "notAllowedToJoinCall": "તમને આ વાતચીતમાં જોડાવાની પરવાનગી નથી.",
         "startedConversation": "વાતચીત શરૂ કરી",
-        "RealTimeCall": "રીઅલ ટાઇમ ક Callલ"
+        "RealTimeCall": "રીઅલ ટાઇમ ક Callલ",
+        "SearchByName": "નામ દ્વારા શોધો"
     },
     "notifications": {
         "*": "સંદેશ {{& message.fields.type}} થી {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "જો તમે અનસબ્સ્ક્રાઇબ કરવા માંગો છો",
         "Streams/relatedTo/Streams/call": "નવો ક Callલ {{999} in માં પ્રારંભ થયો",
         "Streams/relatedTo/*": "New {1000}} માં નવું {999}",
-        "Streams/relatedFrom/*": "{{relationDisplayType}} તરીકે {9 999} to માં ઉમેર્યું"
+        "Streams/relatedFrom/*": "{{relationDisplayType}} તરીકે {9 999} to માં ઉમેર્યું",
+        "Streams/mention": "{{999} a એ એક ટિપ્પણીમાં તમારો ઉલ્લેખ કર્યો",
+        "Streams/call": "{{999} you તમને ક}લ કરે છે"
     },
     "invite": {
         "messageContent": "{{displayName}} તમને {{inviteUrl}} માં આમંત્રિત કર્યા છે",
@@ -76,7 +79,8 @@
             "subject": "અરે, આ તપાસો",
             "PleaseVisitLink": "કૃપા કરીને નીચેની લિંકની મુલાકાત લો:",
             "InvitingYou": "હું તમને {{title}} પર આમંત્રિત કરું છું",
-            "HasInvitedYou": "{{displayName}} એ તમને {{title}} પર આમંત્રિત કર્યા છે"
+            "HasInvitedYou": "{{displayName}} એ તમને {{title}} પર આમંત્રિત કર્યા છે",
+            "HasMentionedYou": "{{999} એ &quot;{{title}}&quot; માં તમારો ઉલ્લેખ કર્યો છે"
         },
         "sms": {
             "content": "તમને {{title}} પર આમંત્રિત કરવામાં આવ્યા છે. કૃપા કરીને {{url}} ને ટેપ કરો"
