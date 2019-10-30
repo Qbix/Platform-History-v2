@@ -87,6 +87,13 @@ function Q_before_Q_responseExtras()
 	));
 	Q_Response::setScriptData('Q.info.text', Q_Config::get('Q', 'text', array()));
 	
+	if (!Q_Request::special('sb') and (
+		Q_Config::get('Q', 'web', 'statusBarOverlapped')
+		or Q_Request::isCordova()
+	)) {
+		Q_Response::addHtmlCssClass('Q_statusBarOverlapped');
+	}
+	
 	// We may want to set the initial URL and updateTimestamp cookie
 	$environment = Q_Config::get('Q', 'environment', '');
 	$config = Q_Config::get('Q', 'environments', $environment, 'urls', array());

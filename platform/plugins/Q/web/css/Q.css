@@ -756,6 +756,7 @@ html.Q_scanning body > .Q_scanning_code {
 #status_background {
 	width: 100%;
 }
+.Q_statusBarOverlapped #status_background { display: block !important; }
 
 input[type=text],
 input[type=password] {

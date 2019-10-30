@@ -36,7 +36,8 @@
 		},
 		"web": {
 			"ignoreUserAbort": true,
-			"requireValidNonce": []
+			"requireValidNonce": [],
+			"statusBarOverlapped": true
 		},
 		"response": {
 			"isBuffered": true
