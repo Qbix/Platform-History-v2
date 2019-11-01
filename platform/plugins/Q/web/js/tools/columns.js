@@ -520,8 +520,8 @@ Q.Tool.define("Q/columns", function(options) {
 				});
 			});
 			
-			var expandTop = index > 0 && Q.info.isMobile && state.expandOnMobile && state.expandOnMobile.top;
-			var expandBottom = index > 0 && Q.info.isMobile && state.expandOnMobile && state.expandOnMobile.bottom;
+			var expandTop = index > 0 && Q.info.isMobile && o.expandOnMobile && o.expandOnMobile.top;
+			var expandBottom = index > 0 && Q.info.isMobile && o.expandOnMobile && o.expandOnMobile.bottom;
 			var $sc = $(state.container);
 			var containerRect = $sc[0].getBoundingClientRect();
 			var top = expandTop
