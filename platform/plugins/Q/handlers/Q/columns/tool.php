@@ -35,7 +35,7 @@ function Q_columns_tool($options)
 {
 	$jsOptions = array(
 		'animation', 'back', 'close', 'title',
-		'scrollbarsAutoHide', 'fullscreen'
+		'scrollbarsAutoHide', 'fullscreen', 'expandOnMobile'
 	);
 	Q_Response::setToolOptions(Q::take($options, $jsOptions));
 	if (!isset($options['columns'])) {
