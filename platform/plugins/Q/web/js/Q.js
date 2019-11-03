@@ -5793,10 +5793,6 @@ Q.ready = function _Q_ready() {
 			// Call the functions meant to be called after ready() is done
 			Q.onReady.handle.call(root, root.jQuery);
 
-			if (Q.info.isCordova && navigator.splashscreen) {
-				navigator.splashscreen.hide();
-			}
-
 			// This is an HTML document loaded from our server
 			try {
 				Q.Page.beingActivated = true;

@@ -91,7 +91,7 @@
 
 							// set selected Places/area stream
 							tool.filterTool.state.onChoose.set(function (element, details) {
-								var previewTool = Q.Tool.from($('element').closest('.Streams_preview_tool').add(element), "Streams/preview");
+								var previewTool = Q.Tool.from($(element).closest('.Streams_preview_tool').add(element), "Streams/preview");
 
 								if (!previewTool) {
 									return false;
