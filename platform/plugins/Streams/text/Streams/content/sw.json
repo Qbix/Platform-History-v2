@@ -27,7 +27,8 @@
         "Unsubscribed": "Pata Arifa",
         "notAllowedToJoinCall": "Huna ruhusa ya kujiunga na mazungumzo haya.",
         "startedConversation": "alianza mazungumzo",
-        "RealTimeCall": "Simu ya Wakati wa kweli"
+        "RealTimeCall": "Simu ya Wakati wa kweli",
+        "SearchByName": "Tafuta kwa jina"
     },
     "notifications": {
         "*": "Ujumbe {{& message.fields.type}} kwa {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Ikiwa unataka kujiondoa",
         "Streams\/relatedTo\/Streams\/call": "Simu mpya imeanza katika {{toTitle}}",
         "Streams\/relatedTo\/*": "Mpya {{relationDisplayType}} katika {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Imeongezwa kwa {{toTitle}} kama {{1000]}"
+        "Streams\/relatedFrom\/*": "Imeongezwa kwa {{toTitle}} kama {{1000]}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} alikutaja kwenye maoni",
+        "Streams\/call": "{{displayName}} anakuita"
     },
     "invite": {
         "messageContent": "{{displayName}} alikualika {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hey, angalia hii nje",
             "PleaseVisitLink": "Tafadhali tembelea kiungo kinachofuata:",
             "InvitingYou": "Ninakualika {{title}}",
-            "HasInvitedYou": "{{displayName}} amekualika {{title}}"
+            "HasInvitedYou": "{{displayName}} amekualika {{title}}",
+            "HasMentionedYou": "{{displayName}} amekutaja katika &quot;{{1000]}"
         },
         "sms": {
             "content": "Umealikwa {{title}}. Tafadhali piga {{url}}"

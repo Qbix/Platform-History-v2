@@ -424,8 +424,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 				'width': Q.Pointer.windowWidth() + 'px',
 				'height': Q.Pointer.windowHeight() + 'px'
 			});
-			var $close = $('<a class="Q_close" />');
-			$this.append($close);
+
 			$this.hide();
 
 			var dialogData = {
@@ -479,13 +478,19 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 				}
 			};
 
-			$close.on(Q.Pointer.fastclick, dialogData.close);
+			if (!o.noClose) {
+				var $close = $('<a class="Q_close" />');
+				$this.append($close);
+				$close.on(Q.Pointer.fastclick, dialogData.close);
+			}
 
-			$(document).on('keydown', function(e) {
-				if (e.which === 27) {
-					dialogData.close(e);
-				}
-			});
+			if (o.closeOnEsc) {
+				$(document).on('keydown', function(e) {
+					if (e.which === 27) {
+						dialogData.close(e);
+					}
+				});
+			}
 
 			$this.data('Q/dialog', dialogData);
 		}

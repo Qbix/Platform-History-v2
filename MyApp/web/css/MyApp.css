@@ -228,7 +228,6 @@ html .Q_inplace_tool_fieldinput { padding: 0px; }
 .Q_mobile .Q_overlay { width: 90%; }
 
 /* The following lines are for cordova on iOS */
-.Q_notCordova #status_background { display: none; }
 .Q_cordova.Q_ios #status_background {
 	background: #f2f2f2;
 	height: 20px;

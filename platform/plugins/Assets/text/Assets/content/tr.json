@@ -35,7 +35,10 @@
             "message": "{{title}} abonesi olmak ister misiniz?",
             "ok": "tamam",
             "cancel": "İptal etmek"
-        }
+        },
+        "CreditOrDebitCard": "Kredi kartı veya banka kartı",
+        "SubscribePayment": "Abone Ol Ödeme",
+        "ImmediatePayment": "Anında ödeme"
     },
     "payments": {
         "infoTitle": "Ödeme Bilgilerini Ayarla",

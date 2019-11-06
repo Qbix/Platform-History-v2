@@ -35,7 +35,10 @@
             "message": "Hoffech chi danysgrifio i {{title}}?",
             "ok": "iawn",
             "cancel": "Canslo"
-        }
+        },
+        "CreditOrDebitCard": "Cerdyn credyd neu ddebyd",
+        "SubscribePayment": "Taliad Tanysgrifio",
+        "ImmediatePayment": "Taliad Ar Unwaith"
     },
     "payments": {
         "infoTitle": "Gosod Gwybodaeth Taliad",

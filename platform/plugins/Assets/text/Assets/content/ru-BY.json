@@ -35,7 +35,10 @@
             "message": "Хотите подписаться на {{title}}?",
             "ok": "Хорошо",
             "cancel": "отменить"
-        }
+        },
+        "CreditOrDebitCard": "Кредитная или дебетовая карта",
+        "SubscribePayment": "Подписаться Оплата",
+        "ImmediatePayment": "Немедленная оплата"
     },
     "payments": {
         "infoTitle": "Установить информацию об оплате",

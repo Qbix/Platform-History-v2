@@ -27,7 +27,8 @@
         "Unsubscribed": "รับการแจ้งเตือน",
         "notAllowedToJoinCall": "คุณไม่ได้รับอนุญาตให้เข้าร่วมการสนทนานี้",
         "startedConversation": "เริ่มการสนทนา",
-        "RealTimeCall": "โทรตามเวลาจริง"
+        "RealTimeCall": "โทรตามเวลาจริง",
+        "SearchByName": "ค้นหาตามชื่อ"
     },
     "notifications": {
         "*": "ข้อความ {{& message.fields.type}} ถึง {{1,000}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "หากคุณต้องการยกเลิกการสมัคร",
         "Streams\/relatedTo\/Streams\/call": "เริ่มการโทรใหม่ใน {{toTitle}}",
         "Streams\/relatedTo\/*": "ใหม่ {{relationDisplayType}} ใน {{1,000}}",
-        "Streams\/relatedFrom\/*": "เพิ่มไปที่ {{toTitle}} เป็น {{1,000}}"
+        "Streams\/relatedFrom\/*": "เพิ่มไปที่ {{toTitle}} เป็น {{1,000}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} พูดถึงคุณในความคิดเห็น",
+        "Streams\/call": "{{displayName}} กำลังโทรหาคุณ"
     },
     "invite": {
         "messageContent": "{{displayName}} เชิญคุณเข้าร่วม {{1,000}}",
@@ -76,7 +79,8 @@
             "subject": "เฮ้ลองดูนี่สิ",
             "PleaseVisitLink": "กรุณาเยี่ยมชมลิงค์ต่อไปนี้:",
             "InvitingYou": "ฉันเชิญคุณให้ {{title}}",
-            "HasInvitedYou": "{{displayName}} เชิญคุณให้ {{title}}"
+            "HasInvitedYou": "{{displayName}} เชิญคุณให้ {{title}}",
+            "HasMentionedYou": "{{displayName}} ได้พูดถึงคุณใน &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "คุณได้รับเชิญให้ {{title}} กรุณาแตะ {{1,000}}"

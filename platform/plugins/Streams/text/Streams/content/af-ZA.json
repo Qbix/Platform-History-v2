@@ -27,7 +27,8 @@
         "Unsubscribed": "Kry kennisgewings",
         "notAllowedToJoinCall": "U het nie toestemming om aan hierdie gesprek deel te neem nie.",
         "startedConversation": "&#39;n gesprek begin",
-        "RealTimeCall": "Intydse oproep"
+        "RealTimeCall": "Intydse oproep",
+        "SearchByName": "Soek op naam"
     },
     "notifications": {
         "*": "Boodskap {{& message.fields.type}} na {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "As jy wil uitteken",
         "Streams/relatedTo/Streams/call": "Nuwe oproep begin in {{toTitle}}",
         "Streams/relatedTo/*": "Nuwe {{relationDisplayType}} in {{toTitle}}",
-        "Streams/relatedFrom/*": "By {{toTitle}} as {{relationDisplayType}} gevoeg"
+        "Streams/relatedFrom/*": "By {{toTitle}} as {{relationDisplayType}} gevoeg",
+        "Streams/mention": "{{&call 'avatar.displayName'}} het u in &#39;n opmerking genoem",
+        "Streams/call": "{{displayName}} bel jou"
     },
     "invite": {
         "messageContent": "{{displayName}} het jou genooi na {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hey, check dit uit",
             "PleaseVisitLink": "Besoek gerus die volgende skakel:",
             "InvitingYou": "Ek nooi jou uit na {{title}}",
-            "HasInvitedYou": "{{displayName}} het jou genooi om {{title}}"
+            "HasInvitedYou": "{{displayName}} het jou genooi om {{title}}",
+            "HasMentionedYou": "{{displayName}} het u genoem in &#39;{{title}}&#39;"
         },
         "sms": {
             "content": "U is genooi na {{title}}. Tik asseblief {{url}}"

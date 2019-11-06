@@ -35,7 +35,10 @@
             "message": "Ar norite užsisakyti {{title}}?",
             "ok": "Gerai",
             "cancel": "Atšaukti"
-        }
+        },
+        "CreditOrDebitCard": "Kredito ar debeto kortelė",
+        "SubscribePayment": "Prenumeruokite mokėjimą",
+        "ImmediatePayment": "Neatidėliotinas mokėjimas"
     },
     "payments": {
         "infoTitle": "Nustatykite mokėjimo informaciją",

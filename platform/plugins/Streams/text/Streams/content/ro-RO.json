@@ -27,7 +27,8 @@
         "Unsubscribed": "Primiți notificări",
         "notAllowedToJoinCall": "Nu aveți permisiunea de a vă alătura acestei conversații.",
         "startedConversation": "a început o conversație",
-        "RealTimeCall": "Apel în timp real"
+        "RealTimeCall": "Apel în timp real",
+        "SearchByName": "Cauta dupa nume"
     },
     "notifications": {
         "*": "Mesaj {{& message.fields.type}} până la {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Dacă doriți să vă dezabonați",
         "Streams/relatedTo/Streams/call": "Apel nou început în {{toTitle}}",
         "Streams/relatedTo/*": "Nou {{relationDisplayType}} în {{toTitle}}",
-        "Streams/relatedFrom/*": "Adăugat la {{toTitle}} ca {{relationDisplayType}}"
+        "Streams/relatedFrom/*": "Adăugat la {{toTitle}} ca {{relationDisplayType}}",
+        "Streams/mention": "{{&call 'avatar.displayName'}} v-a menționat într-un comentariu",
+        "Streams/call": "{{displayName}} vă sună"
     },
     "invite": {
         "messageContent": "{{displayName}} te-a invitat la {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hei, verifică asta",
             "PleaseVisitLink": "Vă rugăm să vizitați următorul link:",
             "InvitingYou": "Vă invit să {{title}}",
-            "HasInvitedYou": "{{displayName}} te-a invitat la {{title}}"
+            "HasInvitedYou": "{{displayName}} te-a invitat la {{title}}",
+            "HasMentionedYou": "{{displayName}} v-a menționat în „{{title}}”"
         },
         "sms": {
             "content": "Ați fost invitat la {{title}}. Atingeți {{url}}"

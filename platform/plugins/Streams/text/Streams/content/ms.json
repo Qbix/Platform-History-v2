@@ -27,7 +27,8 @@
         "Unsubscribed": "Dapatkan notifikasi",
         "notAllowedToJoinCall": "Anda tidak mempunyai kebenaran untuk menyertai perbualan ini.",
         "startedConversation": "memulakan perbualan",
-        "RealTimeCall": "Panggilan Masa Nyata"
+        "RealTimeCall": "Panggilan Masa Nyata",
+        "SearchByName": "Cari mengikut nama"
     },
     "notifications": {
         "*": "Mesej {{& message.fields.type}} kepada {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Sekiranya anda mahu berhenti berlangganan",
         "Streams\/relatedTo\/Streams\/call": "Panggilan Baru Dimulakan dalam {{toTitle}}",
         "Streams\/relatedTo\/*": "Baru {{relationDisplayType}} dalam {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Ditambah pada {{toTitle}} sebagai {{relationDisplayType}}"
+        "Streams\/relatedFrom\/*": "Ditambah pada {{toTitle}} sebagai {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} menyebut anda dalam ulasan",
+        "Streams\/call": "{{displayName}} memanggil anda"
     },
     "invite": {
         "messageContent": "{{displayName}} menjemput anda ke {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hei, periksa ini",
             "PleaseVisitLink": "Sila lawati pautan berikut:",
             "InvitingYou": "Saya menjemput anda ke {{title}}",
-            "HasInvitedYou": "{{displayName}} telah menjemput anda ke {{title}}"
+            "HasInvitedYou": "{{displayName}} telah menjemput anda ke {{title}}",
+            "HasMentionedYou": "{{displayName}} telah menyebut anda dalam &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Anda telah dijemput ke {{title}}. Sila ketik {{url}}"

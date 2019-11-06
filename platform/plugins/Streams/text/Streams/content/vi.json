@@ -27,7 +27,8 @@
         "Unsubscribed": "Nhận thông báo",
         "notAllowedToJoinCall": "Bạn không được phép tham gia cuộc trò chuyện này.",
         "startedConversation": "bắt đầu một cuộc trò chuyện",
-        "RealTimeCall": "Cuộc gọi thời gian thực"
+        "RealTimeCall": "Cuộc gọi thời gian thực",
+        "SearchByName": "Tìm kiếm theo tên"
     },
     "notifications": {
         "*": "Tin nhắn {{& message.fields.type}} đến {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Nếu bạn muốn hủy đăng ký",
         "Streams\/relatedTo\/Streams\/call": "Cuộc gọi mới bắt đầu trong {{toTitle}}",
         "Streams\/relatedTo\/*": "Mới {{relationDisplayType}} trong {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Đã thêm vào {{toTitle}} dưới dạng {{relationDisplayType}}"
+        "Streams\/relatedFrom\/*": "Đã thêm vào {{toTitle}} dưới dạng {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} đã đề cập đến bạn trong một nhận xét",
+        "Streams\/call": "{{displayName}} đang gọi cho bạn"
     },
     "invite": {
         "messageContent": "{{displayName}} đã mời bạn đến {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Này, kiểm tra cái này",
             "PleaseVisitLink": "Vui lòng truy cập liên kết sau:",
             "InvitingYou": "Tôi mời bạn {{title}}",
-            "HasInvitedYou": "{{displayName}} đã mời bạn tham gia {{title}}"
+            "HasInvitedYou": "{{displayName}} đã mời bạn tham gia {{title}}",
+            "HasMentionedYou": "{{displayName}} đã đề cập đến bạn trong &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Bạn đã được mời tham gia {{title}}. Vui lòng nhấn {{url}}"

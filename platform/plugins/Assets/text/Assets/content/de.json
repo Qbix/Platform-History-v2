@@ -35,7 +35,10 @@
             "message": "Möchten Sie {{title}} abonnieren?",
             "ok": "OK",
             "cancel": "Stornieren"
-        }
+        },
+        "CreditOrDebitCard": "Kredit- oder Debitkarte",
+        "SubscribePayment": "Zahlung abonnieren",
+        "ImmediatePayment": "Sofortige Bezahlung"
     },
     "payments": {
         "infoTitle": "Legen Sie die Zahlungsinformationen fest",

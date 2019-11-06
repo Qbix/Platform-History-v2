@@ -35,7 +35,10 @@
             "message": "آیا می خواهید در {999} subs مشترک شوید؟",
             "ok": "خوب",
             "cancel": "لغو"
-        }
+        },
+        "CreditOrDebitCard": "کارت اعتباری",
+        "SubscribePayment": "پرداخت اشتراک",
+        "ImmediatePayment": "پرداخت فوری"
     },
     "payments": {
         "infoTitle": "اطلاعات پرداخت را تنظیم کنید",

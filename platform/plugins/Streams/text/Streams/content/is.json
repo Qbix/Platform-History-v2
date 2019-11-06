@@ -27,7 +27,8 @@
         "Unsubscribed": "Fá tilkynningar",
         "notAllowedToJoinCall": "Þú hefur ekki leyfi til að taka þátt í þessu samtali.",
         "startedConversation": "hóf samtal",
-        "RealTimeCall": "Rauntíma símtal"
+        "RealTimeCall": "Rauntíma símtal",
+        "SearchByName": "Leitaðu með nafni"
     },
     "notifications": {
         "*": "Skilaboð {{& message.fields.type}} til {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Ef þú vilt segja upp áskrift",
         "Streams\/relatedTo\/Streams\/call": "Nýtt símtal byrjað {{toTitle}}",
         "Streams\/relatedTo\/*": "Nýtt {{relationDisplayType}} í {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Bætt við {{toTitle}} sem {{relationDisplayType}}"
+        "Streams\/relatedFrom\/*": "Bætt við {{toTitle}} sem {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} minntist á þig í athugasemd",
+        "Streams\/call": "{{displayName}} hringir í þig"
     },
     "invite": {
         "messageContent": "{{displayName}} bauð þér að {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hey, athugaðu þetta út",
             "PleaseVisitLink": "Vinsamlegast farðu á eftirfarandi tengil:",
             "InvitingYou": "Ég býð þér að {{title}}",
-            "HasInvitedYou": "{{displayName}} hefur boðið þér að {{title}}"
+            "HasInvitedYou": "{{displayName}} hefur boðið þér að {{title}}",
+            "HasMentionedYou": "{{displayName}} hefur minnst á þig í „{{title}}“"
         },
         "sms": {
             "content": "Þú hefur verið boðið {{title}}. Vinsamlegast bankaðu á {{url}}"

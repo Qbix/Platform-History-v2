@@ -35,7 +35,10 @@
             "message": "Doriți să vă abonați la {{title}}?",
             "ok": "O.K",
             "cancel": "Anulare"
-        }
+        },
+        "CreditOrDebitCard": "Card de credit sau debit",
+        "SubscribePayment": "Abonează-te la plată",
+        "ImmediatePayment": "Plată imediată"
     },
     "payments": {
         "infoTitle": "Setați informații de plată",

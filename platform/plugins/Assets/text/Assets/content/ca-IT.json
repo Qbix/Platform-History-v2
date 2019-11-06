@@ -35,7 +35,10 @@
             "message": "Voleu subscriure-us a {{title}}?",
             "ok": "D&#39;acord",
             "cancel": "Cancel · lar"
-        }
+        },
+        "CreditOrDebitCard": "Targeta de crèdit o dèbit",
+        "SubscribePayment": "Subscripció de pagament",
+        "ImmediatePayment": "Pagament immediat"
     },
     "payments": {
         "infoTitle": "Establiu la informació de pagament",

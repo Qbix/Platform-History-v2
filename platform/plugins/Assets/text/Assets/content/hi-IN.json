@@ -35,7 +35,10 @@
             "message": "क्या आप {{title}} की सदस्यता लेना चाहेंगे?",
             "ok": "ठीक",
             "cancel": "रद्द करना"
-        }
+        },
+        "CreditOrDebitCard": "क्रेडिट या डेबिट कार्ड",
+        "SubscribePayment": "सदस्यता लें भुगतान",
+        "ImmediatePayment": "त्वरित भुगतान"
     },
     "payments": {
         "infoTitle": "भुगतान जानकारी सेट करें",

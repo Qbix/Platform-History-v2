@@ -35,7 +35,10 @@
             "message": "Wilt u zich abonneren op {{title}}?",
             "ok": "OK",
             "cancel": "annuleren"
-        }
+        },
+        "CreditOrDebitCard": "Creditcard of bankpas",
+        "SubscribePayment": "Abonneren op betaling",
+        "ImmediatePayment": "Onmiddellijke betaling"
     },
     "payments": {
         "infoTitle": "Stel betalingsinformatie in",

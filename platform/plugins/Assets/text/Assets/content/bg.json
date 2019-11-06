@@ -35,7 +35,10 @@
             "message": "Искате ли да се абонирате за {{title}}?",
             "ok": "Добре",
             "cancel": "Отказ"
-        }
+        },
+        "CreditOrDebitCard": "Кредитна или дебитна карта",
+        "SubscribePayment": "Абонирайте се за плащане",
+        "ImmediatePayment": "Незабавно плащане"
     },
     "payments": {
         "infoTitle": "Задайте информация за плащане",

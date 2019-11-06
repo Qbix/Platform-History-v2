@@ -27,7 +27,8 @@
         "Unsubscribed": "Erhalten Sie Benachrichtigungen",
         "notAllowedToJoinCall": "Sie haben keine Berechtigung, an dieser Unterhaltung teilzunehmen.",
         "startedConversation": "hat ein Gespräch begonnen",
-        "RealTimeCall": "Echtzeitanruf"
+        "RealTimeCall": "Echtzeitanruf",
+        "SearchByName": "Suche mit Name"
     },
     "notifications": {
         "*": "Nachricht {{& message.fields.type}} an {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Wenn Sie sich abmelden möchten",
         "Streams/relatedTo/Streams/call": "Neuer Anruf gestartet in {{toTitle}}",
         "Streams/relatedTo/*": "Neu {{relationDisplayType}} in {{toTitle}}",
-        "Streams/relatedFrom/*": "Zu {{toTitle}} hinzugefügt als {{relationDisplayType}}"
+        "Streams/relatedFrom/*": "Zu {{toTitle}} hinzugefügt als {{relationDisplayType}}",
+        "Streams/mention": "{{&call 'avatar.displayName'}} hat Sie in einem Kommentar erwähnt",
+        "Streams/call": "{{displayName}} ruft Sie an"
     },
     "invite": {
         "messageContent": "{{displayName}} hat Sie zu {{inviteUrl}} eingeladen",
@@ -76,7 +79,8 @@
             "subject": "Hey, schau dir das mal an",
             "PleaseVisitLink": "Bitte besuchen Sie den folgenden Link:",
             "InvitingYou": "Ich lade Sie ein zu {{title}}",
-            "HasInvitedYou": "{{displayName}} hat Sie zu {{title}} eingeladen"
+            "HasInvitedYou": "{{displayName}} hat Sie zu {{title}} eingeladen",
+            "HasMentionedYou": "{{displayName}} hat Sie in &quot;{{title}}&quot; erwähnt."
         },
         "sms": {
             "content": "Sie wurden zu {{title}} eingeladen. Bitte tippen Sie auf {{url}}"

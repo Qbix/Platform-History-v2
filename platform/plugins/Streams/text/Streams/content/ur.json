@@ -27,7 +27,8 @@
         "Unsubscribed": "اطلاعات حاصل کریں۔",
         "notAllowedToJoinCall": "آپ کو اس گفتگو میں شامل ہونے کی اجازت نہیں ہے۔",
         "startedConversation": "گفتگو شروع کی۔",
-        "RealTimeCall": "ریئل ٹائم کال"
+        "RealTimeCall": "ریئل ٹائم کال",
+        "SearchByName": "نام سے تلاش کریں"
     },
     "notifications": {
         "*": "پیغام {{& message.fields.type}} {{& stream.fields.title}} تک",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "اگر آپ سبسکرائب کرنا چاہتے ہیں",
         "Streams\/relatedTo\/Streams\/call": "نیا کال {{999} New میں شروع ہوا",
         "Streams\/relatedTo\/*": "{{toTitle}} میں نیا {9 999}",
-        "Streams\/relatedFrom\/*": "بطور {{10009} {{999} to میں شامل"
+        "Streams\/relatedFrom\/*": "بطور {{10009} {{999} to میں شامل",
+        "Streams\/mention": "{9 999} a نے ایک تبصرے میں آپ کا تذکرہ کیا",
+        "Streams\/call": "{9 999} you آپ کو کال کر رہا ہے"
     },
     "invite": {
         "messageContent": "{{displayName}} آپ کو {{inviteUrl}} میں مدعو کیا",
@@ -76,7 +79,8 @@
             "subject": "ارے، اسے چیک کرو",
             "PleaseVisitLink": "مندرجہ ذیل لنک ملاحظہ کریں:",
             "InvitingYou": "میں آپ کو {{title}} میں مدعو کر رہا ہوں",
-            "HasInvitedYou": "{{displayName}} نے آپ {{title}} کو مدعو کیا ہے"
+            "HasInvitedYou": "{{displayName}} نے آپ {{title}} کو مدعو کیا ہے",
+            "HasMentionedYou": "{{999} نے &quot;{{title}}&quot; میں آپ کا تذکرہ کیا ہے"
         },
         "sms": {
             "content": "آپ {{title}} کو مدعو کیا گیا ہے. برائے کرم {{url}}"

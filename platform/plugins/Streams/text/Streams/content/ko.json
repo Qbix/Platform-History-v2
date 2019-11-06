@@ -27,7 +27,8 @@
         "Unsubscribed": "알림을 받다",
         "notAllowedToJoinCall": "이 대화에 참여할 수있는 권한이 없습니다.",
         "startedConversation": "대화를 시작했다.",
-        "RealTimeCall": "실시간 통화"
+        "RealTimeCall": "실시간 통화",
+        "SearchByName": "이름으로 검색"
     },
     "notifications": {
         "*": "메시지 {{& message.fields.type}} ~ {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "구독을 취소하려면",
         "Streams\/relatedTo\/Streams\/call": "{{toTitle}}에서 새로운 전화가 시작되었습니다",
         "Streams\/relatedTo\/*": "{{toTitle}}의 새로운 {{relationDisplayType}}",
-        "Streams\/relatedFrom\/*": "{{toTitle}}에 {{relationDisplayType}}으로 추가됨"
+        "Streams\/relatedFrom\/*": "{{toTitle}}에 {{relationDisplayType}}으로 추가됨",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} 님이 댓글에서 나를 멘션했습니다",
+        "Streams\/call": "{{displayName}} 님이 전화합니다"
     },
     "invite": {
         "messageContent": "{{displayName}} 님이 {{inviteUrl}}에 당신을 초대했습니다.",
@@ -76,7 +79,8 @@
             "subject": "헤이, 이것 좀 봐.",
             "PleaseVisitLink": "다음 링크를 방문하십시오 :",
             "InvitingYou": "{{title}}에 초대합니다.",
-            "HasInvitedYou": "{{displayName}} 님이 {{title}}에 초대했습니다."
+            "HasInvitedYou": "{{displayName}} 님이 {{title}}에 초대했습니다.",
+            "HasMentionedYou": "{{displayName}} 님이 &quot;{{title}}&quot;에서 나를 언급했습니다."
         },
         "sms": {
             "content": "당신은 {{title}}에 초대되었습니다. {{url}}을 탭하십시오."

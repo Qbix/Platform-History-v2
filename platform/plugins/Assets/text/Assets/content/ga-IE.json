@@ -35,7 +35,10 @@
             "message": "Ar mhaith leat síntiús a íoc le {{title}}?",
             "ok": "OK",
             "cancel": "Cealaigh"
-        }
+        },
+        "CreditOrDebitCard": "Cárta creidmheasa nó dochair",
+        "SubscribePayment": "Liostáil Íocaíocht",
+        "ImmediatePayment": "Íocaíocht Láithreach"
     },
     "payments": {
         "infoTitle": "Faisnéis Socraithe Íocaíochta",

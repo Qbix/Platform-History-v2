@@ -27,7 +27,8 @@
         "Unsubscribed": "Получать уведомления",
         "notAllowedToJoinCall": "У вас нет разрешения присоединиться к этому разговору.",
         "startedConversation": "завел разговор",
-        "RealTimeCall": "Звонок в реальном времени"
+        "RealTimeCall": "Звонок в реальном времени",
+        "SearchByName": "Поиск по имени"
     },
     "notifications": {
         "*": "Сообщение {{& message.fields.type}} на {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Если вы хотите отписаться",
         "Streams\/relatedTo\/Streams\/call": "Новый вызов начался в {{toTitle}}",
         "Streams\/relatedTo\/*": "Новый {{relationDisplayType}} в {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Добавлено в {{toTitle}} как {{relationDisplayType}}"
+        "Streams\/relatedFrom\/*": "Добавлено в {{toTitle}} как {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} упомянул вас в комментарии",
+        "Streams\/call": "{{displayName}} звонит тебе"
     },
     "invite": {
         "messageContent": "{{displayName}} пригласил вас на {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Эй, проверь это",
             "PleaseVisitLink": "Пожалуйста, посетите следующую ссылку:",
             "InvitingYou": "Я приглашаю вас в {{title}}",
-            "HasInvitedYou": "{{displayName}} пригласил вас в {{title}}"
+            "HasInvitedYou": "{{displayName}} пригласил вас в {{title}}",
+            "HasMentionedYou": "{{displayName}} упомянул вас в &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Вы были приглашены в {{title}}. Пожалуйста, нажмите {{url}}"

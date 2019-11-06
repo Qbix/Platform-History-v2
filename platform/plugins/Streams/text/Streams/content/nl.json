@@ -27,7 +27,8 @@
         "Unsubscribed": "Krijg meldingen",
         "notAllowedToJoinCall": "Je hebt geen toestemming om aan dit gesprek deel te nemen.",
         "startedConversation": "begon een gesprek",
-        "RealTimeCall": "Real Time Call"
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Zoek op naam"
     },
     "notifications": {
         "*": "Bericht {{& message.fields.type}} tot {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Als u zich wilt afmelden",
         "Streams\/relatedTo\/Streams\/call": "Nieuwe oproep gestart in {{toTitle}}",
         "Streams\/relatedTo\/*": "Nieuwe {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Toegevoegd aan {{toTitle}} als {{relationDisplayType}}"
+        "Streams\/relatedFrom\/*": "Toegevoegd aan {{toTitle}} als {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} heeft je in een reactie genoemd",
+        "Streams\/call": "{{displayName}} belt u"
     },
     "invite": {
         "messageContent": "{{displayName}} heeft je uitgenodigd voor {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hé, kijk hier eens",
             "PleaseVisitLink": "Ga naar de volgende link:",
             "InvitingYou": "Ik nodig u uit voor {{title}}",
-            "HasInvitedYou": "{{displayName}} heeft u uitgenodigd voor {{title}}"
+            "HasInvitedYou": "{{displayName}} heeft u uitgenodigd voor {{title}}",
+            "HasMentionedYou": "{{displayName}} heeft je genoemd in &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "U bent uitgenodigd voor {{title}}. Tik op {{url}}"

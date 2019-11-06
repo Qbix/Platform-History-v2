@@ -35,7 +35,10 @@
             "message": "Želite li se pretplatiti na {{title}}?",
             "ok": "u redu",
             "cancel": "Otkazati"
-        }
+        },
+        "CreditOrDebitCard": "Kreditna ili debitna kartica",
+        "SubscribePayment": "Pretplatite se na plaćanje",
+        "ImmediatePayment": "Odmah plaćanje"
     },
     "payments": {
         "infoTitle": "Postavite podatke o plaćanju",

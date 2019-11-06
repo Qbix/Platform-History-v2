@@ -27,7 +27,8 @@
         "Unsubscribed": "Gauti pranešimus",
         "notAllowedToJoinCall": "Neturite leidimo prisijungti prie šio pokalbio.",
         "startedConversation": "pradėjo pokalbį",
-        "RealTimeCall": "Skambinimas realiuoju laiku"
+        "RealTimeCall": "Skambinimas realiuoju laiku",
+        "SearchByName": "Paieška pagal pavadinimą"
     },
     "notifications": {
         "*": "Pranešimas {{& message.fields.type}} į {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Jei norite atsisakyti prenumeratos",
         "Streams\/relatedTo\/Streams\/call": "Naujas kvietimas prasidėjo {{toTitle}}",
         "Streams\/relatedTo\/*": "Naujas {{relationDisplayType}} {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Pridėta prie {{toTitle}} kaip {{relationDisplayType}}"
+        "Streams\/relatedFrom\/*": "Pridėta prie {{toTitle}} kaip {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} paminėjo jus komentare",
+        "Streams\/call": "{{displayName}} skambina jums"
     },
     "invite": {
         "messageContent": "{{displayName}} pakvietė jus į {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Ei, patikrinkite tai",
             "PleaseVisitLink": "Apsilankykite šioje nuorodoje:",
             "InvitingYou": "Kviečiu jus {{title}}",
-            "HasInvitedYou": "{{displayName}} pakvietė jus į {{title}}"
+            "HasInvitedYou": "{{displayName}} pakvietė jus į {{title}}",
+            "HasMentionedYou": "{{displayName}} paminėjo jus „{{title}}“"
         },
         "sms": {
             "content": "Jūs esate pakviestas į {{title}}. Palieskite {{url}}"

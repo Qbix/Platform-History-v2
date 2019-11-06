@@ -27,7 +27,8 @@
         "Unsubscribed": "通知を受け取る",
         "notAllowedToJoinCall": "この会話に参加する権限がありません。",
         "startedConversation": "会話を始めた",
-        "RealTimeCall": "リアルタイム通話"
+        "RealTimeCall": "リアルタイム通話",
+        "SearchByName": "名前で検索"
     },
     "notifications": {
         "*": "メッセージ{{& message.fields.type}}から{{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "退会したい場合",
         "Streams/relatedTo/Streams/call": "{{toTitle}}に新しい通話が開始されました",
         "Streams/relatedTo/*": "{{toTitle}}の新しい{{relationDisplayType}}",
-        "Streams/relatedFrom/*": "{{relationDisplayType}}として{{toTitle}}に追加しました"
+        "Streams/relatedFrom/*": "{{relationDisplayType}}として{{toTitle}}に追加しました",
+        "Streams/mention": "{{&call 'avatar.displayName'}}はコメントであなたに言及しました",
+        "Streams/call": "{{displayName}}からの電話"
     },
     "invite": {
         "messageContent": "{{displayName}}はあなたを{{inviteUrl}}に招待しました",
@@ -76,7 +79,8 @@
             "subject": "こんにちは、これをチェックしてください",
             "PleaseVisitLink": "次のリンクにアクセスしてください。",
             "InvitingYou": "{{title}}に招待しています",
-            "HasInvitedYou": "{{displayName}}があなたを{{title}}に招待しました"
+            "HasInvitedYou": "{{displayName}}があなたを{{title}}に招待しました",
+            "HasMentionedYou": "{{displayName}}から「{{title}}」にあなたの名前があります"
         },
         "sms": {
             "content": "あなたは{{title}}に招待されました。 {{url}}をタップしてください"

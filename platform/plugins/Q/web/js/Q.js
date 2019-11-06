@@ -5793,10 +5793,6 @@ Q.ready = function _Q_ready() {
 			// Call the functions meant to be called after ready() is done
 			Q.onReady.handle.call(root, root.jQuery);
 
-			if (Q.info.isCordova && navigator.splashscreen) {
-				navigator.splashscreen.hide();
-			}
-
 			// This is an HTML document loaded from our server
 			try {
 				Q.Page.beingActivated = true;
@@ -7568,7 +7564,7 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	if (typeof media === 'function') {
 		options = onload; onload = media; media = undefined;
 	} else if (Q.isPlainObject(media) && !(media instanceof Q.Event)) {
-		options = media; media = onload = null;
+		options = media; media = null;
 	}
 	options = options || {};
 	if (!onload) {
@@ -12736,6 +12732,11 @@ Q.onInit.add(function () {
 	Q.onReady.set(function () {
 		// renew sockets when reverting to online
 		Q.onOnline.set(Q.Socket.reconnectAll, 'Q.Socket');
+
+		// iOS related code. Hide black screen on app start.
+		if (navigator.splashscreen) {
+			navigator.splashscreen.hide();
+		}
 	}, 'Q.Socket');
 	var info = Q.first(Q.info.languages);
 	if (info) {

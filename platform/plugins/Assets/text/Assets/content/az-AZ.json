@@ -35,7 +35,10 @@
             "message": "{{title}} səhifəsinə abunə olmaq istərdinizmi?",
             "ok": "tamam",
             "cancel": "Ləğv et"
-        }
+        },
+        "CreditOrDebitCard": "Kredit və ya debet kartı",
+        "SubscribePayment": "Abunə Ödəniş",
+        "ImmediatePayment": "Dərhal ödəniş"
     },
     "payments": {
         "infoTitle": "Ödəniş məlumatlarını təyin edin",

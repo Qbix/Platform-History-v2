@@ -8,7 +8,7 @@
     -webkit-transform-origin: 0 0;
 }
 
-.Assets_subscribe, .Assets_payment {
+.Assets_payment {
     margin: 10px;
 }
 
@@ -17,7 +17,6 @@
     margin: 20px;
 }
 
-.Users_loggedOut .Assets_subscription_tool,
 .Users_loggedOut .Assets_payment_tool {
 	display: none;
 }

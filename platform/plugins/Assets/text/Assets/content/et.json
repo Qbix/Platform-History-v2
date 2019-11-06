@@ -35,7 +35,10 @@
             "message": "Kas soovite tellida {{title}}?",
             "ok": "Okei",
             "cancel": "Tühista"
-        }
+        },
+        "CreditOrDebitCard": "Krediit- või deebetkaart",
+        "SubscribePayment": "Telli makse",
+        "ImmediatePayment": "Kohene makse"
     },
     "payments": {
         "infoTitle": "Määrake makseteave",

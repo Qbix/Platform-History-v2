@@ -27,7 +27,8 @@
         "Unsubscribed": "Შეტყობინებების მიღება",
         "notAllowedToJoinCall": "თქვენ არ გაქვთ ამ საუბარში მონაწილეობის უფლება.",
         "startedConversation": "დაიწყო საუბარი",
-        "RealTimeCall": "რეალურ დროში ზარი"
+        "RealTimeCall": "რეალურ დროში ზარი",
+        "SearchByName": "ძებნა სახელით"
     },
     "notifications": {
         "*": "შეტყობინება {{& message.fields.type}} {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "თუ გსურთ გაუქმება",
         "Streams\/relatedTo\/Streams\/call": "ახალი ზარი დაიწყო 999 {}} – ში",
         "Streams\/relatedTo\/*": "ახალი {999}} in {{1000}",
-        "Streams\/relatedFrom\/*": "დაამატა 99 999}} როგორც}} 1000}"
+        "Streams\/relatedFrom\/*": "დაამატა 99 999}} როგორც}} 1000}",
+        "Streams\/mention": "თქვენ 999}} მოგახსენეთ კომენტარში",
+        "Streams\/call": "999 {calling მირეკავს"
     },
     "invite": {
         "messageContent": "{{displayName}} მოიწვია თქვენ {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "ჰეი, შეამოწმეთ ეს",
             "PleaseVisitLink": "გთხოვთ ეწვიოთ შემდეგ ბმულს:",
             "InvitingYou": "მე გიწვევთ {999}}",
-            "HasInvitedYou": "{{displayName}} მოიწვია თქვენ {{title}}"
+            "HasInvitedYou": "{{displayName}} მოიწვია თქვენ {{title}}",
+            "HasMentionedYou": "99 {999}} მოგახსენეთ &quot;{{title}}&quot; -ში"
         },
         "sms": {
             "content": "თქვენ მოწვეული იყავით {{title}}. გთხოვთ {{url}}"

@@ -35,7 +35,10 @@
             "message": "Жадаеце падпісацца на {{title}}?",
             "ok": "добра",
             "cancel": "Адмяніць"
-        }
+        },
+        "CreditOrDebitCard": "Крэдытная ці дэбетавая карта",
+        "SubscribePayment": "Падпісацца на аплату",
+        "ImmediatePayment": "Неадкладная аплата"
     },
     "payments": {
         "infoTitle": "Усталюйце інфармацыю аб аплаце",

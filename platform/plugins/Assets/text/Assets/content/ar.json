@@ -35,7 +35,10 @@
             "message": "هل ترغب في الاشتراك في {{title}}؟",
             "ok": "حسنا",
             "cancel": "إلغاء"
-        }
+        },
+        "CreditOrDebitCard": "بطاقة الائتمان أو الخصم",
+        "SubscribePayment": "الاشتراك الدفع",
+        "ImmediatePayment": "الدفع الفوري"
     },
     "payments": {
         "infoTitle": "ضبط معلومات الدفع",

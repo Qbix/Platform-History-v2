@@ -27,7 +27,8 @@
         "Unsubscribed": "לקבל התראות",
         "notAllowedToJoinCall": "אין לך הרשאה להצטרף לשיחה זו.",
         "startedConversation": "פתח שיחה",
-        "RealTimeCall": "שיחה בזמן אמת"
+        "RealTimeCall": "שיחה בזמן אמת",
+        "SearchByName": "חפש לפי שם"
     },
     "notifications": {
         "*": "הודעה {{& message.fields.type}} ל {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "אם אתה רוצה לבטל את המנוי",
         "Streams\/relatedTo\/Streams\/call": "שיחה חדשה החלה ב- {{toTitle}}",
         "Streams\/relatedTo\/*": "{{relationDisplayType}} חדש ב- {{toTitle}}",
-        "Streams\/relatedFrom\/*": "נוסף ל- {{toTitle}} בתור {{relationDisplayType}}"
+        "Streams\/relatedFrom\/*": "נוסף ל- {{toTitle}} בתור {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} אזכרו אותך בתגובה",
+        "Streams\/call": "{{displayName}} מתקשר אליך"
     },
     "invite": {
         "messageContent": "{{displayName}} הזמין אותך ל {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "ללא שם: היי, לבדוק את זה",
             "PleaseVisitLink": "בקר בקישור הבא:",
             "InvitingYou": "אני מזמין אותך {{title}}",
-            "HasInvitedYou": "{{displayName}} הזמין אותך ל {{title}}"
+            "HasInvitedYou": "{{displayName}} הזמין אותך ל {{title}}",
+            "HasMentionedYou": "{{displayName}} הזכיר אותך ב&quot; {{title}} &quot;"
         },
         "sms": {
             "content": "הוזמנת ל {{title}}. הקש על {{url}}"

@@ -35,7 +35,10 @@
             "message": "Dëshironi të regjistroheni në 99 999}?",
             "ok": "Ne rregull",
             "cancel": "anuloj"
-        }
+        },
+        "CreditOrDebitCard": "Kartë krediti ose debiti",
+        "SubscribePayment": "Regjistroni Pagesën",
+        "ImmediatePayment": "Pagesa e menjëhershme"
     },
     "payments": {
         "infoTitle": "Vendosni informacionin e pagesës",

@@ -1149,8 +1149,9 @@ class Db_Mysql implements Db_Interface
 		$js_table_classes_string = '';
 		$class_name_prefix = rtrim(ucfirst($classname_prefix), "._");
 		
+		$class_extras = $js_class_extras = '';
+		
 		$filenames = array();
-
 		foreach ($rows as $row) {
 			$table_name = $row[0];
 			$table_name_base = substr($table_name, $prefix_len);
@@ -2342,7 +2343,7 @@ $dc
  */
 EOT;
 			$required = !$field_nulls[$k] && $default == '"null"';
-			$js_properties2[$k] = $required_fields_string
+			$js_properties2[$k] = !empty($required_fields_string)
 				? " * @param {".$tmp[0]."} \$fields.".$tmp[1]
 				: " * @param {".$tmp[0]."} [\$fields.".$tmp[1]."] defaults to $default";
 		}

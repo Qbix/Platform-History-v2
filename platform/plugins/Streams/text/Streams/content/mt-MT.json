@@ -27,7 +27,8 @@
         "Unsubscribed": "Ikseb Notifiki",
         "notAllowedToJoinCall": "M&#39;għandekx permess biex tissieħeb f&#39;din il-konversazzjoni.",
         "startedConversation": "bdiet konverżazzjoni",
-        "RealTimeCall": "Sejħa f&#39;ħin Reali"
+        "RealTimeCall": "Sejħa f&#39;ħin Reali",
+        "SearchByName": "Fittex bl-isem"
     },
     "notifications": {
         "*": "Messaġġ {{& message.fields.type}} lil {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Jekk trid tabbona",
         "Streams/relatedTo/Streams/call": "Sejħa Ġdida Beda f &#39;{{toTitle}}",
         "Streams/relatedTo/*": "Ġdid {{relationDisplayType}} f &#39;{{toTitle}}",
-        "Streams/relatedFrom/*": "Miżjud ma &#39;{{toTitle}} bħala {{relationDisplayType}}"
+        "Streams/relatedFrom/*": "Miżjud ma &#39;{{toTitle}} bħala {{relationDisplayType}}",
+        "Streams/mention": "{{&call 'avatar.displayName'}} semmejt f&#39;kumment",
+        "Streams/call": "{{displayName}} qed isejjaħlek"
     },
     "invite": {
         "messageContent": "{{displayName}} stiednek biex {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Ħej, iċċekkja dan",
             "PleaseVisitLink": "Jekk jogħġbok żur il-link li ġejja:",
             "InvitingYou": "Qed nistiednek għal {{title}}",
-            "HasInvitedYou": "{{displayName}} stiednek biex {{title}}"
+            "HasInvitedYou": "{{displayName}} stiednek biex {{title}}",
+            "HasMentionedYou": "{{displayName}} semmejt f &#39;&quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Int ġejt mistiedna għal {{title}}. Jekk jogħġbok vit {{url}}"

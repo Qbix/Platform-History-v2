@@ -27,7 +27,8 @@
         "Unsubscribed": "Cael Hysbysiadau",
         "notAllowedToJoinCall": "Nid oes gennych ganiatâd i ymuno â&#39;r sgwrs hon.",
         "startedConversation": "cychwyn sgwrs",
-        "RealTimeCall": "Galwad Amser Real"
+        "RealTimeCall": "Galwad Amser Real",
+        "SearchByName": "Chwilio yn ôl enw"
     },
     "notifications": {
         "*": "Neges {{& message.fields.type}} i {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Os ydych chi eisiau dad-danysgrifio",
         "Streams/relatedTo/Streams/call": "Galwad Newydd Dechreuwyd yn {{toTitle}}",
         "Streams/relatedTo/*": "Newydd {{relationDisplayType}} yn {{toTitle}}",
-        "Streams/relatedFrom/*": "Ychwanegwyd at {{toTitle}} fel {{relationDisplayType}}"
+        "Streams/relatedFrom/*": "Ychwanegwyd at {{toTitle}} fel {{relationDisplayType}}",
+        "Streams/mention": "Soniodd {{&call 'avatar.displayName'}} amdanoch mewn sylw",
+        "Streams/call": "Mae {{displayName}} yn eich galw chi"
     },
     "invite": {
         "messageContent": "Gwahoddwyd {{displayName}} i {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hey, gwiriwch hyn",
             "PleaseVisitLink": "Ewch i&#39;r ddolen ganlynol:",
             "InvitingYou": "Rwy&#39;n eich gwahodd i {{title}}",
-            "HasInvitedYou": "Mae {{displayName}} wedi eich gwahodd i {{title}}"
+            "HasInvitedYou": "Mae {{displayName}} wedi eich gwahodd i {{title}}",
+            "HasMentionedYou": "Mae {{displayName}} wedi sôn amdanoch chi yn &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Fe&#39;ch gwahoddwyd i {{title}}. Defnyddiwch tap {{url}}"

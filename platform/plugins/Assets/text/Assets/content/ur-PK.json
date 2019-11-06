@@ -35,7 +35,10 @@
             "message": "کیا آپ {{999} subs کو سبسکرائب کرنا چاہیں گے؟",
             "ok": "ٹھیک ہے",
             "cancel": "منسوخ کریں"
-        }
+        },
+        "CreditOrDebitCard": "کریڈٹ یا ڈیبٹ کارڈ",
+        "SubscribePayment": "ادائیگی کو سبسکرائب کریں",
+        "ImmediatePayment": "فوری ادائیگی"
     },
     "payments": {
         "infoTitle": "ادائیگی کی معلومات مرتب کریں۔",

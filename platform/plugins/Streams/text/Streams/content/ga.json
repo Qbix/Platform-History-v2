@@ -27,7 +27,8 @@
         "Unsubscribed": "Faigh Fógraí",
         "notAllowedToJoinCall": "Níl cead agat an comhrá seo a dhéanamh.",
         "startedConversation": "thosaigh comhrá",
-        "RealTimeCall": "Glao Ama Fíor-Ama"
+        "RealTimeCall": "Glao Ama Fíor-Ama",
+        "SearchByName": "Cuardaigh de réir ainm"
     },
     "notifications": {
         "*": "Teachtaireacht {{& message.fields.type}} go {{& stream.fields.title}}",
@@ -47,7 +48,9 @@
         "IfUnsubscribe": "Más mian leat díliostáil",
         "Streams\/relatedTo\/Streams\/call": "Glao Nua Glactha i {{toTitle}}",
         "Streams\/relatedTo\/*": "Nua {{relationDisplayType}} i {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Curtha le {{toTitle}} mar {{relationDisplayType}}"
+        "Streams\/relatedFrom\/*": "Curtha le {{toTitle}} mar {{relationDisplayType}}",
+        "Streams\/mention": "Luaigh {{&call 'avatar.displayName'}} tú trácht",
+        "Streams\/call": "Tá {{displayName}} ag glaoch ort"
     },
     "invite": {
         "messageContent": "Thug {{displayName}} cuireadh duit {{inviteUrl}}",
@@ -76,7 +79,8 @@
             "subject": "Hey, seiceáil seo amach",
             "PleaseVisitLink": "Tabhair cuairt ar an nasc seo a leanas:",
             "InvitingYou": "Táim ag tabhairt cuireadh duit {{title}}",
-            "HasInvitedYou": "Thug {{displayName}} cuireadh duit {{title}}"
+            "HasInvitedYou": "Thug {{displayName}} cuireadh duit {{title}}",
+            "HasMentionedYou": "Luaigh {{displayName}} tú i &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Tugadh cuireadh duit {{title}}. Le do thoil bain úsáid as {{url}}"

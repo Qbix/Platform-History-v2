@@ -35,7 +35,10 @@
             "message": "શું તમે {{999} to પર સબ્સ્ક્રાઇબ કરવા માંગો છો?",
             "ok": "ઠીક છે",
             "cancel": "રદ કરો"
-        }
+        },
+        "CreditOrDebitCard": "ક્રેડિટ અથવા ડેબિટ કાર્ડ",
+        "SubscribePayment": "ચુકવણી સબ્સ્ક્રાઇબ કરો",
+        "ImmediatePayment": "તાત્કાલિક ચુકવણી"
     },
     "payments": {
         "infoTitle": "ચુકવણીની માહિતી સેટ કરો",
