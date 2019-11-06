@@ -901,13 +901,91 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			} else {
 				Q.addScript([
 					"https://requirejs.org/docs/release/2.2.0/minified/require.js",
-					"{{Streams}}/js/tools/webrtc/app.js?ts=" + Date.now()
+					"{{Streams}}/js/tools/webrtc/app.js?ts=" + Date.now(),
+					"{{Streams}}/js/tools/webrtc/RecordRTC.js"
 				], function () {
+
+					var gApi = document.createElement('SCRIPT');
+					gApi.src = 'https://apis.google.com/js/api.js';
+					gApi.defer = true;
+					gApi.async = true;
+					gApi.onload = function(){
+						youtubeApi.handleClientLoad();
+					}
+					gApi.onreadystatechange = function(){
+						if (this.readyState === 'complete') this.onload()
+					}
+					document.head.appendChild(gApi);
 					initConference();
 				});
 			}
 
 		}
+
+		var youtubeApi = (function () {
+			var api = {};
+			var CLIENT_ID = '';
+			var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
+			var SCOPES = 'https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube';
+			var DRIVE_UPLOAD_URL = 'https://www.googleapis.com/upload/drive/v2/files/';
+			var ACCESS_TOKEN;
+
+			var defchannel = 'dechguyweb';
+
+			function updateSigninStatus(isSignedin) {
+				console.log('updateSigninStatus', isSignedin)
+				if(isSignedin) {
+					ACCESS_TOKEN = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
+				} else {
+					ACCESS_TOKEN = null;
+				}
+			}
+
+			api.login = function () {
+				gapi.auth2.getAuthInstance().signIn();
+			}
+
+			api.logOut = function ()  {
+				gapi.auth2.getAuthInstance().signOut();
+			}
+
+			api.getChannel = function (channel) {
+				gapi.client.youtube.channels.list({
+					'part': 'snippet,contentDetails,statistics',
+					'forUsername': 'GoogleDevelopers'
+				}).then(function(response) {
+					console.log(response)
+				});
+			}
+
+			function initClient() {
+				gapi.client.init({
+					discoveryDocs: DISCOVERY_DOCS,
+					clientId: CLIENT_ID,
+					scope: SCOPES
+				}).then(function () {
+					// Listen for sign-in state changes.
+					gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+					// Handle the initial sign-in state.
+					updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+					/*authorizeButton.onclick = handleAuthClick;
+					signoutButton.onclick = handleSignoutClick;*/
+				});
+			}
+
+			api.handleClientLoad = function () {
+				gapi.load('client:auth2', initClient);
+
+				Q.addScript([
+					"{{Streams}}/js/tools/webrtc/upload_video.js",
+					"{{Streams}}/js/tools/webrtc/cors_upload.js"
+				], function () {
+
+				});
+			}
+
+			return api;
+		}())
 
 		/**
 		 * Render screens of all participants in the room
@@ -2911,7 +2989,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			},
 			options: function () {
 				return _options;
-			}
+			},
+			loader: connectionState
 		};
 
 		return webRTCInstance;
