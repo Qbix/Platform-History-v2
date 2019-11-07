@@ -5847,7 +5847,7 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
 				for (var k in data) {
 					Q.setObject(k, data[k]);
 				}
-			});
+			}
 		});
 	}
 	Q.req('Q/nonce', 'data', function _Q_loadNonce_nonceLoaded(err, data) {
