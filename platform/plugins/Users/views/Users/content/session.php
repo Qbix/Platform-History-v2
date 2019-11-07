@@ -2,6 +2,9 @@
 	<?php Q_Response::addScriptLine(<<<EOT
 		function _login() {
 			Q.Users.login({
+			    fullscreen: true,
+			    noClose: true,
+			    closeOnEsc: false,
 				onSuccess: function () {
 					// now we are signed in
 					window.location.reload(true)
@@ -20,7 +23,4 @@
 		});
 EOT
 	); ?>
-	<div id="Users_session_buttons">
-		<a class="Q_button" id="Users_login"><?php echo $session['GetStarted'] ?></a>
-	</div>
 </div>

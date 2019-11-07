@@ -670,7 +670,7 @@
 					? {facebook: appId}
 					: {};
 				// set up dialog
-				login_setupDialog(usingPlatforms, o.scope, o.dialogContainer, o.identifierType);
+				login_setupDialog(usingPlatforms, o);
 				priv.login_onConnect = _onConnect;
 				priv.login_onCancel = _onCancel;
 				priv.linkToken = null;
@@ -1461,7 +1461,7 @@
 	 * Set up login dialog.
 	 * login_setupDialog.dialog will contain the dialog
 	 */
-	function login_setupDialog(usingPlatforms, scope, dialogContainer, identifierType) {
+	function login_setupDialog(usingPlatforms, options) {
 		$('#Users_login_step1_form').data('used', null);
 		if (login_setupDialog.dialog) {
 			return;
@@ -1472,7 +1472,7 @@
 		// step1_form request identifier
 		var placeholder = Q.text.Users.login.placeholders.identifier;
 		var type = Q.info.isTouchscreen ? 'email' : 'text';
-		var parts = identifierType ? identifierType.split(',') : [];
+		var parts = options.identifierType ? options.identifierType.split(',') : [];
 		if (parts.length === 1) {
 			if (parts[0] == 'email') {
 				type = 'email';
@@ -1517,7 +1517,7 @@
 			identifierInput
 		).append(
 			$('<input id="Users_login_identifierType" type="hidden" name="identifierType" />')
-			.val(identifierType)
+			.val(options.identifierType)
 		).append($a)
 		.append(
 			$('<div id="Users_login_explanation" />').html(Q.text.Users.login.explanation)
@@ -1586,7 +1586,7 @@
 						.click(function () {
 							Users.initFacebook(function () {
 								Users.Facebook.usingPlatforms = usingPlatforms;
-								Users.Facebook.scope = scope;
+								Users.Facebook.scope = options.scope;
 								Users.Facebook.login();
 							}, {
 								appId: appId
@@ -1617,10 +1617,12 @@
 		login_setupDialog.dialog = dialog;
 		dialog.append(titleSlot)
 			.append(dialogSlot)
-			.prependTo(dialogContainer)
+			.prependTo(options.dialogContainer)
 			.plugin('Q/dialog', {
 				alignByParent: false,
-				fullscreen: false,
+				fullscreen: !!options.fullscreen,
+				noClose: !!options.noClose,
+				closeOnEsc: Q.typeOf(options.closeOnEsc) === 'undefined' ? true : !!options.closeOnEsc,
 				beforeLoad: function () {
 					$('#Users_login_step1').css('opacity', 1).nextAll().hide();
 					$('input[type!=hidden]', dialog).val('');
