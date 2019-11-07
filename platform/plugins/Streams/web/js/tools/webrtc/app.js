@@ -69,6 +69,7 @@ window.WebRTCconferenceLib = function app(options){
 	var _usesUnifiedPlan =  RTCRtpTransceiver.prototype.hasOwnProperty('currentDirection');
 
 	var pc_config = {
+		/*"iceTransportPolicy": "relay",*/
 		"iceServers": [
 			{
 				"urls": "stun:stun.l.google.com:19302"
@@ -1203,8 +1204,8 @@ window.WebRTCconferenceLib = function app(options){
 				if (track.kind == 'audio') localParticipant.audioStream = stream;
 			}
 
-			//var supportableFormats = supportsVideoType(remoteStreamEl);
-			//log('createTrackElement: supportsVideoType', supportableFormats)
+			var supportableFormats = supportsVideoType(remoteStreamEl);
+			log('createTrackElement: supportsVideoType', supportableFormats)
 			remoteStreamEl.onload = function () {
 				log('createTrackElement: onload', remoteStreamEl)
 			}
@@ -1425,16 +1426,21 @@ window.WebRTCconferenceLib = function app(options){
 
 		}
 
-		var fbLive = (function () {
-			console.log('fbLive');
-			var _streamingSocket;
+		var canvasComposer = (function () {
+
+			var _composerOptions = {
+				useRecordRTCLibrary: false,
+				drawBackground: false,
+			}
+
+			var _canvas = null;
 			var _canvasMediStream = null;
 			var _mediaRecorder = null;
-			var _fbUserId = null;
+			var _dataListeners = [];
+
 			var videoComposer = (function () {
 				var _streams = [];
 				var _size = {width:640, height: 480};
-				var _canvas = null;
 				var _inputCtx = null;
 				var _outputCtx = null;
 				var _isActive = null;
@@ -1446,181 +1452,6 @@ window.WebRTCconferenceLib = function app(options){
 				_backgroundVideo.src = 'https://www.w3schools.com/html/mov_bbb.mp4';
 				_backgroundVideo.muted = true;
 				_backgroundVideo.loop = true;
-
-				var _fbApiInited;
-				var _fbStreamUrl;
-
-				function goLiveDialog() {
-					console.log('goLiveDialog')
-					//return connect('123', captureStreamAndSend);
-					var goLive = function() {
-						FB.ui({
-							display: 'touch',
-							method: 'live_broadcast',
-							phase: 'create'
-						}, (createRes) => {
-
-							FB.ui({
-								display: 'touch',
-								method: 'live_broadcast',
-								phase: 'publish',
-								broadcast_data: createRes
-							}, (publishRes) => {
-								console.log('goLiveDialog', publishRes);
-								if(publishRes == null || typeof publishRes == 'undefined') {
-									app.screensInterface.fbLive.endStreaming();
-								} else {
-									var videoLink = 'https://www.facebook.com/' + _fbUserId + '/videos/' +  publishRes.id;
-									var videoPlayerLink = 'https://www.facebook.com/plugins/video.php?href=' + encodeURI(videoLink) + '&show_text=0&width=560';
-									app.event.dispatch('facebookLiveStreamingStarted',{
-										'videoId': publishRes.id,
-										'userId': _fbUserId,
-										'link': videoLink,
-										'videoPlayerLink': videoPlayerLink
-									});
-
-									FB.api('/me', function(response) {
-
-
-										console.log('fbinfo', response)
-									});
-
-								}
-							});
-
-							console.log('goLiveDialog', createRes);
-							connect(createRes.secure_stream_url, captureStreamAndSend);
-						});
-					}
-
-					FB.getLoginStatus(function(response){
-						console.log('getLoginStatus', response)
-						if (response.status === 'connected') {
-							_fbApiInited = true;
-							_fbUserId = response.authResponse.userID;
-							goLive();
-						} else {
-							FB.login(function(response) {
-								if (response.authResponse) {
-									_fbApiInited = true;
-									_fbUserId = response.authResponse.userID;
-									goLive();
-								}
-							}, {scope: 'email,public_profile,publish_video'});
-
-						}
-
-					});
-
-				}
-
-				function connect(streamUrl, callback) {
-					if(typeof io == 'undefined') return;
-					var secure = options.nodeServer.indexOf('https://') == 0;
-					_streamingSocket = io.connect(options.nodeServer, {
-						query: {
-							rtmp: streamUrl
-						},
-						transports: ['websocket'],
-						'force new connection': true,
-						secure:secure,
-						reconnection: true,
-						reconnectionDelay: 1000,
-						reconnectionDelayMax: 5000,
-						reconnectionAttempts: 5
-					});
-					_streamingSocket.on('connect', function () {
-						if(callback != null) callback();
-					});
-					window.streamingSocket = _streamingSocket;
-				}
-
-				function captureStreamAndSend() {
-					_canvasMediStream = _canvas.captureStream(30); // 30 FPS
-
-					audioComposer.mix();
-
-					_mediaRecorder = new MediaRecorder(_canvasMediStream, {
-						mimeType: 'video/webm;codecs=h264',
-						videoBitsPerSecond : 3 * 1024 * 1024
-					});
-
-					_mediaRecorder.onerror = function(e) {
-						console.error(e);
-					}
-
-					console.log('captureStreamAndSend mediaRecorder', _mediaRecorder);
-
-					_mediaRecorder.addEventListener('dataavailable', function(e) {
-						console.log('captureStreamAndSend send', e);
-
-						_streamingSocket.emit('Streams/webrtc/videoData', e.data);
-					});
-					//_mediaRecorder.addEventListener('stop', _streamingSocket.disconnect());
-
-					_mediaRecorder.start(1000); // Start recording, and dump data every second
-
-					_streamingSocket.on('close', function () {
-						alert('disconnected')
-						_mediaRecorder.stop();
-					});
-
-					///playCanvasStream();
-				}
-
-				function playCanvasStream(){
-
-					var canvasVideo = document.createElement("VIDEO");
-					canvasVideo.style.position = 'absolute';
-					canvasVideo.style.top = '0';
-					canvasVideo.style.left = '0';
-					canvasVideo.style.zIndex = '9999999999999999999';
-					canvasVideo.style.width = '300px';
-					canvasVideo.style.height = '300px';
-
-					document.body.appendChild(canvasVideo);
-					canvasVideo.oncanplay = function (e) {
-						canvasVideo.play();
-					}
-					canvasVideo.play();
-					var mediaSource = new MediaSource();
-					canvasVideo.src = URL.createObjectURL(mediaSource);
-					var sourceBuffer;
-					window.segments = [];
-					mediaSource.addEventListener('sourceopen', function (e) {
-						console.log("sourceopen");
-						sourceBuffer = mediaSource.addSourceBuffer('video/webm; codecs="opus,h264"');
-						window.sourceBuffer = sourceBuffer;
-					}, false);
-					mediaSource.addEventListener('error', function (e) {
-						console.log("error", e)
-					}, false);
-
-					_mediaRecorder.addEventListener('dataavailable', function(e) {
-						console.log('captureStreamAndSend send', e);
-
-						var reader = new FileReader();
-						reader.addEventListener("loadend", function () {
-							var arr = new Uint8Array(reader.result);
-							console.log('reader.result',arr)
-							window.segments.push(arr);
-
-							console.log('mediaSource.readyState', mediaSource.readyState, sourceBuffer.updating)
-							if (
-								mediaSource.readyState === "open" &&
-								sourceBuffer &&
-								sourceBuffer.updating === false
-							)
-							{
-								//sourceBuffer.appendBuffer(arrayOfBlobs.shift());
-								window.sourceBuffer.appendBuffer(window.segments.shift());
-								canvasVideo.play();
-
-							}
-						});
-						reader.readAsArrayBuffer(e.data);
-					});
-				}
 
 
 				function createCanvas() {
@@ -1641,13 +1472,10 @@ window.WebRTCconferenceLib = function app(options){
 
 					_canvas = videoCanvas;
 
-					app.event.on('facebookLiveStreamingStarted', function () {
-
-					});
 				}
 				createCanvas();
 
-				function updateCanvasLayout(callback) {
+				function updateCanvasLayout() {
 					var layoutRects = layoutGenerator('tiledHorizontalMobile');
 					console.log('updateCanvasLayout');
 
@@ -1714,7 +1542,6 @@ window.WebRTCconferenceLib = function app(options){
 					}
 				}
 
-
 				function moveit(timestamp, rectToUpdate, distRect, startPositionRect, duration, starttime, a){
 					var timestamp = timestamp || new Date().getTime()
 					var runtime = timestamp - starttime
@@ -1741,8 +1568,8 @@ window.WebRTCconferenceLib = function app(options){
 
 				function drawVideosOnCanvas() {
 					_inputCtx.clearRect(0, 0, _size.width, _size.height);
-					//_inputCtx.drawImage(_background,0,0);
-					//drawBackground(_background)
+					if(_composerOptions.drawBackground && _background != null) drawBackground(_background);
+
 					for(let i in _streams) {
 						let streamData = _streams[i];
 
@@ -1854,6 +1681,7 @@ window.WebRTCconferenceLib = function app(options){
 				}
 
 				function compositeVideosAndDraw() {
+					if(_isActive) return;
 					if(!document.body.contains(_canvas)) document.body.appendChild(_canvas);
 
 					updateCanvasLayout();
@@ -1871,132 +1699,6 @@ window.WebRTCconferenceLib = function app(options){
 						}
 					});
 				}
-
-				function putVideoOnCanvas(data, callback) {
-					//return;7
-					log('putVideoOnCanvas');
-
-					var mediaStreamId = 0;
-					//var localVideo = screen.videoTrack;
-					var canvasWidth;
-					var canvasHeight;
-					var videoWidth;
-					var videoHeight;
-
-
-					var background = new Image();
-					background.src = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80";
-
-
-					function drawVideoToCanvas(localVideo, data, canvasWidth, canvasHeight, videoWidth, videoHeight) {
-						//_inputCtx.translate(data.rect.x, data.rect.y);
-
-
-						var currentWidth = data.htmlVideoEl.videoWidth;
-						var currentHeight = data.htmlVideoEl.videoHeight;
-						var rectWidth, rectHeight;
-						var wrh = currentWidth / currentHeight;
-						rectWidth = data.rect.width;
-						rectHeight = rectWidth / wrh;
-						if (rectHeight > data.rect.height) {
-							rectHeight = data.rect.height;
-							rectWidth = rectHeight * wrh;
-						}
-
-						if(data.widthLog != null && data.heightLog != null) {
-							if(data.widthLog !=currentWidth || data.heightLog != currentHeight) {
-								//alert('dimensions changed');
-								console.log('dimensions changed width: ' + data.widthLog + ' -> ' + currentWidth);
-								console.log('dimensions changed height: ' + data.heightLog + ' -> ' + currentHeight);
-							}
-						}
-						//console.log('drawImage',  data.rect.width,  data.rect.height);
-
-						data.widthLog = currentWidth;
-						data.heightLog = currentHeight;
-						data.widthLog = currentWidth;
-						data.heightLog = currentHeight;
-
-						var widthToGet = data.rect.width, heightToGet = data.rect.height, ratio = data.rect.width / data.rect.height;
-						//console.log('ratio', ratio)
-
-						if(data.rect.height > data.rect.width) {
-							if (currentHeight < data.rect.height) {
-								heightToGet = currentHeight;
-								widthToGet = heightToGet * ratio;
-							} else {
-								heightToGet = data.rect.height;
-							}
-						} else {
-							if (currentWidth < data.rect.width) {
-								widthToGet = currentWidth;
-								heightToGet = widthToGet / ratio;
-							} else {
-								widthToGet = data.rect.width;
-							}
-						}
-						_inputCtx.drawImage( localVideo,
-							(currentWidth/2) - (widthToGet / 2), (currentHeight/2) - (heightToGet / 2),
-							widthToGet, heightToGet,
-							data.rect.x, data.rect.y,
-							data.rect.width, data.rect.height);
-
-						_inputCtx.fillStyle = "black";
-						_inputCtx.fillRect(0,  0, data.rect.width, 36);
-
-						_inputCtx.font = "16px Arial";
-						_inputCtx.fillStyle = "white";
-						_inputCtx.fillText(data.name, 10, 36 + 16 - 18 - 8);
-
-						//_inputCtx.translate(-data.rect.x, -data.rect.y);
-
-						//var pixelData = _inputCtx.getImageData( 0, 0, videoWidth, videoHeight );
-
-						//_outputCtx.putImageData( pixelData, 0, 0);
-						if(data.participant.online == false) return;
-						requestAnimationFrame( function () {
-							drawVideoToCanvas(localVideo, data, canvasWidth, canvasHeight, videoWidth, videoHeight);
-						} );
-					}
-
-					function start() {
-						var waitingVideoTimer = setInterval(function () {
-							if(document.documentElement.contains(data.htmlVideoEl)) {
-
-								videoWidth = data.htmlVideoEl.videoWidth;
-								videoHeight = data.htmlVideoEl.videoHeight;
-								drawVideoToCanvas(data.htmlVideoEl, data, _size.width, _size.height, videoWidth, videoHeight);
-								_isActive = true;
-
-								app.event.on('videoTrackLoaded', function () {
-									if(_isActive == true) {
-										updateCanvasLayout();
-									}
-								})
-								app.event.on('participantDisconnected', function (participant) {
-									if(_isActive == true) {
-										updateCanvasLayout();
-									}
-								})
-
-								if(callback != null) callback();
-								clearInterval(waitingVideoTimer);
-								waitingVideoTimer = null;
-							}
-
-						}, 500);
-					}
-
-
-					if(data.htmlVideoEl.videoWidth != null && data.htmlVideoEl.videoHeight) {
-						start();
-					} else {
-						data.htmlVideoEl.addEventListener('loadedmetadata', function () {
-							start();
-						})
-					}
-				}
-
 
 				function layoutGenerator(layoutName) {
 
@@ -2140,10 +1842,8 @@ window.WebRTCconferenceLib = function app(options){
 				}
 
 				return {
-					goLiveDialog: goLiveDialog,
 					updateCanvasLayout: updateCanvasLayout,
 					compositeVideosAndDraw: compositeVideosAndDraw,
-					captureStreamAndSend: captureStreamAndSend,
 					stop: stopAndRemove,
 					isActive: isActive,
 				}
@@ -2151,10 +1851,10 @@ window.WebRTCconferenceLib = function app(options){
 
 			var audioComposer = (function(){
 				var audio = new AudioContext();
+				var _dest;
 
 				function mix() {
-					var dest = audio.createMediaStreamDestination();
-					window.dest = dest;
+					_dest = audio.createMediaStreamDestination();
 					let participants = app.roomParticipants();
 					let tracksNum = 0;
 					participants.forEach(function(participant) {
@@ -2164,12 +1864,12 @@ window.WebRTCconferenceLib = function app(options){
 							console.log('audioComposer add stream', audiotracks);
 
 							const source = audio.createMediaStreamSource(audiotracks[0].stream);
-							source.connect(dest);
+							source.connect(_dest);
 							tracksNum++;
 						}
 					});
 
-					console.log('audioComposer dest.stream.getTracks()', dest.stream.getTracks());
+					console.log('audioComposer dest.stream.getTracks()', _dest.stream.getTracks());
 					let silence = () => {
 						let ctx = new AudioContext(), oscillator = ctx.createOscillator();
 						let dst = oscillator.connect(ctx.createMediaStreamDestination());
@@ -2178,66 +1878,263 @@ window.WebRTCconferenceLib = function app(options){
 					}
 
 					if(tracksNum != 0){
-						_canvasMediStream.addTrack(dest.stream.getTracks()[0]);
+						_canvasMediStream.addTrack(_dest.stream.getTracks()[0]);
 					} else {
 						var silentTrack = silence();
 						var silentStream = new MediaStream();
 						silentStream.addTrack(silentTrack);
 						let source = audio.createMediaStreamSource(silentStream);
-						source.connect(window.dest);
-						_canvasMediStream.addTrack(dest.stream.getTracks()[0]);
+						source.connect(_dest);
+						_canvasMediStream.addTrack(_dest.stream.getTracks()[0]);
 
 					}
 
-					console.log('audioComposer mix')
 					app.event.on('audioTrackLoaded', function(e) {
-
-						var audiotracks = _canvasMediStream.getAudioTracks();
-						console.log('audioTrackLoaded audioTrackLoaded audiotracks', audiotracks);
-						console.log('audioTrackLoaded audioTrackLoaded e.track.mediaStreamTrack', e.track.mediaStreamTrack);
-
-
-						console.log('audioTrackLoaded dest trackd', dest.stream.getTracks());
-
+						if(_canvasMediStream == null || _dest == null) return;
 						let source = audio.createMediaStreamSource(e.track.stream);
-						source.connect(window.dest);
-
-						//_canvasMediStream.removeTrack(audiotracks[0]);
-						//_mediaRecorder.pause()
-						//_canvasMediStream.addTrack(window.dest.stream.getTracks()[0]);
-						//_mediaRecorder.resume()
-
-						//_canvasMediStream.addTrack(e.track.mediaStreamTrack);
+						source.connect(_dest);
 					})
+				}
 
-
+				function stop() {
+					if(_dest != null) _dest.disconnect();
+					_dest = null;
 				}
 
 				return {
-					mix: mix
+					mix: mix,
+					stop: stop
 				}
 			}());
+
+			function addDataListener(callbackFunction) {
+				_dataListeners.push(callbackFunction);
+			}
+
+			function removeDataListener(callbackFunction) {
+				console.log('removeDataListener');
+				var index = _dataListeners.indexOf(callbackFunction);
+				console.log('removeDataListener index', index);
+
+				if (index > -1) {
+					_dataListeners.splice(index, 1);
+				}
+			}
+
+			function trigerDataListeners(blob) {
+				for(let i in _dataListeners) {
+					_dataListeners[i](blob);
+				}
+			}
+
+			function captureStream(ondataavailable) {
+				if(ondataavailable != null){
+					addDataListener(ondataavailable);
+					console.log('_dataListeners', _dataListeners);
+				}
+
+				if(_composerOptions.useRecordRTCLibrary) {
+					videoComposer.compositeVideosAndDraw();
+
+					_canvasMediStream = canvasComposer.canvas().captureStream(30);
+					audioComposer.mix();
+					_mediaRecorder = RecordRTC(_canvasMediStream, {
+						recorderType:MediaStreamRecorder,
+						mimeType: 'video/webm;codecs=h264',
+						timeSlice: 1000,
+						ondataavailable:trigerDataListeners
+					});
+					_mediaRecorder.startRecording();
+				} else {
+
+					if(_mediaRecorder != null){
+						return;
+					}
+
+					videoComposer.compositeVideosAndDraw();
+
+					_canvasMediStream = _canvas.captureStream(30); // 30 FPS
+
+					audioComposer.mix();
+
+					_mediaRecorder = new MediaRecorder(_canvasMediStream, {
+						//mimeType: 'video/webm',
+						mimeType: 'video/webm;codecs=h264',
+						videoBitsPerSecond : 3 * 1024 * 1024
+					});
+
+					_mediaRecorder.onerror = function(e) {
+						console.error(e);
+					}
+
+					_mediaRecorder.addEventListener('dataavailable', function(e) {
+						trigerDataListeners(e.data);
+					});
+
+					console.log('captureStream mediaRecorder', _mediaRecorder);
+
+					_mediaRecorder.start(1000); // Start recording, and dump data every second
+				}
+
+			}
+
+			function stopRecorder() {
+				if(_mediaRecorder == null) return;
+				if(_composerOptions.useRecordRTCLibrary) {
+					_mediaRecorder.stopRecording();
+				} else {
+					_mediaRecorder.stop();
+				}
+				videoComposer.stop();
+				audioComposer.stop();
+			}
+
+			function stopCanvasRendering() {
+				videoComposer.stop();
+			}
+
+			function stopAudioMixing() {
+				audioComposer.stop();
+			}
 
 			return {
 				videoComposer: videoComposer,
 				audioComposer: audioComposer,
+				captureStream: captureStream,
+				addDataListener: addDataListener,
+				removeDataListener: removeDataListener,
+				mediaRecorder: function () {
+					return _mediaRecorder;
+				},
+				canvas: function () {
+					return _canvas;
+				},
+				endStreaming: function () {
+					console.log('goLiveDialog end streaming');
+					stopRecorder();
+				},
+				stopRecorder: stopRecorder,
+				isActive: function () {
+					if(_mediaRecorder != null) return true;
+					return false;
+				}
+			}
+		}())
+
+
+		var fbLive = (function () {
+			console.log('fbLive');
+			var fbliveOptions = {
+				createLiveViaPHPSDK: true,
+			};
+			var _streamingSocket;
+			var _fbUserId = null;
+
+			var _fbApiInited;
+			var _fbStreamUrl;
+
+			function goLiveDialog() {
+				console.log('goLiveDialog')
+				//return connect('123', captureStreamAndSend);
+				var goLive = function() {
+					FB.ui({
+						display: 'touch',
+						method: 'live_broadcast',
+						phase: 'create'
+					}, (createRes) => {
+
+						FB.ui({
+							display: 'touch',
+							method: 'live_broadcast',
+							phase: 'publish',
+							broadcast_data: createRes
+						}, (publishRes) => {
+							console.log('goLiveDialog', publishRes);
+							if(publishRes == null || typeof publishRes == 'undefined') {
+								app.screensInterface.fbLive.endStreaming();
+							} else {
+								var videoLink = 'https://www.facebook.com/' + _fbUserId + '/videos/' +  publishRes.id;
+								var videoPlayerLink = 'https://www.facebook.com/plugins/video.php?href=' + encodeURI(videoLink) + '&show_text=0&width=560';
+								app.event.dispatch('facebookLiveStreamingStarted',{
+									'videoId': publishRes.id,
+									'userId': _fbUserId,
+									'link': videoLink,
+									'videoPlayerLink': videoPlayerLink
+								});
+
+								FB.api('/me', function(response) {
+
+
+									console.log('fbinfo', response)
+								});
+
+							}
+						});
+
+						console.log('goLiveDialog', createRes);
+						connect(createRes.secure_stream_url, captureStreamAndSend);
+					});
+				}
+
+				FB.getLoginStatus(function(response){
+					console.log('getLoginStatus', response)
+					if (response.status === 'connected') {
+						_fbApiInited = true;
+						_fbUserId = response.authResponse.userID;
+						goLive();
+					} else {
+						FB.login(function(response) {
+							if (response.authResponse) {
+								_fbApiInited = true;
+								_fbUserId = response.authResponse.userID;
+								goLive();
+							}
+						}, {scope: 'email,public_profile,publish_video'});
+
+					}
+
+				});
+
+			}
+
+			function connect(streamUrl, callback) {
+				if(typeof io == 'undefined') return;
+
+				var secure = options.nodeServer.indexOf('https://') == 0;
+				_streamingSocket = io.connect(options.nodeServer, {
+					query: {
+						rtmp: streamUrl
+					},
+					transports: ['websocket'],
+					'force new connection': true,
+					secure:secure,
+					reconnection: true,
+					reconnectionDelay: 1000,
+					reconnectionDelayMax: 5000,
+					reconnectionAttempts: 5
+				});
+				_streamingSocket.on('connect', function () {
+					if(callback != null) callback();
+				});
+				window.streamingSocket = _streamingSocket;
+			}
+
+			return {
 				goLive: function () {
 					console.log('goLiveDialog goLive');
 
-					try {
+					/*try {
 
 						videoComposer.compositeVideosAndDraw();
 						videoComposer.goLiveDialog();
 					} catch (e) {
 						console.error(e);
-					}
+					}*/
 				},
 				endStreaming: function () {
 					console.log('goLiveDialog end streaming');
 
-					if(_mediaRecorder != null) _mediaRecorder.stop();
-
-					videoComposer.stop();
+					canvasComposer.stop();
 
 					if(_streamingSocket != null) _streamingSocket.disconnect();
 					_streamingSocket = null;
@@ -2245,12 +2142,603 @@ window.WebRTCconferenceLib = function app(options){
 					app.event.dispatch('facebookLiveStreamingEnded');
 				},
 				isStreaming: function () {
-					if(_mediaRecorder != null && _streamingSocket != null) return true;
+					if(_streamingSocket != null && _streamingSocket.connected) return true;
 					return false;
+				},
+				startStreaming: function(fbStreamUrl) {
+					console.log('startStreaming', fbStreamUrl)
+					connect(fbStreamUrl, function () {
+						canvasComposer.captureStream({
+							ondataavailable: function (blob) {
+								_streamingSocket.emit('Streams/webrtc/videoData', blob);
+							}
+						});
+					});
 				}
 			}
 		}())
+		
+		var youtubeLiveUploader = (function () {
+			var DRIVE_UPLOAD_URL = 'https://www.googleapis.com/upload/drive/v2/files/';
+			var STATUS_POLLING_INTERVAL_MILLIS = 60 * 1000; // One minute.
+			var _recorder;
+			var _videoStream = {blobs: [], size:0};
+			var _uploaderInterval;
 
+			/**
+			 * Helper for implementing retries with backoff. Initial retry
+			 * delay is 1 second, increasing by 2x (+jitter) for subsequent retries
+			 *
+			 * @constructor
+			 */
+			var RetryHandler = function() {
+				this.interval = 1000; // Start at one second
+				this.maxInterval = 60 * 1000; // Don't wait longer than a minute
+			};
+
+			/**
+			 * Invoke the function after waiting
+			 *
+			 * @param {function} fn Function to invoke
+			 */
+			RetryHandler.prototype.retry = function(fn) {
+				console.log('RetryHandler: retry');
+				setTimeout(fn, this.interval);
+				this.interval = this.nextInterval_();
+			};
+
+			/**
+			 * Reset the counter (e.g. after successful request.)
+			 */
+			RetryHandler.prototype.reset = function() {
+				console.log('RetryHandler: reset');
+				this.interval = 1000;
+			};
+
+			/**
+			 * Calculate the next wait time.
+			 * @return {number} Next wait interval, in milliseconds
+			 *
+			 * @private
+			 */
+			RetryHandler.prototype.nextInterval_ = function() {
+				console.log('RetryHandler: nextInterval_');
+
+				var interval = this.interval * 2 + this.getRandomInt_(0, 1000);
+				return Math.min(interval, this.maxInterval);
+			};
+
+			/**
+			 * Get a random int in the range of min to max. Used to add jitter to wait times.
+			 *
+			 * @param {number} min Lower bounds
+			 * @param {number} max Upper bounds
+			 * @private
+			 */
+			RetryHandler.prototype.getRandomInt_ = function(min, max) {
+				return Math.floor(Math.random() * (max - min + 1) + min);
+			};
+
+
+			/**
+			 * Helper class for resumable uploads using XHR/CORS. Can upload any Blob-like item, whether
+			 * files or in-memory constructs.
+			 *
+			 * @example
+			 * var content = new Blob(["Hello world"], {"type": "text/plain"});
+			 * var uploader = new MediaUploader({
+ *   file: content,
+ *   token: accessToken,
+ *   onComplete: function(data) { ... }
+ *   onError: function(data) { ... }
+ * });
+			 * uploader.upload();
+			 *
+			 * @constructor
+			 * @param {object} options Hash of options
+			 * @param {string} options.token Access token
+			 * @param {blob} options.file Blob-like item to upload
+			 * @param {string} [options.fileId] ID of file if replacing
+			 * @param {object} [options.params] Additional query parameters
+			 * @param {string} [options.contentType] Content-type, if overriding the type of the blob.
+			 * @param {object} [options.metadata] File metadata
+			 * @param {function} [options.onComplete] Callback for when upload is complete
+			 * @param {function} [options.onProgress] Callback for status for the in-progress upload
+			 * @param {function} [options.onError] Callback if upload fails
+			 */
+			var MediaUploader = function(options) {
+				var noop = function() {};
+				this.file = options.file;
+				this.contentType = options.contentType || this.file.type || 'application/octet-stream';
+				this.metadata = options.metadata || {
+					'title': this.file.name,
+					'mimeType': this.contentType
+				};
+				this.token = options.token;
+				this.onComplete = options.onComplete || noop;
+				this.onProgress = options.onProgress || noop;
+				this.onError = options.onError || noop;
+				this.offset = options.offset || 0;
+				this.chunkSize = options.chunkSize || 0;
+				this.totalSize = 0;
+				this.fileSize = 1000000*150;
+				this.retryHandler = new RetryHandler();
+
+				this.url = options.url;
+				if (!this.url) {
+					var params = options.params || {};
+					params.uploadType = 'resumable';
+					this.url = this.buildUrl_(options.fileId, params, options.baseUrl);
+				}
+				this.httpMethod = options.fileId ? 'PUT' : 'POST';
+			};
+
+			/**
+			 * Initiate the upload.
+			 */
+			MediaUploader.prototype.initUpload = function(callback) {
+				console.log('MediaUploader: upload');
+
+				var self = this;
+				var xhr = new XMLHttpRequest();
+
+				xhr.open(this.httpMethod, this.url, true);
+				xhr.setRequestHeader('Authorization', 'Bearer ' + this.token);
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				//xhr.setRequestHeader('Content-Length', 262144);
+				//xhr.setRequestHeader('X-Upload-Content-Length', 1000000*150);
+				xhr.setRequestHeader('X-Upload-Content-Type', this.contentType);
+
+				xhr.onload = function(e) {
+					console.log('initUpload response', e.target)
+					if (e.target.status < 400) {
+						var location = e.target.getResponseHeader('Location');
+						this.url = location;
+						if(callback != null) callback(location);
+					} else {
+						this.onUploadError_(e);
+					}
+				}.bind(this);
+				xhr.onerror = this.onUploadError_.bind(this);
+				xhr.send(JSON.stringify(this.metadata));
+			};
+
+			/**
+			 * Send the actual file content.
+			 *
+			 * @private
+			 */
+			MediaUploader.prototype.sendChunk = function(blob, lastChunk) {
+				console.log('MediaUploader: sendChunk');
+				var MediaUploaderInstance = this;
+				var xhr = new XMLHttpRequest();
+
+				console.log('MediaUploader: sendChunk size' + blob.size);
+				this.totalSize = this.totalSize + blob.size;
+				console.log('MediaUploader: sendChunk this.totalSize' + this.totalSize);
+
+				var end;
+				if (this.offset || this.chunkSize) {
+					end = this.offset + blob.size;
+				}
+
+				xhr.open('PUT', this.url, true);
+				xhr.setRequestHeader('Content-Type', this.contentType);
+
+				if(lastChunk) {
+					MediaUploaderInstance.fileSize = this.totalSize;
+					end = this.offset + blob.size;
+
+					xhr.setRequestHeader('Content-Range', 'bytes ' + this.offset + '-' + (end - 1) + '/' + end);
+
+				} else {
+					xhr.setRequestHeader('Content-Range', 'bytes ' + this.offset + '-' + (end - 1) + '/*');
+				}
+
+
+				xhr.setRequestHeader('X-Upload-Content-Type', this.file.type);
+				if (xhr.upload) {
+					xhr.upload.addEventListener('progress', this.onProgress);
+				}
+				xhr.onload = function(e){
+					if (e.target.status == 200 || e.target.status == 201) {
+						console.log('MediaUploader: sendChunk_: onContentUploadSuccess: 200 || 201', e.target.response);
+						MediaUploaderInstance.onComplete(e.target.response);
+					} else if (e.target.status == 308) {
+						MediaUploaderInstance.extractRange_(e.target);
+						console.log('MediaUploader: sendChunk_: onContentUploadSuccess: 308', e.target.response);
+					}
+				};
+				xhr.onerror = function(e){
+					if (e.target.status && e.target.status < 500) {
+						console.error('MediaUploader: sendChunk_: onContentUploadError_: if < 500', e.target.response);
+					} else {
+						console.error('MediaUploader: sendChunk_: onContentUploadError_: else', e.target.response);
+					}
+				}
+				xhr.send(blob);
+			};
+
+			/**
+			 * Query for the state of the file for resumption.
+			 *
+			 * @private
+			 */
+			MediaUploader.prototype.resume_ = function() {
+				console.log('MediaUploader: resume_');
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('PUT', this.url, true);
+				console.log('MediaUploader PUT size' + this.file.size);
+				xhr.setRequestHeader('Content-Range', 'bytes */' + this.file.size);
+				xhr.setRequestHeader('X-Upload-Content-Type', this.file.type);
+				if (xhr.upload) {
+					xhr.upload.addEventListener('progress', this.onProgress);
+				}
+				xhr.onload = this.onContentUploadSuccess_.bind(this);
+				xhr.onerror = this.onContentUploadError_.bind(this);
+				xhr.send();
+			};
+
+			/**
+			 * Extract the last saved range if available in the request.
+			 *
+			 * @param {XMLHttpRequest} xhr Request object
+			 */
+			MediaUploader.prototype.extractRange_ = function(xhr) {
+				var range = xhr.getResponseHeader('Range');
+				if (range) {
+					this.offset = parseInt(range.match(/\d+/g).pop(), 10) + 1;
+				}
+			};
+
+			/**
+			 * Handle successful responses for uploads. Depending on the context,
+			 * may continue with uploading the next chunk of the file or, if complete,
+			 * invokes the caller's callback.
+			 *
+			 * @private
+			 * @param {object} e XHR event
+			 */
+			MediaUploader.prototype.onContentUploadSuccess_ = function(e) {
+				console.log('MediaUploader: onContentUploadSuccess_');
+
+				if (e.target.status == 200 || e.target.status == 201) {
+					console.log('MediaUploader: onContentUploadSuccess: 200 || 201');
+					this.onComplete(e.target.response);
+				} else if (e.target.status == 308) {
+					console.log('MediaUploader: onContentUploadSuccess: 308');
+					this.extractRange_(e.target);
+					this.retryHandler.reset();
+					this.sendFile_();
+				}
+			};
+
+			/**
+			 * Handles errors for uploads. Either retries or aborts depending
+			 * on the error.
+			 *
+			 * @private
+			 * @param {object} e XHR event
+			 */
+			MediaUploader.prototype.onContentUploadError_ = function(e) {
+				console.log('MediaUploader: onContentUploadError_');
+
+				if (e.target.status && e.target.status < 500) {
+					console.log('MediaUploader: onContentUploadError_: if < 500');
+
+					this.onError(e.target.response);
+				} else {
+					console.log('MediaUploader: onContentUploadError_: else');
+
+					this.retryHandler.retry(this.resume_.bind(this));
+				}
+			};
+
+			/**
+			 * Handles errors for the initial request.
+			 *
+			 * @private
+			 * @param {object} e XHR event
+			 */
+			MediaUploader.prototype.onUploadError_ = function(e) {
+				this.onError(e.target.response); // TODO - Retries for initial upload
+			};
+
+			/**
+			 * Construct a query string from a hash/object
+			 *
+			 * @private
+			 * @param {object} [params] Key/value pairs for query string
+			 * @return {string} query string
+			 */
+			MediaUploader.prototype.buildQuery_ = function(params) {
+				console.log('MediaUploader: buildQuery_');
+
+				params = params || {};
+				return Object.keys(params).map(function(key) {
+					return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+				}).join('&');
+			};
+
+			/**
+			 * Build the drive upload URL
+			 *
+			 * @private
+			 * @param {string} [id] File ID if replacing
+			 * @param {object} [params] Query parameters
+			 * @return {string} URL
+			 */
+			MediaUploader.prototype.buildUrl_ = function(id, params, baseUrl) {
+				console.log('MediaUploader: buildUrl_');
+
+				var url = baseUrl || DRIVE_UPLOAD_URL;
+				if (id) {
+					url += id;
+				}
+				var query = this.buildQuery_(params);
+				if (query) {
+					url += '?' + query;
+				}
+				return url;
+			};
+
+
+			var UploadVideo = function() {
+
+				this.title = 'test upload';
+				this.description = 'test desc';
+				this.tags = ['youtube-cors-upload'];
+				this.categoryId = 28;
+				this.videoId = '';
+				this.uploadStartTime = 0;
+			};
+
+			UploadVideo.prototype.ready = function(accessToken) {
+				this.accessToken = accessToken;
+				this.gapi = gapi;
+				this.authenticated = true;
+				this.gapi.client.request({
+					path: '/youtube/v3/channels',
+					params: {
+						part: 'snippet',
+						mine: true
+					},
+					callback: function(response) {
+						if (response.error) {
+							console.log(response.error.message);
+						} else {
+							console.log(response.items[0].snippet.title);
+							console.log('src', response.items[0].snippet.thumbnails.default.url);
+
+
+						}
+					}.bind(this)
+				});
+			};
+
+			UploadVideo.prototype.initUpload = function(file, callback) {
+				var uploadVideoInstance = this;
+				var metadata = {
+					snippet: {
+						title: this.title,
+						description: this.description,
+						tags: this.tags,
+						categoryId: this.categoryId
+					},
+					status: {
+						privacyStatus: 'public'
+					}
+				};
+				var uploader = new MediaUploader({
+					baseUrl: 'https://www.googleapis.com/upload/youtube/v3/videos',
+					file: file,
+					token: this.accessToken,
+					chunkSize:  5000,
+					metadata: metadata,
+					params: {
+						part: Object.keys(metadata).join(',')
+					},
+					onError: function(data) {
+						var message = data;
+						try {
+							var errorResponse = JSON.parse(data);
+							message = errorResponse.error.message;
+						} finally {
+							alert(message);
+						}
+					}.bind(this),
+					onProgress: function(data) {
+						var bytesUploaded = data.loaded;
+						var totalBytes = parseInt(data.total);
+						var percentageComplete = parseInt((bytesUploaded * 100) / totalBytes);
+
+						this.callback(percentageComplete);
+					}.bind(this),
+					onComplete: function(data) {
+						var uploadResponse = JSON.parse(data);
+						this.videoId = uploadResponse.id;
+						this.videoURL = 'https://www.youtube.com/watch?v=' + this.videoId;
+						this.callback('uploaded', this.videoURL);
+
+						setTimeout(uploadVideoInstance.pollForVideoStatus.bind(this), 2000);
+					}.bind(this)
+				});
+				// This won't correspond to the *exact* start of the upload, but it should be close enough.
+				this.uploadStartTime = Date.now();
+				uploader.initUpload(callback);
+				this.uploader = uploader;
+				window.uploader = uploader;
+			};
+
+			UploadVideo.prototype.pollForVideoStatus = function() {
+				var instace = this;
+				console.log('pollForVideoStatus', this)
+				this.gapi.client.request({
+					path: '/youtube/v3/videos',
+					params: {
+						part: 'status,player',
+						id: this.videoId
+					},
+					callback: function(response) {
+						if (response.error) {
+							setTimeout(instace.pollForVideoStatus.bind(this), 2000);
+						} else {
+							var uploadStatus = response.items[0].status.uploadStatus;
+							switch (uploadStatus) {
+								case 'uploaded':
+									this.callback('uploaded', instace.videoURL);
+									setTimeout(instace.pollForVideoStatus.bind(this), 2000);
+									break;
+								case 'processed':
+									instace.callback('processed', instace.videoURL);
+									break;
+								default:
+									instace.callback('failed', instace.videoURL);
+									break;
+							}
+						}
+					}.bind(this)
+				});
+			};
+
+			function getRandomString() {
+				if (window.crypto && window.crypto.getRandomValues && navigator.userAgent.indexOf('Safari') === -1) {
+					var a = window.crypto.getRandomValues(new Uint32Array(3)),
+						token = '';
+					for (var i = 0, l = a.length; i < l; i++) {
+						token += a[i].toString(36);
+					}
+					return token;
+				} else {
+					return (Math.random() * new Date().getTime()).toString(36).replace(/\./g, '');
+				}
+			}
+
+			function getFileName(fileExtension) {
+				var d = new Date();
+				var year = d.getUTCFullYear();
+				var month = d.getUTCMonth();
+				var date = d.getUTCDate();
+				return 'Conference-' + year + month + date + '-' + getRandomString() + '.' + fileExtension;
+			}
+
+			function uploadToYouTube(fileName, firstBlob, callback, initCallback) {
+				var fileExtension = 'mp4';
+				var mediaContainerFormat = 'h264'
+				var mimeType = 'video/webm\;codecs=h264';
+
+
+				var uploadVideo = new UploadVideo();
+				uploadVideo.ready(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token);
+
+				var blob = new File([firstBlob], getFileName(fileExtension), {
+					type: mimeType
+				});
+
+				if(!uploadVideo) {
+					alert('YouTube API are not available.');
+					return;
+				}
+
+				uploadVideo.title = fileName;
+				uploadVideo.description = fileName;
+				uploadVideo.tags = ['recordrtc'];
+				uploadVideo.categoryId = 28; // via: http://stackoverflow.com/a/35877512/552182
+				uploadVideo.videoId = '';
+				uploadVideo.uploadStartTime = 0;
+
+				uploadVideo.callback = callback;
+				uploadVideo.initUpload(blob, function () {
+					if(initCallback != null) initCallback(uploadVideo.uploader);
+				});
+			}
+
+			function onDataAvailablehandler(blob) {
+				console.log('ondataavailable', blob)
+
+				if(_videoStream.size == 0) {
+					var fileName = getFileName('mp4');
+
+					uploadToYouTube(fileName,blob, function (percentageComplete, fileURL) {
+							if (percentageComplete == 'uploaded') {
+								console.log('Uploaded. However YouTube is still processing.', fileURL);
+								return;
+							}
+							if (percentageComplete == 'processed') {
+								console.log('Uploaded & Processed. Click to open YouTube video.', fileURL);
+								return;
+							}
+							if (percentageComplete == 'failed') {
+								console.log('YouTube failed transcoding the video.', fileURL);
+								return;
+							}
+							console.log(percentageComplete + '% uploaded to YouTube.');
+						},
+						function (uploader) {
+							console.log('uploadToYouTube: uploading inited')
+							_uploaderInterval = setInterval(function () {
+								let blobsLength = _videoStream.blobs.length;
+								let sumSize = 0;
+
+								for(let i = 0; i < blobsLength; i++) {
+									if(_videoStream.blobs.length == 0) break;
+									sumSize = sumSize + _videoStream.blobs[i].size;
+									if(sumSize >= 262144 && _videoStream.recordingStopped != true) {
+										let blobsToSend = _videoStream.blobs.slice(0, i + 1);
+										let blobToSend = new Blob(blobsToSend);
+										_videoStream.blobs.splice(0, i);
+										console.log('ondataavailable SEND', sumSize)
+
+										let lastChunk = _videoStream.recordingStopped === true ? true : false;
+										uploader.sendChunk(blobToSend, lastChunk);
+										break;
+									} else if(_videoStream.recordingStopped === true) {
+										console.log('ondataavailable SEND LAST CHUNK', sumSize)
+										let blobToSend = new Blob(_videoStream.blobs);
+										_videoStream.blobs = [];
+										console.log('ondataavailable SEND', sumSize)
+
+										uploader.sendChunk(blobToSend, true);
+										if(_uploaderInterval != null) {
+											clearInterval(_uploaderInterval);
+											_uploaderInterval = null;
+											canvasComposer.removeDataListener(onDataAvailablehandler);
+										}
+									} else {
+										console.log('ondataavailable BUFFER', sumSize)
+									}
+								}
+							}, 1000)
+						});
+				}
+
+				_videoStream.blobs.push(blob);
+
+
+				var size = 0;
+				_videoStream.blobs.forEach(function(b) {
+					size += b.size;
+				});
+				_videoStream.size = size;
+			}
+
+			function recordAndUpload() {
+				_videoStream.size = 0
+				_videoStream.blobs = [];
+				_videoStream.recordingStopped = false;
+				canvasComposer.captureStream(onDataAvailablehandler);
+			}
+
+			function stopRecording() {
+				_videoStream.recordingStopped = true;
+			}
+			
+			return {
+				recordAndUpload: recordAndUpload,
+				stopRecording: stopRecording
+			}
+		}())
 
 
 		return {
@@ -2263,7 +2751,9 @@ window.WebRTCconferenceLib = function app(options){
 			getLoudestScreen: getLoudestScreen,
 			audioVisualization: audioVisualization,
 			createAudioAnalyser: createAudioAnalyser,
-			fbLive:fbLive
+			canvasComposer:canvasComposer,
+			fbLive:fbLive,
+			youtubeLiveUploader:youtubeLiveUploader
 		}
 	}())
 
@@ -2841,6 +3331,39 @@ window.WebRTCconferenceLib = function app(options){
 			}
 			return candidate;
 		};
+
+		function getPCStats() {
+
+			var participants = app.roomParticipants();
+			for(let i in participants) {
+				let participant = participants[i];
+				if(participant.RTCPeerConnection == null) continue;
+
+				participant.RTCPeerConnection.getStats(null).then(stats => {
+					var statsOutput = [];
+					stats.forEach(report => {
+						let reportItem = {};
+						reportItem.reportType = report.type;
+						reportItem.id = report.id;
+						reportItem.timestump = report.timestamp;
+
+
+						// Now the statistics for this report; we intentially drop the ones we
+						// sorted to the top above
+
+						Object.keys(report).forEach(statName => {
+							if (statName !== "id" && statName !== "timestamp" && statName !== "type") {
+								reportItem[statName]= report[statName];
+							}
+						});
+						statsOutput.push(reportItem);
+
+					});
+					console.log(statsOutput);
+				})
+
+			}
+		}
 
 		function rawTrackSubscribed(event, existingParticipant){
 			log('rawTrackSubscribed ' + event.track.kind, existingParticipant);
@@ -4087,7 +4610,6 @@ window.WebRTCconferenceLib = function app(options){
 		}
 
 		function addTrack(track, stream) {
-			log('conferenceControl: addTrack');
 			if(options.mode == 'twilio') {
 				var participant = localParticipant.twilioInstance;
 				participant.publishTrack(track).then(function (publication) {

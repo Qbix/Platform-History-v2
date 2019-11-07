@@ -9,7 +9,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 99999;
+    z-index: 99999 !important;
     pointer-events: none;
 }
 
@@ -25,7 +25,7 @@
 .Streams_webrtc_mobile-screen .Streams_webrtc_controls_tool {
     display: flex;
     justify-content: center;
-    z-index: 999999;
+    z-index: 999999 !important;
     position: fixed;
     width:100%;
     bottom: 0;
