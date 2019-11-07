@@ -36,7 +36,9 @@
 	 *  @param {Function} [options.onRefresh] Event after tabs have been refreshed
 	 * @return {Q.Tool}
 	 */
-	Q.Tool.define("Q/tabs", function(options) {
+	Q.Tool.define("Q/tabs",
+	
+		function(options) {
 
 			var tool = this;
 			var state = tool.state;
@@ -62,7 +64,7 @@
 			// catches events that bubble up from any child elements
 			_addListeners(tool, $te);
 
-			tool.$tabs = $('.Q_tabs_tab', tool.element).css('visibility', 'hidden');
+			tool.$tabs = tool.$('.Q_tabs_tab').css('visibility', 'hidden');
 			Q.onLayout(tool).set(function () {
 				tool.refresh();
 			}, tool);
@@ -120,7 +122,7 @@
 					name = name[0];
 				}
 				if (tab === undefined) {
-					$('.Q_tabs_tab', tool.element).each(function () {
+					tool.$('.Q_tabs_tab').each(function () {
 						if (this.getAttribute('data-name') === name) {
 							tab = this;
 							return false;
@@ -132,6 +134,7 @@
 					}
 				}
 
+				tool.$('.Q_current').addClass('Q_tabs_switchingFrom');
 				$(tab).addClass('Q_tabs_switchingTo');
 
 				state.slots = typeof state.slot === "string"
@@ -159,6 +162,8 @@
 					slotNames: slots,
 					onError: new Q.Event(function (msg) {
 						alert(msg);
+						tool.$tabs.filter('.Q_tabs_switchingFrom')
+							.removeClass('Q_tabs_switchingFrom');
 						tool.$tabs.removeClass('Q_tabs_switchingTo');
 					}, "Q/tabs"),
 					onActivate: new Q.Event(function () {
@@ -234,7 +239,7 @@
 				tab = tool.getCurrentTab(tab);
 
 				var $tab = $(tab);
-				tool.$tabs.removeClass('Q_current Q_tabs_switchingTo');
+				tool.$tabs.removeClass('Q_current Q_tabs_switchingTo Q_tabs_switchingFrom');
 				$tab.addClass('Q_current');
 
 				_copyClassToOverflow(tool);
