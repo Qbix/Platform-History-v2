@@ -294,12 +294,9 @@
 				if (err) {
 					return Q.handle(callback, null, [err]);
 				}
-				var userVisibleOnly = true;
-				if (options && !options.userVisibleOnly) {
-					userVisibleOnly = false;
-				}
+
 				sw.pushManager.subscribe({
-					userVisibleOnly: userVisibleOnly,
+					userVisibleOnly: true,
 					applicationServerKey: _urlB64ToUint8Array(appConfig.publicKey)
 				}).then(function (subscription) {
 					_saveSubscription(subscription, appConfig, function (err, res) {
