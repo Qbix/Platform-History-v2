@@ -40,6 +40,26 @@
 	if(typeof cordova != 'undefined' && _isiOS) _isiOSCordova = true;
 	if(typeof cordova != 'undefined' && _isAndroid) _isAndroidCordova = true;
 
+	function copyToClipboard(str) {
+		var el = document.createElement('textarea');
+		el.value = str;
+		el.setAttribute('readonly', '');
+		el.style.position = 'absolute';
+		el.style.left = '-9999px';
+		document.body.appendChild(el);
+		var selected =
+			document.getSelection().rangeCount > 0
+				? document.getSelection().getRangeAt(0)
+				: false;
+		el.select();
+		document.execCommand('copy');
+		document.body.removeChild(el);
+		if (selected) {
+			document.getSelection().removeAllRanges();
+			document.getSelection().addRange(selected);
+		}
+	};
+
 	/**
 	 * Streams/webrtc/control tool.
 	 * Users can chat with each other via WebRTC using Twilio or raw streams
@@ -88,6 +108,7 @@
 				tool.textChat().init();
 				tool.createSettingsPopup();
 				tool.participantsPopup().createList();
+				tool.initFbLiveInterface();
 
 				var activeViewMode = tool.state.webrtcClass.screenRendering.getActiveViewMode();
 				if(activeViewMode == 'maximized' || activeViewMode == 'maximizedMobile') {
@@ -143,18 +164,14 @@
 				});
 
 				tool.WebRTCLib.event.on('facebookLiveStreamingStarted', function (e) {
-					log('facebookLiveStreamingStarted', e)
-
-					tool.facebookLiveDialog();
-
-					if(!tool.facebookLiveBtn.classList.contains('Q_working')) tool.facebookLiveBtn.classList.add('Q_working');
+					//tool.facebookLiveDialog();
+					if(!tool.cameraBtn.classList.contains('isRecording')) tool.cameraBtn.classList.add('isRecording');
 				});
 				tool.WebRTCLib.event.on('facebookLiveStreamingEnded', function () {
-					log('facebookLiveStreamingEnded')
 					if(document.querySelector('.Streams_webrtc_fblive_dialog_inner') != null) {
 						Q.Dialogs.pop()
 					}
-					tool.facebookLiveBtn.classList.remove('Q_working');
+					tool.cameraBtn.classList.remove('isRecording');
 				});
 
 				var roomStream = tool.WebRTCClass.roomStream();
@@ -1126,8 +1143,161 @@
 
 				settingsPopup.appendChild(videoinputList);
 
+				var streamingAndUploading = document.createElement('DIV');
+				streamingAndUploading.className = 'Streams_webrtc_streaming'
+
+
+				var facebookLiveItem = document.createElement('DIV');
+				facebookLiveItem.className = 'Streams_webrtc_streaming_item';
+				var textLabel = document.createTextNode('Facebook Live');
+				var fbLiveIcon = document.createElement('SPAN');
+				fbLiveIcon.className = 'Streams_webrtc_streaming_icon';
+				fbLiveIcon.innerHTML = icons.facebooklogo;
+				facebookLiveItem.appendChild(textLabel);
+				facebookLiveItem.appendChild(fbLiveIcon);
+
+				var fbStreamingSettings = document.createElement('DIV');
+				fbStreamingSettings.className = 'Streams_webrtc_streaming_settings'
+
+				var fbStreamingStartSettings = document.createElement('DIV');
+				fbStreamingStartSettings.className = 'Streams_webrtc_streaming_start_settings'
+
+				var facebookLiveTtle = document.createElement('LABEL');
+				facebookLiveTtle.className = 'Streams_webrtc_streaming_title';
+
+				var facebookLiveTtleInput = document.createElement('INPUT');
+				facebookLiveTtleInput.type = 'text';
+				facebookLiveTtleInput.placeholder = 'Live title';
+
+				var facebookLiveDesc = document.createElement('LABEL');
+				facebookLiveDesc.className = 'Streams_webrtc_streaming_desc';
+
+				var facebookLiveDescInput = document.createElement('INPUT');
+				facebookLiveDescInput.type = 'text';
+				facebookLiveDescInput.placeholder = 'Live description';
+
+				var startStreamingBtnCon = document.createElement('DIV');
+				startStreamingBtnCon.className = 'Streams_webrtc_streaming_start';
+
+				var privacySelect = document.createElement('SELECT');
+				privacySelect.className = 'loudest-options'
+				var option1 = document.createElement('OPTION');
+				option1.innerHTML = 'Only Me';
+				option1.value = 'SELF';
+				option1.selected = true;
+				var option2 = document.createElement('OPTION');
+				option2.innerHTML = 'Friends';
+				option2.value = 'ALL_FRIENDS';
+				var option3 = document.createElement('OPTION');
+				option3.value = 'EVERYONE';
+				option3.innerHTML = 'Public';
+
+				var startStreamingBtn = document.createElement('BUTTON');
+				startStreamingBtn.type = 'button';
+				startStreamingBtn.className = 'Q_button';
+				startStreamingBtn.innerHTML = "Go Live";
+
+
+
+				var fbStreamingLiveSection = document.createElement('DIV');
+				fbStreamingLiveSection.style.display = 'none';
+				fbStreamingLiveSection.className = 'Streams_webrtc_streaming_live';
+
+				var facebookLiveEmbed = document.createElement('DIV');
+				facebookLiveEmbed.className = "Streams_webrtc_streaming_url";
+
+				var facebookLiveUrl = document.createElement('INPUT');
+				facebookLiveUrl.type = 'text';
+
+				var facebookLiveCopy = document.createElement('DIV');
+				facebookLiveCopy.className = 'Streams_webrtc_streaming_copy_url_btn';
+				var facebookLiveCopyLink = document.createElement('SPAN');
+				facebookLiveCopyLink.innerHTML = 'COPY';
+
+				var stopStreamingBtnCon = document.createElement('DIV');
+				stopStreamingBtnCon.className = 'Streams_webrtc_streaming_stop';
+
+				var stopStreamingBtn = document.createElement('BUTTON');
+				stopStreamingBtn.type = 'button';
+				stopStreamingBtn.className = 'Q_button';
+				stopStreamingBtn.innerHTML = "End Live";
+
+
+				facebookLiveCopy.appendChild(facebookLiveCopyLink);
+				facebookLiveEmbed.appendChild(facebookLiveUrl);
+				facebookLiveEmbed.appendChild(facebookLiveCopy);
+				streamingAndUploading.appendChild(facebookLiveItem);
+				facebookLiveTtle.appendChild(facebookLiveTtleInput);
+				fbStreamingStartSettings.appendChild(facebookLiveTtle);
+				facebookLiveDesc.appendChild(facebookLiveDescInput);
+				fbStreamingStartSettings.appendChild(facebookLiveDesc);
+
+				privacySelect.appendChild(option1);
+				privacySelect.appendChild(option2);
+				privacySelect.appendChild(option3);
+				startStreamingBtnCon.appendChild(privacySelect);
+
+				startStreamingBtnCon.appendChild(startStreamingBtn);
+				fbStreamingStartSettings.appendChild(startStreamingBtnCon);
+				fbStreamingLiveSection.appendChild(facebookLiveEmbed);
+				stopStreamingBtnCon.appendChild(stopStreamingBtn);
+				fbStreamingLiveSection.appendChild(stopStreamingBtnCon);
+
+				streamingAndUploading.appendChild(fbStreamingStartSettings);
+				streamingAndUploading.appendChild(fbStreamingLiveSection);
+
+				settingsPopup.appendChild(streamingAndUploading);
+
 				tool.settingsPopupEl = settingsPopup;
 				tool.cameraBtn.parentNode.appendChild(settingsPopup);
+
+				facebookLiveItem.addEventListener('click', function () {
+					if(fbStreamingStartSettings.classList.contains('shown')) {
+						fbStreamingStartSettings.classList.remove('shown');
+					} else {
+						fbStreamingStartSettings.classList.add('shown');
+					}
+				})
+				startStreamingBtn.addEventListener('click', function () {
+					if(!fbStreamingStartSettings.classList.contains('Q_working')) fbStreamingStartSettings.classList.add('Q_working');
+
+					var data = {};
+					data.title = facebookLiveTtleInput.value;
+					data.description = facebookLiveDescInput.value;
+					data.privacy = privacySelect.value;
+					tool.fbLiveInterface.startFacebookLive(data, function (streamingData) {
+						facebookLiveUrl.value = 'https://www.facebook.com/facebook/videos/' + streamingData.id;
+
+						fbStreamingStartSettings.style.display = 'none';
+						fbStreamingLiveSection.style.display = 'block';
+						if(fbStreamingStartSettings.classList.contains('Q_working')) fbStreamingStartSettings.classList.remove('Q_working');
+
+					});
+				})
+				stopStreamingBtn.addEventListener('click', function () {
+					if(!fbStreamingLiveSection.classList.contains('Q_working')) fbStreamingLiveSection.classList.add('Q_working');
+
+					var data = {};
+					data.title = facebookLiveTtleInput.value;
+					data.description = facebookLiveDescInput.value;
+					data.privacy = privacySelect.value;
+					tool.fbLiveInterface.endLive(function (streamingData) {
+						facebookLiveUrl.value = '';
+
+						fbStreamingStartSettings.style.display = 'block';
+						fbStreamingLiveSection.style.display = 'none';
+						if(fbStreamingLiveSection.classList.contains('Q_working')) fbStreamingLiveSection.classList.remove('Q_working');
+
+					});
+				})
+
+				facebookLiveCopy.addEventListener('click', function () {
+					var link = facebookLiveUrl.value;
+					if(link.trim() != '') {
+						copyToClipboard(link);
+						tool.WebRTCClass.notice.show('Link copied to clipboard');
+					}
+				})
 
 				tool.hoverTimeout = {setttingsPopup: null, participantsPopup: null};
 				if(!Q.info.isMobile && !Q.info.isTablet) {
@@ -1138,24 +1308,7 @@
 						}
 						tool.cameraBtn.parentNode.classList.add('Streams_webrtc_hover');
 					});
-					/*tool.cameraBtn.addEventListener('click', function (e) {
-						if(tool.WebRTCLib.conferenceControl.frontCameraDevice() == null) {
-							tool.WebRTCLib.conferenceControl.requestCamera(function () {
-								var currentCamera = tool.WebRTCLib.conferenceControl.frontCameraDevice();
-								if(currentCamera != null && tool.settingsPopupEl != null) {
-									var labelToSelect = tool.settingsPopupEl.querySelector('label[data-device-id="' + currentCamera.deviceId + '"]');
-									if(labelToSelect != null) {
-										tool.toggleCameraButtons(labelToSelect)
-									} else {
-										var labelToSelect = tool.settingsPopupEl.querySelector('label[data-device-id="off"]');
-										if(labelToSelect != null) tool.toggleCameraButtons(labelToSelect);
-									}
-								}
-								tool.updateControlBar();
-							});
-							return;
-						}
-					});*/
+
 					tool.cameraBtn.addEventListener('mouseleave', function (e) {
 						if (e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
 							e.stopPropagation();
@@ -1589,13 +1742,6 @@
 					var maximizeStaticBtnIcon = document.createElement('SPAN');
 					maximizeStaticBtnIcon.innerHTML = icons.staticMaximizeOff;
 
-					var facebookLiveBtn = document.createElement('DIV');
-					facebookLiveBtn.className = 'Streams_webrtc_facebook-live-btn';
-					facebookLiveBtn.dataset.touchlabel = 'Facebook Live Streaming';
-					var facebookLiveIcon = document.createElement('SPAN');
-					facebookLiveIcon.innerHTML = icons.facebookLive;
-					tool.facebookLiveBtn = facebookLiveBtn;
-
 					var loudestSelectCon = document.createElement('DIV');
 					loudestSelectCon.className = 'loudest-options-con'
 					var loudestSelect = document.createElement('SELECT');
@@ -1632,8 +1778,6 @@
 					topBtns.appendChild(loudestBtn);
 					maximizeStaticBtn.appendChild(maximizeStaticBtnIcon);
 					topBtns.appendChild(maximizeStaticBtn);
-					facebookLiveBtn.appendChild(facebookLiveIcon);
-					//topBtns.appendChild(facebookLiveBtn);
 					//topBtns.appendChild(loudestSelectCon);
 					participantsListCon.appendChild(topBtns)
 
@@ -1710,8 +1854,6 @@
 							toggleViewMode(e, buttonsArr);
 						});
 					}
-
-					facebookLiveBtn.addEventListener('mouseup', startFacebookLive)
 
 					tool.toggleViewBtns = buttonsArr;
 
@@ -1889,48 +2031,7 @@
 					}
 				}
 
-				function startFacebookLive() {
 
-					if(tool.WebRTCLib.screensInterface.fbLive.isStreaming()) {
-						tool.facebookLiveDialog();
-					} else {
-						tool.WebRTCLib.screensInterface.fbLive.goLive();
-					}
-
-					/*var makeRequest = function(accessToken) {
-						Q.req("Streams/webrtc", ["fblive"], function (err, response) {
-							var msg = Q.firstErrorMessage(err, response && response.errors);
-
-							if (msg) {
-								return Q.alert(msg);
-							}
-
-							console.log('fblive', response)
-
-						}, {
-							method: 'get',
-							fields: {
-								'accessToken': accessToken,
-							}
-						});
-					}
-
-					FB.getLoginStatus(function(response){
-						console.log('getLoginStatus', response)
-						if (response.status === 'connected') {
-							makeRequest(response.authResponse.accessToken);
-						} else {
-							FB.login(function(response) {
-								if (response.authResponse) {
-									makeRequest(response.authResponse.accessToken);
-								}
-							}, {scope: 'email,public_profile,publish_video'});
-
-						}
-
-					});*/
-
-				}
 
 				return {
 					createList:createList,
@@ -1945,6 +2046,149 @@
 					disableLoudesScreenMode:disableLoudesScreenMode,
 					disableCheckActiveMediaTracks:disableCheckActiveMediaTracks,
 				}
+			},
+
+			initFbLiveInterface: function() {
+				var tool = this;
+				tool.fbLiveInterface = (function() {
+					var _liveId;
+					var _accessToken;
+
+					/**
+					 * Creates live streaming session via FB SDK for PHP
+					 * @method createLive
+					 * @param {Object} [data] title, description
+					 * @param {Object} [data.title] title when posting Live
+					 * @param {Object} [data.description] description when posting live
+					 * @param {Function} [callback] callback function that is triggered after live session created
+					 * @return {Object} RTMP urls for streaming
+					 */
+					function createLive(data, callback) {
+						Q.req("Streams/fbLive", ["fbLive"], function (err, response) {
+							var msg = Q.firstErrorMessage(err, response && response.errors);
+
+							if (msg) {
+								return Q.alert(msg);
+							}
+
+							_liveId = response.slots.fbLive.id
+							if(callback != null) callback(response.slots.fbLive);
+
+						}, {
+							method: 'POST',
+							fields: {
+								'accessToken': tool.fbAccessToken,
+								'title': data.title,
+								'description': data.description,
+								'action': 'start'
+							}
+						});
+					}
+
+					/**
+					 * Ends live streaming session via FB SDK for PHP
+					 * @method deleteLive
+					 * @param {Function} [callback] callback function that is triggered after live session was ended
+					 */
+					function endLive(callback) {
+						Q.req("Streams/fbLive", ["fbLive"], function (err, response) {
+							var msg = Q.firstErrorMessage(err, response && response.errors);
+
+							if (msg) {
+								return Q.alert(msg);
+							}
+
+							tool.WebRTCLib.screensInterface.fbLive.endStreaming();
+							if(callback != null) callback(response.slots.fbLive);
+						}, {
+							method: 'post',
+							fields: {
+								'accessToken': tool.fbAccessToken,
+								'id': _liveId,
+								'action': 'end',
+							}
+						});
+					}
+
+					/**
+					 * Removes live streaming session via FB SDK for PHP
+					 * @method deleteLive
+					 * @param {Function} [callback] callback function that is triggered after live session was deleted
+					 */
+					function deleteLive(callback) {
+						Q.req("Streams/webrtc", ["fblive"], function (err, response) {
+							var msg = Q.firstErrorMessage(err, response && response.errors);
+
+							if (msg) {
+								return Q.alert(msg);
+							}
+
+							if(callback != null) callback();
+						}, {
+							method: 'delete',
+							fields: {
+								'accessToken': tool.fbAccessToken,
+								'action': 'delete',
+							}
+						});
+					}
+
+
+					/**
+					 * 1) Checks FB login status; 2) gets RTMP url for streaming; 3) passes it to websocket streamer function
+					 * @method startFacebookLive
+					 */
+					function startFacebookLive(data, callback) {
+
+						var satrtLive = function() {
+							var handlerCallback = function() {
+								if(tool.WebRTCLib.screensInterface.fbLive.isStreaming()) {
+									tool.facebookLiveDialog();
+								} else {
+									tool.fbLiveInterface.createLive(data, function (response) {
+
+										tool.WebRTCLib.screensInterface.fbLive.startStreaming(response.secure_stream_url);
+										if(callback != null) callback(response);
+									});
+								}
+							}
+
+							FB.getLoginStatus(function(response){
+								if (response.status === 'connected') {
+									tool.fbAccessToken = response.authResponse.accessToken;
+									handlerCallback();
+								} else {
+									FB.login(function(response) {
+										if (response.authResponse) {
+											tool.fbAccessToken = response.authResponse.accessToken;
+											handlerCallback(response.authResponse.accessToken);
+										}
+									}, {scope: 'email,public_profile,publish_video'});
+
+								}
+
+							});
+						}
+
+						if(tool.WebRTCClass.options().canvasComposerOptions.useRecordRTCLibrary) {
+							Q.addScript([
+								"{{Streams}}/js/tools/webrtc/RecordRTC.js"
+							], function () {
+								satrtLive();
+							});
+						} else {
+							satrtLive();
+						}
+
+					}
+
+					return {
+						createLive: createLive,
+						deleteLive: deleteLive,
+						endLive: endLive,
+						startFacebookLive: startFacebookLive
+					}
+				}());
 			},
 			facebookLiveDialog: function () {
 				var tool = this;

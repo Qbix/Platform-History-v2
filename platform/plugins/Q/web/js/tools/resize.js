@@ -199,7 +199,8 @@
 						if(tool.state.ignoreOnElements.length != 0) {
 							var ignoreEls = tool.state.ignoreOnElements;
 							for(var e in ignoreEls) {
-								if ((evt.type != "mousemove" && evt.type != "touchmove") && (evt.target == ignoreEls[e] || ignoreEls[e].contains(evt.target))) {
+								if (((evt.type != "mousemove" && evt.type != "touchmove") && (evt.target == ignoreEls[e] || ignoreEls[e].contains(evt.target)))
+									|| (evt.target.nodeName == 'INPUT' && evt.target.type == 'text')) {
 									return;
 								}
 							}
