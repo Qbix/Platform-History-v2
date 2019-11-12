@@ -463,6 +463,7 @@ Q.Tool.define("Q/columns", function(options) {
 					Q.instanceOf(o.controls, Element) ? $(o.controls) : o.controls
 				);
 			}
+
 			waitFor.push('activated1', 'activated2', 'activated3');
 			$titleSlot.activate(o.activateOptions, p.fill('activated1'));
 			$columnSlot.activate(o.activateOptions, p.fill('activated2'));
@@ -484,8 +485,6 @@ Q.Tool.define("Q/columns", function(options) {
 					}
 					// check url before document location changed
 					var url = $div.attr('data-url');
-					// set document title anyway
-					document.title = $div.find('.Q_title_slot').text();
 					$div.attr('data-title', document.title);
 					if (o.pagePushUrl && createdNewDiv && url && url !== location.href) {
 						Q.Page.push(url);
@@ -926,14 +925,22 @@ Q.Template.set('Q/columns/column',
 
 function presentColumn(tool, $column, fullscreen) {
 	var state = tool.state;
+	var $currentColumn = Q.getObject('$currentColumn', state);
+
 	if (!$column) {
-		$column = tool.state.$currentColumn;
+		$column = $currentColumn;
 		fullscreen = tool.state.fullscreen;
 		if (!$column || !$column.length) {
 			return;
 		}
 	}
 	var $ct = $('.Q_columns_title', $column);
+
+	// set document title to current column title
+	if ($currentColumn) {
+		document.title = $currentColumn.find('.Q_title_slot').text();
+	}
+
 	var $cs = $('.Q_column_slot', $column);
 	var $controls = $column.find('.Q_controls_slot');
 	var cth = $ct.is(":visible") ? $ct.height() : 0;
