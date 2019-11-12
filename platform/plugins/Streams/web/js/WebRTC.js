@@ -1431,6 +1431,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			function updateScreensButtons() {
 				var screens = WebRTCconference.screens();
 
+				console.log('updateScreensButtons', viewMode);
 				if(viewMode == 'regular') {
 					var i, screen;
 					for (i = 0; screen = screens[i]; i++) {
@@ -1450,7 +1451,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							maximizeBtn.style.display = 'none';
 							minimizeBtn.style.display = '';
 						} else {
-							if(!Q.info.isMobile) maximizeBtn.style.display = '';
+							if(!Q.info.isMobile){
+								maximizeBtn.style.display = '';
+							} else {
+								maximizeBtn.style.display = 'none';
+
+							}
 							minimizeBtn.style.display = 'none';
 						}
 					}
