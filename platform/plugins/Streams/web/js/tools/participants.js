@@ -275,34 +275,30 @@ function _Streams_participants(options) {
 					if (!state.overflowed) {
 						$te.addClass('Q_overflowed');
 						var $expand = $te.find('.Streams_participants_expand');
-						tool.$pei.plugin('Q/clickable', {
-							triggers: $expand,
-							onRelease: function (evt, overElement) {
-								if (!overElement) return;
-								if (state.expanded) {
-									tool.$blanks.show();
-									$te.animate({
-										height: state.originalHeight
-									});
-									tool.$pei.attr({
-										src: Q.url('{{Q}}/img/expand.png'),
-										alt: 'expand'
-									});
-									tool.$pet.html('See All');
-								} else {
-									state.originalHeight = $te.height();
-									tool.$blanks.hide();
-									$te.animate({
-										height: tool.$pc.height()
-									});
-									tool.$pei.attr({
-										src: Q.url('{{Q}}/img/collapse.png'),
-										alt: 'collapse'
-									});
-									tool.$pet.html('Fewer');
-								}
-								state.expanded = !state.expanded;
+						tool.$pei.plugin('Q/clickable').on(Q.Pointer.fastclick, function () {
+							if (state.expanded) {
+								tool.$blanks.show();
+								$te.animate({
+									height: state.originalHeight
+								});
+								tool.$pei.attr({
+									src: Q.url('{{Q}}/img/expand.png'),
+									alt: 'expand'
+								});
+								tool.$pet.html('See All');
+							} else {
+								state.originalHeight = $te.height();
+								tool.$blanks.hide();
+								$te.animate({
+									height: tool.$pc.height()
+								});
+								tool.$pei.attr({
+									src: Q.url('{{Q}}/img/collapse.png'),
+									alt: 'collapse'
+								});
+								tool.$pet.html('Fewer');
 							}
+							state.expanded = !state.expanded;
 						});
 					}
 				} else {
