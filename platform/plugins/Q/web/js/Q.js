@@ -5838,6 +5838,18 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
 		Q.handle(callback, context, args); // nonce won't load cross-origin anyway
 		return;
 	}
+	// make this into a getter function, and call it from here but also from Q.js
+	if (Q.info.isStatic) {
+		Q.request({"Q.scriptData": 1}, Q.info.isStatic, Q.info.slotNames,
+		function (err, res) {
+			for (var slot in response.scriptData) {
+				var data = response.scriptData[slot];
+				for (var k in data) {
+					Q.setObject(k, data[k]);
+				}
+			}
+		});
+	}
 	Q.req('Q/nonce', 'data', function _Q_loadNonce_nonceLoaded(err, data) {
 		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
@@ -6595,7 +6607,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  *  followed by a Boolean indicating whether a redirect was performed.
  * @param {Object} options
  *  A hash of options, including options that would be passed to Q.url(), but also these:
- * @param {String} [options.method] if set, adds a &Q.method= that value to the querystring, default "get"
+ * @param {String} [options.method="GET"] the HTTP method to use. If not "GET" and options.form is set, adds to url &Q.method= that value to the querystring, and uses POST method.
  * @param {Object} [options.fields] optional fields to pass with any method other than "get"
  * @param {HTMLElement} [options.form] if specified, then the request is made by submitting this form, temporarily extending it with any fields passed in options.fields, and possibly overriding its method with whatever is passed to options.method .
  * @param {String} [options.resultFunction="result"] The path to the function to handle inside the
@@ -8093,6 +8105,7 @@ Q.replace = function _Q_replace(container, source, options) {
 var _latestLoadUrlObjects = {};
 
 /**
+ * Requests a URL served by Qbix Platform and loads it as if it was a page loaded in the browser.
  * @static
  * @method loadUrl
  * @param {String} url The url to load.
@@ -8103,7 +8116,7 @@ var _latestLoadUrlObjects = {};
  * By default place slot content to DOM element with id "{slotName}_slot"
  * @param {Object} options Optional.
  * An hash of options to pass to the loader, and can also include options for loadUrl itself:
- * @param {Function} [options.loader=Q.request] the actual function to load the URL. See Q.request documentation for more options.
+ * @param {Function} [options.loader=Q.request] can be used to override the actual function to request the URL. See Q.request documentation for more options.
  * @param {Function} [options.handler] the function to handle the returned data. Defaults to a function that fills the corresponding slot containers correctly.
  * @param {boolean} [options.ignoreHistory=false] if true, does not push the url onto the history stack
  * @param {boolean} [options.ignorePage=false] if true, does not process the links / stylesheets / script data in the response, and doesn't trigger deactivation of current page and activation of the new page
