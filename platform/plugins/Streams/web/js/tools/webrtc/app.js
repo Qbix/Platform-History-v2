@@ -5,7 +5,6 @@ window.WebRTCconferenceLib = function app(options){
 		useIosrtcPlugin: false,
 		nodeServer: '',
 		roomName: null,
-		useAsLibrary: false,
 		audio: true,
 		video: true,
 		startWith: {},
@@ -14,7 +13,9 @@ window.WebRTCconferenceLib = function app(options){
 		disconnectTime: 3000,
 		turnCredentials: null,
 		username: null,
-		debug: false
+		debug: false,
+		canvasComposerOptions: {},
+		TwilioInstance: null
 	};
 
 	if(typeof options === 'object') {
@@ -1428,11 +1429,6 @@ window.WebRTCconferenceLib = function app(options){
 
 		var canvasComposer = (function () {
 
-			var _composerOptions = {
-				useRecordRTCLibrary: false,
-				drawBackground: false,
-			}
-
 			var _canvas = null;
 			var _canvasMediStream = null;
 			var _mediaRecorder = null;
@@ -1547,9 +1543,7 @@ window.WebRTCconferenceLib = function app(options){
 					var runtime = timestamp - starttime
 					var progress = runtime / duration;
 					progress = Math.min(progress, 1);
-
-					console.log('moveit progress', a, distRect.x, rectToUpdate.x, startPositionRect.x + (distRect.x - startPositionRect.x) * progress)
-
+					
 					rectToUpdate.y = startPositionRect.y + (distRect.y - startPositionRect.y) * progress;
 					rectToUpdate.x = startPositionRect.x + (distRect.x - startPositionRect.x) * progress;
 					rectToUpdate.width = startPositionRect.width + (distRect.width - startPositionRect.width) * progress;
@@ -1568,7 +1562,7 @@ window.WebRTCconferenceLib = function app(options){
 
 				function drawVideosOnCanvas() {
 					_inputCtx.clearRect(0, 0, _size.width, _size.height);
-					if(_composerOptions.drawBackground && _background != null) drawBackground(_background);
+					if(options.canvasComposerOptions.drawBackground && _background != null) drawBackground(_background);
 
 					for(let i in _streams) {
 						let streamData = _streams[i];
@@ -1933,7 +1927,7 @@ window.WebRTCconferenceLib = function app(options){
 					console.log('_dataListeners', _dataListeners);
 				}
 
-				if(_composerOptions.useRecordRTCLibrary) {
+				if(options.canvasComposerOptions.useRecordRTCLibrary) {
 					videoComposer.compositeVideosAndDraw();
 
 					_canvasMediStream = canvasComposer.canvas().captureStream(30);
@@ -1980,7 +1974,7 @@ window.WebRTCconferenceLib = function app(options){
 
 			function stopRecorder() {
 				if(_mediaRecorder == null) return;
-				if(_composerOptions.useRecordRTCLibrary) {
+				if(options.canvasComposerOptions.useRecordRTCLibrary) {
 					_mediaRecorder.stopRecording();
 				} else {
 					_mediaRecorder.stop();
@@ -2032,6 +2026,8 @@ window.WebRTCconferenceLib = function app(options){
 
 			var _fbApiInited;
 			var _fbStreamUrl;
+
+			var _videoStream = {blobs: [], allBlobs: [], size: 0}
 
 			function goLiveDialog() {
 				console.log('goLiveDialog')
@@ -2119,22 +2115,53 @@ window.WebRTCconferenceLib = function app(options){
 				window.streamingSocket = _streamingSocket;
 			}
 
+			function onDataAvailablehandler(blob) {
+				_videoStream.blobs.push(blob);
+
+				_videoStream.size += blob.size;
+
+				let blobsLength = _videoStream.blobs.length;
+				let sumSize = 0;
+
+				for (let i = 0; i < blobsLength; i++) {
+					if (_videoStream.blobs.length == 0) break;
+					sumSize = sumSize + _videoStream.blobs[i].size;
+
+					if (sumSize >= 1000000 && _videoStream.recordingStopped != true) {
+						let blobsToSend = _videoStream.blobs.slice(0, i + 1);
+						_videoStream.blobs.splice(0, i);
+						var mergedBlob = new Blob(blobsToSend);
+
+						/*var blobToSend;
+						if (mergedBlob.size > 1000000) {
+							blobToSend = mergedBlob.slice(0, 1000000);
+							var blobToNotSend = mergedBlob.slice(1000000);
+							_videoStream.blobs.unshift(blobToNotSend);
+						} else {
+							blobToSend = mergedBlob;
+						}
+
+						console.log('VIMEO ondataavailable SEND', blobToSend.size)*/
+
+						//let lastChunk = _videoStream.recordingStopped === true ? true : false;
+						//_videoStream.allBlobs.push(mergedBlob);
+						console.log('VIMEO ondataavailable SEND', mergedBlob.size)
+						_streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
+						break;
+					} else if (_videoStream.recordingStopped === true) {
+
+					}
+				}
+			}
+
 			return {
 				goLive: function () {
 					console.log('goLiveDialog goLive');
-
-					/*try {
-
-						videoComposer.compositeVideosAndDraw();
-						videoComposer.goLiveDialog();
-					} catch (e) {
-						console.error(e);
-					}*/
 				},
 				endStreaming: function () {
 					console.log('goLiveDialog end streaming');
 
-					canvasComposer.stop();
+					canvasComposer.stopRecorder();
 
 					if(_streamingSocket != null) _streamingSocket.disconnect();
 					_streamingSocket = null;
@@ -2148,11 +2175,11 @@ window.WebRTCconferenceLib = function app(options){
 				startStreaming: function(fbStreamUrl) {
 					console.log('startStreaming', fbStreamUrl)
 					connect(fbStreamUrl, function () {
-						canvasComposer.captureStream({
-							ondataavailable: function (blob) {
-								_streamingSocket.emit('Streams/webrtc/videoData', blob);
-							}
+						canvasComposer.captureStream(function (blob) {
+							onDataAvailablehandler(blob);
+							//_streamingSocket.emit('Streams/webrtc/videoData', blob);
 						});
+						app.event.dispatch('facebookLiveStreamingStarted');
 					});
 				}
 			}
@@ -2740,6 +2767,376 @@ window.WebRTCconferenceLib = function app(options){
 			}
 		}())
 
+		var vimeoLiveUploader = (function () {
+			var CLIENT_ID = '193908d217bc935a828ce19cf0631c76aee1b235';
+			var CLIENT_SECRET = 'a8TnwfsvIJrY4afE4/Y9HUuar0lzq+FaOOFyNv62KGmFlQ8kGl7D5/M/V/7QEoiC/EceGp6NUavAiTdJJASKgdznaxw6xgYAwx28tZZjTBIPzyWD1judlfqpw8O4idDQ';
+			var ACCESS_TOKEN;
+			var TEST_ACCESS_TOKEN = '2f57d119a5880c77cc8491ab0a43b98b';
+
+			var _location;
+			var _videoStream = {blobs:[], size:0};
+			var  _offset = 0;
+
+			function authenticate(callback) {
+
+				var authRequestBody = {
+					"grant_type": "client_credentials",
+					"scope": "private, upload",
+				}
+
+				var xhr = new XMLHttpRequest();
+
+				xhr.open('POST', 'https://api.vimeo.com/oauth/authorize/client', true);
+				xhr.setRequestHeader('Authorization','basic ' + window.btoa(CLIENT_ID + ':' + CLIENT_SECRET));
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.setRequestHeader('Accept', 'application/vnd.vimeo.*+json;version=3.4')
+
+				xhr.onload = function(e) {
+					var response = JSON.parse(e.target.response);
+					console.log('VIMEO initUpload response', response.access_token)
+					if (e.target.status < 400) {
+						ACCESS_TOKEN = response.access_token;
+						if(callback != null) callback(ACCESS_TOKEN);
+					} else {
+						onUploadError(e);
+					}
+				}.bind(this);
+				xhr.onerror = onUploadError;
+				xhr.send(JSON.stringify(authRequestBody));
+			}
+
+			function initUpload() {
+				authenticate(createVideo);
+			}
+
+			function onDataAvailablehandler(blob) {
+				_videoStream.blobs.push(blob);
+
+				_videoStream.size += blob.size;
+
+				let blobsLength = _videoStream.blobs.length;
+				let sumSize = 0;
+
+				for(let i = 0; i < blobsLength; i++) {
+					if(_videoStream.blobs.length == 0) break;
+					sumSize = sumSize + _videoStream.blobs[i].size;
+
+					if(_videoStream.size > 1000000*2 && _videoStream.recordingStopped != true){
+						let blobsToSend = _videoStream.blobs.slice(0, i + 1);
+						var mergedBlob = new Blob(blobsToSend);
+						var blobToSend = mergedBlob.slice(0, _videoStream.size - (1000000*2));
+						console.log('VIMEO ondataavailable FIIIINISSHHH', blobToSend.size)
+
+						let lastChunk = _videoStream.recordingStopped === true ? true : false;
+						canvasComposer.removeDataListener(onDataAvailablehandler);
+						_videoStream.recordingStopped = true;
+						sendChunk(blobToSend, lastChunk);
+						break;
+					} else if(sumSize >= 1000000 && _videoStream.recordingStopped != true) {
+						let blobsToSend = _videoStream.blobs.slice(0, i + 1);
+						_videoStream.blobs.splice(0, i);
+						var mergedBlob = new Blob(blobsToSend);
+
+						var blobToSend;
+						if(mergedBlob.size > 1000000) {
+							blobToSend = mergedBlob.slice(0, 1000000);
+							var blobToNotSend = mergedBlob.slice(1000000);
+							_videoStream.blobs.unshift(blobToNotSend);
+						} else {
+							blobToSend = mergedBlob;
+						}
+
+						console.log('VIMEO ondataavailable SEND', blobToSend.size)
+
+						let lastChunk = _videoStream.recordingStopped === true ? true : false;
+						sendChunk(blobToSend, lastChunk);
+						break;
+					} else if(_videoStream.recordingStopped === true) {
+
+					}
+				}
+
+				console.log('VIMEO ondataavailable BUFFER', sumSize)
+			}
+
+			function createVideo() {
+				var uploadRequestBody = {
+					"upload": {
+						"approach": "tus",
+						"size": 1000000*2
+					},
+					"name": "My Video",
+					"privacy": { "view": "nobody" }
+				}
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', 'https://api.vimeo.com/me/videos', true);
+				xhr.setRequestHeader('Authorization','bearer ' + TEST_ACCESS_TOKEN);
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				xhr.setRequestHeader('Accept', 'application/vnd.vimeo.*+json;version=3.4')
+
+				xhr.onload = function(e) {
+					var response = JSON.parse(e.target.response);
+					console.log('VIMEO createVideo response', response)
+					if (e.target.status < 400) {
+						_location = response.upload.upload_link;
+						canvasComposer.captureStream(onDataAvailablehandler);
+					} else {
+						onUploadError(e);
+					}
+				}.bind(this);
+				xhr.onerror = onUploadError;
+				xhr.send(JSON.stringify(uploadRequestBody));
+			}
+
+			function onUploadError(e) {
+				console.error(e);
+			}
+
+			function sendChunk(blob) {
+				var xhr = new XMLHttpRequest();
+				xhr.open('PATCH', _location, true);
+				xhr.setRequestHeader('Tus-Resumable','1.0.0');
+				xhr.setRequestHeader('Upload-Offset', _offset);
+				xhr.setRequestHeader('Content-Type', 'application/offset+octet-stream');
+				xhr.setRequestHeader('Accept', 'application/vnd.vimeo.*+json;version=3.4')
+
+				xhr.onload = function(e) {
+					console.log('VIMEO sendChunk response', e)
+					if (e.target.status < 400) {
+						_offset = e.target.getResponseHeader('upload-offset');
+					} else {
+						onUploadError(e);
+					}
+				}.bind(this);
+				xhr.onerror = onUploadError;
+				xhr.send(blob);
+			}
+
+			function completeUploading() {
+				_videoStream.recordingStopped = true;
+				var xhr = new XMLHttpRequest();
+				xhr.open('PATCH', _location, true);
+				xhr.setRequestHeader('Tus-Resumable','1.0.0');
+				xhr.setRequestHeader('Upload-Offset',  _videoStream.size);
+				xhr.setRequestHeader('Content-Type', 'application/offset+octet-stream');
+				xhr.setRequestHeader('Accept', 'application/vnd.vimeo.*+json;version=3.4')
+
+				xhr.onload = function(e) {
+					console.log('VIMEO completeUploading response', e)
+					if (e.target.status < 400) {
+
+					} else {
+						onUploadError(e);
+					}
+				}.bind(this);
+				xhr.onerror = onUploadError;
+				xhr.send();
+			}
+			
+			function recordAndUpload() {
+
+			}
+
+			function stopRecording() {
+				completeUploading();
+			}
+
+			function verifyUpload() {
+				var xhr = new XMLHttpRequest();
+				xhr.open('HEAD', _location, true);
+				xhr.setRequestHeader('Tus-Resumable','1.0.0');
+				xhr.setRequestHeader('Accept', 'application/vnd.vimeo.*+json;version=3.4')
+
+				xhr.onload = function(e) {
+					console.log('VIMEO completeUploading response', e.target.response)
+					if (e.target.status < 400) {
+
+					} else {
+						onUploadError(e);
+					}
+				}.bind(this);
+				xhr.onerror = onUploadError;
+				xhr.send();			}
+
+			return {
+				recordAndUpload: recordAndUpload,
+				stopRecording: stopRecording,
+				initUpload: initUpload,
+				verifyUpload: verifyUpload
+			}
+		}())
+
+		var facebookLiveUploader = (function () {
+
+			var _fbUserId
+			var _location;
+			var _uploadSessionId;
+			var _videoStream = {blobs:[], size:0};
+			var  _offset = 0;
+			var _fbAccessToken;
+
+			function authenticate(callback) {
+				FB.getLoginStatus(function(response){
+					console.log('getLoginStatus', response)
+					if (response.status === 'connected') {
+						_fbUserId = response.authResponse.userID;
+						_fbAccessToken = response.authResponse.accessToken;
+						callback();
+					} else {
+						FB.login(function(response) {
+							if (response.authResponse) {
+								_fbUserId = response.authResponse.userID;
+								_fbAccessToken = response.authResponse.accessToken;
+								callback();
+							}
+						}, {scope: 'public_profile,publish_pages,publish_video,user_videos'});
+
+					}
+
+				});
+
+			}
+
+			function initUpload() {
+				authenticate(createVideo)
+			}
+
+			function onDataAvailablehandler(blob) {
+				_videoStream.blobs.push(blob);
+
+				_videoStream.size += blob.size;
+
+				let blobsLength = _videoStream.blobs.length;
+				let sumSize = 0;
+
+				for(let i = 0; i < blobsLength; i++) {
+					if(_videoStream.blobs.length == 0) break;
+					sumSize = sumSize + _videoStream.blobs[i].size;
+
+					if(_videoStream.size > 1000000*2 && _videoStream.recordingStopped != true){
+						let blobsToSend = _videoStream.blobs.slice(0, i + 1);
+						var mergedBlob = new Blob(blobsToSend);
+						var blobToSend = mergedBlob.slice(0, _videoStream.size - (1000000*2));
+						console.log('VIMEO ondataavailable FIIIINISSHHH', blobToSend.size)
+
+						let lastChunk = _videoStream.recordingStopped === true ? true : false;
+						canvasComposer.removeDataListener(onDataAvailablehandler);
+						_videoStream.recordingStopped = true;
+						sendChunk(blobToSend, lastChunk);
+						break;
+					} else if(sumSize >= 1000000 && _videoStream.recordingStopped != true) {
+						let blobsToSend = _videoStream.blobs.slice(0, i + 1);
+						_videoStream.blobs.splice(0, i);
+						var mergedBlob = new Blob(blobsToSend);
+
+						var blobToSend;
+						if(mergedBlob.size > 1000000) {
+							blobToSend = mergedBlob.slice(0, 1000000);
+							var blobToNotSend = mergedBlob.slice(1000000);
+							_videoStream.blobs.unshift(blobToNotSend);
+						} else {
+							blobToSend = mergedBlob;
+						}
+
+						console.log('VIMEO ondataavailable SEND', blobToSend.size)
+
+						let lastChunk = _videoStream.recordingStopped === true ? true : false;
+						sendChunk(blobToSend, lastChunk);
+						break;
+					} else if(_videoStream.recordingStopped === true) {
+
+					}
+				}
+
+				console.log('VIMEO ondataavailable BUFFER', sumSize)
+			}
+
+			function createVideo() {
+				var uploadRequestBody = {
+					"access_token": _fbAccessToken,
+					"upload_phase": "start",
+					"file_size": 1000000*2
+				}
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', "https://graph.facebook.com/v2.9/" + _fbUserId + "/videos", true);
+				xhr.setRequestHeader('access_token', _fbAccessToken);
+				xhr.setRequestHeader('upload_phase', 'start');
+				xhr.setRequestHeader('file_size', 1000000*2);
+
+				xhr.onload = function(e) {
+					var response = JSON.parse(e.target.response);
+					console.log('VIMEO createVideo response', response)
+					if (e.target.status < 400) {
+						_uploadSessionId = response.id;
+						//_location = response.upload.upload_link;
+						canvasComposer.captureStream(onDataAvailablehandler);
+					} else {
+						onUploadError(e);
+					}
+				}.bind(this);
+				xhr.onerror = onUploadError;
+				xhr.send(JSON.stringify(uploadRequestBody));
+			}
+
+			function onUploadError(e) {
+				console.error(e);
+			}
+
+			function sendChunk(blob) {
+				var uploadRequestBody = {
+					"access_token": _fbAccessToken,
+					"upload_phase": "start",
+					"file_size": 1000000*2
+				}
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('POST', "https://graph.facebook.com/v4.0/app/uploads?access_token=" + _fbAccessToken + "&file_type=video/mp4", true);
+				/*xhr.setRequestHeader('access_token', _fbAccessToken);
+				xhr.setRequestHeader('upload_phase', 'start');
+				xhr.setRequestHeader('file_size', 1000000*2);*/
+
+				xhr.onload = function(e) {
+					var response = JSON.parse(e.target.response);
+					console.log('VIMEO createVideo response', response)
+					if (e.target.status < 400) {
+						_uploadSessionId = response.id;
+						//_location = response.upload.upload_link;
+						//canvasComposer.captureStream(onDataAvailablehandler);
+					} else {
+						onUploadError(e);
+					}
+				}.bind(this);
+				xhr.onerror = onUploadError;
+				xhr.send();
+			}
+
+			function completeUploading() {
+
+			}
+
+			function recordAndUpload() {
+
+			}
+
+			function stopRecording() {
+
+			}
+
+			return {
+				recordAndUpload: recordAndUpload,
+				stopRecording: stopRecording,
+				initUpload: initUpload
+			}
+		}())
+		window.fbLiveUploader = facebookLiveUploader;
+
+		var serverLiveUploader = (function () {
+			function initUpload() {
+				//send post to create upload
+			}
+		}())
 
 		return {
 			attachTrack: attachTrack,
@@ -3176,10 +3573,6 @@ window.WebRTCconferenceLib = function app(options){
 		function roomJoined(room, dataTrack) {
 			app.state = 'connected';
 			twilioRoom = room;
-
-			if(location.hash.trim() == '') {
-				if(!options.useAsLibrary) location.hash = '#' + room.name;
-			}
 
 			var participantScreen = roomScreens.filter(function (obj) {
 				return obj.sid == room.localParticipant.sid;
@@ -6230,10 +6623,9 @@ window.WebRTCconferenceLib = function app(options){
 		app.state = 'connecting';
 		log('app.init')
 		if(options.mode == 'twilio') {
-			require(['/Q/plugins/Streams/js/tools/webrtc/twilio-video.min.js?ts=' + (+new Date)], function (TwilioInstance) {
-				Twilio = window.Twilio = TwilioInstance;
-				initWithTwilio(callback);
-			});
+			console.log('options.TwilioInstance', options.TwilioInstance)
+			Twilio = window.Twilio = options.TwilioInstance;
+			initWithTwilio(callback);
 		} else {
 			initWithNodeJs(callback);
 		}
