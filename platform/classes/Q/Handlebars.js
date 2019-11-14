@@ -104,13 +104,13 @@ handlebars.registerHelper('json', function(context) {
 });
 
 handlebars.registerHelper('interpolate', function(expression) {
-	if (arguments.length < 2) {
+	if (Q.isEmpty(expression) || arguments.length < 2) {
 		return '';
 	}
 	var arr = Array.prototype.slice.call(arguments, 0);
 	var last = arr.pop();
 	arr.shift();
-	return expression.interpolate(Q.isEmpty(last.hash) ? arr : last.hash);
+	return expression.interpolate(Q.isEmpty(last.hash) ? arr[0] : last.hash);
 });
 
 handlebars.registerHelper('option', function(value, html, selectedValue) {

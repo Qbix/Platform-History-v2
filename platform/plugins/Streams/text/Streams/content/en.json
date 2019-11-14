@@ -31,7 +31,9 @@
         "SearchByName": "Search by name"
     },
     "notifications": {
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+		"*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+		"ManageEmailSubscriptions": "manage your email subscriptions",
+		"IfUnsubscribe": "If you want to unsubscribe",
         "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: ",
         "Streams\/changed": "Changes in {{stream.fields.title}}",
         "Streams\/invite": "You were invited to {{& stream.fields.title}}",
@@ -100,7 +102,7 @@
                 "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{message.instructions.fromDisplayType}}",
+                "hasANew": "has a new",
                 "byAvatar": "added by {{avatar.displayName}}"
             }
         }
