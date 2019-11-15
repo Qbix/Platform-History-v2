@@ -52,13 +52,29 @@ function _getLoaders() {
 	return _loaders;
 }
 
+/**
+ * Call this in your helpers to parse the args into a useful array
+ * @method parseArgs
+ * @static
+ * @param {Array} arguments to helper function
+ * @return {array}
+ */
+handlebars.prepareArgs = function(args) {
+	var arr = Array.prototype.slice.call(args, 0);
+	var last = arr.pop(); // last parameter is for the hash
+	arr.shift(); // the pattern
+	var result = Q.isEmpty(last.hash) ? {} : last.hash;
+	arr.forEach(function (item, i) {
+		result[i] = item;
+	});
+	return result;
+};
+
 handlebars.registerHelper('call', function(path) {
 	if (!path) {
 		return "{{call missing method name}}";
 	}
-	var args = Array.prototype.slice.call(
-		arguments, 1, arguments.length-1
-	);
+	var args = handlebars.prepareArgs(arguments);
 	var parts = path.split('.');
 	var subparts = parts.slice(0, -1);
 	var f = Q.getObject(parts, this);
@@ -107,10 +123,8 @@ handlebars.registerHelper('interpolate', function(expression) {
 	if (arguments.length < 2) {
 		return '';
 	}
-	var arr = Array.prototype.slice.call(arguments, 0);
-	var last = arr.pop();
-	arr.shift();
-	return expression.interpolate(Q.isEmpty(last.hash) ? arr : last.hash);
+	var args = handlebars.prepareArgs(arguments);
+	return expression.interpolate(args);
 });
 
 handlebars.registerHelper('option', function(value, html, selectedValue) {
