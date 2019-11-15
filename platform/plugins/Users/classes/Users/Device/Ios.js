@@ -90,7 +90,7 @@ Users_Device_Ios.prototype.handlePushNotification = function (notification, opti
  * Starts iOS APNs provider server, based on options
  * @method provider
  * @static
- * @param {String} appId
+ * @param {String} appId Can be the internal app id or external app id on the platform
  * @param {Object} [providerOptions={}] Override any apn.Provider constructor options
  * @return {apn.Provider}
  */
@@ -108,7 +108,8 @@ Users_Device_Ios.provider = function (appId, providerOptions) {
  	var fs = require('fs');
  	var apn = require('apn');
  	var path = require('path');
- 	var o = Q.Config.expect(['Users', 'apps', 'ios', appId]);
+	var d = Q.Users.appInfo('ios', appId);
+ 	var o = d.appInfo || {};
  	var sandbox = o.sandbox || false;
  	var token = o.token;
  	var ssl = o.ssl;

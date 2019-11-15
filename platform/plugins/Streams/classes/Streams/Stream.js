@@ -1251,10 +1251,10 @@ Sp.notify = function(participant, event, message, byUserId, callback) {
 				appIds = {};
 				var platforms = Q.Config.expect(['Users', 'apps', 'platforms']);
 				platforms.forEach(function (platform) {
-					var platformAppId = Q.Config.expect([
-						'Users', 'apps', platform, app, 'appId'
-					]);
-					appIds[platform] = [platformAppId];
+					var p = Users.appInfo(platform, app);
+					if (p.appId) {
+						appIds[platform] = [p.appId];
+					}
 				});
 			}
 			Users.User.devices(userId, appIds, function (devices) {
