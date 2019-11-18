@@ -14,7 +14,7 @@ window.WebRTCconferenceLib = function app(options){
 		turnCredentials: null,
 		username: null,
 		debug: false,
-		canvasComposerOptions: {},
+		liveStreaming: {},
 		TwilioInstance: null
 	};
 
@@ -1562,7 +1562,7 @@ window.WebRTCconferenceLib = function app(options){
 
 				function drawVideosOnCanvas() {
 					_inputCtx.clearRect(0, 0, _size.width, _size.height);
-					if(options.canvasComposerOptions.drawBackground && _background != null) drawBackground(_background);
+					if(options.liveStreaming.drawBackground && _background != null) drawBackground(_background);
 
 					for(let i in _streams) {
 						let streamData = _streams[i];
@@ -1857,9 +1857,11 @@ window.WebRTCconferenceLib = function app(options){
 						if(audiotracks.length != 0) {
 							console.log('audioComposer add stream', audiotracks);
 
-							const source = audio.createMediaStreamSource(audiotracks[0].stream);
-							source.connect(_dest);
-							tracksNum++;
+							if(audiotracks[0].stream != null && audiotracks[0].stream.getAudioTracks().length != 0) {
+								const source = audio.createMediaStreamSource(audiotracks[0].stream);
+								source.connect(_dest);
+								tracksNum++;
+							}
 						}
 					});
 
@@ -1927,14 +1929,24 @@ window.WebRTCconferenceLib = function app(options){
 					console.log('_dataListeners', _dataListeners);
 				}
 
-				if(options.canvasComposerOptions.useRecordRTCLibrary) {
+				var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+
+				var codecs;
+				if(isChrome && !_isMobile) {
+					codecs = 'video/webm;codecs=h264';
+				} else if (_isMobile && _isAndroid) {
+					codecs = 'video/webm;codecs=vp8';
+				}
+
+				if(options.liveStreaming.useRecordRTCLibrary) {
 					videoComposer.compositeVideosAndDraw();
 
-					_canvasMediStream = canvasComposer.canvas().captureStream(30);
+					_canvasMediStream = canvasComposer.canvas().captureStream(25);
 					audioComposer.mix();
+
 					_mediaRecorder = RecordRTC(_canvasMediStream, {
 						recorderType:MediaStreamRecorder,
-						mimeType: 'video/webm;codecs=h264',
+						mimeType: codecs,
 						timeSlice: 1000,
 						ondataavailable:trigerDataListeners
 					});
@@ -1953,7 +1965,7 @@ window.WebRTCconferenceLib = function app(options){
 
 					_mediaRecorder = new MediaRecorder(_canvasMediStream, {
 						//mimeType: 'video/webm',
-						mimeType: 'video/webm;codecs=h264',
+						mimeType: codecs,
 						videoBitsPerSecond : 3 * 1024 * 1024
 					});
 
@@ -1974,8 +1986,19 @@ window.WebRTCconferenceLib = function app(options){
 
 			function stopRecorder() {
 				if(_mediaRecorder == null) return;
-				if(options.canvasComposerOptions.useRecordRTCLibrary) {
-					_mediaRecorder.stopRecording();
+				if(options.liveStreaming.useRecordRTCLibrary) {
+					_mediaRecorder.stopRecording(function () {
+						document.querySelector('.Streams_webrtc_streaming_item').addEventListener('click', function () {
+
+							var fileName = 'test.webm';
+							var file = new File([_mediaRecorder.getBlob()], fileName, {
+								type: 'video/webm;codecs=h264'
+							});
+							invokeSaveAsDialog(file, fileName);
+
+
+						})
+					});
 				} else {
 					_mediaRecorder.stop();
 				}
@@ -2018,80 +2041,13 @@ window.WebRTCconferenceLib = function app(options){
 
 		var fbLive = (function () {
 			console.log('fbLive');
-			var fbliveOptions = {
-				createLiveViaPHPSDK: true,
-			};
 			var _streamingSocket;
 			var _fbUserId = null;
 
 			var _fbApiInited;
 			var _fbStreamUrl;
 
-			var _videoStream = {blobs: [], allBlobs: [], size: 0}
-
-			function goLiveDialog() {
-				console.log('goLiveDialog')
-				//return connect('123', captureStreamAndSend);
-				var goLive = function() {
-					FB.ui({
-						display: 'touch',
-						method: 'live_broadcast',
-						phase: 'create'
-					}, (createRes) => {
-
-						FB.ui({
-							display: 'touch',
-							method: 'live_broadcast',
-							phase: 'publish',
-							broadcast_data: createRes
-						}, (publishRes) => {
-							console.log('goLiveDialog', publishRes);
-							if(publishRes == null || typeof publishRes == 'undefined') {
-								app.screensInterface.fbLive.endStreaming();
-							} else {
-								var videoLink = 'https://www.facebook.com/' + _fbUserId + '/videos/' +  publishRes.id;
-								var videoPlayerLink = 'https://www.facebook.com/plugins/video.php?href=' + encodeURI(videoLink) + '&show_text=0&width=560';
-								app.event.dispatch('facebookLiveStreamingStarted',{
-									'videoId': publishRes.id,
-									'userId': _fbUserId,
-									'link': videoLink,
-									'videoPlayerLink': videoPlayerLink
-								});
-
-								FB.api('/me', function(response) {
-
-
-									console.log('fbinfo', response)
-								});
-
-							}
-						});
-
-						console.log('goLiveDialog', createRes);
-						connect(createRes.secure_stream_url, captureStreamAndSend);
-					});
-				}
-
-				FB.getLoginStatus(function(response){
-					console.log('getLoginStatus', response)
-					if (response.status === 'connected') {
-						_fbApiInited = true;
-						_fbUserId = response.authResponse.userID;
-						goLive();
-					} else {
-						FB.login(function(response) {
-							if (response.authResponse) {
-								_fbApiInited = true;
-								_fbUserId = response.authResponse.userID;
-								goLive();
-							}
-						}, {scope: 'email,public_profile,publish_video'});
-
-					}
-
-				});
-
-			}
+			var _videoStream = {blobs: [], allBlobs: [], size: 0, timer: null}
 
 			function connect(streamUrl, callback) {
 				if(typeof io == 'undefined') return;
@@ -2099,7 +2055,8 @@ window.WebRTCconferenceLib = function app(options){
 				var secure = options.nodeServer.indexOf('https://') == 0;
 				_streamingSocket = io.connect(options.nodeServer, {
 					query: {
-						rtmp: streamUrl
+						rtmp: streamUrl,
+						localInfo: JSON.stringify(_localInfo)
 					},
 					transports: ['websocket'],
 					'force new connection': true,
@@ -2116,9 +2073,12 @@ window.WebRTCconferenceLib = function app(options){
 			}
 
 			function onDataAvailablehandler(blob) {
+
 				_videoStream.blobs.push(blob);
 
 				_videoStream.size += blob.size;
+
+				if(options.liveStreaming.timeSlice != null) return;
 
 				let blobsLength = _videoStream.blobs.length;
 				let sumSize = 0;
@@ -2127,7 +2087,8 @@ window.WebRTCconferenceLib = function app(options){
 					if (_videoStream.blobs.length == 0) break;
 					sumSize = sumSize + _videoStream.blobs[i].size;
 
-					if (sumSize >= 1000000 && _videoStream.recordingStopped != true) {
+					let chunkSize = options.liveStreaming.chunkSize != null ? options.liveStreaming.chunkSize : 1000000;
+					if (sumSize >= chunkSize && _videoStream.recordingStopped != true) {
 						let blobsToSend = _videoStream.blobs.slice(0, i + 1);
 						_videoStream.blobs.splice(0, i);
 						var mergedBlob = new Blob(blobsToSend);
@@ -2148,10 +2109,9 @@ window.WebRTCconferenceLib = function app(options){
 						console.log('VIMEO ondataavailable SEND', mergedBlob.size)
 						_streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
 						break;
-					} else if (_videoStream.recordingStopped === true) {
-
 					}
 				}
+
 			}
 
 			return {
@@ -2160,6 +2120,11 @@ window.WebRTCconferenceLib = function app(options){
 				},
 				endStreaming: function () {
 					console.log('goLiveDialog end streaming');
+
+					clearTimeout(_videoStream.timer);
+					let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
+					var mergedBlob = new Blob(blobsToSend);
+					_streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
 
 					canvasComposer.stopRecorder();
 
@@ -2174,11 +2139,24 @@ window.WebRTCconferenceLib = function app(options){
 				},
 				startStreaming: function(fbStreamUrl) {
 					console.log('startStreaming', fbStreamUrl)
+
 					connect(fbStreamUrl, function () {
 						canvasComposer.captureStream(function (blob) {
 							onDataAvailablehandler(blob);
 							//_streamingSocket.emit('Streams/webrtc/videoData', blob);
 						});
+
+						var timer = function() {
+							if(_videoStream.blobs.length != 0) {
+								let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
+								var mergedBlob = new Blob(blobsToSend);
+								_streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
+							}
+							_videoStream.timer = setTimeout(timer, 6000);
+						}
+
+						_videoStream.timer = setTimeout(timer, 6000);
+
 						app.event.dispatch('facebookLiveStreamingStarted');
 					});
 				}
@@ -6656,6 +6634,8 @@ window.WebRTCconferenceLib = function app(options){
 		if(socket != null) socket.disconnect();
 
 		if(twilioRoom != null) twilioRoom.disconnect();
+
+		app.event.dispatch('disconnected');
 	}
 
 	function log(text, arg1, arg2, arg3, arg4) {

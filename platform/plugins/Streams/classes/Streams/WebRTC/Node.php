@@ -51,6 +51,7 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
 
 		$turnServers = Q_Config::get('Streams', 'webrtc', 'turnServers', []);
 		$useTwilioTurn = Q_Config::get('Streams', 'webrtc', 'useTwilioTurnServers', null);
+		$liveStreamingConfig = Q_Config::get('Streams', 'webrtc', 'liveStreaming', []);
 		$debug = Q_Config::get('Streams', 'webrtc', 'debug', false);
 
 		if($useTwilioTurn) {
@@ -67,7 +68,10 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
             'roomId' => $stream->name,
             'socketServer' => $socketServer,
             'turnCredentials' => $turnServers,
-            'debug' => $debug
+            'debug' => $debug,
+			'options' => array(
+				'liveStreaming' => $liveStreamingConfig
+			)
         );
     }
 

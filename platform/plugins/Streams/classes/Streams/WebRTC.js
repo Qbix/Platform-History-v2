@@ -47,14 +47,14 @@ WebRTC.listen = function () {
 	var io = socket.io;
 	io.on('connection', function(socket) {
 
-		let rtmpUrl = socket.handshake.query.rtmp
+		let rtmpUrl = socket.handshake.query.rtmp;
 		if ( rtmpUrl != null ) {
-			//return;
 			if(_debug) console.log('made sockets connection (LIVE STREAMING)', socket.id);
+			var usersInfo = JSON.parse(socket.handshake.query.localInfo);
+			var isAndroid = usersInfo.platform == 'android' ? true : false
 
-
-			console.log('Target RTMP URL:', rtmpUrl);
 			var ffmpeg;
+			var encoder = (isAndroid || usersInfo.ua.toLowerCase().indexOf('firefox') != -1) ? 'libx264' : 'copy';
 			function createFfmpegProcess() {
 				// Launch FFmpeg to handle all appropriate transcoding, muxing, and RTMP.
 				// If 'ffmpeg' isn't in your path, specify the full path to the ffmpeg binary.
@@ -65,6 +65,7 @@ WebRTC.listen = function () {
 
 					//set input framerate to 24 fps
 					//'-r', '24',
+					'-re',
 					// FFmpeg will read input video from STDIN
 					'-i', '-',
 
@@ -77,7 +78,7 @@ WebRTC.listen = function () {
 					// so that we don't waste any CPU and quality with unnecessary transcoding.
 					// If the browser doesn't support H.264, set the video codec to 'libx264'
 					// or similar to transcode it to H.264 here on the server.
-					'-vcodec', 'copy',
+					'-vcodec', encoder,
 
 					// AAC audio is required for Facebook Live.  No browser currently supports
 					// encoding AAC, so we must transcode the audio to AAC here on the server.

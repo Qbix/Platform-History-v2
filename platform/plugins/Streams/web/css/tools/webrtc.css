@@ -1557,6 +1557,7 @@ webrtc_tool_popup-settings.Streams_webrtc_popup-box > div {
     padding-top: 2px;
     margin-top: 7px;
     min-height: 25px;
+    cursor: pointer;
 }
 .Streams_webrtc_popup-box .Streams_webrtc_choose-device  .Streams_webrtc_disabled-radio,
 .dialog-box .Streams_webrtc_choose-device  .Streams_webrtc_disabled-radio,
