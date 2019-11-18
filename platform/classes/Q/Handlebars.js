@@ -64,7 +64,7 @@ handlebars.prepareArgs = function(args) {
 	var last = arr.pop(); // last parameter is for the hash
 	arr.shift(); // the pattern
 	var result = Q.isEmpty(last.hash) ? {} : last.hash;
-	arr.forEach(function (item, i) {
+	Q.each(arr[0], function (i, item) {
 		result[i] = item;
 	});
 	return result;
@@ -120,7 +120,7 @@ handlebars.registerHelper('json', function(context) {
 });
 
 handlebars.registerHelper('interpolate', function(expression) {
-	if (arguments.length < 2) {
+	if (Q.isEmpty(expression) || arguments.length < 2) {
 		return '';
 	}
 	var args = handlebars.prepareArgs(arguments);
