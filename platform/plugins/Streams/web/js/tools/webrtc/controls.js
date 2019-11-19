@@ -164,7 +164,7 @@
 				});
 
 				tool.WebRTCLib.event.on('facebookLiveStreamingStarted', function (e) {
-					//tool.facebookLiveDialog();
+
 					if(!tool.cameraBtn.classList.contains('isRecording')) tool.cameraBtn.classList.add('isRecording');
 				});
 				tool.WebRTCLib.event.on('facebookLiveStreamingEnded', function () {
@@ -1149,7 +1149,7 @@
 
 				var facebookLiveItem = document.createElement('DIV');
 				facebookLiveItem.className = 'Streams_webrtc_streaming_item';
-				var textLabel = document.createTextNode('Facebook Live');
+				var textLabel = document.createTextNode('Start Facebook Livestream');
 				var fbLiveIcon = document.createElement('SPAN');
 				fbLiveIcon.className = 'Streams_webrtc_streaming_icon';
 				fbLiveIcon.innerHTML = icons.facebooklogo;
@@ -1208,6 +1208,7 @@
 
 				var facebookLiveUrl = document.createElement('INPUT');
 				facebookLiveUrl.type = 'text';
+				tool.facebookLiveUrlInput = facebookLiveUrl;
 
 				var facebookLiveCopy = document.createElement('DIV');
 				facebookLiveCopy.className = 'Streams_webrtc_streaming_copy_url_btn';
@@ -1227,15 +1228,18 @@
 				facebookLiveEmbed.appendChild(facebookLiveUrl);
 				facebookLiveEmbed.appendChild(facebookLiveCopy);
 				streamingAndUploading.appendChild(facebookLiveItem);
-				facebookLiveTtle.appendChild(facebookLiveTtleInput);
-				fbStreamingStartSettings.appendChild(facebookLiveTtle);
-				facebookLiveDesc.appendChild(facebookLiveDescInput);
-				fbStreamingStartSettings.appendChild(facebookLiveDesc);
+				if(!tool.WebRTCClass.options().liveStreaming.startFbLiveViaGoLiveDialog) {
+					facebookLiveTtle.appendChild(facebookLiveTtleInput);
+					fbStreamingStartSettings.appendChild(facebookLiveTtle);
+					facebookLiveDesc.appendChild(facebookLiveDescInput);
+					fbStreamingStartSettings.appendChild(facebookLiveDesc);
 
-				privacySelect.appendChild(option1);
-				privacySelect.appendChild(option2);
-				privacySelect.appendChild(option3);
-				startStreamingBtnCon.appendChild(privacySelect);
+					privacySelect.appendChild(option1);
+					privacySelect.appendChild(option2);
+					privacySelect.appendChild(option3);
+					startStreamingBtnCon.appendChild(privacySelect);
+				}
+
 
 				startStreamingBtnCon.appendChild(startStreamingBtn);
 				fbStreamingStartSettings.appendChild(startStreamingBtnCon);
@@ -1256,6 +1260,7 @@
 						fbStreamingStartSettings.classList.remove('shown');
 					} else {
 						fbStreamingStartSettings.classList.add('shown');
+						facebookLiveTtleInput.focus();
 					}
 				})
 				startStreamingBtn.addEventListener('click', function () {
@@ -1265,8 +1270,8 @@
 					data.title = facebookLiveTtleInput.value;
 					data.description = facebookLiveDescInput.value;
 					data.privacy = privacySelect.value;
-					tool.fbLiveInterface.startFacebookLive(data, function (streamingData) {
-						facebookLiveUrl.value = 'https://www.facebook.com/facebook/videos/' + streamingData.id;
+					tool.fbLiveInterface.startFacebookLive(data, function (linkToStream) {
+						facebookLiveUrl.value = linkToStream;
 
 						fbStreamingStartSettings.style.display = 'none';
 						fbStreamingLiveSection.style.display = 'block';
@@ -1281,7 +1286,7 @@
 					data.title = facebookLiveTtleInput.value;
 					data.description = facebookLiveDescInput.value;
 					data.privacy = privacySelect.value;
-					tool.fbLiveInterface.endLive(function (streamingData) {
+					tool.fbLiveInterface.endLive(function () {
 						facebookLiveUrl.value = '';
 
 						fbStreamingStartSettings.style.display = 'block';
@@ -2054,6 +2059,54 @@
 					var _liveId;
 					var _accessToken;
 
+					function goLiveDialog(callback) {
+						console.log('goLiveDialog')
+						//return connect('123', captureStreamAndSend);
+						var goLive = function() {
+							FB.ui({
+								display: 'popup',
+								method: 'live_broadcast',
+								phase: 'create'
+							}, (createRes) => {
+								console.log('goLiveDialog 0', createRes);
+
+								FB.ui({
+									display: 'popup',
+									method: 'live_broadcast',
+									phase: 'publish',
+									broadcast_data: createRes
+								}, (publishRes) => {
+									console.log('goLiveDialog 1', publishRes);
+									if(publishRes == null || typeof publishRes == 'undefined') {
+										tool.WebRTCLib.screensInterface.fbLive.endStreaming();
+									}
+
+									_liveId = publishRes.id
+									var linkToStream = 'https://www.facebook.com/facebook/videos/' + publishRes.id;
+									if(callback != null) callback(linkToStream);
+								});
+
+								tool.WebRTCLib.screensInterface.fbLive.startStreaming(createRes.secure_stream_url);
+							});
+						}
+
+						FB.getLoginStatus(function(response){
+							console.log('getLoginStatus', response)
+							if (response.status === 'connected') {
+								goLive();
+							} else {
+								FB.login(function(response) {
+									if (response.authResponse) {
+										goLive();
+									}
+								}, {scope: 'email,public_profile,publish_video'});
+
+							}
+
+						});
+
+					}
+
 					/**
 					 * Creates live streaming session via FB SDK for PHP
 					 * @method createLive
@@ -2140,7 +2193,12 @@
 					 */
 					function startFacebookLive(data, callback) {
 
+
 						var satrtLive = function() {
+							if(tool.WebRTCClass.options().liveStreaming.startFbLiveViaGoLiveDialog) {
+								goLiveDialog(callback);
+								return
+							}
 							var handlerCallback = function() {
 								if(tool.WebRTCLib.screensInterface.fbLive.isStreaming()) {
 									tool.facebookLiveDialog();
@@ -2148,7 +2206,8 @@
 									tool.fbLiveInterface.createLive(data, function (response) {
 
 										tool.WebRTCLib.screensInterface.fbLive.startStreaming(response.secure_stream_url);
-										if(callback != null) callback(response);
+										var linkToStream = 'https://www.facebook.com/facebook/videos/' + response.id;
+										if(callback != null) callback(linkToStream);
 									});
 								}
 							}
@@ -2170,7 +2229,7 @@
 							});
 						}
 
-						if(tool.WebRTCClass.options().canvasComposerOptions.useRecordRTCLibrary) {
+						if(tool.WebRTCClass.options().liveStreaming.useRecordRTCLibrary) {
 							Q.addScript([
 								"{{Streams}}/js/tools/webrtc/RecordRTC.js"
 							], function () {
