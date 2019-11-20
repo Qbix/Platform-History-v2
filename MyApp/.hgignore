@@ -6,13 +6,9 @@ syntax: regexp
 ^\.idea/
 ^local/
 ^files/Q/
-^files/MyApp/uploads/Users/(?!.dir).+
-^files/MyApp/uploads/Streams/(?!.dir).+
+^files/MyApp/uploads
 ^text/(?!MyApp)
-^web/Q/uploads
-^web/Q/plugins
-^web/Q/text
-^web/Q/views
+^web/Q/
 ^config/Q/urls/
 
 syntax: glob
