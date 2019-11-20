@@ -686,8 +686,7 @@
 				$('#Users_login_identifierType').val(o.identifierType);
 			} else if (o.using[0] === 'facebook') { // only facebook used. Open facebook login right away
 				Users.initFacebook(function () {
-					var opts = o.scope ? {scope: o.scope.join(',')} : undefined;
-					FB.login(function (response) {
+					Users.Facebook.login(function (response) {
 						if (!response.authResponse) {
 							_onCancel();
 							return;
@@ -720,7 +719,7 @@
 						}, {
 							check: o.scope
 						});
-					}, opts);
+					});
 				}, {
 					appId: appId
 				});
@@ -2981,17 +2980,19 @@
 			}
 		},
 
-		login: function () {
+		login: function (callback) {
 			switch (Users.Facebook.type) {
 			case 'web':
 				var scope = Users.Facebook.scope;
 				FB.login(function (response) {
 					Users.Facebook.doLogin(response);
+					callback && callback(response);
 				}, scope ? {scope: scope.join(',')} : undefined);
 				break;
 			case 'native':
 				facebookConnectPlugin.login(["public_profile", "email"], function (response) {
 					Users.Facebook.doLogin(response);
+					callback && callback(response);
 				}, function (err) {
 					console.warn(err);
 				});
