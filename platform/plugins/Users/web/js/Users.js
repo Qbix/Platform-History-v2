@@ -644,9 +644,6 @@
 		return false;
 
 		function _doLogin() {
-
-			var dest;
-
 			// try quietly, possible only with facebook
 			if (o.tryQuietly) {
 				if (o.using.indexOf('facebook') >= 0) {
@@ -1582,8 +1579,13 @@
 					var facebookLogin = $('<a href="#login_facebook" id="Users_login_with_facebook" />').append(
 						$('<img alt="login with facebook" />')
 							.attr('src', Q.text.Users.login.facebookSrc || Q.url('{{Users}}/img/facebook-login.png'))
-					).css({'display': 'inline-block', 'vertical-align': 'middle'})
-						.click(function () {
+					)
+					.css({'display': 'inline-block', 'vertical-align': 'middle'})
+					.click(function () {
+						if (location.search.includes('handoff=yes')) {
+							var scheme = Q.getObject([Q.info.platform, Q.info.app, 'scheme'], Users.apps);
+							document.location.href = scheme + '#facebookLogin=1';
+						} else {
 							Users.initFacebook(function () {
 								Users.Facebook.usingPlatforms = usingPlatforms;
 								Users.Facebook.scope = options.scope;
@@ -1591,8 +1593,10 @@
 							}, {
 								appId: appId
 							});
-							return false;
-						});
+						}
+
+						return false;
+					});
 					step1_usingPlatforms_div.append(Q.text.Users.login.usingOther).append(facebookLogin);
 					// Load the facebook script now, so clicking on the facebook button
 					// can trigger a popup directly, otherwise popup blockers may complain:
@@ -2354,23 +2358,22 @@
 				Q.plugins.Users.setIdentifier();
 				return false;
 			});
-		if (!location.hash.queryField('Q.Users.newSessionId')) {
-			return;
-		}
-		var fieldNames = [
-			'Q.Users.appId', 'Q.Users.newSessionId',
-			'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.signature'
-		];
-		var fields = location.hash.queryField(fieldNames);
-		var storedDeviceId = localStorage.getItem("Q.Users.Device.deviceId");
-		fields['Q.Users.deviceId'] = fields['Q.Users.deviceId'] || storedDeviceId;
-		if (fields['Q.Users.newSessionId']) {
-			Q.req('Users/session', function () {
-				// user was redirected from Users/session
-			}, {
-				method: 'post',
-				fields: fields
-			});
+		if (location.hash.queryField('Q.Users.newSessionId')) {
+			var fieldNames = [
+				'Q.Users.appId', 'Q.Users.newSessionId',
+				'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.signature'
+			];
+			var fields = location.hash.queryField(fieldNames);
+			var storedDeviceId = localStorage.getItem("Q.Users.Device.deviceId");
+			fields['Q.Users.deviceId'] = fields['Q.Users.deviceId'] || storedDeviceId;
+			if (fields['Q.Users.newSessionId']) {
+				Q.req('Users/session', function () {
+					// user was redirected from Users/session
+				}, {
+					method: 'post',
+					fields: fields
+				});
+			}
 		}
 	}, 'Users');
 
@@ -2383,6 +2386,8 @@
 				Q.cookie('Q_sessionId', fields['Q.Users.newSessionId']);
 				document.location.reload();
 			}
+		} else if (url.includes('facebookLogin=1')) {
+			Users.login({using: 'facebook'});
 		}
 
 		function _getParams(url) {
