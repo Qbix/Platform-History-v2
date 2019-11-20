@@ -137,14 +137,17 @@ function () {
 			if ($this.val()) {
 				$placeholder.stop().hide();
 			}
-			var interval;
-			$this.focus(function () {
+
+			$this.on('input change', function () {
+				if ($this.val()) {
+					$placeholder.stop().hide();
+				}
+			}).on('focus', function () {
 				$placeholder.parent().addClass('Q_focus');
-			});
-			$this.blur(function () {
+			}).on('blur', function () {
 				$placeholder.parent().removeClass('Q_focus');
-				if (interval) clearInterval(interval);
 			});
+						
 			$this.data('Q-placeholder', $placeholder);
 		}).off('.Q_placeholders')
 		.on(namespacedEvents, manage);
