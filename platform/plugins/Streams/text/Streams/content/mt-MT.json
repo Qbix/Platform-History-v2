@@ -241,7 +241,7 @@
                 "byAvatar": "minn {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "għandu {{message.instructions.fromDisplayType}} ġdid",
+                "hasANew": "għandu {{instructions.fromDisplayType}} ġdid",
                 "byAvatar": "miżjud minn {{avatar.displayName}}"
             }
         }

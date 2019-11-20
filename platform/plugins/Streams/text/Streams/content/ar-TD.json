@@ -241,7 +241,7 @@
                 "byAvatar": "بواسطة {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "لديه {{message.instructions.fromDisplayType}} جديد",
+                "hasANew": "لديه {{instructions.fromDisplayType}} جديد",
                 "byAvatar": "أضيفت بواسطة {{avatar.displayName}}"
             }
         }

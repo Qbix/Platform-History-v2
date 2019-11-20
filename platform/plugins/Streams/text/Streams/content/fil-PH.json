@@ -238,7 +238,7 @@
                 "byAvatar": "sa pamamagitan ng {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "ay may isang bagong {{message.instructions.fromDisplayType}}",
+                "hasANew": "ay may isang bagong {{instructions.fromDisplayType}}",
                 "byAvatar": "idinagdag ni {{avatar.displayName}}"
             }
         }

@@ -241,7 +241,7 @@
                 "byAvatar": "eftir {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "er með nýjan {{message.instructions.fromDisplayType}}",
+                "hasANew": "er með nýjan {{instructions.fromDisplayType}}",
                 "byAvatar": "bætt við af {{avatar.displayName}}"
             }
         }

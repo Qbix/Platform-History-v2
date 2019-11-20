@@ -241,7 +241,7 @@
                 "byAvatar": "na {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "ina mpya {{message.instructions.fromDisplayType}}",
+                "hasANew": "ina mpya {{instructions.fromDisplayType}}",
                 "byAvatar": "imeongezwa na {{avatar.displayName}}"
             }
         }

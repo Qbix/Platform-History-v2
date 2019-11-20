@@ -242,7 +242,7 @@
                 "byAvatar": "{{avatar.displayName}} tarafından"
             },
             "relatedTo": {
-                "hasANew": "yeni bir {{message.instructions.fromDisplayType}} var",
+                "hasANew": "yeni bir {{instructions.fromDisplayType}} var",
                 "byAvatar": "{{avatar.displayName}} tarafından eklendi"
             }
         }

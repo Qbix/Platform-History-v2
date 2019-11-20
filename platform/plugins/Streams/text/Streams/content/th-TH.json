@@ -241,7 +241,7 @@
                 "byAvatar": "โดย {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "มี {{message.instructions.fromDisplayType}} ใหม่",
+                "hasANew": "มี {{instructions.fromDisplayType}} ใหม่",
                 "byAvatar": "เพิ่มโดย {{avatar.displayName}}"
             }
         }

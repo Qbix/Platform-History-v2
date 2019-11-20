@@ -241,7 +241,7 @@
                 "byAvatar": "bởi {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "có {{message.instructions.fromDisplayType}} mới",
+                "hasANew": "có {{instructions.fromDisplayType}} mới",
                 "byAvatar": "được thêm bởi {{avatar.displayName}}"
             }
         }

@@ -241,7 +241,7 @@
                 "byAvatar": "від {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "має новий {{message.instructions.fromDisplayType}}",
+                "hasANew": "має новий {{instructions.fromDisplayType}}",
                 "byAvatar": "додав {{avatar.displayName}}"
             }
         }

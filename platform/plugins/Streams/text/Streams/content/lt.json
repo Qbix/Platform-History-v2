@@ -241,7 +241,7 @@
                 "byAvatar": "pateikė {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "turi naują {{message.instructions.fromDisplayType}}",
+                "hasANew": "turi naują {{instructions.fromDisplayType}}",
                 "byAvatar": "pridėjo {{avatar.displayName}}"
             }
         }

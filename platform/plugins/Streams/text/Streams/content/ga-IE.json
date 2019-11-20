@@ -241,7 +241,7 @@
                 "byAvatar": "le {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "a bhfuil {{message.instructions.fromDisplayType}} nua aige",
+                "hasANew": "a bhfuil {{instructions.fromDisplayType}} nua aige",
                 "byAvatar": "le {{avatar.displayName}}"
             }
         }

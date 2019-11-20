@@ -241,7 +241,7 @@
                 "byAvatar": "af {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "har en ny {{message.instructions.fromDisplayType}}",
+                "hasANew": "har en ny {{instructions.fromDisplayType}}",
                 "byAvatar": "tilføjet af {{avatar.displayName}}"
             }
         }

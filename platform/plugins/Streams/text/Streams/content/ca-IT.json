@@ -241,7 +241,7 @@
                 "byAvatar": "per {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "té un {{message.instructions.fromDisplayType}} nou",
+                "hasANew": "té un {{instructions.fromDisplayType}} nou",
                 "byAvatar": "afegit per {{avatar.displayName}}"
             }
         }

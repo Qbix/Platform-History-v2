@@ -241,7 +241,7 @@
                 "byAvatar": "egilea: {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "{{message.instructions.fromDisplayType}} berri bat du",
+                "hasANew": "{{instructions.fromDisplayType}} berri bat du",
                 "byAvatar": "{{avatar.displayName}} (e) k gehituta"
             }
         }

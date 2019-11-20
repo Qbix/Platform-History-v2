@@ -241,7 +241,7 @@
                 "byAvatar": "{{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "есть новый {{message.instructions.fromDisplayType}}",
+                "hasANew": "есть новый {{instructions.fromDisplayType}}",
                 "byAvatar": "добавлено {{avatar.displayName}}"
             }
         }
