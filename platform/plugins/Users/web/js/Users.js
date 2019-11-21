@@ -659,6 +659,8 @@
 
 			priv.result = null;
 			priv.used = null;
+			priv.login_onConnect = _onConnect;
+			priv.login_onCancel = _onCancel;
 
 			// perform actual login
 			if (o.using.indexOf('native') >= 0) {
@@ -668,8 +670,6 @@
 					: {};
 				// set up dialog
 				login_setupDialog(usingPlatforms, o);
-				priv.login_onConnect = _onConnect;
-				priv.login_onCancel = _onCancel;
 				priv.linkToken = null;
 				priv.scope = o.scope;
 				priv.activation = o.activation;
@@ -3034,11 +3034,11 @@
 				var me = params.me[0];
 				Users.Facebook.me = me;
 				var picture = params.picture[0].data;
+				var $usersLoginIdentifier= $('#Users_login_identifier');
 				if (!me.email) {
 					step1_form.data('used', null);
 					alert(Q.text.Users.login.facebookNoEmail);
-					$('#Users_login_identifier')
-						.plugin('Q/clickfocus');
+					$usersLoginIdentifier.plugin('Q/clickfocus');
 					return true;
 				}
 				priv.registerInfo = {
@@ -3053,11 +3053,33 @@
 					picWidth: picture.width,
 					picHeight: picture.height
 				};
-				$('#Users_login_identifier')
-					.val(me.email)
-					.closest('form')
-					.submit();
-				// The login onSuccess callback is about to be called
+
+				if ($usersLoginIdentifier.length) {
+					$('#Users_login_identifier')
+						.val(me.email)
+						.closest('form')
+						.submit();
+					// The login onSuccess callback is about to be called
+				} else {
+					var url = Q.action(Users.login.options.userQueryUri) + '?' + $.param({
+						identifier: me.email,
+						identifierType: 'email'
+					});
+					Q.request(url, ['data'], function (err, response) {
+						if (response.errors) {
+							return;
+						}
+
+						// auto-login by authenticating with facebook
+						Users.authenticate('facebook', function (user) {
+							priv.login_connected = true;
+							priv.login_onConnect && priv.login_onConnect(user);
+						}, function () {
+							priv.login_onCancel && priv.login_onCancel();
+						}, {"prompt": false});
+
+					}, {xhr: Q.info.isTouchscreen ? 'sync' : {}});
+				}
 			});
 			var paramsPicture = {
 				"redirect": false,
