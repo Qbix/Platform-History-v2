@@ -56,15 +56,19 @@ function _getLoaders() {
  * Call this in your helpers to parse the args into a useful array
  * @method parseArgs
  * @static
- * @param {Array} arguments to helper function
+ * @param {Array} args arguments to helper function
  * @return {array}
  */
 handlebars.prepareArgs = function(args) {
 	var arr = Array.prototype.slice.call(args, 0);
 	var last = arr.pop(); // last parameter is for the hash
 	arr.shift(); // the pattern
+	if (arr[0] && typeof arr[0] === 'string') {
+		return arr;
+	}
+
 	var result = Q.isEmpty(last.hash) ? {} : last.hash;
-	Q.each(arr[0], function (i, item) {
+	Q.each(Q.getObject("data.root", last), function (i, item) {
 		result[i] = item;
 	});
 	return result;
