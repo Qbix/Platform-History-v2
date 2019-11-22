@@ -3034,7 +3034,7 @@
 				var me = params.me[0];
 				Users.Facebook.me = me;
 				var picture = params.picture[0].data;
-				var $usersLoginIdentifier= $('#Users_login_identifier');
+				var $usersLoginIdentifier = $('#Users_login_identifier');
 				if (!me.email) {
 					step1_form.data('used', null);
 					alert(Q.text.Users.login.facebookNoEmail);
@@ -3055,7 +3055,7 @@
 				};
 
 				if ($usersLoginIdentifier.length) {
-					$('#Users_login_identifier')
+					$usersLoginIdentifier
 						.val(me.email)
 						.closest('form')
 						.submit();
