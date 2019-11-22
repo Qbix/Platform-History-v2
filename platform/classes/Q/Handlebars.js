@@ -68,9 +68,11 @@ handlebars.prepareArgs = function(args) {
 	}
 
 	var result = Q.isEmpty(last.hash) ? {} : last.hash;
-	Q.each(Q.getObject("data.root", last), function (i, item) {
-		result[i] = item;
-	});
+	if (Q.isEmpty(result)) {
+		Q.each(arr[0] || Q.getObject("data.root", last), function (i, item) {
+			result[i] = item;
+		});
+	}
 	return result;
 };
 
