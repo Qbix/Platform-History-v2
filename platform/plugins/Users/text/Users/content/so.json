@@ -18,7 +18,8 @@
         "GetStarted": "Raadso Bilaab",
         "Authorize": "Oggolow",
         "TermsLabel": "Waxaan aqriyay oo aan ogolaaday <br> ilaa {999}}",
-        "TermsTitle": "Shuruudaha"
+        "TermsTitle": "Shuruudaha",
+        "mustAgree": "Marka hore waa inaad ogolaato shuruudaha."
     },
     "register": {
         "TermsLabel": "Waan aqbalayaa {999}}",
@@ -31,11 +32,18 @@
         "no": "Maya",
         "WelcomePleaseVerifyEmail": "Soo dhawow! Fadlan xaqiiji cinwaanka emailkaaga.",
         "WelcomeVerifyEmail": "Soo dhawow! Hubi cinwaankaaga emailkaaga.",
-        "ForgetPass": "Hey, miyaad illowday marinkaaga?"
+        "ForgetPass": "Hey, miyaad illowday marinkaaga?",
+        "PassphraseSaved": "Oraahdaada gudbinta waa la keydiyay.",
+        "IdentifierActivated": "{{type}} waa la shaqeeyey.",
+        "CompletedActivation": "Waad dhammaystirtay dhaqdhaqaaqa isticmaale.",
+        "CompletedActivationLogIn": "Waad dhammaystirtay dhaqdhaqaaqa isticmaale. Isku day inaad gasho hadda."
     },
     "contacts": {
         "dialog": {
-            "title": "Dooro xiriirka"
+            "title": "Dooro xiriirka",
+            "CreateAccount": "+ Xiriir Cusub",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create lama helin",
+            "SearchByName": "Magac raadso"
         },
         "select": {
             "title": "Xulo xiriirinta {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Fadlan dooro calaamad.",
-        "inviteUser": "Ku marti isticmaal User"
+        "inviteUser": "Ku marti isticmaal User",
+        "selectRole": "Xulo Dooro",
+        "inviteRole": "Casuumaad {{role}}"
     },
-    "invalidLanguageSelected": "Luqad aan sax ahayn ee la doortay"
+    "invalidLanguageSelected": "Luqad aan sax ahayn ee la doortay",
+    "login": {
+        "title": "Soo dhowow",
+        "directions": "Abuur koonto, ama gasho.",
+        "directionsNoRegister": "Gal haddii aad leedahay koonto.",
+        "goButton": "Tag",
+        "passphrase": "Gali weedha gudbintaada:",
+        "loginButton": "Bilow",
+        "registerButton": "Bilow",
+        "resendButton": "U dir Fariinta Waxqabadka",
+        "forgot": "Ma ilowday?",
+        "resendConfirm": "Ma waxaad dooneysaa inaad dirto farriin aad ku dejiso passphrase-kaaga?",
+        "resendSuccess": "Hubi farriin si aad u dejiso lambarkaaga",
+        "resendClose": "Xidh",
+        "noPassphrase": "Kahor intaadan galin, waa inaad dejiso weedh gudbinta adoo gujinaya xiriirinta farriinta dhaqdhaqaaqaaga.",
+        "notVerified": "Waa inaad adigu naftaada u dirtaa farriin dhaqdhaqaaq si aad u gasho.",
+        "emailExists": "Ma isku dayday inaad iska diiwaangeliso emaylkan kahor? Hadday sidaas tahay, hubi inbox-kaaga si aad u socodsiiso koontadaada. <a href='#resend' class='Q_button Users_activation_resend'>Guji si aad dib ugu dirto farriinta<\/a>",
+        "mobileExists": "Ma isku dayday inaad iska diiwaangeliso nambarkan moobiilka kahor? Hadday sidaas tahay, hubi SMS-kaaga si aad ugu hawl gasho koontadaada. <a href='#resend' class='Q_button Users_activation_resend'>Guji si aad dib ugu dirto farriinta<\/a>",
+        "usingOther": "ama waad awoodaa",
+        "prompt": "Xulo magac isticmaale:",
+        "newUser": "ama abuuro koonto cusub",
+        "placeholders": {
+            "identifier": "mobilkaaga # ama emaylka",
+            "mobile": "gali mobilkaaga #",
+            "email": "geli cinwaanka emaylkaaga",
+            "username": "username"
+        },
+        "confirmTerms": "Oggolow shuruudaha adeegga?",
+        "facebookNoEmail": "Koontadaada facebook ayaa ka maqan cinwaan email ah oo la xaqiijiyay. Si fudud u gal habka asalka ah.",
+        "picTooltip": "Waad beddeli kartaa sawirkan goor dambe"
+    },
+    "setIdentifier": {
+        "title": "Kudar hab lagu galo",
+        "sendMessage": "U dir Fariinta Waxqabadka",
+        "placeholders": {
+            "identifier": "Gali mobilkaaga # ama emaylka",
+            "mobile": "geli lambarkaaga moobiilka",
+            "email": "geli cinwaanka emaylkaaga",
+            "username": "username"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Koonto",
+        "areUsing": "Waxaad u isticmaaleysaa {{platform}} sida",
+        "noLongerUsing": "Mar dambe kuma xirnid {{platform}} sida",
+        "doAuth": "Kusoo gal akoonkan",
+        "doSwitch": "U beddelo koontadaas"
+    }
 }

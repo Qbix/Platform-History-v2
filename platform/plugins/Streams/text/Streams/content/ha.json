@@ -3,8 +3,8 @@
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams/invited": "Mutane da na kira su",
-        "Streams/invitedMe": "Wane ne ya gayyace ni"
+        "Streams\/invited": "Mutane da na kira su",
+        "Streams\/invitedMe": "Wane ne ya gayyace ni"
     },
     "interests": {
         "Filter": "Me kuke jin dadi?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Shin kuna tabbatar kuna so ku rufe wannan hira?",
         "closeChatConfirmYes": "Ee",
         "closeChatConfirmNo": "A&#39;a",
-        "earlierComments": "baya comments"
+        "earlierComments": "baya comments",
+        "Subscribed": "Fadakarwar sanarwa na saiti",
+        "Unsubscribed": "Samu sanarwar",
+        "notAllowedToJoinCall": "Baka da izinin shiga wannan tattaunawar.",
+        "startedConversation": "fara hira",
+        "RealTimeCall": "Kira na Gaskiya",
+        "SearchByName": "Bincika da suna"
     },
     "notifications": {
         "*": "Message {{& message.fields.type}} zuwa {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "An cigaba da cigaba a [{999}}",
         "Streams\/task\/complete": "An kammala aikin: {{stream.fields.title}}",
         "Streams\/task\/error": "Kuskure a lokacin: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Saƙon shiga"
+        "Streams\/incoming\/*": "{{app}}: Saƙon shiga",
+        "Streams\/relatedTo\/Streams\/call": "An fara Sabuwar Kira a {{toTitle}}",
+        "Streams\/relatedTo\/*": "Sabuwar {{relationDisplayType}} a cikin {{toTitle}}",
+        "Streams\/relatedFrom\/*": "An kara shi zuwa {{toTitle}} kamar yadda {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} ya ambace ka cikin sharhi",
+        "Streams\/call": "{{displayName}} yana kiran ku"
     },
     "invite": {
         "messageContent": "{{displayName}} ya gayyatar ku zuwa {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Imel",
             "byText": "Rubutu",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} idan aka kirkiri lambar"
         },
         "email": {
             "subject": "Hey, duba wannan",
             "PleaseVisitLink": "Da fatan a ziyarci mahaɗin da ke biyowa:",
             "InvitingYou": "Ina kiran ku zuwa [{999}}",
-            "HasInvitedYou": "{{displayName}} ya gayyatar ku zuwa {{title}}"
+            "HasInvitedYou": "{{displayName}} ya gayyatar ku zuwa {{title}}",
+            "HasMentionedYou": "{{displayName}} ya ambace ka a cikin &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "An gayyace ku zuwa {{title}}. Da fatan a latsa {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Yi amfani da Microphone",
             "cameraTitle": "Enable Kamara",
-            "cameraAndMicrophoneTitle": "Enable Kamara da Kira"
+            "cameraAndMicrophoneTitle": "Enable Kamara da Kira",
+            "dialogTitle": "Haɗawa",
+            "microphoneBtn": "Kunna Makirufo",
+            "cameraBtn": "Kunna Kamara",
+            "cameraAndMicrophoneBtn": "Sanya Kyamara da makirufo"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "buga wani sakon <em>{{message.fields.type}}<\/em> zuwa {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "sharhi a kan",
+            "in": "a",
+            "body": "a {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "An sanya wa",
+                "byAvatar": "ta {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "yana da sabon {{instructions.fromDisplayType}}",
+                "byAvatar": "kara da {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "An Gayyata",
+            "description": "Akwati.saƙ.m-shig .. don gayyata"
+        },
+        "Streams\/resource": {
+            "displayType": "Kayan aiki",
+            "description": "rafi don sarrafa damar amfani da hanya da kuma aika sakonni game da sabuntawa"
+        },
+        "Streams\/task": {
+            "description": "don karɓar sabuntawa game da ci gaba akan wani aiki",
+            "displayType": "Aiki"
+        },
+        "Streams\/tasks": {
+            "description": "rukuni don ayyuka",
+            "displayType": "Ksawainiya"
+        },
+        "Streams\/experience": {
+            "description": "sanannen masani ne ga membobin wata al&#39;umma",
+            "displayType": "Kwarewa ta yau da kullun ga membobin wata al&#39;umma"
+        },
+        "Streams\/greeting": {
+            "description": "gaisuwa da wanda mai amfani zai iya gabatar da kansu",
+            "displayType": "Gaisuwa"
+        },
+        "Streams\/number": {
+            "displayType": "Lambar",
+            "description": "lambar lissafi"
+        },
+        "Streams\/date": {
+            "displayType": "Kwanan Wata",
+            "description": "kwanan wata"
+        },
+        "Streams\/text": {
+            "displayType": "Rubutu",
+            "description": "jikin rubutu"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Rubutu",
+            "description": "karamin jikin rubutu"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Rubutu",
+            "description": "matsakaici jikin rubutu"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Adireshin i-mel",
+            "description": "adireshin i-mel"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Lambar tarho",
+            "description": "lambar tarho"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "mahaɗi akan yanar gizo"
+        },
+        "Streams\/image": {
+            "displayType": "Hoto",
+            "description": "hoto na gani"
+        },
+        "Streams\/images": {
+            "displayType": "Hoton Hoto",
+            "description": "gidan hotuna"
+        },
+        "Streams\/album": {
+            "displayType": "Kundin hoto",
+            "description": "kundi wanda yake da alaƙa da kafofin watsa labarai daban-daban"
+        },
+        "Streams\/file": {
+            "displayType": "Fayiloli",
+            "description": "fayil da aka ɗora"
+        },
+        "Streams\/audio": {
+            "displayType": "Clip Audio",
+            "description": "shirin bidiyo"
+        },
+        "Streams\/video": {
+            "displayType": "Filin Bidiyo",
+            "description": "shirin bidiyo"
+        },
+        "Streams\/live": {
+            "displayType": "Hanyar rayuwa",
+            "description": "live audio ko bidiyo"
+        },
+        "Streams\/category": {
+            "displayType": "Kashi",
+            "description": "rukuni wanda za&#39;a iya danganta wasu koguna"
+        },
+        "Streams\/participating": {
+            "displayType": "Kasancewa Index",
+            "description": "Kogunan suna da alaƙa \/ basu da alaƙa da wannan lokacin da mai amfani ya shiga \/ ganye"
+        },
+        "Streams\/interest": {
+            "displayType": "Sha&#39;awa",
+            "description": "wakiltar sha&#39;awar mai amfani a wani takamaiman taken"
+        },
+        "Streams\/incoming": {
+            "displayType": "Mai shigowa",
+            "description": "manufa don saƙonnin da wasu masu amfani suka aiko"
+        },
+        "Streams\/chat": {
+            "displayType": "Tattaunawa",
+            "description": "tattaunawa tsakanin masu amfani, tare da tarihi"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Kira na Gaskiya",
+            "description": "lokaci na ainihi bidiyo \/ kira"
         }
     }
 }

@@ -18,7 +18,8 @@
         "GetStarted": "ਸ਼ੁਰੂਆਤ ਕਰੋ",
         "Authorize": "ਅਧਿਕ੍ਰਿਤੀ",
         "TermsLabel": "ਮੈਂ ਪੜ੍ਹ ਲਿਆ ਹੈ ਅਤੇ ਸਹਿਮਤ ਹਾਂ <br> {{link}}",
-        "TermsTitle": "ਸ਼ਰਤਾਂ"
+        "TermsTitle": "ਸ਼ਰਤਾਂ",
+        "mustAgree": "ਪਹਿਲਾਂ ਤੁਹਾਨੂੰ ਸ਼ਰਤਾਂ ਨਾਲ ਸਹਿਮਤ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ."
     },
     "register": {
         "TermsLabel": "ਮੈਂ {{link}} ਨੂੰ ਸਵੀਕਾਰ ਕਰਦਾ \/ ਕਰਦੀ ਹਾਂ",
@@ -31,11 +32,18 @@
         "no": "ਨਹੀਂ",
         "WelcomePleaseVerifyEmail": "ਸੁਆਗਤ ਹੈ! ਕਿਰਪਾ ਕਰਕੇ ਆਪਣਾ ਈਮੇਲ ਪਤਾ ਪ੍ਰਮਾਣਿਤ ਕਰੋ.",
         "WelcomeVerifyEmail": "ਸੁਆਗਤ ਹੈ! ਆਪਣਾ ਈਮੇਲ ਪਤਾ ਪ੍ਰਮਾਣਿਤ ਕਰੋ",
-        "ForgetPass": "ਹੇ, ਕੀ ਤੁਸੀਂ ਆਪਣਾ ਪਾਸਫਰੇਜ ਭੁੱਲ ਗਏ ਹੋ?"
+        "ForgetPass": "ਹੇ, ਕੀ ਤੁਸੀਂ ਆਪਣਾ ਪਾਸਫਰੇਜ ਭੁੱਲ ਗਏ ਹੋ?",
+        "PassphraseSaved": "ਤੁਹਾਡਾ ਪਾਸ ਸ਼ਬਦ ਬਚਾਇਆ ਗਿਆ ਹੈ.",
+        "IdentifierActivated": "ਤੁਹਾਡਾ {{999} activ ਚਾਲੂ ਹੋ ਗਿਆ ਹੈ.",
+        "CompletedActivation": "ਤੁਸੀਂ ਉਪਭੋਗਤਾ ਦੀ ਸਰਗਰਮੀ ਨੂੰ ਪੂਰਾ ਕਰ ਲਿਆ ਹੈ.",
+        "CompletedActivationLogIn": "ਤੁਸੀਂ ਉਪਭੋਗਤਾ ਦੀ ਸਰਗਰਮੀ ਨੂੰ ਪੂਰਾ ਕਰ ਲਿਆ ਹੈ. ਹੁਣੇ ਲੌਗਇਨ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ."
     },
     "contacts": {
         "dialog": {
-            "title": "ਸੰਪਰਕ ਚੁਣੋ"
+            "title": "ਸੰਪਰਕ ਚੁਣੋ",
+            "CreateAccount": "+ ਨਵਾਂ ਸੰਪਰਕ",
+            "CreateAccountNotFound": "Q.User.Cordova.UI.create ਨਹੀਂ ਮਿਲਿਆ",
+            "SearchByName": "ਨਾਮ ਨਾਲ ਖੋਜ ਕਰੋ"
         },
         "select": {
             "title": "{{displayName}} ਦੇ ਸੰਪਰਕ ਦੀ ਚੋਣ ਕਰੋ"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "ਲੇਬਲ ਦੀ ਚੋਣ ਕਰੋ.",
-        "inviteUser": "ਯੂਜ਼ਰ ਨੂੰ ਸੱਦੋ"
+        "inviteUser": "ਯੂਜ਼ਰ ਨੂੰ ਸੱਦੋ",
+        "selectRole": "ਰੋਲ ਚੁਣੋ",
+        "inviteRole": "ਸੱਦਾ ਦਿਓ {{role}}"
     },
-    "invalidLanguageSelected": "ਗਲਤ ਭਾਸ਼ਾ ਚੁਣੀ ਗਈ"
+    "invalidLanguageSelected": "ਗਲਤ ਭਾਸ਼ਾ ਚੁਣੀ ਗਈ",
+    "login": {
+        "title": "ਸਵਾਗਤ ਹੈ",
+        "directions": "ਇੱਕ ਖਾਤਾ ਬਣਾਓ, ਜਾਂ ਲੌਗ ਇਨ ਕਰੋ.",
+        "directionsNoRegister": "ਲੌਗ ਇਨ ਕਰੋ ਜੇ ਤੁਹਾਡਾ ਕੋਈ ਖਾਤਾ ਹੈ.",
+        "goButton": "ਜਾਣਾ",
+        "passphrase": "ਆਪਣਾ ਪਾਸ ਸ਼ਬਦ:",
+        "loginButton": "ਅਰੰਭ ਕਰੋ",
+        "registerButton": "ਅਰੰਭ ਕਰੋ",
+        "resendButton": "ਐਕਟੀਵੇਸ਼ਨ ਦਾ ਸੁਨੇਹਾ ਭੇਜੋ",
+        "forgot": "ਇਸ ਨੂੰ ਭੁੱਲ ਗਏ?",
+        "resendConfirm": "ਕੀ ਤੁਸੀਂ ਆਪਣਾ ਗੁਪਤਕੋਡ ਮੁੜ ਸੈੱਟ ਕਰਨ ਲਈ ਸੁਨੇਹਾ ਭੇਜਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
+        "resendSuccess": "ਆਪਣੇ ਗੁਪਤਕੋਡ ਨੂੰ ਰੀਸੈਟ ਕਰਨ ਲਈ ਇੱਕ ਸੰਦੇਸ਼ ਦੀ ਜਾਂਚ ਕਰੋ",
+        "resendClose": "ਬੰਦ ਕਰੋ",
+        "noPassphrase": "ਲੌਗਇਨ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ, ਤੁਹਾਨੂੰ ਆਪਣੇ ਸਰਗਰਮ ਸੰਦੇਸ਼ ਵਿੱਚ ਲਿੰਕ ਤੇ ਕਲਿਕ ਕਰਕੇ ਇੱਕ ਪਾਸ ਮੁਹਾਵਰਾ ਸੈੱਟ ਕਰਨਾ ਚਾਹੀਦਾ ਹੈ.",
+        "notVerified": "ਲੌਗਇਨ ਕਰਨ ਲਈ ਤੁਹਾਨੂੰ ਆਪਣੇ ਆਪ ਨੂੰ ਇੱਕ ਸਰਗਰਮ ਸੰਦੇਸ਼ ਭੇਜਣਾ ਪਵੇਗਾ.",
+        "emailExists": "ਕੀ ਤੁਸੀਂ ਪਹਿਲਾਂ ਇਸ ਈਮੇਲ ਨਾਲ ਰਜਿਸਟਰ ਹੋਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕੀਤੀ ਸੀ? ਜੇ ਅਜਿਹਾ ਹੈ ਤਾਂ ਆਪਣੇ ਖਾਤੇ ਨੂੰ ਐਕਟੀਵੇਟ ਕਰਨ ਲਈ ਆਪਣੇ ਇਨਬਾਕਸ ਦੀ ਜਾਂਚ ਕਰੋ. <a href='#resend' class='Q_button Users_activation_resend'>ਸੁਨੇਹਾ ਦੁਬਾਰਾ ਭੇਜਣ ਲਈ ਕਲਿਕ ਕਰੋ<\/a>",
+        "mobileExists": "ਕੀ ਤੁਸੀਂ ਪਹਿਲਾਂ ਇਸ ਮੋਬਾਈਲ ਨੰਬਰ ਨਾਲ ਰਜਿਸਟਰ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕੀਤੀ ਸੀ? ਜੇ ਅਜਿਹਾ ਹੈ, ਤਾਂ ਆਪਣੇ ਖਾਤੇ ਨੂੰ ਕਿਰਿਆਸ਼ੀਲ ਕਰਨ ਲਈ ਆਪਣੇ ਐਸਐਮਐਸ ਦੀ ਜਾਂਚ ਕਰੋ. <a href='#resend' class='Q_button Users_activation_resend'>ਸੁਨੇਹਾ ਦੁਬਾਰਾ ਭੇਜਣ ਲਈ ਕਲਿਕ ਕਰੋ<\/a>",
+        "usingOther": "ਜਾਂ ਤੁਸੀਂ ਕਰ ਸਕਦੇ ਹੋ",
+        "prompt": "ਇੱਕ ਉਪਯੋਗਕਰਤਾ ਨਾਮ ਚੁਨੋਂ:",
+        "newUser": "ਜਾਂ ਨਵਾਂ ਖਾਤਾ ਬਣਾਓ",
+        "placeholders": {
+            "identifier": "ਤੁਹਾਡਾ ਮੋਬਾਈਲ # ਜਾਂ ਈਮੇਲ",
+            "mobile": "ਆਪਣਾ ਮੋਬਾਈਲ ਦਰਜ ਕਰੋ #",
+            "email": "ਆਪਣਾ ਈਮੇਲ ਪਤਾ ਦਰਜ ਕਰੋ",
+            "username": "ਉਪਯੋਗਕਰਤਾ ਨਾਮ"
+        },
+        "confirmTerms": "ਸੇਵਾ ਦੀਆਂ ਸ਼ਰਤਾਂ ਸਵੀਕਾਰ ਕਰੋ?",
+        "facebookNoEmail": "ਤੁਹਾਡੇ ਫੇਸਬੁੱਕ ਖਾਤੇ ਵਿੱਚ ਇੱਕ ਪੁਸ਼ਟੀ ਕੀਤਾ ਈਮੇਲ ਪਤਾ ਗੁੰਮ ਹੈ. ਬਸ ਮੂਲ ਰੂਪ ਵਿੱਚ ਲੌਗਇਨ ਕਰੋ.",
+        "picTooltip": "ਤੁਸੀਂ ਬਾਅਦ ਵਿਚ ਇਸ ਤਸਵੀਰ ਨੂੰ ਬਦਲ ਸਕਦੇ ਹੋ"
+    },
+    "setIdentifier": {
+        "title": "ਲਾਗਇਨ ਕਰਨ ਦਾ ਤਰੀਕਾ ਸ਼ਾਮਲ ਕਰੋ",
+        "sendMessage": "ਐਕਟੀਵੇਸ਼ਨ ਦਾ ਸੁਨੇਹਾ ਭੇਜੋ",
+        "placeholders": {
+            "identifier": "ਆਪਣਾ ਮੋਬਾਈਲ # ਜਾਂ ਈਮੇਲ ਦਰਜ ਕਰੋ",
+            "mobile": "ਆਪਣਾ ਮੋਬਾਈਲ ਨੰਬਰ ਦਰਜ ਕਰੋ",
+            "email": "ਆਪਣਾ ਈਮੇਲ ਪਤਾ ਦਰਜ ਕਰੋ",
+            "username": "ਉਪਭੋਗਤਾ ਨਾਮ"
+        }
+    },
+    "prompt": {
+        "title": "{9 999}} ਖਾਤਾ",
+        "areUsing": "ਤੁਸੀਂ ਇਸ ਤਰਾਂ {{999} using ਦੀ ਵਰਤੋਂ ਕਰ ਰਹੇ ਹੋ",
+        "noLongerUsing": "ਤੁਸੀਂ ਹੁਣ {{999} to ਨਾਲ ਜੁੜੇ ਨਹੀਂ ਹੋ",
+        "doAuth": "ਇਸ ਖਾਤੇ ਨਾਲ ਲੌਗ ਇਨ ਕਰੋ",
+        "doSwitch": "ਇਸ ਖਾਤੇ ਤੇ ਸਵਿਚ ਕਰੋ"
+    }
 }

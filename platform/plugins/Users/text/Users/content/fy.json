@@ -18,7 +18,8 @@
         "GetStarted": "Begjinne",
         "Authorize": "Authorize",
         "TermsLabel": "Ik haw lêzen en oerien <br> nei de {{link}}",
-        "TermsTitle": "Betingsten"
+        "TermsTitle": "Betingsten",
+        "mustAgree": "Earst moatte jo akkoard gean mei de betingsten."
     },
     "register": {
         "TermsLabel": "Ik akseptearje de {{link}}",
@@ -31,11 +32,18 @@
         "no": "Nee",
         "WelcomePleaseVerifyEmail": "Wolkom! Kontrolearje jo jo adres.",
         "WelcomeVerifyEmail": "Wolkom! Kontrolearje jo email adres.",
-        "ForgetPass": "Hey, ferjitten jo passphrase?"
+        "ForgetPass": "Hey, ferjitten jo passphrase?",
+        "PassphraseSaved": "Jo wachtwurd is bewarre.",
+        "IdentifierActivated": "Jo {{type}} is aktiveare.",
+        "CompletedActivation": "Jo hawwe brûkersaktivering foltôge.",
+        "CompletedActivationLogIn": "Jo hawwe brûkersaktivering foltôge. Besykje no yn te loggen."
     },
     "contacts": {
         "dialog": {
-            "title": "Kies kontakt"
+            "title": "Kies kontakt",
+            "CreateAccount": "+ Nij kontakt",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create net fûn",
+            "SearchByName": "Sykje op namme"
         },
         "select": {
             "title": "Selektearje kontaktpersoan fan {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Selektearje labels.",
-        "inviteUser": "Meidogger brûke"
+        "inviteUser": "Meidogger brûke",
+        "selectRole": "Selektearje rol",
+        "inviteRole": "Noegje {{role}} út"
     },
-    "invalidLanguageSelected": "Unjildige taal selektearre"
+    "invalidLanguageSelected": "Unjildige taal selektearre",
+    "login": {
+        "title": "Wolkom",
+        "directions": "Meitsje in akkount oan, of oanmelde.",
+        "directionsNoRegister": "Meld jo oan as jo in akkount hawwe.",
+        "goButton": "Rinne",
+        "passphrase": "Fier jo paswurd yn:",
+        "loginButton": "Begjinne",
+        "registerButton": "Begjinne",
+        "resendButton": "Stjoer aktivaasjeberjocht",
+        "forgot": "Ferjitten?",
+        "resendConfirm": "Wolle jo in berjocht stjoere om jo wachtwurd te resetten?",
+        "resendSuccess": "Kontrolearje op in berjocht om jo wachtwurd te resetten",
+        "resendClose": "Slute",
+        "noPassphrase": "Foardat jo kinne oanmelde, moatte jo in paswurd ynstelle troch te klikken op de keppeling yn jo aktivearberjocht.",
+        "notVerified": "Jo moatte josels in aktivaasjeberjocht stjoere om yn te loggen.",
+        "emailExists": "Besocht jo earder te registrearjen mei dizze e-post? As dat sa is, kontrolearje jo ynfak om jo akkount te aktivearjen. <a href='#resend' class='Q_button Users_activation_resend'>Klikje om it berjocht opnij te stjoeren<\/a>",
+        "mobileExists": "Hawwe jo earder besocht mei dit mobile nûmer te registrearjen? As dat sa is, kontrolearje jo SMS om jo akkount te aktivearjen. <a href='#resend' class='Q_button Users_activation_resend'>Klikje om it berjocht opnij te stjoeren<\/a>",
+        "usingOther": "as jo kinne",
+        "prompt": "Kies in gebrûkersnamme:",
+        "newUser": "of meitsje in nij akkount",
+        "placeholders": {
+            "identifier": "jo mobile # as e-post",
+            "mobile": "ynfiere jo mobyl #",
+            "email": "Fier dyn emailadres yn",
+            "username": "brûkersnamme"
+        },
+        "confirmTerms": "De tsjinstbetingsten akseptearje?",
+        "facebookNoEmail": "Jo facebook-account mist in befêstige e-postadres. Meld jo gewoan de native manier oan.",
+        "picTooltip": "Jo kinne dizze ôfbylding letter feroarje"
+    },
+    "setIdentifier": {
+        "title": "Foegje in manier om oan te melden",
+        "sendMessage": "Stjoer aktivaasjeberjocht",
+        "placeholders": {
+            "identifier": "Fier jo mobyl # as e-post yn",
+            "mobile": "Fier jo mobile nûmer yn",
+            "email": "Fier dyn emailadres yn",
+            "username": "brûkersnamme"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} akkount",
+        "areUsing": "Jo brûke {{platform}} as",
+        "noLongerUsing": "Jo binne net langer ferbûn mei {{platform}} as",
+        "doAuth": "Log yn mei dit akkount",
+        "doSwitch": "Wikselje nei dit akkount"
+    }
 }

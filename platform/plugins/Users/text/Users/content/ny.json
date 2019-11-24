@@ -18,7 +18,8 @@
         "GetStarted": "Yambani",
         "Authorize": "Vomerezani",
         "TermsLabel": "Ndawerenga ndikuvomereza <br> ku {{link}}",
-        "TermsTitle": "Maganizo"
+        "TermsTitle": "Maganizo",
+        "mustAgree": "Choyamba muyenera kuvomereza mawuwo."
     },
     "register": {
         "TermsLabel": "Ndikuvomereza {{link}}",
@@ -31,11 +32,18 @@
         "no": "Ayi",
         "WelcomePleaseVerifyEmail": "Landirani! Chonde onetsetsani imelo yanu.",
         "WelcomeVerifyEmail": "Landirani! Tsimikizani imelo yanu.",
-        "ForgetPass": "Eya, kodi mwaiwala mawu anu ozembera?"
+        "ForgetPass": "Eya, kodi mwaiwala mawu anu ozembera?",
+        "PassphraseSaved": "Mawu anu odutsa asungidwa.",
+        "IdentifierActivated": "{{type}} yanu idagwira.",
+        "CompletedActivation": "Mwamaliza kuyambitsa ntchito.",
+        "CompletedActivationLogIn": "Mwamaliza kuyambitsa ntchito. Yeserani kulowa."
     },
     "contacts": {
         "dialog": {
-            "title": "Sankhani kukhudzana"
+            "title": "Sankhani kukhudzana",
+            "CreateAccount": "+ Kuyankhulana Kwatsopano",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create sapezeka",
+            "SearchByName": "Sakani ndi dzina"
         },
         "select": {
             "title": "Sankhani kukhudzana ndi {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Chonde sankhani chizindikiro.",
-        "inviteUser": "Pemphani Wophunzira"
+        "inviteUser": "Pemphani Wophunzira",
+        "selectRole": "Sankhani Udindo",
+        "inviteRole": "Imbirani {{role}}"
     },
-    "invalidLanguageSelected": "Chilankhulo chosasankhidwa"
+    "invalidLanguageSelected": "Chilankhulo chosasankhidwa",
+    "login": {
+        "title": "Takulandirani",
+        "directions": "Pangani akaunti, kapena Lowani.",
+        "directionsNoRegister": "Lowani ngati muli ndi akaunti.",
+        "goButton": "Pitani",
+        "passphrase": "Lowetsani mawu anu:",
+        "loginButton": "Yambirani",
+        "registerButton": "Yambirani",
+        "resendButton": "Tumizani Mauthenga Othandizira",
+        "forgot": "Mwayiwala?",
+        "resendConfirm": "Kodi mukufuna kutumiza uthenga kuti ubwezeretse mawu anu obweza?",
+        "resendSuccess": "Yang&#39;anani kuti mukufuna meseji yanu kuti ibwezeretse mawu anu",
+        "resendClose": "Tsekani",
+        "noPassphrase": "Musanalowe mu akaunti yanu, muyenera kukhazikitsa mawu odutsa ndikudina ulalo womwe uli pakompyuta yanu.",
+        "notVerified": "Mukuyenera kuti mudzitumizire nokha uthenga wotsegula kuti mulowe.",
+        "emailExists": "Kodi mudayesako kulembetsa ndi imelo izi m&#39;mbuyomu? Ngati ndi choncho, onetsetsani bokosi lanu kuti mulimitse akaunti yanu. <a href='#resend' class='Q_button Users_activation_resend'>Dinani kuti mutumizenso uthengawo<\/a>",
+        "mobileExists": "Kodi mudayesa kulembetsa kale ndi nambala yam&#39;mbuyomu? Ngati ndi choncho, onani SMS yanu kuti ikwaniritse akaunti yanu. <a href='#resend' class='Q_button Users_activation_resend'>Dinani kuti mutumizenso uthengawo<\/a>",
+        "usingOther": "kapena mutha",
+        "prompt": "Sankhani dzina lolowera:",
+        "newUser": "kapena pangani akaunti yatsopano",
+        "placeholders": {
+            "identifier": "yanu yam&#39;manja # kapena imelo",
+            "mobile": "lembani foni yanu #",
+            "email": "lembani imelo adilesi yanu",
+            "username": "dzina lolowera"
+        },
+        "confirmTerms": "Landirani Malangizo?",
+        "facebookNoEmail": "Akaunti yanu ya facebook ikusowa imelo yosatsimikizika. Ingolowetsani momwe mwakhalira.",
+        "picTooltip": "Mutha kusintha chithunzichi pambuyo pake"
+    },
+    "setIdentifier": {
+        "title": "Onjezani njira yolowera",
+        "sendMessage": "Tumizani Mauthenga Othandizira",
+        "placeholders": {
+            "identifier": "lembani foni yanu # kapena imelo",
+            "mobile": "lowetsani nambala yanu yam&#39;manja",
+            "email": "lembani imelo adilesi yanu",
+            "username": "dzina lolowera"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Akaunti",
+        "areUsing": "Mukugwiritsa ntchito {{999]}",
+        "noLongerUsing": "Simulumikizananso ndi {{platform}}",
+        "doAuth": "Lowani mu akaunti iyi",
+        "doSwitch": "Sinthani ku akaunti iyi"
+    }
 }

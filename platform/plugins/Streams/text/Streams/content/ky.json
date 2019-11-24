@@ -3,8 +3,8 @@
         "NewItemTitle": "жаңы сап"
     },
     "labels": {
-        "Streams/invited": "Адамдар мен чакырды",
-        "Streams/invitedMe": "Ким мени чакырды"
+        "Streams\/invited": "Адамдар мен чакырды",
+        "Streams\/invitedMe": "Ким мени чакырды"
     },
     "interests": {
         "Filter": "Сен эмне жагат?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Бул маек жабуу келеби?",
         "closeChatConfirmYes": "Ооба",
         "closeChatConfirmNo": "Жок",
-        "earlierComments": "мурда талкуулар"
+        "earlierComments": "мурда талкуулар",
+        "Subscribed": "Үнсүз эскертмелер",
+        "Unsubscribed": "Get Эскертмелер",
+        "notAllowedToJoinCall": "Бул маекти кирүүгө уруксат берилген эмес.",
+        "startedConversation": "сөз баштады",
+        "RealTimeCall": "Айкын убакыт Call",
+        "SearchByName": "аталышы боюнча издөө"
     },
     "notifications": {
         "*": "Message {{& message.fields.type}} үчүн {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "боюнча прогресс {{stream.fields.title}}",
         "Streams\/task\/complete": "Тапшырма аяктады: {{stream.fields.title}}",
         "Streams\/task\/error": "Error учурунда: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Кириш сүйлөшүү"
+        "Streams\/incoming\/*": "{{app}}: Кириш сүйлөшүү",
+        "Streams\/relatedTo\/Streams\/call": "башталды жаңы Call {{toTitle}}",
+        "Streams\/relatedTo\/*": "Болумушту {{relationDisplayType}} {{жылы 1000}}",
+        "Streams\/relatedFrom\/*": "кошулду {{toTitle}} {{катары 1000}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} комментарий сага айтылган",
+        "Streams\/call": "{{displayName}}, сени чакырып жатат"
     },
     "invite": {
         "messageContent": "{{displayName}} чакырды {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "E-mail",
             "byText": "текст",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "коду сканерден болсо {{ClickOrTap}}"
         },
         "email": {
             "subject": "Эй, бул текшерип",
             "PleaseVisitLink": "төмөнкү шилтемени төмөнкү сайттан алууга болот:",
             "InvitingYou": "Мен сени чакырып жатам {{title}}",
-            "HasInvitedYou": "{{displayName}} {{title}} сизди чакырды"
+            "HasInvitedYou": "{{displayName}} {{title}} сизди чакырды",
+            "HasMentionedYou": "{{displayName}} &quot;{{title}}&quot; сени айтылып жатат"
         },
         "sms": {
             "content": "{{title}} Сиз чакырылган. Сураныч, таптап, {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "иштетүү Наушник",
             "cameraTitle": "иштетүү Камера",
-            "cameraAndMicrophoneTitle": "Камера жана Наушник иштетүү"
+            "cameraAndMicrophoneTitle": "Камера жана Наушник иштетүү",
+            "dialogTitle": "туташуу",
+            "microphoneBtn": "иштетүү Наушник",
+            "cameraBtn": "иштетүү Камера",
+            "cameraAndMicrophoneBtn": "Камера жана Наушник иштетүү"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "үчүн <em>{{message.fields.type}}<\/em> билдирүү {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "жорум",
+            "in": "боюнча",
+            "body": "жылы {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "жарыяланды үчүн",
+                "byAvatar": "тарабынан {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ээ болгон жаңы {{instructions.fromDisplayType}}",
+                "byAvatar": "менен кошо {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "чакырылган",
+            "description": "Чакырууларды жөнөтүү кутусу"
+        },
+        "Streams\/resource": {
+            "displayType": "каражат",
+            "description": "өзгөрүштөр жөнүндө ресурстарга жеткиликтүүлүктү башкаруу жана жайгаштыруу билдирүүлөрдү үчүн агым"
+        },
+        "Streams\/task": {
+            "description": "бир ишти жүрүшү жөнүндө өзгөрүүлөр алуу үчүн",
+            "displayType": "маселе"
+        },
+        "Streams\/tasks": {
+            "description": "милдеттерди аткаруу үчүн категория",
+            "displayType": "милдеттери"
+        },
+        "Streams\/experience": {
+            "description": "жамааттын мүчөлөрү үчүн жалпы тажрыйба",
+            "displayType": "жамааттын мүчөлөрүнүн жалпы тажрыйба"
+        },
+        "Streams\/greeting": {
+            "description": "колдонуучунун менен учурашып өздөрүн киргизүү мүмкүн",
+            "displayType": "Салам"
+        },
+        "Streams\/number": {
+            "displayType": "сан",
+            "description": "математикалык саны"
+        },
+        "Streams\/date": {
+            "displayType": "дата",
+            "description": "дата"
+        },
+        "Streams\/text": {
+            "displayType": "текст",
+            "description": "тексттин орган"
+        },
+        "Streams\/text\/small": {
+            "displayType": "текст",
+            "description": "тексттин кичинекей орган"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "текст",
+            "description": "тексттин орто органы"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Электрондук почта дареги",
+            "description": "электрондук почта дареги"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Тел номери",
+            "description": "Тел номери"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "Желедеги -га шилтеме берген барактар"
+        },
+        "Streams\/image": {
+            "displayType": "Image",
+            "description": "көрүү сүрөтү"
+        },
+        "Streams\/images": {
+            "displayType": "Сүрөт галлереясы",
+            "description": "буркандарды галереясы"
+        },
+        "Streams\/album": {
+            "displayType": "альбом",
+            "description": "ар кандай маалымат каражаттары кайсы бир альбом байланыштуу"
+        },
+        "Streams\/file": {
+            "displayType": "File",
+            "description": "жүктөлгөн билэ"
+        },
+        "Streams\/audio": {
+            "displayType": "аудио-клип",
+            "description": "аудио-клип"
+        },
+        "Streams\/video": {
+            "displayType": "Видео клип",
+            "description": "Видео клип"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "жандуу үн же көргөзмө"
+        },
+        "Streams\/category": {
+            "displayType": "Category",
+            "description": "турган категориядагы башка агымдары байланыштуу болушу мүмкүн"
+        },
+        "Streams\/participating": {
+            "displayType": "катышуу индекси",
+            "description": "агымдары \/ колдонуучу \/ жалбырактары кошулат Бул байланышпаган байланыштуу"
+        },
+        "Streams\/interest": {
+            "displayType": "Пайыздык",
+            "description": "белгилүү бир темага бир колдонуучунун кызыгуусун билдирет"
+        },
+        "Streams\/incoming": {
+            "displayType": "кирген",
+            "description": "билдирүүлөр үчүн, бара турган башка колдонуучулар тарабынан жиберилген"
+        },
+        "Streams\/chat": {
+            "displayType": "сүйлөшүү",
+            "description": "тарых менен керектөөчүлөрдүн ортосундагы маек,"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Time Call",
+            "description": "реалдуу убакыт Video \/ аудио чалуу"
         }
     }
 }

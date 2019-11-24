@@ -3,8 +3,8 @@
         "NewItemTitle": "Ny gjenstand"
     },
     "labels": {
-        "Streams/invited": "Folk jeg inviterte",
-        "Streams/invitedMe": "Hvem inviterte meg"
+        "Streams\/invited": "Folk jeg inviterte",
+        "Streams\/invitedMe": "Hvem inviterte meg"
     },
     "interests": {
         "Filter": "Hva liker du?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Er du sikker på at du vil lukke denne chatten?",
         "closeChatConfirmYes": "Ja",
         "closeChatConfirmNo": "Nei",
-        "earlierComments": "tidligere kommentarer"
+        "earlierComments": "tidligere kommentarer",
+        "Subscribed": "Skru av varsler",
+        "Unsubscribed": "Få varsler",
+        "notAllowedToJoinCall": "Du har ikke tillatelse til å delta i denne samtalen.",
+        "startedConversation": "startet en samtale",
+        "RealTimeCall": "Sanntids samtale",
+        "SearchByName": "Søk etter navn"
     },
     "notifications": {
         "*": "Melding {{& message.fields.type}} til {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Fremskritt gjort på {{stream.fields.title}}",
         "Streams\/task\/complete": "Oppgave fullført: {{stream.fields.title}}",
         "Streams\/task\/error": "Feil under: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Innkommende melding"
+        "Streams\/incoming\/*": "{{app}}: Innkommende melding",
+        "Streams\/relatedTo\/Streams\/call": "Ny samtale startet {{toTitle}}",
+        "Streams\/relatedTo\/*": "Ny {{relationDisplayType}} på {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Lagt til {{toTitle}} som {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} nevnte deg i en kommentar",
+        "Streams\/call": "{{displayName}} ringer deg"
     },
     "invite": {
         "messageContent": "{{displayName}} inviterte deg til {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "e-post",
             "byText": "Tekst",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} hvis koden ble skannet"
         },
         "email": {
             "subject": "Hei, sjekk dette ut",
             "PleaseVisitLink": "Vennligst besøk følgende lenke:",
             "InvitingYou": "Jeg inviterer deg til {{title}}",
-            "HasInvitedYou": "{{displayName}} har invitert deg til {{title}}"
+            "HasInvitedYou": "{{displayName}} har invitert deg til {{title}}",
+            "HasMentionedYou": "{{displayName}} har nevnt deg i &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Du har blitt invitert til {{title}}. Vennligst trykk på {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Aktiver mikrofon",
             "cameraTitle": "Aktiver kamera",
-            "cameraAndMicrophoneTitle": "Aktiver kamera og mikrofon"
+            "cameraAndMicrophoneTitle": "Aktiver kamera og mikrofon",
+            "dialogTitle": "Kobler til",
+            "microphoneBtn": "Aktiver mikrofon",
+            "cameraBtn": "Aktiver kamera",
+            "cameraAndMicrophoneBtn": "Aktiver kamera og mikrofon"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "postet en <em>{{message.fields.type}}<\/em> melding til {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "kommenterte på",
+            "in": "i",
+            "body": "i {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "har blitt postet til",
+                "byAvatar": "av {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "har en ny {{instructions.fromDisplayType}}",
+                "byAvatar": "lagt til av {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "invitert",
+            "description": "Innboks for invitasjoner"
+        },
+        "Streams\/resource": {
+            "displayType": "Ressurs",
+            "description": "strøm for å administrere tilgang til en ressurs og legge ut meldinger om oppdateringer"
+        },
+        "Streams\/task": {
+            "description": "for å motta oppdateringer om fremdrift på en bestemt oppgave",
+            "displayType": "Oppgave"
+        },
+        "Streams\/tasks": {
+            "description": "kategori for oppgaver",
+            "displayType": "oppgaver"
+        },
+        "Streams\/experience": {
+            "description": "en vanlig opplevelse for medlemmer av et samfunn",
+            "displayType": "Vanlig erfaring for medlemmer av et samfunn"
+        },
+        "Streams\/greeting": {
+            "description": "hilsen som en bruker kan presentere seg med",
+            "displayType": "Hilsen"
+        },
+        "Streams\/number": {
+            "displayType": "Nummer",
+            "description": "matematisk antall"
+        },
+        "Streams\/date": {
+            "displayType": "Dato",
+            "description": "Dato"
+        },
+        "Streams\/text": {
+            "displayType": "Tekst",
+            "description": "tekstdel"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Tekst",
+            "description": "liten tekstdel"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Tekst",
+            "description": "middels tekstdel"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Epostadresse",
+            "description": "epostadresse"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Telefonnummer",
+            "description": "telefonnummer"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "lenke på nettet"
+        },
+        "Streams\/image": {
+            "displayType": "Bilde",
+            "description": "visuelt bilde"
+        },
+        "Streams\/images": {
+            "displayType": "bildegalleri",
+            "description": "galleri med bilder"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "et album som forskjellige medier er relatert til"
+        },
+        "Streams\/file": {
+            "displayType": "Fil",
+            "description": "lastet opp fil"
+        },
+        "Streams\/audio": {
+            "displayType": "Lydklipp",
+            "description": "lydklipp"
+        },
+        "Streams\/video": {
+            "displayType": "Videoklipp",
+            "description": "videoklipp"
+        },
+        "Streams\/live": {
+            "displayType": "Direktestrømming",
+            "description": "live lyd eller video"
+        },
+        "Streams\/category": {
+            "displayType": "Kategori",
+            "description": "en kategori som andre strømmer kan relateres til"
+        },
+        "Streams\/participating": {
+            "displayType": "Deltakende indeks",
+            "description": "strømmer er relatert \/ ikke relatert til dette når en bruker blir \/ forlater"
+        },
+        "Streams\/interest": {
+            "displayType": "Renter",
+            "description": "representerer en brukers interesse for et bestemt emne"
+        },
+        "Streams\/incoming": {
+            "displayType": "innkommende",
+            "description": "destinasjon for meldinger sendt av andre brukere"
+        },
+        "Streams\/chat": {
+            "displayType": "Samtale",
+            "description": "en samtale mellom brukere, med historikk"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Sanntids samtale",
+            "description": "en video- \/ lydanrop i sanntid"
         }
     }
 }

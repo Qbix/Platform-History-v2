@@ -3,8 +3,8 @@
         "NewItemTitle": "Waxyaabaha cusub"
     },
     "labels": {
-        "Streams/invited": "Dadka aan ku casuumay",
-        "Streams/invitedMe": "Yaa iigu yeedhay"
+        "Streams\/invited": "Dadka aan ku casuumay",
+        "Streams\/invitedMe": "Yaa iigu yeedhay"
     },
     "interests": {
         "Filter": "Maxaad ku raaxaysataa?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Ma hubtaa inaad rabto inaad xirto wada sheekeysiga?",
         "closeChatConfirmYes": "Haa",
         "closeChatConfirmNo": "Maya",
-        "earlierComments": "faallooyinka hore"
+        "earlierComments": "faallooyinka hore",
+        "Subscribed": "Kusoo Ogeysiisyada",
+        "Unsubscribed": "Hel Ogeysiisyada",
+        "notAllowedToJoinCall": "Uma lihin rukhsad inaad ku biirto wadahadalka.",
+        "startedConversation": "bilaabay wadahadal",
+        "RealTimeCall": "Wicitaanka waqtiga dhabta ah",
+        "SearchByName": "Magac raadso"
     },
     "notifications": {
         "*": "Fariin {{& message.fields.type}} ilaa {1000}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Horumarka laga gaaray {{stream.fields.title}}",
         "Streams\/task\/complete": "Hawlaha la dhammeeyey: {999}}",
         "Streams\/task\/error": "Xilliga lagu jiro: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Farriinta soo socota"
+        "Streams\/incoming\/*": "{{app}}: Farriinta soo socota",
+        "Streams\/relatedTo\/Streams\/call": "Wicitaan cusub ayaa ka bilaabmay {{toTitle}}",
+        "Streams\/relatedTo\/*": "Cusub {{relationDisplayType}} ee {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Lagu daray {{toTitle}} sida {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} ayaa lagu sheegay faallooyinka",
+        "Streams\/call": "{{displayName}} ayaa ku soo wacaya"
     },
     "invite": {
         "messageContent": "{{displayName}} kugu martiqaaday {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Email",
             "byText": "Qoraalka",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} haddii koodhkaas la-sawiray"
         },
         "email": {
             "subject": "Hey, hubi tan",
             "PleaseVisitLink": "Fadlan booqo xiriirka soo socda:",
             "InvitingYou": "Waxaan kugu martiqaadayaa {999}",
-            "HasInvitedYou": "{{displayName}} ayaa kugu martiqaaday {{title}}"
+            "HasInvitedYou": "{{displayName}} ayaa kugu martiqaaday {{title}}",
+            "HasMentionedYou": "{{displayName}} wuxuu kugu xusey &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Waxaa lagugu casuumay {999}}. Fadlan wac {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "U oggolow Mikrafoon",
             "cameraTitle": "Awood siinta Kamarida",
-            "cameraAndMicrophoneTitle": "Awood injiiyaha iyo Maqalka"
+            "cameraAndMicrophoneTitle": "Awood injiiyaha iyo Maqalka",
+            "dialogTitle": "Isku xidhka",
+            "microphoneBtn": "Karti makarafoon",
+            "cameraBtn": "Karti Kaameeraha",
+            "cameraAndMicrophoneBtn": "Karti Kaamerada iyo makarafoonka"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "posted <em>{{message.fields.type}}<\/em> a fariin u {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "faallo ka bixiyay",
+            "in": "gudaha",
+            "body": "ee {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ayaa lagu dhajiyay",
+                "byAvatar": "Waxaa qoray {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "leeyahay mid cusub {{instructions.fromDisplayType}}",
+                "byAvatar": "lagu daray {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Casuumay",
+            "description": "Sanduuqa martiqaadyada"
+        },
+        "Streams\/resource": {
+            "displayType": "Kheyraadka",
+            "description": "u qulqulka maaraynta marin u helka macluumaadka iyo dhajinta farriimaha ku saabsan cusbooneysiinta"
+        },
+        "Streams\/task": {
+            "description": "si aad u hesho cusboonaysiinta ku saabsan horumarka hawl gaar ah",
+            "displayType": "Hawl"
+        },
+        "Streams\/tasks": {
+            "description": "qaybta hawlaha",
+            "displayType": "Hawlaha"
+        },
+        "Streams\/experience": {
+            "description": "waayo-aragnimo guud oo loogu talagalay xubnaha bulshada",
+            "displayType": "Khibrad guud oo loogu talagalay xubnaha bulshada"
+        },
+        "Streams\/greeting": {
+            "description": "salaan taas oo isticmaale isbarasho isu sameyn karo",
+            "displayType": "Salaan"
+        },
+        "Streams\/number": {
+            "displayType": "Tirada",
+            "description": "lambar xisaabeed"
+        },
+        "Streams\/date": {
+            "displayType": "Taariikh",
+            "description": "taariikhda"
+        },
+        "Streams\/text": {
+            "displayType": "Qoraal",
+            "description": "jirka qoraalka"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Qoraal",
+            "description": "jirka yar ee qoraalka"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Qoraal",
+            "description": "jirka dhexe ee qoraalka"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Cinwaanka emailka",
+            "description": "cinwaanka emailka"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Lambarka taleefanka",
+            "description": "lambarka taleefanka"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "iskuxiraha shabakadda"
+        },
+        "Streams\/image": {
+            "displayType": "Sawirka",
+            "description": "muuqaal muuqaal ah"
+        },
+        "Streams\/images": {
+            "displayType": "Sawirka Sawirka",
+            "description": "sawirrada sawirrada"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "album ay ku xiran tahay warbaahinta kala duwan"
+        },
+        "Streams\/file": {
+            "displayType": "Fayl",
+            "description": "faylka la galiyay"
+        },
+        "Streams\/audio": {
+            "displayType": "Clip Audio",
+            "description": "maqal maqal ah"
+        },
+        "Streams\/video": {
+            "displayType": "Clip Video",
+            "description": "Muuqaal video ah"
+        },
+        "Streams\/live": {
+            "displayType": "Tooska",
+            "description": "live audio ama video"
+        },
+        "Streams\/category": {
+            "displayType": "Nooca",
+            "description": "Qaybta ay durdurrada kale xiriir la yeelan karaan"
+        },
+        "Streams\/participating": {
+            "displayType": "Kaqeybgalka kaqaybgalka",
+            "description": "durdurku waa la xiriira \/ kuma xirna tan tan marka isticmaale uu ku biiro \/ baxo"
+        },
+        "Streams\/interest": {
+            "displayType": "Daneyn",
+            "description": "wuxuu matalaa danaha isticmaale ee mowduuc gaar ah"
+        },
+        "Streams\/incoming": {
+            "displayType": "Soo gal",
+            "description": "halka loo socdo fariimaha ay isticmaaleyaan isticmaaleyaasha kale"
+        },
+        "Streams\/chat": {
+            "displayType": "Wadahadal",
+            "description": "wadahadal u dhexeeya isticmaaleyaasha, oo leh taariikh"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Wicitaan waqti-dhab ah",
+            "description": "waqti fiidiyow ah \/ maqal maqal ah"
         }
     }
 }

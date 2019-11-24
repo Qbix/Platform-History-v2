@@ -3,8 +3,8 @@
         "NewItemTitle": "Նոր նյութեր"
     },
     "labels": {
-        "Streams/invited": "Մարդիկ հրավիրեցի",
-        "Streams/invitedMe": "Ով է ինձ հրավիրել"
+        "Streams\/invited": "Մարդիկ հրավիրեցի",
+        "Streams\/invitedMe": "Ով է ինձ հրավիրել"
     },
     "interests": {
         "Filter": "Ինչ եք վայելում:",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Վստահ եք, որ ցանկանում եք փակել այս զրույցը:",
         "closeChatConfirmYes": "Այո",
         "closeChatConfirmNo": "Ոչ",
-        "earlierComments": "ավելի վաղ մեկնաբանություններ"
+        "earlierComments": "ավելի վաղ մեկնաբանություններ",
+        "Subscribed": "Անլռելի ծանուցումներ",
+        "Unsubscribed": "Ստանալ ծանուցումներ",
+        "notAllowedToJoinCall": "Դուք չունեք հաղորդագրություն փակցնելու միանալու թույլտվություն:",
+        "startedConversation": "զրույց սկսեց",
+        "RealTimeCall": "Իրական ժամանակի զանգ",
+        "SearchByName": "Որոնել անունով"
     },
     "notifications": {
         "*": "Հաղորդագրություն {{& message.fields.type}} - ից {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "{{stream.fields.title}} - ում կատարված առաջընթաց",
         "Streams\/task\/complete": "Առաջադրանքն ավարտվեց `{{stream.fields.title}}",
         "Streams\/task\/error": "{{stream.fields.title}} - ի սխալ ժամանակ",
-        "Streams\/incoming\/*": "{{app}}: Մուտքային հաղորդագրություն"
+        "Streams\/incoming\/*": "{{app}}: Մուտքային հաղորդագրություն",
+        "Streams\/relatedTo\/Streams\/call": "Նոր զանգը սկսվեց 99 99 999}} – ում",
+        "Streams\/relatedTo\/*": "Նոր {99 999}} in {{1000}",
+        "Streams\/relatedFrom\/*": "Ավելացված է {{toTitle}} -ի որպես {{relationDisplayType}} -ի",
+        "Streams\/mention": "99 99 999} you -ը ձեզ նշել է մեկնաբանության մեջ",
+        "Streams\/call": "99 99 999}} -ը զանգում է ձեզ"
     },
     "invite": {
         "messageContent": "{{displayName}} հրավիրեց ձեզ {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Email",
             "byText": "Տեքստը",
             "byFacebook": "Facebook- ը",
-            "byTwitter": "Twitter- ը"
+            "byTwitter": "Twitter- ը",
+            "scannedQR": "99 99 999}} եթե կոդը սկանավորվել է"
         },
         "email": {
             "subject": "Hey, ստուգեք սա",
             "PleaseVisitLink": "Խնդրում ենք այցելել հետեւյալ հղումը.",
             "InvitingYou": "Ես հրավիրում եմ ձեզ {{title}}",
-            "HasInvitedYou": "{{displayName}} հրավիրել է ձեզ {{title}}"
+            "HasInvitedYou": "{{displayName}} հրավիրել է ձեզ {{title}}",
+            "HasMentionedYou": "99 {999}} -ը ձեզ նշել է «{{title}}» –ում"
         },
         "sms": {
             "content": "Դուք հրավիրվել եք {{title}}: Խնդրում ենք `{{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Միացնել խոսափողը",
             "cameraTitle": "Միացնել տեսախցիկը",
-            "cameraAndMicrophoneTitle": "Միացնել Camera եւ Microphone"
+            "cameraAndMicrophoneTitle": "Միացնել Camera եւ Microphone",
+            "dialogTitle": "Կապող",
+            "microphoneBtn": "Միացնել խոսափողը",
+            "cameraBtn": "Միացնել տեսախցիկը",
+            "cameraAndMicrophoneBtn": "Միացնել տեսախցիկը և խոսափողը"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "փակցված է <em>99 99 999}}<\/em> հաղորդագրությամբ {{1000}"
+        },
+        "text": {
+            "commentedOn": "մեկնաբանեց",
+            "in": "ներս",
+            "body": "in {{& url}}: {{1000}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "փակցված է",
+                "byAvatar": "ըստ {99 999}}"
+            },
+            "relatedTo": {
+                "hasANew": "ունի նոր 99 999}}",
+                "byAvatar": "ավելացրել է 99 {999}} -ի կողմից"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Հրավիրված",
+            "description": "Ներարկղ `հրավիրատոմսերի համար"
+        },
+        "Streams\/resource": {
+            "displayType": "Ռեսուրս",
+            "description": "հոսք ռեսուրս մուտքի կառավարման և թարմացումների վերաբերյալ հաղորդագրություններ փակցնելու համար"
+        },
+        "Streams\/task": {
+            "description": "որոշակի առաջադրանքի առաջընթացի մասին թարմացումներ ստանալու համար",
+            "displayType": "Առաջադրանք"
+        },
+        "Streams\/tasks": {
+            "description": "առաջադրանքների կատեգորիա",
+            "displayType": "Առաջադրանքներ"
+        },
+        "Streams\/experience": {
+            "description": "համայնքի փորձի համար ընդհանուր փորձ",
+            "displayType": "Համայնքի անդամների համար ընդհանուր փորձ"
+        },
+        "Streams\/greeting": {
+            "description": "ողջույն, որի միջոցով օգտագործողը կարող է ներկայացնել իրենց",
+            "displayType": "Ողջույն"
+        },
+        "Streams\/number": {
+            "displayType": "Թիվ",
+            "description": "մաթեմատիկական համարը"
+        },
+        "Streams\/date": {
+            "displayType": "Ամսաթիվ",
+            "description": "ամսաթիվը"
+        },
+        "Streams\/text": {
+            "displayType": "Տեքստ",
+            "description": "տեքստի մարմինը"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Տեքստ",
+            "description": "տեքստի փոքր մարմին"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Տեքստ",
+            "description": "տեքստի միջին մարմին"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Էլեկտրոնային հասցե",
+            "description": "էլեկտրոնային հասցե"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Հեռախոսահամար",
+            "description": "հեռախոսահամար"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "հղումը համացանցում"
+        },
+        "Streams\/image": {
+            "displayType": "Պատկեր",
+            "description": "տեսողական պատկեր"
+        },
+        "Streams\/images": {
+            "displayType": "Պատկերասրահ",
+            "description": "պատկերների պատկերասրահ"
+        },
+        "Streams\/album": {
+            "displayType": "Ալբոմը",
+            "description": "ալբոմ, որի հետ կապված են տարբեր լրատվամիջոցներ"
+        },
+        "Streams\/file": {
+            "displayType": "Ֆայլ",
+            "description": "վերբեռնված ֆայլ"
+        },
+        "Streams\/audio": {
+            "displayType": "Ձայնային տեսահոլովակ",
+            "description": "աուդիո հոլովակ"
+        },
+        "Streams\/video": {
+            "displayType": "Տեսահոլովակը",
+            "description": "տեսահոլովակը"
+        },
+        "Streams\/live": {
+            "displayType": "Ուղիղ եթեր",
+            "description": "կենդանի աուդիո կամ վիդեո"
+        },
+        "Streams\/category": {
+            "displayType": "Կատեգորիա",
+            "description": "կատեգորիա, որի հետ կարող են կապված լինել այլ հոսքեր"
+        },
+        "Streams\/participating": {
+            "displayType": "Մասնակցության ցուցիչ",
+            "description": "հոսքերը կապված են դրա հետ \/ կապ չունեն, երբ օգտագործողը միանում է \/ հեռանում է"
+        },
+        "Streams\/interest": {
+            "displayType": "Հետաքրքրություն",
+            "description": "ներկայացնում է օգտագործողի հետաքրքրությունը որոշակի թեմայի վերաբերյալ"
+        },
+        "Streams\/incoming": {
+            "displayType": "Ներգնա",
+            "description": "այլ օգտվողների կողմից ուղարկված հաղորդագրությունների նպատակակետը"
+        },
+        "Streams\/chat": {
+            "displayType": "Խոսակցություն",
+            "description": "խոսակցություն օգտվողների միջև ՝ պատմության հետ"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Իրական ժամանակի զանգ",
+            "description": "իրական ժամանակի վիդեո \/ աուդիո զանգ"
         }
     }
 }

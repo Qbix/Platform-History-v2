@@ -3,8 +3,8 @@
         "NewItemTitle": "Ohun Titun"
     },
     "labels": {
-        "Streams/invited": "Awọn eniyan Mo pe",
-        "Streams/invitedMe": "Tani o pe mi"
+        "Streams\/invited": "Awọn eniyan Mo pe",
+        "Streams\/invitedMe": "Tani o pe mi"
     },
     "interests": {
         "Filter": "Kini o ni igbadun?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Ṣe o da ọ loju pe o fẹ pa iwiregbe yii pari?",
         "closeChatConfirmYes": "Bẹẹni",
         "closeChatConfirmNo": "Rara",
-        "earlierComments": "awọn alaye iṣaaju"
+        "earlierComments": "awọn alaye iṣaaju",
+        "Subscribed": "Awọn iwifunni ti o gbo mi",
+        "Unsubscribed": "Gba Iwifunni",
+        "notAllowedToJoinCall": "O ko ni aṣẹ lati darapọ mọ ibaraẹnisọrọ yii.",
+        "startedConversation": "bẹrẹ ibaraẹnisọrọ kan",
+        "RealTimeCall": "Ipe Akoko gidi",
+        "SearchByName": "Wa ni orukọ"
     },
     "notifications": {
         "*": "Ifiranṣẹ {{& message.fields.type}} si {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Ilọsiwaju lọ si {{stream.fields.title}}",
         "Streams\/task\/complete": "Iṣẹ ti pari: {{stream.fields.title}}",
         "Streams\/task\/error": "Aṣiṣe nigba: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Ifiranṣẹ ti nwọle"
+        "Streams\/incoming\/*": "{{app}}: Ifiranṣẹ ti nwọle",
+        "Streams\/relatedTo\/Streams\/call": "Ipe tuntun ti a bẹrẹ ni {{toTitle}}",
+        "Streams\/relatedTo\/*": "Tuntun {{relationDisplayType}} ni {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Ṣe afikun si {{toTitle}} bi {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mẹnuba ninu rẹ ni asọye",
+        "Streams\/call": "{{displayName}} n pe e"
     },
     "invite": {
         "messageContent": "{{displayName}} pe o si {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Imeeli",
             "byText": "Ọrọ",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} ti koodu naa ba ṣayẹwo"
         },
         "email": {
             "subject": "Hey, ṣayẹwo eyi jade",
             "PleaseVisitLink": "Jọwọ ṣẹwo si ọna asopọ wọnyi:",
             "InvitingYou": "Mo n pe ọ si {{title}}",
-            "HasInvitedYou": "{{displayName}} ti pe o si {{title}}"
+            "HasInvitedYou": "{{displayName}} ti pe o si {{title}}",
+            "HasMentionedYou": "{{displayName}} ti mẹnuba rẹ ninu &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "A ti pe ọ si {{title}}. Jọwọ tẹ {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Muu gbohungbohun ṣiṣẹ",
             "cameraTitle": "Mu kamẹra ṣiṣẹ",
-            "cameraAndMicrophoneTitle": "Mu kamẹra ati Gbohungbohun ṣiṣẹ"
+            "cameraAndMicrophoneTitle": "Mu kamẹra ati Gbohungbohun ṣiṣẹ",
+            "dialogTitle": "Sisopọ",
+            "microphoneBtn": "Jeki Gbohungbohun",
+            "cameraBtn": "Mu kamẹra ṣiṣẹ",
+            "cameraAndMicrophoneBtn": "Mu kamẹra ṣiṣẹ ati Gbohungbohun"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "sọ ifiranṣẹ <em>{{message.fields.type}}<\/em> si {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "asọye lori",
+            "in": "ninu",
+            "body": "ninu {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ti firanṣẹ si",
+                "byAvatar": "lati {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ni tuntun {{instructions.fromDisplayType}}",
+                "byAvatar": "afikun nipasẹ {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Nkepe",
+            "description": "Apo-iwọle fun awọn ifiwepe"
+        },
+        "Streams\/resource": {
+            "displayType": "Ohun elo",
+            "description": "san fun ṣiṣakoso wiwọle si orisun kan ati fifiranṣẹ awọn ifiranṣẹ nipa awọn imudojuiwọn"
+        },
+        "Streams\/task": {
+            "description": "fun gbigba awọn imudojuiwọn nipa ilọsiwaju lori iṣẹ ṣiṣe kan",
+            "displayType": "Iṣẹ-ṣiṣe"
+        },
+        "Streams\/tasks": {
+            "description": "ẹka fun awọn iṣẹ-ṣiṣe",
+            "displayType": "Awọn iṣẹ-ṣiṣe"
+        },
+        "Streams\/experience": {
+            "description": "iriri ti o wọpọ fun awọn ọmọ ẹgbẹ ti agbegbe kan",
+            "displayType": "Iriri ti o wọpọ fun awọn ọmọ ẹgbẹ ti agbegbe kan"
+        },
+        "Streams\/greeting": {
+            "description": "ikini pẹlu eyiti olumulo le ṣafihan ara wọn",
+            "displayType": "Ẹ kí"
+        },
+        "Streams\/number": {
+            "displayType": "Nọmba",
+            "description": "nọmba ti iṣiro"
+        },
+        "Streams\/date": {
+            "displayType": "Ọjọ",
+            "description": "ọjọ"
+        },
+        "Streams\/text": {
+            "displayType": "Ọrọ",
+            "description": "ara ti ọrọ"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Ọrọ",
+            "description": "ara kekere ti ọrọ"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Ọrọ",
+            "description": "alabọde ara ti ọrọ"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Adirẹsi imeeli",
+            "description": "adirẹsi imeeli"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Nomba fonu",
+            "description": "nomba fonu"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "ọna asopọ lori oju opo wẹẹbu"
+        },
+        "Streams\/image": {
+            "displayType": "Aworan",
+            "description": "aworan wiwo"
+        },
+        "Streams\/images": {
+            "displayType": "Aworan Aworan",
+            "description": "àwòrán àwọn àwòrán"
+        },
+        "Streams\/album": {
+            "displayType": "Awo-orin",
+            "description": "awo-orin si eyiti ọpọlọpọ awọn media jẹ ti o jọmọ"
+        },
+        "Streams\/file": {
+            "displayType": "Faili",
+            "description": "faili po si"
+        },
+        "Streams\/audio": {
+            "displayType": "Agekuru Audio",
+            "description": "agekuru ohun"
+        },
+        "Streams\/video": {
+            "displayType": "Agekuru fidio",
+            "description": "agekuru fidio"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "ohun afetigbọ tabi fidio"
+        },
+        "Streams\/category": {
+            "displayType": "Ẹka",
+            "description": "Ẹya si eyiti awọn ṣiṣan omi miiran le jẹ ibatan"
+        },
+        "Streams\/participating": {
+            "displayType": "Atọka ikopa",
+            "description": "Awọn ṣiṣan ni o ni ibatan \/ ko ni ibatan si eyi nigbati oluṣamulo darapọ \/ fi oju silẹ"
+        },
+        "Streams\/interest": {
+            "displayType": "Ifẹ si",
+            "description": "duro fun iwulo olumulo ninu akọle kan"
+        },
+        "Streams\/incoming": {
+            "displayType": "Ti nwọle",
+            "description": "opin irin-ajo fun awọn ifiranṣẹ ti awọn olumulo miiran ranṣẹ"
+        },
+        "Streams\/chat": {
+            "displayType": "Ọrọ sisọ",
+            "description": "ibaraẹnisọrọ laarin awọn olumulo, pẹlu itan-akọọlẹ"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Ipe ti Gidi",
+            "description": "akoko gidi fidio \/ ohun ipe"
         }
     }
 }

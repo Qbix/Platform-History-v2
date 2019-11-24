@@ -3,8 +3,8 @@
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams/invited": "מענטשן איך פארבעטן",
-        "Streams/invitedMe": "ווער געבעטן מיר"
+        "Streams\/invited": "מענטשן איך פארבעטן",
+        "Streams\/invitedMe": "ווער געבעטן מיר"
     },
     "interests": {
         "Filter": "וואָס טאָן דו הנאה?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "זענט איר זיכער איר ווילן צו פאַרמאַכן דעם שמועס?",
         "closeChatConfirmYes": "Yes",
         "closeChatConfirmNo": "ניין",
-        "earlierComments": "פריער באַמערקונגען"
+        "earlierComments": "פריער באַמערקונגען",
+        "Subscribed": "שטום נאָטיפיקאַטיאָנס",
+        "Unsubscribed": "באַקומען נאָוטאַפאַקיישאַנז",
+        "notAllowedToJoinCall": "איר האָט נישט קיין דערלויבעניש צו פאַרבינדן דעם שמועס.",
+        "startedConversation": "סטאַרטעד אַ שמועס",
+        "RealTimeCall": "פאַקטיש צייט רופן",
+        "SearchByName": "זוכן דורך נאָמען"
     },
     "notifications": {
         "*": "אָנזאָג {{& message.fields.type}} צו {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "פּראָגרעס געמאכט אויף {{stream.fields.title}}",
         "Streams\/task\/complete": "אַרבעט געענדיקט: {{stream.fields.title}}",
         "Streams\/task\/error": "טעות בעשאַס: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: ינקאָמינג אָנזאָג"
+        "Streams\/incoming\/*": "{{app}}: ינקאָמינג אָנזאָג",
+        "Streams\/relatedTo\/Streams\/call": "נייַ רופן סטאַרטעד אין {{toTitle}}",
+        "Streams\/relatedTo\/*": "נייַ {{relationDisplayType}} אין {{toTitle}}",
+        "Streams\/relatedFrom\/*": "צוגעגעבן צו {{toTitle}} ווי {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} דערמאנט איר אין אַ באַמערקונג",
+        "Streams\/call": "{{displayName}} רופט דיך"
     },
     "invite": {
         "messageContent": "{{displayName}} פארבעטן איר צו {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Email",
             "byText": "טעקסט",
             "byFacebook": "פאַסעבאָאָק",
-            "byTwitter": "טוויטער"
+            "byTwitter": "טוויטער",
+            "scannedQR": "{{ClickOrTap}} אויב די קאָד איז געווען סקאַנד"
         },
         "email": {
             "subject": "היי, קאָנטראָלירן דעם אויס",
             "PleaseVisitLink": "ביטע באַזוכן די פאלגענדע לינק:",
             "InvitingYou": "איך בין אייך ינווייטינג צו {{title}}",
-            "HasInvitedYou": "{{displayName}} האָט איר פארבעטן צו {{title}}"
+            "HasInvitedYou": "{{displayName}} האָט איר פארבעטן צו {{title}}",
+            "HasMentionedYou": "{{displayName}} האָט איר דערמאנט אין &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "איר זענט פארבעטן צו {{title}}. ביטע צאַפּן {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "געבן מיקראָפאָן",
             "cameraTitle": "Enable Camera",
-            "cameraAndMicrophoneTitle": "געבן קאַמעראַ און מיקראָפאָן"
+            "cameraAndMicrophoneTitle": "געבן קאַמעראַ און מיקראָפאָן",
+            "dialogTitle": "קאַנעקטינג",
+            "microphoneBtn": "געבן מיקראָפאָן",
+            "cameraBtn": "געבן קאַמעראַ",
+            "cameraAndMicrophoneBtn": "געבן קאַמעראַ און מיקראָפאָן"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "אַרייַנגעשיקט אַ <em>{{message.fields.type}}<\/em> אָנזאָג צו {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "קאַמענטאַד אויף",
+            "in": "אין",
+            "body": "אין {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "האט שוין אַרייַנגעשיקט צו",
+                "byAvatar": "דורך {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "האט אַ נייַע {{instructions.fromDisplayType}}",
+                "byAvatar": "צוגעגעבן דורך {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "פאַרבעטן",
+            "description": "ינבאָקס פֿאַר ינוויטיישאַנז"
+        },
+        "Streams\/resource": {
+            "displayType": "ריסאָרס",
+            "description": "טייַך פֿאַר אָנפירונג אַקסעס צו אַ מיטל און פּאָסטינג אַרטיקלען וועגן דערהייַנטיקונגען"
+        },
+        "Streams\/task": {
+            "description": "פֿאַר ריסיווינג דערהייַנטיקונגען וועגן פּראָגרעס אויף אַ זיכער אַרבעט",
+            "displayType": "אַרבעט"
+        },
+        "Streams\/tasks": {
+            "description": "קאַטעגאָריע פֿאַר טאַסקס",
+            "displayType": "טאַסקס"
+        },
+        "Streams\/experience": {
+            "description": "אַ פּראָסט דערפאַרונג פֿאַר מיטגלידער פון אַ קהל",
+            "displayType": "פּראָסט דערפאַרונג פֿאַר מיטגלידער פון אַ קהל"
+        },
+        "Streams\/greeting": {
+            "description": "גרוס מיט וואָס אַ באַניצער קענען באַקענען זיך",
+            "displayType": "גרוס"
+        },
+        "Streams\/number": {
+            "displayType": "נומער",
+            "description": "מאַטאַמאַטיקאַל נומער"
+        },
+        "Streams\/date": {
+            "displayType": "דאַטע",
+            "description": "דאַטע"
+        },
+        "Streams\/text": {
+            "displayType": "טעקסט",
+            "description": "גוף פון טעקסט"
+        },
+        "Streams\/text\/small": {
+            "displayType": "טעקסט",
+            "description": "קליין גוף פון טעקסט"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "טעקסט",
+            "description": "מיטל גוף פון טעקסט"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "אימעיל אדרעס",
+            "description": "אימעיל אדרעס"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "טעלעפאן נומער",
+            "description": "טעלעפאָן נומער"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "לינק אויף די וועב"
+        },
+        "Streams\/image": {
+            "displayType": "בילד",
+            "description": "וויסואַל בילד"
+        },
+        "Streams\/images": {
+            "displayType": "בילד גאַלערי",
+            "description": "גאַלעריע פון בילדער"
+        },
+        "Streams\/album": {
+            "displayType": "אלבאם",
+            "description": "אַן אלבאם צו וואָס פאַרשידן מעדיע איז פארבונדן"
+        },
+        "Streams\/file": {
+            "displayType": "טעקע",
+            "description": "ופּלאָאַדעד טעקע"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio Clip",
+            "description": "audio clip"
+        },
+        "Streams\/video": {
+            "displayType": "ווידעא קליפּ",
+            "description": "ווידעא קלעמערל"
+        },
+        "Streams\/live": {
+            "displayType": "ליוועסטרעאַם",
+            "description": "לעבן אַודיאָ אָדער ווידעא"
+        },
+        "Streams\/category": {
+            "displayType": "קאַטעגאָריע",
+            "description": "אַ קאַטעגאָריע צו וואָס אנדערע סטרימז קענען זיין שייך"
+        },
+        "Streams\/participating": {
+            "displayType": "פּאַרטיסאַפּייטינג אינדעקס",
+            "description": "סטרימז זענען פֿאַרבונדן \/ אַנרילייטיד צו דעם ווען אַ באַניצער דזשאָינס \/ בלעטער"
+        },
+        "Streams\/interest": {
+            "displayType": "אינטערעס",
+            "description": "רעפּראַזענץ אַ באַניצער &#39;ס אינטערעס אין אַ זיכער טעמע"
+        },
+        "Streams\/incoming": {
+            "displayType": "אָנקומענדיק",
+            "description": "דעסטיניישאַן פֿאַר אַרטיקלען געשיקט דורך אנדערע ניצערס"
+        },
+        "Streams\/chat": {
+            "displayType": "שמועס",
+            "description": "אַ שמועס צווישן יוזערז, מיט געשיכטע"
+        },
+        "Streams\/webrtc": {
+            "displayType": "פאַקטיש-צייט רופן",
+            "description": "אַ פאַקטיש-צייט ווידעא \/ אַודיאָ רופן"
         }
     }
 }

@@ -3,8 +3,8 @@
         "NewItemTitle": "Қисми нав"
     },
     "labels": {
-        "Streams/invited": "Мардон даъват карданд",
-        "Streams/invitedMe": "Ки маро даъват кард"
+        "Streams\/invited": "Мардон даъват карданд",
+        "Streams\/invitedMe": "Ки маро даъват кард"
     },
     "interests": {
         "Filter": "Шумо аз чӣ истифода мекунед?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Оё боварӣ доред, ки ин паёмро пӯшед?",
         "closeChatConfirmYes": "Бале",
         "closeChatConfirmNo": "Не",
-        "earlierComments": "шарҳҳои қаблӣ"
+        "earlierComments": "шарҳҳои қаблӣ",
+        "Subscribed": "Огоҳиҳоро хомӯш кунед",
+        "Unsubscribed": "Огоҳинома гиред",
+        "notAllowedToJoinCall": "Шумо иҷозати ҳамроҳ шудан ба ин сӯҳбатро надоред.",
+        "startedConversation": "сӯҳбатро оғоз кард",
+        "RealTimeCall": "Занги вақти воқеӣ",
+        "SearchByName": "Ҷустуҷӯ аз рӯи ном"
     },
     "notifications": {
         "*": "{{& message.fields.type}} то {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Пешрафт дар {{stream.fields.title}}",
         "Streams\/task\/complete": "Вазифа ба анҷом расид: {{stream.fields.title}}",
         "Streams\/task\/error": "Хатогӣ дар муддати: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Паёмҳои воридотӣ"
+        "Streams\/incoming\/*": "{{app}}: Паёмҳои воридотӣ",
+        "Streams\/relatedTo\/Streams\/call": "Занги нав дар {{toTitle}} оғоз ёфт",
+        "Streams\/relatedTo\/*": "Нави {{relationDisplayType}} дар {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Ба {{toTitle}} ҳамчун {{relationDisplayType}} илова карда шуд",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} шуморо дар шарҳ қайд кард",
+        "Streams\/call": "{{displayName}} ба шумо занг мезанад"
     },
     "invite": {
         "messageContent": "{{displayName}} шуморо ба {{inviteUrl}} даъват кард",
@@ -59,13 +70,15 @@
             "byEmail": "Email",
             "byText": "Матн",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} агар код скан карда шуда бошад"
         },
         "email": {
             "subject": "Ҳа, ин тафтиш кунед",
             "PleaseVisitLink": "Лутфан ба пайвандҳои зерин муроҷиат кунед:",
             "InvitingYou": "Ман шуморо даъват менамоям, ки {{title}}",
-            "HasInvitedYou": "{{displayName}} шуморо ба {{title}} даъват кард"
+            "HasInvitedYou": "{{displayName}} шуморо ба {{title}} даъват кард",
+            "HasMentionedYou": "{{displayName}} шуморо дар &quot;{{title}}&quot; ёдрас кард"
         },
         "sms": {
             "content": "Шумо ба {{title}} даъват кардаед. Лутфан {{url}} -ро лутфан гузоред"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Микрофонро фаъол созед",
             "cameraTitle": "Камераро фаъол кунед",
-            "cameraAndMicrophoneTitle": "Камера ва микрофонро фаъол созед"
+            "cameraAndMicrophoneTitle": "Камера ва микрофонро фаъол созед",
+            "dialogTitle": "Пайвастшавӣ",
+            "microphoneBtn": "Микрофонро фаъол кунед",
+            "cameraBtn": "Камераро фаъол кунед",
+            "cameraAndMicrophoneBtn": "Камера ва Микрофонро фаъол кунед"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "паёми <em>{{message.fields.type}} -ро<\/em> ба {{stream.fields.title}} пешниҳод кард"
+        },
+        "text": {
+            "commentedOn": "шарҳ дод",
+            "in": "дар",
+            "body": "дар {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ба нашр расидааст",
+                "byAvatar": "аз ҷониби {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "дорои нав {{instructions.fromDisplayType}}",
+                "byAvatar": "иловашуда {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Даъват карданд",
+            "description": "Қуттии даъватномаҳо"
+        },
+        "Streams\/resource": {
+            "displayType": "Захира",
+            "description": "ҷараён барои идоракунии дастрасӣ ба манба ва интишори паёмҳо дар бораи навсозиҳо"
+        },
+        "Streams\/task": {
+            "description": "барои гирифтани навсозиҳо дар бораи пешрафт дар вазифаи муайян",
+            "displayType": "Вазифа"
+        },
+        "Streams\/tasks": {
+            "description": "категория барои вазифаҳо",
+            "displayType": "Вазифаҳо"
+        },
+        "Streams\/experience": {
+            "description": "як таҷрибаи муштарак барои аъзои ҷамоа",
+            "displayType": "Таҷрибаи маъмул барои аъзоёни ҷамоа"
+        },
+        "Streams\/greeting": {
+            "description": "салом, ки бо он корбар метавонад худро муаррифӣ кунад",
+            "displayType": "Салом"
+        },
+        "Streams\/number": {
+            "displayType": "Шумора",
+            "description": "рақами математикӣ"
+        },
+        "Streams\/date": {
+            "displayType": "Таърих",
+            "description": "санаи"
+        },
+        "Streams\/text": {
+            "displayType": "Матн",
+            "description": "матни матн"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Матн",
+            "description": "ҷасади хурди матн"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Матн",
+            "description": "ҷасади миёнаи матн"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Суроғаи электронӣ",
+            "description": "суроғаи электронӣ"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Рақами мобилӣ",
+            "description": "рақами мобилӣ"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "истиноди дар веб"
+        },
+        "Streams\/image": {
+            "displayType": "Тасвир",
+            "description": "тасвири визуалӣ"
+        },
+        "Streams\/images": {
+            "displayType": "Галереяи тасвирҳо",
+            "description": "галереяи тасвирҳо"
+        },
+        "Streams\/album": {
+            "displayType": "Албом",
+            "description": "албом, ки бо васоити мухталифи он алоқаманд аст"
+        },
+        "Streams\/file": {
+            "displayType": "Файл",
+            "description": "файли боршуда"
+        },
+        "Streams\/audio": {
+            "displayType": "Клипи аудиоӣ",
+            "description": "клипи аудио"
+        },
+        "Streams\/video": {
+            "displayType": "Клипи видеоӣ",
+            "description": "клипи видеоӣ"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "аудио ё видео зинда"
+        },
+        "Streams\/category": {
+            "displayType": "Гурӯҳ",
+            "description": "категорияест, ки ба дигар ҷараёнҳо тааллуқ дошта метавонад"
+        },
+        "Streams\/participating": {
+            "displayType": "Индекси иштирок",
+            "description": "ҷараёнҳо ба ин иртибот доранд \/ алоқаманд нестанд, вақте корбар ба он мепайвандад \/ тарк мекунад"
+        },
+        "Streams\/interest": {
+            "displayType": "Фоизҳо",
+            "description": "манфиати корбарро ба мавзӯи муайян ифода мекунад"
+        },
+        "Streams\/incoming": {
+            "displayType": "Воридотӣ",
+            "description": "таъинот барои паёмҳое, ки аз ҷониби корбарони дигар фиристода шудаанд"
+        },
+        "Streams\/chat": {
+            "displayType": "Гуфтугӯ",
+            "description": "як сӯҳбати байни корбарон, бо таърих"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Занги воқеӣ",
+            "description": "вақти воқеӣ видео \/ занги аудио"
         }
     }
 }

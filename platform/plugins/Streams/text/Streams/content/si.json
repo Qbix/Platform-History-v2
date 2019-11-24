@@ -3,8 +3,8 @@
         "NewItemTitle": "නව අයිතමය"
     },
     "labels": {
-        "Streams/invited": "මම ආරාධනා කළ අය",
-        "Streams/invitedMe": "කවුද මට ආරාධනා කළේ"
+        "Streams\/invited": "මම ආරාධනා කළ අය",
+        "Streams\/invitedMe": "කවුද මට ආරාධනා කළේ"
     },
     "interests": {
         "Filter": "ඔබ භුක්ති විඳින්නේ කුමක්ද?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "ඔබට මෙම චැට් එක වසා දැමීමට අවශ්‍ය යැයි විශ්වාසද?",
         "closeChatConfirmYes": "ඔව්",
         "closeChatConfirmNo": "නොමැත",
-        "earlierComments": "කලින් අදහස්"
+        "earlierComments": "කලින් අදහස්",
+        "Subscribed": "නිවේදන නිශ්ශබ්ද කරන්න",
+        "Unsubscribed": "දැනුම්දීම් ලබා ගන්න",
+        "notAllowedToJoinCall": "මෙම සංවාදයට සම්බන්ධ වීමට ඔබට අවසර නැත.",
+        "startedConversation": "සංවාදයක් ආරම්භ කළා",
+        "RealTimeCall": "රියල් ටයිම් ඇමතුම",
+        "SearchByName": "නමින් සොයන්න"
     },
     "notifications": {
         "*": "පණිවිඩය {{& message.fields.type}} සිට {{& stream.fields.title}} දක්වා",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "{{999} on හි ප්‍රගතිය",
         "Streams\/task\/complete": "කාර්යය සම්පූර්ණයි: {{stream.fields.title}}",
         "Streams\/task\/error": "අතරතුර දෝෂය: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: එන පණිවිඩය"
+        "Streams\/incoming\/*": "{{app}}: එන පණිවිඩය",
+        "Streams\/relatedTo\/Streams\/call": "නව ඇමතුම {{999} in වලින් ආරම්භ විය",
+        "Streams\/relatedTo\/*": "{{toTitle}} හි නව {{relationDisplayType}}",
+        "Streams\/relatedFrom\/*": "{{999} to ලෙස {{relationDisplayType}} ලෙස එකතු කරන ලදි",
+        "Streams\/mention": "Comment 99 999} a ඔබ අදහස් දැක්වීමක සඳහන් කර ඇත",
+        "Streams\/call": "Call {999} you ඔබට කතා කරයි"
     },
     "invite": {
         "messageContent": "{{999} you ඔබට {{1000} to වෙත ආරාධනා කළේය",
@@ -59,13 +70,15 @@
             "byEmail": "විද්යුත් තැපෑල",
             "byText": "පෙළ",
             "byFacebook": "ෆේස්බුක්",
-            "byTwitter": "ට්විටර්"
+            "byTwitter": "ට්විටර්",
+            "scannedQR": "කේතය පරිලෝකනය කර ඇත්නම් {{ClickOrTap}}"
         },
         "email": {
             "subject": "හේයි, මෙය පරීක්ෂා කරන්න",
             "PleaseVisitLink": "කරුණාකර පහත සබැඳියට පිවිසෙන්න:",
             "InvitingYou": "මම ඔබට ආරාධනා කරන්නේ {{title}}",
-            "HasInvitedYou": "{{999} you ඔබට {{1000} to වෙත ආරාධනා කර ඇත"
+            "HasInvitedYou": "{{999} you ඔබට {{1000} to වෙත ආරාධනා කර ඇත",
+            "HasMentionedYou": "{{999} you ඔබව &quot;{{1000} in&quot; හි සඳහන් කර ඇත."
         },
         "sms": {
             "content": "ඔබට {{999} to වෙත ආරාධනා කර ඇත. කරුණාකර {{1000} තට්ටු කරන්න"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "මයික්‍රොෆෝනය සක්‍රීය කරන්න",
             "cameraTitle": "කැමරාව සක්‍රීය කරන්න",
-            "cameraAndMicrophoneTitle": "කැමරාව සහ මයික්‍රොෆෝනය සක්‍රීය කරන්න"
+            "cameraAndMicrophoneTitle": "කැමරාව සහ මයික්‍රොෆෝනය සක්‍රීය කරන්න",
+            "dialogTitle": "සම්බන්ධ වෙමින්",
+            "microphoneBtn": "මයික්‍රොෆෝනය සක්‍රීය කරන්න",
+            "cameraBtn": "කැමරාව සක්‍රීය කරන්න",
+            "cameraAndMicrophoneBtn": "කැමරාව සහ මයික්‍රොෆෝනය සක්‍රීය කරන්න"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "<em>{{message.fields.type}}<\/em> පණිවිඩයක් {{1000} to වෙත පළ කරන ලදි"
+        },
+        "text": {
+            "commentedOn": "අදහස් දැක්වීය",
+            "in": "තුල",
+            "body": "{{999} in හි: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "වෙත පළ කර ඇත",
+                "byAvatar": "by {999} by"
+            },
+            "relatedTo": {
+                "hasANew": "නව {{999} has ඇත",
+                "byAvatar": "by {999 by by විසින් එකතු කරන ලදි"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "ආරාධනා",
+            "description": "ආරාධනා සඳහා එන ලිපි"
+        },
+        "Streams\/resource": {
+            "displayType": "සම්පත්",
+            "description": "සම්පතකට ප්‍රවේශය කළමනාකරණය කිරීම සහ යාවත්කාලීන කිරීම් පිළිබඳ පණිවිඩ පළ කිරීම සඳහා ප්‍රවාහය"
+        },
+        "Streams\/task": {
+            "description": "කිසියම් කාර්යයක ප්‍රගතිය පිළිබඳ යාවත්කාලීන කිරීම් ලබා ගැනීම සඳහා",
+            "displayType": "කාර්ය"
+        },
+        "Streams\/tasks": {
+            "description": "කාර්යයන් සඳහා කාණ්ඩය",
+            "displayType": "කාර්යයන්"
+        },
+        "Streams\/experience": {
+            "description": "ප්‍රජාවක සාමාජිකයින්ට පොදු අත්දැකීමක්",
+            "displayType": "ප්‍රජාවක සාමාජිකයින්ට පොදු අත්දැකීම්"
+        },
+        "Streams\/greeting": {
+            "description": "පරිශීලකයෙකුට තමන්ව හඳුන්වා දිය හැකි සුබ පැතුම්",
+            "displayType": "සුබපැතුම්"
+        },
+        "Streams\/number": {
+            "displayType": "අංකය",
+            "description": "ගණිත අංකය"
+        },
+        "Streams\/date": {
+            "displayType": "දිනය",
+            "description": "දිනය"
+        },
+        "Streams\/text": {
+            "displayType": "පෙළ",
+            "description": "පෙළ ශරීරය"
+        },
+        "Streams\/text\/small": {
+            "displayType": "පෙළ",
+            "description": "කුඩා පෙළ"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "පෙළ",
+            "description": "මධ්‍යම පා text ය"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "විද්යුත් තැපැල් ලිපිනය",
+            "description": "විද්යුත් තැපැල් ලිපිනය"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "දුරකතන අංකය",
+            "description": "දුරකතන අංකය"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "වෙබයේ සබැඳිය"
+        },
+        "Streams\/image": {
+            "displayType": "රූප",
+            "description": "දෘශ්‍ය රූපය"
+        },
+        "Streams\/images": {
+            "displayType": "රූප ගැලරිය",
+            "description": "රූප ගැලරිය"
+        },
+        "Streams\/album": {
+            "displayType": "ඇල්බමය",
+            "description": "විවිධ මාධ්‍ය සම්බන්ධිත ඇල්බමයකි"
+        },
+        "Streams\/file": {
+            "displayType": "ගොනුව",
+            "description": "උඩුගත කරන ලද ගොනුව"
+        },
+        "Streams\/audio": {
+            "displayType": "ශ්‍රව්‍ය පටය",
+            "description": "ශ්‍රව්‍ය පටය"
+        },
+        "Streams\/video": {
+            "displayType": "වීඩියෝ පටය",
+            "description": "වීඩියෝ පටය"
+        },
+        "Streams\/live": {
+            "displayType": "සජීවී විකාශය",
+            "description": "සජීවී ශ්‍රව්‍ය හෝ වීඩියෝ"
+        },
+        "Streams\/category": {
+            "displayType": "වර්ගය",
+            "description": "වෙනත් ප්‍රවාහයන්ට සම්බන්ධ විය හැකි කාණ්ඩයකි"
+        },
+        "Streams\/participating": {
+            "displayType": "සහභාගී වීමේ දර්ශකය",
+            "description": "පරිශීලකයෙකු සම්බන්ධ වූ විට \/ පිටවන විට ධාරාවන් මේ හා සම්බන්ධ \/ සම්බන්ධ නොවේ"
+        },
+        "Streams\/interest": {
+            "displayType": "උනන්දුව",
+            "description": "කිසියම් මාතෘකාවක් සඳහා පරිශීලකයාගේ උනන්දුව නියෝජනය කරයි"
+        },
+        "Streams\/incoming": {
+            "displayType": "එන",
+            "description": "වෙනත් පරිශීලකයින් විසින් යවන ලද පණිවිඩ සඳහා ගමනාන්තය"
+        },
+        "Streams\/chat": {
+            "displayType": "සාකච්ඡාව",
+            "description": "ඉතිහාසය සමඟ පරිශීලකයින් අතර සංවාදයක්"
+        },
+        "Streams\/webrtc": {
+            "displayType": "තථ්‍ය කාලීන ඇමතුම",
+            "description": "තථ්‍ය කාලීන වීඩියෝ \/ ශ්‍රව්‍ය ඇමතුමක්"
         }
     }
 }

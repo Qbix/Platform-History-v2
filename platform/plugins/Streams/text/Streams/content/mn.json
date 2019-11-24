@@ -3,8 +3,8 @@
         "NewItemTitle": "Шинэ зүйл"
     },
     "labels": {
-        "Streams/invited": "Миний урьсан хүмүүс",
-        "Streams/invitedMe": "Хэн намайг урьсан юм бэ?"
+        "Streams\/invited": "Миний урьсан хүмүүс",
+        "Streams\/invitedMe": "Хэн намайг урьсан юм бэ?"
     },
     "interests": {
         "Filter": "Та юунд дуртай вэ?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Та энэ чатыг хаах гэж байгаадаа итгэлтэй байна уу?",
         "closeChatConfirmYes": "Тиймээ",
         "closeChatConfirmNo": "Үгүй",
-        "earlierComments": "өмнөх тайлбарууд"
+        "earlierComments": "өмнөх тайлбарууд",
+        "Subscribed": "Дуугүй мэдэгдэл",
+        "Unsubscribed": "Мэдэгдэл авах",
+        "notAllowedToJoinCall": "Танд энэ харилцаанд оролцох эрх байхгүй.",
+        "startedConversation": "яриа эхлүүлэв",
+        "RealTimeCall": "Бодит цагийн дуудлага",
+        "SearchByName": "Нэрээр хайх"
     },
     "notifications": {
         "*": "Зурвас {{& message.fields.type}} руу {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "{{stream.fields.title}} дээр хийсэн явц",
         "Streams\/task\/complete": "Гүйцэтгэсэн ажил: {{stream.fields.title}}",
         "Streams\/task\/error": "Алдааны үед: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Ирж буй зурвас"
+        "Streams\/incoming\/*": "{{app}}: Ирж буй зурвас",
+        "Streams\/relatedTo\/Streams\/call": "Шинэ дуудлага {{toTitle}} -д эхэлсэн",
+        "Streams\/relatedTo\/*": "{{toTitle}} -д шинэ {{relationDisplayType}}",
+        "Streams\/relatedFrom\/*": "{{toTitle}} -г {{relationDisplayType}} болгож нэмсэн",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} таныг коммент дээр дурдсан",
+        "Streams\/call": "{{displayName}} таныг дуудаж байна"
     },
     "invite": {
         "messageContent": "{{displayName}} таныг {{inviteUrl}} -д урьсан",
@@ -59,13 +70,15 @@
             "byEmail": "И-мэйл хаяг",
             "byText": "Текст",
             "byFacebook": "Facebook",
-            "byTwitter": "Твиттер"
+            "byTwitter": "Твиттер",
+            "scannedQR": "{{ClickOrTap}} хэрэв код сканнердсан бол"
         },
         "email": {
             "subject": "Хөөе, үүнийг шалга",
             "PleaseVisitLink": "Дараах холбоосоор зочилно уу:",
             "InvitingYou": "Би таныг {{title}} -д урьж байна.",
-            "HasInvitedYou": "{{displayName}} таныг {{title}} -д урьсан"
+            "HasInvitedYou": "{{displayName}} таныг {{title}} -д урьсан",
+            "HasMentionedYou": "{{displayName}} таныг &quot;{{title}}&quot; -д дурдсан"
         },
         "sms": {
             "content": "Та {{title}} -д уригдсан. {{url}} дарна уу"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Микрофоныг идэвхжүүлэх",
             "cameraTitle": "Камерыг идэвхжүүлэх",
-            "cameraAndMicrophoneTitle": "Камер ба микрофоныг идэвхжүүлэх"
+            "cameraAndMicrophoneTitle": "Камер ба микрофоныг идэвхжүүлэх",
+            "dialogTitle": "Холбож байна",
+            "microphoneBtn": "Микрофоныг идэвхжүүлнэ үү",
+            "cameraBtn": "Камерыг идэвхжүүлэх нь",
+            "cameraAndMicrophoneBtn": "Камер ба микрофоныг идэвхжүүлнэ"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "<em>{{message.fields.type}}<\/em> мессежийг {{stream.fields.title}} нийтэлсэн"
+        },
+        "text": {
+            "commentedOn": "дээр сэтгэгдэл бичсэн",
+            "in": "дотор",
+            "body": "{{& url}}: {{& message.fields.content}} дотор",
+            "relatedFrom": {
+                "hasBeenPostedTo": "нийтлэгдсэн байна",
+                "byAvatar": "Зохиолыг бичсэн {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "шинэ {{instructions.fromDisplayType}} байна.",
+                "byAvatar": "{{avatar.displayName}} нэмсэн"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Урьсан",
+            "description": "Урилга ирсэн мэйл"
+        },
+        "Streams\/resource": {
+            "displayType": "Нөөцийн",
+            "description": "мэдээллийн эх үүсвэрийг удирдах, шинэчлэлтийн талаар мессеж илгээх урсгал"
+        },
+        "Streams\/task": {
+            "description": "Тодорхой даалгаврын явцын талаарх шинэчлэлтүүдийг хүлээн авах",
+            "displayType": "Даалгавар"
+        },
+        "Streams\/tasks": {
+            "description": "даалгаврын ангилал",
+            "displayType": "Даалгавар"
+        },
+        "Streams\/experience": {
+            "description": "нийгэмлэгийн гишүүдэд зориулсан нийтлэг туршлага",
+            "displayType": "Нөхөрлөлийн гишүүдэд зориулсан нийтлэг туршлага"
+        },
+        "Streams\/greeting": {
+            "description": "хэрэглэгч өөрсдийгөө танилцуулах мэндчилгээ",
+            "displayType": "Мэндчилж байна"
+        },
+        "Streams\/number": {
+            "displayType": "Тоо",
+            "description": "математикийн тоо"
+        },
+        "Streams\/date": {
+            "displayType": "Огноо",
+            "description": "огноо"
+        },
+        "Streams\/text": {
+            "displayType": "Текстээр бичнэ үү",
+            "description": "текстийн их бие"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Текстээр бичнэ үү",
+            "description": "жижиг текст"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Текстээр бичнэ үү",
+            "description": "текстийн дунд биет"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Имэйл хаяг",
+            "description": "имэйл хаяг"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Утасны дугаар",
+            "description": "утасны дугаар"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL хаяг",
+            "description": "вэб дээр холбох"
+        },
+        "Streams\/image": {
+            "displayType": "Зураг",
+            "description": "харааны дүрс"
+        },
+        "Streams\/images": {
+            "displayType": "Зургийн цомог",
+            "description": "зургийн галлерей"
+        },
+        "Streams\/album": {
+            "displayType": "Цомог",
+            "description": "янз бүрийн хэвлэл мэдээллийн хэрэгслээр холбоотой цомог"
+        },
+        "Streams\/file": {
+            "displayType": "Файл",
+            "description": "байршуулсан файл"
+        },
+        "Streams\/audio": {
+            "displayType": "Аудио клип",
+            "description": "аудио клип"
+        },
+        "Streams\/video": {
+            "displayType": "Видео клип",
+            "description": "видео клип"
+        },
+        "Streams\/live": {
+            "displayType": "Шууд дамжуулалт",
+            "description": "амьд аудио эсвэл видео"
+        },
+        "Streams\/category": {
+            "displayType": "Ангилал",
+            "description": "бусад урсгалтай холбоотой ангилал"
+        },
+        "Streams\/participating": {
+            "displayType": "Оролцох индекс",
+            "description": "хэрэглэгч нэгдэх \/ гарах үед урсгал нь үүнтэй холбоотой \/ хамааралгүй болно"
+        },
+        "Streams\/interest": {
+            "displayType": "Сонирхол",
+            "description": "хэрэглэгчийн тодорхой сэдвийг сонирхдог"
+        },
+        "Streams\/incoming": {
+            "displayType": "Ирж буй",
+            "description": "бусад хэрэглэгчдийн илгээсэн мессежний очих газар"
+        },
+        "Streams\/chat": {
+            "displayType": "Яриа",
+            "description": "түүх, хэрэглэгчдийн хооронд яриа"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Бодит цагийн дуудлага",
+            "description": "бодит цаг хугацааны видео \/ аудио дуудлага"
         }
     }
 }

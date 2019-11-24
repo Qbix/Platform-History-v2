@@ -3,8 +3,8 @@
         "NewItemTitle": "Nova ero"
     },
     "labels": {
-        "Streams/invited": "Homoj, kiujn mi invitis",
-        "Streams/invitedMe": "Kiu invitis min"
+        "Streams\/invited": "Homoj, kiujn mi invitis",
+        "Streams\/invitedMe": "Kiu invitis min"
     },
     "interests": {
         "Filter": "Kion vi ĝuas?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Ĉu vi certas, ke vi volas fermi ĉi tiun konversacion?",
         "closeChatConfirmYes": "Jes",
         "closeChatConfirmNo": "Ne",
-        "earlierComments": "pli fruaj komentoj"
+        "earlierComments": "pli fruaj komentoj",
+        "Subscribed": "Mute Sciigoj",
+        "Unsubscribed": "Akiri Sciigojn",
+        "notAllowedToJoinCall": "Vi ne havas permeson aliĝi al ĉi tiu konversacio.",
+        "startedConversation": "komencis konversacion",
+        "RealTimeCall": "Reala Tempo-Voko",
+        "SearchByName": "Serĉo laŭ nomo"
     },
     "notifications": {
         "*": "Mesaĝo {{& message.fields.type}} al {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Progresoj faritaj en {{stream.fields.title}}",
         "Streams\/task\/complete": "Tasko kompletigita: {{stream.fields.title}}",
         "Streams\/task\/error": "Eraro dum: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Alvenanta mesaĝo"
+        "Streams\/incoming\/*": "{{app}}: Alvenanta mesaĝo",
+        "Streams\/relatedTo\/Streams\/call": "Nova Voko Komencita en {{toTitle}}",
+        "Streams\/relatedTo\/*": "Nova {{relationDisplayType}} en {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Aldonita al {{toTitle}} kiel {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} menciis vin en komento",
+        "Streams\/call": "{{displayName}} vokas vin"
     },
     "invite": {
         "messageContent": "{{displayName}} invitis vin al {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Retpoŝto",
             "byText": "Teksto",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} se la kodo estis skanita"
         },
         "email": {
             "subject": "Hej, kontrolu ĉi tion",
             "PleaseVisitLink": "Bonvolu viziti la jenan ligon:",
             "InvitingYou": "Mi invitas vin al {999}}",
-            "HasInvitedYou": "{{displayName}} invitis vin al {{title}}"
+            "HasInvitedYou": "{{displayName}} invitis vin al {{title}}",
+            "HasMentionedYou": "{{displayName}} menciis vin en &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Vi estis invitita al {999}}. Bonvolu frapeti {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Ebligu Mikrofonon",
             "cameraTitle": "Ebligu Fotilon",
-            "cameraAndMicrophoneTitle": "Ebligi Fotilon kaj Mikrofonon"
+            "cameraAndMicrophoneTitle": "Ebligi Fotilon kaj Mikrofonon",
+            "dialogTitle": "Konektanta",
+            "microphoneBtn": "Ebligu Mikrofonon",
+            "cameraBtn": "Ebligu Fotilon",
+            "cameraAndMicrophoneBtn": "Ebligu Fotilon kaj Mikrofonon"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "afiŝis <em>{{message.fields.type}}<\/em> mesaĝon al {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "komentis",
+            "in": "en",
+            "body": "en {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "estis poŝtita al",
+                "byAvatar": "de {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "havas novan {{instructions.fromDisplayType}}",
+                "byAvatar": "aldonita de {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Invitita",
+            "description": "Informkesto por invitoj"
+        },
+        "Streams\/resource": {
+            "displayType": "Rimedo",
+            "description": "rivereto por administri aliron al rimedo kaj afiŝi mesaĝojn pri ĝisdatigoj"
+        },
+        "Streams\/task": {
+            "description": "por ricevi ĝisdatigojn pri progreso pri certa tasko",
+            "displayType": "Tasko"
+        },
+        "Streams\/tasks": {
+            "description": "kategorio por taskoj",
+            "displayType": "Taskoj"
+        },
+        "Streams\/experience": {
+            "description": "ofta sperto por membroj de komunumo",
+            "displayType": "Komuna sperto por membroj de komunumo"
+        },
+        "Streams\/greeting": {
+            "description": "saluton per kiu uzanto povas sin prezenti",
+            "displayType": "Saluto"
+        },
+        "Streams\/number": {
+            "displayType": "Nombro",
+            "description": "matematika nombro"
+        },
+        "Streams\/date": {
+            "displayType": "Dato",
+            "description": "dato"
+        },
+        "Streams\/text": {
+            "displayType": "Teksto",
+            "description": "korpo de teksto"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Teksto",
+            "description": "malgranda korpo de teksto"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Teksto",
+            "description": "meza korpo de teksto"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Retpoŝta adreso",
+            "description": "retpoŝta adreso"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Telefonnumero",
+            "description": "telefonnumero"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "ligilo en la reto"
+        },
+        "Streams\/image": {
+            "displayType": "Bildo",
+            "description": "vida bildo"
+        },
+        "Streams\/images": {
+            "displayType": "Bildgalerio",
+            "description": "galerio de bildoj"
+        },
+        "Streams\/album": {
+            "displayType": "Albumo",
+            "description": "albumo al kiu diversaj amaskomunikiloj rilatas"
+        },
+        "Streams\/file": {
+            "displayType": "Dosiero",
+            "description": "alŝutita dosiero"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio Clip",
+            "description": "sondosiero"
+        },
+        "Streams\/video": {
+            "displayType": "Vidbendo",
+            "description": "filmeto"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "viva audio aŭ video"
+        },
+        "Streams\/category": {
+            "displayType": "Kategorio",
+            "description": "kategorio al kiu aliaj riveretoj povas rilati"
+        },
+        "Streams\/participating": {
+            "displayType": "Partoprenanta Indekso",
+            "description": "riveretoj rilatas \/ ne rilatas al tio, kiam uzanto aliĝas \/ foriras"
+        },
+        "Streams\/interest": {
+            "displayType": "Intereso",
+            "description": "reprezentas la intereson de uzanto pri certa temo"
+        },
+        "Streams\/incoming": {
+            "displayType": "Alvenantaj",
+            "description": "celloko por mesaĝoj senditaj de aliaj uzantoj"
+        },
+        "Streams\/chat": {
+            "displayType": "Konversacio",
+            "description": "konversacio inter uzantoj, kun historio"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Realtempa Voko",
+            "description": "realtempa filmeto \/ audiovoko"
         }
     }
 }

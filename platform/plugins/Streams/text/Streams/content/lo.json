@@ -3,8 +3,8 @@
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams/invited": "ປະຊາຊົນຂ້າພະເຈົ້າໄດ້ເຊື້ອເຊີນ",
-        "Streams/invitedMe": "ຜູ້ທີ່ເຊື້ອເຊີນຂ້ອຍ"
+        "Streams\/invited": "ປະຊາຊົນຂ້າພະເຈົ້າໄດ້ເຊື້ອເຊີນ",
+        "Streams\/invitedMe": "ຜູ້ທີ່ເຊື້ອເຊີນຂ້ອຍ"
     },
     "interests": {
         "Filter": "ເຈົ້າຊອບສິ່ງໃດ?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "ທ່ານແນ່ໃຈວ່າທ່ານຕ້ອງການປິດການສົນທະນານີ້?",
         "closeChatConfirmYes": "ແມ່ນແລ້ວ",
         "closeChatConfirmNo": "ບໍ່ມີ",
-        "earlierComments": "comments earlier"
+        "earlierComments": "comments earlier",
+        "Subscribed": "ແຈ້ງການປິດສຽງ",
+        "Unsubscribed": "ຮັບແຈ້ງການ",
+        "notAllowedToJoinCall": "ທ່ານບໍ່ມີສິດເຂົ້າຮ່ວມການສົນທະນານີ້.",
+        "startedConversation": "ເລີ່ມການສົນທະນາ",
+        "RealTimeCall": "ໂທເວລາຈິງ",
+        "SearchByName": "ຄົ້ນຫາຕາມຊື່"
     },
     "notifications": {
         "*": "ຂໍ້ຄວາມ {{& message.fields.type}} ກັບ {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "ຄວາມຄືບຫນ້າທີ່ດໍາເນີນຢູ່ {{stream.fields.title}}",
         "Streams\/task\/complete": "ວຽກສໍາເລັດແລ້ວ: {{stream.fields.title}}",
         "Streams\/task\/error": "ຂໍ້ຜິດພາດໃນລະຫວ່າງ: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: ຂໍ້ຄວາມທີ່ມາຮອດ"
+        "Streams\/incoming\/*": "{{app}}: ຂໍ້ຄວາມທີ່ມາຮອດ",
+        "Streams\/relatedTo\/Streams\/call": "ການໂທ ໃໝ່ ເລີ່ມຕົ້ນໃນ {{toTitle}}",
+        "Streams\/relatedTo\/*": "{{relationDisplayType}} ໃໝ່ ໃນ {{toTitle}}",
+        "Streams\/relatedFrom\/*": "ເພີ່ມເຂົ້າໃນ {{toTitle}} ເປັນ {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} ໄດ້ກ່າວເຖິງທ່ານໃນ ຄຳ ເຫັນ",
+        "Streams\/call": "{{displayName}} ກຳ ລັງໂທຫາທ່ານ"
     },
     "invite": {
         "messageContent": "{{displayName}} ເຊີນທ່ານໄປ {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Email",
             "byText": "ຂໍ້​ຄວາມ",
             "byFacebook": "ເຟສບຸກ",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} ຖ້າລະຫັດຖືກສະແກນ"
         },
         "email": {
             "subject": "Hey, ກວດເບິ່ງນີ້ອອກ",
             "PleaseVisitLink": "ກະລຸນາໄປທີ່ລິ້ງຕໍ່ໄປນີ້:",
             "InvitingYou": "ຂ້ອຍຂໍເຊີນທ່ານໃຫ້ {{title}}",
-            "HasInvitedYou": "{{displayName}} ໄດ້ເຊີນທ່ານໃຫ້ {{title}}"
+            "HasInvitedYou": "{{displayName}} ໄດ້ເຊີນທ່ານໃຫ້ {{title}}",
+            "HasMentionedYou": "{{displayName}} ໄດ້ກ່າວເຖິງທ່ານໃນ &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "ທ່ານໄດ້ຖືກເຊີນໄປຫາ {{title}}. ກະລຸນາແຕະ {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "ເປີດ Microphone",
             "cameraTitle": "ເປີດກ້ອງຖ່າຍຮູບ",
-            "cameraAndMicrophoneTitle": "ເປີດກ້ອງແລະໄມໂຄໂຟນ"
+            "cameraAndMicrophoneTitle": "ເປີດກ້ອງແລະໄມໂຄໂຟນ",
+            "dialogTitle": "ການເຊື່ອມຕໍ່",
+            "microphoneBtn": "ເປີດໃຊ້ໄມໂຄຣໂຟນ",
+            "cameraBtn": "ເປີດໃຊ້ກ້ອງ",
+            "cameraAndMicrophoneBtn": "ເປີດໃຊ້ກ້ອງແລະໄມໂຄຣໂຟນ"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "ປະກາດ <em>{{message.fields.type}}<\/em> ຂໍ້ຄວາມເຖິງ {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "ປະກອບ ຄຳ ເຫັນໃສ່",
+            "in": "ໃນ",
+            "body": "ໃນ {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ໄດ້ຖືກລົງໄປ",
+                "byAvatar": "ໂດຍ {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ມີ {{instructions.fromDisplayType}} ໃໝ່",
+                "byAvatar": "ເພີ່ມໂດຍ {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "ເຊີນເຂົ້າຮ່ວມ",
+            "description": "ກ່ອງຈົດ ໝາຍ ສຳ ລັບການເຊີນ"
+        },
+        "Streams\/resource": {
+            "displayType": "ຊັບພະຍາກອນ",
+            "description": "ກະແສ ສຳ ລັບການຈັດການການເຂົ້າເຖິງຊັບພະຍາກອນແລະການໂພດຂໍ້ຄວາມກ່ຽວກັບການອັບເດດ"
+        },
+        "Streams\/task": {
+            "description": "ສຳ ລັບການໄດ້ຮັບການອັບເດດກ່ຽວກັບຄວາມຄືບ ໜ້າ ໃນ ໜ້າ ວຽກໃດ ໜຶ່ງ",
+            "displayType": "ວຽກງານ"
+        },
+        "Streams\/tasks": {
+            "description": "ປະເພດ ສຳ ລັບວຽກງານ",
+            "displayType": "ໜ້າ ວຽກ"
+        },
+        "Streams\/experience": {
+            "description": "ປະສົບການທົ່ວໄປ ສຳ ລັບສະມາຊິກຂອງຊຸມຊົນ",
+            "displayType": "ປະສົບການທົ່ວໄປ ສຳ ລັບສະມາຊິກຂອງຊຸມຊົນ"
+        },
+        "Streams\/greeting": {
+            "description": "ທັກທາຍເຊິ່ງຜູ້ໃຊ້ສາມາດແນະ ນຳ ຕົວເອງ",
+            "displayType": "ທັກທາຍ"
+        },
+        "Streams\/number": {
+            "displayType": "ເລກ",
+            "description": "ເລກຄະນິດສາດ"
+        },
+        "Streams\/date": {
+            "displayType": "ວັນທີ",
+            "description": "ວັນທີ"
+        },
+        "Streams\/text": {
+            "displayType": "ຂໍ້​ຄວາມ",
+            "description": "ຮ່າງກາຍຂອງຂໍ້ຄວາມ"
+        },
+        "Streams\/text\/small": {
+            "displayType": "ຂໍ້​ຄວາມ",
+            "description": "ຕົວ ໜັງ ສືຂະ ໜາດ ນ້ອຍ"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "ຂໍ້​ຄວາມ",
+            "description": "ຕົວກາງຂອງຕົວ ໜັງ ສື"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "ທີ່​ຢູ່​ອີ​ເມວ",
+            "description": "ທີ່​ຢູ່​ອີ​ເມວ"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "ເບີ​ໂທລະ​ສັບ",
+            "description": "ເບີ​ໂທລະ​ສັບ"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "ການເຊື່ອມຕໍ່ໃນເວັບ"
+        },
+        "Streams\/image": {
+            "displayType": "ຮູບພາບ",
+            "description": "ຮູບພາບສາຍຕາ"
+        },
+        "Streams\/images": {
+            "displayType": "ຫ້ອງສະແດງຮູບພາບ",
+            "description": "ວາງສະແດງຮູບພາບ"
+        },
+        "Streams\/album": {
+            "displayType": "ອະລະບ້ ຳ",
+            "description": "ອັນລະບັ້ມເຊິ່ງສື່ຕ່າງໆມີສ່ວນກ່ຽວຂ້ອງ"
+        },
+        "Streams\/file": {
+            "displayType": "ແຟ້ມ",
+            "description": "ໄຟລ໌ທີ່ອັບໂຫລດແລ້ວ"
+        },
+        "Streams\/audio": {
+            "displayType": "ຄລິບສຽງ",
+            "description": "ຄລິບສຽງ"
+        },
+        "Streams\/video": {
+            "displayType": "ຄລິບວີດີໂອ",
+            "description": "ຄລິບວິດີໂອ"
+        },
+        "Streams\/live": {
+            "displayType": "ກະແສນໍ້າ",
+            "description": "ສຽງສົດຫລືວີດີໂອ"
+        },
+        "Streams\/category": {
+            "displayType": "ໝວດ",
+            "description": "ປະເພດທີ່ສາຍນ້ ຳ ອື່ນໆສາມາດພົວພັນໄດ້"
+        },
+        "Streams\/participating": {
+            "displayType": "ດັດສະນີທີ່ເຂົ້າຮ່ວມ",
+            "description": "ສາຍນ້ໍາແມ່ນກ່ຽວຂ້ອງ \/ ບໍ່ກ່ຽວຂ້ອງກັບສິ່ງນີ້ເມື່ອຜູ້ໃຊ້ເຂົ້າຮ່ວມ \/ ອອກ"
+        },
+        "Streams\/interest": {
+            "displayType": "ຄວາມສົນໃຈ",
+            "description": "ສະແດງຄວາມສົນໃຈຂອງຜູ້ໃຊ້ໃນຫົວຂໍ້ໃດ ໜຶ່ງ"
+        },
+        "Streams\/incoming": {
+            "displayType": "ເຂົ້າມາ",
+            "description": "ປາຍທາງ ສຳ ລັບຂໍ້ຄວາມທີ່ສົ່ງໂດຍຜູ້ໃຊ້ອື່ນໆ"
+        },
+        "Streams\/chat": {
+            "displayType": "ການສົນທະນາ",
+            "description": "ການສົນທະນາລະຫວ່າງຜູ້ໃຊ້, ກັບປະຫວັດສາດ"
+        },
+        "Streams\/webrtc": {
+            "displayType": "ການໂທດ້ວຍເວລາຈິງ",
+            "description": "ການໂທດ້ວຍວິດີໂອ \/ ສຽງທີ່ໃຊ້ເວລາຈິງ"
         }
     }
 }

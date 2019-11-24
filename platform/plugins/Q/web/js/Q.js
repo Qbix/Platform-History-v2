@@ -11642,11 +11642,12 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
 	clearTimeout(_pointerMoveTimeout);
 	var screenX = Q.Pointer.getX(evt) - Q.Pointer.scrollLeft();
 	var screenY = Q.Pointer.getY(evt) - Q.Pointer.scrollTop();
-	if (!screenX || !screenY || Q.Pointer.canceledClick) {
+	if (!screenX || !screenY || Q.Pointer.canceledClick
+	|| (!evt.button || (evt.touches && !evt.touches.length))) {
 		return;
 	}
 	var ccd = Q.Pointer.options.cancelClickDistance;
-	if (_pos
+	if (event.button || _pos
 	&& ((_pos.x && Math.abs(_pos.x - screenX) > ccd)
 	 || (_pos.y && Math.abs(_pos.y - screenY) > ccd))) {
 		// finger moved more than the threshhold
@@ -13127,64 +13128,7 @@ if (_isCordova) {
 }
 
 /**
- * @module Q
- */
-if (typeof module !== 'undefined' && typeof process !== 'undefined') {
-	// Assume we are in a Node.js environment, e.g. running tests
-	module.exports = Q;
-} else if (!dontSetGlobals) {
-	// We are in a browser environment
-	/**
-	 * This method restores the old window.Q and returns an instance of itself.
-     * @method noConflict
-	 * @param {boolean} extend
-	 *  If true, extends the old Q with methods and properties from the Q Platform.
-	 *  Otherwise, the old Q is untouched.
-	 * @return {Function}
-	 *  Returns the Q instance on which this method was called
-	 */
-	Q.noConflict = function (extend) {
-		if (extend) {
-			Q.extend(oldQ, Q);
-		}
-		root.Q = oldQ;
-		return Q;
-	};
-	var oldQ = root.Q;
-	root.Q = Q;
-}
-
-Q.globalNames = Object.keys(root); // to find stray globals
-
-/**
- * This function is useful to make sure your code is not polluting the global namespace
- * @method globalNamesAdded
- * @static
- */
-Q.globalNamesAdded = function () {
-	return Q.diff(Object.keys(window), Q.globalNames);
-};
-
-/**
- * This function is useful for debugging, e.g. calling it in breakpoint conditions
- * @method stackTrack
- * @static
- */
-Q.stackTrace = function() {
-	var obj = {};
-	if (Error.captureStackTrace) {
-		Error.captureStackTrace(obj, Q.stackTrace);
-	} else {
-		obj = new Error();
-	}
-	return obj.stack;
-};
-
-var _udid = location.search.queryField('Q.udid');
-var _appId = location.search.queryField('Q.appId');
-
-/**
- * Class to handle with cameras.
+ * Class to do things with cameras.
  * @class Camera
  * @namespace Q
  * @static
@@ -13635,6 +13579,63 @@ Q.beforeInit.addOnce(function () {
 		});
 	}
 }, 'Q');
+
+/**
+ * @module Q
+ */
+if (typeof module !== 'undefined' && typeof process !== 'undefined') {
+	// Assume we are in a Node.js environment, e.g. running tests
+	module.exports = Q;
+} else if (!dontSetGlobals) {
+	// We are in a browser environment
+	/**
+	 * This method restores the old window.Q and returns an instance of itself.
+     * @method noConflict
+	 * @param {boolean} extend
+	 *  If true, extends the old Q with methods and properties from the Q Platform.
+	 *  Otherwise, the old Q is untouched.
+	 * @return {Function}
+	 *  Returns the Q instance on which this method was called
+	 */
+	Q.noConflict = function (extend) {
+		if (extend) {
+			Q.extend(oldQ, Q);
+		}
+		root.Q = oldQ;
+		return Q;
+	};
+	var oldQ = root.Q;
+	root.Q = Q;
+}
+
+Q.globalNames = Object.keys(root); // to find stray globals
+
+/**
+ * This function is useful to make sure your code is not polluting the global namespace
+ * @method globalNamesAdded
+ * @static
+ */
+Q.globalNamesAdded = function () {
+	return Q.diff(Object.keys(window), Q.globalNames);
+};
+
+/**
+ * This function is useful for debugging, e.g. calling it in breakpoint conditions
+ * @method stackTrack
+ * @static
+ */
+Q.stackTrace = function() {
+	var obj = {};
+	if (Error.captureStackTrace) {
+		Error.captureStackTrace(obj, Q.stackTrace);
+	} else {
+		obj = new Error();
+	}
+	return obj.stack;
+};
+
+var _udid = location.search.queryField('Q.udid');
+var _appId = location.search.queryField('Q.appId');
 
 return Q;
 

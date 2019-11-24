@@ -3,8 +3,8 @@
         "NewItemTitle": "Itsva Item"
     },
     "labels": {
-        "Streams/invited": "Vanhu vandakakokwa",
-        "Streams/invitedMe": "Ndiani akandidana"
+        "Streams\/invited": "Vanhu vandakakokwa",
+        "Streams\/invitedMe": "Ndiani akandidana"
     },
     "interests": {
         "Filter": "Unofarira chii?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Unonyatsoziva here kuti unoda kuvhara iyi mharidzo?",
         "closeChatConfirmYes": "Ehe",
         "closeChatConfirmNo": "Aihwa",
-        "earlierComments": "pakutanga anotaura"
+        "earlierComments": "pakutanga anotaura",
+        "Subscribed": "Nyarara Ziviso",
+        "Unsubscribed": "Tora Zviziviso",
+        "notAllowedToJoinCall": "Iwe hauna mvumo yekujoinha iyi hurukuro.",
+        "startedConversation": "akatanga hurukuro",
+        "RealTimeCall": "Nguva Yekufona Chaizvo",
+        "SearchByName": "Tsvaga nemazita"
     },
     "notifications": {
         "*": "Mharidzo kune (1000)",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Kufambira mberi kwakaitwa pa {{stream.fields.title}}",
         "Streams\/task\/complete": "Basa rakapedzwa: {{stream.fields.title}}",
         "Streams\/task\/error": "Kukanganisa panguva: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "Mharidzo inopinda"
+        "Streams\/incoming\/*": "Mharidzo inopinda",
+        "Streams\/relatedTo\/Streams\/call": "New Call Yakatangwa mu {{toTitle}}",
+        "Streams\/relatedTo\/*": "Nyowani {{relationDisplayType}} mu {{1000]}",
+        "Streams\/relatedFrom\/*": "Yakawedzerwa ku {{toTitle}} se {{1000]}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} akakureva iwe mumashoko",
+        "Streams\/call": "{{displayName}} ari kukudaidza"
     },
     "invite": {
         "messageContent": "Ndakakokwa iwe (1000)",
@@ -59,13 +70,15 @@
             "byEmail": "Email",
             "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} kana iyo kodhi yakaongororwa"
         },
         "email": {
             "subject": "Hey, chengeta izvi",
             "PleaseVisitLink": "Ndapota shanyirai link inotevera:",
             "InvitingYou": "Ndiri kukukoka iwe ku {{title}}",
-            "HasInvitedYou": "Ndakakudanira kuna [1000]"
+            "HasInvitedYou": "Ndakakudanira kuna [1000]",
+            "HasMentionedYou": "{{displayName}} akakuudza iwe mu &quot;{{1000]}&quot;"
         },
         "sms": {
             "content": "Wakadanwa ku {{title}}. Ndapota tapota {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Shandisa Microphone",
             "cameraTitle": "Svumira Kamera",
-            "cameraAndMicrophoneTitle": "Ita kuti Kamera nemakrofoni vigone"
+            "cameraAndMicrophoneTitle": "Ita kuti Kamera nemakrofoni vigone",
+            "dialogTitle": "Kubatanidza",
+            "microphoneBtn": "Gonesa Microphone",
+            "cameraBtn": "Gonesa Kamera",
+            "cameraAndMicrophoneBtn": "Gonesa kamera uye Microphone"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "yakatumira <em>{{message.fields.type}}<\/em> meseji ku {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "yakataura",
+            "in": "in",
+            "body": "mu {{& url}}: {{1000]}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "yakatumirwa kuna",
+                "byAvatar": "na {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ane chitsva {{instructions.fromDisplayType}}",
+                "byAvatar": "yakawedzerwa ne {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Akokwa",
+            "description": "Inbox yekukoka"
+        },
+        "Streams\/resource": {
+            "displayType": "Resource",
+            "description": "rwizi rwekutarisira kuwana kune chisungo uye kutumira mameseji nezvekugadzirisa"
+        },
+        "Streams\/task": {
+            "description": "yekugamuchira zvigadziriso nezve kufambira mberi pane rimwe basa",
+            "displayType": "Basa"
+        },
+        "Streams\/tasks": {
+            "description": "chikamu chemabasa",
+            "displayType": "Mabasa"
+        },
+        "Streams\/experience": {
+            "description": "chiitiko chakajairwa nenhengo dzenharaunda",
+            "displayType": "Zvakaitika kuvanhu vese venharaunda"
+        },
+        "Streams\/greeting": {
+            "description": "kukwazisa uko mushandisi anogona kuzvisuma ivo pachavo",
+            "displayType": "Kukwazisa"
+        },
+        "Streams\/number": {
+            "displayType": "Nhamba",
+            "description": "nhamba yemasvomhu"
+        },
+        "Streams\/date": {
+            "displayType": "Zuva",
+            "description": "zuva"
+        },
+        "Streams\/text": {
+            "displayType": "Zvinyorwa",
+            "description": "muviri wezvinyorwa"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Zvinyorwa",
+            "description": "muviri mudiki wezvinyorwa"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Zvinyorwa",
+            "description": "muviri wepakati wezvinyorwa"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Chikero chetsamba yemumhepo",
+            "description": "chikero chetsamba yemumhepo"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Nhamba yenhare",
+            "description": "nhamba yenhare"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "batani pawebhu"
+        },
+        "Streams\/image": {
+            "displayType": "Mufananidzo",
+            "description": "mufananidzo unoona"
+        },
+        "Streams\/images": {
+            "displayType": "Image Garari",
+            "description": "gallery yemifananidzo"
+        },
+        "Streams\/album": {
+            "displayType": "Rwiyo",
+            "description": "iyo albhamu kune yakasiyana-siyana mhau inoenderana"
+        },
+        "Streams\/file": {
+            "displayType": "Faira",
+            "description": "uploaded faira"
+        },
+        "Streams\/audio": {
+            "displayType": "Vadivelu Comedy Audio Clip",
+            "description": "clip yekuteerera"
+        },
+        "Streams\/video": {
+            "displayType": "Vhidhiyo Dura",
+            "description": "clip yevhidhiyo"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "rarama odhiyo kana vhidhiyo"
+        },
+        "Streams\/category": {
+            "displayType": "Rudzi",
+            "description": "chikamu chinogona kufambidzana nedzimwe nzizi"
+        },
+        "Streams\/participating": {
+            "displayType": "Kubatanidzwa Index",
+            "description": "hova dzinoenderana \/ hadziyane neizvi kana mushandisi ajoina \/ mashizha"
+        },
+        "Streams\/interest": {
+            "displayType": "Kufarira",
+            "description": "inomiririra kufarira kwemushandisi mune imwe nyaya"
+        },
+        "Streams\/incoming": {
+            "displayType": "Inouya",
+            "description": "kuenda kwema meseji kunotumirwa nevamwe vashandisi"
+        },
+        "Streams\/chat": {
+            "displayType": "Kukurukurirana",
+            "description": "hurukuro pakati pevashandisi, ine nhoroondo"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Nguva Yekufona",
+            "description": "vhiki chaiyo vhidhiyo \/ kudhindwa kudana"
         }
     }
 }

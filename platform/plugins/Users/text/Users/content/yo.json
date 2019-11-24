@@ -18,7 +18,8 @@
         "GetStarted": "Bẹrẹ Bibẹrẹ",
         "Authorize": "Gba aṣẹ",
         "TermsLabel": "Mo ti ka ati gba <br> si {{link}}",
-        "TermsTitle": "Awọn ofin"
+        "TermsTitle": "Awọn ofin",
+        "mustAgree": "Ni akọkọ o gbọdọ gba si awọn ofin naa."
     },
     "register": {
         "TermsLabel": "Mo gba {{link}}",
@@ -31,11 +32,18 @@
         "no": "Rara",
         "WelcomePleaseVerifyEmail": "Kaabo! Jọwọ ṣayẹwo adiresi imeeli rẹ.",
         "WelcomeVerifyEmail": "Kaabo! Daju adirẹsi imeeli rẹ.",
-        "ForgetPass": "Hey, ṣe o gbagbe ọrọigbaniwọle rẹ?"
+        "ForgetPass": "Hey, ṣe o gbagbe ọrọigbaniwọle rẹ?",
+        "PassphraseSaved": "Gbolohun rẹ ti o ti fipamọ.",
+        "IdentifierActivated": "{{type}} ti mu ṣiṣẹ.",
+        "CompletedActivation": "O ti pari mu ṣiṣẹ olumulo.",
+        "CompletedActivationLogIn": "O ti pari mu ṣiṣẹ olumulo. Gbiyanju wọle si bayi."
     },
     "contacts": {
         "dialog": {
-            "title": "Yan olubasọrọ"
+            "title": "Yan olubasọrọ",
+            "CreateAccount": "+ Olubasọrọ Tuntun",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ko ri",
+            "SearchByName": "Wa ni orukọ"
         },
         "select": {
             "title": "Yan olubasọrọ ti {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Jowo yan aami.",
-        "inviteUser": "Olukọni Olukọni"
+        "inviteUser": "Olukọni Olukọni",
+        "selectRole": "Yan ipa",
+        "inviteRole": "Fiwepe {{role}}"
     },
-    "invalidLanguageSelected": "Ainilẹjẹ ede ti a yan"
+    "invalidLanguageSelected": "Ainilẹjẹ ede ti a yan",
+    "login": {
+        "title": "Kaabo",
+        "directions": "Ṣẹda akọọlẹ kan, tabi wọle.",
+        "directionsNoRegister": "Wọle ti o ba ni akọọlẹ kan.",
+        "goButton": "Lọ",
+        "passphrase": "Tẹ gbolohun ọrọ rẹ si:",
+        "loginButton": "Bibẹrẹ",
+        "registerButton": "Bibẹrẹ",
+        "resendButton": "Firanṣẹ Fi si ibere ise",
+        "forgot": "Gbagbe o?",
+        "resendConfirm": "Ṣe o fẹ lati fi ifiranṣẹ ranṣẹ lati tun awọn ọrọ kukuru rẹ bi?",
+        "resendSuccess": "Ṣayẹwo fun ifiranṣẹ kan lati tun ọrọ kukuru rẹ da",
+        "resendClose": "Pade",
+        "noPassphrase": "Ṣaaju ki o to wọle, o gbọdọ ṣeto gbolohun ọrọ kọja nipa titẹ ọna asopọ ninu ifiranṣẹ fi si ibere iṣẹ rẹ.",
+        "notVerified": "O gbọdọ fi ifiranṣẹ ibere ise ranṣẹ si ara rẹ lati wọle.",
+        "emailExists": "Njẹ o gbiyanju lati forukọsilẹ pẹlu imeeli yii ṣaaju? Ti o ba rii bẹ, ṣayẹwo apo-iwọle rẹ lati mu iwe ipamọ rẹ ṣiṣẹ. <a href='#resend' class='Q_button Users_activation_resend'>Tẹ lati tun firanṣẹ ranṣẹ<\/a>",
+        "mobileExists": "Ṣe o gbiyanju lati forukọsilẹ pẹlu nọmba alagbeka yii ṣaaju? Ti o ba rii bẹ, ṣayẹwo SMS rẹ lati mu iwe ipamọ rẹ ṣiṣẹ. <a href='#resend' class='Q_button Users_activation_resend'>Tẹ lati tun firanṣẹ ranṣẹ<\/a>",
+        "usingOther": "tabi o le",
+        "prompt": "Yan oruko lilo:",
+        "newUser": "tabi ṣẹda iwe apamọ tuntun",
+        "placeholders": {
+            "identifier": "alagbeka rẹ # tabi imeeli",
+            "mobile": "tẹ alagbeka rẹ #",
+            "email": "tẹ adirẹsi imeeli rẹ",
+            "username": "orukọ olumulo"
+        },
+        "confirmTerms": "Gba awọn ofin ti Iṣẹ?",
+        "facebookNoEmail": "Àkọọlẹ facebook rẹ n padanu adirẹsi imeeli ti timo. Nìkan wọle si ọna abinibi.",
+        "picTooltip": "O le yi aworan pada nigbamii"
+    },
+    "setIdentifier": {
+        "title": "Ṣafikun ọna lati wọle",
+        "sendMessage": "Firanṣẹ Fi si ibere ise",
+        "placeholders": {
+            "identifier": "tẹ alagbeka rẹ # tabi imeeli",
+            "mobile": "tẹ nọmba alagbeka rẹ",
+            "email": "tẹ adirẹsi imeeli rẹ",
+            "username": "orukọ olumulo"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Account",
+        "areUsing": "O nlo {{platform}} bii",
+        "noLongerUsing": "O ko ni asopọ mọ si {{platform}} bii",
+        "doAuth": "Wọle pẹlu iwe ipamọ yii",
+        "doSwitch": "Yipada si iwe apamọ yii"
+    }
 }

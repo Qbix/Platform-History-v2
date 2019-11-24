@@ -18,7 +18,8 @@
         "GetStarted": "Fara Fara",
         "Authorize": "Izini",
         "TermsLabel": "Na karanta kuma in yarda <br> zuwa {{link}}",
-        "TermsTitle": "Terms"
+        "TermsTitle": "Terms",
+        "mustAgree": "Da farko dole ne ku yarda da sharuɗɗan."
     },
     "register": {
         "TermsLabel": "Na yarda da {{link}}",
@@ -31,11 +32,18 @@
         "no": "A&#39;a",
         "WelcomePleaseVerifyEmail": "Barka da zuwa! Da fatan a tabbatar da adireshin imel naka.",
         "WelcomeVerifyEmail": "Barka da zuwa! Tabbatar da adireshin imel naka.",
-        "ForgetPass": "Hey, baku manta da fasfonku ba?"
+        "ForgetPass": "Hey, baku manta da fasfonku ba?",
+        "PassphraseSaved": "An ajiye kalmar wucewa.",
+        "IdentifierActivated": "An kunna {{type}}.",
+        "CompletedActivation": "Kun gama kunnawa mai amfani.",
+        "CompletedActivationLogIn": "Kun gama kunnawa mai amfani. Gwada shiga yanzu."
     },
     "contacts": {
         "dialog": {
-            "title": "Zaɓi lamba"
+            "title": "Zaɓi lamba",
+            "CreateAccount": "+ Sabuwar lamba",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ba&#39;a samo shi ba",
+            "SearchByName": "Bincika da suna"
         },
         "select": {
             "title": "Zaɓi lamba na {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Da fatan a zaɓi lakabin.",
-        "inviteUser": "Gayyatar mai amfani"
+        "inviteUser": "Gayyatar mai amfani",
+        "selectRole": "Zaɓi Matsayi",
+        "inviteRole": "Gayyata {{role}}"
     },
-    "invalidLanguageSelected": "Harshen mara inganci da aka zaɓa"
+    "invalidLanguageSelected": "Harshen mara inganci da aka zaɓa",
+    "login": {
+        "title": "Maraba",
+        "directions": "Anirƙiri lissafi, ko shiga ciki.",
+        "directionsNoRegister": "Shiga ciki idan kuna da asusu.",
+        "goButton": "Ku tafi",
+        "passphrase": "Shigar da kalmar wucewa:",
+        "loginButton": "Fara",
+        "registerButton": "Fara",
+        "resendButton": "Aika sakon kunnawa",
+        "forgot": "Manta da shi?",
+        "resendConfirm": "Kuna so ku aika da sako don sake saita kalmar wucewar ku?",
+        "resendSuccess": "Bincika saƙo don sake saita kalmar wucewa",
+        "resendClose": "Rufe",
+        "noPassphrase": "Kafin ka iya shiga, dole ne ka saita jumlar wucewa ta danna hanyar haɗi a cikin sakon kunnawa.",
+        "notVerified": "Dole ne ku aika da kanku saƙo na kunnawa don shiga.",
+        "emailExists": "Shin kun yi kokarin yin rijista da wannan imel din? Idan haka ne, bincika akwatin saƙo mai shiga don kunna asusunka. <a href='#resend' class='Q_button Users_activation_resend'>Danna don sake aika saƙon<\/a>",
+        "mobileExists": "Shin kun yi kokarin yin rijista da wannan lambar wayar a gabani? Idan haka ne, duba SMS don kunna asusunka. <a href='#resend' class='Q_button Users_activation_resend'>Danna don sake aika saƙon<\/a>",
+        "usingOther": "ko zaka iya",
+        "prompt": "Zaba sunan amfani:",
+        "newUser": "ko ƙirƙirar sabon lissafi",
+        "placeholders": {
+            "identifier": "ta wayar salula # ko email",
+            "mobile": "shigar da wayar hannu #",
+            "email": "shigar da adireshin imel",
+            "username": "sunan mai amfani"
+        },
+        "confirmTerms": "Yarda da Sharuɗɗan sabis?",
+        "facebookNoEmail": "Adireshin facebook naku ya rasa adireshin imel da aka tabbatar. Kawai shiga cikin asalin ƙasar.",
+        "picTooltip": "Kuna iya canza wannan hoto nan gaba"
+    },
+    "setIdentifier": {
+        "title": "Sanya wata hanyar shiga",
+        "sendMessage": "Aika sakon kunnawa",
+        "placeholders": {
+            "identifier": "shigar da # ta hannu ko kuma imel",
+            "mobile": "shigar da lambar salula",
+            "email": "shigar da adireshin imel",
+            "username": "sunan mai amfani"
+        }
+    },
+    "prompt": {
+        "title": "Account {{Platform}}",
+        "areUsing": "Kana amfani da {{platform}} as",
+        "noLongerUsing": "Ba a haɗa ku da {{platform}} kamar",
+        "doAuth": "Shiga ciki tare da wannan asusun",
+        "doSwitch": "Canza shi zuwa wannan asusun"
+    }
 }

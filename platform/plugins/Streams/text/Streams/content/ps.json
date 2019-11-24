@@ -3,8 +3,8 @@
         "NewItemTitle": "نوی توکي"
     },
     "labels": {
-        "Streams/invited": "هغه کسان چې ما بلنه کړې وه",
-        "Streams/invitedMe": "چا چا ته بلنه ورکړه؟"
+        "Streams\/invited": "هغه کسان چې ما بلنه کړې وه",
+        "Streams\/invitedMe": "چا چا ته بلنه ورکړه؟"
     },
     "interests": {
         "Filter": "تاسو څه خوند اخلئ؟",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "ایا ته باوري یې چې دا چیٹ بندول غواړئ؟",
         "closeChatConfirmYes": "هو",
         "closeChatConfirmNo": "نه",
-        "earlierComments": "پخوانیو څرګندونو"
+        "earlierComments": "پخوانیو څرګندونو",
+        "Subscribed": "خبرتیاوې خاموش کړئ",
+        "Unsubscribed": "خبرتیاوې ترلاسه کول",
+        "notAllowedToJoinCall": "تاسو په دې خبرو اترو کې د شاملیدو اجازه نلرئ.",
+        "startedConversation": "خبرې پیل کړې",
+        "RealTimeCall": "د ریښتیني وخت زنګ",
+        "SearchByName": "د نوم له مخې لټون"
     },
     "notifications": {
         "*": "پیغام {{& message.fields.type}} {{& stream.fields.title}} ته",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "پرمختګ په {9 9 99}} کې جوړ شوی",
         "Streams\/task\/complete": "دندې بشپړ شوی: {9 9}}}",
         "Streams\/task\/error": "په تېروتنه کې: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{9 9}}: راتلونکی پیغام"
+        "Streams\/incoming\/*": "{9 9}}: راتلونکی پیغام",
+        "Streams\/relatedTo\/Streams\/call": "نوی زنګ په {{{9} in کې پیل شو",
+        "Streams\/relatedTo\/*": "نوی {9 999}} په {{toTitle}}",
+        "Streams\/relatedFrom\/*": "د {1000 {} په توګه",
+        "Streams\/mention": "{{999} you په تبصره کې مو یادونه وکړه",
+        "Streams\/call": "{{999} you تلیفون کوي"
     },
     "invite": {
         "messageContent": "{{displayName}} تاسو ته {{inviteUrl}} بلنه ورکړه",
@@ -59,13 +70,15 @@
             "byEmail": "برېښلیک",
             "byText": "متن",
             "byFacebook": "فیسبوک",
-            "byTwitter": "ټویټر"
+            "byTwitter": "ټویټر",
+            "scannedQR": "{9 999}} که کوډ سکین شوی و"
         },
         "email": {
             "subject": "هو، دا وګوره",
             "PleaseVisitLink": "لطفا لاندې لینک وګورئ:",
             "InvitingYou": "زه تاسو ته {9 999}} بلنه درکوم",
-            "HasInvitedYou": "{{displayName}} تاسو ته {{title}} بلنه درکړي"
+            "HasInvitedYou": "{{displayName}} تاسو ته {{title}} بلنه درکړي",
+            "HasMentionedYou": "{{999} you په &quot;{{title}}&quot; کې ستاسو یادونه کړې"
         },
         "sms": {
             "content": "تاسو ته {{title}} رابلل شوي. مهرباني وکړئ {{url}} ټیک کړئ"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "مایکروفون فعال کړئ",
             "cameraTitle": "کیمپ فعال کړئ",
-            "cameraAndMicrophoneTitle": "کیمرې او مایکروفون فعال کړئ"
+            "cameraAndMicrophoneTitle": "کیمرې او مایکروفون فعال کړئ",
+            "dialogTitle": "نښلول",
+            "microphoneBtn": "مایکروفون فعال کړئ",
+            "cameraBtn": "کیمره فعال کړئ",
+            "cameraAndMicrophoneBtn": "کیمره او مایکروفون فعال کړئ"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "{{1000} to ته د <em>{{message.fields.type}}<\/em> پیغام استول"
+        },
+        "text": {
+            "commentedOn": "تبصره وکړه",
+            "in": "په",
+            "body": "په {9 999}} کې: {{1000}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ته استول شوی",
+                "byAvatar": "د {{999} by لخوا"
+            },
+            "relatedTo": {
+                "hasANew": "نوی {{{9} has لري",
+                "byAvatar": "د {{999} by لخوا زیات شوی"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "بلل شوی",
+            "description": "د بلنې لپاره انبکس"
+        },
+        "Streams\/resource": {
+            "displayType": "سرچینه",
+            "description": "سرچینې ته د لاسرسي مدیریت لپاره او د اوسمهالونو په اړه د پیغامونو پوسټ کولو لپاره جریان"
+        },
+        "Streams\/task": {
+            "description": "په یو ټاکلي دنده د پرمختګ په اړه تازه معلومات ترلاسه کولو لپاره",
+            "displayType": "ټاسک"
+        },
+        "Streams\/tasks": {
+            "description": "د دندو لپاره کټګورۍ",
+            "displayType": "ټاسکونه"
+        },
+        "Streams\/experience": {
+            "description": "د ټولنې د غړو لپاره ګډه تجربه",
+            "displayType": "د ټولنې د غړو لپاره ګډه تجربه"
+        },
+        "Streams\/greeting": {
+            "description": "سلام کول کوم سره چې یو کارن کولی شي خپل ځان معرفي کړي",
+            "displayType": "سلام کول"
+        },
+        "Streams\/number": {
+            "displayType": "شمیره",
+            "description": "ریاضی نمبر"
+        },
+        "Streams\/date": {
+            "displayType": "نیټه",
+            "description": "نیټه"
+        },
+        "Streams\/text": {
+            "displayType": "متن",
+            "description": "د متن اصلي ډله"
+        },
+        "Streams\/text\/small": {
+            "displayType": "متن",
+            "description": "د متن کوچنی بدن"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "متن",
+            "description": "د متن منځنۍ برخه"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "بریښنالیک",
+            "description": "بریښنالیک"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "د تلیفون شمیره",
+            "description": "د تلیفون شمیره"
+        },
+        "Streams\/text\/url": {
+            "displayType": "یو آر ایل",
+            "description": "په ویب کې لینک"
+        },
+        "Streams\/image": {
+            "displayType": "انځور",
+            "description": "لید انځور"
+        },
+        "Streams\/images": {
+            "displayType": "د انځور ګالري",
+            "description": "د انځورونو ګالري"
+        },
+        "Streams\/album": {
+            "displayType": "البوم",
+            "description": "یو البوم چې مختلف رسنۍ پکې تړاو لري"
+        },
+        "Streams\/file": {
+            "displayType": "دوتنه",
+            "description": "پورته شوې دوتنه"
+        },
+        "Streams\/audio": {
+            "displayType": "آډیو کلیپ",
+            "description": "آډیو کلپ"
+        },
+        "Streams\/video": {
+            "displayType": "ویډیو کلیپ",
+            "description": "ویډیو کلپ"
+        },
+        "Streams\/live": {
+            "displayType": "ژوندۍ ب .ه",
+            "description": "ژوندی آډیو یا ویډیو"
+        },
+        "Streams\/category": {
+            "displayType": "کټګورۍ",
+            "description": "یوه کټګورۍ پورې چې نور جریان پکې تړاو لري"
+        },
+        "Streams\/participating": {
+            "displayType": "برخه اخیستونکی",
+            "description": "جریانونه پدې پورې اړوند \/ غیر تړاو لري کله چې یو کاروونکی \/ پا leavesې سره یوځای کیږي"
+        },
+        "Streams\/interest": {
+            "displayType": "سود",
+            "description": "په یو ټاکلې موضوع کې د کارونکي علاقه څرګندوي"
+        },
+        "Streams\/incoming": {
+            "displayType": "راتلونکی",
+            "description": "د نورو کاروونکو لخوا لیږل شوي پیغامونو لپاره منزل"
+        },
+        "Streams\/chat": {
+            "displayType": "خبرې اترې",
+            "description": "د کاروونکو تر مینځ خبرې اترې ، د تاریخ سره"
+        },
+        "Streams\/webrtc": {
+            "displayType": "ریښتیني وخت زنګ",
+            "description": "یو ریښتنی وخت ویډیو \/ آډیو زنګ"
         }
     }
 }

@@ -18,7 +18,8 @@
         "GetStarted": "መጀመር",
         "Authorize": "ፈቃድ ስጥ",
         "TermsLabel": "እኔ አንብቤ ተስማማለሁ <br> ወደ {{link}}",
-        "TermsTitle": "ውሎች"
+        "TermsTitle": "ውሎች",
+        "mustAgree": "በመጀመሪያ በውሎች መስማማት አለብዎት።"
     },
     "register": {
         "TermsLabel": "{{link}} ተቀብያለሁ",
@@ -31,11 +32,18 @@
         "no": "አይ",
         "WelcomePleaseVerifyEmail": "እንኳን ደህና መጣህ! እባክዎ የኢሜይል አድራሻዎን ያረጋግጡ.",
         "WelcomeVerifyEmail": "እንኳን ደህና መጣህ! የኢሜይል አድራሻህን አረጋግጥ.",
-        "ForgetPass": "ሃይም, የይለፍ ሐረግዎን ረስተዋል?"
+        "ForgetPass": "ሃይም, የይለፍ ሐረግዎን ረስተዋል?",
+        "PassphraseSaved": "የእርስዎ የማለፍ ሐረግ ተቀም beenል።",
+        "IdentifierActivated": "የእርስዎ {{type}} እንዲነቃ ተደርጓል።",
+        "CompletedActivation": "የተጠቃሚን ማግበር ጨርሰዋል ፡፡",
+        "CompletedActivationLogIn": "የተጠቃሚን ማግበር ጨርሰዋል ፡፡ አሁን በመለያ ለመግባት ይሞክሩ።"
     },
     "contacts": {
         "dialog": {
-            "title": "ዕውቂያ ይምረጡ"
+            "title": "ዕውቂያ ይምረጡ",
+            "CreateAccount": "+ አዲስ እውቂያ",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create አልተገኘም",
+            "SearchByName": "በስም ይፈልጉ"
         },
         "select": {
             "title": "የ {{displayName}} እውቂያ ይምረጡ"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "እባክዎ መለያውን ይምረጡ.",
-        "inviteUser": "ተጠቃሚ ጋብዝ"
+        "inviteUser": "ተጠቃሚ ጋብዝ",
+        "selectRole": "ሚና ይምረጡ",
+        "inviteRole": "መጋበዝ {{role}}"
     },
-    "invalidLanguageSelected": "ልክ ያልሆነ ቋንቋ ተመርጧል"
+    "invalidLanguageSelected": "ልክ ያልሆነ ቋንቋ ተመርጧል",
+    "login": {
+        "title": "እንኳን ደህና መጣህ",
+        "directions": "መለያ ይፍጠሩ ወይም ይግቡ።",
+        "directionsNoRegister": "መለያ ካለዎት ይግቡ።",
+        "goButton": "ሂድ",
+        "passphrase": "የማለፍ ሐረግዎን ያስገቡ",
+        "loginButton": "መጀመር",
+        "registerButton": "መጀመር",
+        "resendButton": "የማስገበሪያ መልእክት ይላኩ",
+        "forgot": "ረሳው?",
+        "resendConfirm": "የይለፍ ሐረግዎን ዳግም ለማስጀመር መልዕክት መላክ ይፈልጋሉ?",
+        "resendSuccess": "የይለፍ ሐረግዎን ዳግም ለማስጀመር መልዕክት ይመልከቱ",
+        "resendClose": "ገጠመ",
+        "noPassphrase": "በመለያ ከመግባትዎ በፊት በአግብር መልዕክትዎ ውስጥ ያለውን አገናኝ ጠቅ በማድረግ የይለፍ ሐረግ ማዘጋጀት አለብዎት ፡፡",
+        "notVerified": "ለመግባት ለራስዎ የማነቃቂያ መልዕክት መላክ አለብዎት።",
+        "emailExists": "ከዚህ በፊት በዚህ ኢሜይል ለመመዝገብ ሞክረዋል? ከሆነ መለያዎን ለማግበር የገቢ መልእክት ሳጥንዎን ይመልከቱ። <a href='#resend' class='Q_button Users_activation_resend'>መልዕክቱን እንደገና ለመላክ ጠቅ ያድርጉ<\/a>",
+        "mobileExists": "ከዚህ በፊት በዚህ የሞባይል ቁጥር ለመመዝገብ ሞክረዋል? ከሆነ መለያዎን ለማሰራት ኤስኤምኤስዎን ይመልከቱ። <a href='#resend' class='Q_button Users_activation_resend'>መልዕክቱን እንደገና ለመላክ ጠቅ ያድርጉ<\/a>",
+        "usingOther": "ወይም ይችላሉ",
+        "prompt": "የመጠቀሚያ ስም ምረጥ:",
+        "newUser": "ወይም አዲስ መለያ ይፍጠሩ",
+        "placeholders": {
+            "identifier": "የተንቀሳቃሽ ስልክዎ # ወይም በኢሜል",
+            "mobile": "የሞባይልዎን # ያስገቡ",
+            "email": "የኢሜይል አድራሻዎን ያስገቡ",
+            "username": "የተጠቃሚ ስም"
+        },
+        "confirmTerms": "የአገልግሎት ውሉን ይቀበሉ?",
+        "facebookNoEmail": "የእርስዎ facebook መለያ የተረጋገጠ የኢሜይል አድራሻ ይጎድለዋል። በቀላሉ በአገሬው መንገድ ይግቡ።",
+        "picTooltip": "ይህንን ስዕል በኋላ ላይ መለወጥ ይችላሉ"
+    },
+    "setIdentifier": {
+        "title": "ለመግባት መንገድ ያክሉ",
+        "sendMessage": "የማስገበሪያ መልእክት ይላኩ",
+        "placeholders": {
+            "identifier": "ተንቀሳቃሽ # ወይም ኢሜል ያስገቡ",
+            "mobile": "የተንቀሳቃሽ ስልክ ቁጥርዎን ያስገቡ",
+            "email": "የኢሜይል አድራሻዎን ያስገቡ",
+            "username": "የተጠቃሚ ስም"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} መለያ",
+        "areUsing": "እርስዎ እንደ {{platform}} ይጠቀማሉ",
+        "noLongerUsing": "ከአሁን በኋላ ከ {{platform}} ጋር አልተገናኙም",
+        "doAuth": "በዚህ መለያ ይግቡ",
+        "doSwitch": "ወደዚህ መለያ ቀይር"
+    }
 }

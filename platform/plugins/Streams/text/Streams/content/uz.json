@@ -3,8 +3,8 @@
         "NewItemTitle": "Yangi element"
     },
     "labels": {
-        "Streams/invited": "Men taklif qilingan odamlar",
-        "Streams/invitedMe": "Meni kim taklif qildi?"
+        "Streams\/invited": "Men taklif qilingan odamlar",
+        "Streams\/invitedMe": "Meni kim taklif qildi?"
     },
     "interests": {
         "Filter": "Siz nimani yoqtirasiz?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Ushbu suhbatni yopmoqchimisiz?",
         "closeChatConfirmYes": "Ha",
         "closeChatConfirmNo": "Yo&#39;q",
-        "earlierComments": "oldingi sharhlar"
+        "earlierComments": "oldingi sharhlar",
+        "Subscribed": "Ovozsiz bildirishnomalar",
+        "Unsubscribed": "Bildirishnomalarni oling",
+        "notAllowedToJoinCall": "Sizda ushbu suhbatga kirish huquqi yo&#39;q.",
+        "startedConversation": "suhbat boshladi",
+        "RealTimeCall": "Haqiqiy vaqt qo&#39;ng&#39;irog&#39;i",
+        "SearchByName": "Nom bo&#39;yicha qidirish"
     },
     "notifications": {
         "*": "{{& message.fields.type}} dan {{& stream.fields.title}} ga xabar yuborish",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "{{stream.fields.title}} da bajarilgan progress",
         "Streams\/task\/complete": "Vazifa tugadi: {{stream.fields.title}}",
         "Streams\/task\/error": "{{stream.fields.title}} paytida xatolik yuz berdi",
-        "Streams\/incoming\/*": "{{app}}: Kirish xabar"
+        "Streams\/incoming\/*": "{{app}}: Kirish xabar",
+        "Streams\/relatedTo\/Streams\/call": "{{toTitle}} da yangi qo&#39;ng&#39;iroq boshlandi",
+        "Streams\/relatedTo\/*": "Yangi {{relationDisplayType}} {{toTitle}}",
+        "Streams\/relatedFrom\/*": "{{toTitle}} ga {{relationDisplayType}} sifatida qo&#39;shildi",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} sizni sharhda eslatib o&#39;tdi",
+        "Streams\/call": "{{displayName}} sizga qo&#39;ng&#39;iroq qilmoqda"
     },
     "invite": {
         "messageContent": "{{displayName}} sizni {{inviteUrl}} ga taklif qildi",
@@ -59,13 +70,15 @@
             "byEmail": "E-pochta",
             "byText": "Matn",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "Agar kod skanerlangan bo&#39;lsa {{ClickOrTap}}"
         },
         "email": {
             "subject": "Hey, buni tekshirib ko&#39;ring",
             "PleaseVisitLink": "Iltimos, quyidagi havolaga tashrif buyuring:",
             "InvitingYou": "Men sizni {{title}} ga taklif qilyapman",
-            "HasInvitedYou": "{{displayName}} sizni {{title}} ga taklif qildi"
+            "HasInvitedYou": "{{displayName}} sizni {{title}} ga taklif qildi",
+            "HasMentionedYou": "{{displayName}} sizni &quot;{{title}}&quot; da eslatib o&#39;tdi"
         },
         "sms": {
             "content": "Siz {{title}} ga taklif qilingansiz. Iltimos, {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Mikrofonni yoqish",
             "cameraTitle": "Kamerani yoqish",
-            "cameraAndMicrophoneTitle": "Kamera va mikrofonni yoqish"
+            "cameraAndMicrophoneTitle": "Kamera va mikrofonni yoqish",
+            "dialogTitle": "Ulanmoqda",
+            "microphoneBtn": "Mikrofonni yoqing",
+            "cameraBtn": "Kamerani yoqish",
+            "cameraAndMicrophoneBtn": "Kamera va mikrofonni yoqing"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "<em>{{message.fields.type}}<\/em> xabarini {{stream.fields.title}} <em>saytiga<\/em> yubordi."
+        },
+        "text": {
+            "commentedOn": "sharhladi",
+            "in": "ichida",
+            "body": "{{& url}}: {{& message.fields.content}} da",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ga joylashtirilgan",
+                "byAvatar": "Muallif: {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "yangi {{instructions.fromDisplayType}} bor",
+                "byAvatar": "tomonidan qo&#39;shilgan {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Taklif qilingan",
+            "description": "Taklifnomalar uchun pochta qutisi"
+        },
+        "Streams\/resource": {
+            "displayType": "Manba",
+            "description": "manbaga kirishni boshqarish va yangilanishlar haqida xabarlarni yuborish uchun oqim"
+        },
+        "Streams\/task": {
+            "description": "ma&#39;lum bir vazifaning bajarilishi to&#39;g&#39;risida yangiliklar olish uchun",
+            "displayType": "Vazifa"
+        },
+        "Streams\/tasks": {
+            "description": "vazifalar uchun kategoriya",
+            "displayType": "Vazifalar"
+        },
+        "Streams\/experience": {
+            "description": "jamiyat a&#39;zolari uchun odatiy tajriba",
+            "displayType": "Jamiyat a&#39;zolari uchun odatiy tajriba"
+        },
+        "Streams\/greeting": {
+            "description": "foydalanuvchi o&#39;zini tanishtirishi mumkin bo&#39;lgan salomlashish",
+            "displayType": "Salomlashish"
+        },
+        "Streams\/number": {
+            "displayType": "Raqam",
+            "description": "matematik raqam"
+        },
+        "Streams\/date": {
+            "displayType": "Sana",
+            "description": "sana"
+        },
+        "Streams\/text": {
+            "displayType": "Matn",
+            "description": "matnning tanasi"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Matn",
+            "description": "kichik matn"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Matn",
+            "description": "o&#39;rta matn"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Elektron pochta manzili",
+            "description": "elektron pochta manzili"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Telefon raqami",
+            "description": "telefon raqami"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL manzili",
+            "description": "Internetdagi havola"
+        },
+        "Streams\/image": {
+            "displayType": "Rasm",
+            "description": "vizual tasvir"
+        },
+        "Streams\/images": {
+            "displayType": "Rasmlar galereyasi",
+            "description": "rasmlar galereyasi"
+        },
+        "Streams\/album": {
+            "displayType": "Albom",
+            "description": "turli ommaviy axborot vositalari bog&#39;liq bo&#39;lgan albom"
+        },
+        "Streams\/file": {
+            "displayType": "Fayl",
+            "description": "yuklangan fayl"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio klip",
+            "description": "audio klip"
+        },
+        "Streams\/video": {
+            "displayType": "Videoklip",
+            "description": "videoklip"
+        },
+        "Streams\/live": {
+            "displayType": "Jonli oqim",
+            "description": "jonli audio yoki video"
+        },
+        "Streams\/category": {
+            "displayType": "Kategoriya",
+            "description": "boshqa oqimlar bog&#39;liq bo&#39;lishi mumkin bo&#39;lgan kategoriya"
+        },
+        "Streams\/participating": {
+            "displayType": "Ishtirok etish indeksi",
+            "description": "foydalanuvchi qo&#39;shilganda \/ chiqib ketganda oqimlar bu bilan bog&#39;liq \/ bog&#39;liq emas"
+        },
+        "Streams\/interest": {
+            "displayType": "Qiziqish",
+            "description": "foydalanuvchining ma&#39;lum bir mavzuga bo&#39;lgan qiziqishini anglatadi"
+        },
+        "Streams\/incoming": {
+            "displayType": "Kiruvchi",
+            "description": "boshqa foydalanuvchilar tomonidan yuborilgan xabarlar uchun manzil"
+        },
+        "Streams\/chat": {
+            "displayType": "Suhbat",
+            "description": "foydalanuvchilar o&#39;rtasida tarix bilan suhbat"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Haqiqiy vaqtda qo&#39;ng&#39;iroq",
+            "description": "real vaqtda video \/ audio qo&#39;ng&#39;iroq"
         }
     }
 }

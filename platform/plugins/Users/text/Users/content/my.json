@@ -18,7 +18,8 @@
         "GetStarted": "Started Get",
         "Authorize": "ခွင့်ပြု",
         "TermsLabel": "ကျွန်မဖတ်ပါနှင့်သဘောတူခဲ့ကြ <br> အဆိုပါ {{link}} မှ",
-        "TermsTitle": "စည်းမျဉ်းစည်းကမ်းများ"
+        "TermsTitle": "စည်းမျဉ်းစည်းကမ်းများ",
+        "mustAgree": "ပထမ ဦး စွာသင်စည်းကမ်းချက်များကိုသဘောတူရပေမည်။"
     },
     "register": {
         "TermsLabel": "ငါ {{link}} ကိုလက်ခံ",
@@ -31,11 +32,18 @@
         "no": "အဘယ်သူမျှမ",
         "WelcomePleaseVerifyEmail": "ကြိုဆိုပါတယ်! သင့်အီးမေးလ်လိပ်စာအတည်ပြုရန်ပေးပါ။",
         "WelcomeVerifyEmail": "ကြိုဆိုပါတယ်! သင့်အီးမေးလ်လိပ်စာ Verify ။",
-        "ForgetPass": "ဟေ့, သင်သည်သင်၏ passphrase ကိုမေ့လျော့ခဲ့တာလဲ"
+        "ForgetPass": "ဟေ့, သင်သည်သင်၏ passphrase ကိုမေ့လျော့ခဲ့တာလဲ",
+        "PassphraseSaved": "သင်၏ Pass စကားစုကိုသိမ်းထားပြီးပါပြီ",
+        "IdentifierActivated": "သင့် {{type}} ကိုဖွင့်ထားသည်။",
+        "CompletedActivation": "သုံးစွဲသူသက်တမ်းတိုးပြီးပါပြီ။",
+        "CompletedActivationLogIn": "သုံးစွဲသူသက်တမ်းတိုးပြီးပါပြီ။ ယခုဝင်ရောက်ရန်ကြိုးစားပါ။"
     },
     "contacts": {
         "dialog": {
-            "title": "အဆက်အသွယ်ကိုရွေးချယ်ပါ"
+            "title": "အဆက်အသွယ်ကိုရွေးချယ်ပါ",
+            "CreateAccount": "ဆက်သွယ်ရန်",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create မတွေ့ပါ",
+            "SearchByName": "အမည်ဖြင့်ရှာဖွေပါ"
         },
         "select": {
             "title": "{{displayName}} ၏အဆက်အသွယ်ကိုရွေးချယ်ပါ"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "တံဆိပ်ရွေးချယ်ပါ။",
-        "inviteUser": "အသုံးပြုသူ Invite"
+        "inviteUser": "အသုံးပြုသူ Invite",
+        "selectRole": "Role ကိုရွေးပါ",
+        "inviteRole": "ဖိတ်ကြားပါ {{role}}"
     },
-    "invalidLanguageSelected": "မှားနေသောဘာသာစကားမရွေး"
+    "invalidLanguageSelected": "မှားနေသောဘာသာစကားမရွေး",
+    "login": {
+        "title": "ကြိုဆိုပါတယ်",
+        "directions": "အကောင့်တစ်ခုဖွင့်ပါ၊",
+        "directionsNoRegister": "သင့်မှာအကောင့်တစ်ခုရှိရင် log in လုပ်ပါ။",
+        "goButton": "သွား",
+        "passphrase": "သင်၏ Pass စကားစုကိုရိုက်ပါ",
+        "loginButton": "စတင်ပါ",
+        "registerButton": "စတင်ပါ",
+        "resendButton": "Activation သတင်းစကားပို့ပါ",
+        "forgot": "မေ့နေတာလား",
+        "resendConfirm": "သင်၏ passphrase ကိုပြန်လည်သတ်မှတ်ရန်စာတစ်စောင်ပို့လိုပါသလား။",
+        "resendSuccess": "သင်၏ passphrase ကိုပြန်လည်သတ်မှတ်ရန်စာတစ်စောင်ကိုစစ်ဆေးပါ",
+        "resendClose": "ပိတ်",
+        "noPassphrase": "သင် log in မလုပ်မီ activation message ရှိ link ကိုနှိပ်ခြင်းဖြင့် pass фразတစ်ခုကိုသတ်မှတ်ရမည်။",
+        "notVerified": "သင် log in လုပ်ရန် activation စာတစ်စောင်ကိုသင်ပို့ရမည်။",
+        "emailExists": "အရင်အီးမေးလ်ဖြင့်မှတ်ပုံတင်ရန်ကြိုးစားခဲ့ပါသလား။ ရှိပါကသင်၏အကောင့်ကိုသက်ဝင်ရန်သင်၏စာပုံးကိုစစ်ဆေးပါ။ <a href='#resend' class='Q_button Users_activation_resend'>မက်ဆေ့ခ်ျကိုပြန်လည်ပေးပို့ရန်ကိုနှိပ်ပါ<\/a>",
+        "mobileExists": "အရင်မိုဘိုင်းနံပါတ်ဖြင့်မှတ်ပုံတင်ရန်ကြိုးစားခဲ့ပါသလား။ ထိုသို့ဖြစ်ပါကသင်၏အကောင့်ကိုဖွင့်ရန်သင်၏ SMS ကိုစစ်ဆေးပါ။ <a href='#resend' class='Q_button Users_activation_resend'>မက်ဆေ့ခ်ျကိုပြန်လည်ပေးပို့ရန်ကိုနှိပ်ပါ<\/a>",
+        "usingOther": "ဒါမှမဟုတ်မင်းလုပ်နိုင်တယ်",
+        "prompt": "သုံးစွဲသူအမည်ရွေးပါ:",
+        "newUser": "သို့မဟုတ်အကောင့်အသစ်တစ်ခုဖန်တီးပါ",
+        "placeholders": {
+            "identifier": "သင်၏မိုဘိုင်းနံပါတ်သို့မဟုတ်အီးမေးလ်",
+            "mobile": "သင်၏မိုဘိုင်းနံပါတ်ကိုထည့်ပါ",
+            "email": "သင့်အီးမေးလ်လိပ်စာကိုရိုက်ထည့်ပါ",
+            "username": "အသုံးပြုသူအမည်"
+        },
+        "confirmTerms": "ဝန်ဆောင်မှု၏စည်းကမ်းချက်များကိုလက်ခံပါသလား။",
+        "facebookNoEmail": "သင်၏ဖေ့ဘွတ်အကောင့်တွင်အတည်ပြုအီးမေးလ်လိပ်စာပျောက်နေသည်။ ရိုးရှင်းစွာအထဲဝင်ပါ။",
+        "picTooltip": "ဒီပုံကိုနောက်မှပြောင်းနိုင်သည်"
+    },
+    "setIdentifier": {
+        "title": "လော့အင်ဝင်ရန်နည်းလမ်းတစ်ခုထည့်ပါ",
+        "sendMessage": "Activation သတင်းစကားပို့ပါ",
+        "placeholders": {
+            "identifier": "သင်၏မိုဘိုင်းနံပါတ်သို့မဟုတ်အီးမေးလ်ကိုထည့်ပါ",
+            "mobile": "သင့်မိုဘိုင်းနံပါတ်ကိုရိုက်ထည့်ပါ",
+            "email": "သင့်အီးမေးလ်လိပ်စာကိုရိုက်ထည့်ပါ",
+            "username": "အသုံးပြုသူအမည်"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} အကောင့်",
+        "areUsing": "{{platform}} ကိုသင်အသုံးပြုနေပါတယ်",
+        "noLongerUsing": "{{platform}} ကဲ့သို့သင်မချိတ်ဆက်တော့ပါ",
+        "doAuth": "ဒီအကောင့်ဖြင့်ဝင်ပါ",
+        "doSwitch": "ဒီအကောင့်သို့ပြောင်းပါ"
+    }
 }

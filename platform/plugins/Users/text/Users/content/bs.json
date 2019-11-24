@@ -18,7 +18,8 @@
         "GetStarted": "Get Started",
         "Authorize": "Authorize",
         "TermsLabel": "Pročitao sam i slažem se <br> do {{link}}",
-        "TermsTitle": "Uslovi"
+        "TermsTitle": "Uslovi",
+        "mustAgree": "Prvo morate pristati na uvjete."
     },
     "register": {
         "TermsLabel": "Prihvatam {{link}}",
@@ -31,11 +32,18 @@
         "no": "Ne",
         "WelcomePleaseVerifyEmail": "Dobrodošli! Potvrdite svoju adresu e-pošte.",
         "WelcomeVerifyEmail": "Dobrodošli! Potvrdite svoju adresu e-pošte.",
-        "ForgetPass": "Hej, jesi li zaboravio svoju lozinku?"
+        "ForgetPass": "Hej, jesi li zaboravio svoju lozinku?",
+        "PassphraseSaved": "Vaša fraza je bila spremljena.",
+        "IdentifierActivated": "Vaš {{type}} je aktiviran.",
+        "CompletedActivation": "Završili ste aktivaciju korisnika.",
+        "CompletedActivationLogIn": "Završili ste aktivaciju korisnika. Pokušajte se prijaviti sada."
     },
     "contacts": {
         "dialog": {
-            "title": "Izaberite kontakt"
+            "title": "Izaberite kontakt",
+            "CreateAccount": "+ Novi kontakt",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nije pronađen",
+            "SearchByName": "Traži po imenu"
         },
         "select": {
             "title": "Odaberite kontakt {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Odaberite oznaku.",
-        "inviteUser": "Pozovi korisnika"
+        "inviteUser": "Pozovi korisnika",
+        "selectRole": "Odaberite Uloga",
+        "inviteRole": "Pozovite {{role}}"
     },
-    "invalidLanguageSelected": "Izabran je nevažeći jezik"
+    "invalidLanguageSelected": "Izabran je nevažeći jezik",
+    "login": {
+        "title": "Dobrodošli",
+        "directions": "Otvorite račun ili se prijavite.",
+        "directionsNoRegister": "Prijavite se ako imate račun.",
+        "goButton": "Idi",
+        "passphrase": "Unesite svoju frazu:",
+        "loginButton": "Započnite",
+        "registerButton": "Započnite",
+        "resendButton": "Pošalji poruku za aktiviranje",
+        "forgot": "Zaboravili ste?",
+        "resendConfirm": "Želite li poslati poruku da resetirate svoju lozinku?",
+        "resendSuccess": "Provjerite poruku za resetiranje svoje lozinke",
+        "resendClose": "Zatvori",
+        "noPassphrase": "Prije nego što se možete prijaviti, morate postaviti prolaznu frazu klikom na vezu u vašoj aktivacijskoj poruci.",
+        "notVerified": "Morate sami poslati poruku o aktivaciji da biste se prijavili.",
+        "emailExists": "Jeste li se ranije pokušali registrirati s ovom e-poštom? Ako je to slučaj, provjerite pretinac pristigle pošte da biste aktivirali svoj račun. <a href='#resend' class='Q_button Users_activation_resend'>Kliknite da biste ponovo poslali poruku<\/a>",
+        "mobileExists": "Jeste li se prije pokušali registrirati na ovaj mobilni broj? Ako je to slučaj, provjerite svoj SMS kako biste aktivirali svoj račun. <a href='#resend' class='Q_button Users_activation_resend'>Kliknite da biste ponovo poslali poruku<\/a>",
+        "usingOther": "ili možete",
+        "prompt": "Izaberi korisničko ime:",
+        "newUser": "ili otvoriti novi račun",
+        "placeholders": {
+            "identifier": "vaš mobilni # ili e-poštu",
+            "mobile": "unesite broj mobitela",
+            "email": "unesite svoju adresu e-pošte",
+            "username": "korisničko ime"
+        },
+        "confirmTerms": "Prihvaćate Uslove usluge?",
+        "facebookNoEmail": "Na vašem facebook računu nedostaje potvrđena adresa e-pošte. Jednostavno se prijavite na izvorni način.",
+        "picTooltip": "Tu sliku možete naknadno promijeniti"
+    },
+    "setIdentifier": {
+        "title": "Dodajte način za prijavu",
+        "sendMessage": "Pošalji poruku za aktiviranje",
+        "placeholders": {
+            "identifier": "unesite svoj mobilni broj # ili e-poštu",
+            "mobile": "unesite svoj mobilni broj",
+            "email": "unesite svoju adresu e-pošte",
+            "username": "korisničko ime"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Račun",
+        "areUsing": "Koristite {{platform}} kao",
+        "noLongerUsing": "Više niste povezani sa {{platform}} kao",
+        "doAuth": "Prijavite se s ovim računom",
+        "doSwitch": "Prebacite se na ovaj račun"
+    }
 }

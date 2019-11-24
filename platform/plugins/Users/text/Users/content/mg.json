@@ -18,7 +18,8 @@
         "GetStarted": "Manomboka",
         "Authorize": "alalana",
         "TermsLabel": "Namaky sy nanaiky aho <br> amin&#39;ny {{link}}",
-        "TermsTitle": "Terms"
+        "TermsTitle": "Terms",
+        "mustAgree": "Voalohany dia tsy maintsy manaiky ny voambolana ianao."
     },
     "register": {
         "TermsLabel": "Manaiky ny {{link}}",
@@ -31,11 +32,18 @@
         "no": "No",
         "WelcomePleaseVerifyEmail": "Tonga soa! Azafady avereno adiresy mailaka.",
         "WelcomeVerifyEmail": "Tonga soa! Jereo ny adiresy mailakao.",
-        "ForgetPass": "Hey, hadinonao ny pasipaoronao?"
+        "ForgetPass": "Hey, hadinonao ny pasipaoronao?",
+        "PassphraseSaved": "Voavonjy ny fehezanteny nolalovanao.",
+        "IdentifierActivated": "Ny {{type}} anao dia efa navitrika.",
+        "CompletedActivation": "Nahavita ny fampahavitrihana ny mpampiasa ianao.",
+        "CompletedActivationLogIn": "Nahavita ny fampahavitrihana ny mpampiasa ianao. Andramo ny fitrandrahana izao."
     },
     "contacts": {
         "dialog": {
-            "title": "Mifidiana fifandraisana"
+            "title": "Mifidiana fifandraisana",
+            "CreateAccount": "+ Fifandraisana vaovao",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create tsy hita",
+            "SearchByName": "Mikaraho amin&#39;ny anarany"
         },
         "select": {
             "title": "Fifantenana fifandraisana amin&#39;ny {999}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Mifidiana marika azafady.",
-        "inviteUser": "Asao ny mpampiasa"
+        "inviteUser": "Asao ny mpampiasa",
+        "selectRole": "Safidio ny Andraikitra",
+        "inviteRole": "Asao ny {{role}}"
     },
-    "invalidLanguageSelected": "Teny tsy voafetra"
+    "invalidLanguageSelected": "Teny tsy voafetra",
+    "login": {
+        "title": "Welcome",
+        "directions": "Mamorona kaonty, na miditra.",
+        "directionsNoRegister": "Midira raha manana kaonty ianao.",
+        "goButton": "Mandehana",
+        "passphrase": "Ampidiro io fehezanteny io:",
+        "loginButton": "Manomboka",
+        "registerButton": "Manomboka",
+        "resendButton": "Alefaso ny hafatra fampahavitrihana",
+        "forgot": "Hadinonao io?",
+        "resendConfirm": "Te-mandefa hafatra ianao hamerina ny passprase anao?",
+        "resendSuccess": "Hamarino hafatra mba hamerenanao ny pejin-toetranao",
+        "resendClose": "Close",
+        "noPassphrase": "Alohan&#39;ny ahafahanao miditra dia tsy maintsy mametraka andian-teny iray ianao amin&#39;ny alàlan&#39;ny fanindriana ilay rohy mankany amin&#39;ny hafatra fampahavitrihana anao.",
+        "notVerified": "Tsy maintsy mandefa hafatra fampahalalana ianao mba hidiranao.",
+        "emailExists": "Efa nanandrana nisoratra anarana tamin&#39;ny email ity ianao taloha? Raha izany no izy, jereo ny boaty inbox mba hampahatezitra ny kaontinao. <a href='#resend' class='Q_button Users_activation_resend'>Kitiho ny fandefasana ilay hafatra<\/a>",
+        "mobileExists": "Nanandrana nisoratra anarana tamin&#39;ity isa finday ity ve ianao? Raha izany dia jereo ny SMS anao mba hampahatezitra ny kaontinao. <a href='#resend' class='Q_button Users_activation_resend'>Kitiho ny fandefasana ilay hafatra<\/a>",
+        "usingOther": "na azonao atao",
+        "prompt": "Misafidiana solon&#39;anarana:",
+        "newUser": "na mamorona kaonty vaovao",
+        "placeholders": {
+            "identifier": "ny findainao # na mailakao",
+            "mobile": "ampidiro ny findainao #",
+            "email": "Ampidiro ny adiresy email",
+            "username": "Anaran&#39;ny mpampiasa"
+        },
+        "confirmTerms": "Raiso ny fepetra momba ny serivisy?",
+        "facebookNoEmail": "Ny kaontinao facebook dia tsy misy adiresy mailaka voamarina. Midira fotsiny amin&#39;ny fomba niaviany.",
+        "picTooltip": "Azonao atao ny manova an&#39;ity sary ity avy eo"
+    },
+    "setIdentifier": {
+        "title": "Manampia fomba fidirana miditra",
+        "sendMessage": "Alefaso ny hafatra fampahavitrihana",
+        "placeholders": {
+            "identifier": "ampidiro ny findainao # na mailakao",
+            "mobile": "ampidiro ny nomeraon-telefaonanao",
+            "email": "Ampidiro ny adiresy email",
+            "username": "Anaran&#39;ny mpampiasa"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} kaonty",
+        "areUsing": "Mampiasa {{platform}} ianao raha mampiasa",
+        "noLongerUsing": "Tsy misy ifandraisany intsony amin&#39;ny {{platform}} ianao",
+        "doAuth": "Midira ao amin&#39;ity kaonty ity",
+        "doSwitch": "Avadio amin&#39;ity kaonty ity"
+    }
 }

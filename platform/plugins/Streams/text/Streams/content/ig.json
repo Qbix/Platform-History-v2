@@ -3,8 +3,8 @@
         "NewItemTitle": "Ihe ọhụrụ"
     },
     "labels": {
-        "Streams/invited": "Ndị m kpọrọ",
-        "Streams/invitedMe": "Ònye kpọrọ m"
+        "Streams\/invited": "Ndị m kpọrọ",
+        "Streams\/invitedMe": "Ònye kpọrọ m"
     },
     "interests": {
         "Filter": "Kedu ihe na-atọ gị ụtọ?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Ị ma na ịchọrọ imechi nkata a?",
         "closeChatConfirmYes": "Ee",
         "closeChatConfirmNo": "Ee e",
-        "earlierComments": "ihe ndị dị na mbụ"
+        "earlierComments": "ihe ndị dị na mbụ",
+        "Subscribed": "Ma Ọkwa ọkwa",
+        "Unsubscribed": "Nweta .ma Ọkwa",
+        "notAllowedToJoinCall": "I nweghị ikike iji sonyere mkparịta ụka a.",
+        "startedConversation": "bidoro mkparịta ụka",
+        "RealTimeCall": "Oku Oge",
+        "SearchByName": "Choo aha"
     },
     "notifications": {
         "*": "Ozi {{& message.fields.type}} na {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Ọganihu enwere na {{stream.fields.title}}",
         "Streams\/task\/complete": "E mechara kọwaa: {{stream.fields.title}}",
         "Streams\/task\/error": "Njehie n&#39;oge: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Ozi Na-abata"
+        "Streams\/incoming\/*": "{{app}}: Ozi Na-abata",
+        "Streams\/relatedTo\/Streams\/call": "Oku ohuru bidoro na {{toTitle}}",
+        "Streams\/relatedTo\/*": "Ọhụrụ {{relationDisplayType}} na {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Agbakwunyere na {{toTitle}} dika {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} hotara gi na nzaghachi",
+        "Streams\/call": "{{displayName}} na-akpọ gị"
     },
     "invite": {
         "messageContent": "{{displayName}} kpọrọ gị ka ị bịa {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Email",
             "byText": "Ederede",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} ma ọ bụrụ na nyochapụrụ koodu ahụ"
         },
         "email": {
             "subject": "Hey, lelee nke a",
             "PleaseVisitLink": "Biko gaa na njikọ ndị a:",
             "InvitingYou": "Ana m akpọ gị ka ị bịa {{title}}",
-            "HasInvitedYou": "{{displayName}} akpọwo gị na {{title}}"
+            "HasInvitedYou": "{{displayName}} akpọwo gị na {{title}}",
+            "HasMentionedYou": "{{displayName}} kpọtụrụ gị aha na &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "A kpọrọ gị ka ị bịa {{title}}. Biko pịa {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Kwado Igwe okwu",
             "cameraTitle": "Kwado Igwefoto",
-            "cameraAndMicrophoneTitle": "Kwado Igwefoto na Igwe okwu"
+            "cameraAndMicrophoneTitle": "Kwado Igwefoto na Igwe okwu",
+            "dialogTitle": "Ijikọ",
+            "microphoneBtn": "Kwado Igwe okwu",
+            "cameraBtn": "Kwado igwefoto",
+            "cameraAndMicrophoneBtn": "Kwado igwefoto na Igwe okwu"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "ezigara ozi <em>{{message.fields.type}}<\/em> {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "kwuru na",
+            "in": "n&#39;ime",
+            "body": "na {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ekenyela ya",
+                "byAvatar": "site na {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "nwere nke ọhụụ {{instructions.fromDisplayType}}",
+                "byAvatar": "gbakwunyere na {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Akpọọ",
+            "description": "Igbe mbata maka akwụkwọ ịkpọ òkù"
+        },
+        "Streams\/resource": {
+            "displayType": "Akụ",
+            "description": "iyi maka ijikwa ohere ị nweta ma nweta ozi banyere mmelite"
+        },
+        "Streams\/task": {
+            "description": "maka inweta nnata banyere ọganihu n’otu ọrụ",
+            "displayType": "Ọrụ"
+        },
+        "Streams\/tasks": {
+            "description": "udi maka ihe aga-eme",
+            "displayType": "Ihe aga-eme"
+        },
+        "Streams\/experience": {
+            "description": "Ahụmịhe nkịtị maka ndị otu obodo",
+            "displayType": "Ahụmahụ na-ahụkarị maka ndị otu obodo"
+        },
+        "Streams\/greeting": {
+            "description": "ekele nke onye ọrụ jiri webata onwe ha",
+            "displayType": "Kelee ekele"
+        },
+        "Streams\/number": {
+            "displayType": "Nọmba",
+            "description": "nọmba mgbakọ na mwepụ"
+        },
+        "Streams\/date": {
+            "displayType": "Datebọchị",
+            "description": "ụbọchị"
+        },
+        "Streams\/text": {
+            "displayType": "Ederede",
+            "description": "ahu ederede"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Ederede",
+            "description": "obere ahu ederede"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Ederede",
+            "description": "ọkara ahụ nke ederede"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Adreesị ozi ịntanetị",
+            "description": "adreesị ozi ịntanetị"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Nọmba ekwentị",
+            "description": "nọmba ekwentị"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "njikọ na web"
+        },
+        "Streams\/image": {
+            "displayType": "Onyonyo",
+            "description": "ihe nlere anya"
+        },
+        "Streams\/images": {
+            "displayType": "Osisi onyonyo",
+            "description": "osisi nke onyunyo"
+        },
+        "Streams\/album": {
+            "displayType": "Ndekọ album",
+            "description": "album nke metụtara mgbasa ozi dị iche iche"
+        },
+        "Streams\/file": {
+            "displayType": "Faịlụ",
+            "description": "ebugote faịlụ"
+        },
+        "Streams\/audio": {
+            "displayType": "Clip Audio",
+            "description": "ọdịyo"
+        },
+        "Streams\/video": {
+            "displayType": "Obere vidiyo",
+            "description": "obere vidiyo"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "ndụ ọdịyo ma ọ bụ vidiyo"
+        },
+        "Streams\/category": {
+            "displayType": "Otu",
+            "description": "otu mpaghara nke nwere ike jikọta iyi ndị ọzọ"
+        },
+        "Streams\/participating": {
+            "displayType": "Ndepụta Ndebanye Anya",
+            "description": "iyi nwere njikọ \/ ejikọtaghị na nke a mgbe onye ọrụ sonyere \/ apụ"
+        },
+        "Streams\/interest": {
+            "displayType": "Mmasị",
+            "description": "na-anọchite anya mmasị onye ọrụ na otu isiokwu"
+        },
+        "Streams\/incoming": {
+            "displayType": "Na-abata",
+            "description": "njedebe maka ozi ndị ọrụ ndị ọzọ zitere"
+        },
+        "Streams\/chat": {
+            "displayType": "Mkparịta ụka",
+            "description": "mkparịta ụka n&#39;etiti ndị ọrụ, yana akụkọ ihe mere eme"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Oku n’ezie",
+            "description": "ezigbo oge vidiyo \/ oku ọdịyo"
         }
     }
 }

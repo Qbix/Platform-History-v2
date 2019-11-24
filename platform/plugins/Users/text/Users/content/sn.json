@@ -18,7 +18,8 @@
         "GetStarted": "Tanga",
         "Authorize": "Authorize",
         "TermsLabel": "Ndakaverenga uye ndinobvumirana <br> kuna Jehovha,",
-        "TermsTitle": "Mitemo"
+        "TermsTitle": "Mitemo",
+        "mustAgree": "Kutanga iwe unofanirwa kubvumirana kune zvirevo."
     },
     "register": {
         "TermsLabel": "Ndinogamuchira {{link}}",
@@ -31,11 +32,18 @@
         "no": "Aihwa",
         "WelcomePleaseVerifyEmail": "Mauya! Ndapota chengetedza email yako.",
         "WelcomeVerifyEmail": "Mauya! Tsirirai email yako kero.",
-        "ForgetPass": "Hei, makakanganwa your passphrase?"
+        "ForgetPass": "Hei, makakanganwa your passphrase?",
+        "PassphraseSaved": "Mutsara wepasita wanga waponeswa.",
+        "IdentifierActivated": "Yako {{type}} yakagadziriswa.",
+        "CompletedActivation": "Wapedza kuvhurwa kwemushandisi.",
+        "CompletedActivationLogIn": "Wapedza kuvhurwa kwemushandisi. Edza kupinda mukati izvozvi."
     },
     "contacts": {
         "dialog": {
-            "title": "Sarudza"
+            "title": "Sarudza",
+            "CreateAccount": "+ Kubata Kwetsva",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create haina kuwanikwa",
+            "SearchByName": "Tsvaga nemazita"
         },
         "select": {
             "title": "Sarudza mutauro we {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Ndapota sarudza shanduro.",
-        "inviteUser": "Kumbira Umushandi"
+        "inviteUser": "Kumbira Umushandi",
+        "selectRole": "Sarudza Basa",
+        "inviteRole": "Koka {{role}}"
     },
-    "invalidLanguageSelected": "Mutauro usina kukodzera wakasarudzwa"
+    "invalidLanguageSelected": "Mutauro usina kukodzera wakasarudzwa",
+    "login": {
+        "title": "Mauya",
+        "directions": "Gadzira account, kana kupinda mukati.",
+        "directionsNoRegister": "Log in kana uine account.",
+        "goButton": "Enda",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Tanga",
+        "registerButton": "Tanga",
+        "resendButton": "Tumira Meseji Inoshanda",
+        "forgot": "Wakazvikanganwa?",
+        "resendConfirm": "Iwe unoda kutumira meseji yekugadzirisa zvakare pasipoti yako?",
+        "resendSuccess": "Tarisa uwane meseji yekugadzirisa yako paswedi",
+        "resendClose": "Pedyo",
+        "noPassphrase": "Usati iwe wagona kupinda mukati, iwe unofanirwa kuseta chirevo chekupfuura nekudzvanya chinongedzo mune yako activation meseji.",
+        "notVerified": "Iwe unofanirwa kuzvitumira iwe meseji yeku activation kuitira kuti ugone kupinda mukati.",
+        "emailExists": "Wati wamboyedza kunyoresa neiyi email here? Kana zvirizvo, tarisa yako inbox kuti ishandise account yako. <a href='#resend' class='Q_button Users_activation_resend'>Dzvanya kuti utumirezve meseji yacho<\/a>",
+        "mobileExists": "Wakamboedza kunyoresa neiyi nharembozha zvisati zvaitika? Kana zvirizvo, tarisa yako yeSMS yekumisa account yako. <a href='#resend' class='Q_button Users_activation_resend'>Dzvanya kuti utumirezve meseji yacho<\/a>",
+        "usingOther": "kana iwe unokwanisa",
+        "prompt": "Sarudza zita rekushandisa:",
+        "newUser": "kana gadzira account nyowani",
+        "placeholders": {
+            "identifier": "yako mobile # kana email",
+            "mobile": "pinda nhare yako #",
+            "email": "pinda yako email kero",
+            "username": "username"
+        },
+        "confirmTerms": "Gamuchira iyo Mashandiro ebasa?",
+        "facebookNoEmail": "Yako facebook account iri kushaya yakasimbiswa email kero. Ingo pinda munzira yekuzvarwa.",
+        "picTooltip": "Unogona kuchinja mufananidzo uyu gare gare"
+    },
+    "setIdentifier": {
+        "title": "Wedzera nzira yekupinda mairi",
+        "sendMessage": "Tumira Meseji Inoshanda",
+        "placeholders": {
+            "identifier": "pinda yako runhare # kana email",
+            "mobile": "pinda yako nhamba yenhare",
+            "email": "pinda yako email kero",
+            "username": "username"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Akaunti",
+        "areUsing": "Uri kushandisa {{platform}} se",
+        "noLongerUsing": "Hausisiri wakabatana ne {{platform}} se",
+        "doAuth": "Pinda neiyi account",
+        "doSwitch": "Chinja kune iyi account"
+    }
 }

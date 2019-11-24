@@ -3,8 +3,8 @@
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams/invited": "E persone ch&#39;e aghju invitato",
-        "Streams/invitedMe": "Chi mi ha invitatu"
+        "Streams\/invited": "E persone ch&#39;e aghju invitato",
+        "Streams\/invitedMe": "Chi mi ha invitatu"
     },
     "interests": {
         "Filter": "Cosa ti piace?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Sì sicuru chì vulete fermà sta chat?",
         "closeChatConfirmYes": "Iè",
         "closeChatConfirmNo": "Innò",
-        "earlierComments": "primu commenti"
+        "earlierComments": "primu commenti",
+        "Subscribed": "Mute Notificazioni",
+        "Unsubscribed": "Ricevi Notificazioni",
+        "notAllowedToJoinCall": "Ùn avete micca permessu di unisce à sta cunversazione.",
+        "startedConversation": "hà principiatu una cunversazione",
+        "RealTimeCall": "Chjamate in tempu Reali",
+        "SearchByName": "Ricerca per nome"
     },
     "notifications": {
         "*": "Messaggio {{& message.fields.type}} per {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Progressu fattu in {{stream.fields.title}}",
         "Streams\/task\/complete": "U travagliu cumpletitu: {{stream.fields.title}}",
         "Streams\/task\/error": "Errore durante: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Messaggio in entrata"
+        "Streams\/incoming\/*": "{{app}}: Messaggio in entrata",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "Novu {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Agghiuntu à {{toTitle}} cum&#39;è {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} ci hà mintuatu in un cumentu",
+        "Streams\/call": "{{displayName}} vi chjamanu"
     },
     "invite": {
         "messageContent": "{{displayName}} ti invita à {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Email",
             "byText": "Testo",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} se u codice hè statu scannatu"
         },
         "email": {
             "subject": "Hey, fighjate questu",
             "PleaseVisitLink": "Visite u ligame chì seguita:",
             "InvitingYou": "Vi invita à {{title}}",
-            "HasInvitedYou": "{{displayName}} ti hà invitato à {{title}}"
+            "HasInvitedYou": "{{displayName}} ti hà invitato à {{title}}",
+            "HasMentionedYou": "{{displayName}} ci hà citatu in &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Avete invitu à {{title}}. Please tap tap {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Abilate Microphone",
             "cameraTitle": "Abilita a Camera",
-            "cameraAndMicrophoneTitle": "Abilita Fotocamera è Microphone"
+            "cameraAndMicrophoneTitle": "Abilita Fotocamera è Microphone",
+            "dialogTitle": "Cunnessione",
+            "microphoneBtn": "Habilita u Microfonu",
+            "cameraBtn": "Habilita a Camera",
+            "cameraAndMicrophoneBtn": "Habilita a Camera è u Microfonu"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "signalatu un missaghju <em>{{message.fields.type}}<\/em> à {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "cummentatu",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "hè statu posta in",
+                "byAvatar": "da {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "hà un novu {{instructions.fromDisplayType}}",
+                "byAvatar": "aghjuntu da {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Invitatu",
+            "description": "Inbox per inviti"
+        },
+        "Streams\/resource": {
+            "displayType": "U risorse",
+            "description": "flussu di gestione di l&#39;accessu à una risorsa è di mandà messaggi riguardanti aghjornamenti"
+        },
+        "Streams\/task": {
+            "description": "per riceve aghjurnamenti annantu à u prugressu nantu à un certu compitu",
+            "displayType": "Task"
+        },
+        "Streams\/tasks": {
+            "description": "categuria per i travaglii",
+            "displayType": "Impegni"
+        },
+        "Streams\/experience": {
+            "description": "una sperienza cumuna per i membri di una cumunità",
+            "displayType": "Esperienza cumuni per i membri di una cumunità"
+        },
+        "Streams\/greeting": {
+            "description": "salutazione cù quale un utilizatore si pò presentà",
+            "displayType": "Salutu"
+        },
+        "Streams\/number": {
+            "displayType": "Numero",
+            "description": "numeru matematicu"
+        },
+        "Streams\/date": {
+            "displayType": "Data",
+            "description": "data"
+        },
+        "Streams\/text": {
+            "displayType": "Testu",
+            "description": "corpu di testu"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Testu",
+            "description": "picculu corpu di testu"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Testu",
+            "description": "corpu di testu di mediu"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Indirizzu mail",
+            "description": "indirizzu mail"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Numeru di telefonu",
+            "description": "numeru di telefonu"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "ligame nantu à u web"
+        },
+        "Streams\/image": {
+            "displayType": "Maghjina",
+            "description": "maghjina visuale"
+        },
+        "Streams\/images": {
+            "displayType": "Galleria di Image",
+            "description": "galeria d&#39;imaghjini"
+        },
+        "Streams\/album": {
+            "displayType": "Àlbum",
+            "description": "un album à quale diverse media sò in relazione"
+        },
+        "Streams\/file": {
+            "displayType": "File",
+            "description": "u schedariu carricatu"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio Clip",
+            "description": "audio clip"
+        },
+        "Streams\/video": {
+            "displayType": "Video Clip",
+            "description": "video"
+        },
+        "Streams\/live": {
+            "displayType": "In diretta",
+            "description": "audio o video in diretta"
+        },
+        "Streams\/category": {
+            "displayType": "Categoria",
+            "description": "una categuria à quale altri flussi ponu esse ligati"
+        },
+        "Streams\/participating": {
+            "displayType": "Indici participanti",
+            "description": "i flussi sò rilativi \/ ùn anu micca relazione cù questu quandu un utilizatore si unisce \/ lascia"
+        },
+        "Streams\/interest": {
+            "displayType": "Interessu",
+            "description": "rapprisenta l&#39;interessu di un utilizatore in un certu tema"
+        },
+        "Streams\/incoming": {
+            "displayType": "Invenuta",
+            "description": "destinazione per i messaggi mandati da altri utilizatori"
+        },
+        "Streams\/chat": {
+            "displayType": "Cunversazione",
+            "description": "una cunversazione trà l&#39;utilizatori, cù a storia"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Chjamate in tempu reale",
+            "description": "una chjama video \/ audio in tempu reale"
         }
     }
 }

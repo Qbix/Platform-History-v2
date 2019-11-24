@@ -3,8 +3,8 @@
         "NewItemTitle": "പുതിയ സാധനം"
     },
     "labels": {
-        "Streams/invited": "ഞാൻ ക്ഷണിച്ച ആളുകൾ",
-        "Streams/invitedMe": "ആരാണ് എന്നെ ക്ഷണിച്ചത്"
+        "Streams\/invited": "ഞാൻ ക്ഷണിച്ച ആളുകൾ",
+        "Streams\/invitedMe": "ആരാണ് എന്നെ ക്ഷണിച്ചത്"
     },
     "interests": {
         "Filter": "നിങ്ങൾ എന്താണ് ആസ്വദിക്കുന്നത്?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "ഈ ചാറ്റ് അവസാനിപ്പിക്കണമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ?",
         "closeChatConfirmYes": "അതെ",
         "closeChatConfirmNo": "ഇല്ല",
-        "earlierComments": "മുമ്പത്തെ അഭിപ്രായങ്ങൾ"
+        "earlierComments": "മുമ്പത്തെ അഭിപ്രായങ്ങൾ",
+        "Subscribed": "അറിയിപ്പുകൾ നിശബ്ദമാക്കുക",
+        "Unsubscribed": "അറിയിപ്പുകൾ നേടുക",
+        "notAllowedToJoinCall": "ഈ സംഭാഷണത്തിൽ ചേരാൻ നിങ്ങൾക്ക് അനുമതിയില്ല.",
+        "startedConversation": "ഒരു സംഭാഷണം ആരംഭിച്ചു",
+        "RealTimeCall": "തത്സമയ കോൾ",
+        "SearchByName": "പേര് പ്രകാരം തിരയുക"
     },
     "notifications": {
         "*": "{{& message.fields.type}} മുതൽ {{& stream.fields.title}} വരെ സന്ദേശം",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "{{999} on എന്നതിലെ പുരോഗതി",
         "Streams\/task\/complete": "ചുമതല പൂർത്തിയായി: {{stream.fields.title}}",
         "Streams\/task\/error": "ഇതിലെ പിശക്: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: ഇൻകമിംഗ് സന്ദേശം"
+        "Streams\/incoming\/*": "{{app}}: ഇൻകമിംഗ് സന്ദേശം",
+        "Streams\/relatedTo\/Streams\/call": "പുതിയ കോൾ {{999} in ൽ ആരംഭിച്ചു",
+        "Streams\/relatedTo\/*": "{{toTitle}} ലെ പുതിയ {{relationDisplayType}}",
+        "Streams\/relatedFrom\/*": "{{toTitle}} എന്നതിലേക്ക് {{relationDisplayType}} ആയി ചേർത്തു",
+        "Streams\/mention": "{99 999} a നിങ്ങളെ ഒരു അഭിപ്രായത്തിൽ പരാമർശിച്ചു",
+        "Streams\/call": "{{999} you നിങ്ങളെ വിളിക്കുന്നു"
     },
     "invite": {
         "messageContent": "{{displayName}} നിങ്ങളെ {{1000} to ലേക്ക് ക്ഷണിച്ചു",
@@ -59,13 +70,15 @@
             "byEmail": "ഇമെയിൽ",
             "byText": "വാചകം",
             "byFacebook": "ഫേസ്ബുക്ക്",
-            "byTwitter": "ട്വിറ്റർ"
+            "byTwitter": "ട്വിറ്റർ",
+            "scannedQR": "കോഡ് സ്കാൻ ചെയ്തിട്ടുണ്ടെങ്കിൽ {{ClickOrTap}}"
         },
         "email": {
             "subject": "ഹേയ്, ഇത് പരിശോധിക്കുക",
             "PleaseVisitLink": "ഇനിപ്പറയുന്ന ലിങ്ക് സന്ദർശിക്കുക:",
             "InvitingYou": "ഞാൻ നിങ്ങളെ {{999} to ലേക്ക് ക്ഷണിക്കുന്നു",
-            "HasInvitedYou": "{{999} you നിങ്ങളെ {{1000} to ലേക്ക് ക്ഷണിച്ചു"
+            "HasInvitedYou": "{{999} you നിങ്ങളെ {{1000} to ലേക്ക് ക്ഷണിച്ചു",
+            "HasMentionedYou": "{{999} you നിങ്ങളെ &quot;{{1000} in&quot; ൽ പരാമർശിച്ചു"
         },
         "sms": {
             "content": "നിങ്ങളെ {{999} to ലേക്ക് ക്ഷണിച്ചു. ദയവായി {{1000} ap ടാപ്പുചെയ്യുക"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "മൈക്രോഫോൺ പ്രവർത്തനക്ഷമമാക്കുക",
             "cameraTitle": "ക്യാമറ പ്രവർത്തനക്ഷമമാക്കുക",
-            "cameraAndMicrophoneTitle": "ക്യാമറയും മൈക്രോഫോണും പ്രവർത്തനക്ഷമമാക്കുക"
+            "cameraAndMicrophoneTitle": "ക്യാമറയും മൈക്രോഫോണും പ്രവർത്തനക്ഷമമാക്കുക",
+            "dialogTitle": "ബന്ധിപ്പിക്കുന്നു",
+            "microphoneBtn": "മൈക്രോഫോൺ പ്രവർത്തനക്ഷമമാക്കുക",
+            "cameraBtn": "ക്യാമറ പ്രവർത്തനക്ഷമമാക്കുക",
+            "cameraAndMicrophoneBtn": "ക്യാമറയും മൈക്രോഫോണും പ്രവർത്തനക്ഷമമാക്കുക"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "{{1000} to എന്നതിലേക്ക് <em>{{message.fields.type}}<\/em> സന്ദേശം പോസ്റ്റുചെയ്‌തു"
+        },
+        "text": {
+            "commentedOn": "അഭിപ്രായമിട്ടു",
+            "in": "അകത്ത്",
+            "body": "{{999} in ൽ: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "എന്നതിലേക്ക് പോസ്റ്റുചെയ്‌തു",
+                "byAvatar": "by {999} by"
+            },
+            "relatedTo": {
+                "hasANew": "ഒരു പുതിയ {{999} has ഉണ്ട്",
+                "byAvatar": "ചേർത്തു {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "ക്ഷണിച്ചു",
+            "description": "ക്ഷണങ്ങൾക്കായുള്ള ഇൻ‌ബോക്സ്"
+        },
+        "Streams\/resource": {
+            "displayType": "വിഭവം",
+            "description": "ഒരു ഉറവിടത്തിലേക്കുള്ള ആക്‌സസ്സ് നിയന്ത്രിക്കുന്നതിനും അപ്‌ഡേറ്റുകളെക്കുറിച്ചുള്ള സന്ദേശങ്ങൾ പോസ്റ്റുചെയ്യുന്നതിനുമുള്ള സ്ട്രീം"
+        },
+        "Streams\/task": {
+            "description": "ഒരു പ്രത്യേക ചുമതലയിലെ പുരോഗതിയെക്കുറിച്ചുള്ള അപ്‌ഡേറ്റുകൾ സ്വീകരിക്കുന്നതിന്",
+            "displayType": "ടാസ്ക്"
+        },
+        "Streams\/tasks": {
+            "description": "ടാസ്‌ക്കുകൾക്കായുള്ള വിഭാഗം",
+            "displayType": "ചുമതലകൾ"
+        },
+        "Streams\/experience": {
+            "description": "ഒരു കമ്മ്യൂണിറ്റിയിലെ അംഗങ്ങൾക്ക് ഒരു പൊതു അനുഭവം",
+            "displayType": "ഒരു കമ്മ്യൂണിറ്റിയിലെ അംഗങ്ങൾക്ക് പൊതുവായ അനുഭവം"
+        },
+        "Streams\/greeting": {
+            "description": "ഒരു ഉപയോക്താവിന് സ്വയം പരിചയപ്പെടുത്താൻ കഴിയുന്ന അഭിവാദ്യം",
+            "displayType": "അഭിവാദ്യം"
+        },
+        "Streams\/number": {
+            "displayType": "നമ്പർ",
+            "description": "ഗണിതശാസ്ത്ര നമ്പർ"
+        },
+        "Streams\/date": {
+            "displayType": "തീയതി",
+            "description": "തീയതി"
+        },
+        "Streams\/text": {
+            "displayType": "വാചകം",
+            "description": "ടെക്സ്റ്റ് ബോഡി"
+        },
+        "Streams\/text\/small": {
+            "displayType": "വാചകം",
+            "description": "ചെറിയ വാചകം"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "വാചകം",
+            "description": "ഇടത്തരം വാചകം"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "ഈ - മെയില് വിലാസം",
+            "description": "ഈ - മെയില് വിലാസം"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "ഫോൺ നമ്പർ",
+            "description": "ഫോൺ നമ്പർ"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "വെബിലെ ലിങ്ക്"
+        },
+        "Streams\/image": {
+            "displayType": "ചിത്രം",
+            "description": "വിഷ്വൽ ഇമേജ്"
+        },
+        "Streams\/images": {
+            "displayType": "ഇമേജ് ഗാലറി",
+            "description": "ചിത്രങ്ങളുടെ ഗാലറി"
+        },
+        "Streams\/album": {
+            "displayType": "ആൽബം",
+            "description": "വിവിധ മാധ്യമങ്ങളുമായി ബന്ധപ്പെട്ട ഒരു ആൽബം"
+        },
+        "Streams\/file": {
+            "displayType": "ഫയൽ",
+            "description": "അപ്‌ലോഡ് ചെയ്ത ഫയൽ"
+        },
+        "Streams\/audio": {
+            "displayType": "ഓഡിയോ ക്ലിപ്പ്",
+            "description": "ഓഡിയോ ക്ലിപ്പ്"
+        },
+        "Streams\/video": {
+            "displayType": "വീഡിയോ ക്ലിപ്പ്",
+            "description": "വീഡിയോ ക്ലിപ്പ്"
+        },
+        "Streams\/live": {
+            "displayType": "ലൈവ്സ്ട്രീം",
+            "description": "തത്സമയ ഓഡിയോ വീഡിയോ"
+        },
+        "Streams\/category": {
+            "displayType": "വിഭാഗം",
+            "description": "മറ്റ് സ്ട്രീമുകളുമായി ബന്ധപ്പെടാൻ കഴിയുന്ന ഒരു വിഭാഗം"
+        },
+        "Streams\/participating": {
+            "displayType": "പങ്കെടുക്കുന്ന സൂചിക",
+            "description": "ഒരു ഉപയോക്താവ് ചേരുമ്പോൾ \/ പോകുമ്പോൾ സ്ട്രീമുകൾ ഇതുമായി ബന്ധപ്പെട്ടിരിക്കുന്നു \/ ബന്ധമില്ല"
+        },
+        "Streams\/interest": {
+            "displayType": "താൽപ്പര്യം",
+            "description": "ഒരു പ്രത്യേക വിഷയത്തിലുള്ള ഉപയോക്താവിന്റെ താൽപ്പര്യത്തെ പ്രതിനിധീകരിക്കുന്നു"
+        },
+        "Streams\/incoming": {
+            "displayType": "ഇൻകമിംഗ്",
+            "description": "മറ്റ് ഉപയോക്താക്കൾ അയച്ച സന്ദേശങ്ങൾക്കായുള്ള ലക്ഷ്യസ്ഥാനം"
+        },
+        "Streams\/chat": {
+            "displayType": "സംഭാഷണം",
+            "description": "ചരിത്രമുള്ള ഉപയോക്താക്കൾ തമ്മിലുള്ള സംഭാഷണം"
+        },
+        "Streams\/webrtc": {
+            "displayType": "തത്സമയ കോൾ",
+            "description": "ഒരു തത്സമയ വീഡിയോ \/ ഓഡിയോ കോൾ"
         }
     }
 }

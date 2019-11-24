@@ -3,8 +3,8 @@
         "NewItemTitle": "Nij item"
     },
     "labels": {
-        "Streams/invited": "Minsken dy&#39;t ik útnoege",
-        "Streams/invitedMe": "Wa hat my frege"
+        "Streams\/invited": "Minsken dy&#39;t ik útnoege",
+        "Streams\/invitedMe": "Wa hat my frege"
     },
     "interests": {
         "Filter": "Wat wolle jo?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Binne jo wis dat jo dit petear slute wolle?",
         "closeChatConfirmYes": "Ja",
         "closeChatConfirmNo": "Nee",
-        "earlierComments": "earder kommentaren"
+        "earlierComments": "earder kommentaren",
+        "Subscribed": "Mute notifikaasjes",
+        "Unsubscribed": "Krij meldingen",
+        "notAllowedToJoinCall": "Jo hawwe gjin tastimming om mei te dwaan oan dit petear.",
+        "startedConversation": "begon in petear",
+        "RealTimeCall": "Echte tiidoprop",
+        "SearchByName": "Sykje op namme"
     },
     "notifications": {
         "*": "Berjocht {{& message.fields.type}} nei {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Progress makke op {{stream.fields.title}}",
         "Streams\/task\/complete": "Task is foltôge: {{stream.fields.title}}",
         "Streams\/task\/error": "Flater ûnder: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Inkommende berjocht"
+        "Streams\/incoming\/*": "{{app}}: Inkommende berjocht",
+        "Streams\/relatedTo\/Streams\/call": "Nije oprop begon yn {{toTitle}}",
+        "Streams\/relatedTo\/*": "Nij {{relationDisplayType}} yn {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Tafoege oan {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} neamde jo yn in reaksje",
+        "Streams\/call": "{{displayName}} ropt jo"
     },
     "invite": {
         "messageContent": "{{displayName}} hat jo nei {{inviteUrl}} útnoege",
@@ -59,13 +70,15 @@
             "byEmail": "E-post",
             "byText": "Tekst",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} as de koade waard skand"
         },
         "email": {
             "subject": "Hjir, kontrolearje dit út",
             "PleaseVisitLink": "Besykje op &#39;e folgjende link:",
             "InvitingYou": "Ik freegje jo nei {{title}}",
-            "HasInvitedYou": "{{displayName}} hat jo útnoege ta {{title}}"
+            "HasInvitedYou": "{{displayName}} hat jo útnoege ta {{title}}",
+            "HasMentionedYou": "{{displayName}} hat jo neamd yn &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Jo binne oanmeld nei {{title}}. Folje op {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Mikrofoan ynskeakelje",
             "cameraTitle": "Kamera ynskeakelje",
-            "cameraAndMicrophoneTitle": "Kamera en mikrofoan ynskeakelje"
+            "cameraAndMicrophoneTitle": "Kamera en mikrofoan ynskeakelje",
+            "dialogTitle": "Ferbine",
+            "microphoneBtn": "Mikrofoan ynskeakelje",
+            "cameraBtn": "Kamera ynskeakelje",
+            "cameraAndMicrophoneBtn": "Kamera en mikrofoan ynskeakelje"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "pleatste in <em>{{message.fields.type}}<\/em> berjocht nei {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "kommintaar oer",
+            "in": "yn",
+            "body": "yn {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "is pleatst nei",
+                "byAvatar": "troch {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "hat in nije {{instructions.fromDisplayType}}",
+                "byAvatar": "tafoege troch {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Útnoege",
+            "description": "Postfek YN foar útnoegings"
+        },
+        "Streams\/resource": {
+            "displayType": "Helpmiddel",
+            "description": "stream foar it behearjen fan tagong ta in boarne en it pleatsen fan berjochten oer updates"
+        },
+        "Streams\/task": {
+            "description": "foar it ûntfangen fan updates oer foarútgong op in bepaalde taak",
+            "displayType": "Taak"
+        },
+        "Streams\/tasks": {
+            "description": "kategory foar taken",
+            "displayType": "Taken"
+        },
+        "Streams\/experience": {
+            "description": "in mienskiplike ûnderfining foar leden fan in mienskip",
+            "displayType": "Mienskiplike ûnderfining foar leden fan in mienskip"
+        },
+        "Streams\/greeting": {
+            "description": "groetnis wêrmei in brûker harsels kin foarstelle",
+            "displayType": "Groet"
+        },
+        "Streams\/number": {
+            "displayType": "Nûmer",
+            "description": "wiskundich getal"
+        },
+        "Streams\/date": {
+            "displayType": "Datum",
+            "description": "datum"
+        },
+        "Streams\/text": {
+            "displayType": "Tekst",
+            "description": "lichem fan tekst"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Tekst",
+            "description": "lyts lichem fan tekst"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Tekst",
+            "description": "medium lichem fan tekst"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "E-postadres",
+            "description": "e-postadres"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Telefoannûmer",
+            "description": "telefoannûmer"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "link op it web"
+        },
+        "Streams\/image": {
+            "displayType": "Byld",
+            "description": "fisuele ôfbylding"
+        },
+        "Streams\/images": {
+            "displayType": "Ofbylding gallery",
+            "description": "gallery fan ôfbyldings"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "in album wêrop ferskate media besibbe binne"
+        },
+        "Streams\/file": {
+            "displayType": "Map",
+            "description": "opladen bestân"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio Clip",
+            "description": "audio klip"
+        },
+        "Streams\/video": {
+            "displayType": "Fideoklip",
+            "description": "fideoklip"
+        },
+        "Streams\/live": {
+            "displayType": "Streekrjochte útstjoering",
+            "description": "live audio as fideo"
+        },
+        "Streams\/category": {
+            "displayType": "Kategory",
+            "description": "in kategory wêrop oare streamingen kinne wurde relatearre"
+        },
+        "Streams\/participating": {
+            "displayType": "Dielnimmende yndeks",
+            "description": "streamen binne hjirmei relatearre \/ net relateare as in brûker oanmeld \/ ferlit"
+        },
+        "Streams\/interest": {
+            "displayType": "Ynteresse",
+            "description": "fertsjintwurdiget de belangstelling fan in brûker foar in bepaald ûnderwerp"
+        },
+        "Streams\/incoming": {
+            "displayType": "Ynkommend",
+            "description": "bestimming foar berjochten ferstjoerd troch oare brûkers"
+        },
+        "Streams\/chat": {
+            "displayType": "Petear",
+            "description": "in petear tusken brûkers, mei skiednis"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Echte-tiidoprop",
+            "description": "in realtime fideo \/ audio-oprop"
         }
     }
 }

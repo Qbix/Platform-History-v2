@@ -3,8 +3,8 @@
         "NewItemTitle": "Жаңа элемент"
     },
     "labels": {
-        "Streams/invited": "Мен шақырған адамдар",
-        "Streams/invitedMe": "Маған кім шақырды"
+        "Streams\/invited": "Мен шақырған адамдар",
+        "Streams\/invitedMe": "Маған кім шақырды"
     },
     "interests": {
         "Filter": "Сізге не ұнайды?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Бұл сөйлесуді шынымен жабу керек пе?",
         "closeChatConfirmYes": "Иә",
         "closeChatConfirmNo": "Жоқ",
-        "earlierComments": "бұрынғы ескертулер"
+        "earlierComments": "бұрынғы ескертулер",
+        "Subscribed": "Үнсіз хабарландырулар",
+        "Unsubscribed": "Хабарламалар алыңыз",
+        "notAllowedToJoinCall": "Бұл әңгімеге қосылуға рұқсатыңыз жоқ.",
+        "startedConversation": "әңгіме бастады",
+        "RealTimeCall": "Нақты уақыттағы қоңырау",
+        "SearchByName": "Аты бойынша іздеу"
     },
     "notifications": {
         "*": "{{& message.fields.type}} дегенге {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "{{stream.fields.title}} арқылы жасалған прогресс",
         "Streams\/task\/complete": "Тапсырма аяқталды: {{stream.fields.title}}",
         "Streams\/task\/error": "Қате: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Кіріс хабары"
+        "Streams\/incoming\/*": "{{app}}: Кіріс хабары",
+        "Streams\/relatedTo\/Streams\/call": "{{toTitle}} жаңа қоңырау басталды",
+        "Streams\/relatedTo\/*": "{{toTitle}} жаңа {{relationDisplayType}}",
+        "Streams\/relatedFrom\/*": "{{toTitle}} тізіміне {{relationDisplayType}} ретінде қосылды",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} сізді түсініктемеде атады",
+        "Streams\/call": "{{displayName}} қоңырау шалып жатыр"
     },
     "invite": {
         "messageContent": "{{displayName}} сізді {{inviteUrl}} шақырды",
@@ -59,13 +70,15 @@
             "byEmail": "Электрондық пошта",
             "byText": "Мәтін",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "Егер код сканерленген болса {{ClickOrTap}}"
         },
         "email": {
             "subject": "Hey, мұны тексеріңіз",
             "PleaseVisitLink": "Келесі сілтеме бойынша өтіңіз:",
             "InvitingYou": "Мен сізді {{title}} -ке шақырамын",
-            "HasInvitedYou": "{{displayName}} сізді {{title}} шақырды"
+            "HasInvitedYou": "{{displayName}} сізді {{title}} шақырды",
+            "HasMentionedYou": "{{displayName}} сізді «{{title}}» ішінде атады"
         },
         "sms": {
             "content": "Сізге {{title}} шақырылды. {{url}} түртіңіз."
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Микрофонды қосу",
             "cameraTitle": "Камераны қосу",
-            "cameraAndMicrophoneTitle": "Камераны және микрофонды қосыңыз"
+            "cameraAndMicrophoneTitle": "Камераны және микрофонды қосыңыз",
+            "dialogTitle": "Қосылуда",
+            "microphoneBtn": "Микрофонды қосыңыз",
+            "cameraBtn": "Камераны қосыңыз",
+            "cameraAndMicrophoneBtn": "Камера мен микрофонды қосыңыз"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "<em>{{message.fields.type}}<\/em> хабарламасын {{stream.fields.title}} жіберді"
+        },
+        "text": {
+            "commentedOn": "түсініктеме берді",
+            "in": "ішінде",
+            "body": "{{& url}} ішінде: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "орналастырылды",
+                "byAvatar": "авторы: {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "жаңа {{instructions.fromDisplayType}} бар",
+                "byAvatar": "қосылған {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Шақырылған",
+            "description": "Шақыруға арналған жәшігі"
+        },
+        "Streams\/resource": {
+            "displayType": "Ресурс",
+            "description": "ресурстарға қол жетімділікті басқару және жаңартулар туралы хабарлама жіберу үшін ағын"
+        },
+        "Streams\/task": {
+            "description": "белгілі бір тапсырманың орындалу барысы туралы жаңартуларды алу үшін",
+            "displayType": "Тапсырма"
+        },
+        "Streams\/tasks": {
+            "description": "тапсырмалар категориясы",
+            "displayType": "Тапсырмалар"
+        },
+        "Streams\/experience": {
+            "description": "қоғамдастық мүшелері үшін ортақ тәжірибе",
+            "displayType": "Қауымдастық мүшелеріне ортақ тәжірибе"
+        },
+        "Streams\/greeting": {
+            "description": "пайдаланушы өздерін таныстыра алатын сәлемдесу",
+            "displayType": "Сәлемдесу"
+        },
+        "Streams\/number": {
+            "displayType": "Сан",
+            "description": "математикалық сан"
+        },
+        "Streams\/date": {
+            "displayType": "Күні",
+            "description": "күні"
+        },
+        "Streams\/text": {
+            "displayType": "Мәтін",
+            "description": "мәтін мәтіні"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Мәтін",
+            "description": "кіші мәтін"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Мәтін",
+            "description": "мәтіннің орташа денесі"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Электрондық пошта",
+            "description": "электрондық пошта"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Телефон нөмірі",
+            "description": "телефон нөмірі"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL мекен-жайы",
+            "description": "интернеттегі сілтеме"
+        },
+        "Streams\/image": {
+            "displayType": "Сурет",
+            "description": "көрнекі сурет"
+        },
+        "Streams\/images": {
+            "displayType": "Суреттер галереясы",
+            "description": "суреттер галереясы"
+        },
+        "Streams\/album": {
+            "displayType": "Альбом",
+            "description": "әр түрлі медиа байланысты альбом"
+        },
+        "Streams\/file": {
+            "displayType": "Файл",
+            "description": "жүктелген файл"
+        },
+        "Streams\/audio": {
+            "displayType": "Аудио клип",
+            "description": "аудио клип"
+        },
+        "Streams\/video": {
+            "displayType": "Видеоролик",
+            "description": "бейнеролик"
+        },
+        "Streams\/live": {
+            "displayType": "Тікелей эфир",
+            "description": "тірі аудио немесе видео"
+        },
+        "Streams\/category": {
+            "displayType": "Санат",
+            "description": "басқа ағындарды байланыстыруға болатын категория"
+        },
+        "Streams\/participating": {
+            "displayType": "Қатысушы индекс",
+            "description": "Пайдаланушы қосылған \/ кеткенде ағындар бұған байланысты \/ байланысты емес"
+        },
+        "Streams\/interest": {
+            "displayType": "Қызығушылық",
+            "description": "пайдаланушының белгілі бір тақырыпқа деген қызығушылығын білдіреді"
+        },
+        "Streams\/incoming": {
+            "displayType": "Кіріс",
+            "description": "басқа пайдаланушылар жіберетін хабарлардың тағайындалуы"
+        },
+        "Streams\/chat": {
+            "displayType": "Әңгіме",
+            "description": "пайдаланушылар арасындағы тарих, әңгіме"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Нақты уақыттағы қоңырау",
+            "description": "нақты уақыттағы бейне \/ аудио қоңырау"
         }
     }
 }

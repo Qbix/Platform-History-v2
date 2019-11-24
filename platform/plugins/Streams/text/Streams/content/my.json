@@ -3,8 +3,8 @@
         "NewItemTitle": "နယူး Item"
     },
     "labels": {
-        "Streams/invited": "ငါကိုဖိတ်ကြားပြည်သူ့",
-        "Streams/invitedMe": "ငါ့ကိုရန်ဖိတ်ခေါ်အဘယ်သူသည်"
+        "Streams\/invited": "ငါကိုဖိတ်ကြားပြည်သူ့",
+        "Streams\/invitedMe": "ငါ့ကိုရန်ဖိတ်ခေါ်အဘယ်သူသည်"
     },
     "interests": {
         "Filter": "သငျသညျအဘယျသို့ပျော်မွေ့သလဲ?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "သငျသညျဤချတ်ကိုပိတ်လိုက်ချင်သင်သေချာပါသလား?",
         "closeChatConfirmYes": "ဟုတ်ကဲ့",
         "closeChatConfirmNo": "အဘယ်သူမျှမ",
-        "earlierComments": "အစောပိုင်းကမှတ်ချက်များ"
+        "earlierComments": "အစောပိုင်းကမှတ်ချက်များ",
+        "Subscribed": "အသံတိတ်သတိပေးချက်များ",
+        "Unsubscribed": "အသိပေးချက်များကိုရယူပါ",
+        "notAllowedToJoinCall": "ဤစကားဝိုင်းတွင်သင်ခွင့်ပြုချက်မရှိပါ။",
+        "startedConversation": "စကားစပြောတယ်",
+        "RealTimeCall": "Real Time ခေါ်ဆိုမှု",
+        "SearchByName": "အမည်ဖြင့်ရှာဖွေပါ"
     },
     "notifications": {
         "*": "မက်ဆေ့ခ်ျကို {{& message.fields.type}} {{& stream.fields.title}} မှ",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "တိုးတက်မှုကို {{stream.fields.title}} အပေါ်လုပ်",
         "Streams\/task\/complete": "Task ကိုပြီးစီး: {{stream.fields.title}}",
         "Streams\/task\/error": "{{stream.fields.title}}: စဉ်အတွင်းမှားယွင်းနေသည်",
-        "Streams\/incoming\/*": "{{app}}: ဝင်လာသောမက်ဆေ့ဂ်ျ"
+        "Streams\/incoming\/*": "{{app}}: ဝင်လာသောမက်ဆေ့ဂ်ျ",
+        "Streams\/relatedTo\/Streams\/call": "{{toTitle}} တွင်စတင်ခဲ့သောခေါ်ဆိုမှုအသစ်",
+        "Streams\/relatedTo\/*": "{{၉၉၉}} {{toTitle}} ထဲမှအသစ်",
+        "Streams\/relatedFrom\/*": "{{toTitle}} {{relationDisplayType}} အဖြစ်ထည့်သွင်းခဲ့သည်",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} မှတ်ချက်တစ်ခုတွင်သင့်အားဖော်ပြခဲ့သည်",
+        "Streams\/call": "{{displayName}} မင်းကမင်းကိုခေါ်နေတယ်"
     },
     "invite": {
         "messageContent": "{{displayName}} {{inviteUrl}} ရန်သင့်အားဖိတ်ခေါ်ခဲ့သည်",
@@ -59,13 +70,15 @@
             "byEmail": "အီးမေးလ်ပို့ရန်",
             "byText": "စာသားမ",
             "byFacebook": "Facebook က",
-            "byTwitter": "တွစ်တာ"
+            "byTwitter": "တွစ်တာ",
+            "scannedQR": "{{ClickOrTap}} ကုဒ် scan ဖတ်ခဲ့လျှင်"
         },
         "email": {
             "subject": "ဟေ့, ဒီထုတ်စစ်ဆေး",
             "PleaseVisitLink": "အောက်ပါ link ကိုသွားရောက်ကြည့်ရှုပေးပါ:",
             "InvitingYou": "ငါ {{title}} ရန်သင့်အားဖိတ်ခေါ်နေပါတယ်",
-            "HasInvitedYou": "{{displayName}} {{title}} ရန်သင့်အားဖိတ်ခေါ်ခဲ့သည်"
+            "HasInvitedYou": "{{displayName}} {{title}} ရန်သင့်အားဖိတ်ခေါ်ခဲ့သည်",
+            "HasMentionedYou": "{{displayName}} &quot;{{title}}&quot; တွင်သင့်ကိုဖော်ပြခဲ့သည်"
         },
         "sms": {
             "content": "သငျသညျ {{title}} ရန်ဖိတ်ခေါ်ခဲ့ကြသည်။ ကိုအသာပုတ် ကျေးဇူးပြု. {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "မိုက်ခရိုဖုန်းကို Enable",
             "cameraTitle": "ကင်မရာ Enable",
-            "cameraAndMicrophoneTitle": "ကင်မရာနှင့်မိုက်ခရိုဖုန်းကို Enable"
+            "cameraAndMicrophoneTitle": "ကင်မရာနှင့်မိုက်ခရိုဖုန်းကို Enable",
+            "dialogTitle": "ဆက်သွယ်ခြင်း",
+            "microphoneBtn": "မိုက်ခရိုဖုန်းဖွင့်ပါ",
+            "cameraBtn": "ကင်မရာဖွင့်ပါ",
+            "cameraAndMicrophoneBtn": "ကင်မရာနှင့်မိုက်ကရိုဖုန်းဖွင့်ပါ"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "<em>{{message.fields.type}}<\/em> သတင်းစကားကို {{stream.fields.title}} သို့တင်ခဲ့သည်။"
+        },
+        "text": {
+            "commentedOn": "ရာဝတီ",
+            "in": "in",
+            "body": "{{& url}}: {{& message.fields.content}} တွင်",
+            "relatedFrom": {
+                "hasBeenPostedTo": "မှတင်ထားသည်",
+                "byAvatar": "{{avatar.displayName}} အားဖြင့်"
+            },
+            "relatedTo": {
+                "hasANew": "{{instructions.fromDisplayType}} အသစ်ရှိသည်",
+                "byAvatar": "{{avatar.displayName}} မှထည့်သွင်းခဲ့သည်"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "ဖိတ်ကြားထားသည်",
+            "description": "ဖိတ်စာများအတွက်စာတိုက်ပုံး"
+        },
+        "Streams\/resource": {
+            "displayType": "အရင်းအမြစ်",
+            "description": "အရင်းအမြစ်တစ်ခုအားဝင်ရောက်ခွင့်ကိုစီမံခန့်ခွဲခြင်းနှင့်မွမ်းမံမှုများနှင့်ပတ်သက်သောသတင်းစကားများကိုတင်ခြင်းအတွက်အစီအစဉ်"
+        },
+        "Streams\/task": {
+            "description": "အလုပ်တစ်ခုခု၏တိုးတက်မှုနှင့် ပတ်သတ်၍ နောက်ဆုံးသတင်းများကိုလက်ခံရရှိခြင်းအတွက်ဖြစ်သည်",
+            "displayType": "Task"
+        },
+        "Streams\/tasks": {
+            "description": "တာဝန်များကိုများအတွက်အမျိုးအစား",
+            "displayType": "လုပ်ငန်းတာဝန်များ"
+        },
+        "Streams\/experience": {
+            "description": "အသိုင်းအဝိုင်းအဖွဲ့ဝင်များများအတွက်ဘုံအတွေ့အကြုံ",
+            "displayType": "အသိုင်းအဝိုင်းအဖွဲ့ဝင်များအတွက်ဘုံအတွေ့အကြုံ"
+        },
+        "Streams\/greeting": {
+            "description": "အသုံးပြုသူတစ် ဦး မိမိတို့ကိုယ်ကိုမိတ်ဆက်ပေးနိုင်သည့်နှင့်အတူနှုတ်ခွန်းဆက်သ",
+            "displayType": "မင်္ဂလာပါ"
+        },
+        "Streams\/number": {
+            "displayType": "နံပါတ်",
+            "description": "သင်္ချာနံပါတ်"
+        },
+        "Streams\/date": {
+            "displayType": "ရက်စွဲ",
+            "description": "ရက်စွဲ"
+        },
+        "Streams\/text": {
+            "displayType": "စာသား",
+            "description": "စာသား၏ခန္ဓာကိုယ်"
+        },
+        "Streams\/text\/small": {
+            "displayType": "စာသား",
+            "description": "စာသား၏သေးငယ်တဲ့ခန္ဓာကိုယ်"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "စာသား",
+            "description": "စာသား၏အလတ်စားခန္ဓာကိုယ်"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "အီးမေးလိပ်စာ",
+            "description": "အီးမေးလိပ်စာ"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "ဖုန်းနံပါတ်",
+            "description": "ဖုန်းနံပါတ်"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "ဝဘ်ပေါ်က link"
+        },
+        "Streams\/image": {
+            "displayType": "ပုံ",
+            "description": "အမြင်အာရုံပုံရိပ်"
+        },
+        "Streams\/images": {
+            "displayType": "ပုံပြခန်း",
+            "description": "ပုံများ၏ပြခန်း"
+        },
+        "Streams\/album": {
+            "displayType": "အယ်လ်ဘမ်",
+            "description": "အမျိုးမျိုးသောမီဒီယာနှင့်ဆက်စပ်သောရန်အယ်လ်ဘမ်"
+        },
+        "Streams\/file": {
+            "displayType": "ဖိုင်",
+            "description": "တင်ထားသောဖိုင်"
+        },
+        "Streams\/audio": {
+            "displayType": "အသံကလစ်",
+            "description": "အသံကလစ်"
+        },
+        "Streams\/video": {
+            "displayType": "ဗီဒီယိုကလစ်",
+            "description": "ဗီဒီယိုကလစ်"
+        },
+        "Streams\/live": {
+            "displayType": "တိုက်ရိုက်ထုတ်လွှင့်ခြင်း",
+            "description": "အသံသို့မဟုတ်ဗွီဒီယိုကိုတိုက်ရိုက်ကြည့်ရှုပါ"
+        },
+        "Streams\/category": {
+            "displayType": "အမျိုးအစား",
+            "description": "အခြားစီးဆက်စပ်သောနိုင်သည့်အမျိုးအစား"
+        },
+        "Streams\/participating": {
+            "displayType": "ပါဝင်အညွှန်းကိန်း",
+            "description": "အသုံးပြုသူတစ် ဦး \/ အရွက်လာသောအခါစီးသည်ဤနှင့်ဆက်စပ်မှုမရှိပါ"
+        },
+        "Streams\/interest": {
+            "displayType": "စိတ်ဝင်စားမှု",
+            "description": "အချို့သောခေါင်းစဉ်အတွက်အသုံးပြုသူတစ် ဦး ၏အကျိုးစီးပွားကိုကိုယ်စားပြုသည်"
+        },
+        "Streams\/incoming": {
+            "displayType": "ဝင်ငွေ",
+            "description": "အခြားအသုံးပြုသူများကပို့မက်ဆေ့ခ်ျများအတွက် ဦး တည်ရာ"
+        },
+        "Streams\/chat": {
+            "displayType": "စကားလက်ဆုံပြောဆိုခြင်း",
+            "description": "သမိုင်းနှင့်အတူအသုံးပြုသူများအကြားစကားပြောဆိုမှု"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Time ခေါ်ဆိုမှု",
+            "description": "အမှန်တကယ်အချိန်ဗီဒီယို \/ အသံခေါ်ဆိုမှု"
         }
     }
 }
