@@ -12853,25 +12853,46 @@ Q.onJQuery.add(function ($) {
 
 function _addHandlebarsHelpers() {
 	var Handlebars = root.Handlebars;
+	/**
+	 * Call this in your helpers to parse the args into a useful array
+	 * You must call it like this: Handlebars.prepareArgs.call(this, arguments)
+	 * @method prepareArgs
+	 * @static
+	 * @param {Array} arguments to helper function
+	 * @return {array}
+	 */
+	Handlebars.prepareArgs = function(args) {
+		var arr = Array.prototype.slice.call(args, 0);
+		var last = arr.pop(); // last parameter is for the hash
+		arr.shift(); // the pattern
+		var result = Q.isEmpty(last.hash) ? {} : Q.copy(last.hash);
+		Q.each(arr, function (i, item) {
+			result[i] = item;
+		});
+		return Q.extend(result, this);
+	};
 	if (!Handlebars.helpers.call) {
 		Handlebars.registerHelper('call', function(path) {
 			if (!path) {
 				return "{{call missing method name}}";
 			}
-			var args = Array.prototype.slice.call(
-				arguments, 1, arguments.length-1
-			);
+			var args = Handlebars.prepareArgs.call(this, arguments);
 			var parts = path.split('.');
 			var subparts = parts.slice(0, -1);
+			var i=0;
+			var params = [];
+			do {
+				params.push(i);
+			} while (args[++i]);
 			var f = Q.getObject(parts, this);
 			if (typeof f === 'function') {
-				return f.apply(Q.getObject(subparts, this), args);
+				return f.apply(Q.getObject(subparts, this), params);
 			}
 			var f = Q.getObject(parts);
 			if (typeof f === 'function') {
-				return f.apply(Q.getObject(subparts), args);
+				return f.apply(Q.getObject(subparts), params);
 			}
-			return "{{call '"+path+"' not found}}";
+			return "{{call "+path+" not found}}";
 		});
 	}
 	if (!Handlebars.helpers.tool) {
@@ -12958,10 +12979,8 @@ function _addHandlebarsHelpers() {
 			if (arguments.length < 2) {
 				return '';
 			}
-			var arr = Array.prototype.slice.call(arguments, 0);
-			var last = arr.pop();
-			arr.shift();
-			return expression.interpolate(Q.isEmpty(last.hash) ? arr : last.hash);
+			var args = Handlebars.prepareArgs.call(this, arguments);
+			return expression.interpolate(args);
 		});
 	}
 	if (!Handlebars.helpers.option) {
