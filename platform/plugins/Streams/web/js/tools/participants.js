@@ -154,7 +154,7 @@ function _Streams_participants(options) {
 			if (!$(tool.element).closest('body').length) {
 				return;
 			}
-			var stream = tool.stream = this;
+			tool.stream = this;
 			var i = 0, c = 0;
 			$te.removeClass('Streams_participants_loading');
 			Q.Tool.clear(tool.$avatars[0]);
@@ -215,11 +215,7 @@ function _Streams_participants(options) {
 					state.templates.invite.fields,
 					function (err, html) {
 						if (err) return;
-						var $element = 
-						tool.$invite = $('<div class="Streams_participants_invite" />')
-							.html(html)
-							.insertBefore(tool.$avatars)
-							.addClass('Streams_inviteTrigger');
+						var $element = tool.$invite = $(html).insertBefore(tool.$avatars);
 						var filter = '.Streams_inviteTrigger';
 						$(tool.element)
 						.on(Q.Pointer.fastclick, filter, function () {
@@ -344,8 +340,10 @@ function _Streams_participants(options) {
 );
 
 Q.Template.set('Streams/participants/invite',
-	'<img src="{{& src}}" alt="{{alt}}">'
-	+ '<div class="Streams_invite_label">{{& title}}</div>'
+	'<div class="Streams_participants_invite Streams_inviteTrigger">' +
+	'	<img src="{{& src}}" alt="{{alt}}">' +
+	'	<div class="Streams_invite_label">{{& title}}</div>' +
+	'</div>'
 );
 
 })(Q, jQuery);
