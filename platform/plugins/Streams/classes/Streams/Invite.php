@@ -82,7 +82,7 @@ class Streams_Invite extends Base_Streams_Invite
 			}
 			$userId = $user->id;
 		}
-		if ($stream->participant()) {
+		if (!($stream instanceof Streams_Stream) || $stream->participant()) {
 			return false;
 		}
 		$invites = Streams_Invite::forStream($stream->publisherId, $stream->name, $userId);
