@@ -91,7 +91,15 @@
 	$('#activate_passphrase').val('').focus();
 	
 	Q.addScript('{{Q}}/js/sha1.js');
-	$('form').on('submit', function () {
+	
+	var form = $('form');
+	form.data('onBeforeSubmit', new Q.Event())
+	form.on('submit', function (event) {
+        if (Q.handle(form.data('onBeforeSubmit'), this) === false) {
+            event.stopImmediatePropagation();
+            return false;
+        }
+        
 		var salt = $salt_json;
 		if (!window.CryptoJS || !salt) {
 			return;
@@ -106,7 +114,6 @@
 		} else {
 			$('#Users_login_isHashed').attr('value', 0);
 		}
-		 
 	});
 	
 	// Get the suggestions from YAHOO, if possible
