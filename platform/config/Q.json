@@ -72,7 +72,7 @@
 		},
 		"logs": {
 			"directory": "Q/logs",
-			"removeAfterDays": 10
+			"removeAfterDays": 2
 		},
 		"configFiles": ["Q/config/bootstrap.json"],
 		"install": {
