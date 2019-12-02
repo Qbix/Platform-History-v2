@@ -3257,6 +3257,12 @@ Sp.interpolate = function _String_prototype_interpolate(fields) {
 	}
 	return this.replace(/\{\{([^{}]*)\}\}/g, function (a, b) {
 		var r = Q.getObject(b, fields);
+
+		if (Q.typeOf(r) === 'function') {
+			var context = Q.getObject(b.split('.').slice(0, -1), fields);
+			r = r.apply(context);
+		}
+
 		return (typeof r === 'string' || typeof r === 'number') ? r : a;
 	});
 };
