@@ -1475,7 +1475,6 @@ class Q_Response
 	 */
 	static function isStatic($newValue = null)
 	{
-		return true;
 		if (isset($newValue)) {
 			self::$isStatic = $newValue;
 		}
