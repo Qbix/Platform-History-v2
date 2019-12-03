@@ -619,6 +619,10 @@ class Q_Response
 			$slotName = isset(self::$slotName) ? self::$slotName : '';
 		}
 		self::$scriptDataForSlot[$slotName][$path] = $data;
+		if (self::$captureScriptDataForSession) {
+			self::$sessionScriptData[$path] = $data;
+			self::$sessionScriptDataPaths[] = $path;
+		}
 	}
 
 	/**
@@ -646,6 +650,8 @@ class Q_Response
 			foreach ($slotName as $sn) {
 				$scriptLines[$sn] = self::scriptLinesArray($sn, $without_script_data);
 			}
+			$json = Q::json_encode(self::$sessionScriptDataPaths);
+			$scriptLines[] = "Q.sessionScriptDataPaths = $json;";
 			return $scriptLines;
 		}
 		$scriptLines = isset(self::$scriptLinesForSlot[$slotName])
@@ -1464,22 +1470,6 @@ class Q_Response
 		}
 		return $old_url;
 	}
-	
-	/**
-	 * Use this to determine whether or not we are just trying to
-	 * render a static page, so as not to send any session-specific data
-	 * in places like responseExtras hooks.
-	 * @method isStatic
-	 * @static
-	 * @return {boolean} true if this is a "static page" request
-	 */
-	static function isStatic($newValue = null)
-	{
-		if (isset($newValue)) {
-			self::$isStatic = $newValue;
-		}
-		return self::$isStatic;
-	}
 
 	/**
 	 * Gets or sets whether the response is buffered.
@@ -1498,6 +1488,63 @@ class Q_Response
 			self::$isBuffered = $new_value;
 		}
 		return $old_value;
+	}
+
+	/**
+	 * Used mostly internally, to determine whether or not we should be firing the
+	 * Q/responseExtras handlers, to add information to the loaded web environment.
+	 * This is true when rendering a static page, but false during a regular AJAX call,
+	 * because typically these things are already loaded by then.
+	 * @method processResponseExtras
+	 * @param {string} $hookType can be "before" or "after"
+	 * @static
+	 * @return {boolean} true if the Q/responseExtras was processed
+	 */
+	static function processResponseExtras($hookType)
+	{
+		if (self::$skipResponseExtras or !Q_Request::shouldLoadExtras('response')) {
+			return false;
+		}
+		Q_Valid::nonce(true); // SECURITY: prevent CSRF attacks
+		Q::event('Q/responseExtras', array(), $hookType);
+		return true;
+	}
+	
+	/**
+	 * Used mostly internally, to determine whether or not we should be firing the
+	 * Q/sessionExtras handlers, to add information specific to the user's session.
+	 * This is false when rendering a static page, or just a regular AJAX call.
+	 * @method processSessionExtras
+	 * @param {string} $hookType can be "before" or "after"
+	 * @static
+	 * @return {boolean} true if the Q/sessionExtras was processed
+	 */
+	static function processSessionExtras($hookType)
+	{
+		if (self::$skipSessionExtras or !Q_Request::shouldLoadExtras('session')) {
+			return false;
+		}
+		Q_Valid::nonce(true); // SECURITY: prevent CSRF attacks
+		Q_Response::captureScriptDataForSession(true);
+		Q::event('Q/sessionExtras', array(), $hookType);
+		Q_Response::captureScriptDataForSession(false);
+		return true;
+	}
+	
+	/**
+	 * This is mostly called internally, to start or stop capturing
+	 * scriptData for sessions. Typically it is done in the default
+	 * Q/response handler before and after handling sessionExtras events.
+	 * @method captureScriptDataForSession
+	 * @static
+	 * @return {boolean} true if we arer capturing scriptData for the session
+	 */
+	static function captureScriptDataForSession($newValue = null)
+	{
+		if (isset($newValue)) {
+			self::$captureScriptDataForSession = $newValue;
+		}
+		return self::$captureScriptDataForSession;
 	}
 
 	/**
@@ -1906,7 +1953,13 @@ class Q_Response
 	 */
 	public static $language = "en";
 
-	static protected $isStatic = false;
+	static public $skipResponseExtras = false;
+	static public $skipSessionExtras = false;
+	
+	static protected $captureScriptDataForSession = false;
+	
+	static public $sessionScriptData = array();
+	static public $sessionScriptDataPaths = array();
 }
 
 

@@ -6473,8 +6473,8 @@ Q.action = function _Q_action(uri, fields, options) {
  *  * @param {String} [options.echo] A string to echo back. Used to keep track of responses
  *  * @param {String} [options.method] if set, adds a &Q.method=$method to the querystring
  *  * @param {String|Function} [options.callback] if a string, adds a "&Q.callback="+encodeURIComponent(callback) to the querystring.
- *  * @param {boolean} [options.iframe] if true, tells the server to render the response as HTML in an iframe, which should call the specified callback
- *  * @param {boolean} [options.loadExtras] if true, asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load
+ *  * @param {Boolean} [options.iframe] if true, tells the server to render the response as HTML in an iframe, which should call the specified callback
+ *  * @param {Boolean|String} [options.loadExtras] if true, asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load, can also be "response", "session" or "response,session"
  *  * @param {Array} [options.idPrefixes] optional array of Q_Html::pushIdPrefix values for each slotName
  *  * @param {number} [options.timestamp] whether to include a timestamp (e.g. as a cache-breaker)
  * @return {String|Object}
@@ -6497,8 +6497,7 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
 			: (options.idPrefixes && options.idPrefixes.join(',')))
 		: '';
 	var timestamp = Date.now();
-	var ajax = options.iframe ? 'iframe'
-		: (options.loadExtras ? 'loadExtras' : 'json');
+	var ajax = options.iframe ? 'iframe' : 'json';
 	if (typeof what == 'string') {
 		var p = what.split('#');
 		var what2 = p[0];
@@ -6506,7 +6505,11 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
 			what2 += '/'; // otherwise we will have 301 redirect with trailing slash on most servers
 		}
 		what2 += (what2.indexOf('?') < 0) ? '?' : '&';
-		what2 += encodeURI('Q.ajax='+ajax);
+		what2 += 'Q.ajax=' + encodeURIComponent(ajax);
+		if (options.loadExtras) {
+			var loadExtras = options.loadExtras === true ? 'page' : options.loadExtras;
+			what2 += '&Q.loadExtras=' + encodeURIComponent(loadExtras);
+		}
 		if (options.timestamp) {
 			what2 += encodeURI('&Q.timestamp=')+encodeURIComponent(timestamp);
 		}
@@ -6798,9 +6801,10 @@ Q.request = function (url, slotNames, callback, options) {
 		
 		var method = o.method || 'GET';
 		var verb = method.toUpperCase();
-		var overrides = {
-			loadExtras: !!o.loadExtras
-		};
+		var overrides = {};
+		if (o.loadExtras) {
+			overrides.loadExtras = o.loadExtras;
+		}
 
 		if (verb !== 'GET') {
 			verb = 'POST'; // browsers don't always support other HTTP verbs;
@@ -8123,7 +8127,7 @@ var _latestLoadUrlObjects = {};
  * @param {boolean} [options.ignoreLoadingErrors=false] If true, ignores any errors in loading scripts.
  * @param {boolean} [options.ignoreHash=false] if true, does not navigate to the hash part of the URL in browsers that can support it
  * @param {Object} [options.fields] additional fields to pass via the querystring
- * @param {boolean} [options.loadExtras=false] if true, asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load
+ * @param {Boolean|String} [options.loadExtras=false] if true, asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load. Can also be "request", "session" or "request,session"
  * @param {Number|boolean} [options.timeout=1500] milliseconds to wait for response, before showing cancel button and triggering onTimeout event, if any, passed to the options
  * @param {boolean} [options.quiet=false] if true, allows visual indications that the request is going to take place.
  * @param {String|Array} [options.slotNames] an array of slot names to request and process (default is all slots in Q.info.slotNames)

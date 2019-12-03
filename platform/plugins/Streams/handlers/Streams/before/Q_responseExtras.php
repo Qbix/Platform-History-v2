@@ -38,22 +38,4 @@ function Streams_before_Q_responseExtras()
 		$typeUrls[$type] = $content['url'];
 	}
 	Q_Response::setScriptData('Q.plugins.Streams.urls', $typeUrls);
-	
-	if (Q_Session::id()) {
-		// We have a valid session. Generate a token for observe/neglect resources etc.
-		if ($permissions = Q_Config::get('Streams', 'public', 'permissions', null)) {
-			Users::capability()->addPermission($permissions);
-		}
-	}
-	
-	if (Q_Response::isStatic()) {
-		return;
-	}
-	$user = Users::loggedInUser();
-	if ($user) {
-		Q_Response::setScriptData(
-			'Q.plugins.Users.loggedInUser.displayName', 
-			Streams::displayName($user)
-		);
-	}
 }

@@ -403,28 +403,50 @@ class Q_Request
 	}
 	
 	/**
-	 * Use this to determine whether or not it the request is an "loadExtras"
+	 * Use this to determine whether or not we have a request to also "loadExtras".
+	 * which may be expecting responseExtras or sessionExtras.
 	 * request, and is expecting responseExtras.
-	 * @method isLoadExtras
+	 * @method shouldLoadExtras
+	 * @param {string} [$type=null]
+	 *  You can leave this blank to see if any any extras are expected
+	 *  to be returned with the AJAX response.
+	 *  You can pass "response" or "session" here to see if additionally
+	 *  responseExtras or sessionExtras were requested, respectively.
+	 *  If yes, then the "Q/response" event handler will fire the
+	 *  "Q/responseExtras" and/or "Q/sessionExtras" events, respectively.
 	 * @static
-	 * @return {string} The contents of `Q.loadExtras` if it is present.
+	 * @return {boolean} The contents of `Q.loadExtras` if it is present.
 	 */
-	static function isLoadExtras()
+	static function shouldLoadExtras($type = null)
 	{
 		static $result;
 		if (isset($result)) {
 			return $result;
 		}
+		if (!Q_Request::isAjax()) {
+			// SECURITY: Should load all types of extras, but make sure
+			// unencrypted HTTP or CORS doesn't allow third parties to steal this data.
+			return true;
+		}
 		/**
-		 * @event Q/request/isLoadExtras {before}
+		 * @event Q/request/shouldLoadExtras {before}
 		 * @return {string}
 		 */
-		$result = Q::event('Q/request/isLoadExtras', array(), 'before');
+		$result = Q::event('Q/request/shouldLoadExtras', array(), 'before');
 		if (isset($result)) {
 			return $result;
 		}
-		$result = (Q_Request::special('ajax', false) === 'loadExtras');
-		return $result;
+		$loadExtras = Q_Request::special('loadExtras', false);
+		if (!$loadExtras) {
+			return false;
+		}
+		if ($type) {
+			if (is_string($loadExtras)) {
+				$loadExtras = explode(',', $loadExtras);
+			}
+			return in_array($type, $loadExtras);
+		}
+		return true;
 	}
 	
 	/**

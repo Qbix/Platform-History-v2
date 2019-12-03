@@ -12,6 +12,7 @@
 		"handlersBeforeEvent": {
 			"Q/objects": ["Users/before/Q_objects"],
 			"Q/responseExtras": ["Users/before/Q_responseExtras"],
+			"Q/sessionExtras": ["Users/before/Q_sessionExtras"],
 			"Q/response/notices": ["Users/before/Q_response_notices"],
 			"Q/session/save": ["Users/before/Q_session_save"],
 			"Q/Utils/canWriteToPath": ["Users/before/Q_Utils_canWriteToPath"]
@@ -21,7 +22,7 @@
 			"Q/session/destroy": ["Users/after/Q_session_destroy"],
 			"Q/reroute": ["Users/after/Q_reroute"],
 			"Q/image/save": ["Users/after/Q_image_save"],
-			"Q/responseExtras": ["Users/after/Q_responseExtras"],
+			"Q/sessionExtras": ["Users/after/Q_sessionExtras"],
 			"Users/setEmailAddress": ["Users/after/Users_setEmailAddress"],
 			"Users/setMobileNumber": ["Users/after/Users_setMobileNumber"],
 			"Users/addIdentifier": ["Users/after/Users_addIdentifier"]
