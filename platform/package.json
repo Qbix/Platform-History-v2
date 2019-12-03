@@ -12,6 +12,7 @@
 		"crypto-js": "3.x.x",
 		"express": "3.x.x",
 		"handlebars": "4.1.x",
+		"html-entities": "^1.2.1",
 		"moment-timezone": "0.5.x",
 		"mysql": "2.14.x",
 		"nodemailer": "^4.4.2",
