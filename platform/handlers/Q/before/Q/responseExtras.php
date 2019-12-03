@@ -59,9 +59,11 @@ function Q_before_Q_responseExtras()
 	}
 
 	// Export more variables to inline js
-	$nonce = isset($_SESSION['Q']['nonce']) ? $_SESSION['Q']['nonce'] : null;
-	if ($nonce) {
-		Q_Response::setScriptData('Q.nonce', $nonce);
+	if (!Q_Response::isStatic()) {
+		$nonce = isset($_SESSION['Q']['nonce']) ? $_SESSION['Q']['nonce'] : null;
+		if ($nonce) {
+			Q_Response::setScriptData('Q.nonce', $nonce);
+		}
 	}
 
 	Q_Response::setScriptData('Q.allSlotNames', Q_Response::allSlotNames());

@@ -1464,6 +1464,23 @@ class Q_Response
 		}
 		return $old_url;
 	}
+	
+	/**
+	 * Use this to determine whether or not we are just trying to
+	 * render a static page, so as not to send any session-specific data
+	 * in places like responseExtras hooks.
+	 * @method isStatic
+	 * @static
+	 * @return {boolean} true if this is a "static page" request
+	 */
+	static function isStatic($newValue = null)
+	{
+		return true;
+		if (isset($newValue)) {
+			self::$isStatic = $newValue;
+		}
+		return self::$isStatic;
+	}
 
 	/**
 	 * Gets or sets whether the response is buffered.
@@ -1889,6 +1906,8 @@ class Q_Response
 	 * @type string
 	 */
 	public static $language = "en";
+
+	static protected $isStatic = false;
 }
 
 
