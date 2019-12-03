@@ -190,7 +190,7 @@
 		}
 	},
 	"Streams/user/twitter/xid": {
-		"type": "Streams/text/url",
+		"type": "Streams/text/xid",
 		"title": "Twitter UserID",
 		"icon": "",
 		"platforms": {
