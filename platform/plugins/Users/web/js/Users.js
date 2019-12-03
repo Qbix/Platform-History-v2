@@ -231,7 +231,8 @@
 	};
 
 	/**
-	 * Authenticates this session with a given platform
+	 * Authenticates this session with a given platform,
+	 * if the user was already connected to it.
 	 * @method authenticate
 	 * @param {String} platform Currently only supports "facebook", "ios" or "android"
 	 * @param {Function} onSuccess Called if the user successfully authenticates with the platform, or was already authenticated.

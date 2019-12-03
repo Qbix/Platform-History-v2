@@ -401,6 +401,14 @@ Sp.notifyParticipants = function (event, byUserId, message, dontNotifyObservers,
 
 	Streams.getParticipants(fields.publisherId, fields.name, function (participants) {
 		message.fields.streamType = fields.type;
+		var userIds = Object.keys(participants);
+		var byUserId = message.fields.byUserId;
+		if (byUserId) {
+			var i = userIds.indexOf(byUserId);
+			if (i >= 0) {
+				userIds.splice(i, 1).concat(userIds);
+			}
+		}
 		for (var userId in participants) {
 			var participant = participants[userId];
 			stream.notify(participant, event, message, byUserId, function(err) {
