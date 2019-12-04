@@ -1505,7 +1505,6 @@ class Q_Response
 		if (self::$skipResponseExtras or !Q_Request::shouldLoadExtras('response')) {
 			return false;
 		}
-		Q_Valid::nonce(true); // SECURITY: prevent CSRF attacks
 		Q::event('Q/responseExtras', array(), $hookType);
 		return true;
 	}
