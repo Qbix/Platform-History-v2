@@ -527,10 +527,13 @@ class Q_Uri
 			}
 		} else {
 			foreach ($routes as $pattern => $fields) {
-				if (!isset($fields))
+				if (!isset($fields)) {
 					continue;
-				$url = $this->matchRoute($pattern, $fields, $controller);
-				break;
+				}
+
+				if ($url = $this->matchRoute($pattern, $fields, $controller)) {
+					break;
+				}
 			}
 		}
 		if ($url) {
