@@ -102,5 +102,11 @@
         "noLongerUsing": "Nu mai sunteți conectat la {{platform}} as",
         "doAuth": "Conectați-vă cu acest cont",
         "doSwitch": "Treceți la acest cont"
+    },
+    "roles": {
+        "Owner": "Proprietar",
+        "Admin": "admin",
+        "Member": "Membru",
+        "Guest": "Oaspete"
     }
 }

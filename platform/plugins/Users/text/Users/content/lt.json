@@ -102,5 +102,11 @@
         "noLongerUsing": "Jūs nebesate prisijungę prie {{platform}} kaip",
         "doAuth": "Prisijunkite naudodami šią sąskaitą",
         "doSwitch": "Perjungti į šią sąskaitą"
+    },
+    "roles": {
+        "Owner": "Savininkas",
+        "Admin": "Administratorius",
+        "Member": "Narys",
+        "Guest": "Svečias"
     }
 }

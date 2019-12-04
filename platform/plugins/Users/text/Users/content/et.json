@@ -102,5 +102,11 @@
         "noLongerUsing": "Te pole enam kasutajaga {{platform}} ühendatud",
         "doAuth": "Logi selle kontoga sisse",
         "doSwitch": "Lülitu sellele kontole"
+    },
+    "roles": {
+        "Owner": "Omanik",
+        "Admin": "Administraator",
+        "Member": "Liige",
+        "Guest": "Külaline"
     }
 }

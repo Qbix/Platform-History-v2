@@ -102,5 +102,11 @@
         "noLongerUsing": "Níl tú ceangailte le {{platform}} a thuilleadh",
         "doAuth": "Logáil isteach leis an gcuntas seo",
         "doSwitch": "Téigh go dtí an cuntas seo"
+    },
+    "roles": {
+        "Owner": "Úinéir",
+        "Admin": "Riarachán",
+        "Member": "Comhalta",
+        "Guest": "Aoi"
     }
 }

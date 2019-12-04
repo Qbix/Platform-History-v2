@@ -102,5 +102,11 @@
         "noLongerUsing": "Haujaunganishwa tena na {{platform}} kama",
         "doAuth": "Ingia na akaunti hii",
         "doSwitch": "Badilisha kwenye akaunti hii"
+    },
+    "roles": {
+        "Owner": "Mmiliki",
+        "Admin": "Usimamizi",
+        "Member": "Mwanachama",
+        "Guest": "Mgeni"
     }
 }

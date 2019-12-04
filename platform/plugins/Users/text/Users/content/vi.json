@@ -102,5 +102,11 @@
         "noLongerUsing": "Bạn không còn kết nối với {{platform}} như",
         "doAuth": "Đăng nhập bằng tài khoản này",
         "doSwitch": "Chuyển sang tài khoản này"
+    },
+    "roles": {
+        "Owner": "Chủ nhân",
+        "Admin": "quản trị viên",
+        "Member": "Hội viên",
+        "Guest": "Khách"
     }
 }

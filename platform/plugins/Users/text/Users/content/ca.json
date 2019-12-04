@@ -102,5 +102,11 @@
         "noLongerUsing": "Ja no esteu connectats a {{platform}}",
         "doAuth": "Inicieu la sessió amb aquest compte",
         "doSwitch": "Canvia a aquest compte"
+    },
+    "roles": {
+        "Owner": "Propietari",
+        "Admin": "Administrador",
+        "Member": "Membre",
+        "Guest": "Convidat"
     }
 }

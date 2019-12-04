@@ -102,5 +102,11 @@
         "noLongerUsing": "Xa non estás conectado a {{platform}} como",
         "doAuth": "Inicie sesión con esta conta",
         "doSwitch": "Cambia a esta conta"
+    },
+    "roles": {
+        "Owner": "Propietario",
+        "Admin": "Administrador",
+        "Member": "Membro",
+        "Guest": "Convidado"
     }
 }
