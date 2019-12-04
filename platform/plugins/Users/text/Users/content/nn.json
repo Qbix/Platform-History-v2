@@ -102,5 +102,11 @@
         "noLongerUsing": "Du er ikke lenger koblet til {{platform}} som",
         "doAuth": "Logg inn med denne kontoen",
         "doSwitch": "Bytt til denne kontoen"
+    },
+    "roles": {
+        "Owner": "Eieren",
+        "Admin": "admin",
+        "Member": "Medlem",
+        "Guest": "Gjest"
     }
 }

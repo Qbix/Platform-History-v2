@@ -102,5 +102,11 @@
         "noLongerUsing": "Nie jesteś już połączony z {{platform}} as",
         "doAuth": "Zaloguj się za pomocą tego konta",
         "doSwitch": "Przełącz się na to konto"
+    },
+    "roles": {
+        "Owner": "Właściciel",
+        "Admin": "Administrator",
+        "Member": "Członek",
+        "Guest": "Gość"
     }
 }

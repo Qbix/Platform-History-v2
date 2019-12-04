@@ -102,5 +102,11 @@
         "noLongerUsing": "Hindi ka na nakakonekta sa {{platform}} bilang",
         "doAuth": "Mag-log in gamit ang account na ito",
         "doSwitch": "Lumipat sa account na ito"
+    },
+    "roles": {
+        "Owner": "May-ari",
+        "Admin": "Admin",
+        "Member": "Miyembro",
+        "Guest": "Bisita"
     }
 }

@@ -1368,6 +1368,52 @@ class Q_Utils
 				break;
 		}
 	}
+	
+	/**
+	 * Take a URL that starts with baseURL and normalize it in a consistent way
+	 * to something that can be stored as a filename.
+	 * @method normalizeUrlToRelativeFilename
+	 * @param {string} $url
+	 * @param {string} $suffix such as ".html"
+	 * @static
+	 * @param {string} $filename A relative filename that can be stored or appended to
+	 */
+	static function normalizeUrlToRelativeFilename ($url, $suffix, $baseUrl = null)
+	{
+		if (!$baseUrl) {
+			$baseUrl = Q_Request::baseUrl(true, true);
+		}
+		if (!Q::startsWith($url, $baseUrl)) {
+			return null;
+		}
+		$tail = substr($url, strlen($baseUrl) + 1);
+		$normalized = Q_Utils::normalize($tail, '_', '/[^\\/A-Za-z0-9-]+/', null, 200, true);
+		return str_replace('/', DS, $normalized) . $suffix;
+	}
+	
+	/**
+	 * Returns the cartesian product composed of all combinations of values
+	 * from an array of arrrays.
+	 * @method normalizePath
+	 * @static
+	 * @param {array} $input an array of arrays
+	 * @return {array} The cartesian product
+	 */
+	static function cartesianProduct($input)
+	{
+	    $result = array(array());
+	    foreach ($input as $key => $values) {
+	        $append = array();
+	        foreach($result as $product) {
+	            foreach($values as $item) {
+	                $product[$key] = $item;
+	                $append[] = $product;
+	            }
+	        }
+	        $result = $append;
+	    }
+	    return $result;
+	}
 
 	protected static $urand;
 	protected static $sockets = array();

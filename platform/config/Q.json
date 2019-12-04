@@ -4,6 +4,7 @@
 		"handlersBeforeEvent": {
 			"Q/reroute": ["Q/before/Q_reroute"],
 			"Q/responseExtras": ["Q/before/Q/responseExtras"],
+			"Q/sessionExtras": ["Q/before/Q/sessionExtras"],
 			"Q/tool/render": ["Q/before/Q/tool/render"],
 			"Q/view": ["Q/before/Q/view"],
 			"Q/autoload": ["Q/before/Q/autoload"]

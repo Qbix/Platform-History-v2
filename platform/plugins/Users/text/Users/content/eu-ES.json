@@ -102,5 +102,11 @@
         "noLongerUsing": "Ez zara {{platform}} (r) ekin konektatuta",
         "doAuth": "Hasi saioa kontu honekin",
         "doSwitch": "Aldatu kontu honetara"
+    },
+    "roles": {
+        "Owner": "Jabea",
+        "Admin": "admin",
+        "Member": "kidea",
+        "Guest": "Gonbidatua"
     }
 }

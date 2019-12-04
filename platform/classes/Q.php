@@ -1448,7 +1448,12 @@ class Q
 		if (isset($max_levels)) {
 			self::$var_dump_max_levels = $max_levels;
 		}
-		self::do_dump($var, $label . $vname, null, null, $as_text);
+		try {
+			self::do_dump($var, $label . $vname, null, null, $as_text);
+		} catch (Exception $e) {
+			// maybe can't traverse an already closed generator, or something else
+			// just continue
+		}
 		if (isset($max_levels)) {
 			self::$var_dump_max_levels = $current_levels;
 		}

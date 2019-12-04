@@ -102,5 +102,11 @@
         "noLongerUsing": "Artıq {{platform}} ilə əlaqəniz yoxdur",
         "doAuth": "Bu hesabla daxil olun",
         "doSwitch": "Bu hesaba keçin"
+    },
+    "roles": {
+        "Owner": "Sahib",
+        "Admin": "Admin",
+        "Member": "Üzv",
+        "Guest": "Qonaq"
     }
 }

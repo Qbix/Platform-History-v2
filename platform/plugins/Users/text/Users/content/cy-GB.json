@@ -102,5 +102,11 @@
         "noLongerUsing": "Nid ydych bellach wedi&#39;ch cysylltu â {{platform}} fel",
         "doAuth": "Mewngofnodi gyda&#39;r cyfrif hwn",
         "doSwitch": "Newid i&#39;r cyfrif hwn"
+    },
+    "roles": {
+        "Owner": "Perchennog",
+        "Admin": "Gweinyddiaeth",
+        "Member": "Aelod",
+        "Guest": "Guest"
     }
 }

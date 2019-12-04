@@ -102,5 +102,11 @@
         "noLongerUsing": "Et ole enää yhteydessä {{platform}} -yritykseen",
         "doAuth": "Kirjaudu sisään tällä tilillä",
         "doSwitch": "Vaihda tälle tilille"
+    },
+    "roles": {
+        "Owner": "Omistaja",
+        "Admin": "admin",
+        "Member": "Jäsen",
+        "Guest": "vieras"
     }
 }

@@ -102,5 +102,11 @@
         "noLongerUsing": "Þú ert ekki lengur tengdur {{platform}} sem",
         "doAuth": "Skráðu þig inn með þessum reikningi",
         "doSwitch": "Skiptu yfir í þennan reikning"
+    },
+    "roles": {
+        "Owner": "Eigandi",
+        "Admin": "Stjórnandi",
+        "Member": "Meðlimur",
+        "Guest": "Gestur"
     }
 }

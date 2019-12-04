@@ -2338,7 +2338,7 @@
 			Q.extend(Q.text.Users, 10, text);
 		});
 		if (Q.Users.loggedInUser
-			&& Q.typeOf(Q.Users.loggedInUser) !== 'Q.Users.User') {
+		&& Q.typeOf(Q.Users.loggedInUser) !== 'Q.Users.User') {
 			Q.Users.loggedInUser = new Users.User(Q.Users.loggedInUser);
 			Q.nonce = Q.cookie('Q_nonce');
 		}
@@ -2422,9 +2422,9 @@
 	Q.request.options.onProcessed.set(function (err, response) {
 		Q.nonce = Q.cookie('Q_nonce');
 		if (Users.lastSeenNonce !== Q.nonce
-			&& !Users.login.occurring
-			&& !Users.authenticate.occurring
-			&& !Users.logout.occurring) {
+		&& !Users.login.occurring
+		&& !Users.authenticate.occurring
+		&& !Users.logout.occurring) {
 			Q.nonce = Q.cookie('Q_nonce');
 			Q.req("Users/login", 'data', function (err, res) {
 				Users.lastSeenNonce = Q.nonce = Q.cookie('Q_nonce');
@@ -2463,6 +2463,12 @@
 			Q.Users.onLoginLost.handle();
 			Q.Users.loggedInUser = null;
 			Q.Users.roles = {};
+			Q.each(Q.sessionScriptDataPaths, function (i, path) {
+				if (Q.getObject(path)) {
+					Q.setObject(path, null);
+				}
+			});
+			Q.Users.hinted = [];
 		}
 	}, 'Users');
 

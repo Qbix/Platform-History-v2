@@ -102,5 +102,11 @@
         "noLongerUsing": "Sie sind nicht mehr mit {{platform}} verbunden als",
         "doAuth": "Melden Sie sich mit diesem Konto an",
         "doSwitch": "Wechseln Sie zu diesem Konto"
+    },
+    "roles": {
+        "Owner": "Inhaber",
+        "Admin": "Administrator",
+        "Member": "Mitglied",
+        "Guest": "Gast"
     }
 }

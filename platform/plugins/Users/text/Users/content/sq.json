@@ -102,5 +102,11 @@
         "noLongerUsing": "Ju nuk jeni më të lidhur me 99 999}} si",
         "doAuth": "Identifikohu me këtë llogari",
         "doSwitch": "Kalo te kjo llogari"
+    },
+    "roles": {
+        "Owner": "pronar",
+        "Admin": "admin",
+        "Member": "anëtar",
+        "Guest": "mysafir"
     }
 }
