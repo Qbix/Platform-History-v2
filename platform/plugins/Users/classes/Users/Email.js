@@ -82,10 +82,16 @@ Users_Email.sendMessage = function (to, subject, view, fields, options, callback
 		subject = Q.getObject(subject[1], text);
 	}
 
-	subject = Q.Handlebars.renderSource(subject, fields);
+	var htmlEntities = require('html-entities').AllHtmlEntities;
+	var entities = new htmlEntities();
+
+	subject = entities.decode(Q.Handlebars.renderSource(subject, fields));
 	var body = options.isSource
 		? Q.Handlebars.renderSource(view, fields)
 		: Q.view(view, fields, { language: options.language });
+	if (!options.html) {
+		body = entities.decode(body);
+	}
 
 	var mailOptions = {
 		from: from[1]+' <'+from[0]+'>',
