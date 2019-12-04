@@ -1523,7 +1523,9 @@ class Q_Response
 		if (self::$skipSessionExtras or !Q_Request::shouldLoadExtras('session')) {
 			return false;
 		}
-		Q_Valid::nonce(true); // SECURITY: prevent CSRF attacks
+		if (Q_Request::isAjax()) {
+			Q_Valid::nonce(true); // SECURITY: prevent CSRF attacks
+		}
 		Q_Response::captureScriptDataForSession(true);
 		Q::event('Q/sessionExtras', array(), $hookType);
 		Q_Response::captureScriptDataForSession(false);
