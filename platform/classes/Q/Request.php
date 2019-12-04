@@ -423,11 +423,6 @@ class Q_Request
 		if (isset($result)) {
 			return $result;
 		}
-		if (!Q_Request::isAjax()) {
-			// SECURITY: Should load all types of extras, but make sure
-			// unencrypted HTTP or CORS doesn't allow third parties to steal this data.
-			return true;
-		}
 		/**
 		 * @event Q/request/shouldLoadExtras {before}
 		 * @return {string}
@@ -438,7 +433,14 @@ class Q_Request
 		}
 		$loadExtras = Q_Request::special('loadExtras', false);
 		if (!$loadExtras) {
-			return false;
+			if (!Q_Request::isAjax()) {
+				// SECURITY: Should load all types of extras, but make sure
+				// unencrypted HTTP or CORS doesn't allow third parties to steal this data.
+				return true;
+			} else {
+				// Don't load any extras
+				return false;	
+			}
 		}
 		if ($type) {
 			if (is_string($loadExtras)) {
