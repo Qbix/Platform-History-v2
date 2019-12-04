@@ -1368,6 +1368,30 @@ class Q_Utils
 				break;
 		}
 	}
+	
+	/**
+	 * Returns the cartesian product composed of all combinations of values
+	 * from an array of arrrays.
+	 * @method normalizePath
+	 * @static
+	 * @param {array} $input an array of arrays
+	 * @return {array} The cartesian product
+	 */
+	static function cartesianProduct($input)
+	{
+	    $result = array(array());
+	    foreach ($input as $key => $values) {
+	        $append = array();
+	        foreach($result as $product) {
+	            foreach($values as $item) {
+	                $product[$key] = $item;
+	                $append[] = $product;
+	            }
+	        }
+	        $result = $append;
+	    }
+	    return $result;
+	}
 
 	protected static $urand;
 	protected static $sockets = array();

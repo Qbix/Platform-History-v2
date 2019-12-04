@@ -523,36 +523,36 @@ class Q_Uri
 			if (!isset($routes[$route])) {
 				$url = null;
 			} else {
-				return self::matchRoute($route, $routes[$route], $controller);
+				$url = self::matchRoute($route, $routes[$route], $controller);
 			}
 		} else {
 			foreach ($routes as $pattern => $fields) {
 				if (!isset($fields))
 					continue;
 				$url = $this->matchRoute($pattern, $fields, $controller);
-				if ($url) {
-					if ($this->querystring) {
-						$url .= '?'.$this->querystring;
+				break;
+			}
+		}
+		if ($url) {
+			if ($this->querystring) {
+				$url .= '?'.$this->querystring;
+			}
+			if ($this->anchorstring) {
+				$url .= '#'.$this->anchorstring;
+			}
+			$suffix = self::suffix();
+			if (is_string($suffix)) {
+				$url .= self::suffix();
+			} else {
+				// aggregate suffixes
+				foreach ($suffix as $k => $v) {
+					$k_len = strlen($k);
+					if (substr($url, 0, $k_len) === $k) {
+						$url .= $v;
 					}
-					if ($this->anchorstring) {
-						$url .= '#'.$this->anchorstring;
-					}
-					$suffix = self::suffix();
-					if (is_string($suffix)) {
-						$url .= self::suffix();
-					} else {
-						// aggregate suffixes
-						foreach ($suffix as $k => $v) {
-							$k_len = strlen($k);
-							if (substr($url, 0, $k_len) === $k) {
-								$url .= $v;
-							}
-						}
-					}
-					$route = $pattern;
-					break;
 				}
 			}
+			$route = $pattern;
 		}
 		
 		/**
@@ -1007,9 +1007,11 @@ class Q_Uri
 		$u = new Q_Uri();
 		if (isset($source['?'])) {
 			$u->querystring = $source['?'];
+			unset($source['?']);
 		}
 		if (isset($source['#'])) {
 			$u->anchorstring = $source['#'];
+			unset($source['#']);
 		}
 		$u->fields = $source;
 		return $u;
