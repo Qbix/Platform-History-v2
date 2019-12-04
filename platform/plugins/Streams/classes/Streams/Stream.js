@@ -401,14 +401,14 @@ Sp.notifyParticipants = function (event, byUserId, message, dontNotifyObservers,
 
 	Streams.getParticipants(fields.publisherId, fields.name, function (participants) {
 		message.fields.streamType = fields.type;
-		var userIds = Object.keys(participants);
+		var userIds = Object.keys(participants) || [];
 		if (byUserId) {
 			var index = userIds.indexOf(byUserId);
 			if (index > 0) {
 				userIds = userIds.splice(index, 1).concat(userIds);
 			}
 		}
-		for (var i in userIds) {
+		for (var i = 0; i < userIds.length; i++) {
 			var userId = userIds[i];
 			var participant = participants[userId];
 			stream.notify(participant, event, message, byUserId, function(err) {
