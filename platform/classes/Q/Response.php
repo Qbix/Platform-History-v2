@@ -620,8 +620,8 @@ class Q_Response
 		}
 		self::$scriptDataForSlot[$slotName][$path] = $data;
 		if (self::$captureScriptDataForSession) {
-			self::$sessionScriptData[$path] = $data;
-			self::$sessionScriptDataPaths[] = $path;
+			self::$sessionData[$path] = $data;
+			self::$sessionDataPaths[] = $path;
 		}
 	}
 
@@ -650,8 +650,8 @@ class Q_Response
 			foreach ($slotName as $sn) {
 				$scriptLines[$sn] = self::scriptLinesArray($sn, $without_script_data);
 			}
-			$json = Q::json_encode(self::$sessionScriptDataPaths);
-			$scriptLines[] = "Q.sessionScriptDataPaths = $json;";
+			$json = Q::json_encode(self::$sessionDataPaths);
+			$scriptLines[] = "Q.Session.paths = $json;";
 			return $scriptLines;
 		}
 		$scriptLines = isset(self::$scriptLinesForSlot[$slotName])
@@ -1959,8 +1959,8 @@ class Q_Response
 	
 	static protected $captureScriptDataForSession = false;
 	
-	static public $sessionScriptData = array();
-	static public $sessionScriptDataPaths = array();
+	static public $sessionData = array();
+	static public $sessionDataPaths = array();
 }
 
 

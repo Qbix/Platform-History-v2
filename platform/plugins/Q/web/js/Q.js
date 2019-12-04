@@ -4991,20 +4991,28 @@ Q.Links = {
 	}
 };
 
-Q.Session = function _Q_Session() {
-	// TODO: Set a timer for when session expires?
-	return {};
-};
-
 /**
  * A Q.Session object represents a session, and implements things like an "expiring" dialog
  * @class Q.Session
  * @constructor
  */
 
-Q.Session = function _Q_Session() {
-	// TODO: Set a timer for when session expires?
-	return {};
+Q.Session = {
+	paths: [],
+	/**
+	 * Clears the various objects that were set specifically
+	 * for this user session.
+	 * @static
+	 * @method clear
+	 */
+	clear: function () {
+		Q.each(Q.Session.paths, function (i, path) {
+			if (Q.getObject(path)) {
+				Q.setObject(path, null);
+			}
+		});
+		return true;
+	}
 };
 
 /**
@@ -8361,6 +8369,9 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 							Q.setObject(k, v);
 						});
 					});
+				}
+				if (response.sessionDataPaths) {
+					Q.Session.paths = response.sessionDataPaths;
 				}
 				if (response.scriptLines) {
 					for (i in response.scriptLines) {

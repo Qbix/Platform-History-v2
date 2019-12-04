@@ -79,7 +79,7 @@ foreach ($config as $suffix => $info) {
 			$url = Q_Uri::url($fields, $route);
 			$urlToFetch = Q_Uri::fixUrl("$url?Q.loadExtras=response");
 			$body = Q_Utils::get($urlToFetch);
-			$filename = $out . DS . Q_Utils::normalizeUrlToRelativeFilename($url, $suffix, $baseUrl);
+			$filename = $out . DS . Q_Utils::normalizeUrlToPath($url, $suffix, $baseUrl);
 			$dirname = dirname($filename);
 			if (!file_exists($dirname)) {
 				@mkdir($dirname);

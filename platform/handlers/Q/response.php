@@ -120,11 +120,10 @@ function Q_response($params)
 					if ($temp) $to_encode['scriptData'][$slotName] = $temp;
 					$temp = Q_Response::templateData($slotName);
 					if ($temp) $to_encode['templates'][$slotName] = $temp;
-					$to_encode['sessionScriptDataPaths'] = 
-						!empty(Q_Response::$sessionScriptDataPaths)
-						? Q_Response::$sessionScriptDataPaths
+					$to_encode['sessionDataPaths'] = 
+						!empty(Q_Response::$sessionDataPaths)
+						? Q_Response::$sessionDataPaths
 						: array();
-					
 				}
 			} else {
 				$to_encode['slots'] = Q_Response::slots(true);

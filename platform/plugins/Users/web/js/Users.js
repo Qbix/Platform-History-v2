@@ -2463,11 +2463,7 @@
 			Q.Users.onLoginLost.handle();
 			Q.Users.loggedInUser = null;
 			Q.Users.roles = {};
-			Q.each(Q.sessionScriptDataPaths, function (i, path) {
-				if (Q.getObject(path)) {
-					Q.setObject(path, null);
-				}
-			});
+			Q.Session.clear();
 			Q.Users.hinted = [];
 		}
 	}, 'Users');
@@ -2478,6 +2474,7 @@
 		ddc.className = ddc.className.replace(' Users_loggedOut', '') + ' Users_loggedIn';
 	}, 'Users');
 	Users.onLogout = new Q.Event(function () {
+		Q.Session.clear();
 		ddc.className = ddc.className.replace(' Users_loggedIn', '') + ' Users_loggedOut';
 	});
 	Users.onLoginLost = new Q.Event(function () {
