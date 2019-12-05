@@ -18,7 +18,8 @@
         "GetStarted": "Ufänken",
         "Authorize": "Autorisatioun",
         "TermsLabel": "Ech hunn gelies an eens <br> fir de {{link}}",
-        "TermsTitle": "Konditiounen"
+        "TermsTitle": "Konditiounen",
+        "mustAgree": "Als éischt musst Dir d&#39;Konditioune averstane sinn."
     },
     "register": {
         "TermsLabel": "Ech akzeptéieren d&#39;{{link}}",
@@ -31,11 +32,18 @@
         "no": "Nee",
         "WelcomePleaseVerifyEmail": "Wëllkomm! Gitt weg Är E-Mailadress.",
         "WelcomeVerifyEmail": "Wëllkomm! Äert E-Mailadress verifizéiert.",
-        "ForgetPass": "Hey, hutt Dir Äert Passphrase vergiess?"
+        "ForgetPass": "Hey, hutt Dir Äert Passphrase vergiess?",
+        "PassphraseSaved": "Äre Passwuert ass gespäichert.",
+        "IdentifierActivated": "Är {{type}} gouf ageschalt.",
+        "CompletedActivation": "Dir hutt d&#39;Benotzeraktivéierung ofgeschloss.",
+        "CompletedActivationLogIn": "Dir hutt d&#39;Benotzeraktivéierung ofgeschloss. Probéiert elo unzemellen."
     },
     "contacts": {
         "dialog": {
-            "title": "Kontakt wielen"
+            "title": "Kontakt wielen",
+            "CreateAccount": "+ Neie Kontakt",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create net fonnt",
+            "SearchByName": "Sich mam Numm"
         },
         "select": {
             "title": "Wielt Äre Kontakt vun {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Wielt we g",
-        "inviteUser": "Invitéiere Benotzer"
+        "inviteUser": "Invitéiere Benotzer",
+        "selectRole": "Wielt Roll",
+        "inviteRole": "Invitéieren {{role}}"
     },
-    "invalidLanguageSelected": "Ongülteg Sprooch ausgewielt"
+    "invalidLanguageSelected": "Ongülteg Sprooch ausgewielt",
+    "login": {
+        "title": "Wëllkomm",
+        "directions": "Erstellt e Konto, oder loggt Iech un.",
+        "directionsNoRegister": "Loggt Iech an wann Dir e Kont hutt.",
+        "goButton": "Gitt",
+        "passphrase": "Gitt ärt Passwuert an:",
+        "loginButton": "Ufänken",
+        "registerButton": "Ufänken",
+        "resendButton": "Schéckt Aktivéierungs Noriicht",
+        "forgot": "Hutt Dir et vergiess?",
+        "resendConfirm": "Wëllt Dir e Message schécken fir Är Passwuert zréckzesetzen?",
+        "resendSuccess": "Kuckt fir e Message fir Är Passwuert zréckzesetzen",
+        "resendClose": "Zoumaachen",
+        "noPassphrase": "Ier Dir kënnt aloggen, musst Dir e Passphrase astellen andeems Dir op de Link an Ärer Aktivéierungs Noriicht klickt.",
+        "notVerified": "Dir musst Iech selwer en Aktivéierungsmessage schécken fir Iech unzemellen.",
+        "emailExists": "Hutt Dir probéiert scho mat dëser E-Mail unzemellen? Wa jo, préift Är Inbox fir Äre Kont z&#39;aktivéieren. <a href='#resend' class='Q_button Users_activation_resend'>Klickt fir de Message erëm ze schécken<\/a>",
+        "mobileExists": "Hutt Dir probéiert mat dëser Handysnummer unzemellen? Wann jo, kontrolléiert Är SMS fir Äre Kont z&#39;aktivéieren. <a href='#resend' class='Q_button Users_activation_resend'>Klickt fir de Message erëm ze schécken<\/a>",
+        "usingOther": "oder Dir kënnt",
+        "prompt": "Wielt e Benotzernumm:",
+        "newUser": "oder erstellt en neie Kont",
+        "placeholders": {
+            "identifier": "Ären Handy # oder E-Mail",
+            "mobile": "Gitt Ären Handy an",
+            "email": "Gitt är E-Mail Adress",
+            "username": "Benotzernumm"
+        },
+        "confirmTerms": "Akzeptéieren Dir d&#39;Konditioune vum Service?",
+        "facebookNoEmail": "Äre Facebook Kont fehlt eng bestätegt E-mail Adress. Logt Iech einfach op déi gebierteg Manéier.",
+        "picTooltip": "Dir kënnt dëst Bild méi spéit änneren"
+    },
+    "setIdentifier": {
+        "title": "Füügt e Wee fir ze aloggen",
+        "sendMessage": "Schéckt Aktivéierungs Noriicht",
+        "placeholders": {
+            "identifier": "gitt Ären Handy # oder E-Mail un",
+            "mobile": "gitt Är Handysnummer",
+            "email": "Gitt är E-Mail Adress",
+            "username": "Benotzernumm"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Kont",
+        "areUsing": "Dir benotzt {{platform}} als",
+        "noLongerUsing": "Dir sidd net méi mat {{platform}} ugeschloss als",
+        "doAuth": "Loggt Iech mat dësem Kont un",
+        "doSwitch": "Schalt op dëse Kont"
+    }
 }

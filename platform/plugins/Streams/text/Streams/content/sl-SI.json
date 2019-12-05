@@ -241,7 +241,7 @@
                 "byAvatar": "do {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "ima novo {{message.instructions.fromDisplayType}}",
+                "hasANew": "ima novo {{instructions.fromDisplayType}}",
                 "byAvatar": "dodal {{avatar.displayName}}"
             }
         }

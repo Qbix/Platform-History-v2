@@ -18,7 +18,8 @@
         "GetStarted": "Qala",
         "Authorize": "Lumella",
         "TermsLabel": "Ke balile mme kea lumela <br> ho {{link}}",
-        "TermsTitle": "Melao"
+        "TermsTitle": "Melao",
+        "mustAgree": "Pele, o tlameha ho lumellana le lipehelo."
     },
     "register": {
         "TermsLabel": "Ke amohela {{link}}",
@@ -31,11 +32,18 @@
         "no": "Che",
         "WelcomePleaseVerifyEmail": "Amoheloa! Ka kopo netefatsa aterese ea hau ea imeile.",
         "WelcomeVerifyEmail": "Amoheloa! Netefatsa aterese ea hau ea imeile.",
-        "ForgetPass": "Hey, o kile oa lebala molaetsa oa hau?"
+        "ForgetPass": "Hey, o kile oa lebala molaetsa oa hau?",
+        "PassphraseSaved": "Polelo ea hau ea ho feta e bolokiloe.",
+        "IdentifierActivated": "{{type}} ea hau e sebelisitsoe ts&#39;ebetso.",
+        "CompletedActivation": "U qetile ts&#39;ebetso ea mosebelisi.",
+        "CompletedActivationLogIn": "U qetile ts&#39;ebetso ea mosebelisi. Leka ho kena hona joale."
     },
     "contacts": {
         "dialog": {
-            "title": "Khetha moqoqo"
+            "title": "Khetha moqoqo",
+            "CreateAccount": "+ Khokahano e ncha",
+            "CreateAccountNotFound": "Q.Esers.Cordova.UI.create ha e fumanoe",
+            "SearchByName": "Batla ka lebitso"
         },
         "select": {
             "title": "Khetha puisano ea {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Ka kopo khetha lebokose.",
-        "inviteUser": "Mema User"
+        "inviteUser": "Mema User",
+        "selectRole": "Khetha Karolo",
+        "inviteRole": "Mema {{role}}"
     },
-    "invalidLanguageSelected": "Puo e sa nepahaleng e khethiloeng"
+    "invalidLanguageSelected": "Puo e sa nepahaleng e khethiloeng",
+    "login": {
+        "title": "Rea u amohela",
+        "directions": "Theha ak&#39;haonte, kapa u kene.",
+        "directionsNoRegister": "Kena haeba u na le ak&#39;haonte.",
+        "goButton": "Eya",
+        "passphrase": "Kenya polelo ea hau ea ho feta:",
+        "loginButton": "Qala",
+        "registerButton": "Qala",
+        "resendButton": "Romella molaetsa o sebetsang",
+        "forgot": "U se tšoaretse?",
+        "resendConfirm": "Na u batla ho romella molaetsa ho etsa poleloana ea hau ea &#39;nete?",
+        "resendSuccess": "Lekola molaetsa hore o hlophisetse polelo ea hau ea mantsoe",
+        "resendClose": "Haufi",
+        "noPassphrase": "Pele o kena, o lokela ho ipehela poleloana ea ho feta ka ho tobetsa sehokelo molaetseng oa hau oa ts&#39;ebetso.",
+        "notVerified": "U tlameha ho it romella molaetsa oa ts&#39;ebetso e le hore u kene.",
+        "emailExists": "Na u kile oa leka ho ingolisa le lengolo-tsoibila lena pele? Haeba ho joalo, hlahloba hore na ke eng e kenyang ak&#39;haonte ea hau. <a href='#resend' class='Q_button Users_activation_resend'>Tobetsa ho romella molaetsa hape<\/a>",
+        "mobileExists": "Na u kile oa leka ho ingolisa le nomoro ee ea mohala pele? Haeba ho joalo, hlahloba molaetsa oa hau oa tšebetsong. <a href='#resend' class='Q_button Users_activation_resend'>Tobetsa ho romella molaetsa hape<\/a>",
+        "usingOther": "kapa o ka khona",
+        "prompt": "Khetha lebitso sa mosebelisi:",
+        "newUser": "kapa theha ak&#39;haonte e ncha",
+        "placeholders": {
+            "identifier": "# mobile kapa lengolo tsoibila",
+            "mobile": "kenya mohala oa hau #",
+            "email": "kenya aterese ea hau ea lengolo tsoibila",
+            "username": "lebitso la mosebelisi"
+        },
+        "confirmTerms": "Amohela Melao ea Tšebeletso?",
+        "facebookNoEmail": "Ak&#39;haonte ea hau ea facebook e haelloa ke aterese ea lengolo-tsoibila. Kenya feela tsela ea tlhaho.",
+        "picTooltip": "U ka fetola setšoantšo sena hamorao"
+    },
+    "setIdentifier": {
+        "title": "Kenya tsela ea ho kena",
+        "sendMessage": "Romella molaetsa o sebetsang",
+        "placeholders": {
+            "identifier": "kenya # kapa lengolo tsoibila la hau",
+            "mobile": "kenya nomoro ea hau ea mohala",
+            "email": "kenya aterese ea hau ea lengolo tsoibila",
+            "username": "lebitso la mosebelisi"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Ak&#39;haonte",
+        "areUsing": "U sebelisa {{platform}} joalo ka",
+        "noLongerUsing": "Ha o sa kopantsoe le {{platform}} joalo ka",
+        "doAuth": "Kena ka akhaonto ena",
+        "doSwitch": "Fetolela ak&#39;haonte ena"
+    }
 }

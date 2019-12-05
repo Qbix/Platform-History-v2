@@ -53,8 +53,9 @@ function _getLoaders() {
 }
 
 /**
- * Call this in your helpers to parse the args into a useful array
- * @method parseArgs
+ * Call this in your helpers to parse the args into a useful array.
+ * You must call it like this: handlebars.prepareArgs.call(this, arguments)
+ * @method prepareArgs
  * @static
  * @param {Array} arguments to helper function
  * @return {array}
@@ -63,33 +64,38 @@ handlebars.prepareArgs = function(args) {
 	var arr = Array.prototype.slice.call(args, 0);
 	var last = arr.pop(); // last parameter is for the hash
 	arr.shift(); // the pattern
-	var result = Q.isEmpty(last.hash) ? {} : last.hash;
-	arr.forEach(function (item, i) {
+	var result = Q.isEmpty(last.hash) ? {} : Q.copy(last.hash);
+	Q.each(arr, function (i, item) {
 		result[i] = item;
 	});
-	return result;
+	return Q.extend(result, this);
 };
 
 handlebars.registerHelper('call', function(path) {
 	if (!path) {
 		return "{{call missing method name}}";
 	}
-	var args = handlebars.prepareArgs(arguments);
+	var args = handlebars.prepareArgs.call(this, arguments);
 	var parts = path.split('.');
 	var subparts = parts.slice(0, -1);
+	var i=0;
+	var params = [];
+	do {
+		params.push(args[i]);
+	} while (args[++i]);
 	var f = Q.getObject(parts, this);
 	if (typeof f === 'function') {
-		return f.apply(Q.getObject(subparts, this), args);
+		return f.apply(Q.getObject(subparts, this), params);
 	}
 	if (parts[0] === 'Q') {
 		parts.shift();
 		subpath.shift();
 		f = Q.getObject(parts, Q);
 		if (typeof f === 'function') {
-			return f.apply(Q.getObject(subparts, Q), args);
+			return f.apply(Q.getObject(subparts, Q), params);
 		}
 	}
-	return "{{call \""+path+"\" not found}}";
+	return "{{call "+path+" not found}}";
 });
 
 handlebars.registerHelper('toUrl', function(url) {
@@ -120,10 +126,10 @@ handlebars.registerHelper('json', function(context) {
 });
 
 handlebars.registerHelper('interpolate', function(expression) {
-	if (arguments.length < 2) {
+	if (Q.isEmpty(expression) || arguments.length < 2) {
 		return '';
 	}
-	var args = handlebars.prepareArgs(arguments);
+	var args = handlebars.prepareArgs.call(this, arguments);
 	return expression.interpolate(args);
 });
 

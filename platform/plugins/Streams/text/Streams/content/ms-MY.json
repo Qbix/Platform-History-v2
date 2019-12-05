@@ -241,7 +241,7 @@
                 "byAvatar": "oleh {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "mempunyai {{message.instructions.fromDisplayType}} baru",
+                "hasANew": "mempunyai {{instructions.fromDisplayType}} baru",
                 "byAvatar": "ditambah oleh {{avatar.displayName}}"
             }
         }

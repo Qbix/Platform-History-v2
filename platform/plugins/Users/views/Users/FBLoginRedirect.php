@@ -25,7 +25,7 @@
 
 	var url = scheme + '://nothing?access_token=' + params.access_token + (params.state ? '&state=' + params.state : '');
 
-	window.location.replace(url);
+	location.href = url;
 
 	function getScheme() {
 		var str = window.location.href.split('#')[0];

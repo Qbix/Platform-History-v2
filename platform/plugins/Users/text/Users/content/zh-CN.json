@@ -102,5 +102,11 @@
         "noLongerUsing": "您已不再与{{platform}}相关联",
         "doAuth": "使用此帐户登录",
         "doSwitch": "切换到此帐户"
+    },
+    "roles": {
+        "Owner": "所有者",
+        "Admin": "管理员",
+        "Member": "会员",
+        "Guest": "来宾"
     }
 }

@@ -3,8 +3,8 @@
         "NewItemTitle": "አዲስ ንጥል"
     },
     "labels": {
-        "Streams/invited": "የጋበዝኳቸው ሰዎች",
-        "Streams/invitedMe": "ማን እንደጋበዘኝ"
+        "Streams\/invited": "የጋበዝኳቸው ሰዎች",
+        "Streams\/invitedMe": "ማን እንደጋበዘኝ"
     },
     "interests": {
         "Filter": "ምን ደስ ይልዎታል?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "እርግጠኛ ነዎት ይህን ውይይት መዝጋት ይፈልጋሉ?",
         "closeChatConfirmYes": "አዎ",
         "closeChatConfirmNo": "አይ",
-        "earlierComments": "ቀደምት አስተያየቶች"
+        "earlierComments": "ቀደምት አስተያየቶች",
+        "Subscribed": "ማሳወቂያዎችን ድምጸ-ከል አድርግ",
+        "Unsubscribed": "ማሳወቂያዎችን ያግኙ",
+        "notAllowedToJoinCall": "ይህንን ውይይት ለመቀላቀል ፈቃድ የልዎትም።",
+        "startedConversation": "ውይይት ጀመርኩ",
+        "RealTimeCall": "እውነተኛ ሰዓት ጥሪ",
+        "SearchByName": "በስም ይፈልጉ"
     },
     "notifications": {
         "*": "መልዕክት {{& message.fields.type}} to {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "በ {{stream.fields.title}} ላይ የተደረገው ሂደት",
         "Streams\/task\/complete": "ተግባር ተጠናቅቋል: {{stream.fields.title}}",
         "Streams\/task\/error": "ስህተት በዚህ ጊዜ: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: ገቢ መልዕክት"
+        "Streams\/incoming\/*": "{{app}}: ገቢ መልዕክት",
+        "Streams\/relatedTo\/Streams\/call": "አዲስ ጥሪ በ {{toTitle}} ውስጥ ተጀምሯል",
+        "Streams\/relatedTo\/*": "አዲስ {{relationDisplayType}} በ {{toTitle}} ውስጥ",
+        "Streams\/relatedFrom\/*": "ወደ {{toTitle}} እንደ {{relationDisplayType}} ታክሏል",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} በአስተያየት ውስጥ ጠቅሶዎታል",
+        "Streams\/call": "{{displayName}} እየደወለልዎት ነው"
     },
     "invite": {
         "messageContent": "{{displayName}} ወደ {{inviteUrl}} እንዲገኙ ጋብዘዎታል",
@@ -59,13 +70,15 @@
             "byEmail": "ኢሜይል",
             "byText": "ጽሑፍ",
             "byFacebook": "ፌስቡክ",
-            "byTwitter": "ትዊተር"
+            "byTwitter": "ትዊተር",
+            "scannedQR": "ኮዱ ከተቃኘ {{ClickOrTap}}"
         },
         "email": {
             "subject": "ሄይ, ይህን አረጋግጡ",
             "PleaseVisitLink": "እባክዎ የሚከተለውን አገናኝ ይጎብኙ:",
             "InvitingYou": "ወደ {{title}} በመጋበዝ ላይ ነኝ",
-            "HasInvitedYou": "{{displayName}} እርስዎን በ {{title}} ላይ ጋብዞዎታል"
+            "HasInvitedYou": "{{displayName}} እርስዎን በ {{title}} ላይ ጋብዞዎታል",
+            "HasMentionedYou": "{{displayName}} በ &quot;{{title}}&quot; ውስጥ ጠቅሶዎታል"
         },
         "sms": {
             "content": "ወደ {{title}} ተጋብዘዋል. እባክዎ {{url}} ን መታ ያድርጉ"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "ማይክሮፎን አንቃ",
             "cameraTitle": "ካሜራ አንቃ",
-            "cameraAndMicrophoneTitle": "ካሜራ እና ማይክሮፎን ያንቁ"
+            "cameraAndMicrophoneTitle": "ካሜራ እና ማይክሮፎን ያንቁ",
+            "dialogTitle": "በመገናኘት ላይ",
+            "microphoneBtn": "ማይክሮፎን አንቃ",
+            "cameraBtn": "ካሜራ አንቃ",
+            "cameraAndMicrophoneBtn": "ካሜራ እና ማይክሮፎን ያንቁ"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "<em>{{message.fields.type}}<\/em> መልእክት {{stream.fields.title}} ላይ <em>ለጥ postedል<\/em>"
+        },
+        "text": {
+            "commentedOn": "አስተያየት ተሰጥቷል",
+            "in": "ውስጥ",
+            "body": "በ {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ተለጠፈ",
+                "byAvatar": "በ {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "አዲስ {{instructions.fromDisplayType}} አለው",
+                "byAvatar": "በ {{avatar.displayName}} ታክሏል"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "ተጋብዘዋል",
+            "description": "ለግብዣዎች የገቢ መልእክት ሳጥን"
+        },
+        "Streams\/resource": {
+            "displayType": "ምንጭ",
+            "description": "ስለአስተማማኝ ግብዓቶችን ለማደራጀት እና መልዕክቶችን ለመለጠፍ ፍሰት"
+        },
+        "Streams\/task": {
+            "description": "በአንድ የተወሰነ ተግባር ላይ ስለ መሻሻል ዝማኔዎችን ለመቀበል",
+            "displayType": "ተግባር"
+        },
+        "Streams\/tasks": {
+            "description": "ምድብ ለ ተግባራት",
+            "displayType": "ተግባራት"
+        },
+        "Streams\/experience": {
+            "description": "ለአንድ ማህበረሰብ አባላት የተለመደ ተሞክሮ",
+            "displayType": "የጋራ ተሞክሮ ለአንዱ ማህበረሰብ"
+        },
+        "Streams\/greeting": {
+            "description": "አንድ ተጠቃሚ እራሳቸውን ማስተዋወቅ የሚችልበት ሰላምታ",
+            "displayType": "ሰላምታ"
+        },
+        "Streams\/number": {
+            "displayType": "ቁጥር",
+            "description": "የሂሳብ ቁጥር"
+        },
+        "Streams\/date": {
+            "displayType": "ቀን",
+            "description": "ቀን"
+        },
+        "Streams\/text": {
+            "displayType": "ጽሑፍ",
+            "description": "የጽሑፍ አካል"
+        },
+        "Streams\/text\/small": {
+            "displayType": "ጽሑፍ",
+            "description": "የጽሑፍ አካል"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "ጽሑፍ",
+            "description": "የጽሑፍ አካል"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "የ ኢሜል አድራሻ",
+            "description": "የ ኢሜል አድራሻ"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "ስልክ ቁጥር",
+            "description": "ስልክ ቁጥር"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "ድር ላይ አገናኝ"
+        },
+        "Streams\/image": {
+            "displayType": "ምስል",
+            "description": "ምስላዊ ምስል"
+        },
+        "Streams\/images": {
+            "displayType": "የምስል ማእከል",
+            "description": "የምስል ማሳያ"
+        },
+        "Streams\/album": {
+            "displayType": "አልበም",
+            "description": "የተለያዩ ሚዲያዎች የሚገናኙበት አልበም"
+        },
+        "Streams\/file": {
+            "displayType": "ፋይል",
+            "description": "የተሰቀለ ፋይል"
+        },
+        "Streams\/audio": {
+            "displayType": "ኦዲዮ ክሊፕ",
+            "description": "የድምፅ ቅንጥብ"
+        },
+        "Streams\/video": {
+            "displayType": "ቪዲዮ ክሊፕ",
+            "description": "ቪዲዮ ክሊፕ"
+        },
+        "Streams\/live": {
+            "displayType": "ቀጥታ ስርጭት",
+            "description": "የቀጥታ ድምጽ ወይም ቪዲዮ"
+        },
+        "Streams\/category": {
+            "displayType": "ምድብ",
+            "description": "ሌሎች ፈሳሾች የሚገናኙበት ምድብ"
+        },
+        "Streams\/participating": {
+            "displayType": "ማውጫውን በመሳተፍ ላይ",
+            "description": "ተጠቃሚው ሲቀላቀል \/ ሲቀየር ዥረቶቹ ከዚህ ጋር ይዛመዳሉ \/ አይዛመዱም"
+        },
+        "Streams\/interest": {
+            "displayType": "ፍላጎት",
+            "description": "በአንድ የተወሰነ ርዕስ ውስጥ የተጠቃሚውን ፍላጎት ይወክላል"
+        },
+        "Streams\/incoming": {
+            "displayType": "ገቢ",
+            "description": "በሌሎች ተጠቃሚዎች ለተላኩ መልእክቶች መድረሻ"
+        },
+        "Streams\/chat": {
+            "displayType": "ውይይት",
+            "description": "ከታሪክ ጋር በተጠቃሚዎች መካከል የተደረገ ውይይት"
+        },
+        "Streams\/webrtc": {
+            "displayType": "የእውነተኛ-ጊዜ ጥሪ",
+            "description": "የእውነተኛ ጊዜ ቪዲዮ \/ ድምጽ ጥሪ"
         }
     }
 }

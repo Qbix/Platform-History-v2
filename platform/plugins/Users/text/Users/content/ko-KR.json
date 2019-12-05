@@ -102,5 +102,11 @@
         "noLongerUsing": "더 이상 {{platform}}에 연결되지 않았습니다.",
         "doAuth": "이 계정으로 로그인",
         "doSwitch": "이 계정으로 전환"
+    },
+    "roles": {
+        "Owner": "소유자",
+        "Admin": "관리자",
+        "Member": "회원",
+        "Guest": "손님"
     }
 }

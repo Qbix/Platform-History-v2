@@ -3,8 +3,8 @@
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams/invited": "Leit, déi ech invitéiert hunn",
-        "Streams/invitedMe": "Wien huet mech invitéiert"
+        "Streams\/invited": "Leit, déi ech invitéiert hunn",
+        "Streams\/invitedMe": "Wien huet mech invitéiert"
     },
     "interests": {
         "Filter": "Wat Iech gutt?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Sidd dir sëcher datt Dir dëse Chat wëllt schloen?",
         "closeChatConfirmYes": "jo",
         "closeChatConfirmNo": "Nee",
-        "earlierComments": "fréier Kommentaren"
+        "earlierComments": "fréier Kommentaren",
+        "Subscribed": "Mute Notifikatiounen",
+        "Unsubscribed": "Kritt Notifikatiounen",
+        "notAllowedToJoinCall": "Dir hutt net déi néideg Rechter fir un dësem Gespréich deelzehuelen.",
+        "startedConversation": "huet e Gespréich ugefaang",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Sich mam Numm"
     },
     "notifications": {
         "*": "Message {{& message.fields.type}} op {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Fortschrëtter gemaach an {{stream.fields.title}}",
         "Streams\/task\/complete": "Aarbecht opgedeelt: {{stream.fields.title}}",
         "Streams\/task\/error": "Feeler während: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Message komm"
+        "Streams\/incoming\/*": "{{app}}: Message komm",
+        "Streams\/relatedTo\/Streams\/call": "Neie Ruff huet am {{toTitle}} ugefaang",
+        "Streams\/relatedTo\/*": "Nei {{relationDisplayType}} an {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Zu {{toTitle}} als {{relationDisplayType}} bäigefüügt",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} huet Iech an engem Kommentar ernimmt",
+        "Streams\/call": "{{displayName}} rufft Iech un"
     },
     "invite": {
         "messageContent": "{{displayName}} invitéiert Iech op {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Email",
             "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} wann de Code gescannt gouf"
         },
         "email": {
             "subject": "Hey, kontrolléiert dat aus",
             "PleaseVisitLink": "Kuckt de Link op",
             "InvitingYou": "Ech invitéieren Iech op {{title}}",
-            "HasInvitedYou": "{{displayName}} huet Iech invitéiert op {{title}}"
+            "HasInvitedYou": "{{displayName}} huet Iech invitéiert op {{title}}",
+            "HasMentionedYou": "{{displayName}} huet Iech an &quot;{{title}}&quot; erwähnt."
         },
         "sms": {
             "content": "Dir sidd invitéiert op {{title}}. Bitte op t&#39;huelt {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "De Mikrofoon aktivéieren",
             "cameraTitle": "Camera aktivéieren",
-            "cameraAndMicrophoneTitle": "Kamera a Microphone aktivéieren"
+            "cameraAndMicrophoneTitle": "Kamera a Microphone aktivéieren",
+            "dialogTitle": "Verbindung",
+            "microphoneBtn": "Aktivéiert Mikrofon",
+            "cameraBtn": "Aktivéiert Kamera",
+            "cameraAndMicrophoneBtn": "Aktivéiert Kamera a Mikrofon"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "huet e <em>{{message.fields.type}}<\/em> Message op {{stream.fields.title}} gepost"
+        },
+        "text": {
+            "commentedOn": "kommentéiert",
+            "in": "an",
+            "body": "an {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "gouf op gepost",
+                "byAvatar": "vum {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "huet en neie {{instructions.fromDisplayType}}",
+                "byAvatar": "hinzugefügt vum {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Invitéiert",
+            "description": "Inbox fir Invitatiounen"
+        },
+        "Streams\/resource": {
+            "displayType": "Ressource",
+            "description": "Stream fir den Zougang zu enger Ressource ze managen an Messagen iwwer Updates ze posten"
+        },
+        "Streams\/task": {
+            "description": "fir Updates iwwer de Fortschrëtt op enger gewëssen Aufgab ze kréien",
+            "displayType": "Aufgab"
+        },
+        "Streams\/tasks": {
+            "description": "Kategorie fir Aufgaben",
+            "displayType": "Aufgaben"
+        },
+        "Streams\/experience": {
+            "description": "eng gemeinsam Erfahrung fir Membere vun enger Gemeinschaft",
+            "displayType": "Allgemeng Erfahrung fir Membere vun enger Gemeinschaft"
+        },
+        "Streams\/greeting": {
+            "description": "Begréissung mat deem e Benotzer sech selwer aféieren kann",
+            "displayType": "Gréiss"
+        },
+        "Streams\/number": {
+            "displayType": "Zuel",
+            "description": "mathematesch Zuel"
+        },
+        "Streams\/date": {
+            "displayType": "Datum",
+            "description": "Datum"
+        },
+        "Streams\/text": {
+            "displayType": "Text",
+            "description": "Kierper vum Text"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Text",
+            "description": "klenge Kierper Text"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Text",
+            "description": "mëttel Kierper vun Text"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "E-Mailadress",
+            "description": "E-Mailadress"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Telefonsnummer",
+            "description": "Telefonsnummer"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "Link um Internet"
+        },
+        "Streams\/image": {
+            "displayType": "Bild",
+            "description": "visuellt Bild"
+        },
+        "Streams\/images": {
+            "displayType": "Bild Galerie",
+            "description": "Galerie vu Biller"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "en Album, un deem verschidde Medien verbonne sinn"
+        },
+        "Streams\/file": {
+            "displayType": "Datei",
+            "description": "eropgelueden Datei"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio Clip",
+            "description": "audio Clip"
+        },
+        "Streams\/video": {
+            "displayType": "Videoclip",
+            "description": "Video Clip"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "liewen Audio oder Video"
+        },
+        "Streams\/category": {
+            "displayType": "Kategorie",
+            "description": "eng Kategorie zu där aner Streame kënne bezéien"
+        },
+        "Streams\/participating": {
+            "displayType": "Participatioun Index",
+            "description": "Streame si verbonnen \/ net ze dinn wann e Benotzer bäitrieden \/ verléisst"
+        },
+        "Streams\/interest": {
+            "displayType": "Interesse",
+            "description": "stellt den Interessi vun engem Benotzer fir e bestëmmten Thema duer"
+        },
+        "Streams\/incoming": {
+            "displayType": "Ankomm",
+            "description": "Destinatioun fir Messagen vun anere Benotzer geschéckt"
+        },
+        "Streams\/chat": {
+            "displayType": "Gespréich",
+            "description": "e Gespréich tëscht de Benotzer, mat der Geschicht"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Time Call",
+            "description": "en Echtzäit Video \/ Audio Uruff"
         }
     }
 }

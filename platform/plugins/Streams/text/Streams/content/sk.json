@@ -241,7 +241,7 @@
                 "byAvatar": "do {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "má nový {{message.instructions.fromDisplayType}}",
+                "hasANew": "má nový {{instructions.fromDisplayType}}",
                 "byAvatar": "pridal {{avatar.displayName}}"
             }
         }

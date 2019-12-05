@@ -241,7 +241,7 @@
                 "byAvatar": "írta: {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "van egy új {{message.instructions.fromDisplayType}}",
+                "hasANew": "van egy új {{instructions.fromDisplayType}}",
                 "byAvatar": "hozzáadta: {{avatar.displayName}}"
             }
         }

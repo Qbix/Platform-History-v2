@@ -18,7 +18,8 @@
         "GetStarted": "E hoʻomaka",
         "Authorize": "Hōʻaia",
         "TermsLabel": "Ua heluhelu au a uaʻae wau <br> i ka {{link}}",
-        "TermsTitle": "&#39;Ōlelo"
+        "TermsTitle": "&#39;Ōlelo",
+        "mustAgree": "ʻO ka mua me ʻoe e ʻae i nā ʻōlelo."
     },
     "register": {
         "TermsLabel": "&#39;Apono wau i {{link}}",
@@ -31,11 +32,18 @@
         "no": "Aʻole",
         "WelcomePleaseVerifyEmail": "Welina! E hōʻoia i kāu leka uila.",
         "WelcomeVerifyEmail": "Welina! E hōʻoia i kāu leka uila.",
-        "ForgetPass": "ʻAe, ua poina iāʻoe kāu kīpala?"
+        "ForgetPass": "ʻAe, ua poina iāʻoe kāu kīpala?",
+        "PassphraseSaved": "Ua mālama ʻia kāu huaʻōlelo ʻōlelo.",
+        "IdentifierActivated": "Ua hana ʻia kāu {{type}} iā.",
+        "CompletedActivation": "Ua hoʻopau ʻoe i ka hana hana.",
+        "CompletedActivationLogIn": "Ua hoʻopau ʻoe i ka hana hana. E ho&#39;āʻo i ke kāohi i kēia manawa."
     },
     "contacts": {
         "dialog": {
-            "title": "E koho i ka pilina"
+            "title": "E koho i ka pilina",
+            "CreateAccount": "+ Hoʻohui hou",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ʻaʻole i loaʻa",
+            "SearchByName": "Huli ma o ka inoa"
         },
         "select": {
             "title": "E koho i ka hulina o {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "E koho i kahi lepili.",
-        "inviteUser": "E ho&#39;āʻo i ka mea hoʻohana"
+        "inviteUser": "E ho&#39;āʻo i ka mea hoʻohana",
+        "selectRole": "Koho i ka Role",
+        "inviteRole": "Kāhea {{role}}"
     },
-    "invalidLanguageSelected": "&#39;Ōlelo maʻamau i kohoʻia"
+    "invalidLanguageSelected": "&#39;Ōlelo maʻamau i kohoʻia",
+    "login": {
+        "title": "Welina",
+        "directions": "E hana i kahi moʻokāki, a i ʻole.",
+        "directionsNoRegister": "Kākau i ka loaʻa inā he moʻokāki.",
+        "goButton": "Hele",
+        "passphrase": "E hoʻokomo i kāu huaʻōlelo pili:",
+        "loginButton": "E hoʻomaka",
+        "registerButton": "E hoʻomaka",
+        "resendButton": "Hoʻouna i Kauka Hoʻohālikelike",
+        "forgot": "Poina ia?",
+        "resendConfirm": "Makemake ʻoe e hoʻouna i kahi leka e hoʻihoʻi i kāu passphrase?",
+        "resendSuccess": "E nānā no kahi leka e hoʻihoʻi i kāu leka",
+        "resendClose": "Hoʻopili",
+        "noPassphrase": "Ma mua o hiki iā ʻoe ke kaʻe aku, pono ʻoe e hoʻonohonoho i kahi huaʻōlelo ma o ka kaomi ʻana i ka loulou i kāu leka hoʻāʻo.",
+        "notVerified": "Pono ʻoe e hoʻouna iā ʻoe iho i kahi memele hoʻāla e kau ai.",
+        "emailExists": "Ua hoʻāʻo ʻoe e kākau inoa me kēia leka uila ma mua? Inā pēlā, e nānā i kāu inbox e hoʻolaʻa i kāu moʻokāki. <a href='#resend' class='Q_button Users_activation_resend'>Kaomi e hoʻouna hou i ka leka<\/a>",
+        "mobileExists": "Ua hoʻāʻo ʻoe e kākau inoa me kēia helu kelepona ma mua? Inā pēlā, e nānā i kāu SMS e hoʻolaʻa i kāu moʻokāki. <a href='#resend' class='Q_button Users_activation_resend'>Kaomi e hoʻouna hou i ka leka<\/a>",
+        "usingOther": "a i ʻole",
+        "prompt": "E koho i kahi inoa inoa:",
+        "newUser": "a i ʻole ka hana ʻana i kahi moʻolelo hou",
+        "placeholders": {
+            "identifier": "kāu pūnaewele # a i ʻole ka leka uila",
+            "mobile": "komo i kāu pūkona #",
+            "email": "komo i kāu leka uila",
+            "username": "inoa inoa"
+        },
+        "confirmTerms": "E hoʻokae i nā ʻ Termslelo a ke lawelawe?",
+        "facebookNoEmail": "Pau ka leka uila i kāu leka uila i hōʻoia ʻia. Hoʻopili wale i ka hele kumu.",
+        "picTooltip": "Hiki iā ʻoe ke hoʻololi i kēia kiʻi ma hope aku"
+    },
+    "setIdentifier": {
+        "title": "E hoʻohui i kahi ala e hoʻopili ai",
+        "sendMessage": "Hoʻouna i Kauka Hoʻohālikelike",
+        "placeholders": {
+            "identifier": "komo i kāu pūnaewele # a i ʻole nā leka uila",
+            "mobile": "komo i kāu helu kelepona",
+            "email": "komo i kāu leka uila",
+            "username": "inoa inoa"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Waihona",
+        "areUsing": "E hoʻohana ʻoe i ka {{platform}} iā",
+        "noLongerUsing": "ʻAʻole pili ʻoe ma kahi {{platform}} e like me",
+        "doAuth": "Kākau pū me kēia waihona",
+        "doSwitch": "Hoʻololi i kēia moʻokāki"
+    }
 }

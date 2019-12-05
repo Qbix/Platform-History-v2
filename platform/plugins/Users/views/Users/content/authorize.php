@@ -1,7 +1,7 @@
 <div id="content">
 	<div id="Users_authorize_welcome">
 		<div>
-			<?php echo Q_Html::img($client->iconUrl('180.png'),  'user icon', 
+			<?php echo Q_Html::img($client->iconUrl('200.png'),  'user icon', 
 				array('class' => 'Users_app_icon')
 			); ?>
 			<h2 class="Users_app_name"><?php echo $client->displayName() ?></h2>

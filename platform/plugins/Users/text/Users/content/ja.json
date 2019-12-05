@@ -102,5 +102,11 @@
         "noLongerUsing": "次のように{{platform}}に接続していません",
         "doAuth": "このアカウントでログイン",
         "doSwitch": "このアカウントに切り替える"
+    },
+    "roles": {
+        "Owner": "オーナー",
+        "Admin": "管理者",
+        "Member": "メンバー",
+        "Guest": "ゲスト"
     }
 }

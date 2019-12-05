@@ -231,7 +231,8 @@
 	};
 
 	/**
-	 * Authenticates this session with a given platform
+	 * Authenticates this session with a given platform,
+	 * if the user was already connected to it.
 	 * @method authenticate
 	 * @param {String} platform Currently only supports "facebook", "ios" or "android"
 	 * @param {Function} onSuccess Called if the user successfully authenticates with the platform, or was already authenticated.
@@ -290,7 +291,8 @@
 					// multiple times on the same page, or because the page is reloaded
 					Q.cookie('Users_ignorePlatformXid', fb_xid);
 
-					if (Users.loggedInUser && Users.loggedInUser.xids.facebook === fb_xid) {
+					var fbAppId = "facebook\t" + appId;
+					if (Users.loggedInUser && Users.loggedInUser.xids[fbAppId] === fb_xid) {
 						// The correct user is already logged in.
 						// Call onSuccess but do not pass a user object -- the user didn't change.
 						_doSuccess(null, platform, onSuccess, onCancel, options);
@@ -644,9 +646,6 @@
 		return false;
 
 		function _doLogin() {
-
-			var dest;
-
 			// try quietly, possible only with facebook
 			if (o.tryQuietly) {
 				if (o.using.indexOf('facebook') >= 0) {
@@ -662,6 +661,8 @@
 
 			priv.result = null;
 			priv.used = null;
+			priv.login_onConnect = _onConnect;
+			priv.login_onCancel = _onCancel;
 
 			// perform actual login
 			if (o.using.indexOf('native') >= 0) {
@@ -671,8 +672,6 @@
 					: {};
 				// set up dialog
 				login_setupDialog(usingPlatforms, o);
-				priv.login_onConnect = _onConnect;
-				priv.login_onCancel = _onCancel;
 				priv.linkToken = null;
 				priv.scope = o.scope;
 				priv.activation = o.activation;
@@ -686,8 +685,7 @@
 				$('#Users_login_identifierType').val(o.identifierType);
 			} else if (o.using[0] === 'facebook') { // only facebook used. Open facebook login right away
 				Users.initFacebook(function () {
-					var opts = o.scope ? {scope: o.scope.join(',')} : undefined;
-					FB.login(function (response) {
+					Users.Facebook.login(function (response) {
 						if (!response.authResponse) {
 							_onCancel();
 							return;
@@ -720,7 +718,7 @@
 						}, {
 							check: o.scope
 						});
-					}, opts);
+					});
 				}, {
 					appId: appId
 				});
@@ -1582,8 +1580,13 @@
 					var facebookLogin = $('<a href="#login_facebook" id="Users_login_with_facebook" />').append(
 						$('<img alt="login with facebook" />')
 							.attr('src', Q.text.Users.login.facebookSrc || Q.url('{{Users}}/img/facebook-login.png'))
-					).css({'display': 'inline-block', 'vertical-align': 'middle'})
-						.click(function () {
+					)
+					.css({'display': 'inline-block', 'vertical-align': 'middle'})
+					.click(function () {
+						if (location.search.includes('handoff=yes')) {
+							var scheme = Q.getObject([Q.info.platform, Q.info.app, 'scheme'], Users.apps);
+							document.location.href = scheme + '#facebookLogin=1';
+						} else {
 							Users.initFacebook(function () {
 								Users.Facebook.usingPlatforms = usingPlatforms;
 								Users.Facebook.scope = options.scope;
@@ -1591,8 +1594,10 @@
 							}, {
 								appId: appId
 							});
-							return false;
-						});
+						}
+
+						return false;
+					});
 					step1_usingPlatforms_div.append(Q.text.Users.login.usingOther).append(facebookLogin);
 					// Load the facebook script now, so clicking on the facebook button
 					// can trigger a popup directly, otherwise popup blockers may complain:
@@ -2333,7 +2338,7 @@
 			Q.extend(Q.text.Users, 10, text);
 		});
 		if (Q.Users.loggedInUser
-			&& Q.typeOf(Q.Users.loggedInUser) !== 'Q.Users.User') {
+		&& Q.typeOf(Q.Users.loggedInUser) !== 'Q.Users.User') {
 			Q.Users.loggedInUser = new Users.User(Q.Users.loggedInUser);
 			Q.nonce = Q.cookie('Q_nonce');
 		}
@@ -2354,23 +2359,22 @@
 				Q.plugins.Users.setIdentifier();
 				return false;
 			});
-		if (!location.hash.queryField('Q.Users.newSessionId')) {
-			return;
-		}
-		var fieldNames = [
-			'Q.Users.appId', 'Q.Users.newSessionId',
-			'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.signature'
-		];
-		var fields = location.hash.queryField(fieldNames);
-		var storedDeviceId = localStorage.getItem("Q.Users.Device.deviceId");
-		fields['Q.Users.deviceId'] = fields['Q.Users.deviceId'] || storedDeviceId;
-		if (fields['Q.Users.newSessionId']) {
-			Q.req('Users/session', function () {
-				// user was redirected from Users/session
-			}, {
-				method: 'post',
-				fields: fields
-			});
+		if (location.hash.queryField('Q.Users.newSessionId')) {
+			var fieldNames = [
+				'Q.Users.appId', 'Q.Users.newSessionId',
+				'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.signature'
+			];
+			var fields = location.hash.queryField(fieldNames);
+			var storedDeviceId = localStorage.getItem("Q.Users.Device.deviceId");
+			fields['Q.Users.deviceId'] = fields['Q.Users.deviceId'] || storedDeviceId;
+			if (fields['Q.Users.newSessionId']) {
+				Q.req('Users/session', function () {
+					// user was redirected from Users/session
+				}, {
+					method: 'post',
+					fields: fields
+				});
+			}
 		}
 	}, 'Users');
 
@@ -2383,6 +2387,8 @@
 				Q.cookie('Q_sessionId', fields['Q.Users.newSessionId']);
 				document.location.reload();
 			}
+		} else if (url.includes('facebookLogin=1')) {
+			Users.login({using: 'facebook'});
 		}
 
 		function _getParams(url) {
@@ -2416,9 +2422,9 @@
 	Q.request.options.onProcessed.set(function (err, response) {
 		Q.nonce = Q.cookie('Q_nonce');
 		if (Users.lastSeenNonce !== Q.nonce
-			&& !Users.login.occurring
-			&& !Users.authenticate.occurring
-			&& !Users.logout.occurring) {
+		&& !Users.login.occurring
+		&& !Users.authenticate.occurring
+		&& !Users.logout.occurring) {
 			Q.nonce = Q.cookie('Q_nonce');
 			Q.req("Users/login", 'data', function (err, res) {
 				Users.lastSeenNonce = Q.nonce = Q.cookie('Q_nonce');
@@ -2457,6 +2463,8 @@
 			Q.Users.onLoginLost.handle();
 			Q.Users.loggedInUser = null;
 			Q.Users.roles = {};
+			Q.Session.clear();
+			Q.Users.hinted = [];
 		}
 	}, 'Users');
 
@@ -2466,6 +2474,7 @@
 		ddc.className = ddc.className.replace(' Users_loggedOut', '') + ' Users_loggedIn';
 	}, 'Users');
 	Users.onLogout = new Q.Event(function () {
+		Q.Session.clear();
 		ddc.className = ddc.className.replace(' Users_loggedIn', '') + ' Users_loggedOut';
 	});
 	Users.onLoginLost = new Q.Event(function () {
@@ -2981,17 +2990,19 @@
 			}
 		},
 
-		login: function () {
+		login: function (callback) {
 			switch (Users.Facebook.type) {
 			case 'web':
 				var scope = Users.Facebook.scope;
 				FB.login(function (response) {
 					Users.Facebook.doLogin(response);
+					callback && callback(response);
 				}, scope ? {scope: scope.join(',')} : undefined);
 				break;
 			case 'native':
 				facebookConnectPlugin.login(["public_profile", "email"], function (response) {
 					Users.Facebook.doLogin(response);
+					callback && callback(response);
 				}, function (err) {
 					console.warn(err);
 				});
@@ -3029,11 +3040,11 @@
 				var me = params.me[0];
 				Users.Facebook.me = me;
 				var picture = params.picture[0].data;
+				var $usersLoginIdentifier = $('#Users_login_identifier');
 				if (!me.email) {
 					step1_form.data('used', null);
 					alert(Q.text.Users.login.facebookNoEmail);
-					$('#Users_login_identifier')
-						.plugin('Q/clickfocus');
+					$usersLoginIdentifier.plugin('Q/clickfocus');
 					return true;
 				}
 				priv.registerInfo = {
@@ -3048,11 +3059,33 @@
 					picWidth: picture.width,
 					picHeight: picture.height
 				};
-				$('#Users_login_identifier')
-					.val(me.email)
-					.closest('form')
-					.submit();
-				// The login onSuccess callback is about to be called
+
+				if ($usersLoginIdentifier.length) {
+					$usersLoginIdentifier
+						.val(me.email)
+						.closest('form')
+						.submit();
+					// The login onSuccess callback is about to be called
+				} else {
+					var url = Q.action(Users.login.options.userQueryUri) + '?' + $.param({
+						identifier: me.email,
+						identifierType: 'email'
+					});
+					Q.request(url, ['data'], function (err, response) {
+						if (response.errors) {
+							return;
+						}
+
+						// auto-login by authenticating with facebook
+						Users.authenticate('facebook', function (user) {
+							priv.login_connected = true;
+							priv.login_onConnect && priv.login_onConnect(user);
+						}, function () {
+							priv.login_onCancel && priv.login_onCancel();
+						}, {"prompt": false});
+
+					}, {xhr: Q.info.isTouchscreen ? 'sync' : {}});
+				}
 			});
 			var paramsPicture = {
 				"redirect": false,

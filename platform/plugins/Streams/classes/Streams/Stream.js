@@ -401,14 +401,22 @@ Sp.notifyParticipants = function (event, byUserId, message, dontNotifyObservers,
 
 	Streams.getParticipants(fields.publisherId, fields.name, function (participants) {
 		message.fields.streamType = fields.type;
-		for (var userId in participants) {
+		var userIds = Object.keys(participants) || [];
+		if (byUserId) {
+			var index = userIds.indexOf(byUserId);
+			if (index > 0) {
+				userIds = userIds.splice(index, 1).concat(userIds);
+			}
+		}
+		for (var i = 0; i < userIds.length; i++) {
+			var userId = userIds[i];
 			var participant = participants[userId];
 			stream.notify(participant, event, message, byUserId, function(err) {
 				callback && callback(err, participants);
 				if (!err) return;
 				var debug = Q.Config.get(['Streams', 'notifications', 'debug'], false);
 				if (debug) {
-					Q.log("Failed to notify user '"+participant.fields.userId+"': ");
+					Q.log("Failed to notify user '" + participant.fields.userId + "': ");
 					Q.log(err);
 				}
 			});

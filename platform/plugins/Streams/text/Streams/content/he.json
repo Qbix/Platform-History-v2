@@ -238,7 +238,7 @@
                 "byAvatar": "מאת {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "יש {{message.instructions.fromDisplayType}} חדש",
+                "hasANew": "יש {{instructions.fromDisplayType}} חדש",
                 "byAvatar": "נוסף על ידי {{avatar.displayName}}"
             }
         }

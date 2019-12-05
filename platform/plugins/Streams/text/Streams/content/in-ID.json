@@ -238,7 +238,7 @@
                 "byAvatar": "oleh {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "memiliki {{message.instructions.fromDisplayType}} baru",
+                "hasANew": "memiliki {{instructions.fromDisplayType}} baru",
                 "byAvatar": "ditambahkan oleh {{avatar.displayName}}"
             }
         }

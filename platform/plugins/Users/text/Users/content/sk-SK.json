@@ -102,5 +102,11 @@
         "noLongerUsing": "Už nie ste pripojení k {{platform}} ako",
         "doAuth": "Prihláste sa pomocou tohto účtu",
         "doSwitch": "Prepnite na tento účet"
+    },
+    "roles": {
+        "Owner": "vlastník",
+        "Admin": "admin",
+        "Member": "člen",
+        "Guest": "Hosť"
     }
 }

@@ -3,8 +3,8 @@
         "NewItemTitle": "Into entsha"
     },
     "labels": {
-        "Streams/invited": "Abantu ndiwameme",
-        "Streams/invitedMe": "Ngubani owamemileyo"
+        "Streams\/invited": "Abantu ndiwameme",
+        "Streams\/invitedMe": "Ngubani owamemileyo"
     },
     "interests": {
         "Filter": "Uyakuthanda ntoni?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Uqinisekile ukuba ufuna ukuvala le ngxoxo?",
         "closeChatConfirmYes": "Ewe",
         "closeChatConfirmNo": "Hayi",
-        "earlierComments": "izimvo zangaphambili"
+        "earlierComments": "izimvo zangaphambili",
+        "Subscribed": "Thulisa iZaziso",
+        "Unsubscribed": "Fumana iZaziso",
+        "notAllowedToJoinCall": "Awunayo imvume yokujoyina le ncoko.",
+        "startedConversation": "yaqala incoko",
+        "RealTimeCall": "Ixesha lokutsala umnxeba",
+        "SearchByName": "Khangela ngegama"
     },
     "notifications": {
         "*": "Umyalezo {{& message.fields.type}} kwi {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Inkqubela phambili eyenziwe kwi {{stream.fields.title}}",
         "Streams\/task\/complete": "Umsebenzi ogqityiweyo: {{stream.fields.title}}",
         "Streams\/task\/error": "Iphutha ngexesha: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Umyalezo ongenawo"
+        "Streams\/incoming\/*": "{{app}}: Umyalezo ongenawo",
+        "Streams\/relatedTo\/Streams\/call": "Umnxeba omtsha oQalile kwi {{toTitle}}",
+        "Streams\/relatedTo\/*": "Entsha {{relationDisplayType}} kwi {{1000]}",
+        "Streams\/relatedFrom\/*": "Yongezwe kwi - {{toTitle}} njenge {{1000]}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} ndikukhankanyile kumazwana",
+        "Streams\/call": "{{displayName}} uyakubiza"
     },
     "invite": {
         "messageContent": "{{displayName}} ukumeme ukuba {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Imeyili",
             "byText": "Umbhalo",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} ukuba ikhowudi iskenisiwe"
         },
         "email": {
             "subject": "Hayi, khangela oku",
             "PleaseVisitLink": "Nceda u tyelele eli linxulumano:",
             "InvitingYou": "Ndikumema ukuba {{title}}",
-            "HasInvitedYou": "{{displayName}} ukumeme ukuba {{title}}"
+            "HasInvitedYou": "{{displayName}} ukumeme ukuba {{title}}",
+            "HasMentionedYou": "{{displayName}} ukukhankanyile kwi &quot;{{1000]}"
         },
         "sms": {
             "content": "Umenywe {{title}}. Nceda uthephe {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Nika amandla iMakrofoni",
             "cameraTitle": "Nika amandla ikhamera",
-            "cameraAndMicrophoneTitle": "Nika amandla ikhamera kunye nemakrofoni"
+            "cameraAndMicrophoneTitle": "Nika amandla ikhamera kunye nemakrofoni",
+            "dialogTitle": "Iyaxhuma",
+            "microphoneBtn": "Yenza i-Microphone",
+            "cameraBtn": "Yenza iKhamera",
+            "cameraAndMicrophoneBtn": "Yenza iKhamera kunye neMakrofoni"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "uthumele umyalezo <em>{{message.fields.type}}<\/em> kwi {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "gqabaza",
+            "in": "ngaphakathi",
+            "body": "kwi {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "iposwe kuyo",
+                "byAvatar": "ngo {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ine {{instructions.fromDisplayType}} entsha",
+                "byAvatar": "yongezwe ngu {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Ukumenyiwe",
+            "description": "Ibhokisi lemiyalezo engenayo malunga nezimemo"
+        },
+        "Streams\/resource": {
+            "displayType": "Izixhobo",
+            "description": "umsinga wolawulo lokufikelela kulwazi kunye nokuthumela imiyalezo malunga nohlaziyo"
+        },
+        "Streams\/task": {
+            "description": "yokufumana uhlaziyo malunga nenkqubela phambili kumsebenzi othile",
+            "displayType": "Umsebenzi"
+        },
+        "Streams\/tasks": {
+            "description": "udidi lwemisebenzi",
+            "displayType": "Imisebenzi"
+        },
+        "Streams\/experience": {
+            "description": "amava aqhelekileyo amalungu oluntu",
+            "displayType": "Amava aqhelekileyo amalungu oluntu"
+        },
+        "Streams\/greeting": {
+            "description": "Ukubulisa umntu anokuzazisa bona",
+            "displayType": "Ukubulisa"
+        },
+        "Streams\/number": {
+            "displayType": "Inani",
+            "description": "inombolo yemathematics"
+        },
+        "Streams\/date": {
+            "displayType": "Umhla",
+            "description": "umhla"
+        },
+        "Streams\/text": {
+            "displayType": "Isicatshulwa",
+            "description": "umzimba wesicatshulwa"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Isicatshulwa",
+            "description": "umzimba omncinci wesicatshulwa"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Isicatshulwa",
+            "description": "umzimba ophakathi"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Idilesi yemeyile",
+            "description": "idilesi yemeyile"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Inombolo yomnxeba",
+            "description": "inombolo yomnxeba"
+        },
+        "Streams\/text\/url": {
+            "displayType": "I-URL",
+            "description": "ikhonkco kwiwebhu"
+        },
+        "Streams\/image": {
+            "displayType": "Umfanekiso",
+            "description": "umfanekiso obonakalayo"
+        },
+        "Streams\/images": {
+            "displayType": "Igalari yemifanekiso",
+            "description": "igalari yemifanekiso"
+        },
+        "Streams\/album": {
+            "displayType": "I-albhamu",
+            "description": "I-albhamu enxulumene nayo imithombo yeendaba eyahlukeneyo"
+        },
+        "Streams\/file": {
+            "displayType": "Ifayile",
+            "description": "ifayile egciniweyo"
+        },
+        "Streams\/audio": {
+            "displayType": "Isiqeshana somsindo",
+            "description": "iklip yevidiyo"
+        },
+        "Streams\/video": {
+            "displayType": "Umboniso weVidiyo",
+            "description": "iklip yevidiyo"
+        },
+        "Streams\/live": {
+            "displayType": "Umthombo philayo",
+            "description": "irediyo ephilayo okanye ividiyo"
+        },
+        "Streams\/category": {
+            "displayType": "Udidi",
+            "description": "udidi olunokuhambelana nayo eminye imilambo"
+        },
+        "Streams\/participating": {
+            "displayType": "Index yokuThatha inxaxheba",
+            "description": "Imilambo inxulumene \/ ayidibananga noku xa umsebenzisi edibana \/ eshiya"
+        },
+        "Streams\/interest": {
+            "displayType": "Inzala",
+            "description": "imele umdla womsebenzisi kwisihloko esithile"
+        },
+        "Streams\/incoming": {
+            "displayType": "Ezayo",
+            "description": "indawo ekuthunyelwa kuyo imiyalezo ethunyelwe ngabanye abasebenzisi"
+        },
+        "Streams\/chat": {
+            "displayType": "Incoko",
+            "description": "Incoko phakathi kwabasebenzisi, kunye nembali"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Umnxeba wexesha lokwenyani",
+            "description": "ividiyo yexesha \/ ividiyo yomsindo"
         }
     }
 }

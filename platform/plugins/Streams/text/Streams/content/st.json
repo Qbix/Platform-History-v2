@@ -3,8 +3,8 @@
         "NewItemTitle": "Sehlooho se secha"
     },
     "labels": {
-        "Streams/invited": "Batho bao ke ba memileng",
-        "Streams/invitedMe": "Ke mang ea nketselitseng"
+        "Streams\/invited": "Batho bao ke ba memileng",
+        "Streams\/invitedMe": "Ke mang ea nketselitseng"
     },
     "interests": {
         "Filter": "U thabela eng?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Na u netefatsa hore u batla ho koala puisano ee?",
         "closeChatConfirmYes": "E.",
         "closeChatConfirmNo": "Che",
-        "earlierComments": "pejana litlhaloso"
+        "earlierComments": "pejana litlhaloso",
+        "Subscribed": "Tsebisoang",
+        "Unsubscribed": "Fumana Litsebiso",
+        "notAllowedToJoinCall": "Ha u na tumello ea ho kena moqoqong ona.",
+        "startedConversation": "o qalile moqoqo",
+        "RealTimeCall": "Mohala oa Nako ea &#39;nete",
+        "SearchByName": "Batla ka lebitso"
     },
     "notifications": {
         "*": "Molaetsa {{& message.fields.type}} ho {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Tsoelo-pele e entsoeng ka {{stream.fields.title}}",
         "Streams\/task\/complete": "Mosebetsi o phethiloe: {{stream.fields.title}}",
         "Streams\/task\/error": "Phoso nakong ea: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Molaetsa o sa keneng"
+        "Streams\/incoming\/*": "{{app}}: Molaetsa o sa keneng",
+        "Streams\/relatedTo\/Streams\/call": "Qaliso e ncha e qalile ho {{toTitle}}",
+        "Streams\/relatedTo\/*": "Ncha {{relationDisplayType}} ho {{1000]}",
+        "Streams\/relatedFrom\/*": "E kenyellelitsoe ho {{toTitle}} joalo ka {{1000]}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} o u boletse ka maikutlo",
+        "Streams\/call": "{{displayName}} ea u bitsa"
     },
     "invite": {
         "messageContent": "{{displayName}} eu meme ho {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Imeile",
             "byText": "Mongolo",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} haeba khoutu e hlahlojoa"
         },
         "email": {
             "subject": "Hey, hlahloba sena",
             "PleaseVisitLink": "Ka kopo, etela kgokahanyo e latelang:",
             "InvitingYou": "Ke u mema ho {{title}}",
-            "HasInvitedYou": "{{displayName}} eu mema ho {{title}}"
+            "HasInvitedYou": "{{displayName}} eu mema ho {{title}}",
+            "HasMentionedYou": "{{displayName}} o boletse ka uena ho &quot;{{{title}}&quot;"
         },
         "sms": {
             "content": "U mengoe ho {{title}}. Ka kōpo tlanya {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Numella Microphone",
             "cameraTitle": "Etsa K&#39;hamera",
-            "cameraAndMicrophoneTitle": "Etsa K&#39;hamera le Microphone"
+            "cameraAndMicrophoneTitle": "Etsa K&#39;hamera le Microphone",
+            "dialogTitle": "Ho hokela",
+            "microphoneBtn": "Nolofatsa Microphone",
+            "cameraBtn": "Nolofatsa Khamera",
+            "cameraAndMicrophoneBtn": "Nolofatsa Khamera le Microphone"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "o romelle molaetsa oa <em>{{message.fields.type}}<\/em> ho {{1000]}"
+        },
+        "text": {
+            "commentedOn": "fana ka maikutlo ka",
+            "in": "ka",
+            "body": "ho {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "e romelletsoe ho",
+                "byAvatar": "ka {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "e na le {{instructions.fromDisplayType}} e ncha",
+                "byAvatar": "e kentsoe ke {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "E memiloe",
+            "description": "Inbox bakeng sa limemo"
+        },
+        "Streams\/resource": {
+            "displayType": "Sesebelisoa",
+            "description": "phallela bakeng sa ho laola phihlello ea lisebelisoa le ho romella melaetsa mabapi le lipapatso"
+        },
+        "Streams\/task": {
+            "description": "bakeng sa ho amohela lintlha mabapi le tsoelo-pele mabapi le mosebetsi o itseng",
+            "displayType": "Mosebetsi"
+        },
+        "Streams\/tasks": {
+            "description": "mokga bakeng sa mesebetsi",
+            "displayType": "Mesebetsi"
+        },
+        "Streams\/experience": {
+            "description": "boiphihlelo bo tloaelehileng ho litho tsa sechaba",
+            "displayType": "Boiphihlelo bo tloaelehileng bakeng sa litho tsa sechaba"
+        },
+        "Streams\/greeting": {
+            "description": "litumeliso tseo mosebelisi a ka itlhahisang ka tsona",
+            "displayType": "Litumeliso"
+        },
+        "Streams\/number": {
+            "displayType": "Palo",
+            "description": "nomoro ea lipalo"
+        },
+        "Streams\/date": {
+            "displayType": "Letsatsi",
+            "description": "letsatsi"
+        },
+        "Streams\/text": {
+            "displayType": "Mongolo",
+            "description": "mmele wa sengoloa"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Mongolo",
+            "description": "mmele o monyane wa sengoloa"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Mongolo",
+            "description": "mmele o mahareng oa mongolo"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Aterese ea imeile",
+            "description": "aterese ea imeile"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Nomoro ea mohala",
+            "description": "nomoro ea mohala"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "khokahano ho webosaete"
+        },
+        "Streams\/image": {
+            "displayType": "Setšoantšo",
+            "description": "setšoantšo se bonoang"
+        },
+        "Streams\/images": {
+            "displayType": "Setšoantšo sa litšoantšo",
+            "description": "pokello ea litšoantšo"
+        },
+        "Streams\/album": {
+            "displayType": "Albums",
+            "description": "albamo e amanang le litaba tse fapaneng e amanang le eona"
+        },
+        "Streams\/file": {
+            "displayType": "Faele",
+            "description": "faele e kentsoeng"
+        },
+        "Streams\/audio": {
+            "displayType": "Molumo oa Audio",
+            "description": "sekotlo sa molumo"
+        },
+        "Streams\/video": {
+            "displayType": "Papali ea Video",
+            "description": "sekotwana sa video"
+        },
+        "Streams\/live": {
+            "displayType": "Ho pharalla",
+            "description": "seea-le-moea kapa video"
+        },
+        "Streams\/category": {
+            "displayType": "Sehlopha",
+            "description": "sehlopha seo melapo e meng e ka amanang le sona"
+        },
+        "Streams\/participating": {
+            "displayType": "Index e Akarelletsang",
+            "description": "melapo e amana \/ e hokahane le sena ha mosebelisi a kenella \/ a tsoa"
+        },
+        "Streams\/interest": {
+            "displayType": "Thahasello",
+            "description": "e emetse thahasello ea mosebelisi ka sehlooho se itseng"
+        },
+        "Streams\/incoming": {
+            "displayType": "E tlang",
+            "description": "sebaka sa melaetsa e rometsoeng ke basebelisi ba bang"
+        },
+        "Streams\/chat": {
+            "displayType": "Moqoqo",
+            "description": "puisano pakeng tsa basebelisi, e nang le nalane"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Mohala oa Nako ea &#39;nete",
+            "description": "video ea nako ea &#39;nete \/ mohala oa molumo"
         }
     }
 }

@@ -18,7 +18,8 @@
         "GetStarted": "Pib Tau",
         "Authorize": "Tso cai",
         "TermsLabel": "Kuv tau nyeem thiab pom zoo <br> rau {999}}",
-        "TermsTitle": "Cov ntsiab lus"
+        "TermsTitle": "Cov ntsiab lus",
+        "mustAgree": "Ua ntej koj yuav tsum pom zoo rau cov lus."
     },
     "register": {
         "TermsLabel": "Kuv txais cov {{link}}",
@@ -31,11 +32,18 @@
         "no": "Tsis yog",
         "WelcomePleaseVerifyEmail": "Txais tos! Thov qhia koj email chaw nyob.",
         "WelcomeVerifyEmail": "Txais tos! Tshawb xyuas koj email chaw nyob.",
-        "ForgetPass": "Lus hauv no teb Hav, koj puas tau hnov qab koj cov lus nug?"
+        "ForgetPass": "Lus hauv no teb Hav, koj puas tau hnov qab koj cov lus nug?",
+        "PassphraseSaved": "Koj sob lus hla tau txais kev cawmdim lawm.",
+        "IdentifierActivated": "Koj {{type}} tau ua kom tiav.",
+        "CompletedActivation": "Koj tau ua tiav cov neeg siv kev ua kom.",
+        "CompletedActivationLogIn": "Koj tau ua tiav cov neeg siv kev ua kom. Sim nkag mus hauv tam sim no."
     },
     "contacts": {
         "dialog": {
-            "title": "Xaiv qhov sib tham"
+            "title": "Xaiv qhov sib tham",
+            "CreateAccount": "+ Sib cuag Tshiab",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create tsis pom",
+            "SearchByName": "Tshawb ntawm npe"
         },
         "select": {
             "title": "Xaiv hu rau {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Thov xaiv daim ntawv lo.",
-        "inviteUser": "Caw Neeg"
+        "inviteUser": "Caw Neeg",
+        "selectRole": "Xaiv Lub Luag Haujlwm",
+        "inviteRole": "Caw {{role}}"
     },
-    "invalidLanguageSelected": "Cov lus xaiv tsis raug xaiv"
+    "invalidLanguageSelected": "Cov lus xaiv tsis raug xaiv",
+    "login": {
+        "title": "Zoo Siab Tos Txais",
+        "directions": "Tsim tus account, lossis nkag mus rau hauv.",
+        "directionsNoRegister": "Nkag mus yog hais tias koj muaj ib tug account.",
+        "goButton": "Mus",
+        "passphrase": "Sau koj kab lus pass:",
+        "loginButton": "Tau Pib",
+        "registerButton": "Tau Pib",
+        "resendButton": "Xa Cov Lus Qhia Kom Raug",
+        "forgot": "Tsis nco qab nws?",
+        "resendConfirm": "Koj puas xav xa ib tsab ntawv rau rov pib dua koj daim ntawv hla kev?",
+        "resendSuccess": "Txheeb xov kab rov pib dua koj lo lus hla",
+        "resendClose": "Kaw",
+        "noPassphrase": "Ua ntej koj tuaj yeem nkag mus, koj yuav tsum tsim kab lus hla los ntawm kev nyem qhov txuas hauv koj cov lus sau.",
+        "notVerified": "Koj yuav tsum xa koj tus kheej ib qho kev xa xov txhawm rau txhawm rau nkag mus.",
+        "emailExists": "Koj puas tau sim rau npe nrog tus email no ua ntej? Yog tias muaj, txheeb xyuas koj lub inbox kom qhib koj tus as khauj. <a href='#resend' class='Q_button Users_activation_resend'>Nyem rau rov xa cov lus<\/a>",
+        "mobileExists": "Koj puas tau sim rau npe nrog tus lej xov tooj no ua ntej? Yog li, xyuas koj cov SMS kom ua kom koj tus lej nyiaj. <a href='#resend' class='Q_button Users_activation_resend'>Nyem rau rov xa cov lus<\/a>",
+        "usingOther": "lossis koj ua tau",
+        "prompt": "Xaiv ib lub npe neeg siv:",
+        "newUser": "lossis tsim tus as khauj tshiab",
+        "placeholders": {
+            "identifier": "koj li # lossis email",
+            "mobile": "ntaus koj li #",
+            "email": "sau koj email chaw nyob",
+            "username": "username"
+        },
+        "confirmTerms": "Txais Cov Lus Qhia Kev Pabcuam?",
+        "facebookNoEmail": "Koj tus facebook account ploj lawm ib qho chaw nyob email. Cias teev nyob rau hauv txoj kev ib txwm nyob.",
+        "picTooltip": "Koj tuaj yeem hloov cov duab tom qab"
+    },
+    "setIdentifier": {
+        "title": "Ntxiv ib txoj hauv kev kom nkag mus",
+        "sendMessage": "Xa Cov Lus Qhia Kom Raug",
+        "placeholders": {
+            "identifier": "ntaus koj li # lossis email",
+            "mobile": "Ntaus koj tus lej naj npawb",
+            "email": "sau koj email chaw nyob",
+            "username": "username"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Txwm",
+        "areUsing": "Koj siv {{platform}} li",
+        "noLongerUsing": "Tam sim no koj tsis raug txuas nrog {{platform}} zoo li",
+        "doAuth": "Nkag mus nrog cov nyiaj no",
+        "doSwitch": "Hloov rau cov nyiaj no"
+    }
 }

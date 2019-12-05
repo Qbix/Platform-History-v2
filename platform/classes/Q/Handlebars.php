@@ -137,6 +137,9 @@ class Q_Handlebars {
 		$id = null;
 		if (isset($args[1]) && (is_string($args[1]) || is_numeric($args[1]))) {
 			$id = $args[1];
+			if (isset($args[2]) && is_string($args[2])) {
+				$tag = $args[2];
+			}
 		}
 		$t = new Q_Tree();
 		foreach ($args as $k => $v) {
@@ -165,7 +168,7 @@ class Q_Handlebars {
 			$classes = $o['class'];
 			unset($o['class']);
 		}
-		return Q::tool($name, $o, compact('id', 'classes'));
+		return Q::tool($name, $o, compact('id', 'classes', 'tag'));
 	}
 
 	static function helperLookup($template, $context, $args, $source)

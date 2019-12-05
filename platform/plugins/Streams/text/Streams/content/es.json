@@ -241,7 +241,7 @@
                 "byAvatar": "por {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "tiene un nuevo {{message.instructions.fromDisplayType}}",
+                "hasANew": "tiene un nuevo {{instructions.fromDisplayType}}",
                 "byAvatar": "agregado por {{avatar.displayName}}"
             }
         }

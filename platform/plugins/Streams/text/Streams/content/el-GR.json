@@ -241,7 +241,7 @@
                 "byAvatar": "από {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "έχει ένα νέο {{message.instructions.fromDisplayType}}",
+                "hasANew": "έχει ένα νέο {{instructions.fromDisplayType}}",
                 "byAvatar": "προστέθηκε από {{avatar.displayName}}"
             }
         }

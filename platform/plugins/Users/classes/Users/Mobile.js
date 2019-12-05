@@ -70,9 +70,13 @@ Users_Mobile.sendMessage = function (to, view, fields, options, callback) {
 		}
 	}
 	
+	var htmlEntities = require('html-entities').AllHtmlEntities;
+	var entities = new htmlEntities();
+	
 	var content = options.isSource
 		? Q.Handlebars.renderSource(view, fields)
 		: Q.view(view, fields, { language: options.language });
+	content = entities.decode(content);
 	
 	if (twilioClient
 	&& (from = options.from || Q.Config.get(['Users', 'mobile', 'from'], null))) {

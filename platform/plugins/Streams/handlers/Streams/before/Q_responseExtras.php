@@ -5,13 +5,6 @@ function Streams_before_Q_responseExtras()
 	Q_Response::addScript('{{Streams}}/js/Streams.js', 'Streams');
 	Q_Response::addScript('{{Streams}}/js/WebRTC.js' , 'Streams');
 
-	$user = Users::loggedInUser();
-	if ($user) {
-		Q_Response::setScriptData(
-			'Q.plugins.Users.loggedInUser.displayName', 
-			Streams::displayName($user)
-		);
-	}
 	if (!Q_Request::isAjax()) {
 		$invite_url = Q_Config::get('Streams', 'invite', 'url', "http://invites.to");
 		Q_Response::setScriptData('Q.plugins.Streams.invite.url', $invite_url);
@@ -45,11 +38,4 @@ function Streams_before_Q_responseExtras()
 		$typeUrls[$type] = $content['url'];
 	}
 	Q_Response::setScriptData('Q.plugins.Streams.urls', $typeUrls);
-	
-	if (Q_Session::id()) {
-		// We have a valid session. Generate a token for observe/neglect resources etc.
-		if ($permissions = Q_Config::get('Streams', 'public', 'permissions', null)) {
-			Users::capability()->addPermission($permissions);
-		}
-	}
 }

@@ -102,5 +102,11 @@
         "noLongerUsing": "M&#39;għadekx konness ma &#39;{{platform}} bħala",
         "doAuth": "Idħol ma &#39;dan il-kont",
         "doSwitch": "Aqleb għal dan il-kont"
+    },
+    "roles": {
+        "Owner": "Sid il-prodott",
+        "Admin": "Amministratur",
+        "Member": "Membru",
+        "Guest": "Mistieden"
     }
 }

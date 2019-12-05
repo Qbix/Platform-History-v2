@@ -738,6 +738,8 @@ class Q
 	 * @param {boolean} [$extra.cache=false]
 	 *    If true, then the Qbix front end will not replace existing tools with same id
 	 *    during Q.loadUrl when this tool appears in the rendered HTML
+	 * @param {string} [$extra.tag='div']
+	 *    You can pass a different HTML tag name to use instead of "div"
 	 * @param {string} [$extra.classes]
 	 *    You can pass this to add any additional CSS classes to the tool's element
 	 * @param {string} [$extra.attributes]
@@ -1446,7 +1448,12 @@ class Q
 		if (isset($max_levels)) {
 			self::$var_dump_max_levels = $max_levels;
 		}
-		self::do_dump($var, $label . $vname, null, null, $as_text);
+		try {
+			self::do_dump($var, $label . $vname, null, null, $as_text);
+		} catch (Exception $e) {
+			// maybe can't traverse an already closed generator, or something else
+			// just continue
+		}
 		if (isset($max_levels)) {
 			self::$var_dump_max_levels = $current_levels;
 		}

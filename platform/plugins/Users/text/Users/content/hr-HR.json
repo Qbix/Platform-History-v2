@@ -102,5 +102,11 @@
         "noLongerUsing": "Više niste povezani sa {{platform}} kao",
         "doAuth": "Prijavite se s ovim računom",
         "doSwitch": "Prebacite se na ovaj račun"
+    },
+    "roles": {
+        "Owner": "Vlasnik",
+        "Admin": "Admin",
+        "Member": "Član",
+        "Guest": "Gost"
     }
 }

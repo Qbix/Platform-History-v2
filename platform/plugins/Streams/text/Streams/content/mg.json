@@ -3,8 +3,8 @@
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams/invited": "Ny olona nasaina",
-        "Streams/invitedMe": "Izay nanasa ahy"
+        "Streams\/invited": "Ny olona nasaina",
+        "Streams\/invitedMe": "Izay nanasa ahy"
     },
     "interests": {
         "Filter": "Inona no tianao?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Azonao antoka fa te hanidy ity chat ity ianao?",
         "closeChatConfirmYes": "Eny",
         "closeChatConfirmNo": "No",
-        "earlierComments": "fanehoan-kevitra teo aloha"
+        "earlierComments": "fanehoan-kevitra teo aloha",
+        "Subscribed": "Fampandrenesana moana",
+        "Unsubscribed": "Makà fampandrenesana",
+        "notAllowedToJoinCall": "Tsy manana alalana hiditra amin&#39;ity resaka ity ianao.",
+        "startedConversation": "nanomboka resaka",
+        "RealTimeCall": "Fiantsoana tena fotoana",
+        "SearchByName": "Mikaraho amin&#39;ny anarany"
     },
     "notifications": {
         "*": "Hafatra {{& message.fields.type}} amin&#39;ny {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Fandrosoana vita amin&#39;ny {{stream.fields.title}}",
         "Streams\/task\/complete": "Tanjona vita: {{stream.fields.title}}",
         "Streams\/task\/error": "Hadisoana nandritra ny: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Hafatra ho avy"
+        "Streams\/incoming\/*": "{{app}}: Hafatra ho avy",
+        "Streams\/relatedTo\/Streams\/call": "Nisy antso vaovao nanomboka tamin&#39;ny {{toTitle}}",
+        "Streams\/relatedTo\/*": "Vaovao {{relationDisplayType}} amin&#39;ny {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Nampiana tamin&#39;ny {{toTitle}} ho {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} no nanonona anao tao anaty hevitra",
+        "Streams\/call": "Miantso anao ny {{displayName}}"
     },
     "invite": {
         "messageContent": "{{displayName}} manasa anao ho any {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Email",
             "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} raha namboarina ilay kaody"
         },
         "email": {
             "subject": "Hey, jereo ity",
             "PleaseVisitLink": "Alefaso azafady ity rohy manaraka ity:",
             "InvitingYou": "Manasa anao amin&#39;ny {{title}}",
-            "HasInvitedYou": "{{displayName}} dia nanasa anao ho any amin&#39;ny {{title}}"
+            "HasInvitedYou": "{{displayName}} dia nanasa anao ho any amin&#39;ny {{title}}",
+            "HasMentionedYou": "{{displayName}} dia efa niresaka taminao tamin&#39;ny &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Nasaina hanatrika ny {{title}} ianao. Azafady, tadiavo {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Alefaso ny mikrôfo",
             "cameraTitle": "Enable Camera",
-            "cameraAndMicrophoneTitle": "Enable Camera and Microphone"
+            "cameraAndMicrophoneTitle": "Enable Camera and Microphone",
+            "dialogTitle": "mampifandray",
+            "microphoneBtn": "Ampiasao ny mikrô",
+            "cameraBtn": "Azafady ny fakantsary",
+            "cameraAndMicrophoneBtn": "Ampiasao ny fakan-tsary sy ny mikrô"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "nandefa hafatra <em>{{message.fields.type}}<\/em> ho an&#39;ny {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "naneho hevitra",
+            "in": "in",
+            "body": "amin&#39;ny {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "dia efa navoaka",
+                "byAvatar": "by {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "manana vaovao {{instructions.fromDisplayType}}",
+                "byAvatar": "nampian&#39;i {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "nasaina",
+            "description": "Pooaka ho an&#39;ny fanasana"
+        },
+        "Streams\/resource": {
+            "displayType": "Resource",
+            "description": "mikoriana amin&#39;ny fitantanana ny fidirana loharano ary mamoaka hafatra momba ireo fanavaozana"
+        },
+        "Streams\/task": {
+            "description": "satria mahazo vaovao farany momba ny fandrosoana amin&#39;ny asa iray",
+            "displayType": "Task"
+        },
+        "Streams\/tasks": {
+            "description": "sokajy ho an&#39;ny asa",
+            "displayType": "asa"
+        },
+        "Streams\/experience": {
+            "description": "traikefa mahazatra ho an&#39;ny mpikambana ao amin&#39;ny vondron&#39;olona iray",
+            "displayType": "Traikefa mahazatra ho an&#39;ny mpikambana ao amin&#39;ny vondron&#39;olona iray"
+        },
+        "Streams\/greeting": {
+            "description": "fiarahabana izay ahafahan&#39;ny mpampiasa mampahafantatra ny tenany",
+            "displayType": "miarahaba"
+        },
+        "Streams\/number": {
+            "displayType": "Number",
+            "description": "isa matematika"
+        },
+        "Streams\/date": {
+            "displayType": "Date",
+            "description": "daty"
+        },
+        "Streams\/text": {
+            "displayType": "Text",
+            "description": "body text"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Text",
+            "description": "vatana kely misy soratra"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Text",
+            "description": "anton-tsoratra mahazatra"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Adiresy mailaka",
+            "description": "adiresy mailaka"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Nomeraon-telefaona",
+            "description": "nomeraon-telefaona"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "rohy amin&#39;ny tranonkala"
+        },
+        "Streams\/image": {
+            "displayType": "Image",
+            "description": "sary fahitana"
+        },
+        "Streams\/images": {
+            "displayType": "Gallery Gallery",
+            "description": "galeran&#39;ny sary"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "rakitsary izay ifandraisan&#39;ny media isan-karazany"
+        },
+        "Streams\/file": {
+            "displayType": "File",
+            "description": "nampidirina"
+        },
+        "Streams\/audio": {
+            "displayType": "Clip Audio",
+            "description": "audio clip"
+        },
+        "Streams\/video": {
+            "displayType": "Horonan-tsarimihetsika",
+            "description": "sary mihetsika"
+        },
+        "Streams\/live": {
+            "displayType": "LiveStream",
+            "description": "mivantana an-tsary na horonan-tsary"
+        },
+        "Streams\/category": {
+            "displayType": "Category",
+            "description": "sokajy azo ampifandraisina amina renirano hafa"
+        },
+        "Streams\/participating": {
+            "displayType": "Fanondroana fandraisana anjara",
+            "description": "ny renirano dia mifandraika \/ tsy misy ifandraisany amin&#39;io rehefa misy mpampiasa iray mikambana \/ miala"
+        },
+        "Streams\/interest": {
+            "displayType": "Interest",
+            "description": "maneho ny mahaliana ny mpampiasa iray amin&#39;ny lohahevitra iray"
+        },
+        "Streams\/incoming": {
+            "displayType": "Incoming",
+            "description": "toerana ho an&#39;ny hafatra nalefan&#39;ireo mpampiasa hafa"
+        },
+        "Streams\/chat": {
+            "displayType": "Conversation",
+            "description": "resaka ifanaovan&#39;ny mpampiasa, amin&#39;ny tantara"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Antso tena-fotoana",
+            "description": "antso an-tsary \/ audio tena ora"
         }
     }
 }

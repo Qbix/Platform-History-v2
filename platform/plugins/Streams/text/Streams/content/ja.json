@@ -242,7 +242,7 @@
                 "byAvatar": "{{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "新しい{{message.instructions.fromDisplayType}}があります",
+                "hasANew": "新しい{{instructions.fromDisplayType}}があります",
                 "byAvatar": "{{avatar.displayName}}によって追加されました"
             }
         }

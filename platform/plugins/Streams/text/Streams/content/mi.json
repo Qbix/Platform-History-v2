@@ -3,8 +3,8 @@
         "NewItemTitle": "Tuhinga Hou"
     },
     "labels": {
-        "Streams/invited": "Nga tangata i karangatia",
-        "Streams/invitedMe": "Ko wai i kii mai ki ahau"
+        "Streams\/invited": "Nga tangata i karangatia",
+        "Streams\/invitedMe": "Ko wai i kii mai ki ahau"
     },
     "interests": {
         "Filter": "He aha koe e koa ana?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Kei te hiahia koe kia kati i tenei korerorero?",
         "closeChatConfirmYes": "Ae",
         "closeChatConfirmNo": "No",
-        "earlierComments": "Tuhinga o mua"
+        "earlierComments": "Tuhinga o mua",
+        "Subscribed": "Nga Korongo Korero",
+        "Unsubscribed": "Tikina nga Panui",
+        "notAllowedToJoinCall": "Kaore he whakaaetanga kia uru atu ki tenei korerorero.",
+        "startedConversation": "haamata tetahi korero",
+        "RealTimeCall": "Karanga Real Time",
+        "SearchByName": "Rapua te ingoa"
     },
     "notifications": {
         "*": "Karere {{& message.fields.type}} ki {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Ko te ahunga whakamua i {{stream.fields.title}}",
         "Streams\/task\/complete": "Kua oti te mahi: {{stream.fields.title}}",
         "Streams\/task\/error": "Hapa i te wā: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Karere Taumai"
+        "Streams\/incoming\/*": "{{app}}: Karere Taumai",
+        "Streams\/relatedTo\/Streams\/call": "Kua Toro Panui Hou i {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} i {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Ka tapiritia ki te {{toTitle}} hei {{relationDisplayType}}",
+        "Streams\/mention": "Na {{&call 'avatar.displayName'}} koe i korero i to korero",
+        "Streams\/call": "Kei te karanga koe i a {{displayName}}"
     },
     "invite": {
         "messageContent": "{{displayName}} i karangatia koe ki {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Īmēra",
             "byText": "Kuputuhi",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} mena kua tohua te tohu"
         },
         "email": {
             "subject": "Tena, tirohia tenei",
             "PleaseVisitLink": "Tena koa ki te hononga e whai ake nei:",
             "InvitingYou": "Kei te karanga ahau ki a koe [{999}}",
-            "HasInvitedYou": "Kua karangatia koe e {{displayName}} ki {{title}}"
+            "HasInvitedYou": "Kua karangatia koe e {{displayName}} ki {{title}}",
+            "HasMentionedYou": "{{displayName}} kua kii i a koe i &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Kua tohaina koe ki {{title}}. Tena koa {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Whakahohea te Waeaoro",
             "cameraTitle": "Whakahohea te Kāmera",
-            "cameraAndMicrophoneTitle": "Whakahohea te Kāmera me te Waeaoro"
+            "cameraAndMicrophoneTitle": "Whakahohea te Kāmera me te Waeaoro",
+            "dialogTitle": "Tūhono",
+            "microphoneBtn": "Whakahohea te Microphone",
+            "cameraBtn": "Whakahohe kāmera",
+            "cameraAndMicrophoneBtn": "Whakahohea te Kamera me te Microphone"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "i tukuna he karere <em>{{message.fields.type}}<\/em> ki {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "i korero mo",
+            "in": "i roto",
+            "body": "i roto i {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "kua tukuna iatu ki",
+                "byAvatar": "e {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "he hou {{instructions.fromDisplayType}}",
+                "byAvatar": "tapiritia e {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Ua taponohia",
+            "description": "Pouakauru mo nga tono akiaki"
+        },
+        "Streams\/resource": {
+            "displayType": "Rauemi",
+            "description": "rere mo te whakahaere i te uru ki tetahi rauemi me te tuku korero mo nga whakahoutanga"
+        },
+        "Streams\/task": {
+            "description": "mo te whiwhi whakahoutanga mo te ahunga whakamua i runga i tetahi mahi",
+            "displayType": "Mahi"
+        },
+        "Streams\/tasks": {
+            "description": "waahanga mo nga mahi",
+            "displayType": "Nga Mahi"
+        },
+        "Streams\/experience": {
+            "description": "he wheako noa mo nga mema o te hapori",
+            "displayType": "He wheako noa mo nga mema o tetahi hapori"
+        },
+        "Streams\/greeting": {
+            "description": "nga mihi me pehea e taea ai e te kaiwhakamahi te whakauru i a raatau ano",
+            "displayType": "Nunui"
+        },
+        "Streams\/number": {
+            "displayType": "Tau",
+            "description": "tau pāngarau"
+        },
+        "Streams\/date": {
+            "displayType": "Rangi",
+            "description": "rā"
+        },
+        "Streams\/text": {
+            "displayType": "Kakano",
+            "description": "Tuhinga o mua"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Kakano",
+            "description": "Tuhinga o mua"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Kakano",
+            "description": "Tuhinga o mua"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Wāhitau Emailmera",
+            "description": "wāhitau īmēra"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Tau Waea",
+            "description": "tau waea"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "hono ki te tukutuku"
+        },
+        "Streams\/image": {
+            "displayType": "Whakaahua",
+            "description": "atahanga ahua"
+        },
+        "Streams\/images": {
+            "displayType": "Taiwhanga Whakaahua",
+            "description": "Tuhinga o mua"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "he album e hono atu ai nga momo pāpāho"
+        },
+        "Streams\/file": {
+            "displayType": "Kōnae",
+            "description": "tukuake"
+        },
+        "Streams\/audio": {
+            "displayType": "Ataata Ororongo",
+            "description": "topenga oro"
+        },
+        "Streams\/video": {
+            "displayType": "Ataata Ataata",
+            "description": "topenga ataata"
+        },
+        "Streams\/live": {
+            "displayType": "Whanui",
+            "description": "ataata ororongo ranei"
+        },
+        "Streams\/category": {
+            "displayType": "Kāwai",
+            "description": "he waahanga e pa ana ki etahi atu awa"
+        },
+        "Streams\/participating": {
+            "displayType": "Whai Wahanga whakauru",
+            "description": "e hono ana \/ e hono ana nga awa ki tenei ka uru ana te kaiwhakamahi ki te rau"
+        },
+        "Streams\/interest": {
+            "displayType": "Kawenga",
+            "description": "e tohu ana i nga hiahia o te kaiwhakamahi ki tetahi kaupapa"
+        },
+        "Streams\/incoming": {
+            "displayType": "Whakauru",
+            "description": "haerenga mo nga karere i tukuna e etahi atu kaiwhakamahi"
+        },
+        "Streams\/chat": {
+            "displayType": "Whakawhiti",
+            "description": "he korerorero i waenga i nga kaiwhakamahi, me te hitori"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Karangatia-Katoa Waea",
+            "description": "he waea ataata \/ oro korero tūturu"
         }
     }
 }

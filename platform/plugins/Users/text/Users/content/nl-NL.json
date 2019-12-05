@@ -102,5 +102,11 @@
         "noLongerUsing": "U bent niet langer verbonden met {{platform}} als",
         "doAuth": "Log in met dit account",
         "doSwitch": "Schakel over naar dit account"
+    },
+    "roles": {
+        "Owner": "Eigenaar",
+        "Admin": "beheerder",
+        "Member": "Lid",
+        "Guest": "Gast"
     }
 }

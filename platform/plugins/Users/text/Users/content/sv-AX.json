@@ -102,5 +102,11 @@
         "noLongerUsing": "Du är inte längre ansluten till {{platform}} som",
         "doAuth": "Logga in med det här kontot",
         "doSwitch": "Byt till det här kontot"
+    },
+    "roles": {
+        "Owner": "Ägare",
+        "Admin": "Administration",
+        "Member": "Medlem",
+        "Guest": "Gäst"
     }
 }

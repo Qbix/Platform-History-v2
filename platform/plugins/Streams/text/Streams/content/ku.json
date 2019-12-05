@@ -3,8 +3,8 @@
         "NewItemTitle": "Pirtûka nû"
     },
     "labels": {
-        "Streams/invited": "Mirovên ku ez vexwendin",
-        "Streams/invitedMe": "Yê ku min vexwendin"
+        "Streams\/invited": "Mirovên ku ez vexwendin",
+        "Streams\/invitedMe": "Yê ku min vexwendin"
     },
     "interests": {
         "Filter": "Hûn bi kêfê dikin?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Ma hûn rast binivîsin ku hûn vê chat-ê nêzî bikin?",
         "closeChatConfirmYes": "Erê",
         "closeChatConfirmNo": "Na",
-        "earlierComments": "pêşniyarên berê"
+        "earlierComments": "pêşniyarên berê",
+        "Subscribed": "Nîşaneyên Muteşîn",
+        "Unsubscribed": "Sererastkirinan bistînin",
+        "notAllowedToJoinCall": "Tu destûr nîn e ku beşdarî vê danûstendinê bibe.",
+        "startedConversation": "axaftinek dest pê kir",
+        "RealTimeCall": "Banga Wexta rast",
+        "SearchByName": "Bi navî bigerin"
     },
     "notifications": {
         "*": "Peyama {{& message.fields.type}} ji {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Pêşveçûn li ser {{stream.fields.title}}",
         "Streams\/task\/complete": "Task qedandin: {{stream.fields.title}}",
         "Streams\/task\/error": "Di dema çewtiyê de {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Peyama Dawîn"
+        "Streams\/incoming\/*": "{{app}}: Peyama Dawîn",
+        "Streams\/relatedTo\/Streams\/call": "Banga Nû Li {999} Dest pê kir",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Zêdetir {999}} wek {{1000} Added",
+        "Streams\/mention": "99 99 999} you di şîroveyekê de ji we re destnîşan kir",
+        "Streams\/call": "99 999}} gazî we dike"
     },
     "invite": {
         "messageContent": "{{displayName}} tu ji {{inviteUrl}} vexwendin",
@@ -59,13 +70,15 @@
             "byEmail": "Email",
             "byText": "Nivîstok",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "The 99 999}} heke kodê nexşandî bû"
         },
         "email": {
             "subject": "Hey, vê yekê bibînin",
             "PleaseVisitLink": "Ji kerema xwe pêwendiya jêrîn bibînin:",
             "InvitingYou": "Ez ji we re ji {{title}} vexwendin",
-            "HasInvitedYou": "{{displayName}} te ji bo {{title}} vexwendin"
+            "HasInvitedYou": "{{displayName}} te ji bo {{title}} vexwendin",
+            "HasMentionedYou": "{{displayName}} we di &quot;{{title}}&quot; de qala we kiriye."
         },
         "sms": {
             "content": "Ji bo {{title}} ve hat vexwendin. Ji kerema xwe {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Microphone",
             "cameraTitle": "Kamera çalak",
-            "cameraAndMicrophoneTitle": "Kamera û Microphone çalak bike"
+            "cameraAndMicrophoneTitle": "Kamera û Microphone çalak bike",
+            "dialogTitle": "Girêdana",
+            "microphoneBtn": "Mîkrofon aktîf bike",
+            "cameraBtn": "Kamera çalak bike",
+            "cameraAndMicrophoneBtn": "Kamera û mîkrofona çalak bikin"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "peyamek <em>{{999}<\/em> posted şand {{1000}"
+        },
+        "text": {
+            "commentedOn": "şîrove kirin",
+            "in": "li",
+            "body": "di {999}}: {{1000}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ve hatî şandin",
+                "byAvatar": "by {{999}"
+            },
+            "relatedTo": {
+                "hasANew": "nû {999} nû heye",
+                "byAvatar": "added by {{999 added"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Vexwendin",
+            "description": "Inbox ji bo vexwendinan"
+        },
+        "Streams\/resource": {
+            "displayType": "Kanî",
+            "description": "stream ji bo cîbicîkirina çavkaniyek û şandina peyamên di derbarê nûvekirinan de"
+        },
+        "Streams\/task": {
+            "description": "ji bo wergirtina nûvekirinên di derbarê pêşkeftina li ser karekî diyarkirî de",
+            "displayType": "Karî"
+        },
+        "Streams\/tasks": {
+            "description": "kategoriya ji bo peywiran",
+            "displayType": "Karên"
+        },
+        "Streams\/experience": {
+            "description": "ezmûnek hevbeş ji bo endamên civatekê",
+            "displayType": "Tecrubeya hevbeş ji bo endamên civatekê"
+        },
+        "Streams\/greeting": {
+            "description": "silav bi wan re ku bikarhênerek dikare xwe danasîne",
+            "displayType": "Silav"
+        },
+        "Streams\/number": {
+            "displayType": "Jimare",
+            "description": "hejmar matematîkî"
+        },
+        "Streams\/date": {
+            "displayType": "Rojek",
+            "description": "rojek"
+        },
+        "Streams\/text": {
+            "displayType": "Nivîstok",
+            "description": "laşê nivîsê"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Nivîstok",
+            "description": "laşê piçûk a nivîsê"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Nivîstok",
+            "description": "laşê navîn a nivîsê"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Navnîşana emailê",
+            "description": "navnîşana emailê"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Jimare telefon",
+            "description": "jimare telefon"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "li ser tevneyê girêdan"
+        },
+        "Streams\/image": {
+            "displayType": "Wêne",
+            "description": "wêneya dîtbar"
+        },
+        "Streams\/images": {
+            "displayType": "Galeriya Wêne",
+            "description": "galeriya wêneyan"
+        },
+        "Streams\/album": {
+            "displayType": "Albûm",
+            "description": "albûmek ku bi çapemeniya cihêreng ve girêdayî ye"
+        },
+        "Streams\/file": {
+            "displayType": "Dosî",
+            "description": "pelê hilandin"
+        },
+        "Streams\/audio": {
+            "displayType": "Clip Audio",
+            "description": "klîp audio"
+        },
+        "Streams\/video": {
+            "displayType": "Video Clip",
+            "description": "klîpa vîdyoyê"
+        },
+        "Streams\/live": {
+            "displayType": "Zindî",
+            "description": "zindî an vîdyoyê zindî bikin"
+        },
+        "Streams\/category": {
+            "displayType": "Liq",
+            "description": "kategoriyek ku bi pêlên din re têkildar be"
+        },
+        "Streams\/participating": {
+            "displayType": "Indeksa Tevlêbûnê",
+            "description": "Dema ku bikarhênerek têkevê \/ vekişîne ev pêl bi vê \/ têkildar re ne girêdayî ye"
+        },
+        "Streams\/interest": {
+            "displayType": "Zem",
+            "description": "di mijareke diyar de berjewendiya bikarhênerê temsîl dike"
+        },
+        "Streams\/incoming": {
+            "displayType": "Hatin",
+            "description": "ji bo peyamên ku ji hêla bikarhênerên din ve hatine şandin"
+        },
+        "Streams\/chat": {
+            "displayType": "Kêfî",
+            "description": "danûstendinek di navbera bikarhêneran de, bi dîrokê"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Banga rast-time",
+            "description": "telefonek \/ vîdyoyek rastîn a rastîn"
         }
     }
 }

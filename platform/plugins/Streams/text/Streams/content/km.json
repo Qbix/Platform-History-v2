@@ -3,8 +3,8 @@
         "NewItemTitle": "ធាតុថ្មី"
     },
     "labels": {
-        "Streams/invited": "មនុស្សដែលខ្ញុំបានអញ្ជើញ",
-        "Streams/invitedMe": "តើអ្នកណាបានអញ្ជើញខ្ញុំ"
+        "Streams\/invited": "មនុស្សដែលខ្ញុំបានអញ្ជើញ",
+        "Streams\/invitedMe": "តើអ្នកណាបានអញ្ជើញខ្ញុំ"
     },
     "interests": {
         "Filter": "តើអ្នកចូលចិត្តអ្វី?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "តើអ្នកប្រាកដជាចង់បិទការជជែកនេះមែនទេ?",
         "closeChatConfirmYes": "បាទ",
         "closeChatConfirmNo": "ទេ",
-        "earlierComments": "យោបល់មុន"
+        "earlierComments": "យោបល់មុន",
+        "Subscribed": "បិទការជូនដំណឹង",
+        "Unsubscribed": "ទទួល​បាន​ការ​ជូនដំណឹង",
+        "notAllowedToJoinCall": "អ្នកគ្មានសិទ្ធិចូលរួមការសន្ទនានេះទេ។",
+        "startedConversation": "ចាប់ផ្តើមការសន្ទនា",
+        "RealTimeCall": "ការហៅពេលវេលាពិតប្រាកដ",
+        "SearchByName": "ស្វែងរកតាមឈ្មោះ"
     },
     "notifications": {
         "*": "សារ {{& message.fields.type}} ទៅ {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "វឌ្ឍនភាពបានធ្វើនៅលើ {{stream.fields.title}}",
         "Streams\/task\/complete": "កិច្ចការត្រូវបានបញ្ចប់: {{stream.fields.title}}",
         "Streams\/task\/error": "កំហុសក្នុងកំឡុងពេល: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: សារចូល"
+        "Streams\/incoming\/*": "{{app}}: សារចូល",
+        "Streams\/relatedTo\/Streams\/call": "ការហៅថ្មីបានចាប់ផ្តើមនៅ {{៩៩៩}}",
+        "Streams\/relatedTo\/*": "{{៩៩៩}} ថ្មីនៅក្នុង {{១០០០}}",
+        "Streams\/relatedFrom\/*": "បានបន្ថែមទៅ {{៩៩៩}} ជា {{១០០០}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} បានលើកឡើងពីអ្នកនៅក្នុងមតិយោបល់",
+        "Streams\/call": "{{displayName}} កំពុងហៅអ្នក"
     },
     "invite": {
         "messageContent": "{{displayName}} បានអញ្ជើញអ្នកមក {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "អ៊ីមែល",
             "byText": "អត្ថបទ",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} ប្រសិនបើលេខកូដត្រូវបានស្កេន"
         },
         "email": {
             "subject": "ហេសូមពិនិត្យមើលវាចេញ",
             "PleaseVisitLink": "សូមទស្សនាតំណខាងក្រោម:",
             "InvitingYou": "ខ្ញុំសូមអញ្ជើញអ្នកចូលរួម {{title}}",
-            "HasInvitedYou": "{{displayName}} បានអញ្ជើញអ្នកមក {{title}}"
+            "HasInvitedYou": "{{displayName}} បានអញ្ជើញអ្នកមក {{title}}",
+            "HasMentionedYou": "{{៩៩៩}} បាននិយាយអំពី &quot;{{១០០០}}&quot;"
         },
         "sms": {
             "content": "អ្នកត្រូវបានអញ្ជើញឱ្យចូល {{title}} ។ សូមប៉ះ {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "បើកដំណើរការមីក្រូហ្វូន",
             "cameraTitle": "បើកកាមេរ៉ា",
-            "cameraAndMicrophoneTitle": "បើកដំណើរការកាមេរ៉ានិងមីក្រូហ្វូន"
+            "cameraAndMicrophoneTitle": "បើកដំណើរការកាមេរ៉ានិងមីក្រូហ្វូន",
+            "dialogTitle": "ភ្ជាប់",
+            "microphoneBtn": "បើកដំណើរការមីក្រូហ្វូន",
+            "cameraBtn": "បើកដំណើរការកាមេរ៉ា",
+            "cameraAndMicrophoneBtn": "បើកម៉ាស៊ីនថតនិងមីក្រូ"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "បានប្រកាសសារ <em>{{៩៩៩}}<\/em> ទៅ {{១០០០}}"
+        },
+        "text": {
+            "commentedOn": "អត្ថាធិប្បាយលើ",
+            "in": "ក្នុង",
+            "body": "ក្នុង {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ត្រូវបានគេបង្ហោះទៅ",
+                "byAvatar": "ដោយ {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "មាន {{៩៩៩}} ថ្មី",
+                "byAvatar": "បន្ថែមដោយ {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "បានអញ្ជើញ",
+            "description": "ប្រអប់សំបុត្រសម្រាប់ការអញ្ជើញ"
+        },
+        "Streams\/resource": {
+            "displayType": "ធនធាន",
+            "description": "ស្ទ្រីមសម្រាប់គ្រប់គ្រងការចូលប្រើធនធាននិងប្រកាសសារអំពីបច្ចុប្បន្នភាព"
+        },
+        "Streams\/task": {
+            "description": "ចំពោះការទទួលបានបច្ចុប្បន្នភាពអំពីវឌ្ឍនភាពលើកិច្ចការជាក់លាក់",
+            "displayType": "កិច្ចការ"
+        },
+        "Streams\/tasks": {
+            "description": "ប្រភេទសម្រាប់ភារកិច្ច",
+            "displayType": "ភារកិច្ច"
+        },
+        "Streams\/experience": {
+            "description": "បទពិសោធន៍ទូទៅសម្រាប់សមាជិកសហគមន៍",
+            "displayType": "បទពិសោធន៍ទូទៅសម្រាប់សមាជិកសហគមន៍"
+        },
+        "Streams\/greeting": {
+            "description": "ស្វាគមន៍ដែលអ្នកប្រើប្រាស់អាចណែនាំខ្លួនពួកគេ",
+            "displayType": "ការសួរសុខទុក្ខ"
+        },
+        "Streams\/number": {
+            "displayType": "ចំនួន",
+            "description": "លេខគណិតវិទ្យា"
+        },
+        "Streams\/date": {
+            "displayType": "កាលបរិច្ឆេទ",
+            "description": "កាលបរិច្ឆេទ"
+        },
+        "Streams\/text": {
+            "displayType": "អត្ថបទ",
+            "description": "តួអត្ថបទ"
+        },
+        "Streams\/text\/small": {
+            "displayType": "អត្ថបទ",
+            "description": "តួអត្ថបទតូច"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "អត្ថបទ",
+            "description": "តួអត្ថបទមធ្យម"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "អាស័យ​ដ្ឋាន​អ៊ី​ម៉េ​ល",
+            "description": "អាស័យ​ដ្ឋាន​អ៊ី​ម៉េ​ល"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "លេខទូរសព្ទ",
+            "description": "លេខទូរសព្ទ"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "តំណភ្ជាប់នៅលើគេហទំព័រ"
+        },
+        "Streams\/image": {
+            "displayType": "រូបភាព",
+            "description": "រូបភាពមើលឃើញ"
+        },
+        "Streams\/images": {
+            "displayType": "វិចិត្រសាលរូបភាព",
+            "description": "វិចិត្រសាលរូបភាព"
+        },
+        "Streams\/album": {
+            "displayType": "អាល់ប៊ុម",
+            "description": "អាល់ប៊ុមដែលមេឌៀផ្សេងៗទាក់ទង"
+        },
+        "Streams\/file": {
+            "displayType": "ឯកសារ",
+            "description": "ឯកសារដែលបានផ្ទុកឡើង"
+        },
+        "Streams\/audio": {
+            "displayType": "ឈុតសំលេង",
+            "description": "ឈុតសំលេង"
+        },
+        "Streams\/video": {
+            "displayType": "ឈុតវីដេអូ",
+            "description": "ឈុតវីដេអូ"
+        },
+        "Streams\/live": {
+            "displayType": "ផ្សាយ​ផ្ទាល់",
+            "description": "អូឌីយ៉ូបន្តផ្ទាល់ឬវីដេអូ"
+        },
+        "Streams\/category": {
+            "displayType": "ប្រភេទ",
+            "description": "ប្រភេទដែលស្ទ្រីមផ្សេងទៀតអាចទាក់ទង"
+        },
+        "Streams\/participating": {
+            "displayType": "សន្ទស្សន៍ចូលរួម",
+            "description": "ការផ្សាយផ្ទាល់គឺទាក់ទង \/ មិនទាក់ទងនឹងបញ្ហានេះនៅពេលអ្នកប្រើប្រាស់ភ្ជាប់ \/ ទុក"
+        },
+        "Streams\/interest": {
+            "displayType": "ចំណាប់អារម្មណ៍",
+            "description": "តំណាងឱ្យចំណាប់អារម្មណ៍របស់អ្នកប្រើប្រាស់នៅក្នុងប្រធានបទជាក់លាក់មួយ"
+        },
+        "Streams\/incoming": {
+            "displayType": "ចូល",
+            "description": "ទិសដៅសម្រាប់សារដែលបានផ្ញើដោយអ្នកប្រើផ្សេងទៀត"
+        },
+        "Streams\/chat": {
+            "displayType": "ការសន្ទនា",
+            "description": "ការសន្ទនារវាងអ្នកប្រើប្រាស់និងប្រវត្តិ"
+        },
+        "Streams\/webrtc": {
+            "displayType": "ការហៅពេលវេលាពិតប្រាកដ",
+            "description": "ការហៅជាវីដេអូ \/ អូឌីយ៉ូពេលវេលាពិត"
         }
     }
 }

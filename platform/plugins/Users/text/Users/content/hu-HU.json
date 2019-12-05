@@ -102,5 +102,11 @@
         "noLongerUsing": "Ön már nem kapcsolódik a (z) {{platform}} -hez",
         "doAuth": "Jelentkezzen be ezzel a fiókkal",
         "doSwitch": "Váltás erre a fiókra"
+    },
+    "roles": {
+        "Owner": "Tulajdonos",
+        "Admin": "admin",
+        "Member": "Tag",
+        "Guest": "Vendég"
     }
 }

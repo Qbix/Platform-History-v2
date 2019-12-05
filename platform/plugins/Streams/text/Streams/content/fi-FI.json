@@ -241,7 +241,7 @@
                 "byAvatar": "lähettäjä {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "on uusi {{message.instructions.fromDisplayType}}",
+                "hasANew": "on uusi {{instructions.fromDisplayType}}",
                 "byAvatar": "lisännyt {{avatar.displayName}}"
             }
         }

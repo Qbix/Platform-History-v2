@@ -102,5 +102,11 @@
         "noLongerUsing": "Anda tidak lagi berhubung dengan {{platform}} sebagai",
         "doAuth": "Log masuk dengan akaun ini",
         "doSwitch": "Beralih ke akaun ini"
+    },
+    "roles": {
+        "Owner": "Pemilik",
+        "Admin": "Admin",
+        "Member": "Ahli",
+        "Guest": "Tetamu"
     }
 }

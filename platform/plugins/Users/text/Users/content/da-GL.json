@@ -102,5 +102,11 @@
         "noLongerUsing": "Du er ikke længere tilsluttet {{platform}} som",
         "doAuth": "Log ind med denne konto",
         "doSwitch": "Skift til denne konto"
+    },
+    "roles": {
+        "Owner": "Ejer",
+        "Admin": "Admin",
+        "Member": "Medlem",
+        "Guest": "Gæst"
     }
 }

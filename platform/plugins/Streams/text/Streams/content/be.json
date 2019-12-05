@@ -241,7 +241,7 @@
                 "byAvatar": "па {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "мае новы {{message.instructions.fromDisplayType}}",
+                "hasANew": "мае новы {{instructions.fromDisplayType}}",
                 "byAvatar": "дадаў {{avatar.displayName}}"
             }
         }

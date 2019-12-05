@@ -18,7 +18,8 @@
         "GetStarted": "Kòmanse",
         "Authorize": "Otorize",
         "TermsLabel": "Mwen te li epi mwen dakò <br> nan {{link}}",
-        "TermsTitle": "Tèm yo"
+        "TermsTitle": "Tèm yo",
+        "mustAgree": "Premye ou dwe dakò ak tèm yo."
     },
     "register": {
         "TermsLabel": "Mwen aksepte {{link}}",
@@ -31,11 +32,18 @@
         "no": "Non",
         "WelcomePleaseVerifyEmail": "Byenveni! Tanpri verifye adrès imèl ou.",
         "WelcomeVerifyEmail": "Byenveni! Verify adrès imel ou.",
-        "ForgetPass": "Hey, ou te bliye pasfraz ou a?"
+        "ForgetPass": "Hey, ou te bliye pasfraz ou a?",
+        "PassphraseSaved": "Fraz pas ou te sove.",
+        "IdentifierActivated": "{{type}} ou te aktive.",
+        "CompletedActivation": "Ou te fini aktivasyon itilizatè.",
+        "CompletedActivationLogIn": "Ou te fini aktivasyon itilizatè. Eseye antre nan kounye a."
     },
     "contacts": {
         "dialog": {
-            "title": "Chwazi kontak"
+            "title": "Chwazi kontak",
+            "CreateAccount": "+ Nouvo Kontak",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create pa jwenn",
+            "SearchByName": "Rechèch pa non"
         },
         "select": {
             "title": "Chwazi kontak nan {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Tanpri chwazi etikèt.",
-        "inviteUser": "Envite Itilizatè a"
+        "inviteUser": "Envite Itilizatè a",
+        "selectRole": "Chwazi wòl",
+        "inviteRole": "Envite {{role}}"
     },
-    "invalidLanguageSelected": "Lang valab chwazi"
+    "invalidLanguageSelected": "Lang valab chwazi",
+    "login": {
+        "title": "Byenveni",
+        "directions": "Kreye yon kont, oswa ouvri sesyon an.",
+        "directionsNoRegister": "Log in si ou gen yon kont.",
+        "goButton": "Ale",
+        "passphrase": "Antre fraz pas ou:",
+        "loginButton": "Kòmanse",
+        "registerButton": "Kòmanse",
+        "resendButton": "Voye Mesaj Aktivasyon",
+        "forgot": "Bliye li?",
+        "resendConfirm": "Ou vle voye yon mesaj pou retabli pasfraz ou a?",
+        "resendSuccess": "Tcheke pou yon mesaj pou Reyajiste pasfraz ou",
+        "resendClose": "Fèmen",
+        "noPassphrase": "Anvan ou ka ouvri sesyon an, ou dwe mete yon fraz pas pa klike lyen ki nan mesaj deklanchman ou.",
+        "notVerified": "Ou dwe voye yon mesaj aktivasyon pou ou antre nan kay la.",
+        "emailExists": "Eske ou te eseye enskri ak imèl sa a anvan? Si se konsa, tcheke bwat resepsyon ou a aktive kont ou. <a href='#resend' class='Q_button Users_activation_resend'>Klike sou re-voye mesaj la<\/a>",
+        "mobileExists": "Eske ou te eseye enskri ak nimewo mobil sa a anvan? Si se konsa, tcheke SMS ou a aktive kont ou. <a href='#resend' class='Q_button Users_activation_resend'>Klike sou re-voye mesaj la<\/a>",
+        "usingOther": "oswa ou kapab",
+        "prompt": "Chwazi yon non itilizatè:",
+        "newUser": "oswa kreye yon nouvo kont",
+        "placeholders": {
+            "identifier": "mobil ou oswa imèl",
+            "mobile": "antre nan mobil ou",
+            "email": "antre nan adrès imel ou",
+            "username": "non itilizatè"
+        },
+        "confirmTerms": "Aksepte kondisyon ki nan sèvis la?",
+        "facebookNoEmail": "Kont facebook ou manke yon adrès imèl konfime. Senpleman ale nan fason natif natal la.",
+        "picTooltip": "Ou ka chanje foto sa a pita"
+    },
+    "setIdentifier": {
+        "title": "Ajoute yon fason pou ouvri sesyon an",
+        "sendMessage": "Voye Mesaj Aktivasyon",
+        "placeholders": {
+            "identifier": "antre nan mobil ou # oswa imèl",
+            "mobile": "antre nimewo mobil ou",
+            "email": "antre nan adrès imel ou",
+            "username": "non itilizatè"
+        }
+    },
+    "prompt": {
+        "title": "Kont {{Platform}}",
+        "areUsing": "Ou ap itilize {{platform}} kòm",
+        "noLongerUsing": "Ou pa gen plis koneksyon ak {{platform}} kòm",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Chanje nan kont sa a"
+    }
 }

@@ -241,7 +241,7 @@
                 "byAvatar": "{{avatar.displayName}} से"
             },
             "relatedTo": {
-                "hasANew": "एक नया {{message.instructions.fromDisplayType}} है",
+                "hasANew": "एक नया {{instructions.fromDisplayType}} है",
                 "byAvatar": "{{avatar.displayName}} द्वारा जोड़ा गया"
             }
         }

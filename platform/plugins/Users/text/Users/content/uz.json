@@ -18,7 +18,8 @@
         "GetStarted": "Boshlang",
         "Authorize": "Yetkilendir",
         "TermsLabel": "Men o&#39;qidim va rozi bo&#39;ldim <br> {{link}} uchun",
-        "TermsTitle": "Shartlar"
+        "TermsTitle": "Shartlar",
+        "mustAgree": "Avval shartlarga rozi bo&#39;lishingiz kerak."
     },
     "register": {
         "TermsLabel": "{{link}}}",
@@ -31,11 +32,18 @@
         "no": "Yo&#39;q",
         "WelcomePleaseVerifyEmail": "Xush kelibsiz! E-pochta manzilingizni tasdiqlang.",
         "WelcomeVerifyEmail": "Xush kelibsiz! E-pochta manzilingizni tasdiqlang.",
-        "ForgetPass": "Hey, parolingizni unutdingizmi?"
+        "ForgetPass": "Hey, parolingizni unutdingizmi?",
+        "PassphraseSaved": "Sizning parolingiz saqlandi.",
+        "IdentifierActivated": "Sizning {{type}} xizmati faollashtirildi.",
+        "CompletedActivation": "Siz foydalanuvchini faollashtirishni tugatdingiz.",
+        "CompletedActivationLogIn": "Siz foydalanuvchini faollashtirishni tugatdingiz. Tizimga kiring."
     },
     "contacts": {
         "dialog": {
-            "title": "Kontaktni tanlang"
+            "title": "Kontaktni tanlang",
+            "CreateAccount": "+ Yangi aloqa",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create topilmadi",
+            "SearchByName": "Nom bo&#39;yicha qidirish"
         },
         "select": {
             "title": "{{displayName}} kontaktini tanlang"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Yorliqni tanlang.",
-        "inviteUser": "Foydalanuvchini taklif qiling"
+        "inviteUser": "Foydalanuvchini taklif qiling",
+        "selectRole": "Rolni tanlang",
+        "inviteRole": "Taklif qiling {{role}}"
     },
-    "invalidLanguageSelected": "Til noto&#39;g&#39;ri tanlandi"
+    "invalidLanguageSelected": "Til noto&#39;g&#39;ri tanlandi",
+    "login": {
+        "title": "Xush kelibsiz",
+        "directions": "Hisob qaydnomasini yarating yoki tizimga kiring.",
+        "directionsNoRegister": "Agar sizda hisobingiz bo&#39;lsa, tizimga kiring.",
+        "goButton": "Boring",
+        "passphrase": "Pass iborasini kiriting:",
+        "loginButton": "Boshlang",
+        "registerButton": "Boshlang",
+        "resendButton": "Aktivatsiya xabarini yuboring",
+        "forgot": "Uni unutdingizmi?",
+        "resendConfirm": "Kodli iborani tiklash uchun xabar yubormoqchimisiz?",
+        "resendSuccess": "Kodli iborani tiklash uchun xabarni tekshiring",
+        "resendClose": "Yopish",
+        "noPassphrase": "Tizimga kirishdan oldin, faollashtirish xabaringizdagi havolani bosib, kirish so&#39;zini belgilashingiz kerak.",
+        "notVerified": "Kirish uchun siz o&#39;zingizni faollashtirish xabarini yuborishingiz kerak.",
+        "emailExists": "Ilgari ushbu elektron pochtada ro&#39;yxatdan o&#39;tishga harakat qilganmisiz? Agar shunday bo&#39;lsa, hisobingizni faollashtirish uchun inbox-ni tekshiring. <a href='#resend' class='Q_button Users_activation_resend'>Xabarni qayta yuborish uchun bosing<\/a>",
+        "mobileExists": "Siz oldin ushbu mobil raqam bilan ro&#39;yxatdan o&#39;tishga harakat qilganmisiz? Agar shunday bo&#39;lsa, hisobingizni faollashtirish uchun SMS-ni tekshiring. <a href='#resend' class='Q_button Users_activation_resend'>Xabarni qayta yuborish uchun bosing<\/a>",
+        "usingOther": "yoki mumkin",
+        "prompt": "Foydalanuvchi ismini tanlang:",
+        "newUser": "yoki yangi hisob yarating",
+        "placeholders": {
+            "identifier": "mobil telefoningiz # yoki elektron pochta manzilingiz",
+            "mobile": "mobil telefoningizga # kiriting",
+            "email": "E-mail manzilingizni kiriting",
+            "username": "foydalanuvchi nomi"
+        },
+        "confirmTerms": "Foydalanish shartlari qabul qilinsinmi?",
+        "facebookNoEmail": "Sizning Facebook hisob qaydnomangizda tasdiqlangan elektron pochta manzili yo&#39;q. Tizimga oddiygina kiring.",
+        "picTooltip": "Keyinchalik bu rasmni o&#39;zgartirishingiz mumkin"
+    },
+    "setIdentifier": {
+        "title": "Kirish uchun usul qo&#39;shing",
+        "sendMessage": "Aktivatsiya xabarini yuboring",
+        "placeholders": {
+            "identifier": "mobil telefoningizga # yoki elektron pochta manzilingizni kiriting",
+            "mobile": "mobil raqamingizni kiriting",
+            "email": "E-mail manzilingizni kiriting",
+            "username": "foydalanuvchi nomi"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} hisob",
+        "areUsing": "Siz {{platform}} kabi ishlatmoqdasiz",
+        "noLongerUsing": "Siz endi {{platform}} ga ulanmagansiz",
+        "doAuth": "Ushbu hisob bilan kiring",
+        "doSwitch": "Ushbu qayd yozuviga o&#39;ting"
+    }
 }

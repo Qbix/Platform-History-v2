@@ -3,8 +3,8 @@
         "NewItemTitle": "Yam Tshiab"
     },
     "labels": {
-        "Streams/invited": "Cov neeg kuv tau caw",
-        "Streams/invitedMe": "Leej twg caw kuv"
+        "Streams\/invited": "Cov neeg kuv tau caw",
+        "Streams\/invitedMe": "Leej twg caw kuv"
     },
     "interests": {
         "Filter": "Koj nyiam dab tsi?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Koj puas paub tseeb tias koj xav kaw qhov kev sib tham no?",
         "closeChatConfirmYes": "Muaj",
         "closeChatConfirmNo": "Tsis yog",
-        "earlierComments": "ua ntej cov lus"
+        "earlierComments": "ua ntej cov lus",
+        "Subscribed": "Cov Ntawv Ceeb Toom",
+        "Unsubscribed": "Tau Txais Cov Ntawv Ceeb Toom",
+        "notAllowedToJoinCall": "Koj tsis muaj kev tso cai los koom nrog qhov kev sib tham.",
+        "startedConversation": "tau pib sib tham",
+        "RealTimeCall": "Lub Sij Hawm Tiag Hu",
+        "SearchByName": "Tshawb ntawm npe"
     },
     "notifications": {
         "*": "Tsuag {{& message.fields.type}} rau {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Kev kawm tau ntawm {{stream.fields.title}}",
         "Streams\/task\/complete": "Tus neeg ua haujlwm tiav: {{stream.fields.title}}",
         "Streams\/task\/error": "Yuam kev thaum: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Yav tag los lus"
+        "Streams\/incoming\/*": "{{app}}: Yav tag los lus",
+        "Streams\/relatedTo\/Streams\/call": "Hu Xov Pib Pib Hauv {{toTitle}}",
+        "Streams\/relatedTo\/*": "Tshiab {{relationDisplayType}} hauv {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Ntxiv rau {{toTitle}} li {{1000 tauj}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} hais koj hauv ib qho lus pom",
+        "Streams\/call": "{{displayName}} yog koj hu"
     },
     "invite": {
         "messageContent": "{{displayName}} tau caw koj tuaj rau {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Email",
             "byText": "Cov ntawv nyeem",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} yog tias pom cov cai"
         },
         "email": {
             "subject": "Hav, kos qhov no",
             "PleaseVisitLink": "Thov mus saib qhov txuas nram no:",
             "InvitingYou": "Kuv tabtom caw koj mus rau {{title}}",
-            "HasInvitedYou": "{{displayName}} tau caw koj tuaj rau {{title}}"
+            "HasInvitedYou": "{{displayName}} tau caw koj tuaj rau {{title}}",
+            "HasMentionedYou": "{{displayName}} tau hais koj hauv &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Koj tau caw kom {{title}}. Thov coj mus {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Pab kom muaj Microphone",
             "cameraTitle": "Pab kom lub koob yees duab",
-            "cameraAndMicrophoneTitle": "Pab kom lub koob yees duab thiab lub tshuab hlwb hlau"
+            "cameraAndMicrophoneTitle": "Pab kom lub koob yees duab thiab lub tshuab hlwb hlau",
+            "dialogTitle": "Txuas",
+            "microphoneBtn": "Pab Kom Pom Kev Microphone",
+            "cameraBtn": "Qhib Lub Koob Yees Duab",
+            "cameraAndMicrophoneBtn": "Pab Siv Lub Koob Yees Duab thiab Microphone"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "muab lo <em>{{message.fields.type}} cov<\/em> lus rau {{1000 tauj}"
+        },
+        "text": {
+            "commentedOn": "tawm tswv yim nyob rau",
+            "in": "hauv",
+            "body": "hauv {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "tau tshaj tawm rau",
+                "byAvatar": "los ntawm {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "muaj tshiab {{instructions.fromDisplayType}}",
+                "byAvatar": "ntxiv los ntawm {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Caw",
+            "description": "Inbox rau kev caw"
+        },
+        "Streams\/resource": {
+            "displayType": "Cov peev txheej",
+            "description": "kwj rau kev tswj xyuas kev nkag mus rau cov cuab yeej thiab tshaj tawm xov txog kev hloov tshiab"
+        },
+        "Streams\/task": {
+            "description": "kom tau txais cov ntawv qhia tshiab hais txog kev nce qib ntawm qee cov haujlwm",
+            "displayType": "Ua Hauj Lwm"
+        },
+        "Streams\/tasks": {
+            "description": "qeb rau paub tab",
+            "displayType": "Cov haujlwm"
+        },
+        "Streams\/experience": {
+            "description": "kev paub rau cov tswv cuab hauv zej zog",
+            "displayType": "Kev kawm ntau yam rau cov tswv cuab hauv zej zog"
+        },
+        "Streams\/greeting": {
+            "description": "tos txais nrog uas tus neeg siv tuaj yeem qhia lawv tus kheej",
+            "displayType": "Txais tos"
+        },
+        "Streams\/number": {
+            "displayType": "Tooj",
+            "description": "lej lej"
+        },
+        "Streams\/date": {
+            "displayType": "Hnub Tim",
+            "description": "hnub tim"
+        },
+        "Streams\/text": {
+            "displayType": "Ntawv",
+            "description": "lub cev ntawm cov ntawv nyeem"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Ntawv",
+            "description": "lub cev me me ntawm cov ntawv nyeem"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Ntawv",
+            "description": "nruab nrab lub cev ntawm cov ntawv nyeem"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Email Chaw Nyob",
+            "description": "email chaw nyob"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Tus Xov Tooj",
+            "description": "tus xov tooj"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "txuas rau hauv web"
+        },
+        "Streams\/image": {
+            "displayType": "Duab",
+            "description": "pom duab"
+        },
+        "Streams\/images": {
+            "displayType": "Duab Saib",
+            "description": "gallery ntawm cov duab"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "ib qho album uas muaj ntau yam xov xwm cuam tshuam"
+        },
+        "Streams\/file": {
+            "displayType": "Cov ntaub ntawv",
+            "description": "ua ntaub ntawv upload"
+        },
+        "Streams\/audio": {
+            "displayType": "Tsom Xyooj Clip",
+            "description": "suab nkauj"
+        },
+        "Streams\/video": {
+            "displayType": "Daim Video Kab Zuag",
+            "description": "kwv txhiaj clip"
+        },
+        "Streams\/live": {
+            "displayType": "Ciaj sia",
+            "description": "nyob audio lossis video"
+        },
+        "Streams\/category": {
+            "displayType": "Qeb",
+            "description": "ib qeb twg uas lwm tus kwj kuj sib cuam tshuam"
+        },
+        "Streams\/participating": {
+            "displayType": "Koom Tes Nrog Index",
+            "description": "kwj muaj feem cuam tshuam \/ tsis cuam tshuam rau qhov no thaum tus neeg siv koom \/ nplooj"
+        },
+        "Streams\/interest": {
+            "displayType": "Paj",
+            "description": "sawv cev rau tus neeg siv khoom txaus siab hauv qee cov ncauj lus"
+        },
+        "Streams\/incoming": {
+            "displayType": "Khoom Tuaj",
+            "description": "lo lus uas peb xa rau lwm cov neeg siv"
+        },
+        "Streams\/chat": {
+            "displayType": "Kev Sib Tham",
+            "description": "ib qho kev sib tham ntawm cov neeg siv, nrog keeb kwm"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Tiag-Lub sijhawm Hu",
+            "description": "lub sijhawm tiag tiag video \/ audio hu"
         }
     }
 }

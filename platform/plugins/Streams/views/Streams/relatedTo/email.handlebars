@@ -5,7 +5,7 @@
 	<h2>{{stream.fields.title}}</h2>
 {{/if}}
 <div>
-{{messages.text.relatedTo.hasANew}} {{fromDisplayType}}:
+{{interpolate messages.text.relatedTo.hasANew}}:
 </div>
 {{#if (call 'message.getInstruction' 'fromUrl')}}
 	<h2><a href="{{fromUrl}}">{{fromTitle}}</a></h2>

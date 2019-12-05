@@ -241,7 +241,7 @@
                 "byAvatar": "autor: {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "omab uut {{message.instructions.fromDisplayType}}",
+                "hasANew": "omab uut {{instructions.fromDisplayType}}",
                 "byAvatar": "lisas {{avatar.displayName}}"
             }
         }

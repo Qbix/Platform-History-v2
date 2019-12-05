@@ -18,7 +18,8 @@
         "GetStarted": "پیل کړئ",
         "Authorize": "واکمن",
         "TermsLabel": "ما لوستلی او موافق یم <br> {{link}} ته",
-        "TermsTitle": "شرطونه"
+        "TermsTitle": "شرطونه",
+        "mustAgree": "لومړی تاسو باید شرایطو سره موافق شئ."
     },
     "register": {
         "TermsLabel": "زه {{link}} وموم",
@@ -31,11 +32,18 @@
         "no": "نه",
         "WelcomePleaseVerifyEmail": "ښه راغلاست! مهرباني وکړئ خپل بریښنالیک تایید کړئ.",
         "WelcomeVerifyEmail": "ښه راغلاست! خپل برېښنالیک تایید کړۍ.",
-        "ForgetPass": "اې، ستا پاسپورت هیر کړی؟"
+        "ForgetPass": "اې، ستا پاسپورت هیر کړی؟",
+        "PassphraseSaved": "ستاسو د پاس عبارت خوندي شوی دی",
+        "IdentifierActivated": "ستاسو {{999} ated فعال شوی.",
+        "CompletedActivation": "تاسو د کارن فعالول بشپړ کړي.",
+        "CompletedActivationLogIn": "تاسو د کارن فعالول بشپړ کړي. اوس ننوتل هڅه وکړئ."
     },
     "contacts": {
         "dialog": {
-            "title": "اړیکې غوره کړئ"
+            "title": "اړیکې غوره کړئ",
+            "CreateAccount": "+ نوې اړیکه",
+            "CreateAccountNotFound": "Q.User.Cordova.UI.create ونه موندل شو",
+            "SearchByName": "د نوم له مخې لټون"
         },
         "select": {
             "title": "د {9 999}} سره اړیکه ونیسئ"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "مهرباني وکړئ لیبل غوره کړئ.",
-        "inviteUser": "کارن ته بلنه ورکړه"
+        "inviteUser": "کارن ته بلنه ورکړه",
+        "selectRole": "رول وټاکئ",
+        "inviteRole": "بلنه {{999}"
     },
-    "invalidLanguageSelected": "غلط ژبه غوره شوی"
+    "invalidLanguageSelected": "غلط ژبه غوره شوی",
+    "login": {
+        "title": "ښه راغلاست",
+        "directions": "ګ accountون جوړ کړئ ، یا ننوتل.",
+        "directionsNoRegister": "ننوتل که حساب مو وي",
+        "goButton": "ځه",
+        "passphrase": "د خپل توري جمله داخل کړئ:",
+        "loginButton": "پیل وکړئ",
+        "registerButton": "پیل وکړئ",
+        "resendButton": "د فعالولو پیغام ولیږئ",
+        "forgot": "هیر مو کړی؟",
+        "resendConfirm": "ایا تاسو غواړئ د خپل پاسفرایس له سره تنظیم کولو لپاره پیغام ولیږئ؟",
+        "resendSuccess": "د خپل پاسفرایس بیا تنظیمولو لپاره د پیغام لپاره چیک وکړئ",
+        "resendClose": "بندول",
+        "noPassphrase": "مخکې لدې چې تاسو وکولی شئ لاګ ان شئ ، تاسو باید خپل د فعالولو په پیغام کې لینک کلیک کولو سره د پاس جمله جوړه کړئ.",
+        "notVerified": "د ننوتلو لپاره تاسو باید ځان ته د فعالولو پیغام ولیږئ.",
+        "emailExists": "ایا تاسو مخکې د دې بریښنالیک سره راجستر کولو هڅه کړې؟ که داسې وي ، خپل حساب فعالولو لپاره خپل انبکس وګورئ. <a href='#resend' class='Q_button Users_activation_resend'>د پیغام بیا استولو لپاره کلیک وکړئ<\/a>",
+        "mobileExists": "ایا تاسو دمخه د دې ګرځنده لمبر سره راجسټر کولو هڅه کړې؟ که داسې وي ، خپل حساب فعالولو لپاره خپل لیکلي پیغامونه وګورئ. <a href='#resend' class='Q_button Users_activation_resend'>د پیغام بیا استولو لپاره کلیک وکړئ<\/a>",
+        "usingOther": "یا تاسو کولی شئ",
+        "prompt": "د کارونکي یو نوم وټاکئ:",
+        "newUser": "یا نوی حساب جوړ کړئ",
+        "placeholders": {
+            "identifier": "ستاسو ګرځنده # یا بریښنالیک",
+            "mobile": "خپل موبایل داخل کړئ #",
+            "email": "خپل بریښنا لیک ادرس داخل کړه",
+            "username": "کارن نوم"
+        },
+        "confirmTerms": "د خدمت شرایط ومني؟",
+        "facebookNoEmail": "ستاسو د فېسبوک حساب یو باوري شوی ایمیل ادرس ورک دی. په اصلي لاره ننوتل.",
+        "picTooltip": "تاسو دا عکس وروسته بدلولی شئ"
+    },
+    "setIdentifier": {
+        "title": "د ننوتلو لپاره لاره اضافه کړئ",
+        "sendMessage": "د فعالولو پیغام ولیږئ",
+        "placeholders": {
+            "identifier": "خپل ګرځنده # یا بریښنالیک دننه کړئ",
+            "mobile": "خپل ګرځنده شمیره دننه کړئ",
+            "email": "خپل بریښنا لیک ادرس داخل کړه",
+            "username": "کارن نوم"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} ګ .ون",
+        "areUsing": "تاسو د {{9{9}} په توګه کار کوئ",
+        "noLongerUsing": "تاسو نور د {{999} to سره تړلي نه یاست",
+        "doAuth": "د دې حساب سره ننوتل",
+        "doSwitch": "دې حساب ته لاړ شه"
+    }
 }

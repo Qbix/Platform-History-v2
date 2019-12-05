@@ -18,7 +18,8 @@
         "GetStarted": "Tīmata",
         "Authorize": "Whakaaetia",
         "TermsLabel": "Kua pānui ahau, kua whakaae hoki <br> ki te {{link}}",
-        "TermsTitle": "Nga Ture"
+        "TermsTitle": "Nga Ture",
+        "mustAgree": "Tuatahi me whakaae koe ki nga tikanga."
     },
     "register": {
         "TermsLabel": "Ka whakaaetia e ahau te {{link}}",
@@ -31,11 +32,18 @@
         "no": "No",
         "WelcomePleaseVerifyEmail": "Nau mai! Manatokohia tō wāhitau īmēra.",
         "WelcomeVerifyEmail": "Nau mai! Manatokohia tō wāhitau īmēra.",
-        "ForgetPass": "Hey, kua wareware koe ki to kupuhipa?"
+        "ForgetPass": "Hey, kua wareware koe ki to kupuhipa?",
+        "PassphraseSaved": "Kua paahitia to rerenga korero.",
+        "IdentifierActivated": "Kua whakahohehia to {{type}}",
+        "CompletedActivation": "Kua oti i a koe te whakahohenga kaiwhakamahi.",
+        "CompletedActivationLogIn": "Kua oti i a koe te whakahohenga kaiwhakamahi. Whakamātauria te takiuru inaianei."
     },
     "contacts": {
         "dialog": {
-            "title": "Kōwhiria te whakapā"
+            "title": "Kōwhiria te whakapā",
+            "CreateAccount": "+ Whakapā Hou",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create kaore i kitea",
+            "SearchByName": "Rapua te ingoa"
         },
         "select": {
             "title": "Tīpakohia te whakapā o {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Tohua koa te tapanga.",
-        "inviteUser": "Whakauru Kaiwhakamahi"
+        "inviteUser": "Whakauru Kaiwhakamahi",
+        "selectRole": "Tīpakohia Te Tūranga",
+        "inviteRole": "A ani i te {{role}}"
     },
-    "invalidLanguageSelected": "Reo muhu i tīpakohia"
+    "invalidLanguageSelected": "Reo muhu i tīpakohia",
+    "login": {
+        "title": "Tokotai",
+        "directions": "Waihangahia tetahi kaute, takiuru ranei.",
+        "directionsNoRegister": "Takiuru ki te mea kei a koe he putea.",
+        "goButton": "Haere",
+        "passphrase": "Whakauruhia to rerenga korero:",
+        "loginButton": "E Takitata",
+        "registerButton": "E Takitata",
+        "resendButton": "Tukuna Karere whakahohenga",
+        "forgot": "Ka wareware ki a ia?",
+        "resendConfirm": "Kei te hiahia koe ki te tuku karere ki te whakahoki i to raarangi reiti?",
+        "resendSuccess": "Tirohia he karere hei tautuhi i to raarangi reiti",
+        "resendClose": "Katia",
+        "noPassphrase": "I mua i to whakauru i te takiuru, me whakanoho koe i tetahi rerenga korero ma te paatene i te hono ki to karere whakahohenga.",
+        "notVerified": "Me tuku e koe he karere whakahohenga kia uru ai koe.",
+        "emailExists": "I whai koe ki te rēhita me tenei imeera i mua? Mena, tirohia to pouaka pouaka hei whakahohe i to putea. <a href='#resend' class='Q_button Users_activation_resend'>Paatohia kia tukuna atu te karere<\/a>",
+        "mobileExists": "I tamata koe ki te rēhita me tenei nama pūkoro i mua? Ki te pera, tirohia to SMS ki te whakahohe i to putea. <a href='#resend' class='Q_button Users_activation_resend'>Paatohia kia tukuna atu te karere<\/a>",
+        "usingOther": "ka taea e koe",
+        "prompt": "Kōwhiria he ingoa ingoa ingoa:",
+        "newUser": "te waihanga ranei i tetahi putea hou",
+        "placeholders": {
+            "identifier": "tou pūkoro # me to imeera ranei",
+            "mobile": "tomo koutou pūkoro #",
+            "email": "tomo koutou wāhitau īmēra",
+            "username": "ingoa kaiwhakamahi"
+        },
+        "confirmTerms": "Whakaaehia nga Ture o te Ratonga?",
+        "facebookNoEmail": "Kei te ngaro to pūkete facebook i tetahi wahitau imeera kua whakaatuhia. Ka takiuru noa te huarahi taketake.",
+        "picTooltip": "Ka taea te huri i tenei pikitia i muri mai"
+    },
+    "setIdentifier": {
+        "title": "Taapirihia he huarahi whakauru",
+        "sendMessage": "Tukuna Karere whakahohenga",
+        "placeholders": {
+            "identifier": "tomo tou waea pūkoro # me to email ranei",
+            "mobile": "tomo koutou tau pūkoro",
+            "email": "tomo koutou wāhitau īmēra",
+            "username": "ingoa kaiwhakamahi"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Pūkete",
+        "areUsing": "Kei te whakamahi koe i te {{platform}} hei",
+        "noLongerUsing": "Kua kore koe e hono atu ki te {{platform}} hei",
+        "doAuth": "Takiuru me tenei kaute",
+        "doSwitch": "Tahuri ki tenei putea"
+    }
 }

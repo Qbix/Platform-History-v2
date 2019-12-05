@@ -3,8 +3,8 @@
         "NewItemTitle": "Mea fou"
     },
     "labels": {
-        "Streams/invited": "Tagata na ou valaauliaina",
-        "Streams/invitedMe": "O ai na valaauliaina au"
+        "Streams\/invited": "Tagata na ou valaauliaina",
+        "Streams\/invitedMe": "O ai na valaauliaina au"
     },
     "interests": {
         "Filter": "O a mea e te fiafia i ai?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "E te mautinoa e te manaʻo e tapuni lenei talatalanoaga?",
         "closeChatConfirmYes": "ioe",
         "closeChatConfirmNo": "leai",
-        "earlierComments": "faamatalaga muamua"
+        "earlierComments": "faamatalaga muamua",
+        "Subscribed": "Faailoaina Mute",
+        "Unsubscribed": "Maua Faʻamatalaga",
+        "notAllowedToJoinCall": "E leai sau faʻatagaga e auai i lenei talanoaga.",
+        "startedConversation": "amataina se talanoaga",
+        "RealTimeCall": "Taimi Moni Taimi",
+        "SearchByName": "Saili i le igoa"
     },
     "notifications": {
         "*": "Savali {{& message.fields.type}} i {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Alualu i luma o le alualu i luma {{stream.fields.title}}",
         "Streams\/task\/complete": "Ua maeʻa galuega: {{stream.fields.title}}",
         "Streams\/task\/error": "Laʻasaga i le taimi: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Savali o loʻo i totonu"
+        "Streams\/incoming\/*": "{{app}}: Savali o loʻo i totonu",
+        "Streams\/relatedTo\/Streams\/call": "Na amata le New Call i {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Faʻaopoopo i {{toTitle}} e pei {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} na taʻua oe i se faamatalaga",
+        "Streams\/call": "{{displayName}} o loo valaau ia oe"
     },
     "invite": {
         "messageContent": "{{displayName}} valaaulia oe i {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Imeli",
             "byText": "Tusitusiga",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} pe afai na siakiina le code"
         },
         "email": {
             "subject": "Hey, siaki le mea lenei",
             "PleaseVisitLink": "Faamolemole asiasi i le sootaga lenei:",
             "InvitingYou": "O loʻo ou valaauliaina oe i {{title}}",
-            "HasInvitedYou": "{{displayName}} ua valaauliaina oe i {{title}}"
+            "HasInvitedYou": "{{displayName}} ua valaauliaina oe i {{title}}",
+            "HasMentionedYou": "{{displayName}} ua taua oe i le &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Ua valaaulia oe i {{title}}. Faamolemole tap {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Faʻaliliu le Microphone",
             "cameraTitle": "Enable Camera",
-            "cameraAndMicrophoneTitle": "Faʻamaonia le Kamera ma le Masini"
+            "cameraAndMicrophoneTitle": "Faʻamaonia le Kamera ma le Masini",
+            "dialogTitle": "Fesoʻotaʻi",
+            "microphoneBtn": "Faʻaliliu le Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Faʻamaonia le Kamera ma le Masini"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "lafo se savali <em>{{message.fields.type}}<\/em> i {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "fai mai",
+            "in": "i",
+            "body": "i {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "ua lafoina i",
+                "byAvatar": "e {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ua i ai se {{instructions.fromDisplayType}} fou {",
+                "byAvatar": "faaopoopo e {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Valaaulia",
+            "description": "Peta meli mo valaaulia"
+        },
+        "Streams\/resource": {
+            "displayType": "Punaoa",
+            "description": "vaitafe mo le puleaina o avanoa i se punaʻoa ma le lafoina o savali e uiga i faʻaleleia"
+        },
+        "Streams\/task": {
+            "description": "mo le mauaina o faʻamatalaga e uiga i le alualu i luma i se galuega faapitoa",
+            "displayType": "Task"
+        },
+        "Streams\/tasks": {
+            "description": "vasega mo galuega",
+            "displayType": "Galuega"
+        },
+        "Streams\/experience": {
+            "description": "o se masani masani mo tagata o le alaalafaga",
+            "displayType": "Le masani masani mo tagata o le alaalafaga"
+        },
+        "Streams\/greeting": {
+            "description": "faʻafeiloaʻiga lea e mafai ai e se faʻaaoga ona faʻalauiloaina i latou lava",
+            "displayType": "Faʻafeiloaʻi"
+        },
+        "Streams\/number": {
+            "displayType": "Numera",
+            "description": "numera numera"
+        },
+        "Streams\/date": {
+            "displayType": "Aso",
+            "description": "aso"
+        },
+        "Streams\/text": {
+            "displayType": "Tusitusiga",
+            "description": "tino o tusitusiga"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Tusitusiga",
+            "description": "tamai tino o tusitusiga"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Tusitusiga",
+            "description": "vaega masani o tusitusiga"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Imeli tuatusi",
+            "description": "imeli tuatusi"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Numera telefoni",
+            "description": "numera telefoni"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "fesoʻotaʻi i le upega tafailagi"
+        },
+        "Streams\/image": {
+            "displayType": "Ata",
+            "description": "ata vaaia"
+        },
+        "Streams\/images": {
+            "displayType": "Faʻafanua Ata",
+            "description": "ata o ata"
+        },
+        "Streams\/album": {
+            "displayType": "Tusi",
+            "description": "se lipine e fesoʻotaʻi faʻatasi ai le aufaasālalau"
+        },
+        "Streams\/file": {
+            "displayType": "File",
+            "description": "lokaina faila"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio Clip",
+            "description": "lipine leo"
+        },
+        "Streams\/video": {
+            "displayType": "Ata Vitio",
+            "description": "vitio vitio"
+        },
+        "Streams\/live": {
+            "displayType": "Faʻaola",
+            "description": "ola leo pe vitio"
+        },
+        "Streams\/category": {
+            "displayType": "Category",
+            "description": "se vaega e mafai ona fesootai i ai isi vaitafe"
+        },
+        "Streams\/participating": {
+            "displayType": "Faʻamatalaga Auai",
+            "description": "vaitafe e fesoʻotai \/ le fesoʻotaʻi i lenei mea pe a faʻatasi se tagata faʻapipiʻi \/ lau"
+        },
+        "Streams\/interest": {
+            "displayType": "Tului",
+            "description": "e faʻatusa ai le fiafia o se tagata i se autu"
+        },
+        "Streams\/incoming": {
+            "displayType": "O mai",
+            "description": "taunuʻuga mo savali na lafoina e isi tagata faʻaoga"
+        },
+        "Streams\/chat": {
+            "displayType": "Talanoaga",
+            "description": "se talanoaga i le va o tagata faaaoga, ma le talafaasolopito"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Taimi Moni Taimi",
+            "description": "se taimi moni video \/ leo telefoni"
         }
     }
 }

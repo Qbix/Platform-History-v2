@@ -18,7 +18,8 @@
         "GetStarted": "להתחיל",
         "Authorize": "הרשאה",
         "TermsLabel": "קראתי ואני מסכים <br> אל {{link}}",
-        "TermsTitle": "תנאים"
+        "TermsTitle": "תנאים",
+        "mustAgree": "ראשית עליכם להסכים לתנאים."
     },
     "register": {
         "TermsLabel": "אני מקבל את {{link}}",
@@ -31,11 +32,18 @@
         "no": "לא",
         "WelcomePleaseVerifyEmail": "ברוך הבא! אמת את כתובת האימייל שלך.",
         "WelcomeVerifyEmail": "ברוך הבא! אמת את כתובת הדוא&quot;ל שלך.",
-        "ForgetPass": "היי, האם שכחת את משפט הסיסמה שלך?"
+        "ForgetPass": "היי, האם שכחת את משפט הסיסמה שלך?",
+        "PassphraseSaved": "משפט הביטוי שלך נשמר.",
+        "IdentifierActivated": "{{type}} שלך הופעל.",
+        "CompletedActivation": "השלמת את הפעלת המשתמש.",
+        "CompletedActivationLogIn": "השלמת את הפעלת המשתמש. נסה להתחבר עכשיו."
     },
     "contacts": {
         "dialog": {
-            "title": "בחר איש קשר"
+            "title": "בחר איש קשר",
+            "CreateAccount": "+ איש קשר חדש",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.creat לא נמצא",
+            "SearchByName": "חפש לפי שם"
         },
         "select": {
             "title": "בחר איש קשר של {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "בחר תווית.",
-        "inviteUser": "הזמנת משתמש"
+        "inviteUser": "הזמנת משתמש",
+        "selectRole": "בחר תפקיד",
+        "inviteRole": "הזמן {{role}}"
     },
-    "invalidLanguageSelected": "נבחרה שפה לא חוקית"
+    "invalidLanguageSelected": "נבחרה שפה לא חוקית",
+    "login": {
+        "title": "ברוך הבא",
+        "directions": "צור חשבון, או התחבר.",
+        "directionsNoRegister": "התחבר אם יש לך חשבון.",
+        "goButton": "ללכת",
+        "passphrase": "הזן את ביטוי הסיסמה שלך:",
+        "loginButton": "להתחיל",
+        "registerButton": "להתחיל",
+        "resendButton": "שלח הודעת הפעלה",
+        "forgot": "שכח מזה?",
+        "resendConfirm": "האם אתה רוצה לשלוח הודעה לאיפוס משפט הסיסמה שלך?",
+        "resendSuccess": "בדוק אם קיימת הודעה לאיפוס ביטוי הסיסמה שלך",
+        "resendClose": "קרוב",
+        "noPassphrase": "לפני שתוכל להתחבר, עליך להגדיר ביטוי מעבר על ידי לחיצה על הקישור בהודעת ההפעלה שלך.",
+        "notVerified": "עליך לשלוח לעצמך הודעת הפעלה על מנת להיכנס.",
+        "emailExists": "האם ניסית להירשם באמצעות דוא&quot;ל זה בעבר? אם כן, בדוק בתיבת הדואר הנכנס שלך כדי להפעיל את חשבונך. <a href='#resend' class='Q_button Users_activation_resend'>לחץ כדי לשלוח מחדש את ההודעה<\/a>",
+        "mobileExists": "האם ניסית להירשם למספר הנייד הזה בעבר? אם כן, בדוק את ה- SMS שלך כדי להפעיל את חשבונך. <a href='#resend' class='Q_button Users_activation_resend'>לחץ כדי לשלוח מחדש את ההודעה<\/a>",
+        "usingOther": "או שאתה יכול",
+        "prompt": "בחר שם משתמש:",
+        "newUser": "או צור חשבון חדש",
+        "placeholders": {
+            "identifier": "מספר הטלפון הנייד או הדוא&quot;ל שלך",
+            "mobile": "הזן את מספר הטלפון הנייד שלך",
+            "email": "הזן את כתובת הדוא&quot;ל שלך",
+            "username": "שם משתמש"
+        },
+        "confirmTerms": "לקבל את תנאי השירות?",
+        "facebookNoEmail": "בחשבון הפייסבוק שלך חסרה כתובת דוא&quot;ל מאושרת. פשוט התחבר בדרך המקורית.",
+        "picTooltip": "אתה יכול לשנות תמונה זו מאוחר יותר"
+    },
+    "setIdentifier": {
+        "title": "הוסף דרך להתחברות",
+        "sendMessage": "שלח הודעת הפעלה",
+        "placeholders": {
+            "identifier": "הזן את מספר הטלפון הנייד שלך או את הדוא&quot;ל שלך",
+            "mobile": "הזן את מספר הנייד שלך",
+            "email": "הזן את כתובת הדוא&quot;ל שלך",
+            "username": "שם משתמש"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} חשבון",
+        "areUsing": "אתה משתמש {{platform}} בתור",
+        "noLongerUsing": "אינך מחובר עוד ל- {{platform}} בתור",
+        "doAuth": "התחבר באמצעות חשבון זה",
+        "doSwitch": "עבור לחשבון זה"
+    }
 }

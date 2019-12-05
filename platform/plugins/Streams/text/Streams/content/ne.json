@@ -3,8 +3,8 @@
         "NewItemTitle": "नयाँ वस्तु"
     },
     "labels": {
-        "Streams/invited": "मैले आमन्त्रित गरे",
-        "Streams/invitedMe": "कसले मलाई निम्तायो"
+        "Streams\/invited": "मैले आमन्त्रित गरे",
+        "Streams\/invitedMe": "कसले मलाई निम्तायो"
     },
     "interests": {
         "Filter": "तपाई के मज्जा लिनुहुन्छ?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "के तपाईं पक्का यो च्याट बन्द गर्न चाहनुहुन्छ?",
         "closeChatConfirmYes": "हो",
         "closeChatConfirmNo": "होइन",
-        "earlierComments": "पहिलेका टिप्पणीहरू"
+        "earlierComments": "पहिलेका टिप्पणीहरू",
+        "Subscribed": "सूचनाहरू म्यूट गर्नुहोस्",
+        "Unsubscribed": "सूचनाहरू प्राप्त गर्नुहोस्",
+        "notAllowedToJoinCall": "तपाईंसँग यस कुराकानीमा सहभागी हुन अनुमति छैन।",
+        "startedConversation": "कुराकानी सुरु भयो",
+        "RealTimeCall": "वास्तविक समय कल",
+        "SearchByName": "नामबाट खोज्नुहोस्"
     },
     "notifications": {
         "*": "सन्देश {9 9 99}} मा {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "प्रगति {9 9 99}} मा गरियो",
         "Streams\/task\/complete": "कार्य पूरा भयो: {{stream.fields.title}}",
         "Streams\/task\/error": "त्रुटिको बेला: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{9 9 99}}: आगमन सन्देश"
+        "Streams\/incoming\/*": "{9 9 99}}: आगमन सन्देश",
+        "Streams\/relatedTo\/Streams\/call": "नयाँ कल {{9{} in मा शुरू भयो",
+        "Streams\/relatedTo\/*": "{{toTitle}} मा नयाँ {9{}}}",
+        "Streams\/relatedFrom\/*": "{{relationDisplayType}} को रूपमा {{9{} Added to मा थपियो",
+        "Streams\/mention": "{{9{} a एक टिप्पणी मा तपाइँ उल्लेख छ",
+        "Streams\/call": "{{9{}} तपाईंलाई कल गर्दै छ"
     },
     "invite": {
         "messageContent": "{9 9 99}} तपाईंलाई {{inviteUrl}} मा निमन्त्रणा दिइयो",
@@ -59,13 +70,15 @@
             "byEmail": "ईमेल",
             "byText": "पाठ",
             "byFacebook": "फेसबुक",
-            "byTwitter": "ट्विटर"
+            "byTwitter": "ट्विटर",
+            "scannedQR": "Scan {9{}} कोड स्क्यान गरिएको थियो भने"
         },
         "email": {
             "subject": "अरे, यो जाँच गर्नुहोस्",
             "PleaseVisitLink": "कृपया निम्न लिङ्कमा जानुहोस्:",
             "InvitingYou": "म तपाईंलाई आमन्त्रित गर्दै छु {{9 99}}",
-            "HasInvitedYou": "{{displayName}} तपाईंलाई {{title}} मा निमन्त्रणा दिइयो"
+            "HasInvitedYou": "{{displayName}} तपाईंलाई {{title}} मा निमन्त्रणा दिइयो",
+            "HasMentionedYou": "{{9{} you you &quot;{{१०००}}&quot; मा तपाईंलाई उल्लेख गरेको छ"
         },
         "sms": {
             "content": "तपाईलाई आमन्त्रित गरिएको छ {{9 99}}। कृपया ट्याप गर्नुहोस् {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "माइक्रोफोन सक्षम गर्नुहोस्",
             "cameraTitle": "क्यामेरा सक्षम पार्नुहोस्",
-            "cameraAndMicrophoneTitle": "क्यामेरा र माइक्रोफोन सक्षम गर्नुहोस्"
+            "cameraAndMicrophoneTitle": "क्यामेरा र माइक्रोफोन सक्षम गर्नुहोस्",
+            "dialogTitle": "जडान गर्दै",
+            "microphoneBtn": "माइक्रोफोन सक्षम गर्नुहोस्",
+            "cameraBtn": "क्यामेरा सक्षम गर्नुहोस्",
+            "cameraAndMicrophoneBtn": "क्यामेरा र माइक्रोफोन सक्षम गर्नुहोस्"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "{{1000} to मा <em>} {9{}}<\/em> posted सन्देश पोष्ट गर्नुभयो"
+        },
+        "text": {
+            "commentedOn": "मा टिप्पणी गरियो",
+            "in": "भित्र",
+            "body": "{{9{}}}: {{१०००}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "मा पोस्ट गरिएको छ",
+                "byAvatar": "{{9{} by by द्वारा"
+            },
+            "relatedTo": {
+                "hasANew": "नयाँ {{9{} has छ",
+                "byAvatar": "{{9{} added द्वारा थपियो"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "आमन्त्रित",
+            "description": "आमन्त्रणहरूका लागि इनबक्स"
+        },
+        "Streams\/resource": {
+            "displayType": "स्रोत",
+            "description": "एक संसाधनमा पहुँच प्रबन्धन गर्न र अपडेटहरूको बारेमा सन्देश पोष्टिंगको लागि स्ट्रिम गर्नुहोस्"
+        },
+        "Streams\/task": {
+            "description": "निश्चित कार्यमा प्रगतिको बारेमा अपडेटहरू प्राप्त गर्नका लागि",
+            "displayType": "कार्य"
+        },
+        "Streams\/tasks": {
+            "description": "कार्यहरूको लागि कोटी",
+            "displayType": "कार्यहरू"
+        },
+        "Streams\/experience": {
+            "description": "समुदायको सदस्यहरूको लागि साझा अनुभव",
+            "displayType": "एक समुदाय को सदस्यहरु को लागी साझा अनुभव"
+        },
+        "Streams\/greeting": {
+            "description": "अभिवादन जसको साथ प्रयोगकर्ताले आफैं परिचय गर्न सक्दछ",
+            "displayType": "अभिवादन"
+        },
+        "Streams\/number": {
+            "displayType": "संख्या",
+            "description": "गणितीय संख्या"
+        },
+        "Streams\/date": {
+            "displayType": "मिति",
+            "description": "मिति"
+        },
+        "Streams\/text": {
+            "displayType": "पाठ",
+            "description": "पाठको मुख्य भाग"
+        },
+        "Streams\/text\/small": {
+            "displayType": "पाठ",
+            "description": "पाठको सानो भाग"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "पाठ",
+            "description": "पाठको मध्यम भाग"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "इ - मेल ठेगाना",
+            "description": "इ - मेल ठेगाना"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "फोन नम्बर",
+            "description": "फोन नम्बर"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "वेबमा लिंक गर्नुहोस्"
+        },
+        "Streams\/image": {
+            "displayType": "छवि",
+            "description": "दृश्य छवि"
+        },
+        "Streams\/images": {
+            "displayType": "छवि ग्यालरी",
+            "description": "छविहरूको ग्यालरी"
+        },
+        "Streams\/album": {
+            "displayType": "एल्बम",
+            "description": "विभिन्न मिडिया सम्बन्धित छ कि एक एल्बम"
+        },
+        "Streams\/file": {
+            "displayType": "फाईल",
+            "description": "अपलोड गरिएको फाईल"
+        },
+        "Streams\/audio": {
+            "displayType": "अडियो क्लिप",
+            "description": "अडियो क्लिप"
+        },
+        "Streams\/video": {
+            "displayType": "भिडियो क्लिप",
+            "description": "भिडियो क्लिप"
+        },
+        "Streams\/live": {
+            "displayType": "प्रत्यक्ष प्रसारण",
+            "description": "प्रत्यक्ष अडियो वा भिडियो"
+        },
+        "Streams\/category": {
+            "displayType": "कोटि",
+            "description": "एक कोटी जसमा अन्य स्ट्रिमहरू सम्बन्धित हुन सक्छन्"
+        },
+        "Streams\/participating": {
+            "displayType": "सहभागी सूचकांक",
+            "description": "स्ट्रिमहरू यससँग सम्बन्धित \/ असम्बन्धित छन् जब प्रयोगकर्ता सामील हुन्छ \/ पातहरू"
+        },
+        "Streams\/interest": {
+            "displayType": "ब्याज",
+            "description": "निश्चित विषयमा प्रयोगकर्ताको रुचि प्रतिनिधित्व गर्दछ"
+        },
+        "Streams\/incoming": {
+            "displayType": "आगमन",
+            "description": "अन्य प्रयोगकर्ताहरू द्वारा पठाईएको सन्देशहरूका लागि गन्तव्य"
+        },
+        "Streams\/chat": {
+            "displayType": "कुराकानी",
+            "description": "ईतिहासको साथ प्रयोगकर्ताहरू बीचको कुराकानी"
+        },
+        "Streams\/webrtc": {
+            "displayType": "वास्तविक-समय कल",
+            "description": "एक वास्तविक समय भिडियो \/ अडियो कल"
         }
     }
 }

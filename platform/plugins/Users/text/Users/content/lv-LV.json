@@ -102,5 +102,11 @@
         "noLongerUsing": "Jūs vairs neesat izveidojis savienojumu ar {{platform}} kā",
         "doAuth": "Piesakieties, izmantojot šo kontu",
         "doSwitch": "Pārslēgties uz šo kontu"
+    },
+    "roles": {
+        "Owner": "Īpašnieks",
+        "Admin": "Administrator",
+        "Member": "Biedrs",
+        "Guest": "Viesis"
     }
 }

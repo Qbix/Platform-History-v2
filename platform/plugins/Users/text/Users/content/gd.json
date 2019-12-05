@@ -18,7 +18,8 @@
         "GetStarted": "Toiseach tòiseachaidh",
         "Authorize": "Ceadaich",
         "TermsLabel": "Tha mi air a leughadh agus ag aontachadh <br> chun an {{link}}",
-        "TermsTitle": "Riaghailtean"
+        "TermsTitle": "Riaghailtean",
+        "mustAgree": "An toiseach feumaidh tu aontachadh ris na cumhachan."
     },
     "register": {
         "TermsLabel": "Tha mi a ’gabhail ris an {{link}}",
@@ -31,11 +32,18 @@
         "no": "Chan eil",
         "WelcomePleaseVerifyEmail": "Fàilte! Dearbhaich an seòladh puist-d agad.",
         "WelcomeVerifyEmail": "Fàilte! Dearbhaich an seòladh puist-d agad.",
-        "ForgetPass": "Hey, an do dhìochuimhnich thu an abairt-fhaire agad?"
+        "ForgetPass": "Hey, an do dhìochuimhnich thu an abairt-fhaire agad?",
+        "PassphraseSaved": "Chaidh an abairt pas agad a shàbhaladh.",
+        "IdentifierActivated": "Chaidh do {{type}} a chuir an gnìomh.",
+        "CompletedActivation": "Tha thu air crìoch a chuir air gnìomhachd luchd-cleachdaidh.",
+        "CompletedActivationLogIn": "Tha thu air crìoch a chuir air gnìomhachd luchd-cleachdaidh. Feuch ri logadh a-steach a-nis."
     },
     "contacts": {
         "dialog": {
-            "title": "Tagh conaltradh"
+            "title": "Tagh conaltradh",
+            "CreateAccount": "+ Fios Ùr",
+            "CreateAccountNotFound": "Cha deach Q.Users.Cordova.UI.create a lorg",
+            "SearchByName": "Rannsaich a rèir ainm"
         },
         "select": {
             "title": "Tagh conaltradh le {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Tagh leubail.",
-        "inviteUser": "Thoir cuireadh do chleachdaiche"
+        "inviteUser": "Thoir cuireadh do chleachdaiche",
+        "selectRole": "Tagh Dreuchd",
+        "inviteRole": "Thoir cuireadh do {{role}}"
     },
-    "invalidLanguageSelected": "Cànan mì-dhligheach air a thaghadh"
+    "invalidLanguageSelected": "Cànan mì-dhligheach air a thaghadh",
+    "login": {
+        "title": "Fàilte",
+        "directions": "Cruthaich cunntas, no log a-steach.",
+        "directionsNoRegister": "Log a-steach ma tha cunntas agad.",
+        "goButton": "Rach",
+        "passphrase": "Cuir a-steach an abairt pas agad:",
+        "loginButton": "Tòisich",
+        "registerButton": "Tòisich",
+        "resendButton": "Cuir teachdaireachd gnìomhachaidh",
+        "forgot": "An do dhìochuimhnich thu e?",
+        "resendConfirm": "A bheil thu airson teachdaireachd a chuir a-steach gus an abairt-fhaire agad ath-shuidheachadh?",
+        "resendSuccess": "Thoir sùil airson teachdaireachd gus an abairt-fhaire agad ath-shuidheachadh",
+        "resendClose": "Dùin",
+        "noPassphrase": "Mus urrainn dhut logadh a-steach, feumaidh tu abairt pas a shuidheachadh le bhith a ’briogadh air a’ cheangal anns an teachdaireachd gnìomhachaidh agad.",
+        "notVerified": "Feumaidh tu teachdaireachd gnìomhachaidh a chuir thugad fhèin gus logadh a-steach.",
+        "emailExists": "An do dh ’fheuch thu ri clàradh leis a’ phost-d seo roimhe? Ma tha, thoir sùil air a ’bhogsa a-steach agad gus do chunntas a ghnìomhachadh. <a href='#resend' class='Q_button Users_activation_resend'>Cliog gus an teachdaireachd a chuir air ais<\/a>",
+        "mobileExists": "An do dh ’fheuch thu ri clàradh leis an àireamh fòn-làimhe seo roimhe? Ma tha, thoir sùil air do SMS gus do chunntas a ghnìomhachadh. <a href='#resend' class='Q_button Users_activation_resend'>Cliog gus an teachdaireachd a chuir air ais<\/a>",
+        "usingOther": "no faodaidh tu",
+        "prompt": "Tagh ainm-cleachdaidh:",
+        "newUser": "no cruthaich cunntas ùr",
+        "placeholders": {
+            "identifier": "am fòn-làimhe agad # no post-d",
+            "mobile": "cuir a-steach am fòn-làimhe agad #",
+            "email": "cuir a-steach do sheòladh puist-d",
+            "username": "ainm-cleachdaidh"
+        },
+        "confirmTerms": "Gabh ris na Cumhachan Seirbheis?",
+        "facebookNoEmail": "Tha do chunntas facebook ag ionndrainn seòladh puist-d dearbhte. Dìreach dèan log a-steach san dòigh dhùthchasach.",
+        "picTooltip": "Faodaidh tu an dealbh seo atharrachadh nas fhaide air adhart"
+    },
+    "setIdentifier": {
+        "title": "Cuir dòigh air logadh a-steach",
+        "sendMessage": "Cuir teachdaireachd gnìomhachaidh",
+        "placeholders": {
+            "identifier": "cuir a-steach am fòn-làimhe # no post-d agad",
+            "mobile": "cuir a-steach an àireamh fòn-làimhe agad",
+            "email": "cuir a-steach do sheòladh puist-d",
+            "username": "ainm-cleachdaidh"
+        }
+    },
+    "prompt": {
+        "title": "Cunntas {{Platform}}",
+        "areUsing": "Tha thu a ’cleachdadh {{platform}} mar",
+        "noLongerUsing": "Chan eil thu tuilleadh ceangailte ri {{platform}} mar",
+        "doAuth": "Log a-steach leis a ’chunntas seo",
+        "doSwitch": "Atharraich chun chunntas seo"
+    }
 }

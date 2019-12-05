@@ -3,8 +3,8 @@
         "NewItemTitle": "Chinthu Chatsopano"
     },
     "labels": {
-        "Streams/invited": "Anthu omwe ndinawaitana",
-        "Streams/invitedMe": "Ndani anandiitana"
+        "Streams\/invited": "Anthu omwe ndinawaitana",
+        "Streams\/invitedMe": "Ndani anandiitana"
     },
     "interests": {
         "Filter": "Kodi mumakonda chiyani?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Kodi mukutsimikiza kuti mukufuna kutseka chatsopano ichi?",
         "closeChatConfirmYes": "Inde",
         "closeChatConfirmNo": "Ayi",
-        "earlierComments": "ndemanga zoyambirira"
+        "earlierComments": "ndemanga zoyambirira",
+        "Subscribed": "Zindikirani",
+        "Unsubscribed": "Pezani Zidziwitso",
+        "notAllowedToJoinCall": "Mulibe chilolezo cholowa nawo zokambirana.",
+        "startedConversation": "adayamba kukambirana",
+        "RealTimeCall": "Kuyimbira Nthawi Yeniyeni",
+        "SearchByName": "Sakani ndi dzina"
     },
     "notifications": {
         "*": "Uthenga {{& message.fields.type}} kwa {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Kupita patsogolo kunapangidwa pa {{stream.fields.title}}",
         "Streams\/task\/complete": "Ntchito idatha: {{stream.fields.title}}",
         "Streams\/task\/error": "Cholakwika pa: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Uthenga Wolowera"
+        "Streams\/incoming\/*": "{{app}}: Uthenga Wolowera",
+        "Streams\/relatedTo\/Streams\/call": "Kuyimba Kwatsopano Kuyambika mu {{toTitle}}",
+        "Streams\/relatedTo\/*": "Chatsopano {{relationDisplayType}} mu {{1000]}",
+        "Streams\/relatedFrom\/*": "Adawonjeza ku {{toTitle}} monga {{1000]}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} adakutchulirani ndemanga",
+        "Streams\/call": "{{displayName}} akukuyimbirani"
     },
     "invite": {
         "messageContent": "{{9}} akuitanani ku {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Imelo",
             "byText": "Malembo",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} ngati nambala idaseweredwa"
         },
         "email": {
             "subject": "Eya, fufuzani izi",
             "PleaseVisitLink": "Chonde tananizilani izi:",
             "InvitingYou": "Ndikukuitanani ku {{title}}",
-            "HasInvitedYou": "{{displayName}} wakuitanani ku {{title}}"
+            "HasInvitedYou": "{{displayName}} wakuitanani ku {{title}}",
+            "HasMentionedYou": "{{displayName}} anakuwuzani mu &quot;{{{title}}&quot;"
         },
         "sms": {
             "content": "Mwaitanidwa ku {{title}}. Chonde tambani {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Thandizani maikolofoni",
             "cameraTitle": "Thandizani Kamera",
-            "cameraAndMicrophoneTitle": "Thandizani Kamera ndi Microphone"
+            "cameraAndMicrophoneTitle": "Thandizani Kamera ndi Microphone",
+            "dialogTitle": "Kuphatikiza",
+            "microphoneBtn": "Yambitsani Maikolofoni",
+            "cameraBtn": "Yambitsani Kamera",
+            "cameraAndMicrophoneBtn": "Yambitsani Kamera ndi Maikolofoni"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "adatumiza uthenga wa <em>{{message.fields.type}}<\/em> kwa {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "adapereka ndemanga",
+            "in": "mu",
+            "body": "mu {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "yatumizidwa kwa",
+                "byAvatar": "ndi {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ali ndi {{instructions.fromDisplayType}} yatsopano",
+                "byAvatar": "yowonjezeredwa ndi {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Zoyitanidwa",
+            "description": "Makina olowera pamaimelo"
+        },
+        "Streams\/resource": {
+            "displayType": "Zothandizira",
+            "description": "kutsata kolowera chidziwitso ndikutumiza mauthenga okhudza zosintha"
+        },
+        "Streams\/task": {
+            "description": "pakulandila zosintha zakuyenda bwino pa ntchito inayake",
+            "displayType": "Ntchito"
+        },
+        "Streams\/tasks": {
+            "description": "gulu la ntchito",
+            "displayType": "Ntchito"
+        },
+        "Streams\/experience": {
+            "description": "zodziwika bwino kwa anthu ammudzi",
+            "displayType": "Zomwe zimachitika pagawo lililonse"
+        },
+        "Streams\/greeting": {
+            "description": "moni womwe wogwiritsa ntchito angadzidziwitse",
+            "displayType": "Moni"
+        },
+        "Streams\/number": {
+            "displayType": "Chiwerengero",
+            "description": "nambala ya masamu"
+        },
+        "Streams\/date": {
+            "displayType": "Tsiku",
+            "description": "tsiku"
+        },
+        "Streams\/text": {
+            "displayType": "Zolemba",
+            "description": "thupi lalemba"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Zolemba",
+            "description": "kagawo kakang&#39;ono ka malembedwe"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Zolemba",
+            "description": "thupi lazamalemba"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Imelo adilesi",
+            "description": "imelo adilesi"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Nambala yafoni",
+            "description": "nambala yafoni"
+        },
+        "Streams\/text\/url": {
+            "displayType": "Ulalo",
+            "description": "ulalo pa intaneti"
+        },
+        "Streams\/image": {
+            "displayType": "Chithunzi",
+            "description": "chithunzi chowoneka"
+        },
+        "Streams\/images": {
+            "displayType": "Zithunzi Zithunzi",
+            "description": "malo opangira zithunzi"
+        },
+        "Streams\/album": {
+            "displayType": "Chimbale",
+            "description": "chimbale chomwe media zambiri zalumikizana"
+        },
+        "Streams\/file": {
+            "displayType": "Fayilo",
+            "description": "fayilo yokwezedwa"
+        },
+        "Streams\/audio": {
+            "displayType": "Pofikira Audio",
+            "description": "clip clip"
+        },
+        "Streams\/video": {
+            "displayType": "Vidiyo Yakanema",
+            "description": "kapepala kanema"
+        },
+        "Streams\/live": {
+            "displayType": "Kutali",
+            "description": "nyimbo kapena kanema"
+        },
+        "Streams\/category": {
+            "displayType": "Gulu",
+            "description": "gulu lomwe mitsinje ina ingagwirizane"
+        },
+        "Streams\/participating": {
+            "displayType": "Index yochita nawo",
+            "description": "mitsinje imalumikizidwa \/ siyanjanitsidwa ndi izi pamene wogwiritsa ntchito alowa \/ achoka"
+        },
+        "Streams\/interest": {
+            "displayType": "Chidwi",
+            "description": "imayimira chidwi cha wogwiritsa ntchito pamutu wina"
+        },
+        "Streams\/incoming": {
+            "displayType": "Zikubwera",
+            "description": "kopita kwa mauthenga omwe atumizidwa ndi ogwiritsa ntchito ena"
+        },
+        "Streams\/chat": {
+            "displayType": "Kukambirana",
+            "description": "kucheza pakati pa ogwiritsa ntchito, ndi mbiriyakale"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Kuyimbira Kwambiri",
+            "description": "kanema weniweni \/ kuyimba"
         }
     }
 }

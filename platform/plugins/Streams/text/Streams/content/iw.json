@@ -3,8 +3,8 @@
         "NewItemTitle": "פריט חדש"
     },
     "labels": {
-        "Streams/invited": "אנשים שהזמנתי",
-        "Streams/invitedMe": "מי הזמין אותי"
+        "Streams\/invited": "אנשים שהזמנתי",
+        "Streams\/invitedMe": "מי הזמין אותי"
     },
     "interests": {
         "Filter": "ממה אתה נהנה?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "האם אתה בטוח שברצונך לסגור את הצ&#39;אט הזה?",
         "closeChatConfirmYes": "כן",
         "closeChatConfirmNo": "לא",
-        "earlierComments": "הערות מוקדמות יותר"
+        "earlierComments": "הערות מוקדמות יותר",
+        "Subscribed": "השתק התראות",
+        "Unsubscribed": "לקבל התראות",
+        "notAllowedToJoinCall": "אין לך הרשאה להצטרף לשיחה זו.",
+        "startedConversation": "פתח שיחה",
+        "RealTimeCall": "שיחה בזמן אמת",
+        "SearchByName": "חפש לפי שם"
     },
     "notifications": {
         "*": "הודעה {{& message.fields.type}} ל {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "ההתקדמות בוצעה בתאריך {{stream.fields.title}}",
         "Streams\/task\/complete": "המשימה הושלמה: {{stream.fields.title}}",
         "Streams\/task\/error": "שגיאה במהלך: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: הודעה נכנסת"
+        "Streams\/incoming\/*": "{{app}}: הודעה נכנסת",
+        "Streams\/relatedTo\/Streams\/call": "שיחה חדשה החלה ב- {{toTitle}}",
+        "Streams\/relatedTo\/*": "{{relationDisplayType}} חדש ב- {{toTitle}}",
+        "Streams\/relatedFrom\/*": "נוסף ל- {{toTitle}} בתור {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} אזכרו אותך בתגובה",
+        "Streams\/call": "{{displayName}} מתקשר אליך"
     },
     "invite": {
         "messageContent": "{{displayName}} הזמין אותך ל {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "דוא&quot;ל",
             "byText": "טקסט",
             "byFacebook": "פייסבוק",
-            "byTwitter": "טוויטר"
+            "byTwitter": "טוויטר",
+            "scannedQR": "{{ClickOrTap}} אם הקוד נסרק"
         },
         "email": {
             "subject": "ללא שם: היי, לבדוק את זה",
             "PleaseVisitLink": "בקר בקישור הבא:",
             "InvitingYou": "אני מזמין אותך {{title}}",
-            "HasInvitedYou": "{{displayName}} הזמין אותך ל {{title}}"
+            "HasInvitedYou": "{{displayName}} הזמין אותך ל {{title}}",
+            "HasMentionedYou": "{{displayName}} הזכיר אותך ב&quot; {{title}} &quot;"
         },
         "sms": {
             "content": "הוזמנת ל {{title}}. הקש על {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "הפעל מיקרופון",
             "cameraTitle": "הפעל את המצלמה",
-            "cameraAndMicrophoneTitle": "הפעל מצלמה ומיקרופון"
+            "cameraAndMicrophoneTitle": "הפעל מצלמה ומיקרופון",
+            "dialogTitle": "מתחבר",
+            "microphoneBtn": "אפשר מיקרופון",
+            "cameraBtn": "אפשר מצלמה",
+            "cameraAndMicrophoneBtn": "אפשר מצלמה ומיקרופון"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "פרסמה הודעה <em>{{message.fields.type}}<\/em> ל- {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "הגיב על",
+            "in": "בתוך",
+            "body": "בתוך {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "פורסם ב-",
+                "byAvatar": "מאת {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "יש {{instructions.fromDisplayType}} חדש",
+                "byAvatar": "נוסף על ידי {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "מוזמנים",
+            "description": "תיבת הדואר הנכנס להזמנות"
+        },
+        "Streams\/resource": {
+            "displayType": "משאב",
+            "description": "זרם לניהול גישה למשאב ופרסום הודעות על עדכונים"
+        },
+        "Streams\/task": {
+            "description": "לקבלת עדכונים על התקדמות במשימה מסוימת",
+            "displayType": "משימה"
+        },
+        "Streams\/tasks": {
+            "description": "קטגוריה למשימות",
+            "displayType": "משימות"
+        },
+        "Streams\/experience": {
+            "description": "חוויה נפוצה לחברי הקהילה",
+            "displayType": "ניסיון נפוץ לחברי קהילה"
+        },
+        "Streams\/greeting": {
+            "description": "ברכה בה המשתמש יכול להציג את עצמו",
+            "displayType": "ברכה"
+        },
+        "Streams\/number": {
+            "displayType": "מספר",
+            "description": "מספר מתמטי"
+        },
+        "Streams\/date": {
+            "displayType": "תאריך",
+            "description": "תאריך"
+        },
+        "Streams\/text": {
+            "displayType": "טקסט",
+            "description": "גוף טקסט"
+        },
+        "Streams\/text\/small": {
+            "displayType": "טקסט",
+            "description": "גוף טקסט קטן"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "טקסט",
+            "description": "גוף טקסט בינוני"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "כתובת דוא&quot;ל",
+            "description": "כתובת דוא&quot;ל"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "מספר טלפון",
+            "description": "מספר טלפון"
+        },
+        "Streams\/text\/url": {
+            "displayType": "כתובת אתר",
+            "description": "קישור באינטרנט"
+        },
+        "Streams\/image": {
+            "displayType": "תמונה",
+            "description": "תמונה חזותית"
+        },
+        "Streams\/images": {
+            "displayType": "גלריית תמונות",
+            "description": "גלריית תמונות"
+        },
+        "Streams\/album": {
+            "displayType": "אלבום",
+            "description": "אלבום שאליו קשורים מדיות שונות"
+        },
+        "Streams\/file": {
+            "displayType": "קובץ",
+            "description": "הקובץ שהועלה"
+        },
+        "Streams\/audio": {
+            "displayType": "קליפ שמע",
+            "description": "קליפ שמע"
+        },
+        "Streams\/video": {
+            "displayType": "סרטון וידאו",
+            "description": "סרטון וידאו"
+        },
+        "Streams\/live": {
+            "displayType": "שידור חי",
+            "description": "שמע או וידאו חי"
+        },
+        "Streams\/category": {
+            "displayType": "קטגוריה",
+            "description": "קטגוריה שאליה ניתן יהיה להזרים זרמים אחרים"
+        },
+        "Streams\/participating": {
+            "displayType": "אינדקס משתתף",
+            "description": "זרמים קשורים \/ לא קשורים לזה כאשר משתמש מצטרף \/ עוזב"
+        },
+        "Streams\/interest": {
+            "displayType": "ריבית",
+            "description": "מייצג את העניין של המשתמש בנושא מסוים"
+        },
+        "Streams\/incoming": {
+            "displayType": "נכנסת",
+            "description": "יעד להודעות שנשלחו על ידי משתמשים אחרים"
+        },
+        "Streams\/chat": {
+            "displayType": "שיחה",
+            "description": "שיחה בין משתמשים, עם היסטוריה"
+        },
+        "Streams\/webrtc": {
+            "displayType": "שיחה בזמן אמת",
+            "description": "שיחת וידאו \/ שמע בזמן אמת"
         }
     }
 }

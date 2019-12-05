@@ -26,26 +26,9 @@ function Users_before_Q_responseExtras()
 		$setIdentifierOptions = Q::take($loginOptions, array('identifierType'));
 		Q_Response::setScriptData('Q.plugins.Users.setIdentifier.serverOptions', $setIdentifierOptions);
 	}
-	if (Q_Config::get('Users', 'showLoggedInUser', true)) {
-		$user = Q_Session::id() ? Users::loggedInUser() : null;
-		if ($user) {
-			$u = $user->exportArray();
-			$u['sessionCount'] = $user->sessionCount;
-			$u['email'] = $user->emailAddress;
-			$u['mobile'] = $user->mobileNumber;
-			Q_Response::setScriptData("Q.plugins.Users.loggedInUser", $u);
-			Q_Response::addScriptLine("Q.plugins.Users.loggedInUser = new Q.plugins.Users.User(Q.plugins.Users.loggedInUser);");
-			Users::capability()->addPermission('Users/socket');
-			Users::capability()->setData('userId', $user->id);
-		}
-	}
 	Q_Response::setScriptData('Q.plugins.Users.communityId', Users::communityId());
 	Q_Response::setScriptData('Q.plugins.Users.communityName', Users::communityName());
 	Q_Response::setScriptData('Q.plugins.Users.communitySuffix', Users::communitySuffix());
-	Q_Response::setScriptData(
-		'Q.plugins.Users.hinted',
-		Q::ifset($_SESSION, 'Users', 'hinted', array())
-	);
 	if ($sizes = Q_Image::getSizes('Users/icon', $maxStretch)) {
 		ksort($sizes);
 		Q_Response::setScriptData('Q.plugins.Users.icon.sizes', $sizes);

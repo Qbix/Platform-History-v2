@@ -3,8 +3,8 @@
         "NewItemTitle": "Mea hou"
     },
     "labels": {
-        "Streams/invited": "Ka poʻe i konoʻia au",
-        "Streams/invitedMe": "ʻO wai ka mea i kono iaʻu"
+        "Streams\/invited": "Ka poʻe i konoʻia au",
+        "Streams\/invitedMe": "ʻO wai ka mea i kono iaʻu"
     },
     "interests": {
         "Filter": "He aha kāu mea hauʻoli?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Makemakeʻoe e pani i kēia kūkākūkāʻana?",
         "closeChatConfirmYes": "Ae",
         "closeChatConfirmNo": "Aʻole",
-        "earlierComments": "nā&#39;ōlelo mua"
+        "earlierComments": "nā&#39;ōlelo mua",
+        "Subscribed": "Hoʻomaopopo i ka ʻike",
+        "Unsubscribed": "E kiʻi i nā hōʻikeʻike",
+        "notAllowedToJoinCall": "ʻAʻole kou ʻae e komo pū i kēia kamaʻilio.",
+        "startedConversation": "hoʻomaka kahi kamaʻilio",
+        "RealTimeCall": "Kāhea Keia",
+        "SearchByName": "Huli ma o ka inoa"
     },
     "notifications": {
         "*": "Kākauʻia {{& message.fields.type}} i {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Ua holomua i ka {{stream.fields.title}}",
         "Streams\/task\/complete": "Ua pau ka hana: {{stream.fields.title}}",
         "Streams\/task\/error": "Kuhi hewa ma: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Karere e komo"
+        "Streams\/incoming\/*": "{{app}}: Karere e komo",
+        "Streams\/relatedTo\/Streams\/call": "Kāhea ʻia hou i {{toTitle}}",
+        "Streams\/relatedTo\/*": "Hou {{relationDisplayType}} i {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Kahi i hoʻohui ʻia ma ka {{toTitle}} e like me {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} i hoʻoiho iā ʻoe ma ka ʻōlelo",
+        "Streams\/call": "{{displayName}} ke kāhea iā ʻoe"
     },
     "invite": {
         "messageContent": "ʻIke &#39;{{displayName}} iāʻoe i {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Email",
             "byText": "Kākau",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} inā he kāwele ʻia ka helu"
         },
         "email": {
             "subject": "E nānā, e nānā i kēia",
             "PleaseVisitLink": "Eʻoluʻolu e nānā i kēia loulou:",
             "InvitingYou": "Ke kono nei au iāʻoe i {{title}}",
-            "HasInvitedYou": "Ua konoʻo {{displayName}} iāʻoe i {{title}}"
+            "HasInvitedYou": "Ua konoʻo {{displayName}} iāʻoe i {{title}}",
+            "HasMentionedYou": "{{displayName}} ua haʻi iā ʻoe ma &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Ua konoʻiaʻoe e [999}}. Eʻoluʻolu e paʻi {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "E ho&#39;āla i kahi kani",
             "cameraTitle": "E ho&#39;āla i ka kamera",
-            "cameraAndMicrophoneTitle": "E ho&#39;āla i ka kamera a me ke kani"
+            "cameraAndMicrophoneTitle": "E ho&#39;āla i ka kamera a me ke kani",
+            "dialogTitle": "Pūnaewele",
+            "microphoneBtn": "E kaha i ke kelepona uila",
+            "cameraBtn": "Hoʻāue Kamera",
+            "cameraAndMicrophoneBtn": "Hoʻopili i nā kāmeka a me nā mikropona"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "hoʻouka i kahi <em>{{message.fields.type}}<\/em> memo i {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "ua ʻōlelo ʻia",
+            "in": "i loko",
+            "body": "i {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "i ua l?",
+                "byAvatar": "e {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "i has {{instructions.fromDisplayType}} hou",
+                "byAvatar": "i hoʻohui ʻia e {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Kāhea ʻia",
+            "description": "Pahu inikua no nā mea noi"
+        },
+        "Streams\/resource": {
+            "displayType": "Kumuhana",
+            "description": "kahawai no ka mālama ʻana i kahi ʻike i kahi kumuwaiwai a hoʻouna i nā leka e pili ana i nā hoʻonui hou"
+        },
+        "Streams\/task": {
+            "description": "no ka loaʻa ʻana o nā mea pili e pili ana i ka holomua ma kekahi hana",
+            "displayType": "ʻĀina hana"
+        },
+        "Streams\/tasks": {
+            "description": "kāʻei no nā hana",
+            "displayType": "Nā hana"
+        },
+        "Streams\/experience": {
+            "description": "kahi kūlana maʻamau no nā lālā o kahi kaiāulu",
+            "displayType": "Hōʻike maʻamau no nā lālā o kahi kaiāulu"
+        },
+        "Streams\/greeting": {
+            "description": "aloha e hiki ai i kahi mea hoʻohana ke hoʻopuka iā lākou iho",
+            "displayType": "Kākau"
+        },
+        "Streams\/number": {
+            "displayType": "Helu",
+            "description": "helu matematika"
+        },
+        "Streams\/date": {
+            "displayType": "Lā",
+            "description": "lā"
+        },
+        "Streams\/text": {
+            "displayType": "ʻAtikala",
+            "description": "kino o ka kikokikona"
+        },
+        "Streams\/text\/small": {
+            "displayType": "ʻAtikala",
+            "description": "kino liʻiliʻi o ke kikokikona"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "ʻAtikala",
+            "description": "kino kino o nā kikokikona"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Helu leka uila",
+            "description": "helu leka uila"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Helu kelepona",
+            "description": "helu kelepona"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "loulou ma ka pūnaewele"
+        },
+        "Streams\/image": {
+            "displayType": "Kiʻi",
+            "description": "kiʻi kiʻi"
+        },
+        "Streams\/images": {
+            "displayType": "Kiʻi Kiʻi",
+            "description": "kiʻi o nā kiʻi"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "kahi mele kahi e pili ai nā ʻano like ʻole"
+        },
+        "Streams\/file": {
+            "displayType": "Faila",
+            "description": "hoʻouna ʻia"
+        },
+        "Streams\/audio": {
+            "displayType": "Kōkua Audio",
+            "description": "pakipili leo"
+        },
+        "Streams\/video": {
+            "displayType": "Kōkua wikiō",
+            "description": "kiʻi wikiō"
+        },
+        "Streams\/live": {
+            "displayType": "Kawai Kawai",
+            "description": "ola ke wikiō a i ʻole wikiō"
+        },
+        "Streams\/category": {
+            "displayType": "Kākau",
+            "description": "kahi māhele e pili ai nā kahawai ʻē aʻe"
+        },
+        "Streams\/participating": {
+            "displayType": "Pāʻālua hui",
+            "description": "pili nā kahawai \/ pili ʻole i kēia i ka wā e hui ai \/ hoʻohana nā mea hoʻohana"
+        },
+        "Streams\/interest": {
+            "displayType": "Manaʻoʻia",
+            "description": "ulena i ka makemake o kahi mea hoʻohana i kekahi kumuhana"
+        },
+        "Streams\/incoming": {
+            "displayType": "Kāhea",
+            "description": "papa no nā leka i hoʻouna ʻia e nā mea hoʻohana ʻē aʻe"
+        },
+        "Streams\/chat": {
+            "displayType": "Ke kūkā",
+            "description": "ke kamaʻilio ʻana ma waena o nā mea hoʻohana, me ka mōʻaukala"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Kāhea-Ka-Pono",
+            "description": "i ke kelepona mau \/ kelepona maoli"
         }
     }
 }

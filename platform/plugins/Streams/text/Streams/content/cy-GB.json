@@ -241,7 +241,7 @@
                 "byAvatar": "gan {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "mae ganddo {{message.instructions.fromDisplayType}} newydd",
+                "hasANew": "mae ganddo {{instructions.fromDisplayType}} newydd",
                 "byAvatar": "ychwanegwyd gan {{avatar.displayName}}"
             }
         }

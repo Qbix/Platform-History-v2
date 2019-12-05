@@ -294,6 +294,12 @@ Sp.interpolate = function _String_prototype_interpolate(fields) {
 	}
 	return this.replace(/\{\{([^{}]*)\}\}/g, function (a, b) {
 		var r = fields[b];
+
+		if (Q.typeOf(r) === 'function') {
+			var context = Q.getObject(b.split('.').slice(0, -1), fields);
+			r = r.apply(context);
+		}
+
 		return (typeof r === 'string' || typeof r === 'number') ? r : a;
 	});
 };
@@ -4991,20 +4997,28 @@ Q.Links = {
 	}
 };
 
-Q.Session = function _Q_Session() {
-	// TODO: Set a timer for when session expires?
-	return {};
-};
-
 /**
  * A Q.Session object represents a session, and implements things like an "expiring" dialog
  * @class Q.Session
  * @constructor
  */
 
-Q.Session = function _Q_Session() {
-	// TODO: Set a timer for when session expires?
-	return {};
+Q.Session = {
+	paths: [],
+	/**
+	 * Clears the various objects that were set specifically
+	 * for this user session.
+	 * @static
+	 * @method clear
+	 */
+	clear: function () {
+		Q.each(Q.Session.paths, function (i, path) {
+			if (Q.getObject(path)) {
+				Q.setObject(path, null);
+			}
+		});
+		return true;
+	}
 };
 
 /**
@@ -6473,8 +6487,8 @@ Q.action = function _Q_action(uri, fields, options) {
  *  * @param {String} [options.echo] A string to echo back. Used to keep track of responses
  *  * @param {String} [options.method] if set, adds a &Q.method=$method to the querystring
  *  * @param {String|Function} [options.callback] if a string, adds a "&Q.callback="+encodeURIComponent(callback) to the querystring.
- *  * @param {boolean} [options.iframe] if true, tells the server to render the response as HTML in an iframe, which should call the specified callback
- *  * @param {boolean} [options.loadExtras] if true, asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load
+ *  * @param {Boolean} [options.iframe] if true, tells the server to render the response as HTML in an iframe, which should call the specified callback
+ *  * @param {Boolean|String} [options.loadExtras] if true, asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load, can also be "response", "session" or "response,session"
  *  * @param {Array} [options.idPrefixes] optional array of Q_Html::pushIdPrefix values for each slotName
  *  * @param {number} [options.timestamp] whether to include a timestamp (e.g. as a cache-breaker)
  * @return {String|Object}
@@ -6497,8 +6511,7 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
 			: (options.idPrefixes && options.idPrefixes.join(',')))
 		: '';
 	var timestamp = Date.now();
-	var ajax = options.iframe ? 'iframe'
-		: (options.loadExtras ? 'loadExtras' : 'json');
+	var ajax = options.iframe ? 'iframe' : 'json';
 	if (typeof what == 'string') {
 		var p = what.split('#');
 		var what2 = p[0];
@@ -6506,7 +6519,11 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
 			what2 += '/'; // otherwise we will have 301 redirect with trailing slash on most servers
 		}
 		what2 += (what2.indexOf('?') < 0) ? '?' : '&';
-		what2 += encodeURI('Q.ajax='+ajax);
+		what2 += 'Q.ajax=' + encodeURIComponent(ajax);
+		if (options.loadExtras) {
+			var loadExtras = options.loadExtras === true ? 'page' : options.loadExtras;
+			what2 += '&Q.loadExtras=' + encodeURIComponent(loadExtras);
+		}
 		if (options.timestamp) {
 			what2 += encodeURI('&Q.timestamp=')+encodeURIComponent(timestamp);
 		}
@@ -6798,9 +6815,10 @@ Q.request = function (url, slotNames, callback, options) {
 		
 		var method = o.method || 'GET';
 		var verb = method.toUpperCase();
-		var overrides = {
-			loadExtras: !!o.loadExtras
-		};
+		var overrides = {};
+		if (o.loadExtras) {
+			overrides.loadExtras = o.loadExtras;
+		}
 
 		if (verb !== 'GET') {
 			verb = 'POST'; // browsers don't always support other HTTP verbs;
@@ -8123,7 +8141,7 @@ var _latestLoadUrlObjects = {};
  * @param {boolean} [options.ignoreLoadingErrors=false] If true, ignores any errors in loading scripts.
  * @param {boolean} [options.ignoreHash=false] if true, does not navigate to the hash part of the URL in browsers that can support it
  * @param {Object} [options.fields] additional fields to pass via the querystring
- * @param {boolean} [options.loadExtras=false] if true, asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load
+ * @param {Boolean|String} [options.loadExtras=false] if true, asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load. Can also be "request", "session" or "request,session"
  * @param {Number|boolean} [options.timeout=1500] milliseconds to wait for response, before showing cancel button and triggering onTimeout event, if any, passed to the options
  * @param {boolean} [options.quiet=false] if true, allows visual indications that the request is going to take place.
  * @param {String|Array} [options.slotNames] an array of slot names to request and process (default is all slots in Q.info.slotNames)
@@ -8357,6 +8375,9 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 							Q.setObject(k, v);
 						});
 					});
+				}
+				if (response.sessionDataPaths) {
+					Q.Session.paths = response.sessionDataPaths;
 				}
 				if (response.scriptLines) {
 					for (i in response.scriptLines) {
@@ -11480,11 +11501,15 @@ Q.Pointer = {
 	 * This is to good for preventing stray clicks from happening after an accidental scroll,
 	 * for instance if content changed after a tab was selected, and scrollTop became 0.
 	 * @method startCancelingClicksOnScroll
-	 * @param {
+	 * @param {Element} [element] If you skip this, all scrolling cancels clicks
 	 */
 	startCancelingClicksOnScroll: function (element) {
-		var sp = element.scrollingParent(true);
-		Q.addEventListener(sp, 'scroll', Q.Pointer.cancelClick);
+		if (element) {
+			var sp = element.scrollingParent(true);
+			Q.addEventListener(sp, 'scroll', _cancelClickBriefly);
+		} else {
+			Q.addEventListener(document.body, 'scroll', _cancelClickBriefly, true);
+		}
 	},
 	/**
 	 * Call this function to stop canceling clicks on the element or its scrolling parent.
@@ -11494,8 +11519,12 @@ Q.Pointer = {
 	 * @param {
 	 */
 	stopCancelingClicksOnScroll: function (element) {
-		var sp = element.scrollingParent(true);
-		Q.removeEventListener(sp, 'scroll', Q.Pointer.cancelClick);
+		if (element) {
+			var sp = element.scrollingParent(true);
+			Q.removeEventListener(sp, 'scroll', _cancelClickBriefly);
+		} else {
+			Q.removeEventListener(document.body, 'scroll', _cancelClickBriefly);
+		}
 	},
 	/**
 	 * This event occurs when a click has been canceled, for one of several possible reasons.
@@ -11524,6 +11553,13 @@ Q.Pointer = {
 		cancelClickDistance: 10
 	}
 };
+
+function _cancelClickBriefly() {
+	Q.Pointer.cancelClick();
+	setTimeout(function () {
+		Q.Pointer.canceledClick = false;
+	}, 100);
+}
 
 function _stopHint(img, container) {
 	var outside = (
@@ -11642,11 +11678,12 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
 	clearTimeout(_pointerMoveTimeout);
 	var screenX = Q.Pointer.getX(evt) - Q.Pointer.scrollLeft();
 	var screenY = Q.Pointer.getY(evt) - Q.Pointer.scrollTop();
-	if (!screenX || !screenY || Q.Pointer.canceledClick) {
+	if (!screenX || !screenY || Q.Pointer.canceledClick
+	|| (!evt.button || (evt.touches && !evt.touches.length))) {
 		return;
 	}
 	var ccd = Q.Pointer.options.cancelClickDistance;
-	if (_pos
+	if (event.button || _pos
 	&& ((_pos.x && Math.abs(_pos.x - screenX) > ccd)
 	 || (_pos.y && Math.abs(_pos.y - screenY) > ccd))) {
 		// finger moved more than the threshhold
@@ -12852,25 +12889,46 @@ Q.onJQuery.add(function ($) {
 
 function _addHandlebarsHelpers() {
 	var Handlebars = root.Handlebars;
+	/**
+	 * Call this in your helpers to parse the args into a useful array
+	 * You must call it like this: Handlebars.prepareArgs.call(this, arguments)
+	 * @method prepareArgs
+	 * @static
+	 * @param {Array} arguments to helper function
+	 * @return {array}
+	 */
+	Handlebars.prepareArgs = function(args) {
+		var arr = Array.prototype.slice.call(args, 0);
+		var last = arr.pop(); // last parameter is for the hash
+		arr.shift(); // the pattern
+		var result = Q.isEmpty(last.hash) ? {} : Q.copy(last.hash);
+		Q.each(arr, function (i, item) {
+			result[i] = item;
+		});
+		return Q.extend(result, this);
+	};
 	if (!Handlebars.helpers.call) {
 		Handlebars.registerHelper('call', function(path) {
 			if (!path) {
 				return "{{call missing method name}}";
 			}
-			var args = Array.prototype.slice.call(
-				arguments, 1, arguments.length-1
-			);
+			var args = Handlebars.prepareArgs.call(this, arguments);
 			var parts = path.split('.');
 			var subparts = parts.slice(0, -1);
+			var i=0;
+			var params = [];
+			do {
+				params.push(args[i]);
+			} while (args[++i]);
 			var f = Q.getObject(parts, this);
 			if (typeof f === 'function') {
-				return f.apply(Q.getObject(subparts, this), args);
+				return f.apply(Q.getObject(subparts, this), params);
 			}
 			var f = Q.getObject(parts);
 			if (typeof f === 'function') {
-				return f.apply(Q.getObject(subparts), args);
+				return f.apply(Q.getObject(subparts), params);
 			}
-			return "{{call '"+path+"' not found}}";
+			return "{{call "+path+" not found}}";
 		});
 	}
 	if (!Handlebars.helpers.tool) {
@@ -12957,10 +13015,8 @@ function _addHandlebarsHelpers() {
 			if (arguments.length < 2) {
 				return '';
 			}
-			var arr = Array.prototype.slice.call(arguments, 0);
-			var last = arr.pop();
-			arr.shift();
-			return expression.interpolate(Q.isEmpty(last.hash) ? arr : last.hash);
+			var args = Handlebars.prepareArgs.call(this, arguments);
+			return expression.interpolate(args);
 		});
 	}
 	if (!Handlebars.helpers.option) {
@@ -13127,64 +13183,7 @@ if (_isCordova) {
 }
 
 /**
- * @module Q
- */
-if (typeof module !== 'undefined' && typeof process !== 'undefined') {
-	// Assume we are in a Node.js environment, e.g. running tests
-	module.exports = Q;
-} else if (!dontSetGlobals) {
-	// We are in a browser environment
-	/**
-	 * This method restores the old window.Q and returns an instance of itself.
-     * @method noConflict
-	 * @param {boolean} extend
-	 *  If true, extends the old Q with methods and properties from the Q Platform.
-	 *  Otherwise, the old Q is untouched.
-	 * @return {Function}
-	 *  Returns the Q instance on which this method was called
-	 */
-	Q.noConflict = function (extend) {
-		if (extend) {
-			Q.extend(oldQ, Q);
-		}
-		root.Q = oldQ;
-		return Q;
-	};
-	var oldQ = root.Q;
-	root.Q = Q;
-}
-
-Q.globalNames = Object.keys(root); // to find stray globals
-
-/**
- * This function is useful to make sure your code is not polluting the global namespace
- * @method globalNamesAdded
- * @static
- */
-Q.globalNamesAdded = function () {
-	return Q.diff(Object.keys(window), Q.globalNames);
-};
-
-/**
- * This function is useful for debugging, e.g. calling it in breakpoint conditions
- * @method stackTrack
- * @static
- */
-Q.stackTrace = function() {
-	var obj = {};
-	if (Error.captureStackTrace) {
-		Error.captureStackTrace(obj, Q.stackTrace);
-	} else {
-		obj = new Error();
-	}
-	return obj.stack;
-};
-
-var _udid = location.search.queryField('Q.udid');
-var _appId = location.search.queryField('Q.appId');
-
-/**
- * Class to handle with cameras.
+ * Class to do things with cameras.
  * @class Camera
  * @namespace Q
  * @static
@@ -13635,6 +13634,63 @@ Q.beforeInit.addOnce(function () {
 		});
 	}
 }, 'Q');
+
+/**
+ * @module Q
+ */
+if (typeof module !== 'undefined' && typeof process !== 'undefined') {
+	// Assume we are in a Node.js environment, e.g. running tests
+	module.exports = Q;
+} else if (!dontSetGlobals) {
+	// We are in a browser environment
+	/**
+	 * This method restores the old window.Q and returns an instance of itself.
+     * @method noConflict
+	 * @param {boolean} extend
+	 *  If true, extends the old Q with methods and properties from the Q Platform.
+	 *  Otherwise, the old Q is untouched.
+	 * @return {Function}
+	 *  Returns the Q instance on which this method was called
+	 */
+	Q.noConflict = function (extend) {
+		if (extend) {
+			Q.extend(oldQ, Q);
+		}
+		root.Q = oldQ;
+		return Q;
+	};
+	var oldQ = root.Q;
+	root.Q = Q;
+}
+
+Q.globalNames = Object.keys(root); // to find stray globals
+
+/**
+ * This function is useful to make sure your code is not polluting the global namespace
+ * @method globalNamesAdded
+ * @static
+ */
+Q.globalNamesAdded = function () {
+	return Q.diff(Object.keys(window), Q.globalNames);
+};
+
+/**
+ * This function is useful for debugging, e.g. calling it in breakpoint conditions
+ * @method stackTrack
+ * @static
+ */
+Q.stackTrace = function() {
+	var obj = {};
+	if (Error.captureStackTrace) {
+		Error.captureStackTrace(obj, Q.stackTrace);
+	} else {
+		obj = new Error();
+	}
+	return obj.stack;
+};
+
+var _udid = location.search.queryField('Q.udid');
+var _appId = location.search.queryField('Q.appId');
 
 return Q;
 

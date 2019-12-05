@@ -18,7 +18,8 @@
         "GetStarted": "شروع ڪر",
         "Authorize": "اختيار ڏيڻ",
         "TermsLabel": "مون پڙهيو آهي ۽ متفق آهيان <br> تائين {{link}}",
-        "TermsTitle": "ضابطا"
+        "TermsTitle": "ضابطا",
+        "mustAgree": "پھريون اوھان کي شرطن سان متفق آھي."
     },
     "register": {
         "TermsLabel": "مون کي {{link}} قبول ڪيو",
@@ -31,11 +32,18 @@
         "no": "نه",
         "WelcomePleaseVerifyEmail": "ڀلي ڪري آيا! مهرباني ڪري پنهنجي اي ميل ايڊريس جي تصديق ڪريو.",
         "WelcomeVerifyEmail": "ڀلي ڪري آيا! پنهنجي اي ميل ايڊريس جي تصديق ڪريو.",
-        "ForgetPass": "افسوس، توهان پنهنجي پاسرفيس کي وساري ڇڏيو؟"
+        "ForgetPass": "افسوس، توهان پنهنجي پاسرفيس کي وساري ڇڏيو؟",
+        "PassphraseSaved": "توهان جو پاسورڊ محفوظ ڪيو ويو آهي.",
+        "IdentifierActivated": "توهان جو {{type}} چالو ڪيو ويو آهي.",
+        "CompletedActivation": "توھان کي استعمال ڪندڙ سرگرمي مڪمل ڪيو آھي.",
+        "CompletedActivationLogIn": "توھان کي استعمال ڪندڙ سرگرمي مڪمل ڪيو آھي. ھاڻي ڪوشش ڪرڻ ۾ ڪوشش ڪريو."
     },
     "contacts": {
         "dialog": {
-            "title": "رابطو چونڊيو"
+            "title": "رابطو چونڊيو",
+            "CreateAccount": "+ نئين رابطو",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.cre نه مليو",
+            "SearchByName": "نالو ڳولھيو"
         },
         "select": {
             "title": "{{displayName}} مان رابطو ڪريو"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "مهرباني ڪري ليبل چونڊيو.",
-        "inviteUser": "دعوت نامي استعمال ڪندڙ"
+        "inviteUser": "دعوت نامي استعمال ڪندڙ",
+        "selectRole": "ڪردار منتخب ڪريو",
+        "inviteRole": "دعوت نامو {{role}}"
     },
-    "invalidLanguageSelected": "غلط ٻولي منتخب ٿيل"
+    "invalidLanguageSelected": "غلط ٻولي منتخب ٿيل",
+    "login": {
+        "title": "ڀلي ڪري آيا",
+        "directions": "هڪ اڪائونٽ ٺاهيو، يا لاگ ان ڪريو.",
+        "directionsNoRegister": "لاگ ان ٿيو جيڪڏهن توهان وٽ اڪائونٽ آهي.",
+        "goButton": "وڃ",
+        "passphrase": "پنهنجو پاسورڊ درج ڪريو:",
+        "loginButton": "شروع ڪر",
+        "registerButton": "شروع ڪر",
+        "resendButton": "Activation Message موڪليو",
+        "forgot": "ان کي وساريو؟",
+        "resendConfirm": "ڇا توھان پنھنجي پاسپراس کي ريٽ ڪرڻ لاء پيغام موڪلڻ چاھيو ٿا؟",
+        "resendSuccess": "توهان جي پاسفريٽ ريٽ ڪرڻ لاء پيغام جي چڪاس ڪريو",
+        "resendClose": "بند ڪريو",
+        "noPassphrase": "ان کان اڳ توهان لاگ ان ڪري سگهو ٿا، توهان کي توهان جي فعالي پيغام ۾ لنڪ تي ڪلڪ ڪندي هڪ پاس جملي کي مقرر ڪرڻ گهرجي.",
+        "notVerified": "توهان کي لاگ ان ڪرڻ لاء توهان پاڻ ڏانهن هڪ ايڪڪشن جي پيغام موڪليو.",
+        "emailExists": "ڇا توهان هن اي ميل سان رجسٽر ڪرڻ جي ڪوشش ڪئي آهي؟ جيڪڏهن ائين آهي، پنهنجي اڪائونٽ کي فعال ڪرڻ لاء پنهنجي انباڪس کي پڙتال ڪريو. <a href='#resend' class='Q_button Users_activation_resend'>پيغام موڪلڻ لاء ڪلڪ ڪريو<\/a>",
+        "mobileExists": "ڇا توھان اڳوڻي ھن نمبر تي رجسٽر ڪرڻ جي ڪوشش ڪئي؟ جيڪڏهن ائين، پنهنجي اڪائونٽ کي فعال ڪرڻ لاء پنهنجي ايس ايم ايس جي سڃاڻپ ڪريو. <a href='#resend' class='Q_button Users_activation_resend'>پيغام موڪلڻ لاء ڪلڪ ڪريو<\/a>",
+        "usingOther": "يا تون ڪري سگھين ٿو",
+        "prompt": "ھڪ استعمال ڪندڙ جو نالو چونڊيو",
+        "newUser": "يا نئون اڪائونٽ ٺاهيو",
+        "placeholders": {
+            "identifier": "توهان جو موبائل # يا اي ميل",
+            "mobile": "پنهنجي موبائل فون داخل ڪريو",
+            "email": "پنهنجو اي ميل پتو داخل ڪريو",
+            "username": "استعمال ڪندڙ"
+        },
+        "confirmTerms": "قبول ڪريو شرطن جون شرطون؟",
+        "facebookNoEmail": "توهان جو فيسبوڪ اڪائونٽ هڪ تصديق ٿيل اي ميل ايڊريس موجود ناهي. بس رڳو اصلي طريقي سان لاگ ان ڪريو.",
+        "picTooltip": "توھان ھن تصوير کي تبديل ڪري سگھو ٿا"
+    },
+    "setIdentifier": {
+        "title": "لاگ ان ۾ رستو شامل ڪريو",
+        "sendMessage": "Activation Message موڪليو",
+        "placeholders": {
+            "identifier": "پنھنجو موبائل يا اي ميل داخل ڪريو",
+            "mobile": "پنهنجو موبائل نمبر داخل ڪريو",
+            "email": "پنهنجو اي ميل پتو داخل ڪريو",
+            "username": "استعمال ڪندڙ"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} اڪائونٽ",
+        "areUsing": "توھان استعمال ڪيو آھي {{platform}} وانگر",
+        "noLongerUsing": "توهان هينئر تائين {{platform}} سان ڳنڍيل ناهي",
+        "doAuth": "هن اڪائونٽ سان لاگ ان ڪريو",
+        "doSwitch": "هن اڪائونٽ کي مٽايو"
+    }
 }

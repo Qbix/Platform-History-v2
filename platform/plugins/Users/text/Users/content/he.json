@@ -102,5 +102,11 @@
         "noLongerUsing": "אינך מחובר עוד ל- {{platform}} בתור",
         "doAuth": "התחבר באמצעות חשבון זה",
         "doSwitch": "עבור לחשבון זה"
+    },
+    "roles": {
+        "Owner": "בעלים",
+        "Admin": "מנהל",
+        "Member": "חבר",
+        "Guest": "אורח"
     }
 }

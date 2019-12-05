@@ -18,7 +18,8 @@
         "GetStarted": "הייב אהן",
         "Authorize": "Authorize",
         "TermsLabel": "איך האָבן לייענען און שטימען <br> צו די {{link}}",
-        "TermsTitle": "Terms"
+        "TermsTitle": "Terms",
+        "mustAgree": "ערשטער איר מוזן שטימען צו די טערמינען."
     },
     "register": {
         "TermsLabel": "איך אָננעמען די {{link}}",
@@ -31,11 +32,18 @@
         "no": "ניין",
         "WelcomePleaseVerifyEmail": "באַגריסונג! ביטע באַשטעטיקן דיין בליצפּאָסט אַדרעס.",
         "WelcomeVerifyEmail": "באַגריסונג! באַשטעטיקן דיין בליצפּאָסט אַדרעס.",
-        "ForgetPass": "היי, האָט איר פאַרגעסן דיין פּאַסספראַס?"
+        "ForgetPass": "היי, האָט איר פאַרגעסן דיין פּאַסספראַס?",
+        "PassphraseSaved": "דיין פאספראזע איז געראטעוועט געווארן",
+        "IdentifierActivated": "דיין {{type}} איז אַקטיווייטיד.",
+        "CompletedActivation": "איר האָט געענדיקט באַניצער אַקטאַוויישאַן.",
+        "CompletedActivationLogIn": "איר האָט געענדיקט באַניצער אַקטאַוויישאַן. פּרוּווט לאָגינג אין איצט."
     },
     "contacts": {
         "dialog": {
-            "title": "קלייַבן קאָנטאַקט"
+            "title": "קלייַבן קאָנטאַקט",
+            "CreateAccount": "+ ניו קאָנטאַקט",
+            "CreateAccountNotFound": "Q.Uersers.Cordova.UI.create ניט געפֿונען",
+            "SearchByName": "זוכן דורך נאָמען"
         },
         "select": {
             "title": "אויסקלייַבן קאָנטאַקט פון {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "ביטע אויסקלייַבן פירמע.",
-        "inviteUser": "Invite User"
+        "inviteUser": "Invite User",
+        "selectRole": "סעלעקט ראָלע",
+        "inviteRole": "לאַדן {{role}}"
     },
-    "invalidLanguageSelected": "אומלעגאַלע שפּראַך אויסגעקליבן"
+    "invalidLanguageSelected": "אומלעגאַלע שפּראַך אויסגעקליבן",
+    "login": {
+        "title": "באַגריסונג",
+        "directions": "שאַפֿן אַ חשבון, אָדער קלאָץ אין.",
+        "directionsNoRegister": "קלאָץ אין אויב איר האָט אַ חשבון.",
+        "goButton": "גיי",
+        "passphrase": "אַרייַן דיין פאָרן פראַזע:",
+        "loginButton": "הייב אהן",
+        "registerButton": "הייב אהן",
+        "resendButton": "שיקן אַקטיוואַטיאָן אָנזאָג",
+        "forgot": "פארגעסן עס?",
+        "resendConfirm": "צי איר ווילן צו שיקן אַ אָנזאָג צו באַשטעטיק דיין פּאַסספראַסע?",
+        "resendSuccess": "קוק פֿאַר אַ אָנזאָג צו באַשטעטיק דיין פּאַסספראַסע",
+        "resendClose": "נאָענט",
+        "noPassphrase": "איידער איר קענען קלאָץ אין, איר מוזן שטעלן אַ פראַזע דורך געבן אַ קליק דעם לינק אין דיין אַקטאַוויישאַן אָנזאָג.",
+        "notVerified": "איר מוזן שיקן זיך אַ אַקטאַוויישאַן אָנזאָג צו קלאָץ אין.",
+        "emailExists": "האָבן איר געפרוווט צו פאַרשרייַבן מיט דעם E- בריוו פריער? אויב אַזוי, טשעק דיין ינבאָקס צו אַקטאַווייט דיין אקאונט. <a href='#resend' class='Q_button Users_activation_resend'>גיט צו שיקט דעם אָנזאָג ווידער<\/a>",
+        "mobileExists": "האָבן איר געפרוווט צו פאַרשרייַבן מיט דעם רירעוודיק נומער פריער? אויב אַזוי, טשעק דיין SMS צו אַקטאַווייט דיין אקאונט. <a href='#resend' class='Q_button Users_activation_resend'>גיט צו שיקט דעם אָנזאָג ווידער<\/a>",
+        "usingOther": "אָדער איר קענען",
+        "prompt": "קלויב אויס א באנוצער נאמען:",
+        "newUser": "אָדער שאַפֿן אַ נייַע אַקאַונט",
+        "placeholders": {
+            "identifier": "דיין רירעוודיק # אָדער E- בריוו",
+            "mobile": "אַרייַן דיין רירעוודיק #",
+            "email": "לייג אריין דיין אימעל אדרעס",
+            "username": "נאמען"
+        },
+        "confirmTerms": "אָננעמען די תּנאָים פון סערוויס?",
+        "facebookNoEmail": "אין דיין פאַסעבאָאָק חשבון פעלנדיק אַ באשטעטיקט E- בריוו אַדרעס. סימפּלי קלאָץ אין די געבוירן וועג.",
+        "picTooltip": "איר קענט טוישן דעם בילד שפּעטער"
+    },
+    "setIdentifier": {
+        "title": "לייג אַ וועג צו קלאָץ אין",
+        "sendMessage": "שיקן אַקטיוואַטיאָן אָנזאָג",
+        "placeholders": {
+            "identifier": "אַרייַן דיין רירעוודיק # אָדער E- בריוו",
+            "mobile": "אַרייַן דיין רירעוודיק נומער",
+            "email": "לייג אריין דיין אימעל אדרעס",
+            "username": "נאמען"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} אקאונט",
+        "areUsing": "איר נוצן {{platform}} ווי",
+        "noLongerUsing": "איר זענט ניט מער פארבונדן צו {{platform}} ווי",
+        "doAuth": "קלאָץ אין מיט דעם חשבון",
+        "doSwitch": "באַשטימען צו דעם חשבון"
+    }
 }

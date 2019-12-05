@@ -3,8 +3,8 @@
         "NewItemTitle": "Item novum"
     },
     "labels": {
-        "Streams/invited": "Invitavit mihi populus",
-        "Streams/invitedMe": "Quis praeter me"
+        "Streams\/invited": "Invitavit mihi populus",
+        "Streams\/invitedMe": "Quis praeter me"
     },
     "interests": {
         "Filter": "Quid frui?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Curabitur velit obstruere certus es?",
         "closeChatConfirmYes": "Ita",
         "closeChatConfirmNo": "nullum",
-        "earlierComments": "ante comments"
+        "earlierComments": "ante comments",
+        "Subscribed": "muta Notificaciones",
+        "Unsubscribed": "Suspendisse Get",
+        "notAllowedToJoinCall": "Vos non liceat iungere conloquio hoc.",
+        "startedConversation": "coepi colloquium",
+        "RealTimeCall": "Realis tempus Voca",
+        "SearchByName": "Quaere nomen"
     },
     "notifications": {
         "*": "Nuntium {{CMXCIX}} ad {{M}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "{{Progressus est de CMXCIX}}",
         "Streams\/task\/complete": "Opus complebitur: {{CMXCIX}}",
         "Streams\/task\/error": "Error in {{CMXCIX}}",
-        "Streams\/incoming\/*": "{{CMXCIX}}: Reditus Nuntius"
+        "Streams\/incoming\/*": "{{CMXCIX}}: Reditus Nuntius",
+        "Streams\/relatedTo\/Streams\/call": "Coepi}} per novam quandam appellationem {{CMXCIX",
+        "Streams\/relatedTo\/*": "Novum {{CMXCIX}} in {{M}}",
+        "Streams\/relatedFrom\/*": "} {Sicut M {ut} {{addidit CMXCIX}}",
+        "Streams\/mention": "{{CMXCIX}} in quibus et vos a comment",
+        "Streams\/call": "} {CMXCIX} {vocat vos"
     },
     "invite": {
         "messageContent": "} {{CMXCIX te invitavit} {{M}}",
@@ -59,13 +70,15 @@
             "byEmail": "Email",
             "byText": "text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{Si}} CMXCIX cum codice lustrabat lumine"
         },
         "email": {
             "subject": "Nullam Lorem ista",
             "PleaseVisitLink": "Placere visitare vinculo sequenti:",
             "InvitingYou": "{{Ego sum invitamus ad CMXCIX}}",
-            "HasInvitedYou": "} {{CMXCIX} {{te invitavit M}}"
+            "HasInvitedYou": "} {{CMXCIX} {{te invitavit M}}",
+            "HasMentionedYou": "} {CMXCIX} {quod ad vos &quot;{}} {M &#39;"
         },
         "sms": {
             "content": "{{Vos adhibitus essem CMXCIX}}. {{Quaeso ICTUS M}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Admitte Microphone",
             "cameraTitle": "DE CAMERA activare",
-            "cameraAndMicrophoneTitle": "Admitte camera et microphone"
+            "cameraAndMicrophoneTitle": "Admitte camera et microphone",
+            "dialogTitle": "connectens",
+            "microphoneBtn": "Admitte Microphone",
+            "cameraBtn": "DE CAMERA activare",
+            "cameraAndMicrophoneBtn": "Admitte camera et microphone"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "<em>{{a}<\/em> ad <em>CMXCIX missae}<\/em> {{M}}"
+        },
+        "text": {
+            "commentedOn": "commentati",
+            "in": "apud",
+            "body": "{CMXCIX} {in} {{M}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "missae sunt, ut",
+                "byAvatar": "CMXCIX {{a}}"
+            },
+            "relatedTo": {
+                "hasANew": "nova}} habet {{CMXCIX",
+                "byAvatar": "addidit}} ex {{CMXCIX"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "invitari",
+            "description": "Inbuxo posita ad invitationes"
+        },
+        "Streams\/resource": {
+            "displayType": "resource",
+            "description": "fluunt impetu de nuntiis updates pro administrandi obvius ut a resource communitis ac praesidio"
+        },
+        "Streams\/task": {
+            "description": "accipiens enim proficere updates de quadam in negotium",
+            "displayType": "negotium"
+        },
+        "Streams\/tasks": {
+            "description": "genus muneribus directionis",
+            "displayType": "tasks"
+        },
+        "Streams\/experience": {
+            "description": "quia a communi experientia membra civitatis",
+            "displayType": "Experientia communis, quia membra civitatis"
+        },
+        "Streams\/greeting": {
+            "description": "salutem sibi inducere possunt, quibus a user",
+            "displayType": "Salutem"
+        },
+        "Streams\/number": {
+            "displayType": "numerus",
+            "description": "mathematicus"
+        },
+        "Streams\/date": {
+            "displayType": "Date",
+            "description": "diem"
+        },
+        "Streams\/text": {
+            "displayType": "text",
+            "description": "Corpus illud"
+        },
+        "Streams\/text\/small": {
+            "displayType": "text",
+            "description": "parvum corpus illud"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "text",
+            "description": "medium text Corpus"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Email Oratio",
+            "description": "inscriptio"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "phone number",
+            "description": "phone numerus"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "nectunt in textus"
+        },
+        "Streams\/image": {
+            "displayType": "Image",
+            "description": "imago visual"
+        },
+        "Streams\/images": {
+            "displayType": "Image",
+            "description": "gallery imaginum"
+        },
+        "Streams\/album": {
+            "displayType": "album",
+            "description": "ad variis media, quae se habet ad album"
+        },
+        "Streams\/file": {
+            "displayType": "file",
+            "description": "file uploaded"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio Clip",
+            "description": "audio clip"
+        },
+        "Streams\/video": {
+            "displayType": "Video clip",
+            "description": "video clip"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "Vivamus audio et video"
+        },
+        "Streams\/category": {
+            "displayType": "genus",
+            "description": "genus referri potest ad alios"
+        },
+        "Streams\/participating": {
+            "displayType": "Index participating",
+            "description": "fluminum sunt related \/ user joins cum non finitimus ad illud \/ p"
+        },
+        "Streams\/interest": {
+            "displayType": "interest",
+            "description": "repraesentat rem a user scriptor quaedam in topic"
+        },
+        "Streams\/incoming": {
+            "displayType": "ineuntes",
+            "description": "Misitque nuntios ad destinatum Vimeo"
+        },
+        "Streams\/chat": {
+            "displayType": "colloquium",
+            "description": "colloquio inter users, cum historia"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Verus-Tempus Voca",
+            "description": "verum nunc video \/ vocationem audio"
         }
     }
 }

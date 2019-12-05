@@ -18,7 +18,8 @@
         "GetStarted": "Destpêk",
         "Authorize": "Ercdan",
         "TermsLabel": "Min xwendin û mikûlim <br> ji {{link}}",
-        "TermsTitle": "Şertên"
+        "TermsTitle": "Şertên",
+        "mustAgree": "Pêşîn divê hûn şertan bipejirînin."
     },
     "register": {
         "TermsLabel": "Ez qebûl dikim {{link}}",
@@ -31,11 +32,18 @@
         "no": "Na",
         "WelcomePleaseVerifyEmail": "Bi xêr hatî! Ji kerema xwe ji navnîşana e-nameya xwe bişîne",
         "WelcomeVerifyEmail": "Bi xêr hatî! Navnîşana nameya xwe ya Verîteyê bikin.",
-        "ForgetPass": "Hey, ji we re şîfreyê xwe bibîr kir?"
+        "ForgetPass": "Hey, ji we re şîfreyê xwe bibîr kir?",
+        "PassphraseSaved": "Fraza weyê hilanîn.",
+        "IdentifierActivated": "{{999} Your we hate aktîfkirin.",
+        "CompletedActivation": "We aktîfkirina bikarhêner qedand.",
+        "CompletedActivationLogIn": "We aktîfkirina bikarhêner qedand. Naha têkevinê."
     },
     "contacts": {
         "dialog": {
-            "title": "Têkiliyê hilbijêre"
+            "title": "Têkiliyê hilbijêre",
+            "CreateAccount": "+ Têkiliya Nû",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nehat dîtin",
+            "SearchByName": "Bi navî bigerin"
         },
         "select": {
             "title": "Têkilî hilbijêre {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Ji kerema xwe vegotinê hilbijêr",
-        "inviteUser": "Invite User"
+        "inviteUser": "Invite User",
+        "selectRole": "Role hilbijêrin",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "Zimanek çewt e"
+    "invalidLanguageSelected": "Zimanek çewt e",
+    "login": {
+        "title": "Bi xêr hatî",
+        "directions": "Hesabek çêbikin, an jî têkeve.",
+        "directionsNoRegister": "Ger hesabek we heye têkevinê.",
+        "goButton": "Çûyin",
+        "passphrase": "Gotina xweya derbazkirinê binivîse:",
+        "loginButton": "Destpêkirin",
+        "registerButton": "Destpêkirin",
+        "resendButton": "Peyama ationalakbûnê bişînin",
+        "forgot": "Jibîrkir?",
+        "resendConfirm": "Ma hûn dixwazin ji bo vesazkirina şîfreya xwe peyamek bişînin?",
+        "resendSuccess": "Ji bo ku mesajek were girtin ji rîfreya xwe rakirin",
+        "resendClose": "Nêzîkî",
+        "noPassphrase": "Berî ku hûn bikaribin têkevinê, divê hûn pêvekek pass li dar bixin û di peyama xwe ya aktîvkirinê de bidin hev.",
+        "notVerified": "Ji bo ku têkevinê divê hûn ji xwe re peyamek çalakiyê bişînin.",
+        "emailExists": "Ma we hewl da ku hûn berî vê e-nameyê qeyd bikin? Heke wusa be, hûn inboxê xwe kontrol bikin ku hûn hesabê xwe çalak bikin. <a href='#resend' class='Q_button Users_activation_resend'>Ji bo ku ji nû ve bişînin mesajê bikirtînin<\/a>",
+        "mobileExists": "Ma we hewl da ku hûn berî vê hejmarê mobîl tomar bikin? Heke wusa be, SMS-ya xwe kontrol bikin ku hûn hesabê xwe çalak bikin. <a href='#resend' class='Q_button Users_activation_resend'>Ji bo ku ji nû ve bişînin mesajê bikirtînin<\/a>",
+        "usingOther": "an jî hûn dikarin",
+        "prompt": "Navek bikarhêner hilbijêrin:",
+        "newUser": "an hesabek nû biafirînin",
+        "placeholders": {
+            "identifier": "mobile xwe an e-nameyê",
+            "mobile": "têlefona xwe têkevim #",
+            "email": "navnîşana e-nameya xwe binivîse",
+            "username": "navê bikarhêner"
+        },
+        "confirmTerms": "Mercên karûbar qebûl dikin?",
+        "facebookNoEmail": "Hesabê weya facebookê navnîşana e-nameyek pejirandî winda ye. Bi hêsanî bi rengek xweser têkevin.",
+        "picTooltip": "Hûn dikarin vê wêneyê paşê veguherînin"
+    },
+    "setIdentifier": {
+        "title": "Awirek ku têkeve hundurê",
+        "sendMessage": "Peyama ationalakbûnê bişînin",
+        "placeholders": {
+            "identifier": "# an e-nameya xweya mobîl têkevin",
+            "mobile": "hejmara telefona xwe têkevin",
+            "email": "navnîşana e-nameya xwe binivîse",
+            "username": "navê bikarhêner"
+        }
+    },
+    "prompt": {
+        "title": "99 {999}} Hesabê",
+        "areUsing": "Hûn wekî {999}} wekî kar dikin",
+        "noLongerUsing": "Aredî hûn bi {999} connected re wekî ve girêdayî ne",
+        "doAuth": "Bi vê hesabê têkevin",
+        "doSwitch": "Binêre hesabê vê"
+    }
 }

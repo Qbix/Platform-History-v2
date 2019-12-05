@@ -3,8 +3,8 @@
         "NewItemTitle": "Anyar Item"
     },
     "labels": {
-        "Streams/invited": "Wong sing diundang",
-        "Streams/invitedMe": "Sapa sing ngajak aku"
+        "Streams\/invited": "Wong sing diundang",
+        "Streams\/invitedMe": "Sapa sing ngajak aku"
     },
     "interests": {
         "Filter": "Apa sampeyan seneng?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Apa sampeyan yakin arep nutup chatting iki?",
         "closeChatConfirmYes": "Ya",
         "closeChatConfirmNo": "Ora Ana",
-        "earlierComments": "komentar sadurungé"
+        "earlierComments": "komentar sadurungé",
+        "Subscribed": "Kabar Bisu",
+        "Unsubscribed": "Entuk Kabar",
+        "notAllowedToJoinCall": "Sampeyan ora duwe idin kanggo melu ing obrolan iki.",
+        "startedConversation": "miwiti pacelathon",
+        "RealTimeCall": "Telpon Real Time",
+        "SearchByName": "Telusuri miturut jeneng"
     },
     "notifications": {
         "*": "Pesen {{& message.fields.type}} kanggo {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Perkembangan digawe ing {{stream.fields.title}}",
         "Streams\/task\/complete": "Tugas rampung: {{stream.fields.title}}",
         "Streams\/task\/error": "Kesalahan sajrone: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Mlebu pesen"
+        "Streams\/incoming\/*": "{{app}}: Mlebu pesen",
+        "Streams\/relatedTo\/Streams\/call": "Telpon Anyar Diwiwiti ing {{toTitle}}",
+        "Streams\/relatedTo\/*": "{{relationDisplayType}} ing {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Ditambahake ing {{toTitle}} minangka {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} sampeyan nyebutake komentar",
+        "Streams\/call": "{{displayName}} nelpon sampeyan"
     },
     "invite": {
         "messageContent": "{{displayName}} ngundang sampeyan menyang {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Email",
             "byText": "Teks",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} yen kode wis dipindai"
         },
         "email": {
             "subject": "Eh, cek iki metu",
             "PleaseVisitLink": "Delengen pranala iki:",
             "InvitingYou": "Aku ngajak sampeyan menyang {{title}}",
-            "HasInvitedYou": "{{displayName}} wis ngundang sampeyan menyang {{title}}"
+            "HasInvitedYou": "{{displayName}} wis ngundang sampeyan menyang {{title}}",
+            "HasMentionedYou": "{{displayName}} wis nyebutake sampeyan ing &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Sampeyan wis diundang menyang {{title}}. Monggo tutul {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Ngaktifake Mikropon",
             "cameraTitle": "Ngaktifake kamera",
-            "cameraAndMicrophoneTitle": "Ngaktifake Kamera lan Mikropon"
+            "cameraAndMicrophoneTitle": "Ngaktifake Kamera lan Mikropon",
+            "dialogTitle": "Nyambung",
+            "microphoneBtn": "Aktifake Mikropon",
+            "cameraBtn": "Aktifake Kamera",
+            "cameraAndMicrophoneBtn": "Aktifake Kamera lan Mikropon"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "dikirim <em>{{message.fields.type}}<\/em> pesen menyang {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "komentar ing",
+            "in": "ing",
+            "body": "ing {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "wis dikirim menyang",
+                "byAvatar": "dening {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "nduwe {{instructions.fromDisplayType}} anyar",
+                "byAvatar": "ditambahake dening {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Diundang",
+            "description": "Kothak mlebu kanggo undhangan"
+        },
+        "Streams\/resource": {
+            "displayType": "Sumber",
+            "description": "stream kanggo ngatur akses menyang sumber daya lan ngirim pesen babagan nganyari"
+        },
+        "Streams\/task": {
+            "description": "amarga nampa nganyari babagan kemajuan ing tugas tartamtu",
+            "displayType": "Tugas"
+        },
+        "Streams\/tasks": {
+            "description": "kategori kanggo tugas",
+            "displayType": "Tugas"
+        },
+        "Streams\/experience": {
+            "description": "pengalaman umum kanggo anggota komunitas",
+            "displayType": "Pengalaman umum kanggo anggota komunitas"
+        },
+        "Streams\/greeting": {
+            "description": "salam karo pangguna bisa ngenalake awake dhewe",
+            "displayType": "Salam"
+        },
+        "Streams\/number": {
+            "displayType": "Nomer",
+            "description": "nomer matematika"
+        },
+        "Streams\/date": {
+            "displayType": "Tanggal",
+            "description": "tanggal"
+        },
+        "Streams\/text": {
+            "displayType": "Teks",
+            "description": "awak teks"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Teks",
+            "description": "teks cilik"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Teks",
+            "description": "teks teks medium"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Alamat email",
+            "description": "alamat email"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Nomer Telpon",
+            "description": "nomer telpon"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "link ing web"
+        },
+        "Streams\/image": {
+            "displayType": "Gambar",
+            "description": "gambar visual"
+        },
+        "Streams\/images": {
+            "displayType": "Galeri Gambar",
+            "description": "galeri gambar"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "album sing wis digandhengake macem-macem media"
+        },
+        "Streams\/file": {
+            "displayType": "File",
+            "description": "file sing diunggah"
+        },
+        "Streams\/audio": {
+            "displayType": "Klip Audio",
+            "description": "klip audio"
+        },
+        "Streams\/video": {
+            "displayType": "Klip Video",
+            "description": "klip video"
+        },
+        "Streams\/live": {
+            "displayType": "Urip",
+            "description": "audio utawa video langsung"
+        },
+        "Streams\/category": {
+            "displayType": "Babagan",
+            "description": "kategori sing bisa uga ana aliran liyane"
+        },
+        "Streams\/participating": {
+            "displayType": "Indeks Peserta",
+            "description": "aliran kasebut ana gandhengane \/ ora ana gandhengane karo pangguna nalika pangguna gabung \/ ninggalake"
+        },
+        "Streams\/interest": {
+            "displayType": "Kepincut",
+            "description": "nggantosi minat pangguna ing topik tartamtu"
+        },
+        "Streams\/incoming": {
+            "displayType": "Mlebu",
+            "description": "tujuan kanggo pesen sing dikirim dening pangguna liyane"
+        },
+        "Streams\/chat": {
+            "displayType": "Obrolan",
+            "description": "obrolan ing antarane pangguna, kanthi sejarah"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Telpon Real-Time",
+            "description": "telpon video \/ audio nyata"
         }
     }
 }

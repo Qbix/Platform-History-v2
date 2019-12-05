@@ -18,7 +18,8 @@
         "GetStarted": "Qalisa",
         "Authorize": "Ugunyazisile",
         "TermsLabel": "Ndiyifunde kwaye ndiyavuma <br> {{link}}",
-        "TermsTitle": "Imigomo"
+        "TermsTitle": "Imigomo",
+        "mustAgree": "Okokuqala kufuneka uvume imigaqo."
     },
     "register": {
         "TermsLabel": "Ndiyamkela {{link}}",
@@ -31,11 +32,18 @@
         "no": "Hayi",
         "WelcomePleaseVerifyEmail": "Wamkelekile! Nceda uqinisekise idilesi yakho ye-imeyile.",
         "WelcomeVerifyEmail": "Wamkelekile! Qinisekisa idilesi yakho ye-imeyile.",
-        "ForgetPass": "Hayi, uyalilibala inqabana yakho?"
+        "ForgetPass": "Hayi, uyalilibala inqabana yakho?",
+        "PassphraseSaved": "Ibinzana lakho lokuphumelela ligcinwe.",
+        "IdentifierActivated": "Eyakho {{type}} yenziwe yasebenza.",
+        "CompletedActivation": "Ugqibile ukusebenza komsebenzisi.",
+        "CompletedActivationLogIn": "Ugqibile ukusebenza komsebenzisi. Zama ukungena ngoku."
     },
     "contacts": {
         "dialog": {
-            "title": "Khetha uqhagamshelwano"
+            "title": "Khetha uqhagamshelwano",
+            "CreateAccount": "+ Unxibelelwano olutsha",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create akafumaneki",
+            "SearchByName": "Khangela ngegama"
         },
         "select": {
             "title": "Khetha uqhagamshelwano lwe {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Nceda ukhethe ilebula.",
-        "inviteUser": "Mema Umsebenzisi"
+        "inviteUser": "Mema Umsebenzisi",
+        "selectRole": "Khetha Indima",
+        "inviteRole": "Mema {{role}}"
     },
-    "invalidLanguageSelected": "Ulwimi olungavumelekanga"
+    "invalidLanguageSelected": "Ulwimi olungavumelekanga",
+    "login": {
+        "title": "Wamkelekile",
+        "directions": "Yenza iakhawunti, okanye ungene.",
+        "directionsNoRegister": "Ngena ukuba uneakhawunti.",
+        "goButton": "Yiya",
+        "passphrase": "Ngenisa intetho yakho:",
+        "loginButton": "Qalisa",
+        "registerButton": "Qalisa",
+        "resendButton": "Thumela Umyalezo wokuvula",
+        "forgot": "Uyilibale?",
+        "resendConfirm": "Ngaba ufuna ukuthumela umyalezo wokuba usekwe kwakhona igama lakho lokugqithisa?",
+        "resendSuccess": "Jonga umyalezo ukuze usete kwakhona igama lakho lokugqithisa",
+        "resendClose": "Vala",
+        "noPassphrase": "Ngaphambi kokuba ungene, kufuneka usete ibinzana lokudlula ngokuchofoza ikhonkco kumyalezo wokuvula.",
+        "notVerified": "Kuya kufuneka uzithumele umyalezo wokuvula ukuze ungene.",
+        "emailExists": "Ukhe wazama ukubhalisa kule imeyile ngaphambili? Ukuba kunjalo, jonga i-inbox yakho ukuze isebenze. <a href='#resend' class='Q_button Users_activation_resend'>Cofa ukuze uphinde uthumele umyalezo<\/a>",
+        "mobileExists": "Ukhe wazama ukubhalisa kule nombolo yeselula ngaphambili? Ukuba kunjalo, jonga i-SMS yakho ukuze isebenze. <a href='#resend' class='Q_button Users_activation_resend'>Cofa ukuze uphinde uthumele umyalezo<\/a>",
+        "usingOther": "okanye unako",
+        "prompt": "Khetha igama lokuyisebeznisa:",
+        "newUser": "okanye wenze iakhawunti entsha",
+        "placeholders": {
+            "identifier": "mobile wakho # okanye i-imeyile",
+            "mobile": "Ngenisa iselfowuni yakho #",
+            "email": "faka Idilesi yakho yemeyile",
+            "username": "igama lomsebenzisi"
+        },
+        "confirmTerms": "Uyayamkela iMigaqo yeNkonzo?",
+        "facebookNoEmail": "Iakhawunti yakho ye-facebook ilahlekile idilesi ye-imeyile. Ngena nje ngendlela yemveli.",
+        "picTooltip": "Ungawutshintsha lo mfanekiso kamva"
+    },
+    "setIdentifier": {
+        "title": "Yongeza indlela yokungena",
+        "sendMessage": "Thumela Umyalezo wokuvula",
+        "placeholders": {
+            "identifier": "Ngenisa iselfowuni yakho # okanye i-imeyile",
+            "mobile": "faka inombolo yakho yeselula",
+            "email": "faka Idilesi yakho yemeyile",
+            "username": "igama lomsebenzisi"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} iakhawunti",
+        "areUsing": "Usebenzisa {{platform}} njenge",
+        "noLongerUsing": "Awukaqhagamshelwa kwi {{platform}} njenge",
+        "doAuth": "Ngena kule akhawunti",
+        "doSwitch": "Tshintshela kule akhawunti"
+    }
 }

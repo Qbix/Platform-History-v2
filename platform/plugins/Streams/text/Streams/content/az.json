@@ -241,7 +241,7 @@
                 "byAvatar": "tərəfindən {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "yeni {{message.instructions.fromDisplayType}} var",
+                "hasANew": "yeni {{instructions.fromDisplayType}} var",
                 "byAvatar": "əlavə edilmiş {{avatar.displayName}}"
             }
         }

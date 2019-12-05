@@ -1,6 +1,6 @@
 <?php
 
-function Users_after_Q_responseExtras() {
+function Users_after_Q_sessionExtras() {
 	if ($preloaded = Users_User::$preloaded) {
 		Q_Response::setScriptData(
 			'Q.plugins.Users.User.preloaded',

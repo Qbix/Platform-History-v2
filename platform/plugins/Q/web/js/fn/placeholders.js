@@ -59,7 +59,9 @@ function () {
 		.not('input[type=submit]')
 		.add('textarea', this).each(function () {
 			var t = this.tagName.toLowerCase();
-			if (t != 'input' && t != 'textarea') return;
+			if (t !== 'input' && t !== 'textarea') {
+				return;
+			}
 		
 			var $this = $(this);
 		
@@ -114,7 +116,6 @@ function () {
 				'padding-bottom': props['padding-bottom'],
 				'border-top': 'solid ' + $this.css('border-top-width') + ' transparent',
 				'border-left': 'solid ' + $this.css('border-left-width') + ' transparent',
-				'box-sizing': $this.css('box-sizing'),
 				'font-size': $this.css('font-size'),
 				'font-weight': $this.css('font-weight'),
 				'overflow': 'hidden',
@@ -137,13 +138,14 @@ function () {
 			if ($this.val()) {
 				$placeholder.stop().hide();
 			}
-			var interval;
-			$this.focus(function () {
+			$this.on('input change', function () {
+				if ($this.val()) {
+					$placeholder.stop().hide();
+				}
+			}).on('focus', function () {
 				$placeholder.parent().addClass('Q_focus');
-			});
-			$this.blur(function () {
+			}).on('blur', function () {
 				$placeholder.parent().removeClass('Q_focus');
-				if (interval) clearInterval(interval);
 			});
 			$this.data('Q-placeholder', $placeholder);
 		}).off('.Q_placeholders')

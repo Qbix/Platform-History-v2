@@ -3,8 +3,8 @@
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams/invited": "Ljudi koje sam pozvao",
-        "Streams/invitedMe": "Ko me je pozvao"
+        "Streams\/invited": "Ljudi koje sam pozvao",
+        "Streams\/invitedMe": "Ko me je pozvao"
     },
     "interests": {
         "Filter": "Šta uživate?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Jeste li sigurni da želite zatvoriti ovaj chat?",
         "closeChatConfirmYes": "Da",
         "closeChatConfirmNo": "Ne",
-        "earlierComments": "raniji komentari"
+        "earlierComments": "raniji komentari",
+        "Subscribed": "Isključivanje zvuka",
+        "Unsubscribed": "Dobijajte obavijesti",
+        "notAllowedToJoinCall": "Nemate dozvolu da se pridružite ovom razgovoru.",
+        "startedConversation": "započeo razgovor",
+        "RealTimeCall": "Poziv u stvarnom vremenu",
+        "SearchByName": "Traži po imenu"
     },
     "notifications": {
         "*": "Poruka {{& message.fields.type}} do {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Napredak postignut {{stream.fields.title}}",
         "Streams\/task\/complete": "Zadatak je završen: {{stream.fields.title}}",
         "Streams\/task\/error": "Greška u toku: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Dolazna poruka"
+        "Streams\/incoming\/*": "{{app}}: Dolazna poruka",
+        "Streams\/relatedTo\/Streams\/call": "Novi poziv započeo u {{toTitle}}",
+        "Streams\/relatedTo\/*": "Novo {{relationDisplayType}} u {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Dodano u {{toTitle}} kao {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} spomenuo vas je u komentaru",
+        "Streams\/call": "{{displayName}} zove vas"
     },
     "invite": {
         "messageContent": "{{displayName}} vas je pozvao na {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Email",
             "byText": "Tekst",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} ako je kod skeniran"
         },
         "email": {
             "subject": "Hej, vidi ovo",
             "PleaseVisitLink": "Posjetite sljedeći link:",
             "InvitingYou": "Pozivam vas na {{title}}",
-            "HasInvitedYou": "{{displayName}} vas je pozvao na {{title}}"
+            "HasInvitedYou": "{{displayName}} vas je pozvao na {{title}}",
+            "HasMentionedYou": "{{displayName}} te spominje u &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Pozvani ste na {{title}}. Dodirnite {{url}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Omogući mikrofon",
             "cameraTitle": "Omogući kameru",
-            "cameraAndMicrophoneTitle": "Omogući kameru i mikrofon"
+            "cameraAndMicrophoneTitle": "Omogući kameru i mikrofon",
+            "dialogTitle": "Povezivanje",
+            "microphoneBtn": "Omogući mikrofon",
+            "cameraBtn": "Omogući kameru",
+            "cameraAndMicrophoneBtn": "Omogući kameru i mikrofon"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "objavio je <em>{{message.fields.type}}<\/em> poruku {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "komentirao",
+            "in": "u",
+            "body": "u {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "objavljeno je u",
+                "byAvatar": "do {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "ima novi {{instructions.fromDisplayType}}",
+                "byAvatar": "dodao {{avatar.displayName}}"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Pozvani",
+            "description": "Inbox za pozivnice"
+        },
+        "Streams\/resource": {
+            "displayType": "Resurs",
+            "description": "stream za upravljanje pristupom resursu i objavljivanje poruka o ažuriranjima"
+        },
+        "Streams\/task": {
+            "description": "za primanje ažuriranja o napretku na određenom zadatku",
+            "displayType": "Zadatak"
+        },
+        "Streams\/tasks": {
+            "description": "kategorija za zadatke",
+            "displayType": "Zadaci"
+        },
+        "Streams\/experience": {
+            "description": "zajedničko iskustvo za članove neke zajednice",
+            "displayType": "Uobičajeno iskustvo za članove zajednice"
+        },
+        "Streams\/greeting": {
+            "description": "pozdrav s kojim se korisnik može predstaviti",
+            "displayType": "Pozdrav"
+        },
+        "Streams\/number": {
+            "displayType": "Broj",
+            "description": "matematički broj"
+        },
+        "Streams\/date": {
+            "displayType": "Datum",
+            "description": "datum"
+        },
+        "Streams\/text": {
+            "displayType": "Tekst",
+            "description": "tijelo teksta"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Tekst",
+            "description": "mali tekst teksta"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Tekst",
+            "description": "srednji dio teksta"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "E-mail adresa",
+            "description": "e-mail adresa"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Telefonski broj",
+            "description": "telefonski broj"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "veza na webu"
+        },
+        "Streams\/image": {
+            "displayType": "Image",
+            "description": "vizuelna slika"
+        },
+        "Streams\/images": {
+            "displayType": "Galerija slika",
+            "description": "galerija slika"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "album na koji se odnose razni mediji"
+        },
+        "Streams\/file": {
+            "displayType": "Datoteka",
+            "description": "prenesena datoteka"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio Clip",
+            "description": "audio snimak"
+        },
+        "Streams\/video": {
+            "displayType": "Video klip",
+            "description": "video klip"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "audio ili video zapis uživo"
+        },
+        "Streams\/category": {
+            "displayType": "Kategorija",
+            "description": "kategoriju na koju se mogu povezati drugi tokovi"
+        },
+        "Streams\/participating": {
+            "displayType": "Indeks učešća",
+            "description": "potoci su povezani \/ nevezani za to kada se korisnik pridruži \/ napusti"
+        },
+        "Streams\/interest": {
+            "displayType": "Kamata",
+            "description": "predstavlja zanimanje korisnika za određenu temu"
+        },
+        "Streams\/incoming": {
+            "displayType": "Dolazni",
+            "description": "odredište za poruke koje šalju drugi korisnici"
+        },
+        "Streams\/chat": {
+            "displayType": "Razgovor",
+            "description": "razgovor između korisnika, sa istorijom"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Poziv u stvarnom vremenu",
+            "description": "video \/ audio poziv u stvarnom vremenu"
         }
     }
 }

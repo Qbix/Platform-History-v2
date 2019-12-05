@@ -18,7 +18,8 @@
         "GetStarted": "Amata",
         "Authorize": "Faataga",
         "TermsLabel": "Ua ou faitau ma ioe <br> i le {{link}}",
-        "TermsTitle": "Faʻamatalaga"
+        "TermsTitle": "Faʻamatalaga",
+        "mustAgree": "Muamua e tatau ona e malilie i tuutuuga."
     },
     "register": {
         "TermsLabel": "Ou te taliaina le {{link}}",
@@ -31,11 +32,18 @@
         "no": "leai",
         "WelcomePleaseVerifyEmail": "Afio mai! Faamolemole siaki lou tuatusi imeli.",
         "WelcomeVerifyEmail": "Afio mai! Faʻamaonia lau tuatusi imeli.",
-        "ForgetPass": "Hey, na e galo lau pasese?"
+        "ForgetPass": "Hey, na e galo lau pasese?",
+        "PassphraseSaved": "Na faasaoina lau pasese faʻasologa.",
+        "IdentifierActivated": "Ua faʻaalia le {{type}}.",
+        "CompletedActivation": "Ua maeʻa faʻauʻuina tagata.",
+        "CompletedActivationLogIn": "Ua maeʻa faʻauʻuina tagata. Taumafai e teu i totonu nei."
     },
     "contacts": {
         "dialog": {
-            "title": "Filifili fesoʻotaʻiga"
+            "title": "Filifili fesoʻotaʻiga",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "F.Users.Cordova.UI.create e le maua",
+            "SearchByName": "Saili i le igoa"
         },
         "select": {
             "title": "Filifili le fesoʻotaʻiga o {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Faamolemole filifili le igoa.",
-        "inviteUser": "Valaaulia le Tagata"
+        "inviteUser": "Valaaulia le Tagata",
+        "selectRole": "Filifili le Matafaioi",
+        "inviteRole": "Valaaulia {{role}}"
     },
-    "invalidLanguageSelected": "Filifili le gagana filifilia"
+    "invalidLanguageSelected": "Filifili le gagana filifilia",
+    "login": {
+        "title": "Afio mai",
+        "directions": "Fausia se tala, pe ulufale i totonu.",
+        "directionsNoRegister": "Faamolemole pe a iai sau tala.",
+        "goButton": "Alu",
+        "passphrase": "Ulufale lau faʻaiuga fuaitau:",
+        "loginButton": "Amata",
+        "registerButton": "Amata",
+        "resendButton": "Auina Atu le Faauluga Faaulu",
+        "forgot": "Faʻamagaloina?",
+        "resendConfirm": "E te manaʻo e lafo se savali e toefaʻalo ai lau faʻailoga?",
+        "resendSuccess": "Siaki mo se savali e toefaʻailoga lau pasese",
+        "resendClose": "Katia",
+        "noPassphrase": "Aʻo leʻi mafai ona e ulufale i totonu, e tatau ona e faatulagaina se fuaitau fesuiaiga e ala i le kiliki o le fesoʻotaʻiga i lau savali e faʻasaga ai.",
+        "notVerified": "E tatau ona e auina atu se savali o le toe faatoaga ina ia e ulufale ai.",
+        "emailExists": "Na e taumafai e lesitala i lenei imeli muamua? Afai o lea, siaki lau atigipusa e faʻaagaoioi lau tala. <a href='#resend' class='Q_button Users_activation_resend'>Kiliki ina ia toe auina atu le savali<\/a>",
+        "mobileExists": "Na e taumafai e lesitala i lenei telefoni feaveaʻi muamua? Afai o lea, siaki lau SSS e faʻaagaoioi ai lau faʻamatalaga. <a href='#resend' class='Q_button Users_activation_resend'>Kiliki ina ia toe auina atu le savali<\/a>",
+        "usingOther": "pe mafai foʻi",
+        "prompt": "Filifili se igoa ole igoa:",
+        "newUser": "pe fatu se tala fou",
+        "placeholders": {
+            "identifier": "lau mobile # po o le imeli",
+            "mobile": "ulufale i lau mobile #",
+            "email": "ulufale i lau tuatusi imeli",
+            "username": "igoa ole igoa"
+        },
+        "confirmTerms": "Talia le Tuutuuga o Auaunaga?",
+        "facebookNoEmail": "O lau facebook tala o loʻo misi se tuatusi imeli imeli. Faʻasinoa le ala i le auala masani.",
+        "picTooltip": "E mafai ona e suia lenei ata mulimuli ane"
+    },
+    "setIdentifier": {
+        "title": "Faʻaopoopo se auala e teu ai",
+        "sendMessage": "Auina Atu le Faauluga Faaulu",
+        "placeholders": {
+            "identifier": "ulufale i lau mobile # po o le imeli",
+            "mobile": "ulufale i lau numera feaveaʻi",
+            "email": "ulufale i lau tuatusi imeli",
+            "username": "igoa ole igoa"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Account",
+        "areUsing": "Oe faʻaaoga {{platform}} as",
+        "noLongerUsing": "E le toe fesoʻotaʻi atu i {{platform}}",
+        "doAuth": "Faʻailoga i lenei tala",
+        "doSwitch": "Suʻe i lenei tala"
+    }
 }

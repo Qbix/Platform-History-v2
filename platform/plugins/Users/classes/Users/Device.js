@@ -83,6 +83,9 @@ Users_Device.prototype.pushNotification = function (notification, options, callb
 	if (o.collapseId) {
 		n.collapseId = o.collapseId;
 	}
+	
+	var htmlEntities = require('html-entities').AllHtmlEntities;
+	var entities = new htmlEntities();
 
 	// process title and body
 	['alert', 'actions'].forEach(function(item1){
@@ -96,7 +99,7 @@ Users_Device.prototype.pushNotification = function (notification, options, callb
 				n[item1][item2] = Q.getObject(n[item1][item2][1], Q.Text.get(n[item1][item2][0], o.language));
 			}
 
-			n[item1][item2] = Q.Handlebars.renderSource(n[item1][item2], o.fields);
+			n[item1][item2] = entities.decode(Q.Handlebars.renderSource(n[item1][item2], o.fields));
 		});
 	});
 
@@ -105,6 +108,7 @@ Users_Device.prototype.pushNotification = function (notification, options, callb
 		var body = o.isSource
 			? Q.Handlebars.renderSource(o.view, o.fields)
 			: Q.view(o.view, o.fields, { language: o.language });
+		body = entities.decode(body);
 		Q.setObject(['alert', 'body'], body, n);
 	}
 	return this.handlePushNotification(n, o, callback);

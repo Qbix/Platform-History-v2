@@ -580,7 +580,15 @@ Places.Location = {
 	 * @param {Streams_Stream} stream
 	 */
 	fromStream: function(stream){
-		var location = stream.getAttribute('location');
+		var location;
+
+		// this new approach, location set in stream fields
+		try {
+			location = JSON.parse(stream.fields.location);
+		} catch (ex) {}
+
+		// this old approach, when location stored in attributes
+		location = location || stream.getAttribute('location');
 
 		// new approach
 		if (Q.isPlainObject(location)) {

@@ -3,8 +3,8 @@
         "NewItemTitle": "Nouvo atik"
     },
     "labels": {
-        "Streams/invited": "Moun mwen envite",
-        "Streams/invitedMe": "Ki moun ki envite m &#39;"
+        "Streams\/invited": "Moun mwen envite",
+        "Streams\/invitedMe": "Ki moun ki envite m &#39;"
     },
     "interests": {
         "Filter": "Kisa ou renmen?",
@@ -22,7 +22,13 @@
         "closeChatConfirm": "Èske ou sèten ou vle fèmen chat sa a?",
         "closeChatConfirmYes": "Wi",
         "closeChatConfirmNo": "Non",
-        "earlierComments": "kòmantè pi bonè"
+        "earlierComments": "kòmantè pi bonè",
+        "Subscribed": "Notifikasyon sou bèbè",
+        "Unsubscribed": "Jwenn Notifikasyon yo",
+        "notAllowedToJoinCall": "Ou pa gen pèmisyon pou rantre nan konvèsasyon sa a.",
+        "startedConversation": "te kòmanse yon konvèsasyon",
+        "RealTimeCall": "Rele nan tan reyèl",
+        "SearchByName": "Rechèch pa non"
     },
     "notifications": {
         "*": "Mesaj {{& message.fields.type}} a {{& stream.fields.title}}",
@@ -37,7 +43,12 @@
         "Streams\/task\/progress": "Pwogrè ki fèt sou {{stream.fields.title}}",
         "Streams\/task\/complete": "Objektif Travay la ranpli: {{stream.fields.title}}",
         "Streams\/task\/error": "Erè pandan: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Mesaj kap vini"
+        "Streams\/incoming\/*": "{{app}}: Mesaj kap vini",
+        "Streams\/relatedTo\/Streams\/call": "Nouvo apèl te kòmanse nan {{toTitle}}",
+        "Streams\/relatedTo\/*": "Nouvo {{relationDisplayType}} nan {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Te ajoute nan {{toTitle}} kòm {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mansyone ou nan yon kòmantè",
+        "Streams\/call": "{{displayName}} ap rele ou"
     },
     "invite": {
         "messageContent": "{{displayName}} envite ou nan {{inviteUrl}}",
@@ -59,13 +70,15 @@
             "byEmail": "Imèl",
             "byText": "Tèks",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} si yo te eskane kòd la"
         },
         "email": {
             "subject": "Hey, tcheke sa a soti",
             "PleaseVisitLink": "Tanpri vizite lyen sa a:",
             "InvitingYou": "Mwen envite ou nan {{title}}",
-            "HasInvitedYou": "{{displayName}} envite ou nan {{title}}"
+            "HasInvitedYou": "{{displayName}} envite ou nan {{title}}",
+            "HasMentionedYou": "{{displayName}} te mansyone ou nan &quot;{{title}}&quot;"
         },
         "sms": {
             "content": "Ou te envite nan {{title}}. Tanpri tape {1000}}"
@@ -91,7 +104,139 @@
         "allow": {
             "microphoneTitle": "Pèmèt mikwofòn",
             "cameraTitle": "Pèmèt kamera",
-            "cameraAndMicrophoneTitle": "Pèmèt kamera ak mikwofòn"
+            "cameraAndMicrophoneTitle": "Pèmèt kamera ak mikwofòn",
+            "dialogTitle": "Konekte",
+            "microphoneBtn": "Pèmèt mikwofòn",
+            "cameraBtn": "Pèmèt kamera",
+            "cameraAndMicrophoneBtn": "Pèmèt kamera ak mikwofòn"
+        }
+    },
+    "messages": {
+        "html": {
+            "posted": "afiche yon <em>{{message.fields.type}}<\/em> mesaj bay {{stream.fields.title}}"
+        },
+        "text": {
+            "commentedOn": "kòmante sou",
+            "in": "pous",
+            "body": "nan {{& url}}: {{& message.fields.content}}",
+            "relatedFrom": {
+                "hasBeenPostedTo": "te afiche sou",
+                "byAvatar": "pa {{avatar.displayName}}"
+            },
+            "relatedTo": {
+                "hasANew": "gen yon nouvo {{instructions.fromDisplayType}}",
+                "byAvatar": "{{avatar.displayName}} te ajoute"
+            }
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Envite",
+            "description": "Bwat resepsyon pou envitasyon"
+        },
+        "Streams\/resource": {
+            "displayType": "Resous",
+            "description": "kouran pou jere aksè nan yon resous ak afiche mesaj sou dènye enfòmasyon yo"
+        },
+        "Streams\/task": {
+            "description": "pou resevwa nouvèl sou pwogrè sou yon sèten travay",
+            "displayType": "Objektif Travay la"
+        },
+        "Streams\/tasks": {
+            "description": "kategori pou travay",
+            "displayType": "Travay"
+        },
+        "Streams\/experience": {
+            "description": "yon eksperyans komen pou manm yon kominote",
+            "displayType": "Eksperyans komen pou manm yon kominote"
+        },
+        "Streams\/greeting": {
+            "description": "bonjou ak yon itilizatè ka prezante tèt yo",
+            "displayType": "Salitasyon"
+        },
+        "Streams\/number": {
+            "displayType": "Nimewo",
+            "description": "nimewo matematik"
+        },
+        "Streams\/date": {
+            "displayType": "Dat",
+            "description": "dat"
+        },
+        "Streams\/text": {
+            "displayType": "Tèks",
+            "description": "kò tèks la"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Tèks",
+            "description": "ti kò nan tèks la"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Tèks",
+            "description": "kò medyòm tèks la"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Adrès imèl",
+            "description": "adrès imèl"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Nimewo telefòn",
+            "description": "nimewo telefòn"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "lyen sou entènèt la"
+        },
+        "Streams\/image": {
+            "displayType": "Imaj",
+            "description": "imaj vizyèl"
+        },
+        "Streams\/images": {
+            "displayType": "Galeri Imaj",
+            "description": "galri nan imaj yo"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "yon album kote plizyè medya gen rapò"
+        },
+        "Streams\/file": {
+            "displayType": "File",
+            "description": "Uploaded file"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio Clip",
+            "description": "odyo clip"
+        },
+        "Streams\/video": {
+            "displayType": "Videyo Clip",
+            "description": "videyo"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "viv odyo oswa videyo"
+        },
+        "Streams\/category": {
+            "displayType": "Kategori",
+            "description": "yon kategori ki ka gen lòt sous dlo ki gen rapò"
+        },
+        "Streams\/participating": {
+            "displayType": "Patisipe Index",
+            "description": "sous dlo yo gen rapò ak \/ asosye ak sa a lè yon itilizatè kontre ak \/ kite"
+        },
+        "Streams\/interest": {
+            "displayType": "Enterè",
+            "description": "reprezante enterè yon itilizatè nan yon sijè sèten"
+        },
+        "Streams\/incoming": {
+            "displayType": "Fèk ap rantre",
+            "description": "destinasyon pou mesaj ke lòt itilizatè yo voye"
+        },
+        "Streams\/chat": {
+            "displayType": "Konvèsasyon",
+            "description": "yon konvèsasyon ant itilizatè yo, ak istwa"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Rele an tan reyèl",
+            "description": "yon tan reyèl videyo \/ odyo apèl"
         }
     }
 }

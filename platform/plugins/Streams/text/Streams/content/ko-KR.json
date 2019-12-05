@@ -241,7 +241,7 @@
                 "byAvatar": "{{avatar.displayName}}까지"
             },
             "relatedTo": {
-                "hasANew": "새로운 {{message.instructions.fromDisplayType}}",
+                "hasANew": "새로운 {{instructions.fromDisplayType}}",
                 "byAvatar": "{{avatar.displayName}} 님이 추가 함"
             }
         }

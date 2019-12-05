@@ -241,7 +241,7 @@
                 "byAvatar": "autors: {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "ir jauns {{message.instructions.fromDisplayType}}",
+                "hasANew": "ir jauns {{instructions.fromDisplayType}}",
                 "byAvatar": "pievienoja {{avatar.displayName}}"
             }
         }

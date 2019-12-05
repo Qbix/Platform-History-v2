@@ -18,7 +18,8 @@
         "GetStarted": "Malite",
         "Authorize": "Kwenye",
         "TermsLabel": "Agụrụ m ma kwenye <br> na {{link}}",
-        "TermsTitle": "Usoro"
+        "TermsTitle": "Usoro",
+        "mustAgree": "Buru ụzọ kwenye n’okwu ndị a."
     },
     "register": {
         "TermsLabel": "Ana m anabata {{link}}",
@@ -31,11 +32,18 @@
         "no": "Ee e",
         "WelcomePleaseVerifyEmail": "Nabata! Biko nyochaa adreesị email gị.",
         "WelcomeVerifyEmail": "Nabata! Chọpụta adreesị email gị.",
-        "ForgetPass": "Hey, ị chefuola paspọsọ gị?"
+        "ForgetPass": "Hey, ị chefuola paspọsọ gị?",
+        "PassphraseSaved": "Echekwarala ahịrịokwu gị.",
+        "IdentifierActivated": "Emegola {{type}} ya.",
+        "CompletedActivation": "I mezue okike onye oru.",
+        "CompletedActivationLogIn": "I mezue okike onye oru. Gbalịa banye ugbu a."
     },
     "contacts": {
         "dialog": {
-            "title": "Họrọ kọntaktị"
+            "title": "Họrọ kọntaktị",
+            "CreateAccount": "+ Kpọtụrụ m",
+            "CreateAccountNotFound": "Achọpụtaghị Q.Users.Cordova.UI.create adịghị",
+            "SearchByName": "Choo aha"
         },
         "select": {
             "title": "Họrọ nchọta nke {{displayName}}"
@@ -43,7 +51,56 @@
     },
     "usersContacts": {
         "selectLabel": "Biko họrọ akara ngosi.",
-        "inviteUser": "Onye na-enyocha Onye ọrụ"
+        "inviteUser": "Onye na-enyocha Onye ọrụ",
+        "selectRole": "Họrọ Ọrụ",
+        "inviteRole": "Ziga {{role}}"
     },
-    "invalidLanguageSelected": "Asụsụ a na-ejighị n&#39;aka họrọ"
+    "invalidLanguageSelected": "Asụsụ a na-ejighị n&#39;aka họrọ",
+    "login": {
+        "title": "Nnọọ",
+        "directions": "Mepụta akaụntụ, ma ọ bụ banye.",
+        "directionsNoRegister": "Banye ma ọ bụrụ na ị nwere akaụntụ.",
+        "goButton": "Gaa",
+        "passphrase": "Tinye ahịrịokwu gị:",
+        "loginButton": "Bido",
+        "registerButton": "Bido",
+        "resendButton": "Ziga Ozi Mgbalite",
+        "forgot": "Chefuru ya?",
+        "resendConfirm": "You chọrọ izipu ozi iji degharịa passphrase gị?",
+        "resendSuccess": "Lelee maka ozi iji tọghaa passphrase gị",
+        "resendClose": "Mechie",
+        "noPassphrase": "Tupu ịbanye, ịkwesịrị ịtọlite ahịrịokwu okwu site na ịpị njikọ dị na ozi nkwalite gị.",
+        "notVerified": "Must ga-ezitere onwe gị ozi nkwalite iji wee banye.",
+        "emailExists": "You nwara ịdebanye aha na email a tupu ị mee? Ọ bụrụ otu a, lelee igbe mbata gị iji mee ka akaụntụ gị rụọ ọrụ. <a href='#resend' class='Q_button Users_activation_resend'>Pịa ka ịzigharịa ozi ahụ<\/a>",
+        "mobileExists": "Try nwara ịdebanye aha na nọmba ekwentị a na mbụ? Ọ bụrụ otu a, lelee SMS gị iji rụọ ọrụ akaụntụ gị. <a href='#resend' class='Q_button Users_activation_resend'>Pịa ka ịzigharịa ozi ahụ<\/a>",
+        "usingOther": "ma obu ike",
+        "prompt": "Họrọ aha njirimara:",
+        "newUser": "ma ọ bụ mepụta akaụntụ ọhụrụ",
+        "placeholders": {
+            "identifier": "mkpanaka gị # ma ọ bụ email",
+            "mobile": "tinye igwe mkpanaka gi",
+            "email": "tinye adreesị ozi-e gị",
+            "username": "aha njirimara"
+        },
+        "confirmTerms": "Nabata Usoro ọrụ?",
+        "facebookNoEmail": "Akaụntụ email gị na-efu na adreesị ozi-e enyochaghị. Nanị banye n&#39;ụzọ amaala.",
+        "picTooltip": "Nwere ike ịgbanwe foto a ma emechaa"
+    },
+    "setIdentifier": {
+        "title": "Tinye uzo iji banye",
+        "sendMessage": "Ziga Ozi Mgbalite",
+        "placeholders": {
+            "identifier": "tinye mobile gị ma ọ bụ email",
+            "mobile": "tinye akara ekwentị gị",
+            "email": "tinye adreesị ozi-e gị",
+            "username": "aha njirimara"
+        }
+    },
+    "prompt": {
+        "title": "{{Platform}} Akaụntụ",
+        "areUsing": "Na-eji {{platform}} dika",
+        "noLongerUsing": "Are nweghị njikọ ọzọ na {{platform}} dị ka",
+        "doAuth": "Banye akaụntụ a",
+        "doSwitch": "Sapeta na akaụntụ a"
+    }
 }
