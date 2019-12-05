@@ -95,6 +95,7 @@ Q.Tool.jQuery('Q/overlay',
 			}
 		}
 
+		var $body = $('body');
 		$this.data('Q/overlay', {
 			options: o,
 			load: function()
@@ -106,7 +107,7 @@ Q.Tool.jQuery('Q/overlay',
 					return;
 				}
 				var topZ = 0;
-				$('body').children().each(function () {
+				$body.children().each(function () {
 					var $this = $(this);
 					if ($this.hasClass('Q_click_mask')) {
 						return;
@@ -121,7 +122,6 @@ Q.Tool.jQuery('Q/overlay',
 				calculatePosition($this);
 				$this.show();
 				dialogs.push($this[0]);
-				var $body = $('body');
 				data.bodyStyle = {
 					left: $body.css('left'),
 					top: $body.css('top')
@@ -225,7 +225,7 @@ Q.Tool.jQuery('Q/overlay',
 					$html.removeClass(data.options.htmlClass);
 				}
 				setTimeout(function () {
-					$('body').removeClass('Q_preventScroll').css(data.bodyStyle);	
+					$body.removeClass('Q_preventScroll').css(data.bodyStyle);
 				}, 500);
 				$('html,body').scrollTop(data.documentScrollTop)
 					.scrollLeft(data.documentScrollLeft);
@@ -234,6 +234,7 @@ Q.Tool.jQuery('Q/overlay',
 				}
 				$this.removeClass('Q_overlay_open');
 				$this.find('input, select, textarea').trigger('blur');
+
 				if (false === Q.handle(data.options.beforeClose, $this, [$this])) {
 					return false;
 				}
@@ -291,7 +292,20 @@ Q.Tool.jQuery('Q/overlay',
 		beforeLoad: new Q.Event(),
 		onLoad: new Q.Event(),
 		beforeClose: new Q.Event(),
-		onClose: new Q.Event()
+		onClose: new Q.Event(function () {
+			// set z-index of mask less than visible dialog element
+			var $lastDialog = dialogs[dialogs.length-1];
+			if ($lastDialog) {
+				if (!($lastDialog instanceof jQuery)) {
+					$lastDialog = $($lastDialog);
+				}
+
+				var zIndex = parseInt($lastDialog.css('z-index'));
+				if (zIndex) {
+					Q.Masks.mask('Q.screen.mask', {'zIndex': zIndex - 1});
+				}
+			}
+		})
 	},
 
 	{

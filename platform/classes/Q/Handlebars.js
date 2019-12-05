@@ -81,7 +81,7 @@ handlebars.registerHelper('call', function(path) {
 	var i=0;
 	var params = [];
 	do {
-		params.push(i);
+		params.push(args[i]);
 	} while (args[++i]);
 	var f = Q.getObject(parts, this);
 	if (typeof f === 'function') {

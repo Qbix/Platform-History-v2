@@ -294,6 +294,12 @@ Sp.interpolate = function _String_prototype_interpolate(fields) {
 	}
 	return this.replace(/\{\{([^{}]*)\}\}/g, function (a, b) {
 		var r = fields[b];
+
+		if (Q.typeOf(r) === 'function') {
+			var context = Q.getObject(b.split('.').slice(0, -1), fields);
+			r = r.apply(context);
+		}
+
 		return (typeof r === 'string' || typeof r === 'number') ? r : a;
 	});
 };
@@ -12912,7 +12918,7 @@ function _addHandlebarsHelpers() {
 			var i=0;
 			var params = [];
 			do {
-				params.push(i);
+				params.push(args[i]);
 			} while (args[++i]);
 			var f = Q.getObject(parts, this);
 			if (typeof f === 'function') {
