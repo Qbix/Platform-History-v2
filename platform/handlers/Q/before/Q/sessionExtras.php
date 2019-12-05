@@ -10,7 +10,7 @@
 function Q_before_Q_sessionExtras()
 {
 	$app = Q::app();
-	$nonce = isset($_SESSION['Q']['nonce']) ? $_SESSION['Q']['nonce'] : null;
+	$nonce = Q_Session::calculateNonce();
 	if ($nonce) {
 		Q_Response::setScriptData('Q.nonce', $nonce);
 	}
