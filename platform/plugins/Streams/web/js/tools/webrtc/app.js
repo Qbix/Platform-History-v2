@@ -1,12 +1,41 @@
+/**
+ * Library for real time calls based on WebRTC
+ * @module WebRTCconferenceLib
+ * @class WebRTCconferenceLib
+ * @param {Object} [options] config options
+ * @param {String} [options.mode = 'node'] node|twilio mode that will use library for realtime calls. If mode is 'twilio' it will use twilio-video.js library, so twilio account's credentials should be specified in app.json
+ * @param {String} [options.nodeServer] address of node websocket server that is used as signalling server while WebRTC negotiation
+ * @param {String} [options.roomName] unique string that is used as room identifier
+ * @param {Boolean} [options.audio] if true, library will request acces to microphone and adds to call
+ * @param {Boolean} [options.video] if true, library will request acces to microphone and adds to call
+ * @param {Boolean} [options.startWith.audio] if true, microphone icon by default is turned on
+ * @param {Boolean} [options.startWith.video] if true, microphone icon by default is turned on
+ * @param {Array} [streams] Precreated streams that will be added to call
+ * @param {String} [twilioAccessToken] is required for accessing to Twilio API in 'twilio' mode. Token is created on server
+ * @param {Number} [disconnectTime] time in ms after which inactive user will be disconnected
+ * @param {Array} [turnCredentials] Array of objects that contains createndials for TURN server
+ * @param {String} [turnCredentials[].credential] secret string/password
+ * @param {String} [turnCredentials[].urls] address of TURN Server
+ * @param {String} [turnCredentials[].username]
+ * @param {String} [username] username of current user in chat
+ * @param {Boolean} [debug] if true, logs will be showed in console
+ * @param {Object} [liveStreaming] option for live sctreaming
+ * @param {Boolean} [liveStreaming.startFbLiveViaGoLiveDialog] whether to start Facebook Live Video via "Go Live Dialog" (JS SDK); if false - live will be started via PHP SDK
+ * @param {Boolean} [liveStreaming.useRecordRTCLibrary] whether to RecordRTC.js library while capturing compounded video from canvas
+ * @param {Boolean} [liveStreaming.drawBackground] whether to draw background behid participants video on canvas
+ * @param {Number} [liveStreaming.timeSlice] time in ms - video will be send in chunks once per <timeSlice>
+ * @param {Number} [liveStreaming.chunkSize] size in bytes (if timeSlice not specified) - size of chunk to send on server
+ * @param {Object} [TwilioInstance] if mode is 'twilio', it is instance of Twilio Video library
+ * @return {Object} instance of WebRTC chat
+ */
 window.WebRTCconferenceLib = function app(options){
 	var app = {};
 	var defaultOptions = {
 		mode: 'node',
-		useIosrtcPlugin: false,
 		nodeServer: '',
 		roomName: null,
-		audio: true,
-		video: true,
+		audio: false,
+		video: false,
 		startWith: {},
 		streams: null,
 		twilioAccessToken: null,
@@ -41,7 +70,7 @@ window.WebRTCconferenceLib = function app(options){
 			return roomScreens;
 		} else {
 			return roomScreens.filter(function (screen) {
-				return (screen.isActive == true && screen.participant.online == true);
+				return (screen.isActive == true);
 			});
 		}
 	}
@@ -140,7 +169,7 @@ window.WebRTCconferenceLib = function app(options){
 		backArrow: '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    width="35.317px" height="35.445px" viewBox="0 0 35.317 35.445" enable-background="new 0 0 35.317 35.445" xml:space="preserve">  <polyline fill="none" stroke="#000000" stroke-width="4" stroke-miterlimit="10" points="19.135,34.031 2.828,17.722 19.135,1.414    "/>  <line fill="none" stroke="#000000" stroke-width="4" stroke-miterlimit="10" x1="2.645" y1="17.722" x2="35.317" y2="17.722"/>  </svg>',
 		enabledSpeaker: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0 0 99.999 99.999" enable-background="new 0 0 99.999 99.999" xml:space="preserve">  <path fill="#FFFFFF" d="M50,0C22.431,0,0,22.43,0,50c0,27.571,22.429,50,50,50c27.569,0,50-22.429,50-50   C99.999,22.431,77.568,0,50,0z M45.261,67.689c0,0.148-0.188,0.191-0.261,0.326c-0.026,0.049-0.149,0.098-0.187,0.141   c-0.076,0.084-0.217,0.146-0.324,0.188c-0.053,0.018-0.131,0.029-0.188,0.033c-0.056,0.008-0.125,0.006-0.18-0.004   c-0.15-0.021-0.186-0.292-0.316-0.364l-10.094-7.804h-8.544c-0.06,0-0.121,0.224-0.179,0.21c-0.058-0.016-0.114,0.077-0.166,0.05   c-0.105-0.061-0.192-0.089-0.252-0.193c-0.03-0.053-0.162-0.079-0.178-0.137c-0.015-0.059-0.132-0.089-0.132-0.15V40.02   c0-0.06,0.117-0.121,0.132-0.178c0.016-0.058,0.094-0.114,0.123-0.166c0.03-0.052,0.095-0.1,0.137-0.143   c0.086-0.086,0.206-0.209,0.322-0.242c0.058-0.016,0.133-0.086,0.193-0.086h8.545l10.089-7.51c0.049-0.028,0.095-0.03,0.146-0.052   c0.141-0.059,0.184-0.031,0.333-0.035c0.055,0.012,0.11,0.032,0.165,0.045c0.05,0.025,0.104,0.048,0.151,0.079   c0.046,0.031,0.09,0.07,0.127,0.112c0.077,0.084,0.31,0.187,0.337,0.296c0.013,0.055,0.2,0.113,0.2,0.169V67.689z M53.839,60.984   c-0.25,0-0.502-0.095-0.695-0.283c-0.396-0.386-0.406-1.019-0.021-1.412c9.075-9.354,0.391-18.188,0.018-18.56   c-0.396-0.389-0.396-1.022-0.01-1.415c0.393-0.392,1.024-0.393,1.415-0.005c0.105,0.105,10.449,10.615,0.016,21.372   C54.361,60.883,54.102,60.984,53.839,60.984z M60.025,66.293c-0.25,0-0.502-0.094-0.693-0.281c-0.396-0.385-0.406-1.02-0.021-1.414   c14.265-14.703,0.603-28.596,0.015-29.181c-0.394-0.389-0.396-1.022-0.007-1.414c0.392-0.392,1.023-0.393,1.414-0.005   c0.158,0.157,15.638,15.888,0.015,31.991C60.548,66.189,60.289,66.293,60.025,66.293z M66.607,70.43   c-0.197,0.203-0.459,0.301-0.719,0.301c-0.252,0-0.502-0.094-0.697-0.279c-0.396-0.387-0.404-1.02-0.021-1.414   c18.603-19.174,0.781-37.296,0.015-38.06c-0.394-0.389-0.396-1.022-0.006-1.414c0.389-0.392,1.022-0.394,1.413-0.005   C66.794,29.759,86.568,49.853,66.607,70.43z"/>  </svg>  ',
 		disabledSpeaker: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0 0 99.999 99.999" enable-background="new 0 0 99.999 99.999" xml:space="preserve">  <path fill="#FFFFFF" d="M50,0C22.431,0,0,22.43,0,50c0,27.571,22.429,50,50,50c27.568,0,49.999-22.429,49.999-50   C99.999,22.431,77.568,0,50,0z M50,95.929C24.675,95.929,4.071,75.325,4.071,50C4.071,24.675,24.675,4.07,50,4.07   C75.324,4.07,95.927,24.674,95.927,50C95.927,75.326,75.324,95.929,50,95.929z"/>  <g>   <path fill="#FFFFFF" d="M43.8,68.242c0.13,0.072,0.16,0.109,0.31,0.131c0.055,0.01,0.113,0.012,0.169,0.004    c0.056-0.004,0.112-0.016,0.165-0.033c0.107-0.041,0.203-0.104,0.279-0.188c0.038-0.043,0.277-0.092,0.303-0.141    c0.072-0.135,0.287-0.178,0.287-0.326v-6.393l-4.271,4.722L43.8,68.242z"/>   <path fill="#FFFFFF" d="M45.314,32.309c0-0.056-0.213-0.113-0.227-0.168c-0.027-0.109-0.185-0.211-0.261-0.295    c-0.037-0.042-0.132-0.079-0.178-0.11c-0.047-0.031-0.126-0.05-0.177-0.075c-0.055-0.013-0.123-0.025-0.178-0.037    c-0.149,0.004-0.199-0.008-0.339,0.051c-0.051,0.022-0.1,0.291-0.149,0.319l-10.092,7.808h-8.545c-0.06,0-0.121-0.228-0.179-0.212    c-0.117,0.032-0.223-0.024-0.309,0.062c-0.042,0.043-0.079,0.032-0.109,0.084c-0.03,0.052-0.135,0.078-0.151,0.136    c-0.016,0.057-0.105,0.088-0.105,0.148v19.964c0,0.062,0.09,0.121,0.105,0.18c0.016,0.058,0.08,0.113,0.11,0.166    c0.06,0.104,0.167,0.191,0.273,0.252c0.052,0.027,0.118,0.116,0.176,0.132c0.058,0.014,0.129,0.088,0.189,0.088h8.544l1.704,1.059    l9.898-11.321V32.309z"/>   <path fill="#FFFFFF" d="M53.123,59.289c-0.385,0.394-0.375,1.026,0.021,1.412c0.193,0.188,0.445,0.283,0.695,0.283    c0.263,0,0.522-0.102,0.722-0.303c5.376-5.542,5.232-11.014,3.819-15.036l-1.497,1.738C57.72,50.709,57.34,54.942,53.123,59.289z"    />   <path fill="#FFFFFF" d="M54.545,39.31c-0.391-0.388-1.021-0.387-1.415,0.005c-0.387,0.393-0.387,1.026,0.01,1.415    c0.018,0.018,0.059,0.06,0.111,0.114l1.308-1.52C54.556,39.321,54.546,39.311,54.545,39.31z"/>   <path fill="#FFFFFF" d="M59.311,64.598c-0.385,0.395-0.375,1.029,0.021,1.414c0.191,0.188,0.443,0.281,0.693,0.281    c0.264,0,0.522-0.104,0.722-0.305c10.414-10.733,7.009-21.294,3.533-27.195l-1.324,1.538    C66.038,45.763,68.617,55.007,59.311,64.598z"/>   <path fill="#FFFFFF" d="M65.171,69.037c-0.384,0.395-0.375,1.027,0.021,1.414c0.195,0.186,0.445,0.279,0.697,0.279    c0.26,0,0.521-0.098,0.719-0.301c15.134-15.601,7.428-30.921,2.728-37.507l-1.299,1.509C72.5,40.69,79.215,54.562,65.171,69.037z"    />  </g>  <rect x="47.989" y="13.233" transform="matrix(0.7577 0.6526 -0.6526 0.7577 44.7397 -20.5144)" fill="#C12337" width="4.02" height="73.532"/>  </svg>',
-		switchCameras: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <g>   <path fill="#FFFFFF" d="M50.037,43.904c-3.939,0-7.151,3.212-7.151,7.168c0,3.947,3.212,7.167,7.151,7.167    c3.947,0,7.152-3.22,7.152-7.167C57.189,47.116,53.984,43.904,50.037,43.904z M50.037,56.49c-2.988,0-5.402-2.431-5.402-5.417    c0-2.997,2.414-5.418,5.402-5.418c2.98,0,5.402,2.422,5.402,5.418C55.439,54.069,53.017,56.49,50.037,56.49z"/>   <path fill="#FFFFFF" d="M63.047,43.286c-0.596,0-1.084,0.487-1.084,1.091c0,0.604,0.488,1.091,1.084,1.091    c0.597,0,1.083-0.487,1.083-1.091C64.13,43.773,63.644,43.286,63.047,43.286z"/>   <path fill="#FFFFFF" d="M50,0C22.431,0,0,22.43,0,50c0,27.571,22.429,50,50,50c27.569,0,50-22.429,50-50C100,22.431,77.569,0,50,0z     M25.111,51.626c0.934-0.933,2.432-0.933,3.366,0c0.934,0.936,0.926,2.446-0.007,3.382l-6.642,6.634    c-0.448,0.451-1.058,0.703-1.692,0.703c-0.633,0-1.242-0.252-1.689-0.703l-6.639-6.634c-0.933-0.936-0.933-2.446,0-3.382    c0.934-0.933,2.365-0.931,3.299,0l2.477,2.563V50c0-17.784,14.551-32.255,32.336-32.255c1.321,0,2.427,1.071,2.427,2.389    c0,1.32-1.017,2.39-2.337,2.39C34.86,22.524,22.583,34.85,22.583,50v4.189L25.111,51.626z M33.583,59.54V43.897    c0-1.44,1.517-3.086,2.956-3.086h5.341l2.703-2.58v-0.008c1-0.518,1.5-1.412,2.258-1.412h6.502c0.711,0,1.338,0.578,1.804,1.043    l0.015,0.158c0.007,0,0.022-0.172,0.022-0.172l3.128,2.971h5.224c1.433,0,3.048,1.646,3.048,3.086V59.54    c0,1.439-1.615,3.271-3.048,3.271H36.538C35.099,62.811,33.583,60.979,33.583,59.54z M86.506,49.071    c-0.614,0-1.063-0.235-1.529-0.698l-2.395-2.56V50c0,17.787-14.631,32.255-32.419,32.255c-1.32,0-2.47-1.067-2.47-2.39    c0-1.32,1.08-2.388,2.399-2.388c15.151,0,27.489-12.329,27.489-27.478v-4.187l-2.611,2.56c-0.934,0.931-2.473,0.931-3.403,0    c-0.938-0.934-0.951-2.447-0.014-3.381l6.63-6.636c0.935-0.935,2.442-0.935,3.375,0l6.635,6.636    c0.936,0.934,0.935,2.447-0.001,3.381C87.728,48.836,87.116,49.071,86.506,49.071z"/>  </g>  </svg>',
+		switchCameras: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <g>   <path fill="#FFFFFF" d="M50.037,43.904c-3.939,0-7.151,3.212-7.151,7.168c0,3.947,3.212,7.167,7.151,7.167    c3.947,0,7.152-3.22,7.152-7.167C57.189,47.116,53.984,43.904,50.037,43.904z M50.037,56.49c-2.988,0-5.402-2.431-5.402-5.417    c0-2.997,2.414-5.418,5.402-5.418c2.98,0,5.402,2.422,5.402,5.418C55.439,54.069,53.017,56.49,50.037,56.49z"/>   <path fill="#FFFFFF" d="M63.047,43.286c-0.596,0-1.084,0.487-1.084,1.091c0,0.604,0.488,1.091,1.084,1.091    c0.597,0,1.083-0.487,1.083-1.091C64.13,43.773,63.644,43.286,63.047,43.286z"/>   <path fill="#FFFFFF" d="M50,0C22.431,0,0,22.43,0,50c0,27.571,22.429,50,50,50c27.569,0,50-22.429,50-50C100,22.431,77.569,0,50,0z     M25.111,51.626c0.934-0.933,2.432-0.933,3.366,0c0.934,0.936,0.926,2.446-0.007,3.382l-6.642,6.634    c-0.448,0.451-1.058,0.703-1.692,0.703c-0.633,0-1.242-0.252-1.689-0.703l-6.639-6.634c-0.933-0.936-0.933-2.446,0-3.382    c0.934-0.933,2.365-0.931,3.299,0l2.477,2.563V50c0-17.784,14.551-32.255,32.336-32.255c1.321,0,2.427,1.071,2.427,2.389    c0,1.32-1.017,2.39-2.337,2.39C34.86,22.524,22.583,34.85,22.583,50v4.189L25.111,51.626z M33.583,59.54V43.897    c0-1.44,1.517-3.086,2.956-3.086h5.341l2.703-2.58v-0.008c1-0.518,1.5-1.412,2.258-1.412h6.502c0.711,0,1.338,0.578,1.804,1.043    l0.015,0.158c0.007,0,0.022-0.172,0.022-0.172l3.128,2.971h5.224c1.433,0,3.048,1.646,3.048,3.086V59.54    c0,1.439-1.615,3.271-3.048,3.271H36.538C35.099,62.811,33.583,60.979,33.583,59.54z M86.506,49.071    c-0.614,0-1.063-0.235-1.529-0.698l-2.395-2.56V50c0,17.787-14.631,32.255-32.419,32.255c-1.32,0-2.47-1.067-2.47-2.39    c0-1.32,1.08-2.388,2.399-2.388c15.151,0,27.489-12.329,27.489-27.478v-4.187l-2.611,2.56c-0.934,0.931-2.473,0.931-3.403,0    c-0.938-0.934-0.951-2.447-0.014-3.381l6.63-6.636c0.935-0.935,2.442-0.935,3.375,0l6.635,6.636    c0.936,0.934,0.935,2.447-0.001,3.381C87.728,48.836,87.116,49.071,86.506,49.071z"/>  </g>  </svg>'
 	}
 
 	/**
@@ -216,7 +245,7 @@ window.WebRTCconferenceLib = function app(options){
 			dispatch:dispatch,
 			on:on,
 			off:off,
-			doesHandlerExist:doesHandlerExist,
+			doesHandlerExist:doesHandlerExist
 		}
 	}())
 
@@ -333,7 +362,7 @@ window.WebRTCconferenceLib = function app(options){
 			},
 			stop: function() {
 
-			},
+			}
 		}
 		/**
 		 * Array of participant's screens. Usually participant has only one screen with webcam video. Potentially there
@@ -488,18 +517,6 @@ window.WebRTCconferenceLib = function app(options){
 
 	/*This function was a part of standalone app; currently is not used */
 	app.views = (function () {
-		var _currentView;
-
-		function createMainView() {
-			mainView = document.createElement('DIV');
-			mainView.id = 'main-webrtc-container';
-			roomsMedia = document.createElement('DIV');
-			roomsMedia.id = 'remote-media';
-
-			mainView.appendChild(roomsMedia);
-			document.body.appendChild(mainView);
-		}
-
 
 		function isMobile(mobile) {
 			if(mobile == false) {
@@ -540,16 +557,14 @@ window.WebRTCconferenceLib = function app(options){
 			for(var i=0;i<elems.length;i++) {
 				elems[i].parentNode.removeChild(elems[i]);
 			}
-			//app.views.dialogIsClosed();
 		}
 
 		return {
-			createMainView: createMainView,
 			dialogIsOpened: dialogIsOpened,
 			dialogIsClosed: dialogIsClosed,
 			updateOrientation: updateOrientation,
 			isMobile: isMobile,
-			closeAllDialogues: closeAllDialogues,
+			closeAllDialogues: closeAllDialogues
 		}
 	}())
 
@@ -608,9 +623,39 @@ window.WebRTCconferenceLib = function app(options){
 				var index = this.tracks.map(function(e) { return e.sid; }).indexOf(twilioTrack.sid);
 				this.tracks[index].remove();
 
-			}
+			};
+			this.hide = function() {
+				let screen = this;
+				if(screen.screenEl != null && screen.screenEl.parentElement != null) screen.screenEl.parentElement.removeChild(screen.screenEl);
+
+				for(let m in roomScreens) {
+
+					if(screen == roomScreens[m]){
+						screen.isActive = false;
+						roomScreens.splice(m, 1);
+						break;
+					}
+				}
+			};
+			this.show = function() {
+				let screen = this;
+				for(let m in roomScreens) {
+					if(screen == roomScreens[m]){
+						return false;
+					}
+				}
+				screen.isActive = true;
+				roomScreens.push(screen);
+			};
 		};
 
+		/**
+		 * Attaches new tracks to Participant and to his screen. If there is no screen, it creates it. If screen already
+		 * has video track while adding new, it replaces old video track with new one.
+		 * @method attachTrack
+		 * @param {Object} [track] instance of Track (not MediaStreamTrack) that has mediaStreamTrack as its property
+		 * @param {Object} [participant.url] instance of Participant
+		 */
 		function attachTrack(track, participant) {
 			log('attachTrack', track);
 			if(typeof cordova != 'undefined' && _isiOS && track.kind == 'video' && track.stream != null && track.stream.hasOwnProperty('_blobId')) {
@@ -626,7 +671,8 @@ window.WebRTCconferenceLib = function app(options){
 			}
 
 			var screenToAttach;
-			var curRoomScreens = roomScreens.filter(function (obj) {
+
+			var curRoomScreens = participant.screens.filter(function (obj) {
 				return obj.sid == participant.sid;
 			});
 
@@ -643,7 +689,6 @@ window.WebRTCconferenceLib = function app(options){
 				//track.twilioReference.unmute();
 				screenToAttach.videoCon.appendChild(trackEl);
 				screenToAttach.videoTrack = trackEl;
-				screenToAttach.isActive = true;
 				//createVideoCanvas(screenToAttach, track);
 				app.event.dispatch('videoTrackIsBeingAdded', screenToAttach);
 			} else if(track.kind == 'video' && screenToAttach.videoTrack == null){
@@ -651,7 +696,6 @@ window.WebRTCconferenceLib = function app(options){
 				track.trackEl = trackEl;
 				screenToAttach.videoCon.appendChild(trackEl);
 				screenToAttach.videoTrack = trackEl;
-				screenToAttach.isActive = true;
 				//createVideoCanvas(screenToAttach, track);
 				app.event.dispatch('videoTrackIsBeingAdded', screenToAttach);
 			} else if(track.kind == 'audio') {
@@ -724,9 +768,13 @@ window.WebRTCconferenceLib = function app(options){
 
 				participant.soundMeter.audioTrack = track.mediaStreamTrack;
 				participant.soundMeter.source = participant.soundMeter.context.createMediaStreamSource(track.stream);
+				participant.soundMeter.analyser = participant.soundMeter.context.createAnalyser();
+				participant.soundMeter.analyser.fftSize = 256;
 
 				participant.soundMeter.source.connect(participant.soundMeter.script);
+				participant.soundMeter.source.connect(participant.soundMeter.analyser);
 				participant.soundMeter.script.connect(participant.soundMeter.context.destination);
+				participant.soundMeter.analyser.connect(participant.soundMeter.script);
 				return;
 			}
 
@@ -739,11 +787,17 @@ window.WebRTCconferenceLib = function app(options){
 			} else {
 			}
 
+			participant.soundMeter.analyser = participant.soundMeter.context.createAnalyser();
+			participant.soundMeter.analyser.fftSize = 256;
+
 			participant.soundMeter.source = participant.soundMeter.context.createMediaStreamSource(track.stream);
 			participant.soundMeter.source.connect(participant.soundMeter.script);
+			participant.soundMeter.source.connect(participant.soundMeter.analyser);
 			//participant.soundMeter.source.connect(participant.soundMeter.context.destination); // connect the source to the destination
 
 			participant.soundMeter.script.connect(participant.soundMeter.context.destination); // chrome needs the analyser to be connected too...
+
+			participant.soundMeter.analyser.connect(participant.soundMeter.script);
 
 
 			participant.soundMeter.instant = 0;
@@ -777,16 +831,36 @@ window.WebRTCconferenceLib = function app(options){
 				participant.soundMeter.script.onaudioprocess = function(e) {
 					participant.soundMeter.onaudioprocessEvent = e;
 					var input = e.inputBuffer.getChannelData(0);
+					//participant.soundMeter.input = input;
 					var i;
 					var sum = 0.0;
 					var clipcount = 0;
-					for (i = 0; i < input.length; ++i) {
+					var inputLength = input.length;
+					for (i = 0; i < inputLength; ++i) {
 						sum += input[i] * input[i];
+
 						if (Math.abs(input[i]) > 0.99) {
+							//console.log('peak', Math.abs(input[i]))
+
 							clipcount += 1;
 						}
 
 					}
+					let rms = Math.sqrt(sum / (inputLength / 2));
+
+					/*let len = input.length;
+					let total = i = 0
+					/let rms;
+
+					while ( i < len ) total += Math.abs( input[i++] )
+					//rms = Math.sqrt( total / len )
+
+					console.log('total2', rms * 100)
+
+					if(rms * 100 > 100) {
+						//alert('13');
+					}*/
+
 
 					var audioIsDisabled = participant.soundMeter.source.mediaStream && (participant.soundMeter.source.mediaStream.active == false || participant.soundMeter.audioTrack.readyState == 'ended');
 					if(!audioIsDisabled) {
@@ -1059,7 +1133,7 @@ window.WebRTCconferenceLib = function app(options){
 			}
 
 			return {
-				build: buildVisualization,
+				build: buildVisualization
 			}
 		}
 
@@ -1129,6 +1203,15 @@ window.WebRTCconferenceLib = function app(options){
 			return supportabbleFormats;
 		}
 
+		/**
+		 * Creates HTMLMediaElement for audio/video track. Sets handlers on mute, unmute, ended events of video track -
+		 * this is needed for showing/hiding participant's screen when his video is can be played or muted.
+		 * loadedmetadata helps us to know video size to fit screen size to it when rendering layout
+		 * @method createTrackElement
+		 * @param {Object} [track] instance of Track (not MediaStreamTrack) that has mediaStreamTrack as its property
+		 * @param {Object} [participant.url] instance of Participant
+		 * @returns {HTMLMediaElement}
+		 */
 		function createTrackElement(track, participant) {
 			log('createTrackElement: ' + track.kind);
 			log('createTrackElement: local' + participant.isLocal);
@@ -1212,10 +1295,8 @@ window.WebRTCconferenceLib = function app(options){
 			}
 			remoteStreamEl.oncanplay = function (e) {
 				log('createTrackElement: oncanplay', remoteStreamEl);
-				log('createTrackElement: oncanplay: paused befor = ' + remoteStreamEl.paused);
 
 				if(!participant.isLocal) remoteStreamEl.play();
-				log('createTrackElement: oncanplay: paused after = ' + remoteStreamEl.paused);
 
 				if(track.kind == 'audio') {
 					log('createTrackElement: dispatch audioTrackLoaded');
@@ -1244,11 +1325,50 @@ window.WebRTCconferenceLib = function app(options){
 					app.event.dispatch('videoTrackLoaded', {
 						screen: track.parentScreen,
 						trackEl: e.target,
-						reset:shouldReset,
+						reset:shouldReset
 					});
+					addScreenToCommonList(track.parentScreen);
 				});
 
+				track.mediaStreamTrack.addEventListener('mute', function(){
+					log('mediaStreamTrack mute');
+					removeScreenFromCommonList(track.parentScreen);
+				});
+
+				track.mediaStreamTrack.addEventListener('unmute', function(e){
+					log('mediaStreamTrack unmute');
+					addScreenToCommonList(track.parentScreen);
+				});
+
+				track.mediaStreamTrack.addEventListener('ended', function(e){
+					log('mediaStreamTrack ended');
+					removeScreenFromCommonList(track.parentScreen);
+				});
 			}
+
+			track.mediaStreamTrack.addEventListener('mute', function(e){
+				app.event.dispatch('trackMuted', {
+					screen: track.parentScreen,
+					trackEl: e.target,
+					track:track
+				});
+			});
+
+			track.mediaStreamTrack.addEventListener('unmute', function(e){
+				app.event.dispatch('trackUnmuted', {
+					screen: track.parentScreen,
+					trackEl: e.target,
+					track:track
+				});
+			});
+
+			track.mediaStreamTrack.addEventListener('ended', function(e){
+				app.event.dispatch('trackMuted', {
+					screen: track.parentScreen,
+					trackEl: e.target,
+					track:track
+				});
+			});
 
 			return remoteStreamEl;
 		}
@@ -1338,6 +1458,13 @@ window.WebRTCconferenceLib = function app(options){
 			})
 		}
 
+		/**
+		 * Creates screen object (instance of Screen) and some HTML elements of screen that will be used as containers
+		 * for participant's name and audio visualization;
+		 * @method createRoomScreen
+		 * @param {Object} [participant] instance of Participant
+		 * @returns {Object}
+		 */
 		function createRoomScreen(participant) {
 			log('createRoomScreen', participant);
 			var chatParticipantEl = document.createElement('DIV');
@@ -1381,10 +1508,7 @@ window.WebRTCconferenceLib = function app(options){
 			newScreen.isLocal = isLocal;
 
 			participant.screens.push(newScreen);
-			if(participant.isLocal)
-				roomScreens.push(newScreen);
-			else roomScreens.unshift(newScreen);
-			app.event.dispatch('screenAdded', participant);
+				//roomScreens.push(newScreen);
 			return newScreen;
 		}
 
@@ -1392,10 +1516,10 @@ window.WebRTCconferenceLib = function app(options){
 			log('removeScreensByParticipant');
 
 			for(var i in roomScreens) {
-				if(roomScreens[i].sid != participant.sid) continue;
+				if(roomScreens[i].participant == participant || roomScreens[i].sid != participant.sid) continue;
 
-				roomScreens[i].isActive = false;
 				var screenEl = roomScreens[i].screenEl;
+				app.screensInterface.removeScreenFromCommonList(roomScreens[i]);
 				if(screenEl != null && screenEl.parentNode != null) screenEl.parentNode.removeChild(screenEl)
 			}
 		}
@@ -1455,7 +1579,7 @@ window.WebRTCconferenceLib = function app(options){
 					videoCanvas.className = "Streams_webrtc_video-stream-canvas";
 					videoCanvas.style.position = 'absolute';
 					videoCanvas.style.top = '-999999999px';
-					//videoCanvas.style.top = '0';
+					videoCanvas.style.top = '0';
 					videoCanvas.style.left = '0';
 					videoCanvas.style.zIndex = '9999999999999999999';
 					videoCanvas.style.backgroundColor = 'transparent';
@@ -1473,34 +1597,51 @@ window.WebRTCconferenceLib = function app(options){
 
 				function updateCanvasLayout() {
 					var layoutRects = layoutGenerator('tiledHorizontalMobile');
-					console.log('updateCanvasLayout');
+					log('updateCanvasLayout');
 
-					var screens = app.screens();
-					for(var i in screens) {
+					var participants = app.roomParticipants();
+
+					for(var i in participants) {
 
 						let rect = layoutRects[i];
-						let screen = screens[i];
-						let mediaStream = screen.videoTrack.srcObject;
-						let htmlVideoEl = screen.videoTrack;
+						let participant = participants[i];
+						let screen = participant.screens[0];
+						let mediaStream;
+						let htmlVideoEl
+						let videoTrack;
+						if(screen != null && screen.videoTrack != null) {
+							mediaStream = screen.videoTrack.srcObject;
+							videoTrack = mediaStream.getVideoTracks()[0];
+							htmlVideoEl = screen.videoTrack;
+						}
 
-						var r, videoAlreadyExist = false
+						var r, participantAlreadyExist = false
 						for(r = _streams.length - 1; r >= 0 ; r--){
-							if(_streams[r].htmlVideoEl == htmlVideoEl) {
-								videoAlreadyExist = _streams[r];
+							if(_streams[r].participant == participant) {
+								participantAlreadyExist = _streams[r];
 								break;
 							}
 						}
 
-						if(videoAlreadyExist != false) {
-							if(videoAlreadyExist.participant.online == false) {
+						if(participantAlreadyExist != false) {
+							if(participantAlreadyExist.participant.online == false) {
 								_inputCtx.clearRect(_streams[r].rect.x, _streams[r].rect.y, _streams[r].rect.width, _streams[r].rect.height);
 								_streams[r] = null;
 								_streams.splice(r, 1);
 								continue;
 							}
-							console.log('updateCanvasLayout videoAlreadyExist');
 							let newRect = new DOMRect(_streams[r].rect.x, _streams[r].rect.y, _streams[r].rect.width, _streams[r].rect.height);
 							_streams[r].rect = newRect;
+
+							if((_streams[r].htmlVideoEl == null || _streams[r].mediaStream == null) && mediaStream != null && mediaStream.active) {
+
+								_streams[r].htmlVideoEl = htmlVideoEl;
+								_streams[r].mediaStream = mediaStream;
+							} else if(videoTrack != null && (videoTrack.muted || videoTrack.readyState == 'ended')) {
+
+								_streams[r].htmlVideoEl = null;
+								_streams[r].mediaStream = null;
+							}
 
 							/*_streams[r].rect.x = rect.x;
 							_streams[r].rect.y = rect.y;
@@ -1513,16 +1654,16 @@ window.WebRTCconferenceLib = function app(options){
 							})
 
 						} else {
-							console.log('updateCanvasLayout new video', rect);
 
 							var startRect = new DOMRect(0, 0, 0, 0);
 							let videoToAdd = {
 								rect: startRect,
-								htmlVideoEl: htmlVideoEl,
-								mediaStream: mediaStream,
-								participant: screen.participant,
-								name: screen.nameEl.innerText,
+								participant: participant,
+								name: participant.username
 							}
+
+							if(htmlVideoEl != null) videoToAdd.htmlVideoEl = htmlVideoEl;
+							if(mediaStream != null) videoToAdd.mediaStream = mediaStream;
 
 							requestAnimationFrame(function(timestamp){
 								let starttime = timestamp || new Date().getTime()
@@ -1543,7 +1684,7 @@ window.WebRTCconferenceLib = function app(options){
 					var runtime = timestamp - starttime
 					var progress = runtime / duration;
 					progress = Math.min(progress, 1);
-					
+
 					rectToUpdate.y = startPositionRect.y + (distRect.y - startPositionRect.y) * progress;
 					rectToUpdate.x = startPositionRect.x + (distRect.x - startPositionRect.x) * progress;
 					rectToUpdate.width = startPositionRect.width + (distRect.width - startPositionRect.width) * progress;
@@ -1561,14 +1702,20 @@ window.WebRTCconferenceLib = function app(options){
 				}
 
 				function drawVideosOnCanvas() {
+					//console.log('drawVideosOnCanvas', _streams.length);
 					_inputCtx.clearRect(0, 0, _size.width, _size.height);
 					if(options.liveStreaming.drawBackground && _background != null) drawBackground(_background);
 
 					for(let i in _streams) {
 						let streamData = _streams[i];
 
-						if(streamData.htmlVideoEl.videoWidth == null || streamData.htmlVideoEl.videoHeight == null) continue;
-						drawSingleVideoOnCanvas(streamData.htmlVideoEl, streamData, _size.width, _size.height, streamData.htmlVideoEl.videoWidth, streamData.htmlVideoEl.videoHeight);
+						if(streamData.htmlVideoEl != null && (streamData.htmlVideoEl.videoWidth != null || streamData.htmlVideoEl.videoHeight != null)) {
+							//console.log('drawVideosOnCanvas 1', streamData.participant.sid, streamData.htmlVideoEl != null);
+							drawSingleVideoOnCanvas(streamData.htmlVideoEl, streamData, _size.width, _size.height, streamData.htmlVideoEl.videoWidth, streamData.htmlVideoEl.videoHeight);
+						} else {
+							//console.log('drawVideosOnCanvas 2', streamData.participant.sid, streamData.htmlVideoEl != null);
+							drawSingleAudioOnCanvas(streamData.htmlVideoEl, streamData, _size.width, _size.height);
+						}
 					}
 
 					requestAnimationFrame(function(){
@@ -1615,14 +1762,12 @@ window.WebRTCconferenceLib = function app(options){
 						rectWidth = rectHeight * wrh;
 					}
 
-					if(data.widthLog != null && data.heightLog != null) {
+					/*if(data.widthLog != null && data.heightLog != null) {
 						if(data.widthLog !=currentWidth || data.heightLog != currentHeight) {
-							//alert('dimensions changed');
 							console.log('dimensions changed width: ' + data.widthLog + ' -> ' + currentWidth);
 							console.log('dimensions changed height: ' + data.heightLog + ' -> ' + currentHeight);
 						}
-					}
-					//console.log('drawImage',  data.rect.width,  data.rect.height);
+					}*/
 
 					data.widthLog = currentWidth;
 					data.heightLog = currentHeight;
@@ -1674,6 +1819,76 @@ window.WebRTCconferenceLib = function app(options){
 
 				}
 
+				function drawSingleAudioOnCanvas(localVideo, data, canvasWidth, canvasHeight) {
+					if(data.participant.online == false) return;
+					var participant = data.participant;
+
+					var analyser = participant.soundMeter.analyser;
+					var bufferLength = analyser.frequencyBinCount;
+					var dataArray = new Uint8Array(bufferLength);
+					analyser.getByteFrequencyData(dataArray);
+
+
+					var WIDTH = data.rect.width;
+					var HEIGHT = data.rect.height / 2;
+					var barWidth = (WIDTH / bufferLength) * 2.5;
+					var barsNum = Math.floor(data.rect.width / barWidth);
+					var barHeight;
+
+					//var x = data.rect.x;
+					var y = (data.rect.y + data.rect.height) - (data.rect.height / 2);
+					var x = ((data.rect.x + data.rect.width - data.rect.x) / 2) - barWidth + data.rect.x;
+
+					_inputCtx.clearRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
+
+					_inputCtx.fillStyle = "#000";
+					_inputCtx.fillRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
+
+					var lastRightX = x, lastLeftX = x, side = 'l';
+					for (var i = 0; i < bufferLength; i++) {
+						barHeight = dataArray[i];
+
+						var r = barHeight + (25 * (i/bufferLength));
+						var g = 250 * (i/bufferLength);
+						var b = 50;
+
+						_inputCtx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+						_inputCtx.fillRect(x, y - (barHeight / 2), barWidth, barHeight);
+
+						if(side == 'l') {
+							lastLeftX = x;
+							side = 'r';
+
+							x = lastRightX + barWidth + 1;
+							if(x + barWidth >= data.rect.x + data.rect.width) break;
+						} else if(side == 'r') {
+							lastRightX = x;
+							side = 'l';
+
+							x = lastLeftX - barWidth - 1;
+							if(x - barWidth <= data.rect.x) break;
+						}
+
+
+					}
+
+
+					//(currentWidth/2) - (widthToGet / 2), (currentHeight/2) - (heightToGet / 2),
+					_inputCtx.fillStyle = "black";
+					_inputCtx.fillRect(data.rect.x,  data.rect.y, data.rect.width, 36);
+
+					_inputCtx.font = "16px Arial";
+					_inputCtx.fillStyle = "white";
+					_inputCtx.fillText(data.name, data.rect.x + 10, data.rect.y + 36 + 16 - 18 - 8);
+
+					//_inputCtx.translate(-data.rect.x, -data.rect.y);
+
+					//var pixelData = _inputCtx.getImageData( 0, 0, videoWidth, videoHeight );
+
+					//_outputCtx.putImageData( pixelData, 0, 0);
+
+				}
+
 				function compositeVideosAndDraw() {
 					if(_isActive) return;
 					if(!document.body.contains(_canvas)) document.body.appendChild(_canvas);
@@ -1687,11 +1902,27 @@ window.WebRTCconferenceLib = function app(options){
 							updateCanvasLayout();
 						}
 					});
+					app.event.on('participantConnected', function () {
+						if(_isActive == true) {
+							updateCanvasLayout();
+						}
+					});
 					app.event.on('participantDisconnected', function () {
 						if(_isActive == true) {
 							updateCanvasLayout();
 						}
 					});
+					app.event.on('trackMuted', function () {
+						if(_isActive == true) {
+							updateCanvasLayout();
+						}
+					});
+					app.event.on('trackUnmuted', function () {
+						if(_isActive == true) {
+							updateCanvasLayout();
+						}
+					});
+
 				}
 
 				function layoutGenerator(layoutName) {
@@ -1812,7 +2043,7 @@ window.WebRTCconferenceLib = function app(options){
 						return rects;
 					}
 
-					return layouts[layoutName]({width: _size.width, height: _size.height}, app.screens().length);
+					return layouts[layoutName]({width: _size.width, height: _size.height}, app.roomParticipants().length);
 				}
 
 				function stopAndRemove() {
@@ -1839,7 +2070,7 @@ window.WebRTCconferenceLib = function app(options){
 					updateCanvasLayout: updateCanvasLayout,
 					compositeVideosAndDraw: compositeVideosAndDraw,
 					stop: stopAndRemove,
-					isActive: isActive,
+					isActive: isActive
 				}
 			}());
 
@@ -1853,9 +2084,7 @@ window.WebRTCconferenceLib = function app(options){
 					let tracksNum = 0;
 					participants.forEach(function(participant) {
 						let audiotracks = participant.audioTracks();
-						console.log('audioComposer audiotracks', audiotracks);
 						if(audiotracks.length != 0) {
-							console.log('audioComposer add stream', audiotracks);
 
 							if(audiotracks[0].stream != null && audiotracks[0].stream.getAudioTracks().length != 0) {
 								const source = audio.createMediaStreamSource(audiotracks[0].stream);
@@ -1865,7 +2094,6 @@ window.WebRTCconferenceLib = function app(options){
 						}
 					});
 
-					console.log('audioComposer dest.stream.getTracks()', _dest.stream.getTracks());
 					let silence = () => {
 						let ctx = new AudioContext(), oscillator = ctx.createOscillator();
 						let dst = oscillator.connect(ctx.createMediaStreamDestination());
@@ -1908,9 +2136,7 @@ window.WebRTCconferenceLib = function app(options){
 			}
 
 			function removeDataListener(callbackFunction) {
-				console.log('removeDataListener');
 				var index = _dataListeners.indexOf(callbackFunction);
-				console.log('removeDataListener index', index);
 
 				if (index > -1) {
 					_dataListeners.splice(index, 1);
@@ -1926,7 +2152,6 @@ window.WebRTCconferenceLib = function app(options){
 			function captureStream(ondataavailable) {
 				if(ondataavailable != null){
 					addDataListener(ondataavailable);
-					console.log('_dataListeners', _dataListeners);
 				}
 
 				var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
@@ -1977,8 +2202,6 @@ window.WebRTCconferenceLib = function app(options){
 						trigerDataListeners(e.data);
 					});
 
-					console.log('captureStream mediaRecorder', _mediaRecorder);
-
 					_mediaRecorder.start(1000); // Start recording, and dump data every second
 				}
 
@@ -2027,7 +2250,6 @@ window.WebRTCconferenceLib = function app(options){
 					return _canvas;
 				},
 				endStreaming: function () {
-					console.log('goLiveDialog end streaming');
 					stopRecorder();
 				},
 				stopRecorder: stopRecorder,
@@ -2038,9 +2260,10 @@ window.WebRTCconferenceLib = function app(options){
 			}
 		}())
 
+		window.videoComposer = canvasComposer.videoComposer;
+
 
 		var fbLive = (function () {
-			console.log('fbLive');
 			var _streamingSocket;
 			var _fbUserId = null;
 
@@ -2100,13 +2323,11 @@ window.WebRTCconferenceLib = function app(options){
 							_videoStream.blobs.unshift(blobToNotSend);
 						} else {
 							blobToSend = mergedBlob;
-						}
-
-						console.log('VIMEO ondataavailable SEND', blobToSend.size)*/
+						}*/
 
 						//let lastChunk = _videoStream.recordingStopped === true ? true : false;
 						//_videoStream.allBlobs.push(mergedBlob);
-						console.log('VIMEO ondataavailable SEND', mergedBlob.size)
+						log('ondataavailable SEND CHUNK', mergedBlob.size)
 						_streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
 						break;
 					}
@@ -2116,10 +2337,10 @@ window.WebRTCconferenceLib = function app(options){
 
 			return {
 				goLive: function () {
-					console.log('goLiveDialog goLive');
+					log('goLiveDialog goLive');
 				},
 				endStreaming: function () {
-					console.log('goLiveDialog end streaming');
+					log('endStreaming');
 
 					clearTimeout(_videoStream.timer);
 					let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
@@ -2138,7 +2359,127 @@ window.WebRTCconferenceLib = function app(options){
 					return false;
 				},
 				startStreaming: function(fbStreamUrl) {
-					console.log('startStreaming', fbStreamUrl)
+					log('startStreaming', fbStreamUrl);
+
+					connect(fbStreamUrl, function () {
+						canvasComposer.captureStream(function (blob) {
+							onDataAvailablehandler(blob);
+						});
+
+						var timer = function() {
+							if(_videoStream.blobs.length != 0) {
+								let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
+								var mergedBlob = new Blob(blobsToSend);
+								_streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
+							}
+							_videoStream.timer = setTimeout(timer, 6000);
+						}
+
+						_videoStream.timer = setTimeout(timer, 6000);
+
+						app.event.dispatch('facebookLiveStreamingStarted');
+					});
+				}
+			}
+		}())
+
+		var youtubeLive = (function () {
+			var _streamingSocket;
+			var _fbUserId = null;
+
+			var _fbApiInited;
+			var _fbStreamUrl;
+
+			var _videoStream = {blobs: [], allBlobs: [], size: 0, timer: null}
+
+			function connect(streamUrl, callback) {
+				if(typeof io == 'undefined') return;
+
+				var secure = options.nodeServer.indexOf('https://') == 0;
+				_streamingSocket = io.connect(options.nodeServer, {
+					query: {
+						rtmp: streamUrl,
+						localInfo: JSON.stringify(_localInfo)
+					},
+					transports: ['websocket'],
+					'force new connection': true,
+					secure:secure,
+					reconnection: true,
+					reconnectionDelay: 1000,
+					reconnectionDelayMax: 5000,
+					reconnectionAttempts: 5
+				});
+				_streamingSocket.on('connect', function () {
+					if(callback != null) callback();
+				});
+				window.streamingSocket = _streamingSocket;
+			}
+
+			function onDataAvailablehandler(blob) {
+
+				_videoStream.blobs.push(blob);
+
+				_videoStream.size += blob.size;
+
+				if(options.liveStreaming.timeSlice != null) return;
+
+				let blobsLength = _videoStream.blobs.length;
+				let sumSize = 0;
+
+				for (let i = 0; i < blobsLength; i++) {
+					if (_videoStream.blobs.length == 0) break;
+					sumSize = sumSize + _videoStream.blobs[i].size;
+
+					let chunkSize = options.liveStreaming.chunkSize != null ? options.liveStreaming.chunkSize : 1000000;
+					if (sumSize >= chunkSize && _videoStream.recordingStopped != true) {
+						let blobsToSend = _videoStream.blobs.slice(0, i + 1);
+						_videoStream.blobs.splice(0, i);
+						var mergedBlob = new Blob(blobsToSend);
+
+						/*var blobToSend;
+						if (mergedBlob.size > 1000000) {
+							blobToSend = mergedBlob.slice(0, 1000000);
+							var blobToNotSend = mergedBlob.slice(1000000);
+							_videoStream.blobs.unshift(blobToNotSend);
+						} else {
+							blobToSend = mergedBlob;
+						}*/
+
+						//let lastChunk = _videoStream.recordingStopped === true ? true : false;
+						//_videoStream.allBlobs.push(mergedBlob);
+						log('ondataavailable SEND CHUNK', mergedBlob.size)
+						_streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
+						break;
+					}
+				}
+
+			}
+
+			return {
+				goLive: function () {
+					log('goLiveDialog goLive');
+				},
+				endStreaming: function () {
+					log('endStreaming');
+
+					clearTimeout(_videoStream.timer);
+					let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
+					var mergedBlob = new Blob(blobsToSend);
+					_streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
+
+					canvasComposer.stopRecorder();
+
+					if(_streamingSocket != null) _streamingSocket.disconnect();
+					_streamingSocket = null;
+
+					app.event.dispatch('facebookLiveStreamingEnded');
+				},
+				isStreaming: function () {
+					if(_streamingSocket != null && _streamingSocket.connected) return true;
+					return false;
+				},
+				startStreaming: function(fbStreamUrl) {
+					log('startStreaming', fbStreamUrl);
 
 					connect(fbStreamUrl, function () {
 						canvasComposer.captureStream(function (blob) {
@@ -2162,7 +2503,7 @@ window.WebRTCconferenceLib = function app(options){
 				}
 			}
 		}())
-		
+
 		var youtubeLiveUploader = (function () {
 			var DRIVE_UPLOAD_URL = 'https://www.googleapis.com/upload/drive/v2/files/';
 			var STATUS_POLLING_INTERVAL_MILLIS = 60 * 1000; // One minute.
@@ -2187,7 +2528,7 @@ window.WebRTCconferenceLib = function app(options){
 			 * @param {function} fn Function to invoke
 			 */
 			RetryHandler.prototype.retry = function(fn) {
-				console.log('RetryHandler: retry');
+				log('RetryHandler: retry');
 				setTimeout(fn, this.interval);
 				this.interval = this.nextInterval_();
 			};
@@ -2196,7 +2537,7 @@ window.WebRTCconferenceLib = function app(options){
 			 * Reset the counter (e.g. after successful request.)
 			 */
 			RetryHandler.prototype.reset = function() {
-				console.log('RetryHandler: reset');
+				log('RetryHandler: reset');
 				this.interval = 1000;
 			};
 
@@ -2207,7 +2548,7 @@ window.WebRTCconferenceLib = function app(options){
 			 * @private
 			 */
 			RetryHandler.prototype.nextInterval_ = function() {
-				console.log('RetryHandler: nextInterval_');
+				log('RetryHandler: nextInterval_');
 
 				var interval = this.interval * 2 + this.getRandomInt_(0, 1000);
 				return Math.min(interval, this.maxInterval);
@@ -2282,7 +2623,7 @@ window.WebRTCconferenceLib = function app(options){
 			 * Initiate the upload.
 			 */
 			MediaUploader.prototype.initUpload = function(callback) {
-				console.log('MediaUploader: upload');
+				log('MediaUploader: upload');
 
 				var self = this;
 				var xhr = new XMLHttpRequest();
@@ -2295,7 +2636,7 @@ window.WebRTCconferenceLib = function app(options){
 				xhr.setRequestHeader('X-Upload-Content-Type', this.contentType);
 
 				xhr.onload = function(e) {
-					console.log('initUpload response', e.target)
+					log('initUpload response', e.target)
 					if (e.target.status < 400) {
 						var location = e.target.getResponseHeader('Location');
 						this.url = location;
@@ -2314,13 +2655,11 @@ window.WebRTCconferenceLib = function app(options){
 			 * @private
 			 */
 			MediaUploader.prototype.sendChunk = function(blob, lastChunk) {
-				console.log('MediaUploader: sendChunk');
+				log('MediaUploader: sendChunk');
 				var MediaUploaderInstance = this;
 				var xhr = new XMLHttpRequest();
 
-				console.log('MediaUploader: sendChunk size' + blob.size);
 				this.totalSize = this.totalSize + blob.size;
-				console.log('MediaUploader: sendChunk this.totalSize' + this.totalSize);
 
 				var end;
 				if (this.offset || this.chunkSize) {
@@ -2347,11 +2686,9 @@ window.WebRTCconferenceLib = function app(options){
 				}
 				xhr.onload = function(e){
 					if (e.target.status == 200 || e.target.status == 201) {
-						console.log('MediaUploader: sendChunk_: onContentUploadSuccess: 200 || 201', e.target.response);
 						MediaUploaderInstance.onComplete(e.target.response);
 					} else if (e.target.status == 308) {
 						MediaUploaderInstance.extractRange_(e.target);
-						console.log('MediaUploader: sendChunk_: onContentUploadSuccess: 308', e.target.response);
 					}
 				};
 				xhr.onerror = function(e){
@@ -2370,11 +2707,10 @@ window.WebRTCconferenceLib = function app(options){
 			 * @private
 			 */
 			MediaUploader.prototype.resume_ = function() {
-				console.log('MediaUploader: resume_');
+				log('MediaUploader: resume_');
 
 				var xhr = new XMLHttpRequest();
 				xhr.open('PUT', this.url, true);
-				console.log('MediaUploader PUT size' + this.file.size);
 				xhr.setRequestHeader('Content-Range', 'bytes */' + this.file.size);
 				xhr.setRequestHeader('X-Upload-Content-Type', this.file.type);
 				if (xhr.upload) {
@@ -2406,13 +2742,13 @@ window.WebRTCconferenceLib = function app(options){
 			 * @param {object} e XHR event
 			 */
 			MediaUploader.prototype.onContentUploadSuccess_ = function(e) {
-				console.log('MediaUploader: onContentUploadSuccess_');
+				log('MediaUploader: onContentUploadSuccess_');
 
 				if (e.target.status == 200 || e.target.status == 201) {
-					console.log('MediaUploader: onContentUploadSuccess: 200 || 201');
+					log('MediaUploader: onContentUploadSuccess: 200 || 201');
 					this.onComplete(e.target.response);
 				} else if (e.target.status == 308) {
-					console.log('MediaUploader: onContentUploadSuccess: 308');
+					log('MediaUploader: onContentUploadSuccess: 308');
 					this.extractRange_(e.target);
 					this.retryHandler.reset();
 					this.sendFile_();
@@ -2427,14 +2763,14 @@ window.WebRTCconferenceLib = function app(options){
 			 * @param {object} e XHR event
 			 */
 			MediaUploader.prototype.onContentUploadError_ = function(e) {
-				console.log('MediaUploader: onContentUploadError_');
+				log('MediaUploader: onContentUploadError_');
 
 				if (e.target.status && e.target.status < 500) {
-					console.log('MediaUploader: onContentUploadError_: if < 500');
+					log('MediaUploader: onContentUploadError_: if < 500');
 
 					this.onError(e.target.response);
 				} else {
-					console.log('MediaUploader: onContentUploadError_: else');
+					log('MediaUploader: onContentUploadError_: else');
 
 					this.retryHandler.retry(this.resume_.bind(this));
 				}
@@ -2458,7 +2794,7 @@ window.WebRTCconferenceLib = function app(options){
 			 * @return {string} query string
 			 */
 			MediaUploader.prototype.buildQuery_ = function(params) {
-				console.log('MediaUploader: buildQuery_');
+				log('MediaUploader: buildQuery_');
 
 				params = params || {};
 				return Object.keys(params).map(function(key) {
@@ -2475,7 +2811,7 @@ window.WebRTCconferenceLib = function app(options){
 			 * @return {string} URL
 			 */
 			MediaUploader.prototype.buildUrl_ = function(id, params, baseUrl) {
-				console.log('MediaUploader: buildUrl_');
+				log('MediaUploader: buildUrl_');
 
 				var url = baseUrl || DRIVE_UPLOAD_URL;
 				if (id) {
@@ -2511,10 +2847,10 @@ window.WebRTCconferenceLib = function app(options){
 					},
 					callback: function(response) {
 						if (response.error) {
-							console.log(response.error.message);
+							console.error(response.error.message);
 						} else {
-							console.log(response.items[0].snippet.title);
-							console.log('src', response.items[0].snippet.thumbnails.default.url);
+							log('UploadVideo.ready title', response.items[0].snippet.title);
+							log('UploadVideo.ready thumbnails', response.items[0].snippet.thumbnails.default.url);
 
 
 						}
@@ -2578,7 +2914,7 @@ window.WebRTCconferenceLib = function app(options){
 
 			UploadVideo.prototype.pollForVideoStatus = function() {
 				var instace = this;
-				console.log('pollForVideoStatus', this)
+				log('UploadVideo.pollForVideoStatus');
 				this.gapi.client.request({
 					path: '/youtube/v3/videos',
 					params: {
@@ -2660,28 +2996,29 @@ window.WebRTCconferenceLib = function app(options){
 			}
 
 			function onDataAvailablehandler(blob) {
-				console.log('ondataavailable', blob)
+				log('onDataAvailablehandler');
 
 				if(_videoStream.size == 0) {
 					var fileName = getFileName('mp4');
 
 					uploadToYouTube(fileName,blob, function (percentageComplete, fileURL) {
 							if (percentageComplete == 'uploaded') {
-								console.log('Uploaded. However YouTube is still processing.', fileURL);
+								log('Uploaded. However YouTube is still processing.', fileURL);
 								return;
 							}
 							if (percentageComplete == 'processed') {
-								console.log('Uploaded & Processed. Click to open YouTube video.', fileURL);
+								log('Uploaded & Processed. Click to open YouTube video.', fileURL);
 								return;
 							}
 							if (percentageComplete == 'failed') {
-								console.log('YouTube failed transcoding the video.', fileURL);
+								log('YouTube failed transcoding the video.', fileURL);
 								return;
 							}
-							console.log(percentageComplete + '% uploaded to YouTube.');
+
+							log(percentageComplete + '% uploaded to YouTube.');
 						},
 						function (uploader) {
-							console.log('uploadToYouTube: uploading inited')
+							log('uploadToYouTube: uploading inited')
 							_uploaderInterval = setInterval(function () {
 								let blobsLength = _videoStream.blobs.length;
 								let sumSize = 0;
@@ -2693,16 +3030,15 @@ window.WebRTCconferenceLib = function app(options){
 										let blobsToSend = _videoStream.blobs.slice(0, i + 1);
 										let blobToSend = new Blob(blobsToSend);
 										_videoStream.blobs.splice(0, i);
-										console.log('ondataavailable SEND', sumSize)
+										log('ondataavailable SEND', sumSize);
 
 										let lastChunk = _videoStream.recordingStopped === true ? true : false;
 										uploader.sendChunk(blobToSend, lastChunk);
 										break;
 									} else if(_videoStream.recordingStopped === true) {
-										console.log('ondataavailable SEND LAST CHUNK', sumSize)
+										log('ondataavailable SEND LAST CHUNK', sumSize);
 										let blobToSend = new Blob(_videoStream.blobs);
 										_videoStream.blobs = [];
-										console.log('ondataavailable SEND', sumSize)
 
 										uploader.sendChunk(blobToSend, true);
 										if(_uploaderInterval != null) {
@@ -2711,7 +3047,7 @@ window.WebRTCconferenceLib = function app(options){
 											canvasComposer.removeDataListener(onDataAvailablehandler);
 										}
 									} else {
-										console.log('ondataavailable BUFFER', sumSize)
+										log('ondataavailable BUFFER', sumSize);
 									}
 								}
 							}, 1000)
@@ -2738,7 +3074,7 @@ window.WebRTCconferenceLib = function app(options){
 			function stopRecording() {
 				_videoStream.recordingStopped = true;
 			}
-			
+
 			return {
 				recordAndUpload: recordAndUpload,
 				stopRecording: stopRecording
@@ -2759,7 +3095,7 @@ window.WebRTCconferenceLib = function app(options){
 
 				var authRequestBody = {
 					"grant_type": "client_credentials",
-					"scope": "private, upload",
+					"scope": "private, upload"
 				}
 
 				var xhr = new XMLHttpRequest();
@@ -2771,7 +3107,6 @@ window.WebRTCconferenceLib = function app(options){
 
 				xhr.onload = function(e) {
 					var response = JSON.parse(e.target.response);
-					console.log('VIMEO initUpload response', response.access_token)
 					if (e.target.status < 400) {
 						ACCESS_TOKEN = response.access_token;
 						if(callback != null) callback(ACCESS_TOKEN);
@@ -2803,7 +3138,6 @@ window.WebRTCconferenceLib = function app(options){
 						let blobsToSend = _videoStream.blobs.slice(0, i + 1);
 						var mergedBlob = new Blob(blobsToSend);
 						var blobToSend = mergedBlob.slice(0, _videoStream.size - (1000000*2));
-						console.log('VIMEO ondataavailable FIIIINISSHHH', blobToSend.size)
 
 						let lastChunk = _videoStream.recordingStopped === true ? true : false;
 						canvasComposer.removeDataListener(onDataAvailablehandler);
@@ -2824,8 +3158,6 @@ window.WebRTCconferenceLib = function app(options){
 							blobToSend = mergedBlob;
 						}
 
-						console.log('VIMEO ondataavailable SEND', blobToSend.size)
-
 						let lastChunk = _videoStream.recordingStopped === true ? true : false;
 						sendChunk(blobToSend, lastChunk);
 						break;
@@ -2834,7 +3166,6 @@ window.WebRTCconferenceLib = function app(options){
 					}
 				}
 
-				console.log('VIMEO ondataavailable BUFFER', sumSize)
 			}
 
 			function createVideo() {
@@ -2855,7 +3186,7 @@ window.WebRTCconferenceLib = function app(options){
 
 				xhr.onload = function(e) {
 					var response = JSON.parse(e.target.response);
-					console.log('VIMEO createVideo response', response)
+					log('VIMEO createVideo response', response);
 					if (e.target.status < 400) {
 						_location = response.upload.upload_link;
 						canvasComposer.captureStream(onDataAvailablehandler);
@@ -2880,7 +3211,7 @@ window.WebRTCconferenceLib = function app(options){
 				xhr.setRequestHeader('Accept', 'application/vnd.vimeo.*+json;version=3.4')
 
 				xhr.onload = function(e) {
-					console.log('VIMEO sendChunk response', e)
+					log('VIMEO sendChunk response', e);
 					if (e.target.status < 400) {
 						_offset = e.target.getResponseHeader('upload-offset');
 					} else {
@@ -2901,7 +3232,7 @@ window.WebRTCconferenceLib = function app(options){
 				xhr.setRequestHeader('Accept', 'application/vnd.vimeo.*+json;version=3.4')
 
 				xhr.onload = function(e) {
-					console.log('VIMEO completeUploading response', e)
+					log('VIMEO completeUploading response', e);
 					if (e.target.status < 400) {
 
 					} else {
@@ -2911,7 +3242,7 @@ window.WebRTCconferenceLib = function app(options){
 				xhr.onerror = onUploadError;
 				xhr.send();
 			}
-			
+
 			function recordAndUpload() {
 
 			}
@@ -2927,7 +3258,7 @@ window.WebRTCconferenceLib = function app(options){
 				xhr.setRequestHeader('Accept', 'application/vnd.vimeo.*+json;version=3.4')
 
 				xhr.onload = function(e) {
-					console.log('VIMEO completeUploading response', e.target.response)
+					log('VIMEO verifyUpload response', e.target.response);
 					if (e.target.status < 400) {
 
 					} else {
@@ -2945,6 +3276,8 @@ window.WebRTCconferenceLib = function app(options){
 			}
 		}())
 
+
+
 		var facebookLiveUploader = (function () {
 
 			var _fbUserId
@@ -2952,23 +3285,23 @@ window.WebRTCconferenceLib = function app(options){
 			var _uploadSessionId;
 			var _videoStream = {blobs:[], size:0};
 			var  _offset = 0;
-			var _fbAccessToken;
+			var _fbAccessToken = 'EAAGitls3RnEBADwlODp5oPAy339HUvopUbi0ymAd6a0xbnFcjhKky0dOy4EN2aLoYiarDI4K7khY8PLTLJWClHTOK8vzh9LLrMZCmKt5hk5MZATbA259qWBvhGZCPCx1GWQ2qqoe5zZBpCh7HbY9JYgT57IeZBZBKSSZC8ZBaumd2tN1yiWtNn5AICeRMYUhHBZAuPQKqtAOPRgZDZD';
 
 			function authenticate(callback) {
 				FB.getLoginStatus(function(response){
 					console.log('getLoginStatus', response)
 					if (response.status === 'connected') {
 						_fbUserId = response.authResponse.userID;
-						_fbAccessToken = response.authResponse.accessToken;
+						//_fbAccessToken = response.authResponse.accessToken;
 						callback();
 					} else {
 						FB.login(function(response) {
 							if (response.authResponse) {
 								_fbUserId = response.authResponse.userID;
-								_fbAccessToken = response.authResponse.accessToken;
+								//_fbAccessToken = response.authResponse.accessToken;
 								callback();
 							}
-						}, {scope: 'public_profile,publish_pages,publish_video,user_videos'});
+						}, {scope: 'public_profile,publish_video'});
 
 					}
 
@@ -3032,13 +3365,20 @@ window.WebRTCconferenceLib = function app(options){
 
 			function createVideo() {
 				var uploadRequestBody = {
-					"access_token": _fbAccessToken,
+				/*	"access_token": _fbAccessToken,
 					"upload_phase": "start",
-					"file_size": 1000000*2
+					"file_size": 1000000*2*/
 				}
 
+				var video_title = 'Teeest';
+				var video_desc = 'Teeest desc';
+
+				var post_url = "https://graph-video.facebook.com/me/videos?"
+					+ "title=" + video_title + "&description=" + video_desc
+					+ "&access_token=" + _fbAccessToken;
+				console.log('post_url', post_url)
 				var xhr = new XMLHttpRequest();
-				xhr.open('POST', "https://graph.facebook.com/v2.9/" + _fbUserId + "/videos", true);
+				xhr.open('POST', post_url, true);
 				xhr.setRequestHeader('access_token', _fbAccessToken);
 				xhr.setRequestHeader('upload_phase', 'start');
 				xhr.setRequestHeader('file_size', 1000000*2);
@@ -3070,7 +3410,7 @@ window.WebRTCconferenceLib = function app(options){
 				}
 
 				var xhr = new XMLHttpRequest();
-				xhr.open('POST', "https://graph.facebook.com/v4.0/app/uploads?access_token=" + _fbAccessToken + "&file_type=video/mp4", true);
+				xhr.open('POST', "https://graph.facebook.com/v2.9/app/uploads?access_token=" + _fbAccessToken + "&file_type=video/mp4", true);
 				/*xhr.setRequestHeader('access_token', _fbAccessToken);
 				xhr.setRequestHeader('upload_phase', 'start');
 				xhr.setRequestHeader('file_size', 1000000*2);*/
@@ -3110,11 +3450,24 @@ window.WebRTCconferenceLib = function app(options){
 		}())
 		window.fbLiveUploader = facebookLiveUploader;
 
-		var serverLiveUploader = (function () {
-			function initUpload() {
-				//send post to create upload
-			}
-		}())
+		function addScreenToCommonList(screen) {
+			screen.show();
+			app.event.dispatch('screenAdded', {
+				screen: screen,
+				participant: screen.participant
+			});
+
+		}
+
+		function removeScreenFromCommonList(screen) {
+			log('removeScreenFromCommonList')
+			screen.hide();
+
+			app.event.dispatch('screenRemoved', {
+				screen: screen,
+				participant: screen.participant
+			});
+		}
 
 		return {
 			attachTrack: attachTrack,
@@ -3128,7 +3481,9 @@ window.WebRTCconferenceLib = function app(options){
 			createAudioAnalyser: createAudioAnalyser,
 			canvasComposer:canvasComposer,
 			fbLive:fbLive,
-			youtubeLiveUploader:youtubeLiveUploader
+			youtubeLiveUploader:youtubeLiveUploader,
+			addScreenToCommonList:addScreenToCommonList,
+			removeScreenFromCommonList:removeScreenFromCommonList
 		}
 	}())
 
@@ -3365,6 +3720,7 @@ window.WebRTCconferenceLib = function app(options){
 		function processDataTrackMessage(data, participant) {
 			data = JSON.parse(data);
 			if(data.type == 'screensharingStarting' || data.type == 'screensharingStarted' || data.type == 'screensharingFailed' || data.type == 'afterCamerasToggle') {
+				if(participant.screens.length == 0) app.screensInterface.createParticipantScreen(participant);
 				app.event.dispatch(data.type, {content:data.content != null ? data.content : null, participant: participant});
 			} else if(data.type == 'online') {
 
@@ -3413,7 +3769,6 @@ window.WebRTCconferenceLib = function app(options){
 
 						if(audioTracks.length != 0 && enabledAudioTracks.length == 0 && participant.remoteMicIsEnabled) {
 							log('checkOnlineStatus: MIC DOESN\'T WORK');
-							console.log('checkOnlineStatus: MIC DOESN\'T WORK');
 							sendDataTrackMessage('service', {audioNotWork: true});
 							if(socket != null) socket.emit('Streams/webrtc/errorlog', "checkOnlineStatus MIC DOESN'T WORK'");
 						}
@@ -4234,7 +4589,7 @@ window.WebRTCconferenceLib = function app(options){
 									name: localParticipant.identity,
 									targetSid: senderParticipant.sid,
 									type: "offer",
-									sdp: senderParticipant.RTCPeerConnection.localDescription.sdp,
+									sdp: senderParticipant.RTCPeerConnection.localDescription.sdp
 								});
 
 							});
@@ -4421,7 +4776,7 @@ window.WebRTCconferenceLib = function app(options){
 									name: localParticipant.identity,
 									targetSid: message.fromSid,
 									type: "answer",
-									sdp: senderParticipant.RTCPeerConnection.localDescription,
+									sdp: senderParticipant.RTCPeerConnection.localDescription
 								});
 							});
 						})
@@ -4542,7 +4897,7 @@ window.WebRTCconferenceLib = function app(options){
 			answerRecieved: answerRecieved,
 			iceConfigurationReceived: iceConfigurationReceived,
 			socketParticipantConnected: socketParticipantConnected,
-			createOfferAndRenegotiate: createOfferAndRenegotiate,
+			createOfferAndRenegotiate: createOfferAndRenegotiate
 		}
 	}())
 
@@ -4742,7 +5097,7 @@ window.WebRTCconferenceLib = function app(options){
 					width: { min: 320, max: 1280 },
 					height: { min: 240, max: 720 },
 					deviceId: { exact: cameraId != null ? cameraId : deviceToSwitch.deviceId }
-				},
+				}
 			}).then(function (stream) {
 				var localVideoTrack = stream.getVideoTracks()[0];
 				log('toggleCameras: getUserMedia: got stream');
@@ -4836,7 +5191,7 @@ window.WebRTCconferenceLib = function app(options){
 					'audio': false,
 					'video': {
 						width: { min: 320, max: 1280 },
-						height: { min: 240, max: 720 },
+						height: { min: 240, max: 720 }
 					}
 				}, function (videoStream) {
 					gotCameraStream(videoStream);
@@ -4910,7 +5265,7 @@ window.WebRTCconferenceLib = function app(options){
 			if(typeof cordova != 'undefined' && _isiOS){
 
 				cordova.plugins.iosrtc.getUserMedia({
-					'audio': true,
+					'audio': true
 				}, function (audioStream) {
 					successCallback(audioStream);
 				}, function (err) {
@@ -4918,7 +5273,7 @@ window.WebRTCconferenceLib = function app(options){
 				});
 			} else {
 				navigator.mediaDevices.getUserMedia({
-					'audio': true,
+					'audio': true
 				}).then(function (audioStream) {
 					successCallback(audioStream);
 				}).catch(function (err) {
@@ -5263,6 +5618,7 @@ window.WebRTCconferenceLib = function app(options){
 				for(let i = localParticipant.tracks.length - 1; i >= 0 ; i--){
 					if(localParticipant.tracks[i].kind == 'video') {
 						localParticipant.tracks[i].mediaStreamTrack.stop();
+						localParticipant.tracks[i].mediaStreamTrack.dispatchEvent(new Event("ended"));
 					}
 				}
 
@@ -5618,7 +5974,7 @@ window.WebRTCconferenceLib = function app(options){
 			} else {
 				videoConstrains = {
 					width: { min: 320, max: 1280 },
-					height: { min: 240, max: 720 },
+					height: { min: 240, max: 720 }
 				};
 			}
 
@@ -5659,7 +6015,7 @@ window.WebRTCconferenceLib = function app(options){
 				connect(token, {
 					name:options.roomName,
 					tracks: tracks,
-					preferredVideoCodecs: codecs,
+					preferredVideoCodecs: codecs
 				}).then(function(room) {
 					joinRoom(room, dataTrack);
 				}, function(error) {
@@ -5694,7 +6050,7 @@ window.WebRTCconferenceLib = function app(options){
 				} else if(videoDevices != 0 && options.video) {
 					videoConstrains = {
 						width: { min: 320, max: 1280 },
-						height: { min: 240, max: 720 },
+						height: { min: 240, max: 720 }
 					};
 				}
 
@@ -5755,7 +6111,7 @@ window.WebRTCconferenceLib = function app(options){
 
 				navigator.mediaDevices.getUserMedia ({
 					'audio': audioDevices != 0 && options.audio,
-					'video': videoConstrains,
+					'video': videoConstrains
 				}).then(function (stream) {
 					var tracks = stream.getTracks();
 					tracks.push(dataTrack);
@@ -5802,7 +6158,7 @@ window.WebRTCconferenceLib = function app(options){
 		function joinRoom(streams, mediaDevicesList) {
 			app.eventBinding.socketRoomJoined((streams != null ? streams : []));
 			if(mediaDevicesList != null) app.conferenceControl.loadDevicesList(mediaDevicesList);
-			app.event.dispatch('joined');
+			app.event.dispatch('joined', localParticipant);
 			if(callback != null) callback(app);
 		}
 
@@ -5811,7 +6167,7 @@ window.WebRTCconferenceLib = function app(options){
 
 			navigator.mediaDevices.getUserMedia ({
 				'audio': options.audio,
-				'video': options.video,
+				'video': options.video
 			}).then(function (stream) {
 				joinRoom(stream);
 			}).catch(function(err) {
@@ -5846,7 +6202,7 @@ window.WebRTCconferenceLib = function app(options){
 			} else {
 				videoConstrains = {
 					width: { min: 320, max: 1280 },
-					height: { min: 240, max: 720 },
+					height: { min: 240, max: 720 }
 				};
 			}
 
@@ -5866,7 +6222,7 @@ window.WebRTCconferenceLib = function app(options){
 
 			navigator.mediaDevices.getUserMedia ({
 				'audio': audioDevices != 0 && options.audio,
-				'video': videoConstrains,
+				'video': videoConstrains
 			}).then(function (stream) {
 				navigator.mediaDevices.enumerateDevices().then(function (mediaDevicesList) {
 					joinRoom(stream, mediaDevicesList);
@@ -5920,7 +6276,7 @@ window.WebRTCconferenceLib = function app(options){
 			} else if(videoDevices != 0 && options.video) {
 				videoConstrains = {
 					width: { min: 320, max: 1280 },
-					height: { min: 240, max: 720 },
+					height: { min: 240, max: 720 }
 				};
 			}
 
@@ -6116,7 +6472,7 @@ window.WebRTCconferenceLib = function app(options){
 						label: event.candidate.sdpMLineIndex,
 						sdpMid: event.candidate.sdpMid,
 						candidate: event.candidate.candidate,
-						id: event.candidate.sdpMid,
+						id: event.candidate.sdpMid
 					};
 
 					//iceQueue.push(message);
@@ -6244,7 +6600,7 @@ window.WebRTCconferenceLib = function app(options){
 						label: event.candidate.sdpMLineIndex,
 						sdpMid: event.candidate.sdpMid,
 						candidate: event.candidate.candidate,
-						id: event.candidate.sdpMid,
+						id: event.candidate.sdpMid
 					};
 
 					//iceQueue.push(message);
@@ -6566,10 +6922,31 @@ window.WebRTCconferenceLib = function app(options){
 		}
 
 		if(findScript('socket.io.js') && typeof io != 'undefined') {
-			console.log('initWithNodeJs 1');
-
 			connect();
 		} else {
+
+
+			/*var url = 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'
+			var xhr = new XMLHttpRequest();
+
+			xhr.open('GET', url, true);
+
+			xhr.onload = function(e) {
+				console.log('e', e)
+				var script = e.target.response || e.target.responseText;
+				if (e.target.readyState === 4) {
+					switch( e.target.status) {
+						case 200:
+							eval.apply( window, [script] );
+							console.log("script loaded: ", url);
+							break;
+						default:
+							console.log("ERROR: script not loaded: ", url);
+					}
+				}
+			}
+			xhr.send();*/
+
 			var script = document.createElement('script');
 			script.onload = function () {
 				requirejs(['https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'], function (io) {
@@ -6601,7 +6978,6 @@ window.WebRTCconferenceLib = function app(options){
 		app.state = 'connecting';
 		log('app.init')
 		if(options.mode == 'twilio') {
-			console.log('options.TwilioInstance', options.TwilioInstance)
 			Twilio = window.Twilio = options.TwilioInstance;
 			initWithTwilio(callback);
 		} else {
