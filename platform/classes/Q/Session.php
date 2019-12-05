@@ -802,7 +802,6 @@ class Q_Session
 		)) {
 			return false;
 		}
-		self::clearNonce();
 		if (! empty(self::$session_db_connection)) {
 			self::$session_db
 				->delete(self::$session_db_table)
@@ -904,18 +903,6 @@ class Q_Session
 		);
 		return true;
 	}
-
-	/**
-	 * Gets nonce from the session
-	 * @method getNonce
-	 * @return {string}
-	 */
-	static function getNonce()
-	{
-		return isset($_SESSION['Q']['nonce'])
-			? $_SESSION['Q']['nonce']
-			: null;
-	}
 	
 	/**
 	 * Calculates a nonce from a session id.
@@ -959,19 +946,6 @@ class Q_Session
 			);
 		}
 		Q_Session::$nonceWasSet = true;
-	}
-
-	/**
-	 * Clears the nonce in the session ['Q']['nonce'] field and in cookie 'Q_nonce'
-	 * @method clearNonce
-	 */
-	static function clearNonce($overwrite = false)
-	{
-		self::start();
-		$_SESSION['Q']['nonce'] = null;
-		if (!empty($_SERVER['HTTP_HOST'])) {
-			Q_Response::clearCookie('Q_nonce');
-		}
 	}
 
 	static function durationName()
