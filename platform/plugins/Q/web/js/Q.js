@@ -11495,11 +11495,15 @@ Q.Pointer = {
 	 * This is to good for preventing stray clicks from happening after an accidental scroll,
 	 * for instance if content changed after a tab was selected, and scrollTop became 0.
 	 * @method startCancelingClicksOnScroll
-	 * @param {
+	 * @param {Element} [element] If you skip this, all scrolling cancels clicks
 	 */
 	startCancelingClicksOnScroll: function (element) {
-		var sp = element.scrollingParent(true);
-		Q.addEventListener(sp, 'scroll', Q.Pointer.cancelClick);
+		if (element) {
+			var sp = element.scrollingParent(true);
+			Q.addEventListener(sp, 'scroll', _cancelClickBriefly);
+		} else {
+			Q.addEventListener(document.body, 'scroll', _cancelClickBriefly, true);
+		}
 	},
 	/**
 	 * Call this function to stop canceling clicks on the element or its scrolling parent.
@@ -11509,8 +11513,12 @@ Q.Pointer = {
 	 * @param {
 	 */
 	stopCancelingClicksOnScroll: function (element) {
-		var sp = element.scrollingParent(true);
-		Q.removeEventListener(sp, 'scroll', Q.Pointer.cancelClick);
+		if (element) {
+			var sp = element.scrollingParent(true);
+			Q.removeEventListener(sp, 'scroll', _cancelClickBriefly);
+		} else {
+			Q.removeEventListener(document.body, 'scroll', _cancelClickBriefly);
+		}
 	},
 	/**
 	 * This event occurs when a click has been canceled, for one of several possible reasons.
@@ -11539,6 +11547,13 @@ Q.Pointer = {
 		cancelClickDistance: 10
 	}
 };
+
+function _cancelClickBriefly() {
+	Q.Pointer.cancelClick();
+	setTimeout(function () {
+		Q.Pointer.canceledClick = false;
+	}, 100);
+}
 
 function _stopHint(img, container) {
 	var outside = (
