@@ -273,7 +273,7 @@ class Q_Valid
 		}
 		$gp = array_merge($_GET, $_POST);
 		$rn = Q_Request::special($snf, null, $gp);
-		if (!isset($sn) or $_SESSION['Q']['nonce'] != $rn) {
+		if (!isset($sn) or $rn !== Q_Session::calculateNonce()) {
 			if (!$throwIfInvalid) {
 				return false;
 			}

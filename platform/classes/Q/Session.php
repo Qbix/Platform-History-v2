@@ -916,28 +916,45 @@ class Q_Session
 			? $_SESSION['Q']['nonce']
 			: null;
 	}
+	
+	/**
+	 * Calculates a nonce from a session id.
+	 * @method calculateNonce
+	 * @param {string} [$sessionId] By default, uses current session id, if any
+	 * @return {string|null} the nonce, or null if no session is active
+	 */
+	static function calculateNonce($sessionId = null)
+	{
+		if (!isset($sessionId)) {
+			$sessionId = Q_Session::id();
+		}
+		if (!$sessionId) {
+			return null;
+		}
+		$secret = Q_Config::get('Q', 'internal', 'secret', null);
+		return hash_hmac('sha256', $sessionId, $secret);
+	}
 
 	/**
-	 * Sets a nonce in the session ['Q']['nonce'] field and in cookie 'Q_nonce'
+	 * Sets a nonce in cookie 'Q_nonce'.
+	 * The session data may not actually be saved, if there is nothing besides this nonce.
+	 * That's because the nonce can be verified deterministically from the session id.
 	 * @method setNonce
-	 * @param {boolean} [$overwrite=false] If true, sets a new nonce even if one is already there.
 	 * @param {boolean} [$startNewSession] If true, will create a new session even if
 	 *  the current session (from the Q_sessionId cookie) is missing or invalid.
 	 */
-	static function setNonce($overwrite = false, $startNewSession = null)
+	static function setNonce($startNewSession = null)
 	{
 		if (!isset($startNewSession)) {
 			$startNewSession = !Q_Request::isAjax() || !empty(Q_Request::special('startNewSession'));
 		}
 		self::start(!$startNewSession);
-		if ($overwrite or !isset($_SESSION['Q']['nonce'])) {
-			$_SESSION['Q']['nonce'] = Q_Utils::randomHexString(64);
-		}
+		$nonce = self::calculateNonce();
 		if (!empty($_SERVER['HTTP_HOST'])) {
 			$durationName = self::durationName();
 			$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
 			Q_Response::setCookie(
-				'Q_nonce', $_SESSION['Q']['nonce'], $duration ? time()+$duration : 0,
+				'Q_nonce', $nonce, $duration ? time()+$duration : 0,
 				null, null, false, false
 			);
 		}

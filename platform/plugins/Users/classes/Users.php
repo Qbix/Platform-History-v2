@@ -907,7 +907,7 @@ abstract class Users extends Base_Users
 		// Store the new information in the session
 		$snf = Q_Config::get('Q', 'session', 'nonceField', 'nonce');
 		$_SESSION['Users']['loggedInUser']['id'] = $user->id;
-		Q_Session::setNonce(true);
+		Q_Session::setNonce();
 		
 		$user->sessionCount = isset($user->sessionCount)
 			? $user->sessionCount + 1

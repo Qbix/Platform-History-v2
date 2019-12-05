@@ -13,7 +13,6 @@ var util = require('util');
 var events = require('events');
 var path = require('path');
 var fs = require('fs');
-var htmlEntities = require('html-entities').AllHtmlEntities;
 
 var root = this;
 var QConstructor = function QConstructor() {};
@@ -2488,11 +2487,8 @@ Q.view = function _Q_view(viewName, params, options) {
 
 	var textParams = Q.Text.params(parts, {'language': options.language});
 	params = Q.extend({}, 10, textParams, 10,  params);
-	
-	var result = Q.Handlebars.render(viewPath, params);
-	var entities = new htmlEntities();
+	return Q.Handlebars.render(viewPath, params);
 
-	return entities.decode(result);
 };
 /**
  * Check if a file exists in the include path
