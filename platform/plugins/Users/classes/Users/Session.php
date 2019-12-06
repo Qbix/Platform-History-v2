@@ -48,7 +48,6 @@ class Users_Session extends Base_Users_Session
 		if (isset($arr)) {
 			$fields = Q_Config::get('Q', 'session', 'userAgentInfo', array());
 			$_SESSION['Q'] = Q::take($sessionFields, $fields, $arr);
-			$_SESSION['Q']['nonce'] = sha1(mt_rand().microtime());
 		}
 
 		$us = new Users_Session();
