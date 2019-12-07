@@ -57,8 +57,7 @@ function Q_before_Q_responseExtras()
 	}
 
 	// Export more variables to inline js
-	$nonce = isset($_SESSION['Q']['nonce']) ? $_SESSION['Q']['nonce'] : null;
-	if ($nonce) {
+	if ($nonce = Q_Session::calculateNonce()) {
 		Q_Response::setScriptData('Q.nonce', $nonce);
 	}
 
