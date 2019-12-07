@@ -281,9 +281,32 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					});
 				}
 			}
+
+			function setUserAvatar(participant) {
+				var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
+
+				if(userId != null){
+					Q.Streams.Avatar.get(userId, function (err, avatar) {
+						if (!avatar) {
+							return;
+						}
+
+						var src = Q.url(avatar.iconUrl(400));
+						if(src != null) {
+							var avatarImg = new Image();
+							avatarImg.src = src;
+							participant.avatar = {src:src, image:avatarImg};
+						}
+
+
+					});
+				}
+			}
+
 			WebRTCconference.event.on('joined', function (participant) {
 				if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
 				setRealName(participant);
+				setUserAvatar(participant);
 			});
 
 			WebRTCconference.event.on('participantConnected', function (participant) {
@@ -291,6 +314,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				setRealName(participant, function(name){
 					notice.show("Joining: " + name.firstName);
 				});
+				setUserAvatar(participant);
 
 				//screensRendering.updateLayout();
 			});

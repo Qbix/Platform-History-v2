@@ -769,7 +769,7 @@ window.WebRTCconferenceLib = function app(options){
 				participant.soundMeter.audioTrack = track.mediaStreamTrack;
 				participant.soundMeter.source = participant.soundMeter.context.createMediaStreamSource(track.stream);
 				participant.soundMeter.analyser = participant.soundMeter.context.createAnalyser();
-				participant.soundMeter.analyser.fftSize = 256;
+				participant.soundMeter.analyser.fftSize = 1024;
 
 				participant.soundMeter.source.connect(participant.soundMeter.script);
 				participant.soundMeter.source.connect(participant.soundMeter.analyser);
@@ -788,7 +788,7 @@ window.WebRTCconferenceLib = function app(options){
 			}
 
 			participant.soundMeter.analyser = participant.soundMeter.context.createAnalyser();
-			participant.soundMeter.analyser.fftSize = 256;
+			participant.soundMeter.analyser.fftSize = 1024;
 
 			participant.soundMeter.source = participant.soundMeter.context.createMediaStreamSource(track.stream);
 			participant.soundMeter.source.connect(participant.soundMeter.script);
@@ -875,7 +875,7 @@ window.WebRTCconferenceLib = function app(options){
 					}
 
 					var historyLength = participant.soundMeter.history.volumeValues.length;
-					if(historyLength > 100) participant.soundMeter.history.volumeValues.splice(0, historyLength - 100);
+					if(historyLength > 256) participant.soundMeter.history.volumeValues.splice(0, historyLength - 256);
 					participant.soundMeter.history.volumeValues.push({
 						time: performance.now(),
 						value: participant.soundMeter.instant
@@ -892,8 +892,8 @@ window.WebRTCconferenceLib = function app(options){
 					var sum = latest500ms.reduce((a, b) => a + (b['value'] || 0), 0);
 					var average = (sum / 2);
 					if(!audioIsDisabled) {
-						participant.soundMeter.changedVolume = participant.soundMeter.instant / average * 100;
-					} else participant.soundMeter.changedVolume = 0;
+						participant.soundMeter.average500s = average;
+					} else participant.soundMeter.average500s = 0;
 
 
 
@@ -1659,11 +1659,13 @@ window.WebRTCconferenceLib = function app(options){
 							let videoToAdd = {
 								rect: startRect,
 								participant: participant,
-								name: participant.username
+								name: participant.username,
+								volumeHistory: [],
 							}
 
 							if(htmlVideoEl != null) videoToAdd.htmlVideoEl = htmlVideoEl;
 							if(mediaStream != null) videoToAdd.mediaStream = mediaStream;
+							if(participant.avatar != null) videoToAdd.avatar = participant.avatar.image;
 
 							requestAnimationFrame(function(timestamp){
 								let starttime = timestamp || new Date().getTime()
@@ -1810,65 +1812,48 @@ window.WebRTCconferenceLib = function app(options){
 					_inputCtx.font = "16px Arial";
 					_inputCtx.fillStyle = "white";
 					_inputCtx.fillText(data.name, data.rect.x + 10, data.rect.y + 36 + 16 - 18 - 8);
-
-					//_inputCtx.translate(-data.rect.x, -data.rect.y);
-
-					//var pixelData = _inputCtx.getImageData( 0, 0, videoWidth, videoHeight );
-
-					//_outputCtx.putImageData( pixelData, 0, 0);
-
 				}
 
 				function drawSingleAudioOnCanvas(localVideo, data, canvasWidth, canvasHeight) {
 					if(data.participant.online == false) return;
-					var participant = data.participant;
-
-					var analyser = participant.soundMeter.analyser;
-					var bufferLength = analyser.frequencyBinCount;
-					var dataArray = new Uint8Array(bufferLength);
-					analyser.getByteFrequencyData(dataArray);
-
-
-					var WIDTH = data.rect.width;
-					var HEIGHT = data.rect.height / 2;
-					var barWidth = (WIDTH / bufferLength) * 2.5;
-					var barsNum = Math.floor(data.rect.width / barWidth);
-					var barHeight;
-
-					//var x = data.rect.x;
-					var y = (data.rect.y + data.rect.height) - (data.rect.height / 2);
-					var x = ((data.rect.x + data.rect.width - data.rect.x) / 2) - barWidth + data.rect.x;
 
 					_inputCtx.clearRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
 
 					_inputCtx.fillStyle = "#000";
 					_inputCtx.fillRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
 
-					var lastRightX = x, lastLeftX = x, side = 'l';
-					for (var i = 0; i < bufferLength; i++) {
-						barHeight = dataArray[i];
+					//drawAudioVisualization(data);
 
-						var r = barHeight + (25 * (i/bufferLength));
-						var g = 250 * (i/bufferLength);
-						var b = 50;
+					var width, height;
+					if(data.avatar != null) {
+						var avatar = data.avatar;
+						width = avatar.width;
+						height = avatar.height;
 
-						_inputCtx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
-						_inputCtx.fillRect(x, y - (barHeight / 2), barWidth, barHeight);
+						var scale = Math.max( (data.rect.width / 2) / width,  (data.rect.height / 2) / height);
+						var scaledWidth = width * scale;
+						var scaledHeight = height * scale;
+						// get the top left position of the image
+						var x = data.rect.x + (( data.rect.width / 2) - (width / 2) * scale);
+						var y = data.rect.y + (( data.rect.height / 2) - (height / 2) * scale);
+						var size = Math.min(scaledHeight, scaledWidth);
+						var radius =  size / 2;
 
-						if(side == 'l') {
-							lastLeftX = x;
-							side = 'r';
+						_inputCtx.save();
+						_inputCtx.beginPath();
+						_inputCtx.arc(x + (size / 2), y + (size / 2), radius, 0, Math.PI * 2 , false); //draw the circle
+						_inputCtx.clip(); //call the clip method so the next render is clipped in last path
+						//_inputCtx.strokeStyle = "blue";
+						//_inputCtx.stroke();
+						_inputCtx.closePath();
 
-							x = lastRightX + barWidth + 1;
-							if(x + barWidth >= data.rect.x + data.rect.width) break;
-						} else if(side == 'r') {
-							lastRightX = x;
-							side = 'l';
+						_inputCtx.drawImage(avatar,
+							x, y,
+							width * scale, height * scale);
+						_inputCtx.restore();
 
-							x = lastLeftX - barWidth - 1;
-							if(x - barWidth <= data.rect.x) break;
-						}
 
+						drawCircleAudioVisualization(data, x, y, radius, scale, size);
 
 					}
 
@@ -1881,12 +1866,124 @@ window.WebRTCconferenceLib = function app(options){
 					_inputCtx.fillStyle = "white";
 					_inputCtx.fillText(data.name, data.rect.x + 10, data.rect.y + 36 + 16 - 18 - 8);
 
-					//_inputCtx.translate(-data.rect.x, -data.rect.y);
+				}
 
-					//var pixelData = _inputCtx.getImageData( 0, 0, videoWidth, videoHeight );
+				function drawCircleAudioVisualization(data, x, y, radius, scale, size) {
+					var analyser = data.participant.soundMeter.analyser;
+					if(analyser == null) return;
+					var bufferLength = analyser.frequencyBinCount;
+					var dataArray = new Uint8Array(bufferLength);
+					analyser.getByteFrequencyData(dataArray);
+					//just show bins with a value over the treshold
+					var threshold = 0;
+					// clear the current state
+					//_inputCtx.clearRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
+					//the max count of bins for the visualization
+					var maxBinCount = dataArray.length;
 
-					//_outputCtx.putImageData( pixelData, 0, 0);
+					_inputCtx.save();
+					_inputCtx.beginPath();
+					_inputCtx.rect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
+					_inputCtx.clip();
+					//_inputCtx.stroke();
 
+					_inputCtx.globalCompositeOperation='source-over';
+
+					//_inputCtx.scale(0.5, 0.5);
+					_inputCtx.translate(x + radius, y + radius);
+					_inputCtx.fillStyle = "#fff";
+
+					var bass = Math.floor(dataArray[1]); //1Hz Frequenz
+					var radius = (bass * 0.1 + radius);
+					//var radius =  size / 2  + (bass * 0.25);
+
+					//go over each bin
+					var x = x;
+					for ( var i = 0; i < maxBinCount; i++ ){
+
+						var value = dataArray[i];
+						var barHeight = value / 2;
+						if(Math.floor(barHeight) == 0) barHeight = 1;
+						/*var r = barHeight + (25 * (i/bufferLength));
+						var g = 250 * (i/bufferLength);
+						var b = 50;
+
+						_inputCtx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";*/
+						if (value >= threshold) {
+							_inputCtx.fillRect(0, -radius, 2, -barHeight);
+							_inputCtx.rotate(((180 / 128) * Math.PI / 180));
+						}
+					}
+
+					/*for ( var i = 0; i < maxBinCount; i++ ){
+
+						var value = dataArray[i];
+						if (value >= threshold) {
+							_inputCtx.rotate(-(180 / 128) * Math.PI / 180);
+							_inputCtx.fillRect(0, radius, 2, value / 2);
+						}
+					}
+
+					for ( var i = 0; i < maxBinCount; i++ ){
+
+						var value = dataArray[i];
+						if (value >= threshold) {
+							_inputCtx.rotate((180 / 128) * Math.PI / 180);
+							_inputCtx.fillRect(0, radius, 2, value / 2);
+						}
+					}*/
+
+
+					_inputCtx.restore();
+				}
+
+				function drawAudioVisualization(data) {
+					var analyser = data.participant.soundMeter.analyser;
+					if(analyser == null) return;
+					var bufferLength = analyser.frequencyBinCount;
+					var dataArray = new Uint8Array(bufferLength);
+					analyser.getByteFrequencyData(dataArray);
+
+					var WIDTH = data.rect.width;
+					var HEIGHT = data.rect.height / 2;
+					var barWidth = 2;
+					var barsNum = Math.floor(data.rect.width / barWidth);
+					var barHeight;
+
+					//var x = data.rect.x;
+					var y = data.rect.y + 36;
+					var x = ((data.rect.x + data.rect.width - data.rect.x) / 2) - barWidth + data.rect.x;
+
+					var lastRightX = x, lastLeftX = x, side = 'l';
+					for (var i = 0; i < bufferLength; i++) {
+						barHeight = dataArray[i] * 0.2;
+
+						//var r = barHeight + (25 * (i/bufferLength));
+						var r = '0';
+						//var g = 250 * (i/bufferLength);
+						var g = 250;
+						var b = 50;
+
+						_inputCtx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+						_inputCtx.fillRect(x, y - (barHeight / 2), barWidth, barHeight);
+
+						if(side == 'l') {
+							lastLeftX = x;
+							side = 'r';
+
+							x = lastRightX + barWidth + 1;
+
+							if(x + barWidth >= data.rect.x + data.rect.width) break;
+						} else if(side == 'r') {
+							lastRightX = x;
+							side = 'l';
+
+							x = lastLeftX - barWidth - 1;
+							if(x - barWidth <= data.rect.x) break;
+						}
+
+
+					}
 				}
 
 				function compositeVideosAndDraw() {
