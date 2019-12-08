@@ -253,7 +253,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 					}, state.inplaces);
 					Q.Tool.setUpElement(
 						f, 'Streams/inplace', opt,
-						tool.prefix+'Streams_inplace-'+vName, tool.prefix
+						'Streams_inplace-'+vName, tool.prefix
 					);
 					f.style.zIndex = --zIndex;
 					Q.activate(f);

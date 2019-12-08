@@ -443,6 +443,9 @@ class Q_Request
 			}
 		}
 		if ($type) {
+			if ($loadExtras === 'all') {
+				return true; // all extras
+			}
 			if (is_string($loadExtras)) {
 				$loadExtras = explode(',', $loadExtras);
 			}

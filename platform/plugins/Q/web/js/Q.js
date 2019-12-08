@@ -6521,7 +6521,7 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
 		what2 += (what2.indexOf('?') < 0) ? '?' : '&';
 		what2 += 'Q.ajax=' + encodeURIComponent(ajax);
 		if (options.loadExtras) {
-			var loadExtras = options.loadExtras === true ? 'page' : options.loadExtras;
+			var loadExtras = options.loadExtras === true ? 'all' : options.loadExtras;
 			what2 += '&Q.loadExtras=' + encodeURIComponent(loadExtras);
 		}
 		if (options.timestamp) {
