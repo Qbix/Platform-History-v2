@@ -172,14 +172,11 @@ class Q_Html
 	 * @param {string} [$onErrors=null] The URI or URL to redirect to in case of errors
 	 *  If you put "true" here, it uses Q_Request::special('onErrors', $uri),
 	 *  or if it's not there, then `Q_Dispatcher::uri()`
-	 * @param {string} [$sessionNonceField=null] The name of the nonce field to use in the session.
-	 *  If the config parameter "Q"/"session"/"nonceField" is set, uses that.
 	 * @return {string} The generated markup
 	 */
 	static function formInfo(
 	 $onSuccess,
-	 $onErrors = null,
-	 $sessionNonceField = null)
+	 $onErrors = null)
 	{
 		$uri = Q_Dispatcher::uri();
 		if ($onSuccess === true) {
@@ -195,14 +192,8 @@ class Q_Html
 		if (isset($onErrors)) {
 			$hiddenFields['Q.onErrors'] = Q_Uri::url($onErrors);
 		}
-		if (!isset($sessionNonceField)) {
-			$sessionNonceField = Q_Config::get('Q', 'session', 'nonceField', 'nonce');
-		}
 		if (isset($sessionNonceField)) {
-			if (!isset($_SESSION['Q'][$sessionNonceField])) {
-				$_SESSION['Q'][$sessionNonceField] = uniqid();
-			}
-			$hiddenFields['Q.nonce'] = $_SESSION['Q'][$sessionNonceField];
+			$hiddenFields['Q.nonce'] = Q_Response::calculateNonce();
 		}
 		return self::hidden($hiddenFields);
 	}
