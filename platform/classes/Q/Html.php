@@ -192,8 +192,8 @@ class Q_Html
 		if (isset($onErrors)) {
 			$hiddenFields['Q.onErrors'] = Q_Uri::url($onErrors);
 		}
-		if (isset($sessionNonceField)) {
-			$hiddenFields['Q.nonce'] = Q_Response::calculateNonce();
+		if ($nonce = Q_Response::calculateNonce()) {
+			$hiddenFields['Q.nonce'] = $nonce;
 		}
 		return self::hidden($hiddenFields);
 	}
