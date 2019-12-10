@@ -21,6 +21,8 @@ Q.Tool.define('Q/layouts', function (options) {
 	elementToWrap: null,
 	alternativeContainer: null,
 	customGenerators: [],
+	currentGenerator: [],
+	currentMappedRects: [],
 	filter: null,
 	key: null,
 	onLayout: new Q.Event()
@@ -93,11 +95,14 @@ Q.Tool.define('Q/layouts', function (options) {
 		var wrappingContainer = tool.state.alternativeContainer != null ? tool.state.alternativeContainer : tool.element;
 		var layout = g(wrappingContainer, elements.length);
 
+		tool.state.currentMappedRects = [];
+
 		if (container.computedStyle('position') === 'static') {
 			container.style.position = 'relative';
 		}
 		var rects = [];
 		var i, element;
+
 		for(i = 0; element = elements[i]; i++){
 			var layoutRect = layout[i];
 
@@ -119,31 +124,40 @@ Q.Tool.define('Q/layouts', function (options) {
 				element.style.width = '';
 			}*/
             rects.push(elementRect);
-
+            tool.state.currentMappedRects.push({rect: layoutRect, el: element});
 
 		}
 		if (this.animation) {
 			this.animation.pause();
 		}
 
+
 		this.animation = Q.Animation.play(function (x, y) {
 			Q.each(elements, function (i) {
+
 				var rect1 = rects[i];
 				var rect2 = layout[i];
 				var ts = elements[i].style;
+
+				if(ts.left == '') ts.left = rect2.left + 'px';
+				if(ts.top == '') ts.top = rect2.top + 'px';
+				if(ts.width == '') ts.width = rect2.width + 'px';
+				if(ts.height == '') ts.height = rect2.height + 'px';
 
                 var currentLeft = parseFloat(ts.left);
                 var currentTop = parseFloat(ts.top);
                 var currentWidth = parseFloat(ts.width);
                 var currentHeight = parseFloat(ts.height);
 
-                if(currentLeft !== rect2.left) ts.left = rect1.left + (rect2.left - rect1.left) * y + 'px';
+				if(currentLeft !== rect2.left) ts.left = rect1.left + (rect2.left - rect1.left) * y + 'px';
                 if(currentTop !== rect2.top) ts.top = rect1.top + (rect2.top - rect1.top) * y + 'px';
-                if((rect2.width != 0 && currentWidth != rect2.width) && currentWidth !== rect2.width) ts.width = rect1.width + (rect2.width - rect1.width) * y + 'px';
-                if((rect2.height != 0 && currentWidth != rect2.height) && currentHeight !== rect2.height) ts.height = rect1.height + (rect2.height - rect1.height) * y + 'px';
+
+
+				if((rect2.width != 0 && currentWidth != rect2.width) && currentWidth !== rect2.width) ts.width = rect1.width + (rect2.width - rect1.width) * y + 'px';
+                if((rect2.height != 0 && currentHeight != rect2.height) && currentHeight !== rect2.height) ts.height = rect1.height + (rect2.height - rect1.height) * y + 'px';
 			});
-			if(typeof cordova != "undefined" && window.device.platform === 'iOS') cordova.plugins.iosrtc.refreshVideos();
-		}, duration, ease)
+		}, duration, ease);
+		tool.state.currentGenerator = generator;
 	}
 });
 
@@ -227,7 +241,6 @@ var _generators = {
         return minimizedOrMaximizedHorizontalMobile(count, size);
 	},
 	minimizedVerticalMobile: function (container, count) {
-		console.log('minimizeVerticalMobile')
 		var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
         var size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
 

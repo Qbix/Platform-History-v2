@@ -971,9 +971,12 @@ and (max-device-width : 320px) {
     display: inline-block;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-screen-btns{
-    display: flex;
+    display: none;
     align-items: center;
     z-index:10;
+}
+.Streams_webrtc_desktop-screen .Streams_webrtc_maximized-main-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-screen-btns{
+    display: flex;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-screen-btns span{
     display: block;
@@ -1532,11 +1535,11 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
 }
 .Streams_webrtc_streaming {
     border-top: 1px solid #ccc;
-    padding: 5px 0 10px 0;
-    margin: 15px;
+    padding: 5px 0 25px 0;
+    margin: 15px 15px 0 15px;
 }
-webrtc_tool_popup-settings.Streams_webrtc_popup-box > div {
-    float:left;
+.Streams_webrtc_popup-box {
+    background: #fff;
 }
 .Streams_webrtc_popup-box .Streams_webrtc_choose-device h4,
 .dialog-box .Streams_webrtc_choose-device h4{
