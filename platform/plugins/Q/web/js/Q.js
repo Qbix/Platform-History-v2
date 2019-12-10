@@ -7812,7 +7812,7 @@ Q.sessionId = function () {
  */
 Q.clientId = function () {
 	var storage = sessionStorage;
-	if (Q.clientId.value = storage.getItem("Q\tclientId")) {
+	if (Q.clientId.value = storage.getItem("Q.clientId")) {
 		return Q.clientId.value;
 	}
 	var detected = Q.Browser.detect();
@@ -7822,7 +7822,7 @@ Q.clientId = function () {
 		+ "-" + Q.normalize(detected.name.substr(0, 3))
 		+ "-" + detected.mainVersion + (detected.isWebView ? "n" : "w")
 		+ "-" + code.toString(36);
-	storage.setItem("Q\tclientId", ret);
+	storage.setItem("Q.clientId", ret);
 	return ret;
 };
 
@@ -12538,7 +12538,142 @@ Q.Audio.stopSpeaking = function () {
 	} else if (root.speechSynthesis) {
 		root.speechSynthesis.pause();
 	}
-}
+};
+
+var rls = root.localStorage;
+
+/**
+ * Methods for working with storage and signaling across frames and windows
+ * @class Q.Frames
+ * @namespace Q
+ * @static
+ */
+Q.Frames = {
+	/**
+	 * An index that uniquely identifies this frame among all frames and windows
+	 * loaded from this domain.
+	 * @property index
+	 * @type {Number}
+	 */
+	index: null,
+	/**
+	 * Get the index of the "main" iframe, that will be the one opening
+	 * sockets, making requests to the server, and triggering any callbacks
+	 * in the other "client" iframes.
+	 * @method mainIndex
+	 * @static
+	 * @return {Integer} 
+	 */
+	mainIndex: function () {
+		return parseInt(rls.getItem(Q.Frames.mainIndexKey));
+	},
+	/**
+	 * Send some message to all other frames on this domain.
+	 * This will trigger their onMessage() event with the data.
+	 * @method message
+	 * @static
+	 * @param {Object} data Will be JSON-encoded for transmitting via localStorage
+	 * @param {Integer} [index] Place the index of a specific frame here,
+	 *  such as the return value of Q.Frames.main(), to message only this frame.
+	 *  Otherwise it will be broadcast to all other frames.
+	 * @param {Function} [callback] If index is provided, then you can optionally
+	 *  pass a callback here whose first parameter will be false if the message was not handled
+	 *  by the frame with that index (because it was unloaded), or true if it was handled.
+	 */
+	message: function (data, index, callback) {
+		var messageIndex;
+		rls.setItem(Q.Frames.message.counterKey,
+			messageIndex = ((parseInt(rls.getItem(Q.Frames.message.counterKey)) || 0) + 1) % 1000000
+		);
+		var value = {
+			data: data,
+			toIndex: index || null,
+			fromIndex: Q.Frames.index,
+			messageIndex: messageIndex,
+			rand: Math.random().toString(36).substring(7)
+			// rand is to make it unique and trigger "storage" event
+		};
+		rls.setItem(Q.Frames.message.key, JSON.stringify(value));
+		rls.removeItem(Q.Frames.message.key); // just to keep things clean
+		if (callback) {
+			Q.Frames.message.callbacks[messageIndex] = callback;
+			setTimeout(function () {
+				var cb = Q.Frames.message.callbacks[messageIndex];
+				if (cb) {
+					callback(false); // it's been 100 ms and it hasn't been handled
+					delete Q.Frames.message.callbacks[messageIndex];
+				}
+			}, 100);
+		}
+	},
+	/**
+	 * This event occurs when Q.Frames.message() was called in one of the frames
+	 * to send some data.
+	 * @event onMessage
+	 * @param {Object} data the data that was passed.
+	 * @param {Integer} fromIndex The index of the frame from which it was sent
+	 * @param {Boolean} wasBroadcast Whether it was broadcast to all frames
+	 */
+	onMessage: new Q.Event(function (data, fromIndex, wasBroadcast) {
+		if (wasBroadcast && data && data["Q.needNewMainIndex"]) {
+			if (!rls.getItem(Q.Frames.mainIndexKey)) {
+				// indicate this frame as the main one, if no one else has
+				rls.setItem(Q.Frames.mainIndexKey, Q.Frames.index);
+			}
+		}
+	}, 'Q.Frames')
+};
+
+Q.Frames.mainIndexKey = "Q.Frames.mainIndex";
+Q.Frames.counterKey = "Q.Frames.counter";
+Q.Frames.message.key = "Q.Frames.message";
+Q.Frames.message.handledKey = "Q.Frames.message.handled";
+Q.Frames.message.counterKey = "Q.Frames.message.counter";
+Q.Frames.message.callbacks = {};
+
+(function () {
+	rls.setItem(Q.Frames.counterKey,
+		Q.Frames.index = (parseInt(rls.getItem(Q.Frames.counterKey) || 0) + 1) % 1000000
+	);
+	if (!rls.getItem(Q.Frames.mainIndexKey)) {
+		// indicate this frame as the main one, if no one else has
+		rls.setItem(Q.Frames.mainIndexKey, Q.Frames.index);
+	}
+	Q.addEventListener(window, 'storage', function (e) {
+		var handledKey = Q.Frames.message.handledKey;
+		if (e.key === handledKey) {
+			var cb, mi = e.newValue;
+			if (mi != null) {
+				// signal arrived indicating some messageIndex was handled
+				if (cb = Q.Frames.message.callbacks[mi]) {
+					cb(true);
+					delete Q.Frames.message.callbacks[mi];
+				}
+			}
+			return;
+		}
+		if (e.key !== Q.Frames.message.key
+		|| e.newValue == null) {
+			return;
+		}
+		var value = JSON.parse(e.newValue);
+		if (value.toIndex && value.toIndex !== Q.Frames.index) {
+			return;
+		}
+		rls.setItem(handledKey, value.messageIndex); // signal that it was handled
+		rls.removeItem(handledKey); // just to keep things clean
+		Q.Frames.onMessage.handle.call(
+			Q, value.data, value.fromIndex, value.toIndex == null
+		);
+	});
+	Q.onUnload.set(function () {
+		if (Q.Frames.mainIndex() !== Q.Frames.index) {
+			return;
+		}
+		rls.removeItem(Q.Frames.mainIndexKey);
+		Q.Frames.message({"Q.needNewMainIndex": true});
+	}, 'Q.Frames');
+})();
 
 /**
  * Methods for temporarily covering up certain parts of the screen with masks
