@@ -28,6 +28,8 @@
 		staticMaximizeOff: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#8C8C8C" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"/>  <g>   <g>    <path fill="#FFFFFF" d="M73.238,74.392h-21.52c-0.663,0-1.2-0.537-1.2-1.2s0.537-1.2,1.2-1.2h20.319V30.007H29.97v20.111     c0,0.663-0.538,1.2-1.2,1.2s-1.2-0.537-1.2-1.2V28.807c0-0.663,0.538-1.2,1.2-1.2h44.468c0.663,0,1.2,0.538,1.2,1.2v44.384     C74.438,73.854,73.901,74.392,73.238,74.392z"/>   </g>   <g>    <path fill="#FFFFFF" d="M49.758,53.38c-0.307,0-0.614-0.117-0.849-0.352c-0.469-0.469-0.468-1.229,0-1.697l14.785-14.776     c0.47-0.469,1.229-0.468,1.697,0c0.469,0.469,0.469,1.229,0,1.697L50.606,53.028C50.372,53.263,50.065,53.38,49.758,53.38z"/>   </g>   <g>    <path fill="#FFFFFF" d="M65.046,48.662c-0.663,0-1.2-0.538-1.2-1.2v-9.359h-9.359c-0.663,0-1.2-0.538-1.2-1.2s0.537-1.2,1.2-1.2     h10.56c0.663,0,1.2,0.538,1.2,1.2v10.56C66.246,48.124,65.709,48.662,65.046,48.662z"/>   </g>   <g>    <path fill="#FFFFFF" d="M44.989,74.392H28.77c-0.663,0-1.2-0.537-1.2-1.2V56.982c0-0.663,0.538-1.2,1.2-1.2h16.219     c0.663,0,1.2,0.537,1.2,1.2v16.209C46.189,73.854,45.651,74.392,44.989,74.392z M29.97,71.991h13.818V58.183H29.97V71.991z"/>   </g>  </g>  </svg>',
 		facebooklogo: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#1877F2" d="M50,0C22.3857422,0,0,22.3857422,0,50c0,25.6513672,19.3173828,46.7910156,44.1982422,49.6660156   c0-11.5039063,0-23.0068359,0-34.5107422c-4.2099609-0.03125-8.5439453,0.0625-12.6748047-0.046875   c0.03125-4.7861328-0.0625-9.6972656,0.0458984-14.4052734c4.2099609,0,8.4189453,0,12.6289063,0   c0.1933594-5.2246094-0.3769531-10.6503906,0.2802734-15.0605469c1.2792969-8.5859375,6.7324219-14.1972656,15.5751953-15.1542969   c4.7587891-0.5146484,9.7216797,0.1660156,14.171875,0.8427734c-0.03125,4.0683594,0.0615234,8.2626953-0.046875,12.2539063   c-2.7724609,0.0996094-5.40625-0.1748047-7.7646484,0.09375c-2.2597656,0.2558594-3.9492188,1.1113281-5.1445313,2.7119141   c-1.2519531,1.6767578-1.4501953,3.5166016-1.4501953,6.4082031c0,2.5195313,0,5.3271484,0,7.9042969   c4.5839844,0.03125,9.2919922-0.0625,13.7978516,0.046875c-0.734375,4.8164063-1.4101563,9.6894531-2.2451172,14.4052734   c-3.8505859,0-7.7011719,0-11.5527344,0c0,11.2939453,0,22.5869141,0,33.8808594C82.7314453,94.4726563,100,74.2529297,100,50   C100,22.3857422,77.6142578,0,50,0z"/>  <path fill="#FFFFFF" d="M71.3720703,65.1552734c0.8349609-4.7158203,1.5107422-9.5888672,2.2451172-14.4052734   c-4.5058594-0.109375-9.2138672-0.015625-13.7978516-0.046875c0-2.5771484,0-5.3847656,0-7.9042969   c0-2.8916016,0.1982422-4.7314453,1.4501953-6.4082031c1.1953125-1.6005859,2.8847656-2.4560547,5.1445313-2.7119141   c2.3583984-0.2685547,4.9921875,0.0058594,7.7646484-0.09375c0.1083984-3.9912109,0.015625-8.1855469,0.046875-12.2539063   c-4.4501953-0.6767578-9.4130859-1.3574219-14.171875-0.8427734c-8.8427734,0.9570313-14.2958984,6.5683594-15.5751953,15.1542969   c-0.6572266,4.4101563-0.0869141,9.8359375-0.2802734,15.0605469c-4.2099609,0-8.4189453,0-12.6289063,0   c-0.1083984,4.7080078-0.0146484,9.6191406-0.0458984,14.4052734c4.1308594,0.109375,8.4648438,0.015625,12.6748047,0.046875   c0,11.5039063,0,23.0068359,0,34.5107422C46.1015625,99.8867188,48.0371094,100,50,100   c3.3613281,0,6.6445313-0.3320313,9.8193359-0.9638672c0-11.2939453,0-22.5869141,0-33.8808594   C63.6708984,65.1552734,67.5214844,65.1552734,71.3720703,65.1552734z"/>  </svg> ',
 		facebookLive: '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" viewBox="-0.625 -0.0761719 101 101"    enable-background="new -0.625 -0.0761719 101 101" xml:space="preserve">  <defs>  </defs>  <circle fill="#4373B9" cx="50" cy="50" r="50"/>  <path fill="#FFFFFF" d="M38.4082031,63.8222656h2.2822266c0.7070313,0,1.2797852-0.5722656,1.2802734-1.2797852   l0.0019531-25.0449219c0.0004883-0.7070313-0.5727539-1.2792969-1.2792969-1.2792969l-2.2827148-0.0004883l-20.9248047-0.0019531   l-2.2832031-0.0004883c-0.7045898,0-1.2753906,0.5698242-1.2788086,1.2734375L13.921875,60.2573242l-0.0004883,2.2851563   c0.0009766,0.7055664,0.5727539,1.277832,1.2792969,1.277832"/>  <path fill="#FFFFFF" d="M80.6865234,63.7851563l3.4536133,0.0004883c1.0693359,0,1.9360352-0.5732422,1.9365234-1.2802734   l0.0019531-25.0444336c0-0.7070313-0.8662109-1.2797852-1.9355469-1.2807617h-3.4541016L49.03125,36.1787109l-3.4545898-0.0009766   c-1.0664063,0-1.9306641,0.5693359-1.9350586,1.2729492l-0.0014648,22.7685547l-0.0019531,2.284668   c0.0029297,0.7060547,0.8676758,1.277832,1.9360352,1.277832"/>  <path fill="#4373B9" d="M48.2314453,42.8789063h1.8564453v12.6665039h6.0693359v1.5385742h-7.9257813V42.8789063z"/>  <path fill="#4373B9" d="M60.0351563,42.8789063v14.2050781h-1.8564453V42.8789063H60.0351563z"/>  <path fill="#4373B9" d="M66.3564453,57.0839844l-4.6577148-14.2050781h2.003418l2.2119141,6.9970703   c0.5898438,1.9179688,1.1162109,3.6455078,1.5170898,5.3110352h0.043457   c0.3989258-1.6435547,0.9682617-3.4350586,1.6225586-5.2900391L71.5,42.8789063h1.9589844l-5.0791016,14.2050781H66.3564453z"/>  <path fill="#4373B9" d="M82.3305664,50.4238281h-5.5004883v5.121582h6.1557617v1.5385742h-8.0107422V42.8789063h7.6938477v1.5385742   h-5.8388672V48.90625h5.5004883V50.4238281z"/>  <path fill="#4373B9" d="M29.3564453,63.8212891l0.0004883-11.0820313l-3.6538086-0.0004883l0.0004883-3.8188477l3.6538086,0.0009766   l0.0009766-4.1469727c0-2.4848633,2.2539063-4.1538086,4.0712891-4.1538086h4.0908203L37.5195313,44.09375h-1.8867188   c-0.9301758,0-2.1694336,0.7548828-2.1694336,1.6835938l-0.0004883,3.1435547l3.6855469,0.0004883l-0.0004883,3.8183594   l-3.6855469-0.0004883l-0.0004883,11.0820313H29.3564453z"/>  </svg>',
+		dragIconOff: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#8C8C8C" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"/>  <path fill="#FFFFFF" d="M66.508,39.37c-1.358,0-2.59,0.571-3.465,1.486l0.012-1.438c0.02-2.646-2.116-4.814-4.798-4.834   c-1.359,0-2.592,0.573-3.467,1.49l0.002-0.192c0.019-2.644-2.118-4.811-4.799-4.832c-1.359,0-2.59,0.572-3.466,1.487l0.089-11.674   c0.011-1.284-0.481-2.494-1.383-3.407c-0.899-0.911-2.099-1.418-3.417-1.428c-2.623,0-4.774,2.135-4.794,4.76l-0.261,34.258   l-4.639-2.011c-1.242-0.547-3.103-1.274-4.923-1.274c-1.11,0-2.106,0.265-2.972,0.793c-1.196,0.742-2.032,1.924-2.356,3.327   c-0.346,1.502-0.057,3.137,0.793,4.487l0.202,0.32l0.319,0.202c2.809,1.794,10.573,7.182,12.745,10.537   c3.75,5.805,9.523,8.656,17.651,8.718l0.227,0.001c0.001,0,0.002,0,0.003,0c16.4,0,17.334-13.387,17.354-16.07l0.151-19.873   C71.337,41.559,69.196,39.391,66.508,39.37z M38.697,58.021c0.136-0.089,0.219-0.239,0.22-0.402l0.281-36.814   c0.011-1.434,1.186-2.601,2.64-2.601c0.699,0.005,1.355,0.283,1.847,0.781c0.492,0.499,0.761,1.16,0.755,1.861l-0.201,26.45   c-0.005,0.835,0.671,1.52,1.518,1.525c0.836,0,1.521-0.674,1.528-1.503l0.086-11.492c0.011-1.434,1.188-2.6,2.641-2.6   c1.446,0.011,2.614,1.195,2.604,2.639l-0.087,11.491c-0.004,0.403,0.151,0.784,0.436,1.072c0.287,0.292,0.672,0.453,1.095,0.455   c0.833,0,1.514-0.675,1.518-1.503l0.063-8.017c0.01-1.436,1.185-2.603,2.638-2.603c0.702,0.005,1.359,0.282,1.85,0.78   c0.49,0.499,0.758,1.16,0.752,1.861l-0.077,10.096c-0.004,0.836,0.678,1.521,1.528,1.526c0.831,0,1.511-0.675,1.516-1.503   l0.042-5.372c0.011-1.435,1.186-2.602,2.642-2.602c1.451,0.012,2.624,1.197,2.613,2.642L68.99,64.059   c-0.018,2.323-0.833,13.913-15.182,13.912L53.6,77.97c-7.44-0.057-12.474-2.511-15.841-7.723   c-2.763-4.268-12.189-10.409-13.308-11.13c-0.501-0.844-0.668-1.84-0.459-2.748c0.192-0.834,0.683-1.532,1.38-1.965   c0.515-0.314,1.113-0.468,1.827-0.468c1.41,0,2.984,0.622,4.048,1.091l6.991,3.032C38.388,58.123,38.56,58.11,38.697,58.021z"/>  </svg> ',
+		dragIconOn: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#4AAA4E" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"/>  <path fill="#FFFFFF" d="M66.508,39.37c-1.358,0-2.59,0.571-3.465,1.486l0.012-1.438c0.02-2.646-2.116-4.814-4.798-4.834   c-1.359,0-2.592,0.573-3.467,1.49l0.002-0.192c0.019-2.644-2.118-4.811-4.799-4.832c-1.359,0-2.59,0.572-3.466,1.487l0.089-11.674   c0.011-1.284-0.481-2.494-1.383-3.407c-0.899-0.911-2.099-1.418-3.417-1.428c-2.623,0-4.774,2.135-4.794,4.76l-0.261,34.258   l-4.639-2.011c-1.242-0.547-3.103-1.274-4.923-1.274c-1.11,0-2.106,0.265-2.972,0.793c-1.196,0.742-2.032,1.924-2.356,3.327   c-0.346,1.502-0.057,3.137,0.793,4.487l0.202,0.32l0.319,0.202c2.809,1.794,10.573,7.182,12.745,10.537   c3.75,5.805,9.523,8.656,17.651,8.718l0.227,0.001c0.001,0,0.002,0,0.003,0c16.4,0,17.334-13.387,17.354-16.07l0.151-19.873   C71.337,41.559,69.196,39.391,66.508,39.37z M38.697,58.021c0.136-0.089,0.219-0.239,0.22-0.402l0.281-36.814   c0.011-1.434,1.186-2.601,2.64-2.601c0.699,0.005,1.355,0.283,1.847,0.781c0.492,0.499,0.761,1.16,0.755,1.861l-0.201,26.45   c-0.005,0.835,0.671,1.52,1.518,1.525c0.836,0,1.521-0.674,1.528-1.503l0.086-11.492c0.011-1.434,1.188-2.6,2.641-2.6   c1.446,0.011,2.614,1.195,2.604,2.639l-0.087,11.491c-0.004,0.403,0.151,0.784,0.436,1.072c0.287,0.292,0.672,0.453,1.095,0.455   c0.833,0,1.514-0.675,1.518-1.503l0.063-8.017c0.01-1.436,1.185-2.603,2.638-2.603c0.702,0.005,1.359,0.282,1.85,0.78   c0.49,0.499,0.758,1.16,0.752,1.861l-0.077,10.096c-0.004,0.836,0.678,1.521,1.528,1.526c0.831,0,1.511-0.675,1.516-1.503   l0.042-5.372c0.011-1.435,1.186-2.602,2.642-2.602c1.451,0.012,2.624,1.197,2.613,2.642L68.99,64.059   c-0.018,2.323-0.833,13.913-15.182,13.912L53.6,77.97c-7.44-0.057-12.474-2.511-15.841-7.723   c-2.763-4.268-12.189-10.409-13.308-11.13c-0.501-0.844-0.668-1.84-0.459-2.748c0.192-0.834,0.683-1.532,1.38-1.965   c0.515-0.314,1.113-0.468,1.827-0.468c1.41,0,2.984,0.622,4.048,1.091l6.991,3.032C38.388,58.123,38.56,58.11,38.697,58.021z"/>  </svg> '
 	}
 
 	var ua=navigator.userAgent;
@@ -140,6 +142,12 @@
 					var participantsCount = tool.WebRTCLib.roomParticipants().length;
 					tool.usersCounter.innerHTML = participantsCount;
 				});
+				tool.WebRTCLib.event.on('screenAdded', function (e) {
+					tool.participantsPopup().update(e.participant);
+				});
+				tool.WebRTCLib.event.on('screenRemoved', function (e) {
+					tool.participantsPopup().update(e.participant);
+				});
 				tool.WebRTCLib.event.on('trackAdded', function () {
 					tool.updateControlBar();
 				});
@@ -203,7 +211,7 @@
 						title: 'Instructions',
 						className: 'Streams_webrtc_devices_dialog',
 						content: instructionsPermissionDialog,
-						apply: true,
+						apply: true
 					});
 			},
 
@@ -222,7 +230,7 @@
 						title: 'Instructions',
 						className: 'Streams_webrtc_devices_dialog',
 						content: instructionsPermissionDialog,
-						apply: true,
+						apply: true
 					});
 			},
 			showBrowserPermissionsInstructions: function(kind) {
@@ -237,7 +245,7 @@
 					title: 'Instructions',
 					className: 'Streams_webrtc_devices_dialog',
 					content: instructionsPermissionDialog,
-					apply: true,
+					apply: true
 				});
 			},
 
@@ -466,7 +474,7 @@
 										movable: true,
 										activateOnElement: dialogTitle,
 										resizeByWheel: false,
-										active: true,
+										active: true
 									}
 								),
 								{},
@@ -561,7 +569,7 @@
 									"Streams/chat",
 									{
 										publisherId:tool.WebRTCClass.options().roomPublisherId,
-										streamName:'Streams/webrtc/' + tool.WebRTCClass.options().roomId,
+										streamName:'Streams/webrtc/' + tool.WebRTCClass.options().roomId
 									}
 								)
 							),
@@ -610,7 +618,7 @@
 								tool.textChatBtn.parentNode.classList.remove('Streams_webrtc_hover');
 								tool.textChat.chatTool.seen(false);
 								tool.textChat.isHidden = true;
-							}, 300)
+							}, 400)
 						});
 
 
@@ -651,7 +659,7 @@
 								tool.textChatBtn.parentNode.classList.remove('Streams_webrtc_hover');
 								tool.textChat.chatTool.seen(false);
 								tool.textChat.isHidden = true;
-							}, 300)
+							}, 400)
 
 						});
 					}
@@ -659,7 +667,7 @@
 				}
 
 				return {
-					init: init,
+					init: init
 				}
 			},
 
@@ -821,22 +829,20 @@
 
 				if(!activeViewMode || tool.WebRTCLib.screens().length == 0) return;
 				var viewModeToApply;
-				if(activeViewMode == 'minimized' || activeViewMode == 'maximized' || activeViewMode == 'maximizedMobile') {
+				if(activeViewMode == 'minimized' || activeViewMode == 'maximized' || activeViewMode == 'maximizedMobile' || activeViewMode == 'minimizedMobile') {
 					if(tool.state.loudestMode == 'all') {
 						viewModeToApply = 'loudest';
 					} else if(tool.state.loudestMode == 'allButMe') {
 						viewModeToApply = 'loudestExceptMe';
 					} else {
-						if(activeViewMode == 'minimized'){
-							viewModeToApply = null;
-						} else {
-							viewModeToApply = 'maximizeStatic';
-						}
+						viewModeToApply = 'maximizeStatic';
 					}
 				} else if(activeViewMode == 'tiled' || activeViewMode == 'tiledMobile') {
 					viewModeToApply = 'tiledView';
 				} else if(activeViewMode == 'regular') {
 					viewModeToApply = 'floatingView';
+				} else if(activeViewMode == 'manual') {
+					viewModeToApply = 'manual';
 				}
 
 				for(var b in buttonsArr) {
@@ -1321,7 +1327,7 @@
 						}
 						tool.hoverTimeout.setttingsPopup = setTimeout(function () {
 							tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
-						}, 300)
+						}, 400)
 					});
 
 					settingsPopup.addEventListener('mouseenter', function (e) {
@@ -1334,7 +1340,7 @@
 					settingsPopup.addEventListener('mouseleave', function (e) {
 						setTimeout(function () {
 							tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
-						}, 300)
+						}, 400)
 
 					});
 				}
@@ -1360,6 +1366,7 @@
 					this.isVideoMuted = null;
 					this.manuallyToggled = false;
 					this.audioToggledManually = false;
+					this.isActive = false;
 					this.toggleAudio = function (manually) {
 						var participant = this.participant;
 						var enabledAudioTracks = participant.tracks.filter(function (t) {
@@ -1425,33 +1432,14 @@
 						}
 					};
 					this.muteVideo = function () {
-						var participant = this.participant;
-
-						/*for(var i in participant.tracks) {
-							var track = participant.tracks[i];
-							if(track.kind != 'video') continue;
-							track.trackEl.pause();
-							track.trackEl.srcObject = null;
-						}*/
 						this.videoBtnEl.innerHTML = listIcons.disabledScreen;
 						this.isVideoMuted = true;
+						this.isActive = false;
 					};
 					this.unmuteVideo = function () {
-						var participant = this.participant;
-						/*for(var i in participant.tracks) {
-							var track = participant.tracks[i];
-							if(track.kind != 'video') continue;
-							if(track.stream != null) {
-								track.trackEl.srcObject = track.stream;
-							} else {
-								var stream = new MediaStream()
-								stream.addTrack(track.mediaStreamTrack)
-								track.trackEl.srcObject = stream;
-								track.stream = track.trackEl.srcObject;
-							}
-						}*/
 						this.videoBtnEl.innerHTML = listIcons.screen;
 						this.isVideoMuted = false;
+						this.isActive = true;
 					};
 					this.muteAudio = function () {
 						if(this.isAudioMuted == true) return;
@@ -1497,64 +1485,82 @@
 							return t.kind == 'video' && t.mediaStreamTrack != null;
 						}).length;
 
-						if(enabledVideoTracks == 0 && !this.isActive) return;
 
-						for(var i in screens) {
-							//if(screens[i].screenEl.parentNode != null) {
-								//screens[i].screenEl.parentNode.removeChild(screens[i].screenEl)
-							this.manuallyToggled = false;
-								if(screens[i].screenEl.style.display == 'none') {
-									this.showScreen(screens[i]);
-								} else {
-									this.removeScreen(screens[i]);
-									screens[i].isActive = false;
-								}
-							this.manuallyToggled = manually;
-							//}
+						this.manuallyToggled = manually;
+						if(this.isActive == false) {
+							this.showPartcicipantScreens(manually);
+						} else {
+							this.removePartcicipantScreens();
 						}
 
 					};
-					this.removeScreen = function (screen) {
-						if(this.isActive === false || screen.videoIsChanging === true || this.manuallyToggled) return;
-						//if(screen.screenEl.parentNode != null) {
-						if(screen.screenEl.parentNode != null) screen.screenEl.parentNode.removeChild(screen.screenEl);
-
-						screen.screenEl.style.display = 'none';
-							this.isActive = false;
-							this.muteVideo();
-							tool.state.webrtcClass.screenRendering.updateLayout();
-
-						//}
+					this.removePartcicipantScreens = function () {
+						var screens = this.participant.screens;
+						for(var s in screens) {
+							let screen = screens[s];
+							screen.hide();
+						}
+						tool.WebRTCClass.screenRendering.updateLayout();
+						this.muteVideo();
 					};
-					this.showScreen = function (screen) {
-						if(this.isActive === true || this.manuallyToggled) return;
-						//if(screen.screenEl.parentNode != null) {
-							screen.screenEl.style.display = '';
+					this.showPartcicipantScreens = function (manually) {
 
-						this.isActive = true;
-							this.unmuteVideo();
-							tool.state.webrtcClass.screenRendering.updateLayout();
-						//}
+						var screens = this.participant.screens;
+						for(var s in screens) {
+							let screen = screens[s];
+
+							var hasNoVideo = screen.videoTrack == null || (screen.videoTrack != null && screen.videoTrack.videoWidth == 0 && screen.videoTrack.videoHeight == 0);
+							if(hasNoVideo && manually) {
+								tool.WebRTCClass.notice.show('Participant has not video');
+								return;
+							} else if(hasNoVideo && !screen.videoIsChanging) {
+								return;
+							}
+							screen.show();
+
+						}
+						tool.WebRTCClass.screenRendering.updateLayout();
+						this.unmuteVideo();
 					};
 				}
 
-				function showScreen(screen) {
+				function showScreen(screen, manually) {
 					var i, listItem;
 					for (i = 0; listItem = tool.participantsList[i]; i++){
 						if(listItem.participant != screen.participant) continue;
 
 						screen.isActive = true;
-						listItem.showScreen(screen);
+						listItem.showPartcicipantScreens(manually);
 					}
+				}
+				function update(participant) {
+					for(let i in tool.participantsList) {
+						let item = tool.participantsList[i];
+						if(participant != item.participant) continue;
+
+						let activeScreens = 0;
+						for(let s in participant.screens) {
+							if(participant.screens[s].isActive) {
+								activeScreens++;
+							}
+						}
+						if(activeScreens == 0) {
+							item.muteVideo();
+						} else {
+							item.unmuteVideo();
+						}
+						break;
+					}
+
 				}
 
 				var listIcons = {
-					loudSpeaker: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0 0 99.5 99.5" enable-background="new 0 0 99.5 99.5" xml:space="preserve">  <path fill="#C12337" d="M49.749,99.5C22.317,99.5,0,77.18,0,49.749C0,22.317,22.317,0,49.749,0S99.5,22.317,99.5,49.749   C99.5,77.18,77.182,99.5,49.749,99.5z"/>  <g>   <g id="Layer_2">    <path fill="#FFFFFF" d="M36.463,39.359l10.089-7.573c0.049-0.028,0.095-0.062,0.146-0.084c0.141-0.059,0.184-0.047,0.333-0.051     c0.055,0.012,0.11,0.024,0.165,0.037c0.05,0.025,0.104,0.044,0.151,0.075c0.046,0.031,0.09,0.068,0.127,0.11     c0.077,0.084,0.131,0.186,0.159,0.295c0.013,0.055,0.013,0.112,0.021,0.168v35.382c-0.019,0.148-0.01,0.191-0.082,0.326     c-0.026,0.049-0.06,0.097-0.098,0.14c-0.076,0.084-0.172,0.146-0.279,0.187c-0.053,0.018-0.109,0.029-0.165,0.034     c-0.056,0.007-0.114,0.005-0.169-0.004c-0.15-0.021-0.18-0.058-0.31-0.131l-10.089-7.571h-8.544     c-0.06-0.009-0.121-0.009-0.179-0.023c-0.058-0.016-0.114-0.039-0.166-0.067c-0.105-0.06-0.192-0.147-0.252-0.251     c-0.03-0.053-0.053-0.109-0.069-0.167c-0.015-0.058-0.016-0.118-0.023-0.179V40.047c0.007-0.06,0.008-0.121,0.023-0.178     c0.016-0.058,0.039-0.114,0.069-0.166c0.03-0.052,0.067-0.1,0.109-0.143c0.086-0.086,0.192-0.147,0.309-0.179     c0.058-0.016,0.119-0.016,0.179-0.023L36.463,39.359L36.463,39.359z"/>   </g>   <g>    <path fill="#FFFFFF" d="M56.589,61.012c-0.25,0-0.502-0.095-0.695-0.283c-0.396-0.386-0.406-1.019-0.021-1.413     c9.074-9.354,0.39-18.188,0.017-18.559c-0.396-0.389-0.396-1.022-0.009-1.415c0.392-0.392,1.024-0.393,1.414-0.005     c0.106,0.105,10.449,10.615,0.016,21.372C57.111,60.91,56.851,61.012,56.589,61.012z"/>   </g>   <g>    <path fill="#FFFFFF" d="M62.776,66.321c-0.251,0-0.502-0.094-0.694-0.282c-0.396-0.385-0.406-1.019-0.021-1.414     c14.264-14.703,0.602-28.596,0.014-29.181c-0.393-0.389-0.395-1.022-0.006-1.414c0.391-0.392,1.023-0.393,1.414-0.005     c0.158,0.157,15.637,15.888,0.014,31.991C63.298,66.218,63.039,66.321,62.776,66.321z"/>   </g>   <g>    <path fill="#FFFFFF" d="M68.638,70.759c-0.251,0-0.502-0.094-0.696-0.28c-0.396-0.386-0.405-1.019-0.021-1.414     c18.602-19.175,0.781-37.297,0.014-38.06c-0.393-0.389-0.395-1.022-0.006-1.414c0.39-0.392,1.023-0.394,1.414-0.005     c0.201,0.2,19.975,20.294,0.014,40.871C69.16,70.66,68.898,70.759,68.638,70.759z"/>   </g>  </g>  </svg>',
+					loudSpeaker: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0 0 99.5 99.5" enable-background="new 0 0 99.5 99.5" xml:space="preserve">  <path fill="#4AAA4E" d="M49.749,99.5C22.317,99.5,0,77.18,0,49.749C0,22.317,22.317,0,49.749,0S99.5,22.317,99.5,49.749   C99.5,77.18,77.182,99.5,49.749,99.5z"/>  <g>   <g id="Layer_2">    <path fill="#FFFFFF" d="M36.463,39.359l10.089-7.573c0.049-0.028,0.095-0.062,0.146-0.084c0.141-0.059,0.184-0.047,0.333-0.051     c0.055,0.012,0.11,0.024,0.165,0.037c0.05,0.025,0.104,0.044,0.151,0.075c0.046,0.031,0.09,0.068,0.127,0.11     c0.077,0.084,0.131,0.186,0.159,0.295c0.013,0.055,0.013,0.112,0.021,0.168v35.382c-0.019,0.148-0.01,0.191-0.082,0.326     c-0.026,0.049-0.06,0.097-0.098,0.14c-0.076,0.084-0.172,0.146-0.279,0.187c-0.053,0.018-0.109,0.029-0.165,0.034     c-0.056,0.007-0.114,0.005-0.169-0.004c-0.15-0.021-0.18-0.058-0.31-0.131l-10.089-7.571h-8.544     c-0.06-0.009-0.121-0.009-0.179-0.023c-0.058-0.016-0.114-0.039-0.166-0.067c-0.105-0.06-0.192-0.147-0.252-0.251     c-0.03-0.053-0.053-0.109-0.069-0.167c-0.015-0.058-0.016-0.118-0.023-0.179V40.047c0.007-0.06,0.008-0.121,0.023-0.178     c0.016-0.058,0.039-0.114,0.069-0.166c0.03-0.052,0.067-0.1,0.109-0.143c0.086-0.086,0.192-0.147,0.309-0.179     c0.058-0.016,0.119-0.016,0.179-0.023L36.463,39.359L36.463,39.359z"/>   </g>   <g>    <path fill="#FFFFFF" d="M56.589,61.012c-0.25,0-0.502-0.095-0.695-0.283c-0.396-0.386-0.406-1.019-0.021-1.413     c9.074-9.354,0.39-18.188,0.017-18.559c-0.396-0.389-0.396-1.022-0.009-1.415c0.392-0.392,1.024-0.393,1.414-0.005     c0.106,0.105,10.449,10.615,0.016,21.372C57.111,60.91,56.851,61.012,56.589,61.012z"/>   </g>   <g>    <path fill="#FFFFFF" d="M62.776,66.321c-0.251,0-0.502-0.094-0.694-0.282c-0.396-0.385-0.406-1.019-0.021-1.414     c14.264-14.703,0.602-28.596,0.014-29.181c-0.393-0.389-0.395-1.022-0.006-1.414c0.391-0.392,1.023-0.393,1.414-0.005     c0.158,0.157,15.637,15.888,0.014,31.991C63.298,66.218,63.039,66.321,62.776,66.321z"/>   </g>   <g>    <path fill="#FFFFFF" d="M68.638,70.759c-0.251,0-0.502-0.094-0.696-0.28c-0.396-0.386-0.405-1.019-0.021-1.414     c18.602-19.175,0.781-37.297,0.014-38.06c-0.393-0.389-0.395-1.022-0.006-1.414c0.39-0.392,1.023-0.394,1.414-0.005     c0.201,0.2,19.975,20.294,0.014,40.871C69.16,70.66,68.898,70.759,68.638,70.759z"/>   </g>  </g>  </svg>',
 					disabledSpeaker: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="0 0 99.5 99.5" enable-background="new 0 0 99.5 99.5" xml:space="preserve">  <path fill="#8C8C8C" d="M49.749,99.5C22.317,99.5,0,77.18,0,49.749C0,22.317,22.317,0,49.749,0S99.5,22.317,99.5,49.749   C99.5,77.18,77.182,99.5,49.749,99.5z"/>  <g>   <path fill="#FFFFFF" d="M47.654,32.336c-0.008-0.056-0.008-0.113-0.021-0.168c-0.028-0.109-0.082-0.211-0.159-0.295    c-0.037-0.042-0.081-0.079-0.127-0.11c-0.047-0.031-0.101-0.05-0.151-0.075c-0.055-0.013-0.11-0.025-0.165-0.037    c-0.149,0.004-0.192-0.008-0.333,0.051c-0.051,0.022-0.097,0.056-0.146,0.084l-10.089,7.573l-8.545-0.001    c-0.06,0.007-0.121,0.007-0.179,0.023c-0.117,0.032-0.223,0.093-0.309,0.179c-0.042,0.043-0.079,0.091-0.109,0.143    c-0.03,0.052-0.053,0.108-0.069,0.166c-0.015,0.057-0.016,0.118-0.023,0.178v19.964c0.007,0.061,0.008,0.121,0.023,0.179    c0.016,0.058,0.039,0.114,0.069,0.167c0.06,0.104,0.147,0.191,0.252,0.251c0.052,0.028,0.108,0.052,0.166,0.067    c0.058,0.015,0.119,0.015,0.179,0.023h7.885l11.851-11.852V32.336z"/>   <path fill="#FFFFFF" d="M46.551,68.27c0.13,0.073,0.16,0.11,0.31,0.131c0.055,0.009,0.113,0.011,0.169,0.004    c0.056-0.005,0.112-0.017,0.165-0.034c0.107-0.041,0.203-0.103,0.279-0.187c0.038-0.043,0.072-0.091,0.098-0.14    c0.072-0.135,0.063-0.178,0.082-0.326V57.356l-6.708,6.708L46.551,68.27z"/>   <path fill="#FFFFFF" d="M55.873,59.316c-0.385,0.395-0.375,1.027,0.021,1.413c0.193,0.188,0.445,0.283,0.695,0.283    c0.262,0,0.521-0.103,0.721-0.304c5.972-6.156,5.136-12.229,3.31-16.319l-1.479,1.48C60.492,49.367,60.773,54.264,55.873,59.316z"    />   <path fill="#FFFFFF" d="M55.88,39.342c-0.361,0.367-0.371,0.937-0.05,1.329l1.386-1.385C56.824,38.964,56.249,38.974,55.88,39.342z    "/>   <path fill="#FFFFFF" d="M62.068,34.03c-0.189,0.191-0.283,0.44-0.286,0.689l0.981-0.982C62.511,33.741,62.26,33.837,62.068,34.03z"    />   <path fill="#FFFFFF" d="M62.06,64.625c-0.385,0.396-0.375,1.029,0.021,1.414c0.192,0.188,0.443,0.282,0.694,0.282    c0.263,0,0.522-0.103,0.72-0.305c10.728-11.057,6.791-21.938,3.22-27.723l-1.401,1.401C68.548,45.015,71.756,54.63,62.06,64.625z"    />   <path fill="#FFFFFF" d="M67.921,69.065c-0.385,0.396-0.375,1.028,0.021,1.414c0.194,0.187,0.445,0.28,0.696,0.28    c0.26,0,0.521-0.1,0.719-0.303c15.146-15.612,7.416-30.945,2.718-37.522l-1.388,1.388C75.15,40.513,82.071,54.48,67.921,69.065z"/>   <path fill="#FFFFFF" d="M80.402,18.845c-0.385,0-0.771,0.147-1.066,0.441L18.422,80.201c-0.589,0.59-0.589,1.543,0,2.133    c0.294,0.293,0.68,0.441,1.066,0.441c0.386,0,0.772-0.148,1.066-0.441l60.913-60.915c0.59-0.588,0.59-1.544,0-2.132    C81.175,18.992,80.789,18.845,80.402,18.845z"/>  </g>  </svg>',
 					screen: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="0 0 99.5 99.498" enable-background="new 0 0 99.5 99.498" xml:space="preserve">  <path fill="#4AAA4E" d="M49.749,99.498C22.317,99.498,0,77.181,0,49.749C0,22.318,22.317,0,49.749,0S99.5,22.317,99.5,49.749   C99.5,77.181,77.182,99.498,49.749,99.498z"/>  <g>   <path fill="#FFFFFF" d="M22.158,28.781c-1.204,0-2.172,0.969-2.172,2.173v35.339c0,1.204,0.969,2.173,2.172,2.173h20.857v6.674    h-2.366c-0.438,0-0.79,0.353-0.79,0.789c0,0.438,0.353,0.79,0.79,0.79h18.203c0.438,0,0.789-0.352,0.789-0.79    c0-0.438-0.353-0.789-0.789-0.789h-2.366v-6.674h20.855c1.203,0,2.173-0.969,2.173-2.173V30.954c0-1.204-0.97-2.173-2.173-2.173    H22.158z M22.751,31.47h53.997v34.081H22.751V31.47z"/>   <polygon fill="#F6F4EC" points="42.159,38.611 42.159,59.573 59.137,49.771  "/>  </g>  </svg>',
 					disabledScreen: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="0 0 99.499 99.498" enable-background="new 0 0 99.499 99.498" xml:space="preserve">  <path fill="#8C8C8C" d="M49.749,99.498C22.317,99.498,0,77.18,0,49.749S22.317,0,49.749,0s49.75,22.317,49.75,49.749   S77.182,99.498,49.749,99.498z"/>  <g>   <path fill="#FFFFFF" d="M77,31v35H38.234l-1.984,2H43v7h-2.352c-0.438,0-0.79,0.563-0.79,1s0.353,1,0.79,1h18.203    c0.438,0,0.789-0.563,0.789-1s-0.352-1-0.789-1H56v-7h21.341C78.545,68,80,67.497,80,66.293V30.954C80,29.75,78.545,29,77.341,29    h-2.337l-2.02,2H77z"/>   <path fill="#FFFFFF" d="M23,66V31h42.244l2.146-2H22.158C20.954,29,20,29.75,20,30.954v35.339C20,67.497,20.954,68,22.158,68h6.091    l2.11-2H23z"/>   <polygon fill="#FFFFFF" points="42,54.557 51.621,44.936 42,38.611  "/>   <polygon fill="#FFFFFF" points="56.046,47.74 47.016,56.769 59.137,49.771  "/>   <path fill="#FFFFFF" d="M81.061,21.311c0.586-0.585,0.586-1.536,0-2.121C80.768,18.896,80.384,18.75,80,18.75    s-0.768,0.146-1.061,0.439L18.33,79.799c-0.586,0.586-0.586,1.535,0,2.121c0.293,0.293,0.677,0.439,1.061,0.439    s0.768-0.146,1.061-0.439L81.061,21.311z"/>  </g>  </svg>',
 					locDisabledCamera: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-0.165 -0.245 100 99.999" enable-background="new -0.165 -0.245 100 99.999"    xml:space="preserve">  <path fill="#8C8C8C" d="M49.834-0.245c-27.569,0-50,22.43-50,50c0,27.57,22.429,49.999,50,49.999c27.57,0,50-22.429,50-49.999   C99.835,22.186,77.404-0.245,49.834-0.245z M25.516,37.254h29.489L34.73,60.791h-9.214V37.254z M24.492,75.004l47.98-55.722   l3.046,2.623L27.538,77.627L24.492,75.004z M77.71,61.244l-15.599-9.006v8.553H44.016l18.096-21.006v6.309l15.599-9.006V61.244z"/>  </svg>',
-					locDisabledMic: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-0.165 -0.245 100 99.999" enable-background="new -0.165 -0.245 100 99.999"    xml:space="preserve">  <path fill="#8C8C8C" d="M49.834-0.245c-27.569,0-50,22.43-50,50c0,27.57,22.429,49.999,50,49.999c27.57,0,50-22.429,50-49.999   C99.835,22.186,77.404-0.245,49.834-0.245z M41.411,32.236c0.001-4.678,3.794-8.473,8.473-8.473c4.681,0,8.472,3.793,8.472,8.473   v0.502L41.421,52.4c-0.001-0.068-0.01-0.135-0.01-0.203V32.236z M35.376,42.216h3.379v10.177c0,0.934,0.127,1.836,0.345,2.703   l-2.616,3.037c-0.708-1.713-1.107-3.58-1.107-5.535V42.216z M64.392,52.598c0,7.357-5.51,13.551-12.818,14.408v5.436h6.783v3.381   H41.411v-3.381h6.783v-5.436c-2.8-0.328-5.331-1.443-7.394-3.105l2.317-2.688c1.875,1.441,4.217,2.309,6.767,2.309   c6.146,0,11.127-4.984,11.127-11.129V42.216h3.381V52.598z M44.954,59.078l13.403-15.56v8.677c0,4.68-3.793,8.475-8.473,8.475   C48.042,60.67,46.344,60.076,44.954,59.078z M27.421,77.139l-3.046-2.623l47.979-55.723l3.046,2.623L27.421,77.139z"/>  </svg>',
+					locDisabledMic: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-0.165 -0.245 100 99.999" enable-background="new -0.165 -0.245 100 99.999"    xml:space="preserve">  <path fill="#8C8C8C" d="M49.834-0.245c-27.569,0-50,22.43-50,50c0,27.57,22.429,49.999,50,49.999c27.57,0,50-22.429,50-49.999   C99.835,22.186,77.404-0.245,49.834-0.245z M41.411,32.236c0.001-4.678,3.794-8.473,8.473-8.473c4.681,0,8.472,3.793,8.472,8.473   v0.502L41.421,52.4c-0.001-0.068-0.01-0.135-0.01-0.203V32.236z M35.376,42.216h3.379v10.177c0,0.934,0.127,1.836,0.345,2.703   l-2.616,3.037c-0.708-1.713-1.107-3.58-1.107-5.535V42.216z M64.392,52.598c0,7.357-5.51,13.551-12.818,14.408v5.436h6.783v3.381   H41.411v-3.381h6.783v-5.436c-2.8-0.328-5.331-1.443-7.394-3.105l2.317-2.688c1.875,1.441,4.217,2.309,6.767,2.309   c6.146,0,11.127-4.984,11.127-11.129V42.216h3.381V52.598z M44.954,59.078l13.403-15.56v8.677c0,4.68-3.793,8.475-8.473,8.475   C48.042,60.67,46.344,60.076,44.954,59.078z M27.421,77.139l-3.046-2.623l47.979-55.723l3.046,2.623L27.421,77.139z"/>  </svg>'
 				}
 
 				/**
@@ -1582,7 +1588,7 @@
 							participantIdentityText, // or pass an existing element
 							"Users/avatar",
 							{
-								userId: userId,
+								userId: userId
 							}
 						)
 					);
@@ -1596,7 +1602,7 @@
 						name:'participantsPopup',
 						participant: roomParticipant,
 						element:audioVisualization,
-						updateSizeOnlyOnce:true,
+						updateSizeOnlyOnce:true
 					});
 
 					participantItem.appendChild(tracksControlBtns);
@@ -1743,9 +1749,16 @@
 					var maximizeStaticBtn = document.createElement('DIV');
 					maximizeStaticBtn.className = 'Streams_webrtc_loudest-mode-btn';
 					maximizeStaticBtn.dataset.viewMode = 'maximizeStatic';
-					maximizeStaticBtn.dataset.touchlabel = 'Manual';
+					maximizeStaticBtn.dataset.touchlabel = 'Static Maximized';
 					var maximizeStaticBtnIcon = document.createElement('SPAN');
 					maximizeStaticBtnIcon.innerHTML = icons.staticMaximizeOff;
+
+					var manualLayoutBtn = document.createElement('DIV');
+					manualLayoutBtn.className = 'Streams_webrtc_loudest-mode-btn';
+					manualLayoutBtn.dataset.viewMode = 'manual';
+					manualLayoutBtn.dataset.touchlabel = 'Manual';
+					var manualLayoutBtnIcon = document.createElement('SPAN');
+					manualLayoutBtnIcon.innerHTML = icons.dragIconOff;
 
 					var loudestSelectCon = document.createElement('DIV');
 					loudestSelectCon.className = 'loudest-options-con'
@@ -1783,6 +1796,8 @@
 					topBtns.appendChild(loudestBtn);
 					maximizeStaticBtn.appendChild(maximizeStaticBtnIcon);
 					topBtns.appendChild(maximizeStaticBtn);
+					manualLayoutBtn.appendChild(manualLayoutBtnIcon);
+					if(!Q.info.isMobile) topBtns.appendChild(manualLayoutBtn);
 					//topBtns.appendChild(loudestSelectCon);
 					participantsListCon.appendChild(topBtns)
 
@@ -1839,10 +1854,10 @@
 							offIcon: icons.staticMaximizeOff,
 							handler: function(){
 								toggleLoudesScreenMode('disabled');
-								var maximize = function(loudestScreen) {
+								var maximize = function(screen) {
 									if(Q.info.isMobile)
-										tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(loudestScreen, 300);
-									else tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(loudestScreen, 300);
+										tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(screen, 300);
+									else tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(screen, 300);
 								}
 								var activeScreen = tool.state.webrtcClass.screenRendering.getActiveSreen();
 								if(activeScreen != null) {
@@ -1851,6 +1866,18 @@
 									var screens = tool.WebRTCLib.screens();
 									maximize(screens[0]);
 								}
+							}
+						},
+						{
+							viewMode:'manual',
+							btn: manualLayoutBtn,
+							icon: manualLayoutBtnIcon,
+							onIcon: icons.dragIconOn,
+							offIcon: icons.dragIconOff,
+							handler: function(){
+								toggleLoudesScreenMode('disabled');
+								tool.state.webrtcClass.screenRendering.renderManualScreensGrid();
+
 							}
 						}
 						];
@@ -1904,7 +1931,7 @@
 											if(participants[i].soundMeter.visualizations.participantsPopup != null) participants[i].soundMeter.visualizations.participantsPopup.reset();
 										}
 									}, 3000)
-								},
+								}
 							});
 						});
 
@@ -1925,7 +1952,7 @@
 						tool.usersBtn.parentNode.addEventListener('mouseleave', function (e) {
 							tool.hoverTimeout.participantsPopup = setTimeout(function () {
 								tool.usersBtn.parentNode.classList.remove('Streams_webrtc_hover');
-							}, 300)
+							}, 400)
 						});
 
 						participantsListCon.addEventListener('mouseenter', function (e) {
@@ -1938,7 +1965,7 @@
 						participantsListCon.addEventListener('mouseleave', function (e) {
 							setTimeout(function () {
 								tool.usersBtn.parentNode.classList.remove('Streams_webrtc_hover');
-							}, 300)
+							}, 400)
 
 						});
 
@@ -1991,42 +2018,48 @@
 				}
 
 				function checkActiveMediaTracks() {
-					tool.checkActiveMediaTracksInterval = setInterval(function () {
-						var i, listItem;
-						for (i = 0; listItem = tool.participantsList[i]; i++){
+					/*tool.checkActiveMediaTracksInterval = setInterval(function () {
+						var i;
+						for (i = 0; i < tool.participantsList.length; i++){
+							let listItem = tool.participantsList[i];
 							var participant = listItem.participant;
 							var screens = participant.screens;
-
 							var enabledVideoTracks = participant.tracks.filter(function (t) {
-								return t.kind == 'video' && t.mediaStreamTrack != null && (t.mediaStreamTrack.enabled && t.mediaStreamTrack.readyState != 'ended');
+								if(t.kind == 'video' && t.mediaStreamTrack != null) {
+									console.log('checkActiveMediaTracks track', t.mediaStreamTrack.enabled,  t.mediaStreamTrack.readyState)
+								}
+								return t.kind == 'video' && t.mediaStreamTrack != null && (t.mediaStreamTrack.enabled && t.mediaStreamTrack.readyState != 'ended' && t.mediaStreamTrack.muted != true);
 							}).length;
 
-							if(enabledVideoTracks == 0 || participant.remoteCameraIsEnabled == false) {
-
-								for(var s in screens) {
-									if(!listItem.participant.videoIsChanging) {
-										screens[s].isActive = false;
-
-										//tool.state.webrtcClass.screenRendering.updateLayout();
-
-										listItem.removeScreen(screens[s]);
-									}
-									/*if(screens[s].screenEl.parentNode != null) {
-										listItem.removeScreen(screens[s]);
-									}*/
+							var hasActiveVideoTrack = false, hasActiveScreen = false, participantScreens = listItem.participant.screens;
+							for (let s in participantScreens) {
+								let screen = participantScreens[s];
+								if(screen.videoTrack != null && screen.videoTrack.videoWidth != 0 && screen.videoTrack.videoHeight != 0) {
+									console.log('screen.videoTrack', screen.videoTrack)
+									hasActiveVideoTrack = true;
 								}
-							} else if(enabledVideoTracks != 0) {
-								for(var s in screens) {
-									screens[s].isActive = true;
-									//tool.state.webrtcClass.screenRendering.updateLayout();
-									listItem.showScreen(screens[s]);
-									/*if(screens[s].screenEl.parentNode != null) {
-										listItem.showScreen(screens[s]);
-									}*/
+								if(screen.isActive) {
+									hasActiveScreen = true;
 								}
 							}
+
+							console.log('checkActiveMediaTracks enabledVideoTracks', hasActiveScreen, hasActiveVideoTrack, enabledVideoTracks, listItem.participant.screens.length, listItem.participant.isLocal, listItem.isActive, listItem.manuallyToggled )
+
+							if(hasActiveScreen && (participant.remoteCameraIsEnabled == false || ((!hasActiveVideoTrack || enabledVideoTracks == 0) && !listItem.participant.videoIsChanging && listItem.participant.screens.length != 0))) {
+								console.log('checkActiveMediaTracks if1')
+								listItem.removePartcicipantScreens(true);
+
+							} else if(participant.remoteCameraIsEnabled == true && !hasActiveScreen && hasActiveVideoTrack && enabledVideoTracks != 0 && !listItem.manuallyToggled && !listItem.isActive && listItem.participant.screens.length != 0) {
+								console.log('checkActiveMediaTracks if2')
+								listItem.showPartcicipantScreens();
+							}
+
+							if(!hasActiveScreen && hasActiveVideoTrack && enabledVideoTracks != 0 && !listItem.manuallyToggled ) {
+
+							}
+
 						}
-					}, 3000);
+					}, 3000);*/
 				}
 
 				function disableCheckActiveMediaTracks() {
@@ -2045,11 +2078,12 @@
 					addItem:addItem,
 					removeItem:removeItem,
 					showScreen:showScreen,
+					update:update,
 					maximizeLoudestScreen:maximizeLoudestScreen,
 					toggleLoudesScreenMode:toggleLoudesScreenMode,
 					checkActiveMediaTracks:checkActiveMediaTracks,
 					disableLoudesScreenMode:disableLoudesScreenMode,
-					disableCheckActiveMediaTracks:disableCheckActiveMediaTracks,
+					disableCheckActiveMediaTracks:disableCheckActiveMediaTracks
 				}
 			},
 
@@ -2060,7 +2094,6 @@
 					var _accessToken;
 
 					function goLiveDialog(callback) {
-						console.log('goLiveDialog')
 						//return connect('123', captureStreamAndSend);
 						var goLive = function() {
 							FB.ui({
@@ -2068,7 +2101,6 @@
 								method: 'live_broadcast',
 								phase: 'create'
 							}, (createRes) => {
-								console.log('goLiveDialog 0', createRes);
 
 								FB.ui({
 									display: 'popup',
@@ -2076,7 +2108,6 @@
 									phase: 'publish',
 									broadcast_data: createRes
 								}, (publishRes) => {
-									console.log('goLiveDialog 1', publishRes);
 									if(publishRes == null || typeof publishRes == 'undefined') {
 										tool.WebRTCLib.screensInterface.fbLive.endStreaming();
 									}
@@ -2091,7 +2122,6 @@
 						}
 
 						FB.getLoginStatus(function(response){
-							console.log('getLoginStatus', response)
 							if (response.status === 'connected') {
 								goLive();
 							} else {
@@ -2158,7 +2188,7 @@
 							fields: {
 								'accessToken': tool.fbAccessToken,
 								'id': _liveId,
-								'action': 'end',
+								'action': 'end'
 							}
 						});
 					}
@@ -2181,7 +2211,7 @@
 							method: 'delete',
 							fields: {
 								'accessToken': tool.fbAccessToken,
-								'action': 'delete',
+								'action': 'delete'
 							}
 						});
 					}
@@ -2265,7 +2295,7 @@
 					title: 'Faceook live streaming started',
 					className: 'Streams_webrtc_fblive_dialog',
 					content: fbLiveDialog,
-					apply: true,
+					apply: true
 				});
 			},
 			closeAllDialogues: function () {
