@@ -900,7 +900,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				initConference();
 			} else {
 				Q.addScript([
-					"{{Streams}}/js/tools/webrtc/app.js?ts=" + Date.now()
+					"{{Streams}}/js/tools/webrtc/app.js"
 				], function () {
 					initConference();
 				});
@@ -1040,7 +1040,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				initConference();
 			} else {
 				Q.addScript([
-					"{{Streams}}/js/tools/webrtc/app.js?ts=" + Date.now(),
+					"{{Streams}}/js/tools/webrtc/app.js",
 				], function () {
 
 					/*var gApi = document.createElement('SCRIPT');
