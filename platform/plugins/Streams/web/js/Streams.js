@@ -4656,7 +4656,7 @@ Streams.displayType = function _Streams_displayType(type) {
  * @return {boolean}
  */
 Streams.isStream = function (value) {
-	return value instanceof Stream;
+	return Q.getObject('constructor.name', value) === 'Streams_Stream';
 };
 /**
  * Use this to check whether user subscribed to stream
