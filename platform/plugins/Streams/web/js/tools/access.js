@@ -176,7 +176,7 @@ Q.Tool.define("Streams/access", function(options) {
 				}
 				if (!response) return;
 				var extra = response.slots.extra;
-				Q.Streams.construct(extra.stream, {}, null);
+				Q.Streams.Stream.construct(extra.stream, {}, null);
 				state.avatarArray = extra.avatarArray;
 				state.accessArray = extra.accessArray;
 				state.labels = extra.labels;

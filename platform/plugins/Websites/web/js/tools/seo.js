@@ -56,7 +56,7 @@ Q.Tool.define("Websites/seo", function () {
 					var args = [err, data];
 					return console.warn("POST to Websites/seo: "+ msg);
 				}
-				Q.Streams.construct(Q.getObject('slots.stream', data), {}, function (err) {
+				Q.Streams.Stream.construct(Q.getObject('slots.stream', data), {}, function (err) {
 					_proceed.call(this, err);
 				});
 			}, {

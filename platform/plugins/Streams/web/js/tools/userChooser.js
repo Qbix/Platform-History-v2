@@ -22,8 +22,7 @@
  *   @param {string} [options.position=bottom] Vertical position of results related to input. Can be 'top', 'bottom'
  */
 Q.Tool.define("Streams/userChooser", function(o) {
-	Q.plugins.Streams.cache = Q.plugins.Streams.cache || {};
-    Q.plugins.Streams.cache.userChooser = Q.plugins.Streams.cache.userChooser || {};
+    Q.Streams.cache.userChooser = Q.Streams.cache.userChooser || {};
 
 	var tool = this;
 

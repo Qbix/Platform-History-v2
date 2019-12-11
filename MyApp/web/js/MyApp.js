@@ -89,6 +89,9 @@ var MyApp = (function (Q, $) {
 		'Q/touchscroll'
 	]);
 	
+	Q.Users.cache.where = 'local';
+	Q.Streams.cache.where = 'local';
+	
 	return MyApp;
 	
 })(Q, jQuery);
