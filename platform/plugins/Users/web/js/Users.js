@@ -2332,7 +2332,7 @@
 				if (params[0]) {
 					return callback(subject, params);
 				}
-				var label = params[1] = new Label(subject);
+				var label = new Label(subject);
 				return callback(label, params);
 			}
 		});
