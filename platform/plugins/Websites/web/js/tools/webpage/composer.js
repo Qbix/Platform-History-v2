@@ -4,6 +4,9 @@
 	 * @class Websites/webpage/composer
 	 * @constructor
 	 * @param {Object} [options] this is an object that contains parameters for this function
+	 * @param {Object} [options.categoryStream] Object with publisherId and streamName of stream where to need to
+	 * relate new Websites/webpage stream.
+	 * @param {Object} [options.relationType] Type of relation to category stream.
 	 * @param {Q.Event} [options.onScrape] fires when the tool successfully scrapes a webpage
 	 * @param {Q.Event} [options.onCreate] fires when the Websites/webpage stream successfully created
 	 */
@@ -35,6 +38,11 @@
 	},
 
 	{
+		categoryStream: {
+			publisherId: Q.Users.communityId,
+			streamName: 'Streams/chats/main'
+		},
+		relationType: 'Websites/webpage',
 		onScrape: new Q.Event(),
 		onCreate: new Q.Event()
 	},
@@ -79,27 +87,10 @@
 
 				$startButton.on(Q.Pointer.fastclick, function () {
 					$startButton.addClass('Q_working');
-					Q.req("Websites/webpage", ["data"], function (err, response) {
+
+					tool.createStream(function () {
 						$startButton.removeClass('Q_working');
-						var msg = Q.firstErrorMessage(err, response && response.errors);
-						if (msg) {
-							return Q.alert(msg);
-						}
-
-						var slot = response.slots.data;
-						state.publisherId = slot.publisherId;
-						state.streamName = slot.streamName;
-
-						Q.handle(state.onCreate, tool);
-					}, {
-						method: 'post',
-						fields: {
-							action: 'start',
-							data: state.siteData,
-							message: $message.val()
-						}
 					});
-
 				});
 
 				$goButton.on(Q.Pointer.fastclick, function () {
@@ -146,7 +137,7 @@
 
 						$startButton.removeClass('Q_disabled');
 
-						Q.handle(state.onScrape, tool, [this]);
+						Q.handle(state.onScrape, tool);
 					}, {
 						method: 'post',
 						fields: {
@@ -154,6 +145,39 @@
 						}
 					});
 				});
+			});
+		},
+		/**
+		 * Create stream and relate to category
+		 * @method createStream
+		 * @param {function} callback
+		 */
+		createStream: function (callback) {
+			var tool = this;
+			var state = this.state;
+			var $message = tool.$('textarea[name=message]');
+
+			Q.req("Websites/webpage", ["data"], function (err, response) {
+				var msg = Q.firstErrorMessage(err, response && response.errors);
+				if (msg) {
+					return Q.alert(msg);
+				}
+
+				var slot = response.slots.data;
+				state.publisherId = slot.publisherId;
+				state.streamName = slot.streamName;
+
+				Q.handle(state.onCreate, tool);
+				Q.handle(callback);
+			}, {
+				method: 'post',
+				fields: {
+					action: 'start',
+					data: state.siteData,
+					categoryStream: state.categoryStream,
+					relationType: state.relationType,
+					message: $message.val()
+				}
 			});
 		},
 		/**

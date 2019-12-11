@@ -29,22 +29,22 @@ function Websites_webpage_start ($r) {
 		throw new Exception("stream not found");
 	}
 
-	$communitiesId = Users::communityId();
-	$mainChatCategory = 'Streams/chats/main';
-	$chatRelationType = 'Websites/webpage';
+	$publisherId = Q::ifset($r, 'categoryStream', 'publisherId', Users::communityId());
+	$streamName = Q::ifset($r, 'categoryStream', 'streamName', 'Streams/chats/main');
+	$chatRelationType = Q::ifset($r, 'relationType', 'Websites/webpage');
 
 	// if this stream already related, exit
 	if (!Streams_RelatedTo::select()->where(array(
-		'toPublisherId' => $communitiesId,
-		'toStreamName' => $mainChatCategory,
+		'toPublisherId' => $publisherId,
+		'toStreamName' => $streamName,
 		'type' => $chatRelationType,
 		'fromPublisherId' => $stream->publisherId,
 		'fromStreamName' => $stream->name
 	))->fetchDbRows()) {
 		Streams::relate(
 			null,
-			$communitiesId,
-			$mainChatCategory,
+			$publisherId,
+			$streamName,
 			$chatRelationType,
 			$stream->publisherId,
 			$stream->name,
