@@ -87,7 +87,7 @@
 			var inputVal = $input.val();
 			var $form = $input.closest("form");
 			var websitesPreview = this.state.websitesPreview;
-			var urls = inputVal.matchTypes('url');
+			var urls = inputVal.matchTypes('url', {requireScheme: false});
 
 			Q.each(urls, function (i, url) {
 				if (tool.getActivePreview() || url in websitesPreview || inputVal.endsWith(url)) {

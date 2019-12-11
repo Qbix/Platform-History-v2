@@ -180,13 +180,17 @@
 	display: block;
 	color: #222;
 }
-.Streams_chat_message {
+.Streams_chat_message,
+.Streams_chat_message a, .Streams_chat_message a:visited {
 	color: #222;
 	max-height: 100px;
 	overflow: hidden;
 	word-wrap: break-word;
 	text-overflow: ellipsis;
 	cursor: default;
+}
+.Streams_chat_message a, .Streams_chat_message a:visited {
+	font-weight: bold;
 }
 .Streams_chat_messages {
 	min-height: 70px;
