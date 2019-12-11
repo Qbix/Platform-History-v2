@@ -149,6 +149,9 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 	if ($this.css('position') === 'static') {
 		css.position = 'relative';
 	}
+	if (!parseInt($this.css('height'))) {
+		$this.css('height', $this.parent().innerHeight());
+	}
 	$this.css(css);
 	
 	function loadImage(index, callback) {
