@@ -803,6 +803,8 @@ window.WebRTCconferenceLib = function app(options){
 			participant.soundMeter.instant = 0;
 			participant.soundMeter.slow = 0;
 			participant.soundMeter.clip = 0;
+			participant.soundMeter.rms = 0;
+			participant.soundMeter.slowRms = 0;
 			participant.soundMeter.reset = function() {
 				if(participant.isLocal && participant.soundMeter.isDisabled) return;
 			}
@@ -846,20 +848,22 @@ window.WebRTCconferenceLib = function app(options){
 						}
 
 					}
-					let rms = Math.sqrt(sum / (inputLength / 2));
-
+					let rms1 = Math.sqrt(sum / inputLength);
+					participant.soundMeter.rms = rms1;
+					participant.soundMeter.slowRms = (0.5 * participant.soundMeter.slowRms + 0.5 * rms1);
+					//console.log(participant.soundMeter.slowRms)
 					/*let len = input.length;
 					let total = i = 0
-					/let rms;
+					let rms2;
 
-					while ( i < len ) total += Math.abs( input[i++] )
-					//rms = Math.sqrt( total / len )
+					while ( i < len ) total += Math.abs( input[i++] );
+					rms2 = Math.sqrt( total / len )
+					participant.soundMeter.rms = rms2 * 100;
 
-					console.log('total2', rms * 100)
-
-					if(rms * 100 > 100) {
+					if(rms2 * 100 > 100) {
 						//alert('13');
 					}*/
+					//console.log(rms1, rms2)
 
 
 					var audioIsDisabled = participant.soundMeter.source.mediaStream && (participant.soundMeter.source.mediaStream.active == false || participant.soundMeter.audioTrack.readyState == 'ended');
@@ -1806,12 +1810,19 @@ window.WebRTCconferenceLib = function app(options){
 
 
 					//(currentWidth/2) - (widthToGet / 2), (currentHeight/2) - (heightToGet / 2),
-					_inputCtx.fillStyle = "black";
+					_inputCtx.fillStyle = "#232323";
 					_inputCtx.fillRect(data.rect.x,  data.rect.y, data.rect.width, 36);
 
 					_inputCtx.font = "16px Arial";
 					_inputCtx.fillStyle = "white";
 					_inputCtx.fillText(data.name, data.rect.x + 10, data.rect.y + 36 + 16 - 18 - 8);
+
+					_inputCtx.strokeStyle = "black";
+					_inputCtx.beginPath();
+					_inputCtx.moveTo(data.rect.x + data.rect.width, data.rect.y);
+					_inputCtx.lineTo(data.rect.x + data.rect.width, data.rect.y + 36);
+					_inputCtx.stroke();
+					//_inputCtx.strokeRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
 				}
 
 				function drawSingleAudioOnCanvas(localVideo, data, canvasWidth, canvasHeight) {
@@ -1826,18 +1837,22 @@ window.WebRTCconferenceLib = function app(options){
 
 					var width, height;
 					if(data.avatar != null) {
+
 						var avatar = data.avatar;
 						width = avatar.width;
 						height = avatar.height;
 
-						var scale = Math.max( (data.rect.width / 2) / width,  (data.rect.height / 2) / height);
+						var scale = Math.min( (data.rect.width / 2) / width,  (data.rect.height / 2) / height);
 						var scaledWidth = width * scale;
 						var scaledHeight = height * scale;
 						// get the top left position of the image
 						var x = data.rect.x + (( data.rect.width / 2) - (width / 2) * scale);
-						var y = data.rect.y + (( data.rect.height / 2) - (height / 2) * scale);
+						var y = (data.rect.y + 36) + (((data.rect.height - 36) / 2) - (height / 2) * scale);
 						var size = Math.min(scaledHeight, scaledWidth);
 						var radius =  size / 2;
+
+						drawSimpleCircleAudioVisualization(data, x, y, radius, scale, size);
+
 
 						_inputCtx.save();
 						_inputCtx.beginPath();
@@ -1853,19 +1868,53 @@ window.WebRTCconferenceLib = function app(options){
 						_inputCtx.restore();
 
 
-						drawCircleAudioVisualization(data, x, y, radius, scale, size);
 
+						_inputCtx.strokeStyle = "black";
+						_inputCtx.strokeRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
 					}
 
 
 					//(currentWidth/2) - (widthToGet / 2), (currentHeight/2) - (heightToGet / 2),
-					_inputCtx.fillStyle = "black";
+					_inputCtx.fillStyle = "#232323";
 					_inputCtx.fillRect(data.rect.x,  data.rect.y, data.rect.width, 36);
 
 					_inputCtx.font = "16px Arial";
 					_inputCtx.fillStyle = "white";
 					_inputCtx.fillText(data.name, data.rect.x + 10, data.rect.y + 36 + 16 - 18 - 8);
 
+				}
+
+				function drawSimpleCircleAudioVisualization(data, x, y, radius, scale, size) {
+					var analyser = data.participant.soundMeter.analyser;
+					if(analyser == null) return;
+					var bufferLength = analyser.frequencyBinCount;
+					var dataArray = new Uint8Array(bufferLength);
+					analyser.getByteFrequencyData(dataArray);
+					//just show bins with a value over the treshold
+					var threshold = 0;
+					// clear the current state
+					//_inputCtx.clearRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
+					//the max count of bins for the visualization
+					var maxBinCount = dataArray.length;
+
+					_inputCtx.save();
+					_inputCtx.beginPath();
+					_inputCtx.rect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
+					_inputCtx.clip();
+					//_inputCtx.stroke();
+
+					//var bass = Math.floor(dataArray[1]); //1Hz Frequenz
+					var rms = data.participant.soundMeter.slowRms * 100;
+					//console.log(rms, bass)
+					var radius = ((radius / 100 * rms) + radius);
+
+					_inputCtx.fillStyle = "#505050";
+					_inputCtx.beginPath();
+					_inputCtx.arc(data.rect.x + ( data.rect.width / 2), (data.rect.y + 36) + ( (data.rect.height - 36) / 2), radius, 0, 2 * Math.PI);
+					_inputCtx.fill();
+					//var radius =  size / 2  + (bass * 0.25);
+
+					_inputCtx.restore();
 				}
 
 				function drawCircleAudioVisualization(data, x, y, radius, scale, size) {
@@ -2479,127 +2528,133 @@ window.WebRTCconferenceLib = function app(options){
 				}
 			}
 		}())
+		var url = new URL(location.href);
 
-		var youtubeLive = (function () {
-			var _streamingSocket;
-			var _fbUserId = null;
+		var mode = url.searchParams.get("mode");
 
-			var _fbApiInited;
-			var _fbStreamUrl;
+		if(mode != null) {
+			var youtubeLive = (function () {
+				var _streamingSocket;
+				var _fbUserId = null;
 
-			var _videoStream = {blobs: [], allBlobs: [], size: 0, timer: null}
+				var _fbApiInited;
+				var _fbStreamUrl;
 
-			function connect(streamUrl, callback) {
-				if(typeof io == 'undefined') return;
+				var _videoStream = {blobs: [], allBlobs: [], size: 0, timer: null}
 
-				var secure = options.nodeServer.indexOf('https://') == 0;
-				_streamingSocket = io.connect(options.nodeServer, {
-					query: {
-						rtmp: streamUrl,
-						localInfo: JSON.stringify(_localInfo)
+				function connect(streamUrl, callback) {
+					if(typeof io == 'undefined') return;
+
+					var secure = options.nodeServer.indexOf('https://') == 0;
+					_streamingSocket = io.connect(options.nodeServer, {
+						query: {
+							rtmp: streamUrl,
+							localInfo: JSON.stringify(_localInfo)
+						},
+						transports: ['websocket'],
+						'force new connection': true,
+						secure:secure,
+						reconnection: true,
+						reconnectionDelay: 1000,
+						reconnectionDelayMax: 5000,
+						reconnectionAttempts: 5
+					});
+					_streamingSocket.on('connect', function () {
+						if(callback != null) callback();
+					});
+					window.streamingSocket = _streamingSocket;
+				}
+
+				function onDataAvailablehandler(blob) {
+
+					_videoStream.blobs.push(blob);
+
+					_videoStream.size += blob.size;
+
+					if(options.liveStreaming.timeSlice != null) return;
+
+					let blobsLength = _videoStream.blobs.length;
+					let sumSize = 0;
+
+					for (let i = 0; i < blobsLength; i++) {
+						if (_videoStream.blobs.length == 0) break;
+						sumSize = sumSize + _videoStream.blobs[i].size;
+
+						let chunkSize = options.liveStreaming.chunkSize != null ? options.liveStreaming.chunkSize : 1000000;
+						if (sumSize >= chunkSize && _videoStream.recordingStopped != true) {
+							let blobsToSend = _videoStream.blobs.slice(0, i + 1);
+							_videoStream.blobs.splice(0, i);
+							var mergedBlob = new Blob(blobsToSend);
+
+							/*var blobToSend;
+							if (mergedBlob.size > 1000000) {
+								blobToSend = mergedBlob.slice(0, 1000000);
+								var blobToNotSend = mergedBlob.slice(1000000);
+								_videoStream.blobs.unshift(blobToNotSend);
+							} else {
+								blobToSend = mergedBlob;
+							}*/
+
+							//let lastChunk = _videoStream.recordingStopped === true ? true : false;
+							//_videoStream.allBlobs.push(mergedBlob);
+							log('ondataavailable SEND CHUNK', mergedBlob.size)
+							_streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
+							break;
+						}
+					}
+
+				}
+
+				return {
+					goLive: function () {
+						log('goLiveDialog goLive');
 					},
-					transports: ['websocket'],
-					'force new connection': true,
-					secure:secure,
-					reconnection: true,
-					reconnectionDelay: 1000,
-					reconnectionDelayMax: 5000,
-					reconnectionAttempts: 5
-				});
-				_streamingSocket.on('connect', function () {
-					if(callback != null) callback();
-				});
-				window.streamingSocket = _streamingSocket;
-			}
+					endStreaming: function () {
+						log('endStreaming');
 
-			function onDataAvailablehandler(blob) {
-
-				_videoStream.blobs.push(blob);
-
-				_videoStream.size += blob.size;
-
-				if(options.liveStreaming.timeSlice != null) return;
-
-				let blobsLength = _videoStream.blobs.length;
-				let sumSize = 0;
-
-				for (let i = 0; i < blobsLength; i++) {
-					if (_videoStream.blobs.length == 0) break;
-					sumSize = sumSize + _videoStream.blobs[i].size;
-
-					let chunkSize = options.liveStreaming.chunkSize != null ? options.liveStreaming.chunkSize : 1000000;
-					if (sumSize >= chunkSize && _videoStream.recordingStopped != true) {
-						let blobsToSend = _videoStream.blobs.slice(0, i + 1);
-						_videoStream.blobs.splice(0, i);
+						clearTimeout(_videoStream.timer);
+						let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
 						var mergedBlob = new Blob(blobsToSend);
-
-						/*var blobToSend;
-						if (mergedBlob.size > 1000000) {
-							blobToSend = mergedBlob.slice(0, 1000000);
-							var blobToNotSend = mergedBlob.slice(1000000);
-							_videoStream.blobs.unshift(blobToNotSend);
-						} else {
-							blobToSend = mergedBlob;
-						}*/
-
-						//let lastChunk = _videoStream.recordingStopped === true ? true : false;
-						//_videoStream.allBlobs.push(mergedBlob);
-						log('ondataavailable SEND CHUNK', mergedBlob.size)
 						_streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
-						break;
+
+						canvasComposer.stopRecorder();
+
+						if(_streamingSocket != null) _streamingSocket.disconnect();
+						_streamingSocket = null;
+
+						app.event.dispatch('facebookLiveStreamingEnded');
+					},
+					isStreaming: function () {
+						if(_streamingSocket != null && _streamingSocket.connected) return true;
+						return false;
+					},
+					startStreaming: function(fbStreamUrl) {
+						log('startStreaming', fbStreamUrl);
+
+						connect(fbStreamUrl, function () {
+							canvasComposer.captureStream(function (blob) {
+								onDataAvailablehandler(blob);
+								//_streamingSocket.emit('Streams/webrtc/videoData', blob);
+							});
+
+							var timer = function() {
+								if(_videoStream.blobs.length != 0) {
+									let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
+									var mergedBlob = new Blob(blobsToSend);
+									_streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
+								}
+								_videoStream.timer = setTimeout(timer, 6000);
+							}
+
+							_videoStream.timer = setTimeout(timer, 6000);
+
+							app.event.dispatch('facebookLiveStreamingStarted');
+						});
 					}
 				}
-
-			}
-
-			return {
-				goLive: function () {
-					log('goLiveDialog goLive');
-				},
-				endStreaming: function () {
-					log('endStreaming');
-
-					clearTimeout(_videoStream.timer);
-					let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
-					var mergedBlob = new Blob(blobsToSend);
-					_streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
-
-					canvasComposer.stopRecorder();
-
-					if(_streamingSocket != null) _streamingSocket.disconnect();
-					_streamingSocket = null;
-
-					app.event.dispatch('facebookLiveStreamingEnded');
-				},
-				isStreaming: function () {
-					if(_streamingSocket != null && _streamingSocket.connected) return true;
-					return false;
-				},
-				startStreaming: function(fbStreamUrl) {
-					log('startStreaming', fbStreamUrl);
-
-					connect(fbStreamUrl, function () {
-						canvasComposer.captureStream(function (blob) {
-							onDataAvailablehandler(blob);
-							//_streamingSocket.emit('Streams/webrtc/videoData', blob);
-						});
-
-						var timer = function() {
-							if(_videoStream.blobs.length != 0) {
-								let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
-								var mergedBlob = new Blob(blobsToSend);
-								_streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
-							}
-							_videoStream.timer = setTimeout(timer, 6000);
-						}
-
-						_videoStream.timer = setTimeout(timer, 6000);
-
-						app.event.dispatch('facebookLiveStreamingStarted');
-					});
-				}
-			}
-		}())
+			}())
+			window.youtubeLive = youtubeLive;
+		}
 
 		var youtubeLiveUploader = (function () {
 			var DRIVE_UPLOAD_URL = 'https://www.googleapis.com/upload/drive/v2/files/';
