@@ -915,7 +915,7 @@
 	 * @method User
 	 * @param {String} fields
 	 */
-	Users.User = function (fields) {
+	var User = Users.User = function (fields) {
 		Q.extend(this, fields);
 		this.typename = 'Q.Users.User';
 	};
@@ -2260,19 +2260,81 @@
 
 	Q.beforeInit.add(function _Users_beforeInit() {
 
+		var where = Users.cache.where || 'document';
+
 		Users.get = Q.getter(Users.get, {
-			cache: Q.Cache.document("Users.get", 100),
-			throttle: 'Users.get'
+			cache: Q.Cache[where]("Users.get", 100),
+			throttle: 'Users.get',
+			prepare: function (subject, params, callback) {
+				if (subject instanceof User) {
+					return callback(subject, params);
+				}
+				if (params[0]) {
+					return callback(subject, params);
+				}
+				var user = params[1] = new User(subject);
+				return callback(user, params);
+			}
+		});
+		
+		Users.get = Q.getter(Users.get, {
+			cache: Q.Cache[where]("Users.get", 100),
+			throttle: 'Users.get',
+			prepare: function (subject, params, callback) {
+				if (subject instanceof User) {
+					return callback(subject, params);
+				}
+				if (params[0]) {
+					return callback(subject, params);
+				}
+				var user = params[1] = new User(subject);
+				return callback(user, params);
+			}
 		});
 
-		Users.getContacts = Q.getter(Users.getContacts, {
-			cache: Q.Cache.document("Users.getContacts", 100),
-			throttle: 'Users.getContacts'
+		Contact.get = Q.getter(Contact.get, {
+			cache: Q.Cache[where]("Users.Contact.get", 100),
+			throttle: 'Users.Contact.get',
+			prepare: function (subject, params, callback) {
+				if (subject instanceof Contact) {
+					return callback(subject, params);
+				}
+				if (params[0]) {
+					return callback(subject, params);
+				}
+				var contact = params[1] = new Contact(subject);
+				return callback(contact, params);
+			}
+		});
+		
+		Label.get = Q.getter(Label.get, {
+			cache: Q.Cache[where]("Users.Label.get", 100),
+			throttle: 'Users.Label.get',
+			prepare: function (subject, params, callback) {
+				if (subject instanceof Contact) {
+					return callback(subject, params);
+				}
+				if (params[0]) {
+					return callback(subject, params);
+				}
+				var contact = params[1] = new Label(subject);
+				return callback(contact, params);
+			}
 		});
 
 		Users.getLabels = Q.getter(Users.getLabels, {
-			cache: Q.Cache.document("Users.getLabels", 100),
-			throttle: 'Users.getLabels'
+			cache: Q.Cache[where]("Users.getLabels", 100),
+			throttle: 'Users.getLabels',
+			prepare: function (subject, params, callback) {
+				if (subject instanceof Label) {
+					return callback(subject, params);
+				}
+				if (params[0]) {
+					return callback(subject, params);
+				}
+				var label = params[1] = new Label(subject);
+				return callback(label, params);
+			}
 		});
 
 		Users.lastSeenNonce = Q.cookie('Q_nonce');
@@ -3178,5 +3240,7 @@
 			dontStopBeforeShown: true
 		});
 	}, 'Users.dialogCloseHint');
+	
+	Q.Users.cache = Q.Users.cache || {};
 
 })(Q, jQuery);

@@ -683,7 +683,7 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 				Streams.onError.handle(err, [err, data, null]);
 				return callback && callback.call(null, err, null, extra);
 			}
-			Streams.construct(
+			Stream.construct(
 				data.stream,
 				{
 					messages: data.messages,
@@ -833,7 +833,7 @@ Streams.create = function (fields, callback, related, options) {
 		if (related) {
 			Streams.related.cache.removeEach([related.publisherId, related.streamName]);
 		}
-		Streams.construct(data.slots.stream, {},
+		Stream.construct(data.slots.stream, {},
 			function Stream_create_construct_handler (err, stream) {
 				var msg = Q.firstErrorMessage(err);
 				if (msg) {
@@ -876,141 +876,6 @@ Streams.create = function (fields, callback, related, options) {
  * @event create.onError
  */
 Streams.create.onError = new Q.Event();
-
-/**
- * This function is similar to _activateTools in Q.js
- * That one is to create "controllers" on the front end,
- * and this one is to create "models" on the front end.
- * They have very similar conventions.
- * @static
- * @method construct
- * @param {Object} fields Provide any stream fields here. Requires at least the "type" of the stream.
- * @param {Object} [extra={}] Can include "messages" and "participants"
- * @param {Function} [callback] The function to call when all constructors and event handlers have executed
- *  The first parameter is an error, in case something went wrong. The second one is the stream object.
- * @param {Boolean} [updateCache=false] Whether to update the Streams.get cache after constructing the stream
- * @return {Q.Stream}
- */
-Streams.construct = function _Streams_construct(fields, extra, callback, updateCache) {
-
-	if (typeof extra === 'function') {
-		callback = extra;
-		extra = null;
-	}
-
-	if (Q.typeOf(fields) === 'Q.Streams.Stream') {
-		fields = Q.extend({}, fields.fields, {
-			access: fields.access,
-			participant: fields.participant,
-			messageTotals: fields.messageTotals,
-			relatedToTotals: fields.relatedToTotals,
-			relatedFromTotals: fields.relatedFromTotals,
-			isRequired: fields.isRequired
-		});
-	}
-
-	if (Q.isEmpty(fields)) {
-		Q.handle(callback, this, ["Streams.Stream constructor: fields are missing"]);
-		return false;
-	}
-
-	var type = Q.normalize(fields.type);
-	var streamFunc = Streams.defined[type];
-	if (!streamFunc) {
-		streamFunc = Streams.defined[type] = function StreamConstructor(fields) {
-			streamFunc.constructors.apply(this, arguments);
-			// Default constructor. Copy any additional fields.
-			if (!fields) return;
-			for (var k in fields) {
-				if ((k in this.fields)
-					|| k === 'messageTotals'
-					|| k === 'relatedToTotals'
-					|| k === 'relatedFromTotals'
-					|| k === 'participant'
-					|| k === 'access'
-					|| k === 'isRequired') continue;
-				this.fields[k] = Q.copy(fields[k]);
-			}
-		};
-	}
-	if (typeof streamFunc === 'function') {
-		return _doConstruct();
-	} else if (typeof streamFunc === 'string') {
-		Q.addScript(streamFunc, function () {
-			streamFunc = Streams.defined[streamName];
-			if (typeof streamFunc !== 'function') {
-				throw new Error("Streams.construct: streamFunc cannot be " + typeof(streamFunc));
-			}
-			return _doConstruct();
-		});
-		return true;
-	} else if (typeof streamFunc !== 'undefined') {
-		throw new Error("Streams.construct: streamFunc cannot be " + typeof(streamFunc));
-	}
-	function _doConstruct() {
-		if (!streamFunc.streamConstructor) {
-			streamFunc.streamConstructor = function Streams_Stream(fields) {
-				// run any constructors
-				streamFunc.streamConstructor.constructors.apply(this, arguments);
-
-				var f = this.fields;
-				if (updateCache) { // update the Streams.get cache
-					if (f.publisherId && f.name) {
-						Streams.get.cache
-							.removeEach([f.publisherId, f.name])
-							.set(
-								[f.publisherId, f.name], 0,
-								this, [null, this]
-							);
-					}
-				}
-
-				// call any onConstruct handlers
-				Q.handle(_constructHandlers[f.type], this, []);
-				Q.handle(_constructHandlers[''], this, []);
-				if (f.publisherId && f.name) {
-					Q.handle(Q.getObject([f.publisherId, f.name], _streamConstructHandlers), this, []);
-					Q.handle(Q.getObject([f.publisherId, ''], _streamConstructHandlers), this, []);
-					Q.handle(Q.getObject(['', f.name], _streamConstructHandlers), this, []);
-					Q.handle(Q.getObject(['', ''], _streamConstructHandlers), this, []);
-				}
-			};
-			Q.mixin(streamFunc, Streams.Stream);
-			Q.mixin(streamFunc.streamConstructor, streamFunc);
-		}
-		var stream = new streamFunc.streamConstructor(fields);
-		var messages = {}, participants = {};
-
-		updateMessageTotalsCache(fields.publisherId, fields.name, stream.messageTotals);
-
-		if (extra && extra.messages) {
-			Q.each(extra.messages, function (ordinal, message) {
-				if (Q.typeOf(message) !== 'Q.Streams.Message') {
-					message = Message.construct(message, true);
-				}
-				messages[ordinal] = message;
-			});
-		}
-		if (extra && extra.participants) {
-			Q.each(extra.participants, function (userId, participant) {
-				if (Q.typeOf(participant) !== 'Q.Streams.Participant') {
-					participant = new Participant(participant);
-				}
-				participants[userId] = participant;
-				Participant.get.cache.set(
-					[fields.publisherId, fields.name, participant.userId], 0,
-					participant, [null, participant]
-				);
-			});
-		}
-
-		Q.handle(callback, stream, [null, stream, {
-			messages: messages,
-			participants: participants
-		}]);
-		return stream;
-	}
-}
 
 function _toolInDialog(toolName, toolParams, callback, classContainer) {
 	Q.Dialogs.push({
@@ -1767,7 +1632,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 				msg = "Streams/related missing stream "+streamName+' published by '+publisherId;
 				callback && callback.call(this, msg);
 			} else {
-				Streams.construct(data.slots.stream, extra, _processResults, true);
+				Stream.construct(data.slots.stream, extra, _processResults, true);
 			}
 		}
 
@@ -1785,7 +1650,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 				var key = Streams.key(fields.publisherId, fields.name);
 				keys.push(key);
 				keys2[key] = true;
-				Streams.construct(fields, {}, function () {
+				Stream.construct(fields, {}, function () {
 					streams[key] = this;
 					p.fill(key)();
 				}, true);
@@ -1926,9 +1791,143 @@ var Stream = Streams.Stream = function (fields) {
 	prepareStream(this, fields);
 };
 
+/**
+ * This function is similar to _activateTools in Q.js
+ * That one is to create "controllers" on the front end,
+ * and this one is to create "models" on the front end.
+ * They have very similar conventions.
+ * @static
+ * @method construct
+ * @param {Object} fields Provide any stream fields here. Requires at least the "type" of the stream.
+ * @param {Object} [extra={}] Can include "messages" and "participants"
+ * @param {Function} [callback] The function to call when all constructors and event handlers have executed
+ *  The first parameter is an error, in case something went wrong. The second one is the stream object.
+ * @param {Boolean} [updateCache=false] Whether to update the Streams.get cache after constructing the stream
+ * @return {Q.Stream}
+ */
+Stream.construct = function _Streams_construct(fields, extra, callback, updateCache) {
+
+	if (typeof extra === 'function') {
+		callback = extra;
+		extra = null;
+	}
+
+	if (Q.typeOf(fields) === 'Q.Streams.Stream') {
+		fields = Q.extend({}, fields.fields, {
+			access: fields.access,
+			participant: fields.participant,
+			messageTotals: fields.messageTotals,
+			relatedToTotals: fields.relatedToTotals,
+			relatedFromTotals: fields.relatedFromTotals,
+			isRequired: fields.isRequired
+		});
+	}
+
+	if (Q.isEmpty(fields)) {
+		Q.handle(callback, this, ["Streams.Stream constructor: fields are missing"]);
+		return false;
+	}
+
+	var type = Q.normalize(fields.type);
+	var streamFunc = Streams.defined[type];
+	if (!streamFunc) {
+		streamFunc = Streams.defined[type] = function StreamConstructor(fields) {
+			streamFunc.constructors.apply(this, arguments);
+			// Default constructor. Copy any additional fields.
+			if (!fields) return;
+			for (var k in fields) {
+				if ((k in this.fields)
+					|| k === 'messageTotals'
+					|| k === 'relatedToTotals'
+					|| k === 'relatedFromTotals'
+					|| k === 'participant'
+					|| k === 'access'
+					|| k === 'isRequired') continue;
+				this.fields[k] = Q.copy(fields[k]);
+			}
+		};
+	}
+	if (typeof streamFunc === 'function') {
+		return _doConstruct();
+	} else if (typeof streamFunc === 'string') {
+		Q.addScript(streamFunc, function () {
+			streamFunc = Streams.defined[streamName];
+			if (typeof streamFunc !== 'function') {
+				throw new Error("Stream.construct: streamFunc cannot be " + typeof(streamFunc));
+			}
+			return _doConstruct();
+		});
+		return true;
+	} else if (typeof streamFunc !== 'undefined') {
+		throw new Error("Stream.construct: streamFunc cannot be " + typeof(streamFunc));
+	}
+	function _doConstruct() {
+		if (!streamFunc.streamConstructor) {
+			streamFunc.streamConstructor = function Streams_Stream(fields) {
+				// run any constructors
+				streamFunc.streamConstructor.constructors.apply(this, arguments);
+
+				var f = this.fields;
+				if (updateCache) { // update the Streams.get cache
+					if (f.publisherId && f.name) {
+						Streams.get.cache
+							.removeEach([f.publisherId, f.name])
+							.set(
+								[f.publisherId, f.name], 0,
+								this, [null, this]
+							);
+					}
+				}
+
+				// call any onConstruct handlers
+				Q.handle(_constructHandlers[f.type], this, []);
+				Q.handle(_constructHandlers[''], this, []);
+				if (f.publisherId && f.name) {
+					Q.handle(Q.getObject([f.publisherId, f.name], _streamConstructHandlers), this, []);
+					Q.handle(Q.getObject([f.publisherId, ''], _streamConstructHandlers), this, []);
+					Q.handle(Q.getObject(['', f.name], _streamConstructHandlers), this, []);
+					Q.handle(Q.getObject(['', ''], _streamConstructHandlers), this, []);
+				}
+			};
+			Q.mixin(streamFunc, Streams.Stream);
+			Q.mixin(streamFunc.streamConstructor, streamFunc);
+		}
+		var stream = new streamFunc.streamConstructor(fields);
+		var messages = {}, participants = {};
+
+		updateMessageTotalsCache(fields.publisherId, fields.name, stream.messageTotals);
+
+		if (extra && extra.messages) {
+			Q.each(extra.messages, function (ordinal, message) {
+				if (!(message instanceof Message)) {
+					message = Message.construct(message, true);
+				}
+				messages[ordinal] = message;
+			});
+		}
+		if (extra && extra.participants) {
+			Q.each(extra.participants, function (userId, participant) {
+				if (!(participant instanceof Participant)) {
+					participant = new Participant(participant);
+				}
+				participants[userId] = participant;
+				Participant.get.cache.set(
+					[fields.publisherId, fields.name, participant.userId], 0,
+					participant, [null, participant]
+				);
+			});
+		}
+
+		Q.handle(callback, stream, [null, stream, {
+			messages: messages,
+			participants: participants
+		}]);
+		return stream;
+	}
+};
+
 Stream.get = Streams.get;
 Stream.create = Streams.create;
-Stream.construct = Streams.construct;
 Stream.define = Streams.define;
 
 /**
@@ -3581,6 +3580,11 @@ Message.construct = function Streams_Message_construct(fields, updateCache) {
 	if (Q.isEmpty(fields)) {
 		return false;
 	}
+	var orig = null;
+	if (fields && fields.fields) {
+		orig = fields;
+		fields = fields.fields;
+	}
 	var type = Q.normalize(fields.type);
 	var messageFunc = Message.defined[type];
 	if (!messageFunc) {
@@ -3609,6 +3613,9 @@ Message.construct = function Streams_Message_construct(fields, updateCache) {
 	}
 	var msg = new messageFunc.messageConstructor(fields);
 	_updateMessageCache(msg);
+	if (orig) {
+		Q.extend(msg, orig);
+	}
 	return msg;
 };
 
@@ -3741,7 +3748,7 @@ Message.get = function _Message_get (publisherId, streamName, ordinal, callback)
 				messages[ordinal] = data.message;
 			}
 			Q.each(messages, function (ordinal, message) {
-				if (Q.typeOf(message) !== 'Q.Streams.Message') {
+				if (!(message instanceof Message)) {
 					message = Message.construct(message, true);
 				}
 				messages[ordinal] = message;
@@ -4152,7 +4159,7 @@ var _seen = {};
  * @event get.onError
  */
 MTotal.get.onError = new Q.Event();
-MTotal.seen.cache = Q.Cache.local("Streams.Message.Total.seen", 1000);
+MTotal.seen.cache = Q.Cache[Streams.cache.where || 'document']("Streams.Message.Total.seen", 1000);
 
 /**
  * Constructs a participant from fields, which are typically returned from the server.
@@ -4649,7 +4656,7 @@ Streams.displayType = function _Streams_displayType(type) {
  * @return {boolean}
  */
 Streams.isStream = function (value) {
-	return Q.typeOf(value) === "Q.Streams.Stream";
+	return value instanceof Stream;
 };
 /**
  * Use this to check whether user subscribed to stream
@@ -5037,7 +5044,7 @@ function _onResultHandler(subject, params, args, shared, original) {
 	if (key == undefined || params[0] || !subject) {
 		return; // either retainWith was not called or an error occurred during the request
 	}
-	if (Q.typeOf(subject) === 'Q.Streams.Stream') {
+	if (subject instanceof Stream) {
 		subject.retain(key);
 	} else {
 		if (subject.stream) {
@@ -5063,13 +5070,13 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 		cache: Q.Cache[where]("Streams.get", 1000),
 		throttle: 'Streams.get',
 		prepare: function (subject, params, callback) {
-			if (Q.typeOf(subject) === 'Q.Streams.Stream') {
+			if (subject instanceof Stream) {
 				return callback(subject, params);
 			}
 			if (params[0]) {
 				return callback(subject, params);
 			}
-			Streams.construct(subject, {}, function () {
+			Stream.construct(subject, {}, function () {
 				params[1] = this;
 				callback(this, params);
 			});
@@ -5087,12 +5094,12 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 			var pipe = Q.pipe(keys, function () {
 				callback(subject, params);
 			});
-			Streams.construct(subject.stream, {}, function () {
+			Stream.construct(subject.stream, {}, function () {
 				subject.stream = this;
 				pipe.fill('stream')();
 			});
 			Q.each(subject.relatedStreams, function (i) {
-				Streams.construct(this, function () {
+				Stream.construct(this, function () {
 					subject.relatedStreams[i] = this;
 					pipe.fill(i)();
 				});
@@ -5326,7 +5333,7 @@ Q.onInit.add(function _Streams_onInit() {
 			params.prompt = (params.prompt !== undefined)
 				? params.prompt
 				: Q.text.Streams.login.prompt;
-			Streams.construct(params.stream, function () {
+			Stream.construct(params.stream, function () {
 				params.stream = this;
 				params.communityId = Q.Users.communityId;
 				params.communityName = Q.Users.communityName;
@@ -5493,7 +5500,7 @@ Q.onInit.add(function _Streams_onInit() {
 
 			// Otherwise, we have a new message posted - update cache
 			console.log('Users.Socket.onEvent("Streams/post")', msg);
-			var message = (Q.typeOf(msg) === 'Q.Streams.Message')
+			var message = (msg instanceof Message)
 				? msg
 				: Message.construct(msg, true);
 			Message.latest[ptn] = parseInt(msg.ordinal);
@@ -5711,7 +5718,7 @@ function _preloadedStreams(elem) {
 	// Every time before anything is activated,
 	// process any preloaded streams data we find
 	Q.each(Stream.preloaded, function (i, fields) {
-		Streams.construct(fields, {}, null, true);
+		Stream.construct(fields, {}, null, true);
 	});
 	Stream.preloaded = null;
 }
@@ -5933,5 +5940,7 @@ Q.Template.set('Streams/chat/webrtc/available',
 	'	<div class="Q_close"></div>'+
 	'</div>'
 );
+
+Q.Streams.cache = Q.Streams.cache || {};
 
 })(Q, jQuery);
