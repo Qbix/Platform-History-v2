@@ -1891,7 +1891,7 @@ Stream.construct = function _Stream_construct(fields, extra, callback, updateCac
 			};
 			Q.mixin(streamFunc, Streams.Stream);
 			Q.mixin(streamFunc.streamConstructor, streamFunc);
-			Streams_Stream.isConstructorOf = 'Q.Streams.Stream';
+			streamFunc.streamConstructor.isConstructorOf = 'Q.Streams.Stream';
 		}
 		var stream = new streamFunc.streamConstructor(fields);
 		var messages = {}, participants = {};
