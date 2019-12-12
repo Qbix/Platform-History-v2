@@ -9614,6 +9614,23 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 	}
 }
 
+function _doInMainFrame(functionPath, subject, params, callback) {
+	// var mainIndex = Frames.mainIndex();
+	// if (mainIndex) {
+	// 	Frames.message({
+	// 		Q: {
+	// 			call: "Q.Socket.connect",
+	// 			params: [ns, url, callback, callback2]
+	// 		}
+	// 	}, mainIndex, function (received) {
+	// 		if (!received) {
+	// 			return callback.apply(subject, params);
+	// 		}
+	// 		Frames.onMessage()
+	// 	});
+	// }
+};
+
 /**
  * Connects a socket, and stores it in the list of connected sockets
  * @static
@@ -9627,20 +9644,22 @@ Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, callback2) {
 	if (!url) {
 		return false;
 	}
-	if (typeof ns === 'function') {
-		callback = ns;
-		ns = '';
-	} else if (!ns) {
-		ns = '';
-	} else if (ns[0] !== '/') {
-		ns = '/' + ns;
-	}
-	if (!_qsockets[ns]) _qsockets[ns] = {};
-	if (!_qsockets[ns][url]) {
-		_qsockets[ns][url] = null; // pending
-	}
-	// check if socket already connected, or reconnect
-	_connectSocketNS(ns, url, callback, callback2, false);
+	_doInMainFrame('Q.Socket.connect', this, arguments, function () {
+		if (typeof ns === 'function') {
+			callback = ns;
+			ns = '';
+		} else if (!ns) {
+			ns = '';
+		} else if (ns[0] !== '/') {
+			ns = '/' + ns;
+		}
+		if (!_qsockets[ns]) _qsockets[ns] = {};
+		if (!_qsockets[ns][url]) {
+			_qsockets[ns][url] = null; // pending
+		}
+		// check if socket already connected, or reconnect
+		_connectSocketNS(ns, url, callback, callback2, false);
+	});
 };
 
 /**
@@ -12541,6 +12560,7 @@ Q.Audio.stopSpeaking = function () {
 };
 
 var rls = root.localStorage;
+var _frameMessageEvents = {};
 
 /**
  * Methods for working with storage and signaling across frames and windows
@@ -12572,6 +12592,7 @@ var Frames = Q.Frames = {
 	 * This will trigger their onMessage() event with the data.
 	 * @method message
 	 * @static
+	 * @param {String} type The type of the message
 	 * @param {Object} data Will be JSON-encoded for transmitting via localStorage
 	 * @param {Integer} [index] Place the index of a specific frame here,
 	 *  such as the return value of Q.Frames.main(), to message only this frame.
@@ -12580,12 +12601,13 @@ var Frames = Q.Frames = {
 	 *  pass a callback here whose first parameter will be false if the message was not received
 	 *  by the frame with that index (because it was unloaded), or true if it was received.
 	 */
-	message: function (data, index, callback) {
+	message: function (type, data, index, callback) {
 		var messageIndex;
 		rls.setItem(Frames.message.counterKey,
 			messageIndex = ((parseInt(rls.getItem(Frames.message.counterKey)) || 0) + 1) % 1000000
 		);
 		var value = {
+			type: type,
 			data: data,
 			toIndex: index || null,
 			fromIndex: Frames.index,
@@ -12607,20 +12629,13 @@ var Frames = Q.Frames = {
 		}
 	},
 	/**
-	 * This event occurs when Q.Frames.message() was called in one of the frames
-	 * to send some data.
+	 * This event factory is used to create events to be handled
+	 * when Q.Frames.message() was called in one of the frames
+	 * to send some data. Call the factory and pass the messageType to create an event handler.
 	 * @event onMessage
-	 * @param {Object} data the data that was passed.
-	 * @param {Integer} fromIndex The index of the frame from which it was sent
-	 * @param {Boolean} wasBroadcast Whether it was broadcast to all frames
+	 * @param name {String} The name of the message. Can be "" to listen on all messages.
 	 */
-	onMessage: new Q.Event(function (data, fromIndex, wasBroadcast) {
-		if (wasBroadcast && data && data["Q.needNewMainIndex"]) {
-			if (!rls.getItem(Frames.mainIndexKey)) {
-				_indicateThisAsMainFrame();
-			}
-		}
-	}, 'Q.Frames')
+	onMessage: new Q.Event.factory(_frameMessageEvents, "")
 };
 
 Frames.mainIndexKey = "Q.Frames.mainIndex";
@@ -12642,12 +12657,18 @@ function _indicateThisAsMainFrame() {
 	if (!mainIndex) {
 		_indicateThisAsMainFrame();
 	} else {
-		Frames.message({}, mainIndex, function (received) {
+		Frames.message('Q.seekingMainFrame', {}, mainIndex, function (received) {
 			if (received === false) {
 				_indicateThisAsMainFrame();
 			}
 		});
 	}
+	Frames.onMessage("Q.needNewMainIndex").set(
+	function (type, data, fromIndex, wasBroadcast) {
+		if (wasBroadcast && !rls.getItem(Frames.mainIndexKey)) {
+			_indicateThisAsMainFrame();
+		}
+	}, 'Q.Frames');
 	Q.addEventListener(window, 'storage', function (e) {
 		var handledKey = Q.Frames.message.handledKey;
 		if (e.key === handledKey) {
@@ -12655,7 +12676,7 @@ function _indicateThisAsMainFrame() {
 			if (mi != null) {
 				// signal arrived indicating some messageIndex was handled
 				if (cb = Q.Frames.message.callbacks[mi]) {
-					cb(true);
+					try { cb(true); } catch (e) {}
 					delete Q.Frames.message.callbacks[mi];
 				}
 			}
@@ -12671,16 +12692,19 @@ function _indicateThisAsMainFrame() {
 		}
 		rls.setItem(handledKey, value.messageIndex); // signal that it was handled
 		rls.removeItem(handledKey); // just to keep things clean
-		Q.Frames.onMessage.handle.call(
-			Q, value.data, value.fromIndex, value.toIndex == null
-		);
+		var event = _frameMessageEvents[value.type];
+		if (event) {
+			event.handle.call(
+				Q, value.type, value.data, value.fromIndex, value.toIndex == null
+			);
+		}
 	});
 	Q.onUnload.set(function () {
 		if (Q.Frames.mainIndex() !== Q.Frames.index) {
 			return;
 		}
 		rls.removeItem(Q.Frames.mainIndexKey);
-		Q.Frames.message({"Q.needNewMainIndex": true});
+		Q.Frames.message('Q.needNewMainIndex');
 	}, 'Q.Frames');
 })();
 
