@@ -1805,7 +1805,7 @@ var Stream = Streams.Stream = function (fields) {
  * @param {Boolean} [updateCache=false] Whether to update the Streams.get cache after constructing the stream
  * @return {Q.Stream}
  */
-Stream.construct = function _Streams_construct(fields, extra, callback, updateCache) {
+Stream.construct = function _Stream_construct(fields, extra, callback, updateCache) {
 
 	if (typeof extra === 'function') {
 		callback = extra;
@@ -1891,6 +1891,7 @@ Stream.construct = function _Streams_construct(fields, extra, callback, updateCa
 			};
 			Q.mixin(streamFunc, Streams.Stream);
 			Q.mixin(streamFunc.streamConstructor, streamFunc);
+			streamFunc.streamConstructor.isConstructorOf = 'Q.Streams.Stream';
 		}
 		var stream = new streamFunc.streamConstructor(fields);
 		var messages = {}, participants = {};
@@ -4656,8 +4657,9 @@ Streams.displayType = function _Streams_displayType(type) {
  * @return {boolean}
  */
 Streams.isStream = function (value) {
-	return Q.getObject('constructor.name', value) === 'Streams_Stream';
+	return Q.getObject('constructor.isConstructorOf', value) === 'Q.Streams.Stream';
 };
+
 /**
  * Use this to check whether user subscribed to stream
  * and also whether subscribed to message type (from streams_subscription_rule)

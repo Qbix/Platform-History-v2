@@ -9614,6 +9614,23 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 	}
 }
 
+function _doInMainFrame(functionPath, subject, params, callback) {
+	// var mainIndex = Frames.mainIndex();
+	// if (mainIndex) {
+	// 	Frames.message({
+	// 		Q: {
+	// 			call: "Q.Socket.connect",
+	// 			params: [ns, url, callback, callback2]
+	// 		}
+	// 	}, mainIndex, function (received) {
+	// 		if (!received) {
+	// 			return callback.apply(subject, params);
+	// 		}
+	// 		Frames.onMessage()
+	// 	});
+	// }
+};
+
 /**
  * Connects a socket, and stores it in the list of connected sockets
  * @static
@@ -9627,20 +9644,22 @@ Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, callback2) {
 	if (!url) {
 		return false;
 	}
-	if (typeof ns === 'function') {
-		callback = ns;
-		ns = '';
-	} else if (!ns) {
-		ns = '';
-	} else if (ns[0] !== '/') {
-		ns = '/' + ns;
-	}
-	if (!_qsockets[ns]) _qsockets[ns] = {};
-	if (!_qsockets[ns][url]) {
-		_qsockets[ns][url] = null; // pending
-	}
-	// check if socket already connected, or reconnect
-	_connectSocketNS(ns, url, callback, callback2, false);
+	_doInMainFrame('Q.Socket.connect', this, arguments, function () {
+		if (typeof ns === 'function') {
+			callback = ns;
+			ns = '';
+		} else if (!ns) {
+			ns = '';
+		} else if (ns[0] !== '/') {
+			ns = '/' + ns;
+		}
+		if (!_qsockets[ns]) _qsockets[ns] = {};
+		if (!_qsockets[ns][url]) {
+			_qsockets[ns][url] = null; // pending
+		}
+		// check if socket already connected, or reconnect
+		_connectSocketNS(ns, url, callback, callback2, false);
+	});
 };
 
 /**
@@ -12541,6 +12560,7 @@ Q.Audio.stopSpeaking = function () {
 };
 
 var rls = root.localStorage;
+var _frameMessageEvents = {};
 
 /**
  * Methods for working with storage and signaling across frames and windows
@@ -12548,7 +12568,7 @@ var rls = root.localStorage;
  * @namespace Q
  * @static
  */
-Q.Frames = {
+var Frames = Q.Frames = {
 	/**
 	 * An index that uniquely identifies this frame among all frames and windows
 	 * loaded from this domain.
@@ -12562,83 +12582,93 @@ Q.Frames = {
 	 * in the other "client" iframes.
 	 * @method mainIndex
 	 * @static
-	 * @return {Integer} 
+	 * @return {Integer|null} 
 	 */
 	mainIndex: function () {
-		return parseInt(rls.getItem(Q.Frames.mainIndexKey));
+		return parseInt(rls.getItem(Frames.mainIndexKey)) || null;
 	},
 	/**
 	 * Send some message to all other frames on this domain.
 	 * This will trigger their onMessage() event with the data.
 	 * @method message
 	 * @static
+	 * @param {String} type The type of the message
 	 * @param {Object} data Will be JSON-encoded for transmitting via localStorage
 	 * @param {Integer} [index] Place the index of a specific frame here,
 	 *  such as the return value of Q.Frames.main(), to message only this frame.
 	 *  Otherwise it will be broadcast to all other frames.
 	 * @param {Function} [callback] If index is provided, then you can optionally
-	 *  pass a callback here whose first parameter will be false if the message was not handled
-	 *  by the frame with that index (because it was unloaded), or true if it was handled.
+	 *  pass a callback here whose first parameter will be false if the message was not received
+	 *  by the frame with that index (because it was unloaded), or true if it was received.
 	 */
-	message: function (data, index, callback) {
+	message: function (type, data, index, callback) {
 		var messageIndex;
-		rls.setItem(Q.Frames.message.counterKey,
-			messageIndex = ((parseInt(rls.getItem(Q.Frames.message.counterKey)) || 0) + 1) % 1000000
+		rls.setItem(Frames.message.counterKey,
+			messageIndex = ((parseInt(rls.getItem(Frames.message.counterKey)) || 0) + 1) % 1000000
 		);
 		var value = {
+			type: type,
 			data: data,
 			toIndex: index || null,
-			fromIndex: Q.Frames.index,
+			fromIndex: Frames.index,
 			messageIndex: messageIndex,
 			rand: Math.random().toString(36).substring(7)
 			// rand is to make it unique and trigger "storage" event
 		};
-		rls.setItem(Q.Frames.message.key, JSON.stringify(value));
-		rls.removeItem(Q.Frames.message.key); // just to keep things clean
+		rls.setItem(Frames.message.key, JSON.stringify(value));
+		rls.removeItem(Frames.message.key); // just to keep things clean
 		if (callback) {
-			Q.Frames.message.callbacks[messageIndex] = callback;
+			Frames.message.callbacks[messageIndex] = callback;
 			setTimeout(function () {
-				var cb = Q.Frames.message.callbacks[messageIndex];
+				var cb = Frames.message.callbacks[messageIndex];
 				if (cb) {
 					callback(false); // it's been 100 ms and it hasn't been handled
-					delete Q.Frames.message.callbacks[messageIndex];
+					delete Frames.message.callbacks[messageIndex];
 				}
 			}, 100);
 		}
 	},
 	/**
-	 * This event occurs when Q.Frames.message() was called in one of the frames
-	 * to send some data.
+	 * This event factory is used to create events to be handled
+	 * when Q.Frames.message() was called in one of the frames
+	 * to send some data. Call the factory and pass the messageType to create an event handler.
 	 * @event onMessage
-	 * @param {Object} data the data that was passed.
-	 * @param {Integer} fromIndex The index of the frame from which it was sent
-	 * @param {Boolean} wasBroadcast Whether it was broadcast to all frames
+	 * @param name {String} The name of the message. Can be "" to listen on all messages.
 	 */
-	onMessage: new Q.Event(function (data, fromIndex, wasBroadcast) {
-		if (wasBroadcast && data && data["Q.needNewMainIndex"]) {
-			if (!rls.getItem(Q.Frames.mainIndexKey)) {
-				// indicate this frame as the main one, if no one else has
-				rls.setItem(Q.Frames.mainIndexKey, Q.Frames.index);
-			}
-		}
-	}, 'Q.Frames')
+	onMessage: new Q.Event.factory(_frameMessageEvents, "")
 };
 
-Q.Frames.mainIndexKey = "Q.Frames.mainIndex";
-Q.Frames.counterKey = "Q.Frames.counter";
-Q.Frames.message.key = "Q.Frames.message";
-Q.Frames.message.handledKey = "Q.Frames.message.handled";
-Q.Frames.message.counterKey = "Q.Frames.message.counter";
-Q.Frames.message.callbacks = {};
+Frames.mainIndexKey = "Q.Frames.mainIndex";
+Frames.counterKey = "Q.Frames.counter";
+Frames.message.key = "Q.Frames.message";
+Frames.message.handledKey = "Q.Frames.message.handled";
+Frames.message.counterKey = "Q.Frames.message.counter";
+Frames.message.callbacks = {};
+
+function _indicateThisAsMainFrame() {
+	rls.setItem(Frames.mainIndexKey, Frames.index);
+}
 
 (function () {
 	rls.setItem(Q.Frames.counterKey,
-		Q.Frames.index = (parseInt(rls.getItem(Q.Frames.counterKey) || 0) + 1) % 1000000
+		Frames.index = (parseInt(rls.getItem(Frames.counterKey) || 0) + 1) % 1000000
 	);
-	if (!rls.getItem(Q.Frames.mainIndexKey)) {
-		// indicate this frame as the main one, if no one else has
-		rls.setItem(Q.Frames.mainIndexKey, Q.Frames.index);
+	var mainIndex = Q.Frames.mainIndex();
+	if (!mainIndex) {
+		_indicateThisAsMainFrame();
+	} else {
+		Frames.message('Q.seekingMainFrame', {}, mainIndex, function (received) {
+			if (received === false) {
+				_indicateThisAsMainFrame();
+			}
+		});
 	}
+	Frames.onMessage("Q.needNewMainIndex").set(
+	function (type, data, fromIndex, wasBroadcast) {
+		if (wasBroadcast && !rls.getItem(Frames.mainIndexKey)) {
+			_indicateThisAsMainFrame();
+		}
+	}, 'Q.Frames');
 	Q.addEventListener(window, 'storage', function (e) {
 		var handledKey = Q.Frames.message.handledKey;
 		if (e.key === handledKey) {
@@ -12646,7 +12676,7 @@ Q.Frames.message.callbacks = {};
 			if (mi != null) {
 				// signal arrived indicating some messageIndex was handled
 				if (cb = Q.Frames.message.callbacks[mi]) {
-					cb(true);
+					try { cb(true); } catch (e) {}
 					delete Q.Frames.message.callbacks[mi];
 				}
 			}
@@ -12662,16 +12692,19 @@ Q.Frames.message.callbacks = {};
 		}
 		rls.setItem(handledKey, value.messageIndex); // signal that it was handled
 		rls.removeItem(handledKey); // just to keep things clean
-		Q.Frames.onMessage.handle.call(
-			Q, value.data, value.fromIndex, value.toIndex == null
-		);
+		var event = _frameMessageEvents[value.type];
+		if (event) {
+			event.handle.call(
+				Q, value.type, value.data, value.fromIndex, value.toIndex == null
+			);
+		}
 	});
 	Q.onUnload.set(function () {
 		if (Q.Frames.mainIndex() !== Q.Frames.index) {
 			return;
 		}
 		rls.removeItem(Q.Frames.mainIndexKey);
-		Q.Frames.message({"Q.needNewMainIndex": true});
+		Q.Frames.message('Q.needNewMainIndex');
 	}, 'Q.Frames');
 })();
 
