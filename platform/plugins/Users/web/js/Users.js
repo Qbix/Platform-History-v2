@@ -2994,7 +2994,7 @@
 
 		scheme: null,
 
-		scope: null,
+		scope: 'email,public_profile',
 
 		construct: function () {
 			Users.Facebook.appId = Q.getObject(['facebook', Q.info.app, 'appId'], Users.apps);
@@ -3058,7 +3058,7 @@
 				FB.login(function (response) {
 					Users.Facebook.doLogin(response);
 					callback && callback(response);
-				}, scope ? {scope: scope.join(',')} : undefined);
+				}, scope ? {scope: scope} : undefined);
 				break;
 			case 'native':
 				facebookConnectPlugin.login(["public_profile", "email"], function (response) {
@@ -3073,7 +3073,7 @@
 					'?client_id=' + Users.Facebook.appId +
 					'&redirect_uri=' + Q.baseUrl() + '/login/facebook%3Fscheme%3D' + Users.Facebook.scheme +
 					'&state=' + _stringGen(10) +
-					'&response_type=token&scope=email,public_profile';
+					'&response_type=token&scope=' + scope;
 				cordova.plugins.browsertab.openUrl(url,
 					{scheme: Users.Facebook.scheme + '://'},
 					function(success) { console.log(success); },
