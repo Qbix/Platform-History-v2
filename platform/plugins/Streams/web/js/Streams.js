@@ -5232,7 +5232,7 @@ Q.onInit.add(function _Streams_onInit() {
 			return;
 		}
 
-		Users.Socket.onEvent('Streams/post').set(function (message, byUserId) {
+		Users.Socket.onEvent('Streams/post').set(function (message) {
 			message = Streams.Message.construct(message);
 			var messageType = message.type;
 			var messageUrl = message.getInstruction('inviteUrl') || message.getInstruction('url');
@@ -5726,6 +5726,9 @@ function _preloadedStreams(elem) {
 }
 
 function _updateMessageCache(msg) {
+	if (Streams.cache.where === 'local' && Q.Frames && !Q.Frames.isMain()) {
+		return false; // do nothing, this isn't the main frame
+	}
 	Streams.get.cache.each([msg.publisherId, msg.streamName],
 		function (k, v) {
 			var stream = (v && !v.params[0]) ? v.subject : null;
@@ -5747,6 +5750,9 @@ function _updateMessageCache(msg) {
 }
 
 function _updateRelatedTotalsCache(msg, instructions, which, change) {
+	if (Streams.cache.where === 'local' && Q.Frames && !Q.Frames.isMain()) {
+		return false; // do nothing, this isn't the main frame
+	}
 	Streams.get.cache.each([msg.publisherId, msg.streamName],
 		function (k, v) {
 			var stream = (v && !v.params[0]) ? v.subject : null;
@@ -5761,6 +5767,9 @@ function _updateRelatedTotalsCache(msg, instructions, which, change) {
 }
 
 function _updateMessageTotalsCache(msg) {
+	if (Streams.cache.where === 'local' && Q.Frames && !Q.Frames.isMain()) {
+		return false; // do nothing, this isn't the main frame
+	}
 	Streams.get.cache.each([msg.publisherId, msg.streamName],
 		function (k, v) {
 			var stream = (v && !v.params[0]) ? v.subject : null;

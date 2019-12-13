@@ -524,8 +524,8 @@ Sp.matchTypes.adapters = {
 		var parts = this.split(' ');
 		var res = [];
 		var regexp = (options && options.requireScheme)
-			? /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]{3})(:[0-9]{1,5})?([\/|\?].*)?$/gim
-			: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]{3})(:[0-9]{1,5})?([\/|\?].*)?$/gim;
+			? /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim
+			: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim;
 		for (var i=0; i<parts.length; i++) {
 			if (!parts[i].match(regexp)) {
 				continue;
@@ -2258,7 +2258,7 @@ Evp.add = function _Q_Event_prototype_add(handler, key, prepend) {
  * @param {boolean} prepend If true, then prepends the handler to the chain
  * @return {String} The key under which the handler was set
  */
-Evp.setOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
+Evp.setOnce = function _Q_Event_prototype_setOnce(handler, key, prepend) {
 	if (!handler) return undefined;
 	var event = this;
 	return key = event.set(function _setOnce() {
@@ -5168,11 +5168,10 @@ Q.Cache = function _Q_Cache(options) {
 function Q_Cache_get(cache, key, special) {
 	if (cache.documentStorage) {
 		return (special === true) ? cache.special[key] : cache.data[key];
-	} else {
-		var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
-		var item = storage.getItem(cache.name + (special===true ? "\t" : "\t\t") + key);
-		return item ? JSON.parse(item) : undefined;
 	}
+	var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
+	var item = storage.getItem(cache.name + (special===true ? "\t" : "\t\t") + key);
+	return item ? JSON.parse(item) : undefined;
 }
 function Q_Cache_set(cache, key, obj, special) {
 	if (cache.documentStorage) {
@@ -5182,6 +5181,9 @@ function Q_Cache_set(cache, key, obj, special) {
 			cache.data[key] = obj;
 		}
 	} else {
+		if (cache.localStorage && Q.Frames && !Q.Frames.isMain()) {
+			return false; // do nothing, this isn't the main frame
+		}
 		var serialized = JSON.stringify(obj);
 		var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
 		storage.setItem(cache.name + (special===true ? "\t" : "\t\t") + key, serialized);
@@ -5195,6 +5197,9 @@ function Q_Cache_remove(cache, key, special) {
 			delete cache.data[key];
 		}
 	} else {
+		if (cache.localStorage && Q.Frames && !Q.Frames.isMain()) {
+			return false; // do nothing, this isn't the main frame
+		}
 		var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
 		storage.removeItem(cache.name + (special === true ? "\t" : "\t\t") + key);
 	}
@@ -9585,6 +9590,7 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 				var name = item[1];
 				_ioOn(socket, name, Q.Socket.onEvent(ns, url, name).handle); // may overwrite again, but it's ok
 				_ioOn(socket, name, Q.Socket.onEvent(ns, '', name).handle);
+				Q.handle(Q.Socket.onRegister, Q.Socket, [ns, url, name]);
 			});
 		}
 		
@@ -9614,23 +9620,6 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 	}
 }
 
-function _doInMainFrame(functionPath, subject, params, callback) {
-	// var mainIndex = Frames.mainIndex();
-	// if (mainIndex) {
-	// 	Frames.message({
-	// 		Q: {
-	// 			call: "Q.Socket.connect",
-	// 			params: [ns, url, callback, callback2]
-	// 		}
-	// 	}, mainIndex, function (received) {
-	// 		if (!received) {
-	// 			return callback.apply(subject, params);
-	// 		}
-	// 		Frames.onMessage()
-	// 	});
-	// }
-};
-
 /**
  * Connects a socket, and stores it in the list of connected sockets
  * @static
@@ -9644,23 +9633,23 @@ Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, callback2) {
 	if (!url) {
 		return false;
 	}
-	_doInMainFrame('Q.Socket.connect', this, arguments, function () {
-		if (typeof ns === 'function') {
-			callback = ns;
-			ns = '';
-		} else if (!ns) {
-			ns = '';
-		} else if (ns[0] !== '/') {
-			ns = '/' + ns;
-		}
-		if (!_qsockets[ns]) _qsockets[ns] = {};
-		if (!_qsockets[ns][url]) {
-			_qsockets[ns][url] = null; // pending
-		}
-		// check if socket already connected, or reconnect
-		_connectSocketNS(ns, url, callback, callback2, false);
-	});
+	if (typeof ns === 'function') {
+		callback = ns;
+		ns = '';
+	} else if (!ns) {
+		ns = '';
+	} else if (ns[0] !== '/') {
+		ns = '/' + ns;
+	}
+	if (!_qsockets[ns]) _qsockets[ns] = {};
+	if (!_qsockets[ns][url]) {
+		_qsockets[ns][url] = null; // pending
+	}
+	// check if socket already connected, or reconnect
+	_connectSocketNS(ns, url, callback, callback2, false);
 };
+
+Q.Socket.onRegister = new Q.Event();
 
 /**
  * Disconnects a socket corresponding to a Q.Socket
@@ -9677,6 +9666,10 @@ Q.Socket.prototype.disconnect = function _Q_Socket_prototype_disconnect() {
 		return;
 	}
 	qs.socket.disconnect();
+};
+
+Q.Socket.prototype.toJSON = function () {
+	return {ns: this.ns, url: this.url};
 };
 
 /**
@@ -9796,7 +9789,7 @@ Q.Socket.onConnect = Q.Event.factory(
 );
 
 /**
- * Returns Q.Event which occurs on a message post event coming from socket.io
+ * Returns Q.Event which occurs on posted event coming from socket.io
  * Generic callbacks can be assigend by setting messageType to ""
  * @event onEvent
  * @param name {String} name of the event to listen for
@@ -12558,155 +12551,6 @@ Q.Audio.stopSpeaking = function () {
 		root.speechSynthesis.pause();
 	}
 };
-
-var rls = root.localStorage;
-var _frameMessageEvents = {};
-
-/**
- * Methods for working with storage and signaling across frames and windows
- * @class Q.Frames
- * @namespace Q
- * @static
- */
-var Frames = Q.Frames = {
-	/**
-	 * An index that uniquely identifies this frame among all frames and windows
-	 * loaded from this domain.
-	 * @property index
-	 * @type {Number}
-	 */
-	index: null,
-	/**
-	 * Get the index of the "main" iframe, that will be the one opening
-	 * sockets, making requests to the server, and triggering any callbacks
-	 * in the other "client" iframes.
-	 * @method mainIndex
-	 * @static
-	 * @return {Integer|null} 
-	 */
-	mainIndex: function () {
-		return parseInt(rls.getItem(Frames.mainIndexKey)) || null;
-	},
-	/**
-	 * Send some message to all other frames on this domain.
-	 * This will trigger their onMessage() event with the data.
-	 * @method message
-	 * @static
-	 * @param {String} type The type of the message
-	 * @param {Object} data Will be JSON-encoded for transmitting via localStorage
-	 * @param {Integer} [index] Place the index of a specific frame here,
-	 *  such as the return value of Q.Frames.main(), to message only this frame.
-	 *  Otherwise it will be broadcast to all other frames.
-	 * @param {Function} [callback] If index is provided, then you can optionally
-	 *  pass a callback here whose first parameter will be false if the message was not received
-	 *  by the frame with that index (because it was unloaded), or true if it was received.
-	 */
-	message: function (type, data, index, callback) {
-		var messageIndex;
-		rls.setItem(Frames.message.counterKey,
-			messageIndex = ((parseInt(rls.getItem(Frames.message.counterKey)) || 0) + 1) % 1000000
-		);
-		var value = {
-			type: type,
-			data: data,
-			toIndex: index || null,
-			fromIndex: Frames.index,
-			messageIndex: messageIndex,
-			rand: Math.random().toString(36).substring(7)
-			// rand is to make it unique and trigger "storage" event
-		};
-		rls.setItem(Frames.message.key, JSON.stringify(value));
-		rls.removeItem(Frames.message.key); // just to keep things clean
-		if (callback) {
-			Frames.message.callbacks[messageIndex] = callback;
-			setTimeout(function () {
-				var cb = Frames.message.callbacks[messageIndex];
-				if (cb) {
-					callback(false); // it's been 100 ms and it hasn't been handled
-					delete Frames.message.callbacks[messageIndex];
-				}
-			}, 100);
-		}
-	},
-	/**
-	 * This event factory is used to create events to be handled
-	 * when Q.Frames.message() was called in one of the frames
-	 * to send some data. Call the factory and pass the messageType to create an event handler.
-	 * @event onMessage
-	 * @param name {String} The name of the message. Can be "" to listen on all messages.
-	 */
-	onMessage: new Q.Event.factory(_frameMessageEvents, "")
-};
-
-Frames.mainIndexKey = "Q.Frames.mainIndex";
-Frames.counterKey = "Q.Frames.counter";
-Frames.message.key = "Q.Frames.message";
-Frames.message.handledKey = "Q.Frames.message.handled";
-Frames.message.counterKey = "Q.Frames.message.counter";
-Frames.message.callbacks = {};
-
-function _indicateThisAsMainFrame() {
-	rls.setItem(Frames.mainIndexKey, Frames.index);
-}
-
-(function () {
-	rls.setItem(Q.Frames.counterKey,
-		Frames.index = (parseInt(rls.getItem(Frames.counterKey) || 0) + 1) % 1000000
-	);
-	var mainIndex = Q.Frames.mainIndex();
-	if (!mainIndex) {
-		_indicateThisAsMainFrame();
-	} else {
-		Frames.message('Q.seekingMainFrame', {}, mainIndex, function (received) {
-			if (received === false) {
-				_indicateThisAsMainFrame();
-			}
-		});
-	}
-	Frames.onMessage("Q.needNewMainIndex").set(
-	function (type, data, fromIndex, wasBroadcast) {
-		if (wasBroadcast && !rls.getItem(Frames.mainIndexKey)) {
-			_indicateThisAsMainFrame();
-		}
-	}, 'Q.Frames');
-	Q.addEventListener(window, 'storage', function (e) {
-		var handledKey = Q.Frames.message.handledKey;
-		if (e.key === handledKey) {
-			var cb, mi = e.newValue;
-			if (mi != null) {
-				// signal arrived indicating some messageIndex was handled
-				if (cb = Q.Frames.message.callbacks[mi]) {
-					try { cb(true); } catch (e) {}
-					delete Q.Frames.message.callbacks[mi];
-				}
-			}
-			return;
-		}
-		if (e.key !== Q.Frames.message.key
-		|| e.newValue == null) {
-			return;
-		}
-		var value = JSON.parse(e.newValue);
-		if (value.toIndex && value.toIndex !== Q.Frames.index) {
-			return;
-		}
-		rls.setItem(handledKey, value.messageIndex); // signal that it was handled
-		rls.removeItem(handledKey); // just to keep things clean
-		var event = _frameMessageEvents[value.type];
-		if (event) {
-			event.handle.call(
-				Q, value.type, value.data, value.fromIndex, value.toIndex == null
-			);
-		}
-	});
-	Q.onUnload.set(function () {
-		if (Q.Frames.mainIndex() !== Q.Frames.index) {
-			return;
-		}
-		rls.removeItem(Q.Frames.mainIndexKey);
-		Q.Frames.message('Q.needNewMainIndex');
-	}, 'Q.Frames');
-})();
 
 /**
  * Methods for temporarily covering up certain parts of the screen with masks
