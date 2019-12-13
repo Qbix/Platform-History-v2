@@ -1,4 +1,10 @@
 <div id="content" class="Streams_participating">
+    <div class="Streams_participating_item Communities_icon" data-type="email" data-defined="<?php echo $user->emailAddress ? 'true' : 'false' ?>">
+        <span><?php echo $user->emailAddress ?></span>
+    </div>
+    <div class="Streams_participating_item Communities_icon" data-type="mobile" data-defined="<?php echo $user->mobileNumber ? 'true' : 'false' ?>">
+        <span><?php echo $user->mobileNumber ?></span>
+    </div>
     <?php foreach($participantsGrouped as $streamType => $participants) {
         if (empty($participants)) {
             continue;

@@ -59,10 +59,61 @@
 	position: absolute;
 	right: 40px;
 }
-.Streams_participating .Q_tool.Q_expandable_tool h2 {
+.Streams_participating .Q_tool.Q_expandable_tool h2,
+.Streams_participating .Streams_participating_item {
 	padding: 10px;
 	background-color: rgba(180, 200, 220, 0.7);
 	font-weight: 400;
+	font-size: 20px;
+	border-radius: 10px;
+	margin-top: 10px;
+	white-space: nowrap;
+	position: relative;
+}
+.Streams_participating .Streams_participating_item span {
+	vertical-align: middle;
+	color: #008504;
+}
+.Streams_participating .Streams_participating_item .Streams_participating_item_actions {
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	overflow: hidden;
+
+}
+.Streams_participating .Streams_participating_item .Streams_participating_item_actions .Q_actions_container {
+	position: static !important;
+}
+.Streams_participating .Streams_participating_item:before {
+	color: #919191;
+	font-size: 24px;
+	vertical-align: middle;
+	font-family: 'qplatform-communities' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.Streams_participating .Streams_participating_item[data-type=email]:before {
+	content: "\e91a";
+}
+.Streams_participating .Streams_participating_item[data-type=mobile]:before {
+	content: "\e918";
+}
+.Streams_participating .Streams_participating_item[data-defined=true] .Q_actions_plus {
+	display: none !important;
+}
+.Streams_participating .Streams_participating_item .Q_actions_container {
+	text-align: right;
+}
+.Streams_participating .Streams_participating_item[data-defined=false] .Q_actions_edit,
+.Streams_participating .Streams_participating_item[data-defined=false] .Q_actions_remove {
+	display: none !important;
 }
 .Streams_participating .Q_tool.Q_expandable_tool h2 span {
 	font-weight: normal;
