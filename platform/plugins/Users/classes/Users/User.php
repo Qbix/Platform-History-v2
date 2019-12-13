@@ -450,6 +450,7 @@ class Users_User extends Base_Users_User
 		and $email->state !== 'unverified') {
 			if ($email->userId === $this->id) {
 				$email->set('user', $this);
+				$this->setEmailAddress($emailAddress);
 				return $email;
 			}
 			// Otherwise, say it's verified for another user,
@@ -755,6 +756,7 @@ class Users_User extends Base_Users_User
 		and $mobile->state !== 'unverified') {
 			if ($mobile->userId === $this->id) {
 				$mobile->set('user', $this);
+				$this->setMobileNumber($mobileNumber);
 				return $mobile;
 			}
 			// Otherwise, say it's verified for another user,

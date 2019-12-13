@@ -14,7 +14,11 @@ Q.page("Streams/participating", function () {
 	});
 
 	var _modIdentified = function () {
-		var type = $(this).closest('.Streams_participating_item').attr('data-type');
+		var $this = $(this);
+		var $item = $this.closest('.Streams_participating_item');
+		var type = $item.attr('data-type');
+		var $identifier = $('span', $item);
+
 		Q.Users.setIdentifier({
 			identifierType: type,
 			onSuccess: function () {
