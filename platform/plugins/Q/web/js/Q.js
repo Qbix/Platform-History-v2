@@ -9668,6 +9668,10 @@ Q.Socket.prototype.disconnect = function _Q_Socket_prototype_disconnect() {
 	qs.socket.disconnect();
 };
 
+Q.Socket.prototype.toJSON = function () {
+	return {ns: this.ns, url: this.url};
+};
+
 /**
  * Disconnects all sockets that have been connected
  * @static

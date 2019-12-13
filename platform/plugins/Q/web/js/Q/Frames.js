@@ -108,20 +108,32 @@ var Frames = Q.Frames = {
 	 * @param {String} methodPath for example "Users.Socket.connect"
 	 */
 	useMainFrame: function(original, methodPath) {
-		return function () {
+		var wrapper = function () {
+			var t = this;
+			var a = arguments;
 			var f = Frames.useMainFrame;
 			var callIndex = f.callIndex = ((f.callIndex || 0) + 1) % 1000000;
 			var subjectPath = methodPath.split('.').slice(0, -1).join('.');
 			var subject = Q.getObject(subjectPath);
-			var params = Array.prototype.slice.call(arguments, 0);
+			var args = Array.prototype.slice.call(arguments, 0);
 			var mainIndex = Frames.mainIndex();
 			if (!mainIndex || mainIndex === Frames.index) {
 				if (mainIndex !== Frames.index) {
 					_becomeMainFrame();
 				}
-				return original.apply(subject, params);
+				return original.apply(t, a);
 			}
-			var callbacks = [];
+			var params = [], callbacks = [];
+			var i=0, l=args.length;
+			while (i < l) {
+				// assume callbacks are at the end
+				if (typeof args[i] === 'function') {
+					callbacks.push(args[i]);
+				} else {
+					params.push(args[i]);
+				}
+				++i;
+			}
 			Frames.message('Q.call', {
 				methodPath: methodPath,
 				subjectPath: subjectPath,
@@ -131,19 +143,22 @@ var Frames = Q.Frames = {
 			}, mainIndex, function (received) {
 				if (!received) {
 					_becomeMainFrame();
-					return original.apply(subject, params);
+					return original.apply(t, a);
 				}
 				// the below is only for getters, you don't need them for most functions
 				Frames.onMessage('Q.callback ' + callIndex).addOnce(
 				function (type, data, fromIndex, wasBroadcast) {
-					debugger;
-					// todo: invoke corresponding callback from callbackIndex
-					// with corresponding parameters and subjectPath
-					// this is mostly for getters, then they will call _prepare()
-					// and invoke the correct callbacks
+					var callback = callbacks[data.callbackIndex];
+					var subject = data.subject || {};
+					subject.fromFrames = Frames;
+					if (callback) {
+						callback.apply(data.subject, data.params);
+					}
 				});
 			});
 		}
+		Q.extend(wrapper, original);
+		return wrapper;
 	}
 };
 
@@ -176,6 +191,8 @@ function _Q_call_message (type, data, fromIndex, wasBroadcast) {
 	Q.each(1, data.callbackCount, 1, function (i) {
 		params.push(function () {
 			Frames.message(callbackMessageType, {
+				callbackIndex: i-1,
+				subject: Q.isPlainObject(this) ? this : null,
 				params: Array.prototype.slice.call(arguments, 0),
 				callIndex: data.callIndex
 			}, fromIndex);
@@ -256,7 +273,7 @@ Q.Socket.onRegister.set(function (ns, url, name) {
 		if (this.fromFrames === Frames) {
 			return;
 		}
-		if (Frames.index == Frames.mainIndex()) {
+		if (Frames.isMain()) {
 			var params = Array.prototype.slice.call(arguments, 0);
 			Frames.message('Q.Socket.onEvent', { params: params, ns: ns, url: '', name: name } );
 		}
@@ -265,7 +282,7 @@ Q.Socket.onRegister.set(function (ns, url, name) {
 		if (this.fromFrames === Frames) {
 			return;
 		}
-		if (Frames.index == Frames.mainIndex()) {
+		if (Frames.isMain()) {
 			var params = Array.prototype.slice.call(arguments, 0);
 			Frames.message('Q.Socket.onEvent', { params: params, ns: ns, url: url, name: name } );
 		}
