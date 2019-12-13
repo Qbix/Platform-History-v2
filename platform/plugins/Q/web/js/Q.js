@@ -524,8 +524,8 @@ Sp.matchTypes.adapters = {
 		var parts = this.split(' ');
 		var res = [];
 		var regexp = (options && options.requireScheme)
-			? /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]{3})(:[0-9]{1,5})?([\/|\?].*)?$/gim
-			: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{3}\.[0-9]{3}\.[0-9]{3}\.[0-9]{3})(:[0-9]{1,5})?([\/|\?].*)?$/gim;
+			? /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim
+			: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim;
 		for (var i=0; i<parts.length; i++) {
 			if (!parts[i].match(regexp)) {
 				continue;
@@ -9585,7 +9585,7 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 				var name = item[1];
 				_ioOn(socket, name, Q.Socket.onEvent(ns, url, name).handle); // may overwrite again, but it's ok
 				_ioOn(socket, name, Q.Socket.onEvent(ns, '', name).handle);
-				Q.handle(Q.Socket.onRegister, Q.Socket, [ns, url]);
+				Q.handle(Q.Socket.onRegister, Q.Socket, [ns, url, name]);
 			});
 		}
 		

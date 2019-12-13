@@ -74,7 +74,7 @@ var Frames = Q.Frames = {
 					callback(false); // it's been 100 ms and it hasn't been handled
 					delete Frames.message.callbacks[messageIndex];
 				}
-			}, 300);
+			}, 1000);
 		}
 	},
 	/**
@@ -150,7 +150,7 @@ function _Q_Socket_onEvent_message (type, data, fromIndex, wasBroadcast) {
 	if (Q.Socket.get(data.ns, data.url)) {
 		return; // we already have our own socket
 	}
-	var event = Q.Socket.onEvent(data.ns, data.url);
+	var event = Q.Socket.onEvent(data.ns, data.url, data.name);
 	Q.handle(event, {
 		nsp: data.ns,
 		fromFrames: Frames,
@@ -242,14 +242,14 @@ function _becomeMainFrame() {
 	}, 'Q.Frames');
 })();
 
-Q.Socket.onRegister.set(function (ns, url) {
+Q.Socket.onRegister.set(function (ns, url, name) {
 	Q.Socket.onEvent(ns, '', name).add(function (message) {
 		if (this.fromFrames === Frames) {
 			return;
 		}
 		if (Frames.index == Frames.mainIndex()) {
 			var params = Array.prototype.slice.call(arguments, 0);
-			Frames.message('Q.Socket.onEvent', { params: params, ns: ns, url: '' } );
+			Frames.message('Q.Socket.onEvent', { params: params, ns: ns, url: '', name: name } );
 		}
 	}, 'Q.Frames');
 	Q.Socket.onEvent(ns, url, name).add(function (message) {
@@ -258,7 +258,7 @@ Q.Socket.onRegister.set(function (ns, url) {
 		}
 		if (Frames.index == Frames.mainIndex()) {
 			var params = Array.prototype.slice.call(arguments, 0);
-			Frames.message('Q.Socket.onEvent', { params: params, ns: ns, url: url } );
+			Frames.message('Q.Socket.onEvent', { params: params, ns: ns, url: url, name: name } );
 		}
 	}, 'Q.Frames');
 }, 'Q.Frames');
