@@ -120,7 +120,8 @@
             "subject": "Did you get an invite?",
             "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
 			"CheckYourEmail": "Please check your email and follow instructions!"
-        }
+        },
+		"AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?"
     },
     "webrtc": {
         "allow": {
