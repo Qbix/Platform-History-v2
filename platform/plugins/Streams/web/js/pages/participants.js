@@ -38,7 +38,41 @@ Q.page("Streams/participating", function () {
 			plus: _modIdentified,
 			edit: _modIdentified,
 			remove: function () {
+				var $this = $(this);
+				var $item = $this.closest('.Streams_participating_item');
 
+				Q.Text.get('Streams/content', function (err, text) {
+					var msg = Q.firstErrorMessage(err);
+					if (msg) {
+						return console.warn(msg);
+					}
+
+					var text = Q.getObject('followup.AreYouSureRemoveIdentifier', text);
+					Q.confirm(text, function (res) {
+						if (!res) {
+							return;
+						}
+
+						$item.addClass('Q_working');
+						var $identifier = $('span', $item);
+
+						Q.req('Users/identifier', [], function (err, data) {
+							$item.removeClass('Q_working');
+							var fem = Q.firstErrorMessage(err, data && data.errors);
+							if (fem) {
+								return Q.alert(fem);
+							}
+
+							$item.attr('data-defined', 'false');
+							$identifier.html('');
+						}, {
+							method: 'delete',
+							fields: {
+								identifier: $identifier.text()
+							}
+						});
+					});
+				});
 			}
 		},
 		alwaysShow: true,
