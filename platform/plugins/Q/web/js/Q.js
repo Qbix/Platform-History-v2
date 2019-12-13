@@ -5168,11 +5168,10 @@ Q.Cache = function _Q_Cache(options) {
 function Q_Cache_get(cache, key, special) {
 	if (cache.documentStorage) {
 		return (special === true) ? cache.special[key] : cache.data[key];
-	} else {
-		var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
-		var item = storage.getItem(cache.name + (special===true ? "\t" : "\t\t") + key);
-		return item ? JSON.parse(item) : undefined;
 	}
+	var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
+	var item = storage.getItem(cache.name + (special===true ? "\t" : "\t\t") + key);
+	return item ? JSON.parse(item) : undefined;
 }
 function Q_Cache_set(cache, key, obj, special) {
 	if (cache.documentStorage) {
@@ -5182,6 +5181,9 @@ function Q_Cache_set(cache, key, obj, special) {
 			cache.data[key] = obj;
 		}
 	} else {
+		if (cache.localStorage && Q.Frames && !Q.Frames.isMain()) {
+			return false; // do nothing, this isn't the main frame
+		}
 		var serialized = JSON.stringify(obj);
 		var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
 		storage.setItem(cache.name + (special===true ? "\t" : "\t\t") + key, serialized);
@@ -5195,6 +5197,9 @@ function Q_Cache_remove(cache, key, special) {
 			delete cache.data[key];
 		}
 	} else {
+		if (cache.localStorage && Q.Frames && !Q.Frames.isMain()) {
+			return false; // do nothing, this isn't the main frame
+		}
 		var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
 		storage.removeItem(cache.name + (special === true ? "\t" : "\t\t") + key);
 	}

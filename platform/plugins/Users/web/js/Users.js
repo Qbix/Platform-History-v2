@@ -2262,6 +2262,7 @@
 
 		var where = Users.cache.where || 'document';
 
+		Users.get = Q.Frames.useMainFrame(Users.get, 'Q.Users.get');
 		Users.get = Q.getter(Users.get, {
 			cache: Q.Cache[where]("Users.get", 100),
 			throttle: 'Users.get',

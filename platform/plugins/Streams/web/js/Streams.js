@@ -5726,6 +5726,9 @@ function _preloadedStreams(elem) {
 }
 
 function _updateMessageCache(msg) {
+	if (Streams.cache.where === 'local' && Q.Frames && !Q.Frames.isMain()) {
+		return false; // do nothing, this isn't the main frame
+	}
 	Streams.get.cache.each([msg.publisherId, msg.streamName],
 		function (k, v) {
 			var stream = (v && !v.params[0]) ? v.subject : null;
@@ -5747,6 +5750,9 @@ function _updateMessageCache(msg) {
 }
 
 function _updateRelatedTotalsCache(msg, instructions, which, change) {
+	if (Streams.cache.where === 'local' && Q.Frames && !Q.Frames.isMain()) {
+		return false; // do nothing, this isn't the main frame
+	}
 	Streams.get.cache.each([msg.publisherId, msg.streamName],
 		function (k, v) {
 			var stream = (v && !v.params[0]) ? v.subject : null;
@@ -5761,6 +5767,9 @@ function _updateRelatedTotalsCache(msg, instructions, which, change) {
 }
 
 function _updateMessageTotalsCache(msg) {
+	if (Streams.cache.where === 'local' && Q.Frames && !Q.Frames.isMain()) {
+		return false; // do nothing, this isn't the main frame
+	}
 	Streams.get.cache.each([msg.publisherId, msg.streamName],
 		function (k, v) {
 			var stream = (v && !v.params[0]) ? v.subject : null;

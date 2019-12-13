@@ -37,6 +37,15 @@ var Frames = Q.Frames = {
 		return parseInt(rls.getItem(Frames.mainIndexKey)) || null;
 	},
 	/**
+	 * Get whether this is the main frame
+	 * @method isMain
+	 * @static
+	 * @return {Boolean} 
+	 */
+	isMain: function () {
+		return Frames.mainIndex() === Frames.index;
+	},
+	/**
 	 * Send some message to all other frames on this domain.
 	 * This will trigger their onMessage() event with the data.
 	 * @method message
@@ -101,7 +110,7 @@ var Frames = Q.Frames = {
 	useMainFrame: function(original, methodPath) {
 		return function () {
 			var f = Frames.useMainFrame;
-			var callIndex = f.callIndex = (f.callIndex || 0) + 1;
+			var callIndex = f.callIndex = ((f.callIndex || 0) + 1) % 1000000;
 			var subjectPath = methodPath.split('.').slice(0, -1).join('.');
 			var subject = Q.getObject(subjectPath);
 			var params = Array.prototype.slice.call(arguments, 0);
@@ -164,7 +173,7 @@ function _Q_call_message (type, data, fromIndex, wasBroadcast) {
 	var callbacks = [];
 	var callbackMessageType = 'Q.callback ' + data.callIndex;
 	var params = Q.copy(data.params);
-	Q.each(0, data.callbackCount, function (i) {
+	Q.each(1, data.callbackCount, 1, function (i) {
 		params.push(function () {
 			Frames.message(callbackMessageType, {
 				params: Array.prototype.slice.call(arguments, 0),
@@ -172,7 +181,7 @@ function _Q_call_message (type, data, fromIndex, wasBroadcast) {
 			}, fromIndex);
 		});
 	});
-	Q.handle(Q.getObject(data.methodPath), Q.getObject(data.subjectPath), data.params);
+	Q.handle(Q.getObject(data.methodPath), Q.getObject(data.subjectPath), params);
 });
 
 function _becomeMainFrame() {
