@@ -2026,18 +2026,15 @@ Stream.release = function _Stream_release (publisherId, streamName) {
  *   @param {Object} [options.changed=null] An Object of {fieldName: true} pairs naming fields to trigger change events for, even if their values stayed the same.
  *   @param {Boolean} [options.evenIfNotRetained] If the stream wasn't retained (for example because it was missing last time), then refresh anyway
  *   @param {Object} [options.extra] Any extra parameters to pass to the callback
- * @return {boolean} Whether callback will be called, or false if the refresh has been canceled
+ * @return {boolean} Returns false if refresh was canceled because stream was not retained
  */
 Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, options) {
 	var notRetained = !_retainedByStream[Streams.key(publisherId, streamName)];
 	var callbackCalled = false;
 
 	if ((notRetained && !(options && options.evenIfNotRetained))) {
-		if (!callbackCalled) {
-			Q.handle(callback, this, [false]);
-			callbackCalled = true;
-		}
-		Streams.get.cache.removeEach([publisherId, streamName]);
+		Q.handle(callback, this, [false]);
+		// Streams.get.cache.removeEach([publisherId, streamName]);
 		return false;
 	}
 	var o = options || {};
@@ -5046,7 +5043,7 @@ function _onResultHandler(subject, params, args, shared, original) {
 	if (key == undefined || params[0] || !subject) {
 		return; // either retainWith was not called or an error occurred during the request
 	}
-	if (subject instanceof Stream) {
+	if (Streams.isStream(subject)) {
 		subject.retain(key);
 	} else {
 		if (subject.stream) {
@@ -5072,7 +5069,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 		cache: Q.Cache[where]("Streams.get", 1000),
 		throttle: 'Streams.get',
 		prepare: function (subject, params, callback) {
-			if (subject instanceof Stream) {
+			if (Streams.isStream(subject)) {
 				return callback(subject, params);
 			}
 			if (params[0]) {
