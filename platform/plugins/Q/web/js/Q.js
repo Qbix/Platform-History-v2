@@ -12711,6 +12711,12 @@ Q.Masks = {
 			if (!mask.shouldCover) {
 				mask.rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
 			}
+			if (mask.rect.top < 0) {
+				mask.rect.top = 0;
+			}
+			if (mask.rect.bottom < 0) {
+				mask.rect.bottom = 0;
+			}
 			ms.left = scrollLeft + mask.rect.left + 'px';
 			ms.top = scrollTop + mask.rect.top + 'px';
 			ms.width = (mask.rect.right - mask.rect.left) + 'px';
