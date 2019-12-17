@@ -523,8 +523,11 @@ Q.Tool.define("Q/columns", function(options) {
 			var expandBottom = index > 0 && Q.info.isMobile && state.expandOnMobile && state.expandOnMobile.bottom;
 			var $sc = $(state.container);
 			var containerRect = $sc[0].getBoundingClientRect();
+			var statusBackground = document.getElementById('status_background')
+				|| document.getElementsByClassName('Q_status_background')[0];
+			var margin = (statusBackground && statusBackground.getBoundingClientRect().height) || 0;
 			var top = expandTop
-				? -containerRect.top
+				? -containerRect.top + margin
 				: 0;
 			var show = {
 				opacity: 1,
@@ -952,7 +955,10 @@ function presentColumn(tool, $column, fullscreen) {
 		var expandBottom = index > 0 && state.expandOnMobile && state.expandOnMobile.bottom;
 		var containerRect = $sc[0].getBoundingClientRect();
 		if (!fullscreen && expandTop) {
-			var top = expandTop ? -containerRect.top : 0;
+			var statusBackground = document.getElementById('status_background')
+				|| document.getElementsByClassName('Q_status_background')[0];
+			var margin = (statusBackground && statusBackground.getBoundingClientRect().height) || 0;
+			var top = expandTop ? -containerRect.top + margin : 0;
 			$column.css('top', top + 'px');
 		}
 		var columnRect = $cs[0].getBoundingClientRect();

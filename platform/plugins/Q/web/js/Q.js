@@ -1218,6 +1218,7 @@ Q.typeOf = function _Q_typeOf(value) {
  *	value: the value of the current item
  *  Also can be a string, which would be the name of a method to invoke on each item, if possible.
  *  In this case the callback should be followed by an array of arguments to pass to the method calls.
+ *  You can still pass the options afterwards.
  * @param {Object} options Can include the following:
  * @param {boolean} [options.ascending=false] pass true here to traverse in ascending key order, false in descending.
  * @param {boolean} [options.numeric=false] used together with ascending. Pass true to use numeric sort instead of string sort.
@@ -12709,6 +12710,12 @@ Q.Masks = {
 			};
 			if (!mask.shouldCover) {
 				mask.rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
+			}
+			if (mask.rect.top < 0) {
+				mask.rect.top = 0;
+			}
+			if (mask.rect.bottom < 0) {
+				mask.rect.bottom = 0;
 			}
 			ms.left = scrollLeft + mask.rect.left + 'px';
 			ms.top = scrollTop + mask.rect.top + 'px';
