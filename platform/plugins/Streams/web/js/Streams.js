@@ -5892,23 +5892,15 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 	var streamName = Q.getObject("fromStreamName", instructions);
 	var toStreamName = Q.getObject("streamName", message) || "";
 	var toPublisherId = Q.getObject("publisherId", message) || "";
+	var toUrl = Q.getObject("toUrl", instructions);
 	var conversationUrl;
 
 	// only relation type Streams/webrtc and not for myself
-	if (relationType !== 'Streams/webrtc' || publisherId === Q.Users.loggedInUserId()) {
+	if (relationType !== 'Streams/webrtc' || publisherId === Q.Users.loggedInUserId() || !toUrl) {
 		return;
 	}
 
-	// allowed stream types
-	if (['Streams/chat', 'Websites/webpage'].indexOf(message.streamType) >= 0) {
-		conversationUrl = '/conversation/' + toPublisherId + '/' + toStreamName.split('/').pop();
-	} else if (message.streamType === 'Streams/live') {
-		conversationUrl = '/s/' + toPublisherId + '/' + toStreamName;
-	} else {
-		return;
-	}
-
-	var toUrl = Q.baseUrl() + conversationUrl + '?startWebRTC';
+	toUrl += '?startWebRTC';
 
 	Q.Text.get("Streams/content", function (err, text) {
 		Streams.showNoticeIfSubscribed(toPublisherId, toStreamName, message.type, function () {
