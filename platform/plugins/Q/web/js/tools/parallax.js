@@ -5,6 +5,7 @@
 
 	/**
 	 * This tool create parallax effect on tool element.
+	 * !!!WARNING!!! In order to avoid twitching, comment this: Q.Pointer.preventRubberBand
 	 * @class Q parallax
 	 * @constructor
 	 * @param {Object}	[options] Override various options for this tool
