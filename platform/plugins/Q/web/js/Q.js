@@ -7760,7 +7760,7 @@ Q.cookie = function _Q_cookie(name, value, options) {
 			domain = ';domain='+options.domain;
 		} else {
 			var hostname = parts[1].split('/').shift();
-			domain = ';domain=' + hostname;
+			domain = ''; //';domain=' + hostname;
 		}
 		if (value === null) {
 			document.cookie = encodeURIComponent(name)+'=;expires=Thu, 01-Jan-1970 00:00:01 GMT'+path+domain;
