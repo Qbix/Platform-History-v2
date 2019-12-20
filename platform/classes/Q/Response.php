@@ -1713,10 +1713,12 @@ class Q_Response
 		}
 		$header = '';
 		$header = Q::event('Q/Response/sendCookieHeaders',
-			compact('name', 'value', 'expires', 'path', 'header'),
-			'before', false, $header
+			compact('name', 'value', 'expires', 'path', 'domain', 'secure', 'httponly', 'header'),
+			'after', false, $header
 		);
-		header($header);
+		if ($header) {
+			header($header);
+		}
 		self::$cookies = array();
 	}
 
