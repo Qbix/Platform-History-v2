@@ -289,6 +289,7 @@ class Q_Session
 				self::processDbInfo();
 				self::id($id);
 				session_start();
+				header_remove("Set-Cookie"); // we will set it ourselves, thank you
 				$started = true;
 				if (!self::$sessionExists) {
 					if ($throwIfMissingOrInvalid) {
@@ -313,6 +314,7 @@ class Q_Session
 			session_cache_limiter(''); // don't send the cache limiter headers either
 			if (!$started) {
 				session_start();
+				header_remove("Set-Cookie"); // we will set it ourselves, thank you
 			}
 		} catch (Q_Exception_MissingRow $e) {
 			throw $e;
@@ -438,6 +440,7 @@ class Q_Session
 		}
 		session_id($sid = self::generateId()); // generate a new session id
 		session_start(); // start a new session
+		header_remove("Set-Cookie"); // we will set it ourselves, thank you
 		if (!empty($_SERVER['HTTP_HOST'])) {
 			// set the new cookie
 			if (!isset($duration)) {
