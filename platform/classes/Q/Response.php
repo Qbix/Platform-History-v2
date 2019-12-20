@@ -1658,6 +1658,9 @@ class Q_Response
 	 * @param {string} $value The value of the cookie
 	 * @param {string} [$expires=0] The number of seconds since the epoch, 0 means expire when browser session ends
 	 * @param {string} [$path=null] You can specify a path on the server here for the cookie
+	 * @param {string} [$domain=null] Set true here to set domain to ".hostname" or pass a string.
+	 *  If you leave it null, then the cookie will be set as a host-only cookie, meaning that subdomains
+	 *  won't get it.
 	 * @param {boolean} [$secure=false] Making the cookie secure
 	 * @param {boolean} [$httponly=false] Make the cookie http only
 	 * @return {string}
@@ -1741,7 +1744,11 @@ class Q_Response
 	{
 		$parts = parse_url(Q_Request::baseUrl());
 		$path = $path ? $path : (!empty($parts['path']) ? $parts['path'] : '/');
-		$domain2 = $domain ? $domain : (strpos($parts['host'], '.') !== false ? '.' : '').$parts['host'];
+		if ($domain === true) {
+			$domain2 = (strpos($parts['host'], '.') !== false ? '.' : '').$parts['host'];
+		} else {
+			$domain2 = $domain ? $domain : null;
+		}
 		setcookie($name, $value, $expires, $path, $domain2, $secure, $httponly);
 	}
 
