@@ -300,7 +300,10 @@ class Q_Session
 					// TODO: Think about session fixation attacks, require nonce.
 					$durationName = self::durationName();
 					$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
-					Q_Response::setCookie(self::name(), $id, $duration ? time()+$duration : 0);
+					Q_Response::setCookie(
+						self::name(), $id, $duration ? time()+$duration : 0, 
+						null, true, true
+					);
 				}
 			}
 			if (empty($_SERVER['HTTP_HOST']) and empty($_SESSION)) {
