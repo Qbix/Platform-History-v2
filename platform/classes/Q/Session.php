@@ -302,7 +302,7 @@ class Q_Session
 					$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
 					Q_Response::setCookie(
 						self::name(), $id, $duration ? time()+$duration : 0, 
-						null, true, true
+						null, null, true, true
 					);
 				}
 			}
