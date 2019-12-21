@@ -117,7 +117,7 @@ Q.page("Streams/participating", function () {
 		}
 
 		this.onFieldChanged('content').set(function (fields) {
-			document.location.reload();
+			setTimeout(function () { document.location.reload(); }, 2000);
 		}, true);
 	});
 
@@ -129,7 +129,7 @@ Q.page("Streams/participating", function () {
 		}
 
 		this.onFieldChanged('content').set(function (fields) {
-			document.location.reload();
+			setTimeout(function () { document.location.reload(); }, 2000);
 		}, true);
 	});
 
