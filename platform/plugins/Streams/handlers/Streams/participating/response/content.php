@@ -4,7 +4,8 @@ function Streams_participating_response_content()
 {
 	$user = Users::loggedInUser(true);
 	$loggedUserId = $user->id;
-	$participants = Db::connect('Streams')->rawQuery("select srt.*, sp.state, sp.subscribed, sp.streamType, sp.publisherId from 
+	$dbStreams = Db::connect('Streams');
+	$participants = $dbStreams->rawQuery("select srt.*, sp.state, sp.subscribed, sp.streamType, sp.publisherId from 
 	streams_related_to srt, streams_participant sp 
 	where srt.toPublisherId='".$loggedUserId."' and srt.toStreamname='Streams/participating'
 	and sp.publisherId=srt.fromPublisherId and sp.streamName=srt.fromStreamName and sp.userId='".$loggedUserId."' 
@@ -35,5 +36,11 @@ function Streams_participating_response_content()
 	Q_Response::addStylesheet("{{Streams}}/css/pages/participants.css");
 	Q_Response::addScript("{{Streams}}/js/pages/participants.js");
 
-	return Q::view("Streams/content/participating.php", compact('participantsGrouped', 'user'));
+	$emailSubscribed = $dbStreams->rawQuery("select state from users_email where userId='".$loggedUserId."' and address='".$user->emailAddress."'")->fetchDbRow();
+	$emailSubscribed = count($emailSubscribed) && $emailSubscribed->state == 'active';
+
+	$mobileSubscribed = $dbStreams->rawQuery("select state from users_mobile where userId='".$loggedUserId."' and number='".$user->mobileNumber."'")->fetchDbRow();
+	$mobileSubscribed = count($mobileSubscribed) && $mobileSubscribed->state == 'active';
+
+	return Q::view("Streams/content/participating.php", compact('participantsGrouped', 'user', 'emailSubscribed', 'mobileSubscribed'));
 }

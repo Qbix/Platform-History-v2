@@ -121,7 +121,8 @@
             "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
 			"CheckYourEmail": "Please check your email and follow instructions!"
         },
-		"AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?"
+		"AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+		"AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier."
     },
     "webrtc": {
         "allow": {

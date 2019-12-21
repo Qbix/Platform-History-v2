@@ -123,3 +123,28 @@
 	padding-left: 0;
 	padding-right: 0;
 }
+.Streams_participating_item .Streams_participant_subscribed_icon,
+.Streams_participating_item .Streams_participant_plus_icon,
+.Streams_participating_item .Streams_participant_delete_icon {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	background: url('../../../Q/img/icons/basic32.png') 0 -885px no-repeat;
+	vertical-align: middle;
+	float: right;
+}
+.Streams_participating_item .Streams_participant_delete_icon {
+	background: url('../../../Q/img/icons/basic32.png') 0 -964px no-repeat;
+}
+.Streams_participating_item[data-defined=true] .Streams_participant_plus_icon,
+.Streams_participating_item[data-defined=false] .Streams_participant_subscribed_icon {
+	display: none;
+}
+.Streams_participating_item[data-subscribed=true] .Streams_participant_subscribed_icon {
+	background: url('../../img/subscription/on/80.png') center center no-repeat;
+	background-size: contain;
+}
+.Streams_participating_item[data-subscribed=false] .Streams_participant_subscribed_icon {
+	background: url('../../img/subscription/off/80.png') center center no-repeat;
+	background-size: contain;
+}
