@@ -19,6 +19,18 @@ function Streams_after_Users_User_saveExecute($params)
 	if (isset($modifiedFields['icon'])) {
 		$updates['icon'] = $modifiedFields['icon'];
 	}
+	if (isset($modifiedFields['emailAddress'])) {
+		if ($emailStream = Streams::fetchOne($user->id, $user->id, 'Streams/user/emailAddress')) {
+			$emailStream->content = $user->emailAddress;
+			$emailStream->changed();
+		}
+	}
+	if (isset($modifiedFields['mobileNumber'])) {
+		if ($mobileStream = Streams::fetchOne($user->id, $user->id, 'Streams/user/mobileNumber')) {
+			$mobileStream->content = $user->mobileNumber;
+			$mobileStream->changed();
+		}
+	}
 
 	// if we only modified some inconsequential fields, no need to proceed
 	$mf = $modifiedFields;
