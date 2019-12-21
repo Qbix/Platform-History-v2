@@ -17,7 +17,6 @@ Q.page("Streams/participating", function () {
 		var $this = $(this);
 		var $item = $this.closest('.Streams_participating_item');
 		var type = $item.attr('data-type');
-		var $identifier = $('span', $item);
 
 		Q.Users.setIdentifier({
 			identifierType: type,
@@ -35,52 +34,103 @@ Q.page("Streams/participating", function () {
 		});
 	};
 
-	$('<div class="Streams_participating_item_actions">')
-	.appendTo('.Streams_participating .Streams_participating_item')
-	.plugin('Q/actions', {
-		actions: {
-			plus: _modIdentified,
-			edit: _modIdentified,
-			remove: function () {
-				var $this = $(this);
-				var $item = $this.closest('.Streams_participating_item');
+	$(".Streams_participating_item .Streams_participant_plus_icon").on(Q.Pointer.fastclick, _modIdentified);
+	$(".Streams_participating_item span.Streams_participating_id").on(Q.Pointer.fastclick, _modIdentified);
+	$(".Streams_participating_item .Streams_participant_subscribed_icon").on(Q.Pointer.fastclick, function () {
+		var $this = $(this);
+		var $item = $this.closest('.Streams_participating_item');
+		var subscribed = $item.attr('data-subscribed') === 'true';
+		var $identifier = $('span.Streams_participating_id', $item);
+		var slot = subscribed ? 'unsubscribe' : 'subscribe';
 
-				Q.Text.get('Streams/content', function (err, text) {
-					var msg = Q.firstErrorMessage(err);
-					if (msg) {
-						return console.warn(msg);
-					}
+		var _subscriptionRequest = function () {
+			$item.addClass('Q_working');
 
-					var text = Q.getObject('followup.AreYouSureRemoveIdentifier', text);
-					Q.confirm(text, function (res) {
-						if (!res) {
-							return;
-						}
+			Q.req('Users/identifier', [slot], function (err, data) {
+				$item.removeClass('Q_working');
+				var fem = Q.firstErrorMessage(err, data && data.errors);
+				if (fem) {
+					return Q.alert(fem);
+				}
 
-						$item.addClass('Q_working');
-						var $identifier = $('span', $item);
+				$item.attr('data-subscribed', subscribed ? 'false' : 'true');
+			}, {
+				fields: {
+					identifier: $identifier.text(),
+					type: $item.attr('data-type')
+				}
+			});
+		};
 
-						Q.req('Users/identifier', [], function (err, data) {
-							$item.removeClass('Q_working');
-							var fem = Q.firstErrorMessage(err, data && data.errors);
-							if (fem) {
-								return Q.alert(fem);
-							}
+		if (!subscribed) {
+			return _subscriptionRequest();
+		}
 
-							$item.attr('data-defined', 'false');
-							$identifier.html('');
-						}, {
-							method: 'delete',
-							fields: {
-								identifier: $identifier.text()
-							}
-						});
-					});
-				});
+		Q.Text.get('Streams/content', function (err, text) {
+			var msg = Q.firstErrorMessage(err);
+			if (msg) {
+				return console.warn(msg);
 			}
-		},
-		alwaysShow: true,
-		clickable: false
+
+			var text = Q.getObject('followup.AreYouSureUnsubscribeIdentifier', text);
+			Q.confirm(text, function (res) {
+				if (!res) {
+					return;
+				}
+
+				_subscriptionRequest();
+			});
+		});
+	});
+
+	$(".Streams_participating_item .Streams_participant_delete_icon").on(Q.Pointer.fastclick, function () {
+		var $this = $(this);
+		var $item = $this.closest('.Streams_participating_item');
+		var subscribed = $item.attr('data-subscribed') === 'true';
+		var $identifier = $('span.Streams_participating_id', $item);
+		var slot = subscribed ? 'unsubscribe' : 'subscribe';
+
+		$item.addClass('Q_working');
+
+		Q.req('Users/identifier', [], function (err, data) {
+			$item.removeClass('Q_working');
+			var fem = Q.firstErrorMessage(err, data && data.errors);
+			if (fem) {
+				return Q.alert(fem);
+			}
+
+			$item.attr('data-defined', 'false');
+			$identifier.html('');
+		}, {
+			method: 'delete',
+			fields: {
+				identifier: $identifier.text()
+			}
+		});
+	});
+
+	// listen Streams/user/emailAddress stream to reflect changes
+	Q.Streams.get(userId, 'Streams/user/emailAddress', function (err) {
+		var fem = Q.firstErrorMessage(err);
+		if (fem) {
+			return console.warn("Streams/participating: " + fem);
+		}
+
+		this.onFieldChanged('content').set(function (fields) {
+			document.location.reload();
+		}, true);
+	});
+
+	// listen Streams/user/mobileNumber stream to reflect changes
+	Q.Streams.get(userId, 'Streams/user/mobileNumber', function (err) {
+		var fem = Q.firstErrorMessage(err);
+		if (fem) {
+			return console.warn("Streams/participating: " + fem);
+		}
+
+		this.onFieldChanged('content').set(function (fields) {
+			document.location.reload();
+		}, true);
 	});
 
 	return function () {
