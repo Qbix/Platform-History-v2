@@ -764,7 +764,7 @@ class Q_Utils
 		$curl_opts = array(),
 		$header = null,
 		$res_t = Q_UTILS_CONNECTION_TIMEOUT,
-		&$callback = null)
+		$callback = null)
 	{
 		$method = strtoupper($method);
 		if (!isset($user_agent))
@@ -889,6 +889,9 @@ class Q_Utils
 				}
 			}
 
+			if ($callback and is_callable($callback)) {
+				call_user_func($callback, $ch, $result);
+			}
 			curl_close($ch);
 		} else {
 			// Non-CURL based version...
