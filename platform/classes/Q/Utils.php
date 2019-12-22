@@ -750,8 +750,8 @@ class Q_Utils
 	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
 	 * @param {string} [$header=null] Optional string to replace the entire header
 	 * @param {integer} [$res_t=30] number of seconds before timeout, defaults to 30 if you pass null
-	 * @param {Curl_Handle} [&$ch] Optionally pass a variable to be filled with the return value of
-	 *   curl_init, if CURL is installed
+	 * @param {callable} [&$callback] Optionally pass something callable here, and it will be
+	 *  called with the CURL handle before it's closed, if CURL was used.
 	 * @return {string|false} The response, or false if not received
 	 * 
 	 * **NOTE:** *The function waits for it, which might take a while!*
@@ -764,7 +764,7 @@ class Q_Utils
 		$curl_opts = array(),
 		$header = null,
 		$res_t = Q_UTILS_CONNECTION_TIMEOUT,
-		&$ch = null)
+		&$callback = null)
 	{
 		$method = strtoupper($method);
 		if (!isset($user_agent))
