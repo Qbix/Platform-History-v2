@@ -749,6 +749,7 @@ class Q_Utils
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
 	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
 	 * @param {string} [$header=null] Optional string to replace the entire header
+	 * @param {Curl_Handle} [&$ch] Optionally pass a variable to be filled with the return value of curl_init
 	 * @return {string|false} The response, or false if not received
 	 * 
 	 * **NOTE:** *The function waits for it, which might take a while!*
@@ -760,7 +761,8 @@ class Q_Utils
 		$user_agent = null,
 		$curl_opts = array(),
 		$header = null,
-		$res_t = Q_UTILS_CONNECTION_TIMEOUT)
+		$res_t = Q_UTILS_CONNECTION_TIMEOUT,
+		&$ch = null)
 	{
 		$method = strtoupper($method);
 		if (!isset($user_agent))
