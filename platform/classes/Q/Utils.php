@@ -753,7 +753,14 @@ class Q_Utils
 	 * 
 	 * **NOTE:** *The function waits for it, which might take a while!*
 	 */
-	private static function request($method, $uri, $data, $user_agent = null, $curl_opts = array(), $header = null, $res_t = Q_UTILS_CONNECTION_TIMEOUT)
+	public static function request(
+		$method,
+		$uri,
+		$data = null,
+		$user_agent = null,
+		$curl_opts = array(),
+		$header = null,
+		$res_t = Q_UTILS_CONNECTION_TIMEOUT)
 	{
 		$method = strtoupper($method);
 		if (!isset($user_agent))
