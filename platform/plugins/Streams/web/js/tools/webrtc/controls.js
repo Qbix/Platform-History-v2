@@ -27,7 +27,7 @@
 		staticMaximizeOn: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"     viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#4AAA4E" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"/>  <g>   <g>    <path fill="#FFFFFF" d="M73.238,74.392h-21.52c-0.663,0-1.2-0.537-1.2-1.2s0.537-1.2,1.2-1.2h20.319V30.007H29.97v20.111     c0,0.663-0.538,1.2-1.2,1.2s-1.2-0.537-1.2-1.2V28.807c0-0.663,0.538-1.2,1.2-1.2h44.468c0.663,0,1.2,0.538,1.2,1.2v44.384     C74.438,73.854,73.901,74.392,73.238,74.392z"/>   </g>   <g>    <path fill="#FFFFFF" d="M49.758,53.38c-0.307,0-0.614-0.117-0.849-0.352c-0.469-0.469-0.468-1.229,0-1.697l14.785-14.776     c0.47-0.469,1.229-0.468,1.697,0c0.469,0.469,0.469,1.229,0,1.697L50.606,53.028C50.372,53.263,50.065,53.38,49.758,53.38z"/>   </g>   <g>    <path fill="#FFFFFF" d="M65.046,48.662c-0.663,0-1.2-0.538-1.2-1.2v-9.359h-9.359c-0.663,0-1.2-0.538-1.2-1.2s0.537-1.2,1.2-1.2     h10.56c0.663,0,1.2,0.538,1.2,1.2v10.56C66.246,48.124,65.709,48.662,65.046,48.662z"/>   </g>   <g>    <path fill="#FFFFFF" d="M44.989,74.392H28.77c-0.663,0-1.2-0.537-1.2-1.2V56.982c0-0.663,0.538-1.2,1.2-1.2h16.219     c0.663,0,1.2,0.537,1.2,1.2v16.209C46.189,73.854,45.651,74.392,44.989,74.392z M29.97,71.991h13.818V58.183H29.97V71.991z"/>   </g>  </g>  </svg>',
 		staticMaximizeOff: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#8C8C8C" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"/>  <g>   <g>    <path fill="#FFFFFF" d="M73.238,74.392h-21.52c-0.663,0-1.2-0.537-1.2-1.2s0.537-1.2,1.2-1.2h20.319V30.007H29.97v20.111     c0,0.663-0.538,1.2-1.2,1.2s-1.2-0.537-1.2-1.2V28.807c0-0.663,0.538-1.2,1.2-1.2h44.468c0.663,0,1.2,0.538,1.2,1.2v44.384     C74.438,73.854,73.901,74.392,73.238,74.392z"/>   </g>   <g>    <path fill="#FFFFFF" d="M49.758,53.38c-0.307,0-0.614-0.117-0.849-0.352c-0.469-0.469-0.468-1.229,0-1.697l14.785-14.776     c0.47-0.469,1.229-0.468,1.697,0c0.469,0.469,0.469,1.229,0,1.697L50.606,53.028C50.372,53.263,50.065,53.38,49.758,53.38z"/>   </g>   <g>    <path fill="#FFFFFF" d="M65.046,48.662c-0.663,0-1.2-0.538-1.2-1.2v-9.359h-9.359c-0.663,0-1.2-0.538-1.2-1.2s0.537-1.2,1.2-1.2     h10.56c0.663,0,1.2,0.538,1.2,1.2v10.56C66.246,48.124,65.709,48.662,65.046,48.662z"/>   </g>   <g>    <path fill="#FFFFFF" d="M44.989,74.392H28.77c-0.663,0-1.2-0.537-1.2-1.2V56.982c0-0.663,0.538-1.2,1.2-1.2h16.219     c0.663,0,1.2,0.537,1.2,1.2v16.209C46.189,73.854,45.651,74.392,44.989,74.392z M29.97,71.991h13.818V58.183H29.97V71.991z"/>   </g>  </g>  </svg>',
 		facebooklogo: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#1877F2" d="M50,0C22.3857422,0,0,22.3857422,0,50c0,25.6513672,19.3173828,46.7910156,44.1982422,49.6660156   c0-11.5039063,0-23.0068359,0-34.5107422c-4.2099609-0.03125-8.5439453,0.0625-12.6748047-0.046875   c0.03125-4.7861328-0.0625-9.6972656,0.0458984-14.4052734c4.2099609,0,8.4189453,0,12.6289063,0   c0.1933594-5.2246094-0.3769531-10.6503906,0.2802734-15.0605469c1.2792969-8.5859375,6.7324219-14.1972656,15.5751953-15.1542969   c4.7587891-0.5146484,9.7216797,0.1660156,14.171875,0.8427734c-0.03125,4.0683594,0.0615234,8.2626953-0.046875,12.2539063   c-2.7724609,0.0996094-5.40625-0.1748047-7.7646484,0.09375c-2.2597656,0.2558594-3.9492188,1.1113281-5.1445313,2.7119141   c-1.2519531,1.6767578-1.4501953,3.5166016-1.4501953,6.4082031c0,2.5195313,0,5.3271484,0,7.9042969   c4.5839844,0.03125,9.2919922-0.0625,13.7978516,0.046875c-0.734375,4.8164063-1.4101563,9.6894531-2.2451172,14.4052734   c-3.8505859,0-7.7011719,0-11.5527344,0c0,11.2939453,0,22.5869141,0,33.8808594C82.7314453,94.4726563,100,74.2529297,100,50   C100,22.3857422,77.6142578,0,50,0z"/>  <path fill="#FFFFFF" d="M71.3720703,65.1552734c0.8349609-4.7158203,1.5107422-9.5888672,2.2451172-14.4052734   c-4.5058594-0.109375-9.2138672-0.015625-13.7978516-0.046875c0-2.5771484,0-5.3847656,0-7.9042969   c0-2.8916016,0.1982422-4.7314453,1.4501953-6.4082031c1.1953125-1.6005859,2.8847656-2.4560547,5.1445313-2.7119141   c2.3583984-0.2685547,4.9921875,0.0058594,7.7646484-0.09375c0.1083984-3.9912109,0.015625-8.1855469,0.046875-12.2539063   c-4.4501953-0.6767578-9.4130859-1.3574219-14.171875-0.8427734c-8.8427734,0.9570313-14.2958984,6.5683594-15.5751953,15.1542969   c-0.6572266,4.4101563-0.0869141,9.8359375-0.2802734,15.0605469c-4.2099609,0-8.4189453,0-12.6289063,0   c-0.1083984,4.7080078-0.0146484,9.6191406-0.0458984,14.4052734c4.1308594,0.109375,8.4648438,0.015625,12.6748047,0.046875   c0,11.5039063,0,23.0068359,0,34.5107422C46.1015625,99.8867188,48.0371094,100,50,100   c3.3613281,0,6.6445313-0.3320313,9.8193359-0.9638672c0-11.2939453,0-22.5869141,0-33.8808594   C63.6708984,65.1552734,67.5214844,65.1552734,71.3720703,65.1552734z"/>  </svg> ',
-		facebookLive: '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" viewBox="-0.625 -0.0761719 101 101"    enable-background="new -0.625 -0.0761719 101 101" xml:space="preserve">  <defs>  </defs>  <circle fill="#4373B9" cx="50" cy="50" r="50"/>  <path fill="#FFFFFF" d="M38.4082031,63.8222656h2.2822266c0.7070313,0,1.2797852-0.5722656,1.2802734-1.2797852   l0.0019531-25.0449219c0.0004883-0.7070313-0.5727539-1.2792969-1.2792969-1.2792969l-2.2827148-0.0004883l-20.9248047-0.0019531   l-2.2832031-0.0004883c-0.7045898,0-1.2753906,0.5698242-1.2788086,1.2734375L13.921875,60.2573242l-0.0004883,2.2851563   c0.0009766,0.7055664,0.5727539,1.277832,1.2792969,1.277832"/>  <path fill="#FFFFFF" d="M80.6865234,63.7851563l3.4536133,0.0004883c1.0693359,0,1.9360352-0.5732422,1.9365234-1.2802734   l0.0019531-25.0444336c0-0.7070313-0.8662109-1.2797852-1.9355469-1.2807617h-3.4541016L49.03125,36.1787109l-3.4545898-0.0009766   c-1.0664063,0-1.9306641,0.5693359-1.9350586,1.2729492l-0.0014648,22.7685547l-0.0019531,2.284668   c0.0029297,0.7060547,0.8676758,1.277832,1.9360352,1.277832"/>  <path fill="#4373B9" d="M48.2314453,42.8789063h1.8564453v12.6665039h6.0693359v1.5385742h-7.9257813V42.8789063z"/>  <path fill="#4373B9" d="M60.0351563,42.8789063v14.2050781h-1.8564453V42.8789063H60.0351563z"/>  <path fill="#4373B9" d="M66.3564453,57.0839844l-4.6577148-14.2050781h2.003418l2.2119141,6.9970703   c0.5898438,1.9179688,1.1162109,3.6455078,1.5170898,5.3110352h0.043457   c0.3989258-1.6435547,0.9682617-3.4350586,1.6225586-5.2900391L71.5,42.8789063h1.9589844l-5.0791016,14.2050781H66.3564453z"/>  <path fill="#4373B9" d="M82.3305664,50.4238281h-5.5004883v5.121582h6.1557617v1.5385742h-8.0107422V42.8789063h7.6938477v1.5385742   h-5.8388672V48.90625h5.5004883V50.4238281z"/>  <path fill="#4373B9" d="M29.3564453,63.8212891l0.0004883-11.0820313l-3.6538086-0.0004883l0.0004883-3.8188477l3.6538086,0.0009766   l0.0009766-4.1469727c0-2.4848633,2.2539063-4.1538086,4.0712891-4.1538086h4.0908203L37.5195313,44.09375h-1.8867188   c-0.9301758,0-2.1694336,0.7548828-2.1694336,1.6835938l-0.0004883,3.1435547l3.6855469,0.0004883l-0.0004883,3.8183594   l-3.6855469-0.0004883l-0.0004883,11.0820313H29.3564453z"/>  </svg>',
+		facebookLive: '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" viewBox="-0.622 -0.182 162 63" enable-background="new -0.622 -0.182 162 63"    xml:space="preserve">  <defs>  </defs>  <path fill="#C12337" d="M148.646,61.641l7.711,0.001c2.387,0,4.322-1.279,4.324-2.857l0.004-55.919c0-1.578-1.936-2.857-4.322-2.858   h-7.711L77.966,0.001L70.253,0c-2.381,0-4.311,1.271-4.32,2.843L65.929,53.68l-0.004,5.102c0.006,1.574,1.938,2.853,4.322,2.853"/>  <path fill="#FFFFFF" d="M84.446,19.024h3.082v21.038h10.08v2.555H84.446V19.024z"/>  <path fill="#FFFFFF" d="M104.048,19.024v23.593h-3.082V19.024H104.048z"/>  <path fill="#FFFFFF" d="M114.548,42.617l-7.736-23.593h3.326l3.674,11.621c0.98,3.186,1.855,6.056,2.521,8.821h0.07   c0.664-2.73,1.609-5.705,2.695-8.786l3.99-11.656h3.254l-8.436,23.593H114.548z"/>  <path fill="#FFFFFF" d="M141.077,31.556h-9.135v8.507h10.221v2.555H128.86V19.024h12.777v2.556h-9.695v7.455h9.135V31.556z"/>  <path fill="#4272B9" d="M30.891,0.085C13.83,0.085,0,13.916,0,30.976c0,15.849,11.935,28.908,27.306,30.683   c0-7.105,0-14.213,0-21.321c-2.601-0.019-5.279,0.04-7.831-0.027c0.02-2.956-0.039-5.991,0.028-8.9c2.601,0,5.201,0,7.802,0   c0.12-3.228-0.233-6.58,0.173-9.305c0.79-5.305,4.159-8.771,9.622-9.363c2.94-0.318,6.007,0.103,8.756,0.521   c-0.019,2.514,0.038,5.105-0.029,7.571c-1.713,0.061-3.34-0.108-4.796,0.058c-1.396,0.158-2.441,0.687-3.18,1.676   c-0.772,1.036-0.896,2.172-0.896,3.959c0,1.557,0,3.291,0,4.883c2.833,0.019,5.742-0.039,8.525,0.029   c-0.454,2.976-0.87,5.986-1.387,8.898c-2.379,0-4.759,0-7.139,0c0,6.978,0,13.956,0,20.934   c14.156-2.818,24.825-15.312,24.825-30.295C61.781,13.916,47.951,0.085,30.891,0.085z"/>  <path fill="#FFFFFF" d="M44.095,40.338c0.517-2.912,0.933-5.923,1.387-8.898c-2.783-0.068-5.692-0.01-8.525-0.029   c0-1.592,0-3.327,0-4.883c0-1.787,0.124-2.923,0.896-3.959c0.738-0.989,1.783-1.518,3.18-1.676c1.456-0.166,3.083,0.003,4.796-0.058   c0.067-2.466,0.011-5.058,0.029-7.571c-2.749-0.417-5.815-0.838-8.756-0.521c-5.463,0.591-8.832,4.058-9.622,9.363   c-0.406,2.725-0.054,6.077-0.173,9.305c-2.601,0-5.201,0-7.802,0c-0.067,2.909-0.009,5.944-0.028,8.9   c2.552,0.067,5.229,0.009,7.831,0.027c0,7.108,0,14.216,0,21.321c1.176,0.137,2.372,0.208,3.584,0.208   c2.076,0,4.105-0.206,6.065-0.596c0-6.978,0-13.956,0-20.934C39.336,40.338,41.716,40.338,44.095,40.338z"/>  </svg>',
 		dragIconOff: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#8C8C8C" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"/>  <path fill="#FFFFFF" d="M66.508,39.37c-1.358,0-2.59,0.571-3.465,1.486l0.012-1.438c0.02-2.646-2.116-4.814-4.798-4.834   c-1.359,0-2.592,0.573-3.467,1.49l0.002-0.192c0.019-2.644-2.118-4.811-4.799-4.832c-1.359,0-2.59,0.572-3.466,1.487l0.089-11.674   c0.011-1.284-0.481-2.494-1.383-3.407c-0.899-0.911-2.099-1.418-3.417-1.428c-2.623,0-4.774,2.135-4.794,4.76l-0.261,34.258   l-4.639-2.011c-1.242-0.547-3.103-1.274-4.923-1.274c-1.11,0-2.106,0.265-2.972,0.793c-1.196,0.742-2.032,1.924-2.356,3.327   c-0.346,1.502-0.057,3.137,0.793,4.487l0.202,0.32l0.319,0.202c2.809,1.794,10.573,7.182,12.745,10.537   c3.75,5.805,9.523,8.656,17.651,8.718l0.227,0.001c0.001,0,0.002,0,0.003,0c16.4,0,17.334-13.387,17.354-16.07l0.151-19.873   C71.337,41.559,69.196,39.391,66.508,39.37z M38.697,58.021c0.136-0.089,0.219-0.239,0.22-0.402l0.281-36.814   c0.011-1.434,1.186-2.601,2.64-2.601c0.699,0.005,1.355,0.283,1.847,0.781c0.492,0.499,0.761,1.16,0.755,1.861l-0.201,26.45   c-0.005,0.835,0.671,1.52,1.518,1.525c0.836,0,1.521-0.674,1.528-1.503l0.086-11.492c0.011-1.434,1.188-2.6,2.641-2.6   c1.446,0.011,2.614,1.195,2.604,2.639l-0.087,11.491c-0.004,0.403,0.151,0.784,0.436,1.072c0.287,0.292,0.672,0.453,1.095,0.455   c0.833,0,1.514-0.675,1.518-1.503l0.063-8.017c0.01-1.436,1.185-2.603,2.638-2.603c0.702,0.005,1.359,0.282,1.85,0.78   c0.49,0.499,0.758,1.16,0.752,1.861l-0.077,10.096c-0.004,0.836,0.678,1.521,1.528,1.526c0.831,0,1.511-0.675,1.516-1.503   l0.042-5.372c0.011-1.435,1.186-2.602,2.642-2.602c1.451,0.012,2.624,1.197,2.613,2.642L68.99,64.059   c-0.018,2.323-0.833,13.913-15.182,13.912L53.6,77.97c-7.44-0.057-12.474-2.511-15.841-7.723   c-2.763-4.268-12.189-10.409-13.308-11.13c-0.501-0.844-0.668-1.84-0.459-2.748c0.192-0.834,0.683-1.532,1.38-1.965   c0.515-0.314,1.113-0.468,1.827-0.468c1.41,0,2.984,0.622,4.048,1.091l6.991,3.032C38.388,58.123,38.56,58.11,38.697,58.021z"/>  </svg> ',
 		dragIconOn: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#4AAA4E" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"/>  <path fill="#FFFFFF" d="M66.508,39.37c-1.358,0-2.59,0.571-3.465,1.486l0.012-1.438c0.02-2.646-2.116-4.814-4.798-4.834   c-1.359,0-2.592,0.573-3.467,1.49l0.002-0.192c0.019-2.644-2.118-4.811-4.799-4.832c-1.359,0-2.59,0.572-3.466,1.487l0.089-11.674   c0.011-1.284-0.481-2.494-1.383-3.407c-0.899-0.911-2.099-1.418-3.417-1.428c-2.623,0-4.774,2.135-4.794,4.76l-0.261,34.258   l-4.639-2.011c-1.242-0.547-3.103-1.274-4.923-1.274c-1.11,0-2.106,0.265-2.972,0.793c-1.196,0.742-2.032,1.924-2.356,3.327   c-0.346,1.502-0.057,3.137,0.793,4.487l0.202,0.32l0.319,0.202c2.809,1.794,10.573,7.182,12.745,10.537   c3.75,5.805,9.523,8.656,17.651,8.718l0.227,0.001c0.001,0,0.002,0,0.003,0c16.4,0,17.334-13.387,17.354-16.07l0.151-19.873   C71.337,41.559,69.196,39.391,66.508,39.37z M38.697,58.021c0.136-0.089,0.219-0.239,0.22-0.402l0.281-36.814   c0.011-1.434,1.186-2.601,2.64-2.601c0.699,0.005,1.355,0.283,1.847,0.781c0.492,0.499,0.761,1.16,0.755,1.861l-0.201,26.45   c-0.005,0.835,0.671,1.52,1.518,1.525c0.836,0,1.521-0.674,1.528-1.503l0.086-11.492c0.011-1.434,1.188-2.6,2.641-2.6   c1.446,0.011,2.614,1.195,2.604,2.639l-0.087,11.491c-0.004,0.403,0.151,0.784,0.436,1.072c0.287,0.292,0.672,0.453,1.095,0.455   c0.833,0,1.514-0.675,1.518-1.503l0.063-8.017c0.01-1.436,1.185-2.603,2.638-2.603c0.702,0.005,1.359,0.282,1.85,0.78   c0.49,0.499,0.758,1.16,0.752,1.861l-0.077,10.096c-0.004,0.836,0.678,1.521,1.528,1.526c0.831,0,1.511-0.675,1.516-1.503   l0.042-5.372c0.011-1.435,1.186-2.602,2.642-2.602c1.451,0.012,2.624,1.197,2.613,2.642L68.99,64.059   c-0.018,2.323-0.833,13.913-15.182,13.912L53.6,77.97c-7.44-0.057-12.474-2.511-15.841-7.723   c-2.763-4.268-12.189-10.409-13.308-11.13c-0.501-0.844-0.668-1.84-0.459-2.748c0.192-0.834,0.683-1.532,1.38-1.965   c0.515-0.314,1.113-0.468,1.827-0.468c1.41,0,2.984,0.622,4.048,1.091l6.991,3.032C38.388,58.123,38.56,58.11,38.697,58.021z"/>  </svg> '
 	}
@@ -42,20 +42,41 @@
 	if(typeof cordova != 'undefined' && _isiOS) _isiOSCordova = true;
 	if(typeof cordova != 'undefined' && _isAndroid) _isAndroidCordova = true;
 
-	function copyToClipboard(str) {
-		var el = document.createElement('textarea');
-		el.value = str;
-		el.setAttribute('readonly', '');
-		el.style.position = 'absolute';
-		el.style.left = '-9999px';
-		document.body.appendChild(el);
+	function copyToClipboard(el) {
+		if(Q.info.platform === 'ios') {
+			var oldContentEditable = el.contentEditable,
+				oldReadOnly = el.readOnly,
+				range = document.createRange();
+
+			el.contentEditable = true;
+			el.readOnly = false;
+			range.selectNodeContents(el);
+
+			var s = window.getSelection();
+			s.removeAllRanges();
+			s.addRange(range);
+
+			el.setSelectionRange(0, 999999); // A big number, to cover anything that could be inside the element.
+
+			el.contentEditable = oldContentEditable;
+			el.readOnly = oldReadOnly;
+
+			document.execCommand('copy');
+			return;
+		}
+		var tempEl = document.createElement('textarea');
+		tempEl.value = el.value || el.innerText;
+		tempEl.setAttribute('readonly', '');
+		tempEl.style.position = 'absolute';
+		tempEl.style.left = '-9999px';
+		document.body.appendChild(tempEl);
 		var selected =
 			document.getSelection().rangeCount > 0
 				? document.getSelection().getRangeAt(0)
 				: false;
-		el.select();
+		tempEl.select();
 		document.execCommand('copy');
-		document.body.removeChild(el);
+		document.body.removeChild(tempEl);
 		if (selected) {
 			document.getSelection().removeAllRanges();
 			document.getSelection().addRange(selected);
@@ -99,7 +120,7 @@
 		{
 			refresh: function() {
 				var tool = this;
-
+				tool.textes = tool.WebRTCClass.textes();
 				var controlBar = tool.createControlBar();
 
 				window.WebRTCcontrolBar = controlBar;
@@ -111,7 +132,7 @@
 				tool.createSettingsPopup();
 				tool.participantsPopup().createList();
 				tool.initFbLiveInterface();
-
+				window.fbLiveInterface = tool.fbLiveInterface;
 				var activeViewMode = tool.state.webrtcClass.screenRendering.getActiveViewMode();
 				if(activeViewMode == 'maximized' || activeViewMode == 'maximizedMobile') {
 					tool.participantsPopup().toggleLoudesScreenMode('allButMe');
@@ -127,8 +148,40 @@
 			 */
 			bindRTCEvents: function() {
 				var tool = this;
+
+				function setRealName(participant, callback) {
+					var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
+
+					if (userId != null) {
+						var firstName;
+						var lastName;
+						var fullName = '';
+						Q.Streams.get(userId, 'Streams/user/firstName', function () {
+							firstName = this.fields.content;
+
+							Q.Streams.get(userId, 'Streams/user/lastName', function () {
+								lastName = this.fields.content;
+							});
+
+							if (firstName != null) {
+								fullName += firstName;
+							}
+							if (lastName != null) {
+								fullName += ' ' + lastName;
+							}
+
+							participant.username = fullName;
+
+							if (callback != null) callback({firstName: firstName, lastName: lastName});
+
+						});
+					}
+				}
 				tool.WebRTCLib.event.on('participantConnected', function (participant) {
-					tool.participantsPopup().addItem(participant);
+					setRealName(participant, function(name){
+						tool.participantsPopup().addItem(participant);
+					});
+
 					var participants = tool.WebRTCLib.roomParticipants();
 					for (var i in participants) {
 						if(participants[i].soundMeter.visualizations.participantsPopup != null) participants[i].soundMeter.visualizations.participantsPopup.reset();
@@ -136,6 +189,7 @@
 
 					var participantsCount = tool.WebRTCLib.roomParticipants().length;
 					tool.usersCounter.innerHTML = participantsCount;
+
 				});
 				tool.WebRTCLib.event.on('participantDisconnected', function (participant) {
 					tool.participantsPopup().removeItem(participant);
@@ -171,15 +225,32 @@
 					tool.loadCamerasList();
 				});
 
-				tool.WebRTCLib.event.on('facebookLiveStreamingStarted', function (e) {
+				tool.WebRTCLib.event.on('facebookLiveStreamingStarted', function (participant) {
+					if(participant.isLocal) {
+						if (!tool.cameraBtn.classList.contains('isRecording')) tool.cameraBtn.classList.add('isRecording');
+						tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.youBeganFbLive", tool.textes));
 
-					if(!tool.cameraBtn.classList.contains('isRecording')) tool.cameraBtn.classList.add('isRecording');
-				});
-				tool.WebRTCLib.event.on('facebookLiveStreamingEnded', function () {
-					if(document.querySelector('.Streams_webrtc_fblive_dialog_inner') != null) {
-						Q.Dialogs.pop()
+					} else {
+						if (!tool.usersBtn.classList.contains('isRecording')) tool.usersBtn.classList.add('isRecording');
+						tool.WebRTCClass.notice.show(tool.textes.webrtc.notices.sbBeganFbLive.interpolate({userName: participant.username}));
 					}
-					tool.cameraBtn.classList.remove('isRecording');
+
+					tool.participantsPopup().showFbLiveIndicator(participant);
+				});
+				tool.WebRTCLib.event.on('facebookLiveStreamingEnded', function (participant) {
+					if(document.querySelector('.Streams_webrtc_fblive_dialog_inner') != null) {
+						Q.Dialogs.pop();
+					}
+					if(participant.isLocal) {
+						tool.cameraBtn.classList.remove('isRecording');
+						tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.youStoppedFbLive", tool.textes));
+					} else {
+						tool.usersBtn.classList.remove('isRecording');
+						tool.WebRTCClass.notice.show(tool.textes.webrtc.notices.sbStoppedFbLive.interpolate({userName: participant.username}));
+
+					}
+
+					tool.participantsPopup().hideFbLiveIndicator(participant);
 				});
 
 				var roomStream = tool.WebRTCClass.roomStream();
@@ -912,7 +983,7 @@
 			createSettingsPopup: function () {
 				var tool = this;
 
-				var settingsPopup=document.createElement('DIV');
+				var settingsPopup = document.createElement('DIV');
 				settingsPopup.className = 'Streams_webrtc_popup-settings Streams_webrtc_popup-box';
 
 				function toggleRadioButton(label) {
@@ -949,7 +1020,7 @@
 				radioBtn.name = 'cameras';
 				radioBtn.type = 'radio';
 				radioBtn.value = 'camera';
-				var textLabel = document.createTextNode('Web Camera');
+				var textLabel = document.createTextNode(Q.getObject("webrtc.settingsPopup.webCamera", tool.textes));
 				var checkmark = document.createElement('SPAN');
 				checkmark.className = 'Streams_webrtc_radio-checkmark';
 				checkmark.innerHTML = icons.screen;
@@ -964,7 +1035,7 @@
 				radioBtn.name = 'cameras';
 				radioBtn.type = 'radio';
 				radioBtn.value = 'screen';
-				var textLabel = document.createTextNode('Screen sharing');
+				var textLabel = document.createTextNode(Q.getObject("webrtc.settingsPopup.screenSharing", tool.textes));
 				var checkmark = document.createElement('SPAN');
 				checkmark.className = 'Streams_webrtc_radio-checkmark';
 				checkmark.innerHTML = icons.screen;
@@ -980,7 +1051,7 @@
 				radioBtn.name = 'cameras';
 				radioBtn.type = 'radio';
 				radioBtn.value = 'screen';
-				var textLabel = document.createTextNode('Share another screen');
+				var textLabel = document.createTextNode(Q.getObject("webrtc.settingsPopup.shareAnotherScreen", tool.textes));
 				var checkmark = document.createElement('SPAN');
 				checkmark.className = 'Streams_webrtc_radio-checkmark';
 				checkmark.innerHTML = icons.screen;
@@ -995,7 +1066,7 @@
 				radioBtn.name = 'cameras';
 				radioBtn.type = 'radio';
 				radioBtn.value = 'off';
-				var textLabel = document.createTextNode('Turn off all cameras');
+				var textLabel = document.createTextNode(Q.getObject("webrtc.settingsPopup.turnOffCameras", tool.textes));
 				var checkmark = document.createElement('SPAN');
 				checkmark.className = 'Streams_webrtc_radio-checkmark';
 				checkmark.innerHTML = icons.switchOffCameras;
@@ -1155,11 +1226,12 @@
 
 				var facebookLiveItem = document.createElement('DIV');
 				facebookLiveItem.className = 'Streams_webrtc_streaming_item';
-				var textLabel = document.createTextNode('Start Facebook Livestream');
+				var fbLivetextLabel = document.createElement('SPAN');
+				fbLivetextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.startFBLive", tool.textes);
 				var fbLiveIcon = document.createElement('SPAN');
 				fbLiveIcon.className = 'Streams_webrtc_streaming_icon';
 				fbLiveIcon.innerHTML = icons.facebooklogo;
-				facebookLiveItem.appendChild(textLabel);
+				facebookLiveItem.appendChild(fbLivetextLabel);
 				facebookLiveItem.appendChild(fbLiveIcon);
 
 				var fbStreamingSettings = document.createElement('DIV');
@@ -1173,35 +1245,34 @@
 
 				var facebookLiveTtleInput = document.createElement('INPUT');
 				facebookLiveTtleInput.type = 'text';
-				facebookLiveTtleInput.placeholder = 'Live title';
+				facebookLiveTtleInput.placeholder = Q.getObject("webrtc.settingsPopup.fbLiveTitle", tool.textes);
 
 				var facebookLiveDesc = document.createElement('LABEL');
 				facebookLiveDesc.className = 'Streams_webrtc_streaming_desc';
 
 				var facebookLiveDescInput = document.createElement('INPUT');
 				facebookLiveDescInput.type = 'text';
-				facebookLiveDescInput.placeholder = 'Live description';
+				facebookLiveDescInput.placeholder = Q.getObject("webrtc.settingsPopup.fbLiveDescription", tool.textes);
 
 				var startStreamingBtnCon = document.createElement('DIV');
 				startStreamingBtnCon.className = 'Streams_webrtc_streaming_start';
 
 				var privacySelect = document.createElement('SELECT');
-				privacySelect.className = 'loudest-options'
 				var option1 = document.createElement('OPTION');
-				option1.innerHTML = 'Only Me';
+				option1.innerHTML = Q.getObject("webrtc.settingsPopup.fbOnlyMeLiveAccess", tool.textes);
 				option1.value = 'SELF';
 				option1.selected = true;
 				var option2 = document.createElement('OPTION');
-				option2.innerHTML = 'Friends';
+				option2.innerHTML = Q.getObject("webrtc.settingsPopup.fbFriendsAccess", tool.textes);
 				option2.value = 'ALL_FRIENDS';
 				var option3 = document.createElement('OPTION');
 				option3.value = 'EVERYONE';
-				option3.innerHTML = 'Public';
+				option3.innerHTML = Q.getObject("webrtc.settingsPopup.fbPublicAccess", tool.textes);
 
 				var startStreamingBtn = document.createElement('BUTTON');
 				startStreamingBtn.type = 'button';
 				startStreamingBtn.className = 'Q_button';
-				startStreamingBtn.innerHTML = "Go Live";
+				startStreamingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbStartLive", tool.textes);
 
 
 
@@ -1219,7 +1290,18 @@
 				var facebookLiveCopy = document.createElement('DIV');
 				facebookLiveCopy.className = 'Streams_webrtc_streaming_copy_url_btn';
 				var facebookLiveCopyLink = document.createElement('SPAN');
-				facebookLiveCopyLink.innerHTML = 'COPY';
+				facebookLiveCopyLink.innerHTML = Q.getObject("webrtc.settingsPopup.copy", tool.textes);
+
+				var buttonsCon = document.createElement('DIV');
+				buttonsCon.className = 'Streams_webrtc_streaming_buttons';
+
+				var getIframeBtnCon = document.createElement('DIV');
+				getIframeBtnCon.className = 'Streams_webrtc_streaming_embed';
+
+				var getIframeBtn = document.createElement('BUTTON');
+				getIframeBtn.type = 'button';
+				getIframeBtn.className = 'Q_button';
+				getIframeBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbEmbedCode", tool.textes);
 
 				var stopStreamingBtnCon = document.createElement('DIV');
 				stopStreamingBtnCon.className = 'Streams_webrtc_streaming_stop';
@@ -1227,7 +1309,7 @@
 				var stopStreamingBtn = document.createElement('BUTTON');
 				stopStreamingBtn.type = 'button';
 				stopStreamingBtn.className = 'Q_button';
-				stopStreamingBtn.innerHTML = "End Live";
+				stopStreamingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbStopLive", tool.textes);
 
 
 				facebookLiveCopy.appendChild(facebookLiveCopyLink);
@@ -1250,8 +1332,11 @@
 				startStreamingBtnCon.appendChild(startStreamingBtn);
 				fbStreamingStartSettings.appendChild(startStreamingBtnCon);
 				fbStreamingLiveSection.appendChild(facebookLiveEmbed);
+				getIframeBtnCon.appendChild(getIframeBtn);
+				buttonsCon.appendChild(getIframeBtnCon);
 				stopStreamingBtnCon.appendChild(stopStreamingBtn);
-				fbStreamingLiveSection.appendChild(stopStreamingBtnCon);
+				buttonsCon.appendChild(stopStreamingBtnCon);
+				fbStreamingLiveSection.appendChild(buttonsCon);
 
 				streamingAndUploading.appendChild(fbStreamingStartSettings);
 				streamingAndUploading.appendChild(fbStreamingLiveSection);
@@ -1276,12 +1361,13 @@
 					data.title = facebookLiveTtleInput.value;
 					data.description = facebookLiveDescInput.value;
 					data.privacy = privacySelect.value;
-					tool.fbLiveInterface.startFacebookLive(data, function (linkToStream) {
-						facebookLiveUrl.value = linkToStream;
+					tool.fbLiveInterface.startFacebookLive(data, function (liveInfo) {
+						facebookLiveUrl.value = 'https://www.facebook.com' + liveInfo.permalink_url;
 
 						fbStreamingStartSettings.style.display = 'none';
 						fbStreamingLiveSection.style.display = 'block';
 						if(fbStreamingStartSettings.classList.contains('Q_working')) fbStreamingStartSettings.classList.remove('Q_working');
+						fbLivetextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.stopFBLive", tool.textes);
 
 					});
 				})
@@ -1298,15 +1384,19 @@
 						fbStreamingStartSettings.style.display = 'block';
 						fbStreamingLiveSection.style.display = 'none';
 						if(fbStreamingLiveSection.classList.contains('Q_working')) fbStreamingLiveSection.classList.remove('Q_working');
+						fbLivetextLabel.innerHTML = 'Start Facebook Livestream';
 
 					});
+				})
+				getIframeBtn.addEventListener('click', function () {
+					tool.fbLiveInterface.getIframe();
 				})
 
 				facebookLiveCopy.addEventListener('click', function () {
 					var link = facebookLiveUrl.value;
 					if(link.trim() != '') {
-						copyToClipboard(link);
-						tool.WebRTCClass.notice.show('Link copied to clipboard');
+						copyToClipboard(facebookLiveUrl);
+						tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.textes));
 					}
 				})
 
@@ -1361,6 +1451,7 @@
 					this.listElement = null;
 					this.audioBtnEl = null;
 					this.videoBtnEl = null;
+					this.liveStatusEl = null;
 					this.participant = null;
 					this.isAudioMuted = null;
 					this.isVideoMuted = null;
@@ -1511,7 +1602,7 @@
 
 							var hasNoVideo = screen.videoTrack == null || (screen.videoTrack != null && screen.videoTrack.videoWidth == 0 && screen.videoTrack.videoHeight == 0);
 							if(hasNoVideo && manually) {
-								tool.WebRTCClass.notice.show('Participant has not video');
+								tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.userHasNoVideo", tool.textes));
 								return;
 							} else if(hasNoVideo && !screen.videoIsChanging) {
 								return;
@@ -1521,6 +1612,14 @@
 						}
 						tool.WebRTCClass.screenRendering.updateLayout();
 						this.unmuteVideo();
+					};
+					this.showFacebookLiveIcon = function() {
+						this.liveStatusEl.innerHTML = icons.facebookLive;
+						if(!this.liveStatusEl.classList.contains('isRecording')) this.liveStatusEl.classList.add('isRecording');
+					};
+					this.hideFacebookLiveIcon = function() {
+						this.liveStatusEl.innerHTML = '';
+						if(this.liveStatusEl.classList.contains('isRecording')) this.liveStatusEl.classList.remove('isRecording');
 					};
 				}
 
@@ -1533,6 +1632,7 @@
 						listItem.showPartcicipantScreens(manually);
 					}
 				}
+
 				function update(participant) {
 					for(let i in tool.participantsList) {
 						let item = tool.participantsList[i];
@@ -1552,6 +1652,28 @@
 						break;
 					}
 
+				}
+
+				function showFbLiveIndicator(participant) {
+					for(let i in tool.participantsList) {
+						let item = tool.participantsList[i];
+						if(participant != item.participant) continue;
+
+						item.showFacebookLiveIcon();
+
+						break;
+					}
+				}
+
+				function hideFbLiveIndicator(participant) {
+					for(let i in tool.participantsList) {
+						let item = tool.participantsList[i];
+						if(participant != item.participant) continue;
+
+						item.hideFacebookLiveIcon();
+
+						break;
+					}
 				}
 
 				var listIcons = {
@@ -1581,19 +1703,37 @@
 					muteAudioBtn.innerHTML = isLocal ? (tool.WebRTCLib.conferenceControl.micIsEnabled() ? icons.microphone : listIcons.locDisabledMic) : listIcons.loudSpeaker;
 					var participantIdentity = document.createElement('DIV');
 					participantIdentity.className = 'Streams_webrtc_participants-identity';
-					var participantIdentityText = document.createElement('DIV');
+					var participantIdentityIcon = document.createElement('DIV');
 					var userId = roomParticipant.identity != null ? roomParticipant.identity.split('\t')[0] : Q.Users.loggedInUser.id;
 					Q.activate(
 						Q.Tool.setUpElement(
-							participantIdentityText, // or pass an existing element
+							participantIdentityIcon, // or pass an existing element
 							"Users/avatar",
 							{
-								userId: userId
+								userId: userId,
+								contents: false
 							}
 						)
 					);
 					//$(participantIdentityText).tool('Users/avatar', { userId: userId }).activate();
 					//participantIdentityText.innerHTML = isLocal ? roomParticipant.identity + ' <span style="font-weight: normal;font-style: italic;">(me)</span>' : roomParticipant.identity;
+					var liveStatus = document.createElement('DIV');
+					liveStatus.className = 'Streams_webrtc_participants-live-status';
+					if(roomParticipant.fbLiveStreamingActive) liveStatus.classList.add('isRecording');
+					liveStatus.innerHTML = icons.facebookLive;
+
+					var participantIdentityText = document.createElement('DIV');
+					//fullName.innerHTML = roomParticipant.userName;
+					Q.activate(
+						Q.Tool.setUpElement(
+							participantIdentityText, // or pass an existing element
+							"Users/avatar",
+							{
+								userId: userId,
+								icon: false
+							}
+						)
+					);
 
 					var audioVisualization = document.createElement('DIV')
 					audioVisualization.className = 'Streams_webrtc_popup-visualization';
@@ -1609,9 +1749,11 @@
 					tracksControlBtns.appendChild(muteVideoBtn);
 					tracksControlBtns.appendChild(muteAudioBtn);
 					participantItem.appendChild(tracksControlBtns);
-					participantIdentity.appendChild(audioVisualization)
-					participantIdentity.appendChild(participantIdentityText)
-					participantItem.appendChild(participantIdentity)
+					participantIdentity.appendChild(audioVisualization);
+					participantIdentity.appendChild(participantIdentityIcon);
+					participantIdentity.appendChild(liveStatus);
+					participantIdentity.appendChild(participantIdentityText);
+					participantItem.appendChild(participantIdentity);
 
 					tool.participantListEl.appendChild(participantItem);
 
@@ -1620,6 +1762,7 @@
 					listItem.listElement = participantItem;
 					listItem.videoBtnEl = muteVideoBtn;
 					listItem.audioBtnEl = muteAudioBtn;
+					listItem.liveStatusEl = liveStatus;
 					tool.participantsList.push(listItem);
 
 					muteAudioBtn.addEventListener('click', function (e) {
@@ -1715,48 +1858,48 @@
 					topBtns.className = 'participants-list-btns';
 					var disconnectBtn = document.createElement('DIV');
 					disconnectBtn.className = 'Streams_webrtc_disconnect-btn';
-					disconnectBtn.dataset.touchlabel = 'Disconnect';
+					disconnectBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.disconnect", tool.textes);
 					disconnectBtn.innerHTML = icons.disconnectIcon;
 
 					var floatingViewModeBtn = document.createElement('DIV');
 					floatingViewModeBtn.className = 'Streams_webrtc_floating-mode-btn';
 					floatingViewModeBtn.dataset.viewMode = 'floatingView';
-					floatingViewModeBtn.dataset.touchlabel = 'Floating Screens';
+					floatingViewModeBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.floatingScreens", tool.textes);
 					var floatingViewModeBtnIcon = document.createElement('SPAN');
 					floatingViewModeBtnIcon.innerHTML = icons.freeViewModeOff;
 
 					var tiledViewModeBtn = document.createElement('DIV');
 					tiledViewModeBtn.className = 'Streams_webrtc_tiled-mode-btn';
 					tiledViewModeBtn.dataset.viewMode = 'tiledView';
-					tiledViewModeBtn.dataset.touchlabel = 'Tiled Screens';
+					tiledViewModeBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.tiledScreens", tool.textes);
 					var tiledViewModeBtnIcon = document.createElement('SPAN');
 					tiledViewModeBtnIcon.innerHTML = icons.tiledViewModeOff;
 
 					var loudestExceptMeBtn = document.createElement('DIV');
 					loudestExceptMeBtn.className = 'Streams_webrtc_lem-mode-btn';
 					loudestExceptMeBtn.dataset.viewMode = 'loudestExceptMe';
-					loudestExceptMeBtn.dataset.touchlabel = 'Loudest Except Me';
+					loudestExceptMeBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.loudestExceptMe", tool.textes);
 					var loudestExceptMeBtnIcon = document.createElement('SPAN');
 					loudestExceptMeBtnIcon.innerHTML = icons.loudestExceptMeOff;
 
 					var loudestBtn = document.createElement('DIV');
 					loudestBtn.className = 'Streams_webrtc_loudest-mode-btn';
 					loudestBtn.dataset.viewMode = 'loudest';
-					loudestBtn.dataset.touchlabel = 'Maximize Loudest';
+					loudestBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.maximizeLoudest", tool.textes);
 					var loudestBtnIcon = document.createElement('SPAN');
 					loudestBtnIcon.innerHTML = icons.maximizeLoudestOff;
 
 					var maximizeStaticBtn = document.createElement('DIV');
 					maximizeStaticBtn.className = 'Streams_webrtc_loudest-mode-btn';
 					maximizeStaticBtn.dataset.viewMode = 'maximizeStatic';
-					maximizeStaticBtn.dataset.touchlabel = 'Static Maximized';
+					maximizeStaticBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.staticMaximized", tool.textes);
 					var maximizeStaticBtnIcon = document.createElement('SPAN');
 					maximizeStaticBtnIcon.innerHTML = icons.staticMaximizeOff;
 
 					var manualLayoutBtn = document.createElement('DIV');
 					manualLayoutBtn.className = 'Streams_webrtc_loudest-mode-btn';
 					manualLayoutBtn.dataset.viewMode = 'manual';
-					manualLayoutBtn.dataset.touchlabel = 'Manual';
+					manualLayoutBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.manual", tool.textes);
 					var manualLayoutBtnIcon = document.createElement('SPAN');
 					manualLayoutBtnIcon.innerHTML = icons.dragIconOff;
 
@@ -2079,6 +2222,8 @@
 					removeItem:removeItem,
 					showScreen:showScreen,
 					update:update,
+					showFbLiveIndicator:showFbLiveIndicator,
+					hideFbLiveIndicator:hideFbLiveIndicator,
 					maximizeLoudestScreen:maximizeLoudestScreen,
 					toggleLoudesScreenMode:toggleLoudesScreenMode,
 					checkActiveMediaTracks:checkActiveMediaTracks,
@@ -2091,6 +2236,7 @@
 				var tool = this;
 				tool.fbLiveInterface = (function() {
 					var _liveId;
+					var _liveInfo;
 					var _accessToken;
 
 					function goLiveDialog(callback) {
@@ -2224,36 +2370,54 @@
 					function startFacebookLive(data, callback) {
 
 
-						var satrtLive = function() {
-							if(tool.WebRTCClass.options().liveStreaming.startFbLiveViaGoLiveDialog) {
+						var satrtLive = function () {
+							if (tool.WebRTCClass.options().liveStreaming.startFbLiveViaGoLiveDialog) {
 								goLiveDialog(callback);
 								return
 							}
-							var handlerCallback = function() {
-								if(tool.WebRTCLib.screensInterface.fbLive.isStreaming()) {
+							var loggedInCallback = function () {
+								if (tool.WebRTCLib.screensInterface.fbLive.isStreaming()) {
 									tool.facebookLiveDialog();
 								} else {
 									tool.fbLiveInterface.createLive(data, function (response) {
 
 										tool.WebRTCLib.screensInterface.fbLive.startStreaming(response.secure_stream_url);
-										var linkToStream = 'https://www.facebook.com/facebook/videos/' + response.id;
-										if(callback != null) callback(linkToStream);
+										_liveInfo = response;
+										if (callback != null) callback(response);
 									});
 								}
 							}
 
-							FB.getLoginStatus(function(response){
-								if (response.status === 'connected') {
-									tool.fbAccessToken = response.authResponse.accessToken;
-									handlerCallback();
-								} else {
-									FB.login(function(response) {
-										if (response.authResponse) {
-											tool.fbAccessToken = response.authResponse.accessToken;
-											handlerCallback(response.authResponse.accessToken);
-										}
-									}, {scope: 'email,public_profile,publish_video'});
+							var notLoggedInCallback = function() {
+								FB.login(function (response) {
+									if (response.authResponse) {
+										tool.fbAccessToken = response.authResponse.accessToken;
+										loggedInCallback(response.authResponse.accessToken);
+									}
+								}, {auth_type: 'reauthorize', scope: 'email,public_profile,publish_video'});
+							}
 
+							FB.getLoginStatus(function (response) {
+								if (response.status === 'connected') {
+									FB.api(
+										'/me/permissions',
+										'GET',
+										function(permissionsResponse) {
+											var permissions = permissionsResponse.data;
+											for (let p in permissions) {
+												if(permissions[p].permission == 'publish_video') {
+													tool.fbAccessToken = response.authResponse.accessToken;
+													loggedInCallback();
+													return;
+												}
+											}
+
+											notLoggedInCallback();
+										}
+									);
+
+								} else {
+									notLoggedInCallback();
 								}
 
 							});
@@ -2271,11 +2435,96 @@
 
 					}
 
+					/**
+					 * Show dialog with iframe code
+					 * @method startFacebookLive
+					 */
+					function getIframe() {
+						var testFrame = '<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2F100004473155810%2Fvideos%2F1429100060582419%2F&width=0" width="0" height="0" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>';
+
+						var bg=document.createElement('DIV');
+						bg.className = 'dialog-bg';
+
+						var dialogCon = document.createElement('DIV');
+						dialogCon.className = 'dialog-con';
+						dialogCon.addEventListener('click', function (e){
+							e.stopPropagation();
+							//if(e.currentTarget == e.target) self.closeAllDialogues();
+						});
+
+						var dialogTitle=document.createElement('H3');
+						dialogTitle.innerHTML = 'Embed';
+						dialogTitle.className = 'dialog-header Q_dialog_title';
+
+						var close=document.createElement('div');
+						close.className = 'close-dialog-sign';
+						close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/apply.png") + '")';
+
+						var dialogue=document.createElement('DIV');
+						dialogue.className = 'dialog-box Streams_webrtc_live-preview';
+
+						var dialogInner=document.createElement('DIV');
+						dialogInner.className = 'dialog-inner';
+
+						var iframeCodeCon = document.createElement('DIV');
+						iframeCodeCon.className = 'Streams_webrtc_live_embed_code';
+						var iframeCodeTitle = document.createElement('DIV');
+						iframeCodeTitle.className = 'Streams_webrtc_live_embed_title';
+						iframeCodeTitle.innerHTML = 'Embed Video';
+						var iframeCode = document.createElement('TEXTAREA');
+						iframeCode.innerText = _liveInfo ? _liveInfo['embed_html'] : testFrame;
+
+						var copyBtn = document.createElement('BUTTON');
+						copyBtn.type = 'button';
+						copyBtn.className = 'Q_button';
+						copyBtn.innerHTML = Q.getObject("webrtc.settingsPopup.copy", tool.textes);
+
+						var preview = document.createElement('DIV');
+						preview.className = 'Streams_webrtc-dialog-preview';
+						preview.innerHTML = _liveInfo ? _liveInfo['embed_html'] : testFrame;
+
+						dialogInner.appendChild(dialogTitle);
+						iframeCodeCon.appendChild(iframeCodeTitle);
+						iframeCodeCon.appendChild(iframeCode);
+						iframeCodeCon.appendChild(copyBtn);
+						preview.appendChild(iframeCodeCon);
+						dialogInner.appendChild(preview);
+
+						dialogue.appendChild(close);
+						dialogue.appendChild(dialogInner);
+						dialogCon.appendChild(dialogue)
+						document.body.appendChild(dialogCon);
+						document.body.appendChild(bg);
+
+						/*var contentWidth = tool.settingsPopupEl.firstChild.scrollWidth;
+
+						dialogue.style.minWidth = tool.settingsPopupEl.firstChild.scrollWidth + 'px';*/
+						tool.state.dialogIsOpened = true;
+
+
+						iframeCode.addEventListener('click', function () {
+							this.setSelectionRange(0, this.value.length);
+						})
+
+						copyBtn.addEventListener('click', function () {
+							copyToClipboard(preview);
+							tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.codeCopiedToCb", tool.textes));
+						});
+
+						close.addEventListener('click', function () {
+							if(bg.parentNode != null) bg.parentNode.removeChild(bg);
+							if(dialogCon.parentNode != null) dialogCon.parentNode.removeChild(dialogCon);
+							tool.state.dialogIsOpened = false;
+						});
+					}
+
+
 					return {
 						createLive: createLive,
 						deleteLive: deleteLive,
 						endLive: endLive,
-						startFacebookLive: startFacebookLive
+						startFacebookLive: startFacebookLive,
+						getIframe: getIframe
 					}
 				}());
 			},

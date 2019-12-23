@@ -76,6 +76,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		};
 		var WebRTCconference;
 
+		var _textes = null;
 		var _controls = null;
 		var _controlsTool = null;
 		var _roomsMedia = null;
@@ -312,7 +313,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			WebRTCconference.event.on('participantConnected', function (participant) {
 				log('user joined',  participant);
 				setRealName(participant, function(name){
-					notice.show("Joining: " + name.firstName);
+					notice.show(_textes.webrtc.notices.joining.interpolate({userName: name.firstName}));
 				});
 				setUserAvatar(participant);
 
@@ -326,14 +327,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				if(userId != null){
 					Q.Streams.get(userId, 'Streams/user/firstName', function () {
 						var firstName = this.fields.content;
-						notice.show(firstName + " left the room");
+						notice.show(_textes.webrtc.notices.sbLeftRoom.interpolate({userName: firstName}));
+
 					});
 				}
 				screensRendering.updateLayout();
 			});
 			WebRTCconference.event.on('localParticipantDisconnected', function (participant) {
 				log('you left the room')
-				notice.show('You left the room');
+				notice.show(Q.getObject("webrtc.notices.youLeftRoom", _textes));
 				screensRendering.updateLayout();
 			});
 			WebRTCconference.event.on('screenAdded', function (participant) {
@@ -491,16 +493,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			dialogList.className = 'Streams_webrtc_instructions_dialog';
 
 			if(Q.info.platform === 'ios') {
-				dialogList.innerHTML = `<div>Permission for ` + kind + ` denied. Please reload this page and confirm access to ` + kind + ` to join the conference.</div>`;
+				dialogList.innerHTML = `<div>` + _textes.webrtc.webIosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>`;
+				//Q.getObject("webrtc.allow." + titleText, _textes)
 			} else {
-				dialogList.innerHTML = `<div>Permission for ` + kind + ` denied. To use it please follow these steps:</div>
-									<li>Go to "Settings" -> "Advanced" -> "Privacy and security" -> "Site Settings" -> "Camera" or "Site Settings" -> "Microphone"</li>
-									<li>Remove ` + location.hostname + ` from "Block" list</li>`;
+				dialogList.innerHTML = `<div>` + _textes.webrtc.webInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
+									<li>` + Q.getObject("webrtc.webInstructionsDialog.point1", _textes) + `</li>
+									<li>` + _textes.webrtc.webInstructionsDialog.point2.interpolate({hostname: location.hostname}) + `</li>`;
 			}
 
 			instructionsPermissionDialog.appendChild(dialogList);
 			Q.Dialogs.push({
-				title: 'Instructions',
+				title: Q.getObject("webrtc.webInstructionsDialog.dialogTitle", _textes),
 				className: 'Streams_webrtc_devices_dialog',
 				content: instructionsPermissionDialog,
 				apply: true
@@ -566,55 +569,49 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					}
 				}
 
-
-				Q.Text.get("Streams/content", function (err, result) {
-					var mediaDevicesDialog = document.createElement('DIV');
-					mediaDevicesDialog.className = 'Streams_webrtc_devices_dialog_inner';
-					var turnOnBtn = document.createElement('BUTTON');
-					turnOnBtn.type = 'button';
-					turnOnBtn.className = 'Q_button Streams_webrtc_enable-microphone-btn';
-					var btnText = document.createElement('SPAN');
-					turnOnBtn.appendChild(btnText)
-					var titleText;
-					if (constrains.audio) {
-						turnOnBtn.innerHTML = micIcon + turnOnBtn.innerHTML;
-						titleText = 'microphoneBtn';
-					}
-					if (constrains.video) {
-						turnOnBtn.innerHTML = turnOnBtn.innerHTML + cameraIcon;
-						titleText = 'cameraBtn';
-					}
-					if (constrains.audio && constrains.video) {
-						titleText = 'cameraAndMicrophoneBtn';
-					}
-					var text = Q.getObject("webrtc.allow." + titleText, result);
-					turnOnBtn.querySelector('SPAN').innerHTML = text;
+				var mediaDevicesDialog = document.createElement('DIV');
+				mediaDevicesDialog.className = 'Streams_webrtc_devices_dialog_inner';
+				var turnOnBtn = document.createElement('BUTTON');
+				turnOnBtn.type = 'button';
+				turnOnBtn.className = 'Q_button Streams_webrtc_enable-microphone-btn';
+				var btnText = document.createElement('SPAN');
+				turnOnBtn.appendChild(btnText)
+				var titleText;
+				if (constrains.audio) {
+					turnOnBtn.innerHTML = micIcon + turnOnBtn.innerHTML;
+					titleText = 'microphoneBtn';
+				}
+				if (constrains.video) {
+					turnOnBtn.innerHTML = turnOnBtn.innerHTML + cameraIcon;
+					titleText = 'cameraBtn';
+				}
+				if (constrains.audio && constrains.video) {
+					titleText = 'cameraAndMicrophoneBtn';
+				}
+				var text = Q.getObject("webrtc.allow." + titleText, _textes);
+				turnOnBtn.querySelector('SPAN').innerHTML = text;
 
 
-					mediaDevicesDialog.appendChild(turnOnBtn);
-					mediaDevicesDialog.addEventListener('mouseup', function (e) {
-						if(_options.streams != null && _options.streams.length != 0) return;
-						navigator.mediaDevices.getUserMedia({video: constrains.video && videoDevices != 0, audio:constrains.audio && audioDevices != 0})
-							.then(function (stream) {
-								addStreamToRoom(stream);
-							}).catch(function (err) {
-							if(err.name == "NotAllowedError") showInstructionsDialog('camera/microphone');
-							console.error(err.name + ": " + err.message);
-						});
+				mediaDevicesDialog.appendChild(turnOnBtn);
+				mediaDevicesDialog.addEventListener('mouseup', function (e) {
+					if(_options.streams != null && _options.streams.length != 0) return;
+					navigator.mediaDevices.getUserMedia({video: constrains.video && videoDevices != 0, audio:constrains.audio && audioDevices != 0})
+						.then(function (stream) {
+							addStreamToRoom(stream);
+						}).catch(function (err) {
+						if(err.name == "NotAllowedError") showInstructionsDialog('camera/microphone');
+						console.error(err.name + ": " + err.message);
 					});
+				});
 
-					Q.Dialogs.push({
-						title: Q.getObject("webrtc.allow.dialogTitle", result),
-						className: 'Streams_webrtc_devices_dialog',
-						content: mediaDevicesDialog,
-						apply: true
-					});
+				Q.Dialogs.push({
+					title: Q.getObject("webrtc.allow.dialogTitle", _textes),
+					className: 'Streams_webrtc_devices_dialog',
+					content: mediaDevicesDialog,
+					apply: true
+				});
 
-				})
-
-			}).catch(function (e) {
-				console.error('ERROR: cannot get device info: ' + e.message);
-			});
+			})
 		}
 
 		/**
@@ -644,13 +641,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
 						var dialogList = document.createElement('OL');
 						dialogList.className = 'Streams_webrtc_instructions_dialog';
-						dialogList.innerHTML = `<div>Permission for ` + kind + ` denied. To use it please follow these steps:</div><li>Go to your iOS Settings</li>
-									<li>Open "Privacy"</li>
-									<li>Find "` + kind + `" and open it</li>
-									<li>Find "` + Q.Users.communityName + `" and enable</li>`;
+						dialogList.innerHTML = `<div>` + _textes.webrtc.iosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
+									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point1", _textes) + `</li>
+									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point2", _textes) + `</li>
+									<li>` + _textes.webrtc.iosInstructionsDialog.point3.interpolate({kind: kind}) + `</li>
+									<li>` + _textes.webrtc.iosInstructionsDialog.point4.interpolate({communityName: Q.Users.communityName}) + `</li>`;
 						instructionsPermissionDialog.appendChild(dialogList);
 						Q.Dialogs.push({
-							title: 'Instructions',
+							title: Q.getObject("webrtc.iosInstructionsDialog.dialogTitle", _textes),
 							className: 'Streams_webrtc_devices_dialog',
 							content: instructionsPermissionDialog,
 							apply: true
@@ -851,7 +849,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						connectionState.hide();
 						Q.handle(_options.onWebRTCRoomCreated, webRTCInstance);
 						_debugTimer.loadEnd = performance.now();
-						notice.show("You joined the room");
+						notice.show(Q.getObject("webrtc.notices.youJoinedRoom", _textes));
 
 						Q.activate(
 							document.body.appendChild(
@@ -4017,8 +4015,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				_debugTimer.loadStart = performance.now();
 
 				overrideDefaultOptions(options);
-
-				onConnect();
+				Q.Text.get("Streams/content", function (err, result) {
+					_textes = result;
+					window._textes = _textes;
+					onConnect();
+				})
 
 				function onConnect() {
 					log('start: load time ' + (performance.now() - _debugTimer.loadStart));
@@ -4035,14 +4036,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
 							var dialogList = document.createElement('OL');
 							dialogList.className = 'Streams_webrtc_instructions_dialog';
-							dialogList.innerHTML = `<div>Permission for "` + kind + `" denied. To use it please follow these steps:</div><li>Go to your Android Settings</li>
-									<li>Open "Apps & notifications"</li>
-									<li>Find "` + (Q.Users.communityName) + `" and open it</li>
-									<li>Tap on Permissions</li>
-									<li>Enable ` + kind + `</li>`;
+							dialogList.innerHTML = `<div>` + _textes.webrtc.androidInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
+									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point1", _textes) + `</li>
+									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point2", _textes) + `</li>
+									<li>` + _textes.webrtc.androidInstructionsDialog.point3.interpolate({communityName: Q.Users.communityName}) + `</li>
+									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point4", _textes) + `</li>
+									<li>` + _textes.webrtc.androidInstructionsDialog.point5.interpolate({kind: kind}) + `</li>`;
 							instructionsPermissionDialog.appendChild(dialogList);
 							Q.Dialogs.push({
-								title: 'Instructions',
+								title: Q.getObject("webrtc.androidInstructionsDialog.dialogTitle", _textes),
 								className: 'Streams_webrtc_devices_dialog',
 								content: instructionsPermissionDialog,
 								apply: true
@@ -4107,14 +4109,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
 							var dialogList = document.createElement('OL');
 							dialogList.className = 'Streams_webrtc_instructions_dialog';
-							dialogList.innerHTML = `<div>Permission for "` + kind + `" denied. To use it please follow these steps:</div><li>Go to your Android Settings</li>
-									<li>Open "Apps & notifications"</li>
-									<li>Find "` + (Q.Users.communityName) + `" and open it</li>
-									<li>Tap on Permissions</li>
-									<li>Enable ` + kind + `</li>`;
+							dialogList.innerHTML = `<div>` + _textes.webrtc.androidInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
+									<li>` +  Q.getObject("webrtc.androidInstructionsDialog.point1", _textes) + `</li>
+									<li>` +  Q.getObject("webrtc.androidInstructionsDialog.point2", _textes) + `</li>
+									<li>` + _textes.webrtc.androidInstructionsDialog.point3.interpolate({communityName: Q.Users.communityName}) + `</li>
+									<li>` +  Q.getObject("webrtc.androidInstructionsDialog.point4", _textes) + `</li>
+									<li>` + _textes.webrtc.androidInstructionsDialog.point5.interpolate({kind: kind}) + `</li>`;
 							instructionsPermissionDialog.appendChild(dialogList);
 							Q.Dialogs.push({
-								title: 'Instructions',
+								title:  Q.getObject("webrtc.androidInstructionsDialog.dialogTitle", _textes),
 								className: 'Streams_webrtc_devices_dialog',
 								content: instructionsPermissionDialog,
 								apply: true
@@ -4177,7 +4180,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						if(_options.mediaDevicesDialog != null && (startWith.audio || startWith.video)) {
 							setTimeout(function () {
 								if(_options.streams != null) return;
-								showPermissionsDialogue();
+								showPermissionsDialogue({video: startWith.video, audio: startWith.audio});
 							}, _options.mediaDevicesDialog.timeout != null ? _options.mediaDevicesDialog.timeout : 2000);
 
 						}
@@ -4310,7 +4313,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		function stop(callback) {
 			log('WebRTC.stop');
 
-			if (!Streams.isStream(_roomStream)) {
+			if (_roomStream != null) {
 				return Q.handle(callback);
 			}
 
@@ -4409,6 +4412,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			},
 			options: function () {
 				return _options;
+			},
+			textes: function () {
+				return _textes;
 			},
 			loader: connectionState,
 			notice: notice
