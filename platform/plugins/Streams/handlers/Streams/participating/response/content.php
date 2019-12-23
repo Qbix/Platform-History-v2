@@ -49,5 +49,7 @@ function Streams_participating_response_content()
 	))->fetchDbRow();
 	$mobileSubscribed = Q::ifset($mobileSubscribed, 'state', null) == 'active';
 
-	return Q::view("Streams/content/participating.php", compact('participantsGrouped', 'user', 'emailSubscribed', 'mobileSubscribed'));
+	$devices = Users_Device::select()->where(array('userId' => $loggedUserId))->fetchDbRows();
+
+	return Q::view("Streams/content/participating.php", compact('participantsGrouped', 'user', 'emailSubscribed', 'mobileSubscribed', 'devices'));
 }

@@ -83,7 +83,7 @@ Q.page("Streams/participating", function () {
 		});
 	});
 
-	$(".Streams_participating_item .Streams_participant_delete_icon").on(Q.Pointer.fastclick, function () {
+	$(".Streams_participating_item[data-subscribed] .Streams_participant_delete_icon").on(Q.Pointer.fastclick, function () {
 		var $this = $(this);
 		var $item = $this.closest('.Streams_participating_item');
 		var subscribed = $item.attr('data-subscribed') === 'true';
@@ -106,6 +106,41 @@ Q.page("Streams/participating", function () {
 			fields: {
 				identifier: $identifier.text()
 			}
+		});
+	});
+
+	$(".Streams_participating_item[data-type=device] .Streams_participant_delete_icon").on(Q.Pointer.fastclick, function () {
+		var $this = $(this);
+		var $item = $this.closest('.Streams_participating_item');
+
+		Q.Text.get('Streams/content', function (err, text) {
+			var msg = Q.firstErrorMessage(err);
+			if (msg) {
+				return console.warn(msg);
+			}
+
+			Q.confirm(Q.getObject('followup.AreYouSureUnsubscribeDevice', text), function (res) {
+				if (!res) {
+					return;
+				}
+
+				$item.addClass('Q_working');
+
+				Q.req('Users/device', [], function (err, data) {
+					$item.removeClass('Q_working');
+					var fem = Q.firstErrorMessage(err, data && data.errors);
+					if (fem) {
+						return Q.alert(fem);
+					}
+
+					$item.remove();
+				}, {
+					method: 'delete',
+					fields: {
+						deviceId: $("input[name=deviceId]", $item).val()
+					}
+				});
+			});
 		});
 	});
 
