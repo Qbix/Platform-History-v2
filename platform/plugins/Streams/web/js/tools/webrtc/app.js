@@ -441,6 +441,13 @@ window.WebRTCconferenceLib = function app(options){
 		 */
 		this.remoteMicIsEnabled = false;
 		/**
+		 * Property shows whether remote participant currently streams video chat to Facebook
+		 *
+		 * @property fbLiveStreamingActive
+		 * @type {Boolean}
+		 */
+		this.fbLiveStreamingActive = false;
+		/**
 		 * Represents whether participant is local
 		 *
 		 * @property isLocal
@@ -1336,12 +1343,23 @@ window.WebRTCconferenceLib = function app(options){
 
 				track.mediaStreamTrack.addEventListener('mute', function(){
 					log('mediaStreamTrack mute');
-					removeScreenFromCommonList(track.parentScreen);
+					track.parentScreen.removeTimer = setTimeout(function () {
+						if(track.mediaStreamTrack.muted){
+							removeScreenFromCommonList(track.parentScreen);
+							track.parentScreen.removeTimer = null;
+						}
+					}, 3000);
+
 				});
 
 				track.mediaStreamTrack.addEventListener('unmute', function(e){
 					log('mediaStreamTrack unmute');
-					addScreenToCommonList(track.parentScreen);
+					if(track.parentScreen.removeTimer != null) {
+						clearTimeout(track.parentScreen.removeTimer);
+						track.parentScreen.removeTimer = null;
+					} else if (track.parentScreen.removeTimer == null && !track.parentScreen.isActive) {
+						addScreenToCommonList(track.parentScreen);
+					}
 				});
 
 				track.mediaStreamTrack.addEventListener('ended', function(e){
@@ -1708,7 +1726,6 @@ window.WebRTCconferenceLib = function app(options){
 				}
 
 				function drawVideosOnCanvas() {
-					//console.log('drawVideosOnCanvas', _streams.length);
 					_inputCtx.clearRect(0, 0, _size.width, _size.height);
 					if(options.liveStreaming.drawBackground && _background != null) drawBackground(_background);
 
@@ -1716,10 +1733,8 @@ window.WebRTCconferenceLib = function app(options){
 						let streamData = _streams[i];
 
 						if(streamData.htmlVideoEl != null && (streamData.htmlVideoEl.videoWidth != null || streamData.htmlVideoEl.videoHeight != null)) {
-							//console.log('drawVideosOnCanvas 1', streamData.participant.sid, streamData.htmlVideoEl != null);
 							drawSingleVideoOnCanvas(streamData.htmlVideoEl, streamData, _size.width, _size.height, streamData.htmlVideoEl.videoWidth, streamData.htmlVideoEl.videoHeight);
 						} else {
-							//console.log('drawVideosOnCanvas 2', streamData.participant.sid, streamData.htmlVideoEl != null);
 							drawSingleAudioOnCanvas(streamData.htmlVideoEl, streamData, _size.width, _size.height);
 						}
 					}
@@ -2043,31 +2058,16 @@ window.WebRTCconferenceLib = function app(options){
 					drawVideosOnCanvas();
 					_isActive = true;
 
-					app.event.on('videoTrackLoaded', function () {
+					var updateCanvas = function() {
 						if(_isActive == true) {
 							updateCanvasLayout();
 						}
-					});
-					app.event.on('participantConnected', function () {
-						if(_isActive == true) {
-							updateCanvasLayout();
-						}
-					});
-					app.event.on('participantDisconnected', function () {
-						if(_isActive == true) {
-							updateCanvasLayout();
-						}
-					});
-					app.event.on('trackMuted', function () {
-						if(_isActive == true) {
-							updateCanvasLayout();
-						}
-					});
-					app.event.on('trackUnmuted', function () {
-						if(_isActive == true) {
-							updateCanvasLayout();
-						}
-					});
+					}
+					app.event.on('videoTrackLoaded', updateCanvas);
+					app.event.on('audioTrackLoaded', updateCanvas);
+					app.event.on('participantDisconnected', updateCanvas);
+					app.event.on('trackMuted', updateCanvas);
+					app.event.on('trackUnmuted', updateCanvas);
 
 				}
 
@@ -2316,7 +2316,7 @@ window.WebRTCconferenceLib = function app(options){
 					audioComposer.mix();
 
 					_mediaRecorder = RecordRTC(_canvasMediStream, {
-						recorderType:MediaStreamRecorder,
+						recorderType:WhammyRecorder,
 						mimeType: codecs,
 						timeSlice: 1000,
 						ondataavailable:trigerDataListeners
@@ -2357,7 +2357,7 @@ window.WebRTCconferenceLib = function app(options){
 				if(_mediaRecorder == null) return;
 				if(options.liveStreaming.useRecordRTCLibrary) {
 					_mediaRecorder.stopRecording(function () {
-						document.querySelector('.Streams_webrtc_streaming_item').addEventListener('click', function () {
+						/*document.querySelector('.Streams_webrtc_streaming_item').addEventListener('click', function () {
 
 							var fileName = 'test.webm';
 							var file = new File([_mediaRecorder.getBlob()], fileName, {
@@ -2366,7 +2366,7 @@ window.WebRTCconferenceLib = function app(options){
 							invokeSaveAsDialog(file, fileName);
 
 
-						})
+						})*/
 					});
 				} else {
 					_mediaRecorder.stop();
@@ -2498,7 +2498,8 @@ window.WebRTCconferenceLib = function app(options){
 					if(_streamingSocket != null) _streamingSocket.disconnect();
 					_streamingSocket = null;
 
-					app.event.dispatch('facebookLiveStreamingEnded');
+					app.event.dispatch('facebookLiveStreamingEnded', localParticipant);
+					app.eventBinding.sendDataTrackMessage("facebookLiveStreamingEnded");
 				},
 				isStreaming: function () {
 					if(_streamingSocket != null && _streamingSocket.connected) return true;
@@ -2523,7 +2524,8 @@ window.WebRTCconferenceLib = function app(options){
 
 						_videoStream.timer = setTimeout(timer, 6000);
 
-						app.event.dispatch('facebookLiveStreamingStarted');
+						app.event.dispatch('facebookLiveStreamingStarted', localParticipant);
+						app.eventBinding.sendDataTrackMessage("facebookLiveStreamingStarted");
 					});
 				}
 			}
@@ -2622,7 +2624,7 @@ window.WebRTCconferenceLib = function app(options){
 						if(_streamingSocket != null) _streamingSocket.disconnect();
 						_streamingSocket = null;
 
-						app.event.dispatch('facebookLiveStreamingEnded');
+						//app.event.dispatch('facebookLiveStreamingEnded');
 					},
 					isStreaming: function () {
 						if(_streamingSocket != null && _streamingSocket.connected) return true;
@@ -2648,7 +2650,7 @@ window.WebRTCconferenceLib = function app(options){
 
 							_videoStream.timer = setTimeout(timer, 6000);
 
-							app.event.dispatch('facebookLiveStreamingStarted');
+							//app.event.dispatch('facebookLiveStreamingStarted');
 						});
 					}
 				}
@@ -3234,10 +3236,10 @@ window.WebRTCconferenceLib = function app(options){
 		}())
 
 		var vimeoLiveUploader = (function () {
-			var CLIENT_ID = '193908d217bc935a828ce19cf0631c76aee1b235';
-			var CLIENT_SECRET = 'a8TnwfsvIJrY4afE4/Y9HUuar0lzq+FaOOFyNv62KGmFlQ8kGl7D5/M/V/7QEoiC/EceGp6NUavAiTdJJASKgdznaxw6xgYAwx28tZZjTBIPzyWD1judlfqpw8O4idDQ';
+			var CLIENT_ID = '';
+			var CLIENT_SECRET = '';
 			var ACCESS_TOKEN;
-			var TEST_ACCESS_TOKEN = '2f57d119a5880c77cc8491ab0a43b98b';
+			var TEST_ACCESS_TOKEN = '';
 
 			var _location;
 			var _videoStream = {blobs:[], size:0};
@@ -3427,180 +3429,6 @@ window.WebRTCconferenceLib = function app(options){
 				verifyUpload: verifyUpload
 			}
 		}())
-
-
-
-		var facebookLiveUploader = (function () {
-
-			var _fbUserId
-			var _location;
-			var _uploadSessionId;
-			var _videoStream = {blobs:[], size:0};
-			var  _offset = 0;
-			var _fbAccessToken = 'EAAGitls3RnEBADwlODp5oPAy339HUvopUbi0ymAd6a0xbnFcjhKky0dOy4EN2aLoYiarDI4K7khY8PLTLJWClHTOK8vzh9LLrMZCmKt5hk5MZATbA259qWBvhGZCPCx1GWQ2qqoe5zZBpCh7HbY9JYgT57IeZBZBKSSZC8ZBaumd2tN1yiWtNn5AICeRMYUhHBZAuPQKqtAOPRgZDZD';
-
-			function authenticate(callback) {
-				FB.getLoginStatus(function(response){
-					console.log('getLoginStatus', response)
-					if (response.status === 'connected') {
-						_fbUserId = response.authResponse.userID;
-						//_fbAccessToken = response.authResponse.accessToken;
-						callback();
-					} else {
-						FB.login(function(response) {
-							if (response.authResponse) {
-								_fbUserId = response.authResponse.userID;
-								//_fbAccessToken = response.authResponse.accessToken;
-								callback();
-							}
-						}, {scope: 'public_profile,publish_video'});
-
-					}
-
-				});
-
-			}
-
-			function initUpload() {
-				authenticate(createVideo)
-			}
-
-			function onDataAvailablehandler(blob) {
-				_videoStream.blobs.push(blob);
-
-				_videoStream.size += blob.size;
-
-				let blobsLength = _videoStream.blobs.length;
-				let sumSize = 0;
-
-				for(let i = 0; i < blobsLength; i++) {
-					if(_videoStream.blobs.length == 0) break;
-					sumSize = sumSize + _videoStream.blobs[i].size;
-
-					if(_videoStream.size > 1000000*2 && _videoStream.recordingStopped != true){
-						let blobsToSend = _videoStream.blobs.slice(0, i + 1);
-						var mergedBlob = new Blob(blobsToSend);
-						var blobToSend = mergedBlob.slice(0, _videoStream.size - (1000000*2));
-						console.log('VIMEO ondataavailable FIIIINISSHHH', blobToSend.size)
-
-						let lastChunk = _videoStream.recordingStopped === true ? true : false;
-						canvasComposer.removeDataListener(onDataAvailablehandler);
-						_videoStream.recordingStopped = true;
-						sendChunk(blobToSend, lastChunk);
-						break;
-					} else if(sumSize >= 1000000 && _videoStream.recordingStopped != true) {
-						let blobsToSend = _videoStream.blobs.slice(0, i + 1);
-						_videoStream.blobs.splice(0, i);
-						var mergedBlob = new Blob(blobsToSend);
-
-						var blobToSend;
-						if(mergedBlob.size > 1000000) {
-							blobToSend = mergedBlob.slice(0, 1000000);
-							var blobToNotSend = mergedBlob.slice(1000000);
-							_videoStream.blobs.unshift(blobToNotSend);
-						} else {
-							blobToSend = mergedBlob;
-						}
-
-						console.log('VIMEO ondataavailable SEND', blobToSend.size)
-
-						let lastChunk = _videoStream.recordingStopped === true ? true : false;
-						sendChunk(blobToSend, lastChunk);
-						break;
-					} else if(_videoStream.recordingStopped === true) {
-
-					}
-				}
-
-				console.log('VIMEO ondataavailable BUFFER', sumSize)
-			}
-
-			function createVideo() {
-				var uploadRequestBody = {
-				/*	"access_token": _fbAccessToken,
-					"upload_phase": "start",
-					"file_size": 1000000*2*/
-				}
-
-				var video_title = 'Teeest';
-				var video_desc = 'Teeest desc';
-
-				var post_url = "https://graph-video.facebook.com/me/videos?"
-					+ "title=" + video_title + "&description=" + video_desc
-					+ "&access_token=" + _fbAccessToken;
-				console.log('post_url', post_url)
-				var xhr = new XMLHttpRequest();
-				xhr.open('POST', post_url, true);
-				xhr.setRequestHeader('access_token', _fbAccessToken);
-				xhr.setRequestHeader('upload_phase', 'start');
-				xhr.setRequestHeader('file_size', 1000000*2);
-
-				xhr.onload = function(e) {
-					var response = JSON.parse(e.target.response);
-					console.log('VIMEO createVideo response', response)
-					if (e.target.status < 400) {
-						_uploadSessionId = response.id;
-						//_location = response.upload.upload_link;
-						canvasComposer.captureStream(onDataAvailablehandler);
-					} else {
-						onUploadError(e);
-					}
-				}.bind(this);
-				xhr.onerror = onUploadError;
-				xhr.send(JSON.stringify(uploadRequestBody));
-			}
-
-			function onUploadError(e) {
-				console.error(e);
-			}
-
-			function sendChunk(blob) {
-				var uploadRequestBody = {
-					"access_token": _fbAccessToken,
-					"upload_phase": "start",
-					"file_size": 1000000*2
-				}
-
-				var xhr = new XMLHttpRequest();
-				xhr.open('POST', "https://graph.facebook.com/v2.9/app/uploads?access_token=" + _fbAccessToken + "&file_type=video/mp4", true);
-				/*xhr.setRequestHeader('access_token', _fbAccessToken);
-				xhr.setRequestHeader('upload_phase', 'start');
-				xhr.setRequestHeader('file_size', 1000000*2);*/
-
-				xhr.onload = function(e) {
-					var response = JSON.parse(e.target.response);
-					console.log('VIMEO createVideo response', response)
-					if (e.target.status < 400) {
-						_uploadSessionId = response.id;
-						//_location = response.upload.upload_link;
-						//canvasComposer.captureStream(onDataAvailablehandler);
-					} else {
-						onUploadError(e);
-					}
-				}.bind(this);
-				xhr.onerror = onUploadError;
-				xhr.send();
-			}
-
-			function completeUploading() {
-
-			}
-
-			function recordAndUpload() {
-
-			}
-
-			function stopRecording() {
-
-			}
-
-			return {
-				recordAndUpload: recordAndUpload,
-				stopRecording: stopRecording,
-				initUpload: initUpload
-			}
-		}())
-		window.fbLiveUploader = facebookLiveUploader;
 
 		function addScreenToCommonList(screen) {
 			screen.show();
@@ -3874,6 +3702,12 @@ window.WebRTCconferenceLib = function app(options){
 			if(data.type == 'screensharingStarting' || data.type == 'screensharingStarted' || data.type == 'screensharingFailed' || data.type == 'afterCamerasToggle') {
 				if(participant.screens.length == 0) app.screensInterface.createParticipantScreen(participant);
 				app.event.dispatch(data.type, {content:data.content != null ? data.content : null, participant: participant});
+			} else if(data.type == 'facebookLiveStreamingStarted') {
+				participant.fbLiveStreamingActive = true;
+				app.event.dispatch('facebookLiveStreamingStarted', participant);
+			} else if(data.type == 'facebookLiveStreamingEnded') {
+				participant.fbLiveStreamingActive = false;
+				app.event.dispatch('facebookLiveStreamingEnded', participant);
 			} else if(data.type == 'online') {
 
 				if(data.content.micIsEnabled != null) participant.remoteMicIsEnabled = data.content.micIsEnabled;
@@ -4015,6 +3849,9 @@ window.WebRTCconferenceLib = function app(options){
 			app.screensInterface.removeScreensByParticipant(participant);
 			//participant.remove();
 			participant.online = false;
+			if(participant.fbLiveStreamingActive) {
+				app.event.dispatch('facebookLiveStreamingEnded', participant);
+			}
 
 			app.event.dispatch('participantDisconnected', participant);
 
@@ -4526,6 +4363,14 @@ window.WebRTCconferenceLib = function app(options){
 				var dataChannel = newPeerConnection.createDataChannel('dataTrack', {reliable: true})
 				setChannelEvents(dataChannel, participant);
 				participant.dataTrack = dataChannel;
+				var sendInitialData = function(){
+					if(app.screensInterface.fbLive.isStreaming()) {
+						//app.eventBinding.sendDataTrackMessage("facebookLiveStreamingStarted");
+						dataChannel.send(JSON.stringify({type:"facebookLiveStreamingStarted"}));
+					}
+					dataChannel.removeEventListener('open', sendInitialData);
+				}
+				dataChannel.addEventListener('open', sendInitialData);
 
 				createOffer();
 				newPeerConnection.onnegotiationneeded = function (e) {
@@ -4861,6 +4706,10 @@ window.WebRTCconferenceLib = function app(options){
 					return existingParticipant.sid == message.fromSid && existingParticipant.RTCPeerConnection;
 				})[0];
 
+				if(senderParticipant && senderParticipant.isNegotiating) {
+					return;
+				}
+
 				var isVideoInOffer = message.sdp.indexOf('m=video') != -1 || message.sdp.indexOf('mid:video') != -1;
 				var isAudioInOffer = message.sdp.indexOf('m=audio') != -1 || message.sdp.indexOf('mid:audio') != -1;
 
@@ -4872,6 +4721,13 @@ window.WebRTCconferenceLib = function app(options){
 					participantConnected(senderParticipant);
 				}
 
+
+				var description;
+				if(typeof cordova != 'undefined' && _isiOS) {
+					description = new RTCSessionDescription({type: message.type, sdp:message.sdp});
+				} else {
+					description =  {type: message.type, sdp:message.sdp};
+				}
 
 
 				if(senderParticipant.RTCPeerConnection == null || senderParticipant.RTCPeerConnection.connectionState =='closed') {
@@ -4895,13 +4751,6 @@ window.WebRTCconferenceLib = function app(options){
 						};
 					}
 
-				}
-
-				var description;
-				if(typeof cordova != 'undefined' && _isiOS) {
-					description = new RTCSessionDescription({type: message.type, sdp:message.sdp});
-				} else {
-					description =  {type: message.type, sdp:message.sdp};
 				}
 
 				senderParticipant.isNegotiating = true;
@@ -6113,7 +5962,7 @@ window.WebRTCconferenceLib = function app(options){
 			app.eventBinding.roomJoined(room, dataTrack);
 			if(mediaDevicesList != null) app.conferenceControl.loadDevicesList(mediaDevicesList);
 
-			app.event.dispatch('joined');
+			app.event.dispatch('joined', localParticipant);
 			if(callback != null) callback(app);
 		}
 
@@ -6405,7 +6254,7 @@ window.WebRTCconferenceLib = function app(options){
 		function joinRoom(streams, mediaDevicesList) {
 			app.eventBinding.socketRoomJoined((streams != null ? streams : []));
 			if(mediaDevicesList != null) app.conferenceControl.loadDevicesList(mediaDevicesList);
-			app.event.dispatch('joined');
+			app.event.dispatch('joined', localParticipant);
 			if(callback != null) callback(app);
 		}
 
@@ -6487,11 +6336,11 @@ window.WebRTCconferenceLib = function app(options){
 				);
 			} else {
 				cordova.plugins.iosrtc.enumerateDevices(function (mediaDevicesList) {
-					try {
+					//try {
 						joinRoom((options.streams != null ? options.streams : []), mediaDevicesList);
-					} catch (e) {
-						console.error('error', e.message);
-					}
+					//} catch (e) {
+					////	console.error('error', e.message);
+					//}
 				}, function (error) {
 					console.error(`Unable to connect to Room: ${error.message}`);
 				});
@@ -7077,29 +6926,27 @@ window.WebRTCconferenceLib = function app(options){
 			connect();
 		} else {
 
-
-			/*var url = 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'
+			var url = 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'
 			var xhr = new XMLHttpRequest();
 
 			xhr.open('GET', url, true);
 
 			xhr.onload = function(e) {
-				console.log('e', e)
 				var script = e.target.response || e.target.responseText;
 				if (e.target.readyState === 4) {
 					switch( e.target.status) {
 						case 200:
 							eval.apply( window, [script] );
-							console.log("script loaded: ", url);
+							connect();
 							break;
 						default:
-							console.log("ERROR: script not loaded: ", url);
+							console.error("ERROR: script not loaded: ", url);
 					}
 				}
 			}
-			xhr.send();*/
+			xhr.send();
 
-			var script = document.createElement('script');
+			/*var script = document.createElement('script');
 			script.onload = function () {
 				requirejs(['https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'], function (io) {
 					window.io = io;
@@ -7108,7 +6955,7 @@ window.WebRTCconferenceLib = function app(options){
 			};
 			script.src = 'https://requirejs.org/docs/release/2.2.0/minified/require.js';
 
-			document.head.appendChild(script); //or something of the likes
+			document.head.appendChild(script);*/
 
 		}
 
@@ -7145,6 +6992,10 @@ window.WebRTCconferenceLib = function app(options){
 		if(app.sendOnlineStatusInterval != null) {
 			clearInterval(app.sendOnlineStatusInterval);
 			app.sendOnlineStatusInterval = null;
+		}
+
+		if(app.screensInterface.fbLive.isStreaming()) {
+			app.screensInterface.fbLive.endStreaming();
 		}
 
 		for(var p = roomParticipants.length - 1; p >= 0; p--){

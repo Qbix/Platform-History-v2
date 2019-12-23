@@ -193,6 +193,19 @@
     z-index: 5;
     cursor: pointer;
 }
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_manage-users-btn-btn.isRecording::after {
+    display: block;
+    position: absolute;
+    top:-5px;
+    left:0;
+    content: " ";
+    width: 15px;
+    height: 15px;
+    background: red;
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: Q_working 1s ease-in-out infinite alternate;
+}
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_text-chat-btn{
     cursor: pointer;
 }
@@ -339,6 +352,19 @@
     height: 100%;
     width: 100%;
     z-index: 5;
+}
+.Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_manage-users-btn-btn.isRecording::after {
+    display: block;
+    position: absolute;
+    top:-5px;
+    left:0;
+    content: " ";
+    width: 15px;
+    height: 15px;
+    background: red;
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: Q_working 1s ease-in-out infinite alternate;
 }
 
 .Streams_webrtc_mobile-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_users-counter,
@@ -490,6 +516,14 @@
 .Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity span{
     font-weight: bold;
     color: #000;
+}
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity .Streams_webrtc_participants-live-status {
+    display: none;
+    z-index: 10;
+    animation: Q_working 1s ease-in-out infinite alternate;
+}
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity .Streams_webrtc_participants-live-status.isRecording {
+    display: block;
 }
 
 .Streams_webrtc_mobile-screen .Streams_webrtc_conference-control .Streams_webrtc_popup-box {
@@ -1375,6 +1409,14 @@ and (max-device-width : 320px) {
 .Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity span {
     font-weight: bold;
 }
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity .Streams_webrtc_participants-live-status {
+    display: none;
+    z-index: 10;
+    animation: Q_working 1s ease-in-out infinite alternate;
+}
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity .Streams_webrtc_participants-live-status.isRecording {
+    display: block;
+}
 
 
 /* text chat popup */
@@ -1457,9 +1499,87 @@ and (max-device-width : 320px) {
     -moz-box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.2);
     box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.2);
 }
-.dialog-box.select-camera {
+.dialog-box.select-camera,
+.dialog-box.Streams_webrtc_live-preview {
     padding: 0;
 }
+.dialog-box.Streams_webrtc_live-preview {
+    padding: 0;
+    width:400px;
+}
+
+.dialog-box.Streams_webrtc_live-preview .Streams_webrtc-dialog-preview {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+.dialog-box.Streams_webrtc_live-preview .Streams_webrtc-dialog-preview iframe {
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+    /*width:640px;
+    height:360px;*/
+    width: 100%;
+    height: auto;
+    min-height: 230px;
+}
+.dialog-box.Streams_webrtc_live-preview .Streams_webrtc_live_embed_code {
+    flex:1;
+}
+.dialog-box.Streams_webrtc_live-preview .Streams_webrtc_live_embed_title {
+    padding: 15px;
+}
+.dialog-box.Streams_webrtc_live-preview .Streams_webrtc-dialog-preview textarea {
+    display: block;
+    width: 100%;
+    border: 1px solid #ccc;
+    height: 200px;
+    font-size: 17px;
+}
+.dialog-box.Streams_webrtc_live-preview .Streams_webrtc_live_embed_code button{
+    float: right;
+    margin: 15px;
+}
+
+@media (min-width: 576px) {
+
+}
+
+
+@media (min-width: 768px) {
+
+}
+
+
+@media (min-width: 992px) {
+
+}
+
+
+@media (min-width: 1200px) {
+
+    .dialog-box.Streams_webrtc_live-preview {
+        padding: 0;
+        width:992px;
+    }
+
+    .dialog-box.Streams_webrtc_live-preview .Streams_webrtc-dialog-preview {
+        background: #fff;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .dialog-box.Streams_webrtc_live-preview .Streams_webrtc-dialog-preview iframe {
+        background: #fff;
+        display: flex;
+        flex-direction: row;
+        width:640px;
+        height:360px;
+    }
+}
+
+
+
 .dialog-box.text-chat {
     padding: 0;
     margin: 0;
@@ -1644,10 +1764,16 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
     max-height: 1000px;
 }
 .Streams_webrtc_streaming .Streams_webrtc_streaming_start,
-.Streams_webrtc_streaming .Streams_webrtc_streaming_stop {
+.Streams_webrtc_streaming .Streams_webrtc_streaming_stop,
+.Streams_webrtc_streaming .Streams_webrtc_streaming_embed {
     display: flex;
     justify-content: flex-end;
     padding: 10px 0;
+    margin-left: 10px;
+}
+.Streams_webrtc_streaming .Streams_webrtc_streaming_buttons {
+    display: flex;
+    justify-content: flex-end;
 }
 .Streams_webrtc_streaming .Streams_webrtc_streaming_start button {
     margin-left: 20px;
