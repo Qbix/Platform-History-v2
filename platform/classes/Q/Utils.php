@@ -749,11 +749,22 @@ class Q_Utils
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
 	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
 	 * @param {string} [$header=null] Optional string to replace the entire header
+	 * @param {integer} [$res_t=30] number of seconds before timeout, defaults to 30 if you pass null
+	 * @param {callable} [&$callback] Optionally pass something callable here, and it will be
+	 *  called with the CURL handle before it's closed, if CURL was used.
 	 * @return {string|false} The response, or false if not received
 	 * 
 	 * **NOTE:** *The function waits for it, which might take a while!*
 	 */
-	private static function request($method, $uri, $data, $user_agent = null, $curl_opts = array(), $header = null, $res_t = Q_UTILS_CONNECTION_TIMEOUT)
+	public static function request(
+		$method,
+		$uri,
+		$data = null,
+		$user_agent = null,
+		$curl_opts = array(),
+		$header = null,
+		$res_t = Q_UTILS_CONNECTION_TIMEOUT,
+		$callback = null)
 	{
 		$method = strtoupper($method);
 		if (!isset($user_agent))
@@ -800,8 +811,24 @@ class Q_Utils
 				if ($method === 'GET') {
 					$url = Q_Uri::fixUrl("$url?$data");
 				} else {
-					$headers[] = "Content-type: application/x-www-form-urlencoded";
-					$headers[] = "Content-length: " . strlen($data);
+					$found = false;
+					foreach ($header as $h) {
+						if (Q::startsWith($h, 'Content-type:')) {
+							$count = true;
+						}
+					}
+					if (!$found) {
+						$headers[] = "Content-type: application/x-www-form-urlencoded";
+					}
+					$found = false;
+					foreach ($header as $h) {
+						if (Q::startsWith($h, 'Content-type:')) {
+							$count = true;
+						}
+					}
+					if (!$found) {
+						$headers[] = "Content-length: " . strlen($data);
+					}
 				}
 			}
 			if ($header) {
@@ -814,7 +841,7 @@ class Q_Utils
 		if (function_exists('curl_init')) {
 			// Use CURL if installed...
 			$ch = curl_init();
-			$curl_opts = $curl_opts + array(
+			$curl_opts = $curl_opts + array( // defaults unless something different is specified
 				CURLOPT_USERAGENT => $user_agent,
 				CURLOPT_RETURNTRANSFER => true,	 // return web page
 				CURLOPT_HEADER		 => false,	// don't return headers
@@ -862,6 +889,9 @@ class Q_Utils
 				}
 			}
 
+			if ($callback and is_callable($callback)) {
+				call_user_func($callback, $ch, $result);
+			}
 			curl_close($ch);
 		} else {
 			// Non-CURL based version...
@@ -871,7 +901,7 @@ class Q_Utils
 					'header' => $header,
 					'content' => $data,
 					'max_redirects' => 10,
-					'timeout' => $res_t
+					'timeout' => isset($res_t) ? $res_t : Q_UTILS_CONNECTION_TIMEOUT
 				)
 			));
 			$sock = fopen($url, 'rb', false, $context);

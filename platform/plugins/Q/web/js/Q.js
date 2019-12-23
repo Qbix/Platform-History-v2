@@ -10622,6 +10622,9 @@ Q.Page.beforeUnload('').set(function () {
 }, 'Q');
 
 function _touchScrollingHandler(event) {
+	if (Q.Pointer.preventRubberBand.suspend) {
+		return false;
+	}
     var p = event.target;
 	var pos;
 	var scrollable = null;
