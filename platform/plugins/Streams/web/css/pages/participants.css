@@ -1,3 +1,6 @@
+#content.Streams_participating h2 {
+	margin-top: 10px;
+}
 .Streams_participating_stream {
 	table-layout: fixed;
 	width: 100%;

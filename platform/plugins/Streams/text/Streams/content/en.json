@@ -122,8 +122,12 @@
 			"CheckYourEmail": "Please check your email and follow instructions!"
         },
 		"AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-		"AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier."
-    },
+		"AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+		"AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+		"Identifiers": "Identifiers",
+		"Devices": "Devices",
+		"Streams": "Streams"
+	},
     "webrtc": {
         "allow": {
             "dialogTitle": "Connecting",
