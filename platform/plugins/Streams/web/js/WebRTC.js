@@ -1399,7 +1399,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 									onResized: function () {
 										if(!Q.info.isMobile) screensRendering.renderManualScreensGrid();
 									}
-								},
+								}
 							),
 							{}
 						);

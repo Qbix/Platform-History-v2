@@ -1805,7 +1805,7 @@ var Stream = Streams.Stream = function (fields) {
  * @param {Boolean} [updateCache=false] Whether to update the Streams.get cache after constructing the stream
  * @return {Q.Stream}
  */
-Stream.construct = function _Streams_construct(fields, extra, callback, updateCache) {
+Stream.construct = function _Stream_construct(fields, extra, callback, updateCache) {
 
 	if (typeof extra === 'function') {
 		callback = extra;
@@ -1891,6 +1891,7 @@ Stream.construct = function _Streams_construct(fields, extra, callback, updateCa
 			};
 			Q.mixin(streamFunc, Streams.Stream);
 			Q.mixin(streamFunc.streamConstructor, streamFunc);
+			streamFunc.streamConstructor.isConstructorOf = 'Q.Streams.Stream';
 		}
 		var stream = new streamFunc.streamConstructor(fields);
 		var messages = {}, participants = {};
@@ -2025,18 +2026,15 @@ Stream.release = function _Stream_release (publisherId, streamName) {
  *   @param {Object} [options.changed=null] An Object of {fieldName: true} pairs naming fields to trigger change events for, even if their values stayed the same.
  *   @param {Boolean} [options.evenIfNotRetained] If the stream wasn't retained (for example because it was missing last time), then refresh anyway
  *   @param {Object} [options.extra] Any extra parameters to pass to the callback
- * @return {boolean} Whether callback will be called, or false if the refresh has been canceled
+ * @return {boolean} Returns false if refresh was canceled because stream was not retained
  */
 Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, options) {
 	var notRetained = !_retainedByStream[Streams.key(publisherId, streamName)];
 	var callbackCalled = false;
 
 	if ((notRetained && !(options && options.evenIfNotRetained))) {
-		if (!callbackCalled) {
-			Q.handle(callback, this, [false]);
-			callbackCalled = true;
-		}
-		Streams.get.cache.removeEach([publisherId, streamName]);
+		Q.handle(callback, this, [false]);
+		// Streams.get.cache.removeEach([publisherId, streamName]);
 		return false;
 	}
 	var o = options || {};
@@ -4656,8 +4654,9 @@ Streams.displayType = function _Streams_displayType(type) {
  * @return {boolean}
  */
 Streams.isStream = function (value) {
-	return value instanceof Stream;
+	return Q.getObject('constructor.isConstructorOf', value) === 'Q.Streams.Stream';
 };
+
 /**
  * Use this to check whether user subscribed to stream
  * and also whether subscribed to message type (from streams_subscription_rule)
@@ -5044,7 +5043,7 @@ function _onResultHandler(subject, params, args, shared, original) {
 	if (key == undefined || params[0] || !subject) {
 		return; // either retainWith was not called or an error occurred during the request
 	}
-	if (subject instanceof Stream) {
+	if (Streams.isStream(subject)) {
 		subject.retain(key);
 	} else {
 		if (subject.stream) {
@@ -5070,7 +5069,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 		cache: Q.Cache[where]("Streams.get", 1000),
 		throttle: 'Streams.get',
 		prepare: function (subject, params, callback) {
-			if (subject instanceof Stream) {
+			if (Streams.isStream(subject)) {
 				return callback(subject, params);
 			}
 			if (params[0]) {
@@ -5230,7 +5229,7 @@ Q.onInit.add(function _Streams_onInit() {
 			return;
 		}
 
-		Users.Socket.onEvent('Streams/post').set(function (message, byUserId) {
+		Users.Socket.onEvent('Streams/post').set(function (message) {
 			message = Streams.Message.construct(message);
 			var messageType = message.type;
 			var messageUrl = message.getInstruction('inviteUrl') || message.getInstruction('url');
@@ -5724,6 +5723,9 @@ function _preloadedStreams(elem) {
 }
 
 function _updateMessageCache(msg) {
+	if (Streams.cache.where === 'local' && Q.Frames && !Q.Frames.isMain()) {
+		return false; // do nothing, this isn't the main frame
+	}
 	Streams.get.cache.each([msg.publisherId, msg.streamName],
 		function (k, v) {
 			var stream = (v && !v.params[0]) ? v.subject : null;
@@ -5745,6 +5747,9 @@ function _updateMessageCache(msg) {
 }
 
 function _updateRelatedTotalsCache(msg, instructions, which, change) {
+	if (Streams.cache.where === 'local' && Q.Frames && !Q.Frames.isMain()) {
+		return false; // do nothing, this isn't the main frame
+	}
 	Streams.get.cache.each([msg.publisherId, msg.streamName],
 		function (k, v) {
 			var stream = (v && !v.params[0]) ? v.subject : null;
@@ -5759,6 +5764,9 @@ function _updateRelatedTotalsCache(msg, instructions, which, change) {
 }
 
 function _updateMessageTotalsCache(msg) {
+	if (Streams.cache.where === 'local' && Q.Frames && !Q.Frames.isMain()) {
+		return false; // do nothing, this isn't the main frame
+	}
 	Streams.get.cache.each([msg.publisherId, msg.streamName],
 		function (k, v) {
 			var stream = (v && !v.params[0]) ? v.subject : null;

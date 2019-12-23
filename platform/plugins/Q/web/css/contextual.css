@@ -125,9 +125,9 @@
 .Q_contextual_arrows_preloaded
 {
 	position: absolute;
+	display: none;
 	top: -100px;
 	left: -100px;
-	display: block;
 	visibility: hidden;
 }
 

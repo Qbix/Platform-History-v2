@@ -452,7 +452,9 @@ class Q_Dispatcher
 		 * @param {array} $routed
 		 */
 		self::$startedResponse = true;
-		Q::event("Q/response", self::$routed);
+		if (!isset(self::$skip['Q/response'])) {
+			Q::event("Q/response", self::$routed);
+		}
 		if ($closeConnection) {
 			header("Connection: close");
 			header("Content-Length: ".$ob->getLength());

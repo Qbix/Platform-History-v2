@@ -2262,6 +2262,9 @@
 
 		var where = Users.cache.where || 'document';
 
+		if (Q.Frames) {
+			Users.get = Q.Frames.useMainFrame(Users.get, 'Q.Users.get');
+		}
 		Users.get = Q.getter(Users.get, {
 			cache: Q.Cache[where]("Users.get", 100),
 			throttle: 'Users.get',
@@ -2277,18 +2280,17 @@
 			}
 		});
 		
-		Users.get = Q.getter(Users.get, {
-			cache: Q.Cache[where]("Users.get", 100),
-			throttle: 'Users.get',
+		Users.getContacts = Q.getter(Users.getContacts, {
+			cache: Q.Cache[where]("Users.getContacts", 100),
+			throttle: 'Users.getContacts',
 			prepare: function (subject, params, callback) {
-				if (subject instanceof User) {
-					return callback(subject, params);
-				}
 				if (params[0]) {
 					return callback(subject, params);
 				}
-				var user = params[1] = new User(subject);
-				return callback(user, params);
+				for (var i in params[1]) {
+					params[1][i] = new Users.Contact(params[1][i]);
+				};
+				return callback(subject, params);
 			}
 		});
 
@@ -2995,7 +2997,7 @@
 
 		scheme: null,
 
-		scope: null,
+		scope: 'email,public_profile',
 
 		construct: function () {
 			Users.Facebook.appId = Q.getObject(['facebook', Q.info.app, 'appId'], Users.apps);
@@ -3059,7 +3061,7 @@
 				FB.login(function (response) {
 					Users.Facebook.doLogin(response);
 					callback && callback(response);
-				}, scope ? {scope: scope.join(',')} : undefined);
+				}, scope ? {scope: scope} : undefined);
 				break;
 			case 'native':
 				facebookConnectPlugin.login(["public_profile", "email"], function (response) {
@@ -3074,7 +3076,7 @@
 					'?client_id=' + Users.Facebook.appId +
 					'&redirect_uri=' + Q.baseUrl() + '/login/facebook%3Fscheme%3D' + Users.Facebook.scheme +
 					'&state=' + _stringGen(10) +
-					'&response_type=token&scope=email,public_profile';
+					'&response_type=token&scope=' + scope;
 				cordova.plugins.browsertab.openUrl(url,
 					{scheme: Users.Facebook.scheme + '://'},
 					function(success) { console.log(success); },

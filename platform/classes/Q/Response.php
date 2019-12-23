@@ -1574,7 +1574,7 @@ class Q_Response
 	 * @static
 	 * @param {string} $uri The URL or internal URI to redirect to
 	 * @param {array} $options An array of options that can include:
-	 * @param {boolean} [$options.loop=false] If false, and current URL is the same as the new one, skips setting the redirect header and just returns false.
+	 * @param {boolean} [$options.loop=false] If false, and current URL is the same as the new one, skips setting the redirect header and just returns false. Set to true to avoid this.
 	 * @param {boolean} [$options.permanently=false] If true, sets response code as 304 instead of 302
 	 * @param {boolean} [$options.noProxy=false] If true, doesn't use the proxy mapping to determine URL
 	 * @param {boolean} [$options.querystring=true] If true, attach all existing GET params to redirect url.
@@ -1612,7 +1612,7 @@ class Q_Response
 		if (isset($result)) {
 			return $result;
 		}
-		if (!empty($loop) and Q_Request::url() === $url) {
+		if (empty($loop) and Q_Request::url() === $url) {
 			return false;
 		}
 		if (!empty($querystring) and !empty($_SERVER['QUERY_STRING'])) {
@@ -1658,6 +1658,9 @@ class Q_Response
 	 * @param {string} $value The value of the cookie
 	 * @param {string} [$expires=0] The number of seconds since the epoch, 0 means expire when browser session ends
 	 * @param {string} [$path=null] You can specify a path on the server here for the cookie
+	 * @param {string} [$domain=null] Set true here to set domain to ".hostname" or pass a string.
+	 *  If you leave it null, then the cookie will be set as a host-only cookie, meaning that subdomains
+	 *  won't get it.
 	 * @param {boolean} [$secure=false] Making the cookie secure
 	 * @param {boolean} [$httponly=false] Make the cookie http only
 	 * @return {string}
@@ -1713,10 +1716,12 @@ class Q_Response
 		}
 		$header = '';
 		$header = Q::event('Q/Response/sendCookieHeaders',
-			compact('name', 'value', 'expires', 'path', 'header'),
-			'before', false, $header
+			compact('name', 'value', 'expires', 'path', 'domain', 'secure', 'httponly', 'header'),
+			'after', false, $header
 		);
-		header($header);
+		if ($header) {
+			header($header);
+		}
 		self::$cookies = array();
 	}
 
@@ -1739,7 +1744,11 @@ class Q_Response
 	{
 		$parts = parse_url(Q_Request::baseUrl());
 		$path = $path ? $path : (!empty($parts['path']) ? $parts['path'] : '/');
-		$domain2 = $domain ? $domain : (strpos($parts['host'], '.') !== false ? '.' : '').$parts['host'];
+		if ($domain === true) {
+			$domain2 = (strpos($parts['host'], '.') !== false ? '.' : '').$parts['host'];
+		} else {
+			$domain2 = $domain ? $domain : null;
+		}
 		setcookie($name, $value, $expires, $path, $domain2, $secure, $httponly);
 	}
 

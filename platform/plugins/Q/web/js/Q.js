@@ -524,8 +524,8 @@ Sp.matchTypes.adapters = {
 		var parts = this.split(' ');
 		var res = [];
 		var regexp = (options && options.requireScheme)
-			? /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}(:[0-9]{1,5})?([\/|\?].*)?$/gim
-			: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}(:[0-9]{1,5})?([\/|\?].*)?$/gim;
+			? /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim
+			: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim;
 		for (var i=0; i<parts.length; i++) {
 			if (!parts[i].match(regexp)) {
 				continue;
@@ -1218,6 +1218,7 @@ Q.typeOf = function _Q_typeOf(value) {
  *	value: the value of the current item
  *  Also can be a string, which would be the name of a method to invoke on each item, if possible.
  *  In this case the callback should be followed by an array of arguments to pass to the method calls.
+ *  You can still pass the options afterwards.
  * @param {Object} options Can include the following:
  * @param {boolean} [options.ascending=false] pass true here to traverse in ascending key order, false in descending.
  * @param {boolean} [options.numeric=false] used together with ascending. Pass true to use numeric sort instead of string sort.
@@ -2258,7 +2259,7 @@ Evp.add = function _Q_Event_prototype_add(handler, key, prepend) {
  * @param {boolean} prepend If true, then prepends the handler to the chain
  * @return {String} The key under which the handler was set
  */
-Evp.setOnce = function _Q_Event_prototype_addOnce(handler, key, prepend) {
+Evp.setOnce = function _Q_Event_prototype_setOnce(handler, key, prepend) {
 	if (!handler) return undefined;
 	var event = this;
 	return key = event.set(function _setOnce() {
@@ -5168,11 +5169,10 @@ Q.Cache = function _Q_Cache(options) {
 function Q_Cache_get(cache, key, special) {
 	if (cache.documentStorage) {
 		return (special === true) ? cache.special[key] : cache.data[key];
-	} else {
-		var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
-		var item = storage.getItem(cache.name + (special===true ? "\t" : "\t\t") + key);
-		return item ? JSON.parse(item) : undefined;
 	}
+	var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
+	var item = storage.getItem(cache.name + (special===true ? "\t" : "\t\t") + key);
+	return item ? JSON.parse(item) : undefined;
 }
 function Q_Cache_set(cache, key, obj, special) {
 	if (cache.documentStorage) {
@@ -5182,6 +5182,9 @@ function Q_Cache_set(cache, key, obj, special) {
 			cache.data[key] = obj;
 		}
 	} else {
+		if (cache.localStorage && Q.Frames && !Q.Frames.isMain()) {
+			return false; // do nothing, this isn't the main frame
+		}
 		var serialized = JSON.stringify(obj);
 		var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
 		storage.setItem(cache.name + (special===true ? "\t" : "\t\t") + key, serialized);
@@ -5195,6 +5198,9 @@ function Q_Cache_remove(cache, key, special) {
 			delete cache.data[key];
 		}
 	} else {
+		if (cache.localStorage && Q.Frames && !Q.Frames.isMain()) {
+			return false; // do nothing, this isn't the main frame
+		}
 		var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
 		storage.removeItem(cache.name + (special === true ? "\t" : "\t\t") + key);
 	}
@@ -7754,7 +7760,7 @@ Q.cookie = function _Q_cookie(name, value, options) {
 			domain = ';domain='+options.domain;
 		} else {
 			var hostname = parts[1].split('/').shift();
-			domain = ';domain=' + (hostname.isIPAddress() ? '' : '.') + hostname;
+			domain = ''; //';domain=' + hostname;
 		}
 		if (value === null) {
 			document.cookie = encodeURIComponent(name)+'=;expires=Thu, 01-Jan-1970 00:00:01 GMT'+path+domain;
@@ -9585,6 +9591,7 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 				var name = item[1];
 				_ioOn(socket, name, Q.Socket.onEvent(ns, url, name).handle); // may overwrite again, but it's ok
 				_ioOn(socket, name, Q.Socket.onEvent(ns, '', name).handle);
+				Q.handle(Q.Socket.onRegister, Q.Socket, [ns, url, name]);
 			});
 		}
 		
@@ -9643,6 +9650,8 @@ Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, callback2) {
 	_connectSocketNS(ns, url, callback, callback2, false);
 };
 
+Q.Socket.onRegister = new Q.Event();
+
 /**
  * Disconnects a socket corresponding to a Q.Socket
  * @method disconnect
@@ -9658,6 +9667,10 @@ Q.Socket.prototype.disconnect = function _Q_Socket_prototype_disconnect() {
 		return;
 	}
 	qs.socket.disconnect();
+};
+
+Q.Socket.prototype.toJSON = function () {
+	return {ns: this.ns, url: this.url};
 };
 
 /**
@@ -9777,7 +9790,7 @@ Q.Socket.onConnect = Q.Event.factory(
 );
 
 /**
- * Returns Q.Event which occurs on a message post event coming from socket.io
+ * Returns Q.Event which occurs on posted event coming from socket.io
  * Generic callbacks can be assigend by setting messageType to ""
  * @event onEvent
  * @param name {String} name of the event to listen for
@@ -12540,141 +12553,6 @@ Q.Audio.stopSpeaking = function () {
 	}
 };
 
-var rls = root.localStorage;
-
-/**
- * Methods for working with storage and signaling across frames and windows
- * @class Q.Frames
- * @namespace Q
- * @static
- */
-Q.Frames = {
-	/**
-	 * An index that uniquely identifies this frame among all frames and windows
-	 * loaded from this domain.
-	 * @property index
-	 * @type {Number}
-	 */
-	index: null,
-	/**
-	 * Get the index of the "main" iframe, that will be the one opening
-	 * sockets, making requests to the server, and triggering any callbacks
-	 * in the other "client" iframes.
-	 * @method mainIndex
-	 * @static
-	 * @return {Integer} 
-	 */
-	mainIndex: function () {
-		return parseInt(rls.getItem(Q.Frames.mainIndexKey));
-	},
-	/**
-	 * Send some message to all other frames on this domain.
-	 * This will trigger their onMessage() event with the data.
-	 * @method message
-	 * @static
-	 * @param {Object} data Will be JSON-encoded for transmitting via localStorage
-	 * @param {Integer} [index] Place the index of a specific frame here,
-	 *  such as the return value of Q.Frames.main(), to message only this frame.
-	 *  Otherwise it will be broadcast to all other frames.
-	 * @param {Function} [callback] If index is provided, then you can optionally
-	 *  pass a callback here whose first parameter will be false if the message was not handled
-	 *  by the frame with that index (because it was unloaded), or true if it was handled.
-	 */
-	message: function (data, index, callback) {
-		var messageIndex;
-		rls.setItem(Q.Frames.message.counterKey,
-			messageIndex = ((parseInt(rls.getItem(Q.Frames.message.counterKey)) || 0) + 1) % 1000000
-		);
-		var value = {
-			data: data,
-			toIndex: index || null,
-			fromIndex: Q.Frames.index,
-			messageIndex: messageIndex,
-			rand: Math.random().toString(36).substring(7)
-			// rand is to make it unique and trigger "storage" event
-		};
-		rls.setItem(Q.Frames.message.key, JSON.stringify(value));
-		rls.removeItem(Q.Frames.message.key); // just to keep things clean
-		if (callback) {
-			Q.Frames.message.callbacks[messageIndex] = callback;
-			setTimeout(function () {
-				var cb = Q.Frames.message.callbacks[messageIndex];
-				if (cb) {
-					callback(false); // it's been 100 ms and it hasn't been handled
-					delete Q.Frames.message.callbacks[messageIndex];
-				}
-			}, 100);
-		}
-	},
-	/**
-	 * This event occurs when Q.Frames.message() was called in one of the frames
-	 * to send some data.
-	 * @event onMessage
-	 * @param {Object} data the data that was passed.
-	 * @param {Integer} fromIndex The index of the frame from which it was sent
-	 * @param {Boolean} wasBroadcast Whether it was broadcast to all frames
-	 */
-	onMessage: new Q.Event(function (data, fromIndex, wasBroadcast) {
-		if (wasBroadcast && data && data["Q.needNewMainIndex"]) {
-			if (!rls.getItem(Q.Frames.mainIndexKey)) {
-				// indicate this frame as the main one, if no one else has
-				rls.setItem(Q.Frames.mainIndexKey, Q.Frames.index);
-			}
-		}
-	}, 'Q.Frames')
-};
-
-Q.Frames.mainIndexKey = "Q.Frames.mainIndex";
-Q.Frames.counterKey = "Q.Frames.counter";
-Q.Frames.message.key = "Q.Frames.message";
-Q.Frames.message.handledKey = "Q.Frames.message.handled";
-Q.Frames.message.counterKey = "Q.Frames.message.counter";
-Q.Frames.message.callbacks = {};
-
-(function () {
-	rls.setItem(Q.Frames.counterKey,
-		Q.Frames.index = (parseInt(rls.getItem(Q.Frames.counterKey) || 0) + 1) % 1000000
-	);
-	if (!rls.getItem(Q.Frames.mainIndexKey)) {
-		// indicate this frame as the main one, if no one else has
-		rls.setItem(Q.Frames.mainIndexKey, Q.Frames.index);
-	}
-	Q.addEventListener(window, 'storage', function (e) {
-		var handledKey = Q.Frames.message.handledKey;
-		if (e.key === handledKey) {
-			var cb, mi = e.newValue;
-			if (mi != null) {
-				// signal arrived indicating some messageIndex was handled
-				if (cb = Q.Frames.message.callbacks[mi]) {
-					cb(true);
-					delete Q.Frames.message.callbacks[mi];
-				}
-			}
-			return;
-		}
-		if (e.key !== Q.Frames.message.key
-		|| e.newValue == null) {
-			return;
-		}
-		var value = JSON.parse(e.newValue);
-		if (value.toIndex && value.toIndex !== Q.Frames.index) {
-			return;
-		}
-		rls.setItem(handledKey, value.messageIndex); // signal that it was handled
-		rls.removeItem(handledKey); // just to keep things clean
-		Q.Frames.onMessage.handle.call(
-			Q, value.data, value.fromIndex, value.toIndex == null
-		);
-	});
-	Q.onUnload.set(function () {
-		if (Q.Frames.mainIndex() !== Q.Frames.index) {
-			return;
-		}
-		rls.removeItem(Q.Frames.mainIndexKey);
-		Q.Frames.message({"Q.needNewMainIndex": true});
-	}, 'Q.Frames');
-})();
-
 /**
  * Methods for temporarily covering up certain parts of the screen with masks
  * @class Q.Masks
@@ -12832,6 +12710,12 @@ Q.Masks = {
 			};
 			if (!mask.shouldCover) {
 				mask.rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
+			}
+			if (mask.rect.top < 0) {
+				mask.rect.top = 0;
+			}
+			if (mask.rect.bottom < 0) {
+				mask.rect.bottom = 0;
 			}
 			ms.left = scrollLeft + mask.rect.left + 'px';
 			ms.top = scrollTop + mask.rect.top + 'px';

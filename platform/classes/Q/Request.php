@@ -798,6 +798,9 @@ class Q_Request
 	 */
 	static function browser()
 	{
+		if (!isset($_SERVER['HTTP_USER_AGENT'])) {
+			return null;
+		}
 		$userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
 		$detect = array(
 			'msie' => 'ie',

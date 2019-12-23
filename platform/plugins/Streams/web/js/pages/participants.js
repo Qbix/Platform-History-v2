@@ -1,4 +1,5 @@
 Q.page("Streams/participating", function () {
+	var userId = Q.Users.loggedInUserId();
 
 	$(".Streams_participating_stream_checkmark").on("change", function () {
 		var $this = $(this);
@@ -10,6 +11,38 @@ Q.page("Streams/participating", function () {
 		} else {
 			Q.Streams.Stream.unsubscribe(publisherId, name);
 		}
+	});
+
+	var _modIdentified = function () {
+		var type = $(this).closest('.Streams_participating_item').attr('data-type');
+		Q.Users.setIdentifier({
+			identifierType: type,
+			onSuccess: function () {
+				Q.Text.get('Streams/content', function (err, text) {
+					var msg = Q.firstErrorMessage(err);
+					if (msg) {
+						return console.warn(msg);
+					}
+
+					var text = Q.getObject('followup.'+type+'.CheckYour' + type.toCapitalized(), text);
+					Q.alert(text);
+				});
+			}
+		});
+	};
+
+	$('<div class="Streams_participating_item_actions">')
+	.appendTo('.Streams_participating .Streams_participating_item')
+	.plugin('Q/actions', {
+		actions: {
+			plus: _modIdentified,
+			edit: _modIdentified,
+			remove: function () {
+
+			}
+		},
+		alwaysShow: true,
+		clickable: false
 	});
 
 	return function () {

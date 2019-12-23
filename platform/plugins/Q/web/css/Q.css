@@ -755,6 +755,7 @@ html.Q_scanning body > .Q_scanning_code {
 }
 #status_background {
 	width: 100%;
+	position: fixed;
 }
 .Q_statusBarOverlapped #status_background { display: block !important; }
 

@@ -258,13 +258,13 @@ function _Streams_participants(options) {
 		}
 		
 		function _adjustInterval() {
+			var w = $te.width();
+			var pm = tool.$pc.outerWidth(true) - tool.$pc.width();
 			if (state.showSummary) {
-				var w = $te.width() - tool.$summary.outerWidth(true);
-				var pm = tool.$pc.outerWidth(true) - tool.$pc.width();
-				tool.$pc.width(w - pm);
+				w = w - tool.$summary.outerWidth(true);
 			}
 			if (state.showControls) {
-				var $c = tool.$controls;
+				w = w - tool.$controls.outerWidth(true);
 				var $tew = $te.width();
 				var overflowed = (state.avatarsWidth > $tew && $tew > 0);
 				if (overflowed) {
@@ -303,6 +303,8 @@ function _Streams_participants(options) {
 				}
 				state.overflowed = overflowed;
 			}
+
+			tool.$pc.width(w - pm);
 		}
 		
 		function _addAvatar(userId, prepend) {
