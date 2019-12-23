@@ -36,11 +36,18 @@ function Streams_participating_response_content()
 	Q_Response::addStylesheet("{{Streams}}/css/pages/participants.css");
 	Q_Response::addScript("{{Streams}}/js/pages/participants.js");
 
-	$emailSubscribed = $dbStreams->rawQuery("select state from users_email where userId='".$loggedUserId."' and address='".$user->emailAddress."'")->fetchDbRow();
-	$emailSubscribed = count($emailSubscribed) && $emailSubscribed->state == 'active';
+	//$emailSubscribed = $dbStreams->rawQuery("select state from users_email where userId='".$loggedUserId."' and address='".$user->emailAddress."'")->fetchDbRow();
+	$emailSubscribed = Users_Email::select()->where(array(
+		'userId' => $loggedUserId,
+		'address' => $user->emailAddress
+	))->fetchDbRow();
+	$emailSubscribed = Q::ifset($emailSubscribed, 'state', null) == 'active';
 
-	$mobileSubscribed = $dbStreams->rawQuery("select state from users_mobile where userId='".$loggedUserId."' and number='".$user->mobileNumber."'")->fetchDbRow();
-	$mobileSubscribed = count($mobileSubscribed) && $mobileSubscribed->state == 'active';
+	$mobileSubscribed = Users_Mobile::select()->where(array(
+		'userId' => $loggedUserId,
+		'number' => $user->mobileNumber
+	))->fetchDbRow();
+	$mobileSubscribed = Q::ifset($mobileSubscribed, 'state', null) == 'active';
 
 	return Q::view("Streams/content/participating.php", compact('participantsGrouped', 'user', 'emailSubscribed', 'mobileSubscribed'));
 }

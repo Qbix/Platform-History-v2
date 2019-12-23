@@ -53,7 +53,7 @@ Q.page("Streams/participating", function () {
 					return Q.alert(fem);
 				}
 
-				$item.attr('data-subscribed', subscribed ? 'false' : 'true');
+				$item.attr('data-subscribed', Q.getObject(['slots', slot], data) === 'active' ? 'true' : 'false');
 			}, {
 				fields: {
 					identifier: $identifier.text(),
