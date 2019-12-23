@@ -11,12 +11,27 @@ function Users_identifier_response_subscribe($params)
 	$identifier = $fields['identifier'];
 	$type = $fields['type'];
 
-	$dbStreams = Db::connect('Streams');
 	if ($type == 'email') {
-		$dbStreams->rawQuery("update users_email set state='active' where userId='".$user->id."' and address='".$identifier."'")->execute();
+		Users_Email::update()->set(array(
+			'state' => 'active'
+		))->where(array(
+			'userId' => $user->id,
+			'address' => $identifier,
+			'state!=' => 'unverified'
+		))->execute();
+		$res = Users_Email::select()->where(array('userId' => $user->id, 'address' => $identifier))->fetchDbRow();
+		$res = Q::ifset($res, 'state', null);
 	} elseif ($type == 'mobile') {
-		$dbStreams->rawQuery("update users_mobile set state='active' where userId='".$user->id."' and number='".$identifier."'")->execute();
+		Users_Mobile::update()->set(array(
+			'state' => 'active'
+		))->where(array(
+			'userId' => $user->id,
+			'number' => $identifier,
+			'state!=' => 'unverified'
+		))->execute();
+		$res = Users_Mobile::select()->where(array('userId' => $user->id, 'number' => $identifier))->fetchDbRow();
+		$res = Q::ifset($res, 'state', null);
 	}
 
-	return true;
+	return $res;
 }
