@@ -40,6 +40,8 @@
 		var tool = this;
 		var state = this.state;
 
+		Q.setObject("Q.Pointer.preventRubberBand.suspend", true);
+
 		if (state.style) {
 			tool.element.setAttribute('style', state.style);
 		}
