@@ -4,16 +4,15 @@
 	 */
 
 	/**
-	 * This tool create parallax effect on tool element.
-	 * !!!WARNING!!! In order to avoid twitching, comment this: Q.Pointer.preventRubberBand
+	 * This tool creates parallax effect on tool element.
 	 * @class Q parallax
 	 * @constructor
-	 * @param {Object}	[options] Override various options for this tool
-	 *  @param {bool|Number}    [options.speed=false] A negative value will make it move slower than regular scrolling, and faster for positive. Recommended keeping the speed between -10 and 10.
-	 *  @param {Float}          [options.center=0.5] Can move start position of parallax element. Top if > 0.5 and bottom if less.
-	 *  @param {Number}         [options.zIndex] Can set particular z-index
-	 *  @param {String}         [style] Any styles you want to to apply to element.
-	 *  @param {String}         [className] Any css classes you want to to apply to element.
+	 * @param {Object}             [options] Override various options for this tool
+	 *  @param {bool|Number}       [options.speed=false] A negative value will make it move slower than regular scrolling, and faster for positive. Recommended keeping the speed between -10 and 10.
+	 *  @param {Float}             [options.center=0.5] Can move start position of parallax element. Top if > 0.5 and bottom if less.
+	 *  @param {Number}            [options.zIndex] Can set particular z-index
+	 *  @param {String}            [style] Any styles you want to to apply to element.
+	 *  @param {String}            [className] Any css classes you want to to apply to element.
 	 *  @param {boolean|number}    [leftToRight=false] Horizontal left to right. Use number to define movement limit. If true, 1 value using (means move from border to border).
 	 *  @param {boolean|number}    [rightToLeft=false] Horizontal right to left. Use number to define movement limit. If true, 1 value using (means move from border to border).
 	 *  @param {boolean|Number}    [spin=false] will spin element to angle defined by number. If just true, angle=360.
@@ -32,7 +31,7 @@
 	 *  @param {boolean|number}    [slalom=false] Moving element to and fro. Use number as measure of swing. If true, 50 value using.
 	 *  @param {number}            [offset=0] scrollY position so the animation will begin at this point
 	 *  @param {String|HTMLElement}	[wrapper] By default, the position of parallax elements is determined via the scroll position of the body.
-	 *  Passing in the wrapper property will force to watch that element instead.
+	 *    Passing in the wrapper property will force to watch that element instead.
 	 *  @param {Q.Event}           [onMove] Event that happens when parallax position changed.
 	 * @return {Q.Tool}
 	 */
@@ -175,6 +174,7 @@
 				$te.addClass('lax');
 				$te.attr('data-lax-preset', preset.join(' '));
 				$te.attr('data-lax-options', options.join(' '));
+				lax.addElement($te[0]);
 			});
 		},
 		rellax: function () {
