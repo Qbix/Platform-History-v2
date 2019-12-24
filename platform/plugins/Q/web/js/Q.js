@@ -10621,8 +10621,10 @@ Q.Page.beforeUnload('').set(function () {
 		.removeClass(Q.info.uri.module);
 }, 'Q');
 
+Q.Pointer.preventRubberBand.suspend = {};
+
 function _touchScrollingHandler(event) {
-	if (Q.Pointer.preventRubberBand.suspend) {
+	if (!Q.isEmpty(Q.Pointer.preventRubberBand.suspend)) {
 		return false;
 	}
     var p = event.target;
