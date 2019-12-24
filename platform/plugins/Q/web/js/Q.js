@@ -10621,8 +10621,6 @@ Q.Page.beforeUnload('').set(function () {
 		.removeClass(Q.info.uri.module);
 }, 'Q');
 
-Q.Pointer.preventRubberBand.suspend = {};
-
 function _touchScrollingHandler(event) {
 	if (!Q.isEmpty(Q.Pointer.preventRubberBand.suspend)) {
 		return false;
@@ -11571,6 +11569,8 @@ Q.Pointer = {
 		cancelClickDistance: 10
 	}
 };
+
+Q.Pointer.preventRubberBand.suspend = {};
 
 function _cancelClickBriefly() {
 	Q.Pointer.cancelClick();
