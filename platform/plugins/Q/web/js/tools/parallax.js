@@ -39,6 +39,12 @@
 	Q.Tool.define("Q/parallax", function () {
 		var tool = this;
 		var state = this.state;
+		
+		var s = Q.Pointer.preventRubberBand.suspend;
+		if (!s['Q/parallax']) {
+			s['Q/parallax'] = 0;
+		}
+		++s['Q/parallax'];
 
 		if (state.style) {
 			tool.element.setAttribute('style', state.style);
@@ -207,6 +213,10 @@
 		Q: {
 			beforeRemove: function () {
 				this.parallax && this.parallax.destroy();
+				var s = Q.Pointer.preventRubberBand.suspend;
+				if (--s['Q/parallax'] === 0) {
+					delete Q.Pointer.preventRubberBand.suspend['Q/parallax'];
+				}
 			}
 		}
 	});
