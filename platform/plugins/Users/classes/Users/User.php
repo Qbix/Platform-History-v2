@@ -629,7 +629,6 @@ class Users_User extends Base_Users_User
 		$users_email = new Users_Email();
 		$users_email->address = $normalized;
 		$users_email->userId = $this->id;
-		$users_email->state = 'active';
 		$retrieved = $users_email->retrieve(null, array('ignoreCache' => true));
 		if (!$retrieved) {
 			throw new Q_Exception_MissingRow(array(
@@ -668,7 +667,6 @@ class Users_User extends Base_Users_User
 		$users_mobile = new Users_Mobile();
 		$users_mobile->number = $normalized;
 		$users_mobile->userId = $this->id;
-		$users_mobile->state = 'active';
 		$retrieved = $users_mobile->retrieve(null, array('ignoreCache' => true));
 		if (!$retrieved) {
 			throw new Q_Exception_MissingRow(array(

@@ -1,15 +1,19 @@
-#content.Streams_participating h2 {
-	margin-top: 10px;
+#content.Streams_participating {
+	padding: 0 5px;
 }
-.Streams_participating_stream {
-	table-layout: fixed;
+#content.Streams_participating > h2 {
+	margin-top: 10px;
+	text-align: center;
+}
+table.Streams_participating_stream {
+	table-layout: auto;
 	width: 100%;
 }
 .Streams_participating_stream th {
 	text-align: center;
 }
 .Streams_participating_stream th[data-type=checkmark] {
-	width: 100px;
+	width: 90px;
 }
 .Streams_participating_stream tr {
 	background-color: #eeeeff;
@@ -42,6 +46,7 @@
 }
 .Streams_participating_stream td[data-type=checkmark] {
 	text-align: center;
+	width: 50px;
 }
 .Streams_participating_stream td[data-type=participants] {
 	min-width: 280px;
@@ -136,6 +141,9 @@
 	vertical-align: middle;
 	float: right;
 }
+tr.Streams_participating_item .Streams_participant_subscribed_icon {
+	float: none;
+}
 .Streams_participating_item .Streams_participant_delete_icon {
 	background: url('../../../Q/img/icons/basic32.png') 0 -964px no-repeat;
 }
@@ -143,11 +151,13 @@
 .Streams_participating_item[data-defined=false] .Streams_participant_subscribed_icon {
 	display: none;
 }
-.Streams_participating_item[data-subscribed=true] .Streams_participant_subscribed_icon {
+.Streams_participating_item[data-subscribed=true] .Streams_participant_subscribed_icon,
+.Streams_participant_subscribed_icon[data-subscribed=true] {
 	background: url('../../img/subscription/on/80.png') center center no-repeat;
 	background-size: contain;
 }
-.Streams_participating_item[data-subscribed=false] .Streams_participant_subscribed_icon {
+.Streams_participating_item[data-subscribed=false] .Streams_participant_subscribed_icon,
+.Streams_participant_subscribed_icon[data-subscribed=false] {
 	background: url('../../img/subscription/off/80.png') center center no-repeat;
 	background-size: contain;
 }

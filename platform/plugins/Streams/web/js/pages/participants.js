@@ -1,15 +1,28 @@
 Q.page("Streams/participating", function () {
 	var userId = Q.Users.loggedInUserId();
 
-	$(".Streams_participating_stream_checkmark").on("change", function () {
+	$("td[data-type=checkmark] .Streams_participant_subscribed_icon").on(Q.Pointer.fastclick, function () {
 		var $this = $(this);
+		var $parent = $this.closest('tr');
 		var publisherId = $this.attr('data-publisherId');
-		var name = $this.prop('name');
+		var name = $this.attr('data-name');
+		var subscribed = $this.attr('data-subscribed');
 
-		if ($this.prop('checked')) {
-			Q.Streams.Stream.subscribe(publisherId, name);
+		var _callback = function (err, participant) {
+			if (err || !participant) {
+				return;
+			}
+
+			$this.attr('data-subscribed', participant.subscribed === 'yes' ? 'true' : 'false');
+			$parent.removeClass('Q_working');
+		};
+
+		$parent.addClass('Q_working');
+
+		if (subscribed === 'true') {
+			Q.Streams.Stream.unsubscribe(publisherId, name, _callback);
 		} else {
-			Q.Streams.Stream.unsubscribe(publisherId, name);
+			Q.Streams.Stream.subscribe(publisherId, name, _callback);
 		}
 	});
 
@@ -72,7 +85,7 @@ Q.page("Streams/participating", function () {
 				return console.warn(msg);
 			}
 
-			var text = Q.getObject('followup.AreYouSureUnsubscribeIdentifier', text);
+			var text = Q.getObject('participating.AreYouSureUnsubscribeIdentifier', text);
 			Q.confirm(text, function (res) {
 				if (!res) {
 					return;
@@ -119,7 +132,7 @@ Q.page("Streams/participating", function () {
 				return console.warn(msg);
 			}
 
-			Q.confirm(Q.getObject('followup.AreYouSureUnsubscribeDevice', text), function (res) {
+			Q.confirm(Q.getObject('participating.AreYouSureUnsubscribeDevice', text), function (res) {
 				if (!res) {
 					return;
 				}
