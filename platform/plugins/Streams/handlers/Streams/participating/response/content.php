@@ -25,7 +25,7 @@ function Streams_participating_response_content()
 		}
 
 		$stream = Streams::fetchOne($loggedUserId, $participant->fromPublisherId, $participant->fromStreamName);
-		$checked = $participant->subscribed == 'yes' ? 'checked' : '';
+		$checked = $participant->subscribed == 'yes' ? 'true' : 'false';
 		$iconUrl = $stream->iconUrl('40.png');
 
 		$participantsGrouped[$participant->streamType][] = Q::view("Streams/content/participatingItem.php",
@@ -36,7 +36,6 @@ function Streams_participating_response_content()
 	Q_Response::addStylesheet("{{Streams}}/css/pages/participants.css");
 	Q_Response::addScript("{{Streams}}/js/pages/participants.js");
 
-	//$emailSubscribed = $dbStreams->rawQuery("select state from users_email where userId='".$loggedUserId."' and address='".$user->emailAddress."'")->fetchDbRow();
 	$emailSubscribed = Users_Email::select()->where(array(
 		'userId' => $loggedUserId,
 		'address' => $user->emailAddress
