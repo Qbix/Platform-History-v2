@@ -5,6 +5,6 @@
 		<div title="<?php echo $stream->title ?>"><?php echo $stream->title ?></div>
 	</td>
 	<td data-type="checkmark">
-		<input type="checkbox" class="Streams_participating_stream_checkmark" data-publisherId="<?php echo $stream->publisherId ?>" name="<?php echo $stream->name ?>" <?php echo $checked?>>
+        <i class="Streams_participant_subscribed_icon" data-publisherId="<?php echo $stream->publisherId ?>" data-name="<?php echo $stream->name ?>" data-subscribed="<?php echo $checked?>"></i>
 	</td>
 </tr>
