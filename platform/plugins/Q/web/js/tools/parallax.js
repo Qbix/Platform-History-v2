@@ -92,7 +92,7 @@
 				var htmlTag = document.getElementsByTagName("html")[0];
 
 				// this code applied only once, so set data-q-parallax flag to HTML tag
-				if (!htmlTag.getAttribute('data-q-parallax')) {
+				if (!_parallaxApplied) {
 					setTimeout(function () {
 						lax.setup();
 
@@ -111,7 +111,7 @@
 						});
 					}, 2000);
 
-					htmlTag.setAttribute('data-q-parallax', 1);
+					_parallaxApplied = true;
 				}
 
 				var preset = [];
@@ -220,5 +220,7 @@
 			}
 		}
 	});
+	
+	var _parallaxApplied = false;
 
 })(Q, jQuery);
