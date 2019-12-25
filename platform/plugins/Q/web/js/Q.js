@@ -10622,7 +10622,7 @@ Q.Page.beforeUnload('').set(function () {
 }, 'Q');
 
 function _touchScrollingHandler(event) {
-	if (Q.Pointer.preventRubberBand.suspend) {
+	if (!Q.isEmpty(Q.Pointer.preventRubberBand.suspend)) {
 		return false;
 	}
     var p = event.target;
@@ -11569,6 +11569,8 @@ Q.Pointer = {
 		cancelClickDistance: 10
 	}
 };
+
+Q.Pointer.preventRubberBand.suspend = {};
 
 function _cancelClickBriefly() {
 	Q.Pointer.cancelClick();
@@ -12867,7 +12869,8 @@ Q.onJQuery.add(function ($) {
 		"Q/parallax": "{{Q}}/js/tools/parallax.js",
 		"Q/resize": "{{Q}}/js/tools/resize.js",
 		"Q/layouts": "{{Q}}/js/tools/layouts.js",
-		"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js"
+		"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js",
+		"Q/parallax": "{{Q}}/js/tools/parallax.js"
 	});
 	
 	Q.Tool.jQuery({

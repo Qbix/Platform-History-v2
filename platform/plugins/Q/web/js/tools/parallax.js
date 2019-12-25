@@ -4,41 +4,48 @@
 	 */
 
 	/**
-	 * This tool create parallax effect on tool element.
-	 * !!!WARNING!!! In order to avoid twitching, comment this: Q.Pointer.preventRubberBand
+	 * This tool creates parallax effect on tool element.
 	 * @class Q parallax
 	 * @constructor
-	 * @param {Object}	[options] Override various options for this tool
-	 *  @param {bool|Number}	[options.speed=false] A negative value will make it move slower than regular scrolling, and faster for positive. Recommended keeping the speed between -10 and 10.
-	 *  @param {Float}	[options.center=0.5] Can move start position of parallax element. Top if > 0.5 and bottom if less.
-	 *  @param {Number}	[options.zIndex] Can set particular z-index
-	 *  @param {string}	[style] Any styles need to apply to element.
-	 *  @param {string}	[className] Css class name need to apply to element.
-	 *  @param {bool|number}	[leftToRight=false] Horizontal left to right. Use number to define movement limit. If true, 1 value using (means move from border to border).
-	 *  @param {bool|number}	[rightToLeft=false] Horizontal right to left. Use number to define movement limit. If true, 1 value using (means move from border to border).
-	 *  @param {bool|Number}	[spin=false] will spin element to angle defined by number. If just true, angle=360.
-	 *  @param {bool|Number}	[spinRev=false] same as above but spin counterclock-wise.
-	 *  @param {bool|Number}	[fadeInOut=false] fade in than out.
-	 *  @param {bool|Number}	[fadeIn=false] just fade in
-	 *  @param {bool|Number}	[fadeOut=false] just fade out
-	 *  @param {bool|number}	[zoomInOut=false] zoom in than out. Use number as measure of zoom. If true, 0.2 value using.
-	 *  @param {bool|Number}	[zoomIn=false] just zoom in. Use number as measure of zoom. If true, 0.2 value using.
-	 *  @param {bool|Number}	[zoomOut=false] just zoom out. Use number as measure of zoom. If true, 0.2 value using.
-	 *  @param {bool|Number}	[blurInOut=false] blur in than out. Use number as measure of blur. If true, 40 value using.
-	 *  @param {bool|Number}	[blurIn=false] just blur in. Use number as measure of blur. If true, 40 value using.
-	 *  @param {bool|Number}	[blurOut=false] just blur out. Use number as measure of blur. If true, 40 value using.
-	 *  @param {bool|number}	[spin=false] Set angle to rotate element (for example 360). If positive - clockwise, negative - back clockwise.
-	 *  @param {bool|number}	[swing=false] Skew element to and fro. Use number as measure of Skew. If true, 30 value using.
-	 *  @param {bool|number}	[slalom=false] Moving element to and fro. Use number as measure of swing. If true, 50 value using.
-	 *  @param {number}	[offset=0] scrollY position so the animation will begin at this point
+	 * @param {Object}             [options] Override various options for this tool
+	 *  @param {bool|Number}       [options.speed=false] A negative value will make it move slower than regular scrolling, and faster for positive. Recommended keeping the speed between -10 and 10.
+	 *  @param {Float}             [options.center=0.5] Can move start position of parallax element. Top if > 0.5 and bottom if less.
+	 *  @param {Number}            [options.zIndex] Can set particular z-index
+	 *  @param {String}            [style] Any styles you want to to apply to element.
+	 *  @param {String}            [className] Any css classes you want to to apply to element.
+	 *  @param {boolean|number}    [leftToRight=false] Horizontal left to right. Use number to define movement limit. If true, 1 value using (means move from border to border).
+	 *  @param {boolean|number}    [rightToLeft=false] Horizontal right to left. Use number to define movement limit. If true, 1 value using (means move from border to border).
+	 *  @param {boolean|Number}    [spin=false] will spin element to angle defined by number. If just true, angle=360.
+	 *  @param {boolean|Number}    [spinRev=false] same as above but spin counterclock-wise.
+	 *  @param {boolean|Number}    [spinIn=false] will spin element to angle defined by number. If just true, angle=360.
+	 *  @param {boolean|Number}    [spinOut=false] will spin element to angle defined by number. If just true, angle=360.
+	 *  @param {boolean|Number}    [fadeInOut=false] fade in than out.
+	 *  @param {boolean|Number}    [fadeIn=false] just fade in
+	 *  @param {boolean|Number}    [fadeOut=false] just fade out
+	 *  @param {boolean|number}    [zoomInOut=false] zoom in than out. Use number as measure of zoom. If true, 0.2 value using.
+	 *  @param {boolean|Number}    [zoomIn=false] just zoom in. Use number as measure of zoom. If true, 0.2 value using.
+	 *  @param {boolean|Number}    [zoomOut=false] just zoom out. Use number as measure of zoom. If true, 0.2 value using.
+	 *  @param {boolean|Number}    [blurInOut=false] blur in than out. Use number as measure of blur. If true, 40 value using.
+	 *  @param {boolean|Number}    [blurIn=false] just blur in. Use number as measure of blur. If true, 40 value using.
+	 *  @param {boolean|Number}    [blurOut=false] just blur out. Use number as measure of blur. If true, 40 value using.
+	 *  @param {boolean|number}    [spin=false] Set angle to rotate element (for example 360). If positive - clockwise, negative - back clockwise.
+	 *  @param {boolean|number}    [swing=false] Skew element to and fro. Use number as measure of Skew. If true, 30 value using.
+	 *  @param {boolean|number}    [slalom=false] Moving element to and fro. Use number as measure of swing. If true, 50 value using.
+	 *  @param {number}            [offset=0] scrollY position so the animation will begin at this point
 	 *  @param {String|HTMLElement}	[wrapper] By default, the position of parallax elements is determined via the scroll position of the body.
-	 *  Passing in the wrapper property will force to watch that element instead.
-	 *  @param {Q.Event}	[onChange] Event that happens when parallax position changed.
+	 *    Passing in the wrapper property will force to watch that element instead.
+	 *  @param {Q.Event}           [onMove] Event that happens when parallax position changed.
 	 * @return {Q.Tool}
 	 */
 	Q.Tool.define("Q/parallax", function () {
 		var tool = this;
 		var state = this.state;
+		
+		var s = Q.Pointer.preventRubberBand.suspend;
+		if (!s['Q/parallax']) {
+			s['Q/parallax'] = 0;
+		}
+		++s['Q/parallax'];
 
 		Q.setObject("Q.Pointer.preventRubberBand.suspend", true);
 
@@ -77,7 +84,7 @@
 		swing: false,
 		slalom: false,
 		offset: 0,
-		onChange: new Q.Event()
+		onMove: new Q.Event()
 	},
 
 	{
@@ -89,7 +96,7 @@
 				var htmlTag = document.getElementsByTagName("html")[0];
 
 				// this code applied only once, so set data-q-parallax flag to HTML tag
-				if (!htmlTag.getAttribute('data-q-parallax')) {
+				if (!_parallaxApplied) {
 					setTimeout(function () {
 						lax.setup();
 
@@ -108,7 +115,7 @@
 						});
 					}, 2000);
 
-					htmlTag.setAttribute('data-q-parallax', 1);
+					_parallaxApplied = true;
 				}
 
 				var preset = [];
@@ -128,37 +135,20 @@
 					}
 				}
 
-				if (state.fadeInOut) {
-					preset.push('fadeInOut');
-				} else if (state.fadeIn) {
-					preset.push('fadeIn');
-				} else if (state.fadeOut) {
-					preset.push('fadeOut');
-				}
-
-				if (state.zoomInOut) {
-					preset.push(state.zoomInOut === true ? 'zoomInOut' : 'zoomInOut-' + state.zoomInOut);
-				} else if (state.zoomIn) {
-					preset.push(state.zoomIn === true ? 'zoomIn' : 'zoomIn-' + state.zoomIn);
-				} else if (state.zoomOut) {
-					preset.push(state.zoomOut === true ? 'zoomOut' : 'zoomOut-' + state.zoomOut);
-				}
-
-				if (state.blurInOut) {
-					preset.push(state.blurInOut === true ? 'blurInOut' : 'blurInOut-' + state.blurInOut);
-				} else if (state.blurIn) {
-					preset.push(state.blurIn === true ? 'blurIn' : 'blurIn-' + state.blurIn);
-				} else if (state.blurOut) {
-					preset.push(state.blurOut === true ? 'blurOut' : 'blurOut-' + state.blurOut);
-				}
-
-				if (state.swing) {
-					preset.push(state.swing === true ? 'swing' : 'swing-' + state.swing);
-				}
-
-				if (state.slalom) {
-					preset.push(state.slalom === true ? 'slalom' : 'slalom-' + state.slalom);
-				}
+				Q.each(['fadeInOut', 'fadeIn', 'fadeOut', 'spinIn', 'spinOut'], function (i, k) {
+					if (state[k]) {
+						preset.push(state[k] === true ? k : (k + '-' + state[k]));
+					}
+				});
+				
+				Q.each([
+					'zoomInOut', 'zoomIn', 'zoomOut', 'blurInOut', 'blurIn', 'blurOut',
+					'swing', 'slalom'
+				], function (i, k) {
+					if (state[k]) {
+						preset.push(state[k] === true ? k : (k + '-' + state[k]));
+					}
+				});
 
 				if (state.optimize) {
 					$te.attr('data-lax-optimize', true);
@@ -171,6 +161,7 @@
 				$te.addClass('lax');
 				$te.attr('data-lax-preset', preset.join(' '));
 				$te.attr('data-lax-options', options.join(' '));
+				lax.addElement($te[0]);
 			});
 		},
 		rellax: function () {
@@ -186,7 +177,7 @@
 					vertical: true,
 					horizontal: false,
 					callback: function(positions) {
-						Q.handle(state.onChange, tool, [positions]);
+						Q.handle(state.onMove, tool, [positions]);
 					}
 				};
 
@@ -209,8 +200,14 @@
 		Q: {
 			beforeRemove: function () {
 				this.parallax && this.parallax.destroy();
+				var s = Q.Pointer.preventRubberBand.suspend;
+				if (--s['Q/parallax'] === 0) {
+					delete Q.Pointer.preventRubberBand.suspend['Q/parallax'];
+				}
 			}
 		}
 	});
+	
+	var _parallaxApplied = false;
 
 })(Q, jQuery);
