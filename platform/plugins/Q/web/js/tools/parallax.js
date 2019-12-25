@@ -17,6 +17,8 @@
 	 *  @param {boolean|number}    [rightToLeft=false] Horizontal right to left. Use number to define movement limit. If true, 1 value using (means move from border to border).
 	 *  @param {boolean|Number}    [spin=false] will spin element to angle defined by number. If just true, angle=360.
 	 *  @param {boolean|Number}    [spinRev=false] same as above but spin counterclock-wise.
+	 *  @param {boolean|Number}    [spinIn=false] will spin element to angle defined by number. If just true, angle=360.
+	 *  @param {boolean|Number}    [spinOut=false] will spin element to angle defined by number. If just true, angle=360.
 	 *  @param {boolean|Number}    [fadeInOut=false] fade in than out.
 	 *  @param {boolean|Number}    [fadeIn=false] just fade in
 	 *  @param {boolean|Number}    [fadeOut=false] just fade out
@@ -131,37 +133,20 @@
 					}
 				}
 
-				if (state.fadeInOut) {
-					preset.push('fadeInOut');
-				} else if (state.fadeIn) {
-					preset.push('fadeIn');
-				} else if (state.fadeOut) {
-					preset.push('fadeOut');
-				}
-
-				if (state.zoomInOut) {
-					preset.push(state.zoomInOut === true ? 'zoomInOut' : 'zoomInOut-' + state.zoomInOut);
-				} else if (state.zoomIn) {
-					preset.push(state.zoomIn === true ? 'zoomIn' : 'zoomIn-' + state.zoomIn);
-				} else if (state.zoomOut) {
-					preset.push(state.zoomOut === true ? 'zoomOut' : 'zoomOut-' + state.zoomOut);
-				}
-
-				if (state.blurInOut) {
-					preset.push(state.blurInOut === true ? 'blurInOut' : 'blurInOut-' + state.blurInOut);
-				} else if (state.blurIn) {
-					preset.push(state.blurIn === true ? 'blurIn' : 'blurIn-' + state.blurIn);
-				} else if (state.blurOut) {
-					preset.push(state.blurOut === true ? 'blurOut' : 'blurOut-' + state.blurOut);
-				}
-
-				if (state.swing) {
-					preset.push(state.swing === true ? 'swing' : 'swing-' + state.swing);
-				}
-
-				if (state.slalom) {
-					preset.push(state.slalom === true ? 'slalom' : 'slalom-' + state.slalom);
-				}
+				Q.each(['fadeInOut', 'fadeIn', 'fadeOut', 'spinIn', 'spinOut'], function (i, k) {
+					if (state[k]) {
+						preset.push(state[k] === true ? k : (k + '-' + state[k]));
+					}
+				});
+				
+				Q.each([
+					'zoomInOut', 'zoomIn', 'zoomOut', 'blurInOut', 'blurIn', 'blurOut',
+					'swing', 'slalom'
+				], function (i, k) {
+					if (state[k]) {
+						preset.push(state[k] === true ? k : (k + '-' + state[k]));
+					}
+				});
 
 				if (state.optimize) {
 					$te.attr('data-lax-optimize', true);
