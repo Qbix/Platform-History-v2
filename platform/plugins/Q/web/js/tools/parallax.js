@@ -91,31 +91,6 @@
 			var state = this.state;
 
 			Q.addScript("{{Q}}/js/parallax/lax.js", function () {
-				var htmlTag = document.getElementsByTagName("html")[0];
-
-				// this code applied only once, so set data-q-parallax flag to HTML tag
-				if (!_parallaxApplied) {
-					setTimeout(function () {
-						lax.setup();
-
-						var update = function () {
-							lax.update(window.scrollY);
-							window.requestAnimationFrame(update);
-						};
-
-						window.requestAnimationFrame(update);
-
-						var w = window.innerWidth;
-						window.addEventListener("resize", function() {
-							if(w !== window.innerWidth) {
-								lax.updateElements();
-							}
-						});
-					}, 2000);
-
-					_parallaxApplied = true;
-				}
-
 				var preset = [];
 				var options = [];
 
@@ -159,7 +134,31 @@
 				$te.addClass('lax');
 				$te.attr('data-lax-preset', preset.join(' '));
 				$te.attr('data-lax-options', options.join(' '));
-				lax.addElement($te[0]);
+
+				// this code applied only once
+				if (_parallaxApplied) {
+					lax.addElement($te[0]);
+				} else {
+					//setTimeout(function () {
+					lax.setup();
+
+					var update = function () {
+						lax.update(window.scrollY);
+						window.requestAnimationFrame(update);
+					};
+
+					window.requestAnimationFrame(update);
+
+					var w = window.innerWidth;
+					window.addEventListener("resize", function() {
+						if(w !== window.innerWidth) {
+							lax.updateElements();
+						}
+					});
+					//}, 2000);
+
+					_parallaxApplied = true;
+				}
 			});
 		},
 		rellax: function () {
