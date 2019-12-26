@@ -25,6 +25,10 @@
 		 * If set to true, than device will be subscribed without confirmation.
 		 */
 		subscribe: function (callback, options) {
+			if (!Users.loggedInUserId()) {
+				return;
+			}
+
 			Users.Device.getAdapter(function (err, adapter) {
 				if (err) {
 					return Q.handle(callback, null, [err]);
