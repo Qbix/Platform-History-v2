@@ -144,7 +144,9 @@
 
 					var update = function () {
 						lax.update(window.scrollY);
-						window.requestAnimationFrame(update);
+						if (!tool.removed) {
+							window.requestAnimationFrame(update);
+						}
 					};
 
 					window.requestAnimationFrame(update);
