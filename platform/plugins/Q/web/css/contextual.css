@@ -104,22 +104,28 @@
 .Q_contextual .Q_contextual_bottom_arrow, .Q_contextual .Q_contextual_top_arrow
 {
 	position: absolute;
-	width: 41px;
-	height: 16px;
+	width: 0;
+	height: 0;
 }
 
 .Q_contextual .Q_contextual_top_arrow
 {
   top: -15px;
   left: 105px;
-  background: url('../img/ui/contextual_top_arrow.png') no-repeat;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 15px solid #000;
+  margin-left: -20px;
 }
 
 .Q_contextual .Q_contextual_bottom_arrow
 {
   margin-top: 6px;
   left: 105px;
-  background: url('../img/ui/contextual_bottom_arrow.png') no-repeat;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 15px solid #000;
+  margin-left: -20px;
 }
 
 .Q_contextual_arrows_preloaded
