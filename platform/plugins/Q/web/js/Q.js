@@ -10546,6 +10546,7 @@ Q.info = {
 	isStandalone: detected.isStandalone,
 	isCordova: _isCordova,
 	platform: detected.OS,
+	baseUrl: location.protocol + '//' + location.host,
 	browser: detected,
 	isIE: function (minVersion, maxVersion) {
 		return Q.info.browser.name === 'explorer'
