@@ -89,6 +89,7 @@
 
 	{
 		lax: function () {
+			var tool = this;
 			var $te = $(this.element);
 			var state = this.state;
 
@@ -146,7 +147,9 @@
 
 					var update = function () {
 						lax.update(window.scrollY);
-						window.requestAnimationFrame(update);
+						if (!tool.removed) {
+							window.requestAnimationFrame(update);
+						}
 					};
 
 					window.requestAnimationFrame(update);
