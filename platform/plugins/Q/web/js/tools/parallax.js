@@ -87,6 +87,7 @@
 
 	{
 		lax: function () {
+			var tool = this;
 			var $te = $(this.element);
 			var state = this.state;
 
