@@ -479,7 +479,8 @@ class Q_Response
 		$params['content'] = preg_replace("/\r|\n/", "", strip_tags($params['content']));
 
 		if ($params['attrValue'] == 'og:image') {
-			$size = getimagesize(str_replace(Q_Request::baseUrl().'/Q', APP_FILES_DIR.DS.Q::app(), $params['content']));
+			$filename = Q_Uri::filenameFromUrl($params['content']);
+			$size = $filename ? getimagesize($filename) : null;
 			if (is_array($size) && !empty($size[0]) && !empty($size[1])) {
 				self::setMeta(array(
 					array('attrName' => 'property', 'attrValue' => 'og:image:width', 'content' => $size[0]),
