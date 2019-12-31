@@ -1171,7 +1171,7 @@ class Q_Html
 				),
 			);
 			if (isset($defaults[$tag]) and is_array($defaults[$tag])) {
-				$attributes = array_merge($defaults[$tag], $attributes);
+				$attributes = $attributes + $defaults[$tag];
 			}
 		}
 		

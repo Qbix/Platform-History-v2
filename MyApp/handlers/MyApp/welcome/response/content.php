@@ -6,6 +6,8 @@ function MyApp_welcome_response_content($params)
 	$tabs = array("foo" => "bar");
 	$description = "this is a description";
 	Q_Response::addScript('js/pages/welcome.js');
+	
+	
 
 	// set meta tags
 	$communityId = Users::communityId();
@@ -27,8 +29,18 @@ function MyApp_welcome_response_content($params)
 		array('attrName' => 'property', 'attrValue' => 'twitter:image', 'content' => $communityIcon),
 		array('attrName' => 'property', 'attrValue' => 'og:url', 'content' => $url),
 		array('attrName' => 'property', 'attrValue' => 'twitter:url', 'content' => $url),
-		array('attrName' => 'property', 'attrValue' => 'twitter:card', 'content' => 'summary')
+		array('attrName' => 'property', 'attrValue' => 'twitter:card', 'content' => 'summary'),
+		array('attrName' => 'property', 'attrValue' => 'og:type', 'content' => 'website'),
 	));
+	if ($fbApps = Q_Config::get('Users', 'apps', 'facebook', array())) {
+		$app = Q::app();
+		$fbApp = isset($fbApps[$app]) ? $fbApps[$app] : reset($fbApps);
+		if ($appId = $fbApp['appId']) {
+			Q_Response::setMeta(array(
+				'attrName' => 'property', 'attrValue' => 'fb:app_id', 'content' => $title
+			));
+		}
+	}
 
 	return Q::view('MyApp/content/welcome.php', compact('tabs', 'description'));
 }
