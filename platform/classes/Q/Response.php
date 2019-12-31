@@ -1658,10 +1658,10 @@ class Q_Response
 	 * @param {string} $name The name of the cookie
 	 * @param {string} $value The value of the cookie
 	 * @param {string} [$expires=0] The number of seconds since the epoch, 0 means expire when browser session ends
-	 * @param {string} [$path=null] You can specify a path on the server here for the cookie
+	 * @param {string} [$path=null] The path to set for the cookie. Defaults to path from Q_Request::baseUrl()
 	 * @param {string} [$domain=null] Set true here to set domain to ".hostname" or pass a string.
-	 *  If you leave it null, then the cookie will be set as a host-only cookie, meaning that subdomains
-	 *  won't get it.
+	 *  If you leave it null, then the cookie will be set as a host-only cookie, meaning
+	 *  that subdomains won't get it.
 	 * @param {boolean} [$secure=false] Making the cookie secure
 	 * @param {boolean} [$httponly=false] Make the cookie http only
 	 * @return {string}
@@ -1681,6 +1681,16 @@ class Q_Response
 		if (Q_Dispatcher::$startedResponse) {
 			throw new Q_Exception("Q_Response::setCookie must be called before Q/response event");
 		}
+		$baseUrl = Q_Request::baseUrl();
+		if (!isset($path)) {
+			$path = parse_url($baseUrl, PHP_URL_PATH);
+		}
+		if ($domain === null) {
+			// remove any possibly conflicting cookies from .hostname, with same path
+			$host = parse_url($baseUrl, PHP_URL_HOST);
+			$d = (strpos($host, '.') !== false ? '.' : '').$host;
+			self::$cookiesToRemove[$name] = array($path, $d, $secure, $httponly);
+		}
 		// see https://bugs.php.net/bug.php?id=38104
 		self::$cookies[$name] = array($value, $expires, $path, $domain, $secure, $httponly);
 		$_COOKIE[$name] = $value;
@@ -1691,10 +1701,10 @@ class Q_Response
 	 * @method clearCookie
 	 * @static
 	 * @param {string} $name
-	 * @param {string} [$path=false]
+	 * @param {string} [$path=null]
 	 * @return {string}
 	 */
-	static function clearCookie($name, $path = false)
+	static function clearCookie($name, $path = null)
 	{
 		self::setCookie($name, '', 1, $path);
 		unset($_COOKIE[$name]);
@@ -1715,6 +1725,10 @@ class Q_Response
 			list($value, $expires, $path, $domain, $secure, $httponly) = $args;
 			self::_cookie($name, $value, $expires, $path, $domain, $secure, $httponly);
 		}
+		foreach (self::$cookiesToRemove as $name => $args) {
+			list($path, $domain, $secure, $httponly) = $args;
+			self::_cookie($name, '', 1, $path, $domain, $secure, $httponly);
+		}
 		$header = '';
 		$header = Q::event('Q/Response/sendCookieHeaders',
 			compact('name', 'value', 'expires', 'path', 'domain', 'secure', 'httponly', 'header'),
@@ -1724,6 +1738,7 @@ class Q_Response
 			header($header);
 		}
 		self::$cookies = array();
+		self::$cookiesToRemove = array();
 	}
 
 	static function flushAndContinue($timeLimit = 30)
@@ -1951,6 +1966,12 @@ class Q_Response
 	 * @type array
 	 */
 	public static $cookies = array();
+	/**
+	 * @property $cookiesToRemove
+	 * @static
+	 * @type array
+	 */
+	protected static $cookiesToRemove = array();
 	/**
 	 * @property $htmlCssClasses
 	 * @static

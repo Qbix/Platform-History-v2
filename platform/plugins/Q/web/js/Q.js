@@ -7740,8 +7740,9 @@ Q.findStylesheet = function (href) {
  * @param {Object} options
  *   Optional hash of options, including:
  * @param {number} [options.expires] number of milliseconds until expiration. Defaults to session cookie.
- * @param {String} [options.domain] the domain to set cookie
- * @param {String} [options.path] path to set cookie. Defaults to location.pathname
+ * @param {String} [options.domain] the domain to set cookie. If you leave it blank,
+ *  then the cookie will be set as a host-only cookie, meaning that subdomains won't get it.
+ * @param {String} [options.path] path to set cookie. Defaults to path from Q.info.baseUrl
  * @return {String|null}
  *   If only name was passed, returns the stored value of the cookie, or null.
  */
@@ -7759,7 +7760,11 @@ Q.cookie = function _Q_cookie(name, value, options) {
 		if ('domain' in options) {
 			domain = ';domain='+options.domain;
 		} else {
+			// remove any possibly conflicting cookies from .hostname, with same path
+			var o = Q.copy(options);
 			var hostname = parts[1].split('/').shift();
+			o.domain = '.'+hostname;
+			Q.cookie(name, null, o);
 			domain = ''; //';domain=' + hostname;
 		}
 		if (value === null) {
