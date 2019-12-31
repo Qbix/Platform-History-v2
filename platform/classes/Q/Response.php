@@ -1721,13 +1721,13 @@ class Q_Response
 		if (empty(self::$cookies)) {
 			return;
 		}
-		foreach (self::$cookies as $name => $args) {
-			list($value, $expires, $path, $domain, $secure, $httponly) = $args;
-			self::_cookie($name, $value, $expires, $path, $domain, $secure, $httponly);
-		}
 		foreach (self::$cookiesToRemove as $name => $args) {
 			list($path, $domain, $secure, $httponly) = $args;
 			self::_cookie($name, '', 1, $path, $domain, $secure, $httponly);
+		}
+		foreach (self::$cookies as $name => $args) {
+			list($value, $expires, $path, $domain, $secure, $httponly) = $args;
+			self::_cookie($name, $value, $expires, $path, $domain, $secure, $httponly);
 		}
 		$header = '';
 		$header = Q::event('Q/Response/sendCookieHeaders',
