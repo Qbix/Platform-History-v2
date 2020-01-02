@@ -18,7 +18,7 @@ function Q_filters_googleClosureCompiler($params)
 	$timeout = isset($config['timeout'])
 		? $config['timeout']
 		: Q_Config::get('Q', 'environments', '*', 'js', 'timeout', 600);
-	$result = Q_Utils::post($service_url, $options, null, $timeout);
+	$result = Q_Utils::post($service_url, $options, null, array(), null, $timeout);
 	if ($error = substr($result, 0, 5) === 'Error') {
 		throw new Q_Exception(
 			"Google Closure Compiler:\n" . $result
