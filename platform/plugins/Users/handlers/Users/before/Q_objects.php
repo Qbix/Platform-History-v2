@@ -24,9 +24,15 @@ function Users_before_Q_objects(&$params)
 	if (Q_Dispatcher::uri()->facebook) {
 		Q_Dispatcher::skip('Q/post');
 	}
+	
+	if ($user = Users::loggedInUser(false, false)
+	and $user->preferredLanguage
+	and Q_Config::get('Users', 'login', 'setLanguage', true)) {
+		Q_Text::setLanguage($user->preferredLanguage);
+	}
 
-	// if app in preview mode and not loggedin
-	if (Q_Config::get('Users', 'previewMode', false) && !Users::loggedInUser(false, false)) {
+	// If app is in preview mode (for screenshots) and user is not logged in
+	if (!$user and Q_Config::get('Users', 'previewMode', false)) {
 		// find first valid user and login
 		$users = Users_User::select()
 			->where(array(
@@ -39,7 +45,6 @@ function Users_before_Q_objects(&$params)
 			if (Users::isCommunityId($user->id)) {
 				continue;
 			}
-
 			Users::setLoggedInUser($user);
 			break;
 		}
