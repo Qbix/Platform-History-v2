@@ -7676,7 +7676,7 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	link.setAttribute('type', 'text/css');
 	link.setAttribute('media', media);
 	if (options.info.h && !options.skipIntegrity) {
-		if (Q.info.urls && Q.info.urls.caching) {
+		if (Q.info.urls && Q.info.urls.integrity) {
 			link.setAttribute('integrity', 'sha256-' + options.info.h);
 		}
 	}
