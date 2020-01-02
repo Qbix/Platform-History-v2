@@ -358,7 +358,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 			WebRTCconference.event.on('trackUnmuted', function (e) {
 				log('track unmuted', e)
-				if(e.track.kind == 'video') screensRendering.showLoader('videoUnmuted', e.screen.participant);
+				if(e.track.kind == 'video') screensRendering.hideLoader('videoUnmuted', e.screen.participant);
 			});
 
 			WebRTCconference.event.on('videoTrackIsBeingAdded', function (screen) {
@@ -4335,7 +4335,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		function stop(callback) {
 			log('WebRTC.stop');
 
-			if (_roomStream != null) {
+			if (_roomStream == null) {
 				return Q.handle(callback);
 			}
 
