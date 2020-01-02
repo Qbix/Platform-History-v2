@@ -955,7 +955,8 @@ class Q_Uri
 	 * @param {boolean} [$options.skipCacheBaseUrl=false] If true, skips the cacheBaseUrl transformations
 	 * @return {array} array($urlWithCacheBust, $hash)
 	 */
-	static function cachedUrlAndHash($url, $options = array()) {
+	static function cachedUrlAndHash($url, $options = array())
+	{
 		$cacheTimestamp = Q_Request::cacheTimestamp();
 		$environment = Q_Config::get('Q', 'environment', '');
 		$config = Q_Config::get('Q', 'environments', $environment, 'urls', array());
