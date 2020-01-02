@@ -88,7 +88,7 @@ window.WebRTCconferenceLib = function app(options){
 
 	var localParticipant;
 	app.localParticipant = function() { return localParticipant; }
-	app.state = null;
+	app.state = 'disconnected';
 
 	//node.js vars
 	var socket;
@@ -149,12 +149,15 @@ window.WebRTCconferenceLib = function app(options){
 		}
 	}
 
+	var browser = determineBrowser(navigator.userAgent)
 	var _localInfo = {
 		isMobile: _isMobile,
 		platform: _isiOS ? 'ios' : (_isAndroid ? 'android' : null),
 		usesUnifiedPlan: _usesUnifiedPlan,
 		isCordova: typeof cordova != 'undefined',
-		ua: navigator.userAgent
+		ua: navigator.userAgent,
+		browserName: browser[0],
+		browserVersion: browser[1]
 	}
 
 	var icons = {
@@ -289,12 +292,20 @@ window.WebRTCconferenceLib = function app(options){
 		 *
 		 * @method videoTracks
 		 * @uses Track
+		 * @param {Object} [activeTracksOnly] return only active video tracks
 		 * @return {Array}
 		 */
-		this.videoTracks = function () {
+		this.videoTracks = function (activeTracksOnly) {
+			if(activeTracksOnly) {
+				return this.tracks.filter(function (trackObj) {
+					return trackObj.kind == 'video' && !(trackObj.mediaStreamTrack.muted == true || trackObj.mediaStreamTrack.enabled == false || trackObj.mediaStreamTrack.readyState == 'ended');
+				});
+			}
+
 			return this.tracks.filter(function (trackObj) {
 				return trackObj.kind == 'video';
 			});
+
 		}
 		/**
 		 * Returns list of participant's audio tracks
@@ -421,6 +432,29 @@ window.WebRTCconferenceLib = function app(options){
 		 * @type {Boolean}
 		 */
 		this.isNegotiating = false;
+		/**
+		 * Non false value means that one more renegotiation is needed when current one will be finished
+		 *
+		 * @property hasNewOffersInQueue
+		 * @type {Integer|Boolean}
+		 */
+		this.hasNewOffersInQueue = false;
+		/**
+		 * Non false value means id of the offer that is in progress. When current offer is finished, currentOfferId will
+		 * be compared to hasNewOffersInQueue and if it differs, new negotiation well be needed.
+		 *
+		 * @property currentOfferId
+		 * @type {Integer|Boolean}
+		 */
+		this.currentOfferId = false;
+		/**
+		 * Writable property that corrsponds to .RTCPeerConnection.signallingState but can have additional values:
+		 * have-local-pranswer
+		 *
+		 * @property signallingState
+		 * @type {String}
+		 */
+		this.signallingState = false;
 		//this.audioStream = null;
 		//this.videoStream = null;
 		/**
@@ -1343,8 +1377,11 @@ window.WebRTCconferenceLib = function app(options){
 
 				track.mediaStreamTrack.addEventListener('mute', function(){
 					log('mediaStreamTrack mute');
+
+					if(track.participant.videoTracks(true).length != 0) return;
+
 					track.parentScreen.removeTimer = setTimeout(function () {
-						if(track.mediaStreamTrack.muted){
+						if(track.participant.videoTracks(true).length == 0){
 							removeScreenFromCommonList(track.parentScreen);
 							track.parentScreen.removeTimer = null;
 						}
@@ -1357,14 +1394,14 @@ window.WebRTCconferenceLib = function app(options){
 					if(track.parentScreen.removeTimer != null) {
 						clearTimeout(track.parentScreen.removeTimer);
 						track.parentScreen.removeTimer = null;
-					} else if (track.parentScreen.removeTimer == null && !track.parentScreen.isActive) {
+					} else if (track.parentScreen.removeTimer == null && track.participant.videoTracks(true).length != 0) {
 						addScreenToCommonList(track.parentScreen);
 					}
 				});
 
 				track.mediaStreamTrack.addEventListener('ended', function(e){
 					log('mediaStreamTrack ended');
-					removeScreenFromCommonList(track.parentScreen);
+					if(track.participant.videoTracks(true).length == 0) removeScreenFromCommonList(track.parentScreen);
 				});
 			}
 
@@ -3643,11 +3680,13 @@ window.WebRTCconferenceLib = function app(options){
 			})[0];
 			log('participantConnected: ' + newParticipant.sid)
 			if(participantExist == null){
-				log('participantConnected participantExist')
+				log('participantConnected doesn\'t participantExist')
 				roomParticipants.unshift(newParticipant);
 			}
 			if(newParticipant.screens.length == 0) app.screensInterface.createParticipantScreen(newParticipant)
 			newParticipant.connectedTime = performance.now();
+			newParticipant.latestOnlineTime = performance.now();
+			newParticipant.online = true;
 			app.event.dispatch('participantConnected', newParticipant);
 		}
 
@@ -3765,7 +3804,7 @@ window.WebRTCconferenceLib = function app(options){
 
 					if(participant.online && participant.online != 'checking' && participant.latestOnlineTime != null && performance.now() - participant.latestOnlineTime >= disconnectTime) {
 
-						log('checkOnlineStatus : prepare to remove due inactivity' + performance.now() - participant.latestOnlineTime);
+						//log('checkOnlineStatus : prepare to remove due inactivity' + performance.now() - participant.latestOnlineTime);
 
 						let latestOnlineTime = participant.latestOnlineTime;
 						let participantSid = participant.sid;
@@ -4241,14 +4280,84 @@ window.WebRTCconferenceLib = function app(options){
 
 		function socketParticipantConnected() {
 
-
-			function createPeerConnection(participant) {
-				log('createPeerConnection', participant)
-
+			function createPeerConnection(participant, resetConnection) {
+				log('createPeerConnection', participant, resetConnection)
 				var config = pc_config;
 				if(!participant.localInfo.usesUnifiedPlan) config.sdpSemantics = "plan-b";
 				log('createPeerConnection: usesUnifiedPlan = '+ participant.localInfo.usesUnifiedPlan);
+
 				var newPeerConnection = new RTCPeerConnection(config);
+
+				function createOffer(hasPriority, resetConnection){
+					log('createOffer')
+					participant.isNegotiating = true;
+
+					newPeerConnection.createOffer({ 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true })
+						.then(function(offer) {
+							log('createOffer: offer created', hasPriority, participant.hasNewOffersInQueue, participant.currentOfferId, participant.RTCPeerConnection.signalingState, offer)
+
+							//In the case when renegotiationneeded was triggered right after initial offer was created
+							//this cancels initial offer before signalingState will be changed to have-local-offer
+							/*if(participant.hasNewOffersInQueue !== false && hasPriority == null) {
+								console.log('createOffer: offer created: offer was canceled by new one');
+								return;
+							}*/
+
+							//In case, when multiple renegotiationneeded events was triggered one after another,
+							//this will cancel all offers but last. It's highly unlikely that this scenario will ever happen.
+							if(participant.currentOfferId || (participant.hasNewOffersInQueue !== false && hasPriority != null && participant.hasNewOffersInQueue > hasPriority)) {
+								log('createOffer: offer created: RENEGOTIATING WAS CANCELED as priority: ' + hasPriority + '/' + participant.hasNewOffersInQueue);
+								return;
+							}
+							participant.currentOfferId = hasPriority;
+
+							var localDescription;
+							if(typeof cordova != 'undefined' && _isiOS) {
+								localDescription = new RTCSessionDescription(offer);
+							} else {
+								localDescription = offer;
+							}
+
+							if(_isiOS){
+								//localDescription.sdp = removeInactiveTracksFromSDP(localDescription.sdp);
+								log('createOffer: removeInactiveTracksFromSDP', localDescription.sdp)
+							}
+
+							return newPeerConnection.setLocalDescription(localDescription).then(function () {
+								log('createOffer: offer created: sending', participant.hasNewOffersInQueue, participant.currentOfferId, participant.RTCPeerConnection.signalingState)
+								sendMessage({
+									name: localParticipant.identity,
+									targetSid: participant.sid,
+									type: "offer",
+									resetConnection: resetConnection == true ? true : false,
+									sdp: newPeerConnection.localDescription.sdp
+								});
+							});
+						})
+						.catch(function(error) {
+							console.error(error.name + ': ' + error.message);
+						});
+				}
+
+				function negotiate() {
+					log('negotiate START', newPeerConnection.signalingState,  participant.hasNewOffersInQueue,  participant.currentOfferId);
+					if(participant.isNegotiating) {
+						log('negotiate CANCELING NEGOTIATION');
+
+						participant.hasNewOffersInQueue = participant.hasNewOffersInQueue !== false ? participant.hasNewOffersInQueue + 1 : 0;
+						return;
+					}
+
+					participant.hasNewOffersInQueue = participant.hasNewOffersInQueue !== false ? participant.hasNewOffersInQueue + 1 : 0;
+
+
+					log('negotiate CONTINUE', participant.hasNewOffersInQueue)
+					//if(newPeerConnection.connectionState == 'new' && newPeerConnection.iceConnectionState == 'new' && newPeerConnection.iceGatheringState == 'new') return;
+
+					createOffer(participant.hasNewOffersInQueue);
+				}
+				participant.negotiate = negotiate;
+
 
 				var localTracks = localParticipant.tracks;
 
@@ -4283,10 +4392,27 @@ window.WebRTCconferenceLib = function app(options){
 				}
 
 				newPeerConnection.onsignalingstatechange = function (e) {
-					log('socketParticipantConnected: onsignalingstatechange = ' + newPeerConnection.signalingState )
+					log('socketParticipantConnected: onsignalingstatechange = ' + newPeerConnection.signalingState, participant.signalingState, participant.hasNewOffersInQueue, participant.currentOfferId)
+
 
 					if(newPeerConnection.signalingState == 'stable') {
-						participant.isNegotiating = false;
+
+						if(participant.signalingState == 'have-remote-offer') {
+							if(participant.hasNewOffersInQueue !== false && participant.currentOfferId !== false && participant.hasNewOffersInQueue > participant.currentOfferId) {
+								log('socketParticipantConnected: answer sent: STARTING NEW NEGOTIATION AGAIN ', participant.hasNewOffersInQueue, participant.currentOfferId)
+
+								participant.isNegotiating = false;
+								participant.currentOfferId = false;
+								participant.negotiate();
+							} else {
+								participant.hasNewOffersInQueue = false;
+								participant.isNegotiating = false;
+								participant.currentOfferId = false;
+							}
+						}
+
+
+						//participant.isNegotiating = false;
 
 						for(var i = participant.iceCandidatesQueue.length - 1; i >= 0 ; i--){
 							if(participant.iceCandidatesQueue[i] != null) {
@@ -4297,13 +4423,15 @@ window.WebRTCconferenceLib = function app(options){
 							}
 						}
 					}
+
+					participant.signalingState = newPeerConnection.signalingState;
 				};
 
 				newPeerConnection.oniceconnectionstatechange = function (e) {
 					log('socketParticipantConnected: oniceconnectionstatechange = ' + newPeerConnection.iceConnectionState)
 
 					if(newPeerConnection.iceConnectionState == 'connected' || newPeerConnection.iceConnectionState == 'completed') {
-						participant.isNegotiating = false;
+						//participant.isNegotiating = false;
 					}
 
 				};
@@ -4312,43 +4440,11 @@ window.WebRTCconferenceLib = function app(options){
 					gotIceCandidate(e, participant);
 				};
 
-				function createOffer(){
-					//if (newPeerConnection._negotiating == true) return;
-					log('createOffer')
-					participant.isNegotiating = true;
-					//newPeerConnection._negotiating = true;
-					newPeerConnection.createOffer({ 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true })
-						.then(function(offer) {
-							log('createOffer: offer created', offer)
-							//offer.sdp = setH264AsPreffered(offer.sdp);
-							var localDescription;
-							if(typeof cordova != 'undefined' && _isiOS) {
-								localDescription = new RTCSessionDescription(offer);
-							} else {
-								localDescription = offer;
-							}
-
-							if(_isiOS){
-								//localDescription.sdp = removeInactiveTracksFromSDP(localDescription.sdp);
-								log('createOffer: removeInactiveTracksFromSDP', localDescription.sdp)
-							}
-
-							return newPeerConnection.setLocalDescription(localDescription).then(function () {
-								log('createOffer: offer created: sending')
-								//var sdp = setH264AsPreffered(newPeerConnection.localDescription.sdp)
-								sendMessage({
-									name: localParticipant.identity,
-									targetSid: participant.sid,
-									type: "offer",
-									sdp: newPeerConnection.localDescription.sdp
-								});
-								//newPeerConnection._negotiating = false;
-							});
-						})
-						.catch(function(error) {
-							console.error(error.name + ': ' + error.message);
-						});
-				}
+				newPeerConnection.ondatachannel = function (evt) {
+					log('socketParticipantConnected: ondatachannel', participant);
+					participant.dataTrack = evt.channel;
+					setChannelEvents(evt.channel, participant);
+				};
 
 				if('ontrack' in newPeerConnection) {
 					newPeerConnection.ontrack = function (e) {
@@ -4360,43 +4456,67 @@ window.WebRTCconferenceLib = function app(options){
 					};
 				}
 
-				var dataChannel = newPeerConnection.createDataChannel('dataTrack', {reliable: true})
-				setChannelEvents(dataChannel, participant);
-				participant.dataTrack = dataChannel;
-				var sendInitialData = function(){
-					if(app.screensInterface.fbLive.isStreaming()) {
-						//app.eventBinding.sendDataTrackMessage("facebookLiveStreamingStarted");
-						dataChannel.send(JSON.stringify({type:"facebookLiveStreamingStarted"}));
-					}
-					dataChannel.removeEventListener('open', sendInitialData);
-				}
-				dataChannel.addEventListener('open', sendInitialData);
-
-				createOffer();
 				newPeerConnection.onnegotiationneeded = function (e) {
 					log('socketParticipantConnected: onnegotiationneeded, negotiating = ' + participant.isNegotiating);
 
-					if(participant.isNegotiating) {
-						return;
-					}
-					if(newPeerConnection.connectionState == 'new' && newPeerConnection.iceConnectionState == 'new' && newPeerConnection.iceGatheringState == 'new') return;
-
-					createOffer();
+					negotiate();
 				};
+
+				function createDataChannel() {
+					if(participant.dataTrack != null) participant.dataTrack.close();
+					var dataChannel = newPeerConnection.createDataChannel('mainDataChannel' + Date.now(), {reliable: false})
+					setChannelEvents(dataChannel, participant);
+					participant.dataTrack = dataChannel;
+					var sendInitialData = function(){
+						if(app.screensInterface.fbLive.isStreaming()) {
+							//app.eventBinding.sendDataTrackMessage("facebookLiveStreamingStarted");
+							dataChannel.send(JSON.stringify({type:"facebookLiveStreamingStarted"}));
+						}
+						dataChannel.removeEventListener('open', sendInitialData);
+					}
+					dataChannel.addEventListener('open', sendInitialData);
+
+					if(participant.dataTracks == null) {
+						participant.dataTracks = [];
+					}
+					participant.dataTracks.push(dataChannel);
+				}
+				createDataChannel();
+
+				participant.createDataChannel = createDataChannel;
+
+				createOffer(9999, true);
 
 				return newPeerConnection;
 			}
 
 			function init(participantData) {
-				log('socketParticipantConnected: participantData', participantData);
+				var senderParticipant = roomParticipants.filter(function (existingParticipant) {
+					return existingParticipant.sid == participantData.fromSid && existingParticipant.RTCPeerConnection;
+				})[0];
+				log('socketParticipantConnected', participantData);
 
-				var newParticipant = new Participant();
-				newParticipant.iosrtc = true;
-				newParticipant.sid = participantData.sid;
-				newParticipant.identity = participantData.username;
-				newParticipant.localInfo = participantData.info;
-				participantConnected(newParticipant);
-				newParticipant.RTCPeerConnection = createPeerConnection(newParticipant);
+				if(senderParticipant == null && senderParticipant != localParticipant) {
+					log('socketParticipantConnected NO PARTICIPANT');
+					var newParticipant = new Participant();
+					newParticipant.iosrtc = true;
+					newParticipant.sid = participantData.sid || participantData.fromSid;
+					newParticipant.identity = participantData.username;
+					newParticipant.localInfo = participantData.info;
+					participantConnected(newParticipant);
+					newParticipant.RTCPeerConnection = createPeerConnection(newParticipant, true);
+				} else if(senderParticipant != null && senderParticipant.online == false) {
+					log('socketParticipantConnected PARTICIPANT reconnects');
+					var newParticipant = new Participant();
+					newParticipant.iosrtc = true;
+					newParticipant.sid = participantData.sid;
+					newParticipant.identity = participantData.username;
+					newParticipant.localInfo = participantData.info;
+					participantConnected(newParticipant);
+					newParticipant.RTCPeerConnection = createPeerConnection(newParticipant, true);
+				}
+
+
 
 			}
 
@@ -4406,16 +4526,20 @@ window.WebRTCconferenceLib = function app(options){
 		}
 
 		function setChannelEvents(dataChannel, participant) {
+			log('setChannelEvents', dataChannel.id);
 			dataChannel.onerror = function (err) {
 				console.error(err.name + ': ' + err.message);
 			};
 			dataChannel.onclose = function () {
-				log('dataChannel closed');
+				log('dataChannel closed', dataChannel.id, participant.online, participant);
 			};
 			dataChannel.onmessage = function (e) {
 				processDataTrackMessage(e.data, participant);
 			};
-			dataChannel.onopen = function (e) {};
+			dataChannel.onopen = function (e) {
+				log('dataChannel opened', participant.online, participant);
+
+			};
 		}
 
 		function removeInactiveTracksFromSDP(sdp) {
@@ -4514,6 +4638,68 @@ window.WebRTCconferenceLib = function app(options){
 				if(!senderParticipant.localInfo.usesUnifiedPlan) config.sdpSemantics = "plan-b";
 				var newPeerConnection = new RTCPeerConnection(config);
 
+				function createOffer(hasPriority){
+					//if (newPeerConnection._negotiating == true) return;
+					log('createOffer')
+					senderParticipant.isNegotiating = true;
+
+					newPeerConnection.createOffer({ 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true })
+						.then(function(offer) {
+							log('createOffer: offer created', senderParticipant.hasNewOffersInQueue, senderParticipant.currentOfferId, senderParticipant.RTCPeerConnection.signalingState, offer)
+
+							//In case, when multiple renegotiationneeded events was triggered one after another,
+							//this will cancel all offers but last. It's highly unlikely that this scenario will ever happen.
+							if(senderParticipant.hasNewOffersInQueue !== false && hasPriority != null && senderParticipant.hasNewOffersInQueue > hasPriority) {
+								log('createOffer: offer created: RENEGOTIATING WAS CANCELED as priority: ' + hasPriority + '/' + senderParticipant.hasNewOffersInQueue);
+								return;
+							}
+							senderParticipant.currentOfferId = hasPriority;
+
+							var localDescription;
+							if(typeof cordova != 'undefined' && _isiOS) {
+								localDescription = new RTCSessionDescription(offer);
+							} else {
+								localDescription = offer;
+							}
+
+							if(_isiOS){
+								//localDescription.sdp = removeInactiveTracksFromSDP(localDescription.sdp);
+								log('createOffer: removeInactiveTracksFromSDP', localDescription.sdp)
+							}
+
+							return newPeerConnection.setLocalDescription(localDescription).then(function () {
+								log('createOffer: offer created: sending', senderParticipant.hasNewOffersInQueue, senderParticipant.currentOfferId, senderParticipant.RTCPeerConnection.signalingState)
+								sendMessage({
+									name: localParticipant.identity,
+									targetSid: senderParticipant.sid,
+									type: "offer",
+									sdp: senderParticipant.RTCPeerConnection.localDescription.sdp
+								});
+							});
+						})
+						.catch(function(error) {
+							console.error(error.name + ': ' + error.message);
+						});
+				}
+
+				function negotiate() {
+					log('negotiate START', newPeerConnection.signalingState,  senderParticipant.hasNewOffersInQueue,  senderParticipant.currentOfferId);
+					if(senderParticipant.isNegotiating && ( senderParticipant.currentOfferId !== false /*newPeerConnection.signalingState != 'stable'*/)) {
+						log('negotiate CANCELING NEGOTIATION');
+
+						senderParticipant.hasNewOffersInQueue = senderParticipant.hasNewOffersInQueue !== false ? senderParticipant.hasNewOffersInQueue + 1 : 0;
+						return;
+					}
+
+					senderParticipant.hasNewOffersInQueue = senderParticipant.hasNewOffersInQueue !== false ? senderParticipant.hasNewOffersInQueue + 1 : 0;
+
+
+					log('negotiate CONTINUE', senderParticipant.hasNewOffersInQueue)
+					//if(newPeerConnection.connectionState == 'new' && newPeerConnection.iceConnectionState == 'new' && newPeerConnection.iceGatheringState == 'new') return;
+
+					createOffer(senderParticipant.hasNewOffersInQueue);
+				}
+
 				if('ontrack' in newPeerConnection) {
 					newPeerConnection.ontrack = function (e) {
 						rawTrackSubscribed(e, senderParticipant);
@@ -4525,15 +4711,29 @@ window.WebRTCconferenceLib = function app(options){
 				}
 
 				newPeerConnection.ondatachannel = function (evt) {
+					log('offerReceived: ondatachannel', senderParticipant);
 					senderParticipant.dataTrack = evt.channel;
 					setChannelEvents(evt.channel, senderParticipant);
 				};
 
 				newPeerConnection.onsignalingstatechange = function (e) {
-					log('offerReceived: onsignalingstatechange: ' + newPeerConnection.signalingState);
+					log('offerReceived: onsignalingstatechange: ' + newPeerConnection.signalingState, e);
 
 					if(newPeerConnection.signalingState == 'stable') {
-						senderParticipant.isNegotiating = false;
+						if(senderParticipant.signalingState == 'have-remote-offer') {
+							if(senderParticipant.hasNewOffersInQueue !== false && senderParticipant.currentOfferId !== false && senderParticipant.hasNewOffersInQueue > senderParticipant.currentOfferId) {
+								log('offerReceived: answer sent: STARTING NEW NEGOTIATION AGAIN ', senderParticipant.hasNewOffersInQueue, senderParticipant.currentOfferId)
+
+								senderParticipant.isNegotiating = false;
+								senderParticipant.currentOfferId = false;
+								senderParticipant.negotiate();
+							} else {
+								senderParticipant.hasNewOffersInQueue = false;
+								senderParticipant.isNegotiating = false;
+								senderParticipant.currentOfferId = false;
+							}
+						}
+
 						for(var i = senderParticipant.iceCandidatesQueue.length - 1; i >= 0 ; i--){
 							if(senderParticipant.iceCandidatesQueue[i] != null) {
 								newPeerConnection.addIceCandidate(senderParticipant.iceCandidatesQueue[i].candidate);
@@ -4543,13 +4743,16 @@ window.WebRTCconferenceLib = function app(options){
 							}
 						}
 					}
+
+					senderParticipant.signalingState = newPeerConnection.signalingState;
+
 				};
 
 				newPeerConnection.onconnectionstatechange = function (e) {
 					log('offerReceived: onconnectionstatechange: ' + newPeerConnection.connectionState);
 
 					if(newPeerConnection.connectionState == 'connected') {
-						senderParticipant.isNegotiating = false;
+						//senderParticipant.isNegotiating = false;
 					}
 
 				};
@@ -4558,58 +4761,12 @@ window.WebRTCconferenceLib = function app(options){
 					gotIceCandidate(e, senderParticipant);
 				};
 
-				var createOffer = function(peerConnection) {
-					log('offerReceived: createOffer');
-
-					senderParticipant.isNegotiating = true;
-					senderParticipant.RTCPeerConnection.createOffer({ 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true })
-						.then(function(offer) {
-							log('offerReceived: createOffer: offer created');
-							//offer.sdp = setH264AsPreffered(offer.sdp);
-							var localDescription;
-							if(typeof cordova != 'undefined' && _isiOS) {
-								localDescription = offer;
-							} else {
-								localDescription = offer;
-							}
-
-							if(_isiOS){
-								//localDescription.sdp = removeInactiveTracksFromSDP(localDescription.sdp);
-								log('offerReceived: createOffer: removeInactiveTracksFromSDP');
-							}
-
-
-							return peerConnection.setLocalDescription(localDescription).then(function () {
-								log('offerReceived: createOffer: offer created: send: ' + localDescription.sdp);
-
-								sendMessage({
-									name: localParticipant.identity,
-									targetSid: senderParticipant.sid,
-									type: "offer",
-									sdp: senderParticipant.RTCPeerConnection.localDescription.sdp
-								});
-
-							});
-						})
-
-						.catch(function(error) {
-							console.error(error.name + ': ' + error.message);
-						});
-				}
-
-				var dataChannel = newPeerConnection.createDataChannel('dataTrack', {reliable: true})
-				setChannelEvents(dataChannel, senderParticipant);
-				senderParticipant.dataTrack = dataChannel;
+				senderParticipant.negotiate = negotiate;
 
 				newPeerConnection.onnegotiationneeded = function (e) {
 					log('offerReceived: onnegotiationneeded, isNegotiating = ' + senderParticipant.isNegotiating);
 
-					if(senderParticipant.isNegotiating) {
-						return;
-					}
-					if(newPeerConnection.connectionState == 'new' && newPeerConnection.iceConnectionState == 'new' && newPeerConnection.iceGatheringState == 'new') return;
-
-					createOffer(newPeerConnection);
+					negotiate();
 				};
 
 				return newPeerConnection;
@@ -4701,12 +4858,21 @@ window.WebRTCconferenceLib = function app(options){
 			}
 
 			function process(message) {
+				log('offerReceived ', message.resetConnection);
 				log('offerReceived ' + message.sdp);
+
 				var senderParticipant = roomParticipants.filter(function (existingParticipant) {
 					return existingParticipant.sid == message.fromSid && existingParticipant.RTCPeerConnection;
 				})[0];
+				if(senderParticipant) log('offerReceived senderParticipant', senderParticipant.isNegotiating,  message.resetConnection);
 
-				if(senderParticipant && senderParticipant.isNegotiating) {
+				if(senderParticipant == null && _localInfo.browserName == 'Chrome' && message.info.browserName == 'Firefox') {
+					log('offerReceived reset as socketParticipantConnected');
+
+					socketParticipantConnected().initPeerConnection(message);
+					return;
+				}
+				if(senderParticipant && senderParticipant.isNegotiating && !message.resetConnection) {
 					return;
 				}
 
@@ -4714,6 +4880,17 @@ window.WebRTCconferenceLib = function app(options){
 				var isAudioInOffer = message.sdp.indexOf('m=audio') != -1 || message.sdp.indexOf('mid:audio') != -1;
 
 				if(senderParticipant == null && senderParticipant != localParticipant) {
+					log('offerReceived participantConnected', senderParticipant);
+
+					senderParticipant = new Participant();
+					senderParticipant.sid = message.fromSid;
+					senderParticipant.identity = message.name;
+					senderParticipant.localInfo = message.info;
+					participantConnected(senderParticipant);
+				} else if(senderParticipant != null && senderParticipant.online == false && message.resetConnection == true) {
+					log('offerReceived participantConnected: reset connection', senderParticipant);
+					if(senderParticipant.RTCPeerConnection != null) senderParticipant.RTCPeerConnection.close();
+					senderParticipant.remove();
 					senderParticipant = new Participant();
 					senderParticipant.sid = message.fromSid;
 					senderParticipant.identity = message.name;
@@ -4721,6 +4898,8 @@ window.WebRTCconferenceLib = function app(options){
 					participantConnected(senderParticipant);
 				}
 
+				senderParticipant.isNegotiating = true;
+				senderParticipant.currentOfferId = senderParticipant.hasNewOffersInQueue !== false ? senderParticipant.hasNewOffersInQueue + 1 : 0;
 
 				var description;
 				if(typeof cordova != 'undefined' && _isiOS) {
@@ -4730,7 +4909,7 @@ window.WebRTCconferenceLib = function app(options){
 				}
 
 
-				if(senderParticipant.RTCPeerConnection == null || senderParticipant.RTCPeerConnection.connectionState =='closed') {
+				if(senderParticipant.RTCPeerConnection == null || senderParticipant.RTCPeerConnection.connectionState =='closed' ||  message.resetConnection == true) {
 					log('offerReceived: createPeerConnection');
 					senderParticipant.RTCPeerConnection = createPeerConnection(senderParticipant);
 
@@ -4741,7 +4920,6 @@ window.WebRTCconferenceLib = function app(options){
 						var oldHandler = senderParticipant.RTCPeerConnection.oniceconnectionstatechange;
 						senderParticipant.RTCPeerConnection.oniceconnectionstatechange = function (e) {
 							if(senderParticipant.RTCPeerConnection.iceConnectionState == 'connected') {
-								senderParticipant.isNegotiating = false;
 								if(!isVideoInOffer) publishLocalVideo(senderParticipant.RTCPeerConnection);
 								if(!isAudioInOffer) publishLocalAudio(senderParticipant.RTCPeerConnection);
 
@@ -4753,17 +4931,11 @@ window.WebRTCconferenceLib = function app(options){
 
 				}
 
-				senderParticipant.isNegotiating = true;
 				senderParticipant.RTCPeerConnection.setRemoteDescription(description).then(function () {
 
 					senderParticipant.RTCPeerConnection.createAnswer()
 						.then(function(answer) {
 							log('offerReceived: answer created');
-
-							//offer.sdp = setH264AsPreffered(offer.sdp);
-							//answer.type = 'offer';
-
-							//answer.sdp = answer.sdp.replace(/UDP\/TLS\/RTP\/SAVP/g, "RTP\/SAVPF");
 
 							if(_isiOS){
 								//answer.sdp = removeInactiveTracksFromSDP(answer.sdp);
@@ -4810,10 +4982,19 @@ window.WebRTCconferenceLib = function app(options){
 			var peerConnection = senderParticipant.RTCPeerConnection;
 
 			peerConnection.setRemoteDescription(description).then(function () {
-				senderParticipant.isNegotiating = false;
-				if(typeof senderParticipant.offersQueue[0] != 'undefined') {
-					senderParticipant.offersQueue[0]();
-					senderParticipant.offersQueue.tracks.splice(0, 1);
+				//senderParticipant.isNegotiating = false;
+				log('answerRecieved setRemoteDescription ', peerConnection.signalingState, senderParticipant.hasNewOffersInQueue, senderParticipant.currentOfferId)
+
+				if(senderParticipant.hasNewOffersInQueue !== false && senderParticipant.currentOfferId !== false && senderParticipant.hasNewOffersInQueue > senderParticipant.currentOfferId) {
+					log('answerRecieved STARTING NEW NEGOTIATION AGAIN ', senderParticipant.hasNewOffersInQueue, senderParticipant.currentOfferId)
+
+					senderParticipant.isNegotiating = false;
+					senderParticipant.currentOfferId = false;
+					senderParticipant.negotiate();
+				} else {
+					senderParticipant.hasNewOffersInQueue = false;
+					senderParticipant.isNegotiating = false;
+					senderParticipant.currentOfferId = false;
 				}
 			});
 		}
@@ -4844,6 +5025,8 @@ window.WebRTCconferenceLib = function app(options){
 						console.error(e.name + ': ' + e.message);
 					});
 			} else {
+				log('iceConfigurationReceived: add to queue')
+
 				senderParticipant.iceCandidatesQueue.push({
 					peerConnection: peerConnection,
 					candidate: candidate
@@ -6884,15 +7067,24 @@ window.WebRTCconferenceLib = function app(options){
 			socket.on('connect', function () {
 				app.event.dispatch('connected');
 
+				if(app.state == 'reconnecting') {
+					app.state = 'connected';
+					log('initWithNodeJs: socket: RECONNECTED')
+					socket.emit('Streams/webrtc/joined', {username:localParticipant.identity, sid:localParticipant.sid, room:options.roomName, isiOS: _isiOS, info: _localInfo});
+					localParticipant.sid = socket.id;
+					return;
+				}
+
 				enableiOSDebug();
-				log('initWithNodeJs: socket: connected: ' + socket.connected);
-				if(localParticipant != null) return;
-				localParticipant = new Participant();
-				localParticipant.sid = socket.id;
-				localParticipant.identity = options.username;
-				localParticipant.isLocal = true;
-				localParticipant.online = true;
-				roomParticipants.push(localParticipant);
+				log('initWithNodeJs: socket: connected: ' + socket.connected + ',  app.state: ' +  app.state);
+				if(localParticipant == null) {
+					localParticipant = new Participant();
+					localParticipant.sid = socket.id;
+					localParticipant.identity = options.username;
+					localParticipant.isLocal = true;
+					localParticipant.online = true;
+					roomParticipants.push(localParticipant);
+				}
 
 				if(typeof cordova != 'undefined' && _isiOS) {
 					iosrtcLocalPeerConnection.create(function () {
@@ -6902,7 +7094,7 @@ window.WebRTCconferenceLib = function app(options){
 					});
 				}
 
-				if(socket.connected) initOrConnectWithNodeJs(callback);
+				if(socket.connected && app.state == 'connecting') initOrConnectWithNodeJs(callback);
 
 			});
 			socket.on('connect_error', function(e) {
@@ -6918,6 +7110,7 @@ window.WebRTCconferenceLib = function app(options){
 			});
 			socket.on('reconnect_attempt', function(e) {
 				console.log('reconnect_attempt', e)
+				app.state = 'reconnecting';
 				app.event.dispatch('reconnectAttempt', e);
 			});
 		}
@@ -7015,6 +7208,22 @@ window.WebRTCconferenceLib = function app(options){
 		if(twilioRoom != null) twilioRoom.disconnect();
 
 		app.event.dispatch('disconnected');
+	}
+
+	function determineBrowser(ua) {
+		var ua= navigator.userAgent, tem,
+			M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+		if(/trident/i.test(M[1])){
+			tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+			return 'IE '+(tem[1] || '');
+		}
+		if(M[1]=== 'Chrome'){
+			tem= ua.match(/\b(OPR|Edge?)\/(\d+)/);
+			if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera').replace('Edg ', 'Edge ');
+		}
+		M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+		if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+		return M;
 	}
 
 	function log(text, arg1, arg2, arg3, arg4) {

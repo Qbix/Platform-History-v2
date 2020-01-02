@@ -170,6 +170,7 @@ WebRTC.listen = function () {
 				username:identity.username,
 				sid:socket.id,
 				info:identity.info,
+				fromSid:identity.sid
 			});
 
 
