@@ -291,8 +291,8 @@
 					// multiple times on the same page, or because the page is reloaded
 					Q.cookie('Users_ignorePlatformXid', fb_xid);
 
-					var fbAppId = "facebook\t" + appId;
-					if (Users.loggedInUser && Users.loggedInUser.xids[fbAppId] === fb_xid) {
+					var key = "facebook\t" + fbAppId;
+					if (Users.loggedInUser && Users.loggedInUser.xids[key] === fb_xid) {
 						// The correct user is already logged in.
 						// Call onSuccess but do not pass a user object -- the user didn't change.
 						_doSuccess(null, platform, onSuccess, onCancel, options);
