@@ -94,6 +94,11 @@ class Q_Text
 		}
 		$basename = self::basename($options);
 		$filename = "text/$name/$basename.json";
+
+		if (!file_exists(Q::realPath($filename))) {
+			$filename = "text/$name/en.json";
+		}
+
 		if (!empty(self::$get[$filename])) {
 			return self::$get[$filename];
 		}
