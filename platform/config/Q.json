@@ -118,7 +118,8 @@
 					},
 					"js": {
 						"handler": "Q/filters/googleClosureCompiler",
-						"params": {"compilation_level": "SIMPLE_OPTIMIZATIONS"}
+						"params": {"compilation_level": "SIMPLE_OPTIMIZATIONS"},
+						"timeout": 600
 					}
 				}
 			}

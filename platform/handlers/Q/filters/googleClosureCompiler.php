@@ -13,7 +13,12 @@ function Q_filters_googleClosureCompiler($params)
 		'output_format' => 'text',
 		'output_info' => 'compiled_code'
 	);
-	$result = Q_Utils::post($service_url, $options);
+	$environment = Q_Config::get('Q', 'environment', '');
+	$config = Q_Config::get('Q', 'environments', $environment, 'js', array());
+	$timeout = isset($config['timeout'])
+		? $config['timeout']
+		: Q_Config::get('Q', 'environments', '*', 'js', 'timeout', 600);
+	$result = Q_Utils::post($service_url, $options, null, $timeout);
 	if ($error = substr($result, 0, 5) === 'Error') {
 		throw new Q_Exception(
 			"Google Closure Compiler:\n" . $result
