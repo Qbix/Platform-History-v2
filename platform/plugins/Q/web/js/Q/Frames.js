@@ -6,7 +6,7 @@
  */
 "use strict";
 /* jshint -W014 */
-(function _Q_setup(undefined, dontSetGlobals) {
+(function (undefined, dontSetGlobals) {
 
 var rls = window.localStorage;
 var _frameMessageEvents = {};

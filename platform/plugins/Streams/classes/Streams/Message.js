@@ -403,13 +403,24 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/email.handlebars';
 			}
-			Users.Email.sendMessage(
-				emailAddress, o.subject, viewPath, o.fields, {
-					html: true, 
-					language: uf.preferredLanguage
-				}, callback
-			);
-			result.push({'email': emailAddress});
+			Users.Email.SELECT().where({
+				'address': emailAddress
+			}).execute(function (err, rows) {
+				if (err || !rows.length) {
+					Q.log(err);
+					return callback && callback(new Q.Exception("Message.deliver: email missing"));
+				}
+				if (rows[0].fields.state !== 'active') {
+					return callback && callback(new Q.Exception("Message.deliver: email not active"));
+				}
+				Users.Email.sendMessage(
+					emailAddress, o.subject, viewPath, o.fields, {
+						html: true, 
+						language: uf.preferredLanguage
+					}, callback
+				);
+				result.push({'email': emailAddress});
+			});
 		}
 		function _mobile(mobileNumber, callback) {
 			o.destination = 'mobile';
@@ -418,10 +429,21 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/mobile.handlebars';
 			}
-			Users.Mobile.sendMessage(mobileNumber, viewPath, o.fields, {
-				language: uf.preferredLanguage
-			}, callback);
-			result.push({'mobile': mobileNumber});
+			Users.Mobile.SELECT().where({
+				'number': mobileNumber
+			}).execute(function (err, rows) {
+				if (err || !rows.length) {
+					Q.log(err);
+					return callback && callback(new Q.Exception("Message.deliver: mobile missing"));
+				}
+				if (rows[0].fields.state !== 'active') {
+					return callback && callback(new Q.Exception("Message.deliver: mobile not active"));
+				}
+				Users.Mobile.sendMessage(mobileNumber, viewPath, o.fields, {
+					language: uf.preferredLanguage
+				}, callback);
+				result.push({'mobile': mobileNumber});
+			});
 		}
 		function _device(deviceId, callback) {
 			o.destination = 'devices';

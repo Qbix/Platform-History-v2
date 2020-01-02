@@ -450,6 +450,7 @@ class Users_User extends Base_Users_User
 		and $email->state !== 'unverified') {
 			if ($email->userId === $this->id) {
 				$email->set('user', $this);
+				$this->setEmailAddress($emailAddress, true);
 				return $email;
 			}
 			// Otherwise, say it's verified for another user,
@@ -608,7 +609,109 @@ class Users_User extends Base_Users_User
 		Q::event('Users/setEmailAddress', compact('user', 'email'), 'after');
 		return true;
 	}
-	
+
+	/**
+	 * @method removeEmail
+	 * @param {string} $emailAddress
+	 * @throws Q_Exception_WrongValue
+	 * @throws Q_Exception_MissingRow
+	 * @return bool
+	 */
+	function removeEmail($emailAddress)
+	{
+		// check if email activated by user
+		if (!Q_Valid::email($emailAddress, $normalized)) {
+			throw new Q_Exception_WrongValue(array(
+				'field' => 'email',
+				'range' => 'a valid email address'
+			), 'mobileNumber');
+		}
+		$users_email = new Users_Email();
+		$users_email->address = $normalized;
+		$users_email->userId = $this->id;
+		$retrieved = $users_email->retrieve(null, array('ignoreCache' => true));
+		if (!$retrieved) {
+			throw new Q_Exception_MissingRow(array(
+				'table' => "an email",
+				'criteria' => "address $emailAddress"
+			), 'emailAddress');
+		}
+
+		$users_email->remove();
+
+		if ($this->emailAddress == $normalized) {
+			$this->emailAddress = '';
+			$this->save();
+		}
+
+		Q_Response::removeNotice('Users/email');
+
+		return true;
+	}
+	/**
+	 * @method removeMobile
+	 * @param {string} $mobileNumber
+	 * @throws Q_Exception_MissingRow
+	 * @throws Q_Exception_WrongValue
+	 * @return bool
+	 */
+	function removeMobile($mobileNumber)
+	{
+		// check if email activated by user
+		if (!Q_Valid::phone($mobileNumber, $normalized)) {
+			throw new Q_Exception_WrongValue(array(
+				'field' => 'Mobile phone',
+				'range' => 'a valid number'
+			), 'mobileNumber');
+		}
+		$users_mobile = new Users_Mobile();
+		$users_mobile->number = $normalized;
+		$users_mobile->userId = $this->id;
+		$retrieved = $users_mobile->retrieve(null, array('ignoreCache' => true));
+		if (!$retrieved) {
+			throw new Q_Exception_MissingRow(array(
+				'table' => "an mobile",
+				'criteria' => "number $mobileNumber"
+			), 'emailAddress');
+		}
+
+		$users_mobile->remove();
+
+		if ($this->mobileNumber == $normalized) {
+			$this->mobileNumber = '';
+			$this->save();
+		}
+
+		Q_Response::removeNotice('Users/mobile');
+
+		return true;
+	}
+	/**
+	 * @method removeIdentifier
+	 * @param {string} $identifier
+	 * @throws Users_Exception_LastIdentifier
+	 * @return boolean
+	 */
+	function removeIdentifier($identifier)
+	{
+		$identifierType = Users::identifierType($identifier, $normalized);
+
+		if ($identifierType == 'email') {
+			if ($this->emailAddress == $normalized && empty($this->mobileNumber)) {
+				throw new Users_Exception_LastIdentifier();
+			}
+
+			$this->removeEmail($identifier);
+		} elseif ($identifierType == 'mobile') {
+			if ($this->mobileNumber == $normalized && empty($this->emailAddress)) {
+				throw new Users_Exception_LastIdentifier();
+			}
+
+			$this->removeMobile($identifier);
+		}
+
+		return true;
+	}
 	/**
 	 * Starts the process of adding a mobile to a saved user object.
 	 * Also modifies and saves this user object back to the database.
@@ -651,6 +754,7 @@ class Users_User extends Base_Users_User
 		and $mobile->state !== 'unverified') {
 			if ($mobile->userId === $this->id) {
 				$mobile->set('user', $this);
+				$this->setMobileNumber($mobileNumber);
 				return $mobile;
 			}
 			// Otherwise, say it's verified for another user,

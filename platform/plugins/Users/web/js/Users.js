@@ -284,15 +284,15 @@
 			// check if user is connected to facebook
 			Users.Facebook.getLoginStatus(function (response) {
 				if (response.status === 'connected') {
-					var fb_xid = parseInt(response.authResponse.userID);
-					var ignoreXid = parseInt(Q.cookie('Users_ignorePlatformXid'));
+					var fb_xid = response.authResponse.userID;
+					var ignoreXid = Q.cookie('Users_ignorePlatformXid');
 					// the following line prevents multiple prompts for the same user,
 					// which can be a problem especially if the authenticate() is called
 					// multiple times on the same page, or because the page is reloaded
 					Q.cookie('Users_ignorePlatformXid', fb_xid);
 
-					var fbAppId = "facebook\t" + appId;
-					if (Users.loggedInUser && Users.loggedInUser.xids[fbAppId] === fb_xid) {
+					var key = "facebook\t" + fbAppId;
+					if (Users.loggedInUser && Users.loggedInUser.xids[key] == fb_xid) {
 						// The correct user is already logged in.
 						// Call onSuccess but do not pass a user object -- the user didn't change.
 						_doSuccess(null, platform, onSuccess, onCancel, options);
@@ -300,7 +300,7 @@
 					}
 					if (options.prompt === undefined || options.prompt === null) {
 						// show prompt only if we aren't ignoring this facebook xid
-						if (fb_xid === ignoreXid) {
+						if (fb_xid == ignoreXid) {
 							_doCancel(null, platform, onSuccess, onCancel, options);
 						} else {
 							Users.prompt('facebook', fb_xid, __doAuthenticate, __doCancel);
@@ -2294,6 +2294,20 @@
 			}
 		});
 
+		Users.getLabels = Q.getter(Users.getLabels, {
+			cache: Q.Cache[where]("Users.getLabels", 100),
+			throttle: 'Users.getLabels',
+			prepare: function (subject, params, callback) {
+				if (params[0]) {
+					return callback(subject, params);
+				}
+				for (var i in params[1]) {
+					params[1][i] = new Users.Label(params[1][i]);
+				};
+				return callback(subject, params);
+			}
+		});
+
 		Contact.get = Q.getter(Contact.get, {
 			cache: Q.Cache[where]("Users.Contact.get", 100),
 			throttle: 'Users.Contact.get',
@@ -2321,21 +2335,6 @@
 				}
 				var contact = params[1] = new Label(subject);
 				return callback(contact, params);
-			}
-		});
-
-		Users.getLabels = Q.getter(Users.getLabels, {
-			cache: Q.Cache[where]("Users.getLabels", 100),
-			throttle: 'Users.getLabels',
-			prepare: function (subject, params, callback) {
-				if (subject instanceof Label) {
-					return callback(subject, params);
-				}
-				if (params[0]) {
-					return callback(subject, params);
-				}
-				var label = params[1] = new Label(subject);
-				return callback(label, params);
 			}
 		});
 

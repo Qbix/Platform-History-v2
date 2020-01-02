@@ -598,7 +598,7 @@ class Q_Utils
 	 * @param {string} [$user_agent=null] The user-agent string to send. 
 	 *  If null, is replaced by default of "Mozilla/5.0 ..."
 	 *  If false, not sent.
-	 * @param {integer} [$timeout=Q_UTILS_CONNECTION_TIMEOUT]
+	 * @param {integer} [$timeout=30] number of seconds before timeout, defaults to 30 if you pass null
 	 * @param {boolean} [$throwIfRefused=false] Pass true here to throw an exception whenever Node process is not running or refuses the request
 	 * @param {boolean} [$closeSocket=false] Pass true to close the socket after sending. The default is to do HTTP pipelining.
 	 * @return {boolean} Returns whether the post succeeded.
@@ -678,6 +678,7 @@ class Q_Utils
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
 	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
 	 * @param {string} [$header=null] Optional string to replace the entire POST header
+	 * @param {integer} [$timeout=30] number of seconds before timeout, defaults to 30 if you pass null
 	 * @return {string|false} The response, or false if not received
 	 * 
 	 * **NOTE:** *The function waits for it, which might take a while!*
@@ -688,9 +689,9 @@ class Q_Utils
 		$user_agent = null,
 		$curl_opts = array(),
 		$header = null,
-		$res_t = Q_UTILS_CONNECTION_TIMEOUT)
+		$timeout = Q_UTILS_CONNECTION_TIMEOUT)
 	{
-		return self::request('POST', $url, $data, $user_agent, $curl_opts, $header, $res_t);
+		return self::request('POST', $url, $data, $user_agent, $curl_opts, $header, $timeout);
 	}
 	/**
 	 * Issues a PUT request, and returns the response
@@ -713,9 +714,9 @@ class Q_Utils
 		$user_agent = null,
 		$curl_opts = array(),
 		$header = null,
-		$res_t = Q_UTILS_CONNECTION_TIMEOUT)
+		$timeout = Q_UTILS_CONNECTION_TIMEOUT)
 	{
-		return self::request('PUT', $url, $data, $user_agent, $curl_opts, $header, $res_t);
+		return self::request('PUT', $url, $data, $user_agent, $curl_opts, $header, $timeout);
 	}
 	/**
 	 * Issues a GET request, and returns the response
@@ -727,13 +728,19 @@ class Q_Utils
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
 	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
 	 * @param {string} [$header=null] Optional string to replace the entire GET header
+	 * @param {integer} [$timeout=30] number of seconds before timeout, defaults to 30 if you pass null
 	 * @return {string|false} The response, or false if not received
 	 * 
 	 * **NOTE:** *The function waits for it, which might take a while!*
 	 */
-	static function get ($url, $user_agent = null, $curl_opts = array(), $header = null, $res_t = Q_UTILS_CONNECTION_TIMEOUT)
+	static function get (
+		$url, 
+		$user_agent = null, 
+		$curl_opts = array(),
+		$header = null, 
+		$timeout = Q_UTILS_CONNECTION_TIMEOUT)
 	{
-		return self::request('GET', $url, null, $user_agent, $curl_opts, $header, $res_t);
+		return self::request('GET', $url, null, $user_agent, $curl_opts, $header, $timeout);
 	}
 
 	/**
@@ -749,7 +756,7 @@ class Q_Utils
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
 	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
 	 * @param {string} [$header=null] Optional string to replace the entire header
-	 * @param {integer} [$res_t=30] number of seconds before timeout, defaults to 30 if you pass null
+	 * @param {integer} [$timeout=30] number of seconds before timeout, defaults to 30 if you pass null
 	 * @param {callable} [&$callback] Optionally pass something callable here, and it will be
 	 *  called with the CURL handle before it's closed, if CURL was used.
 	 * @return {string|false} The response, or false if not received
@@ -763,7 +770,7 @@ class Q_Utils
 		$user_agent = null,
 		$curl_opts = array(),
 		$header = null,
-		$res_t = Q_UTILS_CONNECTION_TIMEOUT,
+		$timeout = Q_UTILS_CONNECTION_TIMEOUT,
 		$callback = null)
 	{
 		$method = strtoupper($method);
@@ -901,7 +908,7 @@ class Q_Utils
 					'header' => $header,
 					'content' => $data,
 					'max_redirects' => 10,
-					'timeout' => isset($res_t) ? $res_t : Q_UTILS_CONNECTION_TIMEOUT
+					'timeout' => isset($timeout) ? $timeout : Q_UTILS_CONNECTION_TIMEOUT
 				)
 			));
 			$sock = fopen($url, 'rb', false, $context);

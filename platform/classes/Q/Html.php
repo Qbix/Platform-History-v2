@@ -1171,7 +1171,7 @@ class Q_Html
 				),
 			);
 			if (isset($defaults[$tag]) and is_array($defaults[$tag])) {
-				$attributes = array_merge($defaults[$tag], $attributes);
+				$attributes = $attributes + $defaults[$tag];
 			}
 		}
 		
@@ -1361,7 +1361,8 @@ class Q_Html
 	 * Gets the url and filename of a themed file
 	 * @method themedUrlFilenameAndHash
 	 * @static
-	 * @param {string} $filePath  Basically the subpath of the file underneath the web or theme directory
+	 * @param {string} $filePath  Basically the subpath of the file underneath the web or theme
+	 *  directory. You can also pass a URL here, but it's not ideal.
 	 * @param {array} [$options=array()]
 	 * @param {boolean} [$options.ignoreEnvironment=false] If true, doesn't apply environment transformations
 	 * @param {string} [$options.hash=null] If URL was already processed with cachedUrlAndCache, set hash here to avoid calling it again
@@ -1380,6 +1381,11 @@ class Q_Html
 		}
 
 		$filePath2 = Q_Uri::interpolateUrl($filePath);
+		
+		$baseUrl = Q_Request::baseUrl();
+		if (Q::startsWith($filePath2, $baseUrl)) {
+			$filePath2 = substr($filePath2, strlen($baseUrl) + 1);
+		}
 		
 		if (empty($options['ignoreEnvironment'])
 		and $environment = Q_Config::get('Q', 'environment', '')) {

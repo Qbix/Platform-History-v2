@@ -37,7 +37,7 @@ Q.Tool.define('Q/expandable', function (options) {
 		this.element.innerHTML = h2 + div;
 	}
 	
-	var $h2 = $('h2', $te);
+	var $h2 = $('>h2', $te);
 	if (state.expanded == null) {
 		state.expanded = $h2.next().is(':visible');
 	} else if (state.expanded) {
@@ -47,9 +47,7 @@ Q.Tool.define('Q/expandable', function (options) {
 	}
 	
 	this.element.preventSelections(true);
-	var $h2 = $('h2', $te)
-	.on(Q.Pointer.fastclick, function () {
-		var $h2 = $('h2', $te);
+	$h2.on(Q.Pointer.fastclick, function () {
 		if ($h2.hasClass('Q_expanded')) {
 			tool.collapse();
 		} else {
@@ -102,10 +100,10 @@ Q.Tool.define('Q/expandable', function (options) {
 		}
 		var o = Q.extend({}, tool.state, options);
 		var $te = $(this.element);
-		var $h2 = $('h2', $te);
+		var $h2 = $('>h2', $te);
 		var $parent = $te.parent();
 		if (o.autoCollapseSiblings) {
-			$('.Q_expandable_tool h2', $parent).not(this)
+			$('.Q_expandable_tool > h2.Q_expanded', $parent)
 			.removeClass('Q_expanded')
 			.next().removeClass('Q_expanded')
 			.slideUp(state.duration).each(function () {
@@ -177,7 +175,7 @@ Q.Tool.define('Q/expandable', function (options) {
 	collapse: function () {
 		var tool = this;
 		var state = this.state;
-		var $h2 = $('h2', this.element);
+		var $h2 = $('>h2', this.element);
 		$h2.removeClass('Q_expanded')
 		.next().removeClass('Q_expanded')
 		.slideUp(state.duration).each(function () {

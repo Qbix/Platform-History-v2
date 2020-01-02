@@ -7676,7 +7676,7 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	link.setAttribute('type', 'text/css');
 	link.setAttribute('media', media);
 	if (options.info.h && !options.skipIntegrity) {
-		if (Q.info.urls && Q.info.urls.caching) {
+		if (Q.info.urls && Q.info.urls.integrity) {
 			link.setAttribute('integrity', 'sha256-' + options.info.h);
 		}
 	}
@@ -7740,8 +7740,9 @@ Q.findStylesheet = function (href) {
  * @param {Object} options
  *   Optional hash of options, including:
  * @param {number} [options.expires] number of milliseconds until expiration. Defaults to session cookie.
- * @param {String} [options.domain] the domain to set cookie
- * @param {String} [options.path] path to set cookie. Defaults to location.pathname
+ * @param {String} [options.domain] the domain to set cookie. If you leave it blank,
+ *  then the cookie will be set as a host-only cookie, meaning that subdomains won't get it.
+ * @param {String} [options.path] path to set cookie. Defaults to path from Q.info.baseUrl
  * @return {String|null}
  *   If only name was passed, returns the stored value of the cookie, or null.
  */
@@ -7759,7 +7760,11 @@ Q.cookie = function _Q_cookie(name, value, options) {
 		if ('domain' in options) {
 			domain = ';domain='+options.domain;
 		} else {
+			// remove any possibly conflicting cookies from .hostname, with same path
+			var o = Q.copy(options);
 			var hostname = parts[1].split('/').shift();
+			o.domain = '.'+hostname;
+			Q.cookie(name, null, o);
 			domain = ''; //';domain=' + hostname;
 		}
 		if (value === null) {
@@ -10622,6 +10627,9 @@ Q.Page.beforeUnload('').set(function () {
 }, 'Q');
 
 function _touchScrollingHandler(event) {
+	if (!Q.isEmpty(Q.Pointer.preventRubberBand.suspend)) {
+		return false;
+	}
     var p = event.target;
 	var pos;
 	var scrollable = null;
@@ -11566,6 +11574,8 @@ Q.Pointer = {
 		cancelClickDistance: 10
 	}
 };
+
+Q.Pointer.preventRubberBand.suspend = {};
 
 function _cancelClickBriefly() {
 	Q.Pointer.cancelClick();
@@ -12863,7 +12873,8 @@ Q.onJQuery.add(function ($) {
 		"Q/badge": "{{Q}}/js/tools/badge.js",
 		"Q/resize": "{{Q}}/js/tools/resize.js",
 		"Q/layouts": "{{Q}}/js/tools/layouts.js",
-		"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js"
+		"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js",
+		"Q/parallax": "{{Q}}/js/tools/parallax.js"
 	});
 	
 	Q.Tool.jQuery({
