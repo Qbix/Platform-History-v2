@@ -351,6 +351,16 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				//screensRendering.updateLayout();
 			});
 
+			WebRTCconference.event.on('trackMuted', function (e) {
+				log('track muted', e)
+				if(e.track.kind == 'video') screensRendering.showLoader('videoMuted', e.screen.participant);
+			});
+
+			WebRTCconference.event.on('trackUnmuted', function (e) {
+				log('track unmuted', e)
+				if(e.track.kind == 'video') screensRendering.hideLoader('videoUnmuted', e.screen.participant);
+			});
+
 			WebRTCconference.event.on('videoTrackIsBeingAdded', function (screen) {
 				log('video track is being added', screen)
 				screensRendering.updateLayout();
@@ -1628,6 +1638,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						'</div>';
 
 					screen.screenEl.appendChild(loaderCon);
+				} else if(loaderName == 'videoMuted') {
+					if(participant.isLocal) return;
+					var loaderCon = document.createElement('DIV');
+					loaderCon.className = 'connect-spinner-con';
+					var loader = document.createElement('DIV');
+					loader.className = 'connect-spinner spinner-bounce-middle';
+					loaderCon.appendChild(loader);
+					if(screen.videoCon != null) screen.videoCon.appendChild(loaderCon);
 				} else if(loaderName == 'screensharingStarting') {
 					var loader = screen.screenEl.querySelector('.spinner-load');
 					if(loader != null) return;
@@ -1663,6 +1681,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				participant.videoIsChanging = false;
 				if(loaderName == 'screensharingFailed' || loaderName == 'videoTrackLoaded' || loaderName == 'afterCamerasToggle') {
 					var loader = screen.screenEl.querySelector('.spinner-load');
+					if(loader != null && loader.parentNode != null) loader.parentNode.removeChild(loader);
+				} else if(loaderName == 'videoUnmuted') {
+					if(participant.isLocal) return;
+					var loader = screen.screenEl.querySelector('.connect-spinner-con');
 					if(loader != null && loader.parentNode != null) loader.parentNode.removeChild(loader);
 				}
 
@@ -4313,7 +4335,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		function stop(callback) {
 			log('WebRTC.stop');
 
-			if (_roomStream != null) {
+			if (_roomStream == null) {
 				return Q.handle(callback);
 			}
 

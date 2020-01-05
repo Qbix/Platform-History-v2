@@ -120,7 +120,7 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 		if (state.shadow && state.shadow.src) {
 			var shadow = $('<img />').addClass('Places_globe_shadow')
 				.attr('src', Q.url(state.shadow.src));
-			shadow.css('display', 'none').prependTo($te).load(function () {
+			shadow.css('display', 'none').prependTo($te).on('load', function () {
 				var $this = $(this);
 				var w = h = radius * 2;
 				var width = w * state.shadow.stretch;

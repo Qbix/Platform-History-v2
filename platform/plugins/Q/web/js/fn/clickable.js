@@ -132,7 +132,7 @@ function _Q_clickable(o) {
 		if (o.shadow && o.shadow.src) {
 			var shadow = $('<img />').addClass('Q_clickable_shadow')
 				.attr('src', Q.url(o.shadow.src));
-			shadow.css('display', 'none').appendTo($container).load(function () {
+			shadow.css('display', 'none').appendTo($container).on('load', function () {
 				var $this = $(this);
 				var width = csw * o.shadow.stretch;
 				var height = Math.min($this.height() * width / $this.width(), csh/2);

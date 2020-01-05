@@ -82,7 +82,7 @@ Q.Tool.jQuery('Q/textfill',
 					break; // container is super small
 				}
 			};
-			ourElement.css('font-size', lastGoodFontSize + 'px');
+			ourElement.add(this).css('font-size', lastGoodFontSize + 'px');
 			return this;
 		},
 		

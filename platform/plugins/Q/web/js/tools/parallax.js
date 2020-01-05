@@ -92,6 +92,13 @@
 			var tool = this;
 			var $te = $(this.element);
 			var state = this.state;
+			
+			function update () {
+				lax.update(window.scrollY);
+				if (!tool.removed) {
+					window.requestAnimationFrame(update);
+				}
+			};
 
 			Q.addScript("{{Q}}/js/parallax/lax.js", function () {
 				var preset = [];
@@ -138,31 +145,23 @@
 				$te.attr('data-lax-preset', preset.join(' '));
 				$te.attr('data-lax-options', options.join(' '));
 
-				// this code applied only once
-				if (_parallaxApplied) {
-					lax.addElement($te[0]);
-				} else {
-					//setTimeout(function () {
+				lax.addElement($te[0]);
+
+				if (!_parallaxApplied) {
 					lax.setup();
-
-					var update = function () {
-						lax.update(window.scrollY);
-						if (!tool.removed) {
-							window.requestAnimationFrame(update);
-						}
-					};
-
-					window.requestAnimationFrame(update);
 
 					var w = window.innerWidth;
 					window.addEventListener("resize", function() {
-						if(w !== window.innerWidth) {
+						if (w !== window.innerWidth) {
 							lax.updateElements();
 						}
 					});
-					//}, 2000);
-
 					_parallaxApplied = true;
+				}
+				
+				if (!_startedAnimationFrames) {
+					window.requestAnimationFrame(update);
+					_startedAnimationFrames = true;
 				}
 			});
 		},
@@ -204,6 +203,7 @@
 				this.parallax && this.parallax.destroy();
 				var s = Q.Pointer.preventRubberBand.suspend;
 				if (--s['Q/parallax'] === 0) {
+					_startedAnimationFrames = false;
 					delete Q.Pointer.preventRubberBand.suspend['Q/parallax'];
 				}
 			}
@@ -211,5 +211,6 @@
 	});
 	
 	var _parallaxApplied = false;
+	var _startedAnimationFrames = false;
 
 })(Q, jQuery);

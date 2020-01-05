@@ -284,15 +284,15 @@
 			// check if user is connected to facebook
 			Users.Facebook.getLoginStatus(function (response) {
 				if (response.status === 'connected') {
-					var fb_xid = parseInt(response.authResponse.userID);
-					var ignoreXid = parseInt(Q.cookie('Users_ignorePlatformXid'));
+					var fb_xid = response.authResponse.userID;
+					var ignoreXid = Q.cookie('Users_ignorePlatformXid');
 					// the following line prevents multiple prompts for the same user,
 					// which can be a problem especially if the authenticate() is called
 					// multiple times on the same page, or because the page is reloaded
 					Q.cookie('Users_ignorePlatformXid', fb_xid);
 
-					var fbAppId = "facebook\t" + appId;
-					if (Users.loggedInUser && Users.loggedInUser.xids[fbAppId] === fb_xid) {
+					var key = "facebook\t" + fbAppId;
+					if (Users.loggedInUser && Users.loggedInUser.xids[key] == fb_xid) {
 						// The correct user is already logged in.
 						// Call onSuccess but do not pass a user object -- the user didn't change.
 						_doSuccess(null, platform, onSuccess, onCancel, options);
@@ -300,7 +300,7 @@
 					}
 					if (options.prompt === undefined || options.prompt === null) {
 						// show prompt only if we aren't ignoring this facebook xid
-						if (fb_xid === ignoreXid) {
+						if (fb_xid == ignoreXid) {
 							_doCancel(null, platform, onSuccess, onCancel, options);
 						} else {
 							Users.prompt('facebook', fb_xid, __doAuthenticate, __doCancel);

@@ -8,10 +8,14 @@ The Qbix Platform
 For Developers
 ===
 
+### Overview
+
+[![Platform](https://img.youtube.com/vi/pZ1O_gmPneI/0.jpg)](https://youtu.be/pZ1O_gmPneI)
+
 ### 3 Minute Showcase
 See what's possible to build with Qbix Platform:
 
-[![Qbix](https://qbix.com/img/thumbnails/showcase.png)](https://vimeo.com/208438090)
+[![Showcase](https://qbix.com/img/thumbnails/showcase.png)](https://vimeo.com/208438090)
 
 ### About Qbix
 There are lots of frameworks out there for making websites. You've probably encountered them. Well, Qbix is different. It was designed from the ground up to power social apps for communities to install.
