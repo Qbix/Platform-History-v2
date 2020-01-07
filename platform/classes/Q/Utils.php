@@ -845,6 +845,9 @@ class Q_Utils
 		} else {
 			$headers = explode("\r\n", $header);
 		}
+		if (!isset($timeout)) {
+			$timeout = Q_UTILS_CONNECTION_TIMEOUT;
+		}
 		if (function_exists('curl_init')) {
 			// Use CURL if installed...
 			$ch = curl_init();
@@ -855,8 +858,8 @@ class Q_Utils
 				CURLOPT_FOLLOWLOCATION => true,	 // follow redirects
 				CURLOPT_ENCODING	   => "",	   // handle all encodings
 				CURLOPT_AUTOREFERER	=> true,	 // set referer on redirect
-				CURLOPT_CONNECTTIMEOUT => Q_UTILS_CONNECTION_TIMEOUT,	  // timeout on connect
-				CURLOPT_TIMEOUT		=> Q_UTILS_CONNECTION_TIMEOUT,	  // timeout on response
+				CURLOPT_CONNECTTIMEOUT => $timeout,	  // timeout on connect
+				CURLOPT_TIMEOUT		=> $timeout,	  // timeout on response
 				CURLOPT_MAXREDIRS	  => 10,	   // stop after 10 redirects
 			);
 			curl_setopt_array($ch, $curl_opts);
@@ -908,7 +911,7 @@ class Q_Utils
 					'header' => $header,
 					'content' => $data,
 					'max_redirects' => 10,
-					'timeout' => isset($timeout) ? $timeout : Q_UTILS_CONNECTION_TIMEOUT
+					'timeout' => $timeout
 				)
 			));
 			$sock = fopen($url, 'rb', false, $context);
