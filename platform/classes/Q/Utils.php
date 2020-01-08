@@ -1454,6 +1454,21 @@ class Q_Utils
 	    }
 	    return $result;
 	}
+	
+	/**
+	 * Replace any line breaks with CRLF characters 
+	 * @method crlf
+	 * @static
+	 * @param {string} $input
+	 */
+	static function lineBreaks($input)
+	{
+		$input = str_replace("\n", "\r\n", $input);
+		$input = str_replace("\r\r\n", "\r\n", $input);
+		$input = str_replace("\r", "\r\n", $input);
+		$input = str_replace("\r\n\n", "\r\n", $input);
+		return $input;
+	}
 
 	protected static $urand;
 	protected static $sockets = array();
