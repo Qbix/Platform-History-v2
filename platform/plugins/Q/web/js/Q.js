@@ -6712,7 +6712,7 @@ Q.request = function (url, slotNames, callback, options) {
 				} catch (e) {
 					console.warn('Q.request(' + url + ',['+slotNames+']):' + e);
 					err = {"errors": [e]};
-					callback && callback(e, content);
+					callback(e, content);
 					return Q.handle(o.onProcessed, this, [e, content]);
 				}
 			}

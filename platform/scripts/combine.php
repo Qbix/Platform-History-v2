@@ -116,7 +116,7 @@ function Q_scripts_preprocessCss(&$params)
 	$processed = array();
 	foreach ($parts as $src => $content) {
 		if (strpos($src, '{{') === 0) {
-			$src = Q_Request::tail(Q_Uri::interpolateUrl($src));
+			$src = Q_Request::tail(Q_Uri::interpolateUrl($src), true);
 		}
 		$dest_parts = explode('/', $dest);
 		$src_parts = explode('/', $src);

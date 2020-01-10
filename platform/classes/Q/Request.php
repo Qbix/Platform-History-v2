@@ -249,17 +249,22 @@ class Q_Request
 		return self::$uri;
 	}
 	/**
-	 * Get just the part of the URL after the Q_Request::baseUrl() and slash
+	 * Get just the part of the URL after the Q_Request::baseUrl() and slash.
 	 * @method tail
 	 * @static
 	 * @param {string} [$url=Q_Request::url()] Defaults to the currently requested url
+	 * @param {string} [$returnInvalidUrls=false] Set to true to return invalid URLs
+	 *  that are passed, as the return value, treating them as relative URLs already.
 	 * @return {string}
 	 */
 	static function tail(
-	 $url = null)
+	 $url = null,
+	 $returnInvalidUrls = false)
 	{
 		if (!isset($url)) {
 			$url = self::url();
+		} else if (!Q_Valid::url($url)){
+			return $url;
 		}
 		$base_url = self::baseUrl(true); // first, try with the controller URL
 		$base_url_len = strlen($base_url);
