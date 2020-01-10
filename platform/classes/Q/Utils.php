@@ -856,7 +856,7 @@ class Q_Utils
 				CURLOPT_ENCODING	   => "",	   // handle all encodings
 				CURLOPT_AUTOREFERER	=> true,	 // set referer on redirect
 				CURLOPT_CONNECTTIMEOUT => $timeout,	  // timeout on connect
-				CURLOPT_TIMEOUT		=> Q_UTILS_CONNECTION_TIMEOUT,	  // timeout on response
+				CURLOPT_TIMEOUT		=> $timeout,	  // timeout on response
 				CURLOPT_MAXREDIRS	  => 10,	   // stop after 10 redirects
 			);
 			curl_setopt_array($ch, $curl_opts);
