@@ -816,6 +816,10 @@
 			}
 		};
 	}
+	
+	Q.Text.get('Assets/content', function (err, text) {
+		// preload this, so it's available on gesture handlers
+	});
 
 
 })(Q, Q.plugins.Assets, Q.plugins.Streams, jQuery);
