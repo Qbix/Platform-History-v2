@@ -1157,6 +1157,11 @@ class Q_Utils
 	 */
 	static function copy($source, $dest) {
 		
+		if (file_exists($dest) and !is_dir($source) and !is_dir($dest)) {
+			// just copies a file
+			copy($source, $dest);
+		}
+		
 		if (file_exists($dest) and (is_dir($source) xor is_dir($dest))) {
 			throw new Q_Exception("Q_Utils::copy doesn't work if one parameter is a file and one is a directory");
 		}
