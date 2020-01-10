@@ -757,6 +757,9 @@
 	});
 	
 	Q.onInit.set(function () {
+		Q.Text.get('Assets/content', function (err, text) {
+			// preload this, so it's available on gesture handlers
+		});
 		if (Q.info.platform === 'ios' && Q.getObject("Stripe.applePay.checkAvailability")) {
 			Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
 			Stripe.applePay.checkAvailability(function (available) {
@@ -816,10 +819,6 @@
 			}
 		};
 	}
-	
-	Q.Text.get('Assets/content', function (err, text) {
-		// preload this, so it's available on gesture handlers
-	});
 
 
 })(Q, Q.plugins.Assets, Q.plugins.Streams, jQuery);
