@@ -1160,6 +1160,7 @@ class Q_Utils
 		if (file_exists($dest) and !is_dir($source) and !is_dir($dest)) {
 			// just copies a file
 			copy($source, $dest);
+			return;
 		}
 		
 		if (file_exists($dest) and (is_dir($source) xor is_dir($dest))) {
