@@ -1157,10 +1157,10 @@ class Q_Utils
 	 */
 	static function copy($source, $dest) {
 		
-		if (file_exists($dest) and !is_dir($source) and !is_dir($dest)) {
+		if (file_exists($source) and !is_dir($source) and !is_dir($dest)) {
 			// just copies a file
 			copy($source, $dest);
-			return;
+			return;	
 		}
 		
 		if (file_exists($dest) and (is_dir($source) xor is_dir($dest))) {
