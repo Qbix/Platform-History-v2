@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} di {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ditambahkeun kana {{toTitle}} salaku {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} nyebatkeun anjeun dina koméntar",
-        "Streams\/call": "{{displayName}} nyaéta nelepon anjeun"
+        "Streams\/call": "{{displayName}} nyaéta nelepon anjeun",
+        "ManageEmailSubscriptions": "ngatur langganan email anjeun",
+        "IfUnsubscribe": "Upami anjeun badé nyarios"
     },
     "invite": {
         "messageContent": "{{displayName}} ngajak anjeun ka {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Ulem dikirim ti jumlah kami, anu parantosan sanés teu ngakuan. Turutan sareng téks gancang kanggo ngantepkeun abdi ondangan sumping ti anjeun, nanyakeun ka klik link.",
             "confirm": "Ulem dikirim ti jumlah kami, anu parantosan sanés teu ngakuan. Rék nuturkeun sareng téks gancang anu ngantepkeun maranéhna terang ku ondakan sumping ti anjeun, nanyakeun ka klik link.",
-            "check": "Héy, abdi ngan ngirimkeun anjeun diondang kana aplikasi {{app}}. Punten parios sms anjeun teras klik link tumbu!"
+            "check": "Héy, abdi ngan ngirimkeun anjeun diondang kana aplikasi {{app}}. Punten parios sms anjeun teras klik link tumbu!",
+            "CheckYourMobile": "Punten parios SMS sareng turutan petunjuk!"
         },
         "email": {
             "alert": "Uleman dikirim ti domain kami, anu réréncangan anjeun henteu acan terang. Turutan sareng téks gancang kanggo ngantepkeun abdi ondangan sumping ti anjeun, nanyakeun ka klik link.",
             "confirm": "Uleman dikirim ti domain kami, anu réréncangan anjeun henteu acan terang. Rék nuturkeun sareng téks gancang anu ngantepkeun maranéhna terang ku ondakan sumping ti anjeun, nanyakeun ka klik link.",
             "subject": "Naha anjeun narajang?",
-            "body": "Héy, abdi ngan ngirimkeun anjeun diondang kana aplikasi {{app}}. Punten parios email anjeun sareng klik link di dinya!"
+            "body": "Héy, abdi ngan ngirimkeun anjeun diondang kana aplikasi {{app}}. Punten parios email anjeun sareng klik link di dinya!",
+            "CheckYourEmail": "Punten parios email anjeun sareng turutan petunjuk!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Aktipkeun Mikropon",
             "cameraBtn": "Aktifkeun Kamera",
             "cameraAndMicrophoneBtn": "Aktifkeun Kamera sareng Mikropon"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Parentah",
+            "permissionDenied": "Idin pikeun {{kind}} ditolak. Pikeun ngagunakeun éta tuturkeun léngkah ieu:",
+            "point1": "Pindah ka &quot;Setélan&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Privasi sareng kaamanan&quot; -&gt; &quot;Setélan Loka&quot; -&gt; &quot;Kaméra&quot; atanapi &quot;Setélan Loka&quot; -&gt; &quot;Mikropon&quot;",
+            "point2": "Piceun {{hostname}} tina daptar &quot;Blok&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Parentah",
+            "permissionDenied": "Idin pikeun {{kind}} ditolak. Mangga tambahkeun deui halaman ieu sareng mastikeun aksés ka {{kind}} pikeun ngiringan konperénsi."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Parentah",
+            "permissionDenied": "Idin pikeun {{kind}} ditolak. Pikeun ngagunakeun éta tuturkeun léngkah ieu:",
+            "point1": "Buka Setélan Android anjeun",
+            "point2": "Buka &quot;Aplikasi &amp; bewara&quot;",
+            "point3": "Milarian &quot;{{communityName}}&quot; teras buka",
+            "point4": "Toél Pangidinan",
+            "point5": "Aktipkeun {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Parentah",
+            "permissionDenied": "Idin pikeun {{kind}} ditolak. Pikeun ngagunakeun éta tuturkeun léngkah ieu:",
+            "point1": "Buka Setélan ios Anjeun",
+            "point2": "Buka &quot;Privasi&quot;",
+            "point3": "Pilari {{kind}} teras buka",
+            "point4": "Milarian &quot;{{communityName}}&quot; jeung aktipkeun"
+        },
+        "notices": {
+            "youJoinedRoom": "Anjeun asup ka rohangan",
+            "joining": "Ngagabung: {{userName}}",
+            "sbLeftRoom": "{{userName}} ninggalkeun kamar",
+            "youLeftRoom": "Anjeun ninggalkeun rohangan",
+            "codeCopied": "Anjeun ninggalkeun rohangan",
+            "sbBeganFbLive": "{{userName}} mimiti nyebarkeun sauran ieu di Facebook",
+            "sbStoppedFbLive": "{{userName}} lirén nyebarkeun sauran ieu di Facebook",
+            "youBeganFbLive": "Anjeun mimiti nyebarkeun telepon ieu di Facebook",
+            "youStoppedFbLive": "Anjeun lirén nyiarkeun sauran ieu dina Facebook",
+            "linkCopiedToCb": "Link ditiron ka clipboard",
+            "codeCopiedToCb": "Kodeu disalin ka clipboard",
+            "userHasNoVideo": "Peserta teu gaduh pidio"
+        },
+        "settingsPopup": {
+            "webCamera": "Kaméra Wéb",
+            "screenSharing": "Babagi layar",
+            "shareAnotherScreen": "Bagikeun layar anu sanés",
+            "turnOffCameras": "Pareuman sadaya kaméra",
+            "startFBLive": "Mimitian Facebook Livestream",
+            "stopFBLive": "Eureun Facebook Livestream",
+            "fbLiveTitle": "Judul Live",
+            "fbLiveDescription": "Live Pedaran",
+            "fbOnlyMeLiveAccess": "Ngan Kuring",
+            "fbFriendsAccess": "Babaturan",
+            "fbPublicAccess": "Publik",
+            "fbStartLive": "Indit Langsung",
+            "fbStopLive": "Tungtung Langsung",
+            "fbEmbedCode": "Nyebak",
+            "copy": "Nyalin"
+        },
+        "participantsPopup": {
+            "disconnect": "Pegatkeun",
+            "floatingScreens": "Potret Ngambang",
+            "tiledScreens": "Potret Tile",
+            "loudestExceptMe": "Anu paling Nyuar",
+            "maximizeLoudest": "Maksimalkeun Loudest",
+            "staticMaximized": "Statis maksimal",
+            "manual": "Pitunjuk"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Panggeroan Real-Time",
             "description": "nyata waktos video \/ telepon audio"
         }
+    },
+    "participating": {
+        "Title": "Judul",
+        "Subscribed": "Ngalanggan",
+        "Participants": "Pamilon",
+        "AreYouSureRemoveIdentifier": "Naha anjeun pasti miceun identifier ieu?",
+        "AreYouSureUnsubscribeIdentifier": "Naha anjeun yakin unubscribe identifier ieu? Éta bakal mareuman béwara pikeun pengenal ieu.",
+        "AreYouSureUnsubscribeDevice": "Naha anjeun yakin unsubscribe alat ieu? Éta bakal mareuman béwara ka alat ieu.",
+        "Identifiers": "Pengenal",
+        "Devices": "Alat",
+        "Streams": "Aliran"
     }
 }

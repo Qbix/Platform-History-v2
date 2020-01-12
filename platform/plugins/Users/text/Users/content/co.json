@@ -102,5 +102,11 @@
         "noLongerUsing": "Ùn sia più cunnessu à {{platform}} cum&#39;è",
         "doAuth": "Logu cù stu contu",
         "doSwitch": "Cambia à stu contu"
+    },
+    "roles": {
+        "Owner": "Pruprietariu",
+        "Admin": "Amministratore",
+        "Member": "Membru",
+        "Guest": "Invitatu"
     }
 }

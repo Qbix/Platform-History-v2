@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Yangi {{relationDisplayType}} {{toTitle}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} ga {{relationDisplayType}} sifatida qo&#39;shildi",
         "Streams\/mention": "{{&call 'avatar.displayName'}} sizni sharhda eslatib o&#39;tdi",
-        "Streams\/call": "{{displayName}} sizga qo&#39;ng&#39;iroq qilmoqda"
+        "Streams\/call": "{{displayName}} sizga qo&#39;ng&#39;iroq qilmoqda",
+        "ManageEmailSubscriptions": "elektron pochta obunalaringizni boshqarish",
+        "IfUnsubscribe": "Agar obunani bekor qilmoqchi bo&#39;lsangiz"
     },
     "invite": {
         "messageContent": "{{displayName}} sizni {{inviteUrl}} ga taklif qildi",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Do&#39;stlaringiz hali tanish bo&#39;lmagan raqamlarimizdan takliflar yuboriladi. Sizdan kelgan taklifnomani ularga havola etishni so&#39;rash uchun tezkor matn bilan kuzatib boring.",
             "confirm": "Do&#39;stlaringiz hali tanish bo&#39;lmagan raqamlarimizdan takliflar yuboriladi. Sizdan kelgan taklifnomani ularga etkazib berishni so&#39;rash uchun ularni tezkor matn bilan kuzatib borishni istaysizmi?",
-            "check": "Hey, men sizga faqat {{app}} ilovaga taklifnoma yubordim. Iltimos, SMS-ni tekshiring va havolani bosing!"
+            "check": "Hey, men sizga faqat {{app}} ilovaga taklifnoma yubordim. Iltimos, SMS-ni tekshiring va havolani bosing!",
+            "CheckYourMobile": "Iltimos, SMS-xabarlarni tekshiring va ko&#39;rsatmalarga amal qiling!"
         },
         "email": {
             "alert": "Do&#39;stlaringiz hali tanish bo&#39;lmagan domenimizdan takliflar yuboriladi. Sizdan kelgan taklifnomani ularga havola etishni so&#39;rash uchun tezkor matn bilan kuzatib boring.",
             "confirm": "Do&#39;stlaringiz hali tanish bo&#39;lmagan domenimizdan takliflar yuboriladi. Sizdan kelgan taklifnomani ularga etkazib berishni so&#39;rash uchun ularni tezkor matn bilan kuzatib borishni istaysizmi?",
             "subject": "Siz taklif oldingizmi?",
-            "body": "Hey, men sizga faqat {{app}} ilovaga taklifnoma yubordim. E-pochtangizni tekshiring va u yerdagi havolani bosing!"
+            "body": "Hey, men sizga faqat {{app}} ilovaga taklifnoma yubordim. E-pochtangizni tekshiring va u yerdagi havolani bosing!",
+            "CheckYourEmail": "Iltimos, elektron pochtangizni tekshiring va ko&#39;rsatmalarga amal qiling!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Mikrofonni yoqing",
             "cameraBtn": "Kamerani yoqish",
             "cameraAndMicrophoneBtn": "Kamera va mikrofonni yoqing"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Ko&#39;rsatmalar",
+            "permissionDenied": "{{kind}} uchun ruxsat rad etildi. Uni ishlatish uchun quyidagi amallarni bajaring:",
+            "point1": "&quot;Sozlamalar&quot; -&gt; &quot;Kengaytirilgan&quot; -&gt; &quot;Maxfiylik va xavfsizlik&quot; -&gt; &quot;Sayt sozlamalari&quot; -&gt; &quot;Kamera&quot; yoki &quot;Sayt sozlamalari&quot; -&gt; &quot;Mikrofon&quot; -ga o&#39;ting.",
+            "point2": "&quot;Bloklash&quot; ro&#39;yxatidan {{hostname}} ni olib tashlang"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Ko&#39;rsatmalar",
+            "permissionDenied": "{{kind}} uchun ruxsat rad etildi. Iltimos, ushbu sahifani qayta yuklang va {{kind}} ga kirishni tasdiqlang."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Ko&#39;rsatmalar",
+            "permissionDenied": "{{kind}} uchun ruxsat rad etildi. Uni ishlatish uchun quyidagi amallarni bajaring:",
+            "point1": "Android sozlamalariga o&#39;ting",
+            "point2": "&quot;Ilovalar va bildirishnomalar&quot; ni oching",
+            "point3": "&quot;{{communityName}}&quot; ni toping va uni oching",
+            "point4": "Ruxsatlar-ga teging",
+            "point5": "Yoqish {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Ko&#39;rsatmalar",
+            "permissionDenied": "{{kind}} uchun ruxsat rad etildi. Uni ishlatish uchun quyidagi amallarni bajaring:",
+            "point1": "IOS sozlamalariga o&#39;ting",
+            "point2": "&quot;Maxfiylik&quot; ni oching",
+            "point3": "{{kind}} ni toping va uni oching",
+            "point4": "&quot;{{communityName}}&quot; ni toping va yoqing"
+        },
+        "notices": {
+            "youJoinedRoom": "Siz xonaga qo&#39;shildingiz",
+            "joining": "Qo&#39;shilish: {{userName}}",
+            "sbLeftRoom": "{{userName}} xonani tark etdi",
+            "youLeftRoom": "Siz xonani tark etdingiz",
+            "codeCopied": "Siz xonani tark etdingiz",
+            "sbBeganFbLive": "{{userName}} ushbu qo&#39;ng&#39;iroqni Facebook-da tarqatishni boshladi",
+            "sbStoppedFbLive": "{{userName}} ushbu qo&#39;ng&#39;iroqni Facebook-da tarqatishni to&#39;xtatdi",
+            "youBeganFbLive": "Siz ushbu qo&#39;ng&#39;iroqni Facebook-da tarqatishni boshladingiz",
+            "youStoppedFbLive": "Siz ushbu qo&#39;ng&#39;iroqni Facebook-da tarqatishni to&#39;xtatdingiz",
+            "linkCopiedToCb": "Havola buferga ko&#39;chirildi",
+            "codeCopiedToCb": "Kod clipboardga nusxa olindi",
+            "userHasNoVideo": "Ishtirokchining videosi yo‘q"
+        },
+        "settingsPopup": {
+            "webCamera": "Veb-kamera",
+            "screenSharing": "Ekranni ulashish",
+            "shareAnotherScreen": "Boshqa ekranni ulashing",
+            "turnOffCameras": "Barcha kameralarni o&#39;chiring",
+            "startFBLive": "Facebook Livestream-ni ishga tushiring",
+            "stopFBLive": "Facebook Livestream-ni to&#39;xtating",
+            "fbLiveTitle": "Jonli sarlavha",
+            "fbLiveDescription": "Jonli tavsif",
+            "fbOnlyMeLiveAccess": "Faqat men",
+            "fbFriendsAccess": "Do&#39;stlar",
+            "fbPublicAccess": "Umumiy",
+            "fbStartLive": "Jonli efirga chiqing",
+            "fbStopLive": "Jonli tugatish",
+            "fbEmbedCode": "Joylashtirish",
+            "copy": "Nusxalash"
+        },
+        "participantsPopup": {
+            "disconnect": "Uzing",
+            "floatingScreens": "Suzuvchi ekranlar",
+            "tiledScreens": "Tilimli ekranlar",
+            "loudestExceptMe": "Mendan tashqari Loudest",
+            "maximizeLoudest": "Loudestni maksimal darajaga ko&#39;taring",
+            "staticMaximized": "Statik maksimal darajaga ko&#39;tarildi",
+            "manual": "Qo&#39;lda"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Haqiqiy vaqtda qo&#39;ng&#39;iroq",
             "description": "real vaqtda video \/ audio qo&#39;ng&#39;iroq"
         }
+    },
+    "participating": {
+        "Title": "Sarlavha",
+        "Subscribed": "Obuna",
+        "Participants": "Ishtirokchilar",
+        "AreYouSureRemoveIdentifier": "Haqiqatan ham bu identifikatorni olib tashlamoqchimisiz?",
+        "AreYouSureUnsubscribeIdentifier": "Haqiqatan ham ushbu identifikatorni bekor qilmoqchimisiz? Ushbu identifikator uchun bildirishnomalarni o&#39;chirib qo&#39;yadi.",
+        "AreYouSureUnsubscribeDevice": "Haqiqatan ham ushbu qurilmani bekor qilyapsizmi? Ushbu qurilmadagi bildirishnomalarni o&#39;chirib qo&#39;yadi.",
+        "Identifiers": "Aniqlovchilar",
+        "Devices": "Qurilmalar",
+        "Streams": "Oqimlar"
     }
 }

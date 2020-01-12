@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Nij {{relationDisplayType}} yn {{toTitle}}",
         "Streams\/relatedFrom\/*": "Tafoege oan {{toTitle}} as {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} neamde jo yn in reaksje",
-        "Streams\/call": "{{displayName}} ropt jo"
+        "Streams\/call": "{{displayName}} ropt jo",
+        "ManageEmailSubscriptions": "beheare jo e-postabonneminten",
+        "IfUnsubscribe": "As jo wolle útskriuwe"
     },
     "invite": {
         "messageContent": "{{displayName}} hat jo nei {{inviteUrl}} útnoege",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Untfongen wurde út ús nûmere stjoerd, dy&#39;t jo freonen net werkenne. Folgje mei in fluchste tekst om se te wite litten hoe&#39;t de útnoeging fan jo kaam, en freegje har om de link te klikken.",
             "confirm": "Untfongen wurde út ús nûmere stjoerd, dy&#39;t jo freonen net werkenne. Wolle jo trochgean mei in fluchste tekst om se te wite litte jo de útnoeging fan jo kaam, freegje se om de link te klikken.",
-            "check": "Hey, ik stjoerde jo gewoan in útnoeging nei de {{app}} app. Kontrolearje jo sms en klik op de link!"
+            "check": "Hey, ik stjoerde jo gewoan in útnoeging nei de {{app}} app. Kontrolearje jo sms en klik op de link!",
+            "CheckYourMobile": "Kontrolearje asjebleaft SMS en folgje ynstruksjes!"
         },
         "email": {
             "alert": "Untfongen wurde út ús domein stjoerd, dy&#39;t jo freonen net werkenne. Folgje mei in fluchste tekst om se te wite litten hoe&#39;t de útnoeging fan jo kaam, en freegje har om de link te klikken.",
             "confirm": "Untfongen wurde út ús domein stjoerd, dy&#39;t jo freonen net werkenne. Wolle jo trochgean mei in fluchste tekst om se te wite litte jo de útnoeging fan jo kaam, freegje se om de link te klikken.",
             "subject": "Hawwe jo in útnoeging?",
-            "body": "Hey, ik stjoerde jo gewoan in útnoeging nei de {{app}} app. Kontrolje jo e-post en klik de link yn!"
+            "body": "Hey, ik stjoerde jo gewoan in útnoeging nei de {{app}} app. Kontrolje jo e-post en klik de link yn!",
+            "CheckYourEmail": "Kontrolearje asjebleaft jo e-post en folgje ynstruksjes!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Mikrofoan ynskeakelje",
             "cameraBtn": "Kamera ynskeakelje",
             "cameraAndMicrophoneBtn": "Kamera en mikrofoan ynskeakelje"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Ynstruksjes",
+            "permissionDenied": "Tastimming foar {{kind}} wegere. Folgje dizze stappen om it te brûken:",
+            "point1": "Gean nei &quot;Ynstellings&quot; -&gt; &quot;Avansearre&quot; -&gt; &quot;Privacy en feiligens&quot; -&gt; &quot;Siteynstellingen&quot; -&gt; &quot;Camera&quot; of &quot;Siteynstellingen&quot; -&gt; &quot;Mikrofoan&quot;",
+            "point2": "Ferwiderje {{hostname}} fan de list &quot;Blokkearje&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Ynstruksjes",
+            "permissionDenied": "Tastimming foar {{kind}} wegere. Reload dizze pagina asjebleaft en befêstigje tagong ta {{kind}} om mei te dwaan oan &#39;e konferinsje."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Ynstruksjes",
+            "permissionDenied": "Tastimming foar {{kind}} wegere. Folgje dizze stappen om it te brûken:",
+            "point1": "Gean nei jo Android-ynstellings",
+            "point2": "Iepenje &quot;Apps &amp; notifikaasjes&quot;",
+            "point3": "Sykje &quot;{{communityName}}&quot; en iepenje it",
+            "point4": "Tap op Permissions",
+            "point5": "Aktivearje {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Ynstruksjes",
+            "permissionDenied": "Tastimming foar {{kind}} wegere. Folgje dizze stappen om it te brûken:",
+            "point1": "Gean nei jo iOS-ynstellingen",
+            "point2": "Iepenje &quot;Privacy&quot;",
+            "point3": "Sykje {{kind}} en iepenje it",
+            "point4": "Sykje &quot;{{communityName}}&quot; en ynskeakelje"
+        },
+        "notices": {
+            "youJoinedRoom": "Jo binne by de keamer kaam",
+            "joining": "Meidwaan: {{userName}}",
+            "sbLeftRoom": "{{userName}} ferliet de keamer",
+            "youLeftRoom": "Jo hawwe de keamer ferliet",
+            "codeCopied": "Jo hawwe de keamer ferliet",
+            "sbBeganFbLive": "{{userName}} begon dizze oprop út te stjoeren yn Facebook",
+            "sbStoppedFbLive": "{{userName}} is ophâlden mei it útstjoeren fan dizze oprop yn Facebook",
+            "youBeganFbLive": "Jo begon dizze oprop út te stjoeren yn Facebook",
+            "youStoppedFbLive": "Jo binne ophâlden mei útstjoeren fan dizze oprop yn Facebook",
+            "linkCopiedToCb": "Koppeling kopieare nei klamboerd",
+            "codeCopiedToCb": "Koade kopieare nei klamboerd",
+            "userHasNoVideo": "Dielnimmer hat gjin fideo"
+        },
+        "settingsPopup": {
+            "webCamera": "Webkamera",
+            "screenSharing": "Skerm dielen",
+            "shareAnotherScreen": "Diel in oar skerm",
+            "turnOffCameras": "Skeakelje alle kamera&#39;s út",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stopje Facebook Livestream",
+            "fbLiveTitle": "Live titel",
+            "fbLiveDescription": "Live beskriuwing",
+            "fbOnlyMeLiveAccess": "Allinnich ik",
+            "fbFriendsAccess": "Vrienden",
+            "fbPublicAccess": "Iepenbier",
+            "fbStartLive": "Gean libjen",
+            "fbStopLive": "Einde Live",
+            "fbEmbedCode": "Ynbêde",
+            "copy": "Kopy"
+        },
+        "participantsPopup": {
+            "disconnect": "Disconnect",
+            "floatingScreens": "Driuwende skermen",
+            "tiledScreens": "Betegele skermen",
+            "loudestExceptMe": "It lûdste útsein my",
+            "maximizeLoudest": "Maksimalisearje Loudest",
+            "staticMaximized": "Statyske maksimalisearre",
+            "manual": "Hantlieding"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Echte-tiidoprop",
             "description": "in realtime fideo \/ audio-oprop"
         }
+    },
+    "participating": {
+        "Title": "Titel",
+        "Subscribed": "Ynskreaun",
+        "Participants": "Dielnimmers",
+        "AreYouSureRemoveIdentifier": "Binne jo wis dat jo dizze identifier fuortsmite?",
+        "AreYouSureUnsubscribeIdentifier": "Binne jo wis dat jo dizze identifier ôfskriuwe? It sil notifikaasjes foar dizze identifier útsette.",
+        "AreYouSureUnsubscribeDevice": "Binne jo wis dat jo dit apparaat ôfskriuwe? It sil notifikaasjes foar dit apparaat útsette.",
+        "Identifiers": "Identifisearders",
+        "Devices": "Apparaten",
+        "Streams": "Streams"
     }
 }

@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Ftesat janë dërguar nga numri ynë, të cilin miqtë tuaj ende nuk e njohin. Ndiqni me një tekst të shpejtë për t&#39;u bërë të ditur se ftesa erdhi nga ju, duke u kërkuar atyre të klikonin lidhjen.",
             "confirm": "Ftesat janë dërguar nga numri ynë, të cilin miqtë tuaj ende nuk e njohin. Do të dëshironit të përcillni me një tekst të shpejtë për t&#39;u bërë të ditur se ftesa erdhi nga ju, duke u kërkuar atyre të klikonin lidhjen.",
-            "check": "Hej, sapo kam dërguar një ftesë në aplikacionin {{app}}. Ju lutemi kontrolloni sms-in tuaj dhe klikoni lidhjen!"
+            "check": "Hej, sapo kam dërguar një ftesë në aplikacionin {{app}}. Ju lutemi kontrolloni sms-in tuaj dhe klikoni lidhjen!",
+            "CheckYourMobile": "Ju lutemi kontrolloni SMS dhe ndiqni udhëzimet!"
         },
         "email": {
             "alert": "Ftesat dërgohen nga domenin tonë, të cilin miqtë tuaj ende nuk e njohin. Ndiqni me një tekst të shpejtë për t&#39;u bërë të ditur se ftesa erdhi nga ju, duke u kërkuar atyre të klikonin lidhjen.",
             "confirm": "Ftesat dërgohen nga domenin tonë, të cilin miqtë tuaj ende nuk e njohin. Do të dëshironit të përcillni me një tekst të shpejtë për t&#39;u bërë të ditur se ftesa erdhi nga ju, duke u kërkuar atyre të klikonin lidhjen.",
             "subject": "A keni marrë një ftesë?",
-            "body": "Hej, sapo kam dërguar një ftesë në aplikacionin {{app}}. Ju lutemi kontrolloni email-in tuaj dhe klikoni lidhjen atje!"
+            "body": "Hej, sapo kam dërguar një ftesë në aplikacionin {{app}}. Ju lutemi kontrolloni email-in tuaj dhe klikoni lidhjen atje!",
+            "CheckYourEmail": "Ju lutemi kontrolloni emailin tuaj dhe ndiqni udhëzimet!"
         }
     },
     "participating": {
         "Title": "titull",
         "Subscribed": "regjistruar",
-        "Participants": "pjesëmarrësit"
+        "Participants": "pjesëmarrësit",
+        "AreYouSureRemoveIdentifier": "Jeni i sigurt për të hequr këtë identifikues?",
+        "AreYouSureUnsubscribeIdentifier": "A jeni i sigurt se abononi këtë identifikues? Do të fiket njoftimet për këtë identifikues.",
+        "AreYouSureUnsubscribeDevice": "A jeni i sigurt se abononi këtë pajisje? Do të fiket njoftimet në këtë pajisje.",
+        "Identifiers": "identifikues",
+        "Devices": "Devices",
+        "Streams": "streams"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Aktivizoni mikrofonin",
             "cameraBtn": "Aktivizo kamerën",
             "cameraAndMicrophoneBtn": "Aktivizo kamerën dhe mikrofonin"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Udhëzime",
+            "permissionDenied": "Leja për 99 999 nuk u pranua. Për ta përdorur atë, ju lutemi ndiqni këto hapa:",
+            "point1": "Shkoni te &quot;Cilësimet&quot; -&gt; &quot;Avancuar&quot; -&gt; &quot;Intimiteti dhe siguria&quot; -&gt; &quot;Cilësimet e sitit&quot; -&gt; &quot;Kamera&quot; ose &quot;Cilësimet e sitit&quot; -&gt; &quot;Mikrofoni&quot;",
+            "point2": "Hiq {999} nga lista &quot;Bllok&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Udhëzime",
+            "permissionDenied": "Leja për 99 999 nuk u pranua. Ju lutemi rifreskoni këtë faqe dhe konfirmoni qasjen në {999} për t&#39;u bashkuar me konferencën."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Udhëzime",
+            "permissionDenied": "Leja për 99 999 nuk u pranua. Për ta përdorur atë, ju lutemi ndiqni këto hapa:",
+            "point1": "Shkoni te Parametrat tuaj të Android",
+            "point2": "Hapni &quot;Aplikacione dhe njoftime&quot;",
+            "point3": "Gjeni &quot;{{communityName}}&quot; dhe hapeni",
+            "point4": "Takoni mbi Lejet",
+            "point5": "Aktivizo {{999}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Udhëzime",
+            "permissionDenied": "Leja për 99 999 nuk u pranua. Për ta përdorur atë, ju lutemi ndiqni këto hapa:",
+            "point1": "Shkoni te Parametrat e iOS tuaj",
+            "point2": "Hapni &quot;Privatësinë&quot;",
+            "point3": "Gjeni 99 999}} dhe hapeni",
+            "point4": "Gjeni &quot;{{communityName}}&quot; dhe aktivizoni"
+        },
+        "notices": {
+            "youJoinedRoom": "Ju u bashkua në dhomë",
+            "joining": "Bashkimi: {{userName}}",
+            "sbLeftRoom": "999} dolën nga dhoma",
+            "youLeftRoom": "U largove nga dhoma",
+            "codeCopied": "U largove nga dhoma",
+            "sbBeganFbLive": "99 99 999} filluan transmetimin e kësaj thirrje në Facebook",
+            "sbStoppedFbLive": "99 99 999} ndaloi transmetimin e kësaj thirrje në Facebook",
+            "youBeganFbLive": "Ju filluat të transmetoni këtë thirrje në Facebook",
+            "youStoppedFbLive": "Ndalove transmetimin e kësaj thirrje në Facebook",
+            "linkCopiedToCb": "Lidhja e kopjuar në clipboard",
+            "codeCopiedToCb": "Kodi i kopjuar në clipboard",
+            "userHasNoVideo": "Pjesëmarrësi nuk ka video"
+        },
+        "settingsPopup": {
+            "webCamera": "Kamera në internet",
+            "screenSharing": "Ndarja e ekranit",
+            "shareAnotherScreen": "Ndani një ekran tjetër",
+            "turnOffCameras": "Fikni të gjitha kamerat",
+            "startFBLive": "Filloni Facebook Livestream",
+            "stopFBLive": "Ndaloni Facebook Livestream",
+            "fbLiveTitle": "Titulli i drejtpërdrejtë",
+            "fbLiveDescription": "Përshkrimi i drejtpërdrejtë",
+            "fbOnlyMeLiveAccess": "Vetëm unë",
+            "fbFriendsAccess": "Miqtë",
+            "fbPublicAccess": "publik",
+            "fbStartLive": "Shko jeto",
+            "fbStopLive": "Fund Jetoni",
+            "fbEmbedCode": "mbjell",
+            "copy": "kopje"
+        },
+        "participantsPopup": {
+            "disconnect": "shqit",
+            "floatingScreens": "Ekranet lundrues",
+            "tiledScreens": "Ekranet e pllakave",
+            "loudestExceptMe": "Me zë të lartë përveç meje",
+            "maximizeLoudest": "Maksimizoni me zë të lartë",
+            "staticMaximized": "Maksimumi statik",
+            "manual": "udhëzues"
         }
     },
     "types": {

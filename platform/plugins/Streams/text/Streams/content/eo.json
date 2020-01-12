@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Nova {{relationDisplayType}} en {{toTitle}}",
         "Streams\/relatedFrom\/*": "Aldonita al {{toTitle}} kiel {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} menciis vin en komento",
-        "Streams\/call": "{{displayName}} vokas vin"
+        "Streams\/call": "{{displayName}} vokas vin",
+        "ManageEmailSubscriptions": "administri viajn retpoŝtajn abonojn",
+        "IfUnsubscribe": "Se vi volas malaboni"
     },
     "invite": {
         "messageContent": "{{displayName}} invitis vin al {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Invitoj estas senditaj de nia numero, kiun viaj amikoj ankoraŭ ne rekonas. Sekvu rapidan tekston por sciigi al ili, ke la invito venis de vi, petante ilin alklaki la ligon.",
             "confirm": "Invitoj estas senditaj de nia numero, kiun viaj amikoj ankoraŭ ne rekonas. Ĉu vi ŝatus sekvi per rapida teksto por sciigi al ili, ke la invito venis de vi, petante ilin alklaki la ligilon.",
-            "check": "Hej, mi ĵus sendis al vi inviton al la {{app}} programo. Bonvolu kontroli viajn sms kaj klaki la ligon!"
+            "check": "Hej, mi ĵus sendis al vi inviton al la {{app}} programo. Bonvolu kontroli viajn sms kaj klaki la ligon!",
+            "CheckYourMobile": "Bonvolu kontroli SMS kaj sekvu instrukciojn!"
         },
         "email": {
             "alert": "Invitoj estas senditaj de nia domajno, kiun viaj amikoj ankoraŭ ne rekonas. Sekvu rapidan tekston por sciigi al ili, ke la invito venis de vi, petante ilin alklaki la ligon.",
             "confirm": "Invitoj estas senditaj de nia domajno, kiun viaj amikoj ankoraŭ ne rekonas. Ĉu vi ŝatus sekvi per rapida teksto por sciigi al ili, ke la invito venis de vi, petante ilin alklaki la ligilon.",
             "subject": "Ĉu vi ricevis inviton?",
-            "body": "Hej, mi ĵus sendis al vi inviton al la {{app}} programo. Bonvolu kontroli vian retpoŝton kaj alklaku la ligon tie!"
+            "body": "Hej, mi ĵus sendis al vi inviton al la {{app}} programo. Bonvolu kontroli vian retpoŝton kaj alklaku la ligon tie!",
+            "CheckYourEmail": "Bonvolu kontroli vian retpoŝton kaj sekvu instrukciojn!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Ebligu Mikrofonon",
             "cameraBtn": "Ebligu Fotilon",
             "cameraAndMicrophoneBtn": "Ebligu Fotilon kaj Mikrofonon"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instrukcioj",
+            "permissionDenied": "Permeso por {{kind}} neita. Por uzi ĝin bonvolu sekvi ĉi tiujn paŝojn:",
+            "point1": "Iru al &quot;Agordoj&quot; -&gt; &quot;Altnivela&quot; -&gt; &quot;Privateco kaj sekureco&quot; -&gt; &quot;Retejaj Agordoj&quot; -&gt; &quot;Fotilo&quot; aŭ &quot;Retejaj Agordoj&quot; -&gt; &quot;Mikrofono&quot;",
+            "point2": "Forigu {{hostname}} el la listo &quot;Bloko&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instrukcioj",
+            "permissionDenied": "Permeso por {{kind}} neita. Bonvolu reŝargi ĉi tiun paĝon kaj konfirmi aliron al {{kind}} por aliĝi al la konferenco."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instrukcioj",
+            "permissionDenied": "Permeso por {{kind}} neita. Por uzi ĝin bonvolu sekvi ĉi tiujn paŝojn:",
+            "point1": "Iru al via Android-Agordo",
+            "point2": "Malfermu &quot;Aplikoj kaj sciigoj&quot;",
+            "point3": "Trovu &quot;{{communityName}}&quot; kaj malfermu ĝin",
+            "point4": "Frapetu pri Permesoj",
+            "point5": "Ebligi {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instrukcioj",
+            "permissionDenied": "Permeso por {{kind}} neita. Por uzi ĝin bonvolu sekvi ĉi tiujn paŝojn:",
+            "point1": "Iru al via iOS-Agordo",
+            "point2": "Malfermu &quot;Privateco&quot;",
+            "point3": "Trovu {{kind}} kaj malfermu ĝin",
+            "point4": "Trovu &quot;{{communityName}}&quot; kaj ebligu"
+        },
+        "notices": {
+            "youJoinedRoom": "Vi aliĝis al la ĉambro",
+            "joining": "Aliĝado: {{userName}}",
+            "sbLeftRoom": "{{userName}} forlasis la ĉambron",
+            "youLeftRoom": "Vi forlasis la ĉambron",
+            "codeCopied": "Vi forlasis la ĉambron",
+            "sbBeganFbLive": "{{userName}} komencis elsendi ĉi tiun vokon en Facebook",
+            "sbStoppedFbLive": "{{userName}} ĉesis elsendi ĉi tiun vokon en Facebook",
+            "youBeganFbLive": "Vi komencis elsendi ĉi tiun vokon en Facebook",
+            "youStoppedFbLive": "Vi ĉesis elsendi ĉi tiun vokon en Facebook",
+            "linkCopiedToCb": "Ligilo kopiita al klipo",
+            "codeCopiedToCb": "Kodo kopiita al klipo",
+            "userHasNoVideo": "Partoprenanto ne havas filmeton"
+        },
+        "settingsPopup": {
+            "webCamera": "Reta fotilo",
+            "screenSharing": "Ekrano-Dividado",
+            "shareAnotherScreen": "Kunhavigu alian ekranon",
+            "turnOffCameras": "Malŝaltu ĉiujn fotilojn",
+            "startFBLive": "Komencu Facebook Livestream",
+            "stopFBLive": "Ĉesu Facebook Livestream",
+            "fbLiveTitle": "Viva Titolo",
+            "fbLiveDescription": "Viva Priskribo",
+            "fbOnlyMeLiveAccess": "Nur mi",
+            "fbFriendsAccess": "Amikoj",
+            "fbPublicAccess": "Publika",
+            "fbStartLive": "Iru vivi",
+            "fbStopLive": "Fino Viva",
+            "fbEmbedCode": "Korpigi",
+            "copy": "Kopii"
+        },
+        "participantsPopup": {
+            "disconnect": "Malkonekti",
+            "floatingScreens": "Flosaj Ekranoj",
+            "tiledScreens": "Kaheloj",
+            "loudestExceptMe": "Plej Laŭte Escepte Min",
+            "maximizeLoudest": "Maksimume Plej Laŭta",
+            "staticMaximized": "Static Maksimumigita",
+            "manual": "Manlibro"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Realtempa Voko",
             "description": "realtempa filmeto \/ audiovoko"
         }
+    },
+    "participating": {
+        "Title": "Titolo",
+        "Subscribed": "Abonitaj",
+        "Participants": "Partoprenantoj",
+        "AreYouSureRemoveIdentifier": "Ĉu vi certe forigas ĉi tiun identigilon?",
+        "AreYouSureUnsubscribeIdentifier": "Ĉu vi certas malaboni ĉi tiun identigilon? Ĝi malŝaltos sciigojn al ĉi tiu identigilo.",
+        "AreYouSureUnsubscribeDevice": "Ĉu vi certas malaboni ĉi tiun aparaton? Ĝi malŝaltos sciigojn al ĉi tiu aparato.",
+        "Identifiers": "Identigiloj",
+        "Devices": "Aparatoj",
+        "Streams": "Rojoj"
     }
 }

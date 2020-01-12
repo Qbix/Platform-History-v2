@@ -102,5 +102,11 @@
         "noLongerUsing": "{{Vos autem non applicatur ad quam CMXCIX}}",
         "doAuth": "Hac ratione aperire",
         "doSwitch": "Ob hanc mutes rationem tuam"
+    },
+    "roles": {
+        "Owner": "dominus",
+        "Admin": "Maecenas et ipsum",
+        "Member": "socius",
+        "Guest": "hospes"
     }
 }

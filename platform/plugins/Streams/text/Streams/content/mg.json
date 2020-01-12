@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Vaovao {{relationDisplayType}} amin&#39;ny {{toTitle}}",
         "Streams\/relatedFrom\/*": "Nampiana tamin&#39;ny {{toTitle}} ho {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} no nanonona anao tao anaty hevitra",
-        "Streams\/call": "Miantso anao ny {{displayName}}"
+        "Streams\/call": "Miantso anao ny {{displayName}}",
+        "ManageEmailSubscriptions": "hitantana famandrihana mailaka",
+        "IfUnsubscribe": "Raha te-hanao unsubscribe ianao"
     },
     "invite": {
         "messageContent": "{{displayName}} manasa anao ho any {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Ny fanasana dia alefa amin&#39;ny isa misy anay, izay mbola tsy fantatrao ireo namanao. Araho amin&#39;ny lahatsoratra haingana mba hamela azy ireo fa ny fanasana dia avy aminao ary mangataka azy ireo mba hanindry ny rohy.",
             "confirm": "Ny fanasana dia alefa amin&#39;ny isa misy anay, izay mbola tsy fantatrao ireo namanao. Tianao ve ny hanaraka lahatsoratra haingana mba hamela azy ireo fa ilay fanasana dia avy aminao ary mangataka azy ireo mba hanindry ny rohy.",
-            "check": "Hey, nalefako fotsiny ianao ho an&#39;ny {{app}} app. Azafady azafady ny sms ary tsindrio ny rohy!"
+            "check": "Hey, nalefako fotsiny ianao ho an&#39;ny {{app}} app. Azafady azafady ny sms ary tsindrio ny rohy!",
+            "CheckYourMobile": "Azafady zahao ny SMS ary araho ny toromarika!"
         },
         "email": {
             "alert": "Ny fanasana dia alefa avy amin&#39;ny faritra misy anay, izay mbola tsy fantatr&#39;ireo namanao. Araho amin&#39;ny lahatsoratra haingana mba hamela azy ireo fa ny fanasana dia avy aminao ary mangataka azy ireo mba hanindry ny rohy.",
             "confirm": "Ny fanasana dia alefa avy amin&#39;ny faritra misy anay, izay mbola tsy fantatr&#39;ireo namanao. Tianao ve ny hanaraka lahatsoratra haingana mba hamela azy ireo fa ilay fanasana dia avy aminao ary mangataka azy ireo mba hanindry ny rohy.",
             "subject": "Nahazo fanasana ve ianao?",
-            "body": "Hey, nalefako fotsiny ianao ho an&#39;ny {{app}} app. Azafady azafady ny mailakao ary tsindrio ny rohy ao!"
+            "body": "Hey, nalefako fotsiny ianao ho an&#39;ny {{app}} app. Azafady azafady ny mailakao ary tsindrio ny rohy ao!",
+            "CheckYourEmail": "Azafady mba jereo ny mailaka ary araho ny torolalana!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Ampiasao ny mikrô",
             "cameraBtn": "Azafady ny fakantsary",
             "cameraAndMicrophoneBtn": "Ampiasao ny fakan-tsary sy ny mikrô"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "torolalana",
+            "permissionDenied": "Tsy nahazo alàlana ny {{kind}}. Ampiasao ireto manaraka ireto:",
+            "point1": "Mandehana any amin&#39;ny &quot;Settings&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Privacy and security&quot; -&gt; &quot;Tetikasa toerana&quot; -&gt; &quot;Camera&quot; na &quot;Site setting&quot; -&gt; &quot;Mikrofon&quot;",
+            "point2": "Esory ny {{hostname}} ao amin&#39;ny lisitra &quot;Block&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "torolalana",
+            "permissionDenied": "Tsy nahazo alàlana ny {{kind}}. Azafady avereno indray ity pejy ity ary hamafiso ny fidirana amin&#39;ny {{kind}} hiditra ao amin&#39;ny federasiona."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "torolalana",
+            "permissionDenied": "Tsy nahazo alàlana ny {{kind}}. Ampiasao ireto manaraka ireto:",
+            "point1": "Mandehana any amin&#39;ny Android Settings",
+            "point2": "Sokafy ny &quot;Apps &amp; fampilazana&quot;",
+            "point3": "Jereo &quot;{{communityName}}&quot; &quot;ary sokafy",
+            "point4": "Tap ny fahazoan-dàlana",
+            "point5": "Azafady ny {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "torolalana",
+            "permissionDenied": "Tsy nahazo alàlana ny {{kind}}. Ampiasao ireto manaraka ireto:",
+            "point1": "Mandehana any amin&#39;ny fampiasa iOS anao",
+            "point2": "Sokafy ny &quot;tsiambaratelo&quot;",
+            "point3": "Jereo {{kind}} ary sokafy",
+            "point4": "Jereo &quot;{{communityName}}&quot; ary avelao"
+        },
+        "notices": {
+            "youJoinedRoom": "Niditra tao amin&#39;ilay efitrano ianao",
+            "joining": "Mampiditra: {{userName}}",
+            "sbLeftRoom": "{{userName}} nandao ny efitrano",
+            "youLeftRoom": "Nandao ny efitrano ianao",
+            "codeCopied": "Nandao ny efitrano ianao",
+            "sbBeganFbLive": "Nanomboka nandefa ity antso ity tao amin&#39;ny Facebook ny {{userName}}",
+            "sbStoppedFbLive": "{{userName}} dia nijanona tsy nandefa ity antso ity tao amin&#39;ny Facebook",
+            "youBeganFbLive": "Nanomboka nandefa ity antso ity tao amin&#39;ny Facebook ianao",
+            "youStoppedFbLive": "Nijanona ny fandefasana ity antso ity tao amin&#39;ny Facebook ianao",
+            "linkCopiedToCb": "Rohy azo adika amin&#39;ny takelaka",
+            "codeCopiedToCb": "Kaody azo adika amin&#39;ny takelaka",
+            "userHasNoVideo": "Tsy mandray horonantsary ny mpandray anjara"
+        },
+        "settingsPopup": {
+            "webCamera": "Web Camera",
+            "screenSharing": "Fizarana fakantsary",
+            "shareAnotherScreen": "Mizarà efijery hafa",
+            "turnOffCameras": "Tapaho ny fakantsary rehetra",
+            "startFBLive": "Atombohy amin&#39;ny Livestream Facebook",
+            "stopFBLive": "Atsaharo ny onjam-pifandraisana Facebook",
+            "fbLiveTitle": "Live Lohateny",
+            "fbLiveDescription": "Famaritana mivantana",
+            "fbOnlyMeLiveAccess": "Izaho irery",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "fbStartLive": "Mandehana Live",
+            "fbStopLive": "Fiafarana farany",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy"
+        },
+        "participantsPopup": {
+            "disconnect": "elektrônika",
+            "floatingScreens": "Pikantsary mitsingevana",
+            "tiledScreens": "Pikantsary misy lamba",
+            "loudestExceptMe": "Mihoatra ahy indrindra",
+            "maximizeLoudest": "Fampivoarana avo indrindra",
+            "staticMaximized": "Static Maximized",
+            "manual": "Manual"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Antso tena-fotoana",
             "description": "antso an-tsary \/ audio tena ora"
         }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "famandrihana",
+        "Participants": "Ireo mpandray anjara",
+        "AreYouSureRemoveIdentifier": "Azo antoka ve ny hanaisotra izany famantarana izany?",
+        "AreYouSureUnsubscribeIdentifier": "Azo antoka ve fa soratana io famantarana io? Hamadika ny fampandrenesana an&#39;io mpamantatra io.",
+        "AreYouSureUnsubscribeDevice": "Azo antoka ve fa tsy mandika an&#39;io fitaovana io ianao? Hamadika ny fampandrenesana an&#39;io fitaovana io.",
+        "Identifiers": "Identifiers",
+        "Devices": "fitaovana",
+        "Streams": "mikoriana"
     }
 }

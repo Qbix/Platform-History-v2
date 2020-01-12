@@ -119,6 +119,7 @@ if ($app) {
 		}
 	};
 
+	echo PHP_EOL . PHP_EOL . "Translating $textFolder" . PHP_EOL;
 	$translate = new Q_Translate($options);
 	$translate->saveAll();
 }

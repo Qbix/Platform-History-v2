@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Kutsed saadetakse meie numbrist, mida teie sõbrad veel ei tunne. Jälgige kiiret teksti, et teada saada, et kutse tuli sinult, paludes neil linki klõpsata.",
             "confirm": "Kutsed saadetakse meie numbrist, mida teie sõbrad veel ei tunne. Kas soovite kiiret teksti jälgida, et anda neile teada, et kutse tuli sinult, paludes neil linki klõpsata.",
-            "check": "Hei, ma lihtsalt saatsin teile kutse {{app}} rakendusse. Palun kontrollige oma SMS-i ja klõpsake linki!"
+            "check": "Hei, ma lihtsalt saatsin teile kutse {{app}} rakendusse. Palun kontrollige oma SMS-i ja klõpsake linki!",
+            "CheckYourMobile": "Kontrollige SMS-i ja järgige juhiseid!"
         },
         "email": {
             "alert": "Kutsed saadetakse meie domeenist, mida teie sõbrad veel ei tunne. Jälgige kiiret teksti, et teada saada, et kutse tuli sinult, paludes neil linki klõpsata.",
             "confirm": "Kutsed saadetakse meie domeenist, mida teie sõbrad veel ei tunne. Kas soovite kiiret teksti jälgida, et anda neile teada, et kutse tuli sinult, paludes neil linki klõpsata.",
             "subject": "Kas sa said kutse?",
-            "body": "Hei, ma lihtsalt saatsin teile kutse {{app}} rakendusse. Palun kontrollige oma e-posti ja klõpsake seal olevat linki!"
+            "body": "Hei, ma lihtsalt saatsin teile kutse {{app}} rakendusse. Palun kontrollige oma e-posti ja klõpsake seal olevat linki!",
+            "CheckYourEmail": "Kontrollige oma e-posti ja järgige juhiseid!"
         }
     },
     "participating": {
         "Title": "Pealkiri",
         "Subscribed": "Tellitud",
-        "Participants": "Osalejad"
+        "Participants": "Osalejad",
+        "AreYouSureRemoveIdentifier": "Kas olete selle identifikaatori kindlasti eemaldanud?",
+        "AreYouSureUnsubscribeIdentifier": "Kas olete kindlasti selle identifikaatori tellimuse tühistanud? See lülitab selle identifikaatori teatised välja.",
+        "AreYouSureUnsubscribeDevice": "Kas olete kindlasti selle seadme tellimuse tühistanud? See lülitab selle seadme märguanded välja.",
+        "Identifiers": "Identifitseerijad",
+        "Devices": "Seadmed",
+        "Streams": "Vood"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Luba mikrofon",
             "cameraBtn": "Luba kaamera",
             "cameraAndMicrophoneBtn": "Luba kaamera ja mikrofon"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Juhised",
+            "permissionDenied": "Ettevõtte {{kind}} luba on keelatud. Selle kasutamiseks järgige neid samme:",
+            "point1": "Minge jaotisse &quot;Seaded&quot; -&gt; &quot;Täpsemad&quot; -&gt; &quot;Privaatsus ja turvalisus&quot; -&gt; &quot;Saidi seaded&quot; -&gt; &quot;Kaamera&quot; või &quot;Saidi seaded&quot; -&gt; &quot;Mikrofon&quot;",
+            "point2": "Eemaldage {{hostname}} loendist Blokeeri"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Juhised",
+            "permissionDenied": "Ettevõtte {{kind}} luba on keelatud. Laadige see leht uuesti ja kinnitage juurdepääs saidile {{kind}}, et konverentsiga liituda."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Juhised",
+            "permissionDenied": "Ettevõtte {{kind}} luba on keelatud. Selle kasutamiseks järgige neid samme:",
+            "point1": "Minge oma Androidi seadetesse",
+            "point2": "Avage „Rakendused ja teatised”",
+            "point3": "Leidke &quot;{{communityName}}&quot; ja avage see",
+            "point4": "Puudutage ikooni Permissions",
+            "point5": "Luba {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Juhised",
+            "permissionDenied": "Ettevõtte {{kind}} luba on keelatud. Selle kasutamiseks järgige neid samme:",
+            "point1": "Minge oma iOS-i seadetesse",
+            "point2": "Avage &quot;Privaatsus&quot;",
+            "point3": "Leidke {{kind}} ja avage see",
+            "point4": "Leidke &quot;{{communityName}}&quot; ja lubage"
+        },
+        "notices": {
+            "youJoinedRoom": "Liitusite toaga",
+            "joining": "Liitumine: {{userName}}",
+            "sbLeftRoom": "{{userName}} lahkus ruumist",
+            "youLeftRoom": "Sa lahkusid ruumist",
+            "codeCopied": "Sa lahkusid ruumist",
+            "sbBeganFbLive": "{{userName}} hakkas seda kõnet Facebookis levitama",
+            "sbStoppedFbLive": "{{userName}} peatas selle kõne edastamise Facebookis",
+            "youBeganFbLive": "Alustasite selle kõne edastamist Facebookis",
+            "youStoppedFbLive": "Lõpetasite selle kõne edastamise Facebookis",
+            "linkCopiedToCb": "Link kopeeritakse lõikelauale",
+            "codeCopiedToCb": "Kood kopeeriti lõikelauale",
+            "userHasNoVideo": "Osalejal pole videot"
+        },
+        "settingsPopup": {
+            "webCamera": "Veebikaamera",
+            "screenSharing": "Ekraani jagamine",
+            "shareAnotherScreen": "Jagage teist ekraani",
+            "turnOffCameras": "Lülitage kõik kaamerad välja",
+            "startFBLive": "Käivitage Facebook Livestream",
+            "stopFBLive": "Peatage Facebook Livestream",
+            "fbLiveTitle": "Reaalajas pealkiri",
+            "fbLiveDescription": "Reaalajas kirjeldus",
+            "fbOnlyMeLiveAccess": "Ainult mina",
+            "fbFriendsAccess": "Sõbrad",
+            "fbPublicAccess": "Avalik",
+            "fbStartLive": "Mine elama",
+            "fbStopLive": "Lõpeta otseülekanne",
+            "fbEmbedCode": "Manusta",
+            "copy": "Kopeeri"
+        },
+        "participantsPopup": {
+            "disconnect": "Katkesta ühendus",
+            "floatingScreens": "Ujuvad ekraanid",
+            "tiledScreens": "Plaaditud ekraanid",
+            "loudestExceptMe": "Kõige valjem, välja arvatud mina",
+            "maximizeLoudest": "Maksimeeri valjem",
+            "staticMaximized": "Staatiline maksimeeritud",
+            "manual": "Käsitsi"
         }
     },
     "types": {

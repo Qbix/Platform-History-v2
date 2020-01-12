@@ -102,5 +102,11 @@
         "noLongerUsing": "Chan eil thu tuilleadh ceangailte ri {{platform}} mar",
         "doAuth": "Log a-steach leis a ’chunntas seo",
         "doSwitch": "Atharraich chun chunntas seo"
+    },
+    "roles": {
+        "Owner": "Sealbhadair",
+        "Admin": "Rianachd",
+        "Member": "Ball",
+        "Guest": "Guest"
     }
 }

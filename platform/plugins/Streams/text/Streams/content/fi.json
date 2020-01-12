@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Kutsut lähetetään numerostamme, jota ystäväsi eivät vielä tunnista. Seuraa nopeaa tekstiä, jotta he tietävät, että kutsu tuli sinulta, pyytäen heitä napsauttamaan linkkiä.",
             "confirm": "Kutsut lähetetään numerostamme, jota ystäväsi eivät vielä tunnista. Haluatko seurata nopeaa tekstiä, jotta he tietävät, että kutsu tuli sinulta, pyytäen heitä napsauttamaan linkkiä.",
-            "check": "Lähetin juuri sinulle kutsun {{app}} -sovellukseen. Tarkista sms ja napsauta linkkiä!"
+            "check": "Lähetin juuri sinulle kutsun {{app}} -sovellukseen. Tarkista sms ja napsauta linkkiä!",
+            "CheckYourMobile": "Tarkista tekstiviesti ja noudata ohjeita!"
         },
         "email": {
             "alert": "Kutsut lähetetään verkkotunnuksestamme, jota ystäväsi eivät vielä tunnista. Seuraa nopeaa tekstiä, jotta he tietävät, että kutsu tuli sinulta, pyytäen heitä napsauttamaan linkkiä.",
             "confirm": "Kutsut lähetetään verkkotunnuksestamme, jota ystäväsi eivät vielä tunnista. Haluatko seurata nopeaa tekstiä, jotta he tietävät, että kutsu tuli sinulta, pyytäen heitä napsauttamaan linkkiä.",
             "subject": "Saitko kutsun?",
-            "body": "Lähetin juuri sinulle kutsun {{app}} -sovellukseen. Tarkista sähköpostiosoitteesi ja napsauta siellä olevaa linkkiä!"
+            "body": "Lähetin juuri sinulle kutsun {{app}} -sovellukseen. Tarkista sähköpostiosoitteesi ja napsauta siellä olevaa linkkiä!",
+            "CheckYourEmail": "Tarkista sähköpostisi ja noudata ohjeita!"
         }
     },
     "participating": {
         "Title": "otsikko",
         "Subscribed": "Tilatut",
-        "Participants": "osallistujien"
+        "Participants": "osallistujien",
+        "AreYouSureRemoveIdentifier": "Haluatko varmasti poistaa tämän tunnisteen?",
+        "AreYouSureUnsubscribeIdentifier": "Oletko varma, että peruutat tämän tunnisteen tilauksen? Se poistaa ilmoitukset tämän tunnisteen käytöstä.",
+        "AreYouSureUnsubscribeDevice": "Haluatko varmasti lopettaa tämän laitteen tilauksen? Se poistaa tämän laitteen ilmoitukset käytöstä.",
+        "Identifiers": "tunnisteet",
+        "Devices": "Laitteet",
+        "Streams": "Streams"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Ota mikrofoni käyttöön",
             "cameraBtn": "Ota kamera käyttöön",
             "cameraAndMicrophoneBtn": "Ota kamera ja mikrofoni käyttöön"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Ohjeet",
+            "permissionDenied": "Käyttäjän {{kind}} käyttölupa evätty. Voit käyttää sitä noudattamalla näitä vaiheita:",
+            "point1": "Siirry kohtaan &quot;Asetukset&quot; -&gt; &quot;Lisäasetukset&quot; -&gt; &quot;Tietosuoja ja suojaus&quot; -&gt; &quot;Sivuston asetukset&quot; -&gt; &quot;Kamera&quot; tai &quot;Sivuston asetukset&quot; -&gt; &quot;Mikrofoni&quot;",
+            "point2": "Poista {{hostname}} Estä-luettelosta"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Ohjeet",
+            "permissionDenied": "Käyttäjän {{kind}} käyttölupa evätty. Lataa tämä sivu uudelleen ja vahvista pääsy osoitteeseen {{kind}} liittyäksesi konferenssiin."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Ohjeet",
+            "permissionDenied": "Käyttäjän {{kind}} käyttölupa evätty. Voit käyttää sitä noudattamalla näitä vaiheita:",
+            "point1": "Siirry Android-asetuksiin",
+            "point2": "Avaa &quot;Sovellukset ja ilmoitukset&quot;",
+            "point3": "Etsi &quot;{{communityName}}&quot; ja avaa se",
+            "point4": "Napauta Käyttöoikeudet",
+            "point5": "Ota {{kind}} käyttöön"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Ohjeet",
+            "permissionDenied": "Käyttäjän {{kind}} käyttölupa evätty. Voit käyttää sitä noudattamalla näitä vaiheita:",
+            "point1": "Siirry iOS-asetuksiin",
+            "point2": "Avaa &quot;Tietosuoja&quot;",
+            "point3": "Etsi {{kind}} ja avaa se",
+            "point4": "Etsi &quot;{{communityName}}&quot; ja ota se käyttöön"
+        },
+        "notices": {
+            "youJoinedRoom": "Liityit huoneeseen",
+            "joining": "Liittyminen: {{userName}}",
+            "sbLeftRoom": "{{userName}} lähti huoneesta",
+            "youLeftRoom": "Lähdit huoneesta",
+            "codeCopied": "Lähdit huoneesta",
+            "sbBeganFbLive": "{{userName}} aloitti tämän puhelun lähettämisen Facebookissa",
+            "sbStoppedFbLive": "{{userName}} lopetti tämän puhelun lähettämisen Facebookissa",
+            "youBeganFbLive": "Aloitit tämän puhelun lähettämisen Facebookissa",
+            "youStoppedFbLive": "Lopetit tämän puhelun lähettämisen Facebookissa",
+            "linkCopiedToCb": "Linkki kopioitiin leikepöydälle",
+            "codeCopiedToCb": "Koodi kopioitiin leikepöydälle",
+            "userHasNoVideo": "Osallistujalla ei ole videota"
+        },
+        "settingsPopup": {
+            "webCamera": "Nettikamera",
+            "screenSharing": "Näytön jakaminen",
+            "shareAnotherScreen": "Jaa toinen näyttö",
+            "turnOffCameras": "Sammuta kaikki kamerat",
+            "startFBLive": "Käynnistä Facebook Livestream",
+            "stopFBLive": "Lopeta Facebook Livestream",
+            "fbLiveTitle": "Live-otsikko",
+            "fbLiveDescription": "Live kuvaus",
+            "fbOnlyMeLiveAccess": "Vain minä",
+            "fbFriendsAccess": "Ystävät",
+            "fbPublicAccess": "Julkinen",
+            "fbStartLive": "Elä",
+            "fbStopLive": "Lopeta live",
+            "fbEmbedCode": "Upottaa",
+            "copy": "Kopio"
+        },
+        "participantsPopup": {
+            "disconnect": "Katkaista",
+            "floatingScreens": "Kelluvat näytöt",
+            "tiledScreens": "Laatoitetut näytöt",
+            "loudestExceptMe": "Lojain paitsi minä",
+            "maximizeLoudest": "Maksimoi Loudest",
+            "staticMaximized": "Staattinen maksimoitu",
+            "manual": "manuaalinen"
         }
     },
     "types": {

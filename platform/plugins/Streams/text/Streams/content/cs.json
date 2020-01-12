@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Pozvánky jsou zasílány z našeho čísla, které vaši přátelé ještě nepoznají. Následujte rychlý text a dejte jim vědět, že pozvání přišlo od vás, a požádejte je, aby klikli na odkaz.",
             "confirm": "Pozvánky jsou zasílány z našeho čísla, které vaši přátelé ještě nepoznají. Chcete následovat rychlý text a informovat je, že pozvání přišlo od vás, a požádat je, aby klikli na odkaz.",
-            "check": "Hej, právě jsem vám poslal pozvánku do aplikace {{app}}. Zkontrolujte prosím sms a klikněte na odkaz!"
+            "check": "Hej, právě jsem vám poslal pozvánku do aplikace {{app}}. Zkontrolujte prosím sms a klikněte na odkaz!",
+            "CheckYourMobile": "Zkontrolujte SMS a postupujte podle pokynů!"
         },
         "email": {
             "alert": "Pozvánky jsou odesílány z naší domény, kterou vaši přátelé ještě nepoznají. Následujte rychlý text a dejte jim vědět, že pozvání přišlo od vás, a požádejte je, aby klikli na odkaz.",
             "confirm": "Pozvánky jsou odesílány z naší domény, kterou vaši přátelé ještě nepoznají. Chcete následovat rychlý text a informovat je, že pozvání přišlo od vás, a požádat je, aby klikli na odkaz.",
             "subject": "Dostali jste pozvání?",
-            "body": "Hej, právě jsem vám poslal pozvánku do aplikace {{app}}. Zkontrolujte prosím svůj e-mail a klikněte na odkaz!"
+            "body": "Hej, právě jsem vám poslal pozvánku do aplikace {{app}}. Zkontrolujte prosím svůj e-mail a klikněte na odkaz!",
+            "CheckYourEmail": "Zkontrolujte prosím svůj e-mail a postupujte podle pokynů!"
         }
     },
     "participating": {
         "Title": "Titul",
         "Subscribed": "Přihlásit se",
-        "Participants": "Účastníci"
+        "Participants": "Účastníci",
+        "AreYouSureRemoveIdentifier": "Opravdu jste tento identifikátor odstranili?",
+        "AreYouSureUnsubscribeIdentifier": "Jste si jisti, že jste tento identifikátor odhlásili? Vypne oznámení k tomuto identifikátoru.",
+        "AreYouSureUnsubscribeDevice": "Jste si jisti, že chcete toto zařízení odhlásit? Vypne oznámení do tohoto zařízení.",
+        "Identifiers": "Identifikátory",
+        "Devices": "Zařízení",
+        "Streams": "Proudy"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Povolit mikrofon",
             "cameraBtn": "Povolit kameru",
             "cameraAndMicrophoneBtn": "Povolit kameru a mikrofon"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instrukce",
+            "permissionDenied": "Povolení pro {{kind}} bylo zamítnuto. Chcete-li jej použít, postupujte takto:",
+            "point1": "Přejděte na „Nastavení“ -&gt; „Upřesnit“ -&gt; „Ochrana soukromí a zabezpečení“ -&gt; „Nastavení webu“ -&gt; „Fotoaparát“ nebo „Nastavení webu“ -&gt; „Mikrofon“",
+            "point2": "Odebrat {{hostname}} ze seznamu &quot;Blokovat&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instrukce",
+            "permissionDenied": "Povolení pro {{kind}} bylo zamítnuto. Znovu načtěte tuto stránku a potvrďte přístup na stránku {{kind}} a připojte se ke konferenci."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instrukce",
+            "permissionDenied": "Povolení pro {{kind}} bylo zamítnuto. Chcete-li jej použít, postupujte takto:",
+            "point1": "Přejděte do nastavení Androidu",
+            "point2": "Otevřete „Aplikace a oznámení“",
+            "point3": "Najděte &quot;{{communityName}}&quot; a otevřete jej",
+            "point4": "Klepněte na Oprávnění",
+            "point5": "Povolit {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instrukce",
+            "permissionDenied": "Povolení pro {{kind}} bylo zamítnuto. Chcete-li jej použít, postupujte takto:",
+            "point1": "Přejděte do nastavení iOS",
+            "point2": "Otevřete „Ochrana osobních údajů“",
+            "point3": "Najděte {{kind}} a otevřete jej",
+            "point4": "Najděte &quot;{{communityName}}&quot; a povolte"
+        },
+        "notices": {
+            "youJoinedRoom": "Připojili jste se do místnosti",
+            "joining": "Připojování: {{userName}}",
+            "sbLeftRoom": "{{userName}} opustil místnost",
+            "youLeftRoom": "Opustil jsi pokoj",
+            "codeCopied": "Opustil jsi pokoj",
+            "sbBeganFbLive": "{{userName}} začal tento hovor vysílat na Facebooku",
+            "sbStoppedFbLive": "{{userName}} přestal vysílat tento hovor na Facebooku",
+            "youBeganFbLive": "Tento hovor jste začali vysílat na Facebooku",
+            "youStoppedFbLive": "Tento hovor jste přestali vysílat na Facebooku",
+            "linkCopiedToCb": "Odkaz byl zkopírován do schránky",
+            "codeCopiedToCb": "Kód zkopírován do schránky",
+            "userHasNoVideo": "Účastník nemá žádné video"
+        },
+        "settingsPopup": {
+            "webCamera": "Webová kamera",
+            "screenSharing": "Sdílení obrazovky",
+            "shareAnotherScreen": "Sdílejte další obrazovku",
+            "turnOffCameras": "Vypněte všechny kamery",
+            "startFBLive": "Spusťte Facebook Livestream",
+            "stopFBLive": "Zastavte Livestream na Facebooku",
+            "fbLiveTitle": "Živý název",
+            "fbLiveDescription": "Živý popis",
+            "fbOnlyMeLiveAccess": "Jen já",
+            "fbFriendsAccess": "Přátelé",
+            "fbPublicAccess": "Veřejnost",
+            "fbStartLive": "Běž žít",
+            "fbStopLive": "End Live",
+            "fbEmbedCode": "Vložit",
+            "copy": "kopírovat"
+        },
+        "participantsPopup": {
+            "disconnect": "Odpojit",
+            "floatingScreens": "Plovoucí obrazovky",
+            "tiledScreens": "Kachlová obrazovky",
+            "loudestExceptMe": "Nejhlasitější kromě mě",
+            "maximizeLoudest": "Maximalizujte nejhlasitější",
+            "staticMaximized": "Statická maximalizace",
+            "manual": "Manuál"
         }
     },
     "types": {

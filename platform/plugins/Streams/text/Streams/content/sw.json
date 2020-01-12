@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Mwaliko hutumwa kutoka kwa nambari yetu, ambayo marafiki wako bado hawajui. Fuatilia na maandishi ya haraka ili kuwawezesha kujua mwaliko ulikuja kutoka kwako, ukawaomba kubofya kiungo.",
             "confirm": "Mwaliko hutumwa kutoka kwa nambari yetu, ambayo marafiki wako bado hawajui. Ungependa kufuatilia na maandishi ya haraka ili kuwajulishe mwaliko ulikuja kutoka kwako, ukawaomba kubofya kiungo.",
-            "check": "Hey, nilikupeleka mwaliko kwenye programu ya {{app}}. Tafadhali angalia sms yako na bofya kiungo!"
+            "check": "Hey, nilikupeleka mwaliko kwenye programu ya {{app}}. Tafadhali angalia sms yako na bofya kiungo!",
+            "CheckYourMobile": "Tafadhali angalia SMS na ufuate maagizo!"
         },
         "email": {
             "alert": "Mwaliko hutumwa kutoka kwa kikoa chetu, ambacho marafiki zako bado hawajui. Fuatilia na maandishi ya haraka ili kuwawezesha kujua mwaliko ulikuja kutoka kwako, ukawaomba kubofya kiungo.",
             "confirm": "Mwaliko hutumwa kutoka kwa kikoa chetu, ambacho marafiki zako bado hawajui. Ungependa kufuatilia na maandishi ya haraka ili kuwajulishe mwaliko ulikuja kutoka kwako, ukawaomba kubofya kiungo.",
             "subject": "Umepata mwaliko?",
-            "body": "Hey, nilikupeleka mwaliko kwenye programu ya {{app}}. Tafadhali angalia barua pepe yako na bofya kiungo huko!"
+            "body": "Hey, nilikupeleka mwaliko kwenye programu ya {{app}}. Tafadhali angalia barua pepe yako na bofya kiungo huko!",
+            "CheckYourEmail": "Tafadhali angalia barua pepe yako na fuata maagizo!"
         }
     },
     "participating": {
         "Title": "Kichwa",
         "Subscribed": "Imejiandikisha",
-        "Participants": "Washiriki"
+        "Participants": "Washiriki",
+        "AreYouSureRemoveIdentifier": "Je! Una uhakika wa kuondoa kitambulisho hiki?",
+        "AreYouSureUnsubscribeIdentifier": "Je! Una uhakika kujiandikisha kitambulisho hiki? Itafuta arifu kwa kitambulisho hiki.",
+        "AreYouSureUnsubscribeDevice": "Je! Una uhakika wa kujiandikisha kifaa hiki? Itafuta arifu kwa kifaa hiki.",
+        "Identifiers": "Vitambulisho",
+        "Devices": "Vifaa",
+        "Streams": "Mito"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Washa kipaza sauti",
             "cameraBtn": "Washa Kamera",
             "cameraAndMicrophoneBtn": "Washa Kamera na kipaza sauti"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Maagizo",
+            "permissionDenied": "Idhini ya {{kind}} iliyokataliwa. Ili kuitumia tafadhali fuata hatua hizi:",
+            "point1": "Nenda kwa &quot;Mipangilio&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Usiri na usalama&quot; -&gt; &quot;Mipangilio ya Tovuti&quot; -&gt; &quot;Kamera&quot; au &quot;Mipangilio ya Tovuti&quot; -&gt; &quot;Microphone&quot;",
+            "point2": "Ondoa {{hostname}} kwenye orodha ya &quot;Zuia&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Maagizo",
+            "permissionDenied": "Idhini ya {{kind}} iliyokataliwa. Tafadhali pakia ukurasa huu tena na uthibitishe upatikanaji wa {{kind}} ili ujiunge na mkutano huo."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Maagizo",
+            "permissionDenied": "Idhini ya {{kind}} iliyokataliwa. Ili kuitumia tafadhali fuata hatua hizi:",
+            "point1": "Nenda kwa Mipangilio yako ya Android",
+            "point2": "Fungua &quot;Programu na arifa&quot;",
+            "point3": "Pata &quot;{{communityName}} na ufungue",
+            "point4": "Gonga kwenye Ruhusa",
+            "point5": "Wezesha {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Maagizo",
+            "permissionDenied": "Idhini ya {{kind}} iliyokataliwa. Ili kuitumia tafadhali fuata hatua hizi:",
+            "point1": "Nenda kwa Mipangilio yako ya iOS",
+            "point2": "Fungua &quot;Usiri&quot;",
+            "point3": "Pata {{kind}} na ufungue",
+            "point4": "Tafuta &quot;{{communityName}}&quot; na uwezeshe"
+        },
+        "notices": {
+            "youJoinedRoom": "Ulijiunga na chumba",
+            "joining": "Kujiunga: {{userName}}",
+            "sbLeftRoom": "{{userName}} alitoka chumbani",
+            "youLeftRoom": "Uliondoka chumbani",
+            "codeCopied": "Uliondoka chumbani",
+            "sbBeganFbLive": "{{userName}} alianza kutangaza simu hii kwenye Facebook",
+            "sbStoppedFbLive": "{{userName}} aliacha kutangaza simu hii kwenye Facebook",
+            "youBeganFbLive": "Ulianza kutangaza simu hii kwenye Facebook",
+            "youStoppedFbLive": "Uliacha kutangaza simu hii kwenye Facebook",
+            "linkCopiedToCb": "Kiunga kilichonakiliwa kwa clipboard",
+            "codeCopiedToCb": "Nambari iliyonakiliwa kwa clipboard",
+            "userHasNoVideo": "Mshiriki hana video"
+        },
+        "settingsPopup": {
+            "webCamera": "Kamera ya Wavuti",
+            "screenSharing": "Kushiriki kwa skrini",
+            "shareAnotherScreen": "Shiriki skrini nyingine",
+            "turnOffCameras": "Zima kamera zote",
+            "startFBLive": "Anzisha Facebook Livestream",
+            "stopFBLive": "Acha Facebook Livestream",
+            "fbLiveTitle": "Kichwa cha moja kwa moja",
+            "fbLiveDescription": "Maelezo ya moja kwa moja",
+            "fbOnlyMeLiveAccess": "Ni mimi tu",
+            "fbFriendsAccess": "Marafiki",
+            "fbPublicAccess": "Umma",
+            "fbStartLive": "Nenda Moja kwa Moja",
+            "fbStopLive": "Mwisho Kuishi",
+            "fbEmbedCode": "Embed",
+            "copy": "Nakala"
+        },
+        "participantsPopup": {
+            "disconnect": "Kukata",
+            "floatingScreens": "Skrini za Kuelea",
+            "tiledScreens": "Skrini zilizo na Tiles",
+            "loudestExceptMe": "Mzito Ila mimi",
+            "maximizeLoudest": "Panua zaidi",
+            "staticMaximized": "Imesimamishwa sana",
+            "manual": "Mwongozo"
         }
     },
     "types": {

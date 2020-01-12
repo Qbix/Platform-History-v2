@@ -102,5 +102,11 @@
         "noLongerUsing": "Ba a haɗa ku da {{platform}} kamar",
         "doAuth": "Shiga ciki tare da wannan asusun",
         "doSwitch": "Canza shi zuwa wannan asusun"
+    },
+    "roles": {
+        "Owner": "Mai mallaka",
+        "Admin": "Admin",
+        "Member": "Memba",
+        "Guest": "Bako"
     }
 }

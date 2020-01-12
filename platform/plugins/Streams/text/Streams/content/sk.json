@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Pozvánky sa odosielajú z nášho čísla, ktoré vaši priatelia ešte nepoznajú. Nasledujte rýchly text, aby ste vedeli, že pozvanie prišlo od vás, a požiadajte ich, aby klikli na odkaz.",
             "confirm": "Pozvánky sa odosielajú z nášho čísla, ktoré vaši priatelia ešte nepoznajú. Chceli by ste nadviazať rýchly text, aby ste vedeli, že pozvanie prišlo od vás a požiadali ich, aby klikli na odkaz.",
-            "check": "Hej, práve som vám poslal pozvánku na aplikáciu {{app}}. Skontrolujte svoje SMS a kliknite na odkaz!"
+            "check": "Hej, práve som vám poslal pozvánku na aplikáciu {{app}}. Skontrolujte svoje SMS a kliknite na odkaz!",
+            "CheckYourMobile": "Skontrolujte SMS a postupujte podľa pokynov!"
         },
         "email": {
             "alert": "Pozvánky sa odosielajú z našej domény, ktorú vaši priatelia ešte nepoznajú. Nasledujte rýchly text, aby ste vedeli, že pozvanie prišlo od vás, a požiadajte ich, aby klikli na odkaz.",
             "confirm": "Pozvánky sa odosielajú z našej domény, ktorú vaši priatelia ešte nepoznajú. Chceli by ste nadviazať rýchly text, aby ste vedeli, že pozvanie prišlo od vás a požiadali ich, aby klikli na odkaz.",
             "subject": "Dostali ste pozvanie?",
-            "body": "Hej, práve som vám poslal pozvánku na aplikáciu {{app}}. Skontrolujte svoj e-mail a kliknite na odkaz."
+            "body": "Hej, práve som vám poslal pozvánku na aplikáciu {{app}}. Skontrolujte svoj e-mail a kliknite na odkaz.",
+            "CheckYourEmail": "Skontrolujte svoj e-mail a postupujte podľa pokynov!"
         }
     },
     "participating": {
         "Title": "nadpis",
         "Subscribed": "upísaný",
-        "Participants": "účastníci"
+        "Participants": "účastníci",
+        "AreYouSureRemoveIdentifier": "Naozaj chcete odstrániť tento identifikátor?",
+        "AreYouSureUnsubscribeIdentifier": "Naozaj chcete zrušiť odber tohto identifikátora? Vypne upozornenia na tento identifikátor.",
+        "AreYouSureUnsubscribeDevice": "Naozaj chcete zrušiť odber tohto zariadenia? Vypne upozornenia pre toto zariadenie.",
+        "Identifiers": "identifikátory",
+        "Devices": "prístroje",
+        "Streams": "prúdy"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Povoliť mikrofón",
             "cameraBtn": "Povoliť kameru",
             "cameraAndMicrophoneBtn": "Povoliť fotoaparát a mikrofón"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Inštrukcie",
+            "permissionDenied": "Povolenie pre {{kind}} bolo zamietnuté. Ak ju chcete použiť, postupujte takto:",
+            "point1": "Prejdite na „Nastavenia“ -&gt; „Rozšírené“ -&gt; „Ochrana osobných údajov a zabezpečenie“ -&gt; „Nastavenia stránok“ -&gt; „Fotoaparát“ alebo „Nastavenia stránok“ -&gt; „Mikrofón“.",
+            "point2": "Odstrániť {{hostname}} zo zoznamu &quot;Blokovať&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Inštrukcie",
+            "permissionDenied": "Povolenie pre {{kind}} bolo zamietnuté. Znova načítajte túto stránku a potvrďte prístup na konferenciu {{kind}}."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Inštrukcie",
+            "permissionDenied": "Povolenie pre {{kind}} bolo zamietnuté. Ak ju chcete použiť, postupujte takto:",
+            "point1": "Prejdite do nastavení systému Android",
+            "point2": "Otvorte položku „Aplikácie a upozornenia“",
+            "point3": "Vyhľadajte „{{communityName}}“ a otvorte ho",
+            "point4": "Klepnite na Povolenia",
+            "point5": "Povoliť {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Inštrukcie",
+            "permissionDenied": "Povolenie pre {{kind}} bolo zamietnuté. Ak ju chcete použiť, postupujte takto:",
+            "point1": "Prejdite do nastavení iOS",
+            "point2": "Otvorte „Ochrana osobných údajov“",
+            "point3": "Vyhľadajte {{kind}} a otvorte ho",
+            "point4": "Vyhľadajte a povoľte znak {{communityName}}"
+        },
+        "notices": {
+            "youJoinedRoom": "Pripojili ste sa do miestnosti",
+            "joining": "Pripája sa: {{userName}}",
+            "sbLeftRoom": "{{userName}} opustil miestnosť",
+            "youLeftRoom": "Opustili ste miestnosť",
+            "codeCopied": "Opustili ste miestnosť",
+            "sbBeganFbLive": "{{userName}} začal tento hovor vysielať na Facebooku",
+            "sbStoppedFbLive": "{{userName}} zastavil vysielanie tohto hovoru na Facebooku",
+            "youBeganFbLive": "Tento hovor ste začali vysielať na Facebooku",
+            "youStoppedFbLive": "Tento hovor ste prestali vysielať na Facebooku",
+            "linkCopiedToCb": "Odkaz bol skopírovaný do schránky",
+            "codeCopiedToCb": "Kód bol skopírovaný do schránky",
+            "userHasNoVideo": "Účastník nemá žiadne video"
+        },
+        "settingsPopup": {
+            "webCamera": "Webová kamera",
+            "screenSharing": "Zdieľanie obrazovky",
+            "shareAnotherScreen": "Zdieľajte ďalšiu obrazovku",
+            "turnOffCameras": "Vypnite všetky kamery",
+            "startFBLive": "Spustiť Facebook Livestream",
+            "stopFBLive": "Zastavte Livestream na Facebooku",
+            "fbLiveTitle": "Živý názov",
+            "fbLiveDescription": "Živý popis",
+            "fbOnlyMeLiveAccess": "Iba ja",
+            "fbFriendsAccess": "Priatelia",
+            "fbPublicAccess": "verejnosť",
+            "fbStartLive": "Choď žiť",
+            "fbStopLive": "End Live",
+            "fbEmbedCode": "vložiť",
+            "copy": "kópie"
+        },
+        "participantsPopup": {
+            "disconnect": "odpojiť",
+            "floatingScreens": "Plávajúce obrazovky",
+            "tiledScreens": "Kachľové obrazovky",
+            "loudestExceptMe": "Najhlasnejšie okrem mňa",
+            "maximizeLoudest": "Maximalizujte hlasitosť",
+            "staticMaximized": "Statická maximalizácia",
+            "manual": "Manuálny"
         }
     },
     "types": {

@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Болумушту {{relationDisplayType}} {{жылы 1000}}",
         "Streams\/relatedFrom\/*": "кошулду {{toTitle}} {{катары 1000}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} комментарий сага айтылган",
-        "Streams\/call": "{{displayName}}, сени чакырып жатат"
+        "Streams\/call": "{{displayName}}, сени чакырып жатат",
+        "ManageEmailSubscriptions": "электрондук почта жазылууларды башкаруу",
+        "IfUnsubscribe": "Эгер сиз жазылууну каалайм"
     },
     "invite": {
         "messageContent": "{{displayName}} чакырды {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Чакыруу сиздин Досторду тааныган жок, биздин санына чейин берилет. шилтемени чыкылдатып, аларды сурап, аларды чакыруу сага келген билип алсын үчүн тез текст менен керек.",
             "confirm": "Чакыруу сиздин Досторду тааныган жок, биздин санына чейин берилет. Эгер шилтемени чыкылдатканда, аларды сурап, аларды чакыруу сага келген билип алсын үчүн тез текст менен ылайык келет.",
-            "check": "Салам, мен сиз {{app}} колдонмосун чакыруу жиберди. Сураныч, SMS текшерип, шилтемени чыкылдатып!"
+            "check": "Салам, мен сиз {{app}} колдонмосун чакыруу жиберди. Сураныч, SMS текшерип, шилтемени чыкылдатып!",
+            "CheckYourMobile": "Сураныч, SMS текшерүү жана көрсөтмөлөрүнө ылайык иш!"
         },
         "email": {
             "alert": "Чакыруу сиздин Досторду тааныган жок, биздин доменде жиберген жатышат. шилтемени чыкылдатып, аларды сурап, аларды чакыруу сага келген билип алсын үчүн тез текст менен керек.",
             "confirm": "Чакыруу сиздин Досторду тааныган жок, биздин доменде жиберген жатышат. Эгер шилтемени чыкылдатканда, аларды сурап, аларды чакыруу сага келген билип алсын үчүн тез текст менен ылайык келет.",
             "subject": "Эгер чакыруу ала беле?",
-            "body": "Салам, мен сиз {{app}} колдонмосун чакыруу жиберди. Сураныч, электрондук почта текшерип, ошол шилтемени чыкылдатып!"
+            "body": "Салам, мен сиз {{app}} колдонмосун чакыруу жиберди. Сураныч, электрондук почта текшерип, ошол шилтемени чыкылдатып!",
+            "CheckYourEmail": "Сураныч, электрондук жана андан көрсөтмөлөрдү текшерүү!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "иштетүү Наушник",
             "cameraBtn": "иштетүү Камера",
             "cameraAndMicrophoneBtn": "Камера жана Наушник иштетүү"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "көрсөтмө",
+            "permissionDenied": "Уруксат алуу үчүн {{kind}} четке какты. Аны колдонуу үчүн төмөнкү кадамдарды суранабыз:",
+            "point1": "&quot;Жөндөөлөргө&quot; Go -&gt; &quot;Advanced&quot; -&gt; &quot;Жашыруун жана коопсуздук&quot; -&gt; &quot;сайты Орнотуулар&quot; -&gt; &quot;Камера&quot; же &quot;Сайт Орнотуулар&quot; -&gt; &quot;колдонуу&quot;",
+            "point2": "Remove {{hostname}} чейин &quot;блок&quot; тизме"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "көрсөтмө",
+            "permissionDenied": "Уруксат алуу үчүн {{kind}} четке какты. {{kind}} жыйынында кошулуп, бул баракча жана ырастоо мүмкүнчүлүгүн Сураныч, кайра."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "көрсөтмө",
+            "permissionDenied": "Уруксат алуу үчүн {{kind}} четке какты. Аны колдонуу үчүн төмөнкү кадамдарды суранабыз:",
+            "point1": "Сиздин Android Жөндөөлөрүнөн Мурунку",
+            "point2": "Open &quot;Apps &amp; эскертмелер&quot;",
+            "point3": "Табуу &quot;{{communityName}}&quot; жана аны көрүү",
+            "point4": "Уруксаттар боюнча таптоо",
+            "point5": "Иштетүү {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "көрсөтмө",
+            "permissionDenied": "Уруксат алуу үчүн {{kind}} четке какты. Аны колдонуу үчүн төмөнкү кадамдарды суранабыз:",
+            "point1": "Сиздин Серик Жөндөөлөр",
+            "point2": "Open &quot;Privacy&quot;",
+            "point3": "Табуу {{kind}}, аны көрүү",
+            "point4": "Табуу &quot;{{communityName}}&quot; жана иштетүү"
+        },
+        "notices": {
+            "youJoinedRoom": "Сиз Бөлмөгө кошулду",
+            "joining": "Биригүү: {{userName}}",
+            "sbLeftRoom": "{{userName}} бөлмөдөн чыгып",
+            "youLeftRoom": "Сиз бөлмөдөн чыгып",
+            "codeCopied": "Сиз бөлмөдөн чыгып",
+            "sbBeganFbLive": "{{userName}} Facebook бул чакырыкты көрсөтүлө баштады",
+            "sbStoppedFbLive": "{{userName}} Facebook бул чакырыкты уктурууну токтотуп салды",
+            "youBeganFbLive": "Сиз Facebook бул чакырыкты көрсөтүлө баштады",
+            "youStoppedFbLive": "Сиз Facebook бул чакырыкты уктурууну токтотуп салды",
+            "linkCopiedToCb": "тактасына көчүрүлдү -га шилтеме берген барактар",
+            "codeCopiedToCb": "Code тактасына көчүрүлдү",
+            "userHasNoVideo": "Катышуучу жок Video элек"
+        },
+        "settingsPopup": {
+            "webCamera": "Желе Камера",
+            "screenSharing": "Экран бөлүшүү",
+            "shareAnotherScreen": "Share башка экранды",
+            "turnOffCameras": "Бардык камералар өчүрүү",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "fbLiveTitle": "Live титул",
+            "fbLiveDescription": "Live Description",
+            "fbOnlyMeLiveAccess": "Мен гана",
+            "fbFriendsAccess": "Достор",
+            "fbPublicAccess": "коомдук",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "Аягы",
+            "fbEmbedCode": "Embed",
+            "copy": "копия"
+        },
+        "participantsPopup": {
+            "disconnect": "ажыратуу",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Ажайып Screens",
+            "loudestExceptMe": "Дүркүрөгөн кол тышкары Мен",
+            "maximizeLoudest": "Maximize дүркүрөгөн",
+            "staticMaximized": "Статикалык көбүнчө",
+            "manual": "колдонмо"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Real-Time Call",
             "description": "реалдуу убакыт Video \/ аудио чалуу"
         }
+    },
+    "participating": {
+        "Title": "наам",
+        "Subscribed": "жазылган",
+        "Participants": "Катышуучулар",
+        "AreYouSureRemoveIdentifier": "Бул аныктагычты алып келеби?",
+        "AreYouSureUnsubscribeIdentifier": "Сиз бул аныктагычы жазылууну барбы? Бул таануучу эскертмелерди өчүрүү болот.",
+        "AreYouSureUnsubscribeDevice": "Сиз бул аппаратты жазылууну барбы? Бул түзмөккө билдирүүлөрдү өчүрөт.",
+        "Identifiers": "Identifiers",
+        "Devices": "түзмөктөр",
+        "Streams": "агымдар"
     }
 }

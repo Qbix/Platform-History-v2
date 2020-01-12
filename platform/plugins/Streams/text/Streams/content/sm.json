@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
         "Streams\/relatedFrom\/*": "Faʻaopoopo i {{toTitle}} e pei {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} na taʻua oe i se faamatalaga",
-        "Streams\/call": "{{displayName}} o loo valaau ia oe"
+        "Streams\/call": "{{displayName}} o loo valaau ia oe",
+        "ManageEmailSubscriptions": "pulea lau lisiti imeli",
+        "IfUnsubscribe": "Afai e te manaʻo e faʻaaoga"
     },
     "invite": {
         "messageContent": "{{displayName}} valaaulia oe i {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "O valaaulia e auina mai le numera, lea e leʻi iloa e au uo. Suʻe faʻatasi ma se faʻamatalaga vave e taʻu atu ia i latou o le valaaulia na sau mai ia te oe, fai atu ia i latou e kiliki le sootaga.",
             "confirm": "O valaaulia e auina mai le numera, lea e leʻi iloa e au uo. Mata e te manaʻo e tulitatao i se faʻamatalaga vave e taʻu atu ia i latou o le valaaulia na sau mai ia te oe, fai atu ia i latou e kiliki le sootaga.",
-            "check": "Hey, faatoa ou auina atu ia te oe se valaaulia i le {{app}} app. Faamolemole siaki lau sms ma kiliki le sootaga!"
+            "check": "Hey, faatoa ou auina atu ia te oe se valaaulia i le {{app}} app. Faamolemole siaki lau sms ma kiliki le sootaga!",
+            "CheckYourMobile": "Faamolemole siaki SMS ma mulimuli i faatonuga!"
         },
         "email": {
             "alert": "O valaaulia e auina atu mai la tatou itu, lea e leʻi iloa e au uo. Suʻe faʻatasi ma se faʻamatalaga vave e taʻu atu ia i latou o le valaaulia na sau mai ia te oe, fai atu ia i latou e kiliki le sootaga.",
             "confirm": "O valaaulia e auina atu mai la tatou itu, lea e leʻi iloa e au uo. Mata e te manaʻo e tulitatao i se faʻamatalaga vave e taʻu atu ia i latou o le valaaulia na sau mai ia te oe, fai atu ia i latou e kiliki le sootaga.",
             "subject": "Na e mauaina se valaaulia?",
-            "body": "Hey, faatoa ou auina atu ia te oe se valaaulia i le {{app}} app. Faamolemole siaki lau imeli ma kiliki le sootaga i totonu!"
+            "body": "Hey, faatoa ou auina atu ia te oe se valaaulia i le {{app}} app. Faamolemole siaki lau imeli ma kiliki le sootaga i totonu!",
+            "CheckYourEmail": "Faamolemole siaki lau imeli ma mulimuli i faatonuga!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Faʻaliliu le Microphone",
             "cameraBtn": "Enable Camera",
             "cameraAndMicrophoneBtn": "Faʻamaonia le Kamera ma le Masini"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Faatonuga",
+            "permissionDenied": "Faʻatagaina mo le {{kind}} faafitia. Le faʻaaogaina faamolemole mulimuli i laasaga nei:",
+            "point1": "Alu i le &quot;Faʻatonu&quot; -&gt; &quot;Faʻalauteleina&quot; -&gt; &quot;Faʻamatalaga o le Nofoaga&quot; -&gt; &quot;Kamera&quot; poʻo le &quot;Faʻamaumauga o le Pae&quot; -&gt; &quot;Telefoni&quot;",
+            "point2": "Aveese {{hostname}} mai le &quot;Block&quot; lisi"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Faatonuga",
+            "permissionDenied": "Faʻatagaina mo le {{kind}} faafitia. Faʻamolemole toe sii mai lenei itulau ma faʻamaonia avanoa i {{kind}} e auai i le fonotaga."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Faatonuga",
+            "permissionDenied": "Faʻatagaina mo le {{kind}} faafitia. Le faʻaaogaina faamolemole mulimuli i laasaga nei:",
+            "point1": "Alu i lau Tautuʻuga Android",
+            "point2": "Tatala &quot;Galuega ma faʻamatalaga&quot;",
+            "point3": "Saili &quot;{{communityName}}&quot; ma tatala",
+            "point4": "Tapuni i Faʻatagaga",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Faatonuga",
+            "permissionDenied": "Faʻatagaina mo le {{kind}} faafitia. Le faʻaaogaina faamolemole mulimuli i laasaga nei:",
+            "point1": "Alu i lau iOS Seti",
+            "point2": "Tatala &quot;Tūmataitino&quot;",
+            "point3": "Saili {{kind}} ma tatala",
+            "point4": "Saili &quot;{{communityName}}&quot; ma mafai ai"
+        },
+        "notices": {
+            "youJoinedRoom": "Na e auai i le potu",
+            "joining": "Auai i: {{userName}}",
+            "sbLeftRoom": "{{userName}} tuua le potu",
+            "youLeftRoom": "Na e tuua le potu",
+            "codeCopied": "Na e tuua le potu",
+            "sbBeganFbLive": "{{userName}} na amata faasalalauina lenei valaau i luga o Facebook",
+            "sbStoppedFbLive": "{{userName}} taofia le faasalalauina o lenei valaau i luga o Facebook",
+            "youBeganFbLive": "Na e amata faasalalauina lenei valaau i le Facebook",
+            "youStoppedFbLive": "Ua e taofia le faasalalauina o lenei valaau i le Facebook",
+            "linkCopiedToCb": "Lisi na kopi i luga o le laupapa",
+            "codeCopiedToCb": "Code na kopiina i luga o le laupapa",
+            "userHasNoVideo": "E leai se vitio e auai"
+        },
+        "settingsPopup": {
+            "webCamera": "Upega Tafaʻilagi",
+            "screenSharing": "Fefaasoaaʻi Mata",
+            "shareAnotherScreen": "Fetufaai se isi lau",
+            "turnOffCameras": "Ave uma taʻavale",
+            "startFBLive": "Amata Facebook Livestream",
+            "stopFBLive": "Taofi Facebook Livestream",
+            "fbLiveTitle": "Live Title",
+            "fbLiveDescription": "Faʻaaliga Ola",
+            "fbOnlyMeLiveAccess": "Naʻo Me",
+            "fbFriendsAccess": "Uo",
+            "fbPublicAccess": "Malo",
+            "fbStartLive": "Alu Ola",
+            "fbStopLive": "Maea Ola",
+            "fbEmbedCode": "Toto",
+            "copy": "Kopi"
+        },
+        "participantsPopup": {
+            "disconnect": "Alu ese",
+            "floatingScreens": "Fofo Matagofie",
+            "tiledScreens": "Faʻataʻi Mata",
+            "loudestExceptMe": "Filifili Seʻi vagana Au",
+            "maximizeLoudest": "Faʻateleina le Laiti",
+            "staticMaximized": "Faʻailoga Faʻateleina",
+            "manual": "Tusi lesona"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Taimi Moni Taimi",
             "description": "se taimi moni video \/ leo telefoni"
         }
+    },
+    "participating": {
+        "Title": "Ulutala",
+        "Subscribed": "Saini",
+        "Participants": "Tagata auai",
+        "AreYouSureRemoveIdentifier": "E te mautinoa e aveese lenei faʻailoga?",
+        "AreYouSureUnsubscribeIdentifier": "E te mautinoa e vavaeeseina lenei faʻamatalaga? O le a tape ai faʻamatalaga i lenei faʻamatalaga.",
+        "AreYouSureUnsubscribeDevice": "E te mautinoa e vavaeeseina lenei masini? O le a tape ai faʻamatalaga i lenei masini.",
+        "Identifiers": "Faʻamatalaga",
+        "Devices": "Lelei",
+        "Streams": "Vaitafe"
     }
 }

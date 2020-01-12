@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "{{toTitle}} -д шинэ {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} -г {{relationDisplayType}} болгож нэмсэн",
         "Streams\/mention": "{{&call 'avatar.displayName'}} таныг коммент дээр дурдсан",
-        "Streams\/call": "{{displayName}} таныг дуудаж байна"
+        "Streams\/call": "{{displayName}} таныг дуудаж байна",
+        "ManageEmailSubscriptions": "өөрийн имэйлийн бүртгэлийг удирдах",
+        "IfUnsubscribe": "Хэрэв та захиалгаа цуцлахыг хүсч байвал"
     },
     "invite": {
         "messageContent": "{{displayName}} таныг {{inviteUrl}} -д урьсан",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Таны урилга манай дугаараас илгээгдэж байгаа бөгөөд таны найзууд танихгүй байна. Тэднийг урилга ирснийг мэдэгдэж, тэдэнд холбоосыг дарахыг хүссэн текстийг хурдан шалгаарай.",
             "confirm": "Таны урилга манай дугаараас илгээгдэж байгаа бөгөөд таны найзууд танихгүй байна. Тэднийг урилга илгээсэн гэдгийг мэдэгдэж, тэдэнд холбоос дээр дарахыг хүсвэл текстийг хурдан авахыг хүсч байна уу.",
-            "check": "Хөөе, би таныг {{app}} апп-д урилга илгээсэн. Өөрийн зурвасыг шалгаад холбоос дээр дарна уу!"
+            "check": "Хөөе, би таныг {{app}} апп-д урилга илгээсэн. Өөрийн зурвасыг шалгаад холбоос дээр дарна уу!",
+            "CheckYourMobile": "SMS-г шалгаад зааварчилгааг дагана уу!"
         },
         "email": {
             "alert": "Таны домэйноос урилга илгээж таны найзууд танихгүй байна. Тэднийг урилга ирснийг мэдэгдэж, тэдэнд холбоосыг дарахыг хүссэн текстийг хурдан шалгаарай.",
             "confirm": "Таны домэйноос урилга илгээж таны найзууд танихгүй байна. Тэднийг урилга илгээсэн гэдгийг мэдэгдэж, тэдэнд холбоос дээр дарахыг хүсвэл текстийг хурдан авахыг хүсч байна уу.",
             "subject": "Та урилга авсан уу?",
-            "body": "Хөөе, би таныг {{app}} апп-д урилга илгээсэн. Та имэйлээ шалгаад, линк дээр дарна уу!"
+            "body": "Хөөе, би таныг {{app}} апп-д урилга илгээсэн. Та имэйлээ шалгаад, линк дээр дарна уу!",
+            "CheckYourEmail": "Имэйлээ шалгаад зааварчилгааг дагана уу!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Микрофоныг идэвхжүүлнэ үү",
             "cameraBtn": "Камерыг идэвхжүүлэх нь",
             "cameraAndMicrophoneBtn": "Камер ба микрофоныг идэвхжүүлнэ"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Зааварчилгаа",
+            "permissionDenied": "{{kind}} зөвшөөрлийг татгалзсан байна. Ашиглахын тулд дараах алхамуудыг дагана уу.",
+            "point1": "&quot;Тохиргоо&quot; -&gt; &quot;Нарийвчилсан&quot; -&gt; &quot;Нууцлал ба аюулгүй байдал&quot; -&gt; &quot;Сайтын тохиргоо&quot; -&gt; &quot;Камер&quot; эсвэл &quot;Сайтын тохиргоо&quot; -&gt; &quot;Микрофон&quot; руу очно уу.",
+            "point2": "&quot;Блоклох&quot; жагсаалтаас {{hostname}} хасах"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Зааварчилгаа",
+            "permissionDenied": "{{kind}} зөвшөөрлийг татгалзсан байна. Энэ хуудсыг дахин ачаалж хуралд оролцохын тулд {{kind}} хандалтыг баталгаажуулна уу."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Зааварчилгаа",
+            "permissionDenied": "{{kind}} зөвшөөрлийг татгалзсан байна. Ашиглахын тулд дараах алхамуудыг дагана уу.",
+            "point1": "Андройд Тохиргоо руу очно уу",
+            "point2": "&quot;Апп ба мэдэгдэл&quot; нээх",
+            "point3": "&quot;{{communityName}}&quot; -г олоод нээнэ үү",
+            "point4": "Зөвшөөрөл дээр дарна уу",
+            "point5": "Идэвхжүүлэх {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Зааварчилгаа",
+            "permissionDenied": "{{kind}} зөвшөөрлийг татгалзсан байна. Ашиглахын тулд дараах алхамуудыг дагана уу.",
+            "point1": "IOS Тохиргоо руу очно уу",
+            "point2": "&quot;Нууцлал&quot; нээх",
+            "point3": "{{kind}} -г олоод нээнэ үү",
+            "point4": "&quot;{{communityName}}&quot; -г олоод идэвхжүүлнэ үү"
+        },
+        "notices": {
+            "youJoinedRoom": "Та өрөөнд орсон",
+            "joining": "Нэгдэж байна: {{userName}}",
+            "sbLeftRoom": "{{userName}} нь өрөөнөөс гарав",
+            "youLeftRoom": "Чи өрөөнөөс гарлаа",
+            "codeCopied": "Чи өрөөнөөс гарлаа",
+            "sbBeganFbLive": "{{userName}} нь энэ дуудлагыг Facebook дээр цацаж эхлэв",
+            "sbStoppedFbLive": "{{userName}} нь энэ дуудлагыг Facebook дээр цацахаа больсон",
+            "youBeganFbLive": "Та энэ дуудлагыг Facebook дээр цацаж эхэлсэн",
+            "youStoppedFbLive": "Та энэ дуудлагыг Facebook дээр цацахаа больсон",
+            "linkCopiedToCb": "Холбоосыг санах самбар луу хуулав",
+            "codeCopiedToCb": "Кодыг санах самбар луу хуулав",
+            "userHasNoVideo": "Оролцогч видео байхгүй байна"
+        },
+        "settingsPopup": {
+            "webCamera": "Вэб камер",
+            "screenSharing": "Дэлгэц хуваалцах",
+            "shareAnotherScreen": "Өөр дэлгэцийг хуваалцана уу",
+            "turnOffCameras": "Бүх камерыг унтраа",
+            "startFBLive": "Facebook Live дамжуулалтыг эхлүүлнэ үү",
+            "stopFBLive": "Facebook Livestream-ийг зогсоох",
+            "fbLiveTitle": "Шууд гарчиг",
+            "fbLiveDescription": "Шууд тайлбар",
+            "fbOnlyMeLiveAccess": "Зөвхөн би",
+            "fbFriendsAccess": "Найзууд",
+            "fbPublicAccess": "Олон нийтийн",
+            "fbStartLive": "Амьд явах",
+            "fbStopLive": "Шууд дамжуулах",
+            "fbEmbedCode": "Оруулах боломжтой",
+            "copy": "Хуулбарлах"
+        },
+        "participantsPopup": {
+            "disconnect": "Салгах",
+            "floatingScreens": "Хөвөгч дэлгэцүүд",
+            "tiledScreens": "Хийсэн дэлгэцүүд",
+            "loudestExceptMe": "Надаас бусад нь хамгийн чанга",
+            "maximizeLoudest": "Хамгийн чанга байдлыг нэмэгдүүлэх",
+            "staticMaximized": "Хамгийн их статик",
+            "manual": "Гарын авлага"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Бодит цагийн дуудлага",
             "description": "бодит цаг хугацааны видео \/ аудио дуудлага"
         }
+    },
+    "participating": {
+        "Title": "Гарчиг",
+        "Subscribed": "Захиалсан",
+        "Participants": "Оролцогчид",
+        "AreYouSureRemoveIdentifier": "Энэ таниулбарыг устгахдаа итгэлтэй байна уу?",
+        "AreYouSureUnsubscribeIdentifier": "Та энэ таниулбарыг цуцлахдаа итгэлтэй байна уу? Энэ таниулбар дээрх мэдэгдлийг унтраах болно.",
+        "AreYouSureUnsubscribeDevice": "Та үнэхээр энэ төхөөрөмжийг бүртгэлээс хасуулсан уу? Энэ нь төхөөрөмж дээрх мэдэгдлийг унтраах болно.",
+        "Identifiers": "Тодорхойлогч",
+        "Devices": "Төхөөрөмжүүд",
+        "Streams": "Горхи"
     }
 }

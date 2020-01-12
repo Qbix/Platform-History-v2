@@ -102,5 +102,11 @@
         "noLongerUsing": "Awukaqhagamshelwa kwi {{platform}} njenge",
         "doAuth": "Ngena kule akhawunti",
         "doSwitch": "Tshintshela kule akhawunti"
+    },
+    "roles": {
+        "Owner": "Umnini",
+        "Admin": "Ulawulo",
+        "Member": "Ilungu",
+        "Guest": "Undwendwe"
     }
 }

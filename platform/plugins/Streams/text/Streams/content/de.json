@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Einladungen werden von unserer Nummer gesendet, die Ihre Freunde noch nicht kennen. Folgen Sie einem kurzen Text, um sie darüber zu informieren, dass die Einladung von Ihnen stammt, und bitten Sie, auf den Link zu klicken.",
             "confirm": "Einladungen werden von unserer Nummer gesendet, die Ihre Freunde noch nicht kennen. Möchten Sie mit einem kurzen Text darauf aufmerksam machen, dass die Einladung von Ihnen stammt, und bitten Sie, auf den Link zu klicken.",
-            "check": "Ich habe Ihnen gerade eine Einladung zur {{app}} App gesendet. Bitte überprüfen Sie Ihre SMS und klicken Sie auf den Link!"
+            "check": "Ich habe Ihnen gerade eine Einladung zur {{app}} App gesendet. Bitte überprüfen Sie Ihre SMS und klicken Sie auf den Link!",
+            "CheckYourMobile": "Bitte überprüfen Sie die SMS und folgen Sie den Anweisungen!"
         },
         "email": {
             "alert": "Einladungen werden von unserer Domain gesendet, die Ihre Freunde noch nicht kennen. Folgen Sie einem kurzen Text, um sie darüber zu informieren, dass die Einladung von Ihnen stammt, und bitten Sie, auf den Link zu klicken.",
             "confirm": "Einladungen werden von unserer Domain gesendet, die Ihre Freunde noch nicht kennen. Möchten Sie mit einem kurzen Text darauf aufmerksam machen, dass die Einladung von Ihnen stammt, und bitten Sie, auf den Link zu klicken.",
             "subject": "Hast du eine Einladung bekommen?",
-            "body": "Ich habe Ihnen gerade eine Einladung zur {{app}} App gesendet. Bitte überprüfen Sie Ihre E-Mail und klicken Sie auf den Link dort!"
+            "body": "Ich habe Ihnen gerade eine Einladung zur {{app}} App gesendet. Bitte überprüfen Sie Ihre E-Mail und klicken Sie auf den Link dort!",
+            "CheckYourEmail": "Bitte überprüfen Sie Ihre E-Mails und folgen Sie den Anweisungen!"
         }
     },
     "participating": {
         "Title": "Titel",
         "Subscribed": "Gezeichnet",
-        "Participants": "Teilnehmer"
+        "Participants": "Teilnehmer",
+        "AreYouSureRemoveIdentifier": "Möchten Sie diesen Bezeichner wirklich entfernen?",
+        "AreYouSureUnsubscribeIdentifier": "Sind Sie sicher, dass Sie diese Kennung abbestellen? Benachrichtigungen für diese Kennung werden deaktiviert.",
+        "AreYouSureUnsubscribeDevice": "Sind Sie sicher, dass Sie dieses Gerät abbestellen? Benachrichtigungen für dieses Gerät werden deaktiviert.",
+        "Identifiers": "Bezeichner",
+        "Devices": "Geräte",
+        "Streams": "Streams"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Mikrofon aktivieren",
             "cameraBtn": "Kamera aktivieren",
             "cameraAndMicrophoneBtn": "Kamera und Mikrofon aktivieren"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Anleitung",
+            "permissionDenied": "Erlaubnis für {{kind}} verweigert. Um es zu benutzen, folge bitte diesen Schritten:",
+            "point1": "Gehen Sie zu &quot;Einstellungen&quot; -&gt; &quot;Erweitert&quot; -&gt; &quot;Datenschutz und Sicherheit&quot; -&gt; &quot;Site-Einstellungen&quot; -&gt; &quot;Kamera&quot; oder &quot;Site-Einstellungen&quot; -&gt; &quot;Mikrofon&quot;",
+            "point2": "{{hostname}} aus der Liste &quot;Sperren&quot; entfernen"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Anleitung",
+            "permissionDenied": "Erlaubnis für {{kind}} verweigert. Bitte laden Sie diese Seite neu und bestätigen Sie den Zugriff auf {{kind}}, um an der Konferenz teilzunehmen."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Anleitung",
+            "permissionDenied": "Erlaubnis für {{kind}} verweigert. Um es zu benutzen, folge bitte diesen Schritten:",
+            "point1": "Gehen Sie zu Ihren Android-Einstellungen",
+            "point2": "Öffne &quot;Apps &amp; Benachrichtigungen&quot;",
+            "point3": "Suchen Sie nach &quot;{{communityName}}&quot; und öffnen Sie es",
+            "point4": "Tippen Sie auf Berechtigungen",
+            "point5": "{{kind}} aktivieren"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Anleitung",
+            "permissionDenied": "Erlaubnis für {{kind}} verweigert. Um es zu benutzen, folge bitte diesen Schritten:",
+            "point1": "Gehen Sie zu Ihren iOS-Einstellungen",
+            "point2": "Öffnen Sie &quot;Datenschutz&quot;",
+            "point3": "Finde {{kind}} und öffne es",
+            "point4": "Suchen Sie nach &quot;{{communityName}}&quot; und aktivieren Sie"
+        },
+        "notices": {
+            "youJoinedRoom": "Du bist dem Raum beigetreten",
+            "joining": "Beitritt: {{userName}}",
+            "sbLeftRoom": "{{userName}} hat den Raum verlassen",
+            "youLeftRoom": "Du hast den Raum verlassen",
+            "codeCopied": "Du hast den Raum verlassen",
+            "sbBeganFbLive": "{{userName}} hat mit der Ausstrahlung dieses Anrufs auf Facebook begonnen",
+            "sbStoppedFbLive": "{{userName}} hat die Übertragung dieses Anrufs in Facebook gestoppt",
+            "youBeganFbLive": "Sie haben begonnen, diesen Anruf in Facebook zu senden",
+            "youStoppedFbLive": "Sie haben die Übertragung dieses Anrufs in Facebook beendet",
+            "linkCopiedToCb": "Link in die Zwischenablage kopiert",
+            "codeCopiedToCb": "Code in die Zwischenablage kopiert",
+            "userHasNoVideo": "Teilnehmer hat kein Video"
+        },
+        "settingsPopup": {
+            "webCamera": "Web-Kamera",
+            "screenSharing": "Bildschirm teilen",
+            "shareAnotherScreen": "Anderen Bildschirm freigeben",
+            "turnOffCameras": "Schalten Sie alle Kameras aus",
+            "startFBLive": "Starten Sie den Facebook Livestream",
+            "stopFBLive": "Stoppen Sie den Facebook Livestream",
+            "fbLiveTitle": "Live-Titel",
+            "fbLiveDescription": "Live Beschreibung",
+            "fbOnlyMeLiveAccess": "Nur ich",
+            "fbFriendsAccess": "Freunde",
+            "fbPublicAccess": "Öffentlichkeit",
+            "fbStartLive": "Geh Leben",
+            "fbStopLive": "Live beenden",
+            "fbEmbedCode": "Einbetten",
+            "copy": "Kopieren"
+        },
+        "participantsPopup": {
+            "disconnect": "Trennen",
+            "floatingScreens": "Schwimmende Bildschirme",
+            "tiledScreens": "Gekachelte Bildschirme",
+            "loudestExceptMe": "Lauteste außer mir",
+            "maximizeLoudest": "Am lautesten maximieren",
+            "staticMaximized": "Statisch maximiert",
+            "manual": "Handbuch"
         }
     },
     "types": {

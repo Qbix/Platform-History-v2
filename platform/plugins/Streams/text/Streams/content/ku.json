@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
         "Streams\/relatedFrom\/*": "Zêdetir {999}} wek {{1000} Added",
         "Streams\/mention": "99 99 999} you di şîroveyekê de ji we re destnîşan kir",
-        "Streams\/call": "99 999}} gazî we dike"
+        "Streams\/call": "99 999}} gazî we dike",
+        "ManageEmailSubscriptions": "aboneyên e-nameya xwe birêve bibin",
+        "IfUnsubscribe": "Heke tu dixwazî ji hev veqetandinê"
     },
     "invite": {
         "messageContent": "{{displayName}} tu ji {{inviteUrl}} vexwendin",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Invite ji me hejmarek şandin, ku hevalên we ne nas dikin. Bi nivîskî zûtirîn bişopînin da ku ew bizanin ku vexwendina we ji we re hat, ji wan re ji wan re dipirsin ku li girêdana navnîşê.",
             "confirm": "Invite ji me hejmarek şandin, ku hevalên we ne nas dikin. Ma hûn dixwazin dixwazin bi tekstek zûtirîn peyda bikin ku bila wan bizanin ku ji wan re vexwendin ji we re hatin, ji wan re dipirsin ku li ser vê rûpelê.",
-            "check": "Hey, ez ji we re şîfreya {{app}} anî we şandime. Ji kerema xwe smsê xwe binihêrin û girêdana li jêr bike!"
+            "check": "Hey, ez ji we re şîfreya {{app}} anî we şandime. Ji kerema xwe smsê xwe binihêrin û girêdana li jêr bike!",
+            "CheckYourMobile": "Ji kerema xwe SMS bişopînin û rêwerzan bişopînin!"
         },
         "email": {
             "alert": "Invite ji navenda me re şandiye, ku hevalên we ne nas dikin. Bi nivîskî zûtirîn bişopînin da ku ew bizanin ku vexwendina we ji we re hat, ji wan re ji wan re dipirsin ku li girêdana navnîşê.",
             "confirm": "Invite ji navenda me re şandiye, ku hevalên we ne nas dikin. Ma hûn dixwazin dixwazin bi tekstek zûtirîn peyda bikin ku bila wan bizanin ku ji wan re vexwendin ji we re hatin, ji wan re dipirsin ku li ser vê rûpelê.",
             "subject": "Ma hûn ji bo vegotin?",
-            "body": "Hey, ez ji we re şîfreya {{app}} anî we şandime. Ji kerema xwe, e-nameya xwe bibînin û li wir li wir binêrin!"
+            "body": "Hey, ez ji we re şîfreya {{app}} anî we şandime. Ji kerema xwe, e-nameya xwe bibînin û li wir li wir binêrin!",
+            "CheckYourEmail": "Ji kerema xwe e-nameya xwe kontrol bikin û rêwerzan bişopînin!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Mîkrofon aktîf bike",
             "cameraBtn": "Kamera çalak bike",
             "cameraAndMicrophoneBtn": "Kamera û mîkrofona çalak bikin"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Rêbername",
+            "permissionDenied": "Destûr ji bo 99 999}} hat red kirin. Ji bo karanîna wê ji kerema xwe van gavan bişopînin:",
+            "point1": "Herin &quot;Settings&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Privacy and Security&quot; -&gt; &quot;Settings Site&quot; -&gt; &quot;Camera&quot; an &quot;Settings Site&quot; -&gt; &quot;Microphone&quot;",
+            "point2": "List {999}} ji lîsteya &quot;Bişkojka&quot; rakin"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Rêbername",
+            "permissionDenied": "Destûr ji bo 99 999}} hat red kirin. Ji kerema xwe vê rûpelê ji nû ve saz bikin û gihîştina {999} access ji bo beşdarî konferansê piştrast bikin."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Rêbername",
+            "permissionDenied": "Destûr ji bo 99 999}} hat red kirin. Ji bo karanîna wê ji kerema xwe van gavan bişopînin:",
+            "point1": "Herin Settings Android xwe",
+            "point2": "&quot;Serlêdan û agahdariyan&quot; vekirin",
+            "point3": "&quot;{{communityName}}&quot; bibînin û veke",
+            "point4": "Tap Bike destûrên",
+            "point5": "999 {çalak bike"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Rêbername",
+            "permissionDenied": "Destûr ji bo 99 999}} hat red kirin. Ji bo karanîna wê ji kerema xwe van gavan bişopînin:",
+            "point1": "Herin mîhengên xwe yên iOS-ê",
+            "point2": "&quot;Taybetmendî&quot; veke",
+            "point3": "{999} Find bibînin û vekin",
+            "point4": "&quot;{{communityName}}&quot; bibînin û çalak bikin"
+        },
+        "notices": {
+            "youJoinedRoom": "Hûn beşdarî odeyê bûn",
+            "joining": "Tevlêbûn: {99 999}",
+            "sbLeftRoom": "99 999}} ji odeyê derket",
+            "youLeftRoom": "Hûn ji odeyê derketin",
+            "codeCopied": "Hûn ji odeyê derketin",
+            "sbBeganFbLive": "99 99 999}} dest bi weşana vê banga li Facebook kir",
+            "sbStoppedFbLive": "99 99 999}} weşandina vê banga li Facebookê rawestand",
+            "youBeganFbLive": "We dest bi weşandina vê banga li Facebookê kir",
+            "youStoppedFbLive": "We ev bang li Facebookê weşand",
+            "linkCopiedToCb": "Zencîre hatî kopî kirin",
+            "codeCopiedToCb": "Koda ku li clipboard hatî kopî kirin",
+            "userHasNoVideo": "Beşdarê vîdyoyê tune"
+        },
+        "settingsPopup": {
+            "webCamera": "Kamera Web",
+            "screenSharing": "Parvekirina Screen",
+            "shareAnotherScreen": "Dîreyek din parve bikin",
+            "turnOffCameras": "Hemî kamera vekişînin",
+            "startFBLive": "Facebook Livestream dest pê bikin",
+            "stopFBLive": "Facebook Livestream rawestînin",
+            "fbLiveTitle": "Sernavê zindî",
+            "fbLiveDescription": "Danasîna Zindî",
+            "fbOnlyMeLiveAccess": "Tenê Me",
+            "fbFriendsAccess": "Hevalno",
+            "fbPublicAccess": "Alenî",
+            "fbStartLive": "Bijî Zindî",
+            "fbStopLive": "Bijî Zindî",
+            "fbEmbedCode": "Hatin kirin",
+            "copy": "Kopî"
+        },
+        "participantsPopup": {
+            "disconnect": "Hevqetandin",
+            "floatingScreens": "Parçeyên Qiraxê",
+            "tiledScreens": "Parêzgehên Tiled",
+            "loudestExceptMe": "Ji bilî min bilindtir",
+            "maximizeLoudest": "Berfirehî zêde bikin",
+            "staticMaximized": "Maximek Static",
+            "manual": "Destî"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Banga rast-time",
             "description": "telefonek \/ vîdyoyek rastîn a rastîn"
         }
+    },
+    "participating": {
+        "Title": "Nav",
+        "Subscribed": "Qeydkirî",
+        "Participants": "Beşdaran",
+        "AreYouSureRemoveIdentifier": "Bawer bî ku hûn vê nasnameyê jê bibin?",
+        "AreYouSureUnsubscribeIdentifier": "Hûn bi rastî ji vê nasnameyê qut in? Ew ê notifications bi vî nasnameyê bar bike.",
+        "AreYouSureUnsubscribeDevice": "Hûn ji vê amûrê re piştrast in? Ew ê agahdariya ji bo vê cîhazê biqede.",
+        "Identifiers": "Nasname",
+        "Devices": "Amûrên",
+        "Streams": "Streams"
     }
 }

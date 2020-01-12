@@ -102,5 +102,11 @@
         "noLongerUsing": "Tsy misy ifandraisany intsony amin&#39;ny {{platform}} ianao",
         "doAuth": "Midira ao amin&#39;ity kaonty ity",
         "doSwitch": "Avadio amin&#39;ity kaonty ity"
+    },
+    "roles": {
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest"
     }
 }

@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Tuntun {{relationDisplayType}} ni {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ṣe afikun si {{toTitle}} bi {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} mẹnuba ninu rẹ ni asọye",
-        "Streams\/call": "{{displayName}} n pe e"
+        "Streams\/call": "{{displayName}} n pe e",
+        "ManageEmailSubscriptions": "ṣakoso awọn ṣiṣe alabapin imeeli rẹ",
+        "IfUnsubscribe": "Ti o ba fẹ lati yowo kuro"
     },
     "invite": {
         "messageContent": "{{displayName}} pe o si {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Awọn ipe ni a fi ranṣẹ lati inu nọmba wa, ti awọn ọrẹ rẹ ko iti mọ. Tẹle pẹlu ọrọ ti o yara lati jẹ ki wọn mọ pe pipe si lati ọdọ rẹ, pe wọn lati tẹ ọna asopọ naa.",
             "confirm": "Awọn ipe ni a fi ranṣẹ lati inu nọmba wa, ti awọn ọrẹ rẹ ko iti mọ. Ṣe o fẹ lati tẹle awọn ọrọ ti o yara lati jẹ ki wọn mọ pe pipe si lati ọdọ rẹ, ti o beere fun wọn lati tẹ ọna asopọ naa.",
-            "check": "Hey, Mo kan ranṣẹ si ọ si {{app}} app. Jọwọ ṣayẹwo awọn SMS rẹ ki o si tẹ ọna asopọ naa!"
+            "check": "Hey, Mo kan ranṣẹ si ọ si {{app}} app. Jọwọ ṣayẹwo awọn SMS rẹ ki o si tẹ ọna asopọ naa!",
+            "CheckYourMobile": "Jọwọ ṣayẹwo SMS ki o tẹle awọn itọsọna!"
         },
         "email": {
             "alert": "Awọn ipe ni a fi ranṣẹ lati ọdọ wa, ti awọn ọrẹ rẹ ko iti mọ. Tẹle pẹlu ọrọ ti o yara lati jẹ ki wọn mọ pe pipe si lati ọdọ rẹ, pe wọn lati tẹ ọna asopọ naa.",
             "confirm": "Awọn ipe ni a fi ranṣẹ lati ọdọ wa, ti awọn ọrẹ rẹ ko iti mọ. Ṣe o fẹ lati tẹle awọn ọrọ ti o yara lati jẹ ki wọn mọ pe pipe si lati ọdọ rẹ, ti o beere fun wọn lati tẹ ọna asopọ naa.",
             "subject": "Ṣe o gba ipe kan?",
-            "body": "Hey, Mo kan ranṣẹ si ọ si {{app}} app. Jọwọ ṣayẹwo imeeli rẹ ki o si tẹ ọna asopọ naa wa nibẹ!"
+            "body": "Hey, Mo kan ranṣẹ si ọ si {{app}} app. Jọwọ ṣayẹwo imeeli rẹ ki o si tẹ ọna asopọ naa wa nibẹ!",
+            "CheckYourEmail": "Jọwọ ṣayẹwo imeeli rẹ ki o tẹle awọn itọnisọna!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Jeki Gbohungbohun",
             "cameraBtn": "Mu kamẹra ṣiṣẹ",
             "cameraAndMicrophoneBtn": "Mu kamẹra ṣiṣẹ ati Gbohungbohun"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Awọn ilana",
+            "permissionDenied": "Awọn igbanilaaye fun {{kind}} sẹ. Lati lo o jọwọ tẹle awọn igbesẹ wọnyi:",
+            "point1": "Lọ si &quot;Eto&quot; -&gt; &quot;Onitẹsiwaju&quot; -&gt; &quot;Asiri ati aabo&quot; -&gt; &quot;Eto Aye&quot; -&gt; &quot;Kamẹra&quot; tabi &quot;Eto Aaye&quot; -&gt; &quot;Gbohungbohun&quot;",
+            "point2": "Yo {{hostname}} kuro ni atokọ “Dẹkun”"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Awọn ilana",
+            "permissionDenied": "Awọn igbanilaaye fun {{kind}} sẹ. Jọwọ tun gbe oju-iwe yii mulẹ ki o jẹrisi wiwọle si {{kind}} lati darapọ mọ apejọ naa."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Awọn ilana",
+            "permissionDenied": "Awọn igbanilaaye fun {{kind}} sẹ. Lati lo o jọwọ tẹle awọn igbesẹ wọnyi:",
+            "point1": "Lọ si Awọn Eto Android rẹ",
+            "point2": "Ṣi &quot;Awọn ohun elo &amp; awọn iwifunni&quot;",
+            "point3": "Wa &quot;{{communityName}}&quot; ati ṣii",
+            "point4": "Tẹ lori Awọn igbanilaaye",
+            "point5": "Mu ṣiṣẹ ṣiṣẹ {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Awọn ilana",
+            "permissionDenied": "Awọn igbanilaaye fun {{kind}} sẹ. Lati lo o jọwọ tẹle awọn igbesẹ wọnyi:",
+            "point1": "Lọ si Eto Eto iOS rẹ",
+            "point2": "Ṣi &quot;Asiri&quot;",
+            "point3": "Wa {{kind}} ki o si ṣi i",
+            "point4": "Wa &quot;{{communityName}}&quot; ki o mu ṣiṣẹ"
+        },
+        "notices": {
+            "youJoinedRoom": "O darapọ mọ yara naa",
+            "joining": "Didapo: {{userName}}",
+            "sbLeftRoom": "{{userName}} kuro ni yara naa",
+            "youLeftRoom": "O kuro ni yara naa",
+            "codeCopied": "O kuro ni yara naa",
+            "sbBeganFbLive": "{{userName}} bẹrẹ sii ṣe ikede ni ipe yii ni Facebook",
+            "sbStoppedFbLive": "{{userName}} dẹkun igbohunsafefe ipe yii ni Facebook",
+            "youBeganFbLive": "O bẹrẹ ikede ni ipe yii ni Facebook",
+            "youStoppedFbLive": "O da igbohunsafefe ipe yii duro ni Facebook",
+            "linkCopiedToCb": "Ọna asopọ dakọ si agekuru",
+            "codeCopiedToCb": "Koodu dakọ si agekuru",
+            "userHasNoVideo": "Olukopa ko ni fidio"
+        },
+        "settingsPopup": {
+            "webCamera": "Kamẹra wẹẹbu",
+            "screenSharing": "Pinpin Iboju",
+            "shareAnotherScreen": "Pin iboju miiran",
+            "turnOffCameras": "Pa gbogbo awọn kamẹra",
+            "startFBLive": "Bẹrẹ Facebook Livestream",
+            "stopFBLive": "Da Facebook Livestream duro",
+            "fbLiveTitle": "Akọle Live",
+            "fbLiveDescription": "Apejuwe Live",
+            "fbOnlyMeLiveAccess": "Emi nikan soso",
+            "fbFriendsAccess": "Awọn ọrẹ",
+            "fbPublicAccess": "Gbangba",
+            "fbStartLive": "Lọ Live",
+            "fbStopLive": "Ipari Gbe",
+            "fbEmbedCode": "Fi sabe",
+            "copy": "Daakọ"
+        },
+        "participantsPopup": {
+            "disconnect": "Ge asopọ",
+            "floatingScreens": "Awọn iboju Fifọ loju omi",
+            "tiledScreens": "Awọn iboju ti o nira",
+            "loudestExceptMe": "Ayafi Mofi Gẹẹsi Mi",
+            "maximizeLoudest": "Loudest Lopin",
+            "staticMaximized": "Iwosan Maximized",
+            "manual": "Afowoyi"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Ipe ti Gidi",
             "description": "akoko gidi fidio \/ ohun ipe"
         }
+    },
+    "participating": {
+        "Title": "Akọle",
+        "Subscribed": "Ṣe alabapin",
+        "Participants": "Olukopa",
+        "AreYouSureRemoveIdentifier": "Ṣe o da ọ loju lati yọ idamọ yii kuro?",
+        "AreYouSureUnsubscribeIdentifier": "Ṣe o da ọ daju pe o yọ aami idanimọ rẹ kuro? O yoo pa awọn iwifunni si idanimọ yii.",
+        "AreYouSureUnsubscribeDevice": "Ṣe o da ọ loju pe iwọ ko sọ ohun elo yii kuro? Yoo pa awọn iwifunni si ẹrọ yii.",
+        "Identifiers": "Awọn idamo",
+        "Devices": "Awọn ẹrọ",
+        "Streams": "Awọn ṣiṣan"
     }
 }

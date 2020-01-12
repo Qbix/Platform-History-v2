@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Les invitacions s&#39;envien des del nostre número, que els teus amics encara no reconeixen. Feu un seguiment amb un text ràpid per fer-los saber que la vostra invitació va venir, demanant-los que facin clic a l&#39;enllaç.",
             "confirm": "Les invitacions s&#39;envien des del nostre número, que els teus amics encara no reconeixen. Voleu fer un seguiment amb un text ràpid per fer-los saber que la vostra invitació va venir, demanant-los que faci clic a l’enllaç.",
-            "check": "Hola, acabo de enviar-te una invitació a l&#39;aplicació {{app}}. Comproveu els vostres sms i feu clic a l’enllaç."
+            "check": "Hola, acabo de enviar-te una invitació a l&#39;aplicació {{app}}. Comproveu els vostres sms i feu clic a l’enllaç.",
+            "CheckYourMobile": "Comproveu SMS i seguiu les instruccions."
         },
         "email": {
             "alert": "Les invitacions s&#39;envien des del nostre domini, que els teus amics encara no reconeixen. Feu un seguiment amb un text ràpid per fer-los saber que la vostra invitació va venir, demanant-los que facin clic a l&#39;enllaç.",
             "confirm": "Les invitacions s&#39;envien des del nostre domini, que els teus amics encara no reconeixen. Voleu fer un seguiment amb un text ràpid per fer-los saber que la vostra invitació va venir, demanant-los que faci clic a l’enllaç.",
             "subject": "Heu rebut una invitació?",
-            "body": "Hola, acabo de enviar-te una invitació a l&#39;aplicació {{app}}. Comproveu el vostre correu electrònic i feu clic a l’enllaç allà."
+            "body": "Hola, acabo de enviar-te una invitació a l&#39;aplicació {{app}}. Comproveu el vostre correu electrònic i feu clic a l’enllaç allà.",
+            "CheckYourEmail": "Comproveu el vostre correu electrònic i seguiu les instruccions."
         }
     },
     "participating": {
         "Title": "Títol",
         "Subscribed": "Subscrit",
-        "Participants": "Participants"
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Esteu segur que traieu aquest identificador?",
+        "AreYouSureUnsubscribeIdentifier": "Confirmeu que anul·lar la subscripció d&#39;aquest identificador? Desactivaran les notificacions a aquest identificador.",
+        "AreYouSureUnsubscribeDevice": "Esteu segur \/ a de donar-vos de baixa d&#39;aquest dispositiu? Desactivaran les notificacions a aquest dispositiu.",
+        "Identifiers": "Identificadors",
+        "Devices": "Dispositius",
+        "Streams": "Corrents"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Activa el micròfon",
             "cameraBtn": "Habilita la càmera",
             "cameraAndMicrophoneBtn": "Activa la càmera i el micròfon"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instruccions",
+            "permissionDenied": "El permís per a {{kind}} s&#39;ha denegat. Per utilitzar-lo, seguiu aquests passos:",
+            "point1": "Vés a &quot;Configuració&quot; -&gt; &quot;Avançada&quot; -&gt; &quot;Privacitat i seguretat&quot; -&gt; &quot;Configuració del lloc&quot; -&gt; &quot;Càmera&quot; o &quot;Configuració del lloc&quot; -&gt; &quot;Micròfon&quot;",
+            "point2": "Elimineu {{hostname}} de la llista &quot;Bloquejar&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instruccions",
+            "permissionDenied": "El permís per a {{kind}} s&#39;ha denegat. Torneu a carregar aquesta pàgina i confirmeu l’accés a {{kind}} per unir-vos a la conferència."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instruccions",
+            "permissionDenied": "El permís per a {{kind}} s&#39;ha denegat. Per utilitzar-lo, seguiu aquests passos:",
+            "point1": "Vés a la configuració d’Android",
+            "point2": "Obre &quot;Aplicacions i notificacions&quot;",
+            "point3": "Cerqueu &quot;{{communityName}}&quot; i obriu-lo",
+            "point4": "Toqueu els permisos",
+            "point5": "Activa {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instruccions",
+            "permissionDenied": "El permís per a {{kind}} s&#39;ha denegat. Per utilitzar-lo, seguiu aquests passos:",
+            "point1": "Vés a la configuració d’iOS",
+            "point2": "Obre &quot;Privadesa&quot;",
+            "point3": "Cerqueu {{kind}} i obriu-lo",
+            "point4": "Cerqueu &quot;{{communityName}}&quot; i activeu-lo"
+        },
+        "notices": {
+            "youJoinedRoom": "Vas entrar a l’habitació",
+            "joining": "S’uneix: {{userName}}",
+            "sbLeftRoom": "{{userName}} va abandonar l&#39;habitació",
+            "youLeftRoom": "Vau sortir de l’habitació",
+            "codeCopied": "Vau sortir de l’habitació",
+            "sbBeganFbLive": "{{userName}} va començar a emetre aquesta trucada a Facebook",
+            "sbStoppedFbLive": "{{userName}} va deixar de transmetre aquesta trucada a Facebook",
+            "youBeganFbLive": "Vau començar a emetre aquesta trucada a Facebook",
+            "youStoppedFbLive": "Heu deixat de publicar aquesta trucada a Facebook",
+            "linkCopiedToCb": "Enllaç copiat al porta-retalls",
+            "codeCopiedToCb": "Codi copiat al porta-retalls",
+            "userHasNoVideo": "El participant no té cap vídeo"
+        },
+        "settingsPopup": {
+            "webCamera": "Càmera web",
+            "screenSharing": "Compartir pantalla",
+            "shareAnotherScreen": "Comparteix una altra pantalla",
+            "turnOffCameras": "Apagueu totes les càmeres",
+            "startFBLive": "Inicieu Facebook en temps real",
+            "stopFBLive": "Atureu Facebook en temps real",
+            "fbLiveTitle": "Títol en directe",
+            "fbLiveDescription": "Descripció en directe",
+            "fbOnlyMeLiveAccess": "Només jo",
+            "fbFriendsAccess": "Amics",
+            "fbPublicAccess": "Públic",
+            "fbStartLive": "Anar a viure",
+            "fbStopLive": "Acabar en directe",
+            "fbEmbedCode": "Incrustar",
+            "copy": "Còpia"
+        },
+        "participantsPopup": {
+            "disconnect": "Desconnecta",
+            "floatingScreens": "Pantalles flotants",
+            "tiledScreens": "Pantalles enrajolades",
+            "loudestExceptMe": "Més fort excepte jo",
+            "maximizeLoudest": "Maximitza més fort",
+            "staticMaximized": "Màxim estàtic",
+            "manual": "Manual"
         }
     },
     "types": {

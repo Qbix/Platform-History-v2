@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Davetiyeler, arkadaşlarınızın henüz tanımadığı numaramızdan gönderilir. Davetiyenin sizden geldiğini bildirmek için hızlı bir metinle takip edin ve bağlantıyı tıklatmalarını isteyin.",
             "confirm": "Davetiyeler, arkadaşlarınızın henüz tanımadığı numaramızdan gönderilir. Davetiyenin sizden geldiğini bildirmek ve bağlantıyı tıklatmalarını istemek için kısa bir metin takip etmek ister misiniz?",
-            "check": "Hey, size {{app}} uygulamasına bir davetiye gönderdim. Lütfen sms&#39;inizi kontrol edin ve linke tıklayın!"
+            "check": "Hey, size {{app}} uygulamasına bir davetiye gönderdim. Lütfen sms&#39;inizi kontrol edin ve linke tıklayın!",
+            "CheckYourMobile": "Lütfen SMS&#39;i kontrol edin ve talimatları izleyin!"
         },
         "email": {
             "alert": "Davetiyeler, arkadaşlarınızın henüz tanımadığı etki alanımızdan gönderilir. Davetiyenin sizden geldiğini bildirmek için hızlı bir metin izleyin ve bağlantıyı tıklamaları istenir.",
             "confirm": "Davetiyeler, arkadaşlarınızın henüz tanımadığı etki alanımızdan gönderilir. Davetiyenin sizden geldiğini bildirmek ve bağlantıyı tıklatmalarını istemek için kısa bir metin takip etmek ister misiniz?",
             "subject": "Davet aldın mı?",
-            "body": "Hey, size {{app}} uygulamasına bir davetiye gönderdim. Lütfen e-postanızı kontrol edin ve oradaki bağlantıyı tıklayın!"
+            "body": "Hey, size {{app}} uygulamasına bir davetiye gönderdim. Lütfen e-postanızı kontrol edin ve oradaki bağlantıyı tıklayın!",
+            "CheckYourEmail": "Lütfen e-postanızı kontrol edin ve talimatları izleyin!"
         }
     },
     "participating": {
         "Title": "Başlık",
         "Subscribed": "Abone",
-        "Participants": "Katılımcılar"
+        "Participants": "Katılımcılar",
+        "AreYouSureRemoveIdentifier": "Bu tanımlayıcıyı kaldırmak istediğinizden emin misiniz?",
+        "AreYouSureUnsubscribeIdentifier": "Bu tanımlayıcının aboneliğini iptal ettiğinizden emin misiniz? Bu tanımlayıcıya yönelik bildirimleri kapatır.",
+        "AreYouSureUnsubscribeDevice": "Bu cihazın aboneliğini iptal ettiğinizden emin misiniz? Bu cihaza yapılan bildirimleri kapatır.",
+        "Identifiers": "Tanımlayıcılar",
+        "Devices": "Cihazlar",
+        "Streams": "Canlı Yayınlar"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Mikrofonu Etkinleştir",
             "cameraBtn": "Kamerayı Etkinleştir",
             "cameraAndMicrophoneBtn": "Kamera ve Mikrofonu Etkinleştir"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Talimatlar",
+            "permissionDenied": "{{kind}} için izin reddedildi. Kullanmak için lütfen aşağıdaki adımları izleyin:",
+            "point1": "&quot;Ayarlar&quot; -&gt; &quot;Gelişmiş&quot; -&gt; &quot;Gizlilik ve güvenlik&quot; -&gt; &quot;Site Ayarları&quot; -&gt; &quot;Kamera&quot; veya &quot;Site Ayarları&quot; -&gt; &quot;Mikrofon&quot;",
+            "point2": "{{hostname}} &#39;ı &quot;Engelle&quot; listesinden kaldırın"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Talimatlar",
+            "permissionDenied": "{{kind}} için izin reddedildi. Lütfen bu sayfayı yeniden yükleyin ve konferansa katılmak için {{kind}} erişimini onaylayın."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Talimatlar",
+            "permissionDenied": "{{kind}} için izin reddedildi. Kullanmak için lütfen aşağıdaki adımları izleyin:",
+            "point1": "Android Ayarlarınıza gidin",
+            "point2": "&quot;Uygulamalar ve bildirimler&quot; i açın",
+            "point3": "&quot;{{communityName}}&quot; dosyasını bulun ve açın",
+            "point4": "İzinler&#39;e dokunun",
+            "point5": "{{kind}} &#39;ı etkinleştir"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Talimatlar",
+            "permissionDenied": "{{kind}} için izin reddedildi. Kullanmak için lütfen aşağıdaki adımları izleyin:",
+            "point1": "İOS Ayarlarınıza gidin",
+            "point2": "&quot;Gizlilik&quot; i açın",
+            "point3": "{{kind}} &#39;yı bulun ve açın",
+            "point4": "&quot;{{communityName}}&quot; yı bulun ve etkinleştirin"
+        },
+        "notices": {
+            "youJoinedRoom": "Odaya katıldın",
+            "joining": "Katılma: {{userName}}",
+            "sbLeftRoom": "{{userName}} odadan ayrıldı",
+            "youLeftRoom": "Odadan çıktın",
+            "codeCopied": "Odadan çıktın",
+            "sbBeganFbLive": "{{userName}} bu çağrıyı Facebook&#39;ta yayınlamaya başladı",
+            "sbStoppedFbLive": "{{userName}} bu çağrıyı Facebook&#39;ta yayınlamayı durdurdu",
+            "youBeganFbLive": "Bu çağrıyı Facebook&#39;ta yayınlamaya başladın",
+            "youStoppedFbLive": "Bu aramayı Facebook&#39;ta yayınlamayı durdurdunuz",
+            "linkCopiedToCb": "link kopyalandı",
+            "codeCopiedToCb": "Kod panoya kopyalandı",
+            "userHasNoVideo": "Katılımcının videosu yok"
+        },
+        "settingsPopup": {
+            "webCamera": "İnternet kamerası",
+            "screenSharing": "Ekran paylaşımı",
+            "shareAnotherScreen": "Başka bir ekran paylaşma",
+            "turnOffCameras": "Tüm kameraları kapat",
+            "startFBLive": "Facebook Canlı Yayınını Başlat",
+            "stopFBLive": "Facebook Canlı Yayınını Durdur",
+            "fbLiveTitle": "Canlı Başlık",
+            "fbLiveDescription": "Canlı Açıklama",
+            "fbOnlyMeLiveAccess": "Sadece ben",
+            "fbFriendsAccess": "Arkadaşlar",
+            "fbPublicAccess": "halka açık",
+            "fbStartLive": "Canlı Yayına Başla",
+            "fbStopLive": "Canlı Yayını Sonlandır",
+            "fbEmbedCode": "Göm",
+            "copy": "kopya"
+        },
+        "participantsPopup": {
+            "disconnect": "kesmek",
+            "floatingScreens": "Yüzen Ekranlar",
+            "tiledScreens": "Döşenmiş Ekranlar",
+            "loudestExceptMe": "Benim Dışımdaki En Yüksek",
+            "maximizeLoudest": "En Yüksek Seviyeye Çıkar",
+            "staticMaximized": "Statik Maksimum",
+            "manual": "Manuel"
         }
     },
     "types": {

@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Undangan dihantar dari nombor kami, yang rakan anda belum mengenali. Ikuti dengan teks pantas untuk memberitahu mereka bahawa jemputan datang daripada anda, meminta mereka untuk mengklik pautan.",
             "confirm": "Undangan dihantar dari nombor kami, yang rakan anda belum mengenali. Adakah anda ingin menindaklanjuti dengan teks pantas untuk memberitahu mereka bahawa jemputan datang daripada anda, meminta mereka untuk mengklik pautan tersebut.",
-            "check": "Hei, saya hanya menghantar anda jemputan ke aplikasi {{app}}. Sila periksa sms anda dan klik pautan!"
+            "check": "Hei, saya hanya menghantar anda jemputan ke aplikasi {{app}}. Sila periksa sms anda dan klik pautan!",
+            "CheckYourMobile": "Sila semak SMS dan ikuti arahan!"
         },
         "email": {
             "alert": "Jemputan dihantar dari domain kami, yang rakan anda belum mengenali. Ikuti dengan teks pantas untuk memberitahu mereka bahawa jemputan datang daripada anda, meminta mereka untuk mengklik pautan.",
             "confirm": "Jemputan dihantar dari domain kami, yang rakan anda belum mengenali. Adakah anda ingin menindaklanjuti dengan teks pantas untuk memberitahu mereka bahawa jemputan datang daripada anda, meminta mereka untuk mengklik pautan tersebut.",
             "subject": "Adakah anda mendapat jemputan?",
-            "body": "Hei, saya hanya menghantar anda jemputan ke aplikasi {{app}}. Sila semak e-mel anda dan klik pautan di sana!"
+            "body": "Hei, saya hanya menghantar anda jemputan ke aplikasi {{app}}. Sila semak e-mel anda dan klik pautan di sana!",
+            "CheckYourEmail": "Sila semak e-mel anda dan ikut arahan!"
         }
     },
     "participating": {
         "Title": "Tajuk",
         "Subscribed": "Dilanggan",
-        "Participants": "Peserta"
+        "Participants": "Peserta",
+        "AreYouSureRemoveIdentifier": "Adakah anda pasti untuk mengalih keluar pengecam ini?",
+        "AreYouSureUnsubscribeIdentifier": "Adakah anda pasti berhenti melanggan pengecam ini? Ia akan mematikan pemberitahuan kepada pengecam ini.",
+        "AreYouSureUnsubscribeDevice": "Adakah anda pasti berhenti melanggan peranti ini? Ia akan mematikan pemberitahuan ke peranti ini.",
+        "Identifiers": "Pengenal pasti",
+        "Devices": "Peranti",
+        "Streams": "Aliran"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Dayakan Mikrofon",
             "cameraBtn": "Dayakan Kamera",
             "cameraAndMicrophoneBtn": "Dayakan Kamera dan Mikrofon"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Arahan",
+            "permissionDenied": "Kebenaran untuk {{kind}} dinafikan. Untuk menggunakannya sila ikuti langkah-langkah berikut:",
+            "point1": "Pergi ke &quot;Tetapan&quot; -&gt; &quot;Lanjutan&quot; -&gt; &quot;Privasi dan keselamatan&quot; -&gt; &quot;Tetapan Tapak&quot; -&gt; &quot;Kamera&quot; atau &quot;Tetapan Tapak&quot; -&gt; &quot;Mikrofon&quot;",
+            "point2": "Alih keluar {{hostname}} dari senarai &quot;Blok&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Arahan",
+            "permissionDenied": "Kebenaran untuk {{kind}} dinafikan. Sila muat semula halaman ini dan sahkan akses ke {{kind}} untuk menyertai persidangan."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Arahan",
+            "permissionDenied": "Kebenaran untuk {{kind}} dinafikan. Untuk menggunakannya sila ikuti langkah-langkah berikut:",
+            "point1": "Pergi ke Tetapan Android anda",
+            "point2": "Buka &quot;Apl &amp; pemberitahuan&quot;",
+            "point3": "Cari &quot;{{communityName}}&quot; dan bukanya",
+            "point4": "Ketik pada Kebenaran",
+            "point5": "Dayakan {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Arahan",
+            "permissionDenied": "Kebenaran untuk {{kind}} dinafikan. Untuk menggunakannya sila ikuti langkah-langkah berikut:",
+            "point1": "Pergi ke Tetapan iOS anda",
+            "point2": "Buka &quot;Privasi&quot;",
+            "point3": "Cari {{kind}} dan bukanya",
+            "point4": "Cari &quot;{{communityName}}&quot; dan aktifkan"
+        },
+        "notices": {
+            "youJoinedRoom": "Anda menyertai bilik",
+            "joining": "Menyertai: {{userName}}",
+            "sbLeftRoom": "{{userName}} meninggalkan bilik itu",
+            "youLeftRoom": "Anda meninggalkan bilik",
+            "codeCopied": "Anda meninggalkan bilik",
+            "sbBeganFbLive": "{{userName}} mula menyiarkan panggilan ini di Facebook",
+            "sbStoppedFbLive": "{{userName}} berhenti menyiarkan panggilan ini di Facebook",
+            "youBeganFbLive": "Anda mula menyiarkan panggilan ini di Facebook",
+            "youStoppedFbLive": "Anda berhenti menyiarkan panggilan ini di Facebook",
+            "linkCopiedToCb": "Pautan disalin ke papan keratan",
+            "codeCopiedToCb": "Kod disalin ke papan keratan",
+            "userHasNoVideo": "Peserta tidak mempunyai video"
+        },
+        "settingsPopup": {
+            "webCamera": "Kamera sesawang",
+            "screenSharing": "Perkongsian Skrin",
+            "shareAnotherScreen": "Kongsi skrin lain",
+            "turnOffCameras": "Matikan semua kamera",
+            "startFBLive": "Mulakan Facebook Livestream",
+            "stopFBLive": "Hentikan Facebook Livestream",
+            "fbLiveTitle": "Tajuk Langsung",
+            "fbLiveDescription": "Penerangan Langsung",
+            "fbOnlyMeLiveAccess": "Hanya saya",
+            "fbFriendsAccess": "Rakan-rakan",
+            "fbPublicAccess": "Awam",
+            "fbStartLive": "Pergi secara langsung",
+            "fbStopLive": "Akhir hidup",
+            "fbEmbedCode": "Benamkan",
+            "copy": "Salinan"
+        },
+        "participantsPopup": {
+            "disconnect": "Putuskan sambungan",
+            "floatingScreens": "Skrin Terapung",
+            "tiledScreens": "Skrin berjubin",
+            "loudestExceptMe": "Paling kuat kecuali saya",
+            "maximizeLoudest": "Maksimumkan Tertinggi",
+            "staticMaximized": "Dimaksimumkan statik",
+            "manual": "Manual"
         }
     },
     "types": {

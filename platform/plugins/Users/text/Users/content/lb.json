@@ -102,5 +102,11 @@
         "noLongerUsing": "Dir sidd net méi mat {{platform}} ugeschloss als",
         "doAuth": "Loggt Iech mat dësem Kont un",
         "doSwitch": "Schalt op dëse Kont"
+    },
+    "roles": {
+        "Owner": "Besëtzer",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Gaascht"
     }
 }

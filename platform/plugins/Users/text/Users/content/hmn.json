@@ -102,5 +102,11 @@
         "noLongerUsing": "Tam sim no koj tsis raug txuas nrog {{platform}} zoo li",
         "doAuth": "Nkag mus nrog cov nyiaj no",
         "doSwitch": "Hloov rau cov nyiaj no"
+    },
+    "roles": {
+        "Owner": "Tus tswv tsev",
+        "Admin": "Cov thawj coj",
+        "Member": "Tswvcuab",
+        "Guest": "Qhua"
     }
 }

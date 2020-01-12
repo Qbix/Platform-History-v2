@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Bag-ong {{relationDisplayType}} sa {{toTitle}}",
         "Streams\/relatedFrom\/*": "Gidugang sa {{toTitle}} ingon {{relationDisplayType}}",
         "Streams\/mention": "Gikutlo ka sa {{&call 'avatar.displayName'}} sa usa ka komento",
-        "Streams\/call": "Ang {{displayName}} nagtawag kanimo"
+        "Streams\/call": "Ang {{displayName}} nagtawag kanimo",
+        "ManageEmailSubscriptions": "pagdumala sa imong mga subskripsyon sa email",
+        "IfUnsubscribe": "Kung gusto nimo mag-unsubscribe"
     },
     "invite": {
         "messageContent": "Gidapit ka ni {{displayName}} sa {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Ang mga imbitasyon gipadala gikan sa among numero, nga wala pa mailhi sa imong mga higala. Susiha ang usa ka dali nga teksto aron mahibal-an nila nga ang imbitasyon gikan kanimo, naghangyo kanila sa pag-klik sa link.",
             "confirm": "Ang mga imbitasyon gipadala gikan sa among numero, nga wala pa mailhi sa imong mga higala. Buot ba nimo nga sundan ang usa ka dali nga teksto aron mahibal-an sila nga ang imbitasyon gikan kanimo, naghangyo kanila sa pag-klik sa link.",
-            "check": "Hoy, gipadala lang ko nimo sa pagdapit sa {{app}} app. Palihug susiha ang imong sms ug i-klik ang link!"
+            "check": "Hoy, gipadala lang ko nimo sa pagdapit sa {{app}} app. Palihug susiha ang imong sms ug i-klik ang link!",
+            "CheckYourMobile": "Palihug susihon ang SMS ug sunda ang mga panudlo!"
         },
         "email": {
             "alert": "Ang mga imbitasyon gipadala gikan sa among domain, nga wala pa mailhi sa imong mga higala. Susiha ang usa ka dali nga teksto aron mahibal-an nila nga ang imbitasyon gikan kanimo, naghangyo kanila sa pag-klik sa link.",
             "confirm": "Ang mga imbitasyon gipadala gikan sa among domain, nga wala pa mailhi sa imong mga higala. Buot ba nimo nga sundan ang usa ka dali nga teksto aron mahibal-an sila nga ang imbitasyon gikan kanimo, naghangyo kanila sa pag-klik sa link.",
             "subject": "Nakadawat ka ba og usa ka imbitasyon?",
-            "body": "Hoy, gipadala lang ko nimo sa pagdapit sa {{app}} app. Palihug susiha ang imong email ug i-klik ang link sa didto!"
+            "body": "Hoy, gipadala lang ko nimo sa pagdapit sa {{app}} app. Palihug susiha ang imong email ug i-klik ang link sa didto!",
+            "CheckYourEmail": "Palihug susihon ang imong email ug sunda ang mga panudlo!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Pag-ayo sa Microphone",
             "cameraBtn": "Pag-ayo sa Camera",
             "cameraAndMicrophoneBtn": "Pag-access sa Camera ug Microphone"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Panudlo",
+            "permissionDenied": "Pagtugot alang sa {{kind}} gilimod. Aron magamit kini palihug pagsunud sa kini nga mga lakang:",
+            "point1": "Lakaw ngadto sa &quot;Mga Setting&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Pagkapribado ug seguridad&quot; -&gt; &quot;Mga Setting sa Site&quot; -&gt; &quot;Camera&quot; o &quot;Mga Setting sa Site&quot; -&gt; &quot;Mikropono&quot;",
+            "point2": "Kuhaa ang {{hostname}} gikan sa &quot;block&quot; nga lista"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Panudlo",
+            "permissionDenied": "Pagtugot alang sa {{kind}} gilimod. Palihug i-reload kini nga panid ug kumpirmahi ang pag-access sa {{kind}} aron moapil sa komperensya."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Panudlo",
+            "permissionDenied": "Pagtugot alang sa {{kind}} gilimod. Aron magamit kini palihug pagsunud sa kini nga mga lakang:",
+            "point1": "Lakaw ngadto sa imong mga setting sa Android",
+            "point2": "Buksi ang &quot;Apps &amp; notifications&quot;",
+            "point3": "Pangitaa ang &quot;{{communityName}}&quot; ug ablihi kini",
+            "point4": "Tapik sa Mga Permissions",
+            "point5": "Pag-ayo sa {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Panudlo",
+            "permissionDenied": "Pagtugot alang sa {{kind}} gilimod. Aron magamit kini palihug pagsunud sa kini nga mga lakang:",
+            "point1": "Lakaw ngadto sa imong mga Settings sa iOS",
+            "point2": "Bukas nga &quot;Pagkapribado&quot;",
+            "point3": "Pagpangita {{kind}} ug ablihi kini",
+            "point4": "Pangitaa ang &quot;{{communityName}}&quot; ug pagana"
+        },
+        "notices": {
+            "youJoinedRoom": "Sumali ka sa kwarto",
+            "joining": "Paghiusa: {{userName}}",
+            "sbLeftRoom": "{{userName}} mibiya sa kwarto",
+            "youLeftRoom": "Naghawa ka sa kwarto",
+            "codeCopied": "Naghawa ka sa kwarto",
+            "sbBeganFbLive": "Nagsugod ang pag-broadcast sa {{userName}} sa kini nga tawag sa Facebook",
+            "sbStoppedFbLive": "Ang {{userName}} mihunong sa pagsibya sa kini nga tawag sa Facebook",
+            "youBeganFbLive": "Nagsugod ka sa pag-broadcast sa kini nga tawag sa Facebook",
+            "youStoppedFbLive": "Nag-undang ka sa pag-broadcast sa kini nga tawag sa Facebook",
+            "linkCopiedToCb": "Link nga gikopya sa clipboard",
+            "codeCopiedToCb": "Ang code nga gikopya sa clipboard",
+            "userHasNoVideo": "Wala’y video ang partisipante"
+        },
+        "settingsPopup": {
+            "webCamera": "Web Camera",
+            "screenSharing": "Pagbahinbahin sa Screen",
+            "shareAnotherScreen": "Pagpakigbahin lain nga screen",
+            "turnOffCameras": "Patya ang tanan nga mga kamera",
+            "startFBLive": "Sugdi ang Facebook Livestream",
+            "stopFBLive": "Hunong ang Facebook Livestream",
+            "fbLiveTitle": "Mabuhi nga titulo",
+            "fbLiveDescription": "Paglaraw sa Live",
+            "fbOnlyMeLiveAccess": "Ako ra",
+            "fbFriendsAccess": "Mga Higala",
+            "fbPublicAccess": "Publiko",
+            "fbStartLive": "Lakaw nga Mabuhi",
+            "fbStopLive": "Katapusan nga Pagpuyo",
+            "fbEmbedCode": "Gipasangkad",
+            "copy": "Kopyahon"
+        },
+        "participantsPopup": {
+            "disconnect": "Pagdugtong",
+            "floatingScreens": "Mga naglutaw nga Screens",
+            "tiledScreens": "Gipunting nga Mga screenshot",
+            "loudestExceptMe": "Labing Labing Maayong Gawas",
+            "maximizeLoudest": "Pag-maximize ang Loudest",
+            "staticMaximized": "Static nga Nag-ayo",
+            "manual": "Manwal"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Tinuod nga Panahon sa Pagtawag",
             "description": "usa ka tinuud nga tawag sa tawag \/ audio"
         }
+    },
+    "participating": {
+        "Title": "Titulo",
+        "Subscribed": "Naka-subscribe",
+        "Participants": "Mga miapil",
+        "AreYouSureRemoveIdentifier": "Sigurado ka nga kuhaon kini nga identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Sigurado ka nga dili pag-unsubscribe kini nga identifier? Kini magpalong sa mga pahibalo sa kini nga identifier.",
+        "AreYouSureUnsubscribeDevice": "Sigurado ka nga dili pag-unsubscribe kini nga aparato? Kini magpugong sa mga pahibalo sa kini nga aparato.",
+        "Identifiers": "Mga nagpakilala",
+        "Devices": "Mga lalang",
+        "Streams": "Mga sapa"
     }
 }

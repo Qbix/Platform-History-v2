@@ -102,5 +102,11 @@
         "noLongerUsing": "Anjeun henteu deui nyambung ka {{platform}} salaku",
         "doAuth": "Asup log kana rekening ieu",
         "doSwitch": "Pindah ka akun ieu"
+    },
+    "roles": {
+        "Owner": "Anu gaduh",
+        "Admin": "Admin",
+        "Member": "Anggota",
+        "Guest": "Tamu"
     }
 }

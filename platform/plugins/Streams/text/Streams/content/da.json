@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Invitationer sendes fra vores nummer, som dine venner endnu ikke genkender. Følg med en hurtig tekst for at fortælle dem, at invitationen kom fra dig og bede dem om at klikke på linket.",
             "confirm": "Invitationer sendes fra vores nummer, som dine venner endnu ikke genkender. Vil du følge med med en hurtig tekst for at fortælle dem, at invitationen kom fra dig, og bede dem om at klikke på linket.",
-            "check": "Hej, jeg har lige sendt dig en invitation til appen {{app}}. Tjek venligst dine sms og klik på linket!"
+            "check": "Hej, jeg har lige sendt dig en invitation til appen {{app}}. Tjek venligst dine sms og klik på linket!",
+            "CheckYourMobile": "Kontroller venligst SMS og følg instruktionerne!"
         },
         "email": {
             "alert": "Invitationer sendes fra vores domæne, som dine venner endnu ikke genkender. Følg med en hurtig tekst for at fortælle dem, at invitationen kom fra dig og bede dem om at klikke på linket.",
             "confirm": "Invitationer sendes fra vores domæne, som dine venner endnu ikke genkender. Vil du følge med med en hurtig tekst for at fortælle dem, at invitationen kom fra dig, og bede dem om at klikke på linket.",
             "subject": "Fik du en invitation?",
-            "body": "Hej, jeg har lige sendt dig en invitation til appen {{app}}. Tjek venligst din email og klik på linket derinde!"
+            "body": "Hej, jeg har lige sendt dig en invitation til appen {{app}}. Tjek venligst din email og klik på linket derinde!",
+            "CheckYourEmail": "Kontroller din e-mail og følg instruktionerne!"
         }
     },
     "participating": {
         "Title": "Titel",
         "Subscribed": "Abonneret",
-        "Participants": "Deltagere"
+        "Participants": "Deltagere",
+        "AreYouSureRemoveIdentifier": "Er du sikker på at fjerne denne id?",
+        "AreYouSureUnsubscribeIdentifier": "Er du sikker på at afmelde denne id? Det deaktiverer underretninger til denne identifikator.",
+        "AreYouSureUnsubscribeDevice": "Er du sikker på at afmelde denne enhed? Det deaktiverer underretninger til denne enhed.",
+        "Identifiers": "identifikatorer",
+        "Devices": "Enheder",
+        "Streams": "Vandløb"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Aktivér mikrofon",
             "cameraBtn": "Aktivér kamera",
             "cameraAndMicrophoneBtn": "Aktivér kamera og mikrofon"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instruktioner",
+            "permissionDenied": "Tilladelse til {{kind}} afvist. Følg disse trin for at bruge det:",
+            "point1": "Gå til &quot;Indstillinger&quot; -&gt; &quot;Avanceret&quot; -&gt; &quot;Privatliv og sikkerhed&quot; -&gt; &quot;Webstedsindstillinger&quot; -&gt; &quot;Kamera&quot; eller &quot;Webstedsindstillinger&quot; -&gt; &quot;Mikrofon&quot;",
+            "point2": "Fjern {{hostname}} fra &quot;Bloker&quot; -listen"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instruktioner",
+            "permissionDenied": "Tilladelse til {{kind}} afvist. Genindlæs denne side igen, og bekræft adgangen til {{kind}} for at deltage i konferencen."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instruktioner",
+            "permissionDenied": "Tilladelse til {{kind}} afvist. Følg disse trin for at bruge det:",
+            "point1": "Gå til dine Android-indstillinger",
+            "point2": "Åbn &quot;Apps &amp; underretninger&quot;",
+            "point3": "Find &quot;{{communityName}}&quot; og åbn den",
+            "point4": "Tryk på tilladelser",
+            "point5": "Aktivér {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instruktioner",
+            "permissionDenied": "Tilladelse til {{kind}} afvist. Følg disse trin for at bruge det:",
+            "point1": "Gå til dine iOS-indstillinger",
+            "point2": "Åbn &quot;Privatliv&quot;",
+            "point3": "Find {{kind}} og åbn det",
+            "point4": "Find &quot;{{communityName}}&quot; og aktiver"
+        },
+        "notices": {
+            "youJoinedRoom": "Du kom med i rummet",
+            "joining": "Deltagelse: {{userName}}",
+            "sbLeftRoom": "{{userName}} forlod rummet",
+            "youLeftRoom": "Du forlod rummet",
+            "codeCopied": "Du forlod rummet",
+            "sbBeganFbLive": "{{userName}} begyndte at udsende dette opkald i Facebook",
+            "sbStoppedFbLive": "{{userName}} stoppede med at sende dette opkald i Facebook",
+            "youBeganFbLive": "Du begyndte at udsende dette opkald i Facebook",
+            "youStoppedFbLive": "Du stoppede med at udsende dette opkald i Facebook",
+            "linkCopiedToCb": "Link kopieret til udklipsholder",
+            "codeCopiedToCb": "Kode kopieret til udklipsholder",
+            "userHasNoVideo": "Deltageren har ingen video"
+        },
+        "settingsPopup": {
+            "webCamera": "Web kamera",
+            "screenSharing": "Skærmedeling",
+            "shareAnotherScreen": "Del en anden skærm",
+            "turnOffCameras": "Sluk for alle kameraer",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "fbLiveTitle": "Live titel",
+            "fbLiveDescription": "Live beskrivelse",
+            "fbOnlyMeLiveAccess": "Kun mig",
+            "fbFriendsAccess": "venner",
+            "fbPublicAccess": "Offentlig",
+            "fbStartLive": "Gå live",
+            "fbStopLive": "Afslut Live",
+            "fbEmbedCode": "Indlejre",
+            "copy": "Kopi"
+        },
+        "participantsPopup": {
+            "disconnect": "Koble fra",
+            "floatingScreens": "Flydende skærme",
+            "tiledScreens": "Flisebelagte skærme",
+            "loudestExceptMe": "Højeste undtagen mig",
+            "maximizeLoudest": "Maksimer højest",
+            "staticMaximized": "Statisk maksimeret",
+            "manual": "brugervejledning"
         }
     },
     "types": {

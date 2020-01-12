@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "يتم إرسال الدعوات من رقمنا ، والتي لم يتعرف عليها أصدقاؤك بعد. تابع بنص سريع لإعلامهم بأن الدعوة جاءت منك ، واطلب منهم النقر على الرابط.",
             "confirm": "يتم إرسال الدعوات من رقمنا ، والتي لم يتعرف عليها أصدقاؤك بعد. هل ترغب في المتابعة بنص سريع لإعلامهم بأن الدعوة جاءت منك ، وتطلب منهم النقر على الرابط.",
-            "check": "مرحبًا ، لقد أرسلت إليك دعوة إلى تطبيق {{app}}. يرجى التحقق من الرسائل القصيرة الخاصة بك وانقر على الرابط!"
+            "check": "مرحبًا ، لقد أرسلت إليك دعوة إلى تطبيق {{app}}. يرجى التحقق من الرسائل القصيرة الخاصة بك وانقر على الرابط!",
+            "CheckYourMobile": "يرجى التحقق من الرسائل القصيرة واتباع التعليمات!"
         },
         "email": {
             "alert": "يتم إرسال الدعوات من نطاقنا ، والتي لم يتعرف عليها أصدقاؤك بعد. تابع بنص سريع لإعلامهم بأن الدعوة جاءت منك ، واطلب منهم النقر على الرابط.",
             "confirm": "يتم إرسال الدعوات من نطاقنا ، والتي لم يتعرف عليها أصدقاؤك بعد. هل ترغب في المتابعة بنص سريع لإعلامهم بأن الدعوة جاءت منك ، وتطلب منهم النقر على الرابط.",
             "subject": "هل تلقيت دعوة؟",
-            "body": "مرحبًا ، لقد أرسلت إليك دعوة إلى تطبيق {{app}}. يرجى التحقق من بريدك الإلكتروني والنقر على الرابط هناك!"
+            "body": "مرحبًا ، لقد أرسلت إليك دعوة إلى تطبيق {{app}}. يرجى التحقق من بريدك الإلكتروني والنقر على الرابط هناك!",
+            "CheckYourEmail": "يرجى التحقق من بريدك الإلكتروني واتباع التعليمات!"
         }
     },
     "participating": {
         "Title": "عنوان",
         "Subscribed": "المشترك",
-        "Participants": "المشاركين"
+        "Participants": "المشاركين",
+        "AreYouSureRemoveIdentifier": "هل أنت متأكد من إزالة هذا المعرف؟",
+        "AreYouSureUnsubscribeIdentifier": "هل أنت متأكد من إلغاء اشتراك هذا المعرف؟ سيؤدي ذلك إلى إيقاف تشغيل الإشعارات لهذا المعرف.",
+        "AreYouSureUnsubscribeDevice": "هل أنت متأكد من إلغاء اشتراك هذا الجهاز؟ سيؤدي إلى إيقاف تشغيل الإشعارات لهذا الجهاز.",
+        "Identifiers": "معرفات",
+        "Devices": "الأجهزة",
+        "Streams": "تيارات"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "تمكين الميكروفون",
             "cameraBtn": "قم بتفعيل الكاميرا",
             "cameraAndMicrophoneBtn": "تمكين الكاميرا والميكروفون"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "تعليمات",
+            "permissionDenied": "تم رفض إذن {{kind}}. لاستخدامها ، يرجى اتباع الخطوات التالية:",
+            "point1": "انتقل إلى &quot;الإعدادات&quot; -&gt; &quot;خيارات متقدمة&quot; -&gt; &quot;الخصوصية والأمان&quot; -&gt; &quot;إعدادات الموقع&quot; -&gt; &quot;الكاميرا&quot; أو &quot;إعدادات الموقع&quot; -&gt; &quot;الميكروفون&quot;",
+            "point2": "أزل {{hostname}} من قائمة &quot;الحظر&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "تعليمات",
+            "permissionDenied": "تم رفض إذن {{kind}}. يرجى إعادة تحميل هذه الصفحة وتأكيد الوصول إلى {{kind}} للانضمام إلى المؤتمر."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "تعليمات",
+            "permissionDenied": "تم رفض إذن {{kind}}. لاستخدامها ، يرجى اتباع الخطوات التالية:",
+            "point1": "انتقل إلى إعدادات Android",
+            "point2": "افتح &quot;التطبيقات والإشعارات&quot;",
+            "point3": "ابحث عن &quot;{{communityName}}&quot; وافتحه",
+            "point4": "اضغط على أذونات",
+            "point5": "تمكين {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "تعليمات",
+            "permissionDenied": "تم رفض إذن {{kind}}. لاستخدامها ، يرجى اتباع الخطوات التالية:",
+            "point1": "انتقل إلى إعدادات iOS الخاصة بك",
+            "point2": "فتح &quot;الخصوصية&quot;",
+            "point3": "ابحث عن {{kind}} وافتحه",
+            "point4": "ابحث عن &quot;{{communityName}}&quot; وقم بتمكينه"
+        },
+        "notices": {
+            "youJoinedRoom": "لقد انضممت إلى الغرفة",
+            "joining": "الانضمام: {{userName}}",
+            "sbLeftRoom": "{{userName}} غادر الغرفة",
+            "youLeftRoom": "لقد تركت الغرفة",
+            "codeCopied": "لقد تركت الغرفة",
+            "sbBeganFbLive": "{{userName}} بدأ بث هذه الدعوة في Facebook",
+            "sbStoppedFbLive": "{{userName}} توقف عن بث هذه المكالمة في Facebook",
+            "youBeganFbLive": "لقد بدأت بث هذه المكالمة في Facebook",
+            "youStoppedFbLive": "لقد توقفت عن بث هذه المكالمة في Facebook",
+            "linkCopiedToCb": "تم نسخ الرابط إلى الحافظة",
+            "codeCopiedToCb": "تم نسخ الرمز إلى الحافظة",
+            "userHasNoVideo": "المشارك ليس لديه فيديو"
+        },
+        "settingsPopup": {
+            "webCamera": "كاميرا ويب",
+            "screenSharing": "مشاركة الشاشة",
+            "shareAnotherScreen": "مشاركة شاشة أخرى",
+            "turnOffCameras": "أطفئ جميع الكاميرات",
+            "startFBLive": "بدء الفيسبوك Livestream",
+            "stopFBLive": "وقف الفيسبوك Livestream",
+            "fbLiveTitle": "عنوان لايف",
+            "fbLiveDescription": "وصف لايف",
+            "fbOnlyMeLiveAccess": "انا فقط",
+            "fbFriendsAccess": "اصحاب",
+            "fbPublicAccess": "عامة",
+            "fbStartLive": "الذهاب لايف",
+            "fbStopLive": "نهاية لايف",
+            "fbEmbedCode": "تضمين",
+            "copy": "نسخ"
+        },
+        "participantsPopup": {
+            "disconnect": "قطع الاتصال",
+            "floatingScreens": "شاشات عائمة",
+            "tiledScreens": "شاشات المتجانبة",
+            "loudestExceptMe": "بأعلى صوتي إلا أنا",
+            "maximizeLoudest": "تعظيم بصوت أعلى",
+            "staticMaximized": "ثابت تعظيم",
+            "manual": "كتيب"
         }
     },
     "types": {

@@ -1122,7 +1122,8 @@ class Q_Utils
 	 * @static
 	 * @throws {Q_Exception_MissingConfig} If node host or port are not defined
 	 */
-	static function nodeUrl () {
+	static function nodeUrl ()
+	{
 		$url = Q_Config::get('Q', 'node', 'url', null);
 		if (isset($url)) {
 			return Q_Uri::interpolateUrl($url);
@@ -1143,7 +1144,9 @@ class Q_Utils
 	 * @static
 	 * @throws {Q_Exception_MissingConfig} If node host or port are not defined
 	 */
-	static function socketPath () {
+	static function socketPath ()
+	
+	{
 		return Q_Config::get('Q', 'node', 'socket', 'path', '/socket.io');
 	}
 
@@ -1155,7 +1158,8 @@ class Q_Utils
 	 * @param {string} $dest
 	 * @throws {Q_Exception_MissingConfig} If node host or port are not defined
 	 */
-	static function copy($source, $dest) {
+	static function copy($source, $dest)
+	{
 		
 		if (file_exists($source) and !is_dir($source) and !is_dir($dest)) {
 			// just copies a file

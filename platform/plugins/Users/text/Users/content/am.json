@@ -102,5 +102,11 @@
         "noLongerUsing": "ከአሁን በኋላ ከ {{platform}} ጋር አልተገናኙም",
         "doAuth": "በዚህ መለያ ይግቡ",
         "doSwitch": "ወደዚህ መለያ ቀይር"
+    },
+    "roles": {
+        "Owner": "ባለቤት",
+        "Admin": "አስተዳዳሪ",
+        "Member": "አባል",
+        "Guest": "እንግዳ"
     }
 }
