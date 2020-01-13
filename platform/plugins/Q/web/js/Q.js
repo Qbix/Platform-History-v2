@@ -11702,7 +11702,7 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
 	var screenX = Q.Pointer.getX(evt) - Q.Pointer.scrollLeft();
 	var screenY = Q.Pointer.getY(evt) - Q.Pointer.scrollTop();
 	if (!screenX || !screenY || Q.Pointer.canceledClick
-	|| (!evt.button || (evt.touches && !evt.touches.length))) {
+	|| (!evt.button && (evt.touches && !evt.touches.length))) {
 		return;
 	}
 	var ccd = Q.Pointer.options.cancelClickDistance;
