@@ -37,7 +37,7 @@ function MyApp_welcome_response_content($params)
 		$fbApp = isset($fbApps[$app]) ? $fbApps[$app] : reset($fbApps);
 		if ($appId = $fbApp['appId']) {
 			Q_Response::setMeta(array(
-				'attrName' => 'property', 'attrValue' => 'fb:app_id', 'content' => $title
+				'attrName' => 'property', 'attrValue' => 'fb:app_id', 'content' => $appId
 			));
 		}
 	}
