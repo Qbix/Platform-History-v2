@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "نئون {{relationDisplayType}} ۾ {{toTitle}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} as {{relationDisplayType}} تي شامل ڪيو ويو",
         "Streams\/mention": "{{&call 'avatar.displayName'}} توهان جي تبصرو ۾ چيو",
-        "Streams\/call": "{{displayName}} توهان کي سڏي رهيو آهي"
+        "Streams\/call": "{{displayName}} توهان کي سڏي رهيو آهي",
+        "ManageEmailSubscriptions": "توهان جي اي ميل سبسڪرپشن کي منظم ڪريو",
+        "IfUnsubscribe": "جيڪڏهن توهان ختم ڪرڻ چاهيو ٿا"
     },
     "invite": {
         "messageContent": "{{displayName}} مدعو توهان کي {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "دعوت اسان جي نمبر تان موڪليا ويا آهن، جيڪي توهان جي دوستن کي اڃان تائين نه سڃاڻندا آهن. جلدي متن سان گڏ پوئتي رکو ته انهن کي اهو دعوت ڏيو ته توهان کان دعوت آيا آهيو، انهن کي لنڪ تي ڪلڪ ڪرڻ لاء پڇڻ.",
             "confirm": "دعوت اسان جي نمبر تان موڪليا ويا آهن، جيڪي توهان جي دوستن کي اڃان تائين نه سڃاڻندا آهن. ڇا توهان جلدي متن سان گڏ اپلوڊ ڪرڻ چاهيندا ته انهي کي انهي جي دعوت ڏيو ته توهان انهي دعوت مان آيا آهيو، انهن کي لنڪ تي ڪلڪ ڪرڻ لاء پڇو.",
-            "check": "افسوس، مون توهان صرف توهان کي {{app}} ايپ تي دعوت ڏني آهي. مهرباني ڪري پنهنجن ايس ايم ايس جي چيڪ ڪريو ۽ لنڪ تي ڪلڪ ڪريو!"
+            "check": "افسوس، مون توهان صرف توهان کي {{app}} ايپ تي دعوت ڏني آهي. مهرباني ڪري پنهنجن ايس ايم ايس جي چيڪ ڪريو ۽ لنڪ تي ڪلڪ ڪريو!",
+            "CheckYourMobile": "مھرباني ڪري ايس ايم ايس تي وڃو ۽ هدايتون ھجن."
         },
         "email": {
             "alert": "اسان جي ڊومين کان دعوت ناما موڪليا ويا آهن، جيڪي توهان جي دوستن کي اڃان تائين تسليم نٿا ڪن. جلدي متن سان گڏ پوئتي رکو ته انهن کي اهو دعوت ڏيو ته توهان کان دعوت آيا آهيو، انهن کي لنڪ تي ڪلڪ ڪرڻ لاء پڇڻ.",
             "confirm": "اسان جي ڊومين کان دعوت ناما موڪليا ويا آهن، جيڪي توهان جي دوستن کي اڃان تائين تسليم نٿا ڪن. ڇا توهان جلدي متن سان گڏ اپلوڊ ڪرڻ چاهيندا ته انهي کي انهي جي دعوت ڏيو ته توهان انهي دعوت مان آيا آهيو، انهن کي لنڪ تي ڪلڪ ڪرڻ لاء پڇو.",
             "subject": "ڇا توهان دعوت ڏني آهي؟",
-            "body": "افسوس، مون توهان صرف توهان کي {{app}} ايپ تي دعوت ڏني آهي. مهرباني ڪري پنهنجي اي ميل پڙتال ڪريو ۽ لنڪ تي ڪلڪ ڪريو!"
+            "body": "افسوس، مون توهان صرف توهان کي {{app}} ايپ تي دعوت ڏني آهي. مهرباني ڪري پنهنجي اي ميل پڙتال ڪريو ۽ لنڪ تي ڪلڪ ڪريو!",
+            "CheckYourEmail": "مهرباني ڪري پنهنجي اي ميل پڙتال ۽ هدايتن جي پيروي ڪريو!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "مائڪروفون کي فعال ڪريو",
             "cameraBtn": "ڪئميرا ڏسو",
             "cameraAndMicrophoneBtn": "ڪئميرا ۽ مائڪروفون کي فعال ڪريو"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "هدايتون",
+            "permissionDenied": "اجازت {{kind}} کان انڪار ڪيو. ان کي استعمال ڪرڻ لاء مهرباني ڪري هنن مرحلن تي عمل ڪريو:",
+            "point1": "&quot;سيٽنگون&quot; ڏانهن وڃو -&gt; &quot;ترقي&quot; -&gt; &quot;رازداري ۽ سيڪيورٽي&quot; -&gt; &quot;سائيٽ سيٽنگون&quot; -&gt; &quot;ڪئميرا&quot; يا &quot;سائيٽ سيٽنگون&quot; -&gt; &quot;مائڪروفون&quot;",
+            "point2": "{{hostname}} مان &quot;بلاڪ&quot; جي فهرست تان هٽايو"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "هدايتون",
+            "permissionDenied": "اجازت {{kind}} کان انڪار ڪيو. مهرباني ڪري هن صفحي کي لوڊ ڪريو ۽ ڪانفرنس ۾ شامل ٿيڻ لاء {{kind}} تائين رسائي جي تصديق ڪريو."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "هدايتون",
+            "permissionDenied": "اجازت {{kind}} کان انڪار ڪيو. ان کي استعمال ڪرڻ لاء مهرباني ڪري هنن مرحلن تي عمل ڪريو:",
+            "point1": "توهان جي Android سيٽنگون وڃو",
+            "point2": "&quot;ايپس ۽ اطلاعات&quot; کوليو",
+            "point3": "ڳوليو &quot;{{communityName}}&quot; ۽ ان کي کوليو",
+            "point4": "اجازتن تي ٽيپ ڪريو",
+            "point5": "सक्षम {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "هدايتون",
+            "permissionDenied": "اجازت {{kind}} کان انڪار ڪيو. ان کي استعمال ڪرڻ لاء مهرباني ڪري هنن مرحلن تي عمل ڪريو:",
+            "point1": "توهان جي iOS سيٽنگون ڏانهن وڃو",
+            "point2": "&quot;رازداري&quot; کوليو",
+            "point3": "ڳوليو {{kind}} ۽ ان کي کوليو",
+            "point4": "ڳوليو &quot;{{communityName}}&quot; ۽ قابل"
+        },
+        "notices": {
+            "youJoinedRoom": "توهان ڪمري ۾ شامل ٿي",
+            "joining": "شامل ٿيڻ: {{userName}}",
+            "sbLeftRoom": "{{userName}} ڪمري ڇڏيو",
+            "youLeftRoom": "توهان ڪمري کي ڇڏي ڏنو",
+            "codeCopied": "توهان ڪمري کي ڇڏي ڏنو",
+            "sbBeganFbLive": "{{userName}} Facebook ۾ هن ڪال کي نشر ڪرڻ شروع ڪيو",
+            "sbStoppedFbLive": "{{userName}} هن فيس کي فرحت ۾ روڪي ڇڏيو",
+            "youBeganFbLive": "توهان هن فيس کي ف فيس ۾ نشر ڪرڻ شروع ڪيو",
+            "youStoppedFbLive": "توهان هن فون کي فيسفريب ۾ روڪي ڇڏيو",
+            "linkCopiedToCb": "ڪڙي ڪلپ بورڊ ڏانهن نقل ڪيو ويو آهي",
+            "codeCopiedToCb": "ڪوڊ ڪلپ بورڊ ڏانهن نقل ڪيو ويو آهي",
+            "userHasNoVideo": "شرڪت ڪندڙ ڪا وڊيو ناهي"
+        },
+        "settingsPopup": {
+            "webCamera": "ويب ڪيمرا",
+            "screenSharing": "اسڪرين شيئرنگ",
+            "shareAnotherScreen": "ٻي اسڪرين کي ورهايو",
+            "turnOffCameras": "سڀ ڪئميرا بند ڪريو",
+            "startFBLive": "شروعاتي فيسڪشن Livestream",
+            "stopFBLive": "فيسڪشن ليوزيٽ ڪريو اسٽاپ",
+            "fbLiveTitle": "ٽائيٽل جو عنوان",
+            "fbLiveDescription": "جيون تفصيل",
+            "fbOnlyMeLiveAccess": "صرف مون کي",
+            "fbFriendsAccess": "دوست",
+            "fbPublicAccess": "عوامي",
+            "fbStartLive": "جيئڻ وڃو",
+            "fbStopLive": "انٽرنيٽ ختم ڪريو",
+            "fbEmbedCode": "داخل ڪيو ويو",
+            "copy": "ڪاپي"
+        },
+        "participantsPopup": {
+            "disconnect": "ناڪاري",
+            "floatingScreens": "سچل اسڪرين",
+            "tiledScreens": "ٽريل اسڪرين",
+            "loudestExceptMe": "قافلو مون کان سواء",
+            "maximizeLoudest": "وڌ ۾ وڌ وڌو",
+            "staticMaximized": "جامد وڌايو ويو",
+            "manual": "دستياب"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "ريئل ٽائم ڪال",
             "description": "هڪ حقيقي وقت وڊيو \/ آڊيو ڪال"
         }
+    },
+    "participating": {
+        "Title": "ٽائيٽل",
+        "Subscribed": "رڪنيت حاصل ڪئي وئي",
+        "Participants": "شرڪت ڪندڙ",
+        "AreYouSureRemoveIdentifier": "ڇا توهان کي هن سڃاڻپ کي ختم ڪرڻ جي پڪ آهي؟",
+        "AreYouSureUnsubscribeIdentifier": "ڇا اوھان کي ھن سڃاڻپ ڪندڙ کي ختم ڪرڻ جي پڪ آھي؟ اهو هن سڃاڻپ ڪندڙ کي اطلاعن کي بند ڪندو.",
+        "AreYouSureUnsubscribeDevice": "ڇا توهان کي هن ڊوائيس جو رڪنيت ختم ڪيو وڃي؟ اهو هن ڊوائيس لاء اطلاعات بند ڪري ڇڏيندو.",
+        "Identifiers": "سڃاڻپ ڪندڙ",
+        "Devices": "سامان",
+        "Streams": "سلسلا"
     }
 }

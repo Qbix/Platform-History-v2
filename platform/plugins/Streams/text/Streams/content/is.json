@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Boð eru send frá númerinu okkar, sem vinir þínir þekkja ekki ennþá. Fylgdu með skjótum texta til að láta þá vita að boðið kom frá þér og biðja þá að smella á tengilinn.",
             "confirm": "Boð eru send frá númerinu okkar, sem vinir þínir þekkja ekki ennþá. Viltu fylgja með stuttum texta til að láta þá vita að boðið kom frá þér og biðja þá að smella á tengilinn.",
-            "check": "Hey, ég sendi þér bara boð í {{app}} app. Vinsamlegast athugaðu sms og smelltu á tengilinn!"
+            "check": "Hey, ég sendi þér bara boð í {{app}} app. Vinsamlegast athugaðu sms og smelltu á tengilinn!",
+            "CheckYourMobile": "Vinsamlegast athugaðu SMS og fylgdu leiðbeiningunum!"
         },
         "email": {
             "alert": "Boð eru send frá léninu okkar, sem vinir þínir þekkja ekki ennþá. Fylgdu með skjótum texta til að láta þá vita að boðið kom frá þér og biðja þá að smella á tengilinn.",
             "confirm": "Boð eru send frá léninu okkar, sem vinir þínir þekkja ekki ennþá. Viltu fylgja með stuttum texta til að láta þá vita að boðið kom frá þér og biðja þá að smella á tengilinn.",
             "subject": "Fékkstu boð?",
-            "body": "Hey, ég sendi þér bara boð í {{app}} app. Vinsamlegast athugaðu netfangið þitt og smelltu á tengilinn þarna!"
+            "body": "Hey, ég sendi þér bara boð í {{app}} app. Vinsamlegast athugaðu netfangið þitt og smelltu á tengilinn þarna!",
+            "CheckYourEmail": "Vinsamlegast athugaðu tölvupóstinn þinn og fylgdu leiðbeiningunum!"
         }
     },
     "participating": {
         "Title": "Titill",
         "Subscribed": "Áskrifandi",
-        "Participants": "Þátttakendur"
+        "Participants": "Þátttakendur",
+        "AreYouSureRemoveIdentifier": "Ertu viss um að fjarlægja þetta auðkenni?",
+        "AreYouSureUnsubscribeIdentifier": "Ertu viss um að segja upp áskrift að þessu auðkenni? Það mun slökkva á tilkynningum um þetta auðkenni.",
+        "AreYouSureUnsubscribeDevice": "Ertu viss um að segja upp áskrift að þessu tæki? Það mun slökkva á tilkynningum um þetta tæki.",
+        "Identifiers": "Auðkenni",
+        "Devices": "Tæki",
+        "Streams": "Straumar"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Virkja hljóðnemann",
             "cameraBtn": "Virkja myndavél",
             "cameraAndMicrophoneBtn": "Virkja myndavél og hljóðnema"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Leiðbeiningar",
+            "permissionDenied": "Leyfi fyrir {{kind}} synjað. Fylgdu þessum skrefum til að nota það:",
+            "point1": "Farðu í „Stillingar“ -&gt; „Ítarleg“ -&gt; „Persónuvernd og öryggi“ -&gt; „Vefstillingar“ -&gt; „Myndavél“ eða „Vefsvæðisstillingar“ -&gt; „Hljóðnemi“",
+            "point2": "Fjarlægðu {{hostname}} af „Loka“ lista"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Leiðbeiningar",
+            "permissionDenied": "Leyfi fyrir {{kind}} synjað. Vinsamlegast endurhladdu þessa síðu og staðfestu aðgang að {{kind}} til að taka þátt í ráðstefnunni."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Leiðbeiningar",
+            "permissionDenied": "Leyfi fyrir {{kind}} synjað. Fylgdu þessum skrefum til að nota það:",
+            "point1": "Farðu í Android stillingarnar þínar",
+            "point2": "Opnaðu „Forrit og tilkynningar“",
+            "point3": "Finndu „{{communityName}}“ og opnaðu það",
+            "point4": "Bankaðu á heimildir",
+            "point5": "Virkja {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Leiðbeiningar",
+            "permissionDenied": "Leyfi fyrir {{kind}} synjað. Fylgdu þessum skrefum til að nota það:",
+            "point1": "Farðu í iOS stillingar þínar",
+            "point2": "Opnaðu „Persónuvernd“",
+            "point3": "Finndu {{kind}} og opnaðu það",
+            "point4": "Finndu „{{communityName}}“ og virkjaðu"
+        },
+        "notices": {
+            "youJoinedRoom": "Þú gekkst inn í herbergið",
+            "joining": "Tökum þátt í: {{userName}}",
+            "sbLeftRoom": "{{userName}} yfirgaf herbergið",
+            "youLeftRoom": "Þú fórst úr herberginu",
+            "codeCopied": "Þú fórst úr herberginu",
+            "sbBeganFbLive": "{{userName}} hóf útsendingar á þessu símtali á Facebook",
+            "sbStoppedFbLive": "{{userName}} hætti að útvarpa þessu símtali á Facebook",
+            "youBeganFbLive": "Þú byrjaðir að útvarpa þessu símtali á Facebook",
+            "youStoppedFbLive": "Þú hættir að útvarpa þessu símtali á Facebook",
+            "linkCopiedToCb": "Hlekkur afritaður á klemmuspjald",
+            "codeCopiedToCb": "Kóði afritaður á klemmuspjald",
+            "userHasNoVideo": "Þátttakandinn hefur ekkert myndband"
+        },
+        "settingsPopup": {
+            "webCamera": "Vefmyndavél",
+            "screenSharing": "Skjádeiling",
+            "shareAnotherScreen": "Deildu öðrum skjá",
+            "turnOffCameras": "Slökktu á öllum myndavélum",
+            "startFBLive": "Byrjaðu Facebook Livestream",
+            "stopFBLive": "Hættu Facebook Livestream",
+            "fbLiveTitle": "Lifandi titill",
+            "fbLiveDescription": "Lifandi lýsing",
+            "fbOnlyMeLiveAccess": "Bara ég",
+            "fbFriendsAccess": "Vinir",
+            "fbPublicAccess": "Almenningur",
+            "fbStartLive": "Fara í loftið",
+            "fbStopLive": "End Live",
+            "fbEmbedCode": "Fella inn",
+            "copy": "Afrita"
+        },
+        "participantsPopup": {
+            "disconnect": "Aftengdu",
+            "floatingScreens": "Fljótandi skjár",
+            "tiledScreens": "Flísar á skjánum",
+            "loudestExceptMe": "Háværasti nema mig",
+            "maximizeLoudest": "Hámarka það háværasta",
+            "staticMaximized": "Static hámarkaður",
+            "manual": "Handbók"
         }
     },
     "types": {

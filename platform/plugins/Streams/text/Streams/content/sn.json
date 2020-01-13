@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Nyowani {{relationDisplayType}} mu {{1000]}",
         "Streams\/relatedFrom\/*": "Yakawedzerwa ku {{toTitle}} se {{1000]}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} akakureva iwe mumashoko",
-        "Streams\/call": "{{displayName}} ari kukudaidza"
+        "Streams\/call": "{{displayName}} ari kukudaidza",
+        "ManageEmailSubscriptions": "maneja kunyoreswa kwako kweemail",
+        "IfUnsubscribe": "Kana iwe uchida kuzvinyoresa"
     },
     "invite": {
         "messageContent": "Ndakakokwa iwe (1000)",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Kukokwa kunotumirwa kubva kunhamba yedu, iyo shamwari dzako dzisati dzaziva. Dzokorora nemagwaro matsva kuitira kuti vazive kukokwa kwakabva kwamuri, vachivakumbira kuti vakanise kubatanidza.",
             "confirm": "Kukokwa kunotumirwa kubva kunhamba yedu, iyo shamwari dzako dzisati dzaziva. Ungada here kutevera nemashoko ekukurumidza kuti uvazivise kuti kukokwa kwakabva kwauri, uchivakumbira kuti vanyanise hukama.",
-            "check": "Hei, ndangokutumira kukoka kune {{app}} app. Ndapota chengetedza sms yako uye chenganisa chibatanidza!"
+            "check": "Hei, ndangokutumira kukoka kune {{app}} app. Ndapota chengetedza sms yako uye chenganisa chibatanidza!",
+            "CheckYourMobile": "Ndokumbira utarise SMS uye uteedzere mirayiridzo!"
         },
         "email": {
             "alert": "Kukokwa kunotumirwa kubva kunzvimbo yedu, iyo shamwari dzako dzisati dzaziva. Dzokorora nemagwaro matsva kuitira kuti vazive kukokwa kwakabva kwamuri, vachivakumbira kuti vakanise kubatanidza.",
             "confirm": "Kukokwa kunotumirwa kubva kunzvimbo yedu, iyo shamwari dzako dzisati dzaziva. Ungada here kutevera nemashoko ekukurumidza kuti uvazivise kuti kukokwa kwakabva kwauri, uchivakumbira kuti vanyanise hukama.",
             "subject": "Wakawana kukokwa here?",
-            "body": "Hei, ndangokutumira kukoka kune {{app}} app. Ndapota chengetedza email yako uye chengetedza chibatanidzi mukati maro!"
+            "body": "Hei, ndangokutumira kukoka kune {{app}} app. Ndapota chengetedza email yako uye chengetedza chibatanidzi mukati maro!",
+            "CheckYourEmail": "Ndokumbira utarise email yako uye uteedzere mirayiridzo!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Gonesa Microphone",
             "cameraBtn": "Gonesa Kamera",
             "cameraAndMicrophoneBtn": "Gonesa kamera uye Microphone"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Mirayiridzo",
+            "permissionDenied": "Mvumo ye {{kind}} inorambwa. Kuti uishandise ndapota tevera matanho aya:",
+            "point1": "Enda ku &quot;Zvirongwa&quot; -&gt; &quot;Yepamberi&quot; -&gt; &quot;Zvekuvanzika uye chengetedzo&quot; -&gt; &quot;Saiti Zvirongwa&quot; -&gt; &quot;Kamera&quot; kana &quot;Saiti Zvirongwa&quot; -&gt; &quot;Microphone&quot;",
+            "point2": "Bvisa {{hostname}} kubva ku &quot;Vimba&quot; runyorwa"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Mirayiridzo",
+            "permissionDenied": "Mvumo ye {{kind}} inorambwa. Ndokumbirawo mutangire zvakare peji rino uye musimbise kusvika kune {{kind}} yekubatana nemusangano."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Mirayiridzo",
+            "permissionDenied": "Mvumo ye {{kind}} inorambwa. Kuti uishandise ndapota tevera matanho aya:",
+            "point1": "Enda kune yako Android Zvigadziriso",
+            "point2": "Vhura &quot;Mapepa &amp; notices&quot;",
+            "point3": "Tsvaga &quot;{{communityName}} uye uvhure",
+            "point4": "Tinya paMvumo",
+            "point5": "Gonesa {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Mirayiridzo",
+            "permissionDenied": "Mvumo ye {{kind}} inorambwa. Kuti uishandise ndapota tevera matanho aya:",
+            "point1": "Enda kune yako iOS Zvirongwa",
+            "point2": "Vhura &quot;Kuvanzika&quot;",
+            "point3": "Tsvaga {{kind}} uye uvhure",
+            "point4": "Tsvaga &quot;{{communityName}}&quot; uye gonesa"
+        },
+        "notices": {
+            "youJoinedRoom": "Iwe wakabatana mukamuri",
+            "joining": "Join: {{userName}}",
+            "sbLeftRoom": "{{999]} akabuda mukamuri",
+            "youLeftRoom": "Wakabuda mumba",
+            "codeCopied": "Wakabuda mumba",
+            "sbBeganFbLive": "{{userName}} akatanga kushambadzira iyi call mu Facebook",
+            "sbStoppedFbLive": "{{userName}} yakamira kutepfenyura iyi call mu Facebook",
+            "youBeganFbLive": "Wakatanga kushambadzira iyi call mu Facebook",
+            "youStoppedFbLive": "Wakamira kushambadzira iyi call mu Facebook",
+            "linkCopiedToCb": "Chibatanidza chakapepetwa ku clipboard",
+            "codeCopiedToCb": "Code yakapihwa ku clipboard",
+            "userHasNoVideo": "Mutori wechikamu haana vhidhiyo"
+        },
+        "settingsPopup": {
+            "webCamera": "Web Camera",
+            "screenSharing": "Kugovera Screen",
+            "shareAnotherScreen": "Goverana imwe skrini",
+            "turnOffCameras": "Dzima makamera ese",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Mira Facebook Livestream",
+            "fbLiveTitle": "Rarama Chinyorwa",
+            "fbLiveDescription": "Rarama Tsananguro",
+            "fbOnlyMeLiveAccess": "Ini chete",
+            "fbFriendsAccess": "Shamwari",
+            "fbPublicAccess": "Ruzhinji",
+            "fbStartLive": "Enda Kurarama",
+            "fbStopLive": "End Live",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy"
+        },
+        "participantsPopup": {
+            "disconnect": "Regedza",
+            "floatingScreens": "Kuyerera Zviso",
+            "tiledScreens": "MaTiles Screen",
+            "loudestExceptMe": "Anodada Kunze Kwangu",
+            "maximizeLoudest": "Kurisa Loudest",
+            "staticMaximized": "Static Maximized",
+            "manual": "Manual"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Real-Nguva Yekufona",
             "description": "vhiki chaiyo vhidhiyo \/ kudhindwa kudana"
         }
+    },
+    "participating": {
+        "Title": "Musoro",
+        "Subscribed": "Vakanyoreswa",
+        "Participants": "Vatori vechikamu",
+        "AreYouSureRemoveIdentifier": "Une chokwadi chekubvisa chinozivisa?",
+        "AreYouSureUnsubscribeIdentifier": "Une chokwadi chekunyora ichi chinongedzo? Iyo inodzima notices kune ino identifier.",
+        "AreYouSureUnsubscribeDevice": "Une chokwadi chekunyora chishandiso ichi? Iyo inodzima zviziviso zvemudziyo uyu.",
+        "Identifiers": "Identifiers",
+        "Devices": "Zvishandiso",
+        "Streams": "Miromo"
     }
 }

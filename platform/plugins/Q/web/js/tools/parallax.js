@@ -142,8 +142,12 @@
 				}
 
 				$te.addClass('lax');
-				$te.attr('data-lax-preset', preset.join(' '));
-				$te.attr('data-lax-options', options.join(' '));
+				if (preset.length) {
+					$te.attr('data-lax-preset', preset.join(' '));
+				}
+				if (options.length) {
+					$te.attr('data-lax-options', options.join(' '));
+				}
 
 				lax.addElement($te[0]);
 

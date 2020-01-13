@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "አዲስ {{relationDisplayType}} በ {{toTitle}} ውስጥ",
         "Streams\/relatedFrom\/*": "ወደ {{toTitle}} እንደ {{relationDisplayType}} ታክሏል",
         "Streams\/mention": "{{&call 'avatar.displayName'}} በአስተያየት ውስጥ ጠቅሶዎታል",
-        "Streams\/call": "{{displayName}} እየደወለልዎት ነው"
+        "Streams\/call": "{{displayName}} እየደወለልዎት ነው",
+        "ManageEmailSubscriptions": "የኢሜይል ምዝገባዎችዎን ያቀናብሩ",
+        "IfUnsubscribe": "ከደንበኝነት ምዝገባ መውጣት ከፈለጉ"
     },
     "invite": {
         "messageContent": "{{displayName}} ወደ {{inviteUrl}} እንዲገኙ ጋብዘዎታል",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "ግብዣዎች ጓደኞችዎ እስካላወቁት ድረስ ከእኛ ቁጥር ይላካሉ. ግብዣው የመጣው ከእርስዎ የመጣ መሆኑን እንዲያውቁ እና አገናኙን ጠቅ እንዲያደርጉላቸው በፍጥነት የሚገልጽ ጽሑፍ ይከታተሉ.",
             "confirm": "ግብዣዎች ጓደኞችዎ እስካላወቁት ድረስ ከእኛ ቁጥር ይላካሉ. ግብዣው የመጣው ከእርስዎ የመጣ መሆኑን እንዲያውቁ እና አገናኙን ጠቅ እንዲያደርጉ እንዲረዳቸው በቅጽበት ጽሑፍ መከታተል ይፈልጋሉ.",
-            "check": "ሰላም, አሁን ለ {{app}} መተግበሪያ ግብዣ ልካሎሻለሁ. እባክዎ ኢሜልዎን ይፈትሹ እና አገናኙን ጠቅ ያድርጉ!"
+            "check": "ሰላም, አሁን ለ {{app}} መተግበሪያ ግብዣ ልካሎሻለሁ. እባክዎ ኢሜልዎን ይፈትሹ እና አገናኙን ጠቅ ያድርጉ!",
+            "CheckYourMobile": "እባክዎ ኤስኤምኤስ ይመልከቱ እና መመሪያዎችን ይከተሉ!"
         },
         "email": {
             "alert": "ግብዣዎች ጓደኞችዎ እስካላወቁት ድረስ ከእኛ ጎራ የተላከ ነው. ግብዣው የመጣው ከእርስዎ የመጣ መሆኑን እንዲያውቁ እና አገናኙን ጠቅ እንዲያደርጉላቸው በፍጥነት የሚገልጽ ጽሑፍ ይከታተሉ.",
             "confirm": "ግብዣዎች ጓደኞችዎ እስካላወቁት ድረስ ከእኛ ጎራ የተላከ ነው. ግብዣው የመጣው ከእርስዎ የመጣ መሆኑን እንዲያውቁ እና አገናኙን ጠቅ እንዲያደርጉ እንዲረዳቸው በቅጽበት ጽሑፍ መከታተል ይፈልጋሉ.",
             "subject": "ግብዣ አግኝተው ነበር?",
-            "body": "ሰላም, አሁን ለ {{app}} መተግበሪያ ግብዣ ልካሎሻለሁ. እባክዎ ኢሜይልዎን ይፈትሹ እና እዛው ጠቅ ያድርጉ!"
+            "body": "ሰላም, አሁን ለ {{app}} መተግበሪያ ግብዣ ልካሎሻለሁ. እባክዎ ኢሜይልዎን ይፈትሹ እና እዛው ጠቅ ያድርጉ!",
+            "CheckYourEmail": "እባክዎ ኢሜይልዎን ይመልከቱ እና መመሪያዎችን ይከተሉ!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "ማይክሮፎን አንቃ",
             "cameraBtn": "ካሜራ አንቃ",
             "cameraAndMicrophoneBtn": "ካሜራ እና ማይክሮፎን ያንቁ"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "መመሪያዎች",
+            "permissionDenied": "የ {{kind}} ፈቃድ ተከልክሏል። እሱን ለመጠቀም የሚከተሉትን ደረጃዎች ይከተሉ",
+            "point1": "ወደ &quot;ቅንብሮች&quot; -&gt; &quot;የላቀ&quot; -&gt; &quot;ግላዊነት እና ደህንነት&quot; -&gt; &quot;የጣቢያ ቅንብሮች&quot; -&gt; &quot;ካሜራ&quot; ወይም &quot;የጣቢያ ቅንብሮች&quot; -&gt; &quot;ማይክሮፎን&quot; ይሂዱ",
+            "point2": "{{hostname}} ን ከ “አግድ” ዝርዝር ያስወግዱት"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "መመሪያዎች",
+            "permissionDenied": "የ {{kind}} ፈቃድ ተከልክሏል። እባክዎን ይህንን ገጽ እንደገና ይጫኑት እና ጉባ conferenceውን ለመቀላቀል {{kind}} ን ያረጋግጡ ፡፡"
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "መመሪያዎች",
+            "permissionDenied": "የ {{kind}} ፈቃድ ተከልክሏል። እሱን ለመጠቀም የሚከተሉትን ደረጃዎች ይከተሉ",
+            "point1": "ወደ የእርስዎ የ Android ቅንብሮች ይሂዱ",
+            "point2": "&quot;መተግበሪያዎችን እና ማስታወቂያዎችን&quot; ይክፈቱ",
+            "point3": "«{{communityName}}» ን ይፈልጉ እና ይክፈቱት",
+            "point4": "ፈቃዶች ላይ መታ ያድርጉ",
+            "point5": "{{kind}} ን ያንቁ"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "መመሪያዎች",
+            "permissionDenied": "የ {{kind}} ፈቃድ ተከልክሏል። እሱን ለመጠቀም የሚከተሉትን ደረጃዎች ይከተሉ",
+            "point1": "ወደ እርስዎ የ iOS ቅንብሮች ይሂዱ",
+            "point2": "“ግላዊነት” ክፈት",
+            "point3": "{{kind}} ን ያግኙ እና ይክፈቱት",
+            "point4": "«{{communityName}}» ን ያግኙ እና ያንቁ"
+        },
+        "notices": {
+            "youJoinedRoom": "ወደ ክፍሉ ገብተዋል",
+            "joining": "በመቀላቀል ላይ {{userName}}",
+            "sbLeftRoom": "{{userName}} ክፍሉ ወጥቷል",
+            "youLeftRoom": "ክፍሉን ለቀው ወጥተዋል",
+            "codeCopied": "ክፍሉን ለቀው ወጥተዋል",
+            "sbBeganFbLive": "{{userName}} ይህንን ጥሪ በፌስቡክ ማሰራጨት ጀመረ",
+            "sbStoppedFbLive": "{{userName}} ይህንን ጥሪ በፌስቡክ ማሰራጨት አቁሟል",
+            "youBeganFbLive": "ይህንን ጥሪ በፌስቡክ ማሰራጨት ጀመሩ",
+            "youStoppedFbLive": "ይህንን ጥሪ በፌስቡክ ማሰራጨት አቁመዋል",
+            "linkCopiedToCb": "አገናኝ ወደ ቅንጥብ ሰሌዳ ተቀድቷል",
+            "codeCopiedToCb": "ኮድ ወደ ቅንጥብ ሰሌዳ ተቀድቷል",
+            "userHasNoVideo": "ተሳታፊ ቪዲዮ የለውም"
+        },
+        "settingsPopup": {
+            "webCamera": "የድር ካሜራ",
+            "screenSharing": "ማያ ገጽ ማጋራት",
+            "shareAnotherScreen": "ሌላ ማያ ገጽ ያጋሩ",
+            "turnOffCameras": "ሁሉንም ካሜራዎች ያጥፉ",
+            "startFBLive": "ፌስቡክ ቀጥታ ስርጭት ይጀምሩ",
+            "stopFBLive": "ፌስቡክ ቀጥታ ስርጭት አቁም",
+            "fbLiveTitle": "የቀጥታ ርዕስ",
+            "fbLiveDescription": "የቀጥታ መግለጫ",
+            "fbOnlyMeLiveAccess": "እኔ ብቻ",
+            "fbFriendsAccess": "ጓደኞች",
+            "fbPublicAccess": "ሕዝባዊ",
+            "fbStartLive": "ቀጥታ ስርጭት ይሂዱ",
+            "fbStopLive": "የቀጥታ ስርጭት",
+            "fbEmbedCode": "ክተት",
+            "copy": "ገልብጥ"
+        },
+        "participantsPopup": {
+            "disconnect": "ግንኙነት አቋርጥ",
+            "floatingScreens": "ተንሳፋፊ ማያ ገጾች",
+            "tiledScreens": "የታጠቁ ማያ ገጾች",
+            "loudestExceptMe": "ከእኔ በስተቀር እጅግ ከባድ ነው",
+            "maximizeLoudest": "ከፍተኛ ድምጽን ከፍ ያድርጉ",
+            "staticMaximized": "የማይንቀሳቀስ ከፍተኛ",
+            "manual": "መመሪያ"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "የእውነተኛ-ጊዜ ጥሪ",
             "description": "የእውነተኛ ጊዜ ቪዲዮ \/ ድምጽ ጥሪ"
         }
+    },
+    "participating": {
+        "Title": "ርዕስ",
+        "Subscribed": "ተመዝግበዋል",
+        "Participants": "ተሳታፊዎች",
+        "AreYouSureRemoveIdentifier": "እርግጠኛ ነዎት ይህን ለer ያስወግዳሉ?",
+        "AreYouSureUnsubscribeIdentifier": "እርግጠኛ ነዎት ለዚህ መለያ ከደንበኝነት ምዝገባ ይወጣሉ? ለእዚህ መለያ ማሳወቂያዎችን ያጠፋል ፡፡",
+        "AreYouSureUnsubscribeDevice": "እርግጠኛ ነዎት የዚህ መሣሪያ ደንበኝነት ምዝገባ ይወጣሉ? ለዚህ መሣሪያ ማሳወቂያዎችን ያጠፋል።",
+        "Identifiers": "ለifዎች",
+        "Devices": "መሣሪያዎች",
+        "Streams": "ጅረቶች"
     }
 }

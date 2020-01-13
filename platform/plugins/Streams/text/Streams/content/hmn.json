@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Tshiab {{relationDisplayType}} hauv {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ntxiv rau {{toTitle}} li {{1000 tauj}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} hais koj hauv ib qho lus pom",
-        "Streams\/call": "{{displayName}} yog koj hu"
+        "Streams\/call": "{{displayName}} yog koj hu",
+        "ManageEmailSubscriptions": "tswj koj email subscriptions",
+        "IfUnsubscribe": "Yog koj xav tshem tawm"
     },
     "invite": {
         "messageContent": "{{displayName}} tau caw koj tuaj rau {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Caw raug xa tawm ntawm peb tus xov tooj, uas koj cov phooj ywg tsis tau pom dua. Ua raws li cov ntawv ceev cia qhia rau lawv paub tias qhov kev caw tuaj ntawm koj, kom lawv nias qhov txuas.",
             "confirm": "Caw raug xa tawm ntawm peb tus xov tooj, uas koj cov phooj ywg tsis tau pom dua. Koj puas xav kom ua raws li cov ntawv ceev los qhia rau lawv paub qhov kev caw tuaj ntawm koj, kom lawv nias qhov txuas.",
-            "check": "Lus hauv no teb Hav, kuv cia li xa koj ib qho kev caw rau lub {{app}} app. Thov kos koj cov sms thiab nias qhov txuas!"
+            "check": "Lus hauv no teb Hav, kuv cia li xa koj ib qho kev caw rau lub {{app}} app. Thov kos koj cov sms thiab nias qhov txuas!",
+            "CheckYourMobile": "Thov txheeb xyuas SMS thiab ua raws cov lus qhia!"
         },
         "email": {
             "alert": "Caw raug xa mus los ntawm peb lub npe, uas koj cov phooj ywg tsis tau pom dua. Ua raws li cov ntawv ceev cia qhia rau lawv paub tias qhov kev caw tuaj ntawm koj, kom lawv nias qhov txuas.",
             "confirm": "Caw raug xa mus los ntawm peb lub npe, uas koj cov phooj ywg tsis tau pom dua. Koj puas xav kom ua raws li cov ntawv ceev los qhia rau lawv paub qhov kev caw tuaj ntawm koj, kom lawv nias qhov txuas.",
             "subject": "Koj puas tau txais ib qho kev caw?",
-            "body": "Lus hauv no teb Hav, kuv cia li xa koj ib qho kev caw rau lub {{app}} app. Thov kos koj lub email thiab nias qhov txuas hauv ntawd!"
+            "body": "Lus hauv no teb Hav, kuv cia li xa koj ib qho kev caw rau lub {{app}} app. Thov kos koj lub email thiab nias qhov txuas hauv ntawd!",
+            "CheckYourEmail": "Thov saib koj email thiab ua raws li cov lus qhia!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Pab Kom Pom Kev Microphone",
             "cameraBtn": "Qhib Lub Koob Yees Duab",
             "cameraAndMicrophoneBtn": "Pab Siv Lub Koob Yees Duab thiab Microphone"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Cov Lus Qhia",
+            "permissionDenied": "Tso cai rau {{kind}} tsis kam. Kev siv nws thov ua raws li cov theem hauv qab no:",
+            "point1": "Mus rau &quot;Chaw&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Tsis pub twg paub thiab kev ruaj ntseg&quot; -&gt; &quot;Chaw nqis&quot; -&gt; &quot;Koob Yees Duab&quot; lossis &quot;Chaw Xaiv&quot; -&gt; &quot;Microphone&quot;",
+            "point2": "Tshem tawm {{hostname}} ntawm daim ntawv &quot;Thaiv&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Cov Lus Qhia",
+            "permissionDenied": "Tso cai rau {{kind}} tsis kam. Thov reload nplooj ntawv no thiab lees paub kev nkag mus {{kind}} txhawm rau tuaj koom lub rooj sib tham."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Cov Lus Qhia",
+            "permissionDenied": "Tso cai rau {{kind}} tsis kam. Kev siv nws thov ua raws li cov theem hauv qab no:",
+            "point1": "Mus rau koj tej chaw Android",
+            "point2": "Qhib &quot;Apps &amp; cov ntawv qhia&quot;",
+            "point3": "Nrhiav &quot;{{communityName}}&quot; thiab qhib nws",
+            "point4": "Coj mus rhaub ntawm Cov Ntawv Tso Cai",
+            "point5": "Pab {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Cov Lus Qhia",
+            "permissionDenied": "Tso cai rau {{kind}} tsis kam. Kev siv nws thov ua raws li cov theem hauv qab no:",
+            "point1": "Mus rau koj iOS Chaw",
+            "point2": "Qhib &quot;Tsis pub twg paub&quot;",
+            "point3": "Nrhiav {{kind}} thiab qhib nws",
+            "point4": "Nrhiav &quot;{{communityName}}&quot; thiab pab kom tau"
+        },
+        "notices": {
+            "youJoinedRoom": "Koj koom chav",
+            "joining": "Koom Tes: {{userName}}",
+            "sbLeftRoom": "{{userName}} tawm mus rau chav tsev",
+            "youLeftRoom": "Koj tawm chav lawm",
+            "codeCopied": "Koj tawm chav lawm",
+            "sbBeganFbLive": "{{userName}} pib tshaj tawm hauv xov tooj no hauv Facebook",
+            "sbStoppedFbLive": "{{userName}} nres qhov kev hu no hauv Facebook",
+            "youBeganFbLive": "Koj twb pib tshaj tawm cov xov tooj no hauv Facebook",
+            "youStoppedFbLive": "Koj tsum tsis tshaj tawm txoj xov no hauv Facebook",
+            "linkCopiedToCb": "Txuas kab ntawv luam rau ntawv los teev cia",
+            "codeCopiedToCb": "Code theej rau ntawv los teev cia",
+            "userHasNoVideo": "Cov tuaj koom tsis muaj daim vis dis aus"
+        },
+        "settingsPopup": {
+            "webCamera": "Lub Koob Yees Duab Web",
+            "screenSharing": "Vijtsam Kev Sib Koom",
+            "shareAnotherScreen": "Muab lwm qhov screen",
+            "turnOffCameras": "Xu tag nrho cov koob thaij",
+            "startFBLive": "Pib Facebook Livestream",
+            "stopFBLive": "Nres Facebook Livestream",
+            "fbLiveTitle": "Nyob Npe",
+            "fbLiveDescription": "Nyob Ua Ke",
+            "fbOnlyMeLiveAccess": "Tsuas yog Kuv",
+            "fbFriendsAccess": "Cov Phooj Ywg",
+            "fbPublicAccess": "Pej xeem",
+            "fbStartLive": "Mus Ua Neej",
+            "fbStopLive": "Xaus Nyob",
+            "fbEmbedCode": "Khib",
+            "copy": "Luam"
+        },
+        "participantsPopup": {
+            "disconnect": "Disconnect",
+            "floatingScreens": "Ntse Nplaum",
+            "tiledScreens": "Cov ntxaij vab tshaus",
+            "loudestExceptMe": "Tshaj Lij Tshaj Plaws Tsis Yog Kuv",
+            "maximizeLoudest": "Txhim Kho Siab Tshaj",
+            "staticMaximized": "Zoo li qub Maximized",
+            "manual": "Phau Ntawv"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Tiag-Lub sijhawm Hu",
             "description": "lub sijhawm tiag tiag video \/ audio hu"
         }
+    },
+    "participating": {
+        "Title": "Npe",
+        "Subscribed": "Pab",
+        "Participants": "Cov Neeg Koom Tes",
+        "AreYouSureRemoveIdentifier": "Koj puas paub tseeb tshem cov cim no?",
+        "AreYouSureUnsubscribeIdentifier": "Koj puas tseeb tshem tawm lub cim no? Nws yuav txiav tawm cov ntawv ceeb toom rau tus neeg paub no.",
+        "AreYouSureUnsubscribeDevice": "Koj puas tseeb tshem tawm lub cuab yeej no? Nws yuav kaw cov ntawv ceeb toom rau lub cuab yeej no.",
+        "Identifiers": "Cov cim",
+        "Devices": "Pab kiag li lawm",
+        "Streams": "Ntws"
     }
 }

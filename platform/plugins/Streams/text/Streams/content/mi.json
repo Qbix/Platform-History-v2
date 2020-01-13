@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "New {{relationDisplayType}} i {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ka tapiritia ki te {{toTitle}} hei {{relationDisplayType}}",
         "Streams\/mention": "Na {{&call 'avatar.displayName'}} koe i korero i to korero",
-        "Streams\/call": "Kei te karanga koe i a {{displayName}}"
+        "Streams\/call": "Kei te karanga koe i a {{displayName}}",
+        "ManageEmailSubscriptions": "whakahaere koutou ohaurunga imeera",
+        "IfUnsubscribe": "Ki te hiahia koe ki te tuku toha"
     },
     "invite": {
         "messageContent": "{{displayName}} i karangatia koe ki {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Ka tukuna mai nga tono mai i to maatau nama, kaore i mohiohia e ou hoa. Whakamahia he korero tere kia mohio ai ratou kua tae mai te awhina mai ia koe, me te tono ia ratou ki te patene i te hononga.",
             "confirm": "Ka tukuna mai nga tono mai i to maatau nama, kaore i mohiohia e ou hoa. E hiahia ana koe ki te whai ake i tetahi tuhinga tere kia mohio ai koe kua tae mai te tono mai ia koe, me te tono ia ratou ki te patene i te hononga.",
-            "check": "Na, kua tonoa e ahau he tono ki a koe ki te taupānga {{app}}. Titiro koa ki a koutou sms ka kiria te hononga!"
+            "check": "Na, kua tonoa e ahau he tono ki a koe ki te taupānga {{app}}. Titiro koa ki a koutou sms ka kiria te hononga!",
+            "CheckYourMobile": "Tena tirohia te SMS me te whai i nga tohutohu!"
         },
         "email": {
             "alert": "Ka tukuna mai nga tono mai i to rohe, kaore ano i mohio o hoa. Whakamahia he korero tere kia mohio ai ratou kua tae mai te awhina mai ia koe, me te tono ia ratou ki te patene i te hononga.",
             "confirm": "Ka tukuna mai nga tono mai i to rohe, kaore ano i mohio o hoa. E hiahia ana koe ki te whai ake i tetahi tuhinga tere kia mohio ai koe kua tae mai te tono mai ia koe, me te tono ia ratou ki te patene i te hononga.",
             "subject": "I whiwhi koe i tetahi urunga?",
-            "body": "Na, kua tonoa e ahau he tono ki a koe ki te taupānga {{app}}. Tena koa tirohia to īmēra me te pāwhiri i te hono i reira!"
+            "body": "Na, kua tonoa e ahau he tono ki a koe ki te taupānga {{app}}. Tena koa tirohia to īmēra me te pāwhiri i te hono i reira!",
+            "CheckYourEmail": "Tena tirohia to imeera me te whai i nga tohutohu!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Whakahohea te Microphone",
             "cameraBtn": "Whakahohe kāmera",
             "cameraAndMicrophoneBtn": "Whakahohea te Kamera me te Microphone"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Tohutohu",
+            "permissionDenied": "Te whakaaetanga mo te {{kind}} i whakahe. Hei whakamahi maatau whai i enei mahi:",
+            "point1": "Haere ki te &quot;Tautuhinga&quot; -&gt; &quot;Ararau&quot; -&gt; &quot;Whakauru me te Haumaru&quot; -&gt; &quot;Tautuhinga Pae&quot; -&gt; &quot;Whakaahua&quot; me &quot;Tautuhinga Pae&quot; -&gt; &quot;Maikuku&quot;",
+            "point2": "Tangohia te {{hostname}} mai i te raarangi &quot;Poraka&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Tohutohu",
+            "permissionDenied": "Te whakaaetanga mo te {{kind}} i whakahe. Tena koa taara i tenei whaarangi ka whakaahei te uru ki {{kind}}"
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Tohutohu",
+            "permissionDenied": "Te whakaaetanga mo te {{kind}} i whakahe. Hei whakamahi maatau whai i enei mahi:",
+            "point1": "Haere ki to Tautuhinga Android",
+            "point2": "Whakatūwhera &quot;Apps &amp; whakamōhiotanga&quot;",
+            "point3": "Rapua te &quot;{{communityName}}&quot; ka whakatuwhera ake",
+            "point4": "Tap i runga i Whakaaetanga",
+            "point5": "Whakahoheia {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Tohutohu",
+            "permissionDenied": "Te whakaaetanga mo te {{kind}} i whakahe. Hei whakamahi maatau whai i enei mahi:",
+            "point1": "Haere ki to Tautuhinga iOS",
+            "point2": "Whakatūwhera &quot;Tūmataitinga&quot;",
+            "point3": "Rapua te {{kind}} ka whakatuwhera",
+            "point4": "Rapua &quot;{{communityName}}&quot; ka whakahohe"
+        },
+        "notices": {
+            "youJoinedRoom": "I uru koe ki roto i te ruma",
+            "joining": "Te whakahoahoa: {{userName}}",
+            "sbLeftRoom": "{{userName}} mahue ake i te ruma",
+            "youLeftRoom": "I wehe koe i te ruma",
+            "codeCopied": "I wehe koe i te ruma",
+            "sbBeganFbLive": "I tiimata mai te {{userName}} i te panui i tenei Facebook",
+            "sbStoppedFbLive": "{{userName}} i mutu te tuku i te panui i te Facebook",
+            "youBeganFbLive": "I timata koe i te tuku i tenei karanga i Facebook",
+            "youStoppedFbLive": "Ka mutu koe ki te tuku i te karanga i tenei Facebook",
+            "linkCopiedToCb": "Hangaia te hono ki te papaa",
+            "codeCopiedToCb": "Te waehere i hainatia ki te papaahi",
+            "userHasNoVideo": "Kaore he ataata"
+        },
+        "settingsPopup": {
+            "webCamera": "Kāmera Tukutuku",
+            "screenSharing": "Te Tiri Mata",
+            "shareAnotherScreen": "Te korero i tetahi atu mata",
+            "turnOffCameras": "Tahuri nga kāmera katoa",
+            "startFBLive": "Tīmata Facebook Livestream",
+            "stopFBLive": "Aukati i te Whanui Live",
+            "fbLiveTitle": "Taitara Ora",
+            "fbLiveDescription": "Whakaahuatanga Ora",
+            "fbOnlyMeLiveAccess": "Ko au anake",
+            "fbFriendsAccess": "E hoa",
+            "fbPublicAccess": "Panui",
+            "fbStartLive": "Haere Haere",
+            "fbStopLive": "Kati Ora",
+            "fbEmbedCode": "Whakauru",
+            "copy": "Kake"
+        },
+        "participantsPopup": {
+            "disconnect": "Whakapore",
+            "floatingScreens": "Papa Mata",
+            "tiledScreens": "Kiriata Matapihi",
+            "loudestExceptMe": "Te Rawa Whakahauhau Maaku",
+            "maximizeLoudest": "Whakanuia Te Riri",
+            "staticMaximized": "Whakapiki",
+            "manual": "Pukapuka"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Karangatia-Katoa Waea",
             "description": "he waea ataata \/ oro korero tūturu"
         }
+    },
+    "participating": {
+        "Title": "Taitara",
+        "Subscribed": "Ohauru",
+        "Participants": "Nga kaiuru",
+        "AreYouSureRemoveIdentifier": "Kei te mohio koe ki te tango i tenei kaituhi?",
+        "AreYouSureUnsubscribeIdentifier": "Kei te tino waitohu koe i tenei kaituhi? Ka whakaweto i nga panui ki tenei kaituhi.",
+        "AreYouSureUnsubscribeDevice": "Kua tino mohio koe ki te tuku i tenei taputapu? Ka whakaweto i nga panui ki tenei taputapu.",
+        "Identifiers": "Ngā Kaiwhakaputa",
+        "Devices": "Pūrere",
+        "Streams": "Ngātenga"
     }
 }

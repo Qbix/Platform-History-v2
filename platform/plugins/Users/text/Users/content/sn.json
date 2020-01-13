@@ -102,5 +102,11 @@
         "noLongerUsing": "Hausisiri wakabatana ne {{platform}} se",
         "doAuth": "Pinda neiyi account",
         "doSwitch": "Chinja kune iyi account"
+    },
+    "roles": {
+        "Owner": "Muridzi",
+        "Admin": "Admin",
+        "Member": "Nhengo",
+        "Guest": "Muenzi"
     }
 }

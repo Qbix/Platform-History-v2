@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} ໃໝ່ ໃນ {{toTitle}}",
         "Streams\/relatedFrom\/*": "ເພີ່ມເຂົ້າໃນ {{toTitle}} ເປັນ {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ໄດ້ກ່າວເຖິງທ່ານໃນ ຄຳ ເຫັນ",
-        "Streams\/call": "{{displayName}} ກຳ ລັງໂທຫາທ່ານ"
+        "Streams\/call": "{{displayName}} ກຳ ລັງໂທຫາທ່ານ",
+        "ManageEmailSubscriptions": "ຈັດການການສະ ໝັກ ໃຊ້ອີເມວຂອງທ່ານ",
+        "IfUnsubscribe": "ຖ້າທ່ານຕ້ອງການຍົກເລີກການຈອງ"
     },
     "invite": {
         "messageContent": "{{displayName}} ເຊີນທ່ານໄປ {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "ການເຊີນທີ່ຖືກສົ່ງມາຈາກຈໍານວນຂອງພວກເຮົາ, ເຊິ່ງຫມູ່ເພື່ອນຂອງທ່ານຍັງບໍ່ໄດ້ຮັບຮູ້ເທື່ອ. ຕິດຕາມດ້ວຍຂໍ້ຄວາມໄວເພື່ອໃຫ້ພວກເຂົາຮູ້ວ່າການເຊີນມາຈາກທ່ານ, ຂໍໃຫ້ພວກເຂົາກົດການເຊື່ອມຕໍ່.",
             "confirm": "ການເຊີນທີ່ຖືກສົ່ງມາຈາກຈໍານວນຂອງພວກເຮົາ, ເຊິ່ງຫມູ່ເພື່ອນຂອງທ່ານຍັງບໍ່ໄດ້ຮັບຮູ້ເທື່ອ. ທ່ານຢາກຕິດຕາມດ້ວຍຂໍ້ຄວາມໄວເພື່ອໃຫ້ພວກເຂົາຮູ້ວ່າການເຊີນມາຈາກທ່ານ, ຂໍໃຫ້ພວກເຂົາກົດການເຊື່ອມຕໍ່.",
-            "check": "Hey, ຂ້າພະເຈົ້າພຽງແຕ່ສົ່ງທ່ານໃຫ້ກັບແອັບຯ {{app}}. ກະລຸນາກວດເບິ່ງອີເມວຂອງທ່ານແລະຄລິກໃສ່ການເຊື່ອມຕໍ່!"
+            "check": "Hey, ຂ້າພະເຈົ້າພຽງແຕ່ສົ່ງທ່ານໃຫ້ກັບແອັບຯ {{app}}. ກະລຸນາກວດເບິ່ງອີເມວຂອງທ່ານແລະຄລິກໃສ່ການເຊື່ອມຕໍ່!",
+            "CheckYourMobile": "ກະລຸນາກວດສອບ SMS ແລະປະຕິບັດຕາມ ຄຳ ແນະ ນຳ!"
         },
         "email": {
             "alert": "ການເຊີນທີ່ຖືກສົ່ງມາຈາກໂດເມນຂອງພວກເຮົາ, ເຊິ່ງຫມູ່ເພື່ອນຂອງທ່ານຍັງບໍ່ໄດ້ຮັບຮູ້ເທື່ອ. ຕິດຕາມດ້ວຍຂໍ້ຄວາມໄວເພື່ອໃຫ້ພວກເຂົາຮູ້ວ່າການເຊີນມາຈາກທ່ານ, ຂໍໃຫ້ພວກເຂົາກົດການເຊື່ອມຕໍ່.",
             "confirm": "ການເຊີນທີ່ຖືກສົ່ງມາຈາກໂດເມນຂອງພວກເຮົາ, ເຊິ່ງຫມູ່ເພື່ອນຂອງທ່ານຍັງບໍ່ໄດ້ຮັບຮູ້ເທື່ອ. ທ່ານຢາກຕິດຕາມດ້ວຍຂໍ້ຄວາມໄວເພື່ອໃຫ້ພວກເຂົາຮູ້ວ່າການເຊີນມາຈາກທ່ານ, ຂໍໃຫ້ພວກເຂົາກົດການເຊື່ອມຕໍ່.",
             "subject": "ທ່ານໄດ້ຮັບເຊີນບໍ?",
-            "body": "Hey, ຂ້າພະເຈົ້າພຽງແຕ່ສົ່ງທ່ານໃຫ້ກັບແອັບຯ {{app}}. ກະລຸນາກວດເບິ່ງອີເມວຂອງທ່ານແລະຄລິກໃສ່ການເຊື່ອມຕໍ່ໃນນັ້ນ!"
+            "body": "Hey, ຂ້າພະເຈົ້າພຽງແຕ່ສົ່ງທ່ານໃຫ້ກັບແອັບຯ {{app}}. ກະລຸນາກວດເບິ່ງອີເມວຂອງທ່ານແລະຄລິກໃສ່ການເຊື່ອມຕໍ່ໃນນັ້ນ!",
+            "CheckYourEmail": "ກະລຸນາກວດເບິ່ງອີເມວຂອງທ່ານແລະປະຕິບັດຕາມ ຄຳ ແນະ ນຳ!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "ເປີດໃຊ້ໄມໂຄຣໂຟນ",
             "cameraBtn": "ເປີດໃຊ້ກ້ອງ",
             "cameraAndMicrophoneBtn": "ເປີດໃຊ້ກ້ອງແລະໄມໂຄຣໂຟນ"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "ຄຳ ແນະ ນຳ",
+            "permissionDenied": "ການອະນຸຍາດ ສຳ ລັບ {{kind}} ຖືກປະຕິເສດ. ການນໍາໃຊ້ມັນກະລຸນາປະຕິບັດຕາມຂັ້ນຕອນເຫຼົ່ານີ້:",
+            "point1": "ໄປທີ່ &quot;ຕັ້ງຄ່າ&quot; -&gt; &quot;ຂັ້ນສູງ&quot; -&gt; &quot;ຄວາມເປັນສ່ວນຕົວແລະຄວາມປອດໄພ&quot; -&gt; &quot;ການຕັ້ງຄ່າເວັບໄຊ&quot; -&gt; &quot;ກ້ອງຖ່າຍຮູບ&quot; ຫຼື &quot;ການຕັ້ງຄ່າເວັບໄຊ&quot; -&gt; &quot;ໄມໂຄຣໂຟນ&quot;",
+            "point2": "ເອົາ {{hostname}} ອອກຈາກລາຍຊື່ &quot;ບລັອກ&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "ຄຳ ແນະ ນຳ",
+            "permissionDenied": "ການອະນຸຍາດ ສຳ ລັບ {{kind}} ຖືກປະຕິເສດ. ກະລຸນາໂຫລດ ໜ້າ ນີ້ຄືນ ໃໝ່ ແລະຢືນຢັນການເຂົ້າເຖິງ {{kind}} ເພື່ອເຂົ້າຮ່ວມການປະຊຸມ."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "ຄຳ ແນະ ນຳ",
+            "permissionDenied": "ການອະນຸຍາດ ສຳ ລັບ {{kind}} ຖືກປະຕິເສດ. ການນໍາໃຊ້ມັນກະລຸນາປະຕິບັດຕາມຂັ້ນຕອນເຫຼົ່ານີ້:",
+            "point1": "ໄປທີ່ການຕັ້ງຄ່າ Android ຂອງທ່ານ",
+            "point2": "ເປີດ &quot;ແອັບ &amp; &amp; ການແຈ້ງເຕືອນ&quot;",
+            "point3": "ຊອກຫາ &quot;{{communityName}}&quot; ແລະເປີດມັນ",
+            "point4": "ແຕະກ່ຽວກັບການອະນຸຍາດ",
+            "point5": "ເປີດໃຊ້ {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "ຄຳ ແນະ ນຳ",
+            "permissionDenied": "ການອະນຸຍາດ ສຳ ລັບ {{kind}} ຖືກປະຕິເສດ. ການນໍາໃຊ້ມັນກະລຸນາປະຕິບັດຕາມຂັ້ນຕອນເຫຼົ່ານີ້:",
+            "point1": "ໄປທີ່ການຕັ້ງຄ່າ iOS ຂອງທ່ານ",
+            "point2": "ເປີດ &quot;ຄວາມເປັນສ່ວນຕົວ&quot;",
+            "point3": "ຊອກຫາ {{kind}} ແລະເປີດມັນ",
+            "point4": "ຊອກຫາ &quot;{{communityName}}&quot; ແລະເປີດໃຊ້ງານ"
+        },
+        "notices": {
+            "youJoinedRoom": "ເຈົ້າເຂົ້າຫ້ອງ",
+            "joining": "ເຂົ້າຮ່ວມ: {{userName}}",
+            "sbLeftRoom": "{{userName}} ອອກຈາກຫ້ອງ",
+            "youLeftRoom": "ທ່ານອອກຈາກຫ້ອງ",
+            "codeCopied": "ທ່ານອອກຈາກຫ້ອງ",
+            "sbBeganFbLive": "{{userName}} ເລີ່ມກະຈາຍສຽງໂທໃນ Facebook",
+            "sbStoppedFbLive": "{{userName}} ຢຸດການກະຈາຍສຽງໂທໃນ Facebook",
+            "youBeganFbLive": "ທ່ານໄດ້ເລີ່ມອອກອາກາດການໂທນີ້ໃນເຟສບຸກ",
+            "youStoppedFbLive": "ທ່ານໄດ້ຢຸດການກະຈາຍສຽງໂທນີ້ໃນເຟສບຸກ",
+            "linkCopiedToCb": "ການເຊື່ອມຕໍ່ໄດ້ຄັດລອກໄປທີ່ clipboard",
+            "codeCopiedToCb": "ລະຫັດຖືກຄັດລອກໄປທີ່ clipboard",
+            "userHasNoVideo": "ຜູ້ເຂົ້າຮ່ວມບໍ່ມີວິດີໂອ"
+        },
+        "settingsPopup": {
+            "webCamera": "Web Camera",
+            "screenSharing": "ການແບ່ງປັນ ໜ້າ ຈໍ",
+            "shareAnotherScreen": "ແບ່ງປັນ ໜ້າ ຈໍອື່ນ",
+            "turnOffCameras": "ປິດກ້ອງທຸກລຸ້ນ",
+            "startFBLive": "ເລີ່ມຕົ້ນ Facebook Livestream",
+            "stopFBLive": "ຢຸດ Facebook Livestream",
+            "fbLiveTitle": "ລາຍການສົດ",
+            "fbLiveDescription": "ລາຍລະອຽດສົດ",
+            "fbOnlyMeLiveAccess": "ພຽງ​ຂ້ອຍ",
+            "fbFriendsAccess": "ເພື່ອນ",
+            "fbPublicAccess": "ສາທາລະນະ",
+            "fbStartLive": "ໄປ Live",
+            "fbStopLive": "ສິ້ນສຸດ Live",
+            "fbEmbedCode": "ຝັງ",
+            "copy": "ສຳ ເນົາ"
+        },
+        "participantsPopup": {
+            "disconnect": "ຕັດຂາດ",
+            "floatingScreens": "ພາບ ໜ້າ ຈໍເລື່ອນ",
+            "tiledScreens": "ໜ້າ ຈໍກະເບື້ອງ",
+            "loudestExceptMe": "ຍົກເວັ້ນຂ້ອຍ",
+            "maximizeLoudest": "ເຮັດໃຫ້ສູງທີ່ສຸດ",
+            "staticMaximized": "Static Maximized",
+            "manual": "ຄູ່ມື"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "ການໂທດ້ວຍເວລາຈິງ",
             "description": "ການໂທດ້ວຍວິດີໂອ \/ ສຽງທີ່ໃຊ້ເວລາຈິງ"
         }
+    },
+    "participating": {
+        "Title": "ຫົວຂໍ້",
+        "Subscribed": "ຮັບສະ ໝັກ",
+        "Participants": "ຜູ້ເຂົ້າຮ່ວມ",
+        "AreYouSureRemoveIdentifier": "ທ່ານແນ່ໃຈບໍ່ທີ່ຈະເອົາຕົວຊີ້ບອກນີ້ອອກ?",
+        "AreYouSureUnsubscribeIdentifier": "ທ່ານແນ່ໃຈບໍ່ຮັບສະ ໝັກ ຕົວລະບຸຕົວຕົນນີ້ບໍ? ມັນຈະປິດການແຈ້ງເຕືອນຕໍ່ຕົວລະບຸຕົວຕົນນີ້.",
+        "AreYouSureUnsubscribeDevice": "ທ່ານແນ່ໃຈບໍ່ຮັບສະ ໝັກ ອຸປະກອນນີ້ບໍ? ມັນຈະປິດການແຈ້ງເຕືອນໃຫ້ກັບອຸປະກອນນີ້.",
+        "Identifiers": "ຕົວລະບຸຕົວຕົນ",
+        "Devices": "ອຸປະກອນຕ່າງໆ",
+        "Streams": "ສາຍນ້ ຳ"
     }
 }

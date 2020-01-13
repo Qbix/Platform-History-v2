@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Sabuwar {{relationDisplayType}} a cikin {{toTitle}}",
         "Streams\/relatedFrom\/*": "An kara shi zuwa {{toTitle}} kamar yadda {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ya ambace ka cikin sharhi",
-        "Streams\/call": "{{displayName}} yana kiran ku"
+        "Streams\/call": "{{displayName}} yana kiran ku",
+        "ManageEmailSubscriptions": "gudanar da rajistar imel",
+        "IfUnsubscribe": "Idan kana son ficewa"
     },
     "invite": {
         "messageContent": "{{displayName}} ya gayyatar ku zuwa {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "An aiko da kira daga lambarmu, wanda abokanka ba su gane ba tukuna. Biyo tare da rubutun sauri don sanar da su gayyatar ya zo daga gare ku, ya umarce su su danna mahaɗin.",
             "confirm": "An aiko da kira daga lambarmu, wanda abokanka ba su gane ba tukuna. Kuna so ku bi ta hanyar rubutun sauri don sanar da su cewa gayyatar ya zo daga gare ku, yana tambayar su su danna mahaɗin.",
-            "check": "Hakanan, na aika muku da kira ga {{app}} app. Da fatan a duba sms dinku kuma danna mahadar!"
+            "check": "Hakanan, na aika muku da kira ga {{app}} app. Da fatan a duba sms dinku kuma danna mahadar!",
+            "CheckYourMobile": "Da fatan za a duba SMS kuma a bi umarni!"
         },
         "email": {
             "alert": "Ana aika da kira daga yankinmu, wanda abokanka ba su gane ba tukuna. Biyo tare da rubutun sauri don sanar da su gayyatar ya zo daga gare ku, ya umarce su su danna mahaɗin.",
             "confirm": "Ana aika da kira daga yankinmu, wanda abokanka ba su gane ba tukuna. Kuna so ku bi ta hanyar rubutun sauri don sanar da su cewa gayyatar ya zo daga gare ku, yana tambayar su su danna mahaɗin.",
             "subject": "Shin kun samo kira?",
-            "body": "Hakanan, na aika muku da kira ga {{app}} app. Da fatan a duba adireshin imel ku kuma danna mahadar a can!"
+            "body": "Hakanan, na aika muku da kira ga {{app}} app. Da fatan a duba adireshin imel ku kuma danna mahadar a can!",
+            "CheckYourEmail": "Da fatan za a bincika imel ɗinku kuma ku bi umarnin!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Kunna Makirufo",
             "cameraBtn": "Kunna Kamara",
             "cameraAndMicrophoneBtn": "Sanya Kyamara da makirufo"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Umarnin",
+            "permissionDenied": "An ba da izini ga {{kind}} ya hana. Don amfani da shi don Allah bi waɗannan matakan:",
+            "point1": "Je zuwa &quot;Saiti&quot; -&gt; &quot;Ci gaba&quot; -&gt; &quot;Sirri da tsaro&quot; -&gt; &quot;Saiti shafin&quot; -&gt; &quot;Kamara&quot; ko &quot;Saitunan yanar gizo&quot; -&gt; &quot;Makirufo&quot;",
+            "point2": "Cire {{hostname}} daga &quot;Jerin&quot; jerin"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Umarnin",
+            "permissionDenied": "An ba da izini ga {{kind}} ya hana. Da fatan za a sake buɗe wannan shafin kuma tabbatar da samun dama ga {{kind}} don shiga taron."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Umarnin",
+            "permissionDenied": "An ba da izini ga {{kind}} ya hana. Don amfani da shi don Allah bi waɗannan matakan:",
+            "point1": "Je zuwa Saitunan ku na Android",
+            "point2": "Bude &quot;Apps &amp; sanarwar&quot;",
+            "point3": "Nemo &quot;{{communityName}}&quot; kuma buɗe ta",
+            "point4": "Matsa kan Izini",
+            "point5": "A kunna {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Umarnin",
+            "permissionDenied": "An ba da izini ga {{kind}} ya hana. Don amfani da shi don Allah bi waɗannan matakan:",
+            "point1": "Je zuwa Saitunan iOS ɗinku",
+            "point2": "Bude &quot;Sirri&quot;",
+            "point3": "Nemo {{kind}} kuma buɗe shi",
+            "point4": "Nemo &quot;{{communityName}}&quot; kuma a kunna"
+        },
+        "notices": {
+            "youJoinedRoom": "Kun shiga dakin",
+            "joining": "Kasancewa: {{userName}}",
+            "sbLeftRoom": "{{userName}} ya bar dakin",
+            "youLeftRoom": "Kun bar dakin",
+            "codeCopied": "Kun bar dakin",
+            "sbBeganFbLive": "{{userName}} ya fara yada wannan kiran a Facebook",
+            "sbStoppedFbLive": "{{userName}} ya daina watsa wannan kiran a Facebook",
+            "youBeganFbLive": "Kun fara yada wannan kiran ne a Facebook",
+            "youStoppedFbLive": "Ka dakatar da yada wannan kiran a Facebook",
+            "linkCopiedToCb": "An lika hanyar haɗi zuwa allon rubutu",
+            "codeCopiedToCb": "Lambar da aka kwafa zuwa allo",
+            "userHasNoVideo": "Mai halarta bashi da bidiyo"
+        },
+        "settingsPopup": {
+            "webCamera": "Kyamarar Yanar gizo",
+            "screenSharing": "Raba allo",
+            "shareAnotherScreen": "Raba wani allo",
+            "turnOffCameras": "Kashe duk kyamarori",
+            "startFBLive": "Fara Facebook Livestream",
+            "stopFBLive": "Dakatar da Facebook Livestream",
+            "fbLiveTitle": "Taken Live",
+            "fbLiveDescription": "Bayanin Rayuwa",
+            "fbOnlyMeLiveAccess": "Kawai Ni",
+            "fbFriendsAccess": "Abokai",
+            "fbPublicAccess": "Jama&#39;a",
+            "fbStartLive": "Ku tafi Live",
+            "fbStopLive": "Livearshen Rayuwa",
+            "fbEmbedCode": "Saka ciki",
+            "copy": "Kwafa"
+        },
+        "participantsPopup": {
+            "disconnect": "Cire haɗin",
+            "floatingScreens": "Screens Screens",
+            "tiledScreens": "Screens Screens",
+            "loudestExceptMe": "Banda Wuya Sai Ni",
+            "maximizeLoudest": "Kara girman Loudest",
+            "staticMaximized": "Matsakaicin Matsakaici",
+            "manual": "Manual"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Kira na Gaskiya",
             "description": "lokaci na ainihi bidiyo \/ kira"
         }
+    },
+    "participating": {
+        "Title": "Take",
+        "Subscribed": "Biyan kuɗi",
+        "Participants": "Mahalarta",
+        "AreYouSureRemoveIdentifier": "An tabbatar an cire wannan mai gano?",
+        "AreYouSureUnsubscribeIdentifier": "Ka tabbata ka fitar da wannan ma&#39;aikacin? Zai kashe sanarwa ga wannan mai gano.",
+        "AreYouSureUnsubscribeDevice": "An tabbata an cire wannan na&#39;urar? Zai kashe sanarwa a wannan na&#39;urar.",
+        "Identifiers": "Masu Gano",
+        "Devices": "Na&#39;urori",
+        "Streams": "Ruwaya"
     }
 }

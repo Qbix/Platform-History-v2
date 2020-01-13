@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Kusha okusha {{relationDisplayType}} ku - {{toTitle}}",
         "Streams\/relatedFrom\/*": "Kungezwe ku - {{toTitle}} njengo - {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ukusho emazwaneni",
-        "Streams\/call": "I - {{displayName}} iyakubiza"
+        "Streams\/call": "I - {{displayName}} iyakubiza",
+        "ManageEmailSubscriptions": "phatha okubhaliselwe i-imeyili",
+        "IfUnsubscribe": "Uma ufuna ukuzikhipha ohlwini"
     },
     "invite": {
         "messageContent": "{@}} Ukumemele {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Izimemo zithunyelwa kusuka enombolweni yethu, abangani bakho abangakaboni. Landela ngombhalo osheshayo ukuze ubazise isimemo esivela kuwe, ubacele ukuba uchofoze isixhumanisi.",
             "confirm": "Izimemo zithunyelwa kusuka enombolweni yethu, abangani bakho abangakaboni. Ungathanda ukulandelela ngombhalo osheshayo ukuze ubazise isimemo esivela kuwe, ubacele ukuba uchofoze isixhumanisi.",
-            "check": "Hhayi, ngikuthumelele isimemo kuhlelo lokusebenza {{app}}. Sicela uhlole amasms wakho bese uchofoza isixhumanisi!"
+            "check": "Hhayi, ngikuthumelele isimemo kuhlelo lokusebenza {{app}}. Sicela uhlole amasms wakho bese uchofoza isixhumanisi!",
+            "CheckYourMobile": "Sicela ubheke i-SMS bese ulandela imiyalo!"
         },
         "email": {
             "alert": "Izimemo zithunyelwa kusuka kusizinda sethu, abangani bakho abangakaboni. Landela ngombhalo osheshayo ukuze ubazise isimemo esivela kuwe, ubacele ukuba uchofoze isixhumanisi.",
             "confirm": "Izimemo zithunyelwa kusuka kusizinda sethu, abangani bakho abangakaboni. Ungathanda ukulandelela ngombhalo osheshayo ukuze ubazise isimemo esivela kuwe, ubacele ukuba uchofoze isixhumanisi.",
             "subject": "Uthole isimemo?",
-            "body": "Hhayi, ngikuthumelele isimemo kuhlelo lokusebenza {{app}}. Sicela uhlole i-imeyili yakho bese uchofoza isixhumanisi lapho!"
+            "body": "Hhayi, ngikuthumelele isimemo kuhlelo lokusebenza {{app}}. Sicela uhlole i-imeyili yakho bese uchofoza isixhumanisi lapho!",
+            "CheckYourEmail": "Sicela ubheke i-imeyili yakho bese ulandela imiyalo!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Nika amandla i-Microphone",
             "cameraBtn": "Nika amandla Ikhamera",
             "cameraAndMicrophoneBtn": "Nika amandla Ikhamera neMikrofoni"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Imiyalo",
+            "permissionDenied": "Imvume ye - {{kind}} yenqatshiwe. Ukuze uyisebenzise sicela ulandele lezi zinyathelo:",
+            "point1": "Iya ku- &quot;Izilungiselelo&quot; -&gt; &quot;Okuthuthukile&quot; -&gt; &quot;Ubumfihlo nokuphepha&quot; -&gt; &quot;Izilungiselelo Zesayithi&quot; -&gt; &quot;Ikhamera&quot; noma &quot;Izilungiselelo Zesayithi&quot; -&gt; &quot;Imakrofoni&quot;",
+            "point2": "Susa u - {{hostname}} kusuka ku- &quot;Vimba&quot; uhlu"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Imiyalo",
+            "permissionDenied": "Imvume ye - {{kind}} yenqatshiwe. Sicela ulayishe kabusha leli khasi bese uqinisekisa ukufinyelela ku - {{kind}} ukujoyina inkomfa."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Imiyalo",
+            "permissionDenied": "Imvume ye - {{kind}} yenqatshiwe. Ukuze uyisebenzise sicela ulandele lezi zinyathelo:",
+            "point1": "Iya kuzilungiselelo zakho ze-Android",
+            "point2": "Vula &quot;Izinhlelo zokusebenza nezaziso&quot;",
+            "point3": "Thola i- &quot;{{communityName}} bese uyivula",
+            "point4": "Thepha ku-izimvume",
+            "point5": "Nika amandla i - {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Imiyalo",
+            "permissionDenied": "Imvume ye - {{kind}} yenqatshiwe. Ukuze uyisebenzise sicela ulandele lezi zinyathelo:",
+            "point1": "Iya kuzilungiselelo zakho ze-iOS",
+            "point2": "Vula &quot;Ubumfihlo&quot;",
+            "point3": "Thola i - {{kind}} bese uyivula",
+            "point4": "Thola i- &quot;{{communityName}}&quot; bese unike amandla"
+        },
+        "notices": {
+            "youJoinedRoom": "Ujoyine igumbi",
+            "joining": "Ukujoyina: {{userName}}",
+            "sbLeftRoom": "{{userName}} liphume egumbini",
+            "youLeftRoom": "Uphume egumbini",
+            "codeCopied": "Uphume egumbini",
+            "sbBeganFbLive": "{{userName}} baqale ukusakaza le kholi ku-Facebook",
+            "sbStoppedFbLive": "{{userName}} uyeke ukusakaza le kholi ku-Facebook",
+            "youBeganFbLive": "Uqale ukusakaza le kholi ku-Facebook",
+            "youStoppedFbLive": "Umise ukusakaza le kholi ku-Facebook",
+            "linkCopiedToCb": "Isixhumanisi sikopishelwe ebhodini lokunamathisela",
+            "codeCopiedToCb": "Ikhodi ikopishelwe kubhodi yokunameka",
+            "userHasNoVideo": "Umhlanganyeli akanayo ividiyo"
+        },
+        "settingsPopup": {
+            "webCamera": "Ikhamera yeWebhu",
+            "screenSharing": "Ukwabelana Ngesikrini",
+            "shareAnotherScreen": "Yabelana ngesinye isikrini",
+            "turnOffCameras": "Cisha onke amakhamera",
+            "startFBLive": "Qala i-Facebook Livestream",
+            "stopFBLive": "Misa i-Facebook Livestream",
+            "fbLiveTitle": "Isihloko Esibukhoma",
+            "fbLiveDescription": "Incazelo ebukhoma",
+            "fbOnlyMeLiveAccess": "Mina kuphela",
+            "fbFriendsAccess": "Bangani",
+            "fbPublicAccess": "Esidlangalaleni",
+            "fbStartLive": "Iya bukhoma",
+            "fbStopLive": "Qeda bukhoma",
+            "fbEmbedCode": "Shumeka",
+            "copy": "Kopisha"
+        },
+        "participantsPopup": {
+            "disconnect": "Nqamula",
+            "floatingScreens": "Izikrini Zokuntanta",
+            "tiledScreens": "Izikrini Ezibekiwe",
+            "loudestExceptMe": "Ozithobayo Ngaphandle Kwami",
+            "maximizeLoudest": "Khulisa ubukhulu",
+            "staticMaximized": "Kukhule kakhulu",
+            "manual": "Imanuwali"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Ucingo lwesikhathi sangempela",
             "description": "ividiyo yangempela \/ ikholi yomsindo"
         }
+    },
+    "participating": {
+        "Title": "Isihloko",
+        "Subscribed": "Bhalisiwe",
+        "Participants": "Abahlanganyeli",
+        "AreYouSureRemoveIdentifier": "Uqinisekile ukuthi ususa lesi sikhombi?",
+        "AreYouSureUnsubscribeIdentifier": "Uqinisekile ukuthi uzikhipha ohlwini lesi sikhombi? Izovala izaziso kusihlonzi.",
+        "AreYouSureUnsubscribeDevice": "Uqinisekile ukuthi uzikhipha ohlwini le divayisi? Izocisha izaziso kule divayisi.",
+        "Identifiers": "Izikhombi",
+        "Devices": "Amadivayisi",
+        "Streams": "Imisipha"
     }
 }

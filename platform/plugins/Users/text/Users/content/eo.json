@@ -102,5 +102,11 @@
         "noLongerUsing": "Vi ne plu estas ligita al {{platform}} kiel",
         "doAuth": "Ensalutu kun ĉi tiu konto",
         "doSwitch": "Ŝaltu al ĉi tiu konto"
+    },
+    "roles": {
+        "Owner": "Mastro",
+        "Admin": "Admin",
+        "Member": "Membro",
+        "Guest": "Gasto"
     }
 }

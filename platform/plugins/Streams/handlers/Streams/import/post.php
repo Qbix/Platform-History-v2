@@ -86,8 +86,7 @@ function Streams_import_post()
 
 	// start parsing the rows
 	$j = 0;
-	foreach (Q_Utils::csvLines($instructions) as $line) {
-		$row = str_getcsv($line, ",");
+	foreach (Q_Utils::csv($instructions) as $row) {
 		if (!$row) {
 			continue;
 		}

@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Nouvo {{relationDisplayType}} nan {{toTitle}}",
         "Streams\/relatedFrom\/*": "Te ajoute nan {{toTitle}} kòm {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} mansyone ou nan yon kòmantè",
-        "Streams\/call": "{{displayName}} ap rele ou"
+        "Streams\/call": "{{displayName}} ap rele ou",
+        "ManageEmailSubscriptions": "jere abonnman imel ou",
+        "IfUnsubscribe": "Si ou vle koupe abònman"
     },
     "invite": {
         "messageContent": "{{displayName}} envite ou nan {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Envite yo voye soti nan nimewo nou an, ki zanmi ou pa ankò rekonèt. Swiv avèk yon tèks rapid fè yo konnen envitasyon an te soti nan ou, mande yo klike sou lyen an.",
             "confirm": "Envite yo voye soti nan nimewo nou an, ki zanmi ou pa ankò rekonèt. Èske ou ta renmen swiv avèk yon tèks rapid yo kite yo konnen envitasyon an te soti nan ou, mande yo klike sou lyen an.",
-            "check": "Hey, mwen jis voye ou yon envite nan {{app}} app a. Tanpri tcheke SMS ou epi klike sou lyen an!"
+            "check": "Hey, mwen jis voye ou yon envite nan {{app}} app a. Tanpri tcheke SMS ou epi klike sou lyen an!",
+            "CheckYourMobile": "Tanpri tcheke SMS epi swiv enstriksyon yo!"
         },
         "email": {
             "alert": "Envite yo voye soti nan domèn nou an, ki zanmi ou yo pa ankò rekonèt. Swiv avèk yon tèks rapid fè yo konnen envitasyon an te soti nan ou, mande yo klike sou lyen an.",
             "confirm": "Envite yo voye soti nan domèn nou an, ki zanmi ou yo pa ankò rekonèt. Èske ou ta renmen swiv avèk yon tèks rapid yo kite yo konnen envitasyon an te soti nan ou, mande yo klike sou lyen an.",
             "subject": "Eske ou te jwenn yon envite?",
-            "body": "Hey, mwen jis voye ou yon envite nan {{app}} app a. Tanpri tcheke imèl ou epi klike sou lyen an nan la!"
+            "body": "Hey, mwen jis voye ou yon envite nan {{app}} app a. Tanpri tcheke imèl ou epi klike sou lyen an nan la!",
+            "CheckYourEmail": "Tanpri tcheke imèl ou epi swiv enstriksyon yo!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Pèmèt mikwofòn",
             "cameraBtn": "Pèmèt kamera",
             "cameraAndMicrophoneBtn": "Pèmèt kamera ak mikwofòn"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Enstriksyon",
+            "permissionDenied": "Pèmisyon pou {{kind}} refize. Pou itilize li tanpri swiv etap sa yo:",
+            "point1": "Ale nan &quot;Anviwònman&quot; -&gt; &quot;Avanse&quot; -&gt; &quot;Konfidansyalite ak sekirite&quot; -&gt; &quot;Anviwònman lokal&quot; -&gt; &quot;Kamera&quot; oswa &quot;Anviwònman lokal&quot; -&gt; &quot;Mikwo&quot;",
+            "point2": "Retire {{hostname}} nan lis &quot;blòk&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Enstriksyon",
+            "permissionDenied": "Pèmisyon pou {{kind}} refize. Tanpri rechaje paj sa a epi konfime aksè a {{kind}} pou rantre nan konferans lan."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Enstriksyon",
+            "permissionDenied": "Pèmisyon pou {{kind}} refize. Pou itilize li tanpri swiv etap sa yo:",
+            "point1": "Ale nan Anviwònman android ou",
+            "point2": "Louvri &quot;Apps &amp; notifikasyon&quot;",
+            "point3": "Jwenn &quot;{{communityName}}&quot; epi louvri li",
+            "point4": "Tape sou Permissions",
+            "point5": "Pèmèt {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Enstriksyon",
+            "permissionDenied": "Pèmisyon pou {{kind}} refize. Pou itilize li tanpri swiv etap sa yo:",
+            "point1": "Ale nan anviwònman iOS ou",
+            "point2": "Louvri &quot;Privacy&quot;",
+            "point3": "Jwenn {{kind}} epi louvri li",
+            "point4": "Jwenn &quot;{{communityName}}&quot; ak pèmèt"
+        },
+        "notices": {
+            "youJoinedRoom": "Ou antre nan sal la",
+            "joining": "Rantre nan: {{userName}}",
+            "sbLeftRoom": "{{userName}} kite chanm nan",
+            "youLeftRoom": "Ou te kite sal la",
+            "codeCopied": "Ou te kite sal la",
+            "sbBeganFbLive": "{{userName}} te kòmanse transmèt apèl sa a nan Facebook",
+            "sbStoppedFbLive": "{{userName}} te sispann transmèt apèl sa a nan Facebook",
+            "youBeganFbLive": "Ou te kòmanse transmèt apèl sa a nan Facebook",
+            "youStoppedFbLive": "Ou te sispann difize apèl sa a nan Facebook",
+            "linkCopiedToCb": "Link kopye nan papye",
+            "codeCopiedToCb": "Kòd kopye nan papye",
+            "userHasNoVideo": "Patisipan an pa gen okenn videyo"
+        },
+        "settingsPopup": {
+            "webCamera": "Kamera entènèt",
+            "screenSharing": "Pataje ekran",
+            "shareAnotherScreen": "Pataje yon lòt ekran",
+            "turnOffCameras": "Etenn tout kamera yo",
+            "startFBLive": "Kòmanse Facebook Livestream",
+            "stopFBLive": "One Stop Facebook Livestream",
+            "fbLiveTitle": "Tit Live",
+            "fbLiveDescription": "Live Deskripsyon",
+            "fbOnlyMeLiveAccess": "Sèlman mwen",
+            "fbFriendsAccess": "Zanmi",
+            "fbPublicAccess": "Piblik",
+            "fbStartLive": "Ale viv",
+            "fbStopLive": "Fen Live",
+            "fbEmbedCode": "Afiche",
+            "copy": "Kopi"
+        },
+        "participantsPopup": {
+            "disconnect": "Dekonekte",
+            "floatingScreens": "Ekran k ap flote",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Pi fò eksepte mwen",
+            "maximizeLoudest": "Maksimize Loudest",
+            "staticMaximized": "Static Maximized",
+            "manual": "Manyèl"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Rele an tan reyèl",
             "description": "yon tan reyèl videyo \/ odyo apèl"
         }
+    },
+    "participating": {
+        "Title": "Tit",
+        "Subscribed": "Enskri",
+        "Participants": "Patisipan yo",
+        "AreYouSureRemoveIdentifier": "Èske ou asire w ke ou retire sa a idantifyan?",
+        "AreYouSureUnsubscribeIdentifier": "Èske ou sèten koupe abònman sa a idantifyan? Li pral fèmen notifikasyon sa a idantifyan.",
+        "AreYouSureUnsubscribeDevice": "Èske ou sèten koupe abònman aparèy sa a? Li pral fèmen notifikasyon sou aparèy sa a.",
+        "Identifiers": "Idantifikatè yo",
+        "Devices": "Aparèy",
+        "Streams": "Flux"
     }
 }

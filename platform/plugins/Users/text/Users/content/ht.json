@@ -102,5 +102,11 @@
         "noLongerUsing": "Ou pa gen plis koneksyon ak {{platform}} kòm",
         "doAuth": "Log in with this account",
         "doSwitch": "Chanje nan kont sa a"
+    },
+    "roles": {
+        "Owner": "Pwopriyetè",
+        "Admin": "Admin",
+        "Member": "Manm",
+        "Guest": "Guest"
     }
 }

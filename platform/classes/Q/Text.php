@@ -214,5 +214,20 @@ class Q_Text
 		return Q::ifset($text, 'words', $word, $word);
 	}
 	
+	/**
+	 * Information on languages
+	 * @static
+	 * @return {array} An array with the keys being the two-digit language code
+	 */
+	static function languagesInfo()
+	{
+		static $info = null;
+		if (!$info) {
+			$content = file_get_contents(Q_FILES_DIR.DS.'Q'.DS.'languages.json');
+			$info = Q::json_decode($content);
+		}
+		return $info;
+	}
+	
 	protected static $get = array();
 }

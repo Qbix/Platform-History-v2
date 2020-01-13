@@ -549,6 +549,29 @@ Sp.matchTypes.adapters = {
 };
 
 /**
+ * Deobfuscates some text that was obfuscated by Q_Utils::obfuscate
+ * @method deobfuscate
+ * @param {String} str
+ * @param {String} [key=' ']
+ * @return {String}
+ */
+Sp.deobfuscate = function (key) {
+	key = key || ' ';
+	var len1 = Math.floor(this.length / 2);
+	var len2 = key.length;
+	var result = '';
+	for (var i=0; i<len1; ++i) {
+		var j = i % len2;
+		var diff = this.charCodeAt(i*2+1);
+		if (this.charAt(i*2) == '1') {
+			diff = -diff;
+		}
+		result += String.fromCharCode(key.charCodeAt(j)+diff);
+	}
+	return result;
+};
+
+/**
  * @class Function
  * @description Q extended methods for Functions
  */
@@ -4986,11 +5009,16 @@ Q.Links = {
 		bcc = bcc && Q.isArrayLike(bcc) ? bcc.join(',') : bcc;
 		var names = ['cc', 'bcc', 'subject', 'body'];
 		var parts = [cc, bcc, subject, body];
-		var url = "mailto:" + encodeURIComponent(to || '');
+		var url = "mailto:" + (to || '');
 		var char = '?';
+		var encode = false;
 		for (var i=0, l=names.length; i<l; ++i) {
 			if (parts[i]) {
-				url += char + names[i] + '=' + encodeURIComponent(parts[i]);
+				url += char + names[i] + '=' + 
+					(encode ? encodeURIComponent(parts[i]) : parts[i]);
+				if (i >= 2) {
+					encode = true;
+				}
 				char = '&';
 			}
 		}
@@ -11703,7 +11731,7 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
 	var screenX = Q.Pointer.getX(evt) - Q.Pointer.scrollLeft();
 	var screenY = Q.Pointer.getY(evt) - Q.Pointer.scrollTop();
 	if (!screenX || !screenY || Q.Pointer.canceledClick
-	|| (!evt.button || (evt.touches && !evt.touches.length))) {
+	|| (!evt.button && (evt.touches && !evt.touches.length))) {
 		return;
 	}
 	var ccd = Q.Pointer.options.cancelClickDistance;

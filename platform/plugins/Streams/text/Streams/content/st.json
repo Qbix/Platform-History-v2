@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Ncha {{relationDisplayType}} ho {{1000]}",
         "Streams\/relatedFrom\/*": "E kenyellelitsoe ho {{toTitle}} joalo ka {{1000]}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} o u boletse ka maikutlo",
-        "Streams\/call": "{{displayName}} ea u bitsa"
+        "Streams\/call": "{{displayName}} ea u bitsa",
+        "ManageEmailSubscriptions": "hlokomela ngoliso ea hau ea lengolo-tsoibila",
+        "IfUnsubscribe": "Haeba u batla ho itokolla"
     },
     "invite": {
         "messageContent": "{{displayName}} eu meme ho {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Memo e romeloa ho tloha palo ea rona, eo metsoalle ea hau e sa e tsebeng. Latela ka temana e potlakileng ho ba tsebisa memo eo e tsoa ho uena, u ba kōpe hore ba tobetse konteraka.",
             "confirm": "Memo e romeloa ho tloha palo ea rona, eo metsoalle ea hau e sa e tsebeng. Na o ka rata ho latela le mongolo o potlakileng ho ba tsebisa memo eo e tsoa ho uena, o ba kopa ho tobetsa konteraka.",
-            "check": "Hey, ke u rometse memo ho {{app}} app. Ka kopo sheba li-sms tsa hau mme o tobetsa sekahare!"
+            "check": "Hey, ke u rometse memo ho {{app}} app. Ka kopo sheba li-sms tsa hau mme o tobetsa sekahare!",
+            "CheckYourMobile": "Ka kopo sheba SMS mme u latele litaelo!"
         },
         "email": {
             "alert": "Memo e romeloa ho tsoa ho domain, eo metsoalle ea hau e sa e tsebeng. Latela ka temana e potlakileng ho ba tsebisa memo eo e tsoa ho uena, u ba kōpe hore ba tobetse konteraka.",
             "confirm": "Memo e romeloa ho tsoa ho domain, eo metsoalle ea hau e sa e tsebeng. Na o ka rata ho latela le mongolo o potlakileng ho ba tsebisa memo eo e tsoa ho uena, o ba kopa ho tobetsa konteraka.",
             "subject": "O fumane tumemo?",
-            "body": "Hey, ke u rometse memo ho {{app}} app. Ka kopo, sheba lengolo la hau la imeile mme o tobetsa konteraka ho eona!"
+            "body": "Hey, ke u rometse memo ho {{app}} app. Ka kopo, sheba lengolo la hau la imeile mme o tobetsa konteraka ho eona!",
+            "CheckYourEmail": "Ka kopo sheba lengolo-tsoibila la hau mme u latele litaelo!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Nolofatsa Microphone",
             "cameraBtn": "Nolofatsa Khamera",
             "cameraAndMicrophoneBtn": "Nolofatsa Khamera le Microphone"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Litaelo",
+            "permissionDenied": "Ho lumelloa tumello ea {{kind}}. Ho e sebelisa ka kopo latela mehato ena:",
+            "point1": "Eya ho &quot;Litlhophiso&quot; -&gt; &quot;E hatetse pele&quot; -&gt; &quot;Boitsebiso le lekunutu&quot; -&gt; &quot;Litlhophiso tsa Sebaka&quot; - &quot;Khamera&quot; kapa &quot;Litlhophiso tsa Sebaka&quot; -&gt; &quot;Microphone&quot;",
+            "point2": "Tlosa {{hostname}} lenaneng la &quot;Block&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Litaelo",
+            "permissionDenied": "Ho lumelloa tumello ea {{kind}}. Ka kopo kenya leqephe lena hape &#39;me u netefatse ho fihlella ho {{kind}} ho kenela kopano."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Litaelo",
+            "permissionDenied": "Ho lumelloa tumello ea {{kind}}. Ho e sebelisa ka kopo latela mehato ena:",
+            "point1": "Eya ho Litlhophiso tsa hau tsa Android",
+            "point2": "Bula &quot;Lisebelisoa le tsebiso&quot;",
+            "point3": "Fumana &quot;{{communityName}} &#39;me u e bule",
+            "point4": "Tlanya ka Litumello",
+            "point5": "Nolofatsa {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Litaelo",
+            "permissionDenied": "Ho lumelloa tumello ea {{kind}}. Ho e sebelisa ka kopo latela mehato ena:",
+            "point1": "Eya ho Litlhophiso tsa hau tsa iOS",
+            "point2": "Bula &quot;Lekunutu&quot;",
+            "point3": "Fumana {{kind}} &#39;me u e bule",
+            "point4": "Fumana &quot;{{communityName}} &#39;me u khone"
+        },
+        "notices": {
+            "youJoinedRoom": "O kene ka phapusing",
+            "joining": "Joang: {{userName}}",
+            "sbLeftRoom": "{{userName}} a tsoa ka phapusing",
+            "youLeftRoom": "U tsoile ka phapusing",
+            "codeCopied": "U tsoile ka phapusing",
+            "sbBeganFbLive": "{{userName}} o qalile ho phatlalatsa mohala ona ho Facebook",
+            "sbStoppedFbLive": "{{userName}} o emisitse ho phatlalatsa mohala ona ho Facebook",
+            "youBeganFbLive": "U qalile ho phatlalatsa mohala ona ho Facebook",
+            "youStoppedFbLive": "O emisitse ho phatlalatsa mohala ona ho Facebook",
+            "linkCopiedToCb": "Khokahano e kopitsoe ho clipboard",
+            "codeCopiedToCb": "Khoutu e kopitsoe ho clipboard",
+            "userHasNoVideo": "Morupeluoa ha a na video"
+        },
+        "settingsPopup": {
+            "webCamera": "Khamera ea Webo",
+            "screenSharing": "Ho arolelana Screen",
+            "shareAnotherScreen": "Abelana skrini se seng",
+            "turnOffCameras": "Tima likh&#39;amera tsohle",
+            "startFBLive": "Qala Facebook Livestream",
+            "stopFBLive": "Emisa Facebook Livestream",
+            "fbLiveTitle": "Sehlooho se Phelang",
+            "fbLiveDescription": "Tlhaloso e Phelang",
+            "fbOnlyMeLiveAccess": "Ke Nna feela",
+            "fbFriendsAccess": "Metsoalle",
+            "fbPublicAccess": "Tsa phatlalatsa",
+            "fbStartLive": "Eya ho phela",
+            "fbStopLive": "Phethahetseng",
+            "fbEmbedCode": "Embed",
+            "copy": "Kopitsa"
+        },
+        "participantsPopup": {
+            "disconnect": "Lahla",
+            "floatingScreens": "Lits&#39;oants&#39;o tsa Phaphamale",
+            "tiledScreens": "Mehala ea Literase",
+            "loudestExceptMe": "O Ratehang Haholo ntle le nna",
+            "maximizeLoudest": "Phahamisa ka ho Fetisisa",
+            "staticMaximized": "E matlafalitsoe",
+            "manual": "Buka ea matsoho"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Mohala oa Nako ea &#39;nete",
             "description": "video ea nako ea &#39;nete \/ mohala oa molumo"
         }
+    },
+    "participating": {
+        "Title": "Sehlooho",
+        "Subscribed": "E ngolisitsoe",
+        "Participants": "Barupeluoa",
+        "AreYouSureRemoveIdentifier": "O na le bonnete ba hore o tlosa pontšo ee?",
+        "AreYouSureUnsubscribeIdentifier": "O na le bonnete ba hore u ngolisa sesupo see? E tla tima tsebiso ho tsebisoang.",
+        "AreYouSureUnsubscribeDevice": "O na le bonnete ba hore u ngolisa sesebelisoa see? E tla tima tsebiso mabapi le sesebelisoa sena.",
+        "Identifiers": "Matšoao",
+        "Devices": "Lisebelisoa",
+        "Streams": "Meroallo"
     }
 }

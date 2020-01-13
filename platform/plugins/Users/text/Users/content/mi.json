@@ -102,5 +102,11 @@
         "noLongerUsing": "Kua kore koe e hono atu ki te {{platform}} hei",
         "doAuth": "Takiuru me tenei kaute",
         "doSwitch": "Tahuri ki tenei putea"
+    },
+    "roles": {
+        "Owner": "Kai-rangatira",
+        "Admin": "Tauhokohoko",
+        "Member": "Mema",
+        "Guest": "Manuhiri"
     }
 }

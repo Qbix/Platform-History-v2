@@ -255,7 +255,7 @@ class Q_Utils
 	 * @param {string} [$key="blah"] Some key to use for obfuscation
 	 * @return {text}
 	 */
-	static function obfuscate($text, $key = 'blah')
+	static function obfuscate($text, $key = ' ')
 	{
 		$len = strlen($text);
 		$len2 = strlen($key);
@@ -481,26 +481,95 @@ class Q_Utils
 			return false;
 		}
 	}
+	
+	/**
+	 * Replace any line breaks with CRLF characters 
+	 * @method lineBreaks
+	 * @static
+	 * @param {string} $input
+	 * @param {string} [$out="\r\n"] What to use in the output
+	 */
+	static function lineBreaks($input, $out = "\r\n")
+	{
+		$input = str_replace("\n", "\r\n", $input);
+		$input = str_replace("\r\r\n", "\r\n", $input);
+		$input = str_replace("\r", "\r\n", $input);
+		$input = str_replace("\r\n\n", "\r\n", $input);
+		if ($out != "\r\n") {
+			$input = str_replace("\r\n", $out);
+		}
+		return $input;
+	}
 
 	/**
-	 * Get the lines from a csv file
+	 * Get the lines from a csv file.
+	 * You may want to use str_getcsv($line, ',') to parse each line further.
+	 * But, warning: this strips enclosure characters from lines.
+	 * You may want to just use the 
 	 * @method csvLines
 	 * @param {string} $input
 	 * @param {string} [$enclosure='"']
 	 * @param {string} [$escape="\\"]
+	 * @param {string|true} [$lineBreak="\n"] Pass true to work with line breraks
+	 *  consisting of either "\r", "\n" or "\r\n"
 	 * @return array
-	 *
 	 */
-	static function csvLines($input, $enclosure = '"', $escape = "\\")
+	static function csvLines(
+		$input, 
+		$enclosure = '"', 
+		$escape = "\\", 
+		$lineBreak = "\n")
 	{
+		if ($lineBreak === true) {
+			$input = self::lineBreaks($input, "\n");
+			$lineBreak = "\n";
+		}
 		$result = array();
-		$lines = str_getcsv($input, "\r", $enclosure, $escape);
+		$lines = str_getcsv($input, $lineBreak, $enclosure, $escape);
 		foreach ($lines as $line) {
 			if ($line = trim($line)) {
 				$result[] = $line;
 			}
 		}
 		return $result;
+	}
+	
+	/**
+	 * @method csv
+	 * @static
+	 * @param {string} $input
+	 * @param {string} [$delimiter=","]
+	 * @param {boolean} [$skipEmptyLines=true]
+	 * @param {boolean} [$trimFields=true]
+	 */
+	static function csv (
+		$input,
+		$delimiter = ",",
+		$skipEmptyLines = true,
+		$trimFields = true)
+	{
+		$r = '{{-=csv=-}}';
+	    $enc = preg_replace('/(?<!")""/', $r, $input);
+	    $enc = preg_replace_callback(
+	        '/"(.*?)"/s',
+	        function ($field) {
+	            return urlencode(utf8_encode($field[1]));
+	        },
+	        $enc
+	    );
+	    $lines = preg_split($skipEmptyLines ? ($trimFields ? '/( *\R)+/s' : '/\R+/s') : '/\R/s', $enc);
+		$res1 = array();
+		foreach ($lines as $line) {
+			$res2 = array();
+            $fields = $trimFields 
+				? array_map('trim', explode($delimiter, $line))
+				: explode($delimiter, $line);
+			foreach ($fields as $field) {
+				$res2[] = str_replace($r, '"', utf8_decode(urldecode($field)));
+			}
+			$res1[] = $res2;
+		}
+		return $res1;
 	}
 
 	/**
@@ -855,8 +924,8 @@ class Q_Utils
 				CURLOPT_FOLLOWLOCATION => true,	 // follow redirects
 				CURLOPT_ENCODING	   => "",	   // handle all encodings
 				CURLOPT_AUTOREFERER	=> true,	 // set referer on redirect
-				CURLOPT_CONNECTTIMEOUT => Q_UTILS_CONNECTION_TIMEOUT,	  // timeout on connect
-				CURLOPT_TIMEOUT		=> Q_UTILS_CONNECTION_TIMEOUT,	  // timeout on response
+				CURLOPT_CONNECTTIMEOUT => $timeout,	  // timeout on connect
+				CURLOPT_TIMEOUT		=> $timeout,	  // timeout on response
 				CURLOPT_MAXREDIRS	  => 10,	   // stop after 10 redirects
 			);
 			curl_setopt_array($ch, $curl_opts);
@@ -1122,7 +1191,8 @@ class Q_Utils
 	 * @static
 	 * @throws {Q_Exception_MissingConfig} If node host or port are not defined
 	 */
-	static function nodeUrl () {
+	static function nodeUrl ()
+	{
 		$url = Q_Config::get('Q', 'node', 'url', null);
 		if (isset($url)) {
 			return Q_Uri::interpolateUrl($url);
@@ -1143,7 +1213,9 @@ class Q_Utils
 	 * @static
 	 * @throws {Q_Exception_MissingConfig} If node host or port are not defined
 	 */
-	static function socketPath () {
+	static function socketPath ()
+	
+	{
 		return Q_Config::get('Q', 'node', 'socket', 'path', '/socket.io');
 	}
 
@@ -1155,7 +1227,14 @@ class Q_Utils
 	 * @param {string} $dest
 	 * @throws {Q_Exception_MissingConfig} If node host or port are not defined
 	 */
-	static function copy($source, $dest) {
+	static function copy($source, $dest)
+	{
+		
+		if (file_exists($source) and !is_dir($source) and !is_dir($dest)) {
+			// just copies a file
+			copy($source, $dest);
+			return;	
+		}
 		
 		if (file_exists($dest) and (is_dir($source) xor is_dir($dest))) {
 			throw new Q_Exception("Q_Utils::copy doesn't work if one parameter is a file and one is a directory");

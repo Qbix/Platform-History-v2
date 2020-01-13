@@ -102,5 +102,11 @@
         "noLongerUsing": "Are nweghị njikọ ọzọ na {{platform}} dị ka",
         "doAuth": "Banye akaụntụ a",
         "doSwitch": "Sapeta na akaụntụ a"
+    },
+    "roles": {
+        "Owner": "Nwe",
+        "Admin": "Ijikwa",
+        "Member": "Onye otu",
+        "Guest": "Onye ọbịa"
     }
 }

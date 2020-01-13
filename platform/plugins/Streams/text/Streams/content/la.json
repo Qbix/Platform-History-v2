@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Novum {{CMXCIX}} in {{M}}",
         "Streams\/relatedFrom\/*": "} {Sicut M {ut} {{addidit CMXCIX}}",
         "Streams\/mention": "{{CMXCIX}} in quibus et vos a comment",
-        "Streams\/call": "} {CMXCIX} {vocat vos"
+        "Streams\/call": "} {CMXCIX} {vocat vos",
+        "ManageEmailSubscriptions": "manage vestri email subnotationes",
+        "IfUnsubscribe": "Si vis unsubscribe"
     },
     "invite": {
         "messageContent": "} {{CMXCIX te invitavit} {{M}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Mittatur nobis invitet qui nondum agnoscunt tuos. Post a velox apud se illud scire ad invitationem ergo a te factum est, rogabat ut click in link.",
             "confirm": "Mittatur nobis invitet qui nondum agnoscunt tuos. Vis sequi cum illis sit velox ad textum invitationis scire a te factum est, rogabat ut click in link.",
-            "check": "Heus, sicut misit me ad vos an invite {{CMXCIX}} app. Please click SMS pagina vestra!"
+            "check": "Heus, sicut misit me ad vos an invite {{CMXCIX}} app. Please click SMS pagina vestra!",
+            "CheckYourMobile": "Please SMS sequi praeceptum;"
         },
         "email": {
             "alert": "Mittuntur de dominico invitet qui nondum agnoscunt tuos. Cum sit velox ad illud post invitationem ad illos quia venit a vobis orantes et postulantes ut click in link.",
             "confirm": "Mittuntur de dominico invitet qui nondum agnoscunt tuos. Vis sequi cum illis sit velox ad textum invitationis scire a te factum est, rogabat ut click in link.",
             "subject": "Nonne vos adepto an invitare?",
-            "body": "Heus, sicut misit me ad vos an invite {{CMXCIX}} app. Email reprehendo placere click in pagina illic"
+            "body": "Heus, sicut misit me ad vos an invite {{CMXCIX}} app. Email reprehendo placere click in pagina illic",
+            "CheckYourEmail": "Et disciplinam sequi velit reprehendo vestri email!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Admitte Microphone",
             "cameraBtn": "DE CAMERA activare",
             "cameraAndMicrophoneBtn": "Admitte camera et microphone"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "instructiones",
+            "permissionDenied": "{{Licentiam concedere CMXCIX}} negavit. Uti illud placet, sequere his gradibus,",
+            "point1": "Go to &quot;Optiones&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Privacy et securitas&quot; -&gt; &quot;Optiones Site&quot; -&gt; &quot;Camera&quot; vel &quot;Optiones Site&quot; -&gt; &quot;Microphone&quot;",
+            "point2": "Aufer}} ex {{CMXCIX &quot;Block&quot; album"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "instructiones",
+            "permissionDenied": "{{Licentiam concedere CMXCIX}} negavit. Placere reload confírma hoc aditum ad hanc paginam iungere ad colloquium}} ad {{CMXCIX."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "instructiones",
+            "permissionDenied": "{{Licentiam concedere CMXCIX}} negavit. Uti illud placet, sequere his gradibus,",
+            "point1": "Ad Android Optiones tuae",
+            "point2": "Aperta &quot;Apps &amp; Acta Vicimediorum Communium&quot;",
+            "point3": "Reperio &quot;{{CMXCIX}}&quot; et aperire illum",
+            "point4": "ICTUS in Permissionibus",
+            "point5": "{{Activare CMXCIX}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "instructiones",
+            "permissionDenied": "{{Licentiam concedere CMXCIX}} negavit. Uti illud placet, sequere his gradibus,",
+            "point1": "Ad iOS Optiones tuae",
+            "point2": "Aperta &quot;Privacy&quot;",
+            "point3": "{{Aperire ei: et invenietis CMXCIX}}",
+            "point4": "Reperio &quot;{{CMXCIX}} &#39;quod enable"
+        },
+        "notices": {
+            "youJoinedRoom": "Ad iungere pressa locus",
+            "joining": "Adhaeret: {{CMXCIX}}",
+            "sbLeftRoom": "{{CMXCIX egressus est locus}}",
+            "youLeftRoom": "Locus in quo egressus es",
+            "codeCopied": "Locus in quo egressus es",
+            "sbBeganFbLive": "{{Began}} CMXCIX broadcasting Facebook In hac vocatio",
+            "sbStoppedFbLive": "{{CMXCIX broadcasting hanc vocationem et stetit in Facebook}}",
+            "youBeganFbLive": "Hanc coepisti lacus Facebook",
+            "youStoppedFbLive": "Et hanc vocationem et stetit in Facebook broadcasting",
+            "linkCopiedToCb": "Copied Link to Clipboard",
+            "codeCopiedToCb": "Copied code to Clipboard",
+            "userHasNoVideo": "Video non habet participem"
+        },
+        "settingsPopup": {
+            "webCamera": "Web DE CAMERA",
+            "screenSharing": "screen Socius",
+            "shareAnotherScreen": "Alius screen Share",
+            "turnOffCameras": "Averte omnes cameras",
+            "startFBLive": "Facebook satus Livestream",
+            "stopFBLive": "Facebook subsisto Livestream",
+            "fbLiveTitle": "Title vivet",
+            "fbLiveDescription": "Vivamus Description",
+            "fbOnlyMeLiveAccess": "tantum mihi",
+            "fbFriendsAccess": "amici",
+            "fbPublicAccess": "publica",
+            "fbStartLive": "Ire live",
+            "fbStopLive": "finis vive",
+            "fbEmbedCode": "Embed",
+            "copy": "exemplum"
+        },
+        "participantsPopup": {
+            "disconnect": "Kill",
+            "floatingScreens": "Curabitur Screens",
+            "tiledScreens": "Screens tegulatae",
+            "loudestExceptMe": "Nisi mihi altissimis",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Vestibulum Maximized",
+            "manual": "manual"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Verus-Tempus Voca",
             "description": "verum nunc video \/ vocationem audio"
         }
+    },
+    "participating": {
+        "Title": "titulus",
+        "Subscribed": "subscripta",
+        "Participants": "participantium",
+        "AreYouSureRemoveIdentifier": "Tu es certus ut aufero is identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Hoc tu cave unsubscribe identifier? Et sic declinemus ad hoc identifier Acta Vicimediorum Communium.",
+        "AreYouSureUnsubscribeDevice": "Certus unsubscribe tu artem? Et sic declinemus ad hoc fabrica Acta Vicimediorum Communium.",
+        "Identifiers": "Identifiers",
+        "Devices": "cogitationes",
+        "Streams": "FE divisiones aquarum"
     }
 }

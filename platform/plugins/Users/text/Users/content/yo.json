@@ -102,5 +102,11 @@
         "noLongerUsing": "O ko ni asopọ mọ si {{platform}} bii",
         "doAuth": "Wọle pẹlu iwe ipamọ yii",
         "doSwitch": "Yipada si iwe apamọ yii"
+    },
+    "roles": {
+        "Owner": "Eni",
+        "Admin": "Abojuto",
+        "Member": "Ọmọ ẹgbẹ",
+        "Guest": "Alejo"
     }
 }

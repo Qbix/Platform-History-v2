@@ -102,5 +102,11 @@
         "noLongerUsing": "E le toe fesoʻotaʻi atu i {{platform}}",
         "doAuth": "Faʻailoga i lenei tala",
         "doSwitch": "Suʻe i lenei tala"
+    },
+    "roles": {
+        "Owner": "Pule",
+        "Admin": "Pule",
+        "Member": "Sui",
+        "Guest": "Tagata asiasi"
     }
 }

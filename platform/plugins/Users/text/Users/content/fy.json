@@ -102,5 +102,11 @@
         "noLongerUsing": "Jo binne net langer ferbûn mei {{platform}} as",
         "doAuth": "Log yn mei dit akkount",
         "doSwitch": "Wikselje nei dit akkount"
+    },
+    "roles": {
+        "Owner": "Eigner",
+        "Admin": "Behearder",
+        "Member": "Lid",
+        "Guest": "Gast"
     }
 }

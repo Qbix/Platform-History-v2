@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "A meghívókat a mi számunkból küldjük, melyeket a barátaid még nem ismernek fel. Kövesse nyomon egy gyors szöveget, hogy tudassa velük a meghívást, és kéri őket, hogy kattintson a linkre.",
             "confirm": "A meghívókat a mi számunkból küldjük, melyeket a barátaid még nem ismernek fel. Gyors szöveggel szeretne nyomon követni, hogy tudja, hogy a meghívó tőled érkezett, és kéri őket, hogy kattintson a linkre.",
-            "check": "Hé, csak küldött neked egy meghívót a {{app}} alkalmazásra. Kérjük, ellenőrizze az SMS-t és kattintson a linkre!"
+            "check": "Hé, csak küldött neked egy meghívót a {{app}} alkalmazásra. Kérjük, ellenőrizze az SMS-t és kattintson a linkre!",
+            "CheckYourMobile": "Kérjük, ellenőrizze az SMS-t és kövesse az utasításokat!"
         },
         "email": {
             "alert": "A meghívókat a mi domainünkről küldjük, melyeket a barátok még nem ismernek fel. Kövesse nyomon egy gyors szöveget, hogy tudassa velük a meghívást, és kéri őket, hogy kattintson a linkre.",
             "confirm": "A meghívókat a mi domainünkről küldjük, melyeket a barátok még nem ismernek fel. Gyors szöveggel szeretne nyomon követni, hogy tudja, hogy a meghívó tőled érkezett, és kéri őket, hogy kattintson a linkre.",
             "subject": "Meghívást kapott?",
-            "body": "Hé, csak küldött neked egy meghívót a {{app}} alkalmazásra. Kérjük, ellenőrizze e-mailjét, és kattintson az ott található linkre!"
+            "body": "Hé, csak küldött neked egy meghívót a {{app}} alkalmazásra. Kérjük, ellenőrizze e-mailjét, és kattintson az ott található linkre!",
+            "CheckYourEmail": "Kérjük, ellenőrizze e-mailjét és kövesse az utasításokat!"
         }
     },
     "participating": {
         "Title": "Cím",
         "Subscribed": "Jegyzett",
-        "Participants": "résztvevők"
+        "Participants": "résztvevők",
+        "AreYouSureRemoveIdentifier": "Biztosan eltávolította ezt az azonosítót?",
+        "AreYouSureUnsubscribeIdentifier": "Biztosan lemondott az azonosítóról? Kikapcsolja az azonosító értesítéseit.",
+        "AreYouSureUnsubscribeDevice": "Biztosan leiratkozott erről az eszközről? Kikapcsolja az eszköz értesítéseit.",
+        "Identifiers": "azonosítók",
+        "Devices": "eszközök",
+        "Streams": "Streams"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Mikrofon engedélyezése",
             "cameraBtn": "Kamera engedélyezése",
             "cameraAndMicrophoneBtn": "Kamera és mikrofon engedélyezése"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Utasítás",
+            "permissionDenied": "A (z) {{kind}} engedély megtagadva. Használatához kövesse az alábbi lépéseket:",
+            "point1": "Lépjen a &quot;Beállítások&quot; -&gt; &quot;Speciális&quot; -&gt; &quot;Adatvédelem és biztonság&quot; -&gt; &quot;Webhelybeállítások&quot; -&gt; &quot;Kamera&quot; vagy &quot;Webhelybeállítások&quot; -&gt; &quot;Mikrofon&quot;",
+            "point2": "Távolítsa el a (z) {{hostname}} fájlt a &quot;Blokkolás&quot; listáról"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Utasítás",
+            "permissionDenied": "A (z) {{kind}} engedély megtagadva. Kérjük, töltse újra ezt az oldalt, és erősítse meg a (z) {{kind}} hozzáférést a konferenciához való csatlakozáshoz."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Utasítás",
+            "permissionDenied": "A (z) {{kind}} engedély megtagadva. Használatához kövesse az alábbi lépéseket:",
+            "point1": "Nyissa meg az Android beállításait",
+            "point2": "Nyissa meg az &quot;Alkalmazások és értesítések&quot;",
+            "point3": "Keresse meg a (z) {{communityName}} &quot;-t, és nyissa meg",
+            "point4": "Érintse meg az Engedélyek elemet",
+            "point5": "{{kind}} engedélyezése"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Utasítás",
+            "permissionDenied": "A (z) {{kind}} engedély megtagadva. Használatához kövesse az alábbi lépéseket:",
+            "point1": "Nyissa meg az iOS beállításait",
+            "point2": "Nyissa meg az &quot;Adatvédelem&quot;",
+            "point3": "Keresse meg a (z) {{kind}} -t, és nyissa meg",
+            "point4": "Keresse meg a (z) „{{communityName}}” elemet, és engedélyezze"
+        },
+        "notices": {
+            "youJoinedRoom": "Csatlakoztál a szobába",
+            "joining": "Csatlakozás: {{userName}}",
+            "sbLeftRoom": "{{userName}} elhagyta a helyiséget",
+            "youLeftRoom": "Elhagytad a szobát",
+            "codeCopied": "Elhagytad a szobát",
+            "sbBeganFbLive": "{{userName}} megkezdte a hívás sugárzását a Facebookon",
+            "sbStoppedFbLive": "{{userName}} abbahagyta a hívás sugárzását a Facebookon",
+            "youBeganFbLive": "Ön elkezdett sugározni ezt a hívást a Facebook-on",
+            "youStoppedFbLive": "Ön abbahagyta a hívás sugárzását a Facebookon",
+            "linkCopiedToCb": "A linket a vágólapra másolta",
+            "codeCopiedToCb": "A kódot a vágólapra másolta",
+            "userHasNoVideo": "A résztvevőnek nincs videója"
+        },
+        "settingsPopup": {
+            "webCamera": "Webkamera",
+            "screenSharing": "Képernyőmegosztás",
+            "shareAnotherScreen": "Ossza meg egy másik képernyőt",
+            "turnOffCameras": "Kapcsolja ki az összes kamerát",
+            "startFBLive": "Indítsa el a Facebook Livestream alkalmazást",
+            "stopFBLive": "A Facebook Livestream leállítása",
+            "fbLiveTitle": "Élő cím",
+            "fbLiveDescription": "Élő leírás",
+            "fbOnlyMeLiveAccess": "Csak én",
+            "fbFriendsAccess": "barátok",
+            "fbPublicAccess": "Nyilvános",
+            "fbStartLive": "Élesben",
+            "fbStopLive": "End Live",
+            "fbEmbedCode": "Beágyaz",
+            "copy": "Másolat"
+        },
+        "participantsPopup": {
+            "disconnect": "szétkapcsol",
+            "floatingScreens": "Lebegő képernyők",
+            "tiledScreens": "Csempézett képernyők",
+            "loudestExceptMe": "Leghangosabb, kivéve én",
+            "maximizeLoudest": "Maximalizálja a leghangosabbat",
+            "staticMaximized": "Statikus maximális",
+            "manual": "Kézikönyv"
         }
     },
     "types": {

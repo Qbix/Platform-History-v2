@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Lời mời được gửi từ số của chúng tôi, mà bạn bè của bạn chưa nhận ra. Theo dõi với một văn bản nhanh chóng để cho họ biết lời mời đến từ bạn, yêu cầu họ nhấp vào liên kết.",
             "confirm": "Lời mời được gửi từ số của chúng tôi, mà bạn bè của bạn chưa nhận ra. Bạn có muốn theo dõi với một văn bản nhanh chóng để cho họ biết lời mời đến từ bạn, yêu cầu họ nhấp vào liên kết.",
-            "check": "Xin chào, tôi vừa gửi cho bạn lời mời đến ứng dụng {{app}}. Vui lòng kiểm tra tin nhắn của bạn và nhấp vào liên kết!"
+            "check": "Xin chào, tôi vừa gửi cho bạn lời mời đến ứng dụng {{app}}. Vui lòng kiểm tra tin nhắn của bạn và nhấp vào liên kết!",
+            "CheckYourMobile": "Vui lòng kiểm tra SMS và làm theo hướng dẫn!"
         },
         "email": {
             "alert": "Lời mời được gửi từ miền của chúng tôi mà bạn bè của bạn chưa nhận ra. Theo dõi với một văn bản nhanh chóng để cho họ biết lời mời đến từ bạn, yêu cầu họ nhấp vào liên kết.",
             "confirm": "Lời mời được gửi từ miền của chúng tôi mà bạn bè của bạn chưa nhận ra. Bạn có muốn theo dõi với một văn bản nhanh chóng để cho họ biết lời mời đến từ bạn, yêu cầu họ nhấp vào liên kết.",
             "subject": "Bạn đã nhận được một lời mời?",
-            "body": "Xin chào, tôi vừa gửi cho bạn lời mời đến ứng dụng {{app}}. Vui lòng kiểm tra email của bạn và nhấp vào liên kết trong đó!"
+            "body": "Xin chào, tôi vừa gửi cho bạn lời mời đến ứng dụng {{app}}. Vui lòng kiểm tra email của bạn và nhấp vào liên kết trong đó!",
+            "CheckYourEmail": "Vui lòng kiểm tra email của bạn và làm theo hướng dẫn!"
         }
     },
     "participating": {
         "Title": "Chức vụ",
         "Subscribed": "Đã đăng ký",
-        "Participants": "Người tham gia"
+        "Participants": "Người tham gia",
+        "AreYouSureRemoveIdentifier": "Bạn có chắc chắn để xóa định danh này?",
+        "AreYouSureUnsubscribeIdentifier": "Bạn có chắc chắn hủy đăng ký định danh này? Nó sẽ tắt thông báo cho định danh này.",
+        "AreYouSureUnsubscribeDevice": "Bạn có chắc chắn hủy đăng ký thiết bị này? Nó sẽ tắt thông báo cho thiết bị này.",
+        "Identifiers": "Định danh",
+        "Devices": "Thiết bị",
+        "Streams": "Dòng suối"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Kích hoạt micrô",
             "cameraBtn": "Kích hoạt camera",
             "cameraAndMicrophoneBtn": "Bật máy ảnh và micrô"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Hướng dẫn",
+            "permissionDenied": "Quyền cho {{kind}} bị từ chối. Để sử dụng, vui lòng làm theo các bước sau:",
+            "point1": "Chuyển đến &quot;Cài đặt&quot; -&gt; &quot;Nâng cao&quot; -&gt; &quot;Quyền riêng tư và bảo mật&quot; -&gt; &quot;Cài đặt trang&quot; -&gt; &quot;Máy ảnh&quot; hoặc &quot;Cài đặt trang&quot; -&gt; &quot;Micrô&quot;",
+            "point2": "Xóa {{hostname}} khỏi danh sách &quot;Chặn&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Hướng dẫn",
+            "permissionDenied": "Quyền cho {{kind}} bị từ chối. Vui lòng tải lại trang này và xác nhận quyền truy cập vào {{kind}} để tham gia hội nghị."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Hướng dẫn",
+            "permissionDenied": "Quyền cho {{kind}} bị từ chối. Để sử dụng, vui lòng làm theo các bước sau:",
+            "point1": "Chuyển đến Cài đặt Android của bạn",
+            "point2": "Mở &quot;Ứng dụng và thông báo&quot;",
+            "point3": "Tìm &quot;{{communityName}}&quot; và mở nó",
+            "point4": "Nhấn vào Quyền",
+            "point5": "Kích hoạt {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Hướng dẫn",
+            "permissionDenied": "Quyền cho {{kind}} bị từ chối. Để sử dụng, vui lòng làm theo các bước sau:",
+            "point1": "Chuyển đến Cài đặt iOS của bạn",
+            "point2": "Mở &quot;Quyền riêng tư&quot;",
+            "point3": "Tìm {{kind}} và mở nó",
+            "point4": "Tìm &quot;{{communityName}}&quot; và bật"
+        },
+        "notices": {
+            "youJoinedRoom": "Bạn đã tham gia phòng",
+            "joining": "Tham gia: {{userName}}",
+            "sbLeftRoom": "{{userName}} rời khỏi phòng",
+            "youLeftRoom": "Bạn rời khỏi phòng",
+            "codeCopied": "Bạn rời khỏi phòng",
+            "sbBeganFbLive": "{{userName}} đã bắt đầu phát cuộc gọi này trong Facebook",
+            "sbStoppedFbLive": "{{userName}} đã ngừng phát cuộc gọi này trong Facebook",
+            "youBeganFbLive": "Bạn đã bắt đầu phát cuộc gọi này trên Facebook",
+            "youStoppedFbLive": "Bạn đã ngừng phát cuộc gọi này trong Facebook",
+            "linkCopiedToCb": "Liên kết được sao chép vào khay nhớ tạm",
+            "codeCopiedToCb": "Mã được sao chép vào clipboard",
+            "userHasNoVideo": "Người tham gia không có video"
+        },
+        "settingsPopup": {
+            "webCamera": "Máy ảnh web",
+            "screenSharing": "Chia sẻ màn hình",
+            "shareAnotherScreen": "Chia sẻ màn hình khác",
+            "turnOffCameras": "Tắt tất cả các máy ảnh",
+            "startFBLive": "Bắt đầu phát trực tiếp trên Facebook",
+            "stopFBLive": "Dừng phát trực tiếp trên Facebook",
+            "fbLiveTitle": "Tiêu đề trực tiếp",
+            "fbLiveDescription": "Mô tả trực tiếp",
+            "fbOnlyMeLiveAccess": "Chỉ có tôi",
+            "fbFriendsAccess": "Bạn bè",
+            "fbPublicAccess": "Công cộng",
+            "fbStartLive": "Chưa lên",
+            "fbStopLive": "Kết thúc trực tiếp",
+            "fbEmbedCode": "Nhúng",
+            "copy": "Sao chép"
+        },
+        "participantsPopup": {
+            "disconnect": "Ngắt kết nối",
+            "floatingScreens": "Màn hình nổi",
+            "tiledScreens": "Màn hình lát gạch",
+            "loudestExceptMe": "Lớn nhất ngoại trừ tôi",
+            "maximizeLoudest": "Tối đa hóa to nhất",
+            "staticMaximized": "Tối đa hóa tĩnh",
+            "manual": "Hướng dẫn sử dụng"
         }
     },
     "types": {

@@ -102,5 +102,11 @@
         "noLongerUsing": "Simulumikizananso ndi {{platform}}",
         "doAuth": "Lowani mu akaunti iyi",
         "doSwitch": "Sinthani ku akaunti iyi"
+    },
+    "roles": {
+        "Owner": "Mwini wake",
+        "Admin": "Admin",
+        "Member": "Membala",
+        "Guest": "Mlendo"
     }
 }

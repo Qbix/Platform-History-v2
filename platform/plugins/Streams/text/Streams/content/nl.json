@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Uitnodigingen worden verzonden vanuit ons nummer, dat je vrienden nog niet herkennen. Volg een korte tekst om hen te laten weten dat de uitnodiging van jou afkomstig was, en vraag hen om op de link te klikken.",
             "confirm": "Uitnodigingen worden verzonden vanuit ons nummer, dat je vrienden nog niet herkennen. Wil je een korte tekst volgen om hen te laten weten dat de uitnodiging van jou afkomstig was, en hen vragen op de link te klikken.",
-            "check": "Hallo, ik heb je zojuist een uitnodiging gestuurd naar de app {{app}}. Controleer je sms en klik op de link!"
+            "check": "Hallo, ik heb je zojuist een uitnodiging gestuurd naar de app {{app}}. Controleer je sms en klik op de link!",
+            "CheckYourMobile": "Controleer sms en volg de instructies!"
         },
         "email": {
             "alert": "Uitnodigingen worden verzonden vanuit ons domein, die uw vrienden nog niet herkennen. Volg een korte tekst om hen te laten weten dat de uitnodiging van jou afkomstig was, en vraag hen om op de link te klikken.",
             "confirm": "Uitnodigingen worden verzonden vanuit ons domein, die uw vrienden nog niet herkennen. Wil je een korte tekst volgen om hen te laten weten dat de uitnodiging van jou afkomstig was, en hen vragen op de link te klikken.",
             "subject": "Heb je een uitnodiging ontvangen?",
-            "body": "Hallo, ik heb je zojuist een uitnodiging gestuurd naar de app {{app}}. Controleer uw e-mail en klik op de link daar!"
+            "body": "Hallo, ik heb je zojuist een uitnodiging gestuurd naar de app {{app}}. Controleer uw e-mail en klik op de link daar!",
+            "CheckYourEmail": "Controleer je e-mail en volg de instructies!"
         }
     },
     "participating": {
         "Title": "Titel",
         "Subscribed": "geabonneerd",
-        "Participants": "Deelnemers"
+        "Participants": "Deelnemers",
+        "AreYouSureRemoveIdentifier": "Weet u zeker dat u deze ID wilt verwijderen?",
+        "AreYouSureUnsubscribeIdentifier": "Weet u zeker dat u zich afmeldt voor deze identificatie? Het schakelt meldingen voor deze ID uit.",
+        "AreYouSureUnsubscribeDevice": "Weet u zeker dat u dit apparaat wilt afmelden? Het schakelt meldingen naar dit apparaat uit.",
+        "Identifiers": "identifiers",
+        "Devices": "apparaten",
+        "Streams": "streams"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Microfoon inschakelen",
             "cameraBtn": "Camera inschakelen",
             "cameraAndMicrophoneBtn": "Camera en microfoon inschakelen"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Toestemming voor {{kind}} geweigerd. Volg deze stappen om het te gebruiken:",
+            "point1": "Ga naar &quot;Instellingen&quot; -&gt; &quot;Geavanceerd&quot; -&gt; &quot;Privacy en beveiliging&quot; -&gt; &quot;Site-instellingen&quot; -&gt; &quot;Camera&quot; of &quot;Site-instellingen&quot; -&gt; &quot;Microfoon&quot;",
+            "point2": "Verwijder {{hostname}} uit de lijst &quot;Blokkeren&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Toestemming voor {{kind}} geweigerd. Laad deze pagina opnieuw en bevestig de toegang tot {{kind}} om deel te nemen aan de conferentie."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Toestemming voor {{kind}} geweigerd. Volg deze stappen om het te gebruiken:",
+            "point1": "Ga naar je Android-instellingen",
+            "point2": "Open &quot;Apps &amp; meldingen&quot;",
+            "point3": "Zoek &quot;{{communityName}}&quot; en open het",
+            "point4": "Tik op Machtigingen",
+            "point5": "Schakel {{kind}} in"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Toestemming voor {{kind}} geweigerd. Volg deze stappen om het te gebruiken:",
+            "point1": "Ga naar je iOS-instellingen",
+            "point2": "Open &quot;Privacy&quot;",
+            "point3": "Zoek {{kind}} en open het",
+            "point4": "Zoek &quot;{{communityName}}&quot; en schakel in"
+        },
+        "notices": {
+            "youJoinedRoom": "Je ging de kamer binnen",
+            "joining": "Deelnemen: {{userName}}",
+            "sbLeftRoom": "{{userName}} verliet de kamer",
+            "youLeftRoom": "Je verliet de kamer",
+            "codeCopied": "Je verliet de kamer",
+            "sbBeganFbLive": "{{userName}} begon deze oproep uit te zenden op Facebook",
+            "sbStoppedFbLive": "{{userName}} stopte met het uitzenden van dit gesprek op Facebook",
+            "youBeganFbLive": "Je begon deze oproep op Facebook uit te zenden",
+            "youStoppedFbLive": "Je bent gestopt met het uitzenden van deze oproep op Facebook",
+            "linkCopiedToCb": "Link gekopieerd naar klembord",
+            "codeCopiedToCb": "Code gekopieerd naar klembord",
+            "userHasNoVideo": "Deelnemer heeft geen video"
+        },
+        "settingsPopup": {
+            "webCamera": "Web Camera",
+            "screenSharing": "Scherm delen",
+            "shareAnotherScreen": "Deel nog een scherm",
+            "turnOffCameras": "Schakel alle camera&#39;s uit",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "fbLiveTitle": "Live titel",
+            "fbLiveDescription": "Live beschrijving",
+            "fbOnlyMeLiveAccess": "Alleen ik",
+            "fbFriendsAccess": "vrienden",
+            "fbPublicAccess": "Openbaar",
+            "fbStartLive": "Ga leven",
+            "fbStopLive": "Live beëindigen",
+            "fbEmbedCode": "Integreren",
+            "copy": "Kopiëren"
+        },
+        "participantsPopup": {
+            "disconnect": "verbinding verbreken",
+            "floatingScreens": "Zwevende schermen",
+            "tiledScreens": "Betegelde schermen",
+            "loudestExceptMe": "Luidste behalve ik",
+            "maximizeLoudest": "Maximaliseer Luidste",
+            "staticMaximized": "Statisch gemaximaliseerd",
+            "manual": "Handleiding"
         }
     },
     "types": {

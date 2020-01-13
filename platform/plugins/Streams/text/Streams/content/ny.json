@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Chatsopano {{relationDisplayType}} mu {{1000]}",
         "Streams\/relatedFrom\/*": "Adawonjeza ku {{toTitle}} monga {{1000]}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} adakutchulirani ndemanga",
-        "Streams\/call": "{{displayName}} akukuyimbirani"
+        "Streams\/call": "{{displayName}} akukuyimbirani",
+        "ManageEmailSubscriptions": "samalani maimelo anu a imelo",
+        "IfUnsubscribe": "Ngati mukufuna kulembetsa"
     },
     "invite": {
         "messageContent": "{{9}} akuitanani ku {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Oitanidwa akutumizidwa kuchokera ku chiwerengero chathu, chomwe anzanu sadziwa. Tsatirani ndi malemba ofulumira kuti awadziwitse kuyitanidwa kukuchokera kwa inu, kuwapempha kuti asindikize kulumikizana.",
             "confirm": "Oitanidwa akutumizidwa kuchokera ku chiwerengero chathu, chomwe anzanu sadziwa. Kodi mungakonde kufufuza ndi malemba ofulumira kuti muwadziwitse kuyitanidwa kukuchokera kwa inu, kuwapempha kuti afikitse kulumikizana.",
-            "check": "Eya, ndangokuitanani kuitana {{app}}. Chonde onani sms yanu ndipo dinani kulumikizana!"
+            "check": "Eya, ndangokuitanani kuitana {{app}}. Chonde onani sms yanu ndipo dinani kulumikizana!",
+            "CheckYourMobile": "Chonde onani SMS ndikutsatira malangizo!"
         },
         "email": {
             "alert": "Oitanidwa akutumizidwa kuchokera ku domeni yathu, zomwe abwenzi anu sadziwa. Tsatirani ndi malemba ofulumira kuti awadziwitse kuyitanidwa kukuchokera kwa inu, kuwapempha kuti asindikize kulumikizana.",
             "confirm": "Oitanidwa akutumizidwa kuchokera ku domeni yathu, zomwe abwenzi anu sadziwa. Kodi mungakonde kufufuza ndi malemba ofulumira kuti muwadziwitse kuyitanidwa kukuchokera kwa inu, kuwapempha kuti afikitse kulumikizana.",
             "subject": "Mudalandira kuyitanidwa?",
-            "body": "Eya, ndangokuitanani kuitana {{app}}. Chonde onani imelo yanu ndipo dinani chiyanjano mmenemo!"
+            "body": "Eya, ndangokuitanani kuitana {{app}}. Chonde onani imelo yanu ndipo dinani chiyanjano mmenemo!",
+            "CheckYourEmail": "Chonde onani imelo yanu ndikutsatira malangizo!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Yambitsani Maikolofoni",
             "cameraBtn": "Yambitsani Kamera",
             "cameraAndMicrophoneBtn": "Yambitsani Kamera ndi Maikolofoni"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Malangizo",
+            "permissionDenied": "Chilolezo cha {{kind}} chakanidwa. Kuti mugwiritse ntchito chonde tsatirani izi:",
+            "point1": "Pitani ku &quot;Zikhazikiko&quot; -&gt; &quot;Zotsogola&quot; -&gt; &quot;Zachinsinsi ndi chitetezo&quot; -&gt; &quot;Zikhazikiko&quot; - &quot;Kamera&quot; kapena &quot;Zikhazikiko patsamba&quot; -&gt; &quot;Microphone&quot;",
+            "point2": "Chotsani {{hostname}} pa mndandanda wa &quot;Block&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Malangizo",
+            "permissionDenied": "Chilolezo cha {{kind}} chakanidwa. Chonde patsaninso tsambali ndikutsimikizira kuti {{kind}} kuti mulowe nawo msonkhano."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Malangizo",
+            "permissionDenied": "Chilolezo cha {{kind}} chakanidwa. Kuti mugwiritse ntchito chonde tsatirani izi:",
+            "point1": "Pitani ku Zikhazikiko za Android",
+            "point2": "Tsegulani &quot;Mapulogalamu &amp; zidziwitso&quot;",
+            "point3": "Pezani &quot;{{communityName}} ndikutsegula",
+            "point4": "Dinani pa Zilolezo",
+            "point5": "Yambitsani {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Malangizo",
+            "permissionDenied": "Chilolezo cha {{kind}} chakanidwa. Kuti mugwiritse ntchito chonde tsatirani izi:",
+            "point1": "Pitani ku Zikhazikiko zanu za iOS",
+            "point2": "Tsegulani &quot;Zachinsinsi&quot;",
+            "point3": "Pezani {{999]} ndikutsegula",
+            "point4": "Pezani &quot;{{communityName}}&quot; ndikulola"
+        },
+        "notices": {
+            "youJoinedRoom": "Munalowa m&#39;chipindacho",
+            "joining": "Kujowina: {{userName}}",
+            "sbLeftRoom": "{{999]} achoka m&#39;chipindacho",
+            "youLeftRoom": "Munatuluka m&#39;chipindacho",
+            "codeCopied": "Munatuluka m&#39;chipindacho",
+            "sbBeganFbLive": "{{userName}} idayamba kuwulutsa foni iyi mu Facebook",
+            "sbStoppedFbLive": "{{userName}} adasiya kuwulutsa foni iyi mu Facebook",
+            "youBeganFbLive": "Munayamba kufalitsa izi pa Facebook",
+            "youStoppedFbLive": "Munasiya kuyatsa foni iyi pa Facebook",
+            "linkCopiedToCb": "Lumikizani kukopedwa ku clipboard",
+            "codeCopiedToCb": "Code yolembedwa pabolodi",
+            "userHasNoVideo": "Wophunzira alibe kanema"
+        },
+        "settingsPopup": {
+            "webCamera": "Kamera Yapaintaneti",
+            "screenSharing": "Kugawana Screen",
+            "shareAnotherScreen": "Gawani chophimba china",
+            "turnOffCameras": "Tsitsani makamera onse",
+            "startFBLive": "Yambitsani Facebook Livestream",
+            "stopFBLive": "Imani Facebook Livestream",
+            "fbLiveTitle": "Live Mutu",
+            "fbLiveDescription": "Kutanthauzira Kwathunthu",
+            "fbOnlyMeLiveAccess": "Ine ndekha",
+            "fbFriendsAccess": "Anzanu",
+            "fbPublicAccess": "Zapagulu",
+            "fbStartLive": "Pitani Komweko",
+            "fbStopLive": "Mapeto Live",
+            "fbEmbedCode": "Wopanda",
+            "copy": "Copy"
+        },
+        "participantsPopup": {
+            "disconnect": "Chotsani",
+            "floatingScreens": "Zojambula Zoyandama",
+            "tiledScreens": "Zithunzi Zosungidwa",
+            "loudestExceptMe": "Wokondedwa Kupatula Ine",
+            "maximizeLoudest": "Kwezani Zambiri",
+            "staticMaximized": "Olimba",
+            "manual": "Zolemba"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Kuyimbira Kwambiri",
             "description": "kanema weniweni \/ kuyimba"
         }
+    },
+    "participating": {
+        "Title": "Mutu",
+        "Subscribed": "Adalembetsa",
+        "Participants": "Ophunzira",
+        "AreYouSureRemoveIdentifier": "Mukutsimikiza kuchotsera izi?",
+        "AreYouSureUnsubscribeIdentifier": "Mukutsimikiza kuzindikira izi? Itsegula zidziwitso kuzidziwitso izi.",
+        "AreYouSureUnsubscribeDevice": "Mukutsimikiza kulembera chipangizochi? Itsegula zidziwitso ku chipangizochi.",
+        "Identifiers": "Zizindikiritso",
+        "Devices": "Zipangizo",
+        "Streams": "Mitsinje"
     }
 }

@@ -102,5 +102,11 @@
         "noLongerUsing": "Anda tidak lagi terhubung ke {{platform}} sebagai",
         "doAuth": "Masuk dengan akun ini",
         "doSwitch": "Beralih ke akun ini"
+    },
+    "roles": {
+        "Owner": "Pemilik",
+        "Admin": "Admin",
+        "Member": "Anggota",
+        "Guest": "Tamu"
     }
 }
