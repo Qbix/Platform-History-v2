@@ -611,7 +611,7 @@ html.Q_scanning body > .Q_scanning_code {
 .Q_dialog_content {
 	width: 100%;
 	height: 100%;
-	border-sizing: border-box;
+	box-sizing: border-box;
 	position: relative;
 	min-width: 50px;
 	min-height: 50px;
