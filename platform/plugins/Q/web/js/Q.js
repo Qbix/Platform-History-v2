@@ -15,6 +15,7 @@ var $ = Q.$ = root.jQuery;
 var _isReady = false;
 var _isOnline = null;
 var _isCordova = null;
+var _documentIsUnloading = null;
 
 /**
  * @class Q
@@ -5955,15 +5956,22 @@ Q.loadHandlebars = Q.getter(function _Q_loadHandlebars(callback) {
  * @required
  */
 Q.beforeUnload = function _Q_beforeUnload(notice) {
-	window.onbeforeunload = function(e){
+	Q.addEventListener(window, 'beforeunload', function (e) {
 		if (!notice) return undefined;
 		e = e || window.event;
 		if (e) { // For IE and Firefox (prior to 4)
+			e.preventDefault(); // for newer browsers, but ignores notice
 			e.returnValue = notice;
 		}
 		return notice; // For Safari and Chrome
-	};
+	});
 };
+
+Q.addEventListener(window, 'beforeunload', function (e) {
+	if (!e.defaultPrevented) {
+		_documentIsUnloading = true; // WARN: a later handler might cancel the event
+	}
+});
 
 /**
  * Calculate the total number of pixels that fixed elements take up
@@ -6783,6 +6791,9 @@ Q.request = function (url, slotNames, callback, options) {
 		
 		function _onCancel (status, msg) {
 			var code;
+			if (_documentIsUnloading) { // the document is about to go poof anyway
+				return; // don't call any callbacks, avoiding possible alerts
+			}
 			status = Q.isInteger(status) ? status : null;
 			if (this.response) {
 				var data = JSON.parse(this.response);
