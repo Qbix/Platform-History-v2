@@ -20,7 +20,7 @@
  * @param {String} [username] username of current user in chat
  * @param {Boolean} [debug] if true, logs will be showed in console
  * @param {Object} [liveStreaming] option for live sctreaming
- * @param {Boolean} [liveStreaming.startFbLiveViaGoLiveDialog] whether to start Facebook Live Video via "Go Live Dialog" (JS SDK); if false - live will be started via PHP SDK
+ * @param {Boolean} [liveStreaming.startFbLiveViaGoLiveDialog=false] whether to start Facebook Live Video via "Go Live Dialog" (JS SDK); if false - live will be started via PHP SDK
  * @param {Boolean} [liveStreaming.useRecordRTCLibrary] whether to RecordRTC.js library while capturing compounded video from canvas
  * @param {Boolean} [liveStreaming.drawBackground] whether to draw background behid participants video on canvas
  * @param {Number} [liveStreaming.timeSlice] time in ms - video will be send in chunks once per <timeSlice>
