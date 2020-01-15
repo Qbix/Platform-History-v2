@@ -861,12 +861,18 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {array} [$options.rule.filter] optionally set a filter for the rules to add
 	 * @param {boolean} [$options.skipRules] if true, do not attempt to create rules for new subscriptions
 	 * @param {boolean} [$options.skipAccess] if true, skip access check for whether user can join and subscribe
+	 * @param {boolean} [$options.evenIfSubscribed] if true, posts another subscribe message
 	 * @param {string} [$options.userId] the user subscribing to the stream. Defaults to the logged in user.
 	 * @return {Streams_Participant|null}
 	 */
 	function subscribe($options = array())
 	{
 		$userId = $this->_verifyUser($options);
+		if (empty($options['evenIfSubscribed'])
+		and $participant = $this->participant($userId)
+		and $participant->subscribed === 'yes') {
+			return $participant;
+		}
 		$participants = Streams::subscribe(
 			$userId, $this->publisherId, array($this), $options
 		);
