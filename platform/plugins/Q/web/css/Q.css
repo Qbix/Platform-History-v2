@@ -690,18 +690,6 @@ html.Q_scanning body > .Q_scanning_code {
 	background: url('../img/icons/basic16.png') 5px -477px no-repeat;
 	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
-#notices_slot ul li .Q_tool.Users_avatar_tool {
-	width: 40px;
-	margin-right: 10px;
-	line-height: normal;
-}
-#notices_slot ul li .Q_tool.Users_avatar_tool .Users_avatar_name {
-	line-height: normal;
-}
-#notices_slot ul li .Q_tool.Users_avatar_tool .Users_avatar_name > * {
-	font-size: 12px;
-	line-height: normal;
-}
 
 .Q_appear {
 	transition: transform .25s!important;
