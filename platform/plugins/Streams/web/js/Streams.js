@@ -5937,7 +5937,6 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 Q.Template.set('Streams/chat/webrtc/available',
 	'<div class="Streams_chat_webrtc_available">'+
 	'	{{& avatar}} {{text}}'+
-	'	<div class="Q_close"></div>'+
 	'</div>'
 );
 
