@@ -2353,7 +2353,7 @@ window.WebRTCconferenceLib = function app(options){
 					audioComposer.mix();
 
 					_mediaRecorder = RecordRTC(_canvasMediStream, {
-						recorderType:WhammyRecorder,
+						recorderType:MediaStreamRecorder,
 						mimeType: codecs,
 						timeSlice: 1000,
 						ondataavailable:trigerDataListeners
