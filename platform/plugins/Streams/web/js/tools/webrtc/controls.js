@@ -2243,13 +2243,13 @@
 						//return connect('123', captureStreamAndSend);
 						var goLive = function() {
 							FB.ui({
-								display: 'async',
+								display: 'iframe',
 								method: 'live_broadcast',
 								phase: 'create'
 							}, (createRes) => {
 
 								FB.ui({
-									display: 'async',
+									display: 'iframe',
 									method: 'live_broadcast',
 									phase: 'publish',
 									broadcast_data: createRes
