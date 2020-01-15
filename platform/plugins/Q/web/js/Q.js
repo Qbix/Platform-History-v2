@@ -5949,31 +5949,6 @@ Q.loadHandlebars = Q.getter(function _Q_loadHandlebars(callback) {
 });
 
 /**
- * Call this function to set a notice that is shown when the page is almost about to be unloaded
- * @static
- * @method beforeUnload
- * @param notice {String} The notice to set. It should typically be worded so that "Cancel" cancels the unloading.
- * @required
- */
-Q.beforeUnload = function _Q_beforeUnload(notice) {
-	Q.addEventListener(window, 'beforeunload', function (e) {
-		if (!notice) return undefined;
-		e = e || window.event;
-		if (e) { // For IE and Firefox (prior to 4)
-			e.preventDefault(); // for newer browsers, but ignores notice
-			e.returnValue = notice;
-		}
-		return notice; // For Safari and Chrome
-	});
-};
-
-Q.addEventListener(window, 'beforeunload', function (e) {
-	if (!e.defaultPrevented) {
-		_documentIsUnloading = true; // WARN: a later handler might cancel the event
-	}
-});
-
-/**
  * Calculate the total number of pixels that fixed elements take up
  * from the given side of the screen. The elements are found by simply
  * looking for the class 'Q_fixed_' + from, which should have been added to them.
@@ -6271,6 +6246,32 @@ Q.removeEventListener = function _Q_removeEventListener(element, eventName, even
 		}
 	}
 	return true;
+};
+
+Q.addEventListener(window, 'beforeunload', function (e) {
+	if (!e.defaultPrevented) {
+		_documentIsUnloading = true; // WARN: a later handler might cancel the event
+	}
+});
+
+
+/**
+ * Call this function to set a notice that is shown when the page is almost about to be unloaded
+ * @static
+ * @method beforeUnload
+ * @param notice {String} The notice to set. It should typically be worded so that "Cancel" cancels the unloading.
+ * @required
+ */
+Q.beforeUnload = function _Q_beforeUnload(notice) {
+	Q.addEventListener(window, 'beforeunload', function (e) {
+		if (!notice) return undefined;
+		e = e || window.event;
+		if (e) { // For IE and Firefox (prior to 4)
+			e.preventDefault(); // for newer browsers, but ignores notice
+			e.returnValue = notice;
+		}
+		return notice; // For Safari and Chrome
+	});
 };
 
 /**
