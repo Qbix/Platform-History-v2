@@ -2243,13 +2243,13 @@
 						//return connect('123', captureStreamAndSend);
 						var goLive = function() {
 							FB.ui({
-								display: 'popup',
+								display: 'iframe',
 								method: 'live_broadcast',
 								phase: 'create'
 							}, (createRes) => {
 
 								FB.ui({
-									display: 'popup',
+									display: 'iframe',
 									method: 'live_broadcast',
 									phase: 'publish',
 									broadcast_data: createRes
@@ -2267,20 +2267,9 @@
 							});
 						}
 
-						FB.getLoginStatus(function(response){
-							if (response.status === 'connected') {
-								goLive();
-							} else {
-								FB.login(function(response) {
-									if (response.authResponse) {
-										goLive();
-									}
-								}, {scope: 'email,public_profile,publish_video'});
-
-							}
-
-						});
-
+						if (FB.getUserID()) {
+							goLive();
+						}
 					}
 
 					/**

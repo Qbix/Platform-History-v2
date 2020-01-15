@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Cusub {{relationDisplayType}} ee {{toTitle}}",
         "Streams\/relatedFrom\/*": "Lagu daray {{toTitle}} sida {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ayaa lagu sheegay faallooyinka",
-        "Streams\/call": "{{displayName}} ayaa ku soo wacaya"
+        "Streams\/call": "{{displayName}} ayaa ku soo wacaya",
+        "ManageEmailSubscriptions": "maaree rukhsadaha emaylkaaga",
+        "IfUnsubscribe": "Hadaad rabto inaad rukhsad ka bixiso"
     },
     "invite": {
         "messageContent": "{{displayName}} kugu martiqaaday {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Soo-casuumaad ayaa laga soo diraa lambarkayaga, kuwaas oo saaxiibadaa aysan weli aqoonsan. La soco qoraal deg-deg ah si aad ugu sheegto martiqaadku inuu kaa yimid, adoo waydiinaya inay isku xiraan link.",
             "confirm": "Soo-casuumaad ayaa laga soo diraa lambarkayaga, kuwaas oo saaxiibadaa aysan weli aqoonsan. Ma jeclaan lahayd in aad la socoto qoraal deg-deg ah si aad ugu sheegto martiqaadku inuu kuu yimaado, adoo weydiinaya inay isku xiraan link.",
-            "check": "Haa, waxaan kaliya kuu soo diray martiqaadka barnaamijka {999}}. Fadlan hubi sms-kaaga oo guji link"
+            "check": "Haa, waxaan kaliya kuu soo diray martiqaadka barnaamijka {999}}. Fadlan hubi sms-kaaga oo guji link",
+            "CheckYourMobile": "Fadlan hubi SMS oo raac tilmaamaha!"
         },
         "email": {
             "alert": "Soo-casuumaadyada ayaa laga soo diraa nooca domain, kuwaas oo asxaabtaadu aanay weli aqoonsan. La soco qoraal deg-deg ah si aad ugu sheegto martiqaadku inuu kaa yimid, adoo waydiinaya inay isku xiraan link.",
             "confirm": "Soo-casuumaadyada ayaa laga soo diraa nooca domain, kuwaas oo asxaabtaadu aanay weli aqoonsan. Ma jeclaan lahayd in aad la socoto qoraal deg-deg ah si aad ugu sheegto martiqaadku inuu kuu yimaado, adoo weydiinaya inay isku xiraan link.",
             "subject": "Ma heshay martiqaad?",
-            "body": "Haa, waxaan kaliya kuu soo diray martiqaadka barnaamijka {999}}. Fadlan calaamadee emailkaaga oo guji linkada!"
+            "body": "Haa, waxaan kaliya kuu soo diray martiqaadka barnaamijka {999}}. Fadlan calaamadee emailkaaga oo guji linkada!",
+            "CheckYourEmail": "Fadlan hubi emaylkaaga oo raac tilmaamaha!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Karti makarafoon",
             "cameraBtn": "Karti Kaameeraha",
             "cameraAndMicrophoneBtn": "Karti Kaamerada iyo makarafoonka"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Tilmaamaha",
+            "permissionDenied": "Oggolaanshaha {{kind}} waa la diiday. Si aad u isticmaasho fadlan raac talaabooyinkan:",
+            "point1": "Tag &quot;Settings&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Qarsoodiga iyo Amniga&quot; -&gt; &quot;Meelaha Dejinta&quot; -&gt; &quot;Kaamirada&quot; ama &quot;Meelaha Dejinta&quot; -&gt; &quot;makarafoon&quot;",
+            "point2": "Ka saar {{hostname}} liistada &quot;Qulqul&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Tilmaamaha",
+            "permissionDenied": "Oggolaanshaha {{kind}} waa la diiday. Fadlan dib ujiir boggan oo xaqiiji marin u hel {{kind}} si aad ugu biirto shirka."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Tilmaamaha",
+            "permissionDenied": "Oggolaanshaha {{kind}} waa la diiday. Si aad u isticmaasho fadlan raac talaabooyinkan:",
+            "point1": "Tag Nidaamkaaga Android",
+            "point2": "Fur &quot;Barnaamijyada &amp; Ogeysiisyada&quot;",
+            "point3": "Raadi &quot;{{communityName}}&quot; oo fur",
+            "point4": "Taabo rukhsadaha",
+            "point5": "Karti {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Tilmaamaha",
+            "permissionDenied": "Oggolaanshaha {{kind}} waa la diiday. Si aad u isticmaasho fadlan raac talaabooyinkan:",
+            "point1": "Tag barnaamijyada macruufkaaga",
+            "point2": "Fur &quot;Qarsoodinimo&quot;",
+            "point3": "Raadi {{kind}} oo fur",
+            "point4": "Raadi &quot;{{communityName}}&quot; oo karti gali"
+        },
+        "notices": {
+            "youJoinedRoom": "Qolka ayaad ku biirtay",
+            "joining": "Ku soo biirista: {{userName}}",
+            "sbLeftRoom": "{{userName}} qolka ayuu ka tagay",
+            "youLeftRoom": "Qolka ayaad ka baxday",
+            "codeCopied": "Qolka ayaad ka baxday",
+            "sbBeganFbLive": "{{userName}} ayaa bilaabay inuu wicitaankan ku baahiyo Facebook-ga",
+            "sbStoppedFbLive": "{{userName}} waxay joojisay baahinta wicitaankan Facebook",
+            "youBeganFbLive": "Waxaad bilawday inaad ku baajiso wicitaankan Facebook",
+            "youStoppedFbLive": "Waad joojisay baahinta wicitaankan Facebook",
+            "linkCopiedToCb": "Xiriirinta ayaa lagu soo guuriyey galka",
+            "codeCopiedToCb": "Koodhka ayaa lagu soo guuriyey shaashadda",
+            "userHasNoVideo": "Ka-qeybgalaha ma leh muuqaal"
+        },
+        "settingsPopup": {
+            "webCamera": "Kaamirada Websaydhka",
+            "screenSharing": "Wadaagista Shaashadda",
+            "shareAnotherScreen": "La wadaag shaashad kale",
+            "turnOffCameras": "Dami dhamaan kamaradaha",
+            "startFBLive": "Bilow Facebook Livestream",
+            "stopFBLive": "Jooji Facebook Livestream",
+            "fbLiveTitle": "Cinwaanka Tooska ah",
+            "fbLiveDescription": "Sharraxaadda Tooska ah",
+            "fbOnlyMeLiveAccess": "Kaliya aniga",
+            "fbFriendsAccess": "Asxaabta",
+            "fbPublicAccess": "Dadweynaha",
+            "fbStartLive": "Toos U Soco",
+            "fbStopLive": "Dhamaadka Tooska",
+            "fbEmbedCode": "Ku dhaji",
+            "copy": "Nuqul"
+        },
+        "participantsPopup": {
+            "disconnect": "Kala goynta",
+            "floatingScreens": "Shaashadaha Biyo-Hareenka",
+            "tiledScreens": "Muraayadaha shaashadda leh",
+            "loudestExceptMe": "Aniga mooyee",
+            "maximizeLoudest": "Kordhin Loudest",
+            "staticMaximized": "Static Maximized",
+            "manual": "Buugga"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Wicitaan waqti-dhab ah",
             "description": "waqti fiidiyow ah \/ maqal maqal ah"
         }
+    },
+    "participating": {
+        "Title": "Cinwaanka",
+        "Subscribed": "Isdiiwaangaliyay",
+        "Participants": "Kaqeybgalayaasha",
+        "AreYouSureRemoveIdentifier": "Ma hubtaa inaad meesha ka saartay aqoonsi-yaqaankan?",
+        "AreYouSureUnsubscribeIdentifier": "Ma hubtaa inaad kabixid aqoonsi? Waxay deminta ogeysiiska u tirtireysaa aqoonsigan.",
+        "AreYouSureUnsubscribeDevice": "Ma hubtaa in aad iskaa iska bixinayso aaladda? Waxay dami doontaa ogeysiisyada aaladdaan.",
+        "Identifiers": "Aqoonsiyeyaasha",
+        "Devices": "Aaladda",
+        "Streams": "Qulqulka"
     }
 }

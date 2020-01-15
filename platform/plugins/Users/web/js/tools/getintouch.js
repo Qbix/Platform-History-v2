@@ -21,30 +21,15 @@ Q.Tool.define("Users/getintouch", function(options) {
 	function preventDefault(e) {
 		e.preventDefault();
 	}
-	function deobfuscate(str, key) {
-		key = key || 'blah';
-		var len1 = Math.floor(str.length / 2);
-		var len2 = key.length;
-		var result = '';
-		for (var i=0; i<len1; ++i) {
-			var j = i % len2;
-			var diff = str.charCodeAt(i*2+1);
-			if (str.charAt(i*2) == '1') {
-				diff = -diff;
-			}
-			result += String.fromCharCode(key.charCodeAt(j)+diff);
-		}
-		return result;
-	}
 	var key = this.state.key;
 	$('#'+this.prefix+'email').on(Q.Pointer.fastclick, this, function () {
 		var url = '', qp = [];
-		url = "mailto:"+deobfuscate(options.emailAddress, key);
+		url = "mailto:"+options.emailAddress.deobfuscate(key);
 		if (options.emailSubject) {
-			qp.push('subject='+encodeURIComponent(deobfuscate(options.emailSubject), key));
+			qp.push('subject='+encodeURIComponent(options.emailSubject.deobfuscate(key)));
 		}
 		if (options.emailBody) {
-			qp.push('body='+encodeURIComponent(deobfuscate(options.emailBody), key));
+			qp.push('body='+encodeURIComponent(options.emailBody.deobfuscate(key)));
 		}
 		if (qp.length) {
 			url += '?'+qp.join('&');
@@ -52,10 +37,10 @@ Q.Tool.define("Users/getintouch", function(options) {
 		window.location = url;
 	}).click(preventDefault);
 	$('#'+this.prefix+'sms').on(Q.Pointer.fastclick, this, function () {
-		window.location = "sms:"+deobfuscate(options.mobileNumber, key);
+		window.location = "sms:"+options.mobileNumber.deobfuscate(key);
 	}).click(preventDefault);
 	$('#'+this.prefix+'call').on(Q.Pointer.fastclick, this, function () {
-		window.location = "tel:"+deobfuscate(options.mobileNumber, key);
+		window.location = "tel:"+options.mobileNumber.deobfuscate(key);
 	}).click(preventDefault);
 });
 

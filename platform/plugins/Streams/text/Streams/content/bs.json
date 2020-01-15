@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Novo {{relationDisplayType}} u {{toTitle}}",
         "Streams\/relatedFrom\/*": "Dodano u {{toTitle}} kao {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} spomenuo vas je u komentaru",
-        "Streams\/call": "{{displayName}} zove vas"
+        "Streams\/call": "{{displayName}} zove vas",
+        "ManageEmailSubscriptions": "upravljanje pretplatama za e-poštu",
+        "IfUnsubscribe": "Ako želite odjaviti pretplatu"
     },
     "invite": {
         "messageContent": "{{displayName}} vas je pozvao na {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Pozivi se šalju iz našeg broja, koje vaši prijatelji još ne prepoznaju. Nastavite sa kratkim tekstom da biste saznali da je poziv stigao od vas, tražeći od njih da kliknu na vezu.",
             "confirm": "Pozivi se šalju iz našeg broja, koje vaši prijatelji još ne prepoznaju. Želite li da nastavite sa kratkim tekstom da biste saznali da je poziv stigao od vas, tražeći da kliknu na vezu.",
-            "check": "Hej, upravo sam ti poslao pozivnicu u {{app}} aplikaciju. Molimo Vas da pogledate sms i kliknete na link!"
+            "check": "Hej, upravo sam ti poslao pozivnicu u {{app}} aplikaciju. Molimo Vas da pogledate sms i kliknete na link!",
+            "CheckYourMobile": "Molimo provjerite SMS i slijedite upute!"
         },
         "email": {
             "alert": "Pozivi se šalju iz našeg domena, koje vaši prijatelji još ne prepoznaju. Nastavite sa kratkim tekstom da biste saznali da je poziv stigao od vas, tražeći od njih da kliknu na vezu.",
             "confirm": "Pozivi se šalju iz našeg domena, koje vaši prijatelji još ne prepoznaju. Želite li da nastavite sa kratkim tekstom da biste saznali da je poziv stigao od vas, tražeći da kliknu na vezu.",
             "subject": "Jeste li dobili pozivnicu?",
-            "body": "Hej, upravo sam ti poslao pozivnicu u {{app}} aplikaciju. Molimo provjerite Vašu e-poštu i kliknite na link tamo!"
+            "body": "Hej, upravo sam ti poslao pozivnicu u {{app}} aplikaciju. Molimo provjerite Vašu e-poštu i kliknite na link tamo!",
+            "CheckYourEmail": "Provjerite e-poštu i slijedite upute!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Omogući mikrofon",
             "cameraBtn": "Omogući kameru",
             "cameraAndMicrophoneBtn": "Omogući kameru i mikrofon"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instrukcije",
+            "permissionDenied": "Dozvola za {{kind}} odbijena. Da biste ga koristili slijedite ove korake:",
+            "point1": "Idite na &quot;Podešavanja&quot; -&gt; &quot;Napredno&quot; -&gt; &quot;Privatnost i sigurnost&quot; -&gt; &quot;Postavke web mjesta&quot; -&gt; &quot;Kamera&quot; ili &quot;Postavke stranice&quot; -&gt; &quot;Mikrofon&quot;",
+            "point2": "Uklonite {{hostname}} sa liste &quot;Blokiraj&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instrukcije",
+            "permissionDenied": "Dozvola za {{kind}} odbijena. Ponovo učitajte ovu stranicu i potvrdite pristup {{kind}} da biste se pridružili konferenciji."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instrukcije",
+            "permissionDenied": "Dozvola za {{kind}} odbijena. Da biste ga koristili slijedite ove korake:",
+            "point1": "Idite na Android postavke",
+            "point2": "Otvorite &quot;Aplikacije i obavijesti&quot;",
+            "point3": "Pronađite &quot;{{communityName}}&quot; i otvorite ga",
+            "point4": "Dodirnite Dozvole",
+            "point5": "Omogući {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instrukcije",
+            "permissionDenied": "Dozvola za {{kind}} odbijena. Da biste ga koristili slijedite ove korake:",
+            "point1": "Idite na iOS postavke",
+            "point2": "Otvorite &quot;Privatnost&quot;",
+            "point3": "Pronađite {{kind}} i otvorite ga",
+            "point4": "Pronađite &quot;{{communityName}}&quot; i omogućite"
+        },
+        "notices": {
+            "youJoinedRoom": "Pridružio si se sobi",
+            "joining": "Pridruživanje: {{userName}}",
+            "sbLeftRoom": "{{userName}} napustio sobu",
+            "youLeftRoom": "Izašli ste iz sobe",
+            "codeCopied": "Izašli ste iz sobe",
+            "sbBeganFbLive": "{{userName}} započeo je emitovanje ovog poziva na Facebooku",
+            "sbStoppedFbLive": "{{userName}} prestao je sa emitovanjem ovog poziva na Facebooku",
+            "youBeganFbLive": "Počeli ste emitovati ovaj poziv na Facebooku",
+            "youStoppedFbLive": "Prestali ste emitirati ovaj poziv na Facebooku",
+            "linkCopiedToCb": "Veza je kopirana u međuspremnik",
+            "codeCopiedToCb": "Kod je kopiran u međuspremnik",
+            "userHasNoVideo": "Učesnik nema video"
+        },
+        "settingsPopup": {
+            "webCamera": "Web kamera",
+            "screenSharing": "Deljenje ekrana",
+            "shareAnotherScreen": "Dijelite drugi ekran",
+            "turnOffCameras": "Isključite sve kamere",
+            "startFBLive": "Pokrenite Facebook Livestream",
+            "stopFBLive": "Zaustavite Facebook Livestream",
+            "fbLiveTitle": "Naslov uživo",
+            "fbLiveDescription": "Opis uživo",
+            "fbOnlyMeLiveAccess": "Samo ja",
+            "fbFriendsAccess": "Prijatelji",
+            "fbPublicAccess": "Javno",
+            "fbStartLive": "Ići uživo",
+            "fbStopLive": "Prestani uživo",
+            "fbEmbedCode": "Ugradi",
+            "copy": "Kopiraj"
+        },
+        "participantsPopup": {
+            "disconnect": "Prekini vezu",
+            "floatingScreens": "Plutajući ekrani",
+            "tiledScreens": "Popločane platne",
+            "loudestExceptMe": "Najglasnije osim mene",
+            "maximizeLoudest": "Maksimizirajte najglasnije",
+            "staticMaximized": "Statički maksimiziran",
+            "manual": "Priručnik"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Poziv u stvarnom vremenu",
             "description": "video \/ audio poziv u stvarnom vremenu"
         }
+    },
+    "participating": {
+        "Title": "Naslov",
+        "Subscribed": "Pretplaćeni",
+        "Participants": "Učesnici",
+        "AreYouSureRemoveIdentifier": "Jeste li sigurni da ste uklonili ovaj identifikator?",
+        "AreYouSureUnsubscribeIdentifier": "Jeste li sigurni da možete poništiti pretplatu na ovaj identifikator? Isključit će obavijesti ovom identifikatoru.",
+        "AreYouSureUnsubscribeDevice": "Jeste li sigurni da ćete odjaviti ovaj uređaj? Isključit će obavijesti na ovom uređaju.",
+        "Identifiers": "Identifikatori",
+        "Devices": "Uređaji",
+        "Streams": "Struje"
     }
 }

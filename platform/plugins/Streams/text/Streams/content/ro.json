@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Invitațiile sunt trimise de la numărul nostru, pe care prietenii dvs. încă nu îl recunosc. Urmăriți cu un text rapid pentru a le spune că invitația a venit de la dvs., cerându-i să facă clic pe link.",
             "confirm": "Invitațiile sunt trimise de la numărul nostru, pe care prietenii dvs. încă nu îl recunosc. Doriți să continuați cu un text rapid pentru a le spune că invitația a venit de la dvs., cerându-i să facă clic pe link.",
-            "check": "Hei, v-am trimis o invitație la aplicația {{app}}. Verificați SMS-ul dvs. și faceți clic pe link-ul!"
+            "check": "Hei, v-am trimis o invitație la aplicația {{app}}. Verificați SMS-ul dvs. și faceți clic pe link-ul!",
+            "CheckYourMobile": "Verificați SMS-ul și urmați instrucțiunile!"
         },
         "email": {
             "alert": "Invitațiile sunt trimise de la domeniul nostru, pe care prietenii dvs. încă nu îl recunosc. Urmăriți cu un text rapid pentru a le spune că invitația a venit de la dvs., cerându-i să facă clic pe link.",
             "confirm": "Invitațiile sunt trimise de la domeniul nostru, pe care prietenii dvs. încă nu îl recunosc. Doriți să continuați cu un text rapid pentru a le spune că invitația a venit de la dvs., cerându-i să facă clic pe link.",
             "subject": "Ai primit o invitație?",
-            "body": "Hei, v-am trimis o invitație la aplicația {{app}}. Verificați adresa de e-mail și faceți clic pe link-ul de acolo!"
+            "body": "Hei, v-am trimis o invitație la aplicația {{app}}. Verificați adresa de e-mail și faceți clic pe link-ul de acolo!",
+            "CheckYourEmail": "Vă rugăm să verificați e-mailul și urmați instrucțiunile!"
         }
     },
     "participating": {
         "Title": "Titlu",
         "Subscribed": "subscrisă",
-        "Participants": "Participanți"
+        "Participants": "Participanți",
+        "AreYouSureRemoveIdentifier": "Sigur eliminați acest identificator?",
+        "AreYouSureUnsubscribeIdentifier": "Sunteți sigur că dezabonați acest identificator? Acesta va dezactiva notificările acestui identificator.",
+        "AreYouSureUnsubscribeDevice": "Sunteți sigur că vă dezabonați acest dispozitiv? Acesta va dezactiva notificările acestui dispozitiv.",
+        "Identifiers": "Identificatorii",
+        "Devices": "Dispozitive",
+        "Streams": "Curente"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Activați microfonul",
             "cameraBtn": "Activați Camera",
             "cameraAndMicrophoneBtn": "Activați aparatul foto și microfonul"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instrucțiuni",
+            "permissionDenied": "Permisul pentru {{kind}} refuzat. Pentru ao utiliza, urmați acești pași:",
+            "point1": "Accesați „Setări” -&gt; „Advanced” -&gt; „Confidențialitate și securitate” -&gt; „Setări site” -&gt; „Cameră foto” sau „Setări sit” -&gt; „Microfon”",
+            "point2": "Eliminați {{hostname}} din lista „Blocare”"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instrucțiuni",
+            "permissionDenied": "Permisul pentru {{kind}} refuzat. Reîncărcați această pagină și confirmați accesul la {{kind}} pentru a vă alătura conferinței."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instrucțiuni",
+            "permissionDenied": "Permisul pentru {{kind}} refuzat. Pentru ao utiliza, urmați acești pași:",
+            "point1": "Accesați Setările Android",
+            "point2": "Deschideți „Aplicații și notificări”",
+            "point3": "Găsiți „{{communityName}}” și deschideți-l",
+            "point4": "Atingeți Permisiuni",
+            "point5": "Activați {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instrucțiuni",
+            "permissionDenied": "Permisul pentru {{kind}} refuzat. Pentru ao utiliza, urmați acești pași:",
+            "point1": "Accesați Setările iOS",
+            "point2": "Deschide „Confidențialitate”",
+            "point3": "Găsiți {{kind}} și deschideți-l",
+            "point4": "Găsiți „{{communityName}}” și activați"
+        },
+        "notices": {
+            "youJoinedRoom": "Ai intrat în cameră",
+            "joining": "Alăturarea: {{userName}}",
+            "sbLeftRoom": "{{userName}} a părăsit camera",
+            "youLeftRoom": "Ai părăsit camera",
+            "codeCopied": "Ai părăsit camera",
+            "sbBeganFbLive": "{{userName}} a început difuzarea acestui apel pe Facebook",
+            "sbStoppedFbLive": "{{userName}} a încetat difuzarea acestui apel pe Facebook",
+            "youBeganFbLive": "Ați început să difuzați acest apel pe Facebook",
+            "youStoppedFbLive": "Ați încetat difuzarea acestui apel pe Facebook",
+            "linkCopiedToCb": "Link copiat în clipboard",
+            "codeCopiedToCb": "Cod copiat în clipboard",
+            "userHasNoVideo": "Participantul nu are niciun videoclip"
+        },
+        "settingsPopup": {
+            "webCamera": "Camera web",
+            "screenSharing": "Partajarea ecranului",
+            "shareAnotherScreen": "Partajează un alt ecran",
+            "turnOffCameras": "Opriți toate camerele",
+            "startFBLive": "Porniți Facebook Livestream",
+            "stopFBLive": "Opriți Facebook Livestream",
+            "fbLiveTitle": "Titlu live",
+            "fbLiveDescription": "Descriere live",
+            "fbOnlyMeLiveAccess": "Doar eu",
+            "fbFriendsAccess": "Prieteni",
+            "fbPublicAccess": "Public",
+            "fbStartLive": "Du-te si traieste",
+            "fbStopLive": "End Live",
+            "fbEmbedCode": "Încorporare",
+            "copy": "Copie"
+        },
+        "participantsPopup": {
+            "disconnect": "Deconectat",
+            "floatingScreens": "Ecrane plutitoare",
+            "tiledScreens": "Ecrane de gresie",
+            "loudestExceptMe": "Cel mai tare cu excepția mea",
+            "maximizeLoudest": "Maximizează cel mai tare",
+            "staticMaximized": "Maximizat static",
+            "manual": "Manual"
         }
     },
     "types": {

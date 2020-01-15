@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Ny {{relationDisplayType}} på {{toTitle}}",
         "Streams\/relatedFrom\/*": "Lagt til {{toTitle}} som {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} nevnte deg i en kommentar",
-        "Streams\/call": "{{displayName}} ringer deg"
+        "Streams\/call": "{{displayName}} ringer deg",
+        "ManageEmailSubscriptions": "administrer e-postabonnementene dine",
+        "IfUnsubscribe": "Hvis du vil melde deg ut"
     },
     "invite": {
         "messageContent": "{{displayName}} inviterte deg til {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Invitasjoner sendes fra vårt nummer, som vennene dine ikke kjenner igjen. Følg med en rask tekst for å fortelle dem at invitasjonen kom fra deg, og be dem om å klikke på linken.",
             "confirm": "Invitasjoner sendes fra vårt nummer, som vennene dine ikke kjenner igjen. Vil du følge opp med en rask tekst for å fortelle dem at invitasjonen kom fra deg, og be dem om å klikke på linken.",
-            "check": "Hei, jeg sendte deg en invitasjon til {{app}} appen. Vennligst sjekk sms og klikk på linken!"
+            "check": "Hei, jeg sendte deg en invitasjon til {{app}} appen. Vennligst sjekk sms og klikk på linken!",
+            "CheckYourMobile": "Vennligst sjekk SMS og følg instruksjonene!"
         },
         "email": {
             "alert": "Invitasjoner sendes fra vårt domene, som vennene dine ikke kjenner igjen. Følg med en rask tekst for å fortelle dem at invitasjonen kom fra deg, og be dem om å klikke på linken.",
             "confirm": "Invitasjoner sendes fra vårt domene, som vennene dine ikke kjenner igjen. Vil du følge opp med en rask tekst for å fortelle dem at invitasjonen kom fra deg, og be dem om å klikke på linken.",
             "subject": "Fikk du en invitasjon?",
-            "body": "Hei, jeg sendte deg en invitasjon til {{app}} appen. Vennligst sjekk e-posten din og klikk på linken der inne!"
+            "body": "Hei, jeg sendte deg en invitasjon til {{app}} appen. Vennligst sjekk e-posten din og klikk på linken der inne!",
+            "CheckYourEmail": "Vennligst sjekk e-posten din og følg instruksjonene!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Aktiver mikrofon",
             "cameraBtn": "Aktiver kamera",
             "cameraAndMicrophoneBtn": "Aktiver kamera og mikrofon"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Bruksanvisning",
+            "permissionDenied": "Tillatelse for {{kind}} avslått. Følg denne fremgangsmåten for å bruke den:",
+            "point1": "Gå til &quot;Innstillinger&quot; -&gt; &quot;Avansert&quot; -&gt; &quot;Personvern og sikkerhet&quot; -&gt; &quot;Nettstedsinnstillinger&quot; -&gt; &quot;Kamera&quot; eller &quot;Nettstedsinnstillinger&quot; -&gt; &quot;Mikrofon&quot;",
+            "point2": "Fjern {{hostname}} fra &quot;Blokker&quot; -listen"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Bruksanvisning",
+            "permissionDenied": "Tillatelse for {{kind}} avslått. Last inn denne siden på nytt og bekreft tilgangen til {{kind}} for å delta i konferansen."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Bruksanvisning",
+            "permissionDenied": "Tillatelse for {{kind}} avslått. Følg denne fremgangsmåten for å bruke den:",
+            "point1": "Gå til Android-innstillingene",
+            "point2": "Åpne &quot;Apper og varsler&quot;",
+            "point3": "Finn &quot;{{communityName}}&quot; og åpne den",
+            "point4": "Trykk på Tillatelser",
+            "point5": "Aktiver {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Bruksanvisning",
+            "permissionDenied": "Tillatelse for {{kind}} avslått. Følg denne fremgangsmåten for å bruke den:",
+            "point1": "Gå til iOS-innstillingene dine",
+            "point2": "Åpne &quot;Personvern&quot;",
+            "point3": "Finn {{kind}} og åpne den",
+            "point4": "Finn &quot;{{communityName}}&quot; og aktiver"
+        },
+        "notices": {
+            "youJoinedRoom": "Du ble med på rommet",
+            "joining": "Bli med: {{userName}}",
+            "sbLeftRoom": "{{userName}} forlot rommet",
+            "youLeftRoom": "Du forlot rommet",
+            "codeCopied": "Du forlot rommet",
+            "sbBeganFbLive": "{{userName}} begynte å kringkaste denne samtalen i Facebook",
+            "sbStoppedFbLive": "{{userName}} sluttet å kringkaste denne samtalen i Facebook",
+            "youBeganFbLive": "Du begynte å kringkaste denne samtalen i Facebook",
+            "youStoppedFbLive": "Du sluttet å kringkaste denne samtalen i Facebook",
+            "linkCopiedToCb": "Link kopiert til utklippstavle",
+            "codeCopiedToCb": "Koden kopiert til utklippstavlen",
+            "userHasNoVideo": "Deltakeren har ingen video"
+        },
+        "settingsPopup": {
+            "webCamera": "Webkamera",
+            "screenSharing": "Skjermdeling",
+            "shareAnotherScreen": "Del en annen skjerm",
+            "turnOffCameras": "Slå av alle kameraene",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stopp Facebook Livestream",
+            "fbLiveTitle": "Direkte tittel",
+            "fbLiveDescription": "Live beskrivelse",
+            "fbOnlyMeLiveAccess": "Bare meg",
+            "fbFriendsAccess": "venner",
+            "fbPublicAccess": "Offentlig",
+            "fbStartLive": "Gå live",
+            "fbStopLive": "Slutt Live",
+            "fbEmbedCode": "embed",
+            "copy": "Kopiere"
+        },
+        "participantsPopup": {
+            "disconnect": "Koble fra",
+            "floatingScreens": "Flytende skjermer",
+            "tiledScreens": "Flislagte skjermer",
+            "loudestExceptMe": "Høyest unntatt meg",
+            "maximizeLoudest": "Maksimer høyest",
+            "staticMaximized": "Statisk maksimert",
+            "manual": "Håndbok"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Sanntids samtale",
             "description": "en video- \/ lydanrop i sanntid"
         }
+    },
+    "participating": {
+        "Title": "Tittel",
+        "Subscribed": "abonnerer",
+        "Participants": "deltakere",
+        "AreYouSureRemoveIdentifier": "Er du sikker på å fjerne denne identifikatoren?",
+        "AreYouSureUnsubscribeIdentifier": "Er du sikker på at du melder deg ut denne identifikatoren? Det vil slå av varsler til denne identifikatoren.",
+        "AreYouSureUnsubscribeDevice": "Er du sikker på å avslutte abonnementet på denne enheten? Det vil slå av varsler på denne enheten.",
+        "Identifiers": "identifikatorer",
+        "Devices": "enheter",
+        "Streams": "strømmer"
     }
 }

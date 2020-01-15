@@ -102,5 +102,11 @@
         "noLongerUsing": "Sampeyan ora maneh nyambung menyang {{platform}} minangka",
         "doAuth": "Mlebu karo akun iki",
         "doSwitch": "Ngalih menyang akun iki"
+    },
+    "roles": {
+        "Owner": "Pamilik",
+        "Admin": "Admin",
+        "Member": "Anggota",
+        "Guest": "Tamu"
     }
 }

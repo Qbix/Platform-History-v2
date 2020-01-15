@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Hou {{relationDisplayType}} i {{toTitle}}",
         "Streams\/relatedFrom\/*": "Kahi i hoʻohui ʻia ma ka {{toTitle}} e like me {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} i hoʻoiho iā ʻoe ma ka ʻōlelo",
-        "Streams\/call": "{{displayName}} ke kāhea iā ʻoe"
+        "Streams\/call": "{{displayName}} ke kāhea iā ʻoe",
+        "ManageEmailSubscriptions": "hoʻokō i kāu leka uila leka uila",
+        "IfUnsubscribe": "Inā makemake ʻoe e unuhi"
     },
     "invite": {
         "messageContent": "ʻIke &#39;{{displayName}} iāʻoe i {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Hoʻounaʻia nā kono mai kā mākou helu, nā mea iʻikeʻoleʻia e kou mau hoaaloha. E hahai i kahi wikiwiki e hoʻomaopopo iā lākou ua hoʻouna mai ka kono mai iāʻoe, e noi ana iā lākou e kaomi i ka loulou.",
             "confirm": "Hoʻounaʻia nā kono mai kā mākou helu, nā mea iʻikeʻoleʻia e kou mau hoaaloha. Makemakeʻoe e hoʻomau i kahi wikiwiki e hoʻomaopopo iā lākou ua hele mai ka kono mai iāʻoe, e noi ana iā lākou e kaomi i ka loulou.",
-            "check": "ʻAe, ua hoʻouna wale aku wau iāʻoe i kahi&#39;āpana i ka {{app}} taupānga. Eʻoluʻolu e nānā i kāu sms a kaomi i ka loulou!"
+            "check": "ʻAe, ua hoʻouna wale aku wau iāʻoe i kahi&#39;āpana i ka {{app}} taupānga. Eʻoluʻolu e nānā i kāu sms a kaomi i ka loulou!",
+            "CheckYourMobile": "E ʻoluʻolu e nānā i SMS a hahai i nā ʻōlelo aʻoaʻo!"
         },
         "email": {
             "alert": "Kāheaʻia nā leka mai ko mākou kaiaulu, nā mea iʻikeʻoleʻia e kou mau hoaaloha. E hahai i kahi wikiwiki e hoʻomaopopo iā lākou ua hoʻouna mai ka kono mai iāʻoe, e noi ana iā lākou e kaomi i ka loulou.",
             "confirm": "Kāheaʻia nā leka mai ko mākou kaiaulu, nā mea iʻikeʻoleʻia e kou mau hoaaloha. Makemakeʻoe e hoʻomau i kahi wikiwiki e hoʻomaopopo iā lākou ua hele mai ka kono mai iāʻoe, e noi ana iā lākou e kaomi i ka loulou.",
             "subject": "Loaʻa iāʻoe kahi kono?",
-            "body": "ʻAe, ua hoʻouna wale aku wau iāʻoe i kahi&#39;āpana i ka {{app}} taupānga. Eʻoluʻolu e paʻi i kāu leka uila a kāomi i ka loulou i laila!"
+            "body": "ʻAe, ua hoʻouna wale aku wau iāʻoe i kahi&#39;āpana i ka {{app}} taupānga. Eʻoluʻolu e paʻi i kāu leka uila a kāomi i ka loulou i laila!",
+            "CheckYourEmail": "E ʻoluʻolu e leka uila i kāu leka uila a hahai i nā ʻōlelo kuhikuhi!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "E kaha i ke kelepona uila",
             "cameraBtn": "Hoʻāue Kamera",
             "cameraAndMicrophoneBtn": "Hoʻopili i nā kāmeka a me nā mikropona"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Nā ʻōkuhi",
+            "permissionDenied": "ʻAe ʻia no ka {{kind}} hōʻole ʻia. E hoʻohana i ʻoluʻolu e hahai i kēia mau pae:",
+            "point1": "E hele i ka &quot;Setel&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Pūnaewele a me ka palekana&quot; -&gt; &quot;Hoʻokele pūnaewele&quot; -&gt; &quot;Kamera&quot; a i ʻole &quot;Hoʻokipa Papaʻāina&quot; -&gt; &quot;Kekahi Pūnaewele&quot;",
+            "point2": "Wehe i {{hostname}} mai ka papa inoa &quot;Block.&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Nā ʻōkuhi",
+            "permissionDenied": "ʻAe ʻia no ka {{kind}} hōʻole ʻia. E ʻoluʻolu e hoihoi hou i kēia ʻaoʻao a hoʻopaʻa i ke komo ʻana i {{kind}} e hui ai i ka hālāwai kūkā."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Nā ʻōkuhi",
+            "permissionDenied": "ʻAe ʻia no ka {{kind}} hōʻole ʻia. E hoʻohana i ʻoluʻolu e hahai i kēia mau pae:",
+            "point1": "E hele i kāu hoʻonohonoho Android",
+            "point2": "E wehe i nā &quot;Apps &amp; nā manaʻo&quot;",
+            "point3": "E ʻike iā &quot;{{communityName}}&quot; a wehe iā ia",
+            "point4": "Kaomi ma nā ʻae",
+            "point5": "Hoʻāi {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Nā ʻōkuhi",
+            "permissionDenied": "ʻAe ʻia no ka {{kind}} hōʻole ʻia. E hoʻohana i ʻoluʻolu e hahai i kēia mau pae:",
+            "point1": "E hele i kāu kikowaena iOS",
+            "point2": "Wehe &quot;Pūnaewele&quot;",
+            "point3": "E ʻike iā {{kind}} a wehe iā ia",
+            "point4": "E ʻike &quot;{{communityName}}&quot; a hiki"
+        },
+        "notices": {
+            "youJoinedRoom": "Ua hui pū ʻoe i ka lumi",
+            "joining": "Hoʻohui ʻana: {{userName}}",
+            "sbLeftRoom": "{{userName}} haʻalele i ka lumi",
+            "youLeftRoom": "Ua haʻalele ʻoe i ka lumi",
+            "codeCopied": "Ua haʻalele ʻoe i ka lumi",
+            "sbBeganFbLive": "Ua hoʻomaka ʻo {{userName}} e hoʻolaha i kēia kelepona ma Facebook",
+            "sbStoppedFbLive": "{{userName}} oki i ka hoʻolaha ʻana i kēia kelepona ma Facebook",
+            "youBeganFbLive": "Ua hoʻomaka ʻoe e hoʻolaha i kēia kāhea ma Facebook",
+            "youStoppedFbLive": "Ua ho&#39;ōki ʻoe i ka hoʻolaha ʻana i kēia kāhea ma Facebook",
+            "linkCopiedToCb": "Hoʻopili ʻia kahi hoʻopili ʻia",
+            "codeCopiedToCb": "ʻ coplelo i kope ʻia i ka palupalu",
+            "userHasNoVideo": "ʻAʻohe wahi wikiō"
+        },
+        "settingsPopup": {
+            "webCamera": "ʻ .lelo kamera",
+            "screenSharing": "Nā ʻ .lelo Palapala",
+            "shareAnotherScreen": "Kaʻana like i kekahi ʻaoʻao",
+            "turnOffCameras": "Hoʻopau i nā kāmera",
+            "startFBLive": "Hoʻomaka Facebook Livestream",
+            "stopFBLive": "E hooki i ka Live Live",
+            "fbLiveTitle": "Wā inoa Ola",
+            "fbLiveDescription": "Hoʻomaka Live",
+            "fbOnlyMeLiveAccess": "ʻO wau wale nō",
+            "fbFriendsAccess": "E na makamaka",
+            "fbPublicAccess": "Aupuni ākea",
+            "fbStartLive": "Hele Kalua",
+            "fbStopLive": "Noho ʻAi",
+            "fbEmbedCode": "ʻEpāpū ʻia",
+            "copy": "Kāolua"
+        },
+        "participantsPopup": {
+            "disconnect": "Hoʻololi",
+            "floatingScreens": "Nā ʻānele papahele",
+            "tiledScreens": "Nā Kiʻi Tile",
+            "loudestExceptMe": "Lahi wale nō wau",
+            "maximizeLoudest": "Hoʻoikaika Loudest",
+            "staticMaximized": "Static Maximized",
+            "manual": "Keikole"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Kāhea-Ka-Pono",
             "description": "i ke kelepona mau \/ kelepona maoli"
         }
+    },
+    "participating": {
+        "Title": "Ke poʻo inoa",
+        "Subscribed": "Hoʻopau ʻia",
+        "Participants": "Nā mea komo",
+        "AreYouSureRemoveIdentifier": "ʻIke maopopo ʻoe e kāpae i kēia ʻike?",
+        "AreYouSureUnsubscribeIdentifier": "Mākou e maopopo ʻole i ka wehe ʻana i kēia ʻike? E hōʻole ia i nā hoʻolaha i kēia ʻike.",
+        "AreYouSureUnsubscribeDevice": "‘Oe e ho‘opau i ka hana? E hōʻole i nā leka i kēia polokalamu.",
+        "Identifiers": "Nā mea ʻike",
+        "Devices": "Nā mea hana",
+        "Streams": "Nā Koloho"
     }
 }

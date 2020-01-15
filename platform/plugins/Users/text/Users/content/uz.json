@@ -102,5 +102,11 @@
         "noLongerUsing": "Siz endi {{platform}} ga ulanmagansiz",
         "doAuth": "Ushbu hisob bilan kiring",
         "doSwitch": "Ushbu qayd yozuviga o&#39;ting"
+    },
+    "roles": {
+        "Owner": "Egasi",
+        "Admin": "Admin",
+        "Member": "A&#39;zo",
+        "Guest": "Mehmon"
     }
 }

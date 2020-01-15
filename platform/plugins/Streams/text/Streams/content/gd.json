@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Ùr {{relationDisplayType}} ann an {{toTitle}}",
         "Streams\/relatedFrom\/*": "Air a chur ri {{toTitle}} mar {{relationDisplayType}}",
         "Streams\/mention": "Thug {{&call 'avatar.displayName'}} iomradh ort ann am beachd",
-        "Streams\/call": "Tha {{displayName}} gad ghairm"
+        "Streams\/call": "Tha {{displayName}} gad ghairm",
+        "ManageEmailSubscriptions": "stiùir na fo-sgrìobhaidhean post-d agad",
+        "IfUnsubscribe": "Ma tha thu airson dì-chlàradh a dhèanamh"
     },
     "invite": {
         "messageContent": "Thug {{displayName}} cuireadh dhut gu {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Bidh cuiridhean air an cur bhon àireimh againn, nach eil do charaidean ag aithneachadh fhathast. Lean ri teacsa luath gus innse dhaibh gun tàinig an cuireadh thugad, ag iarraidh orra briogadh air a ’cheangal.",
             "confirm": "Bidh cuiridhean air an cur bhon àireimh againn, nach eil do charaidean ag aithneachadh fhathast. A bheil thu airson leantainn le teacsa luath gus innse dhaibh gun tàinig an cuireadh thugad, ag iarraidh orra briogadh air a ’cheangal.",
-            "check": "Hey, chuir mi cuireadh thugad don aplacaid {{app}}. Thoir sùil air na sms agad agus briog air a ’cheangal!"
+            "check": "Hey, chuir mi cuireadh thugad don aplacaid {{app}}. Thoir sùil air na sms agad agus briog air a ’cheangal!",
+            "CheckYourMobile": "Feuch an toir thu sùil air SMS agus lean an stiùireadh!"
         },
         "email": {
             "alert": "Thèid cuiridhean a chur bhon àrainn againn, rud nach eil do charaidean ag aithneachadh fhathast. Lean ri teacsa luath gus innse dhaibh gun tàinig an cuireadh thugad, ag iarraidh orra briogadh air a ’cheangal.",
             "confirm": "Thèid cuiridhean a chur bhon àrainn againn, rud nach eil do charaidean ag aithneachadh fhathast. A bheil thu airson leantainn le teacsa luath gus innse dhaibh gun tàinig an cuireadh thugad, ag iarraidh orra briogadh air a ’cheangal.",
             "subject": "An d ’fhuair thu cuireadh?",
-            "body": "Hey, chuir mi cuireadh thugad don aplacaid {{app}}. Thoir sùil air a ’phost-d agad agus briog air a’ cheangal ann!"
+            "body": "Hey, chuir mi cuireadh thugad don aplacaid {{app}}. Thoir sùil air a ’phost-d agad agus briog air a’ cheangal ann!",
+            "CheckYourEmail": "Thoir sùil air a ’phost-d agad agus lean an stiùireadh!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Dèan comas air microfòn",
             "cameraBtn": "Dèan comas air camara",
             "cameraAndMicrophoneBtn": "Dèan comas air Camara agus Micreofon"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Stiùireadh",
+            "permissionDenied": "Chaidh cead airson {{kind}} a dhiùltadh. Gus a chleachdadh lean na ceumannan seo:",
+            "point1": "Rach gu &quot;Settings&quot; -&gt; &quot;Adhartach&quot; -&gt; &quot;Prìobhaideachd agus tèarainteachd&quot; -&gt; &quot;Roghainnean làraich&quot; -&gt; &quot;Camara&quot; no &quot;Roghainnean làraich&quot; -&gt; &quot;Micreofon&quot;",
+            "point2": "Thoir air falbh {{hostname}} bhon liosta &quot;Bloc&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Stiùireadh",
+            "permissionDenied": "Chaidh cead airson {{kind}} a dhiùltadh. Feuch an ath-luchdaich thu an duilleag seo agus dearbhadh ruigsinneachd gu {{kind}} gus a thighinn chun cho-labhairt."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Stiùireadh",
+            "permissionDenied": "Chaidh cead airson {{kind}} a dhiùltadh. Gus a chleachdadh lean na ceumannan seo:",
+            "point1": "Rach gu na roghainnean Android agad",
+            "point2": "Fosgail &quot;Apps &amp; notifications&quot;",
+            "point3": "Lorg &quot;{{communityName}}&quot; agus fosgail e",
+            "point4": "Tap air Ceadan",
+            "point5": "Dèan comas air {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Stiùireadh",
+            "permissionDenied": "Chaidh cead airson {{kind}} a dhiùltadh. Gus a chleachdadh lean na ceumannan seo:",
+            "point1": "Rach gu na roghainnean iOS agad",
+            "point2": "Fosgail &quot;Prìobhaideachd&quot;",
+            "point3": "Lorg {{kind}} agus fosgail e",
+            "point4": "Lorg &quot;{{communityName}}&quot; agus comas"
+        },
+        "notices": {
+            "youJoinedRoom": "Chaidh thu a-steach don t-seòmar",
+            "joining": "A ’tighinn còmhla: {{userName}}",
+            "sbLeftRoom": "Dh ’fhàg {{userName}} an seòmar",
+            "youLeftRoom": "Dh ’fhàg thu an seòmar",
+            "codeCopied": "Dh ’fhàg thu an seòmar",
+            "sbBeganFbLive": "Thòisich {{userName}} a ’craoladh a’ ghairm seo ann an Facebook",
+            "sbStoppedFbLive": "Sguir {{userName}} de bhith a ’craoladh a’ ghairm seo ann an Facebook",
+            "youBeganFbLive": "Thòisich thu a ’craoladh a’ ghairm seo ann an Facebook",
+            "youStoppedFbLive": "Sguir thu a chraoladh a ’ghairm seo ann an Facebook",
+            "linkCopiedToCb": "Ceangal air a chopaigeadh chun a ’bhòrd bhidio",
+            "codeCopiedToCb": "Còd air a lethbhreacadh gu cairt-bhòrd",
+            "userHasNoVideo": "Chan eil bhidio aig com-pàirtiche"
+        },
+        "settingsPopup": {
+            "webCamera": "Camara lìn",
+            "screenSharing": "Co-roinneadh sgrion",
+            "shareAnotherScreen": "Roinn scrion eile",
+            "turnOffCameras": "Cuir dheth na camarathan uile",
+            "startFBLive": "Tòisich air Facebook Livestream",
+            "stopFBLive": "Cuir stad air Facebook Livestream",
+            "fbLiveTitle": "Tiotal Beò",
+            "fbLiveDescription": "Tuairisgeul Beò",
+            "fbOnlyMeLiveAccess": "Mise a-mhàin",
+            "fbFriendsAccess": "Caraidean",
+            "fbPublicAccess": "Poblach",
+            "fbStartLive": "Rach beò",
+            "fbStopLive": "Crìoch Beò",
+            "fbEmbedCode": "Gabhail a-steach",
+            "copy": "Leth-bhreac"
+        },
+        "participantsPopup": {
+            "disconnect": "Disconnect",
+            "floatingScreens": "Sgrionaichean fleodraidh",
+            "tiledScreens": "Sgrionaichean leacach",
+            "loudestExceptMe": "Loudest Ach a-mhàin mi",
+            "maximizeLoudest": "Meudaich an ìre as àirde",
+            "staticMaximized": "Static Maximized",
+            "manual": "Stiùireadh"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Call fìor-ùine",
             "description": "gairm bhidio \/ claisneachd fìor-ùine"
         }
+    },
+    "participating": {
+        "Title": "Tiotal",
+        "Subscribed": "Fo-sgrìobhte",
+        "Participants": "Com-pàirtichean",
+        "AreYouSureRemoveIdentifier": "A bheil thu cinnteach gun cuir thu an aithnichear seo air falbh?",
+        "AreYouSureUnsubscribeIdentifier": "A bheil thu cinnteach gu bheil thu a ’dì-chlàradh an aithnichear seo? Cuiridh e dheth fiosan chun an aithnichear seo.",
+        "AreYouSureUnsubscribeDevice": "A bheil thu cinnteach gu bheil thu a ’dì-chlàradh an inneal seo? Cuiridh e dheth fiosan chun inneal seo.",
+        "Identifiers": "Luchd-comharrachaidh",
+        "Devices": "Innealan",
+        "Streams": "Sruth"
     }
 }

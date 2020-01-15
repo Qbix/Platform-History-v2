@@ -94,6 +94,11 @@ class Q_Text
 		}
 		$basename = self::basename($options);
 		$filename = "text/$name/$basename.json";
+
+		if (!file_exists(Q::realPath($filename))) {
+			$filename = "text/$name/en.json";
+		}
+
 		if (!empty(self::$get[$filename])) {
 			return self::$get[$filename];
 		}
@@ -207,6 +212,21 @@ class Q_Text
 		}
 		$text = Q_Text::get('Q/content');
 		return Q::ifset($text, 'words', $word, $word);
+	}
+	
+	/**
+	 * Information on languages
+	 * @static
+	 * @return {array} An array with the keys being the two-digit language code
+	 */
+	static function languagesInfo()
+	{
+		static $info = null;
+		if (!$info) {
+			$content = file_get_contents(Q_FILES_DIR.DS.'Q'.DS.'languages.json');
+			$info = Q::json_decode($content);
+		}
+		return $info;
 	}
 	
 	protected static $get = array();

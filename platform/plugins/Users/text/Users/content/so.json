@@ -102,5 +102,11 @@
         "noLongerUsing": "Mar dambe kuma xirnid {{platform}} sida",
         "doAuth": "Kusoo gal akoonkan",
         "doSwitch": "U beddelo koontadaas"
+    },
+    "roles": {
+        "Owner": "Milkiilaha",
+        "Admin": "Maamulka",
+        "Member": "Xubin",
+        "Guest": "Marti"
     }
 }

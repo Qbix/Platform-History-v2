@@ -102,5 +102,11 @@
         "noLongerUsing": "Aredî hûn bi {999} connected re wekî ve girêdayî ne",
         "doAuth": "Bi vê hesabê têkevin",
         "doSwitch": "Binêre hesabê vê"
+    },
+    "roles": {
+        "Owner": "Xwedî",
+        "Admin": "Rêvebir",
+        "Member": "Endam",
+        "Guest": "Mêvan"
     }
 }

@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Kvietimai siunčiami iš mūsų numerio, kurį jūsų draugai dar neatpažįsta. Atlikite greitą tekstą, kad jiems būtų žinoma, kad kvietimas buvo gautas iš jūsų, prašydamas jų spustelėti nuorodą.",
             "confirm": "Kvietimai siunčiami iš mūsų numerio, kurį jūsų draugai dar neatpažįsta. Ar norėtumėte sužinoti greitą tekstą, kad jie žinotų, kad kvietimas buvo gautas iš jūsų, paprašydamas jų spustelėti nuorodą.",
-            "check": "Ei, aš tiesiog atsiuntė jums kvietimą į {{app}} programą. Patikrinkite SMS ir spustelėkite nuorodą!"
+            "check": "Ei, aš tiesiog atsiuntė jums kvietimą į {{app}} programą. Patikrinkite SMS ir spustelėkite nuorodą!",
+            "CheckYourMobile": "Patikrinkite SMS ir vykdykite instrukcijas!"
         },
         "email": {
             "alert": "Kvietimai siunčiami iš mūsų domeno, kurį jūsų draugai dar neatpažįsta. Atlikite greitą tekstą, kad jiems būtų žinoma, kad kvietimas buvo gautas iš jūsų, prašydamas jų spustelėti nuorodą.",
             "confirm": "Kvietimai siunčiami iš mūsų domeno, kurį jūsų draugai dar neatpažįsta. Ar norėtumėte sužinoti greitą tekstą, kad jie žinotų, kad kvietimas buvo gautas iš jūsų, paprašydamas jų spustelėti nuorodą.",
             "subject": "Ar gavote kvietimą?",
-            "body": "Ei, aš tiesiog atsiuntė jums kvietimą į {{app}} programą. Patikrinkite el. Paštą ir spustelėkite ten esančią nuorodą!"
+            "body": "Ei, aš tiesiog atsiuntė jums kvietimą į {{app}} programą. Patikrinkite el. Paštą ir spustelėkite ten esančią nuorodą!",
+            "CheckYourEmail": "Patikrinkite savo el. Pašto adresą ir vykdykite instrukcijas!"
         }
     },
     "participating": {
         "Title": "Pavadinimas",
         "Subscribed": "Prenumeruota",
-        "Participants": "Dalyviai"
+        "Participants": "Dalyviai",
+        "AreYouSureRemoveIdentifier": "Ar tikrai pašalinote šį identifikatorių?",
+        "AreYouSureUnsubscribeIdentifier": "Ar tikrai atšaukėte šio identifikatoriaus prenumeratą? Bus išjungti pranešimai šiuo identifikatoriumi.",
+        "AreYouSureUnsubscribeDevice": "Ar tikrai atšaukėte šio įrenginio prenumeratą? Tai išjungs šio įrenginio pranešimus.",
+        "Identifiers": "Identifikatoriai",
+        "Devices": "Įrenginiai",
+        "Streams": "Srautai"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Įjungti mikrofoną",
             "cameraBtn": "Įgalinti kamerą",
             "cameraAndMicrophoneBtn": "Įgalinti kamerą ir mikrofoną"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instrukcijos",
+            "permissionDenied": "„{{kind}}“ leidimas atmestas. Norėdami jį naudoti, atlikite šiuos veiksmus:",
+            "point1": "Eikite į „Nustatymai“ -&gt; „Išplėstiniai“ -&gt; „Privatumas ir saugumas“ -&gt; „Svetainės nustatymai“ -&gt; „Kamera“ arba „Svetainės nustatymai“ -&gt; „Mikrofonas“",
+            "point2": "Pašalinkite {{hostname}} iš „Blokuoti“ sąrašo"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instrukcijos",
+            "permissionDenied": "„{{kind}}“ leidimas atmestas. Iš naujo įkelkite šį puslapį ir patvirtinkite, kad galite prisijungti prie {{kind}}, kad galėtumėte prisijungti prie konferencijos."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instrukcijos",
+            "permissionDenied": "„{{kind}}“ leidimas atmestas. Norėdami jį naudoti, atlikite šiuos veiksmus:",
+            "point1": "Eikite į „Android“ nustatymus",
+            "point2": "Atidaryti „Programos ir pranešimai“",
+            "point3": "Suraskite „{{communityName}}“ ir atidarykite",
+            "point4": "Bakstelėkite Leidimai",
+            "point5": "Įgalinti {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instrukcijos",
+            "permissionDenied": "„{{kind}}“ leidimas atmestas. Norėdami jį naudoti, atlikite šiuos veiksmus:",
+            "point1": "Eikite į „iOS“ nustatymus",
+            "point2": "Atidarykite „Privatumas“",
+            "point3": "Suraskite {{kind}} ir atidarykite",
+            "point4": "Suraskite „{{communityName}}“ ir įgalinkite"
+        },
+        "notices": {
+            "youJoinedRoom": "Jūs prisijungėte prie kambario",
+            "joining": "Prisijungimas: {{userName}}",
+            "sbLeftRoom": "{{userName}} išėjo iš kambario",
+            "youLeftRoom": "Jūs palikote kambarį",
+            "codeCopied": "Jūs palikote kambarį",
+            "sbBeganFbLive": "{{userName}} pradėjo skambinti šiuo skambučiu „Facebook“",
+            "sbStoppedFbLive": "{{userName}} sustabdė šio skambučio transliaciją „Facebook“",
+            "youBeganFbLive": "Jūs pradėjote transliuoti šį skambutį „Facebook“",
+            "youStoppedFbLive": "Jūs nutraukėte šio skambučio transliavimą „Facebook“",
+            "linkCopiedToCb": "Nuoroda nukopijuota į mainų sritį",
+            "codeCopiedToCb": "Kodas nukopijuotas į mainų sritį",
+            "userHasNoVideo": "Dalyvis neturi vaizdo įrašo"
+        },
+        "settingsPopup": {
+            "webCamera": "Internetinė kamera",
+            "screenSharing": "Ekrano bendrinimas",
+            "shareAnotherScreen": "Bendrinkite kitą ekraną",
+            "turnOffCameras": "Išjunkite visas kameras",
+            "startFBLive": "Pradėkite „Facebook Livestream“",
+            "stopFBLive": "Sustabdykite „Facebook Livestream“",
+            "fbLiveTitle": "Tiesioginis pavadinimas",
+            "fbLiveDescription": "Tiesioginis aprašymas",
+            "fbOnlyMeLiveAccess": "Tik aš",
+            "fbFriendsAccess": "Draugai",
+            "fbPublicAccess": "Vieša",
+            "fbStartLive": "Eik gyvai",
+            "fbStopLive": "Pabaiga gyvai",
+            "fbEmbedCode": "Įterpti",
+            "copy": "Kopijuoti"
+        },
+        "participantsPopup": {
+            "disconnect": "Atjunkite",
+            "floatingScreens": "Plaukiojantys ekranai",
+            "tiledScreens": "Ekranai su plytelėmis",
+            "loudestExceptMe": "Garsiausias, išskyrus mane",
+            "maximizeLoudest": "Maksimaliai padidinkite garsiausią",
+            "staticMaximized": "Statinis maksimalus",
+            "manual": "Rankinis"
         }
     },
     "types": {

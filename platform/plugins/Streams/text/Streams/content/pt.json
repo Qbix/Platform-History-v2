@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Convites são enviados do nosso número, que seus amigos ainda não reconhecem. Faça um acompanhamento com um texto rápido para que eles saibam que o convite veio de você, pedindo que eles cliquem no link.",
             "confirm": "Convites são enviados do nosso número, que seus amigos ainda não reconhecem. Gostaria de acompanhar com um texto rápido para que eles saibam que o convite veio de você, pedindo que eles cliquem no link.",
-            "check": "Ei, acabei de enviar um convite para o aplicativo {{app}}. Por favor, verifique seu sms e clique no link!"
+            "check": "Ei, acabei de enviar um convite para o aplicativo {{app}}. Por favor, verifique seu sms e clique no link!",
+            "CheckYourMobile": "Por favor, verifique o SMS e siga as instruções!"
         },
         "email": {
             "alert": "Convites são enviados do nosso domínio, que seus amigos ainda não reconhecem. Faça um acompanhamento com um texto rápido para que eles saibam que o convite veio de você, pedindo que eles cliquem no link.",
             "confirm": "Convites são enviados do nosso domínio, que seus amigos ainda não reconhecem. Gostaria de acompanhar com um texto rápido para que eles saibam que o convite veio de você, pedindo que eles cliquem no link.",
             "subject": "Você recebeu um convite?",
-            "body": "Ei, acabei de enviar um convite para o aplicativo {{app}}. Por favor, verifique seu e-mail e clique no link lá!"
+            "body": "Ei, acabei de enviar um convite para o aplicativo {{app}}. Por favor, verifique seu e-mail e clique no link lá!",
+            "CheckYourEmail": "Por favor, verifique seu e-mail e siga as instruções!"
         }
     },
     "participating": {
         "Title": "Título",
         "Subscribed": "Subscrito",
-        "Participants": "Participantes"
+        "Participants": "Participantes",
+        "AreYouSureRemoveIdentifier": "Você tem certeza de remover este identificador?",
+        "AreYouSureUnsubscribeIdentifier": "Tem certeza de que cancelou a inscrição neste identificador? Desativará as notificações para esse identificador.",
+        "AreYouSureUnsubscribeDevice": "Tem certeza de que cancelou a inscrição neste dispositivo? Desativará as notificações para este dispositivo.",
+        "Identifiers": "Identificadores",
+        "Devices": "Aparelhos",
+        "Streams": "Streams"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Ativar microfone",
             "cameraBtn": "Ativar câmera",
             "cameraAndMicrophoneBtn": "Ativar câmera e microfone"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instruções",
+            "permissionDenied": "Permissão para {{kind}} negada. Para usá-lo, siga estas etapas:",
+            "point1": "Vá para &quot;Configurações&quot; -&gt; &quot;Avançado&quot; -&gt; &quot;Privacidade e segurança&quot; -&gt; &quot;Configurações do site&quot; -&gt; &quot;Câmera&quot; ou &quot;Configurações do site&quot; -&gt; &quot;Microfone&quot;",
+            "point2": "Remova {{hostname}} da lista &quot;Bloquear&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instruções",
+            "permissionDenied": "Permissão para {{kind}} negada. Atualize esta página e confirme o acesso a {{kind}} para ingressar na conferência."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instruções",
+            "permissionDenied": "Permissão para {{kind}} negada. Para usá-lo, siga estas etapas:",
+            "point1": "Vá para suas configurações do Android",
+            "point2": "Abra &quot;Aplicativos e notificações&quot;",
+            "point3": "Encontre &quot;{{communityName}}&quot; e abra-o",
+            "point4": "Toque em Permissões",
+            "point5": "Ativar {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instruções",
+            "permissionDenied": "Permissão para {{kind}} negada. Para usá-lo, siga estas etapas:",
+            "point1": "Vá para suas configurações do iOS",
+            "point2": "Abra &quot;Privacidade&quot;",
+            "point3": "Encontre {{kind}} e abra-o",
+            "point4": "Encontre &quot;{{communityName}}&quot; e ative"
+        },
+        "notices": {
+            "youJoinedRoom": "Você entrou na sala",
+            "joining": "Participando: {{userName}}",
+            "sbLeftRoom": "{{userName}} saiu da sala",
+            "youLeftRoom": "Você saiu da sala",
+            "codeCopied": "Você saiu da sala",
+            "sbBeganFbLive": "{{userName}} começou a transmitir esta chamada no Facebook",
+            "sbStoppedFbLive": "{{userName}} parou de transmitir esta chamada no Facebook",
+            "youBeganFbLive": "Você começou a transmitir esta ligação no Facebook",
+            "youStoppedFbLive": "Você parou de transmitir esta chamada no Facebook",
+            "linkCopiedToCb": "Link copiado para a área de transferência",
+            "codeCopiedToCb": "Código copiado para a área de transferência",
+            "userHasNoVideo": "O participante não tem vídeo"
+        },
+        "settingsPopup": {
+            "webCamera": "Câmera web",
+            "screenSharing": "Compartilhamento de tela",
+            "shareAnotherScreen": "Compartilhar outra tela",
+            "turnOffCameras": "Desligue todas as câmeras",
+            "startFBLive": "Iniciar o Facebook Livestream",
+            "stopFBLive": "Parar a transmissão ao vivo do Facebook",
+            "fbLiveTitle": "Título ao vivo",
+            "fbLiveDescription": "Descrição ao vivo",
+            "fbOnlyMeLiveAccess": "Só eu",
+            "fbFriendsAccess": "Amigos",
+            "fbPublicAccess": "Público",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "Terminar ao vivo",
+            "fbEmbedCode": "Embutir",
+            "copy": "cópia de"
+        },
+        "participantsPopup": {
+            "disconnect": "desconectar",
+            "floatingScreens": "Telas flutuantes",
+            "tiledScreens": "Telas lado a lado",
+            "loudestExceptMe": "Mais Alto, Exceto Eu",
+            "maximizeLoudest": "Maximizar o mais alto",
+            "staticMaximized": "Estática Maximizada",
+            "manual": "Manual"
         }
     },
     "types": {

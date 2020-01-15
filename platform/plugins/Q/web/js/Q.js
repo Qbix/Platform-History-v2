@@ -15,6 +15,7 @@ var $ = Q.$ = root.jQuery;
 var _isReady = false;
 var _isOnline = null;
 var _isCordova = null;
+var _documentIsUnloading = null;
 
 /**
  * @class Q
@@ -546,6 +547,29 @@ Sp.matchTypes.adapters = {
 	qbixUserId: function () {
 		return this.match(/(@[a-z]{8})/gi) || [];
 	}
+};
+
+/**
+ * Deobfuscates some text that was obfuscated by Q_Utils::obfuscate
+ * @method deobfuscate
+ * @param {String} str
+ * @param {String} [key=' ']
+ * @return {String}
+ */
+Sp.deobfuscate = function (key) {
+	key = key || ' ';
+	var len1 = Math.floor(this.length / 2);
+	var len2 = key.length;
+	var result = '';
+	for (var i=0; i<len1; ++i) {
+		var j = i % len2;
+		var diff = this.charCodeAt(i*2+1);
+		if (this.charAt(i*2) == '1') {
+			diff = -diff;
+		}
+		result += String.fromCharCode(key.charCodeAt(j)+diff);
+	}
+	return result;
 };
 
 /**
@@ -4986,11 +5010,16 @@ Q.Links = {
 		bcc = bcc && Q.isArrayLike(bcc) ? bcc.join(',') : bcc;
 		var names = ['cc', 'bcc', 'subject', 'body'];
 		var parts = [cc, bcc, subject, body];
-		var url = "mailto:" + encodeURIComponent(to || '');
+		var url = "mailto:" + (to || '');
 		var char = '?';
+		var encode = false;
 		for (var i=0, l=names.length; i<l; ++i) {
 			if (parts[i]) {
-				url += char + names[i] + '=' + encodeURIComponent(parts[i]);
+				url += char + names[i] + '=' + 
+					(encode ? encodeURIComponent(parts[i]) : parts[i]);
+				if (i >= 2) {
+					encode = true;
+				}
 				char = '&';
 			}
 		}
@@ -5920,24 +5949,6 @@ Q.loadHandlebars = Q.getter(function _Q_loadHandlebars(callback) {
 });
 
 /**
- * Call this function to set a notice that is shown when the page is almost about to be unloaded
- * @static
- * @method beforeUnload
- * @param notice {String} The notice to set. It should typically be worded so that "Cancel" cancels the unloading.
- * @required
- */
-Q.beforeUnload = function _Q_beforeUnload(notice) {
-	window.onbeforeunload = function(e){
-		if (!notice) return undefined;
-		e = e || window.event;
-		if (e) { // For IE and Firefox (prior to 4)
-			e.returnValue = notice;
-		}
-		return notice; // For Safari and Chrome
-	};
-};
-
-/**
  * Calculate the total number of pixels that fixed elements take up
  * from the given side of the screen. The elements are found by simply
  * looking for the class 'Q_fixed_' + from, which should have been added to them.
@@ -6031,6 +6042,252 @@ Q.removeElement = function _Q_removeElement(element, removeTools) {
 	} catch (e) {
 		// Old IE doesn't like this
 	}
+};
+
+/**
+ * A tool for detecting user browser parameters.
+ * @class Q.Browser
+ */
+Q.Browser = {
+
+	/**
+	 * The only public method, detect() returns a hash consisting of these elements:
+	 * "name": Name of the browser, can be 'mozilla' for example.
+	 * "mainVersion": Major version of the browser, digit like '9' for example.
+	 * "OS": Browser's operating system. For example 'windows'.
+	 * "engine": Suggested engine of the browser, can be 'gecko', 'webkit' or some other.
+	 * @static
+     * @method detect
+     * @return {Object}
+	 */
+	detect: function() {
+		var data = this.searchData(this.dataBrowser);
+		var browser = (data && data.identity) || "An unknown browser";
+		
+		var version = (this.searchVersion(navigator.userAgent)
+			|| this.searchVersion(navigator.appVersion)
+			|| "an unknown version").toString();
+		var dotIndex = version.indexOf('.');
+		var mainVersion = version.substring(0, dotIndex != -1 ? dotIndex : version.length);
+		var OSdata = this.searchData(this.dataOS);
+		var OS = (OSdata && OSdata.identity) || "an unknown OS";
+		var engine = '', ua = navigator.userAgent.toLowerCase();
+		if (ua.indexOf('webkit') != -1) {
+			engine = 'webkit';
+		} else if (ua.indexOf('gecko') != -1) {
+			engine = 'gecko';
+		} else if (ua.indexOf('presto') != -1) {
+			engine = 'presto';
+		}
+		var isWebView = /(.*)QWebView(.*)/.test(navigator.userAgent)
+			|| (/(iPhone|iPod|iPad).*AppleWebKit(?!.*Version)/i).test(navigator.userAgent);
+		var isStandalone = navigator.standalone
+			|| (root.matchMedia && root.matchMedia('(display-mode: standalone)').matches)
+			|| (root.external && external.msIsSiteMode && external.msIsSiteMode())
+			|| false;
+		if (OS === 'Android') {
+			var w = screen.width-document.documentElement.clientHeight;
+			var h = screen.height-document.documentElement.clientHeight;
+			isStandalone = (0<h && h<40)|| (0<w && w<40);
+		}
+		if (/(.*)QWebView(.*)/.test(navigator.userAgent)) {
+			isStandalone = false;
+		}
+		var name = browser.toLowerCase();
+		var prefix;
+		switch (engine) {
+			case 'webkit': prefix = '-webkit-'; break;
+			case 'gecko': prefix = '-moz-'; break;
+			case 'presto': prefix = '-o-'; break;
+			default: prefix = '';
+		}
+		prefix = (name === 'explorer') ? '-ms-' : prefix;
+		return {
+			name: name,
+			mainVersion: mainVersion,
+			prefix: prefix,
+			OS: OS.toLowerCase(),
+			engine: engine,
+			device: OSdata && OSdata.device,
+			isWebView: isWebView,
+			isStandalone: isStandalone,
+			isCordova: _isCordova
+		};
+	},
+	
+	searchData: function(data) {
+		for (var i=0, l=data.length; i<l; i++) {
+			var dataString = data[i].string;
+			this.versionSearchString = data[i].versionSearch || data[i].identity;
+			if (dataString) {
+				if (navigator.userAgent.indexOf(data[i].subString) != -1) {
+					return data[i];
+				}
+			}
+		}
+	},
+	
+	searchVersion : function(dataString) {
+		var index = dataString.indexOf(this.versionSearchString);
+		if (index == -1)
+			return;
+		return parseFloat(dataString.substring(index + this.versionSearchString.length + 1));
+	},
+	
+	dataBrowser : [
+		{
+			string : navigator.userAgent,
+			subString : "MSIE",
+			identity : "Explorer",
+			versionSearch : "MSIE"
+		},
+		{
+			string : navigator.userAgent,
+			subString : "Chrome",
+			identity : "Chrome"
+		},
+		{
+			string : navigator.userAgent,
+			subString : "OmniWeb",
+			versionSearch : "OmniWeb/",
+			identity : "OmniWeb"
+		},
+		{
+			string : navigator.vendor,
+			subString : "Apple",
+			identity : "Safari",
+			versionSearch : "Version"
+		},
+		{
+			prop : root.opera,
+			identity : "Opera",
+			versionSearch : "Version"
+		},
+		{
+			string : navigator.vendor,
+			subString : "iCab",
+			identity : "iCab"
+		},
+		{
+			string : navigator.vendor,
+			subString : "KDE",
+			identity : "Konqueror"
+		},
+		{
+			string : navigator.userAgent,
+			subString : "Firefox",
+			identity : "Firefox"
+		},
+		{
+			string : navigator.vendor,
+			subString : "Camino",
+			identity : "Camino"
+		},
+		{ // for newer Netscapes (6+)
+			string : navigator.userAgent,
+			subString : "Netscape",
+			identity : "Netscape"
+		},
+		{
+			string : navigator.userAgent,
+			subString : "Gecko",
+			identity : "Mozilla",
+			versionSearch : "rv"
+		},
+		{ // for older Netscapes (4-)
+			string : navigator.userAgent,
+			subString : "Mozilla",
+			identity : "Netscape",
+			versionSearch : "Mozilla"
+		}
+	],
+
+	dataOS : [
+		{
+			string : navigator.userAgent,
+			subString : "iPhone",
+			identity : "iOS",
+			device: "iPhone"
+		},
+		{
+			string : navigator.userAgent,
+			subString : "iPod",
+			identity : "iOS",
+			device: "iPod"
+		},
+		{
+			string : navigator.userAgent,
+			subString : "iPad",
+			identity : "iOS",
+			device: "iPad"
+		},
+		{
+			string : navigator.userAgent,
+			subString : "Android",
+			identity : "Android"
+		},
+		{
+			string : navigator.platform,
+			subString : "RIM",
+			identity : "BlackBerry"
+		},
+		{
+			string : navigator.platform,
+			subString : "Win",
+			identity : "Windows"
+		},
+		{
+			string : navigator.platform,
+			subString : "Mac",
+			identity : "Mac"
+		},
+		{
+			string : navigator.platform,
+			subString : "Linux",
+			identity : "Linux"
+		},
+		{
+			string : navigator.platform,
+			subString : "BSD",
+			identity : "FreeBSD"
+		},
+	],
+	
+	getScrollbarWidth: function() {
+		if (Q.Browser.scrollbarWidth) {
+			return Q.Browser.scrollbarWidth;
+		}
+		var inner = document.createElement('p');
+		inner.style.width = '100%';
+		inner.style.height = '200px';
+		
+		var outer = document.createElement('div');
+		Q.each({
+			'position': 'absolute',
+			'top': '0px',
+			'left': '0px',
+			'visibility': 'hidden',
+			'width': '200px',
+			'height': '150px',
+			'overflow': 'hidden'
+		}, function (k, v) {
+			outer.style[k] = v;
+		});
+		outer.appendChild(inner);
+		document.body.appendChild(outer);
+
+		var w1 = parseInt(inner.offsetWidth);
+		outer.style.overflow = 'scroll';
+		var w2 = parseInt(inner.offsetWidth);
+		if (w1 == w2) {
+			w2 = outer.clientWidth;
+		}
+
+		Q.removeElement(outer);
+		
+		return Q.Browser.scrollbarWidth = w1 - w2;
+	}
+	
 };
 
 var _supportsPassive;
@@ -6235,6 +6492,25 @@ Q.removeEventListener = function _Q_removeEventListener(element, eventName, even
 		}
 	}
 	return true;
+};
+
+/**
+ * Call this function to set a notice that is shown when the page is almost about to be unloaded
+ * @static
+ * @method beforeUnload
+ * @param notice {String} The notice to set. It should typically be worded so that "Cancel" cancels the unloading.
+ * @required
+ */
+Q.beforeUnload = function _Q_beforeUnload(notice) {
+	Q.addEventListener(window, 'beforeunload', function (e) {
+		if (!notice) return undefined;
+		e = e || window.event;
+		if (e) { // For IE and Firefox (prior to 4)
+			e.preventDefault(); // for newer browsers, but ignores notice
+			e.returnValue = notice;
+		}
+		return notice; // For Safari and Chrome
+	});
 };
 
 /**
@@ -6755,6 +7031,9 @@ Q.request = function (url, slotNames, callback, options) {
 		
 		function _onCancel (status, msg) {
 			var code;
+			if (_documentIsUnloading) { // the document is about to go poof anyway
+				return; // don't call any callbacks, avoiding possible alerts
+			}
 			status = Q.isInteger(status) ? status : null;
 			if (this.response) {
 				var data = JSON.parse(this.response);
@@ -10290,252 +10569,6 @@ _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
 	|| location.search.queryField('Q.cordova')
 	|| Q.cookie('Q_cordova');
 
-/**
- * A tool for detecting user browser parameters.
- * @class Q.Browser
- */
-Q.Browser = {
-
-	/**
-	 * The only public method, detect() returns a hash consisting of these elements:
-	 * "name": Name of the browser, can be 'mozilla' for example.
-	 * "mainVersion": Major version of the browser, digit like '9' for example.
-	 * "OS": Browser's operating system. For example 'windows'.
-	 * "engine": Suggested engine of the browser, can be 'gecko', 'webkit' or some other.
-	 * @static
-     * @method detect
-     * @return {Object}
-	 */
-	detect: function() {
-		var data = this.searchData(this.dataBrowser);
-		var browser = (data && data.identity) || "An unknown browser";
-		
-		var version = (this.searchVersion(navigator.userAgent)
-			|| this.searchVersion(navigator.appVersion)
-			|| "an unknown version").toString();
-		var dotIndex = version.indexOf('.');
-		var mainVersion = version.substring(0, dotIndex != -1 ? dotIndex : version.length);
-		var OSdata = this.searchData(this.dataOS);
-		var OS = (OSdata && OSdata.identity) || "an unknown OS";
-		var engine = '', ua = navigator.userAgent.toLowerCase();
-		if (ua.indexOf('webkit') != -1) {
-			engine = 'webkit';
-		} else if (ua.indexOf('gecko') != -1) {
-			engine = 'gecko';
-		} else if (ua.indexOf('presto') != -1) {
-			engine = 'presto';
-		}
-		var isWebView = /(.*)QWebView(.*)/.test(navigator.userAgent)
-			|| (/(iPhone|iPod|iPad).*AppleWebKit(?!.*Version)/i).test(navigator.userAgent);
-		var isStandalone = navigator.standalone
-			|| (root.matchMedia && root.matchMedia('(display-mode: standalone)').matches)
-			|| (root.external && external.msIsSiteMode && external.msIsSiteMode())
-			|| false;
-		if (OS === 'Android') {
-			var w = screen.width-document.documentElement.clientHeight;
-			var h = screen.height-document.documentElement.clientHeight;
-			isStandalone = (0<h && h<40)|| (0<w && w<40);
-		}
-		if (/(.*)QWebView(.*)/.test(navigator.userAgent)) {
-			isStandalone = false;
-		}
-		var name = browser.toLowerCase();
-		var prefix;
-		switch (engine) {
-			case 'webkit': prefix = '-webkit-'; break;
-			case 'gecko': prefix = '-moz-'; break;
-			case 'presto': prefix = '-o-'; break;
-			default: prefix = '';
-		}
-		prefix = (name === 'explorer') ? '-ms-' : prefix;
-		return {
-			name: name,
-			mainVersion: mainVersion,
-			prefix: prefix,
-			OS: OS.toLowerCase(),
-			engine: engine,
-			device: OSdata && OSdata.device,
-			isWebView: isWebView,
-			isStandalone: isStandalone,
-			isCordova: _isCordova
-		};
-	},
-	
-	searchData: function(data) {
-		for (var i=0, l=data.length; i<l; i++) {
-			var dataString = data[i].string;
-			this.versionSearchString = data[i].versionSearch || data[i].identity;
-			if (dataString) {
-				if (navigator.userAgent.indexOf(data[i].subString) != -1) {
-					return data[i];
-				}
-			}
-		}
-	},
-	
-	searchVersion : function(dataString) {
-		var index = dataString.indexOf(this.versionSearchString);
-		if (index == -1)
-			return;
-		return parseFloat(dataString.substring(index + this.versionSearchString.length + 1));
-	},
-	
-	dataBrowser : [
-		{
-			string : navigator.userAgent,
-			subString : "MSIE",
-			identity : "Explorer",
-			versionSearch : "MSIE"
-		},
-		{
-			string : navigator.userAgent,
-			subString : "Chrome",
-			identity : "Chrome"
-		},
-		{
-			string : navigator.userAgent,
-			subString : "OmniWeb",
-			versionSearch : "OmniWeb/",
-			identity : "OmniWeb"
-		},
-		{
-			string : navigator.vendor,
-			subString : "Apple",
-			identity : "Safari",
-			versionSearch : "Version"
-		},
-		{
-			prop : root.opera,
-			identity : "Opera",
-			versionSearch : "Version"
-		},
-		{
-			string : navigator.vendor,
-			subString : "iCab",
-			identity : "iCab"
-		},
-		{
-			string : navigator.vendor,
-			subString : "KDE",
-			identity : "Konqueror"
-		},
-		{
-			string : navigator.userAgent,
-			subString : "Firefox",
-			identity : "Firefox"
-		},
-		{
-			string : navigator.vendor,
-			subString : "Camino",
-			identity : "Camino"
-		},
-		{ // for newer Netscapes (6+)
-			string : navigator.userAgent,
-			subString : "Netscape",
-			identity : "Netscape"
-		},
-		{
-			string : navigator.userAgent,
-			subString : "Gecko",
-			identity : "Mozilla",
-			versionSearch : "rv"
-		},
-		{ // for older Netscapes (4-)
-			string : navigator.userAgent,
-			subString : "Mozilla",
-			identity : "Netscape",
-			versionSearch : "Mozilla"
-		}
-	],
-
-	dataOS : [
-		{
-			string : navigator.userAgent,
-			subString : "iPhone",
-			identity : "iOS",
-			device: "iPhone"
-		},
-		{
-			string : navigator.userAgent,
-			subString : "iPod",
-			identity : "iOS",
-			device: "iPod"
-		},
-		{
-			string : navigator.userAgent,
-			subString : "iPad",
-			identity : "iOS",
-			device: "iPad"
-		},
-		{
-			string : navigator.userAgent,
-			subString : "Android",
-			identity : "Android"
-		},
-		{
-			string : navigator.platform,
-			subString : "RIM",
-			identity : "BlackBerry"
-		},
-		{
-			string : navigator.platform,
-			subString : "Win",
-			identity : "Windows"
-		},
-		{
-			string : navigator.platform,
-			subString : "Mac",
-			identity : "Mac"
-		},
-		{
-			string : navigator.platform,
-			subString : "Linux",
-			identity : "Linux"
-		},
-		{
-			string : navigator.platform,
-			subString : "BSD",
-			identity : "FreeBSD"
-		},
-	],
-	
-	getScrollbarWidth: function() {
-		if (Q.Browser.scrollbarWidth) {
-			return Q.Browser.scrollbarWidth;
-		}
-		var inner = document.createElement('p');
-		inner.style.width = '100%';
-		inner.style.height = '200px';
-		
-		var outer = document.createElement('div');
-		Q.each({
-			'position': 'absolute',
-			'top': '0px',
-			'left': '0px',
-			'visibility': 'hidden',
-			'width': '200px',
-			'height': '150px',
-			'overflow': 'hidden'
-		}, function (k, v) {
-			outer.style[k] = v;
-		});
-		outer.appendChild(inner);
-		document.body.appendChild(outer);
-
-		var w1 = parseInt(inner.offsetWidth);
-		outer.style.overflow = 'scroll';
-		var w2 = parseInt(inner.offsetWidth);
-		if (w1 == w2) {
-			w2 = outer.clientWidth;
-		}
-
-		Q.removeElement(outer);
-		
-		return Q.Browser.scrollbarWidth = w1 - w2;
-	}
-	
-};
-
 var detected = Q.Browser.detect();
 var isTouchscreen = ('ontouchstart' in root || !!root.navigator.msMaxTouchPoints);
 var isTablet = navigator.userAgent.match(/tablet|ipad/i)
@@ -11702,7 +11735,7 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
 	var screenX = Q.Pointer.getX(evt) - Q.Pointer.scrollLeft();
 	var screenY = Q.Pointer.getY(evt) - Q.Pointer.scrollTop();
 	if (!screenX || !screenY || Q.Pointer.canceledClick
-	|| (!evt.button || (evt.touches && !evt.touches.length))) {
+	|| (!evt.button && (evt.touches && !evt.touches.length))) {
 		return;
 	}
 	var ccd = Q.Pointer.options.cancelClickDistance;
@@ -13620,6 +13653,13 @@ Q.Notices = {
 Q.onInit.add(function () {
 	// on Q initiated, parse all notices loaded from backend and parse them
 	Q.Notices.process();
+	
+	// hook beforeunload event
+	Q.addEventListener(window, 'beforeunload', function (e) {
+		if (!e.defaultPrevented) {
+			_documentIsUnloading = true; // WARN: a later handler might cancel the event
+		}
+	});
 });
 
 Q.beforeInit.addOnce(function () {

@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} חדש ב- {{toTitle}}",
         "Streams\/relatedFrom\/*": "נוסף ל- {{toTitle}} בתור {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} אזכרו אותך בתגובה",
-        "Streams\/call": "{{displayName}} מתקשר אליך"
+        "Streams\/call": "{{displayName}} מתקשר אליך",
+        "ManageEmailSubscriptions": "נהל את מנויי הדוא&quot;ל שלך",
+        "IfUnsubscribe": "אם ברצונך לבטל את המנוי"
     },
     "invite": {
         "messageContent": "{{displayName}} הזמין אותך ל {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "ההזמנות נשלחות מהמספר שלנו, שהחברים שלך עדיין לא מזהים. עקוב אחר טקסט קצר כדי להודיע להם על ההזמנה שהגיעה ממך, ולבקש מהם ללחוץ על הקישור.",
             "confirm": "ההזמנות נשלחות מהמספר שלנו, שהחברים שלך עדיין לא מזהים. האם ברצונך לעקוב אחר טקסט קצר כדי להודיע להם על ההזמנה שהגיעה ממך, ולבקש מהם ללחוץ על הקישור.",
-            "check": "היי, כרגע שלחתי לך הזמנה לאפליקציה {{app}}. בדוק את ה- SMS שלך ולחץ על הקישור!"
+            "check": "היי, כרגע שלחתי לך הזמנה לאפליקציה {{app}}. בדוק את ה- SMS שלך ולחץ על הקישור!",
+            "CheckYourMobile": "אנא בדוק SMS ופעל לפי ההוראות!"
         },
         "email": {
             "alert": "ההזמנות נשלחות מהדומיין שלנו, שהחברים שלך עדיין לא מזהים. עקוב אחר טקסט קצר כדי להודיע להם על ההזמנה שהגיעה ממך, ולבקש מהם ללחוץ על הקישור.",
             "confirm": "ההזמנות נשלחות מהדומיין שלנו, שהחברים שלך עדיין לא מזהים. האם ברצונך לעקוב אחר טקסט קצר כדי להודיע להם על ההזמנה שהגיעה ממך, ולבקש מהם ללחוץ על הקישור.",
             "subject": "קיבלת הזמנה?",
-            "body": "היי, כרגע שלחתי לך הזמנה לאפליקציה {{app}}. בדוק את הדוא&quot;ל שלך ולחץ על הקישור שם!"
+            "body": "היי, כרגע שלחתי לך הזמנה לאפליקציה {{app}}. בדוק את הדוא&quot;ל שלך ולחץ על הקישור שם!",
+            "CheckYourEmail": "אנא בדוק את הדוא&quot;ל שלך ועקוב אחר ההוראות!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "אפשר מיקרופון",
             "cameraBtn": "אפשר מצלמה",
             "cameraAndMicrophoneBtn": "אפשר מצלמה ומיקרופון"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "הוראות",
+            "permissionDenied": "הרשות ל {{kind}} נדחתה. כדי להשתמש בו, בצע את הצעדים הבאים:",
+            "point1": "עבור אל &quot;הגדרות&quot; -&gt; &quot;מתקדם&quot; -&gt; &quot;פרטיות ואבטחה&quot; -&gt; &quot;הגדרות אתר&quot; -&gt; &quot;מצלמה&quot; או &quot;הגדרות אתר&quot; -&gt; &quot;מיקרופון&quot;",
+            "point2": "הסר את {{hostname}} מרשימת &quot;חסום&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "הוראות",
+            "permissionDenied": "הרשות ל {{kind}} נדחתה. טען מחדש עמוד זה ואשר את הגישה ל- {{kind}} כדי להצטרף לוועידה."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "הוראות",
+            "permissionDenied": "הרשות ל {{kind}} נדחתה. כדי להשתמש בו, בצע את הצעדים הבאים:",
+            "point1": "עבור אל הגדרות Android שלך",
+            "point2": "פתח את &quot;אפליקציות והודעות&quot;",
+            "point3": "מצא את &quot;{{communityName}}&quot; ופתח אותו",
+            "point4": "הקש על הרשאות",
+            "point5": "הפעל את {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "הוראות",
+            "permissionDenied": "הרשות ל {{kind}} נדחתה. כדי להשתמש בו, בצע את הצעדים הבאים:",
+            "point1": "עבור אל הגדרות iOS שלך",
+            "point2": "פתח את &quot;פרטיות&quot;",
+            "point3": "מצא את {{kind}} ופתח אותו",
+            "point4": "מצא את &quot;{{communityName}}&quot; והפעל"
+        },
+        "notices": {
+            "youJoinedRoom": "הצטרפת לחדר",
+            "joining": "הצטרפות: {{userName}}",
+            "sbLeftRoom": "{{userName}} עזב את החדר",
+            "youLeftRoom": "עזבת את החדר",
+            "codeCopied": "עזבת את החדר",
+            "sbBeganFbLive": "{{userName}} החל לשדר שיחה זו בפייסבוק",
+            "sbStoppedFbLive": "{{userName}} הפסיק לשדר שיחה זו בפייסבוק",
+            "youBeganFbLive": "התחלת לשדר שיחה זו בפייסבוק",
+            "youStoppedFbLive": "הפסקת לשדר שיחה זו בפייסבוק",
+            "linkCopiedToCb": "קישור הועתק ללוח",
+            "codeCopiedToCb": "הקוד הועתק ללוח",
+            "userHasNoVideo": "למשתתף אין סרטון"
+        },
+        "settingsPopup": {
+            "webCamera": "מצלמת רשת",
+            "screenSharing": "שיתוף מסך",
+            "shareAnotherScreen": "שתף מסך אחר",
+            "turnOffCameras": "כבה את כל המצלמות",
+            "startFBLive": "התחל פייסבוק Livestream",
+            "stopFBLive": "עצור את הפייסבוק Livestream",
+            "fbLiveTitle": "כותרת חיה",
+            "fbLiveDescription": "תיאור חי",
+            "fbOnlyMeLiveAccess": "רק אני",
+            "fbFriendsAccess": "חברים",
+            "fbPublicAccess": "ציבורי",
+            "fbStartLive": "לך תחיה",
+            "fbStopLive": "סוף לייב",
+            "fbEmbedCode": "הטמע",
+            "copy": "עותק"
+        },
+        "participantsPopup": {
+            "disconnect": "נתק",
+            "floatingScreens": "מסכים צפים",
+            "tiledScreens": "מסכים רעפים",
+            "loudestExceptMe": "הכי חזק חוץ ממני",
+            "maximizeLoudest": "למקסם את הרם ביותר",
+            "staticMaximized": "סטטי ממקסם",
+            "manual": "מדריך ל"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "שיחה בזמן אמת",
             "description": "שיחת וידאו \/ שמע בזמן אמת"
         }
+    },
+    "participating": {
+        "Title": "כותרת",
+        "Subscribed": "מנוי",
+        "Participants": "המשתתפים",
+        "AreYouSureRemoveIdentifier": "האם אתה בטוח להסיר את המזהה הזה?",
+        "AreYouSureUnsubscribeIdentifier": "האם אתה בטוח לבטל את הרישום של מזהה זה? זה יכבה התראות למזהה זה.",
+        "AreYouSureUnsubscribeDevice": "האם אתה בטוח לבטל את הרישום למכשיר זה? זה יכבה את ההתראות למכשיר זה.",
+        "Identifiers": "מזהים",
+        "Devices": "מכשירים",
+        "Streams": "נחלים"
     }
 }

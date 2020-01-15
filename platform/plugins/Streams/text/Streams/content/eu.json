@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Zure lagunek oraindik ez dute ezagutzen gonbidatuak bidaltzen dira. Jarrai ezazu testu azkar batekin, gonbidapena zuretzako etorri zitzaizun jakin dezaten, estekan klik eginez.",
             "confirm": "Zure lagunek oraindik ez dute ezagutzen gonbidatuak bidaltzen dira. Nahi al duzu testu azkar baten jarraipena egitea, gonbidapena zuretzako etorri zena jakinarazteko.",
-            "check": "Hey, gonbidapen bat bidali dizuet {{app}} aplikazioan. Egiaztatu zure sms eta egin klik estekan!"
+            "check": "Hey, gonbidapen bat bidali dizuet {{app}} aplikazioan. Egiaztatu zure sms eta egin klik estekan!",
+            "CheckYourMobile": "Mesedez, egiaztatu SMS eta jarraitu argibideak!"
         },
         "email": {
             "alert": "Gonbidapenak gure domeinutik bidaltzen dira eta oraindik zure lagunek ez dute ezagutzen. Jarrai ezazu testu azkar batekin, gonbidapena zuretzako etorri zitzaizun jakin dezaten, estekan klik eginez.",
             "confirm": "Gonbidapenak gure domeinutik bidaltzen dira eta oraindik zure lagunek ez dute ezagutzen. Nahi al duzu testu azkar baten jarraipena egitea, gonbidapena zuretzako etorri zena jakinarazteko.",
             "subject": "Gonbidapen bat lortu al duzu?",
-            "body": "Hey, gonbidapen bat bidali dizuet {{app}} aplikazioan. Egiaztatu mezu elektronikoa eta egin klik estekan dagoen estekan."
+            "body": "Hey, gonbidapen bat bidali dizuet {{app}} aplikazioan. Egiaztatu mezu elektronikoa eta egin klik estekan dagoen estekan.",
+            "CheckYourEmail": "Mesedez, egiaztatu posta elektronikoa eta jarraitu argibideak!"
         }
     },
     "participating": {
         "Title": "Izenburua",
         "Subscribed": "harpidetutako",
-        "Participants": "Parte-hartzaileak"
+        "Participants": "Parte-hartzaileak",
+        "AreYouSureRemoveIdentifier": "Ziur identifikatzaile hori kentzen duzula?",
+        "AreYouSureUnsubscribeIdentifier": "Ziur identifikatzaile hau ezabatu nahi duzula? Identifikatzaile honi jakinarazpenak desaktibatuko ditu.",
+        "AreYouSureUnsubscribeDevice": "Ziur al zaude harpidetu gailua? Telefonoari jakinarazpenak desaktibatuko ditu.",
+        "Identifiers": "Identifikatzailek",
+        "Devices": "gailuak",
+        "Streams": "Arroyos"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Gaitu mikrofonoa",
             "cameraBtn": "Gaitu kamera",
             "cameraAndMicrophoneBtn": "Gaitu Kamera eta Mikrofonoa"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Argibideak",
+            "permissionDenied": "{{kind}} erabiltzailearen baimena ukatu egin da. Erabiltzeko jarraitu urrats hauek:",
+            "point1": "Joan &quot;Ezarpenak&quot; -&gt; &quot;Aurreratua&quot; -&gt; &quot;Pribatutasuna eta segurtasuna&quot; -&gt; &quot;Gunearen ezarpenak&quot; -&gt; &quot;Kamera&quot; edo &quot;Gunearen ezarpenak&quot; -&gt; &quot;Mikrofonoa&quot;",
+            "point2": "Kendu {{hostname}} &quot;Blokeatu&quot; zerrendatik"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Argibideak",
+            "permissionDenied": "{{kind}} erabiltzailearen baimena ukatu egin da. Orrialde hau berriro kargatu eta berretsi {{kind}} sarbidea kongresura joateko."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Argibideak",
+            "permissionDenied": "{{kind}} erabiltzailearen baimena ukatu egin da. Erabiltzeko jarraitu urrats hauek:",
+            "point1": "Joan zure Android ezarpenetara",
+            "point2": "Ireki &quot;Aplikazioak eta jakinarazpenak&quot;",
+            "point3": "Bilatu &quot;{{communityName}}&quot; eta ireki ezazu",
+            "point4": "Punteatu Baimenak",
+            "point5": "Gaitu {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Argibideak",
+            "permissionDenied": "{{kind}} erabiltzailearen baimena ukatu egin da. Erabiltzeko jarraitu urrats hauek:",
+            "point1": "Joan zure iOS ezarpenetara",
+            "point2": "Ireki &quot;Pribatutasuna&quot;",
+            "point3": "Bilatu {{kind}} eta ireki",
+            "point4": "Bilatu &quot;{{communityName}}&quot; eta gaitu"
+        },
+        "notices": {
+            "youJoinedRoom": "Gelan sartu zara",
+            "joining": "Bat egiten: {{userName}}",
+            "sbLeftRoom": "{{userName}} gelatik irten da",
+            "youLeftRoom": "Gelatik irten zara",
+            "codeCopied": "Gelatik irten zara",
+            "sbBeganFbLive": "{{userName}} Facebook-ek deia emititzen hasi zen",
+            "sbStoppedFbLive": "{{userName}}-ek deia hau Facebook-en emititzen utzi du",
+            "youBeganFbLive": "Deia hau Facebooken emititzen hasi zinen",
+            "youStoppedFbLive": "Dei hau Facebook-en emititzen utzi zenuen",
+            "linkCopiedToCb": "Esteka arbelean kopiatuta",
+            "codeCopiedToCb": "Arbelera kopiatutako kodea",
+            "userHasNoVideo": "Parte hartzaileak ez du bideorik"
+        },
+        "settingsPopup": {
+            "webCamera": "Web Kamera",
+            "screenSharing": "Pantaila partekatzea",
+            "shareAnotherScreen": "Partekatu beste pantaila",
+            "turnOffCameras": "Kamera guztiak itzali",
+            "startFBLive": "Hasi Facebook Livestream",
+            "stopFBLive": "Gelditu Facebook Livestream",
+            "fbLiveTitle": "Zuzeneko Izenburua",
+            "fbLiveDescription": "Zuzeneko deskribapena",
+            "fbOnlyMeLiveAccess": "Ni bakarrik",
+            "fbFriendsAccess": "Lagunak",
+            "fbPublicAccess": "Publiko",
+            "fbStartLive": "Joan Bizi",
+            "fbStopLive": "Amaitu Live",
+            "fbEmbedCode": "txertatu",
+            "copy": "Copy"
+        },
+        "participantsPopup": {
+            "disconnect": "Deskonektatu",
+            "floatingScreens": "Pantaila mugikorrak",
+            "tiledScreens": "Teilatu pantailak",
+            "loudestExceptMe": "Ozenena ni izan ezik",
+            "maximizeLoudest": "Ahalik eta ozenena",
+            "staticMaximized": "Estatiko Maximizatua",
+            "manual": "Eskuzko"
         }
     },
     "types": {

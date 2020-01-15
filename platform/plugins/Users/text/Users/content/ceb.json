@@ -102,5 +102,11 @@
         "noLongerUsing": "Dili ka na konektado sa {{platform}} ingon",
         "doAuth": "Pag-log sa niini nga account",
         "doSwitch": "Pagbalhin sa kini nga asoy"
+    },
+    "roles": {
+        "Owner": "Tag-iya",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Bisita"
     }
 }

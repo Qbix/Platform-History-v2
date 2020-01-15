@@ -98,7 +98,8 @@
 			"iconType": "wavatar",
 			"gravatar": true,
 			"noRegister": false,
-			"notice": "{{#if displayName}}You have been logged in as {{displayName}}{{else}}Logged into another account.{{/if}}"
+			"notice": "{{#if displayName}}You have been logged in as {{displayName}}{{else}}Logged into another account.{{/if}}",
+			"setLanguage": true
 		},
 		"paths": {
 			"icons": "files/Users/icons",

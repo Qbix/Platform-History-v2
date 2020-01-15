@@ -102,5 +102,11 @@
         "noLongerUsing": "ʻAʻole pili ʻoe ma kahi {{platform}} e like me",
         "doAuth": "Kākau pū me kēia waihona",
         "doSwitch": "Hoʻololi i kēia moʻokāki"
+    },
+    "roles": {
+        "Owner": "Ka mea nona",
+        "Admin": "Kauka",
+        "Member": "Lālā",
+        "Guest": "Kāhea"
     }
 }

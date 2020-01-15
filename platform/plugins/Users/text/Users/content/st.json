@@ -102,5 +102,11 @@
         "noLongerUsing": "Ha o sa kopantsoe le {{platform}} joalo ka",
         "doAuth": "Kena ka akhaonto ena",
         "doSwitch": "Fetolela ak&#39;haonte ena"
+    },
+    "roles": {
+        "Owner": "Mong",
+        "Admin": "Tsamaiso",
+        "Member": "Setho",
+        "Guest": "Moeti"
     }
 }

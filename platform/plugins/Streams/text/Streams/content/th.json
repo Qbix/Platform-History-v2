@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "คำเชิญจะถูกส่งจากหมายเลขของเราซึ่งเพื่อนของคุณยังจำไม่ได้ ติดตามด้วยข้อความด่วนเพื่อให้พวกเขารู้ว่าคำเชิญมาจากคุณขอให้พวกเขาคลิกที่ลิงค์",
             "confirm": "คำเชิญจะถูกส่งจากหมายเลขของเราซึ่งเพื่อนของคุณยังจำไม่ได้ คุณต้องการติดตามข้อความสั้น ๆ เพื่อให้พวกเขาทราบว่าข้อความเชิญมาจากคุณขอให้พวกเขาคลิกลิงก์",
-            "check": "สวัสดีฉันเพิ่งส่งคำเชิญให้คุณไปยังแอป {{app}} กรุณาตรวจสอบ sms ของคุณแล้วคลิกที่ลิงค์!"
+            "check": "สวัสดีฉันเพิ่งส่งคำเชิญให้คุณไปยังแอป {{app}} กรุณาตรวจสอบ sms ของคุณแล้วคลิกที่ลิงค์!",
+            "CheckYourMobile": "โปรดตรวจสอบ SMS และทำตามคำแนะนำ!"
         },
         "email": {
             "alert": "คำเชิญจะถูกส่งจากโดเมนของเราซึ่งเพื่อนของคุณยังจำไม่ได้ ติดตามด้วยข้อความด่วนเพื่อให้พวกเขารู้ว่าคำเชิญมาจากคุณขอให้พวกเขาคลิกที่ลิงค์",
             "confirm": "คำเชิญจะถูกส่งจากโดเมนของเราซึ่งเพื่อนของคุณยังจำไม่ได้ คุณต้องการติดตามข้อความสั้น ๆ เพื่อให้พวกเขาทราบว่าข้อความเชิญมาจากคุณขอให้พวกเขาคลิกลิงก์",
             "subject": "คุณได้รับคำเชิญหรือไม่",
-            "body": "สวัสดีฉันเพิ่งส่งคำเชิญให้คุณไปยังแอป {{app}} โปรดตรวจสอบอีเมลของคุณและคลิกลิงก์ในนั้น!"
+            "body": "สวัสดีฉันเพิ่งส่งคำเชิญให้คุณไปยังแอป {{app}} โปรดตรวจสอบอีเมลของคุณและคลิกลิงก์ในนั้น!",
+            "CheckYourEmail": "โปรดตรวจสอบอีเมลของคุณและทำตามคำแนะนำ!"
         }
     },
     "participating": {
         "Title": "หัวข้อ",
         "Subscribed": "สมัครเป็นสมาชิก",
-        "Participants": "ผู้เข้าร่วม"
+        "Participants": "ผู้เข้าร่วม",
+        "AreYouSureRemoveIdentifier": "คุณแน่ใจที่จะลบตัวระบุนี้?",
+        "AreYouSureUnsubscribeIdentifier": "คุณแน่ใจหรือไม่ยกเลิกการสมัครตัวระบุนี้ มันจะปิดการแจ้งเตือนไปยังตัวระบุนี้",
+        "AreYouSureUnsubscribeDevice": "คุณแน่ใจหรือว่ายกเลิกการสมัครอุปกรณ์นี้ มันจะปิดการแจ้งเตือนไปยังอุปกรณ์นี้",
+        "Identifiers": "ตัวบ่งชี้",
+        "Devices": "อุปกรณ์",
+        "Streams": "ลำธาร"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "เปิดใช้งานไมโครโฟน",
             "cameraBtn": "เปิดใช้งานกล้อง",
             "cameraAndMicrophoneBtn": "เปิดใช้งานกล้องและไมโครโฟน"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "คำแนะนำ",
+            "permissionDenied": "ปฏิเสธสิทธิ์สำหรับ {{kind}} หากต้องการใช้โปรดปฏิบัติตามขั้นตอนเหล่านี้:",
+            "point1": "ไปที่ &quot;การตั้งค่า&quot; -&gt; &quot;ขั้นสูง&quot; -&gt; &quot;ความเป็นส่วนตัวและความปลอดภัย&quot; -&gt; &quot;การตั้งค่าไซต์&quot; -&gt; &quot;กล้อง&quot; หรือ &quot;การตั้งค่าไซต์&quot; -&gt; &quot;ไมโครโฟน&quot;",
+            "point2": "ลบ {{hostname}} ออกจากรายการ &quot;บล็อก&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "คำแนะนำ",
+            "permissionDenied": "ปฏิเสธสิทธิ์สำหรับ {{kind}} โปรดโหลดหน้านี้ซ้ำและยืนยันการเข้าถึง {{kind}} เพื่อเข้าร่วมการประชุม"
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "คำแนะนำ",
+            "permissionDenied": "ปฏิเสธสิทธิ์สำหรับ {{kind}} หากต้องการใช้โปรดปฏิบัติตามขั้นตอนเหล่านี้:",
+            "point1": "ไปที่การตั้งค่า Android ของคุณ",
+            "point2": "เปิด &quot;แอปและการแจ้งเตือน&quot;",
+            "point3": "ค้นหา &quot;{{communityName}}&quot; และเปิด",
+            "point4": "แตะที่สิทธิ์",
+            "point5": "เปิดใช้งาน {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "คำแนะนำ",
+            "permissionDenied": "ปฏิเสธสิทธิ์สำหรับ {{kind}} หากต้องการใช้โปรดปฏิบัติตามขั้นตอนเหล่านี้:",
+            "point1": "ไปที่การตั้งค่า iOS ของคุณ",
+            "point2": "เปิด &quot;ความเป็นส่วนตัว&quot;",
+            "point3": "ค้นหา {{kind}} และเปิด",
+            "point4": "ค้นหา &quot;{{communityName}}&quot; และเปิดใช้งาน"
+        },
+        "notices": {
+            "youJoinedRoom": "คุณเข้าร่วมห้อง",
+            "joining": "กำลังเข้าร่วม: {{userName}}",
+            "sbLeftRoom": "{{userName}} ออกจากห้องไป",
+            "youLeftRoom": "คุณออกจากห้องไป",
+            "codeCopied": "คุณออกจากห้องไป",
+            "sbBeganFbLive": "{{userName}} เริ่มแพร่ภาพการโทรนี้ใน Facebook",
+            "sbStoppedFbLive": "{{userName}} หยุดถ่ายทอดการโทรนี้ใน Facebook",
+            "youBeganFbLive": "คุณเริ่มแพร่ภาพการโทรนี้ใน Facebook",
+            "youStoppedFbLive": "คุณหยุดแพร่ภาพการโทรนี้ใน Facebook",
+            "linkCopiedToCb": "ลิงก์คัดลอกไปยังคลิปบอร์ด",
+            "codeCopiedToCb": "รหัสคัดลอกไปยังคลิปบอร์ด",
+            "userHasNoVideo": "ผู้เข้าร่วมไม่มีวิดีโอ"
+        },
+        "settingsPopup": {
+            "webCamera": "กล้องเว็บ",
+            "screenSharing": "การแชร์หน้าจอ",
+            "shareAnotherScreen": "แบ่งปันหน้าจออื่น",
+            "turnOffCameras": "ปิดกล้องทั้งหมด",
+            "startFBLive": "เริ่ม Facebook Livestream",
+            "stopFBLive": "หยุด Livestream Facebook",
+            "fbLiveTitle": "ชื่อสด",
+            "fbLiveDescription": "คำอธิบายสด",
+            "fbOnlyMeLiveAccess": "แค่ฉัน",
+            "fbFriendsAccess": "เพื่อน",
+            "fbPublicAccess": "สาธารณะ",
+            "fbStartLive": "ใช้ชีวิต",
+            "fbStopLive": "จบการแข่งขัน",
+            "fbEmbedCode": "ฝัง",
+            "copy": "สำเนา"
+        },
+        "participantsPopup": {
+            "disconnect": "ปลด",
+            "floatingScreens": "หน้าจอลอย",
+            "tiledScreens": "หน้าจอกระเบื้อง",
+            "loudestExceptMe": "ดังยกเว้นฉัน",
+            "maximizeLoudest": "ขยายใหญ่สุด",
+            "staticMaximized": "สถิตสูงสุด",
+            "manual": "คู่มือ"
         }
     },
     "types": {

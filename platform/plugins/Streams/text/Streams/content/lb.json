@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Nei {{relationDisplayType}} an {{toTitle}}",
         "Streams\/relatedFrom\/*": "Zu {{toTitle}} als {{relationDisplayType}} bäigefüügt",
         "Streams\/mention": "{{&call 'avatar.displayName'}} huet Iech an engem Kommentar ernimmt",
-        "Streams\/call": "{{displayName}} rufft Iech un"
+        "Streams\/call": "{{displayName}} rufft Iech un",
+        "ManageEmailSubscriptions": "managen Är E-Mail Abonnementer",
+        "IfUnsubscribe": "Wann Dir Iech ofschreift"
     },
     "invite": {
         "messageContent": "{{displayName}} invitéiert Iech op {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Invitatioune gi vun eiser Zuel geschéckt, déi Är Frënn net erkenne kënnen. Follegt mat engem schnellen Text, fir se ze wëssen, datt d&#39;Invitatioun vun Iech komm ass a se gefrot huet fir op de Link ze klicken.",
             "confirm": "Invitatioune gi vun eiser Zuel geschéckt, déi Är Frënn net erkenne kënnen. Wëllt Dir Iech mat engem schnellen Text ze weisen, fir ze wëssen datt d&#39;Invitatioun vun Iech komm ass a se gefrot ze klickt op de Link.",
-            "check": "Hey, ech hunn Iech just e Invitatioun an der {{app}} App geschéckt. Kuckt weg Är SMS un an klickt op de Link!"
+            "check": "Hey, ech hunn Iech just e Invitatioun an der {{app}} App geschéckt. Kuckt weg Är SMS un an klickt op de Link!",
+            "CheckYourMobile": "Préift w.e.g. SMS a befollegt d&#39;Instruktioune!"
         },
         "email": {
             "alert": "Invitatioune ginn aus eiser Domain geschéckt, déi Är Frënn net erkennen. Follegt mat engem schnellen Text, fir se ze wëssen, datt d&#39;Invitatioun vun Iech komm ass a se gefrot huet fir op de Link ze klicken.",
             "confirm": "Invitatioune ginn aus eiser Domain geschéckt, déi Är Frënn net erkennen. Wëllt Dir Iech mat engem schnellen Text ze weisen, fir ze wëssen datt d&#39;Invitatioun vun Iech komm ass a se gefrot ze klickt op de Link.",
             "subject": "Hutt Dir eng Invitatioun?",
-            "body": "Hey, ech hunn Iech just e Invitatioun an der {{app}} App geschéckt. Gidd weg d&#39;E-Mail an a klickt op de Link hei!"
+            "body": "Hey, ech hunn Iech just e Invitatioun an der {{app}} App geschéckt. Gidd weg d&#39;E-Mail an a klickt op de Link hei!",
+            "CheckYourEmail": "Préift w.e.g. Är E-Mail a befollegt d&#39;Instruktioune!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Aktivéiert Mikrofon",
             "cameraBtn": "Aktivéiert Kamera",
             "cameraAndMicrophoneBtn": "Aktivéiert Kamera a Mikrofon"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Uweisungen",
+            "permissionDenied": "Erlaabnes fir {{kind}} refuséiert. Fir et ze benotzen w.e.g. befollegt dës Schrëtt:",
+            "point1": "Gitt op &quot;Settings&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Privatsphär a Sécherheet&quot; -&gt; &quot;Site Astellungen&quot; -&gt; &quot;Camera&quot; oder &quot;Site Astellungen&quot; -&gt; &quot;Mikrofon&quot;",
+            "point2": "Ewech {{hostname}} aus der &quot;Block&quot; Lëscht"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Uweisungen",
+            "permissionDenied": "Erlaabnes fir {{kind}} refuséiert. Reload dës Säit nei a confirméiert den Zougang zu {{kind}} fir un d&#39;Konferenz matzemaachen."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Uweisungen",
+            "permissionDenied": "Erlaabnes fir {{kind}} refuséiert. Fir et ze benotzen w.e.g. befollegt dës Schrëtt:",
+            "point1": "Gitt op Är Android Astellunge",
+            "point2": "Open &quot;Apps &amp; Notifikatiounen&quot;",
+            "point3": "Fannt &quot;{{communityName}}&quot; an op",
+            "point4": "Tippen op Permissiounen",
+            "point5": "Aktivéiert {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Uweisungen",
+            "permissionDenied": "Erlaabnes fir {{kind}} refuséiert. Fir et ze benotzen w.e.g. befollegt dës Schrëtt:",
+            "point1": "Gitt op Är iOS Parameteren",
+            "point2": "Open &quot;Privatsphär&quot;",
+            "point3": "Fannt {{kind}} an op",
+            "point4": "Fannt &quot;{{communityName}}&quot; an aktivéiert"
+        },
+        "notices": {
+            "youJoinedRoom": "Dir sidd an de Raum komm",
+            "joining": "Bäitrieden: {{userName}}",
+            "sbLeftRoom": "{{userName}} huet de Raum verlooss",
+            "youLeftRoom": "Dir hutt de Raum verlooss",
+            "codeCopied": "Dir hutt de Raum verlooss",
+            "sbBeganFbLive": "{{userName}} huet dësen Opruff bei Facebook ausgestraalt",
+            "sbStoppedFbLive": "{{userName}} huet opgehalen dës Ruff op Facebook ze iwwerdroen",
+            "youBeganFbLive": "Dir hutt dësen Uruff bei Facebook ausgestraalt",
+            "youStoppedFbLive": "Dir hutt opgehalen dësen Uruff an Facebook ze Senden",
+            "linkCopiedToCb": "Link kopéiert op Clipboard",
+            "codeCopiedToCb": "Code kopéiert op Clipboard",
+            "userHasNoVideo": "De Participant huet kee Video"
+        },
+        "settingsPopup": {
+            "webCamera": "Webkamera",
+            "screenSharing": "Écran Deele",
+            "shareAnotherScreen": "Deelt en aneren Ecran",
+            "turnOffCameras": "All Kameraen ausschalten",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "fbLiveTitle": "Live Tittel",
+            "fbLiveDescription": "Live Beschreiwung",
+            "fbOnlyMeLiveAccess": "Nëmmen ech",
+            "fbFriendsAccess": "Frënn",
+            "fbPublicAccess": "Ëffentlech",
+            "fbStartLive": "Gitt Live",
+            "fbStopLive": "End Live",
+            "fbEmbedCode": "Embedden",
+            "copy": "Kopie"
+        },
+        "participantsPopup": {
+            "disconnect": "Trennen",
+            "floatingScreens": "Schwammschiirme",
+            "tiledScreens": "Pechpabeier Schiirme",
+            "loudestExceptMe": "Héchstens ausser mir",
+            "maximizeLoudest": "Maximaliséieren Lueft",
+            "staticMaximized": "Statesch Maximaliséiert",
+            "manual": "Handbuch"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Real-Time Call",
             "description": "en Echtzäit Video \/ Audio Uruff"
         }
+    },
+    "participating": {
+        "Title": "Titel",
+        "Subscribed": "Abonnéiert",
+        "Participants": "Participanten",
+        "AreYouSureRemoveIdentifier": "Sidd Dir sécher dësen Identifikator ze läschen?",
+        "AreYouSureUnsubscribeIdentifier": "Sidd Dir sécher dësen Identifizéier ofgeschriwwen? Et schalt Notifikatiounen op dësen Identifizéierer aus.",
+        "AreYouSureUnsubscribeDevice": "Sidd Dir sécher dësen Apparat ofgemellt? Et schalt Notifikatiounen op dësem Apparat aus.",
+        "Identifiers": "Identifizéierer",
+        "Devices": "Apparater",
+        "Streams": "Baachen"
     }
 }

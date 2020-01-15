@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Uzaicinājumi tiek nosūtīti no mūsu numura, ko jūsu draugi vēl neatpazīst. Sekojiet līdzi ātram tekstam, lai ļautu viņiem uzzināt, ka ielūgums ir no jums, lūdzot tos noklikšķināt uz saites.",
             "confirm": "Uzaicinājumi tiek nosūtīti no mūsu numura, ko jūsu draugi vēl neatpazīst. Vai vēlaties sekot līdzi ātram tekstam, lai ļautu viņiem uzzināt, ka ielūgums ir no jums, lūdzot tos noklikšķināt uz saites.",
-            "check": "Hei, es tikai nosūtīju jums uzaicinājumu uz {{app}} lietotni. Lūdzu, pārbaudiet savu SMS un noklikšķiniet uz saites!"
+            "check": "Hei, es tikai nosūtīju jums uzaicinājumu uz {{app}} lietotni. Lūdzu, pārbaudiet savu SMS un noklikšķiniet uz saites!",
+            "CheckYourMobile": "Lūdzu, pārbaudiet SMS un izpildiet instrukcijas!"
         },
         "email": {
             "alert": "Uzaicinājumi tiek nosūtīti no mūsu domēna, ko jūsu draugi vēl neatpazīst. Sekojiet līdzi ātram tekstam, lai ļautu viņiem uzzināt, ka ielūgums ir no jums, lūdzot tos noklikšķināt uz saites.",
             "confirm": "Uzaicinājumi tiek nosūtīti no mūsu domēna, ko jūsu draugi vēl neatpazīst. Vai vēlaties sekot līdzi ātram tekstam, lai ļautu viņiem uzzināt, ka ielūgums ir no jums, lūdzot tos noklikšķināt uz saites.",
             "subject": "Vai jūs saņēmāt uzaicinājumu?",
-            "body": "Hei, es tikai nosūtīju jums uzaicinājumu uz {{app}} lietotni. Lūdzu, pārbaudiet savu e-pastu un noklikšķiniet uz saites!"
+            "body": "Hei, es tikai nosūtīju jums uzaicinājumu uz {{app}} lietotni. Lūdzu, pārbaudiet savu e-pastu un noklikšķiniet uz saites!",
+            "CheckYourEmail": "Lūdzu, pārbaudiet savu e-pastu un izpildiet instrukcijas!"
         }
     },
     "participating": {
         "Title": "Nosaukums",
         "Subscribed": "Abonēts",
-        "Participants": "Dalībnieki"
+        "Participants": "Dalībnieki",
+        "AreYouSureRemoveIdentifier": "Vai tiešām noņemt šo identifikatoru?",
+        "AreYouSureUnsubscribeIdentifier": "Vai tiešām atteicāties no šī identifikatora abonēšanas? Tas izslēgs paziņojumus šim identifikatoram.",
+        "AreYouSureUnsubscribeDevice": "Vai tiešām atteicāties no šīs ierīces abonēšanas? Tas izslēgs paziņojumus šai ierīcei.",
+        "Identifiers": "Identifikatori",
+        "Devices": "Ierīces",
+        "Streams": "Straumes"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Iespējot mikrofonu",
             "cameraBtn": "Iespējot kameru",
             "cameraAndMicrophoneBtn": "Iespējot kameru un mikrofonu"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instrukcijas",
+            "permissionDenied": "Vietnei {{kind}} nav atļauta. Lai to lietotu, lūdzu, rīkojieties šādi:",
+            "point1": "Atveriet sadaļu &quot;Iestatījumi&quot; -&gt; &quot;Papildu&quot; -&gt; &quot;Konfidencialitāte un drošība&quot; -&gt; &quot;Vietnes iestatījumi&quot; -&gt; &quot;Kamera&quot; vai &quot;Vietnes iestatījumi&quot; -&gt; &quot;Mikrofons&quot;",
+            "point2": "Noņemiet no saraksta “Bloķēt” {{hostname}}"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instrukcijas",
+            "permissionDenied": "Vietnei {{kind}} nav atļauta. Lūdzu, atkārtoti ielādējiet šo lapu un apstipriniet piekļuvi vietnei {{kind}}, lai pievienotos konferencei."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instrukcijas",
+            "permissionDenied": "Vietnei {{kind}} nav atļauta. Lai to lietotu, lūdzu, rīkojieties šādi:",
+            "point1": "Atveriet savus Android iestatījumus",
+            "point2": "Atveriet lietotnes un paziņojumus.",
+            "point3": "Atrodiet “{{communityName}}” un atveriet to",
+            "point4": "Pieskarieties Atļaujas",
+            "point5": "Iespējot {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instrukcijas",
+            "permissionDenied": "Vietnei {{kind}} nav atļauta. Lai to lietotu, lūdzu, rīkojieties šādi:",
+            "point1": "Atveriet iOS iestatījumus",
+            "point2": "Atveriet “Konfidencialitāte”",
+            "point3": "Atrodiet {{kind}} un atveriet to",
+            "point4": "Atrodiet “{{communityName}}” un iespējojiet"
+        },
+        "notices": {
+            "youJoinedRoom": "Jūs pievienojāties istabai",
+            "joining": "Pievienošanās: {{userName}}",
+            "sbLeftRoom": "{{userName}} atstāja istabu",
+            "youLeftRoom": "Jūs atstājāt istabu",
+            "codeCopied": "Jūs atstājāt istabu",
+            "sbBeganFbLive": "{{userName}} sāka pārraidīt šo zvanu Facebook",
+            "sbStoppedFbLive": "{{userName}} pārtrauca šī zvana pārraidi Facebook",
+            "youBeganFbLive": "Jūs sākāt šī zvana pārraidi Facebook",
+            "youStoppedFbLive": "Jūs pārtraucāt šī zvana pārraidi Facebook",
+            "linkCopiedToCb": "Saite kopēta starpliktuvē",
+            "codeCopiedToCb": "Kods nokopēts starpliktuvē",
+            "userHasNoVideo": "Dalībniekam nav video"
+        },
+        "settingsPopup": {
+            "webCamera": "Web kamera",
+            "screenSharing": "Ekrāna koplietošana",
+            "shareAnotherScreen": "Kopīgojiet citu ekrānu",
+            "turnOffCameras": "Izslēdziet visas kameras",
+            "startFBLive": "Sāciet Facebook tiešraidi",
+            "stopFBLive": "Pārtrauciet Facebook tiešraidi",
+            "fbLiveTitle": "Tiešraides nosaukums",
+            "fbLiveDescription": "Tiešraides apraksts",
+            "fbOnlyMeLiveAccess": "Tikai es",
+            "fbFriendsAccess": "Draugi",
+            "fbPublicAccess": "Publisks",
+            "fbStartLive": "Dodieties dzīvot",
+            "fbStopLive": "Beigt tiešraidi",
+            "fbEmbedCode": "Iegult",
+            "copy": "Kopēt"
+        },
+        "participantsPopup": {
+            "disconnect": "Atvienojiet",
+            "floatingScreens": "Peldošie ekrāni",
+            "tiledScreens": "Ekrāni ar flīzēm",
+            "loudestExceptMe": "Skaļāk, izņemot mani",
+            "maximizeLoudest": "Maksimizēt skaļākos",
+            "staticMaximized": "Statisks maksimizēts",
+            "manual": "Rokasgrāmata"
         }
     },
     "types": {

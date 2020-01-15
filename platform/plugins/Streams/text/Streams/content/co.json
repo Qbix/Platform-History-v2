@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Novu {{relationDisplayType}} in {{toTitle}}",
         "Streams\/relatedFrom\/*": "Agghiuntu à {{toTitle}} cum&#39;è {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ci hà mintuatu in un cumentu",
-        "Streams\/call": "{{displayName}} vi chjamanu"
+        "Streams\/call": "{{displayName}} vi chjamanu",
+        "ManageEmailSubscriptions": "gestite i vostri abbonamenti per email",
+        "IfUnsubscribe": "Se vulete desubscrive"
     },
     "invite": {
         "messageContent": "{{displayName}} ti invita à {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "L&#39;invite hè inviata da u nostru numeru, chì i vostri amichi ùn ricanùvanu micca. Fate una prova à un testu rapidu per dà li sapete chì l&#39;invitazione hè venuta da voi, dumandanduli di cliccà u ligame.",
             "confirm": "L&#39;invite hè inviata da u nostru numeru, chì i vostri amichi ùn ricanùvanu micca. Ti piacerebbe seguitu cun un testu rapidu per fà sapè chì l&#39;invite venia da voi, dumandanduli di cliccà u ligame.",
-            "check": "Hey, aghju mandatu appena una invitazione à l&#39;applicazione {{app}}. Per piacè, verificate u vostru sms è cliccate nantu à u ligame!"
+            "check": "Hey, aghju mandatu appena una invitazione à l&#39;applicazione {{app}}. Per piacè, verificate u vostru sms è cliccate nantu à u ligame!",
+            "CheckYourMobile": "Verificate SMS è seguitate struzzioni!"
         },
         "email": {
             "alert": "I inviti sò inviati da u nostru duminiu chì i vostri amichi ùn ricunnosce micca. Fate una prova à un testu rapidu per dà li sapete chì l&#39;invitazione hè venuta da voi, dumandanduli di cliccà u ligame.",
             "confirm": "I inviti sò inviati da u nostru duminiu chì i vostri amichi ùn ricunnosce micca. Ti piacerebbe seguitu cun un testu rapidu per fà sapè chì l&#39;invite venia da voi, dumandanduli di cliccà u ligame.",
             "subject": "Avete ottenutu un invita?",
-            "body": "Hey, aghju mandatu appena una invitazione à l&#39;applicazione {{app}}. Per piacè, verificate u vostru email è cliccate nantu à u ligame!"
+            "body": "Hey, aghju mandatu appena una invitazione à l&#39;applicazione {{app}}. Per piacè, verificate u vostru email è cliccate nantu à u ligame!",
+            "CheckYourEmail": "Verificate u vostru email è seguitate struzzioni!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Habilita u Microfonu",
             "cameraBtn": "Habilita a Camera",
             "cameraAndMicrophoneBtn": "Habilita a Camera è u Microfonu"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Istruzzioni",
+            "permissionDenied": "U permissione per {{kind}} negatu. Per utilizallu per piacè seguite sti passi:",
+            "point1": "Vai à &quot;Configurazione&quot; -&gt; &quot;Avanzata&quot; -&gt; &quot;Privacità è sicurità&quot; -&gt; &quot;Configurazione situ&quot; -&gt; &quot;Camera&quot; o &quot;Configurazione situ&quot; -&gt; &quot;Microfonu&quot;",
+            "point2": "Elimina {{hostname}} da a lista &quot;Bloccà&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Istruzzioni",
+            "permissionDenied": "U permissione per {{kind}} negatu. Ricaricate questa pagina è cunfirmate l&#39;accessu à {{kind}} per unisce à a cunferenza."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Istruzzioni",
+            "permissionDenied": "U permissione per {{kind}} negatu. Per utilizallu per piacè seguite sti passi:",
+            "point1": "Andà à u vostru Settings Android",
+            "point2": "Apertura &quot;App &amp; notificazioni&quot;",
+            "point3": "Truvate &quot;{{communityName}}&quot; è apre u",
+            "point4": "Tap nant&#39;à Permissions",
+            "point5": "Habilita {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Istruzzioni",
+            "permissionDenied": "U permissione per {{kind}} negatu. Per utilizallu per piacè seguite sti passi:",
+            "point1": "Andà à u vostru Settings di iOS",
+            "point2": "Apertura &quot;Privacy&quot;",
+            "point3": "Truvate {{kind}} è apre lu",
+            "point4": "Truvate &quot;{{communityName}}&quot; è attivà"
+        },
+        "notices": {
+            "youJoinedRoom": "Avete entratu in stanza",
+            "joining": "Unione: {{userName}}",
+            "sbLeftRoom": "{{userName}} ha lasciatu a stanza",
+            "youLeftRoom": "Avete lasciatu a stanza",
+            "codeCopied": "Avete lasciatu a stanza",
+            "sbBeganFbLive": "{{userName}} hà iniziatu à trasmette sta chjamata in Facebook",
+            "sbStoppedFbLive": "{{userName}} ha cessatu di trasmette sta chjamata in Facebook",
+            "youBeganFbLive": "Avete cuminciatu à trasmissione sta chjamata in Facebook",
+            "youStoppedFbLive": "Avete dettu l&#39;emissioni di sta chjamata in Facebook",
+            "linkCopiedToCb": "Link copiatu à u clipboard",
+            "codeCopiedToCb": "Codice copiatu à i clipboard",
+            "userHasNoVideo": "U participante ùn hà micca alcun video"
+        },
+        "settingsPopup": {
+            "webCamera": "Camera Web",
+            "screenSharing": "Spartuta Screen",
+            "shareAnotherScreen": "Condividi un altru screnu",
+            "turnOffCameras": "Apaga tutte e camere",
+            "startFBLive": "Inizià Facebook Livestream",
+            "stopFBLive": "Pare Facebook Livestream",
+            "fbLiveTitle": "Titulu Vivu",
+            "fbLiveDescription": "Live Description",
+            "fbOnlyMeLiveAccess": "Solo Me",
+            "fbFriendsAccess": "Amichi",
+            "fbPublicAccess": "Publicu",
+            "fbStartLive": "Vai Live",
+            "fbStopLive": "Fini Live",
+            "fbEmbedCode": "Incorpora",
+            "copy": "Copia"
+        },
+        "participantsPopup": {
+            "disconnect": "Disconnect",
+            "floatingScreens": "Screens Flottanti",
+            "tiledScreens": "Pantaloni piazzati",
+            "loudestExceptMe": "Più forte m&#39;hè Salvo",
+            "maximizeLoudest": "Maximizeghja più forte",
+            "staticMaximized": "Massimizatu staticu",
+            "manual": "Manuale"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Chjamate in tempu reale",
             "description": "una chjama video \/ audio in tempu reale"
         }
+    },
+    "participating": {
+        "Title": "Titulu",
+        "Subscribed": "Abbunatu",
+        "Participants": "Participanti",
+        "AreYouSureRemoveIdentifier": "Hè sicura di sguassà stu identificatore?",
+        "AreYouSureUnsubscribeIdentifier": "Hè sicura di desubscrive stu identificatore? Disattiva i notificazioni à questu identificatore.",
+        "AreYouSureUnsubscribeDevice": "Hè sicura di desubscrive stu dispusitivu? Chiuderà i notificazioni à stu dispusitivu.",
+        "Identifiers": "Identificatori",
+        "Devices": "U dispositivu",
+        "Streams": "Strati"
     }
 }

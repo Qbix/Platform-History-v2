@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} ing {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ditambahake ing {{toTitle}} minangka {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} sampeyan nyebutake komentar",
-        "Streams\/call": "{{displayName}} nelpon sampeyan"
+        "Streams\/call": "{{displayName}} nelpon sampeyan",
+        "ManageEmailSubscriptions": "ngatur langgananku email",
+        "IfUnsubscribe": "Yen sampeyan pengin nggawe langganan"
     },
     "invite": {
         "messageContent": "{{displayName}} ngundang sampeyan menyang {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Ngajak dikirim saka nomer kita, sing durung kenal kanca-kanca. Tindakake karo teks cepet supaya dheweke ngerti undhangan saka sampeyan, nyuwun supaya bisa ngeklik link kasebut.",
             "confirm": "Ngajak dikirim saka nomer kita, sing durung kenal kanca-kanca. Apa sampeyan pengin ngetutake kanthi cepet supaya bisa ngerti undhangan saka sampeyan, nyuwun supaya bisa ngeklik link kasebut.",
-            "check": "Eh, aku mung ngirim sampeyan ngajak menyang app {{app}}. Mangga dipriksa sms lan klik link!"
+            "check": "Eh, aku mung ngirim sampeyan ngajak menyang app {{app}}. Mangga dipriksa sms lan klik link!",
+            "CheckYourMobile": "Mangga priksa SMS lan tindakake pandhuan!"
         },
         "email": {
             "alert": "Ngundang dikirim saka domain kita, sing durung kenal kanca-kanca. Tindakake karo teks cepet supaya dheweke ngerti undhangan saka sampeyan, nyuwun supaya bisa ngeklik link kasebut.",
             "confirm": "Ngundang dikirim saka domain kita, sing durung kenal kanca-kanca. Apa sampeyan pengin ngetutake kanthi cepet supaya bisa ngerti undhangan saka sampeyan, nyuwun supaya bisa ngeklik link kasebut.",
             "subject": "Apa sampeyan njaluk undangan?",
-            "body": "Eh, aku mung ngirim sampeyan ngajak menyang app {{app}}. Mangga dipriksa email lan klik link kasebut!"
+            "body": "Eh, aku mung ngirim sampeyan ngajak menyang app {{app}}. Mangga dipriksa email lan klik link kasebut!",
+            "CheckYourEmail": "Mangga priksa email sampeyan lan tindakake pandhuan!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Aktifake Mikropon",
             "cameraBtn": "Aktifake Kamera",
             "cameraAndMicrophoneBtn": "Aktifake Kamera lan Mikropon"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Pandhuan",
+            "permissionDenied": "Ijin kanggo ditolak {{kind}}. Kanggo nggunakake, tututi langkah-langkah iki:",
+            "point1": "Menyang &quot;Setelan&quot; -&gt; &quot;Lanjut&quot; -&gt; &quot;Kebijakan lan keamanan&quot; -&gt; &quot;Setelan Situs&quot; -&gt; &quot;Kamera&quot; utawa &quot;Setelan Situs&quot; -&gt; &quot;Mikropon&quot;",
+            "point2": "Mbusak {{hostname}} saka dhaptar &quot;Blok&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Pandhuan",
+            "permissionDenied": "Ijin kanggo ditolak {{kind}}. Monggo ulang kaca iki lan konfirmasi akses menyang {{kind}} kanggo konperensi."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Pandhuan",
+            "permissionDenied": "Ijin kanggo ditolak {{kind}}. Kanggo nggunakake, tututi langkah-langkah iki:",
+            "point1": "Menyang Setelan Android",
+            "point2": "Bukak &quot;Aplikasi &amp; kabar&quot;",
+            "point3": "Temokake &quot;{{communityName}}&quot; lan mbukak",
+            "point4": "Tutul Ijin",
+            "point5": "Ngaktifake {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Pandhuan",
+            "permissionDenied": "Ijin kanggo ditolak {{kind}}. Kanggo nggunakake, tututi langkah-langkah iki:",
+            "point1": "Pindhah menyang setelan iOS sampeyan",
+            "point2": "Bukak &quot;Kebijakan&quot;",
+            "point3": "Temokake {{kind}} lan mbukak",
+            "point4": "Temokake &quot;{{communityName}}&quot; lan aktifake"
+        },
+        "notices": {
+            "youJoinedRoom": "Sampeyan melu kamar",
+            "joining": "Gabung: {{userName}}",
+            "sbLeftRoom": "{{userName}} metu saka kamar",
+            "youLeftRoom": "Sampeyan metu saka ruangan",
+            "codeCopied": "Sampeyan metu saka ruangan",
+            "sbBeganFbLive": "{{userName}} wiwit nyebarake telpon iki ing Facebook",
+            "sbStoppedFbLive": "{{userName}} mandheg nyebarake siaran ing Facebook iki",
+            "youBeganFbLive": "Sampeyan miwiti nyebarake telpon iki ing Facebook",
+            "youStoppedFbLive": "Sampeyan mandheg nyebarake telpon iki ing Facebook",
+            "linkCopiedToCb": "Link disalin menyang clipboard",
+            "codeCopiedToCb": "Kode sing disalin menyang clipboard",
+            "userHasNoVideo": "Peserta ora duwe video"
+        },
+        "settingsPopup": {
+            "webCamera": "Kamera Web",
+            "screenSharing": "Nuduhake layar",
+            "shareAnotherScreen": "Nuduhake layar liyane",
+            "turnOffCameras": "Pateni kabeh kamera",
+            "startFBLive": "Miwiti Facebook Livestream",
+            "stopFBLive": "Mungkasi Facebook Livestream",
+            "fbLiveTitle": "Judul Urip",
+            "fbLiveDescription": "Katrangan Langsung",
+            "fbOnlyMeLiveAccess": "Mung kula",
+            "fbFriendsAccess": "Kanca",
+            "fbPublicAccess": "Publik",
+            "fbStartLive": "Go Urip",
+            "fbStopLive": "Pungkasan Urip",
+            "fbEmbedCode": "Embed",
+            "copy": "Nyalin"
+        },
+        "participantsPopup": {
+            "disconnect": "Pedhot",
+            "floatingScreens": "Ngambang Ngambang",
+            "tiledScreens": "Gambar Jubin",
+            "loudestExceptMe": "Paling Ora Kajaba Aku",
+            "maximizeLoudest": "Ngoptimalake Loudest",
+            "staticMaximized": "Statis Maksimal",
+            "manual": "Manual"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Telpon Real-Time",
             "description": "telpon video \/ audio nyata"
         }
+    },
+    "participating": {
+        "Title": "Judhul",
+        "Subscribed": "Langganan",
+        "Participants": "Peserta",
+        "AreYouSureRemoveIdentifier": "Apa sampeyan yakin ngilangi pengenal iki?",
+        "AreYouSureUnsubscribeIdentifier": "Apa sampeyan yakin nyipta identifikasi iki? Bakal mateni kabar kanggo pengenal iki.",
+        "AreYouSureUnsubscribeDevice": "Apa sampeyan yakin nggunakake langganan piranti iki? Bakal mateni kabar menyang piranti iki.",
+        "Identifiers": "Pengenal",
+        "Devices": "Piranti",
+        "Streams": "Aliran"
     }
 }

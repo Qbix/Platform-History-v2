@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Seoltar cuireadhí ónár n-uimhir, nach n-aithníonn do chairde go fóill iad. Lean ort le téacs tapaidh chun a chur in iúl dóibh gur tháinig an cuireadh uait, ag iarraidh orthu cliceáil ar an nasc.",
             "confirm": "Seoltar cuireadhí ónár n-uimhir, nach n-aithníonn do chairde go fóill iad. Ar mhaith leat téacs tapaidh a leanúint chun a chur in iúl dóibh gur tháinig an cuireadh uait, ag iarraidh orthu cliceáil ar an nasc.",
-            "check": "Hey, chuir mé cuireadh chugat chuig an aip {{app}}. Seiceáil le do thoil do chuid SMS agus cliceáil ar an nasc!"
+            "check": "Hey, chuir mé cuireadh chugat chuig an aip {{app}}. Seiceáil le do thoil do chuid SMS agus cliceáil ar an nasc!",
+            "CheckYourMobile": "Seiceáil SMS agus lean treoracha!"
         },
         "email": {
             "alert": "Seoltar cuireadhí ónár bhfearann, nach n-aithníonn do chairde go fóill iad. Lean ort le téacs tapaidh chun a chur in iúl dóibh gur tháinig an cuireadh uait, ag iarraidh orthu an nasc a chliceáil.",
             "confirm": "Seoltar cuireadhí ónár bhfearann, nach n-aithníonn do chairde go fóill iad. Ar mhaith leat téacs tapaidh a leanúint chun a chur in iúl dóibh gur tháinig an cuireadh uait, ag iarraidh orthu cliceáil ar an nasc.",
             "subject": "An bhfuair tú cuireadh?",
-            "body": "Hey, chuir mé cuireadh chugat chuig an aip {{app}}. Seiceáil do ríomhphost agus cliceáil ar an nasc ann!"
+            "body": "Hey, chuir mé cuireadh chugat chuig an aip {{app}}. Seiceáil do ríomhphost agus cliceáil ar an nasc ann!",
+            "CheckYourEmail": "Seiceáil do ríomhphost agus lean na treoracha!"
         }
     },
     "participating": {
         "Title": "Teideal",
         "Subscribed": "Suibscríofa",
-        "Participants": "Rannpháirtithe"
+        "Participants": "Rannpháirtithe",
+        "AreYouSureRemoveIdentifier": "An bhfuil tú cinnte an t-aitheantóir seo a bhaint?",
+        "AreYouSureUnsubscribeIdentifier": "An bhfuil tú cinnte díliostáil an aitheantóra seo? Casfaidh sé fógraí faoin aitheantóir seo.",
+        "AreYouSureUnsubscribeDevice": "An bhfuil tú cinnte díliostáil an fheiste seo? Múchfaidh sé fógraí chuig an bhfeiste seo.",
+        "Identifiers": "Aitheantóirí",
+        "Devices": "Gléasanna",
+        "Streams": "Sruthanna"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Cumasaigh Micreafón",
             "cameraBtn": "Cumasaigh an Ceamara",
             "cameraAndMicrophoneBtn": "Cumasaigh an Ceamara agus an Micreafón"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Treoracha",
+            "permissionDenied": "Diúltaíodh cead do {{kind}}. Chun é a úsáid, lean na céimeanna seo le do thoil:",
+            "point1": "Téigh go &quot;Settings&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Príobháideacht agus slándáil&quot; -&gt; &quot;Socruithe Suímh&quot; -&gt; &quot;Ceamara&quot; nó &quot;Socruithe Suímh&quot; -&gt; &quot;Micreafón&quot;",
+            "point2": "Bain {{hostname}} as an liosta “Block”"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Treoracha",
+            "permissionDenied": "Diúltaíodh cead do {{kind}}. Déan an leathanach seo a athlódáil le do thoil agus dearbhaigh rochtain ar {{kind}} chun dul isteach sa chomhdháil."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Treoracha",
+            "permissionDenied": "Diúltaíodh cead do {{kind}}. Chun é a úsáid, lean na céimeanna seo le do thoil:",
+            "point1": "Téigh go dtí do Socruithe Android",
+            "point2": "Oscail &quot;Aipeanna &amp; Fógraí&quot;",
+            "point3": "Faigh &quot;{{communityName}}&quot; agus oscail é",
+            "point4": "Beartaíonn ar Cheadanna",
+            "point5": "Cumasaigh {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Treoracha",
+            "permissionDenied": "Diúltaíodh cead do {{kind}}. Chun é a úsáid, lean na céimeanna seo le do thoil:",
+            "point1": "Téigh go dtí do Socruithe iOS",
+            "point2": "Oscail &quot;Príobháideachas&quot;",
+            "point3": "Faigh {{kind}} agus oscail é",
+            "point4": "Faigh &quot;{{communityName}}&quot; agus cuir ar a gcumas é"
+        },
+        "notices": {
+            "youJoinedRoom": "Chuaigh tú isteach sa seomra",
+            "joining": "Cónascadh: {{userName}}",
+            "sbLeftRoom": "D&#39;fhág {{userName}} an seomra",
+            "youLeftRoom": "D&#39;fhág tú an seomra",
+            "codeCopied": "D&#39;fhág tú an seomra",
+            "sbBeganFbLive": "Thosaigh {{userName}} ag craoladh an ghlao seo i Facebook",
+            "sbStoppedFbLive": "Stop {{userName}} an craoladh seo a chraoladh i Facebook",
+            "youBeganFbLive": "Thosaigh tú ag craoladh an ghlao seo i Facebook",
+            "youStoppedFbLive": "Stop tú ag craoladh an ghlao seo i Facebook",
+            "linkCopiedToCb": "Cóipeáil nasc chuig an ghearrthaisce",
+            "codeCopiedToCb": "Cód cóipeáilte chuig an ghearrthaisce",
+            "userHasNoVideo": "Níl aon fhíseán ag an rannpháirtí"
+        },
+        "settingsPopup": {
+            "webCamera": "Ceamara Gréasáin",
+            "screenSharing": "Roinnt Scáileáin",
+            "shareAnotherScreen": "Roinn scáileán eile",
+            "turnOffCameras": "Múch gach ceamara",
+            "startFBLive": "Tosaigh Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "fbLiveTitle": "Teideal Beo",
+            "fbLiveDescription": "Cur Síos Beo",
+            "fbOnlyMeLiveAccess": "Mise amháin",
+            "fbFriendsAccess": "Cairde",
+            "fbPublicAccess": "Poiblí",
+            "fbStartLive": "Téigh Beo",
+            "fbStopLive": "Deireadh Beo",
+            "fbEmbedCode": "Leabú",
+            "copy": "Cóip"
+        },
+        "participantsPopup": {
+            "disconnect": "Dícheangail",
+            "floatingScreens": "Scáileáin Snámh",
+            "tiledScreens": "Scáileáin Tílithe",
+            "loudestExceptMe": "Loudest Ach amháin Mise",
+            "maximizeLoudest": "Uasmhéadaigh Loudest",
+            "staticMaximized": "Static Maximized",
+            "manual": "Lámhleabhar"
         }
     },
     "types": {

@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "L-istediniet jintbagħtu min-numru tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Segwitu b&#39;test rapidu biex tgħarrafhom mill-istedina ġiet mingħandek, u titlobhom ikklikkja l-link.",
             "confirm": "L-istediniet jintbagħtu min-numru tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Tixtieq issegwi test rapidu biex tgħarrafhom dwar l-istedina ġiet mingħandek, u titlobhom ikklikkja l-link.",
-            "check": "Ħej, jien bgħattlek biss invit għall-app {{app}}. Jekk jogħġbok iċċekkja l-sms tiegħek u kklikkja l-link!"
+            "check": "Ħej, jien bgħattlek biss invit għall-app {{app}}. Jekk jogħġbok iċċekkja l-sms tiegħek u kklikkja l-link!",
+            "CheckYourMobile": "Jekk jogħġbok iċċekkja l-SMS u segwi l-istruzzjonijiet!"
         },
         "email": {
             "alert": "L-istediniet jintbagħtu mid-dominju tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Segwitu b&#39;test rapidu biex tgħarrafhom mill-istedina ġiet mingħandek, u titlobhom ikklikkja l-link.",
             "confirm": "L-istediniet jintbagħtu mid-dominju tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Tixtieq issegwi test rapidu biex tgħarrafhom dwar l-istedina ġiet mingħandek, u titlobhom ikklikkja l-link.",
             "subject": "Irċivejt stedina?",
-            "body": "Ħej, jien bgħattlek biss invit għall-app {{app}}. Jekk jogħġbok iċċekkja l-email tiegħek u kklikkja l-link hemm!"
+            "body": "Ħej, jien bgħattlek biss invit għall-app {{app}}. Jekk jogħġbok iċċekkja l-email tiegħek u kklikkja l-link hemm!",
+            "CheckYourEmail": "Jekk jogħġbok iċċekkja l-email tiegħek u segwi l-istruzzjonijiet!"
         }
     },
     "participating": {
         "Title": "Titolu",
         "Subscribed": "Sottoskritt",
-        "Participants": "Parteċipanti"
+        "Participants": "Parteċipanti",
+        "AreYouSureRemoveIdentifier": "Int żgur li tneħħi dan l-identifikatur?",
+        "AreYouSureUnsubscribeIdentifier": "Int żgur li tħassar dan l-identifikatur? Se itfi n-notifiki lil dan l-identifikatur.",
+        "AreYouSureUnsubscribeDevice": "Int żgur li tħassar dan it-tagħmir? Se itfi n-notifiki ma &#39;dan l-apparat.",
+        "Identifiers": "Identifikaturi",
+        "Devices": "Apparat",
+        "Streams": "Nixxigħat"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +124,73 @@
             "microphoneBtn": "Agħti Mikrofonu",
             "cameraBtn": "Jippermetti l-Kamera",
             "cameraAndMicrophoneBtn": "Agħti Kamera u Mikrofonu"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Istruzzjonijiet",
+            "permissionDenied": "Il-permess għal {{kind}} miċħud. Biex tużah jekk jogħġbok segwi dawn il-passi:",
+            "point1": "Mur fuq &quot;Issettjar&quot; -&gt; &quot;Avvanzat&quot; -&gt; &quot;Privatezza u sigurtà&quot; -&gt; &quot;Sit ta &#39;l-issettjar&quot; -&gt; &quot;Kamera&quot; jew &quot;Issettjar tas-sit&quot; -&gt; &quot;Mikrofonu&quot;",
+            "point2": "Neħħi {{hostname}} mil-lista &quot;Blokk&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Istruzzjonijiet",
+            "permissionDenied": "Il-permess għal {{kind}} miċħud. Jekk jogħġbok iċċarġja mill-ġdid din il-paġna u kkonferma l-aċċess għal {{kind}} biex tingħaqad mal-konferenza."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Istruzzjonijiet",
+            "permissionDenied": "Il-permess għal {{kind}} miċħud. Biex tużah jekk jogħġbok segwi dawn il-passi:",
+            "point1": "Mur fil-Settings Android tiegħek",
+            "point2": "Iftaħ &quot;Applikazzjonijiet u notifiki&quot;",
+            "point3": "Sib &quot;{{communityName}}&quot; u iftaħha",
+            "point4": "Tektek fuq il-Permessi",
+            "point5": "Attiv {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Istruzzjonijiet",
+            "permissionDenied": "Il-permess għal {{kind}} miċħud. Biex tużah jekk jogħġbok segwi dawn il-passi:",
+            "point1": "Mur fl-issettjar tal-iOS tiegħek",
+            "point2": "Miftuħa &quot;Privatezza&quot;",
+            "point3": "Sib {{kind}} u iftaħha",
+            "point4": "Sib &quot;{{communityName}}&quot; u attivat"
+        },
+        "notices": {
+            "youJoinedRoom": "Inti ngħaqadt fil-kamra",
+            "joining": "Tgħaqqad: {{userName}}",
+            "sbLeftRoom": "{{userName}} ħalla l-kamra",
+            "youLeftRoom": "Tlaqt mill-kamra",
+            "codeCopied": "Tlaqt mill-kamra",
+            "sbBeganFbLive": "{{userName}} bdew ixandru din is-sejħa fuq Facebook",
+            "sbStoppedFbLive": "{{userName}} waqfu jxandru din is-sejħa fuq Facebook",
+            "youBeganFbLive": "Bdejt ixandar din is-sejħa fuq Facebook",
+            "youStoppedFbLive": "Int waqaf ixandar din is-sejħa fuq Facebook",
+            "linkCopiedToCb": "Link ikkuppjata mal-clipboard",
+            "codeCopiedToCb": "Kodiċi kkupjat fil-clipboard",
+            "userHasNoVideo": "Parteċipant m&#39;għandux video"
+        },
+        "settingsPopup": {
+            "webCamera": "Web Camera",
+            "screenSharing": "Qsim tal-Iskrin",
+            "shareAnotherScreen": "Aqsam skrin ieħor",
+            "turnOffCameras": "Itfi l-kameras kollha",
+            "startFBLive": "Ibda Facebook Livestream",
+            "stopFBLive": "Waqqaf Facebook Livestream",
+            "fbLiveTitle": "Titolu ħaj",
+            "fbLiveDescription": "Deskrizzjoni Live",
+            "fbOnlyMeLiveAccess": "Jien biss",
+            "fbFriendsAccess": "Ħbieb",
+            "fbPublicAccess": "Pubbliku",
+            "fbStartLive": "Mur ħaj",
+            "fbStopLive": "Temm Ħaj",
+            "fbEmbedCode": "Embed",
+            "copy": "Ikkopja"
+        },
+        "participantsPopup": {
+            "disconnect": "Skonnettja",
+            "floatingScreens": "Screens f&#39;wiċċ l-ilma",
+            "tiledScreens": "Screens Madum",
+            "loudestExceptMe": "L-Isbaħ Ħlief Lili",
+            "maximizeLoudest": "Timmassimizza l-Oħxon",
+            "staticMaximized": "Massiku statiku",
+            "manual": "Manwal"
         }
     },
     "types": {

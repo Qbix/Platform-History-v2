@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Baru {{relationDisplayType}} di {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ditambahkan ke {{toTitle}} sebagai {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} menyebut Anda dalam komentar",
-        "Streams\/call": "{{displayName}} memanggil Anda"
+        "Streams\/call": "{{displayName}} memanggil Anda",
+        "ManageEmailSubscriptions": "kelola langganan email Anda",
+        "IfUnsubscribe": "Jika Anda ingin berhenti berlangganan"
     },
     "invite": {
         "messageContent": "{{displayName}} mengundang Anda ke {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "Undangan dikirim dari nomor kami, yang belum dikenali teman Anda. Tindak lanjuti dengan teks cepat untuk memberi tahu mereka bahwa undangan datang dari Anda, minta mereka mengklik tautan.",
             "confirm": "Undangan dikirim dari nomor kami, yang belum dikenali teman Anda. Apakah Anda ingin menindaklanjuti dengan teks singkat untuk memberi tahu mereka bahwa undangan datang dari Anda, meminta mereka untuk mengklik tautan.",
-            "check": "Hai, saya baru saja mengirimi Anda undangan ke aplikasi {{app}}. Silakan periksa sms Anda dan klik tautannya!"
+            "check": "Hai, saya baru saja mengirimi Anda undangan ke aplikasi {{app}}. Silakan periksa sms Anda dan klik tautannya!",
+            "CheckYourMobile": "Silakan periksa SMS dan ikuti instruksi!"
         },
         "email": {
             "alert": "Undangan dikirim dari domain kami, yang belum dikenali teman Anda. Tindak lanjuti dengan teks cepat untuk memberi tahu mereka bahwa undangan datang dari Anda, minta mereka mengklik tautan.",
             "confirm": "Undangan dikirim dari domain kami, yang belum dikenali teman Anda. Apakah Anda ingin menindaklanjuti dengan teks singkat untuk memberi tahu mereka bahwa undangan datang dari Anda, meminta mereka untuk mengklik tautan.",
             "subject": "Apakah Anda mendapat undangan?",
-            "body": "Hai, saya baru saja mengirimi Anda undangan ke aplikasi {{app}}. Silakan periksa email Anda dan klik tautan di sana!"
+            "body": "Hai, saya baru saja mengirimi Anda undangan ke aplikasi {{app}}. Silakan periksa email Anda dan klik tautan di sana!",
+            "CheckYourEmail": "Silakan periksa email Anda dan ikuti instruksi!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Aktifkan Mikrofon",
             "cameraBtn": "Aktifkan Kamera",
             "cameraAndMicrophoneBtn": "Aktifkan Kamera dan Mikrofon"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instruksi",
+            "permissionDenied": "Izin untuk {{kind}} ditolak. Untuk menggunakannya silakan ikuti langkah-langkah ini:",
+            "point1": "Buka &quot;Pengaturan&quot; -&gt; &quot;Lanjut&quot; -&gt; &quot;Privasi dan keamanan&quot; -&gt; &quot;Pengaturan Situs&quot; -&gt; &quot;Kamera&quot; atau &quot;Pengaturan Situs&quot; -&gt; &quot;Mikrofon&quot;",
+            "point2": "Hapus {{hostname}} dari daftar &quot;Blokir&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instruksi",
+            "permissionDenied": "Izin untuk {{kind}} ditolak. Silakan muat ulang halaman ini dan konfirmasikan akses ke {{kind}} untuk bergabung dengan konferensi."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instruksi",
+            "permissionDenied": "Izin untuk {{kind}} ditolak. Untuk menggunakannya silakan ikuti langkah-langkah ini:",
+            "point1": "Buka Pengaturan Android Anda",
+            "point2": "Buka &quot;Aplikasi &amp; pemberitahuan&quot;",
+            "point3": "Temukan &quot;{{communityName}}&quot; dan buka",
+            "point4": "Ketuk Izin",
+            "point5": "Aktifkan {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instruksi",
+            "permissionDenied": "Izin untuk {{kind}} ditolak. Untuk menggunakannya silakan ikuti langkah-langkah ini:",
+            "point1": "Buka Pengaturan iOS Anda",
+            "point2": "Buka &quot;Privasi&quot;",
+            "point3": "Temukan {{kind}} dan buka",
+            "point4": "Temukan &quot;{{communityName}}&quot; dan aktifkan"
+        },
+        "notices": {
+            "youJoinedRoom": "Anda bergabung dengan ruangan",
+            "joining": "Bergabung: {{userName}}",
+            "sbLeftRoom": "{{userName}} meninggalkan ruangan",
+            "youLeftRoom": "Anda meninggalkan ruangan",
+            "codeCopied": "Anda meninggalkan ruangan",
+            "sbBeganFbLive": "{{userName}} mulai menyiarkan panggilan ini di Facebook",
+            "sbStoppedFbLive": "{{userName}} berhenti menyiarkan panggilan ini di Facebook",
+            "youBeganFbLive": "Anda mulai menyiarkan panggilan ini di Facebook",
+            "youStoppedFbLive": "Anda berhenti menyiarkan panggilan ini di Facebook",
+            "linkCopiedToCb": "Tautan disalin ke papan klip",
+            "codeCopiedToCb": "Kode disalin ke papan klip",
+            "userHasNoVideo": "Peserta tidak memiliki video"
+        },
+        "settingsPopup": {
+            "webCamera": "Kamera web",
+            "screenSharing": "Berbagi layar",
+            "shareAnotherScreen": "Bagikan layar lain",
+            "turnOffCameras": "Matikan semua kamera",
+            "startFBLive": "Mulai Facebook Livestream",
+            "stopFBLive": "Hentikan Facebook Livestream",
+            "fbLiveTitle": "Judul Langsung",
+            "fbLiveDescription": "Deskripsi Langsung",
+            "fbOnlyMeLiveAccess": "Hanya saya",
+            "fbFriendsAccess": "Teman",
+            "fbPublicAccess": "Publik",
+            "fbStartLive": "Hiduplah",
+            "fbStopLive": "Akhiri Langsung",
+            "fbEmbedCode": "Menanamkan",
+            "copy": "Salinan"
+        },
+        "participantsPopup": {
+            "disconnect": "Memutuskan",
+            "floatingScreens": "Layar Apung",
+            "tiledScreens": "Layar Ubin",
+            "loudestExceptMe": "Paling Keras Kecuali Aku",
+            "maximizeLoudest": "Maksimalkan Paling Keras",
+            "staticMaximized": "Dimaksimalkan Statis",
+            "manual": "Manual"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Panggilan Real-Time",
             "description": "panggilan video \/ audio real time"
         }
+    },
+    "participating": {
+        "Title": "Judul",
+        "Subscribed": "Berlangganan",
+        "Participants": "Peserta",
+        "AreYouSureRemoveIdentifier": "Apakah Anda yakin akan menghapus pengidentifikasi ini?",
+        "AreYouSureUnsubscribeIdentifier": "Apakah Anda yakin berhenti berlangganan pengidentifikasi ini? Ini akan mematikan notifikasi untuk pengidentifikasi ini.",
+        "AreYouSureUnsubscribeDevice": "Apakah Anda yakin berhenti berlangganan perangkat ini? Ini akan mematikan notifikasi ke perangkat ini.",
+        "Identifiers": "Pengidentifikasi",
+        "Devices": "Perangkat",
+        "Streams": "Streaming"
     }
 }

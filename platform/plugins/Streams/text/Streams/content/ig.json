@@ -48,7 +48,9 @@
         "Streams\/relatedTo\/*": "Ọhụrụ {{relationDisplayType}} na {{toTitle}}",
         "Streams\/relatedFrom\/*": "Agbakwunyere na {{toTitle}} dika {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} hotara gi na nzaghachi",
-        "Streams\/call": "{{displayName}} na-akpọ gị"
+        "Streams\/call": "{{displayName}} na-akpọ gị",
+        "ManageEmailSubscriptions": "jikwaa ndenye aha email gi",
+        "IfUnsubscribe": "Ọ bụrụ na ịchọrọ ịwepu aha"
     },
     "invite": {
         "messageContent": "{{displayName}} kpọrọ gị ka ị bịa {{inviteUrl}}",
@@ -91,13 +93,15 @@
         "mobile": {
             "alert": "A na-ezitere ndị na-akpọ òkù site n&#39;aka ọnụ ọgụgụ anyị, nke ndị enyi gị na-amatabeghị. Soro ngwa ngwa mee ka ha mara na òkù ahụ sitere n&#39;aka gị, na-agwa ha ka ha pịa njikọ ahụ.",
             "confirm": "A na-ezitere ndị na-akpọ òkù site n&#39;aka ọnụ ọgụgụ anyị, nke ndị enyi gị na-amatabeghị. Ị ga-achọ iji edemede ọsọ ọsọ mee ka ha mara na òkù ahụ sitere n&#39;aka gị, na-agwa ha ka ha pịa njikọ ahụ.",
-            "check": "Ee, naanị m ezigara gị òkù gaa na {{app}} ngwa. Biko lelee sms gị wee pịa njikọ ahụ!"
+            "check": "Ee, naanị m ezigara gị òkù gaa na {{app}} ngwa. Biko lelee sms gị wee pịa njikọ ahụ!",
+            "CheckYourMobile": "Biko lelee SMS ma soro ntuziaka!"
         },
         "email": {
             "alert": "A na-eziga ndị na-eziga site na ngalaba anyị, nke ndị enyi gị na-aghọtabeghị. Soro ngwa ngwa mee ka ha mara na òkù ahụ sitere n&#39;aka gị, na-agwa ha ka ha pịa njikọ ahụ.",
             "confirm": "A na-eziga ndị na-eziga site na ngalaba anyị, nke ndị enyi gị na-aghọtabeghị. Ị ga-achọ iji edemede ọsọ ọsọ mee ka ha mara na òkù ahụ sitere n&#39;aka gị, na-agwa ha ka ha pịa njikọ ahụ.",
             "subject": "Ị nwetara òkù?",
-            "body": "Ee, naanị m ezigara gị òkù gaa na {{app}} ngwa. Biko lelee email gị ma pịa njikọ ahụ n&#39;ebe ahụ!"
+            "body": "Ee, naanị m ezigara gị òkù gaa na {{app}} ngwa. Biko lelee email gị ma pịa njikọ ahụ n&#39;ebe ahụ!",
+            "CheckYourEmail": "Biko lelee email gị ma soro ntuziaka!"
         }
     },
     "webrtc": {
@@ -109,6 +113,73 @@
             "microphoneBtn": "Kwado Igwe okwu",
             "cameraBtn": "Kwado igwefoto",
             "cameraAndMicrophoneBtn": "Kwado igwefoto na Igwe okwu"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Ntuziaka",
+            "permissionDenied": "Enweghị ikike maka {{kind}} gọnarịrị. Iji jiri ya, biko soro usoro ndị a:",
+            "point1": "Gaa na &quot;Ntọala&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Nzuzo na nche&quot; -&gt; &quot;Ntọala saịtị&quot; -&gt; &quot;Igwefoto&quot; ma ọ bụ &quot;Ntọala saịtị&quot; -&gt; &quot;Igwe okwu&quot;",
+            "point2": "Wepu {{hostname}} na “Gbochie”"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Ntuziaka",
+            "permissionDenied": "Enweghị ikike maka {{kind}} gọnarịrị. Biko bubataghachị peeji a wee gosi na ịnweta {{kind}} iji sonyere ogbako a."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Ntuziaka",
+            "permissionDenied": "Enweghị ikike maka {{kind}} gọnarịrị. Iji jiri ya, biko soro usoro ndị a:",
+            "point1": "Gaa na Ntọala gam akporo gị",
+            "point2": "Mepee &quot;ngwa &amp; ihe ngosi&quot;",
+            "point3": "Choo &quot;{{communityName}}&quot; ma mepee ya",
+            "point4": "Pịa na Ikikere",
+            "point5": "Kwado {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Ntuziaka",
+            "permissionDenied": "Enweghị ikike maka {{kind}} gọnarịrị. Iji jiri ya, biko soro usoro ndị a:",
+            "point1": "Gaa na Ntọala iOS gị",
+            "point2": "Mepee &quot;Nzuzo&quot;",
+            "point3": "Choo {{kind}} meghee ya",
+            "point4": "Choo &quot;{{communityName}}&quot; ma mee"
+        },
+        "notices": {
+            "youJoinedRoom": "Joined sonyeere n’ime ụlọ ahụ",
+            "joining": "Jikọrọ: {{userName}}",
+            "sbLeftRoom": "{{userName}} hapụrụ ụlọ ahụ",
+            "youLeftRoom": "Left pụọ n&#39;ime ụlọ ahụ",
+            "codeCopied": "Left pụọ n&#39;ime ụlọ ahụ",
+            "sbBeganFbLive": "{{userName}} bidoro ịgbasa oku a na Facebook",
+            "sbStoppedFbLive": "{{userName}} kwụsịrị ịgbasa oku a na Facebook",
+            "youBeganFbLive": "Began malitere ịkpọ oku a na Facebook",
+            "youStoppedFbLive": "You kwụsịrị ịkpọsa oku a na Facebook",
+            "linkCopiedToCb": "Edekọtara njikọ ga na bọọdụ",
+            "codeCopiedToCb": "Edepụtaghachi koodu na clipboard",
+            "userHasNoVideo": "Onye so na ya enweghị vidiyo"
+        },
+        "settingsPopup": {
+            "webCamera": "Igwefoto weebụ",
+            "screenSharing": "Ikesa ihuenyo",
+            "shareAnotherScreen": "Kekọrịta ihuenyo ọzọ",
+            "turnOffCameras": "Gbanyụọ igwefoto niile",
+            "startFBLive": "Bido Facebook Livestream",
+            "stopFBLive": "Kwụsị Facebook Livestream",
+            "fbLiveTitle": "Isi Okwu",
+            "fbLiveDescription": "Nkọwa dị ndụ",
+            "fbOnlyMeLiveAccess": "Naanị m",
+            "fbFriendsAccess": "Ndị enyị",
+            "fbPublicAccess": "Ọha",
+            "fbStartLive": "Gaa Live",
+            "fbStopLive": "Kwụsị Live",
+            "fbEmbedCode": "Gbakwunye",
+            "copy": "Detuo"
+        },
+        "participantsPopup": {
+            "disconnect": "Kwupu",
+            "floatingScreens": "Na-ese Ewu",
+            "tiledScreens": "Nseta ihu abụọ",
+            "loudestExceptMe": "Ewezuga ụda dị elu",
+            "maximizeLoudest": "Jiri Loudest mụbaa",
+            "staticMaximized": "Static Maximized",
+            "manual": "Akwụkwọ ntuziaka"
         }
     },
     "messages": {
@@ -238,5 +309,16 @@
             "displayType": "Oku n’ezie",
             "description": "ezigbo oge vidiyo \/ oku ọdịyo"
         }
+    },
+    "participating": {
+        "Title": "Aha",
+        "Subscribed": "Idenye aha",
+        "Participants": "Ndi sonyere",
+        "AreYouSureRemoveIdentifier": "O doro gi anya wepu ihe njirimara a?",
+        "AreYouSureUnsubscribeIdentifier": "Idoro anya wepu aha njirimara a? Ọ ga-agbanyụ amamọkwa onye mata.",
+        "AreYouSureUnsubscribeDevice": "Ì ji n&#39;aka ị wepu aha a? Ọ ga-agbanyụ amamọkwa na ngwaọrụ a.",
+        "Identifiers": "Ndị na-eme nchọpụta",
+        "Devices": "Ngwaọrụ",
+        "Streams": "Iyi"
     }
 }
