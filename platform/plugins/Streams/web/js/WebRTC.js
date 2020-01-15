@@ -64,7 +64,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			minimizeOnPageSwitching: true,
 			leaveOtherActiveRooms: true,
 			liveStreaming: {
-				startFbLiveViaGoLiveDialog: false,
+				startFbLiveViaGoLiveDialog: true,
 				useRecordRTCLibrary: true,
 				drawBackground: false,
 				timeSlice: 6000,

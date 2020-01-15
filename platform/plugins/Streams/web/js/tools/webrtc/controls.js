@@ -2267,20 +2267,9 @@
 							});
 						}
 
-						FB.getLoginStatus(function(response){
-							if (response.status === 'connected') {
-								goLive();
-							} else {
-								FB.login(function(response) {
-									if (response.authResponse) {
-										goLive();
-									}
-								}, {scope: 'email,public_profile,publish_video'});
-
-							}
-
-						});
-
+						if (FB.getUserID()) {
+							goLive();
+						}
 					}
 
 					/**
