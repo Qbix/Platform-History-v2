@@ -10912,6 +10912,13 @@ Q.Pointer = {
 	fastclick: function _Q_fastclick (params) {
 		params.eventName = Q.info.isTouchscreen ? 'touchend' : 'click';
 		return function _Q_fastclick_on_wrapper (e) {
+			var oe = e.originalEvent || e;
+			if (oe.type === 'touchend') {
+				if (oe.touches && oe.touches.length) {
+					return; // still some touches happening
+				}
+				Q.Pointer.touches = oe.touches;
+			}
 			var x = Q.Pointer.getX(e), y = Q.Pointer.getY(e);
 			var elem = (!isNaN(x) && !isNaN(y)) && Q.Pointer.elementFromPoint(x, y);
 			if (!(elem instanceof Element)){
@@ -11141,7 +11148,7 @@ Q.Pointer = {
  		return oe.touches ? oe.touches.length : (Q.Pointer.which(e) > 0 ? 1 : 0);
 	},
 	/**
-	 * Returns which button was pressed - Q.Pointer.which.{LEFT|MIDDLE|RIGHT}
+	 * Returns which button was pressed - Q.Pointer.which.{LEFT|MIDDLE|RIGHT|NONE}
 	 * @static
 	 * @method which
 	 * @param {Q.Event} e Some mouse or touch event from the DOM
@@ -11623,6 +11630,7 @@ Q.Pointer.preventRubberBand.suspend = {};
 
 function _cancelClickBriefly() {
 	Q.Pointer.cancelClick(true);
+	_cancelClickBriefly.active = true;
 	setTimeout(function () {
 		Q.Pointer.canceledClick = false;
 	}, 100);
@@ -11660,10 +11668,33 @@ Q.Pointer.move.eventName = _isTouchscreen ? 'touchmove' : 'mousemove';
 Q.Pointer.end.eventName = _isTouchscreen ? 'touchend' : 'mouseup';
 Q.Pointer.cancel.eventName = _isTouchscreen ? 'touchcancel' : 'mousecancel';
 
+Q.Pointer.which.NONE = 0;
 Q.Pointer.which.LEFT = 1;
 Q.Pointer.which.MIDDLE = 2;
 Q.Pointer.which.RIGHT = 3;
 Q.Pointer.touchclick.duration = 400;
+
+Q.Pointer.latest = {
+	which: Q.Pointer.which.NONE,
+	touches: []
+};
+
+Q.addEventListener(document.body, 'touchstart mousedown', function (e) {
+	if (e.type === 'mousedown') {
+		Q.Pointer.latest.which = Q.Pointer.which(e);
+	} else {
+		Q.Pointer.latest.touches = e.touches;
+	}
+}, false, true);
+
+Q.addEventListener(document.body, 'touchend touchcancel mouseup ', function (e) {
+	if (e.type === 'mousedown') {
+		Q.Pointer.latest.which = Q.Pointer.which(e);
+	} else {
+		Q.Pointer.latest.touches = e.touches;
+	}
+}, false, true);
+
 Q.Pointer.hint.options = {
 	src: '{{Q}}/img/hints/tap.gif',
 	hotspot:  {x: 0.5, y: 0.3},
