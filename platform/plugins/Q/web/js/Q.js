@@ -11481,15 +11481,15 @@ Q.Pointer = {
 	 * returning false.
 	 * @static
 	 * @method cancelClick
-	 * @param {Q.Event} [event] Some mouse or touch event from the DOM
-	 * @param {Object} [extraInfo] Extra info to pass to onCancelClick
 	 * @param {boolean} [skipMask=false] Pass true here to skip showing
 	 *   the Q.click.mask for 300 milliseconds, which blocks any
 	 *   stray clicks on mouseup or touchend, which occurs on some browsers.
 	 *   You will want to skip the mask if you want to allow scrolling, for instance.
+	 * @param {Q.Event} [event] Some mouse or touch event from the DOM
+	 * @param {Object} [extraInfo] Extra info to pass to onCancelClick
 	 * @return {boolean}
 	 */
-	cancelClick: function (event, extraInfo, skipMask) {
+	cancelClick: function (skipMask, event, extraInfo) {
 		if (false === Q.Pointer.onCancelClick.handle(event, extraInfo)) {
 			return false;
 		}
@@ -11622,7 +11622,7 @@ Q.Pointer = {
 Q.Pointer.preventRubberBand.suspend = {};
 
 function _cancelClickBriefly() {
-	Q.Pointer.cancelClick();
+	Q.Pointer.cancelClick(true);
 	setTimeout(function () {
 		Q.Pointer.canceledClick = false;
 	}, 100);
@@ -11754,13 +11754,13 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
 	&& ((_pos.x && Math.abs(_pos.x - screenX) > ccd)
 	 || (_pos.y && Math.abs(_pos.y - screenY) > ccd))) {
 		// finger moved more than the threshhold
-		if (false !== Q.Pointer.cancelClick(evt, {
+		if (false !== Q.Pointer.cancelClick(true, evt, {
 			fromX: _pos.x,
 			fromY: _pos.y,
 			toX: screenX,
 			toY: screenY,
 			comingFromPointerMovement: true
-		}, true)) {
+		})) {
 			_pos = false;
 		}
 	}

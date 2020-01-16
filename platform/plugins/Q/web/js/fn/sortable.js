@@ -141,7 +141,7 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 			return;
 		}
 
-		Q.Pointer.cancelClick(event, {
+		Q.Pointer.cancelClick(false, event, {
 			comingFromSortable: true
 		});
 
@@ -261,7 +261,7 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 		_restoreActions();
 		_restoreStyles();
 		
-		Q.Pointer.cancelClick(null, {
+		Q.Pointer.cancelClick(false, null, {
 			comingFromSortable: true
 		});
 		if (!pointerDidntEnd) {

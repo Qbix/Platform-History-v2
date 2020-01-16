@@ -2839,7 +2839,7 @@ Q.Contextual = {
 							Q.Contextual.hide();
 						}
 					}
-					Q.Pointer.cancelClick(e);
+					Q.Pointer.cancelClick(false, e);
 				}
 			};
 			$(document.body).on(Q.Pointer.end, Q.Contextual.endEventHandler);
