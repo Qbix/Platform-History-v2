@@ -1258,16 +1258,17 @@
 				startStreamingBtnCon.className = 'Streams_webrtc_streaming_start';
 
 				var privacySelect = document.createElement('SELECT');
-				var option1 = document.createElement('OPTION');
-				option1.innerHTML = Q.getObject("webrtc.settingsPopup.fbOnlyMeLiveAccess", tool.textes);
-				option1.value = 'SELF';
-				option1.selected = true;
+
+                var option1 = document.createElement('OPTION');
+                option1.value = 'EVERYONE';
+                option1.innerHTML = Q.getObject("webrtc.settingsPopup.fbPublicAccess", tool.textes);
+                option1.selected = true;
 				var option2 = document.createElement('OPTION');
 				option2.innerHTML = Q.getObject("webrtc.settingsPopup.fbFriendsAccess", tool.textes);
 				option2.value = 'ALL_FRIENDS';
-				var option3 = document.createElement('OPTION');
-				option3.value = 'EVERYONE';
-				option3.innerHTML = Q.getObject("webrtc.settingsPopup.fbPublicAccess", tool.textes);
+                var option3 = document.createElement('OPTION');
+                option3.innerHTML = Q.getObject("webrtc.settingsPopup.fbOnlyMeLiveAccess", tool.textes);
+                option3.value = 'SELF';
 
 				var startStreamingBtn = document.createElement('BUTTON');
 				startStreamingBtn.type = 'button';
