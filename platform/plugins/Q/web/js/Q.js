@@ -11629,8 +11629,11 @@ Q.Pointer = {
 Q.Pointer.preventRubberBand.suspend = {};
 
 function _cancelClickBriefly() {
+	if (Q.Pointer.latest.touches.length) {
+		// no need to cancel click here, user will have to lift their fingers to click
+		return false;
+	}
 	Q.Pointer.cancelClick(true);
-	_cancelClickBriefly.active = true;
 	setTimeout(function () {
 		Q.Pointer.canceledClick = false;
 	}, 100);
