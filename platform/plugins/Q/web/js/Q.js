@@ -6326,7 +6326,7 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		? eventHandler.eventListener = _Q_addEventListener_wrapper
 		: eventHandler);
 	if (typeof eventName === 'string') {
-		var split = eventName.split(' ');
+		var split = eventName.trim().split(' ');
 		if (split.length > 1) {
 			eventName = split;
 		}
@@ -11687,8 +11687,8 @@ Q.addEventListener(document.body, 'touchstart mousedown', function (e) {
 	}
 }, false, true);
 
-Q.addEventListener(document.body, 'touchend touchcancel mouseup ', function (e) {
-	if (e.type === 'mousedown') {
+Q.addEventListener(document.body, 'touchend touchcancel mouseup', function (e) {
+	if (e.type === 'mouseup') {
 		Q.Pointer.latest.which = Q.Pointer.which(e);
 	} else {
 		Q.Pointer.latest.touches = e.touches;
