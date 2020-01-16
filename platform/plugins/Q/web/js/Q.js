@@ -11550,6 +11550,17 @@ Q.Pointer = {
 	stopBlurringOnTouch: function () {
 		Q.removeEventListener(window, 'touchstart', _touchBlurHandler, false, true);
 	},
+	clearSelection: function () {
+		if (window.getSelection) {
+			if (window.getSelection().empty) {  // Chrome
+				window.getSelection().empty();
+			} else if (window.getSelection().removeAllRanges) {  // Firefox
+				window.getSelection().removeAllRanges();
+			}
+		} else if (document.selection && document.selection.empty) {  // IE?
+			document.selection.empty();
+		}
+	},
 	/**
 	 * Call this function to begin canceling clicks on the element or its scrolling parent.
 	 * This is to good for preventing stray clicks from happening after an accidental scroll,
