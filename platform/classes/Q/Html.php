@@ -607,7 +607,7 @@ class Q_Html
 		}
 		$tag_params = array_merge(compact('src', 'alt'), $attributes);
 		if (Q_Config::get('Q', 'images', 'defer') and !empty($tag_params['src'])) {
-			$tag_params['data-defer-src'] = $tag_params['src'];
+			$tag_params['data-lazyload-src'] = $tag_params['src'];
 			unset($tag_params['src']);
 		}
 		return self::tag('img', $tag_params);

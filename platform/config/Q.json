@@ -165,7 +165,7 @@
 				"defaultSize": "x",
 				"maxStretch": 1
 			},
-			"defer": false,
+			"lazyload": false,
 			"maxWidth": 5000,
 			"maxHeight": 5000,
 			"pixabay": null,
