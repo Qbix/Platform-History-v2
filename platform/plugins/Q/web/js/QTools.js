@@ -3030,7 +3030,7 @@ Q.Contextual = {
 		}
 		listingWrapper.find('.Q_listing').css('transform', 'none');
 		var arrow = contextual.find('.Q_contextual_bottom_arrow, .Q_contextual_top_arrow');
-		info.arrowHeight = contextual.find('.Q_contextual_top_arrow, .Q_contextual_bottom_arrow').getBoundingClientRect().height;
+		info.arrowHeight = contextual.find('.Q_contextual_top_arrow, .Q_contextual_bottom_arrow').outerHeight();
 		
 		Q.Contextual.calcRelativeCoords(trigger, contextual, info);
 		

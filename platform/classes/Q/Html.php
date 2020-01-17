@@ -606,7 +606,7 @@ class Q_Html
 			$alt = 'not a string';
 		}
 		$tag_params = array_merge(compact('src', 'alt'), $attributes);
-		if (Q_Config::get('Q', 'images', 'defer') and !empty($tag_params['src'])) {
+		if (Q_Config::get('Q', 'images', 'lazyload', false) and !empty($tag_params['src'])) {
 			$tag_params['data-lazyload-src'] = $tag_params['src'];
 			unset($tag_params['src']);
 		}
