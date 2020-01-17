@@ -8744,7 +8744,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 							element.setAttribute('data-slot', slotName);
 							
 							// save some info before prefixfree mangles stuff
-							if (element.tagName.toUpperCase() === 'LINK') {
+							if (element.tagName && element.tagName.toUpperCase() === 'LINK') {
 								processStylesheets.slots[element.getAttribute('href')] = slotName;
 							}
 						});
@@ -11406,7 +11406,7 @@ Q.Pointer = {
 	 * Start showing touchlabels on elements with data-touchlabel="Label text"
 	 * to help people who touch an element know what it's going to do if they release
 	 * their finger on it.
-	 * @method startTouchlabels
+	 * @method activateTouchlabels
 	 * @param {Element} [element=document.body] The element in which to activate touchlabels.
 	 * @param {Boolean} [onlyTouchscreen=false] Whether to only do it on a touchscreen
 	 * @static
