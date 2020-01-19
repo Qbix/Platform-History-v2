@@ -3959,7 +3959,6 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached, removeElementAfterLa
 			if (Q.typeOf(Q.getObject(["Q", "tools", tn[i], "remove"], toolElement)) !== "function") {
 				continue;
 			}
-
 			toolElement.Q.tools[tn[i]].remove(removeCached, removeElementAfterLastTool);
 		}
 	});
@@ -4487,11 +4486,15 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached, removeElementAfterLa
 	var nn = Q.normalize(this.name);
 	delete this.element.Q.tools[nn];
 	delete Q.Tool.active[this.id][nn];
-	if (Q.isEmpty(Q.Tool.active[this.id])) {
+	var tools = Q.Tool.active[this.id];
+	if (Q.isEmpty()) {
 		if (removeElementAfterLastTool) {
 			Q.removeElement(this.element);
 		}
+		this.element.Q.tool = null;
 		delete Q.Tool.active[this.id];
+	} else if (Q.normalize(this.element.Q.tool) === nn) {
+		this.element.Q.tool = Q.byId(this.id);
 	}
 
 	// remove all the tool's events automatically
@@ -12952,7 +12955,8 @@ Q.onJQuery.add(function ($) {
 		"Q/resize": "{{Q}}/js/tools/resize.js",
 		"Q/layouts": "{{Q}}/js/tools/layouts.js",
 		"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js",
-		"Q/parallax": "{{Q}}/js/tools/parallax.js"
+		"Q/parallax": "{{Q}}/js/tools/parallax.js",
+		"Q/lazyload": "{{Q}}/js/tools/lazyload.js"
 	});
 	
 	Q.Tool.jQuery({
