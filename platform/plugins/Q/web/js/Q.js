@@ -12731,7 +12731,7 @@ Q.Masks = {
 			var me = mask.element;
 			me.style.display = 'block';
 			if (mask.fadeIn) {
-				var opacity = me.computedStyle().opacity;
+				var opacity = me.originalOpacity = me.computedStyle().opacity;
 				Q.Animation.play(function (x, y) {
 					me.style.opacity = y * opacity;
 				}, mask.fadeIn, options.animation.ease, options.animation.until);
@@ -12762,7 +12762,7 @@ Q.Masks = {
 		var me = mask.element;
 		if (--mask.counter === 0) {
 			if (mask.fadeOut) {
-				var opacity = me.computedStyle().opacity;
+				var opacity = me.originalOpacity || me.computedStyle().opacity;
 				Q.Animation.play(function (x, y) {
 					me.style.opacity = (1-y) * opacity;
 				}, mask.fadeOut).onComplete.set(function () {
