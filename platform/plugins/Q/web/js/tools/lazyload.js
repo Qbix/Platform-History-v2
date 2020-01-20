@@ -7,8 +7,9 @@
  * Implements lazy-loading for various types of elements.
  * By default, has implementations for "img" and "Q_tool" selectors.
  * The "Q_tool" handler only works with tools whose elements have a "data-q-lazyload" attribute .
- * Note that the elements must have a nonzero width and height to be lazy-loaded when
- * they appear in the viewport.
+ * Note that the elements must have a stable, nonzero width height set in the CSS even
+ * if they are empty, otherwise they might not be lazy-loaded, and they might
+ * thrash back and forth if removed.
  * @class Q lazyload
  * @constructor
  * @param {Object} [options] Override various options for this tool
@@ -102,20 +103,19 @@ Q.Tool.define('Q/lazyload', function (options) {
 				if (src) {
 					img.setAttribute('src', src);
 					img.removeAttribute('data-defer-src');
-					return true;
+					img.addClass('Q_lazy_load');
+					img.addEventListener('load', function () {
+						img.addClass('Q_lazy_loaded');
+					});
 				}
+				return true;
 			},
 			exiting: function (img) {
-				// no need to do anyting
+				// no need to do anything
 				return true;
 			},
 			preparing: function (img, entry) {
-				var src = img.getAttribute('src');
-				if (src) {
-					img.setAttribute('data-defer-src', src);
-					img.removeAttribute('src');
-				}
-				return true;
+				return this.state.handlers.img.entering(img, entry);
 			}
 		},
 		tool: {
@@ -123,7 +123,10 @@ Q.Tool.define('Q/lazyload', function (options) {
 			entering: function (element, entry) {
 				if (element.hasAttribute('data-Q-lazyload')
 				&& (!element.Q || !element.Q.tool)) {
-					Q.activate(element)
+					element.addClass('Q_lazy_load');
+					Q.activate(element, function () {
+						element.addClass('Q_lazy_loaded');
+					});
 					return true;
 				}
 			},
@@ -131,6 +134,8 @@ Q.Tool.define('Q/lazyload', function (options) {
 				if (element.hasAttribute('data-Q-lazyload')
 				&& element.Q.tool) {
 					Q.Tool.remove(element);
+					element.removeClass('Q_lazy_loading');
+					element.removeClass('Q_lazy_loaded');
 					if (this.state.handlers.tool.exitingRemoveHTML) {
 						element.innerHTML = '';
 					}
@@ -198,6 +203,7 @@ function _createObserver(tool, container) {
 					} else  {
 						var rect = entry.target.getBoundingClientRect();
 						if (rect.width > 0 && rect.height > 0) {
+							// also covers !document.body.contains(entry.target)
 							info.exiting.call(tool, entry.target, entry);
 						} // otherwise it might get a false positive
 					}

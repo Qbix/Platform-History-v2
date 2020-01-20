@@ -140,11 +140,11 @@ table { border-spacing:0; border-collapse:collapse; }
 
 .Q_mask { display: none; position: absolute; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; }
 .Q_cancel_mask { z-index: 2000; text-align: center; }
-.Q_load_cancel_tonton { vertical-align: middle; margin-top: 80px; }
+.Q_load_cancel { vertical-align: middle; margin-top: 80px; }
 .Q_notice_mask,
 .Q_screen_mask,
 .Q_dialog_mask { background-color: rgba(0, 0, 0, 0.2); }
-.Q_load_mask { background-color: rgba(0, 0, 0, 0.2); }
+.Q_load_mask { background-color: rgba(0, 0, 0, 0.3); background-image: radial-gradient(circle at center 200px,hsla(0,0%,100%,.1),#000); }
 .Q_click_mask { background: transparent; z-index: 2147483500; }
 
 /* Clear fix */
@@ -455,6 +455,8 @@ div.Q_placeholder { pointer-events: none; }
 	overflow: visible !important;
 	white-space: normal !important;
 }
+.Q_lazy_load { opacity: 0; }
+.Q_lazy_loaded { opacity: 1; transition: all 300ms; }
 
 #dialogs_slot { display: none; }
 
