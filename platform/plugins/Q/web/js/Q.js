@@ -6930,7 +6930,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  * @param {boolean} [options.quiet=true] this option is just passed to your onLoadStart/onLoadEnd handlers in case they want to respect it.
  * @param {boolean} [options.timestamp] whether to include a timestamp (e.g. as a cache-breaker)
  * @param {Function} [options.onRedirect=Q.handle] if set and response data.redirect.url is not empty, automatically call this function.
- * @param {boolean} [options.timeout=3000] milliseconds to wait for response, before showing cancel button and triggering onTimeout event, if any, passed to the options
+ * @param {boolean} [options.timeout=5000] milliseconds to wait for response, before showing cancel button and triggering onTimeout event, if any, passed to the options
  * @param {Q.Event} [options.onTimeout] handler to call when timeout is reached. First argument is a function which can be called to cancel loading.
  * @param {Q.Event} [options.onResponse] handler to call when the response comes back but before it is processed
  * @param {Q.Event} [options.onProcessed] handler to call when a response was processed
@@ -12833,7 +12833,7 @@ Q.Masks = {
 Q.Masks.options = {
 	'Q.click.mask': { className: 'Q_click_mask', fadeIn: 0, fadeOut: 0, duration: 500 },
 	'Q.screen.mask': { className: 'Q_screen_mask', fadeIn: 100 },
-	'Q.request.load.mask': { className: 'Q_load_mask', fadeIn: 3000 },
+	'Q.request.load.mask': { className: 'Q_load_mask', fadeIn: 5000 },
 	'Q.request.cancel.mask': { className: 'Q_cancel_mask', fadeIn: 200 }
 };
 
@@ -13217,7 +13217,7 @@ Q.request.options = {
 	duplicate: true,
 	quiet: true,
 	parse: 'json',
-	timeout: 3000,
+	timeout: 5000,
 	onRedirect: new Q.Event(function (url) {
 		Q.handle(url, {
 			target: '_self',
