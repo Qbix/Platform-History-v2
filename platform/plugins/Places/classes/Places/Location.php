@@ -67,12 +67,12 @@ class Places_Location extends Base_Places_Location
 	 * @param {string} $asUserId The user to fetch as
 	 * @param {string} $publisherId The user publishing the stream
 	 * @param {string} $placeId The id of the place in Google Places
-	 * @param {boolean} $throwIfBadValue
-	 *  Whether to throw Q_Exception if the result contains a bad value
+	 * @param {boolean} [$throwIfBadValue=false] Whether to throw Q_Exception if the result contains a bad value
+	 * @param {boolean} [$withTimeZone=false] If true, trying to get time zone and save to attributes
 	 * @return {Streams_Stream|null}
 	 * @throws {Q_Exception} if a bad value is encountered and $throwIfBadValue is true
 	 */
-	static function stream($asUserId, $publisherId, $placeId, $throwIfBadValue = false)
+	static function stream($asUserId, $publisherId, $placeId, $throwIfBadValue = false, $withTimeZone = false)
 	{
 		if (empty($placeId)) {
 			if ($throwIfBadValue) {
@@ -132,10 +132,12 @@ class Places_Location extends Base_Places_Location
 		);
 
 		// try to get timeZone
-		try {
-			$timeZone = Places::timezone($latitude, $longitude);
-			$attributes['timeZone'] = Q::ifset($timeZone, 'timeZoneId', null);
-		} catch (Exception $e) {}
+		if ($withTimeZone) {
+			try {
+				$timeZone = Places::timezone($latitude, $longitude);
+				$attributes['timeZone'] = Q::ifset($timeZone, 'timeZoneId', null);
+			} catch (Exception $e) {}
+		}
 
 		$geohash = Places_Geohash::encode($latitude, $longitude);
 		if ($location) {
