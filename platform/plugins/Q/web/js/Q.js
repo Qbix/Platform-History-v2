@@ -10290,7 +10290,7 @@ Q.Animation.ease = {
 		return Math.sin(Math.PI * (fraction - 0.5)) / 2 + 0.5;
 	},
 	easeInExpo: function (t) {
-		return (x==0) ? 0 : pow(2, 10 * (x - 1)) + 0 - 1 * 0.001;
+		return (t==0) ? 0 : Math.pow(2, 10 * (t - 1)) + 0 - 1 * 0.001;
 	},
 	inOutQuintic: function(t) {
 		var ts = t * t;
@@ -12713,6 +12713,7 @@ Q.Masks = {
 	 * @method show
 	 * @param {String} key The key of the mask to show.
 	 * @param {Object} [options={}] Used to provide any mask options to Q.Masks.mask
+	 * @param {Object} [animation={}] Used to provide any mask options to the Q.Animation
 	 * @return {Object} the mask info
 	 */
 	show: function(key, options)
@@ -12723,6 +12724,8 @@ Q.Masks = {
 			}, key);
 		}
 		key = Q.calculateKey(key);
+		options = Q.extend({}, 10, Q.Masks.show.options, 10, options);
+		options.animation = options.animation || {};
 		var mask = Q.Masks.mask(key, options);
 		if (!mask.counter) {
 			var me = mask.element;
@@ -12731,7 +12734,7 @@ Q.Masks = {
 				var opacity = me.computedStyle().opacity;
 				Q.Animation.play(function (x, y) {
 					me.style.opacity = y * opacity;
-				}, mask.fadeIn);
+				}, mask.fadeIn, options.animation.ease, options.animation.until);
 				me.style.opacity = 0;
 			}
 		}
@@ -12830,8 +12833,14 @@ Q.Masks = {
 Q.Masks.options = {
 	'Q.click.mask': { className: 'Q_click_mask', fadeIn: 0, fadeOut: 0, duration: 500 },
 	'Q.screen.mask': { className: 'Q_screen_mask', fadeIn: 100 },
-	'Q.request.load.mask': { className: 'Q_load_mask', fadeIn: 1000 },
+	'Q.request.load.mask': { className: 'Q_load_mask', fadeIn: 3000 },
 	'Q.request.cancel.mask': { className: 'Q_cancel_mask', fadeIn: 200 }
+};
+
+Q.Masks.show.options = {
+	animation: {
+		ease: 'easeInExpo'
+	}
 };
 
 Q.addEventListener(window, Q.Pointer.start, _Q_PointerStartHandler, false, true);
