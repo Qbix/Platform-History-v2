@@ -13240,7 +13240,7 @@ Q.onReady.set(function _Q_masks() {
 		var button = mask.querySelectorAll('.Q_load_cancel_button');
 		if (!button.length) {
 			button = document.createElement('button');
-			button.setAttribute('class', 'Q_load_cancel_button');
+			button.setAttribute('class', 'Q_button Q_load_cancel_button');
 			button.innerHTML = 'Cancel';
 			if (mask[0]) { mask = mask[0]; }
 			mask.appendChild(button);
