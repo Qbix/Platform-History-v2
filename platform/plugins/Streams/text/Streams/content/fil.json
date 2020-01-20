@@ -93,19 +93,27 @@
         "mobile": {
             "alert": "Ang mga paanyaya ay ipinadala mula sa aming numero, na hindi pa nakikilala ng iyong mga kaibigan. Sundin ang isang mabilis na teksto upang ipaalam sa kanila na ang imbitasyon ay nagmula sa iyo, na hinihiling sa kanila na i-click ang link.",
             "confirm": "Ang mga paanyaya ay ipinadala mula sa aming numero, na hindi pa nakikilala ng iyong mga kaibigan. Gusto mo bang mag-follow up gamit ang isang mabilis na teksto upang ipaalam sa kanila na ang imbitasyon ay nagmula sa iyo, na hinihiling sa kanila na i-click ang link.",
-            "check": "Hey, naipadala ko lang sa iyo ang isang imbitasyon sa {{app}} app. Mangyaring suriin ang iyong sms at i-click ang link!"
+            "check": "Hey, naipadala ko lang sa iyo ang isang imbitasyon sa {{app}} app. Mangyaring suriin ang iyong sms at i-click ang link!",
+            "CheckYourMobile": "Mangyaring suriin ang SMS at sundin ang mga tagubilin!"
         },
         "email": {
             "alert": "Ang mga paanyaya ay ipinadala mula sa aming domain, na hindi pa nakikilala ng iyong mga kaibigan. Sundin ang isang mabilis na teksto upang ipaalam sa kanila na ang imbitasyon ay nagmula sa iyo, na hinihiling sa kanila na i-click ang link.",
             "confirm": "Ang mga paanyaya ay ipinadala mula sa aming domain, na hindi pa nakikilala ng iyong mga kaibigan. Gusto mo bang mag-follow up gamit ang isang mabilis na teksto upang ipaalam sa kanila na ang imbitasyon ay nagmula sa iyo, na hinihiling sa kanila na i-click ang link.",
             "subject": "Nakatanggap ka ba ng isang imbitasyon?",
-            "body": "Hey, naipadala ko lang sa iyo ang isang imbitasyon sa {{app}} app. Mangyaring suriin ang iyong email at i-click ang link sa doon!"
+            "body": "Hey, naipadala ko lang sa iyo ang isang imbitasyon sa {{app}} app. Mangyaring suriin ang iyong email at i-click ang link sa doon!",
+            "CheckYourEmail": "Mangyaring suriin ang iyong email at sundin ang mga tagubilin!"
         }
     },
     "participating": {
         "Title": "Pamagat",
         "Subscribed": "Nag-subscribe",
-        "Participants": "Mga kalahok"
+        "Participants": "Mga kalahok",
+        "AreYouSureRemoveIdentifier": "Sigurado ka bang alisin ang pagkakakilanlan na ito?",
+        "AreYouSureUnsubscribeIdentifier": "Sigurado ka bang hindi mai-unsubscribe ang identifier na ito? Ito ay patayin ang mga abiso sa identifier na ito.",
+        "AreYouSureUnsubscribeDevice": "Sigurado ka bang hindi i-unsubscribe ang aparatong ito? Ito ay patayin ang mga abiso sa aparatong ito.",
+        "Identifiers": "Mga nagpapakilala",
+        "Devices": "Mga aparato",
+        "Streams": "Batis"
     },
     "webrtc": {
         "allow": {
@@ -113,6 +121,73 @@
             "microphoneBtn": "Paganahin ang Mikropono",
             "cameraBtn": "Paganahin ang Camera",
             "cameraAndMicrophoneBtn": "Paganahin ang Camera at Mikropono"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Mga tagubilin",
+            "permissionDenied": "Hindi tinanggihan ang pahintulot para sa {{kind}}. Upang magamit ito mangyaring sundin ang mga hakbang na ito:",
+            "point1": "Pumunta sa &quot;Mga Setting&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Pagkapribado at seguridad&quot; -&gt; &quot;Mga Setting ng Site&quot; -&gt; &quot;Camera&quot; o &quot;Mga Setting ng Site&quot; -&gt; &quot;Mikropono&quot;",
+            "point2": "Alisin ang {{hostname}} mula sa &quot;I-block&quot; na listahan"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Mga tagubilin",
+            "permissionDenied": "Hindi tinanggihan ang pahintulot para sa {{kind}}. Mangyaring i-reload ang pahinang ito at kumpirmahin ang pag-access sa {{kind}} upang sumali sa komperensya."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Mga tagubilin",
+            "permissionDenied": "Itinanggi ang pahintulot para sa {{kind}}. Upang magamit ito mangyaring sundin ang mga hakbang na ito:",
+            "point1": "Pumunta sa iyong Mga Setting sa Android",
+            "point2": "Buksan ang &quot;Apps &amp; notification&quot;",
+            "point3": "Hanapin ang &quot;{{communityName}}&quot; at buksan ito",
+            "point4": "Tapikin ang Mga Pahintulot",
+            "point5": "Paganahin ang {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Mga tagubilin",
+            "permissionDenied": "Hindi tinanggihan ang pahintulot para sa {{kind}}. Upang magamit ito mangyaring sundin ang mga hakbang na ito:",
+            "point1": "Pumunta sa iyong Mga Setting ng iOS",
+            "point2": "Buksan ang &quot;Pagkapribado&quot;",
+            "point3": "Hanapin ang {{kind}} at buksan ito",
+            "point4": "Hanapin ang &quot;{{communityName}}&quot; at paganahin"
+        },
+        "notices": {
+            "youJoinedRoom": "Sumali ka sa silid",
+            "joining": "Pagsali: {{userName}}",
+            "sbLeftRoom": "{{userName}} umalis sa silid",
+            "youLeftRoom": "Umalis ka sa silid",
+            "codeCopied": "Umalis ka sa silid",
+            "sbBeganFbLive": "Nagsimula ang pag-broadcast ng {{userName}} sa tawag na ito sa Facebook",
+            "sbStoppedFbLive": "Tumigil ang {{userName}} sa pagsasahimpapawid ng tawag na ito sa Facebook",
+            "youBeganFbLive": "Sinimulan mong i-broadcast ang tawag na ito sa Facebook",
+            "youStoppedFbLive": "Tumigil ka sa pag-broadcast ng tawag na ito sa Facebook",
+            "linkCopiedToCb": "Link na kinopya sa clipboard",
+            "codeCopiedToCb": "Nakopya ang code sa clipboard",
+            "userHasNoVideo": "Ang kalahok ay walang video"
+        },
+        "settingsPopup": {
+            "webCamera": "Web Camera",
+            "screenSharing": "Pagbabahagi ng Screen",
+            "shareAnotherScreen": "Ibahagi ang isa pang screen",
+            "turnOffCameras": "I-off ang lahat ng mga camera",
+            "startFBLive": "Simulan ang Facebook Livestream",
+            "stopFBLive": "Itigil ang Facebook Livestream",
+            "fbLiveTitle": "Live na Pamagat",
+            "fbLiveDescription": "Live na paglalarawan",
+            "fbOnlyMeLiveAccess": "Ako lang",
+            "fbFriendsAccess": "Mga Kaibigan",
+            "fbPublicAccess": "Pampubliko",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "Tapusin ang Live",
+            "fbEmbedCode": "I-embed",
+            "copy": "Kopya"
+        },
+        "participantsPopup": {
+            "disconnect": "Idiskonekta",
+            "floatingScreens": "Lumulutang na Mga screenshot",
+            "tiledScreens": "Naka-tile na Mga screenshot",
+            "loudestExceptMe": "Loudest Maliban sa Akin",
+            "maximizeLoudest": "I-maximize ang Loudest",
+            "staticMaximized": "Static na Na-maximize",
+            "manual": "Manwal"
         }
     },
     "types": {

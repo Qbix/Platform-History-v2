@@ -64,7 +64,7 @@ function _Q_actions(options) {
 						context: state.context
 					}
 				});
-				Q.Pointer.cancelClick(event);
+				Q.Pointer.cancelClick(true, event);
 				event.stopPropagation();
 				Q.handle(state.onClick, $this, [this]);
 			}).on(Q.Pointer.start, function (event) {
@@ -74,7 +74,7 @@ function _Q_actions(options) {
 					$(window).off([Q.Pointer.end, '.Q_actions']);
 				});
 			}).click(function (event) {
-				Q.Pointer.cancelClick(event);
+				Q.Pointer.cancelClick(true, event);
 				event.stopPropagation();
 			});
 		buttons[action] = button;

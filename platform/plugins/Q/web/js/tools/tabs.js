@@ -478,7 +478,7 @@
 			if (Q.Pointer.canceledClick	|| $('.Q_discouragePointerEvents', tool.element).length) {
 				return;
 			}
-			Q.Pointer.cancelClick(event, {}, true);
+			Q.Pointer.cancelClick(true, event, {});
 			var element = this;
 			setTimeout(function () {
 				tool.switchTo([element.getAttribute('data-name'), element]);

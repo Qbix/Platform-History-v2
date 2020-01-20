@@ -547,3 +547,17 @@ html.Users_loggedIn .Users_whenLoggedOut {
 #Users_login_dialog .Q_dialog_slot {
 	padding: 10px;
 }
+
+#notices_slot ul li .Q_tool.Users_avatar_tool {
+	width: 40px;
+	line-height: normal;
+}
+
+#notices_slot ul li {
+	white-space: nowrap;
+}
+
+#notices_slot ul li * {
+	line-height: normal;
+	vertical-align: baseline;
+}

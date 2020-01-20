@@ -606,6 +606,10 @@ class Q_Html
 			$alt = 'not a string';
 		}
 		$tag_params = array_merge(compact('src', 'alt'), $attributes);
+		if (Q_Config::get('Q', 'images', 'lazyload', false) and !empty($tag_params['src'])) {
+			$tag_params['data-lazyload-src'] = $tag_params['src'];
+			unset($tag_params['src']);
+		}
 		return self::tag('img', $tag_params);
 	}
 	
@@ -1122,7 +1126,7 @@ class Q_Html
 		if (Q_Config::get('Q', 'html', 'w3c', true)) {
 			$defaults = array(
 				'img' => array(
-					'src' => '',
+					'src' => null,
 					'alt' => 'image'
 				),
 				'a' => array(

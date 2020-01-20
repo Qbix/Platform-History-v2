@@ -1258,16 +1258,17 @@
 				startStreamingBtnCon.className = 'Streams_webrtc_streaming_start';
 
 				var privacySelect = document.createElement('SELECT');
-				var option1 = document.createElement('OPTION');
-				option1.innerHTML = Q.getObject("webrtc.settingsPopup.fbOnlyMeLiveAccess", tool.textes);
-				option1.value = 'SELF';
-				option1.selected = true;
+
+                var option1 = document.createElement('OPTION');
+                option1.value = 'EVERYONE';
+                option1.innerHTML = Q.getObject("webrtc.settingsPopup.fbPublicAccess", tool.textes);
+                option1.selected = true;
 				var option2 = document.createElement('OPTION');
 				option2.innerHTML = Q.getObject("webrtc.settingsPopup.fbFriendsAccess", tool.textes);
 				option2.value = 'ALL_FRIENDS';
-				var option3 = document.createElement('OPTION');
-				option3.value = 'EVERYONE';
-				option3.innerHTML = Q.getObject("webrtc.settingsPopup.fbPublicAccess", tool.textes);
+                var option3 = document.createElement('OPTION');
+                option3.innerHTML = Q.getObject("webrtc.settingsPopup.fbOnlyMeLiveAccess", tool.textes);
+                option3.value = 'SELF';
 
 				var startStreamingBtn = document.createElement('BUTTON');
 				startStreamingBtn.type = 'button';
@@ -2243,13 +2244,13 @@
 						//return connect('123', captureStreamAndSend);
 						var goLive = function() {
 							FB.ui({
-								display: 'popup',
+								display: 'iframe',
 								method: 'live_broadcast',
 								phase: 'create'
 							}, (createRes) => {
 
 								FB.ui({
-									display: 'popup',
+									display: 'iframe',
 									method: 'live_broadcast',
 									phase: 'publish',
 									broadcast_data: createRes
@@ -2267,20 +2268,9 @@
 							});
 						}
 
-						FB.getLoginStatus(function(response){
-							if (response.status === 'connected') {
-								goLive();
-							} else {
-								FB.login(function(response) {
-									if (response.authResponse) {
-										goLive();
-									}
-								}, {scope: 'email,public_profile,publish_video'});
-
-							}
-
-						});
-
+						if (FB.getUserID()) {
+							goLive();
+						}
 					}
 
 					/**

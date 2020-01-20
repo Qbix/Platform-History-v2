@@ -489,6 +489,7 @@ Q.Tool.define("Q/columns", function(options) {
 					if (o.pagePushUrl && createdNewDiv && url && url !== location.href) {
 						Q.Page.push(url);
 					}
+					Q.Pointer.clearSelection();
 
 					// call the callback before the events,
 					// so something custom can be done first
@@ -794,6 +795,7 @@ Q.Tool.define("Q/columns", function(options) {
 				$sc.width($sc.width() - w);
 			}
 			presentColumn(tool);
+			Q.Pointer.clearSelection();
 			Q.handle(callback, tool, [index, div]);
 			state.onClose.handle.call(tool, index, div, data);
 			var url = $prev.attr('data-url') || $div.attr('data-prevUrl');

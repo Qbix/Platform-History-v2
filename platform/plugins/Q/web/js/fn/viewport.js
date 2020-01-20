@@ -137,7 +137,7 @@ function _Q_viewport(options) {
 				x: Q.Pointer.getX(e),
 				y: Q.Pointer.getY(e)
 			};
-			Q.Pointer.cancelClick(e, null, true); // even on the slightest move
+			Q.Pointer.cancelClick(true, e, null); // even on the slightest move
 			e.preventDefault();
 			if (!pos) {
 				return;

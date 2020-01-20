@@ -15,6 +15,7 @@ var $ = Q.$ = root.jQuery;
 var _isReady = false;
 var _isOnline = null;
 var _isCordova = null;
+var _documentIsUnloading = null;
 
 /**
  * @class Q
@@ -3958,7 +3959,6 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached, removeElementAfterLa
 			if (Q.typeOf(Q.getObject(["Q", "tools", tn[i], "remove"], toolElement)) !== "function") {
 				continue;
 			}
-
 			toolElement.Q.tools[tn[i]].remove(removeCached, removeElementAfterLastTool);
 		}
 	});
@@ -4486,11 +4486,15 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached, removeElementAfterLa
 	var nn = Q.normalize(this.name);
 	delete this.element.Q.tools[nn];
 	delete Q.Tool.active[this.id][nn];
-	if (Q.isEmpty(Q.Tool.active[this.id])) {
+	var tools = Q.Tool.active[this.id];
+	if (Q.isEmpty()) {
 		if (removeElementAfterLastTool) {
 			Q.removeElement(this.element);
 		}
+		this.element.Q.tool = null;
 		delete Q.Tool.active[this.id];
+	} else if (Q.normalize(this.element.Q.tool) === nn) {
+		this.element.Q.tool = Q.byId(this.id);
 	}
 
 	// remove all the tool's events automatically
@@ -5948,24 +5952,6 @@ Q.loadHandlebars = Q.getter(function _Q_loadHandlebars(callback) {
 });
 
 /**
- * Call this function to set a notice that is shown when the page is almost about to be unloaded
- * @static
- * @method beforeUnload
- * @param notice {String} The notice to set. It should typically be worded so that "Cancel" cancels the unloading.
- * @required
- */
-Q.beforeUnload = function _Q_beforeUnload(notice) {
-	window.onbeforeunload = function(e){
-		if (!notice) return undefined;
-		e = e || window.event;
-		if (e) { // For IE and Firefox (prior to 4)
-			e.returnValue = notice;
-		}
-		return notice; // For Safari and Chrome
-	};
-};
-
-/**
  * Calculate the total number of pixels that fixed elements take up
  * from the given side of the screen. The elements are found by simply
  * looking for the class 'Q_fixed_' + from, which should have been added to them.
@@ -6061,6 +6047,252 @@ Q.removeElement = function _Q_removeElement(element, removeTools) {
 	}
 };
 
+/**
+ * A tool for detecting user browser parameters.
+ * @class Q.Browser
+ */
+Q.Browser = {
+
+	/**
+	 * The only public method, detect() returns a hash consisting of these elements:
+	 * "name": Name of the browser, can be 'mozilla' for example.
+	 * "mainVersion": Major version of the browser, digit like '9' for example.
+	 * "OS": Browser's operating system. For example 'windows'.
+	 * "engine": Suggested engine of the browser, can be 'gecko', 'webkit' or some other.
+	 * @static
+     * @method detect
+     * @return {Object}
+	 */
+	detect: function() {
+		var data = this.searchData(this.dataBrowser);
+		var browser = (data && data.identity) || "An unknown browser";
+		
+		var version = (this.searchVersion(navigator.userAgent)
+			|| this.searchVersion(navigator.appVersion)
+			|| "an unknown version").toString();
+		var dotIndex = version.indexOf('.');
+		var mainVersion = version.substring(0, dotIndex != -1 ? dotIndex : version.length);
+		var OSdata = this.searchData(this.dataOS);
+		var OS = (OSdata && OSdata.identity) || "an unknown OS";
+		var engine = '', ua = navigator.userAgent.toLowerCase();
+		if (ua.indexOf('webkit') != -1) {
+			engine = 'webkit';
+		} else if (ua.indexOf('gecko') != -1) {
+			engine = 'gecko';
+		} else if (ua.indexOf('presto') != -1) {
+			engine = 'presto';
+		}
+		var isWebView = /(.*)QWebView(.*)/.test(navigator.userAgent)
+			|| (/(iPhone|iPod|iPad).*AppleWebKit(?!.*Version)/i).test(navigator.userAgent);
+		var isStandalone = navigator.standalone
+			|| (root.matchMedia && root.matchMedia('(display-mode: standalone)').matches)
+			|| (root.external && external.msIsSiteMode && external.msIsSiteMode())
+			|| false;
+		if (OS === 'Android') {
+			var w = screen.width-document.documentElement.clientHeight;
+			var h = screen.height-document.documentElement.clientHeight;
+			isStandalone = (0<h && h<40)|| (0<w && w<40);
+		}
+		if (/(.*)QWebView(.*)/.test(navigator.userAgent)) {
+			isStandalone = false;
+		}
+		var name = browser.toLowerCase();
+		var prefix;
+		switch (engine) {
+			case 'webkit': prefix = '-webkit-'; break;
+			case 'gecko': prefix = '-moz-'; break;
+			case 'presto': prefix = '-o-'; break;
+			default: prefix = '';
+		}
+		prefix = (name === 'explorer') ? '-ms-' : prefix;
+		return {
+			name: name,
+			mainVersion: mainVersion,
+			prefix: prefix,
+			OS: OS.toLowerCase(),
+			engine: engine,
+			device: OSdata && OSdata.device,
+			isWebView: isWebView,
+			isStandalone: isStandalone,
+			isCordova: _isCordova
+		};
+	},
+	
+	searchData: function(data) {
+		for (var i=0, l=data.length; i<l; i++) {
+			var dataString = data[i].string;
+			this.versionSearchString = data[i].versionSearch || data[i].identity;
+			if (dataString) {
+				if (navigator.userAgent.indexOf(data[i].subString) != -1) {
+					return data[i];
+				}
+			}
+		}
+	},
+	
+	searchVersion : function(dataString) {
+		var index = dataString.indexOf(this.versionSearchString);
+		if (index == -1)
+			return;
+		return parseFloat(dataString.substring(index + this.versionSearchString.length + 1));
+	},
+	
+	dataBrowser : [
+		{
+			string : navigator.userAgent,
+			subString : "MSIE",
+			identity : "Explorer",
+			versionSearch : "MSIE"
+		},
+		{
+			string : navigator.userAgent,
+			subString : "Chrome",
+			identity : "Chrome"
+		},
+		{
+			string : navigator.userAgent,
+			subString : "OmniWeb",
+			versionSearch : "OmniWeb/",
+			identity : "OmniWeb"
+		},
+		{
+			string : navigator.vendor,
+			subString : "Apple",
+			identity : "Safari",
+			versionSearch : "Version"
+		},
+		{
+			prop : root.opera,
+			identity : "Opera",
+			versionSearch : "Version"
+		},
+		{
+			string : navigator.vendor,
+			subString : "iCab",
+			identity : "iCab"
+		},
+		{
+			string : navigator.vendor,
+			subString : "KDE",
+			identity : "Konqueror"
+		},
+		{
+			string : navigator.userAgent,
+			subString : "Firefox",
+			identity : "Firefox"
+		},
+		{
+			string : navigator.vendor,
+			subString : "Camino",
+			identity : "Camino"
+		},
+		{ // for newer Netscapes (6+)
+			string : navigator.userAgent,
+			subString : "Netscape",
+			identity : "Netscape"
+		},
+		{
+			string : navigator.userAgent,
+			subString : "Gecko",
+			identity : "Mozilla",
+			versionSearch : "rv"
+		},
+		{ // for older Netscapes (4-)
+			string : navigator.userAgent,
+			subString : "Mozilla",
+			identity : "Netscape",
+			versionSearch : "Mozilla"
+		}
+	],
+
+	dataOS : [
+		{
+			string : navigator.userAgent,
+			subString : "iPhone",
+			identity : "iOS",
+			device: "iPhone"
+		},
+		{
+			string : navigator.userAgent,
+			subString : "iPod",
+			identity : "iOS",
+			device: "iPod"
+		},
+		{
+			string : navigator.userAgent,
+			subString : "iPad",
+			identity : "iOS",
+			device: "iPad"
+		},
+		{
+			string : navigator.userAgent,
+			subString : "Android",
+			identity : "Android"
+		},
+		{
+			string : navigator.platform,
+			subString : "RIM",
+			identity : "BlackBerry"
+		},
+		{
+			string : navigator.platform,
+			subString : "Win",
+			identity : "Windows"
+		},
+		{
+			string : navigator.platform,
+			subString : "Mac",
+			identity : "Mac"
+		},
+		{
+			string : navigator.platform,
+			subString : "Linux",
+			identity : "Linux"
+		},
+		{
+			string : navigator.platform,
+			subString : "BSD",
+			identity : "FreeBSD"
+		},
+	],
+	
+	getScrollbarWidth: function() {
+		if (Q.Browser.scrollbarWidth) {
+			return Q.Browser.scrollbarWidth;
+		}
+		var inner = document.createElement('p');
+		inner.style.width = '100%';
+		inner.style.height = '200px';
+		
+		var outer = document.createElement('div');
+		Q.each({
+			'position': 'absolute',
+			'top': '0px',
+			'left': '0px',
+			'visibility': 'hidden',
+			'width': '200px',
+			'height': '150px',
+			'overflow': 'hidden'
+		}, function (k, v) {
+			outer.style[k] = v;
+		});
+		outer.appendChild(inner);
+		document.body.appendChild(outer);
+
+		var w1 = parseInt(inner.offsetWidth);
+		outer.style.overflow = 'scroll';
+		var w2 = parseInt(inner.offsetWidth);
+		if (w1 == w2) {
+			w2 = outer.clientWidth;
+		}
+
+		Q.removeElement(outer);
+		
+		return Q.Browser.scrollbarWidth = w1 - w2;
+	}
+	
+};
+
 var _supportsPassive;
 
 /**
@@ -6097,7 +6329,7 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		? eventHandler.eventListener = _Q_addEventListener_wrapper
 		: eventHandler);
 	if (typeof eventName === 'string') {
-		var split = eventName.split(' ');
+		var split = eventName.trim().split(' ');
 		if (split.length > 1) {
 			eventName = split;
 		}
@@ -6263,6 +6495,25 @@ Q.removeEventListener = function _Q_removeEventListener(element, eventName, even
 		}
 	}
 	return true;
+};
+
+/**
+ * Call this function to set a notice that is shown when the page is almost about to be unloaded
+ * @static
+ * @method beforeUnload
+ * @param notice {String} The notice to set. It should typically be worded so that "Cancel" cancels the unloading.
+ * @required
+ */
+Q.beforeUnload = function _Q_beforeUnload(notice) {
+	Q.addEventListener(window, 'beforeunload', function (e) {
+		if (!notice) return undefined;
+		e = e || window.event;
+		if (e) { // For IE and Firefox (prior to 4)
+			e.preventDefault(); // for newer browsers, but ignores notice
+			e.returnValue = notice;
+		}
+		return notice; // For Safari and Chrome
+	});
 };
 
 /**
@@ -6679,7 +6930,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  * @param {boolean} [options.quiet=true] this option is just passed to your onLoadStart/onLoadEnd handlers in case they want to respect it.
  * @param {boolean} [options.timestamp] whether to include a timestamp (e.g. as a cache-breaker)
  * @param {Function} [options.onRedirect=Q.handle] if set and response data.redirect.url is not empty, automatically call this function.
- * @param {boolean} [options.timeout=1500] milliseconds to wait for response, before showing cancel button and triggering onTimeout event, if any, passed to the options
+ * @param {boolean} [options.timeout=5000] milliseconds to wait for response, before showing cancel button and triggering onTimeout event, if any, passed to the options
  * @param {Q.Event} [options.onTimeout] handler to call when timeout is reached. First argument is a function which can be called to cancel loading.
  * @param {Q.Event} [options.onResponse] handler to call when the response comes back but before it is processed
  * @param {Q.Event} [options.onProcessed] handler to call when a response was processed
@@ -6720,7 +6971,7 @@ Q.request = function (url, slotNames, callback, options) {
 
 		var tout = false, t = {};
 		if (o.timeout !== false) {
-			tout = o.timeout || 1500;
+			tout = o.timeout || Q.request.options.timeout;
 		}
 	
 		function _Q_request_callback(err, content, wasJsonP) {
@@ -6783,6 +7034,9 @@ Q.request = function (url, slotNames, callback, options) {
 		
 		function _onCancel (status, msg) {
 			var code;
+			if (_documentIsUnloading) { // the document is about to go poof anyway
+				return; // don't call any callbacks, avoiding possible alerts
+			}
 			status = Q.isInteger(status) ? status : null;
 			if (this.response) {
 				var data = JSON.parse(this.response);
@@ -8493,7 +8747,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 							element.setAttribute('data-slot', slotName);
 							
 							// save some info before prefixfree mangles stuff
-							if (element.tagName.toUpperCase() === 'LINK') {
+							if (element.tagName && element.tagName.toUpperCase() === 'LINK') {
 								processStylesheets.slots[element.getAttribute('href')] = slotName;
 							}
 						});
@@ -10036,7 +10290,7 @@ Q.Animation.ease = {
 		return Math.sin(Math.PI * (fraction - 0.5)) / 2 + 0.5;
 	},
 	easeInExpo: function (t) {
-		return (x==0) ? 0 : pow(2, 10 * (x - 1)) + 0 - 1 * 0.001;
+		return (t==0) ? 0 : Math.pow(2, 10 * (t - 1)) + 0 - 1 * 0.001;
 	},
 	inOutQuintic: function(t) {
 		var ts = t * t;
@@ -10317,252 +10571,6 @@ Q.jQueryPluginPlugin();
 _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
 	|| location.search.queryField('Q.cordova')
 	|| Q.cookie('Q_cordova');
-
-/**
- * A tool for detecting user browser parameters.
- * @class Q.Browser
- */
-Q.Browser = {
-
-	/**
-	 * The only public method, detect() returns a hash consisting of these elements:
-	 * "name": Name of the browser, can be 'mozilla' for example.
-	 * "mainVersion": Major version of the browser, digit like '9' for example.
-	 * "OS": Browser's operating system. For example 'windows'.
-	 * "engine": Suggested engine of the browser, can be 'gecko', 'webkit' or some other.
-	 * @static
-     * @method detect
-     * @return {Object}
-	 */
-	detect: function() {
-		var data = this.searchData(this.dataBrowser);
-		var browser = (data && data.identity) || "An unknown browser";
-		
-		var version = (this.searchVersion(navigator.userAgent)
-			|| this.searchVersion(navigator.appVersion)
-			|| "an unknown version").toString();
-		var dotIndex = version.indexOf('.');
-		var mainVersion = version.substring(0, dotIndex != -1 ? dotIndex : version.length);
-		var OSdata = this.searchData(this.dataOS);
-		var OS = (OSdata && OSdata.identity) || "an unknown OS";
-		var engine = '', ua = navigator.userAgent.toLowerCase();
-		if (ua.indexOf('webkit') != -1) {
-			engine = 'webkit';
-		} else if (ua.indexOf('gecko') != -1) {
-			engine = 'gecko';
-		} else if (ua.indexOf('presto') != -1) {
-			engine = 'presto';
-		}
-		var isWebView = /(.*)QWebView(.*)/.test(navigator.userAgent)
-			|| (/(iPhone|iPod|iPad).*AppleWebKit(?!.*Version)/i).test(navigator.userAgent);
-		var isStandalone = navigator.standalone
-			|| (root.matchMedia && root.matchMedia('(display-mode: standalone)').matches)
-			|| (root.external && external.msIsSiteMode && external.msIsSiteMode())
-			|| false;
-		if (OS === 'Android') {
-			var w = screen.width-document.documentElement.clientHeight;
-			var h = screen.height-document.documentElement.clientHeight;
-			isStandalone = (0<h && h<40)|| (0<w && w<40);
-		}
-		if (/(.*)QWebView(.*)/.test(navigator.userAgent)) {
-			isStandalone = false;
-		}
-		var name = browser.toLowerCase();
-		var prefix;
-		switch (engine) {
-			case 'webkit': prefix = '-webkit-'; break;
-			case 'gecko': prefix = '-moz-'; break;
-			case 'presto': prefix = '-o-'; break;
-			default: prefix = '';
-		}
-		prefix = (name === 'explorer') ? '-ms-' : prefix;
-		return {
-			name: name,
-			mainVersion: mainVersion,
-			prefix: prefix,
-			OS: OS.toLowerCase(),
-			engine: engine,
-			device: OSdata && OSdata.device,
-			isWebView: isWebView,
-			isStandalone: isStandalone,
-			isCordova: _isCordova
-		};
-	},
-	
-	searchData: function(data) {
-		for (var i=0, l=data.length; i<l; i++) {
-			var dataString = data[i].string;
-			this.versionSearchString = data[i].versionSearch || data[i].identity;
-			if (dataString) {
-				if (navigator.userAgent.indexOf(data[i].subString) != -1) {
-					return data[i];
-				}
-			}
-		}
-	},
-	
-	searchVersion : function(dataString) {
-		var index = dataString.indexOf(this.versionSearchString);
-		if (index == -1)
-			return;
-		return parseFloat(dataString.substring(index + this.versionSearchString.length + 1));
-	},
-	
-	dataBrowser : [
-		{
-			string : navigator.userAgent,
-			subString : "MSIE",
-			identity : "Explorer",
-			versionSearch : "MSIE"
-		},
-		{
-			string : navigator.userAgent,
-			subString : "Chrome",
-			identity : "Chrome"
-		},
-		{
-			string : navigator.userAgent,
-			subString : "OmniWeb",
-			versionSearch : "OmniWeb/",
-			identity : "OmniWeb"
-		},
-		{
-			string : navigator.vendor,
-			subString : "Apple",
-			identity : "Safari",
-			versionSearch : "Version"
-		},
-		{
-			prop : root.opera,
-			identity : "Opera",
-			versionSearch : "Version"
-		},
-		{
-			string : navigator.vendor,
-			subString : "iCab",
-			identity : "iCab"
-		},
-		{
-			string : navigator.vendor,
-			subString : "KDE",
-			identity : "Konqueror"
-		},
-		{
-			string : navigator.userAgent,
-			subString : "Firefox",
-			identity : "Firefox"
-		},
-		{
-			string : navigator.vendor,
-			subString : "Camino",
-			identity : "Camino"
-		},
-		{ // for newer Netscapes (6+)
-			string : navigator.userAgent,
-			subString : "Netscape",
-			identity : "Netscape"
-		},
-		{
-			string : navigator.userAgent,
-			subString : "Gecko",
-			identity : "Mozilla",
-			versionSearch : "rv"
-		},
-		{ // for older Netscapes (4-)
-			string : navigator.userAgent,
-			subString : "Mozilla",
-			identity : "Netscape",
-			versionSearch : "Mozilla"
-		}
-	],
-
-	dataOS : [
-		{
-			string : navigator.userAgent,
-			subString : "iPhone",
-			identity : "iOS",
-			device: "iPhone"
-		},
-		{
-			string : navigator.userAgent,
-			subString : "iPod",
-			identity : "iOS",
-			device: "iPod"
-		},
-		{
-			string : navigator.userAgent,
-			subString : "iPad",
-			identity : "iOS",
-			device: "iPad"
-		},
-		{
-			string : navigator.userAgent,
-			subString : "Android",
-			identity : "Android"
-		},
-		{
-			string : navigator.platform,
-			subString : "RIM",
-			identity : "BlackBerry"
-		},
-		{
-			string : navigator.platform,
-			subString : "Win",
-			identity : "Windows"
-		},
-		{
-			string : navigator.platform,
-			subString : "Mac",
-			identity : "Mac"
-		},
-		{
-			string : navigator.platform,
-			subString : "Linux",
-			identity : "Linux"
-		},
-		{
-			string : navigator.platform,
-			subString : "BSD",
-			identity : "FreeBSD"
-		},
-	],
-	
-	getScrollbarWidth: function() {
-		if (Q.Browser.scrollbarWidth) {
-			return Q.Browser.scrollbarWidth;
-		}
-		var inner = document.createElement('p');
-		inner.style.width = '100%';
-		inner.style.height = '200px';
-		
-		var outer = document.createElement('div');
-		Q.each({
-			'position': 'absolute',
-			'top': '0px',
-			'left': '0px',
-			'visibility': 'hidden',
-			'width': '200px',
-			'height': '150px',
-			'overflow': 'hidden'
-		}, function (k, v) {
-			outer.style[k] = v;
-		});
-		outer.appendChild(inner);
-		document.body.appendChild(outer);
-
-		var w1 = parseInt(inner.offsetWidth);
-		outer.style.overflow = 'scroll';
-		var w2 = parseInt(inner.offsetWidth);
-		if (w1 == w2) {
-			w2 = outer.clientWidth;
-		}
-
-		Q.removeElement(outer);
-		
-		return Q.Browser.scrollbarWidth = w1 - w2;
-	}
-	
-};
 
 var detected = Q.Browser.detect();
 var isTouchscreen = ('ontouchstart' in root || !!root.navigator.msMaxTouchPoints);
@@ -10908,6 +10916,13 @@ Q.Pointer = {
 	fastclick: function _Q_fastclick (params) {
 		params.eventName = Q.info.isTouchscreen ? 'touchend' : 'click';
 		return function _Q_fastclick_on_wrapper (e) {
+			var oe = e.originalEvent || e;
+			if (oe.type === 'touchend') {
+				if (oe.touches && oe.touches.length) {
+					return; // still some touches happening
+				}
+				Q.Pointer.touches = oe.touches;
+			}
 			var x = Q.Pointer.getX(e), y = Q.Pointer.getY(e);
 			var elem = (!isNaN(x) && !isNaN(y)) && Q.Pointer.elementFromPoint(x, y);
 			if (!(elem instanceof Element)){
@@ -11137,7 +11152,7 @@ Q.Pointer = {
  		return oe.touches ? oe.touches.length : (Q.Pointer.which(e) > 0 ? 1 : 0);
 	},
 	/**
-	 * Returns which button was pressed - Q.Pointer.which.{LEFT|MIDDLE|RIGHT}
+	 * Returns which button was pressed - Q.Pointer.which.{LEFT|MIDDLE|RIGHT|NONE}
 	 * @static
 	 * @method which
 	 * @param {Q.Event} e Some mouse or touch event from the DOM
@@ -11395,7 +11410,7 @@ Q.Pointer = {
 	 * Start showing touchlabels on elements with data-touchlabel="Label text"
 	 * to help people who touch an element know what it's going to do if they release
 	 * their finger on it.
-	 * @method startTouchlabels
+	 * @method activateTouchlabels
 	 * @param {Element} [element=document.body] The element in which to activate touchlabels.
 	 * @param {Boolean} [onlyTouchscreen=false] Whether to only do it on a touchscreen
 	 * @static
@@ -11477,15 +11492,15 @@ Q.Pointer = {
 	 * returning false.
 	 * @static
 	 * @method cancelClick
-	 * @param {Q.Event} [event] Some mouse or touch event from the DOM
-	 * @param {Object} [extraInfo] Extra info to pass to onCancelClick
 	 * @param {boolean} [skipMask=false] Pass true here to skip showing
 	 *   the Q.click.mask for 300 milliseconds, which blocks any
 	 *   stray clicks on mouseup or touchend, which occurs on some browsers.
 	 *   You will want to skip the mask if you want to allow scrolling, for instance.
+	 * @param {Q.Event} [event] Some mouse or touch event from the DOM
+	 * @param {Object} [extraInfo] Extra info to pass to onCancelClick
 	 * @return {boolean}
 	 */
-	cancelClick: function (event, extraInfo, skipMask) {
+	cancelClick: function (skipMask, event, extraInfo) {
 		if (false === Q.Pointer.onCancelClick.handle(event, extraInfo)) {
 			return false;
 		}
@@ -11545,6 +11560,17 @@ Q.Pointer = {
 	 */
 	stopBlurringOnTouch: function () {
 		Q.removeEventListener(window, 'touchstart', _touchBlurHandler, false, true);
+	},
+	clearSelection: function () {
+		if (window.getSelection) {
+			if (window.getSelection().empty) {  // Chrome
+				window.getSelection().empty();
+			} else if (window.getSelection().removeAllRanges) {  // Firefox
+				window.getSelection().removeAllRanges();
+			}
+		} else if (document.selection && document.selection.empty) {  // IE?
+			document.selection.empty();
+		}
 	},
 	/**
 	 * Call this function to begin canceling clicks on the element or its scrolling parent.
@@ -11607,7 +11633,11 @@ Q.Pointer = {
 Q.Pointer.preventRubberBand.suspend = {};
 
 function _cancelClickBriefly() {
-	Q.Pointer.cancelClick();
+	if (Q.Pointer.latest.touches.length) {
+		// no need to cancel click here, user will have to lift their fingers to click
+		return false;
+	}
+	Q.Pointer.cancelClick(true);
 	setTimeout(function () {
 		Q.Pointer.canceledClick = false;
 	}, 100);
@@ -11645,10 +11675,33 @@ Q.Pointer.move.eventName = _isTouchscreen ? 'touchmove' : 'mousemove';
 Q.Pointer.end.eventName = _isTouchscreen ? 'touchend' : 'mouseup';
 Q.Pointer.cancel.eventName = _isTouchscreen ? 'touchcancel' : 'mousecancel';
 
+Q.Pointer.which.NONE = 0;
 Q.Pointer.which.LEFT = 1;
 Q.Pointer.which.MIDDLE = 2;
 Q.Pointer.which.RIGHT = 3;
 Q.Pointer.touchclick.duration = 400;
+
+Q.Pointer.latest = {
+	which: Q.Pointer.which.NONE,
+	touches: []
+};
+
+Q.addEventListener(document.body, 'touchstart mousedown', function (e) {
+	if (e.type === 'mousedown') {
+		Q.Pointer.latest.which = Q.Pointer.which(e);
+	} else {
+		Q.Pointer.latest.touches = e.touches;
+	}
+}, false, true);
+
+Q.addEventListener(document.body, 'touchend touchcancel mouseup', function (e) {
+	if (e.type === 'mouseup') {
+		Q.Pointer.latest.which = Q.Pointer.which(e);
+	} else {
+		Q.Pointer.latest.touches = e.touches;
+	}
+}, false, true);
+
 Q.Pointer.hint.options = {
 	src: '{{Q}}/img/hints/tap.gif',
 	hotspot:  {x: 0.5, y: 0.3},
@@ -11739,13 +11792,13 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
 	&& ((_pos.x && Math.abs(_pos.x - screenX) > ccd)
 	 || (_pos.y && Math.abs(_pos.y - screenY) > ccd))) {
 		// finger moved more than the threshhold
-		if (false !== Q.Pointer.cancelClick(evt, {
+		if (false !== Q.Pointer.cancelClick(true, evt, {
 			fromX: _pos.x,
 			fromY: _pos.y,
 			toX: screenX,
 			toY: screenY,
 			comingFromPointerMovement: true
-		}, true)) {
+		})) {
 			_pos = false;
 		}
 	}
@@ -12661,6 +12714,7 @@ Q.Masks = {
 	 * @method show
 	 * @param {String} key The key of the mask to show.
 	 * @param {Object} [options={}] Used to provide any mask options to Q.Masks.mask
+	 * @param {Object} [animation={}] Used to provide any mask options to the Q.Animation
 	 * @return {Object} the mask info
 	 */
 	show: function(key, options)
@@ -12671,15 +12725,17 @@ Q.Masks = {
 			}, key);
 		}
 		key = Q.calculateKey(key);
+		options = Q.extend({}, 10, Q.Masks.show.options, 10, options);
+		options.animation = options.animation || {};
 		var mask = Q.Masks.mask(key, options);
 		if (!mask.counter) {
 			var me = mask.element;
 			me.style.display = 'block';
 			if (mask.fadeIn) {
-				var opacity = me.computedStyle().opacity;
+				var opacity = me.originalOpacity = me.computedStyle().opacity;
 				Q.Animation.play(function (x, y) {
 					me.style.opacity = y * opacity;
-				}, mask.fadeIn);
+				}, mask.fadeIn, options.animation.ease, options.animation.until);
 				me.style.opacity = 0;
 			}
 		}
@@ -12707,7 +12763,7 @@ Q.Masks = {
 		var me = mask.element;
 		if (--mask.counter === 0) {
 			if (mask.fadeOut) {
-				var opacity = me.computedStyle().opacity;
+				var opacity = me.originalOpacity || me.computedStyle().opacity;
 				Q.Animation.play(function (x, y) {
 					me.style.opacity = (1-y) * opacity;
 				}, mask.fadeOut).onComplete.set(function () {
@@ -12778,8 +12834,14 @@ Q.Masks = {
 Q.Masks.options = {
 	'Q.click.mask': { className: 'Q_click_mask', fadeIn: 0, fadeOut: 0, duration: 500 },
 	'Q.screen.mask': { className: 'Q_screen_mask', fadeIn: 100 },
-	'Q.request.load.mask': { className: 'Q_load_mask', fadeIn: 1000 },
+	'Q.request.load.mask': { className: 'Q_load_mask', fadeIn: 5000 },
 	'Q.request.cancel.mask': { className: 'Q_cancel_mask', fadeIn: 200 }
+};
+
+Q.Masks.show.options = {
+	animation: {
+		ease: 'easeInExpo'
+	}
 };
 
 Q.addEventListener(window, Q.Pointer.start, _Q_PointerStartHandler, false, true);
@@ -12903,7 +12965,8 @@ Q.onJQuery.add(function ($) {
 		"Q/resize": "{{Q}}/js/tools/resize.js",
 		"Q/layouts": "{{Q}}/js/tools/layouts.js",
 		"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js",
-		"Q/parallax": "{{Q}}/js/tools/parallax.js"
+		"Q/parallax": "{{Q}}/js/tools/parallax.js",
+		"Q/lazyload": "{{Q}}/js/tools/lazyload.js"
 	});
 	
 	Q.Tool.jQuery({
@@ -13155,6 +13218,7 @@ Q.request.options = {
 	duplicate: true,
 	quiet: true,
 	parse: 'json',
+	timeout: 5000,
 	onRedirect: new Q.Event(function (url) {
 		Q.handle(url, {
 			target: '_self',
@@ -13187,7 +13251,7 @@ Q.onReady.set(function _Q_masks() {
 		var button = mask.querySelectorAll('.Q_load_cancel_button');
 		if (!button.length) {
 			button = document.createElement('button');
-			button.setAttribute('class', 'Q_load_cancel_button');
+			button.setAttribute('class', 'Q_button Q_load_cancel_button Q_wiggle');
 			button.innerHTML = 'Cancel';
 			if (mask[0]) { mask = mask[0]; }
 			mask.appendChild(button);
@@ -13649,6 +13713,13 @@ Q.Notices = {
 Q.onInit.add(function () {
 	// on Q initiated, parse all notices loaded from backend and parse them
 	Q.Notices.process();
+	
+	// hook beforeunload event
+	Q.addEventListener(window, 'beforeunload', function (e) {
+		if (!e.defaultPrevented) {
+			_documentIsUnloading = true; // WARN: a later handler might cancel the event
+		}
+	});
 });
 
 Q.beforeInit.addOnce(function () {
