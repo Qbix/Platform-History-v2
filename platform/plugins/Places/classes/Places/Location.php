@@ -130,6 +130,13 @@ class Places_Location extends Base_Places_Location
 			'website' => Q::ifset($result, 'website', null),
 			'placeId' => $placeId
 		);
+
+		// try to get timeZone
+		try {
+			$timeZone = Places::timezone($latitude, $longitude);
+			$attributes['timeZone'] = Q::ifset($timeZone, 'timeZoneId', null);
+		} catch (Exception $e) {}
+
 		$geohash = Places_Geohash::encode($latitude, $longitude);
 		if ($location) {
 			$location->title = $result['name'];
