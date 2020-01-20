@@ -144,7 +144,7 @@ table { border-spacing:0; border-collapse:collapse; }
 .Q_notice_mask,
 .Q_screen_mask,
 .Q_dialog_mask { background-color: rgba(0, 0, 0, 0.2); }
-.Q_load_mask { background-color: rgba(0, 0, 0, 0.3); background-image: radial-gradient(circle at center 200px,hsla(0,0%,100%,.1),#000); }
+.Q_load_mask { background-color: rgba(0, 0, 0, 0.3); background-image: radial-gradient(circle at center 200px,hsla(0,0%,100%,.1),#000); background-attachment: fixed; }
 .Q_click_mask { background: transparent; z-index: 2147483500; }
 
 /* Clear fix */
