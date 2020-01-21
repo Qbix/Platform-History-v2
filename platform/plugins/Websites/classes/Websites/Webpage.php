@@ -385,6 +385,13 @@ class Websites_Webpage
 			$quota = Users_Quota::check($asUserId, '', $quotaName, true, 1, $roles);
 		}
 
+		$streamName = "Websites/webpage/".substr(self::normalizeUrl($url), 0, 100);
+		$webpageStream = Streams::fetchOne($asUserId, $publisherId, $streamName);
+
+		if ($webpageStream) {
+			return $webpageStream;
+		}
+
 		$webpageStream = Streams::create($asUserId, $publisherId, 'Websites/webpage', array(
 			'title' => trim($title),
 			'content' => trim($description) ?: "",
@@ -398,7 +405,7 @@ class Websites_Webpage
 				'lang' => Q::ifset($params, 'lang', 'en')
 			),
 			'skipAccess' => $skipAccess,
-			'name' => "Websites/webpage/".substr(self::normalizeUrl($url), 0, 100)
+			'name' => $streamName
 		), array(
 			'publisherId' => $interestPublisherId,
 			'streamName' => $interestStreamName,
