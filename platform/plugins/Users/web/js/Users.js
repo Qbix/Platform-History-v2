@@ -3075,7 +3075,7 @@
 					'?client_id=' + Users.Facebook.appId +
 					'&redirect_uri=' + Q.baseUrl() + '/login/facebook%3Fscheme%3D' + Users.Facebook.scheme +
 					'&state=' + _stringGen(10) +
-					'&response_type=token&scope=' + scope;
+					'&response_type=token&scope=' + Users.Facebook.scope.join(",");
 				cordova.plugins.browsertab.openUrl(url,
 					{scheme: Users.Facebook.scheme + '://'},
 					function(success) { console.log(success); },
