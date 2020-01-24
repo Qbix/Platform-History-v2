@@ -284,6 +284,11 @@ class Websites_Webpage
 			return Streams::fetchOne($streams->publisherId, $streams->publisherId, $streams->name);
 		}
 
+		$streams->name .= '_';
+		if ($streams->retrieve()) {
+			return Streams::fetchOne($streams->publisherId, $streams->publisherId, $streams->name);
+		}
+
 		return null;
 	}
 	/**
@@ -378,7 +383,7 @@ class Websites_Webpage
 
 		// check if stream for this url has been already created
 		// and if yes, return it
-		if ($webpageStream = self::fetchStream($url)) {
+		if ($webpageStream = self::fetchStream($url, $publisherId)) {
 			return $webpageStream;
 		}
 
