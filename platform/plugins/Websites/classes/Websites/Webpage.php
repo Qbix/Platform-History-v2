@@ -19,6 +19,11 @@ class Websites_Webpage
 	 */
 	static function scrape($url)
 	{
+		// add scheme to url if not exist
+		if (parse_url($url, PHP_URL_SCHEME) === null) {
+			$url = 'http://'.$url;
+		}
+
 		if (!Q_Valid::url($url)) {
 			throw new Exception("Invalid URL");
 		}
@@ -377,19 +382,14 @@ class Websites_Webpage
 			return $webpageStream;
 		}
 
+		$streamName = "Websites/webpage/".self::normalizeUrl($url);
+
 		$quota = null;
 
 		if (!$skipAccess) {
 			// check quota
 			$roles = Users::roles();
 			$quota = Users_Quota::check($asUserId, '', $quotaName, true, 1, $roles);
-		}
-
-		$streamName = "Websites/webpage/".substr(self::normalizeUrl($url), 0, 100);
-		$webpageStream = Streams::fetchOne($asUserId, $publisherId, $streamName);
-
-		if ($webpageStream) {
-			return $webpageStream;
 		}
 
 		$webpageStream = Streams::create($asUserId, $publisherId, 'Websites/webpage', array(
@@ -434,7 +434,9 @@ class Websites_Webpage
 			}
 		}
 
-		$webpageStream->subscribe(compact('userId'));
+		if (!Users::isCommunityId($publisherId)) {
+			$webpageStream->subscribe(array('userId' => $publisherId));
+		}
 
 		// handle with keywords
 		if (!empty($keywords)) {
