@@ -60,7 +60,16 @@ abstract class Users extends Base_Users
 		$communityId = Q_Config::get('Users', 'community', 'id', null);
 		return $communityId ? $communityId : Q::app();
 	}
-	
+	/**
+	 * Get the id of currently selected community. Defaults to main community.
+	 * @method currentCommunityId
+	 * @static
+	 * @return {string} The id of the current community
+	 */
+	static function currentCommunityId()
+	{
+		return Q::ifset($_SESSION, 'Communities', 'communityId', Users::communityId());
+	}
 	/**
 	 * Get the name of the main community from the config. Defaults to the app name.
 	 * @method communityName
