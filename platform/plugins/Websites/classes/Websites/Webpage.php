@@ -439,9 +439,7 @@ class Websites_Webpage
 			}
 		}
 
-		if (!Users::isCommunityId($publisherId)) {
-			$webpageStream->subscribe(array('userId' => $publisherId));
-		}
+		$webpageStream->subscribe(compact('userId'));
 
 		// handle with keywords
 		if (!empty($keywords)) {
