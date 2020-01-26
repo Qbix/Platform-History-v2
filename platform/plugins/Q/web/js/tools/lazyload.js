@@ -49,7 +49,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 					? Array.from(element.querySelectorAll(info.selector))
 					: [];
 				Q.each(elements, function (i, element) {
-					if (info.preparing.call(tool, element) === true) {
+					if (info.preparing.call(tool, element, true) === true) {
 						found = true;
 					}
 				});
@@ -81,7 +81,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 					elements.push(element);
 				}
 				Q.each(elements, function (i, element) {
-					if (info.preparing.call(tool, element) === true) {
+					if (info.preparing.call(tool, element, true) === true) {
 						found = true;
 						tool.observer.observe(element);
 					}
@@ -114,8 +114,16 @@ Q.Tool.define('Q/lazyload', function (options) {
 				// no need to do anything
 				return true;
 			},
-			preparing: function (img, entry) {
-				return this.state.handlers.img.exiting(img, entry);
+			preparing: function (img, entry, beingInsertedIntoDOM) {
+				if (!beingInsertedIntoDOM) {
+					return true; // too late anyway, browser will load image
+				}
+				var src = img.getAttribute('src');
+				if (src) {
+					img.setAttribute('data-lazyload-src', src);
+					img.removeAttribute('src');
+				}
+				return true;
 			}
 		},
 		tool: {
