@@ -99,10 +99,10 @@ Q.Tool.define('Q/lazyload', function (options) {
 		img: {
 			selector: 'img',
 			entering: function (img, entry) {
-				var src = img.getAttribute('data-defer-src');
+				var src = img.getAttribute('data-lazyload-src');
 				if (src) {
 					img.setAttribute('src', src);
-					img.removeAttribute('data-defer-src');
+					img.removeAttribute('data-lazyload-src');
 					img.addClass('Q_lazy_load');
 					img.addEventListener('load', function () {
 						img.addClass('Q_lazy_loaded');
