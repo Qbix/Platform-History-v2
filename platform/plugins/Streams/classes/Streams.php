@@ -832,6 +832,12 @@ abstract class Streams extends Base_Streams
 		if ($publisherId == $userId) {
 			$authorized = true; // user can publish streams under their own name
 		}
+
+		// user can publish streams on behalf of publisher if user is admin of publisher
+		if ((bool)Users::roles($publisherId, array("Users/admins", "Users/owners"), array(), $userId)) {
+			$authorized = true;
+		}
+
 		if (!$authorized) {
 			// Check for permissions using templates
 			$template = new Streams_Stream();
