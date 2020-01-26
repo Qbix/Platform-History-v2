@@ -115,7 +115,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 				return true;
 			},
 			preparing: function (img, entry) {
-				return this.state.handlers.img.entering(img, entry);
+				return this.state.handlers.img.exiting(img, entry);
 			}
 		},
 		tool: {
