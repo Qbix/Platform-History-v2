@@ -3194,6 +3194,9 @@ Q.batcher.factory = function _Q_batcher_factory(collection, baseUrl, tail, slotN
 				return;
 			}
 			var request = this;
+			if (!response.slots) {
+				callbacks[k][0].call(this, "The slots field is missing", null, request);
+			}
 			Q.each(response.slots.batch, function (k, result) {
 				if (result && result.errors) {
 					callbacks[k][0].call(this, result.errors, null, request);

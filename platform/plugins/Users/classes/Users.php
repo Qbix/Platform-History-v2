@@ -68,7 +68,7 @@ abstract class Users extends Base_Users
 	 */
 	static function currentCommunityId()
 	{
-		return Q::ifset($_SESSION, 'Communities', 'communityId', Users::communityId());
+		return Q::ifset($_SESSION, 'Users', 'communityId', Users::communityId());
 	}
 	/**
 	 * Get the name of the main community from the config. Defaults to the app name.
