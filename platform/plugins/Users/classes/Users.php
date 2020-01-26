@@ -61,7 +61,8 @@ abstract class Users extends Base_Users
 		return $communityId ? $communityId : Q::app();
 	}
 	/**
-	 * Get the id of currently selected community. Defaults to main community.
+	 * Get the id of a currently selected community, if one was set in the session.
+	 * The default return value is the id of the main community, Users::communityId()
 	 * @method currentCommunityId
 	 * @static
 	 * @return {string} The id of the current community

@@ -834,7 +834,10 @@ abstract class Streams extends Base_Streams
 		}
 
 		// user can publish streams on behalf of publisher if user is admin of publisher
-		if ((bool)Users::roles($publisherId, array("Users/admins", "Users/owners"), array(), $userId)) {
+		$labelsAuthorized = Q_Config::get("Streams", "create", "admins", array(
+			"Users/admins", "Users/owners"
+		));	
+		if (Users::roles($publisherId, $labelsAuthorized, array(), $userId)) {
 			$authorized = true;
 		}
 
