@@ -16,13 +16,13 @@ function Websites_webpage_response_start($params)
 		throw new Exception("stream not found");
 	}
 
-	$communitiesId = Users::communityId();
+	$communityId = Users::currentCommunityId();
 	$mainChatCategory = 'Streams/chats/main';
 	$chatRelationType = 'Websites/webpage';
 
 	// if this stream already related, exit
 	if (!Streams_RelatedTo::select()->where(array(
-		'toPublisherId' => $communitiesId,
+		'toPublisherId' => $communityId,
 		'toStreamName' => $mainChatCategory,
 		'type' => $chatRelationType,
 		'fromPublisherId' => $stream->publisherId,
@@ -30,7 +30,7 @@ function Websites_webpage_response_start($params)
 	))->fetchDbRows()) {
 		Streams::relate(
 			null,
-			$communitiesId,
+			$communityId,
 			$mainChatCategory,
 			$chatRelationType,
 			$stream->publisherId,
