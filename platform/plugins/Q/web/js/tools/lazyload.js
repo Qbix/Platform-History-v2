@@ -104,14 +104,18 @@ Q.Tool.define('Q/lazyload', function (options) {
 		img: {
 			selector: 'img',
 			entering: function (img, entry) {
+				function _loaded() {
+					img.addClass('Q_lazy_loaded');
+				}
 				var src = img.getAttribute('data-lazyload-src');
 				if (src) {
 					img.setAttribute('src', Q.url(src));
 					img.removeAttribute('data-lazyload-src');
 					img.addClass('Q_lazy_load');
-					img.addEventListener('load', function () {
-						img.addClass('Q_lazy_loaded');
-					});
+					if (img.complete) {
+						_loaded();
+					}
+					img.addEventListener('load', _loaded);
 				}
 				return true;
 			},
