@@ -390,9 +390,9 @@ abstract class Streams extends Base_Streams
 		);
 
 		// Get streams and set their default access info
-		$restorCaching = false;
+		$restoreCaching = false;
 		if (!self::$dontCache and empty($options['dontCache'])) {
-			$prevCaching = Db::caching(false);
+			$prevCaching = Db::allowCaching(false);
 			$restoreCaching = true;
 		}
 		$allRetrieved = $namesToFetch
@@ -501,7 +501,7 @@ abstract class Streams extends Base_Streams
 			}
 		}
 		if ($restoreCaching) {
-			Db::caching($prevCaching);
+			Db::allowCaching($prevCaching);
 		}
 		return $streams;
 	}
