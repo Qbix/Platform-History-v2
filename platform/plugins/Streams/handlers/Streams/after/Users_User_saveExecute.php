@@ -7,6 +7,7 @@ function Streams_after_Users_User_saveExecute($params)
 		return;
 	}
 	$processing = true;
+	$prevAllowCaching = Db::allowCaching(false);
 
 	// If the username or icon was somehow modified,
 	// update all the avatars for this publisher
@@ -44,6 +45,7 @@ function Streams_after_Users_User_saveExecute($params)
 	unset($mf['insertedTime']);
 	if (empty($mf)) {
 		$processing = false;
+		Db::allowCaching($prevAllowCaching);
 		return;
 	}
 
@@ -189,7 +191,8 @@ function Streams_after_Users_User_saveExecute($params)
 		// Save a greeting stream, to be edited
 		$communityId = Users::communityId();
 		$name = "Streams/greeting/$communityId";
-		$stream = Streams::fetchOne($user->id, $user->id, $name);
+		$stream = Streams::fetchOne($user->id, $user->id, $name, array('dontCache' => true));
+
 		if (!$stream) {
 			Streams::create($user->id, $user->id, "Streams/greeting", compact('name'));
 
@@ -269,6 +272,7 @@ function Streams_after_Users_User_saveExecute($params)
 			Streams::$beingSavedQuery = $stream->changed($user->id);
 		}
 	}
+	Db::allowCaching($prevAllowCaching);
 
 	$processing = false;
 }
