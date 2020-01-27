@@ -65,11 +65,18 @@ abstract class Users extends Base_Users
 	 * The default return value is the id of the main community, Users::communityId()
 	 * @method currentCommunityId
 	 * @static
+	 * @param {bool} $defaultMainCommunity If true and communityId from session empty, use main community id.
 	 * @return {string} The id of the current community
 	 */
-	static function currentCommunityId()
+	static function currentCommunityId($defaultMainCommunity = false)
 	{
-		return Q::ifset($_SESSION, 'Users', 'communityId', Users::communityId());
+		$communityId = Q::ifset($_SESSION, 'Users', 'communityId', null);
+
+		if (!$communityId && $defaultMainCommunity) {
+			$communityId = self::communityId();
+		}
+
+		return $communityId;
 	}
 	/**
 	 * Get the name of the main community from the config. Defaults to the app name.
