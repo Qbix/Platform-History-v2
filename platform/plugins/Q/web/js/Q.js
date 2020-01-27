@@ -4632,7 +4632,7 @@ Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
  * @param {String} [prefix]
  *  Optional prefix to prepend to the tool's id
  * @return {HTMLElement}
- *  Returns an element you can append to things
+ *  Returns an element you can append to things, and/or call Q.activate on
  */
 Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptions, id, prefix) {
 	if (typeof toolOptions === 'string') {
@@ -5949,7 +5949,7 @@ Q.loadHandlebars = Q.getter(function _Q_loadHandlebars(callback) {
 			_addHandlebarsHelpers();
 			Q.handle(callback);
 		});
-	});
+	}, 'Q');
 }, {
 	cache: Q.Cache.document('Q.loadHandlebars', 1)
 });

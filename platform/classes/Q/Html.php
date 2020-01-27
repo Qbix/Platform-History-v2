@@ -606,9 +606,14 @@ class Q_Html
 			$alt = 'not a string';
 		}
 		$tag_params = array_merge(compact('src', 'alt'), $attributes);
-		if (Q_Config::get('Q', 'images', 'lazyload', false) and !empty($tag_params['src'])) {
+		$lazyload = Q_Config::get('Q', 'images', 'lazyload', array());
+		if ($lazyload and !empty($tag_params['src'])) {
 			$tag_params['data-lazyload-src'] = $tag_params['src'];
-			unset($tag_params['src']);
+			$tag_params['src'] = self::themedUrl(
+				!empty($lazyload['loadingSrc'])
+					? $lazyload['loadingSrc']
+					: "{{Q}}/img/throbbers/transparent.gif"
+			);
 		}
 		return self::tag('img', $tag_params);
 	}

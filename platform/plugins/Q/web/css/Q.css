@@ -758,3 +758,7 @@ input[type=password] {
     -webkit-appearance: none;
     -moz-appearance: none;
 }
+
+img[data-lazyload-src] {
+	opacity: 0.1;
+}

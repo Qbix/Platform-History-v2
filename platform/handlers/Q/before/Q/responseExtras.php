@@ -92,9 +92,11 @@ function Q_before_Q_responseExtras()
 	}
 	
 	// We may want to set the initial URL and updateTimestamp cookie
+	$lazyload = Q_Config::get('Q', 'images', 'lazyload', false);
 	$environment = Q_Config::get('Q', 'environment', '');
 	$config = Q_Config::get('Q', 'environments', $environment, 'urls', array());
 	$config['updateBeforeInit'] = (!empty($config['integrity']) or !empty($config['caching']));
 	Q_Response::setScriptData('Q.info.urls', $config);
 	Q_Response::setScriptData('Q.info.cookies', array('Q_cordova', 'Q_nonce', 'Q_dpr'));
+	Q_Response::setScriptData('Q.images.lazyload', $lazyload);
 }
