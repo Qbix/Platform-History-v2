@@ -29,6 +29,11 @@ Q.Tool.define('Q/lazyload', function (options) {
 	var state = this.state;
 
 	var Elp = Element.prototype;
+	
+	if (!window.IntersectionObserver) {
+		console.warn("Q/lazyload tool: need to use IntersectionObserver polyfill");
+		return; // do nothing, this is an older browser
+	}
 
 	// Observe whatever is on the page already
 	tool.observer = _createObserver(tool, tool.element);
@@ -49,7 +54,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 					? Array.from(element.querySelectorAll(info.selector))
 					: [];
 				Q.each(elements, function (i, element) {
-					if (info.preparing.call(tool, element) === true) {
+					if (info.preparing.call(tool, element, true) === true) {
 						found = true;
 					}
 				});
@@ -81,7 +86,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 					elements.push(element);
 				}
 				Q.each(elements, function (i, element) {
-					if (info.preparing.call(tool, element) === true) {
+					if (info.preparing.call(tool, element, true) === true) {
 						found = true;
 						tool.observer.observe(element);
 					}
@@ -99,10 +104,10 @@ Q.Tool.define('Q/lazyload', function (options) {
 		img: {
 			selector: 'img',
 			entering: function (img, entry) {
-				var src = img.getAttribute('data-defer-src');
+				var src = img.getAttribute('data-lazyload-src');
 				if (src) {
-					img.setAttribute('src', src);
-					img.removeAttribute('data-defer-src');
+					img.setAttribute('src', Q.url(src));
+					img.removeAttribute('data-lazyload-src');
 					img.addClass('Q_lazy_load');
 					img.addEventListener('load', function () {
 						img.addClass('Q_lazy_loaded');
@@ -114,14 +119,25 @@ Q.Tool.define('Q/lazyload', function (options) {
 				// no need to do anything
 				return true;
 			},
-			preparing: function (img, entry) {
-				return this.state.handlers.img.entering(img, entry);
+			preparing: function (img, beingInsertedIntoDOM) {
+				if (!beingInsertedIntoDOM) {
+					return true; // too late anyway, browser will load image
+				}
+				var src = img.getAttribute('src');
+				if (src && !img.hasAttribute('data-lazyload-src')) {
+					img.setAttribute('data-lazyload-src', Q.url(src));
+					img.setAttribute('src', Q.url(
+						Q.getObject('Q.images.lazyload.loadingSrc')
+						|| "{{Q}}/img/throbbers/transparent.gif"	
+					));
+				}
+				return true;
 			}
 		},
 		tool: {
 			selector: '.Q_tool',
 			entering: function (element, entry) {
-				if (element.hasAttribute('data-Q-lazyload')
+				if (element.hasAttribute('data-q-lazyload')
 				&& (!element.Q || !element.Q.tool)) {
 					element.addClass('Q_lazy_load');
 					Q.activate(element, function () {
@@ -131,7 +147,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 				}
 			},
 			exiting: function (element, entry) {
-				if (element.hasAttribute('data-Q-lazyload')
+				if (element.hasAttribute('data-q-lazyload')
 				&& element.Q.tool) {
 					Q.Tool.remove(element);
 					element.removeClass('Q_lazy_loading');
@@ -164,13 +180,18 @@ Q.Tool.define('Q/lazyload', function (options) {
 		if (!Q.isInteger(state.total) || state.total < 0) {
 			throw new Q.Error("Q/paging: total is not valid: " + state.total);
 		}
-		$(tool.element).empty();
+		tool.element.innerHTML = '';
 		for (var i=0; i<=state.total-1; ++i) {
-			var $dot = $('<img />').attr({
-				'src': Q.url((i === index) ? state.pages.current : state.pages.other),
-				'class': 'Q_paging_dot '
-					+ (i === index) ? 'Q_paging_dot_current' : 'Q_paging_dot_other'
-			}).appendTo(tool.element);
+			var img = document.createElement('img');
+			img.setAttribute('src', Q.url((i === index)
+				? state.pages.current
+				: state.pages.other)
+			);
+			img.setAttribute('class', 'Q_paging_dot ' + (i === index)
+				? 'Q_paging_dot_current'
+				: 'Q_paging_dot_other'
+			);
+			tool.element.appendChild(img);
 		}
 	},
 	findAndObserve: function (container) {

@@ -390,6 +390,11 @@ abstract class Streams extends Base_Streams
 		);
 
 		// Get streams and set their default access info
+		$restoreCaching = false;
+		if (!self::$dontCache and empty($options['dontCache'])) {
+			$prevCaching = Db::allowCaching(false);
+			$restoreCaching = true;
+		}
 		$allRetrieved = $namesToFetch
 			? Streams_Stream::select($fields)
 				->where($criteria)
@@ -494,6 +499,9 @@ abstract class Streams extends Base_Streams
 			foreach ($streams as $n => $stream) {
 				self::$fetch[$asUserId][$publisherId][$n][$fields] = $stream;
 			}
+		}
+		if ($restoreCaching) {
+			Db::allowCaching($prevCaching);
 		}
 		return $streams;
 	}
@@ -834,7 +842,10 @@ abstract class Streams extends Base_Streams
 		}
 
 		// user can publish streams on behalf of publisher if user is admin of publisher
-		if ((bool)Users::roles($publisherId, array("Users/admins", "Users/owners"), array(), $userId)) {
+		$labelsAuthorized = Q_Config::get("Streams", "create", "admins", array(
+			"Users/admins", "Users/owners"
+		));	
+		if (Users::roles($publisherId, $labelsAuthorized, array(), $userId)) {
 			$authorized = true;
 		}
 
