@@ -119,9 +119,12 @@ Q.Tool.define('Q/lazyload', function (options) {
 					return true; // too late anyway, browser will load image
 				}
 				var src = img.getAttribute('src');
-				if (src) {
+				if (src && !element.hasAttribute('data-Q-lazyload')) {
 					img.setAttribute('data-lazyload-src', src);
-					img.removeAttribute('src');
+					img.setAttribute(src, Q.url(
+						Q.getObject('Q.images.lazyload.loadingSrc')
+						|| "{{Q}}/img/throbbers/transparent.gif"
+					));
 				}
 				return true;
 			}
