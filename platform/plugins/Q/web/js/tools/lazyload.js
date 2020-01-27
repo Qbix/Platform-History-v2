@@ -106,7 +106,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 			entering: function (img, entry) {
 				var src = img.getAttribute('data-lazyload-src');
 				if (src) {
-					img.setAttribute('src', src);
+					img.setAttribute('src', Q.url(src));
 					img.removeAttribute('data-lazyload-src');
 					img.addClass('Q_lazy_load');
 					img.addEventListener('load', function () {
@@ -125,7 +125,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 				}
 				var src = img.getAttribute('src');
 				if (src && !img.hasAttribute('data-lazyload-src')) {
-					img.setAttribute('data-lazyload-src', src);
+					img.setAttribute('data-lazyload-src', Q.url(src));
 					img.setAttribute('src', Q.url(
 						Q.getObject('Q.images.lazyload.loadingSrc')
 						|| "{{Q}}/img/throbbers/transparent.gif"	
