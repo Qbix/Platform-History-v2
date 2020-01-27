@@ -119,7 +119,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 					return true; // too late anyway, browser will load image
 				}
 				var src = img.getAttribute('src');
-				if (src && !img.hasAttribute('data-Q-lazyload')) {
+				if (src && !img.hasAttribute('data-lazyload-src')) {
 					img.setAttribute('data-lazyload-src', src);
 					img.setAttribute('src', Q.url(
 						Q.getObject('Q.images.lazyload.loadingSrc')
