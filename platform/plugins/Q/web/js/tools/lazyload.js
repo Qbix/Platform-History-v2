@@ -29,6 +29,11 @@ Q.Tool.define('Q/lazyload', function (options) {
 	var state = this.state;
 
 	var Elp = Element.prototype;
+	
+	if (!window.IntersectionObserver) {
+		console.warn("Q/lazyload tool: need to use IntersectionObserver polyfill");
+		return; // do nothing, this is an older browser
+	}
 
 	// Observe whatever is on the page already
 	tool.observer = _createObserver(tool, tool.element);
@@ -119,7 +124,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 					return true; // too late anyway, browser will load image
 				}
 				var src = img.getAttribute('src');
-				if (src && !img.hasAttribute('data-lazyload-src')) {
+				if (src && !img.hasAttribute('data-lazyload-src	')) {
 					img.setAttribute('data-lazyload-src', src);
 					img.setAttribute('src', Q.url(
 						Q.getObject('Q.images.lazyload.loadingSrc')
