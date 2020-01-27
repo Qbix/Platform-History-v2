@@ -62,7 +62,7 @@ EOT;
 
 // get all CLI options
 $opts = array( 'h::', 's::', 'i::', 'o::', 'n::', 'f::', 'g::', 'r:', 'l:', 'p:');
-$longopts = array('help::', 'source::', 'in::', 'out::', 'null::', 'format::', 'google-format::', 'retranslate:', 'locales:', 'plugins', 'plugin:', 'all');
+$longopts = array('help::', 'source::', 'in::', 'out::', 'null::', 'format::', 'google-format::', 'retranslate:', 'locales:', 'plugins', 'plugin:', 'all', 'app');
 $options = getopt(implode('', $opts), $longopts);
 if (isset($options['help'])) {
 	echo $help;
@@ -90,13 +90,14 @@ if (isset($options['plugins']) or isset($options['all'])) {
 } else {
 	$app = true;
 }
+$o = $options;
 foreach ($plugins as $plugin) {
 	$PLUGIN = strtoupper($plugin);
 	$PLUGIN_DIR = constant($PLUGIN . '_PLUGIN_DIR');
 	foreach (glob($PLUGIN_DIR . DS . 'text' . DS . '*') as $textFolder) {
-		$options['in'] = $options['out'] = $textFolder;
+		$o['in'] = $o['out'] = $textFolder;
 		echo PHP_EOL . PHP_EOL . "Translating $textFolder" . PHP_EOL;
-		$translate = new Q_Translate($options);
+		$translate = new Q_Translate($o);
 		$translate->saveAll();
 	}
 }
