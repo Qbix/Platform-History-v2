@@ -121,7 +121,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 				var src = img.getAttribute('src');
 				if (src && !img.hasAttribute('data-Q-lazyload')) {
 					img.setAttribute('data-lazyload-src', src);
-					img.setAttribute(src, Q.url(
+					img.setAttribute('src', Q.url(
 						Q.getObject('Q.images.lazyload.loadingSrc')
 						|| "{{Q}}/img/throbbers/transparent.gif"	
 					));
