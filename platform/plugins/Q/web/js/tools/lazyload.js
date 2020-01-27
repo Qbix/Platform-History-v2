@@ -137,7 +137,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 		tool: {
 			selector: '.Q_tool',
 			entering: function (element, entry) {
-				if (element.hasAttribute('data-Q-lazyload')
+				if (element.hasAttribute('data-q-lazyload')
 				&& (!element.Q || !element.Q.tool)) {
 					element.addClass('Q_lazy_load');
 					Q.activate(element, function () {
@@ -147,7 +147,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 				}
 			},
 			exiting: function (element, entry) {
-				if (element.hasAttribute('data-Q-lazyload')
+				if (element.hasAttribute('data-q-lazyload')
 				&& element.Q.tool) {
 					Q.Tool.remove(element);
 					element.removeClass('Q_lazy_loading');
@@ -180,13 +180,18 @@ Q.Tool.define('Q/lazyload', function (options) {
 		if (!Q.isInteger(state.total) || state.total < 0) {
 			throw new Q.Error("Q/paging: total is not valid: " + state.total);
 		}
-		$(tool.element).empty();
+		tool.element.innerHTML = '';
 		for (var i=0; i<=state.total-1; ++i) {
-			var $dot = $('<img />').attr({
-				'src': Q.url((i === index) ? state.pages.current : state.pages.other),
-				'class': 'Q_paging_dot '
-					+ (i === index) ? 'Q_paging_dot_current' : 'Q_paging_dot_other'
-			}).appendTo(tool.element);
+			var img = document.createElement('img');
+			img.setAttribute('src', Q.url((i === index)
+				? state.pages.current
+				: state.pages.other)
+			);
+			img.setAttribute('class', 'Q_paging_dot ' + (i === index)
+				? 'Q_paging_dot_current'
+				: 'Q_paging_dot_other'
+			);
+			tool.element.appendChild(img);
 		}
 	},
 	findAndObserve: function (container) {
