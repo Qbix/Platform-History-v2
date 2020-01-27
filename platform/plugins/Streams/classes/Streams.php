@@ -390,6 +390,11 @@ abstract class Streams extends Base_Streams
 		);
 
 		// Get streams and set their default access info
+		$restorCaching = false;
+		if (!self::$dontCache and empty($options['dontCache'])) {
+			$prevCaching = Db::caching(false);
+			$restoreCaching = true;
+		}
 		$allRetrieved = $namesToFetch
 			? Streams_Stream::select($fields)
 				->where($criteria)
@@ -494,6 +499,9 @@ abstract class Streams extends Base_Streams
 			foreach ($streams as $n => $stream) {
 				self::$fetch[$asUserId][$publisherId][$n][$fields] = $stream;
 			}
+		}
+		if ($restoreCaching) {
+			Db::caching($prevCaching);
 		}
 		return $streams;
 	}
