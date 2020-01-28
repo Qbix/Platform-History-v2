@@ -208,10 +208,11 @@ function _Q_viewport(options) {
 			left: parseFloat(stretcher.css('left')),
 			top: parseFloat(stretcher.css('top'))
 		};
-		container.on(Q.Pointer.move, _moveHandler);
-		$(window).on(Q.Pointer.end, _endHandler);
-		$(window).on(Q.Pointer.cancel, _cancelHandler);
-		$(window).on(Q.Pointer.click, _clickHandler);
+		var de = document.documentElement;
+		Q.addEventListener(container[0], Q.Pointer.move, _moveHandler, {passive: false});
+		Q.addEventListener(de, Q.Pointer.end, _endHandler, {passive: false});
+		Q.addEventListener(de, Q.Pointer.cancel, _cancelHandler, {passive: false});
+		Q.addEventListener(de, Q.Pointer.click, _clickHandler, {passive: false});
 	});
 	
 	container.on(Q.Pointer.wheel, function (e) {

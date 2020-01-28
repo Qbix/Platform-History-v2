@@ -6304,10 +6304,11 @@ var _supportsPassive;
  * @method addEventListener
  * @param {HTMLElement} element
  *  An HTML element, window or other element that supports listening to events
- * @param {String|Array|Object} eventName
+ * @param {String|Array|Object|Function} eventName
  *  A space-delimited string of event names, or an array of event names.
  *  You can also pass an object of { eventName: eventHandler } pairs, in which csae
  *  the next parameter would be useCapture.
+ *  You can also pass functions such as Q.Pointer.start here.
  * @param {Function} eventHandler
  *  A function to call when the event fires
  * @param {boolean|Object} useCapture
