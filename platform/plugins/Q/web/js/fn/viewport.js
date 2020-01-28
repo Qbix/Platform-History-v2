@@ -219,7 +219,7 @@ function _Q_viewport(options) {
 			};
 			pos = {
 				left: parseFloat(stretcher.css('left')),
-				top: parsviewporteFloat(stretcher.css('top'))
+				top: parseFloat(stretcher.css('top'))
 			};
 			Q.addEventListener(container[0], Q.Pointer.move, _moveHandler, {passive: false});
 			Q.addEventListener(window, Q.Pointer.end, _endHandler, {passive: false});
