@@ -47,6 +47,8 @@ function _Q_viewport(options) {
 		_continue(); // the dimensions should have already been set, don't depend on content
 	}
 	
+	var useZoom = Q.info.isIE(0, 8);
+	
 	function _continue() {
 		var ow = this.outerWidth(true);
 		var oh = this.outerHeight(true);
@@ -103,7 +105,6 @@ function _Q_viewport(options) {
 			'height': oh+0.5+'px',
 		});
 	
-		var useZoom = Q.info.isIE(0, 8);
 		var offset = stretcher.offset();	
 		var grab = null;
 		var cur = null;
