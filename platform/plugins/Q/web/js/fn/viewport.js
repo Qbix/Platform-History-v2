@@ -180,10 +180,12 @@ function _Q_viewport(options) {
 		}
 		
 		function _endHandler (e) {
+			var de = document.documentElement;
 			start = pos = null;
-			container.off(Q.Pointer.move);
-			$(window).off(Q.Pointer.end, _endHandler);
-			$(window).off(Q.Pointer.clickHandler, _clickHandler);
+			Q.removeEventListener(container[0], Q.Pointer.move, _moveHandler);
+			Q.removeEventListener(de, Q.Pointer.end, _endHandler);
+			Q.addEventListener(de, Q.Pointer.cancel, _cancelHandler);
+			Q.addEventListener(de, Q.Pointer.click, _clickHandler);
 			e.preventDefault();
 		}
 		
