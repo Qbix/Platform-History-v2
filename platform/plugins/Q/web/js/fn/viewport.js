@@ -117,7 +117,7 @@ function _Q_viewport(options) {
 	}).on(Q.Pointer.start, function (e) {
 		
 		var f = useZoom ? state.scale : 1;
-		var touches = e.originalEvent.touches;
+		var touches = e.touches;
 		var touchDistance;
 		if (touches && touches.length > 1) {
 			var tx0 = Q.Pointer.getX(e, 0);
@@ -142,7 +142,7 @@ function _Q_viewport(options) {
 			if (!pos) {
 				return;
 			}
-			if (Q.info.isTouchscreen && (touches = e.originalEvent.touches)) {
+			if (Q.info.isTouchscreen && (touches = e.touches)) {
 				if (touches.length > 1) {
 					var tx0 = Q.Pointer.getX(e, 0);
 					var ty0 = Q.Pointer.getY(e, 0);
