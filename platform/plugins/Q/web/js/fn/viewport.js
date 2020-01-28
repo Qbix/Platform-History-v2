@@ -192,24 +192,21 @@ function _Q_viewport(options) {
 			}
 		
 			function _endHandler (e) {
-				var de = document.documentElement;
 				start = pos = null;
 				Q.removeEventListener(container[0], Q.Pointer.move, _moveHandler);
-				Q.removeEventListener(de, Q.Pointer.end, _endHandler);
-				Q.removeEventListener(de, Q.Pointer.cancel, _cancelHandler);
-				Q.removeEventListener(de, Q.Pointer.touchclick, _clickHandler);
+				Q.removeEventListener(window, Q.Pointer.end, _endHandler);
+				Q.removeEventListener(window, Q.Pointer.cancel, _cancelHandler);
+				Q.removeEventListener(window, Q.Pointer.touchclick, _clickHandler);
 				e.preventDefault();
 			}
 		
 			function _cancelHandler (e) {
-				var de = document.documentElement;
-				Q.removeEventListener(de, Q.Pointer.end, _endHandler);
-				Q.removeEventListener(de, Q.Pointer.touchclick, _clickHandler);
+				Q.removeEventListener(window, Q.Pointer.end, _endHandler);
+				Q.removeEventListener(window, Q.Pointer.touchclick, _clickHandler);
 			}
 		
 			function _clickHandler (e) {
-				var de = document.documentElement;
-				Q.removeEventListener(de, Q.Pointer.touchclick, _clickHandler);
+				Q.removeEventListener(window, Q.Pointer.touchclick, _clickHandler);
 				e.preventDefault();
 			}
 		
