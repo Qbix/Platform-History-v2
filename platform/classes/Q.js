@@ -3062,7 +3062,10 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
  * @param {Number} [options.cacheBust] Number of milliseconds before a new cachebuster is appended
  */
 Q.url = function _Q_url(what, fields, options) {
-	var what2 = what;
+	var what2 = what || '';
+	if (what2.substr(0, 5) === 'data:') {
+		return what2; // this is a special type of URL
+	}
 	var parts = what2.split('?');
 	if (fields) {
 		for (var k in fields) {

@@ -42,7 +42,6 @@ function Streams_after_Q_Plugin_install($params)
 		if (!$users) {
 			break;
 		}
-		$offset += $batch;
 		foreach ($users as $j => $user) {
 			$simulated = array(
 				'row' => $user,
@@ -57,6 +56,7 @@ function Streams_after_Q_Plugin_install($params)
 				. str_repeat(' ', 20);
 			gc_collect_cycles();
 		}
+		$offset += $batch;
 	}
 	
 	echo PHP_EOL;
