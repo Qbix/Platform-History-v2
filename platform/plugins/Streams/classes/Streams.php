@@ -3380,7 +3380,7 @@ abstract class Streams extends Base_Streams
 	static function invite($publisherId, $streamName, $who, $options = array())
 	{
 		$options = Q::take($options, array(
-			'readLevel', 'writeLevel', 'adminLevel', 'permissions',
+			'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'asUserId',
 			'addLabel', 'addMyLabel', 'displayName', 'appUrl', 'alwaysSend', 'skipAccess'
 		));
 		
