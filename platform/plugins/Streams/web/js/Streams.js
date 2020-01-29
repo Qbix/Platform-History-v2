@@ -5334,8 +5334,8 @@ Q.onInit.add(function _Streams_onInit() {
 				: Q.text.Streams.login.prompt;
 			Stream.construct(params.stream, function () {
 				params.stream = this;
-				params.communityId = params.communityId || Q.Users.communityId;
-				params.communityName = params.communityName || Q.Users.communityName;
+				params.communityId = Q.Users.communityId;
+				params.communityName = Q.Users.communityName;
 				Q.Template.render(templateName, params,
 					function(err, html) {
 						var dialog = $(html);
