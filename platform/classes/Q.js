@@ -2681,7 +2681,7 @@ function _logsDirectory() {
 	return filesDirectory+Q.DS+logsDirectory;
 }
 
-var getLogStream = Q.getter(function (name, callback) {
+var getLogStream = function (name, callback) {
 	var Db = Q.require('Db');
 	var path = _logsDirectory();
 	var suffix = Db.toDate(new Date());
@@ -2715,7 +2715,7 @@ var getLogStream = Q.getter(function (name, callback) {
 		);
 		callback(null, stream);
 	});
-});
+};
 
 /**
  * Returns date/time string formatted the same way as PHP date function does
