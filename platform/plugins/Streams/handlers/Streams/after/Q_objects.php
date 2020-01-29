@@ -50,6 +50,7 @@ function Streams_after_Q_objects () {
 		array('invited', 'dialog', 'templateName'),
 		'Streams/invited/complete'
 	);
+
 	$params = array(
 		'displayName' => $displayName,
 		'nameIsMissing' => $nameIsMissing,
@@ -68,6 +69,11 @@ function Streams_after_Q_objects () {
 		'relations' => !empty($relations) ? Db::exportArray($relations) : array(),
 		'related' => !empty($related) ? Db::exportArray($related) : array()
 	);
+
+	if (Users::isCommunityId($stream->publisherId)) {
+		$params['communityId'] = $stream->publisherId;
+		$params['communityName'] = Streams::displayName($stream->publisherId);
+	}
 
 	$config = Streams_Stream::getConfigField($stream->type, 'invite', array());
 	$defaults = Q::ifset($config, 'dialog', array());

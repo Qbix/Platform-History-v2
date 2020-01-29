@@ -58,3 +58,6 @@
 	width: 100%;
 	display: none;
 }
+.Q_expandable_container.Q_expanded {
+	display: block;
+}
