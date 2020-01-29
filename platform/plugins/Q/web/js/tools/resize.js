@@ -29,6 +29,7 @@
 			move: true,
 			elementPosition: null,
 			snapToSidesOnly: false,
+            moveWithinArea: 'parent',
 			resizeByWheel: true,
 			ignoreOnElements: [],
 			activateOnElement: null,
@@ -81,7 +82,7 @@
 				var elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
 				var activateOnElement = tool.state.activateOnElement != null ? tool.state.activateOnElement : elementToMove;
 				var elementComputedStyle = window.getComputedStyle(elementToResize);
-				var moveWithinEl = document.body;
+				var moveWithinEl = tool.state.moveWithinArea == 'parent' ? elementToMove.parentElement : window;
 
 				var _dragElement = (function (){
 					var posX, posY, divTop, divLeft, eWi, eHe, cWi, cHe, diffX, diffY, snappedTo;
@@ -241,8 +242,8 @@
 							divLeft = elementToMove.offsetLeft,
 							eWi = parseInt(elementToMove.offsetWidth),
 							eHe = parseInt(elementToMove.offsetHeight),
-							cWi = parseInt(moveWithinEl.offsetWidth),
-							cHe = parseInt(moveWithinEl.offsetHeight);
+							cWi = parseInt(tool.state.moveWithinArea == 'parent' ? moveWithinEl.offsetWidth : window.innerWidth),
+							cHe = parseInt(tool.state.moveWithinArea == 'parent' ? moveWithinEl.offsetHeight : window.innerHeight);
 						diffX = posX - divLeft, diffY = posY - divTop;
 
 						tool.state.onMovingStart.handle.call(tool);

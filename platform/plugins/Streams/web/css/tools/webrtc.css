@@ -9,6 +9,8 @@
     position: fixed;
     top: 0;
     left: 0;
+    height:100vh;
+    width:100vw;
     z-index: 99999 !important;
     pointer-events: none;
 }
@@ -1738,12 +1740,18 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
     width: 80%;
     border: none;
 }
-.Streams_webrtc_streaming .Streams_webrtc_streaming_url .Streams_webrtc_streaming_copy_url_btn{
+.Streams_webrtc_streaming .Streams_webrtc_streaming_url .Streams_webrtc_streaming_copy_url_btn {
     padding: 10px 16px 10px 16px;
+}
+.Streams_webrtc_streaming .Streams_webrtc_streaming_previous .Streams_webrtc_streaming_url .Streams_webrtc_streaming_copy_url_btn {
+    padding: 0 10px 0 10px;
+    border-right: 1px solid #e1e1e1;
+}
+.Streams_webrtc_streaming .Streams_webrtc_streaming_previous .Streams_webrtc_streaming_url .Streams_webrtc_streaming_copy_embed_btn {
+    padding: 5px 16px 5px 10px;
 }
 .Streams_webrtc_streaming label {
     padding-left:0;
-
 }
 .Streams_webrtc_streaming label input[type="text"] {
     padding:10px;
@@ -1751,6 +1759,12 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
     width:100%;
     border:none;
 }
+
+.Streams_webrtc_streaming_previous .Streams_webrtc_streaming_url,
+.Streams_webrtc_streaming_previous .Streams_webrtc_streaming_url input{
+    background: #f7f4f4;
+}
+
 .Streams_webrtc_streaming .Streams_webrtc_streaming_start_settings {
     -webkit-transition: max-height 1s;
     -moz-transition: max-height 1s;
