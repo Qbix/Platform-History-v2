@@ -883,6 +883,9 @@ class Q_Utils
 		
 		if (!isset($header) or is_array($header)) {
 			$headers[] = "User-Agent: $user_agent";
+			if (!isset($header)) {
+				$header = array();
+			}
 			if ($data) {
 				if ($method === 'GET') {
 					$url = Q_Uri::fixUrl("$url?$data");
@@ -890,7 +893,7 @@ class Q_Utils
 					$found = false;
 					foreach ($header as $h) {
 						if (Q::startsWith($h, 'Content-type:')) {
-							$count = true;
+							$found = true;
 						}
 					}
 					if (!$found) {
@@ -899,7 +902,7 @@ class Q_Utils
 					$found = false;
 					foreach ($header as $h) {
 						if (Q::startsWith($h, 'Content-type:')) {
-							$count = true;
+							$found = true;
 						}
 					}
 					if (!$found) {
