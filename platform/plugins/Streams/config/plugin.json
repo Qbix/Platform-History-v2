@@ -552,7 +552,7 @@
 		"rules": {
 			"deliver": {
 				"default": ["devices", "email", "mobile"],
-				"invited": [["devices", "email+pending"], "mobile+pending", ],
+				"invited": [["devices", "email+pending"], "mobile+pending"],
 				"mentioned": [["devices", "email+pending"], "mobile+pending"]
 			}
 		},
