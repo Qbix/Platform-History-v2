@@ -791,6 +791,7 @@ class Q_Response
 	}
 	
 	/**
+	 * Indicate whether to retain a tool
 	 * @method toolRetain
 	 * @static
 	 * @param {boolean} [$toRetain=true] Defaults to true. Whether to cache the tool being rendered.
@@ -802,9 +803,10 @@ class Q_Response
 	}
 	
 	/**
+	 * Indicate whether to replace a tool
 	 * @method toolReplace
 	 * @static
-	 * @param {boolean} [$toReplaceWith=true] Defaults to true. Whether to cache the tool being rendered.
+	 * @param {boolean} [$toReplaceWith=true] Defaults to true. Whether to replace the tool being rendered.
 	 */
 	static function toolReplace($toRetain = true)
 	{

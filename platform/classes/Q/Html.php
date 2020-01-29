@@ -606,6 +606,16 @@ class Q_Html
 			$alt = 'not a string';
 		}
 		$tag_params = array_merge(compact('src', 'alt'), $attributes);
+		$lazyload = Q_Config::get('Q', 'images', 'lazyload', array());
+		if ($lazyload and !empty($tag_params['src'])) {
+			$src = Q_Html::themedUrl($tag_params['src']);
+			$tag_params['data-lazyload-src'] = $src;
+			$tag_params['src'] = self::themedUrl(
+				!empty($lazyload['loadingSrc'])
+					? $lazyload['loadingSrc']
+					: "{{Q}}/img/throbbers/transparent.gif"
+			);
+		}
 		return self::tag('img', $tag_params);
 	}
 	
@@ -1122,7 +1132,7 @@ class Q_Html
 		if (Q_Config::get('Q', 'html', 'w3c', true)) {
 			$defaults = array(
 				'img' => array(
-					'src' => '',
+					'src' => null,
 					'alt' => 'image'
 				),
 				'a' => array(

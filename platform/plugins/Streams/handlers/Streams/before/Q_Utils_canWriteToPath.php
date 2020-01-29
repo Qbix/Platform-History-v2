@@ -23,12 +23,25 @@ function Streams_before_Q_Utils_canWriteToPath($params, &$result)
 		$prefix = "files/$app/uploads/Streams/";
 		$len = strlen($prefix);
 		if (substr($sp, 0, $len) === $prefix) {
-			$splitId = Q_Utils::splitId($userId);
+			$splitId = Q_Utils::splitId($userId, 3, '/');
 			$prefix2 = "files/$app/uploads/Streams/invitations/$splitId/";
 			if ($userId and substr($sp, 0, strlen($prefix2)) === $prefix2) {
 				$result = true; // user can write any invitations here
 				return;
 			}
+
+			// check if user can manage streams published by publisherId
+			if ($canManageLabels = Q_Config::get('Streams', 'canManage', null)) {
+				foreach(Users::byRoles($canManageLabels) as $usersContact) {
+					$splitId = Q_Utils::splitId($usersContact->userId, 3, '/');
+					$prefix2 = "files/$app/uploads/Streams/invitations/$splitId/";
+					if (substr($sp, 0, strlen($prefix2)) === $prefix2) {
+						$result = true; // user can write any invitations here
+						return;
+					}
+				}
+			}
+
 			$parts = explode('/', substr($sp, $len));
 			$c = count($parts);
 			if ($c >= 3) {

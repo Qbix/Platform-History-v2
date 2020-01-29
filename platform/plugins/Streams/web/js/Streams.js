@@ -558,7 +558,7 @@ Streams.actionUrl = function(publisherId, streamName, what) {
 Q.Tool.define({
 	"Users/avatar"		 : "{{Streams}}/js/tools/avatar.js", // override for Users/avatar tool
 	"Streams/chat"		 : "{{Streams}}/js/tools/chat.js",
-	"Streams/mentions/chat": "{{Streams}}/js/tools/mentions.js",
+	"Streams/mentions/chat": "{{Streams}}/js/tools/mentions/chat.js",
 	"Streams/comments"	 : "{{Streams}}/js/tools/comments.js",
 	"Streams/photoSelector": "{{Streams}}/js/tools/photoSelector.js",
 	"Streams/userChooser"  : "{{Streams}}/js/tools/userChooser.js",
@@ -5334,8 +5334,8 @@ Q.onInit.add(function _Streams_onInit() {
 				: Q.text.Streams.login.prompt;
 			Stream.construct(params.stream, function () {
 				params.stream = this;
-				params.communityId = Q.Users.communityId;
-				params.communityName = Q.Users.communityName;
+				params.communityId = params.communityId || Q.Users.communityId;
+				params.communityName = params.communityName || Q.Users.communityName;
 				Q.Template.render(templateName, params,
 					function(err, html) {
 						var dialog = $(html);

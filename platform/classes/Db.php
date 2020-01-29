@@ -920,11 +920,30 @@ abstract class Db
 	}
 	
 	/**
+	 * Turn off automatic caching on fetchAll and fetchDbRows.
+	 * @method caching
+	 * @param {boolean} $$allow Pass false to suppress all caching.
+	 *  Pass true to enable caching, for queries with $query->caching() as true.
+	 * @return {Db_Query_Mysql}
+	 */
+	public static function allowCaching($allow = null)
+	{
+		if (!isset($allow)) {
+			return self::$allowCaching;
+		}
+		$prevValue = self::$allowCaching;
+		self::$allowCaching = $allow;
+		return $prevValue;
+	}
+	
+	/**
 	 * Class dir cache
 	 * @property $class_dir
 	 * @type string
 	 * @protected
 	 */
 	protected static $class_dir = null;
+	
+	protected static $allowCaching = true;
 
 }

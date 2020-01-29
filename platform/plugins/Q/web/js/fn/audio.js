@@ -615,7 +615,7 @@
 									state.input.click();
 									e.preventDefault();
 									e.stopPropagation();
-									Q.Pointer.cancelClick(e);
+									Q.Pointer.cancelClick(false, e);
 								});
 
 								// natively support "file" input
@@ -633,7 +633,7 @@
 
 										e.preventDefault();
 										e.stopPropagation();
-										Q.Pointer.cancelClick(e);
+										Q.Pointer.cancelClick(false, e);
 
 										clearInterval(state.encodeIntervalID);
 									}, 1000);
@@ -645,7 +645,7 @@
 
 									e.preventDefault();
 									e.stopPropagation();
-									Q.Pointer.cancelClick(e);
+									Q.Pointer.cancelClick(false, e);
 								});
 							},
 							beforeClose: function(mainDialog) {

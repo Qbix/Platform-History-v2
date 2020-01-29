@@ -580,6 +580,7 @@
 			"description": {
 				"maxLength": 150
 			}
-		}
+		},
+		"canManage": ["Users/owners", "Users/admins"]
 	}
 }

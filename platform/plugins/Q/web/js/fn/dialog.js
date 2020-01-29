@@ -209,6 +209,7 @@ Q.Tool.jQuery('Q/overlay',
 						$('html').addClass(data.options.htmlClass);
 					}
 				}
+				Q.Pointer.clearSelection();
 				Q.Pointer.cancelClick();
 			},
 			close: function(e)

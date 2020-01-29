@@ -36,197 +36,211 @@ function _Q_viewport(options) {
 	var $this = $(this);
 	state.oldCursor = this.css('cursor');
 	this.css('cursor', 'move');
-
-	var ow = this.outerWidth(true);
-	var oh = this.outerHeight(true);
-	if (!state.width) { state.width = ow; }
-	if (!state.height) { state.height = oh; }
-	if ( this.parent('.Q_viewport_stretcher').length ) {
-        stretcher = this.parent();
-        container = stretcher.parent();
-    } else {
-		container = $('<span class="Q_viewport_container" />').css({
-			'display': (display === 'inline' || display === 'inline-block') ? 'inline-block' : display,
-			'zoom': 1,
-			'position': position === 'static' ? 'relative' : position,
-			'left': position === 'static' ? 0 : this.position().left,
-			'top': position === 'static' ? 0 : this.position().top,
-			'margin': '0px',
-			'padding': '0px',
-			'border': '0px solid transparent',
-			'float': this.css('float'),
-			'z-index': this.css('z-index'),
-			'overflow': 'hidden',
-			'width': state.width + 'px',
-			'height': state.height + 'px',
-			'text-align': 'left',
-			'overflow': 'hidden',
-			'line-height': this.css('line-height'),
-			'vertical-align': this.css('vertical-align'),
-			'text-align': this.css('text-align')
-		}).addClass('Q_viewport_container ' + (options.containerClass || ''))
-		.insertAfter(this);
-		
-		stretcher = $('<div class="Q_viewport_stretcher" />')
-		.appendTo(container)
-		.append(this);
-	}
 	
-	var initial = state.initial;
-	var iw = ow, ih = oh, il = 0, it = 0;
-	if (initial && initial.x) {
-		il -= iw * initial.x - state.width/2;
+	if (this[0].tagName.toUpperCase() === 'IMG') {
+		if (this[0].complete) {
+			_continue.call(this);
+		} else {
+			this.on('load', _continue.bind(this));
+		}
+	} else {
+		_continue(); // the dimensions should have already been set, don't depend on content
 	}
-	if (initial && initial.y) {
-		it -= ih * initial.y - state.height/2;
-	}
-	
-	stretcher.css({
-		'position': 'absolute',
-		'overflow': 'visible',
-		'padding': '0px',
-		'margin': '0px',
-		'left': il+'px',
-		'top': it+'px',
-		'width': ow+0.5+'px',
-		'height': oh+0.5+'px',
-	});
 	
 	var useZoom = Q.info.isIE(0, 8);
-	var offset = stretcher.offset();	
-	var grab = null;
-	var cur = null;
-	var pos = {
-		left: parseFloat(stretcher.css('left')),
-		top: parseFloat(stretcher.css('top'))
-	};
 	
-	var s = (initial && initial.scale)
-		|| (state.minScale + state.maxScale) / 2
-		|| 1;
-	state.scale = Math.max(state.minScale, Math.min(state.maxScale, s));
-	var off = stretcher.offset();
-	scale(state.scale, off.left+ow/2, off.top+oh/2);
-
-	state.$container = container;
-	state.$stretcher = stretcher;
-	pos = null;
+	function _continue() {
+		var ow = this.outerWidth(true);
+		var oh = this.outerHeight(true);
+		if (!state.width) { state.width = ow; }
+		if (!state.height) { state.height = oh; }
+		if ( this.parent('.Q_viewport_stretcher').length ) {
+	        stretcher = this.parent();
+	        container = stretcher.parent();
+	    } else {
+			container = $('<span class="Q_viewport_container" />').css({
+				'display': (display === 'inline' || display === 'inline-block') ? 'inline-block' : display,
+				'zoom': 1,
+				'position': position === 'static' ? 'relative' : position,
+				'left': position === 'static' ? 0 : this.position().left,
+				'top': position === 'static' ? 0 : this.position().top,
+				'margin': '0px',
+				'padding': '0px',
+				'border': '0px solid transparent',
+				'float': this.css('float'),
+				'z-index': this.css('z-index'),
+				'overflow': 'hidden',
+				'width': state.width + 'px',
+				'height': state.height + 'px',
+				'text-align': 'left',
+				'overflow': 'hidden',
+				'line-height': this.css('line-height'),
+				'vertical-align': this.css('vertical-align'),
+				'text-align': this.css('text-align')
+			}).addClass('Q_viewport_container ' + (options.containerClass || ''))
+			.insertAfter(this);
+		
+			stretcher = $('<div class="Q_viewport_stretcher" />')
+			.appendTo(container)
+			.append(this);
+		}
 	
-	container.on('dragstart', function () {
-		return false;
-	}).on(Q.Pointer.start, function (e) {
-		
-		var f = useZoom ? state.scale : 1;
-		var touches = e.originalEvent.touches;
-		var touchDistance;
-		if (touches && touches.length > 1) {
-			var tx0 = Q.Pointer.getX(e, 0);
-			var ty0 = Q.Pointer.getY(e, 0);
-			var tx1 = Q.Pointer.getX(e, 1);
-			var ty1 = Q.Pointer.getY(e, 1);
-			touchDistance = Math.sqrt(
-				Math.pow(tx1 - tx0, 2) +
-				Math.pow(ty1 - ty0, 2)
-			);
+		var initial = state.initial;
+		var iw = ow, ih = oh, il = 0, it = 0;
+		if (initial && initial.x) {
+			il -= iw * initial.x - state.width/2;
 		}
-		
-		function _moveHandler (e) {
-			var offset, touches, scaling;
-			offset = stretcher.offset();
-			cur = {
-				x: Q.Pointer.getX(e),
-				y: Q.Pointer.getY(e)
-			};
-			Q.Pointer.cancelClick(e, null, true); // even on the slightest move
-			e.preventDefault();
-			if (!pos) {
-				return;
-			}
-			if (Q.info.isTouchscreen && (touches = e.originalEvent.touches)) {
-				if (touches.length > 1) {
-					var tx0 = Q.Pointer.getX(e, 0);
-					var ty0 = Q.Pointer.getY(e, 0);
-					var tx1 = Q.Pointer.getX(e, 1);
-					var ty1 = Q.Pointer.getY(e, 1);
-					var newDistance = Math.sqrt(
-						Math.pow(tx1 - tx0, 2) +
-						Math.pow(ty1 - ty0, 2)
-					);
-					if (touchDistance) {
-						var midX = (tx0 + tx1) / 2;
-						var midY = (ty0 + ty1) / 2;
-						var factor = state.scale * newDistance / touchDistance;
-						scale(factor, midX, midY);
-						scaling = true;
-					}
-					touchDistance = newDistance;
-				}
-			} else if (Q.Pointer.which(e) !== Q.Pointer.which.LEFT) {
-				return;
-			}
-			if (scaling) {
-				return;
-			}
-			var x = Q.Pointer.getX(e);
-			var y = Q.Pointer.getY(e);
-			var newPos = {
-				left: pos.left + (x - grab.x)/f,
-				top: pos.top + (y - grab.y)/f
-			};
-			fixPosition(newPos);
-			stretcher.css(newPos);
-			Q.handle(state.onMove, $this, [state.selection, state.scale]);
-			Q.handle(state.onUpdate, $this, [state.selection, state.scale]);
+		if (initial && initial.y) {
+			it -= ih * initial.y - state.height/2;
 		}
-		
-		function _endHandler (e) {
-			start = pos = null;
-			container.off(Q.Pointer.move);
-			$(window).off(Q.Pointer.end, _endHandler);
-			$(window).off(Q.Pointer.clickHandler, _clickHandler);
-			e.preventDefault();
-		}
-		
-		function _cancelHandler (e) {
-			$(window).off(Q.Pointer.end, _endHandler);
-			$(window).off(Q.Pointer.clickHandler, _clickHandler);
-		}
-		
-		function _clickHandler (e) {
-			$(window).off(Q.Pointer.clickHandler, _clickHandler);
-			e.preventDefault();
-		}
-		
-		if (Q.Pointer.canceledClick) {
-			return;
-		}
-		grab = cur = {
-			x: Q.Pointer.getX(e),
-			y: Q.Pointer.getY(e)
-		};
-		pos = {
+	
+		stretcher.css({
+			'position': 'absolute',
+			'overflow': 'visible',
+			'padding': '0px',
+			'margin': '0px',
+			'left': il+'px',
+			'top': it+'px',
+			'width': ow+0.5+'px',
+			'height': oh+0.5+'px',
+		});
+	
+		var offset = stretcher.offset();	
+		var grab = null;
+		var cur = null;
+		var pos = {
 			left: parseFloat(stretcher.css('left')),
 			top: parseFloat(stretcher.css('top'))
 		};
-		container.on(Q.Pointer.move, _moveHandler);
-		$(window).on(Q.Pointer.end, _endHandler);
-		$(window).on(Q.Pointer.cancel, _cancelHandler);
-		$(window).on(Q.Pointer.click, _clickHandler);
-	});
 	
-	container.on(Q.Pointer.wheel, function (e) {
-		if (Q.Pointer.started) {
-			return;
-		}
-		if (typeof e.deltaY === 'number' && !isNaN(e.deltaY)) {
-			scale(
-				state.scale - e.deltaY * 0.01,
-				Q.Pointer.getX(e),
-				Q.Pointer.getY(e)
-			);
-		}
-		return false;
-	});
+		var s = (initial && initial.scale)
+			|| (state.minScale + state.maxScale) / 2
+			|| 1;
+		state.scale = Math.max(state.minScale, Math.min(state.maxScale, s));
+		var off = stretcher.offset();
+		scale(state.scale, off.left+ow/2, off.top+oh/2);
+
+		state.$container = container;
+		state.$stretcher = stretcher;
+		pos = null;
+	
+		container.on('dragstart', function () {
+			return false;
+		}).on(Q.Pointer.start, function (e) {
+		
+			var f = useZoom ? state.scale : 1;
+			var touches = e.touches;
+			var touchDistance;
+			if (touches && touches.length > 1) {
+				var tx0 = Q.Pointer.getX(e, 0);
+				var ty0 = Q.Pointer.getY(e, 0);
+				var tx1 = Q.Pointer.getX(e, 1);
+				var ty1 = Q.Pointer.getY(e, 1);
+				touchDistance = Math.sqrt(
+					Math.pow(tx1 - tx0, 2) +
+					Math.pow(ty1 - ty0, 2)
+				);
+			}
+		
+			function _moveHandler (e) {
+				var offset, touches, scaling;
+				offset = stretcher.offset();
+				cur = {
+					x: Q.Pointer.getX(e),
+					y: Q.Pointer.getY(e)
+				};
+				Q.Pointer.cancelClick(true, e, null); // even on the slightest move
+				e.preventDefault();
+				if (!pos) {
+					return;
+				}
+				if (Q.info.isTouchscreen && (touches = e.touches)) {
+					if (touches.length > 1) {
+						var tx0 = Q.Pointer.getX(e, 0);
+						var ty0 = Q.Pointer.getY(e, 0);
+						var tx1 = Q.Pointer.getX(e, 1);
+						var ty1 = Q.Pointer.getY(e, 1);
+						var newDistance = Math.sqrt(
+							Math.pow(tx1 - tx0, 2) +
+							Math.pow(ty1 - ty0, 2)
+						);
+						if (touchDistance) {
+							var midX = (tx0 + tx1) / 2;
+							var midY = (ty0 + ty1) / 2;
+							var factor = state.scale * newDistance / touchDistance;
+							scale(factor, midX, midY);
+							scaling = true;
+						}
+						touchDistance = newDistance;
+					}
+				} else if (Q.Pointer.which(e) !== Q.Pointer.which.LEFT) {
+					return;
+				}
+				if (scaling) {
+					return;
+				}
+				var x = Q.Pointer.getX(e);
+				var y = Q.Pointer.getY(e);
+				var newPos = {
+					left: pos.left + (x - grab.x)/f,
+					top: pos.top + (y - grab.y)/f
+				};
+				fixPosition(newPos);
+				stretcher.css(newPos);
+				Q.handle(state.onMove, $this, [state.selection, state.scale]);
+				Q.handle(state.onUpdate, $this, [state.selection, state.scale]);
+			}
+		
+			function _endHandler (e) {
+				start = pos = null;
+				Q.removeEventListener(container[0], Q.Pointer.move, _moveHandler);
+				Q.removeEventListener(window, Q.Pointer.end, _endHandler);
+				Q.removeEventListener(window, Q.Pointer.cancel, _cancelHandler);
+				Q.removeEventListener(window, Q.Pointer.touchclick, _clickHandler);
+				e.preventDefault();
+			}
+		
+			function _cancelHandler (e) {
+				Q.removeEventListener(window, Q.Pointer.end, _endHandler);
+				Q.removeEventListener(window, Q.Pointer.touchclick, _clickHandler);
+			}
+		
+			function _clickHandler (e) {
+				Q.removeEventListener(window, Q.Pointer.touchclick, _clickHandler);
+				e.preventDefault();
+			}
+		
+			if (Q.Pointer.canceledClick) {
+				return;
+			}
+			grab = cur = {
+				x: Q.Pointer.getX(e),
+				y: Q.Pointer.getY(e)
+			};
+			pos = {
+				left: parseFloat(stretcher.css('left')),
+				top: parseFloat(stretcher.css('top'))
+			};
+			Q.addEventListener(container[0], Q.Pointer.move, _moveHandler, {passive: false});
+			Q.addEventListener(window, Q.Pointer.end, _endHandler, {passive: false});
+			Q.addEventListener(window, Q.Pointer.cancel, _cancelHandler, {passive: false});
+			// Q.addEventListener(window, Q.Pointer.touchclick, _clickHandler, {passive: false});
+		});
+	
+		container.on(Q.Pointer.wheel, function (e) {
+			if (Q.Pointer.started) {
+				return;
+			}
+			if (typeof e.deltaY === 'number' && !isNaN(e.deltaY)) {
+				scale(
+					state.scale - e.deltaY * 0.01,
+					Q.Pointer.getX(e),
+					Q.Pointer.getY(e)
+				);
+			}
+			return false;
+		});
+	}
 	
 	function scale(factor, x, y) {
 		if (state.maxScale > 0) {

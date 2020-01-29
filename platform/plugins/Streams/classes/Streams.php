@@ -390,6 +390,11 @@ abstract class Streams extends Base_Streams
 		);
 
 		// Get streams and set their default access info
+		$restoreCaching = false;
+		if (!self::$dontCache and empty($options['dontCache'])) {
+			$prevCaching = Db::allowCaching(false);
+			$restoreCaching = true;
+		}
 		$allRetrieved = $namesToFetch
 			? Streams_Stream::select($fields)
 				->where($criteria)
@@ -494,6 +499,9 @@ abstract class Streams extends Base_Streams
 			foreach ($streams as $n => $stream) {
 				self::$fetch[$asUserId][$publisherId][$n][$fields] = $stream;
 			}
+		}
+		if ($restoreCaching) {
+			Db::allowCaching($prevCaching);
 		}
 		return $streams;
 	}
@@ -832,6 +840,15 @@ abstract class Streams extends Base_Streams
 		if ($publisherId == $userId) {
 			$authorized = true; // user can publish streams under their own name
 		}
+
+		// user can publish streams on behalf of publisher if user is admin of publisher
+		$labelsAuthorized = Q_Config::get("Streams", "create", "admins", array(
+			"Users/admins", "Users/owners"
+		));	
+		if (Users::roles($publisherId, $labelsAuthorized, array(), $userId)) {
+			$authorized = true;
+		}
+
 		if (!$authorized) {
 			// Check for permissions using templates
 			$template = new Streams_Stream();
@@ -3363,7 +3380,7 @@ abstract class Streams extends Base_Streams
 	static function invite($publisherId, $streamName, $who, $options = array())
 	{
 		$options = Q::take($options, array(
-			'readLevel', 'writeLevel', 'adminLevel', 'permissions',
+			'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'asUserId', 'html',
 			'addLabel', 'addMyLabel', 'displayName', 'appUrl', 'alwaysSend', 'skipAccess'
 		));
 		

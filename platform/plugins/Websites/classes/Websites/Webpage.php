@@ -19,6 +19,11 @@ class Websites_Webpage
 	 */
 	static function scrape($url)
 	{
+		// add scheme to url if not exist
+		if (parse_url($url, PHP_URL_SCHEME) === null) {
+			$url = 'http://'.$url;
+		}
+
 		if (!Q_Valid::url($url)) {
 			throw new Exception("Invalid URL");
 		}
@@ -279,6 +284,11 @@ class Websites_Webpage
 			return Streams::fetchOne($streams->publisherId, $streams->publisherId, $streams->name);
 		}
 
+		$streams->name .= '_';
+		if ($streams->retrieve()) {
+			return Streams::fetchOne($streams->publisherId, $streams->publisherId, $streams->name);
+		}
+
 		return null;
 	}
 	/**
@@ -373,9 +383,11 @@ class Websites_Webpage
 
 		// check if stream for this url has been already created
 		// and if yes, return it
-		if ($webpageStream = self::fetchStream($url)) {
+		if ($webpageStream = self::fetchStream($url, $publisherId)) {
 			return $webpageStream;
 		}
+
+		$streamName = "Websites/webpage/".self::normalizeUrl($url);
 
 		$quota = null;
 
@@ -398,7 +410,7 @@ class Websites_Webpage
 				'lang' => Q::ifset($params, 'lang', 'en')
 			),
 			'skipAccess' => $skipAccess,
-			'name' => "Websites/webpage/".substr(self::normalizeUrl($url), 0, 100)
+			'name' => $streamName
 		), array(
 			'publisherId' => $interestPublisherId,
 			'streamName' => $interestStreamName,

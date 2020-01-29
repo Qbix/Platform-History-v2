@@ -67,13 +67,17 @@ class Places_Location extends Base_Places_Location
 	 * @param {string} $asUserId The user to fetch as
 	 * @param {string} $publisherId The user publishing the stream
 	 * @param {string} $placeId The id of the place in Google Places
-	 * @param {boolean} $throwIfBadValue
-	 *  Whether to throw Q_Exception if the result contains a bad value
+	 * @param {array} [$options=array()] Any options to pass. Also can include:
+	 * @param {boolean} [$options.throwIfBadValue=false] Whether to throw Q_Exception if the result contains a bad value
+	 * @param {boolean} [$options.withTimeZone=false] If true, trying to get time zone and save to attributes
 	 * @return {Streams_Stream|null}
 	 * @throws {Q_Exception} if a bad value is encountered and $throwIfBadValue is true
 	 */
-	static function stream($asUserId, $publisherId, $placeId, $throwIfBadValue = false)
+	static function stream($asUserId, $publisherId, $placeId, $options = array())
 	{
+		$throwIfBadValue = Q::ifset($options, 'throwIfBadValue', false);
+		$withTimeZone = Q::ifset($options, 'withTimeZone', false);
+
 		if (empty($placeId)) {
 			if ($throwIfBadValue) {
 				throw new Q_Exception_RequiredField(array('field' => 'id'));
@@ -130,6 +134,15 @@ class Places_Location extends Base_Places_Location
 			'website' => Q::ifset($result, 'website', null),
 			'placeId' => $placeId
 		);
+
+		// try to get timeZone
+		if ($withTimeZone) {
+			try {
+				$timeZone = Places::timezone($latitude, $longitude);
+				$attributes['timeZone'] = Q::ifset($timeZone, 'timeZoneId', null);
+			} catch (Exception $e) {}
+		}
+
 		$geohash = Places_Geohash::encode($latitude, $longitude);
 		if ($location) {
 			$location->title = $result['name'];

@@ -750,6 +750,9 @@ class Q
 	 * @param {boolean} [$extra.replace]
 	 *    Pass true to tell Q.js to replace any previously rendered tool tool
 	 *    even if it was marked to be retained.
+	 * @param {boolean} [$extra.lazyload]
+	 *    Pass true to allow the tool to be lazy-loaded by a Q/lazyload tool if it is
+	 *    activated on one of its containers.
 	 * @param {boolean} [$extra.merge=false]
 	 *    If true, the element for this tool is merged with the element of the tool
 	 *    already being rendered when this function is called (if any),
