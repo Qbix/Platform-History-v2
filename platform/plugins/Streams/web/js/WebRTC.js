@@ -1013,6 +1013,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 										ignoreOnElements: elementsToIgnore,
 										elementPosition: 'fixed',
 										snapToSidesOnly: true,
+										moveWithinArea: 'window',
 										onMovingStart: function () {
 											_controls.classList.add('isMoving');
 										},
@@ -1402,6 +1403,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								{
 									movable: true,
 									active: true,
+                                    moveWithinArea: 'window',
 									keepRatioBasedOnElement: participantScreen.videoTrack,
 									onMoved: function () {
 										if(!Q.info.isMobile) screensRendering.renderManualScreensGrid();
@@ -4039,7 +4041,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				overrideDefaultOptions(options);
 				Q.Text.get("Streams/content", function (err, result) {
 					_textes = result;
-					window._textes = _textes;
 					onConnect();
 				})
 
@@ -4274,7 +4275,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							//connectUrl = updateQueryStringParameter(connectUrl, 'Q.pid', asPublisherId);
 							Q.Streams.get(asPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
 								_roomStream = stream;
-								window.roomStream = _roomStream;
 								if(Q.Streams.WebRTCRooms == null){
 									Q.Streams.WebRTCRooms = [];
 								}

@@ -2443,8 +2443,6 @@ window.WebRTCconferenceLib = function app(options){
 			}
 		}())
 
-		window.videoComposer = canvasComposer.videoComposer;
-
 
 		var fbLive = (function () {
 			var _streamingSocket;
@@ -2475,7 +2473,6 @@ window.WebRTCconferenceLib = function app(options){
 				_streamingSocket.on('connect', function () {
 					if(callback != null) callback();
 				});
-				window.streamingSocket = _streamingSocket;
 			}
 
 			function onDataAvailablehandler(blob) {
@@ -2692,7 +2689,6 @@ window.WebRTCconferenceLib = function app(options){
 					}
 				}
 			}())
-			window.youtubeLive = youtubeLive;
 		}
 
 		var youtubeLiveUploader = (function () {
@@ -3100,7 +3096,6 @@ window.WebRTCconferenceLib = function app(options){
 				this.uploadStartTime = Date.now();
 				uploader.initUpload(callback);
 				this.uploader = uploader;
-				window.uploader = uploader;
 			};
 
 			UploadVideo.prototype.pollForVideoStatus = function() {
@@ -6907,11 +6902,6 @@ window.WebRTCconferenceLib = function app(options){
 				if (callback != null) callback();
 			}
 
-			//RTCPeerConnection = cordova.plugins.iosrtc.RTCPeerConnection
-			//RTCIceCandidate = cordova.plugins.iosrtc.RTCIceCandidate;
-			//RTCSessionDescription = cordova.plugins.iosrtc.RTCSessionDescription;*/
-			//window.RTCPeerConnection.prototype.addStream = cordova.plugins.iosrtc.RTCPeerConnection.addStream;
-
 			return {
 				create: createIosrtcLocalPeerConnection,
 				createOffer: createOffer,
@@ -7062,8 +7052,6 @@ window.WebRTCconferenceLib = function app(options){
 				reconnectionDelayMax: 5000,
 				reconnectionAttempts: 5
 			});
-			window.webrtcSocket = socket;
-			window.webConf = app;
 			socket.on('connect', function () {
 				app.event.dispatch('connected');
 
