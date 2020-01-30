@@ -1260,16 +1260,18 @@
 				startStreamingBtnCon.className = 'Streams_webrtc_streaming_start';
 
 				var privacySelect = document.createElement('SELECT');
-
                 var option1 = document.createElement('OPTION');
+                option1.name = 'privacy';
                 option1.value = 'EVERYONE';
                 option1.innerHTML = Q.getObject("webrtc.settingsPopup.fbPublicAccess", tool.textes);
                 option1.selected = true;
 				var option2 = document.createElement('OPTION');
 				option2.innerHTML = Q.getObject("webrtc.settingsPopup.fbFriendsAccess", tool.textes);
-				option2.value = 'ALL_FRIENDS';
+                option2.name = 'privacy';
+                option2.value = 'ALL_FRIENDS';
                 var option3 = document.createElement('OPTION');
                 option3.innerHTML = Q.getObject("webrtc.settingsPopup.fbOnlyMeLiveAccess", tool.textes);
+                option3.name = 'privacy';
                 option3.value = 'SELF';
 
 				var startStreamingBtn = document.createElement('BUTTON');
@@ -2331,6 +2333,7 @@
 								'accessToken': tool.fbAccessToken,
 								'title': data.title,
 								'description': data.description,
+								'privacy': data.privacy,
 								'action': 'start'
 							}
 						});
