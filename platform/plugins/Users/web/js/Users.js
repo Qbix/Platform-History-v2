@@ -2845,17 +2845,17 @@
 
 						// remove dublicated contacts
 						Q.each([obj.phoneNumbers, obj.emails], function (i, contacts) {
-							var exist = [];
+							var exist = {};
 							Q.each(contacts, function (i, contact) {
 								var value = contact.value;
 								if (contact.type === 'mobile') {
 									value = value.replace(/\D/g, '');
 								}
 
-								if (exist.includes(value)) {
+								if (exist[value]) {
 									contacts = contacts.splice(i, 1);
 								}
-								exist.push(value);
+								exist[value] = 1;
 							});
 						});
 
