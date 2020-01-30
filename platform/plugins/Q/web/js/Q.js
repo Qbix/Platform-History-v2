@@ -5949,7 +5949,7 @@ Q.loadHandlebars = Q.getter(function _Q_loadHandlebars(callback) {
 			_addHandlebarsHelpers();
 			Q.handle(callback);
 		});
-	}, 'Q');
+	}, 'Q.loadHandlebars');
 }, {
 	cache: Q.Cache.document('Q.loadHandlebars', 1)
 });
@@ -12946,6 +12946,16 @@ Q.onInit.add(function () {
 		Q.removeEventListener(document.body, 'click', _enableSpeech);
 		Q.Audio.speak.enabled = true;
 	}
+
+	// on Q initiated, parse all notices loaded from backend and parse them
+	Q.Notices.process();
+
+	// hook beforeunload event
+	Q.addEventListener(window, 'beforeunload', function (e) {
+		if (!e.defaultPrevented) {
+			_documentIsUnloading = true; // WARN: a later handler might cancel the event
+		}
+	});
 }, 'Q');
 
 Q.onJQuery.add(function ($) {
@@ -13715,18 +13725,6 @@ Q.Notices = {
 		});
 	}
 };
-
-Q.onInit.add(function () {
-	// on Q initiated, parse all notices loaded from backend and parse them
-	Q.Notices.process();
-	
-	// hook beforeunload event
-	Q.addEventListener(window, 'beforeunload', function (e) {
-		if (!e.defaultPrevented) {
-			_documentIsUnloading = true; // WARN: a later handler might cancel the event
-		}
-	});
-});
 
 Q.beforeInit.addOnce(function () {
 	if (!Q.info.baseUrl) {
