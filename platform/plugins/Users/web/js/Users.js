@@ -2843,6 +2843,22 @@
 							return;
 						}
 
+						// remove dublicated contacts
+						Q.each([obj.phoneNumbers, obj.emails], function (i, contacts) {
+							var exist = [];
+							Q.each(contacts, function (i, contact) {
+								var value = contact.value;
+								if (contact.type === 'mobile') {
+									value = value.replace(/\D/g, '');
+								}
+
+								if (exist.includes(value)) {
+									contacts = contacts.splice(i, 1);
+								}
+								exist.push(value);
+							});
+						});
+
 						var firstLetter = obj.displayName.charAt(0).toUpperCase();
 
 						if (!contacts[firstLetter]) {
