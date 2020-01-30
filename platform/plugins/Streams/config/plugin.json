@@ -552,8 +552,8 @@
 		"rules": {
 			"deliver": {
 				"default": ["devices", "email", "mobile"],
-				"invited": ["devices", "mobile+pending", "email+pending"],
-				"mentioned": ["devices", "mobile+pending", "email+pending"]
+				"invited": [["devices", "email+pending"], "mobile+pending"],
+				"mentioned": [["devices", "email+pending"], "mobile+pending"]
 			}
 		},
 		"notifications": {

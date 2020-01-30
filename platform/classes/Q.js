@@ -2648,6 +2648,9 @@ function _removeOldLogs()
 
 	var count = 0;
 	fs.readdir(path, function (err, files) {
+		if (!files) {
+			return;
+		}
 		files.forEach(function (filename) {
 			var basename = filename.split('.').shift();
 			var parts = basename.split('-');
