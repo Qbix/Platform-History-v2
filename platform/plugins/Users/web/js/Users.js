@@ -2832,10 +2832,17 @@
 				var contactOptions = new ContactFindOptions();
 				contactOptions.filter = "";
 				contactOptions.multiple = true;
-				var fields = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+				var fields = [
+					navigator.contacts.fieldType.id,
+					navigator.contacts.fieldType.displayName,
+					navigator.contacts.fieldType.name,
+					navigator.contacts.fieldType.phoneNumbers,
+					navigator.contacts.fieldType.emails
+				];
 				navigator.contacts.find(fields, function (data) {
 					data = data.sort((a,b) => (a.name.formatted > b.name.formatted) ? 1 : ((b.name.formatted > a.name.formatted) ? -1 : 0));
 					var contacts = {};
+
 					Q.each(data, function (i, obj) {
 						obj.displayName = obj.displayName || obj.name.formatted;
 
@@ -2870,6 +2877,7 @@
 
 					Q.handle(callback, contacts);
 				}, function (err) {
+					Q.alert("Error in Users.Dialogs.contacts: " + err);
 					throw new Error("Users.Dialogs.contacts: " + err);
 				}, contactOptions);
 			};
