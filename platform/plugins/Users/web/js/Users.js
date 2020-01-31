@@ -2832,12 +2832,16 @@
 				var contactOptions = new ContactFindOptions();
 				contactOptions.filter = "";
 				contactOptions.multiple = true;
-				var fields = [
+				contactOptions.desiredFields = [
 					navigator.contacts.fieldType.id,
 					navigator.contacts.fieldType.displayName,
 					navigator.contacts.fieldType.name,
 					navigator.contacts.fieldType.phoneNumbers,
 					navigator.contacts.fieldType.emails
+				];
+				var fields = [
+					navigator.contacts.fieldType.displayName,
+					navigator.contacts.fieldType.name
 				];
 				navigator.contacts.find(fields, function (data) {
 					data = data.sort((a,b) => (a.name.formatted > b.name.formatted) ? 1 : ((b.name.formatted > a.name.formatted) ? -1 : 0));
