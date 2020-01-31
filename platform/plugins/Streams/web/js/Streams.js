@@ -974,7 +974,10 @@ Streams.Dialogs = {
 							data: $eContacts.data("contacts") || null
 						};
 
+						$this.addClass('loading');
+
 						Users.Dialogs.contacts(options, function (contacts) {
+							$this.removeClass('loading');
 							$eContacts.data("contacts", contacts);
 
 							if (!contacts || Object.keys(contacts).length <= 0) {
