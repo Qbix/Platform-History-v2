@@ -12030,7 +12030,7 @@ Q.Dialogs = {
 				$h2.empty().append(o.title);
 			}
 			if (content) {
-				$content.empty().append(content);
+				$content[0].innerHTML = content;
 			}
 			$dialog.hide();
 			//if ($dialog.parent().length == 0) {
