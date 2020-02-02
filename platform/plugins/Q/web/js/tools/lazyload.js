@@ -132,7 +132,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 					element.addClass('Q_lazy_load');
 					Q.activate(element, function () {
 						element.addClass('Q_lazy_loaded');
-					});
+					}, {}, true);
 					return true;
 				}
 			},

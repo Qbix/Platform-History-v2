@@ -8256,9 +8256,10 @@ Q.find = function _Q_find(elem, filter, callbackBefore, callbackAfter, options, 
  *  constructors have run.
  *  It receives (elem, tools, options) as arguments, and the last tool to be
  *  activated as "this".
+ * @param {Boolean} activateLazyLoad for internal use, used by Q/lazyload tool
  * @return {Q.Promise} Returns a promise with an extra .cancel() method to cancel the action
  */
-Q.activate = function _Q_activate(elem, options, callback) {
+Q.activate = function _Q_activate(elem, options, callback, activateLazyLoad) {
 	
 	if (!elem) {
 		return;
@@ -8279,7 +8280,8 @@ Q.activate = function _Q_activate(elem, options, callback) {
 		tools: {},
 		waitingForTools: [],
 		pipe: Q.pipe(),
-		canceled: false
+		canceled: false,
+		activateLazyLoad: activateLazyLoad
 	};
 	if (typeof options === 'function') {
 		callback = options;
@@ -9153,9 +9155,13 @@ var _constructors = {};
  * @param {Object} options
  *  Options that should be passed onto the tool
  * @param {Mixed} shared
- *  A shared pipe which we can use to fill
+ *  A shared object we can use to pass info around while activating tools
  */
 function _activateTools(toolElement, options, shared) {
+	if (shared.activateLazyLoad &&
+	toolElement instanceof Element) && toolElement.hasAttribute('data-q-lazyload')) {
+		return false;
+	}
 	var pendingParentEvent = _pendingParentStack[_pendingParentStack.length-1];
 	var pendingCurrentEvent = new Q.Event();
 	pendingCurrentEvent.toolElement = toolElement; // just to keep track for debugging
@@ -9271,6 +9277,11 @@ _activateTools.alreadyActivated = {};
  *  A tool's generated container div
  */
 function _initTools(toolElement) {
+	
+	if (shared.activateLazyLoad &&
+	toolElement instanceof Element) && toolElement.hasAttribute('data-q-lazyload')) {
+		return false;
+	}
 	
 	var currentEvent = _pendingParentStack[_pendingParentStack.length-1];
 	_pendingParentStack.pop(); // it was pushed during tool activate
