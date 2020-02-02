@@ -58,7 +58,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 					return false;
 				}
 			});
-			if (found) {
+			if (!found) {
 				html = originalGet.call(element);
 			}
 			originalSet.call(this, html);
