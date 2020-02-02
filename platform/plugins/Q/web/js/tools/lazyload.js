@@ -76,7 +76,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 			if (!element) {
 				return;
 			}
-			tool.findAndObserve(this, true);
+			tool.findAndObserve(element, true);
 			return orig.apply(this, arguments);
 		};
 	});
