@@ -9283,7 +9283,7 @@ function _initTools(toolElement, options, shared) {
 	
 	if (!shared.activateLazyLoad &&
 	(toolElement instanceof Element)) {
-		var attrr = toolElement.getAttribute('data-q-lazyload');
+		var attr = toolElement.getAttribute('data-q-lazyload');
 		if (attr === 'waiting' || attr === 'removed') {
 			return false;
 		}
