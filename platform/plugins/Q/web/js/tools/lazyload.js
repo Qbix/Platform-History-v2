@@ -76,7 +76,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 			if (!element) {
 				return;
 			}
-			tool.observe(tool.prepare.call(element, true));
+			tool.observe(tool.prepare(element, true));
 			return orig.apply(this, arguments);
 		};
 	});
@@ -162,7 +162,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 }, 
 
 {
-	prepare: function (tool, container, beingInsertedIntoDOM) {
+	prepare: function (container, beingInsertedIntoDOM) {
 		var tool = this;
 		var found = [];
 		Q.each(tool.state.handlers, function (name, info) {
