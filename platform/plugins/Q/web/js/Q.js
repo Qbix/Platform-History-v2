@@ -9161,7 +9161,7 @@ function _activateTools(toolElement, options, shared) {
 	if (!shared.activateLazyLoad &&
 	(toolElement instanceof Element)) {
 		var attr = toolElement.getAttribute('data-q-lazyload');
-		if (attribute === 'waiting' || attribute === 'removed') {
+		if (attr === 'waiting' || attr === 'removed') {
 			return false;
 		}
 	}
@@ -9283,8 +9283,8 @@ function _initTools(toolElement, options, shared) {
 	
 	if (!shared.activateLazyLoad &&
 	(toolElement instanceof Element)) {
-		var attr = toolElement.getAttribute('data-q-lazyload');
-		if (attribute === 'waiting' || attribute === 'removed') {
+		var attrr = toolElement.getAttribute('data-q-lazyload');
+		if (attr === 'waiting' || attr === 'removed') {
 			return false;
 		}
 	}
