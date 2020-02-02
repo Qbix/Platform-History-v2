@@ -37,7 +37,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 
 	// Observe whatever is on the page already
 	tool.observer = _createObserver(tool, tool.element);
-	tool.observe(tool.prepare(tool, tool.element, false));
+	tool.observe(tool.prepare(tool.element, false));
 
 	// Override innerHTML
 
@@ -63,7 +63,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 			}
 			originalSet.call(this, html);
 			if (found) {
-				tool.observe(tool.prepare(tool, this, true));
+				tool.observe(tool.prepare(this, true));
 			}
 			return html;
 		},
@@ -163,6 +163,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 
 {
 	prepare: function (tool, container, beingInsertedIntoDOM) {
+		var tool = this;
 		var found = [];
 		Q.each(tool.state.handlers, function (name, info) {
 			var elements = container.querySelectorAll
@@ -180,6 +181,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 		return found;
 	},
 	observe: function (elements) {
+		var tool = this;
 		Q.each(elements, function (i, element) {
 			tool.observer.observe(element);
 		});
