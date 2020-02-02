@@ -37,7 +37,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 
 	// Observe whatever is on the page already
 	tool.observer = _createObserver(tool, tool.element);
-	tool.findAndObserve(tool.element, false);
+	tool.observe(tool.prepare(tool, tool.element, false));
 
 	// Override innerHTML
 
@@ -63,7 +63,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 			}
 			originalSet.call(this, html);
 			if (found) {
-				tool.findAndObserve(this, true);
+				tool.observe(tool.prepare(tool, this, true));
 			}
 			return html;
 		},
@@ -76,7 +76,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 			if (!element) {
 				return;
 			}
-			tool.findAndObserve(element, true);
+			tool.observe(tool.prepare.call(element, true));
 			return orig.apply(this, arguments);
 		};
 	});
@@ -162,8 +162,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 }, 
 
 {
-	findAndObserve: function (container, beingInsertedIntoDOM) {
-		var tool = this;
+	prepare: function (tool, container, beingInsertedIntoDOM) {
 		var found = [];
 		Q.each(tool.state.handlers, function (name, info) {
 			var elements = container.querySelectorAll
@@ -175,11 +174,15 @@ Q.Tool.define('Q/lazyload', function (options) {
 			Q.each(elements, function (i, element) {
 				if (info.preparing.call(tool, element, beingInsertedIntoDOM) === true) {
 					found.push(element);
-					tool.observer.observe(element);
 				}
 			});
 		});
 		return found;
+	},
+	observe: function (elements) {
+		Q.each(elements, function (i, element) {
+			tool.observer.observe(element);
+		});
 	}
 });
 
