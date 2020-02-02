@@ -9159,7 +9159,7 @@ var _constructors = {};
  */
 function _activateTools(toolElement, options, shared) {
 	if (shared.activateLazyLoad &&
-	toolElement instanceof Element) && toolElement.hasAttribute('data-q-lazyload')) {
+	(toolElement instanceof Element) && toolElement.hasAttribute('data-q-lazyload')) {
 		return false;
 	}
 	var pendingParentEvent = _pendingParentStack[_pendingParentStack.length-1];
@@ -9279,7 +9279,7 @@ _activateTools.alreadyActivated = {};
 function _initTools(toolElement) {
 	
 	if (shared.activateLazyLoad &&
-	toolElement instanceof Element) && toolElement.hasAttribute('data-q-lazyload')) {
+	(toolElement instanceof Element) && toolElement.hasAttribute('data-q-lazyload')) {
 		return false;
 	}
 	
