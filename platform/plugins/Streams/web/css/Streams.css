@@ -786,3 +786,7 @@
 .Streams_inplace_tool .Q_inplace_tool {
 	width: 100%;
 }
+
+.Streams_chat_preview_tool {
+	height: 50px;
+}
