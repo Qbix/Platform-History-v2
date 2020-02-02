@@ -952,7 +952,7 @@ Streams.Dialogs = {
 						go: text.go,
 						placeholder: text.placeholder,
 						orInvite: text.orInvite,
-						QR: text.QR.interpolate({ClickOrTap: Q.getObject("Q.info.isTouchscreen") ? 'Tap' : 'Click'}),
+						ClickOrTap: Q.text.Q.words.ClickOrTap,
 						email: text.byEmail,
 						text: text.byText,
 						facebook: text.byFacebook,
