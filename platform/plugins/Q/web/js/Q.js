@@ -9158,7 +9158,7 @@ var _constructors = {};
  *  A shared object we can use to pass info around while activating tools
  */
 function _activateTools(toolElement, options, shared) {
-	if (shared.activateLazyLoad &&
+	if (!shared.activateLazyLoad &&
 	(toolElement instanceof Element) && toolElement.hasAttribute('data-q-lazyload')) {
 		return false;
 	}
@@ -9278,7 +9278,7 @@ _activateTools.alreadyActivated = {};
  */
 function _initTools(toolElement, options, shared) {
 	
-	if (shared.activateLazyLoad &&
+	if (!shared.activateLazyLoad &&
 	(toolElement instanceof Element) && toolElement.hasAttribute('data-q-lazyload')) {
 		return false;
 	}
