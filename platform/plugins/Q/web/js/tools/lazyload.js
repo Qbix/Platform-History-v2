@@ -130,7 +130,9 @@ Q.Tool.define('Q/lazyload', function (options) {
 				if (element.hasAttribute('data-q-lazyload')
 				&& (!element.Q || !element.Q.tool)) {
 					element.addClass('Q_lazy_load');
+					element.setAttribute('data-q-lazyload', 'activating');
 					Q.activate(element, function () {
+						element.setAttribute('data-q-lazyload', 'activated');
 						element.addClass('Q_lazy_loaded');
 					}, {}, true);
 					return true;
@@ -142,6 +144,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 					Q.Tool.remove(element);
 					element.removeClass('Q_lazy_loading');
 					element.removeClass('Q_lazy_loaded');
+					element.setAttribute('data-q-lazyload', 'removed');
 					if (this.state.handlers.tool.exitingRemoveHTML) {
 						element.innerHTML = '';
 					}

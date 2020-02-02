@@ -9159,8 +9159,11 @@ var _constructors = {};
  */
 function _activateTools(toolElement, options, shared) {
 	if (!shared.activateLazyLoad &&
-	(toolElement instanceof Element) && toolElement.hasAttribute('data-q-lazyload')) {
-		return false;
+	(toolElement instanceof Element)) {
+		var attr = toolElement.getAttribute('data-q-lazyload');
+		if (attribute === 'waiting' || attribute === 'removed') {
+			return false;
+		}
 	}
 	var pendingParentEvent = _pendingParentStack[_pendingParentStack.length-1];
 	var pendingCurrentEvent = new Q.Event();
@@ -9279,8 +9282,11 @@ _activateTools.alreadyActivated = {};
 function _initTools(toolElement, options, shared) {
 	
 	if (!shared.activateLazyLoad &&
-	(toolElement instanceof Element) && toolElement.hasAttribute('data-q-lazyload')) {
-		return false;
+	(toolElement instanceof Element)) {
+		var attr = toolElement.getAttribute('data-q-lazyload');
+		if (attribute === 'waiting' || attribute === 'removed') {
+			return false;
+		}
 	}
 	
 	var currentEvent = _pendingParentStack[_pendingParentStack.length-1];
