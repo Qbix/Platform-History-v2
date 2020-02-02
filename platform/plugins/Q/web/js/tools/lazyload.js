@@ -37,7 +37,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 
 	// Observe whatever is on the page already
 	tool.observer = _createObserver(tool, tool.element);
-	tool.findAndObserve(tool.element);
+	tool.findAndObserve(tool.element, false);
 
 	// Override innerHTML
 
@@ -53,18 +53,17 @@ Q.Tool.define('Q/lazyload', function (options) {
 				var elements = element.querySelectorAll
 					? Array.from(element.querySelectorAll(info.selector))
 					: [];
-				Q.each(elements, function (i, element) {
-					if (info.preparing.call(tool, element, true) === true) {
-						found = true;
-					}
-				});
+				if (elements.length) {
+					found = true;
+					return false;
+				}
 			});
 			if (found) {
 				html = originalGet.call(element);
 			}
 			originalSet.call(this, html);
 			if (found) {
-				tool.findAndObserve(this);
+				tool.findAndObserve(this, true);
 			}
 			return html;
 		},
@@ -77,21 +76,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 			if (!element) {
 				return;
 			}
-			var found = false;
-			Q.each(state.handlers, function (name, info) {
-				var elements = element.querySelectorAll
-					? Array.from(element.querySelectorAll(info.selector))
-					: [];
-				if (element.matches && element.matches(info.selector)) {
-					elements.push(element);
-				}
-				Q.each(elements, function (i, element) {
-					if (info.preparing.call(tool, element, true) === true) {
-						found = true;
-						tool.observer.observe(element);
-					}
-				});
-			});
+			tool.findAndObserve(this, true);
 			return orig.apply(this, arguments);
 		};
 	});
@@ -177,9 +162,9 @@ Q.Tool.define('Q/lazyload', function (options) {
 }, 
 
 {
-	findAndObserve: function (container) {
+	findAndObserve: function (container, beingInsertedIntoDOM) {
 		var tool = this;
-		var found = false;
+		var found = [];
 		Q.each(tool.state.handlers, function (name, info) {
 			var elements = container.querySelectorAll
 				? Array.from(container.querySelectorAll(info.selector))
@@ -188,12 +173,13 @@ Q.Tool.define('Q/lazyload', function (options) {
 				elements.push(container);
 			}
 			Q.each(elements, function (i, element) {
-				if (info.preparing.call(tool, element) === true) {
-					found = true;
+				if (info.preparing.call(tool, element, beingInsertedIntoDOM) === true) {
+					found.push(element);
 					tool.observer.observe(element);
 				}
 			});
 		});
+		return found;
 	}
 });
 
