@@ -9276,7 +9276,7 @@ _activateTools.alreadyActivated = {};
  * @param {HTMLElement} toolElement
  *  A tool's generated container div
  */
-function _initTools(toolElement) {
+function _initTools(toolElement, options, shared) {
 	
 	if (shared.activateLazyLoad &&
 	(toolElement instanceof Element) && toolElement.hasAttribute('data-q-lazyload')) {
