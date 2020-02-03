@@ -7676,7 +7676,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 			}
 			// the script already exists in the document
 			var src2 = src.split('?')[0];
-			if (Q.addScript.loaded[src] || Q.addScript.loaded(src2)) {
+			if (Q.addScript.loaded[src] || Q.addScript.loaded[src2]) {
 				// the script was already loaded successfully
 				_onload();
 				return o.returnAll ? script : false;
