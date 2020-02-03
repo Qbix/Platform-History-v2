@@ -84,7 +84,7 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 		// Note that we're loading a special TopoJSON file
 		// (world-110m-withlakes.json) so we can render lakes.
 		globe.loadPlugin(planetaryjs.plugins.earth({
-			topojson: { file:   Q.url('Q/plugins/Places/data/world-110m-withlakes.json') },
+			topojson: { file:   Q.url('{{Places}}/data/world-110m-withlakes.json') },
 			oceans:   { fill:   state.colors.oceans },
 			land:	 { fill:   state.colors.land },
 			borders:  { stroke: state.colors.borders }
@@ -165,9 +165,9 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 	});
 	
 	Q.addScript([
-		'Q/plugins/Places/js/lib/d3.js',
-		'Q/plugins/Places/js/lib/topojson.js',
-		'Q/plugins/Places/js/lib/planetaryjs.js'
+		'{{Places}}/js/lib/d3.js',
+		'{{Places}}/js/lib/topojson.js',
+		'{{Places}}/js/lib/planetaryjs.js'
 	], p.fill('scripts'));
 	
 	Places.loadCountries(p.fill('countries'));
