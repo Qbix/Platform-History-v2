@@ -323,7 +323,7 @@ Sp.replaceAll = function _String_prototype_replaceAll(pairs) {
  * @method queryField
  * @param {String|Array|Object} name The name of the field. If it's an array, returns an object of {name: value} pairs. If it's an object, then they are added onto the querystring and the result is returned. If it's a string, it's the name of the field to get. And if it's an empty string, then we get the array of field names with no value, e.g. ?123&456&a=b returns [123,456]
  * @param {String} [value] Optional, provide a value to set in the querystring, or null to delete any fields that match name as a RegExp
- * @return {String|Object} the value of the field in the string, or if value was not undefined, the resulting querystring. Finally, if 
+ * @return {String|Object} the value of the field in the string, or if value was not undefined, the resulting querystring.
  */
 Sp.queryField = function Q_queryField(name, value) {
 	var what = this;
@@ -6669,7 +6669,9 @@ Q.url = function _Q_url(what, fields, options) {
 	}
 	if (info) {
 		if (Q.info.urls && Q.info.urls.caching && info.t) {
-			what3 += '?Q.cacheBust=' + info.t;
+			var parts = what3.split('?');
+			parts[1] = parts[1].queryField('Q.cacheBust', info.t);
+			what3 = parts[0] + '?' + parts[1];
 			if (info.cacheBaseUrl && info.t < Q.cookie('Q_ct')) {
 				baseUrl = info.cacheBaseUrl;
 			}
