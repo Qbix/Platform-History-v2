@@ -7656,9 +7656,11 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 			}
 			scripts = arr;
 		}
+		var src2 = src.split('?')[0];
 		for (i=0; i<scripts.length; ++i) {
 			script = scripts[i];
-			if (script.getAttribute('src') !== src) {
+			var s = script.getAttribute('src');
+			if (s !== src && s !== src2) {
 				continue;
 			}
 			// move the element to the right container if necessary
@@ -7675,7 +7677,6 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 				container.appendChild(script);
 			}
 			// the script already exists in the document
-			var src2 = src.split('?')[0];
 			if (Q.addScript.loaded[src] || Q.addScript.loaded[src2]) {
 				// the script was already loaded successfully
 				_onload();
@@ -7924,11 +7925,15 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	if (!media) media = 'screen,print';
 	var insertBefore = null;
 	var links = document.getElementsByTagName('link');
-	var i, e, m, p;
+	var i, e, h, m, p;
 	for (i=0; i<links.length; ++i) {
 		e = links[i];
 		m = e.getAttribute('media');
-		if ((m && m !== media) || e.getAttribute('href') !== href) continue;
+		h = e.getAttribute('href');
+		if ((m && m !== media)
+		|| (h !== href && h !== href2)) {
+			continue;
+		}
 		// A link element with this media and href is already found in the document.
 		// Move the element to the right container if necessary
 		// (This may change the order in which stylesheets are applied).
