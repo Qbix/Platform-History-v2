@@ -3076,8 +3076,10 @@ Q.url = function _Q_url(what, fields, options) {
 	if (options && options.cacheBust) {
 		var timeout = Math.floor(Date.now()/options.cacheBust);
 		var parts = what2.split('?');
-		parts[1] = parts[1].queryField('Q.cacheBust', timeout);
-		what2 = parts[0] + '?' + parts[1];
+		if (parts.length > 1) {
+			parts[1] = parts[1].queryField('Q.cacheBust', timeout);
+			what2 = parts[0] + '?' + parts[1];
+		}
 	}
 	parts = what2.split('?');
 	if (parts.length > 2) {
