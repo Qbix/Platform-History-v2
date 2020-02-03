@@ -7675,7 +7675,8 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 				container.appendChild(script);
 			}
 			// the script already exists in the document
-			if (Q.addScript.loaded[src]) {
+			var src2 = src.split('?')[0];
+			if (Q.addScript.loaded[src] || Q.addScript.loaded(src2)) {
 				// the script was already loaded successfully
 				_onload();
 				return o.returnAll ? script : false;
@@ -7941,7 +7942,10 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 		if (outside) {
 			container.appendChild(e);
 		}
-		if (Q.addStylesheet.loaded[href] || !Q.addStylesheet.added[href]) {
+		var href2 = href.split('?')[0];
+		if (Q.addStylesheet.loaded[href]
+		|| Q.addStylesheet.loaded[href2]
+		|| !Q.addStylesheet.added[href]) {
 			onload();
 			return options.returnAll ? e : false;
 		}
