@@ -110,7 +110,7 @@ function Q_script_urls_glob(
 	foreach ($filenames as $f) {
 		$u = substr($f, $len+1);
 		$v = str_replace(DS, '/', $u);
-		$ignore = Q_Config::get('Q', 'scripts', 'urls', 'skip', array());
+		$ignore = Q_Config::get('Q', 'urls', 'skip', array());
 		if (in_array($v, $ignore)) {
 			continue;
 		}
