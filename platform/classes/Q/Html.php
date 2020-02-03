@@ -1375,7 +1375,7 @@ class Q_Html
 	 *  directory. You can also pass a URL here, but it's not ideal.
 	 * @param {array} [$options=array()]
 	 * @param {boolean} [$options.ignoreEnvironment=false] If true, doesn't apply environment transformations
-	 * @param {string} [$options.hash=null] If URL was already processed with cachedUrlAndCache, set hash here to avoid calling it again
+	 * @param {string} [$options.hash=null] If URL was already processed with cachedUrlAndHash, set hash here to avoid calling it again
 	 * @return {array} A three-element array containing the url, filename, hash
 	 */
 	static function themedUrlFilenameAndHash ($filePath, $options = array())
