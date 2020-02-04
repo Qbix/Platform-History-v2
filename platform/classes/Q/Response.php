@@ -1601,7 +1601,7 @@ class Q_Response
 			return false;
 		}
 		if (!empty($querystring) and !empty($_SERVER['QUERY_STRING'])) {
-			$url = Q_Uri::fixUrl($url . '? ' . $_SERVER['QUERY_STRING']);
+			$url = Q_Uri::fixUrl($url . '?' . $_SERVER['QUERY_STRING']);
 		}
 		if (!Q_Request::isAjax()) {
 			if (!empty($permanently)) {
