@@ -3009,6 +3009,9 @@ Q.Contextual = {
 		contextual.css({ 'visibility': 'hidden' });
 		contextual.show();
 		
+		var arrow = contextual.find('.Q_contextual_bottom_arrow, .Q_contextual_top_arrow');
+		info.arrowHeight = arrow.outerHeight(true);
+		
 		var listingWrapper = contextual.children('.Q_listing_wrapper');
 		listingWrapper.children('.Q_scroller_wrapper').children().unwrap();
 		// applying Q/sroller by default
@@ -3029,8 +3032,6 @@ Q.Contextual = {
 			contextual.prepend('<div class="Q_contextual_top_arrow" />');
 		}
 		listingWrapper.find('.Q_listing').css('transform', 'none');
-		var arrow = contextual.find('.Q_contextual_bottom_arrow, .Q_contextual_top_arrow');
-		info.arrowHeight = contextual.find('.Q_contextual_top_arrow, .Q_contextual_bottom_arrow').outerHeight(true);
 		
 		Q.Contextual.calcRelativeCoords(trigger, contextual, info);
 		
