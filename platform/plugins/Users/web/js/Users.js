@@ -2841,16 +2841,43 @@
 				var contactOptions = new ContactFindOptions();
 				contactOptions.filter = "";
 				contactOptions.multiple = true;
-				var fields = [navigator.contacts.fieldType.displayName, navigator.contacts.fieldType.name];
+				contactOptions.desiredFields = [
+					navigator.contacts.fieldType.id,
+					navigator.contacts.fieldType.displayName,
+					navigator.contacts.fieldType.name,
+					navigator.contacts.fieldType.phoneNumbers,
+					navigator.contacts.fieldType.emails
+				];
+				var fields = [
+					navigator.contacts.fieldType.displayName,
+					navigator.contacts.fieldType.name
+				];
 				navigator.contacts.find(fields, function (data) {
 					data = data.sort((a,b) => (a.name.formatted > b.name.formatted) ? 1 : ((b.name.formatted > a.name.formatted) ? -1 : 0));
 					var contacts = {};
+
 					Q.each(data, function (i, obj) {
 						obj.displayName = obj.displayName || obj.name.formatted;
 
 						if (!obj.displayName) {
 							return;
 						}
+
+						// remove dublicated contacts
+						Q.each([obj.phoneNumbers, obj.emails], function (i, contacts) {
+							var exist = {};
+							Q.each(contacts, function (i, contact) {
+								var value = contact.value;
+								if (contact.type === 'mobile') {
+									value = value.replace(/\D/g, '');
+								}
+
+								if (exist[value]) {
+									contacts = contacts.splice(i, 1);
+								}
+								exist[value] = 1;
+							});
+						});
 
 						var firstLetter = obj.displayName.charAt(0).toUpperCase();
 
@@ -2863,6 +2890,7 @@
 
 					Q.handle(callback, contacts);
 				}, function (err) {
+					Q.alert("Error in Users.Dialogs.contacts: " + err);
 					throw new Error("Users.Dialogs.contacts: " + err);
 				}, contactOptions);
 			};
