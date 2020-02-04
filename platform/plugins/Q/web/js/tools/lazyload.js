@@ -2,7 +2,7 @@
 /**
  * @module Q-tools
  */
-	
+
 /**
  * Implements lazy-loading for various types of elements.
  * By default, has implementations for "img" and "Q_tool" selectors.
@@ -210,5 +210,29 @@ function _createObserver(tool, container) {
 		});
 	}, tool.state.observerOptions);
 }
+
+function _polyfill() {
+	// Exit early if all IntersectionObserver and IntersectionObserverEntry
+	// features are natively supported.
+	if ('IntersectionObserver' in window &&
+	    'IntersectionObserverEntry' in window &&
+	    'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
+
+	  // Minimal polyfill for Edge 15's lack of `isIntersecting`
+	  // See: https://github.com/w3c/IntersectionObserver/issues/211
+	  if (!('isIntersecting' in window.IntersectionObserverEntry.prototype)) {
+	    Object.defineProperty(window.IntersectionObserverEntry.prototype,
+	      'isIntersecting', {
+	      get: function () {
+	        return this.intersectionRatio > 0;
+	      }
+	    });
+	  }
+	  return;
+	}
+	Q.addScript('{{Q}}/polyfills/IntersectionObserver.js');
+}
+
+_polyfill();
 
 })(Q, jQuery);
