@@ -85,10 +85,10 @@ function Streams_fbLive_startStreaming($params) {
 
 	$privacyDesc = ['SELF' => 'Only Me', 'ALL_FRIENDS' => 'Only Friends', 'EVERYONE' => 'Everyone'];
 
-	$createLiveVideo = $fb->post('/me/live_videos', ['title' => $title, 'description' => $description, 'privacy' => ['description' => $privacyDesc[$privacy], 'value' => $privacy]]);
+	$createLiveVideo = $fb->post('/me/live_videos', ['title' => $title, 'description' => $description, 'status' => 'LIVE_NOW', 'privacy' => ['value' => $privacy]]);
 	$createLiveVideo = $createLiveVideo->getGraphNode()->asArray();
 
-	$liveInfo =  $fb->get($createLiveVideo['id'] . '?fields=permalink_url,embed_html', $accessToken);
+    $liveInfo =  $fb->get($createLiveVideo['id'] . '?fields=permalink_url,id,embed_html,status', $accessToken);
 	$createLiveVideo = array_merge($createLiveVideo, $liveInfo->getGraphNode()->asArray());
 
 	Q_Response::setSlot('fbLive', $createLiveVideo);
