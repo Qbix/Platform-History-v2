@@ -1529,26 +1529,8 @@ class Q_Response
 		if (Q_Request::isAjax()) {
 			Q_Valid::nonce(true); // SECURITY: prevent CSRF attacks
 		}
-		Q_Response::captureScriptDataForSession(true);
 		Q::event('Q/sessionExtras', array(), $hookType);
-		Q_Response::captureScriptDataForSession(false);
 		return true;
-	}
-	
-	/**
-	 * This is mostly called internally, to start or stop capturing
-	 * scriptData for sessions. Typically it is done in the default
-	 * Q/response handler before and after handling sessionExtras events.
-	 * @method captureScriptDataForSession
-	 * @static
-	 * @return {boolean} true if we arer capturing scriptData for the session
-	 */
-	static function captureScriptDataForSession($newValue = null)
-	{
-		if (isset($newValue)) {
-			self::$captureScriptDataForSession = $newValue;
-		}
-		return self::$captureScriptDataForSession;
 	}
 
 	/**

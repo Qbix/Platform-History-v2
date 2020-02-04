@@ -2413,6 +2413,57 @@
 			Users.initFacebook();
 		}
 	}, 'Users');
+	
+	function _setSessionFromQueryString(querystring)
+	{
+		if (!querystring) {
+			return;
+		}
+		if (querystring.includes('Q.Users.newSessionId')) { // handoff action
+			var fields = _getParams(url.split('#')[1]);
+			if (fields['Q.Users.newSessionId']) {
+				Q.cookie('Q_sessionId', fields['Q.Users.newSessionId']);
+				document.location.reload();
+			}
+		} else if (querystring.includes('facebookLogin=1')) {
+			Users.login({using: 'facebook'});
+		}
+		if (querystring.queryField('Q.Users.newSessionId')) {
+			var fieldNames = [
+				'Q.Users.appId', 'Q.Users.newSessionId',
+				'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.signature'
+			];
+			var fields = querystring.queryField(fieldNames);
+			var storedDeviceId = localStorage.getItem("Q.Users.Device.deviceId");
+			fields['Q.Users.deviceId'] = fields['Q.Users.deviceId'] || storedDeviceId;
+			if (fields['Q.Users.newSessionId']) {
+				Q.req('Users/session', function () {
+					// Q.request.options.onProcessed would have changed loggedInUser already
+					// but maybe we want to redirect anyway, after a handoff
+					var href = Q.getObject("Q.Cordova.handoff.url");
+					if (href) {
+						location.href = href;
+					}
+				}, {
+					method: 'post',
+					fields: fields
+				});
+			}
+		} else if (querystring.queryField('facebookLogin') == 1) {
+			Users.login({using: 'facebook'});
+		} 
+//      else if ( querystring.queryField('access_token')) {
+// 			//  this is not enabled because malicious users can handleOpenUrl to set some token
+// 			if (Users.Facebook.accessToken) {
+// 				Users.Facebook.doLogin({
+// 					status: 'connected',
+// 					authResponse: {
+// 						accessToken: Users.Facebook.accessToken
+// 					}
+// 				});
+// 			}
+// 		}
+	}
 
 	Q.Page.onActivate('').add(function _Users_Q_Page_onActivate_handler() {
 		$.fn.plugin.load('Q/dialog');
@@ -2422,55 +2473,13 @@
 				Q.plugins.Users.setIdentifier();
 				return false;
 			});
-		if (location.hash.queryField('Q.Users.newSessionId')) {
-			var fieldNames = [
-				'Q.Users.appId', 'Q.Users.newSessionId',
-				'Q.Users.deviceId', 'Q.timestamp', 'Q.Users.signature'
-			];
-			var fields = location.hash.queryField(fieldNames);
-			var storedDeviceId = localStorage.getItem("Q.Users.Device.deviceId");
-			fields['Q.Users.deviceId'] = fields['Q.Users.deviceId'] || storedDeviceId;
-			if (fields['Q.Users.newSessionId']) {
-				Q.req('Users/session', function () {
-					// user was redirected from Users/session
-				}, {
-					method: 'post',
-					fields: fields
-				});
-			}
-		}
+		_setSessionFromQueryString(location.hash);
 	}, 'Users');
 
 	// handoff action
 	Q.onHandleOpenUrl.set(function (url) {
 		window.cordova.plugins.browsertab.close();
-		if (url.includes('Q.Users.newSessionId')) { // handoff action
-			var fields = _getParams(url.split('#')[1]);
-			if (fields['Q.Users.newSessionId']) {
-				Q.cookie('Q_sessionId', fields['Q.Users.newSessionId']);
-				document.location.reload();
-			}
-		} else if (url.includes('facebookLogin=1')) {
-			Users.login({using: 'facebook'});
-		}
-
-		function _getParams(url) {
-			var res = {};
-			try {
-				var pieces = url.split('&');
-				for (var i = 0; i < pieces.length; i++) {
-					var val = pieces[i].split('=');
-					if (val.length !== 2) {
-						continue;
-					}
-					res[val[0]] = val[1];
-				}
-			} catch (err) {
-				console.warn('Error parsing params');
-				return null;
-			}
-			return res;
-		}
+		_setSessionFromQueryString(url.split('#')[1]);
 	}, 'Users.handoff');
 
 	Q.beforeActivate.add(function (elem) {
@@ -3004,36 +3013,6 @@
 			if (Q.info.isCordova) {
 				Users.Facebook.scheme = Q.getObject([Q.info.platform, Q.info.app, 'scheme'], Users.apps);
 				Users.Facebook.scheme = Users.Facebook.scheme && Users.Facebook.scheme.replace('://', '');
-				Q.onHandleOpenUrl.set(function (url) {
-					window.cordova.plugins.browsertab.close();
-					Users.Facebook.accessToken = Q.getObject(["access_token"], _getParams(url.split('?')[1]));
-					if (Users.Facebook.accessToken) {
-						Users.Facebook.doLogin({
-							status: 'connected',
-							authResponse: {
-								accessToken: Users.Facebook.accessToken
-							}
-						});
-					}
-
-					function _getParams(url) {
-						var res = {};
-						try {
-							var pieces = url.split('&');
-							for (var i = 0; i < pieces.length; i++) {
-								var val = pieces[i].split('=');
-								if (val.length !== 2) {
-									continue;
-								}
-								res[val[0]] = val[1];
-							}
-						} catch (err) {
-							console.warn('Error parsing params');
-							return null;
-						}
-						return res;
-					}
-				}, 'Users.facebook');
 				Users.Facebook.type = 'oauth';
 				if (Q.info.platform === 'ios') {
 					// ios

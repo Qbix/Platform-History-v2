@@ -3,8 +3,7 @@
 function Users_before_Q_sessionExtras()
 {
 	if (Q_Config::get('Users', 'showLoggedInUser', true)) {
-		$user = Q_Session::id() ? Users::loggedInUser() : null;
-		if ($user) {
+		if ($user = Users::loggedInUser(false, false)) {
 			$u = $user->exportArray();
 			$u['sessionCount'] = $user->sessionCount;
 			$u['email'] = $user->emailAddress;
