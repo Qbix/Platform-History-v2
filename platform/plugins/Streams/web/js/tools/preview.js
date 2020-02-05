@@ -460,9 +460,9 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			} else {
 				actions[action] = function () {
 					if (state.beforeClose) {
-						Q.handle(state.beforeClose, tool, [tool.remove.bind(tool)]);
+						Q.handle(state.beforeClose, tool, [tool.delete.bind(tool)]);
 					} else {
-						tool.remove();
+						tool.delete();
 					}
 				};
 			}
@@ -476,7 +476,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	 * @method remove
 	 * @param {bool} cancel
 	 */
-	remove: function (cancel) {
+	delete: function (cancel) {
 		if (cancel) {
 			return;
 		}
