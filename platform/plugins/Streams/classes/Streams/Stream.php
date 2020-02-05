@@ -2089,7 +2089,15 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 		return $metas;
 	}
-
+	/**
+	 * Detect if streams icon is custom.
+	 * @method isCustomIcon
+	 * @return {bool}
+	 */
+	function isCustomIcon ()
+	{
+		return strpos(Q::ifset($this, 'icon', null), 'uploads/Streams') !== false;
+	}
 	/* * * */
 	/**
 	 * Implements the __set_state method, so it can work with
