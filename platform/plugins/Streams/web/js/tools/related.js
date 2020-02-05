@@ -239,7 +239,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 					var key = Streams.key(publisherId, streamName);
 					map[key] = index;
 				});
-				tool.integrateWithTabs([element], true);
+				tool.integrateWithTabs(elem, true);
 				if (_done) {
 					if (tool.tabs) {
 						tool.tabs.refresh();
