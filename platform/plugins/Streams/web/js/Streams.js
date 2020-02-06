@@ -570,6 +570,7 @@ Q.Tool.define({
 	"Streams/lookup"	   : "{{Streams}}/js/tools/lookup.js",
 	"Streams/relate"	   : "{{Streams}}/js/tools/relate.js",
 	"Streams/related"	  : "{{Streams}}/js/tools/related.js",
+	"Streams/related/menu"	  : "{{Streams}}/js/tools/related/menu.js",
 	"Streams/inplace"	  : "{{Streams}}/js/tools/inplace.js",
 	"Streams/html"		 : "{{Streams}}/js/tools/html.js",
 	"Streams/preview"  	   : "{{Streams}}/js/tools/preview.js",
