@@ -447,9 +447,11 @@ Q.Tool.define("Q/columns", function(options) {
 			}
 			
 			if (o.title != undefined) {
-				$titleSlot.empty().append(
-					Q.instanceOf(o.title, Element) ? $(o.title) : o.title
-				);
+				if (Q.instanceOf(o.title, Element)) {
+					$titleSlot.empty().append(Element);
+				} else {
+					$titleSlot.empty().text(o.title);
+				}
 				$div.attr('data-title', $titleSlot.text());
 				$div.attr('data-prevTitle', document.title);
 			}
