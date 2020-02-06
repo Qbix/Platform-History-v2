@@ -460,18 +460,9 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			} else {
 				actions[action] = function () {
 					if (state.beforeClose) {
-						Q.handle(state.beforeClose, tool, [_remove]);
+						Q.handle(state.beforeClose, tool, [tool.delete.bind(tool)]);
 					} else {
-						_remove();
-					}
-					function _remove(cancel) {
-						if (cancel) return;
-						tool.element.addClass('Q_working');
-						Q.Masks.show(tool, {
-							shouldCover: tool.element, className: 'Q_removing'
-						});
-
-						tool.close();
+						tool.delete();
 					}
 				};
 			}
@@ -479,6 +470,23 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			$te.tool('Q/actions', ao).activate();
 		});
 		return this;
+	},
+	/**
+	 * Remove related stream
+	 * @method remove
+	 * @param {bool} cancel
+	 */
+	delete: function (cancel) {
+		if (cancel) {
+			return;
+		}
+
+		this.element.addClass('Q_working');
+		Q.Masks.show(this, {
+			shouldCover: this.element, className: 'Q_removing'
+		});
+
+		this.close();
 	},
 	close: function _close() {
 		var tool = this;

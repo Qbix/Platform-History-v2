@@ -17,7 +17,7 @@
 	 *  @param {Boolean} [options.checkQueryString=false] Whether the default getCurrentTab should check the querystring when determining the current tab
 	 *  @param {Boolean} [options.vertical=false] Stack the tabs vertically instead of horizontally
 	 *  @param {Boolean} [options.compact=false] Display the tabs interface in a compact space with a contextual menu
-	 *  @param {Object} [options.overflow]
+	 *  @param {Object} [options.overflow] Object defined element with overflowed menu items. If false, don't crop overflowed menu elements.
 	 *  @param {String} [options.overflow.content] The html that is displayed when the tabs overflow. You can interpolate {{count}}, {{text}} or {{html}} in the string.
 	 *  @param {String} [options.overflow.glyph] Override the glyph that appears next to the overflow text. You can interpolate {{count}} here
 	 *  @param {String} [options.overflow.defaultText] The text to interpolate {{text}} in the content when no tab is selected
@@ -379,7 +379,7 @@
 						}
 					});
 				}
-				if (index >= 0) {
+				if (index >= 0 && state.overflow) {
 					var values = {
 						count: $tabs.length - index - 1,
 						text: $(state.tab).text() || state.overflow.defaultText,
