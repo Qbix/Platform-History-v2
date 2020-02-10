@@ -450,7 +450,7 @@ Q.Tool.define("Q/columns", function(options) {
 			
 			if (o.title != undefined) {
 				if (Q.instanceOf(o.title, Element)) {
-					$titleSlot.empty().append(Element);
+					$titleSlot.empty().append(o.title);
 				} else {
 					$titleSlot.empty().text(o.title);
 				}
