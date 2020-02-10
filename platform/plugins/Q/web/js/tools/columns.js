@@ -59,7 +59,9 @@ Q.Tool.define("Q/columns", function(options) {
 	
 	Q.addStylesheet('{{Q}}/css/columns.css', function () {
 		if (state.title === undefined) {
-			state.title = '<img class="Q_columns_loading" src="' + Q.url('{{Q}}/img/throbbers/loading.gif') +'" alt="">';
+			state.title = $('<div />').append('<img class="Q_columns_loading" src="'
+				+ Q.url('{{Q}}/img/throbbers/loading.gif')
+				+'" alt="">')[0];
 		}
 
 		var selector = '.Q_close';
