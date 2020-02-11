@@ -4782,7 +4782,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				});
 
 			}
-
+			if(appDebug.sendReportsInterbal != null) clearTimeout(appDebug.sendReportsInterbal);
 			_roomStream.leave();
 			WebRTCconference.disconnect();
 			_options.streams = null;
