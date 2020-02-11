@@ -96,7 +96,7 @@ class Users_Quota extends Base_Users_Quota
 		))->groupBy('c')->orderBy('c', false);
 		$queries = $query->shard();
 		if ($begin) {
-			$query = $query->begin();
+			$query = $query->begin(null, $quota->transactionKey());
 		}
 		$shards = array_keys($queries);
 		$quota->set(array(
@@ -173,9 +173,16 @@ class Users_Quota extends Base_Users_Quota
 		$this->save();
 		if ($this->get('begun')) {
 			$shards = array_keys($this->get('shards'));
-			Users_Quota::commit()->execute(false, $shards);
+			Users_Quota::commit($quota->transactionKey())->execute(false, $shards);
 		}
 		return true;
+	}
+	
+	function transactionKey()
+	{
+		return implode(' ', array(
+			"Users_Quota", $this->name, $this->userId, $this->resourceId
+		));
 	}
 
 	/*

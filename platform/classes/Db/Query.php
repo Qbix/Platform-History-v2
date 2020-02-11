@@ -107,10 +107,14 @@ interface Db_Query_Interface
 	 * you often need the "where" clauses to figure out which database to send it to,
 	 * if sharding is being used.
 	 * @method begin
+	 * @param {string} [$$lockType='FOR UPDATE'] Defaults to 'FOR UPDATE', but can also be 'LOCK IN SHARE MODE'
+	 * or set it to null to avoid adding a "LOCK" clause
+	 * @param {string} [$transactionKey=null] Passing a key here makes the system throw an
+	 *  exception if the script exits without a corresponding commit by a query with the
+	 *  same transactionKey or with "*" as the transactionKey to "resolve" this transaction.
 	 * @chainable
-	 * @param {string} [$lock_type] The type of lock in the transaction
 	 */
-	function begin($lock_type = null);
+	function begin($lockType = null, $transactionKey = null);
 	
 	/**
 	 * Rolls back a transaction right before executing this query.
@@ -128,9 +132,15 @@ interface Db_Query_Interface
 	 * you often need the "where" clauses to figure out which database to send it to,
 	 * if sharding is being used.
 	 * @method commit
+	 * @param {string} [$transactionKey=null] Pass a transactionKey here to "resolve" a previously
+	 *  executed that began a transaction with ->begin(). This is to guard against forgetting
+	 *  to "resolve" a begin() query with a corresponding commit() or rollback() query
+	 *  from code that knows about this transactionKey. Passing a transactionKey that doesn't
+	 *  match the latest one on the transaction "stack" also generates an error.
+	 *  Passing "*" here matches any transaction key that may have been on the top of the stack.
 	 * @chainable
 	 */
-	function commit();
+	function commit($transactionKey = null);
 	
 	/**
 	 * Creates a query to select fields from one or more tables.

@@ -1,4 +1,4 @@
-<?php
+f<?php
 
 /**
  * @module Db
@@ -598,20 +598,24 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			$dsn = $connInfo['dsn'];
 			$nt = & self::$nestedTransactions[$dsn];
 			if (!isset($nt)) {
-				self::$nestedTransactions[$dsn] = 0;
 				$nt = & self::$nestedTransactions[$dsn];
+				$nt = array('count' => 0, 'keys' => array());
 			}
+			$ntc = & $nt['count'];
+			$ntk = & $nt['keys'];
 
 			$sql = $query->getSQL();
 
 			try {
 				if (!empty($query->clauses["BEGIN"])) {
-					if (++$nt == 1) {
+					$ntk[] = Q::ifset($query, 'transactionKey', null);
+					if (++$ntc == 1) {
 						$pdo->beginTransaction();
 					}
 				} else if (!empty($query->clauses["ROLLBACK"])) {
 					$pdo->rollBack();
-					$nt = 0;
+					$ntc = 0;
+					$ntk = array();
 				}
 
 				if ($query->type !== Db_Query::TYPE_ROLLBACK) {
@@ -643,7 +647,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 					}
 
 					$stmts[] = $stmt;
-					if (!empty($query->clauses["COMMIT"]) && $nt) {
+					if (!empty($query->clauses["COMMIT"]) && $ntc) {
 						// we commit only if no error occurred - warnings are permitted
 						if (!$stmt or ($stmt !== true and !in_array(
 							substr($stmt->errorCode(), 0, 2), 
@@ -652,19 +656,28 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 							$err = $pdo->errorInfo();
 							throw new Exception($err[0], $err[1]);
 						}
-						if (--$nt == 0) {
+						$lastTransactionKey = array_pop($ntk);
+						if ($lastTransactionKey
+						and $query->transactionKey !== $lastTransactionKey
+						and $query->transactionKey !== '*') {
+							throw new Exception(
+								"forgot to resolve transaction with key $lastTransactionKey"
+							);
+						}
+						if (--$ntc == 0) {
 							$pdo->commit();
 						}
 					}
 				}
 			} catch (Exception $exception) {
-				if ($nt) {
+				if ($ntc) {
 					$pdo->rollBack();
-					$nt = 0;
+					$ntk = array();
+					$ntc = 0;
 				}
 				break;
 			}
-			$this->nestedTransactionCount = $nt;
+			$this->nestedTransactionCount = $ntc;
 			if (class_exists('Q') && isset($sql)) {
 				// log query if shard split process is active
 				// all activities will be done by node.js
@@ -763,6 +776,25 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 
 		return new Db_Result($stmts, $this);
 	}
+	
+	/**
+	 * @method shutdownFunction
+	 * @static
+	 */
+	static function shutdownFunction()
+	{
+		$connections = 0;
+		foreach (self::$nestedTransactions as $nt) {
+			if (!empty($nt['count'])) {
+				++$connections;
+			}
+		}
+		if ($connections) {
+			throw new Exception(
+				"forgot to resolve transactions on $connections connections"
+			);
+		}
+	}
 
 	/**
 	 * Works with SELECT queries to lock the selected rows.
@@ -789,18 +821,21 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * you often need the "where" clauses to figure out which database to send it to,
 	 * if sharding is being used.
 	 * @method begin
-	 * @param {string} [$lock_type='FOR UPDATE'] Defaults to 'FOR UPDATE', but can also be 'LOCK IN SHARE MODE'
+	 * @param {string} [$$lockType='FOR UPDATE'] Defaults to 'FOR UPDATE', but can also be 'LOCK IN SHARE MODE'
 	 * or set it to null to avoid adding a "LOCK" clause
+	 * @param {string} [$transactionKey=null] Passing a key here makes the system throw an
+	 *  exception if the script exits without a corresponding commit by a query with the
+	 *  same transactionKey or with "*" as the transactionKey to "resolve" this transaction.
 	 * @chainable
 	 */
-	function begin($lock_type = null)
+	function begin($lockType = null, $transactionKey = null)
 	{
-		if (!isset($lock_type) or $lock_type === true) {
-			$lock_type = 'FOR UPDATE';
+		if (!isset($lockType) or $lockType === true) {
+			$lockType = 'FOR UPDATE';
 		}
 		$this->ignoreCache();
-		if ($lock_type) {
-			$this->lock($lock_type);
+		if ($lockType) {
+			$this->lock($lockType);
 		}
 		$this->clauses["BEGIN"] = "START TRANSACTION";
 		return $this;
@@ -836,9 +871,15 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * you often need the "where" clauses to figure out which database to send it to,
 	 * if sharding is being used.
 	 * @method commit
+	 * @param {string} [$transactionKey=null] Pass a transactionKey here to "resolve" a previously
+	 *  executed that began a transaction with ->begin(). This is to guard against forgetting
+	 *  to "resolve" a begin() query with a corresponding commit() or rollback() query
+	 *  from code that knows about this transactionKey. Passing a transactionKey that doesn't
+	 *  match the latest one on the transaction "stack" also generates an error.
+	 *  Passing "*" here matches any transaction key that may have been on the top of the stack.
 	 * @chainable
 	 */
-	function commit()
+	function commit($transactionKey = null)
 	{
 		if (!empty($this->clauses["BEGIN"])) {
 			throw new Exception("You can't use BEGIN and COMMIT in the same query.", -1);
@@ -1885,6 +1926,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	
 	public $startedTime = null;
 	public $endedTime = null;
+	protected $transactionKey = null;
 
 	protected static $nestedTransactions = array();
 }
