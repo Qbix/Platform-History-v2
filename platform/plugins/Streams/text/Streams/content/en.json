@@ -319,5 +319,12 @@
             "displayType": "Real-Time Call",
             "description": "a real time video\/audio call"
         }
-    }
+    },
+	"menu": {
+		"placeholder": "type page title",
+		"ModTab": "Modify Item",
+		"Save": "Save",
+		"Delete": "Delete",
+		"Submenu": "Submenu"
+	}
 }

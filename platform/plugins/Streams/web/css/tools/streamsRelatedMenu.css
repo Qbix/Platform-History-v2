@@ -1,0 +1,26 @@
+.Streams_preview_tool.Streams_related_menu_edit .icon-edit {
+	position: absolute;
+	display: block;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 0;
+}
+.Streams_preview_tool.Streams_related_menu_edit {
+	padding-right: 25px !important;
+}
+.Streams_related_menu_edit .Q_dialog_content {
+	padding: 5px;
+}
+.Streams_related_menu_edit input {
+	height: 40px;
+	width: 100%;
+	font-size: 20px;
+	margin-bottom: 5px;
+	display: block;
+}
+.Streams_related_menu_edit .Streams_related_menu_edit_buttons {
+	text-align: center;
+}
+.Streams_related_menu_edit .Streams_related_menu_edit_buttons button:not(:first-of-type) {
+	margin-left: 5%;
+}

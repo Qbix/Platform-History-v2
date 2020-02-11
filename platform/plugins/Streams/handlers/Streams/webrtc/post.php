@@ -21,8 +21,7 @@ function Streams_webrtc_post($params = array())
 {
 	$params = array_merge($_REQUEST, $params);
 	Q_Valid::requireFields(array('publisherId', 'adapter'), $params, true);
-	$loggedUserId = Users::loggedInUser(true)->id; // require that user's logged in
-	$publisherId = Q::ifset($params, 'publisherId', $loggedUserId);
+	$publisherId = Q::ifset($params, 'publisherId', Users::loggedInUser(true)->id);
 	$roomId = Q::ifset($params, 'roomId', null);
 	$adapter = Q::ifset($params, 'adapter', 'node');
 
@@ -32,17 +31,9 @@ function Streams_webrtc_post($params = array())
 
 	$className = "Streams_WebRTC_".ucfirst($adapter);
 
-	// check quota
-	$quota = Users_Quota::check($loggedUserId, '', 'Streams/webrtc', true, 1, Users::roles());
-
 	$webrtc = new $className();
 	$result = $webrtc->createOrJoinRoom($publisherId, $roomId);
 	$result['stream']->join();
-
-	// set quota
-	if ($result['created'] and $quota instanceof Users_Quota) {
-		$quota->used();
-	}
 
 	Q_Response::setSlot("room", $result);
 }

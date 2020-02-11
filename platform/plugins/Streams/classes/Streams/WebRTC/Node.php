@@ -21,21 +21,7 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
             throw new Q_Exception_RequiredField(array('field' => 'publisherId'));
         }
 
-        $created = false;
-        if (!empty($roomId)) {
-            $streamName = "Streams/webrtc/$roomId";
-            $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
-            if (!$stream) {
-                $stream = Streams::create($publisherId, $publisherId, 'Streams/webrtc', array(
-                    'name' => $streamName
-                ));
-                $created = true;
-            }
-        } else {
-            $stream = Streams::create($publisherId, $publisherId, 'Streams/webrtc');
-            $roomId = substr($stream->name, strlen('Streams/webrtc/'));
-            $created = true;
-        }
+		$stream = Streams_WebRTC::getOrCreateStream($publisherId, $roomId);
 
 		$stream->setAttribute('startTime', time());
 		$stream->changed();
@@ -64,7 +50,6 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
 
         return array(
             'stream' => $stream,
-	        'created' => $created,
             'roomId' => $stream->name,
             'socketServer' => $socketServer,
             'turnCredentials' => $turnServers,
