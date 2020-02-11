@@ -32,4 +32,8 @@ function Users_session_post()
 		$device['appId'] = Q::ifset($req, 'Q.Users.appId', Q::app());
 		Users_Device::add($device);
 	}
+	
+	// Set new variables in the client Javascript, etc.
+	Q_Response::processSessionExtras('before');
+	Q_Response::processSessionExtras('after');
 }

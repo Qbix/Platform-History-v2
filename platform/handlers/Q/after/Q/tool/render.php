@@ -54,7 +54,7 @@ function Q_after_Q_tool_render($params, &$result)
 		? " data-Q-replace=''"
 		: '';
 	$data_retain = !empty($extra['lazyload'])
-		? " data-Q-lazyload=''"
+		? " data-Q-lazyload='waiting'"
 		: '';
 	$names = ($count === 1) ? ' '.key($info) : 's '.implode(" ", $names);
 	$ajax = Q_Request::isAjax();

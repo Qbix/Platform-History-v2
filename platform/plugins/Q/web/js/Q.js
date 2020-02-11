@@ -323,7 +323,7 @@ Sp.replaceAll = function _String_prototype_replaceAll(pairs) {
  * @method queryField
  * @param {String|Array|Object} name The name of the field. If it's an array, returns an object of {name: value} pairs. If it's an object, then they are added onto the querystring and the result is returned. If it's a string, it's the name of the field to get. And if it's an empty string, then we get the array of field names with no value, e.g. ?123&456&a=b returns [123,456]
  * @param {String} [value] Optional, provide a value to set in the querystring, or null to delete any fields that match name as a RegExp
- * @return {String|Object} the value of the field in the string, or if value was not undefined, the resulting querystring. Finally, if 
+ * @return {String|Object} the value of the field in the string, or if value was not undefined, the resulting querystring.
  */
 Sp.queryField = function Q_queryField(name, value) {
 	var what = this;
@@ -5627,7 +5627,7 @@ Q.Page.beforeUnload = Q.Event.factory(null, [""]);
  * Use this function to set handlers for when the page is loaded or unloaded.
  * @static
  * @method page
- * @param {String} page "$Module/$action" or a more specific URI string, or "" to handle all pages
+ * @param {String|Array|Object} page "$Module/$action" or a more specific URI string, or "" to handle all pages
  * @param {Function} handler A function to run after the page loaded.
  *  If the page is already currently loaded (i.e. it is the latest loaded page)
  *  then the handler is run right away.
@@ -5949,7 +5949,7 @@ Q.loadHandlebars = Q.getter(function _Q_loadHandlebars(callback) {
 			_addHandlebarsHelpers();
 			Q.handle(callback);
 		});
-	}, 'Q');
+	}, 'Q.loadHandlebars');
 }, {
 	cache: Q.Cache.document('Q.loadHandlebars', 1)
 });
@@ -6669,7 +6669,11 @@ Q.url = function _Q_url(what, fields, options) {
 	}
 	if (info) {
 		if (Q.info.urls && Q.info.urls.caching && info.t) {
-			what3 += '?Q.cacheBust=' + info.t;
+			var parts = what3.split('?');
+			if (parts.length > 1) {
+				parts[1] = parts[1].queryField('Q.cacheBust', info.t);
+				what3 = parts[0] + '?' + parts[1];	
+			}
 			if (info.cacheBaseUrl && info.t < Q.cookie('Q_ct')) {
 				baseUrl = info.cacheBaseUrl;
 			}
@@ -7656,9 +7660,11 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 			}
 			scripts = arr;
 		}
+		var src2 = src.split('?')[0];
 		for (i=0; i<scripts.length; ++i) {
 			script = scripts[i];
-			if (script.getAttribute('src') !== src) {
+			var s = script.getAttribute('src');
+			if (s !== src && s !== src2) {
 				continue;
 			}
 			// move the element to the right container if necessary
@@ -7675,7 +7681,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 				container.appendChild(script);
 			}
 			// the script already exists in the document
-			if (Q.addScript.loaded[src]) {
+			if (Q.addScript.loaded[src] || Q.addScript.loaded[src2]) {
 				// the script was already loaded successfully
 				_onload();
 				return o.returnAll ? script : false;
@@ -7923,11 +7929,15 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	if (!media) media = 'screen,print';
 	var insertBefore = null;
 	var links = document.getElementsByTagName('link');
-	var i, e, m, p;
+	var i, e, h, m, p;
 	for (i=0; i<links.length; ++i) {
 		e = links[i];
 		m = e.getAttribute('media');
-		if ((m && m !== media) || e.getAttribute('href') !== href) continue;
+		h = e.getAttribute('href');
+		if ((m && m !== media)
+		|| (h !== href && h !== href2)) {
+			continue;
+		}
 		// A link element with this media and href is already found in the document.
 		// Move the element to the right container if necessary
 		// (This may change the order in which stylesheets are applied).
@@ -7941,7 +7951,10 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 		if (outside) {
 			container.appendChild(e);
 		}
-		if (Q.addStylesheet.loaded[href] || !Q.addStylesheet.added[href]) {
+		var href2 = href.split('?')[0];
+		if (Q.addStylesheet.loaded[href]
+		|| Q.addStylesheet.loaded[href2]
+		|| !Q.addStylesheet.added[href]) {
 			onload();
 			return options.returnAll ? e : false;
 		}
@@ -8256,9 +8269,10 @@ Q.find = function _Q_find(elem, filter, callbackBefore, callbackAfter, options, 
  *  constructors have run.
  *  It receives (elem, tools, options) as arguments, and the last tool to be
  *  activated as "this".
+ * @param {Boolean} activateLazyLoad for internal use, used by Q/lazyload tool
  * @return {Q.Promise} Returns a promise with an extra .cancel() method to cancel the action
  */
-Q.activate = function _Q_activate(elem, options, callback) {
+Q.activate = function _Q_activate(elem, options, callback, activateLazyLoad) {
 	
 	if (!elem) {
 		return;
@@ -8279,7 +8293,8 @@ Q.activate = function _Q_activate(elem, options, callback) {
 		tools: {},
 		waitingForTools: [],
 		pipe: Q.pipe(),
-		canceled: false
+		canceled: false,
+		activateLazyLoad: activateLazyLoad
 	};
 	if (typeof options === 'function') {
 		callback = options;
@@ -9153,9 +9168,16 @@ var _constructors = {};
  * @param {Object} options
  *  Options that should be passed onto the tool
  * @param {Mixed} shared
- *  A shared pipe which we can use to fill
+ *  A shared object we can use to pass info around while activating tools
  */
 function _activateTools(toolElement, options, shared) {
+	if (!shared.activateLazyLoad &&
+	(toolElement instanceof Element)) {
+		var attr = toolElement.getAttribute('data-q-lazyload');
+		if (attr === 'waiting' || attr === 'removed') {
+			return false;
+		}
+	}
 	var pendingParentEvent = _pendingParentStack[_pendingParentStack.length-1];
 	var pendingCurrentEvent = new Q.Event();
 	pendingCurrentEvent.toolElement = toolElement; // just to keep track for debugging
@@ -9270,7 +9292,15 @@ _activateTools.alreadyActivated = {};
  * @param {HTMLElement} toolElement
  *  A tool's generated container div
  */
-function _initTools(toolElement) {
+function _initTools(toolElement, options, shared) {
+	
+	if (!shared.activateLazyLoad &&
+	(toolElement instanceof Element)) {
+		var attr = toolElement.getAttribute('data-q-lazyload');
+		if (attr === 'waiting' || attr === 'removed') {
+			return false;
+		}
+	}
 	
 	var currentEvent = _pendingParentStack[_pendingParentStack.length-1];
 	_pendingParentStack.pop(); // it was pushed during tool activate
@@ -12946,6 +12976,16 @@ Q.onInit.add(function () {
 		Q.removeEventListener(document.body, 'click', _enableSpeech);
 		Q.Audio.speak.enabled = true;
 	}
+
+	// on Q initiated, parse all notices loaded from backend and parse them
+	Q.Notices.process();
+
+	// hook beforeunload event
+	Q.addEventListener(window, 'beforeunload', function (e) {
+		if (!e.defaultPrevented) {
+			_documentIsUnloading = true; // WARN: a later handler might cancel the event
+		}
+	});
 }, 'Q');
 
 Q.onJQuery.add(function ($) {
@@ -13715,18 +13755,6 @@ Q.Notices = {
 		});
 	}
 };
-
-Q.onInit.add(function () {
-	// on Q initiated, parse all notices loaded from backend and parse them
-	Q.Notices.process();
-	
-	// hook beforeunload event
-	Q.addEventListener(window, 'beforeunload', function (e) {
-		if (!e.defaultPrevented) {
-			_documentIsUnloading = true; // WARN: a later handler might cancel the event
-		}
-	});
-});
 
 Q.beforeInit.addOnce(function () {
 	if (!Q.info.baseUrl) {

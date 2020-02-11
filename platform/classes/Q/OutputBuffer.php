@@ -13,7 +13,7 @@ class Q_OutputBuffer
 	 * @class Q_OutputBuffer
 	 * @constructor
 	 * @param {string} [$handler=null] The output handler, such as 'ob_gzhandler'.
-	 * @param {string} [$locale=null] Can be used to change the locale for a while, e.g. "en_GB"
+	 * @param {string} [$languageLocale=null] Can be used to change the PHP locale for a while, e.g. "en_GB"
 	 * @param {boolean} [$throw_on_failure=false] If true, and throws an exception if failed
 	 *  to create output buffer with this handler.
 	 *  Otherwise, silently creates a "normal" output buffer.
@@ -21,7 +21,7 @@ class Q_OutputBuffer
 	 */
 	function __construct(
 	 $handler = null, 
-	 $locale = null,
+	 $languageLocale = null,
 	 $throw_on_failure = false)
 	{
 		if (empty($handler) or !is_string($handler)) {
@@ -39,7 +39,7 @@ class Q_OutputBuffer
 		}
 		$status = ob_get_status(false);
 		$this->level = $status['level']; // nesting level of current buffer
-		$this->pushLocale($locale);
+		$this->pushLanguageLocale($languageLocale);
 	}
 	
 	/**
@@ -52,7 +52,7 @@ class Q_OutputBuffer
 	function getClean()
 	{
 		$this->flushHigherBuffers();
-		$this->popLocale();
+		$this->popLanguageLocale();
 		return ob_get_clean();
 	}
 	
@@ -65,7 +65,7 @@ class Q_OutputBuffer
 	function endFlush()
 	{
 		$this->flushHigherBuffers();
-		$this->popLocale();
+		$this->popLanguageLocale();
 		return @ob_end_flush();
 	}
 	
@@ -93,28 +93,28 @@ class Q_OutputBuffer
 		}
 	}
 	
-	protected function pushLocale($locale)
+	protected function pushLanguageLocale($languageLocale)
 	{
-		if ($locale) {
-			$this->lastLocale = $this->locales[$this->level] = $locale;
-			setlocale($locale);
+		if ($languageLocale) {
+			$this->lastLanguageLocale = $this->locales[$this->level] = $languageLocale;
+			setlocale(LC_ALL, $languageLocale);
 		} else {
-			if (!$this->lastLocale) {
-				$this->lastLocale = Q_Request::locale();
+			if (!$this->lastLanguageLocale) {
+				$this->lastLanguageLocale = Q_Request::languageLocale();
 			}
-			$this->locales[$this->level] = $this->lastLocale;
+			$this->locales[$this->level] = $this->lastLanguageLocale;
 		}
 	}
 	
-	protected function popLocale()
+	protected function popLanguageLocale()
 	{
-		$locales = array();
+		$languageLocales = array();
 		for ($i=0; $i<$this->level; ++$i) {
-			if (isset($this->locales[$i])) {
-				$locales = $this->locales[$i];
+			if (isset($this->languageLocales[$i])) {
+				$languageLocales = $this->languageLocales[$i];
 			}
 		}
-		$this->locales = $locales;
+		$this->languageLocales = $languageLocales;
 	}
 
 	/**
@@ -124,16 +124,16 @@ class Q_OutputBuffer
 	public $level;
 	
 	/**
-	 * @property $locales
+	 * @property $languageLocales
 	 * @static
 	 * @type array
 	 */
-	public $locales = array();
+	public $languageLocales = array();
 	
 	/**
-	 * @property $lastLocale
+	 * @property $lastLanguageLocale
 	 * @static
 	 * @type string
 	 */
-	public $lastLocale = null;
+	public $lastLanguageLocale = null;
 }

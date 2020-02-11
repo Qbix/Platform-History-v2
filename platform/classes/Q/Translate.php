@@ -78,7 +78,7 @@ class Q_Translate
 		}
 	}
 
-	protected function getLocales()
+	public function getLocales()
 	{
 		$tree = new Q_Tree();
 		$appLocalConfig = APP_LOCAL_DIR . DS . 'locales.json';

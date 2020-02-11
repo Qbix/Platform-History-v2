@@ -3074,7 +3074,12 @@ Q.url = function _Q_url(what, fields, options) {
 		what2 = parts[0] + (parts[1] ? '?' + parts[1] : '');
 	}
 	if (options && options.cacheBust) {
-		what2 += "?Q.cacheBust="+Math.floor(Date.now()/options.cacheBust);
+		var timeout = Math.floor(Date.now()/options.cacheBust);
+		var parts = what2.split('?');
+		if (parts.length > 1) {
+			parts[1] = parts[1].queryField('Q.cacheBust', timeout);
+			what2 = parts[0] + '?' + parts[1];
+		}
 	}
 	parts = what2.split('?');
 	if (parts.length > 2) {

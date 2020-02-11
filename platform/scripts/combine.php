@@ -24,6 +24,13 @@ Script to combine static files into some target static files, and run them throu
 
 $usage
 
+Options
+
+--all            Processes all extensions, this is the default
+--css            Process .css files instead of all
+--js             Process .js files instead of all
+--process <ext>  Followed by names a custom extension to process
+
 EOT;
 
 #Is it a call for help?
@@ -51,9 +58,30 @@ if (!defined('APP_DIR'))
 #Include Q
 include($Q_filename);
 
-echo Q_scripts_combine() . PHP_EOL;
+// get all CLI options
+$opts = array('afcj');
+$longopts = array('all', 'process:', 'css', 'js');
+$options = getopt(implode('', $opts), $longopts);
+if (isset($options['help'])) {
+	echo $help;
+	exit;
+}
 
-function Q_scripts_combine()
+$process = $options;
+if (empty($process	)) {
+	$process['all'] = false; // process all extensions
+} else if (!empty($p = $options['process'])) {
+	if (is_string($p)) {
+		$p = array($p);
+	}
+	foreach ($p as $ext) {
+		$process[$ext] = false; // process this extension
+	}
+}
+
+echo Q_scripts_combine($process) . PHP_EOL;
+
+function Q_scripts_combine($process)
 {
 	$environment = Q_Config::get('Q', 'environment', false);
 	if (!$environment) {
@@ -73,6 +101,10 @@ function Q_scripts_combine()
 	}
 	$combined = array();
 	foreach ($files as $src => $dest) {
+		$ext = strtolower(pathinfo($src, PATHINFO_EXTENSION));
+		if (!isset($process[$ext]) and !isset($process['all'])) {
+			continue;
+		}
 		$f = Q_Uri::filenameFromUrl(Q_Html::themedUrl($src, array(
 			'ignoreEnvironment' => true
 		)));
@@ -88,7 +120,12 @@ function Q_scripts_combine()
 		echo "Writing $df\n";
 		if (!empty($filters)) {
 			foreach ($filters as $e => $filter) {
-				if ($ext !== $e) continue;
+				if (!isset($process[$e]) and !isset($process['all'])) {
+					continue;
+				}
+				if ($ext !== $e) {
+					continue;
+				}
 				$p = !empty($filter['params']) ? Q::json_encode($filter['params']) : '';
 				echo "\t".$filter['handler']."$p\n";
 				foreach ($parts as $src => $part) {

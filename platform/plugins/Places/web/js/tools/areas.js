@@ -28,7 +28,7 @@
 				tool.refresh();
 			});
 
-			Q.addStylesheet('Q/plugins/Places/css/areas.css', function(){
+			Q.addStylesheet('{{Places}}/css/areas.css', function(){
 				pipe.fill('style')();
 			});
 

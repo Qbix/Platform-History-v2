@@ -109,9 +109,11 @@ function Q_script_urls_glob(
 	$filenames = glob($dir.DS.'*');
 	foreach ($filenames as $f) {
 		$u = substr($f, $len+1);
-		// if ($u === 'Q'.DS.'urls') {
-		// 	continue;
-		// }
+		$v = str_replace(DS, '/', $u);
+		$ignore = Q_Config::get('Q', 'urls', 'skip', array());
+		if (in_array($v, $ignore)) {
+			continue;
+		}
 		$ext = pathinfo($u, PATHINFO_EXTENSION);
 		if (!is_dir($f)) {
 			if (is_array($ignore) and in_array($ext, $ignore)) {

@@ -26,6 +26,9 @@ Defaults to the app's name, as found under the "Q"/"app" config.
 labels
 Defaults to \$App/admins but you can override it with a space-separated list.
 
+Options:
+
+--always-send     This option sends invites even if they have already been sent.
 
 EOT;
 
@@ -71,6 +74,14 @@ try {
 	die('[ERROR] ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString() . PHP_EOL);
 }
 
+// get all CLI options
+$longopts = array('always-send');
+$options = getopt('', $longopts);
+if (isset($options['help'])) {
+	echo $help;
+	exit;
+}
+
 $app = Q::app();
 $identifier = $FROM_APP ? $argv[1] : $argv[2];
 $communityId = Q::ifset($argv, $FROM_APP ? 2 : 3, Users::communityId());
@@ -79,6 +90,7 @@ $addLabel = empty($labels) ? "$app/admins" : $labels;
 $asUserId = $app;
 $skipAccess = true;
 $appUrl = Q_Uri::url('Communities/onboarding?communityId='.urlencode($communityId));
+$alwaysSend = isset($options['always-send']);
 
-Streams::invite($communityId, 'Streams/experience/main', compact('identifier'), compact('addLabel', 'asUserId', 'skipAccess', 'appUrl'));
+Streams::invite($communityId, 'Streams/experience/main', compact('identifier'), compact('addLabel', 'asUserId', 'skipAccess', 'appUrl', 'alwaysSend'));
 echo "Successfully invited $identifier\n";

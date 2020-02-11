@@ -87,6 +87,9 @@
 			"Streams": {
 				"*": ["Streams/content"]
 			}
+		},
+		"urls": {
+			"skip": ["Q/plugins/Streams/img/icons/Streams/interest"]
 		}
 	},
 	"Users": {

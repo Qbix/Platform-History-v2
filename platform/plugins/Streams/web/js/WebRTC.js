@@ -1394,28 +1394,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		}
 
 		/**
-		 * Updates start time it if call was just started started
-		 * @method checkOrUpdateStarTime
-		 */
-		function checkOrUpdateStarTime(roomId) {
-			Q.req("Streams/webrtc", ["updateStartTime"], function (err, response) {
-				var msg = Q.firstErrorMessage(err, response && response.errors);
-
-				if (msg) {
-					return Q.alert(msg);
-				}
-
-			}, {
-				method: 'put',
-				fields: {
-                    adapter: _options.mode,
-                    roomId: roomId,
-					publisherId: _options.roomPublisherId,
-				}
-			})
-		}
-
-		/**
 		 * Init conference using own node.js server for signalling process.
 		 * @method initWithStreams
 		 * @param {Object} [turnCredentials] Creadentials that are needed to use TURN server.
@@ -4702,8 +4680,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							_debug = response.slots.room.debug;
 
 							overrideDefaultOptions(response.slots.room.options);
-
-                            checkOrUpdateStarTime(roomId);
 
 							//var connectUrl = updateQueryStringParameter(location.href, 'Q.rid', roomId);
 							//connectUrl = updateQueryStringParameter(connectUrl, 'Q.pid', asPublisherId);

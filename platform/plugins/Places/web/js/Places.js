@@ -42,7 +42,7 @@ var Places = Q.Places = Q.plugins.Places = {
 	 *   Q.Places.countries and Q.Places.countries is accessible
 	 */
 	loadCountries: function (callback) {
-		Q.addScript('Q/plugins/Places/js/lib/countries.js', function () {
+		Q.addScript('{{Places}}/js/lib/countries.js', function () {
 			var pc = Places.countries;
 			var cbc = Places.countriesByCode = {};
 			for (var i=0, l = Places.countries.length; i < l; ++i) {
@@ -645,13 +645,13 @@ Q.text.Places = {
 };
 
 Q.Tool.define({
-	"Places/address": "Q/plugins/Places/js/tools/address.js",
-	"Places/globe": "Q/plugins/Places/js/tools/globe.js",
-	"Places/countries": "Q/plugins/Places/js/tools/countries.js",
-	"Places/user/location": "Q/plugins/Places/js/tools/user/location.js",
-	"Places/location": "Q/plugins/Places/js/tools/location.js",
-	"Places/location/preview": "Q/plugins/Places/js/tools/location/preview.js",
-	"Places/areas": "Q/plugins/Places/js/tools/areas.js"
+	"Places/address": "{{Places}}/js/tools/address.js",
+	"Places/globe": "{{Places}}/js/tools/globe.js",
+	"Places/countries": "{{Places}}/js/tools/countries.js",
+	"Places/user/location": "{{Places}}/js/tools/user/location.js",
+	"Places/location": "{{Places}}/js/tools/location.js",
+	"Places/location/preview": "{{Places}}/js/tools/location/preview.js",
+	"Places/areas": "{{Places}}/js/tools/areas.js"
 });
 
 })(Q, Q.$, window);

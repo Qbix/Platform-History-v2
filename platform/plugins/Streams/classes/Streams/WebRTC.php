@@ -17,12 +17,12 @@ interface Streams_WebRTC_Interface
      * @constructor
      */
 
-	/**
-	 * @method createOrJoinRoom
-	 * @param {string} $publisherId Id of room's publisher/initiator
-	 * @param {string} $roomId Room id in Qbix (last marp of stream name)
-	 * @return {Object}
-	 */
+    /**
+     * @method createOrJoinRoom
+     * @param {string} $publisherId Id of room's publisher/initiator
+     * @param {string} $roomId Room id in Qbix (last marp of stream name)
+     * @return {Object}
+     */
     function createOrJoinRoom($publisherId, $roomId);
 
 }
@@ -52,18 +52,39 @@ abstract class Streams_WebRTC
 
         return $token->iceServers[1];
     }
+    /**
+     * Create or fetch Streams/webrtc stream
+     * @method getOrCreateStream
+     * @param {string} $publisherId publisher of stream
+     * @param {string} $roomId Room Id of room (last part of stream name)
+     * @return {array} The keys are "stream", "created", "roomId", "socketServer"
+     */
+    static function getOrCreateStream($publisherId, $roomId) {
+        $streamName = null;
 
-    function updateStartTime($publisherId, $roomId) {
-        $streamName = "Streams/webrtc/$roomId";
-        $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
-        $endTime = $stream->getAttribute('endTime');
-        if($endTime != null && time() > $endTime) {
-            $stream->setAttribute('startTime', time());
-            $stream->clearAttribute('endTime');
-            $stream->save();
+        if (!empty($roomId)) {
+            $streamName = "Streams/webrtc/$roomId";
+            $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
+
+            if ($stream) {
+                return $stream;
+            }
         }
 
-        return $stream;
-    }
+        // check quota
+        $quota = Users_Quota::check($publisherId, '', 'Streams/webrtc', true, 1, Users::roles());
 
+        $stream = Streams::create($publisherId, $publisherId, 'Streams/webrtc', array(
+            'name' => $streamName
+        ));
+
+        // set quota
+        if ($stream && $quota instanceof Users_Quota) {
+            $quota->used();
+
+            return $stream;
+        }
+
+        throw new Q_Exception("Failed during create webrtc stream");
+    }
 };

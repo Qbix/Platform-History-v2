@@ -40,29 +40,6 @@ function Streams_webrtc_put($params = array()) {
 		$result = $webrtc->endRoom($publisherId, $roomId);
 
 		Q_Response::setSlot("endRoom", $result);
-	} else if(Q_Request::slotName('updateStartTime')) {
-        //print_r('123');die('123');
-		Q_Valid::requireFields(array('publisherId', 'adapter'), $params, true);
-		$publisherId = Q::ifset($params, 'publisherId', null);
-		$roomId = Q::ifset($params, 'roomId', null);
-
-		switch ($params['adapter']) {
-			case 'node':
-				$adapter = 'node';
-				break;
-			case 'twilio':
-				$adapter = 'twilio';
-				break;
-			default:
-				throw new Q_Exception_WrongValue(array('field' => 'adapter', 'range' => 'node or twilio'));
-		}
-
-		$className = "Streams_WebRTC_".ucfirst($adapter);
-
-		$webrtc = new $className();
-		$result = $webrtc->updateStartTime($publisherId, $roomId);
-
-		Q_Response::setSlot("updateStartTime", $result);
 	} else if(Q_Request::slotName('updateLog')) {
         $publisherId = Q::ifset($params, 'publisherId', null);
         $roomId = Q::ifset($params, 'roomId', null);

@@ -570,6 +570,7 @@ Q.Tool.define({
 	"Streams/lookup"	   : "{{Streams}}/js/tools/lookup.js",
 	"Streams/relate"	   : "{{Streams}}/js/tools/relate.js",
 	"Streams/related"	  : "{{Streams}}/js/tools/related.js",
+	"Streams/related/menu"	  : "{{Streams}}/js/tools/related/menu.js",
 	"Streams/inplace"	  : "{{Streams}}/js/tools/inplace.js",
 	"Streams/html"		 : "{{Streams}}/js/tools/html.js",
 	"Streams/preview"  	   : "{{Streams}}/js/tools/preview.js",
@@ -952,7 +953,7 @@ Streams.Dialogs = {
 						go: text.go,
 						placeholder: text.placeholder,
 						orInvite: text.orInvite,
-						QR: text.QR.interpolate({ClickOrTap: Q.getObject("Q.info.isTouchscreen") ? 'Tap' : 'Click'}),
+						QR: text.QR.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap}),
 						email: text.byEmail,
 						text: text.byText,
 						facebook: text.byFacebook,
@@ -974,7 +975,10 @@ Streams.Dialogs = {
 							data: $eContacts.data("contacts") || null
 						};
 
+						$this.addClass('loading');
+
 						Users.Dialogs.contacts(options, function (contacts) {
+							$this.removeClass('loading');
 							$eContacts.data("contacts", contacts);
 
 							if (!contacts || Object.keys(contacts).length <= 0) {

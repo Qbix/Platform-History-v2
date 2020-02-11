@@ -59,7 +59,9 @@ Q.Tool.define("Q/columns", function(options) {
 	
 	Q.addStylesheet('{{Q}}/css/columns.css', function () {
 		if (state.title === undefined) {
-			state.title = '<img class="Q_columns_loading" src="' + Q.url('{{Q}}/img/throbbers/loading.gif') +'" alt="">';
+			state.title = $('<div />').append('<img class="Q_columns_loading" src="'
+				+ Q.url('{{Q}}/img/throbbers/loading.gif')
+				+'" alt="">')[0];
 		}
 
 		var selector = '.Q_close';
@@ -447,9 +449,11 @@ Q.Tool.define("Q/columns", function(options) {
 			}
 			
 			if (o.title != undefined) {
-				$titleSlot.empty().append(
-					Q.instanceOf(o.title, Element) ? $(o.title) : o.title
-				);
+				if (Q.instanceOf(o.title, Element)) {
+					$titleSlot.empty().append(o.title);
+				} else {
+					$titleSlot.empty().text(o.title);
+				}
 				$div.attr('data-title', $titleSlot.text());
 				$div.attr('data-prevTitle', document.title);
 			}

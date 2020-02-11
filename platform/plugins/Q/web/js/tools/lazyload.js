@@ -2,7 +2,7 @@
 /**
  * @module Q-tools
  */
-	
+
 /**
  * Implements lazy-loading for various types of elements.
  * By default, has implementations for "img" and "Q_tool" selectors.
@@ -37,7 +37,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 
 	// Observe whatever is on the page already
 	tool.observer = _createObserver(tool, tool.element);
-	tool.findAndObserve(tool.element);
+	tool.observe(tool.prepare(tool.element, false));
 
 	// Override innerHTML
 
@@ -53,18 +53,17 @@ Q.Tool.define('Q/lazyload', function (options) {
 				var elements = element.querySelectorAll
 					? Array.from(element.querySelectorAll(info.selector))
 					: [];
-				Q.each(elements, function (i, element) {
-					if (info.preparing.call(tool, element, true) === true) {
-						found = true;
-					}
-				});
+				if (elements.length) {
+					found = true;
+					return false;
+				}
 			});
 			if (found) {
 				html = originalGet.call(element);
 			}
 			originalSet.call(this, html);
 			if (found) {
-				tool.findAndObserve(this);
+				tool.observe(tool.prepare(this, true));
 			}
 			return html;
 		},
@@ -77,21 +76,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 			if (!element) {
 				return;
 			}
-			var found = false;
-			Q.each(state.handlers, function (name, info) {
-				var elements = element.querySelectorAll
-					? Array.from(element.querySelectorAll(info.selector))
-					: [];
-				if (element.matches && element.matches(info.selector)) {
-					elements.push(element);
-				}
-				Q.each(elements, function (i, element) {
-					if (info.preparing.call(tool, element, true) === true) {
-						found = true;
-						tool.observer.observe(element);
-					}
-				});
-			});
+			tool.observe(tool.prepare(element, true));
 			return orig.apply(this, arguments);
 		};
 	});
@@ -145,9 +130,11 @@ Q.Tool.define('Q/lazyload', function (options) {
 				if (element.hasAttribute('data-q-lazyload')
 				&& (!element.Q || !element.Q.tool)) {
 					element.addClass('Q_lazy_load');
+					element.setAttribute('data-q-lazyload', 'activating');
 					Q.activate(element, function () {
+						element.setAttribute('data-q-lazyload', 'activated');
 						element.addClass('Q_lazy_loaded');
-					});
+					}, {}, true);
 					return true;
 				}
 			},
@@ -157,6 +144,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 					Q.Tool.remove(element);
 					element.removeClass('Q_lazy_loading');
 					element.removeClass('Q_lazy_loaded');
+					element.setAttribute('data-q-lazyload', 'removed');
 					if (this.state.handlers.tool.exitingRemoveHTML) {
 						element.innerHTML = '';
 					}
@@ -177,9 +165,9 @@ Q.Tool.define('Q/lazyload', function (options) {
 }, 
 
 {
-	findAndObserve: function (container) {
+	prepare: function (container, beingInsertedIntoDOM) {
 		var tool = this;
-		var found = false;
+		var found = [];
 		Q.each(tool.state.handlers, function (name, info) {
 			var elements = container.querySelectorAll
 				? Array.from(container.querySelectorAll(info.selector))
@@ -188,11 +176,17 @@ Q.Tool.define('Q/lazyload', function (options) {
 				elements.push(container);
 			}
 			Q.each(elements, function (i, element) {
-				if (info.preparing.call(tool, element) === true) {
-					found = true;
-					tool.observer.observe(element);
+				if (info.preparing.call(tool, element, beingInsertedIntoDOM) === true) {
+					found.push(element);
 				}
 			});
+		});
+		return found;
+	},
+	observe: function (elements) {
+		var tool = this;
+		Q.each(elements, function (i, element) {
+			tool.observer.observe(element);
 		});
 	}
 });
@@ -216,5 +210,29 @@ function _createObserver(tool, container) {
 		});
 	}, tool.state.observerOptions);
 }
+
+function _polyfill() {
+	// Exit early if all IntersectionObserver and IntersectionObserverEntry
+	// features are natively supported.
+	if ('IntersectionObserver' in window &&
+	    'IntersectionObserverEntry' in window &&
+	    'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
+
+	  // Minimal polyfill for Edge 15's lack of `isIntersecting`
+	  // See: https://github.com/w3c/IntersectionObserver/issues/211
+	  if (!('isIntersecting' in window.IntersectionObserverEntry.prototype)) {
+	    Object.defineProperty(window.IntersectionObserverEntry.prototype,
+	      'isIntersecting', {
+	      get: function () {
+	        return this.intersectionRatio > 0;
+	      }
+	    });
+	  }
+	  return;
+	}
+	Q.addScript('{{Q}}/polyfills/IntersectionObserver.js');
+}
+
+_polyfill();
 
 })(Q, jQuery);

@@ -919,6 +919,7 @@ class Q_Request
 	 * @method accepts
 	 * @static
 	 * @return {array} returns array of array("en", "US", 0.8) entries
+	 *  Note, the second and third element of this array may be omitted!
 	 */
 	static function languages()
 	{
@@ -960,17 +961,27 @@ class Q_Request
 	}
 	
 	/**
-	 * Gets the locale of the user agent in the form "en_GB" etc.
-	 * @method locale
+	 * Gets the language and locale of the user agent in the form "en_GB" etc.
+	 * @method languageLocale
 	 * @static
 	 * @param {string} [$separator='_'] The separator to use
-	 * @return {string} The locale
+	 * @return {string} The locale string, which could be of the form "en-US" or "en"
 	 */
-	static function locale($separator = '_')
+	static function languageLocale($separator = '_')
 	{
 		$languages = self::languages();
-		list($lang, $country, $preference) = reset($languages);
-		return "$lang$separator$country";
+		$first = reset($languages);
+		$lang = reset($first);
+		$country = next($first);
+		if (!$country) {
+			$tree = new Q_Tree();
+			$tree->load(Q_CONFIG_DIR . DS . 'Q' . DS . 'locales.json');
+			$locales = $tree->getAll();
+			if (!empty($locales[$lang])) {
+				$country = reset($locales[$lang]);
+			}
+		}
+		return $country ? "$lang$separator$country" : $lang;
 	}
 	
 	/**
