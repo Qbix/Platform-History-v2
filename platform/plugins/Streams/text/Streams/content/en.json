@@ -181,7 +181,8 @@
             "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
             "linkCopiedToCb": "Link copied to clipboard",
             "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video"
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
         },
         "settingsPopup": {
             "webCamera": "Web Camera",

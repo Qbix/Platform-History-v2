@@ -41,11 +41,12 @@ if(navigator.mediaDevices.getUserMedia === undefined) navigator.mediaDevices.get
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
+
+
 (function (Q, $) {
 
-
-	var Streams = Q.Streams;
-	var _debug = false;
+   	var Streams = Q.Streams;
+	var _debug = null;
 	var _debugTimer = {};
 
 	/**
@@ -56,7 +57,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 	Streams.WebRTC = function Streams_WebRTC() {
 		var _options = {
 			mode: 'node',
-			mediaDevicesDialog: {timeout:2000},
+            conferenceStartedTime: null,
+			startTime: null,
+            mediaDevicesDialog: {timeout:2000},
 			startWith: {
 				audio: true,
 				video: false
@@ -83,6 +86,455 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		var _layoutTool = null;
 		var _roomStream = null;
 		var _renderedScreens = [];
+
+		var appDebug = (function () {
+            var _isMobile = false;
+            var _isiOS = false;
+            var _isAndroid= false;
+            var _isiOSWebView = false;
+            var _infoLog = [];
+
+            var ua = navigator.userAgent;
+
+            if(ua.indexOf('Android')!=-1||ua.indexOf('Windows Phone')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPad')!=-1||ua.indexOf('iPod')!=-1) {
+                _isMobile = true;
+                if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
+                    _isiOS = true;
+                } else if (/android/i.test(ua)) {
+                    _isAndroid = true;
+                }
+            }
+
+            var isSafari = /safari/.test( ua.toLowerCase());
+            if( _isiOS ) {
+                if ( isSafari ) {
+                    //browser
+                } else if ( !isSafari ) {
+                    _isiOSWebView = true;
+                };
+            } else {
+                //not iOS
+            };
+
+            var browser = determineBrowser(navigator.userAgent)
+            var _localInfo = {
+                isMobile: _isMobile,
+                platform: _isiOS ? 'ios' : (_isAndroid ? 'android' : null),
+                isCordova: typeof cordova != 'undefined',
+                isiOSWebView: _isiOSWebView,
+                ua: navigator.userAgent,
+                browserName: browser[0],
+                browserVersion: browser[1]
+            }
+
+            _infoLog.push({type: 'info', log:_localInfo});
+
+            var stderror = console.error.bind(console);
+
+            console.error = function (txt) {
+
+                try {
+                    try {
+                        var err = (new Error);
+                    } catch (e) {
+
+                    }
+
+                    var i, argument;
+                    var argumentsString = '';
+                    for (i = 1; argument = arguments[i]; i++){
+                        if (typeof argument == 'object') {
+                            argumentsString = argumentsString + ', OBJECT';
+                        } else {
+                            argumentsString = argumentsString + ', ' + argument;
+                        }
+                    }
+
+                    var today = new Date();
+                    var dd = today.getDate();
+                    var mm = today.getMonth() + 1;
+                    var ua = navigator.userAgent;
+                    var yyyy = today.getFullYear();
+                    if (dd < 10) {
+                        dd = '0' + dd;
+                    }
+                    if (mm < 10) {
+                        mm = '0' + mm;
+                    }
+                    var today = dd + '/' + mm + '/' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+
+                    var errorMessage = "\n\n" + today + " Error: " + txt + ', ' +  argumentsString + "\nurl: " + location.origin + "\nline: ";
+
+                    if(typeof err != 'undefined' && typeof err.lineNumber != 'undefined') {
+                        errorMessage = errorMessage + err.lineNumber + "\n " + ua+ "\n";
+                    } else if(typeof err != 'undefined' && typeof err.stack != 'undefined')
+                        errorMessage = errorMessage + err.stack + "\n " + ua+ "\n";
+                    else errorMessage = errorMessage + "\n " + ua + "\n";
+
+                    stderror.apply(console, arguments);
+                    logError(errorMessage);
+
+                } catch (e) {
+                    stderror.apply(e.name + ' ' + e.message);
+                    logError(e.name + ' ' + e.message);
+                }
+            }
+
+            window.onerror = function(msg, url, line, col, error) {
+                var extra = !col ? '' : '\ncolumn: ' + col;
+                extra += !error ? '' : '\nerror: ' + error;
+
+                var today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1;
+
+                var yyyy = today.getFullYear();
+                if (dd < 10) {
+                    dd = '0' + dd;
+                }
+                if (mm < 10) {
+                    mm = '0' + mm;
+                }
+                var today = dd + '/' + mm + '/' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+
+                var errMessage = "\n\n" + today + " Error: " + msg + "\nurl: " + url + "\nline: " + line + extra + "\nline: " + ua;
+
+                logError(errMessage);
+            }
+
+            var url = new URL(location.href);
+            var debug = url.searchParams.get("debug");
+
+            var debugWidget = (function () {
+                var _debugWidget;
+                var _debugSideBar;
+                var _debugOutput;
+                var _debugWidgetLouncher;
+
+                function createDebugOutput() {
+                    _debugWidget = document.createElement('DIV');
+                    _debugWidget.className = 'Streams_webrtc_debug_container';
+                    _debugSideBar = document.createElement('DIV');
+                    _debugSideBar.className = 'Streams_webrtc_debug_sidebar';
+                    _debugOutput = document.createElement('DIV');
+                    _debugOutput.className = 'Streams_webrtc_debug_output';
+                    var closeDebugWidget= document.createElement('DIV');
+                    closeDebugWidget.className = 'Streams_webrtc_debug_close';
+                    closeDebugWidget.addEventListener('click', closeDebug)
+                    _debugWidget.appendChild(_debugSideBar);
+                    _debugWidget.appendChild(_debugOutput);
+                    _debugWidget.appendChild(closeDebugWidget);
+                    document.body.appendChild(_debugWidget);
+
+                    _debugWidgetLouncher = document.createElement('DIV');
+                    _debugWidgetLouncher.className = "Streams_webrtc_debug_louncher active";
+                    _debugWidgetLouncher.innerHTML = "Open Debugger";
+                    _debugWidgetLouncher.addEventListener('click', openDebugWidget)
+                    document.body.appendChild(_debugWidgetLouncher);
+                }
+
+                function closeDebug() {
+                    if( _debugWidget.classList.contains('active')) _debugWidget.classList.remove('active');
+                    if( !_debugWidgetLouncher.classList.contains('active')) _debugWidgetLouncher.classList.add('active');
+                }
+
+                function openDebugWidget() {
+                    if(!_debugWidget.classList.contains('active')) _debugWidget.classList.add('active');
+                    if(_debugWidgetLouncher.classList.contains('active')) _debugWidgetLouncher.classList.remove('active');
+                    updateRoomsList();
+                }
+
+                function updateRoomsList() {
+                    loadRoomsList(function (roomList) {
+                        _debugSideBar.innerHTML = '';
+                        var roomListEl = document.createElement('UL');
+                        roomListEl.className = 'Streams_webrtc_debug_room_list';
+                        var i, room;
+                        for(i = 0; room = roomList[i]; i++) {
+                            var roomItem = document.createElement('LI');
+                            roomItem.innerHTML = room.roomName + ', ' + room.date;
+                            roomItem.dataset.startTimeDate = room.startTimeDate;
+                            roomItem.dataset.roomName = room.roomName;
+                            roomItem.addEventListener('click', updateParticipantsList)
+                            if(room.startTimeTs == _options.conferenceStartedTime && room.roomName == _options.roomId) {
+                                roomItem.classList.add('Streams_webrtc_debug_active_room');
+                            }
+                            roomListEl.appendChild(roomItem);
+                        }
+                        _debugSideBar.appendChild(roomListEl);
+                    });
+                }
+
+                function updateParticipantsList(e) {
+                    var roomItem = e.target;
+                    var roomName = roomItem.dataset.roomName;
+                    var startTimeDate = roomItem.dataset.startTimeDate;
+                    var existingList = roomItem.querySelector('UL')
+                    var participantsListEl = existingList != null ? existingList : document.createElement('UL');
+                    var localParticipant = WebRTCconference.localParticipant();
+
+                    participantsListEl.className = 'Streams_webrtc_debug_participant_list';
+                    loadParticipantList(roomName, startTimeDate, function (participantsList) {
+                        participantsListEl.innerHTML = '';
+
+                        var i, participant;
+                        for(i = 0; participant = participantsList[i]; i++) {
+                            var participantItem = document.createElement('LI');
+                            participantItem.innerHTML = participant.username + ' (' + participant.connectedDateTime + ')';
+                            if(participant.userId + '\t' + participant.connectedTime == localParticipant.identity) {
+                                participantItem.innerHTML += ' (me)';
+                            }
+                            participantItem.dataset.roomName = roomName;
+                            participantItem.dataset.callStartedDate = startTimeDate;
+                            participantItem.dataset.userId = participant.userId;
+                            participantItem.dataset.connectedTime = participant.connectedTime;
+                            participantItem.addEventListener('click', updateOutputLog)
+                            if(checkIfUserOnline(participant.userId, participant.connectedTime)){
+                                participantItem.classList.add('Streams_webrtc_debug_active_participant');
+                            }
+
+                            participantsListEl.appendChild(participantItem);
+                        }
+                        if(!roomItem.contains(participantsListEl)) roomItem.appendChild(participantsListEl);
+                    });
+                }
+
+                function checkIfUserOnline(userId, connectionTime) {
+                    var participants = WebRTCconference.roomParticipants();
+                    for (var i in participants) {
+                        if(participants[i].identity == userId + '\t' + connectionTime) return true;
+                    }
+                    return false;
+                }
+
+                function updateOutputLog(e) {
+                    e.stopPropagation();
+                    var participantItem = e.target;
+                    var roomName = participantItem.dataset.roomName;
+                    var callStartedDate = participantItem.dataset.callStartedDate;
+                    var userId = participantItem.dataset.userId;
+                    var connectedTime = participantItem.dataset.connectedTime;
+
+                    getLogByUser(roomName, callStartedDate, userId, connectedTime, function (logs) {
+                        printLog(logs);
+                    });
+                }
+
+                function printLog(logs) {
+                    _debugOutput.innerHTML = '';
+                    var i, log;
+                    for(i = 0; log = logs[i]; i++) {
+                        var logItem = document.createElement('DIV');
+                        logItem.className = 'Streams_webrtc_debug_log_item';
+                        if(log.type == 'error') {
+                            logItem.classList.add('Streams_webrtc_debug_log_error');
+                        }
+                        var logItemType = document.createElement('DIV');
+                        logItemType.className = 'Streams_webrtc_debug_log_type';
+                        logItemType.innerHTML = log.type;
+                        var logContent = document.createElement('DIV');
+                        logContent.className = 'Streams_webrtc_debug_log_contet';
+                        logContent.innerHTML = log.log.constructor === Array ? log.log.join(', ') : JSON.stringify(log.log);
+
+                        logItem.appendChild(logItemType);
+                        logItem.appendChild(logContent);
+                        _debugOutput.appendChild(logItem);
+                    }
+
+                }
+
+                function loadRoomsList(callback) {
+                    Q.req("Streams/webrtc", ["logRoomList"], function (err, response) {
+                        var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                        if (msg) {
+                            return Q.alert(msg);
+                        }
+
+                        callback(response.slots.logRoomList);
+                    }, {
+                        method: 'get',
+                        fields: {
+                            adapter: _options.mode
+                        }
+                    });
+                }
+
+                function loadParticipantList(roomId, startTimeDate, callback) {
+                    Q.req("Streams/webrtc", ["logParticipantList"], function (err, response) {
+                        var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                        if (msg) {
+                            return Q.alert(msg);
+                        }
+
+                        callback(response.slots.logParticipantList);
+                    }, {
+                        method: 'get',
+                        fields: {
+                            roomId: roomId,
+                            startTimeDate: startTimeDate,
+                            adapter: _options.mode
+                        }
+                    });
+                }
+
+                function getLogByUser(roomId, callStartedDate, userId, startTime, callback) {
+                    console.log('getLogByUser', roomId, callStartedDate, userId, startTime)
+                    var userIdAndStartTime;
+                    if(typeof userId == 'undefined' && typeof startTime == 'undefined') {
+                        userIdAndStartTime = Q.Users.loggedInUser.id + '\t' + _options.startTime;
+                    } else {
+                        userIdAndStartTime = userId + '\t' + startTime;
+                    }
+
+                    if(typeof roomId == 'undefined') {
+                        roomId = _options.roomId;
+                    }
+
+                    if(_options.roomId == null || _options.roomPublisherId == null) return;
+                    Q.req("Streams/webrtc", ["log"], function (err, response) {
+                        var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                        if (msg) {
+                            return Q.alert(msg);
+                        }
+
+                        callback(JSON.parse(response.slots.log));
+                    }, {
+                        method: 'get',
+                        fields: {
+                            roomId: roomId,
+                            publisherId: _options.roomPublisherId,
+                            startTime: callStartedDate,
+                            participant: userIdAndStartTime,
+                            adapter: _options.mode
+                        }
+                    });
+                }
+
+                return {
+                    createDebugOutput:createDebugOutput,
+                    openDebugWidget:openDebugWidget,
+                    loadParticipantList:loadParticipantList
+                }
+            }())
+
+            if(debug) {
+                debugWidget.createDebugOutput();
+            }
+
+            function flattenArray(mArr) {
+                return [].concat.apply([], mArr);
+            }
+
+            function flattenObject(source) {
+                var target = {};
+                var keys = Object.keys(source);
+                if(keys.length == 0) {
+                    keys = [];
+                    for(var p in source) {
+                        keys.push(p);
+                        if(p == 10) break;
+                    }
+                }
+                keys.forEach(k => {
+                    if (source[k] !== null && (typeof source[k] === 'object' || typeof source[k] === 'function' || Array.isArray(source[k]))) {
+                        let constName = source[k].constructor.name;
+                        if(constName == 'HTMLDivElement') {
+                            target[k] = source[k].outerHTML;
+                        } else if(constName == 'Text') {
+                            target[k] = source[k].innerText;
+                        } else if(constName == 'DOMRect') {
+                            target[k] = flattenObject(source[k]);
+                        } else {
+                            target[k] = source[k].constructor.name;
+                        }
+                    } else {
+                        target[k] = source[k];
+                    }
+
+                });
+                return target;
+            }
+
+
+            function logInfo(args, isWebRTCLog) {
+                try {
+                    var i, argument;
+                    var consoleArr = [];
+
+                    for (i = 0; argument = args[i]; i++){
+
+                        if (typeof argument == 'string') {
+                            consoleArr.push(argument);
+                        } else if (typeof argument == 'object') {
+                            consoleArr.push( flattenObject(argument));
+                        } else if (typeof argument == 'array') {
+                            consoleArr.push(flattenArray(argument));
+                        } else {
+                            consoleArr.push(argument);
+                        }
+                    }
+
+                    var logObj = {
+                        'type': isWebRTCLog == null ? "WebRTC.js" : "app.js",
+                        'log':consoleArr
+                    };
+                    _infoLog.push(logObj);
+
+                } catch (e) {
+                    var logObj = {
+                        'type': isWebRTCLog == null ? "WebRTC.js" : "app.js",
+                        'log':args
+                    };
+                    _infoLog.push(logObj);
+                }
+            }
+
+            function logError(errMessage) {
+            	var logObj = {
+            		'type': "error",
+					'log':errMessage
+				};
+                _infoLog.push(logObj);
+            }
+
+            function getInfoLog() {
+            	return _infoLog;
+            }
+
+            function sendReportToServer() {
+            	if(_infoLog.length == 0 || _options.roomId == null || _options.roomPublisherId == null) return;
+                Q.req("Streams/webrtc", ["updateLog"], function (err, response) {
+                    var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                    if (msg) {
+                        return Q.alert(msg);
+                    }
+
+                }, {
+                    method: 'put',
+                    fields: {
+                        log: JSON.stringify(_infoLog.splice(0, _infoLog.length)),
+                        roomId: _options.roomId,
+                        publisherId: _options.roomPublisherId,
+                        participant: Q.Users.loggedInUser.id + '\t' + _options.startTime,
+                        adapter: _options.mode
+                    }
+                });
+            }
+
+            return {
+                logInfo: logInfo,
+                logError: logError,
+                getInfoLog: getInfoLog,
+                sendReportToServer: sendReportToServer,
+                debugWidget: function() {return debugWidget;},
+                isiOSwebView: function() {return _isiOSWebView;}
+            }
+        }());
+		window.webrtcDebug = appDebug;
 
 		/**
 		 * Update page URI. Usually is used when new room is created.
@@ -304,7 +756,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				}
 			}
 
-			WebRTCconference.event.on('joined', function (participant) {
+            WebRTCconference.event.on('log', function (params) {
+                appDebug.logInfo(params, true);
+            });
+
+            WebRTCconference.event.on('joined', function (participant) {
 				if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
 				setRealName(participant);
 				setUserAvatar(participant);
@@ -938,6 +1394,28 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		}
 
 		/**
+		 * Updates start time it if call was just started started
+		 * @method checkOrUpdateStarTime
+		 */
+		function checkOrUpdateStarTime(roomId) {
+			Q.req("Streams/webrtc", ["updateStartTime"], function (err, response) {
+				var msg = Q.firstErrorMessage(err, response && response.errors);
+
+				if (msg) {
+					return Q.alert(msg);
+				}
+
+			}, {
+				method: 'put',
+				fields: {
+                    adapter: _options.mode,
+                    roomId: roomId,
+					publisherId: _options.roomPublisherId,
+				}
+			})
+		}
+
+		/**
 		 * Init conference using own node.js server for signalling process.
 		 * @method initWithStreams
 		 * @param {Object} [turnCredentials] Creadentials that are needed to use TURN server.
@@ -948,9 +1426,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		function initWithNodeServer(socketServer, turnCredentials) {
 			log('initWithNodeServer');
 			var initConference = function(){
-				if(typeof window.WebRTCconferenceLib == 'undefined') return;
+                log('initWithNodeServer: initConference');
+
+                if(typeof window.WebRTCconferenceLib == 'undefined') return;
 				var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
-				log('initWithNodeServer: roomId = ' + roomId)
+				log('initWithNodeServer: initConference: roomId = ' + roomId)
 
 				WebRTCconference = window.WebRTCconferenceLib({
 					mode:'node',
@@ -958,7 +1438,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					nodeServer: socketServer,
 					roomName: roomId,
 					sid: Q.Users.loggedInUser.id,
-					username:  Q.Users.loggedInUser.id + '\t' + Date.now(),
+					username:  Q.Users.loggedInUser.id + '\t' + _options.startTime,
 					video: false,
 					audio: false,
 					startWith: _options.startWith,
@@ -969,8 +1449,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				});
 
 				bindConferenceEvents();
+                log('initWithNodeServer: initConference: start init');
 
 				WebRTCconference.init(function (app) {
+                    log('initWithNodeServer: initConference: inited');
 					updateParticipantData();
 					connectionState.hide();
 					_debugTimer.loadEnd = performance.now();
@@ -994,7 +1476,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						),
 						{},
 						function () {
-							_controls = this.element;
+                            log('initWithNodeServer: initConference: activate controls');
+
+                            _controls = this.element;
 							_controlsTool = this;
 							screensRendering.updateLayout();
 
@@ -1046,8 +1530,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				return null;
 			};
 			if(findScript('{{Streams}}/js/tools/webrtc/app.js')) {
-				initConference();
+                log('initWithNodeServer: app.js exists');
+
+                initConference();
 			} else {
+                log('initWithNodeServer: add app.js');
 				Q.addScript([
 					"{{Streams}}/js/tools/webrtc/app.js",
 				], function () {
@@ -4038,9 +4525,21 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				_debugTimer.loadStart = performance.now();
 
-				overrideDefaultOptions(options);
+                _options.startTime = Date.now();
+
+                appDebug.sendReportsInterbal = setInterval(function () {
+                    appDebug.sendReportToServer();
+                }, 3000);
+                overrideDefaultOptions(options);
 				Q.Text.get("Streams/content", function (err, result) {
-					_textes = result;
+                    log('start: translation loaded');
+
+                    _textes = result;
+
+                    if(appDebug.isiOSwebView()) {
+                        return Q.alert(_textes.webrtc.notices.openInBrowserAlert != null ? _textes.webrtc.notices.openInBrowserAlert : 'Open link in Safari browser to join the conference.' );
+                    }
+
 					onConnect();
 				})
 
@@ -4053,6 +4552,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 					if (Q.info.isCordova && Q.info.isAndroid()) {
+                        log('start: onConnect: isCordova && isAndroid');
 
 						var showInstructions = function(kind) {
 							var instructionsPermissionDialog = document.createElement('DIV');
@@ -4124,82 +4624,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						}
 
 					} else if(Q.info.isCordova && Q.info.platform === 'ios'){
-						publishMediaTracks({video: startWith.video, audio: startWith.audio});
-					} else if (Q.info.isCordova && Q.info.isAndroid()) {
-
-						var showInstructions = function(kind) {
-							var instructionsPermissionDialog = document.createElement('DIV');
-							instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
-							var dialogList = document.createElement('OL');
-							dialogList.className = 'Streams_webrtc_instructions_dialog';
-							dialogList.innerHTML = `<div>` + _textes.webrtc.androidInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
-									<li>` +  Q.getObject("webrtc.androidInstructionsDialog.point1", _textes) + `</li>
-									<li>` +  Q.getObject("webrtc.androidInstructionsDialog.point2", _textes) + `</li>
-									<li>` + _textes.webrtc.androidInstructionsDialog.point3.interpolate({communityName: Q.Users.communityName}) + `</li>
-									<li>` +  Q.getObject("webrtc.androidInstructionsDialog.point4", _textes) + `</li>
-									<li>` + _textes.webrtc.androidInstructionsDialog.point5.interpolate({kind: kind}) + `</li>`;
-							instructionsPermissionDialog.appendChild(dialogList);
-							Q.Dialogs.push({
-								title:  Q.getObject("webrtc.androidInstructionsDialog.dialogTitle", _textes),
-								className: 'Streams_webrtc_devices_dialog',
-								content: instructionsPermissionDialog,
-								apply: true
-							});
-						}
-
-						var requestMicPermission = function (callback) {
-							cordova.plugins.permissions.checkPermission("android.permission.RECORD_AUDIO", function(result){
-								if(!result.hasPermission) {
-									cordova.plugins.permissions.requestPermission("android.permission.RECORD_AUDIO", function(result){
-										if(!result.hasPermission) {
-											showInstructions('audio');
-										} else {
-											if(callback != null) callback();
-										}
-									}, function(){console.error("Permission is not granted");})
-								} else {
-									if(callback != null) callback();
-								}
-							}, function(){console.error("Permission is not granted");})
-						}
-
-						var requestCameraPermission = function (callback) {
-							cordova.plugins.permissions.checkPermission("android.permission.CAMERA", function(result){
-								if(!result.hasPermission) {
-									cordova.plugins.permissions.requestPermission("android.permission.CAMERA", function(result){
-										if(!result.hasPermission) {
-											showInstructions('video');
-										} else {
-											if(callback != null) callback();
-										}
-									}, function(){console.error("Permission is not granted");})
-								} else {
-									//Permission granted
-									if(callback != null) callback();
-								}
-							}, function(){console.error("Permission is not granted");})
-						}
-
-						if(startWith.audio && startWith.video) {
-							requestMicPermission(function () {
-								requestCameraPermission(function () {
-									publishMediaTracks({video: startWith.video, audio: startWith.audio});
-								});
-							});
-						} else if (startWith.audio) {
-							requestMicPermission(function () {
-								publishMediaTracks({video: startWith.video, audio: startWith.audio});
-							});
-						} else if (startWith.video) {
-							requestCameraPermission(function () {
-								publishMediaTracks({video: startWith.video, audio: startWith.audio});
-							});
-						}
-
-					} else if(Q.info.isCordova && Q.info.platform === 'ios'){
-						publishMediaTracks({video: startWith.video, audio: startWith.audio});
+                        log('start: onConnect: isCordova && isiOS');
+                        publishMediaTracks({video: startWith.video, audio: startWith.audio});
 					} else if(!((Q.info.isMobile || Q.info.isTablet) && !Q.info.isCordova)) {
-						publishMediaTracks({video: startWith.video, audio: startWith.audio});
+                        log('start: onConnect: isDesktop');
+
+                        publishMediaTracks({video: startWith.video, audio: startWith.audio});
 						if(_options.mediaDevicesDialog != null && (startWith.audio || startWith.video)) {
 							setTimeout(function () {
 								if(_options.streams != null) return;
@@ -4216,7 +4646,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					}
 
 					if(_options.leaveOtherActiveRooms) {
-						if(Q.Streams.WebRTCRooms != null && Q.Streams.WebRTCRooms.length != 0) {
+                        log('start: onConnect: leave existing rooms');
+                        if(Q.Streams.WebRTCRooms != null && Q.Streams.WebRTCRooms.length != 0) {
 							for(var r in Q.Streams.WebRTCRooms) {
 								Q.Streams.WebRTCRooms[r].stop();
 							}
@@ -4263,6 +4694,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							if (msg) {
 								return Q.alert(msg);
 							}
+                            log('createRoomStream: joined/connected');
 
 							roomId = (response.slots.room.roomId).replace('Streams/webrtc/', '');
 							var turnCredentials = response.slots.room.turnCredentials;
@@ -4271,15 +4703,21 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 							overrideDefaultOptions(response.slots.room.options);
 
+                            checkOrUpdateStarTime(roomId);
+
 							//var connectUrl = updateQueryStringParameter(location.href, 'Q.rid', roomId);
 							//connectUrl = updateQueryStringParameter(connectUrl, 'Q.pid', asPublisherId);
 							Q.Streams.get(asPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
-								_roomStream = stream;
+                                log('createRoomStream: joined/connected: pull stream');
+
+                                _roomStream = stream;
 								if(Q.Streams.WebRTCRooms == null){
 									Q.Streams.WebRTCRooms = [];
 								}
 
 								Q.Streams.WebRTCRooms.push(webRTCInstance);
+
+                                _options.conferenceStartedTime = stream.getAttribute('startTime');
 								log('start: createOrJoinRoomStream: mode ' + _options.mode)
 								bindStreamsEvents(stream);
 								if(_options.mode === 'twilio') {
@@ -4306,7 +4744,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 					if(roomId != null && _options.roomPublisherId != null) {
 						if((Q.info.isMobile || Q.info.isTablet)  && !Q.info.isCordova) {
-							var permissionPopupTimeout;
+                            log('start: onConnect: connect from mobile/tablet browser');
+
+                            var permissionPopupTimeout;
 							var premissionGrantedCallback = function () {
 								if(permissionPopupTimeout != null) clearTimeout(permissionPopupTimeout);
 								createOrJoinRoomStream(roomId, _options.roomPublisherId);
@@ -4318,7 +4758,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 								showPermissionsDialogue({video: startWith.video, audio: true}, premissionGrantedCallback);
 							}, _options.mediaDevicesDialog.timeout != null ? _options.mediaDevicesDialog.timeout : 2000);
 						} else {
-							createOrJoinRoomStream(roomId, _options.roomPublisherId);
+                            log('start: onConnect: regular connect');
+
+                            createOrJoinRoomStream(roomId, _options.roomPublisherId);
 						}
 					}
 				}
@@ -4395,28 +4837,38 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			return WebRTCconference;
 		}
 
-		function log(text, arg1, arg2, arg3, arg4) {
-			if(!_debug) return;
+		function log(text) {
+			if(_debug === false) return;
 			var args = Array.prototype.slice.call(arguments);
-
 			var params = [];
-			for(var a in args) {
-				if(a == 0 && typeof text == 'string') continue;
-				params.push(args[a]);
-			}
 
 			if (window.performance) {
-				var now = (window.performance.now() / 1000).toFixed(3);
-				if(args.length > 1) {
-					console.log(now + ": " + text, params);
-				} else {
-					console.log(now + ": " + text);
-				}
-
+                var now = (window.performance.now() / 1000).toFixed(3);
+                params.push(now + ": " + args.splice(0, 1));
+                params = params.concat(args);
+                console.log.apply(console, params);
 			} else {
-				console.log(text);
+                params = params.concat(args);
+                console.log.apply(console, params);
 			}
+            appDebug.logInfo(params);
 		}
+
+        function determineBrowser(ua) {
+            var ua= navigator.userAgent, tem,
+                M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+            if(/trident/i.test(M[1])){
+                tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
+                return 'IE '+(tem[1] || '');
+            }
+            if(M[1]=== 'Chrome'){
+                tem= ua.match(/\b(OPR|Edge?)\/(\d+)/);
+                if(tem!= null) return tem.slice(1).join(' ').replace('OPR', 'Opera').replace('Edg ', 'Edge ');
+            }
+            M= M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+            if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
+            return M;
+        }
 
 		var webRTCInstance = {
 			start: start,

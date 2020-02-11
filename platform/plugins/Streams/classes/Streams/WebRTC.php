@@ -53,4 +53,17 @@ abstract class Streams_WebRTC
         return $token->iceServers[1];
     }
 
+    function updateStartTime($publisherId, $roomId) {
+        $streamName = "Streams/webrtc/$roomId";
+        $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
+        $endTime = $stream->getAttribute('endTime');
+        if($endTime != null && time() > $endTime) {
+            $stream->setAttribute('startTime', time());
+            $stream->clearAttribute('endTime');
+            $stream->save();
+        }
+
+        return $stream;
+    }
+
 };

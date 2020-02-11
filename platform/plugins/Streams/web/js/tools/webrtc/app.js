@@ -42,7 +42,7 @@ window.WebRTCconferenceLib = function app(options){
 		disconnectTime: 3000,
 		turnCredentials: null,
 		username: null,
-		debug: false,
+		debug: null,
 		liveStreaming: {},
 		TwilioInstance: null
 	};
@@ -6335,6 +6335,7 @@ window.WebRTCconferenceLib = function app(options){
 		}
 
 		function joinRoom(streams, mediaDevicesList) {
+            log('initOrConnectWithNodeJs: joinRoom');
 			app.eventBinding.socketRoomJoined((streams != null ? streams : []));
 			if(mediaDevicesList != null) app.conferenceControl.loadDevicesList(mediaDevicesList);
 			app.event.dispatch('joined', localParticipant);
@@ -7053,7 +7054,9 @@ window.WebRTCconferenceLib = function app(options){
 				reconnectionAttempts: 5
 			});
 			socket.on('connect', function () {
-				app.event.dispatch('connected');
+                log('initWithNodeJs: connected');
+
+                app.event.dispatch('connected');
 
 				if(app.state == 'reconnecting') {
 					app.state = 'connected';
@@ -7063,7 +7066,7 @@ window.WebRTCconferenceLib = function app(options){
 					return;
 				}
 
-				enableiOSDebug();
+				//enableiOSDebug();
 				log('initWithNodeJs: socket: connected: ' + socket.connected + ',  app.state: ' +  app.state);
 				if(localParticipant == null) {
 					localParticipant = new Participant();
@@ -7086,26 +7089,31 @@ window.WebRTCconferenceLib = function app(options){
 
 			});
 			socket.on('connect_error', function(e) {
-				//socket.connect();
-				app.event.dispatch('connectError');
+                log('initWithNodeJs: connect_error');
+                app.event.dispatch('connectError');
 				console.log('Connection failed');
 				console.error(e);
 			});
 
 			socket.on('reconnect_failed', function(e) {
+                log('initWithNodeJs: reconnect_failed');
 				console.log(e)
 				app.event.dispatch('reconnectError');
 			});
 			socket.on('reconnect_attempt', function(e) {
+                log('initWithNodeJs: reconnect_attempt');
 				console.log('reconnect_attempt', e)
 				app.state = 'reconnecting';
 				app.event.dispatch('reconnectAttempt', e);
 			});
 		}
 
-		if(findScript('socket.io.js') && typeof io != 'undefined') {
+        log('initWithNodeJs: find socket.io');
+
+        if(findScript('socket.io.js') && typeof io != 'undefined') {
 			connect();
 		} else {
+            log('initWithNodeJs: add socket.io');
 
 			var url = 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'
 			var xhr = new XMLHttpRequest();
@@ -7214,28 +7222,25 @@ window.WebRTCconferenceLib = function app(options){
 		return M;
 	}
 
-	function log(text, arg1, arg2, arg3, arg4) {
-		if(!options.debug) return;
-		var args = Array.prototype.slice.call(arguments);
+    function log(text) {
+        if(options.debug === false) return;
+        var args = Array.prototype.slice.call(arguments);
+        var params = [];
 
-		var params = [];
-		for(var a in args) {
-			if(a == 0 && typeof text == 'string') continue;
-			params.push(args[a]);
-		}
+        if (window.performance) {
+            var now = (window.performance.now() / 1000).toFixed(3);
+            params.push(now + ": " + args.splice(0, 1));
+            params = params.concat(args);
+            console.log.apply(console, params);
+        } else {
+            params.push(text);
+            params = params.concat(args);
+            console.log.apply(console, params);
+        }
 
-		if (window.performance) {
-			var now = (window.performance.now() / 1000).toFixed(3);
-			if(args.length > 1) {
-				console.log(now + ": " + text, params);
-			} else {
-				console.log(now + ": " + text);
-			}
+        app.event.dispatch('log', params);
 
-		} else {
-			console.log(text);
-		}
-	}
+    }
 
 	return app;
 }

@@ -20,7 +20,6 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
         if (empty($publisherId)) {
             throw new Q_Exception_RequiredField(array('field' => 'publisherId'));
         }
-
         $created = false;
         if (!empty($roomId)) {
             $streamName = "Streams/webrtc/$roomId";
@@ -36,9 +35,8 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
             $roomId = substr($stream->name, strlen('Streams/webrtc/'));
             $created = true;
         }
-
-		$stream->setAttribute('startTime', time());
-		$stream->changed();
+        $stream->setAttribute('startTime', time());
+        $stream->save();
 
 		$socketServerHost = Q_Config::get('Streams', 'webrtc', 'socketServerHost', null);
 		$socketServerHost = trim(str_replace('/(http\:\/\/) || (https\:\/\/)/', '', $socketServerHost), '/');
