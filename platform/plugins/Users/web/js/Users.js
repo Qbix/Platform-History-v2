@@ -1585,7 +1585,7 @@
 					.click(function () {
 						if (location.search.includes('handoff=yes')) {
 							var scheme = Q.getObject([Q.info.platform, Q.info.app, 'scheme'], Users.apps);
-							document.location.href = scheme + '#facebookLogin=1';
+							location.href = scheme + '#facebookLogin=1';
 						} else {
 							Users.initFacebook(function () {
 								Users.Facebook.usingPlatforms = usingPlatforms;
@@ -2423,7 +2423,7 @@
 			var fields = _getParams(url.split('#')[1]);
 			if (fields['Q.Users.newSessionId']) {
 				Q.cookie('Q_sessionId', fields['Q.Users.newSessionId']);
-				document.location.reload();
+				location.reload();
 			}
 		} else if (querystring.includes('facebookLogin=1')) {
 			Users.login({using: 'facebook'});

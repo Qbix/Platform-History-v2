@@ -399,8 +399,10 @@ class Q_Session
 
 	static function destroy()
 	{
-		session_destroy();
-		self::clear();
+		if (is_callable('session_status') and session_status() === PHP_SESSION_ACTIVE) {
+			session_destroy();
+			self::clear();
+		}
 		if (ini_get("session.use_cookies")) {
 		    // note - we no use session_get_cookie_params();
 		    Q_Response::clearCookie(self::name());

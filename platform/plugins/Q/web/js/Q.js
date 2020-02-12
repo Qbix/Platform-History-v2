@@ -5627,7 +5627,7 @@ Q.Page.beforeUnload = Q.Event.factory(null, [""]);
  * Use this function to set handlers for when the page is loaded or unloaded.
  * @static
  * @method page
- * @param {String} page "$Module/$action" or a more specific URI string, or "" to handle all pages
+ * @param {String|Array|Object} page "$Module/$action" or a more specific URI string, or "" to handle all pages
  * @param {Function} handler A function to run after the page loaded.
  *  If the page is already currently loaded (i.e. it is the latest loaded page)
  *  then the handler is run right away.

@@ -106,6 +106,7 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 							return alert(msg);
 						}
 
+						info.labelTitle = labelTitle;
 						Q.handle(state.onInvited, tool, [selectedLabel, info]);
 					});
 				});

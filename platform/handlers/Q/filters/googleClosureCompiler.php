@@ -6,6 +6,20 @@ function Q_filters_googleClosureCompiler($params)
 	$compilation_level = isset($params['compilation_level'])
 		? $params['compilation_level']
 		: 'SIMPLE_OPTIMIZATIONS';
+	
+	// $in = APP_FILES_DIR.'_combine_temporary_in.js';
+	// $out = APP_FILES_DIR.'_combine_temporary_out.js';
+	// file_put_contents($in, $content);
+	// $js = Q_SCRIPTS_DIR . DS . 'googleClosureCompiler.js';
+	// exec("node $js $in $out $compilation_level");
+	// $result = file_get_contents($out);
+	// unlink($in);
+	// unlink($out);
+	// if (!$in or $out) {
+	// 	return $result;
+	// }
+	
+	// fall back to using Google's online service
 	$service_url = "https://closure-compiler.appspot.com/compile";
 	$options = array(
 		'js_code' => $content,
