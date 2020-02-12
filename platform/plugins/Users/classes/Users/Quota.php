@@ -173,7 +173,7 @@ class Users_Quota extends Base_Users_Quota
 		$this->save();
 		if ($this->get('begun')) {
 			$shards = array_keys($this->get('shards'));
-			Users_Quota::commit($quota->transactionKey())->execute(false, $shards);
+			Users_Quota::commit()->execute(false, $shards);
 		}
 		return true;
 	}
