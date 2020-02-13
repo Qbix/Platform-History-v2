@@ -238,7 +238,6 @@ html .Q_inplace_tool_fieldinput { padding: 0px; }
 .Q_cordova.Q_ios.Q_mobile #page { top: 70px; }
 .Q_cordova.Q_ios.Q_mobile.Q_notch #status_background {
 	background: black;
-    height: constant(safe-area-inset-bottom);
     height: env(safe-area-inset-top);
 }
 .Q_cordova.Q_ios.Q_mobile.Q_notch #dashboard_slot {
