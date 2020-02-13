@@ -230,7 +230,7 @@ function _polyfill() {
 	  }
 	  return;
 	}
-	Q.addScript('{{Q}}/polyfills/IntersectionObserver.js');
+	Q.addScript('{{Q}}/js/polyfills/IntersectionObserver.js');
 }
 
 _polyfill();
