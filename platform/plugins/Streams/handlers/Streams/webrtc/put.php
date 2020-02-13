@@ -40,6 +40,71 @@ function Streams_webrtc_put($params = array()) {
 		$result = $webrtc->endRoom($publisherId, $roomId);
 
 		Q_Response::setSlot("endRoom", $result);
-	}
+	} else if(Q_Request::slotName('updateLog')) {
+        $publisherId = Q::ifset($params, 'publisherId', null);
+        $roomId = Q::ifset($params, 'roomId', null);
+        $participant = Q::ifset($params, 'participant', null);
+        $toSave = Q::ifset($params, 'log', null);
 
+        if($toSave == null) {
+            Q_Response::setSlot("updateLog", null);
+            return;
+        }
+
+        $logsDirectory = str_replace('/', DS, Q_Config::get('Q', 'logs', 'directory', 'Q/logs'));
+        $logsPath = (defined('APP_FILES_DIR') ? APP_FILES_DIR : Q_FILES_DIR).DS.$logsDirectory.DS.'webrtc';
+
+        $streamName = "Streams/webrtc/$roomId";
+        $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
+        $startTime = date('YmdHis', $stream->getAttribute('startTime'));
+
+        $folderName = $roomId . '_' . $startTime;
+
+        $path = $logsPath . DS . $folderName;
+        $participantInfo = preg_split('/\t/', $participant);
+        $filename = $participantInfo[0] . '_' . $participantInfo[1] . '.log';
+        $mask = umask(0000);
+
+        if (!file_exists($path)) {
+            if (!@mkdir($path, 0777, true)) {
+                throw new Q_Exception_FilePermissions(array('action' => 'create', 'filename' => $path, 'recommendation' => ' Please set the app files directory to be writable.'));
+            }
+        }
+
+        $toSave = filesize($path.DS.$filename) ? ',' . PHP_EOL . trim($toSave,"[]") : trim($toSave,"[]");
+        file_put_contents($path.DS.$filename, $toSave, FILE_APPEND);
+
+        removeOldLogs($logsPath);
+        umask($mask);
+
+		Q_Response::setSlot("updateLog", $toSave);
+	}
+}
+
+function deleteDir($dir) {
+    $it = new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS);
+    $files = new RecursiveIteratorIterator($it,
+        RecursiveIteratorIterator::CHILD_FIRST);
+    foreach($files as $file) {
+        if ($file->isDir()){
+            rmdir($file->getRealPath());
+        } else {
+            unlink($file->getRealPath());
+        }
+    }
+    rmdir($dir);
+}
+//remove logs that are older than 7 days
+function removeOldLogs($logsPath) {
+    $dirs = array_filter(glob($logsPath . '/*'), 'is_dir');
+    foreach ($dirs as $dir) {
+        $dirInfo = pathinfo($dir);
+        $logsDate = explode('_', $dirInfo['basename'])[1];
+        $timestump = strtotime($logsDate);
+        $path = $dirInfo['dirname'] . DS . $dirInfo['basename'] ;
+
+        if(time() - $timestump > 604800) {
+            deleteDir($path);
+        }
+    }
 }
