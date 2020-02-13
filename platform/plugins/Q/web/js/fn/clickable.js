@@ -39,6 +39,7 @@
  * @param {Q.Event} [options.onPress] onPress occurs after the user begins a click or tap.
  * @param {Q.Event} [options.onRelease] onRelease occurs after the user ends the click or tap. This event receives parameters (event, overElement)
  * @param {Q.Event} [options.afterRelease] afterRelease occurs after the user ends the click or tap and the release animation completed. This event receives parameters (evt, overElement)
+ * @param {Q.Event} [options.onClick] This is triggered after the user completes a click or tap over the element.
  * @param {Number} [options.cancelDistance=15] cancelDistance
  *
  */
@@ -450,8 +451,13 @@ function _Q_clickable(o) {
 	preventDefault: false,
 	stopPropagation: true,
 	onPress: new Q.Event(),
-	onRelease: new Q.Event(),
-	afterRelease: new Q.Event()
+	onRelease: new Q.Event(function (event, overElement) {
+		if (overElement) {
+			Q.handle(this.state.onClick, this, [event]);
+		}
+	}),
+	afterRelease: new Q.Event(),
+	onClick: new Q.Event()
 },
 
 {
