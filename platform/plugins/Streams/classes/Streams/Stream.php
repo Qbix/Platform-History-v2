@@ -2000,7 +2000,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$module = reset($parts);
 		$default = end($parts);
 		$text = Q_Text::get("$module/content", $options);
-		$displayType = Q::ifset($text, 'Streams', 'types', $streamType, 'displayType', null);
+		$displayType = Q::ifset($text, 'types', $streamType, 'displayType', null);
 		return $displayType ? $displayType : $default;
 	}
 	
