@@ -53,33 +53,6 @@ function _Streams_participants(options) {
 		tool.$elements[this.state.userId] = $(this.element);
 	});
 
-	// observe dom elements for mutation
-	tool.domObserver = new MutationObserver(function (mutations) {
-		mutations.forEach(function(mutation) {
-			if (mutation.type !== 'childList') {
-				return;
-			}
-
-			setTimeout(tool.adjustInterval(), 0);
-
-			return;
-
-			if (mutation.removedNodes.length) {
-				tool.adjustInterval();
-			}
-
-			mutation.addedNodes.forEach(function(addedElement) {
-				var avatarTool = Q.Tool.from(addedElement, 'Users/avatar');
-
-				if (Q.typeOf(avatarTool) !== 'Q.Tool') {
-					return;
-				}
-
-				tool.adjustInterval();
-			});
-		});
-	});
-
 	tool.refresh();
 },
 
@@ -116,6 +89,11 @@ function _Streams_participants(options) {
 },
 
 {
+	Q: {
+		beforeRemove: function () {
+			clearInterval(this.adjustInterval);
+		}
+	},
 	/**
 	 * Refresh the participants tool
 	 * @method refresh
@@ -190,8 +168,7 @@ function _Streams_participants(options) {
 		});
 
 		$te.addClass('Streams_participants_loading');
-		Q.Streams.get(state.publisherId, state.streamName,
-		function (err, stream, extra) {
+		Q.Streams.get(state.publisherId, state.streamName, function (err, stream, extra) {
 			var fem = Q.firstErrorMessage(err);
 			if (fem) {
 				return console.warn("Streams/participants: " + fem);
@@ -222,20 +199,20 @@ function _Streams_participants(options) {
 				});
 			}
 			_continue();
+
 		}, {participants: state.maxLoad});
 		return true;
 		
 		function _continue() {
 			tool.stateChanged('count');
-			
-			tool.domObserver.observe(tool.$avatars[0], {childList: true});
+
+			tool.adjustInterval = setInterval(_adjustInterval, 500);
 
 			if (state.max) {
 				tool.$max.text('/' + state.max);
 			}
 			
-			Q.Streams.retainWith(tool)
-			.get(state.publisherId, state.streamName, function () {
+			Q.Streams.retainWith(tool).get(state.publisherId, state.streamName, function () {
 				var stream = this;
 				stream.onMessage("Streams/join")
 				.set(function (stream, message, messages) {
@@ -261,8 +238,7 @@ function _Streams_participants(options) {
 						if (err) return;
 						var $element = tool.$invite = $(html).insertBefore(tool.$avatars);
 						var filter = '.Streams_inviteTrigger';
-						$(tool.element)
-						.on(Q.Pointer.fastclick, filter, function () {
+						$(tool.element).on(Q.Pointer.fastclick, filter, function () {
 							var options = Q.extend({
 								identifier: si.identifier
 							}, si);
@@ -323,36 +299,34 @@ function _Streams_participants(options) {
 				Q.removeElement($element[0], true);
 			}
 		}
-	},
-	adjustInterval: function () {
-		var tool = this;
-		var state = this.state;
-		var $te = $(this.element);
-		var w = $te.width();
-		var pm = tool.$pc.outerWidth(true) - tool.$pc.width();
-		if (state.showSummary) {
-			w = w - tool.$summary.outerWidth(true);
-		}
-		if (state.showControls) {
-			w = w - tool.$controls.outerWidth(true);
-			var $pcw = tool.$pc.innerWidth();
-			var avatarsWidth = 0;
-			$(".Streams_participants_invite", tool.$pc).add(".Users_avatar_tool", tool.$avatars).each(function () {
-				avatarsWidth += $(this).outerWidth(true);
-			});
-			var overflowed = ($pcw > 0 && avatarsWidth > $pcw);
-			if (overflowed) {
-				if (!state.overflowed) {
-					$te.addClass('Q_overflowed');
-				}
-			} else {
-				$te.removeClass('Q_overflowed');
-				tool.$blanks.show();
-			}
-			state.overflowed = overflowed;
-		}
 
-		tool.$pc.width(w - pm);
+		function _adjustInterval() {
+			var w = $te.width();
+			var pm = tool.$pc.outerWidth(true) - tool.$pc.width();
+			if (state.showSummary) {
+				w = w - tool.$summary.outerWidth(true);
+			}
+			if (state.showControls) {
+				w = w - tool.$controls.outerWidth(true);
+				var $pcw = tool.$pc.innerWidth();
+				var avatarsWidth = 0;
+				$(".Streams_participants_invite", tool.$pc).add(".Users_avatar_tool", tool.$avatars).each(function () {
+					avatarsWidth += $(this).outerWidth(true);
+				});
+				var overflowed = ($pcw > 0 && avatarsWidth > $pcw);
+				if (overflowed) {
+					if (!state.overflowed) {
+						$te.addClass('Q_overflowed');
+					}
+				} else {
+					$te.removeClass('Q_overflowed');
+					tool.$blanks.show();
+				}
+				state.overflowed = overflowed;
+			}
+
+			tool.$pc.width(w - pm);
+		}
 	}
 }
 
