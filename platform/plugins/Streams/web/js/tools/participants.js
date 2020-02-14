@@ -163,6 +163,32 @@ function _Streams_participants(options) {
 		tool.$blanks = $("<span class='Streams_participants_blanks' />")
 			.appendTo(tool.$pc);
 
+		// set expand icon click event
+		tool.$pei.plugin('Q/clickable').on(Q.Pointer.fastclick, function () {
+			if (state.expanded) {
+				tool.$blanks.show();
+				$te.animate({height: state.originalHeight}, function () {
+					state.expanded = false;
+				});
+				tool.$pei.attr({
+					src: Q.url('{{Q}}/img/expand.png'),
+					alt: 'expand'
+				});
+				tool.$pet.html('See All');
+			} else {
+				state.originalHeight = $te.height();
+				tool.$blanks.hide();
+				$te.animate({height: tool.$pc.height()}, function () {
+					state.expanded = true;
+				});
+				tool.$pei.attr({
+					src: Q.url('{{Q}}/img/collapse.png'),
+					alt: 'collapse'
+				});
+				tool.$pet.html('Fewer');
+			}
+		});
+
 		$te.addClass('Streams_participants_loading');
 		Q.Streams.get(state.publisherId, state.streamName,
 		function (err, stream, extra) {
@@ -318,31 +344,6 @@ function _Streams_participants(options) {
 			if (overflowed) {
 				if (!state.overflowed) {
 					$te.addClass('Q_overflowed');
-					tool.$pei.plugin('Q/clickable').on(Q.Pointer.fastclick, function () {
-						if (state.expanded) {
-							tool.$blanks.show();
-							$te.animate({
-								height: state.originalHeight
-							});
-							tool.$pei.attr({
-								src: Q.url('{{Q}}/img/expand.png'),
-								alt: 'expand'
-							});
-							tool.$pet.html('See All');
-						} else {
-							state.originalHeight = $te.height();
-							tool.$blanks.hide();
-							$te.animate({
-								height: tool.$pc.height()
-							});
-							tool.$pei.attr({
-								src: Q.url('{{Q}}/img/collapse.png'),
-								alt: 'collapse'
-							});
-							tool.$pet.html('Fewer');
-						}
-						state.expanded = !state.expanded;
-					});
 				}
 			} else {
 				$te.removeClass('Q_overflowed');

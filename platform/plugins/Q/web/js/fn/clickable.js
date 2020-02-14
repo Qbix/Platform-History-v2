@@ -197,10 +197,10 @@ function _Q_clickable(o) {
 		triggers.on('dragstart', function () {
 			return false;
 		}).on(Q.Pointer.start, function (evt) {
-			if (Q.info.isTouchscreen) {
+			/*if (Q.info.isTouchscreen) {
 				evt.preventDefault();
 				evt.stopPropagation();
-			}
+			}*/
 			if ($this.css('pointer-events') === 'none') return;
 			if (_started) return;
 			_started = this;
@@ -368,8 +368,6 @@ function _Q_clickable(o) {
 					scale.started = false;
 				}
 			}
-
-			return false;
 		}).on(Q.Pointer.click, function (evt) {
 			if (state.preventDefault) {
 				evt.preventDefault();
