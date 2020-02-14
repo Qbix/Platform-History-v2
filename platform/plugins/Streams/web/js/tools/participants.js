@@ -52,9 +52,35 @@ function _Streams_participants(options) {
 	tool.forEachChild('Users/avatar', function () {
 		tool.$elements[this.state.userId] = $(this.element);
 	});
-	
+
+	// observe dom elements for mutation
+	tool.domObserver = new MutationObserver(function (mutations) {
+		mutations.forEach(function(mutation) {
+			if (mutation.type !== 'childList') {
+				return;
+			}
+
+			setTimeout(tool.adjustInterval(), 0);
+
+			return;
+
+			if (mutation.removedNodes.length) {
+				tool.adjustInterval();
+			}
+
+			mutation.addedNodes.forEach(function(addedElement) {
+				var avatarTool = Q.Tool.from(addedElement, 'Users/avatar');
+
+				if (Q.typeOf(avatarTool) !== 'Q.Tool') {
+					return;
+				}
+
+				tool.adjustInterval();
+			});
+		});
+	});
+
 	tool.refresh();
-	
 },
 
 {
@@ -90,12 +116,6 @@ function _Streams_participants(options) {
 },
 
 {
-	Q: {
-		beforeRemove: function () {
-			clearInterval(this.adjustInterval);
-		}
-	},
-	
 	/**
 	 * Refresh the participants tool
 	 * @method refresh
@@ -106,8 +126,7 @@ function _Streams_participants(options) {
 		var state = tool.state;
 		var $te = $(tool.element);
 		tool.$elements = {};
-		state.avatarsWidth = 0;
-		
+
 		if (state.rendered) {
 			tool.$count = $('.Streams_participants_count', $te);
 			tool.$max = $('.Streams_participants_max', $te);
@@ -183,9 +202,8 @@ function _Streams_participants(options) {
 		function _continue() {
 			tool.stateChanged('count');
 			
-			tool.adjustInterval = setInterval(_adjustInterval, 500);
-			_adjustInterval();
-			
+			tool.domObserver.observe(tool.$avatars[0], {childList: true});
+
 			if (state.max) {
 				tool.$max.text('/' + state.max);
 			}
@@ -241,7 +259,7 @@ function _Streams_participants(options) {
 							}
 							$(window).on(Q.Pointer.end, _pointerEndHandler);
 						});
-						state.avatarsWidth += $element.outerWidth(true);
+
 						if (si.clickable) {
 							$('img', $element).plugin(
 								'Q/clickable', Q.extend({
@@ -256,57 +274,7 @@ function _Streams_participants(options) {
 				);
 			});
 		}
-		
-		function _adjustInterval() {
-			var w = $te.width();
-			var pm = tool.$pc.outerWidth(true) - tool.$pc.width();
-			if (state.showSummary) {
-				w = w - tool.$summary.outerWidth(true);
-			}
-			if (state.showControls) {
-				w = w - tool.$controls.outerWidth(true);
-				var $tew = $te.width();
-				var overflowed = (state.avatarsWidth > $tew && $tew > 0);
-				if (overflowed) {
-					if (!state.overflowed) {
-						$te.addClass('Q_overflowed');
-						var $expand = $te.find('.Streams_participants_expand');
-						tool.$pei.plugin('Q/clickable').on(Q.Pointer.fastclick, function () {
-							if (state.expanded) {
-								tool.$blanks.show();
-								$te.animate({
-									height: state.originalHeight
-								});
-								tool.$pei.attr({
-									src: Q.url('{{Q}}/img/expand.png'),
-									alt: 'expand'
-								});
-								tool.$pet.html('See All');
-							} else {
-								state.originalHeight = $te.height();
-								tool.$blanks.hide();
-								$te.animate({
-									height: tool.$pc.height()
-								});
-								tool.$pei.attr({
-									src: Q.url('{{Q}}/img/collapse.png'),
-									alt: 'collapse'
-								});
-								tool.$pet.html('Fewer');
-							}
-							state.expanded = !state.expanded;
-						});
-					}
-				} else {
-					$te.removeClass('Q_overflowed');
-					tool.$blanks.show();
-				}
-				state.overflowed = overflowed;
-			}
 
-			tool.$pc.width(w - pm);
-		}
-		
 		function _addAvatar(userId, prepend) {
 			var $element = $(Q.Tool.setUpElement(
 				'div', 
@@ -321,21 +289,69 @@ function _Streams_participants(options) {
 			if (false !== Q.handle(state.filter, tool, [$element])) {
 				$element[prepend?'prependTo':'appendTo']($e).activate();
 			}
-			if (userId) {
-				state.avatarsWidth += $element.outerWidth(true);
-			}
-			_adjustInterval();
 		}
 		
 		function _removeAvatar(userId) {
 			var $element = tool.$elements[userId];
-			if (userId) {
-				state.avatarsWidth -= $element.outerWidth(true);
-			}
 			if ($element) {
 				Q.removeElement($element[0], true);
 			}
 		}
+	},
+	adjustInterval: function () {
+		var tool = this;
+		var state = this.state;
+		var $te = $(this.element);
+		var w = $te.width();
+		var pm = tool.$pc.outerWidth(true) - tool.$pc.width();
+		if (state.showSummary) {
+			w = w - tool.$summary.outerWidth(true);
+		}
+		if (state.showControls) {
+			w = w - tool.$controls.outerWidth(true);
+			var $pcw = tool.$pc.innerWidth();
+			var avatarsWidth = 0;
+			$(".Streams_participants_invite", tool.$pc).add(".Users_avatar_tool", tool.$avatars).each(function () {
+				avatarsWidth += $(this).outerWidth(true);
+			});
+			var overflowed = ($pcw > 0 && avatarsWidth > $pcw);
+			if (overflowed) {
+				if (!state.overflowed) {
+					$te.addClass('Q_overflowed');
+					tool.$pei.plugin('Q/clickable').on(Q.Pointer.fastclick, function () {
+						if (state.expanded) {
+							tool.$blanks.show();
+							$te.animate({
+								height: state.originalHeight
+							});
+							tool.$pei.attr({
+								src: Q.url('{{Q}}/img/expand.png'),
+								alt: 'expand'
+							});
+							tool.$pet.html('See All');
+						} else {
+							state.originalHeight = $te.height();
+							tool.$blanks.hide();
+							$te.animate({
+								height: tool.$pc.height()
+							});
+							tool.$pei.attr({
+								src: Q.url('{{Q}}/img/collapse.png'),
+								alt: 'collapse'
+							});
+							tool.$pet.html('Fewer');
+						}
+						state.expanded = !state.expanded;
+					});
+				}
+			} else {
+				$te.removeClass('Q_overflowed');
+				tool.$blanks.show();
+			}
+			state.overflowed = overflowed;
+		}
+
+		tool.$pc.width(w - pm);
 	}
 }
 
