@@ -26,7 +26,7 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.forId] defaults to ""
  * @param {float} [$fields.value] defaults to 0
  * @param {float} [$fields.weight] defaults to 1
- * @param {string|Db_Expression} [$fields.updatedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to new Db_Expression("current_timestamp()")
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -67,7 +67,7 @@ Q.mixin(Base, Row);
 /**
  * @property updatedTime
  * @type String|Db.Expression
- * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * @default new Db_Expression("current_timestamp()")
  * 
  */
 
@@ -474,7 +474,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","14,4","",false],true,"","CURRENT_TIMESTAMP"];
+return [["timestamp","14,4","",false],true,"","current_timestamp()"];
 };
 
 /**

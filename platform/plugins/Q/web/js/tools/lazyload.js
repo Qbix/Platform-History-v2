@@ -30,55 +30,52 @@ Q.Tool.define('Q/lazyload', function (options) {
 
 	var Elp = Element.prototype;
 	
-	if (!window.IntersectionObserver) {
-		console.warn("Q/lazyload tool: need to use IntersectionObserver polyfill");
-		return; // do nothing, this is an older browser
-	}
+	Q.ensure(window.IntersectionObserver, _polyfill, function () {
+		// Observe whatever is on the page already
+		tool.observer = _createObserver(tool, tool.element);
+		tool.observe(tool.prepare(tool.element, false));
 
-	// Observe whatever is on the page already
-	tool.observer = _createObserver(tool, tool.element);
-	tool.observe(tool.prepare(tool.element, false));
+		// Override innerHTML
 
-	// Override innerHTML
+		var originalSet = Object.getOwnPropertyDescriptor(Elp, 'innerHTML').set;
+		var originalGet = Object.getOwnPropertyDescriptor(Elp, 'innerHTML').get;
 
-	var originalSet = Object.getOwnPropertyDescriptor(Elp, 'innerHTML').set;
-	var originalGet = Object.getOwnPropertyDescriptor(Elp, 'innerHTML').get;
-
-	Object.defineProperty(Elp, 'innerHTML', {
-		set: function (html) {
-			var element = document.createElement('div');
-			originalSet.call(element, html);
-			var found = false;
-			Q.each(state.handlers, function (name, info) {
-				var elements = element.querySelectorAll
-					? Array.from(element.querySelectorAll(info.selector))
-					: [];
-				if (elements.length) {
-					found = true;
-					return false;
+		Object.defineProperty(Elp, 'innerHTML', {
+			set: function (html) {
+				var element = document.createElement('div');
+				originalSet.call(element, html);
+				var found = false;
+				Q.each(state.handlers, function (name, info) {
+					var elements = element.querySelectorAll
+						? Array.from(element.querySelectorAll(info.selector))
+						: [];
+					if (elements.length) {
+						found = true;
+						return false;
+					}
+				});
+				if (found) {
+					html = originalGet.call(element);
 				}
-			});
-			if (found) {
-				html = originalGet.call(element);
-			}
-			originalSet.call(this, html);
-			if (found) {
-				tool.observe(tool.prepare(this, true));
-			}
-			return html;
-		},
-		get: originalGet
-	});
+				originalSet.call(this, html);
+				if (found) {
+					tool.observe(tool.prepare(this, true));
+				}
+				return html;
+			},
+			get: originalGet
+		});
 
-	Q.each(['insertBefore', 'appendChild'], function (i, fn) {
-		var orig = Elp[fn];
-		Elp[fn] = function (element) {
-			if (!element) {
-				return;
-			}
-			tool.observe(tool.prepare(element, true));
-			return orig.apply(this, arguments);
-		};
+		Q.each(['insertBefore', 'appendChild'], function (i, fn) {
+			var orig = Elp[fn];
+			Elp[fn] = function (element) {
+				if (!element) {
+					return;
+				}
+				tool.observe(tool.prepare(element, true));
+				return orig.apply(this, arguments);
+			};
+		});
 	});
 
 },
@@ -211,7 +208,7 @@ function _createObserver(tool, container) {
 	}, tool.state.observerOptions);
 }
 
-function _polyfill() {
+function _polyfill(callback) {
 	// Exit early if all IntersectionObserver and IntersectionObserverEntry
 	// features are natively supported.
 	if ('IntersectionObserver' in window &&
@@ -228,9 +225,9 @@ function _polyfill() {
 	      }
 	    });
 	  }
-	  return;
+	  return Q.handle(callback);
 	}
-	Q.addScript('{{Q}}/polyfills/IntersectionObserver.js');
+	Q.addScript('{{Q}}/js/polyfills/IntersectionObserver.js', callback);
 }
 
 _polyfill();

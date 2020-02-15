@@ -97,6 +97,7 @@
         },
         "text": {
             "commentedOn": "commented on",
+			"startedCallIn": "started a call in",
             "in": "in",
             "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {

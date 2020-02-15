@@ -734,6 +734,13 @@ Q.Tool.define('Streams/chat', function(options) {
 			tool.renderNotification(Q.first(messages));
 		}, tool);
 
+		// new user left
+		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/subscribe').set(function(stream, message) {
+			$te.find('.Streams_chat_subscription').attr({
+				'data-subscribed': 'true'
+			})
+		}, tool);
+
 		/*
 		 * activate the composer
 		 */

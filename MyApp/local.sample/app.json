@@ -2,7 +2,7 @@
 	"Q": {
 		"localNotYetConfigured": "TODO: REMOVE THIS ENTRY WHEN YOU ARE DONE WITH THE LOCAL CONFIGURATION",
 		"web": {
-			"appRootUrl": "http://gmba.local/Coinect",
+			"appRootUrl": "http://gmba.local/MyApp",
 			"controllerSuffix": ""
 		},
 		"node" : {
@@ -39,9 +39,9 @@
 	"Db": {
 		"connections": {
 			"*": {
-				"dsn": "mysql:host=127.0.0.1;dbname=Coinect",
-				"username": "Coinect",
-				"password": "0wdzLx0_rp2rV62yKknC",
+				"dsn": "mysql:host=127.0.0.1;dbname=MyApp",
+				"username": "MyApp",
+				"password": "somepassword",
 				"driver_options": { "3": 2 }	
 			},
 			"Users": { "prefix": "users_" },

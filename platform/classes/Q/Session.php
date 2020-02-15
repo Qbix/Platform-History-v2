@@ -256,9 +256,9 @@ class Q_Session
 		$name = Q_Session::name();
 		$id = isset($_REQUEST[$name])
 			? $_REQUEST[$name]
-			: isset($_COOKIE[$name])
+			: (isset($_COOKIE[$name])
 				? $_COOKIE[$name]
-				: null;
+				: null);
 
 		$isNew = false;
 		if (!self::isValidId($id)) {
