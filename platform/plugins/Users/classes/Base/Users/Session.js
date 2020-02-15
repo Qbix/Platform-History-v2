@@ -32,7 +32,7 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.appId] defaults to null
  * @param {string} [$fields.version] defaults to null
  * @param {string} [$fields.formFactor] defaults to null
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  */
 function Base (fields) {
@@ -110,7 +110,7 @@ Q.mixin(Base, Row);
 /**
  * @property insertedTime
  * @type String|Db.Expression
- * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * @default new Db_Expression("current_timestamp()")
  * 
  */
 /**
@@ -755,7 +755,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","'mobile','tablet','desktop'","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","'mobile','tablet','desktop'","",false],false,"","current_timestamp()"];
 };
 
 /**

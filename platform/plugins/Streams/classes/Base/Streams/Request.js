@@ -30,7 +30,7 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.permissions] defaults to null
  * @param {string} [$fields.state] defaults to "pending"
  * @param {string} [$fields.actions] defaults to null
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
  * @param {string|Db_Expression} [$fields.expireTime] defaults to null
  */
 function Base (fields) {
@@ -96,7 +96,7 @@ Q.mixin(Base, Row);
 /**
  * @property insertedTime
  * @type String|Db.Expression
- * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * @default new Db_Expression("current_timestamp()")
  * saved on shard of publisherId
  */
 /**
@@ -668,7 +668,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","255","",false],false,"","current_timestamp()"];
 };
 
 /**

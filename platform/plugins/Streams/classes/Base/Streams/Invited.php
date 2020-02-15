@@ -19,7 +19,7 @@
  * @param {string} [$fields.userId] defaults to ""
  * @param {string} [$fields.token] defaults to ""
  * @param {string} [$fields.state] defaults to "pending"
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  * @param {string|Db_Expression} [$fields.expireTime] defaults to null
  */
@@ -46,7 +46,7 @@ abstract class Base_Streams_Invited extends Db_Row
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
-	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * @default new Db_Expression("current_timestamp()")
 	 * 
 	 */
 	/**
@@ -224,11 +224,17 @@ abstract class Base_Streams_Invited extends Db_Row
 	 * @method begin
 	 * @static
 	 * @param {string} [$lockType=null] First parameter to pass to query->begin() function
+	 * @param {string} [$transactionKey=null] Pass a transactionKey here to "resolve" a previously
+	 *  executed that began a transaction with ->begin(). This is to guard against forgetting
+	 *  to "resolve" a begin() query with a corresponding commit() or rollback() query
+	 *  from code that knows about this transactionKey. Passing a transactionKey that doesn't
+	 *  match the latest one on the transaction "stack" also generates an error.
+	 *  Passing "*" here matches any transaction key that may have been on the top of the stack.
 	 * @return {Db_Query_Mysql} The generated query
 	 */
-	static function begin($lockType = null)
+	static function begin($lockType = null, $transactionKey = null)
 	{
-		$q = self::db()->rawQuery('')->begin($lockType);
+		$q = self::db()->rawQuery('')->begin($lockType, $transactionKey);
 		$q->className = 'Streams_Invited';
 		return $q;
 	}
@@ -238,11 +244,17 @@ abstract class Base_Streams_Invited extends Db_Row
 	 * You'll have to specify shards yourself when calling execute().
 	 * @method commit
 	 * @static
+	 * @param {string} [$transactionKey=null] Pass a transactionKey here to "resolve" a previously
+	 *  executed that began a transaction with ->begin(). This is to guard against forgetting
+	 *  to "resolve" a begin() query with a corresponding commit() or rollback() query
+	 *  from code that knows about this transactionKey. Passing a transactionKey that doesn't
+	 *  match the latest one on the transaction "stack" also generates an error.
+	 *  Passing "*" here matches any transaction key that may have been on the top of the stack.
 	 * @return {Db_Query_Mysql} The generated query
 	 */
-	static function commit()
+	static function commit($transactionKey = null)
 	{
-		$q = self::db()->rawQuery('')->commit();
+		$q = self::db()->rawQuery('')->commit($transactionKey);
 		$q->className = 'Streams_Invited';
 		return $q;
 	}
@@ -450,7 +462,7 @@ return array (
   ),
   1 => false,
   2 => '',
-  3 => 'CURRENT_TIMESTAMP',
+  3 => 'current_timestamp()',
 );			
 	}
 
