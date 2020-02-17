@@ -3477,6 +3477,10 @@ Q.getter.THROTTLING = 3;
 Q.chain = function (callbacks) {
 	var result = null;
 	Q.each(callbacks, function (i, callback) {
+		if (Q.typeOf(callback) !== 'function') {
+			return;
+		}
+
 		var prevResult = result;
 		result = function () {
 			var args = Array.prototype.slice.call(arguments, 0);
