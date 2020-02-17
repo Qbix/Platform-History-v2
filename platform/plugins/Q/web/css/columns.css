@@ -167,3 +167,9 @@ html.Q_ios.Q_standalone .Q_columns_title {
 .Q_columns_title *{
 	user-select: none;
 }
+
+.Q_notMobile .Q_columns_stretchFirstColumn[data-columns='0'],
+.Q_notMobile .Q_columns_stretchFirstColumn[data-columns='0'] .Q_columns_container,
+.Q_notMobile .Q_columns_stretchFirstColumn[data-columns='0'] .Q_column_0 {
+	width: 100% !important;
+}

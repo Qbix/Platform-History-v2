@@ -39,6 +39,7 @@ var dataKey_opening = 'opening';
  *  @param {Object}  [options.handlers] Pairs of columnName: handler where the handler can be a function or a string, in which you assign a function to Q.exports .
  *  @param {Boolean} [options.fullscreen] Whether to use fullscreen mode on mobile phones, using document to scroll instead of relying on possibly buggy "overflow" CSS implementation. Defaults to true on Android stock browser, false everywhere else.
  *  @param {Boolean} [options.hideBackgroundColumns=true] Whether to hide background columns on mobile (perhaps improving browser rendering).
+ *  @param {Boolean} [options.stretchFirstColumn=true] If true, stretch first column to whole page width if no other columns exit.
  *  @param {Boolean|String} [options.pagePushUrl] if this is true and the url of the column
  *    is specified, then Q.Page.push() is called with this URL. You can also pass a string here,
  *    to override the url (in case, for example, the url of the column is not specified, because it is rendered client-side).
@@ -52,11 +53,16 @@ var dataKey_opening = 'opening';
 Q.Tool.define("Q/columns", function(options) {
 	var tool = this;
 	var state = tool.state;
+	var $toolElement = $(tool.element);
 	options = options || {};
 
 	//state.triggers = [];
 	prepareColumns(tool);
-	
+
+	if (state.stretchFirstColumn) {
+		$toolElement.addClass("Q_columns_stretchFirstColumn");
+	}
+
 	Q.addStylesheet('{{Q}}/css/columns.css', function () {
 		if (state.title === undefined) {
 			state.title = $('<div />').append('<img class="Q_columns_loading" src="'
@@ -68,7 +74,7 @@ Q.Tool.define("Q/columns", function(options) {
 		if (Q.info.isMobile && state.closeFromTitleClick) {
 			selector = '.Q_columns_title';
 		}
-		$(tool.element).on(Q.Pointer.fastclick, selector, function(){
+		$toolElement.on(Q.Pointer.fastclick, selector, function(){
 			var index = $(this).closest('.Q_columns_column').data(dataKey_index);
 			if (state.locked) return;
 			if (index) {
@@ -84,7 +90,7 @@ Q.Tool.define("Q/columns", function(options) {
 
 		if (Q.info.isAndroidStock) {
 			var w = Q.Pointer.windowWidth();
-			$(tool.element).parents().andSelf().each(function () {
+			$toolElement.parents().andSelf().each(function () {
 				$(this).data('Q/columns maxWidth', this.style.maxWidth)
 					.css('max-width', w);
 			});
@@ -92,7 +98,7 @@ Q.Tool.define("Q/columns", function(options) {
 
 		// Call setControls whenever a controls slot or a parent element is activated
 		Q.onActivate.set(function (element) {
-			var isContained = !!$(tool.element).closest(element).length;
+			var isContained = !!$toolElement.closest(element).length;
 			for (var i=0, l=state.columns.length; i<l; ++i) {
 				var column = tool.column(i);
 				if (!column) continue;
@@ -139,6 +145,7 @@ Q.Tool.define("Q/columns", function(options) {
 		clickable: null
 	},
 	handlers: {},
+	stretchFirstColumn: false,
 	title: undefined,
 	column: undefined,
 	columns: [],
@@ -154,8 +161,15 @@ Q.Tool.define("Q/columns", function(options) {
 	textfill: null,
 	fullscreen: Q.info.useFullscreen,
 	hideBackgroundColumns: true,
-	beforeOpen: new Q.Event(),
-	beforeClose: new Q.Event(),
+	beforeOpen: new Q.Event(function () {
+		var $toolElement = $(this.element);
+		var columns = $toolElement.attr('data-columns');
+		$toolElement.attr('data-columns', isNaN(columns) ? 0 : columns+1);
+	}),
+	beforeClose: new Q.Event(function () {
+		var max = this.max();
+		$(this.element).attr('data-columns', max ? max-1 : 0);
+	}),
 	onOpen: new Q.Event(function () {
 		Q.Pointer.stopHints();
 	}, 'Q/columns'),
