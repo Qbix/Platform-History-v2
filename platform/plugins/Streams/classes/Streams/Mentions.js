@@ -10,7 +10,7 @@ var Streams_Message = Q.require('Streams/Message');
 var Streams_Avatar = Q.require('Streams/Avatar');
 
 Q.on('init', function () {
-	Streams_Message.addHandler('Streams/chat', 'Streams/chat/message', function (obj, callback) {
+	Streams_Message.addHandler('', 'Streams/chat/message', function (obj, callback) {
 		var message = obj.message;
 		var byUserId = message.fields.byUserId;
 		var content = message.fields.content;
