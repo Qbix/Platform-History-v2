@@ -81,8 +81,8 @@
             "InvitingYou": "I am inviting you to {{title}}",
             "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
             "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-			"YOUAREINVITED": "YOU ARE INVITED!",
-			"AcceptInvite": "Accept Invite"
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
             "content": "You have been invited to {{title}}. Please tap {{url}}"
@@ -97,7 +97,7 @@
         },
         "text": {
             "commentedOn": "commented on",
-			"startedCallIn": "started a call in",
+            "startedCallIn": "started a call in",
             "in": "in",
             "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
@@ -322,11 +322,11 @@
             "description": "a real time video\/audio call"
         }
     },
-	"menu": {
-		"placeholder": "type page title",
-		"ModTab": "Modify Item",
-		"Save": "Save",
-		"Delete": "Delete",
-		"Submenu": "Submenu"
-	}
+    "menu": {
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
+        "Submenu": "Submenu"
+    }
 }

@@ -80,7 +80,9 @@
             "PleaseVisitLink": "مندرجہ ذیل لنک ملاحظہ کریں:",
             "InvitingYou": "میں آپ کو {{title}} میں مدعو کر رہا ہوں",
             "HasInvitedYou": "{{displayName}} نے آپ {{title}} کو مدعو کیا ہے",
-            "HasMentionedYou": "{{999} نے &quot;{{title}}&quot; میں آپ کا تذکرہ کیا ہے"
+            "HasMentionedYou": "{{999} نے &quot;{{title}}&quot; میں آپ کا تذکرہ کیا ہے",
+            "YOUAREINVITED": "آپ کو مدعو کر رہے ہیں!",
+            "AcceptInvite": "دعوت قبول کریں"
         },
         "sms": {
             "content": "آپ {{title}} کو مدعو کیا گیا ہے. برائے کرم {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "آپ نے یہ کال فیس بک میں نشر کرنا بند کردی",
             "linkCopiedToCb": "لنک کاپی کلپ بورڈ میں کیا گیا",
             "codeCopiedToCb": "کلپ بورڈ میں کوڈ کاپی کیا گیا",
-            "userHasNoVideo": "شریک کے پاس کوئی ویڈیو نہیں ہے"
+            "userHasNoVideo": "شریک کے پاس کوئی ویڈیو نہیں ہے",
+            "openInBrowserAlert": "کانفرنس میں شامل ہونے کے لئے سفاری براؤزر میں لنک کھولیں۔"
         },
         "settingsPopup": {
             "webCamera": "ویب کیمرا",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "ایک نیا {{999} has ہے",
                 "byAvatar": "by {999} by کے ذریعہ شامل کردہ"
-            }
+            },
+            "startedCallIn": "کال شروع کی"
         }
+    },
+    "menu": {
+        "placeholder": "ٹائپ پیج ٹائٹل",
+        "ModTab": "آئٹم میں ترمیم کریں",
+        "Save": "محفوظ کریں",
+        "Delete": "حذف کریں",
+        "Submenu": "سب میینو"
     }
 }

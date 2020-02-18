@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Επισκεφθείτε τον ακόλουθο σύνδεσμο:",
             "InvitingYou": "Σας καλώ να {{title}}",
             "HasInvitedYou": "{{displayName}} σάς προσκάλεσε να {{title}}",
-            "HasMentionedYou": "{{displayName}} σας ανέφερε σε &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} σας ανέφερε σε &quot;{{title}}&quot;",
+            "YOUAREINVITED": "ΚΑΛΕΙΣΤΕ!",
+            "AcceptInvite": "Αποδοχή πρόσκλησης"
         },
         "sms": {
             "content": "Έχετε λάβει πρόσκληση στο {{title}}. Πατήστε {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Σταματήσατε να μεταδίδετε αυτήν την κλήση στο Facebook",
             "linkCopiedToCb": "Η σύνδεση αντιγράφηκε στο πρόχειρο",
             "codeCopiedToCb": "Κωδικός αντιγραφεί στο πρόχειρο",
-            "userHasNoVideo": "Ο συμμετέχων δεν έχει βίντεο"
+            "userHasNoVideo": "Ο συμμετέχων δεν έχει βίντεο",
+            "openInBrowserAlert": "Άνοιγμα συνδέσμου στο πρόγραμμα περιήγησης Safari για να συμμετάσχετε στο συνέδριο."
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "έχει ένα νέο {{instructions.fromDisplayType}}",
                 "byAvatar": "προστέθηκε από {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "ξεκίνησε μια κλήση"
         }
+    },
+    "menu": {
+        "placeholder": "πληκτρολογήστε τον τίτλο σελίδας",
+        "ModTab": "Τροποποίηση στοιχείου",
+        "Save": "Αποθηκεύσετε",
+        "Delete": "Διαγράφω",
+        "Submenu": "Υπομενού"
     }
 }

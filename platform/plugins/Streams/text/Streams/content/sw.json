@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Tafadhali tembelea kiungo kinachofuata:",
             "InvitingYou": "Ninakualika {{title}}",
             "HasInvitedYou": "{{displayName}} amekualika {{title}}",
-            "HasMentionedYou": "{{displayName}} amekutaja katika &quot;{{1000]}"
+            "HasMentionedYou": "{{displayName}} amekutaja katika &quot;{{1000]}",
+            "YOUAREINVITED": "UNAJIRI!",
+            "AcceptInvite": "Kubali Mialiko"
         },
         "sms": {
             "content": "Umealikwa {{title}}. Tafadhali piga {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Uliacha kutangaza simu hii kwenye Facebook",
             "linkCopiedToCb": "Kiunga kilichonakiliwa kwa clipboard",
             "codeCopiedToCb": "Nambari iliyonakiliwa kwa clipboard",
-            "userHasNoVideo": "Mshiriki hana video"
+            "userHasNoVideo": "Mshiriki hana video",
+            "openInBrowserAlert": "Fungua kiunga katika kivinjari cha Safari ili ujiunge na mkutano huo."
         },
         "settingsPopup": {
             "webCamera": "Kamera ya Wavuti",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "ina mpya {{instructions.fromDisplayType}}",
                 "byAvatar": "imeongezwa na {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "alianzisha simu ndani"
         }
+    },
+    "menu": {
+        "placeholder": "jina ukurasa ukurasa",
+        "ModTab": "Badilisha jambo",
+        "Save": "Okoa",
+        "Delete": "Futa",
+        "Submenu": "Submenu"
     }
 }

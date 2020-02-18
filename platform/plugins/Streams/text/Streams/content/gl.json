@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Visite a seguinte ligazón:",
             "InvitingYou": "Estou invitado a {{title}}",
             "HasInvitedYou": "{{displayName}} convidoute a {{title}}",
-            "HasMentionedYou": "{{displayName}} mencionoute en &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} mencionoute en &quot;{{title}}&quot;",
+            "YOUAREINVITED": "VOSTEDE É INVITADO!",
+            "AcceptInvite": "Acepta Invitar"
         },
         "sms": {
             "content": "Foi invitado a {{title}}. Toca {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Deixaches de emitir esta chamada en Facebook",
             "linkCopiedToCb": "Ligazón copiada ao portapapeis",
             "codeCopiedToCb": "Código copiado ao portapapeis",
-            "userHasNoVideo": "O participante non ten ningún vídeo"
+            "userHasNoVideo": "O participante non ten ningún vídeo",
+            "openInBrowserAlert": "Abrir ligazón no navegador Safari para participar na conferencia."
         },
         "settingsPopup": {
             "webCamera": "Cámara web",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "ten un novo {{instructions.fromDisplayType}}",
                 "byAvatar": "engadido por {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "comezou unha chamada"
         }
+    },
+    "menu": {
+        "placeholder": "escriba o título da páxina",
+        "ModTab": "Modificar elemento",
+        "Save": "Gardar",
+        "Delete": "Eliminar",
+        "Submenu": "Submenú"
     }
 }

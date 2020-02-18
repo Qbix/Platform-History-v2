@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Ga naar de volgende link:",
             "InvitingYou": "Ik nodig u uit voor {{title}}",
             "HasInvitedYou": "{{displayName}} heeft u uitgenodigd voor {{title}}",
-            "HasMentionedYou": "{{displayName}} heeft je genoemd in &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} heeft je genoemd in &quot;{{title}}&quot;",
+            "YOUAREINVITED": "JE BENT UITGENODIGD!",
+            "AcceptInvite": "Uitnodiging accepteren"
         },
         "sms": {
             "content": "U bent uitgenodigd voor {{title}}. Tik op {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Je bent gestopt met het uitzenden van deze oproep op Facebook",
             "linkCopiedToCb": "Link gekopieerd naar klembord",
             "codeCopiedToCb": "Code gekopieerd naar klembord",
-            "userHasNoVideo": "Deelnemer heeft geen video"
+            "userHasNoVideo": "Deelnemer heeft geen video",
+            "openInBrowserAlert": "Open de link in de Safari-browser om deel te nemen aan de conferentie."
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "heeft een nieuwe {{instructions.fromDisplayType}}",
                 "byAvatar": "toegevoegd door {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "is een oproep gestart"
         }
+    },
+    "menu": {
+        "placeholder": "typ paginatitel",
+        "ModTab": "Artikel wijzigen",
+        "Save": "Opslaan",
+        "Delete": "Delete",
+        "Submenu": "submenu"
     }
 }

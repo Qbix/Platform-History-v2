@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Visite a seguinte ligazón:",
             "InvitingYou": "Estou invitado a {{title}}",
             "HasInvitedYou": "{{displayName}} convidoute a {{title}}",
-            "HasMentionedYou": "{{displayName}} mencionoute en &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} mencionoute en &quot;{{title}}&quot;",
+            "YOUAREINVITED": "VOSTEDE É INVITADO!",
+            "AcceptInvite": "Acepta Invitar"
         },
         "sms": {
             "content": "Foi invitado a {{title}}. Toca {{url}}"
@@ -93,19 +95,27 @@
         "mobile": {
             "alert": "As invitacións son enviadas a partir do noso número, que os teus amigos aínda non recoñecen. Fai un seguimento cun texto rápido para que saiban de que che veu a invitación, pedíndolles que fagan clic na ligazón.",
             "confirm": "As invitacións son enviadas a partir do noso número, que os teus amigos aínda non recoñecen. Quere facer un seguimento cun texto rápido para que saiban que a invitación chegou de ti, pedíndolles que fagan clic na ligazón.",
-            "check": "Hey, acabo de enviarte unha invitación á aplicación {{app}}. Comproba o teu sms e fai clic na ligazón."
+            "check": "Hey, acabo de enviarte unha invitación á aplicación {{app}}. Comproba o teu sms e fai clic na ligazón.",
+            "CheckYourMobile": "Comprobe SMS e siga instrucións."
         },
         "email": {
             "alert": "As invitacións son enviadas desde o noso dominio, que os teus amigos aínda non recoñecen. Fai un seguimento cun texto rápido para que saiban de que che veu a invitación, pedíndolles que fagan clic na ligazón.",
             "confirm": "As invitacións son enviadas desde o noso dominio, que os teus amigos aínda non recoñecen. Quere facer un seguimento cun texto rápido para que saiban que a invitación chegou de ti, pedíndolles que fagan clic na ligazón.",
             "subject": "¿Recibiu unha invitación?",
-            "body": "Hey, acabo de enviarte unha invitación á aplicación {{app}}. Comproba o teu correo electrónico e fai clic na ligazón alí."
+            "body": "Hey, acabo de enviarte unha invitación á aplicación {{app}}. Comproba o teu correo electrónico e fai clic na ligazón alí.",
+            "CheckYourEmail": "Verifique o seu correo electrónico e siga instrucións."
         }
     },
     "participating": {
         "Title": "Título",
         "Subscribed": "Subscrito",
-        "Participants": "Participantes"
+        "Participants": "Participantes",
+        "AreYouSureRemoveIdentifier": "Está seguro de eliminar este identificador?",
+        "AreYouSureUnsubscribeIdentifier": "Está seguro de dar de baixa este identificador? Desactivará as notificacións a este identificador.",
+        "AreYouSureUnsubscribeDevice": "Estás seguro de dar de alta este dispositivo? Desactivará as notificacións a este dispositivo.",
+        "Identifiers": "Identificadores",
+        "Devices": "Dispositivos",
+        "Streams": "Arroios"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +126,74 @@
             "microphoneBtn": "Activar o micrófono",
             "cameraBtn": "Activar a cámara",
             "cameraAndMicrophoneBtn": "Activar cámara e micrófono"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instrucións",
+            "permissionDenied": "Denegouse o permiso para {{kind}}. Para usalo, siga estes pasos:",
+            "point1": "Vai a &quot;Configuración&quot; -&gt; &quot;Avanzado&quot; -&gt; &quot;Privacidade e seguridade&quot; -&gt; &quot;Configuración do sitio&quot; -&gt; &quot;Cámara&quot; ou &quot;Configuración do sitio&quot; -&gt; &quot;Micrófono&quot;",
+            "point2": "Elimina {{hostname}} da lista &quot;Bloquear&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instrucións",
+            "permissionDenied": "Denegouse o permiso para {{kind}}. Vuelva a cargar esta páxina e confirme o acceso a {{kind}} para participar na conferencia."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instrucións",
+            "permissionDenied": "Denegouse o permiso para {{kind}}. Para usalo, siga estes pasos:",
+            "point1": "Vai á Configuración de Android",
+            "point2": "Abre &quot;Aplicacións e notificacións&quot;",
+            "point3": "Atopa &quot;{{communityName}}&quot; e ábreo",
+            "point4": "Toca Permisos",
+            "point5": "Activa {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instrucións",
+            "permissionDenied": "Denegouse o permiso para {{kind}}. Para usalo, siga estes pasos:",
+            "point1": "Vai á súa Configuración de iOS",
+            "point2": "Abrir &quot;Privacidade&quot;",
+            "point3": "Atopa {{kind}} e ábreo",
+            "point4": "Atopar &quot;{{communityName}}&quot; e habilitalo"
+        },
+        "notices": {
+            "youJoinedRoom": "Vostede entrou na habitación",
+            "joining": "Unirse: {{userName}}",
+            "sbLeftRoom": "{{userName}} saíu da habitación",
+            "youLeftRoom": "Saíches da habitación",
+            "codeCopied": "Saíches da habitación",
+            "sbBeganFbLive": "{{userName}} comezou a emitir esta chamada en Facebook",
+            "sbStoppedFbLive": "{{userName}} deixou de emitir esta chamada en Facebook",
+            "youBeganFbLive": "Comezaches a emitir esta chamada en Facebook",
+            "youStoppedFbLive": "Deixaches de emitir esta chamada en Facebook",
+            "linkCopiedToCb": "Ligazón copiada ao portapapeis",
+            "codeCopiedToCb": "Código copiado ao portapapeis",
+            "userHasNoVideo": "O participante non ten ningún vídeo",
+            "openInBrowserAlert": "Abrir ligazón no navegador Safari para participar na conferencia."
+        },
+        "settingsPopup": {
+            "webCamera": "Cámara web",
+            "screenSharing": "Compartir en pantalla",
+            "shareAnotherScreen": "Comparte outra pantalla",
+            "turnOffCameras": "Apague todas as cámaras",
+            "startFBLive": "Inicia Facebook en directo",
+            "stopFBLive": "Pare Facebook en directo",
+            "fbLiveTitle": "Título en directo",
+            "fbLiveDescription": "Descrición en directo",
+            "fbOnlyMeLiveAccess": "Só eu",
+            "fbFriendsAccess": "Amigos",
+            "fbPublicAccess": "Público",
+            "fbStartLive": "Vai vivir",
+            "fbStopLive": "End Live",
+            "fbEmbedCode": "Incorporar",
+            "copy": "Copiar"
+        },
+        "participantsPopup": {
+            "disconnect": "Desconectar",
+            "floatingScreens": "Pantallas flotantes",
+            "tiledScreens": "Pantallas con baldosas",
+            "loudestExceptMe": "Máis forte excepto eu",
+            "maximizeLoudest": "Maximizar o máis alto",
+            "staticMaximized": "Máxico estático",
+            "manual": "Manual"
         }
     },
     "types": {
@@ -243,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "ten un novo {{instructions.fromDisplayType}}",
                 "byAvatar": "engadido por {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "comezou unha chamada"
         }
+    },
+    "menu": {
+        "placeholder": "escriba o título da páxina",
+        "ModTab": "Modificar elemento",
+        "Save": "Gardar",
+        "Delete": "Eliminar",
+        "Submenu": "Submenú"
     }
 }

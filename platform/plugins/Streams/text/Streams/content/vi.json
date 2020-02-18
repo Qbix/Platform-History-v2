@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Vui lòng truy cập liên kết sau:",
             "InvitingYou": "Tôi mời bạn {{title}}",
             "HasInvitedYou": "{{displayName}} đã mời bạn tham gia {{title}}",
-            "HasMentionedYou": "{{displayName}} đã đề cập đến bạn trong &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} đã đề cập đến bạn trong &quot;{{title}}&quot;",
+            "YOUAREINVITED": "BẠN ĐƯỢC MỜI!",
+            "AcceptInvite": "Chấp nhận lời mời"
         },
         "sms": {
             "content": "Bạn đã được mời tham gia {{title}}. Vui lòng nhấn {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Bạn đã ngừng phát cuộc gọi này trong Facebook",
             "linkCopiedToCb": "Liên kết được sao chép vào khay nhớ tạm",
             "codeCopiedToCb": "Mã được sao chép vào clipboard",
-            "userHasNoVideo": "Người tham gia không có video"
+            "userHasNoVideo": "Người tham gia không có video",
+            "openInBrowserAlert": "Mở liên kết trong trình duyệt Safari để tham gia hội nghị."
         },
         "settingsPopup": {
             "webCamera": "Máy ảnh web",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "có {{instructions.fromDisplayType}} mới",
                 "byAvatar": "được thêm bởi {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "bắt đầu một cuộc gọi trong"
         }
+    },
+    "menu": {
+        "placeholder": "gõ tiêu đề trang",
+        "ModTab": "Sửa đổi mục",
+        "Save": "Tiết kiệm",
+        "Delete": "Xóa bỏ",
+        "Submenu": "Menu phụ"
     }
 }

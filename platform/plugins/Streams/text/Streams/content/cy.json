@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Ewch i&#39;r ddolen ganlynol:",
             "InvitingYou": "Rwy&#39;n eich gwahodd i {{title}}",
             "HasInvitedYou": "Mae {{displayName}} wedi eich gwahodd i {{title}}",
-            "HasMentionedYou": "Mae {{displayName}} wedi sôn amdanoch chi yn &quot;{{title}}&quot;"
+            "HasMentionedYou": "Mae {{displayName}} wedi sôn amdanoch chi yn &quot;{{title}}&quot;",
+            "YOUAREINVITED": "RYDYCH CHI&#39;N BUDDSODDI!",
+            "AcceptInvite": "Derbyn Gwahoddiad"
         },
         "sms": {
             "content": "Fe&#39;ch gwahoddwyd i {{title}}. Defnyddiwch tap {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Fe wnaethoch chi roi&#39;r gorau i ddarlledu&#39;r alwad hon yn Facebook",
             "linkCopiedToCb": "Copïwyd y ddolen i&#39;r clipfwrdd",
             "codeCopiedToCb": "Copi cod i&#39;r clipfwrdd",
-            "userHasNoVideo": "Nid oes gan y cyfranogwr fideo"
+            "userHasNoVideo": "Nid oes gan y cyfranogwr fideo",
+            "openInBrowserAlert": "Dolen agored ym mhorwr Safari i ymuno â&#39;r gynhadledd."
         },
         "settingsPopup": {
             "webCamera": "Camera Gwe",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "mae ganddo {{instructions.fromDisplayType}} newydd",
                 "byAvatar": "ychwanegwyd gan {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "cychwyn galwad i mewn"
         }
+    },
+    "menu": {
+        "placeholder": "teipiwch deitl tudalen",
+        "ModTab": "Addasu Eitem",
+        "Save": "Arbedwch",
+        "Delete": "Dileu",
+        "Submenu": "Submenu"
     }
 }

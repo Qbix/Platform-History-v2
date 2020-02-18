@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Silakan kunjungi tautan berikut:",
             "InvitingYou": "Saya mengundang Anda ke {{title}}",
             "HasInvitedYou": "{{displayName}} telah mengundang Anda ke {{title}}",
-            "HasMentionedYou": "{{displayName}} menyebut Anda di &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} menyebut Anda di &quot;{{title}}&quot;",
+            "YOUAREINVITED": "ANDA DIUNDANG!",
+            "AcceptInvite": "Terima Undangan"
         },
         "sms": {
             "content": "Anda telah diundang ke {{title}}. Silakan ketuk {{url}}"
@@ -161,7 +163,8 @@
             "youStoppedFbLive": "Anda berhenti menyiarkan panggilan ini di Facebook",
             "linkCopiedToCb": "Tautan disalin ke papan klip",
             "codeCopiedToCb": "Kode disalin ke papan klip",
-            "userHasNoVideo": "Peserta tidak memiliki video"
+            "userHasNoVideo": "Peserta tidak memiliki video",
+            "openInBrowserAlert": "Buka tautan di browser Safari untuk bergabung dengan konferensi."
         },
         "settingsPopup": {
             "webCamera": "Kamera web",
@@ -315,7 +318,15 @@
             "relatedTo": {
                 "hasANew": "memiliki {{instructions.fromDisplayType}} baru",
                 "byAvatar": "ditambahkan oleh {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "memulai panggilan masuk"
         }
+    },
+    "menu": {
+        "placeholder": "ketik judul halaman",
+        "ModTab": "Ubah Item",
+        "Save": "Menyimpan",
+        "Delete": "Menghapus",
+        "Submenu": "Submenu"
     }
 }

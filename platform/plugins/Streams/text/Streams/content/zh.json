@@ -80,7 +80,9 @@
             "PleaseVisitLink": "请访问以下链接：",
             "InvitingYou": "我邀请你{{title}}",
             "HasInvitedYou": "{{displayName}}已邀请您{{title}}",
-            "HasMentionedYou": "{{displayName}}在“ {{title}}”中提到了您"
+            "HasMentionedYou": "{{displayName}}在“ {{title}}”中提到了您",
+            "YOUAREINVITED": "你被邀请了！",
+            "AcceptInvite": "接受邀请"
         },
         "sms": {
             "content": "您已受邀{{title}}。请点按{{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "您已停止在Facebook中广播此通话",
             "linkCopiedToCb": "链接已复制到剪贴板",
             "codeCopiedToCb": "代码已复制到剪贴板",
-            "userHasNoVideo": "参加者没有视频"
+            "userHasNoVideo": "参加者没有视频",
+            "openInBrowserAlert": "在Safari浏览器中打开链接以加入会议。"
         },
         "settingsPopup": {
             "webCamera": "网络摄像头",
@@ -319,7 +322,15 @@
             "relatedTo": {
                 "hasANew": "有一个新的{{instructions.fromDisplayType}}",
                 "byAvatar": "由{{avatar.displayName}}添加"
-            }
+            },
+            "startedCallIn": "发起了通话"
         }
+    },
+    "menu": {
+        "placeholder": "输入页面标题",
+        "ModTab": "修改项目",
+        "Save": "保存",
+        "Delete": "删除",
+        "Submenu": "子菜单"
     }
 }

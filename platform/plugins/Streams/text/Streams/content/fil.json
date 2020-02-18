@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Pakibisita ang sumusunod na link:",
             "InvitingYou": "Inaanyayahan ko kayo sa {{title}}",
             "HasInvitedYou": "Inimbitahan ka ni {{displayName}} sa {{title}}",
-            "HasMentionedYou": "Binanggit ka ng {{displayName}} sa &quot;{{title}}&quot;"
+            "HasMentionedYou": "Binanggit ka ng {{displayName}} sa &quot;{{title}}&quot;",
+            "YOUAREINVITED": "IKAW AY INIIMBITAHAN!",
+            "AcceptInvite": "Tanggapin ang Imbitahan"
         },
         "sms": {
             "content": "Inanyayahan ka sa {{title}}. Mangyaring i-tap ang {{url}}"
@@ -161,7 +163,8 @@
             "youStoppedFbLive": "Tumigil ka sa pag-broadcast ng tawag na ito sa Facebook",
             "linkCopiedToCb": "Link na kinopya sa clipboard",
             "codeCopiedToCb": "Nakopya ang code sa clipboard",
-            "userHasNoVideo": "Ang kalahok ay walang video"
+            "userHasNoVideo": "Ang kalahok ay walang video",
+            "openInBrowserAlert": "Buksan ang link sa Safari browser upang sumali sa kumperensya."
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -315,7 +318,15 @@
             "relatedTo": {
                 "hasANew": "ay may isang bagong {{instructions.fromDisplayType}}",
                 "byAvatar": "idinagdag ni {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "nagsimula ng isang tawag sa"
         }
+    },
+    "menu": {
+        "placeholder": "pamagat ng uri ng pahina",
+        "ModTab": "Baguhin ang item",
+        "Save": "I-save",
+        "Delete": "Tanggalin",
+        "Submenu": "Submenu"
     }
 }

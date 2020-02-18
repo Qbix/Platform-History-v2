@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Obiščite naslednjo povezavo:",
             "InvitingYou": "Vabim vas na {{title}}",
             "HasInvitedYou": "{{displayName}} vas je povabil na {{title}}",
-            "HasMentionedYou": "{{displayName}} vas je omenil v &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} vas je omenil v &quot;{{title}}&quot;",
+            "YOUAREINVITED": "POVABLJEN SI!",
+            "AcceptInvite": "Sprejmi povabilo"
         },
         "sms": {
             "content": "Povabljeni ste bili na {{title}}. Pritisnite {{url}}"
@@ -93,19 +95,27 @@
         "mobile": {
             "alert": "Povabila so poslana iz naše številke, ki jih vaši prijatelji še ne prepoznajo. Nadaljujte s hitrim besedilom, da jim sporočite, da je povabilo prišlo od vas, in jih prosili, da kliknejo povezavo.",
             "confirm": "Povabila so poslana iz naše številke, ki jih vaši prijatelji še ne prepoznajo. Želite nadaljevati s hitrim besedilom in jim sporočiti, da je povabilo prišlo od vas, in jih prosili, naj klikne povezavo.",
-            "check": "Hej, pravkar sem ti poslal povabilo v aplikacijo {{app}}. Prosimo, preverite sms in kliknite povezavo!"
+            "check": "Hej, pravkar sem ti poslal povabilo v aplikacijo {{app}}. Prosimo, preverite sms in kliknite povezavo!",
+            "CheckYourMobile": "Preverite SMS in sledite navodilom!"
         },
         "email": {
             "alert": "Povabila so poslana iz naše domene, ki jih vaši prijatelji še ne prepoznajo. Nadaljujte s hitrim besedilom, da jim sporočite, da je povabilo prišlo od vas, in jih prosili, da kliknejo povezavo.",
             "confirm": "Povabila so poslana iz naše domene, ki jih vaši prijatelji še ne prepoznajo. Želite nadaljevati s hitrim besedilom in jim sporočiti, da je povabilo prišlo od vas, in jih prosili, naj klikne povezavo.",
             "subject": "Si dobil povabilo?",
-            "body": "Hej, pravkar sem ti poslal povabilo v aplikacijo {{app}}. Preverite vaš e-poštni naslov in kliknite povezavo tam!"
+            "body": "Hej, pravkar sem ti poslal povabilo v aplikacijo {{app}}. Preverite vaš e-poštni naslov in kliknite povezavo tam!",
+            "CheckYourEmail": "Preverite svoj e-poštni naslov in sledite navodilom!"
         }
     },
     "participating": {
         "Title": "Naslov",
         "Subscribed": "Naročen",
-        "Participants": "Udeleženci"
+        "Participants": "Udeleženci",
+        "AreYouSureRemoveIdentifier": "Ali ste prepričani, da ste odstranili ta identifikator?",
+        "AreYouSureUnsubscribeIdentifier": "Ali ste prepričani, da odjavite ta identifikator? Izklopi obvestila temu identifikatorju.",
+        "AreYouSureUnsubscribeDevice": "Ali ste prepričani, da odjavite to napravo? Ta naprava bo izklopila obvestila.",
+        "Identifiers": "Identifikatorji",
+        "Devices": "Naprave",
+        "Streams": "Potoki"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +126,74 @@
             "microphoneBtn": "Omogoči mikrofon",
             "cameraBtn": "Omogoči fotoaparat",
             "cameraAndMicrophoneBtn": "Omogoči kamero in mikrofon"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Navodila",
+            "permissionDenied": "Dovoljenje za {{kind}} zavrnjeno. Če ga želite uporabljati, sledite tem korakom:",
+            "point1": "Pojdite na &quot;Nastavitve&quot; -&gt; &quot;Napredno&quot; -&gt; &quot;Zasebnost in varnost&quot; -&gt; &quot;Nastavitve spletnega mesta&quot; -&gt; &quot;Kamera&quot; ali &quot;Nastavitve spletnega mesta&quot; -&gt; &quot;Mikrofon&quot;",
+            "point2": "Odstrani {{hostname}} s seznama &quot;Blokiraj&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Navodila",
+            "permissionDenied": "Dovoljenje za {{kind}} zavrnjeno. Ponovno naložite to stran in potrdite dostop do {{kind}}, da se pridružite konferenci."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Navodila",
+            "permissionDenied": "Dovoljenje za {{kind}} zavrnjeno. Če ga želite uporabljati, sledite tem korakom:",
+            "point1": "Pojdite na nastavitve za Android",
+            "point2": "Odprite &quot;Aplikacije in obvestila&quot;",
+            "point3": "Poiščite &quot;{{communityName}}&quot; in ga odprite",
+            "point4": "Tapnite Dovoljenja",
+            "point5": "Omogoči {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Navodila",
+            "permissionDenied": "Dovoljenje za {{kind}} zavrnjeno. Če ga želite uporabljati, sledite tem korakom:",
+            "point1": "Pojdite na nastavitve za iOS",
+            "point2": "Odprite &quot;Zasebnost&quot;",
+            "point3": "Poiščite {{kind}} in ga odprite",
+            "point4": "Poiščite &quot;{{communityName}}&quot; in omogočite"
+        },
+        "notices": {
+            "youJoinedRoom": "Pridružil si se sobi",
+            "joining": "Pridružitev: {{userName}}",
+            "sbLeftRoom": "{{userName}} je zapustil sobo",
+            "youLeftRoom": "Zapustil si sobo",
+            "codeCopied": "Zapustil si sobo",
+            "sbBeganFbLive": "{{userName}} je začel oddajati ta klic v Facebooku",
+            "sbStoppedFbLive": "{{userName}} je prenehal oddajati ta klic v Facebooku",
+            "youBeganFbLive": "Začeli ste predvajati ta klic v Facebooku",
+            "youStoppedFbLive": "Prekinili ste oddajanje tega klica na Facebooku",
+            "linkCopiedToCb": "Povezava je bila kopirana v odložišče",
+            "codeCopiedToCb": "Koda je bila kopirana v odložišče",
+            "userHasNoVideo": "Udeleženec nima videoposnetka",
+            "openInBrowserAlert": "Odprite povezavo v brskalniku Safari, da se pridružite konferenci."
+        },
+        "settingsPopup": {
+            "webCamera": "Spletna kamera",
+            "screenSharing": "Skupna raba zaslona",
+            "shareAnotherScreen": "Skupna raba drugega zaslona",
+            "turnOffCameras": "Izklopite vse kamere",
+            "startFBLive": "Zaženite Facebook Livestream",
+            "stopFBLive": "Ustavite Facebook Livestream",
+            "fbLiveTitle": "Naslov v živo",
+            "fbLiveDescription": "Opis v živo",
+            "fbOnlyMeLiveAccess": "Samo jaz",
+            "fbFriendsAccess": "Prijatelji",
+            "fbPublicAccess": "Javno",
+            "fbStartLive": "Pojdi v živo",
+            "fbStopLive": "Končaj v živo",
+            "fbEmbedCode": "Vdelati",
+            "copy": "Kopirati"
+        },
+        "participantsPopup": {
+            "disconnect": "Prekini povezavo",
+            "floatingScreens": "Plavajoči zasloni",
+            "tiledScreens": "Popločan zasloni",
+            "loudestExceptMe": "Najglasneje razen mene",
+            "maximizeLoudest": "Maksimizirajte najglasneje",
+            "staticMaximized": "Statično maksimirano",
+            "manual": "Priročnik"
         }
     },
     "types": {
@@ -243,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "ima novo {{instructions.fromDisplayType}}",
                 "byAvatar": "dodal {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "začel klic v"
         }
+    },
+    "menu": {
+        "placeholder": "tip strani naslov",
+        "ModTab": "Spremeni postavko",
+        "Save": "Shrani",
+        "Delete": "Izbriši",
+        "Submenu": "Podmeni"
     }
 }

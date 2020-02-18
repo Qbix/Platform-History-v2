@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Перейдіть за таким посиланням:",
             "InvitingYou": "Я запрошую вас до {{title}}",
             "HasInvitedYou": "{{displayName}} запросив вас до {{title}}",
-            "HasMentionedYou": "{{displayName}} згадав вас у &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} згадав вас у &quot;{{title}}&quot;",
+            "YOUAREINVITED": "ВИ ЗАПРОШЕНІ!",
+            "AcceptInvite": "Прийняти запрошення"
         },
         "sms": {
             "content": "Вас запрошено до {{title}}. Натисніть {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Ви припинили трансляцію цього дзвінка у Facebook",
             "linkCopiedToCb": "Посилання скопійовано у буфер обміну",
             "codeCopiedToCb": "Код скопійовано у буфер обміну",
-            "userHasNoVideo": "Учасник не має відео"
+            "userHasNoVideo": "Учасник не має відео",
+            "openInBrowserAlert": "Відкрийте посилання в браузері Safari, щоб приєднатися до конференції."
         },
         "settingsPopup": {
             "webCamera": "Веб-камера",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "має новий {{instructions.fromDisplayType}}",
                 "byAvatar": "додав {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "зателефонував у"
         }
+    },
+    "menu": {
+        "placeholder": "введіть назву сторінки",
+        "ModTab": "Змінити елемент",
+        "Save": "Зберегти",
+        "Delete": "Видалити",
+        "Submenu": "Підменю"
     }
 }

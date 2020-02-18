@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Vänligen besök följande länk:",
             "InvitingYou": "Jag uppmanar dig att {{title}}",
             "HasInvitedYou": "{{displayName}} har bjudit in dig till {{title}}",
-            "HasMentionedYou": "{{displayName}} har nämnt dig i &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} har nämnt dig i &quot;{{title}}&quot;",
+            "YOUAREINVITED": "DU ÄR INBJUDEN!",
+            "AcceptInvite": "Acceptera inbjudan"
         },
         "sms": {
             "content": "Du har blivit inbjuden till {{title}}. Var god och tryck på {{url}}"
@@ -93,19 +95,27 @@
         "mobile": {
             "alert": "Inbjudningar skickas från vårt nummer, som dina vänner ännu inte känner igen. Följ upp med en snabb text för att låta dem veta att inbjudan kom från dig och be dem att klicka på länken.",
             "confirm": "Inbjudningar skickas från vårt nummer, som dina vänner ännu inte känner igen. Vill du följa upp en snabbtext så att de vet att inbjudan kom från dig och ber dem att klicka på länken.",
-            "check": "Hej, jag har precis skickat dig en inbjudan till appen {{app}}. Kontrollera din sms och klicka på länken!"
+            "check": "Hej, jag har precis skickat dig en inbjudan till appen {{app}}. Kontrollera din sms och klicka på länken!",
+            "CheckYourMobile": "Kontrollera SMS och följ instruktionerna!"
         },
         "email": {
             "alert": "Inbjudningar skickas från vår domän, som dina vänner ännu inte känner igen. Följ upp med en snabb text för att låta dem veta att inbjudan kom från dig och be dem att klicka på länken.",
             "confirm": "Inbjudningar skickas från vår domän, som dina vänner ännu inte känner igen. Vill du följa upp en snabbtext så att de vet att inbjudan kom från dig och ber dem att klicka på länken.",
             "subject": "Fick du en inbjudan?",
-            "body": "Hej, jag har precis skickat dig en inbjudan till appen {{app}}. Vänligen kolla din email och klicka på länken där inne!"
+            "body": "Hej, jag har precis skickat dig en inbjudan till appen {{app}}. Vänligen kolla din email och klicka på länken där inne!",
+            "CheckYourEmail": "Kontrollera din e-post och följ instruktionerna!"
         }
     },
     "participating": {
         "Title": "Titel",
         "Subscribed": "prenumererar",
-        "Participants": "Deltagarna"
+        "Participants": "Deltagarna",
+        "AreYouSureRemoveIdentifier": "Är du säker på att ta bort den här identifieraren?",
+        "AreYouSureUnsubscribeIdentifier": "Är du säker på att du tecknar denna ID? Det stänger av aviseringar till denna identifierare.",
+        "AreYouSureUnsubscribeDevice": "Är du säker på att du kan avsluta prenumerationen på den här enheten? Det stänger av aviseringar till den här enheten.",
+        "Identifiers": "identifierare",
+        "Devices": "enheter",
+        "Streams": "Strömmar"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +126,74 @@
             "microphoneBtn": "Aktivera mikrofon",
             "cameraBtn": "Aktivera kamera",
             "cameraAndMicrophoneBtn": "Aktivera kamera och mikrofon"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instruktioner",
+            "permissionDenied": "Tillstånd för {{kind}} nekades. Följ de här stegen för att använda den:",
+            "point1": "Gå till &quot;Inställningar&quot; -&gt; &quot;Avancerat&quot; -&gt; &quot;Sekretess och säkerhet&quot; -&gt; &quot;Webbplatsinställningar&quot; -&gt; &quot;Kamera&quot; eller &quot;Webbplatsinställningar&quot; -&gt; &quot;Mikrofon&quot;",
+            "point2": "Ta bort {{hostname}} från listan &quot;Blockera&quot;"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instruktioner",
+            "permissionDenied": "Tillstånd för {{kind}} nekades. Ladda om den här sidan och bekräfta åtkomst till {{kind}} för att gå med i konferensen."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instruktioner",
+            "permissionDenied": "Tillstånd för {{kind}} nekades. Följ de här stegen för att använda den:",
+            "point1": "Gå till dina Android-inställningar",
+            "point2": "Öppna &quot;Appar &amp; aviseringar&quot;",
+            "point3": "Hitta &quot;{{communityName}}&quot; och öppna den",
+            "point4": "Klicka på Behörigheter",
+            "point5": "Aktivera {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instruktioner",
+            "permissionDenied": "Tillstånd för {{kind}} nekades. Följ de här stegen för att använda den:",
+            "point1": "Gå till dina iOS-inställningar",
+            "point2": "Öppna &quot;Sekretess&quot;",
+            "point3": "Hitta {{kind}} och öppna den",
+            "point4": "Hitta &quot;{{communityName}}&quot; och aktivera"
+        },
+        "notices": {
+            "youJoinedRoom": "Du gick med i rummet",
+            "joining": "Gå med: {{userName}}",
+            "sbLeftRoom": "{{userName}} lämnade rummet",
+            "youLeftRoom": "Du lämnade rummet",
+            "codeCopied": "Du lämnade rummet",
+            "sbBeganFbLive": "{{userName}} började sända detta samtal i Facebook",
+            "sbStoppedFbLive": "{{userName}} slutade sända detta samtal i Facebook",
+            "youBeganFbLive": "Du började sända detta samtal i Facebook",
+            "youStoppedFbLive": "Du slutade sända detta samtal i Facebook",
+            "linkCopiedToCb": "Länk kopierad till urklipp",
+            "codeCopiedToCb": "Koden kopierades till urklipp",
+            "userHasNoVideo": "Deltagaren har ingen video",
+            "openInBrowserAlert": "Öppna länken i Safari-webbläsaren för att delta i konferensen."
+        },
+        "settingsPopup": {
+            "webCamera": "Webbkamera",
+            "screenSharing": "Skärmdelning",
+            "shareAnotherScreen": "Dela en annan skärm",
+            "turnOffCameras": "Stäng av alla kameror",
+            "startFBLive": "Starta Facebook Livestream",
+            "stopFBLive": "Stoppa Facebook Livestream",
+            "fbLiveTitle": "Live titel",
+            "fbLiveDescription": "Live-beskrivning",
+            "fbOnlyMeLiveAccess": "Bara jag",
+            "fbFriendsAccess": "Vänner",
+            "fbPublicAccess": "offentlig",
+            "fbStartLive": "Gå och lev",
+            "fbStopLive": "Avsluta Live",
+            "fbEmbedCode": "Bädda in",
+            "copy": "Kopia"
+        },
+        "participantsPopup": {
+            "disconnect": "Koppla ifrån",
+            "floatingScreens": "Flytande skärmar",
+            "tiledScreens": "Kaklade skärmar",
+            "loudestExceptMe": "Högst utom mig",
+            "maximizeLoudest": "Maximera högst",
+            "staticMaximized": "Statisk maximerad",
+            "manual": "Manuell"
         }
     },
     "types": {
@@ -243,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "har en ny {{instructions.fromDisplayType}}",
                 "byAvatar": "tillagd av {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "startade ett samtal"
         }
+    },
+    "menu": {
+        "placeholder": "skriv sidtitel",
+        "ModTab": "Ändra objekt",
+        "Save": "Spara",
+        "Delete": "Radera",
+        "Submenu": "Undermeny meny~~POS=HEADCOMP"
     }
 }

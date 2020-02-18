@@ -53,7 +53,7 @@ Q.Tool.define('Q/paging', function (options) {
 			var $dot = $('<img />').attr({
 				'src': Q.url((i === index) ? state.pages.current : state.pages.other),
 				'class': 'Q_paging_dot '
-					+ (i === index) ? 'Q_paging_dot_current' : 'Q_paging_dot_other'
+					+ ((i === index) ? 'Q_paging_dot_current' : 'Q_paging_dot_other')
 			}).appendTo(tool.element);
 		}
 	}

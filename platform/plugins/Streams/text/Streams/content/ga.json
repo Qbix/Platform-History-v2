@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Tabhair cuairt ar an nasc seo a leanas:",
             "InvitingYou": "Táim ag tabhairt cuireadh duit {{title}}",
             "HasInvitedYou": "Thug {{displayName}} cuireadh duit {{title}}",
-            "HasMentionedYou": "Luaigh {{displayName}} tú i &quot;{{title}}&quot;"
+            "HasMentionedYou": "Luaigh {{displayName}} tú i &quot;{{title}}&quot;",
+            "YOUAREINVITED": "TÁ TÁ IAD A CHUR AR FÁIL!",
+            "AcceptInvite": "Glac le Cuireadh"
         },
         "sms": {
             "content": "Tugadh cuireadh duit {{title}}. Le do thoil bain úsáid as {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Stop tú ag craoladh an ghlao seo i Facebook",
             "linkCopiedToCb": "Cóipeáil nasc chuig an ghearrthaisce",
             "codeCopiedToCb": "Cód cóipeáilte chuig an ghearrthaisce",
-            "userHasNoVideo": "Níl aon fhíseán ag an rannpháirtí"
+            "userHasNoVideo": "Níl aon fhíseán ag an rannpháirtí",
+            "openInBrowserAlert": "Oscail nasc i mbrabhsálaí Safari chun dul isteach sa chomhdháil."
         },
         "settingsPopup": {
             "webCamera": "Ceamara Gréasáin",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "a bhfuil {{instructions.fromDisplayType}} nua aige",
                 "byAvatar": "le {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "thosaigh glao isteach"
         }
+    },
+    "menu": {
+        "placeholder": "teideal leathanach cineáil",
+        "ModTab": "Athraigh an Mír",
+        "Save": "Sábháil",
+        "Delete": "Scrios",
+        "Submenu": "Submenu"
     }
 }

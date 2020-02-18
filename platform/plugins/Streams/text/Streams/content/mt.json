@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Jekk jogħġbok żur il-link li ġejja:",
             "InvitingYou": "Qed nistiednek għal {{title}}",
             "HasInvitedYou": "{{displayName}} stiednek biex {{title}}",
-            "HasMentionedYou": "{{displayName}} semmejt f &#39;&quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} semmejt f &#39;&quot;{{title}}&quot;",
+            "YOUAREINVITED": "INTI MISTIEDNA!",
+            "AcceptInvite": "Aċċetta Tistieden"
         },
         "sms": {
             "content": "Int ġejt mistiedna għal {{title}}. Jekk jogħġbok vit {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Int waqaf ixandar din is-sejħa fuq Facebook",
             "linkCopiedToCb": "Link ikkuppjata mal-clipboard",
             "codeCopiedToCb": "Kodiċi kkupjat fil-clipboard",
-            "userHasNoVideo": "Parteċipant m&#39;għandux video"
+            "userHasNoVideo": "Parteċipant m&#39;għandux video",
+            "openInBrowserAlert": "Rabta miftuħa fil-browser Safari biex tingħaqad mal-konferenza."
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "għandu {{instructions.fromDisplayType}} ġdid",
                 "byAvatar": "miżjud minn {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "bdejt sejħa"
         }
+    },
+    "menu": {
+        "placeholder": "titlu tal-paġna tat-tip",
+        "ModTab": "Ibdel l-Oġġett",
+        "Save": "Issejvja",
+        "Delete": "Ħassar",
+        "Submenu": "Submenu"
     }
 }

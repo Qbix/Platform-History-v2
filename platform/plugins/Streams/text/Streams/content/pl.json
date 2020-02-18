@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Odwiedź następujący link:",
             "InvitingYou": "Zapraszam Cię na {{title}}",
             "HasInvitedYou": "{{displayName}} zaprosił Cię na {{title}}",
-            "HasMentionedYou": "{{displayName}} wspomniał o Tobie w „{{title}}”"
+            "HasMentionedYou": "{{displayName}} wspomniał o Tobie w „{{title}}”",
+            "YOUAREINVITED": "JESTEŚ ZAPROSZONY!",
+            "AcceptInvite": "Zaakceptuj zaproszenie"
         },
         "sms": {
             "content": "Zostałeś zaproszony do {{title}}. Wybierz {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Przestałeś nadawać to połączenie na Facebooku",
             "linkCopiedToCb": "Link skopiowany do schowka",
             "codeCopiedToCb": "Kod skopiowany do schowka",
-            "userHasNoVideo": "Uczestnik nie ma filmu"
+            "userHasNoVideo": "Uczestnik nie ma filmu",
+            "openInBrowserAlert": "Otwórz link w przeglądarce Safari, aby dołączyć do konferencji."
         },
         "settingsPopup": {
             "webCamera": "Kamerka internetowa",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "ma nowy {{instructions.fromDisplayType}}",
                 "byAvatar": "dodane przez {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "rozpoczął połączenie"
         }
+    },
+    "menu": {
+        "placeholder": "wpisz tytuł strony",
+        "ModTab": "Zmodyfikuj element",
+        "Save": "Zapisać",
+        "Delete": "Usunąć",
+        "Submenu": "Podmenu"
     }
 }

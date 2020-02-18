@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Vă rugăm să vizitați următorul link:",
             "InvitingYou": "Vă invit să {{title}}",
             "HasInvitedYou": "{{displayName}} te-a invitat la {{title}}",
-            "HasMentionedYou": "{{displayName}} v-a menționat în „{{title}}”"
+            "HasMentionedYou": "{{displayName}} v-a menționat în „{{title}}”",
+            "YOUAREINVITED": "ESTI INVITAT!",
+            "AcceptInvite": "Acceptați Invitați"
         },
         "sms": {
             "content": "Ați fost invitat la {{title}}. Atingeți {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Ați încetat difuzarea acestui apel pe Facebook",
             "linkCopiedToCb": "Link copiat în clipboard",
             "codeCopiedToCb": "Cod copiat în clipboard",
-            "userHasNoVideo": "Participantul nu are niciun videoclip"
+            "userHasNoVideo": "Participantul nu are niciun videoclip",
+            "openInBrowserAlert": "Deschideți linkul în browserul Safari pentru a vă alătura conferinței."
         },
         "settingsPopup": {
             "webCamera": "Camera web",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "are un nou {{instructions.fromDisplayType}}",
                 "byAvatar": "adăugat de {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "a început un apel"
         }
+    },
+    "menu": {
+        "placeholder": "tastați titlul paginii",
+        "ModTab": "Modificați articolul",
+        "Save": "salva",
+        "Delete": "Șterge",
+        "Submenu": "submeniu"
     }
 }

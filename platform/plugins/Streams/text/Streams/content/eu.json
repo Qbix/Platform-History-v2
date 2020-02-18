@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Bisitatu hurrengo esteka:",
             "InvitingYou": "{{title}}}-ra gonbidatzen zaitut",
             "HasInvitedYou": "{{displayName}} erabiltzaileak {{title}} zerbitzura gonbidatu zaitu",
-            "HasMentionedYou": "{{displayName}} &quot;{{title}}&quot; liburuan aipatu zaitu"
+            "HasMentionedYou": "{{displayName}} &quot;{{title}}&quot; liburuan aipatu zaitu",
+            "YOUAREINVITED": "Gonbidatuta zaude!",
+            "AcceptInvite": "Onartu Gonbidatu"
         },
         "sms": {
             "content": "{{title}} gonbidatu zaituzte. Sakatu {1000}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Dei hau Facebook-en emititzen utzi zenuen",
             "linkCopiedToCb": "Esteka arbelean kopiatuta",
             "codeCopiedToCb": "Arbelera kopiatutako kodea",
-            "userHasNoVideo": "Parte hartzaileak ez du bideorik"
+            "userHasNoVideo": "Parte hartzaileak ez du bideorik",
+            "openInBrowserAlert": "Esteka irekia Safari arakatzailean konferentzian sartzeko."
         },
         "settingsPopup": {
             "webCamera": "Web Kamera",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "{{instructions.fromDisplayType}} berri bat du",
                 "byAvatar": "{{avatar.displayName}} (e) k gehituta"
-            }
+            },
+            "startedCallIn": "dei bat hasi du"
         }
+    },
+    "menu": {
+        "placeholder": "idatzi orrialdearen izenburua",
+        "ModTab": "Aldatu elementua",
+        "Save": "Save",
+        "Delete": "Ezabatu",
+        "Submenu": "Azpimenura"
     }
 }

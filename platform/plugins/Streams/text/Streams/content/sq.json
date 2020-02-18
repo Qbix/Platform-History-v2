@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Ju lutemi vizitoni lidhjen e mëposhtme:",
             "InvitingYou": "Unë jam duke ju ftuar për të {{title}}",
             "HasInvitedYou": "{{displayName}} ju ka ftuar për të {{title}}",
-            "HasMentionedYou": "99 {999}} ju ka përmendur në &quot;{{title}}&quot;"
+            "HasMentionedYou": "99 {999}} ju ka përmendur në &quot;{{title}}&quot;",
+            "YOUAREINVITED": "JU JENI TË FTUAR!",
+            "AcceptInvite": "Pranoni Fto"
         },
         "sms": {
             "content": "Ju jeni ftuar për {{title}}. Përzgjidhni {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Ndalove transmetimin e kësaj thirrje në Facebook",
             "linkCopiedToCb": "Lidhja e kopjuar në clipboard",
             "codeCopiedToCb": "Kodi i kopjuar në clipboard",
-            "userHasNoVideo": "Pjesëmarrësi nuk ka video"
+            "userHasNoVideo": "Pjesëmarrësi nuk ka video",
+            "openInBrowserAlert": "Lidhje e hapur në shfletuesin Safari për t&#39;u bashkuar me konferencën."
         },
         "settingsPopup": {
             "webCamera": "Kamera në internet",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "ka një new 999 të reja",
                 "byAvatar": "shtuar nga {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "filloi një telefonatë në"
         }
+    },
+    "menu": {
+        "placeholder": "shtypni titullin e faqes",
+        "ModTab": "Modifikoni Artikullin",
+        "Save": "Save",
+        "Delete": "fshini",
+        "Submenu": "submenu"
     }
 }

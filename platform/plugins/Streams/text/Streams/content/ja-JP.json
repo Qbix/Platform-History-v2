@@ -80,7 +80,9 @@
             "PleaseVisitLink": "次のリンクにアクセスしてください。",
             "InvitingYou": "{{title}}に招待しています",
             "HasInvitedYou": "{{displayName}}があなたを{{title}}に招待しました",
-            "HasMentionedYou": "{{displayName}}から「{{title}}」にあなたの名前があります"
+            "HasMentionedYou": "{{displayName}}から「{{title}}」にあなたの名前があります",
+            "YOUAREINVITED": "あなたは招待されました！",
+            "AcceptInvite": "招待を受け入れる"
         },
         "sms": {
             "content": "あなたは{{title}}に招待されました。 {{url}}をタップしてください"
@@ -93,19 +95,27 @@
         "mobile": {
             "alert": "招待状は私たちの番号から送信されます。あなたの友達はまだ認識していません。リンクをクリックするように依頼して、あなたからの招待状が届いたことを簡単なテキストでフォローアップします。",
             "confirm": "招待状は私たちの番号から送信されます。あなたの友達はまだ認識していません。リンクをクリックするよう依頼して、あなたからの招待状があなたからのものであることを知らせるためのクイックテキストをフォローアップしますか。",
-            "check": "こんにちは、私はあなたに{{app}}アプリへの招待状を送信しました。あなたのSMSを確認してリンクをクリックしてください！"
+            "check": "こんにちは、私はあなたに{{app}}アプリへの招待状を送信しました。あなたのSMSを確認してリンクをクリックしてください！",
+            "CheckYourMobile": "SMSを確認し、指示に従ってください！"
         },
         "email": {
             "alert": "招待状は我々のドメインから送信されます。あなたの友達はまだ認識していません。リンクをクリックするように依頼して、あなたからの招待状が届いたことを簡単なテキストでフォローアップします。",
             "confirm": "招待状は我々のドメインから送信されます。あなたの友達はまだ認識していません。リンクをクリックするよう依頼して、あなたからの招待状があなたからのものであることを知らせるためのクイックテキストをフォローアップしますか。",
             "subject": "あなたは招待を受けましたか？",
-            "body": "こんにちは、私はあなたに{{app}}アプリへの招待状を送ったばかりです。あなたのEメールをチェックしてそこにあるリンクをクリックしてください！"
+            "body": "こんにちは、私はあなたに{{app}}アプリへの招待状を送ったばかりです。あなたのEメールをチェックしてそこにあるリンクをクリックしてください！",
+            "CheckYourEmail": "メールを確認して、指示に従ってください！"
         }
     },
     "participating": {
         "Title": "タイトル",
         "Subscribed": "購読しています",
-        "Participants": "参加者"
+        "Participants": "参加者",
+        "AreYouSureRemoveIdentifier": "この識別子を削除してもよろしいですか？",
+        "AreYouSureUnsubscribeIdentifier": "この識別子の購読を解除してもよろしいですか？この識別子への通知をオフにします。",
+        "AreYouSureUnsubscribeDevice": "このデバイスのサブスクリプションを解除してもよろしいですか？このデバイスへの通知をオフにします。",
+        "Identifiers": "識別子",
+        "Devices": "装置",
+        "Streams": "ストリーム"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +126,74 @@
             "microphoneBtn": "マイクを有効にする",
             "cameraBtn": "カメラを有効にする",
             "cameraAndMicrophoneBtn": "カメラとマイクを有効にする"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "説明書",
+            "permissionDenied": "{{kind}}の許可が拒否されました。使用するには、次の手順に従ってください。",
+            "point1": "[設定]-&gt; [詳細設定]-&gt; [プライバシーとセキュリティ]-&gt; [サイト設定]-&gt; [カメラ]または[サイト設定]-&gt; [マイク]に移動します。",
+            "point2": "「ブロック」リストから{{hostname}}を削除します"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "説明書",
+            "permissionDenied": "{{kind}}の許可が拒否されました。このページをリロードして、{{kind}}へのアクセスを確認して会議に参加してください。"
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "説明書",
+            "permissionDenied": "{{kind}}の許可が拒否されました。使用するには、次の手順に従ってください。",
+            "point1": "Androidの設定に移動します",
+            "point2": "「アプリと通知」を開きます",
+            "point3": "「{{communityName}}」を見つけて開きます",
+            "point4": "許可をタップします",
+            "point5": "{{kind}}を有効にする"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "説明書",
+            "permissionDenied": "{{kind}}の許可が拒否されました。使用するには、次の手順に従ってください。",
+            "point1": "iOSの設定に移動します",
+            "point2": "「プライバシー」を開く",
+            "point3": "{{kind}}を見つけて開きます",
+            "point4": "「{{communityName}}」を見つけて有効にします"
+        },
+        "notices": {
+            "youJoinedRoom": "あなたは部屋に参加しました",
+            "joining": "参加：{{userName}}",
+            "sbLeftRoom": "{{userName}}は部屋を出ました",
+            "youLeftRoom": "部屋を出ました",
+            "codeCopied": "部屋を出ました",
+            "sbBeganFbLive": "{{userName}}はFacebookでこの通話のブロードキャストを開始しました",
+            "sbStoppedFbLive": "{{userName}}はFacebookでこの通話のブロードキャストを停止しました",
+            "youBeganFbLive": "Facebookでこの通話のブロードキャストを開始しました",
+            "youStoppedFbLive": "Facebookでこの通話のブロードキャストを停止しました",
+            "linkCopiedToCb": "クリップボードにコピーされたリンク",
+            "codeCopiedToCb": "クリップボードにコピーされたコード",
+            "userHasNoVideo": "参加者にはビデオがありません",
+            "openInBrowserAlert": "Safariブラウザーでリンクを開き、会議に参加します。"
+        },
+        "settingsPopup": {
+            "webCamera": "ウェブカメラ",
+            "screenSharing": "画面共有",
+            "shareAnotherScreen": "別の画面を共有する",
+            "turnOffCameras": "すべてのカメラをオフにします",
+            "startFBLive": "Facebook Livestreamを開始",
+            "stopFBLive": "Facebook Livestreamを停止する",
+            "fbLiveTitle": "ライブタイトル",
+            "fbLiveDescription": "ライブ説明",
+            "fbOnlyMeLiveAccess": "私だけ",
+            "fbFriendsAccess": "友だち",
+            "fbPublicAccess": "公衆",
+            "fbStartLive": "ライブ配信",
+            "fbStopLive": "ライブ終了",
+            "fbEmbedCode": "埋め込む",
+            "copy": "コピー"
+        },
+        "participantsPopup": {
+            "disconnect": "切断する",
+            "floatingScreens": "フローティングスクリーン",
+            "tiledScreens": "タイルスクリーン",
+            "loudestExceptMe": "私以外の最大の",
+            "maximizeLoudest": "最大音量を最大化",
+            "staticMaximized": "静的最大化",
+            "manual": "マニュアル"
         }
     },
     "types": {
@@ -244,7 +322,15 @@
             "relatedTo": {
                 "hasANew": "新しい{{instructions.fromDisplayType}}があります",
                 "byAvatar": "{{avatar.displayName}}によって追加されました"
-            }
+            },
+            "startedCallIn": "で電話をかけました"
         }
+    },
+    "menu": {
+        "placeholder": "タイプページタイトル",
+        "ModTab": "アイテムを変更",
+        "Save": "セーブ",
+        "Delete": "削除する",
+        "Submenu": "サブメニュー"
     }
 }

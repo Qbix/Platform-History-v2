@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Vinsamlegast farðu á eftirfarandi tengil:",
             "InvitingYou": "Ég býð þér að {{title}}",
             "HasInvitedYou": "{{displayName}} hefur boðið þér að {{title}}",
-            "HasMentionedYou": "{{displayName}} hefur minnst á þig í „{{title}}“"
+            "HasMentionedYou": "{{displayName}} hefur minnst á þig í „{{title}}“",
+            "YOUAREINVITED": "ÞÉR ER BOÐIÐ!",
+            "AcceptInvite": "Samþykkja að bjóða"
         },
         "sms": {
             "content": "Þú hefur verið boðið {{title}}. Vinsamlegast bankaðu á {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Þú hættir að útvarpa þessu símtali á Facebook",
             "linkCopiedToCb": "Hlekkur afritaður á klemmuspjald",
             "codeCopiedToCb": "Kóði afritaður á klemmuspjald",
-            "userHasNoVideo": "Þátttakandinn hefur ekkert myndband"
+            "userHasNoVideo": "Þátttakandinn hefur ekkert myndband",
+            "openInBrowserAlert": "Opnaðu hlekk í Safari vafranum til að taka þátt í ráðstefnunni."
         },
         "settingsPopup": {
             "webCamera": "Vefmyndavél",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "er með nýjan {{instructions.fromDisplayType}}",
                 "byAvatar": "bætt við af {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "byrjaði að hringja inn"
         }
+    },
+    "menu": {
+        "placeholder": "tegund síðuheiti",
+        "ModTab": "Breyta hlut",
+        "Save": "Vista",
+        "Delete": "Eyða",
+        "Submenu": "Undirvalmynd"
     }
 }

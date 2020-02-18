@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Моля, посетете следната връзка:",
             "InvitingYou": "Каня ви на {{title}}",
             "HasInvitedYou": "{{displayName}} ви покани на {{title}}",
-            "HasMentionedYou": "{{displayName}} ви спомена в &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} ви спомена в &quot;{{title}}&quot;",
+            "YOUAREINVITED": "ВИЕ СТЕ ПОКАНЕНИ!",
+            "AcceptInvite": "Приемете покана"
         },
         "sms": {
             "content": "Поканени сте в {{title}}. Моля, докоснете {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Спряхте да излъчвате това обаждане във Facebook",
             "linkCopiedToCb": "Връзка се копира в клипборда",
             "codeCopiedToCb": "Кодът се копира в клипборда",
-            "userHasNoVideo": "Участникът няма видео"
+            "userHasNoVideo": "Участникът няма видео",
+            "openInBrowserAlert": "Отворете връзката в браузъра Safari, за да се присъедините към конференцията."
         },
         "settingsPopup": {
             "webCamera": "Уеб камера",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "има нов {{instructions.fromDisplayType}}",
                 "byAvatar": "добавено от {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "започна повикване"
         }
+    },
+    "menu": {
+        "placeholder": "тип заглавие на страницата",
+        "ModTab": "Промяна на елемент",
+        "Save": "Запази",
+        "Delete": "Изтрий",
+        "Submenu": "Подменю"
     }
 }

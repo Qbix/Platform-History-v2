@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Besøg venligst følgende link:",
             "InvitingYou": "Jeg inviterer dig til {{title}}",
             "HasInvitedYou": "{{displayName}} har inviteret dig til {{title}}",
-            "HasMentionedYou": "{{displayName}} har nævnt dig i &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} har nævnt dig i &quot;{{title}}&quot;",
+            "YOUAREINVITED": "DU ER INVITERET!",
+            "AcceptInvite": "Accepter invitation"
         },
         "sms": {
             "content": "Du er blevet inviteret til {{title}}. Tryk venligst på {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Du stoppede med at udsende dette opkald i Facebook",
             "linkCopiedToCb": "Link kopieret til udklipsholder",
             "codeCopiedToCb": "Kode kopieret til udklipsholder",
-            "userHasNoVideo": "Deltageren har ingen video"
+            "userHasNoVideo": "Deltageren har ingen video",
+            "openInBrowserAlert": "Åbn link i Safari-browser for at deltage i konferencen."
         },
         "settingsPopup": {
             "webCamera": "Web kamera",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "har en ny {{instructions.fromDisplayType}}",
                 "byAvatar": "tilføjet af {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "startede et opkald"
         }
+    },
+    "menu": {
+        "placeholder": "skriv sidetitel",
+        "ModTab": "Rediger varen",
+        "Save": "Gemme",
+        "Delete": "Slet",
+        "Submenu": "Undermenu"
     }
 }

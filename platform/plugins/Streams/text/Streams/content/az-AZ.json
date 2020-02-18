@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Xahiş edirik aşağıdakı linkə müraciət edin:",
             "InvitingYou": "{{title}} səhifəsinə dəvət edirəm",
             "HasInvitedYou": "{{displayName}} sizi {{title}} səhifəsinə dəvət etdi",
-            "HasMentionedYou": "{{displayName}} sizi &quot;{{title}}&quot; da qeyd etdi"
+            "HasMentionedYou": "{{displayName}} sizi &quot;{{title}}&quot; da qeyd etdi",
+            "YOUAREINVITED": "DİGƏRDİR!",
+            "AcceptInvite": "Dəvəti qəbul edin"
         },
         "sms": {
             "content": "{{title}} dəvət olunmuşdunuz. Xahiş edirik, {{url}}"
@@ -93,19 +95,27 @@
         "mobile": {
             "alert": "Arkadaşlarınız hələ tanımadığınız nömrələrimizdən dəvət göndərilir. Dəvətin sizə gəldiklərini bildirmək üçün onlara tez bir mətnlə baxın və linkdən istifadə etmələrini xahiş edin.",
             "confirm": "Arkadaşlarınız hələ tanımadığınız nömrələrimizdən dəvət göndərilir. Sizdən dəvətnaməni göndərdiyini bildirmək üçün onlara tez bir mətn ilə baxın və onlara link basın.",
-            "check": "Hey, yalnız sizə {{app}} tətbiqinə dəvət göndərdim. Xahiş edirik SMS-lərinizi yoxlayın və linki vurun!"
+            "check": "Hey, yalnız sizə {{app}} tətbiqinə dəvət göndərdim. Xahiş edirik SMS-lərinizi yoxlayın və linki vurun!",
+            "CheckYourMobile": "Zəhmət olmasa SMS-i yoxlayın və təlimatlara əməl edin!"
         },
         "email": {
             "alert": "Dostlarınız hələ tanış olmayan domenlərdən dəvət göndərilir. Dəvətin sizə gəldiklərini bildirmək üçün onlara tez bir mətnlə baxın və linkdən istifadə etmələrini xahiş edin.",
             "confirm": "Dostlarınız hələ tanış olmayan domenlərdən dəvət göndərilir. Sizdən dəvətnaməni göndərdiyini bildirmək üçün onlara tez bir mətn ilə baxın və onlara link basın.",
             "subject": "Bir dəvət aldınız mı?",
-            "body": "Hey, yalnız sizə {{app}} tətbiqinə dəvət göndərdim. E-poçtunuzu yoxlayın və orada olan linki vurun!"
+            "body": "Hey, yalnız sizə {{app}} tətbiqinə dəvət göndərdim. E-poçtunuzu yoxlayın və orada olan linki vurun!",
+            "CheckYourEmail": "Zəhmət olmasa e-poçtunuzu yoxlayın və təlimatlara əməl edin!"
         }
     },
     "participating": {
         "Title": "Başlıq",
         "Subscribed": "Abunə olundu",
-        "Participants": "İştirakçılar"
+        "Participants": "İştirakçılar",
+        "AreYouSureRemoveIdentifier": "Bu identifikatoru çıxartdığınızdan əminsiniz?",
+        "AreYouSureUnsubscribeIdentifier": "Bu identifikatoru ləğv etdiyinizə əminsiniz? Bu identifikatora bildirişləri söndürəcəkdir.",
+        "AreYouSureUnsubscribeDevice": "Bu cihazdan imtina etdiyinizə əminsiniz? Bu cihazdakı bildirişləri söndürəcəkdir.",
+        "Identifiers": "Müəyyənləşdiricilər",
+        "Devices": "Cihazlar",
+        "Streams": "Axınlar"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +126,74 @@
             "microphoneBtn": "Mikrofonu işə salın",
             "cameraBtn": "Kameranı aktivləşdirin",
             "cameraAndMicrophoneBtn": "Kamera və Mikrofonu aktivləşdirin"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Təlimatlar",
+            "permissionDenied": "{{kind}} üçün icazə rədd edildi. Ondan istifadə etmək üçün aşağıdakı adımları edin:",
+            "point1": "&quot;Parametrlər&quot; -&gt; &quot;Qabaqcıl&quot; -&gt; &quot;Məxfilik və təhlükəsizlik&quot; -&gt; &quot;Sayt Ayarları&quot; -&gt; &quot;Kamera&quot; və ya &quot;Sayt Parametrləri&quot; -&gt; &quot;Mikrofon&quot; bölməsinə keçin",
+            "point2": "&quot;Blok&quot; siyahısından {{hostname}} silin"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Təlimatlar",
+            "permissionDenied": "{{kind}} üçün icazə rədd edildi. Xahiş edirəm bu səhifəni yenidən yükləyin və konfransa qoşulmaq üçün {{kind}} girişini təsdiqləyin"
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Təlimatlar",
+            "permissionDenied": "{{kind}} üçün icazə rədd edildi. Ondan istifadə etmək üçün aşağıdakı adımları edin:",
+            "point1": "Android Parametrlərinizə keçin",
+            "point2": "&quot;Tətbiqlər və bildirişlər&quot; açın",
+            "point3": "&quot;{{communityName}}&quot; tapın və açın",
+            "point4": "İcazələrin üzərinə vurun",
+            "point5": "Aktivləşdirin {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Təlimatlar",
+            "permissionDenied": "{{kind}} üçün icazə rədd edildi. Ondan istifadə etmək üçün aşağıdakı adımları edin:",
+            "point1": "İOS Parametrlərinizə keçin",
+            "point2": "&quot;Məxfilik&quot; açın",
+            "point3": "{{kind}} tapın və açın",
+            "point4": "&quot;{{communityName}}&quot; tapın və aktiv olun"
+        },
+        "notices": {
+            "youJoinedRoom": "Otağa qoşuldun",
+            "joining": "Qoşulma: {{userName}}",
+            "sbLeftRoom": "{{userName}} otaqdan çıxdı",
+            "youLeftRoom": "Otaqdan çıxdın",
+            "codeCopied": "Otaqdan çıxdın",
+            "sbBeganFbLive": "{{userName}} bu çağırışı Facebook-da yayımlamağa başladı",
+            "sbStoppedFbLive": "{{userName}} bu çağırışı Facebook-da yayımladı",
+            "youBeganFbLive": "Bu çağırışı Facebook-da yayımlamağa başladın",
+            "youStoppedFbLive": "Facebookda bu zəngin yayımını dayandırdın",
+            "linkCopiedToCb": "Link panoya kopyalandı",
+            "codeCopiedToCb": "Kod panoya kopyalandı",
+            "userHasNoVideo": "İştirakçının videosu yoxdur",
+            "openInBrowserAlert": "Konfransa qoşulmaq üçün Safari brauzerində linki açın."
+        },
+        "settingsPopup": {
+            "webCamera": "Veb Kamera",
+            "screenSharing": "Ekran Paylaşımı",
+            "shareAnotherScreen": "Başqa bir ekran paylaşın",
+            "turnOffCameras": "Bütün kameraları söndürün",
+            "startFBLive": "Facebook Livestream başlayın",
+            "stopFBLive": "Facebook Livestream&#39;i dayandırın",
+            "fbLiveTitle": "Canlı Başlıq",
+            "fbLiveDescription": "Canlı Təsvir",
+            "fbOnlyMeLiveAccess": "Təkcə mən",
+            "fbFriendsAccess": "Dostlar",
+            "fbPublicAccess": "İctimai",
+            "fbStartLive": "Canlı gedin",
+            "fbStopLive": "Canlı son",
+            "fbEmbedCode": "Yerləşdirin",
+            "copy": "Surəti"
+        },
+        "participantsPopup": {
+            "disconnect": "Qoşulun",
+            "floatingScreens": "Üzən ekranlar",
+            "tiledScreens": "Zərif ekranlar",
+            "loudestExceptMe": "Məndən başqa Loudest",
+            "maximizeLoudest": "Səs səviyyəsini artırın",
+            "staticMaximized": "Statik Böyüdülmüşdür",
+            "manual": "Əl ilə"
         }
     },
     "types": {
@@ -243,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "yeni {{instructions.fromDisplayType}} var",
                 "byAvatar": "əlavə edilmiş {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "içəri bir zəng başladı"
         }
+    },
+    "menu": {
+        "placeholder": "səhifə başlığını yazın",
+        "ModTab": "Elementi dəyişdirin",
+        "Save": "Yadda saxla",
+        "Delete": "Silin",
+        "Submenu": "Submenu"
     }
 }

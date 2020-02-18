@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Obiščite naslednjo povezavo:",
             "InvitingYou": "Vabim vas na {{title}}",
             "HasInvitedYou": "{{displayName}} vas je povabil na {{title}}",
-            "HasMentionedYou": "{{displayName}} vas je omenil v &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} vas je omenil v &quot;{{title}}&quot;",
+            "YOUAREINVITED": "POVABLJEN SI!",
+            "AcceptInvite": "Sprejmi povabilo"
         },
         "sms": {
             "content": "Povabljeni ste bili na {{title}}. Pritisnite {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Prekinili ste oddajanje tega klica na Facebooku",
             "linkCopiedToCb": "Povezava je bila kopirana v odložišče",
             "codeCopiedToCb": "Koda je bila kopirana v odložišče",
-            "userHasNoVideo": "Udeleženec nima videoposnetka"
+            "userHasNoVideo": "Udeleženec nima videoposnetka",
+            "openInBrowserAlert": "Odprite povezavo v brskalniku Safari, da se pridružite konferenci."
         },
         "settingsPopup": {
             "webCamera": "Spletna kamera",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "ima novo {{instructions.fromDisplayType}}",
                 "byAvatar": "dodal {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "začel klic v"
         }
+    },
+    "menu": {
+        "placeholder": "tip strani naslov",
+        "ModTab": "Spremeni postavko",
+        "Save": "Shrani",
+        "Delete": "Izbriši",
+        "Submenu": "Podmeni"
     }
 }

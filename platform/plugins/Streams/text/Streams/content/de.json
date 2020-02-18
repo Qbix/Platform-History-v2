@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Bitte besuchen Sie den folgenden Link:",
             "InvitingYou": "Ich lade Sie ein zu {{title}}",
             "HasInvitedYou": "{{displayName}} hat Sie zu {{title}} eingeladen",
-            "HasMentionedYou": "{{displayName}} hat Sie in &quot;{{title}}&quot; erwähnt."
+            "HasMentionedYou": "{{displayName}} hat Sie in &quot;{{title}}&quot; erwähnt.",
+            "YOUAREINVITED": "DU BIST EINGELADEN!",
+            "AcceptInvite": "Akzeptiere Einladung"
         },
         "sms": {
             "content": "Sie wurden zu {{title}} eingeladen. Bitte tippen Sie auf {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Sie haben die Übertragung dieses Anrufs in Facebook beendet",
             "linkCopiedToCb": "Link in die Zwischenablage kopiert",
             "codeCopiedToCb": "Code in die Zwischenablage kopiert",
-            "userHasNoVideo": "Teilnehmer hat kein Video"
+            "userHasNoVideo": "Teilnehmer hat kein Video",
+            "openInBrowserAlert": "Öffnen Sie den Link im Safari-Browser, um an der Konferenz teilzunehmen."
         },
         "settingsPopup": {
             "webCamera": "Web-Kamera",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "hat eine neue {{instructions.fromDisplayType}}",
                 "byAvatar": "hinzugefügt von {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "startete einen Anruf in"
         }
+    },
+    "menu": {
+        "placeholder": "Geben Sie den Seitentitel ein",
+        "ModTab": "Element ändern",
+        "Save": "speichern",
+        "Delete": "Löschen",
+        "Submenu": "Untermenü"
     }
 }

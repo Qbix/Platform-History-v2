@@ -80,7 +80,9 @@
             "PleaseVisitLink": "لطفا از لینک زیر دیدن کنید:",
             "InvitingYou": "من از شما دعوت می کنم {{title}}",
             "HasInvitedYou": "{{displayName}} شما را به {{title}} دعوت کرده است",
-            "HasMentionedYou": "99 99 999} you شما را در &quot;{{title}}&quot; ذکر کرده است"
+            "HasMentionedYou": "99 99 999} you شما را در &quot;{{title}}&quot; ذکر کرده است",
+            "YOUAREINVITED": "شما دعوت شده اید!",
+            "AcceptInvite": "دعوت را بپذیر"
         },
         "sms": {
             "content": "شما به {{title}} دعوت شدهاید. لطفا شیر {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "شما پخش این تماس را در فیس بوک متوقف کردید",
             "linkCopiedToCb": "پیوند در کلیپ بورد کپی شد",
             "codeCopiedToCb": "کپی شده در کلیپ بورد",
-            "userHasNoVideo": "شرکت کننده فیلم ندارد"
+            "userHasNoVideo": "شرکت کننده فیلم ندارد",
+            "openInBrowserAlert": "برای پیوستن به همایش ، پیوند را در مرورگر سافاری باز کنید."
         },
         "settingsPopup": {
             "webCamera": "دوربین وب",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "999 پوند جدید دارد",
                 "byAvatar": "اضافه شده توسط {999}}"
-            }
+            },
+            "startedCallIn": "تماس تلفنی را شروع کرد"
         }
+    },
+    "menu": {
+        "placeholder": "عنوان صفحه را تایپ کنید",
+        "ModTab": "مورد را تغییر دهید",
+        "Save": "صرفه جویی",
+        "Delete": "حذف",
+        "Submenu": "زیرمنو"
     }
 }
