@@ -172,6 +172,9 @@ html.Q_ios.Q_standalone .Q_columns_title {
 .Q_notMobile .Q_columns_tool .Q_columns_container {
 	white-space: nowrap;
 }
+.Q_notMobile .Q_columns_tool .Q_columns_container .Q_columns_column {
+	white-space: normal;
+}
 .Q_notMobile .Q_columns_stretchFirstColumn[data-columns='0'],
 .Q_notMobile .Q_columns_stretchFirstColumn[data-columns='0'] .Q_columns_container,
 .Q_notMobile .Q_columns_stretchFirstColumn[data-columns='0'] .Q_column_0 {
