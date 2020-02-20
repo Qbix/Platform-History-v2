@@ -128,8 +128,10 @@ Q.Tool.define("Streams/interests", function (options) {
 						if (normalized in myInterests) {
 							$jq.addClass('Q_selected');
 							expandable = $jq.closest('.Q_expandable_tool')[0].Q('Q/expandable');
-							expandable.state.count++;
-							expandable.stateChanged(['count']);
+							if (expandable.state) {
+								expandable.state.count++;
+								expandable.stateChanged(['count']);
+							}
 						}
 					} else {
 						otherInterests[normalized] = interests[normalized];
