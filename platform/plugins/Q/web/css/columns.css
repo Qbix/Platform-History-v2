@@ -9,8 +9,7 @@
 }
 
 .Q_columns_column {
-	display: block;
-	float: left;
+	display: inline-block;
 	background: white;
 	overflow: hidden;
 }
@@ -21,7 +20,6 @@
 }
 
 .Q_notMobile .Q_columns_column {
-	margin-right: 10px;
 	width: 300px;
 	box-shadow: black 2px 2px 4px;
 	visibility: hidden;
@@ -31,6 +29,9 @@
 	-moz-user-select: none;
 	-ms-user-select: none;
 	-o-user-select: none;
+}
+.Q_notMobile .Q_columns_column:not(:last-of-type) {
+	margin-right: 10px;
 }
 
 .Q_notMobile .Q_columns_sized .Q_columns_column {
@@ -168,8 +169,20 @@ html.Q_ios.Q_standalone .Q_columns_title {
 	user-select: none;
 }
 
+.Q_notMobile .Q_columns_tool .Q_columns_container {
+	white-space: nowrap;
+}
 .Q_notMobile .Q_columns_stretchFirstColumn[data-columns='0'],
 .Q_notMobile .Q_columns_stretchFirstColumn[data-columns='0'] .Q_columns_container,
 .Q_notMobile .Q_columns_stretchFirstColumn[data-columns='0'] .Q_column_0 {
-	width: 100% !important;
+	width: 100%;
+}
+.Q_notMobile .Q_columns_stretchFirstColumn[data-columns='1'] .Q_columns_container {
+	width: 100%;
+}
+.Q_notMobile .Q_columns_stretchFirstColumn[data-columns='1'] .Q_column_0 {
+	width: 50%;
+}
+.Q_notMobile .Q_columns_stretchFirstColumn .Q_columns_column {
+	transition: width 0.5s;
 }

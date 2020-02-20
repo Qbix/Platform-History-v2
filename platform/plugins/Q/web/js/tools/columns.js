@@ -46,6 +46,7 @@ var dataKey_opening = 'opening';
  *  @param {Q.Event} [options.beforeOpen] Event that happens before a column is opened. Return false to prevent opening. Receives (options, index).
  *  @param {Q.Event} [options.beforeClose] Event that happens before a column is closed. Receives (index, indexAfterClose, columnElement). Return false to prevent closing.
  *  @param {Q.Event} [options.onOpen] Event that happens after a column is opened. Receives (options, index, columnElement).
+ *  @param {Q.Event} [options.onTransitionend] Event that happens after a css transition compete. Have tool as context and index, div as arguments.
  *  @param {Q.Event} [options.afterDelay] Event that happens after a column is opened, after a delay intended to wait out various animations. Receives (options, index, columnElement).
  *  @param {Q.Event} [options.onClose] Event that happens after a column is closed.
  * @return {Q.Tool}
@@ -145,7 +146,7 @@ Q.Tool.define("Q/columns", function(options) {
 		clickable: null
 	},
 	handlers: {},
-	stretchFirstColumn: false,
+	stretchFirstColumn: true,
 	title: undefined,
 	column: undefined,
 	columns: [],
@@ -164,16 +165,21 @@ Q.Tool.define("Q/columns", function(options) {
 	beforeOpen: new Q.Event(function () {
 		var $toolElement = $(this.element);
 		var columns = $toolElement.attr('data-columns');
-		$toolElement.attr('data-columns', isNaN(columns) ? 0 : columns+1);
+		$toolElement.attr('data-columns', columns === undefined ? 0 : parseInt(columns) + 1);
 	}),
 	beforeClose: new Q.Event(function () {
 		var max = this.max();
 		$(this.element).attr('data-columns', max ? max-1 : 0);
 	}),
-	onOpen: new Q.Event(function () {
+	onOpen: new Q.Event(function (options, index, div) {
+		var tool = this;
 		Q.Pointer.stopHints();
+		div.addEventListener('transitionend', function () {
+			Q.handle(tool.state.onTransitionend, tool, [index, div]);
+		});
 	}, 'Q/columns'),
 	onClose: new Q.Event(),
+	onTransitionend: new Q.Event(),
 	afterDelay: new Q.Event()
 },
 
@@ -552,6 +558,7 @@ Q.Tool.define("Q/columns", function(options) {
 				opacity: 1,
 				top: top
 			};
+
 			tool.oldMinHeight = undefined;
 			var hide = o.animation.css.hide;
 			$div.css('position', 'absolute');
@@ -562,9 +569,7 @@ Q.Tool.define("Q/columns", function(options) {
 				show.width = tool.element.clientWidth;
 				show.height = h;
 			} else {
-				var cs = $div[0].computedStyle();
-				$div.show();
-				show.width = cs.width;
+				$div.css('display', 'inline-block');
 				show.height = tool.element.clientHeight;
 				for (var k in hide) {
 					var str = hide[k].toString();
@@ -575,6 +580,7 @@ Q.Tool.define("Q/columns", function(options) {
 				$div.hide()
 				.css('position', 'relative');
 			}
+
 			var lastShow = $div.data(dataKey_lastShow);
 			if (lastShow) {
 				show = lastShow;
@@ -606,11 +612,6 @@ Q.Tool.define("Q/columns", function(options) {
 					$div.add($ct).css('width', '100%');
 				} else {
 					var width = 0;
-					tool.$('.Q_columns_column').each(function () {
-						width += $(this).outerWidth(true);
-					});
-					$sc.width(width).addClass('Q_columns_sized');
-
 					var $toScroll = ($te.css('overflow') === 'visible')
 						? $te.parents()
 						: $te;
@@ -638,7 +639,7 @@ Q.Tool.define("Q/columns", function(options) {
 				}
 				$mask = $('<div class="Q_columns_mask" />')
 				.appendTo($div);
-				$div.show()
+				$div.css('display', 'inline-block')
 				.css('visibility', 'visible')
 				.addClass('Q_columns_opening')
 				.css(o.animation.css.hide)
@@ -756,7 +757,7 @@ Q.Tool.define("Q/columns", function(options) {
 		}
 		
 		if (Q.info.isMobile && o.hideBackgroundColumns) {
-			$prev.show();
+			$prev.css('display', 'inline-block');
 		}
 		if (state.fullscreen) {
 			$(window).scrollTop($prev.data(dataKey_scrollTop) || 0);
@@ -808,10 +809,6 @@ Q.Tool.define("Q/columns", function(options) {
 			Q.removeElement(div, true); // remove it correctly
 
 			var data = tool.data(index);
-			var $sc = $(state.container);
-			if (!Q.info.isMobile) {
-				$sc.width($sc.width() - w);
-			}
 			presentColumn(tool);
 			Q.Pointer.clearSelection();
 			Q.handle(callback, tool, [index, div]);
@@ -850,7 +847,6 @@ Q.Tool.define("Q/columns", function(options) {
 		var $te = $(tool.element);
 		var $columns = $('.Q_columns_column', $te);
 		var $container = $('.Q_columns_container', $te);
-		var $cs = $('.Q_columns_column .Q_column_slot', $te);
 		var top = Q.fixedOffset('top', ['Q_drawers_drawer', tool.element]);
 		
 		if (Q.info.isMobile) {
