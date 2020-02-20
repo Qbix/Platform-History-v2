@@ -2759,6 +2759,7 @@ Q.onJQuery = new Q.Event();
 Q.onHandleOpenUrl = new Q.Event();
 var _layoutElements = [];
 var _layoutEvents = [];
+var _layoutObservers = [];
 /**
  * Call this function to get an event which occurs every time
  * Q.layout() is called on the given element or one of its parents.
@@ -2778,11 +2779,22 @@ Q.onLayout = function (element) {
 	var event = new Q.Event();
 	var l = _layoutElements.push(element);
 	_layoutEvents[l-1] = event;
+
+	// create ResizeObserver
+	var observer = null;
+	if (typeof ResizeObserver === 'function') {
+		observer = new ResizeObserver(function () {
+			Q.layout(element);
+		});
+		observer.observe(element);
+	}
+	_layoutObservers[l-1] = observer;
 	event.onEmpty().set(function () {
 		for (var i=0, l=_layoutElements.length; i<l; ++i) {
 			if (_layoutElements[i] === element) {
 				_layoutElements.splice(i, 1);
 				_layoutEvents.splice(i, 1);
+				_layoutObservers.splice(i, 1);
 				break;
 			}
 		}
