@@ -64,6 +64,10 @@ Q.Tool.define("Q/columns", function(options) {
 		$toolElement.addClass("Q_columns_stretchFirstColumn");
 	}
 
+	if (state.animateWidth) {
+		$toolElement.addClass("Q_columns_animateWidth");
+	}
+
 	Q.addStylesheet('{{Q}}/css/columns.css', function () {
 		if (state.title === undefined) {
 			state.title = $('<div />').append('<img class="Q_columns_loading" src="'
@@ -147,6 +151,7 @@ Q.Tool.define("Q/columns", function(options) {
 	},
 	handlers: {},
 	stretchFirstColumn: true,
+	animateWidth: true,
 	title: undefined,
 	column: undefined,
 	columns: [],
@@ -164,12 +169,12 @@ Q.Tool.define("Q/columns", function(options) {
 	hideBackgroundColumns: true,
 	beforeOpen: new Q.Event(function () {
 		var $toolElement = $(this.element);
-		var columns = $toolElement.attr('data-columns');
-		$toolElement.attr('data-columns', columns === undefined ? 0 : parseInt(columns) + 1);
+		var columns = $toolElement.attr('data-column-count');
+		$toolElement.attr('data-column-count', columns === undefined ? 0 : parseInt(columns) + 1);
 	}),
 	beforeClose: new Q.Event(function () {
 		var max = this.max();
-		$(this.element).attr('data-columns', max ? max-1 : 0);
+		$(this.element).attr('data-column-count', max ? max-1 : 0);
 	}),
 	onOpen: new Q.Event(function (options, index, div) {
 		var tool = this;

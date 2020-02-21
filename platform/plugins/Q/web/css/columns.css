@@ -175,17 +175,20 @@ html.Q_ios.Q_standalone .Q_columns_title {
 .Q_notMobile .Q_columns_tool .Q_columns_container .Q_columns_column {
 	white-space: normal;
 }
-.Q_notMobile .Q_columns_stretchFirstColumn[data-columns='0'],
-.Q_notMobile .Q_columns_stretchFirstColumn[data-columns='0'] .Q_columns_container,
-.Q_notMobile .Q_columns_stretchFirstColumn[data-columns='0'] .Q_column_0 {
+.Q_notMobile .Q_columns_stretchFirstColumn,
+.Q_notMobile .Q_columns_container,
+.Q_notMobile .Q_columns_stretchFirstColumn[data-column-count='0'] .Q_column_0 {
 	width: 100%;
 }
-.Q_notMobile .Q_columns_stretchFirstColumn[data-columns='1'] .Q_columns_container {
-	width: 100%;
+.Q_notMobile .Q_columns_stretchFirstColumn .Q_column_0 {
+	min-width: 300px;
 }
-.Q_notMobile .Q_columns_stretchFirstColumn[data-columns='1'] .Q_column_0 {
-	width: 50%;
+.Q_notMobile .Q_columns_stretchFirstColumn[data-column-count='1'] .Q_column_0 {
+	width: calc(100% - 310px);
 }
-.Q_notMobile .Q_columns_stretchFirstColumn .Q_columns_column {
+.Q_notMobile .Q_columns_stretchFirstColumn[data-column-count='2'] .Q_column_0 {
+	width: calc(100% - 620px);
+}
+.Q_notMobile .Q_columns_stretchFirstColumn.Q_columns_animateWidth .Q_columns_column {
 	transition: width 0.5s;
 }
