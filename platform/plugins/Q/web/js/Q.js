@@ -2784,7 +2784,7 @@ Q.onLayout = function (element) {
 	var observer = null;
 	if (typeof ResizeObserver === 'function') {
 		observer = new ResizeObserver(function () {
-			Q.layout(element);
+			event.handle.call(event, element, element);
 		});
 		observer.observe(element);
 	}
@@ -2794,6 +2794,10 @@ Q.onLayout = function (element) {
 			if (_layoutElements[i] === element) {
 				_layoutElements.splice(i, 1);
 				_layoutEvents.splice(i, 1);
+
+				if (Q.getObject('disconnect', _layoutObservers[i])) {
+					_layoutObservers[i].disconnect();
+				}
 				_layoutObservers.splice(i, 1);
 				break;
 			}
@@ -6571,6 +6575,12 @@ Q.layout = function _Q_layout(element) {
 	Q.each(_layoutElements, function (i, e) {
 		if (!element || element.contains(e)) {
 			var event = _layoutEvents[i];
+
+			// return if ResizeObserver defined on this element
+			if (_layoutObservers[i]) {
+				return;
+			}
+
 			event.handle.call(event, e, element);
 		}
 	});
