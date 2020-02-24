@@ -46,7 +46,7 @@ var dataKey_opening = 'opening';
  *  @param {Q.Event} [options.beforeOpen] Event that happens before a column is opened. Return false to prevent opening. Receives (options, index).
  *  @param {Q.Event} [options.beforeClose] Event that happens before a column is closed. Receives (index, indexAfterClose, columnElement). Return false to prevent closing.
  *  @param {Q.Event} [options.onOpen] Event that happens after a column is opened. Receives (options, index, columnElement).
- *  @param {Q.Event} [options.onTransitionend] Event that happens after a css transition compete. Have tool as context and index, div as arguments.
+ *  @param {Q.Event} [options.onTransitionEnd] Event that happens after a css transition compete. Have tool as context and index, div as arguments.
  *  @param {Q.Event} [options.afterDelay] Event that happens after a column is opened, after a delay intended to wait out various animations. Receives (options, index, columnElement).
  *  @param {Q.Event} [options.onClose] Event that happens after a column is closed.
  * @return {Q.Tool}
@@ -180,11 +180,11 @@ Q.Tool.define("Q/columns", function(options) {
 		var tool = this;
 		Q.Pointer.stopHints();
 		div.addEventListener('transitionend', function () {
-			Q.handle(tool.state.onTransitionend, tool, [index, div]);
+			Q.handle(tool.state.onTransitionEnd, tool, [index, div]);
 		});
 	}, 'Q/columns'),
 	onClose: new Q.Event(),
-	onTransitionend: new Q.Event(),
+	onTransitionEnd: new Q.Event(),
 	afterDelay: new Q.Event()
 },
 
