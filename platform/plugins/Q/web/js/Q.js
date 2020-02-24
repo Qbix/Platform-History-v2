@@ -2784,21 +2784,19 @@ Q.onLayout = function (element) {
 	var observer = null;
 	if (typeof ResizeObserver === 'function') {
 		observer = new ResizeObserver(function () {
-			event.handle.call(event, element, element);
+			Q.layout(element);	
 		});
 		observer.observe(element);
 	}
 	_layoutObservers[l-1] = observer;
 	event.onEmpty().set(function () {
+		var observers;
 		for (var i=0, l=_layoutElements.length; i<l; ++i) {
 			if (_layoutElements[i] === element) {
 				_layoutElements.splice(i, 1);
 				_layoutEvents.splice(i, 1);
-
-				if (Q.getObject('disconnect', _layoutObservers[i])) {
-					_layoutObservers[i].disconnect();
-				}
-				_layoutObservers.splice(i, 1);
+				observers = _layoutObservers.splice(i, 1);
+				observers[0].unobserve(element);
 				break;
 			}
 		}
@@ -6575,12 +6573,6 @@ Q.layout = function _Q_layout(element) {
 	Q.each(_layoutElements, function (i, e) {
 		if (!element || element.contains(e)) {
 			var event = _layoutEvents[i];
-
-			// return if ResizeObserver defined on this element
-			if (_layoutObservers[i]) {
-				return;
-			}
-
 			event.handle.call(event, e, element);
 		}
 	});
