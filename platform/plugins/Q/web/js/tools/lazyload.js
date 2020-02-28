@@ -106,11 +106,11 @@ Q.Tool.define('Q/lazyload', function (options) {
 				return true;
 			},
 			preparing: function (img, beingInsertedIntoDOM) {
-				if (!beingInsertedIntoDOM) {
+				if (!beingInsertedIntoDOM || 	) {
 					return true; // too late anyway, browser will load image
 				}
-				if (img.hasClass('Q_lazy_loaded')) {
-					return true; // this was already lazy-loaded before
+				if (img.hasClass('Q_lazy_load') || img.hasClass('Q_lazy_loaded')) {
+					return true; // this was already processed by lazy-loading
 				}
 				var src = img.getAttribute('src');
 				if (src && src.substr(0, 5) !== 'data:'
