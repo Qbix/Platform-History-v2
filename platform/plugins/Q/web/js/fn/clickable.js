@@ -43,10 +43,7 @@
  * @param {Number} [options.cancelDistance=15] cancelDistance
  *
  */
-Q.Tool.jQuery('Q/clickable',
-
-function _Q_clickable(o) {
-	
+Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 	var $this = $(this);
 	var state = $this.state('Q/clickable');
 	$this.on('invoke.Q_clickable', function () {
@@ -57,8 +54,14 @@ function _Q_clickable(o) {
 	});
 	var originalTime = Date.now();
 	var timing = state.timing;
-	
+	var idString = $this.prop("tagName") + $this.attr("id") + $this.attr("class") + $this.attr("style");
+
 	setTimeout(function _clickify() {
+		// if element already wrapped clickable container, do nothing
+		if ($this.closest(".Q_clickable_container").length) {
+			return;
+		}
+
 		if (!$this.is(':visible')) {
 			if (!$this.closest('body').length) {
 				return;
@@ -72,6 +75,11 @@ function _Q_clickable(o) {
 			}
 			return;
 		}
+
+		Q.onLayout($this.parent()[0]).set(function () {
+			$this.plugin('Q/clickable', 'remove').plugin('Q/clickable');
+		}, idString);
+
 		state.oldStyle = $this.attr('style');
 		var display = $this.css('display');
 		var position = $this.css('position');

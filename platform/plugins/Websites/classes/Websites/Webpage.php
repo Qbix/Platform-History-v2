@@ -30,9 +30,11 @@ class Websites_Webpage
 
 		$parsedUrl = parse_url($url);
 
+		//$document = file_get_contents($url);
+
 		// get source with header
 		// "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36"
-		/*$response = Q_Utils::get($url, $_SERVER['HTTP_USER_AGENT'], array(
+		$response = Q_Utils::get($url, $_SERVER['HTTP_USER_AGENT'], array(
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_VERBOSE => true,
 			CURLOPT_HEADER => true
@@ -44,18 +46,15 @@ class Websites_Webpage
 		$http_response_header = $document = '';
 		foreach ($response as $i => $item) {
 			if (strpos($item, 'HTTP/') === 0 && empty($document)) {
-				$http_response_header = $item;
+				$http_response_header = explode("\n", $item);
 			} else {
 				$document .= $item;
 			}
-		}*/
-
-
-		$document = file_get_contents($url);
+		}
 
 		//If http response header mentions that content is gzipped, then uncompress it
 		foreach ($http_response_header as $item) {
-			if(stristr($item, 'content-encoding') && stristr($item, 'gzip')) {
+			if(stristr($item, 'content-encoding') && stristr($item, 'gzip') && 0 === mb_strpos($document, "\x1f" . "\x8b" . "\x08", 0, "US-ASCII")) {
 				//Now lets uncompress the compressed data
 				$document = gzinflate(substr($document,10,-8) );
 				break;
