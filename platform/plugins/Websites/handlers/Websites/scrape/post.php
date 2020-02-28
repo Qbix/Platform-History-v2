@@ -11,8 +11,8 @@ function Websites_scrape_post($params)
 
 	$url = $fields['url'];
 
-	if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
-		$url = "http://" . $url;
+	if (parse_url($url, PHP_URL_SCHEME) === null) {
+		$url = 'http://'.$url;
 	}
 
 	// if stream for this URL already exist, return it
