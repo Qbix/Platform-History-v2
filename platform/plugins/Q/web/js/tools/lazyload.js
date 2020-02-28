@@ -106,7 +106,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 				return true;
 			},
 			preparing: function (img, beingInsertedIntoDOM) {
-				if (!beingInsertedIntoDOM || 	) {
+				if (!beingInsertedIntoDOM) {
 					return true; // too late anyway, browser will load image
 				}
 				if (img.hasClass('Q_lazy_load') || img.hasClass('Q_lazy_loaded')) {
