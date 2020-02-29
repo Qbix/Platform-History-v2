@@ -264,7 +264,7 @@ Q.Tool.define("Q/columns", function(options) {
 		
 		var div = this.column(index);
 		var titleSlot, columnSlot, controlsSlot;
-		var $div, $mask, $close, $title, $controls, $tc;
+		var $div, $mask, $close, $title, $controls, $tc, $ts;
 		var createdNewDiv = false;
 		if (!div) {
 			createdNewDiv = true;
@@ -274,8 +274,8 @@ Q.Tool.define("Q/columns", function(options) {
 			$div = $(div);
 			++this.state.max;
 			this.state.columns[index] = div;
-			var $tc = $('<div class="Q_columns_title_container">');
-			var $ts = $('<h2 class="Q_title_slot"></h2>').appendTo($tc);
+			$tc = $('<div class="Q_columns_title_container">');
+			$ts = $('<h2 class="Q_title_slot"></h2>').appendTo($tc);
 			titleSlot = $ts[0];
 			$title = $('<div class="Q_columns_title"></div>').append($tc);
 			columnSlot = document.createElement('div').addClass('Q_column_slot');
@@ -650,7 +650,6 @@ Q.Tool.define("Q/columns", function(options) {
 				.css(o.animation.css.hide)
 				.stop()
 				.animate(show, duration, function() {
-					$tc.outerWidth($tc[0].remainingWidth());
 					if (o.textfill) {
 						$tc.plugin('Q/textfill', o.textfill);
 					}
