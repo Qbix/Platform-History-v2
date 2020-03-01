@@ -78,15 +78,15 @@ html.Q_ios.Q_standalone .Q_columns_title {
 
 .Q_columns_title_container {
 	margin: 0;
-	width: 80%;
-	height: 40px;
 	line-height: 40px;
 	box-sizing: content-box;
-	padding: 5px;
 }
-
-.Q_columns_column:first-child .Q_title_slot {
-	width: 100%;
+.Q_columns_column:not([data-index='0']) .Q_columns_title_container {
+	width: calc(100% - 50px);
+}
+.Q_columns_title_container > * {
+	margin: 5px;
+	width: calc(100% - 10px);
 }
 
 .Q_columns_column .Q_column_slot {
