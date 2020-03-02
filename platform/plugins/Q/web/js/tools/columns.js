@@ -493,6 +493,10 @@ Q.Tool.define("Q/columns", function(options) {
 				);
 			}
 
+			Q.onLayout($tc[0]).set(function () {
+				presentColumn(tool, $div, o.fullscreen);
+			}, tool);
+
 			waitFor.push('activated1', 'activated2', 'activated3');
 			$titleSlot.activate(o.activateOptions, p.fill('activated1'));
 			$columnSlot.activate(o.activateOptions, p.fill('activated2'));
@@ -674,17 +678,8 @@ Q.Tool.define("Q/columns", function(options) {
 					}
 				}
 				
-				$div.removeClass('Q_columns_opening')
-				.addClass('Q_columns_opened');
+				$div.removeClass('Q_columns_opening').addClass('Q_columns_opened');
 
-				if (!Q.info.isMobile) {
-					$cs.height(
-						$(tool.element).height()
-						- $cs.offset().top + $cs.parent().offset().top
-						- parseInt($cs.css('padding-top'))
-						- parseInt($cs.css('padding-bottom'))
-					);
-				}
 				presentColumn(tool, $div, o.fullscreen);
 
 				if (Q.info.isTouchscreen) {
@@ -995,6 +990,13 @@ function presentColumn(tool, $column, fullscreen) {
 			$column.css('height', 'auto');
 		}
 	} else {
+		$cs.height(
+			$(tool.element).height()
+			- $cs.offset().top + $cs.parent().offset().top
+			- parseInt($cs.css('padding-top'))
+			- parseInt($cs.css('padding-bottom'))
+		);
+
 		$column.css('min-height', tool.oldMinHeight);
 		var show = $column.data(dataKey_lastShow);
 		if (show && show.height) {
