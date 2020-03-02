@@ -277,7 +277,7 @@ class Websites_Webpage
 	 */
 	static function fetchStream($url, $publisherId = null) {
 		$streams = new Streams_Stream();
-		$streams->publisherId = $publisherId ?: Users::communityId();
+		$streams->publisherId = $publisherId ?: Users::currentCommunityId(true);
 		$streams->name = "Websites/webpage/".self::normalizeUrl($url);
 		if ($streams->retrieve()) {
 			return Streams::fetchOne($streams->publisherId, $streams->publisherId, $streams->name);
