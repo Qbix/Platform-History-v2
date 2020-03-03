@@ -167,23 +167,22 @@ Q.Tool.define("Q/columns", function(options) {
 	textfill: null,
 	fullscreen: Q.info.useFullscreen,
 	hideBackgroundColumns: true,
-	beforeOpen: new Q.Event(function () {
-		var $toolElement = $(this.element);
-		var columns = $toolElement.attr('data-column-count');
-		$toolElement.attr('data-column-count', columns === undefined ? 0 : parseInt(columns) + 1);
-	}),
-	beforeClose: new Q.Event(function () {
-		var max = this.max();
-		$(this.element).attr('data-column-count', max ? max-1 : 0);
-	}),
+	beforeOpen: new Q.Event(),
+	beforeClose: new Q.Event(),
 	onOpen: new Q.Event(function (options, index, div) {
 		var tool = this;
 		Q.Pointer.stopHints();
 		div.addEventListener('transitionend', function () {
 			Q.handle(tool.state.onTransitionEnd, tool, [index, div]);
 		});
+
+		var max = this.max();
+		$(this.element).attr('data-column-count', max ? max + 1 : 1);
 	}, 'Q/columns'),
-	onClose: new Q.Event(),
+	onClose: new Q.Event(function () {
+		var max = this.max();
+		$(this.element).attr('data-column-count', max ? max + 1 : 1);
+	}),
 	onTransitionEnd: new Q.Event(),
 	afterDelay: new Q.Event()
 },
