@@ -143,7 +143,7 @@ class Websites_Webpage
 		}
 
 		// parse url
-		$result['url'] = $canonicalUrl ?: $url;
+		$result['url'] = $canonicalUrl ? $canonicalUrl : $url;
 
 		// get big icon
 		$icon = Q::ifset($result, 'image', null);
@@ -277,7 +277,7 @@ class Websites_Webpage
 	 */
 	static function fetchStream($url, $publisherId = null) {
 		$streams = new Streams_Stream();
-		$streams->publisherId = $publisherId ?: Users::communityId();
+		$streams->publisherId = $publisherId ? $publisherId : Users::currentCommunityId(true);
 		$streams->name = "Websites/webpage/".self::normalizeUrl($url);
 		if ($streams->retrieve()) {
 			return Streams::fetchOne($streams->publisherId, $streams->publisherId, $streams->name);
@@ -396,9 +396,10 @@ class Websites_Webpage
 			$quota = Users_Quota::check($asUserId, '', $quotaName, true, 1, $roles);
 		}
 
+		$td = trim($description);
 		$webpageStream = Streams::create($asUserId, $publisherId, 'Websites/webpage', array(
 			'title' => trim($title),
-			'content' => trim($description) ?: "",
+			'content' => $td ? $td : "",
 			'icon' => $streamIcon,
 			'attributes' => array(
 				'url' => $url,

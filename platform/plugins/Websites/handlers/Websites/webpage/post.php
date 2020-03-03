@@ -29,7 +29,7 @@ function Websites_webpage_start ($r) {
 		throw new Exception("stream not found");
 	}
 
-	$publisherId = Q::ifset($r, 'categoryStream', 'publisherId', Users::communityId());
+	$publisherId = Q::ifset($r, 'categoryStream', 'publisherId', Users::currentCommunityId(true));
 	$streamName = Q::ifset($r, 'categoryStream', 'streamName', 'Streams/chats/main');
 	$chatRelationType = Q::ifset($r, 'relationType', 'Websites/webpage');
 

@@ -29,11 +29,8 @@ function Websites_scrape_post($params)
 		return Q_Response::setSlot('result', $streamExist);
 	}
 
-	// if requested slots publisherId and streamName - create stream
-	if (Q_Request::slotName('publisherId') && Q_Request::slotName('streamName')) {
-		Q::event('Websites/webpage/post', $result);
-	}
-
+	Q::event('Websites/webpage/post', $result);
+	
 	Q_Response::setSlot('result', $result);
 }
 
