@@ -32,12 +32,14 @@
 
 			var previewTool = Q.Tool.from($preview, "Websites/webpage/preview");
 
-			fields.instructions = Q.extend({}, fields.instructions, {
-				'Websites/webpages': {
-					publisherId: previewTool.state.publisherId,
-					streamName: previewTool.state.streamName
-				}
-			});
+			if (Q.typeOf(previewTool) === 'Q.Tool') {
+				fields.instructions = Q.extend({}, fields.instructions, {
+					'Websites/webpages': {
+						publisherId: previewTool.state.publisherId,
+						streamName: previewTool.state.streamName
+					}
+				});
+			}
 
 			tool.removePreview(previewTool.element);
 		}, tool);
