@@ -178,11 +178,16 @@ Q.Tool.define("Q/columns", function(options) {
 
 		var max = this.max();
 		$(this.element).attr('data-column-count', max ? max + 1 : 1);
+
+		var $div = $(div);
+		Q.onLayout(div).set(function () {
+			$div.attr('data-width-index', Math.round($div.width()/300) || 1);
+		}, this);
 	}, 'Q/columns'),
 	onClose: new Q.Event(function () {
 		var max = this.max();
 		$(this.element).attr('data-column-count', max ? max + 1 : 1);
-	}),
+	}, 'Q/columns'),
 	onTransitionEnd: new Q.Event(),
 	afterDelay: new Q.Event()
 },
