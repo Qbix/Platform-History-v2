@@ -80,7 +80,9 @@
             "PleaseVisitLink": "እባክዎ የሚከተለውን አገናኝ ይጎብኙ:",
             "InvitingYou": "ወደ {{title}} በመጋበዝ ላይ ነኝ",
             "HasInvitedYou": "{{displayName}} እርስዎን በ {{title}} ላይ ጋብዞዎታል",
-            "HasMentionedYou": "{{displayName}} በ &quot;{{title}}&quot; ውስጥ ጠቅሶዎታል"
+            "HasMentionedYou": "{{displayName}} በ &quot;{{title}}&quot; ውስጥ ጠቅሶዎታል",
+            "YOUAREINVITED": "ተጋብዘዋል!",
+            "AcceptInvite": "ግብዣውን ተቀበል"
         },
         "sms": {
             "content": "ወደ {{title}} ተጋብዘዋል. እባክዎ {{url}} ን መታ ያድርጉ"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "ይህንን ጥሪ በፌስቡክ ማሰራጨት አቁመዋል",
             "linkCopiedToCb": "አገናኝ ወደ ቅንጥብ ሰሌዳ ተቀድቷል",
             "codeCopiedToCb": "ኮድ ወደ ቅንጥብ ሰሌዳ ተቀድቷል",
-            "userHasNoVideo": "ተሳታፊ ቪዲዮ የለውም"
+            "userHasNoVideo": "ተሳታፊ ቪዲዮ የለውም",
+            "openInBrowserAlert": "ጉባኤውን ለመቀላቀል Safari አሳሽ ውስጥ አገናኝን ይክፈቱ።"
         },
         "settingsPopup": {
             "webCamera": "የድር ካሜራ",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "አዲስ {{instructions.fromDisplayType}} አለው",
                 "byAvatar": "በ {{avatar.displayName}} ታክሏል"
-            }
+            },
+            "startedCallIn": "በ ውስጥ ጥሪ ጀመረ"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "ለifዎች",
         "Devices": "መሣሪያዎች",
         "Streams": "ጅረቶች"
+    },
+    "menu": {
+        "placeholder": "ገጽ ርዕስ ይተይቡ",
+        "ModTab": "ንጥል ያሻሽሉ",
+        "Save": "አስቀምጥ",
+        "Delete": "ሰርዝ",
+        "Submenu": "ንዑስ"
     }
 }

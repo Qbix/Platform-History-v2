@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Jọwọ ṣẹwo si ọna asopọ wọnyi:",
             "InvitingYou": "Mo n pe ọ si {{title}}",
             "HasInvitedYou": "{{displayName}} ti pe o si {{title}}",
-            "HasMentionedYou": "{{displayName}} ti mẹnuba rẹ ninu &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} ti mẹnuba rẹ ninu &quot;{{title}}&quot;",
+            "YOUAREINVITED": "O RẸ!",
+            "AcceptInvite": "Gba ifiwepe"
         },
         "sms": {
             "content": "A ti pe ọ si {{title}}. Jọwọ tẹ {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "O da igbohunsafefe ipe yii duro ni Facebook",
             "linkCopiedToCb": "Ọna asopọ dakọ si agekuru",
             "codeCopiedToCb": "Koodu dakọ si agekuru",
-            "userHasNoVideo": "Olukopa ko ni fidio"
+            "userHasNoVideo": "Olukopa ko ni fidio",
+            "openInBrowserAlert": "Ṣii ọna asopọ ni ẹrọ lilọ-kiri Safari lati darapọ mọ apejọ."
         },
         "settingsPopup": {
             "webCamera": "Kamẹra wẹẹbu",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "ni tuntun {{instructions.fromDisplayType}}",
                 "byAvatar": "afikun nipasẹ {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "bẹrẹ ipe ninu"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Awọn idamo",
         "Devices": "Awọn ẹrọ",
         "Streams": "Awọn ṣiṣan"
+    },
+    "menu": {
+        "placeholder": "akọle akọle iwe",
+        "ModTab": "Yi ohun kan pada",
+        "Save": "Fipamọ",
+        "Delete": "Paarẹ",
+        "Submenu": "Submenu"
     }
 }

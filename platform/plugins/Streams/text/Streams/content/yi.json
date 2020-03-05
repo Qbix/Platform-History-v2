@@ -80,7 +80,9 @@
             "PleaseVisitLink": "ביטע באַזוכן די פאלגענדע לינק:",
             "InvitingYou": "איך בין אייך ינווייטינג צו {{title}}",
             "HasInvitedYou": "{{displayName}} האָט איר פארבעטן צו {{title}}",
-            "HasMentionedYou": "{{displayName}} האָט איר דערמאנט אין &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} האָט איר דערמאנט אין &quot;{{title}}&quot;",
+            "YOUAREINVITED": "איר זענט פאַרבעטן!",
+            "AcceptInvite": "אָננעמען פאַרבעטן"
         },
         "sms": {
             "content": "איר זענט פארבעטן צו {{title}}. ביטע צאַפּן {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "איר סטאַפּט בראָדקאַסטינג דעם רוף אין פאַסעבאָאָק",
             "linkCopiedToCb": "לינק קאַפּיד צו קליפּבאָרד",
             "codeCopiedToCb": "קאָד קאַפּיד צו קליפּבאָרד",
-            "userHasNoVideo": "דער באַטייליקטער האט קיין ווידעא"
+            "userHasNoVideo": "דער באַטייליקטער האט קיין ווידעא",
+            "openInBrowserAlert": "עפֿן לינק אין Safari בלעטערער צו פאַרבינדן די זיצונג."
         },
         "settingsPopup": {
             "webCamera": "וועב קאַמעראַ",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "האט אַ נייַע {{instructions.fromDisplayType}}",
                 "byAvatar": "צוגעגעבן דורך {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "סטאַרטעד אַ רוף אין"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "ידענטיפיערס",
         "Devices": "דעוויסעס",
         "Streams": "סטרעאַמס"
+    },
+    "menu": {
+        "placeholder": "טיפּ בלאַט טיטל",
+        "ModTab": "מאָדיפיצירן יטעם",
+        "Save": "היט",
+        "Delete": "ויסמעקן",
+        "Submenu": "סובמענו"
     }
 }

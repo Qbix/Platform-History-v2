@@ -80,7 +80,9 @@
             "PleaseVisitLink": "ກະລຸນາໄປທີ່ລິ້ງຕໍ່ໄປນີ້:",
             "InvitingYou": "ຂ້ອຍຂໍເຊີນທ່ານໃຫ້ {{title}}",
             "HasInvitedYou": "{{displayName}} ໄດ້ເຊີນທ່ານໃຫ້ {{title}}",
-            "HasMentionedYou": "{{displayName}} ໄດ້ກ່າວເຖິງທ່ານໃນ &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} ໄດ້ກ່າວເຖິງທ່ານໃນ &quot;{{title}}&quot;",
+            "YOUAREINVITED": "ທ່ານ​ໄດ້​ຖືກ​ເຊື້ອ​ເຊີນ!",
+            "AcceptInvite": "ຍອມຮັບການເຊີນ"
         },
         "sms": {
             "content": "ທ່ານໄດ້ຖືກເຊີນໄປຫາ {{title}}. ກະລຸນາແຕະ {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "ທ່ານໄດ້ຢຸດການກະຈາຍສຽງໂທນີ້ໃນເຟສບຸກ",
             "linkCopiedToCb": "ການເຊື່ອມຕໍ່ໄດ້ຄັດລອກໄປທີ່ clipboard",
             "codeCopiedToCb": "ລະຫັດຖືກຄັດລອກໄປທີ່ clipboard",
-            "userHasNoVideo": "ຜູ້ເຂົ້າຮ່ວມບໍ່ມີວິດີໂອ"
+            "userHasNoVideo": "ຜູ້ເຂົ້າຮ່ວມບໍ່ມີວິດີໂອ",
+            "openInBrowserAlert": "ເປີດລິ້ງໃນ browser browser ເພື່ອເຂົ້າຮ່ວມການປະຊຸມ."
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "ມີ {{instructions.fromDisplayType}} ໃໝ່",
                 "byAvatar": "ເພີ່ມໂດຍ {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "ເລີ່ມການໂທເຂົ້າ"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "ຕົວລະບຸຕົວຕົນ",
         "Devices": "ອຸປະກອນຕ່າງໆ",
         "Streams": "ສາຍນ້ ຳ"
+    },
+    "menu": {
+        "placeholder": "ປະເພດຫົວຂໍ້ຫນ້າ",
+        "ModTab": "ປັບປຸງແກ້ໄຂລາຍການ",
+        "Save": "ບັນທຶກ",
+        "Delete": "ລົບ",
+        "Submenu": "ເມນູຍ່ອຍ"
     }
 }

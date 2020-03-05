@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Nceda u tyelele eli linxulumano:",
             "InvitingYou": "Ndikumema ukuba {{title}}",
             "HasInvitedYou": "{{displayName}} ukumeme ukuba {{title}}",
-            "HasMentionedYou": "{{displayName}} ukukhankanyile kwi &quot;{{1000]}"
+            "HasMentionedYou": "{{displayName}} ukukhankanyile kwi &quot;{{1000]}",
+            "YOUAREINVITED": "UYAXELWA!",
+            "AcceptInvite": "Yamkela isimemo"
         },
         "sms": {
             "content": "Umenywe {{title}}. Nceda uthephe {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Uyekile ukusasaza lo mnxeba kuFacebook",
             "linkCopiedToCb": "Ikhonkco elikhutshelwe kwibhodi eqhotyoshwayo",
             "codeCopiedToCb": "Ikhowudi ikopiwe kwibhodi eqhotyoshwayo",
-            "userHasNoVideo": "Umthathi-nxaxheba akanayo ividiyo"
+            "userHasNoVideo": "Umthathi-nxaxheba akanayo ividiyo",
+            "openInBrowserAlert": "Vula ikhonkco kwi-Safari browser ukuze ujoyine inkomfa."
         },
         "settingsPopup": {
             "webCamera": "Ikhamera yeWebhu",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "ine {{instructions.fromDisplayType}} entsha",
                 "byAvatar": "yongezwe ngu {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "waqala umnxeba ngaphakathi"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Izazisi",
         "Devices": "Izixhobo",
         "Streams": "Imilambo"
+    },
+    "menu": {
+        "placeholder": "isihloko sephepha",
+        "ModTab": "Guqula into",
+        "Save": "Gcina",
+        "Delete": "Cima",
+        "Submenu": "Submenu"
     }
 }

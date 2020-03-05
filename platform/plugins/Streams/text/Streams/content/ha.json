@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Da fatan a ziyarci mahaɗin da ke biyowa:",
             "InvitingYou": "Ina kiran ku zuwa [{999}}",
             "HasInvitedYou": "{{displayName}} ya gayyatar ku zuwa {{title}}",
-            "HasMentionedYou": "{{displayName}} ya ambace ka a cikin &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} ya ambace ka a cikin &quot;{{title}}&quot;",
+            "YOUAREINVITED": "KA SAN KYAUTA!",
+            "AcceptInvite": "Karɓi Gayyata"
         },
         "sms": {
             "content": "An gayyace ku zuwa {{title}}. Da fatan a latsa {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Ka dakatar da yada wannan kiran a Facebook",
             "linkCopiedToCb": "An lika hanyar haɗi zuwa allon rubutu",
             "codeCopiedToCb": "Lambar da aka kwafa zuwa allo",
-            "userHasNoVideo": "Mai halarta bashi da bidiyo"
+            "userHasNoVideo": "Mai halarta bashi da bidiyo",
+            "openInBrowserAlert": "Buɗe hanyar haɗi a mai binciken Safari don shiga taron."
         },
         "settingsPopup": {
             "webCamera": "Kyamarar Yanar gizo",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "yana da sabon {{instructions.fromDisplayType}}",
                 "byAvatar": "kara da {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "fara kira a ciki"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Masu Gano",
         "Devices": "Na&#39;urori",
         "Streams": "Ruwaya"
+    },
+    "menu": {
+        "placeholder": "buga taken shafi",
+        "ModTab": "Gyara abu",
+        "Save": "Ajiye",
+        "Delete": "Share",
+        "Submenu": "Submenu"
     }
 }

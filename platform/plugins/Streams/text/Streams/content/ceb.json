@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Palihug bisitaha ang mosunod nga link:",
             "InvitingYou": "Gidapit ko ikaw sa {{title}}",
             "HasInvitedYou": "Gidapit ka ni {{displayName}} sa {{title}}",
-            "HasMentionedYou": "Ang {{displayName}} naghisgot kanimo sa &quot;{{title}}&quot;"
+            "HasMentionedYou": "Ang {{displayName}} naghisgot kanimo sa &quot;{{title}}&quot;",
+            "YOUAREINVITED": "IKAW LABOT!",
+            "AcceptInvite": "Dawata ang Pagdapit"
         },
         "sms": {
             "content": "Gidapit ka sa {{title}}. Palihog tap ang {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Nag-undang ka sa pag-broadcast sa kini nga tawag sa Facebook",
             "linkCopiedToCb": "Link nga gikopya sa clipboard",
             "codeCopiedToCb": "Ang code nga gikopya sa clipboard",
-            "userHasNoVideo": "Wala’y video ang partisipante"
+            "userHasNoVideo": "Wala’y video ang partisipante",
+            "openInBrowserAlert": "Buksi ang link sa Safari browser aron moapil sa komperensya"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "adunay bag-ong {{instructions.fromDisplayType}}",
                 "byAvatar": "gidugang sa {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "nagsugod sa usa ka tawag sa"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Mga nagpakilala",
         "Devices": "Mga lalang",
         "Streams": "Mga sapa"
+    },
+    "menu": {
+        "placeholder": "ulohan nga panid sa titulo",
+        "ModTab": "Bag-ohon ang butang",
+        "Save": "Pag-save",
+        "Delete": "Pagwagtang",
+        "Submenu": "Submenu"
     }
 }

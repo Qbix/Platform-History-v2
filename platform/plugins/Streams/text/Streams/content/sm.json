@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Faamolemole asiasi i le sootaga lenei:",
             "InvitingYou": "O loʻo ou valaauliaina oe i {{title}}",
             "HasInvitedYou": "{{displayName}} ua valaauliaina oe i {{title}}",
-            "HasMentionedYou": "{{displayName}} ua taua oe i le &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} ua taua oe i le &quot;{{title}}&quot;",
+            "YOUAREINVITED": "E TE FAIA!",
+            "AcceptInvite": "Talia le Valaaulia"
         },
         "sms": {
             "content": "Ua valaaulia oe i {{title}}. Faamolemole tap {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Ua e taofia le faasalalauina o lenei valaau i le Facebook",
             "linkCopiedToCb": "Lisi na kopi i luga o le laupapa",
             "codeCopiedToCb": "Code na kopiina i luga o le laupapa",
-            "userHasNoVideo": "E leai se vitio e auai"
+            "userHasNoVideo": "E leai se vitio e auai",
+            "openInBrowserAlert": "Tatala avanoa i le saogala Safari e auai i le konafesi."
         },
         "settingsPopup": {
             "webCamera": "Upega Tafaʻilagi",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "ua i ai se {{instructions.fromDisplayType}} fou {",
                 "byAvatar": "faaopoopo e {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "amata se valaau i"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Faʻamatalaga",
         "Devices": "Lelei",
         "Streams": "Vaitafe"
+    },
+    "menu": {
+        "placeholder": "ituaiga itulau ulutala",
+        "ModTab": "Suia Mea",
+        "Save": "Sefe",
+        "Delete": "Aveese",
+        "Submenu": "Sui"
     }
 }

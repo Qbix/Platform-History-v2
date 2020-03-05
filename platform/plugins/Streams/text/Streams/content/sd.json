@@ -80,7 +80,9 @@
             "PleaseVisitLink": "مھرباني ڪري ھيٺيون لنڪ ڏسو",
             "InvitingYou": "مان توهان کي {{title}} دعوت ڏيڻ ۾ آماده آهيان",
             "HasInvitedYou": "{{displayName}} توهان کي دعوت ڏني آهي {{title}}",
-            "HasMentionedYou": "{{displayName}} توهان کي &quot;{{title}}&quot; ۾ ڪيو آھي"
+            "HasMentionedYou": "{{displayName}} توهان کي &quot;{{title}}&quot; ۾ ڪيو آھي",
+            "YOUAREINVITED": "توهان کي داخل ڪيو ويو آهي",
+            "AcceptInvite": "دعوت قبول ڪريو"
         },
         "sms": {
             "content": "توهان کي دعوت ڏني وئي آهي {{title}}. مھرباني ڪري ٽيپ {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "توهان هن فون کي فيسفريب ۾ روڪي ڇڏيو",
             "linkCopiedToCb": "ڪڙي ڪلپ بورڊ ڏانهن نقل ڪيو ويو آهي",
             "codeCopiedToCb": "ڪوڊ ڪلپ بورڊ ڏانهن نقل ڪيو ويو آهي",
-            "userHasNoVideo": "شرڪت ڪندڙ ڪا وڊيو ناهي"
+            "userHasNoVideo": "شرڪت ڪندڙ ڪا وڊيو ناهي",
+            "openInBrowserAlert": "ڪانفرنس ۾ شامل ٿيڻ لاء صفاري برائوزر ۾ لنڪ کوليو."
         },
         "settingsPopup": {
             "webCamera": "ويب ڪيمرا",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "نئون نئون {{instructions.fromDisplayType}}",
                 "byAvatar": "شامل ٿيو {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "هڪ ڪال ڪيو"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "سڃاڻپ ڪندڙ",
         "Devices": "سامان",
         "Streams": "سلسلا"
+    },
+    "menu": {
+        "placeholder": "صفحي جو عنوان ڏيو",
+        "ModTab": "شيون تبديل ڪريو",
+        "Save": "محفوظ ڪريو",
+        "Delete": "ختم ڪريو",
+        "Submenu": "سبزن جو"
     }
 }

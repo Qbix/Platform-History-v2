@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Tanpri vizite lyen sa a:",
             "InvitingYou": "Mwen envite ou nan {{title}}",
             "HasInvitedYou": "{{displayName}} envite ou nan {{title}}",
-            "HasMentionedYou": "{{displayName}} te mansyone ou nan &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} te mansyone ou nan &quot;{{title}}&quot;",
+            "YOUAREINVITED": "Ou envite!",
+            "AcceptInvite": "Aksepte Envite"
         },
         "sms": {
             "content": "Ou te envite nan {{title}}. Tanpri tape {1000}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Ou te sispann difize apèl sa a nan Facebook",
             "linkCopiedToCb": "Link kopye nan papye",
             "codeCopiedToCb": "Kòd kopye nan papye",
-            "userHasNoVideo": "Patisipan an pa gen okenn videyo"
+            "userHasNoVideo": "Patisipan an pa gen okenn videyo",
+            "openInBrowserAlert": "Louvri lyen nan navigatè Safari pou rantre nan konferans lan."
         },
         "settingsPopup": {
             "webCamera": "Kamera entènèt",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "gen yon nouvo {{instructions.fromDisplayType}}",
                 "byAvatar": "{{avatar.displayName}} te ajoute"
-            }
+            },
+            "startedCallIn": "te kòmanse yon apèl nan"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Idantifikatè yo",
         "Devices": "Aparèy",
         "Streams": "Flux"
+    },
+    "menu": {
+        "placeholder": "tape tit paj",
+        "ModTab": "Modifye Item",
+        "Save": "Sove",
+        "Delete": "Efase",
+        "Submenu": "Soumèt"
     }
 }

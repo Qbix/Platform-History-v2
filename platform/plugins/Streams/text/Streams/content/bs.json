@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Posjetite sljedeći link:",
             "InvitingYou": "Pozivam vas na {{title}}",
             "HasInvitedYou": "{{displayName}} vas je pozvao na {{title}}",
-            "HasMentionedYou": "{{displayName}} te spominje u &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} te spominje u &quot;{{title}}&quot;",
+            "YOUAREINVITED": "POZDRAVLJEN ste!",
+            "AcceptInvite": "Prihvati poziv"
         },
         "sms": {
             "content": "Pozvani ste na {{title}}. Dodirnite {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Prestali ste emitirati ovaj poziv na Facebooku",
             "linkCopiedToCb": "Veza je kopirana u međuspremnik",
             "codeCopiedToCb": "Kod je kopiran u međuspremnik",
-            "userHasNoVideo": "Učesnik nema video"
+            "userHasNoVideo": "Učesnik nema video",
+            "openInBrowserAlert": "Otvorite vezu u pregledniku Safari da biste se pridružili konferenciji."
         },
         "settingsPopup": {
             "webCamera": "Web kamera",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "ima novi {{instructions.fromDisplayType}}",
                 "byAvatar": "dodao {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "započeo je poziv"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Identifikatori",
         "Devices": "Uređaji",
         "Streams": "Struje"
+    },
+    "menu": {
+        "placeholder": "unesite naslov stranice",
+        "ModTab": "Izmijeni predmet",
+        "Save": "Spremi",
+        "Delete": "Izbriši",
+        "Submenu": "Podmeni"
     }
 }

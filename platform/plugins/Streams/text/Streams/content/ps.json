@@ -80,7 +80,9 @@
             "PleaseVisitLink": "لطفا لاندې لینک وګورئ:",
             "InvitingYou": "زه تاسو ته {9 999}} بلنه درکوم",
             "HasInvitedYou": "{{displayName}} تاسو ته {{title}} بلنه درکړي",
-            "HasMentionedYou": "{{999} you په &quot;{{title}}&quot; کې ستاسو یادونه کړې"
+            "HasMentionedYou": "{{999} you په &quot;{{title}}&quot; کې ستاسو یادونه کړې",
+            "YOUAREINVITED": "تاسو ته بلنه درکړل شوې!",
+            "AcceptInvite": "بلنه ومنئ"
         },
         "sms": {
             "content": "تاسو ته {{title}} رابلل شوي. مهرباني وکړئ {{url}} ټیک کړئ"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "تاسو په فېسبوک کې د دې زنګ خپرول بند کړل",
             "linkCopiedToCb": "لینک کليپ بورډ ته کاپي شوی",
             "codeCopiedToCb": "کوډ کليپ بورډ ته کاپي شوی",
-            "userHasNoVideo": "برخه وال هیڅ ویډیو نلري"
+            "userHasNoVideo": "برخه وال هیڅ ویډیو نلري",
+            "openInBrowserAlert": "کنفرانس کې د ګډون لپاره په سفاري براوزر کې لینک خلاص کړئ."
         },
         "settingsPopup": {
             "webCamera": "ویب کیمره",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "نوی {{{9} has لري",
                 "byAvatar": "د {{999} by لخوا زیات شوی"
-            }
+            },
+            "startedCallIn": "په زنګ وهلو پیل وکړ"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "پیژندونکي",
         "Devices": "وسایل",
         "Streams": "جریانونه"
+    },
+    "menu": {
+        "placeholder": "د مخ سرلیک ټایپ کړئ",
+        "ModTab": "توکي بدل کړئ",
+        "Save": "خوندي کړئ",
+        "Delete": "ړنګول",
+        "Submenu": "سب میینو"
     }
 }

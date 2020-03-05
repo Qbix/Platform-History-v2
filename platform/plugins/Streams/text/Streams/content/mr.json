@@ -80,7 +80,9 @@
             "PleaseVisitLink": "कृपया खालील दुव्यावर भेट द्या:",
             "InvitingYou": "मी आपल्याला {{title}} वर आमंत्रित करीत आहे",
             "HasInvitedYou": "{{displayName}} ने आपल्याला {{title}} वर आमंत्रित केले आहे",
-            "HasMentionedYou": "{{999} ने आपला उल्लेख &quot;{{title}}&quot; मध्ये केला आहे"
+            "HasMentionedYou": "{{999} ने आपला उल्लेख &quot;{{title}}&quot; मध्ये केला आहे",
+            "YOUAREINVITED": "आपण आमंत्रित आहात!",
+            "AcceptInvite": "आमंत्रण स्वीकारा"
         },
         "sms": {
             "content": "आपल्याला {{title}} वर आमंत्रित केले गेले आहे. कृपया {{url}} टॅप करा"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "आपण फेसबुकवर हा कॉल प्रसारित करणे थांबविले",
             "linkCopiedToCb": "क्लिपबोर्डवर दुवा कॉपी केला",
             "codeCopiedToCb": "क्लिपबोर्डवर कोड कॉपी केली",
-            "userHasNoVideo": "सहभागीकडे कोणताही व्हिडिओ नाही"
+            "userHasNoVideo": "सहभागीकडे कोणताही व्हिडिओ नाही",
+            "openInBrowserAlert": "परिषदेत सामील होण्यासाठी सफारी ब्राउझरमध्ये दुवा उघडा."
         },
         "settingsPopup": {
             "webCamera": "वेब कॅमेरा",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "एक नवीन {{999} has आहे",
                 "byAvatar": "{{999} by द्वारे जोडले"
-            }
+            },
+            "startedCallIn": "मध्ये कॉल सुरू केला"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "अभिज्ञापक",
         "Devices": "उपकरणे",
         "Streams": "प्रवाह"
+    },
+    "menu": {
+        "placeholder": "पृष्ठ शीर्षक टाइप करा",
+        "ModTab": "आयटम सुधारित करा",
+        "Save": "जतन करा",
+        "Delete": "हटवा",
+        "Submenu": "सबमेनू"
     }
 }

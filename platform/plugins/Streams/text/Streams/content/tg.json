@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Лутфан ба пайвандҳои зерин муроҷиат кунед:",
             "InvitingYou": "Ман шуморо даъват менамоям, ки {{title}}",
             "HasInvitedYou": "{{displayName}} шуморо ба {{title}} даъват кард",
-            "HasMentionedYou": "{{displayName}} шуморо дар &quot;{{title}}&quot; ёдрас кард"
+            "HasMentionedYou": "{{displayName}} шуморо дар &quot;{{title}}&quot; ёдрас кард",
+            "YOUAREINVITED": "ШУМО ДИККАТ ДОРЕД!",
+            "AcceptInvite": "Даъватро қабул кунед"
         },
         "sms": {
             "content": "Шумо ба {{title}} даъват кардаед. Лутфан {{url}} -ро лутфан гузоред"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Шумо пахши ин зангро дар Facebook қатъ кардед",
             "linkCopiedToCb": "Истинод ба буфер нусхабардорӣ карда шуд",
             "codeCopiedToCb": "Рамз ба силули мухобиротӣ нусхабардорӣ шуд",
-            "userHasNoVideo": "Иштирокчӣ видео надорад"
+            "userHasNoVideo": "Иштирокчӣ видео надорад",
+            "openInBrowserAlert": "Барои ҳамроҳ шудан ба конфронс дар браузери Safari пайванд кушоед."
         },
         "settingsPopup": {
             "webCamera": "Веб камера",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "дорои нав {{instructions.fromDisplayType}}",
                 "byAvatar": "иловашуда {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "занг заданро сар кард"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Муайянкунандаҳо",
         "Devices": "Дастгоҳҳо",
         "Streams": "Ҷараёнҳои"
+    },
+    "menu": {
+        "placeholder": "намуди саҳифа",
+        "ModTab": "Тағир додани банд",
+        "Save": "Сарфа",
+        "Delete": "Нест кардан",
+        "Submenu": "Зерменю"
     }
 }

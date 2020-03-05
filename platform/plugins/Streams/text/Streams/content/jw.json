@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Delengen pranala iki:",
             "InvitingYou": "Aku ngajak sampeyan menyang {{title}}",
             "HasInvitedYou": "{{displayName}} wis ngundang sampeyan menyang {{title}}",
-            "HasMentionedYou": "{{displayName}} wis nyebutake sampeyan ing &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} wis nyebutake sampeyan ing &quot;{{title}}&quot;",
+            "YOUAREINVITED": "Sampeyan wis ING!",
+            "AcceptInvite": "Ditampa Ngundang"
         },
         "sms": {
             "content": "Sampeyan wis diundang menyang {{title}}. Monggo tutul {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Sampeyan mandheg nyebarake telpon iki ing Facebook",
             "linkCopiedToCb": "Link disalin menyang clipboard",
             "codeCopiedToCb": "Kode sing disalin menyang clipboard",
-            "userHasNoVideo": "Peserta ora duwe video"
+            "userHasNoVideo": "Peserta ora duwe video",
+            "openInBrowserAlert": "Bukak link ing browser Safari kanggo melu konferensi kasebut."
         },
         "settingsPopup": {
             "webCamera": "Kamera Web",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "nduwe {{instructions.fromDisplayType}} anyar",
                 "byAvatar": "ditambahake dening {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "miwiti telpon mlebu"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Pengenal",
         "Devices": "Piranti",
         "Streams": "Aliran"
+    },
+    "menu": {
+        "placeholder": "judhul kaca",
+        "ModTab": "Ngowahi Item",
+        "Save": "Ngirit",
+        "Delete": "Mbusak",
+        "Submenu": "Submenu"
     }
 }

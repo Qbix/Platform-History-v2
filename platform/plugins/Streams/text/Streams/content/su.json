@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Punten buka tumbu di handap ieu:",
             "InvitingYou": "Kuring ngajak anjeun ka {{title}}",
             "HasInvitedYou": "{{displayName}} ngulem anjeun ka {{title}}",
-            "HasMentionedYou": "{{displayName}} parantos nyarios anjeun dina &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} parantos nyarios anjeun dina &quot;{{title}}&quot;",
+            "YOUAREINVITED": "YOU INVITED!",
+            "AcceptInvite": "Narima Ngajak"
         },
         "sms": {
             "content": "Anjeun geus diondang kana {{title}}. Punten toél {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Anjeun lirén nyiarkeun sauran ieu dina Facebook",
             "linkCopiedToCb": "Link ditiron ka clipboard",
             "codeCopiedToCb": "Kodeu disalin ka clipboard",
-            "userHasNoVideo": "Peserta teu gaduh pidio"
+            "userHasNoVideo": "Peserta teu gaduh pidio",
+            "openInBrowserAlert": "Link kabuka dina browser Safari pikeun ngiringan konperénsi."
         },
         "settingsPopup": {
             "webCamera": "Kaméra Wéb",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "ngabogaan anyar {{instructions.fromDisplayType}}",
                 "byAvatar": "ditambah ku {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "ngamimitian nelepon di"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Pengenal",
         "Devices": "Alat",
         "Streams": "Aliran"
+    },
+    "menu": {
+        "placeholder": "judul judul kaca",
+        "ModTab": "Ngarobih item",
+        "Save": "Simpen",
+        "Delete": "Mupus",
+        "Submenu": "Submenu"
     }
 }

@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Дараах холбоосоор зочилно уу:",
             "InvitingYou": "Би таныг {{title}} -д урьж байна.",
             "HasInvitedYou": "{{displayName}} таныг {{title}} -д урьсан",
-            "HasMentionedYou": "{{displayName}} таныг &quot;{{title}}&quot; -д дурдсан"
+            "HasMentionedYou": "{{displayName}} таныг &quot;{{title}}&quot; -д дурдсан",
+            "YOUAREINVITED": "ТА БҮХЭН ШААРДЛАГАТАЙ!",
+            "AcceptInvite": "Урилгыг хүлээж авах"
         },
         "sms": {
             "content": "Та {{title}} -д уригдсан. {{url}} дарна уу"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Та энэ дуудлагыг Facebook дээр цацахаа больсон",
             "linkCopiedToCb": "Холбоосыг санах самбар луу хуулав",
             "codeCopiedToCb": "Кодыг санах самбар луу хуулав",
-            "userHasNoVideo": "Оролцогч видео байхгүй байна"
+            "userHasNoVideo": "Оролцогч видео байхгүй байна",
+            "openInBrowserAlert": "Конференцид элсэхийн тулд Safari хөтөч дээр холбоосыг нээнэ."
         },
         "settingsPopup": {
             "webCamera": "Вэб камер",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "шинэ {{instructions.fromDisplayType}} байна.",
                 "byAvatar": "{{avatar.displayName}} нэмсэн"
-            }
+            },
+            "startedCallIn": "дуудлага хийж эхлэв"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Тодорхойлогч",
         "Devices": "Төхөөрөмжүүд",
         "Streams": "Горхи"
+    },
+    "menu": {
+        "placeholder": "хуудасны гарчгийг бичнэ үү",
+        "ModTab": "Өөрчлөлт оруулах",
+        "Save": "Хадгалах",
+        "Delete": "Устгах",
+        "Submenu": "Дэд цэс"
     }
 }

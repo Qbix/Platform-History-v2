@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Besykje op &#39;e folgjende link:",
             "InvitingYou": "Ik freegje jo nei {{title}}",
             "HasInvitedYou": "{{displayName}} hat jo útnoege ta {{title}}",
-            "HasMentionedYou": "{{displayName}} hat jo neamd yn &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} hat jo neamd yn &quot;{{title}}&quot;",
+            "YOUAREINVITED": "DO BIST ÚTNOEGE!",
+            "AcceptInvite": "Utnoegje akseptearje"
         },
         "sms": {
             "content": "Jo binne oanmeld nei {{title}}. Folje op {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Jo binne ophâlden mei útstjoeren fan dizze oprop yn Facebook",
             "linkCopiedToCb": "Koppeling kopieare nei klamboerd",
             "codeCopiedToCb": "Koade kopieare nei klamboerd",
-            "userHasNoVideo": "Dielnimmer hat gjin fideo"
+            "userHasNoVideo": "Dielnimmer hat gjin fideo",
+            "openInBrowserAlert": "Iepenje kepling yn &#39;e Safari-blêder om mei te dwaan oan&#39; e konferinsje."
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "hat in nije {{instructions.fromDisplayType}}",
                 "byAvatar": "tafoege troch {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "begon in oprop"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Identifisearders",
         "Devices": "Apparaten",
         "Streams": "Streams"
+    },
+    "menu": {
+        "placeholder": "typ de titel fan &#39;e pagina",
+        "ModTab": "Feroarje item",
+        "Save": "Rêde",
+        "Delete": "Ferwiderje",
+        "Submenu": "Submenu"
     }
 }

@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Visite u ligame chì seguita:",
             "InvitingYou": "Vi invita à {{title}}",
             "HasInvitedYou": "{{displayName}} ti hà invitato à {{title}}",
-            "HasMentionedYou": "{{displayName}} ci hà citatu in &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} ci hà citatu in &quot;{{title}}&quot;",
+            "YOUAREINVITED": "È INVITATU!",
+            "AcceptInvite": "Accetta Invitu"
         },
         "sms": {
             "content": "Avete invitu à {{title}}. Please tap tap {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Avete dettu l&#39;emissioni di sta chjamata in Facebook",
             "linkCopiedToCb": "Link copiatu à u clipboard",
             "codeCopiedToCb": "Codice copiatu à i clipboard",
-            "userHasNoVideo": "U participante ùn hà micca alcun video"
+            "userHasNoVideo": "U participante ùn hà micca alcun video",
+            "openInBrowserAlert": "Link aperto in u navigatore Safari per unisce à a cunferenza."
         },
         "settingsPopup": {
             "webCamera": "Camera Web",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "hà un novu {{instructions.fromDisplayType}}",
                 "byAvatar": "aghjuntu da {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "hà cuminciatu una chjamata"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Identificatori",
         "Devices": "U dispositivu",
         "Streams": "Strati"
+    },
+    "menu": {
+        "placeholder": "tipu titulu di pagina",
+        "ModTab": "Modificà Articulu",
+        "Save": "Salvà",
+        "Delete": "Elimina",
+        "Submenu": "Submenu"
     }
 }

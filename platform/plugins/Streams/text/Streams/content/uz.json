@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Iltimos, quyidagi havolaga tashrif buyuring:",
             "InvitingYou": "Men sizni {{title}} ga taklif qilyapman",
             "HasInvitedYou": "{{displayName}} sizni {{title}} ga taklif qildi",
-            "HasMentionedYou": "{{displayName}} sizni &quot;{{title}}&quot; da eslatib o&#39;tdi"
+            "HasMentionedYou": "{{displayName}} sizni &quot;{{title}}&quot; da eslatib o&#39;tdi",
+            "YOUAREINVITED": "SIZ TANLANG!",
+            "AcceptInvite": "Taklifni qabul qiling"
         },
         "sms": {
             "content": "Siz {{title}} ga taklif qilingansiz. Iltimos, {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Siz ushbu qo&#39;ng&#39;iroqni Facebook-da tarqatishni to&#39;xtatdingiz",
             "linkCopiedToCb": "Havola buferga ko&#39;chirildi",
             "codeCopiedToCb": "Kod clipboardga nusxa olindi",
-            "userHasNoVideo": "Ishtirokchining videosi yo‘q"
+            "userHasNoVideo": "Ishtirokchining videosi yo‘q",
+            "openInBrowserAlert": "Konferentsiyada ishtirok etish uchun Safari brauzerida havolani oching."
         },
         "settingsPopup": {
             "webCamera": "Veb-kamera",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "yangi {{instructions.fromDisplayType}} bor",
                 "byAvatar": "tomonidan qo&#39;shilgan {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "qo&#39;ng&#39;iroqni boshladi"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Aniqlovchilar",
         "Devices": "Qurilmalar",
         "Streams": "Oqimlar"
+    },
+    "menu": {
+        "placeholder": "sahifa sarlavhasini yozing",
+        "ModTab": "Elementni o&#39;zgartiring",
+        "Save": "Saqlash",
+        "Delete": "Yo&#39;q qilish",
+        "Submenu": "Quyi menyu"
     }
 }

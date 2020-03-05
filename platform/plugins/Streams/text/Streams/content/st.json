@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Ka kopo, etela kgokahanyo e latelang:",
             "InvitingYou": "Ke u mema ho {{title}}",
             "HasInvitedYou": "{{displayName}} eu mema ho {{title}}",
-            "HasMentionedYou": "{{displayName}} o boletse ka uena ho &quot;{{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} o boletse ka uena ho &quot;{{{title}}&quot;",
+            "YOUAREINVITED": "O TLETSE!",
+            "AcceptInvite": "Amohela Memo"
         },
         "sms": {
             "content": "U mengoe ho {{title}}. Ka kōpo tlanya {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "O emisitse ho phatlalatsa mohala ona ho Facebook",
             "linkCopiedToCb": "Khokahano e kopitsoe ho clipboard",
             "codeCopiedToCb": "Khoutu e kopitsoe ho clipboard",
-            "userHasNoVideo": "Morupeluoa ha a na video"
+            "userHasNoVideo": "Morupeluoa ha a na video",
+            "openInBrowserAlert": "Bula sehokelo ka sebatli sa Safari ho kenela kopano."
         },
         "settingsPopup": {
             "webCamera": "Khamera ea Webo",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "e na le {{instructions.fromDisplayType}} e ncha",
                 "byAvatar": "e kentsoe ke {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "o ile a qala ho letsetsa"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Matšoao",
         "Devices": "Lisebelisoa",
         "Streams": "Meroallo"
+    },
+    "menu": {
+        "placeholder": "mofuta oa leqephe la sehlooho",
+        "ModTab": "Fetola Taba",
+        "Save": "Boloka",
+        "Delete": "Tlosa",
+        "Submenu": "Submenu"
     }
 }

@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Chonde tananizilani izi:",
             "InvitingYou": "Ndikukuitanani ku {{title}}",
             "HasInvitedYou": "{{displayName}} wakuitanani ku {{title}}",
-            "HasMentionedYou": "{{displayName}} anakuwuzani mu &quot;{{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} anakuwuzani mu &quot;{{{title}}&quot;",
+            "YOUAREINVITED": "MUKUFUNA!",
+            "AcceptInvite": "Landirani Oyitanirani"
         },
         "sms": {
             "content": "Mwaitanidwa ku {{title}}. Chonde tambani {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Munasiya kuyatsa foni iyi pa Facebook",
             "linkCopiedToCb": "Lumikizani kukopedwa ku clipboard",
             "codeCopiedToCb": "Code yolembedwa pabolodi",
-            "userHasNoVideo": "Wophunzira alibe kanema"
+            "userHasNoVideo": "Wophunzira alibe kanema",
+            "openInBrowserAlert": "Tsegulani ulalo mu msakatuli wa Safari kuti mulowe nawo msonkhano."
         },
         "settingsPopup": {
             "webCamera": "Kamera Yapaintaneti",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "ali ndi {{instructions.fromDisplayType}} yatsopano",
                 "byAvatar": "yowonjezeredwa ndi {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "adayambitsa kuyimba"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Zizindikiritso",
         "Devices": "Zipangizo",
         "Streams": "Mitsinje"
+    },
+    "menu": {
+        "placeholder": "lembani mutu wankhani",
+        "ModTab": "Sinthani Chinthu",
+        "Save": "Sungani",
+        "Delete": "Chotsani",
+        "Submenu": "Submenu"
     }
 }

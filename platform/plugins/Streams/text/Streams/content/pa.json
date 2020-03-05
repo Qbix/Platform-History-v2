@@ -80,7 +80,9 @@
             "PleaseVisitLink": "ਕਿਰਪਾ ਕਰਕੇ ਹੇਠਾਂ ਦਿੱਤੇ ਲਿੰਕ &#39;ਤੇ ਜਾਓ:",
             "InvitingYou": "ਮੈਂ ਤੁਹਾਨੂੰ ਸੱਦਾ ਦੇ ਰਿਹਾ ਹਾਂ {{title}}",
             "HasInvitedYou": "{{displayName}} ਨੇ ਤੁਹਾਨੂੰ {{title}} ਲਈ ਸੱਦਾ ਦਿੱਤਾ ਹੈ",
-            "HasMentionedYou": "{{999} &quot;{{title}}&quot; ਵਿੱਚ ਤੁਹਾਡਾ ਜ਼ਿਕਰ ਕੀਤਾ ਹੈ"
+            "HasMentionedYou": "{{999} &quot;{{title}}&quot; ਵਿੱਚ ਤੁਹਾਡਾ ਜ਼ਿਕਰ ਕੀਤਾ ਹੈ",
+            "YOUAREINVITED": "ਤੁਹਾਨੂੰ ਬੁਲਾਇਆ ਗਿਆ ਹੈ!",
+            "AcceptInvite": "ਸੱਦਾ ਸਵੀਕਾਰ ਕਰੋ"
         },
         "sms": {
             "content": "ਤੁਹਾਨੂੰ {{title}} ਤੇ ਬੁਲਾਇਆ ਗਿਆ ਹੈ. ਕਿਰਪਾ ਕਰਕੇ {{url}} ਤੇ ਟੈਪ ਕਰੋ"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "ਤੁਸੀਂ ਇਸ ਕਾਲ ਨੂੰ ਫੇਸਬੁੱਕ ਵਿਚ ਪ੍ਰਸਾਰਤ ਕਰਨਾ ਬੰਦ ਕਰ ਦਿੱਤਾ ਹੈ",
             "linkCopiedToCb": "ਲਿੰਕ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕੀਤਾ ਗਿਆ",
             "codeCopiedToCb": "ਕੋਡ ਦੀ ਨਕਲ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕੀਤੀ ਗਈ",
-            "userHasNoVideo": "ਭਾਗੀਦਾਰ ਦਾ ਕੋਈ ਵੀਡੀਓ ਨਹੀਂ ਹੈ"
+            "userHasNoVideo": "ਭਾਗੀਦਾਰ ਦਾ ਕੋਈ ਵੀਡੀਓ ਨਹੀਂ ਹੈ",
+            "openInBrowserAlert": "ਕਾਨਫਰੰਸ ਵਿਚ ਸ਼ਾਮਲ ਹੋਣ ਲਈ ਸਫਾਰੀ ਬ੍ਰਾ .ਜ਼ਰ ਵਿਚ ਲਿੰਕ ਖੋਲ੍ਹੋ."
         },
         "settingsPopup": {
             "webCamera": "ਵੈੱਬ ਕੈਮਰਾ",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "ਕੋਲ ਨਵਾਂ {{999} has ਹੈ",
                 "byAvatar": "{{999} by ਦੁਆਰਾ ਜੋੜਿਆ ਗਿਆ"
-            }
+            },
+            "startedCallIn": "ਵਿੱਚ ਇੱਕ ਕਾਲ ਸ਼ੁਰੂ ਕੀਤੀ"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "ਪਛਾਣਕਰਤਾ",
         "Devices": "ਉਪਕਰਣ",
         "Streams": "ਸਟ੍ਰੀਮ"
+    },
+    "menu": {
+        "placeholder": "ਟਾਈਪ ਪੇਜ ਦਾ ਸਿਰਲੇਖ",
+        "ModTab": "ਆਈਟਮ ਨੂੰ ਸੋਧੋ",
+        "Save": "ਸੇਵ",
+        "Delete": "ਮਿਟਾਓ",
+        "Submenu": "ਸਬਮੇਨੁ"
     }
 }

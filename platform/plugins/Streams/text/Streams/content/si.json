@@ -80,7 +80,9 @@
             "PleaseVisitLink": "කරුණාකර පහත සබැඳියට පිවිසෙන්න:",
             "InvitingYou": "මම ඔබට ආරාධනා කරන්නේ {{title}}",
             "HasInvitedYou": "{{999} you ඔබට {{1000} to වෙත ආරාධනා කර ඇත",
-            "HasMentionedYou": "{{999} you ඔබව &quot;{{1000} in&quot; හි සඳහන් කර ඇත."
+            "HasMentionedYou": "{{999} you ඔබව &quot;{{1000} in&quot; හි සඳහන් කර ඇත.",
+            "YOUAREINVITED": "ඔබව ආරාධනා කර ඇත!",
+            "AcceptInvite": "ආරාධනය පිළිගන්න"
         },
         "sms": {
             "content": "ඔබට {{999} to වෙත ආරාධනා කර ඇත. කරුණාකර {{1000} තට්ටු කරන්න"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "ඔබ මෙම ඇමතුම ෆේස්බුක් හි විකාශනය කිරීම නැවැත්වීය",
             "linkCopiedToCb": "සබැඳිය ක්ලිප් පුවරුවට පිටපත් කරන ලදි",
             "codeCopiedToCb": "කේතය ක්ලිප් පුවරුවට පිටපත් කරන ලදි",
-            "userHasNoVideo": "සහභාගිවන්නාට වීඩියෝවක් නොමැත"
+            "userHasNoVideo": "සහභාගිවන්නාට වීඩියෝවක් නොමැත",
+            "openInBrowserAlert": "සමුළුවට සම්බන්ධ වීමට සෆාරි බ්‍රව්සරයේ සබැඳිය විවෘත කරන්න."
         },
         "settingsPopup": {
             "webCamera": "වෙබ් කැමරාව",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "නව {{999} has ඇත",
                 "byAvatar": "by {999 by by විසින් එකතු කරන ලදි"
-            }
+            },
+            "startedCallIn": "ඇමතුමක් ආරම්භ කළා"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "හඳුනාගැනීම්",
         "Devices": "උපකරණ",
         "Streams": "ධාරාවන්"
+    },
+    "menu": {
+        "placeholder": "පිටු මාතෘකාව ටයිප් කරන්න",
+        "ModTab": "අයිතමය වෙනස් කරන්න",
+        "Save": "සුරකින්න",
+        "Delete": "මකන්න",
+        "Submenu": "උප මෙනූ"
     }
 }

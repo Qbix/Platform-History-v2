@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Келесі сілтеме бойынша өтіңіз:",
             "InvitingYou": "Мен сізді {{title}} -ке шақырамын",
             "HasInvitedYou": "{{displayName}} сізді {{title}} шақырды",
-            "HasMentionedYou": "{{displayName}} сізді «{{title}}» ішінде атады"
+            "HasMentionedYou": "{{displayName}} сізді «{{title}}» ішінде атады",
+            "YOUAREINVITED": "Сіздер шақырылдыңыз!",
+            "AcceptInvite": "Шақыруды қабылдау"
         },
         "sms": {
             "content": "Сізге {{title}} шақырылды. {{url}} түртіңіз."
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Сіз бұл қоңырауды Facebook-те таратуды тоқтаттыңыз",
             "linkCopiedToCb": "Сілтеме алмасу буферіне көшірілді",
             "codeCopiedToCb": "Код алмасу буферіне көшірілді",
-            "userHasNoVideo": "Қатысушының бейнесі жоқ"
+            "userHasNoVideo": "Қатысушының бейнесі жоқ",
+            "openInBrowserAlert": "Конференцияға қатысу үшін Safari шолғышында сілтемені ашыңыз."
         },
         "settingsPopup": {
             "webCamera": "Веб-камера",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "жаңа {{instructions.fromDisplayType}} бар",
                 "byAvatar": "қосылған {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "қоңырау шала бастады"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Анықтағыштар",
         "Devices": "Құрылғылар",
         "Streams": "Ағындар"
+    },
+    "menu": {
+        "placeholder": "парақтың тақырыбын теріңіз",
+        "ModTab": "Элементті өзгертіңіз",
+        "Save": "Сақтау",
+        "Delete": "Жою",
+        "Submenu": "Ішкі мәзір"
     }
 }

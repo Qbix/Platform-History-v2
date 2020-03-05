@@ -80,7 +80,9 @@
             "PleaseVisitLink": "សូមទស្សនាតំណខាងក្រោម:",
             "InvitingYou": "ខ្ញុំសូមអញ្ជើញអ្នកចូលរួម {{title}}",
             "HasInvitedYou": "{{displayName}} បានអញ្ជើញអ្នកមក {{title}}",
-            "HasMentionedYou": "{{៩៩៩}} បាននិយាយអំពី &quot;{{១០០០}}&quot;"
+            "HasMentionedYou": "{{៩៩៩}} បាននិយាយអំពី &quot;{{១០០០}}&quot;",
+            "YOUAREINVITED": "អ្នកត្រូវបានអញ្ជើញ!",
+            "AcceptInvite": "ទទួលយកការអញ្ជើញ"
         },
         "sms": {
             "content": "អ្នកត្រូវបានអញ្ជើញឱ្យចូល {{title}} ។ សូមប៉ះ {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "អ្នកឈប់ផ្សព្វផ្សាយការហៅនេះនៅក្នុងហ្វេសប៊ុក",
             "linkCopiedToCb": "បានចម្លងតំណទៅក្ដារតម្បៀតខ្ទាស់",
             "codeCopiedToCb": "បានចម្លងកូដទៅក្ដារតម្បៀតខ្ទាស់",
-            "userHasNoVideo": "អ្នកចូលរួមមិនមានវីដេអូទេ"
+            "userHasNoVideo": "អ្នកចូលរួមមិនមានវីដេអូទេ",
+            "openInBrowserAlert": "បើកតំណនៅក្នុងកម្មវិធីរុករក Safari ដើម្បីចូលរួមសន្និសីទ។"
         },
         "settingsPopup": {
             "webCamera": "ម៉ាស៊ីនថតគេហទំព័រ",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "មាន {{៩៩៩}} ថ្មី",
                 "byAvatar": "បន្ថែមដោយ {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "បានចាប់ផ្តើមការហៅចូល"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "ឧបករណ៍កំណត់អត្តសញ្ញាណ",
         "Devices": "ឧបករណ៍",
         "Streams": "ស្ទ្រីម"
+    },
+    "menu": {
+        "placeholder": "វាយចំណងជើងទំព័រ",
+        "ModTab": "កែប្រែធាតុ",
+        "Save": "រក្សាទុក",
+        "Delete": "លុប",
+        "Submenu": "ម៉ឺនុយរង"
     }
 }
