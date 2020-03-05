@@ -857,7 +857,7 @@ Q.Tool.define("Q/columns", function(options) {
 			if (!state.fullscreen) {
 				$te.add($container)
 					.add($columns)
-					.height(Q.Pointer.windowHeight()-$te.offset().top);
+					.height(Q.Pointer.windowHeight() - Q.fixedOffset('top') - Q.fixedOffset('bottom'));
 			}
 		}
 		presentColumn(tool);
