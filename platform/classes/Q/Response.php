@@ -1412,7 +1412,17 @@ class Q_Response
 	{
 		self::$htmlCssClasses[$className] = true;
 	}
-	
+	/**
+	 * Call this method to add attribute to the HTML element in the layout
+	 * @method addHtmlAttribute
+	 * @static
+	 * @param {string} $name
+	 * @param {string} $value
+	 */
+	static function addHtmlAttribute($name, $value)
+	{
+		self::$htmlAttributes[$name] = $value;
+	}
 	/**
 	 * Used to get or set the language (two-letter lowercase ISO code)
 	 * of the output page. Defaults to "en". It is used in htmlAttributes method.
@@ -1448,11 +1458,16 @@ class Q_Response
 		foreach (self::$htmlCssClasses as $k => $v) {
 			$classes .= Q_Html::text(" $k");
 		}
+		$attributes = array();
+		foreach (self::$htmlAttributes as $k => $v) {
+			$attributes[] = Q_Html::text("$k").'='.Q_Html::text("$v");
+		}
 		$language = self::language();
 		return 'lang="' . $language . '" '
 			. 'prefix="og:http://ogp.me/ns# object:http://ogp.me/ns/object# website:http://ogp.me/ns/website# fb:http://ogp.me/ns/fb#" '
 			. 'itemscope itemtype="https://schema.org/WebPage" '
-			. "class='$touchscreen $mobile $cordova $platform $ie $ie8 $classes'";
+			. "class='$touchscreen $mobile $cordova $platform $ie $ie8 $classes' "
+			.implode(' ', $attributes);
 	}
 
 	/**
@@ -1962,6 +1977,12 @@ class Q_Response
 	 * @type array
 	 */
 	public static $htmlCssClasses = array();
+	/**
+	 * @property $htmlAttributes
+	 * @static
+	 * @type array
+	 */
+	public static $htmlAttributes = array();
 	/**
 	 * @property $language
 	 * @static
