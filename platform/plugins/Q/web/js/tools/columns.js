@@ -167,23 +167,27 @@ Q.Tool.define("Q/columns", function(options) {
 	textfill: null,
 	fullscreen: Q.info.useFullscreen,
 	hideBackgroundColumns: true,
-	beforeOpen: new Q.Event(function () {
-		var $toolElement = $(this.element);
-		var columns = $toolElement.attr('data-column-count');
-		$toolElement.attr('data-column-count', columns === undefined ? 0 : parseInt(columns) + 1);
-	}),
-	beforeClose: new Q.Event(function () {
-		var max = this.max();
-		$(this.element).attr('data-column-count', max ? max-1 : 0);
-	}),
+	beforeOpen: new Q.Event(),
+	beforeClose: new Q.Event(),
 	onOpen: new Q.Event(function (options, index, div) {
 		var tool = this;
 		Q.Pointer.stopHints();
 		div.addEventListener('transitionend', function () {
 			Q.handle(tool.state.onTransitionEnd, tool, [index, div]);
 		});
+
+		var max = this.max();
+		$(this.element).attr('data-column-count', max ? max + 1 : 1);
+
+		var $div = $(div);
+		Q.onLayout(div).set(function () {
+			$div.attr('data-width-index', Math.round($div.width()/300) || 1);
+		}, this);
 	}, 'Q/columns'),
-	onClose: new Q.Event(),
+	onClose: new Q.Event(function () {
+		var max = this.max();
+		$(this.element).attr('data-column-count', max ? max + 1 : 1);
+	}, 'Q/columns'),
 	onTransitionEnd: new Q.Event(),
 	afterDelay: new Q.Event()
 },
@@ -493,6 +497,10 @@ Q.Tool.define("Q/columns", function(options) {
 				);
 			}
 
+			Q.onLayout($tc[0]).set(function () {
+				presentColumn(tool, $div, o.fullscreen);
+			}, tool);
+
 			waitFor.push('activated1', 'activated2', 'activated3');
 			$titleSlot.activate(o.activateOptions, p.fill('activated1'));
 			$columnSlot.activate(o.activateOptions, p.fill('activated2'));
@@ -674,17 +682,8 @@ Q.Tool.define("Q/columns", function(options) {
 					}
 				}
 				
-				$div.removeClass('Q_columns_opening')
-				.addClass('Q_columns_opened');
+				$div.removeClass('Q_columns_opening').addClass('Q_columns_opened');
 
-				if (!Q.info.isMobile) {
-					$cs.height(
-						$(tool.element).height()
-						- $cs.offset().top + $cs.parent().offset().top
-						- parseInt($cs.css('padding-top'))
-						- parseInt($cs.css('padding-bottom'))
-					);
-				}
 				presentColumn(tool, $div, o.fullscreen);
 
 				if (Q.info.isTouchscreen) {
@@ -858,7 +857,7 @@ Q.Tool.define("Q/columns", function(options) {
 			if (!state.fullscreen) {
 				$te.add($container)
 					.add($columns)
-					.height(Q.Pointer.windowHeight()-$te.offset().top);
+					.height(Q.Pointer.windowHeight() - Q.fixedOffset('top') - Q.fixedOffset('bottom'));
 			}
 		}
 		presentColumn(tool);
@@ -995,6 +994,13 @@ function presentColumn(tool, $column, fullscreen) {
 			$column.css('height', 'auto');
 		}
 	} else {
+		$cs.height(
+			$(tool.element).height()
+			- $cs.offset().top + $cs.parent().offset().top
+			- parseInt($cs.css('padding-top'))
+			- parseInt($cs.css('padding-bottom'))
+		);
+
 		$column.css('min-height', tool.oldMinHeight);
 		var show = $column.data(dataKey_lastShow);
 		if (show && show.height) {
