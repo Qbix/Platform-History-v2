@@ -63,7 +63,7 @@ Q.Tool.define("Streams/basic", function(options) {
 	$('form', tool).plugin('Q/validator').submit(function() {
 		var $this = $(this);
 		$('input', $this).css({
-			'background-image': 'url(' +Q.url('/{{Q}}/img/throbbers/loading.gif') + ')',
+			'background-image': 'url(' + Q.info.imgLoading + ')',
 			'background-repeat': 'no-repeat'
 		});
 		var url = Q.ajaxExtend($this.attr('action'), 'data');

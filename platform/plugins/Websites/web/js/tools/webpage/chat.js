@@ -14,7 +14,7 @@
 		tool.chatTool = Q.Tool.from(this.element, "Streams/chat");
 
 		// preload throbber
-		$('<img/>')[0].src = Q.url("{{Q}}/img/throbbers/loading.gif");
+		$('<img/>')[0].src = Q.info.imgLoading;
 
 		Q.addStylesheet('{{Websites}}/css/tools/webpage/chat.css');
 
@@ -97,7 +97,7 @@
 				}
 
 				Q.Template.render('Websites/webpage/chat', {
-					src: Q.url("{{Q}}/img/throbbers/loading.gif")
+					src: Q.info.imgLoading
 				}, function (err, html) {
 					if (err) {
 						return;

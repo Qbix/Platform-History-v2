@@ -5702,8 +5702,7 @@ Q.init = function _Q_init(options) {
 		return false;
 	}
 	Q.init.called = true;
-	Q.info.imgLoading = Q.info.imgLoading ||
-		Q.url('{{Q}}/img/throbbers/loading.gif');
+	Q.info.imgLoading = Q.info.imgLoading || Q.url('{{Q}}/img/throbbers/loading.gif');
 	Q.loadUrl.options.slotNames = Q.info.slotNames;
 	_detectOrientation();
 	Q.addEventListener(root, 'unload', Q.onUnload.handle);

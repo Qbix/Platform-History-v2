@@ -763,10 +763,6 @@ img[data-lazyload-src] {
 	opacity: 0.1;
 }
 
-.Q_placeholder_shimmer {
-	
-}
-
 @keyframes Q_placeholder_shimmer {
     0%{
         background-position: -468px 0
