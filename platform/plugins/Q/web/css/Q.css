@@ -776,6 +776,10 @@ img[data-lazyload-src] {
     }
 }
 
+.Q_placeholder_shimmer {
+	background: #f7f7f7;
+}
+
 .Q_placeholder_shimmer * {
     animation-duration: 1s;
     animation-fill-mode: forwards;
