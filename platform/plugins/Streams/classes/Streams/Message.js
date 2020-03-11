@@ -405,6 +405,21 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/email.handlebars';
 			}
+
+			var _sendMessage = function () {
+				Users.Email.sendMessage(
+					emailAddress, o.subject, viewPath, o.fields, {
+						html: true,
+						language: uf.preferredLanguage
+					}, callback
+				);
+				result.push({'email': emailAddress});
+			};
+
+			if (messageType === 'Streams/invite') {
+				return _sendMessage();
+			}
+
 			Users.Email.SELECT().where({
 				'address': emailAddress
 			}).execute(function (err, rows) {
@@ -415,13 +430,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				if (rows[0].fields.state !== 'active') {
 					return callback && callback(new Q.Exception("Message.deliver: email not active"));
 				}
-				Users.Email.sendMessage(
-					emailAddress, o.subject, viewPath, o.fields, {
-						html: true, 
-						language: uf.preferredLanguage
-					}, callback
-				);
-				result.push({'email': emailAddress});
+				_sendMessage();
 			});
 		}
 		function _mobile(mobileNumber, callback) {
@@ -431,6 +440,17 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/mobile.handlebars';
 			}
+			var _sendMessage = function () {
+				Users.Mobile.sendMessage(mobileNumber, viewPath, o.fields, {
+					language: uf.preferredLanguage
+				}, callback);
+				result.push({'mobile': mobileNumber});
+			};
+
+			if (messageType === 'Streams/invite') {
+				return _sendMessage();
+			}
+
 			Users.Mobile.SELECT().where({
 				'number': mobileNumber
 			}).execute(function (err, rows) {
@@ -441,10 +461,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				if (rows[0].fields.state !== 'active') {
 					return callback && callback(new Q.Exception("Message.deliver: mobile not active"));
 				}
-				Users.Mobile.sendMessage(mobileNumber, viewPath, o.fields, {
-					language: uf.preferredLanguage
-				}, callback);
-				result.push({'mobile': mobileNumber});
+				_sendMessage();
 			});
 		}
 		function _device(deviceId, callback) {
