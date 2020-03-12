@@ -307,13 +307,15 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 
 		function _afterTransform() {
 			var w1 = [];
-			var e, m, d;
+			var e, m, d, destination;
 			if (e = deliver.emailAddress || deliver.email) {
-				_email(e, p1.fill('email'));
+				destination = to.find(function(item){ return typeof item === 'string' && item.includes('email'); });
+				_email(e, destination, p1.fill('email'));
 				w1.push('email');
 			}
 			if (m = deliver.mobileNumber || deliver.mobile) {
-				_mobile(m, p1.fill('mobile'));
+				destination = to.find(function(item){ return typeof item === 'string' && item.includes('mobile'); });
+				_mobile(m, destination, p1.fill('mobile'));
 				w1.push('mobile');
 			}
 			if (d = deliver.deviceId || deliver.device) {
@@ -348,11 +350,11 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				chain(o);
 				function _proceed() {
 					if (emailAddress) {
-						_email(emailAddress, p2.fill('email'));
+						_email(emailAddress, d, p2.fill('email'));
 						waitFor.push('email');
 					}
 					if (mobileNumber) {
-						_mobile(mobileNumber, p2.fill('mobile'));
+						_mobile(mobileNumber, d, p2.fill('mobile'));
 						waitFor.push('mobile');
 					}
 					if (d === 'devices') {
@@ -398,7 +400,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				}
 			}).run();
 		}
-		function _email(emailAddress, callback) {
+		function _email(emailAddress, destination, callback) {
 			o.destination = 'email';
 			o.emailAddress = emailAddress;
 			var viewPath = messageType+'/email.handlebars';
@@ -416,7 +418,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				result.push({'email': emailAddress});
 			};
 
-			if (messageType === 'Streams/invite') {
+			if (destination && destination === 'email+pending') {
 				return _sendMessage();
 			}
 
@@ -433,7 +435,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				_sendMessage();
 			});
 		}
-		function _mobile(mobileNumber, callback) {
+		function _mobile(mobileNumber, destination, callback) {
 			o.destination = 'mobile';
 			o.mobileNumber = mobileNumber;
 			var viewPath = messageType+'/mobile.handlebars';
@@ -447,7 +449,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				result.push({'mobile': mobileNumber});
 			};
 
-			if (messageType === 'Streams/invite') {
+			if (destination && destination === 'mobile+pending') {
 				return _sendMessage();
 			}
 
