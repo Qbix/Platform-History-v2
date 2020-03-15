@@ -569,7 +569,7 @@
 				"Streams/invite": {
 					"persistent": true,
 					"closeable": false,
-					"showSubject": false
+					"evenIfNotSubscribed": true
 				}
 			}
 		},
