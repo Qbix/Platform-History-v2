@@ -5,6 +5,7 @@ function Websites_webpage_response_start($params)
 	Q_Valid::nonce(true);
 
 	$userId = Q::ifset($params, 'userId', Users::loggedInUser(true)->id);
+	$currentCommunity = Users::currentCommunityId(true);
 
 	$r = array_merge($_REQUEST, $params);
 
@@ -16,9 +17,9 @@ function Websites_webpage_response_start($params)
 		throw new Exception("stream not found");
 	}
 
-	$communityId = Users::currentCommunityId();
-	$mainChatCategory = 'Streams/chats/main';
-	$chatRelationType = 'Websites/webpage';
+	$communityId = Q::ifset($r, 'categoryStream', 'publisherId', $currentCommunity);
+	$mainChatCategory = Q::ifset($r, 'categoryStream', 'streamName', 'Streams/chats/main');
+	$chatRelationType = Q::ifset($r, 'relationType', 'Websites/webpage');
 
 	// if this stream already related, exit
 	if (!Streams_RelatedTo::select()->where(array(

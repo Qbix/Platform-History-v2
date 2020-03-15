@@ -272,12 +272,10 @@ class Websites_Webpage
 	 * @method fetchStream
 	 * @static
 	 * @param {string} $url URL string to search stream by.
-	 * @param {string} [$publisherId=null] publisher id of stream. If null, main community id used.
 	 * @return Streams_Stream
 	 */
-	static function fetchStream($url, $publisherId = null) {
+	static function fetchStream($url) {
 		$streams = new Streams_Stream();
-		$streams->publisherId = $publisherId ? $publisherId : Users::currentCommunityId(true);
 		$streams->name = "Websites/webpage/".self::normalizeUrl($url);
 		if ($streams->retrieve()) {
 			return Streams::fetchOne($streams->publisherId, $streams->publisherId, $streams->name);
@@ -296,7 +294,7 @@ class Websites_Webpage
 	 * @static
 	 * @param {array} $params
 	 * @param {string} [$params.asUserId=null] The user who would be create stream. If null - logged user id.
-	 * @param {string} [$params.publisherId=null] Stream publisher id. If null - main community if.
+	 * @param {string} [$params.publisherId=null] Stream publisher id. If null - logged in user.
 	 * @param {string} [$params.title]
 	 * @param {string} [$params.keywords]
 	 * @param {string} [$params.description]
@@ -317,9 +315,10 @@ class Websites_Webpage
 			throw new Exception("Invalid URL");
 		}
 		$urlParsed = parse_url($url);
+		$loggedUserId = Users::loggedInUser(true)->id;
 
-		$asUserId = Q::ifset($params, "asUserId", Users::loggedInUser(true)->id);
-		$publisherId = Q::ifset($params, "publisherId", Users::communityId());
+		$asUserId = Q::ifset($params, "asUserId", $loggedUserId);
+		$publisherId = Q::ifset($params, "publisherId", $loggedUserId);
 
 		$title = Q::ifset($params, 'title', substr($url, strrpos($url, '/') + 1));
 		$title = $title ? substr($title, 0, 255) : '';
@@ -382,7 +381,7 @@ class Websites_Webpage
 
 		// check if stream for this url has been already created
 		// and if yes, return it
-		if ($webpageStream = self::fetchStream($url, $publisherId)) {
+		if ($webpageStream = self::fetchStream($url)) {
 			return $webpageStream;
 		}
 
