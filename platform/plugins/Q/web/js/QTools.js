@@ -3033,19 +3033,25 @@ Q.Contextual = {
 		
 		var x = info.coords.x, y = info.coords.y;
 		var w = (info.size && info.size.width) || contextual.outerWidth();
-		var leftOffset = ((w - arrow.outerWidth()) / 2);
+		var arrowLeft = 0;
+		var minArrowLeft = 22;
+		var leftOffset = ((w - arrow.outerWidth()) / 2) || minArrowLeft;
 		arrow.css('left', leftOffset + 'px');
 		if (info.relativeToElement)
 		{
 			if (info.coords.x < 5)
 			{
 				x = 5;
-				arrow.css({ 'left': (leftOffset + info.coords.x - 5) + 'px' });
+				arrowLeft = (leftOffset + trigger.outerWidth()/2 + info.coords.x - 10);
+				arrowLeft = arrowLeft < minArrowLeft ? minArrowLeft : arrowLeft;
+				arrow.css({ 'left': arrowLeft + 'px' });
 			}
 			else if (info.coords.x + contextual.outerWidth() + 5 > $body.width())
 			{
-				x = $body.width() - contextual.outerWidth() - 5;
-				arrow.css({ 'left': (leftOffset + info.coords.x - x) + 'px' });
+				x = $body.width() - contextual.outerWidth() - 10;
+				arrowLeft = (leftOffset + trigger.outerWidth()/2 + info.coords.x - x);
+				arrowLeft = arrowLeft < minArrowLeft ? minArrowLeft : arrowLeft;
+				arrow.css({ 'left': arrowLeft + 'px' });
 			}
 		}
 		
