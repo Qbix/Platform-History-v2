@@ -168,18 +168,7 @@ Q.Tool.define("Q/columns", function(options) {
 	fullscreen: Q.info.useFullscreen,
 	hideBackgroundColumns: true,
 	beforeOpen: new Q.Event(function (options, index) {
-		var tool = this;
-		setTimeout(function () {
-			var max = tool.max();
-			var count = max ? max + 1 : 1;
-			var $te = $(tool.element);
-			$te.attr('data-column-count', count);
-			if (count > 3) {
-				$te.addClass('Q_columns_over3');
-			} else {
-				$te.removeClass('Q_columns_over3');
-			}
-		}, 0)
+		setTimeout(_updateAttributes.bind(this), 0);
 	}, 'Q/columns'),
 	beforeClose: new Q.Event(),
 	onOpen: new Q.Event(function (options, index, div) {
@@ -194,10 +183,7 @@ Q.Tool.define("Q/columns", function(options) {
 			$div.attr('data-width-index', Math.round($div.width()/300) || 1);
 		}, this);
 	}, 'Q/columns'),
-	onClose: new Q.Event(function () {
-		var max = this.max();
-		$(this.element).attr('data-column-count', max ? max + 1 : 1);
-	}, 'Q/columns'),
+	onClose: new Q.Event(_updateAttributes, 'Q/columns'),
 	onTransitionEnd: new Q.Event(),
 	afterDelay: new Q.Event()
 },
@@ -1082,6 +1068,18 @@ function _topZ() {
 		}
 	});
 	return topZ;
+}
+
+function _updateAttributes() {
+	var max = this.max();
+	var count = max ? max + 1 : 1;
+	var $te = $(this.element);
+	$te.attr('data-column-count', count);
+	if (count > 3) {
+		$te.addClass('Q_columns_over3');
+	} else {
+		$te.removeClass('Q_columns_over3');
+	}
 }
 
 })(Q, jQuery);
