@@ -167,7 +167,20 @@ Q.Tool.define("Q/columns", function(options) {
 	textfill: null,
 	fullscreen: Q.info.useFullscreen,
 	hideBackgroundColumns: true,
-	beforeOpen: new Q.Event(),
+	beforeOpen: new Q.Event(function (options, index) {
+		var tool = this;
+		setTimeout(function () {
+			var max = tool.max();
+			var count = max ? max + 1 : 1;
+			var $te = $(tool.element);
+			$te.attr('data-column-count', count);
+			if (count > 3) {
+				$te.addClass('Q_columns_over3');
+			} else {
+				$te.removeClass('Q_columns_over3');
+			}
+		}, 0)
+	}, 'Q/columns'),
 	beforeClose: new Q.Event(),
 	onOpen: new Q.Event(function (options, index, div) {
 		var tool = this;
@@ -175,9 +188,6 @@ Q.Tool.define("Q/columns", function(options) {
 		div.addEventListener('transitionend', function () {
 			Q.handle(tool.state.onTransitionEnd, tool, [index, div]);
 		});
-
-		var max = this.max();
-		$(this.element).attr('data-column-count', max ? max + 1 : 1);
 
 		var $div = $(div);
 		Q.onLayout(div).set(function () {
