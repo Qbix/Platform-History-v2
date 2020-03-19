@@ -13804,9 +13804,9 @@ Q.beforeInit.addOnce(function () {
 			if (e = document.getElementById(sn+'_slot')) {
 				var r = e.getBoundingClientRect();
 				if (r.top < window.innerHeight / 10) {
-					e.addClass('Q_fixed_top');
+					e.removeClass('Q_fixed_bottom').addClass('Q_fixed_top');
 				} else if (r.bottom > window.innerHeight * 9 / 10) {
-					e.addClass('Q_fixed_bottom');
+					e.removeClass('Q_fixed_top').addClass('Q_fixed_bottom');
 				}
 			}
 		}
