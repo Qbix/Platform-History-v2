@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Fadlan booqo xiriirka soo socda:",
             "InvitingYou": "Waxaan kugu martiqaadayaa {999}",
             "HasInvitedYou": "{{displayName}} ayaa kugu martiqaaday {{title}}",
-            "HasMentionedYou": "{{displayName}} wuxuu kugu xusey &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} wuxuu kugu xusey &quot;{{title}}&quot;",
+            "YOUAREINVITED": "WAAD KU JIRTAA!",
+            "AcceptInvite": "Aqbal Martiqaadka"
         },
         "sms": {
             "content": "Waxaa lagugu casuumay {999}}. Fadlan wac {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Waad joojisay baahinta wicitaankan Facebook",
             "linkCopiedToCb": "Xiriirinta ayaa lagu soo guuriyey galka",
             "codeCopiedToCb": "Koodhka ayaa lagu soo guuriyey shaashadda",
-            "userHasNoVideo": "Ka-qeybgalaha ma leh muuqaal"
+            "userHasNoVideo": "Ka-qeybgalaha ma leh muuqaal",
+            "openInBrowserAlert": "Ku fur xiriiriyaha Safari biraawsarka si aad ugu biirto shirka."
         },
         "settingsPopup": {
             "webCamera": "Kaamirada Websaydhka",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "leeyahay mid cusub {{instructions.fromDisplayType}}",
                 "byAvatar": "lagu daray {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "waxay ku bilaabatay wicitaan gudaha"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Aqoonsiyeyaasha",
         "Devices": "Aaladda",
         "Streams": "Qulqulka"
+    },
+    "menu": {
+        "placeholder": "nooca cinwaanka bogga",
+        "ModTab": "Wax ka Beddelka Shayga",
+        "Save": "Badbaadi",
+        "Delete": "Tirtir",
+        "Submenu": "Submenu"
     }
 }

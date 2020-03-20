@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Lütfen aşağıdaki bağlantıyı ziyaret edin:",
             "InvitingYou": "Seni {{title}} davet ediyorum",
             "HasInvitedYou": "{{displayName}} seni {{title}} davet etti",
-            "HasMentionedYou": "&quot;{{title}}&quot; içinde {{displayName}} sizden bahsetti"
+            "HasMentionedYou": "&quot;{{title}}&quot; içinde {{displayName}} sizden bahsetti",
+            "YOUAREINVITED": "SEN DAVETLİSİN!",
+            "AcceptInvite": "Daveti Kabul Et"
         },
         "sms": {
             "content": "{{title}} adlı kişiye davet edildiniz. Lütfen {{url}} simgesine dokunun."
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Bu aramayı Facebook&#39;ta yayınlamayı durdurdunuz",
             "linkCopiedToCb": "link kopyalandı",
             "codeCopiedToCb": "Kod panoya kopyalandı",
-            "userHasNoVideo": "Katılımcının videosu yok"
+            "userHasNoVideo": "Katılımcının videosu yok",
+            "openInBrowserAlert": "Konferansa katılmak için bağlantıyı Safari tarayıcısında açın."
         },
         "settingsPopup": {
             "webCamera": "İnternet kamerası",
@@ -319,7 +322,15 @@
             "relatedTo": {
                 "hasANew": "yeni bir {{instructions.fromDisplayType}} var",
                 "byAvatar": "{{avatar.displayName}} tarafından eklendi"
-            }
+            },
+            "startedCallIn": "içinde bir çağrı başlattı"
         }
+    },
+    "menu": {
+        "placeholder": "sayfa başlığını yazın",
+        "ModTab": "Öğeyi Değiştir",
+        "Save": "Kayıt etmek",
+        "Delete": "Sil",
+        "Submenu": "Alt menü"
     }
 }

@@ -80,7 +80,9 @@
             "PleaseVisitLink": "အောက်ပါ link ကိုသွားရောက်ကြည့်ရှုပေးပါ:",
             "InvitingYou": "ငါ {{title}} ရန်သင့်အားဖိတ်ခေါ်နေပါတယ်",
             "HasInvitedYou": "{{displayName}} {{title}} ရန်သင့်အားဖိတ်ခေါ်ခဲ့သည်",
-            "HasMentionedYou": "{{displayName}} &quot;{{title}}&quot; တွင်သင့်ကိုဖော်ပြခဲ့သည်"
+            "HasMentionedYou": "{{displayName}} &quot;{{title}}&quot; တွင်သင့်ကိုဖော်ပြခဲ့သည်",
+            "YOUAREINVITED": "သင်ဖိတ်ခေါ်ခံရ!",
+            "AcceptInvite": "ဖိတ်ကြားလက်ခံသည်"
         },
         "sms": {
             "content": "သငျသညျ {{title}} ရန်ဖိတ်ခေါ်ခဲ့ကြသည်။ ကိုအသာပုတ် ကျေးဇူးပြု. {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "ဖေ့စ်ဘွတ်တွင်ဤခေါ်ဆိုမှုကိုသင်မလွှင့်တော့ပါ",
             "linkCopiedToCb": "link ကို clipboard မှကူးယူ",
             "codeCopiedToCb": "Code ကို clipboard မှကူးယူ",
-            "userHasNoVideo": "ပါဝင်သူတွင်ဗီဒီယိုမရှိပါ"
+            "userHasNoVideo": "ပါဝင်သူတွင်ဗီဒီယိုမရှိပါ",
+            "openInBrowserAlert": "ဆွေးနွေးပွဲသို့ဝင်ရောက်ရန် Safari browser တွင် link ကိုဖွင့်ပါ"
         },
         "settingsPopup": {
             "webCamera": "ဝက်ဘ်ကင်မရာ",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "{{instructions.fromDisplayType}} အသစ်ရှိသည်",
                 "byAvatar": "{{avatar.displayName}} မှထည့်သွင်းခဲ့သည်"
-            }
+            },
+            "startedCallIn": "စတင်ခေါ်ဆိုခဲ့သည်"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "အမှတ်အသား",
         "Devices": "စက်ပစ္စည်းများ",
         "Streams": "စီး"
+    },
+    "menu": {
+        "placeholder": "စာမျက်နှာခေါင်းစဉ်ရိုက်ပါ",
+        "ModTab": "ပစ္စည်းပြုပြင်မွမ်းမံ",
+        "Save": "သိမ်းဆည်းပါ",
+        "Delete": "ဖျက်ပါ",
+        "Submenu": "Submenu"
     }
 }

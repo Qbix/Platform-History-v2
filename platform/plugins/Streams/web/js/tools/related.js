@@ -23,6 +23,7 @@ var Streams = Q.Streams;
  *   @param {Object} [options.relatedOptions] Can include options like 'limit', 'offset', 'ascending', 'min', 'max', 'prefix' and 'fields'
  *   @param {Boolean} [options.editable] Set to false to avoid showing even authorized users an interface to replace the image or text of related streams
  *   @param {Boolean} [options.closeable] Set to false to avoid showing even authorized users an interface to close related streams
+ *   @param {Object} [options.previewOptions] Obkect of options which can be passed to preview tool.
  *   @param {Object} [options.creatable]  Optional pairs of {streamType: toolOptions} to render Streams/preview tools create new related streams.
  *   The params typically include at least a "title" field which you can fill with values such as "New" or "New ..."
  *   @param {Function} [options.toolName] Function that takes (streamType, options) and returns the name of the tool to render (and then activate) for that stream. That tool should reqire the "Streams/preview" tool, and work with it as documented in "Streams/preview".
@@ -76,6 +77,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		draggable: '.Streams_related_stream',
 		droppable: '.Streams_related_stream'
 	},
+	previewOptions: {},
 	tabs: function (previewTool, tabsTool) {
 		return Streams.key(previewTool.state.publisherId, previewTool.state.streamName);
 	},
@@ -93,7 +95,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			params.streamType = streamType;
 			var element = tool.elementForStream(
 				tool.state.publisherId, "", streamType, null, 
-				{ creatable: params }
+				Q.extend(state.previewOptions, { creatable: params })
 			).addClass('Streams_related_composer Q_contextual_inactive');
 			if (tool.tabs) {
 				element.addClass('Q_tabs_tab');
@@ -201,7 +203,8 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				tff.publisherId, 
 				tff.name, 
 				tff.type, 
-				this.weight
+				this.weight,
+				state.previewOptions
 			);
 			elements.push(element);
 			$(element).addClass('Streams_related_stream');

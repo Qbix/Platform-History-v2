@@ -4666,15 +4666,23 @@ Streams.isStream = function (value) {
  * and also whether subscribed to message type (from streams_subscription_rule)
  * @static
  * @method showNoticeIfSubscribed
- * @param {string} publisherId
- * @param {string} streamName
- * @param {string} messageType
- * @param {function} callback Function which called to show notice if all fine.
+ * @param {object} options
+ * @param {string} options.publisherId
+ * @param {string} options.streamName
+ * @param {string} options.messageType
+ * @param {string} [options.evenIfNotSubscribed=false] - If yes, show notice even if user not subscribed to stream.
+ * @param {function} options.callback Function which called to show notice if all fine.
  */
-Streams.showNoticeIfSubscribed = function (publisherId, streamName, messageType, callback) {
+Streams.showNoticeIfSubscribed = function (options) {
+	var publisherId = options.publisherId;
+	var streamName = options.streamName;
+	var messageType = options.messageType;
+	var callback = options.callback;
+	var evenIfNotSubscribed = options.evenIfNotSubscribed;
+
 	Streams.get.force(publisherId, streamName, function () {
 		// return if user doesn't subscribed to stream
-		if (Q.getObject("participant.subscribed", this) !== 'yes') {
+		if (!evenIfNotSubscribed && Q.getObject("participant.subscribed", this) !== 'yes') {
 			return;
 		}
 
@@ -5257,13 +5265,16 @@ Q.onInit.add(function _Streams_onInit() {
 					return console.warn('Streams.notifications.notices: no text for ' + messageType);
 				}
 
-				Streams.showNoticeIfSubscribed(message.publisherId, message.streamName, message.type,
-					function () {
+				Streams.showNoticeIfSubscribed({
+					publisherId: message.publisherId,
+					streamName: message.streamName,
+					messageType: message.type,
+					evenIfNotSubscribed: noticeOptions.evenIfNotSubscribed,
+					callback: function () {
 						var stream = this;
 
 						Streams.Avatar.get(message.byUserId, function (err, avatar) {
 							var source = (noticeOptions.showSubject !== false ? text : '');
-							source = (source ? source + ': ' : '') + (content || message.content);
 							if (!source) {
 								return;
 							}
@@ -5284,7 +5295,8 @@ Q.onInit.add(function _Streams_onInit() {
 								console.warn(e);
 							}
 						});
-					});
+					}
+				});
 			});
 		}, 'Streams.notifications.notice');
 	}
@@ -5907,34 +5919,39 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 	toUrl += '?startWebRTC';
 
 	Q.Text.get("Streams/content", function (err, text) {
-		Streams.showNoticeIfSubscribed(toPublisherId, toStreamName, message.type, function () {
-			Q.Template.render('Streams/chat/webrtc/available', {
-				avatar: Q.Tool.setUpElementHTML('div', 'Users/avatar', {
-					userId: publisherId,
-					icon: true,
-					short: true
-				}),
-				text: text.chat.startedConversation
-			}, function (err, html) {
-				if (err) {
-					return;
-				}
-
-				Q.Notices.add({
-					content: html,
-					handler: function () {
-						if (window.location.href.includes(conversationUrl)) {
-							var tool = Q.Tool.from($(".Q_tool.Streams_chat_tool[data-streams-chat*='" + toStreamName + "']"), "Streams/chat");
-
-							if (tool) {
-								return tool.startWebRTC();
-							}
-						}
-
-						Q.handle(toUrl);
+		Streams.showNoticeIfSubscribed({
+			publisherId: toPublisherId,
+			streamName: toStreamName,
+			messageType: message.type,
+			callback: function () {
+				Q.Template.render('Streams/chat/webrtc/available', {
+					avatar: Q.Tool.setUpElementHTML('div', 'Users/avatar', {
+						userId: publisherId,
+						icon: true,
+						short: true
+					}),
+					text: text.chat.startedConversation
+				}, function (err, html) {
+					if (err) {
+						return;
 					}
+
+					Q.Notices.add({
+						content: html,
+						handler: function () {
+							if (window.location.href.includes(conversationUrl)) {
+								var tool = Q.Tool.from($(".Q_tool.Streams_chat_tool[data-streams-chat*='" + toStreamName + "']"), "Streams/chat");
+
+								if (tool) {
+									return tool.startWebRTC();
+								}
+							}
+
+							Q.handle(toUrl);
+						}
+					});
 				});
-			});
+			}
 		});
 	});
 }, "Streams.chat.webrtc");

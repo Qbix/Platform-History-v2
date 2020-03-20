@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Alefaso azafady ity rohy manaraka ity:",
             "InvitingYou": "Manasa anao amin&#39;ny {{title}}",
             "HasInvitedYou": "{{displayName}} dia nanasa anao ho any amin&#39;ny {{title}}",
-            "HasMentionedYou": "{{displayName}} dia efa niresaka taminao tamin&#39;ny &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} dia efa niresaka taminao tamin&#39;ny &quot;{{title}}&quot;",
+            "YOUAREINVITED": "FELASA ANAO ianao!",
+            "AcceptInvite": "Ekeo ny fanasana"
         },
         "sms": {
             "content": "Nasaina hanatrika ny {{title}} ianao. Azafady, tadiavo {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Nijanona ny fandefasana ity antso ity tao amin&#39;ny Facebook ianao",
             "linkCopiedToCb": "Rohy azo adika amin&#39;ny takelaka",
             "codeCopiedToCb": "Kaody azo adika amin&#39;ny takelaka",
-            "userHasNoVideo": "Tsy mandray horonantsary ny mpandray anjara"
+            "userHasNoVideo": "Tsy mandray horonantsary ny mpandray anjara",
+            "openInBrowserAlert": "Sokafy ny rohy eo amin&#39;ny navigateur Safari mba hanatevenana ny federasiona."
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "manana vaovao {{instructions.fromDisplayType}}",
                 "byAvatar": "nampian&#39;i {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "nanomboka antso an-tsaina"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Identifiers",
         "Devices": "fitaovana",
         "Streams": "mikoriana"
+    },
+    "menu": {
+        "placeholder": "lohatenin&#39;ny pejy",
+        "ModTab": "Hanova zavatra",
+        "Save": "Save",
+        "Delete": "Mamafa",
+        "Submenu": "Submenu"
     }
 }

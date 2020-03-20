@@ -256,9 +256,9 @@ class Q_Session
 		$name = Q_Session::name();
 		$id = isset($_REQUEST[$name])
 			? $_REQUEST[$name]
-			: isset($_COOKIE[$name])
+			: (isset($_COOKIE[$name])
 				? $_COOKIE[$name]
-				: null;
+				: null);
 
 		$isNew = false;
 		if (!self::isValidId($id)) {
@@ -943,7 +943,7 @@ class Q_Session
 		if (!isset($startNewSession)) {
 			$startNewSession = !Q_Request::isAjax() || !empty(Q_Request::special('startNewSession'));
 		}
-		self::start(!$startNewSession);
+		self::start(false);
 		$nonce = self::calculateNonce();
 		if (!empty($_SERVER['HTTP_HOST'])) {
 			$durationName = self::durationName();

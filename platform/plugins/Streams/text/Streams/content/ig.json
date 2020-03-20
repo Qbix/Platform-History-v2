@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Biko gaa na njikọ ndị a:",
             "InvitingYou": "Ana m akpọ gị ka ị bịa {{title}}",
             "HasInvitedYou": "{{displayName}} akpọwo gị na {{title}}",
-            "HasMentionedYou": "{{displayName}} kpọtụrụ gị aha na &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} kpọtụrụ gị aha na &quot;{{title}}&quot;",
+            "YOUAREINVITED": "ARE BV!",
+            "AcceptInvite": "Nabata akwụkwọ ịkpọ òkù"
         },
         "sms": {
             "content": "A kpọrọ gị ka ị bịa {{title}}. Biko pịa {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "You kwụsịrị ịkpọsa oku a na Facebook",
             "linkCopiedToCb": "Edekọtara njikọ ga na bọọdụ",
             "codeCopiedToCb": "Edepụtaghachi koodu na clipboard",
-            "userHasNoVideo": "Onye so na ya enweghị vidiyo"
+            "userHasNoVideo": "Onye so na ya enweghị vidiyo",
+            "openInBrowserAlert": "Mepee njikọ na ihe nchọgharị Safari iji sonyere ogbako ahụ."
         },
         "settingsPopup": {
             "webCamera": "Igwefoto weebụ",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "nwere nke ọhụụ {{instructions.fromDisplayType}}",
                 "byAvatar": "gbakwunyere na {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "bidoro kpọọ na"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Ndị na-eme nchọpụta",
         "Devices": "Ngwaọrụ",
         "Streams": "Iyi"
+    },
+    "menu": {
+        "placeholder": "pịnye aha peeji",
+        "ModTab": "Gbanwee Nkebi",
+        "Save": "Chekwaa",
+        "Delete": "Hichapụ",
+        "Submenu": "Submenu"
     }
 }

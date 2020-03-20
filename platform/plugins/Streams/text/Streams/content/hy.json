@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Խնդրում ենք այցելել հետեւյալ հղումը.",
             "InvitingYou": "Ես հրավիրում եմ ձեզ {{title}}",
             "HasInvitedYou": "{{displayName}} հրավիրել է ձեզ {{title}}",
-            "HasMentionedYou": "99 {999}} -ը ձեզ նշել է «{{title}}» –ում"
+            "HasMentionedYou": "99 {999}} -ը ձեզ նշել է «{{title}}» –ում",
+            "YOUAREINVITED": "Դուք հրավիրված եք:",
+            "AcceptInvite": "Ընդունեք հրավիրել"
         },
         "sms": {
             "content": "Դուք հրավիրվել եք {{title}}: Խնդրում ենք `{{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Դու դադարեցրել ես այդ զանգի հեռարձակումը Facebook- ում",
             "linkCopiedToCb": "ՈՒղեցույցը պատճենված է clipboard- ում",
             "codeCopiedToCb": "Կոդը պատճենված է clipboard- ում",
-            "userHasNoVideo": "Մասնակիցը տեսանյութ չունի"
+            "userHasNoVideo": "Մասնակիցը տեսանյութ չունի",
+            "openInBrowserAlert": "Կոնֆերանսին միանալու համար Safari զննարկիչում բացեք հղումը:"
         },
         "settingsPopup": {
             "webCamera": "Վեբ ֆոտոխցիկ",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "ունի նոր 99 999}}",
                 "byAvatar": "ավելացրել է 99 {999}} -ի կողմից"
-            }
+            },
+            "startedCallIn": "զանգ է սկսել"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Նույնականացուցիչներ",
         "Devices": "Սարքեր",
         "Streams": "Հոսքեր"
+    },
+    "menu": {
+        "placeholder": "մուտքագրեք էջի վերնագիր",
+        "ModTab": "Փոփոխել նյութը",
+        "Save": "Խնայել",
+        "Delete": "Նջել",
+        "Submenu": "Ենթա"
     }
 }

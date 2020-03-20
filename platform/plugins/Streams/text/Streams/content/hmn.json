@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Thov mus saib qhov txuas nram no:",
             "InvitingYou": "Kuv tabtom caw koj mus rau {{title}}",
             "HasInvitedYou": "{{displayName}} tau caw koj tuaj rau {{title}}",
-            "HasMentionedYou": "{{displayName}} tau hais koj hauv &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} tau hais koj hauv &quot;{{title}}&quot;",
+            "YOUAREINVITED": "KOJ tau caw!",
+            "AcceptInvite": "Txais Yuav Caw"
         },
         "sms": {
             "content": "Koj tau caw kom {{title}}. Thov coj mus {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Koj tsum tsis tshaj tawm txoj xov no hauv Facebook",
             "linkCopiedToCb": "Txuas kab ntawv luam rau ntawv los teev cia",
             "codeCopiedToCb": "Code theej rau ntawv los teev cia",
-            "userHasNoVideo": "Cov tuaj koom tsis muaj daim vis dis aus"
+            "userHasNoVideo": "Cov tuaj koom tsis muaj daim vis dis aus",
+            "openInBrowserAlert": "Qhib qhov txuas hauv Safari browser kom koom nrog lub rooj sib tham."
         },
         "settingsPopup": {
             "webCamera": "Lub Koob Yees Duab Web",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "muaj tshiab {{instructions.fromDisplayType}}",
                 "byAvatar": "ntxiv los ntawm {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "pib hu nyob rau hauv"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Cov cim",
         "Devices": "Pab kiag li lawm",
         "Streams": "Ntws"
+    },
+    "menu": {
+        "placeholder": "hom nplooj npe",
+        "ModTab": "Hloov Kho Khoom",
+        "Save": "Txuag",
+        "Delete": "Rho tawm",
+        "Submenu": "Submenu"
     }
 }

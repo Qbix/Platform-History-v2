@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Sicela uvakashele isixhumanisi esilandelayo:",
             "InvitingYou": "Ngikumema ukuthi {{title}}",
             "HasInvitedYou": "{{displayName}} ukumemele {{title}}",
-            "HasMentionedYou": "{{displayName}} ukhulume ngawe ku- &quot;{{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} ukhulume ngawe ku- &quot;{{{title}}&quot;",
+            "YOUAREINVITED": "UYAVUMELWA!",
+            "AcceptInvite": "Amukele isimemo"
         },
         "sms": {
             "content": "Umenyiwe ku- {{title}}. Sicela uthephe {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Umise ukusakaza le kholi ku-Facebook",
             "linkCopiedToCb": "Isixhumanisi sikopishelwe ebhodini lokunamathisela",
             "codeCopiedToCb": "Ikhodi ikopishelwe kubhodi yokunameka",
-            "userHasNoVideo": "Umhlanganyeli akanayo ividiyo"
+            "userHasNoVideo": "Umhlanganyeli akanayo ividiyo",
+            "openInBrowserAlert": "Vula isixhumanisi esipheqululini seSafari ukuze ujoyine ingqungquthela."
         },
         "settingsPopup": {
             "webCamera": "Ikhamera yeWebhu",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "ine-{{instructions.fromDisplayType}} entsha",
                 "byAvatar": "ingezwe ngu - {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "waqala ucingo lungena"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Izikhombi",
         "Devices": "Amadivayisi",
         "Streams": "Imisipha"
+    },
+    "menu": {
+        "placeholder": "isihloko sephepha lekhasi",
+        "ModTab": "Shintsha Into",
+        "Save": "Gcina",
+        "Delete": "Susa",
+        "Submenu": "Submenu"
     }
 }

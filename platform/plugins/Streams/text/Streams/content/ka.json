@@ -80,7 +80,9 @@
             "PleaseVisitLink": "გთხოვთ ეწვიოთ შემდეგ ბმულს:",
             "InvitingYou": "მე გიწვევთ {999}}",
             "HasInvitedYou": "{{displayName}} მოიწვია თქვენ {{title}}",
-            "HasMentionedYou": "99 {999}} მოგახსენეთ &quot;{{title}}&quot; -ში"
+            "HasMentionedYou": "99 {999}} მოგახსენეთ &quot;{{title}}&quot; -ში",
+            "YOUAREINVITED": "თქვენ მოწვეული ხართ!",
+            "AcceptInvite": "მოიწვიე"
         },
         "sms": {
             "content": "თქვენ მოწვეული იყავით {{title}}. გთხოვთ {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "თქვენ შეაჩერეთ ამ ზარის მაუწყებლობა ფეისბუქში",
             "linkCopiedToCb": "ბმული გადაწერა ბუფერში",
             "codeCopiedToCb": "კოპირება გადაწერა ბუფერში",
-            "userHasNoVideo": "მონაწილეს ვიდეო არ აქვს"
+            "userHasNoVideo": "მონაწილეს ვიდეო არ აქვს",
+            "openInBrowserAlert": "გახსენით ბმული Safari ბრაუზერში კონფერენციაში შესასვლელად."
         },
         "settingsPopup": {
             "webCamera": "Ვებ კამერა",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "აქვს ახალი {999}}",
                 "byAvatar": "დაამატა {999}}"
-            }
+            },
+            "startedCallIn": "ზარი დაიწყო"
         }
+    },
+    "menu": {
+        "placeholder": "აკრიფეთ გვერდის სათაური",
+        "ModTab": "ნივთის შეცვლა",
+        "Save": "Გადარჩენა",
+        "Delete": "წაშლა",
+        "Submenu": "ქვემენიუ"
     }
 }

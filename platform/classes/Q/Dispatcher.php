@@ -207,6 +207,7 @@ class Q_Dispatcher
 				self::$routed = self::$uri->toArray();
 			}
 
+			$module = null;
 			try {
 				// If no module was found, then respond with noModule and return
 				if (!isset(self::$uri->module)) {

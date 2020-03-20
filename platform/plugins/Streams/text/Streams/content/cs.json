@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Navštivte následující odkaz:",
             "InvitingYou": "Zvu vás na {{title}}",
             "HasInvitedYou": "{{displayName}} vás pozvalo na {{title}}",
-            "HasMentionedYou": "{{displayName}} se o vás zmínil v &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} se o vás zmínil v &quot;{{title}}&quot;",
+            "YOUAREINVITED": "JSTE ZVÁNI!",
+            "AcceptInvite": "Přijmout pozvání"
         },
         "sms": {
             "content": "Byli jste pozváni na adresu {{title}}. Klepněte na {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Tento hovor jste přestali vysílat na Facebooku",
             "linkCopiedToCb": "Odkaz byl zkopírován do schránky",
             "codeCopiedToCb": "Kód zkopírován do schránky",
-            "userHasNoVideo": "Účastník nemá žádné video"
+            "userHasNoVideo": "Účastník nemá žádné video",
+            "openInBrowserAlert": "Otevřete odkaz v prohlížeči Safari a připojte se ke konferenci."
         },
         "settingsPopup": {
             "webCamera": "Webová kamera",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "má nový {{instructions.fromDisplayType}}",
                 "byAvatar": "přidal {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "zahájil hovor"
         }
+    },
+    "menu": {
+        "placeholder": "zadejte název stránky",
+        "ModTab": "Upravit položku",
+        "Save": "Uložit",
+        "Delete": "Odstranit",
+        "Submenu": "Podnabídka"
     }
 }

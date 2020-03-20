@@ -67,8 +67,8 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 			var topFactor = (from.top + z*(to.top - from.top));
 			
 			// crop to fit aspect ratio of the gallery
-			var iw = img.width();
-			var ih = img.height();
+			var iw = img[0].naturalWidth;
+			var ih = img[0].naturalHeight;
 			var w = iw * widthFactor;
 			var h = ih * heightFactor;
 			var l = iw * leftFactor;

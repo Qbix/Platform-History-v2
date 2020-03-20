@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Käy seuraavassa linkissä:",
             "InvitingYou": "Kutsun sinut {{title}}",
             "HasInvitedYou": "{{displayName}} on kutsunut sinut {{title}}",
-            "HasMentionedYou": "{{displayName}} on maininnut sinut &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} on maininnut sinut &quot;{{title}}&quot;",
+            "YOUAREINVITED": "SINUT ON KUTSUTTU!",
+            "AcceptInvite": "Hyväksy kutsu"
         },
         "sms": {
             "content": "Sinut on kutsuttu {{title}}. Napauta {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Lopetit tämän puhelun lähettämisen Facebookissa",
             "linkCopiedToCb": "Linkki kopioitiin leikepöydälle",
             "codeCopiedToCb": "Koodi kopioitiin leikepöydälle",
-            "userHasNoVideo": "Osallistujalla ei ole videota"
+            "userHasNoVideo": "Osallistujalla ei ole videota",
+            "openInBrowserAlert": "Avaa linkki Safari-selaimessa liittyäksesi konferenssiin."
         },
         "settingsPopup": {
             "webCamera": "Nettikamera",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "on uusi {{instructions.fromDisplayType}}",
                 "byAvatar": "lisännyt {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "aloitti puhelun"
         }
+    },
+    "menu": {
+        "placeholder": "kirjoita sivun otsikko",
+        "ModTab": "Muokkaa kohdetta",
+        "Save": "Tallentaa",
+        "Delete": "Poistaa",
+        "Submenu": "alivalikko"
     }
 }

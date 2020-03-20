@@ -30,9 +30,11 @@ class Websites_Webpage
 
 		$parsedUrl = parse_url($url);
 
+		//$document = file_get_contents($url);
+
 		// get source with header
 		// "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36"
-		/*$response = Q_Utils::get($url, $_SERVER['HTTP_USER_AGENT'], array(
+		$response = Q_Utils::get($url, $_SERVER['HTTP_USER_AGENT'], array(
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_VERBOSE => true,
 			CURLOPT_HEADER => true
@@ -44,18 +46,15 @@ class Websites_Webpage
 		$http_response_header = $document = '';
 		foreach ($response as $i => $item) {
 			if (strpos($item, 'HTTP/') === 0 && empty($document)) {
-				$http_response_header = $item;
+				$http_response_header = explode("\n", $item);
 			} else {
 				$document .= $item;
 			}
-		}*/
-
-
-		$document = file_get_contents($url);
+		}
 
 		//If http response header mentions that content is gzipped, then uncompress it
 		foreach ($http_response_header as $item) {
-			if(stristr($item, 'content-encoding') && stristr($item, 'gzip')) {
+			if(stristr($item, 'content-encoding') && stristr($item, 'gzip') && 0 === mb_strpos($document, "\x1f" . "\x8b" . "\x08", 0, "US-ASCII")) {
 				//Now lets uncompress the compressed data
 				$document = gzinflate(substr($document,10,-8) );
 				break;
@@ -144,7 +143,7 @@ class Websites_Webpage
 		}
 
 		// parse url
-		$result['url'] = $canonicalUrl ?: $url;
+		$result['url'] = $canonicalUrl ? $canonicalUrl : $url;
 
 		// get big icon
 		$icon = Q::ifset($result, 'image', null);
@@ -273,12 +272,10 @@ class Websites_Webpage
 	 * @method fetchStream
 	 * @static
 	 * @param {string} $url URL string to search stream by.
-	 * @param {string} [$publisherId=null] publisher id of stream. If null, main community id used.
 	 * @return Streams_Stream
 	 */
-	static function fetchStream($url, $publisherId = null) {
+	static function fetchStream($url) {
 		$streams = new Streams_Stream();
-		$streams->publisherId = $publisherId ?: Users::communityId();
 		$streams->name = "Websites/webpage/".self::normalizeUrl($url);
 		if ($streams->retrieve()) {
 			return Streams::fetchOne($streams->publisherId, $streams->publisherId, $streams->name);
@@ -297,7 +294,7 @@ class Websites_Webpage
 	 * @static
 	 * @param {array} $params
 	 * @param {string} [$params.asUserId=null] The user who would be create stream. If null - logged user id.
-	 * @param {string} [$params.publisherId=null] Stream publisher id. If null - main community if.
+	 * @param {string} [$params.publisherId=null] Stream publisher id. If null - logged in user.
 	 * @param {string} [$params.title]
 	 * @param {string} [$params.keywords]
 	 * @param {string} [$params.description]
@@ -318,9 +315,10 @@ class Websites_Webpage
 			throw new Exception("Invalid URL");
 		}
 		$urlParsed = parse_url($url);
+		$loggedUserId = Users::loggedInUser(true)->id;
 
-		$asUserId = Q::ifset($params, "asUserId", Users::loggedInUser(true)->id);
-		$publisherId = Q::ifset($params, "publisherId", Users::communityId());
+		$asUserId = Q::ifset($params, "asUserId", $loggedUserId);
+		$publisherId = Q::ifset($params, "publisherId", $loggedUserId);
 
 		$title = Q::ifset($params, 'title', substr($url, strrpos($url, '/') + 1));
 		$title = $title ? substr($title, 0, 255) : '';
@@ -383,7 +381,7 @@ class Websites_Webpage
 
 		// check if stream for this url has been already created
 		// and if yes, return it
-		if ($webpageStream = self::fetchStream($url, $publisherId)) {
+		if ($webpageStream = self::fetchStream($url)) {
 			return $webpageStream;
 		}
 
@@ -397,9 +395,10 @@ class Websites_Webpage
 			$quota = Users_Quota::check($asUserId, '', $quotaName, true, 1, $roles);
 		}
 
+		$td = trim($description);
 		$webpageStream = Streams::create($asUserId, $publisherId, 'Websites/webpage', array(
 			'title' => trim($title),
-			'content' => trim($description) ?: "",
+			'content' => $td ? $td : "",
 			'icon' => $streamIcon,
 			'attributes' => array(
 				'url' => $url,

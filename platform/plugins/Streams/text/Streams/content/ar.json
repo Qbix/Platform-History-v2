@@ -80,7 +80,9 @@
             "PleaseVisitLink": "يرجى زيارة الرابط التالي:",
             "InvitingYou": "أنا أدعوك إلى {{title}}",
             "HasInvitedYou": "دعاك {{displayName}} إلى {{title}}",
-            "HasMentionedYou": "{{displayName}} ذكرك في &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} ذكرك في &quot;{{title}}&quot;",
+            "YOUAREINVITED": "انت مدعو!",
+            "AcceptInvite": "قبول دعوة"
         },
         "sms": {
             "content": "تمت دعوتك إلى {{title}}. يرجى النقر {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "لقد توقفت عن بث هذه المكالمة في Facebook",
             "linkCopiedToCb": "تم نسخ الرابط إلى الحافظة",
             "codeCopiedToCb": "تم نسخ الرمز إلى الحافظة",
-            "userHasNoVideo": "المشارك ليس لديه فيديو"
+            "userHasNoVideo": "المشارك ليس لديه فيديو",
+            "openInBrowserAlert": "افتح الرابط في متصفح Safari للانضمام إلى المؤتمر."
         },
         "settingsPopup": {
             "webCamera": "كاميرا ويب",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "لديه {{instructions.fromDisplayType}} جديد",
                 "byAvatar": "أضيفت بواسطة {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "بدأت مكالمة في"
         }
+    },
+    "menu": {
+        "placeholder": "اكتب عنوان الصفحة",
+        "ModTab": "تعديل البند",
+        "Save": "حفظ",
+        "Delete": "حذف",
+        "Submenu": "القائمة الفرعية"
     }
 }

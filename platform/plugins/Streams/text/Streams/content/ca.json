@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Visiteu l’enllaç següent:",
             "InvitingYou": "Us convido a {{title}}",
             "HasInvitedYou": "{{displayName}} t&#39;ha convidat a {{title}}",
-            "HasMentionedYou": "{{displayName}} t&#39;ha mencionat a &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} t&#39;ha mencionat a &quot;{{title}}&quot;",
+            "YOUAREINVITED": "VOSTÈ ESTÀ CONVIDAT!",
+            "AcceptInvite": "Accepta Convida"
         },
         "sms": {
             "content": "Heu estat convidat a {{title}}. Toqueu {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Heu deixat de publicar aquesta trucada a Facebook",
             "linkCopiedToCb": "Enllaç copiat al porta-retalls",
             "codeCopiedToCb": "Codi copiat al porta-retalls",
-            "userHasNoVideo": "El participant no té cap vídeo"
+            "userHasNoVideo": "El participant no té cap vídeo",
+            "openInBrowserAlert": "Obrir un enllaç al navegador Safari per unir-se a la conferència."
         },
         "settingsPopup": {
             "webCamera": "Càmera web",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "té un {{instructions.fromDisplayType}} nou",
                 "byAvatar": "afegit per {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "va iniciar una trucada"
         }
+    },
+    "menu": {
+        "placeholder": "escriu el títol de la pàgina",
+        "ModTab": "Modifica l&#39;element",
+        "Save": "Desa",
+        "Delete": "Suprimeix",
+        "Submenu": "Submenú"
     }
 }

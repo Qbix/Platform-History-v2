@@ -25,7 +25,7 @@ var Row = Q.require('Db/Row');
  * @param {string} [$fields.resourceId] defaults to ""
  * @param {string} [$fields.name] defaults to ""
  * @param {integer} [$fields.units] defaults to 1
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -60,7 +60,7 @@ Q.mixin(Base, Row);
 /**
  * @property insertedTime
  * @type String|Db.Expression
- * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * @default new Db_Expression("current_timestamp()")
  * 
  */
 
@@ -450,7 +450,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","11","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","11","",false],false,"","current_timestamp()"];
 };
 
 module.exports = Base;

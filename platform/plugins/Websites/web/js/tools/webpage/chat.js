@@ -14,7 +14,7 @@
 		tool.chatTool = Q.Tool.from(this.element, "Streams/chat");
 
 		// preload throbber
-		$('<img/>')[0].src = Q.url("{{Q}}/img/throbbers/loading.gif");
+		$('<img/>')[0].src = Q.info.imgLoading;
 
 		Q.addStylesheet('{{Websites}}/css/tools/webpage/chat.css');
 
@@ -32,12 +32,14 @@
 
 			var previewTool = Q.Tool.from($preview, "Websites/webpage/preview");
 
-			fields.instructions = Q.extend({}, fields.instructions, {
-				'Websites/webpages': {
-					publisherId: previewTool.state.publisherId,
-					streamName: previewTool.state.streamName
-				}
-			});
+			if (Q.typeOf(previewTool) === 'Q.Tool') {
+				fields.instructions = Q.extend({}, fields.instructions, {
+					'Websites/webpages': {
+						publisherId: previewTool.state.publisherId,
+						streamName: previewTool.state.streamName
+					}
+				});
+			}
 
 			tool.removePreview(previewTool.element);
 		}, tool);
@@ -95,7 +97,7 @@
 				}
 
 				Q.Template.render('Websites/webpage/chat', {
-					src: Q.url("{{Q}}/img/throbbers/loading.gif")
+					src: Q.info.imgLoading
 				}, function (err, html) {
 					if (err) {
 						return;

@@ -80,7 +80,9 @@
             "PleaseVisitLink": "请访问以下链接：",
             "InvitingYou": "我邀请你{{title}}",
             "HasInvitedYou": "{{displayName}}已邀请您{{title}}",
-            "HasMentionedYou": "{{displayName}}在“ {{title}}”中提到了您"
+            "HasMentionedYou": "{{displayName}}在“ {{title}}”中提到了您",
+            "YOUAREINVITED": "你被邀请了！",
+            "AcceptInvite": "接受邀请"
         },
         "sms": {
             "content": "您已受邀{{title}}。请点按{{url}}"
@@ -93,19 +95,27 @@
         "mobile": {
             "alert": "邀请是从我们的号码发送的，您的朋友尚未认出。跟进一个快速文本，让他们知道您的邀请，要求他们点击链接。",
             "confirm": "邀请是从我们的号码发送的，您的朋友尚未认出。您想跟进一个快速文本，让他们知道您的邀请，请他们点击链接。",
-            "check": "嘿，我刚给你发了一个{{app}}应用邀请函。请检查您的短信，然后单击链接！"
+            "check": "嘿，我刚给你发了一个{{app}}应用邀请函。请检查您的短信，然后单击链接！",
+            "CheckYourMobile": "请检查短信并按照说明进行操作！"
         },
         "email": {
             "alert": "邀请是从我们的域发送的，您的朋友尚未识别。跟进一个快速文本，让他们知道您的邀请，要求他们点击链接。",
             "confirm": "邀请是从我们的域发送的，您的朋友尚未识别。您想跟进一个快速文本，让他们知道您的邀请，请他们点击链接。",
             "subject": "你有邀请吗？",
-            "body": "嘿，我刚给你发了一个{{app}}应用邀请函。请检查您的电子邮件，然后单击其中的链接！"
+            "body": "嘿，我刚给你发了一个{{app}}应用邀请函。请检查您的电子邮件，然后单击其中的链接！",
+            "CheckYourEmail": "请检查您的电子邮件并按照说明进行操作！"
         }
     },
     "participating": {
         "Title": "标题",
         "Subscribed": "订阅",
-        "Participants": "参与者"
+        "Participants": "参与者",
+        "AreYouSureRemoveIdentifier": "您确定要删除此标识符吗？",
+        "AreYouSureUnsubscribeIdentifier": "您确定要退订该标识符吗？它将关闭对此标识符的通知。",
+        "AreYouSureUnsubscribeDevice": "您确定要退订该设备吗？它将关闭此设备的通知。",
+        "Identifiers": "身份标识",
+        "Devices": "设备",
+        "Streams": "流"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +126,74 @@
             "microphoneBtn": "启用麦克风",
             "cameraBtn": "启用相机",
             "cameraAndMicrophoneBtn": "启用相机和麦克风"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "使用说明",
+            "permissionDenied": "{{kind}}的权限被拒绝。要使用它，请按照以下步骤操作：",
+            "point1": "转到“设置”-&gt;“高级”-&gt;“隐私和安全性”-&gt;“站点设置”-&gt;“摄像机”或“站点设置”-&gt;“麦克风”",
+            "point2": "从“阻止”列表中删除{{hostname}}"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "使用说明",
+            "permissionDenied": "{{kind}}的权限被拒绝。请重新加载此页面并确认对{{kind}}的访问权限以加入会议。"
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "使用说明",
+            "permissionDenied": "{{kind}}的权限被拒绝。要使用它，请按照以下步骤操作：",
+            "point1": "转到您的Android设置",
+            "point2": "打开“应用和通知”",
+            "point3": "找到“ {{communityName}}”并打开它",
+            "point4": "点击权限",
+            "point5": "启用{{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "使用说明",
+            "permissionDenied": "{{kind}}的权限被拒绝。要使用它，请按照以下步骤操作：",
+            "point1": "转到您的iOS设置",
+            "point2": "打开“隐私”",
+            "point3": "找到{{kind}}并打开它",
+            "point4": "找到“ {{communityName}}”并启用"
+        },
+        "notices": {
+            "youJoinedRoom": "你加入了房间",
+            "joining": "正在加入：{{userName}}",
+            "sbLeftRoom": "{{userName}}离开了房间",
+            "youLeftRoom": "你离开房间了",
+            "codeCopied": "你离开房间了",
+            "sbBeganFbLive": "{{userName}}开始在Facebook中广播此通话",
+            "sbStoppedFbLive": "{{userName}}停止在Facebook中广播此通话",
+            "youBeganFbLive": "您开始在Facebook中广播此通话",
+            "youStoppedFbLive": "您已停止在Facebook中广播此通话",
+            "linkCopiedToCb": "链接已复制到剪贴板",
+            "codeCopiedToCb": "代码已复制到剪贴板",
+            "userHasNoVideo": "参加者没有视频",
+            "openInBrowserAlert": "在Safari浏览器中打开链接以加入会议。"
+        },
+        "settingsPopup": {
+            "webCamera": "网络摄像头",
+            "screenSharing": "屏幕共享",
+            "shareAnotherScreen": "共享另一个屏幕",
+            "turnOffCameras": "关闭所有相机",
+            "startFBLive": "启动Facebook Livestream",
+            "stopFBLive": "停止Facebook直播",
+            "fbLiveTitle": "现场标题",
+            "fbLiveDescription": "现场说明",
+            "fbOnlyMeLiveAccess": "只有我",
+            "fbFriendsAccess": "友人",
+            "fbPublicAccess": "上市",
+            "fbStartLive": "上线",
+            "fbStopLive": "结束直播",
+            "fbEmbedCode": "嵌入",
+            "copy": "复制"
+        },
+        "participantsPopup": {
+            "disconnect": "断开",
+            "floatingScreens": "浮筛",
+            "tiledScreens": "平铺屏幕",
+            "loudestExceptMe": "除了我最大声",
+            "maximizeLoudest": "最大化声音",
+            "staticMaximized": "静态最大化",
+            "manual": "手册"
         }
     },
     "types": {
@@ -244,7 +322,15 @@
             "relatedTo": {
                 "hasANew": "有一个新的{{instructions.fromDisplayType}}",
                 "byAvatar": "由{{avatar.displayName}}添加"
-            }
+            },
+            "startedCallIn": "发起了通话"
         }
+    },
+    "menu": {
+        "placeholder": "输入页面标题",
+        "ModTab": "修改项目",
+        "Save": "保存",
+        "Delete": "删除",
+        "Submenu": "子菜单"
     }
 }

@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Palun külastage järgmist linki:",
             "InvitingYou": "Kutsun teid {{title}}",
             "HasInvitedYou": "{{displayName}} kutsus teid {{title}}",
-            "HasMentionedYou": "{{displayName}} on maininud teid teemal &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} on maininud teid teemal &quot;{{title}}&quot;",
+            "YOUAREINVITED": "TE OLETE KUTSUTUD!",
+            "AcceptInvite": "Võta kutse vastu"
         },
         "sms": {
             "content": "Teid kutsuti {{title}}. Palun puudutage {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Lõpetasite selle kõne edastamise Facebookis",
             "linkCopiedToCb": "Link kopeeritakse lõikelauale",
             "codeCopiedToCb": "Kood kopeeriti lõikelauale",
-            "userHasNoVideo": "Osalejal pole videot"
+            "userHasNoVideo": "Osalejal pole videot",
+            "openInBrowserAlert": "Konverentsiga liitumiseks avage link Safari brauseris."
         },
         "settingsPopup": {
             "webCamera": "Veebikaamera",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "omab uut {{instructions.fromDisplayType}}",
                 "byAvatar": "lisas {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "alustas kõnet sisse"
         }
+    },
+    "menu": {
+        "placeholder": "tippige lehe pealkiri",
+        "ModTab": "Muuda üksust",
+        "Save": "Salvesta",
+        "Delete": "Kustuta",
+        "Submenu": "Alammenüü"
     }
 }

@@ -23,7 +23,7 @@ var Row = Q.require('Db/Row');
  * an associative array of {column: value} pairs
  * @param {string} [$fields.uri] defaults to ""
  * @param {string} [$fields.url] defaults to ""
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  */
 function Base (fields) {
@@ -47,7 +47,7 @@ Q.mixin(Base, Row);
 /**
  * @property insertedTime
  * @type String|Db.Expression
- * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * @default new Db_Expression("current_timestamp()")
  * 
  */
 /**
@@ -370,7 +370,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","255","",false],true,"","CURRENT_TIMESTAMP"];
+return [["timestamp","255","",false],true,"","current_timestamp()"];
 };
 
 /**

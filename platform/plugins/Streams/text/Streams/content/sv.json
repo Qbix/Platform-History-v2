@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Vänligen besök följande länk:",
             "InvitingYou": "Jag uppmanar dig att {{title}}",
             "HasInvitedYou": "{{displayName}} har bjudit in dig till {{title}}",
-            "HasMentionedYou": "{{displayName}} har nämnt dig i &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} har nämnt dig i &quot;{{title}}&quot;",
+            "YOUAREINVITED": "DU ÄR INBJUDEN!",
+            "AcceptInvite": "Acceptera inbjudan"
         },
         "sms": {
             "content": "Du har blivit inbjuden till {{title}}. Var god och tryck på {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Du slutade sända detta samtal i Facebook",
             "linkCopiedToCb": "Länk kopierad till urklipp",
             "codeCopiedToCb": "Koden kopierades till urklipp",
-            "userHasNoVideo": "Deltagaren har ingen video"
+            "userHasNoVideo": "Deltagaren har ingen video",
+            "openInBrowserAlert": "Öppna länken i Safari-webbläsaren för att delta i konferensen."
         },
         "settingsPopup": {
             "webCamera": "Webbkamera",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "har en ny {{instructions.fromDisplayType}}",
                 "byAvatar": "tillagd av {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "startade ett samtal"
         }
+    },
+    "menu": {
+        "placeholder": "skriv sidtitel",
+        "ModTab": "Ändra objekt",
+        "Save": "Spara",
+        "Delete": "Radera",
+        "Submenu": "Undermeny meny~~POS=HEADCOMP"
     }
 }

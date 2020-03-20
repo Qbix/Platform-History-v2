@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Lūdzu, apmeklējiet šo saiti:",
             "InvitingYou": "Es aicinu jūs uz {{title}}",
             "HasInvitedYou": "{{displayName}} uzaicināja jūs uz {{title}}",
-            "HasMentionedYou": "{{displayName}} ir pieminējis jūs žurnālā “{{title}}”"
+            "HasMentionedYou": "{{displayName}} ir pieminējis jūs žurnālā “{{title}}”",
+            "YOUAREINVITED": "JŪS AICINĀJIETIES!",
+            "AcceptInvite": "Pieņemt ielūgumu"
         },
         "sms": {
             "content": "Jūs esat uzaicināts uz {{title}}. Lūdzu, pieskarieties {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Jūs pārtraucāt šī zvana pārraidi Facebook",
             "linkCopiedToCb": "Saite kopēta starpliktuvē",
             "codeCopiedToCb": "Kods nokopēts starpliktuvē",
-            "userHasNoVideo": "Dalībniekam nav video"
+            "userHasNoVideo": "Dalībniekam nav video",
+            "openInBrowserAlert": "Lai pievienotos konferencei, pārlūkprogrammā Safari atveriet saiti."
         },
         "settingsPopup": {
             "webCamera": "Web kamera",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "ir jauns {{instructions.fromDisplayType}}",
                 "byAvatar": "pievienoja {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "sāka sarunu"
         }
+    },
+    "menu": {
+        "placeholder": "ierakstiet lapas virsrakstu",
+        "ModTab": "Modificēt vienumu",
+        "Save": "Saglabāt",
+        "Delete": "Dzēst",
+        "Submenu": "Apakšizvēlne"
     }
 }

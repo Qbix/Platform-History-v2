@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Vennligst besøk følgende lenke:",
             "InvitingYou": "Jeg inviterer deg til {{title}}",
             "HasInvitedYou": "{{displayName}} har invitert deg til {{title}}",
-            "HasMentionedYou": "{{displayName}} har nevnt deg i &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} har nevnt deg i &quot;{{title}}&quot;",
+            "YOUAREINVITED": "DU ER INVITERT!",
+            "AcceptInvite": "Godta invitasjon"
         },
         "sms": {
             "content": "Du har blitt invitert til {{title}}. Vennligst trykk på {{url}}"
@@ -161,7 +163,8 @@
             "youStoppedFbLive": "Du sluttet å kringkaste denne samtalen i Facebook",
             "linkCopiedToCb": "Link kopiert til utklippstavle",
             "codeCopiedToCb": "Koden kopiert til utklippstavlen",
-            "userHasNoVideo": "Deltakeren har ingen video"
+            "userHasNoVideo": "Deltakeren har ingen video",
+            "openInBrowserAlert": "Åpne lenken i Safari-nettleseren for å delta i konferansen."
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -315,7 +318,15 @@
             "relatedTo": {
                 "hasANew": "har en ny {{instructions.fromDisplayType}}",
                 "byAvatar": "lagt til av {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "startet en samtale"
         }
+    },
+    "menu": {
+        "placeholder": "skriv inn sidetittel",
+        "ModTab": "Endre varen",
+        "Save": "Lagre",
+        "Delete": "Slett",
+        "Submenu": "undermeny"
     }
 }

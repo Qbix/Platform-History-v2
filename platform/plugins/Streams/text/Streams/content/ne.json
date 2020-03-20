@@ -80,7 +80,9 @@
             "PleaseVisitLink": "कृपया निम्न लिङ्कमा जानुहोस्:",
             "InvitingYou": "म तपाईंलाई आमन्त्रित गर्दै छु {{9 99}}",
             "HasInvitedYou": "{{displayName}} तपाईंलाई {{title}} मा निमन्त्रणा दिइयो",
-            "HasMentionedYou": "{{9{} you you &quot;{{१०००}}&quot; मा तपाईंलाई उल्लेख गरेको छ"
+            "HasMentionedYou": "{{9{} you you &quot;{{१०००}}&quot; मा तपाईंलाई उल्लेख गरेको छ",
+            "YOUAREINVITED": "तपाईं आमन्त्रित हुनुहुन्छ!",
+            "AcceptInvite": "आमन्त्रित स्वीकार्नुहोस्"
         },
         "sms": {
             "content": "तपाईलाई आमन्त्रित गरिएको छ {{9 99}}। कृपया ट्याप गर्नुहोस् {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "तपाईंले यस कललाई फेसबुकमा प्रसारण गर्न रोक्नुभयो",
             "linkCopiedToCb": "लिंक क्लिपबोर्डमा प्रतिलिपि गरियो",
             "codeCopiedToCb": "क्लिपबोर्डमा कोड प्रतिलिपि गरियो",
-            "userHasNoVideo": "सहभागीको कुनै भिडियो छैन"
+            "userHasNoVideo": "सहभागीको कुनै भिडियो छैन",
+            "openInBrowserAlert": "सम्मेलनमा सामेल हुन सफारी ब्राउजरमा लिंक खोल्नुहोस्।"
         },
         "settingsPopup": {
             "webCamera": "वेब क्यामेरा",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "नयाँ {{9{} has छ",
                 "byAvatar": "{{9{} added द्वारा थपियो"
-            }
+            },
+            "startedCallIn": "भित्र कल सुरु भयो"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "पहिचानकर्ता",
         "Devices": "उपकरणहरू",
         "Streams": "स्ट्रिमहरू"
+    },
+    "menu": {
+        "placeholder": "पृष्ठ शीर्षक टाइप गर्नुहोस्",
+        "ModTab": "वस्तु परिमार्जन गर्नुहोस्",
+        "Save": "बचत गर्नुहोस्",
+        "Delete": "मेटाउन",
+        "Submenu": "सबमेनु"
     }
 }

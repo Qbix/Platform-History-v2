@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Apsilankykite šioje nuorodoje:",
             "InvitingYou": "Kviečiu jus {{title}}",
             "HasInvitedYou": "{{displayName}} pakvietė jus į {{title}}",
-            "HasMentionedYou": "{{displayName}} paminėjo jus „{{title}}“"
+            "HasMentionedYou": "{{displayName}} paminėjo jus „{{title}}“",
+            "YOUAREINVITED": "ESATE KVIEČIAMI!",
+            "AcceptInvite": "Priimti kvietimą"
         },
         "sms": {
             "content": "Jūs esate pakviestas į {{title}}. Palieskite {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Jūs nutraukėte šio skambučio transliavimą „Facebook“",
             "linkCopiedToCb": "Nuoroda nukopijuota į mainų sritį",
             "codeCopiedToCb": "Kodas nukopijuotas į mainų sritį",
-            "userHasNoVideo": "Dalyvis neturi vaizdo įrašo"
+            "userHasNoVideo": "Dalyvis neturi vaizdo įrašo",
+            "openInBrowserAlert": "Norėdami prisijungti prie konferencijos, atidarykite nuorodą „Safari“ naršyklėje."
         },
         "settingsPopup": {
             "webCamera": "Internetinė kamera",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "turi naują {{instructions.fromDisplayType}}",
                 "byAvatar": "pridėjo {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "pradėjo skambinti"
         }
+    },
+    "menu": {
+        "placeholder": "įveskite puslapio pavadinimą",
+        "ModTab": "Pakeisti elementą",
+        "Save": "Sutaupyti",
+        "Delete": "Ištrinti",
+        "Submenu": "Pomeniu"
     }
 }

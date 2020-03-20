@@ -80,7 +80,9 @@
             "PleaseVisitLink": "בקר בקישור הבא:",
             "InvitingYou": "אני מזמין אותך {{title}}",
             "HasInvitedYou": "{{displayName}} הזמין אותך ל {{title}}",
-            "HasMentionedYou": "{{displayName}} הזכיר אותך ב&quot; {{title}} &quot;"
+            "HasMentionedYou": "{{displayName}} הזכיר אותך ב&quot; {{title}} &quot;",
+            "YOUAREINVITED": "אתם מוזמנים!",
+            "AcceptInvite": "קבל את ההזמנה"
         },
         "sms": {
             "content": "הוזמנת ל {{title}}. הקש על {{url}}"
@@ -161,7 +163,8 @@
             "youStoppedFbLive": "הפסקת לשדר שיחה זו בפייסבוק",
             "linkCopiedToCb": "קישור הועתק ללוח",
             "codeCopiedToCb": "הקוד הועתק ללוח",
-            "userHasNoVideo": "למשתתף אין סרטון"
+            "userHasNoVideo": "למשתתף אין סרטון",
+            "openInBrowserAlert": "פתח קישור בדפדפן ספארי כדי להצטרף לוועידה."
         },
         "settingsPopup": {
             "webCamera": "מצלמת רשת",
@@ -315,7 +318,15 @@
             "relatedTo": {
                 "hasANew": "יש {{instructions.fromDisplayType}} חדש",
                 "byAvatar": "נוסף על ידי {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "התחל שיחה"
         }
+    },
+    "menu": {
+        "placeholder": "הקלד כותרת עמוד",
+        "ModTab": "שנה פריט",
+        "Save": "להציל",
+        "Delete": "מחק",
+        "Submenu": "תפריט משנה"
     }
 }

@@ -52,9 +52,8 @@ function _Streams_participants(options) {
 	tool.forEachChild('Users/avatar', function () {
 		tool.$elements[this.state.userId] = $(this.element);
 	});
-	
+
 	tool.refresh();
-	
 },
 
 {
@@ -95,7 +94,6 @@ function _Streams_participants(options) {
 			clearInterval(this.adjustInterval);
 		}
 	},
-	
 	/**
 	 * Refresh the participants tool
 	 * @method refresh
@@ -106,8 +104,7 @@ function _Streams_participants(options) {
 		var state = tool.state;
 		var $te = $(tool.element);
 		tool.$elements = {};
-		state.avatarsWidth = 0;
-		
+
 		if (state.rendered) {
 			tool.$count = $('.Streams_participants_count', $te);
 			tool.$max = $('.Streams_participants_max', $te);
@@ -144,9 +141,34 @@ function _Streams_participants(options) {
 		tool.$blanks = $("<span class='Streams_participants_blanks' />")
 			.appendTo(tool.$pc);
 
+		// set expand icon click event
+		tool.$pei.plugin('Q/clickable').on(Q.Pointer.fastclick, function () {
+			if (state.expanded) {
+				tool.$blanks.show();
+				$te.animate({height: state.originalHeight}, function () {
+					state.expanded = false;
+				});
+				tool.$pei.attr({
+					src: Q.url('{{Q}}/img/expand.png'),
+					alt: 'expand'
+				});
+				tool.$pet.html('See All');
+			} else {
+				state.originalHeight = $te.height();
+				tool.$blanks.hide();
+				$te.animate({height: tool.$pc.height()}, function () {
+					state.expanded = true;
+				});
+				tool.$pei.attr({
+					src: Q.url('{{Q}}/img/collapse.png'),
+					alt: 'collapse'
+				});
+				tool.$pet.html('Fewer');
+			}
+		});
+
 		$te.addClass('Streams_participants_loading');
-		Q.Streams.get(state.publisherId, state.streamName,
-		function (err, stream, extra) {
+		Q.Streams.get(state.publisherId, state.streamName, function (err, stream, extra) {
 			var fem = Q.firstErrorMessage(err);
 			if (fem) {
 				return console.warn("Streams/participants: " + fem);
@@ -177,21 +199,20 @@ function _Streams_participants(options) {
 				});
 			}
 			_continue();
+
 		}, {participants: state.maxLoad});
 		return true;
 		
 		function _continue() {
 			tool.stateChanged('count');
-			
+
 			tool.adjustInterval = setInterval(_adjustInterval, 500);
-			_adjustInterval();
-			
+
 			if (state.max) {
 				tool.$max.text('/' + state.max);
 			}
 			
-			Q.Streams.retainWith(tool)
-			.get(state.publisherId, state.streamName, function () {
+			Q.Streams.retainWith(tool).get(state.publisherId, state.streamName, function () {
 				var stream = this;
 				stream.onMessage("Streams/join")
 				.set(function (stream, message, messages) {
@@ -217,8 +238,7 @@ function _Streams_participants(options) {
 						if (err) return;
 						var $element = tool.$invite = $(html).insertBefore(tool.$avatars);
 						var filter = '.Streams_inviteTrigger';
-						$(tool.element)
-						.on(Q.Pointer.fastclick, filter, function () {
+						$(tool.element).on(Q.Pointer.fastclick, filter, function () {
 							var options = Q.extend({
 								identifier: si.identifier
 							}, si);
@@ -241,7 +261,7 @@ function _Streams_participants(options) {
 							}
 							$(window).on(Q.Pointer.end, _pointerEndHandler);
 						});
-						state.avatarsWidth += $element.outerWidth(true);
+
 						if (si.clickable) {
 							$('img', $element).plugin(
 								'Q/clickable', Q.extend({
@@ -256,57 +276,7 @@ function _Streams_participants(options) {
 				);
 			});
 		}
-		
-		function _adjustInterval() {
-			var w = $te.width();
-			var pm = tool.$pc.outerWidth(true) - tool.$pc.width();
-			if (state.showSummary) {
-				w = w - tool.$summary.outerWidth(true);
-			}
-			if (state.showControls) {
-				w = w - tool.$controls.outerWidth(true);
-				var $tew = $te.width();
-				var overflowed = (state.avatarsWidth > $tew && $tew > 0);
-				if (overflowed) {
-					if (!state.overflowed) {
-						$te.addClass('Q_overflowed');
-						var $expand = $te.find('.Streams_participants_expand');
-						tool.$pei.plugin('Q/clickable').on(Q.Pointer.fastclick, function () {
-							if (state.expanded) {
-								tool.$blanks.show();
-								$te.animate({
-									height: state.originalHeight
-								});
-								tool.$pei.attr({
-									src: Q.url('{{Q}}/img/expand.png'),
-									alt: 'expand'
-								});
-								tool.$pet.html('See All');
-							} else {
-								state.originalHeight = $te.height();
-								tool.$blanks.hide();
-								$te.animate({
-									height: tool.$pc.height()
-								});
-								tool.$pei.attr({
-									src: Q.url('{{Q}}/img/collapse.png'),
-									alt: 'collapse'
-								});
-								tool.$pet.html('Fewer');
-							}
-							state.expanded = !state.expanded;
-						});
-					}
-				} else {
-					$te.removeClass('Q_overflowed');
-					tool.$blanks.show();
-				}
-				state.overflowed = overflowed;
-			}
 
-			tool.$pc.width(w - pm);
-		}
-		
 		function _addAvatar(userId, prepend) {
 			var $element = $(Q.Tool.setUpElement(
 				'div', 
@@ -321,20 +291,41 @@ function _Streams_participants(options) {
 			if (false !== Q.handle(state.filter, tool, [$element])) {
 				$element[prepend?'prependTo':'appendTo']($e).activate();
 			}
-			if (userId) {
-				state.avatarsWidth += $element.outerWidth(true);
-			}
-			_adjustInterval();
 		}
 		
 		function _removeAvatar(userId) {
 			var $element = tool.$elements[userId];
-			if (userId) {
-				state.avatarsWidth -= $element.outerWidth(true);
-			}
 			if ($element) {
 				Q.removeElement($element[0], true);
 			}
+		}
+
+		function _adjustInterval() {
+			var w = $te.width();
+			var pm = tool.$pc.outerWidth(true) - tool.$pc.width();
+			if (state.showSummary) {
+				w = w - tool.$summary.outerWidth(true);
+			}
+			if (state.showControls) {
+				w = w - tool.$controls.outerWidth(true);
+				var $pcw = tool.$pc.innerWidth();
+				var avatarsWidth = 0;
+				$(".Streams_participants_invite", tool.$pc).add(".Users_avatar_tool", tool.$avatars).each(function () {
+					avatarsWidth += $(this).outerWidth(true);
+				});
+				var overflowed = ($pcw > 0 && avatarsWidth > $pcw);
+				if (overflowed) {
+					if (!state.overflowed) {
+						$te.addClass('Q_overflowed');
+					}
+				} else {
+					$te.removeClass('Q_overflowed');
+					tool.$blanks.show();
+				}
+				state.overflowed = overflowed;
+			}
+
+			tool.$pc.width(w - pm);
 		}
 	}
 }

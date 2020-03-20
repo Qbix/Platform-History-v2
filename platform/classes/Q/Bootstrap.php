@@ -128,6 +128,7 @@ class Q_Bootstrap
 		 */
 		Q::event('Q/shutdown', compact('error'), 'before');
 		Q_Cache::shutdownFunction();
+		Db_Query_Mysql::shutdownFunction();
 		if (Q_Session::id()) {
 			session_write_close();
 		}
@@ -282,7 +283,7 @@ class Q_Bootstrap
 		foreach ($script_files as $cf) {
 			Q::includeFile($cf);
 		}
-		error_reporting(Q_Config::get('Q', 'errorReporting', E_ALL));
+		error_reporting(Q_Config::get('Q', 'errorReporting', E_ALL & ~E_NOTICE & ~E_STRICT));
 		
 		if (isset($old_setting)) {
 			Q_Cache::ignore($old_setting);

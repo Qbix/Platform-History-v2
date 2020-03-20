@@ -2759,6 +2759,7 @@ Q.onJQuery = new Q.Event();
 Q.onHandleOpenUrl = new Q.Event();
 var _layoutElements = [];
 var _layoutEvents = [];
+var _layoutObservers = [];
 /**
  * Call this function to get an event which occurs every time
  * Q.layout() is called on the given element or one of its parents.
@@ -2778,11 +2779,25 @@ Q.onLayout = function (element) {
 	var event = new Q.Event();
 	var l = _layoutElements.push(element);
 	_layoutEvents[l-1] = event;
+
+	// create ResizeObserver
+	var observer = null;
+	if (typeof ResizeObserver === 'function') {
+		observer = new ResizeObserver(function () {
+			event.handle.call(event, element, element);
+		});
+		observer.observe(element);
+	}
+	_layoutObservers[l-1] = observer;
 	event.onEmpty().set(function () {
 		for (var i=0, l=_layoutElements.length; i<l; ++i) {
 			if (_layoutElements[i] === element) {
 				_layoutElements.splice(i, 1);
 				_layoutEvents.splice(i, 1);
+				if (Q.getObject('disconnect', _layoutObservers[i])) {
+					_layoutObservers[i].disconnect();
+				}
+				_layoutObservers.splice(i, 1);
 				break;
 			}
 		}
@@ -3477,6 +3492,10 @@ Q.getter.THROTTLING = 3;
 Q.chain = function (callbacks) {
 	var result = null;
 	Q.each(callbacks, function (i, callback) {
+		if (Q.typeOf(callback) !== 'function') {
+			return;
+		}
+
 		var prevResult = result;
 		result = function () {
 			var args = Array.prototype.slice.call(arguments, 0);
@@ -5683,8 +5702,7 @@ Q.init = function _Q_init(options) {
 		return false;
 	}
 	Q.init.called = true;
-	Q.info.imgLoading = Q.info.imgLoading ||
-		Q.url('{{Q}}/img/throbbers/loading.gif');
+	Q.info.imgLoading = Q.info.imgLoading || Q.url('{{Q}}/img/throbbers/loading.gif');
 	Q.loadUrl.options.slotNames = Q.info.slotNames;
 	_detectOrientation();
 	Q.addEventListener(root, 'unload', Q.onUnload.handle);
@@ -6555,6 +6573,12 @@ Q.layout = function _Q_layout(element) {
 	Q.each(_layoutElements, function (i, e) {
 		if (!element || element.contains(e)) {
 			var event = _layoutEvents[i];
+
+			// return if ResizeObserver defined on this element
+			if (_layoutObservers[i]) {
+				return;
+			}
+
 			event.handle.call(event, e, element);
 		}
 	});
@@ -13780,9 +13804,9 @@ Q.beforeInit.addOnce(function () {
 			if (e = document.getElementById(sn+'_slot')) {
 				var r = e.getBoundingClientRect();
 				if (r.top < window.innerHeight / 10) {
-					e.addClass('Q_fixed_top');
+					e.removeClass('Q_fixed_bottom').addClass('Q_fixed_top');
 				} else if (r.bottom > window.innerHeight * 9 / 10) {
-					e.addClass('Q_fixed_bottom');
+					e.removeClass('Q_fixed_top').addClass('Q_fixed_bottom');
 				}
 			}
 		}

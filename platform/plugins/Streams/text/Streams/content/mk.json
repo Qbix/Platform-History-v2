@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Ве молиме посетете ја следнава врска:",
             "InvitingYou": "Ве повикувам да {{title}}",
             "HasInvitedYou": "{{displayName}} ве покани да {{title}}",
-            "HasMentionedYou": "99 {999}} ве спомна во „{{title}}“"
+            "HasMentionedYou": "99 {999}} ве спомна во „{{title}}“",
+            "YOUAREINVITED": "ВИЕ СТЕ ПОКАНЕТИ!",
+            "AcceptInvite": "Прифати покани"
         },
         "sms": {
             "content": "Сте биле поканети на {{title}}. Те молам допрете {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Престанавте да го емитувате овој повик на Фејсбук",
             "linkCopiedToCb": "Врската копирана во таблата со исечоци",
             "codeCopiedToCb": "Код копиран во таблата со исечоци",
-            "userHasNoVideo": "Учесникот нема видео"
+            "userHasNoVideo": "Учесникот нема видео",
+            "openInBrowserAlert": "Отворена врска во прелистувачот Safari за да се приклучи на конференцијата."
         },
         "settingsPopup": {
             "webCamera": "Веб-камера",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "има нов 99 999}",
                 "byAvatar": "додаде од {999}}"
-            }
+            },
+            "startedCallIn": "започна повик"
         }
+    },
+    "menu": {
+        "placeholder": "напишете наслов на страница",
+        "ModTab": "Изменете ја ставката",
+        "Save": "Зачувај",
+        "Delete": "Избриши",
+        "Submenu": "Подмену"
     }
 }

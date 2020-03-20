@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Bonvolu viziti la jenan ligon:",
             "InvitingYou": "Mi invitas vin al {999}}",
             "HasInvitedYou": "{{displayName}} invitis vin al {{title}}",
-            "HasMentionedYou": "{{displayName}} menciis vin en &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} menciis vin en &quot;{{title}}&quot;",
+            "YOUAREINVITED": "VI ESTAS invitita!",
+            "AcceptInvite": "Akceptu Inviti"
         },
         "sms": {
             "content": "Vi estis invitita al {999}}. Bonvolu frapeti {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Vi ĉesis elsendi ĉi tiun vokon en Facebook",
             "linkCopiedToCb": "Ligilo kopiita al klipo",
             "codeCopiedToCb": "Kodo kopiita al klipo",
-            "userHasNoVideo": "Partoprenanto ne havas filmeton"
+            "userHasNoVideo": "Partoprenanto ne havas filmeton",
+            "openInBrowserAlert": "Malferma ligo en Safari-retumilo por aliĝi al la konferenco."
         },
         "settingsPopup": {
             "webCamera": "Reta fotilo",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "havas novan {{instructions.fromDisplayType}}",
                 "byAvatar": "aldonita de {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "komencis vokon en"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Identigiloj",
         "Devices": "Aparatoj",
         "Streams": "Rojoj"
+    },
+    "menu": {
+        "placeholder": "tajpu paĝtitolon",
+        "ModTab": "Modifi Eron",
+        "Save": "Savi",
+        "Delete": "Forigi",
+        "Submenu": "Submenuo"
     }
 }

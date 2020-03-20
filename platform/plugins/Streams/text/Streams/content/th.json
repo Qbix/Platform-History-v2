@@ -80,7 +80,9 @@
             "PleaseVisitLink": "กรุณาเยี่ยมชมลิงค์ต่อไปนี้:",
             "InvitingYou": "ฉันเชิญคุณให้ {{title}}",
             "HasInvitedYou": "{{displayName}} เชิญคุณให้ {{title}}",
-            "HasMentionedYou": "{{displayName}} ได้พูดถึงคุณใน &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} ได้พูดถึงคุณใน &quot;{{title}}&quot;",
+            "YOUAREINVITED": "คุณได้รับเชิญ!",
+            "AcceptInvite": "ยอมรับคำเชิญ"
         },
         "sms": {
             "content": "คุณได้รับเชิญให้ {{title}} กรุณาแตะ {{1,000}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "คุณหยุดแพร่ภาพการโทรนี้ใน Facebook",
             "linkCopiedToCb": "ลิงก์คัดลอกไปยังคลิปบอร์ด",
             "codeCopiedToCb": "รหัสคัดลอกไปยังคลิปบอร์ด",
-            "userHasNoVideo": "ผู้เข้าร่วมไม่มีวิดีโอ"
+            "userHasNoVideo": "ผู้เข้าร่วมไม่มีวิดีโอ",
+            "openInBrowserAlert": "เปิดลิงก์ในเบราว์เซอร์ Safari เพื่อเข้าร่วมการประชุม"
         },
         "settingsPopup": {
             "webCamera": "กล้องเว็บ",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "มี {{instructions.fromDisplayType}} ใหม่",
                 "byAvatar": "เพิ่มโดย {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "เริ่มการโทรเข้า"
         }
+    },
+    "menu": {
+        "placeholder": "พิมพ์ชื่อหน้า",
+        "ModTab": "แก้ไขรายการ",
+        "Save": "บันทึก",
+        "Delete": "ลบ",
+        "Submenu": "เมนูย่อย"
     }
 }

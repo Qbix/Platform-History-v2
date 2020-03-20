@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Пожалуйста, посетите следующую ссылку:",
             "InvitingYou": "Я приглашаю вас в {{title}}",
             "HasInvitedYou": "{{displayName}} пригласил вас в {{title}}",
-            "HasMentionedYou": "{{displayName}} упомянул вас в &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} упомянул вас в &quot;{{title}}&quot;",
+            "YOUAREINVITED": "ВЫ ПРИГЛАШЕНЫ!",
+            "AcceptInvite": "Принять приглашение"
         },
         "sms": {
             "content": "Вы были приглашены в {{title}}. Пожалуйста, нажмите {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Вы перестали транслировать этот звонок в Facebook",
             "linkCopiedToCb": "Ссылка скопирована в буфер обмена",
             "codeCopiedToCb": "Код скопирован в буфер обмена",
-            "userHasNoVideo": "У участника нет видео"
+            "userHasNoVideo": "У участника нет видео",
+            "openInBrowserAlert": "Откройте ссылку в браузере Safari, чтобы присоединиться к конференции."
         },
         "settingsPopup": {
             "webCamera": "Веб-камера",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "есть новый {{instructions.fromDisplayType}}",
                 "byAvatar": "добавлено {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "начал звонить в"
         }
+    },
+    "menu": {
+        "placeholder": "введите заголовок страницы",
+        "ModTab": "Изменить элемент",
+        "Save": "Сохранить",
+        "Delete": "удалять",
+        "Submenu": "Подменю"
     }
 }

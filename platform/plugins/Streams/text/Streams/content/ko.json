@@ -80,7 +80,9 @@
             "PleaseVisitLink": "다음 링크를 방문하십시오 :",
             "InvitingYou": "{{title}}에 초대합니다.",
             "HasInvitedYou": "{{displayName}} 님이 {{title}}에 초대했습니다.",
-            "HasMentionedYou": "{{displayName}} 님이 &quot;{{title}}&quot;에서 나를 언급했습니다."
+            "HasMentionedYou": "{{displayName}} 님이 &quot;{{title}}&quot;에서 나를 언급했습니다.",
+            "YOUAREINVITED": "당신은 초대!",
+            "AcceptInvite": "초대를 수락하다"
         },
         "sms": {
             "content": "당신은 {{title}}에 초대되었습니다. {{url}}을 탭하십시오."
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Facebook에서이 통화 브로드 캐스트를 중지했습니다",
             "linkCopiedToCb": "링크가 클립 보드에 복사되었습니다",
             "codeCopiedToCb": "코드를 클립 보드에 복사",
-            "userHasNoVideo": "참가자는 비디오가 없습니다"
+            "userHasNoVideo": "참가자는 비디오가 없습니다",
+            "openInBrowserAlert": "Safari 브라우저에서 링크를 열어 회의에 참여하십시오."
         },
         "settingsPopup": {
             "webCamera": "웹 카메라",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "새로운 {{instructions.fromDisplayType}}",
                 "byAvatar": "{{avatar.displayName}} 님이 추가 함"
-            }
+            },
+            "startedCallIn": "전화를 시작했다"
         }
+    },
+    "menu": {
+        "placeholder": "유형 페이지 제목",
+        "ModTab": "항목 수정",
+        "Save": "저장",
+        "Delete": "지우다",
+        "Submenu": "하위 메뉴"
     }
 }

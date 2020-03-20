@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Tena koa ki te hononga e whai ake nei:",
             "InvitingYou": "Kei te karanga ahau ki a koe [{999}}",
             "HasInvitedYou": "Kua karangatia koe e {{displayName}} ki {{title}}",
-            "HasMentionedYou": "{{displayName}} kua kii i a koe i &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} kua kii i a koe i &quot;{{title}}&quot;",
+            "YOUAREINVITED": "HEI PUROA!",
+            "AcceptInvite": "Whakaaehia he Pae"
         },
         "sms": {
             "content": "Kua tohaina koe ki {{title}}. Tena koa {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Ka mutu koe ki te tuku i te karanga i tenei Facebook",
             "linkCopiedToCb": "Hangaia te hono ki te papaa",
             "codeCopiedToCb": "Te waehere i hainatia ki te papaahi",
-            "userHasNoVideo": "Kaore he ataata"
+            "userHasNoVideo": "Kaore he ataata",
+            "openInBrowserAlert": "Whakatuwherahia te hono ki te pūtirotiro Safari kia uru atu ki nga huihuinga."
         },
         "settingsPopup": {
             "webCamera": "Kāmera Tukutuku",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "he hou {{instructions.fromDisplayType}}",
                 "byAvatar": "tapiritia e {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "ka tiimata he waea i roto i"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Ngā Kaiwhakaputa",
         "Devices": "Pūrere",
         "Streams": "Ngātenga"
+    },
+    "menu": {
+        "placeholder": "taitara whaarangi",
+        "ModTab": "Whakakēemi te nama",
+        "Save": "Whakaora",
+        "Delete": "Muputu",
+        "Submenu": "Submenu"
     }
 }

@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Ji kerema xwe pêwendiya jêrîn bibînin:",
             "InvitingYou": "Ez ji we re ji {{title}} vexwendin",
             "HasInvitedYou": "{{displayName}} te ji bo {{title}} vexwendin",
-            "HasMentionedYou": "{{displayName}} we di &quot;{{title}}&quot; de qala we kiriye."
+            "HasMentionedYou": "{{displayName}} we di &quot;{{title}}&quot; de qala we kiriye.",
+            "YOUAREINVITED": "TEN JI VIRANE!",
+            "AcceptInvite": "Vexwendin qebûl bikin"
         },
         "sms": {
             "content": "Ji bo {{title}} ve hat vexwendin. Ji kerema xwe {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "We ev bang li Facebookê weşand",
             "linkCopiedToCb": "Zencîre hatî kopî kirin",
             "codeCopiedToCb": "Koda ku li clipboard hatî kopî kirin",
-            "userHasNoVideo": "Beşdarê vîdyoyê tune"
+            "userHasNoVideo": "Beşdarê vîdyoyê tune",
+            "openInBrowserAlert": "Zencîre vekirî di geroka Safari de da ku beşdarî konferansê bibe."
         },
         "settingsPopup": {
             "webCamera": "Kamera Web",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "nû {999} nû heye",
                 "byAvatar": "added by {{999 added"
-            }
+            },
+            "startedCallIn": "dest bi gazîkirinê kir"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Nasname",
         "Devices": "Amûrên",
         "Streams": "Streams"
+    },
+    "menu": {
+        "placeholder": "sernavê rûpelê binivîsin",
+        "ModTab": "Babetê biguherînin",
+        "Save": "Rizgarkirin",
+        "Delete": "Jêkirin",
+        "Submenu": "Submenu"
     }
 }

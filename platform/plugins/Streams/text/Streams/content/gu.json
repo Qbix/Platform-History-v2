@@ -80,7 +80,9 @@
             "PleaseVisitLink": "કૃપા કરીને નીચેની લિંકની મુલાકાત લો:",
             "InvitingYou": "હું તમને {{title}} પર આમંત્રિત કરું છું",
             "HasInvitedYou": "{{displayName}} એ તમને {{title}} પર આમંત્રિત કર્યા છે",
-            "HasMentionedYou": "{{999} એ &quot;{{title}}&quot; માં તમારો ઉલ્લેખ કર્યો છે"
+            "HasMentionedYou": "{{999} એ &quot;{{title}}&quot; માં તમારો ઉલ્લેખ કર્યો છે",
+            "YOUAREINVITED": "તમે આમંત્રિત છો!",
+            "AcceptInvite": "આમંત્રણ સ્વીકારો"
         },
         "sms": {
             "content": "તમને {{title}} પર આમંત્રિત કરવામાં આવ્યા છે. કૃપા કરીને {{url}} ને ટેપ કરો"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "તમે આ ક callલને ફેસબુકમાં પ્રસારિત કરવાનું બંધ કર્યું છે",
             "linkCopiedToCb": "ક્લિપબોર્ડ પર લિંક ક .પિ કરી",
             "codeCopiedToCb": "ક્લિપબોર્ડ પર કોડની ક .પિ કરી",
-            "userHasNoVideo": "સહભાગી પાસે કોઈ વિડિઓ નથી"
+            "userHasNoVideo": "સહભાગી પાસે કોઈ વિડિઓ નથી",
+            "openInBrowserAlert": "પરિષદમાં જોડાવા માટે સફારી બ્રાઉઝરમાં લિંક ખોલો."
         },
         "settingsPopup": {
             "webCamera": "વેબ ક Cameraમેરો",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "નવું {9 999} has છે",
                 "byAvatar": "{{999} by દ્વારા ઉમેર્યું"
-            }
+            },
+            "startedCallIn": "અંદર એક ક callલ શરૂ કર્યો"
         }
+    },
+    "menu": {
+        "placeholder": "ટાઇપ પેજ શીર્ષક",
+        "ModTab": "વસ્તુમાં ફેરફાર કરો",
+        "Save": "સાચવો",
+        "Delete": "કા .ી નાખો",
+        "Submenu": "સબમેનુ"
     }
 }

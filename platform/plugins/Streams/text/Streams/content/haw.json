@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Eʻoluʻolu e nānā i kēia loulou:",
             "InvitingYou": "Ke kono nei au iāʻoe i {{title}}",
             "HasInvitedYou": "Ua konoʻo {{displayName}} iāʻoe i {{title}}",
-            "HasMentionedYou": "{{displayName}} ua haʻi iā ʻoe ma &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} ua haʻi iā ʻoe ma &quot;{{title}}&quot;",
+            "YOUAREINVITED": "NA NUI OIHANA!",
+            "AcceptInvite": "E hoʻokipa a kono"
         },
         "sms": {
             "content": "Ua konoʻiaʻoe e [999}}. Eʻoluʻolu e paʻi {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Ua ho&#39;ōki ʻoe i ka hoʻolaha ʻana i kēia kāhea ma Facebook",
             "linkCopiedToCb": "Hoʻopili ʻia kahi hoʻopili ʻia",
             "codeCopiedToCb": "ʻ coplelo i kope ʻia i ka palupalu",
-            "userHasNoVideo": "ʻAʻohe wahi wikiō"
+            "userHasNoVideo": "ʻAʻohe wahi wikiō",
+            "openInBrowserAlert": "E wehe i kahi loulou ma ka polokalamu ʻo Safari e hui pū i ia kūkā"
         },
         "settingsPopup": {
             "webCamera": "ʻ .lelo kamera",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "i has {{instructions.fromDisplayType}} hou",
                 "byAvatar": "i hoʻohui ʻia e {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "hoʻomaka kahi kāhea i"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Nā mea ʻike",
         "Devices": "Nā mea hana",
         "Streams": "Nā Koloho"
+    },
+    "menu": {
+        "placeholder": "poʻo inoa inoa inoa",
+        "ModTab": "Hoʻololi i nā mea",
+        "Save": "Mālama",
+        "Delete": "Hoʻopau",
+        "Submenu": "Submenu"
     }
 }

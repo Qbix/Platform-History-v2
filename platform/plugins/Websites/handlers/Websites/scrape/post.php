@@ -11,8 +11,8 @@ function Websites_scrape_post($params)
 
 	$url = $fields['url'];
 
-	if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
-		$url = "http://" . $url;
+	if (parse_url($url, PHP_URL_SCHEME) === null) {
+		$url = 'http://'.$url;
 	}
 
 	// if stream for this URL already exist, return it
@@ -29,11 +29,8 @@ function Websites_scrape_post($params)
 		return Q_Response::setSlot('result', $streamExist);
 	}
 
-	// if requested slots publisherId and streamName - create stream
-	if (Q_Request::slotName('publisherId') && Q_Request::slotName('streamName')) {
-		Q::event('Websites/webpage/post', $result);
-	}
-
+	Q::event('Websites/webpage/post', $result);
+	
 	Q_Response::setSlot('result', $result);
 }
 

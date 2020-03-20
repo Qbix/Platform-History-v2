@@ -2,6 +2,8 @@
 <?php
 
 define ('APP_DIR', realpath(dirname(dirname(dirname(__FILE__)))));
+define("CONFIGURE_ORIGINAL_APP_NAME", "MyApp");
+include dirname(__FILE__).'/../Q.inc.php';
 $paths_filename = realpath(APP_DIR . '/local/paths.php');
 if (!file_exists($paths_filename)) {
 	if (!file_exists(APP_DIR . '/local.sample/paths.php')) {
@@ -10,9 +12,6 @@ if (!file_exists($paths_filename)) {
 	Q_configure_copy(APP_DIR.'/local.sample', APP_DIR.'/local');
 }
 
-define("CONFIGURE_ORIGINAL_APP_NAME", "MyApp");
-
-include dirname(__FILE__).'/../Q.inc.php';
 include Q_SCRIPTS_DIR.DS.'configure.php';
 
 function Q_configure_copy($source, $dest) {

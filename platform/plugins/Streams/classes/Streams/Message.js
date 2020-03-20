@@ -307,13 +307,15 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 
 		function _afterTransform() {
 			var w1 = [];
-			var e, m, d;
+			var e, m, d, destination;
 			if (e = deliver.emailAddress || deliver.email) {
-				_email(e, p1.fill('email'));
+				destination = to.find(function(item){ return typeof item === 'string' && item.includes('email'); });
+				_email(e, destination, p1.fill('email'));
 				w1.push('email');
 			}
 			if (m = deliver.mobileNumber || deliver.mobile) {
-				_mobile(m, p1.fill('mobile'));
+				destination = to.find(function(item){ return typeof item === 'string' && item.includes('mobile'); });
+				_mobile(m, destination, p1.fill('mobile'));
 				w1.push('mobile');
 			}
 			if (d = deliver.deviceId || deliver.device) {
@@ -342,15 +344,17 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 					|| (d === 'mobile+pending' && uf.mobileNumberPending);
 				// Give the app an opportunity to modify the fields or anything else
 				var handlers = Q.getObject([stream.fields.type, messageType], Streams_Message.handlers) || [];
-				var chain = Q.chain(handlers.concat([_proceed]));
+				handlers = handlers.concat(Q.getObject(['*', messageType], Streams_Message.handlers) || []);
+				handlers = handlers.concat([_proceed]);
+				var chain = Q.chain(handlers);
 				chain(o);
 				function _proceed() {
 					if (emailAddress) {
-						_email(emailAddress, p2.fill('email'));
+						_email(emailAddress, d, p2.fill('email'));
 						waitFor.push('email');
 					}
 					if (mobileNumber) {
-						_mobile(mobileNumber, p2.fill('mobile'));
+						_mobile(mobileNumber, d, p2.fill('mobile'));
 						waitFor.push('mobile');
 					}
 					if (d === 'devices') {
@@ -396,13 +400,28 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				}
 			}).run();
 		}
-		function _email(emailAddress, callback) {
+		function _email(emailAddress, destination, callback) {
 			o.destination = 'email';
 			o.emailAddress = emailAddress;
 			var viewPath = messageType+'/email.handlebars';
 			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/email.handlebars';
 			}
+
+			var _sendMessage = function () {
+				Users.Email.sendMessage(
+					emailAddress, o.subject, viewPath, o.fields, {
+						html: true,
+						language: uf.preferredLanguage
+					}, callback
+				);
+				result.push({'email': emailAddress});
+			};
+
+			if (destination && destination === 'email+pending') {
+				return _sendMessage();
+			}
+
 			Users.Email.SELECT().where({
 				'address': emailAddress
 			}).execute(function (err, rows) {
@@ -413,22 +432,27 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				if (rows[0].fields.state !== 'active') {
 					return callback && callback(new Q.Exception("Message.deliver: email not active"));
 				}
-				Users.Email.sendMessage(
-					emailAddress, o.subject, viewPath, o.fields, {
-						html: true, 
-						language: uf.preferredLanguage
-					}, callback
-				);
-				result.push({'email': emailAddress});
+				_sendMessage();
 			});
 		}
-		function _mobile(mobileNumber, callback) {
+		function _mobile(mobileNumber, destination, callback) {
 			o.destination = 'mobile';
 			o.mobileNumber = mobileNumber;
 			var viewPath = messageType+'/mobile.handlebars';
 			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/mobile.handlebars';
 			}
+			var _sendMessage = function () {
+				Users.Mobile.sendMessage(mobileNumber, viewPath, o.fields, {
+					language: uf.preferredLanguage
+				}, callback);
+				result.push({'mobile': mobileNumber});
+			};
+
+			if (destination && destination === 'mobile+pending') {
+				return _sendMessage();
+			}
+
 			Users.Mobile.SELECT().where({
 				'number': mobileNumber
 			}).execute(function (err, rows) {
@@ -439,10 +463,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				if (rows[0].fields.state !== 'active') {
 					return callback && callback(new Q.Exception("Message.deliver: mobile not active"));
 				}
-				Users.Mobile.sendMessage(mobileNumber, viewPath, o.fields, {
-					language: uf.preferredLanguage
-				}, callback);
-				result.push({'mobile': mobileNumber});
+				_sendMessage();
 			});
 		}
 		function _device(deviceId, callback) {

@@ -245,7 +245,7 @@
 				_copyClassToOverflow(tool);
 				state.tab = tab;
 				state.tabName = name || tool.getName(tab);
-				Q.handle(state.onCurrent, tool, [tab, name]);
+				Q.handle(state.onCurrent, tool, [tab, state.tabName]);
 			},
 
 			/**

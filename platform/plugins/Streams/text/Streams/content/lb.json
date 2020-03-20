@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Kuckt de Link op",
             "InvitingYou": "Ech invitéieren Iech op {{title}}",
             "HasInvitedYou": "{{displayName}} huet Iech invitéiert op {{title}}",
-            "HasMentionedYou": "{{displayName}} huet Iech an &quot;{{title}}&quot; erwähnt."
+            "HasMentionedYou": "{{displayName}} huet Iech an &quot;{{title}}&quot; erwähnt.",
+            "YOUAREINVITED": "DIR SIN INVITT!",
+            "AcceptInvite": "Akzeptéieren Invitéiere"
         },
         "sms": {
             "content": "Dir sidd invitéiert op {{title}}. Bitte op t&#39;huelt {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Dir hutt opgehalen dësen Uruff an Facebook ze Senden",
             "linkCopiedToCb": "Link kopéiert op Clipboard",
             "codeCopiedToCb": "Code kopéiert op Clipboard",
-            "userHasNoVideo": "De Participant huet kee Video"
+            "userHasNoVideo": "De Participant huet kee Video",
+            "openInBrowserAlert": "Open Link am Safari Browser fir mat der Konferenz matzemaachen."
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "huet en neie {{instructions.fromDisplayType}}",
                 "byAvatar": "hinzugefügt vum {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "huet en Uruff ugefaang"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Identifizéierer",
         "Devices": "Apparater",
         "Streams": "Baachen"
+    },
+    "menu": {
+        "placeholder": "Typ Säit Titel",
+        "ModTab": "Artikel änneren",
+        "Save": "Späicheren",
+        "Delete": "Läschen",
+        "Submenu": "Submenu"
     }
 }

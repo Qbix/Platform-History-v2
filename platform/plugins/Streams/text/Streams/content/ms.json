@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Sila lawati pautan berikut:",
             "InvitingYou": "Saya menjemput anda ke {{title}}",
             "HasInvitedYou": "{{displayName}} telah menjemput anda ke {{title}}",
-            "HasMentionedYou": "{{displayName}} telah menyebut anda dalam &quot;{{title}}&quot;"
+            "HasMentionedYou": "{{displayName}} telah menyebut anda dalam &quot;{{title}}&quot;",
+            "YOUAREINVITED": "ANDA DIJEMPUT!",
+            "AcceptInvite": "Terima Jemputan"
         },
         "sms": {
             "content": "Anda telah dijemput ke {{title}}. Sila ketik {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Anda berhenti menyiarkan panggilan ini di Facebook",
             "linkCopiedToCb": "Pautan disalin ke papan keratan",
             "codeCopiedToCb": "Kod disalin ke papan keratan",
-            "userHasNoVideo": "Peserta tidak mempunyai video"
+            "userHasNoVideo": "Peserta tidak mempunyai video",
+            "openInBrowserAlert": "Pautan terbuka dalam penyemak imbas Safari untuk menyertai persidangan."
         },
         "settingsPopup": {
             "webCamera": "Kamera sesawang",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "mempunyai {{instructions.fromDisplayType}} baru",
                 "byAvatar": "ditambah oleh {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "memulakan panggilan masuk"
         }
+    },
+    "menu": {
+        "placeholder": "ketik tajuk halaman",
+        "ModTab": "Ubah suai Perkara",
+        "Save": "Simpan",
+        "Delete": "Padam",
+        "Submenu": "Submenu"
     }
 }

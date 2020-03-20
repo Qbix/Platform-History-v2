@@ -80,7 +80,9 @@
             "PleaseVisitLink": "次のリンクにアクセスしてください。",
             "InvitingYou": "{{title}}に招待しています",
             "HasInvitedYou": "{{displayName}}があなたを{{title}}に招待しました",
-            "HasMentionedYou": "{{displayName}}から「{{title}}」にあなたの名前があります"
+            "HasMentionedYou": "{{displayName}}から「{{title}}」にあなたの名前があります",
+            "YOUAREINVITED": "あなたは招待されました！",
+            "AcceptInvite": "招待を受け入れる"
         },
         "sms": {
             "content": "あなたは{{title}}に招待されました。 {{url}}をタップしてください"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Facebookでこの通話のブロードキャストを停止しました",
             "linkCopiedToCb": "クリップボードにコピーされたリンク",
             "codeCopiedToCb": "クリップボードにコピーされたコード",
-            "userHasNoVideo": "参加者にはビデオがありません"
+            "userHasNoVideo": "参加者にはビデオがありません",
+            "openInBrowserAlert": "Safariブラウザーでリンクを開き、会議に参加します。"
         },
         "settingsPopup": {
             "webCamera": "ウェブカメラ",
@@ -319,7 +322,15 @@
             "relatedTo": {
                 "hasANew": "新しい{{instructions.fromDisplayType}}があります",
                 "byAvatar": "{{avatar.displayName}}によって追加されました"
-            }
+            },
+            "startedCallIn": "で電話をかけました"
         }
+    },
+    "menu": {
+        "placeholder": "タイプページタイトル",
+        "ModTab": "アイテムを変更",
+        "Save": "セーブ",
+        "Delete": "削除する",
+        "Submenu": "サブメニュー"
     }
 }

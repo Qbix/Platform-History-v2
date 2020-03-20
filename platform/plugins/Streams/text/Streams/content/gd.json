@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Tadhail air a ’cheangal a leanas:",
             "InvitingYou": "Tha mi a ’toirt cuireadh dhut gu {{title}}",
             "HasInvitedYou": "Thug {{displayName}} cuireadh dhut gu {{title}}",
-            "HasMentionedYou": "Tha {{displayName}} air iomradh a thoirt ort ann an &quot;{{title}}&quot;"
+            "HasMentionedYou": "Tha {{displayName}} air iomradh a thoirt ort ann an &quot;{{title}}&quot;",
+            "YOUAREINVITED": "THA SINN AIR A DHÈANAMH!",
+            "AcceptInvite": "Gabh ri cuireadh"
         },
         "sms": {
             "content": "Fhuair thu cuireadh gu {{title}}. Thoir gnogag air {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Sguir thu a chraoladh a ’ghairm seo ann an Facebook",
             "linkCopiedToCb": "Ceangal air a chopaigeadh chun a ’bhòrd bhidio",
             "codeCopiedToCb": "Còd air a lethbhreacadh gu cairt-bhòrd",
-            "userHasNoVideo": "Chan eil bhidio aig com-pàirtiche"
+            "userHasNoVideo": "Chan eil bhidio aig com-pàirtiche",
+            "openInBrowserAlert": "Ceangal fosgailte ann am brabhsair Safari gus a dhol còmhla ris a ’cho-labhairt."
         },
         "settingsPopup": {
             "webCamera": "Camara lìn",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "tha {{instructions.fromDisplayType}} ùr",
                 "byAvatar": "air a chur ris le {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "thòisich gairm a-steach"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Luchd-comharrachaidh",
         "Devices": "Innealan",
         "Streams": "Sruth"
+    },
+    "menu": {
+        "placeholder": "tiotal duilleag seòrsa",
+        "ModTab": "Atharraich Nì",
+        "Save": "Sàbhail",
+        "Delete": "Cuir às",
+        "Submenu": "Submenu"
     }
 }

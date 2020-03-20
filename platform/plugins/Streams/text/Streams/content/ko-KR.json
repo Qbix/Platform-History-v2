@@ -80,7 +80,9 @@
             "PleaseVisitLink": "다음 링크를 방문하십시오 :",
             "InvitingYou": "{{title}}에 초대합니다.",
             "HasInvitedYou": "{{displayName}} 님이 {{title}}에 초대했습니다.",
-            "HasMentionedYou": "{{displayName}} 님이 &quot;{{title}}&quot;에서 나를 언급했습니다."
+            "HasMentionedYou": "{{displayName}} 님이 &quot;{{title}}&quot;에서 나를 언급했습니다.",
+            "YOUAREINVITED": "당신은 초대!",
+            "AcceptInvite": "초대를 수락하다"
         },
         "sms": {
             "content": "당신은 {{title}}에 초대되었습니다. {{url}}을 탭하십시오."
@@ -93,19 +95,27 @@
         "mobile": {
             "alert": "초대장은 귀하의 친구가 아직 인식하지 못하는 번호에서 전송됩니다. 빠른 텍스트를 통해 초대장이 귀하에게서 왔음을 알리고 링크를 클릭하도록 요청하십시오.",
             "confirm": "초대장은 귀하의 친구가 아직 인식하지 못하는 번호에서 전송됩니다. 빠른 텍스트로 후속 조치하여 초대장이 귀하에게서 왔음을 알리고 링크를 클릭하도록 요청 하시겠습니까?",
-            "check": "방금 {{app}} 앱에 초대장을 보냈습니다. 귀하의 SMS를 확인하고 링크를 클릭하십시오!"
+            "check": "방금 {{app}} 앱에 초대장을 보냈습니다. 귀하의 SMS를 확인하고 링크를 클릭하십시오!",
+            "CheckYourMobile": "SMS를 확인하고 지시를 따르십시오!"
         },
         "email": {
             "alert": "친구가 아직 알지 못하는 도메인에서 초대장을 보냅니다. 빠른 텍스트를 통해 초대장이 귀하에게서 왔음을 알리고 링크를 클릭하도록 요청하십시오.",
             "confirm": "친구가 아직 알지 못하는 도메인에서 초대장을 보냅니다. 빠른 텍스트로 후속 조치하여 초대장이 귀하에게서 왔음을 알리고 링크를 클릭하도록 요청 하시겠습니까?",
             "subject": "초대 받았어?",
-            "body": "방금 {{app}} 앱에 초대장을 보냈습니다. 이메일을 확인하고 거기에있는 링크를 클릭하십시오!"
+            "body": "방금 {{app}} 앱에 초대장을 보냈습니다. 이메일을 확인하고 거기에있는 링크를 클릭하십시오!",
+            "CheckYourEmail": "이메일을 확인하고 지시를 따르십시오!"
         }
     },
     "participating": {
         "Title": "표제",
         "Subscribed": "구독 됨",
-        "Participants": "참가자"
+        "Participants": "참가자",
+        "AreYouSureRemoveIdentifier": "이 식별자를 제거 하시겠습니까?",
+        "AreYouSureUnsubscribeIdentifier": "이 식별자를 구독 취소 하시겠습니까? 이 식별자에 대한 알림을 해제합니다.",
+        "AreYouSureUnsubscribeDevice": "이 기기를 구독 취소 하시겠습니까? 이 장치에 대한 알림이 꺼집니다.",
+        "Identifiers": "식별자",
+        "Devices": "장치",
+        "Streams": "스트림"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +126,74 @@
             "microphoneBtn": "마이크 사용",
             "cameraBtn": "카메라 사용",
             "cameraAndMicrophoneBtn": "카메라 및 마이크 사용"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "명령",
+            "permissionDenied": "{{kind}}에 대한 권한이 거부되었습니다. 사용하려면 다음 단계를 따르십시오.",
+            "point1": "&quot;설정&quot;-&gt; &quot;고급&quot;-&gt; &quot;개인 정보 및 보안&quot;-&gt; &quot;사이트 설정&quot;-&gt; &quot;카메라&quot;또는 &quot;사이트 설정&quot;-&gt; &quot;마이크&quot;로 이동하십시오.",
+            "point2": "&quot;차단&quot;목록에서 {{hostname}} 제거"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "명령",
+            "permissionDenied": "{{kind}}에 대한 권한이 거부되었습니다. 이 페이지를 새로 고침하고 회의에 참가하려면 {{kind}}에 대한 액세스 권한을 확인하십시오."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "명령",
+            "permissionDenied": "{{kind}}에 대한 권한이 거부되었습니다. 사용하려면 다음 단계를 따르십시오.",
+            "point1": "안드로이드 설정으로 이동",
+            "point2": "&quot;앱 및 알림&quot;열기",
+            "point3": "&quot;{{communityName}}&quot;를 찾아서여십시오",
+            "point4": "권한을 누릅니다",
+            "point5": "{{kind}} 사용"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "명령",
+            "permissionDenied": "{{kind}}에 대한 권한이 거부되었습니다. 사용하려면 다음 단계를 따르십시오.",
+            "point1": "iOS 설정으로 이동",
+            "point2": "&quot;개인 정보&quot;를 엽니 다",
+            "point3": "{{kind}}를 찾아서여십시오",
+            "point4": "&quot;{{communityName}}&quot;를 찾아서 사용"
+        },
+        "notices": {
+            "youJoinedRoom": "당신은 방에 합류",
+            "joining": "가입 : {{userName}}",
+            "sbLeftRoom": "{{userName}}이 방을 나갔다",
+            "youLeftRoom": "당신은 방을 떠났다",
+            "codeCopied": "당신은 방을 떠났다",
+            "sbBeganFbLive": "{{userName}} 님이 Facebook에서이 통화를 방송하기 시작했습니다",
+            "sbStoppedFbLive": "{{userName}}이 (가) Facebook에서이 통화 브로드 캐스트를 중지했습니다",
+            "youBeganFbLive": "이 전화를 Facebook에서 방송하기 시작했습니다",
+            "youStoppedFbLive": "Facebook에서이 통화 브로드 캐스트를 중지했습니다",
+            "linkCopiedToCb": "링크가 클립 보드에 복사되었습니다",
+            "codeCopiedToCb": "코드를 클립 보드에 복사",
+            "userHasNoVideo": "참가자는 비디오가 없습니다",
+            "openInBrowserAlert": "Safari 브라우저에서 링크를 열어 회의에 참여하십시오."
+        },
+        "settingsPopup": {
+            "webCamera": "웹 카메라",
+            "screenSharing": "화면 공유",
+            "shareAnotherScreen": "다른 화면 공유",
+            "turnOffCameras": "모든 카메라를 끄십시오",
+            "startFBLive": "Facebook Livestream 시작",
+            "stopFBLive": "Facebook Livestream 중지",
+            "fbLiveTitle": "라이브 타이틀",
+            "fbLiveDescription": "라이브 설명",
+            "fbOnlyMeLiveAccess": "나만",
+            "fbFriendsAccess": "친구",
+            "fbPublicAccess": "공공의",
+            "fbStartLive": "생중계",
+            "fbStopLive": "라이브 종료",
+            "fbEmbedCode": "끼워 넣다",
+            "copy": "부"
+        },
+        "participantsPopup": {
+            "disconnect": "분리",
+            "floatingScreens": "플로팅 스크린",
+            "tiledScreens": "타 일식 스크린",
+            "loudestExceptMe": "나를 제외한 가장 큰 소리",
+            "maximizeLoudest": "가장 크게 최대화",
+            "staticMaximized": "정적 최대화",
+            "manual": "설명서"
         }
     },
     "types": {
@@ -243,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "새로운 {{instructions.fromDisplayType}}",
                 "byAvatar": "{{avatar.displayName}} 님이 추가 함"
-            }
+            },
+            "startedCallIn": "전화를 시작했다"
         }
+    },
+    "menu": {
+        "placeholder": "유형 페이지 제목",
+        "ModTab": "항목 수정",
+        "Save": "저장",
+        "Delete": "지우다",
+        "Submenu": "하위 메뉴"
     }
 }

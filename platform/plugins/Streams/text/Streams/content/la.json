@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Placere visitare vinculo sequenti:",
             "InvitingYou": "{{Ego sum invitamus ad CMXCIX}}",
             "HasInvitedYou": "} {{CMXCIX} {{te invitavit M}}",
-            "HasMentionedYou": "} {CMXCIX} {quod ad vos &quot;{}} {M &#39;"
+            "HasMentionedYou": "} {CMXCIX} {quod ad vos &quot;{}} {M &#39;",
+            "YOUAREINVITED": "INVITARI!",
+            "AcceptInvite": "accipere invitare"
         },
         "sms": {
             "content": "{{Vos adhibitus essem CMXCIX}}. {{Quaeso ICTUS M}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Et hanc vocationem et stetit in Facebook broadcasting",
             "linkCopiedToCb": "Copied Link to Clipboard",
             "codeCopiedToCb": "Copied code to Clipboard",
-            "userHasNoVideo": "Video non habet participem"
+            "userHasNoVideo": "Video non habet participem",
+            "openInBrowserAlert": "Link to join aperta Safari pasco ad colloquium."
         },
         "settingsPopup": {
             "webCamera": "Web DE CAMERA",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "nova}} habet {{CMXCIX",
                 "byAvatar": "addidit}} ex {{CMXCIX"
-            }
+            },
+            "startedCallIn": "coepi apud vocatio"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Identifiers",
         "Devices": "cogitationes",
         "Streams": "FE divisiones aquarum"
+    },
+    "menu": {
+        "placeholder": "genus title page",
+        "ModTab": "Item Return",
+        "Save": "salvare",
+        "Delete": "Delete",
+        "Submenu": "submenu"
     }
 }

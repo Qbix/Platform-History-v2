@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Besoek gerus die volgende skakel:",
             "InvitingYou": "Ek nooi jou uit na {{title}}",
             "HasInvitedYou": "{{displayName}} het jou genooi om {{title}}",
-            "HasMentionedYou": "{{displayName}} het u genoem in &#39;{{title}}&#39;"
+            "HasMentionedYou": "{{displayName}} het u genoem in &#39;{{title}}&#39;",
+            "YOUAREINVITED": "U WORD UITGENOOI!",
+            "AcceptInvite": "Aanvaar Nooi"
         },
         "sms": {
             "content": "U is genooi na {{title}}. Tik asseblief {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "U het opgehou om hierdie oproep in Facebook uit te saai",
             "linkCopiedToCb": "Skakel na knipbord gekopieër",
             "codeCopiedToCb": "Kode na klembord gekopieër",
-            "userHasNoVideo": "Deelnemer het geen video nie"
+            "userHasNoVideo": "Deelnemer het geen video nie",
+            "openInBrowserAlert": "Maak &#39;n skakel oop in die Safari-blaaier om aan die konferensie deel te neem."
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "het &#39;n nuwe {{instructions.fromDisplayType}}",
                 "byAvatar": "bygevoeg deur {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "begin &#39;n oproep"
         }
+    },
+    "menu": {
+        "placeholder": "tik bladsy titel",
+        "ModTab": "Verander item",
+        "Save": "Save",
+        "Delete": "Delete",
+        "Submenu": "submenu"
     }
 }

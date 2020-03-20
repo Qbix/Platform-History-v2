@@ -4,7 +4,9 @@ function Websites_before_Streams_Stream_save_Websites_article($params)
 {
 	$stream = $params['stream'];
 	$modifiedFields = $params['modifiedFields'];
-	if ($stream->wasRetrieved()) return;
+	if ($stream->wasRetrieved()) {
+		return;
+	}
 
 	$user = new Users_User();
 	if (empty($stream->userId) and empty($modifiedFields['userId'])) {
@@ -20,10 +22,14 @@ function Websites_before_Streams_Stream_save_Websites_article($params)
 	}
 
 	$title = Streams::displayName($user, array('fullAccess' => true));
-	if (isset($title)) {
+	if (isset($title) && empty($stream->title)) {
 		$stream->title = $title;
 	}
-	$stream->icon = $user->iconUrl();
+
+	if (!$stream->isCustomIcon()) {
+		$stream->icon = $user->iconUrl();
+	}
+
 	$s = Streams::fetchOne($user->id, $user->id, "Streams/user/icon");
 	if (!$s or !$sizes = $s->getAttribute('sizes', null)) {
 		$sizes = Q_Image::getSizes('Users/icon');

@@ -23,7 +23,7 @@ var Row = Q.require('Db/Row');
  * an associative array of {column: value} pairs
  * @param {string} [$fields.appId] defaults to ""
  * @param {string} [$fields.communityId] defaults to null
- * @param {string|Db_Expression} [$fields.earnedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.earnedTime] defaults to new Db_Expression("current_timestamp()")
  * @param {string} [$fields.userId] defaults to ""
  * @param {string} [$fields.badgeName] defaults to ""
  * @param {string} [$fields.publisherId] defaults to null
@@ -50,7 +50,7 @@ Q.mixin(Base, Row);
 /**
  * @property earnedTime
  * @type String|Db.Expression
- * @default new Db_Expression("CURRENT_TIMESTAMP")
+ * @default new Db_Expression("current_timestamp()")
  * 
  */
 /**
@@ -391,7 +391,7 @@ Base.prototype.beforeSet_earnedTime = function (value) {
 	 */
 Base.column_earnedTime = function () {
 
-return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","31","",false],false,"","current_timestamp()"];
 };
 
 /**

@@ -80,7 +80,9 @@
             "PleaseVisitLink": "төмөнкү шилтемени төмөнкү сайттан алууга болот:",
             "InvitingYou": "Мен сени чакырып жатам {{title}}",
             "HasInvitedYou": "{{displayName}} {{title}} сизди чакырды",
-            "HasMentionedYou": "{{displayName}} &quot;{{title}}&quot; сени айтылып жатат"
+            "HasMentionedYou": "{{displayName}} &quot;{{title}}&quot; сени айтылып жатат",
+            "YOUAREINVITED": "Силер чакырып жатат!",
+            "AcceptInvite": "чакыруу кабыл"
         },
         "sms": {
             "content": "{{title}} Сиз чакырылган. Сураныч, таптап, {{url}}"
@@ -153,7 +155,8 @@
             "youStoppedFbLive": "Сиз Facebook бул чакырыкты уктурууну токтотуп салды",
             "linkCopiedToCb": "тактасына көчүрүлдү -га шилтеме берген барактар",
             "codeCopiedToCb": "Code тактасына көчүрүлдү",
-            "userHasNoVideo": "Катышуучу жок Video элек"
+            "userHasNoVideo": "Катышуучу жок Video элек",
+            "openInBrowserAlert": "жыйынында Safari браузер ачуу кошулуу."
         },
         "settingsPopup": {
             "webCamera": "Желе Камера",
@@ -197,7 +200,8 @@
             "relatedTo": {
                 "hasANew": "ээ болгон жаңы {{instructions.fromDisplayType}}",
                 "byAvatar": "менен кошо {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "баштаган бир чалуу"
         }
     },
     "types": {
@@ -320,5 +324,12 @@
         "Identifiers": "Identifiers",
         "Devices": "түзмөктөр",
         "Streams": "агымдар"
+    },
+    "menu": {
+        "placeholder": "түрү барак аты",
+        "ModTab": "жылып, сап",
+        "Save": "Save",
+        "Delete": "Delete",
+        "Submenu": "судан"
     }
 }

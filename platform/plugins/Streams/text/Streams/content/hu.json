@@ -80,7 +80,9 @@
             "PleaseVisitLink": "Kérjük, látogasson el a következő linkre:",
             "InvitingYou": "Meghívom Önt {{title}}",
             "HasInvitedYou": "{{displayName}} meghívta Önt a {{title}}",
-            "HasMentionedYou": "{{displayName}} megemlített téged a &quot;{{title}}&quot; -ben"
+            "HasMentionedYou": "{{displayName}} megemlített téged a &quot;{{title}}&quot; -ben",
+            "YOUAREINVITED": "MEG VAGY HÍVVA!",
+            "AcceptInvite": "Fogadja el a meghívót"
         },
         "sms": {
             "content": "Meghívást kapott a {{title}} -ra. Kérjük, érintse meg a {{url}}"
@@ -164,7 +166,8 @@
             "youStoppedFbLive": "Ön abbahagyta a hívás sugárzását a Facebookon",
             "linkCopiedToCb": "A linket a vágólapra másolta",
             "codeCopiedToCb": "A kódot a vágólapra másolta",
-            "userHasNoVideo": "A résztvevőnek nincs videója"
+            "userHasNoVideo": "A résztvevőnek nincs videója",
+            "openInBrowserAlert": "Nyisson meg egy linket a Safari böngészőben a konferenciához való csatlakozáshoz."
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -318,7 +321,15 @@
             "relatedTo": {
                 "hasANew": "van egy új {{instructions.fromDisplayType}}",
                 "byAvatar": "hozzáadta: {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "hívást indított"
         }
+    },
+    "menu": {
+        "placeholder": "írja be az oldal címét",
+        "ModTab": "Elem módosítása",
+        "Save": "Megment",
+        "Delete": "Töröl",
+        "Submenu": "almenü"
     }
 }
