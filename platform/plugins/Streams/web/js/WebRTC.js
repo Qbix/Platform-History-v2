@@ -64,6 +64,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				audio: true,
 				video: false
 			},
+            showScreenSharingInSeparateScreen: true,
 			minimizeOnPageSwitching: true,
 			leaveOtherActiveRooms: true,
 			liveStreaming: {
@@ -265,6 +266,23 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     });
                 }
 
+                function timestampToDate(unix_timestamp) {
+// Create a new JavaScript Date object based on the timestamp
+// multiplied by 1000 so that the argument is in milliseconds, not seconds.
+                    var date = new Date(unix_timestamp * 1000);
+// Hours part from the timestamp
+                    var hours = date.getHours();
+// Minutes part from the timestamp
+                    var minutes = "0" + date.getMinutes();
+// Seconds part from the timestamp
+                    var seconds = "0" + date.getSeconds();
+
+// Will display time in 10:30:23 format
+                    var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+
+                    return formattedTime;
+                }
+
                 function updateParticipantsList(e) {
                     var roomItem = e.target;
                     var roomName = roomItem.dataset.roomName;
@@ -321,6 +339,37 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
 
                 function printLog(logs) {
+                    function flattenObject(source, depth) {
+                        if(depth == null) depth = 0;
+                        var target = {};
+                        var keys = Object.keys(source);
+                        if(keys.length == 0) {
+                            keys = [];
+                            for(var p in source) {
+                                keys.push(p);
+                                if(p == 10) break;
+                            }
+                        }
+                        keys.forEach(k => {
+                            if (source[k] !== null && (typeof source[k] === 'object' || typeof source[k] === 'function' || Array.isArray(source[k]))) {
+                                let constName = source[k].constructor.name;
+                                if(constName == 'HTMLDivElement') {
+                                    target[k] = source[k].outerHTML;
+                                } else if(constName == 'Text') {
+                                    target[k] = source[k].innerText;
+                                } else if(constName == 'DOMRect') {
+                                    target[k] = flattenObject(source[k]);
+                                } else {
+                                    target[k] = (depth <= 2) ? flattenObject(source[k], depth + 1) : source[k].constructor.name;
+                                }
+                            } else {
+                                target[k] = source[k];
+                            }
+
+                        });
+                        return target;
+                    }
+
                     _debugOutput.innerHTML = '';
                     var i, log;
                     for(i = 0; log = logs[i]; i++) {
@@ -334,8 +383,26 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         logItemType.innerHTML = log.type;
                         var logContent = document.createElement('DIV');
                         logContent.className = 'Streams_webrtc_debug_log_contet';
-                        logContent.innerHTML = log.log.constructor === Array ? log.log.join(', ') : JSON.stringify(log.log);
 
+                        if(log.log.constructor === Array) {
+                            var logResultArr = [];
+                            let logArray = log.log;
+                            for (var k in logArray) {
+                                if (logArray[k] !== null && (typeof logArray[k] === 'object' || typeof logArray[k] === 'function' || Array.isArray(logArray[k]))) {
+                                    logResultArr.push(JSON.stringify(logArray[k]));
+                                } else {
+                                    logResultArr.push(logArray[k]);
+                                }
+                            }
+                            //console.log('logArray', logArray.join(', '))
+
+                            logContent.innerText = logResultArr.join(', ');
+                        } else {
+                            logContent.innerHTML = JSON.stringify(log.log);
+
+                        }
+
+                        //console.log('log.log',log.type, log.log);
                         logItem.appendChild(logItemType);
                         logItem.appendChild(logContent);
                         _debugOutput.appendChild(logItem);
@@ -380,7 +447,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
 
                 function getLogByUser(roomId, callStartedDate, userId, startTime, callback) {
-                    console.log('getLogByUser', roomId, callStartedDate, userId, startTime)
                     var userIdAndStartTime;
                     if(typeof userId == 'undefined' && typeof startTime == 'undefined') {
                         userIdAndStartTime = Q.Users.loggedInUser.id + '\t' + _options.startTime;
@@ -809,18 +875,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 			WebRTCconference.event.on('trackMuted', function (e) {
 				log('track muted', e)
-				if(e.track.kind == 'video') screensRendering.showLoader('videoMuted', e.screen.participant);
+				if(e.track.kind == 'video') screensRendering.showLoader('videoMuted', {screen: e.screen, participant: e.screen.participant});
 			});
 
 			WebRTCconference.event.on('trackUnmuted', function (e) {
 				log('track unmuted', e)
-				if(e.track.kind == 'video') screensRendering.hideLoader('videoUnmuted', e.screen.participant);
+				if(e.track.kind == 'video') screensRendering.hideLoader('videoUnmuted', {screen: e.screen, participant: e.screen.participant});
 			});
 
 			WebRTCconference.event.on('videoTrackIsBeingAdded', function (screen) {
 				log('video track is being added', screen)
 				screensRendering.updateLayout();
-				screensRendering.showLoader('videoTrackIsBeingAdded', screen.participant);
+				screensRendering.showLoader('videoTrackIsBeingAdded', {screen: screen, participant: screen.participant});
 			});
 
 			WebRTCconference.event.on('videoTrackLoaded', function (e) {
@@ -829,7 +895,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 				screensRendering.updateLayout();
 
-				screensRendering.hideLoader('videoTrackLoaded', e.screen.participant);
+				screensRendering.hideLoader('videoTrackLoaded', {screen: e.screen, participant: e.screen.participant});
 				screensRendering.fitScreenToVideo(e.trackEl, e.screen, e.reset, e.oldSize);
 
 				if(e.trackEl) {
@@ -837,26 +903,39 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				}
 			});
 
-			WebRTCconference.event.on('screensharingStarting', function (data) {
-				log('screen sharing is being started', data)
+			WebRTCconference.event.on('screensharingStarting', function (e) {
+				log('screen sharing is being started', e)
 
-				screensRendering.showLoader('screensharingStarting', data.participant);
+				screensRendering.showLoader('screensharingStarting', {participant: e.participant});
 			});
 
 			WebRTCconference.event.on('afterCamerasToggle', function (e) {
-				screensRendering.hideLoader('afterCamerasToggle', e.participant);
+				screensRendering.hideLoader('afterCamerasToggle', {participant: e.participant});
 			});
 			WebRTCconference.event.on('beforeCamerasToggle', function (e) {
-				screensRendering.showLoader('beforeCamerasToggle', e.participant);
+				screensRendering.showLoader('beforeCamerasToggle', {participant: e.participant});
 			});
-			WebRTCconference.event.on('screensharingStarted', function (data) {
+			WebRTCconference.event.on('screensharingStarted', function (e) {
 				log('screen sharing started')
+                if(screensRendering.getActiveViewMode() != 'screenSharing') {
+                    var screensharingTrack;
+				    if(e.content.trackId != null) {
+                        screensharingTrack = e.participant.videoTracks().filter(function (t) {
+                            return t.mediaStreamTrack.id == e.content.trackId ? true : false;
+                        })[0];
+                    } else {
+                        screensharingTrack = e.participant.videoTracks().reduce(function(prev, current) {
+                            return ((prev.trackEl.videoWidth * prev.trackEl.videoHeight) > (current.trackEl.videoWidth * current.trackEl.videoHeight)) ? prev : current;
+                        })
+                    }
 
+                    screensRendering.renderScreenSharingLayout(screensharingTrack.parentScreen);
+                }
 				//screensRendering.hideLoader('screensharingStarting', data.participant);
 			});
 			WebRTCconference.event.on('screensharingFailed', function (e) {
 				log('screen sharing failed')
-				screensRendering.hideLoader('screensharingFailed', e.participant);
+				screensRendering.hideLoader('screensharingFailed', {participant: e.participant});
 			});
 
 			WebRTCconference.event.on('connected', function () {
@@ -1422,7 +1501,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					startWith: _options.startWith,
 					streams: _options.streams != null ? _options.streams : null,
 					liveStreaming: _options.liveStreaming,
-					turnCredentials: turnCredentials,
+                    showScreenSharingInSeparateScreen: _options.showScreenSharingInSeparateScreen,
+                    turnCredentials: turnCredentials,
 					debug: _debug
 				});
 
@@ -1626,10 +1706,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			 */
 			function updateLayout() {
 				if(WebRTCconference == null) return;
-				log('updateLayout');
+				log('updateLayout, current mode is ', viewMode);
+                try {
+                    var err = (new Error);
+                    if(_debug) console.log(err.stack);
+                } catch (e) {
+
+                }
 
 				var roomScreens = WebRTCconference.screens(true);
-				var roomParticipants = WebRTCconference.roomParticipants();
+                log('updateLayout, roomScreens', roomScreens.length);
+
+                var roomParticipants = WebRTCconference.roomParticipants();
 				var i, participantScreen;
 				for(i = 0; participantScreen = roomScreens[i]; i++) {
 					createRoomScreen(participantScreen);
@@ -1688,6 +1776,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						renderTiledScreenGridDesktop();
 					} else if(viewMode == 'manual'){
 						renderManualScreensGrid();
+					} else if(viewMode == 'screenSharing'){
+						renderScreenSharingLayout(activeScreen);
 					}
 
 					/*if(activeScreen && activeScreen.isLocal && roomParticipants.length == 1) {
@@ -1928,7 +2018,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					resizeTool.state.keepRatioBasedOnElement = videoEl;
 				}
 
-
+return;
 				if((screen.screenEl.style.width != '' || screen.screenEl.style.height != '') && !reset) return;
 				if(videoEl.videoHeight == null || videoEl.videoWidth == null) return;
 
@@ -1974,6 +2064,22 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				}
 			}
 
+			function lockScreenResizingAndDragging() {
+                var roomScreens = WebRTCconference.screens();
+                for(var s in roomScreens) {
+                    var resizeTool = Q.Tool.from(roomScreens[s].screenEl, "Q/resize");
+                    if(resizeTool) resizeTool.state.active = false;
+                }
+            }
+
+			function unlockScreenResizingAndDragging() {
+                var roomScreens = WebRTCconference.screens();
+                for(var s in roomScreens) {
+                    var resizeTool = Q.Tool.from(roomScreens[s].screenEl, "Q/resize");
+                    if(resizeTool) resizeTool.state.active = true;
+                }
+            }
+
 			/**
 			 * Updates icons of Maximize/Minimize buttons (top right of participant's screen) when view mode is changed
 			 * @method updateScreensButtons
@@ -2018,6 +2124,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						if(!Q.info.isMobile) maximizeBtn.style.display = 'none';
 						minimizeBtn.style.display = 'none';
 					}
+				} else if(viewMode == 'screenSharing') {
+					var i, screen;
+					for (i = 0; screen = screens[i]; i++) {
+						var maximizeBtn = screen.nameEl.querySelector('.Streams_webrtc_maximize-btn');
+						var minimizeBtn = screen.nameEl.querySelector('.Streams_webrtc_minimize-btn');
+						if(!Q.info.isMobile) maximizeBtn.style.display = 'none';
+						minimizeBtn.style.display = 'none';
+					}
 				}
 
 			}
@@ -2038,7 +2152,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			 * Move screen front while dragging it.
 			 * @method moveScreenFront
 			 */
-			function moveScreenFront() {
+			function moveScreenFront(e) {
+			    if(e != null && viewMode == 'screenSharing') return;
 				var screenEl = this;
 				var screens = WebRTCconference.screens();
 				var currentHighestZIndex = Math.max.apply(Math, screens.map(function(o) { return o.screenEl != null && o.screenEl.style.zIndex != '' ? o.screenEl.style.zIndex : 1000; }))
@@ -2059,7 +2174,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			 * @method moveScreenBack
 			 * @param {Object} [screenEl] HTML element of the screen.
 			 */
-			function moveScreenBack(screenEl) {
+			function moveScreenBack(e) {
+			    var screenEl = this;
 				var screens = WebRTCconference.screens();
 
 				var currentLowestZIndex = Math.min.apply(Math, screens.map(function(o) {
@@ -2075,9 +2191,32 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			 * @param {String} [loaderName] Name of loader that depends on what action happened (camera toggling etc).
 			 * @param {Object} [participant] Participant on whose screen loader should be displayed.
 			 */
-			function showLoader(loaderName, participant) {
-				var screen = participant.screens[0];
-				if(screen == null) return;
+			function showLoader(loaderName, usefulData) {
+                log('showLoader', loaderName, usefulData)
+
+                var participant = usefulData.participant;
+                var screen;
+				if(usefulData.screen != null) {
+                    screen = usefulData.screen;
+                } else {
+                    //if(loaderName == 'screensharingStarting') {
+                        screen = participant.screens.filter(function (scrn) {
+                            return (scrn.screensharing == true && scrn.videoTrack == null);
+                        })[0];
+                    log('showLoader screen 1', screen)
+
+                    if(screen == null) {
+                            screen = participant.screens.filter(function (scrn) {
+                                return !scrn.screensharing;
+                            })[0];
+                        }
+                   /* } else {
+                        screen = participant.screens[0];
+                    }*/
+                }
+
+                log('showLoader', screen,  participant.screens.length)
+                if(screen == null) return;
 				if(screen.screenEl == null) {
 					screensRendering.createRoomScreen(screen);
 				}
@@ -2123,16 +2262,23 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					loaderIcon.innerHTML = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="130.35 175.058 235.692 150.425"    enable-background="new 130.35 175.058 235.692 150.425" xml:space="preserve">  <path shape-rendering="auto" image-rendering="auto" color-rendering="auto" fill="#FFFFFF" d="M153.86,175.058   c-6.743,0-12.271,5.542-12.271,12.285v110.45c0,6.743,5.528,12.271,12.271,12.271h188.672c6.742,0,12.271-5.527,12.271-12.271   V187.343c0-6.743-5.527-12.285-12.271-12.285L153.86,175.058L153.86,175.058z M153.86,182.085h188.672   c2.971,0,5.243,2.285,5.243,5.257v110.45c0,2.972-2.272,5.243-5.243,5.243H153.86c-2.971,0-5.243-2.271-5.243-5.243V187.343   C148.617,184.371,150.889,182.085,153.86,182.085L153.86,182.085z"/>  <path fill="#FFFFFF" d="M130.35,312.092c0,7.418,5.123,13.391,11.483,13.391H354.56c6.36,0,11.482-5.973,11.482-13.391H130.35z    M265.75,316.858h-35.101c-0.542,0-0.978-0.437-0.978-0.978s0.436-0.979,0.978-0.979h35.101c0.542,0,0.978,0.436,0.978,0.979   C266.728,316.422,266.292,316.858,265.75,316.858z"/>  <path fill="#FFFFFF" d="M193.391,291.705c-0.146,0-0.294-0.021-0.44-0.063c-0.729-0.214-1.198-0.92-1.113-1.675   c7.413-65.442,58.168-70.528,73.548-70.528c1.435,0,2.632,0.042,3.541,0.09v-20.55c0-0.63,0.379-1.199,0.961-1.442   c0.58-0.242,1.252-0.113,1.701,0.332l32.512,32.179c0.296,0.293,0.463,0.694,0.463,1.111s-0.167,0.817-0.465,1.111l-32.512,32.114   c-0.448,0.443-1.119,0.575-1.7,0.33c-0.581-0.242-0.96-0.812-0.96-1.441v-20.548c-1.78-0.149-3.449-0.185-4.634-0.185   c-13.734,0-48,4.706-69.501,48.296C194.523,291.378,193.973,291.705,193.391,291.705z"/>  </svg>';
 					loaderCon.appendChild(loaderIcon);
 					screen.screenEl.appendChild(loaderCon);
-					screen.screensharing = true;
-					_controlsTool.participantsPopup().showScreen(screen);
+					//screen.screensharing = true;
+
 					Q.Pointer.activateTouchlabels(document.body);
+
+                    _controlsTool.participantsPopup().showScreen(screen);
 
 					if(Q.info.isMobile){
 						renderMaximizedScreensGridMobile(screen);
 					} else {
-						renderMaximizedScreensGrid(screen);
+                        log('showLoader', screen)
+
+                        renderScreenSharingLayout(screen);
+						//renderMaximizedScreensGrid(screen);
 					}
-				}
+                    screensRendering.updateLayout();
+
+                }
 			}
 
 			/**
@@ -2141,23 +2287,45 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			 * @param {String} [loaderName] Name of loader that depends on what action happened (camera toggling etc).
 			 * @param {Object} [participant] Participant on whose screen loader should be displayed.
 			 */
-			function hideLoader(loaderName, participant) {
-				var screen = participant.screens[0];
-				if(screen == null || screen.screenEl == null) return;
-				screen.videoIsChanging = false;
-				participant.videoIsChanging = false;
-				if(loaderName == 'screensharingFailed' || loaderName == 'videoTrackLoaded' || loaderName == 'afterCamerasToggle') {
-					var loader = screen.screenEl.querySelector('.spinner-load');
-					if(loader != null && loader.parentNode != null) loader.parentNode.removeChild(loader);
-				} else if(loaderName == 'videoUnmuted') {
-					if(participant.isLocal) return;
-					var loader = screen.screenEl.querySelector('.connect-spinner-con');
-					if(loader != null && loader.parentNode != null) loader.parentNode.removeChild(loader);
-				}
+			function hideLoader(loaderName, usefulData) {
+                log('hideLoader', loaderName, usefulData)
 
-				if(loaderName == 'screensharingFailed'){
-					screen.screensharng = false;
-				}
+                var participant = usefulData.participant;
+                var screens = [];
+                if(usefulData.screen != null) {
+                    screens.push(usefulData.screen);
+                } else {
+                    screens = participant.screens;
+                }
+                log('hideLoader screens', screens)
+
+                if(screens.length == 0) return;
+
+                var i, screen;
+                for(i = 0; screen = screens[i]; i++) {
+                    if(screen.screenEl == null) continue;
+                    log('hideLoader for', screen)
+
+                    screen.videoIsChanging = false;
+                    participant.videoIsChanging = false;
+                    if(loaderName == 'screensharingFailed' || loaderName == 'videoTrackLoaded' || loaderName == 'afterCamerasToggle') {
+                        var loader = screen.screenEl.querySelector('.spinner-load');
+                        if(loader != null && loader.parentNode != null) loader.parentNode.removeChild(loader);
+                    } else if(loaderName == 'videoUnmuted') {
+                        if(participant.isLocal) return;
+                        var loader = screen.screenEl.querySelector('.connect-spinner-con');
+                        if(loader != null && loader.parentNode != null) loader.parentNode.removeChild(loader);
+                    }
+
+                    if(loaderName == 'screensharingFailed'){
+                        screen.screensharng = false;
+                        if(screen.videoTrack == null) {
+                            screen.hide();
+                            screensRendering.updateLayout();
+                        }
+                    }
+                }
+
 			}
 
 			var viewModeToSwitchBack;
@@ -2370,11 +2538,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				if(layout == 'minimizedScreensGrid' || layout == 'maximizedScreensGrid'
 					|| layout == 'maximizedVerticalMobile' || layout == 'maximizedHorizontalMobile'
 					|| layout == 'minimizedVerticalMobile' || layout == 'minimizedHorizontalMobile') {
-					var screenClass = 'Streams_webrtc_minimized-small-screen';
-					var maximizedScreenClass = 'Streams_webrtc_maximized-main-screen';
+
+
+				    var containerClass = 'Streams_webrtc_maximized-screens-grid';
+				    var screenClass = 'Streams_webrtc_minimized-small-screen';
+				    var maximizedScreenClass = 'Streams_webrtc_maximized-main-screen';
+
 
 					var elements = []
-					for(var s in roomScreens) {
+                    log('toggleScreensClass roomScreens', roomScreens);
+
+                    for(var s in roomScreens) {
 						let screen = roomScreens[s];
 
 						for (var o in screenClasses) {
@@ -2399,13 +2573,71 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 							} else {
 								elements.push(screen.screenEl);
 							}
-							if(screen == activeScreen) moveScreenBack(screen.screenEl);
+							if(screen == activeScreen) moveScreenBack.call(screen.screenEl);
 						}
 
 					}
 
-					var containerClass = 'Streams_webrtc_maximized-screens-grid';
+					log('toggleScreensClass elements', elements);
+					for (var x in gridClasses) {
+						if(gridClasses[x] == containerClass) continue;
+						if (_roomsMedia.classList.contains(gridClasses[x])) _roomsMedia.classList.remove(gridClasses[x]);
+					}
+					_roomsMedia.classList.add(containerClass);
+					return elements;
+				}
 
+				if(layout == 'screenSharing') {
+
+				    var containerClass = 'Streams_webrtc_screensharing-grid';
+				    var screenClass = 'Streams_webrtc_minimized-small-screen';
+                    var maximizedScreenClass = 'Streams_webrtc_maximized-main-screen';
+
+
+					var elements = []
+                    log('toggleScreensClass roomScreens', roomScreens);
+
+					var localScreensIncludedToRender = false;
+                    for(var s in roomScreens) {
+						let screen = roomScreens[s];
+
+						for (var o in screenClasses) {
+							if(screenClasses[o] == screenClass && screen != activeScreen) continue;
+							if (screen.screenEl.classList.contains(screenClasses[o])) screen.screenEl.classList.remove(screenClasses[o]);
+						}
+						if(!screen.screenEl.classList.contains(screenClass) && screen != activeScreen) {
+							screen.screenEl.classList.add(screenClass);
+						} else if (!screen.screenEl.classList.contains(maximizedScreenClass) && screen == activeScreen) {
+							screen.screenEl.classList.add(maximizedScreenClass);
+						}
+
+                        if(screen.participant == activeScreen.participant && localScreensIncludedToRender == false) {
+						    var screensharingScreens = [];
+						    var cameraScreens = [];
+						    for(let c in screen.participant.screens) {
+						        let pScreen = screen.participant.screens[c];
+                                log('toggleScreensClass pScreen.isActive', pScreen.isActive);
+                                if(!pScreen.isActive) continue;
+						        if(pScreen.screensharing == true) {
+                                    screensharingScreens.push(pScreen.screenEl);
+                                } else {
+                                    cameraScreens.push(pScreen.screenEl);
+                                }
+                            }
+                            cameraScreens.concat(screensharingScreens).map(function(el){
+                                elements.unshift(el);
+                            })
+                            localScreensIncludedToRender = true;
+
+                        } else if (screen.participant != activeScreen.participant) {
+                            elements.push(screen.screenEl);
+                        }
+                        if(screen == activeScreen) moveScreenBack.call(screen.screenEl);
+
+
+                    }
+
+					log('toggleScreensClass elements', elements);
 					for (var x in gridClasses) {
 						if(gridClasses[x] == containerClass) continue;
 						if (_roomsMedia.classList.contains(gridClasses[x])) _roomsMedia.classList.remove(gridClasses[x]);
@@ -2492,6 +2724,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				updateScreensButtons();
 				resetAudioVisualization();
 				if(_controlsTool) _controlsTool.updateViewModeBtns();
+                unlockScreenResizingAndDragging();
 			}
 
 			/**
@@ -2515,6 +2748,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				updateScreensButtons();
 				resetAudioVisualization();
 				if(_controlsTool) _controlsTool.updateViewModeBtns();
+                unlockScreenResizingAndDragging();
 			}
 
 			/**
@@ -2538,6 +2772,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				updateScreensButtons();
 				resetAudioVisualization();
 				if(_controlsTool) _controlsTool.updateViewModeBtns();
+                unlockScreenResizingAndDragging();
 			}
 
 			/**
@@ -2566,6 +2801,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					_controlsTool.participantsPopup().disableLoudesScreenMode();
 					_controlsTool.updateViewModeBtns();
 				}
+                unlockScreenResizingAndDragging();
 			}
 
 			/**
@@ -2575,7 +2811,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 			function renderMaximizedScreensGrid(screenToMaximize, duration) {
 				if(typeof duration == 'undefined') duration = 500;
 				log('renderMaximizedScreensGrid', screenToMaximize)
-
+                //TODO: check if "(screenToMaximize != null && screenToMaximize == activeScreen)" impacts updating layout
 				if(_layoutTool == null || _controls == null || (screenToMaximize != null && screenToMaximize == activeScreen)) return;
 				var roomScreens = WebRTCconference.screens();
 				if(screenToMaximize != null) activeScreen = screenToMaximize;
@@ -2600,7 +2836,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				}
 
 				if(activeScreen == null || !_roomsMedia.contains(activeScreen.screenEl)) activeScreen = roomScreens[0];
-				log('renderMaximizedScreensGrid activeScreen', activeScreen)
+				log('renderMaximizedScreensGrid activeScreen')
 
 				if(!_layoutTool.getLayoutGenerator('maximizedScreensGrid')) _layoutTool.setLayoutGenerator('maximizedScreensGrid', function (container, count) {
 					return customLayouts.minimizedOrMaximizedScreenGrid(document.body, count, _controls.querySelector('.Streams_webrtc_conference-control'), true);
@@ -2614,7 +2850,54 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				updateScreensButtons();
 				resetAudioVisualization();
 				if(_controlsTool) _controlsTool.updateViewModeBtns();
+                unlockScreenResizingAndDragging();
 			}
+
+            /**
+             * Maximize screensharing screen.
+             * @method renderScreenSharingLayout
+             * @param {Object} [screenToMaximize] Screen that contains screensharing video.
+             */
+            function renderScreenSharingLayout(screenToMaximize) {
+                log('renderScreenSharingLayout', screenToMaximize, activeScreen)
+                if(_layoutTool == null || _controls == null/* || (screenToMaximize != null && screenToMaximize == activeScreen)*/) return;
+                var roomScreens = WebRTCconference.screens();
+                if(screenToMaximize != null) activeScreen = screenToMaximize;
+                if(screenToMaximize == null) {
+
+                    var i, screen;
+                    for(i = 0; screen = roomScreens[i]; i++) {
+                        if(!screen.isLocal) {
+                            activeScreen = screen;
+                        }
+                    }
+                }
+                log('renderScreenSharingLayout activeScreen 0', activeScreen);
+
+                //if(activeScreen == null || !_roomsMedia.contains(activeScreen.screenEl)) activeScreen.show();
+
+                log('renderScreenSharingLayout activeScreen 1', activeScreen);
+
+                if(window.innerHeight > window.innerWidth) {
+                    var elements = toggleScreensClass('screenSharing');
+                    log('renderScreenSharingLayout length', elements.length)
+
+                    _layoutTool.animate('screenSharing', elements, 100, true);
+                } else {
+                    var elements = toggleScreensClass('screenSharing');
+                    log('renderScreenSharingLayout length', elements.length)
+
+                    _layoutTool.animate('screenSharing', elements, 100, true);
+                }
+
+                log('renderScreenSharingLayout activeScreen 2', activeScreen);
+
+                viewMode = 'screenSharing';
+                if(_controlsTool) _controlsTool.updateViewModeBtns();
+                updateScreensButtons()
+                resetAudioVisualization();
+                lockScreenResizingAndDragging();
+            }
 
 			/**
 			 * Maximaze tapped screen to full, make another screens minimized.
@@ -2642,6 +2925,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					var elements = toggleScreensClass('maximizedVerticalMobile');
 					_layoutTool.animate('maximizedVerticalMobile', elements, 100, true);
 				} else {
+				    log('renderMaximizedScreensGridMobile maximizedHorizontalMobile');
 					var elements = toggleScreensClass('maximizedHorizontalMobile');
 					_layoutTool.animate('maximizedHorizontalMobile', elements, 100, true);
 				}
@@ -4467,6 +4751,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				renderTiledScreensGridDesktop:renderTiledScreenGridDesktop,
 				renderTiledScreensGridMobile:renderTiledScreenGridMobile,
 				renderManualScreensGrid:renderManualScreensGrid,
+                renderScreenSharingLayout:renderScreenSharingLayout,
 				showLoader:showLoader,
 				hideLoader:hideLoader
 			};
@@ -4757,7 +5042,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				return Q.handle(callback);
 			}
 
-			WebRTCconference.localParticipant().online = false;
+			if(WebRTCconference.localParticipant() != null) WebRTCconference.localParticipant().online = false;
 
 			if(WebRTCconference.roomParticipants().length === 0) {
 
@@ -4782,7 +5067,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				});
 
 			}
-			if(appDebug.sendReportsInterbal != null) clearTimeout(appDebug.sendReportsInterbal);
+			if(appDebug.sendReportsInterbal != null) {
+                appDebug.sendReportToServer();
+			    clearTimeout(appDebug.sendReportsInterbal);
+            }
 			_roomStream.leave();
 			WebRTCconference.disconnect();
 			_options.streams = null;

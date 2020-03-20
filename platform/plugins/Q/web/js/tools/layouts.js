@@ -172,6 +172,12 @@ var _generators = {
 
 		return tiledDesktopGrid(count, containerRect);
 	},
+	screenSharing: function (container, count) {
+        var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
+        var size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
+
+		return screenSharingLayout(count, size, true);
+	},
 	maximizedVertical: function (container, count) {
 
 	},
@@ -238,7 +244,7 @@ var _generators = {
 		var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
         var size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
 
-        return minimizedOrMaximizedHorizontalMobile(count, size);
+        return minimizedOrMaximizedHorizontalMobile(count, size, true);
 	},
 	minimizedVerticalMobile: function (container, count) {
 		var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
@@ -353,7 +359,6 @@ var _generators = {
 
 
     function minimizedOrMaximizedHorizontalMobile(count, size, maximized) {
-
         var rects = [];
 
         if(maximized) {
@@ -441,8 +446,98 @@ var _generators = {
 		    } else colItemCounter++;
 	    }
 
-
 	    return rects;
+    }
+
+    function screenSharingLayout(count, size, maximized) {
+        var rects = [];
+
+        if(maximized) {
+            var mainScreenRect = new DOMRect(0, 0, size.parentWidth, size.parentHeight);
+            rects.push(mainScreenRect);
+        }
+
+        var rectWidth = 100;
+        var rectHeight = 100;
+        var spaceBetween = 10;
+        var totalRects = (size.parentWidth * (size.parentHeight - 66)) / ((rectWidth + spaceBetween) * (rectHeight + spaceBetween));
+        var perCol = Math.floor((size.parentHeight - 66) / (rectHeight + spaceBetween));
+        var perRow =  Math.floor(size.parentWidth / (rectWidth + spaceBetween));
+
+        var side = 'right'
+        var isNextNewLast = false;
+        var createNewColOnRight = null;
+        var createNewColOnLeft = null;
+        var latestRightRect = null;
+        var latestLeftRect = null;
+        var colItemCounter = 1;
+        var leftSideCounter = 0;
+        var rightSideCounter = 0;
+        var i;
+        for (i = 1; i <= count; i++) {
+            var firstRect = new DOMRect(size.parentWidth, size.parentHeight - 66, rectWidth, rectHeight)
+            var prevRect = rects.length > 1 ? rects[rects.length - 2] : firstRect;
+            var currentCol = isNextNewLast  ? perRow : Math.ceil(i/perCol);
+            var isNextNewCol = colItemCounter  == perCol;
+            isNextNewLast = isNextNewLast == true ? true : isNextNewCol && currentCol + 1 == perRow;
+
+            var x, y, rect, prevRect;
+            if(side == "right") {
+                prevRect = latestRightRect;
+                if (rightSideCounter > 0 && !createNewColOnRight) {
+                    y = prevRect.y - (rectHeight + spaceBetween);
+                    x = prevRect.x;
+                } else if(createNewColOnRight) {
+                    y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+                    x = prevRect.x - (rectWidth + spaceBetween);
+                    createNewColOnRight = false;
+                } else {
+                    y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+                    x = size.parentWidth - (rectWidth + spaceBetween);
+                }
+                rightSideCounter++;
+
+                rect = new DOMRect(x, y, rectWidth, rectHeight);
+                latestRightRect = rect;
+
+                side = 'left';
+
+                if(rightSideCounter % perCol == 0) {
+                    createNewColOnRight = true;
+                }
+            } else {
+                prevRect = latestLeftRect;
+                if (leftSideCounter > 0 && !createNewColOnLeft) {
+                    y = prevRect.y - (rectHeight + spaceBetween);
+                    x = prevRect.x;
+                } else if(createNewColOnLeft) {
+                    y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+                    x = prevRect.x + prevRect.width + spaceBetween;
+                    createNewColOnLeft = false;
+                } else {
+                    y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+                    x = spaceBetween;
+                }
+                leftSideCounter++;
+
+                rect = new DOMRect(x, y, rectWidth, rectHeight);
+                latestLeftRect = rect;
+
+                side = 'right';
+
+                if(leftSideCounter % perCol == 0) {
+                    createNewColOnLeft = true;
+                }
+            }
+
+            rects.push(rect);
+
+            if(isNextNewCol) {
+                colItemCounter = 1;
+            } else colItemCounter++;
+        }
+
+        return rects;
     }
 
 	function getElementSizeKeepingRatio(initSize, baseSize) {
