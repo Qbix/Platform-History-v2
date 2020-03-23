@@ -19,7 +19,7 @@ function Streams_webrtc_response_logParticipantList($params = array()) {
         $name = explode('_', $fileInfo['filename']);
         $userId = $name[0];
         $connectedTime = $name[1];
-        $connectedTimeDate = date("H:i:s", (int) $connectedTime);
+        $connectedTimeDate = date("H:i:s", (int) ($connectedTime / 1000));
 
         $user = Users::fetch($userId, false);
         $participantInfo = [
@@ -27,7 +27,7 @@ function Streams_webrtc_response_logParticipantList($params = array()) {
             'userId' => $userId,
             'connectedTime' => $connectedTime,
             'connectedDateTime' => $connectedTimeDate,
-            'username' => $user->displayName(),
+            'username' => $user != null ? $user->displayName() : $userId,
         ];
 
         array_push($roomsParticipants, $participantInfo);
