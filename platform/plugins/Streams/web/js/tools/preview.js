@@ -135,12 +135,15 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	onComposer: new Q.Event(),
 	onRefresh: new Q.Event(),
 	onLoad: new Q.Event(),
+	onAfterClose: new Q.Event(),
 	onClose: new Q.Event(function (wasRemoved) {
+		var tool = this;
 		this.element.removeClass('Q_working');
 		Q.Masks.hide(this);
 		if (wasRemoved) {
 			this.$().hide(300, function () {
 				Q.removeElement(this, true);
+				Q.handle(tool.state.onAfterClose, tool);
 			});
 		}
 	}, 'Streams/preview'),
