@@ -433,6 +433,7 @@ class Q_Uri
 			}
 			$uri_fields = self::matchSegments($route, $segments);
 		} else {
+
 			foreach ($routes as $pattern => $fields) {
 				if (!isset($fields))
 					continue; // this provides a way to disable a route via config
