@@ -11,6 +11,10 @@
 class Q_Text
 {
 	public static $collection = array();
+	// This lang will be default for all text files.
+	// Current lang texts will be merged to default lang text.
+	// So absent texts will be displayed in default lang.
+	public static $defaultLanguage = 'en';
 	public static $language = 'en';
 	public static $locale = 'US';
 	
@@ -190,6 +194,9 @@ class Q_Text
 		}
 		$sources = array_unique($sources);
 		foreach ($sources as $s) {
+			if (isset($options2['language']) && $options2['language'] != self::$defaultLanguage) {
+				$tree->merge(Q_Text::get($s, array('language' => self::$defaultLanguage)));
+			}
 			$tree->merge(Q_Text::get($s, $options2));
 		}
 		return $tree->getAll();
