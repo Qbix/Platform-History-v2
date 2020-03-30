@@ -940,13 +940,16 @@ Streams.Dialogs = {
 		var text = null;
 		var o = Q.extend({}, Streams.Dialogs.invite.options, options);
 
+		// detect if cordova or Contacts Picker API available.
+		var isContactsPicker = Q.info.isCordova || ('contacts' in navigator && 'ContactsManager' in window);
+
 		var pipe = Q.pipe(['stream', 'text'], function () {
 			Q.Dialogs.push({
 				title: o.title || text.title,
 				template: {
 					name: o.templateName,
 					fields: {
-						isCordova: Q.info.isCordova,
+						isContactsPicker: isContactsPicker,
 						chooseFromContacts: text.chooseFromContacts,
 						photo: (o.photo)? text.photo: o.photo,
 						to: text.to.interpolate({"Stream Title": stream.fields.title}),
@@ -963,7 +966,6 @@ Streams.Dialogs = {
 				stylesheet: '{{Streams}}/css/Streams/invite.css',
 				className: 'Streams_invite_dialog',
 				onActivate: function (dialog) {
-
 					// handle "choose from contacts" button
 					$('.Streams_invite_choose_contact', dialog).on(Q.Pointer.fastclick, function () {
 						var $this = $(this);

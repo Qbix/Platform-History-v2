@@ -2565,6 +2565,129 @@
 	}, 'Users');
 
 	/**
+	 * Trying to grab contacts from device
+	 * @class Users.chooseContacts
+	 */
+	Users.chooseContacts = function (callback) {
+		var _getCordovaContacts = function () {
+			var contactOptions = new ContactFindOptions();
+			contactOptions.filter = "";
+			contactOptions.multiple = true;
+			contactOptions.desiredFields = [
+				navigator.contacts.fieldType.id,
+				navigator.contacts.fieldType.displayName,
+				navigator.contacts.fieldType.name,
+				navigator.contacts.fieldType.phoneNumbers,
+				navigator.contacts.fieldType.emails
+			];
+			var fields = [
+				navigator.contacts.fieldType.displayName,
+				navigator.contacts.fieldType.name
+			];
+			navigator.contacts.find(fields, function (data) {
+				data = data.sort((a,b) => (a.name.formatted > b.name.formatted) ? 1 : ((b.name.formatted > a.name.formatted) ? -1 : 0));
+				var contacts = {};
+
+				Q.each(data, function (i, obj) {
+					obj.displayName = obj.displayName || obj.name.formatted;
+
+					if (!obj.displayName) {
+						return;
+					}
+
+					var exist = {};
+					Q.each(obj.phoneNumbers, function (i, contact) {
+						var value = contact.value.replace(/\D/g, '');
+
+						if (exist[value]) {
+							return obj.phoneNumbers.splice(i, 1);
+						}
+						exist[value] = 1;
+
+						obj.phoneNumbers[i] = value;
+					});
+
+					Q.each(obj.emails, function (i, contact) {
+						var value = contact.value;
+
+						if (exist[value]) {
+							return obj.emails.splice(i, 1);
+						}
+						exist[value] = 1;
+
+						obj.emails[i] = value;
+					});
+
+					var firstLetter = obj.displayName.charAt(0).toUpperCase();
+
+					if (!contacts[firstLetter]) {
+						contacts[firstLetter] = [];
+					}
+
+					contacts[firstLetter].push(obj);
+				});
+
+				Q.handle(callback, contacts);
+			}, function (err) {
+				throw new Error("Users.chooseContacts._getCordovaContacts: " + err);
+			}, contactOptions);
+		};
+
+		async function _getPickerContacts () {
+			var contacts = {};
+
+			try {
+				var results = await navigator.contacts.select(['name', 'email', 'tel'], {multiple: true});
+			} catch (ex) {
+				throw new Error("Users.chooseContacts._getPickerContacts: " + ex);
+			}
+
+			Q.each(results, function (i, obj) {
+				obj.displayName = obj.name[0];
+
+				if (!obj.displayName) {
+					return;
+				}
+
+				obj.emails = Array.from(new Set(obj.email));
+
+				obj.phoneNumbers = Array.from(new Set(obj.tel));
+				obj.phoneNumbers = obj.phoneNumbers.map(function(e) {
+					return e.replace(/\D/g, '');
+				});
+
+				obj.id = obj.emails.join() + obj.phoneNumbers.join();
+
+				obj.emails = obj.emails.length ? obj.emails : null;
+				obj.phoneNumbers = obj.phoneNumbers.length ? obj.phoneNumbers : null;
+
+				var firstLetter = obj.displayName.charAt(0).toUpperCase();
+
+				if (!contacts[firstLetter]) {
+					contacts[firstLetter] = [];
+				}
+
+				contacts[firstLetter].push(obj);
+			});
+
+			contacts = Object.keys(contacts).sort().reduce(function (acc, key) {
+				acc[key] = contacts[key];
+				return acc;
+			}, {});
+
+			Q.handle(callback, contacts);
+		};
+
+		if (Q.info.isCordova) { // if cordova use navigator.contacts plugin
+			_getCordovaContacts(callback);
+		} else if ('contacts' in navigator && 'ContactsManager' in window) { // if Picker Contacts API available
+			_getPickerContacts(callback);
+		} else { // if none available
+			Q.handle(callback, null);
+		}
+	};
+
+	/**
 	 * Operates with dialogs.
 	 * @class Users.Dialogs
 	 */
@@ -2577,10 +2700,6 @@
 	 	* @param {Function} [callback] The function to call after dialog is activated
 	 	*/
 		contacts: function(options, callback) {
-			if (!Q.info.isCordova || !navigator.contacts) {
-				throw new Error("Users.Dialogs.contacts: supported only in Cordova");
-			}
-
 			var allOptions = Q.extend({}, Users.Dialogs.contacts.options, options);
 
 			var pipe = Q.pipe(['contacts', 'text'], function (params) {
@@ -2597,7 +2716,7 @@
 					selectedContacts[id] = c;
 				};
 				var _removeContact = function (id, dialog) {
-					$('.tr[data-rawid='+ id +'] .Users_contacts_dialog_' + selectedContacts[id].prefix, dialog)
+					$('.tr[data-rawid="'+ id +'"] .Users_contacts_dialog_' + selectedContacts[id].prefix, dialog)
 						.removeClass("checked");
 					delete selectedContacts[id];
 
@@ -2608,7 +2727,7 @@
 					var $sticky = $(".Users_contacts_sticky", $parent);
 
 					for(var i in selectedContacts) {
-						$('.tr[data-rawid='+ selectedContacts[i].id +'] .Users_contacts_dialog_' + selectedContacts[i].prefix, dialog)
+						$('.tr[data-rawid="'+ selectedContacts[i].id +'"] .Users_contacts_dialog_' + selectedContacts[i].prefix, dialog)
 						.addClass("checked");
 					}
 
@@ -2659,11 +2778,11 @@
 									return;
 								}
 								$email.addClass("checked");
-								_addContact(rawid, name, data.value, "email");
+								_addContact(rawid, name, data, "email");
 							})
 						} else if (emailContact.length === 1) {
 							$email.addClass("checked");
-							_addContact(rawid, name, emailContact[0].value, "email");
+							_addContact(rawid, name, emailContact[0], "email");
 						}
 					} else if (Q.getObject('length', phoneContact)) {
 						if (phoneContact.length > 1) {
@@ -2677,11 +2796,11 @@
 									return;
 								}
 								$phone.addClass("checked");
-								_addContact(rawid, name, data.value, "phone");
+								_addContact(rawid, name, data, "phone");
 							})
 						} else if (phoneContact.length === 1) {
 							$phone.addClass("checked");
-							_addContact(rawid, name, phoneContact[0].value, "phone");
+							_addContact(rawid, name, phoneContact[0], "phone");
 						}
 					}
 				};
@@ -2692,6 +2811,7 @@
 						name: allOptions.templateName,
 						fields: {
 							contacts: contacts,
+							isCordova: Q.info.isCordova,
 							text: text
 						}
 					},
@@ -2732,10 +2852,10 @@
 										$this.removeClass("checked");
 										return;
 									}
-									_addContact(rawid, name, data.value, contactType);
+									_addContact(rawid, name, data, contactType);
 								})
 							} else {
-								_addContact(rawid, name, contact[0].value, contactType);
+								_addContact(rawid, name, contact[0], contactType);
 							}
 
 							return false;
@@ -2796,7 +2916,7 @@
 							}
 
 							method(function(contactId){
-								_getContacts(function () {
+								Users.chooseContacts(function () {
 									Q.Template.render(allOptions.templateName, {
 										contacts: this,
 										text: text
@@ -2809,7 +2929,7 @@
 										_prepareContacts(dialog);
 
 										setTimeout(function () {
-											var $row = $(".tr[data-rawid=" + contactId + "]", $parent);
+											var $row = $(".tr[data-rawid='" + contactId + "']", $parent);
 											var $header = $(".Users_contacts_header", $parent);
 
 											_rowClick($row, dialog);
@@ -2837,65 +2957,7 @@
 				pipe.fill('text')(Q.getObject(["contacts", "dialog"], result));
 			});
 
-			var _getContacts = function (callback) {
-				var contactOptions = new ContactFindOptions();
-				contactOptions.filter = "";
-				contactOptions.multiple = true;
-				contactOptions.desiredFields = [
-					navigator.contacts.fieldType.id,
-					navigator.contacts.fieldType.displayName,
-					navigator.contacts.fieldType.name,
-					navigator.contacts.fieldType.phoneNumbers,
-					navigator.contacts.fieldType.emails
-				];
-				var fields = [
-					navigator.contacts.fieldType.displayName,
-					navigator.contacts.fieldType.name
-				];
-				navigator.contacts.find(fields, function (data) {
-					data = data.sort((a,b) => (a.name.formatted > b.name.formatted) ? 1 : ((b.name.formatted > a.name.formatted) ? -1 : 0));
-					var contacts = {};
-
-					Q.each(data, function (i, obj) {
-						obj.displayName = obj.displayName || obj.name.formatted;
-
-						if (!obj.displayName) {
-							return;
-						}
-
-						// remove dublicated contacts
-						Q.each([obj.phoneNumbers, obj.emails], function (i, contacts) {
-							var exist = {};
-							Q.each(contacts, function (i, contact) {
-								var value = contact.value;
-								if (contact.type === 'mobile') {
-									value = value.replace(/\D/g, '');
-								}
-
-								if (exist[value]) {
-									contacts = contacts.splice(i, 1);
-								}
-								exist[value] = 1;
-							});
-						});
-
-						var firstLetter = obj.displayName.charAt(0).toUpperCase();
-
-						if (!contacts[firstLetter]) {
-							contacts[firstLetter] = [];
-						}
-
-						contacts[firstLetter].push(obj);
-					});
-
-					Q.handle(callback, contacts);
-				}, function (err) {
-					Q.alert("Error in Users.Dialogs.contacts: " + err);
-					throw new Error("Users.Dialogs.contacts: " + err);
-				}, contactOptions);
-			};
-
-			_getContacts(function () {
+			Users.chooseContacts(function () {
 				pipe.fill('contacts')(this);
 			});
 		},

@@ -13,6 +13,15 @@
 	padding-right: 25px;
 	padding-top: 80px;
 }
+.Users_contacts_dialog[data-cordova=false] {
+	padding-top: 50px;
+}
+.Users_contacts_dialog_empty {
+	padding: 20px;
+	text-align: center;
+	font-style: italic;
+	color: #a3a3a3;
+}
 .Users_contacts_dialog .tr.Users_contacts_dialog_letter {
 	font-weight: bold;
 }
