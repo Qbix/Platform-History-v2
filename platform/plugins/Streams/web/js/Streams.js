@@ -933,25 +933,26 @@ Streams.Dialogs = {
 	 * @param {String} publisherId id of publisher which is publishing the stream
 	 * @param {String} streamName the stream's name
 	 * @param {Function} [callback] The function to call after dialog is activated
+	 * @param {object} [options] Different options
 	 * @param {string} [options.title] Custom dialog title
 	 */
 	invite: function(publisherId, streamName, callback, options) {
 		var stream = null;
 		var text = null;
-		var o = Q.extend({}, Streams.Dialogs.invite.options, options);
+		options = Q.extend({}, Streams.Dialogs.invite.options, options);
 
 		// detect if cordova or Contacts Picker API available.
 		var isContactsPicker = Q.info.isCordova || ('contacts' in navigator && 'ContactsManager' in window);
 
 		var pipe = Q.pipe(['stream', 'text'], function () {
 			Q.Dialogs.push({
-				title: o.title || text.title,
+				title: options.title || text.title,
 				template: {
-					name: o.templateName,
+					name: options.templateName,
 					fields: {
 						isContactsPicker: isContactsPicker,
 						chooseFromContacts: text.chooseFromContacts,
-						photo: (o.photo)? text.photo: o.photo,
+						photo: (options.photo)? text.photo: options.photo,
 						to: text.to.interpolate({"Stream Title": stream.fields.title}),
 						go: text.go,
 						placeholder: text.placeholder,
@@ -972,14 +973,15 @@ Streams.Dialogs = {
 						var $eContacts = $(".Streams_invite_contacts", dialog);
 						$eContacts.empty();
 
-						var options = {
+						var params = {
 							prefix: "Users",
-							data: $eContacts.data("contacts") || null
+							data: $eContacts.data("contacts") || null,
+							identifierTypes: options.identifierTypes
 						};
 
 						$this.addClass('loading');
 
-						Users.Dialogs.contacts(options, function (contacts) {
+						Users.Dialogs.contacts(params, function (contacts) {
 							$this.removeClass('loading');
 							$eContacts.data("contacts", contacts);
 
@@ -1430,13 +1432,15 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			_request();
 		}
 	}, {
-		title: o.title
+		title: o.title,
+		identifierTypes: o.identifierTypes
 	});
 	return null;
 };
 
 Streams.invite.options = {
-	followup: "future"
+	followup: "future",
+	identifierTypes: ["email", "mobile"]
 };
 
 /**
