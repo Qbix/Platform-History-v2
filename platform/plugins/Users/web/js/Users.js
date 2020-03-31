@@ -2790,9 +2790,7 @@
 				}
 			};
 
-			var pipe = Q.pipe(['contacts', 'text'], function (params) {
-				var contacts = params.contacts[0];
-				var text = params.text[0];
+			var _groupContacts = function (contacts) {
 				var contactsAlphabet = {};
 
 				// construct contactsAlphabet object: contacts grouped by first name letter
@@ -2812,12 +2810,19 @@
 					return acc;
 				}, {});
 
+				return contactsAlphabet;
+			};
+
+			var pipe = Q.pipe(['contacts', 'text'], function (params) {
+				var contacts = params.contacts[0];
+				var text = params.text[0];
+
 				Q.Dialogs.push({
 					title: text.title,
 					template: {
 						name: allOptions.templateName,
 						fields: {
-							contacts: contactsAlphabet,
+							contacts: _groupContacts(contacts),
 							isCordova: Q.info.isCordova,
 							text: text
 						}
@@ -2924,7 +2929,7 @@
 							method(function(contactId){
 								Users.chooseContacts(function () {
 									Q.Template.render(allOptions.templateName, {
-										contacts: this,
+										contacts: _groupContacts(this),
 										text: text
 									}, function (err, html) {
 										if (err) {
