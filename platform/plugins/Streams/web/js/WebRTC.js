@@ -2620,19 +2620,29 @@ return;
                                 if(!pScreen.isActive) continue;
 						        if(pScreen.screensharing == true) {
                                     screensharingScreens.push(pScreen.screenEl);
+                                    if(!pScreen.participant.isLocal) moveScreenBack.call(pScreen.screenEl);
                                 } else {
                                     cameraScreens.push(pScreen.screenEl);
+                                    if(pScreen.participant.isLocal) moveScreenBack.call(pScreen.screenEl);
                                 }
                             }
-                            cameraScreens.concat(screensharingScreens).map(function(el){
-                                elements.unshift(el);
-                            })
+
+                            if(!screen.participant.isLocal) {
+                                cameraScreens.concat(screensharingScreens).map(function(el){
+                                    elements.unshift(el);
+                                })
+                            } else {
+                                screensharingScreens.concat(cameraScreens).map(function(el){
+                                    elements.unshift(el);
+                                })
+                            }
+
                             localScreensIncludedToRender = true;
 
                         } else if (screen.participant != activeScreen.participant) {
                             elements.push(screen.screenEl);
                         }
-                        if(screen == activeScreen) moveScreenBack.call(screen.screenEl);
+
 
 
                     }
