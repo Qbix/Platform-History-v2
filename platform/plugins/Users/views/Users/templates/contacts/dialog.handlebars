@@ -1,13 +1,15 @@
 <div class="Users_contacts_header">
 	<input name="query" value="" type="text" class="Users_contacts_input" placeholder="{{text.SearchByName}}">
-	<button class="Users_contacts_create Q_button">{{text.CreateAccount}}</button>
+	{{#if isCordova}}
+		<button class="Users_contacts_create Q_button">{{text.CreateAccount}}</button>
+	{{/if}}
 </div>
 <div class="Users_contacts_sticky">
 {{#each contacts}}
 	<div>{{@key}}</div>
 {{/each}}
 </div>
-<div class="Users_contacts_dialog">
+<div class="Users_contacts_dialog" data-cordova="{{isCordova}}">
 {{#each contacts}}
 	<div class="tr Users_contacts_dialog_letter"><div class="td">{{@key}}</div></div>
 	<div>
@@ -27,5 +29,7 @@
 	</div>
 	{{/each}}
 	</div>
+{{else}}
+	<div class="Users_contacts_dialog_empty">{{text.EmptyContacts}}</div>
 {{/each}}
 </div>
