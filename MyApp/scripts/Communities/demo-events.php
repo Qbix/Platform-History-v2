@@ -1,13 +1,4 @@
 #!/usr/bin/env php
 <?php
-
-include dirname(__FILE__).'/../Q.inc.php';
-
-$script = COMMUNITIES_PLUGIN_SCRIPTS_DIR . DS . basename(__FILE__);
-
-$realpath = realpath($script);
-if (!$realpath) {
-	die($header . '[ERROR] ' . "Could not locate $script" . PHP_EOL);
-}
-
-include($realpath);
+require_once(dirname(__FILE__).'/../Q.inc.php');
+require_once(Q_DIR . DS . implode(DS, array("plugins", "Communities", "scripts", basename(__FILE__))));
