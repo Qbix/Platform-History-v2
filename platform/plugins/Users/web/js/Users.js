@@ -2632,36 +2632,35 @@
 		};
 
 		// method to get contacts for browser Picker Contacts API (if exists)
-		async function _getPickerContacts () {
-			try {
-				var results = await navigator.contacts.select(['name', 'email', 'tel'], {multiple: true});
-			} catch (ex) {
-				throw new Error("Users.chooseContacts._getPickerContacts: " + ex);
-			}
+		function _getPickerContacts () {
+			navigator.contacts.select(['name', 'email', 'tel'], {multiple: true})
+			.then(function (results) {
+				Q.each(results, function (i, obj) {
+					obj.displayName = obj.name[0];
 
-			Q.each(results, function (i, obj) {
-				obj.displayName = obj.name[0];
+					if (!obj.displayName) {
+						return;
+					}
 
-				if (!obj.displayName) {
-					return;
-				}
+					obj.emails = Array.from(new Set(obj.email));
 
-				obj.emails = Array.from(new Set(obj.email));
+					obj.phoneNumbers = Array.from(new Set(obj.tel));
+					obj.phoneNumbers = obj.phoneNumbers.map(function(e) {
+						return e.replace(/\D/g, '');
+					});
 
-				obj.phoneNumbers = Array.from(new Set(obj.tel));
-				obj.phoneNumbers = obj.phoneNumbers.map(function(e) {
-					return e.replace(/\D/g, '');
+					obj.id = obj.emails.join() + obj.phoneNumbers.join();
+
+					obj.emails = obj.emails.length ? obj.emails : null;
+					obj.phoneNumbers = obj.phoneNumbers.length ? obj.phoneNumbers : null;
+
+					contacts.push(obj);
 				});
 
-				obj.id = obj.emails.join() + obj.phoneNumbers.join();
-
-				obj.emails = obj.emails.length ? obj.emails : null;
-				obj.phoneNumbers = obj.phoneNumbers.length ? obj.phoneNumbers : null;
-
-				contacts.push(obj);
+				Q.handle(callback, contacts, ["browser"]);	
+			}).catch(function () {
+				throw new Error("Users.chooseContacts._getPickerContacts: " + ex);
 			});
-
-			Q.handle(callback, contacts, ["browser"]);
 		};
 
 		if (Q.info.isCordova) { // if cordova use navigator.contacts plugin
