@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.1",
+				"version": "1.0.2",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets"]
@@ -20,7 +20,8 @@
 		},
 		"routes@start": {
 			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
-			"Q/plugins/Assets/:action": {"module": "Assets"}
+			"Q/plugins/Assets/:action": {"module": "Assets"},
+			"dashboard": {"module": "Assets", "action": "dashboard"}
 		},
 		"web": {
 			"requireValidNonce": ["Assets"]
