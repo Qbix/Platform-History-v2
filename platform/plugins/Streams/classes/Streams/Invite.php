@@ -291,6 +291,25 @@ class Streams_Invite extends Base_Streams_Invite
 		self::$cache['getInvite'][$token] = $invite;
 		return $invite;
 	}
+	
+	/**
+	 * Generate a unique token that can be used for invites
+	 * @method generateToken
+	 * @static
+	 * @return {string}
+	 */
+	static function generateToken()
+	{
+		return self::db()->uniqueId(
+			self::table(),
+			'token',
+			null,
+			array(
+				'length' => Q_Config::get('Streams', 'invites', 'tokens', 'length', 16),
+				'characters' => Q_Config::get('Streams', 'invites', 'tokens', 'characters', 'abcdefghijklmnopqrstuvwxyz')
+			)
+		);
+	}
 
 	/**
 	 * Assigns unique id to 'token' field if not set
@@ -305,15 +324,7 @@ class Streams_Invite extends Base_Streams_Invite
 	{
 		if (!$this->retrieved) {
 			if (!isset($modifiedFields['token'])) {
-				$this->token = $modifiedFields['token'] = self::db()->uniqueId(
-					self::table(),
-					'token',
-					null,
-					array(
-						'length' => Q_Config::get('Streams', 'invites', 'tokens', 'length', 16),
-						'characters' => Q_Config::get('Streams', 'invites', 'tokens', 'characters', 'abcdefghijklmnopqrstuvwxyz')
-					)
-				);
+				$this->token = $modifiedFields['token'] = self::generateToken();
 			}
 			if (!empty($modifiedFields['userId'])) {
 				$p = new Streams_Participant();
