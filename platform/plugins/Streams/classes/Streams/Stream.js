@@ -411,15 +411,17 @@ Sp.notifyParticipants = function (event, byUserId, message, dontNotifyObservers,
 		for (var i = 0; i < userIds.length; i++) {
 			var userId = userIds[i];
 			var participant = participants[userId];
-			stream.notify(participant, event, message, byUserId, function(err) {
-				callback && callback(err, participants);
-				if (!err) return;
-				var debug = Q.Config.get(['Streams', 'notifications', 'debug'], false);
-				if (debug) {
-					Q.log("Failed to notify user '" + participant.fields.userId + "': ");
-					Q.log(err);
-				}
-			});
+			setTimeout(function () {
+				stream.notify(participant, event, message, byUserId, function(err) {
+					callback && callback(err, participants);
+					if (!err) return;
+					var debug = Q.Config.get(['Streams', 'notifications', 'debug'], false);
+					if (debug) {
+						Q.log("Failed to notify user '" + participant.fields.userId + "': ");
+						Q.log(err);
+					}
+				});
+			}, 0);
 		}
 		if (!dontNotifyObservers) {
 			stream.notifyObservers(event, userId, message);
@@ -1139,6 +1141,18 @@ Sp.notify = function(participant, event, message, byUserId, callback) {
 		}
 		if (!access) {
 			return;
+		}
+		
+		var logfile = Q.Config.get(
+			['Streams', 'types', '*', 'messages', '*', 'log'],
+			false
+		);
+		if (logfile) {
+			Q.log({
+				messageType: message.fields.type,
+				publisherId: stream.fields.publisherId,
+				streamName: stream.fields.Name
+			}, logfile);
 		}
 		
 		// 1) check for socket clients which are online

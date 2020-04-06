@@ -291,6 +291,19 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			callback: callback
 		};
 		var result = [];
+		
+		var logfile = Q.Config.get(
+			['Streams', 'types', '*', 'messages', '*', 'log'],
+			false
+		);
+		if (logfile) {
+			Q.log({
+				messageType: message.fields.type,
+				publisherId: stream.fields.publisherId,
+				streamName: stream.fields.Name,
+				subject: subject
+			}, logfile);
+		}
 
 		/**
 		 * @event "Streams/deliver/:messageType"
