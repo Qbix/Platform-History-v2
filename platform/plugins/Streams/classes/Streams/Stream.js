@@ -1217,7 +1217,7 @@ Sp.notify = function(participant, event, message, byUserId, callback) {
 						messageType: message.fields.type,
 						publisherId: stream.fields.publisherId,
 						streamName: stream.fields.name,
-						deliveries: deliveries
+						deliveries: deliveries,
 						displayName: avatar.displayName()
 					}, logfile);
 				}
