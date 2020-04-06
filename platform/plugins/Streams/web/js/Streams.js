@@ -1340,6 +1340,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		}
 		var rsd = r.data;
 		var rss = r.stream;
+		var t;
 		switch (o.sendBy) {
 		case "email":
 			t = Q.extend({
