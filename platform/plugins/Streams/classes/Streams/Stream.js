@@ -1188,18 +1188,6 @@ Sp.notify = function(participant, event, message, byUserId, callback) {
 			if (err || !deliveries.length) {
 				return callback && callback(err);
 			}
-			var logfile = Q.Config.get(
-				['Streams', 'types', '*', 'messages', '*', 'log'],
-				false
-			);
-			if (logfile) {
-				Q.log({
-					messageType: message.fields.type,
-					publisherId: stream.fields.publisherId,
-					streamName: stream.fields.name,
-					deliveries: deliveries
-				}, logfile);
-			}
 			var waitingFor = deliveries.map(function(d) { return JSON.stringify(d); });
 			var p = new Q.Pipe(waitingFor, function(params) {
 				for (var d in params) {
@@ -1220,12 +1208,26 @@ Sp.notify = function(participant, event, message, byUserId, callback) {
 			// actually notify according to the deliveriy rules
 			var byUserId = message.fields.byUserId;
 			Streams.Avatar.fetch(userId, byUserId, function (err, avatar) {
+				var logfile = Q.Config.get(
+					['Streams', 'types', '*', 'messages', '*', 'log'],
+					false
+				);
+				if (logfile) {
+					Q.log({
+						messageType: message.fields.type,
+						publisherId: stream.fields.publisherId,
+						streamName: stream.fields.name,
+						deliveries: deliveries
+						displayName: avatar.displayName()
+					}, logfile);
+				}
+				deliveries.forEach(function(delivery) {
+					message.deliver(stream, userId, delivery, avatar,
+						p.fill(JSON.stringify(delivery))
+					);
+				});
 				if (message.fields.type !== "Streams/invite") {
-					return deliveries.forEach(function(delivery) {
-						message.deliver(stream, userId, delivery, avatar,
-							p.fill(JSON.stringify(delivery))
-						);
-					});
+					return;
 				}
 				var instructions = JSON.parse(message.fields.instructions);
 				new Streams.Invite({
