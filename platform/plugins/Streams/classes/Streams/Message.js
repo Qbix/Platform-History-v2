@@ -301,6 +301,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				messageType: message.fields.type,
 				publisherId: stream.fields.publisherId,
 				streamName: stream.fields.name,
+				displayName: avatar.displayName(),
 				subject: subject
 			}, logfile);
 		}

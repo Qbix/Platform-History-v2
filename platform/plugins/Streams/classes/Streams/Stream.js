@@ -411,17 +411,15 @@ Sp.notifyParticipants = function (event, byUserId, message, dontNotifyObservers,
 		for (var i = 0; i < userIds.length; i++) {
 			var userId = userIds[i];
 			var participant = participants[userId];
-			setTimeout(function () {
-				stream.notify(participant, event, message, byUserId, function(err) {
-					callback && callback(err, participants);
-					if (!err) return;
-					var debug = Q.Config.get(['Streams', 'notifications', 'debug'], false);
-					if (debug) {
-						Q.log("Failed to notify user '" + participant.fields.userId + "': ");
-						Q.log(err);
-					}
-				});
-			}, 0);
+			stream.notify(participant, event, message, byUserId, function(err) {
+				callback && callback(err, participants);
+				if (!err) return;
+				var debug = Q.Config.get(['Streams', 'notifications', 'debug'], false);
+				if (debug) {
+					Q.log("Failed to notify user '" + participant.fields.userId + "': ");
+					Q.log(err);
+				}
+			});
 		}
 		if (!dontNotifyObservers) {
 			stream.notifyObservers(event, userId, message);
@@ -1221,14 +1219,14 @@ Sp.notify = function(participant, event, message, byUserId, callback) {
 						displayName: avatar.displayName()
 					}, logfile);
 				}
-				deliveries.forEach(function(delivery) {
-					message.deliver(stream, userId, delivery, avatar,
-						p.fill(JSON.stringify(delivery))
-					);
-				});
 				if (message.fields.type !== "Streams/invite") {
-					return;
+					return deliveries.forEach(function(delivery) {
+						message.deliver(stream, userId, delivery, avatar,
+							p.fill(JSON.stringify(delivery))
+						);
+					});
 				}
+				// This is only for "Streams/invite"
 				var instructions = JSON.parse(message.fields.instructions);
 				new Streams.Invite({
 					token: instructions.token
