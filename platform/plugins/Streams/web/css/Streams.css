@@ -801,4 +801,5 @@
 .Streams_invite_dialog.Streams_suggestion_ready .Streams_invite_social_buttons {
 	opacity: 1;
 	transition: opacity 300ms;
+	pointer-events: all;
 }
