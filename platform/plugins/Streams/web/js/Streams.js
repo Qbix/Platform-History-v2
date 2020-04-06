@@ -948,6 +948,7 @@ Streams.Dialogs = {
 			if (slots) {
 				suggestion = slots.suggestion;
 				data = slots.data;
+				$('.Streams_invite_dialog').addClass('Streams_suggestion_ready');
 			}
 		}, {
 			fields: {

@@ -792,3 +792,13 @@
 .Streams_chat_preview_tool {
 	height: 50px;
 }
+
+.Streams_invite_dialog .Streams_invite_social_buttons {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.Streams_invite_dialog.Streams_suggestion_ready .Streams_invite_social_buttons {
+	opacity: 1;
+	transition: opacity 3ms;
+}
