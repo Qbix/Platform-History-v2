@@ -1143,18 +1143,6 @@ Sp.notify = function(participant, event, message, byUserId, callback) {
 			return;
 		}
 		
-		var logfile = Q.Config.get(
-			['Streams', 'types', '*', 'messages', '*', 'log'],
-			false
-		);
-		if (logfile) {
-			Q.log({
-				messageType: message.fields.type,
-				publisherId: stream.fields.publisherId,
-				streamName: stream.fields.name
-			}, logfile);
-		}
-		
 		// 1) check for socket clients which are online
 		var only = stream.getAttribute('Streams/onlyIfAllClientsOffline');
 		if (only == undefined) {
@@ -1199,6 +1187,18 @@ Sp.notify = function(participant, event, message, byUserId, callback) {
 		function _continue2(err, deliveries) {
 			if (err || !deliveries.length) {
 				return callback && callback(err);
+			}
+			var logfile = Q.Config.get(
+				['Streams', 'types', '*', 'messages', '*', 'log'],
+				false
+			);
+			if (logfile) {
+				Q.log({
+					messageType: message.fields.type,
+					publisherId: stream.fields.publisherId,
+					streamName: stream.fields.name,
+					deliveries: deliveries
+				}, logfile);
 			}
 			var waitingFor = deliveries.map(function(d) { return JSON.stringify(d); });
 			var p = new Q.Pipe(waitingFor, function(params) {
