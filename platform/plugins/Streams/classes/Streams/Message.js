@@ -300,7 +300,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			Q.log({
 				messageType: message.fields.type,
 				publisherId: stream.fields.publisherId,
-				streamName: stream.fields.Name,
+				streamName: stream.fields.name,
 				subject: subject
 			}, logfile);
 		}

@@ -1151,7 +1151,7 @@ Sp.notify = function(participant, event, message, byUserId, callback) {
 			Q.log({
 				messageType: message.fields.type,
 				publisherId: stream.fields.publisherId,
-				streamName: stream.fields.Name
+				streamName: stream.fields.name
 			}, logfile);
 		}
 		
