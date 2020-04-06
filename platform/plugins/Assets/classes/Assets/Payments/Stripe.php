@@ -56,11 +56,10 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 		$customer->payments = 'stripe';
 		if (!$customer->retrieve()) {
 			Q_Valid::requireFields(array('token'), $options, true);
-			$sc = \Stripe\Customer::create(array(
-				"source" => $options['token']["id"],
-				"description" => $options['user']->displayName()
+			$stripeCustomer = self::createCustomer($user, array(
+				"source" => $options['token']["id"]
 			));
-			$customer->customerId = $sc->id;
+			$customer->customerId = $stripeCustomer->id;
 			$customer->save();
 		}
 		$params = array(
@@ -73,7 +72,27 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 		\Stripe\Charge::create($params); // can throw some exception
 		return $customer->customerId;
 	}
-	
-	public $options = array();
+	/**
+	 * Create stripe customer.
+	 * Allow you to perform recurring charges, and to track multiple charges, that are associated with the same customer
+	 * @method createCustomer
+	 * @param {Users_User} $user
+	 * @param {array} [$params] Additional params. For example 'source' passed with token id.
+	 * @return {object} The customer object
+	 */
+	function createCustomer($user, $params = array())
+	{
+		$avatar = Streams_Avatar::fetch($user->id, $user->id);
+		$params["name"] = $avatar->displayName();
+		if ($user->emailAddress) {
+			$params['email'] = $user->emailAddress;
+		}
+		if ($user->mobileNumber) {
+			$params['phone'] = $user->mobileNumber;
+		}
 
+		return \Stripe\Customer::create($params);
+	}
+
+	public $options = array();
 }
