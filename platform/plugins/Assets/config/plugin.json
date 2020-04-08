@@ -20,8 +20,7 @@
 		},
 		"routes@start": {
 			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
-			"Q/plugins/Assets/:action": {"module": "Assets"},
-			"dashboard": {"module": "Assets", "action": "dashboard"}
+			"Q/plugins/Assets/:action": {"module": "Assets"}
 		},
 		"web": {
 			"requireValidNonce": ["Assets"]
