@@ -18,8 +18,8 @@ function Assets_connected_response_content()
 	$redirectUrl = Q_Uri::url("Assets/connected");
 
 	$connectedAccount = new Assets_Connected();
-	$connectedAccount->userId = Q::app();
-	$connectedAccount->processor = 'stripe';
+	$connectedAccount->merchantUserId = Q::app();
+	$connectedAccount->payments = 'stripe';
 
 	if ($_GET['action'] == 'delete' && $_GET['accNo']) {
 		$account = \Stripe\Account::retrieve($_GET['accNo']);
@@ -27,10 +27,10 @@ function Assets_connected_response_content()
 		exit;
 	}
 
-	if ($code = $_GET['code'] && $_GET['state'] == $nonce) {
+	if ($_GET['code'] && $_GET['state'] == $nonce) {
 		$response = \Stripe\OAuth::token([
 			'grant_type' => 'authorization_code',
-			'code' => $code,
+			'code' => $_GET['code'],
 		]);
 
 		if ($response->error) {
@@ -46,6 +46,7 @@ function Assets_connected_response_content()
 
 		$dashboardLink = \Stripe\Account::createLoginLink($response->stripe_user_id);
 		$redirectUrl = $dashboardLink->url;
+		header("Location: ".$redirectUrl);
 	} else {
 		$connectedAccountId = null;
 		if ($connectedAccount->retrieve()) {
@@ -64,6 +65,5 @@ function Assets_connected_response_content()
 		}
 	}
 
-	header("Location: ".$redirectUrl);
-	exit;
+	return compact("redirectUrl");
 }
