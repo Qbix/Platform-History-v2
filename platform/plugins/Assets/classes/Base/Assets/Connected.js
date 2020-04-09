@@ -21,8 +21,8 @@ var Row = Q.require('Db/Row');
  * @constructor
  * @param {object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.userId] defaults to ""
- * @param {string} [$fields.processor] defaults to ""
+ * @param {string} [$fields.merchantUserId] defaults to ""
+ * @param {string} [$fields.payments] defaults to ""
  * @param {string} [$fields.accountId] defaults to ""
  * @param {string} [$fields.refreshToken] defaults to ""
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
@@ -35,13 +35,13 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property userId
+ * @property merchantUserId
  * @type String|Buffer
  * @default ""
  * 
  */
 /**
- * @property processor
+ * @property payments
  * @type String
  * @default ""
  * 
@@ -257,8 +257,8 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
-		"userId",
-		"processor"
+		"merchantUserId",
+		"payments"
 	];
 };
 
@@ -279,8 +279,8 @@ Base.prototype.fieldNames = function () {
  */
 Base.fieldNames = function () {
 	return [
-		"userId",
-		"processor",
+		"merchantUserId",
+		"payments",
 		"accountId",
 		"refreshToken",
 		"insertedTime",
@@ -291,37 +291,37 @@ Base.fieldNames = function () {
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_userId
+ * @method beforeSet_merchantUserId
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_userId = function (value) {
+Base.prototype.beforeSet_merchantUserId = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".userId");
+			throw new Error('Must pass a String or Buffer to '+this.table()+".merchantUserId");
 		if (typeof value === "string" && value.length > 31)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".userId");
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".merchantUserId");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the userId field
+	 * Returns the maximum string length that can be assigned to the merchantUserId field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_userId = function () {
+Base.prototype.maxSize_merchantUserId = function () {
 
 		return 31;
 };
 
 	/**
-	 * Returns schema information for userId column
+	 * Returns schema information for merchantUserId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_userId = function () {
+Base.column_merchantUserId = function () {
 
 return [["varbinary","31","",false],false,"PRI",null];
 };
@@ -329,37 +329,37 @@ return [["varbinary","31","",false],false,"PRI",null];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_processor
+ * @method beforeSet_payments
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_processor = function (value) {
+Base.prototype.beforeSet_payments = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".processor");
+			throw new Error('Must pass a String to '+this.table()+".payments");
 		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".processor");
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".payments");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the processor field
+	 * Returns the maximum string length that can be assigned to the payments field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_processor = function () {
+Base.prototype.maxSize_payments = function () {
 
 		return 255;
 };
 
 	/**
-	 * Returns schema information for processor column
+	 * Returns schema information for payments column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_processor = function () {
+Base.column_payments = function () {
 
 return [["varchar","255","",false],false,"PRI",null];
 };
@@ -499,7 +499,7 @@ return [["timestamp","255","",false],false,"","0000-00-00 00:00:00"];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['userId','processor'], i;
+	var fields = ['merchantUserId','payments'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {

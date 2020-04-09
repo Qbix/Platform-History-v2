@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS `{$prefix}connected` (
-  `userId` varbinary(31) NOT NULL,
-  `processor` varchar(255) NOT NULL,
+  `merchantUserId` varbinary(31) NOT NULL,
+  `payments` varchar(255) NOT NULL,
   `accountId` varchar(255) NOT NULL,
   `refreshToken` varchar(255) NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`userId`,`processor`)
+  PRIMARY KEY (`merchantUserId`,`payments`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

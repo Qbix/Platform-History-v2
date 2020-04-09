@@ -16,8 +16,8 @@
  *
  * @param {array} [$fields=array()] The fields values to initialize table row as 
  * an associative array of $column => $value pairs
- * @param {string} [$fields.userId] defaults to ""
- * @param {string} [$fields.processor] defaults to ""
+ * @param {string} [$fields.merchantUserId] defaults to ""
+ * @param {string} [$fields.payments] defaults to ""
  * @param {string} [$fields.accountId] defaults to ""
  * @param {string} [$fields.refreshToken] defaults to ""
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
@@ -26,13 +26,13 @@
 abstract class Base_Assets_Connected extends Db_Row
 {
 	/**
-	 * @property $userId
+	 * @property $merchantUserId
 	 * @type string
 	 * @default ""
 	 * 
 	 */
 	/**
-	 * @property $processor
+	 * @property $payments
 	 * @type string
 	 * @default ""
 	 * 
@@ -72,8 +72,8 @@ abstract class Base_Assets_Connected extends Db_Row
 		$this->setTable(self::table());
 		$this->setPrimaryKey(
 			array (
-			  0 => 'userId',
-			  1 => 'processor',
+			  0 => 'merchantUserId',
+			  1 => 'payments',
 			)
 		);
 	}
@@ -279,41 +279,41 @@ abstract class Base_Assets_Connected extends Db_Row
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_userId
+	 * @method beforeSet_merchantUserId
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_userId($value)
+	function beforeSet_merchantUserId($value)
 	{
 		if (!isset($value)) {
 			$value='';
 		}
 		if ($value instanceof Db_Expression) {
-			return array('userId', $value);
+			return array('merchantUserId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".userId");
+			throw new Exception('Must pass a string to '.$this->getTable().".merchantUserId");
 		if (strlen($value) > 31)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".userId");
-		return array('userId', $value);			
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".merchantUserId");
+		return array('merchantUserId', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the userId field
+	 * Returns the maximum string length that can be assigned to the merchantUserId field
 	 * @return {integer}
 	 */
-	function maxSize_userId()
+	function maxSize_merchantUserId()
 	{
 
 		return 31;			
 	}
 
 	/**
-	 * Returns schema information for userId column
+	 * Returns schema information for merchantUserId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_userId()
+	static function column_merchantUserId()
 	{
 
 return array (
@@ -333,41 +333,41 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_processor
+	 * @method beforeSet_payments
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_processor($value)
+	function beforeSet_payments($value)
 	{
 		if (!isset($value)) {
 			$value='';
 		}
 		if ($value instanceof Db_Expression) {
-			return array('processor', $value);
+			return array('payments', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".processor");
+			throw new Exception('Must pass a string to '.$this->getTable().".payments");
 		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".processor");
-		return array('processor', $value);			
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".payments");
+		return array('payments', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the processor field
+	 * Returns the maximum string length that can be assigned to the payments field
 	 * @return {integer}
 	 */
-	function maxSize_processor()
+	function maxSize_payments()
 	{
 
 		return 255;			
 	}
 
 	/**
-	 * Returns schema information for processor column
+	 * Returns schema information for payments column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_processor()
+	static function column_payments()
 	{
 
 return array (
@@ -595,7 +595,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('userId','processor') as $name) {
+			foreach (array('merchantUserId','payments') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
@@ -616,7 +616,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('userId', 'processor', 'accountId', 'refreshToken', 'insertedTime', 'updatedTime');
+		$field_names = array('merchantUserId', 'payments', 'accountId', 'refreshToken', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
