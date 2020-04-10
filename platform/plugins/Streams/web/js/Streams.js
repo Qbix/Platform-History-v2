@@ -973,6 +973,7 @@ Streams.Dialogs = {
 						go: text.go,
 						placeholder: text.placeholder,
 						orInvite: text.orInvite,
+						copyLink: text.copyLink,
 						QR: text.QR.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap}),
 						email: text.byEmail,
 						text: text.byText,
