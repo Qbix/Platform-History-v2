@@ -973,7 +973,7 @@ Streams.Dialogs = {
 						go: text.go,
 						placeholder: text.placeholder,
 						orInvite: text.orInvite,
-						copyLink: text.copyLink,
+						copyLink: text.copyLink.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap}),
 						QR: text.QR.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap}),
 						email: text.byEmail,
 						text: text.byText,
@@ -1398,6 +1398,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			break;
 		case "copyLink":
 			Q.Clipboard.copy(rsd.url);
+			break;
 		case "QR":
 			Q.Dialogs.push({
 				className: 'Streams_invite_QR',

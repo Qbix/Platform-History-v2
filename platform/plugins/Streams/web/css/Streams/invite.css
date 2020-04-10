@@ -57,6 +57,11 @@
 	font-style: italic;
 }
 
+.Streams_invite_dialog .Streams_invite_copyLink {
+	text-align: center;
+	margin-top: 20px;
+}
+
 .Streams_invite_dialog .Streams_invite_QR {
 	text-align: center;
 	margin-top: 20px;
