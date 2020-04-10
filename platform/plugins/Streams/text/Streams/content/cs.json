@@ -73,7 +73,8 @@
             "QRscanned": "Prohledali to!",
             "chooseAgainFromContacts": "Znovu vyberte možnost Kontakty",
             "inviteSelectedContacts": "Pozvěte vybrané kontakty",
-            "scannedQR": "{{ClickOrTap}}, pokud byl kód naskenován"
+            "scannedQR": "{{ClickOrTap}}, pokud byl kód naskenován",
+            "copyLink": "{{ClickOrTap}} zkopírujte odkaz na pozvání"
         },
         "email": {
             "subject": "Hej, podívejte se na to",
@@ -184,7 +185,10 @@
             "fbStartLive": "Běž žít",
             "fbStopLive": "End Live",
             "fbEmbedCode": "Vložit",
-            "copy": "kopírovat"
+            "copy": "kopírovat",
+            "turnOffVideo": "Vypněte sdílení fotoaparátu \/ obrazovky",
+            "turnOffScreenSharing": "Vypněte sdílení obrazovky",
+            "cameraIsTurnedOff": "Fotoaparát je vypnutý"
         },
         "participantsPopup": {
             "disconnect": "Odpojit",

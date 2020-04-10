@@ -73,7 +73,8 @@
             "QRscanned": "Scanadh siad é!",
             "chooseAgainFromContacts": "Roghnaigh Arís ó Teagmhálacha",
             "inviteSelectedContacts": "Tabhair cuireadh do Teagmhálacha Roghnaithe",
-            "scannedQR": "{{ClickOrTap}} má scanadh an cód"
+            "scannedQR": "{{ClickOrTap}} má scanadh an cód",
+            "copyLink": "{{ClickOrTap}} chun nasc cuireadh a chóipeáil"
         },
         "email": {
             "subject": "Hey, seiceáil seo amach",
@@ -184,7 +185,10 @@
             "fbStartLive": "Téigh Beo",
             "fbStopLive": "Deireadh Beo",
             "fbEmbedCode": "Leabú",
-            "copy": "Cóip"
+            "copy": "Cóip",
+            "turnOffVideo": "Múchadh comhroinnt ceamara \/ scáileáin",
+            "turnOffScreenSharing": "Comhroinnt scáileáin a mhúchadh",
+            "cameraIsTurnedOff": "Tá an ceamara casta as"
         },
         "participantsPopup": {
             "disconnect": "Dícheangail",

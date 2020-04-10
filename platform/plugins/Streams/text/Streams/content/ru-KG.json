@@ -73,7 +73,8 @@
             "QRscanned": "Они сканировали это!",
             "chooseAgainFromContacts": "Выберите снова из контактов",
             "inviteSelectedContacts": "Пригласить выбранные контакты",
-            "scannedQR": "{{ClickOrTap}} если код был отсканирован"
+            "scannedQR": "{{ClickOrTap}} если код был отсканирован",
+            "copyLink": "{{ClickOrTap}} скопировать ссылку приглашения"
         },
         "email": {
             "subject": "Эй, проверь это",
@@ -184,7 +185,10 @@
             "fbStartLive": "Go Live",
             "fbStopLive": "Конец Live",
             "fbEmbedCode": "встраивать",
-            "copy": "копия"
+            "copy": "копия",
+            "turnOffVideo": "Отключить камеру / общий доступ к экрану",
+            "turnOffScreenSharing": "Отключить совместное использование экрана",
+            "cameraIsTurnedOff": "Камера выключена"
         },
         "participantsPopup": {
             "disconnect": "Отключить",

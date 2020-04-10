@@ -32,7 +32,7 @@
     },
     "notifications": {
         "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams/chat/message": "{{&call 'avatar.displayName'}} said: ",
+        "Streams/chat/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
         "Streams/changed": "Changes in {{stream.fields.title}}",
         "Streams/invite": "You were invited to {{& stream.fields.title}}",
         "Streams/announcement": "Announcement in {{& streams.fields.title}}",
@@ -73,7 +73,8 @@
             "byTwitter": "Twitter",
             "chooseAgainFromContacts": "Choose Again from Contacts",
             "inviteSelectedContacts": "Invite Selected Contacts",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned"
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "copyLink": "{{ClickOrTap}} to copy invite link "
         },
         "email": {
             "subject": "Hey, check this out",
@@ -170,7 +171,7 @@
             "webCamera": "Web Camera",
             "screenSharing": "Screen Sharing",
             "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off all cameras",
+            "turnOffCameras": "Turn off camera",
             "startFBLive": "Start Facebook Livestream",
             "stopFBLive": "Stop Facebook Livestream",
             "fbLiveTitle": "Live Title",
@@ -181,7 +182,10 @@
             "fbStartLive": "Go Live",
             "fbStopLive": "End Live",
             "fbEmbedCode": "Embed",
-            "copy": "Copy"
+            "copy": "Copy",
+            "turnOffVideo": "Turn off camera/screen sharing",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off"
         },
         "participantsPopup": {
             "disconnect": "Disconnect",

@@ -73,7 +73,8 @@
             "QRscanned": "הם סרקו את זה!",
             "chooseAgainFromContacts": "בחר שוב מאנשי קשר",
             "inviteSelectedContacts": "הזמן אנשי קשר שנבחרו",
-            "scannedQR": "{{ClickOrTap}} אם הקוד נסרק"
+            "scannedQR": "{{ClickOrTap}} אם הקוד נסרק",
+            "copyLink": "{{ClickOrTap}} כדי להעתיק את קישור ההזמנה"
         },
         "email": {
             "subject": "ללא שם: היי, לבדוק את זה",
@@ -181,7 +182,10 @@
             "fbStartLive": "לך תחיה",
             "fbStopLive": "סוף לייב",
             "fbEmbedCode": "הטמע",
-            "copy": "עותק"
+            "copy": "עותק",
+            "turnOffVideo": "כבה את שיתוף המצלמה \/ המסך",
+            "turnOffScreenSharing": "כבה את שיתוף המסך",
+            "cameraIsTurnedOff": "המצלמה כבויה"
         },
         "participantsPopup": {
             "disconnect": "נתק",

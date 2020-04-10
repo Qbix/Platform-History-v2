@@ -73,7 +73,8 @@
             "QRscanned": "Ze hebben het gescand!",
             "chooseAgainFromContacts": "Kies opnieuw uit contacten",
             "inviteSelectedContacts": "Nodig geselecteerde contactpersonen uit",
-            "scannedQR": "{{ClickOrTap}} als de code is gescand"
+            "scannedQR": "{{ClickOrTap}} als de code is gescand",
+            "copyLink": "{{ClickOrTap}} om de uitnodigingslink te kopiëren"
         },
         "email": {
             "subject": "Hé, kijk hier eens",
@@ -184,7 +185,10 @@
             "fbStartLive": "Ga leven",
             "fbStopLive": "Live beëindigen",
             "fbEmbedCode": "Integreren",
-            "copy": "Kopiëren"
+            "copy": "Kopiëren",
+            "turnOffVideo": "Schakel camera \/ scherm delen uit",
+            "turnOffScreenSharing": "Schakel scherm delen uit",
+            "cameraIsTurnedOff": "Camera is uitgeschakeld"
         },
         "participantsPopup": {
             "disconnect": "verbinding verbreken",

@@ -73,7 +73,8 @@
             "QRscanned": "వారు దానిని స్కాన్ చేశారు!",
             "chooseAgainFromContacts": "పరిచయాల నుండి మళ్ళీ ఎంచుకోండి",
             "inviteSelectedContacts": "ఎంచుకున్న పరిచయాలను ఆహ్వానించండి",
-            "scannedQR": "కోడ్ స్కాన్ చేయబడితే {{ClickOrTap}}"
+            "scannedQR": "కోడ్ స్కాన్ చేయబడితే {{ClickOrTap}}",
+            "copyLink": "ఆహ్వాన లింక్‌ను కాపీ చేయడానికి {{ClickOrTap}}"
         },
         "email": {
             "subject": "హే, ఈ తనిఖీ",
@@ -184,7 +185,10 @@
             "fbStartLive": "ప్రత్యక్ష ప్రసారం చేయండి",
             "fbStopLive": "లైవ్‌ను ముగించండి",
             "fbEmbedCode": "పొందుపరిచిన",
-            "copy": "కాపీ"
+            "copy": "కాపీ",
+            "turnOffVideo": "కెమెరా / స్క్రీన్ భాగస్వామ్యాన్ని ఆపివేయండి",
+            "turnOffScreenSharing": "స్క్రీన్ భాగస్వామ్యాన్ని ఆపివేయండి",
+            "cameraIsTurnedOff": "కెమెరా ఆపివేయబడింది"
         },
         "participantsPopup": {
             "disconnect": "డిస్కనెక్ట్",

@@ -1080,6 +1080,21 @@ Streams.Dialogs = {
 						Q.Dialogs.pop(); // close the Dialog
 						Q.handle(callback, Streams, [result]);
 					});
+					
+					// handle social buttons
+					$('.Streams_invite_social_buttons button, .Streams_invite_copyLink', dialog)
+					.on(Q.Pointer.fastclick, function () {
+						var sendBy = $(this).data('sendby');
+						var result = {
+							token: suggestion,
+							identifier: null,
+							sendBy: sendBy,
+							stream: stream,
+							data: data
+						};
+						Q.Dialogs.pop(); // close the Dialog
+						Q.handle(callback, Streams, [result]);
+					});
 				}
 			});
 		});
@@ -1380,8 +1395,9 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		case "twitter":
 			window.open("http://www.twitter.com/share?url=" + rsd.url, "_blank");
 			break;
+		case "copyLink":
+			Q.Clipboard.copy(rsd.url);
 		case "QR":
-			if (err) return;
 			Q.Dialogs.push({
 				className: 'Streams_invite_QR',
 				title: Q.getObject(['invite', 'dialog', 'QRtitle'], text),

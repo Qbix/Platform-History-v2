@@ -73,7 +73,8 @@
             "QRscanned": "Скенирали су га!",
             "chooseAgainFromContacts": "Изаберите Поново из Контаката",
             "inviteSelectedContacts": "Позови изабране контакте",
-            "scannedQR": "{{ClickOrTap}} ако је код скениран"
+            "scannedQR": "{{ClickOrTap}} ако је код скениран",
+            "copyLink": "{{ClickOrTap}} за копирање позивнице"
         },
         "email": {
             "subject": "Хеј, види ово",
@@ -184,7 +185,10 @@
             "fbStartLive": "Уживо",
             "fbStopLive": "Престани уживо",
             "fbEmbedCode": "Уграђивање",
-            "copy": "Копирај"
+            "copy": "Копирај",
+            "turnOffVideo": "Искључите дељење камере / екрана",
+            "turnOffScreenSharing": "Искључите дељење екрана",
+            "cameraIsTurnedOff": "Камера је искључена"
         },
         "participantsPopup": {
             "disconnect": "Прекини везу",

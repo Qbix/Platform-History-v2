@@ -73,7 +73,8 @@
             "QRscanned": "Mereka memindainya!",
             "chooseAgainFromContacts": "Pilih Lagi dari Kontak",
             "inviteSelectedContacts": "Undang Kontak yang Dipilih",
-            "scannedQR": "{{ClickOrTap}} jika kode telah dipindai"
+            "scannedQR": "{{ClickOrTap}} jika kode telah dipindai",
+            "copyLink": "{{ClickOrTap}} untuk menyalin tautan undangan"
         },
         "email": {
             "subject": "Hei, lihat ini",
@@ -181,7 +182,10 @@
             "fbStartLive": "Hiduplah",
             "fbStopLive": "Akhiri Langsung",
             "fbEmbedCode": "Menanamkan",
-            "copy": "Salinan"
+            "copy": "Salinan",
+            "turnOffVideo": "Nonaktifkan berbagi kamera / layar",
+            "turnOffScreenSharing": "Matikan berbagi layar",
+            "cameraIsTurnedOff": "Kamera dimatikan"
         },
         "participantsPopup": {
             "disconnect": "Memutuskan",

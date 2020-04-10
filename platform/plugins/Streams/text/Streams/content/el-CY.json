@@ -73,7 +73,8 @@
             "QRscanned": "Το έλεγξαν!",
             "chooseAgainFromContacts": "Επιλέξτε ξανά από τις Επαφές",
             "inviteSelectedContacts": "Πρόσκληση επιλεγμένων επαφών",
-            "scannedQR": "{{ClickOrTap}} αν ο κώδικας έχει σαρωθεί"
+            "scannedQR": "{{ClickOrTap}} αν ο κώδικας έχει σαρωθεί",
+            "copyLink": "{{ClickOrTap}} για να αντιγράψετε το σύνδεσμο πρόσκλησης"
         },
         "email": {
             "subject": "Ελέγξτε αυτό",
@@ -184,7 +185,10 @@
             "fbStartLive": "Πάμε ζωντανά",
             "fbStopLive": "Τέλος ζωντανά",
             "fbEmbedCode": "Ενθέτω",
-            "copy": "αντίγραφο"
+            "copy": "αντίγραφο",
+            "turnOffVideo": "Απενεργοποιήστε την κοινή χρήση κάμερας / οθόνης",
+            "turnOffScreenSharing": "Απενεργοποιήστε την κοινή χρήση οθόνης",
+            "cameraIsTurnedOff": "Η κάμερα είναι απενεργοποιημένη"
         },
         "participantsPopup": {
             "disconnect": "Διαχωρίζω",

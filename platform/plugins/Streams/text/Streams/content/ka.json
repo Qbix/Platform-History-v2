@@ -73,7 +73,8 @@
             "QRscanned": "ისინი დასკანერებულნი იყვნენ!",
             "chooseAgainFromContacts": "აირჩიეთ კონტაქტებისგან",
             "inviteSelectedContacts": "მოიწვიე შერჩეული კონტაქტები",
-            "scannedQR": "99 99 999}} თუ კოდი დასკანერებული იყო"
+            "scannedQR": "99 99 999}} თუ კოდი დასკანერებული იყო",
+            "copyLink": "Invite 999}} მოწვევის ბმულის ასლის ასათვისებლად"
         },
         "email": {
             "subject": "ჰეი, შეამოწმეთ ეს",
@@ -184,7 +185,10 @@
             "fbStartLive": "Live Live",
             "fbStopLive": "Live Live",
             "fbEmbedCode": "ჩადეთ",
-            "copy": "დააკოპირეთ"
+            "copy": "დააკოპირეთ",
+            "turnOffVideo": "გამორთეთ კამერა \/ ეკრანის გაზიარება",
+            "turnOffScreenSharing": "გამორთეთ ეკრანის გაზიარება",
+            "cameraIsTurnedOff": "კამერა გამორთულია"
         },
         "participantsPopup": {
             "disconnect": "გათიშვა",

@@ -73,7 +73,8 @@
             "QRscanned": "彼らはそれをスキャンしました！",
             "chooseAgainFromContacts": "連絡先からもう一度選択",
             "inviteSelectedContacts": "選択した連絡先を招待",
-            "scannedQR": "{{ClickOrTap}}コードがスキャンされた場合"
+            "scannedQR": "{{ClickOrTap}}コードがスキャンされた場合",
+            "copyLink": "招待リンクをコピーするには{{ClickOrTap}}"
         },
         "email": {
             "subject": "こんにちは、これをチェックしてください",
@@ -184,7 +185,10 @@
             "fbStartLive": "ライブ配信",
             "fbStopLive": "ライブ終了",
             "fbEmbedCode": "埋め込む",
-            "copy": "コピー"
+            "copy": "コピー",
+            "turnOffVideo": "カメラ\/画面共有をオフにする",
+            "turnOffScreenSharing": "画面共有をオフにする",
+            "cameraIsTurnedOff": "カメラがオフになっています"
         },
         "participantsPopup": {
             "disconnect": "切断する",

@@ -73,7 +73,8 @@
             "QRscanned": "Eskaneatu zuten!",
             "chooseAgainFromContacts": "Aukeratu berriro Kontaktuak",
             "inviteSelectedContacts": "Hautatutako kontaktuak gonbidatu",
-            "scannedQR": "{{ClickOrTap}} kodea eskaneatu bada"
+            "scannedQR": "{{ClickOrTap}} kodea eskaneatu bada",
+            "copyLink": "{{ClickOrTap}} gonbidapenaren esteka kopiatzeko"
         },
         "email": {
             "subject": "Hey, begiratu hau",
@@ -184,7 +185,10 @@
             "fbStartLive": "Joan Bizi",
             "fbStopLive": "Amaitu Live",
             "fbEmbedCode": "txertatu",
-            "copy": "Copy"
+            "copy": "Copy",
+            "turnOffVideo": "Desaktibatu kamera \/ pantaila partekatzea",
+            "turnOffScreenSharing": "Desaktibatu pantaila partekatzea",
+            "cameraIsTurnedOff": "Kamera itzalita dago"
         },
         "participantsPopup": {
             "disconnect": "Deskonektatu",

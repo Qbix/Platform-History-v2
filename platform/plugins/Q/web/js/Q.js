@@ -10855,6 +10855,36 @@ _setLayoutInterval.options = {
 };
 
 /**
+ * Methods for working with the clipboard
+ * @class Q.Clipboard
+ */
+Q.Clipboard = {
+	/**
+	 * @method Q.Clipboard
+	 * @static
+	 * @param {String} the text to copy
+	 */
+	copy: function (text) {
+        var range, selection;
+		var textArea = document.createElement('textarea');
+		textArea.value = text;
+		document.body.appendChild(textArea);
+        if (Q.info.platform === 'ios') {
+            range = document.createRange();
+            range.selectNodeContents(textArea);
+            selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            textArea.setSelectionRange(0, 999999);
+        } else {
+            textArea.select();
+        }
+		document.execCommand('copy');
+		document.body.removeChild(textArea);
+	}
+};
+
+/**
  * Methods for working with pointer and touchscreen events
  * @class Q.Pointer
  */

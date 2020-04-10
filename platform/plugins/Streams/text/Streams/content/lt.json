@@ -73,7 +73,8 @@
             "QRscanned": "Jie nuskaito jį!",
             "chooseAgainFromContacts": "Pasirinkite vėl iš „Contacts“",
             "inviteSelectedContacts": "Pakviesti pasirinktus kontaktus",
-            "scannedQR": "{{ClickOrTap}}, jei kodas buvo nuskaitytas"
+            "scannedQR": "{{ClickOrTap}}, jei kodas buvo nuskaitytas",
+            "copyLink": "{{ClickOrTap}} nukopijuoti pakvietimo nuorodą"
         },
         "email": {
             "subject": "Ei, patikrinkite tai",
@@ -184,7 +185,10 @@
             "fbStartLive": "Eik gyvai",
             "fbStopLive": "Pabaiga gyvai",
             "fbEmbedCode": "Įterpti",
-            "copy": "Kopijuoti"
+            "copy": "Kopijuoti",
+            "turnOffVideo": "Išjunkite fotoaparato \/ ekrano bendrinimą",
+            "turnOffScreenSharing": "Išjunkite ekrano bendrinimą",
+            "cameraIsTurnedOff": "Kamera išjungta"
         },
         "participantsPopup": {
             "disconnect": "Atjunkite",

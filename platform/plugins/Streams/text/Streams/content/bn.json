@@ -73,7 +73,8 @@
             "QRscanned": "তারা এটা স্ক্যান!",
             "chooseAgainFromContacts": "পরিচিতি থেকে আবার চয়ন করুন",
             "inviteSelectedContacts": "নির্বাচিত পরিচিতি আমন্ত্রণ জানান",
-            "scannedQR": "কোডটি স্ক্যান করা থাকলে {9 999}।"
+            "scannedQR": "কোডটি স্ক্যান করা থাকলে {9 999}।",
+            "copyLink": "আমন্ত্রণ লিঙ্কটি অনুলিপি করতে {9 999}।"
         },
         "email": {
             "subject": "আরে, এই চেক আউট",
@@ -184,7 +185,10 @@
             "fbStartLive": "সরাসরি যাও",
             "fbStopLive": "শেষ লাইভ",
             "fbEmbedCode": "বসান",
-            "copy": "কপি"
+            "copy": "কপি",
+            "turnOffVideo": "ক্যামেরা \/ স্ক্রিন ভাগ করে নেওয়া বন্ধ করুন",
+            "turnOffScreenSharing": "স্ক্রিন ভাগ করে নেওয়া বন্ধ করুন",
+            "cameraIsTurnedOff": "ক্যামেরা বন্ধ আছে"
         },
         "participantsPopup": {
             "disconnect": "বিযুক্ত করা",

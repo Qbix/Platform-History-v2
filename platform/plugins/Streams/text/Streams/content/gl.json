@@ -73,7 +73,8 @@
             "QRscanned": "Dixitalizáronse!",
             "chooseAgainFromContacts": "Escolla de novo desde os contactos",
             "inviteSelectedContacts": "Invitar a contactos seleccionados",
-            "scannedQR": "{{ClickOrTap}} se o código foi dixitalizado"
+            "scannedQR": "{{ClickOrTap}} se o código foi dixitalizado",
+            "copyLink": "{{ClickOrTap}} para copiar a ligazón de invitación"
         },
         "email": {
             "subject": "Oe, mira isto",
@@ -184,7 +185,10 @@
             "fbStartLive": "Vai vivir",
             "fbStopLive": "End Live",
             "fbEmbedCode": "Incorporar",
-            "copy": "Copiar"
+            "copy": "Copiar",
+            "turnOffVideo": "Desactiva a cámara ou a cámara",
+            "turnOffScreenSharing": "Desactiva a compartición de pantalla",
+            "cameraIsTurnedOff": "A cámara está desactivada"
         },
         "participantsPopup": {
             "disconnect": "Desconectar",

@@ -73,7 +73,8 @@
             "QRscanned": "El van escanejar!",
             "chooseAgainFromContacts": "Trieu de nou els contactes",
             "inviteSelectedContacts": "Convida a contactes seleccionats",
-            "scannedQR": "{{ClickOrTap}} si es va escanejar el codi"
+            "scannedQR": "{{ClickOrTap}} si es va escanejar el codi",
+            "copyLink": "{{ClickOrTap}} per copiar l&#39;enllaç de la invitació"
         },
         "email": {
             "subject": "Hola, comprova-ho",
@@ -184,7 +185,10 @@
             "fbStartLive": "Anar a viure",
             "fbStopLive": "Acabar en directe",
             "fbEmbedCode": "Incrustar",
-            "copy": "Còpia"
+            "copy": "Còpia",
+            "turnOffVideo": "Desactiveu l’ús compartit de càmera / pantalla",
+            "turnOffScreenSharing": "Desactiva l’ús compartit de pantalla",
+            "cameraIsTurnedOff": "La càmera està desactivada"
         },
         "participantsPopup": {
             "disconnect": "Desconnecta",

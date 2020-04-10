@@ -73,7 +73,8 @@
             "QRscanned": "انہوں نے اسے سکین کیا!",
             "chooseAgainFromContacts": "رابطہ سے دوبارہ منتخب کریں",
             "inviteSelectedContacts": "منتخب رابطوں کو مدعو کریں",
-            "scannedQR": "اگر کوڈ اسکین ہوا تو. 999 {.۔"
+            "scannedQR": "اگر کوڈ اسکین ہوا تو. 999 {.۔",
+            "copyLink": "دعوت نامہ کاپی کرنے کیلئے {999}. پر کلک کریں"
         },
         "email": {
             "subject": "ارے، اسے چیک کرو",
@@ -184,7 +185,10 @@
             "fbStartLive": "براہ راست جاؤ",
             "fbStopLive": "اختتام لائیو",
             "fbEmbedCode": "ایمبیڈ کریں",
-            "copy": "کاپی"
+            "copy": "کاپی",
+            "turnOffVideo": "کیمرا \/ اسکرین کا اشتراک بند کریں",
+            "turnOffScreenSharing": "اسکرین کا اشتراک بند کریں",
+            "cameraIsTurnedOff": "کیمرا بند ہے"
         },
         "participantsPopup": {
             "disconnect": "منقطع ہونا",

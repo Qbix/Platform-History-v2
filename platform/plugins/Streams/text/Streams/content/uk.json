@@ -73,7 +73,8 @@
             "QRscanned": "Вони сканували його!",
             "chooseAgainFromContacts": "Виберіть &quot;Знову&quot; у списку &quot;Контакти&quot;",
             "inviteSelectedContacts": "Запросити вибрані контакти",
-            "scannedQR": "{{ClickOrTap}}, якщо код був відсканований"
+            "scannedQR": "{{ClickOrTap}}, якщо код був відсканований",
+            "copyLink": "{{ClickOrTap}}, щоб скопіювати посилання на запрошення"
         },
         "email": {
             "subject": "Ей, перевірте це",
@@ -184,7 +185,10 @@
             "fbStartLive": "Йти жити",
             "fbStopLive": "Закінчити Live",
             "fbEmbedCode": "Вставити",
-            "copy": "Скопіювати"
+            "copy": "Скопіювати",
+            "turnOffVideo": "Вимкніть обмін камерою \/ екраном",
+            "turnOffScreenSharing": "Вимкніть обмін екраном",
+            "cameraIsTurnedOff": "Камера вимкнена"
         },
         "participantsPopup": {
             "disconnect": "Відключити",

@@ -73,7 +73,8 @@
             "QRscanned": "Viņi skenēja to!",
             "chooseAgainFromContacts": "Izvēlieties no kontaktiem vēlreiz",
             "inviteSelectedContacts": "Uzaicināt atlasītos kontaktus",
-            "scannedQR": "{{ClickOrTap}}, ja kods tika skenēts"
+            "scannedQR": "{{ClickOrTap}}, ja kods tika skenēts",
+            "copyLink": "{{ClickOrTap}}, lai kopētu ielūguma saiti"
         },
         "email": {
             "subject": "Hei, pārbaudiet to",
@@ -184,7 +185,10 @@
             "fbStartLive": "Dodieties dzīvot",
             "fbStopLive": "Beigt tiešraidi",
             "fbEmbedCode": "Iegult",
-            "copy": "Kopēt"
+            "copy": "Kopēt",
+            "turnOffVideo": "Izslēdziet kameras / ekrāna kopīgošanu",
+            "turnOffScreenSharing": "Izslēdziet ekrāna kopīgošanu",
+            "cameraIsTurnedOff": "Kamera ir izslēgta"
         },
         "participantsPopup": {
             "disconnect": "Atvienojiet",

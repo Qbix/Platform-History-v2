@@ -73,7 +73,8 @@
             "QRscanned": "Nad skaneerisid seda!",
             "chooseAgainFromContacts": "Valige uuesti kontaktidest",
             "inviteSelectedContacts": "Kutsu valitud kontaktid",
-            "scannedQR": "{{ClickOrTap}}, kui kood skaneeriti"
+            "scannedQR": "{{ClickOrTap}}, kui kood skaneeriti",
+            "copyLink": "{{ClickOrTap}} kutselingi kopeerimiseks"
         },
         "email": {
             "subject": "Hei, vaata seda",
@@ -184,7 +185,10 @@
             "fbStartLive": "Mine elama",
             "fbStopLive": "Lõpeta otseülekanne",
             "fbEmbedCode": "Manusta",
-            "copy": "Kopeeri"
+            "copy": "Kopeeri",
+            "turnOffVideo": "Lülitage kaamera \/ ekraani ühiskasutus välja",
+            "turnOffScreenSharing": "Lülitage ekraani jagamine välja",
+            "cameraIsTurnedOff": "Kaamera on välja lülitatud"
         },
         "participantsPopup": {
             "disconnect": "Katkesta ühendus",
