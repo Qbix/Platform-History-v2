@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Int ġejt mistiedna. {{ClickOrTap}} hawn biex taċċetta u tissieħeb."
-        }
+        },
+        "youCanNowPaste": "Issa tista &#39;tippejstja din il-link x&#39;imkien biex tistieden lin-nies"
     },
     "followup": {
         "mobile": {

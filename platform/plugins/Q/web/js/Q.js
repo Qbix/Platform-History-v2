@@ -12173,6 +12173,18 @@ Q.Dialogs = {
 			Q.Masks.hide('Q.screen.mask');
 		}
 		return $dialog && $dialog[0];
+	},
+	
+	/**
+	 * Returns the HTML element of the dialog on top of the stack, if any
+	 * @static
+     * @method element
+	 * @param {Integer} [index=0] Pass a positive integer for dialogs lower on the stack
+	 * @return {HTMLElement} The HTML element of the dialog that is on top.
+	 */
+	element: function (index) {
+		var $dialog = this.dialogs[this.dialogs.length-index-1];
+		return $dialog && $dialog[0];
 	}
 
 };

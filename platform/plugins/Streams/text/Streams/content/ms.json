@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Anda telah dijemput. {{ClickOrTap}} di sini untuk menerima dan menyertai."
-        }
+        },
+        "youCanNowPaste": "Anda kini boleh menampal pautan ini di suatu tempat untuk menjemput orang"
     },
     "followup": {
         "mobile": {

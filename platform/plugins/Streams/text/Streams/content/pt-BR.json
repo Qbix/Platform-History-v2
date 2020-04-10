@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Você foi convidado. {{ClickOrTap}} aqui para aceitar e participar."
-        }
+        },
+        "youCanNowPaste": "Agora você pode colar este link em algum lugar para convidar pessoas"
     },
     "followup": {
         "mobile": {

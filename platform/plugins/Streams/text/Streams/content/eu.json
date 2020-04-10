@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Gonbidatu zaitu. {{ClickOrTap}} hemen onartzeko eta elkartzeko."
-        }
+        },
+        "youCanNowPaste": "Esteka hau nonbait itsatsi dezakezu jendea gonbidatzeko"
     },
     "followup": {
         "mobile": {

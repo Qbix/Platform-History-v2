@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Sinut on kutsuttu. {{ClickOrTap}} täällä hyväksyä ja liittyä."
-        }
+        },
+        "youCanNowPaste": "Voit nyt liittää tämän linkin jonnekin kutsuaksesi ihmisiä"
     },
     "followup": {
         "mobile": {

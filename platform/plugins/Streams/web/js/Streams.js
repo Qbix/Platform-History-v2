@@ -1398,6 +1398,17 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			break;
 		case "copyLink":
 			Q.Clipboard.copy(rsd.url);
+			Q.Text.get("Streams/content", function (err, result) {
+				var text = result && result.invite;
+				if (text) {
+					var element = Q.alert(text.YouCanNowPaste);
+					setTimeout(function () {
+						if (element === Q.Dialogs.element()) {
+							Q.Dialogs.pop();
+						}
+					}, Streams.invite.options.youCanNowPasteDuration);
+				}
+			});
 			break;
 		case "QR":
 			Q.Dialogs.push({
@@ -1484,7 +1495,8 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 
 Streams.invite.options = {
 	followup: "future",
-	identifierTypes: ["email", "mobile"]
+	identifierTypes: ["email", "mobile"],
+	youCanNowPasteDuration: 1000
 };
 
 /**

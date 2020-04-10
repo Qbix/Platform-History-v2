@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Davet edildin. Kabul etmek ve katılmak için {{ClickOrTap}} burada."
-        }
+        },
+        "youCanNowPaste": "Artık insanları davet etmek için bu bağlantıyı bir yere yapıştırabilirsiniz"
     },
     "followup": {
         "mobile": {

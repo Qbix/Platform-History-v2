@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Byli jste pozváni. {{ClickOrTap}} zde přijměte a připojte se."
-        }
+        },
+        "youCanNowPaste": "Nyní můžete tento odkaz někam vložit a pozvat lidi"
     },
     "followup": {
         "mobile": {

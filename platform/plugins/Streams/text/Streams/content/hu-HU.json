@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Meghívtak. {{ClickOrTap}} itt, hogy elfogadja és csatlakozzon."
-        }
+        },
+        "youCanNowPaste": "Most beillesztheti ezt a linket valahol az emberek meghívására"
     },
     "followup": {
         "mobile": {

@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Teid on kutsutud. {{ClickOrTap}} siin, et nõustuda ja liituda."
-        }
+        },
+        "youCanNowPaste": "Nüüd saate selle lingi kuhugi kleepida, et inimesi kutsuda"
     },
     "followup": {
         "mobile": {

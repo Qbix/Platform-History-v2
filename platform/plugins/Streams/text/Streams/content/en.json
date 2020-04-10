@@ -53,7 +53,9 @@
         "Streams\/call": "{{displayName}} is calling you"
     },
     "invite": {
+		"command": "Invite",
         "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
             "chooseFromContacts": "Choose from your Contacts",
             "chooseAgainFromContacts": "Choose Again from Contacts",

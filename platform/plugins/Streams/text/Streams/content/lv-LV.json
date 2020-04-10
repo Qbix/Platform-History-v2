@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Jūs esat uzaicināts. {{ClickOrTap}} šeit, lai pieņemtu un pievienotos."
-        }
+        },
+        "youCanNowPaste": "Tagad varat kaut kur ielīmēt šo saiti, lai uzaicinātu cilvēkus"
     },
     "followup": {
         "mobile": {

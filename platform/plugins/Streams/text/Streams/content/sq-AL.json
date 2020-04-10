@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Ju keni qenë të ftuar. {{ClickOrTap}} këtu për të pranuar dhe për t&#39;u bashkuar."
-        }
+        },
+        "youCanNowPaste": "Tani mund të ngjitni këtë lidhje diku për të ftuar njerëz"
     },
     "followup": {
         "mobile": {

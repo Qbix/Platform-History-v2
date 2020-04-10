@@ -231,49 +231,56 @@ function _Streams_participants(options) {
 					Q.handle(callback, tool, []);
 					return Q.handle(state.onRefresh, tool, []);
 				}
-				Q.Template.render(
-					'Streams/participants/invite',
-					state.templates.invite.fields,
-					function (err, html) {
-						if (err) return;
-						var $element = tool.$invite = $(html).insertBefore(tool.$avatars);
-						var filter = '.Streams_inviteTrigger';
-						$(tool.element).on(Q.Pointer.fastclick, filter, function () {
-							var options = Q.extend({
-								identifier: si.identifier
-							}, si);
-							Q.Streams.invite(
-								state.publisherId, 
-								state.streamName, 
-								options,
-								function (err, data) {
-									state.onInvited.handle.call(tool, err, data);
+				Q.Text.get("Streams/content", function (err, result) {
+					var text = result && result.invite;
+					if (text) {
+						state.templates.invite.fields.alt = text.command;
+						state.templates.invite.fields.title = text.command;
+					}
+					Q.Template.render(
+						'Streams/participants/invite',
+						state.templates.invite.fields,
+						function (err, html) {
+							if (err) return;
+							var $element = tool.$invite = $(html).insertBefore(tool.$avatars);
+							var filter = '.Streams_inviteTrigger';
+							$(tool.element).on(Q.Pointer.fastclick, filter, function () {
+								var options = Q.extend({
+									identifier: si.identifier
+								}, si);
+								Q.Streams.invite(
+									state.publisherId, 
+									state.streamName, 
+									options,
+									function (err, data) {
+										state.onInvited.handle.call(tool, err, data);
+									}
+								);
+								return false;
+							}).on(Q.Pointer.click, filter, function () {
+								return false;
+							}).on(Q.Pointer.start.eventName, filter, function () {
+								$(tool.element).addClass('Q_discouragePointerEvents');
+								function _pointerEndHandler() {
+									$(tool.element).removeClass('Q_discouragePointerEvents');
+									$(window).off(Q.Pointer.end, _pointerEndHandler);
 								}
-							);
-							return false;
-						}).on(Q.Pointer.click, filter, function () {
-							return false;
-						}).on(Q.Pointer.start.eventName, filter, function () {
-							$(tool.element).addClass('Q_discouragePointerEvents');
-							function _pointerEndHandler() {
-								$(tool.element).removeClass('Q_discouragePointerEvents');
-								$(window).off(Q.Pointer.end, _pointerEndHandler);
-							}
-							$(window).on(Q.Pointer.end, _pointerEndHandler);
-						});
+								$(window).on(Q.Pointer.end, _pointerEndHandler);
+							});
 
-						if (si.clickable) {
-							$('img', $element).plugin(
-								'Q/clickable', Q.extend({
-									triggers: $element
-								}, si.clickable)
-							);
-						}
-						Q.handle(callback, tool, []);
-						Q.handle(state.onRefresh, tool, []);
-					},
-					state.templates.invite
-				);
+							if (si.clickable) {
+								$('img', $element).plugin(
+									'Q/clickable', Q.extend({
+										triggers: $element
+									}, si.clickable)
+								);
+							}
+							Q.handle(callback, tool, []);
+							Q.handle(state.onRefresh, tool, []);
+						},
+						state.templates.invite
+					);
+				});
 			});
 		}
 

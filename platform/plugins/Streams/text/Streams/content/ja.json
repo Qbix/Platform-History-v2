@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "あなたが招待されました。ここで{{ClickOrTap}}を受け入れて参加してください。"
-        }
+        },
+        "youCanNowPaste": "このリンクをどこかに貼り付けて、人々を招待できます"
     },
     "followup": {
         "mobile": {

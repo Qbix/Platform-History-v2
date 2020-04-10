@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "U is genooi. {{ClickOrTap}} hier om te aanvaar en aan te sluit."
-        }
+        },
+        "youCanNowPaste": "U kan nou hierdie skakel êrens plak om mense uit te nooi"
     },
     "followup": {
         "mobile": {

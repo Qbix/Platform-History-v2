@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Anda telah diundang. {{ClickOrTap}} di sini untuk menerima dan bergabung."
-        }
+        },
+        "youCanNowPaste": "Anda sekarang dapat menempelkan tautan ini di suatu tempat untuk mengundang orang"
     },
     "followup": {
         "mobile": {

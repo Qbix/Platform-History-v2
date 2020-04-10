@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Umealikwa. {{ClickOrTap}} hapa kukubali na kujiunga."
-        }
+        },
+        "youCanNowPaste": "Sasa unaweza kubandika kiunga hiki mahali pengine ili kuwaalika watu"
     },
     "followup": {
         "mobile": {

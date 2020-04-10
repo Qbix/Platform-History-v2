@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Fe&#39;ch gwahoddwyd. {{ClickOrTap}} yma i dderbyn ac ymuno."
-        }
+        },
+        "youCanNowPaste": "Nawr gallwch chi gludo&#39;r ddolen hon yn rhywle i wahodd pobl"
     },
     "followup": {
         "mobile": {

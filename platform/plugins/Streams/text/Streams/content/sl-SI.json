@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Povabljeni ste bili. {{ClickOrTap}} tukaj, da sprejmete in se pridružite."
-        }
+        },
+        "youCanNowPaste": "Zdaj lahko to povezavo prilepite nekam, da povabite ljudi"
     },
     "followup": {
         "mobile": {

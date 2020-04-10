@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Inanyayahan ka. {{ClickOrTap}} dito upang tanggapin at sumali."
-        }
+        },
+        "youCanNowPaste": "Maaari mo na ngayong i-paste ang link na ito sa isang lugar upang anyayahan ang mga tao"
     },
     "followup": {
         "mobile": {

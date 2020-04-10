@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Ai fost invitat. {{ClickOrTap}} aici să accepți și să vă alăturați."
-        }
+        },
+        "youCanNowPaste": "Acum puteți lipi acest link undeva pentru a invita oameni"
     },
     "followup": {
         "mobile": {

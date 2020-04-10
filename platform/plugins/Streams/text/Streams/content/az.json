@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Siz dəvət olundu. {{ClickOrTap}} burada qəbul etmək və qoşulmaq."
-        }
+        },
+        "youCanNowPaste": "İndi bu linki insanları dəvət etmək üçün bir yerə yapışdıra bilərsiniz"
     },
     "followup": {
         "mobile": {

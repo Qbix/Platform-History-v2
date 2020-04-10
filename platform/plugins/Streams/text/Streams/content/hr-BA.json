@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Pozvani ste. {{ClickOrTap}} ovdje da prihvatite i pridružite se."
-        }
+        },
+        "youCanNowPaste": "Sada možete zalijepiti ovu vezu negdje da biste pozvali ljude"
     },
     "followup": {
         "mobile": {

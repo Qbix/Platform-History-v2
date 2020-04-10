@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Zostałeś zaproszony. {{ClickOrTap}} tutaj, aby zaakceptować i dołączyć."
-        }
+        },
+        "youCanNowPaste": "Możesz teraz wkleić ten link gdzieś, aby zaprosić osoby"
     },
     "followup": {
         "mobile": {

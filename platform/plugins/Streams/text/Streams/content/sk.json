@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Boli ste pozvaní. {{ClickOrTap}} tu prijať a pripojiť sa."
-        }
+        },
+        "youCanNowPaste": "Teraz môžete tento odkaz niekde prilepiť, aby ste pozvali ľudí"
     },
     "followup": {
         "mobile": {

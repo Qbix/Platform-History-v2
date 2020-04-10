@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Tugadh cuireadh duit. {{ClickOrTap}} anseo chun glacadh agus páirt a ghlacadh."
-        }
+        },
+        "youCanNowPaste": "Is féidir leat an nasc seo a ghreamú anois áit éigin chun cuireadh a thabhairt do dhaoine"
     },
     "followup": {
         "mobile": {

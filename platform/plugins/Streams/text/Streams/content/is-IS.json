@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Þú hefur verið boðið. {{ClickOrTap}} hér til að samþykkja og taka þátt."
-        }
+        },
+        "youCanNowPaste": "Þú getur núna límt þennan tengil einhvers staðar til að bjóða fólki"
     },
     "followup": {
         "mobile": {

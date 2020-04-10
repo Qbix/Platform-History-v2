@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Je bent uitgenodigd. {{ClickOrTap}} hier om te accepteren en deel te nemen."
-        }
+        },
+        "youCanNowPaste": "Je kunt deze link nu ergens plakken om mensen uit te nodigen"
     },
     "followup": {
         "mobile": {

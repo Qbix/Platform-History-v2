@@ -90,7 +90,8 @@
         },
         "notice": {
             "text": "Jūs esate pakviestas. {{ClickOrTap}} čia priimti ir prisijungti."
-        }
+        },
+        "youCanNowPaste": "Dabar galite įklijuoti šią nuorodą kur nors, kad pakviestumėte žmones"
     },
     "followup": {
         "mobile": {
