@@ -12183,7 +12183,7 @@ Q.Dialogs = {
 	 * @return {HTMLElement} The HTML element of the dialog that is on top.
 	 */
 	element: function (index) {
-		var $dialog = this.dialogs[this.dialogs.length-index-1];
+		var $dialog = this.dialogs[this.dialogs.length-(index||0)-1];
 		return $dialog && $dialog[0];
 	}
 

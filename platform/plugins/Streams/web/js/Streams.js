@@ -1401,7 +1401,9 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			Q.Text.get("Streams/content", function (err, result) {
 				var text = result && result.invite;
 				if (text) {
-					var element = Q.alert(text.YouCanNowPaste);
+					var element = Q.alert(text.youCanNowPaste, {
+						title: ''
+					});
 					setTimeout(function () {
 						if (element === Q.Dialogs.element()) {
 							Q.Dialogs.pop();
