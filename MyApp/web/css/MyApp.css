@@ -163,7 +163,7 @@ table { table-layout: fixed; }
 #dashboard .Q_tabs_tab,
 #dashboard .Q_tabs_tab>* { cursor: pointer; }
 #dashboard .Q_tabs_tab { text-decoration: none; color: white; }
-.Q_notTouchscreen #dashboard .Q_tabs_tab:not(.Q_current):hover { background: rgba(100, 100, 100, 0.); }
+.Q_notTouchscreen #dashboard .Q_tabs_tab:not(.Q_current):hover { background: rgba(100, 100, 100, 0.5); }
 #dashboard .Q_tabs_tab img { margin-right: 10px; width: 30px; }
 #dashboard .Q_tabs_tab span { display: inline; text-align: left; }
 #dashboard .Q_tabs_tab.Q_current { background-color: #eeeeee; background-image: url(../Q/plugins/Q/img/bg/stucco.png); color: black !important; }
