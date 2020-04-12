@@ -2743,12 +2743,12 @@ Q.Contextual = {
 					if (!(
 							(px >= conOffset.left && px <= conOffset.left + contextual.outerWidth() &&
 								py >= conOffset.top - (info.inBottomHalf ? 0 : info.arrowHeight) &&
-								py <= conOffset.top + contextual.outerHeight() + (info.inBottomHalf ? info.arrowHeight : 0)) ||
-							(px >= triggerOffset.left && px <= triggerOffset.left + trigger.outerWidth() &&
+								py <= conOffset.top + contextual.outerHeight() + (info.inBottomHalf ? info.arrowHeight : 0))
+						||	(px >= triggerOffset.left && px <= triggerOffset.left + trigger.outerWidth() &&
 								py >= triggerOffset.top && py <= triggerOffset.top + trigger.outerHeight())
-						)
-					)
-					{
+						|| (!info.inBottomHalf && py >= triggerOffset.bottom && py <= conOffset.top)
+						|| (info.inBottomHalf && py <= triggerOffset.top && py >= conOffset.bottom)
+					)) {
 						Q.Contextual.hide();
 					}
 				}

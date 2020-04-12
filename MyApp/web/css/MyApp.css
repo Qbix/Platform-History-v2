@@ -266,7 +266,7 @@ span.c3 { font-weight: bold; }
 
 .Q_notMobile .MyApp_dashboard_logo { float: left; padding: 0; margin: 5px 0 0 10px; background-position: left top; }
 .Q_notMobile .MyApp_dashboard_logo h1 { padding: 0; margin: 0; padding: 0 0 0 50px; line-height: 40px; }
-.Q_notMobile #dashboard .Q_tabs_tabs { text-align: center; }
+.Q_notMobile #dashboard .Q_tabs_tabs { text-align: center; max-height: 40px; }
 .Q_notMobile #dashboard .Q_tabs_tab { margin: 0 10px; }
 
 /* The following lines override default styles for a block-style website */
@@ -274,8 +274,8 @@ span.c3 { font-weight: bold; }
 html.Q_notMobile { height: 100%; }
 .Q_notMobile .MyApp_dashboard_logo { float: none; background-position: center top; background-repeat: no-repeat; padding-top: 100px; text-align: center; }
 .Q_notMobile body { height: 100%; }
-.Q_notMobile .MyApp_dashboard_logo { background-position: center top; }
-.Q_notMobile .MyApp_dashboard_logo h1 { padding: 250px 0 0 0; }
+.Q_notMobile #dashboard .MyApp_dashboard_logo { background-position: center top; padding-top: 250px; }
+.Q_notMobile #dashboard .MyApp_dashboard_logo h1 { padding: 0; display: none; }
 .Q_notMobile #dashboard a { display: block; }
 .Q_notMobile #dashboard>h1,
 .Q_notMobile #dashboard>h2 { float: none; }

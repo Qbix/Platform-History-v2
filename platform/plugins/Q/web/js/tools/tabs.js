@@ -21,7 +21,7 @@
 	 *  @param {String} [options.overflow.content] The html that is displayed when the tabs overflow. You can interpolate {{count}}, {{text}} or {{html}} in the string.
 	 *  @param {String} [options.overflow.glyph] Override the glyph that appears next to the overflow text. You can interpolate {{count}} here
 	 *  @param {String} [options.overflow.defaultText] The text to interpolate {{text}} in the content when no tab is selected
-	 *  @param {String} [options.overflow.defaultHtml] The text to interpolate {{text}} in the content when no tab is selected
+	 *  @param {String} [options.overflow.defaultHtml] The html to interpolate {{html}} in the content when no tab is selected
 	 *  @param {String} [options.selectors] Object of {slotName: selector} pairs, where the values are CSS style selectors indicating the element to update with javascript, and can be a parent of the tabs. Set to null to reload the page.
 	 *  @param {String} [options.slot] The name of the slot to request when changing tabs with javascript.
 	 *  @param {Function} [options.loader] Name of a function which takes url, slot, callback. It should call the callback and pass it an object with the response info. Can be used to implement caching, etc. instead of the default HTTP request. This function shall be Q.batcher getter
@@ -331,7 +331,7 @@
 				var tool = this;
 				var state = tool.state;
 				var $te = $(tool.element);
-				var w = $te.find('.Q_tabs_tabs').width();
+				var w = Math.min($te.width(), $te[0].remainingWidth());
 				var w2 = 0, w3 = 0, index = -10;
 				var $o = $('.Q_tabs_overflow', $te);
 				state.tabName = null;
@@ -370,10 +370,13 @@
 					index = 0;
 				} else {
 					$tabs.each(function (i) {
+						var cs = this.computedStyle();
 						var $t = $(this);
 						w3 = w2;
-						w2 += $t.outerWidth(true);
-						if (w2 > w + $tabs.length) {
+						w2 += this.getBoundingClientRect().width
+							+ parseFloat(cs.marginLeft)
+							+ parseFloat(cs.marginRight);
+						if (w2 > w-1) {
 							index = i-1;
 							return false;
 						}
@@ -389,11 +392,16 @@
 					$overflow = $('<li class="Q_tabs_tab Q_tabs_overflow" />')
 						.css('visibility', 'visible')
 						.html(state.overflow.content.interpolate(values));
+					if (state.overflow.glyph) {
+						$('<span class="Q_tabs_overflowGlyph" />')
+							.html(state.overflow.glyph.interpolate(values))
+							.prependTo($overflow);
+					}
 					var oneLess = !!state.compact;
 					if (!oneLess) {
 						$overflow.insertAfter($lastVisibleTab);
 						// REFLOW happens here
-						if ($overflow.outerWidth(true) > w - w3) {
+						if ($overflow.outerWidth(true) > w - w3 - 1) {
 							oneLess = true;
 						}
 					}
@@ -402,11 +410,11 @@
 						values.count = $tabs.length - index - 1;
 						$overflow.insertBefore($lastVisibleTab)
 							.html(this.state.overflow.content.interpolate(values));
-					}
-					if (state.overflow.glyph) {
-						$('<span class="Q_tabs_overflowGlyph" />')
-							.html(state.overflow.glyph.interpolate(values))
-							.prependTo($overflow);
+						if (state.overflow.glyph) {
+							$('<span class="Q_tabs_overflowGlyph" />')
+								.html(state.overflow.glyph.interpolate(values))
+								.prependTo($overflow);
+						}
 					}
 				}
 				if (!$overflow) {

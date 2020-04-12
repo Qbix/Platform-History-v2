@@ -12283,18 +12283,19 @@ Q.confirm = function(message, callback, options) {
 		'fullscreen': false,
 		'hidePrevious': true
 	}, options));
-	var $dialog = $(dialog);
-	$dialog.find('.Q_buttons button:first').on(Q.Pointer.end, function() {
+	var buttons = dialog.querySelectorAll('.Q_buttons button');
+	Q.addEventListener(buttons[0], Q.Pointer.end, function () {
 		buttonClicked = true;
 		Q.Dialogs.pop();
 		Q.handle(callback, root, [true]);
 	});
-	$dialog.find('.Q_buttons button:last').on(Q.Pointer.end, function() {
+	Q.addEventListener(buttons[0], Q.Pointer.end, function () {
 		buttonClicked = true;
 		Q.Dialogs.pop();
 		Q.handle(callback, root, [false]);
 	});
-	return $dialog;
+	var buttonYes = dialog.querySelectorAll('.Q_buttons button:first-child')[0];
+	return dialog;
 };
 
 Q.confirm.options = {
@@ -12373,9 +12374,9 @@ Q.prompt = function(message, callback, options) {
 		'fullscreen': false,
 		'hidePrevious': true
 	}, options));
-	var $dialog = $(dialog);
-	$dialog.find('button').on(Q.Pointer.click, _done);
-	return $dialog;
+	var button = dialog.querySelector('.Q_buttons button');
+	Q.addEventListener(button, Q.Pointer.click, _done);
+	return dialog;
 };
 Q.prompt.options = {
 	title: 'Prompt',
