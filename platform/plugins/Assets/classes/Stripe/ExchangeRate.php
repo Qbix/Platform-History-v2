@@ -3,42 +3,26 @@
 namespace Stripe;
 
 /**
- * Class ExchangeRate
+ * <code>Exchange Rate</code> objects allow you to determine the rates that Stripe
+ * is currently using to convert from one currency to another. Since this number is
+ * variable throughout the day, there are various reasons why you might want to
+ * know the current rate (for example, to dynamically price an item for a user with
+ * a default payment in a foreign currency).
  *
- * @package Stripe
+ * If you want a guarantee that the charge is made with a certain exchange rate you
+ * expect is current, you can pass in <code>exchange_rate</code> to charges
+ * endpoints. If the value is no longer up to date, the charge won't go through.
+ * Please refer to our <a href="https://stripe.com/docs/exchange-rates">Exchange
+ * Rates API</a> guide for more details.
+ *
+ * @property string $id Unique identifier for the object. Represented as the three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a> in lowercase.
+ * @property string $object String representing the object's type. Objects of the same type share the same value.
+ * @property \Stripe\StripeObject $rates Hash where the keys are supported currencies and the values are the exchange rate at which the base id currency converts to the key currency.
  */
 class ExchangeRate extends ApiResource
 {
-    /**
-     * This is a special case because the exchange rates endpoint has an
-     *    underscore in it. The parent `className` function strips underscores.
-     *
-     * @return string The name of the class.
-     */
-    public static function className()
-    {
-        return 'exchange_rate';
-    }
+    const OBJECT_NAME = 'exchange_rate';
 
-    /**
-     * @param array|string $currency
-     * @param array|string|null $opts
-     *
-     * @return ExchangeRate
-     */
-    public static function retrieve($currency, $opts = null)
-    {
-        return self::_retrieve($currency, $opts);
-    }
-
-    /**
-     * @param array|null $params
-     * @param array|string|null $opts
-     *
-     * @return ExchangeRate
-     */
-    public static function all($params = null, $opts = null)
-    {
-        return self::_all($params, $opts);
-    }
+    use ApiOperations\All;
+    use ApiOperations\Retrieve;
 }
