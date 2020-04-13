@@ -453,9 +453,9 @@ window.WebRTCconferenceLib = function app(options){
 		 * have-local-pranswer
 		 *
 		 * @property signallingState
-		 * @type {String}
+		 * @type {Object}
 		 */
-		this.signallingState = false;
+		this.signalingState = {state:null, stage:null};
 		//this.audioStream = null;
 		//this.videoStream = null;
 		/**
@@ -2414,10 +2414,14 @@ window.WebRTCconferenceLib = function app(options){
 			}
 
 			function stopRecorder() {
-				if(_mediaRecorder == null) return;
+                log('stopRecorder')
+
+                if(_mediaRecorder == null) return;
 				if(options.liveStreaming.useRecordRTCLibrary) {
-					_mediaRecorder.stopRecording(function () {
-						/*document.querySelector('.Streams_webrtc_streaming_item').addEventListener('click', function () {
+                    log('stopRecorder: RecordRTC')
+
+                    _mediaRecorder.stopRecording(function () {
+						document.querySelector('.Streams_webrtc_recording').addEventListener('click', function () {
 
 							var fileName = 'test.webm';
 							var file = new File([_mediaRecorder.getBlob()], fileName, {
@@ -2426,14 +2430,78 @@ window.WebRTCconferenceLib = function app(options){
 							invokeSaveAsDialog(file, fileName);
 
 
-						})*/
+						})
 					});
 				} else {
-					_mediaRecorder.stop();
+                    log('stopRecorder: native')
+
+                    _mediaRecorder.stop();
+                    document.querySelector('.Streams_webrtc_recording').addEventListener('click', function () {
+
+
+                        var blobToSave = new Blob(fbLive.videoStream().allBlobs);
+
+                        var fileName = 'test.webm';
+                        var file = new File([blobToSave], fileName, {
+                            type: 'video/webm;codecs=h264'
+                        });
+                        saveToFile(file, fileName);
+
+
+                    })
 				}
 				videoComposer.stop();
 				audioComposer.stop();
 			}
+
+            function saveToFile(file, fileName) {
+				log('saveToFile')
+                if (!file) {
+                    throw 'Blob object is required.';
+                }
+
+                if (!file.type) {
+                    try {
+                        file.type = 'video/webm';
+                    } catch (e) {}
+                }
+
+                var fileExtension = (file.type || 'video/webm').split('/')[1];
+
+                if (fileName && fileName.indexOf('.') !== -1) {
+                    var splitted = fileName.split('.');
+                    fileName = splitted[0];
+                    fileExtension = splitted[1];
+                }
+
+                var fileFullName = (fileName || (Math.round(Math.random() * 9999999999) + 888888888)) + '.' + fileExtension;
+
+                if (typeof navigator.msSaveOrOpenBlob !== 'undefined') {
+                    return navigator.msSaveOrOpenBlob(file, fileFullName);
+                } else if (typeof navigator.msSaveBlob !== 'undefined') {
+                    return navigator.msSaveBlob(file, fileFullName);
+                }
+
+                var hyperlink = document.createElement('a');
+                hyperlink.href = URL.createObjectURL(file);
+                hyperlink.download = fileFullName;
+
+                hyperlink.style = 'display:none;opacity:0;color:transparent;';
+                (document.body || document.documentElement).appendChild(hyperlink);
+
+                if (typeof hyperlink.click === 'function') {
+                    hyperlink.click();
+                } else {
+                    hyperlink.target = '_blank';
+                    hyperlink.dispatchEvent(new MouseEvent('click', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true
+                    }));
+                }
+
+                URL.revokeObjectURL(hyperlink.href);
+            }
 
 			function stopCanvasRendering() {
 				videoComposer.stop();
@@ -2499,8 +2567,10 @@ window.WebRTCconferenceLib = function app(options){
 			}
 
 			function onDataAvailablehandler(blob) {
+                //log('fbLive onDataAvailablehandler');
 
 				_videoStream.blobs.push(blob);
+                _videoStream.allBlobs.push(blob);
 
 				_videoStream.size += blob.size;
 
@@ -2584,6 +2654,99 @@ window.WebRTCconferenceLib = function app(options){
 						app.event.dispatch('facebookLiveStreamingStarted', localParticipant);
 						app.eventBinding.sendDataTrackMessage("facebookLiveStreamingStarted");
 					});
+				},
+				videoStream:function () {
+					return _videoStream;
+                }
+			}
+		}())
+
+		var videoRecorder = (function () {
+			var _videoStream = {blobs: [], allBlobs: [], size: 0}
+
+			function onDataAvailablehandler(blob) {
+
+				_videoStream.blobs.push(blob);
+                _videoStream.allBlobs.push(blob);
+
+				_videoStream.size += blob.size;
+			}
+
+            function saveToFile(file, fileName) {
+                log('saveToFile')
+                if (!file) {
+                    throw 'Blob object is required.';
+                }
+
+                if (!file.type) {
+                    try {
+                        file.type = 'video/webm';
+                    } catch (e) {}
+                }
+
+                var fileExtension = (file.type || 'video/webm').split('/')[1];
+
+                if (fileName && fileName.indexOf('.') !== -1) {
+                    var splitted = fileName.split('.');
+                    fileName = splitted[0];
+                    fileExtension = splitted[1];
+                }
+
+                var fileFullName = (fileName || (Math.round(Math.random() * 9999999999) + 888888888)) + '.' + fileExtension;
+
+                if (typeof navigator.msSaveOrOpenBlob !== 'undefined') {
+                    return navigator.msSaveOrOpenBlob(file, fileFullName);
+                } else if (typeof navigator.msSaveBlob !== 'undefined') {
+                    return navigator.msSaveBlob(file, fileFullName);
+                }
+
+                var hyperlink = document.createElement('a');
+                hyperlink.href = URL.createObjectURL(file);
+                hyperlink.download = fileFullName;
+
+                hyperlink.style = 'display:none;opacity:0;color:transparent;';
+                (document.body || document.documentElement).appendChild(hyperlink);
+
+                if (typeof hyperlink.click === 'function') {
+                    hyperlink.click();
+                } else {
+                    hyperlink.target = '_blank';
+                    hyperlink.dispatchEvent(new MouseEvent('click', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: true
+                    }));
+                }
+
+                URL.revokeObjectURL(hyperlink.href);
+            }
+
+			function startRecording(callback) {
+                log('startRecording');
+
+                canvasComposer.captureStream(function (blob) {
+                    onDataAvailablehandler(blob);
+                });
+
+                if(callback != null) callback();
+                app.event.dispatch('videoRecordingStarted', localParticipant);
+                //app.eventBinding.sendDataTrackMessage("facebookLiveStreamingStarted");
+            }
+
+            function stopRecording(callback) {
+                log('stopRecording');
+
+                canvasComposer.stopRecorder();
+                if(callback != null) callback();
+                app.event.dispatch('videoRecordingStopped', localParticipant);
+                //app.eventBinding.sendDataTrackMessage("facebookLiveStreamingEnded");
+            }
+
+			return {
+                startRecording: startRecording,
+                stopRecording: stopRecording,
+                isRecording: function () {
+					return false;
 				}
 			}
 		}())
@@ -3515,6 +3678,7 @@ window.WebRTCconferenceLib = function app(options){
 			audioVisualization: audioVisualization,
 			createAudioAnalyser: createAudioAnalyser,
 			canvasComposer:canvasComposer,
+            videoRecorder:videoRecorder,
 			fbLive:fbLive,
 			youtubeLiveUploader:youtubeLiveUploader,
 			addScreenToCommonList:addScreenToCommonList,
@@ -4284,6 +4448,53 @@ window.WebRTCconferenceLib = function app(options){
 					existingParticipant.latestOnlineTime = performance.now();
 				}
 			});
+
+			socket.on('Streams/webrtc/canISendOffer', function (message){
+
+				if(message.type == 'request') {
+					log('got canISendOffer REQUEST');
+
+                    var participant = roomParticipants.filter(function (roomParticipant) {
+                        return roomParticipant.sid == message.fromSid;
+                    })[0];
+
+                    /*if (participant.isNegotiating === false) {
+                        log('got canISendOffer REQUEST: send reverse offer');
+
+                        participant.shouldSendReverseOffer = true;
+                        participant.negotiate();
+                        participant.shouldSendReverseOffer = false;
+                    } else if (participant.isNegotiating === true) {
+                        log('got canISendOffer REQUEST: add offer to queue');
+
+                        participant.shouldSendReverseOffer = true;
+                    }*/
+
+                    if (participant.isNegotiating === false) {
+                       log('got canISendOffer REQUEST: yes, waiting for offer');
+
+                       socket.emit('Streams/webrtc/canISendOffer', {
+                            'type': 'answer',
+                            'targetSid': message.fromSid,
+                            'answerValue': true
+                        });
+                        participant.waitingForOffer = true;
+                    } else if (participant.isNegotiating === true) {
+                       log('got canISendOffer REQUEST: add offer to queue');
+                        socket.emit('Streams/webrtc/canISendOffer', {
+                            'type': 'answer',
+                            'targetSid': message.fromSid,
+                            'answerValue': false
+                        });
+                       participant.shouldSendReverseOffer = true;
+                    }
+
+				} else if (message.type == 'answer') {
+                    log('got canISendOffer ANSWER',message);
+
+                    app.event.dispatch('canISendOffer', message);
+				}
+			});
 		}
 
 		function setH264AsPreffered(description) {
@@ -4365,11 +4576,16 @@ window.WebRTCconferenceLib = function app(options){
 
 				function createOffer(hasPriority, resetConnection){
 					log('createOffer', participant.username, participant.identity, participant.sid)
-					participant.isNegotiating = true;
 
-					newPeerConnection.createOffer({ 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true })
+					participant.isNegotiating = true;
+                    participant.currentOfferId = hasPriority;
+                    participant.signalingState.stage = 'offerCreating';
+
+
+                    newPeerConnection.createOffer({ 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true })
 						.then(function(offer) {
 							log('createOffer: offer created', hasPriority, participant.hasNewOffersInQueue, participant.currentOfferId, participant.RTCPeerConnection.signalingState, offer)
+                            participant.signalingState.stage = 'offerCreated';
 
 							//In the case when renegotiationneeded was triggered right after initial offer was created
 							//this cancels initial offer before signalingState will be changed to have-local-offer
@@ -4380,11 +4596,10 @@ window.WebRTCconferenceLib = function app(options){
 
 							//In case, when multiple renegotiationneeded events was triggered one after another,
 							//this will cancel all offers but last. It's highly unlikely that this scenario will ever happen.
-							if(participant.currentOfferId || (participant.hasNewOffersInQueue !== false && hasPriority != null && participant.hasNewOffersInQueue > hasPriority)) {
+							/*if(participant.hasNewOffersInQueue !== false && hasPriority != null && participant.hasNewOffersInQueue > hasPriority) {
 								log('createOffer: offer created: RENEGOTIATING WAS CANCELED as priority: ' + hasPriority + '/' + participant.hasNewOffersInQueue);
 								return;
-							}
-							participant.currentOfferId = hasPriority;
+							}*/
 
 							var localDescription;
 							if(typeof cordova != 'undefined' && _isiOS) {
@@ -4401,7 +4616,8 @@ window.WebRTCconferenceLib = function app(options){
 
 
                             return newPeerConnection.setLocalDescription(localDescription).then(function () {
-								log('createOffer: offer created: sending', participant.hasNewOffersInQueue, participant.currentOfferId, participant.RTCPeerConnection.signalingState)
+								log('createOffer: offer created: sending', participant.hasNewOffersInQueue, participant.currentOfferId, participant.RTCPeerConnection.signalingState);
+                                participant.signalingState.stage = 'offerSent';
 								sendMessage({
 									name: localParticipant.identity,
 									targetSid: participant.sid,
@@ -4417,21 +4633,55 @@ window.WebRTCconferenceLib = function app(options){
 				}
 
 				function negotiate() {
-					log('negotiate START', newPeerConnection.signalingState,  participant.hasNewOffersInQueue,  participant.currentOfferId);
-					if(participant.isNegotiating) {
-						log('negotiate CANCELING NEGOTIATION');
+					log('negotiate START', newPeerConnection.signalingState, participant.isNegotiating, participant.hasNewOffersInQueue,  participant.currentOfferId, participant.shouldSendReverseOffer);
 
-						participant.hasNewOffersInQueue = participant.hasNewOffersInQueue !== false ? participant.hasNewOffersInQueue + 1 : 0;
-						return;
+					if(participant.waitingForOffer || participant.waitingForReverseOffer) {
+                        log('negotiate CANCELING NEGOTIATION: waitingForOffer');
+                        return;
+                    }
+
+					var startNegotiating = function () {
+                        var incrementOffersQueue = function () {
+                            if(participant.currentOfferId !== false && participant.hasNewOffersInQueue == false){
+                                participant.hasNewOffersInQueue = participant.currentOfferId + 1;
+                            } else {
+                                participant.hasNewOffersInQueue = participant.hasNewOffersInQueue !== false ? participant.hasNewOffersInQueue + 1 : 0;
+                            }
+                        }
+
+                        if(participant.isNegotiating /*&& participant.signalingState.stage != 'offerCreating'*/) {
+                            log('negotiate CANCELING NEGOTIATION');
+
+                            incrementOffersQueue();
+                            return;
+                        }
+
+                        incrementOffersQueue();
+
+
+                        log('negotiate CONTINUE', participant.hasNewOffersInQueue)
+                        //if(newPeerConnection.connectionState == 'new' && newPeerConnection.iceConnectionState == 'new' && newPeerConnection.iceGatheringState == 'new') return;
+
+                        createOffer(participant.hasNewOffersInQueue);
+                        if(participant.shouldSendReverseOffer) participant.shouldSendReverseOffer = false;
+                    }
+
+                    if(!participant.shouldSendReverseOffer && !participant.isNegotiating && (/*!(participant.localInfo.browserName == 'Chrome' && participant.localInfo.browserVersion >= 80) ||*/ participant.localInfo.browserName != 'Firefox')) {
+                        log('negotiate: ask permission for offer');
+
+                        canISendOffer(participant).then(function (order) {
+                            if(order === true) {
+                            	startNegotiating();
+                            } else {
+                                participant.hasNewOffersInQueue = false;
+                                participant.waitingForReverseOffer = true;
+							}
+
+                        });
+                        return;
+                    } else {
+                        startNegotiating();
 					}
-
-					participant.hasNewOffersInQueue = participant.hasNewOffersInQueue !== false ? participant.hasNewOffersInQueue + 1 : 0;
-
-
-					log('negotiate CONTINUE', participant.hasNewOffersInQueue)
-					//if(newPeerConnection.connectionState == 'new' && newPeerConnection.iceConnectionState == 'new' && newPeerConnection.iceGatheringState == 'new') return;
-
-					createOffer(participant.hasNewOffersInQueue);
 				}
 				participant.negotiate = negotiate;
 
@@ -4469,27 +4719,35 @@ window.WebRTCconferenceLib = function app(options){
 				}
 
 				newPeerConnection.onsignalingstatechange = function (e) {
-					log('socketParticipantConnected: onsignalingstatechange = ' + newPeerConnection.signalingState, participant.signalingState, participant.hasNewOffersInQueue, participant.currentOfferId)
+					log('socketParticipantConnected: onsignalingstatechange = ' + newPeerConnection.signalingState, participant.signalingState.state, participant.hasNewOffersInQueue, participant.currentOfferId)
 
 
 					if(newPeerConnection.signalingState == 'stable') {
 
-						if(participant.signalingState == 'have-remote-offer' || participant.signalingState == 'have-local-offer') {
-							if(participant.hasNewOffersInQueue !== false && participant.currentOfferId !== false && participant.hasNewOffersInQueue > participant.currentOfferId) {
+						if(participant.signalingState.state == 'have-remote-offer' || participant.signalingState.state == 'have-local-offer') {
+							/*
+							(participant.hasNewOffersInQueue !== false && participant.currentOfferId === false)
+								if I have incoming offer when onnegotiationneeded event triggered
+							(participant.hasNewOffersInQueue !== false && participant.currentOfferId !== false && participant.hasNewOffersInQueue > participant.currentOfferId)
+								if I created offer but negotiating still was in progress when onnegotiationneeded event triggered
+							*/
+							if((participant.hasNewOffersInQueue !== false && participant.currentOfferId !== false && participant.hasNewOffersInQueue > participant.currentOfferId)
+                                || (participant.hasNewOffersInQueue !== false && participant.currentOfferId === false)
+								|| participant.shouldSendReverseOffer) {
 								log('socketParticipantConnected: answer sent: STARTING NEW NEGOTIATION AGAIN ', participant.hasNewOffersInQueue, participant.currentOfferId)
 
 								participant.isNegotiating = false;
 								participant.currentOfferId = false;
-								participant.negotiate();
+                                participant.signalingState.stage = null;
+
+                                participant.negotiate();
 							} else {
 								participant.hasNewOffersInQueue = false;
 								participant.isNegotiating = false;
 								participant.currentOfferId = false;
-							}
+                                participant.signalingState.stage = null;
+                            }
 						}
-
-
-						//participant.isNegotiating = false;
 
 						for(var i = participant.iceCandidatesQueue.length - 1; i >= 0 ; i--){
 							if(participant.iceCandidatesQueue[i] != null) {
@@ -4501,7 +4759,7 @@ window.WebRTCconferenceLib = function app(options){
 						}
 					}
 
-					participant.signalingState = newPeerConnection.signalingState;
+					participant.signalingState.state = newPeerConnection.signalingState;
 				};
 
 				newPeerConnection.oniceconnectionstatechange = function (e) {
@@ -4732,18 +4990,20 @@ window.WebRTCconferenceLib = function app(options){
 					//if (newPeerConnection._negotiating == true) return;
 					log('createOffer', senderParticipant.username, senderParticipant.identity, senderParticipant.sid)
 					senderParticipant.isNegotiating = true;
+                    senderParticipant.currentOfferId = hasPriority;
+                    senderParticipant.signalingState.stage = 'offerCreating';
 
 					newPeerConnection.createOffer({ 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true })
 						.then(function(offer) {
 							log('createOffer: offer created', senderParticipant.hasNewOffersInQueue, senderParticipant.currentOfferId, senderParticipant.RTCPeerConnection.signalingState, offer)
+                            senderParticipant.signalingState.stage = 'offerCreated';
 
 							//In case, when multiple renegotiationneeded events was triggered one after another,
 							//this will cancel all offers but last. It's highly unlikely that this scenario will ever happen.
-							if(senderParticipant.hasNewOffersInQueue !== false && hasPriority != null && senderParticipant.hasNewOffersInQueue > hasPriority) {
+							/*if(senderParticipant.hasNewOffersInQueue !== false && hasPriority != null && senderParticipant.hasNewOffersInQueue > hasPriority) {
 								log('createOffer: offer created: RENEGOTIATING WAS CANCELED as priority: ' + hasPriority + '/' + senderParticipant.hasNewOffersInQueue);
 								return;
-							}
-							senderParticipant.currentOfferId = hasPriority;
+							}*/
 
 							var localDescription;
 							if(typeof cordova != 'undefined' && _isiOS) {
@@ -4760,8 +5020,10 @@ window.WebRTCconferenceLib = function app(options){
 
 
                             return newPeerConnection.setLocalDescription(localDescription).then(function () {
-								log('createOffer: offer created: sending', senderParticipant.hasNewOffersInQueue, senderParticipant.currentOfferId, senderParticipant.RTCPeerConnection.signalingState)
-								sendMessage({
+								log('createOffer: offer created: sending', senderParticipant.hasNewOffersInQueue, senderParticipant.currentOfferId, senderParticipant.RTCPeerConnection.signalingState);
+                                senderParticipant.signalingState.stage = 'offerSent';
+
+                                sendMessage({
 									name: localParticipant.identity,
 									targetSid: senderParticipant.sid,
 									type: "offer",
@@ -4774,23 +5036,57 @@ window.WebRTCconferenceLib = function app(options){
 						});
 				}
 
-				function negotiate() {
-					log('negotiate START', newPeerConnection.signalingState,  senderParticipant.hasNewOffersInQueue,  senderParticipant.currentOfferId);
-					if(senderParticipant.isNegotiating && ( senderParticipant.currentOfferId !== false /*newPeerConnection.signalingState != 'stable'*/)) {
-						log('negotiate CANCELING NEGOTIATION');
+                function negotiate() {
+                    log('negotiate START', newPeerConnection.signalingState, senderParticipant.isNegotiating, senderParticipant.hasNewOffersInQueue,  senderParticipant.currentOfferId, senderParticipant.shouldSendReverseOffer);
 
-						senderParticipant.hasNewOffersInQueue = senderParticipant.hasNewOffersInQueue !== false ? senderParticipant.hasNewOffersInQueue + 1 : 0;
-						return;
-					}
+                    if(senderParticipant.waitingForOffer || senderParticipant.waitingForReverseOffer) {
+                        log('negotiate CANCELING NEGOTIATION: waitingForOffer');
+                        return;
+                    }
 
-					senderParticipant.hasNewOffersInQueue = senderParticipant.hasNewOffersInQueue !== false ? senderParticipant.hasNewOffersInQueue + 1 : 0;
+                    var startNegotiating = function () {
+                        var incrementOffersQueue = function () {
+                            if(senderParticipant.currentOfferId !== false && senderParticipant.hasNewOffersInQueue == false){
+                                senderParticipant.hasNewOffersInQueue = senderParticipant.currentOfferId + 1;
+                            } else {
+                                senderParticipant.hasNewOffersInQueue = senderParticipant.hasNewOffersInQueue !== false ? senderParticipant.hasNewOffersInQueue + 1 : 0;
+                            }
+                        }
+
+                        if(senderParticipant.isNegotiating /*&& senderParticipant.signalingState.stage != 'offerCreating'*/) {
+                            log('negotiate CANCELING NEGOTIATION');
+
+                            incrementOffersQueue();
+                            return;
+                        }
+
+                        incrementOffersQueue();
 
 
-					log('negotiate CONTINUE', senderParticipant.hasNewOffersInQueue)
-					//if(newPeerConnection.connectionState == 'new' && newPeerConnection.iceConnectionState == 'new' && newPeerConnection.iceGatheringState == 'new') return;
+                        log('negotiate CONTINUE', senderParticipant.hasNewOffersInQueue)
+                        //if(newPeerConnection.connectionState == 'new' && newPeerConnection.iceConnectionState == 'new' && newPeerConnection.iceGatheringState == 'new') return;
 
-					createOffer(senderParticipant.hasNewOffersInQueue);
-				}
+                        createOffer(senderParticipant.hasNewOffersInQueue);
+                        if(senderParticipant.shouldSendReverseOffer) senderParticipant.shouldSendReverseOffer = false;
+                    }
+
+                    if(!senderParticipant.shouldSendReverseOffer && !senderParticipant.isNegotiating && (/*!(senderParticipant.localInfo.browserName == 'Chrome' && senderParticipant.localInfo.browserVersion >= 80) || */senderParticipant.localInfo.browserName != 'Firefox')) {
+                        log('negotiate: ask permission for offer');
+
+                        canISendOffer(senderParticipant).then(function (order) {
+                            if(order === true) {
+                                startNegotiating();
+                            } else {
+                                senderParticipant.hasNewOffersInQueue = false;
+                                senderParticipant.waitingForReverseOffer = true;
+                            }
+
+                        });
+                        return;
+                    } else {
+                        startNegotiating();
+                    }
+                }
 
 				if('ontrack' in newPeerConnection) {
 					newPeerConnection.ontrack = function (e) {
@@ -4812,18 +5108,22 @@ window.WebRTCconferenceLib = function app(options){
 					log('offerReceived: onsignalingstatechange: ' + newPeerConnection.signalingState, e);
 
 					if(newPeerConnection.signalingState == 'stable') {
-						if(senderParticipant.signalingState == 'have-remote-offer' || senderParticipant.signalingState == 'have-local-offer') {
-							if(senderParticipant.hasNewOffersInQueue !== false && senderParticipant.currentOfferId !== false && senderParticipant.hasNewOffersInQueue > senderParticipant.currentOfferId) {
+						if(senderParticipant.signalingState.state == 'have-remote-offer' || senderParticipant.signalingState.state == 'have-local-offer') {
+							if((senderParticipant.hasNewOffersInQueue !== false && senderParticipant.currentOfferId !== false && senderParticipant.hasNewOffersInQueue > senderParticipant.currentOfferId)
+								|| (senderParticipant.hasNewOffersInQueue !== false && senderParticipant.currentOfferId === false)
+                                || senderParticipant.shouldSendReverseOffer) {
 								log('offerReceived: answer sent: STARTING NEW NEGOTIATION AGAIN ', senderParticipant.hasNewOffersInQueue, senderParticipant.currentOfferId)
 
 								senderParticipant.isNegotiating = false;
 								senderParticipant.currentOfferId = false;
-								senderParticipant.negotiate();
+                                senderParticipant.signalingState.stage = null;
+                                senderParticipant.negotiate();
 							} else {
 								senderParticipant.hasNewOffersInQueue = false;
 								senderParticipant.isNegotiating = false;
 								senderParticipant.currentOfferId = false;
-							}
+                                senderParticipant.signalingState.stage = null;
+                            }
 						}
 
 						for(var i = senderParticipant.iceCandidatesQueue.length - 1; i >= 0 ; i--){
@@ -4837,7 +5137,7 @@ window.WebRTCconferenceLib = function app(options){
 						}
 					}
 
-					senderParticipant.signalingState = newPeerConnection.signalingState;
+					senderParticipant.signalingState.state = newPeerConnection.signalingState;
 
 				};
 
@@ -4965,6 +5265,8 @@ window.WebRTCconferenceLib = function app(options){
 					socketParticipantConnected().initPeerConnection(message);
 					return;
 				}
+
+				//TODO: add chrome > 80 and firefox exceptions
 				if(senderParticipant && senderParticipant.isNegotiating && !message.resetConnection) {
 					return;
 				}
@@ -4992,7 +5294,10 @@ window.WebRTCconferenceLib = function app(options){
 				}
 
 				senderParticipant.isNegotiating = true;
-				senderParticipant.currentOfferId = senderParticipant.hasNewOffersInQueue !== false ? senderParticipant.hasNewOffersInQueue + 1 : 0;
+                senderParticipant.waitingForReverseOffer = false;
+                senderParticipant.waitingForOffer = false;
+				senderParticipant.signalingState.stage = 'offerReceived';
+				//senderParticipant.currentOfferId = senderParticipant.hasNewOffersInQueue !== false ? senderParticipant.hasNewOffersInQueue + 1 : 0;
 
 				var description;
 				if(typeof cordova != 'undefined' && _isiOS) {
@@ -5025,18 +5330,20 @@ window.WebRTCconferenceLib = function app(options){
 				}
 
 				senderParticipant.RTCPeerConnection.setRemoteDescription(description).then(function () {
-
+                    senderParticipant.signalingState.stage = 'offerApplied';
 					senderParticipant.RTCPeerConnection.createAnswer()
 						.then(function(answer) {
 							log('offerReceived: answer created');
+                            senderParticipant.signalingState.stage = 'answerCreated';
 
-							if(_isiOS){
+                            if(_isiOS){
 								//answer.sdp = removeInactiveTracksFromSDP(answer.sdp);
 								log('offerReceived: removeInactiveTracksFromSDP: ' + answer.sdp);
 							}
 
 							return senderParticipant.RTCPeerConnection.setLocalDescription(answer).then(function () {
 								log('offerReceived: answer created: sending', answer);
+                                senderParticipant.signalingState.stage = 'answerSent';
 
 								sendMessage({
 									name: localParticipant.identity,
@@ -5076,21 +5383,71 @@ window.WebRTCconferenceLib = function app(options){
 			var peerConnection = senderParticipant.RTCPeerConnection;
 
 			peerConnection.setRemoteDescription(description).then(function () {
-				//senderParticipant.isNegotiating = false;
 				log('answerRecieved setRemoteDescription ', peerConnection.signalingState, senderParticipant.hasNewOffersInQueue, senderParticipant.currentOfferId)
 
-				if(senderParticipant.hasNewOffersInQueue !== false && senderParticipant.currentOfferId !== false && senderParticipant.hasNewOffersInQueue > senderParticipant.currentOfferId) {
+				if((senderParticipant.hasNewOffersInQueue !== false && senderParticipant.currentOfferId !== false && senderParticipant.hasNewOffersInQueue > senderParticipant.currentOfferId)
+                    || (senderParticipant.hasNewOffersInQueue !== false && senderParticipant.currentOfferId === false)
+                    || senderParticipant.shouldSendReverseOffer) {
 					log('answerRecieved STARTING NEW NEGOTIATION AGAIN ', senderParticipant.hasNewOffersInQueue, senderParticipant.currentOfferId)
 
 					senderParticipant.isNegotiating = false;
 					senderParticipant.currentOfferId = false;
-					senderParticipant.negotiate();
+                    senderParticipant.signalingState.stage = null;
+                    senderParticipant.negotiate();
 				} else {
 					senderParticipant.hasNewOffersInQueue = false;
 					senderParticipant.isNegotiating = false;
 					senderParticipant.currentOfferId = false;
-				}
+                    senderParticipant.signalingState.stage = null;
+                }
 			});
+		}
+
+		function canISendOffer(participant) {
+            log('canISendOffer');
+            /*socket.emit('Streams/webrtc/reverseOfferRequest', {
+                targetSid: participant.sid,
+                type: "request",
+            }, function(response) {
+                if (response.error) {
+                    console.error(response.error);
+                } else {
+                    log('reverse offer request sent');
+                    participant.waitingForReverseOffer = true;
+                }
+            });*/
+            return new Promise((resolve, reject) => {
+
+                if (!socket) {
+                    reject('No socket connection.');
+                } else {
+                    socket.emit('Streams/webrtc/canISendOffer', {
+                        targetSid: participant.sid,
+                        type: "request",
+                    });
+                    log('canISendOffer sent')
+
+                    var reseivedAnswer = function (e) {
+                        log('canISendOffer reseivedAnswer', e)
+                        var fromParticipant = roomParticipants.filter(function (roomParticipant) {
+                            return roomParticipant.sid == e.fromSid;
+                        })[0];
+
+                        if(fromParticipant == null || participant != fromParticipant) return;
+
+                        if(e.answerValue === true) {
+                            resolve(true);
+                        } else {
+                            resolve(false);
+                        }
+
+                        app.event.off('canISendOffer', reseivedAnswer);
+                    }
+                    app.event.on('canISendOffer', reseivedAnswer);
+                }
+
+            });
+
 		}
 
 		function iceConfigurationReceived(message) {

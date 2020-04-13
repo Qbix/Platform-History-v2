@@ -194,6 +194,13 @@ WebRTC.listen = function () {
 
 		});
 
+		socket.on('Streams/webrtc/canISendOffer', function(message) {
+			if(_debug) console.log('canISendOffer', message);
+			message.fromSid = socket.id;
+			socket.to(message.targetSid).emit('Streams/webrtc/canISendOffer', message);
+
+		});
+
 		socket.on('Streams/webrtc/signalling', function(message) {
 			if(_debug) console.log('SIGNALLING MESSAGE', message.type, message.name, message.targetSid, socket.id);
 			message.fromSid = socket.id;
