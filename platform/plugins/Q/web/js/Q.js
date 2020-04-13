@@ -13368,6 +13368,7 @@ Q.onReady.set(function _Q_masks() {
 			button.innerHTML = 'Cancel';
 			if (mask[0]) { mask = mask[0]; }
 			mask.appendChild(button);
+			button.style.marginLeft - button.getBoundingClientRect()/2;
 		}
 		$(button).off(Q.Pointer.end).on(Q.Pointer.end, callback);
 		Q.Masks.show('Q.request.cancel.mask');
