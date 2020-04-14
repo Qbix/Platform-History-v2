@@ -210,7 +210,7 @@ function _createObserver(tool, container) {
 				}
 			});
 		});
-	}, Q.extend({ root: container || document.body }, tool.state.observerOptions);
+	}, Q.extend({ root: container || document.body }, tool.state.observerOptions));
 }
 
 function _polyfill(callback) {
