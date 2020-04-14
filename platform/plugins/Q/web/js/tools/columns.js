@@ -179,7 +179,7 @@ Q.Tool.define("Q/columns", function(options) {
 		});
 
 		var $div = $(div);
-		Q.onLayout(div).set(function () {
+		Q.onLayout(div).add(function () {
 			$div.attr('data-width-index', Math.round($div.width()/300) || 1);
 		}, this);
 	}, 'Q/columns'),
@@ -728,15 +728,21 @@ Q.Tool.define("Q/columns", function(options) {
 		if (t === 'object') {
 			p = new Q.Pipe();
 			Q.each(index.max||state.max, index.min||0, -1, function (i) {
-				try { tool.close(i, p.fill(i), options); } catch (e) {}
+				try { tool.close(i, p.fill(i), options, true); } catch (e) {}
 				waitFor.push(i);
 			});
+			if (!skipUpdateAttributes) {
+				setTimeout(_updateAttributes, 0);
+			}
 		} else if (t === 'array') {
 			p = new Q.Pipe();
 			Q.each(index, function (k, i) {
-				try { tool.close(i, p.fill(i), options); } catch (e) {}
+				try { tool.close(i, p.fill(i), options, true); } catch (e) {}
 				waitFor.push(i);
 			}, {ascending: false});
+			if (!skipUpdateAttributes) {
+				setTimeout(_updateAttributes, 0);
+			}
 		}
 		var div = tool.column(index);
 		if (p) {
