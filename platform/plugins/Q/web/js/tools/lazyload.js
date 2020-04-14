@@ -21,6 +21,9 @@
  *    Function "preparing" receives (element) and is used the first time to prepare the element
  *    Both functions must return true if the element was modified.
  * @param {Object} [observerOptions] Override any options to pass to IntersectionObserver
+ * @param {Element} [observerOptions.root=tool.element]
+ * @param {String} [observerOptions.rootMargin='1000px']
+ * @param {String} [observerOptions.threshold=0]
  * @return {Q.Tool}
  */
 Q.Tool.define('Q/lazyload', function (options) {
@@ -81,7 +84,6 @@ Q.Tool.define('Q/lazyload', function (options) {
 },
 
 {
-	root: null,
 	handlers: {
 		img: {
 			selector: 'img',
@@ -159,7 +161,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 	},
 	observerOptions: {
 		root: null,
-		rootMargin: '0px',
+		rootMargin: '100px',
 		threshold: 0
 	}
 }, 
@@ -208,7 +210,7 @@ function _createObserver(tool, container) {
 				}
 			});
 		});
-	}, tool.state.observerOptions);
+	}, Q.extend({ root: container || document.body }, tool.state.observerOptions);
 }
 
 function _polyfill(callback) {
