@@ -732,7 +732,7 @@ Q.Tool.define("Q/columns", function(options) {
 				waitFor.push(i);
 			});
 			if (!skipUpdateAttributes) {
-				setTimeout(_updateAttributes, 0);
+				setTimeout(_updateAttributes.bind(this), 0);
 			}
 		} else if (t === 'array') {
 			p = new Q.Pipe();
@@ -741,7 +741,7 @@ Q.Tool.define("Q/columns", function(options) {
 				waitFor.push(i);
 			}, {ascending: false});
 			if (!skipUpdateAttributes) {
-				setTimeout(_updateAttributes, 0);
+				setTimeout(_updateAttributes.bind(this), 0);
 			}
 		}
 		var div = tool.column(index);
