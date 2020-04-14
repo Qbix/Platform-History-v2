@@ -184,7 +184,7 @@ Q.Tool.define("Q/columns", function(options) {
 		}, this);
 	}, 'Q/columns'),
 	onClose: new Q.Event(function (index, div, data, skipUpdateAttributes) {
-		if (skipUpdateAttributes) {
+		if (!skipUpdateAttributes) {
 			setTimeout(_updateAttributes.bind(this), 0);
 		}
 	}, 'Q/columns'),
