@@ -22,7 +22,7 @@
  *    Both functions must return true if the element was modified.
  * @param {Object} [observerOptions] Override any options to pass to IntersectionObserver
  * @param {Element} [observerOptions.root=tool.element]
- * @param {String} [observerOptions.rootMargin='1000px']
+ * @param {String} [observerOptions.rootMargin='0px']
  * @param {String} [observerOptions.threshold=0]
  * @return {Q.Tool}
  */
@@ -161,7 +161,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 	},
 	observerOptions: {
 		root: null,
-		rootMargin: '100px',
+		rootMargin: '0px',
 		threshold: 0
 	}
 }, 
