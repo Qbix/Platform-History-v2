@@ -183,7 +183,9 @@ Q.Tool.define("Q/columns", function(options) {
 			$div.attr('data-width-index', Math.round($div.width()/300) || 1);
 		}, this);
 	}, 'Q/columns'),
-	onClose: new Q.Event(_updateAttributes, 'Q/columns'),
+	onClose: new Q.Event(function () {
+		setTimeout(_updateAttributes.bind(this), 0);
+	}, 'Q/columns'),
 	onTransitionEnd: new Q.Event(),
 	afterDelay: new Q.Event()
 },
