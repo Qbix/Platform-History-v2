@@ -183,8 +183,10 @@ Q.Tool.define("Q/columns", function(options) {
 			$div.attr('data-width-index', Math.round($div.width()/300) || 1);
 		}, this);
 	}, 'Q/columns'),
-	onClose: new Q.Event(function () {
-		setTimeout(_updateAttributes.bind(this), 0);
+	onClose: new Q.Event(function (index, div, data, skipUpdateAttributes) {
+		if (skipUpdateAttributes) {
+			setTimeout(_updateAttributes.bind(this), 0);
+		}
 	}, 'Q/columns'),
 	onTransitionEnd: new Q.Event(),
 	afterDelay: new Q.Event()
@@ -261,7 +263,7 @@ Q.Tool.define("Q/columns", function(options) {
 		}
 		
 		if (!internal && state.columns[index]) {
-			this.close(index, null, {animation: {duration: 0}});
+			this.close(index, null, {animation: {duration: 0}}, true);
 		}
 		
 		var div = this.column(index);
@@ -713,9 +715,12 @@ Q.Tool.define("Q/columns", function(options) {
 	 * @param {Function} callback Called when the column is closed, or if no column
 	 *  Receives (index, column) where the column could be null if it wasn't found.
 	 * @param {Object} options Can be used to override some values taken from tool state
+	 * @param {Boolean} skipUpdateAttributes Whether to skip updating the attributes
+	 *  of the tool element because some columns are about to be opened, and we want
+	 *  to avoid thrashing.
 	 * @return {Boolean} Whether the column was actually closed.
 	 */
-	close: function (index, callback, options) {
+	close: function (index, callback, options, skipUpdateAttributes) {
 		var tool = this;
 		var state = tool.state;
 		var t = Q.typeOf(index);
@@ -813,7 +818,7 @@ Q.Tool.define("Q/columns", function(options) {
 			presentColumn(tool);
 			Q.Pointer.clearSelection();
 			Q.handle(callback, tool, [index, div]);
-			state.onClose.handle.call(tool, index, div, data);
+			state.onClose.handle.call(tool, index, div, data, skipUpdateAttributes);
 			var url = $prev.attr('data-url') || $div.attr('data-prevUrl');
 			var title = $prev.attr('data-title') || $div.attr('data-prevTitle');
 			if (o.pagePushUrl && url && url !== location.href) {
@@ -1083,7 +1088,5 @@ function _updateAttributes() {
 		$te.removeClass('Q_columns_over3');
 	}
 }
-
-_updateAttributes = Q.debounce(_updateAttributes, 300);
 
 })(Q, jQuery);
