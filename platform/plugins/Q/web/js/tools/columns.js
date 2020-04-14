@@ -1082,4 +1082,6 @@ function _updateAttributes() {
 	}
 }
 
+_updateAttributes = Q.debounce(_updateAttributes, 300);
+
 })(Q, jQuery);
