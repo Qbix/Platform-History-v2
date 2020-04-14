@@ -15,6 +15,7 @@
 
 .Q_columns_column {
 	display: inline-block;
+	vertical-align: top;
 	background: #fff;
 	overflow: hidden;
 }
