@@ -379,7 +379,7 @@
 						w2 += this.getBoundingClientRect().width
 							+ parseFloat(cs.marginLeft)
 							+ parseFloat(cs.marginRight);
-						if (w2 > w-1) {
+						if (w2 > w) {
 							index = i-1;
 							return false;
 						}
