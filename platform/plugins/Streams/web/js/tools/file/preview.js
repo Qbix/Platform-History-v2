@@ -53,6 +53,9 @@ function _Streams_file_preview(options, preview) {
 	};
 
 	// edit action
+	if (ps.editable) {
+		Q.setObject(["actions", "actions", "edit"], true, ps);
+	}
 	if (Q.getObject(["actions", "actions", "edit"], ps)) {
 		ps.actions.actions.edit = tool.selectAndUploadFile.bind(this);
 	}
