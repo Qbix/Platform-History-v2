@@ -359,9 +359,9 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 					}
 				}
 			}
-			var file = (oss && (oss[sfi] || oss['']))
-				|| size
-				|| Q.first(si.saveSizeName, {nonEmptyKey: true});
+			var file = size
+				|| Q.first(si.saveSizeName, {nonEmptyKey: true})
+				|| (oss && (oss[sfi] || oss['']));
 			var full = si.saveSizeName[si.fullSize] || file;
 			var size = si.saveSizeName[si.showSize];
 			var defaultIcon = (options.defaultIcon) || 'default';
