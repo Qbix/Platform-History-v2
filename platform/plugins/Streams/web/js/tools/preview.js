@@ -443,34 +443,40 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		Q.Streams.get(state.publisherId, state.streamName, function () {
 			var stream = this;
 			// check if we should add this behavior
-			if (!state.actions
-			|| state.closeable === false
-			|| !this.testWriteLevel('close')) {
-				return false;
+			if (state.actions
+			&& state.closeable === false
+			&& !this.testWriteLevel('close')) {
+				// add some actions
+				var actions = {};
+				var action = this.isRequired
+					? (this.fields.closedTime ? 'open' : 'close')
+					: 'remove';
+				if (action === 'open') {
+					actions[action] = function () {
+						this.reopen(function (err) {
+							if (err) return;
+							tool.state.onReopen.handle.call(tool);
+						});
+					};
+				} else {
+					actions[action] = function () {
+						if (state.beforeClose) {
+							Q.handle(state.beforeClose, tool, [tool.delete.bind(tool)]);
+						} else {
+							tool.delete();
+						}
+					};
+				}
 			}
-			// add some actions
-			var actions = {};
-			var action = this.isRequired
-				? (this.fields.closedTime ? 'open' : 'close')
-				: 'remove';
-			if (action === 'open') {
-				actions[action] = function () {
-					this.reopen(function (err) {
-						if (err) return;
-						tool.state.onReopen.handle.call(tool);
-					});
-				};
+			var ao = Q.extend({}, state.actions);
+			if (actions) {
+				ao = Q.extend(ao, 10, { actions: actions });
+			}
+			if ($te.state('Q/actions')) {
+				$te.plugin('Q/actions', 'refresh');
 			} else {
-				actions[action] = function () {
-					if (state.beforeClose) {
-						Q.handle(state.beforeClose, tool, [tool.delete.bind(tool)]);
-					} else {
-						tool.delete();
-					}
-				};
+				$te.tool('Q/actions', ao).activate();
 			}
-			var ao = Q.extend({}, state.actions, 10, { actions: actions });
-			$te.tool('Q/actions', ao).activate();
 		});
 		return this;
 	},

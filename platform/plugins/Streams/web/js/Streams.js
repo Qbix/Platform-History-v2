@@ -2187,13 +2187,14 @@ Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
 /**
  * Calculate the url of a stream's file
  * @method fileUrl
- * @return {String} the url
+ * @return {String|null} the url, or null if no url
  */
 Sp.fileUrl = function() {
 	var url = this.getAttribute('Q.file.url') || this.getAttribute('file.url');
-	return url.interpolate({
-		"baseUrl": Q.info.baseUrl
-	});
+	if (!url) {
+		return null;
+	}
+	return url.interpolate({ "baseUrl": Q.info.baseUrl });
 };
 
 /**

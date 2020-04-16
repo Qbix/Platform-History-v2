@@ -9,7 +9,7 @@
  * @class Streams file preview
  * @constructor
  * @param {Object} [options] options to pass to this tool, besides the ones passed to preview
- *   @param {String} [options.windowName='file'] the name of the window in which to open files. Leave it blank to open in the current window.
+ *   @param {String} [options.windowName='file'] the name of the window in which to open files. Set it to blank to open in the current window.
  *   @param {Object} [options.inplace] Any options to pass to the Q/inplace tool -- see its options.
  *   @uses Q inplace
  *   @param {Object} [options.templates] Under the keys "views", "edit" and "create" you can override options for Q.Template.render .
@@ -54,39 +54,7 @@ function _Streams_file_preview(options, preview) {
 
 	// edit action
 	if (Q.getObject(["actions", "actions", "edit"], ps)) {
-		ps.actions.actions.edit = function(){
-			tool.$('.Streams_file_input')
-			.one("click", function (event) {
-				event.stopPropagation();
-			})
-			.one("change", function (event) {
-				if (!this.value) {
-					return; // it was canceled
-				}
-
-				$te.addClass("Q_working");
-
-				var form = $(this).closest('form')[0];
-
-				// send request to replace file
-				Q.req("Streams/file", function(err, responce){
-					var msg = Q.firstErrorMessage(err, responce && responce.errors);
-					if (msg) {
-						return Q.alert(msg);
-					}
-
-					// refresh tool
-					preview.preview();
-
-					$te.removeClass("Q_working");
-				}, {
-					method: 'POST',
-					form: form
-				});
-			}).trigger("click");
-
-			return false;
-		};
+		ps.actions.actions.edit = tool.selectAndUploadFile.bind(this);
 	}
 },
 
@@ -173,7 +141,9 @@ function _Streams_file_preview(options, preview) {
 				});
 				$(tool.element).on(Q.Pointer.click, function () {
 					var url = stream.fileUrl();
-					if (!url) return;
+					if (!url) {
+						return tool.selectAndUploadFile();
+					}
 					if (state.windowName) {
 						window.open(url, state.windowName);
 					} else {
@@ -206,6 +176,48 @@ function _Streams_file_preview(options, preview) {
 			});
 			form.reset();
 		});
+	},
+	selectAndUploadFile: function () {
+		var tool = this;
+		var state = tool.state;
+		var $te = $(tool.element);
+		tool.$('.Streams_file_input')
+		.off('click')
+		.on("click", function (event) {
+			event.stopPropagation();
+		}).off('change')
+		.on("change", function (event) {
+			if (!this.value) {
+				return; // it was canceled
+			}
+
+			$te.addClass("Q_working");
+
+			var form = $(this).closest('form')[0];
+
+			// send request to replace file
+			Q.req("Streams/file", function(err, response){
+				$te.removeClass("Q_working");
+				var msg = Q.firstErrorMessage(err, response && response.errors);
+				if (msg) {
+					return Q.alert(msg);
+				}
+
+				// refresh tool
+				var ps = tool.preview.state;
+				Q.Streams.Stream.refresh(
+					ps.publisherId, ps.streamName, function () {
+						tool.preview.preview();	
+					}
+				);
+						
+			}, {
+				method: 'POST',
+				form: form
+			});
+		}).trigger("click");
+
+		return false;
 	}
 }
 
