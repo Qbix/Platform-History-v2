@@ -3963,21 +3963,34 @@ Q.Tool.beforeRemove = Q.Event.factory(_beforeRemoveToolHandlers, ["", _toolEvent
  *  should be removed.
  * @param {boolean} [removeElementAfterLastTool=false]
  *  If true, removes the element if the last tool on it was removed
+ * @param {String|Function} [filter]
+ *  This is a string that would match the tool name exactly (after normalization) to remove it,
+ *  or a function that will take a tool name and return a boolean, false means don't remove tool.
  */
-Q.Tool.remove = function _Q_Tool_remove(elem, removeCached, removeElementAfterLastTool) {
+Q.Tool.remove = function _Q_Tool_remove(elem, removeCached, removeElementAfterLastTool, filter) {
 	if (typeof elem === 'string') {
 		var tool = Q.Tool.byId(elem);
 		if (!tool) return false;
 		elem = tool.element;
 	}
-	Q.find(elem, true, null,
-	function _Q_Tool_remove_found(toolElement) {
+	if (typeof filter === 'string') {
+		filter = Q.normalize(filter);
+	}
+	Q.find(elem, true, function _Q_Tool_remove_found(toolElement) {
 		var tn = toolElement.Q.toolNames;
 		if (!tn) { // this edge case happens very rarely, usually if a slot element
 			return; // being replaced is inside another slot element being replaced
 		}
 		for (var i=tn.length-1; i>=0; --i) {
-			// check if "remove" method exist
+			if (typeof filter === 'string') {
+				if (tn[i] !== 'filter') {
+					continue;
+				}
+			} else if (typeof filter === 'function') {
+				if (!filter(tn[i])) {
+					continue;
+				}
+			}
 			if (Q.typeOf(Q.getObject(["Q", "tools", tn[i], "remove"], toolElement)) !== "function") {
 				continue;
 			}
@@ -4509,7 +4522,7 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached, removeElementAfterLa
 	delete this.element.Q.tools[nn];
 	delete Q.Tool.active[this.id][nn];
 	var tools = Q.Tool.active[this.id];
-	if (Q.isEmpty()) {
+	if (Q.isEmpty(Q.Tool.active[this.id]))) {
 		if (removeElementAfterLastTool) {
 			Q.removeElement(this.element);
 		}
