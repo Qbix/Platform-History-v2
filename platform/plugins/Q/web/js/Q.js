@@ -4528,7 +4528,8 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached, removeElementAfterLa
 		}
 		this.element.Q.tool = null;
 		delete Q.Tool.active[this.id];
-	} else if (Q.normalize(this.id) === nn) {
+	} else if (this.element.Q.tool
+	&& Q.normalize(this.element.Q.tool.name) === nn) {
 		this.element.Q.tool = Q.byId(this.id);
 	}
 
