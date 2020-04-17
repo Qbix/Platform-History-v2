@@ -3976,7 +3976,7 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached, removeElementAfterLa
 	if (typeof filter === 'string') {
 		filter = Q.normalize(filter);
 	}
-	Q.find(elem, true, function _Q_Tool_remove_found(toolElement) {
+	Q.find(elem, true, null, function _Q_Tool_remove_found(toolElement) {
 		var tn = toolElement.Q.toolNames;
 		if (!tn) { // this edge case happens very rarely, usually if a slot element
 			return; // being replaced is inside another slot element being replaced
