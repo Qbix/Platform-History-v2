@@ -4530,7 +4530,7 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached, removeElementAfterLa
 		delete Q.Tool.active[this.id];
 	} else if (this.element.Q.tool
 	&& Q.normalize(this.element.Q.tool.name) === nn) {
-		this.element.Q.tool = Q.byId(this.id);
+		this.element.Q.tool = Q.Tool.byId(this.id);
 	}
 
 	// remove all the tool's events automatically
