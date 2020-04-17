@@ -443,7 +443,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		Q.Streams.get(state.publisherId, state.streamName, function () {
 			var stream = this;
 			// check if we should add this behavior
-			if (!state.actions
+			if (state.actions
 			&& state.closeable !== false
 			&& this.testWriteLevel('close')) {
 				// add some actions
