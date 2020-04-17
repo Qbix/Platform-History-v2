@@ -4522,7 +4522,7 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached, removeElementAfterLa
 	delete this.element.Q.tools[nn];
 	delete Q.Tool.active[this.id][nn];
 	var tools = Q.Tool.active[this.id];
-	if (Q.isEmpty(Q.Tool.active[this.id]))) {
+	if (Q.isEmpty(Q.Tool.active[this.id])) {
 		if (removeElementAfterLastTool) {
 			Q.removeElement(this.element);
 		}
