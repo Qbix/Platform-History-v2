@@ -136,6 +136,7 @@ function Q_script_urls_glob(
 		++$i;
 		echo "\033[100D";
 		echo "Processed $i of $n files                 ";
+		usleep(1); // garbage collection
 	}
 	return $result;
 }
