@@ -6,15 +6,14 @@
 class Streams_Exception_Type extends Q_Exception
 {
 	/**
-	 * An exception is raised when stream does not support operation
+	 * This exception can be thrown when a different stream type was expected
 	 * @class Streams_Exception_Type
 	 * @constructor
 	 * @extends Q_Exception
-	 * @param {string} $name
-	 *	Stream name
-	 * @param {string} $type
+	 * @param {string} $expectedType the type that was expected
+	 * @param {string} $type the type that was provided
 	 *	Operation type
 	 */	
 };
 
-Q_Exception::add('Streams_Exception_Type', 'Cannot post \'{{type}}\' messages to stream {{name}}');
+Q_Exception::add('Streams_Exception_Type', 'Expected stream type {{expectedType}} instead of {{type}}');

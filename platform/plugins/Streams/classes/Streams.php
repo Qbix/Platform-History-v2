@@ -966,6 +966,12 @@ abstract class Streams extends Base_Streams
 						$stream->$f = $info[$f];
 					}
 				}
+				if (isset($info['type']) and $info['type'] !== $type) {
+					throw new Streams_Exception_Type(array(
+						'expectedType' => $info['type'],
+						'type' => $type
+					));
+				}
 			}
 		}
 		if (!isset($stream->type)) {
@@ -1105,6 +1111,9 @@ abstract class Streams extends Base_Streams
 						if (isset($info[$fn])) {
 							$tc[$fn] = $info[$fn];
 						}
+					}
+					if (isset($info['type']) and $info['type'] !== $f['type']) {
+						throw new Streams_Exception_Type(array('type' => $info['type']));
 					}
 				}
 			}
@@ -4303,7 +4312,7 @@ abstract class Streams extends Base_Streams
 		$streamName = 'Streams/user/profile';
 		$stream = Streams::fetchOne($userId, $userId, $streamName);
 		if (!$stream) {
-			$stream = Streams::create($userId, $userId, 'Streams/resource', array(
+			$stream = Streams::create($userId, $userId, 'Streams/user/profile', array(
 				'name' => $streamName
 			));
 			$ret = $stream->invite(array('token' => true, 'appUrl' => $appUrl));

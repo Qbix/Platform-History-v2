@@ -778,7 +778,8 @@ var _Streams_batchFunction_options = {
  *   @param {String} [related.streamName] the name of the related stream
  *   @param {Mixed} [related.type] the type of the relation
  * @param {Object} [options] Any extra options involved in creating the stream
- *   @param {Object} [options.fields] Used to override any fields passed in the request
+ *   @param {Object} [options.fields] Used to override any other fields passed in the request
+ *   @param {Object} [options.streamName] Overrides fields.name . You can set a specific stream name from Streams/possibleUserStreams config
  *   @param {String} [options.filename] Overrides the default filename for file uploads
  *   @param {HTMLElement} [options.form] If you want to upload a file or an icon, pass
  *	a form element here which includes input elements of type "file", named "file" or "icon".
@@ -796,6 +797,9 @@ Streams.create = function (fields, callback, related, options) {
 	fields = Q.copy(fields);
 	if (options.fields) {
 		Q.extend(fields, 10, options.fields);
+	}
+	if (options.streamName) {
+		fields.name = options.streamName;
 	}
 	if (fields.icon) {
 		slotNames.push('icon');
@@ -944,7 +948,7 @@ Streams.Dialogs = {
 
 		var suggestion = null, data = null;
 		Q.req('Streams/invite', ['suggestion', 'data'], function (err, response) {
-			var slots = response.slots;
+			var slots = response && response.slots;
 			if (slots) {
 				suggestion = slots.suggestion;
 				data = slots.data;

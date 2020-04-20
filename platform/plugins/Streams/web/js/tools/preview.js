@@ -24,9 +24,10 @@
  *   @param {Object} [options.creatable] Optional fields you can override in case if streamName = "", 
  *     @param {String} [options.creatable.streamType="Streams/text/small"] Set the type of the stream to be created
  *     @param {String} [options.creatable.title="New Item"] Optional title for the case when streamName = "", i.e. the composer
- *     @param {Boolean} [options.creatable.clickable=true] Whether the image composer image is clickable
+ *     @param {Boolean} [options.creatable.clickable=true] Whether the image composer image has the Q/clickable effect
  *     @param {Number} [options.creatable.addIconSize=100] The size in pixels of the square add icon
  *     @param {Number} [options.creatable.options={}] Any options to pass to Q.Streams.create
+ *     @param {String} [options.creatable.options.streamName] You can set a specific stream name from Streams/possibleUserStreams config
  *     @param {Function} [options.creatable.preprocess] This function receives 
  *       (a callback, this tool, the event if any that triggered it). 
  *       This is your chance to do any processing before the request to create the stream is sent.

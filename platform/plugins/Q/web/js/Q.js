@@ -4061,6 +4061,8 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 				_qtc[n] = ctor;
 			}
 			continue;
+		} else if (typeof ctor === 'object') {
+			// TODO: implement properties: js, css, 
 		}
 		_qtc[n] = ctor;
 		ctor.toolName = n;

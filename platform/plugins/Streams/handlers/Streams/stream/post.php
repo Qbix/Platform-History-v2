@@ -82,6 +82,17 @@ function Streams_stream_post($params = array())
 		if (!$asOwner or !$possible) {
 			throw new Users_Exception_NotAuthorized();
 		}
+		$p = Streams::userStreamsTree();
+		if ($info = $p->get($fields['name'], array())) {
+			foreach (Base_Streams_Stream::fieldNames() as $f) {
+				if (isset($info[$f])) {
+					$stream->$f = $info[$f];
+				}
+			}
+			if (isset($info['type']) and $info['type'] !== $type) {
+				throw new Streams_Exception_Type(array('type' => $info['type']));
+			}
+		}
 	}
 	
 	// Get allowed fields
