@@ -15,7 +15,8 @@
 			"Q/sessionExtras": ["Users/before/Q_sessionExtras"],
 			"Q/response/notices": ["Users/before/Q_response_notices"],
 			"Q/session/save": ["Users/before/Q_session_save"],
-			"Q/Utils/canWriteToPath": ["Users/before/Q_Utils_canWriteToPath"]
+			"Q/Utils/canWriteToPath": ["Users/before/Q_Utils_canWriteToPath"],
+			"Q/request/languages": ["Users/before/Q_request_languages"]
 		},
 		"handlersAfterEvent": {
 			"Q/session/write": ["Users/after/Q_session_write"],

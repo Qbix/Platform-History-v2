@@ -2658,7 +2658,7 @@
 				});
 
 				Q.handle(callback, contacts, ["browser"]);	
-			}).catch(function () {
+			}).catch(function (ex) {
 				throw new Error("Users.chooseContacts._getPickerContacts: " + ex);
 			});
 		};
