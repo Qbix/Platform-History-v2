@@ -954,6 +954,12 @@ class Q_Request
 			$quality = !empty($parts2[1]) ? substr($parts2[1], 2) : 1;
 			$result[] = array($language, $country, $quality);
 		}
+		/**
+		 * @event Q/request/languages {after}
+		 * @param {array&} $result You can modify the result
+		 * @return {boolean}
+		 */
+		$result = Q::event('Q/request/languages',array(), 'after', false, $result);
 		if (empty($result)) {
 			return array(array("en", "US", 1));
 		}

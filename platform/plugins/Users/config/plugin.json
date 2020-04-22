@@ -15,8 +15,7 @@
 			"Q/sessionExtras": ["Users/before/Q_sessionExtras"],
 			"Q/response/notices": ["Users/before/Q_response_notices"],
 			"Q/session/save": ["Users/before/Q_session_save"],
-			"Q/Utils/canWriteToPath": ["Users/before/Q_Utils_canWriteToPath"],
-			"Q/request/languages": ["Users/before/Q_request_languages"]
+			"Q/Utils/canWriteToPath": ["Users/before/Q_Utils_canWriteToPath"]
 		},
 		"handlersAfterEvent": {
 			"Q/session/write": ["Users/after/Q_session_write"],
@@ -26,7 +25,8 @@
 			"Q/sessionExtras": ["Users/after/Q_sessionExtras"],
 			"Users/setEmailAddress": ["Users/after/Users_setEmailAddress"],
 			"Users/setMobileNumber": ["Users/after/Users_setMobileNumber"],
-			"Users/addIdentifier": ["Users/after/Users_addIdentifier"]
+			"Users/addIdentifier": ["Users/after/Users_addIdentifier"],
+			"Q/request/languages": ["Users/before/Q_request_languages"]
 		},
 		"routes@start": {
 			"login/facebook": {"module": "Users", "action": "facebook"},

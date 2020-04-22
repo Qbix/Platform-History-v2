@@ -1,8 +1,12 @@
 <?php
-function Users_before_Q_request_languages($params, &$result) {
-	$user = Users::loggedInUser();
 
+function Users_after_Q_request_languages($params, &$result)
+{
+	$user = Users::loggedInUser(false, false);
 	if ($user && $user->preferredLanguage) {
-		$result = array(array($user->preferredLanguage, 1 => $user->preferredLanguage, 2 => 1));
+		if (!is_array($result)) {
+			$result = array();
+		}
+		array_unshift($result, array($user->preferredLanguage, $user->preferredLanguage, 1));
 	}
 }
