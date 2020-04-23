@@ -32,11 +32,7 @@ class Stripe
     public static $caBundlePath = null;
 
     /** @var bool Defaults to true. */
-	// we set it false for a while to make work charges
-	// but later need to learn which certificate it need
-	// and set with setCABundlePath method, OR make link to default __DIR__ . '/../data/ca-certificates.crt'
-	// as described in method getDefaultCABundlePath
-    public static $verifySslCerts = false;
+    public static $verifySslCerts = true;
 
     /** @var array The application's information (name, version, URL) */
     public static $appInfo = null;
