@@ -11,6 +11,9 @@
 
 class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_Interface
 {
+
+	public $options = array();
+
 	/**
 	 * @constructor
 	 * @param {array} $options=array() Any initial options
@@ -42,7 +45,7 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 	 * @param {string} [$options.subscription=null] if this charge is related to a subscription stream
 	 * @param {string} [$options.subscription.publisherId]
 	 * @param {string} [$options.subscription.streamName]
-	 * @throws \Stripe\Error\Card
+	 * @throws \Stripe\Exception\CardException
 	 * @return {string} The customerId of the Assets_Customer that was successfully charged
 	 */
 	function charge($amount, $currency = 'USD', $options = array())
@@ -94,5 +97,50 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 		return \Stripe\Customer::create($params);
 	}
 
-	public $options = array();
+	/**
+	 * Create a payment intent
+	 * @method createPaymentIntent
+	 * @param {double} $amount specify the amount (optional cents after the decimal point)
+	 * @param {string} [$currency='USD'] set the currency, which will affect the amount
+	 * @param {array} [$options=array()] Any additional options
+	 * @param {string} [$options.metadata=null] any additional metadata to store with the charge
+	 * @throws \Stripe\Exception\CardException
+	 * @return object
+	 */
+	function createPaymentIntent($amount, $currency = 'USD', $options = array())
+	{
+		$options = array_merge($this->options, $options);
+
+		$options['metadata'] = Q::ifset($options, 'metadata', array());
+		$options['metadata']['userId'] = $options['user']->id;
+
+		$amount = $amount * 100; // in cents
+
+		Q_Valid::requireFields(array('secret', 'user'), $options, true);
+		\Stripe\Stripe::setApiKey($options['secret']);
+		$params = array(
+			'payment_method_types' => ['card'],
+			'amount' => $amount,
+			'currency' => $currency,
+			'metadata' => !empty($options['metadata']) ? $options['metadata'] : null
+		);
+
+		// get connected account
+		$connectedAccount = new Assets_Connected();
+		$connectedAccount->merchantUserId = Q::app();
+		$connectedAccount->payments = 'stripe';
+		if ($connectedAccount->retrieve()) {
+			// get commission percents
+			$commission = (int)Q_Config::expect("Assets", "commission");
+
+			$params['application_fee_amount'] = ceil($amount - $amount/100 * $commission);
+			$params['transfer_data'] = array(
+				'destination' => $connectedAccount->accountId
+			);
+		}
+
+		$intent = \Stripe\PaymentIntent::create($params); // can throw some exception
+
+		return $intent;
+	}
 }

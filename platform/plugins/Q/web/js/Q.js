@@ -12344,7 +12344,7 @@ Q.extend(Q.confirm.options, Q.text.confirm);
 Q.prompt = function(message, callback, options) {
 	function _done() {
 		buttonClicked = true;
-		var value = $dialog.find('input').val();
+		var value = $('input', dialog).val();
 		Q.Dialogs.pop();
 		Q.handle(callback, this, [value]);
 	}
