@@ -988,6 +988,9 @@ Streams.Dialogs = {
 				stylesheet: '{{Streams}}/css/Streams/invite.css',
 				className: 'Streams_invite_dialog',
 				onActivate: function (dialog) {
+					if (data) {
+						dialog.addClass('Streams_suggestion_ready');
+					}
 					// handle "choose from contacts" button
 					$('.Streams_invite_choose_contact', dialog).on(Q.Pointer.fastclick, function () {
 						var $this = $(this);
