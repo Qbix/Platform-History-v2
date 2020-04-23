@@ -12305,7 +12305,7 @@ Q.confirm = function(message, callback, options) {
 		Q.Dialogs.pop();
 		Q.handle(callback, root, [true]);
 	});
-	Q.addEventListener(buttons[0], Q.Pointer.end, function () {
+	Q.addEventListener(buttons[1], Q.Pointer.end, function () {
 		buttonClicked = true;
 		Q.Dialogs.pop();
 		Q.handle(callback, root, [false]);
