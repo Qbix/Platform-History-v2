@@ -203,3 +203,23 @@ html.Q_ios.Q_standalone .Q_columns_title {
 .Q_notMobile .Q_columns_stretchFirstColumn.Q_columns_animateWidth .Q_columns_column {
 	transition: width 50ms;
 }
+
+
+.Q_columns_hideTitle .Q_columns_title {
+	background: none;
+	box-shadow: none;
+}
+.Q_columns_hideTitle .Q_close {
+	opacity: 1;
+	text-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+}
+.Q_columns_hideTitle .Q_columns_title .Q_close::before {
+	color: #eee;
+}
+.Q_columns_hideTitle .Q_columns_title_container {
+	display: none;
+}
+.Q_columns_hideTitle .Q_column_slot {
+	position: absolute;
+	top: 0;
+}

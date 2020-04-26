@@ -127,7 +127,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			}
 
 			fields = Q.extend({}, state.templates.contents.fields, {
-				name: this.username
+				name: this.username.encodeHTML()
 			});
 			Q.Template.render('Users/avatar/contents', fields, function (err, html) {
 				p.fill('contents')(html);

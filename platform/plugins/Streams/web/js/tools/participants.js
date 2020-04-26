@@ -21,7 +21,7 @@
  *   @param {Number} [options.maxShow=10]
  *    The maximum number of participants to fetch for display
  *   @param {Function} [options.filter]
- *    Takes (participant, element) and can modify them.
+ *    Takes (userId, element) and can modify them.
  *    If this function returns false, the element is not appended.
  *   @param {Q.Event} [options.onRefresh] An event that occurs when the tool is refreshed
  */
@@ -284,7 +284,7 @@ function _Streams_participants(options) {
 			});
 		}
 
-		function _addAvatar(userId, prepend) {
+		function _addAvatar(userId, prepend, participant) {
 			var $element = $(Q.Tool.setUpElement(
 				'div', 
 				'Users/avatar',
@@ -295,7 +295,7 @@ function _Streams_participants(options) {
 				tool.prefix)
 			);
 			var $e = userId ? tool.$avatars : tool.$blanks;
-			if (false !== Q.handle(state.filter, tool, [$element])) {
+			if (false !== Q.handle(state.filter, tool, [userId, $element[0]])) {
 				$element[prepend?'prependTo':'appendTo']($e).activate();
 			}
 		}

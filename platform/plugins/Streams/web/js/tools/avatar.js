@@ -110,6 +110,18 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			dir: '{{Users}}/views',
 			name: 'Users/avatar/contents',
 			fields: { tag: "span" }
+		},
+		blank: {
+			contents: {
+				dir: '{{Users}}/views',
+				name: 'Users/avatar/contents/blank',
+				fields: { tag: "span" }
+			},
+			icon: {
+				dir: '{{Users}}/views',
+				name: 'Users/avatar/icon/blank',
+				fields: { tag: "span" }
+			}
 		}
 	},
 	editable: false,
@@ -158,10 +170,10 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			});
 			Q.Template.render('Users/avatar/icon/blank', fields, function (err, html) {
 				p.fill('icon')(html);
-			});
+			}, state.templates.blank.icon);
 			Q.Template.render('Users/avatar/contents/blank', fields, function (err, html) {
 				p.fill('contents')(html);
-			});
+			}, state.templates.blank.contents);
 			return;
 		}
 

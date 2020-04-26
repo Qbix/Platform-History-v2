@@ -36,6 +36,7 @@ var dataKey_opening = 'opening';
  *  @param {Boolean} [options.closeFromSwipeDown=true] on a touchscreen, close a column after a swipe-down gesture starting from the title
  *  @param {boolean} [options.closeFromTitleClick=false] Whether the whole title would be a trigger for the back button. Defaults to true.
  *  @param {Object}  [options.scrollbarsAutoHide] If an object, enables Q/scrollbarsAutoHide functionality with options from here. Enabled by default.
+ *  @param {Object}  [options.classes] Pairs of columnName: cssClass which is added to the column when it's opened
  *  @param {Object}  [options.handlers] Pairs of columnName: handler where the handler can be a function or a string, in which you assign a function to Q.exports .
  *  @param {Boolean} [options.fullscreen] Whether to use fullscreen mode on mobile phones, using document to scroll instead of relying on possibly buggy "overflow" CSS implementation. Defaults to true on Android stock browser, false everywhere else.
  *  @param {Boolean} [options.hideBackgroundColumns=true] Whether to hide background columns on mobile (perhaps improving browser rendering).
@@ -149,6 +150,7 @@ Q.Tool.define("Q/columns", function(options) {
 		src: "{{Q}}/img/x.png",
 		clickable: null
 	},
+	classes: {},
 	handlers: {},
 	stretchFirstColumn: true,
 	animateWidth: true,
@@ -308,7 +310,9 @@ Q.Tool.define("Q/columns", function(options) {
 			controlsSlot = $('.Q_controls_slot', div)[0];
 			$div.attr('data-title', $(titleSlot).text() || document.title);
 		}
-
+		if (o.name && state.classes && state.classes[o.name]) {
+			$(div).addClass(state.classes[o.name]);
+		}
 		if (state.closeFromSwipeDown) {
 			Q.addEventListener($title[0], 'touchstart', function (e1) {
 				var x1 = Q.Pointer.getX(e1);
@@ -411,7 +415,7 @@ Q.Tool.define("Q/columns", function(options) {
 		$div.css('position', 'absolute');
 
 		$div.attr('data-index', index).addClass('Q_column_'+index);
-		if (options.name) {
+		if (o.name) {
 			var n = Q.normalize(options.name, null, null, null, true);
 			$div.attr('data-name', options.name)
 				.addClass('Q_column_'+n);
@@ -974,7 +978,8 @@ function presentColumn(tool, $column, fullscreen) {
 
 	var $cs = $('.Q_column_slot', $column);
 	var $controls = $column.find('.Q_controls_slot');
-	var cth = $ct.is(":visible") ? $ct.height() : 0;
+	var cth = $ct.is(":visible") && !$column.hasClass('Q_columns_hideTitle')
+		? $ct.height() : 0;
 	var controlsh = $controls.is(":visible") ? $controls.height() : 0;
 	var index = parseInt($column.attr('data-index'));
 	if (Q.info.isMobile) {

@@ -9711,11 +9711,12 @@ Q.Template.render = function _Q_Template_render(name, fields, callback, options)
 			);
 		});
 	}
+	var templateName = (options && options.name) ? options.name : name;
 	var tba = (options && options.tool) || Q.Tool.beingActivated;
 	var pba = Q.Page.beingActivated;
 	Q.loadHandlebars(function () {
 		// load the template and its associated info
-		var n = Q.normalize(name);
+		var n = Q.normalize(templateName);
 		var info = Q.Template.info[n];
 		var p = Q.pipe(['template', 'partials', 'helpers', 'text'], function (params) {
 			if (params.template[0]) {
@@ -9740,7 +9741,7 @@ Q.Template.render = function _Q_Template_render(name, fields, callback, options)
 			Q.Page.beingActivated = pbaOld;
 		});
 		var o = Q.copy(options, ['type', 'dir', 'name']);
-		Q.Template.load(name, p.fill('template'), o);
+		Q.Template.load(templateName, p.fill('template'), o);
 		Q.each(['partials', 'helpers', 'text'], function (j, aspect) {
 			if (!info) {
 				// template was not defined yet, so no partials/helpers/text to load
