@@ -43,8 +43,6 @@
 			var tool = this;
 			var state = tool.state;
 			var $te = $(tool.element);
-
-			Q.addStylesheet('{{Q}}/css/tabs.css');
 			
 			if (state.contextualHandler == null) {
 				state.contextualHandler = function ($jq) {
