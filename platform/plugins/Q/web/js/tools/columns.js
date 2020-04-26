@@ -976,10 +976,13 @@ function presentColumn(tool, $column, fullscreen) {
 		document.title = $currentColumn.find('.Q_title_slot').text();
 	}
 
+	var hideTitle = $column.hasClass('Q_columns_hideTitle');
 	var $cs = $('.Q_column_slot', $column);
+	if (hideTitle) {
+		$cs.css('top', '-' + $ct.outerHeight() + 'px');
+	}
 	var $controls = $column.find('.Q_controls_slot');
-	var cth = $ct.is(":visible") && !$column.hasClass('Q_columns_hideTitle')
-		? $ct.height() : 0;
+	var cth = $ct.is(":visible") && !hideTitle ? $ct.height() : 0;
 	var controlsh = $controls.is(":visible") ? $controls.height() : 0;
 	var index = parseInt($column.attr('data-index'));
 	if (Q.info.isMobile) {

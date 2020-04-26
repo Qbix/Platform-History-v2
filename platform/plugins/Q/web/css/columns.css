@@ -220,6 +220,5 @@ html.Q_ios.Q_standalone .Q_columns_title {
 	display: none;
 }
 .Q_columns_hideTitle .Q_column_slot {
-	position: absolute;
-	top: 0;
+	position: relative;
 }
