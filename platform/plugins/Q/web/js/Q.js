@@ -2871,6 +2871,7 @@ var Pp = Q.Pipe.prototype;
  *  The callback receives the same "this" and arguments that the original call was made with.
  *  It is passed the "this" and arguments which are passed to the callback.
  *  If you return true from this function, it will delete all the callbacks in the pipe.
+ * @chainable
  */
 Pp.on = function _Q_pipe_on(field, callback) {
 	return this.add([field], 1, function _Q_pipe_on_callback (params, subjects, field) {
@@ -7220,7 +7221,6 @@ Q.request = function (url, slotNames, callback, options) {
 	}
 };
 
-
 Q.request.callbacks = []; // used by Q.request
 
 /**
@@ -9775,12 +9775,12 @@ Q.Text = {
 	 * @param {String} name The name of the text source
 	 * @param {Object} content The content, a hierarchical object whose leaves are
 	 *  the actual text translated into the current language in Q.Text.language
-	 * @param {Boolean} [merges=false] If true, merges on top instead of replacing
+	 * @param {Boolean} [merge=false] If true, merges on top instead of replacing
 	 */
 	set: function (name, content, merge) {
 		var obj = null;
 		if (merge) {
-			obj = Q.getObject([Q.Text.languageLocaleString, name], content);
+			obj = Q.getObject([Q.Text.languageLocaleString, name], Q.Text.collection);
 		}
 		if (obj) {
 			Q.extend(obj, 10, content);
@@ -9812,10 +9812,17 @@ Q.Text = {
 			Q.handle(callback, Q.Text, [null, content]);
 			return true;
 		}
+		var func = _Q_Text_getter;
+		if (options && options.ignoreCache) {
+			func = func.force;
+		}
 		var names = Q.isArrayLike(name) ? name : [name];
 		var pipe = Q.pipe(names, function (params, subjects) {
 			var result = {};
 			var errors = null;
+			var pipe2 = Q.pipe();
+			var waitFor = [];
+			var urls = {};
 			for (var i=0, l=names.length; i<l; ++i) {
 				var name = names[i];
 				if (params[name][0]) {
@@ -9824,28 +9831,53 @@ Q.Text = {
 				} else if (params[name][1]) {
 					Q.extend(result, 10, params[name][1]);
 				}
+				var override = Q.Text.override.collection[name];
+				if (!Q.isEmpty(override)) {
+					var overrides = Q.isArrayLike(override) ? override : [override];
+					for (var j=0; j<overrides.length; ++j) {
+						var url = Q.url(overrides[j]);
+						if (urls[url]) {
+							continue;
+						}
+						urls[url] = true;
+						waitFor.push(url);
+						func(name, url, pipe2.fill(url), true);
+					}
+				}
 			}
-			Q.handle(callback, Q.Text, [errors, result]);
+			pipe2.add(waitFor, 1, function () {
+				Q.handle(callback, Q.Text, [errors, result]);
+			}).run();
 		});
 		Q.each(names, function (i, name) {
-			var func = _Q_Text_getter;
-			if (options && options.ignoreCache) {
-				func = func.force;
-			}
 			var url = Q.url(dir + '/' + name + '/' + lls + '.json');
 			return func(name, url, pipe.fill(name), options);
 		});
+	},
+	
+	/**
+	 * Call this to override some text files that may have already been loaded,
+	 * or that will be loaded.
+	 * @method override
+	 * @static
+	 * @param {String} name The name of the text source.
+	 * @param {String} override The name of the overriding text source
+	 * e.g. "{{MyApp}}/override/Streams/content"
+	 * @property {Object} override
+	 */
+	override: function (name, override, callback) {
+		Q.Text.override.collection[name] = override;
 	}
 };
 
 // Set the initial language, but this can be overridden after Q.onInit
 Q.Text.setLanguage.apply(Q.Text, navigator.language.split('-'));
 
-var _Q_Text_getter = Q.getter(function (name, url, callback, options) {
+var _Q_Text_getter = Q.getter(function (name, url, callback, merge) {
 	var o = Q.extend({extend: false}, options);
 	return Q.request(url, function (err, content) {
 		if (!err) {
-			Q.Text.set(name, content, options);
+			Q.Text.set(name, content, merge);
 		}
 		Q.handle(callback, Q.Text, [err, content]);
 	}, o);
@@ -12606,7 +12638,22 @@ Q.Audio.pauseAll = function () {
  * @param {Function} callback Receives err, data
  */
 Q.Audio.loadVoices = Q.getter(function (callback) {
-	Q.request('{{Q}}/js/speech/voices.json', [], callback);
+	Q.request('{{Q}}/js/speech/voices.json', [], function (err, voices) {
+		var msg = Q.firstErrorMessage(err, voices);
+		if (msg) {
+			throw new Q.Error(msg);
+		}
+		if (typeof voices !== "object") {
+			callback.call(this, "Q.Audio.speak: could not get the known voices list", null);
+		}
+		for (var languageLocale in voices) {
+			var lang = languageLocale.split('-')[0];
+			if (!voices[lang]) {
+				voices[lang] = voices[languageLocale];
+			}
+		}
+		callback.call(this, err, voices);
+	});
 }, {
 	cache: Q.Cache.document('Q.Audio.speak.loadVoices', 1)
 });
@@ -12622,7 +12669,7 @@ Q.Audio.loadVoices = Q.getter(function (callback) {
  * @param {Number} [options.rate=1] the speaking rate of the SpeechSynthesizer object, from 0.1 to 1.
  * @param {Number} [options.pitch=1] the speaking pitch of the SpeechSynthesizer object, from 0.1 to 1.9.
  * @param {Number} [options.volume=1] the volume height of speech (0.1 - 1).
- * @param {Number} [options.locale] a 4 character code that specifies the language that should be used to synthesize the text.
+ * @param {Number} [options.locale="en-US"] a 5 character code that specifies the language that should be used to synthesize the text.
  * @param {Q.Event|function} [options.onStart] This gets called when the speaking has begun
  * @param {Q.Event|function} [options.onEnd] This gets called when the speaking has finished
  * @param {Q.Event|function} [options.onSpeak] This gets called when the system called speak(), whether or not it worked
@@ -12652,7 +12699,7 @@ Q.Audio.speak = function (text, options) {
 		function _switchGender(gender) {
 			return (gender == "female") ? "male" : "female"
 		}
-		function _search(){
+		function _search() {
 			var result = null;
 			var av = Q.getObject([gender, o.locale], knownVoices)
 				|| Q.getObject([gender, language], knownVoices)
@@ -12713,13 +12760,6 @@ Q.Audio.speak = function (text, options) {
 				SS.cancel();
 			}
 			Q.Audio.loadVoices(function (err, voices) {
-				var msg = Q.firstErrorMessage(err, voices);
-				if (msg) {
-					throw new Q.Error(msg);
-				}
-				if (typeof voices !== "object") {
-					return console.warn("Q.Audio.speak: could not get the known voices list");
-				}
 				var u = new SpeechSynthesisUtterance(text.replace(/<[^>]+>/g, ''));
 				var voicesList = SS.getVoices();
 				var chosenVoice = _chooseVoice(u.text, voicesList, voices);
