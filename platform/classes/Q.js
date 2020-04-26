@@ -156,7 +156,7 @@ function _getProp (/*Array*/parts, /*Boolean*/create, /*Object*/context){
  * @param {mixed} value value or object to place at location given by name
  * @param {Object} [context=root] Optional. Object to use as root of path.
  * @param {String} [delimiter='.'] The delimiter to use in the name
- * @return {Object|undefined} Returns the passed value if setting is successful or `undefined` if not.
+ * @return {Object|undefined} Returns the resulting value if setting is successful or `undefined` if not.
  */
 Q.setObject = function _Q_setObject(name, value, context, delimiter) {
 	delimiter = delimiter || '.';

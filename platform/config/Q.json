@@ -147,7 +147,8 @@
 				"dontCache": true,
 				"duration": 3600
 			},
-			"useLocale": false
+			"useLocale": false,
+			"loadBeforeInit": []
 		},
 		"templates": {
 			"ignoreCache": true,

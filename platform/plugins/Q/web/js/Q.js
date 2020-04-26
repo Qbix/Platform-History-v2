@@ -1974,7 +1974,7 @@ function _getProp (/*Array*/parts, /*Boolean*/create, /*Object*/context){
  * @param {anything} value value or object to place at location given by name
  * @param {Object} [context=window]  Optional. Object to use as root of path.
  * @param {String} [delimiter='.']  The delimiter to use in the name
- * @return {Object|undefined} Returns the passed value if setting is successful or `undefined` if not.
+ * @return {Object|undefined} Returns the resulting value if setting is successful or `undefined` if not.
  */
 Q.setObject = function _Q_setObject(name, value, context, delimiter) {
 	if (Q.isPlainObject(name)) {
@@ -5813,13 +5813,19 @@ Q.init = function _Q_init(options) {
 	Q.handle(Q.beforeInit);
 	
 	// Time to call all the onInit handlers
+	var p2 = Q.pipe();
+	var waitFor = [];
 	if (Q.info.urls && Q.info.urls.updateBeforeInit) {
-		Q.updateUrls(function () {
-			Q.handle(Q.onInit);
-		});
-	} else {
-		Q.handle(Q.onInit);
+		waitFor.push('Q.info.urls.updateBeforeInit');
+		Q.updateUrls(p2.fill('Q.info.urls.updateBeforeInit'));
 	}
+	if (!Q.isEmpty(Q.Text.loadBeforeInit)) {
+		waitFor.push('Q.Text.loadBeforeInit');
+		Q.Text.get(Q.Text.loadBeforeInit, p2.fill('Q.Text.loadBeforeInit'));
+	}
+	p2.add(waitFor, 1, function () {
+		Q.handle(Q.onInit, Q);
+	}).run();
 };
 
 /**
@@ -9778,14 +9784,27 @@ Q.Text = {
 	 * @param {Boolean} [merge=false] If true, merges on top instead of replacing
 	 */
 	set: function (name, content, merge) {
-		var obj = null;
+		var obj, override, n, o;
+		var lls = Q.Text.languageLocaleString;
+		if (Q.Text.override[name]) {
+			// override was specified for this content, merge over it
+			content = Q.extend({}, content, 10, Q.Text.override[name]);
+		}
 		if (merge) {
-			obj = Q.getObject([Q.Text.languageLocaleString, name], Q.Text.collection);
+			obj = Q.getObject([lls, name], Q.Text.collection);
 		}
 		if (obj) {
 			Q.extend(obj, 10, content);
 		} else {
-			Q.setObject([Q.Text.languageLocaleString, name], content, Q.Text.collection);
+			Q.setObject([lls, name], content, Q.Text.collection);
+		}
+		override = (content && content['@override']) || {};
+		for (n in override) {
+			Q.Text.override[n] = Q.extend(Q.Text.override[n], 10, override[n]);
+			if (o = Q.getObject([lls, n], Q.Text.collection)) {
+				// content was already loaded, merge over it in text collection
+				Q.extend(o, 10, Q.Text.override[n]);
+			}
 		}
 	},
 
@@ -9820,9 +9839,6 @@ Q.Text = {
 		var pipe = Q.pipe(names, function (params, subjects) {
 			var result = {};
 			var errors = null;
-			var pipe2 = Q.pipe();
-			var waitFor = [];
-			var urls = {};
 			for (var i=0, l=names.length; i<l; ++i) {
 				var name = names[i];
 				if (params[name][0]) {
@@ -9831,23 +9847,8 @@ Q.Text = {
 				} else if (params[name][1]) {
 					Q.extend(result, 10, params[name][1]);
 				}
-				var override = Q.Text.override.collection[name];
-				if (!Q.isEmpty(override)) {
-					var overrides = Q.isArrayLike(override) ? override : [override];
-					for (var j=0; j<overrides.length; ++j) {
-						var url = Q.url(overrides[j]);
-						if (urls[url]) {
-							continue;
-						}
-						urls[url] = true;
-						waitFor.push(url);
-						func(name, url, pipe2.fill(url), true);
-					}
-				}
 			}
-			pipe2.add(waitFor, 1, function () {
-				Q.handle(callback, Q.Text, [errors, result]);
-			}).run();
+			Q.handle(callback, Q.Text, [errors, result]);
 		});
 		Q.each(names, function (i, name) {
 			var url = Q.url(dir + '/' + name + '/' + lls + '.json');
@@ -9855,29 +9856,23 @@ Q.Text = {
 		});
 	},
 	
-	/**
-	 * Call this to override some text files that may have already been loaded,
-	 * or that will be loaded.
-	 * @method override
-	 * @static
-	 * @param {String} name The name of the text source.
-	 * @param {String} override The name of the overriding text source
-	 * e.g. "{{MyApp}}/override/Streams/content"
-	 * @property {Object} override
-	 */
-	override: function (name, override, callback) {
-		Q.Text.override.collection[name] = override;
-	}
+	override: {}
 };
+
+/**
+ * Array of text files to load before calling Q.onInit
+ * @property {Array} loadBeforeInit
+ */
+Q.Text.loadBeforeInit = [];
 
 // Set the initial language, but this can be overridden after Q.onInit
 Q.Text.setLanguage.apply(Q.Text, navigator.language.split('-'));
 
-var _Q_Text_getter = Q.getter(function (name, url, callback, merge) {
+var _Q_Text_getter = Q.getter(function (name, url, callback, options) {
 	var o = Q.extend({extend: false}, options);
 	return Q.request(url, function (err, content) {
 		if (!err) {
-			Q.Text.set(name, content, merge);
+			Q.Text.set(name, content, o.merge);
 		}
 		Q.handle(callback, Q.Text, [err, content]);
 	}, o);
