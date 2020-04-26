@@ -3857,7 +3857,9 @@ Q.Tool = function _Q_Tool(element, options) {
 	if (!element.Q.toolNames) element.Q.toolNames = [];
 	element.Q.toolNames.push(normalizedName);
 	element.Q.tools[normalizedName] = this;
-	element.Q.tool = this;
+	if (!element.Q.tool) {
+		element.Q.tool = this;
+	}
 	Q.setObject([this.id, this.name], this, Q.Tool.active);
 	
 	// Add a Q property on the object and extend it with the prototype.Q if any
