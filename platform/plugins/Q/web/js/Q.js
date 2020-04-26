@@ -9821,6 +9821,7 @@ Q.Text = {
 	 * @param {Object} content The content, a hierarchical object whose leaves are
 	 *  the actual text translated into the current language in Q.Text.language
 	 * @param {Boolean} [merge=false] If true, merges on top instead of replacing
+	 * @return {Object} The content that was set, with any loaded overrides applied
 	 */
 	set: function (name, content, merge) {
 		var obj, override, n, o;
@@ -9845,6 +9846,7 @@ Q.Text = {
 				Q.extend(o, 10, Q.Text.override[n]);
 			}
 		}
+		return content;
 	},
 
 	/**

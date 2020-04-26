@@ -67,6 +67,7 @@ class Q_Text
 	 * @param {string} [options.language=Q_Text::language] Preferred language, e.g. "en"
 	 * @param {string} [options.locale=Q_Text::locale] Preferred locale, e.g. "US"
 	 * @param {string} [options.merge=false] If true, merges on top instead of replacing
+	 * @return {array} The content that was set, with any loaded overrides applied
 	 */
 	static function set($name, $content, $options = array())
 	{
@@ -90,6 +91,7 @@ class Q_Text
 				}
 			}
 		}
+		return $content;
 	}
 	
 	/**

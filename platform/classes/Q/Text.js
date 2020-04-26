@@ -48,6 +48,7 @@ Text.basename = function(options) {
  * @param {String} [options.language=Q.Text.language] Preferred language, e.g. "en"
  * @param {String} [options.locale=Q.Text.locale] Preferred locale, e.g. "US"
  * @param {Boolean} [options.merge=false] If true, merges on top instead of replacing
+ * @return {Object} The content that was set, with any loaded overrides applied
  */
 Text.set = function (name, content, options) {
 	var obj, override, n, o, toMerge, merged;
