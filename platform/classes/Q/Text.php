@@ -134,7 +134,8 @@ class Q_Text
 		)));
 		if ($json) {
 			$content = Q::json_decode($json, true);
-			return self::set($name, $content, Q::ifset($options, 'merge', false));
+			self::set($name, $content, Q::ifset($options, 'merge', false));
+			return $content;
 		}
 		return array();
 	}
