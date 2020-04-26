@@ -4841,7 +4841,7 @@ Q.Tool.byId = function _Q_Tool_byId(id, name) {
 		return undefined;
 	}
 	var q = tool.element.Q;
-	return q.tools[q.toolNames[q.toolNames.length-1]];
+	return q.tools[q.toolNames[0]];
 };
 
 /**
