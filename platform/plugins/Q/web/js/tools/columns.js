@@ -997,6 +997,7 @@ function presentColumn(tool, $column, fullscreen, recalculateHeights) {
 	var cth = $ct.is(":visible") && !hideTitle ? $ct.height() : 0;
 	var controlsh = $controls.is(":visible") ? $controls.height() : 0;
 	var index = parseInt($column.attr('data-index'));
+	var heightToBottom;
 	if (Q.info.isMobile) {
 		var $sc = $(tool.state.container);
 		var expandTop = index > 0 && state.expandOnMobile && state.expandOnMobile.top;
@@ -1013,7 +1014,7 @@ function presentColumn(tool, $column, fullscreen, recalculateHeights) {
 			$column.css('top', top + 'px');
 		}
 		var columnRect = $cs[0].getBoundingClientRect();
-		var heightToBottom = (expandBottom ? Q.Pointer.windowHeight() : containerRect.bottom)
+		heightToBottom = (expandBottom ? Q.Pointer.windowHeight() : containerRect.bottom)
 			- columnRect.top
 			- parseInt($cs.css('padding-top'))
 			- parseInt($cs.css('padding-bottom'))
@@ -1026,12 +1027,13 @@ function presentColumn(tool, $column, fullscreen, recalculateHeights) {
 			$column.css('height', 'auto');
 		}
 	} else {
-		$cs.height(
-			$(tool.element).height()
+		heightToBottom = $(tool.element).height()
 			- $cs.offset().top + $cs.parent().offset().top
 			- parseInt($cs.css('padding-top'))
 			- parseInt($cs.css('padding-bottom'))
-		);
+			- controlsh;
+
+		$cs.height(heightToBottom);
 		if (0 && !recalculateHeights) {
 			$column.css('min-height', tool.oldMinHeight);
 			var show = $column.data(dataKey_lastShow);
