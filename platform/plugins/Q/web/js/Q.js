@@ -12257,6 +12257,7 @@ Q.Dialogs = {
 		if (!this.dialogs.length) {
 			Q.Masks.hide('Q.screen.mask');
 		}
+		Q.Pointer.cancelClick();
 		return $dialog && $dialog[0];
 	},
 	

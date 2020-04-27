@@ -119,7 +119,7 @@ Q.Tool.define("Q/columns", function(options) {
 		}, tool);
 
 		tool.refresh();
-		if (Q.isMobile) {
+		if (0 && Q.info.isMobile) {
 			tool.startAdjustingPositions();
 		}
 		Q.onLayout(tool).set(function () {
@@ -331,8 +331,12 @@ Q.Tool.define("Q/columns", function(options) {
 						? state.closeFromSwipeDown
 						: Q.getObject(['originalEvent', 'touches', 0, 'radiusY'], e1)*2 || 50;
 					var z = (y2 - y1) / threshold;
-					$(div).css('top', parseInt(originalTop)+Math.max(0, y2-y1));
-					$(div).css('opacity', 1-z);
+					$div.css('top', parseInt(originalTop)+Math.max(0, y2-y1));
+					$div.css('opacity', 1-z);
+					if (Q.info.isMobile && index > 0) {
+						var $prevColumn = $(state.columns[index-1]);
+						(z > 0) ? $prevColumn.show() : $prevColumn.hide();
+					}
 					if (y2 - y1 > threshold
 					&& Math.abs((y2-y1)/(x2-x1)) > 2) { //generally down direction
 						if (!_addedEventListener) {
@@ -351,6 +355,9 @@ Q.Tool.define("Q/columns", function(options) {
 							top: originalTop,
 							opacity: originalOpacity
 						}, 100);
+						if (Q.info.isMobile && index > 0) {
+							$(state.columns[index-1]).hide;
+						}
 					}
 					Q.Masks.hide('Q.click.mask');
 					Q.removeEventListener(document.body, 'touchmove', _onTouchmove);
@@ -502,7 +509,7 @@ Q.Tool.define("Q/columns", function(options) {
 			}
 
 			Q.onLayout($tc[0]).set(function () {
-				presentColumn(tool, $div, o.fullscreen);
+				presentColumn(tool, $div, o.fullscreen, true);
 			}, tool);
 
 			waitFor.push('activated1', 'activated2', 'activated3');
@@ -688,7 +695,7 @@ Q.Tool.define("Q/columns", function(options) {
 				
 				$div.removeClass('Q_columns_opening').addClass('Q_columns_opened');
 
-				presentColumn(tool, $div, o.fullscreen);
+				presentColumn(tool, $div, o.fullscreen, true);
 
 				if (Q.info.isTouchscreen) {
 					if (o.fullscreen) {
@@ -873,7 +880,9 @@ Q.Tool.define("Q/columns", function(options) {
 					.height(Q.Pointer.windowHeight() - Q.fixedOffset('top') - Q.fixedOffset('bottom'));
 			}
 		}
-		presentColumn(tool);
+		$columns.each(function () {
+			presentColumn(tool, $(this), state.fullscreen, true);
+		});
 
 		if (state.fullscreen) {
 			$te.addClass('Q_fullscreen');
@@ -921,15 +930,18 @@ Q.Tool.define("Q/columns", function(options) {
 			}
 			var diff = tool.startAdjustingPositions.top - top;
 			tool.startAdjustingPositions.top = top;
-			Q.each(tool.state.columns, function (i, column) {
-				var rect = column.getBoundingClientRect();
-				$(column).css('top', rect.top + diff);
-			});
+			if (!isNaN(diff)) {
+				Q.each(tool.state.columns, function (i, column) {
+					var rect = column.getBoundingClientRect();
+					$(column).css('top', rect.top + diff);
+				});
+			}
 		});
 	},
 	
 	stopAdjustingPositions: function () {
-		clearInterval(this.startAdjustingPositions.interval);
+		this.startAdjustingPositions.interval
+		&& clearInterval(this.startAdjustingPositions.interval);
 	},
 	
 	Q: {
@@ -958,7 +970,7 @@ Q.Template.set('Q/columns/column',
 	'<div class="Q_contextual"><ul class="Q_listing"></ul></div>'
 );
 
-function presentColumn(tool, $column, fullscreen) {
+function presentColumn(tool, $column, fullscreen, recalculateHeights) {
 	var state = tool.state;
 	var $currentColumn = Q.getObject('$currentColumn', state);
 
@@ -989,6 +1001,9 @@ function presentColumn(tool, $column, fullscreen) {
 		var $sc = $(tool.state.container);
 		var expandTop = index > 0 && state.expandOnMobile && state.expandOnMobile.top;
 		var expandBottom = index > 0 && state.expandOnMobile && state.expandOnMobile.bottom;
+		if (document.documentElement.scrollTop < 0) {
+			document.documentElement.scrollTop = 0; // iOS Safari bug
+		}
 		var containerRect = $sc[0].getBoundingClientRect();
 		if (!fullscreen && expandTop) {
 			var statusBackground = document.getElementById('status_background')
@@ -1017,11 +1032,12 @@ function presentColumn(tool, $column, fullscreen) {
 			- parseInt($cs.css('padding-top'))
 			- parseInt($cs.css('padding-bottom'))
 		);
-
-		$column.css('min-height', tool.oldMinHeight);
-		var show = $column.data(dataKey_lastShow);
-		if (show && show.height) {
-			$cs.css('height', show.height - cth - controlsh + 'px');
+		if (0 && !recalculateHeights) {
+			$column.css('min-height', tool.oldMinHeight);
+			var show = $column.data(dataKey_lastShow);
+			if (show && show.height) {
+				$cs.css('height', show.height - cth - controlsh + 'px');
+			}
 		}
 	}
 	Q.layout($cs[0]);
@@ -1104,3 +1120,8 @@ function _updateAttributes() {
 }
 
 })(Q, jQuery);
+
+/*! jQuery requestAnimationFrame - 0.2.3-pre - 2016-10-26
+* https://github.com/gnarf37/jquery-requestAnimationFrame
+ * Copyright (c) 2016 Corey Frang; Licensed MIT */
+!function(a){"function"==typeof define&&define.amd?define(["jquery"],a):a(jQuery)}(function(a){function b(){c&&(window.requestAnimationFrame(b),a.fx.tick())}if(Number(a.fn.jquery.split(".")[0])>=3)return void(window.console&&window.console.warn&&window.console.warn("The jquery.requestanimationframe plugin is not needed in jQuery 3.0 or newer as they handle it natively."));var c;window.requestAnimationFrame&&(a.fx.timer=function(d){d()&&a.timers.push(d)&&!c&&(c=!0,b())},a.fx.stop=function(){c=!1})});

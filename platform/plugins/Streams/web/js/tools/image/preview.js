@@ -124,6 +124,11 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 			function (err, html) {
 				if (err) return;
 				tool.element.innerHTML = html;
+				var $img = tool.$('.Streams_image_preview_icon');
+				var src = tool.element.getAttribute('data-icon-src');
+				if (src) {
+					$img.attr('src', src);
+				}
 				Q.activate(tool, function () {
 					// load the icon
 					Q.extend(ps.imagepicker.onSuccess, {
