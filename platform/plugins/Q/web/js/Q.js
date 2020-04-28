@@ -8266,7 +8266,7 @@ Q.find = function _Q_find(elem, filter, callbackBefore, callbackAfter, options, 
 	if (filter === true) {
 		filter = 'q_tool';
 		activating = true;
-		if (elem.Q_activating  && elem.Q_activating !== shared.activating) {
+		if (elem.Q_activating  && elem.Q_activating !== Q.getObject("shared.activating")) {
 			return; // skip the element and its subtree, it's already being activated
 		}
 	}
