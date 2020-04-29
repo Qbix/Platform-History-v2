@@ -1,19 +1,34 @@
 The Qbix Platform
 ===
 
-### [Platform Portal](https://qbix.com/platform) - tutorials docs, platform reference, and more.
+### [Platform Portal](https://qbix.com/platform) - overview
 
 ### [Video tutorials](https://qbix.com/platform/tutorials) help you get started.
+
+### [Developer Guide](https://qbix.com/platform/guide) - tutorials docs, platform reference, and more.
 
 For Developers
 ===
 
-### 3 Minute Showcase
-See what's possible to build with Qbix Platform:
+### Learn about the platform:
+[![Qbix](https://img.youtube.com/vi/pZ1O_gmPneI/0.jpg)](https://www.youtube.com/watch?v=pZ1O_gmPneI&feature=emb_title)
 
-[![Qbix](https://qbix.com/img/thumbnails/showcase.png)](https://vimeo.com/208438090)
+### 3 Minute Showcase
+See one possible app to build with Qbix Platform:
+
+[![Showcase](https://qbix.com/img/thumbnails/showcase.png)](https://vimeo.com/208438090)
 
 ### About Qbix
+Our company spent 10 years building a decentralized Social Operating System for the web, with reusable, user-friendly, battle-tested components that can be combined in various ways. It's entirely web-based and is designed to work across every device, including
+* desktop browsers
+* tablet browsers
+* mobile browsers (iOS and Android)
+* native iOS apps (Cordova)
+* native Android apps (Cordova)
+
+We aim to do to Facebook and Google what the Web did to AOL. Foster an open, permissionless ecosystem where any startup or existing organization can release its own app, and be in charge of its own data, identity, relationships and brand. We want to [move the Web from Feudalism to a Free Market](https://qbix.com/QBUX/whitepaper.html#Distributed-Operating-System).
+
+### About Qbix Platform
 There are lots of frameworks out there for making websites. You've probably encountered them. Well, Qbix is different. It was designed from the ground up to power social apps for communities to install.
 
 A social app is an app that enables spontaneous communication and collaboration between users.
