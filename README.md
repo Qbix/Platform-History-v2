@@ -5,7 +5,7 @@ The Qbix Platform
 
 ### [Video tutorials](https://qbix.com/platform/tutorials) help you get started.
 
-### [Developer Guide](https://qbix.com/platform/guide) - tutorials docs, platform reference, and more.
+### [Developer Guide](https://qbix.com/platform/guide) - an overview of every feature.
 
 For Developers
 ===
