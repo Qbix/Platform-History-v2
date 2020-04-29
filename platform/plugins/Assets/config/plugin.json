@@ -109,6 +109,9 @@
 			},
 			"earn": {
 				"acceptedInvite": 10
+			},
+			"exchange": {
+				"USD": 10
 			}
 		},
 		"currencies": {
