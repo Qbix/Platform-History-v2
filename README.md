@@ -26,7 +26,7 @@ Our company spent 10 years building a decentralized Social Operating System for 
 * native iOS apps (Cordova)
 * native Android apps (Cordova)
 
-We aim to do to Facebook and Google what the Web did to AOL. Foster an open, permissionless ecosystem where any startup or existing organization can release its own app, and be in charge of its own data, identity, relationships and brand. We want to [move the Web from Feudalism to a Free Market](https://qbix.com/QBUX/whitepaper.html#Distributed-Operating-System).
+We aim to do to Facebook and Google what the Web did to AOL and CompuServe. Foster an open, permissionless ecosystem where any startup or existing organization can release its own app, and be in charge of its own data, identity, relationships and brand. We want to [move the Web from Feudalism to a Free Market](https://qbix.com/QBUX/whitepaper.html#Distributed-Operating-System).
 
 ### About Qbix Platform
 There are lots of frameworks out there for making websites. You've probably encountered them. Well, Qbix is different. It was designed from the ground up to power social apps for communities to install.
