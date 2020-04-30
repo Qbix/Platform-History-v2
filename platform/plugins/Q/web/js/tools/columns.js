@@ -936,7 +936,7 @@ Q.Tool.define("Q/columns", function(options) {
 					$(column).css('top', rect.top + diff);
 				});
 			}
-		});
+		}, milliseconds);
 	},
 	
 	stopAdjustingPositions: function () {
@@ -990,8 +990,9 @@ function presentColumn(tool, $column, fullscreen, recalculateHeights) {
 
 	var hideTitle = $column.hasClass('Q_columns_hideTitle');
 	var $cs = $('.Q_column_slot', $column);
+	var titleOuterHeight = $ct.outerHeight();
 	if (hideTitle) {
-		$cs.css('top', '-' + $ct.outerHeight() + 'px');
+		$cs.css('top', '-' + titleOuterHeight + 'px');
 	}
 	var $controls = $column.find('.Q_controls_slot');
 	var cth = $ct.is(":visible") && !hideTitle ? $ct.height() : 0;
@@ -1020,11 +1021,15 @@ function presentColumn(tool, $column, fullscreen, recalculateHeights) {
 			- parseInt($cs.css('padding-bottom'))
 			- controlsh;
 		if (fullscreen) {
-			$cs.add($div).css('height', 'auto');
+			$cs.add($column).css('height', 'auto');
 			$cs.css('min-height', heightToBottom);
 		} else {
 			$cs.height(heightToBottom);
-			$column.css('height', 'auto');
+			if (hideTitle) {
+				$column.css('height', heightToBottom + titleOuterHeight);
+			} else {
+				$column.css('height', 'auto');
+			}
 		}
 	} else {
 		heightToBottom = $(tool.element).height()
