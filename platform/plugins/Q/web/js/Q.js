@@ -11673,9 +11673,12 @@ Q.Pointer = {
 	 *   You will want to skip the mask if you want to allow scrolling, for instance.
 	 * @param {Q.Event} [event] Some mouse or touch event from the DOM
 	 * @param {Object} [extraInfo] Extra info to pass to onCancelClick
+	 * @param {Boolean} [msUntilStopCancelClick] Pass a number here to set
+	 *   Q.Pointer.canceledClick = false after this number of milliseconds.
+	 *   Usually you don't want to do this, because it might create race conditions.
 	 * @return {boolean}
 	 */
-	cancelClick: function (skipMask, event, extraInfo) {
+	cancelClick: function (skipMask, event, extraInfo, msUntilStopCancelClick) {
 		if (false === Q.Pointer.onCancelClick.handle(event, extraInfo)) {
 			return false;
 		}
@@ -11684,9 +11687,11 @@ Q.Pointer = {
 		if (!skipMask) {
 			Q.Masks.show('Q.click.mask');
 		}
-		setTimeout(function () {
-			Q.Pointer.canceledClick = false;
-		}, 300);
+		if (msUntilStopCancelClick) {
+			setTimeout(function () {
+				Q.Pointer.canceledClick = false;
+			}, msUntilStopCancelClick);
+		}
 	},
 	/**
 	 * Consistently obtains the element under pageX and pageY relative to document
