@@ -238,7 +238,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		
 		function _callback (err, res) {
 			var state = $this.state('Q/imagepicker');
-			var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(res && res.errors);
+			var msg = Q.firstErrorMessage(err, res);
 			if (msg) {
 				$this.attr('src', state.oldSrc).stop().removeClass('Q_uploading');
 				return Q.handle([state.onError, state.onFinish], $this, [msg]);
@@ -396,6 +396,11 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 					Q.addScript(EXIFjslib, function () {
 						EXIF.getData(img, function () {
 							var orientation = this.exifdata.Orientation;
+							document.body.appendChild(img);
+							if (img.computedStyle().imageOrientation === 'from-image') {
+								orientation = 1; // browser already did the work for us
+							}
+							document.body.removeChild(img);
 							var rotated = (orientation === 8 || orientation === 6);
 							var isw = img.width;
 							var ish = img.height;
@@ -486,6 +491,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 					                    if (!_checkRequiredSize(requiredSize, bounds)) {
 					                    	return _revert();
 					                    }
+
 										var temp;
 										if (orientation === 6) {
 											temp = bounds.width;
@@ -587,10 +593,13 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 					});
 				} else {
 					delete params.data;
-					state.input.wrap('<form />', {
+					var $form = state.input.wrap('<form />', {
 						method: 'POST',
 						action: Q.url(url, params)
-					}).parent().submit();
+					}).parent();
+					Q.formPost($form[0], {
+						onLoad: _callback
+					});
 					state.input.unwrap();
 				}
 			}

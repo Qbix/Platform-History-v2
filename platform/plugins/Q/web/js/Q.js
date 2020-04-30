@@ -11684,6 +11684,9 @@ Q.Pointer = {
 		if (!skipMask) {
 			Q.Masks.show('Q.click.mask');
 		}
+		setTimeout(function () {
+			Q.Pointer.canceledClick = false;
+		}, 300);
 	},
 	/**
 	 * Consistently obtains the element under pageX and pageY relative to document
