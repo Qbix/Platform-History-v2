@@ -80,7 +80,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 				if (!element) {
 					return;
 				}
-				var inside = tool.element === this || tool.element.contains(this);
+				var inside = (tool.element === this) || tool.element.contains(this);
 				if (!inside) {
 					return orig.apply(this, arguments);
 				}
@@ -231,8 +231,8 @@ Q.Tool.define('Q/lazyload', function (options) {
 
 function _createObserver(tool, container) {
 	var o = Q.copy(tool.state.observerOptions);
-	if (!o.root) {
-		o.root = container || document.body;
+	if (o.root === undefined) {
+		o.root = container || null;
 	}
 	return new IntersectionObserver(function (entries, observer) {
 		Q.each(entries, function (i, entry) {
