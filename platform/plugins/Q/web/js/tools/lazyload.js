@@ -101,7 +101,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 					}
 				});
 				if (found) {
-					tool.observe(tool.prepare(this, true));
+					tool.observe(tool.prepare(element, true));
 				}
 				return orig.apply(this, arguments);
 			};
