@@ -132,7 +132,7 @@ Q.Tool.jQuery('Q/overlay',
 						return;
 					}
 					var isInput = $(document.activeElement).is(":input");
-					if (isInput && $this.is(":visible")) {
+					if (isInput && !$this.is(":visible")) {
 						// keyboard is visible or not applicable, do nothing for now
 						setTimeout(_fixBody, 300);
 						return;
