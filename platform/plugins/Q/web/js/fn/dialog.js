@@ -127,13 +127,17 @@ Q.Tool.jQuery('Q/overlay',
 					top: $body.css('top')
 				};
 				setTimeout(function _fixBody() {
-					$body.addClass('Q_preventScroll')
+					if (!$this.closest('html').length) {
+						// no longer in DOM
+						return;
+					}
 					var isInput = $(document.activeElement).is(":input");
-					if (isInput) {
+					if (isInput && $this.is(":visible")) {
 						// keyboard is visible or not applicable, do nothing for now
 						setTimeout(_fixBody, 300);
 						return;
 					}
+					$body.addClass('Q_preventScroll')
 					var hs = document.documentElement.style;
 					var sl = (hs.width === '100%' && hs.overflowX === 'hidden')
 						? 0
