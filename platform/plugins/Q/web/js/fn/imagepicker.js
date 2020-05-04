@@ -82,7 +82,11 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	if (Q.isEmpty(o.saveSizeName)) {
 		throw new Q.Error("Q/imagepicker: saveSizeName is required");
 	}
-	state.input = $('<input type="file" accept="image/gif, image/jpeg, image/png" class="Q_imagepicker_file" />');
+	var extensions = state.extensions
+		|| ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'ico', 'tiff', 
+			'svg', 'ai', 'psp', 'pcd', 'pct', 'raw'];
+	var extensionList = '.' + extensions.join(', .');
+	state.input = $('<input type="file" accept="' + extensions + '" class="Q_imagepicker_file" />');
 	state.input.css({
 		'visibility': 'hidden',
 		'height': '0',

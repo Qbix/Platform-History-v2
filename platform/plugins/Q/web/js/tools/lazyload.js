@@ -46,14 +46,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 		Object.defineProperty(Elp, 'innerHTML', {
 			set: function (html) {
 				var element = document.createElement('div');
-				var inside = false;
-				var p = this;
-				while (p = p.parentNode) {
-					if (p === tool.element) {
-						inside = true;
-						break;
-					}
-				}
+				var inside = tool.element.contains(this);
 				if (!inside) {
 					originalSet.call(this, html);
 					return html;
@@ -87,20 +80,13 @@ Q.Tool.define('Q/lazyload', function (options) {
 				if (!element) {
 					return;
 				}
-				var inside = false;
-				var p = this;
-				while (p = p.parentNode) {
-					if (p === tool.element) {
-						inside = true;
-						break;
-					}
-				}
+				var inside = tool.element.contains(this);
 				if (!inside) {
 					return orig.apply(this, arguments);
 				}
 				var found = false;
 				Q.each(state.handlers, function (name, info) {
-					if (element.matches(info.selector)) {
+					if (element.matches && element.matches(info.selector)) {
 						found = true;
 						return false;
 					}
@@ -199,7 +185,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 		}
 	},
 	observerOptions: {
-		root: null,
+		root: undefined,
 		rootMargin: '0px',
 		threshold: 0
 	}
@@ -244,6 +230,10 @@ Q.Tool.define('Q/lazyload', function (options) {
 });
 
 function _createObserver(tool, container) {
+	var o = Q.copy(tool.state.observerOptions);
+	if (!o.root) {
+		o.root = container || document.body;
+	}
 	return new IntersectionObserver(function (entries, observer) {
 		Q.each(entries, function (i, entry) {
 			Q.each(tool.state.handlers, function (name, info) {
@@ -260,7 +250,7 @@ function _createObserver(tool, container) {
 				}
 			});
 		});
-	}, Q.extend({ root: container || document.body }, tool.state.observerOptions));
+	}, o);
 }
 
 function _polyfill(callback) {

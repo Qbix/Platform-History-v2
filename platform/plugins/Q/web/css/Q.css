@@ -439,7 +439,7 @@ box-shadow:0 0 10px #000; }
 .Q_zoomer { z-index: 9000; border-radius: 1px; box-shadow: black 3px 3px 10px; }
 .Q_gallery_caption { z-index: 201; position: absolute; }
 .Q_contextual { display: none; }
-.Q_rating_tool { display: inline-block; }
+.Q_rating_tool { display: inline-block; min-height: 20px; }
 .Q_rating_tool div.Q_rating_star,
 .Q_rating_tool div.Q_rating_star * { width: 14px; height: 14px; border: 0; padding: 0; }
 .Q_rating_tool div.Q_rating_star { display: inline-block; position: relative; }

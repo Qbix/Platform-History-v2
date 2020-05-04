@@ -14,6 +14,8 @@
  * @default 1000
  * @param {Number} [options.minWidth] minWidth The input won't get smaller than this
  * @default 0
+ * @param {Number} [options.minHeight] minHeight The textarea won't get smaller than this
+ * @default 0
  * @param {Number} [options.comfortZone] How many pixels of padding to allocate for typing ahead
  * @default 10
  * @param [Q.Event] [options.onResize] Triggered during a size change, its "this" object is the jQuery selector of the plugin. If used with a text input, the first parameter is the new width.
@@ -42,8 +44,8 @@ function _Q_autogrow(o) {
 		t.style.resize = 'none';
 		t.style.overflow = 'hidden';
 
-		var tVal = t.value;			
-		t.style.height = '0px';
+		var tVal = t.value;
+		t.style.height = Math.max($t.state('Q/autogrow').minHeight || 0, 0) + 'px';
 		t.value = "W\nW\nW";
 		var H3 = t.scrollHeight;
 		t.value = "W\nW\nW\nW";
@@ -79,11 +81,13 @@ function _Q_autogrow(o) {
 		var prevH = 0;
 
 		function updateHeight() {
+			var minHeight = $t.state('Q/autogrow').minHeight || 0;
 			t.style.height = '0px';
 			var tH = t.scrollHeight; // + H;
-			t.style.height = tH + 'px';
+			t.style.height = Math.max(minHeight, tH) + 'px';
 			setTimeout(function () {
-				c.style.height = $p.outerHeight(true) + 'px';
+				var h = $p.outerHeight(true);
+				c.style.height = h + 'px';
 				if (prevH && prevH != tH) {
 					var $sp = $(c.scrollingParent());
 					var st = $sp.scrollTop();
@@ -215,6 +219,7 @@ function _Q_autogrow(o) {
 {	// default options:
 	maxWidth: 1000,
 	minWidth: '.Q_placeholder',
+	minHeight: 0,
 	comfortZone: 10,
 	onResize: new Q.Event(_surroundPlaceholders, 'Q/autogrow')
 }

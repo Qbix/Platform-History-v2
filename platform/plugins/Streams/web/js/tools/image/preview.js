@@ -160,8 +160,55 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 		);
 	},
 	composer: function () {
+		var tool = this;
+		var ps = tool.preview.state;
 		var src = Q.url('{{Q}}/img/actions/add.png');
 		this.$('img.Streams_preview_add').attr('src', src);
+
+		// add imagepicker
+		var ipo = Q.extend({}, ps.imagepicker, 10, {
+			preprocess: function (callback) {
+				var subpath;
+				Q.Streams.get(ps.publisherId, ps.streamName, function () {
+					var parts = this.iconUrl(40).split('/');
+					var iconUrl = parts.slice(0, parts.length-1).join('/')
+						.substr(Q.info.baseUrl.length+1);
+					if (parts[1] === 'Users') {
+						// uploading a user icon
+						path = 'Q/uploads/Users';
+						subpath = ps.publisherId.splitId() + '/icon';
+					} else { // uploading a regular stream icon
+						path = 'Q/uploads/Streams';
+						subpath = ps.publisherId.splitId() + '/'
+							+ ps.streamName + '/icon';
+					}
+					subpath += '/'+Math.floor(Date.now()/1000);
+					callback({ path: path, subpath: subpath });
+				});
+			},
+			onSuccess: {'Streams/image/preview': function (data, key, file) {
+				Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, null, {
+					messages: true,
+					changed: {icon: true},
+					evenIfNotRetained: true
+				});
+				return false;
+			}}
+		});
+		var p = Q.pipe(['imagepicker', 'load'], function () {
+			Q.handle(onLoad, tool, [element]);
+		});
+		var $element = this.$('.Streams_preview_create')
+		.plugin('Q/imagepicker', ipo, p.fill('imagepicker'));
+		$element.off('load.Streams-preview')
+		.on('load.Streams-preview', p.fill('load'));
+		var container = this.$('.Streams_preview_container');
+		// override the fastclick handler that the Streams/preview tool set
+		container.off([Q.Pointer.fastclick, '.Streams_preview']);	
+		container.on([Q.Pointer.fastclick, '.Streams_image_preview'], function () {
+			return;
+			tool.create.bind(tool);
+		});	
 	}
 }
 

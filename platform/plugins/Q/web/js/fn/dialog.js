@@ -433,8 +433,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 			});
 			$this.data('Q/dialog', $this.data('Q/overlay'));
 		} else {
-			var data = $this.data('Q/overlay');
-			data.windowParams = {
+			var windowParams = {
 				scrollLeft: Q.Pointer.scrollLeft(),
 				scrollTop: Q.Pointer.scrollTop()
 			};
@@ -494,7 +493,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 					for (var i = 0; i < hiddenChildren.length; i++) {
 						hiddenChildren[i].show();
 					}
-					var data = $this.data('Q/overlay');
+					var data = $this.data('Q/dialog');
 					window.scrollTo(data.windowParams.scrollLeft, data.windowParams.scrollTop);
 
 					if (o.removeOnClose) {
@@ -505,7 +504,8 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 
 					Q.handle(o.onClose, $this, [$this]);
 					if (e) $.Event(e).preventDefault();
-				}
+				},
+				windowParams: windowParams
 			};
 
 			if (!o.noClose) {
