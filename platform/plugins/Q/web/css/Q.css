@@ -243,6 +243,7 @@ body.Q_preventScroll {
 	width: 35px;
 	background-image: url(../img/ui/close_big.png);
 	cursor: pointer;
+	z-index: 100;
 }
 .Q_fullscreen_dialog .Q_swap
 {
@@ -259,6 +260,7 @@ body.Q_preventScroll {
 .Q_fullscreen_dialog .Q_title_slot {
 	position: fixed;
 	width: 100%;
+	z-index: 99;
 }
 .Q_overlay .Q_close {
 	background-image:url(../img/close.png);
