@@ -67,6 +67,7 @@ table { border-spacing:0; border-collapse:collapse; }
 }
 
 /* Common Q classes */
+.Q_forceRedraw { animation: Q_forceRedraw 4s infinite; }
 .Q_pagebreak { page-break-after: always; }
 .Q_collapsed { border-bottom: solid 2px #777 !important; }
 .Q_compact {}
