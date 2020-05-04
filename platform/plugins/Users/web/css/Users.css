@@ -417,7 +417,16 @@ a.Users_activation_resend:active {
 	white-space: nowrap;
 }
 
-.Users_avatar_tool { vertical-align: top; }
+.Users_avatar_tool {
+	vertical-align: top;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.Users_avatar_tool>* {
+	vertical-align: middle;
+}
 
 .Users_labels_tool ul,
 .Users_contacts_tool ul { list-style-type: none; padding: 0; }
