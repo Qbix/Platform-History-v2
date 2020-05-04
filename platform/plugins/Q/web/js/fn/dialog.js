@@ -433,11 +433,18 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 			});
 			$this.data('Q/dialog', $this.data('Q/overlay'));
 		} else {
+			var data = $this.data('Q/overlay');
+			data.windowParams = {
+				scrollLeft: Q.Pointer.scrollLeft(),
+				scrollTop: Q.Pointer.scrollTop()
+			};
 			Q.handle(o.beforeLoad, $this, [$this]);
 			var hiddenChildren = [];
 			$(document.body).children().each(function() {
 				var child = $(this);
-				if (child[0] !== $this[0] && child.css('display') !== 'none' && this.className.indexOf('mask') === -1) {
+				if (child[0] !== $this[0] &&
+				child.css('display') !== 'none'
+				&& this.className.indexOf('mask') === -1) {
 					child.hide();
 					hiddenChildren.push(child);
 				}
@@ -487,6 +494,8 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 					for (var i = 0; i < hiddenChildren.length; i++) {
 						hiddenChildren[i].show();
 					}
+					var data = $this.data('Q/overlay');
+					window.scrollTo(data.windowParams.scrollLeft, data.windowParams.scrollTop);
 
 					if (o.removeOnClose) {
 						Q.removeElement($this[0], true);
