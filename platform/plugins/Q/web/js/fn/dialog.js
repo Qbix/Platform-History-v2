@@ -101,8 +101,6 @@ Q.Tool.jQuery('Q/overlay',
 			load: function()
 			{
 				var data = $this.data('Q/overlay');
-				data.documentScrollTop = Q.Pointer.scrollTop();
-				data.documentScrollLeft = Q.Pointer.scrollLeft();
 				if ($this.hasClass('Q_overlay_open')) {
 					return;
 				}
@@ -126,6 +124,10 @@ Q.Tool.jQuery('Q/overlay',
 					left: $body.css('left'),
 					top: $body.css('top')
 				};
+				data.windowParams = {
+					scrollLeft: Q.Pointer.scrollLeft(),
+					scrollTop: Q.Pointer.scrollTop()
+				};
 				setTimeout(function _fixBody() {
 					if (!$this.closest('html').length) {
 						// no longer in DOM
@@ -137,7 +139,6 @@ Q.Tool.jQuery('Q/overlay',
 						setTimeout(_fixBody, 300);
 						return;
 					}
-					$body.addClass('Q_preventScroll')
 					var hs = document.documentElement.style;
 					var sl = (hs.width === '100%' && hs.overflowX === 'hidden')
 						? 0
@@ -145,7 +146,7 @@ Q.Tool.jQuery('Q/overlay',
 					var st = (hs.height === '100%' && hs.overflowY === 'hidden')
 						? 0
 						: Q.Pointer.scrollTop();
-					$body.css({
+					$body.addClass('Q_preventScroll').css({
 						left: -sl + 'px',
 						top: -st + 'px'
 					});
@@ -231,9 +232,8 @@ Q.Tool.jQuery('Q/overlay',
 				}
 				setTimeout(function () {
 					$body.removeClass('Q_preventScroll').css(data.bodyStyle);
+					window.scrollTo(data.windowParams.scrollLeft, data.windowParams.scrollTop);
 				}, 500);
-				$('html,body').scrollTop(data.documentScrollTop)
-					.scrollLeft(data.documentScrollLeft);
 				if (!data.options.noClose) {
 					$(document).off('keydown', closeThisOverlayOnEsc);
 				}
@@ -448,7 +448,6 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 
 			var dialogData = {
 				load: function() {
-					dialogData.documentScrollTop = Q.Pointer.scrollTop();
 					if ($this.hasClass('Q_overlay_open')) {
 						return;
 					}
@@ -489,8 +488,6 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 					} else {
 						$this.hide();
 					}
-
-					$('html,body').scrollTop(dialogData.documentScrollTop);
 
 					Q.handle(o.onClose, $this, [$this]);
 					if (e) $.Event(e).preventDefault();
