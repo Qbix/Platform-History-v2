@@ -46,6 +46,18 @@ Q.Tool.define('Q/lazyload', function (options) {
 		Object.defineProperty(Elp, 'innerHTML', {
 			set: function (html) {
 				var element = document.createElement('div');
+				var inside = false;
+				var p = this;
+				while (p = p.parentNode) {
+					if (p === tool.element) {
+						inside = true;
+						break;
+					}
+				}
+				if (!inside) {
+					originalSet.call(this, html);
+					return html;
+				}
 				originalSet.call(element, html);
 				var found = false;
 				Q.each(state.handlers, function (name, info) {
@@ -75,7 +87,34 @@ Q.Tool.define('Q/lazyload', function (options) {
 				if (!element) {
 					return;
 				}
-				tool.observe(tool.prepare(element, true));
+				var inside = false;
+				var p = this;
+				while (p = p.parentNode) {
+					if (p === tool.element) {
+						inside = true;
+						break;
+					}
+				}
+				if (!inside) {
+					return orig.apply(this, arguments);
+				}
+				var found = false;
+				Q.each(state.handlers, function (name, info) {
+					if (element.matches(info.selector)) {
+						found = true;
+						return false;
+					}
+					var elements = element.querySelectorAll
+						? Array.from(element.querySelectorAll(info.selector))
+						: [];
+					if (elements.length) {
+						found = true;
+						return false;
+					}
+				});
+				if (found) {
+					tool.observe(tool.prepare(this, true));
+				}
 				return orig.apply(this, arguments);
 			};
 		});
@@ -187,9 +226,20 @@ Q.Tool.define('Q/lazyload', function (options) {
 	},
 	observe: function (elements) {
 		var tool = this;
-		Q.each(elements, function (i, element) {
+		tool.observer && Q.each(elements, function (i, element) {
 			tool.observer.observe(element);
 		});
+	},
+	unobserve: function (elements) {
+		var tool = this;
+		tool.observer && Q.each(elements, function (i, element) {
+			tool.observer.unobserve(element);
+		});
+	},
+	Q: {
+		beforeRemove: function () {
+			this.observer && this.observer.disconnect();
+		}
 	}
 });
 
