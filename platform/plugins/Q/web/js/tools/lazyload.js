@@ -46,7 +46,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 		Object.defineProperty(Elp, 'innerHTML', {
 			set: function (html) {
 				var element = document.createElement('div');
-				var root = tool.observer.root;
+				var root = tool.observer.root || document.documentElement;
 				var inside = (root === this) || root.contains(this);
 				if (!inside) {
 					originalSet.call(this, html);
@@ -81,7 +81,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 				if (!element) {
 					return;
 				}
-				var root = tool.observer.root;
+				var root = tool.observer.root || document.documentElement;
 				var inside = (root === this) || root.contains(this);
 				if (!inside) {
 					return orig.apply(this, arguments);
