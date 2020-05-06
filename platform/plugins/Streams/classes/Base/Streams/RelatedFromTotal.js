@@ -19,13 +19,13 @@ var Row = Q.require('Db/Row');
  * @class RelatedFromTotal
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.fromPublisherId] defaults to ""
- * @param {string} [$fields.fromStreamName] defaults to ""
- * @param {string} [$fields.relationType] defaults to ""
- * @param {string} [$fields.toStreamType] defaults to ""
- * @param {integer} [$fields.relationCount] defaults to 0
+ * @param {String|Buffer} [fields.fromPublisherId] defaults to ""
+ * @param {String|Buffer} [fields.fromStreamName] defaults to ""
+ * @param {String|Buffer} [fields.relationType] defaults to ""
+ * @param {String|Buffer} [fields.toStreamType] defaults to ""
+ * @param {Integer} [fields.relationCount] defaults to 0
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);

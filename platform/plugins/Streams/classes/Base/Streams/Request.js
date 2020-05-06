@@ -19,19 +19,19 @@ var Row = Q.require('Db/Row');
  * @class Request
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.publisherId] defaults to ""
- * @param {string} [$fields.streamName] defaults to ""
- * @param {string} [$fields.userId] defaults to ""
- * @param {integer} [$fields.readLevel] defaults to 0
- * @param {integer} [$fields.writeLevel] defaults to 0
- * @param {integer} [$fields.adminLevel] defaults to 0
- * @param {string} [$fields.permissions] defaults to null
- * @param {string} [$fields.state] defaults to "pending"
- * @param {string} [$fields.actions] defaults to null
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
- * @param {string|Db_Expression} [$fields.expireTime] defaults to null
+ * @param {String|Buffer} [fields.publisherId] defaults to ""
+ * @param {String|Buffer} [fields.streamName] defaults to ""
+ * @param {String|Buffer} [fields.userId] defaults to ""
+ * @param {Integer} [fields.readLevel] defaults to 0
+ * @param {Integer} [fields.writeLevel] defaults to 0
+ * @param {Integer} [fields.adminLevel] defaults to 0
+ * @param {String} [fields.permissions] defaults to null
+ * @param {String} [fields.state] defaults to "pending"
+ * @param {String} [fields.actions] defaults to null
+ * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
+ * @param {String|Db.Expression} [fields.expireTime] defaults to null
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -96,7 +96,7 @@ Q.mixin(Base, Row);
 /**
  * @property insertedTime
  * @type String|Db.Expression
- * @default new Db_Expression("current_timestamp()")
+ * @default new Db.Expression("CURRENT_TIMESTAMP")
  * saved on shard of publisherId
  */
 /**
@@ -668,7 +668,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","255","",false],false,"","current_timestamp()"];
+return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**

@@ -19,14 +19,14 @@ var Row = Q.require('Db/Row');
  * @class Vote
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.userId] defaults to ""
- * @param {string} [$fields.forType] defaults to ""
- * @param {string} [$fields.forId] defaults to ""
- * @param {float} [$fields.value] defaults to 0
- * @param {float} [$fields.weight] defaults to 1
- * @param {string|Db_Expression} [$fields.updatedTime] defaults to new Db_Expression("current_timestamp()")
+ * @param {String|Buffer} [fields.userId] defaults to ""
+ * @param {String|Buffer} [fields.forType] defaults to ""
+ * @param {String|Buffer} [fields.forId] defaults to ""
+ * @param {Number} [fields.value] defaults to 0
+ * @param {Number} [fields.weight] defaults to 1
+ * @param {String|Db.Expression} [fields.updatedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -67,7 +67,7 @@ Q.mixin(Base, Row);
 /**
  * @property updatedTime
  * @type String|Db.Expression
- * @default new Db_Expression("current_timestamp()")
+ * @default new Db.Expression("CURRENT_TIMESTAMP")
  * 
  */
 
@@ -474,7 +474,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","14,4","",false],true,"","current_timestamp()"];
+return [["timestamp","14,4","",false],true,"","CURRENT_TIMESTAMP"];
 };
 
 /**

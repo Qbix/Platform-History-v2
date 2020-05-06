@@ -19,12 +19,12 @@ var Row = Q.require('Db/Row');
  * @class Task
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.publisherId] defaults to ""
- * @param {string} [$fields.streamName] defaults to ""
- * @param {string} [$fields.instructions] defaults to null
- * @param {string} [$fields.errors] defaults to null
+ * @param {String|Buffer} [fields.publisherId] defaults to ""
+ * @param {String|Buffer} [fields.streamName] defaults to ""
+ * @param {String|Buffer} [fields.instructions] defaults to null
+ * @param {String|Buffer} [fields.errors] defaults to null
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);

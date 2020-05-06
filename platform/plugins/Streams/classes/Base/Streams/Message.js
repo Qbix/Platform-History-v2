@@ -19,19 +19,19 @@ var Row = Q.require('Db/Row');
  * @class Message
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.publisherId] defaults to ""
- * @param {string} [$fields.streamName] defaults to ""
- * @param {integer} [$fields.ordinal] defaults to 0
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
- * @param {string|Db_Expression} [$fields.sentTime] defaults to null
- * @param {string} [$fields.byUserId] defaults to ""
- * @param {string} [$fields.byClientId] defaults to ""
- * @param {string} [$fields.type] defaults to ""
- * @param {string} [$fields.content] defaults to ""
- * @param {string} [$fields.instructions] defaults to ""
- * @param {float} [$fields.weight] defaults to 1
+ * @param {String|Buffer} [fields.publisherId] defaults to ""
+ * @param {String|Buffer} [fields.streamName] defaults to ""
+ * @param {Integer} [fields.ordinal] defaults to 0
+ * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
+ * @param {String|Db.Expression} [fields.sentTime] defaults to null
+ * @param {String|Buffer} [fields.byUserId] defaults to ""
+ * @param {String|Buffer} [fields.byClientId] defaults to ""
+ * @param {String|Buffer} [fields.type] defaults to ""
+ * @param {String} [fields.content] defaults to ""
+ * @param {String} [fields.instructions] defaults to ""
+ * @param {Number} [fields.weight] defaults to 1
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -60,7 +60,7 @@ Q.mixin(Base, Row);
 /**
  * @property insertedTime
  * @type String|Db.Expression
- * @default new Db_Expression("current_timestamp()")
+ * @default new Db.Expression("CURRENT_TIMESTAMP")
  * saved on shard of publisherId
  */
 /**
@@ -462,7 +462,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","10"," unsigned",true],false,"","current_timestamp()"];
+return [["timestamp","10"," unsigned",true],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**

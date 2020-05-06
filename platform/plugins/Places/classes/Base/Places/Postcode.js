@@ -19,19 +19,19 @@ var Row = Q.require('Db/Row');
  * @class Postcode
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.countryCode] defaults to ""
- * @param {string} [$fields.postcode] defaults to ""
- * @param {string} [$fields.placeName] defaults to ""
- * @param {string} [$fields.stateName] defaults to ""
- * @param {string} [$fields.state] defaults to ""
- * @param {string} [$fields.regionName] defaults to ""
- * @param {string} [$fields.region] defaults to ""
- * @param {string} [$fields.community] defaults to ""
- * @param {float} [$fields.latitude] defaults to 0
- * @param {float} [$fields.longitude] defaults to 0
- * @param {integer} [$fields.accuracy] defaults to 0
+ * @param {String} [fields.countryCode] defaults to ""
+ * @param {String} [fields.postcode] defaults to ""
+ * @param {String} [fields.placeName] defaults to ""
+ * @param {String} [fields.stateName] defaults to ""
+ * @param {String} [fields.state] defaults to ""
+ * @param {String} [fields.regionName] defaults to ""
+ * @param {String} [fields.region] defaults to ""
+ * @param {String} [fields.community] defaults to ""
+ * @param {Number} [fields.latitude] defaults to 0
+ * @param {Number} [fields.longitude] defaults to 0
+ * @param {Integer} [fields.accuracy] defaults to 0
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);

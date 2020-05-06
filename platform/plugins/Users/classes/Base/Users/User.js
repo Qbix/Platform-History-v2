@@ -19,26 +19,26 @@ var Row = Q.require('Db/Row');
  * @class User
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.id] defaults to "0"
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
- * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
- * @param {string} [$fields.sessionId] defaults to null
- * @param {integer} [$fields.sessionCount] defaults to 0
- * @param {string} [$fields.passphraseHash] defaults to null
- * @param {string} [$fields.emailAddress] defaults to null
- * @param {string} [$fields.mobileNumber] defaults to null
- * @param {string} [$fields.xids] defaults to "{}"
- * @param {string} [$fields.emailAddressPending] defaults to ""
- * @param {string} [$fields.mobileNumberPending] defaults to ""
- * @param {string} [$fields.signedUpWith] defaults to ""
- * @param {string} [$fields.username] defaults to ""
- * @param {string} [$fields.icon] defaults to ""
- * @param {string} [$fields.url] defaults to null
- * @param {string} [$fields.pincodeHash] defaults to null
- * @param {string} [$fields.salt] defaults to null
- * @param {string} [$fields.preferredLanguage] defaults to "en"
+ * @param {String|Buffer} [fields.id] defaults to "0"
+ * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
+ * @param {String|Db.Expression} [fields.updatedTime] defaults to null
+ * @param {String|Buffer} [fields.sessionId] defaults to null
+ * @param {Integer} [fields.sessionCount] defaults to 0
+ * @param {String} [fields.passphraseHash] defaults to null
+ * @param {String|Buffer} [fields.emailAddress] defaults to null
+ * @param {String|Buffer} [fields.mobileNumber] defaults to null
+ * @param {String} [fields.xids] defaults to "{}"
+ * @param {String|Buffer} [fields.emailAddressPending] defaults to ""
+ * @param {String|Buffer} [fields.mobileNumberPending] defaults to ""
+ * @param {String} [fields.signedUpWith] defaults to ""
+ * @param {String} [fields.username] defaults to ""
+ * @param {String|Buffer} [fields.icon] defaults to ""
+ * @param {String|Buffer} [fields.url] defaults to null
+ * @param {String|Buffer} [fields.pincodeHash] defaults to null
+ * @param {String|Buffer} [fields.salt] defaults to null
+ * @param {String} [fields.preferredLanguage] defaults to "en"
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -55,7 +55,7 @@ Q.mixin(Base, Row);
 /**
  * @property insertedTime
  * @type String|Db.Expression
- * @default new Db_Expression("current_timestamp()")
+ * @default new Db.Expression("CURRENT_TIMESTAMP")
  * 
  */
 /**
@@ -443,7 +443,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","31","",false],false,"","current_timestamp()"];
+return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**

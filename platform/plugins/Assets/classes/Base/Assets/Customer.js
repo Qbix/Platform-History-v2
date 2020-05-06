@@ -19,11 +19,11 @@ var Row = Q.require('Db/Row');
  * @class Customer
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.userId] defaults to ""
- * @param {string} [$fields.payments] defaults to "stripe"
- * @param {string} [$fields.customerId] defaults to ""
+ * @param {String|Buffer} [fields.userId] defaults to ""
+ * @param {String} [fields.payments] defaults to "stripe"
+ * @param {String|Buffer} [fields.customerId] defaults to ""
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);

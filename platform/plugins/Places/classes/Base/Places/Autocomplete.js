@@ -19,16 +19,16 @@ var Row = Q.require('Db/Row');
  * @class Autocomplete
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.query] defaults to ""
- * @param {string} [$fields.types] defaults to ""
- * @param {float} [$fields.latitude] defaults to 0
- * @param {float} [$fields.longitude] defaults to 0
- * @param {float} [$fields.meters] defaults to 0
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
- * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
- * @param {string} [$fields.results] defaults to ""
+ * @param {String} [fields.query] defaults to ""
+ * @param {String} [fields.types] defaults to ""
+ * @param {Number} [fields.latitude] defaults to 0
+ * @param {Number} [fields.longitude] defaults to 0
+ * @param {Number} [fields.meters] defaults to 0
+ * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
+ * @param {String|Db.Expression} [fields.updatedTime] defaults to null
+ * @param {String} [fields.results] defaults to ""
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -69,7 +69,7 @@ Q.mixin(Base, Row);
 /**
  * @property insertedTime
  * @type String|Db.Expression
- * @default new Db_Expression("current_timestamp()")
+ * @default new Db.Expression("CURRENT_TIMESTAMP")
  * 
  */
 /**
@@ -477,7 +477,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","31","",false],false,"","current_timestamp()"];
+return [["timestamp","31","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**

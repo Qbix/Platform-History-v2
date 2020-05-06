@@ -19,12 +19,12 @@ var Row = Q.require('Db/Row');
  * @class Location
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.geohash] defaults to ""
- * @param {string} [$fields.publisherId] defaults to ""
- * @param {string} [$fields.streamName] defaults to ""
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
+ * @param {String} [fields.geohash] defaults to ""
+ * @param {String|Buffer} [fields.publisherId] defaults to ""
+ * @param {String|Buffer} [fields.streamName] defaults to ""
+ * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -48,12 +48,12 @@ Q.mixin(Base, Row);
  * @property streamName
  * @type String|Buffer
  * @default ""
- * the name of the stream, can be more than one
+ * the name of the stream
  */
 /**
  * @property insertedTime
  * @type String|Db.Expression
- * @default new Db_Expression("current_timestamp()")
+ * @default new Db.Expression("CURRENT_TIMESTAMP")
  * 
  */
 
@@ -407,7 +407,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","255","",false],false,"","current_timestamp()"];
+return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 module.exports = Base;
