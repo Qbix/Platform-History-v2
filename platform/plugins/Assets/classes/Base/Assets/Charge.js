@@ -19,16 +19,16 @@ var Row = Q.require('Db/Row');
  * @class Charge
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.userId] defaults to ""
- * @param {string} [$fields.id] defaults to ""
- * @param {string} [$fields.publisherId] defaults to ""
- * @param {string} [$fields.streamName] defaults to ""
- * @param {string} [$fields.description] defaults to ""
- * @param {string} [$fields.attributes] defaults to ""
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
- * @param {string|Db_Expression} [$fields.updatedTime] defaults to "0000-00-00 00:00:00"
+ * @param {String|Buffer} [fields.userId] defaults to ""
+ * @param {String|Buffer} [fields.id] defaults to ""
+ * @param {String|Buffer} [fields.publisherId] defaults to ""
+ * @param {String|Buffer} [fields.streamName] defaults to ""
+ * @param {String} [fields.description] defaults to ""
+ * @param {String} [fields.attributes] defaults to ""
+ * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
+ * @param {String|Db.Expression} [fields.updatedTime] defaults to "0000-00-00 00:00:00"
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -75,7 +75,7 @@ Q.mixin(Base, Row);
 /**
  * @property insertedTime
  * @type String|Db.Expression
- * @default new Db_Expression("current_timestamp()")
+ * @default new Db.Expression("CURRENT_TIMESTAMP")
  * 
  */
 /**
@@ -554,7 +554,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","1023","",false],false,"","current_timestamp()"];
+return [["timestamp","1023","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**

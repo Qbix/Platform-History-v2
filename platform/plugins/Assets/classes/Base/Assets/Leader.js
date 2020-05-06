@@ -19,12 +19,12 @@ var Row = Q.require('Db/Row');
  * @class Leader
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.app] defaults to ""
- * @param {string|Db_Expression} [$fields.day] defaults to ""
- * @param {string} [$fields.userId] defaults to ""
- * @param {integer} [$fields.points] defaults to 0
+ * @param {String|Buffer} [fields.app] defaults to ""
+ * @param {String|Db.Expression} [fields.day] defaults to ""
+ * @param {String} [fields.userId] defaults to ""
+ * @param {Integer} [fields.points] defaults to 0
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);

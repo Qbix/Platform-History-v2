@@ -73,7 +73,8 @@
             "QRscanned": "Au scanat-o!",
             "chooseAgainFromContacts": "Alegeți din nou din Contacte",
             "inviteSelectedContacts": "Invitați contactele selectate",
-            "scannedQR": "{{ClickOrTap}} dacă codul a fost scanat"
+            "scannedQR": "{{ClickOrTap}} dacă codul a fost scanat",
+            "copyLink": "{{ClickOrTap}} pentru a copia linkul de invitație"
         },
         "email": {
             "subject": "Hei, verifică asta",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Ai fost invitat. {{ClickOrTap}} aici să accepți și să vă alăturați."
-        }
+        },
+        "youCanNowPaste": "Acum puteți lipi acest link undeva pentru a invita oameni"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Du-te si traieste",
             "fbStopLive": "End Live",
             "fbEmbedCode": "Încorporare",
-            "copy": "Copie"
+            "copy": "Copie",
+            "turnOffVideo": "Dezactivați partajarea camerei \/ ecranului",
+            "turnOffScreenSharing": "Dezactivați partajarea ecranului",
+            "cameraIsTurnedOff": "Camera este oprită"
         },
         "participantsPopup": {
             "disconnect": "Deconectat",

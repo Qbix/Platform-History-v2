@@ -73,7 +73,8 @@
             "QRscanned": "Skenirali so ga!",
             "chooseAgainFromContacts": "Ponovno izberite iz imenika",
             "inviteSelectedContacts": "Povabi izbrane stike",
-            "scannedQR": "{{ClickOrTap}} če je bila koda skenirana"
+            "scannedQR": "{{ClickOrTap}} če je bila koda skenirana",
+            "copyLink": "{{ClickOrTap}} za kopiranje vabila"
         },
         "email": {
             "subject": "Hej, poglej to",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Povabljeni ste bili. {{ClickOrTap}} tukaj, da sprejmete in se pridružite."
-        }
+        },
+        "youCanNowPaste": "Zdaj lahko to povezavo prilepite nekam, da povabite ljudi"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Pojdi v živo",
             "fbStopLive": "Končaj v živo",
             "fbEmbedCode": "Vdelati",
-            "copy": "Kopirati"
+            "copy": "Kopirati",
+            "turnOffVideo": "Izklopite skupno rabo kamere / zaslona",
+            "turnOffScreenSharing": "Izklopite skupno rabo zaslona",
+            "cameraIsTurnedOff": "Kamera je izklopljena"
         },
         "participantsPopup": {
             "disconnect": "Prekini povezavo",

@@ -73,7 +73,8 @@
             "QRscanned": "Те го сканираха!",
             "chooseAgainFromContacts": "Изберете Отново от Контакти",
             "inviteSelectedContacts": "Покана за избрани контакти",
-            "scannedQR": "{{ClickOrTap}} ако кодът е сканиран"
+            "scannedQR": "{{ClickOrTap}} ако кодът е сканиран",
+            "copyLink": "{{ClickOrTap}} за да копирате връзка за покана"
         },
         "email": {
             "subject": "Хей, провери това",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Бяхте поканени. {{ClickOrTap}} тук, за да приеме и да се присъедини."
-        }
+        },
+        "youCanNowPaste": "Вече можете да поставите тази връзка някъде, за да поканите хора"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Отидете на живо",
             "fbStopLive": "Край на живо",
             "fbEmbedCode": "закрепвам",
-            "copy": "копие"
+            "copy": "копие",
+            "turnOffVideo": "Изключете споделянето на камера / екран",
+            "turnOffScreenSharing": "Изключете споделянето на екрана",
+            "cameraIsTurnedOff": "Камерата е изключена"
         },
         "participantsPopup": {
             "disconnect": "Прекъсване на връзката",

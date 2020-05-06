@@ -21,6 +21,9 @@
  *    Function "preparing" receives (element) and is used the first time to prepare the element
  *    Both functions must return true if the element was modified.
  * @param {Object} [observerOptions] Override any options to pass to IntersectionObserver
+ * @param {Element} [observerOptions.root=tool.element]
+ * @param {String} [observerOptions.rootMargin='0px']
+ * @param {String} [observerOptions.threshold=0]
  * @return {Q.Tool}
  */
 Q.Tool.define('Q/lazyload', function (options) {
@@ -43,6 +46,12 @@ Q.Tool.define('Q/lazyload', function (options) {
 		Object.defineProperty(Elp, 'innerHTML', {
 			set: function (html) {
 				var element = document.createElement('div');
+				var root = tool.observer.root || document.documentElement;
+				var inside = (root === this) || root.contains(this);
+				if (!inside) {
+					originalSet.call(this, html);
+					return html;
+				}
 				originalSet.call(element, html);
 				var found = false;
 				Q.each(state.handlers, function (name, info) {
@@ -72,7 +81,28 @@ Q.Tool.define('Q/lazyload', function (options) {
 				if (!element) {
 					return;
 				}
-				tool.observe(tool.prepare(element, true));
+				var root = tool.observer.root || document.documentElement;
+				var inside = (root === this) || root.contains(this);
+				if (!inside) {
+					return orig.apply(this, arguments);
+				}
+				var found = false;
+				Q.each(state.handlers, function (name, info) {
+					if (element.matches && element.matches(info.selector)) {
+						found = true;
+						return false;
+					}
+					var elements = element.querySelectorAll
+						? Array.from(element.querySelectorAll(info.selector))
+						: [];
+					if (elements.length) {
+						found = true;
+						return false;
+					}
+				});
+				if (found) {
+					tool.observe(tool.prepare(element, true));
+				}
 				return orig.apply(this, arguments);
 			};
 		});
@@ -81,7 +111,6 @@ Q.Tool.define('Q/lazyload', function (options) {
 },
 
 {
-	root: null,
 	handlers: {
 		img: {
 			selector: 'img',
@@ -158,7 +187,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 		}
 	},
 	observerOptions: {
-		root: null,
+		root: undefined,
 		rootMargin: '0px',
 		threshold: 0
 	}
@@ -185,13 +214,28 @@ Q.Tool.define('Q/lazyload', function (options) {
 	},
 	observe: function (elements) {
 		var tool = this;
-		Q.each(elements, function (i, element) {
+		tool.observer && Q.each(elements, function (i, element) {
 			tool.observer.observe(element);
 		});
+	},
+	unobserve: function (elements) {
+		var tool = this;
+		tool.observer && Q.each(elements, function (i, element) {
+			tool.observer.unobserve(element);
+		});
+	},
+	Q: {
+		beforeRemove: function () {
+			this.observer && this.observer.disconnect();
+		}
 	}
 });
 
 function _createObserver(tool, container) {
+	var o = Q.copy(tool.state.observerOptions);
+	if (o.root === undefined) {
+		o.root = container || null;
+	}
 	return new IntersectionObserver(function (entries, observer) {
 		Q.each(entries, function (i, entry) {
 			Q.each(tool.state.handlers, function (name, info) {
@@ -208,7 +252,7 @@ function _createObserver(tool, container) {
 				}
 			});
 		});
-	}, tool.state.observerOptions);
+	}, o);
 }
 
 function _polyfill(callback) {

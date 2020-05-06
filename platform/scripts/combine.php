@@ -142,6 +142,7 @@ function Q_scripts_combine($process)
 			}
 		}
 		file_put_contents($df, $content);
+		usleep(1); // garbage collection
 	}
 	echo "Success.";
 }

@@ -91,6 +91,11 @@ function Q_before_Q_responseExtras()
 		Q_Response::addHtmlCssClass('Q_statusBarOverlapped');
 	}
 	
+	$textLoadBeforeInit = Q_Config::get('Q', 'text', 'loadBeforeInit', array());
+	Q_Response::setScriptData('Q.Text.loadBeforeInit', $textLoadBeforeInit);
+	$useLocale = Q_Config::get('Q', 'text', 'useLocale', array());
+	Q_Response::setScriptData('Q.Text.useLocale', $useLocale);
+	
 	// We may want to set the initial URL and updateTimestamp cookie
 	$lazyload = Q_Config::get('Q', 'images', 'lazyload', false);
 	$environment = Q_Config::get('Q', 'environment', '');

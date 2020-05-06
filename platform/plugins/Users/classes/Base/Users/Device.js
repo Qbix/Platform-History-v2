@@ -19,19 +19,19 @@ var Row = Q.require('Db/Row');
  * @class Device
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.userId] defaults to ""
- * @param {string} [$fields.deviceId] defaults to ""
- * @param {string} [$fields.platform] defaults to ""
- * @param {string} [$fields.version] defaults to null
- * @param {string} [$fields.appId] defaults to null
- * @param {string} [$fields.sessionId] defaults to ""
- * @param {string} [$fields.formFactor] defaults to null
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
- * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
- * @param {string} [$fields.auth] defaults to ""
- * @param {string} [$fields.p256dh] defaults to null
+ * @param {String|Buffer} [fields.userId] defaults to ""
+ * @param {String|Buffer} [fields.deviceId] defaults to ""
+ * @param {String} [fields.platform] defaults to ""
+ * @param {String} [fields.version] defaults to null
+ * @param {String} [fields.appId] defaults to null
+ * @param {String|Buffer} [fields.sessionId] defaults to ""
+ * @param {String} [fields.formFactor] defaults to null
+ * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
+ * @param {String|Db.Expression} [fields.updatedTime] defaults to null
+ * @param {String} [fields.auth] defaults to ""
+ * @param {String} [fields.p256dh] defaults to null
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -84,7 +84,7 @@ Q.mixin(Base, Row);
 /**
  * @property insertedTime
  * @type String|Db.Expression
- * @default new Db_Expression("current_timestamp()")
+ * @default new Db.Expression("CURRENT_TIMESTAMP")
  * 
  */
 /**
@@ -599,7 +599,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","'mobile','tablet','desktop'","",false],false,"","current_timestamp()"];
+return [["timestamp","'mobile','tablet','desktop'","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**

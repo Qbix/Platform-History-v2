@@ -73,7 +73,8 @@
             "QRscanned": "Huma skannjati!",
             "chooseAgainFromContacts": "Agħżel darb&#39;oħra mill-Kuntatti",
             "inviteSelectedContacts": "Stieden Kuntatti Magħżula",
-            "scannedQR": "{{ClickOrTap}} jekk il-kodiċi kien skannjat"
+            "scannedQR": "{{ClickOrTap}} jekk il-kodiċi kien skannjat",
+            "copyLink": "{{ClickOrTap}} biex tikkopja link għall-istedina"
         },
         "email": {
             "subject": "Ħej, iċċekkja dan",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Int ġejt mistiedna. {{ClickOrTap}} hawn biex taċċetta u tissieħeb."
-        }
+        },
+        "youCanNowPaste": "Issa tista &#39;tippejstja din il-link x&#39;imkien biex tistieden lin-nies"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Mur ħaj",
             "fbStopLive": "Temm Ħaj",
             "fbEmbedCode": "Embed",
-            "copy": "Ikkopja"
+            "copy": "Ikkopja",
+            "turnOffVideo": "Itfi kamera \/ iskrin tal-qsim",
+            "turnOffScreenSharing": "Itfi l-qsim tal-iskrin",
+            "cameraIsTurnedOff": "Kamera tkun mitfija"
         },
         "participantsPopup": {
             "disconnect": "Skonnettja",

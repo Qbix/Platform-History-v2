@@ -73,7 +73,8 @@
             "QRscanned": "Яны сканавалі яго!",
             "chooseAgainFromContacts": "Абярыце зноў з кантактаў",
             "inviteSelectedContacts": "Запрасіце выбраныя кантакты",
-            "scannedQR": "{{ClickOrTap}}, калі код быў адсканаваны"
+            "scannedQR": "{{ClickOrTap}}, калі код быў адсканаваны",
+            "copyLink": "{{ClickOrTap}} скапіяваць запрашальную спасылку"
         },
         "email": {
             "subject": "Эй, праверыць гэта",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Вы былі запрошаны. {{ClickOrTap}} тут, каб прыняць і далучыцца."
-        }
+        },
+        "youCanNowPaste": "Цяпер вы можаце ўставіць гэтую спасылку куды-небудзь, каб запрасіць людзей"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Ідзіце жыць",
             "fbStopLive": "Канец жыць",
             "fbEmbedCode": "Ўстаўляць",
-            "copy": "Копія"
+            "copy": "Копія",
+            "turnOffVideo": "Выключыце сумеснае выкарыстанне камеры / экрана",
+            "turnOffScreenSharing": "Выключыце сумеснае выкарыстанне экрана",
+            "cameraIsTurnedOff": "Камера адключана"
         },
         "participantsPopup": {
             "disconnect": "Адключыце",

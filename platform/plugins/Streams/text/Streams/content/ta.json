@@ -73,7 +73,8 @@
             "QRscanned": "அவர்கள் அதை ஸ்கேன்!",
             "chooseAgainFromContacts": "தொடர்புகளிலிருந்து மீண்டும் தேர்வுசெய்க",
             "inviteSelectedContacts": "தேர்ந்தெடுக்கப்பட்ட தொடர்புகளை அழைக்கவும்",
-            "scannedQR": "குறியீட்டை ஸ்கேன் செய்திருந்தால் {{ClickOrTap}}"
+            "scannedQR": "குறியீட்டை ஸ்கேன் செய்திருந்தால் {{ClickOrTap}}",
+            "copyLink": "அழைப்பு இணைப்பை நகலெடுக்க {99 999}}"
         },
         "email": {
             "subject": "ஏய், இதை பாருங்கள்",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "நீங்கள் அழைக்கப்பட்டுள்ளீர்கள். {{ClickOrTap}} இங்கு ஏற்கவும் சேரவும்."
-        }
+        },
+        "youCanNowPaste": "மக்களை அழைக்க இந்த இணைப்பை இப்போது எங்காவது ஒட்டலாம்"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "போய் வாழ்",
             "fbStopLive": "லைவ் முடிக்கவும்",
             "fbEmbedCode": "உட்பொதி",
-            "copy": "நகல்"
+            "copy": "நகல்",
+            "turnOffVideo": "கேமரா \/ திரை பகிர்வை முடக்கு",
+            "turnOffScreenSharing": "திரை பகிர்வை முடக்கு",
+            "cameraIsTurnedOff": "கேமரா அணைக்கப்பட்டுள்ளது"
         },
         "participantsPopup": {
             "disconnect": "துண்டி",

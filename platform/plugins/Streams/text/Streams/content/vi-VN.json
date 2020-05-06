@@ -73,7 +73,8 @@
             "QRscanned": "Họ đã quét nó!",
             "chooseAgainFromContacts": "Chọn lại từ Danh bạ",
             "inviteSelectedContacts": "Mời các địa chỉ liên lạc được chọn",
-            "scannedQR": "{{ClickOrTap}} nếu mã được quét"
+            "scannedQR": "{{ClickOrTap}} nếu mã được quét",
+            "copyLink": "{{ClickOrTap}} để sao chép liên kết mời"
         },
         "email": {
             "subject": "Này, kiểm tra cái này",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Bạn đã được mời. {{ClickOrTap}} tại đây để chấp nhận và tham gia."
-        }
+        },
+        "youCanNowPaste": "Bây giờ bạn có thể dán liên kết này ở đâu đó để mời mọi người"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Chưa lên",
             "fbStopLive": "Kết thúc trực tiếp",
             "fbEmbedCode": "Nhúng",
-            "copy": "Sao chép"
+            "copy": "Sao chép",
+            "turnOffVideo": "Tắt chia sẻ camera / màn hình",
+            "turnOffScreenSharing": "Tắt chia sẻ màn hình",
+            "cameraIsTurnedOff": "Máy ảnh bị tắt"
         },
         "participantsPopup": {
             "disconnect": "Ngắt kết nối",

@@ -73,7 +73,8 @@
             "QRscanned": "他们扫描了一下！",
             "chooseAgainFromContacts": "从联系人中再次选择",
             "inviteSelectedContacts": "邀请选定的联系人",
-            "scannedQR": "{{ClickOrTap}}如果扫描了代码"
+            "scannedQR": "{{ClickOrTap}}如果扫描了代码",
+            "copyLink": "{{ClickOrTap}}复制邀请链接"
         },
         "email": {
             "subject": "嘿，看看这个",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "你被邀请了。 {{ClickOrTap}}在这里接受并加入。"
-        }
+        },
+        "youCanNowPaste": "现在，您可以将此链接粘贴到某个地方以邀请其他人"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "上线",
             "fbStopLive": "结束直播",
             "fbEmbedCode": "嵌入",
-            "copy": "复制"
+            "copy": "复制",
+            "turnOffVideo": "关闭相机\/屏幕共享",
+            "turnOffScreenSharing": "关闭屏幕共享",
+            "cameraIsTurnedOff": "相机已关闭"
         },
         "participantsPopup": {
             "disconnect": "断开",

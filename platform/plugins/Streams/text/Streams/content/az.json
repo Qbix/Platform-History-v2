@@ -73,7 +73,8 @@
             "QRscanned": "Onlar bunu skanladılar!",
             "chooseAgainFromContacts": "Əlaqələrdən təkrar seçin",
             "inviteSelectedContacts": "Seçilmiş kontaktları dəvət edin",
-            "scannedQR": "Kodu skan edilmişsə {{ClickOrTap}}"
+            "scannedQR": "Kodu skan edilmişsə {{ClickOrTap}}",
+            "copyLink": "Dəvət bağlantısını kopyalamaq üçün {{ClickOrTap}}"
         },
         "email": {
             "subject": "Hey, bunu yoxlayın",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Siz dəvət olundu. {{ClickOrTap}} burada qəbul etmək və qoşulmaq."
-        }
+        },
+        "youCanNowPaste": "İndi bu linki insanları dəvət etmək üçün bir yerə yapışdıra bilərsiniz"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Canlı gedin",
             "fbStopLive": "Canlı son",
             "fbEmbedCode": "Yerləşdirin",
-            "copy": "Surəti"
+            "copy": "Surəti",
+            "turnOffVideo": "Kamera \/ ekran paylaşımını söndürün",
+            "turnOffScreenSharing": "Ekran paylaşımını söndürün",
+            "cameraIsTurnedOff": "Kamera söndürülmüşdür"
         },
         "participantsPopup": {
             "disconnect": "Qoşulun",

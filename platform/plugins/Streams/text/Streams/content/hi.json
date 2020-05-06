@@ -73,7 +73,8 @@
             "QRscanned": "उन्होंने इसे स्कैन किया!",
             "chooseAgainFromContacts": "फिर से संपर्क से चुनें",
             "inviteSelectedContacts": "चयनित संपर्कों को आमंत्रित करें",
-            "scannedQR": "{{ClickOrTap}} यदि कोड स्कैन किया गया था"
+            "scannedQR": "{{ClickOrTap}} यदि कोड स्कैन किया गया था",
+            "copyLink": "{{ClickOrTap}} आमंत्रित लिंक कॉपी करने के लिए"
         },
         "email": {
             "subject": "अरे, यह देखो",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "आपको आमंत्रित किया गया है। {{ClickOrTap}} यहां स्वीकार करने और शामिल होने के लिए।"
-        }
+        },
+        "youCanNowPaste": "अब आप इस लिंक को कहीं न कहीं लोगों को आमंत्रित करने के लिए पेस्ट कर सकते हैं"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "प्रत्यक्ष जाना",
             "fbStopLive": "एंड लाइव",
             "fbEmbedCode": "एम्बेड",
-            "copy": "प्रतिलिपि"
+            "copy": "प्रतिलिपि",
+            "turnOffVideo": "कैमरा \/ स्क्रीन शेयरिंग बंद करें",
+            "turnOffScreenSharing": "स्क्रीन शेयरिंग बंद करें",
+            "cameraIsTurnedOff": "कैमरा बंद है"
         },
         "participantsPopup": {
             "disconnect": "डिस्कनेक्ट",

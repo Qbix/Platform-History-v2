@@ -53,13 +53,13 @@ function Q_after_Q_tool_render($params, &$result)
 	$data_replace = !empty($extra['replace']) || Q_Response::shouldReplaceWithTool($id_prefix)
 		? " data-Q-replace=''"
 		: '';
-	$data_retain = !empty($extra['lazyload'])
+	$data_lazyload = !empty($extra['lazyload'])
 		? " data-Q-lazyload='waiting'"
 		: '';
 	$names = ($count === 1) ? ' '.key($info) : 's '.implode(" ", $names);
 	$ajax = Q_Request::isAjax();
 	$result = "<$tag id='{$id_prefix}tool' "
-		. "class='Q_tool $classes'$data_options$data_retain$data_replace$attributes>"
+		. "class='Q_tool $classes'$data_options$data_retain$data_replace$data_lazyload$attributes>"
 		. "$result</$tag>";
 	if (!Q_Request::isAjax()) {
 		$result = "<!--\nbegin tool$names\n-->$result<!--\nend tool$names \n-->";

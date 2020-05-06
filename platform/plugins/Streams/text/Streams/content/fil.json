@@ -73,7 +73,8 @@
             "QRscanned": "Ini-scan nila ito!",
             "chooseAgainFromContacts": "Pumili Muli mula sa Mga Contact",
             "inviteSelectedContacts": "Anyayahan ang Mga Napiling Mga contact",
-            "scannedQR": "{{ClickOrTap}} kung na-scan ang code"
+            "scannedQR": "{{ClickOrTap}} kung na-scan ang code",
+            "copyLink": "{{ClickOrTap}} upang kopyahin ang link ng imbitasyon"
         },
         "email": {
             "subject": "Uy, tingnan mo ito",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Inanyayahan ka. {{ClickOrTap}} dito upang tanggapin at sumali."
-        }
+        },
+        "youCanNowPaste": "Maaari mo na ngayong i-paste ang link na ito sa isang lugar upang anyayahan ang mga tao"
     },
     "followup": {
         "mobile": {
@@ -181,7 +183,10 @@
             "fbStartLive": "Go Live",
             "fbStopLive": "Tapusin ang Live",
             "fbEmbedCode": "I-embed",
-            "copy": "Kopya"
+            "copy": "Kopya",
+            "turnOffVideo": "I-off ang pagbabahagi ng camera \/ screen",
+            "turnOffScreenSharing": "Patayin ang pagbabahagi ng screen",
+            "cameraIsTurnedOff": "Naka-off ang camera"
         },
         "participantsPopup": {
             "disconnect": "Idiskonekta",

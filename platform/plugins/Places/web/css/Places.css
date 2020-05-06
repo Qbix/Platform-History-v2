@@ -135,7 +135,7 @@
 .Places_countries_tool .Places_countries_select { font-size: 24px; border: 1px solid #555; line-height: 24px; vertical-align: middle; width: 100%; text-overflow: ellipsis; clear: both; }
 .Places_countries_flag { width: 25px; height: 25px; vertical-align: middle; }
 .Places_countries_flags .Places_countries_flag { position: absolute; top: 50%; margin-top: -12px; margin-left: 5px; }
-.Places_countries_flags .Places_countries_select { text-indent: 24px; }
+.Places_countries_flags .Places_countries_select { text-indent: 30px; }
 .Places_globe_shadow { pointer-events: none; }
 
 .Q_filter_tool .Q_filter_results .Places_autocomplete_result {

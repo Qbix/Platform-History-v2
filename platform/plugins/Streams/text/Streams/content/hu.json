@@ -73,7 +73,8 @@
             "QRscanned": "Szkennelték!",
             "chooseAgainFromContacts": "Válasszon újra a Névjegyek közül",
             "inviteSelectedContacts": "Meghívott partnerek meghívása",
-            "scannedQR": "{{ClickOrTap}}, ha a kódot beszkennelték"
+            "scannedQR": "{{ClickOrTap}}, ha a kódot beszkennelték",
+            "copyLink": "{{ClickOrTap}} a meghívó link másolásához"
         },
         "email": {
             "subject": "Hé, nézd meg ezt",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Meghívtak. {{ClickOrTap}} itt, hogy elfogadja és csatlakozzon."
-        }
+        },
+        "youCanNowPaste": "Most beillesztheti ezt a linket valahol az emberek meghívására"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Élesben",
             "fbStopLive": "End Live",
             "fbEmbedCode": "Beágyaz",
-            "copy": "Másolat"
+            "copy": "Másolat",
+            "turnOffVideo": "Kapcsolja ki a kamera \/ képernyő megosztását",
+            "turnOffScreenSharing": "Kapcsolja ki a képernyőmegosztást",
+            "cameraIsTurnedOff": "A kamera ki van kapcsolva"
         },
         "participantsPopup": {
             "disconnect": "szétkapcsol",

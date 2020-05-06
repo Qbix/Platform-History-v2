@@ -73,7 +73,8 @@
             "QRscanned": "Скенирали су га!",
             "chooseAgainFromContacts": "Изаберите Поново из Контаката",
             "inviteSelectedContacts": "Позови изабране контакте",
-            "scannedQR": "{{ClickOrTap}} ако је код скениран"
+            "scannedQR": "{{ClickOrTap}} ако је код скениран",
+            "copyLink": "{{ClickOrTap}} за копирање позивнице"
         },
         "email": {
             "subject": "Хеј, види ово",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Позвани сте. {{ClickOrTap}} овде да прихватим и придружим се."
-        }
+        },
+        "youCanNowPaste": "Сада можете да залепите ову везу негде да бисте позвали људе"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Уживо",
             "fbStopLive": "Престани уживо",
             "fbEmbedCode": "Уграђивање",
-            "copy": "Копирај"
+            "copy": "Копирај",
+            "turnOffVideo": "Искључите дељење камере \/ екрана",
+            "turnOffScreenSharing": "Искључите дељење екрана",
+            "cameraIsTurnedOff": "Камера је искључена"
         },
         "participantsPopup": {
             "disconnect": "Прекини везу",

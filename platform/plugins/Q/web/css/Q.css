@@ -60,7 +60,14 @@ table { border-spacing:0; border-collapse:collapse; }
 	50% {filter:grayscale(100%);}
 }
 
+@keyframes Q_forceRedraw {
+	/* sad, but we need something like this for safari 10+ */
+    from { box-shadow: inset rgba(0,0,0,0) 0 0 0; }
+    to { box-shadow: inset rgba(0,0,0,0.0000001) 0 0 0 10px; }
+}
+
 /* Common Q classes */
+.Q_forceRedraw { animation: Q_forceRedraw 4s infinite; }
 .Q_pagebreak { page-break-after: always; }
 .Q_collapsed { border-bottom: solid 2px #777 !important; }
 .Q_compact {}
@@ -215,6 +222,9 @@ body.Q_preventScroll {
 .Q_prompt .Q_dialog_content {
 	text-align: center;
 }
+.Q_prompt .Q_big_prompt p:empty {
+	display: none;
+}
 .Q_fullscreen_dialog
 {
 	overflow: visible;
@@ -233,6 +243,7 @@ body.Q_preventScroll {
 	width: 35px;
 	background-image: url(../img/ui/close_big.png);
 	cursor: pointer;
+	z-index: 100;
 }
 .Q_fullscreen_dialog .Q_swap
 {
@@ -249,6 +260,7 @@ body.Q_preventScroll {
 .Q_fullscreen_dialog .Q_title_slot {
 	position: fixed;
 	width: 100%;
+	z-index: 99;
 }
 .Q_overlay .Q_close {
 	background-image:url(../img/close.png);
@@ -427,7 +439,7 @@ box-shadow:0 0 10px #000; }
 .Q_zoomer { z-index: 9000; border-radius: 1px; box-shadow: black 3px 3px 10px; }
 .Q_gallery_caption { z-index: 201; position: absolute; }
 .Q_contextual { display: none; }
-.Q_rating_tool { display: inline-block; }
+.Q_rating_tool { display: inline-block; min-height: 20px; }
 .Q_rating_tool div.Q_rating_star,
 .Q_rating_tool div.Q_rating_star * { width: 14px; height: 14px; border: 0; padding: 0; }
 .Q_rating_tool div.Q_rating_star { display: inline-block; position: relative; }

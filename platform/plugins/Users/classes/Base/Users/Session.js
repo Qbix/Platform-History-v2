@@ -19,21 +19,21 @@ var Row = Q.require('Db/Row');
  * @class Session
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.id] defaults to ""
- * @param {string} [$fields.content] defaults to ""
- * @param {string} [$fields.php] defaults to ""
- * @param {string} [$fields.userId] defaults to null
- * @param {string} [$fields.deviceId] defaults to ""
- * @param {integer} [$fields.timeout] defaults to 0
- * @param {integer} [$fields.duration] defaults to 0
- * @param {string} [$fields.platform] defaults to null
- * @param {string} [$fields.appId] defaults to null
- * @param {string} [$fields.version] defaults to null
- * @param {string} [$fields.formFactor] defaults to null
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
- * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
+ * @param {String|Buffer} [fields.id] defaults to ""
+ * @param {String} [fields.content] defaults to ""
+ * @param {String} [fields.php] defaults to ""
+ * @param {String|Buffer} [fields.userId] defaults to null
+ * @param {String|Buffer} [fields.deviceId] defaults to ""
+ * @param {Integer} [fields.timeout] defaults to 0
+ * @param {Integer} [fields.duration] defaults to 0
+ * @param {String} [fields.platform] defaults to null
+ * @param {String} [fields.appId] defaults to null
+ * @param {String} [fields.version] defaults to null
+ * @param {String} [fields.formFactor] defaults to null
+ * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
+ * @param {String|Db.Expression} [fields.updatedTime] defaults to null
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -110,7 +110,7 @@ Q.mixin(Base, Row);
 /**
  * @property insertedTime
  * @type String|Db.Expression
- * @default new Db_Expression("current_timestamp()")
+ * @default new Db.Expression("CURRENT_TIMESTAMP")
  * 
  */
 /**
@@ -755,7 +755,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","'mobile','tablet','desktop'","",false],false,"","current_timestamp()"];
+return [["timestamp","'mobile','tablet','desktop'","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**

@@ -19,18 +19,18 @@ var Row = Q.require('Db/Row');
  * @class Participant
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.publisherId] defaults to ""
- * @param {string} [$fields.streamName] defaults to ""
- * @param {string} [$fields.userId] defaults to ""
- * @param {string} [$fields.streamType] defaults to null
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
- * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
- * @param {string} [$fields.state] defaults to null
- * @param {string} [$fields.subscribed] defaults to "no"
- * @param {string} [$fields.posted] defaults to "no"
- * @param {string} [$fields.extra] defaults to "{}"
+ * @param {String|Buffer} [fields.publisherId] defaults to ""
+ * @param {String|Buffer} [fields.streamName] defaults to ""
+ * @param {String|Buffer} [fields.userId] defaults to ""
+ * @param {String} [fields.streamType] defaults to null
+ * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
+ * @param {String|Db.Expression} [fields.updatedTime] defaults to null
+ * @param {String} [fields.state] defaults to null
+ * @param {String} [fields.subscribed] defaults to "no"
+ * @param {String} [fields.posted] defaults to "no"
+ * @param {String} [fields.extra] defaults to "{}"
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -65,7 +65,7 @@ Q.mixin(Base, Row);
 /**
  * @property insertedTime
  * @type String|Db.Expression
- * @default new Db_Expression("current_timestamp()")
+ * @default new Db.Expression("CURRENT_TIMESTAMP")
  * 
  */
 /**
@@ -493,7 +493,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","63","",false],false,"","current_timestamp()"];
+return [["timestamp","63","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**

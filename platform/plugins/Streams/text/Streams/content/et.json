@@ -73,7 +73,8 @@
             "QRscanned": "Nad skaneerisid seda!",
             "chooseAgainFromContacts": "Valige uuesti kontaktidest",
             "inviteSelectedContacts": "Kutsu valitud kontaktid",
-            "scannedQR": "{{ClickOrTap}}, kui kood skaneeriti"
+            "scannedQR": "{{ClickOrTap}}, kui kood skaneeriti",
+            "copyLink": "{{ClickOrTap}} kutselingi kopeerimiseks"
         },
         "email": {
             "subject": "Hei, vaata seda",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Teid on kutsutud. {{ClickOrTap}} siin, et nõustuda ja liituda."
-        }
+        },
+        "youCanNowPaste": "Nüüd saate selle lingi kuhugi kleepida, et inimesi kutsuda"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Mine elama",
             "fbStopLive": "Lõpeta otseülekanne",
             "fbEmbedCode": "Manusta",
-            "copy": "Kopeeri"
+            "copy": "Kopeeri",
+            "turnOffVideo": "Lülitage kaamera \/ ekraani ühiskasutus välja",
+            "turnOffScreenSharing": "Lülitage ekraani jagamine välja",
+            "cameraIsTurnedOff": "Kaamera on välja lülitatud"
         },
         "participantsPopup": {
             "disconnect": "Katkesta ühendus",

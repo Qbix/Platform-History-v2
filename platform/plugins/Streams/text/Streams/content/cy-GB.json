@@ -73,7 +73,8 @@
             "QRscanned": "Roedden nhw&#39;n ei sganio!",
             "chooseAgainFromContacts": "Dewiswch eto o gysylltiadau",
             "inviteSelectedContacts": "Gwahodd Cysylltiadau Dethol",
-            "scannedQR": "{{ClickOrTap}} os sganiwyd y cod"
+            "scannedQR": "{{ClickOrTap}} os sganiwyd y cod",
+            "copyLink": "{{ClickOrTap}} i gopïo dolen gwahodd"
         },
         "email": {
             "subject": "Hey, gwiriwch hyn",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Fe&#39;ch gwahoddwyd. {{ClickOrTap}} yma i dderbyn ac ymuno."
-        }
+        },
+        "youCanNowPaste": "Nawr gallwch chi gludo&#39;r ddolen hon yn rhywle i wahodd pobl"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Ewch yn Fyw",
             "fbStopLive": "Diwedd yn Fyw",
             "fbEmbedCode": "Gwreiddio",
-            "copy": "Copi"
+            "copy": "Copi",
+            "turnOffVideo": "Diffodd rhannu camera / sgrin",
+            "turnOffScreenSharing": "Diffodd rhannu sgrin",
+            "cameraIsTurnedOff": "Mae&#39;r camera wedi&#39;i ddiffodd"
         },
         "participantsPopup": {
             "disconnect": "Datgysylltwch",

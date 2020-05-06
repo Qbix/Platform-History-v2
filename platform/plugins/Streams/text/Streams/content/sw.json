@@ -73,7 +73,8 @@
             "QRscanned": "Walichunguza!",
             "chooseAgainFromContacts": "Chagua tena kutoka kwa wasiliana",
             "inviteSelectedContacts": "Paribisha Mawasiliano Wachaguliwa",
-            "scannedQR": "{{ClickOrTap}} ikiwa nambari hiyo ilikaguliwa"
+            "scannedQR": "{{ClickOrTap}} ikiwa nambari hiyo ilikaguliwa",
+            "copyLink": "{{ClickOrTap}} kuiga kiunga cha mwaliko"
         },
         "email": {
             "subject": "Hey, angalia hii nje",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Umealikwa. {{ClickOrTap}} hapa kukubali na kujiunga."
-        }
+        },
+        "youCanNowPaste": "Sasa unaweza kubandika kiunga hiki mahali pengine ili kuwaalika watu"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Nenda Moja kwa Moja",
             "fbStopLive": "Mwisho Kuishi",
             "fbEmbedCode": "Embed",
-            "copy": "Nakala"
+            "copy": "Nakala",
+            "turnOffVideo": "Zima kushiriki kamera \/ skrini",
+            "turnOffScreenSharing": "Zima kushiriki skrini",
+            "cameraIsTurnedOff": "Kamera imezimwa"
         },
         "participantsPopup": {
             "disconnect": "Kukata",

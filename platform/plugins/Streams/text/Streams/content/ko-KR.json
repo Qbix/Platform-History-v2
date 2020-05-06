@@ -73,7 +73,8 @@
             "QRscanned": "그들은 그것을 스캔!",
             "chooseAgainFromContacts": "연락처에서 다시 선택",
             "inviteSelectedContacts": "선택한 연락처 초대",
-            "scannedQR": "코드가 스캔 된 경우 {{ClickOrTap}}"
+            "scannedQR": "코드가 스캔 된 경우 {{ClickOrTap}}",
+            "copyLink": "초대 링크를 복사하는 {{ClickOrTap}}"
         },
         "email": {
             "subject": "헤이, 이것 좀 봐.",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "초대되었습니다. {{ClickOrTap}} 여기에 동의하고 참여하십시오."
-        }
+        },
+        "youCanNowPaste": "이제이 링크를 어딘가에 붙여서 사람들을 초대 할 수 있습니다"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "생중계",
             "fbStopLive": "라이브 종료",
             "fbEmbedCode": "끼워 넣다",
-            "copy": "부"
+            "copy": "부",
+            "turnOffVideo": "카메라 / 화면 공유 끄기",
+            "turnOffScreenSharing": "화면 공유 끄기",
+            "cameraIsTurnedOff": "카메라가 꺼져 있습니다"
         },
         "participantsPopup": {
             "disconnect": "분리",

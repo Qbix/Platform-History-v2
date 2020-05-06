@@ -73,7 +73,8 @@
             "QRscanned": "Zeskanowali to!",
             "chooseAgainFromContacts": "Wybierz ponownie z kontaktów",
             "inviteSelectedContacts": "Zaproś wybrane kontakty",
-            "scannedQR": "{{ClickOrTap}} jeśli kod został zeskanowany"
+            "scannedQR": "{{ClickOrTap}} jeśli kod został zeskanowany",
+            "copyLink": "{{ClickOrTap}}, aby skopiować link do zaproszenia"
         },
         "email": {
             "subject": "Hej, sprawdź to",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Zostałeś zaproszony. {{ClickOrTap}} tutaj, aby zaakceptować i dołączyć."
-        }
+        },
+        "youCanNowPaste": "Możesz teraz wkleić ten link gdzieś, aby zaprosić osoby"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Przejdź na żywo",
             "fbStopLive": "End Live",
             "fbEmbedCode": "Osadzać",
-            "copy": "Kopiuj"
+            "copy": "Kopiuj",
+            "turnOffVideo": "Wyłącz udostępnianie aparatu / ekranu",
+            "turnOffScreenSharing": "Wyłącz udostępnianie ekranu",
+            "cameraIsTurnedOff": "Aparat jest wyłączony"
         },
         "participantsPopup": {
             "disconnect": "Rozłączyć się",

@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.1",
+				"version": "1.0.2",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets"]
@@ -109,6 +109,9 @@
 			},
 			"earn": {
 				"acceptedInvite": 10
+			},
+			"exchange": {
+				"USD": 10
 			}
 		},
 		"currencies": {

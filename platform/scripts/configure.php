@@ -5,7 +5,6 @@ if (!defined('RUNNING_FROM_APP') or !defined('CONFIGURE_ORIGINAL_APP_NAME')) {
 
 #Arguments
 $argv = $_SERVER['argv'];
-$count = count($argv);
 
 #Usage strings
 $usage = "Usage: php {$argv[0]} " . "[<original_app_name>] <desired_app_name>\n";
@@ -14,13 +13,30 @@ $help = <<<EOT
 This script automatically does the proper steps to configure an app template into an app that you name.
 Run it before running install.php.
 
+Options:
+
+-v --verbose     Print more diagnostic information while working
+
 EOT;
 
-#Is it a call for help?
-if (isset($argv[1]) and in_array($argv[1], array('--help', '/?', '-h', '-?', '/h')))
+// get all CLI options
+$opts = array( 'v::' );
+$longopts = array('verbose::');
+$options = getopt(implode('', $opts), $longopts);
+if (isset($options['help'])) {
 	die($help);
+}
+
+$verbose = isset($options['verbose']) || isset($options['v']);
+$params = array();
+foreach ($argv as $k => $v) {
+	if (substr($v, 0, 01) !== '-') {
+		$params[] = $v;
+	}
+}
 
 #Check primary arguments count: 1 if running /app/scripts/Q/configure.php
+$count = count($params);
 if ($count < 2)
 	die($usage);
 
@@ -28,11 +44,11 @@ if ($count < 2)
 $LOCAL_DIR = APP_DIR;
 
 if ($count > 2) {
-	$AppName = $argv[1];
-	$Desired = $argv[2];
+	$AppName = $params[1];
+	$Desired = $params[2];
 } else {
 	$AppName = CONFIGURE_ORIGINAL_APP_NAME;
-	$Desired = $argv[1];
+	$Desired = $params[1];
 }
 $APPNAME = strtoupper($AppName);
 $appname = strtolower($AppName);
@@ -67,29 +83,48 @@ do {
 			. (empty($pi['extension']) ? '' : '.' . $pi['extension']);
 		if ($filename != $filename2) {
 			if (file_exists($filename2)) {
-				echo "Cannot overwrite existing path $filename2" . PHP_EOL;
+				echo Q_Utils::colored("Cannot overwrite existing path $filename2", 'red') . PHP_EOL;
 			} else {
+				if ($verbose) {
+					echo Q_Utils::colored($filename . PHP_EOL . "=> $filename2", 'blue').PHP_EOL;
+				}
 				rename($filename, $filename2);
 				$go_again = true;
 				break;
 			}
 		}
+		usleep(1); // garbage collection
 	}
 } while($go_again);
 
-$maxFileSize = pow(2, 20);
+$maxFileSize = min(pow(2, 20), Q_Utils::memoryLimit()/2);
 if ($Desired !== CONFIGURE_ORIGINAL_APP_NAME) {
 	$it = new RecursiveDirectoryIterator(APP_DIR);
 	foreach(new RecursiveIteratorIterator($it) as $filename => $splFileInfo) {
 		if (is_dir($filename) or is_link($filename)) continue;
-		$contents = file_get_contents($filename);
-		if (count($contents) > $maxFileSize) {
+		// return mime type ala mimetype extension
+		$finfo = finfo_open(FILEINFO_MIME);
+//check to see if the mime-type starts with 'text'
+		$mimeType = finfo_file($finfo, $filename);
+		$parts = explode('/', $mimeType);
+		if (filesize($filename) > $maxFileSize) {
+			if ($verbose) {
+				echo Q_Utils::colored("Skipped because file is too large: " . $filename, 'light_gray') . PHP_EOL;
+			}
 			continue;
 		}
+		if (!in_array($parts[0], array('text'))) {
+			continue;
+		}
+		$contents = file_get_contents($filename);
 		$contents = preg_replace("/$APPNAME/", $DESIRED, $contents);
 		$contents = preg_replace("/$AppName/", $Desired, $contents);
 		$contents = preg_replace("/$appname/", $desired, $contents);
 		file_put_contents($filename, $contents);
+		if ($verbose) {
+			echo Q_Utils::colored($filename, 'purple').PHP_EOL;
+		}
+		usleep(1); // garbage collection
 	}
 }
 

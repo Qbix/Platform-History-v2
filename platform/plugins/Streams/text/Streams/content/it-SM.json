@@ -73,7 +73,8 @@
             "QRscanned": "Lo hanno scannerizzato!",
             "chooseAgainFromContacts": "Scegli di nuovo dai contatti",
             "inviteSelectedContacts": "Invita i contatti selezionati",
-            "scannedQR": "{{ClickOrTap}} se il codice è stato scansionato"
+            "scannedQR": "{{ClickOrTap}} se il codice è stato scansionato",
+            "copyLink": "{{ClickOrTap}} per copiare il link di invito"
         },
         "email": {
             "subject": "Ehi, dai un&#39;occhiata",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Sei stato invitato. {{ClickOrTap}} qui per accettare e partecipare."
-        }
+        },
+        "youCanNowPaste": "Ora puoi incollare questo link da qualche parte per invitare le persone"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Andare in diretta",
             "fbStopLive": "End Live",
             "fbEmbedCode": "Incorporare",
-            "copy": "copia"
+            "copy": "copia",
+            "turnOffVideo": "Disattiva la condivisione fotocamera / schermo",
+            "turnOffScreenSharing": "Disattiva la condivisione dello schermo",
+            "cameraIsTurnedOff": "La fotocamera è spenta"
         },
         "participantsPopup": {
             "disconnect": "Disconnect",

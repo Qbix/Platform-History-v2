@@ -36,6 +36,7 @@ var dataKey_opening = 'opening';
  *  @param {Boolean} [options.closeFromSwipeDown=true] on a touchscreen, close a column after a swipe-down gesture starting from the title
  *  @param {boolean} [options.closeFromTitleClick=false] Whether the whole title would be a trigger for the back button. Defaults to true.
  *  @param {Object}  [options.scrollbarsAutoHide] If an object, enables Q/scrollbarsAutoHide functionality with options from here. Enabled by default.
+ *  @param {Object}  [options.classes] Pairs of columnName: cssClass which is added to the column when it's opened
  *  @param {Object}  [options.handlers] Pairs of columnName: handler where the handler can be a function or a string, in which you assign a function to Q.exports .
  *  @param {Boolean} [options.fullscreen] Whether to use fullscreen mode on mobile phones, using document to scroll instead of relying on possibly buggy "overflow" CSS implementation. Defaults to true on Android stock browser, false everywhere else.
  *  @param {Boolean} [options.hideBackgroundColumns=true] Whether to hide background columns on mobile (perhaps improving browser rendering).
@@ -118,7 +119,7 @@ Q.Tool.define("Q/columns", function(options) {
 		}, tool);
 
 		tool.refresh();
-		if (Q.isMobile) {
+		if (0 && Q.info.isMobile) {
 			tool.startAdjustingPositions();
 		}
 		Q.onLayout(tool).set(function () {
@@ -149,6 +150,7 @@ Q.Tool.define("Q/columns", function(options) {
 		src: "{{Q}}/img/x.png",
 		clickable: null
 	},
+	classes: {},
 	handlers: {},
 	stretchFirstColumn: true,
 	animateWidth: true,
@@ -179,11 +181,15 @@ Q.Tool.define("Q/columns", function(options) {
 		});
 
 		var $div = $(div);
-		Q.onLayout(div).set(function () {
+		Q.onLayout(div).add(function () {
 			$div.attr('data-width-index', Math.round($div.width()/300) || 1);
 		}, this);
 	}, 'Q/columns'),
-	onClose: new Q.Event(_updateAttributes, 'Q/columns'),
+	onClose: new Q.Event(function (index, div, data, skipUpdateAttributes) {
+		if (!skipUpdateAttributes) {
+			setTimeout(_updateAttributes.bind(this), 0);
+		}
+	}, 'Q/columns'),
 	onTransitionEnd: new Q.Event(),
 	afterDelay: new Q.Event()
 },
@@ -259,7 +265,7 @@ Q.Tool.define("Q/columns", function(options) {
 		}
 		
 		if (!internal && state.columns[index]) {
-			this.close(index, null, {animation: {duration: 0}});
+			this.close(index, null, {animation: {duration: 0}}, true);
 		}
 		
 		var div = this.column(index);
@@ -304,7 +310,9 @@ Q.Tool.define("Q/columns", function(options) {
 			controlsSlot = $('.Q_controls_slot', div)[0];
 			$div.attr('data-title', $(titleSlot).text() || document.title);
 		}
-
+		if (o.name && state.classes && state.classes[o.name]) {
+			$(div).addClass(state.classes[o.name]);
+		}
 		if (state.closeFromSwipeDown) {
 			Q.addEventListener($title[0], 'touchstart', function (e1) {
 				var x1 = Q.Pointer.getX(e1);
@@ -323,8 +331,12 @@ Q.Tool.define("Q/columns", function(options) {
 						? state.closeFromSwipeDown
 						: Q.getObject(['originalEvent', 'touches', 0, 'radiusY'], e1)*2 || 50;
 					var z = (y2 - y1) / threshold;
-					$(div).css('top', parseInt(originalTop)+Math.max(0, y2-y1));
-					$(div).css('opacity', 1-z);
+					$div.css('top', parseInt(originalTop)+Math.max(0, y2-y1));
+					$div.css('opacity', 1-z);
+					if (Q.info.isMobile && index > 0) {
+						var $prevColumn = $(state.columns[index-1]);
+						(z > 0) ? $prevColumn.show() : $prevColumn.hide();
+					}
 					if (y2 - y1 > threshold
 					&& Math.abs((y2-y1)/(x2-x1)) > 2) { //generally down direction
 						if (!_addedEventListener) {
@@ -343,6 +355,9 @@ Q.Tool.define("Q/columns", function(options) {
 							top: originalTop,
 							opacity: originalOpacity
 						}, 100);
+						if (Q.info.isMobile && index > 0) {
+							$(state.columns[index-1]).hide;
+						}
 					}
 					Q.Masks.hide('Q.click.mask');
 					Q.removeEventListener(document.body, 'touchmove', _onTouchmove);
@@ -407,7 +422,7 @@ Q.Tool.define("Q/columns", function(options) {
 		$div.css('position', 'absolute');
 
 		$div.attr('data-index', index).addClass('Q_column_'+index);
-		if (options.name) {
+		if (o.name) {
 			var n = Q.normalize(options.name, null, null, null, true);
 			$div.attr('data-name', options.name)
 				.addClass('Q_column_'+n);
@@ -494,7 +509,7 @@ Q.Tool.define("Q/columns", function(options) {
 			}
 
 			Q.onLayout($tc[0]).set(function () {
-				presentColumn(tool, $div, o.fullscreen);
+				presentColumn(tool, $div, o.fullscreen, true);
 			}, tool);
 
 			waitFor.push('activated1', 'activated2', 'activated3');
@@ -680,7 +695,7 @@ Q.Tool.define("Q/columns", function(options) {
 				
 				$div.removeClass('Q_columns_opening').addClass('Q_columns_opened');
 
-				presentColumn(tool, $div, o.fullscreen);
+				presentColumn(tool, $div, o.fullscreen, true);
 
 				if (Q.info.isTouchscreen) {
 					if (o.fullscreen) {
@@ -711,9 +726,12 @@ Q.Tool.define("Q/columns", function(options) {
 	 * @param {Function} callback Called when the column is closed, or if no column
 	 *  Receives (index, column) where the column could be null if it wasn't found.
 	 * @param {Object} options Can be used to override some values taken from tool state
+	 * @param {Boolean} skipUpdateAttributes Whether to skip updating the attributes
+	 *  of the tool element because some columns are about to be opened, and we want
+	 *  to avoid thrashing.
 	 * @return {Boolean} Whether the column was actually closed.
 	 */
-	close: function (index, callback, options) {
+	close: function (index, callback, options, skipUpdateAttributes) {
 		var tool = this;
 		var state = tool.state;
 		var t = Q.typeOf(index);
@@ -721,15 +739,21 @@ Q.Tool.define("Q/columns", function(options) {
 		if (t === 'object') {
 			p = new Q.Pipe();
 			Q.each(index.max||state.max, index.min||0, -1, function (i) {
-				try { tool.close(i, p.fill(i), options); } catch (e) {}
+				try { tool.close(i, p.fill(i), options, true); } catch (e) {}
 				waitFor.push(i);
 			});
+			if (!skipUpdateAttributes) {
+				setTimeout(_updateAttributes.bind(this), 0);
+			}
 		} else if (t === 'array') {
 			p = new Q.Pipe();
 			Q.each(index, function (k, i) {
-				try { tool.close(i, p.fill(i), options); } catch (e) {}
+				try { tool.close(i, p.fill(i), options, true); } catch (e) {}
 				waitFor.push(i);
 			}, {ascending: false});
+			if (!skipUpdateAttributes) {
+				setTimeout(_updateAttributes.bind(this), 0);
+			}
 		}
 		var div = tool.column(index);
 		if (p) {
@@ -811,7 +835,7 @@ Q.Tool.define("Q/columns", function(options) {
 			presentColumn(tool);
 			Q.Pointer.clearSelection();
 			Q.handle(callback, tool, [index, div]);
-			state.onClose.handle.call(tool, index, div, data);
+			state.onClose.handle.call(tool, index, div, data, skipUpdateAttributes);
 			var url = $prev.attr('data-url') || $div.attr('data-prevUrl');
 			var title = $prev.attr('data-title') || $div.attr('data-prevTitle');
 			if (o.pagePushUrl && url && url !== location.href) {
@@ -856,7 +880,9 @@ Q.Tool.define("Q/columns", function(options) {
 					.height(Q.Pointer.windowHeight() - Q.fixedOffset('top') - Q.fixedOffset('bottom'));
 			}
 		}
-		presentColumn(tool);
+		$columns.each(function () {
+			presentColumn(tool, $(this), state.fullscreen, true);
+		});
 
 		if (state.fullscreen) {
 			$te.addClass('Q_fullscreen');
@@ -904,15 +930,18 @@ Q.Tool.define("Q/columns", function(options) {
 			}
 			var diff = tool.startAdjustingPositions.top - top;
 			tool.startAdjustingPositions.top = top;
-			Q.each(tool.state.columns, function (i, column) {
-				var rect = column.getBoundingClientRect();
-				$(column).css('top', rect.top + diff);
-			});
-		});
+			if (!isNaN(diff)) {
+				Q.each(tool.state.columns, function (i, column) {
+					var rect = column.getBoundingClientRect();
+					$(column).css('top', rect.top + diff);
+				});
+			}
+		}, milliseconds);
 	},
 	
 	stopAdjustingPositions: function () {
-		clearInterval(this.startAdjustingPositions.interval);
+		this.startAdjustingPositions.interval
+		&& clearInterval(this.startAdjustingPositions.interval);
 	},
 	
 	Q: {
@@ -941,7 +970,7 @@ Q.Template.set('Q/columns/column',
 	'<div class="Q_contextual"><ul class="Q_listing"></ul></div>'
 );
 
-function presentColumn(tool, $column, fullscreen) {
+function presentColumn(tool, $column, fullscreen, recalculateHeights) {
 	var state = tool.state;
 	var $currentColumn = Q.getObject('$currentColumn', state);
 
@@ -959,15 +988,24 @@ function presentColumn(tool, $column, fullscreen) {
 		document.title = $currentColumn.find('.Q_title_slot').text();
 	}
 
+	var hideTitle = $column.hasClass('Q_columns_hideTitle');
 	var $cs = $('.Q_column_slot', $column);
+	var titleOuterHeight = $ct.outerHeight();
+	if (hideTitle) {
+		$cs.css('top', '-' + titleOuterHeight + 'px');
+	}
 	var $controls = $column.find('.Q_controls_slot');
-	var cth = $ct.is(":visible") ? $ct.height() : 0;
+	var cth = $ct.is(":visible") && !hideTitle ? $ct.height() : 0;
 	var controlsh = $controls.is(":visible") ? $controls.height() : 0;
 	var index = parseInt($column.attr('data-index'));
+	var heightToBottom;
 	if (Q.info.isMobile) {
 		var $sc = $(tool.state.container);
 		var expandTop = index > 0 && state.expandOnMobile && state.expandOnMobile.top;
 		var expandBottom = index > 0 && state.expandOnMobile && state.expandOnMobile.bottom;
+		if (document.documentElement.scrollTop < 0) {
+			document.documentElement.scrollTop = 0; // iOS Safari bug
+		}
 		var containerRect = $sc[0].getBoundingClientRect();
 		if (!fullscreen && expandTop) {
 			var statusBackground = document.getElementById('status_background')
@@ -977,30 +1015,36 @@ function presentColumn(tool, $column, fullscreen) {
 			$column.css('top', top + 'px');
 		}
 		var columnRect = $cs[0].getBoundingClientRect();
-		var heightToBottom = (expandBottom ? Q.Pointer.windowHeight() : containerRect.bottom)
+		heightToBottom = (expandBottom ? Q.Pointer.windowHeight() : containerRect.bottom)
 			- columnRect.top
 			- parseInt($cs.css('padding-top'))
 			- parseInt($cs.css('padding-bottom'))
 			- controlsh;
 		if (fullscreen) {
-			$cs.add($div).css('height', 'auto');
+			$cs.add($column).css('height', 'auto');
 			$cs.css('min-height', heightToBottom);
 		} else {
 			$cs.height(heightToBottom);
-			$column.css('height', 'auto');
+			if (hideTitle) {
+				$column.css('height', heightToBottom + titleOuterHeight);
+			} else {
+				$column.css('height', 'auto');
+			}
 		}
 	} else {
-		$cs.height(
-			$(tool.element).height()
+		heightToBottom = $(tool.element).height()
 			- $cs.offset().top + $cs.parent().offset().top
 			- parseInt($cs.css('padding-top'))
 			- parseInt($cs.css('padding-bottom'))
-		);
+			- controlsh;
 
-		$column.css('min-height', tool.oldMinHeight);
-		var show = $column.data(dataKey_lastShow);
-		if (show && show.height) {
-			$cs.css('height', show.height - cth - controlsh + 'px');
+		$cs.height(heightToBottom);
+		if (0 && !recalculateHeights) {
+			$column.css('min-height', tool.oldMinHeight);
+			var show = $column.data(dataKey_lastShow);
+			if (show && show.height) {
+				$cs.css('height', show.height - cth - controlsh + 'px');
+			}
 		}
 	}
 	Q.layout($cs[0]);
@@ -1083,3 +1127,8 @@ function _updateAttributes() {
 }
 
 })(Q, jQuery);
+
+/*! jQuery requestAnimationFrame - 0.2.3-pre - 2016-10-26
+* https://github.com/gnarf37/jquery-requestAnimationFrame
+ * Copyright (c) 2016 Corey Frang; Licensed MIT */
+!function(a){"function"==typeof define&&define.amd?define(["jquery"],a):a(jQuery)}(function(a){function b(){c&&(window.requestAnimationFrame(b),a.fx.tick())}if(Number(a.fn.jquery.split(".")[0])>=3)return void(window.console&&window.console.warn&&window.console.warn("The jquery.requestanimationframe plugin is not needed in jQuery 3.0 or newer as they handle it natively."));var c;window.requestAnimationFrame&&(a.fx.timer=function(d){d()&&a.timers.push(d)&&!c&&(c=!0,b())},a.fx.stop=function(){c=!1})});

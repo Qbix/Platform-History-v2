@@ -820,5 +820,44 @@
 		};
 	}
 
+	// catch Assets/connected request and rewrite handler to open new tab
+	Q.Tool.onActivate('Q/tabs').add(function () {
+		// only for main Q/tabs tool from dashboard
+		if (!$(this.element).closest("#dashboard").length) {
+			return;
+		}
 
+		this.state.beforeSwitch.set(function (tab, href) {
+			if (!href || !href.includes("Assets/connected")) {
+				return true;
+			}
+
+			var $tab = $(tab);
+
+			$tab.addClass("Q_working");
+
+			Q.req(href, "content", function (err, data) {
+				$tab.removeClass("Q_working");
+
+				var fem = Q.firstErrorMessage(err, data);
+				if (fem) return Q.alert(fem);
+
+				var redirectUrl = Q.getObject("slots.content.redirectUrl", data);
+
+				if (!redirectUrl) {
+					Q.alert("Assets/connected: invalid url");
+				}
+
+				// open browsertab for cordova
+				var browsertab = Q.getObject("cordova.plugins.browsertab");
+				if (browsertab) {
+					return browsertab.openUrl(redirectUrl);
+				}
+
+				window.open(redirectUrl, '_blank').focus();
+			});
+
+			return false;
+		}, 'Assets');
+	}, 'Assets');
 })(Q, Q.plugins.Assets, Q.plugins.Streams, jQuery);

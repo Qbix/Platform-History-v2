@@ -19,27 +19,27 @@ var Row = Q.require('Db/Row');
  * @class Stream
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.publisherId] defaults to ""
- * @param {string} [$fields.name] defaults to ""
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
- * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
- * @param {string} [$fields.type] defaults to ""
- * @param {string} [$fields.title] defaults to ""
- * @param {string} [$fields.icon] defaults to "default"
- * @param {string} [$fields.content] defaults to ""
- * @param {string} [$fields.attributes] defaults to null
- * @param {integer} [$fields.readLevel] defaults to 40
- * @param {integer} [$fields.writeLevel] defaults to 10
- * @param {integer} [$fields.adminLevel] defaults to 20
- * @param {string} [$fields.permissions] defaults to null
- * @param {string} [$fields.inheritAccess] defaults to null
- * @param {integer} [$fields.messageCount] defaults to 0
- * @param {integer} [$fields.invitedCount] defaults to 0
- * @param {integer} [$fields.participatingCount] defaults to 0
- * @param {integer} [$fields.leftCount] defaults to 0
- * @param {string|Db_Expression} [$fields.closedTime] defaults to null
+ * @param {String|Buffer} [fields.publisherId] defaults to ""
+ * @param {String|Buffer} [fields.name] defaults to ""
+ * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
+ * @param {String|Db.Expression} [fields.updatedTime] defaults to null
+ * @param {String} [fields.type] defaults to ""
+ * @param {String} [fields.title] defaults to ""
+ * @param {String|Buffer} [fields.icon] defaults to "default"
+ * @param {String} [fields.content] defaults to ""
+ * @param {String} [fields.attributes] defaults to null
+ * @param {Integer} [fields.readLevel] defaults to 40
+ * @param {Integer} [fields.writeLevel] defaults to 10
+ * @param {Integer} [fields.adminLevel] defaults to 20
+ * @param {String} [fields.permissions] defaults to null
+ * @param {String|Buffer} [fields.inheritAccess] defaults to null
+ * @param {Integer} [fields.messageCount] defaults to 0
+ * @param {Integer} [fields.invitedCount] defaults to 0
+ * @param {Integer} [fields.participatingCount] defaults to 0
+ * @param {Integer} [fields.leftCount] defaults to 0
+ * @param {String|Db.Expression} [fields.closedTime] defaults to null
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -62,7 +62,7 @@ Q.mixin(Base, Row);
 /**
  * @property insertedTime
  * @type String|Db.Expression
- * @default new Db_Expression("current_timestamp()")
+ * @default new Db.Expression("CURRENT_TIMESTAMP")
  * saved on shard of publisherId
  */
 /**
@@ -490,7 +490,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","255","",false],false,"","current_timestamp()"];
+return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**

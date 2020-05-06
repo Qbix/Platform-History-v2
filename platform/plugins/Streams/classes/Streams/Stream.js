@@ -1206,6 +1206,19 @@ Sp.notify = function(participant, event, message, byUserId, callback) {
 			// actually notify according to the deliveriy rules
 			var byUserId = message.fields.byUserId;
 			Streams.Avatar.fetch(userId, byUserId, function (err, avatar) {
+				var logfile = Q.Config.get(
+					['Streams', 'types', '*', 'messages', '*', 'log'],
+					false
+				);
+				if (logfile) {
+					Q.log({
+						messageType: message.fields.type,
+						publisherId: stream.fields.publisherId,
+						streamName: stream.fields.name,
+						deliveries: deliveries,
+						displayName: avatar.displayName()
+					}, logfile);
+				}
 				if (message.fields.type !== "Streams/invite") {
 					return deliveries.forEach(function(delivery) {
 						message.deliver(stream, userId, delivery, avatar,
@@ -1213,6 +1226,7 @@ Sp.notify = function(participant, event, message, byUserId, callback) {
 						);
 					});
 				}
+				// This is only for "Streams/invite"
 				var instructions = JSON.parse(message.fields.instructions);
 				new Streams.Invite({
 					token: instructions.token

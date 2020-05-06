@@ -24,9 +24,10 @@
  *   @param {Object} [options.creatable] Optional fields you can override in case if streamName = "", 
  *     @param {String} [options.creatable.streamType="Streams/text/small"] Set the type of the stream to be created
  *     @param {String} [options.creatable.title="New Item"] Optional title for the case when streamName = "", i.e. the composer
- *     @param {Boolean} [options.creatable.clickable=true] Whether the image composer image is clickable
+ *     @param {Boolean} [options.creatable.clickable=true] Whether the image composer image has the Q/clickable effect
  *     @param {Number} [options.creatable.addIconSize=100] The size in pixels of the square add icon
  *     @param {Number} [options.creatable.options={}] Any options to pass to Q.Streams.create
+ *     @param {String} [options.creatable.options.streamName] You can set a specific stream name from Streams/possibleUserStreams config
  *     @param {Function} [options.creatable.preprocess] This function receives 
  *       (a callback, this tool, the event if any that triggered it). 
  *       This is your chance to do any processing before the request to create the stream is sent.
@@ -265,7 +266,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 						: {};
 					container.plugin('Q/clickable', clo);
 				}
-				container.on(Q.Pointer.fastclick, tool, tool.create.bind(tool));
+				container.on([Q.Pointer.fastclick, '.Streams_preview'], tool.create.bind(tool));
 				Q.handle(state.onComposer, tool);
 			},
 			state.templates.create
@@ -359,9 +360,9 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 					}
 				}
 			}
-			var file = (oss && (oss[sfi] || oss['']))
-				|| size
-				|| Q.first(si.saveSizeName, {nonEmptyKey: true});
+			var file = size
+				|| Q.first(si.saveSizeName, {nonEmptyKey: true})
+				|| (oss && (oss[sfi] || oss['']));
 			var full = si.saveSizeName[si.fullSize] || file;
 			var size = si.saveSizeName[si.showSize];
 			var defaultIcon = (options.defaultIcon) || 'default';
@@ -443,34 +444,40 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		Q.Streams.get(state.publisherId, state.streamName, function () {
 			var stream = this;
 			// check if we should add this behavior
-			if (!state.actions
-			|| state.closeable === false
-			|| !this.testWriteLevel('close')) {
-				return false;
+			if (state.actions
+			&& state.closeable !== false
+			&& this.testWriteLevel('close')) {
+				// add some actions
+				var actions = {};
+				var action = this.isRequired
+					? (this.fields.closedTime ? 'open' : 'close')
+					: 'remove';
+				if (action === 'open') {
+					actions[action] = function () {
+						this.reopen(function (err) {
+							if (err) return;
+							tool.state.onReopen.handle.call(tool);
+						});
+					};
+				} else {
+					actions[action] = function () {
+						if (state.beforeClose) {
+							Q.handle(state.beforeClose, tool, [tool.delete.bind(tool)]);
+						} else {
+							tool.delete();
+						}
+					};
+				}
 			}
-			// add some actions
-			var actions = {};
-			var action = this.isRequired
-				? (this.fields.closedTime ? 'open' : 'close')
-				: 'remove';
-			if (action === 'open') {
-				actions[action] = function () {
-					this.reopen(function (err) {
-						if (err) return;
-						tool.state.onReopen.handle.call(tool);
-					});
-				};
+			var ao = Q.extend({}, state.actions);
+			if (actions) {
+				ao = Q.extend(ao, 10, { actions: actions });
+			}
+			if ($te.state('Q/actions')) {
+				$te.plugin('Q/actions', 'refresh');
 			} else {
-				actions[action] = function () {
-					if (state.beforeClose) {
-						Q.handle(state.beforeClose, tool, [tool.delete.bind(tool)]);
-					} else {
-						tool.delete();
-					}
-				};
+				$te.tool('Q/actions', ao).activate();
 			}
-			var ao = Q.extend({}, state.actions, 10, { actions: actions });
-			$te.tool('Q/actions', ao).activate();
 		});
 		return this;
 	},

@@ -19,13 +19,13 @@ var Row = Q.require('Db/Row');
  * @class Article
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.publisherId] defaults to ""
- * @param {string} [$fields.streamName] defaults to ""
- * @param {string} [$fields.userId] defaults to ""
- * @param {string} [$fields.article] defaults to ""
- * @param {string} [$fields.getintouch] defaults to "{}"
+ * @param {String|Buffer} [fields.publisherId] defaults to ""
+ * @param {String|Buffer} [fields.streamName] defaults to ""
+ * @param {String|Buffer} [fields.userId] defaults to ""
+ * @param {String} [fields.article] defaults to ""
+ * @param {String} [fields.getintouch] defaults to "{}"
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);

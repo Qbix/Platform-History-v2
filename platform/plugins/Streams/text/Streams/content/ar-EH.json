@@ -73,7 +73,8 @@
             "QRscanned": "قاموا بمسحها ضوئيًا!",
             "chooseAgainFromContacts": "اختر مرة أخرى من جهات الاتصال",
             "inviteSelectedContacts": "دعوة جهات الاتصال المحددة",
-            "scannedQR": "{{ClickOrTap}} إذا تم مسح الرمز"
+            "scannedQR": "{{ClickOrTap}} إذا تم مسح الرمز",
+            "copyLink": "{{ClickOrTap}} لنسخ رابط الدعوة"
         },
         "email": {
             "subject": "مهلا ، تحقق من ذلك",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "لقد تمت دعوتك. {{ClickOrTap}} هنا للقبول والانضمام."
-        }
+        },
+        "youCanNowPaste": "يمكنك الآن لصق هذا الرابط في مكان ما لدعوة الأشخاص"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "الذهاب لايف",
             "fbStopLive": "نهاية لايف",
             "fbEmbedCode": "تضمين",
-            "copy": "نسخ"
+            "copy": "نسخ",
+            "turnOffVideo": "قم بإيقاف تشغيل مشاركة الكاميرا / الشاشة",
+            "turnOffScreenSharing": "قم بإيقاف تشغيل مشاركة الشاشة",
+            "cameraIsTurnedOff": "تم إيقاف تشغيل الكاميرا"
         },
         "participantsPopup": {
             "disconnect": "قطع الاتصال",

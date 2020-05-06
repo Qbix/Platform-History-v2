@@ -28,131 +28,7 @@
 Q.Tool.jQuery('Q/actions',
 
 function _Q_actions(options) {
-	var $this = $(this);
-	var state = $this.state('Q/actions');
-	var cw, ch;
-	if (state.container) {
-		return;
-	}
-	var container = $('<div class="Q_actions_container" />').css({
-		'position': 'absolute',
-		'zIndex': state.zIndex
-	});
-	var interval = null;
-	if (state.containerClass) {
-		container.addClass(state.containerClass);
-	}
-	var size = state.size;
-	if (state.horizontal) {
-		cw = 0;
-		ch = size;
-	} else {
-		cw = size;
-		ch = 0;
-	}
-	state.container = container;
-	var buttons = {};
-	Q.each(state.actions, function (action, callback) {
-		var button = $("<div class='Q_actions_action basic"+size+"' />")
-			.addClass('Q_actions_'+action)
-			.addClass('basic'+size+'_'+action)
-			.attr('action', action)
-			.on(Q.Pointer.fastclick, function (event) {
-				Q.handle(callback, this, [action, state.context], {
-					fields: {
-						action: action,
-						context: state.context
-					}
-				});
-				Q.Pointer.cancelClick(true, event);
-				event.stopPropagation();
-				Q.handle(state.onClick, $this, [this]);
-			}).on(Q.Pointer.start, function (event) {
-				$(this).addClass('Q_discouragePointerEvents');
-				$(window).on([Q.Pointer.end, '.Q_actions'], function () {
-					$(this).removeClass('Q_discouragePointerEvents');
-					$(window).off([Q.Pointer.end, '.Q_actions']);
-				});
-			}).click(function (event) {
-				Q.Pointer.cancelClick(true, event);
-				event.stopPropagation();
-			});
-		buttons[action] = button;
-		if (state.reverse) {
-			button.prependTo(container);
-		} else {
-			button.appendTo(container);
-		}
-		if (state.horizontal) {
-			cw += size/16*17;
-		} else {
-			ch += size/16*17;
-		}
-	});
-	state.buttons = {};
-	Q.each(state.actions, function (action, callback) {
-		state.buttons[action] = buttons[action];
-	});
-	if ($this.css('position') === 'static') {
-		$this.css('position', 'relative');
-	}
-	if (state.alwaysShow) {
-		_show($this, state, container);
-	} else {
-		$this.off('mouseenter.Q_actions mouseleave.Q_actions');
-		$this.on('mouseenter.Q_actions', function () {
-			_show($this, state, container);
-		});
-		$this.on('mouseleave.Q_actions', function () {
-			_hide($this, state, container);
-		});
-	}
-	
-	function _show($this, state, container) {
-		container.appendTo($this);
-		if (state.horizontal) {
-			$('.Q_actions_action', container).css({
-				'display': 'inline-block',
-				'zoom': 1
-			});
-		}
-		container.css({
-			'width': cw+'px',
-			'height': ch+'px',
-			'line-height': ch+'px'
-		});
-		if (state.clickable) {
-			var $action = $('.Q_actions_action', container);
-			if (!$action.state('Q/clickable')) {
-				$action.plugin('Q/clickable', {}, function () {
-					if (state.horizontal) {
-						$('.Q_clickable_container', container).css({
-							'display': 'inline-block',
-							'zoom': 1
-						});
-					}
-				}).width(0);
-			}
-		}
-		
-		_position($this, state.position, container);
-		interval = setInterval(function () {
-			if (!$this.closest('html').length) {
-				clearInterval(interval);
-			}
-			_position($this, state.position, container);
-		}, state.repositionMs);
-		state.onShow.handle.apply($this, [state, container]);
-	}
-	
-	function _hide($this, state, container) {
-		interval && clearInterval(interval);
-		if (false === state.beforeHide.handle.apply($this, [state, container])) {
-			return false;
-		}
-		container.detach();
-	}
-
+	$(this).plugin('Q/actions', 'refresh');
 },
 
 {	// default options:
@@ -176,8 +52,134 @@ function _Q_actions(options) {
 	remove: function () {
 		var $this = $(this);
 		var state = $this.state('Q/actions');
+		Q.Tool.remove(this, false, false, 'Q/actions');
 		state.container.remove();
 		$this.off('mouseenter.Q_actions mouseleave.Q_actions');
+	},
+	refresh: function (){
+		var $this = $(this);
+		var state = $this.state('Q/actions');
+		var cw, ch;
+		if (!state.container) {
+			var container = $('<div class="Q_actions_container" />').css({
+				'position': 'absolute',
+				'zIndex': state.zIndex
+			});
+			var interval = null;
+			if (state.containerClass) {
+				container.addClass(state.containerClass);
+			}
+			var size = state.size;
+			if (state.horizontal) {
+				cw = 0;
+				ch = size;
+			} else {
+				cw = size;
+				ch = 0;
+			}
+			state.container = container;
+			var buttons = {};
+			Q.each(state.actions, function (action, callback) {
+				var button = $("<div class='Q_actions_action basic"+size+"' />")
+					.addClass('Q_actions_'+action)
+					.addClass('basic'+size+'_'+action)
+					.attr('action', action)
+					.on(Q.Pointer.fastclick, function (event) {
+						Q.handle(callback, this, [action, state.context], {
+							fields: {
+								action: action,
+								context: state.context
+							}
+						});
+						Q.Pointer.cancelClick(true, event);
+						event.stopPropagation();
+						Q.handle(state.onClick, $this, [this]);
+					}).on(Q.Pointer.start, function (event) {
+						$(this).addClass('Q_discouragePointerEvents');
+						$(window).on([Q.Pointer.end, '.Q_actions'], function () {
+							$(this).removeClass('Q_discouragePointerEvents');
+							$(window).off([Q.Pointer.end, '.Q_actions']);
+						});
+					}).click(function (event) {
+						Q.Pointer.cancelClick(true, event);
+						event.stopPropagation();
+					});
+				buttons[action] = button;
+				if (state.reverse) {
+					button.prependTo(container);
+				} else {
+					button.appendTo(container);
+				}
+				if (state.horizontal) {
+					cw += size/16*17;
+				} else {
+					ch += size/16*17;
+				}
+			});
+			state.buttons = {};
+			Q.each(state.actions, function (action, callback) {
+				state.buttons[action] = buttons[action];
+			});
+		}
+		if ($this.css('position') === 'static') {
+			$this.css('position', 'relative');
+		}
+		if (state.alwaysShow) {
+			_show($this, state, state.container);
+		} else {
+			$this.off('mouseenter.Q_actions mouseleave.Q_actions');
+			$this.on('mouseenter.Q_actions', function () {
+				_show($this, state, state.container);
+			});
+			$this.on('mouseleave.Q_actions', function () {
+				_hide($this, state, state.container);
+			});
+		}
+	
+		function _show($this, state, container) {
+			container.appendTo($this);
+			if (state.horizontal) {
+				$('.Q_actions_action', container).css({
+					'display': 'inline-block',
+					'zoom': 1
+				});
+			}
+			container.css({
+				'width': cw+'px',
+				'height': ch+'px',
+				'line-height': ch+'px'
+			});
+			if (state.clickable) {
+				var $action = $('.Q_actions_action', container);
+				if (!$action.state('Q/clickable')) {
+					$action.plugin('Q/clickable', {}, function () {
+						if (state.horizontal) {
+							$('.Q_clickable_container', container).css({
+								'display': 'inline-block',
+								'zoom': 1
+							});
+						}
+					}).width(0);
+				}
+			}
+		
+			_position($this, state.position, container);
+			interval = setInterval(function () {
+				if (!$this.closest('html').length) {
+					clearInterval(interval);
+				}
+				_position($this, state.position, container);
+			}, state.repositionMs);
+			state.onShow.handle.apply($this, [state, container]);
+		}
+	
+		function _hide($this, state, container) {
+			interval && clearInterval(interval);
+			if (false === state.beforeHide.handle.apply($this, [state, container])) {
+				return false;
+			}
+			container.detach();
+		}
 	}
 }
 

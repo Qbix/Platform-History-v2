@@ -1598,9 +1598,12 @@ EOT;
 		$table_comment = (!empty($table_status[0])) ? " * <br>{$table_status[0]}\n" : '';
 		// Calculate primary key
 		$pk = array();
-		foreach ($table_cols as $table_col) {
+		foreach ($table_cols as $k => $table_col) {
 			if ($table_col['Key'] == 'PRI') {
 				$pk[] = $table_col['Field'];
+			}
+			if (strtolower($table_col['Default']) === 'current_timestamp()') {
+				$table_cols[$k]['Default'] = 'CURRENT_TIMESTAMP';
 			}
 		}
 		$pk_exported = var_export($pk, true);
@@ -1610,6 +1613,7 @@ EOT;
 		$functions = array();
 		$js_functions = array();
 		$field_names = array();
+		$field_nulls = array();
 		$properties = array();
 		$js_properties = array();
 		$required_field_names = array();
@@ -1767,7 +1771,7 @@ EOT;
 					$default = isset($table_col['Default'])
 						? $table_col['Default']
 						: ($field_null ? null : 0);
-					$defaults[] = json_encode((int)$default);
+					$js_defaults[] = $defaults[] = json_encode((int)$default);
 					break;
 
 				case 'enum':
@@ -1802,7 +1806,7 @@ EOT;
 					$default = isset($table_col['Default'])
 						? $table_col['Default']
 						: null;
-					$defaults[] = json_encode($default);
+					$js_defaults[] = $defaults[] = json_encode($default);
 					break;
 				
 				case 'char':
@@ -1887,7 +1891,7 @@ EOT;
 					$default = isset($table_col['Default'])
 						? $table_col['Default']
 						: ($field_null ? null : '');
-					$defaults[] = json_encode($default);
+					$js_defaults[] = $defaults[] = json_encode($default);
 					break;
 				
 				case 'date':
@@ -1930,16 +1934,15 @@ EOT;
 					$default = isset($table_col['Default'])
 						? $table_col['Default']
 						: ($field_null ? null : '');
-					if ($default === 'CURRENT_TIMESTAMP'
-					or strpos($default, '(') !== false) {
-						$default = "new Db_Expression($default)";
-					}
 					$isExpression = (
 						$default === 'CURRENT_TIMESTAMP'
 						or strpos($default, '(') !== false
 					);
 					$defaults[] = $isExpression
 						? 'new Db_Expression(' . json_encode($default) . ')'
+						: json_encode($default);
+					$js_defaults[] = $isExpression
+						? 'new Db.Expression(' . json_encode($default) . ')'
 						: json_encode($default);
 					break;
 				case 'datetime':
@@ -2002,6 +2005,9 @@ EOT;
 					$defaults[] = $isExpression
 						? 'new Db_Expression(' . json_encode($default) . ')'
 						: json_encode($default);
+					$js_defaults[] = $isExpression
+						? 'new Db.Expression(' . json_encode($default) . ')'
+						: json_encode($default);
 					break;
 
 				case 'numeric':
@@ -2033,7 +2039,7 @@ EOT;
 					$default = isset($table_col['Default'])
 						? $table_col['Default']
 						: ($field_null ? null : 0);
-					$defaults[] = json_encode((double)$default);
+					$js_defaults[] = $defaults[] = json_encode((double)$default);
 					break;
 
 				default:
@@ -2042,7 +2048,7 @@ EOT;
 					$default = isset($table_col['Default'])
 						? $table_col['Default']
 						: ($field_null ? null : '');
-					$defaults[] = json_encode($default);
+					$js_defaults[] = $defaults[] = json_encode($default);
 					break;
 			}
 			if (! empty($functions["beforeSet_$field_name_safe"])) {
@@ -2325,14 +2331,14 @@ EOT;
 	 * $comment
 	 */
 EOT;
-			$required = !$field_nulls[$k] && $default == '"null"';
+			$required = !$field_nulls[$k] && !isset($default);
 			$properties2[$k] = $required
 				? " * @param {".$tmp[0]."} \$fields.".$tmp[1]
 				: " * @param {".$tmp[0]."} [\$fields.".$tmp[1]."] defaults to $default";
 		}
 		foreach ($js_properties as $k => $v) {
 			$tmp = explode(' ', $v);
-			$default = $defaults[$k];
+			$default = $js_defaults[$k];
 			$comment = str_replace('*/', '**', $comments[$k]);
 			$js_properties[$k] = <<<EOT
 $dc
@@ -2342,15 +2348,15 @@ $dc
  * $comment
  */
 EOT;
-			$required = !$field_nulls[$k] && $default == '"null"';
-			$js_properties2[$k] = !empty($required_fields_string)
-				? " * @param {".$tmp[0]."} \$fields.".$tmp[1]
-				: " * @param {".$tmp[0]."} [\$fields.".$tmp[1]."] defaults to $default";
+			$required = !$field_nulls[$k] && !isset($default);
+			$js_properties2[$k] = !empty($required)
+				? " * @param {".$tmp[0]."} fields.".$tmp[1]
+				: " * @param {".$tmp[0]."} [fields.".$tmp[1]."] defaults to $default";
 		}
 		$field_hints = implode("\n", $properties);
 		$field_hints2 = implode("\n", $properties2);
 		$js_field_hints = implode("\n", $js_properties);
-		$js_field_hints2 = implode("\n", $properties2);
+		$js_field_hints2 = implode("\n", $js_properties2);
 		
 		// Here is the base class:
 		$base_class_string = <<<EOT
@@ -2481,7 +2487,7 @@ $field_hints
 	 * Create DELETE query to the class table
 	 * @method delete
 	 * @static
-	 * @param {object} [\$table_using=null] If set, adds a USING clause with this table
+	 * @param {string} [\$table_using=null] If set, adds a USING clause with this table
 	 * @param {string} [\$alias=null] Table alias
 	 * @return {Db_Query_Mysql} The generated query
 	 */
@@ -2497,7 +2503,7 @@ $field_hints
 	 * Create INSERT query to the class table
 	 * @method insert
 	 * @static
-	 * @param {object} [\$fields=array()] The fields as an associative array of column => value pairs
+	 * @param {array} [\$fields=array()] The fields as an associative array of column => value pairs
 	 * @param {string} [\$alias=null] Table alias
 	 * @return {Db_Query_Mysql} The generated query
 	 */
@@ -2616,9 +2622,9 @@ $dc
  * @class $class_name_base
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
-$field_hints2
+$js_field_hints2
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);

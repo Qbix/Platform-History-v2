@@ -73,7 +73,8 @@
             "QRscanned": "Skenovali to!",
             "chooseAgainFromContacts": "Znova zvoľte možnosť Kontakty",
             "inviteSelectedContacts": "Pozvať vybraných kontaktov",
-            "scannedQR": "{{ClickOrTap}}, ak bol kód naskenovaný"
+            "scannedQR": "{{ClickOrTap}}, ak bol kód naskenovaný",
+            "copyLink": "{{ClickOrTap}} pre kopírovanie odkazu na pozvanie"
         },
         "email": {
             "subject": "Hej, pozrite sa na to",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Boli ste pozvaní. {{ClickOrTap}} tu prijať a pripojiť sa."
-        }
+        },
+        "youCanNowPaste": "Teraz môžete tento odkaz niekde prilepiť, aby ste pozvali ľudí"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Choď žiť",
             "fbStopLive": "End Live",
             "fbEmbedCode": "vložiť",
-            "copy": "kópie"
+            "copy": "kópie",
+            "turnOffVideo": "Vypnite zdieľanie fotoaparátu \/ obrazovky",
+            "turnOffScreenSharing": "Vypnite zdieľanie obrazovky",
+            "cameraIsTurnedOff": "Fotoaparát je vypnutý"
         },
         "participantsPopup": {
             "disconnect": "odpojiť",

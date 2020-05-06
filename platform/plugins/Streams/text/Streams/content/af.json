@@ -73,7 +73,8 @@
             "QRscanned": "Hulle het dit geskandeer!",
             "chooseAgainFromContacts": "Kies weer uit kontakte",
             "inviteSelectedContacts": "Nooi geselekteerde kontakte uit",
-            "scannedQR": "{{ClickOrTap}} as die kode geskandeer is"
+            "scannedQR": "{{ClickOrTap}} as die kode geskandeer is",
+            "copyLink": "{{ClickOrTap}} om die uitnodigingsskakel te kopieer"
         },
         "email": {
             "subject": "Hey, check dit uit",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "U is genooi. {{ClickOrTap}} hier om te aanvaar en aan te sluit."
-        }
+        },
+        "youCanNowPaste": "U kan nou hierdie skakel êrens plak om mense uit te nooi"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Gaan leef",
             "fbStopLive": "Einde Live",
             "fbEmbedCode": "Gedagte",
-            "copy": "kopie"
+            "copy": "kopie",
+            "turnOffVideo": "Skakel die deling van kamera \/ skerm af",
+            "turnOffScreenSharing": "Skakel die deling van die skerm af",
+            "cameraIsTurnedOff": "Die kamera is afgeskakel"
         },
         "participantsPopup": {
             "disconnect": "Ontkoppel",

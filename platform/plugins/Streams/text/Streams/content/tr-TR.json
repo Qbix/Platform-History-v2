@@ -73,7 +73,8 @@
             "QRscanned": "Taradılar!",
             "chooseAgainFromContacts": "Kişilerden Tekrar Seçin",
             "inviteSelectedContacts": "Seçilen Kişileri Davet Et",
-            "scannedQR": "Kod tarandıysa {{ClickOrTap}}"
+            "scannedQR": "Kod tarandıysa {{ClickOrTap}}",
+            "copyLink": "Davet bağlantısını kopyalamak için {{ClickOrTap}}"
         },
         "email": {
             "subject": "Hey, şuna bir bak",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Davet edildin. Kabul etmek ve katılmak için {{ClickOrTap}} burada."
-        }
+        },
+        "youCanNowPaste": "Artık insanları davet etmek için bu bağlantıyı bir yere yapıştırabilirsiniz"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Canlı Yayına Başla",
             "fbStopLive": "Canlı Yayını Sonlandır",
             "fbEmbedCode": "Göm",
-            "copy": "kopya"
+            "copy": "kopya",
+            "turnOffVideo": "Kamera / ekran paylaşımını kapatma",
+            "turnOffScreenSharing": "Ekran paylaşımını kapatma",
+            "cameraIsTurnedOff": "Kamera kapalı"
         },
         "participantsPopup": {
             "disconnect": "kesmek",

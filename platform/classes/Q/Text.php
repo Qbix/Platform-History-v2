@@ -63,13 +63,35 @@ class Q_Text
 	 * @param {string} name The name of the text source
 	 * @param {array} content The content, a hierarchical object whose leaves are
 	 *  the actual text translated into the current language in Q.Text.language
-	 * @param {boolean} [merge=false] If true, merges on top instead of replacing
+	 * @param {array} [options]
+	 * @param {string} [options.language=Q_Text::language] Preferred language, e.g. "en"
+	 * @param {string} [options.locale=Q_Text::locale] Preferred locale, e.g. "US"
+	 * @param {string} [options.merge=false] If true, merges on top instead of replacing
+	 * @return {array} The content that was set, with any loaded overrides applied
 	 */
-	static function set($name, $content, $merge = false)
+	static function set($name, $content, $options = array())
 	{
-		$language = self::$language;
-		$locale = self::$locale;
-		self::$collection[$language][$locale][$name] = $content;
+		$basename = self::basename($options);
+		if (!empty(self::$override[$basename][$name])) {
+			$tree = new Q_Tree($content);
+			$tree->merge(self::$override[$basename][$name]);
+		}
+		if (!empty($options['merge']) and !empty(self::$collection[$basename][$name])) {
+			$tree = new Q_Tree(self::$collection[$basename][$name]);
+			$tree->merge($content);
+		} else {
+			self::$collection[$basename][$name] = $content;
+		}
+		if (!empty($content['@override'])) {
+			foreach ($content['@override'] as $k => $v) {
+				self::$override[$basename][$k] = $v;
+				if (!empty(self::$collection[$basename][$k])) {
+					$tree = new Q_Tree(self::$collection[$basename][$k]);
+					$tree->merge($v);
+				}
+			}
+		}
+		return $content;
 	}
 	
 	/**
@@ -97,26 +119,26 @@ class Q_Text
 			return $result->getAll();
 		}
 		$basename = self::basename($options);
+		$content = Q::ifset(self::$collection, $basename, $name, null);
+		if (empty($options['reload']) and !empty($content)) {
+			return $content;
+		}
 		$filename = "text/$name/$basename.json";
 
 		if (!file_exists(Q::realPath($filename))) {
 			$filename = "text/$name/en.json";
 		}
-
-		if (!empty(self::$get[$filename])) {
-			return self::$get[$filename];
-		}
 		$config = Q_Config::get('Q', 'text', '*', array());
         $json = Q::readFile($filename, Q::take($config, array(
 			'ignoreCache' => true,
 			'dontCache' => true,
-			'duration' => 3600
+			'duration' => 60
 		)));
 		if ($json) {
 			$content = Q::json_decode($json, true);
-			self::set($name, $content, Q::ifset($options, 'merge', false));
+			return self::set($name, $content, Q::ifset($options, 'merge', false));
 		}
-		return self::$get[$filename] = $content ? $content : array();
+		return array();
 	}
 
 	/**
@@ -237,4 +259,5 @@ class Q_Text
 	}
 	
 	protected static $get = array();
+	protected static $override = array();
 }

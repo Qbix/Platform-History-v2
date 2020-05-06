@@ -73,7 +73,8 @@
             "QRscanned": "He skannasi sen!",
             "chooseAgainFromContacts": "Valitse Yhteystiedot-sovelluksesta uudelleen",
             "inviteSelectedContacts": "Kutsu valitut yhteystiedot",
-            "scannedQR": "{{ClickOrTap}}, jos koodi skannattiin"
+            "scannedQR": "{{ClickOrTap}}, jos koodi skannattiin",
+            "copyLink": "{{ClickOrTap}} kopioida kutsulinkki"
         },
         "email": {
             "subject": "Hei, tarkista tämä",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Sinut on kutsuttu. {{ClickOrTap}} täällä hyväksyä ja liittyä."
-        }
+        },
+        "youCanNowPaste": "Voit nyt liittää tämän linkin jonnekin kutsuaksesi ihmisiä"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Elä",
             "fbStopLive": "Lopeta live",
             "fbEmbedCode": "Upottaa",
-            "copy": "Kopio"
+            "copy": "Kopio",
+            "turnOffVideo": "Poista kameran \/ näytön jakaminen käytöstä",
+            "turnOffScreenSharing": "Sammuta näytön jakaminen",
+            "cameraIsTurnedOff": "Kamera on kytketty pois päältä"
         },
         "participantsPopup": {
             "disconnect": "Katkaista",

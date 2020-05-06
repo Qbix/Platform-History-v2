@@ -73,7 +73,8 @@
             "QRscanned": "Prohledali to!",
             "chooseAgainFromContacts": "Znovu vyberte možnost Kontakty",
             "inviteSelectedContacts": "Pozvěte vybrané kontakty",
-            "scannedQR": "{{ClickOrTap}}, pokud byl kód naskenován"
+            "scannedQR": "{{ClickOrTap}}, pokud byl kód naskenován",
+            "copyLink": "{{ClickOrTap}} zkopírujte odkaz na pozvání"
         },
         "email": {
             "subject": "Hej, podívejte se na to",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Byli jste pozváni. {{ClickOrTap}} zde přijměte a připojte se."
-        }
+        },
+        "youCanNowPaste": "Nyní můžete tento odkaz někam vložit a pozvat lidi"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Běž žít",
             "fbStopLive": "End Live",
             "fbEmbedCode": "Vložit",
-            "copy": "kopírovat"
+            "copy": "kopírovat",
+            "turnOffVideo": "Vypněte sdílení fotoaparátu / obrazovky",
+            "turnOffScreenSharing": "Vypněte sdílení obrazovky",
+            "cameraIsTurnedOff": "Fotoaparát je vypnutý"
         },
         "participantsPopup": {
             "disconnect": "Odpojit",

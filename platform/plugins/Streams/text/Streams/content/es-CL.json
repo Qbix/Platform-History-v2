@@ -73,7 +73,8 @@
             "QRscanned": "¡Lo escanearon!",
             "chooseAgainFromContacts": "Elegir de nuevo desde Contactos",
             "inviteSelectedContacts": "Invitar contactos seleccionados",
-            "scannedQR": "{{ClickOrTap}} si el código fue escaneado"
+            "scannedQR": "{{ClickOrTap}} si el código fue escaneado",
+            "copyLink": "{{ClickOrTap}} para copiar el enlace de invitación"
         },
         "email": {
             "subject": "Oye mira esto",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Has sido invitado. {{ClickOrTap}} aquí para aceptar y unirte."
-        }
+        },
+        "youCanNowPaste": "Ahora puede pegar este enlace en algún lugar para invitar personas"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Ir a vivir",
             "fbStopLive": "Fin en vivo",
             "fbEmbedCode": "Empotrar",
-            "copy": "Copiar"
+            "copy": "Copiar",
+            "turnOffVideo": "Apague la cámara / pantalla compartida",
+            "turnOffScreenSharing": "Desactiva el uso compartido de pantalla",
+            "cameraIsTurnedOff": "La cámara está apagada"
         },
         "participantsPopup": {
             "disconnect": "Desconectar",

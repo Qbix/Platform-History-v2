@@ -1,19 +1,29 @@
 The Qbix Platform
 ===
 
-### [Platform Portal](https://qbix.com/platform) - tutorials docs, platform reference, and more.
+### [Platform Portal](https://qbix.com/platform) - overview
 
 ### [Video tutorials](https://qbix.com/platform/tutorials) help you get started.
+
+### [Developer Guide](https://qbix.com/platform/guide) - an overview of every feature.
 
 For Developers
 ===
 
-### 3 Minute Showcase
-See what's possible to build with Qbix Platform:
-
-[![Qbix](https://qbix.com/img/thumbnails/showcase.png)](https://vimeo.com/208438090)
+### Learn about the platform:
+[![Qbix](https://img.youtube.com/vi/pZ1O_gmPneI/0.jpg)](https://www.youtube.com/watch?v=pZ1O_gmPneI&feature=emb_title)
 
 ### About Qbix
+Our company spent 10 years building a decentralized Social Operating System for the web, with reusable, user-friendly, battle-tested components that can be combined in various ways. It's entirely web-based and is designed to work across every device, including
+* desktop browsers
+* tablet browsers
+* mobile browsers (iOS and Android)
+* native iOS apps (Cordova)
+* native Android apps (Cordova)
+
+We aim to do to Facebook and Google what the Web did to AOL and CompuServe. Foster an open, permissionless ecosystem where any startup or existing organization can release its own app, and be in charge of its own data, identity, relationships and brand. We want to [move the Web from Feudalism to a Free Market](https://qbix.com/QBUX/whitepaper.html#Distributed-Operating-System).
+
+### About Qbix Platform
 There are lots of frameworks out there for making websites. You've probably encountered them. Well, Qbix is different. It was designed from the ground up to power social apps for communities to install.
 
 A social app is an app that enables spontaneous communication and collaboration between users.
@@ -25,6 +35,37 @@ Apps built with Qbix can go viral as they work on practically every device and i
 * mobile phones + contacts
 * facebook accounts + friend lists
 * Working in the Qbix platform encourages best practices, e.g. when it comes to [modern web standards](https://qbix.com/platform/welcome/developer), [security](https://www.owasp.org/index.php/Main_Page), [privacy](https://qbix.com/platform/features/access) and [achieving business objectives](https://qbix.com/platform/welcome/business).
+
+### Operating System
+
+Qbix Platform is like a unified operating system, like BSD but for the Web. A graphical operating system provided a common language of windows, buttons and menus and files so that app developers could reason on a higher level and be much more productive, while users got to master a unified set of concepts across applications. This is what Qbix does for modern web development.
+
+These are just a few things you can build with Qbix Platform. You can now design on a much higher level than most web development today. Speak with your clients in terms of apps, communities, subchapters, roles and permissions, invitations, real time updates, notifications, transactional emails, credits, rewards, videoconferencing, payments, payouts, etc.
+
+The other thing Qbix Platform does is provide a standard set of features that people get used to, across websites and environments like the mobile web. Here are some examples:
+
+![Desktop](https://qbix.com/screenshots/desktop.png)
+![Conversations](https://qbix.com/screenshots/conversations.png)
+![Personal](https://qbix.com/screenshots/personal.png)
+![Profiles](https://qbix.com/screenshots/profiles.png)
+![Rides](https://qbix.com/screenshots/rides.png)
+
+### Videos
+
+Here are some more features you can use out of the box:
+
+[![Chat](https://img.youtube.com/vi/QJg3ZwKalmU/3.jpg)](https://www.youtube.com/watch?v=QJg3ZwKalmU) [![Videoconferencing](https://img.youtube.com/vi/opeLeOStuPU/3.jpg)](https://www.youtube.com/watch?v=opeLeOStuPU) [![Events](https://img.youtube.com/vi/RTFcFGZeCsw/3.jpg)](https://www.youtube.com/watch?v=RTFcFGZeCsw) [![Rides](https://img.youtube.com/vi/Z7Q7IzVv1VU/3.jpg)](https://www.youtube.com/watch?v=Z7Q7IzVv1VU) [![People](https://img.youtube.com/vi/ZRfOKuacdqI/3.jpg)](https://www.youtube.com/watch?v=ZRfOKuacdqI) [![Payments](https://img.youtube.com/vi/g9VV1eEbDww/3.jpg)](https://www.youtube.com/watch?v=g9VV1eEbDww) [![Notifications](https://img.youtube.com/vi/rtf7e0lAg8w/3.jpg)](https://www.youtube.com/watch?v=rtf7e0lAg8w) [![Edit HTML](https://img.youtube.com/vi/-DgaTwG1csc/3.jpg)](https://www.youtube.com/watch?v=-DgaTwG1csc)
+
+Oh, and now out of the box you can even use web based videoconferencing, or livestream to facebook.
+
+And as usual, everything we build works across desktop, tablet and mobile browsers and apps.
+
+[![Social Media](https://img.youtube.com/vi/72GgWzIzYjM/3.jpg)](https://www.youtube.com/watch?v=72GgWzIzYjM) [![Why for Communities](https://img.youtube.com/vi/d-aVMmY7BmE/3.jpg)](https://www.youtube.com/watch?v=d-aVMmY7BmE) [![Why for People](https://img.youtube.com/vi/Je_quk1FtBw/3.jpg)](https://www.youtube.com/watch?v=Je_quk1FtBw)
+
+### 3 Minute Showcase
+See one possible app to build with Qbix Platform:
+
+[![Showcase](https://qbix.com/img/thumbnails/showcase.png)](https://vimeo.com/208438090)
 
 ### Back End Technology Stack
 * PHP: Qbix runs on pretty much any environment with PHP 5 or above.

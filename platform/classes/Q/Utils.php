@@ -63,6 +63,7 @@ class Q_Utils
 			if (!Q_Config::get('Q', 'random', 'dontRandomize', false)) {
 				srand();
 			}
+			$temp = '';
 			for ($i=0; $i<$length; $i += 40) {
 				$temp .= sha1(mt_rand().microtime());
 			}
@@ -128,6 +129,23 @@ class Q_Utils
 			$result .= $encoded[$i];
 		}
 		return base64_decode($result);
+	}
+
+	static function memoryLimit()
+	{
+		$val = trim(ini_get('memory_limit'));
+		$last = strtolower($val[strlen($val)-1]);
+		$val = substr($val, 0, -1);
+		switch($last) {
+			// The 'G' modifier is available since PHP 5.1.0
+			case 'g':
+				$val *= 1024;
+			case 'm':
+				$val *= 1024;
+			case 'k':
+				$val *= 1024;
+		}
+		return $val;
 	}
 
 	/**

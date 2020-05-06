@@ -73,7 +73,8 @@
             "QRscanned": "Þeir skannaðu það!",
             "chooseAgainFromContacts": "Veldu aftur úr tengiliðum",
             "inviteSelectedContacts": "Bjóddu valdar tengiliðir",
-            "scannedQR": "{{ClickOrTap}} ef kóðinn var skannaður"
+            "scannedQR": "{{ClickOrTap}} ef kóðinn var skannaður",
+            "copyLink": "{{ClickOrTap}} til að afrita boðstengil"
         },
         "email": {
             "subject": "Hey, athugaðu þetta út",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Þú hefur verið boðið. {{ClickOrTap}} hér til að samþykkja og taka þátt."
-        }
+        },
+        "youCanNowPaste": "Þú getur núna límt þennan tengil einhvers staðar til að bjóða fólki"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Fara í loftið",
             "fbStopLive": "End Live",
             "fbEmbedCode": "Fella inn",
-            "copy": "Afrita"
+            "copy": "Afrita",
+            "turnOffVideo": "Slökktu á samnýtingu myndavélar \/ skjáa",
+            "turnOffScreenSharing": "Slökktu á samnýtingu skjásins",
+            "cameraIsTurnedOff": "Slökkt er á myndavélinni"
         },
         "participantsPopup": {
             "disconnect": "Aftengdu",

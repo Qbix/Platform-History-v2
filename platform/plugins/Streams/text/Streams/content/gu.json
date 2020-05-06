@@ -73,7 +73,8 @@
             "QRscanned": "તેઓ તેને સ્કેન કરે છે!",
             "chooseAgainFromContacts": "સંપર્કોમાંથી ફરીથી પસંદ કરો",
             "inviteSelectedContacts": "પસંદ કરેલા સંપર્કોને આમંત્રિત કરો",
-            "scannedQR": "Scan 9 999}} જો કોડ સ્કેન કરવામાં આવ્યો હતો"
+            "scannedQR": "Scan 9 999}} જો કોડ સ્કેન કરવામાં આવ્યો હતો",
+            "copyLink": "આમંત્રિત લિંકને ક copyપિ કરવા માટે {9 999}."
         },
         "email": {
             "subject": "અરે, આ તપાસો",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "તમને આમંત્રણ આપવામાં આવ્યું છે. {{ClickOrTap}} અહીં સ્વીકારવા અને જોડાવા માટે."
-        }
+        },
+        "youCanNowPaste": "લોકોને આમંત્રિત કરવા માટે તમે હવે આ કડી ક્યાંક પેસ્ટ કરી શકો છો"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "લાઇવ જાઓ",
             "fbStopLive": "અંત લાઇવ",
             "fbEmbedCode": "એમ્બેડ કરો",
-            "copy": "નકલ કરો"
+            "copy": "નકલ કરો",
+            "turnOffVideo": "ક cameraમેરો \/ સ્ક્રીન શેરિંગ બંધ કરો",
+            "turnOffScreenSharing": "સ્ક્રીન શેરિંગ બંધ કરો",
+            "cameraIsTurnedOff": "ક Cameraમેરો બંધ છે"
         },
         "participantsPopup": {
             "disconnect": "ડિસ્કનેક્ટ કરો",

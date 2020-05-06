@@ -21,7 +21,7 @@
  *   @param {Number} [options.maxShow=10]
  *    The maximum number of participants to fetch for display
  *   @param {Function} [options.filter]
- *    Takes (participant, element) and can modify them.
+ *    Takes (userId, element) and can modify them.
  *    If this function returns false, the element is not appended.
  *   @param {Q.Event} [options.onRefresh] An event that occurs when the tool is refreshed
  */
@@ -231,53 +231,60 @@ function _Streams_participants(options) {
 					Q.handle(callback, tool, []);
 					return Q.handle(state.onRefresh, tool, []);
 				}
-				Q.Template.render(
-					'Streams/participants/invite',
-					state.templates.invite.fields,
-					function (err, html) {
-						if (err) return;
-						var $element = tool.$invite = $(html).insertBefore(tool.$avatars);
-						var filter = '.Streams_inviteTrigger';
-						$(tool.element).on(Q.Pointer.fastclick, filter, function () {
-							var options = Q.extend({
-								identifier: si.identifier
-							}, si);
-							Q.Streams.invite(
-								state.publisherId, 
-								state.streamName, 
-								options,
-								function (err, data) {
-									state.onInvited.handle.call(tool, err, data);
+				Q.Text.get("Streams/content", function (err, result) {
+					var text = result && result.invite;
+					if (text) {
+						state.templates.invite.fields.alt = text.command;
+						state.templates.invite.fields.title = text.command;
+					}
+					Q.Template.render(
+						'Streams/participants/invite',
+						state.templates.invite.fields,
+						function (err, html) {
+							if (err) return;
+							var $element = tool.$invite = $(html).insertBefore(tool.$avatars);
+							var filter = '.Streams_inviteTrigger';
+							$(tool.element).on(Q.Pointer.fastclick, filter, function () {
+								var options = Q.extend({
+									identifier: si.identifier
+								}, si);
+								Q.Streams.invite(
+									state.publisherId, 
+									state.streamName, 
+									options,
+									function (err, data) {
+										state.onInvited.handle.call(tool, err, data);
+									}
+								);
+								return false;
+							}).on(Q.Pointer.click, filter, function () {
+								return false;
+							}).on(Q.Pointer.start.eventName, filter, function () {
+								$(tool.element).addClass('Q_discouragePointerEvents');
+								function _pointerEndHandler() {
+									$(tool.element).removeClass('Q_discouragePointerEvents');
+									$(window).off(Q.Pointer.end, _pointerEndHandler);
 								}
-							);
-							return false;
-						}).on(Q.Pointer.click, filter, function () {
-							return false;
-						}).on(Q.Pointer.start.eventName, filter, function () {
-							$(tool.element).addClass('Q_discouragePointerEvents');
-							function _pointerEndHandler() {
-								$(tool.element).removeClass('Q_discouragePointerEvents');
-								$(window).off(Q.Pointer.end, _pointerEndHandler);
-							}
-							$(window).on(Q.Pointer.end, _pointerEndHandler);
-						});
+								$(window).on(Q.Pointer.end, _pointerEndHandler);
+							});
 
-						if (si.clickable) {
-							$('img', $element).plugin(
-								'Q/clickable', Q.extend({
-									triggers: $element
-								}, si.clickable)
-							);
-						}
-						Q.handle(callback, tool, []);
-						Q.handle(state.onRefresh, tool, []);
-					},
-					state.templates.invite
-				);
+							if (si.clickable) {
+								$('img', $element).plugin(
+									'Q/clickable', Q.extend({
+										triggers: $element
+									}, si.clickable)
+								);
+							}
+							Q.handle(callback, tool, []);
+							Q.handle(state.onRefresh, tool, []);
+						},
+						state.templates.invite
+					);
+				});
 			});
 		}
 
-		function _addAvatar(userId, prepend) {
+		function _addAvatar(userId, prepend, participant) {
 			var $element = $(Q.Tool.setUpElement(
 				'div', 
 				'Users/avatar',
@@ -288,7 +295,7 @@ function _Streams_participants(options) {
 				tool.prefix)
 			);
 			var $e = userId ? tool.$avatars : tool.$blanks;
-			if (false !== Q.handle(state.filter, tool, [$element])) {
+			if (false !== Q.handle(state.filter, tool, [userId, $element[0]])) {
 				$element[prepend?'prependTo':'appendTo']($e).activate();
 			}
 		}

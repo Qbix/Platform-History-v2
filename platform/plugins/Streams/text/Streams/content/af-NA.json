@@ -73,39 +73,51 @@
             "QRscanned": "Hulle het dit geskandeer!",
             "chooseAgainFromContacts": "Kies weer uit kontakte",
             "inviteSelectedContacts": "Nooi geselekteerde kontakte uit",
-            "scannedQR": "{{ClickOrTap}} as die kode geskandeer is"
+            "scannedQR": "{{ClickOrTap}} as die kode geskandeer is",
+            "copyLink": "{{ClickOrTap}} om die uitnodigingsskakel te kopieer"
         },
         "email": {
             "subject": "Hey, check dit uit",
             "PleaseVisitLink": "Besoek gerus die volgende skakel:",
             "InvitingYou": "Ek nooi jou uit na {{title}}",
             "HasInvitedYou": "{{displayName}} het jou genooi om {{title}}",
-            "HasMentionedYou": "{{displayName}} het u genoem in &#39;{{title}}&#39;"
+            "HasMentionedYou": "{{displayName}} het u genoem in &#39;{{title}}&#39;",
+            "YOUAREINVITED": "U WORD UITGENOOI!",
+            "AcceptInvite": "Aanvaar Nooi"
         },
         "sms": {
             "content": "U is genooi na {{title}}. Tik asseblief {{url}}"
         },
         "notice": {
             "text": "U is genooi. {{ClickOrTap}} hier om te aanvaar en aan te sluit."
-        }
+        },
+        "youCanNowPaste": "U kan nou hierdie skakel êrens plak om mense uit te nooi"
     },
     "followup": {
         "mobile": {
             "alert": "Uitnodigings word van ons nommer gestuur, wat u vriende nog nie erken nie. Volg met &#39;n vinnige teks om hulle te laat weet dat die uitnodiging van jou gekom het, en vra hulle om die skakel te klik.",
             "confirm": "Uitnodigings word van ons nommer gestuur, wat u vriende nog nie erken nie. Wil jy opvolg met &#39;n vinnige teks om te laat weet dat die uitnodiging van jou gekom het, en vra hulle om die skakel te klik.",
-            "check": "Haai, ek het jou net &#39;n uitnodiging na die {{app}} -program gestuur. Gaan asseblief jou sms en klik op die skakel!"
+            "check": "Haai, ek het jou net &#39;n uitnodiging na die {{app}} -program gestuur. Gaan asseblief jou sms en klik op die skakel!",
+            "CheckYourMobile": "Kyk gerus na SMS en volg die aanwysings!"
         },
         "email": {
             "alert": "Uitnodigings word gestuur vanaf ons domein, wat u vriende nog nie erken nie. Volg met &#39;n vinnige teks om hulle te laat weet dat die uitnodiging van jou gekom het, en vra hulle om die skakel te klik.",
             "confirm": "Uitnodigings word gestuur vanaf ons domein, wat u vriende nog nie erken nie. Wil jy opvolg met &#39;n vinnige teks om te laat weet dat die uitnodiging van jou gekom het, en vra hulle om die skakel te klik.",
             "subject": "Het jy &#39;n uitnodiging gekry?",
-            "body": "Haai, ek het jou net &#39;n uitnodiging na die {{app}} -program gestuur. Gaan asseblief jou e-pos en klik die skakel daar in!"
+            "body": "Haai, ek het jou net &#39;n uitnodiging na die {{app}} -program gestuur. Gaan asseblief jou e-pos en klik die skakel daar in!",
+            "CheckYourEmail": "Gaan u e-pos na en volg die aanwysings!"
         }
     },
     "participating": {
         "Title": "Titel",
         "Subscribed": "ingeskryf",
-        "Participants": "deelnemers"
+        "Participants": "deelnemers",
+        "AreYouSureRemoveIdentifier": "Is u seker dat u hierdie identifiseerder verwyder?",
+        "AreYouSureUnsubscribeIdentifier": "Is u seker dat u hierdie identifiseerder inteken? Dit sal kennisgewings by hierdie identifiseerder afskakel.",
+        "AreYouSureUnsubscribeDevice": "Is u seker dat u hierdie toestel inteken? Dit sal kennisgewings op hierdie toestel afskakel.",
+        "Identifiers": "identifiseerders",
+        "Devices": "toestelle",
+        "Streams": "strome"
     },
     "webrtc": {
         "allow": {
@@ -116,6 +128,77 @@
             "microphoneBtn": "Aktiveer mikrofoon",
             "cameraBtn": "Aktiveer kamera",
             "cameraAndMicrophoneBtn": "Aktiveer kamera en mikrofoon"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "instruksies",
+            "permissionDenied": "Toestemming vir {{kind}} geweier. Volg die volgende stappe om dit te gebruik:",
+            "point1": "Gaan na &quot;Instellings&quot; -&gt; &quot;Geavanceerd&quot; -&gt; &quot;Privaatheid en veiligheid&quot; -&gt; &quot;Site-instellings&quot; -&gt; &quot;Camera&quot; of &quot;Site-instellings&quot; -&gt; &quot;Microphone&quot;",
+            "point2": "Verwyder {{hostname}} van die &quot;Blok&quot; -lys"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "instruksies",
+            "permissionDenied": "Toestemming vir {{kind}} geweier. Herlaai hierdie bladsy en bevestig toegang tot {{kind}} om by die konferensie aan te sluit."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "instruksies",
+            "permissionDenied": "Toestemming vir {{kind}} geweier. Volg die volgende stappe om dit te gebruik:",
+            "point1": "Gaan na u Android-instellings",
+            "point2": "Maak &quot;Programme en kennisgewings&quot; oop",
+            "point3": "Vind &quot;{{communityName}}&quot; en maak dit oop",
+            "point4": "Tik op Toestemmings",
+            "point5": "Aktiveer {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "instruksies",
+            "permissionDenied": "Toestemming vir {{kind}} geweier. Volg die volgende stappe om dit te gebruik:",
+            "point1": "Gaan na u iOS-instellings",
+            "point2": "Maak &quot;privaatheid&quot; oop",
+            "point3": "Soek {{kind}} en maak dit oop",
+            "point4": "Vind &quot;{{communityName}}&quot; en maak dit in staat"
+        },
+        "notices": {
+            "youJoinedRoom": "Jy het by die kamer aangesluit",
+            "joining": "Aansluiting: {{userName}}",
+            "sbLeftRoom": "{{userName}} het die kamer verlaat",
+            "youLeftRoom": "U het die kamer verlaat",
+            "codeCopied": "U het die kamer verlaat",
+            "sbBeganFbLive": "{{userName}} het hierdie oproep in Facebook begin uitsaai",
+            "sbStoppedFbLive": "{{userName}} het opgehou om hierdie oproep in Facebook uit te saai",
+            "youBeganFbLive": "U het hierdie oproep in Facebook begin uitsaai",
+            "youStoppedFbLive": "U het opgehou om hierdie oproep in Facebook uit te saai",
+            "linkCopiedToCb": "Skakel na knipbord gekopieër",
+            "codeCopiedToCb": "Kode na klembord gekopieër",
+            "userHasNoVideo": "Deelnemer het geen video nie",
+            "openInBrowserAlert": "Maak &#39;n skakel oop in die Safari-blaaier om aan die konferensie deel te neem."
+        },
+        "settingsPopup": {
+            "webCamera": "Webkamera",
+            "screenSharing": "Skermdeling",
+            "shareAnotherScreen": "Deel &#39;n ander skerm",
+            "turnOffCameras": "Skakel alle kameras uit",
+            "startFBLive": "Begin Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "fbLiveTitle": "Regstreekse titel",
+            "fbLiveDescription": "Regstreekse beskrywing",
+            "fbOnlyMeLiveAccess": "Slegs Ek",
+            "fbFriendsAccess": "Vriende",
+            "fbPublicAccess": "openbare",
+            "fbStartLive": "Gaan leef",
+            "fbStopLive": "Einde Live",
+            "fbEmbedCode": "Gedagte",
+            "copy": "kopie",
+            "turnOffVideo": "Skakel die deling van kamera / skerm af",
+            "turnOffScreenSharing": "Skakel die deling van die skerm af",
+            "cameraIsTurnedOff": "Die kamera is afgeskakel"
+        },
+        "participantsPopup": {
+            "disconnect": "Ontkoppel",
+            "floatingScreens": "Swaai skerms",
+            "tiledScreens": "Betegelde skerms",
+            "loudestExceptMe": "Die hardste behalwe my",
+            "maximizeLoudest": "Maksimeer die hardste",
+            "staticMaximized": "Staties gemaksimeer",
+            "manual": "handleiding"
         }
     },
     "types": {
@@ -243,7 +326,15 @@
             "relatedTo": {
                 "hasANew": "het &#39;n nuwe {{instructions.fromDisplayType}}",
                 "byAvatar": "bygevoeg deur {{avatar.displayName}}"
-            }
+            },
+            "startedCallIn": "begin &#39;n oproep"
         }
+    },
+    "menu": {
+        "placeholder": "tik bladsy titel",
+        "ModTab": "Verander item",
+        "Save": "Save",
+        "Delete": "Delete",
+        "Submenu": "submenu"
     }
 }

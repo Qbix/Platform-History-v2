@@ -73,7 +73,8 @@
             "QRscanned": "Ata e skanuan atë!",
             "chooseAgainFromContacts": "Zgjidhni përsëri nga Kontaktet",
             "inviteSelectedContacts": "Fto kontaktet e zgjedhura",
-            "scannedQR": "99 99 999}} nëse kodi ishte skanuar"
+            "scannedQR": "99 99 999}} nëse kodi ishte skanuar",
+            "copyLink": "99 99 999}} për të kopjuar lidhjen e ftesës"
         },
         "email": {
             "subject": "Hej, shiko këtë",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Ju keni qenë të ftuar. {{ClickOrTap}} këtu për të pranuar dhe për t&#39;u bashkuar."
-        }
+        },
+        "youCanNowPaste": "Tani mund të ngjitni këtë lidhje diku për të ftuar njerëz"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "Shko jeto",
             "fbStopLive": "Fund Jetoni",
             "fbEmbedCode": "mbjell",
-            "copy": "kopje"
+            "copy": "kopje",
+            "turnOffVideo": "Fikni ndarjen e kamerës / ekranit",
+            "turnOffScreenSharing": "Fikni ndarjen e ekranit",
+            "cameraIsTurnedOff": "Kamera është e fikur"
         },
         "participantsPopup": {
             "disconnect": "shqit",

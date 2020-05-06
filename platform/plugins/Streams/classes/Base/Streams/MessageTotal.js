@@ -19,12 +19,12 @@ var Row = Q.require('Db/Row');
  * @class MessageTotal
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.publisherId] defaults to ""
- * @param {string} [$fields.streamName] defaults to ""
- * @param {string} [$fields.messageType] defaults to ""
- * @param {integer} [$fields.messageCount] defaults to 0
+ * @param {String|Buffer} [fields.publisherId] defaults to ""
+ * @param {String|Buffer} [fields.streamName] defaults to ""
+ * @param {String|Buffer} [fields.messageType] defaults to ""
+ * @param {Integer} [fields.messageCount] defaults to 0
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);

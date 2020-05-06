@@ -19,15 +19,15 @@ var Row = Q.require('Db/Row');
  * @class Badge
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.appId] defaults to ""
- * @param {string} [$fields.communityId] defaults to null
- * @param {string} [$fields.name] defaults to ""
- * @param {string} [$fields.icon] defaults to null
- * @param {string} [$fields.title] defaults to ""
- * @param {string} [$fields.description] defaults to null
- * @param {integer} [$fields.points] defaults to 0
+ * @param {String|Buffer} [fields.appId] defaults to ""
+ * @param {String|Buffer} [fields.communityId] defaults to null
+ * @param {String} [fields.name] defaults to ""
+ * @param {String|Buffer} [fields.icon] defaults to null
+ * @param {String} [fields.title] defaults to ""
+ * @param {String} [fields.description] defaults to null
+ * @param {Integer} [fields.points] defaults to 0
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);

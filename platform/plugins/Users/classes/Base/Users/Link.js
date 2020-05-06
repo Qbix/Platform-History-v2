@@ -19,12 +19,12 @@ var Row = Q.require('Db/Row');
  * @class Link
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.identifier] defaults to ""
- * @param {string} [$fields.userId] defaults to ""
- * @param {string} [$fields.extraInfo] defaults to ""
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
+ * @param {String|Buffer} [fields.identifier] defaults to ""
+ * @param {String|Buffer} [fields.userId] defaults to ""
+ * @param {String} [fields.extraInfo] defaults to ""
+ * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -53,7 +53,7 @@ Q.mixin(Base, Row);
 /**
  * @property insertedTime
  * @type String|Db.Expression
- * @default new Db_Expression("current_timestamp()")
+ * @default new Db.Expression("CURRENT_TIMESTAMP")
  * 
  */
 
@@ -408,7 +408,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","255","",false],false,"","current_timestamp()"];
+return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**

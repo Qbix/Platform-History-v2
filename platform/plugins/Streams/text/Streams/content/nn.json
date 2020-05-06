@@ -73,7 +73,8 @@
             "QRscanned": "De skannet det!",
             "chooseAgainFromContacts": "Velg igjen fra kontakter",
             "inviteSelectedContacts": "Inviter valgte kontakter",
-            "scannedQR": "{{ClickOrTap}} hvis koden ble skannet"
+            "scannedQR": "{{ClickOrTap}} hvis koden ble skannet",
+            "copyLink": "{{ClickOrTap}} for å kopiere invitasjonslink"
         },
         "email": {
             "subject": "Hei, sjekk dette ut",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "Du har blitt invitert. {{ClickOrTap}} her for å godta og bli med."
-        }
+        },
+        "youCanNowPaste": "Du kan nå lime inn denne lenken et sted for å invitere folk"
     },
     "followup": {
         "mobile": {
@@ -181,7 +183,10 @@
             "fbStartLive": "Gå live",
             "fbStopLive": "Slutt Live",
             "fbEmbedCode": "embed",
-            "copy": "Kopiere"
+            "copy": "Kopiere",
+            "turnOffVideo": "Slå av deling av kamera \/ skjerm",
+            "turnOffScreenSharing": "Slå av skjermdeling",
+            "cameraIsTurnedOff": "Kameraet er slått av"
         },
         "participantsPopup": {
             "disconnect": "Koble fra",

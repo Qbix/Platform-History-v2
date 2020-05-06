@@ -19,16 +19,16 @@ var Row = Q.require('Db/Row');
  * @class Avatar
  * @extends Db.Row
  * @constructor
- * @param {object} [fields={}] The fields values to initialize table row as 
+ * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {string} [$fields.toUserId] defaults to ""
- * @param {string} [$fields.publisherId] defaults to ""
- * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
- * @param {string} [$fields.username] defaults to ""
- * @param {string} [$fields.firstName] defaults to ""
- * @param {string} [$fields.lastName] defaults to null
- * @param {string} [$fields.icon] defaults to ""
- * @param {string} [$fields.gender] defaults to null
+ * @param {String|Buffer} [fields.toUserId] defaults to ""
+ * @param {String|Buffer} [fields.publisherId] defaults to ""
+ * @param {String|Db.Expression} [fields.updatedTime] defaults to null
+ * @param {String} [fields.username] defaults to ""
+ * @param {String} [fields.firstName] defaults to ""
+ * @param {String} [fields.lastName] defaults to null
+ * @param {String|Buffer} [fields.icon] defaults to ""
+ * @param {String} [fields.gender] defaults to null
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);

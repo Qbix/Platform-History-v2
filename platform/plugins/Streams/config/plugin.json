@@ -170,7 +170,8 @@
 				"getParticipantsLimit": 100,
 				"messages": {
 					"*": {
-						"subject": ["Streams/content", ["notifications", "*"]]
+						"subject": ["Streams/content", ["notifications", "*"]],
+						"log": "messages"
 					},
 					"Streams/changed": {
 						"description": "Fields or attributes of the stream have changed",

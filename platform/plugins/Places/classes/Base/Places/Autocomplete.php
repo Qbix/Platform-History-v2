@@ -21,7 +21,7 @@
  * @param {float} [$fields.latitude] defaults to 0
  * @param {float} [$fields.longitude] defaults to 0
  * @param {float} [$fields.meters] defaults to 0
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("current_timestamp()")
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  * @param {string} [$fields.results] defaults to ""
  */
@@ -60,7 +60,7 @@ abstract class Base_Places_Autocomplete extends Db_Row
 	/**
 	 * @property $insertedTime
 	 * @type string|Db_Expression
-	 * @default new Db_Expression("current_timestamp()")
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 * 
 	 */
 	/**
@@ -185,7 +185,7 @@ abstract class Base_Places_Autocomplete extends Db_Row
 	 * Create DELETE query to the class table
 	 * @method delete
 	 * @static
-	 * @param {object} [$table_using=null] If set, adds a USING clause with this table
+	 * @param {string} [$table_using=null] If set, adds a USING clause with this table
 	 * @param {string} [$alias=null] Table alias
 	 * @return {Db_Query_Mysql} The generated query
 	 */
@@ -201,7 +201,7 @@ abstract class Base_Places_Autocomplete extends Db_Row
 	 * Create INSERT query to the class table
 	 * @method insert
 	 * @static
-	 * @param {object} [$fields=array()] The fields as an associative array of column => value pairs
+	 * @param {array} [$fields=array()] The fields as an associative array of column => value pairs
 	 * @param {string} [$alias=null] Table alias
 	 * @return {Db_Query_Mysql} The generated query
 	 */
@@ -539,7 +539,7 @@ return array (
   ),
   1 => false,
   2 => '',
-  3 => 'current_timestamp()',
+  3 => 'CURRENT_TIMESTAMP',
 );			
 	}
 

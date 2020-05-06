@@ -1974,7 +1974,7 @@ function _getProp (/*Array*/parts, /*Boolean*/create, /*Object*/context){
  * @param {anything} value value or object to place at location given by name
  * @param {Object} [context=window]  Optional. Object to use as root of path.
  * @param {String} [delimiter='.']  The delimiter to use in the name
- * @return {Object|undefined} Returns the passed value if setting is successful or `undefined` if not.
+ * @return {Object|undefined} Returns the resulting value if setting is successful or `undefined` if not.
  */
 Q.setObject = function _Q_setObject(name, value, context, delimiter) {
 	if (Q.isPlainObject(name)) {
@@ -2871,6 +2871,7 @@ var Pp = Q.Pipe.prototype;
  *  The callback receives the same "this" and arguments that the original call was made with.
  *  It is passed the "this" and arguments which are passed to the callback.
  *  If you return true from this function, it will delete all the callbacks in the pipe.
+ * @chainable
  */
 Pp.on = function _Q_pipe_on(field, callback) {
 	return this.add([field], 1, function _Q_pipe_on_callback (params, subjects, field) {
@@ -3856,7 +3857,9 @@ Q.Tool = function _Q_Tool(element, options) {
 	if (!element.Q.toolNames) element.Q.toolNames = [];
 	element.Q.toolNames.push(normalizedName);
 	element.Q.tools[normalizedName] = this;
-	element.Q.tool = this;
+	if (!element.Q.tool) {
+		element.Q.tool = this;
+	}
 	Q.setObject([this.id, this.name], this, Q.Tool.active);
 	
 	// Add a Q property on the object and extend it with the prototype.Q if any
@@ -3963,21 +3966,34 @@ Q.Tool.beforeRemove = Q.Event.factory(_beforeRemoveToolHandlers, ["", _toolEvent
  *  should be removed.
  * @param {boolean} [removeElementAfterLastTool=false]
  *  If true, removes the element if the last tool on it was removed
+ * @param {String|Function} [filter]
+ *  This is a string that would match the tool name exactly (after normalization) to remove it,
+ *  or a function that will take a tool name and return a boolean, false means don't remove tool.
  */
-Q.Tool.remove = function _Q_Tool_remove(elem, removeCached, removeElementAfterLastTool) {
+Q.Tool.remove = function _Q_Tool_remove(elem, removeCached, removeElementAfterLastTool, filter) {
 	if (typeof elem === 'string') {
 		var tool = Q.Tool.byId(elem);
 		if (!tool) return false;
 		elem = tool.element;
 	}
-	Q.find(elem, true, null,
-	function _Q_Tool_remove_found(toolElement) {
+	if (typeof filter === 'string') {
+		filter = Q.normalize(filter);
+	}
+	Q.find(elem, true, null, function _Q_Tool_remove_found(toolElement) {
 		var tn = toolElement.Q.toolNames;
 		if (!tn) { // this edge case happens very rarely, usually if a slot element
 			return; // being replaced is inside another slot element being replaced
 		}
 		for (var i=tn.length-1; i>=0; --i) {
-			// check if "remove" method exist
+			if (typeof filter === 'string') {
+				if (tn[i] !== 'filter') {
+					continue;
+				}
+			} else if (typeof filter === 'function') {
+				if (!filter(tn[i])) {
+					continue;
+				}
+			}
 			if (Q.typeOf(Q.getObject(["Q", "tools", tn[i], "remove"], toolElement)) !== "function") {
 				continue;
 			}
@@ -4011,11 +4027,11 @@ Q.Tool.clear = function _Q_Tool_clear(elem, removeCached) {
  * @static
  * @method define
  * @param {String|Object} name The name of the tool, e.g. "Q/foo". Also you can pass an object containing {name: filename} pairs instead.
- * @param {Function} ctor Your tool's constructor. You can also pass a filename here, in which case the other parameters are ignored.
  * @param {String|array} [require] Optionally name another tool (or array of tool names) that was supposed to already have been defined. This will cause your tool's constructor to make sure the required tool has been already loaded and activated on the same element.
- * @param {Object} defaultOptions An optional hash of default options for the tool
- * @param {Array} stateKeys An optional array of key names to copy from options to state
- * @param{Object} methods An optional hash of method functions to assign to the prototype
+ * @param {Function} ctor Your tool's constructor. You can also pass a filename here, in which case the other parameters are ignored.
+ * @param {Object} [defaultOptions] An optional hash of default options for the tool
+ * @param {Array} [stateKeys] An optional array of key names to copy from options to state
+ * @param{Object} [methods] An optional hash of method functions to assign to the prototype
  * @return {Function} The tool's constructor function
  */
 Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, methods) {
@@ -4042,10 +4058,13 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 			};
 		}
 		Q.Tool.names[n] = name;
-		if (typeof ctor === 'string') {
+		if (typeof ctor === 'string' || Q.isPlainObject(ctor)) {
 			if (typeof _qtc[n] !== 'function') {
 				_qtdo[n] = _qtdo[n] || {};
 				_qtc[n] = ctor;
+				if (ctor.placeholder) {
+					_qtp[n] = ctor.placeholder;
+				}
 			}
 			continue;
 		}
@@ -4116,7 +4135,7 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 	}
 	n = Q.normalize(name);
 	Q.Tool.names[n] = name;
-	if (typeof ctor === 'string') {
+	if (typeof ctor === 'string' || typeof ctor === 'object') {
 		if (root.jQuery
 		&& typeof jQuery.fn.plugin[n] !== 'function') {
 			_qtjo[n] = _qtjo[n] || {};
@@ -4221,6 +4240,7 @@ var _qtjo = {};
 
 Q.Tool.nextDefaultId = 1;
 var _qtc = Q.Tool.constructors = {};
+var _qtp = Q.Tool.placeholders = {};
 
 var Tp = Q.Tool.prototype;
 
@@ -4509,14 +4529,15 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached, removeElementAfterLa
 	delete this.element.Q.tools[nn];
 	delete Q.Tool.active[this.id][nn];
 	var tools = Q.Tool.active[this.id];
-	if (Q.isEmpty()) {
+	if (Q.isEmpty(Q.Tool.active[this.id])) {
 		if (removeElementAfterLastTool) {
 			Q.removeElement(this.element);
 		}
 		this.element.Q.tool = null;
 		delete Q.Tool.active[this.id];
-	} else if (Q.normalize(this.element.Q.tool) === nn) {
-		this.element.Q.tool = Q.byId(this.id);
+	} else if (this.element.Q.tool
+	&& Q.normalize(this.element.Q.tool.name) === nn) {
+		this.element.Q.tool = Q.Tool.byId(this.id);
 	}
 
 	// remove all the tool's events automatically
@@ -4820,7 +4841,7 @@ Q.Tool.byId = function _Q_Tool_byId(id, name) {
 		return undefined;
 	}
 	var q = tool.element.Q;
-	return q.tools[q.toolNames[q.toolNames.length-1]];
+	return q.tools[q.toolNames[0]];
 };
 
 /**
@@ -4903,9 +4924,11 @@ Tp.toString = function _Q_Tool_prototype_toString() {
  * @param {Function} callback  The callback to call when the corresponding script has been loaded and executed
  * @param {Mixed} [shared] pass this only when constructing a tool
  * @param {String} [parentId] used internally to pass id of parent tools waiting for init
+ * @param {Object} [options={}]
+ * @param {Boolean} [options.placeholder=false] used internally to set placeholder HTML for tools waiting for activation
  * @return {boolean} whether the script needed to be loaded
  */
-function _loadToolScript(toolElement, callback, shared, parentId) {
+function _loadToolScript(toolElement, callback, shared, parentId, options) {
 	var toolId = Q.Tool.calculateId(toolElement.id);
 	var classNames = toolElement.className.split(' ');
 	var toolNames = [];
@@ -4926,6 +4949,7 @@ function _loadToolScript(toolElement, callback, shared, parentId) {
 	});
 	Q.each(toolNames, function (i, toolName) {
 		var toolConstructor = _qtc[toolName];
+		var toolPlaceholder = _qtp[toolName];
 		function _loadToolScript_loaded() {
 			// in this function, toolConstructor starts as a string
 			if (Q.Tool.latestName) {
@@ -4945,7 +4969,9 @@ function _loadToolScript(toolElement, callback, shared, parentId) {
 		if (toolConstructor === undefined) {
 			Q.Tool.onMissingConstructor.handle(_qtc, toolName);
 			toolConstructor = _qtc[toolName];
-			if (typeof toolConstructor !== 'function' && typeof toolConstructor !== 'string') {
+			if (typeof toolConstructor !== 'function'
+			&& typeof toolConstructor !== 'string'
+			&& !(Q.isPlainObject(toolConstructor) && toolConstructor.js)) {
 				toolConstructor = function () {
 					console.log("Missing tool constructor for " + toolName);
 				}; 
@@ -4966,21 +4992,49 @@ function _loadToolScript(toolElement, callback, shared, parentId) {
 				shared.waitingForTools.push(uniqueToolId);
 			}
 		}
+		if (options && options.placeholder && toolPlaceholder) {
+			// Insert placeholder HTML from one of the tools.
+			// Usually it's a .Q_placeholder_shimmer class div container with a bunch of children
+			var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
+			if (!tool && !toolElement.innerHTML) {
+				if (toolPlaceholder.html) {
+					toolElement.innerHTML = toolPlaceholder.html;
+				} else if (toolPlaceholder.template) {
+					if (Q.isPlainObject(toolPlaceholder.template)) {
+						Q.Template.render(toolPlaceholder.template.name, toolPlaceholder.template.fields);
+					} else {
+						Q.Template.render(toolPlaceholder.template);
+					}
+				}
+			}
+		}
 		if (typeof toolConstructor === 'function') {
 			return p.fill(toolName)(toolElement, toolConstructor, toolName, uniqueToolId);
 		}
 		if (toolConstructor === undefined) {
 			return;
 		}
-		if (typeof toolConstructor !== 'string') {
-			throw new Q.Error("Q.Tool.loadScript: toolConstructor cannot be " + Q.typeOf(toolConstructor));
-		}
-		if (Q.Tool.latestNames[toolConstructor]) {
-			Q.Tool.latestName = Q.Tool.latestNames[toolConstructor];
-			_loadToolScript_loaded();
+		if (typeof toolConstructor === 'string') {
+			if (Q.Tool.latestNames[toolConstructor]) {
+				Q.Tool.latestName = Q.Tool.latestNames[toolConstructor];
+				_loadToolScript_loaded();
+			} else {
+				Q.Tool.latestName = null;
+				Q.addScript(toolConstructor, _loadToolScript_loaded);
+			}
+		} else if (Q.isPlainObject(toolConstructor)) {
+			var pipe = Q.pipe(), waitFor = [];
+			if (toolConstructor.js) {
+				waitFor.push('js');
+				Q.addScript(toolConstructor.js, pipe.fill('js'));
+			}
+			if (toolConstructor.css) {
+				waitFor.push('css');
+				Q.addStylesheet(toolConstructor.css, pipe.fill('css'));
+			}
+			pipe.add(waitFor, 1, _loadToolScript_loaded).run();
 		} else {
-			Q.Tool.latestName = null;
-			Q.addScript(toolConstructor, _loadToolScript_loaded);
+			throw new Q.Error("Q.Tool.loadScript: toolConstructor cannot be " + Q.typeOf(toolConstructor));
 		}
 	});
 }
@@ -5796,13 +5850,19 @@ Q.init = function _Q_init(options) {
 	Q.handle(Q.beforeInit);
 	
 	// Time to call all the onInit handlers
+	var p2 = Q.pipe();
+	var waitFor = [];
 	if (Q.info.urls && Q.info.urls.updateBeforeInit) {
-		Q.updateUrls(function () {
-			Q.handle(Q.onInit);
-		});
-	} else {
-		Q.handle(Q.onInit);
+		waitFor.push('Q.info.urls.updateBeforeInit');
+		Q.updateUrls(p2.fill('Q.info.urls.updateBeforeInit'));
 	}
+	if (!Q.isEmpty(Q.Text.loadBeforeInit)) {
+		waitFor.push('Q.Text.loadBeforeInit');
+		Q.Text.get(Q.Text.loadBeforeInit, p2.fill('Q.Text.loadBeforeInit'));
+	}
+	p2.add(waitFor, 1, function () {
+		Q.handle(Q.onInit, Q);
+	}).run();
 };
 
 /**
@@ -7204,7 +7264,6 @@ Q.request = function (url, slotNames, callback, options) {
 	}
 };
 
-
 Q.request.callbacks = []; // used by Q.request
 
 /**
@@ -8200,18 +8259,21 @@ Q.uuid = function () {
  *  An optional object that will be passed to each callbackBefore and callbackAfter
  */
 Q.find = function _Q_find(elem, filter, callbackBefore, callbackAfter, options, shared, parent, index) {
-	var i;
+	var i, activating = false;
 	if (!elem) {
 		return;
 	}
 	if (filter === true) {
 		filter = 'q_tool';
+		activating = true;
+		if (elem.Q_activating && shared && elem.Q_activating !== shared.activating) {
+			return; // skip the element and its subtree, it's already being activated
+		}
 	}
 	// Arrays are accepted
 	if ((Q.isArrayLike(elem) && !Q.instanceOf(elem, Element))
 	|| (typeof HTMLCollection !== 'undefined' && (elem instanceof root.HTMLCollection))
 	|| (root.jQuery && (elem instanceof jQuery))) {
-
 		Q.each(elem, function _Q_find_array(i, item) {
 			if (!item) {
 				return;
@@ -8259,13 +8321,7 @@ Q.find = function _Q_find(elem, filter, callbackBefore, callbackAfter, options, 
 	}
 	if (ret !== true) {
 		var children = ('children' in elem) ? elem.children : elem.childNodes;
-		var c = [];
-		if (children) {
-			for (i=0; i<children.length; ++i) {
-				c[i] = children[i];
-			}
-		}
-		ret = Q.find(c, filter, callbackBefore, callbackAfter, options, shared, elem);
+		ret = Q.find(Q.copy(children), filter, callbackBefore, callbackAfter, options, shared, elem);
 		if (ret === false) {
 			return false;
 		}
@@ -8310,6 +8366,9 @@ Q.activate = function _Q_activate(elem, options, callback, activateLazyLoad) {
 		elem = tool.element;
 	}
 	
+	var activating = ((activating || 0) + 1) % 1000000;
+	elem.Q_activating = activating;
+	
 	Q.beforeActivate.handle.call(root, elem); // things to do before things are activated
 	
 	var shared = {
@@ -8318,6 +8377,7 @@ Q.activate = function _Q_activate(elem, options, callback, activateLazyLoad) {
 		waitingForTools: [],
 		pipe: Q.pipe(),
 		canceled: false,
+		activating: activating,
 		activateLazyLoad: activateLazyLoad
 	};
 	if (typeof options === 'function') {
@@ -8356,6 +8416,7 @@ Q.activate = function _Q_activate(elem, options, callback, activateLazyLoad) {
 		_resolve && _resolve({
 			element: elem, options: options, tools: shared.tools
 		});
+		delete elem.Q_activating;
 		Q.handle(Q.onActivate, tool, [elem, options, shared.tools]);
 	}
 };
@@ -9303,7 +9364,7 @@ function _activateTools(toolElement, options, shared) {
 			pendingCurrentEvent.handle.call(tool, options, result);
 			pendingCurrentEvent.removeAllHandlers();
 		}
-	}, shared);
+	}, shared, null, { placeholder: true });
 }
 
 _activateTools.alreadyActivated = {};
@@ -9650,11 +9711,12 @@ Q.Template.render = function _Q_Template_render(name, fields, callback, options)
 			);
 		});
 	}
+	var templateName = (options && options.name) ? options.name : name;
 	var tba = (options && options.tool) || Q.Tool.beingActivated;
 	var pba = Q.Page.beingActivated;
 	Q.loadHandlebars(function () {
 		// load the template and its associated info
-		var n = Q.normalize(name);
+		var n = Q.normalize(templateName);
 		var info = Q.Template.info[n];
 		var p = Q.pipe(['template', 'partials', 'helpers', 'text'], function (params) {
 			if (params.template[0]) {
@@ -9679,7 +9741,7 @@ Q.Template.render = function _Q_Template_render(name, fields, callback, options)
 			Q.Page.beingActivated = pbaOld;
 		});
 		var o = Q.copy(options, ['type', 'dir', 'name']);
-		Q.Template.load(name, p.fill('template'), o);
+		Q.Template.load(templateName, p.fill('template'), o);
 		Q.each(['partials', 'helpers', 'text'], function (j, aspect) {
 			if (!info) {
 				// template was not defined yet, so no partials/helpers/text to load
@@ -9759,18 +9821,33 @@ Q.Text = {
 	 * @param {String} name The name of the text source
 	 * @param {Object} content The content, a hierarchical object whose leaves are
 	 *  the actual text translated into the current language in Q.Text.language
-	 * @param {Boolean} [merges=false] If true, merges on top instead of replacing
+	 * @param {Boolean} [merge=false] If true, merges on top instead of replacing
+	 * @return {Object} The content that was set, with any loaded overrides applied
 	 */
 	set: function (name, content, merge) {
-		var obj = null;
+		var obj, override, n, o;
+		var lls = Q.Text.languageLocaleString;
+		if (Q.Text.override[name]) {
+			// override was specified for this content, merge over it
+			content = Q.extend({}, content, 10, Q.Text.override[name]);
+		}
 		if (merge) {
-			obj = Q.getObject([Q.Text.languageLocaleString, name], content);
+			obj = Q.getObject([lls, name], Q.Text.collection);
 		}
 		if (obj) {
 			Q.extend(obj, 10, content);
 		} else {
-			Q.setObject([Q.Text.languageLocaleString, name], content, Q.Text.collection);
+			Q.setObject([lls, name], content, Q.Text.collection);
 		}
+		override = (content && content['@override']) || {};
+		for (n in override) {
+			Q.Text.override[n] = Q.extend(Q.Text.override[n], 10, override[n]);
+			if (o = Q.getObject([lls, n], Q.Text.collection)) {
+				// content was already loaded, merge over it in text collection
+				Q.extend(o, 10, Q.Text.override[n]);
+			}
+		}
+		return content;
 	},
 
 	/**
@@ -9796,6 +9873,10 @@ Q.Text = {
 			Q.handle(callback, Q.Text, [null, content]);
 			return true;
 		}
+		var func = _Q_Text_getter;
+		if (options && options.ignoreCache) {
+			func = func.force;
+		}
 		var names = Q.isArrayLike(name) ? name : [name];
 		var pipe = Q.pipe(names, function (params, subjects) {
 			var result = {};
@@ -9812,15 +9893,19 @@ Q.Text = {
 			Q.handle(callback, Q.Text, [errors, result]);
 		});
 		Q.each(names, function (i, name) {
-			var func = _Q_Text_getter;
-			if (options && options.ignoreCache) {
-				func = func.force;
-			}
 			var url = Q.url(dir + '/' + name + '/' + lls + '.json');
 			return func(name, url, pipe.fill(name), options);
 		});
-	}
+	},
+	
+	override: {}
 };
+
+/**
+ * Array of text files to load before calling Q.onInit
+ * @property {Array} loadBeforeInit
+ */
+Q.Text.loadBeforeInit = [];
 
 // Set the initial language, but this can be overridden after Q.onInit
 Q.Text.setLanguage.apply(Q.Text, navigator.language.split('-'));
@@ -9829,7 +9914,7 @@ var _Q_Text_getter = Q.getter(function (name, url, callback, options) {
 	var o = Q.extend({extend: false}, options);
 	return Q.request(url, function (err, content) {
 		if (!err) {
-			Q.Text.set(name, content, options);
+			Q.Text.set(name, content, o.merge);
 		}
 		Q.handle(callback, Q.Text, [err, content]);
 	}, o);
@@ -10855,6 +10940,36 @@ _setLayoutInterval.options = {
 };
 
 /**
+ * Methods for working with the clipboard
+ * @class Q.Clipboard
+ */
+Q.Clipboard = {
+	/**
+	 * @method Q.Clipboard
+	 * @static
+	 * @param {String} the text to copy
+	 */
+	copy: function (text) {
+        var range, selection;
+		var textArea = document.createElement('textarea');
+		textArea.value = text;
+		document.body.appendChild(textArea);
+        if (Q.info.platform === 'ios') {
+            range = document.createRange();
+            range.selectNodeContents(textArea);
+            selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            textArea.setSelectionRange(0, 999999);
+        } else {
+            textArea.select();
+        }
+		document.execCommand('copy');
+		document.body.removeChild(textArea);
+	}
+};
+
+/**
  * Methods for working with pointer and touchscreen events
  * @class Q.Pointer
  */
@@ -11558,9 +11673,12 @@ Q.Pointer = {
 	 *   You will want to skip the mask if you want to allow scrolling, for instance.
 	 * @param {Q.Event} [event] Some mouse or touch event from the DOM
 	 * @param {Object} [extraInfo] Extra info to pass to onCancelClick
+	 * @param {Boolean} [msUntilStopCancelClick] Pass a number here to set
+	 *   Q.Pointer.canceledClick = false after this number of milliseconds.
+	 *   Usually you don't want to do this, because it might create race conditions.
 	 * @return {boolean}
 	 */
-	cancelClick: function (skipMask, event, extraInfo) {
+	cancelClick: function (skipMask, event, extraInfo, msUntilStopCancelClick) {
 		if (false === Q.Pointer.onCancelClick.handle(event, extraInfo)) {
 			return false;
 		}
@@ -11568,6 +11686,11 @@ Q.Pointer = {
 		Q.Pointer.canceledEvent = event;
 		if (!skipMask) {
 			Q.Masks.show('Q.click.mask');
+		}
+		if (msUntilStopCancelClick) {
+			setTimeout(function () {
+				Q.Pointer.canceledClick = false;
+			}, msUntilStopCancelClick);
 		}
 	},
 	/**
@@ -12142,6 +12265,19 @@ Q.Dialogs = {
 		if (!this.dialogs.length) {
 			Q.Masks.hide('Q.screen.mask');
 		}
+		Q.Pointer.cancelClick();
+		return $dialog && $dialog[0];
+	},
+	
+	/**
+	 * Returns the HTML element of the dialog on top of the stack, if any
+	 * @static
+     * @method element
+	 * @param {Integer} [index=0] Pass a positive integer for dialogs lower on the stack
+	 * @return {HTMLElement} The HTML element of the dialog that is on top.
+	 */
+	element: function (index) {
+		var $dialog = this.dialogs[this.dialogs.length-(index||0)-1];
 		return $dialog && $dialog[0];
 	}
 
@@ -12241,18 +12377,19 @@ Q.confirm = function(message, callback, options) {
 		'fullscreen': false,
 		'hidePrevious': true
 	}, options));
-	var $dialog = $(dialog);
-	$dialog.find('.Q_buttons button:first').on(Q.Pointer.end, function() {
+	var buttons = dialog.querySelectorAll('.Q_buttons button');
+	Q.addEventListener(buttons[0], Q.Pointer.end, function () {
 		buttonClicked = true;
 		Q.Dialogs.pop();
 		Q.handle(callback, root, [true]);
 	});
-	$dialog.find('.Q_buttons button:last').on(Q.Pointer.end, function() {
+	Q.addEventListener(buttons[1], Q.Pointer.end, function () {
 		buttonClicked = true;
 		Q.Dialogs.pop();
 		Q.handle(callback, root, [false]);
 	});
-	return $dialog;
+	var buttonYes = dialog.querySelectorAll('.Q_buttons button:first-child')[0];
+	return dialog;
 };
 
 Q.confirm.options = {
@@ -12285,7 +12422,7 @@ Q.extend(Q.confirm.options, Q.text.confirm);
 Q.prompt = function(message, callback, options) {
 	function _done() {
 		buttonClicked = true;
-		var value = $dialog.find('input').val();
+		var value = $('input', dialog).val();
 		Q.Dialogs.pop();
 		Q.handle(callback, this, [value]);
 	}
@@ -12331,9 +12468,9 @@ Q.prompt = function(message, callback, options) {
 		'fullscreen': false,
 		'hidePrevious': true
 	}, options));
-	var $dialog = $(dialog);
-	$dialog.find('button').on(Q.Pointer.click, _done);
-	return $dialog;
+	var button = dialog.querySelector('.Q_buttons button');
+	Q.addEventListener(button, Q.Pointer.click, _done);
+	return dialog;
 };
 Q.prompt.options = {
 	title: 'Prompt',
@@ -12547,7 +12684,22 @@ Q.Audio.pauseAll = function () {
  * @param {Function} callback Receives err, data
  */
 Q.Audio.loadVoices = Q.getter(function (callback) {
-	Q.request('{{Q}}/js/speech/voices.json', [], callback);
+	Q.request('{{Q}}/js/speech/voices.json', [], function (err, voices) {
+		var msg = Q.firstErrorMessage(err, voices);
+		if (msg) {
+			throw new Q.Error(msg);
+		}
+		if (typeof voices !== "object") {
+			callback.call(this, "Q.Audio.speak: could not get the known voices list", null);
+		}
+		for (var languageLocale in voices) {
+			var lang = languageLocale.split('-')[0];
+			if (!voices[lang]) {
+				voices[lang] = voices[languageLocale];
+			}
+		}
+		callback.call(this, err, voices);
+	});
 }, {
 	cache: Q.Cache.document('Q.Audio.speak.loadVoices', 1)
 });
@@ -12563,7 +12715,7 @@ Q.Audio.loadVoices = Q.getter(function (callback) {
  * @param {Number} [options.rate=1] the speaking rate of the SpeechSynthesizer object, from 0.1 to 1.
  * @param {Number} [options.pitch=1] the speaking pitch of the SpeechSynthesizer object, from 0.1 to 1.9.
  * @param {Number} [options.volume=1] the volume height of speech (0.1 - 1).
- * @param {Number} [options.locale] a 4 character code that specifies the language that should be used to synthesize the text.
+ * @param {Number} [options.locale="en-US"] a 5 character code that specifies the language that should be used to synthesize the text.
  * @param {Q.Event|function} [options.onStart] This gets called when the speaking has begun
  * @param {Q.Event|function} [options.onEnd] This gets called when the speaking has finished
  * @param {Q.Event|function} [options.onSpeak] This gets called when the system called speak(), whether or not it worked
@@ -12593,7 +12745,7 @@ Q.Audio.speak = function (text, options) {
 		function _switchGender(gender) {
 			return (gender == "female") ? "male" : "female"
 		}
-		function _search(){
+		function _search() {
 			var result = null;
 			var av = Q.getObject([gender, o.locale], knownVoices)
 				|| Q.getObject([gender, language], knownVoices)
@@ -12654,13 +12806,6 @@ Q.Audio.speak = function (text, options) {
 				SS.cancel();
 			}
 			Q.Audio.loadVoices(function (err, voices) {
-				var msg = Q.firstErrorMessage(err, voices);
-				if (msg) {
-					throw new Q.Error(msg);
-				}
-				if (typeof voices !== "object") {
-					return console.warn("Q.Audio.speak: could not get the known voices list");
-				}
 				var u = new SpeechSynthesisUtterance(text.replace(/<[^>]+>/g, ''));
 				var voicesList = SS.getVoices();
 				var chosenVoice = _chooseVoice(u.text, voicesList, voices);
@@ -13018,7 +13163,10 @@ Q.onJQuery.add(function ($) {
 	
 	Q.Tool.define({
 		"Q/inplace": "{{Q}}/js/tools/inplace.js",
-		"Q/tabs": "{{Q}}/js/tools/tabs.js",
+		"Q/tabs": {
+			js: "{{Q}}/js/tools/tabs.js",
+			css: "{{Q}}/css/tabs.css"
+		},
 		"Q/form": "{{Q}}/js/tools/form.js",
 		"Q/panel": "{{Q}}/js/tools/panel.js",
 		"Q/ticker": "{{Q}}/js/tools/ticker.js",
@@ -13325,6 +13473,7 @@ Q.onReady.set(function _Q_masks() {
 			button.innerHTML = 'Cancel';
 			if (mask[0]) { mask = mask[0]; }
 			mask.appendChild(button);
+			button.style.marginLeft - button.getBoundingClientRect()/2;
 		}
 		$(button).off(Q.Pointer.end).on(Q.Pointer.end, callback);
 		Q.Masks.show('Q.request.cancel.mask');

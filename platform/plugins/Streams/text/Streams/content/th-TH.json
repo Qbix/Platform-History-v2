@@ -73,7 +73,8 @@
             "QRscanned": "พวกเขาสแกนมัน!",
             "chooseAgainFromContacts": "เลือกอีกครั้งจากที่อยู่ติดต่อ",
             "inviteSelectedContacts": "เชิญผู้ติดต่อที่เลือกไว้",
-            "scannedQR": "{{ClickOrTap}} หากสแกนรหัสแล้ว"
+            "scannedQR": "{{ClickOrTap}} หากสแกนรหัสแล้ว",
+            "copyLink": "{{ClickOrTap}} เพื่อคัดลอกลิงก์เชิญ"
         },
         "email": {
             "subject": "เฮ้ลองดูนี่สิ",
@@ -89,7 +90,8 @@
         },
         "notice": {
             "text": "คุณได้รับเชิญ {{ClickOrTap}} ที่นี่เพื่อยอมรับและเข้าร่วม"
-        }
+        },
+        "youCanNowPaste": "ตอนนี้คุณสามารถวางลิงค์นี้เพื่อเชิญคนอื่น"
     },
     "followup": {
         "mobile": {
@@ -184,7 +186,10 @@
             "fbStartLive": "ใช้ชีวิต",
             "fbStopLive": "จบการแข่งขัน",
             "fbEmbedCode": "ฝัง",
-            "copy": "สำเนา"
+            "copy": "สำเนา",
+            "turnOffVideo": "ปิดการแชร์กล้อง / หน้าจอ",
+            "turnOffScreenSharing": "ปิดการแชร์หน้าจอ",
+            "cameraIsTurnedOff": "ปิดกล้องแล้ว"
         },
         "participantsPopup": {
             "disconnect": "ปลด",
