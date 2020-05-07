@@ -577,89 +577,18 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		$toolElement.attr('data-webrtc', 'loading');
 
-		Q.Streams.related.force(
-		state.publisherId,  state.streamName,  'Streams/webrtc',  true, 
-		{limit: 1, stream: true}, 
-		function (err) {
-			if (err) {
-				return;
-			}
-
-			// get first property from relatedStreams (actually it should be only one)
-			var stream = Q.first(this.relatedStreams);
-			function _createRoom(publisherId, streamName) {
-				// connect to this particular conversation
-				Q.Streams.WebRTC().start({
-					element: document.body,
-					roomId: streamName.split('/').pop(),
-					roomPublisherId: publisherId,
-					mode: 'node',
-					onWebrtcControlsCreated: function () {
-						//TODO: for some reason this.Q.beforeRemove doesn't call when user leave conference
-						// may be tool doesn't close at all?
-
-						$toolElement.attr('data-webrtc', true);
-						this.Q.beforeRemove.set(function () {
-							_closeRoom();
-						}, this);
-
-						// this is duplicate to above approach
-						Q.Streams.Stream.onMessage(publisherId, streamName, 'Streams/leave').set(function(stream, message) {
-							if (message.byUserId !== Q.Users.loggedInUserId()) {
-								return;
-							}
-
-							_closeRoom();
-						}, tool);
-					},
-					onWebRTCRoomCreated: function () {
-						state.webrtc = this;
-					},
-					onWebRTCRoomEnded: function () {
-						_closeRoom();
-					}
-				});
-			};
-			var _closeRoom = function () {
+		Q.Streams.WebRTC.start({
+			publisherId: state.publisherId,
+			streamName: state.streamName,
+			onWebrtcControlsCreated: function () {
+				$toolElement.attr('data-webrtc', true);
+			},
+			onStart: function () {
+				state.webrtc = this;
+			},
+			onEnd: function () {
 				state.webrtc = null;
 				$toolElement.attr('data-webrtc', false);
-			};
-			if (stream && !stream.getAttribute('endTime')) {
-				if (!stream.testWriteLevel('join')) {
-					return Q.alert(tool.text.notAllowedToJoinCall);
-				}
-
-				_createRoom(stream.fields.publisherId, stream.fields.name);
-			} else {
-				Q.req("Streams/webrtc", ["room"], function (err, response) {
-					var msg = Q.firstErrorMessage(err, response && response.errors);
-					if (msg) {
-						return Q.alert(msg);
-					}
-
-					Q.Streams.get(Q.Users.loggedInUserId(), response.slots.room.roomId, function (err) {
-						var fem = Q.firstErrorMessage(err);
-						if (fem) {
-							return console.warn("Streams.chat.webrtc.create: " + fem);
-						}
-
-						var stream = this;
-						stream.relateTo('Streams/webrtc', state.publisherId, state.streamName, function (err) {
-							var fem = Q.firstErrorMessage(err);
-							if (fem) {
-								return console.warn("Streams.chat.webrtc.relate: " + fem);
-							}
-
-							_createRoom(stream.fields.publisherId, stream.fields.name);
-						});
-					});
-				}, {
-					method: 'post',
-					fields: {
-						publisherId: Q.Users.loggedInUserId(),
-						adapter: 'node'
-					}
-				});
 			}
 		});
 	},
