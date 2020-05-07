@@ -25,7 +25,6 @@
         "closeChatConfirmYes": "Yes",
         "closeChatConfirmNo": "No",
         "earlierComments": "earlier comments",
-        "notAllowedToJoinCall": "You don't have permission to join this conversation.",
         "startedConversation": "started a conversation",
         "RealTimeCall": "Real Time Call",
         "SearchByName": "Search by name"
@@ -140,6 +139,7 @@
         "Streams": "Streams"
     },
     "webrtc": {
+		"notAllowedToJoinCall": "You don't have permission to join this stream.",
         "allow": {
             "dialogTitle": "Connecting",
             "microphoneBtn": "Enable Microphone",
