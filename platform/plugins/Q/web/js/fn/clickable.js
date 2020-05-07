@@ -120,6 +120,23 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 			'line-height': $this.css('line-height'),
 			'vertical-align': $this.css('vertical-align'),
 			'text-align': $this.css('text-align')
+		}).attr({
+			'data-origin-classes': $this.attr('class'),
+			'data-origin-attributes': function () {
+				var i,
+					attributeNodes = $this[0].attributes,
+					length = attributeNodes.length,
+					attrs = '';
+
+				for (i = 0; i < length; i++) {
+					if (attributeNodes[i].name === 'class') {
+						continue;
+					}
+
+					attrs += attributeNodes[i].name + ':' + attributeNodes[i].value + ';';
+				}
+				return attrs;
+			}()
 		});
 		if (state.className) {
 			$container.addClass(state.className);

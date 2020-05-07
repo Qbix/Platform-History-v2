@@ -78,8 +78,8 @@ Q.Tool.define('Q/lazyload', function (options) {
 		Q.each(['insertBefore', 'appendChild'], function (i, fn) {
 			var orig = Elp[fn];
 			Elp[fn] = function (element) {
-				if (!element) {
-					return;
+				if (!(element instanceof HTMLElement)) {
+					return orig.apply(this, arguments);
 				}
 				var root = tool.observer.root || document.documentElement;
 				var inside = (root === this) || root.contains(this);

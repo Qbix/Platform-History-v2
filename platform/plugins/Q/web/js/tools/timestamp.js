@@ -4,32 +4,6 @@
  * @module Q-tools
  */
 
-Q.text.Q.timestamp = {
-	lastNight: 'last night',
-	lastEvening: 'last eve',
-	yesterday: 'yesterday',
-	thisMorning: 'this morn',
-	today: 'today',
-	tonight: 'tonight',
-	tomorrowMorning: 'tom morn',
-	tomorrow: 'tomorrow',
-	hoursAgo: '{{h}} hours ago',
-	hourAgo: '{{h}} hour ago',
-	minuteAgo: '{{m}} minute ago',
-	minutesAgo: '{{m}} minutes ago',
-	secondAgo: '{{s}} second ago',
-	secondsAgo: '{{s}} seconds ago',
-	fewSecondsAgo: 'seconds ago',
-	rightNow: 'right now',
-	inSecond: 'in {{s}} second',
-	inSeconds: 'in {{s}} seconds',
-	inMinute: 'in {{m}} minute',
-	inMinutes: 'in {{m}} minutes',
-	inHour: 'in {{h}} hour',
-	inHours: 'in {{h}} hours',
-	inUnderMinute: 'in under 1 minute'
-};
-
 /**
  * This tool makes a timestamp which is periodically updated.
  * Initially shows time offsets in '<some_time> ago' manner.
@@ -60,10 +34,23 @@ Q.text.Q.timestamp = {
  */
 Q.Tool.define('Q/timestamp', function () {
 	var tool = this;
-	var state = this.state;
-	Q.ensure(Q.PHPJS, "{{Q}}/js/phpjs.js", function (){
+
+	var pipe = new Q.pipe(['phpjs', 'text'], function () {
 		tool.refresh();
 	});
+
+	Q.Text.get("Q/content", function (err, text) {
+		var msg = Q.firstErrorMessage(err);
+		if (msg) {
+			return console.warn("Q/timestamp: " + msg);
+		}
+
+		tool.text = text.timestamp;
+		pipe.fill('text')();
+	});
+
+	Q.ensure(Q.PHPJS, "{{Q}}/js/phpjs.js", pipe.fill('phpjs'));
+
 	tool.Q.onStateChanged('time')
 	.or(tool.Q.onStateChanged('format'))
 	.set(function () {
@@ -86,7 +73,7 @@ Q.Tool.define('Q/timestamp', function () {
 		var date = isNaN(state.time) ? new Date(state.time) : Date.fromTimestamp(state.time);
 		var time = date.getTime() / 1000;
 		var now = Date.now() / 1000;
-		var date = new Date();
+		date = new Date();
 		var today = new Date(
 			date.getFullYear(), date.getMonth(), date.getDate()
 		).getTime() / 1000;
@@ -95,7 +82,7 @@ Q.Tool.define('Q/timestamp', function () {
 		var dayLength = 3600 * 24;
 		var day = strftime('%a', time);
 		var longday = strftime('%A', time);
-		var t = Q.text.Q.timestamp;
+		var t = tool.text;
 		if (state.relative) {
 			if (diffToday < 0 && diffToday > -dayLength / 8) {
 				day = longday = t.lastNight;
@@ -250,7 +237,7 @@ Q.Tool.define('Q/timestamp', function () {
 			}
 		}
 
-		if (state.beforeRefresh.handle.call(tool, result) === false) {
+		if (state.beforeRefresh.handle.call(tool, result, diff) === false) {
 			return;
 		}
 		
