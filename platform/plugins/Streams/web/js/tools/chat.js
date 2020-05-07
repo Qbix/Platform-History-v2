@@ -564,14 +564,14 @@ Q.Tool.define('Streams/chat', function(options) {
 	 * If WebRTC stream doesn't exist, try to create one.
 	 */
 	startWebRTC: function () {
-		console.log('startWebRTC')
+		console.log('startWebRTC');
 
 		var tool = this;
 		var state = this.state;
 		var $toolElement = $(this.element);
 
 		if (state.webrtc) {
-			console.log('startWebRTC state.webrtc')
+			console.log('startWebRTC state.webrtc');
 			return;
 		}
 
@@ -580,6 +580,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		Q.Streams.WebRTC.start({
 			publisherId: state.publisherId,
 			streamName: state.streamName,
+			tool: tool,
 			onWebrtcControlsCreated: function () {
 				$toolElement.attr('data-webrtc', true);
 			},
