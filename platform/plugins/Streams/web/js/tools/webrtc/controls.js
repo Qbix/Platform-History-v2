@@ -29,7 +29,8 @@
 		facebooklogo: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#1877F2" d="M50,0C22.3857422,0,0,22.3857422,0,50c0,25.6513672,19.3173828,46.7910156,44.1982422,49.6660156   c0-11.5039063,0-23.0068359,0-34.5107422c-4.2099609-0.03125-8.5439453,0.0625-12.6748047-0.046875   c0.03125-4.7861328-0.0625-9.6972656,0.0458984-14.4052734c4.2099609,0,8.4189453,0,12.6289063,0   c0.1933594-5.2246094-0.3769531-10.6503906,0.2802734-15.0605469c1.2792969-8.5859375,6.7324219-14.1972656,15.5751953-15.1542969   c4.7587891-0.5146484,9.7216797,0.1660156,14.171875,0.8427734c-0.03125,4.0683594,0.0615234,8.2626953-0.046875,12.2539063   c-2.7724609,0.0996094-5.40625-0.1748047-7.7646484,0.09375c-2.2597656,0.2558594-3.9492188,1.1113281-5.1445313,2.7119141   c-1.2519531,1.6767578-1.4501953,3.5166016-1.4501953,6.4082031c0,2.5195313,0,5.3271484,0,7.9042969   c4.5839844,0.03125,9.2919922-0.0625,13.7978516,0.046875c-0.734375,4.8164063-1.4101563,9.6894531-2.2451172,14.4052734   c-3.8505859,0-7.7011719,0-11.5527344,0c0,11.2939453,0,22.5869141,0,33.8808594C82.7314453,94.4726563,100,74.2529297,100,50   C100,22.3857422,77.6142578,0,50,0z"/>  <path fill="#FFFFFF" d="M71.3720703,65.1552734c0.8349609-4.7158203,1.5107422-9.5888672,2.2451172-14.4052734   c-4.5058594-0.109375-9.2138672-0.015625-13.7978516-0.046875c0-2.5771484,0-5.3847656,0-7.9042969   c0-2.8916016,0.1982422-4.7314453,1.4501953-6.4082031c1.1953125-1.6005859,2.8847656-2.4560547,5.1445313-2.7119141   c2.3583984-0.2685547,4.9921875,0.0058594,7.7646484-0.09375c0.1083984-3.9912109,0.015625-8.1855469,0.046875-12.2539063   c-4.4501953-0.6767578-9.4130859-1.3574219-14.171875-0.8427734c-8.8427734,0.9570313-14.2958984,6.5683594-15.5751953,15.1542969   c-0.6572266,4.4101563-0.0869141,9.8359375-0.2802734,15.0605469c-4.2099609,0-8.4189453,0-12.6289063,0   c-0.1083984,4.7080078-0.0146484,9.6191406-0.0458984,14.4052734c4.1308594,0.109375,8.4648438,0.015625,12.6748047,0.046875   c0,11.5039063,0,23.0068359,0,34.5107422C46.1015625,99.8867188,48.0371094,100,50,100   c3.3613281,0,6.6445313-0.3320313,9.8193359-0.9638672c0-11.2939453,0-22.5869141,0-33.8808594   C63.6708984,65.1552734,67.5214844,65.1552734,71.3720703,65.1552734z"/>  </svg> ',
 		facebookLive: '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" viewBox="-0.622 -0.182 162 63" enable-background="new -0.622 -0.182 162 63"    xml:space="preserve">  <defs>  </defs>  <path fill="#C12337" d="M148.646,61.641l7.711,0.001c2.387,0,4.322-1.279,4.324-2.857l0.004-55.919c0-1.578-1.936-2.857-4.322-2.858   h-7.711L77.966,0.001L70.253,0c-2.381,0-4.311,1.271-4.32,2.843L65.929,53.68l-0.004,5.102c0.006,1.574,1.938,2.853,4.322,2.853"/>  <path fill="#FFFFFF" d="M84.446,19.024h3.082v21.038h10.08v2.555H84.446V19.024z"/>  <path fill="#FFFFFF" d="M104.048,19.024v23.593h-3.082V19.024H104.048z"/>  <path fill="#FFFFFF" d="M114.548,42.617l-7.736-23.593h3.326l3.674,11.621c0.98,3.186,1.855,6.056,2.521,8.821h0.07   c0.664-2.73,1.609-5.705,2.695-8.786l3.99-11.656h3.254l-8.436,23.593H114.548z"/>  <path fill="#FFFFFF" d="M141.077,31.556h-9.135v8.507h10.221v2.555H128.86V19.024h12.777v2.556h-9.695v7.455h9.135V31.556z"/>  <path fill="#4272B9" d="M30.891,0.085C13.83,0.085,0,13.916,0,30.976c0,15.849,11.935,28.908,27.306,30.683   c0-7.105,0-14.213,0-21.321c-2.601-0.019-5.279,0.04-7.831-0.027c0.02-2.956-0.039-5.991,0.028-8.9c2.601,0,5.201,0,7.802,0   c0.12-3.228-0.233-6.58,0.173-9.305c0.79-5.305,4.159-8.771,9.622-9.363c2.94-0.318,6.007,0.103,8.756,0.521   c-0.019,2.514,0.038,5.105-0.029,7.571c-1.713,0.061-3.34-0.108-4.796,0.058c-1.396,0.158-2.441,0.687-3.18,1.676   c-0.772,1.036-0.896,2.172-0.896,3.959c0,1.557,0,3.291,0,4.883c2.833,0.019,5.742-0.039,8.525,0.029   c-0.454,2.976-0.87,5.986-1.387,8.898c-2.379,0-4.759,0-7.139,0c0,6.978,0,13.956,0,20.934   c14.156-2.818,24.825-15.312,24.825-30.295C61.781,13.916,47.951,0.085,30.891,0.085z"/>  <path fill="#FFFFFF" d="M44.095,40.338c0.517-2.912,0.933-5.923,1.387-8.898c-2.783-0.068-5.692-0.01-8.525-0.029   c0-1.592,0-3.327,0-4.883c0-1.787,0.124-2.923,0.896-3.959c0.738-0.989,1.783-1.518,3.18-1.676c1.456-0.166,3.083,0.003,4.796-0.058   c0.067-2.466,0.011-5.058,0.029-7.571c-2.749-0.417-5.815-0.838-8.756-0.521c-5.463,0.591-8.832,4.058-9.622,9.363   c-0.406,2.725-0.054,6.077-0.173,9.305c-2.601,0-5.201,0-7.802,0c-0.067,2.909-0.009,5.944-0.028,8.9   c2.552,0.067,5.229,0.009,7.831,0.027c0,7.108,0,14.216,0,21.321c1.176,0.137,2.372,0.208,3.584,0.208   c2.076,0,4.105-0.206,6.065-0.596c0-6.978,0-13.956,0-20.934C39.336,40.338,41.716,40.338,44.095,40.338z"/>  </svg>',
 		dragIconOff: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#8C8C8C" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"/>  <path fill="#FFFFFF" d="M66.508,39.37c-1.358,0-2.59,0.571-3.465,1.486l0.012-1.438c0.02-2.646-2.116-4.814-4.798-4.834   c-1.359,0-2.592,0.573-3.467,1.49l0.002-0.192c0.019-2.644-2.118-4.811-4.799-4.832c-1.359,0-2.59,0.572-3.466,1.487l0.089-11.674   c0.011-1.284-0.481-2.494-1.383-3.407c-0.899-0.911-2.099-1.418-3.417-1.428c-2.623,0-4.774,2.135-4.794,4.76l-0.261,34.258   l-4.639-2.011c-1.242-0.547-3.103-1.274-4.923-1.274c-1.11,0-2.106,0.265-2.972,0.793c-1.196,0.742-2.032,1.924-2.356,3.327   c-0.346,1.502-0.057,3.137,0.793,4.487l0.202,0.32l0.319,0.202c2.809,1.794,10.573,7.182,12.745,10.537   c3.75,5.805,9.523,8.656,17.651,8.718l0.227,0.001c0.001,0,0.002,0,0.003,0c16.4,0,17.334-13.387,17.354-16.07l0.151-19.873   C71.337,41.559,69.196,39.391,66.508,39.37z M38.697,58.021c0.136-0.089,0.219-0.239,0.22-0.402l0.281-36.814   c0.011-1.434,1.186-2.601,2.64-2.601c0.699,0.005,1.355,0.283,1.847,0.781c0.492,0.499,0.761,1.16,0.755,1.861l-0.201,26.45   c-0.005,0.835,0.671,1.52,1.518,1.525c0.836,0,1.521-0.674,1.528-1.503l0.086-11.492c0.011-1.434,1.188-2.6,2.641-2.6   c1.446,0.011,2.614,1.195,2.604,2.639l-0.087,11.491c-0.004,0.403,0.151,0.784,0.436,1.072c0.287,0.292,0.672,0.453,1.095,0.455   c0.833,0,1.514-0.675,1.518-1.503l0.063-8.017c0.01-1.436,1.185-2.603,2.638-2.603c0.702,0.005,1.359,0.282,1.85,0.78   c0.49,0.499,0.758,1.16,0.752,1.861l-0.077,10.096c-0.004,0.836,0.678,1.521,1.528,1.526c0.831,0,1.511-0.675,1.516-1.503   l0.042-5.372c0.011-1.435,1.186-2.602,2.642-2.602c1.451,0.012,2.624,1.197,2.613,2.642L68.99,64.059   c-0.018,2.323-0.833,13.913-15.182,13.912L53.6,77.97c-7.44-0.057-12.474-2.511-15.841-7.723   c-2.763-4.268-12.189-10.409-13.308-11.13c-0.501-0.844-0.668-1.84-0.459-2.748c0.192-0.834,0.683-1.532,1.38-1.965   c0.515-0.314,1.113-0.468,1.827-0.468c1.41,0,2.984,0.622,4.048,1.091l6.991,3.032C38.388,58.123,38.56,58.11,38.697,58.021z"/>  </svg> ',
-		dragIconOn: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#4AAA4E" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"/>  <path fill="#FFFFFF" d="M66.508,39.37c-1.358,0-2.59,0.571-3.465,1.486l0.012-1.438c0.02-2.646-2.116-4.814-4.798-4.834   c-1.359,0-2.592,0.573-3.467,1.49l0.002-0.192c0.019-2.644-2.118-4.811-4.799-4.832c-1.359,0-2.59,0.572-3.466,1.487l0.089-11.674   c0.011-1.284-0.481-2.494-1.383-3.407c-0.899-0.911-2.099-1.418-3.417-1.428c-2.623,0-4.774,2.135-4.794,4.76l-0.261,34.258   l-4.639-2.011c-1.242-0.547-3.103-1.274-4.923-1.274c-1.11,0-2.106,0.265-2.972,0.793c-1.196,0.742-2.032,1.924-2.356,3.327   c-0.346,1.502-0.057,3.137,0.793,4.487l0.202,0.32l0.319,0.202c2.809,1.794,10.573,7.182,12.745,10.537   c3.75,5.805,9.523,8.656,17.651,8.718l0.227,0.001c0.001,0,0.002,0,0.003,0c16.4,0,17.334-13.387,17.354-16.07l0.151-19.873   C71.337,41.559,69.196,39.391,66.508,39.37z M38.697,58.021c0.136-0.089,0.219-0.239,0.22-0.402l0.281-36.814   c0.011-1.434,1.186-2.601,2.64-2.601c0.699,0.005,1.355,0.283,1.847,0.781c0.492,0.499,0.761,1.16,0.755,1.861l-0.201,26.45   c-0.005,0.835,0.671,1.52,1.518,1.525c0.836,0,1.521-0.674,1.528-1.503l0.086-11.492c0.011-1.434,1.188-2.6,2.641-2.6   c1.446,0.011,2.614,1.195,2.604,2.639l-0.087,11.491c-0.004,0.403,0.151,0.784,0.436,1.072c0.287,0.292,0.672,0.453,1.095,0.455   c0.833,0,1.514-0.675,1.518-1.503l0.063-8.017c0.01-1.436,1.185-2.603,2.638-2.603c0.702,0.005,1.359,0.282,1.85,0.78   c0.49,0.499,0.758,1.16,0.752,1.861l-0.077,10.096c-0.004,0.836,0.678,1.521,1.528,1.526c0.831,0,1.511-0.675,1.516-1.503   l0.042-5.372c0.011-1.435,1.186-2.602,2.642-2.602c1.451,0.012,2.624,1.197,2.613,2.642L68.99,64.059   c-0.018,2.323-0.833,13.913-15.182,13.912L53.6,77.97c-7.44-0.057-12.474-2.511-15.841-7.723   c-2.763-4.268-12.189-10.409-13.308-11.13c-0.501-0.844-0.668-1.84-0.459-2.748c0.192-0.834,0.683-1.532,1.38-1.965   c0.515-0.314,1.113-0.468,1.827-0.468c1.41,0,2.984,0.622,4.048,1.091l6.991,3.032C38.388,58.123,38.56,58.11,38.697,58.021z"/>  </svg> '
+		dragIconOn: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#4AAA4E" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"/>  <path fill="#FFFFFF" d="M66.508,39.37c-1.358,0-2.59,0.571-3.465,1.486l0.012-1.438c0.02-2.646-2.116-4.814-4.798-4.834   c-1.359,0-2.592,0.573-3.467,1.49l0.002-0.192c0.019-2.644-2.118-4.811-4.799-4.832c-1.359,0-2.59,0.572-3.466,1.487l0.089-11.674   c0.011-1.284-0.481-2.494-1.383-3.407c-0.899-0.911-2.099-1.418-3.417-1.428c-2.623,0-4.774,2.135-4.794,4.76l-0.261,34.258   l-4.639-2.011c-1.242-0.547-3.103-1.274-4.923-1.274c-1.11,0-2.106,0.265-2.972,0.793c-1.196,0.742-2.032,1.924-2.356,3.327   c-0.346,1.502-0.057,3.137,0.793,4.487l0.202,0.32l0.319,0.202c2.809,1.794,10.573,7.182,12.745,10.537   c3.75,5.805,9.523,8.656,17.651,8.718l0.227,0.001c0.001,0,0.002,0,0.003,0c16.4,0,17.334-13.387,17.354-16.07l0.151-19.873   C71.337,41.559,69.196,39.391,66.508,39.37z M38.697,58.021c0.136-0.089,0.219-0.239,0.22-0.402l0.281-36.814   c0.011-1.434,1.186-2.601,2.64-2.601c0.699,0.005,1.355,0.283,1.847,0.781c0.492,0.499,0.761,1.16,0.755,1.861l-0.201,26.45   c-0.005,0.835,0.671,1.52,1.518,1.525c0.836,0,1.521-0.674,1.528-1.503l0.086-11.492c0.011-1.434,1.188-2.6,2.641-2.6   c1.446,0.011,2.614,1.195,2.604,2.639l-0.087,11.491c-0.004,0.403,0.151,0.784,0.436,1.072c0.287,0.292,0.672,0.453,1.095,0.455   c0.833,0,1.514-0.675,1.518-1.503l0.063-8.017c0.01-1.436,1.185-2.603,2.638-2.603c0.702,0.005,1.359,0.282,1.85,0.78   c0.49,0.499,0.758,1.16,0.752,1.861l-0.077,10.096c-0.004,0.836,0.678,1.521,1.528,1.526c0.831,0,1.511-0.675,1.516-1.503   l0.042-5.372c0.011-1.435,1.186-2.602,2.642-2.602c1.451,0.012,2.624,1.197,2.613,2.642L68.99,64.059   c-0.018,2.323-0.833,13.913-15.182,13.912L53.6,77.97c-7.44-0.057-12.474-2.511-15.841-7.723   c-2.763-4.268-12.189-10.409-13.308-11.13c-0.501-0.844-0.668-1.84-0.459-2.748c0.192-0.834,0.683-1.532,1.38-1.965   c0.515-0.314,1.113-0.468,1.827-0.468c1.41,0,2.984,0.622,4.048,1.091l6.991,3.032C38.388,58.123,38.56,58.11,38.697,58.021z"/>  </svg> ',
+		recordingIcon: '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="101px" height="101px" viewBox="-0.5 -0.501 101 101" enable-background="new -0.5 -0.501 101 101"    xml:space="preserve">  <defs>  </defs>  <g>   <path fill="#8C8C8C" d="M50,4c25.365,0,46,20.636,46,46c0,25.363-20.636,45.998-46,45.998C24.635,95.998,4,75.363,4,50    C4,24.636,24.635,4,50,4 M50,0C22.431,0,0,22.43,0,50s22.429,49.998,50,49.998c27.57,0,50-22.428,50-49.998    C100,22.431,77.569,0,50,0L50,0z"/>  </g>  <circle fill="#8C8C8C" cx="50" cy="50" r="25.833"/>  </svg>'
 	}
 
 	var ua=navigator.userAgent;
@@ -249,6 +250,24 @@
 					}
 
 					tool.participantsPopup().hideFbLiveIndicator(participant);
+				});
+
+				tool.WebRTCLib.event.on('videoRecordingStarted', function (participant) {
+					if(participant.isLocal) {
+						if (!tool.cameraBtn.classList.contains('isRecording')) tool.cameraBtn.classList.add('isRecording');
+						tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.youBeganVideoRecording", tool.textes));
+
+					} else {
+					}
+				});
+				tool.WebRTCLib.event.on('videoRecordingStopped', function (participant) {
+
+					if(participant.isLocal) {
+						tool.cameraBtn.classList.remove('isRecording');
+						tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.youStoppedVideoRecording", tool.textes));
+					} else {
+					}
+
 				});
 
 				var roomStream = tool.WebRTCClass.roomStream();
@@ -1341,216 +1360,457 @@
 						}
                     }());
 
-                    function createStreamingSection() {
-                        var streamingAndUploading = document.createElement('DIV');
-                        streamingAndUploading.className = 'Streams_webrtc_streaming'
+					var streamingAndRecordingSection = (function () {
+						var _streamingAndRecordingEl;
+
+                        function createStreamingLink() {
+                            var streamingAndUploading = document.createElement('DIV');
+                            streamingAndUploading.className = 'Streams_webrtc_streaming Streams_webrtc_streaming_recording_item'
+
+                            var facebookLiveItem = document.createElement('DIV');
+                            facebookLiveItem.className = 'Streams_webrtc_streaming_item';
+                            var fbLivetextLabel = document.createElement('SPAN');
+                            fbLivetextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.startFBLive", tool.textes);
+                            var fbLiveIcon = document.createElement('SPAN');
+                            fbLiveIcon.className = 'Streams_webrtc_streaming_recording_icon';
+                            fbLiveIcon.innerHTML = icons.facebooklogo;
+                            facebookLiveItem.appendChild(fbLivetextLabel);
+                            facebookLiveItem.appendChild(fbLiveIcon);
+
+                            var fbStreamingSettings = document.createElement('DIV');
+                            fbStreamingSettings.className = 'Streams_webrtc_streaming_settings'
+
+                            var fbStreamingStartSettings = document.createElement('DIV');
+                            fbStreamingStartSettings.className = 'Streams_webrtc_streaming_start_settings';
+
+                            var fbPreviousStreamings = document.createElement('DIV');
+                            fbPreviousStreamings.className = 'Streams_webrtc_streaming_previous';
+
+                            var facebookLiveTtle = document.createElement('LABEL');
+                            facebookLiveTtle.className = 'Streams_webrtc_streaming_title';
+
+                            var facebookLiveTtleInput = document.createElement('INPUT');
+                            facebookLiveTtleInput.type = 'text';
+                            facebookLiveTtleInput.placeholder = Q.getObject("webrtc.settingsPopup.fbLiveTitle", tool.textes);
+
+                            var facebookLiveDesc = document.createElement('LABEL');
+                            facebookLiveDesc.className = 'Streams_webrtc_streaming_desc';
+
+                            var facebookLiveDescInput = document.createElement('INPUT');
+                            facebookLiveDescInput.type = 'text';
+                            facebookLiveDescInput.placeholder = Q.getObject("webrtc.settingsPopup.fbLiveDescription", tool.textes);
+
+                            var startStreamingBtnCon = document.createElement('DIV');
+                            startStreamingBtnCon.className = 'Streams_webrtc_streaming_start';
+
+                            var privacySelect = document.createElement('SELECT');
+                            var privacyBlock = document.createElement('OPTGROUP');
+                            privacyBlock.label = Q.getObject("webrtc.settingsPopup.publishOnTimeline", tool.textes);
+                            var option1 = document.createElement('OPTION');
+                            option1.name = 'privacy';
+                            option1.value = 'EVERYONE';
+                            option1.innerHTML = Q.getObject("webrtc.settingsPopup.fbPublicAccess", tool.textes);
+                            option1.selected = true;
+                            var option2 = document.createElement('OPTION');
+                            option2.innerHTML = Q.getObject("webrtc.settingsPopup.fbFriendsAccess", tool.textes);
+                            option2.name = 'privacy';
+                            option2.value = 'ALL_FRIENDS';
+                            var option3 = document.createElement('OPTION');
+                            option3.innerHTML = Q.getObject("webrtc.settingsPopup.fbOnlyMeLiveAccess", tool.textes);
+                            option3.name = 'privacy';
+                            option3.value = 'SELF';
 
 
-                        var facebookLiveItem = document.createElement('DIV');
-                        facebookLiveItem.className = 'Streams_webrtc_streaming_item';
-                        var fbLivetextLabel = document.createElement('SPAN');
-                        fbLivetextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.startFBLive", tool.textes);
-                        var fbLiveIcon = document.createElement('SPAN');
-                        fbLiveIcon.className = 'Streams_webrtc_streaming_icon';
-                        fbLiveIcon.innerHTML = icons.facebooklogo;
-                        facebookLiveItem.appendChild(fbLivetextLabel);
-                        facebookLiveItem.appendChild(fbLiveIcon);
-
-                        var fbStreamingSettings = document.createElement('DIV');
-                        fbStreamingSettings.className = 'Streams_webrtc_streaming_settings'
-
-                        var fbStreamingStartSettings = document.createElement('DIV');
-                        fbStreamingStartSettings.className = 'Streams_webrtc_streaming_start_settings';
-
-                        var fbPreviousStreamings = document.createElement('DIV');
-                        fbPreviousStreamings.className = 'Streams_webrtc_streaming_previous';
-
-                        var facebookLiveTtle = document.createElement('LABEL');
-                        facebookLiveTtle.className = 'Streams_webrtc_streaming_title';
-
-                        var facebookLiveTtleInput = document.createElement('INPUT');
-                        facebookLiveTtleInput.type = 'text';
-                        facebookLiveTtleInput.placeholder = Q.getObject("webrtc.settingsPopup.fbLiveTitle", tool.textes);
-
-                        var facebookLiveDesc = document.createElement('LABEL');
-                        facebookLiveDesc.className = 'Streams_webrtc_streaming_desc';
-
-                        var facebookLiveDescInput = document.createElement('INPUT');
-                        facebookLiveDescInput.type = 'text';
-                        facebookLiveDescInput.placeholder = Q.getObject("webrtc.settingsPopup.fbLiveDescription", tool.textes);
-
-                        var startStreamingBtnCon = document.createElement('DIV');
-                        startStreamingBtnCon.className = 'Streams_webrtc_streaming_start';
-
-                        var privacySelect = document.createElement('SELECT');
-                        var option1 = document.createElement('OPTION');
-                        option1.name = 'privacy';
-                        option1.value = 'EVERYONE';
-                        option1.innerHTML = Q.getObject("webrtc.settingsPopup.fbPublicAccess", tool.textes);
-                        option1.selected = true;
-                        var option2 = document.createElement('OPTION');
-                        option2.innerHTML = Q.getObject("webrtc.settingsPopup.fbFriendsAccess", tool.textes);
-                        option2.name = 'privacy';
-                        option2.value = 'ALL_FRIENDS';
-                        var option3 = document.createElement('OPTION');
-                        option3.innerHTML = Q.getObject("webrtc.settingsPopup.fbOnlyMeLiveAccess", tool.textes);
-                        option3.name = 'privacy';
-                        option3.value = 'SELF';
-
-                        var startStreamingBtn = document.createElement('BUTTON');
-                        startStreamingBtn.type = 'button';
-                        startStreamingBtn.className = 'Q_button';
-                        startStreamingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbStartLive", tool.textes);
+                            var startStreamingBtn = document.createElement('BUTTON');
+                            startStreamingBtn.type = 'button';
+                            startStreamingBtn.className = 'Q_button';
+                            startStreamingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbStartLive", tool.textes);
 
 
 
-                        var fbStreamingLiveSection = document.createElement('DIV');
-                        fbStreamingLiveSection.style.display = 'none';
-                        fbStreamingLiveSection.className = 'Streams_webrtc_streaming_live';
+                            var fbStreamingLiveSection = document.createElement('DIV');
+                            fbStreamingLiveSection.style.display = 'none';
+                            fbStreamingLiveSection.className = 'Streams_webrtc_streaming_live';
 
-                        var facebookLiveEmbed = document.createElement('DIV');
-                        facebookLiveEmbed.className = "Streams_webrtc_streaming_url";
+                            var facebookLiveEmbed = document.createElement('DIV');
+                            facebookLiveEmbed.className = "Streams_webrtc_streaming_url";
 
-                        var facebookLiveUrl = document.createElement('INPUT');
-                        facebookLiveUrl.type = 'text';
-                        tool.facebookLiveUrlInput = facebookLiveUrl;
+                            var facebookLiveUrl = document.createElement('INPUT');
+                            facebookLiveUrl.type = 'text';
+                            tool.facebookLiveUrlInput = facebookLiveUrl;
 
-                        var facebookLiveCopy = document.createElement('DIV');
-                        facebookLiveCopy.className = 'Streams_webrtc_streaming_copy_url_btn';
-                        var facebookLiveCopyLink = document.createElement('SPAN');
-                        facebookLiveCopyLink.innerHTML = Q.getObject("webrtc.settingsPopup.copy", tool.textes);
+                            var facebookLiveCopy = document.createElement('DIV');
+                            facebookLiveCopy.className = 'Streams_webrtc_streaming_copy_url_btn';
+                            var facebookLiveCopyLink = document.createElement('SPAN');
+                            facebookLiveCopyLink.innerHTML = Q.getObject("webrtc.settingsPopup.copy", tool.textes);
 
-                        var buttonsCon = document.createElement('DIV');
-                        buttonsCon.className = 'Streams_webrtc_streaming_buttons';
+                            var buttonsCon = document.createElement('DIV');
+                            buttonsCon.className = 'Streams_webrtc_streaming_buttons';
 
-                        var getIframeBtnCon = document.createElement('DIV');
-                        getIframeBtnCon.className = 'Streams_webrtc_streaming_embed';
+                            var getIframeBtnCon = document.createElement('DIV');
+                            getIframeBtnCon.className = 'Streams_webrtc_streaming_embed';
 
-                        var getIframeBtn = document.createElement('BUTTON');
-                        getIframeBtn.type = 'button';
-                        getIframeBtn.className = 'Q_button';
-                        getIframeBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbEmbedCode", tool.textes);
+                            var getIframeBtn = document.createElement('BUTTON');
+                            getIframeBtn.type = 'button';
+                            getIframeBtn.className = 'Q_button';
+                            getIframeBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbEmbedCode", tool.textes);
 
-                        var stopStreamingBtnCon = document.createElement('DIV');
-                        stopStreamingBtnCon.className = 'Streams_webrtc_streaming_stop';
+                            var stopStreamingBtnCon = document.createElement('DIV');
+                            stopStreamingBtnCon.className = 'Streams_webrtc_streaming_stop';
 
-                        var stopStreamingBtn = document.createElement('BUTTON');
-                        stopStreamingBtn.type = 'button';
-                        stopStreamingBtn.className = 'Q_button';
-                        stopStreamingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbStopLive", tool.textes);
+                            var stopStreamingBtn = document.createElement('BUTTON');
+                            stopStreamingBtn.type = 'button';
+                            stopStreamingBtn.className = 'Q_button';
+                            stopStreamingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbStopLive", tool.textes);
 
 
-                        facebookLiveCopy.appendChild(facebookLiveCopyLink);
-                        facebookLiveEmbed.appendChild(facebookLiveUrl);
-                        facebookLiveEmbed.appendChild(facebookLiveCopy);
-                        streamingAndUploading.appendChild(facebookLiveItem);
-                        if(!tool.WebRTCClass.options().liveStreaming.startFbLiveViaGoLiveDialog) {
-                            facebookLiveTtle.appendChild(facebookLiveTtleInput);
-                            fbStreamingStartSettings.appendChild(facebookLiveTtle);
-                            facebookLiveDesc.appendChild(facebookLiveDescInput);
-                            fbStreamingStartSettings.appendChild(facebookLiveDesc);
+                            facebookLiveCopy.appendChild(facebookLiveCopyLink);
+                            facebookLiveEmbed.appendChild(facebookLiveUrl);
+                            facebookLiveEmbed.appendChild(facebookLiveCopy);
+                            streamingAndUploading.appendChild(facebookLiveItem);
+                            if(!tool.WebRTCClass.options().liveStreaming.startFbLiveViaGoLiveDialog) {
+                                facebookLiveTtle.appendChild(facebookLiveTtleInput);
+                                fbStreamingStartSettings.appendChild(facebookLiveTtle);
+                                facebookLiveDesc.appendChild(facebookLiveDescInput);
+                                fbStreamingStartSettings.appendChild(facebookLiveDesc);
 
-                            privacySelect.appendChild(option1);
-                            privacySelect.appendChild(option2);
-                            privacySelect.appendChild(option3);
-                            startStreamingBtnCon.appendChild(privacySelect);
+                                privacyBlock.appendChild(option1);
+                                privacyBlock.appendChild(option2);
+                                privacyBlock.appendChild(option3);
+                                privacySelect.appendChild(privacyBlock);
+                                startStreamingBtnCon.appendChild(privacySelect);
+                            }
+
+
+                            startStreamingBtnCon.appendChild(startStreamingBtn);
+                            fbStreamingStartSettings.appendChild(startStreamingBtnCon);
+                            fbStreamingLiveSection.appendChild(facebookLiveEmbed);
+                            getIframeBtnCon.appendChild(getIframeBtn);
+                            buttonsCon.appendChild(getIframeBtnCon);
+                            stopStreamingBtnCon.appendChild(stopStreamingBtn);
+                            buttonsCon.appendChild(stopStreamingBtnCon);
+                            fbStreamingLiveSection.appendChild(buttonsCon);
+
+                            streamingAndUploading.appendChild(fbStreamingStartSettings);
+                            streamingAndUploading.appendChild(fbStreamingLiveSection);
+                            streamingAndUploading.appendChild(fbPreviousStreamings);
+
+                            facebookLiveItem.addEventListener('click', function () {
+                                var loggedInCallback = function () {
+                                	var addGroupsList = function(groups) {
+                                		if(groups.length === 0) return;
+                                        var groupsBlock = document.createElement('OPTGROUP');
+                                        groupsBlock.label = Q.getObject("webrtc.settingsPopup.publishToGroup", tool.textes)
+
+                                        for (let g in groups) {
+                                            var option = document.createElement('OPTION');
+                                            option.name = 'privacy';
+                                            option.value = groups[g].id;
+                                            option.innerHTML = groups[g].name;
+                                            groupsBlock.appendChild(option);
+										}
+
+                                        privacySelect.appendChild(groupsBlock);
+
+                                    }
+
+                                    FB.api('/me/groups',
+                                        'GET',
+                                        function(response) {
+                                            if (!response || response.error) {
+                                                console.error(response);
+                                            } else {
+                                                addGroupsList(response.data);
+                                            }
+                                        })
+
+                                }
+
+                                var notLoggedInCallback = function() {
+                                    FB.login(function (response) {
+                                        if (response.authResponse) {
+                                            tool.fbAccessToken = response.authResponse.accessToken;
+                                            loggedInCallback(response.authResponse.accessToken);
+                                        }
+                                    }, {auth_type: 'reauthorize', scope: 'email,public_profile,publish_to_groups,publish_video,groups_access_member_info'});
+                                }
+
+                                FB.getLoginStatus(function (response) {
+                                    if (response.status === 'connected') {
+                                    	FB.api(
+                                            '/me/permissions',
+                                            'GET',
+                                            function(permissionsResponse) {
+                                                var permissions = permissionsResponse.data;
+                                                var hasPermissions = 0;
+                                                for (let p in permissions) {
+                                                    if(permissions[p].permission == 'publish_to_groups'
+														|| permissions[p].permission == 'publish_video'
+														|| permissions[p].permission == 'groups_access_member_info') {
+                                                        hasPermissions++;
+                                                    }
+                                                }
+
+                                                if(hasPermissions == 3) {
+                                                    tool.fbAccessToken = response.authResponse.accessToken;
+                                                    loggedInCallback();
+                                                } else {
+                                                    notLoggedInCallback();
+												}
+                                            }
+                                        );
+
+                                    } else {
+                                        notLoggedInCallback();
+                                    }
+
+                                });
+
+                                if(fbStreamingStartSettings.classList.contains('shown')) {
+                                    fbStreamingStartSettings.classList.remove('shown');
+                                } else {
+                                    fbStreamingStartSettings.classList.add('shown');
+                                    facebookLiveTtleInput.focus();
+                                }
+                            })
+                            startStreamingBtn.addEventListener('click', function () {
+                                if(!fbStreamingStartSettings.classList.contains('Q_working')) fbStreamingStartSettings.classList.add('Q_working');
+
+                                var data = {};
+                                data.title = facebookLiveTtleInput.value;
+                                data.description = facebookLiveDescInput.value;
+                                data.privacy = privacySelect.value;
+                                tool.fbLiveInterface.startFacebookLive(data, function (liveInfo) {
+                                    facebookLiveUrl.value = 'https://www.facebook.com' + liveInfo.permalink_url;
+
+                                    fbStreamingStartSettings.style.display = 'none';
+                                    fbStreamingLiveSection.style.display = 'block';
+                                    if(fbStreamingStartSettings.classList.contains('Q_working')) fbStreamingStartSettings.classList.remove('Q_working');
+                                    fbLivetextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.stopFBLive", tool.textes);
+
+                                });
+                            })
+                            stopStreamingBtn.addEventListener('click', function () {
+                                if(!fbStreamingLiveSection.classList.contains('Q_working')) fbStreamingLiveSection.classList.add('Q_working');
+
+                                tool.fbLiveInterface.endLive(function (liveInfo) {
+
+                                    var urlInputCon = facebookLiveEmbed.cloneNode(true);
+                                    var urlInput = urlInputCon.querySelector('input');
+                                    urlInput.value = facebookLiveUrl.value;
+                                    urlInputCon.querySelector('.Streams_webrtc_streaming_copy_url_btn').addEventListener('click', function () {
+                                        var link = urlInput.value;
+                                        if(link.trim() != '') {
+                                            copyToClipboard(urlInput);
+                                            tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.textes));
+                                        }
+                                    })
+
+                                    var embedPopupBtn = document.createElement('DIV');
+                                    embedPopupBtn.className = 'Streams_webrtc_streaming_copy_embed_btn';
+                                    var embedPopupBtnText = document.createElement('SPAN');
+                                    embedPopupBtnText.innerHTML = Q.getObject("webrtc.settingsPopup.fbEmbedCode", tool.textes);
+                                    embedPopupBtn.addEventListener('click', function () {
+                                        tool.fbLiveInterface.getIframe(liveInfo['embed_html']);
+                                    })
+                                    embedPopupBtn.appendChild(embedPopupBtnText);
+                                    urlInputCon.appendChild(embedPopupBtn);
+                                    fbPreviousStreamings.appendChild(urlInputCon);
+
+                                    facebookLiveUrl.value = '';
+                                    fbStreamingStartSettings.style.display = 'block';
+                                    fbStreamingLiveSection.style.display = 'none';
+                                    if(fbStreamingLiveSection.classList.contains('Q_working')) fbStreamingLiveSection.classList.remove('Q_working');
+                                    fbLivetextLabel.innerHTML = 'Start Facebook Livestream';
+
+                                });
+                            })
+                            getIframeBtn.addEventListener('click', function () {
+                                tool.fbLiveInterface.getIframe();
+                            })
+
+                            facebookLiveCopy.addEventListener('click', function () {
+                                var link = facebookLiveUrl.value;
+                                if(link.trim() != '') {
+                                    copyToClipboard(facebookLiveUrl);
+                                    tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.textes));
+                                }
+                            })
+
+                            return streamingAndUploading;
                         }
 
+                        function createRecordingLink() {
+                            var recordingLinkCon = document.createElement('DIV');
+                            recordingLinkCon.className = 'Streams_webrtc_recording Streams_webrtc_streaming_recording_item'
 
-                        startStreamingBtnCon.appendChild(startStreamingBtn);
-                        fbStreamingStartSettings.appendChild(startStreamingBtnCon);
-                        fbStreamingLiveSection.appendChild(facebookLiveEmbed);
-                        getIframeBtnCon.appendChild(getIframeBtn);
-                        buttonsCon.appendChild(getIframeBtnCon);
-                        stopStreamingBtnCon.appendChild(stopStreamingBtn);
-                        buttonsCon.appendChild(stopStreamingBtnCon);
-                        fbStreamingLiveSection.appendChild(buttonsCon);
 
-                        streamingAndUploading.appendChild(fbStreamingStartSettings);
-                        streamingAndUploading.appendChild(fbStreamingLiveSection);
-                        streamingAndUploading.appendChild(fbPreviousStreamings);
+                            var videoRecordingItem = document.createElement('DIV');
+                            videoRecordingItem.className = 'Streams_webrtc_recording_item';
+                            var fbLivetextLabel = document.createElement('SPAN');
+                            fbLivetextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.startRecording", tool.textes);
+                            var fbLiveIcon = document.createElement('SPAN');
+                            fbLiveIcon.className = 'Streams_webrtc_streaming_recording_icon';
+                            fbLiveIcon.innerHTML = icons.recordingIcon;
+                            videoRecordingItem.appendChild(fbLivetextLabel);
+                            videoRecordingItem.appendChild(fbLiveIcon);
 
-                        facebookLiveItem.addEventListener('click', function () {
-                            if(fbStreamingStartSettings.classList.contains('shown')) {
-                                fbStreamingStartSettings.classList.remove('shown');
-                            } else {
-                                fbStreamingStartSettings.classList.add('shown');
-                                facebookLiveTtleInput.focus();
+                            var fbStreamingSettings = document.createElement('DIV');
+                            fbStreamingSettings.className = 'Streams_webrtc_streaming_settings'
+
+                            var fbStreamingStartSettings = document.createElement('DIV');
+                            fbStreamingStartSettings.className = 'Streams_webrtc_streaming_start_settings';
+
+                            var fbPreviousStreamings = document.createElement('DIV');
+                            fbPreviousStreamings.className = 'Streams_webrtc_streaming_previous';
+
+                            var facebookLiveTtle = document.createElement('LABEL');
+                            facebookLiveTtle.className = 'Streams_webrtc_streaming_title';
+
+                            var facebookLiveTtleInput = document.createElement('INPUT');
+                            facebookLiveTtleInput.type = 'text';
+                            facebookLiveTtleInput.placeholder = Q.getObject("webrtc.settingsPopup.fbLiveTitle", tool.textes);
+
+                            var facebookLiveDesc = document.createElement('LABEL');
+                            facebookLiveDesc.className = 'Streams_webrtc_streaming_desc';
+
+                            var facebookLiveDescInput = document.createElement('INPUT');
+                            facebookLiveDescInput.type = 'text';
+                            facebookLiveDescInput.placeholder = Q.getObject("webrtc.settingsPopup.fbLiveDescription", tool.textes);
+
+                            var startStreamingBtnCon = document.createElement('DIV');
+                            startStreamingBtnCon.className = 'Streams_webrtc_streaming_start';
+
+                            var privacySelect = document.createElement('SELECT');
+                            var option1 = document.createElement('OPTION');
+                            option1.name = 'privacy';
+                            option1.value = 'EVERYONE';
+                            option1.innerHTML = Q.getObject("webrtc.settingsPopup.fbPublicAccess", tool.textes);
+                            option1.selected = true;
+                            var option2 = document.createElement('OPTION');
+                            option2.innerHTML = Q.getObject("webrtc.settingsPopup.fbFriendsAccess", tool.textes);
+                            option2.name = 'privacy';
+                            option2.value = 'ALL_FRIENDS';
+                            var option3 = document.createElement('OPTION');
+                            option3.innerHTML = Q.getObject("webrtc.settingsPopup.fbOnlyMeLiveAccess", tool.textes);
+                            option3.name = 'privacy';
+                            option3.value = 'SELF';
+
+                            var startStreamingBtn = document.createElement('BUTTON');
+                            startStreamingBtn.type = 'button';
+                            startStreamingBtn.className = 'Q_button';
+                            startStreamingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbStartLive", tool.textes);
+
+
+
+                            var fbStreamingLiveSection = document.createElement('DIV');
+                            fbStreamingLiveSection.style.display = 'none';
+                            fbStreamingLiveSection.className = 'Streams_webrtc_streaming_live';
+
+                            var facebookLiveEmbed = document.createElement('DIV');
+                            facebookLiveEmbed.className = "Streams_webrtc_streaming_url";
+
+                            var facebookLiveUrl = document.createElement('INPUT');
+                            facebookLiveUrl.type = 'text';
+                            tool.facebookLiveUrlInput = facebookLiveUrl;
+
+                            var facebookLiveCopy = document.createElement('DIV');
+                            facebookLiveCopy.className = 'Streams_webrtc_streaming_copy_url_btn';
+                            var facebookLiveCopyLink = document.createElement('SPAN');
+                            facebookLiveCopyLink.innerHTML = Q.getObject("webrtc.settingsPopup.copy", tool.textes);
+
+                            var buttonsCon = document.createElement('DIV');
+                            buttonsCon.className = 'Streams_webrtc_streaming_buttons';
+
+                            var getIframeBtnCon = document.createElement('DIV');
+                            getIframeBtnCon.className = 'Streams_webrtc_streaming_embed';
+
+                            var getIframeBtn = document.createElement('BUTTON');
+                            getIframeBtn.type = 'button';
+                            getIframeBtn.className = 'Q_button';
+                            getIframeBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbEmbedCode", tool.textes);
+
+                            var stopStreamingBtnCon = document.createElement('DIV');
+                            stopStreamingBtnCon.className = 'Streams_webrtc_streaming_stop';
+
+                            var stopStreamingBtn = document.createElement('BUTTON');
+                            stopStreamingBtn.type = 'button';
+                            stopStreamingBtn.className = 'Q_button';
+                            stopStreamingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbStopLive", tool.textes);
+
+
+                            facebookLiveCopy.appendChild(facebookLiveCopyLink);
+                            facebookLiveEmbed.appendChild(facebookLiveUrl);
+                            facebookLiveEmbed.appendChild(facebookLiveCopy);
+                            streamingAndUploading.appendChild(facebookLiveItem);
+                            if(!tool.WebRTCClass.options().liveStreaming.startFbLiveViaGoLiveDialog) {
+                                facebookLiveTtle.appendChild(facebookLiveTtleInput);
+                                fbStreamingStartSettings.appendChild(facebookLiveTtle);
+                                facebookLiveDesc.appendChild(facebookLiveDescInput);
+                                fbStreamingStartSettings.appendChild(facebookLiveDesc);
+
+                                privacySelect.appendChild(option1);
+                                privacySelect.appendChild(option2);
+                                privacySelect.appendChild(option3);
+                                startStreamingBtnCon.appendChild(privacySelect);
                             }
-                        })
-                        startStreamingBtn.addEventListener('click', function () {
-                            if(!fbStreamingStartSettings.classList.contains('Q_working')) fbStreamingStartSettings.classList.add('Q_working');
 
-                            var data = {};
-                            data.title = facebookLiveTtleInput.value;
-                            data.description = facebookLiveDescInput.value;
-                            data.privacy = privacySelect.value;
-                            tool.fbLiveInterface.startFacebookLive(data, function (liveInfo) {
-                                facebookLiveUrl.value = 'https://www.facebook.com' + liveInfo.permalink_url;
 
-                                fbStreamingStartSettings.style.display = 'none';
-                                fbStreamingLiveSection.style.display = 'block';
-                                if(fbStreamingStartSettings.classList.contains('Q_working')) fbStreamingStartSettings.classList.remove('Q_working');
-                                fbLivetextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.stopFBLive", tool.textes);
+                            startStreamingBtnCon.appendChild(startStreamingBtn);
+                            fbStreamingStartSettings.appendChild(startStreamingBtnCon);
+                            fbStreamingLiveSection.appendChild(facebookLiveEmbed);
+                            getIframeBtnCon.appendChild(getIframeBtn);
+                            buttonsCon.appendChild(getIframeBtnCon);
+                            stopStreamingBtnCon.appendChild(stopStreamingBtn);
+                            buttonsCon.appendChild(stopStreamingBtnCon);
+                            fbStreamingLiveSection.appendChild(buttonsCon);
 
-                            });
-                        })
-                        stopStreamingBtn.addEventListener('click', function () {
-                            if(!fbStreamingLiveSection.classList.contains('Q_working')) fbStreamingLiveSection.classList.add('Q_working');
+                            streamingAndUploading.appendChild(fbStreamingStartSettings);
+                            streamingAndUploading.appendChild(fbStreamingLiveSection);
+                            streamingAndUploading.appendChild(fbPreviousStreamings);
 
-                            tool.fbLiveInterface.endLive(function (liveInfo) {
+                            recordingLinkCon.appendChild(videoRecordingItem);
 
-                                var urlInputCon = facebookLiveEmbed.cloneNode(true);
-                                var urlInput = urlInputCon.querySelector('input');
-                                urlInput.value = facebookLiveUrl.value;
-                                urlInputCon.querySelector('.Streams_webrtc_streaming_copy_url_btn').addEventListener('click', function () {
-                                    var link = urlInput.value;
-                                    if(link.trim() != '') {
-                                        copyToClipboard(urlInput);
-                                        tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.textes));
-                                    }
-                                })
+                            videoRecordingItem.addEventListener('click', function () {
+                                if(fbStreamingStartSettings.classList.contains('shown')) {
+                                    fbStreamingStartSettings.classList.remove('shown');
+                                } else {
+                                    fbStreamingStartSettings.classList.add('shown');
+                                    facebookLiveTtleInput.focus();
+                                }
+                            })
 
-                                var embedPopupBtn = document.createElement('DIV');
-                                embedPopupBtn.className = 'Streams_webrtc_streaming_copy_embed_btn';
-                                var embedPopupBtnText = document.createElement('SPAN');
-                                embedPopupBtnText.innerHTML = Q.getObject("webrtc.settingsPopup.fbEmbedCode", tool.textes);
-                                embedPopupBtn.addEventListener('click', function () {
-                                    tool.fbLiveInterface.getIframe(liveInfo['embed_html']);
-                                })
-                                embedPopupBtn.appendChild(embedPopupBtnText);
-                                urlInputCon.appendChild(embedPopupBtn);
-                                fbPreviousStreamings.appendChild(urlInputCon);
+                            videoRecordingItem.addEventListener('click', function () {
+                                if(!recordingLinkCon.classList.contains('Q_working')) recordingLinkCon.classList.add('Q_working');
 
-                                facebookLiveUrl.value = '';
-                                fbStreamingStartSettings.style.display = 'block';
-                                fbStreamingLiveSection.style.display = 'none';
-                                if(fbStreamingLiveSection.classList.contains('Q_working')) fbStreamingLiveSection.classList.remove('Q_working');
-                                fbLivetextLabel.innerHTML = 'Start Facebook Livestream';
+                                tool.WebRTCLib.screensInterface.videoRecorder.startRecording(function (liveInfo) {
+                                    if(recordingLinkCon.classList.contains('Q_working')) recordingLinkCon.classList.remove('Q_working');
+                                    fbLivetextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.", tool.textes);
 
-                            });
-                        })
-                        getIframeBtn.addEventListener('click', function () {
-                            tool.fbLiveInterface.getIframe();
-                        })
+                                });
+                            })
 
-                        facebookLiveCopy.addEventListener('click', function () {
-                            var link = facebookLiveUrl.value;
-                            if(link.trim() != '') {
-                                copyToClipboard(facebookLiveUrl);
-                                tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.textes));
-                            }
-                        })
-						
-						return streamingAndUploading;
-                    }
+                            return recordingLinkCon;
+                        }
 
+                        function createStreamingAndRecordingSection() {
+                            _streamingAndRecordingEl = document.createElement('DIV');
+                            _streamingAndRecordingEl.className = 'Streams_webrtc_streaming_recording'
+                            _streamingAndRecordingEl.appendChild(createStreamingLink());
+                            //_streamingAndRecordingEl.appendChild(createRecordingLink());
+
+							return _streamingAndRecordingEl;
+                        }
+                        return {
+                        	createSection: createStreamingAndRecordingSection
+						}
+                    }());
 
                     function createSettingsPopUp() {
                         var settingsPopup = document.createElement('DIV');
                         settingsPopup.className = 'Streams_webrtc_popup-settings Streams_webrtc_popup-box';
                         settingsPopup.appendChild(videoInputListSection.createVideoInputList());
-                        settingsPopup.appendChild(createStreamingSection());
+                        settingsPopup.appendChild(streamingAndRecordingSection.createSection());
 
                         tool.settingsPopupEl = settingsPopup;
                         tool.cameraBtn.parentNode.appendChild(settingsPopup);
@@ -2568,7 +2828,7 @@
 										tool.fbAccessToken = response.authResponse.accessToken;
 										loggedInCallback(response.authResponse.accessToken);
 									}
-								}, {auth_type: 'reauthorize', scope: 'email,public_profile,publish_video'});
+								}, {auth_type: 'reauthorize', scope: 'email,public_profile,publish_video,groups_access_member_info'});
 							}
 
 							FB.getLoginStatus(function (response) {

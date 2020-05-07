@@ -508,7 +508,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     if (source[k] !== null && (typeof source[k] === 'object' || typeof source[k] === 'function' || Array.isArray(source[k]))) {
                         let constName = source[k].constructor.name;
                         if(constName == 'HTMLDivElement') {
-                            target[k] = source[k].outerHTML;
+                            target[k] = 'HTMLDivElement';
                         } else if(constName == 'Text') {
                             target[k] = source[k].innerText;
                         } else if(constName == 'DOMRect') {
@@ -929,6 +929,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         })
                     }
 
+                    screensharingTrack.screensharing = true;
                     screensRendering.renderScreenSharingLayout(screensharingTrack.parentScreen);
                 }
 				//screensRendering.hideLoader('screensharingStarting', data.participant);
@@ -2642,8 +2643,6 @@ return;
                         } else if (screen.participant != activeScreen.participant) {
                             elements.push(screen.screenEl);
                         }
-
-
 
                     }
 
