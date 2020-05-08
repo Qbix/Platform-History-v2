@@ -49,11 +49,11 @@ function _Streams_participants(options) {
 		}
 	}, tool);
 	
-	tool.forEachChild('Users/avatar', function () {
-		tool.$elements[this.state.userId] = $(this.element);
+	tool.refresh(function () {
+		tool.forEachChild('Users/avatar', function () {
+			tool.$elements[this.state.userId] = $(this.element);
+		});
 	});
-
-	tool.refresh();
 },
 
 {
