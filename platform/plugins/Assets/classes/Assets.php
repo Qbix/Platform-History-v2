@@ -62,11 +62,7 @@ abstract class Assets extends Base_Assets
 
 		$amount = number_format($amount, 2, '.', ',');
 
-		if ($symbol) {
-			return "$symbol$amount $code";
-		}
-
-		return "$code$amount"; // TODO: make it fit the locale better
+		return "$amount $code"; // TODO: make it fit the locale better
 	}
 	
 	/**
