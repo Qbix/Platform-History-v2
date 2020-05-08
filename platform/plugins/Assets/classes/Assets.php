@@ -59,6 +59,13 @@ abstract class Assets extends Base_Assets
 	static function display($code, $amount)
 	{
 		list($currencyName, $symbol) = self::currency($code);
+
+		$amount = number_format($amount, 2, '.', ',');
+
+		if ($symbol) {
+			return "$symbol$amount $code";
+		}
+
 		return "$code$amount"; // TODO: make it fit the locale better
 	}
 	
