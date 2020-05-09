@@ -5267,8 +5267,20 @@ return;
 								return console.warn("Streams.webrtc.start.relate: " + fem);
 							}
 
-							_createRoom(stream.fields.publisherId, stream.fields.name);
+							// set webrtc stream title same as parent title
+							Streams.get(options.publisherId, options.streamName, function (err) {
+								var fem = Q.firstErrorMessage(err);
+								if (fem) {
+									return console.warn("Streams.webrtc.start.title: " + fem);
+								}
+
+								stream.fields.title = this.fields.title + " live call";
+								stream.save();
+
+								_createRoom(stream.fields.publisherId, stream.fields.name);
+							});
 						});
+
 					});
 				}, {
 					method: 'post',
