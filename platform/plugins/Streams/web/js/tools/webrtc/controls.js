@@ -1532,7 +1532,7 @@
                                             tool.fbAccessToken = response.authResponse.accessToken;
                                             loggedInCallback(response.authResponse.accessToken);
                                         }
-                                    }, {auth_type: 'reauthorize', scope: 'email,public_profile,publish_to_groups,publish_video,groups_access_member_info'});
+                                    }, {auth_type: 'reauthorize', scope: 'email,public_profile,publish_to_groups,publish_video'});
                                 }
 
                                 FB.getLoginStatus(function (response) {
@@ -1545,8 +1545,7 @@
                                                 var hasPermissions = 0;
                                                 for (let p in permissions) {
                                                     if(permissions[p].permission == 'publish_to_groups'
-														|| permissions[p].permission == 'publish_video'
-														|| permissions[p].permission == 'groups_access_member_info') {
+														|| permissions[p].permission == 'publish_video') {
                                                         hasPermissions++;
                                                     }
                                                 }
@@ -2828,7 +2827,7 @@
 										tool.fbAccessToken = response.authResponse.accessToken;
 										loggedInCallback(response.authResponse.accessToken);
 									}
-								}, {auth_type: 'reauthorize', scope: 'email,public_profile,publish_video,groups_access_member_info'});
+								}, {auth_type: 'reauthorize', scope: 'email,public_profile,publish_video'});
 							}
 
 							FB.getLoginStatus(function (response) {
