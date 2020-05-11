@@ -1,2 +1,2 @@
 ALTER TABLE `{$prefix}article`
-ADD COLUMN `getintouch` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '{}' COMMENT 'JSON that can include emailSubject and classes';
+ADD COLUMN `getintouch` varchar(255) COLLATE NOT NULL DEFAULT '{}' COMMENT 'JSON that can include emailSubject and classes';
