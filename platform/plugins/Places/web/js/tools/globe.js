@@ -107,7 +107,15 @@ Q.Tool.define("Places/globe", function _Places_globe(options) {
 		globe.loadPlugin(planetaryjs.plugins.zoom({
 			scaleExtent: [radius, 20 * state.radius]
 		}));
-		globe.loadPlugin(planetaryjs.plugins.drag({}));
+		globe.loadPlugin(planetaryjs.plugins.drag({
+			afterDrag: function(planet) {
+				var r = this.projection.rotate();
+				tool.state.center = {
+					longitude: -r[0],
+					latitude: -r[1]
+				};
+			}
+		}));
 		
 		// Set up the globe's initial scale, offset, and rotation.
 		globe.projection
