@@ -140,6 +140,7 @@
     },
     "webrtc": {
 		"notAllowedToJoinCall": "You don't have permission to join this stream.",
+		"streamTitle": "{{1}} live call",
         "allow": {
             "dialogTitle": "Connecting",
             "microphoneBtn": "Enable Microphone",
