@@ -81,11 +81,16 @@ function Streams_fbLive_startStreaming($params) {
 
 	$title = (isset($params['title']) && !empty($params['title'])) ? $params['title'] : date("D M d, Y G:i");
 	$description = (isset($params['description']) && !empty($params['description'])) ? $params['description'] : '';
-	$privacy = (isset($params['description']) && !empty($params['privacy'])) ? $params['privacy'] : 'SELF';
+	$privacy = (isset($params['privacy']) && !empty($params['privacy'])) ? $params['privacy'] : 'SELF';
 
 	$privacyDesc = ['SELF' => 'Only Me', 'ALL_FRIENDS' => 'Only Friends', 'EVERYONE' => 'Everyone'];
 
-	$createLiveVideo = $fb->post('/me/live_videos', ['title' => $title, 'description' => $description, 'status' => 'LIVE_NOW', 'privacy' => ['value' => $privacy]]);
+	if(!is_numeric($privacy)) {
+        $createLiveVideo = $fb->post('/me/live_videos', ['title' => $title, 'description' => $description, 'status' => 'LIVE_NOW', 'privacy' => ['value' => $privacy]]);
+    } else {
+        $createLiveVideo = $fb->post('/' . $privacy . '/live_videos', ['title' => $title, 'description' => $description, 'status' => 'LIVE_NOW'/*, 'privacy' => ['value' => $privacy]*/]);
+
+    }
 	$createLiveVideo = $createLiveVideo->getGraphNode()->asArray();
 
     $liveInfo =  $fb->get($createLiveVideo['id'] . '?fields=permalink_url,id,embed_html,status', $accessToken);

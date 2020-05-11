@@ -1664,7 +1664,7 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
 .dialog-box .Streams_webrtc_choose-device {
     padding: 15px;
 }
-.Streams_webrtc_streaming {
+.Streams_webrtc_streaming_recording {
     border-top: 1px solid #ccc;
     padding: 5px 0 25px 0;
     margin: 15px 15px 0 15px;
@@ -1682,7 +1682,7 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
 }
 .Streams_webrtc_popup-box .Streams_webrtc_choose-device .Streams_webrtc_settings_popup_item,
 .dialog-box .Streams_webrtc_choose-device .Streams_webrtc_settings_popup_item,
-.Streams_webrtc_streaming .Streams_webrtc_streaming_item{
+.Streams_webrtc_streaming_recording .Streams_webrtc_streaming_recording_item {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1712,7 +1712,7 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
 }
 .Streams_webrtc_popup-box .Streams_webrtc_choose-device .Streams_webrtc_radio-checkmark,
 .dialog-box .Streams_webrtc_choose-device .Streams_webrtc_radio-checkmark,
-.Streams_webrtc_streaming .Streams_webrtc_streaming_icon {
+.Streams_webrtc_streaming_recording_item .Streams_webrtc_streaming_recording_icon {
     position: absolute;
     top: 0;
     left: 0;
@@ -1731,7 +1731,7 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
 }
 .Streams_webrtc_popup-box .Streams_webrtc_choose-device .Streams_webrtc_radio-checkmark svg,
 .dialog-box .Streams_webrtc_choose-device .Streams_webrtc_radio-checkmark svg,
-.Streams_webrtc_streaming .Streams_webrtc_streaming_icon svg{
+.Streams_webrtc_streaming_recording .Streams_webrtc_streaming_recording_icon svg {
     height: 25px;
     width: 25px;
 }
@@ -1793,12 +1793,15 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
 .Streams_webrtc_streaming .Streams_webrtc_streaming_embed {
     display: flex;
     justify-content: flex-end;
-    padding: 10px 0;
+    padding: 10px 0 30px 0;
     margin-left: 10px;
 }
 .Streams_webrtc_streaming .Streams_webrtc_streaming_buttons {
     display: flex;
     justify-content: flex-end;
+}
+.Streams_webrtc_streaming .Streams_webrtc_streaming_start select {
+    min-width: 0;
 }
 .Streams_webrtc_streaming .Streams_webrtc_streaming_start button {
     margin-left: 20px;
