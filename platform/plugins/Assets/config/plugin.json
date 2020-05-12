@@ -129,12 +129,12 @@
 		},
 		"transactional": {
 			"charge": {
-				"subject": ["Assets/content", ["notifications", "ChargeProcessedFor"]],
+				"subject": ["Assets/content", ["charge", "Subject"]],
 				"body": "Assets/email/charge.php",
 				"sms": "Assets/sms/charge.php"
 			},
 			"charged": {
-				"subject": ["Assets/content", ["notifications", "ThankYouForYourPayment"]],
+				"subject": ["Assets/content", ["charged", "Subject"]],
 				"body": "Assets/email/charged.php",
 				"sms": "Assets/sms/charged.php"
 			},

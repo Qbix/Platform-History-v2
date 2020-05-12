@@ -311,10 +311,12 @@ class Q
 			if (is_numeric($key) and floor($key) == ceil($key)) {
 				$key = $key + $a;
 			}
+
+			$p = str_replace('$', '\\REAL_DOLLAR_SIGN\\', $p);
 			$expression = str_replace('$'.$key, $p, $expression);
 			$expression = str_replace('{{'.$key.'}}', $p, $expression);
 		}
-		$expression = str_replace('\\REAL_DOLLAR_SIGN\\', '\\$', $expression);
+		$expression = str_replace('\\REAL_DOLLAR_SIGN\\', '$', $expression);
 		return $expression;
 	}
 	

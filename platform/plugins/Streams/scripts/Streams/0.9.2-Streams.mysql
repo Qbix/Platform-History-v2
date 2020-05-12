@@ -13,6 +13,6 @@ CREATE TABLE `{$prefix}notification` (
   `type` varbinary(255) DEFAULT NULL COMMENT 'the type of message',
   `viewedTime` timestamp NULL DEFAULT NULL COMMENT 'saved on shard of userId',
   `readTime` timestamp NULL DEFAULT NULL COMMENT 'saved on shard of userId',
-  `comment` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'optional human-readable comment to display along with notification',
+  `comment` varchar(255) COLLATE DEFAULT NULL COMMENT 'optional human-readable comment to display along with notification',
   PRIMARY KEY (userId, publisherId, streamName, messageOrdinal)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='stored primarily on userId''s shard';
