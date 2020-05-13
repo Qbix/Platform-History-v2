@@ -447,7 +447,7 @@ box-shadow:0 0 10px #000; }
 .Q_rating_tool div.Q_rating_star_occlusion { width: 0; overflow: hidden; }
 .Q_paging_tool { text-align: center; }
 .Q_placeholders_container,
-.Q_placeholder { display: inline-block; color: #999; font-style: italic; zoom: 1; *display: inline; }
+.Q_placeholder { display: inline-block; color: #999; font-style: italic; zoom: 1; vertical-align: middle; }
 .Q_placeholders_container input,
 .Q_placeholders_container textarea { box-sizing: border-box; width: 100%; height: 100%; }
 .Q_focus .Q_placeholder { color: #aaa; }
