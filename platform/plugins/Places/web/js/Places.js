@@ -582,6 +582,10 @@ Places.Location = {
 	fromStream: function(stream){
 		var location;
 
+		if (!Q.Streams.isStream(stream)) {
+			return;
+		}
+
 		// this new approach, location set in stream fields
 		try {
 			location = JSON.parse(stream.fields.location);
