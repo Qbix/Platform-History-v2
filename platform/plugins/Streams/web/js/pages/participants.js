@@ -1,9 +1,8 @@
 Q.page("Streams/participating", function () {
 	var userId = Q.Users.loggedInUserId();
 
-	$("td[data-type=checkmark] .Streams_participant_subscribed_icon").on(Q.Pointer.fastclick, function () {
+	$("div[data-type=checkmark] .Streams_participant_subscribed_icon").on(Q.Pointer.fastclick, function () {
 		var $this = $(this);
-		var $parent = $this.closest('tr');
 		var publisherId = $this.attr('data-publisherId');
 		var name = $this.attr('data-name');
 		var subscribed = $this.attr('data-subscribed');
@@ -14,10 +13,10 @@ Q.page("Streams/participating", function () {
 			}
 
 			$this.attr('data-subscribed', participant.subscribed === 'yes' ? 'true' : 'false');
-			$parent.removeClass('Q_working');
+			$this.removeClass('Q_working');
 		};
 
-		$parent.addClass('Q_working');
+		$this.addClass('Q_working');
 
 		if (subscribed === 'true') {
 			Q.Streams.Stream.unsubscribe(publisherId, name, _callback);
@@ -190,7 +189,7 @@ Q.page("Streams/participating", function () {
 Q.Tool.onActivate("Q/expandable").set(function () {
 	this.state.beforeExpand.set(function () {
 		// create Streams/participants tools
-		$(".Streams_participating_stream td[data-type=participants][data-processed=0]", this.element).each(function () {
+		$(".Streams_participating_stream div[data-type=participants][data-processed=0]", this.element).each(function () {
 			$("<div>").tool("Streams/participants", {
 				'publisherId': this.getAttribute("data-publisherId"),
 				'streamName': this.getAttribute("data-streamName"),
