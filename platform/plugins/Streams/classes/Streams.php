@@ -3939,7 +3939,29 @@ abstract class Streams extends Base_Streams
 		$communityId = Users::communityId();
 		return Streams::fetchOne(null, $communityId, "Streams/experience/$experienceId", true);
 	}
-
+	/**
+	 * Get the url of the stream's icon
+	 * @param {object} [$stream] Stream row or Streams_Stream object
+	 * @param {string} [$basename=null] The last part after the slash, such as "50.png"
+	 * @return {string} The stream's icon url
+	 */
+	static function iconUrl($stream, $basename = null)
+	{
+		if (empty($stream->icon)) return '';
+		$url = Q_Uri::interpolateUrl($stream->icon, array(
+			'publisherId' => Q_Utils::splitId($stream->publisherId)
+		));
+		$url = (Q_Valid::url($url) or mb_substr($stream->icon, 0, 2) === '{{')
+			? $url
+			: "{{Streams}}/img/icons/$url";
+		if ($basename) {
+			if (strpos($basename, '.') === false) {
+				$basename = "$basename.png";
+			}
+			$url .= "/$basename";
+		}
+		return Q_Html::themedUrl($url);
+	}
 	/**
 	 * Registers a user. Can be hooked to 'Users/register' before event
 	 * so it can override standard functionality.

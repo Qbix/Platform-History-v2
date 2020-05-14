@@ -5,10 +5,11 @@ function Streams_participating_response_content()
 	$user = Users::loggedInUser(true);
 	$loggedUserId = $user->id;
 	$dbStreams = Db::connect('Streams');
-	$participants = $dbStreams->rawQuery("select srt.*, sp.state, sp.subscribed, sp.streamType, sp.publisherId from 
-	streams_related_to srt, streams_participant sp 
+	$participants = $dbStreams->rawQuery("select srt.*, sp.state, sp.subscribed, sp.streamType, sp.publisherId, ss.name, ss.title, ss.icon from 
+	streams_related_to srt, streams_participant sp, streams_stream ss 
 	where srt.toPublisherId='".$loggedUserId."' and srt.toStreamname='Streams/participating'
-	and sp.publisherId=srt.fromPublisherId and sp.streamName=srt.fromStreamName and sp.userId='".$loggedUserId."' 
+	and sp.publisherId=srt.fromPublisherId and sp.streamName=srt.fromStreamName and sp.userId='".$loggedUserId."'
+	and ss.name=srt.fromStreamName and ss.publisherId=srt.fromPublisherId
 	order by sp.subscribed")->fetchDbRows();
 
 	$skipOwnStreams = Q_Config::get('Streams', 'participating', 'skipOwnStreams', true);
@@ -24,12 +25,12 @@ function Streams_participating_response_content()
 			$participantsGrouped[$participant->streamType] = array();
 		}
 
-		$stream = Streams::fetchOne($loggedUserId, $participant->fromPublisherId, $participant->fromStreamName);
 		$checked = $participant->subscribed == 'yes' ? 'true' : 'false';
-		$iconUrl = $stream->iconUrl('40.png');
+
+		$iconUrl = Streams::iconUrl($participant, '40.png');
 
 		$participantsGrouped[$participant->streamType][] = Q::view("Streams/content/participatingItem.php",
-			compact('stream', 'iconUrl', 'checked')
+			compact('participant', 'iconUrl', 'checked')
 		);
 	}
 
@@ -49,6 +50,10 @@ function Streams_participating_response_content()
 	$mobileSubscribed = Q::ifset($mobileSubscribed, 'state', null) == 'active';
 
 	$devices = Users_Device::select()->where(array('userId' => $loggedUserId))->fetchDbRows();
+	$devicesGrouped = array();
+	foreach($devices as $device) {
+		$devicesGrouped[$device->formFactor.' '.$device->platform.' '.$device->version][] = $device;
+	}
 
-	return Q::view("Streams/content/participating.php", compact('participantsGrouped', 'user', 'emailSubscribed', 'mobileSubscribed', 'devices'));
+	return Q::view("Streams/content/participating.php", compact('participantsGrouped', 'user', 'emailSubscribed', 'mobileSubscribed', 'devicesGrouped'));
 }
