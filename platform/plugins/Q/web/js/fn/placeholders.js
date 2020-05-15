@@ -83,6 +83,7 @@ function () {
 				position: 'relative',
 				width: dim.width,
 				height: dim.height,
+				"vertical-align": $this.css('vertical-align') || "middle",
 				display: display
 			}).addClass('Q_placeholders_container');
 			var props = {};
