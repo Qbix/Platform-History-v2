@@ -389,7 +389,8 @@ a.Users_activation_resend:active {
 
 #Users_login_dialog input,
 #Users_setIdentifier_dialog input {
-	margin: 5px 0px 5px 0px;
+	margin: 5px 0 5px 0;
+	vertical-align: middle;
 }
 
 #Users_login_dialog #Users_agree { margin-right: 5px; -webkit-appearance: checkbox; }

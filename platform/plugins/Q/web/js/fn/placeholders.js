@@ -83,6 +83,8 @@ function () {
 				position: 'relative',
 				width: dim.width,
 				height: dim.height,
+				"vertical-align": Q.getObject("verticalAlign", this.computedStyle('placeholder'))
+					|| Q.getObject("verticalAlign", this.computedStyle()) || "middle",
 				display: display
 			}).addClass('Q_placeholders_container');
 			var props = {};
