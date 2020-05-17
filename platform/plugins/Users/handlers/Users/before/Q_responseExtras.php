@@ -63,6 +63,4 @@ function Users_before_Q_responseExtras()
 		}
 		Q_Response::setScriptData("Q.plugins.Users.$k", $apps);
 	}
-
-	Q_Response::setScriptData('Q.plugins.Users.preferredLanguage', Q::ifset(Users::loggedInUser(), "preferredLanguage", null));
 }
