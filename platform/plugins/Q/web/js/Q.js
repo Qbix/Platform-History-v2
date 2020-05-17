@@ -2025,6 +2025,8 @@ Q.getObject = function _Q_getObject(name, context, delimiter, create) {
  * Use this to ensure that a property exists before running some javascript code.
  * If something is undefined, loads a script or executes a function,
  * calling the callback on success.
+ * The callback is called only after the Q.onInit event has executed, so functions
+ * like Q.url() and Q.addScript can be expected to work properly.
  * @static
  * @method ensure
  * @param {Mixed} property
@@ -2045,14 +2047,16 @@ Q.ensure = function _Q_ensure(property, loader, callback) {
 		Q.handle(callback, null, [property]);
 		return;
 	}
-	if (typeof loader === 'string') {
-		Q.require(loader, callback);
-		return;
-	} else if (typeof loader === 'function') {
-		loader(callback);
-	} else if (loader instanceof Q.Event) {
-		loader.add(callback);
-	}
+	Q.onInit.addOnce(function () {
+		if (typeof loader === 'string') {
+			Q.require(loader, callback);
+			return;
+		} else if (typeof loader === 'function') {
+			loader(callback);
+		} else if (loader instanceof Q.Event) {
+			loader.add(callback);
+		}
+	});
 };
 
 /**
