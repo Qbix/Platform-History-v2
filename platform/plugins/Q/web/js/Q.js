@@ -730,11 +730,12 @@ Elp.contains = function (child) {
  * Returns a snapshot of the computed style of an element.
  * @method computedStyle
  * @param {String} [name] If provided, the value of a property is returned instead of the whole style object.
+ * @param {String} [pseudoElement] Optionally indicate the pseudo-element ("before", "placeholder" etc.) to get the style of
  * @return {Object|String}
  */
-Elp.computedStyle = function(name) {
+Elp.computedStyle = function(name, pseudoElement) {
 	var computedStyle = root.getComputedStyle
-		? getComputedStyle(this, null)
+		? root.getComputedStyle(this)
 		: this.currentStyle;
 	var result = {};
 	for (var k in computedStyle) {
