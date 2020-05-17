@@ -6741,7 +6741,7 @@ Q.url = function _Q_url(what, fields, options) {
 		}
 		what2 = parts[0] + (parts[1] ? '?' + parts[1] : '');
 	}
-	var baseUrl = (options && options.baseUrl) || Q.info.proxyBaseUrl || Q.info.baseUrl || '';
+	var baseUrl = (options && options.baseUrl) || Q.info.proxyBaseUrl || Q.info.baseUrl;
 	what3 = Q.interpolateUrl(what2);
 	if (what3.isUrl()) {
 		if (what3.startsWith(baseUrl)) {
