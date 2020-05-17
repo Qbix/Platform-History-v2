@@ -9909,7 +9909,7 @@ Q.Text = {
 Q.Text.loadBeforeInit = [];
 
 // Set the initial language, but this can be overridden after Q.onInit
-Q.Text.setLanguage.apply(Q.Text, Q.Users.preferredLanguage || navigator.language.split('-'));
+Q.Text.setLanguage.apply(Q.Text, navigator.language.split('-'));
 
 var _Q_Text_getter = Q.getter(function (name, url, callback, options) {
 	var o = Q.extend({extend: false}, options);
