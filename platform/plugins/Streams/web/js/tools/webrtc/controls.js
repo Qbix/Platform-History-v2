@@ -212,7 +212,11 @@
 				});
 				tool.WebRTCLib.event.on('micEnabled', function () {
 					tool.updateControlBar();
-					if(tool.microphoneBtn.classList.contains('Q_working')) tool.microphoneBtn.classList.remove('Q_working');
+                    tool.participantsPopup().update(tool.WebRTCLib.localParticipant());
+                    if(tool.microphoneBtn.classList.contains('Q_working')) tool.microphoneBtn.classList.remove('Q_working');
+				});
+				tool.WebRTCLib.event.on('micDisabled', function () {
+                    tool.participantsPopup().update(tool.WebRTCLib.localParticipant());
 				});
 				tool.WebRTCLib.event.on('micIsBeingEnabled', function () {
 					tool.microphoneBtn.classList.add('Q_working')
@@ -1103,7 +1107,7 @@
                                         Q.Dialogs.pop();
                                         tool.closeAllDialogues();
 
-                                        tool.WebRTCLib.conferenceControl.toggleCameras({devideId:mediaDevice.deviceId,groupId:mediaDevice.groupId}, function () {
+                                        tool.WebRTCLib.conferenceControl.toggleCameras({deviceId:mediaDevice.deviceId,groupId:mediaDevice.groupId}, function () {
                                             var localScreens = tool.WebRTCLib.localParticipant().screens;
                                             var i, screen;
                                             for (i = 0; screen = localScreens[i]; i++) {
@@ -1968,33 +1972,40 @@
 					};
 					this.muteVideo = function () {
 						this.cameraBtnEl.innerHTML = listIcons.disabledCamera;
-						this.isVideoMuted = true;
+                        this.cameraBtnEl.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOnCamera", tool.textes);
+                        this.isVideoMuted = true;
 						this.isActive = false;
 					};
 					this.unmuteVideo = function () {
 						this.cameraBtnEl.innerHTML = icons.camera;
-						this.isVideoMuted = false;
+                        this.cameraBtnEl.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOffCamera", tool.textes);
+                        this.isVideoMuted = false;
 						this.isActive = true;
 					};
 					this.muteScreenSharingVideo = function () {
                         this.screenSharingBtnEl.innerHTML = listIcons.disabledScreen;
+                        this.screenSharingBtnEl.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOnScreenSharing", tool.textes);
                         this.screenSharingIsMuted = true;
 					};
 					this.unmuteScreenSharingVideo = function () {
                         this.screenSharingBtnEl.innerHTML = listIcons.screen;
-						this.screenSharingIsMuted = false;
+                        this.screenSharingBtnEl.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOffScreenSharing", tool.textes);
+                        this.screenSharingIsMuted = false;
 					};
 					this.muteAudio = function () {
 						if(this.isAudioMuted == true) return;
                         this.participant.muteAudio();
 						this.audioBtnEl.innerHTML = listIcons.disabledSpeaker;
-						this.isAudioMuted = true;
-					};
+                        this.audioBtnEl.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOnAudio", tool.textes);
+                        this.isAudioMuted = true;
+
+                    };
 					this.unmuteAudio = function () {
 						if(this.isAudioMuted == false) return;
                         this.participant.unmuteAudio();
 						this.audioBtnEl.innerHTML = listIcons.loudSpeaker;
-						this.isAudioMuted = false;
+                        this.audioBtnEl.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOffAudio", tool.textes);
+                        this.isAudioMuted = false;
 					};
 					this.remove = function () {
 						if(this.listElement.parentNode != null) this.listElement.parentNode.removeChild(this.listElement);
@@ -2111,6 +2122,7 @@
 				}
 
 				function update(participant) {
+                    var localParticipant = tool.WebRTCLib.localParticipant();
 					for(let i in tool.participantsList) {
 						let item = tool.participantsList[i];
 						if(participant != item.participant) continue;
@@ -2132,6 +2144,20 @@
 						} else {
 							item.unmuteVideo();
 						}
+
+						if(participant.isLocal) {
+
+                            if(!tool.WebRTCLib.conferenceControl.micIsEnabled()){
+                                item.audioBtnEl.innerHTML = listIcons.locDisabledMic;
+                                item.audioBtnEl.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOnAudio", tool.textes);
+                            } else {
+                                item.audioBtnEl.innerHTML = icons.microphone;
+                                item.audioBtnEl.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOffAudio", tool.textes);
+                            }
+						}
+
+
+
 						if(activeScreenSharingScreens == 0) {
 							item.muteScreenSharingVideo();
                             if(item.videoBtnsEl.classList.contains('Streams_webrtc_screensharing-active')) item.videoBtnsEl.classList.remove('Streams_webrtc_screensharing-active')
@@ -2189,14 +2215,17 @@
 					muteVideo.className = 'Streams_webrtc_mute-video-btn' + (isLocal ? ' Streams_webrtc_isLocal' : '');
                     var muteCameraBtn = document.createElement('DIV');
                     muteCameraBtn.className = 'Streams_webrtc_mute-camera-btn';
+                    muteCameraBtn.dataset.touchlabel = isLocal ? (tool.WebRTCLib.conferenceControl.cameraIsEnabled() ? Q.getObject("webrtc.participantsPopup.turnOffCamera", tool.textes) : Q.getObject("webrtc.participantsPopup.turnOnCamera", tool.textes)) : Q.getObject("webrtc.participantsPopup.turnOnCamera", tool.textes);
                     muteCameraBtn.innerHTML = isLocal ? (tool.WebRTCLib.conferenceControl.cameraIsEnabled() ? icons.camera : listIcons.disabledCamera) : listIcons.disabledCamera;
 
                     var muteScreenSharingBtn = document.createElement('DIV');
                     muteScreenSharingBtn.className = 'Streams_webrtc_mute-screensharing-btn';
+                    muteScreenSharingBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOffScreenSharing", tool.textes);
                     muteScreenSharingBtn.innerHTML = listIcons.disabledScreen;
 
                     var muteAudioBtn = document.createElement('DIV');
 					muteAudioBtn.className = 'Streams_webrtc_mute-audio-btn' + (isLocal ? ' Streams_webrtc_isLocal' : '');
+                    muteAudioBtn.dataset.touchlabel = isLocal ? (tool.WebRTCLib.conferenceControl.micIsEnabled() ? Q.getObject("webrtc.participantsPopup.turnOffAudio", tool.textes) : Q.getObject("webrtc.participantsPopup.turnOnAudio", tool.textes)) : Q.getObject("webrtc.participantsPopup.turnOffAudio", tool.textes);
 					muteAudioBtn.innerHTML = isLocal ? (tool.WebRTCLib.conferenceControl.micIsEnabled() ? icons.microphone : listIcons.locDisabledMic) : listIcons.loudSpeaker;
 					var participantIdentity = document.createElement('DIV');
 					participantIdentity.className = 'Streams_webrtc_participants-identity';

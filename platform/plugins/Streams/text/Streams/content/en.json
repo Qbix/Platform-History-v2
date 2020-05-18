@@ -223,7 +223,13 @@
             "loudestExceptMe": "Loudest Except Me",
             "maximizeLoudest": "Maximize Loudest",
             "staticMaximized": "Static Maximized",
-            "manual": "Manual"
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
         }
     },
     "types": {

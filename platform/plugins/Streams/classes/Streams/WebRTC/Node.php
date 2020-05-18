@@ -25,7 +25,7 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
 
         $endTime = $stream->getAttribute('endTime');
         $startTime = $stream->getAttribute('startTime');
-        if($startTime == null /*|| $endTime != null && time() > $endTime || $endTime*/) {
+        if($startTime == null || ($endTime != null && round(microtime(true) * 1000) > $endTime)) {
 
             $stream->setAttribute('startTime', round(microtime(true) * 1000));
             $stream->clearAttribute('endTime');
