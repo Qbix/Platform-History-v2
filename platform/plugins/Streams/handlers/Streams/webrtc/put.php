@@ -56,7 +56,8 @@ function Streams_webrtc_put($params = array()) {
 
         $streamName = "Streams/webrtc/$roomId";
         $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
-        $startTime = date('YmdHis', $stream->getAttribute('startTime'));
+        $startTime = date('YmdHis', round($stream->getAttribute('startTime') / 1000));
+
         $folderName = $roomId . '_' . $startTime;
 
         $path = $logsPath . DS . $folderName;
