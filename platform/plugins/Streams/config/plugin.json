@@ -457,6 +457,7 @@
 					"title": "Real-Time Call",
 					"icon": "Streams/webrtc"
 				},
+				"edit": ["title"],
 				"messages": {
 					"Streams/webrtc/joined": {}
 				}

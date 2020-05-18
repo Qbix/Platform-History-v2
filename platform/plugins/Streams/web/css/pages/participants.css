@@ -9,46 +9,39 @@ table.Streams_participating_stream {
 	table-layout: auto;
 	width: 100%;
 }
-.Streams_participating_stream th {
-	text-align: center;
-}
-.Streams_participating_stream th[data-type=checkmark] {
-	width: 90px;
-}
-.Streams_participating_stream tr {
+.Streams_participating_stream div[data-type=tr] {
 	background-color: #eeeeff;
 	border: 1px solid #e1e1e1;
-}
-.Streams_participating_stream tr:empty {
-	height: 5px;
-	background-color: #fff;
-}
-.Streams_participating_stream td {
-	vertical-align: top;
-}
-.Streams_participating_stream td[data-type=title],
-.Streams_participating_stream td[data-type=checkmark] {
-	padding: 5px 0;
 	white-space: nowrap;
 }
-.Streams_participating_stream td[data-type=title] > * {
+.Streams_participating_stream div[data-type=title],
+.Streams_participating_stream div[data-type=checkmark] {
+	padding: 0;
+	white-space: nowrap;
+	display: inline-block;
+	vertical-align: middle;
+}
+.Streams_participating_stream div[data-type=title] {
+	width: calc(100% - 50px);
+}
+.Streams_participating_stream div[data-type=title] > * {
 	display: inline-block;
 	line-height: 40px;
 	vertical-align: top;
 }
-.Streams_participating_stream td[data-type=title] > div {
+.Streams_participating_stream div[data-type=title] > div {
 	font-size: 20px;
 	font-weight: normal;
-	width: calc(100% - 40px);
+	width: calc(100% - 50px);
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
 }
-.Streams_participating_stream td[data-type=checkmark] {
+.Streams_participating_stream div[data-type=checkmark] {
 	text-align: center;
 	width: 50px;
 }
-.Streams_participating_stream td[data-type=participants] {
+.Streams_participating_stream div[data-type=participants] {
 	min-width: 280px;
 }
 .Streams_participating_stream img.Streams_participating_stream_icon,
@@ -58,7 +51,7 @@ table.Streams_participating_stream {
 	margin: 0;
 }
 .Streams_participating_stream img.Streams_participating_stream_icon {
-	margin: 0 5px;
+	margin-right: 5px;
 }
 .Streams_participating_stream .Streams_participants_tool {
 	position: relative;
@@ -133,16 +126,20 @@ table.Streams_participating_stream {
 }
 .Streams_participating_item .Streams_participant_subscribed_icon,
 .Streams_participating_item .Streams_participant_plus_icon,
+.Streams_participating_stream .Streams_participant_subscribed_icon,
 .Streams_participating_item .Streams_participant_delete_icon {
 	display: inline-block;
 	width: 32px;
 	height: 32px;
 	background: url('../../../Q/img/icons/basic32.png') 0 -885px no-repeat;
 	vertical-align: middle;
-	float: right;
+	cursor: pointer;
 }
-tr.Streams_participating_item .Streams_participant_subscribed_icon {
-	float: none;
+.Streams_participating_item .Streams_participant_subscribed_icon,
+.Streams_participating_item .Streams_participant_plus_icon,
+.Streams_participating_item .Streams_participant_delete_icon {
+	float: right;
+	margin-top: -3px;
 }
 .Streams_participating_item .Streams_participant_delete_icon {
 	background: url('../../../Q/img/icons/basic32.png') 0 -964px no-repeat;
