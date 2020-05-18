@@ -114,7 +114,7 @@ function Q_tabs_tool($options)
 			'data-name' => $name
 		), Q::ifset($attributes, $name, array()));
 		if ($touchlabels and !isset($attributesMerged['data-touchlabel'])) {
-			$attributesMerged['data-touchlabel'] = $title
+			$attributesMerged['data-touchlabel'] = $title;
 		}
 		$a = Q_Html::a($urls[$name], $title_container);
 		$result .= Q_Html::tag('li', $attributesMerged, $a);
