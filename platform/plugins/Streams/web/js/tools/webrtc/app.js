@@ -34,6 +34,7 @@ window.WebRTCconferenceLib = function app(options){
         mode: 'node',
         nodeServer: '',
         roomName: null,
+        roomPublisher: null,
         audio: false,
         video: false,
         startWith: {},
@@ -709,6 +710,8 @@ window.WebRTCconferenceLib = function app(options){
                         break;
                     }
                 }
+                app.event.dispatch('screenHidden', screen);
+
             };
             this.show = function() {
                 let screen = this;
@@ -719,6 +722,8 @@ window.WebRTCconferenceLib = function app(options){
                 }
                 screen.isActive = true;
                 roomScreens.push(screen);
+                app.event.dispatch('screenShown', screen);
+
             };
         };
 
@@ -1791,9 +1796,9 @@ window.WebRTCconferenceLib = function app(options){
                                 if(vTracks[s].screensharing) {
                                     renderScreenSharingLayout = true;
 
-                                    if(vTracks[s].trackEl.videoWidth !== 0 && vTracks[s].trackEl.videoHeight !== 0) {
+                                    if(!_isActive && vTracks[s].trackEl.videoWidth !== 0 && vTracks[s].trackEl.videoHeight !== 0) {
                                         setCanvasSize(vTracks[s].trackEl.videoWidth, vTracks[s].trackEl.videoHeight)
-                                    } else {
+                                    } else if (!_isActive) {
                                         vTracks[s].trackEl.addEventListener('loadedmetadata', function (e) {
                                             setCanvasSize(e.target.videoWidth, e.target.videoHeight)
                                         });
@@ -1904,7 +1909,8 @@ window.WebRTCconferenceLib = function app(options){
 
                             if(renderedTracks[x].kind == 'video') {
                                 for (let m in vTracks) {
-                                    if(renderedTracks[x].track == vTracks[m]) trackIsLive = true;
+                                    log('updateCanvasLayout remove not active', vTracks[m].parentScreen.isActive)
+                                    if(renderedTracks[x].track == vTracks[m] && vTracks[m].parentScreen.isActive) trackIsLive = true;
                                 }
                             } else {
                                 if(audioIsEnabled) trackIsLive = true;
@@ -2513,6 +2519,8 @@ window.WebRTCconferenceLib = function app(options){
                     app.event.on('participantDisconnected', updateCanvas);
                     app.event.on('trackMuted', updateCanvas);
                     app.event.on('trackUnmuted', updateCanvas);
+                    app.event.on('screenHidden', updateCanvas);
+                    app.event.on('screenShown', updateCanvas);
                     app.event.on('audioMuted', updateCanvas);
                     app.event.on('audioUnmuted', updateCanvas);
 
@@ -4441,7 +4449,7 @@ window.WebRTCconferenceLib = function app(options){
                 var screenSharingTrackHandler = function(e) {
                     log('trackIsBeingAdded screenSharingTrackHandler', e.track, data)
                     if(e.participant != participant) return;
-                    e.track.screenshaFring = true;
+                    e.track.screensharing = true;
                     app.event.off('trackSubscribed', screenSharingTrackHandler);
                 }
 
@@ -6046,7 +6054,7 @@ window.WebRTCconferenceLib = function app(options){
             sendOnlineStatus();
             checkOnlineStatus();
             log('joined', {username:localParticipant.identity, sid:socket.id, room:options.roomName})
-            socket.emit('Streams/webrtc/joined', {username:localParticipant.identity, sid:socket.id, room:options.roomName, isiOS: _isiOS, info: _localInfo});
+            socket.emit('Streams/webrtc/joined', {username:localParticipant.identity, sid:socket.id, room:options.roomName, roomPublisher: options.roomPublisher, isiOS: _isiOS, info: _localInfo});
         }
 
         return {
@@ -6089,7 +6097,7 @@ window.WebRTCconferenceLib = function app(options){
                 audioInputDevices = [];
                 var i, device;
                 for (i = 0; device = mediaDevicesList[i]; i++) {
-                    log('loadDevicesList: ' + device.label);
+                    log('loadDevicesList: ' + device.kind);
                     if (device.kind.indexOf('video') != -1) {
                         videoInputDevices.push(device);
                         for (var x in localParticipant.tracks) {
@@ -6150,8 +6158,8 @@ window.WebRTCconferenceLib = function app(options){
             return currentAudioDevice;
         }
 
-        function toggleCameras(cameraId, callback, failureCallback) {
-            log('toggleCameras: cameraid = ' + cameraId)
+        function toggleCameras(camera, callback, failureCallback) {
+            log('toggleCameras: camera = ' + camera)
             app.eventBinding.sendDataTrackMessage("beforeCamerasToggle");
 
             var i, device, deviceToSwitch;
@@ -6164,14 +6172,29 @@ window.WebRTCconferenceLib = function app(options){
                     } else deviceToSwitch = videoInputDevices[0];
                     break;
                 }
+
+                if(deviceToSwitch == null) videoInputDevices[0];
             };
 
             if(options.mode != 'twilio') {
-                var cameraId = cameraId != null ? cameraId : deviceToSwitch.deviceId;
-                var constrains = {deviceId: {exact: cameraId}};
-                if(typeof cordova != 'undefined' && _isiOS) {
-                    constrains = {deviceId: cameraId}
+                var constrains
+                if(camera != null && camera.deviceId != null && camera.deviceId != '') {
+                    constrains = {deviceId: {exact: cameraId}};
+                    if(typeof cordova != 'undefined' && _isiOS) {
+                        constrains = {deviceId: cameraId}
+                    }
+                } else if(camera != null && camera.groupId != null && camera.groupId != '') {
+                    constrains = {groupId: {exact: camera.groupId}};
+                    if(typeof cordova != 'undefined' && _isiOS) {
+                        constrains = {groupId: camera.groupId}
+                    }
+                } else if(deviceToSwitch != null && deviceToSwitch.deviceId != null && deviceToSwitch.deviceId != '') {
+                    constrains = {groupId: {exact: deviceToSwitch.groupId}};
+                    if(typeof cordova != 'undefined' && _isiOS) {
+                        constrains = {groupId: deviceToSwitch.groupId}
+                    }
                 }
+
                 //TODO: make offers queue as this code makes offer twice - after disableVideo and after enableVideo
                 var toggleCamera = function(videoStream) {
                     var videoTrack = videoStream.getVideoTracks()[0];
@@ -6206,9 +6229,13 @@ window.WebRTCconferenceLib = function app(options){
                         app.event.dispatch('cameraToggled');
                     }
 
-                    if(cameraId != null) {
+                    if(camera != null && camera.deviceId != null && camera.deviceId != '') {
                         currentCameraDevice = videoInputDevices.filter(function (d) {
-                            return d.deviceId == cameraId;
+                            return d.deviceId == camera.deviceId;
+                        })[0];
+                    } else if(camera != null && camera.groupId != null && camera.groupId != '') {
+                        currentCameraDevice = videoInputDevices.filter(function (d) {
+                            return d.groupId == camera.groupId;
                         })[0];
                     } else currentCameraDevice = deviceToSwitch;
                 }
@@ -7397,6 +7424,7 @@ window.WebRTCconferenceLib = function app(options){
             var videoDevices = 0;
             var audioDevices = 0;
             for(var i in mediaDevices) {
+                log('initOrConnectWithNodeJs: enumerateDevices: device: ', mediaDevices[i]);
                 if (mediaDevices[i].kind === 'videoinput' || mediaDevices[i].kind === 'video') {
                     videoDevices++;
                 } else if (mediaDevices[i].kind === 'audioinput' || mediaDevices[i].kind === 'audio') {
@@ -8092,7 +8120,7 @@ window.WebRTCconferenceLib = function app(options){
                 if(app.state == 'reconnecting') {
                     app.state = 'connected';
                     log('initWithNodeJs: socket: RECONNECTED')
-                    socket.emit('Streams/webrtc/joined', {username:localParticipant.identity, sid:localParticipant.sid, room:options.roomName, isiOS: _isiOS, info: _localInfo});
+                    socket.emit('Streams/webrtc/joined', {username:localParticipant.identity, sid:localParticipant.sid, room:options.roomName, roomPublisher: options.roomPublisher, isiOS: _isiOS, info: _localInfo});
                     localParticipant.sid = socket.id;
                     return;
                 }

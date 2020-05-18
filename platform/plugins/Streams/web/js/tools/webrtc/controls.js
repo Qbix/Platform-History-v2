@@ -1103,7 +1103,7 @@
                                         Q.Dialogs.pop();
                                         tool.closeAllDialogues();
 
-                                        tool.WebRTCLib.conferenceControl.toggleCameras(mediaDevice.deviceId, function () {
+                                        tool.WebRTCLib.conferenceControl.toggleCameras({devideId:mediaDevice.deviceId,groupId:mediaDevice.groupId}, function () {
                                             var localScreens = tool.WebRTCLib.localParticipant().screens;
                                             var i, screen;
                                             for (i = 0; screen = localScreens[i]; i++) {
@@ -2106,7 +2106,6 @@
 					for (i = 0; listItem = tool.participantsList[i]; i++){
 						if(listItem.participant != screen.participant) continue;
 
-						screen.isActive = true;
 						listItem.showPartcicipantScreens(screen, manually);
 					}
 				}

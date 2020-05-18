@@ -916,10 +916,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 				screensRendering.showLoader('beforeCamerasToggle', {participant: e.participant});
 			});
 			WebRTCconference.event.on('screensharingStarted', function (e) {
-				log('screen sharing started')
+				log('screen sharing started', e)
                 if(screensRendering.getActiveViewMode() != 'screenSharing') {
                     var screensharingTrack;
-				    if(e.content.trackId != null) {
+				    if(e.content && e.content.trackId != null) {
                         screensharingTrack = e.participant.videoTracks().filter(function (t) {
                             return t.mediaStreamTrack.id == e.content.trackId ? true : false;
                         })[0];
@@ -1495,6 +1495,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					useAsLibrary: true,
 					nodeServer: socketServer,
 					roomName: roomId,
+					roomPublisher: _roomStream.getAll().publisherId,
 					sid: Q.Users.loggedInUser.id,
 					username:  Q.Users.loggedInUser.id + '\t' + _options.startTime,
 					video: false,
@@ -5053,7 +5054,7 @@ return;
 
 			if(WebRTCconference.localParticipant() != null) WebRTCconference.localParticipant().online = false;
 
-			if(WebRTCconference.roomParticipants().length === 0) {
+			/*if(WebRTCconference.roomParticipants().length === 0) {
 
 				Q.req("Streams/webrtc", ["endRoom"], function (err, response) {
 					log('stop: room closed');
@@ -5075,7 +5076,7 @@ return;
 					}
 				});
 
-			}
+			}*/
 			if(appDebug.sendReportsInterbal != null) {
                 appDebug.sendReportToServer();
 			    clearTimeout(appDebug.sendReportsInterbal);
