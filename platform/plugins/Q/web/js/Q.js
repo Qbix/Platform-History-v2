@@ -11620,7 +11620,11 @@ Q.Pointer = {
 					t = t.parentNode
 					continue;
 				}
-				div.innerHTML = t.getAttribute('data-touchlabel');
+				var content = t.getAttribute('data-touchlabel');
+				if (!content) {
+					return;
+				}
+				div.innerHTML = content;
 				var erect = element.getBoundingClientRect();
 				var rect = div.getBoundingClientRect();
 				var trect = t.getBoundingClientRect();
