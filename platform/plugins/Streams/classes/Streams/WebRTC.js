@@ -44,6 +44,7 @@ WebRTC.listen = function () {
 	}
 
 	var _debug = Q.Config.get(['Streams', 'webrtc', 'debug'], false);
+    var Streams = Q.Streams;
 	var io = socket.io;
 	io.on('connection', function(socket) {
 
@@ -156,13 +157,21 @@ WebRTC.listen = function () {
 		});
 
 		var room;
+		var roomPublisherId;
 		socket.on('Streams/webrtc/joined', function (identity) {
-			if(_debug) console.log('Got message: joined', identity, socket.id);
+			if(_debug) console.log('Got message: joined ', identity, socket.id);
 			socket.username = identity.username;
+			socket.userPlatformId = identity.username.split('\t')[0];
 			socket.info = identity.info;
 			room = identity.room;
+            roomPublisherId = identity.roomPublisher;
 			socket.join(identity.room, function () {
 				if(_debug) console.log(socket.id + 'now in rooms: ', socket.rooms);
+                io.of('/').in(room).clients(function (error, clients) {
+                    if(_debug) console.log('PARTICIPANTS IN THE ROOM', clients.length);
+
+
+                });
 			})
 
 
@@ -209,7 +218,19 @@ WebRTC.listen = function () {
 		});
 
 		socket.on('disconnect', function() {
-			if(_debug) console.log('DISCONNECT', socket.id);
+			if(!room) return;
+			if(_debug) console.log('DISCONNECT', socket.id, socket.userPlatformId, 'Streams/webrtc/' + room);
+            io.of('/').in(room).clients(function (error, clients) {
+                if(_debug) console.log('PARTICIPANTS IN THE ROOM', clients.length);
+                if(clients.length === 0) {
+                    Q.plugins.Streams.fetchOne(socket.userPlatformId, roomPublisherId, 'Streams/webrtc/' + room, function (error, stream) {
+                            stream.setAttribute('endTime', +Date.now());
+                            stream.save();
+                        }
+                    )
+				}
+            });
+
 			socket.broadcast.to(room).emit('Streams/webrtc/participantDisconnected', socket.id);
 		});
 

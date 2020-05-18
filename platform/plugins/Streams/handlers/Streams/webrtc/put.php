@@ -57,7 +57,6 @@ function Streams_webrtc_put($params = array()) {
         $streamName = "Streams/webrtc/$roomId";
         $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
         $startTime = date('YmdHis', $stream->getAttribute('startTime'));
-
         $folderName = $roomId . '_' . $startTime;
 
         $path = $logsPath . DS . $folderName;
@@ -72,9 +71,10 @@ function Streams_webrtc_put($params = array()) {
         }
 
         $toSave = filesize($path.DS.$filename) ? ',' . PHP_EOL . trim($toSave,"[]") : trim($toSave,"[]");
-        file_put_contents($path.DS.$filename, $toSave, FILE_APPEND);
+        $reslt = file_put_contents($path.DS.$filename, $toSave, FILE_APPEND);
 
-        removeOldLogs($logsPath);
+
+        //removeOldLogs($logsPath);
         umask($mask);
 
 		Q_Response::setSlot("updateLog", $toSave);

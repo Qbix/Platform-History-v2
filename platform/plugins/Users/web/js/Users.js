@@ -2544,6 +2544,13 @@
 	var ddc = document.documentElement;
 	Users.onLogin = new Q.Event(function () {
 		ddc.className = ddc.className.replace(' Users_loggedOut', '') + ' Users_loggedIn';
+
+		// set language
+		var info = Q.first(Q.info.languages);
+		if (info) {
+			Q.Text.setLanguage.apply(Q.Text, info);
+		}
+
 	}, 'Users');
 	Users.onLogout = new Q.Event(function () {
 		Q.Session.clear();
