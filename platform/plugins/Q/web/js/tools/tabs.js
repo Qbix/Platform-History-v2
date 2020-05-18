@@ -15,6 +15,7 @@
 	 *  @param {Array} [options.urls] An associative array of name: url pairs to override the default urls.
 	 *  @param {String} [options.field='tab'] Uses this field when urls doesn't contain the tab name.
 	 *  @param {Boolean} [options.checkQueryString=false] Whether the default getCurrentTab should check the querystring when determining the current tab
+	 *  @param {boolean} [options.touchlabels=Q.info.isMobile] Whether to show touchlabels on the tabs
 	 *  @param {Boolean} [options.vertical=false] Stack the tabs vertically instead of horizontally
 	 *  @param {Boolean} [options.compact=false] Display the tabs interface in a compact space with a contextual menu
 	 *  @param {Object} [options.overflow] Object defined element with overflowed menu items. If false, don't crop overflowed menu elements.
@@ -43,6 +44,10 @@
 			var tool = this;
 			var state = tool.state;
 			var $te = $(tool.element);
+			
+			if (state.touchlabels === undefined) {
+				state.touchlabels = Q.info.isMobile;
+			}
 			
 			if (state.contextualHandler == null) {
 				state.contextualHandler = function ($jq) {
@@ -75,6 +80,7 @@
 			slot: 'content,title',
 			selectors: { content: '#content_slot' },
 			checkQueryString: false,
+			touchlabels: undefined,
 			contextualHandler: null,
 			overflow: {
 				content: '<span><span>{{count}} more</span></span>',
@@ -380,6 +386,13 @@
 						if (w2 > w) {
 							index = i-1;
 							return false;
+						}
+					});
+				}
+				if (state.touchlabels) {
+					$tabs.each(function () {
+						if (!this.hasAttribute('data-touchlabel')) {
+							this.setAttribute('data-touchlabel', $(this).text());
 						}
 					});
 				}

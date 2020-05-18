@@ -15,6 +15,7 @@
  *  @param {boolean} [options.checkQueryString=false] Whether the default getCurrentTab should check the querystring when determining the current tab
  *  @param {boolean} [$options.vertical=false] Stack the tabs vertically instead of horizontally
  *  @param {boolean} [$options.compact=false] Display the tabs interface in a compact space with a contextual menu
+ *  @param {boolean} [$options.touchlabels=Q_Request::isMobile()] Whether to show touchlabels on the tabs
  *  @param {Object} [$options.overflow]
  *  @param {String} [$options.overflow.content] The html that is displayed when the tabs overflow. You can interpolate {{count}}, {{text}} or {{html}} in the string. 
  *  @param {String} [$options.overflow.glyph] Override the glyph that appears next to the overflow text. You can interpolate {{count}} here
@@ -54,7 +55,11 @@ function Q_tabs_tool($options)
 	 * @var array $tabs
 	 * @var boolean $vertical
 	 * @var boolean $compact
+	 * @var array $touchlabels
 	 */
+	if (!isset($touchlabels)) {
+		$touchlabels = Q_Request::isMobile(); // default
+	}
 	$sel = isset($_REQUEST[$field]) ? $_REQUEST[$field] : null;
 	$result = '';
 	$i = 0;
@@ -108,11 +113,14 @@ function Q_tabs_tool($options)
 			'class' => "Q_tabs_tab $classes_string$selected_class", 
 			'data-name' => $name
 		), Q::ifset($attributes, $name, array()));
+		if ($touchlabels and !isset($attributesMerged['data-touchlabel'])) {
+			$attributesMerged['data-touchlabel'] = $title;
+		}
 		$a = Q_Html::a($urls[$name], $title_container);
 		$result .= Q_Html::tag('li', $attributesMerged, $a);
 	}
 	Q_Response::setToolOptions(compact(
-		'selectors', 'slot', 'urls', 'defaultTabName',
+		'selectors', 'slot', 'urls', 'defaultTabName', 'touchlabels',
 		'vertical', 'compact', 'overflow',
 		'field', 'loader', 'beforeSwitch', 'beforeScripts', 'onActivate'
 	));

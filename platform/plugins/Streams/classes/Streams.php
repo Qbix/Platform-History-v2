@@ -966,7 +966,7 @@ abstract class Streams extends Base_Streams
 						$stream->$f = $info[$f];
 					}
 				}
-				if (isset($info['type']) and $info['type'] !== $type) {
+				if (isset($info['type']) and $type and $info['type'] !== $type) {
 					throw new Streams_Exception_Type(array(
 						'expectedType' => $info['type'],
 						'type' => $type
