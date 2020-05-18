@@ -506,6 +506,9 @@
 .Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control svg{
     height:50px;
 }
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn .camera-icon path {
+    fill: #4AAA4E;
+}
 .Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn.Streams_webrtc_isLocal .camera-icon path,
 .Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-audio-btn.Streams_webrtc_isLocal .microphone-icon path {
     fill: #C12337;
