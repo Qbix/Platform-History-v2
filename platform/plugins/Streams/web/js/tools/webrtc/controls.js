@@ -283,6 +283,20 @@
 
 				}, tool);
 
+                tool.WebRTCLib.event.on('screensharingStarted', function (e) {
+                    var participant = e.participant;
+
+                    //tool.participantsPopup().(participant);
+
+                    for(var i in participant.screens) {
+                    	if(!participant.screens.screensharing) continue;
+
+					}
+
+                });
+                tool.WebRTCLib.event.on('screensharingFailed', function (e) {
+                });
+
 			},
 
 			showIosPermissionsInstructions: function(kind) {
@@ -1089,7 +1103,7 @@
                                         Q.Dialogs.pop();
                                         tool.closeAllDialogues();
 
-                                        tool.WebRTCLib.conferenceControl.toggleCameras(mediaDevice.deviceId, function () {
+                                        tool.WebRTCLib.conferenceControl.toggleCameras({devideId:mediaDevice.deviceId,groupId:mediaDevice.groupId}, function () {
                                             var localScreens = tool.WebRTCLib.localParticipant().screens;
                                             var i, screen;
                                             for (i = 0; screen = localScreens[i]; i++) {
@@ -1878,11 +1892,13 @@
 				var ListItem = function () {
 					this.listElement = null;
 					this.audioBtnEl = null;
-					this.videoBtnEl = null;
+					this.cameraBtnEl = null;
+					this.videoBtnsEl = null;
 					this.liveStatusEl = null;
 					this.participant = null;
 					this.isAudioMuted = null;
 					this.isVideoMuted = null;
+					this.screenSharingIsMuted = null;
 					this.manuallyToggled = false;
 					this.audioToggledManually = false;
 					this.isActive = false;
@@ -1918,10 +1934,10 @@
 						for (i = 0; listItem = tool.participantsList[i]; i++){
 							if(listItem.participant == localParticipant) {
 								if(tool.WebRTCLib.conferenceControl.cameraIsEnabled()){
-									listItem.videoBtnEl.innerHTML = listIcons.disabledScreen;
+									listItem.cameraBtnEl.innerHTML = listIcons.disabledCamera;
 									tool.WebRTCLib.conferenceControl.disableVideo();
 								} else {
-									listItem.videoBtnEl.innerHTML = listIcons.screen;
+									listItem.cameraBtnEl.innerHTML = icons.camera;
 									tool.WebRTCLib.conferenceControl.enableVideo();
 								}
 								tool.updateControlBar();
@@ -1951,37 +1967,34 @@
 						}
 					};
 					this.muteVideo = function () {
-						this.videoBtnEl.innerHTML = listIcons.disabledScreen;
+						this.cameraBtnEl.innerHTML = listIcons.disabledCamera;
 						this.isVideoMuted = true;
 						this.isActive = false;
 					};
 					this.unmuteVideo = function () {
-						this.videoBtnEl.innerHTML = listIcons.screen;
+						this.cameraBtnEl.innerHTML = icons.camera;
 						this.isVideoMuted = false;
 						this.isActive = true;
 					};
+					this.muteScreenSharingVideo = function () {
+                        this.screenSharingBtnEl.innerHTML = listIcons.disabledScreen;
+                        this.screenSharingIsMuted = true;
+					};
+					this.unmuteScreenSharingVideo = function () {
+                        this.screenSharingBtnEl.innerHTML = listIcons.screen;
+						this.screenSharingIsMuted = false;
+					};
 					this.muteAudio = function () {
 						if(this.isAudioMuted == true) return;
-						var participant = this.participant;
-
-						for(var i in participant.tracks) {
-							var track = participant.tracks[i];
-							if(track.kind == 'audio') track.trackEl.muted = true;
-						}
+                        this.participant.muteAudio();
 						this.audioBtnEl.innerHTML = listIcons.disabledSpeaker;
 						this.isAudioMuted = true;
-						this.participant.audioIsMuted = this.isAudioMuted;
 					};
 					this.unmuteAudio = function () {
 						if(this.isAudioMuted == false) return;
-						var participant = this.participant;
-						for(var i in participant.tracks) {
-							var track = participant.tracks[i];
-							if(track.kind == 'audio') track.trackEl.muted = false;
-						}
+                        this.participant.unmuteAudio();
 						this.audioBtnEl.innerHTML = listIcons.loudSpeaker;
 						this.isAudioMuted = false;
-						this.participant.audioIsMuted = this.isAudioMuted;
 					};
 					this.remove = function () {
 						if(this.listElement.parentNode != null) this.listElement.parentNode.removeChild(this.listElement);
@@ -2000,28 +2013,61 @@
 					this.toggleScreen = function (manually) {
 						var participant = this.participant;
 						var screens = participant.screens;
-						var enabledVideoTracks = participant.tracks.filter(function (t) {
-							return t.kind == 'video' && t.mediaStreamTrack != null;
-						}).length;
-
 
 						this.manuallyToggled = manually;
 						if(this.isActive == false) {
-							this.showPartcicipantScreens(null, manually);
-						} else {
-							this.removePartcicipantScreens();
-						}
+                            for(let s in screens) {
+                                if(screens[s].screensharing) continue;
+                                this.showPartcicipantScreens(screens[s], manually);
+                            }
+                            this.unmuteVideo();
+
+                        } else {
+                            for(let s in screens) {
+                                if(screens[s].screensharing) continue;
+                                this.removePartcicipantScreens(screens[s]);
+                            }
+                            this.muteVideo();
+                        }
 
                         tool.WebRTCClass.screenRendering.updateLayout();
 
 					};
-					this.removePartcicipantScreens = function () {
-						var screens = this.participant.screens;
+					this.toggleScreenSharingScreen = function () {
+						var participant = this.participant;
+						var screens = participant.screens;
+
+                        if(this.screenSharingIsMuted) {
+                            for(let s in screens) {
+                                if(!screens[s].screensharing) continue;
+                                this.showPartcicipantScreens(screens[s]);
+                            }
+
+                            this.unmuteScreenSharingVideo();
+
+                        } else {
+                            for(let s in screens) {
+                                if(!screens[s].screensharing) continue;
+                                this.removePartcicipantScreens(screens[s]);
+                            }
+                            this.muteScreenSharingVideo();
+                        }
+
+                        tool.WebRTCClass.screenRendering.updateLayout();
+
+					};
+					this.removePartcicipantScreens = function (screen) {
+                        var screens;
+                        if(screen != null) {
+                            screens = [screen]
+                        } else {
+                            screens = this.participant.screens;
+                        }
+
 						for(var s in screens) {
 							let screen = screens[s];
 							screen.hide();
 						}
-						this.muteVideo();
 					};
 					this.showPartcicipantScreens = function (screen, manually) {
 						var screens;
@@ -2044,7 +2090,6 @@
 							screen.show();
 
 						}
-						this.unmuteVideo();
 					};
 					this.showFacebookLiveIcon = function() {
 						this.liveStatusEl.innerHTML = icons.facebookLive;
@@ -2061,7 +2106,6 @@
 					for (i = 0; listItem = tool.participantsList[i]; i++){
 						if(listItem.participant != screen.participant) continue;
 
-						screen.isActive = true;
 						listItem.showPartcicipantScreens(screen, manually);
 					}
 				}
@@ -2071,17 +2115,31 @@
 						let item = tool.participantsList[i];
 						if(participant != item.participant) continue;
 
-						let activeScreens = 0;
+						let activeCameraScreens = 0;
+						let activeScreenSharingScreens = 0;
 						for(let s in participant.screens) {
 							if(participant.screens[s].isActive) {
-								activeScreens++;
+								if(!participant.screens[s].screensharing) {
+                                    activeCameraScreens++;
+								} else {
+                                    activeScreenSharingScreens++;
+								}
+
 							}
 						}
-						if(activeScreens == 0) {
+						if(activeCameraScreens == 0) {
 							item.muteVideo();
 						} else {
 							item.unmuteVideo();
 						}
+						if(activeScreenSharingScreens == 0) {
+							item.muteScreenSharingVideo();
+                            if(item.videoBtnsEl.classList.contains('Streams_webrtc_screensharing-active')) item.videoBtnsEl.classList.remove('Streams_webrtc_screensharing-active')
+
+                        } else {
+							item.unmuteScreenSharingVideo();
+                            if(!item.videoBtnsEl.classList.contains('Streams_webrtc_screensharing-active')) item.videoBtnsEl.classList.add('Streams_webrtc_screensharing-active')
+                        }
 						break;
 					}
 
@@ -2114,7 +2172,7 @@
 					disabledSpeaker: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="0 0 99.5 99.5" enable-background="new 0 0 99.5 99.5" xml:space="preserve">  <path fill="#8C8C8C" d="M49.749,99.5C22.317,99.5,0,77.18,0,49.749C0,22.317,22.317,0,49.749,0S99.5,22.317,99.5,49.749   C99.5,77.18,77.182,99.5,49.749,99.5z"/>  <g>   <path fill="#FFFFFF" d="M47.654,32.336c-0.008-0.056-0.008-0.113-0.021-0.168c-0.028-0.109-0.082-0.211-0.159-0.295    c-0.037-0.042-0.081-0.079-0.127-0.11c-0.047-0.031-0.101-0.05-0.151-0.075c-0.055-0.013-0.11-0.025-0.165-0.037    c-0.149,0.004-0.192-0.008-0.333,0.051c-0.051,0.022-0.097,0.056-0.146,0.084l-10.089,7.573l-8.545-0.001    c-0.06,0.007-0.121,0.007-0.179,0.023c-0.117,0.032-0.223,0.093-0.309,0.179c-0.042,0.043-0.079,0.091-0.109,0.143    c-0.03,0.052-0.053,0.108-0.069,0.166c-0.015,0.057-0.016,0.118-0.023,0.178v19.964c0.007,0.061,0.008,0.121,0.023,0.179    c0.016,0.058,0.039,0.114,0.069,0.167c0.06,0.104,0.147,0.191,0.252,0.251c0.052,0.028,0.108,0.052,0.166,0.067    c0.058,0.015,0.119,0.015,0.179,0.023h7.885l11.851-11.852V32.336z"/>   <path fill="#FFFFFF" d="M46.551,68.27c0.13,0.073,0.16,0.11,0.31,0.131c0.055,0.009,0.113,0.011,0.169,0.004    c0.056-0.005,0.112-0.017,0.165-0.034c0.107-0.041,0.203-0.103,0.279-0.187c0.038-0.043,0.072-0.091,0.098-0.14    c0.072-0.135,0.063-0.178,0.082-0.326V57.356l-6.708,6.708L46.551,68.27z"/>   <path fill="#FFFFFF" d="M55.873,59.316c-0.385,0.395-0.375,1.027,0.021,1.413c0.193,0.188,0.445,0.283,0.695,0.283    c0.262,0,0.521-0.103,0.721-0.304c5.972-6.156,5.136-12.229,3.31-16.319l-1.479,1.48C60.492,49.367,60.773,54.264,55.873,59.316z"    />   <path fill="#FFFFFF" d="M55.88,39.342c-0.361,0.367-0.371,0.937-0.05,1.329l1.386-1.385C56.824,38.964,56.249,38.974,55.88,39.342z    "/>   <path fill="#FFFFFF" d="M62.068,34.03c-0.189,0.191-0.283,0.44-0.286,0.689l0.981-0.982C62.511,33.741,62.26,33.837,62.068,34.03z"    />   <path fill="#FFFFFF" d="M62.06,64.625c-0.385,0.396-0.375,1.029,0.021,1.414c0.192,0.188,0.443,0.282,0.694,0.282    c0.263,0,0.522-0.103,0.72-0.305c10.728-11.057,6.791-21.938,3.22-27.723l-1.401,1.401C68.548,45.015,71.756,54.63,62.06,64.625z"    />   <path fill="#FFFFFF" d="M67.921,69.065c-0.385,0.396-0.375,1.028,0.021,1.414c0.194,0.187,0.445,0.28,0.696,0.28    c0.26,0,0.521-0.1,0.719-0.303c15.146-15.612,7.416-30.945,2.718-37.522l-1.388,1.388C75.15,40.513,82.071,54.48,67.921,69.065z"/>   <path fill="#FFFFFF" d="M80.402,18.845c-0.385,0-0.771,0.147-1.066,0.441L18.422,80.201c-0.589,0.59-0.589,1.543,0,2.133    c0.294,0.293,0.68,0.441,1.066,0.441c0.386,0,0.772-0.148,1.066-0.441l60.913-60.915c0.59-0.588,0.59-1.544,0-2.132    C81.175,18.992,80.789,18.845,80.402,18.845z"/>  </g>  </svg>',
 					screen: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="0 0 99.5 99.498" enable-background="new 0 0 99.5 99.498" xml:space="preserve">  <path fill="#4AAA4E" d="M49.749,99.498C22.317,99.498,0,77.181,0,49.749C0,22.318,22.317,0,49.749,0S99.5,22.317,99.5,49.749   C99.5,77.181,77.182,99.498,49.749,99.498z"/>  <g>   <path fill="#FFFFFF" d="M22.158,28.781c-1.204,0-2.172,0.969-2.172,2.173v35.339c0,1.204,0.969,2.173,2.172,2.173h20.857v6.674    h-2.366c-0.438,0-0.79,0.353-0.79,0.789c0,0.438,0.353,0.79,0.79,0.79h18.203c0.438,0,0.789-0.352,0.789-0.79    c0-0.438-0.353-0.789-0.789-0.789h-2.366v-6.674h20.855c1.203,0,2.173-0.969,2.173-2.173V30.954c0-1.204-0.97-2.173-2.173-2.173    H22.158z M22.751,31.47h53.997v34.081H22.751V31.47z"/>   <polygon fill="#F6F4EC" points="42.159,38.611 42.159,59.573 59.137,49.771  "/>  </g>  </svg>',
 					disabledScreen: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="0 0 99.499 99.498" enable-background="new 0 0 99.499 99.498" xml:space="preserve">  <path fill="#8C8C8C" d="M49.749,99.498C22.317,99.498,0,77.18,0,49.749S22.317,0,49.749,0s49.75,22.317,49.75,49.749   S77.182,99.498,49.749,99.498z"/>  <g>   <path fill="#FFFFFF" d="M77,31v35H38.234l-1.984,2H43v7h-2.352c-0.438,0-0.79,0.563-0.79,1s0.353,1,0.79,1h18.203    c0.438,0,0.789-0.563,0.789-1s-0.352-1-0.789-1H56v-7h21.341C78.545,68,80,67.497,80,66.293V30.954C80,29.75,78.545,29,77.341,29    h-2.337l-2.02,2H77z"/>   <path fill="#FFFFFF" d="M23,66V31h42.244l2.146-2H22.158C20.954,29,20,29.75,20,30.954v35.339C20,67.497,20.954,68,22.158,68h6.091    l2.11-2H23z"/>   <polygon fill="#FFFFFF" points="42,54.557 51.621,44.936 42,38.611  "/>   <polygon fill="#FFFFFF" points="56.046,47.74 47.016,56.769 59.137,49.771  "/>   <path fill="#FFFFFF" d="M81.061,21.311c0.586-0.585,0.586-1.536,0-2.121C80.768,18.896,80.384,18.75,80,18.75    s-0.768,0.146-1.061,0.439L18.33,79.799c-0.586,0.586-0.586,1.535,0,2.121c0.293,0.293,0.677,0.439,1.061,0.439    s0.768-0.146,1.061-0.439L81.061,21.311z"/>  </g>  </svg>',
-					locDisabledCamera: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-0.165 -0.245 100 99.999" enable-background="new -0.165 -0.245 100 99.999"    xml:space="preserve">  <path fill="#8C8C8C" d="M49.834-0.245c-27.569,0-50,22.43-50,50c0,27.57,22.429,49.999,50,49.999c27.57,0,50-22.429,50-49.999   C99.835,22.186,77.404-0.245,49.834-0.245z M25.516,37.254h29.489L34.73,60.791h-9.214V37.254z M24.492,75.004l47.98-55.722   l3.046,2.623L27.538,77.627L24.492,75.004z M77.71,61.244l-15.599-9.006v8.553H44.016l18.096-21.006v6.309l15.599-9.006V61.244z"/>  </svg>',
+					disabledCamera: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-0.165 -0.245 100 99.999" enable-background="new -0.165 -0.245 100 99.999"    xml:space="preserve">  <path fill="#8C8C8C" d="M49.834-0.245c-27.569,0-50,22.43-50,50c0,27.57,22.429,49.999,50,49.999c27.57,0,50-22.429,50-49.999   C99.835,22.186,77.404-0.245,49.834-0.245z M25.516,37.254h29.489L34.73,60.791h-9.214V37.254z M24.492,75.004l47.98-55.722   l3.046,2.623L27.538,77.627L24.492,75.004z M77.71,61.244l-15.599-9.006v8.553H44.016l18.096-21.006v6.309l15.599-9.006V61.244z"/>  </svg>',
 					locDisabledMic: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-0.165 -0.245 100 99.999" enable-background="new -0.165 -0.245 100 99.999"    xml:space="preserve">  <path fill="#8C8C8C" d="M49.834-0.245c-27.569,0-50,22.43-50,50c0,27.57,22.429,49.999,50,49.999c27.57,0,50-22.429,50-49.999   C99.835,22.186,77.404-0.245,49.834-0.245z M41.411,32.236c0.001-4.678,3.794-8.473,8.473-8.473c4.681,0,8.472,3.793,8.472,8.473   v0.502L41.421,52.4c-0.001-0.068-0.01-0.135-0.01-0.203V32.236z M35.376,42.216h3.379v10.177c0,0.934,0.127,1.836,0.345,2.703   l-2.616,3.037c-0.708-1.713-1.107-3.58-1.107-5.535V42.216z M64.392,52.598c0,7.357-5.51,13.551-12.818,14.408v5.436h6.783v3.381   H41.411v-3.381h6.783v-5.436c-2.8-0.328-5.331-1.443-7.394-3.105l2.317-2.688c1.875,1.441,4.217,2.309,6.767,2.309   c6.146,0,11.127-4.984,11.127-11.129V42.216h3.381V52.598z M44.954,59.078l13.403-15.56v8.677c0,4.68-3.793,8.475-8.473,8.475   C48.042,60.67,46.344,60.076,44.954,59.078z M27.421,77.139l-3.046-2.623l47.979-55.723l3.046,2.623L27.421,77.139z"/>  </svg>'
 				}
 
@@ -2127,11 +2185,17 @@
 					var participantItem = document.createElement('LI');
 					var tracksControlBtns = document.createElement('DIV');
 					tracksControlBtns.className = 'Streams_webrtc_tracks-control';
-					var muteVideoBtn = document.createElement('DIV');
-					muteVideoBtn.className = 'Streams_webrtc_mute-video-btn' + (isLocal ? ' Streams_webrtc_isLocal' : '');
-					muteVideoBtn.innerHTML = (tool.WebRTCLib.conferenceControl.cameraIsEnabled() ? listIcons.screen : listIcons.disabledScreen);
+					var muteVideo = document.createElement('DIV');
+					muteVideo.className = 'Streams_webrtc_mute-video-btn' + (isLocal ? ' Streams_webrtc_isLocal' : '');
+                    var muteCameraBtn = document.createElement('DIV');
+                    muteCameraBtn.className = 'Streams_webrtc_mute-camera-btn';
+                    muteCameraBtn.innerHTML = isLocal ? (tool.WebRTCLib.conferenceControl.cameraIsEnabled() ? icons.camera : listIcons.disabledCamera) : listIcons.disabledCamera;
 
-					var muteAudioBtn = document.createElement('DIV');
+                    var muteScreenSharingBtn = document.createElement('DIV');
+                    muteScreenSharingBtn.className = 'Streams_webrtc_mute-screensharing-btn';
+                    muteScreenSharingBtn.innerHTML = listIcons.disabledScreen;
+
+                    var muteAudioBtn = document.createElement('DIV');
 					muteAudioBtn.className = 'Streams_webrtc_mute-audio-btn' + (isLocal ? ' Streams_webrtc_isLocal' : '');
 					muteAudioBtn.innerHTML = isLocal ? (tool.WebRTCLib.conferenceControl.micIsEnabled() ? icons.microphone : listIcons.locDisabledMic) : listIcons.loudSpeaker;
 					var participantIdentity = document.createElement('DIV');
@@ -2179,7 +2243,9 @@
 					});
 
 					participantItem.appendChild(tracksControlBtns);
-					tracksControlBtns.appendChild(muteVideoBtn);
+                    muteVideo.appendChild(muteCameraBtn);
+                    muteVideo.appendChild(muteScreenSharingBtn);
+					tracksControlBtns.appendChild(muteVideo);
 					tracksControlBtns.appendChild(muteAudioBtn);
 					participantItem.appendChild(tracksControlBtns);
 					participantIdentity.appendChild(audioVisualization);
@@ -2193,7 +2259,9 @@
 					var listItem = new ListItem();
 					listItem.participant = roomParticipant;
 					listItem.listElement = participantItem;
-					listItem.videoBtnEl = muteVideoBtn;
+                    listItem.videoBtnsEl = muteVideo;
+                    listItem.cameraBtnEl = muteCameraBtn;
+                    listItem.screenSharingBtnEl = muteScreenSharingBtn;
 					listItem.audioBtnEl = muteAudioBtn;
 					listItem.liveStatusEl = liveStatus;
 					tool.participantsList.push(listItem);
@@ -2201,8 +2269,11 @@
 					muteAudioBtn.addEventListener('click', function (e) {
 						listItem.toggleAudio(true);
 					});
-					muteVideoBtn.addEventListener('click', function (e) {
+                    muteCameraBtn.addEventListener('click', function (e) {
 						listItem.toggleScreen(true);
+					});
+                    muteScreenSharingBtn.addEventListener('click', function (e) {
+						listItem.toggleScreenSharingScreen();
 					});
 
 				}
@@ -2218,10 +2289,10 @@
 					for (i = 0; listItem = tool.participantsList[i]; i++){
 						if(listItem.participant == localParticipant) {
 							if(tool.WebRTCLib.conferenceControl.cameraIsEnabled()){
-								listItem.videoBtnEl.innerHTML = listIcons.screen;
+								listItem.cameraBtnEl.innerHTML = icons.camera;
 								listItem.isVideoMuted = false;
 							} else {
-								listItem.videoBtnEl.innerHTML = listIcons.disabledScreen;
+								listItem.cameraBtnEl.innerHTML = listIcons.disabledCamera;
 								listItem.isVideoMuted = true;
 							}
 							break;

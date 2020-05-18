@@ -24,8 +24,10 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
         $stream = Streams_WebRTC::getOrCreateStream($publisherId, $roomId);
 
         $endTime = $stream->getAttribute('endTime');
-        if($endTime != null && time() > $endTime) {
-            $stream->setAttribute('startTime', time());
+        $startTime = $stream->getAttribute('startTime');
+        if($startTime == null /*|| $endTime != null && time() > $endTime || $endTime*/) {
+
+            $stream->setAttribute('startTime', round(microtime(true) * 1000));
             $stream->clearAttribute('endTime');
             $stream->save();
         }
@@ -78,8 +80,8 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
 
         $streamName = "Streams/webrtc/$roomId";
         $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
-        $stream->setAttribute('endTime', time());
-        $stream->changed();
+        //$stream->setAttribute('endTime', time());
+        //$stream->changed();
 
         return (object) [
             'stream' => $stream,
