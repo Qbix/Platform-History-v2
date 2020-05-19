@@ -77,7 +77,8 @@
         },
         "Assets\/service": {
             "displayType": "Service",
-            "description": "service being offered"
+            "description": "service being offered",
+			"newService": "New Service"
         }
     },
     "messages": {
