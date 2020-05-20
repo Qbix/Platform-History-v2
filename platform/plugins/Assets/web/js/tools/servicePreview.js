@@ -10,7 +10,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 	var tool = this;
 	tool.preview = preview;
 
-	Q.addStylesheet('{{Assets}}/css/tools/servicePreview.css', { slotName: 'Assets' });
+	Q.addStylesheet('{{Assets}}/css/tools/ServicePreview.css', { slotName: 'Assets' });
 
 	preview.state.creatable.preprocess = function (_proceed) {
 		tool.openDialog(function (dialog) {
@@ -47,10 +47,13 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 		var tool = this;
 		tool.stream = stream;
 		var ps = tool.preview.state;
+		var $toolElement = $(tool.element);
+
+		$toolElement.attr('data-writeLevel', stream.testWriteLevel('edit'));
 
 		Q.Template.render('Assets/service/preview', {
 			title: stream.fields.title,
-			price: '($' + stream.getAttribute('price') + ')'
+			price: '($' + parseFloat(stream.getAttribute('price')).toFixed(2) + ')'
 		}, function (err, html) {
 			if (err) return;
 			tool.element.innerHTML = html;
@@ -73,7 +76,8 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 
 		Q.Streams.Stream.onAttribute(ps.publisherId, ps.streamName, "price")
 		.set(function (attributes, k) {
-			$("span.Assets_service_preview_price", tool.element).html("($" + attributes[k] + ")");
+			var price = parseFloat(attributes[k]).toFixed(2);
+			$("span.Assets_service_preview_price", tool.element).html("($" + price + ")");
 		}, tool);
 	},
 	edit: function () {
