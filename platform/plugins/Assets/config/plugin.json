@@ -89,7 +89,7 @@
 				"defaults": {
 					"title": "Assets Service",
 					"readLevel": 40,
-					"writeLevel": 0,
+					"writeLevel": 23,
 					"adminLevel": 0
 				}
 			}
