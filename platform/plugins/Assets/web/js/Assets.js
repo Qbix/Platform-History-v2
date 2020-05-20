@@ -753,7 +753,8 @@
 	Q.Tool.define({
 		"Assets/subscription": "{{Assets}}/js/tools/subscription.js",
 		"Assets/payment": "{{Assets}}/js/tools/payment.js",
-		"Assets/history": "{{Assets}}/js/tools/history.js"
+		"Assets/history": "{{Assets}}/js/tools/history.js",
+		"Assets/service/preview": "{{Assets}}/js/tools/servicePreview.js"
 	});
 	
 	Q.onInit.set(function () {

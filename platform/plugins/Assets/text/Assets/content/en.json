@@ -77,9 +77,7 @@
         },
         "Assets\/service": {
             "displayType": "Service",
-            "description": "service being offered",
-			"ManageServiceTemplates": "Manage Service Templates",
-			"newService": "New Service"
+            "description": "service being offered"
         }
     },
     "messages": {
@@ -95,5 +93,16 @@
         "Assets\/credits\/received": {
             "content": "Received {{amount}} credits"
         }
-    }
+    },
+	"services": {
+		"NewServiceTemplate": {
+			"Title": "New Service Template",
+			"TitlePlaceholder": "Service title",
+			"PricePlaceholder": "Set price",
+			"DescriptionPlaceholder": "Service description",
+			"SaveService": "Save Service"
+		},
+		"ManageServiceTemplates": "Manage Service Templates",
+		"ManageServices": "Manage Services"
+	}
 }

@@ -73,7 +73,7 @@
 	color: white;
 }
 
-.Assets_services h2 {
+.Assets_services #content_slot h2 {
 	text-align: center;
-	margin: 20px 0 10px;
+	margin: 20px 0 0;
 }
