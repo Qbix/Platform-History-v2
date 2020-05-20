@@ -78,6 +78,7 @@
         "Assets\/service": {
             "displayType": "Service",
             "description": "service being offered",
+			"ManageServiceTemplates": "Manage Service Templates",
 			"newService": "New Service"
         }
     },

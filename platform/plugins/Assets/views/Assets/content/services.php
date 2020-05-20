@@ -1,3 +1,4 @@
+<h2><?php echo $types['Assets/service']['ManageServiceTemplates'] ?></h2>
 <?php
 echo Q::tool("Streams/related", array(
 	"publisherId" => $communityId,
