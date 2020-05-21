@@ -53,7 +53,8 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 
 		Q.Template.render('Assets/service/preview', {
 			title: stream.fields.title,
-			price: '($' + parseFloat(stream.getAttribute('price')).toFixed(2) + ')'
+			price: '($' + parseFloat(stream.getAttribute('price')).toFixed(2) + ')',
+			editable: ps.editable
 		}, function (err, html) {
 			if (err) return;
 			tool.element.innerHTML = html;
@@ -156,7 +157,9 @@ Q.Template.set('Assets/service/preview',
 	+ '<div class="Streams_preview_contents">'
 	+ '<h3 class="Streams_preview_title Streams_preview_view">{{title}}</h3>'
 	+ '<span class="Assets_service_preview_price">{{price}}</span>'
+	+ '{{#if editable}}'
 	+ '<i class="icon-edit"></i>'
+	+ '{{/if}}'
 	+ '</div></div>'
 );
 
