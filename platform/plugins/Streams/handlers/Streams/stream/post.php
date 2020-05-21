@@ -133,9 +133,8 @@ function Streams_stream_post($params = array())
 		$stream =  Streams::create($user->id, $publisherId, $type, $fields, $relate, $result);
 	}
 	$messageTo = false;
-	if (isset($result['messagesTo'])) {
+	if (isset($result['messagesTo']) && !empty($result['messagesTo'])) {
 		$messageTo = reset($result['messagesTo']);
-		$messageTo = reset($messageTo);
 		if (is_array($messageTo)) {
 			$messageTo = reset($messageTo);
 		}
