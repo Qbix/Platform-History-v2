@@ -135,6 +135,7 @@ function Streams_stream_post($params = array())
 	$messageTo = false;
 	if (isset($result['messagesTo']) && !empty($result['messagesTo'])) {
 		$messageTo = reset($result['messagesTo']);
+		$messageTo = reset($messageTo);
 		if (is_array($messageTo)) {
 			$messageTo = reset($messageTo);
 		}
