@@ -553,7 +553,7 @@ class Streams_Avatar extends Base_Streams_Avatar
 	 */
 	function addPreloaded($asUserId=null)
 	{
-		self::$preloaded["{$this->publisherId}, {$this->name}"] = $this;
+		self::$preloaded["{$this->publisherId}, {$this->toUserId}"] = $this;
 	}
 	
 	/**
@@ -564,7 +564,7 @@ class Streams_Avatar extends Base_Streams_Avatar
 	 */
 	function removePreloaded()
 	{
-		unset(self::$preloaded["{$this->publisherId}, {$this->name}"]);
+		unset(self::$preloaded["{$this->publisherId}, {$this->toUserId}"]);
 	}
 
 	protected static $cache;
