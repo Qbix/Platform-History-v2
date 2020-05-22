@@ -67,7 +67,7 @@ class Streams_Invite extends Base_Streams_Invite
 	 * @param {string|array} [$options.notice] Information for the notice
 	 * @param {string|array} [$options.notice.html] HTML to display in the notice.
 	 *  This is a handlebars template which receives the fields
-	 *  {{stream...}}, {{clickOrTap}} and {{ClickOrTap}}.
+	 *  {{stream}}, {{clickOrTap}} and {{ClickOrTap}}.
 	 *  Defaults to the array("Streams/content", array("invite", "notice", "html"))
 	 * @param {array} [$options.userId=Users::loggedInUser()->id] The user to check
 	 * @return {boolean} Whether the notice was set

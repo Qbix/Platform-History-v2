@@ -1,4 +1,7 @@
 {
+	"errors": {
+		"HiddenFromYou": "This content is hidden from you."
+	},
     "preview": {
         "NewItemTitle": "New Item"
     },
