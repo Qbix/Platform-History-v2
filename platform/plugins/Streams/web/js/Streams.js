@@ -5810,7 +5810,7 @@ function _preloaded(elem) {
 	Stream.preloaded = null;
 	Q.each(Avatar.preloaded, function (i, fields) {
 		var avatar = new Avatar(fields);
-		Avatar.get.cache.set(fields.publisherId, 0, avatar, [null, avatar]);
+		Avatar.get.cache.set([fields.publisherId], 0, avatar, [null, avatar]);
 	});
 	Avatar.preloaded = null;
 }
