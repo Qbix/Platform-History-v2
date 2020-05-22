@@ -553,7 +553,6 @@ class Streams_Avatar extends Base_Streams_Avatar
 	 */
 	function addPreloaded($asUserId=null)
 	{
-		$this->calculateAccess($asUserId);
 		self::$preloaded["{$this->publisherId}, {$this->name}"] = $this;
 	}
 	
