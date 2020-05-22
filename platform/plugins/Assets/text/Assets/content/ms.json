@@ -12,7 +12,7 @@
     "payment": {
         "AboutOrder": "Maklumat mengenai pesanan",
         "PaymentMethod": "Kaedah pembayaran",
-        "ContactInfo": "Maklumat kenalan",
+        "ContactInfo": "Maklumat hubungan",
         "Pay": "Bayar"
     },
     "credits": {
@@ -26,7 +26,8 @@
         "Client": "Pelanggan",
         "To": "kepada",
         "From": "dari",
-        "HistoryEmpty": "Anda belum mempunyai data lagi"
+        "HistoryEmpty": "Anda belum mempunyai data lagi",
+        "SeeHistory": "Lihat sejarah pembayaran untuk {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Tetapkan Maklumat Pembayaran",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "Menerima kredit {{amount}}"
         }
+    },
+    "charge": {
+        "Subject": "Anda mendapat pembayaran sebanyak {{displayAmount}} dari {{call 'publisher.displayName'}} oleh &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hai, ini hanya untuk memberitahu anda {{1}} telah dikenakan {{2}} untuk {{3}} oleh {{4}}"
+    },
+    "charged": {
+        "Subject": "Terima kasih atas pembayaran anda untuk &quot;{{description}}&quot;",
+        "HavePaid": "Hai {{1}}, ini hanya pengesahan ringkas bahawa anda telah berjaya membayar {{2}} kepada {{3}} untuk {{4}}"
     }
 }

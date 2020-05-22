@@ -50,7 +50,8 @@
             "title": "పరిచయాన్ని ఎంచుకోండి",
             "SearchByName": "పేరు ద్వారా శోధించండి",
             "CreateAccount": "+ క్రొత్త పరిచయం",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create కనుగొనబడలేదు"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create కనుగొనబడలేదు",
+            "EmptyContacts": "పరిచయాలు కనుగొనబడలేదు ..."
         },
         "select": {
             "title": "Contact {999} contact యొక్క పరిచయాన్ని ఎంచుకోండి"

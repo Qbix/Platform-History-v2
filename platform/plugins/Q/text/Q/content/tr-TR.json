@@ -73,5 +73,30 @@
             "touchscreen": "Yakınlaştırmak ve sürüklemek için parmaklarınızı kullanın",
             "notTouchscreen": "Yakınlaştırmak ve sürüklemek için farenizi ve tekerleğinizi kullanın"
         }
+    },
+    "timestamp": {
+        "lastNight": "dün gece",
+        "lastEvening": "geçen akşam",
+        "yesterday": "dün",
+        "thisMorning": "bu sabah",
+        "today": "bugün",
+        "tonight": "Bu gece",
+        "tomorrowMorning": "tom sabah",
+        "tomorrow": "yarın",
+        "hoursAgo": "{{h}} saat önce",
+        "hourAgo": "{{h}} saat önce",
+        "minuteAgo": "{{m}} dakika önce",
+        "minutesAgo": "{{m}} dakika önce",
+        "secondAgo": "{{s}} saniye önce",
+        "secondsAgo": "{{s}} saniye önce",
+        "fewSecondsAgo": "saniyeler önce",
+        "rightNow": "şimdi",
+        "inSecond": "{{s}} saniyede",
+        "inSeconds": "{{s}} saniye içinde",
+        "inMinute": "{{m}} dakika içinde",
+        "inMinutes": "{{m}} dakika içinde",
+        "inHour": "{{h}} saat içinde",
+        "inHours": "{{h}} saat içinde",
+        "inUnderMinute": "1 dakikadan kısa sürede"
     }
 }

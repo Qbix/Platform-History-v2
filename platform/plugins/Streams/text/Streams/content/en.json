@@ -1,7 +1,7 @@
 {
-	"errors": {
-		"HiddenFromYou": "This content is hidden from you."
-	},
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
         "NewItemTitle": "New Item"
     },
@@ -55,7 +55,7 @@
         "Streams\/call": "{{displayName}} is calling you"
     },
     "invite": {
-		"command": "Invite",
+        "command": "Invite",
         "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
         "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
@@ -142,8 +142,8 @@
         "Streams": "Streams"
     },
     "webrtc": {
-		"notAllowedToJoinCall": "You don't have permission to join this stream.",
-		"streamTitle": "{{1}} live call",
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} live call",
         "allow": {
             "dialogTitle": "Connecting",
             "microphoneBtn": "Enable Microphone",

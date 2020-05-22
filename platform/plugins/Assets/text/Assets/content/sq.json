@@ -10,10 +10,10 @@
         "YouSubscribedTo": "Ju jeni regjistruar në {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "Informacion rreth rendit",
+        "AboutOrder": "Informacione për porosinë",
         "PaymentMethod": "Metoda e pagesës",
-        "ContactInfo": "Kontakt info",
-        "Pay": "paguaj"
+        "ContactInfo": "Informacioni i kontaktit",
+        "Pay": "Pay"
     },
     "credits": {
         "InviteAcceptedBy": "Ftoni të pranuar nga {{1}}",
@@ -26,7 +26,8 @@
         "Client": "klient",
         "To": "në",
         "From": "nga",
-        "HistoryEmpty": "Ju nuk keni ende të dhëna"
+        "HistoryEmpty": "Ju nuk keni ende të dhëna",
+        "SeeHistory": "Shihni historikun e pagesave për 99 99 999}}"
     },
     "subscriptions": {
         "infoTitle": "Vendosni informacionin e pagesës",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "Mori kredi 99 999"
         }
+    },
+    "charge": {
+        "Subject": "Ju merrni pagesa prej 999} nga {{call 'publisher.displayName'}} nga &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hej, kjo është vetëm për t&#39;ju njoftuar {99 999 been është akuzuar {{1000} {për 1001} {nga {1002}}"
+    },
+    "charged": {
+        "Subject": "Faleminderit për pagesën tuaj për &quot;{{description}}&quot;",
+        "HavePaid": "Hej {999} this, ky është vetëm një konfirmim i shpejtë që keni paguar me sukses {1000}} në {1001} për {1002"
     }
 }

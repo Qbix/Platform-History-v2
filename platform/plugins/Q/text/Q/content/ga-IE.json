@@ -73,5 +73,30 @@
             "touchscreen": "Bain úsáid as do mhéara chun súmáil agus tarraing",
             "notTouchscreen": "Bain úsáid as do luch &amp; roth chun súmáil agus tarraing"
         }
+    },
+    "timestamp": {
+        "lastNight": "aréir",
+        "lastEvening": "an oíche roimh dheireadh",
+        "yesterday": "inné",
+        "thisMorning": "an mhaidin seo",
+        "today": "inniu",
+        "tonight": "anocht",
+        "tomorrowMorning": "maidin tom",
+        "tomorrow": "amárach",
+        "hoursAgo": "{{h}} uair an chloig ó shin",
+        "hourAgo": "{{h}} uair ó shin",
+        "minuteAgo": "{{m}} nóiméad ó shin",
+        "minutesAgo": "{{m}} nóiméad ó shin",
+        "secondAgo": "{{s}} an dara ó shin",
+        "secondsAgo": "{{s}} soicind ó shin",
+        "fewSecondsAgo": "soicind ó shin",
+        "rightNow": "Anois",
+        "inSecond": "sa {{s}} sa dara háit",
+        "inSeconds": "i {{s}} soicind",
+        "inMinute": "i {{m}} nóiméad",
+        "inMinutes": "i {{m}} nóiméad",
+        "inHour": "in {{h}} uair an chloig",
+        "inHours": "in {{h}} uair an chloig",
+        "inUnderMinute": "faoi bhun 1 nóiméad"
     }
 }

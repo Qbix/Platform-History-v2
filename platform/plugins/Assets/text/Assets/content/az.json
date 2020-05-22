@@ -13,7 +13,7 @@
         "AboutOrder": "Sifariş haqqında məlumat",
         "PaymentMethod": "Ödəniş üsulu",
         "ContactInfo": "Əlaqə məlumatı",
-        "Pay": "Ödəniş"
+        "Pay": "Ödəyin"
     },
     "credits": {
         "InviteAcceptedBy": "{{1}} tərəfindən qəbul edilən dəvət",
@@ -26,7 +26,8 @@
         "Client": "Müştəri",
         "To": "üçün",
         "From": "dən",
-        "HistoryEmpty": "Hələ məlumatınız yoxdur"
+        "HistoryEmpty": "Hələ məlumatınız yoxdur",
+        "SeeHistory": "{{1}} üçün ödəniş tarixinə baxın"
     },
     "subscriptions": {
         "infoTitle": "Ödəniş məlumatlarını təyin edin",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "{{amount}} kredit aldı"
         }
+    },
+    "charge": {
+        "Subject": "{{displayAmount}} ödənişini &quot;{{description}}&quot; ilə {{call 'publisher.displayName'}} alırsınız",
+        "HasBeenCharged": "Hey, bu yalnız {{1}} tərəfindən {{3}} üçün {{4}} tərəfindən ittiham olunduğunu bildirmək üçündür"
+    },
+    "charged": {
+        "Subject": "&quot;{{description}}&quot; üçün ödəməyiniz üçün təşəkkür edirik",
+        "HavePaid": "Hey {{1}}, bu {{4}} üçün {{2}} -ı {{3}} -ə uğurla ödəməyinizin qısa bir təsdiqidir."
     }
 }

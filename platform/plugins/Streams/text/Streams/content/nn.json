@@ -91,7 +91,8 @@
         "notice": {
             "text": "Du har blitt invitert. {{ClickOrTap}} her for å godta og bli med."
         },
-        "youCanNowPaste": "Du kan nå lime inn denne lenken et sted for å invitere folk"
+        "youCanNowPaste": "Du kan nå lime inn denne lenken et sted for å invitere folk",
+        "command": "Invitere"
     },
     "followup": {
         "mobile": {
@@ -166,7 +167,9 @@
             "linkCopiedToCb": "Link kopiert til utklippstavle",
             "codeCopiedToCb": "Koden kopiert til utklippstavlen",
             "userHasNoVideo": "Deltakeren har ingen video",
-            "openInBrowserAlert": "Åpne lenken i Safari-nettleseren for å delta i konferansen."
+            "openInBrowserAlert": "Åpne lenken i Safari-nettleseren for å delta i konferansen.",
+            "youBeganVideoRecording": "Du begynte å spille inn denne konferansen",
+            "youStoppedVideoRecording": "Du sluttet å spille inn denne konferansen"
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -186,7 +189,12 @@
             "copy": "Kopiere",
             "turnOffVideo": "Slå av deling av kamera \/ skjerm",
             "turnOffScreenSharing": "Slå av skjermdeling",
-            "cameraIsTurnedOff": "Kameraet er slått av"
+            "cameraIsTurnedOff": "Kameraet er slått av",
+            "startRecording": "Start opptak",
+            "stopRecording": "Stopp innspillingen",
+            "recordingInProgress": "Innspillingen pågår ...",
+            "publishOnTimeline": "Publiser på tidslinjen",
+            "publishToGroup": "Publiser til gruppe"
         },
         "participantsPopup": {
             "disconnect": "Koble fra",
@@ -195,8 +203,16 @@
             "loudestExceptMe": "Høyest unntatt meg",
             "maximizeLoudest": "Maksimer høyest",
             "staticMaximized": "Statisk maksimert",
-            "manual": "Håndbok"
-        }
+            "manual": "Håndbok",
+            "turnOffCamera": "Skjul video",
+            "turnOffAudio": "Demp lyd",
+            "turnOffScreenSharing": "Skjul deling av skjermen",
+            "turnOnCamera": "Vis video",
+            "turnOnAudio": "Slå av lyden",
+            "turnOnScreenSharing": "Vis skjermdeling"
+        },
+        "notAllowedToJoinCall": "Du har ikke tillatelse til å bli med i denne strømmen.",
+        "streamTitle": "{{1}} direktesendt samtale"
     },
     "types": {
         "Streams\/invited": {
@@ -333,5 +349,8 @@
         "Save": "Lagre",
         "Delete": "Slett",
         "Submenu": "undermeny"
+    },
+    "errors": {
+        "HiddenFromYou": "Dette innholdet er skjult for deg."
     }
 }

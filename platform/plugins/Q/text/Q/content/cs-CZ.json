@@ -73,5 +73,30 @@
             "touchscreen": "Prstem můžete přiblížit a přetáhnout",
             "notTouchscreen": "Pro přiblížení a přetažení použijte myš a kolečko"
         }
+    },
+    "timestamp": {
+        "lastNight": "minulou noc",
+        "lastEvening": "poslední den",
+        "yesterday": "včera",
+        "thisMorning": "toto ráno",
+        "today": "dnes",
+        "tonight": "dnes večer",
+        "tomorrowMorning": "tom ráno",
+        "tomorrow": "zítra",
+        "hoursAgo": "{{h}} před hodinami",
+        "hourAgo": "{{h}} před hodinou",
+        "minuteAgo": "{{m}} před minutou",
+        "minutesAgo": "{{m}} před minutami",
+        "secondAgo": "{{s}} před sekundou",
+        "secondsAgo": "{{s}} sekund",
+        "fewSecondsAgo": "před sekundami",
+        "rightNow": "právě teď",
+        "inSecond": "za {{s}} sekundu",
+        "inSeconds": "za {{s}} sekund",
+        "inMinute": "za {{m}} minutu",
+        "inMinutes": "za {{m}} minut",
+        "inHour": "za {{h}} hodinu",
+        "inHours": "za {{h}} hodin",
+        "inUnderMinute": "za méně než 1 minutu"
     }
 }

@@ -91,7 +91,8 @@
         "notice": {
             "text": "Meghívtak. {{ClickOrTap}} itt, hogy elfogadja és csatlakozzon."
         },
-        "youCanNowPaste": "Most beillesztheti ezt a linket valahol az emberek meghívására"
+        "youCanNowPaste": "Most beillesztheti ezt a linket valahol az emberek meghívására",
+        "command": "Meghívás"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "A linket a vágólapra másolta",
             "codeCopiedToCb": "A kódot a vágólapra másolta",
             "userHasNoVideo": "A résztvevőnek nincs videója",
-            "openInBrowserAlert": "Nyisson meg egy linket a Safari böngészőben a konferenciához való csatlakozáshoz."
+            "openInBrowserAlert": "Nyisson meg egy linket a Safari böngészőben a konferenciához való csatlakozáshoz.",
+            "youBeganVideoRecording": "Megkezdted a konferencia felvételét",
+            "youStoppedVideoRecording": "Ön abbahagyta a konferencia felvételét"
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -189,7 +192,12 @@
             "copy": "Másolat",
             "turnOffVideo": "Kapcsolja ki a kamera \/ képernyő megosztását",
             "turnOffScreenSharing": "Kapcsolja ki a képernyőmegosztást",
-            "cameraIsTurnedOff": "A kamera ki van kapcsolva"
+            "cameraIsTurnedOff": "A kamera ki van kapcsolva",
+            "startRecording": "Felvétel megkezdése",
+            "stopRecording": "A felvétel leállítása",
+            "recordingInProgress": "A felvétel folyamatban van ...",
+            "publishOnTimeline": "Közzététel az idővonalon",
+            "publishToGroup": "Közzététel csoportban"
         },
         "participantsPopup": {
             "disconnect": "szétkapcsol",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Leghangosabb, kivéve én",
             "maximizeLoudest": "Maximalizálja a leghangosabbat",
             "staticMaximized": "Statikus maximális",
-            "manual": "Kézikönyv"
-        }
+            "manual": "Kézikönyv",
+            "turnOffCamera": "Videó elrejtése",
+            "turnOffAudio": "A hang elnémítása",
+            "turnOffScreenSharing": "A képernyőmegosztás elrejtése",
+            "turnOnCamera": "Videó megjelenítése",
+            "turnOnAudio": "A hang némítása",
+            "turnOnScreenSharing": "A képernyőmegosztás megjelenítése"
+        },
+        "notAllowedToJoinCall": "Nincs engedélyed ahhoz, hogy csatlakozz ehhez a patakhoz.",
+        "streamTitle": "{{1}} élő hívás"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "Megment",
         "Delete": "Töröl",
         "Submenu": "almenü"
+    },
+    "errors": {
+        "HiddenFromYou": "Ez a tartalom el van rejtve tőled."
     }
 }

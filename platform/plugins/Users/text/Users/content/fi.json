@@ -50,7 +50,8 @@
             "title": "Valitse yhteystieto",
             "SearchByName": "Etsi nimen mukaan",
             "CreateAccount": "+ Uusi yhteyshenkilö",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.coreate ei löytynyt"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.coreate ei löytynyt",
+            "EmptyContacts": "Yhteystietoja ei löydy ..."
         },
         "select": {
             "title": "Valitse yhteystieto {{displayName}}"

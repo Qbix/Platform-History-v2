@@ -50,7 +50,8 @@
             "title": "যোগাযোগ চয়ন করুন",
             "SearchByName": "নাম দ্বারা অনুসন্ধান",
             "CreateAccount": "+ নতুন যোগাযোগ",
-            "CreateAccountNotFound": "Q.User.Cordova.UI.create পাওয়া যায় নি"
+            "CreateAccountNotFound": "Q.User.Cordova.UI.create পাওয়া যায় নি",
+            "EmptyContacts": "পরিচিতি পাওয়া যায় নি ..."
         },
         "select": {
             "title": "{{displayName}} এর যোগাযোগ নির্বাচন করুন"

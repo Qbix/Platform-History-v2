@@ -50,7 +50,8 @@
             "title": "Pasirinkite kontaktą",
             "SearchByName": "Paieška pagal pavadinimą",
             "CreateAccount": "+ Naujas kontaktas",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nerastas"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nerastas",
+            "EmptyContacts": "Kontaktų nerasta ..."
         },
         "select": {
             "title": "Pasirinkite {{displayName}} kontaktą"

@@ -91,7 +91,8 @@
         "notice": {
             "text": "Anda telah diundang. {{ClickOrTap}} di sini untuk menerima dan bergabung."
         },
-        "youCanNowPaste": "Anda sekarang dapat menempelkan tautan ini di suatu tempat untuk mengundang orang"
+        "youCanNowPaste": "Anda sekarang dapat menempelkan tautan ini di suatu tempat untuk mengundang orang",
+        "command": "Undang"
     },
     "followup": {
         "mobile": {
@@ -166,7 +167,9 @@
             "linkCopiedToCb": "Tautan disalin ke papan klip",
             "codeCopiedToCb": "Kode disalin ke papan klip",
             "userHasNoVideo": "Peserta tidak memiliki video",
-            "openInBrowserAlert": "Buka tautan di browser Safari untuk bergabung dengan konferensi."
+            "openInBrowserAlert": "Buka tautan di browser Safari untuk bergabung dengan konferensi.",
+            "youBeganVideoRecording": "Anda mulai merekam konferensi ini",
+            "youStoppedVideoRecording": "Anda berhenti merekam konferensi ini"
         },
         "settingsPopup": {
             "webCamera": "Kamera web",
@@ -186,7 +189,12 @@
             "copy": "Salinan",
             "turnOffVideo": "Nonaktifkan berbagi kamera \/ layar",
             "turnOffScreenSharing": "Matikan berbagi layar",
-            "cameraIsTurnedOff": "Kamera dimatikan"
+            "cameraIsTurnedOff": "Kamera dimatikan",
+            "startRecording": "Mulai merekam",
+            "stopRecording": "Hentikan rekaman",
+            "recordingInProgress": "Rekaman sedang berlangsung ...",
+            "publishOnTimeline": "Terbitkan pada timeline",
+            "publishToGroup": "Terbitkan ke grup"
         },
         "participantsPopup": {
             "disconnect": "Memutuskan",
@@ -195,8 +203,16 @@
             "loudestExceptMe": "Paling Keras Kecuali Aku",
             "maximizeLoudest": "Maksimalkan Paling Keras",
             "staticMaximized": "Dimaksimalkan Statis",
-            "manual": "Manual"
-        }
+            "manual": "Manual",
+            "turnOffCamera": "Sembunyikan video",
+            "turnOffAudio": "Membisukan audio",
+            "turnOffScreenSharing": "Sembunyikan berbagi layar",
+            "turnOnCamera": "Tampilkan video",
+            "turnOnAudio": "Suarakan audio",
+            "turnOnScreenSharing": "Tampilkan berbagi layar"
+        },
+        "notAllowedToJoinCall": "Anda tidak memiliki izin untuk bergabung dengan aliran ini.",
+        "streamTitle": "{{1}} panggilan langsung"
     },
     "types": {
         "Streams\/invited": {
@@ -333,5 +349,8 @@
         "Save": "Menyimpan",
         "Delete": "Menghapus",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Konten ini disembunyikan dari Anda."
     }
 }

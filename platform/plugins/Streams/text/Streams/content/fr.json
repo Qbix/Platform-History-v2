@@ -91,7 +91,8 @@
         "notice": {
             "text": "Vous avez été invité. {{ClickOrTap}} ici pour accepter et rejoindre."
         },
-        "youCanNowPaste": "Vous pouvez maintenant coller ce lien quelque part pour inviter des personnes"
+        "youCanNowPaste": "Vous pouvez maintenant coller ce lien quelque part pour inviter des personnes",
+        "command": "Inviter"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Lien copié dans le presse-papiers",
             "codeCopiedToCb": "Code copié dans le presse-papiers",
             "userHasNoVideo": "Le participant n&#39;a pas de vidéo",
-            "openInBrowserAlert": "Ouvrez le lien dans le navigateur Safari pour rejoindre la conférence."
+            "openInBrowserAlert": "Ouvrez le lien dans le navigateur Safari pour rejoindre la conférence.",
+            "youBeganVideoRecording": "Vous avez commencé à enregistrer cette conférence",
+            "youStoppedVideoRecording": "Vous avez arrêté l&#39;enregistrement de cette conférence"
         },
         "settingsPopup": {
             "webCamera": "Webcam",
@@ -189,7 +192,12 @@
             "copy": "Copie",
             "turnOffVideo": "Désactiver le partage caméra \/ écran",
             "turnOffScreenSharing": "Désactiver le partage d&#39;écran",
-            "cameraIsTurnedOff": "L&#39;appareil photo est éteint"
+            "cameraIsTurnedOff": "L&#39;appareil photo est éteint",
+            "startRecording": "Commencer l&#39;enregistrement",
+            "stopRecording": "Arrête d&#39;enregistrer",
+            "recordingInProgress": "L&#39;enregistrement est en cours ...",
+            "publishOnTimeline": "Publier sur la chronologie",
+            "publishToGroup": "Publier dans le groupe"
         },
         "participantsPopup": {
             "disconnect": "Déconnecter",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Le plus fort sauf moi",
             "maximizeLoudest": "Maximize Loudest",
             "staticMaximized": "Statique maximisé",
-            "manual": "Manuel"
-        }
+            "manual": "Manuel",
+            "turnOffCamera": "Masquer la vidéo",
+            "turnOffAudio": "Couper le son",
+            "turnOffScreenSharing": "Masquer le partage d&#39;écran",
+            "turnOnCamera": "Afficher la vidéo",
+            "turnOnAudio": "Réactiver le son",
+            "turnOnScreenSharing": "Afficher le partage d&#39;écran"
+        },
+        "notAllowedToJoinCall": "Vous n&#39;êtes pas autorisé à rejoindre ce flux.",
+        "streamTitle": "{{1}} appel en direct"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "sauvegarder",
         "Delete": "Supprimer",
         "Submenu": "Sous-menu"
+    },
+    "errors": {
+        "HiddenFromYou": "Ce contenu vous est caché."
     }
 }

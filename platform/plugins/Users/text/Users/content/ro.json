@@ -50,7 +50,8 @@
             "title": "Alegeți o persoană de contact",
             "SearchByName": "Cauta dupa nume",
             "CreateAccount": "+ Contact nou",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nu a fost găsit"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nu a fost găsit",
+            "EmptyContacts": "Contacte nu au fost găsite ..."
         },
         "select": {
             "title": "Selectați persoana de contact din {{displayName}}"

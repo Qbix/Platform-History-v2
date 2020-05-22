@@ -91,7 +91,8 @@
         "notice": {
             "text": "Jūs esate pakviestas. {{ClickOrTap}} čia priimti ir prisijungti."
         },
-        "youCanNowPaste": "Dabar galite įklijuoti šią nuorodą kur nors, kad pakviestumėte žmones"
+        "youCanNowPaste": "Dabar galite įklijuoti šią nuorodą kur nors, kad pakviestumėte žmones",
+        "command": "Pakviesk"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Nuoroda nukopijuota į mainų sritį",
             "codeCopiedToCb": "Kodas nukopijuotas į mainų sritį",
             "userHasNoVideo": "Dalyvis neturi vaizdo įrašo",
-            "openInBrowserAlert": "Norėdami prisijungti prie konferencijos, atidarykite nuorodą „Safari“ naršyklėje."
+            "openInBrowserAlert": "Norėdami prisijungti prie konferencijos, atidarykite nuorodą „Safari“ naršyklėje.",
+            "youBeganVideoRecording": "Jūs pradėjote įrašyti šią konferenciją",
+            "youStoppedVideoRecording": "Nustojote įrašyti šią konferenciją"
         },
         "settingsPopup": {
             "webCamera": "Internetinė kamera",
@@ -189,7 +192,12 @@
             "copy": "Kopijuoti",
             "turnOffVideo": "Išjunkite fotoaparato / ekrano bendrinimą",
             "turnOffScreenSharing": "Išjunkite ekrano bendrinimą",
-            "cameraIsTurnedOff": "Kamera išjungta"
+            "cameraIsTurnedOff": "Kamera išjungta",
+            "startRecording": "Pradėkite įrašymą",
+            "stopRecording": "Sustabdyti įrašymą",
+            "recordingInProgress": "Įrašymas vyksta ...",
+            "publishOnTimeline": "Paskelbkite laiko juostoje",
+            "publishToGroup": "Paskelbti grupei"
         },
         "participantsPopup": {
             "disconnect": "Atjunkite",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Garsiausias, išskyrus mane",
             "maximizeLoudest": "Maksimaliai padidinkite garsiausią",
             "staticMaximized": "Statinis maksimalus",
-            "manual": "Rankinis"
-        }
+            "manual": "Rankinis",
+            "turnOffCamera": "Slėpti vaizdo įrašą",
+            "turnOffAudio": "Nutildyti garsą",
+            "turnOffScreenSharing": "Slėpti ekrano bendrinimą",
+            "turnOnCamera": "Rodyti vaizdo įrašą",
+            "turnOnAudio": "Įjungti garso garsą",
+            "turnOnScreenSharing": "Rodyti ekrano bendrinimą"
+        },
+        "notAllowedToJoinCall": "Jūs neturite leidimo prisijungti prie šio srauto.",
+        "streamTitle": "{{1}} tiesioginis skambutis"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "Sutaupyti",
         "Delete": "Ištrinti",
         "Submenu": "Pomeniu"
+    },
+    "errors": {
+        "HiddenFromYou": "Šis turinys nuo jūsų paslėptas."
     }
 }

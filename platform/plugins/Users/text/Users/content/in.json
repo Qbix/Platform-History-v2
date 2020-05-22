@@ -50,7 +50,8 @@
             "title": "Pilih kontak",
             "SearchByName": "Cari berdasarkan nama",
             "CreateAccount": "+ Kontak Baru",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create tidak ditemukan"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create tidak ditemukan",
+            "EmptyContacts": "Kontak tidak ditemukan ..."
         },
         "select": {
             "title": "Pilih kontak dari {{displayName}}"

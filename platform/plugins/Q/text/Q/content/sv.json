@@ -73,5 +73,30 @@
             "touchscreen": "Använd dina fingrar för att zooma och dra",
             "notTouchscreen": "Använd din mus och hjul för att zooma och dra"
         }
+    },
+    "timestamp": {
+        "lastNight": "igår kväll",
+        "lastEvening": "sista kvällen",
+        "yesterday": "i går",
+        "thisMorning": "det här mornet",
+        "today": "i dag",
+        "tonight": "i kväll",
+        "tomorrowMorning": "Tom morn",
+        "tomorrow": "i morgon",
+        "hoursAgo": "{{h}} timmar sedan",
+        "hourAgo": "{{h}} timme sedan",
+        "minuteAgo": "{{m}} minut sedan",
+        "minutesAgo": "{{m}} minuter sedan",
+        "secondAgo": "{{s}} sekund sedan",
+        "secondsAgo": "{{s}} sekunder sedan",
+        "fewSecondsAgo": "för några sekunder sedan",
+        "rightNow": "just nu",
+        "inSecond": "om {{s}} sekund",
+        "inSeconds": "på {{s}} sekunder",
+        "inMinute": "om {{m}} minut",
+        "inMinutes": "om {{m}} minuter",
+        "inHour": "om {{h}} timme",
+        "inHours": "om {{h}} timmar",
+        "inUnderMinute": "på under 1 minut"
     }
 }

@@ -91,7 +91,8 @@
         "notice": {
             "text": "Þú hefur verið boðið. {{ClickOrTap}} hér til að samþykkja og taka þátt."
         },
-        "youCanNowPaste": "Þú getur núna límt þennan tengil einhvers staðar til að bjóða fólki"
+        "youCanNowPaste": "Þú getur núna límt þennan tengil einhvers staðar til að bjóða fólki",
+        "command": "Bjóddu"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Hlekkur afritaður á klemmuspjald",
             "codeCopiedToCb": "Kóði afritaður á klemmuspjald",
             "userHasNoVideo": "Þátttakandinn hefur ekkert myndband",
-            "openInBrowserAlert": "Opnaðu hlekk í Safari vafranum til að taka þátt í ráðstefnunni."
+            "openInBrowserAlert": "Opnaðu hlekk í Safari vafranum til að taka þátt í ráðstefnunni.",
+            "youBeganVideoRecording": "Þú byrjaðir að taka upp þessa ráðstefnu",
+            "youStoppedVideoRecording": "Þú hættir að taka upp þessa ráðstefnu"
         },
         "settingsPopup": {
             "webCamera": "Vefmyndavél",
@@ -189,7 +192,12 @@
             "copy": "Afrita",
             "turnOffVideo": "Slökktu á samnýtingu myndavélar / skjáa",
             "turnOffScreenSharing": "Slökktu á samnýtingu skjásins",
-            "cameraIsTurnedOff": "Slökkt er á myndavélinni"
+            "cameraIsTurnedOff": "Slökkt er á myndavélinni",
+            "startRecording": "Byrjaðu að taka upp",
+            "stopRecording": "Hættu að taka upp",
+            "recordingInProgress": "Upptaka er í gangi ...",
+            "publishOnTimeline": "Birta á tímalínu",
+            "publishToGroup": "Birta í hóp"
         },
         "participantsPopup": {
             "disconnect": "Aftengdu",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Háværasti nema mig",
             "maximizeLoudest": "Hámarka það háværasta",
             "staticMaximized": "Static hámarkaður",
-            "manual": "Handbók"
-        }
+            "manual": "Handbók",
+            "turnOffCamera": "Fela myndband",
+            "turnOffAudio": "Þagga hljóð",
+            "turnOffScreenSharing": "Fela samnýtingu skjáa",
+            "turnOnCamera": "Sýna myndband",
+            "turnOnAudio": "Slökkva á hljóði",
+            "turnOnScreenSharing": "Sýna samnýtingu skjáa"
+        },
+        "notAllowedToJoinCall": "Þú hefur ekki leyfi til að taka þátt í þessum straumi.",
+        "streamTitle": "{{1}} símtal í beinni"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "Vista",
         "Delete": "Eyða",
         "Submenu": "Undirvalmynd"
+    },
+    "errors": {
+        "HiddenFromYou": "Þetta efni er falið fyrir þig."
     }
 }

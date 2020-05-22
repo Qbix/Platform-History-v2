@@ -91,7 +91,8 @@
         "notice": {
             "text": "ನಿಮ್ಮನ್ನು ಆಹ್ವಾನಿಸಲಾಗಿದೆ. {{ClickOrTap}} ಇಲ್ಲಿ ಸ್ವೀಕರಿಸಲು ಮತ್ತು ಸೇರಲು."
         },
-        "youCanNowPaste": "ಜನರನ್ನು ಆಹ್ವಾನಿಸಲು ನೀವು ಈಗ ಈ ಲಿಂಕ್ ಅನ್ನು ಎಲ್ಲೋ ಅಂಟಿಸಬಹುದು"
+        "youCanNowPaste": "ಜನರನ್ನು ಆಹ್ವಾನಿಸಲು ನೀವು ಈಗ ಈ ಲಿಂಕ್ ಅನ್ನು ಎಲ್ಲೋ ಅಂಟಿಸಬಹುದು",
+        "command": "ಆಹ್ವಾನಿಸಿ"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "ಲಿಂಕ್ ಅನ್ನು ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲಿಸಲಾಗಿದೆ",
             "codeCopiedToCb": "ಕೋಡ್ ಅನ್ನು ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲಿಸಲಾಗಿದೆ",
             "userHasNoVideo": "ಭಾಗವಹಿಸುವವರಿಗೆ ಯಾವುದೇ ವೀಡಿಯೊ ಇಲ್ಲ",
-            "openInBrowserAlert": "ಸಮ್ಮೇಳನಕ್ಕೆ ಸೇರಲು ಸಫಾರಿ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಲಿಂಕ್ ತೆರೆಯಿರಿ."
+            "openInBrowserAlert": "ಸಮ್ಮೇಳನಕ್ಕೆ ಸೇರಲು ಸಫಾರಿ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಲಿಂಕ್ ತೆರೆಯಿರಿ.",
+            "youBeganVideoRecording": "ನೀವು ಈ ಸಮ್ಮೇಳನವನ್ನು ರೆಕಾರ್ಡ್ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿದ್ದೀರಿ",
+            "youStoppedVideoRecording": "ಈ ಸಮ್ಮೇಳನವನ್ನು ರೆಕಾರ್ಡಿಂಗ್ ಮಾಡುವುದನ್ನು ನೀವು ನಿಲ್ಲಿಸಿದ್ದೀರಿ"
         },
         "settingsPopup": {
             "webCamera": "ವೆಬ್ ಕ್ಯಾಮರಾ",
@@ -189,7 +192,12 @@
             "copy": "ನಕಲಿಸಿ",
             "turnOffVideo": "ಕ್ಯಾಮೆರಾ \/ ಪರದೆ ಹಂಚಿಕೆಯನ್ನು ಆಫ್ ಮಾಡಿ",
             "turnOffScreenSharing": "ಪರದೆಯ ಹಂಚಿಕೆಯನ್ನು ಆಫ್ ಮಾಡಿ",
-            "cameraIsTurnedOff": "ಕ್ಯಾಮೆರಾ ಆಫ್ ಮಾಡಲಾಗಿದೆ"
+            "cameraIsTurnedOff": "ಕ್ಯಾಮೆರಾ ಆಫ್ ಮಾಡಲಾಗಿದೆ",
+            "startRecording": "ರೆಕಾರ್ಡಿಂಗ್ ಪ್ರಾರಂಭಿಸಿ",
+            "stopRecording": "ರೆಕಾರ್ಡಿಂಗ್ ನಿಲ್ಲಿಸಿ",
+            "recordingInProgress": "ರೆಕಾರ್ಡಿಂಗ್ ಪ್ರಗತಿಯಲ್ಲಿದೆ ...",
+            "publishOnTimeline": "ಟೈಮ್‌ಲೈನ್‌ನಲ್ಲಿ ಪ್ರಕಟಿಸಿ",
+            "publishToGroup": "ಗುಂಪಿಗೆ ಪ್ರಕಟಿಸಿ"
         },
         "participantsPopup": {
             "disconnect": "ಸಂಪರ್ಕ ಕಡಿತಗೊಳಿಸಿ",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "ನನ್ನನ್ನು ಹೊರತುಪಡಿಸಿ ಜೋರಾಗಿ",
             "maximizeLoudest": "ಲೌಡೆಸ್ಟ್ ಅನ್ನು ಗರಿಷ್ಠಗೊಳಿಸಿ",
             "staticMaximized": "ಸ್ಥಾಯೀ ಗರಿಷ್ಠಗೊಳಿಸಲಾಗಿದೆ",
-            "manual": "ಕೈಪಿಡಿ"
-        }
+            "manual": "ಕೈಪಿಡಿ",
+            "turnOffCamera": "ವೀಡಿಯೊ ಮರೆಮಾಡಿ",
+            "turnOffAudio": "ಆಡಿಯೊವನ್ನು ಮ್ಯೂಟ್ ಮಾಡಿ",
+            "turnOffScreenSharing": "ಪರದೆಯ ಹಂಚಿಕೆಯನ್ನು ಮರೆಮಾಡಿ",
+            "turnOnCamera": "ವೀಡಿಯೊ ತೋರಿಸಿ",
+            "turnOnAudio": "ಆಡಿಯೊವನ್ನು ಅನ್‌ಮ್ಯೂಟ್ ಮಾಡಿ",
+            "turnOnScreenSharing": "ಪರದೆಯ ಹಂಚಿಕೆಯನ್ನು ತೋರಿಸಿ"
+        },
+        "notAllowedToJoinCall": "ಈ ಸ್ಟ್ರೀಮ್‌ಗೆ ಸೇರಲು ನಿಮಗೆ ಅನುಮತಿ ಇಲ್ಲ.",
+        "streamTitle": "{{1}} ಲೈವ್ ಕರೆ"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "ಉಳಿಸಿ",
         "Delete": "ಅಳಿಸಿ",
         "Submenu": "ಉಪಮೆನು"
+    },
+    "errors": {
+        "HiddenFromYou": "ಈ ವಿಷಯವನ್ನು ನಿಮ್ಮಿಂದ ಮರೆಮಾಡಲಾಗಿದೆ."
     }
 }

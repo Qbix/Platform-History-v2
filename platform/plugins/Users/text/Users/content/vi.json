@@ -50,7 +50,8 @@
             "title": "Chọn liên hệ",
             "SearchByName": "Tìm kiếm theo tên",
             "CreateAccount": "+ Liên hệ mới",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create không tìm thấy"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create không tìm thấy",
+            "EmptyContacts": "Không tìm thấy địa chỉ liên hệ ..."
         },
         "select": {
             "title": "Chọn liên hệ của {{displayName}}"

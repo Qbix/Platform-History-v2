@@ -50,7 +50,8 @@
             "title": "Aukeratu kontaktua",
             "SearchByName": "Bilatu izenaren arabera",
             "CreateAccount": "+ Kontaktu berria",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ez da aurkitu"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ez da aurkitu",
+            "EmptyContacts": "Aurkitu ez diren kontaktuak ..."
         },
         "select": {
             "title": "{{displayName}} zerbitzuko kontaktu aukeratu"

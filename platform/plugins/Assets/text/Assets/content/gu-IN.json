@@ -11,7 +11,7 @@
     },
     "payment": {
         "AboutOrder": "ઓર્ડર વિશે માહિતી",
-        "PaymentMethod": "ચુકવણી ની રીત",
+        "PaymentMethod": "ચુકવણી પદ્ધતિ",
         "ContactInfo": "સંપર્ક માહિતી",
         "Pay": "પે"
     },
@@ -26,7 +26,8 @@
         "Client": "ગ્રાહક",
         "To": "માટે",
         "From": "માંથી",
-        "HistoryEmpty": "તમારી પાસે હજી કોઈ ડેટા નથી"
+        "HistoryEmpty": "તમારી પાસે હજી કોઈ ડેટા નથી",
+        "SeeHistory": "Payment {999} for માટે ચુકવણી ઇતિહાસ જુઓ"
     },
     "subscriptions": {
         "infoTitle": "ચુકવણીની માહિતી સેટ કરો",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "{9 999}} ક્રેડિટ્સ પ્રાપ્ત થઈ"
         }
+    },
+    "charge": {
+        "Subject": "તમને &quot;{{description}}&quot; દ્વારા {{call 'publisher.displayName'}} થી {{999} of ની ચુકવણી મળે છે",
+        "HasBeenCharged": "અરે, આ ફક્ત તમને જણાવવા માટે છે કે {2 1002}} દ્વારા 1 1 1001}} માટે {{10009}} લેવામાં આવ્યું છે"
+    },
+    "charged": {
+        "Subject": "&quot;{{description}}&quot; માટે ચૂકવણી બદલ આભાર",
+        "HavePaid": "હે {{1}}, આ ફક્ત એક ઝડપી પુષ્ટિ છે કે તમે સફળતાપૂર્વક {{4}} માટે {{3}} ને paid {10001 paid paid ચૂકવ્યું છે"
     }
 }

@@ -73,5 +73,30 @@
             "touchscreen": "انگشتان خود را برای زوم و کشیدن استفاده کنید",
             "notTouchscreen": "ماوس و چرخ را برای زوم و کشیدن استفاده کنید"
         }
+    },
+    "timestamp": {
+        "lastNight": "دیشب",
+        "lastEvening": "شب گذشته",
+        "yesterday": "دیروز",
+        "thisMorning": "این صبح",
+        "today": "امروز",
+        "tonight": "امشب",
+        "tomorrowMorning": "تام صبح",
+        "tomorrow": "فردا",
+        "hoursAgo": "99 999}} ساعت قبل",
+        "hourAgo": "99 999}} ساعت قبل",
+        "minuteAgo": "99 999}} دقیقه قبل",
+        "minutesAgo": "99 999}} دقیقه قبل",
+        "secondAgo": "99 999}} ثانیه قبل",
+        "secondsAgo": "99 999}} ثانیه قبل",
+        "fewSecondsAgo": "چند ثانیه پیش",
+        "rightNow": "همین الان",
+        "inSecond": "در 99 999 {} ثانیه",
+        "inSeconds": "در 99 999}} ثانیه",
+        "inMinute": "در {999 {دقیقه",
+        "inMinutes": "در 999}} دقیقه",
+        "inHour": "در {999}} ساعت",
+        "inHours": "در {999}} ساعت",
+        "inUnderMinute": "در کمتر از 1 دقیقه"
     }
 }

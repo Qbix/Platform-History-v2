@@ -50,7 +50,8 @@
             "title": "เลือกผู้ติดต่อ",
             "SearchByName": "ค้นหาตามชื่อ",
             "CreateAccount": "+ ผู้ติดต่อใหม่",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI ไม่พบการสร้าง"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI ไม่พบการสร้าง",
+            "EmptyContacts": "ไม่พบที่อยู่ติดต่อ ..."
         },
         "select": {
             "title": "เลือกผู้ติดต่อของ {{displayName}}"

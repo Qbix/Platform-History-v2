@@ -73,5 +73,30 @@
             "touchscreen": "Uża s-swaba &#39;biex zoom and drag",
             "notTouchscreen": "Uża l-maws u r-rota biex zoom u drag"
         }
+    },
+    "timestamp": {
+        "lastNight": "il-lejl li għadda",
+        "lastEvening": "lejliet li għadda",
+        "yesterday": "ilbieraħ",
+        "thisMorning": "dan filgħodu",
+        "today": "illum",
+        "tonight": "illejla",
+        "tomorrowMorning": "Tom Morn",
+        "tomorrow": "għada",
+        "hoursAgo": "{{h}} siegħa ilu",
+        "hourAgo": "{{h}} siegħa ilu",
+        "minuteAgo": "{{m}} minuta ilu",
+        "minutesAgo": "{{m}} minuti ilu",
+        "secondAgo": "{{s}} it-tieni ilu",
+        "secondsAgo": "{{s}} sekondi ilu",
+        "fewSecondsAgo": "sekondi ilu",
+        "rightNow": "Bħalissa",
+        "inSecond": "f &#39;{{s}} it-tieni",
+        "inSeconds": "f &#39;{{s}} sekondi",
+        "inMinute": "f &#39;{{m}} minuta",
+        "inMinutes": "f &#39;{{m}} minuti",
+        "inHour": "f &#39;{{h}} siegħa",
+        "inHours": "f &#39;{{h}} sigħat",
+        "inUnderMinute": "fl-inqas 1 minuta"
     }
 }

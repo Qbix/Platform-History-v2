@@ -91,7 +91,8 @@
         "notice": {
             "text": "あなたが招待されました。ここで{{ClickOrTap}}を受け入れて参加してください。"
         },
-        "youCanNowPaste": "このリンクをどこかに貼り付けて、人々を招待できます"
+        "youCanNowPaste": "このリンクをどこかに貼り付けて、人々を招待できます",
+        "command": "招待する"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "クリップボードにコピーされたリンク",
             "codeCopiedToCb": "クリップボードにコピーされたコード",
             "userHasNoVideo": "参加者にはビデオがありません",
-            "openInBrowserAlert": "Safariブラウザーでリンクを開き、会議に参加します。"
+            "openInBrowserAlert": "Safariブラウザーでリンクを開き、会議に参加します。",
+            "youBeganVideoRecording": "この会議の録音を開始しました",
+            "youStoppedVideoRecording": "この会議の記録を停止しました"
         },
         "settingsPopup": {
             "webCamera": "ウェブカメラ",
@@ -189,7 +192,12 @@
             "copy": "コピー",
             "turnOffVideo": "カメラ/画面共有をオフにする",
             "turnOffScreenSharing": "画面共有をオフにする",
-            "cameraIsTurnedOff": "カメラがオフになっています"
+            "cameraIsTurnedOff": "カメラがオフになっています",
+            "startRecording": "録音を開始",
+            "stopRecording": "記録を停止",
+            "recordingInProgress": "記録中です...",
+            "publishOnTimeline": "タイムラインで公開",
+            "publishToGroup": "グループに公開"
         },
         "participantsPopup": {
             "disconnect": "切断する",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "私以外の最大の",
             "maximizeLoudest": "最大音量を最大化",
             "staticMaximized": "静的最大化",
-            "manual": "マニュアル"
-        }
+            "manual": "マニュアル",
+            "turnOffCamera": "ビデオを隠す",
+            "turnOffAudio": "音声をミュート",
+            "turnOffScreenSharing": "画面共有を非表示",
+            "turnOnCamera": "ビデオを表示",
+            "turnOnAudio": "音声のミュートを解除",
+            "turnOnScreenSharing": "画面共有を表示"
+        },
+        "notAllowedToJoinCall": "このストリームに参加する権限がありません。",
+        "streamTitle": "{{1}}ライブ通話"
     },
     "types": {
         "Streams/invited": {
@@ -337,5 +353,8 @@
         "Save": "セーブ",
         "Delete": "削除する",
         "Submenu": "サブメニュー"
+    },
+    "errors": {
+        "HiddenFromYou": "このコンテンツは非表示です。"
     }
 }

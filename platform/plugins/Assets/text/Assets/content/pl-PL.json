@@ -26,7 +26,8 @@
         "Client": "Klient",
         "To": "do",
         "From": "z",
-        "HistoryEmpty": "Nie masz jeszcze danych"
+        "HistoryEmpty": "Nie masz jeszcze danych",
+        "SeeHistory": "Zobacz historię płatności dla {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Ustaw informacje o płatności",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "Otrzymał {{amount}} kredytów"
         }
+    },
+    "charge": {
+        "Subject": "Otrzymujesz płatność w wysokości {{displayAmount}} od {{call 'publisher.displayName'}} przez „{{description}}”",
+        "HasBeenCharged": "Hej, to tylko po to, aby poinformować, że {{1}} został obciążony {{2}} za {{3}} do {{4}}"
+    },
+    "charged": {
+        "Subject": "Dziękujemy za płatność za „{{description}}”",
+        "HavePaid": "Hej {{1}}, to tylko szybkie potwierdzenie, że pomyślnie zapłaciłeś {{2}} na {{3}} za {{4}}"
     }
 }

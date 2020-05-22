@@ -11,7 +11,7 @@
     },
     "payment": {
         "AboutOrder": "Info over bestelling",
-        "PaymentMethod": "Betalingsmiddel",
+        "PaymentMethod": "Betalingswijze",
         "ContactInfo": "Contact informatie",
         "Pay": "Betalen"
     },
@@ -26,7 +26,8 @@
         "Client": "Cliënt",
         "To": "naar",
         "From": "van",
-        "HistoryEmpty": "U heeft nog geen gegevens"
+        "HistoryEmpty": "U heeft nog geen gegevens",
+        "SeeHistory": "Bekijk de betalingsgeschiedenis voor {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Stel betalingsinformatie in",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "Ontvangen {{amount}} credits"
         }
+    },
+    "charge": {
+        "Subject": "U krijgt {{displayAmount}} van {{call 'publisher.displayName'}} betaald door &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hé, dit is alleen om u te laten weten dat {{1}} {{3}} in rekening is gebracht voor {{3}} door {{4}}"
+    },
+    "charged": {
+        "Subject": "Hartelijk dank voor uw betaling voor &#39;{{description}}&#39;",
+        "HavePaid": "Hoi {{1}}, dit is slechts een snelle bevestiging dat je {{2}} met succes hebt betaald aan {{3}} voor {{4}}"
     }
 }

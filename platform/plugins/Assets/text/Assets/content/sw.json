@@ -10,10 +10,10 @@
         "YouSubscribedTo": "Umejisajiliwa {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "Maelezo kuhusu utaratibu",
+        "AboutOrder": "Maelezo juu ya utaratibu",
         "PaymentMethod": "Njia ya malipo",
         "ContactInfo": "Maelezo ya mawasiliano",
-        "Pay": "Kulipa"
+        "Pay": "Lipa"
     },
     "credits": {
         "InviteAcceptedBy": "Paribisha kukubaliwa na {{1}}",
@@ -26,7 +26,8 @@
         "Client": "Mteja",
         "To": "kwa",
         "From": "kutoka",
-        "HistoryEmpty": "Bado haujapata data"
+        "HistoryEmpty": "Bado haujapata data",
+        "SeeHistory": "Tazama historia ya malipo ya {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Weka Habari ya Malipo",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "Imepokea mikopo ya {{amount}}"
         }
+    },
+    "charge": {
+        "Subject": "Unapata malipo ya {{displayAmount}} kutoka {{1000]} na &quot;{{100 100}&quot;",
+        "HasBeenCharged": "Halo, hii ni kukujulisha {{1}} ameshtakiwa {{2}} kwa {{3}} na {{4}}"
+    },
+    "charged": {
+        "Subject": "Asante kwa malipo yako kwa &quot;{{description}}&quot;",
+        "HavePaid": "Mh!"
     }
 }

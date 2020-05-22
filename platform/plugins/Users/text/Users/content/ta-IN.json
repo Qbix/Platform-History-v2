@@ -50,7 +50,8 @@
             "title": "தொடர்பைத் தேர்வுசெய்க",
             "SearchByName": "பெயரால் தேடுங்கள்",
             "CreateAccount": "+ புதிய தொடர்பு",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create கிடைக்கவில்லை"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create கிடைக்கவில்லை",
+            "EmptyContacts": "தொடர்புகள் கிடைக்கவில்லை ..."
         },
         "select": {
             "title": "Contact {999} contact இன் தொடர்பைத் தேர்ந்தெடுக்கவும்"

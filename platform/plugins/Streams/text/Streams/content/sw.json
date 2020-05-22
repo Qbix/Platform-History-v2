@@ -91,7 +91,8 @@
         "notice": {
             "text": "Umealikwa. {{ClickOrTap}} hapa kukubali na kujiunga."
         },
-        "youCanNowPaste": "Sasa unaweza kubandika kiunga hiki mahali pengine ili kuwaalika watu"
+        "youCanNowPaste": "Sasa unaweza kubandika kiunga hiki mahali pengine ili kuwaalika watu",
+        "command": "Mialika"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Kiunga kilichonakiliwa kwa clipboard",
             "codeCopiedToCb": "Nambari iliyonakiliwa kwa clipboard",
             "userHasNoVideo": "Mshiriki hana video",
-            "openInBrowserAlert": "Fungua kiunga katika kivinjari cha Safari ili ujiunge na mkutano huo."
+            "openInBrowserAlert": "Fungua kiunga katika kivinjari cha Safari ili ujiunge na mkutano huo.",
+            "youBeganVideoRecording": "Ulianza kurekodi mkutano huu",
+            "youStoppedVideoRecording": "Uliacha kurekodi mkutano huu"
         },
         "settingsPopup": {
             "webCamera": "Kamera ya Wavuti",
@@ -189,7 +192,12 @@
             "copy": "Nakala",
             "turnOffVideo": "Zima kushiriki kamera \/ skrini",
             "turnOffScreenSharing": "Zima kushiriki skrini",
-            "cameraIsTurnedOff": "Kamera imezimwa"
+            "cameraIsTurnedOff": "Kamera imezimwa",
+            "startRecording": "Anza Kurekodi",
+            "stopRecording": "Acha Kurekodi",
+            "recordingInProgress": "Kurekodi kunaendelea ...",
+            "publishOnTimeline": "Chapisha kwenye ratiba ya saa",
+            "publishToGroup": "Chapisha kwa kikundi"
         },
         "participantsPopup": {
             "disconnect": "Kukata",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Mzito Ila mimi",
             "maximizeLoudest": "Panua zaidi",
             "staticMaximized": "Imesimamishwa sana",
-            "manual": "Mwongozo"
-        }
+            "manual": "Mwongozo",
+            "turnOffCamera": "Ficha video",
+            "turnOffAudio": "Sikiza sauti",
+            "turnOffScreenSharing": "Ficha kushiriki skrini",
+            "turnOnCamera": "Onyesha video",
+            "turnOnAudio": "Sikiza sauti",
+            "turnOnScreenSharing": "Onyesha kushiriki skrini"
+        },
+        "notAllowedToJoinCall": "Huna ruhusa ya kujiunga na mkondo huu.",
+        "streamTitle": "{{1}} simu ya moja kwa moja"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "Okoa",
         "Delete": "Futa",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Yaliyomo hapa siri."
     }
 }

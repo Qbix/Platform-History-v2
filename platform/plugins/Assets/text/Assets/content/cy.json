@@ -12,8 +12,8 @@
     "payment": {
         "AboutOrder": "Gwybodaeth am drefn",
         "PaymentMethod": "Dull talu",
-        "ContactInfo": "Manylion cyswllt",
-        "Pay": "Cyflog"
+        "ContactInfo": "Gwybodaeth gyswllt",
+        "Pay": "Tâl"
     },
     "credits": {
         "InviteAcceptedBy": "Gwahoddwyd gwahoddiad gan {{1}}",
@@ -26,7 +26,8 @@
         "Client": "Cleient",
         "To": "i",
         "From": "o",
-        "HistoryEmpty": "Nid oes gennych unrhyw ddata eto"
+        "HistoryEmpty": "Nid oes gennych unrhyw ddata eto",
+        "SeeHistory": "Gweler hanes talu am {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Gosod Gwybodaeth Taliad",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "Wedi derbyn {{amount}} credyd"
         }
+    },
+    "charge": {
+        "Subject": "Rydych chi&#39;n cael taliad o {{displayAmount}} o {{call 'publisher.displayName'}} gan &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hei, dim ond i adael i chi wybod bod {{1}} wedi&#39;i godi {{2}} am {{3}} gan {{4}}"
+    },
+    "charged": {
+        "Subject": "Diolch am eich taliad am &quot;{{description}}&quot;",
+        "HavePaid": "Hei {{1}}, dim ond cadarnhad cyflym yw hwn eich bod wedi talu {{2}} yn llwyddiannus i {{3}} am {{4}}"
     }
 }

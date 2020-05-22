@@ -50,7 +50,8 @@
             "title": "Kies contact",
             "SearchByName": "Zoek op naam",
             "CreateAccount": "+ Nieuw contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create niet gevonden"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create niet gevonden",
+            "EmptyContacts": "Contacten niet gevonden ..."
         },
         "select": {
             "title": "Selecteer contact van {{displayName}}"

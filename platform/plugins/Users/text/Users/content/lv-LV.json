@@ -50,7 +50,8 @@
             "title": "Izvēlieties kontaktu",
             "SearchByName": "Meklēt pēc vārda",
             "CreateAccount": "+ Jauns kontakts",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nav atrasts"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nav atrasts",
+            "EmptyContacts": "Kontakti nav atrasti ..."
         },
         "select": {
             "title": "Atlasiet kontaktpersonu {{displayName}}"

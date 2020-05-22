@@ -50,7 +50,8 @@
             "title": "Velg kontakt",
             "SearchByName": "Søk etter navn",
             "CreateAccount": "+ Ny kontakt",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ikke funnet"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ikke funnet",
+            "EmptyContacts": "Kontakter ikke funnet ..."
         },
         "select": {
             "title": "Velg kontakt fra {{displayName}}"

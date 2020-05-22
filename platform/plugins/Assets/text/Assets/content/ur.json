@@ -13,7 +13,7 @@
         "AboutOrder": "آرڈر کے بارے میں معلومات",
         "PaymentMethod": "ادائیگی کا طریقہ",
         "ContactInfo": "رابطہ کی معلومات",
-        "Pay": "ادائیگی کریں"
+        "Pay": "تنخواہ"
     },
     "credits": {
         "InviteAcceptedBy": "{{1}} کی جانب سے قبول کیا مدعو",
@@ -26,7 +26,8 @@
         "Client": "مؤکل۔",
         "To": "کرنے کے لئے",
         "From": "سے",
-        "HistoryEmpty": "آپ کے پاس ابھی تک کوئی ڈیٹا نہیں ہے۔"
+        "HistoryEmpty": "آپ کے پاس ابھی تک کوئی ڈیٹا نہیں ہے۔",
+        "SeeHistory": "payment {999} for کے لئے ادائیگی کی تاریخ دیکھیں"
     },
     "subscriptions": {
         "infoTitle": "ادائیگی کی معلومات مرتب کریں۔",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "{9 999}} کریڈٹ موصول ہوئے۔"
         }
+    },
+    "charge": {
+        "Subject": "&quot;{{description}}&quot; کے ذریعہ آپ کو {{call 'publisher.displayName'}} سے {{999} of کی ادائیگی مل جاتی ہے",
+        "HasBeenCharged": "ارے ، یہ آپ کو صرف یہ بتانے کے لئے ہے کہ {2 1001}} کے ذریعہ {{1009}} کے لئے {{10009} charged وصول کیا گیا ہے"
+    },
+    "charged": {
+        "Subject": "&quot;{{description}}&quot; کی ادائیگی کے لئے آپ کا شکریہ",
+        "HavePaid": "ارے {9 999}} ، یہ صرف فوری تصدیق ہے کہ آپ نے کامیابی کے ساتھ {2 1002}}} 1001}} کو} {1001} paid کی ادائیگی کردی ہے"
     }
 }

@@ -91,7 +91,8 @@
         "notice": {
             "text": "Позвани сте. {{ClickOrTap}} овде да прихватим и придружим се."
         },
-        "youCanNowPaste": "Сада можете да залепите ову везу негде да бисте позвали људе"
+        "youCanNowPaste": "Сада можете да залепите ову везу негде да бисте позвали људе",
+        "command": "Позовите"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Веза је копирана у међуспремник",
             "codeCopiedToCb": "Код је копиран у међуспремник",
             "userHasNoVideo": "Учесник нема видео",
-            "openInBrowserAlert": "Отворите везу у прегледачу Сафари да бисте се придружили конференцији."
+            "openInBrowserAlert": "Отворите везу у прегледачу Сафари да бисте се придружили конференцији.",
+            "youBeganVideoRecording": "Почели сте снимати ову конференцију",
+            "youStoppedVideoRecording": "Престали сте да снимате ову конференцију"
         },
         "settingsPopup": {
             "webCamera": "Веб камера",
@@ -189,7 +192,12 @@
             "copy": "Копирај",
             "turnOffVideo": "Искључите дељење камере / екрана",
             "turnOffScreenSharing": "Искључите дељење екрана",
-            "cameraIsTurnedOff": "Камера је искључена"
+            "cameraIsTurnedOff": "Камера је искључена",
+            "startRecording": "Почели са снимањем",
+            "stopRecording": "Заустави снимање",
+            "recordingInProgress": "Снимање је у току ...",
+            "publishOnTimeline": "Објавите на временској траци",
+            "publishToGroup": "Објавите у групи"
         },
         "participantsPopup": {
             "disconnect": "Прекини везу",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Најгласније осим мене",
             "maximizeLoudest": "Максимизирајте најгласније",
             "staticMaximized": "Статички максимизирано",
-            "manual": "Упутство"
-        }
+            "manual": "Упутство",
+            "turnOffCamera": "Сакриј видео",
+            "turnOffAudio": "Искључите звук",
+            "turnOffScreenSharing": "Сакриј дељење екрана",
+            "turnOnCamera": "Прикажи видео",
+            "turnOnAudio": "Занемаривање звука",
+            "turnOnScreenSharing": "Прикажи дељење екрана"
+        },
+        "notAllowedToJoinCall": "Немате дозволу да се придружите овом току.",
+        "streamTitle": "{999}} позив уживо"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "сачувати",
         "Delete": "Избриши",
         "Submenu": "Подмени"
+    },
+    "errors": {
+        "HiddenFromYou": "Овај садржај је сакривен од вас."
     }
 }

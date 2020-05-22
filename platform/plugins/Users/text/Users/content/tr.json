@@ -50,7 +50,8 @@
             "title": "Kişi seç",
             "SearchByName": "İsme göre ara",
             "CreateAccount": "+ Yeni İletişim",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create bulunamadı"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create bulunamadı",
+            "EmptyContacts": "Kişiler bulunamadı ..."
         },
         "select": {
             "title": "{{displayName}} kişisini seçin"

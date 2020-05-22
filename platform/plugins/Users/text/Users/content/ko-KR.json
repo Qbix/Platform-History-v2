@@ -50,7 +50,8 @@
             "title": "연락처 선택",
             "SearchByName": "이름으로 검색",
             "CreateAccount": "+ 새로운 연락처",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create를 찾을 수 없습니다"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create를 찾을 수 없습니다",
+            "EmptyContacts": "연락처를 찾을 수 없습니다 ..."
         },
         "select": {
             "title": "{{displayName}}의 연락처 선택"

@@ -91,7 +91,8 @@
         "notice": {
             "text": "Bạn đã được mời. {{ClickOrTap}} tại đây để chấp nhận và tham gia."
         },
-        "youCanNowPaste": "Bây giờ bạn có thể dán liên kết này ở đâu đó để mời mọi người"
+        "youCanNowPaste": "Bây giờ bạn có thể dán liên kết này ở đâu đó để mời mọi người",
+        "command": "Mời gọi"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Liên kết được sao chép vào khay nhớ tạm",
             "codeCopiedToCb": "Mã được sao chép vào clipboard",
             "userHasNoVideo": "Người tham gia không có video",
-            "openInBrowserAlert": "Mở liên kết trong trình duyệt Safari để tham gia hội nghị."
+            "openInBrowserAlert": "Mở liên kết trong trình duyệt Safari để tham gia hội nghị.",
+            "youBeganVideoRecording": "Bạn đã bắt đầu ghi âm hội nghị này",
+            "youStoppedVideoRecording": "Bạn đã dừng ghi âm hội nghị này"
         },
         "settingsPopup": {
             "webCamera": "Máy ảnh web",
@@ -189,7 +192,12 @@
             "copy": "Sao chép",
             "turnOffVideo": "Tắt chia sẻ camera \/ màn hình",
             "turnOffScreenSharing": "Tắt chia sẻ màn hình",
-            "cameraIsTurnedOff": "Máy ảnh bị tắt"
+            "cameraIsTurnedOff": "Máy ảnh bị tắt",
+            "startRecording": "Bắt đầu thu",
+            "stopRecording": "Dừng ghi âm",
+            "recordingInProgress": "Đang ghi âm ...",
+            "publishOnTimeline": "Xuất bản trên dòng thời gian",
+            "publishToGroup": "Xuất bản lên nhóm"
         },
         "participantsPopup": {
             "disconnect": "Ngắt kết nối",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Lớn nhất ngoại trừ tôi",
             "maximizeLoudest": "Tối đa hóa to nhất",
             "staticMaximized": "Tối đa hóa tĩnh",
-            "manual": "Hướng dẫn sử dụng"
-        }
+            "manual": "Hướng dẫn sử dụng",
+            "turnOffCamera": "Ẩn video",
+            "turnOffAudio": "Tắt tiếng",
+            "turnOffScreenSharing": "Ẩn chia sẻ màn hình",
+            "turnOnCamera": "Hiển thị video",
+            "turnOnAudio": "Tắt âm thanh",
+            "turnOnScreenSharing": "Hiển thị chia sẻ màn hình"
+        },
+        "notAllowedToJoinCall": "Bạn không được phép tham gia luồng này.",
+        "streamTitle": "{{1}} cuộc gọi trực tiếp"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "Tiết kiệm",
         "Delete": "Xóa bỏ",
         "Submenu": "Menu phụ"
+    },
+    "errors": {
+        "HiddenFromYou": "Nội dung này được ẩn từ bạn."
     }
 }

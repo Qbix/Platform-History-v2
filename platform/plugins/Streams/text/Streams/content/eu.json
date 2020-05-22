@@ -91,7 +91,8 @@
         "notice": {
             "text": "Gonbidatu zaitu. {{ClickOrTap}} hemen onartzeko eta elkartzeko."
         },
-        "youCanNowPaste": "Esteka hau nonbait itsatsi dezakezu jendea gonbidatzeko"
+        "youCanNowPaste": "Esteka hau nonbait itsatsi dezakezu jendea gonbidatzeko",
+        "command": "gonbidatu"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Esteka arbelean kopiatuta",
             "codeCopiedToCb": "Arbelera kopiatutako kodea",
             "userHasNoVideo": "Parte hartzaileak ez du bideorik",
-            "openInBrowserAlert": "Esteka irekia Safari arakatzailean konferentzian sartzeko."
+            "openInBrowserAlert": "Esteka irekia Safari arakatzailean konferentzian sartzeko.",
+            "youBeganVideoRecording": "Konferentzia hau grabatzen hasi zinen",
+            "youStoppedVideoRecording": "Konferentzia hau grabatzeari utzi diozu"
         },
         "settingsPopup": {
             "webCamera": "Web Kamera",
@@ -189,7 +192,12 @@
             "copy": "Copy",
             "turnOffVideo": "Desaktibatu kamera \/ pantaila partekatzea",
             "turnOffScreenSharing": "Desaktibatu pantaila partekatzea",
-            "cameraIsTurnedOff": "Kamera itzalita dago"
+            "cameraIsTurnedOff": "Kamera itzalita dago",
+            "startRecording": "Grabatzen hasteko",
+            "stopRecording": "Grabazioa gelditu",
+            "recordingInProgress": "Grabaketa abian da ...",
+            "publishOnTimeline": "Publikatu denbora-lerroan",
+            "publishToGroup": "Argitaratu taldean"
         },
         "participantsPopup": {
             "disconnect": "Deskonektatu",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Ozenena ni izan ezik",
             "maximizeLoudest": "Ahalik eta ozenena",
             "staticMaximized": "Estatiko Maximizatua",
-            "manual": "Eskuzko"
-        }
+            "manual": "Eskuzko",
+            "turnOffCamera": "Ezkutatu bideoa",
+            "turnOffAudio": "Audioa isilarazteko",
+            "turnOffScreenSharing": "Ezkutatu pantaila partekatzea",
+            "turnOnCamera": "Erakutsi bideoa",
+            "turnOnAudio": "Ezabatu audioa",
+            "turnOnScreenSharing": "Erakutsi pantaila partekatzea"
+        },
+        "notAllowedToJoinCall": "Ez duzu korrontean sartzeko baimenik.",
+        "streamTitle": "{{1}} zuzeneko deia"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "Save",
         "Delete": "Ezabatu",
         "Submenu": "Azpimenura"
+    },
+    "errors": {
+        "HiddenFromYou": "Eduki hau ezkutatuta dago."
     }
 }

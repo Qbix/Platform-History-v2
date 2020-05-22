@@ -73,5 +73,30 @@
             "touchscreen": "用手指进行缩放和拖动",
             "notTouchscreen": "使用鼠标和滚轮进行缩放和拖动"
         }
+    },
+    "timestamp": {
+        "lastNight": "昨晚",
+        "lastEvening": "前夕",
+        "yesterday": "昨天",
+        "thisMorning": "这个早晨",
+        "today": "今天",
+        "tonight": "今晚",
+        "tomorrowMorning": "汤姆早晨",
+        "tomorrow": "明天",
+        "hoursAgo": "{{h}}小时前",
+        "hourAgo": "{{h}}小时前",
+        "minuteAgo": "{{m}}分钟前",
+        "minutesAgo": "{{m}}分钟前",
+        "secondAgo": "{{s}}前",
+        "secondsAgo": "{{s}}秒前",
+        "fewSecondsAgo": "秒前",
+        "rightNow": "马上",
+        "inSecond": "在{{s}}秒内",
+        "inSeconds": "在{{s}}秒内",
+        "inMinute": "在{{m}}分钟内",
+        "inMinutes": "在{{m}}分钟内",
+        "inHour": "在{{h}}小时内",
+        "inHours": "在{{h}}小时内",
+        "inUnderMinute": "不到1分钟"
     }
 }

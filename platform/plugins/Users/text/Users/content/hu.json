@@ -50,7 +50,8 @@
             "title": "Válassza ki a kapcsolatot",
             "SearchByName": "Keresés név szerint",
             "CreateAccount": "+ Új kapcsolattartó",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nem található"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nem található",
+            "EmptyContacts": "A kapcsolatok nem találhatóak ..."
         },
         "select": {
             "title": "Kapcsolat kiválasztása a {{displayName}}"

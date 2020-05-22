@@ -73,5 +73,30 @@
             "touchscreen": "Brug dine fingre til at zoome og trække",
             "notTouchscreen": "Brug din mus og hjul til at zoome og trække"
         }
+    },
+    "timestamp": {
+        "lastNight": "igåraftes",
+        "lastEvening": "sidste aften",
+        "yesterday": "i går",
+        "thisMorning": "denne morn",
+        "today": "i dag",
+        "tonight": "i aften",
+        "tomorrowMorning": "Tom morn",
+        "tomorrow": "i morgen",
+        "hoursAgo": "For {{h}} timer siden",
+        "hourAgo": "For {{h}} time siden",
+        "minuteAgo": "{{m}} minut siden",
+        "minutesAgo": "{{m}} minutter siden",
+        "secondAgo": "{{s}} andet siden",
+        "secondsAgo": "For {{s}} sekunder siden",
+        "fewSecondsAgo": "sekunder siden",
+        "rightNow": "lige nu",
+        "inSecond": "om {{s}} sekund",
+        "inSeconds": "om {{s}} sekunder",
+        "inMinute": "om {{m}} minut",
+        "inMinutes": "om {{m}} minutter",
+        "inHour": "om {{h}} time",
+        "inHours": "om {{h}} timer",
+        "inUnderMinute": "på under 1 minut"
     }
 }

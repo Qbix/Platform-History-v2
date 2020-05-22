@@ -73,5 +73,30 @@
             "touchscreen": "Padidinkite ir vilkite pirštus",
             "notTouchscreen": "Naudokite pelę ir ratą, kad padidintumėte ir vilkite"
         }
+    },
+    "timestamp": {
+        "lastNight": "praeita naktis",
+        "lastEvening": "paskutinis vakaras",
+        "yesterday": "vakar",
+        "thisMorning": "šį rytą",
+        "today": "šiandien",
+        "tonight": "šį vakarą",
+        "tomorrowMorning": "Tomas ryte",
+        "tomorrow": "rytoj",
+        "hoursAgo": "Prieš {{h}} valandas",
+        "hourAgo": "Prieš {{h}} valandą",
+        "minuteAgo": "Prieš {{m}} minutę",
+        "minutesAgo": "Prieš {{m}} minutes",
+        "secondAgo": "Prieš {{s}}",
+        "secondsAgo": "Prieš {{s}} sekundes",
+        "fewSecondsAgo": "prieš kelias sekundes",
+        "rightNow": "dabar",
+        "inSecond": "per {{s}} sekundę",
+        "inSeconds": "per {{s}} sekundes",
+        "inMinute": "per {{m}} minutę",
+        "inMinutes": "per {{m}} minutes",
+        "inHour": "per {{h}} valandą",
+        "inHours": "per {{h}} valandas",
+        "inUnderMinute": "per mažiau nei 1 minutę"
     }
 }

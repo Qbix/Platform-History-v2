@@ -10,9 +10,9 @@
         "YouSubscribedTo": "Pretplaćeni ste na {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "Informacije o narudžbi",
+        "AboutOrder": "Podaci o narudžbi",
         "PaymentMethod": "Način plaćanja",
-        "ContactInfo": "Informacije o kontaktu",
+        "ContactInfo": "Podaci za kontakt",
         "Pay": "Platiti"
     },
     "credits": {
@@ -26,7 +26,8 @@
         "Client": "Klijent",
         "To": "do",
         "From": "iz",
-        "HistoryEmpty": "Još nemate podataka"
+        "HistoryEmpty": "Još nemate podataka",
+        "SeeHistory": "Pogledajte povijest plaćanja za {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Postavite podatke o plaćanju",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "Primljeno je {{amount}} kredita"
         }
+    },
+    "charge": {
+        "Subject": "Uplatite {{displayAmount}} od {{call 'publisher.displayName'}} od &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hej, ovo je samo da vas obavijestim {{1}} {{3}} se naplaćuje {{3}} do {{4}}"
+    },
+    "charged": {
+        "Subject": "Zahvaljujemo na uplati za &quot;{{description}}&quot;",
+        "HavePaid": "Hej {{1}}, ovo je samo brza potvrda da ste uspješno platili {{2}} do {{3}} za {{4}}"
     }
 }

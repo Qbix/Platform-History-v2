@@ -26,7 +26,8 @@
         "Client": "Klient",
         "To": "na",
         "From": "z",
-        "HistoryEmpty": "Zatím nemáte žádná data"
+        "HistoryEmpty": "Zatím nemáte žádná data",
+        "SeeHistory": "Zobrazit historii plateb pro {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Nastavte informace o platbě",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "Obdrženo {{amount}} kreditů"
         }
+    },
+    "charge": {
+        "Subject": "Dostanete platbu ve výši {{displayAmount}} od {{call 'publisher.displayName'}} do &quot;{{description}}&quot;",
+        "HasBeenCharged": "Ahoj, jen proto, abychom vás informovali, {{1}} byl {{3}} účtován poplatek {{3}} {{4}}"
+    },
+    "charged": {
+        "Subject": "Děkujeme za vaši platbu za „{{description}}“",
+        "HavePaid": "Ahoj {{1}}, je to jen rychlé potvrzení, že jste úspěšně zaplatili {{2}} do {{3}} za {{4}}"
     }
 }

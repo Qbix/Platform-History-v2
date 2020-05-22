@@ -73,5 +73,30 @@
             "touchscreen": "Użyj palców, aby powiększyć i przeciągnąć",
             "notTouchscreen": "Użyj myszki i koła, aby powiększyć i przeciągnąć"
         }
+    },
+    "timestamp": {
+        "lastNight": "Ostatnia noc",
+        "lastEvening": "ostatnia wigilia",
+        "yesterday": "wczoraj",
+        "thisMorning": "ten poranek",
+        "today": "dzisiaj",
+        "tonight": "tej nocy",
+        "tomorrowMorning": "Tom Morn",
+        "tomorrow": "jutro",
+        "hoursAgo": "{{h}} godzin temu",
+        "hourAgo": "{{h}} godzinę temu",
+        "minuteAgo": "{{m}} minutę temu",
+        "minutesAgo": "{{m}} minut temu",
+        "secondAgo": "{{s}} sekundę temu",
+        "secondsAgo": "{{s}} sekund temu",
+        "fewSecondsAgo": "sekundy temu",
+        "rightNow": "teraz",
+        "inSecond": "za {{s}} sekund",
+        "inSeconds": "za {{s}} sekund",
+        "inMinute": "za {{m}} minut",
+        "inMinutes": "za {{m}} minut",
+        "inHour": "za {{h}} godziny",
+        "inHours": "za {{h}} godzin",
+        "inUnderMinute": "w mniej niż 1 minutę"
     }
 }

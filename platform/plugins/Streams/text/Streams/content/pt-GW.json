@@ -91,7 +91,8 @@
         "notice": {
             "text": "Você foi convidado. {{ClickOrTap}} aqui para aceitar e participar."
         },
-        "youCanNowPaste": "Agora você pode colar este link em algum lugar para convidar pessoas"
+        "youCanNowPaste": "Agora você pode colar este link em algum lugar para convidar pessoas",
+        "command": "Convite"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Link copiado para a área de transferência",
             "codeCopiedToCb": "Código copiado para a área de transferência",
             "userHasNoVideo": "O participante não tem vídeo",
-            "openInBrowserAlert": "Abra o link no navegador Safari para participar da conferência."
+            "openInBrowserAlert": "Abra o link no navegador Safari para participar da conferência.",
+            "youBeganVideoRecording": "Você começou a gravar esta conferência",
+            "youStoppedVideoRecording": "Você parou de gravar esta conferência"
         },
         "settingsPopup": {
             "webCamera": "Câmera web",
@@ -189,7 +192,12 @@
             "copy": "cópia de",
             "turnOffVideo": "Desativar compartilhamento de câmera / tela",
             "turnOffScreenSharing": "Desativar compartilhamento de tela",
-            "cameraIsTurnedOff": "A câmera está desligada"
+            "cameraIsTurnedOff": "A câmera está desligada",
+            "startRecording": "Comece a gravar",
+            "stopRecording": "Pare de gravar",
+            "recordingInProgress": "A gravação está em andamento ...",
+            "publishOnTimeline": "Publicar na linha do tempo",
+            "publishToGroup": "Publicar no grupo"
         },
         "participantsPopup": {
             "disconnect": "desconectar",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Mais Alto, Exceto Eu",
             "maximizeLoudest": "Maximizar o mais alto",
             "staticMaximized": "Estática Maximizada",
-            "manual": "Manual"
-        }
+            "manual": "Manual",
+            "turnOffCamera": "Ocultar vídeo",
+            "turnOffAudio": "Silenciar áudio",
+            "turnOffScreenSharing": "Ocultar compartilhamento de tela",
+            "turnOnCamera": "Mostrar vídeo",
+            "turnOnAudio": "Ativar som do áudio",
+            "turnOnScreenSharing": "Mostrar compartilhamento de tela"
+        },
+        "notAllowedToJoinCall": "Você não tem permissão para ingressar neste fluxo.",
+        "streamTitle": "{{1}} chamada ao vivo"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "Salve ",
         "Delete": "Excluir",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Este conteúdo está oculto para você."
     }
 }

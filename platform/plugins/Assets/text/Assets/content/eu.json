@@ -10,9 +10,9 @@
         "YouSubscribedTo": "{{plan.title}} zerbitzuan harpidetu zara"
     },
     "payment": {
-        "AboutOrder": "Ordena buruzko informazioa",
-        "PaymentMethod": "Ordainketa modua",
-        "ContactInfo": "Harremanetarako informazioa",
+        "AboutOrder": "Eskaerari buruzko informazioa",
+        "PaymentMethod": "Ordaintzeko modua",
+        "ContactInfo": "Harremanetarako datuak",
         "Pay": "Ordaindu"
     },
     "credits": {
@@ -26,7 +26,8 @@
         "Client": "Bezero",
         "To": "to",
         "From": "batetik",
-        "HistoryEmpty": "Datuak oraindik ez dituzu"
+        "HistoryEmpty": "Datuak oraindik ez dituzu",
+        "SeeHistory": "Ikusi {{1}} ordainketaren historia"
     },
     "subscriptions": {
         "infoTitle": "Ezarri ordainketa informazioa",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "{{amount}} kredituak jaso dira"
         }
+    },
+    "charge": {
+        "Subject": "{{displayAmount}} (e) tik {{call 'publisher.displayName'}} ordainketa &quot;{{description}}&quot; bidez jasotzen duzu",
+        "HasBeenCharged": "He, hau jakinarazteko besterik ez da {{1}} {{3}} {{3}} kargutik {{4}} kargatu zaizu"
+    },
+    "charged": {
+        "Subject": "Eskerrik asko &quot;{{description}}&quot; delakoagatik ordaintzeagatik.",
+        "HavePaid": "Kaixo {{1}}, baieztapen bizkorra besterik ez da {{3}} {{3}} (e) tik {{4}} ondo ordaindu duzula."
     }
 }

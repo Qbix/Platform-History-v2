@@ -13,7 +13,7 @@
         "AboutOrder": "Inligting oor bestelling",
         "PaymentMethod": "Betalings metode",
         "ContactInfo": "Kontakbesonderhede",
-        "Pay": "betaal"
+        "Pay": "Pay"
     },
     "credits": {
         "InviteAcceptedBy": "Uitnodiging aanvaar deur {{1}}",
@@ -26,7 +26,8 @@
         "Client": "kliënt",
         "To": "om",
         "From": "van",
-        "HistoryEmpty": "U het nog geen data nie"
+        "HistoryEmpty": "U het nog geen data nie",
+        "SeeHistory": "Kyk na betalingsgeskiedenis vir {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Stel betalinginligting op",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "Het {{amount}} krediete ontvang"
         }
+    },
+    "charge": {
+        "Subject": "U ontvang {{displayAmount}} betaling vanaf {{call 'publisher.displayName'}} deur &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hallo, dit is net om jou te laat weet {{1}} is {{2}} van {{3}} deur {{4}} aangekla."
+    },
+    "charged": {
+        "Subject": "Dankie vir u betaling vir &quot;{{description}}&quot;",
+        "HavePaid": "Hallo {{1}}, dit is net &#39;n vinnige bevestiging dat u {{2}} suksesvol aan {{3}} betaal het vir {{4}}"
     }
 }

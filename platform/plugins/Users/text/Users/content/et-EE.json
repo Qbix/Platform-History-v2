@@ -50,7 +50,8 @@
             "title": "Valige kontakt",
             "SearchByName": "Otsige nime järgi",
             "CreateAccount": "+ Uus kontakt",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ei leitud"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ei leitud",
+            "EmptyContacts": "Kontakte ei leitud ..."
         },
         "select": {
             "title": "Valige kontakt {{displayName}}"

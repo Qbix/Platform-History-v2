@@ -91,7 +91,8 @@
         "notice": {
             "text": "คุณได้รับเชิญ {{ClickOrTap}} ที่นี่เพื่อยอมรับและเข้าร่วม"
         },
-        "youCanNowPaste": "ตอนนี้คุณสามารถวางลิงค์นี้เพื่อเชิญคนอื่น"
+        "youCanNowPaste": "ตอนนี้คุณสามารถวางลิงค์นี้เพื่อเชิญคนอื่น",
+        "command": "เชิญ"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "ลิงก์คัดลอกไปยังคลิปบอร์ด",
             "codeCopiedToCb": "รหัสคัดลอกไปยังคลิปบอร์ด",
             "userHasNoVideo": "ผู้เข้าร่วมไม่มีวิดีโอ",
-            "openInBrowserAlert": "เปิดลิงก์ในเบราว์เซอร์ Safari เพื่อเข้าร่วมการประชุม"
+            "openInBrowserAlert": "เปิดลิงก์ในเบราว์เซอร์ Safari เพื่อเข้าร่วมการประชุม",
+            "youBeganVideoRecording": "คุณเริ่มบันทึกการประชุมนี้",
+            "youStoppedVideoRecording": "คุณหยุดบันทึกการประชุมนี้"
         },
         "settingsPopup": {
             "webCamera": "กล้องเว็บ",
@@ -189,7 +192,12 @@
             "copy": "สำเนา",
             "turnOffVideo": "ปิดการแชร์กล้อง \/ หน้าจอ",
             "turnOffScreenSharing": "ปิดการแชร์หน้าจอ",
-            "cameraIsTurnedOff": "ปิดกล้องแล้ว"
+            "cameraIsTurnedOff": "ปิดกล้องแล้ว",
+            "startRecording": "เริ่มการบันทึก",
+            "stopRecording": "หยุดการบันทึก",
+            "recordingInProgress": "กำลังบันทึก ...",
+            "publishOnTimeline": "เผยแพร่บนไทม์ไลน์",
+            "publishToGroup": "เผยแพร่ไปยังกลุ่ม"
         },
         "participantsPopup": {
             "disconnect": "ปลด",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "ดังยกเว้นฉัน",
             "maximizeLoudest": "ขยายใหญ่สุด",
             "staticMaximized": "สถิตสูงสุด",
-            "manual": "คู่มือ"
-        }
+            "manual": "คู่มือ",
+            "turnOffCamera": "ซ่อนวิดีโอ",
+            "turnOffAudio": "ปิดเสียง",
+            "turnOffScreenSharing": "ซ่อนการแชร์หน้าจอ",
+            "turnOnCamera": "แสดงวิดีโอ",
+            "turnOnAudio": "เปิดเสียง",
+            "turnOnScreenSharing": "แสดงการแชร์หน้าจอ"
+        },
+        "notAllowedToJoinCall": "คุณไม่ได้รับอนุญาตให้เข้าร่วมสตรีมนี้",
+        "streamTitle": "{{1}} การโทรสด"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "บันทึก",
         "Delete": "ลบ",
         "Submenu": "เมนูย่อย"
+    },
+    "errors": {
+        "HiddenFromYou": "เนื้อหานี้ถูกซ่อนจากคุณ"
     }
 }

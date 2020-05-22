@@ -91,7 +91,8 @@
         "notice": {
             "text": "你被邀请了。 {{ClickOrTap}}在这里接受并加入。"
         },
-        "youCanNowPaste": "现在，您可以将此链接粘贴到某个地方以邀请其他人"
+        "youCanNowPaste": "现在，您可以将此链接粘贴到某个地方以邀请其他人",
+        "command": "邀请"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "链接已复制到剪贴板",
             "codeCopiedToCb": "代码已复制到剪贴板",
             "userHasNoVideo": "参加者没有视频",
-            "openInBrowserAlert": "在Safari浏览器中打开链接以加入会议。"
+            "openInBrowserAlert": "在Safari浏览器中打开链接以加入会议。",
+            "youBeganVideoRecording": "您开始录制此会议",
+            "youStoppedVideoRecording": "您已停止录制此会议"
         },
         "settingsPopup": {
             "webCamera": "网络摄像头",
@@ -189,7 +192,12 @@
             "copy": "复制",
             "turnOffVideo": "关闭相机\/屏幕共享",
             "turnOffScreenSharing": "关闭屏幕共享",
-            "cameraIsTurnedOff": "相机已关闭"
+            "cameraIsTurnedOff": "相机已关闭",
+            "startRecording": "开始录音",
+            "stopRecording": "停止录音",
+            "recordingInProgress": "录音正在进行中...",
+            "publishOnTimeline": "在时间表上发布",
+            "publishToGroup": "发布到群组"
         },
         "participantsPopup": {
             "disconnect": "断开",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "除了我最大声",
             "maximizeLoudest": "最大化声音",
             "staticMaximized": "静态最大化",
-            "manual": "手册"
-        }
+            "manual": "手册",
+            "turnOffCamera": "隐藏影片",
+            "turnOffAudio": "静音",
+            "turnOffScreenSharing": "隐藏屏幕共享",
+            "turnOnCamera": "显示影片",
+            "turnOnAudio": "取消静音",
+            "turnOnScreenSharing": "显示屏幕共享"
+        },
+        "notAllowedToJoinCall": "您无权加入此信息流。",
+        "streamTitle": "{{1}}现场通话"
     },
     "types": {
         "Streams\/invited": {
@@ -337,5 +353,8 @@
         "Save": "保存",
         "Delete": "删除",
         "Submenu": "子菜单"
+    },
+    "errors": {
+        "HiddenFromYou": "此内容对您隐藏。"
     }
 }

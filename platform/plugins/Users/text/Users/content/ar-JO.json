@@ -50,7 +50,8 @@
             "title": "اختيار الاتصال",
             "SearchByName": "البحث عن طريق الإسم",
             "CreateAccount": "+ اتصال جديد",
-            "CreateAccountNotFound": "لم يتم العثور على Q.Users.Cordova.UI.Create"
+            "CreateAccountNotFound": "لم يتم العثور على Q.Users.Cordova.UI.Create",
+            "EmptyContacts": "لم يتم العثور على جهات الاتصال ..."
         },
         "select": {
             "title": "اختر جهة اتصال {{displayName}}"

@@ -91,7 +91,8 @@
         "notice": {
             "text": "Has estat convidat. {{ClickOrTap}} aquí per acceptar i unir-se."
         },
-        "youCanNowPaste": "Ara podeu enganxar aquest enllaç en algun lloc per convidar la gent"
+        "youCanNowPaste": "Ara podeu enganxar aquest enllaç en algun lloc per convidar la gent",
+        "command": "Convidar"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Enllaç copiat al porta-retalls",
             "codeCopiedToCb": "Codi copiat al porta-retalls",
             "userHasNoVideo": "El participant no té cap vídeo",
-            "openInBrowserAlert": "Obrir un enllaç al navegador Safari per unir-se a la conferència."
+            "openInBrowserAlert": "Obrir un enllaç al navegador Safari per unir-se a la conferència.",
+            "youBeganVideoRecording": "Vau començar a enregistrar aquesta conferència",
+            "youStoppedVideoRecording": "Heu deixat de gravar aquesta conferència"
         },
         "settingsPopup": {
             "webCamera": "Càmera web",
@@ -189,7 +192,12 @@
             "copy": "Còpia",
             "turnOffVideo": "Desactiveu l’ús compartit de càmera \/ pantalla",
             "turnOffScreenSharing": "Desactiva l’ús compartit de pantalla",
-            "cameraIsTurnedOff": "La càmera està desactivada"
+            "cameraIsTurnedOff": "La càmera està desactivada",
+            "startRecording": "Comença l&#39;enregistrament",
+            "stopRecording": "Deixa de gravar",
+            "recordingInProgress": "La gravació està en curs ...",
+            "publishOnTimeline": "Publica-la a la línia de temps",
+            "publishToGroup": "Publica per agrupar"
         },
         "participantsPopup": {
             "disconnect": "Desconnecta",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Més fort excepte jo",
             "maximizeLoudest": "Maximitza més fort",
             "staticMaximized": "Màxim estàtic",
-            "manual": "Manual"
-        }
+            "manual": "Manual",
+            "turnOffCamera": "Amagueu el vídeo",
+            "turnOffAudio": "Silencia l’àudio",
+            "turnOffScreenSharing": "Amagueu la compartició de pantalla",
+            "turnOnCamera": "Mostra vídeo",
+            "turnOnAudio": "No activa el so",
+            "turnOnScreenSharing": "Mostra compartició de pantalla"
+        },
+        "notAllowedToJoinCall": "No teniu permís per unir-vos a aquest flux.",
+        "streamTitle": "{{1}} trucada en directe"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "Desa",
         "Delete": "Suprimeix",
         "Submenu": "Submenú"
+    },
+    "errors": {
+        "HiddenFromYou": "Aquest contingut està ocult."
     }
 }

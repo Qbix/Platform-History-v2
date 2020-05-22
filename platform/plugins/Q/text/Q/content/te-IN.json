@@ -73,5 +73,30 @@
             "touchscreen": "జూమ్ చేసి డ్రాగ్ చేయడానికి మీ వేళ్లను ఉపయోగించండి",
             "notTouchscreen": "జూమ్ చేసి లాగండి మీ మౌస్ &amp; చక్రం ఉపయోగించండి"
         }
+    },
+    "timestamp": {
+        "lastNight": "నిన్న రాత్రి",
+        "lastEvening": "చివరి ఈవ్",
+        "yesterday": "నిన్న",
+        "thisMorning": "ఈ ఉదయం",
+        "today": "నేడు",
+        "tonight": "ఈరాత్రి",
+        "tomorrowMorning": "టామ్ మార్న్",
+        "tomorrow": "రేపు",
+        "hoursAgo": "{{h}} గంటల క్రితం",
+        "hourAgo": "{{h}} గంట క్రితం",
+        "minuteAgo": "{{m}} నిమిషం క్రితం",
+        "minutesAgo": "{{m}} నిమిషాల క్రితం",
+        "secondAgo": "{{s}} రెండవ క్రితం",
+        "secondsAgo": "{{s}} సెకన్ల క్రితం",
+        "fewSecondsAgo": "సెకన్ల క్రితం",
+        "rightNow": "ఇప్పుడే",
+        "inSecond": "{{s}} సెకనులో",
+        "inSeconds": "{{s}} సెకన్లలో",
+        "inMinute": "{{m}} నిమిషంలో",
+        "inMinutes": "{{m}} నిమిషాల్లో",
+        "inHour": "{{h}} గంటలో",
+        "inHours": "{{h}} గంటల్లో",
+        "inUnderMinute": "1 నిమిషం లోపు"
     }
 }

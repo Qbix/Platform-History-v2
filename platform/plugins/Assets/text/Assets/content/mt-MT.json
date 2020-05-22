@@ -10,10 +10,10 @@
         "YouSubscribedTo": "Inti ġejt sottoskritt għal {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "Informazzjoni dwar ordni",
+        "AboutOrder": "Informazzjoni dwar l-ordni",
         "PaymentMethod": "Metodu ta &#39;pagament",
-        "ContactInfo": "Informazzjoni ta &#39;kuntatt",
-        "Pay": "Tħallas"
+        "ContactInfo": "Info ta &#39;kuntatt",
+        "Pay": "Inħallas"
     },
     "credits": {
         "InviteAcceptedBy": "Stedina aċċettata minn {{1}}",
@@ -26,7 +26,8 @@
         "Client": "Klijent",
         "To": "lil",
         "From": "minn",
-        "HistoryEmpty": "Għad m’għandekx dejta"
+        "HistoryEmpty": "Għad m’għandekx dejta",
+        "SeeHistory": "Ara l-istorja tal-ħlas għal {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Twaqqaf Informazzjoni ta &#39;Ħlas",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "Irċevejt {{amount}} kredti"
         }
+    },
+    "charge": {
+        "Subject": "Ikollok il-ħlas ta &#39;{{displayAmount}} minn {{call 'publisher.displayName'}} minn &quot;{{description}}&quot;",
+        "HasBeenCharged": "Ħej, dan biss biex jgħidlek {{1}} ġie akkużat {{2}} għal {{3}} minn {{4}}"
+    },
+    "charged": {
+        "Subject": "Grazzi għall-ħlas għal &quot;{{description}}&quot;",
+        "HavePaid": "Ħej {{1}}, din hija biss konferma ta &#39;malajr li int ħallast b&#39;suċċess {{2}} minn {{3}} għal {{4}}"
     }
 }

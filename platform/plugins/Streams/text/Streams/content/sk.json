@@ -91,7 +91,8 @@
         "notice": {
             "text": "Boli ste pozvaní. {{ClickOrTap}} tu prijať a pripojiť sa."
         },
-        "youCanNowPaste": "Teraz môžete tento odkaz niekde prilepiť, aby ste pozvali ľudí"
+        "youCanNowPaste": "Teraz môžete tento odkaz niekde prilepiť, aby ste pozvali ľudí",
+        "command": "vyzvať"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Odkaz bol skopírovaný do schránky",
             "codeCopiedToCb": "Kód bol skopírovaný do schránky",
             "userHasNoVideo": "Účastník nemá žiadne video",
-            "openInBrowserAlert": "Ak sa chcete pripojiť na konferenciu, otvorte odkaz v prehliadači Safari."
+            "openInBrowserAlert": "Ak sa chcete pripojiť na konferenciu, otvorte odkaz v prehliadači Safari.",
+            "youBeganVideoRecording": "Začali ste nahrávať túto konferenciu",
+            "youStoppedVideoRecording": "Túto konferenciu ste zastavili"
         },
         "settingsPopup": {
             "webCamera": "Webová kamera",
@@ -189,7 +192,12 @@
             "copy": "kópie",
             "turnOffVideo": "Vypnite zdieľanie fotoaparátu \/ obrazovky",
             "turnOffScreenSharing": "Vypnite zdieľanie obrazovky",
-            "cameraIsTurnedOff": "Fotoaparát je vypnutý"
+            "cameraIsTurnedOff": "Fotoaparát je vypnutý",
+            "startRecording": "Spustite nahrávanie",
+            "stopRecording": "Zastavte nahrávanie",
+            "recordingInProgress": "Prebieha nahrávanie ...",
+            "publishOnTimeline": "Zverejniť na časovej osi",
+            "publishToGroup": "Publikovať do skupiny"
         },
         "participantsPopup": {
             "disconnect": "odpojiť",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Najhlasnejšie okrem mňa",
             "maximizeLoudest": "Maximalizujte hlasitosť",
             "staticMaximized": "Statická maximalizácia",
-            "manual": "Manuálny"
-        }
+            "manual": "Manuálny",
+            "turnOffCamera": "Skryť video",
+            "turnOffAudio": "Stlmiť zvuk",
+            "turnOffScreenSharing": "Skryť zdieľanie obrazovky",
+            "turnOnCamera": "Zobraziť video",
+            "turnOnAudio": "Obnoviť zvuk",
+            "turnOnScreenSharing": "Zobraziť zdieľanie obrazovky"
+        },
+        "notAllowedToJoinCall": "Na pripojenie k tomuto toku nemáte povolenie.",
+        "streamTitle": "{{1}} živý hovor"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "Uložiť",
         "Delete": "delete",
         "Submenu": "podmenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Tento obsah je pred vami skrytý."
     }
 }

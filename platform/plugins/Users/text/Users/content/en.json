@@ -44,7 +44,7 @@
             "CreateAccount": "+ New Contact",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
             "SearchByName": "Search by name",
-			"EmptyContacts": "Contacts not found..."
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
             "title": "Select contact of {{displayName}}"

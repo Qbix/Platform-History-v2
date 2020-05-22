@@ -91,7 +91,8 @@
         "notice": {
             "text": "Byli jste pozváni. {{ClickOrTap}} zde přijměte a připojte se."
         },
-        "youCanNowPaste": "Nyní můžete tento odkaz někam vložit a pozvat lidi"
+        "youCanNowPaste": "Nyní můžete tento odkaz někam vložit a pozvat lidi",
+        "command": "Pozvat"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Odkaz byl zkopírován do schránky",
             "codeCopiedToCb": "Kód zkopírován do schránky",
             "userHasNoVideo": "Účastník nemá žádné video",
-            "openInBrowserAlert": "Otevřete odkaz v prohlížeči Safari a připojte se ke konferenci."
+            "openInBrowserAlert": "Otevřete odkaz v prohlížeči Safari a připojte se ke konferenci.",
+            "youBeganVideoRecording": "Začali jste nahrávat tuto konferenci",
+            "youStoppedVideoRecording": "Zastavili jste nahrávání této konference"
         },
         "settingsPopup": {
             "webCamera": "Webová kamera",
@@ -189,7 +192,12 @@
             "copy": "kopírovat",
             "turnOffVideo": "Vypněte sdílení fotoaparátu / obrazovky",
             "turnOffScreenSharing": "Vypněte sdílení obrazovky",
-            "cameraIsTurnedOff": "Fotoaparát je vypnutý"
+            "cameraIsTurnedOff": "Fotoaparát je vypnutý",
+            "startRecording": "Začít nahrávat",
+            "stopRecording": "Zastavte nahrávání",
+            "recordingInProgress": "Probíhá nahrávání ...",
+            "publishOnTimeline": "Publikovat na časové ose",
+            "publishToGroup": "Publikovat do skupiny"
         },
         "participantsPopup": {
             "disconnect": "Odpojit",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Nejhlasitější kromě mě",
             "maximizeLoudest": "Maximalizujte nejhlasitější",
             "staticMaximized": "Statická maximalizace",
-            "manual": "Manuál"
-        }
+            "manual": "Manuál",
+            "turnOffCamera": "Skrýt video",
+            "turnOffAudio": "Ztlumit zvuk",
+            "turnOffScreenSharing": "Skrýt sdílení obrazovky",
+            "turnOnCamera": "Zobrazit video",
+            "turnOnAudio": "Ztlumit zvuk",
+            "turnOnScreenSharing": "Zobrazit sdílení obrazovky"
+        },
+        "notAllowedToJoinCall": "Nemáte oprávnění připojit se k tomuto proudu.",
+        "streamTitle": "{{1}} živý hovor"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "Uložit",
         "Delete": "Odstranit",
         "Submenu": "Podnabídka"
+    },
+    "errors": {
+        "HiddenFromYou": "Tento obsah je před vámi skrytý."
     }
 }

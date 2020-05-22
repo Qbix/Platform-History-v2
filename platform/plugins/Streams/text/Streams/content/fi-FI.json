@@ -91,7 +91,8 @@
         "notice": {
             "text": "Sinut on kutsuttu. {{ClickOrTap}} täällä hyväksyä ja liittyä."
         },
-        "youCanNowPaste": "Voit nyt liittää tämän linkin jonnekin kutsuaksesi ihmisiä"
+        "youCanNowPaste": "Voit nyt liittää tämän linkin jonnekin kutsuaksesi ihmisiä",
+        "command": "kutsu"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Linkki kopioitiin leikepöydälle",
             "codeCopiedToCb": "Koodi kopioitiin leikepöydälle",
             "userHasNoVideo": "Osallistujalla ei ole videota",
-            "openInBrowserAlert": "Avaa linkki Safari-selaimessa liittyäksesi konferenssiin."
+            "openInBrowserAlert": "Avaa linkki Safari-selaimessa liittyäksesi konferenssiin.",
+            "youBeganVideoRecording": "Aloitit tämän konferenssin nauhoittamisen",
+            "youStoppedVideoRecording": "Lopetit tämän konferenssin nauhoittamisen"
         },
         "settingsPopup": {
             "webCamera": "Nettikamera",
@@ -189,7 +192,12 @@
             "copy": "Kopio",
             "turnOffVideo": "Poista kameran / näytön jakaminen käytöstä",
             "turnOffScreenSharing": "Sammuta näytön jakaminen",
-            "cameraIsTurnedOff": "Kamera on kytketty pois päältä"
+            "cameraIsTurnedOff": "Kamera on kytketty pois päältä",
+            "startRecording": "Aloita nauhottaminen",
+            "stopRecording": "Lopeta tallennus",
+            "recordingInProgress": "Tallennus on käynnissä ...",
+            "publishOnTimeline": "Julkaise aikajanaan",
+            "publishToGroup": "Julkaise ryhmälle"
         },
         "participantsPopup": {
             "disconnect": "Katkaista",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Lojain paitsi minä",
             "maximizeLoudest": "Maksimoi Loudest",
             "staticMaximized": "Staattinen maksimoitu",
-            "manual": "manuaalinen"
-        }
+            "manual": "manuaalinen",
+            "turnOffCamera": "Piilota video",
+            "turnOffAudio": "Mykistä ääni",
+            "turnOffScreenSharing": "Piilota näytön jakaminen",
+            "turnOnCamera": "Näytä video",
+            "turnOnAudio": "Poista äänen mykistys",
+            "turnOnScreenSharing": "Näytä näytön jakaminen"
+        },
+        "notAllowedToJoinCall": "Sinulla ei ole lupaa liittyä tähän streamiin.",
+        "streamTitle": "{{1}} suora puhelu"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "Tallentaa",
         "Delete": "Poistaa",
         "Submenu": "alivalikko"
+    },
+    "errors": {
+        "HiddenFromYou": "Tämä sisältö on piilotettu teiltä."
     }
 }

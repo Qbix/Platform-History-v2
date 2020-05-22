@@ -91,7 +91,8 @@
         "notice": {
             "text": "Jūs esat uzaicināts. {{ClickOrTap}} šeit, lai pieņemtu un pievienotos."
         },
-        "youCanNowPaste": "Tagad varat kaut kur ielīmēt šo saiti, lai uzaicinātu cilvēkus"
+        "youCanNowPaste": "Tagad varat kaut kur ielīmēt šo saiti, lai uzaicinātu cilvēkus",
+        "command": "Uzaicināt"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Saite kopēta starpliktuvē",
             "codeCopiedToCb": "Kods nokopēts starpliktuvē",
             "userHasNoVideo": "Dalībniekam nav video",
-            "openInBrowserAlert": "Lai pievienotos konferencei, pārlūkprogrammā Safari atveriet saiti."
+            "openInBrowserAlert": "Lai pievienotos konferencei, pārlūkprogrammā Safari atveriet saiti.",
+            "youBeganVideoRecording": "Jūs sākāt ierakstīt šo konferenci",
+            "youStoppedVideoRecording": "Jūs pārtraucāt ierakstīt šo konferenci"
         },
         "settingsPopup": {
             "webCamera": "Web kamera",
@@ -189,7 +192,12 @@
             "copy": "Kopēt",
             "turnOffVideo": "Izslēdziet kameras \/ ekrāna kopīgošanu",
             "turnOffScreenSharing": "Izslēdziet ekrāna kopīgošanu",
-            "cameraIsTurnedOff": "Kamera ir izslēgta"
+            "cameraIsTurnedOff": "Kamera ir izslēgta",
+            "startRecording": "Sāciet ierakstīšanu",
+            "stopRecording": "Beigt ierakstīšanu",
+            "recordingInProgress": "Notiek ierakstīšana ...",
+            "publishOnTimeline": "Publicēt laika skalā",
+            "publishToGroup": "Publicēt grupā"
         },
         "participantsPopup": {
             "disconnect": "Atvienojiet",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Skaļāk, izņemot mani",
             "maximizeLoudest": "Maksimizēt skaļākos",
             "staticMaximized": "Statisks maksimizēts",
-            "manual": "Rokasgrāmata"
-        }
+            "manual": "Rokasgrāmata",
+            "turnOffCamera": "Slēpt video",
+            "turnOffAudio": "Izslēgt skaņu",
+            "turnOffScreenSharing": "Slēpt ekrāna kopīgošanu",
+            "turnOnCamera": "Rādīt video",
+            "turnOnAudio": "Ieslēgt skaņu",
+            "turnOnScreenSharing": "Rādīt ekrāna koplietošanu"
+        },
+        "notAllowedToJoinCall": "Jums nav atļaujas pievienoties šai straumei.",
+        "streamTitle": "{{1}} tiešais zvans"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "Saglabāt",
         "Delete": "Dzēst",
         "Submenu": "Apakšizvēlne"
+    },
+    "errors": {
+        "HiddenFromYou": "Šis saturs ir paslēpts no jums."
     }
 }

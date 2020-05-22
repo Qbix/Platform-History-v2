@@ -50,7 +50,8 @@
             "title": "ಸಂಪರ್ಕವನ್ನು ಆರಿಸಿ",
             "SearchByName": "ಹೆಸರಿನಿಂದ ಹುಡುಕಿ",
             "CreateAccount": "+ ಹೊಸ ಸಂಪರ್ಕ",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ಕಂಡುಬಂದಿಲ್ಲ"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ಕಂಡುಬಂದಿಲ್ಲ",
+            "EmptyContacts": "ಸಂಪರ್ಕಗಳು ಕಂಡುಬಂದಿಲ್ಲ ..."
         },
         "select": {
             "title": "Contact {999} contact ನ ಸಂಪರ್ಕವನ್ನು ಆರಿಸಿ"

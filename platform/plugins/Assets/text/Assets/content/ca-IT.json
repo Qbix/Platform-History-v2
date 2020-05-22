@@ -10,10 +10,10 @@
         "YouSubscribedTo": "Heu estat subscrit a {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "Informació sobre la comanda",
+        "AboutOrder": "Informació sobre comanda",
         "PaymentMethod": "Mètode de pagament",
         "ContactInfo": "Dades de contacte",
-        "Pay": "Pagueu"
+        "Pay": "Pagar"
     },
     "credits": {
         "InviteAcceptedBy": "Convidat acceptat per {{1}}",
@@ -26,7 +26,8 @@
         "Client": "Client",
         "To": "a",
         "From": "des de",
-        "HistoryEmpty": "Encara no teniu dades"
+        "HistoryEmpty": "Encara no teniu dades",
+        "SeeHistory": "Consulteu l’historial de pagaments de {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Establiu la informació de pagament",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "S&#39;han rebut {{amount}} crèdits"
         }
+    },
+    "charge": {
+        "Subject": "Obteniu el pagament de {{displayAmount}} de {{call 'publisher.displayName'}} per &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hola, només us heu de fer saber que {{1}} ha estat cobrat per {{3}} per {{3}} per {{4}}"
+    },
+    "charged": {
+        "Subject": "Gràcies pel vostre pagament per &quot;{{description}}&quot;",
+        "HavePaid": "Hola {{1}}, això és només una confirmació ràpida que heu pagat amb èxit {{2}} a {{3}} per {{4}}"
     }
 }

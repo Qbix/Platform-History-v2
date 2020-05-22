@@ -29,7 +29,8 @@
         "Client": "Client",
         "To": "to",
         "From": "from",
-        "HistoryEmpty": "You have no data yet"
+        "HistoryEmpty": "You have no data yet",
+        "SeeHistory": "See payment history for {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Set Payment Information",
@@ -87,5 +88,13 @@
         "Assets/credits/received": {
             "content": "Received {{amount}} credits"
         }
+    },
+    "charge": {
+        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
+        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+    },
+    "charged": {
+        "Subject": "Thank you for your payment for \"{{description}}\"",
+        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
     }
 }

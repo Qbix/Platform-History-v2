@@ -91,7 +91,8 @@
         "notice": {
             "text": "Ju keni qenë të ftuar. {{ClickOrTap}} këtu për të pranuar dhe për t&#39;u bashkuar."
         },
-        "youCanNowPaste": "Tani mund të ngjitni këtë lidhje diku për të ftuar njerëz"
+        "youCanNowPaste": "Tani mund të ngjitni këtë lidhje diku për të ftuar njerëz",
+        "command": "ftoj"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Lidhja e kopjuar në clipboard",
             "codeCopiedToCb": "Kodi i kopjuar në clipboard",
             "userHasNoVideo": "Pjesëmarrësi nuk ka video",
-            "openInBrowserAlert": "Lidhje e hapur në shfletuesin Safari për t&#39;u bashkuar me konferencën."
+            "openInBrowserAlert": "Lidhje e hapur në shfletuesin Safari për t&#39;u bashkuar me konferencën.",
+            "youBeganVideoRecording": "Ju filluat regjistrimin e kësaj konference",
+            "youStoppedVideoRecording": "Ju ndaloi regjistrimin e kësaj konference"
         },
         "settingsPopup": {
             "webCamera": "Kamera në internet",
@@ -189,7 +192,12 @@
             "copy": "kopje",
             "turnOffVideo": "Fikni ndarjen e kamerës / ekranit",
             "turnOffScreenSharing": "Fikni ndarjen e ekranit",
-            "cameraIsTurnedOff": "Kamera është e fikur"
+            "cameraIsTurnedOff": "Kamera është e fikur",
+            "startRecording": "Filloni Regjistrimin",
+            "stopRecording": "Ndaloni regjistrimin",
+            "recordingInProgress": "Regjistrimi është në proces ...",
+            "publishOnTimeline": "Publikoni në afatin kohor",
+            "publishToGroup": "Publikoni në grup"
         },
         "participantsPopup": {
             "disconnect": "shqit",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Me zë të lartë përveç meje",
             "maximizeLoudest": "Maksimizoni me zë të lartë",
             "staticMaximized": "Maksimumi statik",
-            "manual": "udhëzues"
-        }
+            "manual": "udhëzues",
+            "turnOffCamera": "Fshih video",
+            "turnOffAudio": "Qëndroni audio",
+            "turnOffScreenSharing": "Fshih ndarjen e ekranit",
+            "turnOnCamera": "Shfaq videon",
+            "turnOnAudio": "Une audio",
+            "turnOnScreenSharing": "Shfaq ndarjen e ekranit"
+        },
+        "notAllowedToJoinCall": "Ju nuk keni leje për t&#39;u bashkuar me këtë rrjedhë.",
+        "streamTitle": "999 thirrje live"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "Save",
         "Delete": "fshini",
         "Submenu": "submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Kjo përmbajtje është e fshehur nga ju."
     }
 }

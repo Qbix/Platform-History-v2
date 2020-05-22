@@ -50,7 +50,8 @@
             "title": "Veldu tengilið",
             "SearchByName": "Leitaðu með nafni",
             "CreateAccount": "+ Nýr tengiliður",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create fannst ekki"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create fannst ekki",
+            "EmptyContacts": "Tengiliðir fundust ekki ..."
         },
         "select": {
             "title": "Veldu tengilið af {{displayName}}"

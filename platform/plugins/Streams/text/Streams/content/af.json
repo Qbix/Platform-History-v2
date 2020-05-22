@@ -91,7 +91,8 @@
         "notice": {
             "text": "U is genooi. {{ClickOrTap}} hier om te aanvaar en aan te sluit."
         },
-        "youCanNowPaste": "U kan nou hierdie skakel êrens plak om mense uit te nooi"
+        "youCanNowPaste": "U kan nou hierdie skakel êrens plak om mense uit te nooi",
+        "command": "nooi"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Skakel na knipbord gekopieër",
             "codeCopiedToCb": "Kode na klembord gekopieër",
             "userHasNoVideo": "Deelnemer het geen video nie",
-            "openInBrowserAlert": "Maak &#39;n skakel oop in die Safari-blaaier om aan die konferensie deel te neem."
+            "openInBrowserAlert": "Maak &#39;n skakel oop in die Safari-blaaier om aan die konferensie deel te neem.",
+            "youBeganVideoRecording": "U het hierdie konferensie begin opneem",
+            "youStoppedVideoRecording": "U het opgehou om hierdie konferensie op te neem"
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -189,7 +192,12 @@
             "copy": "kopie",
             "turnOffVideo": "Skakel die deling van kamera \/ skerm af",
             "turnOffScreenSharing": "Skakel die deling van die skerm af",
-            "cameraIsTurnedOff": "Die kamera is afgeskakel"
+            "cameraIsTurnedOff": "Die kamera is afgeskakel",
+            "startRecording": "Begin opneem",
+            "stopRecording": "Stop opname",
+            "recordingInProgress": "Opname is aan die gang ...",
+            "publishOnTimeline": "Publiseer op tydlyn",
+            "publishToGroup": "Publiseer in groep"
         },
         "participantsPopup": {
             "disconnect": "Ontkoppel",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Die hardste behalwe my",
             "maximizeLoudest": "Maksimeer die hardste",
             "staticMaximized": "Staties gemaksimeer",
-            "manual": "handleiding"
-        }
+            "manual": "handleiding",
+            "turnOffCamera": "Versteek video",
+            "turnOffAudio": "Demp klank",
+            "turnOffScreenSharing": "Versteek skermdeling",
+            "turnOnCamera": "Wys video",
+            "turnOnAudio": "Demp klank uit",
+            "turnOnScreenSharing": "Wys skermdeling"
+        },
+        "notAllowedToJoinCall": "U het nie toestemming om by hierdie stroom aan te sluit nie.",
+        "streamTitle": "{{1}} regstreekse oproep"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "Save",
         "Delete": "Delete",
         "Submenu": "submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Hierdie inhoud is vir u weggesteek."
     }
 }

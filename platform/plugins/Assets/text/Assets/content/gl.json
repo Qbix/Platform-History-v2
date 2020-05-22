@@ -10,8 +10,8 @@
         "YouSubscribedTo": "Estivo subscrito a {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "Información sobre a orde",
-        "PaymentMethod": "Método de pago",
+        "AboutOrder": "Información sobre pedido",
+        "PaymentMethod": "Forma de pago",
         "ContactInfo": "Información de contacto",
         "Pay": "Pagar"
     },
@@ -26,7 +26,8 @@
         "Client": "Clienta",
         "To": "a",
         "From": "de",
-        "HistoryEmpty": "Non tes datos aínda"
+        "HistoryEmpty": "Non tes datos aínda",
+        "SeeHistory": "Vexa o historial de pagos de {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Establecer información de pago",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "Recibiu {{amount}} créditos"
         }
+    },
+    "charge": {
+        "Subject": "Recibes o pago de {{displayAmount}} de {{call 'publisher.displayName'}} por &quot;{{description}}&quot;",
+        "HasBeenCharged": "Ei, isto só che avisará {{1}} se cargou {{3}} por {{3}} por {{4}}"
+    },
+    "charged": {
+        "Subject": "Grazas polo teu pago por &quot;{{description}}&quot;",
+        "HavePaid": "Hola {{1}}, isto é só unha confirmación rápida de que pagaches con éxito {{2}} a {{3}} por {{4}}"
     }
 }

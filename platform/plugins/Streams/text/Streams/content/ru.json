@@ -91,7 +91,8 @@
         "notice": {
             "text": "Вы были приглашены. {{ClickOrTap}} здесь, чтобы принять и присоединиться."
         },
-        "youCanNowPaste": "Теперь вы можете вставить эту ссылку куда-нибудь, чтобы пригласить людей"
+        "youCanNowPaste": "Теперь вы можете вставить эту ссылку куда-нибудь, чтобы пригласить людей",
+        "command": "приглашение"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Ссылка скопирована в буфер обмена",
             "codeCopiedToCb": "Код скопирован в буфер обмена",
             "userHasNoVideo": "У участника нет видео",
-            "openInBrowserAlert": "Откройте ссылку в браузере Safari, чтобы присоединиться к конференции."
+            "openInBrowserAlert": "Откройте ссылку в браузере Safari, чтобы присоединиться к конференции.",
+            "youBeganVideoRecording": "Вы начали запись этой конференции",
+            "youStoppedVideoRecording": "Вы прекратили запись этой конференции"
         },
         "settingsPopup": {
             "webCamera": "Веб-камера",
@@ -189,7 +192,12 @@
             "copy": "копия",
             "turnOffVideo": "Отключить камеру \/ общий доступ к экрану",
             "turnOffScreenSharing": "Отключить совместное использование экрана",
-            "cameraIsTurnedOff": "Камера выключена"
+            "cameraIsTurnedOff": "Камера выключена",
+            "startRecording": "Начать запись",
+            "stopRecording": "Остановить запись",
+            "recordingInProgress": "Запись идет ...",
+            "publishOnTimeline": "Опубликовать на временной шкале",
+            "publishToGroup": "Опубликовать в группу"
         },
         "participantsPopup": {
             "disconnect": "Отключить",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Громче, кроме меня",
             "maximizeLoudest": "Увеличить громче",
             "staticMaximized": "Максимальный статический",
-            "manual": "Руководство"
-        }
+            "manual": "Руководство",
+            "turnOffCamera": "Скрыть видео",
+            "turnOffAudio": "Отключить звук",
+            "turnOffScreenSharing": "Скрыть экран обмена",
+            "turnOnCamera": "Показать видео",
+            "turnOnAudio": "Включить звук",
+            "turnOnScreenSharing": "Показать общий доступ к экрану"
+        },
+        "notAllowedToJoinCall": "У вас нет разрешения присоединиться к этому потоку.",
+        "streamTitle": "{{1}} живой звонок"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "Сохранить",
         "Delete": "удалять",
         "Submenu": "Подменю"
+    },
+    "errors": {
+        "HiddenFromYou": "Этот контент скрыт от вас."
     }
 }

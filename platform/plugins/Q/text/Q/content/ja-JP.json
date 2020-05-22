@@ -73,5 +73,30 @@
             "touchscreen": "指を使ってズームとドラッグ",
             "notTouchscreen": "マウスとホイールを使ってズームとドラッグ"
         }
+    },
+    "timestamp": {
+        "lastNight": "昨夜",
+        "lastEvening": "最後の前夜",
+        "yesterday": "昨日",
+        "thisMorning": "この朝",
+        "today": "今日",
+        "tonight": "今晩",
+        "tomorrowMorning": "トム・モーン",
+        "tomorrow": "明日",
+        "hoursAgo": "{{h}}時間前",
+        "hourAgo": "{{h}}時間前",
+        "minuteAgo": "{{m}}分前",
+        "minutesAgo": "{{m}}分前",
+        "secondAgo": "{{s}}秒前",
+        "secondsAgo": "{{s}}秒前",
+        "fewSecondsAgo": "数秒前",
+        "rightNow": "たった今",
+        "inSecond": "{{s}}秒後",
+        "inSeconds": "{{s}}秒後",
+        "inMinute": "{{m}}分後",
+        "inMinutes": "{{m}}分後",
+        "inHour": "{{h}}時間後",
+        "inHours": "{{h}}時間後",
+        "inUnderMinute": "1分未満"
     }
 }

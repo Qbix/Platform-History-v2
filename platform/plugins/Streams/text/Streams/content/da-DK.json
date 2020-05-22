@@ -91,7 +91,8 @@
         "notice": {
             "text": "Du er blevet inviteret. {{ClickOrTap}} her for at acceptere og deltage."
         },
-        "youCanNowPaste": "Du kan nu indsætte dette link et sted for at invitere folk"
+        "youCanNowPaste": "Du kan nu indsætte dette link et sted for at invitere folk",
+        "command": "Invitere"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Link kopieret til udklipsholder",
             "codeCopiedToCb": "Kode kopieret til udklipsholder",
             "userHasNoVideo": "Deltageren har ingen video",
-            "openInBrowserAlert": "Åbn link i Safari-browser for at deltage i konferencen."
+            "openInBrowserAlert": "Åbn link i Safari-browser for at deltage i konferencen.",
+            "youBeganVideoRecording": "Du begyndte at optage denne konference",
+            "youStoppedVideoRecording": "Du stoppede med at optage denne konference"
         },
         "settingsPopup": {
             "webCamera": "Web kamera",
@@ -189,7 +192,12 @@
             "copy": "Kopi",
             "turnOffVideo": "Sluk for deling af kamera / skærm",
             "turnOffScreenSharing": "Sluk for deling af skærmen",
-            "cameraIsTurnedOff": "Kameraet er slukket"
+            "cameraIsTurnedOff": "Kameraet er slukket",
+            "startRecording": "Start optagelse",
+            "stopRecording": "Stop optagelse",
+            "recordingInProgress": "Optagelse er i gang ...",
+            "publishOnTimeline": "Publicer på tidslinjen",
+            "publishToGroup": "Publicer i gruppe"
         },
         "participantsPopup": {
             "disconnect": "Koble fra",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Højeste undtagen mig",
             "maximizeLoudest": "Maksimer højest",
             "staticMaximized": "Statisk maksimeret",
-            "manual": "brugervejledning"
-        }
+            "manual": "brugervejledning",
+            "turnOffCamera": "Skjul video",
+            "turnOffAudio": "Dæmp lyd",
+            "turnOffScreenSharing": "Skjul deling af skærmen",
+            "turnOnCamera": "Vis video",
+            "turnOnAudio": "Dæmp lyden",
+            "turnOnScreenSharing": "Vis skærmdeling"
+        },
+        "notAllowedToJoinCall": "Du har ikke tilladelse til at deltage i denne strøm.",
+        "streamTitle": "{{1}} liveopkald"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "Gemme",
         "Delete": "Slet",
         "Submenu": "Undermenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Dette indhold er skjult for dig."
     }
 }

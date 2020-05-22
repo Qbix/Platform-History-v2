@@ -50,7 +50,8 @@
             "title": "Odaberite kontakt",
             "SearchByName": "Traži po imenu",
             "CreateAccount": "+ Novi kontakt",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nije pronađen"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nije pronađen",
+            "EmptyContacts": "Kontakti nisu pronađeni ..."
         },
         "select": {
             "title": "Odaberite kontakt osobe {{displayName}}"

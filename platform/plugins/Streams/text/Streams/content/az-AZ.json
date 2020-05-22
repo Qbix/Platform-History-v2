@@ -91,7 +91,8 @@
         "notice": {
             "text": "Siz dəvət olundu. {{ClickOrTap}} burada qəbul etmək və qoşulmaq."
         },
-        "youCanNowPaste": "İndi bu linki insanları dəvət etmək üçün bir yerə yapışdıra bilərsiniz"
+        "youCanNowPaste": "İndi bu linki insanları dəvət etmək üçün bir yerə yapışdıra bilərsiniz",
+        "command": "Dəvət et"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Link panoya kopyalandı",
             "codeCopiedToCb": "Kod panoya kopyalandı",
             "userHasNoVideo": "İştirakçının videosu yoxdur",
-            "openInBrowserAlert": "Konfransa qoşulmaq üçün Safari brauzerində linki açın."
+            "openInBrowserAlert": "Konfransa qoşulmaq üçün Safari brauzerində linki açın.",
+            "youBeganVideoRecording": "Bu konfransı qeyd etməyə başladınız",
+            "youStoppedVideoRecording": "Bu konfransı qeyd etməyi dayandırdın"
         },
         "settingsPopup": {
             "webCamera": "Veb Kamera",
@@ -189,7 +192,12 @@
             "copy": "Surəti",
             "turnOffVideo": "Kamera / ekran paylaşımını söndürün",
             "turnOffScreenSharing": "Ekran paylaşımını söndürün",
-            "cameraIsTurnedOff": "Kamera söndürülmüşdür"
+            "cameraIsTurnedOff": "Kamera söndürülmüşdür",
+            "startRecording": "Yazmağa başlayın",
+            "stopRecording": "Yazmağı dayandırın",
+            "recordingInProgress": "Qeyd davam edir ...",
+            "publishOnTimeline": "Qrafiki çap edin",
+            "publishToGroup": "Qrupa yayımla"
         },
         "participantsPopup": {
             "disconnect": "Qoşulun",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Məndən başqa Loudest",
             "maximizeLoudest": "Səs səviyyəsini artırın",
             "staticMaximized": "Statik Böyüdülmüşdür",
-            "manual": "Əl ilə"
-        }
+            "manual": "Əl ilə",
+            "turnOffCamera": "Videonu gizlət",
+            "turnOffAudio": "Səsin səssizləşdirilməsi",
+            "turnOffScreenSharing": "Ekran paylaşımlarını gizlət",
+            "turnOnCamera": "Videonu göstərin",
+            "turnOnAudio": "Səsin səsini açın",
+            "turnOnScreenSharing": "Ekran paylaşımını göstərin"
+        },
+        "notAllowedToJoinCall": "Bu axına qoşulmaq icazəniz yoxdur.",
+        "streamTitle": "{{1}} canlı zəng"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "Yadda saxla",
         "Delete": "Silin",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Bu məzmun sizdən gizlidir."
     }
 }

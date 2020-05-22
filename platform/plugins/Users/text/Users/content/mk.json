@@ -50,7 +50,8 @@
             "title": "Изберете контакт",
             "SearchByName": "Пребарувајте по име",
             "CreateAccount": "+ Нов контакт",
-            "CreateAccountNotFound": "П. Корисници.Кордова.UI.сака не е пронајдена"
+            "CreateAccountNotFound": "П. Корисници.Кордова.UI.сака не е пронајдена",
+            "EmptyContacts": "Контактите не се пронајдени ..."
         },
         "select": {
             "title": "Изберете контакт од {{displayName}}"

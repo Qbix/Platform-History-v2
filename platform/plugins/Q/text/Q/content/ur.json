@@ -73,5 +73,30 @@
             "touchscreen": "زوم اور ڈریگ کرنے کیلئے اپنی انگلیوں کا استعمال کریں",
             "notTouchscreen": "زوم اور ڈریگ کرنے کے لئے اپنے ماؤس اور پہیا کا استعمال کریں"
         }
+    },
+    "timestamp": {
+        "lastNight": "گزشتہ رات",
+        "lastEvening": "آخری موقع",
+        "yesterday": "کل",
+        "thisMorning": "یہ صبح",
+        "today": "آج",
+        "tonight": "آج کی رات",
+        "tomorrowMorning": "ٹام صبح",
+        "tomorrow": "کل",
+        "hoursAgo": "} 9 999}} گھنٹے پہلے",
+        "hourAgo": "} 9 999}} گھنٹہ پہلے",
+        "minuteAgo": "} 9 999}} منٹ پہلے",
+        "minutesAgo": "} 9 999}} منٹ پہلے",
+        "secondAgo": "} 9 999}} سیکنڈ پہلے",
+        "secondsAgo": "{9 999}} سیکنڈ پہلے",
+        "fewSecondsAgo": "سیکنڈ پہلے",
+        "rightNow": "ابھی",
+        "inSecond": "{9 999}} سیکنڈ میں",
+        "inSeconds": "{9 999}} سیکنڈ میں",
+        "inMinute": "{9 999}} منٹ میں",
+        "inMinutes": "{9 999}} منٹ میں",
+        "inHour": "{9 999}} گھنٹے میں",
+        "inHours": "{9 999}} گھنٹوں میں",
+        "inUnderMinute": "1 منٹ سے کم میں"
     }
 }

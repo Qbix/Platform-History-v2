@@ -91,7 +91,8 @@
         "notice": {
             "text": "초대되었습니다. {{ClickOrTap}} 여기에 동의하고 참여하십시오."
         },
-        "youCanNowPaste": "이제이 링크를 어딘가에 붙여서 사람들을 초대 할 수 있습니다"
+        "youCanNowPaste": "이제이 링크를 어딘가에 붙여서 사람들을 초대 할 수 있습니다",
+        "command": "초대"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "링크가 클립 보드에 복사되었습니다",
             "codeCopiedToCb": "코드를 클립 보드에 복사",
             "userHasNoVideo": "참가자는 비디오가 없습니다",
-            "openInBrowserAlert": "Safari 브라우저에서 링크를 열어 회의에 참여하십시오."
+            "openInBrowserAlert": "Safari 브라우저에서 링크를 열어 회의에 참여하십시오.",
+            "youBeganVideoRecording": "이 회의를 녹음하기 시작했습니다",
+            "youStoppedVideoRecording": "이 회의 녹음을 중단했습니다"
         },
         "settingsPopup": {
             "webCamera": "웹 카메라",
@@ -189,7 +192,12 @@
             "copy": "부",
             "turnOffVideo": "카메라 \/ 화면 공유 끄기",
             "turnOffScreenSharing": "화면 공유 끄기",
-            "cameraIsTurnedOff": "카메라가 꺼져 있습니다"
+            "cameraIsTurnedOff": "카메라가 꺼져 있습니다",
+            "startRecording": "녹음 시작",
+            "stopRecording": "녹화 중지",
+            "recordingInProgress": "녹음이 진행 중입니다 ...",
+            "publishOnTimeline": "타임 라인에 게시",
+            "publishToGroup": "그룹에 게시"
         },
         "participantsPopup": {
             "disconnect": "분리",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "나를 제외한 가장 큰 소리",
             "maximizeLoudest": "가장 크게 최대화",
             "staticMaximized": "정적 최대화",
-            "manual": "설명서"
-        }
+            "manual": "설명서",
+            "turnOffCamera": "비디오 숨기기",
+            "turnOffAudio": "오디오 음소거",
+            "turnOffScreenSharing": "화면 공유 숨기기",
+            "turnOnCamera": "비디오 표시",
+            "turnOnAudio": "음소거 해제",
+            "turnOnScreenSharing": "화면 공유 표시"
+        },
+        "notAllowedToJoinCall": "이 스트림에 참여할 권한이 없습니다.",
+        "streamTitle": "{{1}} 실시간 통화"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "저장",
         "Delete": "지우다",
         "Submenu": "하위 메뉴"
+    },
+    "errors": {
+        "HiddenFromYou": "이 콘텐츠는 귀하에게서 숨겨져 있습니다."
     }
 }

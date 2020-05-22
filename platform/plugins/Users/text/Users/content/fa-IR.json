@@ -50,7 +50,8 @@
             "title": "تماس را انتخاب کنید",
             "SearchByName": "جستجو براساس نام",
             "CreateAccount": "+ تماس جدید",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create یافت نشد"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create یافت نشد",
+            "EmptyContacts": "مخاطبین یافت نشد ..."
         },
         "select": {
             "title": "تماس با {{displayName}} را انتخاب کنید"

@@ -26,7 +26,8 @@
         "Client": "לקוח",
         "To": "ל",
         "From": "מ",
-        "HistoryEmpty": "אין לך עדיין נתונים"
+        "HistoryEmpty": "אין לך עדיין נתונים",
+        "SeeHistory": "ראה היסטוריית תשלומים עבור {{1}}"
     },
     "subscriptions": {
         "infoTitle": "הגדר פרטי תשלום",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "קיבלו זיכוי של {{amount}}"
         }
+    },
+    "charge": {
+        "Subject": "אתה מקבל תשלום של {{displayAmount}} מ- {{call 'publisher.displayName'}} על ידי &quot;{{description}}&quot;",
+        "HasBeenCharged": "היי, זה רק כדי ליידע אותך {{1}} חויב {{2}} בגין {{3}} על ידי {{4}}"
+    },
+    "charged": {
+        "Subject": "תודה על התשלום שלך עבור &quot;{{description}}&quot;",
+        "HavePaid": "היי {{1}}, זו רק אישור מהיר ששילמת בהצלחה {{2}} ל- {{3}} עבור {{4}}"
     }
 }

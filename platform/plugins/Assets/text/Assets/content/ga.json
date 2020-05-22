@@ -10,7 +10,7 @@
         "YouSubscribedTo": "Tá suibscríobh agat le {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "Eolas faoi ordú",
+        "AboutOrder": "Eolas faoi ord",
         "PaymentMethod": "Modh íocaíochta",
         "ContactInfo": "Eolas teagmhála",
         "Pay": "Pá"
@@ -26,7 +26,8 @@
         "Client": "Cliant",
         "To": "chun",
         "From": "as",
-        "HistoryEmpty": "Níl aon sonraí agat go fóill"
+        "HistoryEmpty": "Níl aon sonraí agat go fóill",
+        "SeeHistory": "Féach stair na híocaíochta le haghaidh {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Faisnéis Socraithe Íocaíochta",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "Creidmheasanna faighte {{amount}}"
         }
+    },
+    "charge": {
+        "Subject": "Faigheann tú íocaíocht {{displayAmount}} ó {{call 'publisher.displayName'}} le &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hey, níl anseo ach a chur in iúl duit go bhfuil {{3}} luchtaithe ag {{4}} ar {{3}} ar {{3}}"
+    },
+    "charged": {
+        "Subject": "Go raibh maith agat as d&#39;íocaíocht as &quot;{{description}}&quot;",
+        "HavePaid": "Hey {{1}}, níl anseo ach deimhniú tapa gur éirigh leat {{2}} a íoc le {{3}} as {{4}}"
     }
 }

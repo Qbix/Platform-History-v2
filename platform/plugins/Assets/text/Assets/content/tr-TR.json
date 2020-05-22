@@ -13,7 +13,7 @@
         "AboutOrder": "Sipariş hakkında bilgi",
         "PaymentMethod": "Ödeme şekli",
         "ContactInfo": "İletişim bilgileri",
-        "Pay": "ödeme"
+        "Pay": "Ödemek"
     },
     "credits": {
         "InviteAcceptedBy": "{{1}} tarafından kabul edilen davet",
@@ -26,7 +26,8 @@
         "Client": "müşteri",
         "To": "için",
         "From": "itibaren",
-        "HistoryEmpty": "Henüz hiçbir bilginiz yok"
+        "HistoryEmpty": "Henüz hiçbir bilginiz yok",
+        "SeeHistory": "{{1}} için ödeme geçmişine bakın"
     },
     "subscriptions": {
         "infoTitle": "Ödeme Bilgilerini Ayarla",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "{{amount}} kredi aldı"
         }
+    },
+    "charge": {
+        "Subject": "{{displayAmount}} tutarını {{call 'publisher.displayName'}} &#39;dan &quot;{{description}}&quot; ile alıyorsunuz",
+        "HasBeenCharged": "Hey, bu sadece {{4}} için {{4}} için {{1}} tahsil edildiğini bildirmek içindir"
+    },
+    "charged": {
+        "Subject": "&quot;{{description}}&quot; tutarındaki ödemeniz için teşekkür ederiz",
+        "HavePaid": "Merhaba {{1}}, bu, {{4}} için {{3}} tutarına {{10001}} tutarında başarılı bir şekilde ödeme yaptığınızı gösteren hızlı bir onaydır."
     }
 }

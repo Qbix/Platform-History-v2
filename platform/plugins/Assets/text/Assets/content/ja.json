@@ -26,7 +26,8 @@
         "Client": "クライアント",
         "To": "に",
         "From": "から",
-        "HistoryEmpty": "まだデータがありません"
+        "HistoryEmpty": "まだデータがありません",
+        "SeeHistory": "{{1}}の支払い履歴を表示"
     },
     "subscriptions": {
         "infoTitle": "支払い情報を設定する",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "{{amount}}クレジットを受け取りました"
         }
+    },
+    "charge": {
+        "Subject": "「{{description}}」によって{{call 'publisher.displayName'}}から{{displayAmount}}の支払いを受け取ります",
+        "HasBeenCharged": "これは、{{1}}が{{3}}に対して{{4}}によって{{2}}が請求されたことをお知らせするためです。"
+    },
+    "charged": {
+        "Subject": "「{{description}}」のお支払いありがとうございます",
+        "HavePaid": "{{1}}様、これは{{4}}の{{2}}から{{3}}への支払いが成功したことの簡単な確認です"
     }
 }

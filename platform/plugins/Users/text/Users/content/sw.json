@@ -50,7 +50,8 @@
             "title": "Chagua wasiliana",
             "SearchByName": "Tafuta kwa jina",
             "CreateAccount": "+ Mawasiliano Mpya",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create haipatikani"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create haipatikani",
+            "EmptyContacts": "Anwani hazipatikani ..."
         },
         "select": {
             "title": "Chagua wasiliana na {{displayName}}"

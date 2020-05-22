@@ -50,7 +50,8 @@
             "title": "კონტაქტის არჩევა",
             "SearchByName": "ძებნა სახელით",
             "CreateAccount": "+ ახალი კონტაქტი",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI. შექმნა ვერ მოიძებნა"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI. შექმნა ვერ მოიძებნა",
+            "EmptyContacts": "კონტაქტები ვერ მოიძებნა ..."
         },
         "select": {
             "title": "აირჩიეთ {{displayName}}"

@@ -73,5 +73,30 @@
             "touchscreen": "Erabili hatzak handitzeko eta arrastatzeko",
             "notTouchscreen": "Erabili zure sagua eta gurpila zoom eta arrastatu"
         }
+    },
+    "timestamp": {
+        "lastNight": "bart",
+        "lastEvening": "azken bezperan",
+        "yesterday": "atzoko",
+        "thisMorning": "goiz honetan",
+        "today": "gaur",
+        "tonight": "gaur gauean",
+        "tomorrowMorning": "Tom goiza",
+        "tomorrow": "bihar",
+        "hoursAgo": "Duela {{h}} ordu",
+        "hourAgo": "Duela {{h}} ordu",
+        "minuteAgo": "Duela {{m}} minutu",
+        "minutesAgo": "Duela {{m}} minutu",
+        "secondAgo": "Duela {{s}} bigarren",
+        "secondsAgo": "Duela {{s}} segundo",
+        "fewSecondsAgo": "segundo batzuk",
+        "rightNow": "oraintxe bertan",
+        "inSecond": "{{s}} bigarrenean",
+        "inSeconds": "{{s}} segundoan",
+        "inMinute": "{{m}} minutuan",
+        "inMinutes": "{{m}} minutu barru",
+        "inHour": "{{h}} orduan",
+        "inHours": "{{h}} orduetan",
+        "inUnderMinute": "1 minutu baino gutxiagoan"
     }
 }

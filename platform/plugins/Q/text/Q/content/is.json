@@ -73,5 +73,30 @@
             "touchscreen": "Notaðu fingrana til að þysja og draga",
             "notTouchscreen": "Notaðu músina og hjólið til að þysja og draga"
         }
+    },
+    "timestamp": {
+        "lastNight": "gærkvöld",
+        "lastEvening": "í fyrradag",
+        "yesterday": "í gær",
+        "thisMorning": "þetta morn",
+        "today": "í dag",
+        "tonight": "í kvöld",
+        "tomorrowMorning": "Tom Morn",
+        "tomorrow": "á morgun",
+        "hoursAgo": "Fyrir {{h}} klukkustundum",
+        "hourAgo": "{{h}} klukkustund síðan",
+        "minuteAgo": "{{m}} mínúta síðan",
+        "minutesAgo": "{{m}} mínútum",
+        "secondAgo": "{{s}} sekúndu síðan",
+        "secondsAgo": "{{s}} sekúndum",
+        "fewSecondsAgo": "sekúndum síðan",
+        "rightNow": "núna strax",
+        "inSecond": "á {{s}} sekúndu",
+        "inSeconds": "eftir {{s}} sekúndur",
+        "inMinute": "eftir {{m}} mínútu",
+        "inMinutes": "eftir {{m}} mínútur",
+        "inHour": "eftir {{h}} klukkustund",
+        "inHours": "eftir {{h}} klukkustundir",
+        "inUnderMinute": "á innan við 1 mínútu"
     }
 }

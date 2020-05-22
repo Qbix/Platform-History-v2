@@ -50,7 +50,8 @@
             "title": "Agħżel kuntatt",
             "SearchByName": "Fittex bl-isem",
             "CreateAccount": "+ Kuntatt Ġdid",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ma nstabx"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ma nstabx",
+            "EmptyContacts": "Il-kuntatti ma nstabux ..."
         },
         "select": {
             "title": "Agħżel kuntatt ta &#39;{{displayName}}"

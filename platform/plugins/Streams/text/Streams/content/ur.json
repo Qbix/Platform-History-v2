@@ -91,7 +91,8 @@
         "notice": {
             "text": "آپ کو مدعو کیا گیا ہے. {{ClickOrTap}} یہاں قبول اور شامل ہونے کے لئے یہاں."
         },
-        "youCanNowPaste": "لوگوں کو مدعو کرنے کے لئے اب آپ یہ لنک کہیں پیسٹ کرسکتے ہیں"
+        "youCanNowPaste": "لوگوں کو مدعو کرنے کے لئے اب آپ یہ لنک کہیں پیسٹ کرسکتے ہیں",
+        "command": "مدعو کریں"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "لنک کاپی کلپ بورڈ میں کیا گیا",
             "codeCopiedToCb": "کلپ بورڈ میں کوڈ کاپی کیا گیا",
             "userHasNoVideo": "شریک کے پاس کوئی ویڈیو نہیں ہے",
-            "openInBrowserAlert": "کانفرنس میں شامل ہونے کے لئے سفاری براؤزر میں لنک کھولیں۔"
+            "openInBrowserAlert": "کانفرنس میں شامل ہونے کے لئے سفاری براؤزر میں لنک کھولیں۔",
+            "youBeganVideoRecording": "آپ نے اس کانفرنس کو ریکارڈ کرنا شروع کیا",
+            "youStoppedVideoRecording": "آپ نے اس کانفرنس کو ریکارڈ کرنا چھوڑ دیا ہے"
         },
         "settingsPopup": {
             "webCamera": "ویب کیمرا",
@@ -189,7 +192,12 @@
             "copy": "کاپی",
             "turnOffVideo": "کیمرا \/ اسکرین کا اشتراک بند کریں",
             "turnOffScreenSharing": "اسکرین کا اشتراک بند کریں",
-            "cameraIsTurnedOff": "کیمرا بند ہے"
+            "cameraIsTurnedOff": "کیمرا بند ہے",
+            "startRecording": "ریکارڈنگ شروع کریں",
+            "stopRecording": "ریکارڈنگ بند کرو",
+            "recordingInProgress": "ریکارڈنگ جاری ہے ...",
+            "publishOnTimeline": "ٹائم لائن پر شائع کریں",
+            "publishToGroup": "گروپ میں شائع کریں"
         },
         "participantsPopup": {
             "disconnect": "منقطع ہونا",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "مجھے چھوڑ کر لاؤڈسٹ",
             "maximizeLoudest": "لاوڈسٹ کو زیادہ سے زیادہ کریں",
             "staticMaximized": "جامد زیادہ سے زیادہ",
-            "manual": "دستی"
-        }
+            "manual": "دستی",
+            "turnOffCamera": "ویڈیو چھپائیں",
+            "turnOffAudio": "آڈیو خاموش کریں",
+            "turnOffScreenSharing": "اسکرین شیئرنگ چھپائیں",
+            "turnOnCamera": "ویڈیو دکھائیں",
+            "turnOnAudio": "آڈیو خاموش کریں",
+            "turnOnScreenSharing": "اسکرین کا اشتراک دکھائیں"
+        },
+        "notAllowedToJoinCall": "آپ کو اس سلسلہ میں شامل ہونے کی اجازت نہیں ہے۔",
+        "streamTitle": "} 9 999}} براہ راست کال"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "محفوظ کریں",
         "Delete": "حذف کریں",
         "Submenu": "سب میینو"
+    },
+    "errors": {
+        "HiddenFromYou": "یہ مواد آپ سے پوشیدہ ہے۔"
     }
 }

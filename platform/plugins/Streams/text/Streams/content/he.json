@@ -91,7 +91,8 @@
         "notice": {
             "text": "הוזמנת. {{ClickOrTap}} כאן כדי לקבל ולהצטרף."
         },
-        "youCanNowPaste": "כעת תוכלו להדביק את הקישור הזה במקום כלשהו כדי להזמין אנשים"
+        "youCanNowPaste": "כעת תוכלו להדביק את הקישור הזה במקום כלשהו כדי להזמין אנשים",
+        "command": "להזמין"
     },
     "followup": {
         "mobile": {
@@ -166,7 +167,9 @@
             "linkCopiedToCb": "קישור הועתק ללוח",
             "codeCopiedToCb": "הקוד הועתק ללוח",
             "userHasNoVideo": "למשתתף אין סרטון",
-            "openInBrowserAlert": "פתח קישור בדפדפן ספארי כדי להצטרף לוועידה."
+            "openInBrowserAlert": "פתח קישור בדפדפן ספארי כדי להצטרף לוועידה.",
+            "youBeganVideoRecording": "התחלת להקליט את הכנס הזה",
+            "youStoppedVideoRecording": "הפסקת להקליט את הוועידה הזו"
         },
         "settingsPopup": {
             "webCamera": "מצלמת רשת",
@@ -186,7 +189,12 @@
             "copy": "עותק",
             "turnOffVideo": "כבה את שיתוף המצלמה \/ המסך",
             "turnOffScreenSharing": "כבה את שיתוף המסך",
-            "cameraIsTurnedOff": "המצלמה כבויה"
+            "cameraIsTurnedOff": "המצלמה כבויה",
+            "startRecording": "התחל להקליט",
+            "stopRecording": "הפסק להקליט",
+            "recordingInProgress": "ההקלטה בעיצומה ...",
+            "publishOnTimeline": "פרסם בציר זמן",
+            "publishToGroup": "פרסם בקבוצה"
         },
         "participantsPopup": {
             "disconnect": "נתק",
@@ -195,8 +203,16 @@
             "loudestExceptMe": "הכי חזק חוץ ממני",
             "maximizeLoudest": "למקסם את הרם ביותר",
             "staticMaximized": "סטטי ממקסם",
-            "manual": "מדריך ל"
-        }
+            "manual": "מדריך ל",
+            "turnOffCamera": "הסתר סרטון",
+            "turnOffAudio": "השתק שמע",
+            "turnOffScreenSharing": "הסתר שיתוף מסך",
+            "turnOnCamera": "הצג וידאו",
+            "turnOnAudio": "בטל השתקת שמע",
+            "turnOnScreenSharing": "הצג שיתוף מסך"
+        },
+        "notAllowedToJoinCall": "אין לך הרשאה להצטרף לזרם זה.",
+        "streamTitle": "{{1}} שיחה חיה"
     },
     "types": {
         "Streams\/invited": {
@@ -333,5 +349,8 @@
         "Save": "להציל",
         "Delete": "מחק",
         "Submenu": "תפריט משנה"
+    },
+    "errors": {
+        "HiddenFromYou": "תוכן זה מוסתר מכם."
     }
 }

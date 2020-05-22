@@ -50,7 +50,8 @@
             "title": "Изаберите контакт",
             "SearchByName": "Тражи по имену",
             "CreateAccount": "+ Нови контакт",
-            "CreateAccountNotFound": "К.Усерс.Цордова.УИ.цреате није пронађен"
+            "CreateAccountNotFound": "К.Усерс.Цордова.УИ.цреате није пронађен",
+            "EmptyContacts": "Контакти нису пронађени ..."
         },
         "select": {
             "title": "Изаберите контакт корисника {{displayName}}"

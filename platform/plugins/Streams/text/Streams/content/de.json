@@ -91,7 +91,8 @@
         "notice": {
             "text": "Du bist eingeladen. {{ClickOrTap}} hier zum Annehmen und Mitmachen."
         },
-        "youCanNowPaste": "Sie können diesen Link jetzt irgendwo einfügen, um Personen einzuladen"
+        "youCanNowPaste": "Sie können diesen Link jetzt irgendwo einfügen, um Personen einzuladen",
+        "command": "Einladen"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Link in die Zwischenablage kopiert",
             "codeCopiedToCb": "Code in die Zwischenablage kopiert",
             "userHasNoVideo": "Teilnehmer hat kein Video",
-            "openInBrowserAlert": "Öffnen Sie den Link im Safari-Browser, um an der Konferenz teilzunehmen."
+            "openInBrowserAlert": "Öffnen Sie den Link im Safari-Browser, um an der Konferenz teilzunehmen.",
+            "youBeganVideoRecording": "Sie haben mit der Aufzeichnung dieser Konferenz begonnen",
+            "youStoppedVideoRecording": "Sie haben die Aufzeichnung dieser Konferenz beendet"
         },
         "settingsPopup": {
             "webCamera": "Web-Kamera",
@@ -189,7 +192,12 @@
             "copy": "Kopieren",
             "turnOffVideo": "Schalten Sie die Kamera- \/ Bildschirmfreigabe aus",
             "turnOffScreenSharing": "Deaktivieren Sie die Bildschirmfreigabe",
-            "cameraIsTurnedOff": "Kamera ist ausgeschaltet"
+            "cameraIsTurnedOff": "Kamera ist ausgeschaltet",
+            "startRecording": "Starte die Aufnahme",
+            "stopRecording": "Höre auf, aufzunehmen",
+            "recordingInProgress": "Die Aufnahme ist im Gange ...",
+            "publishOnTimeline": "Auf der Timeline veröffentlichen",
+            "publishToGroup": "In Gruppe veröffentlichen"
         },
         "participantsPopup": {
             "disconnect": "Trennen",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Lauteste außer mir",
             "maximizeLoudest": "Am lautesten maximieren",
             "staticMaximized": "Statisch maximiert",
-            "manual": "Handbuch"
-        }
+            "manual": "Handbuch",
+            "turnOffCamera": "Video ausblenden",
+            "turnOffAudio": "Audio stumm schalten",
+            "turnOffScreenSharing": "Bildschirmfreigabe ausblenden",
+            "turnOnCamera": "Video anzeigen",
+            "turnOnAudio": "Audio stummschalten",
+            "turnOnScreenSharing": "Bildschirmfreigabe anzeigen"
+        },
+        "notAllowedToJoinCall": "Sie haben keine Berechtigung, diesem Stream beizutreten.",
+        "streamTitle": "{{1}} Live-Anruf"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "speichern",
         "Delete": "Löschen",
         "Submenu": "Untermenü"
+    },
+    "errors": {
+        "HiddenFromYou": "Dieser Inhalt ist Ihnen verborgen."
     }
 }

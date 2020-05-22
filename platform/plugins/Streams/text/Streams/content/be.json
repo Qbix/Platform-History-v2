@@ -91,7 +91,8 @@
         "notice": {
             "text": "Вы былі запрошаны. {{ClickOrTap}} тут, каб прыняць і далучыцца."
         },
-        "youCanNowPaste": "Цяпер вы можаце ўставіць гэтую спасылку куды-небудзь, каб запрасіць людзей"
+        "youCanNowPaste": "Цяпер вы можаце ўставіць гэтую спасылку куды-небудзь, каб запрасіць людзей",
+        "command": "Запрасіць"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Спасылка скапіравана ў буфер абмену",
             "codeCopiedToCb": "Код скапіруецца ў буфер абмену",
             "userHasNoVideo": "У ўдзельніка няма відэа",
-            "openInBrowserAlert": "Адкрыйце спасылку ў браўзэры Safari, каб далучыцца да канферэнцыі."
+            "openInBrowserAlert": "Адкрыйце спасылку ў браўзэры Safari, каб далучыцца да канферэнцыі.",
+            "youBeganVideoRecording": "Вы пачалі запісваць гэтую канферэнцыю",
+            "youStoppedVideoRecording": "Вы спынілі запіс гэтай канферэнцыі"
         },
         "settingsPopup": {
             "webCamera": "Вэб-камера",
@@ -189,7 +192,12 @@
             "copy": "Копія",
             "turnOffVideo": "Выключыце сумеснае выкарыстанне камеры \/ экрана",
             "turnOffScreenSharing": "Выключыце сумеснае выкарыстанне экрана",
-            "cameraIsTurnedOff": "Камера адключана"
+            "cameraIsTurnedOff": "Камера адключана",
+            "startRecording": "Пачніце запіс",
+            "stopRecording": "Спыніць запіс",
+            "recordingInProgress": "Запіс ідзе ...",
+            "publishOnTimeline": "Апублікаваць на часовай шкале",
+            "publishToGroup": "Апублікаваць у групе"
         },
         "participantsPopup": {
             "disconnect": "Адключыце",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Самае гучнае, акрамя мяне",
             "maximizeLoudest": "Максімальна гучна",
             "staticMaximized": "Статычная максімальная",
-            "manual": "Кіраўніцтва"
-        }
+            "manual": "Кіраўніцтва",
+            "turnOffCamera": "Схаваць відэа",
+            "turnOffAudio": "Адключэнне гуку",
+            "turnOffScreenSharing": "Схаваць агульны доступ да экрана",
+            "turnOnCamera": "Паказаць відэа",
+            "turnOnAudio": "Уключыць гук для гуку",
+            "turnOnScreenSharing": "Паказаць сумеснае выкарыстанне экрана"
+        },
+        "notAllowedToJoinCall": "Вы не маеце дазволу далучыцца да гэтага патоку.",
+        "streamTitle": "{{1}} Жывы званок"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "Захаваць",
         "Delete": "Выдаліць",
         "Submenu": "Падменю"
+    },
+    "errors": {
+        "HiddenFromYou": "Гэта ўтрыманне ад вас схавана."
     }
 }

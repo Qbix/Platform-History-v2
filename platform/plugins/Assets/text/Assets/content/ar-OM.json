@@ -10,7 +10,7 @@
         "YouSubscribedTo": "لقد اشتركت في {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "معلومات عن النظام",
+        "AboutOrder": "معلومات حول الطلب",
         "PaymentMethod": "طريقة الدفع او السداد",
         "ContactInfo": "معلومات الاتصال",
         "Pay": "دفع"
@@ -26,7 +26,8 @@
         "Client": "عميل",
         "To": "إلى",
         "From": "من عند",
-        "HistoryEmpty": "لا يوجد لديك بيانات حتى الآن"
+        "HistoryEmpty": "لا يوجد لديك بيانات حتى الآن",
+        "SeeHistory": "راجع سجل الدفع لـ {{1}}"
     },
     "subscriptions": {
         "infoTitle": "ضبط معلومات الدفع",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "تلقى {{amount}} ائتمانات"
         }
+    },
+    "charge": {
+        "Subject": "تحصل على دفعة بقيمة {{displayAmount}} من {{call 'publisher.displayName'}} بواسطة &quot;{{description}}&quot;",
+        "HasBeenCharged": "مرحبًا ، هذا فقط لإعلامك بأنه تم تحصيل مبلغ {{1}} {{2}} مقابل {{3}} بواسطة {{4}}"
+    },
+    "charged": {
+        "Subject": "شكرًا لك على دفعتك مقابل &quot;{{description}}&quot;",
+        "HavePaid": "مرحبًا {{1}} ، هذا مجرد تأكيد سريع بأنك دفعت {{2}} بنجاح إلى {{3}} مقابل {{4}}"
     }
 }

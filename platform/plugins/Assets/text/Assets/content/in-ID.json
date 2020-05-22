@@ -11,7 +11,7 @@
     },
     "payment": {
         "AboutOrder": "Info tentang pesanan",
-        "PaymentMethod": "Metode pembayaran",
+        "PaymentMethod": "Cara Pembayaran",
         "ContactInfo": "Info kontak",
         "Pay": "Membayar"
     },
@@ -26,7 +26,8 @@
         "Client": "Klien",
         "To": "untuk",
         "From": "dari",
-        "HistoryEmpty": "Anda belum memiliki data"
+        "HistoryEmpty": "Anda belum memiliki data",
+        "SeeHistory": "Lihat riwayat pembayaran untuk {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Tetapkan Informasi Pembayaran",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "Menerima kredit {{amount}}"
         }
+    },
+    "charge": {
+        "Subject": "Anda mendapatkan pembayaran {{displayAmount}} dari {{call 'publisher.displayName'}} dengan &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hai, ini hanya untuk memberi tahu Anda {{1}} telah dibebankan {{2}} untuk {{3}} oleh {{4}}"
+    },
+    "charged": {
+        "Subject": "Terima kasih atas pembayaran Anda untuk &quot;{{description}}&quot;",
+        "HavePaid": "Hai {{1}}, ini hanya konfirmasi cepat bahwa Anda telah berhasil membayar {{2}} ke {{3}} untuk {{4}}"
     }
 }

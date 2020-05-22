@@ -50,7 +50,8 @@
             "title": "Επιλέξτε επαφή",
             "SearchByName": "Αναζήτηση βάσει ονόματος",
             "CreateAccount": "+ Νέα επαφή",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create δεν βρέθηκε"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create δεν βρέθηκε",
+            "EmptyContacts": "Δεν βρέθηκαν επαφές ..."
         },
         "select": {
             "title": "Επιλέξτε επαφή του {{displayName}}"

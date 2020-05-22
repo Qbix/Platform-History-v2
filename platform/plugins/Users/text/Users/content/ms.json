@@ -50,7 +50,8 @@
             "title": "Pilih kenalan",
             "SearchByName": "Cari mengikut nama",
             "CreateAccount": "+ Kenalan baru",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create tidak dijumpai"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create tidak dijumpai",
+            "EmptyContacts": "Kenalan tidak dijumpai ..."
         },
         "select": {
             "title": "Pilih kenalan {{displayName}}"
