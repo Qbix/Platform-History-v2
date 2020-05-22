@@ -6,4 +6,8 @@ function Streams_after_Q_sessionExtras()
 		$preloaded = Db::exportArray($preloaded);
 		Q_Response::setScriptData('Q.plugins.Streams.Stream.preloaded', $preloaded);
 	}
+	if ($preloaded = Streams_Avatar::$preloaded) {
+		$preloaded = Db::exportArray($preloaded);
+		Q_Response::setScriptData('Q.plugins.Streams.Avatar.preloaded', $preloaded);
+	}
 }
