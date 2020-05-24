@@ -93,5 +93,16 @@
         "Assets\/credits\/received": {
             "content": "Received {{amount}} credits"
         }
-    }
+    },
+	"services": {
+		"NewServiceTemplate": {
+			"Title": "New Service Template",
+			"TitlePlaceholder": "Service title",
+			"PricePlaceholder": "Set price",
+			"DescriptionPlaceholder": "Service description",
+			"SaveService": "Save Service"
+		},
+		"ManageServiceTemplates": "Manage Service Templates",
+		"ManageServices": "Manage Services"
+	}
 }
