@@ -416,8 +416,8 @@ class Db_Utils
 		$shard_db = $class::db();
 		$pdo = $shard_db->reallyConnect($shard_name);
 		$shard_table = $class::table();
-		$shard_table = str_replace('{$dbname}', $shard_db->dbname, $shard_table);
-		$shard_table = str_replace('{$prefix}', $shard_db->prefix, $shard_table);
+		$shard_table = str_replace('{{dbname}}', $shard_db->dbname, $shard_table);
+		$shard_table = str_replace('{{prefix}}', $shard_db->prefix, $shard_table);
 
 		// verify if current shard is updated to latest version
 		$current_version = $shard_db->select('version', "{$shard_db->prefix}Q_plugin")

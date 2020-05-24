@@ -137,7 +137,7 @@ abstract class Base_Streams_Request extends Db_Row
 	static function table($with_db_name = true, $alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', 'Streams', 'indexes', 'Request', false)) {
-			return new Db_Expression(($with_db_name ? '{$dbname}.' : '').'{$prefix}'.'request');
+			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'request');
 		} else {
 			$conn = Db::getConnection('Streams');
   			$prefix = empty($conn['prefix']) ? '' : $conn['prefix'];

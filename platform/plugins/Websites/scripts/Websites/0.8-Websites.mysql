@@ -1,4 +1,4 @@
-CREATE TABLE `{$prefix}article` (
+CREATE TABLE `{{prefix}}article` (
   `publisherId` varbinary(31) NOT NULL COMMENT 'id of user who owns the stream',
   `streamName` varbinary(255) NOT NULL COMMENT 'local to fm server of publisherId',
   `userId` varbinary(31) NOT NULL COMMENT 'article author or the user to get in touch with about it',

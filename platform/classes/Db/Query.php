@@ -52,7 +52,7 @@ interface Db_Query_Interface
 	 * which is currently just
 	 * @example
 	 *       array ( 
-	 *          '{$prefix}' => $conn['prefix'] 
+	 *          '{{prefix}}' => $conn['prefix'] 
 	 *       )
 	 *
 	 *  The replacements array is used to replace strings in the SQL

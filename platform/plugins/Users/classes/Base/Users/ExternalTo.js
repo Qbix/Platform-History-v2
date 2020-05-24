@@ -118,7 +118,7 @@ Base.db = function () {
  */
 Base.table = function (withoutDbName) {
 	if (Q.Config.get(['Db', 'connections', 'Users', 'indexes', 'ExternalTo'], false)) {
-		return new Db.Expression((withoutDbName ? '' : '{$dbname}.')+'{$prefix}external_to');
+		return new Db.Expression((withoutDbName ? '' : '{{dbname}}.')+'{{prefix}}external_to');
 	} else {
 		var conn = Db.getConnection('Users');
 		var prefix = conn.prefix || '';

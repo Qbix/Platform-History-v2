@@ -76,7 +76,7 @@ Base.db = function () {
  */
 Base.table = function (withoutDbName) {
 	if (Q.Config.get(['Db', 'connections', 'Websites', 'indexes', 'Permalink'], false)) {
-		return new Db.Expression((withoutDbName ? '' : '{$dbname}.')+'{$prefix}permalink');
+		return new Db.Expression((withoutDbName ? '' : '{{dbname}}.')+'{{prefix}}permalink');
 	} else {
 		var conn = Db.getConnection('Websites');
 		var prefix = conn.prefix || '';

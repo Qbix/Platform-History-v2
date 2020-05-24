@@ -101,7 +101,7 @@ abstract class Base_Users_Label extends Db_Row
 	static function table($with_db_name = true, $alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', 'Users', 'indexes', 'Label', false)) {
-			return new Db_Expression(($with_db_name ? '{$dbname}.' : '').'{$prefix}'.'label');
+			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'label');
 		} else {
 			$conn = Db::getConnection('Users');
   			$prefix = empty($conn['prefix']) ? '' : $conn['prefix'];

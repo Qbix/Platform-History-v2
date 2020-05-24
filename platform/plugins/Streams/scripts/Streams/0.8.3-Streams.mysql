@@ -1,4 +1,4 @@
-ALTER TABLE {$prefix}participant
+ALTER TABLE {{prefix}}participant
 DROP COLUMN reason,
 DROP COLUMN	enthusiasm,
 DROP COLUMN reputation,

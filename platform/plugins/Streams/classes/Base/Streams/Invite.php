@@ -156,7 +156,7 @@ abstract class Base_Streams_Invite extends Db_Row
 	static function table($with_db_name = true, $alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', 'Streams', 'indexes', 'Invite', false)) {
-			return new Db_Expression(($with_db_name ? '{$dbname}.' : '').'{$prefix}'.'invite');
+			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'invite');
 		} else {
 			$conn = Db::getConnection('Streams');
   			$prefix = empty($conn['prefix']) ? '' : $conn['prefix'];

@@ -2,9 +2,9 @@
 # The old data won't work with the primary key.
 # We can do this since we didn't release Q publicly yet,
 # so we know that no apps will be affected by the following statement:
-DROP TABLE IF EXISTS `{$prefix}notification`;
+DROP TABLE IF EXISTS `{{prefix}}notification`;
 
-CREATE TABLE `{$prefix}notification` (
+CREATE TABLE `{{prefix}}notification` (
   `userId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'the user to notify',
   `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'the owner of the stream causing the notification',
   `streamName` varbinary(255) NOT NULL COMMENT 'the stream causing the notification',

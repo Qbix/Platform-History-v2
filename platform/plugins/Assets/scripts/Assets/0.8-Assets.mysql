@@ -1,4 +1,4 @@
-ALTER TABLE `{$prefix}badge`
+ALTER TABLE `{{prefix}}badge`
 CHANGE app appId varbinary(31) NOT NULL FIRST,
 ADD COLUMN communityId varbinary(31) NULL DEFAULT NULL AFTER appId,
 CHANGE title title varchar(255) NOT NULL,
@@ -7,7 +7,7 @@ DROP COLUMN pic_big,
 DROP COLUMN pic_small,
 ADD COLUMN icon varbinary(255) NULL DEFAULT NULL AFTER name;
 
-ALTER TABLE `{$prefix}earned`
+ALTER TABLE `{{prefix}}earned`
 CHANGE app appId varbinary(31) NOT NULL FIRST,
 CHANGE userId userId varchar(31) NOT NULL ,
 CHANGE badge_name badgeName varchar(255) NOT NULL,

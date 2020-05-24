@@ -87,7 +87,7 @@ abstract class Base_Streams_Task extends Db_Row
 	static function table($with_db_name = true, $alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', 'Streams', 'indexes', 'Task', false)) {
-			return new Db_Expression(($with_db_name ? '{$dbname}.' : '').'{$prefix}'.'task');
+			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'task');
 		} else {
 			$conn = Db::getConnection('Streams');
   			$prefix = empty($conn['prefix']) ? '' : $conn['prefix'];

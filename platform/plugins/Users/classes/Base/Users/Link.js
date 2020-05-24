@@ -76,7 +76,7 @@ Base.db = function () {
  */
 Base.table = function (withoutDbName) {
 	if (Q.Config.get(['Db', 'connections', 'Users', 'indexes', 'Link'], false)) {
-		return new Db.Expression((withoutDbName ? '' : '{$dbname}.')+'{$prefix}link');
+		return new Db.Expression((withoutDbName ? '' : '{{dbname}}.')+'{{prefix}}link');
 	} else {
 		var conn = Db.getConnection('Users');
 		var prefix = conn.prefix || '';

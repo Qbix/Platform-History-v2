@@ -124,7 +124,7 @@ abstract class Base_Streams_Notification extends Db_Row
 	static function table($with_db_name = true, $alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', 'Streams', 'indexes', 'Notification', false)) {
-			return new Db_Expression(($with_db_name ? '{$dbname}.' : '').'{$prefix}'.'notification');
+			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'notification');
 		} else {
 			$conn = Db::getConnection('Streams');
   			$prefix = empty($conn['prefix']) ? '' : $conn['prefix'];

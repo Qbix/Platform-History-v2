@@ -118,7 +118,7 @@ Base.db = function () {
  */
 Base.table = function (withoutDbName) {
 	if (Q.Config.get(['Db', 'connections', 'Streams', 'indexes', 'Participant'], false)) {
-		return new Db.Expression((withoutDbName ? '' : '{$dbname}.')+'{$prefix}participant');
+		return new Db.Expression((withoutDbName ? '' : '{{dbname}}.')+'{{prefix}}participant');
 	} else {
 		var conn = Db.getConnection('Streams');
 		var prefix = conn.prefix || '';

@@ -1,2 +1,2 @@
-ALTER TABLE {$prefix}session
+ALTER TABLE {{prefix}}session
 ADD INDEX updatedTime (`updatedTime`);

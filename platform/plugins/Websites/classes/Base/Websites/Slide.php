@@ -76,7 +76,7 @@ abstract class Base_Websites_Slide extends Db_Row
 	static function table($with_db_name = true)
 	{
 		if (Q_Config::get('Db', 'connections', 'Websites', 'indexes', 'Slide', false)) {
-			return new Db_Expression(($with_db_name ? '{$dbname}.' : '').'{$prefix}'.'slide');
+			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'slide');
 		} else {
 			$conn = Db::getConnection('Websites');
   			$prefix = empty($conn['prefix']) ? '' : $conn['prefix'];

@@ -1,71 +1,71 @@
-UPDATE {$prefix}access
+UPDATE {{prefix}}access
 SET streamName = "Streams/experience*"
 WHERE streamName = "Streams/community*";
 
-UPDATE {$prefix}access
+UPDATE {{prefix}}access
 SET streamName = "Streams/experience/"
 WHERE streamName = "Streams/community/";
 
-UPDATE {$prefix}access
+UPDATE {{prefix}}access
 SET streamName = REPLACE(streamName, "Streams/community/", "Streams/experience/")
 WHERE streamName LIKE "Streams/community/%";
 
-UPDATE {$prefix}category
+UPDATE {{prefix}}category
 SET streamName = REPLACE(streamName, "Streams/community/", "Streams/experience/")
 WHERE streamName LIKE "Streams/community/%";
 
-UPDATE {$prefix}invite
+UPDATE {{prefix}}invite
 SET streamName = REPLACE(streamName, "Streams/community/", "Streams/experience/")
 WHERE streamName LIKE "Streams/community/%";
 
-UPDATE {$prefix}message
+UPDATE {{prefix}}message
 SET streamName = REPLACE(streamName, "Streams/community/", "Streams/experience/")
 WHERE streamName LIKE "Streams/community/%";
 
-UPDATE {$prefix}notification
+UPDATE {{prefix}}notification
 SET streamName = REPLACE(streamName, "Streams/community/", "Streams/experience/")
 WHERE streamName LIKE "Streams/community/%";
 
-UPDATE {$prefix}participant
+UPDATE {{prefix}}participant
 SET streamName = REPLACE(streamName, "Streams/community/", "Streams/experience/")
 WHERE streamName LIKE "Streams/community/%";
 
-UPDATE {$prefix}related_from
+UPDATE {{prefix}}related_from
 SET fromStreamName = REPLACE(fromStreamName, "Streams/community/", "Streams/experience/")
 WHERE fromStreamName LIKE "Streams/community/%";
 
-UPDATE {$prefix}related_from
+UPDATE {{prefix}}related_from
 SET toStreamName = REPLACE(toStreamName, "Streams/community/", "Streams/experience/")
 WHERE toStreamName LIKE "Streams/community/%";
 
-UPDATE {$prefix}related_to
+UPDATE {{prefix}}related_to
 SET fromStreamName = REPLACE(fromStreamName, "Streams/community/", "Streams/experience/")
 WHERE fromStreamName LIKE "Streams/community/%";
 
-UPDATE {$prefix}related_to
+UPDATE {{prefix}}related_to
 SET toStreamName = REPLACE(toStreamName, "Streams/community/", "Streams/experience/")
 WHERE toStreamName LIKE "Streams/community/%";
 
-UPDATE {$prefix}rule
+UPDATE {{prefix}}rule
 SET streamName = REPLACE(streamName, "Streams/community/", "Streams/experience/")
 WHERE streamName LIKE "Streams/community/%";
 
-UPDATE {$prefix}stream
+UPDATE {{prefix}}stream
 SET type = "Streams/experience"
 WHERE type = "Streams/community";
 
-UPDATE {$prefix}stream
+UPDATE {{prefix}}stream
 SET name = REPLACE(name, "Streams/community/", "Streams/experience/")
 WHERE name LIKE "Streams/community/%";
 
-UPDATE {$prefix}message
+UPDATE {{prefix}}message
 SET streamName = REPLACE(streamName, "Streams/community/", "Streams/experience/")
 WHERE streamName LIKE "Streams/community/%";
 
-UPDATE {$prefix}subscription
+UPDATE {{prefix}}subscription
 SET streamName = REPLACE(streamName, "Streams/community/", "Streams/experience/")
 WHERE streamName LIKE "Streams/community/%";
 
-UPDATE {$prefix}total
+UPDATE {{prefix}}total
 SET streamName = REPLACE(streamName, "Streams/community/", "Streams/experience/")
 WHERE streamName LIKE "Streams/community/%";

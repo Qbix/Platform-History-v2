@@ -69,7 +69,7 @@ Base.db = function () {
  */
 Base.table = function (withoutDbName) {
 	if (Q.Config.get(['Db', 'connections', 'Assets', 'indexes', 'Customer'], false)) {
-		return new Db.Expression((withoutDbName ? '' : '{$dbname}.')+'{$prefix}customer');
+		return new Db.Expression((withoutDbName ? '' : '{{dbname}}.')+'{{prefix}}customer');
 	} else {
 		var conn = Db.getConnection('Assets');
 		var prefix = conn.prefix || '';
