@@ -1,6 +1,7 @@
 <?php
 
 function Assets_before_Q_responseExtras() {
+	Q_Response::addStylesheet('{{Assets}}/css/Assets.css', 'Assets');
 	Q_Response::addScript('{{Assets}}/js/Assets.js', 'Assets');
 
 	try {
