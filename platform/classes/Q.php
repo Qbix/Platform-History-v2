@@ -301,7 +301,6 @@ class Q
 		) ? 1 : 0;
 		$keys = array_keys($params);
 		usort($keys, array(__CLASS__, 'reverseLengthCompare'));
-		$expression = str_replace('\\$', '\\REAL_DOLLAR_SIGN\\', $expression);
 		foreach ($keys as $key) {
 			$parts = explode('.', $key);
 			$p = Q::getObject($params, $parts, '');
@@ -311,12 +310,8 @@ class Q
 			if (is_numeric($key) and floor($key) == ceil($key)) {
 				$key = $key + $a;
 			}
-
-			$p = str_replace('$', '\\REAL_DOLLAR_SIGN\\', $p);
-			$expression = str_replace('$'.$key, $p, $expression);
 			$expression = str_replace('{{'.$key.'}}', $p, $expression);
 		}
-		$expression = str_replace('\\REAL_DOLLAR_SIGN\\', '$', $expression);
 		return $expression;
 	}
 	
