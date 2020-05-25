@@ -581,6 +581,7 @@ button.basic32 { height: 40px; border: solid 1px transparent; cursor: pointer; f
 .basic32_close { background-position: 0 -644px; }
 .basic16_open { background-position: 0 -342px; }
 .basic32_open { background-position: 0 -684px; }
+.basic16_invite { background-position: 0 -440px; }
 .basic32_invite { background-position: 0 -884px; }
 
 html.Q_scanning { background: transparent !important; transform: translateZ(0); }
