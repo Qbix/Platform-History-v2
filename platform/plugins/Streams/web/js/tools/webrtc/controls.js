@@ -227,6 +227,9 @@
 				tool.WebRTCLib.event.on('deviceListUpdated', function () {
 					tool.loadCamerasList();
 				});
+                tool.WebRTCLib.event.on('screensharingStarting', function (e) {
+                    tool.participantsPopup().toggleLoudesScreenMode('disabled');
+                });
 
 				tool.WebRTCLib.event.on('facebookLiveStreamingStarted', function (participant) {
 					if(participant.isLocal) {
@@ -905,15 +908,17 @@
 						viewModeToApply = 'loudest';
 					} else if(tool.state.loudestMode == 'allButMe') {
 						viewModeToApply = 'loudestExceptMe';
-					} else {
+					} /*else {
 						viewModeToApply = 'maximizeStatic';
-					}
+					}*/
 				} else if(activeViewMode == 'tiled' || activeViewMode == 'tiledMobile') {
 					viewModeToApply = 'tiledView';
 				} else if(activeViewMode == 'regular') {
 					viewModeToApply = 'floatingView';
 				} else if(activeViewMode == 'manual') {
 					viewModeToApply = 'manual';
+				} else if(activeViewMode == 'fullScreen' || activeViewMode == 'screenSharing' ) {
+					viewModeToApply = 'fullScreen';
 				}
 
 				for(var b in buttonsArr) {
@@ -2028,14 +2033,19 @@
 						this.manuallyToggled = manually;
 						if(this.isActive == false) {
                             for(let s in screens) {
-                                if(screens[s].screensharing) continue;
+                                if(screens[s].screensharing || (screens[s].trackEl && !screens[s].trackEl.srcObject.active)) continue;
                                 this.showPartcicipantScreens(screens[s], manually);
                             }
-                            this.unmuteVideo();
+                            if(screens.length != 0) {
+                            	this.unmuteVideo();
+                            } else {
+                                tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.userHasNoVideo", tool.textes));
+                                return;
+                            }
 
                         } else {
                             for(let s in screens) {
-                                if(screens[s].screensharing) continue;
+                                if(screens[s].screensharing || (screens[s].trackEl && !screens[s].trackEl.srcObject.active)) continue;
                                 this.removePartcicipantScreens(screens[s]);
                             }
                             this.muteVideo();
@@ -2050,15 +2060,21 @@
 
                         if(this.screenSharingIsMuted) {
                             for(let s in screens) {
-                                if(!screens[s].screensharing) continue;
+                                let videoTracks = screens[s].videoTracks();
+                                if(!screens[s].screensharing || (videoTracks[0].trackEl && !videoTracks[0].trackEl.srcObject.active)) continue;
                                 this.showPartcicipantScreens(screens[s]);
                             }
 
-                            this.unmuteScreenSharingVideo();
+                            if(screens.length != 0) {
+                                this.unmuteScreenSharingVideo();
+                            } else {
+                                tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.userHasNoVideo", tool.textes));
+                            }
 
                         } else {
                             for(let s in screens) {
-                                if(!screens[s].screensharing) continue;
+                            	let videoTracks = screens[s].videoTracks();
+                                if(!screens[s].screensharing || (videoTracks[0].trackEl && !videoTracks[0].trackEl.srcObject.active)) continue;
                                 this.removePartcicipantScreens(screens[s]);
                             }
                             this.muteScreenSharingVideo();
@@ -2092,7 +2108,7 @@
 							let screen = screens[s];
 
 							var hasNoVideo = screen.videoTrack == null || (screen.videoTrack != null && screen.videoTrack.videoWidth == 0 && screen.videoTrack.videoHeight == 0);
-							if(hasNoVideo && manually) {
+                            if(hasNoVideo && manually) {
 								tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.userHasNoVideo", tool.textes));
 								return;
 							} else if(hasNoVideo && !screen.videoIsChanging) {
@@ -2145,6 +2161,13 @@
 							item.unmuteVideo();
 						}
 
+                        if(activeCameraScreens == 0 && activeScreenSharingScreens != 0) {
+                            if(!item.videoBtnsEl.classList.contains('Streams_webrtc_no-camera-video')) item.videoBtnsEl.classList.add('Streams_webrtc_no-camera-video')
+                        } else {
+                            if(item.videoBtnsEl.classList.contains('Streams_webrtc_no-camera-video')) item.videoBtnsEl.classList.remove('Streams_webrtc_no-camera-video')
+                        }
+
+
 						if(participant.isLocal) {
 
                             if(!tool.WebRTCLib.conferenceControl.micIsEnabled()){
@@ -2155,6 +2178,7 @@
                                 item.audioBtnEl.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.turnOffAudio", tool.textes);
                             }
 						}
+
 
 
 
@@ -2422,12 +2446,19 @@
 					var loudestBtnIcon = document.createElement('SPAN');
 					loudestBtnIcon.innerHTML = icons.maximizeLoudestOff;
 
-					var maximizeStaticBtn = document.createElement('DIV');
+					/*var maximizeStaticBtn = document.createElement('DIV');
 					maximizeStaticBtn.className = 'Streams_webrtc_loudest-mode-btn';
 					maximizeStaticBtn.dataset.viewMode = 'maximizeStatic';
 					maximizeStaticBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.staticMaximized", tool.textes);
 					var maximizeStaticBtnIcon = document.createElement('SPAN');
-					maximizeStaticBtnIcon.innerHTML = icons.staticMaximizeOff;
+					maximizeStaticBtnIcon.innerHTML = icons.staticMaximizeOff;*/
+
+					var fullScreenBtn = document.createElement('DIV');
+                    fullScreenBtn.className = 'Streams_webrtc_fullScreen-mode-btn';
+                    fullScreenBtn.dataset.viewMode = 'fullScreen';
+                    fullScreenBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.fullScreen", tool.textes);
+					var fullScreenBtnIcon = document.createElement('SPAN');
+                    fullScreenBtnIcon.innerHTML = icons.staticMaximizeOff;
 
 					var manualLayoutBtn = document.createElement('DIV');
 					manualLayoutBtn.className = 'Streams_webrtc_loudest-mode-btn';
@@ -2436,30 +2467,6 @@
 					var manualLayoutBtnIcon = document.createElement('SPAN');
 					manualLayoutBtnIcon.innerHTML = icons.dragIconOff;
 
-					var loudestSelectCon = document.createElement('DIV');
-					loudestSelectCon.className = 'loudest-options-con'
-					var loudestSelect = document.createElement('SELECT');
-					loudestSelect.className = 'loudest-options'
-					var option1 = document.createElement('OPTION');
-					option1.innerHTML = 'Loudest';
-					option1.value = 'all';
-					var option2 = document.createElement('OPTION');
-					option2.innerHTML = 'Loudest Except Me';
-					option2.value = 'allButMe';
-					option2.selected = true;
-					var option3 = document.createElement('OPTION');
-					option3.value = 'disabled';
-					option3.className = 'loudest-options-disabled';
-					option3.innerHTML = 'Static';
-					loudestSelect.addEventListener('change', function (e) {
-						var value = loudestSelect.options[loudestSelect.selectedIndex].value;
-						toggleLoudesScreenMode(value);
-					})
-					loudestSelect.appendChild(option1);
-					loudestSelect.appendChild(option2);
-					loudestSelect.appendChild(option3);
-					loudestSelectCon.appendChild(loudestSelect);
-					tool.loudestSelect = loudestSelect;
 
 					topBtns.appendChild(disconnectBtn);
 					floatingViewModeBtn.appendChild(floatingViewModeBtnIcon);
@@ -2469,12 +2476,13 @@
 					loudestExceptMeBtn.appendChild(loudestExceptMeBtnIcon);
 					topBtns.appendChild(loudestExceptMeBtn);
 					loudestBtn.appendChild(loudestBtnIcon);
-					topBtns.appendChild(loudestBtn);
+					topBtns.appendChild(loudestBtn);/*
 					maximizeStaticBtn.appendChild(maximizeStaticBtnIcon);
-					topBtns.appendChild(maximizeStaticBtn);
+					topBtns.appendChild(maximizeStaticBtn);*/
+                    fullScreenBtn.appendChild(fullScreenBtnIcon);
+					topBtns.appendChild(fullScreenBtn);
 					manualLayoutBtn.appendChild(manualLayoutBtnIcon);
 					if(!Q.info.isMobile) topBtns.appendChild(manualLayoutBtn);
-					//topBtns.appendChild(loudestSelectCon);
 					participantsListCon.appendChild(topBtns)
 
 					var buttonsArr = [
@@ -2521,7 +2529,7 @@
 							handler: function () {
 								toggleLoudesScreenMode('all');
 							}
-						},
+						},/*
 						{
 							viewMode:'maximizeStatic',
 							btn: maximizeStaticBtn,
@@ -2534,6 +2542,28 @@
 									if(Q.info.isMobile)
 										tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(screen, 300);
 									else tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(screen, 300);
+								}
+								var activeScreen = tool.state.webrtcClass.screenRendering.getActiveSreen();
+								if(activeScreen != null) {
+									maximize(activeScreen);
+								} else {
+									var screens = tool.WebRTCLib.screens();
+									maximize(screens[0]);
+								}
+							}
+						},*/
+						{
+							viewMode:'fullScreen',
+							btn: fullScreenBtn,
+							icon: fullScreenBtnIcon,
+							onIcon: icons.staticMaximizeOn,
+							offIcon: icons.staticMaximizeOff,
+							handler: function(){
+								toggleLoudesScreenMode('disabled');
+								var maximize = function(screen) {
+									if(Q.info.isMobile)
+										tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(screen, 300);
+									else tool.state.webrtcClass.screenRendering.renderFullScreenLayout(screen, 300);
 								}
 								var activeScreen = tool.state.webrtcClass.screenRendering.getActiveSreen();
 								if(activeScreen != null) {
@@ -2686,11 +2716,6 @@
 					if(tool.loudestModeInterval != null) {
 						clearInterval(tool.loudestModeInterval);
 						tool.loudestModeInterval = null;
-					}
-					var disabledOption = tool.loudestSelect.getElementsByClassName('loudest-options-disabled')[0];
-					if(disabledOption != null) {
-						disabledOption.selected = 'selected';
-						tool.state.loudestMode = 'disabled';
 					}
 				}
 

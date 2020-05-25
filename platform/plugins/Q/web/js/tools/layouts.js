@@ -172,11 +172,11 @@ var _generators = {
 
 		return tiledDesktopGrid(count, containerRect);
 	},
-	screenSharing: function (container, count) {
+	fullScreen: function (container, count) {
         var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
         var size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
 
-		return screenSharingLayout(count, size, true);
+		return fullScreenLayout(count, size, true);
 	},
 	maximizedVertical: function (container, count) {
 
@@ -449,7 +449,7 @@ var _generators = {
 	    return rects;
     }
 
-    function screenSharingLayout(count, size, maximized) {
+    function fullScreenLayout(count, size, maximized) {
         var rects = [];
 
         if(maximized) {
