@@ -91,7 +91,8 @@
         "notice": {
             "text": "Du har blivit inbjuden. {{ClickOrTap}} här för att acceptera och gå med."
         },
-        "youCanNowPaste": "Du kan nu klistra in den här länken någonstans för att bjuda in människor"
+        "youCanNowPaste": "Du kan nu klistra in den här länken någonstans för att bjuda in människor",
+        "command": "Inbjudan"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Länk kopierad till urklipp",
             "codeCopiedToCb": "Koden kopierades till urklipp",
             "userHasNoVideo": "Deltagaren har ingen video",
-            "openInBrowserAlert": "Öppna länken i Safari-webbläsaren för att delta i konferensen."
+            "openInBrowserAlert": "Öppna länken i Safari-webbläsaren för att delta i konferensen.",
+            "youBeganVideoRecording": "Du började spela in konferensen",
+            "youStoppedVideoRecording": "Du slutade spela in den här konferensen"
         },
         "settingsPopup": {
             "webCamera": "Webbkamera",
@@ -189,7 +192,12 @@
             "copy": "Kopia",
             "turnOffVideo": "Stäng av kamera \/ skärmdelning",
             "turnOffScreenSharing": "Stäng av skärmdelning",
-            "cameraIsTurnedOff": "Kameran är avstängd"
+            "cameraIsTurnedOff": "Kameran är avstängd",
+            "startRecording": "Börja spela in",
+            "stopRecording": "Sluta inspelningen",
+            "recordingInProgress": "Inspelningen pågår ...",
+            "publishOnTimeline": "Publicera på tidslinjen",
+            "publishToGroup": "Publicera i grupp"
         },
         "participantsPopup": {
             "disconnect": "Koppla ifrån",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Högst utom mig",
             "maximizeLoudest": "Maximera högst",
             "staticMaximized": "Statisk maximerad",
-            "manual": "Manuell"
-        }
+            "manual": "Manuell",
+            "turnOffCamera": "Dölj video",
+            "turnOffAudio": "Stäng av ljud",
+            "turnOffScreenSharing": "Dölj skärmdelning",
+            "turnOnCamera": "Visa video",
+            "turnOnAudio": "Stäng av ljudet",
+            "turnOnScreenSharing": "Visa skärmdelning"
+        },
+        "notAllowedToJoinCall": "Du har inte behörighet att gå med i den här strömmen.",
+        "streamTitle": "{{1}} direktuppringning"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "Spara",
         "Delete": "Radera",
         "Submenu": "Undermeny meny~~POS=HEADCOMP"
+    },
+    "errors": {
+        "HiddenFromYou": "Detta innehåll är gömt för dig."
     }
 }

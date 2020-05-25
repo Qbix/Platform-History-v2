@@ -73,5 +73,30 @@
             "touchscreen": "Utilitzeu els dits per ampliar i arrossegar",
             "notTouchscreen": "Utilitzeu el ratolí i la roda per ampliar i arrossegar"
         }
+    },
+    "timestamp": {
+        "lastNight": "La nit passada",
+        "lastEvening": "última vigília",
+        "yesterday": "ahir",
+        "thisMorning": "aquest matí",
+        "today": "avui",
+        "tonight": "aquesta nit",
+        "tomorrowMorning": "tom matí",
+        "tomorrow": "demà",
+        "hoursAgo": "Fa {{h}} hores",
+        "hourAgo": "Fa {{h}} fa una hora",
+        "minuteAgo": "Fa {{m}} fa un minut",
+        "minutesAgo": "Fa {{m}} minuts",
+        "secondAgo": "Fa {{s}} segon",
+        "secondsAgo": "Fa {{s}} segons",
+        "fewSecondsAgo": "segons",
+        "rightNow": "ara mateix",
+        "inSecond": "a {{s}} segon",
+        "inSeconds": "en {{s}} segons",
+        "inMinute": "en {{m}} minut",
+        "inMinutes": "en {{m}} minuts",
+        "inHour": "en {{h}} hora",
+        "inHours": "en {{h}} hores",
+        "inUnderMinute": "en menys d’un minut"
     }
 }

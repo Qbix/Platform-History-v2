@@ -11,8 +11,8 @@
     },
     "payment": {
         "AboutOrder": "주문 정보",
-        "PaymentMethod": "지불 방법",
-        "ContactInfo": "연락처 정보",
+        "PaymentMethod": "결제 방법",
+        "ContactInfo": "연락 정보",
         "Pay": "지불"
     },
     "credits": {
@@ -26,7 +26,8 @@
         "Client": "고객",
         "To": "에",
         "From": "...에서",
-        "HistoryEmpty": "아직 데이터가 없습니다."
+        "HistoryEmpty": "아직 데이터가 없습니다.",
+        "SeeHistory": "{{1}}의 지불 내역보기"
     },
     "subscriptions": {
         "infoTitle": "지불 정보 설정",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "{{amount}} 크레딧을 받았습니다"
         }
+    },
+    "charge": {
+        "Subject": "&quot;{{description}}&quot;에 의해 {{call 'publisher.displayName'}}에서 {{displayAmount}}의 지불금을받습니다.",
+        "HasBeenCharged": "안녕하세요, {{4}}이 (가) {{3}}에게 {{1}}이 (가) {{2}}을 (를) 청구했음을 알려드립니다."
+    },
+    "charged": {
+        "Subject": "&quot;{{description}}&quot;에 대한 지불에 감사드립니다.",
+        "HavePaid": "{{1}} 님, {{4}}의 {{3}}에게 {{2}}을 (를) 성공적으로 지불했다는 확인 메시지입니다."
     }
 }

@@ -50,7 +50,8 @@
             "title": "Vyberte kontakt",
             "SearchByName": "Hledat podle jména",
             "CreateAccount": "+ Nový kontakt",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nebyl nalezen"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nebyl nalezen",
+            "EmptyContacts": "Kontakty nebyly nalezeny ..."
         },
         "select": {
             "title": "Vyberte kontakt {{displayName}}"

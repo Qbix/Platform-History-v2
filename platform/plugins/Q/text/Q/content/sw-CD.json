@@ -73,5 +73,30 @@
             "touchscreen": "Tumia vidole vyako ili kuvuta na kuruka",
             "notTouchscreen": "Tumia mouse yako na gurudumu ili kuvuta na kuruka"
         }
+    },
+    "timestamp": {
+        "lastNight": "jana usiku",
+        "lastEvening": "usiku wa mwisho",
+        "yesterday": "jana",
+        "thisMorning": "asubuhi hii",
+        "today": "leo",
+        "tonight": "usiku wa leo",
+        "tomorrowMorning": "Tom asubuhi",
+        "tomorrow": "kesho",
+        "hoursAgo": "Masaa {{h}} yaliyopita",
+        "hourAgo": "{{h}} saa iliyopita",
+        "minuteAgo": "Dakika {{m}} iliyopita",
+        "minutesAgo": "Dakika {{m}} zilizopita",
+        "secondAgo": "{{s}} pili iliyopita",
+        "secondsAgo": "Sekunde {{s}} zilizopita",
+        "fewSecondsAgo": "sekunde zilizopita",
+        "rightNow": "sasa hivi",
+        "inSecond": "katika {{s}} pili",
+        "inSeconds": "kwa sekunde {{s}}",
+        "inMinute": "katika dakika ya {{m}}",
+        "inMinutes": "katika dakika {{m}}",
+        "inHour": "katika saa {{h}}",
+        "inHours": "katika masaa {{h}}",
+        "inUnderMinute": "chini ya dakika 1"
     }
 }

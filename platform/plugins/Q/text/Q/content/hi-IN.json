@@ -73,5 +73,30 @@
             "touchscreen": "ज़ूम करने और खींचने के लिए अपनी उंगलियों का उपयोग करें",
             "notTouchscreen": "ज़ूम और ड्रैग करने के लिए अपने माउस और व्हील का उपयोग करें"
         }
+    },
+    "timestamp": {
+        "lastNight": "पिछली रात",
+        "lastEvening": "अंतिम पूर्व संध्या",
+        "yesterday": "बिता कल",
+        "thisMorning": "यह सुबह",
+        "today": "आज",
+        "tonight": "आज रात",
+        "tomorrowMorning": "टॉम मॉर्न",
+        "tomorrow": "आने वाला कल",
+        "hoursAgo": "{{h}} घंटे पहले",
+        "hourAgo": "{{h}} घंटे पहले",
+        "minuteAgo": "{{m}} मिनट पहले",
+        "minutesAgo": "{{m}} मिनट पहले",
+        "secondAgo": "{{s}} दूसरे से पहले",
+        "secondsAgo": "{{s}} सेकंड पहले",
+        "fewSecondsAgo": "एक सेकंड पहले",
+        "rightNow": "अभी",
+        "inSecond": "{{{s}} दूसरे में",
+        "inSeconds": "{{s}} सेकंड में",
+        "inMinute": "{{m}} मिनट में",
+        "inMinutes": "{{m}} मिनट में",
+        "inHour": "{{h}} घंटे में",
+        "inHours": "{{h}} घंटे में",
+        "inUnderMinute": "1 मिनट से कम"
     }
 }

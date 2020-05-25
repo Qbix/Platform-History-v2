@@ -91,7 +91,8 @@
         "notice": {
             "text": "მიწვეული ხართ {{ClickOrTap}} აქ მიიღოს და შეუერთდება."
         },
-        "youCanNowPaste": "ახლა შეგიძლიათ ეს ბმული ჩასვათ სადმე, რომ მოიწვიოთ ხალხი"
+        "youCanNowPaste": "ახლა შეგიძლიათ ეს ბმული ჩასვათ სადმე, რომ მოიწვიოთ ხალხი",
+        "command": "მოიწვიე"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "ბმული გადაწერა ბუფერში",
             "codeCopiedToCb": "კოპირება გადაწერა ბუფერში",
             "userHasNoVideo": "მონაწილეს ვიდეო არ აქვს",
-            "openInBrowserAlert": "გახსენით ბმული Safari ბრაუზერში კონფერენციაში შესასვლელად."
+            "openInBrowserAlert": "გახსენით ბმული Safari ბრაუზერში კონფერენციაში შესასვლელად.",
+            "youBeganVideoRecording": "თქვენ დაიწყეთ ამ კონფერენციის ჩაწერა",
+            "youStoppedVideoRecording": "თქვენ შეაჩერეთ ამ კონფერენციის ჩაწერა"
         },
         "settingsPopup": {
             "webCamera": "Ვებ კამერა",
@@ -189,7 +192,12 @@
             "copy": "დააკოპირეთ",
             "turnOffVideo": "გამორთეთ კამერა \/ ეკრანის გაზიარება",
             "turnOffScreenSharing": "გამორთეთ ეკრანის გაზიარება",
-            "cameraIsTurnedOff": "კამერა გამორთულია"
+            "cameraIsTurnedOff": "კამერა გამორთულია",
+            "startRecording": "ჩაწერა დაიწყეთ",
+            "stopRecording": "ჩაწერის შეჩერება",
+            "recordingInProgress": "ჩაწერა მიმდინარეობს ...",
+            "publishOnTimeline": "ვადებში გამოქვეყნება",
+            "publishToGroup": "ჯგუფურად გამოქვეყნება"
         },
         "participantsPopup": {
             "disconnect": "გათიშვა",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "ჩემგან ყველაზე ხმამაღლა",
             "maximizeLoudest": "მაქსიმალურად ხმამაღლა",
             "staticMaximized": "სტატიკური მაქსიმალური",
-            "manual": "სახელმძღვანელო"
-        }
+            "manual": "სახელმძღვანელო",
+            "turnOffCamera": "დამალეთ ვიდეო",
+            "turnOffAudio": "აუდიო ხმა",
+            "turnOffScreenSharing": "ეკრანის გაზიარება დამალვა",
+            "turnOnCamera": "აჩვენეთ ვიდეო",
+            "turnOnAudio": "აუდიოს გაუქმება",
+            "turnOnScreenSharing": "ეკრანის გაზიარების ჩვენება"
+        },
+        "notAllowedToJoinCall": "თქვენ არ გაქვთ ამ ნაკადში შესვლის ნებართვა.",
+        "streamTitle": "99 999}} ცოცხალი ზარი"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "Გადარჩენა",
         "Delete": "წაშლა",
         "Submenu": "ქვემენიუ"
+    },
+    "errors": {
+        "HiddenFromYou": "ეს შინაარსი შენგან იმალება."
     }
 }

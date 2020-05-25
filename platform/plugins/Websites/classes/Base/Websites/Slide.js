@@ -64,7 +64,7 @@ Base.db = function () {
  */
 Base.table = function (withoutDbName) {
 	if (Q.Config.get(['Db', 'connections', 'Websites', 'indexes', 'Slide'], false)) {
-		return new Db.Expression((withoutDbName ? '' : '{$dbname}.')+'{$prefix}slide');
+		return new Db.Expression((withoutDbName ? '' : '{{dbname}}.')+'{{prefix}}slide');
 	} else {
 		var conn = Db.getConnection('Websites');
 		var prefix = conn.prefix || '';

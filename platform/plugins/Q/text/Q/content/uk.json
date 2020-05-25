@@ -73,5 +73,30 @@
             "touchscreen": "Використовуйте пальці для масштабування та перетягування",
             "notTouchscreen": "Використовуйте мишу та колесо для масштабування та перетягування"
         }
+    },
+    "timestamp": {
+        "lastNight": "минулої ночі",
+        "lastEvening": "минулого вечора",
+        "yesterday": "вчора",
+        "thisMorning": "цього ранку",
+        "today": "сьогодні",
+        "tonight": "сьогодні ввечері",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "завтра",
+        "hoursAgo": "{{h}} годин тому",
+        "hourAgo": "{{h}} годину тому",
+        "minuteAgo": "{{m}} хвилину тому",
+        "minutesAgo": "{{m}} хвилин тому",
+        "secondAgo": "{{s}} секунду тому",
+        "secondsAgo": "{{s}} секунд тому",
+        "fewSecondsAgo": "секунд тому",
+        "rightNow": "зараз",
+        "inSecond": "за {{s}} секунди",
+        "inSeconds": "за {{s}} секунд",
+        "inMinute": "за {{m}} хвилини",
+        "inMinutes": "за {{m}} хвилин",
+        "inHour": "за {{h}} годину",
+        "inHours": "за {{h}} годин",
+        "inUnderMinute": "менше 1 хвилини"
     }
 }

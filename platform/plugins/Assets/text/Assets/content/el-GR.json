@@ -26,7 +26,8 @@
         "Client": "Πελάτης",
         "To": "προς το",
         "From": "από",
-        "HistoryEmpty": "Δεν έχετε ακόμα δεδομένα"
+        "HistoryEmpty": "Δεν έχετε ακόμα δεδομένα",
+        "SeeHistory": "Δείτε το ιστορικό πληρωμών για {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Ορίστε τις πληροφορίες πληρωμής",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "Λήφθηκαν {{amount}} πιστώσεις"
         }
+    },
+    "charge": {
+        "Subject": "Λαμβάνετε πληρωμή ύψους {{displayAmount}} από {{call 'publisher.displayName'}} από το &quot;{{description}}&quot;",
+        "HasBeenCharged": "Γεια, σας ενημερώνουμε ότι {{1}} χρεώθηκε {{2}} για {{3}} από {{4}}"
+    },
+    "charged": {
+        "Subject": "Σας ευχαριστούμε για την πληρωμή σας για το &quot;{{description}}&quot;",
+        "HavePaid": "Γεια {{1}}, αυτή είναι μια γρήγορη επιβεβαίωση ότι έχετε πληρώσει με επιτυχία {{2}} στο {{3}} για {{4}}"
     }
 }

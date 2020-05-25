@@ -91,7 +91,8 @@
         "notice": {
             "text": "আপনি আমন্ত্রিত হয়েছে। {{ClickOrTap}} এখানে গ্রহণ এবং যোগ দিতে।"
         },
-        "youCanNowPaste": "লোকদের আমন্ত্রণ জানাতে আপনি এখন এই লিঙ্কটি কোথাও পেস্ট করতে পারেন"
+        "youCanNowPaste": "লোকদের আমন্ত্রণ জানাতে আপনি এখন এই লিঙ্কটি কোথাও পেস্ট করতে পারেন",
+        "command": "আমন্ত্রণ করা"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "লিপটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে",
             "codeCopiedToCb": "ক্লিপবোর্ডে কোড অনুলিপি করা হয়েছে",
             "userHasNoVideo": "অংশগ্রহণকারীদের কোনও ভিডিও নেই",
-            "openInBrowserAlert": "সম্মেলনে যোগ দিতে সাফারি ব্রাউজারে লিঙ্কটি খুলুন।"
+            "openInBrowserAlert": "সম্মেলনে যোগ দিতে সাফারি ব্রাউজারে লিঙ্কটি খুলুন।",
+            "youBeganVideoRecording": "আপনি এই সম্মেলনের রেকর্ডিং শুরু করেছেন",
+            "youStoppedVideoRecording": "আপনি এই সম্মেলনের রেকর্ডিং বন্ধ করেছেন"
         },
         "settingsPopup": {
             "webCamera": "ওয়েব ক্যামেরা",
@@ -189,7 +192,12 @@
             "copy": "কপি",
             "turnOffVideo": "ক্যামেরা / স্ক্রিন ভাগ করে নেওয়া বন্ধ করুন",
             "turnOffScreenSharing": "স্ক্রিন ভাগ করে নেওয়া বন্ধ করুন",
-            "cameraIsTurnedOff": "ক্যামেরা বন্ধ আছে"
+            "cameraIsTurnedOff": "ক্যামেরা বন্ধ আছে",
+            "startRecording": "রেকর্ড শুরু কর",
+            "stopRecording": "রেকর্ডিং বন্ধ করুন",
+            "recordingInProgress": "রেকর্ডিং চলছে ...",
+            "publishOnTimeline": "টাইমলাইনে প্রকাশ করুন",
+            "publishToGroup": "দলে প্রকাশ করুন"
         },
         "participantsPopup": {
             "disconnect": "বিযুক্ত করা",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "আমাকে বাদে সবচেয়ে জোরে",
             "maximizeLoudest": "সর্বাধিক জোরে",
             "staticMaximized": "স্ট্যাটিক ম্যাক্সিমাইজড",
-            "manual": "ম্যানুয়াল"
-        }
+            "manual": "ম্যানুয়াল",
+            "turnOffCamera": "ভিডিও লুকান",
+            "turnOffAudio": "অডিও নিঃশব্দ করুন",
+            "turnOffScreenSharing": "স্ক্রিন ভাগ করে নেওয়ার বিষয়টি লুকান",
+            "turnOnCamera": "ভিডিও দেখান",
+            "turnOnAudio": "অডিও নিঃশব্দ করুন",
+            "turnOnScreenSharing": "স্ক্রিন ভাগ করে নেওয়া দেখান"
+        },
+        "notAllowedToJoinCall": "আপনার কাছে এই স্ট্রিমে যোগদানের অনুমতি নেই।",
+        "streamTitle": "} 9 999}} লাইভ কল"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "সংরক্ষণ",
         "Delete": "মুছে ফেলা",
         "Submenu": "সাবমেনু"
+    },
+    "errors": {
+        "HiddenFromYou": "এই বিষয়বস্তু আপনার কাছ থেকে লুকানো আছে।"
     }
 }

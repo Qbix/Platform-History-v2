@@ -73,5 +73,30 @@
             "touchscreen": "Користете ги прстите за да зумирате и влечете",
             "notTouchscreen": "Користете го глувчето и тркалото за да зумирате и влечете"
         }
+    },
+    "timestamp": {
+        "lastNight": "минатата ноќ",
+        "lastEvening": "последна вечерта",
+        "yesterday": "вчера",
+        "thisMorning": "ова утро",
+        "today": "денес",
+        "tonight": "вечерва",
+        "tomorrowMorning": "Том утро",
+        "tomorrow": "утре",
+        "hoursAgo": "{{h}} пред неколку часа",
+        "hourAgo": "{{h}} пред еден час",
+        "minuteAgo": "{{m}} пред минута",
+        "minutesAgo": "{{m}} пред неколку минути",
+        "secondAgo": "{{s}} пред секунда",
+        "secondsAgo": "Пред} 999}} секунди",
+        "fewSecondsAgo": "секунди пред",
+        "rightNow": "веднаш",
+        "inSecond": "за 99 {999}} секунда",
+        "inSeconds": "за {{s}} секунди",
+        "inMinute": "за 99 999}} минута",
+        "inMinutes": "за 99 999}} минути",
+        "inHour": "за 99 999}} час",
+        "inHours": "за {999}} часа",
+        "inUnderMinute": "за помалку од 1 минута"
     }
 }

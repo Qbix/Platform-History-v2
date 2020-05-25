@@ -73,5 +73,30 @@
             "touchscreen": "Gunakan jari Anda untuk memperbesar dan menarik",
             "notTouchscreen": "Gunakan mouse &amp; roda Anda untuk memperbesar dan menarik"
         }
+    },
+    "timestamp": {
+        "lastNight": "Tadi malam",
+        "lastEvening": "malam terakhir",
+        "yesterday": "kemarin",
+        "thisMorning": "pagi ini",
+        "today": "hari ini",
+        "tonight": "malam ini",
+        "tomorrowMorning": "tom pagi",
+        "tomorrow": "besok",
+        "hoursAgo": "{{h}} jam yang lalu",
+        "hourAgo": "{{h}} jam yang lalu",
+        "minuteAgo": "{{m}} menit yang lalu",
+        "minutesAgo": "{{m}} menit yang lalu",
+        "secondAgo": "{{s}} detik yang lalu",
+        "secondsAgo": "{{s}} detik yang lalu",
+        "fewSecondsAgo": "beberapa detik lalu",
+        "rightNow": "sekarang juga",
+        "inSecond": "dalam {{s}} detik",
+        "inSeconds": "dalam {{s}} detik",
+        "inMinute": "dalam {{m}} menit",
+        "inMinutes": "dalam {{m}} menit",
+        "inHour": "dalam {{h}} jam",
+        "inHours": "dalam {{h}} jam",
+        "inUnderMinute": "kurang dari 1 menit"
     }
 }

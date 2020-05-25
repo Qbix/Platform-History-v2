@@ -5857,7 +5857,8 @@ Q.init = function _Q_init(options) {
 	// Time to call all the onInit handlers
 	var p2 = Q.pipe();
 	var waitFor = [];
-	if (Q.info.urls && Q.info.urls.updateBeforeInit) {
+	var urls = Q.info.urls;
+	if (urls && urls.updateBeforeInit && (urls.caching || urls.integrity)) {
 		waitFor.push('Q.info.urls.updateBeforeInit');
 		Q.updateUrls(p2.fill('Q.info.urls.updateBeforeInit'));
 	}
@@ -7133,15 +7134,21 @@ Q.request = function (url, slotNames, callback, options) {
 		}
 		
 		function _onCancel (status, msg) {
-			var code;
+			var code, data;
 			if (_documentIsUnloading) { // the document is about to go poof anyway
 				return; // don't call any callbacks, avoiding possible alerts
 			}
 			status = Q.isInteger(status) ? status : null;
 			if (this.response) {
-				var data = JSON.parse(this.response);
-				msg = Q.getObject(['errors', 0, 'message'], data);
-				code = Q.getObject(['errors', 0, 'code'], data);
+				try {
+					data = JSON.parse(this.response);
+					msg = Q.getObject(['errors', 0, 'message'], data);
+					code = Q.getObject(['errors', 0, 'code'], data);
+				} catch (e) {
+					data = null;
+					msg = "Response is not in JSON format";
+					console.warn('Q.request(' + url + ',['+slotNames+']): ' + msg);
+				}
 			}
 			if (!msg) {
 				var defaultError = status ? Q.text.Q.request.error : Q.text.Q.request.canceled;
@@ -7592,6 +7599,10 @@ Q.updateUrls = function(callback) {
 	if (ut) {
 		url = 'Q/urls/diffs/' + ut + '.json';
 		Q.request(url, [], function (err, result) {
+			if (err) {
+				console.warn("Q.updateUrls couldn't load or parse " + url);
+				return Q.handle(callback, null, []);
+			}
 			var urls = JSON.parse(localStorage.getItem('Q.updateUrls.urls'));
 			if (!Q.isEmpty(urls)) {
 				Q.updateUrls.urls = urls;
@@ -7603,7 +7614,7 @@ Q.updateUrls = function(callback) {
 				Q.cookie('Q_ut', timestamp);
 			}
 			Q.handle(callback, null, [result, timestamp]);
-		}, {extend: false, cacheBust: 1000});
+		}, { extend: false, cacheBust: 1000 });
 	} else {
 		Q.request('Q/urls/urls/latest.json', [], function (err, result) {
 			Q.updateUrls.urls = result;
@@ -11620,7 +11631,11 @@ Q.Pointer = {
 					t = t.parentNode
 					continue;
 				}
-				div.innerHTML = t.getAttribute('data-touchlabel');
+				var content = t.getAttribute('data-touchlabel');
+				if (!content) {
+					return;
+				}
+				div.innerHTML = content;
 				var erect = element.getBoundingClientRect();
 				var rect = div.getBoundingClientRect();
 				var trect = t.getBoundingClientRect();

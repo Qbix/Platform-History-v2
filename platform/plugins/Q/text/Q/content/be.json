@@ -74,5 +74,30 @@
             "touchscreen": "Выкарыстоўвайце свае пальцы, каб павялічыць і перацягнуць",
             "notTouchscreen": "Выкарыстоўвайце мыш &amp; кола, каб павялічыць і перацягнуць"
         }
+    },
+    "timestamp": {
+        "lastNight": "Учора ўвечары",
+        "lastEvening": "апошні вечар",
+        "yesterday": "учора",
+        "thisMorning": "гэта раніца",
+        "today": "сёння",
+        "tonight": "сёння ўвечары",
+        "tomorrowMorning": "Tom Morn",
+        "tomorrow": "заўтра",
+        "hoursAgo": "{{h}} гадзін таму",
+        "hourAgo": "{{h}} гадзіну таму",
+        "minuteAgo": "{{m}} хвіліну таму",
+        "minutesAgo": "{{m}} хвілін таму",
+        "secondAgo": "{{s}} секунду таму",
+        "secondsAgo": "{{s}} секунд таму",
+        "fewSecondsAgo": "секунды таму",
+        "rightNow": "зараз",
+        "inSecond": "у {{s}} секунду",
+        "inSeconds": "за {{s}} секунд",
+        "inMinute": "праз {{m}} хвіліну",
+        "inMinutes": "за {{m}} хвілін",
+        "inHour": "у {{h}} гадзіну",
+        "inHours": "у {{h}} гадзін",
+        "inUnderMinute": "менш за 1 хвіліну"
     }
 }

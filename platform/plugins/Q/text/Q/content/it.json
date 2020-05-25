@@ -73,5 +73,30 @@
             "touchscreen": "Usa le dita per ingrandire e trascinare",
             "notTouchscreen": "Usa il mouse e ruota per ingrandire e trascinare"
         }
+    },
+    "timestamp": {
+        "lastNight": "la notte scorsa",
+        "lastEvening": "ultima vigilia",
+        "yesterday": "ieri",
+        "thisMorning": "questa mattina",
+        "today": "oggi",
+        "tonight": "stasera",
+        "tomorrowMorning": "domani mattina",
+        "tomorrow": "Domani",
+        "hoursAgo": "{{h}} ore fa",
+        "hourAgo": "{{h}} ora fa",
+        "minuteAgo": "{{m}} minuto fa",
+        "minutesAgo": "{{m}} minuti fa",
+        "secondAgo": "{{s}} secondo fa",
+        "secondsAgo": "{{s}} secondi fa",
+        "fewSecondsAgo": "secondi fa",
+        "rightNow": "proprio adesso",
+        "inSecond": "tra {{s}} secondo",
+        "inSeconds": "tra {{s}} secondi",
+        "inMinute": "tra {{m}} minuto",
+        "inMinutes": "tra {{m}} minuti",
+        "inHour": "tra {{h}} ora",
+        "inHours": "tra {{h}} ore",
+        "inUnderMinute": "in meno di 1 minuto"
     }
 }

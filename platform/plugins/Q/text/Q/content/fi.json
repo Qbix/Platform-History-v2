@@ -73,5 +73,30 @@
             "touchscreen": "Zoomaa ja vedä sormilla",
             "notTouchscreen": "Zoomaa ja vedä hiiren ja pyörän avulla"
         }
+    },
+    "timestamp": {
+        "lastNight": "viime yö",
+        "lastEvening": "viime aattona",
+        "yesterday": "eilen",
+        "thisMorning": "tänä aamuna",
+        "today": "tänään",
+        "tonight": "tänä yönä",
+        "tomorrowMorning": "tom aamu",
+        "tomorrow": "huomenna",
+        "hoursAgo": "{{h}} tuntia sitten",
+        "hourAgo": "{{h}} tunti sitten",
+        "minuteAgo": "{{m}} minuutti sitten",
+        "minutesAgo": "{{m}} minuuttia sitten",
+        "secondAgo": "{{s}} toinen vuosi sitten",
+        "secondsAgo": "{{s}} sekuntia sitten",
+        "fewSecondsAgo": "sekuntia sitten",
+        "rightNow": "juuri nyt",
+        "inSecond": "{{s}} sekunnissa",
+        "inSeconds": "{{s}} sekunnissa",
+        "inMinute": "{{m}} minuutissa",
+        "inMinutes": "{{m}} minuutissa",
+        "inHour": "{{h}} tunnissa",
+        "inHours": "{{h}} tunnissa",
+        "inUnderMinute": "alle 1 minuutissa"
     }
 }

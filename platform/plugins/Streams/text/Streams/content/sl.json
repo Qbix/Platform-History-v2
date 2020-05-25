@@ -91,7 +91,8 @@
         "notice": {
             "text": "Povabljeni ste bili. {{ClickOrTap}} tukaj, da sprejmete in se pridružite."
         },
-        "youCanNowPaste": "Zdaj lahko to povezavo prilepite nekam, da povabite ljudi"
+        "youCanNowPaste": "Zdaj lahko to povezavo prilepite nekam, da povabite ljudi",
+        "command": "Povabi"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Povezava je bila kopirana v odložišče",
             "codeCopiedToCb": "Koda je bila kopirana v odložišče",
             "userHasNoVideo": "Udeleženec nima videoposnetka",
-            "openInBrowserAlert": "Odprite povezavo v brskalniku Safari, da se pridružite konferenci."
+            "openInBrowserAlert": "Odprite povezavo v brskalniku Safari, da se pridružite konferenci.",
+            "youBeganVideoRecording": "Začeli ste snemati to konferenco",
+            "youStoppedVideoRecording": "Nehali ste snemati to konferenco"
         },
         "settingsPopup": {
             "webCamera": "Spletna kamera",
@@ -189,7 +192,12 @@
             "copy": "Kopirati",
             "turnOffVideo": "Izklopite skupno rabo kamere \/ zaslona",
             "turnOffScreenSharing": "Izklopite skupno rabo zaslona",
-            "cameraIsTurnedOff": "Kamera je izklopljena"
+            "cameraIsTurnedOff": "Kamera je izklopljena",
+            "startRecording": "Začnite snemati",
+            "stopRecording": "Ustavi snemanje",
+            "recordingInProgress": "Snemanje je v teku ...",
+            "publishOnTimeline": "Objavi na časovnici",
+            "publishToGroup": "Objavi v skupini"
         },
         "participantsPopup": {
             "disconnect": "Prekini povezavo",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Najglasneje razen mene",
             "maximizeLoudest": "Maksimizirajte najglasneje",
             "staticMaximized": "Statično maksimirano",
-            "manual": "Priročnik"
-        }
+            "manual": "Priročnik",
+            "turnOffCamera": "Skrij videoposnetek",
+            "turnOffAudio": "Izklopi zvok",
+            "turnOffScreenSharing": "Skrivanje skupne rabe zaslona",
+            "turnOnCamera": "Prikaži video",
+            "turnOnAudio": "Vklopite zvok zvoka",
+            "turnOnScreenSharing": "Pokažite skupno rabo zaslona"
+        },
+        "notAllowedToJoinCall": "Nimate dovoljenja za pridružitev temu toku.",
+        "streamTitle": "{{1}} klic v živo"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "Shrani",
         "Delete": "Izbriši",
         "Submenu": "Podmeni"
+    },
+    "errors": {
+        "HiddenFromYou": "Ta vsebina je skrita pred vami."
     }
 }

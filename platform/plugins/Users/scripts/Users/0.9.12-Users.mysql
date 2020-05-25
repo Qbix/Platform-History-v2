@@ -1,4 +1,4 @@
-ALTER TABLE {$prefix}user
+ALTER TABLE {{prefix}}user
 DROP COLUMN fb_uid,
 DROP COLUMN tw_uid,
 DROP COLUMN g_uid,

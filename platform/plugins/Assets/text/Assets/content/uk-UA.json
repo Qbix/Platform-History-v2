@@ -13,7 +13,7 @@
         "AboutOrder": "Інформація про замовлення",
         "PaymentMethod": "Спосіб оплати",
         "ContactInfo": "Контактна інформація",
-        "Pay": "Оплатити"
+        "Pay": "Платити"
     },
     "credits": {
         "InviteAcceptedBy": "Запрошення, прийняте {{1}}",
@@ -26,7 +26,8 @@
         "Client": "Клієнт",
         "To": "до",
         "From": "з",
-        "HistoryEmpty": "Ви ще не маєте даних"
+        "HistoryEmpty": "Ви ще не маєте даних",
+        "SeeHistory": "Перегляньте історію платежів для {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Встановити платіжну інформацію",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "Отримано {{amount}} кредитів"
         }
+    },
+    "charge": {
+        "Subject": "Ви отримуєте {{displayAmount}} від {{call 'publisher.displayName'}} від &quot;{{description}}&quot;",
+        "HasBeenCharged": "Гей, це просто для того, щоб ви дізналися, що {{1}} стягується плата {{2}} за {{3}} {{4}}"
+    },
+    "charged": {
+        "Subject": "Дякуємо за ваш платіж за &quot;{{description}}&quot;",
+        "HavePaid": "Привіт {{1}}, це лише швидке підтвердження того, що ти успішно заплатив {{2}} до {{3}} за {{4}}"
     }
 }

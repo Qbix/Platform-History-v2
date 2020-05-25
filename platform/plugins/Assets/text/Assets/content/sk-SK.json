@@ -13,7 +13,7 @@
         "AboutOrder": "Informácie o objednávke",
         "PaymentMethod": "Spôsob platby",
         "ContactInfo": "Kontaktné informácie",
-        "Pay": "platiť"
+        "Pay": "Pay"
     },
     "credits": {
         "InviteAcceptedBy": "Pozvánka prijatá {{1}}",
@@ -26,7 +26,8 @@
         "Client": "Zákazník",
         "To": "na",
         "From": "z",
-        "HistoryEmpty": "Zatiaľ nemáte žiadne údaje"
+        "HistoryEmpty": "Zatiaľ nemáte žiadne údaje",
+        "SeeHistory": "Zobraziť históriu platieb za {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Nastavte informácie o platbe",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "Prijaté kredity {{amount}}"
         }
+    },
+    "charge": {
+        "Subject": "Dostanete platbu vo výške {{displayAmount}} od {{call 'publisher.displayName'}} do &quot;{{description}}&quot;",
+        "HasBeenCharged": "Ahoj, len preto, aby sme vedeli, že {{1}} bol {{3}} naúčtovaný poplatok {{3}} do {{4}}"
+    },
+    "charged": {
+        "Subject": "Ďakujeme vám za platbu vo výške „{{description}}“",
+        "HavePaid": "Ahoj {{1}}, toto je iba rýchle potvrdenie, že ste úspešne zaplatili {{2}} do {{3}} za {{4}}"
     }
 }

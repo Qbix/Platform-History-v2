@@ -73,5 +73,30 @@
             "touchscreen": "Използвайте пръстите си, за да увеличите и плъзнете",
             "notTouchscreen": "Използвайте мишката и колелото, за да увеличите и плъзнете"
         }
+    },
+    "timestamp": {
+        "lastNight": "миналата нощ",
+        "lastEvening": "последното навечерие",
+        "yesterday": "вчера",
+        "thisMorning": "този сутрин",
+        "today": "днес",
+        "tonight": "тази нощ",
+        "tomorrowMorning": "Tom Morn",
+        "tomorrow": "утре",
+        "hoursAgo": "{{h}} преди часове",
+        "hourAgo": "{{h}} преди час",
+        "minuteAgo": "{{m}} преди минута",
+        "minutesAgo": "{{m}} минути",
+        "secondAgo": "{{s}} преди секунда",
+        "secondsAgo": "{{s}} секунди",
+        "fewSecondsAgo": "преди секунди",
+        "rightNow": "точно сега",
+        "inSecond": "за {{s}} секунда",
+        "inSeconds": "за {{s}} секунди",
+        "inMinute": "за {{m}} минута",
+        "inMinutes": "за {{m}} минути",
+        "inHour": "за {{h}} час",
+        "inHours": "за {{h}} часа",
+        "inUnderMinute": "за по-малко от 1 минута"
     }
 }

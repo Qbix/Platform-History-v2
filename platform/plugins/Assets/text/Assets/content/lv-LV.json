@@ -13,7 +13,7 @@
         "AboutOrder": "Informācija par pasūtījumu",
         "PaymentMethod": "Apmaksas veids",
         "ContactInfo": "Kontaktinformācija",
-        "Pay": "Maksa"
+        "Pay": "Maksājiet"
     },
     "credits": {
         "InviteAcceptedBy": "Uzaicinājums akceptēts {{1}}",
@@ -26,7 +26,8 @@
         "Client": "Klients",
         "To": "uz",
         "From": "no",
-        "HistoryEmpty": "Jums vēl nav datu"
+        "HistoryEmpty": "Jums vēl nav datu",
+        "SeeHistory": "Skatīt {{1}} maksājumu vēsturi"
     },
     "subscriptions": {
         "infoTitle": "Iestatiet maksājumu informāciju",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "Saņemti {{amount}} kredīti"
         }
+    },
+    "charge": {
+        "Subject": "Jūs saņemat maksājumu {{displayAmount}} no {{call 'publisher.displayName'}} ar &quot;{{description}}&quot;",
+        "HasBeenCharged": "Sveiki, tas ir tikai tāpēc, lai jūs zināt, ka {{1}} no {{3}} ir iekasējis samaksu no {{2}} par {{3}}."
+    },
+    "charged": {
+        "Subject": "Paldies par jūsu maksājumu par {{description}}",
+        "HavePaid": "Sveiki, {{1}}, tas ir tikai ātrs apstiprinājums tam, ka esat veiksmīgi samaksājis {{2}} {{3}} par {{4}}"
     }
 }

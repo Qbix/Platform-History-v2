@@ -1819,6 +1819,7 @@ class Streams_Stream extends Base_Streams_Stream
 	/**
 	 * Add this stream to the list of streams to be preloaded onto the client with the rest of the page
 	 * @method addPreloaded
+	 * @static
 	 * @param {string} $asUserId=null
 	 *	The id of the user from whose point of view the access should be calculated.
 	 *  If this matches the publisherId, just sets full access and calls publishedByFetcher(true).
@@ -1833,7 +1834,8 @@ class Streams_Stream extends Base_Streams_Stream
 	
 	/**
 	 * Remove this stream from the list of streams to be preloaded onto the client with the rest of the page
-	 * @method addPreloaded
+	 * @method removePreloaded
+	 * @static
 	 */
 	function removePreloaded()
 	{

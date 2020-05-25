@@ -1,5 +1,5 @@
 
-CREATE TABLE {$prefix}quota (
+CREATE TABLE {{prefix}}quota (
   userId varbinary(31)  NOT NULL COMMENT 'this can be a person, app or organization',
   resourceId varbinary(255) NOT NULL DEFAULT '' COMMENT 'empty string means global resource quota',
   name varbinary(255) NOT NULL COMMENT 'the name of the quota',
@@ -8,6 +8,6 @@ CREATE TABLE {$prefix}quota (
   KEY byTime (userId, resourceId, name, insertedTime)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Used for keeping track of quotas';
 
-ALTER TABLE {$prefix}app_user
+ALTER TABLE {{prefix}}app_user
 ADD COLUMN refresh_token varchar(1023) DEFAULT NULL COMMENT 'The OAuth refresh token' AFTER access_token,
 ADD COLUMN grant_type varchar(255) DEFAULT NULL COMMENT 'The OAuth token grant type' AFTER updatedTime;

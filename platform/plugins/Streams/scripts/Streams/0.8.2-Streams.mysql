@@ -1,7 +1,7 @@
 
-DROP TABLE IF EXISTS `{$prefix}category`;
+DROP TABLE IF EXISTS `{{prefix}}category`;
 
-CREATE TABLE `{$prefix}category` (
+CREATE TABLE `{{prefix}}category` (
   `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of user that owns the stream',
   `streamName` varbinary(255) NOT NULL COMMENT '',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on Qbix server of publisherId',

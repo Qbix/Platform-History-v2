@@ -13,7 +13,7 @@
         "AboutOrder": "Informacija apie užsakymą",
         "PaymentMethod": "Mokėjimo būdas",
         "ContactInfo": "Kontaktinė informacija",
-        "Pay": "Mokėti"
+        "Pay": "Mokėk"
     },
     "credits": {
         "InviteAcceptedBy": "Pakviesti {{1}}",
@@ -26,7 +26,8 @@
         "Client": "Klientas",
         "To": "į",
         "From": "iš",
-        "HistoryEmpty": "Jūs dar neturite duomenų"
+        "HistoryEmpty": "Jūs dar neturite duomenų",
+        "SeeHistory": "Žr. {{1}} mokėjimų istoriją"
     },
     "subscriptions": {
         "infoTitle": "Nustatykite mokėjimo informaciją",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "Gavo {{amount}} kreditų"
         }
+    },
+    "charge": {
+        "Subject": "{{displayAmount}} mokėjimą iš {{call 'publisher.displayName'}} gausite „{{description}}“.",
+        "HasBeenCharged": "Ei, tai tik pranešimas, kad {{1}} {{3}} sumokėjo {{2}} už {{3}}"
+    },
+    "charged": {
+        "Subject": "Dėkojame, kad sumokėjote už „{{description}}“",
+        "HavePaid": "Sveiki, {{1}}, tai tik trumpas patvirtinimas, kad sėkmingai sumokėjote {{2}} {{3}} už {{4}}"
     }
 }

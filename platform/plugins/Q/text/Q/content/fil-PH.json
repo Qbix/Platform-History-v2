@@ -73,5 +73,30 @@
             "touchscreen": "Gamitin ang iyong mga daliri upang mag-zoom at i-drag",
             "notTouchscreen": "Gamitin ang iyong mouse &amp; wheel upang mag-zoom at i-drag"
         }
+    },
+    "timestamp": {
+        "lastNight": "kagabi",
+        "lastEvening": "huling bisperas",
+        "yesterday": "kahapon",
+        "thisMorning": "umaga na ito",
+        "today": "ngayon",
+        "tonight": "ngayong gabi",
+        "tomorrowMorning": "tom umaga",
+        "tomorrow": "bukas",
+        "hoursAgo": "{{h}} na oras na ang nakakaraan",
+        "hourAgo": "{{h}} na oras na ang nakakaraan",
+        "minuteAgo": "{{m}} minuto ang nakaraan",
+        "minutesAgo": "{{m}} minuto ang nakaraan",
+        "secondAgo": "{{s}} pangalawang nakaraan",
+        "secondsAgo": "{{s}} segundo na ang nakalilipas",
+        "fewSecondsAgo": "ilang segundo",
+        "rightNow": "ngayon na",
+        "inSecond": "sa {{s}} pangalawa",
+        "inSeconds": "sa {{s}} segundo",
+        "inMinute": "sa {{m}} minuto",
+        "inMinutes": "sa {{m}} minuto",
+        "inHour": "sa {{h}} oras",
+        "inHours": "sa {{h}} na oras",
+        "inUnderMinute": "sa ilalim ng 1 minuto"
     }
 }

@@ -10,7 +10,7 @@
         "YouSubscribedTo": "Olet tilannut {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "Tietoa tilasta",
+        "AboutOrder": "Tietoja tilauksesta",
         "PaymentMethod": "Maksutapa",
         "ContactInfo": "Yhteystiedot",
         "Pay": "Maksaa"
@@ -26,7 +26,8 @@
         "Client": "Asiakas",
         "To": "että",
         "From": "alkaen",
-        "HistoryEmpty": "Sinulla ei ole vielä tietoja"
+        "HistoryEmpty": "Sinulla ei ole vielä tietoja",
+        "SeeHistory": "Katso {{1}} -historiaa"
     },
     "subscriptions": {
         "infoTitle": "Aseta maksutiedot",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "Saanut {{amount}} hyvitystä"
         }
+    },
+    "charge": {
+        "Subject": "Saat {{displayAmount}} maksun {{call 'publisher.displayName'}} maksamalla &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hei, tämä on vain kertoa sinulle, että {{1}} on veloittanut {{2}} {{3}} {{3}}"
+    },
+    "charged": {
+        "Subject": "Kiitos maksustasi {{description}}",
+        "HavePaid": "Hei {{1}}, tämä on vain nopea vahvistus siitä, että olet maksanut {{2}} {{3}} {{4}}"
     }
 }

@@ -26,7 +26,8 @@
         "Client": "Client",
         "To": "la",
         "From": "din",
-        "HistoryEmpty": "Încă nu aveți date"
+        "HistoryEmpty": "Încă nu aveți date",
+        "SeeHistory": "Consultați istoricul plăților pentru {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Setați informații de plată",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "A primit {{amount}} credite"
         }
+    },
+    "charge": {
+        "Subject": "Obțineți plata {{displayAmount}} de la {{call 'publisher.displayName'}} prin &quot;{{description}}&quot;",
+        "HasBeenCharged": "Asta înseamnă doar să vă anunțăm că {{1}} a fost taxat {{2}} pentru {{3}} de {{4}}"
+    },
+    "charged": {
+        "Subject": "Vă mulțumim pentru plata pentru &quot;{{description}}&quot;",
+        "HavePaid": "Hei {{1}}, aceasta este doar o confirmare rapidă că ai plătit cu succes {{2}} la {{3}} pentru {{4}}"
     }
 }

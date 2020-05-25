@@ -73,5 +73,30 @@
             "touchscreen": "השתמש באצבעות כדי להגדיל ולגרור",
             "notTouchscreen": "השתמש בעכבר &amp; גלגל כדי להגדיל ולגרור"
         }
+    },
+    "timestamp": {
+        "lastNight": "אתמול בלילה",
+        "lastEvening": "ערב אחרון",
+        "yesterday": "אתמול",
+        "thisMorning": "הבוקר הזה",
+        "today": "היום",
+        "tonight": "היום בלילה",
+        "tomorrowMorning": "טום מורן",
+        "tomorrow": "מחר",
+        "hoursAgo": "לפני {{h}} שעות",
+        "hourAgo": "לפני {{h}} שעה",
+        "minuteAgo": "לפני {{m}} דקה",
+        "minutesAgo": "לפני {{m}} דקות",
+        "secondAgo": "לפני {{s}} שנייה",
+        "secondsAgo": "לפני {{s}} שניות",
+        "fewSecondsAgo": "לפני שניות",
+        "rightNow": "עכשיו",
+        "inSecond": "בעוד {{s}} שנייה",
+        "inSeconds": "תוך {{s}} שניות",
+        "inMinute": "תוך {{m}} דקה",
+        "inMinutes": "תוך {{m}} דקות",
+        "inHour": "תוך {{h}} שעה",
+        "inHours": "בעוד {{h}} שעות",
+        "inUnderMinute": "תוך פחות מדקה"
     }
 }

@@ -91,7 +91,8 @@
         "notice": {
             "text": "Бяхте поканени. {{ClickOrTap}} тук, за да приеме и да се присъедини."
         },
-        "youCanNowPaste": "Вече можете да поставите тази връзка някъде, за да поканите хора"
+        "youCanNowPaste": "Вече можете да поставите тази връзка някъде, за да поканите хора",
+        "command": "каня"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Връзка се копира в клипборда",
             "codeCopiedToCb": "Кодът се копира в клипборда",
             "userHasNoVideo": "Участникът няма видео",
-            "openInBrowserAlert": "Отворете връзката в браузъра Safari, за да се присъедините към конференцията."
+            "openInBrowserAlert": "Отворете връзката в браузъра Safari, за да се присъедините към конференцията.",
+            "youBeganVideoRecording": "Започнахте да записвате тази конференция",
+            "youStoppedVideoRecording": "Спряхте да записвате тази конференция"
         },
         "settingsPopup": {
             "webCamera": "Уеб камера",
@@ -189,7 +192,12 @@
             "copy": "копие",
             "turnOffVideo": "Изключете споделянето на камера / екран",
             "turnOffScreenSharing": "Изключете споделянето на екрана",
-            "cameraIsTurnedOff": "Камерата е изключена"
+            "cameraIsTurnedOff": "Камерата е изключена",
+            "startRecording": "Започнете записа",
+            "stopRecording": "Спрете записа",
+            "recordingInProgress": "Записът е в ход ...",
+            "publishOnTimeline": "Публикуване на времевата линия",
+            "publishToGroup": "Публикуване в групата"
         },
         "participantsPopup": {
             "disconnect": "Прекъсване на връзката",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Най-силно освен мен",
             "maximizeLoudest": "Увеличете най-силно",
             "staticMaximized": "Статичен максимизиран",
-            "manual": "наръчник"
-        }
+            "manual": "наръчник",
+            "turnOffCamera": "Скриване на видеоклипа",
+            "turnOffAudio": "Заглушаване на звука",
+            "turnOffScreenSharing": "Скриване на споделянето на екрана",
+            "turnOnCamera": "Показване на видео",
+            "turnOnAudio": "Спиране на звука",
+            "turnOnScreenSharing": "Показване на споделяне на екрана"
+        },
+        "notAllowedToJoinCall": "Нямате разрешение да се присъедините към този поток.",
+        "streamTitle": "{{1}} обаждане на живо"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "Запази",
         "Delete": "Изтрий",
         "Submenu": "Подменю"
+    },
+    "errors": {
+        "HiddenFromYou": "Това съдържание е скрито от вас."
     }
 }

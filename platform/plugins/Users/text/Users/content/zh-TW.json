@@ -50,7 +50,8 @@
             "title": "选择联系人",
             "SearchByName": "按名称搜索",
             "CreateAccount": "+新联络人",
-            "CreateAccountNotFound": "找不到Q.Users.Cordova.UI.create"
+            "CreateAccountNotFound": "找不到Q.Users.Cordova.UI.create",
+            "EmptyContacts": "找不到联络人..."
         },
         "select": {
             "title": "选择{{displayName}}的联系人"

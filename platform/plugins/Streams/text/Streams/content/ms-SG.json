@@ -91,7 +91,8 @@
         "notice": {
             "text": "Anda telah dijemput. {{ClickOrTap}} di sini untuk menerima dan menyertai."
         },
-        "youCanNowPaste": "Anda kini boleh menampal pautan ini di suatu tempat untuk menjemput orang"
+        "youCanNowPaste": "Anda kini boleh menampal pautan ini di suatu tempat untuk menjemput orang",
+        "command": "Jemput"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Pautan disalin ke papan keratan",
             "codeCopiedToCb": "Kod disalin ke papan keratan",
             "userHasNoVideo": "Peserta tidak mempunyai video",
-            "openInBrowserAlert": "Pautan terbuka dalam penyemak imbas Safari untuk menyertai persidangan."
+            "openInBrowserAlert": "Pautan terbuka dalam penyemak imbas Safari untuk menyertai persidangan.",
+            "youBeganVideoRecording": "Anda mula merakam persidangan ini",
+            "youStoppedVideoRecording": "Anda berhenti merakam persidangan ini"
         },
         "settingsPopup": {
             "webCamera": "Kamera sesawang",
@@ -189,7 +192,12 @@
             "copy": "Salinan",
             "turnOffVideo": "Matikan perkongsian kamera / skrin",
             "turnOffScreenSharing": "Matikan perkongsian skrin",
-            "cameraIsTurnedOff": "Kamera dimatikan"
+            "cameraIsTurnedOff": "Kamera dimatikan",
+            "startRecording": "Mula Merakam",
+            "stopRecording": "Berhenti Merakam",
+            "recordingInProgress": "Rakaman sedang dijalankan ...",
+            "publishOnTimeline": "Terbitkan mengikut garis masa",
+            "publishToGroup": "Terbitkan ke kumpulan"
         },
         "participantsPopup": {
             "disconnect": "Putuskan sambungan",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Paling kuat kecuali saya",
             "maximizeLoudest": "Maksimumkan Tertinggi",
             "staticMaximized": "Dimaksimumkan statik",
-            "manual": "Manual"
-        }
+            "manual": "Manual",
+            "turnOffCamera": "Sembunyikan video",
+            "turnOffAudio": "Redamkan audio",
+            "turnOffScreenSharing": "Sembunyikan perkongsian skrin",
+            "turnOnCamera": "Tunjukkan video",
+            "turnOnAudio": "Redamkan suara",
+            "turnOnScreenSharing": "Tunjukkan perkongsian skrin"
+        },
+        "notAllowedToJoinCall": "Anda tidak mempunyai kebenaran untuk menyertai aliran ini.",
+        "streamTitle": "{{1}} panggilan langsung"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "Simpan",
         "Delete": "Padam",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Kandungan ini disembunyikan daripada anda."
     }
 }

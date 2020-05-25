@@ -73,5 +73,30 @@
             "touchscreen": "Suumimiseks ja lohistamiseks kasutage sõrmi",
             "notTouchscreen": "Suumimiseks ja lohistamiseks kasutage hiirt ja ratast"
         }
+    },
+    "timestamp": {
+        "lastNight": "eile õhtul",
+        "lastEvening": "eelõhtul",
+        "yesterday": "eile",
+        "thisMorning": "see hommik",
+        "today": "täna",
+        "tonight": "täna õhtul",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "homme",
+        "hoursAgo": "{{h}} tundi tagasi",
+        "hourAgo": "{{h}} tund tagasi",
+        "minuteAgo": "{{m}} minut tagasi",
+        "minutesAgo": "{{m}} minutit tagasi",
+        "secondAgo": "{{s}} teine tagasi",
+        "secondsAgo": "{{s}} sekundit tagasi",
+        "fewSecondsAgo": "sekundit tagasi",
+        "rightNow": "praegu",
+        "inSecond": "sekundis {{s}}",
+        "inSeconds": "{{s}} sekundiga",
+        "inMinute": "{{m}} minutiga",
+        "inMinutes": "{{m}} minutiga",
+        "inHour": "tunni pärast {{h}}",
+        "inHours": "{{h}} tunni pärast",
+        "inUnderMinute": "vähem kui 1 minut"
     }
 }

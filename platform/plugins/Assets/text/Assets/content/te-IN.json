@@ -13,7 +13,7 @@
         "AboutOrder": "ఆర్డర్ గురించి సమాచారం",
         "PaymentMethod": "పైకము చెల్లించు విదానం",
         "ContactInfo": "సంప్రదింపు సమాచారం",
-        "Pay": "చెల్లించండి"
+        "Pay": "పే"
     },
     "credits": {
         "InviteAcceptedBy": "ఆహ్వానించబడినది {{999} by",
@@ -26,7 +26,8 @@
         "Client": "క్లయింట్",
         "To": "కు",
         "From": "నుండి",
-        "HistoryEmpty": "మీకు ఇంకా డేటా లేదు"
+        "HistoryEmpty": "మీకు ఇంకా డేటా లేదు",
+        "SeeHistory": "History {999} for కోసం చెల్లింపు చరిత్ర చూడండి"
     },
     "subscriptions": {
         "infoTitle": "చెల్లింపు సమాచారాన్ని సెట్ చేయండి",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "{{amount}} క్రెడిట్‌లను అందుకున్నారు"
         }
+    },
+    "charge": {
+        "Subject": "మీరు {{call 'publisher.displayName'}} నుండి &quot;{{description}}&quot; ద్వారా {{999} payment చెల్లింపు పొందుతారు.",
+        "HasBeenCharged": "హే, ఇది మీకు తెలియజేయడానికి {{1}} {{1001} for {{4}} కు {{1000} charge వసూలు చేయబడింది."
+    },
+    "charged": {
+        "Subject": "&quot;{{999} for&quot; కోసం మీ చెల్లింపుకు ధన్యవాదాలు",
+        "HavePaid": "హే {{1}}, ఇది మీరు {{1002} for కోసం {{2}} ను {{3}} కు విజయవంతంగా చెల్లించినట్లు శీఘ్ర నిర్ధారణ."
     }
 }

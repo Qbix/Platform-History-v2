@@ -50,7 +50,8 @@
             "title": "رابطہ منتخب کریں",
             "SearchByName": "نام سے تلاش کریں۔",
             "CreateAccount": "+ نیا رابطہ",
-            "CreateAccountNotFound": "Q.User.Cordova.UI.create نہیں ملا۔"
+            "CreateAccountNotFound": "Q.User.Cordova.UI.create نہیں ملا۔",
+            "EmptyContacts": "رابطے نہیں ملے…"
         },
         "select": {
             "title": "{{displayName}} کا رابطہ منتخب کریں"

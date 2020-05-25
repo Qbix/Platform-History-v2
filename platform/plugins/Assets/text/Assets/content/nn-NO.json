@@ -26,7 +26,8 @@
         "Client": "Klient",
         "To": "til",
         "From": "fra",
-        "HistoryEmpty": "Du har ingen data ennå"
+        "HistoryEmpty": "Du har ingen data ennå",
+        "SeeHistory": "Se betalingslogg for {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Angi betalingsinformasjon",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "Mottatt {{amount}} studiepoeng"
         }
+    },
+    "charge": {
+        "Subject": "Du får betaling av {{displayAmount}} fra {{call 'publisher.displayName'}} med &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hei, dette er bare for å gi deg beskjed {{1}} har blitt belastet {{2}} for {{3}} av {{4}}"
+    },
+    "charged": {
+        "Subject": "Takk for betalingen for &quot;{{description}}&quot;",
+        "HavePaid": "Hei {{1}}, dette er bare en rask bekreftelse på at du har betalt {{2}} til {{3}} for {{4}}"
     }
 }

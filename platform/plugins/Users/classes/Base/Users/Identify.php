@@ -93,7 +93,7 @@ abstract class Base_Users_Identify extends Db_Row
 	static function table($with_db_name = true, $alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', 'Users', 'indexes', 'Identify', false)) {
-			return new Db_Expression(($with_db_name ? '{$dbname}.' : '').'{$prefix}'.'identify');
+			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'identify');
 		} else {
 			$conn = Db::getConnection('Users');
   			$prefix = empty($conn['prefix']) ? '' : $conn['prefix'];

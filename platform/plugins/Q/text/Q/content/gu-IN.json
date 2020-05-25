@@ -73,5 +73,30 @@
             "touchscreen": "ઝૂમ કરવા અને ખેંચવા માટે તમારી આંગળીઓનો ઉપયોગ કરો",
             "notTouchscreen": "ઝૂમ અને ડ્રેગ કરવા માટે તમારા માઉસ અને વ્હીલનો ઉપયોગ કરો"
         }
+    },
+    "timestamp": {
+        "lastNight": "ગઈ કાલે રાત્રે",
+        "lastEvening": "છેલ્લા પર્વ",
+        "yesterday": "ગઇકાલે",
+        "thisMorning": "આ સવારે",
+        "today": "આજે",
+        "tonight": "આજની રાત",
+        "tomorrowMorning": "ટોમ મોર્ન",
+        "tomorrow": "આવતીકાલે",
+        "hoursAgo": "} 9 999}} કલાક પહેલા",
+        "hourAgo": "} 9 999}} કલાક પહેલા",
+        "minuteAgo": "} 9 999}} મિનિટ પહેલા",
+        "minutesAgo": "} 9 999}} મિનિટ પહેલા",
+        "secondAgo": "} 9 999}} સેકંડ પહેલા",
+        "secondsAgo": "} 9 999}} સેકંડ પહેલા",
+        "fewSecondsAgo": "સેકંડ પહેલા",
+        "rightNow": "અત્યારે જ",
+        "inSecond": "{9 999}} સેકન્ડમાં",
+        "inSeconds": "{9 999}} સેકંડમાં",
+        "inMinute": "{9 999}} મિનિટમાં",
+        "inMinutes": "{9 999}} મિનિટમાં",
+        "inHour": "{9 999}} કલાકમાં",
+        "inHours": "{9 999}} કલાકમાં",
+        "inUnderMinute": "1 મિનિટ હેઠળ"
     }
 }

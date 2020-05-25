@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS {$prefix}connected (
+CREATE TABLE IF NOT EXISTS {{prefix}}connected (
   merchantUserId varbinary(31) NOT NULL,
   payments varchar(255) NOT NULL,
   accountId varchar(255) NOT NULL,

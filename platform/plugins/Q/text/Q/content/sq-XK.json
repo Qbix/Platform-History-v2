@@ -73,5 +73,30 @@
             "touchscreen": "Përdorni gishtat për të zmadhuar dhe zvarritur",
             "notTouchscreen": "Përdorni miun dhe timonin për të zmadhuar dhe zvarritur"
         }
+    },
+    "timestamp": {
+        "lastNight": "natën e kaluar",
+        "lastEvening": "pragun e fundit",
+        "yesterday": "dje",
+        "thisMorning": "kjo e mëngjesit",
+        "today": "sot",
+        "tonight": "sonte",
+        "tomorrowMorning": "tom mëngjesit",
+        "tomorrow": "nesër",
+        "hoursAgo": "{{h}} orë më parë",
+        "hourAgo": "{{h}} orë më parë",
+        "minuteAgo": "99 {999}} minutë më parë",
+        "minutesAgo": "{{m}} minuta më parë",
+        "secondAgo": "99 {999}} sekondë më parë",
+        "secondsAgo": "{{s}} sekonda më parë",
+        "fewSecondsAgo": "sekonda më parë",
+        "rightNow": "tani",
+        "inSecond": "në 99 99 999}} sekondë",
+        "inSeconds": "në 99 999}} sekonda",
+        "inMinute": "në 99 999}} minutë",
+        "inMinutes": "në 99 999}} minuta",
+        "inHour": "në {999}} orë",
+        "inHours": "në {999}} orë",
+        "inUnderMinute": "në nën 1 minutë"
     }
 }

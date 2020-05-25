@@ -9,15 +9,15 @@
         "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
         "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
     },
-	"charge": {
-		"Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-		"HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
-	},
-	"charged": {
-		"Subject": "Thank you for your payment for \"{{description}}\"",
-		"HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
-	},
-	"payment": {
+    "charge": {
+        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
+        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+    },
+    "charged": {
+        "Subject": "Thank you for your payment for \"{{description}}\"",
+        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+    },
+    "payment": {
         "AboutOrder": "Info about order",
         "PaymentMethod": "Payment method",
         "ContactInfo": "Contact info",
@@ -34,7 +34,7 @@
         "Client": "Client",
         "To": "to",
         "From": "from",
-		"SeeHistory": "See payment history for {{1}}",
+        "SeeHistory": "See payment history for {{1}}",
         "HistoryEmpty": "You have no data yet"
     },
     "subscriptions": {
@@ -93,5 +93,16 @@
         "Assets\/credits\/received": {
             "content": "Received {{amount}} credits"
         }
-    }
+    },
+	"services": {
+		"NewServiceTemplate": {
+			"Title": "New Service Template",
+			"TitlePlaceholder": "Service title",
+			"PricePlaceholder": "Set price",
+			"DescriptionPlaceholder": "Service description",
+			"SaveService": "Save Service"
+		},
+		"ManageServiceTemplates": "Manage Service Templates",
+		"ManageServices": "Manage Services"
+	}
 }

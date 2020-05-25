@@ -324,7 +324,7 @@ class Q_Session
 			$app = Q_Config::get('Q', 'app', null);
 			$prefix = $app ? "$app/" : '';
 			if (empty($_SERVER['HTTP_HOST'])) {
-				echo "Warning: Ignoring Q_Session::start() called before running {$prefix}scripts/Q/install.php --all".PHP_EOL;
+				echo "Warning: Ignoring Q_Session::start() called before running {{prefix}}scripts/Q/install.php --all".PHP_EOL;
 				$message = $e->getMessage();
 				$file = $e->getFile();
 				$line = $e->getLine();
@@ -337,7 +337,7 @@ class Q_Session
 			} else {
 				Q_Cache::clear(true);
 				Q::log($e);
-				throw new Q_Exception("Please run {$prefix}scripts/Q/install.php --all");
+				throw new Q_Exception("Please run {{prefix}}scripts/Q/install.php --all");
 			}
 		}
 		// merge in all the stuff that was added to $_SESSION

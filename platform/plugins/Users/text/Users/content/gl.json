@@ -50,7 +50,8 @@
             "title": "Escolla o contacto",
             "SearchByName": "Busca por nome",
             "CreateAccount": "+ Novo contacto",
-            "CreateAccountNotFound": "Non se atopou Q.Users.Cordova.UI.create"
+            "CreateAccountNotFound": "Non se atopou Q.Users.Cordova.UI.create",
+            "EmptyContacts": "Non se atoparon contactos ..."
         },
         "select": {
             "title": "Seleccione o contacto de {{displayName}}"

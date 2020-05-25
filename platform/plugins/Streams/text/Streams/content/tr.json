@@ -91,7 +91,8 @@
         "notice": {
             "text": "Davet edildin. Kabul etmek ve katılmak için {{ClickOrTap}} burada."
         },
-        "youCanNowPaste": "Artık insanları davet etmek için bu bağlantıyı bir yere yapıştırabilirsiniz"
+        "youCanNowPaste": "Artık insanları davet etmek için bu bağlantıyı bir yere yapıştırabilirsiniz",
+        "command": "Davet et"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "link kopyalandı",
             "codeCopiedToCb": "Kod panoya kopyalandı",
             "userHasNoVideo": "Katılımcının videosu yok",
-            "openInBrowserAlert": "Konferansa katılmak için bağlantıyı Safari tarayıcısında açın."
+            "openInBrowserAlert": "Konferansa katılmak için bağlantıyı Safari tarayıcısında açın.",
+            "youBeganVideoRecording": "Bu konferansı kaydetmeye başladınız",
+            "youStoppedVideoRecording": "Bu konferansı kaydetmeyi durdurdunuz"
         },
         "settingsPopup": {
             "webCamera": "İnternet kamerası",
@@ -189,7 +192,12 @@
             "copy": "kopya",
             "turnOffVideo": "Kamera \/ ekran paylaşımını kapatma",
             "turnOffScreenSharing": "Ekran paylaşımını kapatma",
-            "cameraIsTurnedOff": "Kamera kapalı"
+            "cameraIsTurnedOff": "Kamera kapalı",
+            "startRecording": "Kayda başla",
+            "stopRecording": "Kaydetmeyi bırak",
+            "recordingInProgress": "Kayıt devam ediyor ...",
+            "publishOnTimeline": "Zaman çizelgesinde yayınla",
+            "publishToGroup": "Gruba yayınla"
         },
         "participantsPopup": {
             "disconnect": "kesmek",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Benim Dışımdaki En Yüksek",
             "maximizeLoudest": "En Yüksek Seviyeye Çıkar",
             "staticMaximized": "Statik Maksimum",
-            "manual": "Manuel"
-        }
+            "manual": "Manuel",
+            "turnOffCamera": "Videoyu gizle",
+            "turnOffAudio": "Sesi kapat",
+            "turnOffScreenSharing": "Ekran paylaşımını gizle",
+            "turnOnCamera": "Videoyu göster",
+            "turnOnAudio": "Sesi aç",
+            "turnOnScreenSharing": "Ekran paylaşımını göster"
+        },
+        "notAllowedToJoinCall": "Bu akışa katılma izniniz yok.",
+        "streamTitle": "{{1}} canlı çağrı"
     },
     "types": {
         "Streams\/invited": {
@@ -337,5 +353,8 @@
         "Save": "Kayıt etmek",
         "Delete": "Sil",
         "Submenu": "Alt menü"
+    },
+    "errors": {
+        "HiddenFromYou": "Bu içerik sizden gizlenmiştir."
     }
 }

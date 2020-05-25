@@ -73,5 +73,30 @@
             "touchscreen": "জুম এবং টেনে আনতে আপনার আঙ্গুল ব্যবহার করুন",
             "notTouchscreen": "জুম এবং টেনে আনতে আপনার মাউস এবং চাকা ব্যবহার করুন"
         }
+    },
+    "timestamp": {
+        "lastNight": "গত রাত",
+        "lastEvening": "শেষ আগের দিন",
+        "yesterday": "গতকাল",
+        "thisMorning": "এই সকালে",
+        "today": "আজ",
+        "tonight": "অদ্য রজনীতে",
+        "tomorrowMorning": "টম মর্ন",
+        "tomorrow": "আগামীকাল",
+        "hoursAgo": "} 9 999}} ঘন্টা আগে",
+        "hourAgo": "} 9 999}} ঘন্টা আগে",
+        "minuteAgo": "} 9 999}} মিনিট আগে",
+        "minutesAgo": "} 9 999}} মিনিট আগে",
+        "secondAgo": "} 9 999}} সেকেন্ড আগে",
+        "secondsAgo": "} 9 999}} সেকেন্ড আগে",
+        "fewSecondsAgo": "এই মাত্র",
+        "rightNow": "এখনই",
+        "inSecond": "{9 999}} সেকেন্ডে",
+        "inSeconds": "{{s}} সেকেন্ডে",
+        "inMinute": "{9 999}} মিনিটে",
+        "inMinutes": "{{m}} মিনিটে",
+        "inHour": "{{h}} ঘন্টা",
+        "inHours": "{9 999}} ঘন্টা",
+        "inUnderMinute": "1 মিনিটের মধ্যে"
     }
 }

@@ -13,7 +13,7 @@
         "AboutOrder": "ข้อมูลเกี่ยวกับการสั่งซื้อ",
         "PaymentMethod": "วิธีการชำระเงิน",
         "ContactInfo": "ข้อมูลติดต่อ",
-        "Pay": "จ่ายเงิน"
+        "Pay": "การชำระเงิน"
     },
     "credits": {
         "InviteAcceptedBy": "คำเชิญได้รับการยอมรับโดย {{1}}",
@@ -26,7 +26,8 @@
         "Client": "ไคลเอนต์",
         "To": "ไปยัง",
         "From": "จาก",
-        "HistoryEmpty": "คุณยังไม่มีข้อมูล"
+        "HistoryEmpty": "คุณยังไม่มีข้อมูล",
+        "SeeHistory": "ดูประวัติการชำระเงินสำหรับ {{1}}"
     },
     "subscriptions": {
         "infoTitle": "ตั้งค่าข้อมูลการชำระเงิน",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "รับ {{amount}} หน่วยกิต"
         }
+    },
+    "charge": {
+        "Subject": "คุณได้รับเงิน {{displayAmount}} จาก {{call 'publisher.displayName'}} โดย &quot;{{description}}&quot;",
+        "HasBeenCharged": "สวัสดีนี่เป็นเพียงการแจ้งให้คุณทราบว่า {{1}} ถูกเรียกเก็บเงิน {{1,000}} สำหรับ {{3}} โดย {{4}}"
+    },
+    "charged": {
+        "Subject": "ขอบคุณสำหรับการชำระเงินสำหรับ &quot;{{description}}&quot;",
+        "HavePaid": "สวัสดี {{1}} นี่เป็นเพียงการยืนยันอย่างรวดเร็วว่าคุณชำระเงิน {{2}} เป็น {{3}} สำหรับ {{4}} สำเร็จแล้ว"
     }
 }

@@ -83,7 +83,7 @@ Base.db = function () {
  */
 Base.table = function (withoutDbName) {
 	if (Q.Config.get(['Db', 'connections', 'Streams', 'indexes', 'RelatedFromTotal'], false)) {
-		return new Db.Expression((withoutDbName ? '' : '{$dbname}.')+'{$prefix}related_from_total');
+		return new Db.Expression((withoutDbName ? '' : '{{dbname}}.')+'{{prefix}}related_from_total');
 	} else {
 		var conn = Db.getConnection('Streams');
 		var prefix = conn.prefix || '';

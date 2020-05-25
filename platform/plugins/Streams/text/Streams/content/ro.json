@@ -91,7 +91,8 @@
         "notice": {
             "text": "Ai fost invitat. {{ClickOrTap}} aici să accepți și să vă alăturați."
         },
-        "youCanNowPaste": "Acum puteți lipi acest link undeva pentru a invita oameni"
+        "youCanNowPaste": "Acum puteți lipi acest link undeva pentru a invita oameni",
+        "command": "A invita"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Link copiat în clipboard",
             "codeCopiedToCb": "Cod copiat în clipboard",
             "userHasNoVideo": "Participantul nu are niciun videoclip",
-            "openInBrowserAlert": "Deschideți linkul în browserul Safari pentru a vă alătura conferinței."
+            "openInBrowserAlert": "Deschideți linkul în browserul Safari pentru a vă alătura conferinței.",
+            "youBeganVideoRecording": "Ai început să înregistrezi această conferință",
+            "youStoppedVideoRecording": "Ați oprit înregistrarea acestei conferințe"
         },
         "settingsPopup": {
             "webCamera": "Camera web",
@@ -189,7 +192,12 @@
             "copy": "Copie",
             "turnOffVideo": "Dezactivați partajarea camerei \/ ecranului",
             "turnOffScreenSharing": "Dezactivați partajarea ecranului",
-            "cameraIsTurnedOff": "Camera este oprită"
+            "cameraIsTurnedOff": "Camera este oprită",
+            "startRecording": "Începeți înregistrarea",
+            "stopRecording": "Opriți înregistrarea",
+            "recordingInProgress": "Înregistrarea este în curs ...",
+            "publishOnTimeline": "Publicați pe cronologie",
+            "publishToGroup": "Publicați în grup"
         },
         "participantsPopup": {
             "disconnect": "Deconectat",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Cel mai tare cu excepția mea",
             "maximizeLoudest": "Maximizează cel mai tare",
             "staticMaximized": "Maximizat static",
-            "manual": "Manual"
-        }
+            "manual": "Manual",
+            "turnOffCamera": "Ascundeți videoclipul",
+            "turnOffAudio": "Sunetul sonor",
+            "turnOffScreenSharing": "Ascundeți partajarea ecranului",
+            "turnOnCamera": "Afișați videoclipuri",
+            "turnOnAudio": "Anulați sunetul",
+            "turnOnScreenSharing": "Afișare partajare ecran"
+        },
+        "notAllowedToJoinCall": "Nu aveți permisiunea de a vă alătura acestui flux.",
+        "streamTitle": "{{1}} apel live"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "salva",
         "Delete": "Șterge",
         "Submenu": "submeniu"
+    },
+    "errors": {
+        "HiddenFromYou": "Acest conținut vă este ascuns."
     }
 }

@@ -10,7 +10,7 @@
         "YouSubscribedTo": "Feliratkozott a {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "Információ a rendelésről",
+        "AboutOrder": "Információ a megrendelésről",
         "PaymentMethod": "Fizetési mód",
         "ContactInfo": "Elérhetőségei",
         "Pay": "Fizetés"
@@ -26,7 +26,8 @@
         "Client": "Ügyfél",
         "To": "nak nek",
         "From": "tól től",
-        "HistoryEmpty": "Még nincs adatod"
+        "HistoryEmpty": "Még nincs adatod",
+        "SeeHistory": "Lásd a (z) {{1}} fizetési előzményeit"
     },
     "subscriptions": {
         "infoTitle": "Állítsa be a fizetési információkat",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "Kapott {{amount}} kredit"
         }
+    },
+    "charge": {
+        "Subject": "{{displayAmount}} összeget kap a (z) {{call 'publisher.displayName'}} összegből a (z) &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hé, ez csak azért szól, hogy tudatja Önnel, hogy a {{1}} {{2}} {{3}} összeget terhelt {{4}}"
+    },
+    "charged": {
+        "Subject": "Köszönjük a (z) {{description}}",
+        "HavePaid": "Hé {{1}}, ez csak egy gyors megerősítés arról, hogy sikeresen befizette a (z) {{2}} -ot a {{3}} -hez a (z) {{4}}"
     }
 }

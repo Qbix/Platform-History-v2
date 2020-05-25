@@ -73,5 +73,30 @@
             "touchscreen": "Prstami môžete priblížiť a pretiahnuť",
             "notTouchscreen": "Pomocou myši a kolieska môžete priblížiť a pretiahnuť"
         }
+    },
+    "timestamp": {
+        "lastNight": "minulú noc",
+        "lastEvening": "posledný deň",
+        "yesterday": "včera",
+        "thisMorning": "toto ráno",
+        "today": "dnes",
+        "tonight": "dnes večer",
+        "tomorrowMorning": "tom ráno",
+        "tomorrow": "zajtra",
+        "hoursAgo": "Pred {{h}} hodinami",
+        "hourAgo": "Pred {{h}} hodinou",
+        "minuteAgo": "Pred {{m}} minútou",
+        "minutesAgo": "Pred {{m}} minútami",
+        "secondAgo": "{{s}} pred sekundou",
+        "secondsAgo": "Pred {{s}} sekundami",
+        "fewSecondsAgo": "pred sekundami",
+        "rightNow": "práve teraz",
+        "inSecond": "o {{s}} sekundu",
+        "inSeconds": "o {{s}} sekúnd",
+        "inMinute": "o {{m}} minútu",
+        "inMinutes": "o {{m}} minút",
+        "inHour": "o {{h}} hodinu",
+        "inHours": "o {{h}} hodín",
+        "inUnderMinute": "za menej ako 1 minútu"
     }
 }

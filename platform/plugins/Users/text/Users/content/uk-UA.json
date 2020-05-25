@@ -50,7 +50,8 @@
             "title": "Виберіть контакт",
             "SearchByName": "Пошук по імені",
             "CreateAccount": "+ Новий контакт",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create не знайдено"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create не знайдено",
+            "EmptyContacts": "Контакти не знайдено ..."
         },
         "select": {
             "title": "Виберіть контакт користувача {{displayName}}"

@@ -26,7 +26,8 @@
         "Client": "Khách hàng",
         "To": "đến",
         "From": "từ",
-        "HistoryEmpty": "Bạn chưa có dữ liệu"
+        "HistoryEmpty": "Bạn chưa có dữ liệu",
+        "SeeHistory": "Xem lịch sử thanh toán cho {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Đặt thông tin thanh toán",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "Đã nhận được {{amount}} tín dụng"
         }
+    },
+    "charge": {
+        "Subject": "Bạn nhận được khoản thanh toán {{displayAmount}} từ {{call 'publisher.displayName'}} trước &quot;{{description}}&quot;",
+        "HasBeenCharged": "Xin chào, đây chỉ là để cho bạn biết {{1}} đã bị tính phí {{2}} cho {{3}} bởi {{4}}"
+    },
+    "charged": {
+        "Subject": "Cảm ơn bạn đã thanh toán cho &quot;{{description}}&quot;",
+        "HavePaid": "Xin chào {{1}}, đây chỉ là một xác nhận nhanh rằng bạn đã trả thành công {{2}} cho {{3}} cho {{4}}"
     }
 }

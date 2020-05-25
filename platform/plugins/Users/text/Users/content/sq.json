@@ -50,7 +50,8 @@
             "title": "Zgjidhni kontaktin",
             "SearchByName": "Kërkoni sipas emrit",
             "CreateAccount": "+ Kontakt i ri",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.krijoni nuk u gjet"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.krijoni nuk u gjet",
+            "EmptyContacts": "Kontaktet nuk u gjetën ..."
         },
         "select": {
             "title": "Përzgjidh kontaktin e {{displayName}}"

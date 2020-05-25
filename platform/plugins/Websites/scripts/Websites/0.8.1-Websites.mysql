@@ -1,4 +1,4 @@
-CREATE TABLE `{$prefix}permalink` (
+CREATE TABLE `{{prefix}}permalink` (
   `uri` varbinary(255) NOT NULL DEFAULT '',
   `url` varbinary(255) NOT NULL DEFAULT '',
   `insertedTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,

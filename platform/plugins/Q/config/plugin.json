@@ -5,6 +5,12 @@
 				"version": "1.1",
 				"compatible": "0.8"
 			}
+		},
+		"routes": {
+			"Q/urls/urls/latest.json": {
+				"module": "Q",
+				"action": "urls"
+			}
 		}
 	}
 }

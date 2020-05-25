@@ -73,5 +73,30 @@
             "touchscreen": "استخدم أصابعك للتكبير والسحب",
             "notTouchscreen": "استخدم الماوس والعجلة للتكبير والسحب"
         }
+    },
+    "timestamp": {
+        "lastNight": "الليلة الماضية",
+        "lastEvening": "عشية الماضي",
+        "yesterday": "في الامس",
+        "thisMorning": "هذا الصباح",
+        "today": "اليوم",
+        "tonight": "هذه الليلة",
+        "tomorrowMorning": "توم مورن",
+        "tomorrow": "غدا",
+        "hoursAgo": "قبل {{h}} ساعة",
+        "hourAgo": "قبل {{h}} ساعة",
+        "minuteAgo": "منذ {{m}} دقيقة",
+        "minutesAgo": "منذ {{m}} دقيقة",
+        "secondAgo": "قبل {{s}} ثانية",
+        "secondsAgo": "قبل {{s}} ثانية",
+        "fewSecondsAgo": "منذ ثوانى",
+        "rightNow": "الآن",
+        "inSecond": "في {{s}} ثانية",
+        "inSeconds": "في {{s}} ثانية",
+        "inMinute": "في {{m}} دقيقة",
+        "inMinutes": "في {{m}} دقيقة",
+        "inHour": "في {{h}} ساعة",
+        "inHours": "في {{h}} ساعة",
+        "inUnderMinute": "في أقل من دقيقة واحدة"
     }
 }

@@ -74,5 +74,30 @@
             "touchscreen": "ಜೂಮ್ ಮತ್ತು ಎಳೆಯಲು ನಿಮ್ಮ ಬೆರಳುಗಳನ್ನು ಬಳಸಿ",
             "notTouchscreen": "ಜೂಮ್ ಮತ್ತು ಎಳೆಯಲು ನಿಮ್ಮ ಮೌಸ್ ಮತ್ತು ಚಕ್ರ ಬಳಸಿ"
         }
+    },
+    "timestamp": {
+        "lastNight": "ಕಳೆದ ರಾತ್ರಿ",
+        "lastEvening": "ಕೊನೆಯ ಮುನ್ನಾದಿನ",
+        "yesterday": "ನಿನ್ನೆ",
+        "thisMorning": "ಈ ಬೆಳಿಗ್ಗೆ",
+        "today": "ಇಂದು",
+        "tonight": "ಇಂದು ರಾತ್ರಿ",
+        "tomorrowMorning": "ಟಾಮ್ ಮಾರ್ನ್",
+        "tomorrow": "ನಾಳೆ",
+        "hoursAgo": "{{h}} ಗಂಟೆಗಳ ಹಿಂದೆ",
+        "hourAgo": "{{h}} ಗಂಟೆ ಹಿಂದೆ",
+        "minuteAgo": "{{m}} ನಿಮಿಷದ ಹಿಂದೆ",
+        "minutesAgo": "{{m}} ನಿಮಿಷಗಳ ಹಿಂದೆ",
+        "secondAgo": "{{s}} ಎರಡನೇ ಹಿಂದೆ",
+        "secondsAgo": "{{s}} ಸೆಕೆಂಡುಗಳ ಹಿಂದೆ",
+        "fewSecondsAgo": "ಸೆಕೆಂಡುಗಳ ಹಿಂದೆ",
+        "rightNow": "ಇದೀಗ",
+        "inSecond": "{{s}} ಸೆಕೆಂಡಿನಲ್ಲಿ",
+        "inSeconds": "{{s}} ಸೆಕೆಂಡುಗಳಲ್ಲಿ",
+        "inMinute": "{{m}} ನಿಮಿಷದಲ್ಲಿ",
+        "inMinutes": "{{m}} ನಿಮಿಷಗಳಲ್ಲಿ",
+        "inHour": "{{h}} ಗಂಟೆಯಲ್ಲಿ",
+        "inHours": "{{h}} ಗಂಟೆಗಳಲ್ಲಿ",
+        "inUnderMinute": "1 ನಿಮಿಷದಲ್ಲಿ"
     }
 }

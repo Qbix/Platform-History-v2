@@ -73,5 +73,30 @@
             "touchscreen": "Utilizați degetele pentru a mări și a mări",
             "notTouchscreen": "Utilizați mouse-ul și rotița pentru a mări și a mări"
         }
+    },
+    "timestamp": {
+        "lastNight": "noaptea trecuta",
+        "lastEvening": "ajunul trecut",
+        "yesterday": "ieri",
+        "thisMorning": "aceasta dimineata",
+        "today": "astăzi",
+        "tonight": "astă seară",
+        "tomorrowMorning": "tom dimineața",
+        "tomorrow": "Mâine",
+        "hoursAgo": "Acum {{h}} ore",
+        "hourAgo": "{{h}} acum o oră",
+        "minuteAgo": "{{m}} acum un minut",
+        "minutesAgo": "Acum {{m}} minute",
+        "secondAgo": "{{s}} acum a doua",
+        "secondsAgo": "{{s}} secunde în urmă",
+        "fewSecondsAgo": "acum câteva secunde",
+        "rightNow": "chiar acum",
+        "inSecond": "în {{s}} secundă",
+        "inSeconds": "în {{s}} secunde",
+        "inMinute": "în {{m}} minut",
+        "inMinutes": "în {{m}} minute",
+        "inHour": "în {{h}} oră",
+        "inHours": "în {{h}} ore",
+        "inUnderMinute": "în sub 1 minut"
     }
 }

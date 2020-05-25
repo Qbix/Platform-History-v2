@@ -54,7 +54,7 @@ interface Db_Query_Interface
 	 * Merges additional replacements over the default replacement array,
 	 * which is currently just
 	 *        array ( 
-	 *           '{$prefix}' => $conn['prefix'] 
+	 *           '{{prefix}}' => $conn['prefix'] 
 	 *        )
 	 *  The replacements array is used to replace strings in the SQL
 	 *  before using it. Watch out, because it may replace more than you want!

@@ -104,7 +104,7 @@ Base.db = function () {
  */
 Base.table = function (withoutDbName) {
 	if (Q.Config.get(['Db', 'connections', 'Places', 'indexes', 'Autocomplete'], false)) {
-		return new Db.Expression((withoutDbName ? '' : '{$dbname}.')+'{$prefix}autocomplete');
+		return new Db.Expression((withoutDbName ? '' : '{{dbname}}.')+'{{prefix}}autocomplete');
 	} else {
 		var conn = Db.getConnection('Places');
 		var prefix = conn.prefix || '';

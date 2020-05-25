@@ -91,7 +91,8 @@
         "notice": {
             "text": "لقد تمت دعوتك. {{ClickOrTap}} هنا للقبول والانضمام."
         },
-        "youCanNowPaste": "يمكنك الآن لصق هذا الرابط في مكان ما لدعوة الأشخاص"
+        "youCanNowPaste": "يمكنك الآن لصق هذا الرابط في مكان ما لدعوة الأشخاص",
+        "command": "يدعو"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "تم نسخ الرابط إلى الحافظة",
             "codeCopiedToCb": "تم نسخ الرمز إلى الحافظة",
             "userHasNoVideo": "المشارك ليس لديه فيديو",
-            "openInBrowserAlert": "افتح الرابط في متصفح Safari للانضمام إلى المؤتمر."
+            "openInBrowserAlert": "افتح الرابط في متصفح Safari للانضمام إلى المؤتمر.",
+            "youBeganVideoRecording": "لقد بدأت تسجيل هذا المؤتمر",
+            "youStoppedVideoRecording": "لقد توقفت عن تسجيل هذا المؤتمر"
         },
         "settingsPopup": {
             "webCamera": "كاميرا ويب",
@@ -189,7 +192,12 @@
             "copy": "نسخ",
             "turnOffVideo": "قم بإيقاف تشغيل مشاركة الكاميرا / الشاشة",
             "turnOffScreenSharing": "قم بإيقاف تشغيل مشاركة الشاشة",
-            "cameraIsTurnedOff": "تم إيقاف تشغيل الكاميرا"
+            "cameraIsTurnedOff": "تم إيقاف تشغيل الكاميرا",
+            "startRecording": "ابدأ التسجيل",
+            "stopRecording": "إيقاف التسجيل",
+            "recordingInProgress": "التسجيل قيد التقدم ...",
+            "publishOnTimeline": "نشر على الجدول الزمني",
+            "publishToGroup": "نشر إلى المجموعة"
         },
         "participantsPopup": {
             "disconnect": "قطع الاتصال",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "بأعلى صوتي إلا أنا",
             "maximizeLoudest": "تعظيم بصوت أعلى",
             "staticMaximized": "ثابت تعظيم",
-            "manual": "كتيب"
-        }
+            "manual": "كتيب",
+            "turnOffCamera": "إخفاء الفيديو",
+            "turnOffAudio": "كتم الصوت",
+            "turnOffScreenSharing": "إخفاء مشاركة الشاشة",
+            "turnOnCamera": "عرض الفيديو",
+            "turnOnAudio": "إلغاء كتم الصوت",
+            "turnOnScreenSharing": "إظهار مشاركة الشاشة"
+        },
+        "notAllowedToJoinCall": "ليس لديك إذن للانضمام إلى هذا الدفق.",
+        "streamTitle": "{{1}} مكالمة مباشرة"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "حفظ",
         "Delete": "حذف",
         "Submenu": "القائمة الفرعية"
+    },
+    "errors": {
+        "HiddenFromYou": "هذا المحتوى مخفي عنك."
     }
 }

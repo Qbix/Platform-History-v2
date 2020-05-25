@@ -91,7 +91,8 @@
         "notice": {
             "text": "Tugadh cuireadh duit. {{ClickOrTap}} anseo chun glacadh agus páirt a ghlacadh."
         },
-        "youCanNowPaste": "Is féidir leat an nasc seo a ghreamú anois áit éigin chun cuireadh a thabhairt do dhaoine"
+        "youCanNowPaste": "Is féidir leat an nasc seo a ghreamú anois áit éigin chun cuireadh a thabhairt do dhaoine",
+        "command": "Tabhair cuireadh"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Cóipeáil nasc chuig an ghearrthaisce",
             "codeCopiedToCb": "Cód cóipeáilte chuig an ghearrthaisce",
             "userHasNoVideo": "Níl aon fhíseán ag an rannpháirtí",
-            "openInBrowserAlert": "Oscail nasc i mbrabhsálaí Safari chun dul isteach sa chomhdháil."
+            "openInBrowserAlert": "Oscail nasc i mbrabhsálaí Safari chun dul isteach sa chomhdháil.",
+            "youBeganVideoRecording": "Thosaigh tú ag taifeadadh na comhdhála seo",
+            "youStoppedVideoRecording": "Stop tú ag taifeadadh na comhdhála seo"
         },
         "settingsPopup": {
             "webCamera": "Ceamara Gréasáin",
@@ -189,7 +192,12 @@
             "copy": "Cóip",
             "turnOffVideo": "Múchadh comhroinnt ceamara \/ scáileáin",
             "turnOffScreenSharing": "Comhroinnt scáileáin a mhúchadh",
-            "cameraIsTurnedOff": "Tá an ceamara casta as"
+            "cameraIsTurnedOff": "Tá an ceamara casta as",
+            "startRecording": "Tosaigh Taifeadadh",
+            "stopRecording": "Stop Taifeadadh",
+            "recordingInProgress": "Tá an taifeadadh ar siúl ...",
+            "publishOnTimeline": "Foilsigh ar an amlíne",
+            "publishToGroup": "Foilsigh don ghrúpa"
         },
         "participantsPopup": {
             "disconnect": "Dícheangail",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Loudest Ach amháin Mise",
             "maximizeLoudest": "Uasmhéadaigh Loudest",
             "staticMaximized": "Static Maximized",
-            "manual": "Lámhleabhar"
-        }
+            "manual": "Lámhleabhar",
+            "turnOffCamera": "Folaigh físeán",
+            "turnOffAudio": "Fuaim bhog",
+            "turnOffScreenSharing": "Folaigh comhroinnt scáileáin",
+            "turnOnCamera": "Taispeáin físeán",
+            "turnOnAudio": "Fuaim unmute",
+            "turnOnScreenSharing": "Taispeáin comhroinnt scáileáin"
+        },
+        "notAllowedToJoinCall": "Níl cead agat dul isteach sa sruth seo.",
+        "streamTitle": "{{1}} glao beo"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "Sábháil",
         "Delete": "Scrios",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Tá an t-ábhar seo i bhfolach uait."
     }
 }

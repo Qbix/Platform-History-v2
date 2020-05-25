@@ -1355,7 +1355,7 @@ EOT;
 			$js_base_class_filename = $directory.DS.'Base'.DS.implode(DS, $class_name_parts).'.js';
 			$js_base_class_require = 'Base'.'/'.implode('/', $class_name_parts);
 			$dbname =
-			// because table name can be {$prefix}_Q_plugin or {$prefix}_Q_app we need to know correct table name
+			// because table name can be {{prefix}}_Q_plugin or {{prefix}}_Q_app we need to know correct table name
 			$tables = $this->rawQuery(
 				"SELECT table_comment"
 				." FROM INFORMATION_SCHEMA.TABLES"

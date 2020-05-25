@@ -73,5 +73,30 @@
             "touchscreen": "Gebruik jou vingers om te zoom en sleep",
             "notTouchscreen": "Gebruik jou muis en wiel om te zoom en sleep"
         }
+    },
+    "timestamp": {
+        "lastNight": "gisteraand",
+        "lastEvening": "laaste aand",
+        "yesterday": "gister",
+        "thisMorning": "hierdie môre",
+        "today": "vandag",
+        "tonight": "vanaand",
+        "tomorrowMorning": "Tom Morn",
+        "tomorrow": "môre",
+        "hoursAgo": "{{h}} uur gelede",
+        "hourAgo": "{{h}} uur gelede",
+        "minuteAgo": "{{m}} minuut gelede",
+        "minutesAgo": "{{m}} minute gelede",
+        "secondAgo": "{{s}} tweede gelede",
+        "secondsAgo": "{{s}} sekondes gelede",
+        "fewSecondsAgo": "sekondes gelede",
+        "rightNow": "nou dadelik",
+        "inSecond": "oor {{s}} sekonde",
+        "inSeconds": "binne {{s}} sekondes",
+        "inMinute": "binne {{m}} minuut",
+        "inMinutes": "binne {{m}} minute",
+        "inHour": "binne {{h}} uur",
+        "inHours": "binne {{h}} uur",
+        "inUnderMinute": "binne minder as 1 minuut"
     }
 }

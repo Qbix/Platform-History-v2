@@ -13,7 +13,7 @@
         "AboutOrder": "Información sobre el pedido",
         "PaymentMethod": "Método de pago",
         "ContactInfo": "Datos de contacto",
-        "Pay": "Paga"
+        "Pay": "Pagar"
     },
     "credits": {
         "InviteAcceptedBy": "Invitación aceptada por {{1}}",
@@ -26,7 +26,8 @@
         "Client": "Cliente",
         "To": "a",
         "From": "desde",
-        "HistoryEmpty": "Aún no tienes datos"
+        "HistoryEmpty": "Aún no tienes datos",
+        "SeeHistory": "Ver historial de pagos de {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Establecer información de pago",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "Recibió {{amount}} créditos"
         }
+    },
+    "charge": {
+        "Subject": "Obtiene el pago de {{displayAmount}} de {{call 'publisher.displayName'}} por &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hola, esto es solo para informarle que {{1}} ha cobrado {{2}} por {{3}} por {{4}}"
+    },
+    "charged": {
+        "Subject": "Gracias por su pago por &quot;{{description}}&quot;",
+        "HavePaid": "Hola, {{1}}, esto es solo una confirmación rápida de que has pagado con éxito {{2}} a {{3}} por {{4}}"
     }
 }

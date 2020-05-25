@@ -114,7 +114,7 @@ abstract class Base_Users_Email extends Db_Row
 	static function table($with_db_name = true, $alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', 'Users', 'indexes', 'Email', false)) {
-			return new Db_Expression(($with_db_name ? '{$dbname}.' : '').'{$prefix}'.'email');
+			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'email');
 		} else {
 			$conn = Db::getConnection('Users');
   			$prefix = empty($conn['prefix']) ? '' : $conn['prefix'];

@@ -73,5 +73,30 @@
             "touchscreen": "Koristite prste za zumiranje i povlačenje",
             "notTouchscreen": "Koristite miš i kotač za zumiranje i povlačenje"
         }
+    },
+    "timestamp": {
+        "lastNight": "prošlu noć",
+        "lastEvening": "zadnja uoči",
+        "yesterday": "jučer",
+        "thisMorning": "ovog jutra",
+        "today": "danas",
+        "tonight": "večeras",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "sutra",
+        "hoursAgo": "{{h}} sati prije",
+        "hourAgo": "{{h}} prije sat vremena",
+        "minuteAgo": "{{m}} prije minute",
+        "minutesAgo": "{{m}} minuta",
+        "secondAgo": "{{s}} prije sekunde",
+        "secondsAgo": "{{s}} sekundi",
+        "fewSecondsAgo": "prije nekoliko sekundi",
+        "rightNow": "sada",
+        "inSecond": "za {{s}} sekundu",
+        "inSeconds": "za {{s}} sekundi",
+        "inMinute": "za {{m}} minutu",
+        "inMinutes": "za {{m}} minuta",
+        "inHour": "za {{h}} sat",
+        "inHours": "za {{h}} sati",
+        "inUnderMinute": "za manje od 1 minute"
     }
 }

@@ -12,7 +12,7 @@
     "payment": {
         "AboutOrder": "Upplýsingar um pöntun",
         "PaymentMethod": "Greiðslumáti",
-        "ContactInfo": "Hafa samband",
+        "ContactInfo": "Upplýsingar um tengilið",
         "Pay": "Borga"
     },
     "credits": {
@@ -26,7 +26,8 @@
         "Client": "Viðskiptavinur",
         "To": "að",
         "From": "frá",
-        "HistoryEmpty": "Þú hefur engin gögn ennþá"
+        "HistoryEmpty": "Þú hefur engin gögn ennþá",
+        "SeeHistory": "Sjá greiðslusögu fyrir {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Stilltu greiðsluupplýsingar",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "Fékk {{amount}} einingar"
         }
+    },
+    "charge": {
+        "Subject": "Þú færð {{displayAmount}} greiðslu frá {{call 'publisher.displayName'}} með „{{description}}“",
+        "HasBeenCharged": "Hæ, þetta er bara til að láta þig vita {{1}} hefur verið innheimt {{2}} fyrir {{3}} af {{4}}"
+    },
+    "charged": {
+        "Subject": "Þakka þér fyrir greiðsluna þína fyrir „{{description}}“",
+        "HavePaid": "Hey {{1}}, þetta er bara fljótleg staðfesting á því að þú hafir greitt {{2}} til {{3}} fyrir {{4}}"
     }
 }

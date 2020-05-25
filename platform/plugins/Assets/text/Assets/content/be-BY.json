@@ -10,10 +10,10 @@
         "YouSubscribedTo": "Вы падпісаліся на {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "Інфармацыя пра парадак",
+        "AboutOrder": "Інфармацыя пра заказ",
         "PaymentMethod": "Спосаб аплаты",
         "ContactInfo": "Кантактная інфармацыя",
-        "Pay": "Аплаціць"
+        "Pay": "Плацяць"
     },
     "credits": {
         "InviteAcceptedBy": "Запрашэнне прынятае {{1}}",
@@ -26,7 +26,8 @@
         "Client": "Кліент",
         "To": "да",
         "From": "ад",
-        "HistoryEmpty": "У вас пакуль няма дадзеных"
+        "HistoryEmpty": "У вас пакуль няма дадзеных",
+        "SeeHistory": "Глядзіце гісторыю плацяжоў для {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Усталюйце інфармацыю аб аплаце",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "Атрымаў {{amount}} крэдытаў"
         }
+    },
+    "charge": {
+        "Subject": "Вы атрымліваеце аплату {{displayAmount}} ад {{call 'publisher.displayName'}} праз &quot;{{description}}&quot;",
+        "HasBeenCharged": "Эй, гэта проста, каб паведаміць вам, што {{1}} {{3}} быў спагнаны {{4}}."
+    },
+    "charged": {
+        "Subject": "Дзякуем вам за плату за &quot;{{description}}&quot;",
+        "HavePaid": "Эй, {{1}}, гэта проста хуткае пацверджанне таго, што ты паспяхова заплаціў {{2}} да {{3}} за {{4}}"
     }
 }

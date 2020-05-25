@@ -539,8 +539,42 @@ class Streams_Avatar extends Base_Streams_Avatar
 			'Streams/user/gender'
 		);
 	}
+	
+	/**
+	 * Add this avatar to the list of avatars to be preloaded onto the client
+	 * with the rest of the page
+	 * @method addPreloaded
+	 * @static
+	 * @param {string} $asUserId=null
+	 *	The id of the user from whose point of view the access should be calculated.
+	 *  If this matches the publisherId, just sets full access and calls publishedByFetcher(true).
+	 *  If this is '', only preloads the streams anybody can see.
+	 *  If this is null, the logged-in user's id is used, or '' if no one is logged in
+	 */
+	function addPreloaded($asUserId=null)
+	{
+		self::$preloaded["{$this->publisherId}, {$this->toUserId}"] = $this;
+	}
+	
+	/**
+	 * Remove this avatars from the list of avatars to be preloaded onto the client
+	 * with the rest of the page
+	 * @method removePreloaded
+	 * @static
+	 */
+	function removePreloaded()
+	{
+		unset(self::$preloaded["{$this->publisherId}, {$this->toUserId}"]);
+	}
 
 	protected static $cache;
+	
+	/**
+	 * @property $preloaded
+	 * @static
+	 * @type array
+	 */
+	static $preloaded = array();
 
 	/* * * */
 	/**

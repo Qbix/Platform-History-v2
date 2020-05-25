@@ -1,10 +1,10 @@
 
-# Dump of table {$prefix}access
+# Dump of table {{prefix}}access
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}access`;
+DROP TABLE IF EXISTS `{{prefix}}access`;
 
-CREATE TABLE `{$prefix}access` (
+CREATE TABLE `{{prefix}}access` (
   `publisherId` varbinary(31) NOT NULL COMMENT 'id of user who publishes the stream',
   `streamName` varbinary(255) NOT NULL COMMENT 'the name of the stream whose access is specified',
   `ofUserId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of user whose subscription access being recorded',
@@ -20,12 +20,12 @@ CREATE TABLE `{$prefix}access` (
   KEY `subscriber` (`ofUserId`),
   KEY `contacts` (`ofContactLabel`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='stored primarily on publisherId''s shard';
-# Dump of table {$prefix}avatar
+# Dump of table {{prefix}}avatar
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}avatar`;
+DROP TABLE IF EXISTS `{{prefix}}avatar`;
 
-CREATE TABLE `{$prefix}avatar` (
+CREATE TABLE `{{prefix}}avatar` (
   `toUserId` varbinary(31) NOT NULL COMMENT 'the user the avatar is being displayed to',
   `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'the user whose avatar is being displayed',
   `updatedTime` timestamp NULL DEFAULT NULL COMMENT 'the time this record was last updated',
@@ -36,12 +36,12 @@ CREATE TABLE `{$prefix}avatar` (
 PRIMARY KEY (`toUserId`,`publisherId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='stored primarily on publisherId''s shard';
 
-# Dump of table {$prefix}invite
+# Dump of table {{prefix}}invite
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}invite`;
+DROP TABLE IF EXISTS `{{prefix}}invite`;
 
-CREATE TABLE `{$prefix}invite` (
+CREATE TABLE `{{prefix}}invite` (
   `token` varbinary(255) NOT NULL COMMENT 'unique random token for the link, to embed in invitation URLs',
   `userId` varbinary(31) NOT NULL COMMENT 'id of user who is being invited to the stream',
   `publisherId` varbinary(31) NOT NULL COMMENT 'id of user who publishes the stream',
@@ -61,12 +61,12 @@ CREATE TABLE `{$prefix}invite` (
   KEY `inviting` (`invitingUserId`,`publisherId`,`streamName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='stores invites to the stream on publisher id server';
 
-# Dump of table {$prefix}invited
+# Dump of table {{prefix}}invited
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}invited`;
+DROP TABLE IF EXISTS `{{prefix}}invited`;
 
-CREATE TABLE `{$prefix}invited` (
+CREATE TABLE `{{prefix}}invited` (
   `userId` varbinary(31) NOT NULL COMMENT 'id of user who is being invited to the stream',
   `token` varbinary(255) NOT NULL COMMENT 'unique random token for the link, to embed in invitation URLs',
   `state` enum('pending','accepted','declined','forwarded','expired','claimed') NOT NULL DEFAULT 'pending' COMMENT 'the state of the invite',
@@ -76,12 +76,12 @@ CREATE TABLE `{$prefix}invited` (
   PRIMARY KEY (`userId`,`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='stores tokens where user is invited on userId server';
 
-# Dump of table {$prefix}message
+# Dump of table {{prefix}}message
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}message`;
+DROP TABLE IF EXISTS `{{prefix}}message`;
 
-CREATE TABLE `{$prefix}message` (
+CREATE TABLE `{{prefix}}message` (
   `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of user that publishes the stream to place the message on',
   `streamName` varbinary(255) NOT NULL COMMENT 'the stream to place the message on',
   `ordinal` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'used for storing the order of messages in the stream',
@@ -96,12 +96,12 @@ CREATE TABLE `{$prefix}message` (
   PRIMARY KEY (`publisherId`,`streamName`,`ordinal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='stored primarily on publisherId''s shard';
 
-# Dump of table {$prefix}notification
+# Dump of table {{prefix}}notification
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}notification`;
+DROP TABLE IF EXISTS `{{prefix}}notification`;
 
-CREATE TABLE `{$prefix}notification` (
+CREATE TABLE `{{prefix}}notification` (
   `userId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'the user to notify',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'the owner of the stream causing the notification',
@@ -117,12 +117,12 @@ CREATE TABLE `{$prefix}notification` (
   KEY `count` (`publisherId`,`streamName`,`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='stored primarily on userId''s shard';
 
-# Dump of table {$prefix}participant
+# Dump of table {{prefix}}participant
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}participant`;
+DROP TABLE IF EXISTS `{{prefix}}participant`;
 
-CREATE TABLE `{$prefix}participant` (
+CREATE TABLE `{{prefix}}participant` (
   `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'The id of the user publishing the stream',
   `streamName` varbinary(255) NOT NULL COMMENT 'The name of the stream where people can chat about this message',
   `userId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'The id of the user participating in the stream',
@@ -142,12 +142,12 @@ CREATE TABLE `{$prefix}participant` (
   KEY `updated` (`publisherId`,`streamName`,`updatedTime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='stored primarily on publisherId''s shard';
 
-# Dump of table {$prefix}related_from
+# Dump of table {{prefix}}related_from
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}related_from`;
+DROP TABLE IF EXISTS `{{prefix}}related_from`;
 
-CREATE TABLE `{$prefix}related_from` (
+CREATE TABLE `{{prefix}}related_from` (
   `fromPublisherId` varbinary(31) NOT NULL COMMENT 'publisherId of member',
   `fromStreamName` varbinary(255) NOT NULL COMMENT 'name of member',
   `type` varbinary(255) NOT NULL DEFAULT '' COMMENT 'The type of the relation. Can be empty.',
@@ -158,12 +158,12 @@ CREATE TABLE `{$prefix}related_from` (
   KEY `sorting` (`fromPublisherId`,`fromStreamName`,`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='This table is owned by publisher of the member stream';
 
-# Dump of table {$prefix}related_to
+# Dump of table {{prefix}}related_to
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}related_to`;
+DROP TABLE IF EXISTS `{{prefix}}related_to`;
 
-CREATE TABLE `{$prefix}related_to` (
+CREATE TABLE `{{prefix}}related_to` (
   `toPublisherId` varbinary(31) NOT NULL COMMENT 'publisherId of category',
   `toStreamName` varbinary(255) NOT NULL COMMENT 'name of category',
   `type` varbinary(255) NOT NULL DEFAULT '' COMMENT 'The type of the relation. Can be empty.',
@@ -175,12 +175,12 @@ CREATE TABLE `{$prefix}related_to` (
   KEY `sorting` (`toPublisherId`,`toStreamName`,`type`,`weight`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='This table is owned by publisher of the aggregator stream';
 
-# Dump of table {$prefix}rule
+# Dump of table {{prefix}}rule
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}rule`;
+DROP TABLE IF EXISTS `{{prefix}}rule`;
 
-CREATE TABLE `{$prefix}rule` (
+CREATE TABLE `{{prefix}}rule` (
   `ofUserId` varbinary(31) NOT NULL DEFAULT '',
   `publisherId` varbinary(31) NOT NULL DEFAULT '',
   `streamName` varbinary(255) NOT NULL,
@@ -193,12 +193,12 @@ CREATE TABLE `{$prefix}rule` (
   PRIMARY KEY (`ofUserId`,`publisherId`,`streamName`,`ordinal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='rules applied on the user''s side for notifications coming in';
 
-# Dump of table {$prefix}stream
+# Dump of table {{prefix}}stream
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}stream`;
+DROP TABLE IF EXISTS `{{prefix}}stream`;
 
-CREATE TABLE `{$prefix}stream` (
+CREATE TABLE `{{prefix}}stream` (
   `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of user that publishes the stream',
   `name` varbinary(255) NOT NULL COMMENT 'the name of the stream',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'saved on shard of publisherId',
@@ -219,12 +219,12 @@ CREATE TABLE `{$prefix}stream` (
   PRIMARY KEY (`publisherId`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='stored primarily on publisherId''s shard';
 
-# Dump of table {$prefix}subscription
+# Dump of table {{prefix}}subscription
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}subscription`;
+DROP TABLE IF EXISTS `{{prefix}}subscription`;
 
-CREATE TABLE `{$prefix}subscription` (
+CREATE TABLE `{{prefix}}subscription` (
   `publisherId` varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of user who publishes the stream',
   `streamName` varbinary(255) NOT NULL DEFAULT '' COMMENT 'the name of the stream being subscribed to',
   `ofUserId` varbinary(31) NOT NULL COMMENT 'local to shard of publisherId',
@@ -237,12 +237,12 @@ CREATE TABLE `{$prefix}subscription` (
   KEY `subscriber` (`ofUserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='{"type": [ array of message types ], "notifications": 5}';
 
-# Dump of table {$prefix}total
+# Dump of table {{prefix}}total
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}total`;
+DROP TABLE IF EXISTS `{{prefix}}total`;
 
-CREATE TABLE `{$prefix}total` (
+CREATE TABLE `{{prefix}}total` (
   `publisherId` varbinary(31) NOT NULL,
   `streamName` varbinary(255) NOT NULL,
   `messageType` varbinary(255) NOT NULL,

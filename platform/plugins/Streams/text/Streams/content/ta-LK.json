@@ -91,7 +91,8 @@
         "notice": {
             "text": "நீங்கள் அழைக்கப்பட்டுள்ளீர்கள். {{ClickOrTap}} இங்கு ஏற்கவும் சேரவும்."
         },
-        "youCanNowPaste": "மக்களை அழைக்க இந்த இணைப்பை இப்போது எங்காவது ஒட்டலாம்"
+        "youCanNowPaste": "மக்களை அழைக்க இந்த இணைப்பை இப்போது எங்காவது ஒட்டலாம்",
+        "command": "அழைக்கவும்"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "இணைப்பு கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது",
             "codeCopiedToCb": "குறியீடு கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது",
             "userHasNoVideo": "பங்கேற்பாளருக்கு வீடியோ இல்லை",
-            "openInBrowserAlert": "மாநாட்டில் சேர சஃபாரி உலாவியில் இணைப்பைத் திறக்கவும்."
+            "openInBrowserAlert": "மாநாட்டில் சேர சஃபாரி உலாவியில் இணைப்பைத் திறக்கவும்.",
+            "youBeganVideoRecording": "இந்த மாநாட்டை நீங்கள் பதிவு செய்யத் தொடங்கினீர்கள்",
+            "youStoppedVideoRecording": "இந்த மாநாட்டை பதிவு செய்வதை நிறுத்திவிட்டீர்கள்"
         },
         "settingsPopup": {
             "webCamera": "வலை கேமரா",
@@ -189,7 +192,12 @@
             "copy": "நகல்",
             "turnOffVideo": "கேமரா / திரை பகிர்வை முடக்கு",
             "turnOffScreenSharing": "திரை பகிர்வை முடக்கு",
-            "cameraIsTurnedOff": "கேமரா அணைக்கப்பட்டுள்ளது"
+            "cameraIsTurnedOff": "கேமரா அணைக்கப்பட்டுள்ளது",
+            "startRecording": "பதிவு செய்யத் தொடங்குங்கள்",
+            "stopRecording": "பதிவு செய்வதை நிறுத்து",
+            "recordingInProgress": "பதிவுசெய்தல் நடந்து கொண்டிருக்கிறது ...",
+            "publishOnTimeline": "காலவரிசையில் வெளியிடவும்",
+            "publishToGroup": "குழுவிற்கு வெளியிடுக"
         },
         "participantsPopup": {
             "disconnect": "துண்டி",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "என்னைத் தவிர சத்தமாக",
             "maximizeLoudest": "சத்தமாக அதிகரிக்கவும்",
             "staticMaximized": "நிலையான அதிகபட்சம்",
-            "manual": "கையேடு"
-        }
+            "manual": "கையேடு",
+            "turnOffCamera": "வீடியோவை மறைக்கவும்",
+            "turnOffAudio": "ஆடியோவை முடக்கு",
+            "turnOffScreenSharing": "திரை பகிர்வை மறைக்க",
+            "turnOnCamera": "வீடியோவைக் காட்டு",
+            "turnOnAudio": "ஆடியோவை முடக்கு",
+            "turnOnScreenSharing": "திரை பகிர்வைக் காட்டு"
+        },
+        "notAllowedToJoinCall": "இந்த ஸ்ட்ரீமில் சேர உங்களுக்கு அனுமதி இல்லை.",
+        "streamTitle": "{{1}} நேரடி அழைப்பு"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "சேமி",
         "Delete": "அழி",
         "Submenu": "துணைமெனு"
+    },
+    "errors": {
+        "HiddenFromYou": "இந்த உள்ளடக்கம் உங்களிடமிருந்து மறைக்கப்பட்டுள்ளது."
     }
 }

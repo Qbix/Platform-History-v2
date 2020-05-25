@@ -73,5 +73,30 @@
             "touchscreen": "Sử dụng ngón tay của bạn để phóng to và kéo",
             "notTouchscreen": "Sử dụng chuột và bánh xe của bạn để phóng to và kéo"
         }
+    },
+    "timestamp": {
+        "lastNight": "tối hôm qua",
+        "lastEvening": "đêm trước",
+        "yesterday": "hôm qua",
+        "thisMorning": "buổi sáng này",
+        "today": "hôm nay",
+        "tonight": "tối nay",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "Ngày mai",
+        "hoursAgo": "{{h}} giờ trước",
+        "hourAgo": "{{h}} giờ trước",
+        "minuteAgo": "{{m}} phút trước",
+        "minutesAgo": "{{m}} phút trước",
+        "secondAgo": "{{s}} thứ hai trước",
+        "secondsAgo": "{{s}} giây trước",
+        "fewSecondsAgo": "Cách đây vài giây",
+        "rightNow": "ngay bây giờ",
+        "inSecond": "trong {{s}} giây",
+        "inSeconds": "trong {{s}} giây",
+        "inMinute": "trong {{m}} phút",
+        "inMinutes": "trong {{m}} phút",
+        "inHour": "trong {{h}} giờ",
+        "inHours": "trong {{h}} giờ",
+        "inUnderMinute": "dưới 1 phút"
     }
 }

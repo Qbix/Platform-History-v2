@@ -91,7 +91,8 @@
         "notice": {
             "text": "Fe&#39;ch gwahoddwyd. {{ClickOrTap}} yma i dderbyn ac ymuno."
         },
-        "youCanNowPaste": "Nawr gallwch chi gludo&#39;r ddolen hon yn rhywle i wahodd pobl"
+        "youCanNowPaste": "Nawr gallwch chi gludo&#39;r ddolen hon yn rhywle i wahodd pobl",
+        "command": "Gwahodd"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Copïwyd y ddolen i&#39;r clipfwrdd",
             "codeCopiedToCb": "Copi cod i&#39;r clipfwrdd",
             "userHasNoVideo": "Nid oes gan y cyfranogwr fideo",
-            "openInBrowserAlert": "Dolen agored ym mhorwr Safari i ymuno â&#39;r gynhadledd."
+            "openInBrowserAlert": "Dolen agored ym mhorwr Safari i ymuno â&#39;r gynhadledd.",
+            "youBeganVideoRecording": "Dechreuoch chi recordio&#39;r gynhadledd hon",
+            "youStoppedVideoRecording": "Fe wnaethoch chi roi&#39;r gorau i recordio&#39;r gynhadledd hon"
         },
         "settingsPopup": {
             "webCamera": "Camera Gwe",
@@ -189,7 +192,12 @@
             "copy": "Copi",
             "turnOffVideo": "Diffodd rhannu camera \/ sgrin",
             "turnOffScreenSharing": "Diffodd rhannu sgrin",
-            "cameraIsTurnedOff": "Mae&#39;r camera wedi&#39;i ddiffodd"
+            "cameraIsTurnedOff": "Mae&#39;r camera wedi&#39;i ddiffodd",
+            "startRecording": "Dechreuwch Recordio",
+            "stopRecording": "Stopio Recordio",
+            "recordingInProgress": "Mae recordio ar y gweill ...",
+            "publishOnTimeline": "Cyhoeddi ar y llinell amser",
+            "publishToGroup": "Cyhoeddi i&#39;r grŵp"
         },
         "participantsPopup": {
             "disconnect": "Datgysylltwch",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Loudest Ac eithrio Fi",
             "maximizeLoudest": "Uchafu Uchaf",
             "staticMaximized": "Uchafswm Statig",
-            "manual": "Llawlyfr"
-        }
+            "manual": "Llawlyfr",
+            "turnOffCamera": "Cuddio fideo",
+            "turnOffAudio": "Sain fud",
+            "turnOffScreenSharing": "Cuddio rhannu sgrin",
+            "turnOnCamera": "Dangos fideo",
+            "turnOnAudio": "Sain ddigamsyniol",
+            "turnOnScreenSharing": "Dangos rhannu sgrin"
+        },
+        "notAllowedToJoinCall": "Nid oes gennych ganiatâd i ymuno â&#39;r nant hon.",
+        "streamTitle": "{{1}} galwad byw"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "Arbedwch",
         "Delete": "Dileu",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Mae&#39;r cynnwys hwn wedi&#39;i guddio oddi wrthych chi."
     }
 }

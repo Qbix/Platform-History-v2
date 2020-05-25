@@ -91,7 +91,8 @@
         "notice": {
             "text": "Сте биле поканети. {{ClickOrTap}} овде за да прифатите и да се придружите."
         },
-        "youCanNowPaste": "Сега можете да ја залепите оваа врска некаде за да ги поканите луѓето"
+        "youCanNowPaste": "Сега можете да ја залепите оваа врска некаде за да ги поканите луѓето",
+        "command": "Покани"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Врската копирана во таблата со исечоци",
             "codeCopiedToCb": "Код копиран во таблата со исечоци",
             "userHasNoVideo": "Учесникот нема видео",
-            "openInBrowserAlert": "Отворена врска во прелистувачот Safari за да се приклучи на конференцијата."
+            "openInBrowserAlert": "Отворена врска во прелистувачот Safari за да се приклучи на конференцијата.",
+            "youBeganVideoRecording": "Почнавте да ја снимате оваа конференција",
+            "youStoppedVideoRecording": "Престанавте да ја снимате оваа конференција"
         },
         "settingsPopup": {
             "webCamera": "Веб-камера",
@@ -189,7 +192,12 @@
             "copy": "Копирај",
             "turnOffVideo": "Исклучете го споделувањето на камерата / екранот",
             "turnOffScreenSharing": "Исклучете го споделувањето на екранот",
-            "cameraIsTurnedOff": "Камерата е исклучена"
+            "cameraIsTurnedOff": "Камерата е исклучена",
+            "startRecording": "Започнете со снимање",
+            "stopRecording": "Престанете да снимате",
+            "recordingInProgress": "Снимањето е во тек ...",
+            "publishOnTimeline": "Објавување на времеплов",
+            "publishToGroup": "Објавува во група"
         },
         "participantsPopup": {
             "disconnect": "Исклучете се",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Гласно освен мене",
             "maximizeLoudest": "Максимизирајте го најгласно",
             "staticMaximized": "Статички максимизиран",
-            "manual": "Прирачник"
-        }
+            "manual": "Прирачник",
+            "turnOffCamera": "Сокриј го видеото",
+            "turnOffAudio": "Исклучете го звукот",
+            "turnOffScreenSharing": "Сокриј споделување на екранот",
+            "turnOnCamera": "Покажи видео",
+            "turnOnAudio": "Исклучете го аудио",
+            "turnOnScreenSharing": "Прикажи споделување на екранот"
+        },
+        "notAllowedToJoinCall": "Немате дозвола да се приклучите на овој поток.",
+        "streamTitle": "99 99 999}} во живо повик"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "Зачувај",
         "Delete": "Избриши",
         "Submenu": "Подмену"
+    },
+    "errors": {
+        "HiddenFromYou": "Оваа содржина е скриена од вас."
     }
 }

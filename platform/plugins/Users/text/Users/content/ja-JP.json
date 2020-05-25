@@ -50,7 +50,8 @@
             "title": "連絡先を選択",
             "SearchByName": "名前で検索",
             "CreateAccount": "+新しい連絡先",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.createが見つかりません"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.createが見つかりません",
+            "EmptyContacts": "連絡先が見つかりません..."
         },
         "select": {
             "title": "{{displayName}}の連絡先を選択"

@@ -50,7 +50,8 @@
             "title": "Əlaqə seçin",
             "SearchByName": "Adı ilə axtarın",
             "CreateAccount": "+ Yeni Əlaqə",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create tapılmadı"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create tapılmadı",
+            "EmptyContacts": "Əlaqə tapılmadı ..."
         },
         "select": {
             "title": "{{displayName}}} kontaktını seçin"

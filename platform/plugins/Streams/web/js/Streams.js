@@ -5771,8 +5771,8 @@ Q.onInit.add(function _Streams_onInit() {
 		});
 	}
 
-	Q.beforeActivate.add(_preloadedStreams, 'Streams');
-	Q.loadUrl.options.onResponse.add(_preloadedStreams, 'Streams');
+	Q.beforeActivate.add(_preloaded, 'Streams');
+	Q.loadUrl.options.onResponse.add(_preloaded, 'Streams');
 
 	Q.addEventListener(window, Streams.refresh.options.duringEvents, Streams.refresh);
 	_scheduleUpdate();
@@ -5801,13 +5801,18 @@ Q.Page.beforeUnload("").set(function () {
 	Streams.release(true);
 }, 'Stream');
 
-function _preloadedStreams(elem) {
+function _preloaded(elem) {
 	// Every time before anything is activated,
-	// process any preloaded streams data we find
+	// process any preloaded streams and avatars data we find
 	Q.each(Stream.preloaded, function (i, fields) {
 		Stream.construct(fields, {}, null, true);
 	});
 	Stream.preloaded = null;
+	Q.each(Avatar.preloaded, function (i, fields) {
+		var avatar = new Avatar(fields);
+		Avatar.get.cache.set([fields.publisherId], 0, avatar, [null, avatar]);
+	});
+	Avatar.preloaded = null;
 }
 
 function _updateMessageCache(msg) {

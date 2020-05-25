@@ -91,7 +91,8 @@
         "notice": {
             "text": "તમને આમંત્રણ આપવામાં આવ્યું છે. {{ClickOrTap}} અહીં સ્વીકારવા અને જોડાવા માટે."
         },
-        "youCanNowPaste": "લોકોને આમંત્રિત કરવા માટે તમે હવે આ કડી ક્યાંક પેસ્ટ કરી શકો છો"
+        "youCanNowPaste": "લોકોને આમંત્રિત કરવા માટે તમે હવે આ કડી ક્યાંક પેસ્ટ કરી શકો છો",
+        "command": "આમંત્રિત"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "ક્લિપબોર્ડ પર લિંક ક .પિ કરી",
             "codeCopiedToCb": "ક્લિપબોર્ડ પર કોડની ક .પિ કરી",
             "userHasNoVideo": "સહભાગી પાસે કોઈ વિડિઓ નથી",
-            "openInBrowserAlert": "પરિષદમાં જોડાવા માટે સફારી બ્રાઉઝરમાં લિંક ખોલો."
+            "openInBrowserAlert": "પરિષદમાં જોડાવા માટે સફારી બ્રાઉઝરમાં લિંક ખોલો.",
+            "youBeganVideoRecording": "તમે આ પરિષદ રેકોર્ડ કરવાનું શરૂ કર્યું",
+            "youStoppedVideoRecording": "તમે આ પરિષદનું રેકોર્ડિંગ બંધ કર્યું છે"
         },
         "settingsPopup": {
             "webCamera": "વેબ ક Cameraમેરો",
@@ -189,7 +192,12 @@
             "copy": "નકલ કરો",
             "turnOffVideo": "ક cameraમેરો \/ સ્ક્રીન શેરિંગ બંધ કરો",
             "turnOffScreenSharing": "સ્ક્રીન શેરિંગ બંધ કરો",
-            "cameraIsTurnedOff": "ક Cameraમેરો બંધ છે"
+            "cameraIsTurnedOff": "ક Cameraમેરો બંધ છે",
+            "startRecording": "રેકોર્ડિંગ પ્રારંભ કરો",
+            "stopRecording": "રેકોર્ડિંગ બંધ કરો",
+            "recordingInProgress": "રેકોર્ડિંગ ચાલુ છે ...",
+            "publishOnTimeline": "સમયરેખા પર પ્રકાશિત કરો",
+            "publishToGroup": "જૂથ પર પ્રકાશિત કરો"
         },
         "participantsPopup": {
             "disconnect": "ડિસ્કનેક્ટ કરો",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "મને સિવાય લાઉડેસ્ટ",
             "maximizeLoudest": "મહત્તમ અવાજ કરો",
             "staticMaximized": "સ્થિર મહત્તમ",
-            "manual": "મેન્યુઅલ"
-        }
+            "manual": "મેન્યુઅલ",
+            "turnOffCamera": "વિડિઓ છુપાવો",
+            "turnOffAudio": "Audioડિઓને મ્યૂટ કરો",
+            "turnOffScreenSharing": "સ્ક્રીન શેરિંગ છુપાવો",
+            "turnOnCamera": "વિડિઓ બતાવો",
+            "turnOnAudio": "Mડિઓ અવાજ બંધ કરો",
+            "turnOnScreenSharing": "સ્ક્રીન શેરિંગ બતાવો"
+        },
+        "notAllowedToJoinCall": "તમને આ પ્રવાહમાં જોડાવાની પરવાનગી નથી.",
+        "streamTitle": "} 9 999}} લાઇવ ક callલ"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "સાચવો",
         "Delete": "કા .ી નાખો",
         "Submenu": "સબમેનુ"
+    },
+    "errors": {
+        "HiddenFromYou": "આ સામગ્રી તમારી પાસેથી છુપાયેલ છે."
     }
 }

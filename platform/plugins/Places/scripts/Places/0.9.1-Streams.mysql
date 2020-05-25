@@ -1,59 +1,59 @@
-UPDATE {$prefix}access
+UPDATE {{prefix}}access
 SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE streamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}category
+UPDATE {{prefix}}category
 SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE streamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}invite
+UPDATE {{prefix}}invite
 SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE streamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}message
+UPDATE {{prefix}}message
 SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE streamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}notification
+UPDATE {{prefix}}notification
 SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE streamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}participant
+UPDATE {{prefix}}participant
 SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE streamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}related_from
+UPDATE {{prefix}}related_from
 SET fromStreamName = REPLACE(fromStreamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE fromStreamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}related_from
+UPDATE {{prefix}}related_from
 SET toStreamName = REPLACE(toStreamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE toStreamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}related_to
+UPDATE {{prefix}}related_to
 SET fromStreamName = REPLACE(fromStreamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE fromStreamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}related_to
+UPDATE {{prefix}}related_to
 SET toStreamName = REPLACE(toStreamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE toStreamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}subscription_rule
+UPDATE {{prefix}}subscription_rule
 SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE streamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}stream
+UPDATE {{prefix}}stream
 SET name = REPLACE(name, "Places/timeslot/", "Places/timeslot/main/")
 WHERE name LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}message
+UPDATE {{prefix}}message
 SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE streamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}subscription
+UPDATE {{prefix}}subscription
 SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE streamName LIKE "Places/timeslot/%";
 
-UPDATE {$prefix}message_total
+UPDATE {{prefix}}message_total
 SET streamName = REPLACE(streamName, "Places/timeslot/", "Places/timeslot/main/")
 WHERE streamName LIKE "Places/timeslot/%";

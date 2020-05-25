@@ -11,7 +11,7 @@
     },
     "payment": {
         "AboutOrder": "Infos zur Bestellung",
-        "PaymentMethod": "Zahlungsmethode",
+        "PaymentMethod": "Bezahlverfahren",
         "ContactInfo": "Kontaktinformation",
         "Pay": "Zahlen"
     },
@@ -26,7 +26,8 @@
         "Client": "Klient",
         "To": "zu",
         "From": "von",
-        "HistoryEmpty": "Sie haben noch keine Daten"
+        "HistoryEmpty": "Sie haben noch keine Daten",
+        "SeeHistory": "Siehe Zahlungsverlauf für {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Legen Sie die Zahlungsinformationen fest",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "{{amount}} Credits erhalten"
         }
+    },
+    "charge": {
+        "Subject": "Sie erhalten die Zahlung von {{displayAmount}} von {{call 'publisher.displayName'}} mit &quot;{{description}}&quot;.",
+        "HasBeenCharged": "Hey, dies dient nur dazu, Ihnen mitzuteilen, dass {{1}} von {{4}} {{2}} für {{3}} berechnet wurde."
+    },
+    "charged": {
+        "Subject": "Vielen Dank für Ihre Zahlung für &quot;{{description}}&quot;",
+        "HavePaid": "Hey {{1}}, dies ist nur eine kurze Bestätigung, dass Sie {{100}} erfolgreich an {{3}} für {{4}} bezahlt haben."
     }
 }

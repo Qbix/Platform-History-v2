@@ -898,8 +898,8 @@ function _split() {
 						s.push(_escapeRow(rows[i]));
 					}
 					var sql = "INSERT INTO "+_rowClass.table().toString()
-						.replace('{$prefix}', _dbm.prefix())
-						.replace('{$dbname}', _dbm.dbname())
+						.replace('{{prefix}}', _dbm.prefix())
+						.replace('{{dbname}}', _dbm.dbname())
 						+" ("+Object.keys(rows[0]).join(", ")+") VALUES "+s.join(", ");
 					client.query(sql, function(err) {
 						process.stderr.write("Processed "+(count/total*100).toFixed(1)+"%\r");
@@ -1037,8 +1037,8 @@ function _dump_log (phase, onsuccess) {
 							shard = obj.shards[i];
 							_dbm.reallyConnect(function(client) {
 								var sql = obj.sql
-									.replace('{$prefix}', _dbm.prefix())
-									.replace('{$dbname}', _dbm.dbname());
+									.replace('{{prefix}}', _dbm.prefix())
+									.replace('{{dbname}}', _dbm.dbname());
 								client.query(sql, function(err) {
 									if (failed) return;
 									if (err) {

@@ -13,7 +13,11 @@ function Streams_stream_response_content()
 		throw new Q_Exception_MissingRow(array('table' => 'stream', 'criteria' => 'that name'));
 	}
 	if ($publisherId != $userId and !$stream->testReadLevel('content')) {
-		Q_Response::setNotice('Streams/stream/response/content', 'This content is hidden from you.', true);
+		$text = Q_Text::get('Streams/content');
+		Q_Response::setNotice(
+			'Streams/stream/response/content', 
+			$text['errors']['HiddenFromYou'], true
+		);
 		return '';
 	}
 

@@ -73,5 +73,30 @@
             "touchscreen": "손가락을 사용하여 확대 / 축소 및 드래그",
             "notTouchscreen": "확대 / 축소하려면 마우스와 휠을 사용하십시오."
         }
+    },
+    "timestamp": {
+        "lastNight": "지난 밤",
+        "lastEvening": "마지막 이브",
+        "yesterday": "어제",
+        "thisMorning": "이 아침",
+        "today": "오늘",
+        "tonight": "오늘 밤",
+        "tomorrowMorning": "톰 몬",
+        "tomorrow": "내일",
+        "hoursAgo": "{{h}} 시간 전",
+        "hourAgo": "{{h}} 시간 전",
+        "minuteAgo": "{{m}} 분 전",
+        "minutesAgo": "{{m}} 분 전",
+        "secondAgo": "{{s}} 초 전",
+        "secondsAgo": "{{s}} 초 전",
+        "fewSecondsAgo": "초 전",
+        "rightNow": "지금",
+        "inSecond": "{{s}} 초",
+        "inSeconds": "{{s}} 초 안에",
+        "inMinute": "{{m}} 분 후",
+        "inMinutes": "{{m}} 분 안에",
+        "inHour": "{{h}} 시간 안에",
+        "inHours": "{{h}} 시간 안에",
+        "inUnderMinute": "1 분 안에"
     }
 }

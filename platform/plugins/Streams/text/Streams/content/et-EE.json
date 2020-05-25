@@ -91,7 +91,8 @@
         "notice": {
             "text": "Teid on kutsutud. {{ClickOrTap}} siin, et nõustuda ja liituda."
         },
-        "youCanNowPaste": "Nüüd saate selle lingi kuhugi kleepida, et inimesi kutsuda"
+        "youCanNowPaste": "Nüüd saate selle lingi kuhugi kleepida, et inimesi kutsuda",
+        "command": "Kutsu"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Link kopeeritakse lõikelauale",
             "codeCopiedToCb": "Kood kopeeriti lõikelauale",
             "userHasNoVideo": "Osalejal pole videot",
-            "openInBrowserAlert": "Konverentsiga liitumiseks avage link Safari brauseris."
+            "openInBrowserAlert": "Konverentsiga liitumiseks avage link Safari brauseris.",
+            "youBeganVideoRecording": "Hakkasite seda konverentsi lindistama",
+            "youStoppedVideoRecording": "Lõpetasite selle konverentsi salvestamise"
         },
         "settingsPopup": {
             "webCamera": "Veebikaamera",
@@ -189,7 +192,12 @@
             "copy": "Kopeeri",
             "turnOffVideo": "Lülitage kaamera / ekraani ühiskasutus välja",
             "turnOffScreenSharing": "Lülitage ekraani jagamine välja",
-            "cameraIsTurnedOff": "Kaamera on välja lülitatud"
+            "cameraIsTurnedOff": "Kaamera on välja lülitatud",
+            "startRecording": "Alustage salvestamist",
+            "stopRecording": "Lõpeta salvestamine",
+            "recordingInProgress": "Salvestamine käib ...",
+            "publishOnTimeline": "Avaldage ajateljel",
+            "publishToGroup": "Avaldage rühmas"
         },
         "participantsPopup": {
             "disconnect": "Katkesta ühendus",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Kõige valjem, välja arvatud mina",
             "maximizeLoudest": "Maksimeeri valjem",
             "staticMaximized": "Staatiline maksimeeritud",
-            "manual": "Käsitsi"
-        }
+            "manual": "Käsitsi",
+            "turnOffCamera": "Video peitmine",
+            "turnOffAudio": "Vaigista heli",
+            "turnOffScreenSharing": "Peida ekraani jagamine",
+            "turnOnCamera": "Kuva video",
+            "turnOnAudio": "Vaigista heli sisse",
+            "turnOnScreenSharing": "Kuva ekraani jagamine"
+        },
+        "notAllowedToJoinCall": "Teil pole luba selle vooga liituda.",
+        "streamTitle": "{{1}} otsekõne"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "Salvesta",
         "Delete": "Kustuta",
         "Submenu": "Alammenüü"
+    },
+    "errors": {
+        "HiddenFromYou": "See sisu on teie eest peidetud."
     }
 }

@@ -12,7 +12,7 @@
     "payment": {
         "AboutOrder": "有关订单的信息",
         "PaymentMethod": "付款方法",
-        "ContactInfo": "联系信息",
+        "ContactInfo": "联络资料",
         "Pay": "工资"
     },
     "credits": {
@@ -26,7 +26,8 @@
         "Client": "客户",
         "To": "至",
         "From": "从",
-        "HistoryEmpty": "你还没有数据"
+        "HistoryEmpty": "你还没有数据",
+        "SeeHistory": "查看{{1}}的付款记录"
     },
     "subscriptions": {
         "infoTitle": "设置付款信息",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "收到{{amount}}个学分"
         }
+    },
+    "charge": {
+        "Subject": "您将通过{{description}}从{{call 'publisher.displayName'}}获得{{displayAmount}}的付款",
+        "HasBeenCharged": "嘿，这只是让您知道{{4}}已向{{10001}}收取了{{3}}的{{2}}"
+    },
+    "charged": {
+        "Subject": "感谢您支付“ {{description}}”",
+        "HavePaid": "嘿{{1}}，这只是一个快速确认，您已成功将{{4}}的{{2}}支付给{{3}}"
     }
 }

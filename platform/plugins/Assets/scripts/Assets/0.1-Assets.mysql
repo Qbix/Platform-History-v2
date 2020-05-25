@@ -1,4 +1,4 @@
-CREATE TABLE `{$prefix}badge` (
+CREATE TABLE `{{prefix}}badge` (
   `app` varbinary(31) NOT NULL,
   `name` varchar(63) NOT NULL,
   `title` text NOT NULL,
@@ -8,17 +8,17 @@ CREATE TABLE `{$prefix}badge` (
   PRIMARY KEY (`app`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE `{$prefix}earned` (
+CREATE TABLE `{{prefix}}earned` (
   `userId` bigint(20) unsigned NOT NULL,
   `app` varbinary(255) NOT NULL,
   `badge_name` varchar(255) NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-ALTER TABLE  `{$prefix}earned` ADD INDEX (  `userId` );
-ALTER TABLE  `{$prefix}earned` ADD  `associated_id` VARCHAR( 255 ) NOT NULL;
+ALTER TABLE  `{{prefix}}earned` ADD INDEX (  `userId` );
+ALTER TABLE  `{{prefix}}earned` ADD  `associated_id` VARCHAR( 255 ) NOT NULL;
 
-CREATE TABLE `{$prefix}leader` (
+CREATE TABLE `{{prefix}}leader` (
   `app` varbinary(255) NOT NULL,
   `day` date NOT NULL,
   `userId` bigint(20) unsigned NOT NULL,

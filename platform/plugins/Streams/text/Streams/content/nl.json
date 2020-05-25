@@ -91,7 +91,8 @@
         "notice": {
             "text": "Je bent uitgenodigd. {{ClickOrTap}} hier om te accepteren en deel te nemen."
         },
-        "youCanNowPaste": "Je kunt deze link nu ergens plakken om mensen uit te nodigen"
+        "youCanNowPaste": "Je kunt deze link nu ergens plakken om mensen uit te nodigen",
+        "command": "Nodig uit"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Link gekopieerd naar klembord",
             "codeCopiedToCb": "Code gekopieerd naar klembord",
             "userHasNoVideo": "Deelnemer heeft geen video",
-            "openInBrowserAlert": "Open de link in de Safari-browser om deel te nemen aan de conferentie."
+            "openInBrowserAlert": "Open de link in de Safari-browser om deel te nemen aan de conferentie.",
+            "youBeganVideoRecording": "Je begon deze conferentie op te nemen",
+            "youStoppedVideoRecording": "Je bent gestopt met het opnemen van deze conferentie"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -189,7 +192,12 @@
             "copy": "Kopiëren",
             "turnOffVideo": "Schakel camera \/ scherm delen uit",
             "turnOffScreenSharing": "Schakel scherm delen uit",
-            "cameraIsTurnedOff": "Camera is uitgeschakeld"
+            "cameraIsTurnedOff": "Camera is uitgeschakeld",
+            "startRecording": "Begin met opnemen",
+            "stopRecording": "Stop met opnemen",
+            "recordingInProgress": "Er wordt opgenomen ...",
+            "publishOnTimeline": "Publiceer op tijdlijn",
+            "publishToGroup": "Publiceer naar groep"
         },
         "participantsPopup": {
             "disconnect": "verbinding verbreken",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "Luidste behalve ik",
             "maximizeLoudest": "Maximaliseer Luidste",
             "staticMaximized": "Statisch gemaximaliseerd",
-            "manual": "Handleiding"
-        }
+            "manual": "Handleiding",
+            "turnOffCamera": "Video verbergen",
+            "turnOffAudio": "Audio dempen",
+            "turnOffScreenSharing": "Scherm delen verbergen",
+            "turnOnCamera": "Video weergeven",
+            "turnOnAudio": "Dempen van audio opheffen",
+            "turnOnScreenSharing": "Scherm delen weergeven"
+        },
+        "notAllowedToJoinCall": "Je hebt geen toestemming om deel te nemen aan deze stream.",
+        "streamTitle": "{{1}} live-oproep"
     },
     "types": {
         "Streams\/invited": {
@@ -336,5 +352,8 @@
         "Save": "Opslaan",
         "Delete": "Delete",
         "Submenu": "submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Deze inhoud is voor u verborgen."
     }
 }

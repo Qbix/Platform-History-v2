@@ -73,5 +73,30 @@
             "touchscreen": "ใช้นิ้วของคุณเพื่อซูมและลาก",
             "notTouchscreen": "ใช้เมาส์และล้อของคุณเพื่อซูมและลาก"
         }
+    },
+    "timestamp": {
+        "lastNight": "คืนที่แล้ว",
+        "lastEvening": "วันก่อน",
+        "yesterday": "เมื่อวาน",
+        "thisMorning": "ยามเช้านี้",
+        "today": "ในวันนี้",
+        "tonight": "คืนนี้",
+        "tomorrowMorning": "ทอมมอญ",
+        "tomorrow": "วันพรุ่งนี้",
+        "hoursAgo": "{{h}} ชั่วโมงก่อน",
+        "hourAgo": "{{h}} ชั่วโมงก่อน",
+        "minuteAgo": "{{m}} นาทีก่อน",
+        "minutesAgo": "{{m}} นาทีก่อน",
+        "secondAgo": "{{s}} วินาทีที่ผ่านมา",
+        "secondsAgo": "{{s}} วินาทีก่อน",
+        "fewSecondsAgo": "วินาทีที่ผ่านมา",
+        "rightNow": "ตอนนี้",
+        "inSecond": "ใน {{s}} วินาที",
+        "inSeconds": "ใน {{s}} วินาที",
+        "inMinute": "ใน {{m}} นาที",
+        "inMinutes": "ใน {{m}} นาที",
+        "inHour": "ใน {{h}} ชั่วโมง",
+        "inHours": "ใน {{h}} ชั่วโมง",
+        "inUnderMinute": "ในไม่เกิน 1 นาที"
     }
 }

@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `{$prefix}charge` (
+CREATE TABLE IF NOT EXISTS `{{prefix}}charge` (
   `userId` varbinary(31) NOT NULL,
   `id` varbinary(255) NOT NULL,
   `subscriptionId` varbinary(255) NOT NULL,

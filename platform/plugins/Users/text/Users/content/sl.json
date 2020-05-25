@@ -50,7 +50,8 @@
             "title": "Izberite stik",
             "SearchByName": "Iščite po imenu",
             "CreateAccount": "+ Nov stik",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ni mogoče najti"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ni mogoče najti",
+            "EmptyContacts": "Stikov ni bilo mogoče najti ..."
         },
         "select": {
             "title": "Izberite stik osebe {{displayName}}"

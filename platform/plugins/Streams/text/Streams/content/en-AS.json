@@ -91,7 +91,8 @@
         "notice": {
             "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         },
-        "youCanNowPaste": "You can now paste this link somewhere to invite people"
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "Invite"
     },
     "followup": {
         "mobile": {
@@ -166,7 +167,9 @@
             "linkCopiedToCb": "Link copied to clipboard",
             "codeCopiedToCb": "Code copied to clipboard",
             "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "openInBrowserAlert": "Open link in Safari browser to join the conference.",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -186,7 +189,12 @@
             "copy": "Copy",
             "turnOffVideo": "Turn off camera/screen sharing",
             "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off"
+            "cameraIsTurnedOff": "Camera is turned off",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "recordingInProgress": "Recording is in progress...",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group"
         },
         "participantsPopup": {
             "disconnect": "Disconnect",
@@ -195,8 +203,16 @@
             "loudestExceptMe": "Loudest Except Me",
             "maximizeLoudest": "Maximize Loudest",
             "staticMaximized": "Static Maximized",
-            "manual": "Manual"
-        }
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} live call"
     },
     "types": {
         "Streams/invited": {
@@ -333,5 +349,8 @@
         "Save": "Save",
         "Delete": "Delete",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
     }
 }

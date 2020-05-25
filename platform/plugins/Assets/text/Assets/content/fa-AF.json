@@ -26,7 +26,8 @@
         "Client": "مشتری",
         "To": "به",
         "From": "از جانب",
-        "HistoryEmpty": "شما هنوز داده ای ندارید"
+        "HistoryEmpty": "شما هنوز داده ای ندارید",
+        "SeeHistory": "مشاهده تاریخچه پرداخت 999 {}"
     },
     "subscriptions": {
         "infoTitle": "اطلاعات پرداخت را تنظیم کنید",
@@ -84,5 +85,13 @@
         "Assets/credits/received": {
             "content": "اعتبار 999 {دریافت کرد"
         }
+    },
+    "charge": {
+        "Subject": "شما مبلغ 999 {} {از {{call 'publisher.displayName'}} توسط &quot;{{description}}&quot; دریافت می کنید",
+        "HasBeenCharged": "سلام ، این فقط به شما اطلاع می دهد {99 999}}} {1000}}} 1001 {}} توسط 2 1002} charged charged پرداخت شده است"
+    },
+    "charged": {
+        "Subject": "از پرداخت خود برای &quot;{999}}&quot; متشکریم",
+        "HavePaid": "سلام {999}} ، این فقط یک تأیید سریع است که شما با موفقیت paid 1000}}} 1001 {} 1002 {paid successfully پرداخت کرده اید"
     }
 }

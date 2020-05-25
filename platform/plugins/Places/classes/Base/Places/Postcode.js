@@ -125,7 +125,7 @@ Base.db = function () {
  */
 Base.table = function (withoutDbName) {
 	if (Q.Config.get(['Db', 'connections', 'Places', 'indexes', 'Postcode'], false)) {
-		return new Db.Expression((withoutDbName ? '' : '{$dbname}.')+'{$prefix}postcode');
+		return new Db.Expression((withoutDbName ? '' : '{{dbname}}.')+'{{prefix}}postcode');
 	} else {
 		var conn = Db.getConnection('Places');
 		var prefix = conn.prefix || '';

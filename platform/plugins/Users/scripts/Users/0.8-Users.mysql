@@ -1,9 +1,9 @@
-# Dump of table {$prefix}app_user
+# Dump of table {{prefix}}app_user
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}app_user`;
+DROP TABLE IF EXISTS `{{prefix}}app_user`;
 
-CREATE TABLE `{$prefix}app_user` (
+CREATE TABLE `{{prefix}}app_user` (
   `userId` varbinary(31) NOT NULL DEFAULT '',
   `provider` enum('native','facebook','twitter','google','yahoo')  NOT NULL,
   `appId` varbinary(200) NOT NULL COMMENT 'An external app id registered with the provider',
@@ -18,12 +18,12 @@ CREATE TABLE `{$prefix}app_user` (
   UNIQUE KEY `provider` (`provider`,`appId`,`provider_uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Represents a user in our 3rd party app with a provider like facebook';
 
-# Dump of table {$prefix}contact
+# Dump of table {{prefix}}contact
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}contact`;
+DROP TABLE IF EXISTS `{{prefix}}contact`;
 
-CREATE TABLE `{$prefix}contact` (
+CREATE TABLE `{{prefix}}contact` (
   `userId` varbinary(31)  NOT NULL DEFAULT '',
   `label` varchar(63)  NOT NULL,
   `contactUserId` varbinary(31)  NOT NULL DEFAULT '',
@@ -32,12 +32,12 @@ CREATE TABLE `{$prefix}contact` (
   PRIMARY KEY (`userId`,`label`,`contactUserId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Represents user contacts in the system';
 
-# Dump of table {$prefix}device
+# Dump of table {{prefix}}device
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}device`;
+DROP TABLE IF EXISTS `{{prefix}}device`;
 
-CREATE TABLE `{$prefix}device` (
+CREATE TABLE `{{prefix}}device` (
   `userId` varbinary(31)  NOT NULL,
   `deviceId` varbinary(255)  NOT NULL,
   `platform` enum('ios','android')  NOT NULL,
@@ -49,12 +49,12 @@ CREATE TABLE `{$prefix}device` (
   PRIMARY KEY (`userId`,`deviceId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Represents devices that can receive push notifications, etc.';
 
-# Dump of table {$prefix}email
+# Dump of table {{prefix}}email
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}email`;
+DROP TABLE IF EXISTS `{{prefix}}email`;
 
-CREATE TABLE `{$prefix}email` (
+CREATE TABLE `{{prefix}}email` (
   `address` varbinary(255)  NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
@@ -69,12 +69,12 @@ CREATE TABLE `{$prefix}email` (
   KEY `userId` (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-# Dump of table {$prefix}external_from
+# Dump of table {{prefix}}external_from
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}external_from`;
+DROP TABLE IF EXISTS `{{prefix}}external_from`;
 
-CREATE TABLE `{$prefix}external_from` (
+CREATE TABLE `{{prefix}}external_from` (
   `publisherId` varbinary(31)  NOT NULL,
   `xid` varbinary(31)  NOT NULL COMMENT 'The external user id',
   `userId` varbinary(31)  NOT NULL,
@@ -83,12 +83,12 @@ CREATE TABLE `{$prefix}external_from` (
   PRIMARY KEY (`publisherId`,`xid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Stores external ids for users';
 
-# Dump of table {$prefix}external_to
+# Dump of table {{prefix}}external_to
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}external_to`;
+DROP TABLE IF EXISTS `{{prefix}}external_to`;
 
-CREATE TABLE `{$prefix}external_to` (
+CREATE TABLE `{{prefix}}external_to` (
   `publisherId` varbinary(31)  NOT NULL,
   `userId` varbinary(31)  NOT NULL,
   `xid` varbinary(31)  NOT NULL COMMENT 'The external user id',
@@ -96,24 +96,24 @@ CREATE TABLE `{$prefix}external_to` (
   PRIMARY KEY (`publisherId`,`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Stores external ids for users';
 
-# Dump of table {$prefix}identify
+# Dump of table {{prefix}}identify
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}identify`;
+DROP TABLE IF EXISTS `{{prefix}}identify`;
 
-CREATE TABLE `{$prefix}identify` (
+CREATE TABLE `{{prefix}}identify` (
   `identifier` varbinary(255)  NOT NULL,
   `state` enum('verified','future')  NOT NULL COMMENT '"future" is a mapping to a user which may later be adopted by someone',
   `userId` varbinary(31)  NOT NULL,
   PRIMARY KEY (`identifier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Mapping table for finding users based on various info';
 
-# Dump of table {$prefix}label
+# Dump of table {{prefix}}label
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}label`;
+DROP TABLE IF EXISTS `{{prefix}}label`;
 
-CREATE TABLE `{$prefix}label` (
+CREATE TABLE `{{prefix}}label` (
   `userId` varbinary(31) NOT NULL,
   `label` varchar(63) NOT NULL,
   `icon` varbinary(255) NOT NULL,
@@ -121,12 +121,12 @@ CREATE TABLE `{$prefix}label` (
   PRIMARY KEY (`userId`,`label`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Enables display and renaming of labels and their icons';
 
-# Dump of table {$prefix}link
+# Dump of table {{prefix}}link
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}link`;
+DROP TABLE IF EXISTS `{{prefix}}link`;
 
-CREATE TABLE `{$prefix}link` (
+CREATE TABLE `{{prefix}}link` (
   `identifier` varbinary(255)  NOT NULL,
   `userId` varbinary(31)  NOT NULL DEFAULT '' COMMENT 'user who imported the contact link',
   `extraInfo` varchar(255)  NOT NULL COMMENT 'json possibly including "labels" array, "firstName", "lastName"',
@@ -134,12 +134,12 @@ CREATE TABLE `{$prefix}link` (
   PRIMARY KEY (`identifier`, `userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Represents imported contact links that can turn into contacts';
 
-# Dump of table {$prefix}mobile
+# Dump of table {{prefix}}mobile
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}mobile`;
+DROP TABLE IF EXISTS `{{prefix}}mobile`;
 
-CREATE TABLE `{$prefix}mobile` (
+CREATE TABLE `{{prefix}}mobile` (
   `number` varbinary(255)  NOT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
@@ -157,12 +157,12 @@ CREATE TABLE `{$prefix}mobile` (
   KEY `userId` (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Represents mobile accounts that can receive sms via mobile numbers';
 
-# Dump of table {$prefix}oAuth
+# Dump of table {{prefix}}oAuth
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}oAuth`;
+DROP TABLE IF EXISTS `{{prefix}}oAuth`;
 
-CREATE TABLE `{$prefix}oAuth` (
+CREATE TABLE `{{prefix}}oAuth` (
   `userId` varbinary(31) NOT NULL COMMENT 'The id of the user who granted access',
   `client_id` varbinary(31) NOT NULL COMMENT 'The user id of the app',
   `state` varbinary(255) NOT NULL COMMENT 'For client to protect against CSRF attacks',
@@ -174,28 +174,28 @@ CREATE TABLE `{$prefix}oAuth` (
   PRIMARY KEY (`userId`,`client_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='For implementing three-legged oAuth 2.0';
 
-# Dump of table {$prefix}session
+# Dump of table {{prefix}}session
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}session`;
+DROP TABLE IF EXISTS `{{prefix}}session`;
 
-CREATE TABLE `{$prefix}session` (
+CREATE TABLE `{{prefix}}session` (
   `id` varbinary(255)  NOT NULL COMMENT 'the session id',
   `content` varchar(4095)  NOT NULL COMMENT 'json format',
   `php` varchar(4095)  NOT NULL COMMENT 'php serialized session data',
-  `deviceId` varbinary(255)  NOT NULL COMMENT 'the id of the device in {$prefix}devices',
+  `deviceId` varbinary(255)  NOT NULL COMMENT 'the id of the device in {{prefix}}devices',
   `timeout` int(11) NOT NULL DEFAULT 0 COMMENT 'how long until the pincode needs to be entered',
   `duration` int(11) NOT NULL DEFAULT 0 DEFAULT '0' COMMENT 'the number of seconds until the session is considered expired',
   `updatedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'PHP timestamp of last time this row was saved',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='This table replicates PHP session data in JS-readable format';
 
-# Dump of table {$prefix}total
+# Dump of table {{prefix}}total
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}total`;
+DROP TABLE IF EXISTS `{{prefix}}total`;
 
-CREATE TABLE `{$prefix}total` (
+CREATE TABLE `{{prefix}}total` (
   `forType` varbinary(31)  NOT NULL,
   `forId` varbinary(255)  NOT NULL,
   `voteCount` bigint(20) NOT NULL DEFAULT '0',
@@ -205,12 +205,12 @@ CREATE TABLE `{$prefix}total` (
   PRIMARY KEY (`forType`,`forId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Represents a total of the votes';
 
-# Dump of table {$prefix}user
+# Dump of table {{prefix}}user
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}user`;
+DROP TABLE IF EXISTS `{{prefix}}user`;
 
-CREATE TABLE `{$prefix}user` (
+CREATE TABLE `{{prefix}}user` (
   `id` varbinary(31)  NOT NULL DEFAULT '0',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
@@ -233,12 +233,12 @@ CREATE TABLE `{$prefix}user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Represents a user in the system';
 
-# Dump of table {$prefix}vote
+# Dump of table {{prefix}}vote
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `{$prefix}vote`;
+DROP TABLE IF EXISTS `{{prefix}}vote`;
 
-CREATE TABLE `{$prefix}vote` (
+CREATE TABLE `{{prefix}}vote` (
   `userId` varbinary(31)  NOT NULL,
   `forType` varbinary(31)  NOT NULL,
   `forId` varbinary(255)  NOT NULL,

@@ -50,7 +50,8 @@
             "title": "Dewiswch gyswllt",
             "SearchByName": "Chwilio yn ôl enw",
             "CreateAccount": "+ Cyswllt Newydd",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create heb ei ddarganfod"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create heb ei ddarganfod",
+            "EmptyContacts": "Cysylltiadau heb eu darganfod ..."
         },
         "select": {
             "title": "Dewiswch gyswllt o {{displayName}}"

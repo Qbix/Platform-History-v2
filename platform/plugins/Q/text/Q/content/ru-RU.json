@@ -73,5 +73,30 @@
             "touchscreen": "Используйте свои пальцы, чтобы увеличить и перетащить",
             "notTouchscreen": "Используйте мышь и колесо для масштабирования и перетаскивания"
         }
+    },
+    "timestamp": {
+        "lastNight": "прошлой ночью",
+        "lastEvening": "последний канун",
+        "yesterday": "вчерашний день",
+        "thisMorning": "это утро",
+        "today": "Cегодня",
+        "tonight": "сегодня ночью",
+        "tomorrowMorning": "Том Морн",
+        "tomorrow": "завтра",
+        "hoursAgo": "{{h}} часов назад",
+        "hourAgo": "{{h}} час назад",
+        "minuteAgo": "{{m}} минуту назад",
+        "minutesAgo": "{{m}} минут назад",
+        "secondAgo": "{{s}} второй назад",
+        "secondsAgo": "{{s}} секунд назад",
+        "fewSecondsAgo": "секунд назад",
+        "rightNow": "прямо сейчас",
+        "inSecond": "через {{s}} секунду",
+        "inSeconds": "через {{s}} секунд",
+        "inMinute": "через {{m}} минуту",
+        "inMinutes": "через {{m}} минут",
+        "inHour": "через {{h}} час",
+        "inHours": "в {{h}} часах",
+        "inUnderMinute": "менее чем за 1 минуту"
     }
 }

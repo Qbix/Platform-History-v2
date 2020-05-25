@@ -81,7 +81,7 @@ class Q_Plugin
 
 		$db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
 
-		$tableName = "{$prefix}Q_{$type}";
+		$tableName = "{{prefix}}Q_{$type}";
 
 		if ($db->dbms() === 'mysql') {
 			$cols = false;
@@ -200,7 +200,7 @@ class Q_Plugin
 			if ($db->dbms() === 'mysql') {
 				// Do we already have $name installed?
 				// Checking SCHEMA plugin version in the DB.
-				$tableName = "{$prefix}Q_{$type}";
+				$tableName = "{{prefix}}Q_{$type}";
 				$cols = false;
 				try {
 					$cols = $db->rawQuery("SHOW COLUMNS FROM $tableName")
@@ -232,7 +232,7 @@ class Q_Plugin
 				}
 			}
 
-			$res = $db->select('version, versionPHP', "{$prefix}Q_{$type}")
+			$res = $db->select('version, versionPHP', "{{prefix}}Q_{$type}")
 				->where(array($type => $name))
 				->fetchAll(PDO::FETCH_ASSOC);
 
@@ -316,7 +316,7 @@ class Q_Plugin
 					if (substr($script, -4) === '.php') {
 						echo "Processing PHP file: $script " . PHP_EOL;
 						Q::includeFile($scriptsdir.DS.$script);
-						$db->update("{$prefix}Q_{$type}")->set(array(
+						$db->update("{{prefix}}Q_{$type}")->set(array(
 							'versionPHP' => $new_version
 						))->where(array(
 							$type => $name
@@ -326,8 +326,8 @@ class Q_Plugin
 
 					echo "Processing SQL file: $script ";
 					$sqltext = file_get_contents($scriptsdir.DS.$script);
-					$sqltext = str_replace('{$prefix}', $prefix, $sqltext);
-					$sqltext = str_replace('{$dbname}', $db->dbname, $sqltext);
+					$sqltext = str_replace('{{prefix}}', $prefix, $sqltext);
+					$sqltext = str_replace('{{dbname}}', $db->dbname, $sqltext);
 
 					/**
 					 * @event Q/Plugin/installSchema {before}
@@ -366,7 +366,7 @@ class Q_Plugin
 							'version' => $new_version,
 							'versionPHP' => 0
 						);
-						$db->insert("{$prefix}Q_{$type}", $fields)
+						$db->insert("{{prefix}}Q_{$type}", $fields)
 							->onDuplicateKeyUpdate(array('version' => $new_version))
 							->execute();
 						$current_version = $new_version;
@@ -402,7 +402,7 @@ class Q_Plugin
 				if (Q::compareVersion($version, $current_version) > 0
 					or Q::compareVersion($version, $current_versionPHP) > 0) {
 					echo '+ ' . ucfirst($type) . " '$name' schema on '$conn_name'$shard_text (v. $original_version -> $version) installed".PHP_EOL;
-					$db->insert("{$prefix}Q_{$type}", array(
+					$db->insert("{{prefix}}Q_{$type}", array(
 						$type => $name,
 						'version' => $version,
 						'versionPHP' => $version

@@ -50,7 +50,8 @@
             "title": "संपर्क चुनें",
             "SearchByName": "नाम से खोजें",
             "CreateAccount": "+ नया संपर्क",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create नहीं मिला"
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create नहीं मिला",
+            "EmptyContacts": "संपर्क नहीं मिले ..."
         },
         "select": {
             "title": "{{displayName}} के संपर्क का चयन करें"

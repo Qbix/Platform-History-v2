@@ -1,0 +1,56 @@
+.Assets_service_composer .Q_dialog_content {
+	padding: 5px;
+}
+.Assets_service_composer .Q_dialog_content form > * {
+	display: block;
+	font-size: 20px;
+}
+.Assets_service_composer .Q_dialog_content form .Q_error {
+	border-bottom: 1px solid red;
+}
+.Assets_service_composer .Q_dialog_content input {
+	height: 40px;
+	margin-bottom: 10px;
+}
+.Assets_service_composer .Q_dialog_content input[name=price] {
+	padding-left: 20px;
+}
+.Assets_service_composer .Q_dialog_content label[for=price] {
+	position: relative;
+}
+.Assets_service_composer .Q_dialog_content label[for=price]:after {
+	display: block;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	content: '$';
+	left: 5px;
+	top: 10px;
+	line-height: 20px;
+}
+.Assets_service_composer .Q_dialog_content textarea {
+	height: 80px;
+	margin-bottom: 10px;
+}
+.Assets_service_composer .Q_dialog_content button {
+	margin: 0 auto;
+}
+
+.Assets_service_preview_tool .icon-edit {
+	display: none;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 40px;
+	color: red;
+	font-size: 23px;
+}
+.Assets_service_preview_tool[data-writeLevel=true] .icon-edit {
+	display: block;
+}
+.Assets_service_preview_tool .Assets_service_preview_price {
+	padding-left: 10px;
+}
+.Assets_service_preview_tool .Streams_preview_title {
+	display: inline-block;
+}

@@ -92,7 +92,7 @@ abstract class Base_Users_Quota extends Db_Row
 	static function table($with_db_name = true, $alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', 'Users', 'indexes', 'Quota', false)) {
-			return new Db_Expression(($with_db_name ? '{$dbname}.' : '').'{$prefix}'.'quota');
+			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'quota');
 		} else {
 			$conn = Db::getConnection('Users');
   			$prefix = empty($conn['prefix']) ? '' : $conn['prefix'];

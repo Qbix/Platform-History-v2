@@ -10,7 +10,7 @@
         "YouSubscribedTo": "Du er blevet abonneret på {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "Info om bestilling",
+        "AboutOrder": "Info om ordre",
         "PaymentMethod": "Betalingsmetode",
         "ContactInfo": "Kontaktoplysninger",
         "Pay": "Betale"
@@ -26,7 +26,8 @@
         "Client": "Klient",
         "To": "til",
         "From": "fra",
-        "HistoryEmpty": "Du har endnu ingen data"
+        "HistoryEmpty": "Du har endnu ingen data",
+        "SeeHistory": "Se betalingshistorik for {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Angiv betalingsoplysninger",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "Modtaget {{amount}} kreditter"
         }
+    },
+    "charge": {
+        "Subject": "Du får betaling af {{displayAmount}} fra {{call 'publisher.displayName'}} med &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hej, dette er bare for at fortælle dig {{1}} er blevet debiteret {{2}} for {{3}} af {{4}}"
+    },
+    "charged": {
+        "Subject": "Tak for din betaling for &quot;{{description}}&quot;",
+        "HavePaid": "Hej {{1}}, dette er bare en hurtig bekræftelse af, at du har betalt {{2}} til {{3}} for {{4}}"
     }
 }

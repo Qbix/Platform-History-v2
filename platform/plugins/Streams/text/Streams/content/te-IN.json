@@ -91,7 +91,8 @@
         "notice": {
             "text": "మీరు ఆహ్వానించబడ్డారు. {{ClickOrTap}} ఇక్కడ అంగీకరించి చేరడానికి."
         },
-        "youCanNowPaste": "ప్రజలను ఆహ్వానించడానికి మీరు ఇప్పుడు ఈ లింక్‌ను ఎక్కడో అతికించవచ్చు"
+        "youCanNowPaste": "ప్రజలను ఆహ్వానించడానికి మీరు ఇప్పుడు ఈ లింక్‌ను ఎక్కడో అతికించవచ్చు",
+        "command": "ఆహ్వానించండి"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "లింక్ క్లిప్‌బోర్డ్‌కు కాపీ చేయబడింది",
             "codeCopiedToCb": "కోడ్ క్లిప్‌బోర్డ్‌కు కాపీ చేయబడింది",
             "userHasNoVideo": "పాల్గొనేవారికి వీడియో లేదు",
-            "openInBrowserAlert": "సమావేశంలో చేరడానికి సఫారి బ్రౌజర్‌లో లింక్‌ను తెరవండి."
+            "openInBrowserAlert": "సమావేశంలో చేరడానికి సఫారి బ్రౌజర్‌లో లింక్‌ను తెరవండి.",
+            "youBeganVideoRecording": "మీరు ఈ సమావేశాన్ని రికార్డ్ చేయడం ప్రారంభించారు",
+            "youStoppedVideoRecording": "మీరు ఈ సమావేశాన్ని రికార్డ్ చేయడం మానేశారు"
         },
         "settingsPopup": {
             "webCamera": "వెబ్ కెమెరా",
@@ -189,7 +192,12 @@
             "copy": "కాపీ",
             "turnOffVideo": "కెమెరా / స్క్రీన్ భాగస్వామ్యాన్ని ఆపివేయండి",
             "turnOffScreenSharing": "స్క్రీన్ భాగస్వామ్యాన్ని ఆపివేయండి",
-            "cameraIsTurnedOff": "కెమెరా ఆపివేయబడింది"
+            "cameraIsTurnedOff": "కెమెరా ఆపివేయబడింది",
+            "startRecording": "రికార్డింగ్ ప్రారంభించండి",
+            "stopRecording": "రికార్డింగ్ ఆపు",
+            "recordingInProgress": "రికార్డింగ్ పురోగతిలో ఉంది ...",
+            "publishOnTimeline": "కాలక్రమంలో ప్రచురించండి",
+            "publishToGroup": "సమూహానికి ప్రచురించండి"
         },
         "participantsPopup": {
             "disconnect": "డిస్కనెక్ట్",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "నన్ను తప్ప బిగ్గరగా",
             "maximizeLoudest": "లౌడెస్ట్ పెంచండి",
             "staticMaximized": "స్టాటిక్ గరిష్టీకరించబడింది",
-            "manual": "మాన్యువల్"
-        }
+            "manual": "మాన్యువల్",
+            "turnOffCamera": "వీడియోను దాచండి",
+            "turnOffAudio": "ఆడియోను మ్యూట్ చేయండి",
+            "turnOffScreenSharing": "స్క్రీన్ భాగస్వామ్యాన్ని దాచండి",
+            "turnOnCamera": "వీడియో చూపించు",
+            "turnOnAudio": "ఆడియోను అన్‌మ్యూట్ చేయండి",
+            "turnOnScreenSharing": "స్క్రీన్ భాగస్వామ్యాన్ని చూపించు"
+        },
+        "notAllowedToJoinCall": "ఈ స్ట్రీమ్‌లో చేరడానికి మీకు అనుమతి లేదు.",
+        "streamTitle": "{{1}} ప్రత్యక్ష కాల్"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "సేవ్",
         "Delete": "తొలగించు",
         "Submenu": "సిద్ధంగా"
+    },
+    "errors": {
+        "HiddenFromYou": "ఈ కంటెంట్ మీ నుండి దాచబడింది."
     }
 }

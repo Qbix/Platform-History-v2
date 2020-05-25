@@ -48,7 +48,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		$conn = $this->db->connection();
 		$prefix = empty($conn['prefix']) ? '' : $conn['prefix'];
 		$this->replacements = array(
-			'{$prefix}' => $prefix
+			'{{prefix}}' => $prefix
 		);
 
 		// Put default contents in the clauses
@@ -379,8 +379,8 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	function getSQL ($callback = null, $template = false)
 	{
 		if (!$template) {
-			if (isset($this->db->dbname)) $this->replacements['{$dbname}'] = $this->db->dbname;
-			if (isset($this->db->prefix)) $this->replacements['{$prefix}'] = $this->db->prefix;
+			if (isset($this->db->dbname)) $this->replacements['{{dbname}}'] = $this->db->dbname;
+			if (isset($this->db->prefix)) $this->replacements['{{prefix}}'] = $this->db->prefix;
 		}
 		$repres = $this->build();
 		$keys = array_keys($this->parameters);
@@ -445,7 +445,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * which is currently just
 	 * @example
 	 *      array (
-	 *         '{$prefix}' => $conn['prefix']
+	 *         '{{prefix}}' => $conn['prefix']
 	 *      )
 	 *
 	 * The replacements array is used to replace strings in the SQL before using it. Watch out,
@@ -524,8 +524,8 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 
 		$stmts = array();
 		// make sure SQL template will be ready for sharding. reallyConnect will add new values
-		unset($this->replacements['{$dbname}']);
-		unset($this->replacements['{$prefix}']);
+		unset($this->replacements['{{dbname}}']);
+		unset($this->replacements['{{prefix}}']);
 
 		$this->startedTime = Q::milliseconds(true);
 

@@ -91,7 +91,8 @@
         "notice": {
             "text": "Int ġejt mistiedna. {{ClickOrTap}} hawn biex taċċetta u tissieħeb."
         },
-        "youCanNowPaste": "Issa tista &#39;tippejstja din il-link x&#39;imkien biex tistieden lin-nies"
+        "youCanNowPaste": "Issa tista &#39;tippejstja din il-link x&#39;imkien biex tistieden lin-nies",
+        "command": "Tistieden"
     },
     "followup": {
         "mobile": {
@@ -169,7 +170,9 @@
             "linkCopiedToCb": "Link ikkuppjata mal-clipboard",
             "codeCopiedToCb": "Kodiċi kkupjat fil-clipboard",
             "userHasNoVideo": "Parteċipant m&#39;għandux video",
-            "openInBrowserAlert": "Rabta miftuħa fil-browser Safari biex tingħaqad mal-konferenza."
+            "openInBrowserAlert": "Rabta miftuħa fil-browser Safari biex tingħaqad mal-konferenza.",
+            "youBeganVideoRecording": "Int bdejt tirrekordja din il-konferenza",
+            "youStoppedVideoRecording": "Int waqaf tirreġistra din il-konferenza"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -189,7 +192,12 @@
             "copy": "Ikkopja",
             "turnOffVideo": "Itfi kamera / iskrin tal-qsim",
             "turnOffScreenSharing": "Itfi l-qsim tal-iskrin",
-            "cameraIsTurnedOff": "Kamera tkun mitfija"
+            "cameraIsTurnedOff": "Kamera tkun mitfija",
+            "startRecording": "Ibda r-Reġistrazzjoni",
+            "stopRecording": "Waqqaf ir-Reġistrazzjoni",
+            "recordingInProgress": "Ir-reġistrazzjoni tinsab għaddejja ...",
+            "publishOnTimeline": "Ippubblika fuq l-iskeda ta ’żmien",
+            "publishToGroup": "Ippubblika għall-grupp"
         },
         "participantsPopup": {
             "disconnect": "Skonnettja",
@@ -198,8 +206,16 @@
             "loudestExceptMe": "L-Isbaħ Ħlief Lili",
             "maximizeLoudest": "Timmassimizza l-Oħxon",
             "staticMaximized": "Massiku statiku",
-            "manual": "Manwal"
-        }
+            "manual": "Manwal",
+            "turnOffCamera": "Aħbi l-video",
+            "turnOffAudio": "Akkordja l-awdjo",
+            "turnOffScreenSharing": "Aħbi l-qsim tal-iskrin",
+            "turnOnCamera": "Uri vidjow",
+            "turnOnAudio": "Akkordja l-awdjo",
+            "turnOnScreenSharing": "Uri l-qsim tal-iskrin"
+        },
+        "notAllowedToJoinCall": "M&#39;għandekx permess biex tissieħeb f&#39;dan il-fluss.",
+        "streamTitle": "{{1}} telefonata diretta"
     },
     "types": {
         "Streams/invited": {
@@ -336,5 +352,8 @@
         "Save": "Issejvja",
         "Delete": "Ħassar",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Dan il-kontenut huwa moħbi minnek."
     }
 }

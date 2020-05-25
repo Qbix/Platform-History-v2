@@ -10,9 +10,9 @@
         "YouSubscribedTo": "Nag-subscribe ka sa {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "Impormasyon ukol sa pagkakasunud-sunod",
+        "AboutOrder": "Impormasyon tungkol sa pagkakasunud-sunod",
         "PaymentMethod": "Paraan ng Pagbayad",
-        "ContactInfo": "Impormasyon ng contact",
+        "ContactInfo": "Impormasyon sa pakikipag-ugnay",
         "Pay": "Magbayad"
     },
     "credits": {
@@ -26,7 +26,8 @@
         "Client": "Kliyente",
         "To": "sa",
         "From": "mula sa",
-        "HistoryEmpty": "Wala ka pang data"
+        "HistoryEmpty": "Wala ka pang data",
+        "SeeHistory": "Tingnan ang kasaysayan ng pagbabayad para sa {{1}}"
     },
     "subscriptions": {
         "infoTitle": "Itakda ang Impormasyon sa Pagbabayad",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "Natanggap ang {{amount}} credits"
         }
+    },
+    "charge": {
+        "Subject": "Makakakuha ka ng pagbabayad ng {{displayAmount}} mula sa {{call 'publisher.displayName'}} sa pamamagitan ng &quot;{{description}}&quot;",
+        "HasBeenCharged": "Uy, ito ay upang ipaalam sa iyo na {{1}} ay sisingilin {{2}} para sa {{3}} sa pamamagitan ng {{4}}"
+    },
+    "charged": {
+        "Subject": "Salamat sa iyong pagbabayad para sa &quot;{{description}}&quot;",
+        "HavePaid": "Hoy {{1}}, ito ay isang mabilis na kumpirmasyon na matagumpay mong nabayaran {{2}} sa {{3}} para sa {{4}}"
     }
 }

@@ -26,7 +26,8 @@
         "Client": "Klient",
         "To": "kuni",
         "From": "alates",
-        "HistoryEmpty": "Teil pole veel andmeid"
+        "HistoryEmpty": "Teil pole veel andmeid",
+        "SeeHistory": "Vaadake {{1}} maksete ajalugu"
     },
     "subscriptions": {
         "infoTitle": "Määrake makseteave",
@@ -84,5 +85,13 @@
         "Assets\/credits\/received": {
             "content": "Saanud {{amount}} krediiti"
         }
+    },
+    "charge": {
+        "Subject": "Saate {{displayAmount}} makse {{call 'publisher.displayName'}} arvelt {{description}} &quot;",
+        "HasBeenCharged": "Hei, see on ainult selleks, et teile teada anda, {{1}} on {{3}} {{3}} eest {{2}} arve sisse nõudnud."
+    },
+    "charged": {
+        "Subject": "Täname teid konto {{description}} eest makse eest",
+        "HavePaid": "Hei {{1}}, see on vaid kiire kinnitus, et olete {{2}} {{3}} -le {{4}}"
     }
 }

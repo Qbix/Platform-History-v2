@@ -73,5 +73,30 @@
             "touchscreen": "Izmantojiet pirkstus, lai tuvinātu un velciet",
             "notTouchscreen": "Izmantojiet peli un riteni, lai tuvinātu un velciet"
         }
+    },
+    "timestamp": {
+        "lastNight": "pagājušo nakti",
+        "lastEvening": "pēdējā priekšvakarā",
+        "yesterday": "vakar",
+        "thisMorning": "šorīt",
+        "today": "šodien",
+        "tonight": "šovakar",
+        "tomorrowMorning": "tom rītā",
+        "tomorrow": "rīt",
+        "hoursAgo": "Pirms {{h}} stundām",
+        "hourAgo": "Pirms {{h}} stundas",
+        "minuteAgo": "Pirms {{m}} minūtes",
+        "minutesAgo": "Pirms {{m}} minūtēm",
+        "secondAgo": "Pirms {{s}}",
+        "secondsAgo": "Pirms {{s}} sekundēm",
+        "fewSecondsAgo": "pirms dažām sekundēm",
+        "rightNow": "tieši tagad",
+        "inSecond": "pēc {{s}} sekundes",
+        "inSeconds": "pēc {{s}} sekundēm",
+        "inMinute": "pēc {{m}} minūtes",
+        "inMinutes": "pēc {{m}} minūtēm",
+        "inHour": "pēc {{h}} stundas",
+        "inHours": "pēc {{h}} stundām",
+        "inUnderMinute": "pēc 1 minūtes"
     }
 }

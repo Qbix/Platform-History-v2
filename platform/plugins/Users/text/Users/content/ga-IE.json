@@ -50,7 +50,8 @@
             "title": "Roghnaigh teagmháil",
             "SearchByName": "Cuardaigh de réir ainm",
             "CreateAccount": "+ Teagmháil Nua",
-            "CreateAccountNotFound": "Ní aimsíodh Q.Users.Cordova.UI.cre"
+            "CreateAccountNotFound": "Ní aimsíodh Q.Users.Cordova.UI.cre",
+            "EmptyContacts": "Teagmhálacha nár aimsíodh ..."
         },
         "select": {
             "title": "Roghnaigh teagmháil le {{displayName}}"
