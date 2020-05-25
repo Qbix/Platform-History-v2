@@ -405,12 +405,12 @@
     width: 100%;
 }
 
-.Q_horizontalOrientation.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant.screensharing {
+.Q_horizontalOrientation.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant.Streams_webrtc_chat-active-screen-sharing {
     transform: none;
     -webkit-transform:none;
     -moz-transform:none;
 }
-.Q_horizontalOrientation.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant.screensharing {
+.Q_verticalOrientation.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant.Streams_webrtc_chat-active-screen-sharing {
     transform: none;
     -webkit-transform:none;
     -moz-transform:none;
@@ -599,6 +599,10 @@
     left: 18px;
     border-radius: 50%;
 }
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn.Streams_webrtc_no-camera-video .Streams_webrtc_mute-screensharing-btn {
+    top: 0;
+    left: 0;
+}
 .Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn.Streams_webrtc_screensharing-active .Streams_webrtc_mute-screensharing-btn{
     display: block;
 }
@@ -611,9 +615,17 @@
     top: 0;
     left: 0;
 }
+
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn.Streams_webrtc_no-camera-video.Streams_webrtc_screensharing-active .Streams_webrtc_mute-camera-btn{
+    display: none;
+}
 .Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn.Streams_webrtc_screensharing-active svg {
     height: 32px;
     width: 32px;
+}
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn.Streams_webrtc_screensharing-active.Streams_webrtc_no-camera-video svg {
+    height: 50px;
+    width: 50px;
 }
 .Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity {
     flex: 1;
@@ -658,7 +670,8 @@ and (max-device-width : 320px) {
 }
 .Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_chat-participant,
 .Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_chat-participant {
-    display: block;
+    display: flex;
+    flex-direction: column;
     background-color: lightgrey;
     box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
     overflow: hidden;
@@ -725,6 +738,11 @@ and (max-device-width : 320px) {
     position: absolute;
     object-fit: cover;
 }
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_chat-active-screen-sharing.Streams_webrtc_maximized-main-screen .Streams_webrtc_chat-participant-video video.isHorizontal,
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_chat-active-screen-sharing.Streams_webrtc_maximized-main-screen .Streams_webrtc_chat-participant-video video.isVertical{
+    object-fit: contain;
+}
+
 .Streams_webrtc_mobile-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_minimized-small-screen .Streams_webrtc_chat-participant-video video.isHorizontal {
     width: 100%;
     height: 100%;
@@ -782,7 +800,8 @@ and (max-device-width : 320px) {
 .Streams_webrtc_mobile-screen .Streams_webrtc_maximized-main-screen .Streams_webrtc_participant-screen-btns {
     z-index: 2;
 }
-.Streams_webrtc_mobile-screen .Streams_webrtc_maximized-main-screen .Streams_webrtc_participant-screen-btns button {
+.Streams_webrtc_mobile-screen .Streams_webrtc_participant-screen-btns button,
+.Streams_webrtc_mobile-screen .Streams_webrtc_participant-screen-btns button {
     background: transparent;
     border: 0;
 }
@@ -1439,6 +1458,10 @@ and (max-device-width : 320px) {
     left: 18px;
     border-radius: 50%;
 }
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn.Streams_webrtc_no-camera-video .Streams_webrtc_mute-screensharing-btn {
+    top: 0;
+    left: 0;
+}
 .Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn.Streams_webrtc_screensharing-active .Streams_webrtc_mute-screensharing-btn{
     display: block;
 }
@@ -1448,9 +1471,16 @@ and (max-device-width : 320px) {
     top: 0;
     left: 0;
 }
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn.Streams_webrtc_no-camera-video.Streams_webrtc_screensharing-active .Streams_webrtc_mute-camera-btn{
+    display: none;
+}
 .Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn.Streams_webrtc_screensharing-active svg {
     height: 32px;
     width: 32px;
+}
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn.Streams_webrtc_screensharing-active.Streams_webrtc_no-camera-video svg {
+    height: 50px;
+    width: 50px;
 }
 .Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity {
     flex: 1;
@@ -2099,8 +2129,8 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
     bottom: -5% !important;
 }
 
-.flipped video,
-.flipped canvas{
+.Streams_webrtc_chat-flipped-video video,
+.Streams_webrtc_chat-flipped-video canvas{
     transform: rotateY(180deg);
     -webkit-transform:rotateY(180deg); /* Safari and Chrome */
     -moz-transform:rotateY(180deg); /* Firefox */

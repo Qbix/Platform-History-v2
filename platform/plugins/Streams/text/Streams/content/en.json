@@ -226,6 +226,7 @@
             "loudestExceptMe": "Loudest Except Me",
             "maximizeLoudest": "Maximize Loudest",
             "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
             "manual": "Manual",
             "turnOffCamera": "Hide video",
             "turnOffAudio": "Mute audio",

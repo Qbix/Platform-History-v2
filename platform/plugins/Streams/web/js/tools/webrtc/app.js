@@ -1701,6 +1701,7 @@ window.WebRTCconferenceLib = function app(options){
                     videoCanvas.className = "Streams_webrtc_video-stream-canvas";
                     videoCanvas.style.position = 'absolute';
                     videoCanvas.style.top = '-999999999px';
+                    videoCanvas.style.top = '0';
                     videoCanvas.style.left = '0';
                     videoCanvas.style.zIndex = '9999999999999999999';
                     videoCanvas.style.backgroundColor = 'transparent';
@@ -1726,7 +1727,7 @@ window.WebRTCconferenceLib = function app(options){
                     this.kind = null;
                     this.participant = participant;
                     this.name = participant.username;
-                    this.avatar = participant.avatar.image;
+                    this.avatar = participant.avatar ? participant.avatar.image : null;
                     this.track = null;
                     this.mediaStream = null;
                     this.htmlVideoEl = null;
@@ -1789,6 +1790,8 @@ window.WebRTCconferenceLib = function app(options){
 
                                 let trackCurrentlyRendered = false;
                                 for (let c in renderedTracks) {
+                                    log('updateCanvasLayout trackCurrentlyRendered', vTracks[s], renderedTracks[c].track)
+
                                     if(vTracks[s] == renderedTracks[c].track)  {
                                         trackCurrentlyRendered = true;
                                         break;
@@ -1814,14 +1817,14 @@ window.WebRTCconferenceLib = function app(options){
                                     if(vTracks.length > 1) {
                                         log('updateCanvasLayout !trackCurrentlyRendered if1')
 
-                                        let z;
+                                        /*let z;
                                         for(z = renderedTracks.length - 1; z >= 0 ; z--){
                                             if(renderedTracks[z].kind == 'video') {
                                                 let currentTracks = renderedTracks.splice(z, 1);
                                                 tracksToRemove = tracksToRemove.concat(currentTracks);
                                                 tracksToAdd = tracksToAdd.concat(currentTracks);
                                             }
-                                        }
+                                        }*/
 
                                         let canvasStream = new CanvasStream(participants[v]);
                                         canvasStream.kind = 'video';
@@ -1911,8 +1914,11 @@ window.WebRTCconferenceLib = function app(options){
 
                             if(renderedTracks[x].kind == 'video') {
                                 for (let m in vTracks) {
-                                    log('updateCanvasLayout remove not active', vTracks[m].parentScreen.isActive)
-                                    if(renderedTracks[x].track == vTracks[m] && vTracks[m].parentScreen.isActive) trackIsLive = true;
+                                    if(renderedTracks[x].track == vTracks[m] && vTracks[m].parentScreen.isActive) {
+                                        log('updateCanvasLayout remove not active', vTracks[m].parentScreen.isActive)
+
+                                        trackIsLive = true;
+                                    }
                                 }
                             } else {
                                 if(audioIsEnabled) trackIsLive = true;
@@ -4441,17 +4447,21 @@ window.WebRTCconferenceLib = function app(options){
          */
         function processDataTrackMessage(data, participant) {
             data = JSON.parse(data);
-            if(data.type == 'screensharingStarting' || data.type == 'screensharingStarted' || data.type == 'screensharingFailed' || data.type == 'afterCamerasToggle') {
+            if(data.type == 'screensharingStarting' || /*data.type == 'screensharingStarted' ||*/ data.type == 'screensharingFailed' || data.type == 'afterCamerasToggle') {
+                log('processDataTrackMessage', data.type)
                 if(data.type == 'screensharingStarting') {
                     var screenForScreensharing = app.screensInterface.createParticipantScreen(participant);
                     screenForScreensharing.screensharing = true;
                 }
                 app.event.dispatch(data.type, {content:data.content != null ? data.content : null, participant: participant});
             } else if(data.type == 'trackIsBeingAdded') {
+                log('processDataTrackMessage', data.type)
                 var screenSharingTrackHandler = function(e) {
                     log('trackIsBeingAdded screenSharingTrackHandler', e.track, data)
                     if(e.participant != participant) return;
                     e.track.screensharing = true;
+                    app.event.dispatch('screensharingStarted', {content:data.content != null ? data.content : null, participant: participant});
+
                     app.event.off('trackSubscribed', screenSharingTrackHandler);
                 }
 
