@@ -18,7 +18,9 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 				title: $("input[name=title]", dialog).val(),
 				content: $("textarea[name=description]", dialog).val(),
 				attributes: {
-					price: $("input[name=price]", dialog).val()
+					price: $("input[name=price]", dialog).val(),
+					link: $("input[name=link]", dialog).val(),
+					payment: $("select[name=payment]", dialog).val()
 				}
 			}]);
 		}, function () {
@@ -94,7 +96,9 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 			tool.openDialog(function (dialog) {
 				stream.pendingFields.title = $("input[name=title]", dialog).val();
 				stream.pendingFields.content = $("textarea[name=description]", dialog).val();
+				stream.setAttribute('payment', $("select[name=payment]", dialog).val());
 				stream.setAttribute('price', $("input[name=price]", dialog).val());
+				stream.setAttribute('link', $("input[name=link]", dialog).val());
 				stream.save({
 					onSave: function () {
 						stream.refresh();
@@ -102,7 +106,9 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 				});
 			}, null, {
 				title: stream.fields.title,
+				payment: stream.getAttribute('payment'),
 				price: stream.getAttribute('price'),
+				link: stream.getAttribute('link'),
 				description: stream.fields.content
 			});
 		});
@@ -119,6 +125,22 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 			className: "Assets_service_composer",
 			onActivate: function (dialog) {
 				$("input,textarea", dialog).plugin('Q/placeholders');
+
+				var $price = $("label[for=price]", dialog);
+				var payment = Q.getObject("payment", fields) || 'free';
+				if (payment === 'free') {
+					$price.hide();
+				}
+
+				var $payment = $("select[name=payment]", dialog).on('change', function () {
+					if ($payment.val() === 'free') {
+						$price.hide();
+					} else {
+						$price.show();
+					}
+				});
+
+				$payment.val(payment);
 
 				$("button[name=save]", dialog).on(Q.Pointer.fastclick, function () {
 					var $form = $(this).closest("form");
@@ -166,7 +188,9 @@ Q.Template.set('Assets/service/preview',
 Q.Template.set("Assets/service/composer",
 	'<form>' +
 	'	<input type="text" name="title" required placeholder="{{text.services.NewServiceTemplate.TitlePlaceholder}}" value="{{title}}">' +
+	'	<select name="payment"><option value="free">{{text.services.FreeEvent}}</option><option value="optional">{{text.services.OptionalContribution}}</option><option value="required">{{text.services.RequiredPayment}}</option></select>' +
 	'	<label for="price"><input type="text" name="price" required placeholder="{{text.services.NewServiceTemplate.PricePlaceholder}}" value="{{price}}"></label>' +
+	'	<input type="text" name="link" placeholder="{{text.services.NewServiceTemplate.LinkPlaceholder}}" value="{{link}}">' +
 	'	<textarea name="description" placeholder="{{text.services.NewServiceTemplate.DescriptionPlaceholder}}">{{description}}</textarea>' +
 	'	<button name="save" class="Q_button">{{text.services.NewServiceTemplate.SaveService}}</button>' +
 	'</form>'
