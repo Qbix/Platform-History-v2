@@ -435,7 +435,7 @@ box-shadow:0 0 10px #000; }
 
 /* Some quick styles for various tools */
 
-.Q_actions_action { cursor: pointer !important; }
+.Q_actions_action { cursor: pointer !important; display: inline-block; zoom: 1; }
 .Q_zoomer { z-index: 9000; border-radius: 1px; box-shadow: black 3px 3px 10px; }
 .Q_gallery_caption { z-index: 201; position: absolute; }
 .Q_contextual { display: none; }
