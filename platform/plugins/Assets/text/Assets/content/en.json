@@ -99,10 +99,14 @@
 			"Title": "New Service Template",
 			"TitlePlaceholder": "Service title",
 			"PricePlaceholder": "Set price",
+			"LinkPlaceholder": "set additional info link",
 			"DescriptionPlaceholder": "Service description",
 			"SaveService": "Save Service"
 		},
 		"ManageServiceTemplates": "Manage Service Templates",
-		"ManageServices": "Manage Services"
+		"ManageServices": "Manage Services",
+		"FreeEvent": "Free event",
+		"OptionalContribution": "Optional contribution",
+		"RequiredPayment": "Required payment"
 	}
 }
