@@ -9295,7 +9295,7 @@ function _activateTools(toolElement, options, shared) {
 					tool = tool || this;
 					return _activateTools.alreadyActivated;
 				}
-				this.activating = true
+				this.activating = true;
 				this.activated = false;
 				this.initialized = false;
 				try {
@@ -9340,6 +9340,8 @@ function _activateTools(toolElement, options, shared) {
 					_activateToolHandlers["id:"+normalizedId] &&
 					_activateToolHandlers["id:"+normalizedId].handle.call(this, this.options);
 					Q.Tool.beingActivated = prevTool;
+
+					Q.handle(Q.Tool.onActivate(normalizedName), this);
 				} catch (e) {
 					debugger; // pause here if debugging
 					console.warn(e);
