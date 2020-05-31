@@ -12499,7 +12499,45 @@ Q.prompt.options = {
 	maxlength: 100,
 	noClose: true
 };
-Q.extend(Q.confirm.options, Q.text.prompt);
+Q.extend(Q.prompt.options, Q.text.prompt);
+
+/**
+ * Opens some content with a title inside an interface construct,
+ * by trying registered Q.invoke.handlers one by one in turn,
+ * until one returns false (to stop trying next ones).
+ * Use Array.prototype.unshift() to prepend handlers to the beginning of the list.
+ * @method invoke
+ * @static
+ * @param {Object} options These options are passed to each handler.
+ *   They should contain at least "title", "content" and "trigger"
+ * @param {String|Element} options.title
+ *   The title to display
+ * @param {String|Element} options.content
+ *   The content to display
+ * @param {Element} options.trigger 
+ *   The element that the user interacted with to result in this function call
+ * @param {Function} [options.callback]
+ *   Optional callback to call once the title and content has been shown and activated.
+ *   Should be passed the container element by the handler.
+ * @return {Integer} Returns the index of the handler that executed in Q.invoke.handlers
+ */
+Q.invoke = function (options) {
+	Q.each(Q.invoke.handlers, function (i, handler) {
+		var ret = Q.handle(handler, Q, options);
+		if (ret === false) {
+			return false
+		}
+	});
+};
+Q.invoke.handlers = [
+	function (options) {
+		Q.Dialogs.push(Q.extend({}, options, {
+			title: title,
+			content: content,
+			onActivate: options.callback || function () { }
+		}));
+	}
+];
 
 /**
  * Methods relating to internationalization

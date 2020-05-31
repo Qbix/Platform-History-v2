@@ -1126,6 +1126,34 @@ function _updateAttributes() {
 	}
 }
 
+Q.invoke.handlers.unshift(function (options, callback) {
+	var index, node, columns;
+	if (options.trigger) {
+		node = options.trigger;
+		while (node) {
+			if (node.hasClass) {
+				if (node.hasClass('Q_columns_column')) {
+					index = node.getAttribute('data-index');
+				}
+				if (node.hasClass('Q_columns_tool')) {
+					columns = node.Q.tools['q_columns'];
+				}
+			}
+			node = node.parentNode;
+		}
+		if (columns) {
+			columns.close({min: index+1}, null, {animation: {duration: 0}});
+			columns.open(Q.extend({}, options, {
+				title: options.title,
+				column: options.content,
+				onOpen: options.callback
+			}));
+			return false;
+		}
+	}
+});
+	
+
 })(Q, jQuery);
 
 /*! jQuery requestAnimationFrame - 0.2.3-pre - 2016-10-26
