@@ -115,7 +115,6 @@
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-bottom: 15px solid #000;
-  margin-left: -20px;
 }
 
 .Q_contextual .Q_contextual_bottom_arrow
@@ -124,7 +123,6 @@
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-top: 15px solid #000;
-  margin-left: -20px;
 }
 
 .Q_contextual_arrows_preloaded
