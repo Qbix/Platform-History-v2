@@ -471,7 +471,7 @@ div.Q_placeholder { pointer-events: none; }
 .Q_lazy_load { opacity: 0; }
 .Q_lazy_loaded { opacity: 1; transition: opacity 300ms; }
 .Q_gallery .Q_lazy_load,
-.Q_gallery .Q_lazy_loaded { opacity: 1; }
+.Q_gallery .Q_lazy_loaded { opacity: 1; transition: none; }
 
 #dialogs_slot { display: none; }
 
