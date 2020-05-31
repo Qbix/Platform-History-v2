@@ -2424,7 +2424,7 @@ Sp.url = function (messageOrdinal, baseUrl) {
 	});
 	var sep = urlString.indexOf('?') >= 0 ? '&' : '?';
 	var qs = messageOrdinal ? sep+messageOrdinal : "";
-	return Q.url(urlString + sep + qs);
+	return Q.url(urlString + qs);
 };
 /**
  * Save a stream to the server
