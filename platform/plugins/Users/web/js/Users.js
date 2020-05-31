@@ -1317,6 +1317,16 @@
 					.val(username)
 					.width($('#Users_login_identifier').width() - 30)
 			);
+			var $b = $('<button />', {
+				"type": "submit",
+				"class": "Q_button Q_main_button Users_login_start "
+			}).html(Q.text.Users.login.registerButton)
+			.on(Q.Pointer.touchclick, function (e) {
+				Users.submitClosestForm.apply(this, arguments);
+			}).on(Q.Pointer.click, function (e) {
+				e.preventDefault(); // prevent automatic submit on click
+			});
+			var _registering = false;
 			var register_form = $('<form method="post" class="Users_register_form" />')
 				.attr('action', Q.action("Users/register"))
 				.data('form-type', 'register')
@@ -1326,13 +1336,16 @@
 				.append($('<input type="hidden" name="icon[40.png]" />').val(src40))
 				.append($('<input type="hidden" name="icon[50.png]" />').val(src50))
 				.append($('<input type="hidden" name="icon[80.png]" />').val(src80))
-				.append($('<div class="Users_login_get_started">&nbsp;</div>')
-					.append(
-						$('<button type="submit" class="Q_button Users_login_start Q_main_button" />')
-							.html(Q.text.Users.login.registerButton)
-					)).submit(function () {
+				.append(
+					$('<div class="Users_login_get_started"></div>')
+					.append($b)
+				).submit(function () {
+					if (_registering) {
+						return false;
+					}
 					var $this = $(this);
 					$this.removeData('cancelSubmit');
+					$b.addClass('Q_working')[0].disabled = true;
 					document.activeElement.blur();
 					if ($('#Users_agree').length && !$('#Users_agree').is(':checked')) {
 						$this.data('cancelSubmit', true);
@@ -1340,6 +1353,7 @@
 							if (confirm(Q.text.Users.login.confirmTerms)) {
 								$('#Users_agree').attr('checked', 'checked');
 								$('#Users_agree')[0].checked = true;
+								$b.addClass('Q_working')[0].disabled = true;
 								$this.submit();
 							}
 						}, 300);

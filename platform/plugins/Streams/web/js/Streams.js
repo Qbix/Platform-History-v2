@@ -4810,39 +4810,42 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 		"type": "submit",
 		"class": "Q_button Q_main_button Streams_login_start "
 	}).html(Q.text.Users.login.registerButton)
-		.on(Q.Pointer.touchclick, function (e) {
-			Users.submitClosestForm.apply(this, arguments);
-		}).on(Q.Pointer.click, function (e) {
-			e.preventDefault(); // prevent automatic submit on click
-		});
+	.on(Q.Pointer.touchclick, function (e) {
+		Users.submitClosestForm.apply(this, arguments);
+	}).on(Q.Pointer.click, function (e) {
+		e.preventDefault(); // prevent automatic submit on click
+	});
 
 	register_form.append($formContent)
 		.append($('<input type="hidden" name="identifier" />').val(identifier))
 		.append($('<input type="hidden" name="icon" />'))
 		.append($('<input type="hidden" name="Q.method" />').val('post'))
 		.append(
-			$('<div class="Streams_login_get_started">&nbsp;</div>')
-				.append($b)
+			$('<div class="Streams_login_get_started"></div>')
+			.append($b)
 		).submit(Q.throttle(function (e) {
-		var $this = $(this);
-		$this.removeData('cancelSubmit');
-		document.activeElement.blur();
-		if ($('#Users_agree').length && !$('#Users_agree').is(':checked')) {
-			$this.data('cancelSubmit', true);
-			setTimeout(function () {
-				if (confirm(Q.text.Users.login.confirmTerms)) {
-					$('#Users_agree').attr('checked', 'checked');
-					$('#Users_agree')[0].checked = true;
-					$this.submit();
-				}
-			}, 300);
-		}
-	}, 300)).on('keydown', function (e) {
-		if ((e.keyCode || e.which) === 13) {
-			$(this).submit();
-			e.preventDefault();
-		}
-	});
+			var $this = $(this);
+			$this.removeData('cancelSubmit');
+			$b.addClass('Q_working')[0].disabled = true;
+			document.activeElement.blur();
+			if ($('#Users_agree').length && !$('#Users_agree').is(':checked')) {
+				$this.data('cancelSubmit', true);
+				setTimeout(function () {
+					if (confirm(Q.text.Users.login.confirmTerms)) {
+						$('#Users_agree').attr('checked', 'checked');
+						$('#Users_agree')[0].checked = true;
+						$b.addClass('Q_working')[0].disabled = true;
+						$this.submit();
+					}
+				}, 300);
+			}
+		}, 300))
+		.on('keydown', function (e) {
+			if ((e.keyCode || e.which) === 13) {
+				$(this).submit();
+				e.preventDefault();
+			}
+		});
 	if (priv.activation) {
 		register_form.append($('<input type="hidden" name="activation" />').val(priv.activation));
 	}
