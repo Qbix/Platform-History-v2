@@ -12138,7 +12138,6 @@ Q.Dialogs = {
 	 *  @param {Object} [options.template] can be used instead of content option.
 	 *  @param {String} [options.template.name] names a template to render into the initial dialog content.
 	 *  @param {String} [options.template.fields] fields to pass to the template, if any
-	 *  @param {Array} [options.template.text] any text to load for the template
 	 *  @param {String} [options.className] a CSS class name or 
 	 *   space-separated list of classes to append to the dialog element.
 	 *  @param {String} [options.htmlClass] Any class to add to the html element while the overlay is open
@@ -12509,25 +12508,39 @@ Q.extend(Q.prompt.options, Q.text.prompt);
  * @method invoke
  * @static
  * @param {Object} options These options are passed to each handler.
- *   They should contain at least "title", "content" and "trigger"
+ *   They should contain at least "trigger", "title", and "content" (or "template")
  * @param {String|Element} options.title
  *   The title to display
  * @param {String|Element} options.content
  *   The content to display
  * @param {Element} options.trigger 
  *   The element that the user interacted with to result in this function call
+ * @param {Object} [options.template] can be used instead of content option.
+ * @param {String} [options.template.name] names a template to render into the initial dialog content.
+ * @param {String} [options.template.fields] fields to pass to the template, if any
  * @param {Function} [options.callback]
  *   Optional callback to call once the title and content has been shown and activated.
  *   Should be passed the container element by the handler.
  * @return {Integer} Returns the index of the handler that executed in Q.invoke.handlers
  */
 Q.invoke = function (options) {
-	Q.each(Q.invoke.handlers, function (i, handler) {
-		var ret = Q.handle(handler, Q, options);
-		if (ret === false) {
-			return false
-		}
-	});
+	var o = options;
+	if (options.template) {
+		Q.Template.render(options.template.name, options.template.fields, function (err, html) {
+			o = Q.extend({ content: html }, options);
+			_continue();
+		});
+	} else {
+		_continue();
+	}
+	function _continue() {
+		Q.each(Q.invoke.handlers, function (i, handler) {
+			var ret = Q.handle(handler, Q, o);
+			if (ret === false) {
+				return false
+			}
+		});
+	}
 };
 Q.invoke.handlers = [
 	function (options) {
