@@ -57,6 +57,8 @@ class Users_ExternalFrom extends Base_Users_ExternalFrom
 	 * If found, returns an instance of the class named Users_ExternalFrom_Foo
 	 * where Foo = ucfirst(strtolower($platform)).
 	 * It is your job to populate it with a user id and save it.
+	 * @method authenticated
+	 * @static
 	 * @param {string} $platform
 	 * @param {string} [$appId=Q::app()] optionally indicate the appId on the platform
 	 * @return {Users_ExternalFrom_Interface|null}

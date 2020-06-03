@@ -118,6 +118,37 @@ class Users_ExternalTo extends Base_Users_ExternalTo
 		return parent::beforeSave($updatedFields);
 	}
 	
+	function processPlatformResponse($data)
+	{
+		$this->accessToken = $data['access_token'];
+		$this->expires = new Db_Expression("CURRENT_TIMESTAMP + INTERVAL $data[expires_in] SECOND");
+		if (!empty($data['refreshToken'])) {
+			$this->setExtra('refreshToken', $data['refreshToken']);
+		}
+		if (empty($this->xid)) {
+			$this->xid = '';
+		}
+		if (!empty($scope)) {
+			$this->setExtra('scope', $data['scope']);
+		}
+		$this->save();
+	}
+	
+	function refreshToken()
+	{
+		$token = $this->getExtra('refreshToken');
+		if (!$token) {
+			throw new Q_Exception_MissingObject(array('name' => 'refreshToken'));
+		}
+		$params = array(
+			'grant_type' => 'refresh_token',
+			'refresh_token' => $token;
+		);
+		$response = Q_Utils::post($tokenUri, $params);
+		$data = Q::json_decode($response, true);
+		$this->processPlatformResponse($data);
+	}
+	
 	/**
 	 * Inserts or updates a corresponding Users_ExternalFrom row
 	 * @method afterSaveExecute
@@ -126,9 +157,12 @@ class Users_ExternalTo extends Base_Users_ExternalTo
 	 */
 	function afterSaveExecute($result)
 	{
-		Users_ExternalFrom::insert($this->fields)
-			->onDuplicateKeyUpdate($this->fields)
-			->execute();
+		if (empty($this->xid)) {
+			// don't save it if xid is empty
+			Users_ExternalFrom::insert($this->fields)
+				->onDuplicateKeyUpdate($this->fields)
+				->execute();
+		}
 		return $result;
 	}
 

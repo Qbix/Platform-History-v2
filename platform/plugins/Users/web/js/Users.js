@@ -2073,6 +2073,120 @@
 			method: 'post'
 		});
 	};
+	
+	/**
+	 * Methods for OAuth
+	 * @class Users.OAuth
+	 * @constructor
+	 * @param {Object} fields
+	 */
+	var OAuth = Users.OAuth = {
+		/**
+		 * Generate a URL based on the oAuth spec, with a redirect back to our
+		 * own endpoint hosted by the Users plugin, to save the information in the database
+		 * and possibly close any popup window.
+		 * @method url
+		 * @static
+		 * @param {String} authorizeUri The url of the oAuth service endpoint
+		 * @param {String} client_id The id of this client app on the externa; platform.
+		 *    Typically found in Users_ExternalTo under appId in the Qbix server database.
+		 * @param {String} scope The scopes to request from the platform. See their docs.
+		 * @param {Object} [options={}]
+		 * @param {String} [options.redirect_uri] You can override the redirect URI.
+		 *    Often this has to be added to a whitelist on the platform's side.
+		 * @param {String} [options.response_type='code']
+		 * @param {String} [options.state=Math.random()] If state was not provided, this
+		 *    method also modifies the passed options object and sets options.state on it
+		 * @return {String} The URL to redirect to or open in a window
+		 */
+		url: function (authorizeUri, client_id, scope, options) {
+			options = options || {};
+			var redirectUri = options.redirectUri || Users.OAuth.redirectUri;
+			var responseType = options.responseType || 'code';
+			if (!options.state) {
+				options.state = String(Math.random());
+			}
+			Q.cookie('Users_latest_oAuth_state', );
+			Q.url(authorizeUri, {
+				client_id: client_id,
+				redirect_uri: redirectUri,
+				state: options.state,
+				response_type: responseType,
+				scope: scope
+			});
+		},
+		/**
+		 * Start an oAuth flow, and let the Users plugin handle it
+		 * @method start
+		 * @static
+		 * @param {String} platform The name of an external platform under Q.plugins.Users.apps
+		 * @param {String} scope The scopes to request from the platform. See their docs.
+		 * @param {Function} [callback] This function is called after the oAuth flow ends,
+		 *    unless options.openWindow === false, because then the redirect would happen.
+		 * @param {Object} [options={}]
+		 * @param {Object|String} [openWindow={}] Set to false to start the oAuth flow in the
+		 *    current window. Otherwise, this object can be used to set window features
+		 *    passed to window.open() as a string.
+		 * @param {Object|String} [finalRedirect=location.href] If openWindow === false,
+		 *    this can be used to specify the url to redirect to after Users plugin has
+		 *    handled the oAuth redirect. Defaults to current window location.
+		 * @param {String} [appId=Q.info.app] Override appId to under Q.Users.apps[platform]
+		 * @param {String} [options.redirect_uri] You can override the redirect URI.
+		 *    Often this has to be added to a whitelist on the platform's side.
+		 * @param {String} [options.response_type='code']
+		 * @param {String} [options.state=Math.random()] If state was not provided, this
+		 *    method also modifies the passed options object and sets options.state on it
+		 * @return {String}
+		 */
+		start: function (platform, scope, callback, options) {
+			options = options || {};
+			var finalRedirect = options.finalRedirect || location.href;
+			var appId = options.appId || Q.info.appId;
+			var appInfo = Q.getObject([platform, appId], Users.apps)
+			var authorizeUri = options.authorizeUri || appInfo.authorizeUri;
+			var client_id = options.client_id || appInfo.client_id || appInfo.appId;
+			if (!authorizeUri) {
+				throw new Q.Exception("Users.OAuth.start: authorizeUri is empty");
+			}
+			var redirectUri = options.redirectUri || Users.OAuth.redirectUri;
+			var responseType = options.response_typeeType || 'code';
+			if (!options.state) {
+				options.state = String(Math.random());
+			}
+			if (!('openWindow' in options)) {
+				options.openWindow = {};
+			}
+			// this cookie will be sent on the next request, probably to Users/oauthed action
+			Q.cookie('Q_Users_oAuth', JSON.stringify({
+				platform: platform,
+				appId: appId,
+				scope: scope,
+				state: options.state,
+				finalRedirect: finalRedirect
+			}));
+			var url = OAuth.url(authorizeUri, appId, scope, options);
+			if (options.openWindow === false) {
+				location.href = url;
+			} else {
+				window.open(url, 'Q_Users_oAuth', options.openWindow);
+				// todo: setInterval to wait for window name to change to success
+				// then signal the window to close itself via anothe name change,
+				// or it closes after a timeout, and then we call the callbac
+			}
+		}
+	};
+	
+	/**
+	 * Constructs a contact from fields, which are typically returned from the server.
+	 * @class Users.Contact
+	 * @constructor
+	 * @param {Object} fields
+	 */
+	var Contact = Users.Contact = function Users_Contact(fields) {
+		Q.extend(this, fields);
+		this.typename = 'Q.Users.Contact';
+	};
+	var Cp = Contact.prototype;
 
 	/**
 	 * Constructs a contact from fields, which are typically returned from the server.
@@ -2426,6 +2540,7 @@
 		if (fbAppId) {
 			Users.initFacebook();
 		}
+		OAuth.redirectUri = Q.action('Users/oauthed');
 	}, 'Users');
 	
 	function _setSessionFromQueryString(querystring)

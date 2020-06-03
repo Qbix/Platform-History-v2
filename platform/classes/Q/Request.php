@@ -1030,6 +1030,7 @@ class Q_Request
 		array_splice($args, 1, 0, array(null));
 		$exceptions = call_user_func_array(array('Q_Valid', 'requireFields'), $args);
 		Q_Response::addError($exceptions);
+		return $exceptions;
 	}
 	
 	/**
