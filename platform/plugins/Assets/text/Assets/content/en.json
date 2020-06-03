@@ -96,7 +96,7 @@
     },
 	"services": {
 		"NewServiceTemplate": {
-			"Title": "New Service Template",
+			"Title": "New Service",
 			"TitlePlaceholder": "Service title",
 			"PricePlaceholder": "Set price",
 			"LinkPlaceholder": "set additional info link",
