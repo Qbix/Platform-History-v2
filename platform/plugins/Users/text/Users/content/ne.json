@@ -43,7 +43,8 @@
             "title": "संपर्क छान्नुहोस्",
             "CreateAccount": "+ नयाँ सम्पर्क",
             "CreateAccountNotFound": "Q.Uvers.Cordova.UI.create फेला परेन",
-            "SearchByName": "नामबाट खोज्नुहोस्"
+            "SearchByName": "नामबाट खोज्नुहोस्",
+            "EmptyContacts": "सम्पर्क भेटिएन ..."
         },
         "select": {
             "title": "{9 9 99}} को सम्पर्क चयन गर्नुहोस्"

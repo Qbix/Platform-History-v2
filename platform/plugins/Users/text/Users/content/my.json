@@ -43,7 +43,8 @@
             "title": "အဆက်အသွယ်ကိုရွေးချယ်ပါ",
             "CreateAccount": "ဆက်သွယ်ရန်",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create မတွေ့ပါ",
-            "SearchByName": "အမည်ဖြင့်ရှာဖွေပါ"
+            "SearchByName": "အမည်ဖြင့်ရှာဖွေပါ",
+            "EmptyContacts": "ဆက်သွယ်ရန်မတွေ့ပါ ..."
         },
         "select": {
             "title": "{{displayName}} ၏အဆက်အသွယ်ကိုရွေးချယ်ပါ"

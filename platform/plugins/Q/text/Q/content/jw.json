@@ -73,5 +73,30 @@
             "touchscreen": "Gunakake driji kanggo nggedhekake lan seret",
             "notTouchscreen": "Gunakake mouse &amp; roda kanggo nggedhekake lan nyeret"
         }
+    },
+    "timestamp": {
+        "lastNight": "pungkasan wengi",
+        "lastEvening": "wengi pungkasan",
+        "yesterday": "wingi",
+        "thisMorning": "enjing iki",
+        "today": "dina iki",
+        "tonight": "bengi iki",
+        "tomorrowMorning": "tom enjing",
+        "tomorrow": "sesuk",
+        "hoursAgo": "{{h}} jam kepungkur",
+        "hourAgo": "{{h}} jam kepungkur",
+        "minuteAgo": "{{m}} menit kepungkur",
+        "minutesAgo": "{{m}} menit kepungkur",
+        "secondAgo": "{{s}} kaping pindho",
+        "secondsAgo": "{{s}} detik kepungkur",
+        "fewSecondsAgo": "detik kepungkur",
+        "rightNow": "saiki",
+        "inSecond": "ing {{s}} kaping pindho",
+        "inSeconds": "ing {{s}} detik",
+        "inMinute": "ing {{m}} menit",
+        "inMinutes": "ing {{m}} menit",
+        "inHour": "ing {{h}} jam",
+        "inHours": "ing {{h}} jam",
+        "inUnderMinute": "ing 1 menit"
     }
 }

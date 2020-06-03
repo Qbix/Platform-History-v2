@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Скриване на споделянето на екрана",
             "turnOnCamera": "Показване на видео",
             "turnOnAudio": "Спиране на звука",
-            "turnOnScreenSharing": "Показване на споделяне на екрана"
+            "turnOnScreenSharing": "Показване на споделяне на екрана",
+            "fullScreen": "Цял екран"
         },
         "notAllowedToJoinCall": "Нямате разрешение да се присъедините към този поток.",
         "streamTitle": "{{1}} обаждане на живо"

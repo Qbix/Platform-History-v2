@@ -43,7 +43,8 @@
             "title": "Pumili ng contact",
             "CreateAccount": "+ Bagong Makipag-ugnay",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create hindi nahanap",
-            "SearchByName": "Paghahanap ayon sa pangalan"
+            "SearchByName": "Paghahanap ayon sa pangalan",
+            "EmptyContacts": "Hindi matatagpuan ang mga contact ..."
         },
         "select": {
             "title": "Pumili ng contact ng {{displayName}}"

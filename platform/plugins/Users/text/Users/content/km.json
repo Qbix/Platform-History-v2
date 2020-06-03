@@ -43,7 +43,8 @@
             "title": "ជ្រើសរើសទំនាក់ទំនង",
             "CreateAccount": "+ ទំនាក់ទំនងថ្មី",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create រកមិនឃើញ",
-            "SearchByName": "ស្វែងរកតាមឈ្មោះ"
+            "SearchByName": "ស្វែងរកតាមឈ្មោះ",
+            "EmptyContacts": "រកមិនឃើញទំនាក់ទំនង ..."
         },
         "select": {
             "title": "ជ្រើសរើសទំនាក់ទំនងរបស់ {{displayName}}"

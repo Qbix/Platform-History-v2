@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "स्क्रीन साझाकरण छिपाएँ",
             "turnOnCamera": "वीडियो दिखाएं",
             "turnOnAudio": "ऑडियो को अनम्यूट करें",
-            "turnOnScreenSharing": "स्क्रीन शेयरिंग दिखाओ"
+            "turnOnScreenSharing": "स्क्रीन शेयरिंग दिखाओ",
+            "fullScreen": "पूर्ण स्क्रीन"
         },
         "notAllowedToJoinCall": "आपको इस स्ट्रीम में शामिल होने की अनुमति नहीं है।",
         "streamTitle": "{{1}} लाइव कॉल"

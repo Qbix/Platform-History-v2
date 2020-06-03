@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "اشتراک گذاری صفحه را مخفی کنید",
             "turnOnCamera": "نمایش فیلم",
             "turnOnAudio": "صدا را قطع کنید",
-            "turnOnScreenSharing": "اشتراک گذاری صفحه نمایش"
+            "turnOnScreenSharing": "اشتراک گذاری صفحه نمایش",
+            "fullScreen": "تمام صفحه"
         },
         "notAllowedToJoinCall": "شما اجازه پیوستن به این جریان را ندارید.",
         "streamTitle": "99 999}} تماس زنده"

@@ -43,7 +43,8 @@
             "title": "E koho i ka pilina",
             "CreateAccount": "+ Hoʻohui hou",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create ʻaʻole i loaʻa",
-            "SearchByName": "Huli ma o ka inoa"
+            "SearchByName": "Huli ma o ka inoa",
+            "EmptyContacts": "ʻAʻole i loaʻa nā hopena ..."
         },
         "select": {
             "title": "E koho i ka hulina o {{displayName}}"

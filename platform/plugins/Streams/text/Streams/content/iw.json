@@ -73,7 +73,8 @@
             "byText": "טקסט",
             "byFacebook": "פייסבוק",
             "byTwitter": "טוויטר",
-            "scannedQR": "{{ClickOrTap}} אם הקוד נסרק"
+            "scannedQR": "{{ClickOrTap}} אם הקוד נסרק",
+            "copyLink": "{{ClickOrTap}} כדי להעתיק את קישור ההזמנה"
         },
         "email": {
             "subject": "ללא שם: היי, לבדוק את זה",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "הוזמנת. {{ClickOrTap}} כאן כדי לקבל ולהצטרף."
-        }
+        },
+        "command": "להזמין",
+        "youCanNowPaste": "כעת תוכלו להדביק את הקישור הזה במקום כלשהו כדי להזמין אנשים"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "קישור הועתק ללוח",
             "codeCopiedToCb": "הקוד הועתק ללוח",
             "userHasNoVideo": "למשתתף אין סרטון",
-            "openInBrowserAlert": "פתח קישור בדפדפן ספארי כדי להצטרף לוועידה."
+            "openInBrowserAlert": "פתח קישור בדפדפן ספארי כדי להצטרף לוועידה.",
+            "youBeganVideoRecording": "התחלת להקליט את הכנס הזה",
+            "youStoppedVideoRecording": "הפסקת להקליט את הוועידה הזו"
         },
         "settingsPopup": {
             "webCamera": "מצלמת רשת",
@@ -173,7 +178,15 @@
             "fbStartLive": "לך תחיה",
             "fbStopLive": "סוף לייב",
             "fbEmbedCode": "הטמע",
-            "copy": "עותק"
+            "copy": "עותק",
+            "turnOffVideo": "כבה את שיתוף המצלמה \/ המסך",
+            "turnOffScreenSharing": "כבה את שיתוף המסך",
+            "cameraIsTurnedOff": "המצלמה כבויה",
+            "startRecording": "התחל להקליט",
+            "stopRecording": "הפסק להקליט",
+            "recordingInProgress": "ההקלטה בעיצומה ...",
+            "publishOnTimeline": "פרסם בציר זמן",
+            "publishToGroup": "פרסם בקבוצה"
         },
         "participantsPopup": {
             "disconnect": "נתק",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "הכי חזק חוץ ממני",
             "maximizeLoudest": "למקסם את הרם ביותר",
             "staticMaximized": "סטטי ממקסם",
-            "manual": "מדריך ל"
-        }
+            "manual": "מדריך ל",
+            "fullScreen": "מסך מלא",
+            "turnOffCamera": "הסתר סרטון",
+            "turnOffAudio": "השתק שמע",
+            "turnOffScreenSharing": "הסתר שיתוף מסך",
+            "turnOnCamera": "הצג וידאו",
+            "turnOnAudio": "בטל השתקת שמע",
+            "turnOnScreenSharing": "הצג שיתוף מסך"
+        },
+        "notAllowedToJoinCall": "אין לך הרשאה להצטרף לזרם זה.",
+        "streamTitle": "{{1}} שיחה חיה"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "להציל",
         "Delete": "מחק",
         "Submenu": "תפריט משנה"
+    },
+    "errors": {
+        "HiddenFromYou": "תוכן זה מוסתר מכם."
     }
 }

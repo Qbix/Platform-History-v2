@@ -43,7 +43,8 @@
             "title": "Họrọ kọntaktị",
             "CreateAccount": "+ Kpọtụrụ m",
             "CreateAccountNotFound": "Achọpụtaghị Q.Users.Cordova.UI.create adịghị",
-            "SearchByName": "Choo aha"
+            "SearchByName": "Choo aha",
+            "EmptyContacts": "Ahụbeghị ndị kọntaktị ..."
         },
         "select": {
             "title": "Họrọ nchọta nke {{displayName}}"

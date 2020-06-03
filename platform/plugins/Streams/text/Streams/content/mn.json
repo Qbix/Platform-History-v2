@@ -73,7 +73,8 @@
             "byText": "Текст",
             "byFacebook": "Facebook",
             "byTwitter": "Твиттер",
-            "scannedQR": "{{ClickOrTap}} хэрэв код сканнердсан бол"
+            "scannedQR": "{{ClickOrTap}} хэрэв код сканнердсан бол",
+            "copyLink": "Урилгын холбоосыг хуулах {{ClickOrTap}} дээр дарна уу"
         },
         "email": {
             "subject": "Хөөе, үүнийг шалга",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "Та уригдсан. {{ClickOrTap}} энд хүлээн зөвшөөрч, нэгдэнэ үү."
-        }
+        },
+        "command": "Урих",
+        "youCanNowPaste": "Та одоо энэ холбоосыг хүмүүсийг урьж урих боломжтой"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "Холбоосыг санах самбар луу хуулав",
             "codeCopiedToCb": "Кодыг санах самбар луу хуулав",
             "userHasNoVideo": "Оролцогч видео байхгүй байна",
-            "openInBrowserAlert": "Конференцид элсэхийн тулд Safari хөтөч дээр холбоосыг нээнэ."
+            "openInBrowserAlert": "Конференцид элсэхийн тулд Safari хөтөч дээр холбоосыг нээнэ.",
+            "youBeganVideoRecording": "Та энэ хурлыг тэмдэглэж эхэлсэн",
+            "youStoppedVideoRecording": "Та энэ хурлыг бичихээ зогсоосон"
         },
         "settingsPopup": {
             "webCamera": "Вэб камер",
@@ -173,7 +178,15 @@
             "fbStartLive": "Амьд явах",
             "fbStopLive": "Шууд дамжуулах",
             "fbEmbedCode": "Оруулах боломжтой",
-            "copy": "Хуулбарлах"
+            "copy": "Хуулбарлах",
+            "turnOffVideo": "Камер \/ дэлгэц хуваалцахыг унтраана уу",
+            "turnOffScreenSharing": "Дэлгэц хуваалцахыг идэвхгүй болгох",
+            "cameraIsTurnedOff": "Камер унтарсан байна",
+            "startRecording": "Бичлэг хийж эхэл",
+            "stopRecording": "Бичлэг хийхээ боль",
+            "recordingInProgress": "Бичлэг хийгдэж байна ...",
+            "publishOnTimeline": "Он цагийн хэлхээн дээр нийтлэх",
+            "publishToGroup": "Бүлэгт нийтлэх"
         },
         "participantsPopup": {
             "disconnect": "Салгах",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "Надаас бусад нь хамгийн чанга",
             "maximizeLoudest": "Хамгийн чанга байдлыг нэмэгдүүлэх",
             "staticMaximized": "Хамгийн их статик",
-            "manual": "Гарын авлага"
-        }
+            "manual": "Гарын авлага",
+            "fullScreen": "Дэлгэц дүүрэн",
+            "turnOffCamera": "Видеог нуух",
+            "turnOffAudio": "Аудиог дуугүй болгох",
+            "turnOffScreenSharing": "Дэлгэц хуваалцахыг нуух",
+            "turnOnCamera": "Видео үзүүлэх",
+            "turnOnAudio": "Аудиог дуутай болгох",
+            "turnOnScreenSharing": "Дэлгэц хуваалцахыг харуул"
+        },
+        "notAllowedToJoinCall": "Танд энэ цацалтад нэгдэх зөвшөөрөл байхгүй байна.",
+        "streamTitle": "{{1}} шууд дуудлага"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "Хадгалах",
         "Delete": "Устгах",
         "Submenu": "Дэд цэс"
+    },
+    "errors": {
+        "HiddenFromYou": "Энэ агуулга нь танаас нуугдсан байна."
     }
 }

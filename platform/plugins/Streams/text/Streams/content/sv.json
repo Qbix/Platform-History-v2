@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Dölj skärmdelning",
             "turnOnCamera": "Visa video",
             "turnOnAudio": "Stäng av ljudet",
-            "turnOnScreenSharing": "Visa skärmdelning"
+            "turnOnScreenSharing": "Visa skärmdelning",
+            "fullScreen": "Fullskärm"
         },
         "notAllowedToJoinCall": "Du har inte behörighet att gå med i den här strömmen.",
         "streamTitle": "{{1}} direktuppringning"

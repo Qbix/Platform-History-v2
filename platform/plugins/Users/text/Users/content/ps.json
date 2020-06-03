@@ -43,7 +43,8 @@
             "title": "اړیکې غوره کړئ",
             "CreateAccount": "+ نوې اړیکه",
             "CreateAccountNotFound": "Q.User.Cordova.UI.create ونه موندل شو",
-            "SearchByName": "د نوم له مخې لټون"
+            "SearchByName": "د نوم له مخې لټون",
+            "EmptyContacts": "اړیکې ونه موندل شوې ..."
         },
         "select": {
             "title": "د {9 999}} سره اړیکه ونیسئ"

@@ -43,7 +43,8 @@
             "title": "සම්බන්ධතා තෝරන්න",
             "CreateAccount": "+ නව සම්බන්ධතා",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create හමු නොවීය",
-            "SearchByName": "නමින් සොයන්න"
+            "SearchByName": "නමින් සොයන්න",
+            "EmptyContacts": "සම්බන්ධතා හමු නොවීය ..."
         },
         "select": {
             "title": "Contact {999} contact හි සම්බන්ධතාවය තෝරන්න"

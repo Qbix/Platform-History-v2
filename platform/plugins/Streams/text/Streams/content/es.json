@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Ocultar pantalla compartida",
             "turnOnCamera": "Mostrar video",
             "turnOnAudio": "Activar audio",
-            "turnOnScreenSharing": "Mostrar pantalla compartida"
+            "turnOnScreenSharing": "Mostrar pantalla compartida",
+            "fullScreen": "Pantalla completa"
         },
         "notAllowedToJoinCall": "No tienes permiso para unirte a esta transmisión.",
         "streamTitle": "{{1}} llamada en vivo"

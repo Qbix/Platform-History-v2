@@ -73,7 +73,8 @@
             "byText": "Nivîstok",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "The 99 999}} heke kodê nexşandî bû"
+            "scannedQR": "The 99 999}} heke kodê nexşandî bû",
+            "copyLink": "99 99 999}} ji bo kopkirina girêdana vexwendinê"
         },
         "email": {
             "subject": "Hey, vê yekê bibînin",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "Te vexwendin. Li vir {{ClickOrTap}} li vir bipejirîne û tevlî bibin."
-        }
+        },
+        "command": "Ezimanden",
+        "youCanNowPaste": "Naha hûn dikarin vê linkê li derekê bişînin da ku mirov vexwendin"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "Zencîre hatî kopî kirin",
             "codeCopiedToCb": "Koda ku li clipboard hatî kopî kirin",
             "userHasNoVideo": "Beşdarê vîdyoyê tune",
-            "openInBrowserAlert": "Zencîre vekirî di geroka Safari de da ku beşdarî konferansê bibe."
+            "openInBrowserAlert": "Zencîre vekirî di geroka Safari de da ku beşdarî konferansê bibe.",
+            "youBeganVideoRecording": "We dest bi tomara vê konferansê kir",
+            "youStoppedVideoRecording": "We tomarkirina vê konferansê rawestand"
         },
         "settingsPopup": {
             "webCamera": "Kamera Web",
@@ -173,7 +178,15 @@
             "fbStartLive": "Bijî Zindî",
             "fbStopLive": "Bijî Zindî",
             "fbEmbedCode": "Hatin kirin",
-            "copy": "Kopî"
+            "copy": "Kopî",
+            "turnOffVideo": "Parvekirina kamerayan \/ ekranê vekişîne",
+            "turnOffScreenSharing": "Dabeşandina ser screenê vekişîne",
+            "cameraIsTurnedOff": "Kamera vekişiyaye",
+            "startRecording": "Danasîna Destpêkê",
+            "stopRecording": "Xwe tomar bikin",
+            "recordingInProgress": "Dabeşandin di pêşde ye ...",
+            "publishOnTimeline": "Li ser timelê çap bikin",
+            "publishToGroup": "Ji bo komê bide weşandin"
         },
         "participantsPopup": {
             "disconnect": "Hevqetandin",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "Ji bilî min bilindtir",
             "maximizeLoudest": "Berfirehî zêde bikin",
             "staticMaximized": "Maximek Static",
-            "manual": "Destî"
-        }
+            "manual": "Destî",
+            "fullScreen": "Full Screen",
+            "turnOffCamera": "Vîdyoyê veşêrin",
+            "turnOffAudio": "Dengê deng bikin",
+            "turnOffScreenSharing": "Dabeşkirina screenê veşêrin",
+            "turnOnCamera": "Vîdyoyê nîşan bikin",
+            "turnOnAudio": "Dengê deng veke",
+            "turnOnScreenSharing": "Parvekirina serşokê nîşan bide"
+        },
+        "notAllowedToJoinCall": "Tu destûr naye ku hûn beşdarî vê streamê bibin.",
+        "streamTitle": "99 999} call banga zindî"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "Rizgarkirin",
         "Delete": "Jêkirin",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Ev naverok ji we veşartî ye."
     }
 }

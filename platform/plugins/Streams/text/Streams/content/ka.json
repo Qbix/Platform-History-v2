@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "ეკრანის გაზიარება დამალვა",
             "turnOnCamera": "აჩვენეთ ვიდეო",
             "turnOnAudio": "აუდიოს გაუქმება",
-            "turnOnScreenSharing": "ეკრანის გაზიარების ჩვენება"
+            "turnOnScreenSharing": "ეკრანის გაზიარების ჩვენება",
+            "fullScreen": "Სრულ ეკრანზე"
         },
         "notAllowedToJoinCall": "თქვენ არ გაქვთ ამ ნაკადში შესვლის ნებართვა.",
         "streamTitle": "99 999}} ცოცხალი ზარი"

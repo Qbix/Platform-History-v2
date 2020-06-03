@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Сакриј дељење екрана",
             "turnOnCamera": "Прикажи видео",
             "turnOnAudio": "Занемаривање звука",
-            "turnOnScreenSharing": "Прикажи дељење екрана"
+            "turnOnScreenSharing": "Прикажи дељење екрана",
+            "fullScreen": "Цео екран"
         },
         "notAllowedToJoinCall": "Немате дозволу да се придружите овом току.",
         "streamTitle": "{999}} позив уживо"

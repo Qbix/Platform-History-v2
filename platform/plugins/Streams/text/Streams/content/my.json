@@ -73,7 +73,8 @@
             "byText": "စာသားမ",
             "byFacebook": "Facebook က",
             "byTwitter": "တွစ်တာ",
-            "scannedQR": "{{ClickOrTap}} ကုဒ် scan ဖတ်ခဲ့လျှင်"
+            "scannedQR": "{{ClickOrTap}} ကုဒ် scan ဖတ်ခဲ့လျှင်",
+            "copyLink": "{{ClickOrTap}} ဖိတ်ကြားထားသောလင့်ခ်ကိုကူးယူရန်"
         },
         "email": {
             "subject": "ဟေ့, ဒီထုတ်စစ်ဆေး",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "သငျသညျဖိတ်ကြားထားသည်။ {{ClickOrTap}} ကဒီမှာကိုလက်မခံခြင်းနှင့်ပူးပေါင်းရန်ဖြစ်သည်။"
-        }
+        },
+        "command": "ဖိတ်ကြားပါ",
+        "youCanNowPaste": "ယခုလူများကိုဖိတ်ရန်သင်ဤ link ကိုတစ်နေရာရာမှာကူးထည့်နိုင်သည်"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "link ကို clipboard မှကူးယူ",
             "codeCopiedToCb": "Code ကို clipboard မှကူးယူ",
             "userHasNoVideo": "ပါဝင်သူတွင်ဗီဒီယိုမရှိပါ",
-            "openInBrowserAlert": "ဆွေးနွေးပွဲသို့ဝင်ရောက်ရန် Safari browser တွင် link ကိုဖွင့်ပါ"
+            "openInBrowserAlert": "ဆွေးနွေးပွဲသို့ဝင်ရောက်ရန် Safari browser တွင် link ကိုဖွင့်ပါ",
+            "youBeganVideoRecording": "ဒီကွန်ဖရင့်ကိုသင်စတင်မှတ်တမ်းတင်ခဲ့တယ်",
+            "youStoppedVideoRecording": "သင်သည်ဤကွန်ဖရန့်ကိုမှတ်တမ်းတင်ခြင်းမပြုတော့ပါ"
         },
         "settingsPopup": {
             "webCamera": "ဝက်ဘ်ကင်မရာ",
@@ -173,7 +178,15 @@
             "fbStartLive": "တိုက်ရိုက်ထုတ်လွှ",
             "fbStopLive": "Live အဆုံးသတ်",
             "fbEmbedCode": "Embed",
-            "copy": "ကူးပါ"
+            "copy": "ကူးပါ",
+            "turnOffVideo": "ကင်မရာ \/ မျက်နှာပြင်မျှဝေခြင်းကိုပိတ်ပါ",
+            "turnOffScreenSharing": "မျက်နှာပြင်မျှဝေခြင်းကိုပိတ်ပါ",
+            "cameraIsTurnedOff": "ကင်မရာပိတ်ထားသည်",
+            "startRecording": "အသံသွင်းပါ",
+            "stopRecording": "မှတ်တမ်းတင်ခြင်းရပ်ပါ",
+            "recordingInProgress": "အသံသွင်းနေသည် ...",
+            "publishOnTimeline": "အချိန်ဇယားအပေါ်ထုတ်ဝေပါ",
+            "publishToGroup": "အုပ်စုလိုက်ထုတ်ဝေပါ"
         },
         "participantsPopup": {
             "disconnect": "အဆက်ဖြတ်လိုက်ပါ",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "ငါ မှလွဲ၍",
             "maximizeLoudest": "အသံကျယ်အကျယ်ချဲ့ပါ",
             "staticMaximized": "အမြင့်ဆုံး static",
-            "manual": "လက်စွဲစာအုပ်"
-        }
+            "manual": "လက်စွဲစာအုပ်",
+            "fullScreen": "မျက်နှာပြင်အပြည့်",
+            "turnOffCamera": "ဗွီဒီယိုဖျောက်ရန်",
+            "turnOffAudio": "အသံတိတ်အသံ",
+            "turnOffScreenSharing": "မျက်နှာပြင်မျှဝေခြင်းကိုဖျောက်ထားပါ",
+            "turnOnCamera": "ဗွီဒီယိုပြပါ",
+            "turnOnAudio": "အသံကိုအသံတိတ်",
+            "turnOnScreenSharing": "မျက်နှာပြင်မျှဝေပါ"
+        },
+        "notAllowedToJoinCall": "သင်ဤစီးဝင်ရန်ခွင့်ပြုချက်မရှိပါ",
+        "streamTitle": "{{1}} တိုက်ရိုက်ခေါ်ဆိုမှု"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "သိမ်းဆည်းပါ",
         "Delete": "ဖျက်ပါ",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "ဤအကြောင်းအရာသည်သင့်ထံမှလျှို့ဝှက်ထားသည်"
     }
 }

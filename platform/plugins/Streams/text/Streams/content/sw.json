@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Ficha kushiriki skrini",
             "turnOnCamera": "Onyesha video",
             "turnOnAudio": "Sikiza sauti",
-            "turnOnScreenSharing": "Onyesha kushiriki skrini"
+            "turnOnScreenSharing": "Onyesha kushiriki skrini",
+            "fullScreen": "Screen kamili"
         },
         "notAllowedToJoinCall": "Huna ruhusa ya kujiunga na mkondo huu.",
         "streamTitle": "{{1}} simu ya moja kwa moja"

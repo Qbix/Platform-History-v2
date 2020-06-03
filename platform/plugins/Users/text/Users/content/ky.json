@@ -43,7 +43,8 @@
             "title": "байланышты тандоо",
             "CreateAccount": "+ Болумушту Байланыш",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create табылган жок",
-            "SearchByName": "аталышы боюнча издөө"
+            "SearchByName": "аталышы боюнча издөө",
+            "EmptyContacts": "Байланыштар табылган жок ..."
         },
         "select": {
             "title": "боюнча тандоо байланыш {{displayName}}"

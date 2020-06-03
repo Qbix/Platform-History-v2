@@ -73,5 +73,30 @@
             "touchscreen": "Faaaoga ou tamatamailima e sulu ma toso",
             "notTouchscreen": "Faaaoga lau kiota &amp; uili e sosolo ma toso"
         }
+    },
+    "timestamp": {
+        "lastNight": "anapo",
+        "lastEvening": "afiafi mulimuli",
+        "yesterday": "ananafi",
+        "thisMorning": "lenei taeao",
+        "today": "ananei",
+        "tonight": "anapo",
+        "tomorrowMorning": "taeao taeao",
+        "tomorrow": "taeao",
+        "hoursAgo": "{{h}} itula talu ai",
+        "hourAgo": "{{h}} le itula talu ai",
+        "minuteAgo": "{{m}} minute talu ai",
+        "minutesAgo": "{{m}} minute talu ai",
+        "secondAgo": "{{s}} lona lua talu ai",
+        "secondsAgo": "{{s}} sekone talu ai",
+        "fewSecondsAgo": "sekone talu ai",
+        "rightNow": "taimi nei",
+        "inSecond": "i le {{s}} lona lua",
+        "inSeconds": "ile {{s}} sekone",
+        "inMinute": "ile {{m}} minute",
+        "inMinutes": "i le {{m}} minute",
+        "inHour": "ile {{h}} le itula",
+        "inHours": "ile {{h}} itula",
+        "inUnderMinute": "i lalo ole 1 minute"
     }
 }

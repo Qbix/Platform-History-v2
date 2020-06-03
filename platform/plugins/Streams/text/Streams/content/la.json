@@ -73,7 +73,8 @@
             "byText": "text",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{Si}} CMXCIX cum codice lustrabat lumine"
+            "scannedQR": "{{Si}} CMXCIX cum codice lustrabat lumine",
+            "copyLink": "{{CMXCIX}} invite ut effingo link Index"
         },
         "email": {
             "subject": "Nullam Lorem ista",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "Vos invitatus ab eo. {{CMXCIX}} accipere et hic adiungere."
-        }
+        },
+        "command": "invitare",
+        "youCanNowPaste": "Vos can crustulum is link Index autem in quodam loco invitare populum"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "Copied Link to Clipboard",
             "codeCopiedToCb": "Copied code to Clipboard",
             "userHasNoVideo": "Video non habet participem",
-            "openInBrowserAlert": "Link to join aperta Safari pasco ad colloquium."
+            "openInBrowserAlert": "Link to join aperta Safari pasco ad colloquium.",
+            "youBeganVideoRecording": "Vos coepi, haec conquiri colloquium",
+            "youStoppedVideoRecording": "Et haec conquiri colloquium veniens staret"
         },
         "settingsPopup": {
             "webCamera": "Web DE CAMERA",
@@ -173,7 +178,15 @@
             "fbStartLive": "Ire live",
             "fbStopLive": "finis vive",
             "fbEmbedCode": "Embed",
-            "copy": "exemplum"
+            "copy": "exemplum",
+            "turnOffVideo": "Illuminationes camera \/ screen sharing",
+            "turnOffScreenSharing": "Illuminationes screen sharing",
+            "cameraIsTurnedOff": "Off camera est",
+            "startRecording": "Book initio",
+            "stopRecording": "Book subsisto",
+            "recordingInProgress": "Book progressus est ...",
+            "publishOnTimeline": "Publish in timeline",
+            "publishToGroup": "Publish catervae"
         },
         "participantsPopup": {
             "disconnect": "Kill",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "Nisi mihi altissimis",
             "maximizeLoudest": "Maximize Loudest",
             "staticMaximized": "Vestibulum Maximized",
-            "manual": "manual"
-        }
+            "manual": "manual",
+            "fullScreen": "Screen",
+            "turnOffCamera": "celare video",
+            "turnOffAudio": "muta audio",
+            "turnOffScreenSharing": "Screen celare sharing",
+            "turnOnCamera": "show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "notAllowedToJoinCall": "Haec tibi non liceat iungere amnis.",
+        "streamTitle": "{{CMXCIX vivere vocationem}}"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "salvare",
         "Delete": "Delete",
         "Submenu": "submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Hoc contentus non est absconditum a te."
     }
 }

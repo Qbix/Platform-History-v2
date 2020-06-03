@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "隐藏屏幕共享",
             "turnOnCamera": "显示影片",
             "turnOnAudio": "取消静音",
-            "turnOnScreenSharing": "显示屏幕共享"
+            "turnOnScreenSharing": "显示屏幕共享",
+            "fullScreen": "全屏"
         },
         "notAllowedToJoinCall": "您无权加入此信息流。",
         "streamTitle": "{{1}}现场通话"

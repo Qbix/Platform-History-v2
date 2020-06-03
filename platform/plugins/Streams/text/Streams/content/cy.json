@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Cuddio rhannu sgrin",
             "turnOnCamera": "Dangos fideo",
             "turnOnAudio": "Sain ddigamsyniol",
-            "turnOnScreenSharing": "Dangos rhannu sgrin"
+            "turnOnScreenSharing": "Dangos rhannu sgrin",
+            "fullScreen": "Sgrin llawn"
         },
         "notAllowedToJoinCall": "Nid oes gennych ganiatâd i ymuno â&#39;r nant hon.",
         "streamTitle": "{{1}} galwad byw"

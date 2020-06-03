@@ -43,7 +43,8 @@
             "title": "संपर्क निवडा",
             "CreateAccount": "+ नवीन संपर्क",
             "CreateAccountNotFound": "प्र.उझर.कोर्डोवा.यूआय.सी. आढळले नाही",
-            "SearchByName": "नावाने शोधा"
+            "SearchByName": "नावाने शोधा",
+            "EmptyContacts": "संपर्क सापडला नाही ..."
         },
         "select": {
             "title": "{{displayName}} चा संपर्क निवडा"

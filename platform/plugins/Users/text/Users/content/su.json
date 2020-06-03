@@ -43,7 +43,8 @@
             "title": "Milih kontak",
             "CreateAccount": "+ Hubungan Anyar",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create teu kapendak",
-            "SearchByName": "Milarian ku nami"
+            "SearchByName": "Milarian ku nami",
+            "EmptyContacts": "Hubungan henteu kapendak ..."
         },
         "select": {
             "title": "Pilih kontak tina {{displayName}}"

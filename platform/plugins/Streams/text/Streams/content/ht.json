@@ -73,7 +73,8 @@
             "byText": "Tèks",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} si yo te eskane kòd la"
+            "scannedQR": "{{ClickOrTap}} si yo te eskane kòd la",
+            "copyLink": "{{ClickOrTap}} kopye lyen envite"
         },
         "email": {
             "subject": "Hey, tcheke sa a soti",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "Ou te envite. {{ClickOrTap}} isit la pou aksepte ak rantre nan."
-        }
+        },
+        "command": "Envite",
+        "youCanNowPaste": "Ou kapab kounye a kole lyen sa a yon kote pou envite moun"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "Link kopye nan papye",
             "codeCopiedToCb": "Kòd kopye nan papye",
             "userHasNoVideo": "Patisipan an pa gen okenn videyo",
-            "openInBrowserAlert": "Louvri lyen nan navigatè Safari pou rantre nan konferans lan."
+            "openInBrowserAlert": "Louvri lyen nan navigatè Safari pou rantre nan konferans lan.",
+            "youBeganVideoRecording": "Ou te kòmanse anrejistre konferans sa a",
+            "youStoppedVideoRecording": "Ou te sispann anrejistre konferans sa a"
         },
         "settingsPopup": {
             "webCamera": "Kamera entènèt",
@@ -173,7 +178,15 @@
             "fbStartLive": "Ale viv",
             "fbStopLive": "Fen Live",
             "fbEmbedCode": "Afiche",
-            "copy": "Kopi"
+            "copy": "Kopi",
+            "turnOffVideo": "Etenn kamera \/ ekran pataje",
+            "turnOffScreenSharing": "Etenn pataje ekran",
+            "cameraIsTurnedOff": "Kamera etenn",
+            "startRecording": "Kòmanse anrejistreman",
+            "stopRecording": "One Stop anrejistreman",
+            "recordingInProgress": "Anrejistreman an nan pwogrè ...",
+            "publishOnTimeline": "Pibliye sou delè",
+            "publishToGroup": "Pibliye nan gwoup la"
         },
         "participantsPopup": {
             "disconnect": "Dekonekte",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "Pi fò eksepte mwen",
             "maximizeLoudest": "Maksimize Loudest",
             "staticMaximized": "Static Maximized",
-            "manual": "Manyèl"
-        }
+            "manual": "Manyèl",
+            "fullScreen": "Full Screen",
+            "turnOffCamera": "Kache videyo",
+            "turnOffAudio": "Bèbè odyo",
+            "turnOffScreenSharing": "Kache pataje ekran",
+            "turnOnCamera": "Montre videyo",
+            "turnOnAudio": "Unmute odyo",
+            "turnOnScreenSharing": "Montre pataje ekran"
+        },
+        "notAllowedToJoinCall": "Ou pa gen pèmisyon pou rantre nan kouran sa a.",
+        "streamTitle": "{{1}} apèl viv"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "Sove",
         "Delete": "Efase",
         "Submenu": "Soumèt"
+    },
+    "errors": {
+        "HiddenFromYou": "Kontni sa a kache pou ou."
     }
 }

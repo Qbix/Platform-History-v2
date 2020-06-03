@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "A képernyőmegosztás elrejtése",
             "turnOnCamera": "Videó megjelenítése",
             "turnOnAudio": "A hang némítása",
-            "turnOnScreenSharing": "A képernyőmegosztás megjelenítése"
+            "turnOnScreenSharing": "A képernyőmegosztás megjelenítése",
+            "fullScreen": "Teljes képernyő"
         },
         "notAllowedToJoinCall": "Nincs engedélyed ahhoz, hogy csatlakozz ehhez a patakhoz.",
         "streamTitle": "{{1}} élő hívás"

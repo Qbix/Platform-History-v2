@@ -43,7 +43,8 @@
             "title": "Elektu kontakton",
             "CreateAccount": "+ Nova Kontakto",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create ne trovita",
-            "SearchByName": "Serĉo laŭ nomo"
+            "SearchByName": "Serĉo laŭ nomo",
+            "EmptyContacts": "Kontaktoj ne trovitaj ..."
         },
         "select": {
             "title": "Elektu kontakton de {{displayName}}"

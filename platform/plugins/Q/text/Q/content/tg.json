@@ -73,5 +73,30 @@
             "touchscreen": "Ангуштони худро истифода баред ва дуртар кунед",
             "notTouchscreen": "Мӯй ва чархи худро истифода баред ва собит кунед"
         }
+    },
+    "timestamp": {
+        "lastNight": "шаби гузашта",
+        "lastEvening": "арафаи гузашта",
+        "yesterday": "дирӯз",
+        "thisMorning": "ин мох",
+        "today": "имрӯз",
+        "tonight": "имшаб",
+        "tomorrowMorning": "Том Мор",
+        "tomorrow": "фардо",
+        "hoursAgo": "{{h}} соат пеш",
+        "hourAgo": "{{h}} соат пеш",
+        "minuteAgo": "{{m}} дақиқа пеш",
+        "minutesAgo": "{{m}} дақиқа пеш",
+        "secondAgo": "{{s}} сония пеш",
+        "secondsAgo": "{{s}} сония пеш аз он",
+        "fewSecondsAgo": "сония пеш",
+        "rightNow": "худи ҳозир",
+        "inSecond": "дар {{s}} сония",
+        "inSeconds": "дар {{s}} сония",
+        "inMinute": "дар {{m}} дақиқа",
+        "inMinutes": "дар {{m}} дақиқа",
+        "inHour": "дар {{h}} соат",
+        "inHours": "дар {{h}} соат",
+        "inUnderMinute": "дар зери 1 дақиқа"
     }
 }

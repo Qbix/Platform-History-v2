@@ -73,5 +73,30 @@
             "touchscreen": "जुम गर्न तान्नुहोस् र तान्नुहोस् तान्नुहोस्",
             "notTouchscreen": "जूम र ड्र्याग गर्नको लागी आफ्नो माउस र पाङ्ग्रा प्रयोग गर्नुहोस्"
         }
+    },
+    "timestamp": {
+        "lastNight": "हिजो राती",
+        "lastEvening": "पछिल्लो साँझ",
+        "yesterday": "हिजो",
+        "thisMorning": "यो बिहान",
+        "today": "आज",
+        "tonight": "आज राती",
+        "tomorrowMorning": "टम बिहान",
+        "tomorrow": "भोली",
+        "hoursAgo": "} {9{}}} घण्टा अघि",
+        "hourAgo": "} {9{}}} घण्टा अघि",
+        "minuteAgo": "} {9{}}} मिनेट अघि",
+        "minutesAgo": "} {9{}}} मिनेट अघि",
+        "secondAgo": "} {9{}} दोस्रो पहिले",
+        "secondsAgo": "} {9{}} सेकेन्ड अघि",
+        "fewSecondsAgo": "सेकेन्ड अघि",
+        "rightNow": "अहिले",
+        "inSecond": "{{9{}} सेकेन्डमा",
+        "inSeconds": "{{9{}} सेकेन्डमा",
+        "inMinute": "{{9{}} मिनेटमा",
+        "inMinutes": "{{9{}} मिनेटमा",
+        "inHour": "{{9{}} घण्टामा",
+        "inHours": "{{9{}} घण्टामा",
+        "inUnderMinute": "१ मिनेट मुनि"
     }
 }

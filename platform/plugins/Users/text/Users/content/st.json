@@ -43,7 +43,8 @@
             "title": "Khetha moqoqo",
             "CreateAccount": "+ Khokahano e ncha",
             "CreateAccountNotFound": "Q.Esers.Cordova.UI.create ha e fumanoe",
-            "SearchByName": "Batla ka lebitso"
+            "SearchByName": "Batla ka lebitso",
+            "EmptyContacts": "Mabitso ha a fumanehe ..."
         },
         "select": {
             "title": "Khetha puisano ea {{displayName}}"

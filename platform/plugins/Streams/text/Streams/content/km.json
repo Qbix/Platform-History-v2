@@ -73,7 +73,8 @@
             "byText": "អត្ថបទ",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} ប្រសិនបើលេខកូដត្រូវបានស្កេន"
+            "scannedQR": "{{ClickOrTap}} ប្រសិនបើលេខកូដត្រូវបានស្កេន",
+            "copyLink": "{{ClickOrTap}} ដើម្បីចម្លងតំណអញ្ជើញ"
         },
         "email": {
             "subject": "ហេសូមពិនិត្យមើលវាចេញ",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "អ្នកត្រូវបានអញ្ជើញ។ {{ClickOrTap}} នៅទីនេះដើម្បីទទួលយកនិងចូលរួម។"
-        }
+        },
+        "command": "សូមអញ្ជើញ",
+        "youCanNowPaste": "ឥឡូវអ្នកអាចបិទភ្ជាប់តំណនេះនៅកន្លែងណាមួយដើម្បីអញ្ជើញមនុស្ស"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "បានចម្លងតំណទៅក្ដារតម្បៀតខ្ទាស់",
             "codeCopiedToCb": "បានចម្លងកូដទៅក្ដារតម្បៀតខ្ទាស់",
             "userHasNoVideo": "អ្នកចូលរួមមិនមានវីដេអូទេ",
-            "openInBrowserAlert": "បើកតំណនៅក្នុងកម្មវិធីរុករក Safari ដើម្បីចូលរួមសន្និសីទ។"
+            "openInBrowserAlert": "បើកតំណនៅក្នុងកម្មវិធីរុករក Safari ដើម្បីចូលរួមសន្និសីទ។",
+            "youBeganVideoRecording": "អ្នកចាប់ផ្តើមកត់ត្រាសន្និសីទនេះ",
+            "youStoppedVideoRecording": "អ្នកឈប់ថតសន្និសិទនេះ"
         },
         "settingsPopup": {
             "webCamera": "ម៉ាស៊ីនថតគេហទំព័រ",
@@ -173,7 +178,15 @@
             "fbStartLive": "ទៅផ្សាយផ្ទាល់",
             "fbStopLive": "បញ្ចប់ការផ្សាយបន្តផ្ទាល់",
             "fbEmbedCode": "បង្កប់",
-            "copy": "ចម្លង"
+            "copy": "ចម្លង",
+            "turnOffVideo": "បិទការចែករំលែកកាមេរ៉ា \/ អេក្រង់",
+            "turnOffScreenSharing": "បិទការចែករំលែកអេក្រង់",
+            "cameraIsTurnedOff": "កាមេរ៉ាត្រូវបានបិទ",
+            "startRecording": "ចាប់ផ្តើមថត",
+            "stopRecording": "បញ្ឈប់ការកត់ត្រា",
+            "recordingInProgress": "ការថតកំពុងដំណើរការ ...",
+            "publishOnTimeline": "ផ្សព្វផ្សាយតាមពេលវេលាកំណត់",
+            "publishToGroup": "ផ្សព្វផ្សាយទៅក្រុម"
         },
         "participantsPopup": {
             "disconnect": "ផ្តាច់",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "លើកលែងតែខ្ញុំ",
             "maximizeLoudest": "ពង្រីកសំឡេងឱ្យខ្ពស់បំផុត",
             "staticMaximized": "ឋិតិវន្តអតិបរមា",
-            "manual": "ហត្ថកម្ម"
-        }
+            "manual": "ហត្ថកម្ម",
+            "fullScreen": "ពេញ​អេក្រង់",
+            "turnOffCamera": "លាក់វីដេអូ",
+            "turnOffAudio": "បិទសំឡេង",
+            "turnOffScreenSharing": "លាក់ការចែករំលែកអេក្រង់",
+            "turnOnCamera": "បង្ហាញវីដេអូ",
+            "turnOnAudio": "បើកសំឡេង",
+            "turnOnScreenSharing": "បង្ហាញការចែករំលែកអេក្រង់"
+        },
+        "notAllowedToJoinCall": "អ្នកមិនមានសិទ្ធិចូលរួមក្នុងស្ទ្រីមនេះទេ។",
+        "streamTitle": "ការហៅបន្តផ្ទាល់ {{៩៩៩}}"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "រក្សាទុក",
         "Delete": "លុប",
         "Submenu": "ម៉ឺនុយរង"
+    },
+    "errors": {
+        "HiddenFromYou": "មាតិកានេះត្រូវបានលាក់ពីអ្នក។"
     }
 }

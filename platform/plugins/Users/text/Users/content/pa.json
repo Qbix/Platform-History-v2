@@ -43,7 +43,8 @@
             "title": "ਸੰਪਰਕ ਚੁਣੋ",
             "CreateAccount": "+ ਨਵਾਂ ਸੰਪਰਕ",
             "CreateAccountNotFound": "Q.User.Cordova.UI.create ਨਹੀਂ ਮਿਲਿਆ",
-            "SearchByName": "ਨਾਮ ਨਾਲ ਖੋਜ ਕਰੋ"
+            "SearchByName": "ਨਾਮ ਨਾਲ ਖੋਜ ਕਰੋ",
+            "EmptyContacts": "ਸੰਪਰਕ ਨਹੀਂ ਮਿਲੇ ..."
         },
         "select": {
             "title": "{{displayName}} ਦੇ ਸੰਪਰਕ ਦੀ ਚੋਣ ਕਰੋ"

@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Sembunyikan perkongsian skrin",
             "turnOnCamera": "Tunjukkan video",
             "turnOnAudio": "Redamkan suara",
-            "turnOnScreenSharing": "Tunjukkan perkongsian skrin"
+            "turnOnScreenSharing": "Tunjukkan perkongsian skrin",
+            "fullScreen": "Skrin penuh"
         },
         "notAllowedToJoinCall": "Anda tidak mempunyai kebenaran untuk menyertai aliran ini.",
         "streamTitle": "{{1}} panggilan langsung"

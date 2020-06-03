@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "اسکرین شیئرنگ چھپائیں",
             "turnOnCamera": "ویڈیو دکھائیں",
             "turnOnAudio": "آڈیو خاموش کریں",
-            "turnOnScreenSharing": "اسکرین کا اشتراک دکھائیں"
+            "turnOnScreenSharing": "اسکرین کا اشتراک دکھائیں",
+            "fullScreen": "مکمل اسکرین یا بڑی اسکرین"
         },
         "notAllowedToJoinCall": "آپ کو اس سلسلہ میں شامل ہونے کی اجازت نہیں ہے۔",
         "streamTitle": "} 9 999}} براہ راست کال"

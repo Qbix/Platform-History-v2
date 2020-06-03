@@ -73,7 +73,8 @@
             "byText": "Kuputuhi",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} mena kua tohua te tohu"
+            "scannedQR": "{{ClickOrTap}} mena kua tohua te tohu",
+            "copyLink": "{{ClickOrTap}} hei kape i te hono panui"
         },
         "email": {
             "subject": "Tena, tirohia tenei",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "Kua karangatia koe. {{ClickOrTap}} konei hei whakaae me te whakauru mai."
-        }
+        },
+        "command": "Ani",
+        "youCanNowPaste": "Ka taea e koe te whakapiri i tenei hono ki tetahi waahi hei karanga i te iwi"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "Hangaia te hono ki te papaa",
             "codeCopiedToCb": "Te waehere i hainatia ki te papaahi",
             "userHasNoVideo": "Kaore he ataata",
-            "openInBrowserAlert": "Whakatuwherahia te hono ki te pūtirotiro Safari kia uru atu ki nga huihuinga."
+            "openInBrowserAlert": "Whakatuwherahia te hono ki te pūtirotiro Safari kia uru atu ki nga huihuinga.",
+            "youBeganVideoRecording": "I timata koe i te tuhi i tenei hui",
+            "youStoppedVideoRecording": "Ka mutu koe ki te tuhi i tenei hui"
         },
         "settingsPopup": {
             "webCamera": "Kāmera Tukutuku",
@@ -173,7 +178,15 @@
             "fbStartLive": "Haere Haere",
             "fbStopLive": "Kati Ora",
             "fbEmbedCode": "Whakauru",
-            "copy": "Kake"
+            "copy": "Kake",
+            "turnOffVideo": "Whakaweto tiri i te kāmera \/ mata",
+            "turnOffScreenSharing": "Tahuri te tiritiri mata",
+            "cameraIsTurnedOff": "Kua whakaweto te kamera",
+            "startRecording": "Tīmata Whakaahuri",
+            "stopRecording": "Aukati Te Whakaaturanga",
+            "recordingInProgress": "Kei te haere tonu te rekoata ...",
+            "publishOnTimeline": "Whakaputa i te tohu tohu waa",
+            "publishToGroup": "Panui ki te roopu"
         },
         "participantsPopup": {
             "disconnect": "Whakapore",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "Te Rawa Whakahauhau Maaku",
             "maximizeLoudest": "Whakanuia Te Riri",
             "staticMaximized": "Whakapiki",
-            "manual": "Pukapuka"
-        }
+            "manual": "Pukapuka",
+            "fullScreen": "Mata Kaha",
+            "turnOffCamera": "Hunaia te ataata",
+            "turnOffAudio": "Whakarongo",
+            "turnOffScreenSharing": "Huna te tiritiri mata",
+            "turnOnCamera": "Whakaatuhia te ataata",
+            "turnOnAudio": "Whakarekehia te oro",
+            "turnOnScreenSharing": "Whakaatuhia te tohatoha mata"
+        },
+        "notAllowedToJoinCall": "Kaore koe e whakaae kia uru atu ki tenei awa.",
+        "streamTitle": "{{1}} karanga ora"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "Whakaora",
         "Delete": "Muputu",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "He mea huna tenei korero kei a koe."
     }
 }

@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Ezkutatu pantaila partekatzea",
             "turnOnCamera": "Erakutsi bideoa",
             "turnOnAudio": "Ezabatu audioa",
-            "turnOnScreenSharing": "Erakutsi pantaila partekatzea"
+            "turnOnScreenSharing": "Erakutsi pantaila partekatzea",
+            "fullScreen": "Pantaila osoa"
         },
         "notAllowedToJoinCall": "Ez duzu korrontean sartzeko baimenik.",
         "streamTitle": "{{1}} zuzeneko deia"

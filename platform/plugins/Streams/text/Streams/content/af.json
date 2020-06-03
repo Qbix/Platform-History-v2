@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Versteek skermdeling",
             "turnOnCamera": "Wys video",
             "turnOnAudio": "Demp klank uit",
-            "turnOnScreenSharing": "Wys skermdeling"
+            "turnOnScreenSharing": "Wys skermdeling",
+            "fullScreen": "Volskerm"
         },
         "notAllowedToJoinCall": "U het nie toestemming om by hierdie stroom aan te sluit nie.",
         "streamTitle": "{{1}} regstreekse oproep"

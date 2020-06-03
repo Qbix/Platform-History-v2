@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "સ્ક્રીન શેરિંગ છુપાવો",
             "turnOnCamera": "વિડિઓ બતાવો",
             "turnOnAudio": "Mડિઓ અવાજ બંધ કરો",
-            "turnOnScreenSharing": "સ્ક્રીન શેરિંગ બતાવો"
+            "turnOnScreenSharing": "સ્ક્રીન શેરિંગ બતાવો",
+            "fullScreen": "સંપૂર્ણ સ્ક્રીન"
         },
         "notAllowedToJoinCall": "તમને આ પ્રવાહમાં જોડાવાની પરવાનગી નથી.",
         "streamTitle": "} 9 999}} લાઇવ ક callલ"

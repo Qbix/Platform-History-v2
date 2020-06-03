@@ -73,7 +73,8 @@
             "byText": "Cov ntawv nyeem",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} yog tias pom cov cai"
+            "scannedQR": "{{ClickOrTap}} yog tias pom cov cai",
+            "copyLink": "{{ClickOrTap}} theej qhov caw txuas"
         },
         "email": {
             "subject": "Hav, kos qhov no",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "Koj tau raug caw tuaj lawm. {{ClickOrTap}} nov los txais thiab koom nrog."
-        }
+        },
+        "command": "Caw",
+        "youCanNowPaste": "Tam sim no koj tuaj yeem txuas qhov txuas no rau ib qho twg kom caw tib neeg"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "Txuas kab ntawv luam rau ntawv los teev cia",
             "codeCopiedToCb": "Code theej rau ntawv los teev cia",
             "userHasNoVideo": "Cov tuaj koom tsis muaj daim vis dis aus",
-            "openInBrowserAlert": "Qhib qhov txuas hauv Safari browser kom koom nrog lub rooj sib tham."
+            "openInBrowserAlert": "Qhib qhov txuas hauv Safari browser kom koom nrog lub rooj sib tham.",
+            "youBeganVideoRecording": "Koj pib sau cov lus no",
+            "youStoppedVideoRecording": "Koj tsum tsis sau cov lus sib tham no"
         },
         "settingsPopup": {
             "webCamera": "Lub Koob Yees Duab Web",
@@ -173,7 +178,15 @@
             "fbStartLive": "Mus Ua Neej",
             "fbStopLive": "Xaus Nyob",
             "fbEmbedCode": "Khib",
-            "copy": "Luam"
+            "copy": "Luam",
+            "turnOffVideo": "Tig lub koob yees duab \/ tshuaj ntsuam sib qhia",
+            "turnOffScreenSharing": "Xu siab tshuaj ntsuam kev sib koom",
+            "cameraIsTurnedOff": "Lub koob yees duab yog muab tua",
+            "startRecording": "Pib sau cia",
+            "stopRecording": "Nres Txias",
+            "recordingInProgress": "Cov ntaubntawv pov thawj yog nyob rau hauv kev kawm ...",
+            "publishOnTimeline": "Luam tawm rau ncua sijhawm",
+            "publishToGroup": "Tshaj tawm rau pawg"
         },
         "participantsPopup": {
             "disconnect": "Disconnect",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "Tshaj Lij Tshaj Plaws Tsis Yog Kuv",
             "maximizeLoudest": "Txhim Kho Siab Tshaj",
             "staticMaximized": "Zoo li qub Maximized",
-            "manual": "Phau Ntawv"
-        }
+            "manual": "Phau Ntawv",
+            "fullScreen": "Puv Ntsia",
+            "turnOffCamera": "Zais video",
+            "turnOffAudio": "Suab kaw suab",
+            "turnOffScreenSharing": "Nkaum daim iav sib qhia",
+            "turnOnCamera": "Qhia saib video",
+            "turnOnAudio": "Txhob kaw suab",
+            "turnOnScreenSharing": "Qhia pom kev sib koom ntawm kev tshuaj ntsuam"
+        },
+        "notAllowedToJoinCall": "Koj tsis muaj kev tso cai los koom nrog cov kwj deg no.",
+        "streamTitle": "{{1}} nyob ntawm kev hu xov tooj"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "Txuag",
         "Delete": "Rho tawm",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Cov ntsiab lus no tau muab zais los ntawm koj."
     }
 }

@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "ซ่อนการแชร์หน้าจอ",
             "turnOnCamera": "แสดงวิดีโอ",
             "turnOnAudio": "เปิดเสียง",
-            "turnOnScreenSharing": "แสดงการแชร์หน้าจอ"
+            "turnOnScreenSharing": "แสดงการแชร์หน้าจอ",
+            "fullScreen": "เต็มจอ"
         },
         "notAllowedToJoinCall": "คุณไม่ได้รับอนุญาตให้เข้าร่วมสตรีมนี้",
         "streamTitle": "{{1}} การโทรสด"

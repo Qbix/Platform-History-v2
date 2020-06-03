@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Slėpti ekrano bendrinimą",
             "turnOnCamera": "Rodyti vaizdo įrašą",
             "turnOnAudio": "Įjungti garso garsą",
-            "turnOnScreenSharing": "Rodyti ekrano bendrinimą"
+            "turnOnScreenSharing": "Rodyti ekrano bendrinimą",
+            "fullScreen": "Per visą ekraną"
         },
         "notAllowedToJoinCall": "Jūs neturite leidimo prisijungti prie šio srauto.",
         "streamTitle": "{{1}} tiesioginis skambutis"

@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "画面共有を非表示",
             "turnOnCamera": "ビデオを表示",
             "turnOnAudio": "音声のミュートを解除",
-            "turnOnScreenSharing": "画面共有を表示"
+            "turnOnScreenSharing": "画面共有を表示",
+            "fullScreen": "全画面表示"
         },
         "notAllowedToJoinCall": "このストリームに参加する権限がありません。",
         "streamTitle": "{{1}}ライブ通話"

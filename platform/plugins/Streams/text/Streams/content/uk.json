@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Сховати спільний доступ до екрана",
             "turnOnCamera": "Показати відео",
             "turnOnAudio": "Увімкнути звук",
-            "turnOnScreenSharing": "Показати спільний доступ до екрана"
+            "turnOnScreenSharing": "Показати спільний доступ до екрана",
+            "fullScreen": "Повноекранний"
         },
         "notAllowedToJoinCall": "Ви не маєте дозволу приєднатися до цього потоку.",
         "streamTitle": "{{1}} прямий дзвінок"

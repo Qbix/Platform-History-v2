@@ -43,7 +43,8 @@
             "title": "Khetha uqhagamshelwano",
             "CreateAccount": "+ Unxibelelwano olutsha",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create akafumaneki",
-            "SearchByName": "Khangela ngegama"
+            "SearchByName": "Khangela ngegama",
+            "EmptyContacts": "Abaqhagamshelwa abafunyenwanga ..."
         },
         "select": {
             "title": "Khetha uqhagamshelwano lwe {{displayName}}"

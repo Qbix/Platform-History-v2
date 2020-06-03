@@ -73,5 +73,30 @@
             "touchscreen": "Sebelisa menoana ea hau ho senya le ho hula",
             "notTouchscreen": "Sebelisa mouse le maqhubu bakeng sa ho atamela le ho hula"
         }
+    },
+    "timestamp": {
+        "lastNight": "bosiu ba maobane",
+        "lastEvening": "bosiu ba ho qetela",
+        "yesterday": "maobane",
+        "thisMorning": "Hoseng hona",
+        "today": "kajeno",
+        "tonight": "bosiung bona",
+        "tomorrowMorning": "Hoseng hoseng",
+        "tomorrow": "hosane",
+        "hoursAgo": "{{h}} lihora tse fetileng",
+        "hourAgo": "{{h}} hora e fetileng",
+        "minuteAgo": "{{m}} motsotso o fetileng",
+        "minutesAgo": "{{m}} metsotso e fetileng",
+        "secondAgo": "{{s}} motsotsoana o fetileng",
+        "secondsAgo": "{{s}} metsotsoana e fetileng",
+        "fewSecondsAgo": "metsotsoana e fetileng",
+        "rightNow": "hona joale",
+        "inSecond": "ho {{s}} ea bobeli",
+        "inSeconds": "ka metsotsoana e {{s}}",
+        "inMinute": "ka motsotso oa {{m}}",
+        "inMinutes": "ka metsotso e {{m}}",
+        "inHour": "ka hora ea {{h}}",
+        "inHours": "ka lihora tse {{h}}",
+        "inUnderMinute": "ka tlasa motsotso o le mong"
     }
 }

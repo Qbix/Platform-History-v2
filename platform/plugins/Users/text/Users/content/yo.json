@@ -43,7 +43,8 @@
             "title": "Yan olubasọrọ",
             "CreateAccount": "+ Olubasọrọ Tuntun",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create ko ri",
-            "SearchByName": "Wa ni orukọ"
+            "SearchByName": "Wa ni orukọ",
+            "EmptyContacts": "A ko ri awọn olubasọrọ"
         },
         "select": {
             "title": "Yan olubasọrọ ti {{displayName}}"

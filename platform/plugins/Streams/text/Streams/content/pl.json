@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Ukryj udostępnianie ekranu",
             "turnOnCamera": "Pokaż wideo",
             "turnOnAudio": "Wyłącz wyciszenie dźwięku",
-            "turnOnScreenSharing": "Pokaż udostępnianie ekranu"
+            "turnOnScreenSharing": "Pokaż udostępnianie ekranu",
+            "fullScreen": "Pełny ekran"
         },
         "notAllowedToJoinCall": "Nie masz uprawnień, aby dołączyć do tego strumienia.",
         "streamTitle": "{{1}} połączenie na żywo"

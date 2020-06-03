@@ -43,7 +43,8 @@
             "title": "קלייַבן קאָנטאַקט",
             "CreateAccount": "+ ניו קאָנטאַקט",
             "CreateAccountNotFound": "Q.Uersers.Cordova.UI.create ניט געפֿונען",
-            "SearchByName": "זוכן דורך נאָמען"
+            "SearchByName": "זוכן דורך נאָמען",
+            "EmptyContacts": "קאנטאקטן זענען נישט געפונען ..."
         },
         "select": {
             "title": "אויסקלייַבן קאָנטאַקט פון {{displayName}}"

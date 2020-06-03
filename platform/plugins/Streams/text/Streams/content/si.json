@@ -73,7 +73,8 @@
             "byText": "පෙළ",
             "byFacebook": "ෆේස්බුක්",
             "byTwitter": "ට්විටර්",
-            "scannedQR": "කේතය පරිලෝකනය කර ඇත්නම් {{ClickOrTap}}"
+            "scannedQR": "කේතය පරිලෝකනය කර ඇත්නම් {{ClickOrTap}}",
+            "copyLink": "ආරාධනා සබැඳිය පිටපත් කිරීමට {99 999}}"
         },
         "email": {
             "subject": "හේයි, මෙය පරීක්ෂා කරන්න",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "ඔබට ආරාධනා කර ඇත. පිළිගැනීමට හා සම්බන්ධ වීමට here {999}} මෙහි."
-        }
+        },
+        "command": "ආරාධනා කරන්න",
+        "youCanNowPaste": "මිනිසුන්ට ආරාධනා කිරීම සඳහා ඔබට දැන් මෙම සබැඳිය කොහේ හෝ ඇලවිය හැකිය"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "සබැඳිය ක්ලිප් පුවරුවට පිටපත් කරන ලදි",
             "codeCopiedToCb": "කේතය ක්ලිප් පුවරුවට පිටපත් කරන ලදි",
             "userHasNoVideo": "සහභාගිවන්නාට වීඩියෝවක් නොමැත",
-            "openInBrowserAlert": "සමුළුවට සම්බන්ධ වීමට සෆාරි බ්‍රව්සරයේ සබැඳිය විවෘත කරන්න."
+            "openInBrowserAlert": "සමුළුවට සම්බන්ධ වීමට සෆාරි බ්‍රව්සරයේ සබැඳිය විවෘත කරන්න.",
+            "youBeganVideoRecording": "ඔබ මෙම සමුළුව පටිගත කිරීමට පටන් ගත්තා",
+            "youStoppedVideoRecording": "ඔබ මෙම සමුළුව පටිගත කිරීම නැවැත්තුවා"
         },
         "settingsPopup": {
             "webCamera": "වෙබ් කැමරාව",
@@ -173,7 +178,15 @@
             "fbStartLive": "සජීවීව යන්න",
             "fbStopLive": "සජීවීව අවසන් කරන්න",
             "fbEmbedCode": "කාවැද්දීම",
-            "copy": "පිටපත් කරන්න"
+            "copy": "පිටපත් කරන්න",
+            "turnOffVideo": "කැමරාව \/ තිර බෙදාගැනීම අක්‍රිය කරන්න",
+            "turnOffScreenSharing": "තිර බෙදාගැනීම අක්‍රිය කරන්න",
+            "cameraIsTurnedOff": "කැමරාව ක්‍රියා විරහිත කර ඇත",
+            "startRecording": "පටිගත කිරීම ආරම්භ කරන්න",
+            "stopRecording": "පටිගත කිරීම නවත්වන්න",
+            "recordingInProgress": "පටිගත කිරීම සිදු වෙමින් පවතී ...",
+            "publishOnTimeline": "කාලරාමුව මත ප්‍රකාශයට පත් කරන්න",
+            "publishToGroup": "කණ්ඩායමට ප්‍රකාශයට පත් කරන්න"
         },
         "participantsPopup": {
             "disconnect": "විසන්ධි කරන්න",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "මා හැර හ oud නඟන්න",
             "maximizeLoudest": "Loudest උපරිම කරන්න",
             "staticMaximized": "ස්ථිතික උපරිම",
-            "manual": "අත්පොත"
-        }
+            "manual": "අත්පොත",
+            "fullScreen": "පුන් තිරය",
+            "turnOffCamera": "වීඩියෝ සඟවන්න",
+            "turnOffAudio": "ශ්රව්ය උපකරණ නිශ්ශබ්ද කරන්න",
+            "turnOffScreenSharing": "තිර බෙදාගැනීම සඟවන්න",
+            "turnOnCamera": "වීඩියෝව පෙන්වන්න",
+            "turnOnAudio": "ශ්රව්ය උපකරණ ඉවත් කරන්න",
+            "turnOnScreenSharing": "තිර බෙදාගැනීම පෙන්වන්න"
+        },
+        "notAllowedToJoinCall": "මෙම ප්‍රවාහයට සම්බන්ධ වීමට ඔබට අවසර නැත.",
+        "streamTitle": "{{1}} සජීවී ඇමතුම"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "සුරකින්න",
         "Delete": "මකන්න",
         "Submenu": "උප මෙනූ"
+    },
+    "errors": {
+        "HiddenFromYou": "මෙම අන්තර්ගතය ඔබෙන් සැඟවී ඇත."
     }
 }

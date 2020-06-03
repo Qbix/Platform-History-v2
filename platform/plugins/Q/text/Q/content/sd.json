@@ -73,5 +73,30 @@
             "touchscreen": "پنھنجي آڱرين کي ڏسو ۽ ڇڪڻ لاء استعمال ڪريو",
             "notTouchscreen": "پنھنجي ماؤس ۽ سائيڪل کي ڏسو ۽ ڇڪڻ لاء استعمال ڪريو"
         }
+    },
+    "timestamp": {
+        "lastNight": "گزريل رات",
+        "lastEvening": "گذريل شام",
+        "yesterday": "ڪالھ",
+        "thisMorning": "هي صبح",
+        "today": "ا",
+        "tonight": "ا tonight رات",
+        "tomorrowMorning": "ٽام مارن",
+        "tomorrow": "سڀاڻي",
+        "hoursAgo": "{{h}} ڪلاڪ اڳ",
+        "hourAgo": "{{h}} ڪلاڪ اڳ",
+        "minuteAgo": "{{m}} منٽ اڳ",
+        "minutesAgo": "{{m}} منٽ اڳ",
+        "secondAgo": "{{s}} سيڪنڊ اڳ",
+        "secondsAgo": "{{s}} سيڪنڊ اڳ",
+        "fewSecondsAgo": "سيڪنڊ اڳ",
+        "rightNow": "بلڪل هاڻي",
+        "inSecond": "{{s}} سيڪنڊ ۾",
+        "inSeconds": "{{s}} سيڪنڊن ۾",
+        "inMinute": "{{m}} منٽ ۾",
+        "inMinutes": "{{m}} منٽن ۾",
+        "inHour": "{{h}} ڪلاڪ ۾",
+        "inHours": "{{h}} ڪلاڪن ۾",
+        "inUnderMinute": "1 منٽ کان گهٽ ۾"
     }
 }

@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Aħbi l-qsim tal-iskrin",
             "turnOnCamera": "Uri vidjow",
             "turnOnAudio": "Akkordja l-awdjo",
-            "turnOnScreenSharing": "Uri l-qsim tal-iskrin"
+            "turnOnScreenSharing": "Uri l-qsim tal-iskrin",
+            "fullScreen": "Skrin sħiħ"
         },
         "notAllowedToJoinCall": "M&#39;għandekx permess biex tissieħeb f&#39;dan il-fluss.",
         "streamTitle": "{{1}} telefonata diretta"

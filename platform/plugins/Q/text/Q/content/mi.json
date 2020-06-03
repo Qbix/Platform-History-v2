@@ -73,5 +73,30 @@
             "touchscreen": "Whakamahia ou maihao ki te tarai me te toi",
             "notTouchscreen": "Whakamahia te kiore me te wira ki te toro me te toi"
         }
+    },
+    "timestamp": {
+        "lastNight": "inanahi nei",
+        "lastEvening": "inanahi",
+        "yesterday": "inanahi",
+        "thisMorning": "tenei ata",
+        "today": "inanahi",
+        "tonight": "tenei po",
+        "tomorrowMorning": "ata ata",
+        "tomorrow": "āpōpō",
+        "hoursAgo": "{{h}} haora i mua",
+        "hourAgo": "{{h}} haora i mua",
+        "minuteAgo": "{{m}} meneti i mua",
+        "minutesAgo": "{{m}} meneti i mua",
+        "secondAgo": "{{s}} tuarua i mua",
+        "secondsAgo": "{{s}} hekona i mua",
+        "fewSecondsAgo": "hēkona i mua",
+        "rightNow": "inaianei",
+        "inSecond": "i te {{s}} tuarua",
+        "inSeconds": "i roto i {{s}} hēkona",
+        "inMinute": "i roto i {{m}} meneti",
+        "inMinutes": "i roto i {{m}} meneti",
+        "inHour": "i roto i {{h}} haora",
+        "inHours": "i roto i {{h}} haora",
+        "inUnderMinute": "i raro i te 1 meneti"
     }
 }

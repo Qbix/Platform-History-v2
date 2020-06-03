@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Схаваць агульны доступ да экрана",
             "turnOnCamera": "Паказаць відэа",
             "turnOnAudio": "Уключыць гук для гуку",
-            "turnOnScreenSharing": "Паказаць сумеснае выкарыстанне экрана"
+            "turnOnScreenSharing": "Паказаць сумеснае выкарыстанне экрана",
+            "fullScreen": "Поуны экран"
         },
         "notAllowedToJoinCall": "Вы не маеце дазволу далучыцца да гэтага патоку.",
         "streamTitle": "{{1}} Жывы званок"

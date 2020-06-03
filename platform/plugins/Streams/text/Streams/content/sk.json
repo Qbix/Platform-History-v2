@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Skryť zdieľanie obrazovky",
             "turnOnCamera": "Zobraziť video",
             "turnOnAudio": "Obnoviť zvuk",
-            "turnOnScreenSharing": "Zobraziť zdieľanie obrazovky"
+            "turnOnScreenSharing": "Zobraziť zdieľanie obrazovky",
+            "fullScreen": "Celá obrazovka"
         },
         "notAllowedToJoinCall": "Na pripojenie k tomuto toku nemáte povolenie.",
         "streamTitle": "{{1}} živý hovor"

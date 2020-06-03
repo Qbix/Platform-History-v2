@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Скрыть экран обмена",
             "turnOnCamera": "Показать видео",
             "turnOnAudio": "Включить звук",
-            "turnOnScreenSharing": "Показать общий доступ к экрану"
+            "turnOnScreenSharing": "Показать общий доступ к экрану",
+            "fullScreen": "Полноэкранный"
         },
         "notAllowedToJoinCall": "У вас нет разрешения присоединиться к этому потоку.",
         "streamTitle": "{{1}} живой звонок"

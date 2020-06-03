@@ -73,7 +73,8 @@
             "byText": "Teksto",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} kung ang code gi-scan"
+            "scannedQR": "{{ClickOrTap}} kung ang code gi-scan",
+            "copyLink": "{{ClickOrTap}} aron kopyahon ang link sa pagdapit"
         },
         "email": {
             "subject": "Hoy, susiha kini",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "Gidapit ka. {{ClickOrTap}} dinhi aron dawaton ug apilan."
-        }
+        },
+        "command": "Imbitar",
+        "youCanNowPaste": "Mahimo nimo karon i-paste kini nga link sa usa ka lugar aron maimbitahan ang mga tawo"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "Link nga gikopya sa clipboard",
             "codeCopiedToCb": "Ang code nga gikopya sa clipboard",
             "userHasNoVideo": "Wala’y video ang partisipante",
-            "openInBrowserAlert": "Buksi ang link sa Safari browser aron moapil sa komperensya"
+            "openInBrowserAlert": "Buksi ang link sa Safari browser aron moapil sa komperensya",
+            "youBeganVideoRecording": "Gisugdan nimo ang pagrekord niini nga komperensya",
+            "youStoppedVideoRecording": "Mihunong ka sa pagrekord niini nga komperensya"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -173,7 +178,15 @@
             "fbStartLive": "Lakaw nga Mabuhi",
             "fbStopLive": "Katapusan nga Pagpuyo",
             "fbEmbedCode": "Gipasangkad",
-            "copy": "Kopyahon"
+            "copy": "Kopyahon",
+            "turnOffVideo": "Patya ang pagpaambit sa camera \/ screen",
+            "turnOffScreenSharing": "Patya ang pagpaambit sa screen",
+            "cameraIsTurnedOff": "Napatay ang camera",
+            "startRecording": "Pagsugod Pagrekord",
+            "stopRecording": "Hunong Pagrekord",
+            "recordingInProgress": "Nagpadayon ang pagrekord ...",
+            "publishOnTimeline": "I-publish sa timeline",
+            "publishToGroup": "I-publish sa grupo"
         },
         "participantsPopup": {
             "disconnect": "Pagdugtong",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "Labing Labing Maayong Gawas",
             "maximizeLoudest": "Pag-maximize ang Loudest",
             "staticMaximized": "Static nga Nag-ayo",
-            "manual": "Manwal"
-        }
+            "manual": "Manwal",
+            "fullScreen": "Tibuok nga Screen",
+            "turnOffCamera": "Tagoi ang video",
+            "turnOffAudio": "Hilom nga audio",
+            "turnOffScreenSharing": "Itago ang pagpaambit sa screen",
+            "turnOnCamera": "Ipakita ang video",
+            "turnOnAudio": "Ayaw paghunong audio",
+            "turnOnScreenSharing": "Ipakita ang pagpaambit sa screen"
+        },
+        "notAllowedToJoinCall": "Wala kay pagtugot nga moapil sa kini nga sapa.",
+        "streamTitle": "{{1}} live nga tawag"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "Pag-save",
         "Delete": "Pagwagtang",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Ang sulud kini gitago gikan kanimo."
     }
 }

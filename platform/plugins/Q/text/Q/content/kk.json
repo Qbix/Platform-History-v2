@@ -73,5 +73,30 @@
             "touchscreen": "Ұлғайту және сүйреу үшін саусақтарыңызды пайдаланыңыз",
             "notTouchscreen": "Ұлғайту және сүйреу үшін тінтуір мен дөңгелекті пайдаланыңыз"
         }
+    },
+    "timestamp": {
+        "lastNight": "өткен түнде",
+        "lastEvening": "өткен кеш",
+        "yesterday": "кеше",
+        "thisMorning": "бұл таң",
+        "today": "бүгін",
+        "tonight": "бүгін кешке",
+        "tomorrowMorning": "Том таң",
+        "tomorrow": "ертең",
+        "hoursAgo": "{{h}} сағат бұрын",
+        "hourAgo": "{{h}} сағат бұрын",
+        "minuteAgo": "{{m}} минут бұрын",
+        "minutesAgo": "{{m}} минут бұрын",
+        "secondAgo": "{{s}} екінші рет",
+        "secondsAgo": "{{s}} секунд бұрын",
+        "fewSecondsAgo": "секунд бұрын",
+        "rightNow": "дәл қазір",
+        "inSecond": "{{s}} секундта",
+        "inSeconds": "{{s}} секундта",
+        "inMinute": "{{m}} минут ішінде",
+        "inMinutes": "{{m}} минут ішінде",
+        "inHour": "{{h}} сағатта",
+        "inHours": "{{h}} сағат ішінде",
+        "inUnderMinute": "1 минут ішінде"
     }
 }

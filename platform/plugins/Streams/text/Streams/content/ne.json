@@ -73,7 +73,8 @@
             "byText": "पाठ",
             "byFacebook": "फेसबुक",
             "byTwitter": "ट्विटर",
-            "scannedQR": "Scan {9{}} कोड स्क्यान गरिएको थियो भने"
+            "scannedQR": "Scan {9{}} कोड स्क्यान गरिएको थियो भने",
+            "copyLink": "आमन्त्रित लिंकको प्रतिलिपि गर्न {invite 9{}।।"
         },
         "email": {
             "subject": "अरे, यो जाँच गर्नुहोस्",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "तपाईंलाई आमन्त्रित गरिएको छ। {{ClickOrTap}} यहाँ स्वीकार गर्न र सामेल हुन।"
-        }
+        },
+        "command": "आमन्त्रण",
+        "youCanNowPaste": "व्यक्तिलाई आमन्त्रित गर्न तपाईं अब यो लिंक टाँस्न सक्नुहुन्छ"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "लिंक क्लिपबोर्डमा प्रतिलिपि गरियो",
             "codeCopiedToCb": "क्लिपबोर्डमा कोड प्रतिलिपि गरियो",
             "userHasNoVideo": "सहभागीको कुनै भिडियो छैन",
-            "openInBrowserAlert": "सम्मेलनमा सामेल हुन सफारी ब्राउजरमा लिंक खोल्नुहोस्।"
+            "openInBrowserAlert": "सम्मेलनमा सामेल हुन सफारी ब्राउजरमा लिंक खोल्नुहोस्।",
+            "youBeganVideoRecording": "तपाईंले यो सम्मेलन रेकर्ड गर्न सुरु गर्नुभयो",
+            "youStoppedVideoRecording": "तपाईंले यो सम्मेलन रेकर्ड गर्न रोक्नुभयो"
         },
         "settingsPopup": {
             "webCamera": "वेब क्यामेरा",
@@ -173,7 +178,15 @@
             "fbStartLive": "प्रत्यक्ष जानुहोस्",
             "fbStopLive": "अन्त लाइभ",
             "fbEmbedCode": "इम्बेड",
-            "copy": "कापी"
+            "copy": "कापी",
+            "turnOffVideo": "क्यामेरा \/ स्क्रीन साझेदारी बन्द गर्नुहोस्",
+            "turnOffScreenSharing": "स्क्रीन साझेदारी बन्द गर्नुहोस्",
+            "cameraIsTurnedOff": "क्यामेरा बन्द छ",
+            "startRecording": "रेकर्डि Start सुरू गर्नुहोस्",
+            "stopRecording": "रेकर्डि Stop रोक्नुहोस्",
+            "recordingInProgress": "रेकर्डि progress प्रगतिमा छ ...",
+            "publishOnTimeline": "टाइमलाइनमा प्रकाशित गर्नुहोस्",
+            "publishToGroup": "समूहमा प्रकाशित गर्नुहोस्"
         },
         "participantsPopup": {
             "disconnect": "विच्छेद गर्नुहोस्",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "म बाहेक ठूलो स्वर",
             "maximizeLoudest": "अधिकतम लाउडेस्ट गर्नुहोस्",
             "staticMaximized": "स्थिर अधिकतम",
-            "manual": "म्यानुअल"
-        }
+            "manual": "म्यानुअल",
+            "fullScreen": "पूर्ण स्क्रीन",
+            "turnOffCamera": "भिडियो लुकाउनुहोस्",
+            "turnOffAudio": "अडियो म्यूट गर्नुहोस्",
+            "turnOffScreenSharing": "स्क्रिन सेयरिंग लुकाउनुहोस्",
+            "turnOnCamera": "भिडियो देखाउनुहोस्",
+            "turnOnAudio": "अडियो अनम्यूट गर्नुहोस्",
+            "turnOnScreenSharing": "स्क्रीन साझेदारी देखाउनुहोस्"
+        },
+        "notAllowedToJoinCall": "तपाईंसँग यस स्ट्रिममा सहभागी हुन अनुमति छैन।",
+        "streamTitle": "Call {9{}} call प्रत्यक्ष कल"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "बचत गर्नुहोस्",
         "Delete": "मेटाउन",
         "Submenu": "सबमेनु"
+    },
+    "errors": {
+        "HiddenFromYou": "यो सामग्री तपाईंबाट लुकेको छ।"
     }
 }

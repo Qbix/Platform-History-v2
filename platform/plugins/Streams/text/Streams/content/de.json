@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Bildschirmfreigabe ausblenden",
             "turnOnCamera": "Video anzeigen",
             "turnOnAudio": "Audio stummschalten",
-            "turnOnScreenSharing": "Bildschirmfreigabe anzeigen"
+            "turnOnScreenSharing": "Bildschirmfreigabe anzeigen",
+            "fullScreen": "Vollbildschirm"
         },
         "notAllowedToJoinCall": "Sie haben keine Berechtigung, diesem Stream beizutreten.",
         "streamTitle": "{{1}} Live-Anruf"

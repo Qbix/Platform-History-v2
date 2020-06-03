@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "திரை பகிர்வை மறைக்க",
             "turnOnCamera": "வீடியோவைக் காட்டு",
             "turnOnAudio": "ஆடியோவை முடக்கு",
-            "turnOnScreenSharing": "திரை பகிர்வைக் காட்டு"
+            "turnOnScreenSharing": "திரை பகிர்வைக் காட்டு",
+            "fullScreen": "முழு திரை"
         },
         "notAllowedToJoinCall": "இந்த ஸ்ட்ரீமில் சேர உங்களுக்கு அனுமதி இல்லை.",
         "streamTitle": "{{1}} நேரடி அழைப்பு"

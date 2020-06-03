@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Ẩn chia sẻ màn hình",
             "turnOnCamera": "Hiển thị video",
             "turnOnAudio": "Tắt âm thanh",
-            "turnOnScreenSharing": "Hiển thị chia sẻ màn hình"
+            "turnOnScreenSharing": "Hiển thị chia sẻ màn hình",
+            "fullScreen": "Toàn màn hình"
         },
         "notAllowedToJoinCall": "Bạn không được phép tham gia luồng này.",
         "streamTitle": "{{1}} cuộc gọi trực tiếp"

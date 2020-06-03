@@ -73,5 +73,30 @@
             "touchscreen": "විශාලනය කිරීමට සහ ඇදගෙන යාමට ඔබේ ඇඟිලි භාවිතා කරන්න",
             "notTouchscreen": "විශාලනය කිරීමට සහ ඇදගෙන යාමට ඔබේ මූසිකය සහ රෝදය භාවිතා කරන්න"
         }
+    },
+    "timestamp": {
+        "lastNight": "ඊයේ රෑ",
+        "lastEvening": "අන්තිම දවස",
+        "yesterday": "ඊයේ",
+        "thisMorning": "මේ උදේ",
+        "today": "අද",
+        "tonight": "අද රෑ",
+        "tomorrowMorning": "ටොම් මෝන්",
+        "tomorrow": "හෙට",
+        "hoursAgo": "{{h}} පැය කිහිපයකට පෙර",
+        "hourAgo": "{{h}} පැයකට පෙර",
+        "minuteAgo": "මිනිත්තුවකට පෙර {{m}}",
+        "minutesAgo": "මිනිත්තු {999}} මිනිත්තු කිහිපයකට පෙර",
+        "secondAgo": "{{s}} තත්පරයට පෙර",
+        "secondsAgo": "තත්පර {999}} තත්පරයට පෙර",
+        "fewSecondsAgo": "තත්පර වලට පෙර",
+        "rightNow": "මේ දැන්",
+        "inSecond": "තත්පර {{s}} දී",
+        "inSeconds": "තත්පර {99 999}} කින්",
+        "inMinute": "{{m}} විනාඩියෙන්",
+        "inMinutes": "{{m}} විනාඩි වලින්",
+        "inHour": "{{h}} පැය තුළ",
+        "inHours": "{{h}} පැය වලින්",
+        "inUnderMinute": "මිනිත්තු 1 ට අඩු"
     }
 }

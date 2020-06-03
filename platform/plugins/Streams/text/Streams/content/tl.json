@@ -73,7 +73,8 @@
             "byText": "Teksto",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} kung na-scan ang code"
+            "scannedQR": "{{ClickOrTap}} kung na-scan ang code",
+            "copyLink": "{{ClickOrTap}} upang kopyahin ang link ng imbitasyon"
         },
         "email": {
             "subject": "Uy, tingnan mo ito",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "Inanyayahan ka. {{ClickOrTap}} dito upang tanggapin at sumali."
-        }
+        },
+        "command": "Mag-anyaya",
+        "youCanNowPaste": "Maaari mo nang i-paste ang link na ito sa isang lugar upang anyayahan ang mga tao"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "Link na kinopya sa clipboard",
             "codeCopiedToCb": "Nakopya ang code sa clipboard",
             "userHasNoVideo": "Ang kalahok ay walang video",
-            "openInBrowserAlert": "Buksan ang link sa Safari browser upang sumali sa kumperensya."
+            "openInBrowserAlert": "Buksan ang link sa Safari browser upang sumali sa kumperensya.",
+            "youBeganVideoRecording": "Sinimulan mo ang pagrekord sa kumperensya na ito",
+            "youStoppedVideoRecording": "Tumigil ka sa pag-record ng kumperensya na ito"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -173,7 +178,15 @@
             "fbStartLive": "Go Live",
             "fbStopLive": "Tapusin ang Mabuhay",
             "fbEmbedCode": "I-embed",
-            "copy": "Kopya"
+            "copy": "Kopya",
+            "turnOffVideo": "I-off ang pagbabahagi ng camera \/ screen",
+            "turnOffScreenSharing": "Patayin ang pagbabahagi ng screen",
+            "cameraIsTurnedOff": "Naka-off ang camera",
+            "startRecording": "Simulan ang recording",
+            "stopRecording": "Itigil ang Pag-record",
+            "recordingInProgress": "Natapos ang pagrekord ...",
+            "publishOnTimeline": "I-publish sa takdang oras",
+            "publishToGroup": "I-publish sa pangkat"
         },
         "participantsPopup": {
             "disconnect": "Idiskonekta",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "Loudest Maliban sa Akin",
             "maximizeLoudest": "I-maximize ang Loudest",
             "staticMaximized": "Static na Na-maximize",
-            "manual": "Manwal"
-        }
+            "manual": "Manwal",
+            "fullScreen": "Buong Screen",
+            "turnOffCamera": "Itago ang video",
+            "turnOffAudio": "I-mute ang audio",
+            "turnOffScreenSharing": "Itago ang pagbabahagi ng screen",
+            "turnOnCamera": "Ipakita ang video",
+            "turnOnAudio": "I-unute ang audio",
+            "turnOnScreenSharing": "Ipakita ang pagbabahagi ng screen"
+        },
+        "notAllowedToJoinCall": "Wala kang pahintulot na sumali sa stream na ito.",
+        "streamTitle": "Live na tawag ng {{1}}"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "I-save",
         "Delete": "Tanggalin",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Ang nilalamang ito ay nakatago mula sa iyo."
     }
 }

@@ -73,5 +73,30 @@
             "touchscreen": "Sèvi ak dwèt ou pou rale ak trennen",
             "notTouchscreen": "Sèvi ak sourit ou &amp; wou rale ak trennen"
         }
+    },
+    "timestamp": {
+        "lastNight": "yeswa",
+        "lastEvening": "dènye vèy",
+        "yesterday": "yè",
+        "thisMorning": "Morn sa a",
+        "today": "jodi a",
+        "tonight": "aswè a",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "demen",
+        "hoursAgo": "{{h}} èdtan de sa",
+        "hourAgo": "{{h}} èdtan de sa",
+        "minuteAgo": "{{m}} minit de sa",
+        "minutesAgo": "{{m}} minit de sa",
+        "secondAgo": "{{s}} dezyèm de sa",
+        "secondsAgo": "{{s}} segonn de sa",
+        "fewSecondsAgo": "segonn de sa",
+        "rightNow": "kounye a",
+        "inSecond": "nan {{s}} dezyèm fwa",
+        "inSeconds": "nan {{s}} segonn",
+        "inMinute": "nan {{m}} minit",
+        "inMinutes": "nan {{m}} minit",
+        "inHour": "nan {{h}} èdtan",
+        "inHours": "nan {{h}} èdtan",
+        "inUnderMinute": "anba 1 minit"
     }
 }

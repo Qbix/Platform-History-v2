@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Ekran paylaşımını gizle",
             "turnOnCamera": "Videoyu göster",
             "turnOnAudio": "Sesi aç",
-            "turnOnScreenSharing": "Ekran paylaşımını göster"
+            "turnOnScreenSharing": "Ekran paylaşımını göster",
+            "fullScreen": "Tam ekran"
         },
         "notAllowedToJoinCall": "Bu akışa katılma izniniz yok.",
         "streamTitle": "{{1}} canlı çağrı"

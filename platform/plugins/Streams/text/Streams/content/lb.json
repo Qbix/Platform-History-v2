@@ -73,7 +73,8 @@
             "byText": "Text",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} wann de Code gescannt gouf"
+            "scannedQR": "{{ClickOrTap}} wann de Code gescannt gouf",
+            "copyLink": "{{ClickOrTap}} fir Invitatiounslink ze kopéieren"
         },
         "email": {
             "subject": "Hey, kontrolléiert dat aus",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "Dir hutt invitéiert. {{ClickOrTap}} hei fir ze akzeptéieren a matzemaachen."
-        }
+        },
+        "command": "Invitéieren",
+        "youCanNowPaste": "Dir kënnt elo dëse Link iergendwou plakken fir Leit ze invitéieren"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "Link kopéiert op Clipboard",
             "codeCopiedToCb": "Code kopéiert op Clipboard",
             "userHasNoVideo": "De Participant huet kee Video",
-            "openInBrowserAlert": "Open Link am Safari Browser fir mat der Konferenz matzemaachen."
+            "openInBrowserAlert": "Open Link am Safari Browser fir mat der Konferenz matzemaachen.",
+            "youBeganVideoRecording": "Dir hutt dës Konferenz opgeholl",
+            "youStoppedVideoRecording": "Dir hutt dës Konferenz opgeholl"
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -173,7 +178,15 @@
             "fbStartLive": "Gitt Live",
             "fbStopLive": "End Live",
             "fbEmbedCode": "Embedden",
-            "copy": "Kopie"
+            "copy": "Kopie",
+            "turnOffVideo": "Kamera \/ Bildschierm auszeschalten",
+            "turnOffScreenSharing": "Auszeschalten Écran Deele",
+            "cameraIsTurnedOff": "D&#39;Kamera ass ausgeschalt",
+            "startRecording": "Start Enregistréiere",
+            "stopRecording": "Stop Enregistréiere",
+            "recordingInProgress": "D&#39;Recording ass amgaang ...",
+            "publishOnTimeline": "Verëffentlecht op Timeline",
+            "publishToGroup": "Verëffentlechen op Grupp"
         },
         "participantsPopup": {
             "disconnect": "Trennen",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "Héchstens ausser mir",
             "maximizeLoudest": "Maximaliséieren Lueft",
             "staticMaximized": "Statesch Maximaliséiert",
-            "manual": "Handbuch"
-        }
+            "manual": "Handbuch",
+            "fullScreen": "Vollbildmodus",
+            "turnOffCamera": "Verstoppen Video",
+            "turnOffAudio": "Mute Audio",
+            "turnOffScreenSharing": "Verstoppen Écran Deele",
+            "turnOnCamera": "Show Video",
+            "turnOnAudio": "Unmute Audio",
+            "turnOnScreenSharing": "Show Écran Deele"
+        },
+        "notAllowedToJoinCall": "Dir hutt net déi néideg Rechter fir matzemaachen.",
+        "streamTitle": "{{1}} Live Uruff"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "Späicheren",
         "Delete": "Läschen",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Dësen Inhalt ass vun Iech verstoppt."
     }
 }

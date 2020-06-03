@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Сокриј споделување на екранот",
             "turnOnCamera": "Покажи видео",
             "turnOnAudio": "Исклучете го аудио",
-            "turnOnScreenSharing": "Прикажи споделување на екранот"
+            "turnOnScreenSharing": "Прикажи споделување на екранот",
+            "fullScreen": "Цел екран"
         },
         "notAllowedToJoinCall": "Немате дозвола да се приклучите на овој поток.",
         "streamTitle": "99 99 999}} во живо повик"

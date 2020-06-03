@@ -73,7 +73,8 @@
             "byText": "ຂໍ້​ຄວາມ",
             "byFacebook": "ເຟສບຸກ",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} ຖ້າລະຫັດຖືກສະແກນ"
+            "scannedQR": "{{ClickOrTap}} ຖ້າລະຫັດຖືກສະແກນ",
+            "copyLink": "{{ClickOrTap}} ເພື່ອ ສຳ ເນົາລິ້ງເຊີນ"
         },
         "email": {
             "subject": "Hey, ກວດເບິ່ງນີ້ອອກ",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "ທ່ານໄດ້ຮັບເຊີນ. {{ClickOrTap}} ທີ່ນີ້ເພື່ອຍອມຮັບແລະເຂົ້າຮ່ວມ."
-        }
+        },
+        "command": "ເຊີນເຂົ້າຮ່ວມ",
+        "youCanNowPaste": "ດຽວນີ້ທ່ານສາມາດວາງລິ້ງນີ້ຢູ່ບ່ອນໃດບ່ອນ ໜຶ່ງ ເພື່ອເຊື້ອເຊີນຄົນ"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "ການເຊື່ອມຕໍ່ໄດ້ຄັດລອກໄປທີ່ clipboard",
             "codeCopiedToCb": "ລະຫັດຖືກຄັດລອກໄປທີ່ clipboard",
             "userHasNoVideo": "ຜູ້ເຂົ້າຮ່ວມບໍ່ມີວິດີໂອ",
-            "openInBrowserAlert": "ເປີດລິ້ງໃນ browser browser ເພື່ອເຂົ້າຮ່ວມການປະຊຸມ."
+            "openInBrowserAlert": "ເປີດລິ້ງໃນ browser browser ເພື່ອເຂົ້າຮ່ວມການປະຊຸມ.",
+            "youBeganVideoRecording": "ທ່ານເລີ່ມບັນທຶກກອງປະຊຸມນີ້",
+            "youStoppedVideoRecording": "ທ່ານຢຸດການບັນທຶກກອງປະຊຸມນີ້"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -173,7 +178,15 @@
             "fbStartLive": "ໄປ Live",
             "fbStopLive": "ສິ້ນສຸດ Live",
             "fbEmbedCode": "ຝັງ",
-            "copy": "ສຳ ເນົາ"
+            "copy": "ສຳ ເນົາ",
+            "turnOffVideo": "ປິດການແບ່ງປັນກ້ອງຖ່າຍຮູບ \/ ໜ້າ ຈໍ",
+            "turnOffScreenSharing": "ປິດການແບ່ງປັນ ໜ້າ ຈໍ",
+            "cameraIsTurnedOff": "ກ້ອງຖືກປິດ",
+            "startRecording": "ເລີ່ມຕົ້ນການບັນທຶກ",
+            "stopRecording": "ຢຸດການບັນທຶກ",
+            "recordingInProgress": "ການບັນທຶກ ກຳ ລັງ ດຳ ເນີນຢູ່ ...",
+            "publishOnTimeline": "ເຜີຍແຜ່ຕາມ ກຳ ນົດເວລາ",
+            "publishToGroup": "ເຜີຍແຜ່ໃຫ້ກຸ່ມ"
         },
         "participantsPopup": {
             "disconnect": "ຕັດຂາດ",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "ຍົກເວັ້ນຂ້ອຍ",
             "maximizeLoudest": "ເຮັດໃຫ້ສູງທີ່ສຸດ",
             "staticMaximized": "Static Maximized",
-            "manual": "ຄູ່ມື"
-        }
+            "manual": "ຄູ່ມື",
+            "fullScreen": "ເຕັມ​ຈໍ",
+            "turnOffCamera": "ເຊື່ອງວິດີໂອ",
+            "turnOffAudio": "ປິດສຽງ",
+            "turnOffScreenSharing": "ເຊື່ອງການແບ່ງປັນ ໜ້າ ຈໍ",
+            "turnOnCamera": "ສະແດງວິດີໂອ",
+            "turnOnAudio": "ເປີດສຽງ",
+            "turnOnScreenSharing": "ສະແດງການແບ່ງປັນ ໜ້າ ຈໍ"
+        },
+        "notAllowedToJoinCall": "ທ່ານບໍ່ມີສິດເຂົ້າຮ່ວມກະແສນີ້.",
+        "streamTitle": "{{1}} ການໂທໂດຍກົງ"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "ບັນທຶກ",
         "Delete": "ລົບ",
         "Submenu": "ເມນູຍ່ອຍ"
+    },
+    "errors": {
+        "HiddenFromYou": "ເນື້ອຫານີ້ຖືກປິດບັງຈາກທ່ານ."
     }
 }

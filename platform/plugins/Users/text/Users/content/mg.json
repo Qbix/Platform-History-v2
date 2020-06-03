@@ -43,7 +43,8 @@
             "title": "Mifidiana fifandraisana",
             "CreateAccount": "+ Fifandraisana vaovao",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create tsy hita",
-            "SearchByName": "Mikaraho amin&#39;ny anarany"
+            "SearchByName": "Mikaraho amin&#39;ny anarany",
+            "EmptyContacts": "Fifandraisana tsy hita ..."
         },
         "select": {
             "title": "Fifantenana fifandraisana amin&#39;ny {999}}"

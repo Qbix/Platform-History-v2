@@ -43,7 +43,8 @@
             "title": "ዕውቂያ ይምረጡ",
             "CreateAccount": "+ አዲስ እውቂያ",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create አልተገኘም",
-            "SearchByName": "በስም ይፈልጉ"
+            "SearchByName": "በስም ይፈልጉ",
+            "EmptyContacts": "እውቅያዎች አልተገኙም ..."
         },
         "select": {
             "title": "የ {{displayName}} እውቂያ ይምረጡ"

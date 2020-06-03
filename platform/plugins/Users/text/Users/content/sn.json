@@ -43,7 +43,8 @@
             "title": "Sarudza",
             "CreateAccount": "+ Kubata Kwetsva",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create haina kuwanikwa",
-            "SearchByName": "Tsvaga nemazita"
+            "SearchByName": "Tsvaga nemazita",
+            "EmptyContacts": "Contacts hazviwanikwe ..."
         },
         "select": {
             "title": "Sarudza mutauro we {{displayName}}"

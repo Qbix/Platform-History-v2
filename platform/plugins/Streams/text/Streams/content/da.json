@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Skjul deling af skærmen",
             "turnOnCamera": "Vis video",
             "turnOnAudio": "Dæmp lyden",
-            "turnOnScreenSharing": "Vis skærmdeling"
+            "turnOnScreenSharing": "Vis skærmdeling",
+            "fullScreen": "Fuld skærm"
         },
         "notAllowedToJoinCall": "Du har ikke tilladelse til at deltage i denne strøm.",
         "streamTitle": "{{1}} liveopkald"

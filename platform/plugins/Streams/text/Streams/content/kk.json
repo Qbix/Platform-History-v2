@@ -73,7 +73,8 @@
             "byText": "Мәтін",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "Егер код сканерленген болса {{ClickOrTap}}"
+            "scannedQR": "Егер код сканерленген болса {{ClickOrTap}}",
+            "copyLink": "Шақыру сілтемесін көшіру үшін {{ClickOrTap}}"
         },
         "email": {
             "subject": "Hey, мұны тексеріңіз",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "Сізді шақырды. {{ClickOrTap}} мұнда қабылдау және қосылу үшін."
-        }
+        },
+        "command": "Шақыру",
+        "youCanNowPaste": "Енді сіз бұл сілтемені адамдарды шақыру үшін бір жерге қоюға болады"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "Сілтеме алмасу буферіне көшірілді",
             "codeCopiedToCb": "Код алмасу буферіне көшірілді",
             "userHasNoVideo": "Қатысушының бейнесі жоқ",
-            "openInBrowserAlert": "Конференцияға қатысу үшін Safari шолғышында сілтемені ашыңыз."
+            "openInBrowserAlert": "Конференцияға қатысу үшін Safari шолғышында сілтемені ашыңыз.",
+            "youBeganVideoRecording": "Сіз осы конференцияны жаза бастадыңыз",
+            "youStoppedVideoRecording": "Сіз бұл конференцияны жазуды тоқтаттыңыз"
         },
         "settingsPopup": {
             "webCamera": "Веб-камера",
@@ -173,7 +178,15 @@
             "fbStartLive": "Өмір сүр",
             "fbStopLive": "Тікелей эфир",
             "fbEmbedCode": "Ендіру",
-            "copy": "Көшіру"
+            "copy": "Көшіру",
+            "turnOffVideo": "Камера \/ экран бөлісуді өшіріңіз",
+            "turnOffScreenSharing": "Экранды бөлісуді өшіріңіз",
+            "cameraIsTurnedOff": "Камера өшірулі",
+            "startRecording": "Жазуды бастаңыз",
+            "stopRecording": "Жазуды тоқтату",
+            "recordingInProgress": "Жазу орындалуда ...",
+            "publishOnTimeline": "Уақыт кестесінде жариялау",
+            "publishToGroup": "Топқа жариялау"
         },
         "participantsPopup": {
             "disconnect": "Ажырату",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "Менен басқа ең жоғары дауыс",
             "maximizeLoudest": "Ең жоғары деңгей",
             "staticMaximized": "Статикалық максималды",
-            "manual": "Қолмен"
-        }
+            "manual": "Қолмен",
+            "fullScreen": "Толық экран",
+            "turnOffCamera": "Бейнені жасыру",
+            "turnOffAudio": "Дыбысты өшіру",
+            "turnOffScreenSharing": "Экранмен бөлісуді жасыру",
+            "turnOnCamera": "Видеоны көрсету",
+            "turnOnAudio": "Дыбысты қосу",
+            "turnOnScreenSharing": "Экранмен бөлісуді көрсету"
+        },
+        "notAllowedToJoinCall": "Бұл ағынға қосылуға рұқсатыңыз жоқ.",
+        "streamTitle": "{{1}} тікелей қоңырау"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "Сақтау",
         "Delete": "Жою",
         "Submenu": "Ішкі мәзір"
+    },
+    "errors": {
+        "HiddenFromYou": "Бұл мазмұн сізден жасырылған."
     }
 }

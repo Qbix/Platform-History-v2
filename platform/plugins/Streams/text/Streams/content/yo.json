@@ -73,7 +73,8 @@
             "byText": "Ọrọ",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} ti koodu naa ba ṣayẹwo"
+            "scannedQR": "{{ClickOrTap}} ti koodu naa ba ṣayẹwo",
+            "copyLink": "{{ClickOrTap}} lati daakọ ọna asopọ ifiwepe"
         },
         "email": {
             "subject": "Hey, ṣayẹwo eyi jade",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "O ti pe. {{ClickOrTap}} nibi lati gba ati darapo."
-        }
+        },
+        "command": "Ifiwepe",
+        "youCanNowPaste": "O le bayi lẹẹmọ ọna asopọ yii nibikan lati pe eniyan"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "Ọna asopọ dakọ si agekuru",
             "codeCopiedToCb": "Koodu dakọ si agekuru",
             "userHasNoVideo": "Olukopa ko ni fidio",
-            "openInBrowserAlert": "Ṣii ọna asopọ ni ẹrọ lilọ-kiri Safari lati darapọ mọ apejọ."
+            "openInBrowserAlert": "Ṣii ọna asopọ ni ẹrọ lilọ-kiri Safari lati darapọ mọ apejọ.",
+            "youBeganVideoRecording": "O bẹrẹ gbigbasilẹ apejọ yii",
+            "youStoppedVideoRecording": "O da gbigbasilẹ apejọ yii duro"
         },
         "settingsPopup": {
             "webCamera": "Kamẹra wẹẹbu",
@@ -173,7 +178,15 @@
             "fbStartLive": "Lọ Live",
             "fbStopLive": "Ipari Gbe",
             "fbEmbedCode": "Fi sabe",
-            "copy": "Daakọ"
+            "copy": "Daakọ",
+            "turnOffVideo": "Paa kamẹra \/ pinpin iboju",
+            "turnOffScreenSharing": "Pa a pinpin iboju",
+            "cameraIsTurnedOff": "Ti pa kamẹra",
+            "startRecording": "Bẹrẹ Gbigbasilẹ",
+            "stopRecording": "Duro Gbigbasilẹ",
+            "recordingInProgress": "Gbigbasilẹ wa ni ilọsiwaju ...",
+            "publishOnTimeline": "Atẹjade lori Ago",
+            "publishToGroup": "Ṣe atẹjade si ẹgbẹ"
         },
         "participantsPopup": {
             "disconnect": "Ge asopọ",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "Ayafi Mofi Gẹẹsi Mi",
             "maximizeLoudest": "Loudest Lopin",
             "staticMaximized": "Iwosan Maximized",
-            "manual": "Afowoyi"
-        }
+            "manual": "Afowoyi",
+            "fullScreen": "Gbogbo sikirini",
+            "turnOffCamera": "Tọju fidio",
+            "turnOffAudio": "Gbo ohun mi",
+            "turnOffScreenSharing": "Tọju pinpin iboju",
+            "turnOnCamera": "Fi fidio han",
+            "turnOnAudio": "Aṣiṣe ohun ti a ko gbọ",
+            "turnOnScreenSharing": "Fihan pinpin iboju"
+        },
+        "notAllowedToJoinCall": "Iwọ ko ni aṣẹ lati darapọ mọ ṣiṣan yii.",
+        "streamTitle": "{{1}} ipe laaye"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "Fipamọ",
         "Delete": "Paarẹ",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Akoonu yii wa ni pamọ fun yin."
     }
 }

@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Fela samnýtingu skjáa",
             "turnOnCamera": "Sýna myndband",
             "turnOnAudio": "Slökkva á hljóði",
-            "turnOnScreenSharing": "Sýna samnýtingu skjáa"
+            "turnOnScreenSharing": "Sýna samnýtingu skjáa",
+            "fullScreen": "Fullur skjár"
         },
         "notAllowedToJoinCall": "Þú hefur ekki leyfi til að taka þátt í þessum straumi.",
         "streamTitle": "{{1}} símtal í beinni"

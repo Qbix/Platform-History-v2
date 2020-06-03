@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Ascundeți partajarea ecranului",
             "turnOnCamera": "Afișați videoclipuri",
             "turnOnAudio": "Anulați sunetul",
-            "turnOnScreenSharing": "Afișare partajare ecran"
+            "turnOnScreenSharing": "Afișare partajare ecran",
+            "fullScreen": "Ecran complet"
         },
         "notAllowedToJoinCall": "Nu aveți permisiunea de a vă alătura acestui flux.",
         "streamTitle": "{{1}} apel live"

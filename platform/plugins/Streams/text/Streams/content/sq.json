@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Fshih ndarjen e ekranit",
             "turnOnCamera": "Shfaq videon",
             "turnOnAudio": "Une audio",
-            "turnOnScreenSharing": "Shfaq ndarjen e ekranit"
+            "turnOnScreenSharing": "Shfaq ndarjen e ekranit",
+            "fullScreen": "Ekran i plotë"
         },
         "notAllowedToJoinCall": "Ju nuk keni leje për t&#39;u bashkuar me këtë rrjedhë.",
         "streamTitle": "999 thirrje live"

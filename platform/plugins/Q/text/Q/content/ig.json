@@ -73,5 +73,30 @@
             "touchscreen": "Jiri mkpịsị aka gị mee ka ịbịgharịa na dọrọ",
             "notTouchscreen": "Jiri ntan &amp; ugboelu gị ka ịbịgharịa na dọrọ"
         }
+    },
+    "timestamp": {
+        "lastNight": "abalị ụnyahụ",
+        "lastEvening": "ikpeazụ eve",
+        "yesterday": "ụnyaahụ",
+        "thisMorning": "ututu a",
+        "today": "taa",
+        "tonight": "abali a",
+        "tomorrowMorning": "tom ututu",
+        "tomorrow": "echi",
+        "hoursAgo": "{{h}} awa gara aga",
+        "hourAgo": "{{h}} awa gara aga",
+        "minuteAgo": "{{m}} nkeji oge gara aga",
+        "minutesAgo": "{{m}} nkeji gara aga",
+        "secondAgo": "{{s}} nke abụọ gara aga",
+        "secondsAgo": "{{s}} sekọnd gara aga",
+        "fewSecondsAgo": "sekọnd gara aga",
+        "rightNow": "ugbu a",
+        "inSecond": "na {{s}} nke abuo",
+        "inSeconds": "n&#39;ime nkeji {{s}}",
+        "inMinute": "na nkeji {{m}}",
+        "inMinutes": "na nkeji {{m}}",
+        "inHour": "n’ime awa {{h}}",
+        "inHours": "n’ime awa {{h}}",
+        "inUnderMinute": "n&#39;okpuru 1 nkeji"
     }
 }

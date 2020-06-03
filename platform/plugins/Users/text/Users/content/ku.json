@@ -43,7 +43,8 @@
             "title": "Têkiliyê hilbijêre",
             "CreateAccount": "+ Têkiliya Nû",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create nehat dîtin",
-            "SearchByName": "Bi navî bigerin"
+            "SearchByName": "Bi navî bigerin",
+            "EmptyContacts": "Têkilî nehat dîtin ..."
         },
         "select": {
             "title": "Têkilî hilbijêre {{displayName}}"

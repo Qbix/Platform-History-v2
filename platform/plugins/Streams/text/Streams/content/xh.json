@@ -73,7 +73,8 @@
             "byText": "Umbhalo",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} ukuba ikhowudi iskenisiwe"
+            "scannedQR": "{{ClickOrTap}} ukuba ikhowudi iskenisiwe",
+            "copyLink": "{{ClickOrTap}} ukukopa ikhonkco lesimemo"
         },
         "email": {
             "subject": "Hayi, khangela oku",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "Umenywe. {{ClickOrTap}} apha ukuba wamkele kwaye ujoyine."
-        }
+        },
+        "command": "Mema",
+        "youCanNowPaste": "Ngoku ungancamathisela eli khonkco kwenye indawo ukumema abantu"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "Ikhonkco elikhutshelwe kwibhodi eqhotyoshwayo",
             "codeCopiedToCb": "Ikhowudi ikopiwe kwibhodi eqhotyoshwayo",
             "userHasNoVideo": "Umthathi-nxaxheba akanayo ividiyo",
-            "openInBrowserAlert": "Vula ikhonkco kwi-Safari browser ukuze ujoyine inkomfa."
+            "openInBrowserAlert": "Vula ikhonkco kwi-Safari browser ukuze ujoyine inkomfa.",
+            "youBeganVideoRecording": "Uqale ukurekhoda le nkomfa",
+            "youStoppedVideoRecording": "Uyekile ukurekhoda le nkomfa"
         },
         "settingsPopup": {
             "webCamera": "Ikhamera yeWebhu",
@@ -173,7 +178,15 @@
             "fbStartLive": "Yiya uphile",
             "fbStopLive": "Phela ukuPhila",
             "fbEmbedCode": "Shumeka",
-            "copy": "Khuphela"
+            "copy": "Khuphela",
+            "turnOffVideo": "Cima ikhamera \/ ukwabelana ngesikrini",
+            "turnOffScreenSharing": "Cima ukwabelana ngesikrini",
+            "cameraIsTurnedOff": "Ikhamera icinyiwe",
+            "startRecording": "Qala ukuRekhoda",
+            "stopRecording": "Yekani ukuRekhoda",
+            "recordingInProgress": "Ukurekhoda kuyaqhubeka ...",
+            "publishOnTimeline": "Shicilela kumda wexesha",
+            "publishToGroup": "Shicilela kwiqela"
         },
         "participantsPopup": {
             "disconnect": "Nqamla",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "Ndinesidima Ngaphandle Kwam",
             "maximizeLoudest": "Yandisa ubukhulu becala",
             "staticMaximized": "Ukuqina okuzinzileyo",
-            "manual": "Incwadi yezandla"
-        }
+            "manual": "Incwadi yezandla",
+            "fullScreen": "Isikrini esiphelele",
+            "turnOffCamera": "Fihla ividiyo",
+            "turnOffAudio": "Thulisa iaudiyo",
+            "turnOffScreenSharing": "Fihla ukwabelana ngesikrini",
+            "turnOnCamera": "Veza ividiyo",
+            "turnOnAudio": "Susa umsindo",
+            "turnOnScreenSharing": "Bonisa ukwabelana ngesikrini"
+        },
+        "notAllowedToJoinCall": "Awunayo imvume yokujoyina lo msele.",
+        "streamTitle": "{{1}} umnxeba ophilayo"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "Gcina",
         "Delete": "Cima",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Lo mxholo ufihliwe kuwe."
     }
 }

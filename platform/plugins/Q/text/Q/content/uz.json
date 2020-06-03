@@ -73,5 +73,30 @@
             "touchscreen": "Kattalashtirish va harakatlantirish uchun barmoqlaringizdan foydalaning",
             "notTouchscreen": "Masshtabni kattalashtirish va harakatlantiring"
         }
+    },
+    "timestamp": {
+        "lastNight": "kecha tunda",
+        "lastEvening": "oxirgi kecha",
+        "yesterday": "kecha",
+        "thisMorning": "bu tong",
+        "today": "Bugun",
+        "tonight": "bugun kechqurun",
+        "tomorrowMorning": "tom ertalab",
+        "tomorrow": "ertaga",
+        "hoursAgo": "{{h}} soat oldin",
+        "hourAgo": "{{h}} soat oldin",
+        "minuteAgo": "{{m}} daqiqa oldin",
+        "minutesAgo": "{{m}} daqiqa oldin",
+        "secondAgo": "{{s}} ikkinchi marta",
+        "secondsAgo": "{{s}} soniya oldin",
+        "fewSecondsAgo": "soniya oldin",
+        "rightNow": "hoziroq",
+        "inSecond": "{{s}} soniyada",
+        "inSeconds": "{{s}} soniyada",
+        "inMinute": "{{m}} daqiqada",
+        "inMinutes": "{{m}} daqiqada",
+        "inHour": "{{h}} soat ichida",
+        "inHours": "{{h}} soat ichida",
+        "inUnderMinute": "1 minut ichida"
     }
 }

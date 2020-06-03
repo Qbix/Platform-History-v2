@@ -43,7 +43,8 @@
             "title": "Контактіні таңдаңыз",
             "CreateAccount": "+ Жаңа байланыс",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create табылмады",
-            "SearchByName": "Аты бойынша іздеу"
+            "SearchByName": "Аты бойынша іздеу",
+            "EmptyContacts": "Контактілер табылмады ..."
         },
         "select": {
             "title": "{{displayName}}} контактісін таңдаңыз"

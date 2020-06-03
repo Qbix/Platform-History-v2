@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Nascondi la condivisione dello schermo",
             "turnOnCamera": "Mostra video",
             "turnOnAudio": "Riattiva l&#39;audio",
-            "turnOnScreenSharing": "Mostra la condivisione dello schermo"
+            "turnOnScreenSharing": "Mostra la condivisione dello schermo",
+            "fullScreen": "A schermo intero"
         },
         "notAllowedToJoinCall": "Non sei autorizzato a partecipare a questo stream.",
         "streamTitle": "{{1}} chiamata in diretta"

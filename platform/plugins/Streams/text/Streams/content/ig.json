@@ -73,7 +73,8 @@
             "byText": "Ederede",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} ma ọ bụrụ na nyochapụrụ koodu ahụ"
+            "scannedQR": "{{ClickOrTap}} ma ọ bụrụ na nyochapụrụ koodu ahụ",
+            "copyLink": "{{ClickOrTap}} idetuo njikọ njikọ"
         },
         "email": {
             "subject": "Hey, lelee nke a",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "A kpọrọ gị òkù. {{ClickOrTap}} ebe a iji nabata ma sonye."
-        }
+        },
+        "command": "Kpọọ",
+        "youCanNowPaste": "Inwere ike imepita njikọ a ebe ọzọ iji kpọọ ndị mmadụ"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "Edekọtara njikọ ga na bọọdụ",
             "codeCopiedToCb": "Edepụtaghachi koodu na clipboard",
             "userHasNoVideo": "Onye so na ya enweghị vidiyo",
-            "openInBrowserAlert": "Mepee njikọ na ihe nchọgharị Safari iji sonyere ogbako ahụ."
+            "openInBrowserAlert": "Mepee njikọ na ihe nchọgharị Safari iji sonyere ogbako ahụ.",
+            "youBeganVideoRecording": "Began malitere idekọ ogbako a",
+            "youStoppedVideoRecording": "Kwụsịrị idekọ ogbako a"
         },
         "settingsPopup": {
             "webCamera": "Igwefoto weebụ",
@@ -173,7 +178,15 @@
             "fbStartLive": "Gaa Live",
             "fbStopLive": "Kwụsị Live",
             "fbEmbedCode": "Gbakwunye",
-            "copy": "Detuo"
+            "copy": "Detuo",
+            "turnOffVideo": "Gbanyụọ nkesa igwefoto \/ ihuenyo",
+            "turnOffScreenSharing": "Gbanyụọ nkesa ihuenyo",
+            "cameraIsTurnedOff": "Gbanyụọ igwefoto",
+            "startRecording": "Bido na Ndekọ",
+            "stopRecording": "Kwụsị ndekọ",
+            "recordingInProgress": "Ndekọ na-aga n&#39;ihu ...",
+            "publishOnTimeline": "Mbipụta na usoro iheomume",
+            "publishToGroup": "Kwusaanụ otu"
         },
         "participantsPopup": {
             "disconnect": "Kwupu",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "Ewezuga ụda dị elu",
             "maximizeLoudest": "Jiri Loudest mụbaa",
             "staticMaximized": "Static Maximized",
-            "manual": "Akwụkwọ ntuziaka"
-        }
+            "manual": "Akwụkwọ ntuziaka",
+            "fullScreen": "Ihuenyo zuru oke",
+            "turnOffCamera": "Zoo vidiyo",
+            "turnOffAudio": "Gbuo ụda",
+            "turnOffScreenSharing": "Zoo ikiri ekiri",
+            "turnOnCamera": "Gosi vidiyo",
+            "turnOnAudio": "Gbanyụọ ụda",
+            "turnOnScreenSharing": "Gosi nkekọrịta onyonyo"
+        },
+        "notAllowedToJoinCall": "I nweghi ikike isonye na mmiri iyi a.",
+        "streamTitle": "{{1}} oku di ndu"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "Chekwaa",
         "Delete": "Hichapụ",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "E zonarịrị ọdịnaya gị ihe ndị a."
     }
 }

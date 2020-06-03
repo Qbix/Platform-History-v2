@@ -43,7 +43,8 @@
             "title": "Xaiv qhov sib tham",
             "CreateAccount": "+ Sib cuag Tshiab",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create tsis pom",
-            "SearchByName": "Tshawb ntawm npe"
+            "SearchByName": "Tshawb ntawm npe",
+            "EmptyContacts": "Tiv tauj tsis pom ..."
         },
         "select": {
             "title": "Xaiv hu rau {{displayName}}"

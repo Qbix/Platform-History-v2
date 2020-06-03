@@ -73,5 +73,30 @@
             "touchscreen": "Uzu viajn fingrojn por zomi kaj treni",
             "notTouchscreen": "Uzu vian muson por movi kaj treni"
         }
+    },
+    "timestamp": {
+        "lastNight": "hieraŭ vespere",
+        "lastEvening": "lasta vespero",
+        "yesterday": "hieraŭ",
+        "thisMorning": "ĉi matene",
+        "today": "hodiaŭ",
+        "tonight": "ĉi-vespere",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "morgaŭ",
+        "hoursAgo": "{{h}} antaŭ horoj",
+        "hourAgo": "{{h}} antaŭ horo",
+        "minuteAgo": "{{m}} antaŭ minuto",
+        "minutesAgo": "{{m}} antaŭ minutoj",
+        "secondAgo": "{{s}} antaŭ du",
+        "secondsAgo": "{{s}} antaŭ sekundoj",
+        "fewSecondsAgo": "sekundoj antaŭ",
+        "rightNow": "nun",
+        "inSecond": "en {{s}} dua",
+        "inSeconds": "en {{s}} sekundoj",
+        "inMinute": "en {{m}} minuto",
+        "inMinutes": "en {{m}} minutoj",
+        "inHour": "en {{h}} horo",
+        "inHours": "en {{h}} horoj",
+        "inUnderMinute": "en malpli ol 1 minuto"
     }
 }

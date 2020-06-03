@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Amagueu la compartició de pantalla",
             "turnOnCamera": "Mostra vídeo",
             "turnOnAudio": "No activa el so",
-            "turnOnScreenSharing": "Mostra compartició de pantalla"
+            "turnOnScreenSharing": "Mostra compartició de pantalla",
+            "fullScreen": "Pantalla completa"
         },
         "notAllowedToJoinCall": "No teniu permís per unir-vos a aquest flux.",
         "streamTitle": "{{1}} trucada en directe"

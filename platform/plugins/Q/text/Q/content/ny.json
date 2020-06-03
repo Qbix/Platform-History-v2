@@ -73,5 +73,30 @@
             "touchscreen": "Gwiritsani ntchito zala zanu kuti muzisindikize ndikukoka",
             "notTouchscreen": "Gwiritsani ntchito mbewa yanu ndi gudumu kuti muziseko ndikukoka"
         }
+    },
+    "timestamp": {
+        "lastNight": "usiku wapita",
+        "lastEvening": "usiku watha",
+        "yesterday": "dzulo",
+        "thisMorning": "m&#39;mawa",
+        "today": "lero",
+        "tonight": "usiku uno",
+        "tomorrowMorning": "m&#39;mawa",
+        "tomorrow": "mawa",
+        "hoursAgo": "{{h}} maola apitawa",
+        "hourAgo": "{{h}} ola lapitalo",
+        "minuteAgo": "{{999]} mphindi",
+        "minutesAgo": "{{m}} mphindi zapitazo",
+        "secondAgo": "{{s}} chachiwiri",
+        "secondsAgo": "{{s}} masekondi apitawo",
+        "fewSecondsAgo": "masekondi apitawa",
+        "rightNow": "pompano",
+        "inSecond": "mu {{999]} chachiwiri",
+        "inSeconds": "m&#39;masekondi {{s}}",
+        "inMinute": "mu mphindi {{999]}",
+        "inMinutes": "mu {{m}} mphindi",
+        "inHour": "mu {{h}} ola",
+        "inHours": "mu {{h}} maora",
+        "inUnderMinute": "osakwana mphindi 1"
     }
 }

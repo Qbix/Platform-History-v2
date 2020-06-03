@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Piilota näytön jakaminen",
             "turnOnCamera": "Näytä video",
             "turnOnAudio": "Poista äänen mykistys",
-            "turnOnScreenSharing": "Näytä näytön jakaminen"
+            "turnOnScreenSharing": "Näytä näytön jakaminen",
+            "fullScreen": "Koko näyttö"
         },
         "notAllowedToJoinCall": "Sinulla ei ole lupaa liittyä tähän streamiin.",
         "streamTitle": "{{1}} suora puhelu"

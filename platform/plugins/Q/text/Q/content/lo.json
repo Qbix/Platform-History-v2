@@ -73,5 +73,30 @@
             "touchscreen": "ໃຊ້ນິ້ວມືຂອງທ່ານເພື່ອຊູມແລະລາກ",
             "notTouchscreen": "ໃຊ້ເມົາແລະລໍ້ຂອງທ່ານເພື່ອຊູມແລະລາກ"
         }
+    },
+    "timestamp": {
+        "lastNight": "ມື້​ຄືນ​ນີ້",
+        "lastEvening": "ສຸດທ້າຍ Eve",
+        "yesterday": "ມື້ວານນີ້",
+        "thisMorning": "ເຊົ້ານີ້",
+        "today": "ມື້​ນີ້",
+        "tonight": "ຄືນນີ້",
+        "tomorrowMorning": "ຕອນເຊົ້າ",
+        "tomorrow": "ມື້ອື່ນ",
+        "hoursAgo": "{{h}} ຊົ່ວໂມງທີ່ຜ່ານມາ",
+        "hourAgo": "{{h}} ຊົ່ວໂມງທີ່ຜ່ານມາ",
+        "minuteAgo": "{{m}} ນາທີທີ່ຜ່ານມາ",
+        "minutesAgo": "{{m}} ນາທີທີ່ແລ້ວ",
+        "secondAgo": "{{s}} ວິນາທີກ່ອນ ໜ້າ ນີ້",
+        "secondsAgo": "{{s}} ວິນາທີກ່ອນ ໜ້າ ນີ້",
+        "fewSecondsAgo": "ວິນາທີກ່ອນ ໜ້າ ນີ້",
+        "rightNow": "ດຽວ​ນີ້",
+        "inSecond": "ໃນ {{s}} ວິນາທີ",
+        "inSeconds": "ໃນ {{s}} ວິນາທີ",
+        "inMinute": "ໃນ {{m}} ນາທີ",
+        "inMinutes": "ໃນ {{m}} ນາທີ",
+        "inHour": "ໃນ {{h}} ຊົ່ວໂມງ",
+        "inHours": "ໃນ {{h}} ຊົ່ວໂມງ",
+        "inUnderMinute": "ພາຍໃຕ້ 1 ນາທີ"
     }
 }

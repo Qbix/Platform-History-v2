@@ -73,7 +73,8 @@
             "byText": "Kākau",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} inā he kāwele ʻia ka helu"
+            "scannedQR": "{{ClickOrTap}} inā he kāwele ʻia ka helu",
+            "copyLink": "{{ClickOrTap}} e kope i ka pilina kono"
         },
         "email": {
             "subject": "E nānā, e nānā i kēia",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "Ua konoʻiaʻoe. {{ClickOrTap}} maʻaneʻi eʻae a hoʻohui."
-        }
+        },
+        "command": "Kāhea ʻia",
+        "youCanNowPaste": "Hiki iā ʻoe ke ʻoluʻolu i kēia loulou i kahi e kono ai i nā poʻe"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "Hoʻopili ʻia kahi hoʻopili ʻia",
             "codeCopiedToCb": "ʻ coplelo i kope ʻia i ka palupalu",
             "userHasNoVideo": "ʻAʻohe wahi wikiō",
-            "openInBrowserAlert": "E wehe i kahi loulou ma ka polokalamu ʻo Safari e hui pū i ia kūkā"
+            "openInBrowserAlert": "E wehe i kahi loulou ma ka polokalamu ʻo Safari e hui pū i ia kūkā",
+            "youBeganVideoRecording": "Ua hoʻomaka ʻoe e hoʻopaʻa i kēia kūkā",
+            "youStoppedVideoRecording": "Ua hoʻōki ʻoe i ka hoʻopaʻa ʻana i kēia kūkā"
         },
         "settingsPopup": {
             "webCamera": "ʻ .lelo kamera",
@@ -173,7 +178,15 @@
             "fbStartLive": "Hele Kalua",
             "fbStopLive": "Noho ʻAi",
             "fbEmbedCode": "ʻEpāpū ʻia",
-            "copy": "Kāolua"
+            "copy": "Kāolua",
+            "turnOffVideo": "Hoʻopaʻa i ka haʻi ʻana i nā kāmera \/ hōʻike",
+            "turnOffScreenSharing": "Hoʻopau i ka ʻae ʻana o ka pale",
+            "cameraIsTurnedOff": "Hoʻōlē ʻia ke kāmela",
+            "startRecording": "Hoʻomaka ka hana",
+            "stopRecording": "Hoʻopau i ka hoʻopaʻa ʻana",
+            "recordingInProgress": "Ke holomua nei ka hoʻopaʻa ʻana ...",
+            "publishOnTimeline": "Kūkulu i ka manawa",
+            "publishToGroup": "E hoʻolaha i ka hui"
         },
         "participantsPopup": {
             "disconnect": "Hoʻololi",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "Lahi wale nō wau",
             "maximizeLoudest": "Hoʻoikaika Loudest",
             "staticMaximized": "Static Maximized",
-            "manual": "Keikole"
-        }
+            "manual": "Keikole",
+            "fullScreen": "Nā Kiʻi piha",
+            "turnOffCamera": "Hūnā wikiō",
+            "turnOffAudio": "ʻO ka leo kani",
+            "turnOffScreenSharing": "Hūnā i ka hoʻoili ʻana o ka pā",
+            "turnOnCamera": "Hōʻike wikiō",
+            "turnOnAudio": "Hoʻonā leo ʻole",
+            "turnOnScreenSharing": "Hōʻike i ke kaʻana like screen"
+        },
+        "notAllowedToJoinCall": "ʻAʻole ʻae ʻia ʻoe e komo i kēia kahawai.",
+        "streamTitle": "{{1}} kāhea ola"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "Mālama",
         "Delete": "Hoʻopau",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Huna ʻia kēia ʻike iā ʻoe."
     }
 }

@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "إخفاء مشاركة الشاشة",
             "turnOnCamera": "عرض الفيديو",
             "turnOnAudio": "إلغاء كتم الصوت",
-            "turnOnScreenSharing": "إظهار مشاركة الشاشة"
+            "turnOnScreenSharing": "إظهار مشاركة الشاشة",
+            "fullScreen": "شاشة كاملة"
         },
         "notAllowedToJoinCall": "ليس لديك إذن للانضمام إلى هذا الدفق.",
         "streamTitle": "{{1}} مكالمة مباشرة"

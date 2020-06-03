@@ -43,7 +43,8 @@
             "title": "Zaɓi lamba",
             "CreateAccount": "+ Sabuwar lamba",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create ba&#39;a samo shi ba",
-            "SearchByName": "Bincika da suna"
+            "SearchByName": "Bincika da suna",
+            "EmptyContacts": "Ba a samo adireshi ba ..."
         },
         "select": {
             "title": "Zaɓi lamba na {{displayName}}"

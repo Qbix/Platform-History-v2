@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Slēpt ekrāna kopīgošanu",
             "turnOnCamera": "Rādīt video",
             "turnOnAudio": "Ieslēgt skaņu",
-            "turnOnScreenSharing": "Rādīt ekrāna koplietošanu"
+            "turnOnScreenSharing": "Rādīt ekrāna koplietošanu",
+            "fullScreen": "Pilnekrāna režīmā"
         },
         "notAllowedToJoinCall": "Jums nav atļaujas pievienoties šai straumei.",
         "streamTitle": "{{1}} tiešais zvans"

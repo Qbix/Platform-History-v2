@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Sakrij dijeljenje zaslona",
             "turnOnCamera": "Prikaži video",
             "turnOnAudio": "Zanemarivanje zvuka",
-            "turnOnScreenSharing": "Prikaži dijeljenje zaslona"
+            "turnOnScreenSharing": "Prikaži dijeljenje zaslona",
+            "fullScreen": "Puni zaslon"
         },
         "notAllowedToJoinCall": "Nemate dozvolu pridružiti se tom toku.",
         "streamTitle": "{{1}} poziv uživo"

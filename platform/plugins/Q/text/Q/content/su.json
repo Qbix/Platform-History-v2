@@ -73,5 +73,30 @@
             "touchscreen": "Paké ramo anjeun pikeun ngazum séred",
             "notTouchscreen": "Pigunakeun mouse sareng kabayang pikeun ngazum séred"
         }
+    },
+    "timestamp": {
+        "lastNight": "tadi wengi",
+        "lastEvening": "wengi panungtungan",
+        "yesterday": "kamari",
+        "thisMorning": "enjing ieu",
+        "today": "ayeuna",
+        "tonight": "wengi ayeuna",
+        "tomorrowMorning": "tom isuk",
+        "tomorrow": "isukan",
+        "hoursAgo": "{{h}} sababaraha jam ka pengker",
+        "hourAgo": "{{h}} jam ka tukang",
+        "minuteAgo": "{{m}} menit ka tukang",
+        "minutesAgo": "{{m}} sababaraha menit ka pengker",
+        "secondAgo": "{{s}} kadua tukang",
+        "secondsAgo": "{{s}} detik ka tukang",
+        "fewSecondsAgo": "detik ka tukang",
+        "rightNow": "ayeuna",
+        "inSecond": "dina {{s}} kadua",
+        "inSeconds": "dina {{s}} detik",
+        "inMinute": "dina {{m}} menit",
+        "inMinutes": "dina {{m}} menit",
+        "inHour": "dina {{h}} jam",
+        "inHours": "dina {{h}} jam",
+        "inUnderMinute": "di handapeun 1 menit"
     }
 }

@@ -43,7 +43,8 @@
             "title": "Dooro xiriirka",
             "CreateAccount": "+ Xiriir Cusub",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create lama helin",
-            "SearchByName": "Magac raadso"
+            "SearchByName": "Magac raadso",
+            "EmptyContacts": "Xiriirrada lama helin ..."
         },
         "select": {
             "title": "Xulo xiriirinta {{displayName}}"

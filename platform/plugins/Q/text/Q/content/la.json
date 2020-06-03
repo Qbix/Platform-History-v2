@@ -73,5 +73,30 @@
             "touchscreen": "Et trahunt digitis tuis zoom",
             "notTouchscreen": "Uti &amp; mus et rota to zoom drag"
         }
+    },
+    "timestamp": {
+        "lastNight": "noctis",
+        "lastEvening": "tandem eve",
+        "yesterday": "hesterno",
+        "thisMorning": "hoc mane habes",
+        "today": "hodie",
+        "tonight": "hac nocte",
+        "tomorrowMorning": "Tom mane junctum",
+        "tomorrow": "cras",
+        "hoursAgo": "{{CMXCIX}} horis abhinc",
+        "hourAgo": "{{CMXCIX ante horam}}",
+        "minuteAgo": "{{Minute ante CMXCIX}}",
+        "minutesAgo": "{{CMXCIX}} minutes ago",
+        "secondAgo": "{{CMXCIX ante secundam}}",
+        "secondsAgo": "{{CMXCIX ago}}",
+        "fewSecondsAgo": "ante seconds",
+        "rightNow": "nunc",
+        "inSecond": "{{In secunda CMXCIX}}",
+        "inSeconds": "} {in} {CMXCIX seconds",
+        "inMinute": "{{In momento CMXCIX}}",
+        "inMinutes": "{{in}} minuta CMXCIX",
+        "inHour": "{{CMXCIX in hora}}",
+        "inHours": "{{CMXCIX per horas}}",
+        "inUnderMinute": "in momento in I"
     }
 }

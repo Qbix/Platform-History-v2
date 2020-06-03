@@ -73,7 +73,8 @@
             "byText": "Տեքստը",
             "byFacebook": "Facebook- ը",
             "byTwitter": "Twitter- ը",
-            "scannedQR": "99 99 999}} եթե կոդը սկանավորվել է"
+            "scannedQR": "99 99 999}} եթե կոդը սկանավորվել է",
+            "copyLink": "Invite 99 999} հրավեր հղումը պատճենելու համար"
         },
         "email": {
             "subject": "Hey, ստուգեք սա",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "Դուք հրավիրվել եք: {{ClickOrTap}} այստեղ ընդունելու եւ միանալու համար:"
-        }
+        },
+        "command": "Հրավիրել",
+        "youCanNowPaste": "Այժմ կարող եք տեղադրել այս հղումը ինչ-որ տեղ `մարդկանց հրավիրելու համար"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "ՈՒղեցույցը պատճենված է clipboard- ում",
             "codeCopiedToCb": "Կոդը պատճենված է clipboard- ում",
             "userHasNoVideo": "Մասնակիցը տեսանյութ չունի",
-            "openInBrowserAlert": "Կոնֆերանսին միանալու համար Safari զննարկիչում բացեք հղումը:"
+            "openInBrowserAlert": "Կոնֆերանսին միանալու համար Safari զննարկիչում բացեք հղումը:",
+            "youBeganVideoRecording": "Դուք սկսեցիք ձայնագրել այս գիտաժողովը",
+            "youStoppedVideoRecording": "Դուք դադարեցիք ձայնագրել այս գիտաժողովը"
         },
         "settingsPopup": {
             "webCamera": "Վեբ ֆոտոխցիկ",
@@ -173,7 +178,15 @@
             "fbStartLive": "Ապրիր կենդանի",
             "fbStopLive": "Վերջ կենդանի",
             "fbEmbedCode": "Տեղադրել",
-            "copy": "Պատճենել"
+            "copy": "Պատճենել",
+            "turnOffVideo": "Անջատեք խցիկի \/ էկրանի համօգտագործումը",
+            "turnOffScreenSharing": "Անջատեք էկրանի համօգտագործումը",
+            "cameraIsTurnedOff": "Տեսախցիկը անջատված է",
+            "startRecording": "Սկսել ձայնագրումը",
+            "stopRecording": "Դադարեցրեք ձայնագրումը",
+            "recordingInProgress": "Ձայնագրումն ընթացքի մեջ է ...",
+            "publishOnTimeline": "Հրապարակել ժամանակացույցով",
+            "publishToGroup": "Հրապարակել խմբին"
         },
         "participantsPopup": {
             "disconnect": "Անջատեք",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "Ինձանից բարձր ձայնով",
             "maximizeLoudest": "Առավելագույնը բարձրացրեք",
             "staticMaximized": "Ստատիկ առավելագույնը",
-            "manual": "Ձեռնարկ"
-        }
+            "manual": "Ձեռնարկ",
+            "fullScreen": "Ամբողջ էկրանով",
+            "turnOffCamera": "Թաքցնել տեսանյութը",
+            "turnOffAudio": "Կլոր աուդիո",
+            "turnOffScreenSharing": "Թաքցնել էկրանի համօգտագործումը",
+            "turnOnCamera": "Showուցադրել տեսանյութը",
+            "turnOnAudio": "Լսեք ձայնագրությունը",
+            "turnOnScreenSharing": "Showուցադրել էկրանի համօգտագործումը"
+        },
+        "notAllowedToJoinCall": "Դուք այս հոսքին միանալու թույլտվություն չունեք:",
+        "streamTitle": "99 99 999}} կենդանի զանգ"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "Խնայել",
         "Delete": "Նջել",
         "Submenu": "Ենթա"
+    },
+    "errors": {
+        "HiddenFromYou": "Այս բովանդակությունը թաքնված է ձեզանից:"
     }
 }

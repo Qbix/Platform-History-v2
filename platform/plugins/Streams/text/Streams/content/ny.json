@@ -73,7 +73,8 @@
             "byText": "Malembo",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} ngati nambala idaseweredwa"
+            "scannedQR": "{{ClickOrTap}} ngati nambala idaseweredwa",
+            "copyLink": "{{ClickOrTap}} kuti mukope ulalo woyitanitsa"
         },
         "email": {
             "subject": "Eya, fufuzani izi",
@@ -89,7 +90,9 @@
         },
         "notice": {
             "text": "Mwapitanidwa. {{ClickOrTap}} apa kulandira ndi kujowina."
-        }
+        },
+        "command": "Itanani",
+        "youCanNowPaste": "Tsopano mutha kuyika ulalo uwu kwinakwake kuti uitane anthu"
     },
     "followup": {
         "mobile": {
@@ -156,7 +159,9 @@
             "linkCopiedToCb": "Lumikizani kukopedwa ku clipboard",
             "codeCopiedToCb": "Code yolembedwa pabolodi",
             "userHasNoVideo": "Wophunzira alibe kanema",
-            "openInBrowserAlert": "Tsegulani ulalo mu msakatuli wa Safari kuti mulowe nawo msonkhano."
+            "openInBrowserAlert": "Tsegulani ulalo mu msakatuli wa Safari kuti mulowe nawo msonkhano.",
+            "youBeganVideoRecording": "Munayamba kujambula msonkhano uno",
+            "youStoppedVideoRecording": "Mwaleka kujambula msonkhano uno"
         },
         "settingsPopup": {
             "webCamera": "Kamera Yapaintaneti",
@@ -173,7 +178,15 @@
             "fbStartLive": "Pitani Komweko",
             "fbStopLive": "Mapeto Live",
             "fbEmbedCode": "Wopanda",
-            "copy": "Copy"
+            "copy": "Copy",
+            "turnOffVideo": "Tsitsani kugawana kamera \/ skrini",
+            "turnOffScreenSharing": "Imitsani kugawana zenera",
+            "cameraIsTurnedOff": "Kamera yazimitsidwa",
+            "startRecording": "Yambani Kujambulira",
+            "stopRecording": "Siyani Kulemba",
+            "recordingInProgress": "Kulemba zikuyenda ...",
+            "publishOnTimeline": "Sindikizani pamndandanda wa nthawi",
+            "publishToGroup": "Sindikizani pagulu"
         },
         "participantsPopup": {
             "disconnect": "Chotsani",
@@ -182,8 +195,17 @@
             "loudestExceptMe": "Wokondedwa Kupatula Ine",
             "maximizeLoudest": "Kwezani Zambiri",
             "staticMaximized": "Olimba",
-            "manual": "Zolemba"
-        }
+            "manual": "Zolemba",
+            "fullScreen": "Kudzaza zenera lonse",
+            "turnOffCamera": "Bisani kanema",
+            "turnOffAudio": "Mumvereni",
+            "turnOffScreenSharing": "Bisani kugawana zenera",
+            "turnOnCamera": "Onetsani kanema",
+            "turnOnAudio": "Chotsani nyimbo",
+            "turnOnScreenSharing": "Onetsani kugawana pazenera"
+        },
+        "notAllowedToJoinCall": "Mulibe chilolezo cholowa nawo mtsinje uwu.",
+        "streamTitle": "{{1}} mayankho amoyo"
     },
     "messages": {
         "html": {
@@ -331,5 +353,8 @@
         "Save": "Sungani",
         "Delete": "Chotsani",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Izi ndizobisika kwa inu."
     }
 }

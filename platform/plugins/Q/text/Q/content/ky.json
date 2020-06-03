@@ -73,5 +73,30 @@
             "touchscreen": "кичирейтүү жана сүйрөө манжаларыбыз менен колдон",
             "notTouchscreen": "кичирейтүү үчүн чычканды &amp; рулду колдонуу менен сүйрөп"
         }
+    },
+    "timestamp": {
+        "lastNight": "Өткөн түнү",
+        "lastEvening": "акыркы кече",
+        "yesterday": "кечээ",
+        "thisMorning": "бул тун",
+        "today": "бүгүн",
+        "tonight": "бүгүн кечинде",
+        "tomorrowMorning": "том тун",
+        "tomorrow": "эртең",
+        "hoursAgo": "{{h}} саат мурун",
+        "hourAgo": "{{h}} саат мурун",
+        "minuteAgo": "{{m}} мүнөт мурун",
+        "minutesAgo": "{{m}} мүнөт мурун",
+        "secondAgo": "Экинчи жолу {{s}}",
+        "secondsAgo": "{{s}} секунда мурун",
+        "fewSecondsAgo": "секунд мурун",
+        "rightNow": "Азыр",
+        "inSecond": "экинчисинде {{s}}",
+        "inSeconds": "{{s}} секунданын ичинде",
+        "inMinute": "{{m}} мүнөттө",
+        "inMinutes": "{{m}} мүнөттө",
+        "inHour": "{{h}} саатта",
+        "inHours": "{{h}} саатта",
+        "inUnderMinute": "1 мүнөттүн ичинде"
     }
 }

@@ -43,7 +43,8 @@
             "title": "Pilia ang kontak",
             "CreateAccount": "+ Bag-ong Pakigkontak",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create dili makapangita",
-            "SearchByName": "Pagpangita pinaagi sa ngalan"
+            "SearchByName": "Pagpangita pinaagi sa ngalan",
+            "EmptyContacts": "Wala makit-an ang mga contact ..."
         },
         "select": {
             "title": "Pagpili sa kontak sa {{displayName}}"

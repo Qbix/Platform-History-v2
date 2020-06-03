@@ -212,7 +212,8 @@
             "turnOffScreenSharing": "Scherm delen verbergen",
             "turnOnCamera": "Video weergeven",
             "turnOnAudio": "Dempen van audio opheffen",
-            "turnOnScreenSharing": "Scherm delen weergeven"
+            "turnOnScreenSharing": "Scherm delen weergeven",
+            "fullScreen": "Volledig scherm"
         },
         "notAllowedToJoinCall": "Je hebt geen toestemming om deel te nemen aan deze stream.",
         "streamTitle": "{{1}} live-oproep"
