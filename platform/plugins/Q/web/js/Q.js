@@ -5617,7 +5617,7 @@ Q.Page = function (uriString) {
 Q.Page.push = function (url, title) {
 	var prevUrl = location.href;
 	url = Q.url(url);
-	if (url.substr(0, Q.info.baseUrl.length) !== Q.info.baseUrl) {
+	if (url.startsWith(Q.info.baseUrl) || url.startsWith(Q.info.proxyBaseUrl)) {
 		return;
 	}
 	var parts = url.split('#');
@@ -9480,7 +9480,7 @@ Q.baseUrl = function _Q_host(where) {
 			return result;
 		}
 	}
-	return Q.info.baseUrl; // By default, return the base url of the app
+	return Q.info.proxyBaseUrl || Q.info.baseUrl; // By default, return the base url of the app
 };
 Q.baseUrl.routers = []; // functions returning a custom url
 
