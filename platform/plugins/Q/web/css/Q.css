@@ -790,7 +790,7 @@ img[data-lazyload-src] {
 }
 
 .Q_placeholder_shimmer {
-	animation: Q_loading 1s forwards infinite;
+	animation: Q_loading 1s forwards linear infinite;
 	background: rgba(247, 247, 247, 0.75);
 }
 
