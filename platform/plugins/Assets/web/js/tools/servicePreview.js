@@ -52,10 +52,11 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 		var $toolElement = $(tool.element);
 
 		$toolElement.attr('data-writeLevel', stream.testWriteLevel('edit'));
+		var price = stream.getAttribute('price');
 
 		Q.Template.render('Assets/service/preview', {
 			title: stream.fields.title,
-			price: '($' + parseFloat(stream.getAttribute('price')).toFixed(2) + ')',
+			price: price ? '($' + parseFloat(price).toFixed(2) + ')' : '',
 			editable: ps.editable
 		}, function (err, html) {
 			if (err) return;
@@ -79,8 +80,9 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 
 		Q.Streams.Stream.onAttribute(ps.publisherId, ps.streamName, "price")
 		.set(function (attributes, k) {
-			var price = parseFloat(attributes[k]).toFixed(2);
-			$("span.Assets_service_preview_price", tool.element).html("($" + price + ")");
+			var price = parseFloat(attributes[k]);
+			price = price ? "($" + price.toFixed(2) + ")" : '';
+			$("span.Assets_service_preview_price", tool.element).html(price);
 		}, tool);
 	},
 	edit: function () {
@@ -134,6 +136,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 
 				var $payment = $("select[name=payment]", dialog).on('change', function () {
 					if ($payment.val() === 'free') {
+						$("input[name=price]", $price).val('');
 						$price.hide();
 					} else {
 						$price.show();
@@ -149,7 +152,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 					Q.each(['title', 'price', 'description'], function (i, value) {
 						var $item = $("input[name=" + value + "]", $form);
 
-						if ($item.attr('required') && !$item.val()) {
+						if ($item.is(":visible") && $item.attr('required') && !$item.val()) {
 							$item.addClass('Q_error');
 							valid = false;
 						} else {
