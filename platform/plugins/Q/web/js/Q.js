@@ -10815,7 +10815,7 @@ de.addClass(Q.info.isWebView ? 'Q_webView' : 'Q_notWebView');
 if (Q.info.isAndroidStock) {
 	de.addClass('Q_androidStock');
 }
-if (Q.info.hasNotch) {
+if (Q.info.hasNotch()) {
 	de.addClass('Q_notch');
 }
 
