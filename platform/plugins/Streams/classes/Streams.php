@@ -3668,13 +3668,13 @@ abstract class Streams extends Base_Streams
 			$return['url'] = $invite->url();
 		}
 		
-		$instructions = array_merge($who, $options, compact(
-			'displayName', 'appUrl', 'readLevel', 'writeLevel', 'adminLevel', 'permissions'
-		));
-		Streams_Message::post($asUserId, $publisherId, $streamName, array(
-			'type' => 'Streams/invite',
-			'instructions' => $instructions
-		), true);
+		// $instructions = array_merge($who, $options, compact(
+		// 	'displayName', 'appUrl', 'readLevel', 'writeLevel', 'adminLevel', 'permissions'
+		// ));
+		// Streams_Message::post($asUserId, $publisherId, $streamName, array(
+		// 	'type' => 'Streams/invite',
+		// 	'instructions' => $instructions
+		// ), true);
 		
 		/**
 		 * @event Streams/invite {after}
