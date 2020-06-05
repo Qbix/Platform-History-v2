@@ -7238,7 +7238,8 @@ Q.request = function (url, slotNames, callback, options) {
 			return;
 		}
 
-		if (!o.query && o.xhr !== false && url.startsWith(Q.info.baseUrl)) {
+		if (!o.query && o.xhr !== false
+		&& (url.startsWith(Q.info.baseUrl) || url.startsWith(Q.info.proxyBaseUrl))) {
 			_onStart();
 			return xhr(_onResponse, _onCancel);
 		}
