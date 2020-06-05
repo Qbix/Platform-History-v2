@@ -1150,8 +1150,10 @@ class Q_Request
 		if ($server_name[0] === '*') {
 			$server_name = $_SERVER['HTTP_HOST'];
 		}
+		$https === empty($_SERVER['HTTPS'])
+			|| !empty($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https';
 		return sprintf('http%s://%s%s%s%s%s%s', 
-			empty($_SERVER['HTTPS']) ? '' : 's',
+			$https ? '' : 's',
 			isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : '',
 			isset($_SERVER['PHP_AUTH_PW']) ? ':'.$_SERVER['PHP_AUTH_PW'] : '',
 			isset($_SERVER['PHP_AUTH_USER']) ? '@' : '',
