@@ -142,7 +142,9 @@ class Users_ExternalTo extends Base_Users_ExternalTo
 		}
 		$params = array(
 			'grant_type' => 'refresh_token',
-			'refresh_token' => $token
+			'refresh_token' => $token,
+			'platform' => $this->platform,
+			'client_id' => $this->appId
 		);
 		$response = Q_Utils::post($tokenUri, $params);
 		$data = Q::json_decode($response, true);
