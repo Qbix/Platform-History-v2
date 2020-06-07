@@ -2168,10 +2168,19 @@
 			if (options.openWindow === false) {
 				location.href = url;
 			} else {
-				window.open(url, 'Q_Users_oAuth', options.openWindow);
-				// todo: setInterval to wait for window name to change to success
-				// then signal the window to close itself via anothe name change,
-				// or it closes after a timeout, and then we call the callbac
+				var w = window.open(url, 'Q_Users_oAuth', options.openWindow);
+				var ival = setInterval(function () {
+					if (w.name === 'Q_Users_oAuth_success') {
+						w.close();
+						callback(true);
+						clearInterval(ival);
+					}
+					if (w.name === 'Q_Users_oAuth_error') {
+						w.close();
+						callback(false);
+						clearInterval(ival);
+					}
+				}, 300);
 			}
 		}
 	};
