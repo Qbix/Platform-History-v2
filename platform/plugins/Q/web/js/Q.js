@@ -4097,6 +4097,22 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 Q.Tool.beingActivated = undefined;
 
 /**
+ * Call this to find out if a tool was defined (but maybe not loaded).
+ * 
+ * @static
+ * @method defined
+ * @param {String} toolName the name of the tool
+ * @return {Function|String|undefined} the tool constuctor's constructor function,
+ *    the Javascript file url if not yet loaded, or undefined if not defined
+ */
+Q.Tool.defined = function (toolName) {
+	if (!toolName) {
+		return undefined;
+	}
+	return Q.Tool.constructors[Q.normalize(toolName)];
+};
+
+/**
  * Call this function to define default options for a tool constructor,
  * even if has not been loaded yet. Extends existing options with Q.extend().
  * @static

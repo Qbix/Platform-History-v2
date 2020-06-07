@@ -30,7 +30,13 @@
         "earlierComments": "earlier comments",
         "startedConversation": "started a conversation",
         "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name"
+        "SearchByName": "Search by name",
+		"Notifications": {
+			"Visit": "{{displayName}} is visiting the chat",
+			"Join": "{{displayName}} joined the chat",
+			"Leave": "{{displayName}} left the chat",
+			"RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+		}
     },
     "notifications": {
         "ManageEmailSubscriptions": "manage your email subscriptions",

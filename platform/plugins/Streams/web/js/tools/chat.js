@@ -663,6 +663,39 @@ Q.Tool.define('Streams/chat', function(options) {
 			var messages = tool.prepareMessages(message, 'leave');
 			tool.renderNotification(Q.first(messages));
 		}, tool);
+		
+		// a new stream was related (including a call)
+		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/relatedTo')
+		.set(function(stream, message) {
+			var instructions = message.getAllInstructions();
+			var previewToolName = instructions.fromType + '/preview';
+			if (!Q.Tool.defined(previewToolName)) {
+				return;
+			}
+			var messages = tool.prepareMessages(message, 'leave');
+			tool.renderNotification(Q.first(messages));
+			tool.$('.Streams_chat_noMessages').remove();
+			var $messages = tool.$('.Streams_chat_messages');
+			var $div = $('<div />').tool(previewToolName, {
+				publisherId: instructions.fromPublisherId,
+				streamName: instructions.fromStreamName
+			}).appendTo($messages)
+			.activate()
+			.click(function () {
+				if (instructions.fromType === 'Streams/webrtc') {
+					tool.startWebRTC();
+					return;
+				}
+				var element = Q.Tool.setUpElement('div', previewToolName, {
+					publisherId: instructions.fromPublisherId,
+					streamName: instructions.fromStreamName
+				});
+				Q.invoke({
+					title: instructions.fromTitle,
+					content: element
+				});
+			});
+		}, tool);
 
 		// new user left
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/subscribe').set(function(stream, message) {
@@ -1030,16 +1063,12 @@ Q.Template.set('Streams/chat/message/bubble',
 Q.Template.set('Streams/chat/message/notification', 
 	'<div class="Streams_chat_notification>'+
 		'<div class="Streams_chat_timestamp" data-time="{{time}}"></div>'+
-		'{{#if visit}}'+
-			'<b>{{displayName}}</b> visited'+
-		'{{/if}}'+
-		'{{#if join}}'+
-			'<b>{{displayName}}</b> joined'+
-		'{{/if}}'+
-		'{{#if leave}}'+
-			'<b>{{displayName}}</b> left'+
-		'{{/if}}'+
-	'</div>'
+		'{{#if visit}}{{interpolate Visit displayName=displayName}}{{/if}}'+
+		'{{#if join}}{{interpolate Join displayName=displayName}}{{/if}}'+
+		'{{#if leave}}{{interpolate Leave displayName=displayName}}{{/if}}'+
+		'{{#if relatedTo}}{{interpolate RelatedTo displayName=displayName stream=stream}}{{/if}}'+
+	'</div>',
+	{ text: ['Streams/content'] }
 );
 
 Q.Template.set('Streams/chat/message/error',
