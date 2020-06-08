@@ -10042,7 +10042,7 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 			url: url,
 			ns: ns
 		};
-		var baseUrl = Q.info.baseUrl();
+		var baseUrl = Q.baseUrl();
 		if (Q.info.nodeUrl.startsWith(baseUrl)) {
 			params.path = Q.info.nodeUrl.substr(baseUrl.length);
 		}
