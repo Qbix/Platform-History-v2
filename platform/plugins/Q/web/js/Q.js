@@ -10045,7 +10045,7 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 			o.path = url.substr(host.length) + Q.getObject('Q.info.socketPath');
 		}
 		_qsockets[ns][url] = qs = new Q.Socket({
-			socket: root.io.connect(host+'/'+ns, o),
+			socket: root.io.connect(host+ns, o),
 			url: url,
 			ns: ns
 		});
