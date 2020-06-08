@@ -10038,7 +10038,7 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 		// Forget this socket manager, we must connect another one
 		// because g doesn't reconnect normally otherwise
 		var baseUrl = Q.baseUrl();
-		if (Q.info.nodeUrl.startsWith(baseUrl)) {
+		if (Q.info.nodeUrl.startsWith(baseUrl+'/')) {
 			o.path = Q.info.nodeUrl.substr(baseUrl.length) + 
 				Q.getObject('Q.info.socketPath');
 		}
