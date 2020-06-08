@@ -5633,8 +5633,7 @@ Q.Page = function (uriString) {
 Q.Page.push = function (url, title) {
 	var prevUrl = location.href;
 	url = Q.url(url);
-	var baseUrl = Q.baseUrl();
-	if (url.startsWith(baseUrl)) {
+	if (!url.startsWith(Q.info.baseUrl) && !url.statsWith(Q.info.proxyBaseUrl)) {
 		return;
 	}
 	var parts = url.split('#');
