@@ -1,6 +1,7 @@
 :root {
 	--column-width: 300px;
-	--column-margin: 10px;
+	--column-margin: 5px;
+	--scrollbar-width: 15px;
 }
 
 .Q_columns_tool {
@@ -190,15 +191,15 @@ html.Q_ios.Q_standalone .Q_columns_title {
 }
 .Q_notMobile .Q_columns_stretchFirstColumn[data-column-count='2'] .Q_column_0 {
 	min-width: var(--column-width);
-	width: calc(100% - var(--column-width) - var(--column-margin));
+	width: calc(100% - var(--column-width) - var(--column-margin) - var(--scrollbar-width));
 }
 .Q_notMobile .Q_columns_stretchFirstColumn[data-column-count='3'] .Q_column_0 {
 	min-width: var(--column-width);
-	width: calc(100% - 2*(var(--column-width) + var(--column-margin)));
+	width: calc(100% - 2*(var(--column-width) + var(--column-margin) + var(--scrollbar-width)));
 }
 .Q_notMobile .Q_columns_stretchFirstColumn.Q_columns_over3 .Q_column_0 {
 	min-width: var(--column-width);
-	width: calc(100% - 2*(var(--column-width) + var(--column-margin)));
+	width: calc(100% - 2*(var(--column-width) + var(--column-margin) + var(--scrollbar-width)));
 }
 .Q_notMobile .Q_columns_stretchFirstColumn.Q_columns_animateWidth .Q_columns_column {
 	transition: width 50ms;
