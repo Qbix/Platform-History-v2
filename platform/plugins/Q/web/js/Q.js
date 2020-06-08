@@ -10058,8 +10058,8 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 		_ioOn(socket.io, 'close', function () {
 			console.log('Socket ' + ns + ' disconnected from '+url);
 		});
-		_ioOn(socket, 'error', function (errors) {
-			console.log('Error on connection '+url+' ('+errors.join(', ')+')');
+		_ioOn(socket, 'error', function (error) {
+			console.log('Error on connection '+url+' ('+error+')');
 		});
 
 		callback2 && callback2(_qsockets[ns][url], ns, url);
