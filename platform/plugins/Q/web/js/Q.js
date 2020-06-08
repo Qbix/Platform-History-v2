@@ -10037,11 +10037,16 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 		// If we have a disconnected socket that is not connecting.
 		// Forget this socket manager, we must connect another one
 		// because socket.io doesn't reconnect normally otherwise
-		_qsockets[ns][url] = qs = new Q.Socket({
+		var params = {
 			socket: root.io.connect(url + ns, o),
 			url: url,
 			ns: ns
-		});
+		};
+		var baseUrl = Q.info.baseUrl();
+		if (Q.info.nodeUrl.startsWith(baseUrl)) {
+			params.path = Q.info.nodeUrl.substr(baseUrl.length);
+		}
+		_qsockets[ns][url] = qs = new Q.Socket(params);
 		// remember actual socket - for disconnecting
 		var socket = qs.socket;
 		
@@ -10053,8 +10058,8 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 		_ioOn(socket.io, 'close', function () {
 			console.log('Socket ' + ns + ' disconnected from '+url);
 		});
-		_ioOn(socket, 'error', function () {
-			console.log('Error on connection '+url);
+		_ioOn(socket, 'error', function (errors) {
+			console.log('Error on connection '+url+' ('+errors.join(', ')+')');
 		});
 
 		callback2 && callback2(_qsockets[ns][url], ns, url);
