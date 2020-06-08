@@ -1010,7 +1010,10 @@ Q.Tool.define('Streams/chat', function(options) {
 				tool.scrollToBottom();
 
 				// if startWebRTC is true, start webrtc
-				if (state.startWebRTC || (location.href.includes(state.stream.url()) && location.href.includes('startWebRTC'))) {
+				if (state.startWebRTC
+				|| (location.href.indexOf(state.stream.url() >= 0) 
+					&& location.href.indexOf('startWebRTC') >= 0
+				)) {
 					tool.startWebRTC();
 				}
 			});
