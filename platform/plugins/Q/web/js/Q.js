@@ -10039,7 +10039,8 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 		// because g doesn't reconnect normally otherwise
 		var baseUrl = Q.baseUrl();
 		if (Q.info.nodeUrl.startsWith(baseUrl)) {
-			o.path = Q.info.nodeUrl.substr(baseUrl.length);
+			o.path = Q.info.nodeUrl.substr(baseUrl.length) + 
+				Q.getObject('Q.info.socketPath');
 		}
 		_qsockets[ns][url] = qs = new Q.Socket({
 			socket: root.io.connect(url + ns, o),
