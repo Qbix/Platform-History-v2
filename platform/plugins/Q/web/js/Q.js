@@ -10036,17 +10036,16 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 		}
 		// If we have a disconnected socket that is not connecting.
 		// Forget this socket manager, we must connect another one
-		// because socket.io doesn't reconnect normally otherwise
-		var params = {
+		// because g doesn't reconnect normally otherwise
+		var baseUrl = Q.baseUrl();
+		if (Q.info.nodeUrl.startsWith(baseUrl)) {
+			o.path = Q.info.nodeUrl.substr(baseUrl.length);
+		}
+		_qsockets[ns][url] = qs = new Q.Socket({
 			socket: root.io.connect(url + ns, o),
 			url: url,
 			ns: ns
-		};
-		var baseUrl = Q.baseUrl();
-		if (Q.info.nodeUrl.startsWith(baseUrl)) {
-			params.path = Q.info.nodeUrl.substr(baseUrl.length);
-		}
-		_qsockets[ns][url] = qs = new Q.Socket(params);
+		});
 		// remember actual socket - for disconnecting
 		var socket = qs.socket;
 		
