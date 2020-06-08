@@ -10040,7 +10040,7 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 		var baseUrl = Q.baseUrl();
 		var parsed = url.parseUrl();
 		var host = parsed.scheme + '://' + parsed.host 
-			+ (parsed.port ? ':'+parsed.port + '');
+			+ (parsed.port ? ':'+parsed.port : '');
 		if (url.startsWith(host+'/')) {
 			o.path = url.substr(host.length) + Q.getObject('Q.info.socketPath');
 		}
