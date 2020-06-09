@@ -5633,11 +5633,12 @@ Q.Page = function (uriString) {
 Q.Page.push = function (url, title) {
 	var prevUrl = location.href;
 	url = Q.url(url);
-	if (!url.startsWith(Q.info.baseUrl) && !url.statsWith(Q.info.proxyBaseUrl)) {
+	var baseUrl = Q.baseUrl();
+	if (!url.startsWith(baseUrl)) {
 		return;
 	}
 	var parts = url.split('#');
-	var path = (url.substr(baseUrl.length+1) || '');
+	var path = (url.substr(Q.baseUrl().length+1) || '');
 	if (history.pushState) {
 		history.pushState({}, null, url);
 	} else {
