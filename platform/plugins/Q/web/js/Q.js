@@ -13912,8 +13912,8 @@ Q.Notices = {
 		li.setAttribute('data-notice', JSON.stringify(notice));
 		li.classList.add(noticeClass);
 		li.onclick = function () {
-			Q.handle(o.handler, li, [content]);
 			Q.Notices.remove(li);
+			Q.handle(o.handler, li, [content]);
 		};
 		var span = document.createElement('span');
 		span.innerHTML = content.trim();
@@ -13987,17 +13987,20 @@ Q.Notices = {
 		notice = this.get(notice);
 		if (notice instanceof HTMLElement) {
 			this.hide(notice);
+
+			var key = notice.getAttribute('data-key');
+			var json = notice.getAttribute('data-notice');
+			var o = JSON.parse(json) || {};
+			// if notice persistent - send request to remove from session
+			if (typeof key === 'string' && o.persistent) {
+				Q.req('Q/notice', 'data', null, {
+					method: 'delete',
+					fields: {key: key}
+				});
+			}
+
+			// delay because notice hide with transition
 			setTimeout(function () {
-				var key = notice.getAttribute('data-key');
-				var json = notice.getAttribute('data-notice');
-				var o = JSON.parse(json) || {};
-				// if notice persistent - send request to remove from session
-				if (typeof key === 'string' && o.persistent) {
-					Q.req('Q/notice', 'data', null, {
-						method: 'delete',
-						fields: {key: key}
-					});
-				}
 				notice.remove();
 			}, 1000);
 		}
