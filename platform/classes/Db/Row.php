@@ -1736,6 +1736,21 @@ class Db_Row implements Iterator
 				$modifiedFields[$name] = $value;
 			}
 		}
+
+		if (class_exists('Q')) {
+			/**
+			 * Gives an oppotunity to modify the row or do something else
+			 * @event {before} Db/Row/$class_name/save
+			 * @param {Db_Row} row
+			 * @param {Db_Query} query
+			 * @param {array} modifiedFields
+			 * @param {array} where
+			 */
+			Q::event("Db/Row/$this_class/saveExecute", array(
+				'row' => $this,
+				'modifiedFields' => $modifiedFields
+			), 'before');
+		}
 		
 		$callback = array($this, "beforeSave");
 		if (is_callable($callback)) {
@@ -1834,7 +1849,7 @@ class Db_Row implements Iterator
 			 * @param {array} modifiedFields
 			 * @param {array} where
 			 * @return {Db_Query|null}
-			 *	Modified query or NULL if no midifications are necessary
+			 *	Modified query or NULL if no modifications are necessary
 			 */
 			$temp = Q::event("Db/Row/$this_class/saveExecute", array(
 				'row' => $this,
