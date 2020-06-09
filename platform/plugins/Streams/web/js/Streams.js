@@ -5348,6 +5348,10 @@ Q.onInit.add(function _Streams_onInit() {
 					callback: function () {
 						var stream = this;
 
+						if (stream.fields.name === 'Streams/invited') {
+							stream.fields.title = message.getInstruction('title');
+						}
+
 						Streams.Avatar.get(message.byUserId, function (err, avatar) {
 							var source = (noticeOptions.showSubject !== false ? text : '');
 							if (!source) {
