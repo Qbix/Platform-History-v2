@@ -1079,6 +1079,30 @@ Elp.remainingWidth = function (subpixelAccuracy, excludeMargins) {
 	return subpixelAccuracy ? w : Math.floor(w-0.01);
 };
 
+/**
+ * Gets activated and future tools inside some html element.
+ * @method forEachTool
+ * @param {String} [name=""] Filter by name of the child tools, such as "Q/inplace"
+ * @param {Function} callback The callback to execute at the right time
+ */
+Elp.forEachTool = function _Q_Tool_prototype_forEachChild(name, callback) {
+	var element = this;
+
+	// check already activated tools
+	Q.each($(".Q_tool", element), function () {
+		var tool = Q.Tool.from(this, name);
+		tool && Q.handle(callback, tool);
+	});
+
+	Q.Tool.onActivate(name).set(function () {
+		if (!element.contains(this.element)) {
+			return;
+		}
+
+		Q.handle(callback, this);
+	}, 'Q');
+};
+
 if (!Elp.getElementsByClassName) {
 	Elp.getElementsByClassName = document.getElementsByClassName;
 }
