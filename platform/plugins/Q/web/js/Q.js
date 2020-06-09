@@ -1089,7 +1089,7 @@ Elp.forEachTool = function _Q_Tool_prototype_forEachChild(name, callback) {
 	var element = this;
 
 	// check already activated tools
-	Q.each($(".Q_tool", element), function () {
+	Q.each(element.getElementsByClassName("Q_tool"), function () {
 		var tool = Q.Tool.from(this, name);
 		tool && Q.handle(callback, tool);
 	});
