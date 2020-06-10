@@ -126,6 +126,7 @@
 				var tool = this;
 				var state = this.state;
 
+				tool.filterTool.element.classList.add("Q_working");
 				tool.getStream(function(stream){
 					// if related tool already exist - set new stream and refresh
 					if (tool.relatedTool) {
@@ -146,6 +147,7 @@
 						onRefresh: function(){
 							// add Q_filter_result class to each preview tool except composer
 							$(".Streams_preview_tool:not(.Streams_related_composer)", this.element).addClass("Q_filter_result");
+							tool.filterTool.element.classList.remove("Q_working");
 						},
 						creatable: {
 							"Places/area": {
