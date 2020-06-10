@@ -822,7 +822,7 @@
 	}
 
 	// catch Assets/connected request and rewrite handler to open new tab
-	Q.Tool.onActivate('Q/tabs').add(function () {
+	Q.Tool.onActivate('Q/tabs').set(function () {
 		// only for main Q/tabs tool from dashboard
 		if (!$(this.element).closest("#dashboard").length) {
 			return;

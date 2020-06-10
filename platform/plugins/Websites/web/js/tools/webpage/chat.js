@@ -53,7 +53,7 @@
 			fields.html = $html[0].outerHTML;
 		}, tool);
 
-		Q.Tool.onActivate('Websites/webpage/preview').add(function () {
+		Q.Tool.onActivate('Websites/webpage/preview').set(function () {
 			var previewTool = this;
 			var $te = $(this.element);
 

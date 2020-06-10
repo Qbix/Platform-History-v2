@@ -1742,9 +1742,7 @@ class Db_Row implements Iterator
 			 * Gives an oppotunity to modify the row or do something else
 			 * @event {before} Db/Row/$class_name/save
 			 * @param {Db_Row} row
-			 * @param {Db_Query} query
 			 * @param {array} modifiedFields
-			 * @param {array} where
 			 */
 			Q::event("Db/Row/$this_class/saveExecute", array(
 				'row' => $this,
