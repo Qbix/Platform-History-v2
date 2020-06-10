@@ -2,8 +2,11 @@
 
 function Streams_message_response_message()
 {
-	if (isset(Streams::$cache['message'])) {
-		return Streams::$cache['message']->exportArray();
+	if (isset(Streams::$cache['message']) && gettype(Streams::$cache['message']) == 'object') {
+		if (method_exists(Streams::$cache['message'], "exportArray")) {
+			return Streams::$cache['message']->exportArray();
+		}
+		return Streams::$cache['message'];
 	}
 
 	$publisherId = Streams::requestedPublisherId(true);
