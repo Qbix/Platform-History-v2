@@ -1079,6 +1079,31 @@ Elp.remainingWidth = function (subpixelAccuracy, excludeMargins) {
 	return subpixelAccuracy ? w : Math.floor(w-0.01);
 };
 
+/**
+ * Gets activated and future tools inside some html element.
+ * @method forEachTool
+ * @param {String} [name=""] Filter by name of the child tools, such as "Q/inplace"
+ * @param {Function} callback The callback to execute at the right time
+ * @param {String} [key]
+ */
+Elp.forEachTool = function _Q_Tool_prototype_forEachChild(name, callback, key) {
+	var element = this;
+	if (typeof name !== 'string') {
+		callback = name;
+		name = "";
+	}
+	// check already activated tools
+	Q.each(element.getElementsByClassName("Q_tool"), function () {
+		var tool = Q.Tool.from(this, name);
+		tool && Q.handle(callback, tool);
+	});
+	Q.Tool.onActivate(name).set(function () {
+		if (element.contains(this.element)) {
+			Q.handle(callback, this);
+		}
+	}, key);
+};
+
 if (!Elp.getElementsByClassName) {
 	Elp.getElementsByClassName = document.getElementsByClassName;
 }
@@ -13888,8 +13913,8 @@ Q.Notices = {
 		li.setAttribute('data-notice', JSON.stringify(notice));
 		li.classList.add(noticeClass);
 		li.onclick = function () {
-			Q.handle(o.handler, li, [content]);
 			Q.Notices.remove(li);
+			Q.handle(o.handler, li, [content]);
 		};
 		var span = document.createElement('span');
 		span.innerHTML = content.trim();
@@ -13963,17 +13988,20 @@ Q.Notices = {
 		notice = this.get(notice);
 		if (notice instanceof HTMLElement) {
 			this.hide(notice);
+
+			var key = notice.getAttribute('data-key');
+			var json = notice.getAttribute('data-notice');
+			var o = JSON.parse(json) || {};
+			// if notice persistent - send request to remove from session
+			if (typeof key === 'string' && o.persistent) {
+				Q.req('Q/notice', 'data', null, {
+					method: 'delete',
+					fields: {key: key}
+				});
+			}
+
+			// delay because notice hide with transition
 			setTimeout(function () {
-				var key = notice.getAttribute('data-key');
-				var json = notice.getAttribute('data-notice');
-				var o = JSON.parse(json) || {};
-				// if notice persistent - send request to remove from session
-				if (typeof key === 'string' && o.persistent) {
-					Q.req('Q/notice', 'data', null, {
-						method: 'delete',
-						fields: {key: key}
-					});
-				}
 				notice.remove();
 			}, 1000);
 		}
