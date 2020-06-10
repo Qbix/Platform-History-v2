@@ -1084,23 +1084,24 @@ Elp.remainingWidth = function (subpixelAccuracy, excludeMargins) {
  * @method forEachTool
  * @param {String} [name=""] Filter by name of the child tools, such as "Q/inplace"
  * @param {Function} callback The callback to execute at the right time
+ * @param {String} [key]
  */
-Elp.forEachTool = function _Q_Tool_prototype_forEachChild(name, callback) {
+Elp.forEachTool = function _Q_Tool_prototype_forEachChild(name, callback, key) {
 	var element = this;
-
+	if (typeof name !== 'string') {
+		callback = name;
+		name = "";
+	}
 	// check already activated tools
 	Q.each(element.getElementsByClassName("Q_tool"), function () {
 		var tool = Q.Tool.from(this, name);
 		tool && Q.handle(callback, tool);
 	});
-
 	Q.Tool.onActivate(name).set(function () {
-		if (!element.contains(this.element)) {
-			return;
+		if (element.contains(this.element)) {
+			Q.handle(callback, this);
 		}
-
-		Q.handle(callback, this);
-	}, 'Q');
+	}, key);
 };
 
 if (!Elp.getElementsByClassName) {
