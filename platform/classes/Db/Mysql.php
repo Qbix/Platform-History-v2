@@ -2420,7 +2420,7 @@ $field_hints
 	static function table(\$with_db_name = true, \$alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', '$connectionName', 'indexes', '$class_name_base', false)) {
-			return new Db_Expression((\$with_db_name ? '{\$dbname}.' : '').'{\$prefix}'.'$table_name_base');
+			return new Db_Expression((\$with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'$table_name_base');
 		} else {
 			\$conn = Db::getConnection($connectionName_var);
   			\$prefix = empty(\$conn['prefix']) ? '' : \$conn['prefix'];
@@ -2653,7 +2653,7 @@ $dc
  */
 Base.table = function (withoutDbName) {
 	if (Q.Config.get(['Db', 'connections', '$connectionName', 'indexes', '$class_name_base'], false)) {
-		return new Db.Expression((withoutDbName ? '' : '{\$dbname}.')+'{\$prefix}$table_name_base');
+		return new Db.Expression((withoutDbName ? '' : '{{dbname}}.')+'{{prefix}}$table_name_base');
 	} else {
 		var conn = Db.getConnection('$connectionName');
 		var prefix = conn.prefix || '';
