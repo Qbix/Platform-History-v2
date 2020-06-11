@@ -1124,8 +1124,8 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 	 */
 	mq.getSQL = function (callback, shardName) {
 		var mq = this;
-		delete mq.replacements['{\\$prefix}'];
-		delete mq.replacements['{\\$dbname}'];
+		delete mq.replacements['{{prefix}}'];
+		delete mq.replacements['{{dbname}}'];
 		var repres = mq.build();
 		var keys = Object.keys(mq.parameters);
 		keys.sort(replaceKeysCompare);
@@ -1163,7 +1163,10 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 				});
 			}
 			if (callback)
-				Q.extend(mq.replacements, {'{\\$prefix}': mq.db.prefix(), '{\\$dbname}': mq.db.dbname()});
+				Q.extend(mq.replacements, {
+					'{{prefix}}': mq.db.prefix(), 
+					'{{dbname}}': mq.db.dbname()
+				});
 			for (k in mq.replacements) {
 				repres = repres.replace(new RegExp(k, 'g'), mq.replacements[k]);
 			}

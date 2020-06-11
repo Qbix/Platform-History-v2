@@ -8495,8 +8495,9 @@ Q.activate = function _Q_activate(elem, options, callback, activateLazyLoad) {
  *  You can update the tool by implementing a handler for
  *  tool.Q.onRetain, which receives the old Q.Tool object, the new options and incoming element.
  *  After the event is handled, the tool's state will be extended with these new options.
- * @param {Element|String} source
- *  An HTML string or a Element which is not part of the DOM
+ * @param {Element|String|DocumentFragment} source
+ *  An HTML string or a Element which is not part of the DOM.
+ *  It is treated as a document fragment, and its contents are used to replace the container's contents.
  * @param {Object} options
  *  Optional. A hash of options, including:
  * @param {Array} [options.replaceElements] array of elements or ids of elements in the document to replace, even if they have "data-q-retain" attributes.

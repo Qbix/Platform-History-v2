@@ -17,7 +17,9 @@
  *   @default Q.Event()
  *   @param {String} [options.slotsToRequest] Slot names for Q.request
  *   @default 'form'
- *   @param {Object} [options.contentElements] An Object of content Elements
+ *   @param {Object} [options.contentElements] An Object of {slotName: Element} pairs to replace their content.
+ *     Otherwise, by default, after a response with no errors, we replace the content in the tool's container element,
+ *     from the first slot found in slotsToRequest.
  *   @default {}
  *   @param {Function} [options.loader] Main request function which calls on form submit
  *   @default <code>function (url, method, params, slots, callback) {  Q.request(url+"?"+params, slots, callback, {method: method}); }</code>
@@ -105,8 +107,10 @@ Q.Tool.define('Q/form', function(options) {
 						default:
 							e = $(tool.element);
 						}
-						var replaced = Q.replace(e[0], data.slots[slot]);
-						Q.activate(replaced, pipe.fill(slot));
+						if (data.slots[slot] != null) {
+							var replaced = Q.replace(e[0], data.slots[slot]);
+							Q.activate(replaced, pipe.fill(slot));
+						}
 						if (data.scriptLines && data.scriptLines[slot]) {
 							eval(data.scriptLines[slot]);
 						}
