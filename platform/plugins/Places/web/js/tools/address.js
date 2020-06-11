@@ -75,18 +75,20 @@ Q.Tool.define("Places/address", function _Places_address(options) {
 			tool.place = null;
 			Q.handle(state.onChoose, tool, [null]);
 		}, tool);
+
+		p.fill('filter')(this);
+
+		// if place defined in state, this place should be applied after p.fill
+		// because it call refresh() which do filter.setText('')
 		if (state.place) {
 			_choose(state.place);
 		}
-		p.fill('filter')(this);
 	});
 	$('<div class="Places_address_text "/>').appendTo(tool.element);
 	function _choose(place, details, skipSetText) {
 		details = details || {};
 		details.text = place.name;
-		tool.$('.Places_address_text')
-		.html(place.description)
-		.show();
+		tool.$('.Places_address_text').html(place.description).show();
 		Q.handle(state.onChoose, tool, [place, details]);
 		if (!skipSetText) {
 			tool.filter.setText(details.text);
