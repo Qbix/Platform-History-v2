@@ -2106,7 +2106,7 @@
 			if (!options.state) {
 				options.state = String(Math.random());
 			}
-			Q.cookie('Users_latest_oAuth_state', );
+			Q.cookie('Users_latest_oAuth_state', options.state);
 			Q.url(authorizeUri, {
 				client_id: client_id,
 				redirect_uri: redirectUri,
