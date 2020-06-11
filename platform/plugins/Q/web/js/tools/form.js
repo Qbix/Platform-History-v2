@@ -77,11 +77,11 @@ Q.Tool.define('Q/form', function(options) {
 		if (form.data('Q/form tool')) return;
 		form.on('submit.Q_form', function(event) {
 			function onResponse(err, data) {
+				$('button', $te).closest('form').removeClass('Q_working');
 				var msg;
 				if (msg = Q.firstErrorMessage(err)) {
 					return alert(msg);
 				}
-				$('button', $te).closest('td').removeClass('Q_throb');
 				Q.handle(tool.state.onResponse, tool, arguments);
 				$('div.Q_form_undermessagebubble', $te).empty();
 				$('tr.Q_error', $te).removeClass('Q_error');
@@ -118,7 +118,7 @@ Q.Tool.define('Q/form', function(options) {
 				}
 			};
 			event.preventDefault();
-			$('button', $te).closest('td').addClass('Q_throb');
+			$('button', $te).closest('form').addClass('Q_working');
 			var result = {};
 			var action = form.attr('action');
 			if (!action) {
