@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "ਤੁਹਾਨੂੰ ਇਸ ਗੱਲਬਾਤ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਣ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਹੈ.",
         "startedConversation": "ਇੱਕ ਗੱਲਬਾਤ ਸ਼ੁਰੂ ਕੀਤੀ",
         "RealTimeCall": "ਰੀਅਲ ਟਾਈਮ ਕਾਲ",
-        "SearchByName": "ਨਾਮ ਨਾਲ ਖੋਜ ਕਰੋ"
+        "SearchByName": "ਨਾਮ ਨਾਲ ਖੋਜ ਕਰੋ",
+        "Notifications": {
+            "Visit": "{9 999} visiting ਚੈਟ &#39;ਤੇ ਜਾ ਰਹੇ ਹਨ",
+            "Join": "} {999} the ਚੈਟ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਏ",
+            "Leave": "} 9 999} the ਨੇ ਗੱਲਬਾਤ ਛੱਡ ਦਿੱਤੀ",
+            "RelatedTo": "{{999} ਨੇ ਇੱਕ {{stream.displayType}} ਦੀ ਸ਼ੁਰੂਆਤ ਕੀਤੀ"
+        }
     },
     "notifications": {
         "*": "ਸੁਨੇਹਾ {{& message.fields.type}} ਤੋਂ {{& stream.fields.title}}",

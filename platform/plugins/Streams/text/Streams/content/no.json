@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Du har ikke tillatelse til å delta i denne samtalen.",
         "startedConversation": "startet en samtale",
         "RealTimeCall": "Sanntids samtale",
-        "SearchByName": "Søk etter navn"
+        "SearchByName": "Søk etter navn",
+        "Notifications": {
+            "Visit": "{{displayName}} besøker chatten",
+            "Join": "{{displayName}} ble med i chatten",
+            "Leave": "{{displayName}} forlot chatten",
+            "RelatedTo": "{{displayName}} startet en {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Melding {{& message.fields.type}} til {{& stream.fields.title}}",

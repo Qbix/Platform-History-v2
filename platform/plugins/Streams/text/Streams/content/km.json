@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "អ្នកគ្មានសិទ្ធិចូលរួមការសន្ទនានេះទេ។",
         "startedConversation": "ចាប់ផ្តើមការសន្ទនា",
         "RealTimeCall": "ការហៅពេលវេលាពិតប្រាកដ",
-        "SearchByName": "ស្វែងរកតាមឈ្មោះ"
+        "SearchByName": "ស្វែងរកតាមឈ្មោះ",
+        "Notifications": {
+            "Visit": "{{៩៩៩}} កំពុងទស្សនាការជជែក",
+            "Join": "{{displayName}} បានចូលរួមការជជែក",
+            "Leave": "{{displayName}} បានចាកចេញពីការជជែក",
+            "RelatedTo": "{{៩៩៩}} បានចាប់ផ្តើម {{១០០០}}"
+        }
     },
     "notifications": {
         "*": "សារ {{& message.fields.type}} ទៅ {{& stream.fields.title}}",

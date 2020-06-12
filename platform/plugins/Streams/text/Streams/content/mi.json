@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Kaore he whakaaetanga kia uru atu ki tenei korerorero.",
         "startedConversation": "haamata tetahi korero",
         "RealTimeCall": "Karanga Real Time",
-        "SearchByName": "Rapua te ingoa"
+        "SearchByName": "Rapua te ingoa",
+        "Notifications": {
+            "Visit": "Kei te toro atu te {{displayName}} ki te whaikorero",
+            "Join": "{{displayName}} i hono atu ki te whaikorero",
+            "Leave": "{{displayName}} mahue ake nga korerorero",
+            "RelatedTo": "{{displayName}} i tiimata te {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Karere {{& message.fields.type}} ki {{& stream.fields.title}}",

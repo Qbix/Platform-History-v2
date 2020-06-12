@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Vi ne havas permeson aliĝi al ĉi tiu konversacio.",
         "startedConversation": "komencis konversacion",
         "RealTimeCall": "Reala Tempo-Voko",
-        "SearchByName": "Serĉo laŭ nomo"
+        "SearchByName": "Serĉo laŭ nomo",
+        "Notifications": {
+            "Visit": "{{displayName}} vizitas la babilejon",
+            "Join": "{{displayName}} aliĝis al la babilejo",
+            "Leave": "{{displayName}} forlasis la babilejon",
+            "RelatedTo": "{{displayName}} ekigis {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Mesaĝo {{& message.fields.type}} al {{& stream.fields.title}}",

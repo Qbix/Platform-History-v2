@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "U het nie toestemming om aan hierdie gesprek deel te neem nie.",
         "startedConversation": "&#39;n gesprek begin",
         "RealTimeCall": "Intydse oproep",
-        "SearchByName": "Soek op naam"
+        "SearchByName": "Soek op naam",
+        "Notifications": {
+            "Visit": "{{displayName}} besoek die klets",
+            "Join": "{{displayName}} het by die klets aangesluit",
+            "Leave": "{{displayName}} het die klets verlaat",
+            "RelatedTo": "{{displayName}} het &#39;n {{stream.displayType}} begin"
+        }
     },
     "notifications": {
         "*": "Boodskap {{& message.fields.type}} na {{& stream.fields.title}}",

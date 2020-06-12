@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "توهان هن ڪچهري ۾ شامل ٿيڻ جي اجازت نه آهي.",
         "startedConversation": "گفتگو شروع ڪيو",
         "RealTimeCall": "حقيقي وقت ڪال",
-        "SearchByName": "نالو ڳولھيو"
+        "SearchByName": "نالو ڳولھيو",
+        "Notifications": {
+            "Visit": "{{displayName}} چيٽ جو دورو ڪري رهيو آهي",
+            "Join": "{{displayName}} چيٽ ۾ شامل ٿيو",
+            "Leave": "{{displayName}} چيپي ڇڏي وئي",
+            "RelatedTo": "{{displayName}} شروع ڪيو {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "نياپو {{& message.fields.type}} ڏانهن {{& stream.fields.title}}",

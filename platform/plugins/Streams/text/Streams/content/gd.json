@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Chan eil cead agad a dhol an sàs sa chòmhradh seo.",
         "startedConversation": "thòisich còmhradh",
         "RealTimeCall": "Call Fìor-ùine",
-        "SearchByName": "Rannsaich a rèir ainm"
+        "SearchByName": "Rannsaich a rèir ainm",
+        "Notifications": {
+            "Visit": "Tha {{displayName}} a ’tadhal air a’ chat",
+            "Join": "Thàinig {{displayName}} a-steach don chat",
+            "Leave": "Dh ’fhàg {{displayName}} an còmhradh",
+            "RelatedTo": "Thòisich {{displayName}} {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Brath {{& message.fields.type}} gu {{& stream.fields.title}}",

@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Vos non liceat iungere conloquio hoc.",
         "startedConversation": "coepi colloquium",
         "RealTimeCall": "Realis tempus Voca",
-        "SearchByName": "Quaere nomen"
+        "SearchByName": "Quaere nomen",
+        "Notifications": {
+            "Visit": "{{CMXCIX est visitare ad chat}}",
+            "Join": "{{CMXCIX joined ad chat}}",
+            "Leave": "{{CMXCIX}} egressus ad chat",
+            "RelatedTo": "{{CMXCIX} {a} {coepi M}}"
+        }
     },
     "notifications": {
         "*": "Nuntium {{CMXCIX}} ad {{M}}",

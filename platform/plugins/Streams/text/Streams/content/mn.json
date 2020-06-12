@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Танд энэ харилцаанд оролцох эрх байхгүй.",
         "startedConversation": "яриа эхлүүлэв",
         "RealTimeCall": "Бодит цагийн дуудлага",
-        "SearchByName": "Нэрээр хайх"
+        "SearchByName": "Нэрээр хайх",
+        "Notifications": {
+            "Visit": "{{displayName}} нь чатад орж байна",
+            "Join": "{{displayName}} нь чатад нэгдсэн",
+            "Leave": "{{displayName}} нь чатыг орхисон байна",
+            "RelatedTo": "{{displayName}} нь {{stream.displayType}} эхлүүлсэн"
+        }
     },
     "notifications": {
         "*": "Зурвас {{& message.fields.type}} руу {{& stream.fields.title}}",

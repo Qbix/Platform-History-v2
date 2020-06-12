@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Uma lihin rukhsad inaad ku biirto wadahadalka.",
         "startedConversation": "bilaabay wadahadal",
         "RealTimeCall": "Wicitaanka waqtiga dhabta ah",
-        "SearchByName": "Magac raadso"
+        "SearchByName": "Magac raadso",
+        "Notifications": {
+            "Visit": "{{displayName}} ayaa booqanaya wada sheekaysiga",
+            "Join": "{{displayName}} waxay ku biirtay wada sheekaysiga",
+            "Leave": "{{displayName}} sheekadii wuu ka tagay",
+            "RelatedTo": "{{displayName}} wuxuu bilaabay {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Fariin {{& message.fields.type}} ilaa {1000}}",

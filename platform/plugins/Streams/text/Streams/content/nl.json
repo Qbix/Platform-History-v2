@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Je hebt geen toestemming om aan dit gesprek deel te nemen.",
         "startedConversation": "begon een gesprek",
         "RealTimeCall": "Real Time Call",
-        "SearchByName": "Zoek op naam"
+        "SearchByName": "Zoek op naam",
+        "Notifications": {
+            "Visit": "{{displayName}} bezoekt de chat",
+            "Join": "{{displayName}} is bij de chat gekomen",
+            "Leave": "{{displayName}} heeft de chat verlaten",
+            "RelatedTo": "{{displayName}} is een {{stream.displayType}} begonnen"
+        }
     },
     "notifications": {
         "*": "Bericht {{& message.fields.type}} tot {{& stream.fields.title}}",

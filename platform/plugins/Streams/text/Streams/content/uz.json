@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Sizda ushbu suhbatga kirish huquqi yo&#39;q.",
         "startedConversation": "suhbat boshladi",
         "RealTimeCall": "Haqiqiy vaqt qo&#39;ng&#39;irog&#39;i",
-        "SearchByName": "Nom bo&#39;yicha qidirish"
+        "SearchByName": "Nom bo&#39;yicha qidirish",
+        "Notifications": {
+            "Visit": "{{displayName}} chatga tashrif buyurmoqda",
+            "Join": "{{displayName}} suhbatga qo&#39;shildi",
+            "Leave": "{{displayName}} suhbatni tark etdi",
+            "RelatedTo": "{{displayName}} {{stream.displayType}} ni boshladi"
+        }
     },
     "notifications": {
         "*": "{{& message.fields.type}} dan {{& stream.fields.title}} ga xabar yuborish",

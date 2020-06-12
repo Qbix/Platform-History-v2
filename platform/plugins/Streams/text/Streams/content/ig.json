@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "I nweghị ikike iji sonyere mkparịta ụka a.",
         "startedConversation": "bidoro mkparịta ụka",
         "RealTimeCall": "Oku Oge",
-        "SearchByName": "Choo aha"
+        "SearchByName": "Choo aha",
+        "Notifications": {
+            "Visit": "{{displayName}} na-elele nkata ahụ",
+            "Join": "{{displayName}} batara na nkata ahụ",
+            "Leave": "{{displayName}} hapụrụ nkata ahụ",
+            "RelatedTo": "{{displayName}} bidoro {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Ozi {{& message.fields.type}} na {{& stream.fields.title}}",

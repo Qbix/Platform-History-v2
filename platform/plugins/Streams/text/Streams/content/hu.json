@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Nincs engedélye a beszélgetéshez.",
         "startedConversation": "beszélgetést kezdett",
         "RealTimeCall": "Valós idejű hívás",
-        "SearchByName": "Keresés név szerint"
+        "SearchByName": "Keresés név szerint",
+        "Notifications": {
+            "Visit": "{{displayName}} meglátogatja a csevegőt",
+            "Join": "{{displayName}} csatlakozott a csevegéshez",
+            "Leave": "{{displayName}} elhagyta a csevegőt",
+            "RelatedTo": "{{displayName}} indított egy {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Üzenet {{& message.fields.type}} {{& stream.fields.title}}",

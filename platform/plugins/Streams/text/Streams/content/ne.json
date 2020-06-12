@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "तपाईंसँग यस कुराकानीमा सहभागी हुन अनुमति छैन।",
         "startedConversation": "कुराकानी सुरु भयो",
         "RealTimeCall": "वास्तविक समय कल",
-        "SearchByName": "नामबाट खोज्नुहोस्"
+        "SearchByName": "नामबाट खोज्नुहोस्",
+        "Notifications": {
+            "Visit": "{{9{}} च्याट भ्रमण गर्दैछ",
+            "Join": "{{9{} the कुराकानीमा सामेल भए",
+            "Leave": "} {9{} the कुराकानी छोडियो",
+            "RelatedTo": "{{displayName}} एक} {1000}} सुरु गर्नुभयो"
+        }
     },
     "notifications": {
         "*": "सन्देश {9 9 99}} मा {{& stream.fields.title}}",

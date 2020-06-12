@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Non sei autorizzato a partecipare a questa conversazione.",
         "startedConversation": "ha iniziato una conversazione",
         "RealTimeCall": "Chiamata in tempo reale",
-        "SearchByName": "Ricerca per nome"
+        "SearchByName": "Ricerca per nome",
+        "Notifications": {
+            "Visit": "{{displayName}} sta visitando la chat",
+            "Join": "{{displayName}} si è unito alla chat",
+            "Leave": "{{displayName}} ha lasciato la chat",
+            "RelatedTo": "{{displayName}} ha iniziato un {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Messaggio {{& message.fields.type}} a {{& stream.fields.title}}",

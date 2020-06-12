@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Awunayo imvume yokujoyina le ngxoxo.",
         "startedConversation": "waqala ingxoxo",
         "RealTimeCall": "Ucingo Isikhathi Sangempela",
-        "SearchByName": "Sesha ngegama"
+        "SearchByName": "Sesha ngegama",
+        "Notifications": {
+            "Visit": "{{displayName}} evakashela ingxoxo",
+            "Join": "{{displayName}} ujoyine ingxoxo",
+            "Leave": "{{displayName}} ishiye ingxoxo",
+            "RelatedTo": "I - {{displayName}} i - {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Umlayezo {{& message.fields.type}} kuya {{& stream.fields.title}}",

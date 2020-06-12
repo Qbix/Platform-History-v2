@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "ఈ సంభాషణలో చేరడానికి మీకు అనుమతి లేదు.",
         "startedConversation": "సంభాషణను ప్రారంభించారు",
         "RealTimeCall": "రియల్ టైమ్ కాల్",
-        "SearchByName": "పేరు ద్వారా శోధించండి"
+        "SearchByName": "పేరు ద్వారా శోధించండి",
+        "Notifications": {
+            "Visit": "{{999} the చాట్‌ను సందర్శిస్తున్నారు",
+            "Join": "{{999} the చాట్‌లో చేరారు",
+            "Leave": "{{999} the చాట్ నుండి నిష్క్రమించారు",
+            "RelatedTo": "{{999} a ప్రారంభమైంది {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "{{& stream.fields.title}} కి సందేశం {{& message.fields.type}}",

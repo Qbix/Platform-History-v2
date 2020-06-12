@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "M&#39;għandekx permess biex tissieħeb f&#39;din il-konversazzjoni.",
         "startedConversation": "bdiet konverżazzjoni",
         "RealTimeCall": "Sejħa f&#39;ħin Reali",
-        "SearchByName": "Fittex bl-isem"
+        "SearchByName": "Fittex bl-isem",
+        "Notifications": {
+            "Visit": "{{displayName}} qiegħed iżur iċ-chat",
+            "Join": "{{displayName}} ingħaqad maċ-chat",
+            "Leave": "{{displayName}} ħallew iċ-chat",
+            "RelatedTo": "{{displayName}} bdew {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Messaġġ {{& message.fields.type}} lil {{& stream.fields.title}}",

@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Jo hawwe gjin tastimming om mei te dwaan oan dit petear.",
         "startedConversation": "begon in petear",
         "RealTimeCall": "Echte tiidoprop",
-        "SearchByName": "Sykje op namme"
+        "SearchByName": "Sykje op namme",
+        "Notifications": {
+            "Visit": "{{displayName}} is op besite by it petear",
+            "Join": "{{displayName}} die mei oan it petear",
+            "Leave": "{{displayName}} ferliet it petear",
+            "RelatedTo": "{{displayName}} begon in {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Berjocht {{& message.fields.type}} nei {{& stream.fields.title}}",

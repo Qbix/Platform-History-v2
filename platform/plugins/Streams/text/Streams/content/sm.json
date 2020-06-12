@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "E leai sau faʻatagaga e auai i lenei talanoaga.",
         "startedConversation": "amataina se talanoaga",
         "RealTimeCall": "Taimi Moni Taimi",
-        "SearchByName": "Saili i le igoa"
+        "SearchByName": "Saili i le igoa",
+        "Notifications": {
+            "Visit": "{{displayName}} o loo asiasi i le talatalanoaga",
+            "Join": "{{displayName}} auai i le talatalanoaga",
+            "Leave": "{{displayName}} tuʻua le talatalanoaga",
+            "RelatedTo": "{{displayName}} amata le {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Savali {{& message.fields.type}} i {{& stream.fields.title}}",

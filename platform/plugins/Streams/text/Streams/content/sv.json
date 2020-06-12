@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Du har inte behörighet att gå med i den här konversationen.",
         "startedConversation": "inledde en konversation",
         "RealTimeCall": "Realtidssamtal",
-        "SearchByName": "Sök efter namn"
+        "SearchByName": "Sök efter namn",
+        "Notifications": {
+            "Visit": "{{displayName}} besöker chatten",
+            "Join": "{{displayName}} gick med i chatten",
+            "Leave": "{{displayName}} lämnade chatten",
+            "RelatedTo": "{{displayName}} startade en {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Meddelande {{& message.fields.type}} till {{& stream.fields.title}}",

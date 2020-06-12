@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Þú hefur ekki leyfi til að taka þátt í þessu samtali.",
         "startedConversation": "hóf samtal",
         "RealTimeCall": "Rauntíma símtal",
-        "SearchByName": "Leitaðu með nafni"
+        "SearchByName": "Leitaðu með nafni",
+        "Notifications": {
+            "Visit": "{{displayName}} er að heimsækja spjallið",
+            "Join": "{{displayName}} tengdust spjallinu",
+            "Leave": "{{displayName}} yfirgaf spjallið",
+            "RelatedTo": "{{displayName}} byrjaði {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Skilaboð {{& message.fields.type}} til {{& stream.fields.title}}",

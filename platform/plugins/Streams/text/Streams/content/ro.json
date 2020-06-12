@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Nu aveți permisiunea de a vă alătura acestei conversații.",
         "startedConversation": "a început o conversație",
         "RealTimeCall": "Apel în timp real",
-        "SearchByName": "Cauta dupa nume"
+        "SearchByName": "Cauta dupa nume",
+        "Notifications": {
+            "Visit": "{{displayName}} vizitează chatul",
+            "Join": "{{displayName}} s-a alăturat chatului",
+            "Leave": "{{displayName}} a părăsit chat-ul",
+            "RelatedTo": "{{displayName}} a început o {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Mesaj {{& message.fields.type}} până la {{& stream.fields.title}}",

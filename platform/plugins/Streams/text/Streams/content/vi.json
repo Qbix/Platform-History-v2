@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Bạn không được phép tham gia cuộc trò chuyện này.",
         "startedConversation": "bắt đầu một cuộc trò chuyện",
         "RealTimeCall": "Cuộc gọi thời gian thực",
-        "SearchByName": "Tìm kiếm theo tên"
+        "SearchByName": "Tìm kiếm theo tên",
+        "Notifications": {
+            "Visit": "{{displayName}} đang truy cập trò chuyện",
+            "Join": "{{displayName}} đã tham gia trò chuyện",
+            "Leave": "{{displayName}} rời khỏi trò chuyện",
+            "RelatedTo": "{{displayName}} đã bắt đầu {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Tin nhắn {{& message.fields.type}} đến {{& stream.fields.title}}",

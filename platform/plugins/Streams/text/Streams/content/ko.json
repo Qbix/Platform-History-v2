@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "이 대화에 참여할 수있는 권한이 없습니다.",
         "startedConversation": "대화를 시작했다.",
         "RealTimeCall": "실시간 통화",
-        "SearchByName": "이름으로 검색"
+        "SearchByName": "이름으로 검색",
+        "Notifications": {
+            "Visit": "{{displayName}} 님이 채팅을 방문 중입니다",
+            "Join": "{{displayName}} 님이 채팅에 참여했습니다",
+            "Leave": "{{displayName}} 님이 채팅에서 나갔습니다",
+            "RelatedTo": "{{displayName}}가 {{stream.displayType}}을 (를) 시작했습니다"
+        }
     },
     "notifications": {
         "*": "메시지 {{& message.fields.type}} ~ {{& stream.fields.title}}",

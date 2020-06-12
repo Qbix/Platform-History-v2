@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Awunayo imvume yokujoyina le ncoko.",
         "startedConversation": "yaqala incoko",
         "RealTimeCall": "Ixesha lokutsala umnxeba",
-        "SearchByName": "Khangela ngegama"
+        "SearchByName": "Khangela ngegama",
+        "Notifications": {
+            "Visit": "{{displayName}} undwendwela incoko",
+            "Join": "{{displayName}} ujoyine incoko",
+            "Leave": "{{displayName}} ishiye incoko",
+            "RelatedTo": "{{displayName}} uqalile {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Umyalezo {{& message.fields.type}} kwi {{& stream.fields.title}}",

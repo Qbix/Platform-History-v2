@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Nemate dozvolu pridružiti se ovom razgovoru.",
         "startedConversation": "započeo razgovor",
         "RealTimeCall": "Poziv u stvarnom vremenu",
-        "SearchByName": "Traži po imenu"
+        "SearchByName": "Traži po imenu",
+        "Notifications": {
+            "Visit": "{{displayName}} dolazi u chat",
+            "Join": "{{displayName}} pridružio se chatu",
+            "Leave": "{{displayName}} napustio chat",
+            "RelatedTo": "{{displayName}} pokrenuo je {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Poruka {{& message.fields.type}} do {{& stream.fields.title}}",

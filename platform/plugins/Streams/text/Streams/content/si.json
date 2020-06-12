@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "මෙම සංවාදයට සම්බන්ධ වීමට ඔබට අවසර නැත.",
         "startedConversation": "සංවාදයක් ආරම්භ කළා",
         "RealTimeCall": "රියල් ටයිම් ඇමතුම",
-        "SearchByName": "නමින් සොයන්න"
+        "SearchByName": "නමින් සොයන්න",
+        "Notifications": {
+            "Visit": "{{999} the චැට් වෙත පැමිණේ",
+            "Join": "{{999} the චැට් එකට සම්බන්ධ විය",
+            "Leave": "{{999} the සංවාදයෙන් ඉවත් විය",
+            "RelatedTo": "{{displayName}} ආරම්භ කළේ {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "පණිවිඩය {{& message.fields.type}} සිට {{& stream.fields.title}} දක්වා",

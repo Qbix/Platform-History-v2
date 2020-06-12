@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "ይህንን ውይይት ለመቀላቀል ፈቃድ የልዎትም።",
         "startedConversation": "ውይይት ጀመርኩ",
         "RealTimeCall": "እውነተኛ ሰዓት ጥሪ",
-        "SearchByName": "በስም ይፈልጉ"
+        "SearchByName": "በስም ይፈልጉ",
+        "Notifications": {
+            "Visit": "{{displayName}} ውይይቱን እየጎበኘ ነው",
+            "Join": "{{displayName}} ውይይቱን ተቀላቅሏል",
+            "Leave": "{{displayName}} ውይይቱን ትቶ ወጥቷል",
+            "RelatedTo": "{{displayName}} አንድ {{stream.displayType}} ጀምረዋል"
+        }
     },
     "notifications": {
         "*": "መልዕክት {{& message.fields.type}} to {{& stream.fields.title}}",

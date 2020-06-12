@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Anjeun teu gaduh idin pikeun ngiluan paguneman ieu.",
         "startedConversation": "ngamimitian paguneman",
         "RealTimeCall": "Panggeroan Real Time",
-        "SearchByName": "Milarian ku nami"
+        "SearchByName": "Milarian ku nami",
+        "Notifications": {
+            "Visit": "{{displayName}} nyaéta ngadatangan obrolan",
+            "Join": "{{displayName}} gabung dina obrolan",
+            "Leave": "{{displayName}} tinggalkeun obrolan",
+            "RelatedTo": "{{displayName}} ngamimitian hiji {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Pesen {{& message.fields.type}} kana {{& stream.fields.title}}",

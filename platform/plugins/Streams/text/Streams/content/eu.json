@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Ez duzu elkarrizketetan sartzeko baimenik.",
         "startedConversation": "elkarrizketa bat hasi zuen",
         "RealTimeCall": "Denbora errealeko deia",
-        "SearchByName": "Bilatu izenaren arabera"
+        "SearchByName": "Bilatu izenaren arabera",
+        "Notifications": {
+            "Visit": "{{displayName}} txata bisitatzen ari da",
+            "Join": "{{displayName}} txatean sartu da",
+            "Leave": "{{displayName}} txatetik irten da",
+            "RelatedTo": "{{displayName}} hasi da {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "{{& message.fields.type}} mezua {{& stream.fields.title}}",

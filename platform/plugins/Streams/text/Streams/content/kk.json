@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Бұл әңгімеге қосылуға рұқсатыңыз жоқ.",
         "startedConversation": "әңгіме бастады",
         "RealTimeCall": "Нақты уақыттағы қоңырау",
-        "SearchByName": "Аты бойынша іздеу"
+        "SearchByName": "Аты бойынша іздеу",
+        "Notifications": {
+            "Visit": "{{displayName}} чатқа кіріп жатыр",
+            "Join": "{{displayName}} чатқа қосылды",
+            "Leave": "{{displayName}} чаттан кетті",
+            "RelatedTo": "{{displayName}} {{stream.displayType}} бастады"
+        }
     },
     "notifications": {
         "*": "{{& message.fields.type}} дегенге {{& stream.fields.title}}",

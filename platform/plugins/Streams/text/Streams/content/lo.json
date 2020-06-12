@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "ທ່ານບໍ່ມີສິດເຂົ້າຮ່ວມການສົນທະນານີ້.",
         "startedConversation": "ເລີ່ມການສົນທະນາ",
         "RealTimeCall": "ໂທເວລາຈິງ",
-        "SearchByName": "ຄົ້ນຫາຕາມຊື່"
+        "SearchByName": "ຄົ້ນຫາຕາມຊື່",
+        "Notifications": {
+            "Visit": "{{displayName}} ກຳ ລັງຢ້ຽມຊົມການສົນທະນາ",
+            "Join": "{{displayName}} ເຂົ້າຮ່ວມການສົນທະນາ",
+            "Leave": "{{displayName}} ອອກຈາກການສົນທະນາແລ້ວ",
+            "RelatedTo": "{{displayName}} ເລີ່ມຕົ້ນ {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "ຂໍ້ຄວາມ {{& message.fields.type}} ກັບ {{& stream.fields.title}}",

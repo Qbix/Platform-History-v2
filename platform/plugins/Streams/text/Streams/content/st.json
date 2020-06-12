@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Ha u na tumello ea ho kena moqoqong ona.",
         "startedConversation": "o qalile moqoqo",
         "RealTimeCall": "Mohala oa Nako ea &#39;nete",
-        "SearchByName": "Batla ka lebitso"
+        "SearchByName": "Batla ka lebitso",
+        "Notifications": {
+            "Visit": "{{displayName}} e etela moqoqo",
+            "Join": "{{displayName}} o kene moqoqong",
+            "Leave": "{{displayName}} o tlohetse moqoqo",
+            "RelatedTo": "{{displayName}} o qalile {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Molaetsa {{& message.fields.type}} ho {{& stream.fields.title}}",

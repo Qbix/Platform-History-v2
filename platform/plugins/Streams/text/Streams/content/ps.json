@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "تاسو په دې خبرو اترو کې د شاملیدو اجازه نلرئ.",
         "startedConversation": "خبرې پیل کړې",
         "RealTimeCall": "د ریښتیني وخت زنګ",
-        "SearchByName": "د نوم له مخې لټون"
+        "SearchByName": "د نوم له مخې لټون",
+        "Notifications": {
+            "Visit": "{{999} the چیټ ته ورځي",
+            "Join": "{{999} the په خبرو کې ګډون وکړ",
+            "Leave": "the {999} the چیٹ پریښود",
+            "RelatedTo": "{{displayName}} پیل وکړ {1000}}"
+        }
     },
     "notifications": {
         "*": "پیغام {{& message.fields.type}} {{& stream.fields.title}} ته",

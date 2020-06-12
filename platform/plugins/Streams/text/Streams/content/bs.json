@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Nemate dozvolu da se pridružite ovom razgovoru.",
         "startedConversation": "započeo razgovor",
         "RealTimeCall": "Poziv u stvarnom vremenu",
-        "SearchByName": "Traži po imenu"
+        "SearchByName": "Traži po imenu",
+        "Notifications": {
+            "Visit": "{{displayName}} posećuje ćaskanje",
+            "Join": "{{displayName}} pridružio se ćaskanju",
+            "Leave": "{{displayName}} napustio ćaskanje",
+            "RelatedTo": "{{displayName}} pokrenuo je {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Poruka {{& message.fields.type}} do {{& stream.fields.title}}",

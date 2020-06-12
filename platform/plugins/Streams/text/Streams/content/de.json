@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Sie haben keine Berechtigung, an dieser Unterhaltung teilzunehmen.",
         "startedConversation": "hat ein Gespräch begonnen",
         "RealTimeCall": "Echtzeitanruf",
-        "SearchByName": "Suche mit Name"
+        "SearchByName": "Suche mit Name",
+        "Notifications": {
+            "Visit": "{{displayName}} besucht den Chat",
+            "Join": "{{displayName}} ist dem Chat beigetreten",
+            "Leave": "{{displayName}} hat den Chat verlassen",
+            "RelatedTo": "{{displayName}} hat eine {{stream.displayType}} gestartet"
+        }
     },
     "notifications": {
         "*": "Nachricht {{& message.fields.type}} an {{& stream.fields.title}}",

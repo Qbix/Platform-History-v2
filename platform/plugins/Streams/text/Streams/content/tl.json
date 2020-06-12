@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Wala kang pahintulot na sumali sa pag-uusap na ito.",
         "startedConversation": "nagsimula ng usapan",
         "RealTimeCall": "Tinawag na Tunay na Oras",
-        "SearchByName": "Paghahanap ayon sa pangalan"
+        "SearchByName": "Paghahanap ayon sa pangalan",
+        "Notifications": {
+            "Visit": "Ang {{displayName}} ay bumibisita sa chat",
+            "Join": "Ang {{displayName}} ay sumali sa chat",
+            "Leave": "Iniwan ng {{displayName}} ang chat",
+            "RelatedTo": "Nagsimula ang {{displayName}} isang {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Mensahe {{& message.fields.type}} sa {{& stream.fields.title}}",

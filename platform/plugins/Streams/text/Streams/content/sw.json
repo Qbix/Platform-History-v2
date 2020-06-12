@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Huna ruhusa ya kujiunga na mazungumzo haya.",
         "startedConversation": "alianza mazungumzo",
         "RealTimeCall": "Simu ya Wakati wa kweli",
-        "SearchByName": "Tafuta kwa jina"
+        "SearchByName": "Tafuta kwa jina",
+        "Notifications": {
+            "Visit": "{{displayName}} anatembelea gumzo",
+            "Join": "{{displayName}} alijiunga na gumzo",
+            "Leave": "{{displayName}} aliongea gumzo",
+            "RelatedTo": "{{displayName}} alianza {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Ujumbe {{& message.fields.type}} kwa {{& stream.fields.title}}",

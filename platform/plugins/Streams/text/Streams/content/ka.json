@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "თქვენ არ გაქვთ ამ საუბარში მონაწილეობის უფლება.",
         "startedConversation": "დაიწყო საუბარი",
         "RealTimeCall": "რეალურ დროში ზარი",
-        "SearchByName": "ძებნა სახელით"
+        "SearchByName": "ძებნა სახელით",
+        "Notifications": {
+            "Visit": "999}} სტუმრობს ჩეთს",
+            "Join": "{99 999}} შეუერთდა ჩეთს",
+            "Leave": "99 99 999}} დატოვა ჩატი",
+            "RelatedTo": "99 {999} }– მა დაიწყო {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "შეტყობინება {{& message.fields.type}} {{& stream.fields.title}}",

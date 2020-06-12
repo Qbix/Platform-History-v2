@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "તમને આ વાતચીતમાં જોડાવાની પરવાનગી નથી.",
         "startedConversation": "વાતચીત શરૂ કરી",
         "RealTimeCall": "રીઅલ ટાઇમ ક Callલ",
-        "SearchByName": "નામ દ્વારા શોધો"
+        "SearchByName": "નામ દ્વારા શોધો",
+        "Notifications": {
+            "Visit": "{9 999} the ચેટની મુલાકાત લઈ રહ્યાં છે",
+            "Join": "The 9 999} the ચેટમાં જોડાયા",
+            "Leave": "The 9 999} the એ ચેટ છોડી દીધી",
+            "RelatedTo": "{{999} એ {{stream.displayType}} પ્રારંભ કર્યું"
+        }
     },
     "notifications": {
         "*": "સંદેશ {{& message.fields.type}} થી {{& stream.fields.title}}",

@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Бул маекти кирүүгө уруксат берилген эмес.",
         "startedConversation": "сөз баштады",
         "RealTimeCall": "Айкын убакыт Call",
-        "SearchByName": "аталышы боюнча издөө"
+        "SearchByName": "аталышы боюнча издөө",
+        "Notifications": {
+            "Visit": "{{displayName}} баарлашууну көрүп жатат",
+            "Join": "Чатка {{displayName}} кошулду",
+            "Leave": "{{displayName}} баарлашуудан чыгып кетти",
+            "RelatedTo": "{{displayName}} {{stream.displayType}} баштаган"
+        }
     },
     "notifications": {
         "*": "Message {{& message.fields.type}} үчүн {{& stream.fields.title}}",

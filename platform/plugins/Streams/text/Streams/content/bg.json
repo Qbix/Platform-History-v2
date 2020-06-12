@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Нямате разрешение да се присъедините към този разговор.",
         "startedConversation": "започна разговор",
         "RealTimeCall": "Обаждане в реално време",
-        "SearchByName": "Търсене по име"
+        "SearchByName": "Търсене по име",
+        "Notifications": {
+            "Visit": "{{displayName}} посещава чата",
+            "Join": "{{displayName}} се присъедини към чата",
+            "Leave": "{{displayName}} напусна чата",
+            "RelatedTo": "{{displayName}} стартира {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Съобщение {{& message.fields.type}} до {{& stream.fields.title}}",

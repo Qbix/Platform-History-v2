@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "ʻAʻole kou ʻae e komo pū i kēia kamaʻilio.",
         "startedConversation": "hoʻomaka kahi kamaʻilio",
         "RealTimeCall": "Kāhea Keia",
-        "SearchByName": "Huli ma o ka inoa"
+        "SearchByName": "Huli ma o ka inoa",
+        "Notifications": {
+            "Visit": "{{displayName}} ke kipa aku nei i ka kamaʻilio",
+            "Join": "{{displayName}} i hui",
+            "Leave": "{{displayName}} waiho i ke kamaʻilio",
+            "RelatedTo": "{{displayName}} hoʻomaka i kahi {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Kākauʻia {{& message.fields.type}} i {{& stream.fields.title}}",

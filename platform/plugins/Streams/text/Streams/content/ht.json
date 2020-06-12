@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Ou pa gen pèmisyon pou rantre nan konvèsasyon sa a.",
         "startedConversation": "te kòmanse yon konvèsasyon",
         "RealTimeCall": "Rele nan tan reyèl",
-        "SearchByName": "Rechèch pa non"
+        "SearchByName": "Rechèch pa non",
+        "Notifications": {
+            "Visit": "{{displayName}} ap vizite chat la",
+            "Join": "{{displayName}} rantre nan chat la",
+            "Leave": "{{displayName}} kite chat la",
+            "RelatedTo": "{{displayName}} te kòmanse yon {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Mesaj {{& message.fields.type}} a {{& stream.fields.title}}",

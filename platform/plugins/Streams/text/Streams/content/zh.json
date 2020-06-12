@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "您无权加入此对话。",
         "startedConversation": "开始了对话",
         "RealTimeCall": "实时通话",
-        "SearchByName": "按名称搜寻"
+        "SearchByName": "按名称搜寻",
+        "Notifications": {
+            "Visit": "{{displayName}}正在聊天",
+            "Join": "{{displayName}}加入了聊天",
+            "Leave": "{{displayName}}离开了聊天室",
+            "RelatedTo": "{{displayName}}开始了{{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "消息{{& message.fields.type}}至{{& stream.fields.title}}",

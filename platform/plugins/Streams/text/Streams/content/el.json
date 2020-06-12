@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Δεν έχετε δικαίωμα να συμμετάσχετε σε αυτήν τη συζήτηση.",
         "startedConversation": "ξεκίνησε μια συνομιλία",
         "RealTimeCall": "Κλήση σε πραγματικό χρόνο",
-        "SearchByName": "Αναζήτηση βάσει ονόματος"
+        "SearchByName": "Αναζήτηση βάσει ονόματος",
+        "Notifications": {
+            "Visit": "Ο χρήστης {{displayName}} επισκέπτεται τη συζήτηση",
+            "Join": "Ο χρήστης {{displayName}} συμμετείχε στη συζήτηση",
+            "Leave": "Ο χρήστης {{displayName}} αποχώρησε από τη συζήτηση",
+            "RelatedTo": "Ο {{displayName}} ξεκίνησε ένα {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Μήνυμα {{& message.fields.type}} έως {{& stream.fields.title}}",

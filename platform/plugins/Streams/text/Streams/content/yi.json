@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "איר האָט נישט קיין דערלויבעניש צו פאַרבינדן דעם שמועס.",
         "startedConversation": "סטאַרטעד אַ שמועס",
         "RealTimeCall": "פאַקטיש צייט רופן",
-        "SearchByName": "זוכן דורך נאָמען"
+        "SearchByName": "זוכן דורך נאָמען",
+        "Notifications": {
+            "Visit": "{{displayName}} באַזוכן דעם שמועס",
+            "Join": "{{displayName}} האָט זיך אייַנגעשלאָסן אין דעם שמועס",
+            "Leave": "{{displayName}} האָט איבערגעלאָזט דעם שמועס",
+            "RelatedTo": "{{displayName}} האָט אָנגעהויבן אַ {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "אָנזאָג {{& message.fields.type}} צו {{& stream.fields.title}}",

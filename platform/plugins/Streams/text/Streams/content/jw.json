@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Sampeyan ora duwe idin kanggo melu ing obrolan iki.",
         "startedConversation": "miwiti pacelathon",
         "RealTimeCall": "Telpon Real Time",
-        "SearchByName": "Telusuri miturut jeneng"
+        "SearchByName": "Telusuri miturut jeneng",
+        "Notifications": {
+            "Visit": "{{displayName}} ngunjungi obrolan",
+            "Join": "{{displayName}} gabung ing obrolan",
+            "Leave": "{{displayName}} ninggalake obrolan",
+            "RelatedTo": "{{displayName}} miwiti {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Pesen {{& message.fields.type}} kanggo {{& stream.fields.title}}",

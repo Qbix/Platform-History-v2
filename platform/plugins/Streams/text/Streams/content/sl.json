@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Nimate dovoljenja za pridružitev temu pogovoru.",
         "startedConversation": "začel pogovor",
         "RealTimeCall": "Klic v realnem času",
-        "SearchByName": "Iščite po imenu"
+        "SearchByName": "Iščite po imenu",
+        "Notifications": {
+            "Visit": "{{displayName}} obišče klepet",
+            "Join": "{{displayName}} se je pridružil klepetu",
+            "Leave": "{{displayName}} je zapustil klepet",
+            "RelatedTo": "{{displayName}} je začel {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Sporočilo {{& message.fields.type}} do {{& stream.fields.title}}",

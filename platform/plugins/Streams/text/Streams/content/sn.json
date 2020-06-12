@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Iwe hauna mvumo yekujoinha iyi hurukuro.",
         "startedConversation": "akatanga hurukuro",
         "RealTimeCall": "Nguva Yekufona Chaizvo",
-        "SearchByName": "Tsvaga nemazita"
+        "SearchByName": "Tsvaga nemazita",
+        "Notifications": {
+            "Visit": "{{displayName}} ari kushanyira chat",
+            "Join": "{{displayName}} akajoinha chat",
+            "Leave": "{{displayName}} akasiya chat",
+            "RelatedTo": "{{displayName}} akatanga {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Mharidzo kune (1000)",

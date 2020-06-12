@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Baka da izinin shiga wannan tattaunawar.",
         "startedConversation": "fara hira",
         "RealTimeCall": "Kira na Gaskiya",
-        "SearchByName": "Bincika da suna"
+        "SearchByName": "Bincika da suna",
+        "Notifications": {
+            "Visit": "{{displayName}} yana ziyartar tattaunawar",
+            "Join": "{{displayName}} ya shiga tattaunawar",
+            "Leave": "{{displayName}} ya bar hira",
+            "RelatedTo": "{{displayName}} ya fara {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Message {{& message.fields.type}} zuwa {{& stream.fields.title}}",

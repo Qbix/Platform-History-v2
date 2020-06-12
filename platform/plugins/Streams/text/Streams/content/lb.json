@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Dir hutt net déi néideg Rechter fir un dësem Gespréich deelzehuelen.",
         "startedConversation": "huet e Gespréich ugefaang",
         "RealTimeCall": "Real Time Call",
-        "SearchByName": "Sich mam Numm"
+        "SearchByName": "Sich mam Numm",
+        "Notifications": {
+            "Visit": "{{displayName}} besicht de Chat",
+            "Join": "{{displayName}} ass un de Chat bäikomm",
+            "Leave": "{{displayName}} huet de Chat verlooss",
+            "RelatedTo": "{{displayName}} huet e {{stream.displayType}} ugefaang"
+        }
     },
     "notifications": {
         "*": "Message {{& message.fields.type}} op {{& stream.fields.title}}",

@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Wala kay pagtugot nga moapil sa kini nga panag-istoryahanay.",
         "startedConversation": "nagsugod sa usa ka panagsultihanay",
         "RealTimeCall": "Tinuod nga Panawag sa Panahon",
-        "SearchByName": "Pagpangita pinaagi sa ngalan"
+        "SearchByName": "Pagpangita pinaagi sa ngalan",
+        "Notifications": {
+            "Visit": "Ang {{displayName}} nagbisita sa chat",
+            "Join": "Ang {{displayName}} miapil sa chat",
+            "Leave": "Gibilin sa {{displayName}} ang chat",
+            "RelatedTo": "Ang {{displayName}} nagsugod usa ka {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Mensahe {{& message.fields.type}} sa {{& stream.fields.title}}",

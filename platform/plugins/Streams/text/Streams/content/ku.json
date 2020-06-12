@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Tu destûr nîn e ku beşdarî vê danûstendinê bibe.",
         "startedConversation": "axaftinek dest pê kir",
         "RealTimeCall": "Banga Wexta rast",
-        "SearchByName": "Bi navî bigerin"
+        "SearchByName": "Bi navî bigerin",
+        "Notifications": {
+            "Visit": "999}} serdana mêvanetê dike",
+            "Join": "99 999}} beşdarî chat bû",
+            "Leave": "99 999}} dev ji axaftinê berda",
+            "RelatedTo": "99 {999}} dest pê kir {{1000}"
+        }
     },
     "notifications": {
         "*": "Peyama {{& message.fields.type}} ji {{& stream.fields.title}}",

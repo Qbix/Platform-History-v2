@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Koj tsis muaj kev tso cai los koom nrog qhov kev sib tham.",
         "startedConversation": "tau pib sib tham",
         "RealTimeCall": "Lub Sij Hawm Tiag Hu",
-        "SearchByName": "Tshawb ntawm npe"
+        "SearchByName": "Tshawb ntawm npe",
+        "Notifications": {
+            "Visit": "{{displayName}} yog mus saib qhov kev sib tham",
+            "Join": "{{displayName}} koom nrog cov lus sib tham",
+            "Leave": "{{displayName}} tawm mus sib tham",
+            "RelatedTo": "{{displayName}} pib lub {{1000 tauj}"
+        }
     },
     "notifications": {
         "*": "Tsuag {{& message.fields.type}} rau {{& stream.fields.title}}",

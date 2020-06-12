@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Neturite leidimo prisijungti prie šio pokalbio.",
         "startedConversation": "pradėjo pokalbį",
         "RealTimeCall": "Skambinimas realiuoju laiku",
-        "SearchByName": "Paieška pagal pavadinimą"
+        "SearchByName": "Paieška pagal pavadinimą",
+        "Notifications": {
+            "Visit": "{{displayName}} lankosi pokalbyje",
+            "Join": "{{displayName}} prisijungė prie pokalbio",
+            "Leave": "{{displayName}} paliko pokalbį",
+            "RelatedTo": "{{displayName}} pradėjo {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Pranešimas {{& message.fields.type}} į {{& stream.fields.title}}",

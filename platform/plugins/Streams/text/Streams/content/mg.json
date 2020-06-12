@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Tsy manana alalana hiditra amin&#39;ity resaka ity ianao.",
         "startedConversation": "nanomboka resaka",
         "RealTimeCall": "Fiantsoana tena fotoana",
-        "SearchByName": "Mikaraho amin&#39;ny anarany"
+        "SearchByName": "Mikaraho amin&#39;ny anarany",
+        "Notifications": {
+            "Visit": "{{displayName}} dia mitsidika ny resaka",
+            "Join": "{{displayName}} nanatevina ny resaka",
+            "Leave": "Niala tamin&#39;ny resaka ny {{displayName}}",
+            "RelatedTo": "{{displayName}} nanomboka ny {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Hafatra {{& message.fields.type}} amin&#39;ny {{& stream.fields.title}}",

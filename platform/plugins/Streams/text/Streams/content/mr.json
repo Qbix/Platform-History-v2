@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "आपणास या संभाषणात सामील होण्याची परवानगी नाही.",
         "startedConversation": "संभाषण सुरू केले",
         "RealTimeCall": "रीअल टाइम कॉल",
-        "SearchByName": "नावाने शोधा"
+        "SearchByName": "नावाने शोधा",
+        "Notifications": {
+            "Visit": "{{999} the गप्पांना भेट देत आहे",
+            "Join": "{{999} the गप्पांमध्ये सामील झाले",
+            "Leave": "The {999} यांनी गप्पा सोडल्या",
+            "RelatedTo": "{{999} ने एक {{stream.displayType}} प्रारंभ केला"
+        }
     },
     "notifications": {
         "*": "संदेश {{& message.fields.type}} वर {{& stream.fields.title}}",

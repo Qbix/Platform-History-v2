@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Դուք չունեք հաղորդագրություն փակցնելու միանալու թույլտվություն:",
         "startedConversation": "զրույց սկսեց",
         "RealTimeCall": "Իրական ժամանակի զանգ",
-        "SearchByName": "Որոնել անունով"
+        "SearchByName": "Որոնել անունով",
+        "Notifications": {
+            "Visit": "99 99 999}}-ը այցելում է զրույցը",
+            "Join": "{99 999}} -ը միացավ զրույցին",
+            "Leave": "{99 999}} -ը թողեց զրույցը",
+            "RelatedTo": "99 {999}} -ը սկսեց {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Հաղորդագրություն {{& message.fields.type}} - ից {{& stream.fields.title}}",

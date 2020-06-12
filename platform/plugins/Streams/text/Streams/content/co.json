@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Ùn avete micca permessu di unisce à sta cunversazione.",
         "startedConversation": "hà principiatu una cunversazione",
         "RealTimeCall": "Chjamate in tempu Reali",
-        "SearchByName": "Ricerca per nome"
+        "SearchByName": "Ricerca per nome",
+        "Notifications": {
+            "Visit": "{{displayName}} visita a chat",
+            "Join": "{{displayName}} unitu à u chat",
+            "Leave": "{{displayName}} ha lasciatu u chat",
+            "RelatedTo": "{{displayName}} ha iniziatu un {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Messaggio {{& message.fields.type}} per {{& stream.fields.title}}",

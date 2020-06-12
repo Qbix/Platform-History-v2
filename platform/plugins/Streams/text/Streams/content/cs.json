@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "K této konverzaci nemáte povolení.",
         "startedConversation": "zahájil konverzaci",
         "RealTimeCall": "Volání v reálném čase",
-        "SearchByName": "Hledat podle jména"
+        "SearchByName": "Hledat podle jména",
+        "Notifications": {
+            "Visit": "{{displayName}} navštěvuje chat",
+            "Join": "{{displayName}} se připojil k chatu",
+            "Leave": "{{displayName}} opustil chat",
+            "RelatedTo": "{{displayName}} odstartoval {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Zpráva {{& message.fields.type}} až {{& stream.fields.title}}",

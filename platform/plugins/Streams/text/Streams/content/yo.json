@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "O ko ni aṣẹ lati darapọ mọ ibaraẹnisọrọ yii.",
         "startedConversation": "bẹrẹ ibaraẹnisọrọ kan",
         "RealTimeCall": "Ipe Akoko gidi",
-        "SearchByName": "Wa ni orukọ"
+        "SearchByName": "Wa ni orukọ",
+        "Notifications": {
+            "Visit": "{{displayName}} n bẹ iwiregbe naa",
+            "Join": "{{displayName}} darapọ mọ iwiregbe naa",
+            "Leave": "{{displayName}} fi iwiregbe silẹ",
+            "RelatedTo": "{{displayName}} ti bẹrẹ {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Ifiranṣẹ {{& message.fields.type}} si {{& stream.fields.title}}",

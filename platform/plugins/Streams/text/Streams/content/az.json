@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Bu söhbətə qoşulmaq üçün icazəniz yoxdur.",
         "startedConversation": "söhbətə başladı",
         "RealTimeCall": "Real vaxt zəng",
-        "SearchByName": "Adı ilə axtarın"
+        "SearchByName": "Adı ilə axtarın",
+        "Notifications": {
+            "Visit": "{{displayName}} sohbeti ziyarət edir",
+            "Join": "{{displayName}} söhbətə qoşuldu",
+            "Leave": "{{displayName}} söhbətdən çıxdı",
+            "RelatedTo": "{{displayName}} bir {{stream.displayType}} başladı"
+        }
     },
     "notifications": {
         "*": "{{& message.fields.type}} - {{& stream.fields.title}}",

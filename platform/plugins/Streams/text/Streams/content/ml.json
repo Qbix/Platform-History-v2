@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "ഈ സംഭാഷണത്തിൽ ചേരാൻ നിങ്ങൾക്ക് അനുമതിയില്ല.",
         "startedConversation": "ഒരു സംഭാഷണം ആരംഭിച്ചു",
         "RealTimeCall": "തത്സമയ കോൾ",
-        "SearchByName": "പേര് പ്രകാരം തിരയുക"
+        "SearchByName": "പേര് പ്രകാരം തിരയുക",
+        "Notifications": {
+            "Visit": "{{999} the ചാറ്റ് സന്ദർശിക്കുന്നു",
+            "Join": "{{999} the ചാറ്റിൽ ചേർന്നു",
+            "Leave": "{{999} the ചാറ്റ് വിട്ടു",
+            "RelatedTo": "{{displayName}} ഒരു {{stream.displayType}} ആരംഭിച്ചു"
+        }
     },
     "notifications": {
         "*": "{{& message.fields.type}} മുതൽ {{& stream.fields.title}} വരെ സന്ദേശം",

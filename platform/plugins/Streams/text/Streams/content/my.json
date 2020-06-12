@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "ဤစကားဝိုင်းတွင်သင်ခွင့်ပြုချက်မရှိပါ။",
         "startedConversation": "စကားစပြောတယ်",
         "RealTimeCall": "Real Time ခေါ်ဆိုမှု",
-        "SearchByName": "အမည်ဖြင့်ရှာဖွေပါ"
+        "SearchByName": "အမည်ဖြင့်ရှာဖွေပါ",
+        "Notifications": {
+            "Visit": "{{displayName}} ဟာချက်တင်စကားပြောခန်းကိုရောက်လာသည်",
+            "Join": "{{displayName}} သည်ချက်တင်စကားပြောခဲ့သည်",
+            "Leave": "{{displayName}} ချက်တင်မှထွက်ခွာသည်",
+            "RelatedTo": "{{displayName}} {{stream.displayType}} ကိုစတင်ခဲ့သည်။"
+        }
     },
     "notifications": {
         "*": "မက်ဆေ့ခ်ျကို {{& message.fields.type}} {{& stream.fields.title}} မှ",

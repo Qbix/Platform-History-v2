@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Mulibe chilolezo cholowa nawo zokambirana.",
         "startedConversation": "adayamba kukambirana",
         "RealTimeCall": "Kuyimbira Nthawi Yeniyeni",
-        "SearchByName": "Sakani ndi dzina"
+        "SearchByName": "Sakani ndi dzina",
+        "Notifications": {
+            "Visit": "{{displayName}} akuyendera macheza",
+            "Join": "{{displayName}} adalowa nawo macheza",
+            "Leave": "{{999]} adachoka pamacheza",
+            "RelatedTo": "{{displayName}} adayamba {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Uthenga {{& message.fields.type}} kwa {{& stream.fields.title}}",

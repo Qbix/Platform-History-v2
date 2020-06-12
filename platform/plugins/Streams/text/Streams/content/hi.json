@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "आपको इस वार्तालाप में शामिल होने की अनुमति नहीं है।",
         "startedConversation": "बातचीत शुरू की",
         "RealTimeCall": "रियल टाइम कॉल",
-        "SearchByName": "नाम से खोजें"
+        "SearchByName": "नाम से खोजें",
+        "Notifications": {
+            "Visit": "{{displayName}} चैट पर जा रहा है",
+            "Join": "{{displayName}} चैट में शामिल हो गया",
+            "Leave": "{{displayName}} ने चैट छोड़ दी",
+            "RelatedTo": "{{displayName}} ने {{stream.displayType}} शुरू किया"
+        }
     },
     "notifications": {
         "*": "संदेश {{& message.fields.type}} से {{& stream.fields.title}}",

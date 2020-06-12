@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "இந்த உரையாடலில் சேர உங்களுக்கு அனுமதி இல்லை.",
         "startedConversation": "உரையாடலைத் தொடங்கினார்",
         "RealTimeCall": "நிகழ் நேர அழைப்பு",
-        "SearchByName": "பெயரால் தேடுங்கள்"
+        "SearchByName": "பெயரால் தேடுங்கள்",
+        "Notifications": {
+            "Visit": "{{999} the அரட்டைக்கு வருகை தருகிறார்",
+            "Join": "{{999} the அரட்டையில் சேர்ந்தார்",
+            "Leave": "{{999} the அரட்டையிலிருந்து வெளியேறினார்",
+            "RelatedTo": "{{999} a ஒரு {{stream.displayType}} ஐத் தொடங்கியது"
+        }
     },
     "notifications": {
         "*": "{{& stream.fields.title}} க்கு {999}}",

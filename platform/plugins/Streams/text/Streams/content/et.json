@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Teil pole sellel vestlusel luba.",
         "startedConversation": "alustas vestlust",
         "RealTimeCall": "Real Time Call",
-        "SearchByName": "Otsige nime järgi"
+        "SearchByName": "Otsige nime järgi",
+        "Notifications": {
+            "Visit": "{{displayName}} külastab vestlust",
+            "Join": "{{displayName}} liitus vestlusega",
+            "Leave": "{{displayName}} lahkus vestlusest",
+            "RelatedTo": "{{displayName}} alustas {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Sõnum {{& message.fields.type}} {{& stream.fields.title}}",

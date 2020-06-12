@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Шумо иҷозати ҳамроҳ шудан ба ин сӯҳбатро надоред.",
         "startedConversation": "сӯҳбатро оғоз кард",
         "RealTimeCall": "Занги вақти воқеӣ",
-        "SearchByName": "Ҷустуҷӯ аз рӯи ном"
+        "SearchByName": "Ҷустуҷӯ аз рӯи ном",
+        "Notifications": {
+            "Visit": "{{displayName}} ба сӯҳбат ташриф меорад",
+            "Join": "{{displayName}} ба сӯҳбат ҳамроҳ шуд",
+            "Leave": "{{displayName}} сӯҳбатро тарк кард",
+            "RelatedTo": "{{displayName}} барномаи {{stream.displayType}} -ро сар кард"
+        }
     },
     "notifications": {
         "*": "{{& message.fields.type}} то {{& stream.fields.title}}",

@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Níl cead agat an comhrá seo a dhéanamh.",
         "startedConversation": "thosaigh comhrá",
         "RealTimeCall": "Glao Ama Fíor-Ama",
-        "SearchByName": "Cuardaigh de réir ainm"
+        "SearchByName": "Cuardaigh de réir ainm",
+        "Notifications": {
+            "Visit": "Tá {{displayName}} ag tabhairt cuairte ar an gcomhrá",
+            "Join": "Chuaigh {{displayName}} isteach sa chomhrá",
+            "Leave": "D’fhág {{displayName}} an comhrá",
+            "RelatedTo": "Chuir {{displayName}} tús le {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Teachtaireacht {{& message.fields.type}} go {{& stream.fields.title}}",
