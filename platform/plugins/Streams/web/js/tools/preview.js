@@ -198,7 +198,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			}
 			var fields = Q.extend({
 				publisherId: state.publisherId,
-				type: state.creatable.streamType || "Streams/text/small"
+				type: (state.creatable && state.creatable.streamType) || "Streams/text/small"
 			}, 10, overrides);
 			state.beforeCreate.handle.call(tool);
 			tool.loading();
@@ -275,19 +275,14 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	loading: function _loading() {
 		var tool = this;
 		var state = tool.state;
-		var $img = $('<img />').attr({
-			'alt': 'loading',
-			'src': Q.url(state.throbber || Q.info.imgLoading),
-			'class': 'Streams_preview_loading'
-		});
-		Q.Tool.clear(tool.element);
-		$(tool.element).empty().append($img);
-		_setWidthHeight(tool, $img);
+		$(tool.element).addClass('Q_working').attr('disabled', 'disabled');
+		return;
 	},
 	preview: function _preview() {
 		var tool = this;
 		var state = tool.state;
 		var $te = $(tool.element);
+		$te.removeClass('Q_working').removeAttr('disabled');
 
 		Q.Streams.retainWith(tool).get(state.publisherId, state.streamName,
 		function (err) {
@@ -391,10 +386,10 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 					preprocess: function (callback) {
 						var subpath;
 						Q.Streams.get(state.publisherId, state.streamName, function () {
-							var parts = this.iconUrl(40).split('/');
-							var iconUrl = parts.slice(0, parts.length-1).join('/')
-								.substr(Q.info.baseUrl.length+1);
-							if (parts[1] === 'Users') {
+							var iconUrl = this.iconUrl(40);
+							var p = 'Q/plugins/';
+							var i = this.iconUrl(40).indexOf('Q/plugins/');
+							if (iconUrl.substr(i+p.length).startsWith('Users/')) {
 								// uploading a user icon
 								path = 'Q/uploads/Users';
 								subpath = state.publisherId.splitId() + '/icon';
