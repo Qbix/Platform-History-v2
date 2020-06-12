@@ -317,6 +317,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	            if ( requiredSize.width && requiredSize.height ) {
 					// if specified both dimensions - we should remove
 					// smaller size to avoid double reductions
+		            requiredSize = Q.copy(requiredSize);
 	                if ( requiredSize.width > requiredSize.height ) {
 	                    requiredSize.height = null;
 	                } else {
