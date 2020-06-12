@@ -327,10 +327,10 @@ class Streams_Stream extends Base_Streams_Stream
 			);
 		}
 
-		if (is_array($this->title)) {
+		if (isset($this->title) and is_array($this->title)) {
 			$this->title = Q::interpolate($this->title); // fetch from text files
 		}
-		if (is_array($this->content)) {
+		if (isset($this->content) and is_array($this->content)) {
 			$this->content = Q::interpolate($this->content); // fetch from text files
 		}
 
