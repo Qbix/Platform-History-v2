@@ -498,34 +498,37 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				                    if (!_checkRequiredSize(requiredSize, bounds)) {
 				                    	return _revert();
 				                    }
-
-									var temp;
-									if (orientation === 6) {
-										temp = bounds.width;
-										bounds.width = bounds.height;
-										bounds.height = temp;
-										temp = bounds.left;
-										bounds.left = bounds.top;
-										bounds.top = isw - temp - bounds.height;
-									} else if (orientation === 8) {
-										temp = bounds.height;
-										bounds.height = bounds.width;
-										bounds.width = temp;
-										temp = bounds.top;
-										bounds.top = bounds.left;
-										bounds.left = ish - temp - bounds.width;
-									} else if (orientation === 3) {
-										bounds.top = ish - bounds.top - bounds.height;
-										bounds.left = isw - bounds.left - bounds.width;
-									}
-									if (!bounds) return;
+									_handleOrientation(bounds);
 				                    _doCanvasCrop(img.src, bounds, orientation, _doUpload);
 		                        }
 		                    });
 						} else {
 							var bounds = _selectionInfo(requiredSize, imageSize);
 							bounds.requiredSize = requiredSize;
+							_handleOrientation(bounds);
 		                    _doCanvasCrop(img.src, bounds, orientation, _doUpload);
+						}
+
+						function _handleOrientation(bounds) {
+							var temp;
+							if (orientation === 6) {
+								temp = bounds.width;
+								bounds.width = bounds.height;
+								bounds.height = temp;
+								temp = bounds.left;
+								bounds.left = bounds.top;
+								bounds.top = isw - temp - bounds.height;
+							} else if (orientation === 8) {
+								temp = bounds.height;
+								bounds.height = bounds.width;
+								bounds.width = temp;
+								temp = bounds.top;
+								bounds.top = bounds.left;
+								bounds.left = ish - temp - bounds.width;
+							} else if (orientation === 3) {
+								bounds.top = ish - bounds.top - bounds.height;
+								bounds.left = isw - bounds.left - bounds.width;
+							}
 						}
 					});
 				});
@@ -533,12 +536,6 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		
 			var EXIFjslib = '{{Q}}/js/exif.js';
 			Q.addScript(EXIFjslib); // start loading it
-		
-			if ((!state.cropping && !state.crop)
-			|| state.saveSizeName.x) {
-				_doUpload(data);
-				return;
-			}
 		
 			var img = new Image;
 			img.onload = _onImgLoad;
