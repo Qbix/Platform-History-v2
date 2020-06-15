@@ -246,7 +246,7 @@ class Streams_Invite extends Base_Streams_Invite
 			}
 		} else {
 			$stream->join($userId, $this->publisherId, $this->streamName, array(
-				'extra' => array('Streams/invitingUserId' => $this->invitingUserId)
+				'extra' => array('Streams/invitingUserId' => $this->invitingUserId),
 				'noVisit' => true
 			));
 		}
