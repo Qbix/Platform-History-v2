@@ -13266,6 +13266,9 @@ Q.onInit.add(function () {
 		QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
 		QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
 	});
+	
+	// load this ASAP so dialogs can load synchronously (for keyboard focus, etc.)
+	Q.addScript("{{Q}}/js/fn/dialog.js");
 
 	function _enableSpeech () {
 		var s = new SpeechSynthesisUtterance();
