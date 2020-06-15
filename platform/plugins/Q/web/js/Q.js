@@ -363,6 +363,7 @@ Sp.queryField = function Q_queryField(name, value) {
 		Q.each(name, function (key, value) {
 			result = result.queryField(key, value);
 		});
+		return result;
 	} else if (value === undefined) {
 		return Q.parseQueryString(what) [ name ];
 	} else if (value === null) {
