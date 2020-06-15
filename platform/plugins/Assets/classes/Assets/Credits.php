@@ -69,9 +69,9 @@ class Assets_Credits
 	{
 		$stream = self::userStream($userId, $userId);
 		if ($stream instanceof Streams_Stream) {
-			return $stream->getAttribute('amount');
+			return (int)$stream->getAttribute('amount');
 		}
-		return null;
+		return 0;
 	}
 	
 	/**
@@ -105,7 +105,7 @@ class Assets_Credits
 			));
 		}
 		$stream->setAttribute('amount', $existing_amount - $amount);
-		$stream->save();
+		$stream->changed();
 		
 		$instructions_json = Q::json_encode(array_merge(
 			array(
@@ -212,7 +212,7 @@ class Assets_Credits
 		}
 		
 		$from_stream->setAttribute('amount', $existing_amount - $amount);
-		$from_stream->save();
+		$from_stream->changed();
 
 		$instructions['operation'] = '-';
 		$text = Q_Text::get('Assets/content');
@@ -230,7 +230,7 @@ class Assets_Credits
 		// without the other person getting them. For now we will rely on the user complaining.
 		$to_stream = self::userStream($toUserId, $toUserId, true);
 		$to_stream->setAttribute('amount', $to_stream->getAttribute('amount') + $amount);
-		$to_stream->save();
+		$to_stream->changed();
 		$instructions['operation'] = '+';
 		$text = Q_Text::get('Assets/content');
 		$type = 'Assets/credits/received';
