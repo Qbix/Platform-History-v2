@@ -25,7 +25,9 @@
     },
     "credits": {
         "InviteAcceptedBy": "Invite accepted by {{1}}",
-        "YouHaveCreditsToStart": "You have {{1}} credits to start"
+        "YouHaveCreditsToStart": "You have {{1}} credits to start",
+		"PaymentFor": "Payment for \"{{1}}\"",
+		"PaymentTo": "Payment to {{1}}"
     },
     "history": {
         "Date": "Date",

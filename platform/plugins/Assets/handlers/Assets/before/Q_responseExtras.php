@@ -4,12 +4,7 @@ function Assets_before_Q_responseExtras() {
 	Q_Response::addStylesheet('{{Assets}}/css/Assets.css', 'Assets');
 	Q_Response::addScript('{{Assets}}/js/Assets.js', 'Assets');
 
-	try {
-		$amount = Assets_Credits::amount();
-	} catch (Exception $e) {
-		$amount = null;
-	}
-	Q_Response::setScriptData('Q.plugins.Assets.credits', compact('amount'));
+	Q_Response::setScriptData('Q.plugins.Assets.credits.amount', Assets_Credits::amount());
 
 	if ($publishableKey = Q_Config::get('Assets', 'payments', 'stripe', 'publishableKey', null)) {
 		if ($jsLibrary = Q_Config::get('Assets', 'payments', 'stripe', 'jsLibrary', null)) {

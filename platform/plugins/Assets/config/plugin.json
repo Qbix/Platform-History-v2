@@ -22,7 +22,7 @@
 		"routes@start": {
 			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
 			"Q/plugins/Assets/:action": {"module": "Assets"},
-			"Q/plugins/Assets/services": { "module": "Assets", "action": "services" }
+			"Assets/services": { "module": "Assets", "action": "services" }
 		},
 		"web": {
 			"requireValidNonce": ["Assets"]
@@ -113,7 +113,12 @@
 				"acceptedInvite": 10
 			},
 			"exchange": {
-				"USD": 10
+				"USD": 10,
+				"EUR": 11,
+				"GBP": 12,
+				"JPY": 0.01,
+				"CAD": 0.07,
+				"AUD": 6
 			}
 		},
 		"currencies": {

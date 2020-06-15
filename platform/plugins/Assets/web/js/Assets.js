@@ -26,6 +26,41 @@
 					return false;
 				}
 				Streams.get(Users.loggedInUser.id, "Assets/user/credits", callback);
+			},
+			/**
+			 * Make payment for some source. Pay with credits if enough, or buy missing credits and pay.
+			 * @method pay
+			 *  @param {object} options
+			 *  @param {number} options.amount
+			 *  @param {string} options.currency Currency ISO 4217 code (USD, EUR etc)
+			 *  @param {Streams_Stream} [options.stream] Stream object for which to pay. If also can be object {publisherId: ..., streamName: ...}
+			 *  @param {Streams_Stream} [options.userId] User id where need to pass credits.
+			 *  @param {string} [options.reason] Particular payment reason.
+			 *  @param {function} [options.callback] Callback to run when payment done.
+			 */
+			pay: function (options) {
+				if (Streams.isStream(options.stream)) {
+					options.stream = {
+						publisherId: options.stream.fields.publisherId,
+						streamName: options.stream.fields.name
+					};
+				}
+
+				Q.req("Assets/credist", ['status', 'details'], function (err, response) {
+					var msg = Q.firstErrorMessage(err, response && response.errors);
+					if (msg) {
+						return Q.alert(msg);
+					}
+
+					if (!response.slots.status) {
+						Q.Dialogs.push();
+					}
+
+					Q.handle(options.callback, null, response.slots);
+				}, {
+					method: 'post',
+					fields: options
+				});
 			}
 		},
 
@@ -767,6 +802,23 @@
 				Assets.Payments.stripe.applePayAvailable = available;
 			});
 		}
+
+		// Listen for Assets/user/credits stream changes to update Q.Assets.credits on client.
+		Assets.Credits.userStream(function (err) {
+			if (err) {
+				return;
+			}
+
+			this.onFieldChanged('attributes').set(function (fields, k) {
+				if (!fields[k]) {
+					return;
+				}
+
+				try {
+					Assets.credits.amount = JSON.parse(fields[k]).amount;
+				} catch (e) {}
+			}, 'Assets');
+		});
 	}, 'Assets');
 
 	function _error(message, code) {
