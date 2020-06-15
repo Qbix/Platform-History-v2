@@ -13270,6 +13270,7 @@ Q.onInit.add(function () {
 	
 	// load this ASAP so dialogs can load synchronously (for keyboard focus, etc.)
 	Q.addScript("{{Q}}/js/fn/dialog.js");
+	Q.addScript("{{Q}}/js/fn/clickfocus.js");
 
 	function _enableSpeech () {
 		var s = new SpeechSynthesisUtterance();
