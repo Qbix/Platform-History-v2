@@ -780,7 +780,7 @@
 				}
 
 				try {
-					Assets.credits = JSON.parse(fields[k]);
+					Assets.credits.amount = JSON.parse(fields[k]).amount;
 				} catch (e) {}
 			}, 'Assets');
 		});
