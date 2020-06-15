@@ -153,7 +153,7 @@ class Assets_Credits
 
 		$stream = self::userStream($userId, $userId);
 		$stream->setAttribute('amount', $stream->getAttribute('amount') + $amount);
-		$stream->save();
+		$stream->changed();
 		
 		// Post that this user earned $amount credits by $reason
 		$text = Q_Text::get('Assets/content');

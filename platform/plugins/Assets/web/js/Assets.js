@@ -767,6 +767,23 @@
 				Assets.Payments.stripe.applePayAvailable = available;
 			});
 		}
+
+		// Listen for Assets/user/credits stream changes to update Q.Assets.credits on client.
+		Assets.Credits.userStream(function (err) {
+			if (err) {
+				return;
+			}
+
+			this.onFieldChanged('attributes').set(function (fields, k) {
+				if (!fields[k]) {
+					return;
+				}
+
+				try {
+					Assets.credits = JSON.parse(fields[k]);
+				} catch (e) {}
+			}, 'Assets');
+		});
 	}, 'Assets');
 
 	function _error(message, code) {
