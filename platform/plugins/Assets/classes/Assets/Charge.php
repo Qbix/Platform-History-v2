@@ -51,7 +51,28 @@ class Assets_Charge extends Base_Assets_Charge
 		);
 		return parent::beforeSave($updatedFields);
 	}
-
+	/**
+	 * Get all attributes as array
+	 * @method getAllAttributes
+	 * @return {array}
+	 */
+	function getAllAttributes()
+	{
+		return empty($this->attributes)
+			? array()
+			: json_decode($this->attributes, true);
+	}
+	/**
+	 * @method getAttribute
+	 * @param {string} $attributeName The name of the attribute to get
+	 * @param {mixed} $default The value to return if the attribute is missing
+	 * @return {mixed} The value of the attribute, or the default value, or null
+	 */
+	function getAttribute($attributeName, $default = null)
+	{
+		$attr = $this->getAllAttributes();
+		return Q::ifset($attr, $attributeName, $default);
+	}
 	/* * * */
 	/**
 	 * Implements the __set_state method, so it can work with
