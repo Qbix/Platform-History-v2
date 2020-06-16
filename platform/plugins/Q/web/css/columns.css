@@ -81,7 +81,7 @@ html.Q_ios.Q_standalone .Q_columns_title {
 .Q_columns_title_container {
 	margin: 0;
 	line-height: 40px;
-	box-sizing: content-box;
+	box-sizing: border-box;
 }
 .Q_columns_column:not([data-index='0']) .Q_columns_title_container {
 	width: calc(100% - 50px);
