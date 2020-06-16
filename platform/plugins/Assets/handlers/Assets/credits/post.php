@@ -17,21 +17,14 @@ function Assets_credits_post($params = array())
 	}
 
 	// if stream defined
-	$publisherId = Q::ifset($req, 'publisherId', null);
-	$streamName = Q::ifset($req, 'streamName', null);
+	$publisherId = Q::ifset($req, 'stream', 'publisherId', null);
+	$streamName = Q::ifset($req, 'stream', 'streamName', null);
 	$userId = Q::ifset($req, 'userId', null);
-	$reason = Q::ifset($req, 'reason', null);
-	$texts = Q_Text::get('Assets/content');
 
-	if ($publisherId and $streamName) {
-		$stream = Streams::fetchOne(null, $publisherId, $streamName);
-		$reason = $reason ?: Q::interpolate($texts['credits']['PaymentFor'], array($stream->title));
-
-		Assets_Credits::send($needCredits, $publisherId, $loggedUserId, compact("reason"));
+	if ($publisherId && $streamName) {
+		Assets_Credits::spend($needCredits, 'JoinPaidStream', $loggedUserId, compact("publisherId", "streamName"));
 	} elseif ($userId) {
-		$reason = $reason ?: Q::interpolate($texts['credits']['PaymentTo'], array($userId));
-
-		Assets_Credits::send($needCredits, $userId, $loggedUserId, compact("reason"));
+		Assets_Credits::send($needCredits,'PaymentToUser', $userId, $loggedUserId);
 	}
 
 	Q_response::setSlot('status', true);

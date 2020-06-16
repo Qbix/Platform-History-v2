@@ -36,7 +36,8 @@
 			 *  @param {Streams_Stream} [options.stream] Stream object for which to pay. If also can be object {publisherId: ..., streamName: ...}
 			 *  @param {Streams_Stream} [options.userId] User id where need to pass credits.
 			 *  @param {string} [options.reason] Particular payment reason.
-			 *  @param {function} [options.callback] Callback to run when payment done.
+			 *  @param {function} [options.resolve] Callback to run when payment done.
+			 *  @param {function} [options.reject] Callback to run when payment rejected.
 			 */
 			pay: function (options) {
 				if (Streams.isStream(options.stream)) {
@@ -46,9 +47,10 @@
 					};
 				}
 
-				Q.req("Assets/credist", ['status', 'details'], function (err, response) {
+				Q.req("Assets/credits", ['status', 'details'], function (err, response) {
 					var msg = Q.firstErrorMessage(err, response && response.errors);
 					if (msg) {
+						Q.handle(options.reject);
 						return Q.alert(msg);
 					}
 
@@ -56,7 +58,7 @@
 						Q.Dialogs.push();
 					}
 
-					Q.handle(options.callback, null, response.slots);
+					Q.handle(options.resolve, null, response.slots);
 				}, {
 					method: 'post',
 					fields: options
@@ -818,6 +820,15 @@
 					Assets.credits.amount = JSON.parse(fields[k]).amount;
 				} catch (e) {}
 			}, 'Assets');
+
+			var _createNotice = function (stream, message) {
+				Q.Notices.add({
+					content: message.content,
+					timeout: 5
+				});
+			};
+			this.onMessage('Assets/credits/received').set(_createNotice, 'Assets');
+			this.onMessage('Assets/credits/sent').set(_createNotice, 'Assets');
 		});
 	}, 'Assets');
 
