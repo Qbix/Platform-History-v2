@@ -13,7 +13,6 @@
 		 * Operates with credits.
 		 * @class Assets.Credits
 		 */
-
 		Credits: {
 			/**
 			 * Get the Assets/user/credits stream published by the logged-in user, if any
@@ -910,37 +909,51 @@
 		}
 
 		// Listen for Assets/user/credits stream changes to update Q.Assets.Credits on client.
-		Assets.Credits.userStream(function (err) {
-			if (err) {
-				return;
-			}
-
-			this.onFieldChanged('attributes').set(function (fields, k) {
-				if (!fields[k]) {
+		// and listem messages to show Q.Notices
+		var _listenUserStream = function () {
+			Assets.Credits.userStream(function (err) {
+				if (err) {
 					return;
 				}
 
-				try {
-					Assets.Credits.amount = JSON.parse(fields[k]).amount;
-				} catch (e) {}
-			}, 'Assets');
+				this.onFieldChanged('attributes').set(function (fields, k) {
+					if (!fields[k]) {
+						return;
+					}
 
-			var _createNotice = function (stream, message) {
-				var reason = message.getInstruction('reason');
-				var content = message.content;
-				if (reason) {
-					content += '<br>' + reason;
-				}
+					try {
+						Assets.Credits.amount = JSON.parse(fields[k]).amount;
+					} catch (e) {}
+				}, 'Assets');
 
-				Q.Notices.add({
-					content: content,
-					timeout: 5
-				});
-			};
-			this.onMessage('Assets/credits/received').set(_createNotice, 'Assets');
-			this.onMessage('Assets/credits/sent').set(_createNotice, 'Assets');
-			this.onMessage('Assets/credits/earned').set(_createNotice, 'Assets');
-		});
+				var _createNotice = function (stream, message) {
+					var reason = message.getInstruction('reason');
+					var content = message.content;
+					if (reason) {
+						content += '<br>' + reason;
+					}
+
+					Q.Notices.add({
+						content: content,
+						timeout: 5
+					});
+				};
+				this.onMessage('Assets/credits/received').set(_createNotice, 'Assets');
+				this.onMessage('Assets/credits/sent').set(_createNotice, 'Assets');
+				this.onMessage('Assets/credits/earned').set(_createNotice, 'Assets');
+			});
+		};
+
+		_listenUserStream();
+
+		Users.onLogin.set(function (user) {
+			if (!user) { // the user changed
+				return;
+			}
+
+			_listenUserStream();
+		}, "Assets");
+
 	}, 'Assets');
 
 	function _error(message, code) {
