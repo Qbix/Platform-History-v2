@@ -17,6 +17,6 @@ CREATE TABLE IF NOT EXISTS `{{prefix}}credits` (
   KEY `reason` (`reason`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-ALTER TABLE `{{prefix}}charge` DROP IF EXISTS `publisherId`;
-ALTER TABLE `{{prefix}}charge` DROP IF EXISTS `streamName`;
-ALTER TABLE `{{prefix}}charge` DROP IF EXISTS `description`;
+ALTER TABLE `{{prefix}}charge` DROP COLUMN IF EXISTS `publisherId`;
+ALTER TABLE `{{prefix}}charge` DROP COLUMN IF EXISTS `streamName`;
+ALTER TABLE `{{prefix}}charge` DROP COLUMN IF EXISTS `description`;
