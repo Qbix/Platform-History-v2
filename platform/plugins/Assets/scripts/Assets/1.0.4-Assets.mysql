@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS `{{prefix}}credits` (
   `id` varbinary(31) NOT NULL,
-  `fromUserId` varbinary(31) NOT NULL,
+  `fromUserId` varbinary(31) NULL,
   `toUserId` varbinary(31) NULL,
   `publisherId` varbinary(255) NULL COMMENT 'publisherId of the stream regarding which the charge was made',
   `streamName` varbinary(255) NULL COMMENT 'name of the stream regarding which the charge was made',

@@ -11,6 +11,7 @@ function Assets_credits_post($params = array())
 	$needCredits = $rate * $amount;
 
 	if ($credits < $needCredits) {
+		$needCredits = $needCredits - $credits;
 		Q_response::setSlot('status', false);
 		Q_response::setSlot('details', compact("credits", "needCredits"));
 		return;
@@ -28,5 +29,5 @@ function Assets_credits_post($params = array())
 	}
 
 	Q_response::setSlot('status', true);
-	Q_response::setSlot('details', compact("credits", "needCredits", "reason"));
+	Q_response::setSlot('details', compact("credits", "needCredits"));
 }

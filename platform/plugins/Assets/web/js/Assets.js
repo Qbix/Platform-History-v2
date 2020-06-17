@@ -28,6 +28,89 @@
 				Streams.get(Users.loggedInUser.id, "Assets/user/credits", callback);
 			},
 			/**
+			 * Buy credits
+			 * @method buy
+			 *  @param {object} options
+			 *  @param {number} [options.amount=100] Default amount of credits to buy.
+			 *  @param {string} [options.currency=USD] Currency ISO 4217 code (USD, EUR etc)
+			 *  @param {string} [options.missing=false] Whether to show text about credits missing.
+			 *  @param {function} [options.resolve] Callback to run when payment done.
+			 *  @param {function} [options.reject] Callback to run when payment rejected.
+			 */
+			buy: function (options) {
+				options = Q.extend({
+					amount: 100,
+					currency: 'USD',
+					missing: false
+				}, options);
+				var title = Assets.texts.credits.BuyCredits;
+				var YouMissingCredits = null;
+				if (options.missing) {
+					title = Assets.texts.credits.MissingCredits;
+					YouMissingCredits = Assets.texts.credits.YouMissingCredits.interpolate({amount: options.amount});
+				}
+
+				Q.Template.set('Assets/credits/buy',
+					'  {{#if missing}}'
+					+ '	<div class="Assets_credits_buy_missing">{{YouMissingCredits}}</div>'
+					+ '{{/if}}'
+					+ '<div class="Assets_credits_buy"><input name="amount" value="{{amount}}"> {{texts.Credits}}</div>'
+					+ '<button class="Q_button" name="buy">{{texts.Buy}}</button>'
+				);
+
+				// indicator of payment process started
+				var paymentStarted = false;
+
+				Q.Dialogs.push({
+					title: title,
+					className: "Assets_credits_buy",
+					template: {
+						name: "Assets/credits/buy",
+						fields: {
+							amount: options.amount,
+							missing: options.missing,
+							YouMissingCredits: YouMissingCredits,
+							texts: Assets.texts.credits
+						}
+					},
+					onActivate: function (dialog) {
+						$("button[name=buy]", dialog).on(Q.Pointer.fastclick, function () {
+							paymentStarted = true;
+							var amount = parseInt($("input[name=amount]", dialog).val());
+							if (!amount) {
+								return Q.alert(Assets.texts.credits.ErrorInvalidAmount);
+							}
+
+							var currency = options.currency;
+							var rate = Q.getObject(['exchange', currency], Assets.Credits);
+							if (!rate) {
+								return Q.alert(Assets.texts.credits.ErrorInvalidCurrency.interpolate({currency: currency}));
+							}
+
+							// apply currency rate
+							amount = Math.ceil(amount/rate);
+
+							Q.Dialogs.pop();
+
+							Assets.Payments['stripe']({
+								amount: amount,
+								currency: currency
+							}, function(err, data) {
+								if (err) {
+									return Q.handle(options.reject, null, [err]);
+								}
+								return Q.handle(options.resolve, null, [data]);
+							});
+						});
+					},
+					onClose: function () {
+						if (!paymentStarted) {
+							Q.handle(options.reject);
+						}
+					}
+				});
+			},
+			/**
 			 * Make payment for some source. Pay with credits if enough, or buy missing credits and pay.
 			 * @method pay
 			 *  @param {object} options
@@ -35,7 +118,6 @@
 			 *  @param {string} options.currency Currency ISO 4217 code (USD, EUR etc)
 			 *  @param {Streams_Stream} [options.stream] Stream object for which to pay. If also can be object {publisherId: ..., streamName: ...}
 			 *  @param {Streams_Stream} [options.userId] User id where need to pass credits.
-			 *  @param {string} [options.reason] Particular payment reason.
 			 *  @param {function} [options.resolve] Callback to run when payment done.
 			 *  @param {function} [options.reject] Callback to run when payment rejected.
 			 */
@@ -55,13 +137,28 @@
 					}
 
 					if (!response.slots.status) {
-						Q.Dialogs.push();
+						var details = response.slots.details;
+
+						Assets.Credits.buy({
+							missing: true,
+							amount: details.needCredits,
+							resolve: function () {
+								Assets.Credits.pay(options);
+							},
+							reject: options.reject
+						});
+						return;
 					}
 
 					Q.handle(options.resolve, null, response.slots);
 				}, {
 					method: 'post',
-					fields: options
+					fields: {
+						amount: options.amount,
+						currency: options.currency,
+						userId: options.userId,
+						stream: options.stream
+					}
 				});
 			}
 		},
@@ -795,9 +892,16 @@
 	});
 	
 	Q.onInit.set(function () {
+		// preload this, so it's available on gesture handlers
 		Q.Text.get('Assets/content', function (err, text) {
-			// preload this, so it's available on gesture handlers
+			var msg = Q.firstErrorMessage(err);
+			if (msg) {
+				return console.warn("Assets/text: " + msg);
+			}
+
+			Assets.texts = text;
 		});
+
 		if (Q.info.platform === 'ios' && Q.getObject("Stripe.applePay.checkAvailability")) {
 			Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
 			Stripe.applePay.checkAvailability(function (available) {
@@ -805,7 +909,7 @@
 			});
 		}
 
-		// Listen for Assets/user/credits stream changes to update Q.Assets.credits on client.
+		// Listen for Assets/user/credits stream changes to update Q.Assets.Credits on client.
 		Assets.Credits.userStream(function (err) {
 			if (err) {
 				return;
@@ -817,18 +921,25 @@
 				}
 
 				try {
-					Assets.credits.amount = JSON.parse(fields[k]).amount;
+					Assets.Credits.amount = JSON.parse(fields[k]).amount;
 				} catch (e) {}
 			}, 'Assets');
 
 			var _createNotice = function (stream, message) {
+				var reason = message.getInstruction('reason');
+				var content = message.content;
+				if (reason) {
+					content += '<br>' + reason;
+				}
+
 				Q.Notices.add({
-					content: message.content,
+					content: content,
 					timeout: 5
 				});
 			};
 			this.onMessage('Assets/credits/received').set(_createNotice, 'Assets');
 			this.onMessage('Assets/credits/sent').set(_createNotice, 'Assets');
+			this.onMessage('Assets/credits/earned').set(_createNotice, 'Assets');
 		});
 	}, 'Assets');
 
