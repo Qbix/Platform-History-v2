@@ -1078,7 +1078,7 @@
 			form.plugin('Q/validator', 'invalidate',
 				Q.ajaxErrors(response.errors, ['identifier'])
 			);
-			identifier_input.plugin('Q/clickfocus');
+			identifier_input.plugin('Q/clickfocus').val();
 			return;
 		}
 
@@ -1177,7 +1177,7 @@
 							));
 					}
 					$('#Users_login_identifier').blur();
-					first_input.plugin('Q/clickfocus');
+					first_input.plugin('Q/clickfocus').val('');
 					return;
 				}
 				// success!
@@ -3358,7 +3358,7 @@
 				if (!me.email) {
 					step1_form.data('used', null);
 					alert(Q.text.Users.login.facebookNoEmail);
-					$usersLoginIdentifier.plugin('Q/clickfocus');
+					$usersLoginIdentifier.plugin('Q/clickfocus').val('');
 					return true;
 				}
 				priv.registerInfo = {

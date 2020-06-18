@@ -1060,7 +1060,8 @@ Streams.Dialogs = {
 					if (!Q.info.isTouchscreen) {
 						$('.Streams_invite_submit input[type=text]').focus();
 						setTimeout(function () {
-							$('.Streams_invite_submit input[type=text]').plugin('Q/clickfocus');
+							$('.Streams_invite_submit input[type=text]')
+							.plugin('Q/clickfocus').val('');
 						}, 300);
 					}
 					// handle go button
@@ -5455,12 +5456,12 @@ Q.onInit.add(function _Streams_onInit() {
 										.plugin('Q/placeholders');
 									if (!Q.info.isTouchscreen) {
 										var $input = $('input', dialog).eq(0);
-										$input.plugin('Q/clickfocus');
+										$input.plugin('Q/clickfocus').val('');
 										interval = setInterval(function () {
 											if ($input.val() || $input[0] === document.activeElement) {
 												return clearInterval(interval);
 											}
-											$input.plugin('Q/clickfocus');
+											$input.plugin('Q/clickfocus').val('');
 										}, 100);
 									}
 									var $complete_form = dialog.find('form')
@@ -5479,7 +5480,7 @@ Q.onInit.add(function _Streams_onInit() {
 														Q.ajaxErrors(data.errors, ['fullName'])
 													);
 													$('input', $complete_form).eq(0)
-														.plugin('Q/clickfocus');
+														.plugin('Q/clickfocus').val('');
 													return;
 												} else if (msg) {
 													return alert(msg);
