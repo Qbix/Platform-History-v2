@@ -22,7 +22,7 @@ var Row = Q.require('Db/Row');
  * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
  * @param {String|Buffer} [fields.id] defaults to ""
- * @param {String|Buffer} [fields.fromUserId] defaults to ""
+ * @param {String|Buffer} [fields.fromUserId] defaults to null
  * @param {String|Buffer} [fields.toUserId] defaults to null
  * @param {String|Buffer} [fields.publisherId] defaults to null
  * @param {String|Buffer} [fields.streamName] defaults to null
@@ -47,7 +47,7 @@ Q.mixin(Base, Row);
 /**
  * @property fromUserId
  * @type String|Buffer
- * @default ""
+ * @default null
  * 
  */
 /**
@@ -366,9 +366,7 @@ return [["varbinary","31","",false],false,"PRI",null];
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_fromUserId = function (value) {
-		if (value == null) {
-			value='';
-		}
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
 			throw new Error('Must pass a String or Buffer to '+this.table()+".fromUserId");
@@ -392,7 +390,7 @@ Base.prototype.maxSize_fromUserId = function () {
 	 */
 Base.column_fromUserId = function () {
 
-return [["varbinary","31","",false],false,"MUL",null];
+return [["varbinary","31","",false],true,"MUL",null];
 };
 
 /**

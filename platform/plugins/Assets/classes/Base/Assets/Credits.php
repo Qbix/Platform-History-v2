@@ -17,7 +17,7 @@
  * @param {array} [$fields=array()] The fields values to initialize table row as 
  * an associative array of $column => $value pairs
  * @param {string} [$fields.id] defaults to ""
- * @param {string} [$fields.fromUserId] defaults to ""
+ * @param {string} [$fields.fromUserId] defaults to null
  * @param {string} [$fields.toUserId] defaults to null
  * @param {string} [$fields.publisherId] defaults to null
  * @param {string} [$fields.streamName] defaults to null
@@ -38,7 +38,7 @@ abstract class Base_Assets_Credits extends Db_Row
 	/**
 	 * @property $fromUserId
 	 * @type string
-	 * @default ""
+	 * @default null
 	 * 
 	 */
 	/**
@@ -368,7 +368,7 @@ return array (
 	function beforeSet_fromUserId($value)
 	{
 		if (!isset($value)) {
-			$value='';
+			return array('fromUserId', $value);
 		}
 		if ($value instanceof Db_Expression) {
 			return array('fromUserId', $value);
@@ -405,7 +405,7 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => false,
+  1 => true,
   2 => 'MUL',
   3 => NULL,
 );			
