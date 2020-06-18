@@ -6700,6 +6700,37 @@ Q.layout = function _Q_layout(element) {
  * Call this to fix the iOS Safari bug where dynamically
  * added content doesn't cause the scrolling parent element
  * to start scrolling when -webkit-overflow-scrolling is enabled.
+ * @param {Element} element the element to scroll into view, if needed
+ * @param {Object} options see https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
+ * @param {String} [options.behavior] can be "auto" or "smooth"
+ * @param {String} [options.block] can be "start", "center", "end" or "nearest"
+ * @param {String} [options.inline] can be "start", "center", "end" or "nearest"
+ * @param {Boolean} [options.unlessOffscreenHorizontally]
+ * @return {Boollean} Whether the native scrollIntoView(options) was called on the element.
+ */
+Q.scrollIntoView = function _Q_fixScrollingParent(element, options) {
+	if (!element || typeof element.scrollIntoView !== 'function') {
+		return false;
+	}
+	options = options || {};
+	if (options.unlessOffscreenHorizontally) {
+		var sp = element.scrollingParent();
+		var r = element.getBoundingClientRect();
+		var bcr = element.scrollingParent().getBoundingClientRect();
+		if (bcr && r.left < bcr.left) {
+			return false;
+		}
+		delete options.verticalOnly;
+	}
+	element.scrollIntoView(options);
+	return true;
+};
+
+/**
+ * Call this to fix the iOS Safari bug where dynamically
+ * added content doesn't cause the scrolling parent element
+ * to start scrolling when -webkit-overflow-scrolling is enabled.
+ * @param {Element} element
  */
 Q.fixScrollingParent = function _Q_fixScrollingParent(element) {
 	if (Q.info.platform !== 'ios') {
