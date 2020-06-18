@@ -1078,7 +1078,7 @@
 			form.plugin('Q/validator', 'invalidate',
 				Q.ajaxErrors(response.errors, ['identifier'])
 			);
-			identifier_input.plugin('Q/clickfocus').val();
+			identifier_input.plugin('Q/clickfocus');
 			return;
 		}
 
@@ -1177,7 +1177,7 @@
 							));
 					}
 					$('#Users_login_identifier').blur();
-					first_input.plugin('Q/clickfocus').val('');
+					first_input.plugin('Q/clickfocus');
 					return;
 				}
 				// success!
@@ -1648,7 +1648,7 @@
 				},
 				onActivate: function () {
 					dialog.plugin('Q/placeholders');
-					$('input[type!=hidden]', dialog).eq(0).val('').plugin('Q/clickfocus');
+					$('input[type!=hidden]', dialog).eq(0).plugin('Q/clickfocus').val('');
 				},
 				onClose: function () {
 					$('#Users_login_step1 .Q_button').removeAttr('disabled');
@@ -1782,7 +1782,7 @@
 			},
 			onActivate: function () {
 				dialog.plugin('Q/placeholders');
-				$('input[type!=hidden]', dialog).eq(0).val('').plugin('Q/clickfocus');
+				$('input[type!=hidden]', dialog).eq(0).plugin('Q/clickfocus').val('');
 			},
 			onClose: function () {
 				$('form', dialog).each(function () {
@@ -3358,7 +3358,7 @@
 				if (!me.email) {
 					step1_form.data('used', null);
 					alert(Q.text.Users.login.facebookNoEmail);
-					$usersLoginIdentifier.plugin('Q/clickfocus').val('');
+					$usersLoginIdentifier.plugin('Q/clickfocus');
 					return true;
 				}
 				priv.registerInfo = {
