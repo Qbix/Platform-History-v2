@@ -1644,11 +1644,17 @@
 				closeOnEsc: Q.typeOf(options.closeOnEsc) === 'undefined' ? true : !!options.closeOnEsc,
 				beforeLoad: function () {
 					$('#Users_login_step1').css('opacity', 1).nextAll().hide();
-					$('input[type!=hidden]', dialog).val('');
+					setTimeout(function () {
+						$('input[type!=hidden]', dialog).val('').trigger('change');
+					}, 0);
 				},
 				onActivate: function () {
 					dialog.plugin('Q/placeholders');
-					$('input[type!=hidden]', dialog).eq(0).plugin('Q/clickfocus').val('');
+					var $input = $('input[type!=hidden]', dialog)
+						.eq(0).plugin('Q/clickfocus');
+					setTimeout(function () {
+						$input.val('').trigger('change');
+					}, 0);
 				},
 				onClose: function () {
 					$('#Users_login_step1 .Q_button').removeAttr('disabled');
@@ -1778,11 +1784,16 @@
 			alignByParent: false,
 			fullscreen: false,
 			beforeLoad: function () {
-				$('input[type!=hidden]', dialog).val('');
+				setTimeout(function () {
+					$('input[type!=hidden]', dialog).val('').trigger('change');
+				}, 0);
 			},
 			onActivate: function () {
 				dialog.plugin('Q/placeholders');
-				$('input[type!=hidden]', dialog).eq(0).plugin('Q/clickfocus').val('');
+				var $input = $('input[type!=hidden]', dialog).eq(0).plugin('Q/clickfocus');
+				setTimeout(function () {
+					$input.val('').trigger('change');
+				}, 0);
 			},
 			onClose: function () {
 				$('form', dialog).each(function () {
