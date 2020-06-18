@@ -6714,11 +6714,12 @@ Q.scrollIntoView = function _Q_fixScrollingParent(element, options) {
 	}
 	options = options || {};
 	if (options.unlessOffscreenHorizontally) {
-		var sp = element.scrollingParent();
-		var r = element.getBoundingClientRect();
-		var spr = element.scrollingParent().getBoundingClientRect();
-		if (r.left < 0 || (spr && r.left < spr.left)) {
-			return false;
+		var er = element.getBoundingClientRect();
+		while (p = p.parentNode) {
+			var pr = p.getBoundingClientRect && p.getBoundingClientRect();
+			if (pr && er.left < pr.left) {
+				return false;
+			}
 		}
 		delete options.unlessOffscreenHorizontally;
 	}
