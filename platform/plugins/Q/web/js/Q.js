@@ -6716,11 +6716,11 @@ Q.scrollIntoView = function _Q_fixScrollingParent(element, options) {
 	if (options.unlessOffscreenHorizontally) {
 		var sp = element.scrollingParent();
 		var r = element.getBoundingClientRect();
-		var bcr = element.scrollingParent().getBoundingClientRect();
-		if (bcr && r.left < bcr.left) {
+		var spr = element.scrollingParent().getBoundingClientRect();
+		if (r.left < 0 || (spr && r.left < spr.left)) {
 			return false;
 		}
-		delete options.verticalOnly;
+		delete options.unlessOffscreenHorizontally;
 	}
 	element.scrollIntoView(options);
 	return true;
