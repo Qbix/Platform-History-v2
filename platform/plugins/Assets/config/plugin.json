@@ -159,6 +159,6 @@
 		"browsertab": {
 			"css": []
 		},
-		"canCheckPaid": ["Users/admoins", "Assets/admins"]
+		"canCheckPaid": ["Users/owners", "Users/admins", "Assets/admins"]
 	}
 }

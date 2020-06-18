@@ -5,10 +5,9 @@ function Assets_credits_post($params = array())
 	Q_Valid::requireFields(array('amount', 'currency'), $req, true);
 
 	$loggedUserId = Users::loggedInUser(true)->id;
-	$rate = (float)Q_Config::expect('Assets', 'credits', 'exchange', $req['currency']);
 	$amount = (float)$req['amount'];
 	$credits = (int)Assets_Credits::amount();
-	$needCredits = $rate * $amount;
+	$needCredits = Assets_Credits::convertToCredits($amount, $req['currency']);
 
 	if ($credits < $needCredits) {
 		$needCredits = $needCredits - $credits;

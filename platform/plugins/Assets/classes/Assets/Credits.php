@@ -124,6 +124,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$assets_credits->fromUserId = $userId;
 		$assets_credits->reason = $reason;
 		$assets_credits->credits = $amount;
+		$assets_credits->attributes = Q::json_encode($more);
 		$assets_credits->save();
 
 		$instructions_json = Q::json_encode(array_merge(
@@ -187,6 +188,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$assets_credits->toUserId = $userId;
 		$assets_credits->reason = $reason;
 		$assets_credits->credits = $amount;
+		$assets_credits->attributes = Q::json_encode($more);
 		$assets_credits->save();
 
 		// Post that this user earned $amount credits by $reason
@@ -252,6 +254,11 @@ class Assets_Credits extends Base_Assets_Credits
 
 		$publisherId = Q::ifset($more, "publisherId", null);
 		$streamName = Q::ifset($more, "streamName", null);
+		if ($publisherId && $streamName) {
+			$more['streamTitle'] = Streams::fetchOne($publisherId, $publisherId, $streamName)->title;
+		} elseif ($toUserId) {
+			$more['userName'] = Users::fetch($toUserId, true)->displayName();
+		}
 
 		// add row to assets_credits
 		$assets_credits = new Assets_Credits();
@@ -262,13 +269,8 @@ class Assets_Credits extends Base_Assets_Credits
 		$assets_credits->streamName = $streamName;
 		$assets_credits->reason = $reason;
 		$assets_credits->credits = $amount;
+		$assets_credits->attributes = Q::json_encode($more);
 		$assets_credits->save();
-
-		if ($publisherId && $streamName) {
-			$more['streamTitle'] = Streams::fetchOne($publisherId, $publisherId, $streamName)->title;
-		} elseif ($toUserId) {
-			$more['userName'] = Users::fetch($toUserId, true)->displayName();
-		}
 
 		$instructions = array_merge(
 			array(
@@ -306,7 +308,21 @@ class Assets_Credits extends Base_Assets_Credits
 			'instructions' => Q::json_encode($instructions)
 		));
 	}
+	/**
+	 * Convert reason to readable text.
+	 * @method reasonToText
+	 * @static
+	 * @param {string} $key json key to search in Assets/content/credits.
+	 * @param {array} $more additional data need to interpolate json with.
+	 * @return {string}
+	 */
+	static function convertToCredits($amount, $currency)
+	{
+		$rate = Q_Config::expect('Assets', 'credits', 'exchange', $currency);
+		$credits = $amount * $rate;
 
+		return $credits;
+	}
 	/**
 	 * Convert reason to readable text.
 	 * @method reasonToText

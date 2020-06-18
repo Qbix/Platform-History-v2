@@ -29,9 +29,9 @@
 		"PaymentFor": "Payment for \"{{1}}\"",
 		"PaymentTo": "Payment to {{1}}",
 		"PaymentToUser": "Payment to {{userName}}",
-		"JoinPaidStream": "Payment for \"{{streamTitle}}\"",
+		"JoinPaidStream": "Join \"{{streamTitle}}\"",
 		"CreatedCommunity": "Created Community \"{{communityId}}\"",
-		"LeftPaidStream": "Left {{streamTitle}}",
+		"LeftPaidStream": "Left \"{{streamTitle}}\"",
 		"BoughtCredits": "Bought {{amount}} credits",
 		"MissingCredits": "Missing Credits",
 		"YouMissingCredits": "You missing {{amount}} credits",
@@ -49,8 +49,23 @@
         "To": "to",
         "From": "from",
         "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet"
-    },
+        "HistoryEmpty": "You have no data yet",
+		"PaymentFor": "Spent {{amount}} credits",
+		"PaymentTo": "Sent {{amount}} credits",
+		"PaymentToUser": "Sent {{amount}} credits",
+		"JoinPaidStream": {
+			"+": "Earned {{amount}} credits",
+			"-": "Spent {{amount}} credits"
+		},
+		"LeftPaidStream": {
+			"+": "Received {{amount}} credits",
+			"-": "Sent {{amount}} credits"
+		},
+		"CreatedCommunity": "Spent {{amount}} credits",
+		"BoughtCredits": "Bought {{amount}} credits",
+		"InviteAcceptedBy": "Earned {{amount}} credits",
+		"YouHaveCreditsToStart": "Earned {{amount}} credits"
+	},
     "subscriptions": {
         "infoTitle": "Set Payment Information",
         "confirm": {

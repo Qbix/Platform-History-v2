@@ -19,6 +19,11 @@ function Assets_history_response_tool($options)
 	//$userId = Q::ifset($options, 'userId', $loggedUser->id);
 	$userId = $loggedUser->id;
 
+	// if user is admin, he can see transactions of other users
+	if ((bool)Users::roles(null, Q_Config::expect('Assets', 'canCheckPaid'))) {
+		$userId = Q::ifset($options, 'userId', $userId);
+	}
+
 	if (!in_array($type, $supportedTypes)) {
 		throw new Q_Exception("Unsupported type ".$type.". Supported types are: ".join(',', $supportedTypes));
 	}
@@ -27,29 +32,59 @@ function Assets_history_response_tool($options)
 
 	$res = array();
 	if ($type == 'credits') {
-		$rows = Streams_Message::select()
-		->where(array(
-			'streamName' => 'Assets/user/credits',
-			'byUserId' => $userId,
-			'type like ' => 'Assets/credits/%'
-		))
+		$rows = Assets_Credits::select()
+		->where(array('fromUserId' => $userId))
+		->orWhere(array('toUserId' => $userId))
 		->orderBy('insertedTime', false)
 		->fetchDbRows();
 
 		foreach ($rows as $i => $row) {
-			$instructions = Q::json_decode($row->instructions);
-			$direction = $instructions->operation == '+' ? Q::ifset($texts, 'history', 'From', 'From') : Q::ifset($texts, 'history', 'To', 'To');
+			$attributes = (array)Q::json_decode($row->attributes);
+			$attributes['amount'] = $row->credits;
+			$amount = $row->credits;
+			$sign = $direction = $clientInfo = $clientId = null;
+			if ($row->fromUserId == $userId) {
+				$clientId = $row->toUserId;
+				$direction = Q::ifset($texts, 'history', 'To', 'To');
+				$sign = '-';
+
+			} elseif ($row->toUserId == $userId) {
+				$clientId = $row->fromUserId;
+				$direction = Q::ifset($texts, 'history', 'From', 'From');
+				$sign = '+';
+			}
+
+			if ($clientId) {
+				$clientInfo = array(
+					'id' => $clientId,
+					'name' => Streams::displayName($clientId),
+					'direction' => $direction
+				);
+			}
+
+			$operation = Q::ifset($texts, 'history', $row->reason, $sign, null);
+			if (!$operation) {
+				$operation = Q::ifset($texts, 'history', $row->reason, null);
+			}
+			if ($operation) {
+				$operation = Q::interpolate($operation, compact("amount"));
+			} else {
+				$operation = $row->reason;
+			}
+
+			if ($reason = Q::ifset($texts, 'credits', $row->reason, null)) {
+				$reason = Q::interpolate($reason, $attributes);
+			} else {
+				$reason = $row->reason;
+			}
+
 			$res[] = array(
 				'date' => $row->insertedTime,
-				'type' => $row->type,
-				'amount' => $row->content,
-				'operation' => $instructions->operation,
-				'client' => array(
-					'id' => $row->byClientId,
-					'name' => Streams::displayName($row->byClientId),
-					'direction' => $direction
-				),
-				'description' => $instructions->reason
+				'amount' => $amount,
+				'operation' => $operation,
+				'reason' => $reason,
+				'sign' => $sign,
+				'clientInfo' => $clientInfo
 			);
 		}
 	} elseif ($type == 'charges') {
@@ -63,12 +98,18 @@ function Assets_history_response_tool($options)
 		// clean rows
 		foreach ($rows as $i => $row) {
 			$attributes = Q::json_decode($row->attributes);
+			$description = Q::ifset($texts, 'history', $row->description, null);
+			if ($description && $attributes->credits) {
+				$description = Q::interpolate($description, array('amount' => $attributes->credits));
+			} else {
+				$description = $row->description;
+			}
 			$res[] = array(
 				'gateway' => $attributes->payments,
 				'amount' => $attributes->amount,
 				'currency' => $attributes->currency,
 				'communityId' => $attributes->communityId,
-				'description' => $row->description,
+				'description' => $description,
 				'date' => $row->insertedTime
 			);
 		}
