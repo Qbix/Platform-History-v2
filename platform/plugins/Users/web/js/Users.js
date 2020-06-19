@@ -1429,6 +1429,7 @@
 		if (!autologin) {
 			var step2 = $('#Users_login_step2').html(step2_form);
 			var $dc = step2.closest('.Q_dialog_content');
+			login_setupDialog.dialog.addClass('Users_login_expanded');
 			if (Q.info && Q.info.isTouchscreen) {
 				step2.show();
 				step2_form.plugin('Q/placeholders');
@@ -1689,6 +1690,7 @@
 				$('#Users_login_usingPlatforms').css({opacity: 0}).show()
 					.animate({opacity: 1}, 'fast');
 			}
+			login_setupDialog.dialog.removeClass('Users_login_expanded');
 		}
 	}
 

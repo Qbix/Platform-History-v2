@@ -4,7 +4,7 @@ function Users_0_8_3_Users_mysql()
 {
 	$app = Q::app();
 	$communityId = Users::communityId();
-	$communityName = Q_Config::get('Users', 'community', 'name', $app);
+	$communityName = Users::communityName();
 	$appRootUrl = Q_Config::expect('Q', 'web', 'appRootUrl');
 	
 	$user = new Users_User();
