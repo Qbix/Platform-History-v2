@@ -75,8 +75,8 @@
 					onActivate: function (dialog) {
 						$("button[name=buy]", dialog).on(Q.Pointer.fastclick, function () {
 							paymentStarted = true;
-							var amount = parseInt($("input[name=amount]", dialog).val());
-							if (!amount) {
+							var credits = parseInt($("input[name=amount]", dialog).val());
+							if (!credits) {
 								return Q.alert(Assets.texts.credits.ErrorInvalidAmount);
 							}
 
@@ -85,15 +85,16 @@
 							if (!rate) {
 								return Q.alert(Assets.texts.credits.ErrorInvalidCurrency.interpolate({currency: currency}));
 							}
-
+							
 							// apply currency rate
-							amount = Math.ceil(amount/rate);
+							var amount = Math.ceil(credits/rate);
 
 							Q.Dialogs.pop();
 
-							Assets.Payments['stripe']({
+							Assets.Payments.stripe({
 								amount: amount,
-								currency: currency
+								currency: currency,
+								description: Assets.texts.credits.BuyAmountCredits.interpolate({amount: credits})
 							}, function(err, data) {
 								if (err) {
 									return Q.handle(options.reject, null, [err]);
@@ -394,7 +395,7 @@
 			 *  @param {String} [options.streamName] The name of the Assets/product or Assets/service stream
 			 *  @param {String} [options.name=Users::communityName()] The name of the organization the user will be paying
 			 *  @param {String} [options.image] The url pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
-			 *  @param {String} [options.description] A short name or description of the product or service being purchased.
+			 *  @param {String} [options.description] Operation code which detailed text can be fetch from lang json (Assets/content/payments).
 			 *  @param {String} [options.panelLabel] The label of the payment button in the Stripe Checkout form (e.g. "Pay {{amount}}", etc.). If you include {{amount}}, it will be replaced by the provided amount. Otherwise, the amount will be appended to the end of your label.
 			 *  @param {String} [options.zipCode] Specify whether Stripe Checkout should validate the billing ZIP code (true or false). The default is false.
 			 *  @param {Boolean} [options.billingAddress] Specify whether Stripe Checkout should collect the user's billing address (true or false). The default is false.
@@ -408,7 +409,6 @@
 			 */
 			stripe: function (options, callback) {
 				Q.Text.get('Assets/content', function (err, text) {
-					var err;
 					options = Q.extend({},
 						text.payments,
 						Assets.Payments.stripe.options,
