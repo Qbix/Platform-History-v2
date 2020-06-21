@@ -134,7 +134,7 @@ class Users_Label extends Base_Users_Label
 			));
 		}
 		if (isset($updates['title'])) {
-			$l->title = $title;
+			$l->title = $updates['title'];
 		}
 		$icon = Q::ifset($updates, 'icon', null);
 		self::_icon($l, $icon, $userId);
@@ -224,7 +224,7 @@ class Users_Label extends Base_Users_Label
 		);
 		$allLabels = self::ofCommunities();
 		$labelsCanManageIcon = Q_Config::get("Users", "icon", "canManage", array());
-		$labelsCanManageEvents = Q_Config::get("Calendars", "labels", "canManageEvents", array());
+		$labelsCanManageEvents = Q_Config::get("Calendars", "events", "admins", array());
 		$contacts = Users_Contact::select()->where(array(
 			'userId' => $communityId,
 			'contactUserId' => $userId
@@ -435,7 +435,7 @@ class Users_Label extends Base_Users_Label
 		}
 		// Process any icon data
 		$icon['path'] = 'Q/uploads/Users';
-		$icon['subpath'] = "$userId/label/$label/icon";
+		$icon['subpath'] = "$userId/label/$l->label/icon";
 		$data = Q::event("Q/image/post", $icon);
 		Q_Response::setSlot('icon', $data);
 		$l->icon = Q_Request::baseUrl().'/'.$data[''];
