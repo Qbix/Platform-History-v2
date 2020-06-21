@@ -14,9 +14,7 @@ function Assets_after_Community_create($params)
 
 	$amountToSpend = (int)Q_Config::expect('Assets', 'credits', 'amounts', 'createCommunity');
 
-	Assets_Credits::spend($amountToSpend, $userId, array(
-		'reason' => "Created community ".$community->id,
-		'publisherId' => $community->id,
-		'streamName' => 'Streams/experience/main'
+	Assets_Credits::spend($amountToSpend, "CreatedCommunity", $userId, array(
+		'communityId' => $community->id
 	));
 }

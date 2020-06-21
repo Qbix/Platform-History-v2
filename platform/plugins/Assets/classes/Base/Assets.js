@@ -29,6 +29,8 @@ module.exports = Base;
 Base.tableClasses = [
 	"Assets_Badge",
 	"Assets_Charge",
+	"Assets_Connected",
+	"Assets_Credits",
 	"Assets_Customer",
 	"Assets_Earned",
 	"Assets_Leader"
@@ -66,6 +68,20 @@ Base.Badge = Q.require('Assets/Badge');
  * @type Assets.Charge
  */
 Base.Charge = Q.require('Assets/Charge');
+
+/**
+ * Link to Assets.Connected model
+ * @property Connected
+ * @type Assets.Connected
+ */
+Base.Connected = Q.require('Assets/Connected');
+
+/**
+ * Link to Assets.Credits model
+ * @property Credits
+ * @type Assets.Credits
+ */
+Base.Credits = Q.require('Assets/Credits');
 
 /**
  * Link to Assets.Customer model

@@ -23,10 +23,8 @@ var Row = Q.require('Db/Row');
  * an associative array of {column: value} pairs
  * @param {String|Buffer} [fields.userId] defaults to ""
  * @param {String|Buffer} [fields.id] defaults to ""
- * @param {String|Buffer} [fields.publisherId] defaults to ""
- * @param {String|Buffer} [fields.streamName] defaults to ""
- * @param {String} [fields.description] defaults to ""
  * @param {String} [fields.attributes] defaults to ""
+ * @param {String} [fields.description] defaults to ""
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  * @param {String|Db.Expression} [fields.updatedTime] defaults to "0000-00-00 00:00:00"
  */
@@ -49,28 +47,16 @@ Q.mixin(Base, Row);
  * 
  */
 /**
- * @property publisherId
- * @type String|Buffer
+ * @property attributes
+ * @type String
  * @default ""
- * publisherId of the stream regarding which the charge was made
- */
-/**
- * @property streamName
- * @type String|Buffer
- * @default ""
- * name of the stream regarding which the charge was made
+ * additional information for the charge in JSON format
  */
 /**
  * @property description
  * @type String
  * @default ""
- * human-readable description of the charge
- */
-/**
- * @property attributes
- * @type String
- * @default ""
- * additional information for the charge in JSON format
+ * 
  */
 /**
  * @property insertedTime
@@ -295,10 +281,8 @@ Base.fieldNames = function () {
 	return [
 		"userId",
 		"id",
-		"publisherId",
-		"streamName",
-		"description",
 		"attributes",
+		"description",
 		"insertedTime",
 		"updatedTime"
 	];
@@ -383,77 +367,39 @@ return [["varbinary","255","",false],false,"PRI",null];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_publisherId
+ * @method beforeSet_attributes
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_publisherId = function (value) {
+Base.prototype.beforeSet_attributes = function (value) {
 		if (value == null) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".publisherId");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".attributes");
+		if (typeof value === "string" && value.length > 1023)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".attributes");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the publisherId field
+	 * Returns the maximum string length that can be assigned to the attributes field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_publisherId = function () {
+Base.prototype.maxSize_attributes = function () {
 
-		return 255;
+		return 1023;
 };
 
 	/**
-	 * Returns schema information for publisherId column
+	 * Returns schema information for attributes column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_publisherId = function () {
+Base.column_attributes = function () {
 
-return [["varbinary","255","",false],false,"",""];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_streamName
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_streamName = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".streamName");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".streamName");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the streamName field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_streamName = function () {
-
-		return 255;
-};
-
-	/**
-	 * Returns schema information for streamName column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_streamName = function () {
-
-return [["varbinary","255","",false],false,"",""];
+return [["varchar","1023","",false],false,"",null];
 };
 
 /**
@@ -491,45 +437,7 @@ Base.prototype.maxSize_description = function () {
 	 */
 Base.column_description = function () {
 
-return [["varchar","255","",false],false,"",null];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_attributes
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_attributes = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".attributes");
-		if (typeof value === "string" && value.length > 1023)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".attributes");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the attributes field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_attributes = function () {
-
-		return 1023;
-};
-
-	/**
-	 * Returns schema information for attributes column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_attributes = function () {
-
-return [["varchar","1023","",false],false,"",null];
+return [["varchar","255","",false],false,"",""];
 };
 
 /**
@@ -554,7 +462,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","1023","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -579,7 +487,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","1023","",false],false,"","0000-00-00 00:00:00"];
+return [["timestamp","255","",false],false,"","0000-00-00 00:00:00"];
 };
 
 /**

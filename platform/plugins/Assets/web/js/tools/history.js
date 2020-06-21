@@ -95,9 +95,9 @@ Q.Template.set('Assets/history/credits',
 	'	<tr><th>{{text.Date}}</th><th>{{text.Amount}}</th><th>{{text.Client}}</th><th>{{text.Description}}</th></tr>' +
 	'	{{#each rows}}' +
 	'		<tr><td class="Assets_history_date">{{this.date}}</td>' +
-	'		<td class="Assets_history_amount">{{this.operation}}{{this.amount}}</td>' +
-	'		<td class="Assets_history_client">{{this.client.direction}} <a data-userId="{{this.client.id}}">{{this.client.name}}</a></td>' +
-	'		<td class="Assets_history_description">{{this.description}}</td></tr>' +
+	'		<td class="Assets_history_amount">{{this.operation}}</td>' +
+	'		<td class="Assets_history_client">{{this.clientInfo.direction}} <a data-userId="{{this.clientInfo.id}}">{{this.clientInfo.name}}</a></td>' +
+	'		<td class="Assets_history_description">{{this.reason}}</td></tr>' +
 	'	{{/each}}' +
 	'</table>'
 );

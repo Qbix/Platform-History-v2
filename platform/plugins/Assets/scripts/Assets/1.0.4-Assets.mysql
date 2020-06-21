@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS `{{prefix}}credits` (
+  `id` varbinary(31) NOT NULL,
+  `fromUserId` varbinary(31) NULL,
+  `toUserId` varbinary(31) NULL,
+  `publisherId` varbinary(255) NULL COMMENT 'publisherId of the stream regarding which the charge was made',
+  `streamName` varbinary(255) NULL COMMENT 'name of the stream regarding which the charge was made',
+  `reason` varchar(255) COLLATE utf8_bin  NOT NULL COMMENT 'human-readable description of the charge',
+  `credits` SMALLINT NOT NULL,
+  `attributes` varchar(1023) NULL COMMENT 'additional information for the charge in JSON format',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`),
+  KEY `fromUserId` (`fromUserId`),
+  KEY `toUserId` (`toUserId`),
+  KEY `stream` (`publisherId`, `streamName`),
+  KEY `credits` (`credits`),
+  KEY `reason` (`reason`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE `{{prefix}}charge` DROP COLUMN `publisherId`;
+ALTER TABLE `{{prefix}}charge` DROP COLUMN `streamName`;

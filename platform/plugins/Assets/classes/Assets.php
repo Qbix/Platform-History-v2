@@ -118,15 +118,14 @@ abstract class Assets extends Base_Assets
 		$customerId = $adapter->charge($amount, $currency, $options);
 		$charge = new Assets_Charge();
 		$charge->userId = $user->id;
-		$charge->publisherId = Q::ifset($options, 'stream', 'publisherId', '');
-		$charge->streamName = Q::ifset($options, 'stream', 'name', '');
-		$charge->description = Q::ifset($options, 'metadata', 'description', '');
+		$charge->description = 'BoughtCredits';
 		$attributes = array(
 			"payments" => $payments,
 			"customerId" => $customerId,
 			"amount" => sprintf("%0.2f", $amount),
 			"currency" => $currency,
-			"communityId" => $communityId
+			"communityId" => $communityId,
+			"credits" =>  Assets_Credits::convertToCredits($amount, $currency)
 		);
 		$charge->attributes = Q::json_encode($attributes);
 		$charge->save();
