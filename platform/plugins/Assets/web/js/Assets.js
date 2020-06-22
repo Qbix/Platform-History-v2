@@ -391,9 +391,8 @@
 			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
 			 *  @param {Number} options.amount the amount to pay.
 			 *  @param {String} [options.currency="usd"] the currency to pay in.
-			 *  @param {String} [options.publisherId=Q.Users.communityId] The publisherId of the Assets/product or Assets/service stream
-			 *  @param {String} [options.streamName] The name of the Assets/product or Assets/service stream
 			 *  @param {String} [options.name=Users::communityName()] The name of the organization the user will be paying
+			 *  @param {String} [options.email] Email of user paying. Logged in user email by default.
 			 *  @param {String} [options.image] The url pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
 			 *  @param {String} [options.description] Operation code which detailed text can be fetch from lang json (Assets/content/payments).
 			 *  @param {String} [options.panelLabel] The label of the payment button in the Stripe Checkout form (e.g. "Pay {{amount}}", etc.). If you include {{amount}}, it will be replaced by the provided amount. Otherwise, the amount will be appended to the end of your label.
@@ -419,6 +418,7 @@
 						return Q.handle(callback, null, [err]);
 					}
 
+					options.email = options.email || Q.getObject("loggedInUser.email", Users);
 					options.userId = options.userId || Q.Users.loggedInUserId();
 					options.currency = (options.currency || 'USD').toUpperCase();
 
@@ -494,6 +494,7 @@
 			 * @method applePayCordova
 			 * @static
 			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
+			 *  @param {String} options.email users email.
 			 *  @param {Float} options.amount the amount to pay.
 			 *  @param {String} options.description Payment description.
 			 *  @param {Boolean} options.shippingAddress Whether shipping address required.
@@ -518,6 +519,7 @@
 					merchantCapabilities: merchantCapabilities
 				}).then((message) => {
 					ApplePay.makePaymentRequest({
+						email: options.email,
 						items: [{
 							label: options.description,
 							amount: options.amount
@@ -553,6 +555,7 @@
 			 * @method applePayStripe
 			 * @static
 			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
+			 *  @param {String} options.email users email.
 			 *  @param {Float} options.amount the amount to pay.
 			 *  @param {String} options.description Payment description.
 			 *  @param {Boolean} options.shippingAddress Whether shipping address required.
@@ -565,6 +568,7 @@
 					return callback(_error('Apple pay is not available', 21));
 				}
 				var request = {
+					email: options.email,
 					currencyCode: options.currency,
 					countryCode: options.countryCode ? options.countryCode : 'US',
 					total: {
@@ -605,6 +609,7 @@
 			 * @method paymentRequestStripe
 			 * @static
 			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
+			 *  @param {String} options.email users email.
 			 *  @param {Float} options.amount the amount to pay.
 			 *  @param {String} options.description Payment description.
 			 *  @param {Boolean} options.shippingAddress Whether shipping address required.
@@ -689,6 +694,7 @@
 					}
 				];
 				var details = {
+					email: options.email,
 					total: {
 						label: options.description ? options.description : 'Total due',
 						amount: {currency: currency, value: options.amount}
@@ -769,6 +775,7 @@
 			 * @method standardStripe
 			 * @static
 			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
+			 *  @param {String} options.email payer email. Logged user email by default.
 			 *  @param {Float} options.amount the amount to pay.
 			 *  @param {String} options.description Payment description.
 			 *  @param {Boolean} [options.shippingAddress=false] Whether shipping address required.
@@ -784,6 +791,7 @@
 					StripeCheckout.configure({
 						key: Assets.Payments.stripe.publishableKey,
 						name: options.name,
+						email: options.email,
 						description: options.description,
 						amount: options.amount * 100,
 						allowRememberMe: options.allowRememberMe,
@@ -863,15 +871,12 @@
 	};
 
 	Assets.Subscriptions.authnet.options = {
-		planPublisherId: Users.communityId,
-		planStreamName: "Assets/plan/main",
 		name: Users.communityName
 	};
 	Assets.Subscriptions.stripe.options = {
-		planPublisherId: Users.communityId,
-		planStreamName: "Assets/plan/main",
 		javascript: 'https://checkout.stripe.com/checkout.js',
-		name: Users.communityName
+		name: Users.communityName,
+		email: Q.getObject("loggedInUser.email", Users)
 	};
 	Assets.Payments.authnet.options = {
 		name: Users.communityName,
