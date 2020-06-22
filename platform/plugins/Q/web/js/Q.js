@@ -12886,6 +12886,11 @@ Q.Audio.speak = function (text, options) {
 	var TTS = root.TTS; // cordova
 	var SS = root.speechSynthesis; //browsers
 	var o = Q.extend({}, Q.Audio.speak.options, 10, options);
+
+	if (o.mute) {
+		return;
+	}
+
 	o.locale = o.locale ||  Q.Text.languageLocale;
 	if (Q.isArrayLike(text)) {
 		var source = text[0];
@@ -13321,6 +13326,9 @@ Q.onInit.add(function () {
 			_documentIsUnloading = true; // WARN: a later handler might cancel the event
 		}
 	});
+
+	// set some options
+	Q.Audio.speak.options.mute = !!Q.getObject("Audio.speak.mute", Q);
 }, 'Q');
 
 Q.onJQuery.add(function ($) {

@@ -11,6 +11,11 @@
 				"module": "Q",
 				"action": "urls"
 			}
+		},
+		"Audio": {
+			"speak": {
+				"mute": false
+			}
 		}
 	}
 }
