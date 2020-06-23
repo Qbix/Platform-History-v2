@@ -44,17 +44,21 @@
 				}, options);
 				var title = Assets.texts.credits.BuyCredits;
 				var YouMissingCredits = null;
+				var templateName = 'Assets/credits/buy';
 				if (options.missing) {
+					templateName = 'Assets/credits/missing';
 					title = Assets.texts.credits.MissingCredits;
 					YouMissingCredits = Assets.texts.credits.YouMissingCredits.interpolate({amount: options.amount});
 				}
 
+				Q.Template.set('Assets/credits/missing',
+					'<div class="Assets_credits_buy_missing">{{YouMissingCredits}}</div>' +
+					'<input type="hidden" name="amount" value="{{amount}}">' +
+					'<button class="Q_button" name="buy">{{texts.Buy}}</button>'
+				);
 				Q.Template.set('Assets/credits/buy',
-					'  {{#if missing}}'
-					+ '	<div class="Assets_credits_buy_missing">{{YouMissingCredits}}</div>'
-					+ '{{/if}}'
-					+ '<div class="Assets_credits_buy"><input name="amount" value="{{amount}}"> {{texts.Credits}}</div>'
-					+ '<button class="Q_button" name="buy">{{texts.Buy}}</button>'
+					'<div class="Assets_credits_buy"><input name="amount" value="{{amount}}"> {{texts.Credits}}</div>' +
+					'<button class="Q_button" name="buy">{{texts.Buy}}</button>'
 				);
 
 				// indicator of payment process started
@@ -64,10 +68,9 @@
 					title: title,
 					className: "Assets_credits_buy",
 					template: {
-						name: "Assets/credits/buy",
+						name: templateName,
 						fields: {
 							amount: options.amount,
-							missing: options.missing,
 							YouMissingCredits: YouMissingCredits,
 							texts: Assets.texts.credits
 						}
