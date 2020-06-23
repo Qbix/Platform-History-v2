@@ -856,17 +856,37 @@
 		 */
 		Currencies: {
 			/**
+			 * Use this to load currency data into Q.Assets.Currencies.symbols and Q.Assets.Currencies.names
 			 * @method load
 			 * @static
-			 * Use this to load currency data into Q.Assets.Currencies
 			 * @param {Function} callback Once the callback is called,
 			 *   Q.Assets.Currencies.symbols and Q.Assets.Currencies.names is accessible
 			 */
-			load: function (callback) {
-				Q.addScript('{{Assets}}/js/lib/currencies.js', callback);
-			},
-			symbols: null,
-			names: null
+			load: Q.getter(function (callback) {
+				Q.req('Assets/currency', 'load', function (err, data) {
+					var msg = Q.firstErrorMessage(err, data && data.errors);
+					if (msg) {
+						return alert(msg);
+					}
+
+					Assets.Currencies.symbols = data.slots.load.symbols;
+					Assets.Currencies.names = data.slots.load.names;
+
+					Q.handle(callback, Assets.Currencies, [Assets.Currencies.symbols, Assets.Currencies.names]);
+				});
+			}),
+			/**
+			 * Use this to get symbol for currency
+			 * @method getSymbol
+			 * @static
+			 * @param {String} currency Currency in ISO 4217 (USD, EUR,...)
+			 * @param {Function} callback
+			 */
+			getSymbol: function (currency, callback) {
+				Assets.Currencies.load(function (symbols, names) {
+					Q.handle(callback, null, [Q.getObject(currency, symbols) || currency]);
+				});
+			}
 		}
 	};
 
