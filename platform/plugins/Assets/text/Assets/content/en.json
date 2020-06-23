@@ -115,6 +115,9 @@
         "Assets\/credits\/earned": {
             "content": "Earned {{amount}} credits"
         },
+		"Assets\/credits\/bought": {
+			"content": "Bought {{amount}} credits"
+		},
         "Assets\/credits\/spent": {
             "content": "Spent {{amount}} credits"
         },

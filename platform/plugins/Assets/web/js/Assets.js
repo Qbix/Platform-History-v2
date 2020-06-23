@@ -946,6 +946,7 @@
 				this.onMessage('Assets/credits/received').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/sent').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/earned').set(_createNotice, 'Assets');
+				this.onMessage('Assets/credits/bought').set(_createNotice, 'Assets');
 			});
 		};
 

@@ -193,21 +193,24 @@ class Assets_Credits extends Base_Assets_Credits
 
 		// Post that this user earned $amount credits by $reason
 		$text = Q_Text::get('Assets/content');
-		$type = 'Assets/credits/earned';
+		$instructions = array(
+			'app' => Q::app(),
+			'operation' => '+',
+			'amount' => $amount
+		);
+		if ($reason == 'BoughtCredits') {
+			$type = 'Assets/credits/bought';
+		} else {
+			$type = 'Assets/credits/earned';
+			$instructions['reason'] = self::reasonToText($reason, $more);
+		}
+
 		$content = Q::ifset($text, 'messages', $type, "content", "Earned {{amount}} credits");
 		$stream->post($userId, array(
 			'type' => $type,
 			'content' => Q::interpolate($content, compact('amount')),
 			'byClientId' => Q::ifset($more, 'publisherId', null),
-			'instructions' => Q::json_encode(array_merge(
-				array(
-					'app' => Q::app(),
-					'operation' => '+',
-					'amount' => $amount,
-					'reason' => self::reasonToText($reason, $more)
-				),
-				$more
-			))
+			'instructions' => Q::json_encode(array_merge($instructions, $more))
 		));
 	}
 	
