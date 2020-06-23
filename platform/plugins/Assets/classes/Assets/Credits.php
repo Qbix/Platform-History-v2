@@ -255,10 +255,12 @@ class Assets_Credits extends Base_Assets_Credits
 		$from_stream->setAttribute('amount', $existing_amount - $amount);
 		$from_stream->changed();
 
+		$more['amount'] = $amount;
 		$publisherId = Q::ifset($more, "publisherId", null);
 		$streamName = Q::ifset($more, "streamName", null);
 		if ($publisherId && $streamName) {
 			$more['streamTitle'] = Streams::fetchOne($publisherId, $publisherId, $streamName)->title;
+			$more['userName'] = Users::fetch($publisherId, true)->displayName();
 		} elseif ($toUserId) {
 			$more['userName'] = Users::fetch($toUserId, true)->displayName();
 		}
@@ -290,7 +292,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$from_stream->post($fromUserId, array(
 			'type' => $type,
 			'byClientId' => $toUserId,
-			'content' => Q::interpolate($content, compact("amount")),
+			'content' => Q::interpolate($content, $more),
 			'instructions' => Q::json_encode($instructions)
 		));
 		
@@ -307,7 +309,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$to_stream->post($toUserId, array(
 			'type' => $type,
 			'byClientId' => $fromUserId,
-			'content' => Q::interpolate($content, compact("amount")),
+			'content' => Q::interpolate($content, $more),
 			'instructions' => Q::json_encode($instructions)
 		));
 	}
