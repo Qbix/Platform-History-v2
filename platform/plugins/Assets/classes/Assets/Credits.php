@@ -324,7 +324,7 @@ class Assets_Credits extends Base_Assets_Credits
 	static function convertToCredits($amount, $currency)
 	{
 		$rate = Q_Config::expect('Assets', 'credits', 'exchange', $currency);
-		$credits = $amount * $rate;
+		$credits = ceil($amount * $rate);
 
 		return $credits;
 	}
