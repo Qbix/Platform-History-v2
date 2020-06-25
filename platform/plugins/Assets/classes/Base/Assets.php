@@ -22,9 +22,11 @@ abstract class Base_Assets
 	static $table_classnames = array (
   0 => 'Assets_Badge',
   1 => 'Assets_Charge',
-  2 => 'Assets_Customer',
-  3 => 'Assets_Earned',
-  4 => 'Assets_Leader',
+  2 => 'Assets_Connected',
+  3 => 'Assets_Credits',
+  4 => 'Assets_Customer',
+  5 => 'Assets_Earned',
+  6 => 'Assets_Leader',
 );
 
 	/**
