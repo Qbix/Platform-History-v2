@@ -12,8 +12,8 @@ class Db_Exception_Connect extends Db_Exception
 	 * @constructor
 	 * @extends Db_Exception
 	 * @param {string} $shard_name The connection's shard
-	 * @param {string} $connection The cionnetion name
+	 * @param {string} $connection The connection name
 	 */
 };
 
-Db_Exception::add('Db_Exception_Connect', 'Could not connect to database \'$connection\'');
+Db_Exception::add('Db_Exception_Connect', 'Could not connect to database {{connection}}');

@@ -5150,6 +5150,17 @@ Q.Links = {
 			}
 		}
 		return url;
+	},
+	/**
+	 * Generates a link for opening in android chrome browser.
+	 * Usable in other browsers on Android.
+	 * @static
+	 * @method androidChrome
+	 * @param {String} [url]
+	 * @return {String}
+	 */
+	androidChrome: function (subject, body, to, cc, bcc) {
+		return 'googlechrome://navigate?url=';
 	}
 };
 
