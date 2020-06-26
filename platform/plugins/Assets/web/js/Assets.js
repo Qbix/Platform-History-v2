@@ -44,17 +44,21 @@
 				}, options);
 				var title = Assets.texts.credits.BuyCredits;
 				var YouMissingCredits = null;
+				var templateName = 'Assets/credits/buy';
 				if (options.missing) {
+					templateName = 'Assets/credits/missing';
 					title = Assets.texts.credits.MissingCredits;
 					YouMissingCredits = Assets.texts.credits.YouMissingCredits.interpolate({amount: options.amount});
 				}
 
+				Q.Template.set('Assets/credits/missing',
+					'<div class="Assets_credits_buy_missing">{{YouMissingCredits}}</div>' +
+					'<input type="hidden" name="amount" value="{{amount}}">' +
+					'<button class="Q_button" name="buy">{{texts.Buy}}</button>'
+				);
 				Q.Template.set('Assets/credits/buy',
-					'  {{#if missing}}'
-					+ '	<div class="Assets_credits_buy_missing">{{YouMissingCredits}}</div>'
-					+ '{{/if}}'
-					+ '<div class="Assets_credits_buy"><input name="amount" value="{{amount}}"> {{texts.Credits}}</div>'
-					+ '<button class="Q_button" name="buy">{{texts.Buy}}</button>'
+					'<div class="Assets_credits_buy"><input name="amount" value="{{amount}}"> {{texts.Credits}}</div>' +
+					'<button class="Q_button" name="buy">{{texts.Buy}}</button>'
 				);
 
 				// indicator of payment process started
@@ -64,10 +68,9 @@
 					title: title,
 					className: "Assets_credits_buy",
 					template: {
-						name: "Assets/credits/buy",
+						name: templateName,
 						fields: {
 							amount: options.amount,
-							missing: options.missing,
 							YouMissingCredits: YouMissingCredits,
 							texts: Assets.texts.credits
 						}
@@ -856,17 +859,37 @@
 		 */
 		Currencies: {
 			/**
+			 * Use this to load currency data into Q.Assets.Currencies.symbols and Q.Assets.Currencies.names
 			 * @method load
 			 * @static
-			 * Use this to load currency data into Q.Assets.Currencies
 			 * @param {Function} callback Once the callback is called,
 			 *   Q.Assets.Currencies.symbols and Q.Assets.Currencies.names is accessible
 			 */
-			load: function (callback) {
-				Q.addScript('{{Assets}}/js/lib/currencies.js', callback);
-			},
-			symbols: null,
-			names: null
+			load: Q.getter(function (callback) {
+				Q.req('Assets/currency', 'load', function (err, data) {
+					var msg = Q.firstErrorMessage(err, data && data.errors);
+					if (msg) {
+						return alert(msg);
+					}
+
+					Assets.Currencies.symbols = data.slots.load.symbols;
+					Assets.Currencies.names = data.slots.load.names;
+
+					Q.handle(callback, Assets.Currencies, [Assets.Currencies.symbols, Assets.Currencies.names]);
+				});
+			}),
+			/**
+			 * Use this to get symbol for currency
+			 * @method getSymbol
+			 * @static
+			 * @param {String} currency Currency in ISO 4217 (USD, EUR,...)
+			 * @param {Function} callback
+			 */
+			getSymbol: function (currency, callback) {
+				Assets.Currencies.load(function (symbols, names) {
+					Q.handle(callback, null, [Q.getObject(currency, symbols) || currency]);
+				});
+			}
 		}
 	};
 
@@ -946,6 +969,7 @@
 				this.onMessage('Assets/credits/received').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/sent').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/earned').set(_createNotice, 'Assets');
+				this.onMessage('Assets/credits/bought').set(_createNotice, 'Assets');
 			});
 		};
 
