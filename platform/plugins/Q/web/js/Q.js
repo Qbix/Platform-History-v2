@@ -11156,6 +11156,7 @@ Q.Pointer = {
 	 * Intelligent focusin event that fires only once per focusin
 	 * @static
 	 * @method focusin
+	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	focusin: function (params) {
 		params.eventName = (Q.info.browser.engine === 'gecko' ? 'focus' : 'focusin');
@@ -11173,6 +11174,7 @@ Q.Pointer = {
 	 * Intelligent focusout event that fires only once per focusout
 	 * @static
 	 * @method focusout
+	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	focusout: function (params) {
 		params.eventName = (Q.info.browser.engine === 'gecko' ? 'blur' : 'focusout');
@@ -11190,6 +11192,7 @@ Q.Pointer = {
 	 * Intelligent click event that also works on touchscreens, and respects Q.Pointer.canceledClick
 	 * @static
 	 * @method click
+	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	click: function _Q_click(params) {
 		params.eventName = 'click';
@@ -11205,6 +11208,7 @@ Q.Pointer = {
 	 * and respects Q.Pointer.canceledClick
 	 * @static
 	 * @method fastclick
+	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	fastclick: function _Q_fastclick (params) {
 		params.eventName = Q.info.isTouchscreen ? 'touchend' : 'click';
@@ -11236,6 +11240,7 @@ Q.Pointer = {
 	 * Respects Q.Pointer.canceledClick
 	 * @static
 	 * @method touchclick
+	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	touchclick: function _Q_touchclick (params) {
 		if (!Q.info.isTouchscreen) {
@@ -11260,7 +11265,7 @@ Q.Pointer = {
 					_relevantClick = false;
 				}, Q.Pointer.touchclick.duration);
 			}
-			Q.addEventListener(root, 'click', _clickHandler);
+			Q.addEventListener(this, 'click', _clickHandler);
 			Q.addEventListener(this, 'touchend', _touchendHandler);
 		};
 	},
@@ -11268,6 +11273,7 @@ Q.Pointer = {
 	 * Normalized mouse wheel event that works with various browsers
 	 * @static
 	 * @method click
+	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	wheel: function _Q_wheel (params) {
 		// Modern browsers support "wheel",

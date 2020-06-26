@@ -616,6 +616,7 @@
 	 *  @param {Array} [options.scope=['email','public_profile'] permissions to request from the authentication platform
 	 *  @param {String} [options.identifierType="email,mobile"] the type of the identifier, which could be "mobile" or "email" or "email,mobile"
 	 *  @param {Object} [options.appIds={}] Can be used to set custom {platform: appId} pairs
+	 *  @param {String} [options.identifier] If passed, automatically enters this identifier and clicks the Go button
 	 */
 	Users.login = function (options) {
 
@@ -1650,11 +1651,18 @@
 					}, 0);
 				},
 				onActivate: function () {
-					dialog.plugin('Q/placeholders');
 					var $input = $('input[type!=hidden]', dialog)
-						.eq(0).plugin('Q/clickfocus');
+					dialog.plugin('Q/placeholders');
 					setTimeout(function () {
 						$input.val('').trigger('change');
+						if (options.identifier) {
+							$input.val(options.identifier).trigger('change');
+							setTimeout(function () {
+								Users.submitClosestForm.apply($a, arguments);
+							}, 300);
+						} else {
+							$input.val('').trigger('change').eq(0).plugin('Q/clickfocus');
+						}
 					}, 0);
 				},
 				onClose: function () {
