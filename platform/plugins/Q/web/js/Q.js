@@ -11265,7 +11265,7 @@ Q.Pointer = {
 					_relevantClick = false;
 				}, Q.Pointer.touchclick.duration);
 			}
-			Q.addEventListener(this, 'click', _clickHandler);
+			Q.addEventListener(root, 'click', _clickHandler);
 			Q.addEventListener(this, 'touchend', _touchendHandler);
 		};
 	},
