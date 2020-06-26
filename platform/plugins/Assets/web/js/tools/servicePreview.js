@@ -28,6 +28,43 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 		});
 	};
 
+	// check for related services before delete
+	preview.state.beforeClose = function (_delete) {
+		tool.element.classList.add("Q_working");
+
+		Q.req("Assets/services", "data", function (err, responce) {
+			if (Q.firstErrorMessage(err, responce && responce.errors)) {
+				return;
+			}
+
+			tool.element.classList.remove("Q_working");
+
+			var relatedServices = Q.getObject("slots.data.relatedServices", responce) || [];
+
+			if (relatedServices.length) {
+				var message = tool.text.services.AreYouSureDelete;
+				message += "<br>" + tool.text.services.AmountServicesRelated.interpolate({amount: relatedServices.length});
+
+				Q.confirm(message, function (result) {
+					if (!result){
+						return;
+					}
+
+					_delete();
+				});
+
+				return;
+			}
+
+			_delete();
+		}, {
+			fields: {
+				publisherId: preview.state.publisherId,
+				streamName: preview.state.streamName
+			}
+		});
+	};
+
 	Q.Text.get('Assets/content', function (err, text) {
 		var msg = Q.firstErrorMessage(err);
 		if (msg) {
