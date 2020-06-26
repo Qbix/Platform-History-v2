@@ -3835,6 +3835,10 @@ abstract class Streams extends Base_Streams
 			}
 		}
 
+		if (!$stream->beforeRemove()) {
+			return null;
+		}
+
 		// Clean up relations from other streams to this category
 		list($relations, $related) = Streams::related(
 			$asUserId, 

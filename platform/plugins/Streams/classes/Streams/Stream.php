@@ -532,7 +532,7 @@ class Streams_Stream extends Base_Streams_Stream
 		return $result;
 	}
 	
-	function beforeRemove($pk)
+	function beforeRemove()
 	{
 		/**
 		 * @event Streams/remove/$streamType {before}
@@ -540,7 +540,7 @@ class Streams_Stream extends Base_Streams_Stream
 		 * @param {string} asUserId
 		 * @return {false} To cancel further processing
 		 */
-		if (Q::event("Streams/remove/{$this->type}", compact('stream'), 'before') === false) {
+		if (Q::event("Streams/remove/{$this->type}", array('stream' => $this), 'before') === false) {
 			return false;
 		}
 		return true;
