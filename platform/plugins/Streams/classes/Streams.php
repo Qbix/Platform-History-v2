@@ -3835,7 +3835,7 @@ abstract class Streams extends Base_Streams
 			}
 		}
 
-		if (!$stream->beforeRemove()) {
+		if (!$stream->beforeClose()) {
 			return null;
 		}
 
