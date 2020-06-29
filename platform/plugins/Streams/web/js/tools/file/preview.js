@@ -34,17 +34,10 @@ function _Streams_file_preview(options, preview) {
 	var $te = $(tool.element);
 	var state = this.state;
 	var ps = preview.state;
-	ps.templates.create = Q.extend(
-		ps.templates.create, 
-		10,
-		state.templates && state.templates.create ? state.templates.create : {
-			fields: {
-				src: Q.url('{{Q}}/img/actions/upload.png')
-			},
-			name: 'Streams/file/preview/create',
-			showTitle: (state.showTitle !== false)
-		}
-	);
+
+	// apply custom creatable template (if exists)
+	ps.templates.create = Q.extend(ps.templates.create, 10, state.templates.create);
+
 	if (ps.creatable) {
 		ps.creatable.streamType = ps.creatable.streamType || 'Streams/file';
 		ps.creatable.title = ps.creatable.title || 'Upload File';
@@ -80,6 +73,11 @@ function _Streams_file_preview(options, preview) {
 		edit: {
 			name: 'Streams/file/preview/edit',
 			fields: { alt: 'icon', titleClass: '', titleTag: 'h3' }
+		},
+		create: {
+			fields: { src: Q.url('{{Q}}/img/actions/upload.png') },
+			name: 'Streams/file/preview/create',
+			showTitle: true
 		}
 	}
 },
