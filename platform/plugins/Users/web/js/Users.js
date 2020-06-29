@@ -1654,7 +1654,7 @@
 					var $input = $('input[type!=hidden]', dialog)
 					dialog.plugin('Q/placeholders');
 					if (Q.info.platform === 'ios') {
-						$input.eq(0).plugin('Q/clickfocus');
+						$input.eq(0).plugin('Q/clickfocus');	
 					}
 					setTimeout(function () {
 						$input.val('').trigger('change');

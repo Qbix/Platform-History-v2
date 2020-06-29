@@ -23,7 +23,8 @@ var Streams = Q.Streams;
  *   @param {Object} [options.relatedOptions] Can include options like 'limit', 'offset', 'ascending', 'min', 'max', 'prefix' and 'fields'
  *   @param {Boolean} [options.editable] Set to false to avoid showing even authorized users an interface to replace the image or text of related streams
  *   @param {Boolean} [options.closeable] Set to false to avoid showing even authorized users an interface to close related streams
- *   @param {Object} [options.previewOptions] Obkect of options which can be passed to preview tool.
+ *   @param {Object} [options.previewOptions] Object of options which can be passed to Streams/preview tool.
+ *   @param {Object} [options.specificOptions] Object of options which can be passed to $streamType/preview tool.
  *   @param {Object} [options.creatable]  Optional pairs of {streamType: toolOptions} to render Streams/preview tools create new related streams.
  *   The params typically include at least a "title" field which you can fill with values such as "New" or "New ..."
  *   @param {Function} [options.toolName] Function that takes (streamType, options) and returns the name of the tool to render (and then activate) for that stream. That tool should reqire the "Streams/preview" tool, and work with it as documented in "Streams/preview".
@@ -95,7 +96,8 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			params.streamType = streamType;
 			var element = tool.elementForStream(
 				tool.state.publisherId, "", streamType, null, 
-				Q.extend(state.previewOptions, { creatable: params })
+				Q.extend(state.previewOptions, { creatable: params }),
+				state.specificOptions
 			).addClass('Streams_related_composer Q_contextual_inactive');
 			if (tool.tabs) {
 				element.addClass('Q_tabs_tab');
@@ -351,11 +353,16 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	 * @param {String} streamName
 	 * @param {String} streamType
 	 * @param {Number} weight The weight of the relation
-	 * @param {Object} options
-	 *  The elements of the tools representing the related streams
+	 * @param {Object} [previewOptions]
+	 *  Options for the Streams/preview tool
+	 * @param {Object} [specificOptions]
+	 *  Options for the $streamType/preview tool
 	 * @return {HTMLElement} An element ready for Q.activate
 	 */
-	elementForStream: function (publisherId, streamName, streamType, weight, options) {
+	elementForStream: function (
+		publisherId, streamName, streamType, weight, 
+		previewOptions, specificOptions
+	) {
 		var state = this.state;
 		var o = Q.extend({
 			publisherId: publisherId,
@@ -368,7 +375,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			},
 			editable: state.editable,
 			closeable: state.closeable
-		}, options);
+		}, previewOptions);
 		var f = state.toolName;
 		if (typeof f === 'string') {
 			f = Q.getObject(state.toolName) || f;
@@ -377,7 +384,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		var e = Q.Tool.setUpElement(
 			state.tag || 'div', 
 			['Streams/preview', toolName], 
-			[o, {}], 
+			[o, specificOptions || {}], 
 			null, this.prefix
 		);
  		return e;
