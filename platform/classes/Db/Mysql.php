@@ -416,7 +416,7 @@ class Db_Mysql implements Db_Interface
 				 * @event {before} Db/Row/$className/save
 				 * @param {Db_Row} row
 				 */
-				Q::event("Db/Row/$className/saveExecute", array(
+				Q::event("Db/Row/$className/save", array(
 					'row' => $row
 				), 'before');
 			}
