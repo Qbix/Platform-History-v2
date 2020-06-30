@@ -410,6 +410,16 @@ class Db_Mysql implements Db_Interface
 		$last_q = array();
 		$last_queries = array();
 		foreach ($rows as $row) {
+			if (class_exists($className)) {
+				/**
+				 * Gives an oppotunity to modify the row or do something else
+				 * @event {before} Db/Row/$className/save
+				 * @param {Db_Row} row
+				 */
+				Q::event("Db/Row/$className/saveExecute", array(
+					'row' => $row
+				), 'before');
+			}
 			// get shard, if any
 			$record = ($row instanceof Db_Row) ? $row->fields : $row;
 			$query = new Db_Query_Mysql($this, Db_Query::TYPE_INSERT);
