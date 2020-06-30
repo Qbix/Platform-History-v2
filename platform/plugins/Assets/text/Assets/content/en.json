@@ -141,6 +141,8 @@
 		"ManageServices": "Manage Services",
 		"FreeEvent": "Free event",
 		"OptionalContribution": "Optional contribution",
-		"RequiredPayment": "Required payment"
+		"RequiredPayment": "Required payment",
+		"AreYouSureDelete": "Are you sure you want to delete this service?",
+		"AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
 	}
 }
