@@ -3510,7 +3510,7 @@ abstract class Streams extends Base_Streams
 		// ensure that each userId is included only once
 		$userIds = array_unique($raw_userIds);
 		$alreadyParticipating = Streams_Participant::filter(
-			$userIds, $stream->publisherId, $stream->name, null
+			$userIds, $stream->publisherId, $stream->name, 'participating'
 		);
 
 		// remove already participating users if alwaysSend=false
@@ -3833,6 +3833,10 @@ abstract class Streams extends Base_Streams
 					throw new Users_Exception_NotAuthorized();
 				}
 			}
+		}
+
+		if (!$stream->beforeClose()) {
+			return null;
 		}
 
 		// Clean up relations from other streams to this category
