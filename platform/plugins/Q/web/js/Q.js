@@ -5152,6 +5152,46 @@ Q.Links = {
 		return url;
 	},
 	/**
+	 * Generates a link for opening a WhatsApp message to a number
+	 * @static
+	 * @method whatsApp
+	 * @param {String} [phoneNumber] This should include the country code, without the "+"
+	 * @param {String} [message]
+	 * @return {String}
+	 */
+	whatsApp: function (phoneNumber, message) {
+		return 'whatsapp://send/?phone=' + phoneNumber
+			+ '&text=' + encodeURIComponent(message);
+	},
+	/**
+	 * Generates a link for sharing a link in Telegram
+	 * @static
+	 * @method telegramShare
+	 * @param {String} [text] The text to share, can contain a URL
+	 * @param {String} [phoneNumber] Has to be a phone number, w country code e.g. "+1..."
+	 * @param {String} [url] Optionally put a URL to share here, ahead of the text
+	 * @return {String}
+	 */
+	telegram: function (text, to, url) {
+		return (url
+			? 'tg://msg_url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text)
+			: 'tg://msg?text=' + encodeURIComponent(text)
+		) + (to ? '&to=' + to : '');
+	},
+	/**
+	 * Generates a link for sharing a link in Skype
+	 * @static
+	 * @method telegramShare
+	 * @param {String} [text] The text to share, can contain a URL
+	 * @param {String} [url] The URL to share
+	 * @return {String}
+	 */
+	skype: function (text, url) {
+		return 'https://web.skype.com/share?'
+			+ '&text=' + encodeURIComponent(text)
+			+ (url ? '&url=' + encodeURIComponent(url) : '');
+	},s
+	/**
 	 * Generates a link for opening in android chrome browser.
 	 * Usable in other browsers on Android.
 	 * @static
@@ -5159,8 +5199,8 @@ Q.Links = {
 	 * @param {String} [url]
 	 * @return {String}
 	 */
-	androidChrome: function (subject, body, to, cc, bcc) {
-		return 'googlechrome://navigate?url=';
+	androidChrome: function (url) {
+		return 'googlechrome://navigate?url=' + url; // note: don't encodeURIComponent
 	}
 };
 
