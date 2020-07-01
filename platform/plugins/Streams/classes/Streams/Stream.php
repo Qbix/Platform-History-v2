@@ -978,8 +978,7 @@ class Streams_Stream extends Base_Streams_Stream
 			$this->publisherId,
 			$this->name,
 			$message,
-			$skipAccess,
-			array($this)
+			$skipAccess
 		);
 	}
 	
