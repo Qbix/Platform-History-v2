@@ -410,19 +410,30 @@ class Db_Mysql implements Db_Interface
 		$last_q = array();
 		$last_queries = array();
 		foreach ($rows as $row) {
-			if (class_exists($className)) {
-				/**
-				 * Gives an oppotunity to modify the row or do something else
-				 * @event {before} Db/Row/$className/save
-				 * @param {Db_Row} row
-				 */
-				Q::event("Db/Row/$className/save", array(
-					'row' => $row
-				), 'before');
+			if ($row instanceof Db_Row) {
+				if (class_exists('Q') and class_exists($className)) {
+					Q::event("Db/Row/$className/save", array(
+						'row' => $row
+					), 'before');
+				}
+				$fieldNames = method_exists($row, 'fieldNames')
+					? $row->fieldNames()
+					: null;
+				$record = array();
+				if (is_array($fieldNames)) {
+					foreach ($fieldNames as $name) {
+						$record[$name] = $this->fields[$name];
+					}
+				} else {
+					foreach ($this->fields as $name => $value) {
+						$record[$name] = $value;
+					}
+				}
+			} else {
+				$record = $row;
 			}
-			// get shard, if any
-			$record = ($row instanceof Db_Row) ? $row->fields : $row;
 			$query = new Db_Query_Mysql($this, Db_Query::TYPE_INSERT);
+			// get shard, if any
 			$shard = '';
 			if (isset($className)) {
 				$query->className = $className;
