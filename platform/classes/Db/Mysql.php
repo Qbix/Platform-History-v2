@@ -422,10 +422,10 @@ class Db_Mysql implements Db_Interface
 				$record = array();
 				if (is_array($fieldNames)) {
 					foreach ($fieldNames as $name) {
-						$record[$name] = $this->fields[$name];
+						$record[$name] = $row->fields[$name];
 					}
 				} else {
-					foreach ($this->fields as $name => $value) {
+					foreach ($row->fields as $name => $value) {
 						$record[$name] = $value;
 					}
 				}

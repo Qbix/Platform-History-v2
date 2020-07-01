@@ -5190,7 +5190,7 @@ Q.Links = {
 		return 'https://web.skype.com/share?'
 			+ '&text=' + encodeURIComponent(text)
 			+ (url ? '&url=' + encodeURIComponent(url) : '');
-	},s
+	},
 	/**
 	 * Generates a link for opening in android chrome browser.
 	 * Usable in other browsers on Android.
