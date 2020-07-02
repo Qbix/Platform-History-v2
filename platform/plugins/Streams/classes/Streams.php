@@ -2836,7 +2836,7 @@ abstract class Streams extends Base_Streams
 				$extra = Q::json_decode($p->extra, true);
 				$tree = new Q_Tree($extra);
 				$tree->merge($options['extra']);
-				$p->extra = Q::json_encode($tree->getAll(), true);
+				$extra = $p->extra = Q::json_encode($tree->getAll(), true);
 			}
 			$streamNamesUpdate[] = $sn;
 			$updateCounts[$p->state][] = $sn;
@@ -2844,8 +2844,12 @@ abstract class Streams extends Base_Streams
 			$p->state = $state;
 		}
 		if ($streamNamesUpdate) {
+			$updateFields = compact('state');
+			if (isset($extra)) {
+				$updateFields['extra'] = $extra;
+			}
 			Streams_Participant::update()
-				->set(compact('state'))
+				->set($updateFields)
 				->where(array(
 					'publisherId' => $publisherId,
 					'streamName' => $streamNamesUpdate,
@@ -3646,6 +3650,8 @@ abstract class Streams extends Base_Streams
 		}
 
 		$return = array(
+			'publisherId' => $publisherId,
+			'streamName' => $streamName,
 			'success' => $result,
 			'count' => count($raw_userIds),
 			'userIds' => $raw_userIds,
