@@ -1683,6 +1683,7 @@ abstract class Streams extends Base_Streams
 	 * @param {double|string} [$options.weight] Pass a numeric value here, or something like "max+1" to make the weight 1 greater than the current MAX(weight)
 	 * @param {array} [$options.extra] Can be array of ($streamName => $extra) info
 	 *  to save in the "extra" field.
+	 * @param {boolean} [$options.inheritAccess=false] If true, inherit access from category to related stream.
 	 * @return {array|boolean}
 	 *  Returns false if the operation was canceled by a hook
 	 *  Returns true if relation was already there
@@ -1991,6 +1992,19 @@ abstract class Streams extends Base_Streams
 				compact('relatedTo', 'relatedFrom', 'asUserId', 'category', 'stream'),
 				'after'
 			);
+
+			// inherit access from category to related stream
+			if (Q::ifset($options, 'inheritAccess', false)) {
+				$inheritAccess = ($category and $category->inheritAccess)
+					? Q::json_decode($category->inheritAccess)
+					: array();
+				$newInheritAccess = array($category->publisherId, $category->name);
+				if (!in_array($newInheritAccess, $inheritAccess)) {
+					$inheritAccess[] = $newInheritAccess;
+				}
+				$stream->inheritAccess = Q::json_encode($inheritAccess);
+				$stream->save();
+			}
 		}
 
 		if (empty($options['skipMessageTo'])) {
