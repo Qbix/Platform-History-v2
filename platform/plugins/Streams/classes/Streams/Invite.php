@@ -123,6 +123,10 @@ class Streams_Invite extends Base_Streams_Invite
 	 */
 	function accept($options = array())
 	{
+		if ($this->state == 'accepted') {
+			return false;
+		}
+
 		if (!isset($options['access'])) {
 			$options['access'] = true;
 		}
@@ -137,7 +141,7 @@ class Streams_Invite extends Base_Streams_Invite
 				$quotaName = "Streams/invite";
 				$roles = Users::roles($this->publisherId, null, null, $userId);
 				$quota = Users_Quota::check($userId, $this->token, $quotaName, true, 1, $roles);
-				
+
 				$invited2 = new Streams_Invited();
 				$invited2->token = $invited->token;
 				$invited2->userId = $invited->userId;
@@ -148,7 +152,7 @@ class Streams_Invite extends Base_Streams_Invite
 				$quota->used(1);
 			}
 		}
-		
+
 		/**
 		 * @event Streams/invite {before}
 		 * @param {Streams_Invite} stream
