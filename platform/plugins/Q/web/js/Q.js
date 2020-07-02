@@ -5156,23 +5156,29 @@ Q.Links = {
 	 * @static
 	 * @method whatsApp
 	 * @param {String} [phoneNumber] This should include the country code, without the "+"
-	 * @param {String} [message]
+	 * @param {String} [message] The text can include a URL that will be expanded in the chat
 	 * @return {String}
 	 */
 	whatsApp: function (phoneNumber, message) {
 		return 'whatsapp://send/?phone=' + phoneNumber
-			+ '&text=' + encodeURIComponent(message);
+			+ (message ? '&text=' + encodeURIComponent(message) : '');
 	},
 	/**
 	 * Generates a link for sharing a link in Telegram
 	 * @static
 	 * @method telegramShare
-	 * @param {String} [text] The text to share, can contain a URL
-	 * @param {String} [phoneNumber] Has to be a phone number, w country code e.g. "+1..."
-	 * @param {String} [url] Optionally put a URL to share here, ahead of the text
+	 * @param {String} [to] Phone number with country code e.g. "+1", or username starting with "@".
+	 *  If a username, then don't supply text or url, it can only open a window to chat.
+	 *  Set this to false and supply text (and optional url) to open Telegram and let the user
+	 *  choose Telegram users, channels and groups to share to.
+	 * @param {String} [text] The text to share, can contain a URL, so need to include the next parameter.
+	 * @param {String} [url] Optionally put a URL to share here, which will appear ahead of the text
 	 * @return {String}
 	 */
-	telegram: function (text, to, url) {
+	telegram: function (to, text, url) {
+		if (to && to[0] === '@') {
+			return 'tg://resolve?domain=' + to.substr(1);
+		}
 		return (url
 			? 'tg://msg_url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text)
 			: 'tg://msg?text=' + encodeURIComponent(text)
@@ -5188,7 +5194,7 @@ Q.Links = {
 	 */
 	skype: function (text, url) {
 		return 'https://web.skype.com/share?'
-			+ '&text=' + encodeURIComponent(text)
+			+ (text ? '&text=' + encodeURIComponent(text) : '')
 			+ (url ? '&url=' + encodeURIComponent(url) : '');
 	},
 	/**
