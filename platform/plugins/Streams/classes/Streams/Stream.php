@@ -1697,7 +1697,7 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 		$limit = isset($options['limit']) ? $options['limit'] : 1000000;
 		if (empty($options['skipLimiting'])) {
-			$limit = min($limit, self::getConfigField($this->type, 'getMessagesLimit', 100));
+			$limit = $limit ?: self::getConfigField($this->type, 'getMessagesLimit', 100);
 		}
 		
 		if ($options['min'] > $options['max']) {
