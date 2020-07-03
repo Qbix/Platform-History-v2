@@ -3675,17 +3675,17 @@ Message.construct = function Streams_Message_construct(fields, updateCache) {
 		messageFunc.messageConstructor = function Streams_Message(fields) {
 			// run any constructors
 			messageFunc.messageConstructor.constructors.apply(this, arguments);
-			if (updateCache) {
-				Message.get.cache.set(
-					[this.publisherId, this.streamName, parseInt(this.ordinal)],
-					0, this, [null, this]
-				);
-			}
 		};
 		Q.mixin(messageFunc, Streams.Message);
 		Q.mixin(messageFunc.messageConstructor, messageFunc);
 	}
 	var msg = new messageFunc.messageConstructor(fields);
+	if (updateCache && !isNaN(parseInt(msg.ordinal))) {
+		Message.get.cache.set(
+			[msg.publisherId, msg.streamName, parseInt(msg.ordinal)],
+			0, msg, [null, msg]
+		);
+	}
 	_updateMessageCache(msg);
 	if (orig) {
 		Q.extend(msg, orig);
