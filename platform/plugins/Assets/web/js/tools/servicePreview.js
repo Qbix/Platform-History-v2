@@ -87,9 +87,14 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 		tool.stream = stream;
 		var ps = tool.preview.state;
 		var $toolElement = $(tool.element);
-
-		$toolElement.attr('data-writeLevel', stream.testWriteLevel('edit'));
 		var price = stream.getAttribute('price');
+
+		// edit
+		if (stream.testWriteLevel('edit')) {
+			$toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
+				tool.edit();
+			});
+		}
 
 		Q.Template.render('Assets/service/preview', {
 			title: stream.fields.title,
@@ -100,12 +105,6 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 			tool.element.innerHTML = html;
 
 			tool.preview.icon($("img.Streams_preview_icon", tool.element)[0]);
-
-			$("i.icon-edit", tool.element).on(Q.Pointer.fastclick, function (e) {
-				e.stopImmediatePropagation();
-				tool.edit();
-				return false;
-			});
 		});
 
 		Q.Streams.Stream.onFieldChanged(ps.publisherId, ps.streamName)
@@ -219,9 +218,6 @@ Q.Template.set('Assets/service/preview',
 	+ '<div class="Streams_preview_contents">'
 	+ '<h3 class="Streams_preview_title Streams_preview_view">{{title}}</h3>'
 	+ '<span class="Assets_service_preview_price">{{price}}</span>'
-	+ '{{#if editable}}'
-	+ '<i class="icon-edit"></i>'
-	+ '{{/if}}'
 	+ '</div></div>'
 );
 
