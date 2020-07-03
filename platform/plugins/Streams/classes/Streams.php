@@ -1683,6 +1683,7 @@ abstract class Streams extends Base_Streams
 	 * @param {double|string} [$options.weight] Pass a numeric value here, or something like "max+1" to make the weight 1 greater than the current MAX(weight)
 	 * @param {array} [$options.extra] Can be array of ($streamName => $extra) info
 	 *  to save in the "extra" field.
+	 * @param {boolean} [$options.inheritAccess=false] If true, inherit access from category to related stream.
 	 * @return {array|boolean}
 	 *  Returns false if the operation was canceled by a hook
 	 *  Returns true if relation was already there
@@ -1991,6 +1992,19 @@ abstract class Streams extends Base_Streams
 				compact('relatedTo', 'relatedFrom', 'asUserId', 'category', 'stream'),
 				'after'
 			);
+
+			// inherit access from category to related stream
+			if (Q::ifset($options, 'inheritAccess', false)) {
+				$inheritAccess = ($category and $category->inheritAccess)
+					? Q::json_decode($category->inheritAccess)
+					: array();
+				$newInheritAccess = array($category->publisherId, $category->name);
+				if (!in_array($newInheritAccess, $inheritAccess)) {
+					$inheritAccess[] = $newInheritAccess;
+				}
+				$stream->inheritAccess = Q::json_encode($inheritAccess);
+				$stream->save();
+			}
 		}
 
 		if (empty($options['skipMessageTo'])) {
@@ -2822,7 +2836,7 @@ abstract class Streams extends Base_Streams
 				$extra = Q::json_decode($p->extra, true);
 				$tree = new Q_Tree($extra);
 				$tree->merge($options['extra']);
-				$p->extra = Q::json_encode($tree->getAll(), true);
+				$extra = $p->extra = Q::json_encode($tree->getAll(), true);
 			}
 			$streamNamesUpdate[] = $sn;
 			$updateCounts[$p->state][] = $sn;
@@ -2830,8 +2844,12 @@ abstract class Streams extends Base_Streams
 			$p->state = $state;
 		}
 		if ($streamNamesUpdate) {
+			$updateFields = compact('state');
+			if (isset($extra)) {
+				$updateFields['extra'] = $extra;
+			}
 			Streams_Participant::update()
-				->set(compact('state'))
+				->set($updateFields)
 				->where(array(
 					'publisherId' => $publisherId,
 					'streamName' => $streamNamesUpdate,
@@ -3632,6 +3650,8 @@ abstract class Streams extends Base_Streams
 		}
 
 		$return = array(
+			'publisherId' => $publisherId,
+			'streamName' => $streamName,
 			'success' => $result,
 			'count' => count($raw_userIds),
 			'userIds' => $raw_userIds,

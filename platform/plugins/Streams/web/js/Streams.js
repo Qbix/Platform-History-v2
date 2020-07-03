@@ -3647,10 +3647,11 @@ var Message = Streams.Message = function Streams_Message(fields) {
  * @static
  * @method construct
  * @param {Object} fields Provide any message fields here. Requires at least the "type" of the stream.
- * @param {Boolean} [updateCache=false] Whether to update the Message.get cache after constructing the Message
+ * @param {Boolean} [updateCache=true] Whether to update the Message.get cache after constructing the Message
  * @return {Q.Stream}
  */
 Message.construct = function Streams_Message_construct(fields, updateCache) {
+	updateCache = updateCache !== false;
 	if (Q.isEmpty(fields)) {
 		return false;
 	}
