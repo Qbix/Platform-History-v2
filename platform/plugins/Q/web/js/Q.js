@@ -12555,11 +12555,13 @@ Q.confirm = function(message, callback, options) {
 		buttonClicked = true;
 		Q.Dialogs.pop();
 		Q.handle(callback, root, [true]);
+		return false;
 	});
 	Q.addEventListener(buttons[1], Q.Pointer.end, function () {
 		buttonClicked = true;
 		Q.Dialogs.pop();
 		Q.handle(callback, root, [false]);
+		return false;
 	});
 	var buttonYes = dialog.querySelectorAll('.Q_buttons button:first-child')[0];
 	return dialog;
