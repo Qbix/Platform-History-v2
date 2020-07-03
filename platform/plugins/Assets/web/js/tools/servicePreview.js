@@ -9,6 +9,7 @@
 Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, preview) {
 	var tool = this;
 	tool.preview = preview;
+	var previewState = preview.state;
 
 	Q.addStylesheet('{{Assets}}/css/tools/ServicePreview.css', { slotName: 'Assets' });
 
@@ -65,6 +66,20 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 		});
 	};
 
+	if (previewState.publisherId && previewState.streamName && tool.state.editable) {
+		Q.Streams.get(previewState.publisherId, previewState.streamName, function () {
+			if (!this.testWriteLevel('edit')) {
+				return;
+			}
+
+			$(tool.element).on(Q.Pointer.fastclick, function () {
+				if (tool.state.editable) {
+					tool.edit();
+				}
+			});
+		});
+	}
+
 	Q.Text.get('Assets/content', function (err, text) {
 		var msg = Q.firstErrorMessage(err);
 		if (msg) {
@@ -78,7 +93,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 },
 
 {
-
+	editable: true
 },
 
 {
@@ -87,25 +102,16 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 		tool.stream = stream;
 		var ps = tool.preview.state;
 		var $toolElement = $(tool.element);
-
-		$toolElement.attr('data-writeLevel', stream.testWriteLevel('edit'));
 		var price = stream.getAttribute('price');
 
 		Q.Template.render('Assets/service/preview', {
 			title: stream.fields.title,
 			price: price ? '($' + parseFloat(price).toFixed(2) + ')' : '',
-			editable: ps.editable
 		}, function (err, html) {
 			if (err) return;
 			tool.element.innerHTML = html;
 
 			tool.preview.icon($("img.Streams_preview_icon", tool.element)[0]);
-
-			$("i.icon-edit", tool.element).on(Q.Pointer.fastclick, function (e) {
-				e.stopImmediatePropagation();
-				tool.edit();
-				return false;
-			});
 		});
 
 		Q.Streams.Stream.onFieldChanged(ps.publisherId, ps.streamName)
@@ -219,9 +225,6 @@ Q.Template.set('Assets/service/preview',
 	+ '<div class="Streams_preview_contents">'
 	+ '<h3 class="Streams_preview_title Streams_preview_view">{{title}}</h3>'
 	+ '<span class="Assets_service_preview_price">{{price}}</span>'
-	+ '{{#if editable}}'
-	+ '<i class="icon-edit"></i>'
-	+ '{{/if}}'
 	+ '</div></div>'
 );
 

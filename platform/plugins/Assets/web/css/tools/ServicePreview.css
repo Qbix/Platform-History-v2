@@ -37,19 +37,6 @@
 .Assets_service_composer .Q_dialog_content button {
 	margin: 0 auto;
 }
-
-.Assets_service_preview_tool .icon-edit {
-	display: none;
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	right: 40px;
-	color: red;
-	font-size: 23px;
-}
-.Assets_service_preview_tool[data-writeLevel=true] .icon-edit {
-	display: block;
-}
 .Assets_service_preview_tool .Assets_service_preview_price {
 	padding-left: 10px;
 }
