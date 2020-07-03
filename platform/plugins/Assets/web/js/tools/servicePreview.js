@@ -9,6 +9,7 @@
 Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, preview) {
 	var tool = this;
 	tool.preview = preview;
+	var previewState = preview.state;
 
 	Q.addStylesheet('{{Assets}}/css/tools/ServicePreview.css', { slotName: 'Assets' });
 
@@ -65,6 +66,20 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 		});
 	};
 
+	if (previewState.publisherId && previewState.streamName && tool.state.editable) {
+		Q.Streams.get(previewState.publisherId, previewState.streamName, function () {
+			if (!this.testWriteLevel('edit')) {
+				return;
+			}
+
+			$(tool.element).on(Q.Pointer.fastclick, function () {
+				if (tool.state.editable) {
+					tool.edit();
+				}
+			});
+		});
+	}
+
 	Q.Text.get('Assets/content', function (err, text) {
 		var msg = Q.firstErrorMessage(err);
 		if (msg) {
@@ -78,7 +93,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 },
 
 {
-
+	editable: true
 },
 
 {
@@ -89,17 +104,9 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 		var $toolElement = $(tool.element);
 		var price = stream.getAttribute('price');
 
-		// edit
-		if (stream.testWriteLevel('edit')) {
-			$toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
-				tool.edit();
-			});
-		}
-
 		Q.Template.render('Assets/service/preview', {
 			title: stream.fields.title,
 			price: price ? '($' + parseFloat(price).toFixed(2) + ')' : '',
-			editable: ps.editable
 		}, function (err, html) {
 			if (err) return;
 			tool.element.innerHTML = html;
