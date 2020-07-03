@@ -14000,6 +14000,10 @@ Q.Notices = {
 			persistent: false
 		}, options);
 
+		if (o.persistent && !o.key) {
+			o.key = Date.now().toString();
+		}
+
 		var key = o.key;
 		var content = o.content;
 		var noticeClass = 'Q_' + o.type + '_notice';
@@ -14048,12 +14052,16 @@ Q.Notices = {
 			Q.Notices.show(li);
 
 			if (o.persistent) {
+				if (!key) {
+					throw new Exception("key required for persistent notice");
+				}
+
 				var oj = Q.take(o, ['persistent', 'closeable', 'timeout', 'handler']);
 				Q.req('Q/notice', [], null, {
 					method: 'post',
 					fields: {
 						// we need key for persistent notices
-						key: key || Date.now().toString(),
+						key: key,
 						content: content,
 						options: oj
 					}
@@ -14093,6 +14101,8 @@ Q.Notices = {
 			notice.forEach(function(item) {
 				Q.Notices.remove(item);
 			});
+
+			return;
 		}
 		notice = this.get(notice);
 		if (notice instanceof HTMLElement) {
