@@ -244,7 +244,10 @@ Q.Tool.define("Places/location", function (options) {
 							isCategory: true,
 							editable: false,
 							realtime: true,
-							sortable: false
+							sortable: false,
+							relatedOptions: {
+								withParticipant: false
+							}
 						}, tool.prefix + 'relatedLocations')
 						.activate(function () {
 							tool.relatedTool = this;
