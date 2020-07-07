@@ -246,6 +246,9 @@ Q.Tool.define("Places/location", function (options) {
 						sortable: false,
 						relatedOptions: {
 							withParticipant: false
+						},
+						onRefresh: function () {
+							$(this.element).attr("data-loading", "false");
 						}
 					}, tool.prefix + 'relatedLocations').activate(function () {
 						tool.relatedTool = this;
@@ -453,7 +456,7 @@ Q.Template.set('Places/location/select',
 		'<div data-location="current">{{text.location.myCurrentLocation}}</div>' +
 	'{{/if}}' +
 	'{{#if showLocations}}' +
-		'<div class="Places_location_related"></div>' +
+		'<div class="Places_location_related" data-loading="true"></div>' +
 	'{{/if}}' +
 	'{{#if showAddress}}' +
 		'<div data-location="address">' +
