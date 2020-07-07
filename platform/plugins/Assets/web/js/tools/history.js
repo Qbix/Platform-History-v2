@@ -11,8 +11,10 @@
  * @param {Object} options Override various options for this tool
  *  @param {String} options.type can be "credits" or "charges"
  *  @param {String} [options.userId=loggedUserId] id of user which history need to display
- *  @param {Event} [options.onClient] Event occur when user click on client name link.
+ *  @param {Q.Event} [options.onClient] Event occur when user click on client name link.
  *  Passed tool as context and userId, userName as arguments.
+ *  @param {Q.Event} [options.onStream] Event occur when user click on stream title link.
+ *  Passed tool as context and publisherId, streamName as arguments.
  */
 
 Q.Tool.define("Assets/history", function (options) {
@@ -43,7 +45,8 @@ Q.Tool.define("Assets/history", function (options) {
 { // default options here
 	type: null,
 	userId: Q.Users.loggedInUserId(),
-	onClient: new Q.Event()
+	onClient: new Q.Event(),
+	onStream: new Q.Event()
 },
 
 { // methods go here
@@ -79,6 +82,16 @@ Q.Tool.define("Assets/history", function (options) {
 
 						Q.handle(state.onClient, tool, [$this.attr('data-userId'), $this.text()]);
 					});
+
+					$('.Assets_history_description a[data-streamName]', $te).on(Q.Pointer.fastclick, function () {
+						var $this = $(this);
+						var publisherId = $this.attr('data-publisherId');
+						var streamName = $this.attr('data-streamName');
+
+						if (publisherId && streamName) {
+							Q.handle(state.onStream, tool, [publisherId, streamName]);
+						}
+					});
 				}
 			);
 		}, {
@@ -97,7 +110,7 @@ Q.Template.set('Assets/history/credits',
 	'		<tr><td class="Assets_history_date">{{this.date}}</td>' +
 	'		<td class="Assets_history_amount">{{this.operation}}</td>' +
 	'		<td class="Assets_history_client">{{this.clientInfo.direction}} <a data-userId="{{this.clientInfo.id}}">{{this.clientInfo.name}}</a></td>' +
-	'		<td class="Assets_history_description">{{this.reason}}</td></tr>' +
+	'		<td class="Assets_history_description">{{& this.reason}}</td></tr>' +
 	'	{{/each}}' +
 	'</table>'
 );
