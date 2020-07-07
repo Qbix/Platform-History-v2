@@ -4357,14 +4357,18 @@ abstract class Streams extends Base_Streams
 		}
 		$streamName = 'Streams/user/profile';
 		$stream = Streams::fetchOne($userId, $userId, $streamName);
+		$now = time();
 		if (!$stream) {
 			$stream = Streams::create($userId, $userId, 'Streams/user/profile', array(
 				'name' => $streamName
 			));
+		}
+		if ($stream->getAttribute('userInviteExpires', 0) < $now) {
 			$ret = $stream->invite(array('token' => true, 'appUrl' => $appUrl));
 			$invite = $ret['invite'];
 			$userInviteUrl = $ret['url'];
 			$stream->setAttribute('userInviteUrl', $userInviteUrl);
+			$stream->setAttribute('userInviteExpires', $expires);
 			$stream->changed();
 		} else {
 			$userInviteUrl = $stream->getAttribute('userInviteUrl');

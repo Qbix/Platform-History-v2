@@ -13870,7 +13870,7 @@ Q.Camera = {
 			 * (using Instascan library dynamically loaded)
 			 * @method instascan
 			 * @static
-			 * @param {object} audio Q.audio with loaded audio file to play when QR code found
+			 * @param {Q.Audio} audio Q.Audio with loaded audio file to play when QR code found
 			 * @param {function} callback function to execute when QR code found and provide text as argument
 			 * @param {object} options object with options to replace default
 			 */
@@ -13898,7 +13898,7 @@ Q.Camera = {
 					var elementWidth = $element.width();
 
 					// create video element
-					var $videoElement = $("<video>").appendTo($element);
+					var $videoElement = $("<video playsinline autoplay>").appendTo($element);
 
 					// set heigth/width of video element to stretch full screen
 					if (elementHeight > elementWidth) {
@@ -13931,15 +13931,7 @@ Q.Camera = {
 						// if more than 1 camera - add swap icon
 						if (camerasAmount > 1) {
 							$("<a class='Q_swap'>").on(Q.Pointer.fastclick, function(){
-
-								if (selectedCamera + 1 < camerasAmount) {
-									selectedCamera++;
-								} else if (selectedCamera - 1 >= 0) {
-									selectedCamera--;
-								} else {
-									return;
-								}
-
+								selectedCamera = (selectedCamera+1) % camerasAmount;
 								scanner.start(cameras[selectedCamera]);
 							}).appendTo(dialog);
 						}

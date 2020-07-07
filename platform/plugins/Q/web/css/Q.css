@@ -256,6 +256,7 @@ body.Q_preventScroll {
 	background-image: url(../img/ui/swap_big.png);
 	background-size: contain;
 	cursor: pointer;
+	z-index: 100;
 }
 .Q_fullscreen_dialog .Q_title_slot {
 	position: fixed;
