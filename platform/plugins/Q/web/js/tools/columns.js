@@ -181,6 +181,7 @@ Q.Tool.define("Q/columns", function(options) {
 		});
 
 		var $div = $(div);
+		$div.attr('data-width-index', Math.round($div.width()/300) || 1);
 		Q.onLayout(div).add(function () {
 			$div.attr('data-width-index', Math.round($div.width()/300) || 1);
 		}, this);
