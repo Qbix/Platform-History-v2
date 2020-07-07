@@ -340,7 +340,7 @@ Q.Tool.define("Places/location", function (options) {
 						// if this placeId already selected in related locations,
 						// set selectedLocation.selected=false to allow select this place further
 						// and exit, to avoid reset above selection
-						if (place.id === state.selectedLocation.placeId && state.selectedLocation.selected) {
+						if (place.id === Q.getObject("selectedLocation.placeId", state) && Q.getObject("selectedLocation.selected", state)) {
 							state.selectedLocation.selected = false;
 							return;
 						}
