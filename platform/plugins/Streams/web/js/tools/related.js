@@ -41,7 +41,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	// check for required options
 	var state = this.state;
 	if ((!state.publisherId || !state.streamName)
-	&& (!state.stream || Q.typeOf(state.stream) !== 'Streams.Stream')) {
+	&& (!state.stream || Q.typeOf(state.stream) !== 'Q.Streams.Stream')) {
 		throw new Q.Error("Streams/related tool: missing publisherId or streamName");
 	}
 	if (!state.relationType) {
@@ -274,8 +274,8 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	refresh: function (onUpdate) {
 		var tool = this;
 		var state = tool.state;
-		var publisherId = state.publisherId;
-		var streamName = state.streamName;
+		var publisherId = state.publisherId || Q.getObject("stream.fields.publisherId", state);
+		var streamName = state.streamName || Q.getObject("stream.fields.name", state);
 		Streams.retainWith(tool).related(
 			publisherId, 
 			streamName, 
