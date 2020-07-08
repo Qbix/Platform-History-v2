@@ -13589,7 +13589,7 @@ function _addHandlebarsHelpers() {
 			return context;
 		});
 	}
-	if (!Handlebars.helpers.option) {
+	if (!Handlebars.helpers.interpolate) {
 		Handlebars.registerHelper('interpolate', function(expression) {
 			if (arguments.length < 2) {
 				return '';
@@ -13604,6 +13604,11 @@ function _addHandlebarsHelpers() {
 			return new Handlebars.SafeString(
 				'<option value="'+value.encodeHTML()+'"'+attr+'>'+html+"</option>"
 			);
+		});
+	}
+	if (!Handlebars.helpers.replace) {
+		Handlebars.registerHelper('replace', function(find, replace, options) {
+			return options.fn(this).replace(find, replace);
 		});
 	}
 }
