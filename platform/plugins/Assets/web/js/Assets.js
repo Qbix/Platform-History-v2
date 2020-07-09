@@ -163,6 +163,22 @@
 						stream: options.stream
 					}
 				});
+			},
+			/**
+			 * Convert from currency to credits
+			 * @method convertToCredits
+			 * @static
+			 *  @param {Number} amount
+			 *  @param {String} currency
+			 */
+			convertToCredits: function (amount, currency) {
+				var exchange = Q.getObject(["exchange", currency], Assets.Credits);
+
+				if (!exchange) {
+					return null;
+				}
+
+				return Math.ceil(parseFloat(amount) * parseFloat(exchange));
 			}
 		},
 
