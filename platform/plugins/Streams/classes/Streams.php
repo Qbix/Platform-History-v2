@@ -1761,7 +1761,7 @@ abstract class Streams extends Base_Streams
 				$extra = $options['extra'][$sn];
 				$extra = is_string($extra) ? $extra : Q::json_encode($extra);
 			} else {
-				unset($extra);
+				$extra = null;
 			}
 			/**
 			 * @event Streams/relateTo/$categoryType {before}
@@ -1774,7 +1774,12 @@ abstract class Streams extends Base_Streams
 			 */
 			if (false === Q::event(
 				"Streams/relateTo/{$category->type}",
-				compact('asUserId', 'category', 'stream', 'extra'),
+				array(
+					'asUserId' => $asUserId,
+					'category' => $category,
+					'stream' => $stream,
+					'extra' => &$extra
+				),
 				'before'
 			)) {
 				continue;
