@@ -231,6 +231,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			);
 
 			if (Q.handle(state.beforeRenderPreview, tool, [tff, element]) === false) {
+				delete(result.relations[i]);
 				return;
 			}
 
@@ -239,6 +240,12 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			Q.setObject([tff.publisherId, tff.name], element, tool.previewElements);
 			$container.append(element);
 		});
+
+		// remove empty values from result.relations
+		result.relations = result.relations.filter(function (el) {
+			return el != null;
+		});
+
 		// activate the elements one by one, asynchronously
 		var previews = [];
 		var map = {};
@@ -411,7 +418,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		var toolNames = ['Streams/preview', toolName];
 		var toolOptions = [o, specificOptions || {}];
 
-		if (state.closeable && publisherId && streamName) {
+		if (state.mode === "participant" && state.closeable && publisherId && streamName) {
 			toolNames.push("Q/badge");
 			toolOptions.push({
 				tr: {
