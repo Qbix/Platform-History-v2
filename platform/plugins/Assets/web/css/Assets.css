@@ -79,7 +79,7 @@
 }
 
 .Assets_credits_buy .Q_dialog_content {
-	width: 300px;
+	min-width: 300px;
 }
 .Assets_credits_buy .Q_dialog_content .Assets_credits_buy_missing,
 .Assets_credits_buy .Q_dialog_content .Assets_credits_buy {

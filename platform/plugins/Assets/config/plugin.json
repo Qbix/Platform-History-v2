@@ -9,7 +9,9 @@
 			}
 		},
 		"handlersBeforeEvent": {
-			"Q/responseExtras": ["Assets/before/Q_responseExtras"]
+			"Q/responseExtras": ["Assets/before/Q_responseExtras"],
+			"Streams/relateTo/Calendars/event": ["Assets/before/Streams_relateTo_Calendars_event"],
+			"Streams/unrelateTo/Calendars/event": ["Assets/before/Streams_unrelateTo_Calendars_event"]
 		},
 		"handlersAfterEvent": {
 			"Users/insertUser": ["Assets/after/Users_insertUser"],
