@@ -24,8 +24,10 @@ var Row = Q.require('Db/Row');
  * @param {String|Buffer} [fields.id] defaults to ""
  * @param {String|Buffer} [fields.fromUserId] defaults to null
  * @param {String|Buffer} [fields.toUserId] defaults to null
- * @param {String|Buffer} [fields.publisherId] defaults to null
- * @param {String|Buffer} [fields.streamName] defaults to null
+ * @param {String|Buffer} [fields.fromPublisherId] defaults to null
+ * @param {String|Buffer} [fields.fromStreamName] defaults to null
+ * @param {String|Buffer} [fields.toPublisherId] defaults to null
+ * @param {String|Buffer} [fields.toStreamName] defaults to null
  * @param {String} [fields.reason] defaults to ""
  * @param {Integer} [fields.credits] defaults to 0
  * @param {String} [fields.attributes] defaults to null
@@ -57,13 +59,25 @@ Q.mixin(Base, Row);
  * 
  */
 /**
- * @property publisherId
+ * @property fromPublisherId
+ * @type String|Buffer
+ * @default null
+ * publisherId of the stream from which charge was made
+ */
+/**
+ * @property fromStreamName
+ * @type String|Buffer
+ * @default null
+ * name of the stream from which charge was made
+ */
+/**
+ * @property toPublisherId
  * @type String|Buffer
  * @default null
  * publisherId of the stream regarding which the charge was made
  */
 /**
- * @property streamName
+ * @property toStreamName
  * @type String|Buffer
  * @default null
  * name of the stream regarding which the charge was made
@@ -309,8 +323,10 @@ Base.fieldNames = function () {
 		"id",
 		"fromUserId",
 		"toUserId",
-		"publisherId",
-		"streamName",
+		"fromPublisherId",
+		"fromStreamName",
+		"toPublisherId",
+		"toStreamName",
 		"reason",
 		"credits",
 		"attributes",
@@ -432,35 +448,35 @@ return [["varbinary","31","",false],true,"MUL",null];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_publisherId
+ * @method beforeSet_fromPublisherId
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_publisherId = function (value) {
+Base.prototype.beforeSet_fromPublisherId = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".publisherId");
+			throw new Error('Must pass a String or Buffer to '+this.table()+".fromPublisherId");
 		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".fromPublisherId");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the publisherId field
+	 * Returns the maximum string length that can be assigned to the fromPublisherId field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_publisherId = function () {
+Base.prototype.maxSize_fromPublisherId = function () {
 
 		return 255;
 };
 
 	/**
-	 * Returns schema information for publisherId column
+	 * Returns schema information for fromPublisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_publisherId = function () {
+Base.column_fromPublisherId = function () {
 
 return [["varbinary","255","",false],true,"MUL",null];
 };
@@ -468,35 +484,107 @@ return [["varbinary","255","",false],true,"MUL",null];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_streamName
+ * @method beforeSet_fromStreamName
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_streamName = function (value) {
+Base.prototype.beforeSet_fromStreamName = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".streamName");
+			throw new Error('Must pass a String or Buffer to '+this.table()+".fromStreamName");
 		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".streamName");
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".fromStreamName");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the streamName field
+	 * Returns the maximum string length that can be assigned to the fromStreamName field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_streamName = function () {
+Base.prototype.maxSize_fromStreamName = function () {
 
 		return 255;
 };
 
 	/**
-	 * Returns schema information for streamName column
+	 * Returns schema information for fromStreamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_streamName = function () {
+Base.column_fromStreamName = function () {
+
+return [["varbinary","255","",false],true,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_toPublisherId
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_toPublisherId = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".toPublisherId");
+		if (typeof value === "string" && value.length > 255)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".toPublisherId");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the toPublisherId field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_toPublisherId = function () {
+
+		return 255;
+};
+
+	/**
+	 * Returns schema information for toPublisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_toPublisherId = function () {
+
+return [["varbinary","255","",false],true,"MUL",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_toStreamName
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_toStreamName = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".toStreamName");
+		if (typeof value === "string" && value.length > 255)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".toStreamName");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the toStreamName field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_toStreamName = function () {
+
+		return 255;
+};
+
+	/**
+	 * Returns schema information for toStreamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_toStreamName = function () {
 
 return [["varbinary","255","",false],true,"",null];
 };

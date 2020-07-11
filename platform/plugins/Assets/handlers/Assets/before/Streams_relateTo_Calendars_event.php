@@ -1,9 +1,12 @@
 <?php
 function Assets_before_Streams_relateTo_Calendars_event ($params) {
 	$event = $params['category'];
+	$toPublisherId = $event->publisherId;
+	$toStreamName = $event->name;
+
 	$stream = $params['stream'];
-	$publisherId = $event->publisherId;
-	$streamName = $event->name;
+	$fromPublisherId = $stream->publisherId;
+	$fromStreamName = $stream->name;
 
 	// check if stream payment required
 	$amount = Q::ifset($event->getAttribute("payment"), "amount", null);
@@ -12,7 +15,8 @@ function Assets_before_Streams_relateTo_Calendars_event ($params) {
 		return true;
 	}
 
-	// check if user participating event
+	// if user not participating to event, don't spend credits
+	// will spend when user participated
 	$participant = new Streams_Participant();
 	$participant->publisherId = $event->publisherId;
 	$participant->streamName = $event->name;
@@ -23,14 +27,5 @@ function Assets_before_Streams_relateTo_Calendars_event ($params) {
 	}
 
 	$needCredits = Assets_Credits::convertToCredits($amount, $currency);
-
-	Assets_Credits::spend($needCredits, 'JoinPaidStream', $stream->publisherId, compact("publisherId", "streamName"));
-
-	$extra = &$params['extra'];
-	if (is_string($extra)) {
-		$extra = Q::json_decode($extra);
-	} elseif (!$extra) {
-		$extra = array();
-	}
-	$extra = Q::json_encode(array_merge($extra, array('credits' => $needCredits)));
+	Assets_Credits::spend($needCredits, 'JoinPaidStream', $stream->publisherId, compact("toPublisherId", "toStreamName", "fromPublisherId", "fromStreamName"));
 }
