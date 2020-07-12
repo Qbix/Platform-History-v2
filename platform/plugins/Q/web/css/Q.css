@@ -65,8 +65,12 @@ table { border-spacing:0; border-collapse:collapse; }
     from { box-shadow: inset rgba(0,0,0,0) 0 0 0; }
     to { box-shadow: inset rgba(0,0,0,0.0000001) 0 0 0 10px; }
 }
+@keyframes Q_blink {
+	50% { border-color: #ff0000; }
+}
 
 /* Common Q classes */
+.Q_blink { animation: Q_blink .5s step-end infinite alternate; }
 .Q_forceRedraw { animation: Q_forceRedraw 4s infinite; }
 .Q_pagebreak { page-break-after: always; }
 .Q_collapsed { border-bottom: solid 2px #777 !important; }

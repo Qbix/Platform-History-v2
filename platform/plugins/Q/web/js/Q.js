@@ -12551,13 +12551,17 @@ Q.confirm = function(message, callback, options) {
 		'hidePrevious': true
 	}, options));
 	var buttons = dialog.querySelectorAll('.Q_buttons button');
-	Q.addEventListener(buttons[0], Q.Pointer.end, function () {
+	Q.addEventListener(buttons[0], Q.Pointer.end, function (e) {
+		e.preventDefault();
+		e.stopPropagation();
 		buttonClicked = true;
 		Q.Dialogs.pop();
 		Q.handle(callback, root, [true]);
 		return false;
 	});
-	Q.addEventListener(buttons[1], Q.Pointer.end, function () {
+	Q.addEventListener(buttons[1], Q.Pointer.end, function (e) {
+		e.preventDefault();
+		e.stopPropagation();
 		buttonClicked = true;
 		Q.Dialogs.pop();
 		Q.handle(callback, root, [false]);
@@ -13589,7 +13593,7 @@ function _addHandlebarsHelpers() {
 			return context;
 		});
 	}
-	if (!Handlebars.helpers.option) {
+	if (!Handlebars.helpers.interpolate) {
 		Handlebars.registerHelper('interpolate', function(expression) {
 			if (arguments.length < 2) {
 				return '';
@@ -13604,6 +13608,11 @@ function _addHandlebarsHelpers() {
 			return new Handlebars.SafeString(
 				'<option value="'+value.encodeHTML()+'"'+attr+'>'+html+"</option>"
 			);
+		});
+	}
+	if (!Handlebars.helpers.replace) {
+		Handlebars.registerHelper('replace', function(find, replace, options) {
+			return options.fn(this).replace(find, replace);
 		});
 	}
 }

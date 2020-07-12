@@ -140,6 +140,11 @@ handlebars.registerHelper('option', function(value, html, selectedValue) {
 	);
 });
 
+handlebars.registerHelper('replace', function(find, replace, options) {
+	return options.fn(this).replace(find, replace);
+});
+
+
 /**
  * Creates a Q.Handlebars object
  * @class Handlebars
