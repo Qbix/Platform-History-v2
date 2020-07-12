@@ -23,8 +23,8 @@ var Row = Q.require('Db/Row');
  * an associative array of {column: value} pairs
  * @param {String|Buffer} [fields.userId] defaults to ""
  * @param {String|Buffer} [fields.id] defaults to ""
- * @param {String} [fields.attributes] defaults to ""
  * @param {String} [fields.description] defaults to ""
+ * @param {String} [fields.attributes] defaults to ""
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  * @param {String|Db.Expression} [fields.updatedTime] defaults to "0000-00-00 00:00:00"
  */
@@ -47,16 +47,16 @@ Q.mixin(Base, Row);
  * 
  */
 /**
+ * @property description
+ * @type String
+ * @default ""
+ * human-readable description of the charge
+ */
+/**
  * @property attributes
  * @type String
  * @default ""
  * additional information for the charge in JSON format
- */
-/**
- * @property description
- * @type String
- * @default ""
- * 
  */
 /**
  * @property insertedTime
@@ -281,8 +281,8 @@ Base.fieldNames = function () {
 	return [
 		"userId",
 		"id",
-		"attributes",
 		"description",
+		"attributes",
 		"insertedTime",
 		"updatedTime"
 	];
@@ -367,6 +367,44 @@ return [["varbinary","255","",false],false,"PRI",null];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
+ * @method beforeSet_description
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_description = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".description");
+		if (typeof value === "string" && value.length > 255)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".description");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the description field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_description = function () {
+
+		return 255;
+};
+
+	/**
+	 * Returns schema information for description column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_description = function () {
+
+return [["varchar","255","",false],false,"",null];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
  * @method beforeSet_attributes
  * @param {string} value
  * @return {string} The value
@@ -403,44 +441,6 @@ return [["varchar","1023","",false],false,"",null];
 };
 
 /**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_description
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_description = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".description");
-		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".description");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the description field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_description = function () {
-
-		return 255;
-};
-
-	/**
-	 * Returns schema information for description column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_description = function () {
-
-return [["varchar","255","",false],false,"",""];
-};
-
-/**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
  * @param {String} value
@@ -462,7 +462,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","1023","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -487,7 +487,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","255","",false],false,"","0000-00-00 00:00:00"];
+return [["timestamp","1023","",false],false,"","0000-00-00 00:00:00"];
 };
 
 /**

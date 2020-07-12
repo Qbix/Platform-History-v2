@@ -119,17 +119,31 @@
 			 *  @param {object} options
 			 *  @param {number} options.amount
 			 *  @param {string} options.currency Currency ISO 4217 code (USD, EUR etc)
-			 *  @param {Streams_Stream} [options.stream] Stream object for which to pay. If also can be object {publisherId: ..., streamName: ...}
+			 *  @param {Streams_Stream} [options.toStream] Stream object for which to pay. If also can be object {publisherId: ..., streamName: ...}
 			 *  @param {Streams_Stream} [options.userId] User id where need to pass credits.
+			 *  @param {array} [options.paymentDetails] Array of objects detailed payment. Which userId or stream payment for.
+			 *  look like: [{userId: ..., amount: ...}, {publisherId: ..., streamName: ..., amount: ...}, ...]
 			 *  @param {function} [options.resolve] Callback to run when payment done.
 			 *  @param {function} [options.reject] Callback to run when payment rejected.
 			 */
 			pay: function (options) {
 				if (Streams.isStream(options.stream)) {
-					options.stream = {
-						publisherId: options.stream.fields.publisherId,
-						streamName: options.stream.fields.name
+					options.toStream = {
+						publisherId: options.toStream.fields.publisherId,
+						streamName: options.toStream.fields.name
 					};
+				}
+
+				// check payment details consistent
+				if (options.paymentDetails) {
+					var checkSum = 0;
+					Q.each(options.paymentDetails, function (i, item) {
+						checkSum += item.amount;
+					});
+
+					if (parseFloat(options.amount) !== parseFloat(checkSum)) {
+						throw new Error("Assets.Credits.pay: amount not equal to checkSum");
+					}
 				}
 
 				Q.req("Assets/credits", ['status', 'details'], function (err, response) {
@@ -160,9 +174,26 @@
 						amount: options.amount,
 						currency: options.currency,
 						userId: options.userId,
-						stream: options.stream
+						toStream: options.toStream,
+						paymentDetails: options.paymentDetails
 					}
 				});
+			},
+			/**
+			 * Convert from currency to credits
+			 * @method convertToCredits
+			 * @static
+			 *  @param {Number} amount
+			 *  @param {String} currency
+			 */
+			convertToCredits: function (amount, currency) {
+				var exchange = Q.getObject(["exchange", currency], Assets.Credits);
+
+				if (!exchange) {
+					return null;
+				}
+
+				return Math.ceil(parseFloat(amount) * parseFloat(exchange));
 			}
 		},
 

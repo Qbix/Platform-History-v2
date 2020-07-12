@@ -10,7 +10,26 @@
 class Assets_Credits extends Base_Assets_Credits
 {
 	const DEFAULT_AMOUNT = 20;
-	
+
+	/**
+	 * @method getAllAttributes
+	 * @return {array} The array of all attributes set in the stream
+	 */
+	function getAllAttributes()
+	{
+		return empty($this->attributes) ? array() : json_decode($this->attributes, true);
+	}
+	/**
+	 * @method getAttribute
+	 * @param {string} $attributeName The name of the attribute to get
+	 * @param {mixed} $default The value to return if the attribute is missing
+	 * @return {mixed} The value of the attribute, or the default value, or null
+	 */
+	function getAttribute($attributeName, $default = null)
+	{
+		$attr = $this->getAllAttributes();
+		return isset($attr[$attributeName]) ? $attr[$attributeName] : $default;
+	}
 	/**
 	 * Get the logged-in user's credits stream
 	 * @method userStream
@@ -48,7 +67,7 @@ class Assets_Credits extends Base_Assets_Credits
 
 			$amount = Q_Config::get('Assets', 'credits', 'amounts', 'Users/insertUser', self::DEFAULT_AMOUNT);
 			self::earn($amount, 'YouHaveCreditsToStart', $userId, array(
-				'publisherId' => Users::communityId()
+				'communityId' => Users::communityId()
 			));
 		}
 		return $stream;
@@ -70,7 +89,36 @@ class Assets_Credits extends Base_Assets_Credits
 		}
 		return 0;
 	}
-	
+	/**
+	 * Check if payment details amounts sum equal to general amount
+	 * @method checkAmount
+	 * @static
+	 * @param {integer} $amount The amount of credits to spend.
+	 * @param {array} $paymentDetails Array of objects detailed payment. Which userId or stream payment for.
+	 *  look like: [{userId: ..., amount: ...}, {publisherId: ..., streamName: ..., amount: ...}, ...]
+	 * @param {boolean} [$throwIfNotEqual=false]
+	 * @throws {Exception} If not equal
+	 */
+	static function checkAmount ($amount, $paymentDetails, $throwIfNotEqual = false) {
+		if (!is_array($paymentDetails)) {
+			return true;
+		}
+
+		$checkSum = 0;
+		foreach ($paymentDetails as $item) {
+			$checkSum += $item['amount'];
+		}
+
+		if ($amount != $checkSum) {
+			if ($throwIfNotEqual) {
+				throw new Exception("amount not equal to checkSum");
+			}
+
+			return false;
+		}
+
+		return true;
+	}
 	/**
 	 * Spend credits
 	 * @method spend
@@ -79,8 +127,12 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @param {string} $reason Identifies the reason for spending. Can't be null.
 	 * @param {string} [$userId=null] User which spend credits. Null = logged user.
 	 * @param {array} $more An array supplying more info, including
-	 * @param {string} [$more.publisherId] The publisher of the stream representing the purchase
-	 * @param {string} [$more.streamName] The name of the stream representing the purchase
+	 * @param {string} [$more.fromPublisherId] The publisher of the stream user pay to
+	 * @param {string} [$more.fromStreamName] The name of the stream user pay to
+	 * @param {string} [$more.toPublisherId] The publisher of the stream user pay for
+	 * @param {string} [$more.toStreamName] The name of the stream user pay for
+	 * @param {array} [$more.paymentDetails] Array of objects detailed payment. Which userId or stream payment for.
+	 *  look like: [{userId: ..., amount: ...}, {publisherId: ..., streamName: ..., amount: ...}, ...]
 	 * @throws {Users_Exception_NotLoggedIn} If user is not logged in
 	 */
 	static function spend($amount, $reason, $userId = null, $more = array())
@@ -99,12 +151,16 @@ class Assets_Credits extends Base_Assets_Credits
 
 		$userId = Q::ifset($userId, Users::loggedInUser(true)->id);
 
-		$publisherId = Q::ifset($more, "publisherId", null);
-		$streamName = Q::ifset($more, "streamName", null);
+		$toPublisherId = Q::ifset($more, "toPublisherId", null);
+		$toStreamName = Q::ifset($more, "toStreamName", null);
+		$paymentDetails = Q::ifset($more, "paymentDetails", null);
+
+		// check amount consistent
+		self::checkAmount($amount, $paymentDetails, true);
 
 		// if user spend credits to stream, make it send credits to stream publisher
-		if ($publisherId && $streamName) {
-			self::send($amount, $reason, $publisherId, $userId, $more);
+		if ($toPublisherId && $toStreamName) {
+			self::send($amount, $reason, $toPublisherId, $userId, $more);
 			return;
 		}
 
@@ -115,17 +171,32 @@ class Assets_Credits extends Base_Assets_Credits
 				'missing' => $amount - $existing_amount
 			));
 		}
+
+		if (is_array($paymentDetails)) {
+			foreach ($paymentDetails as $item) {
+				$more['fromPublisherId'] = $item['publisherId'];
+				$more['fromStreamName'] = $item['streamName'];
+				$assets_credits = self::createCreditRow($item['amount'], $reason, null, $userId, $more);
+			}
+		} else {
+			$assets_credits = self::createCreditRow($amount, $reason, null, $userId, $more);
+		}
+
+		// decrease credits only after credit rows created
 		$stream->setAttribute('amount', $existing_amount - $amount);
 		$stream->changed();
 
-		// add row to assets_credits
-		$assets_credits = new Assets_Credits();
-		$assets_credits->id = uniqid();
-		$assets_credits->fromUserId = $userId;
-		$assets_credits->reason = $reason;
-		$assets_credits->credits = $amount;
-		$assets_credits->attributes = Q::json_encode($more);
-		$assets_credits->save();
+		$more['amount'] = $amount;
+		$more['toUserName'] = $assets_credits->getAttribute("toUserName");
+		$more['fromUserName'] = $assets_credits->getAttribute("fromUserName");
+		$more['toStreamTitle'] = $assets_credits->getAttribute("toStreamTitle");
+		$more['fromStreamTitle'] = $assets_credits->getAttribute("fromStreamTitle");
+		$more['toUserId'] = $assets_credits->toUserId;
+		$more['fromUserId'] = $assets_credits->fromUserId;
+		$more['fromPublisherId'] = $assets_credits->fromPublisherId;
+		$more['fromStreamName'] = $assets_credits->fromStreamName;
+		$more['toPublisherId'] = $assets_credits->toPublisherId;
+		$more['toStreamName'] = $assets_credits->toStreamName;
 
 		$instructions_json = Q::json_encode(array_merge(
 			array(
@@ -135,6 +206,7 @@ class Assets_Credits extends Base_Assets_Credits
 			),
 			$more
 		));
+
 		$text = Q_Text::get('Assets/content');
 		$type = 'Assets/credits/spent';
 		$content = Q::ifset($text, 'messages', $type, 'content', "Spent {{amount}} credits");
@@ -145,7 +217,6 @@ class Assets_Credits extends Base_Assets_Credits
 			'instructions' => $instructions_json
 		));
 	}
-	
 	/**
 	 * Earn credits
 	 * @method earn
@@ -182,14 +253,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$stream->setAttribute('amount', $stream->getAttribute('amount') + $amount);
 		$stream->changed();
 
-		// add row to assets_credits
-		$assets_credits = new Assets_Credits();
-		$assets_credits->id = uniqid();
-		$assets_credits->toUserId = $userId;
-		$assets_credits->reason = $reason;
-		$assets_credits->credits = $amount;
-		$assets_credits->attributes = Q::json_encode($more);
-		$assets_credits->save();
+		self::createCreditRow($amount, $reason, $userId, null, $more);
 
 		// Post that this user earned $amount credits by $reason
 		$text = Q_Text::get('Assets/content');
@@ -251,31 +315,37 @@ class Assets_Credits extends Base_Assets_Credits
 				'missing' => $amount - $existing_amount
 			));
 		}
-		
+
+		$paymentDetails = Q::ifset($more, "paymentDetails", null);
+
+		// check amount consistent
+		self::checkAmount($amount, $paymentDetails, true);
+
+		if (is_array($paymentDetails)) {
+			foreach ($paymentDetails as $item) {
+				$more['fromPublisherId'] = $item['publisherId'];
+				$more['fromStreamName'] = $item['streamName'];
+				$assets_credits = self::createCreditRow($item['amount'], $reason, $toUserId, $fromUserId, $more);
+			}
+		} else {
+			$assets_credits = self::createCreditRow($amount, $reason, $toUserId, $fromUserId, $more);
+		}
+
+		// decrease credits only after credits rows created
 		$from_stream->setAttribute('amount', $existing_amount - $amount);
 		$from_stream->changed();
 
 		$more['amount'] = $amount;
-		$publisherId = Q::ifset($more, "publisherId", null);
-		$streamName = Q::ifset($more, "streamName", null);
-		if ($publisherId && $streamName) {
-			$more['streamTitle'] = Streams::fetchOne($publisherId, $publisherId, $streamName)->title;
-			$more['userName'] = Users::fetch($publisherId, true)->displayName();
-		} elseif ($toUserId) {
-			$more['userName'] = Users::fetch($toUserId, true)->displayName();
-		}
-
-		// add row to assets_credits
-		$assets_credits = new Assets_Credits();
-		$assets_credits->id = uniqid();
-		$assets_credits->fromUserId = $fromUserId;
-		$assets_credits->toUserId = $toUserId;
-		$assets_credits->publisherId = $publisherId;
-		$assets_credits->streamName = $streamName;
-		$assets_credits->reason = $reason;
-		$assets_credits->credits = $amount;
-		$assets_credits->attributes = Q::json_encode($more);
-		$assets_credits->save();
+		$more['toUserName'] = $assets_credits->getAttribute("toUserName");
+		$more['fromUserName'] = $assets_credits->getAttribute("fromUserName");
+		$more['toStreamTitle'] = $assets_credits->getAttribute("toStreamTitle");
+		$more['fromStreamTitle'] = $assets_credits->getAttribute("fromStreamTitle");
+		$more['toUserId'] = $assets_credits->toUserId;
+		$more['fromUserId'] = $assets_credits->fromUserId;
+		$more['fromPublisherId'] = $assets_credits->fromPublisherId;
+		$more['fromStreamName'] = $assets_credits->fromStreamName;
+		$more['toPublisherId'] = $assets_credits->toPublisherId;
+		$more['toStreamName'] = $assets_credits->toStreamName;
 
 		$instructions = array_merge(
 			array(
@@ -306,6 +376,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$text = Q_Text::get('Assets/content');
 		$type = 'Assets/credits/received';
 		$content = Q::ifset($text, 'messages', $type, 'content', "Received {{amount}} credits");
+		$more['fromUserName'] = $assets_credits->getAttribute("toUserName");
 		$to_stream->post($toUserId, array(
 			'type' => $type,
 			'byClientId' => $fromUserId,
@@ -314,8 +385,75 @@ class Assets_Credits extends Base_Assets_Credits
 		));
 	}
 	/**
+	 * Create row in Assets_Credits table
+	 * @method createCreditRow
+	 * @static
+	 * @param {int} $amount Amount of credits. Required,
+	 * @param {string} $reason Identifies the reason for send. Required.
+	 * @param {string} $toUserId User id which get credits.
+	 * @param {string} $fromUserId User id which send credits.
+	 * @param {array} $more An array supplying more info, including
+	 * @param {string} [$more.toPublisherId] The publisher of the stream paid to
+	 * @param {string} [$more.toStreamName] The name of the stream paid to
+	 * @param {string} [$more.fromPublisherId] The publisher of the stream paid from
+	 * @param {string} [$more.fromStreamName] The name of the stream paid from
+	 *
+	 * @return {Assets_Credits} Assets_Credits row
+	 */
+	private static function createCreditRow ($amount, $reason, $toUserId = null, $fromUserId = null, $more = array()) {
+		$toPublisherId = null;
+		$toStreamName = null;
+		$fromPublisherId = null;
+		$fromStreamName = null;
+		if (Q::ifset($more, "toPublisherId", null)) {
+			$toPublisherId = $more['toPublisherId'];
+		}
+		if (Q::ifset($more, "toStreamName", null)) {
+			$toStreamName = $more['toStreamName'];
+		}
+		if (Q::ifset($more, "fromPublisherId", null)) {
+			$fromPublisherId = $more['fromPublisherId'];
+		}
+		if (Q::ifset($more, "fromStreamName", null)) {
+			$fromStreamName = $more['fromStreamName'];
+		}
+
+		unset($more['fromPublisherId']);
+		unset($more['fromStreamName']);
+		unset($more['toPublisherId']);
+		unset($more['toStreamName']);
+		unset($more['paymentDetails']);
+
+		if ($toPublisherId && $toStreamName) {
+			$more['toStreamTitle'] = Streams::fetchOne($toPublisherId, $toPublisherId, $toStreamName)->title;
+			$more['toUserName'] = Users::fetch($toPublisherId, true)->displayName();
+		} elseif ($toUserId) {
+			$more['toUserName'] = Users::fetch($toUserId, true)->displayName();
+		}
+
+		if ($fromPublisherId && $fromStreamName) {
+			$more['fromStreamTitle'] = Streams::fetchOne($fromPublisherId, $fromPublisherId, $fromStreamName)->title;
+		}
+
+		// add row to assets_credits
+		$assets_credits = new Assets_Credits();
+		$assets_credits->id = uniqid();
+		$assets_credits->fromUserId = $fromUserId;
+		$assets_credits->toUserId = $toUserId;
+		$assets_credits->toPublisherId = $toPublisherId;
+		$assets_credits->toStreamName = $toStreamName;
+		$assets_credits->fromPublisherId = $fromPublisherId;
+		$assets_credits->fromStreamName = $fromStreamName;
+		$assets_credits->reason = $reason;
+		$assets_credits->credits = $amount;
+		$assets_credits->attributes = Q::json_encode($more);
+		$assets_credits->save();
+
+		return $assets_credits;
+	}
+	/**
 	 * Convert reason to readable text.
-	 * @method reasonToText
+	 * @method convertToCredits
 	 * @static
 	 * @param {string} $key json key to search in Assets/content/credits.
 	 * @param {array} $more additional data need to interpolate json with.
@@ -352,18 +490,19 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @method checkPaid
 	 * @static
 	 * @param {string} $userId user tested paid stream
-	 * @param {Streams_Stream|array} $stream Stream or array('publisherId' => ..., 'streamName' => ...)
+	 * @param {Streams_Stream|array} $toStream Stream or array('publisherId' => ..., 'streamName' => ...)
+	 * @param {Streams_Stream|array} [$fromStream] Stream or array('publisherId' => ..., 'streamName' => ...)
 	 * @throws
 	 * @return {Boolean|Object}
 	 */
-	static function checkPaid($userId, $stream)
+	static function checkPaid($userId, $toStream, $fromStream = null)
 	{
-		if (is_array($stream)) {
-			$publisherId = $stream['publisherId'];
-			$streamName = $stream['streamName'];
-		} elseif ($stream instanceof Streams_Stream) {
-			$publisherId = $stream->publisherId;
-			$streamName = $stream->name;
+		if (is_array($toStream)) {
+			$toPublisherId = $toStream['publisherId'];
+			$toStreamName = $toStream['streamName'];
+		} elseif ($toStream instanceof Streams_Stream) {
+			$toPublisherId = $toStream->publisherId;
+			$toStreamName = $toStream->name;
 		} else {
 			throw new Q_Exception_WrongValue(array(
 				'field' => 'stream',
@@ -371,11 +510,23 @@ class Assets_Credits extends Base_Assets_Credits
 			));
 		}
 
+		$fromPublisherId = null;
+		$fromStreamName = null;
+		if (is_array($fromStream)) {
+			$fromPublisherId = $fromStream['publisherId'];
+			$fromStreamName = $fromStream['streamName'];
+		} elseif ($fromStream instanceof Streams_Stream) {
+			$fromPublisherId = $fromStream->publisherId;
+			$fromStreamName = $fromStream->name;
+		}
+
 		$joined_assets_credits = Assets_Credits::select()
 		->where(array(
 			'fromUserId' => $userId,
-			'publisherId' => $publisherId,
-			'streamName' => $streamName,
+			'toPublisherId' => $toPublisherId,
+			'toStreamName' => $toStreamName,
+			'fromPublisherId' => $fromPublisherId,
+			'fromStreamName' => $fromStreamName,
 			'reason' => 'JoinPaidStream'
 		))
 		->orderBy('insertedTime', false)
@@ -386,8 +537,10 @@ class Assets_Credits extends Base_Assets_Credits
 			$left_assets_credits = Assets_Credits::select()
 			->where(array(
 				'toUserId' => $userId,
-				'publisherId' => $publisherId,
-				'streamName' => $streamName,
+				'toPublisherId' => $toPublisherId,
+				'toStreamName' => $toStreamName,
+				'fromPublisherId' => $fromPublisherId,
+				'fromStreamName' => $fromStreamName,
 				'reason' => 'LeftPaidStream'
 			))
 			->orderBy('insertedTime', false)

@@ -41,6 +41,11 @@ function Assets_history_response_tool($options)
 		foreach ($rows as $i => $row) {
 			$attributes = (array)Q::json_decode($row->attributes);
 			$attributes['amount'] = $row->credits;
+			$attributes['toPublisherId'] = $row->toPublisherId;
+			$attributes['toStreamName'] = $row->toStreamName;
+			$attributes['fromPublisherId'] = $row->fromPublisherId;
+			$attributes['fromStreamName'] = $row->fromStreamName;
+
 			$amount = $row->credits;
 			$sign = $direction = $clientInfo = $clientId = null;
 			if ($row->fromUserId == $userId) {
