@@ -203,7 +203,7 @@
 					$badgeElement = $("<div class='Q_badge'>").appendTo($te);
 
 					if (Q.typeOf(badgeStyle.onClick) === 'function') {
-						$badgeElement.on('click', badgeStyle.onClick);
+						$badgeElement.on(Q.Pointer.fastclick, badgeStyle.onClick);
 					}
 
 					if (badgeStyle.className) {

@@ -1,0 +1,38 @@
+.Streams_related_tool.Streams_related_participant {
+	text-align: center;
+	overflow-x: auto;
+	overflow-y: hidden;
+	white-space: nowrap;
+}
+.Streams_related_tool.Streams_related_participant .Streams_preview_tool {
+	display: inline-block;
+	width: auto;
+	vertical-align: top;
+}
+.Streams_related_tool.Streams_related_participant .Streams_preview_tool:not(:last-of-type) {
+	margin-right: 3%;
+}
+.Streams_related_tool.Streams_related_participant .Streams_preview_tool .Streams_preview_container {
+	display: block;
+}
+.Streams_related_tool.Streams_related_participant .Streams_preview_tool .Streams_preview_contents {
+	display: block;
+	width: 100%;
+}
+.Streams_related_tool.Streams_related_participant .Streams_preview_tool .Streams_preview_title {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.Streams_related_tool.Streams_related_participant .Streams_preview_tool .Streams_preview_icon {
+	border-radius: 50%;
+	margin-right: 0;
+	margin-bottom: 1%;
+}
+.Streams_related_tool.Streams_related_participant .Streams_preview_tool .Q_actions_container {
+	display: none !important;
+}
+.Q_badge.Streams_preview_close {
+	background: url('../../../Q/img/close.png') center center no-repeat;
+	background-size: contain;
+}
