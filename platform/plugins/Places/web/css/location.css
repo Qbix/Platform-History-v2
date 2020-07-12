@@ -48,7 +48,10 @@
 .Places_location_userLocationsNew .Places_location_new .Places_location_new_actions {
 	text-align: center;
 }
-.Places_location_tool .Places_location_related:empty {
+.Places_location_tool .Places_location_related {
+	margin-bottom: 5px;
+}
+.Places_location_tool .Places_location_related[data-loading=true] {
 	margin: 10px 0;
 	height: 40px;
 	width: 100%;
@@ -60,4 +63,7 @@
 	-webkit-opacity: 0.5;
 	-moz-opacity: 0.5;
 	opacity: 0.5;
+}
+.Places_location_tool .Q_filter_input {
+	border-width: 1px;
 }
