@@ -402,22 +402,33 @@
 				var cameraBtnIcon = document.createElement('DIV');
 				cameraBtnIcon.className = 'Streams_webrtc_camera-control-icon';
 				cameraBtnIcon.innerHTML = icons.disabledCamera;
+                cameraBtnCon.appendChild(cameraBtn);
+                cameraBtnCon.appendChild(cameraBtnIcon);
+                controlBarCon.appendChild(cameraBtnCon);
+
 				var cameraSwitcherBtnCon = document.createElement('DIV');
 				cameraSwitcherBtnCon.className = 'Streams_webrtc_camera-switcher';
 				var cameraSwitcherBtn = document.createElement('DIV');
 				cameraSwitcherBtn.className = 'Streams_webrtc_camera-switcher-btn';
 				cameraSwitcherBtn.innerHTML = icons.switchCameras;
-				var speakerBtnCon = document.createElement('DIV');
+                if(tool.WebRTCLib.conferenceControl.videoInputDevices.length > 1) { controlBarCon.appendChild(cameraSwitcherBtn);}
+
+                var speakerBtnCon = document.createElement('DIV');
 				speakerBtnCon.className = 'Streams_webrtc_speaker-control';
 				var speakerBtn = document.createElement('DIV');
 				speakerBtn.className = 'Streams_webrtc_speaker-control-btn';
 				speakerBtn.innerHTML = icons.enabledSpeaker;
-				var microphoneBtnCon = document.createElement('DIV');
+                if(typeof cordova != 'undefined' && Q.info.isMobile) controlBarCon.appendChild(speakerBtn);
+
+
+                var microphoneBtnCon = document.createElement('DIV');
 				microphoneBtnCon.className = 'Streams_webrtc_microphone-control';
 				var microphoneBtn = document.createElement('DIV');
 				microphoneBtn.className = 'Streams_webrtc_microphone-control-btn';
 				microphoneBtn.innerHTML = icons.microphone;
-				var textChatBtnCon = document.createElement('DIV');
+                controlBarCon.appendChild(microphoneBtn);
+
+                var textChatBtnCon = document.createElement('DIV');
 				textChatBtnCon.className = 'Streams_webrtc_text-chat-btn';
 				var textChatBtn = document.createElement('DIV');
 				textChatBtn.className = 'Streams_webrtc_text-chat-btn-btn';
@@ -427,6 +438,12 @@
 				var textChatCounterBadge = document.createElement('DIV');
 				textChatCounterBadge.className = 'Streams_webrtc_text-chat-counter Streams_webrtc_hidden';
 				var textChatCounterBadgeSpan = document.createElement('SPAN');
+                textChatBtnCon.appendChild(textChatBtn);
+                textChatBtnCon.appendChild(textChatBtnIcon);
+                textChatCounterBadge.appendChild(textChatCounterBadgeSpan);
+                textChatBtnCon.appendChild(textChatCounterBadge);
+                controlBarCon.appendChild(textChatBtnCon);
+
 				var usersBtnCon = document.createElement('DIV');
 				usersBtnCon.className = 'Streams_webrtc_manage-users-btn';
 				var usersBtn = document.createElement('DIV');
@@ -439,30 +456,26 @@
 				var counterBadgeSpan = document.createElement('SPAN');
 				var participantsCount = tool.WebRTCLib.roomParticipants().length;
 				counterBadgeSpan.innerHTML = participantsCount;
+                usersBtnCon.appendChild(usersBtn);
+                usersBtnCon.appendChild(usersBtnIcon);
+                counterBadge.appendChild(counterBadgeSpan);
+                usersBtnCon.appendChild(counterBadge);
+                controlBarCon.appendChild(usersBtnCon);
 
-				if(!Q.info.isMobile) {
-					var screenSharingBtn = document.createElement('DIV');
-					screenSharingBtn.className = 'Streams_webrtc_screen-sharing-btn';
-					screenSharingBtn.innerHTML = icons.screen;
-				}
+                if(!tool.WebRTCClass.options().disconnectBtnInParticipants) {
+                    var disconnectBtnCon = document.createElement('DIV');
+                    disconnectBtnCon.className = 'Streams_webrtc_manage-users-btn';
+                    var disconnectBtn = document.createElement('DIV');
+                    disconnectBtn.className = 'Streams_webrtc_disconnect-btn';
+                    var disconnectBtnIcon = document.createElement('DIV');
+                    disconnectBtnIcon.className = 'Streams_webrtc_disconnect-btn-icon';
+                    disconnectBtnIcon.innerHTML = icons.disconnectIcon;
+                    disconnectBtn.appendChild(disconnectBtnIcon);
+                    disconnectBtnCon.appendChild(disconnectBtn);
+                    controlBarCon.appendChild(disconnectBtnCon);
+                }
 
-				cameraBtnCon.appendChild(cameraBtn);
-				cameraBtnCon.appendChild(cameraBtnIcon);
-				controlBarCon.appendChild(cameraBtnCon);
-				if(tool.WebRTCLib.conferenceControl.videoInputDevices.length > 1) { controlBarCon.appendChild(cameraSwitcherBtn);}
-				if(typeof cordova != 'undefined' && Q.info.isMobile) controlBarCon.appendChild(speakerBtn);
-				controlBarCon.appendChild(microphoneBtn);
-				textChatBtnCon.appendChild(textChatBtn);
-				textChatBtnCon.appendChild(textChatBtnIcon);
-				textChatCounterBadge.appendChild(textChatCounterBadgeSpan);
-				textChatBtnCon.appendChild(textChatCounterBadge);
-				controlBarCon.appendChild(textChatBtnCon);
-				usersBtnCon.appendChild(usersBtn);
-				usersBtnCon.appendChild(usersBtnIcon);
-				counterBadge.appendChild(counterBadgeSpan);
-				usersBtnCon.appendChild(counterBadge);
-				controlBarCon.appendChild(usersBtnCon);
-				controlBar.appendChild(controlBarCon);
+                controlBar.appendChild(controlBarCon);
 
 				tool.controlBar = controlBar;
 				tool.cameraBtn = cameraBtn;
@@ -481,22 +494,36 @@
 
 
 				cameraBtn.addEventListener('touchend', function () {
+                    var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
+                    if(resizeTool && resizeTool.state.appliedRecently) return;
 					tool.cameraButtonHandler()
 				})
 
 				/*cameraSwitcherBtn.addEventListener('mouseup', function () {
 					tool.toggleCameras();
 				})*/
+
 				speakerBtn.addEventListener('mouseup', function () {
+                    var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
+                    if(resizeTool && resizeTool.state.appliedRecently) return;
 					tool.toggleAudioOutputSpeaker();
 				})
 				microphoneBtn.addEventListener('mouseup', function () {
+                    var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
+                    if(resizeTool && resizeTool.state.appliedRecently) return;
 					tool.toggleAudio();
 				})
 
 				/*textChatBtnCon.addEventListener('mouseup', function () {
 					tool.textChat.toggle();
 				})*/
+
+				if(disconnectBtn) {
+                    disconnectBtn.addEventListener('mouseup', function () {
+                        Q.Dialogs.pop();
+                        tool.state.webrtcClass.stop();
+                    })
+                }
 
 				return controlBar;
 			},
@@ -658,6 +685,8 @@
 					if(Q.info.isMobile || Q.info.isTablet) {
 
 						tool.textChatBtn.addEventListener('click', function (e) {
+                            var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
+                            if(resizeTool && resizeTool.state.appliedRecently) return;
 							if(tool.textChat.chatTool == null) initChat();
 							tool.textChat.toggle();
 						});
@@ -2413,17 +2442,24 @@
 
 					var topBtns = document.createElement('DIV');
 					topBtns.className = 'participants-list-btns';
-					var disconnectBtn = document.createElement('DIV');
-					disconnectBtn.className = 'Streams_webrtc_disconnect-btn';
-					disconnectBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.disconnect", tool.textes);
-					disconnectBtn.innerHTML = icons.disconnectIcon;
+                    if(tool.WebRTCClass.options().disconnectBtnInParticipants) {
+                        var disconnectBtn = document.createElement('DIV');
+                        disconnectBtn.className = 'Streams_webrtc_disconnect-btn';
+                        disconnectBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.disconnect", tool.textes);
+                        disconnectBtn.innerHTML = icons.disconnectIcon;
+                        topBtns.appendChild(disconnectBtn);
+                    }
 
-					var floatingViewModeBtn = document.createElement('DIV');
-					floatingViewModeBtn.className = 'Streams_webrtc_floating-mode-btn';
-					floatingViewModeBtn.dataset.viewMode = 'floatingView';
-					floatingViewModeBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.floatingScreens", tool.textes);
-					var floatingViewModeBtnIcon = document.createElement('SPAN');
-					floatingViewModeBtnIcon.innerHTML = icons.freeViewModeOff;
+                    if(!Q.info.isMobile) {
+                        var floatingViewModeBtn = document.createElement('DIV');
+                        floatingViewModeBtn.className = 'Streams_webrtc_floating-mode-btn';
+                        floatingViewModeBtn.dataset.viewMode = 'floatingView';
+                        floatingViewModeBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.floatingScreens", tool.textes);
+                        var floatingViewModeBtnIcon = document.createElement('SPAN');
+                        floatingViewModeBtnIcon.innerHTML = icons.freeViewModeOff;
+                        floatingViewModeBtn.appendChild(floatingViewModeBtnIcon);
+                        topBtns.appendChild(floatingViewModeBtn);
+                    }
 
 					var tiledViewModeBtn = document.createElement('DIV');
 					tiledViewModeBtn.className = 'Streams_webrtc_tiled-mode-btn';
@@ -2431,6 +2467,9 @@
 					tiledViewModeBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.tiledScreens", tool.textes);
 					var tiledViewModeBtnIcon = document.createElement('SPAN');
 					tiledViewModeBtnIcon.innerHTML = icons.tiledViewModeOff;
+                    tiledViewModeBtn.appendChild(tiledViewModeBtnIcon);
+                    topBtns.appendChild(tiledViewModeBtn);
+
 
 					var loudestExceptMeBtn = document.createElement('DIV');
 					loudestExceptMeBtn.className = 'Streams_webrtc_lem-mode-btn';
@@ -2438,6 +2477,8 @@
 					loudestExceptMeBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.loudestExceptMe", tool.textes);
 					var loudestExceptMeBtnIcon = document.createElement('SPAN');
 					loudestExceptMeBtnIcon.innerHTML = icons.loudestExceptMeOff;
+                    loudestExceptMeBtn.appendChild(loudestExceptMeBtnIcon);
+                    topBtns.appendChild(loudestExceptMeBtn);
 
 					var loudestBtn = document.createElement('DIV');
 					loudestBtn.className = 'Streams_webrtc_loudest-mode-btn';
@@ -2445,13 +2486,17 @@
 					loudestBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.maximizeLoudest", tool.textes);
 					var loudestBtnIcon = document.createElement('SPAN');
 					loudestBtnIcon.innerHTML = icons.maximizeLoudestOff;
+                    loudestBtn.appendChild(loudestBtnIcon);
+                    topBtns.appendChild(loudestBtn);
 
 					/*var maximizeStaticBtn = document.createElement('DIV');
 					maximizeStaticBtn.className = 'Streams_webrtc_loudest-mode-btn';
 					maximizeStaticBtn.dataset.viewMode = 'maximizeStatic';
 					maximizeStaticBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.staticMaximized", tool.textes);
 					var maximizeStaticBtnIcon = document.createElement('SPAN');
-					maximizeStaticBtnIcon.innerHTML = icons.staticMaximizeOff;*/
+					maximizeStaticBtnIcon.innerHTML = icons.staticMaximizeOff;
+					maximizeStaticBtn.appendChild(maximizeStaticBtnIcon);
+					topBtns.appendChild(maximizeStaticBtn);*/
 
 					var fullScreenBtn = document.createElement('DIV');
                     fullScreenBtn.className = 'Streams_webrtc_fullScreen-mode-btn';
@@ -2459,30 +2504,21 @@
                     fullScreenBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.fullScreen", tool.textes);
 					var fullScreenBtnIcon = document.createElement('SPAN');
                     fullScreenBtnIcon.innerHTML = icons.staticMaximizeOff;
-
-					var manualLayoutBtn = document.createElement('DIV');
-					manualLayoutBtn.className = 'Streams_webrtc_loudest-mode-btn';
-					manualLayoutBtn.dataset.viewMode = 'manual';
-					manualLayoutBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.manual", tool.textes);
-					var manualLayoutBtnIcon = document.createElement('SPAN');
-					manualLayoutBtnIcon.innerHTML = icons.dragIconOff;
-
-
-					topBtns.appendChild(disconnectBtn);
-					floatingViewModeBtn.appendChild(floatingViewModeBtnIcon);
-					if(!Q.info.isMobile) topBtns.appendChild(floatingViewModeBtn);
-					tiledViewModeBtn.appendChild(tiledViewModeBtnIcon);
-					topBtns.appendChild(tiledViewModeBtn);
-					loudestExceptMeBtn.appendChild(loudestExceptMeBtnIcon);
-					topBtns.appendChild(loudestExceptMeBtn);
-					loudestBtn.appendChild(loudestBtnIcon);
-					topBtns.appendChild(loudestBtn);/*
-					maximizeStaticBtn.appendChild(maximizeStaticBtnIcon);
-					topBtns.appendChild(maximizeStaticBtn);*/
                     fullScreenBtn.appendChild(fullScreenBtnIcon);
-					topBtns.appendChild(fullScreenBtn);
-					manualLayoutBtn.appendChild(manualLayoutBtnIcon);
-					if(!Q.info.isMobile) topBtns.appendChild(manualLayoutBtn);
+                    topBtns.appendChild(fullScreenBtn);
+
+                    if(!Q.info.isMobile) {
+                        var manualLayoutBtn = document.createElement('DIV');
+                        manualLayoutBtn.className = 'Streams_webrtc_loudest-mode-btn';
+                        manualLayoutBtn.dataset.viewMode = 'manual';
+                        manualLayoutBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.manual", tool.textes);
+                        var manualLayoutBtnIcon = document.createElement('SPAN');
+                        manualLayoutBtnIcon.innerHTML = icons.dragIconOff;
+                        manualLayoutBtn.appendChild(manualLayoutBtnIcon);
+                        topBtns.appendChild(manualLayoutBtn);
+                    }
+
+
 					participantsListCon.appendChild(topBtns)
 
 					var buttonsArr = [
@@ -2618,7 +2654,9 @@
 
 						tool.usersBtn.addEventListener('touchend', function (e) {
 							//tool.usersBtn.parentNode.classList.toggle('Streams_webrtc_hover');
-							Q.Dialogs.push({
+                            var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
+                            if(resizeTool && resizeTool.state.appliedRecently) return;
+                            Q.Dialogs.push({
 								title: "Participants",
 								className: 'Streams_webrtc_participants-list',
 								content: participantsListCon,
@@ -2639,7 +2677,7 @@
 									}, 3000)
 								}
 							});
-						});
+						}, true);
 
 					} else {
 						tool.usersBtn.addEventListener('mouseenter', function (e) {

@@ -253,7 +253,7 @@
 						} else window.addEventListener('mousemove', drag, { passive: false });
 					}
 
-					var stopMoving = function(container){
+					var stopMoving = function(e){
 						if(Q.info.isTouchscreen) {
 							window.removeEventListener('touchmove', drag, { passive: false });
 						} else window.removeEventListener('mousemove', drag, { passive: false });

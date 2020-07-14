@@ -62,11 +62,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             mediaDevicesDialog: {timeout:2000},
 			startWith: {
 				audio: true,
-				video: false
+				video: true
 			},
             showScreenSharingInSeparateScreen: true,
 			minimizeOnPageSwitching: true,
 			leaveOtherActiveRooms: true,
+            onlyOneScreenSharingAllowed: false,
+            disconnectBtnInParticipants: false,
 			liveStreaming: {
 				startFbLiveViaGoLiveDialog: false,
 				useRecordRTCLibrary: true,
@@ -1427,6 +1429,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 						audio: false,
 						startWith: _options.startWith,
 						streams: _options.streams != null ? _options.streams : null,
+                        onlyOneScreenSharingAllowed: _options.onlyOneScreenSharingAllowed,
 						liveStreaming: _options.liveStreaming,
 						TwilioInstance: TwilioInstance,
 						debug: _debug
@@ -1547,6 +1550,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					audio: false,
 					startWith: _options.startWith,
 					streams: _options.streams != null ? _options.streams : null,
+                    onlyOneScreenSharingAllowed: _options.onlyOneScreenSharingAllowed,
 					liveStreaming: _options.liveStreaming,
                     showScreenSharingInSeparateScreen: _options.showScreenSharingInSeparateScreen,
                     turnCredentials: turnCredentials,
@@ -3323,6 +3327,7 @@ return;
 				 * @return {Array} List of DOMRects that will be passed to Q.layout.
 				 */
 				minimizedOrMaximizedScreenGrid: function (container, count, elementToWrap, maximized) {
+				    console.log('minimizedOrMaximizedScreenGrid', elementToWrap);
 					var wrapElement = elementToWrap;
 					var elementToWrap = elementToWrap.getBoundingClientRect();
 					var roomScreens = WebRTCconference.screens();
