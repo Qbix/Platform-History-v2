@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "आपणास या संभाषणात सामील होण्याची परवानगी नाही.",
         "startedConversation": "संभाषण सुरू केले",
         "RealTimeCall": "रीअल टाइम कॉल",
-        "SearchByName": "नावाने शोधा"
+        "SearchByName": "नावाने शोधा",
+        "Notifications": {
+            "Visit": "{{999} the गप्पांना भेट देत आहे",
+            "Join": "{{999} the गप्पांमध्ये सामील झाले",
+            "Leave": "The {999} यांनी गप्पा सोडल्या",
+            "RelatedTo": "{{999} ने एक {{stream.displayType}} प्रारंभ केला"
+        }
     },
     "notifications": {
         "*": "संदेश {{& message.fields.type}} वर {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "मजकूर",
             "byFacebook": "फेसबुक",
             "byTwitter": "ट्विटर",
-            "scannedQR": "कोड स्कॅन केला असल्यास {{999.."
+            "scannedQR": "कोड स्कॅन केला असल्यास {{999..",
+            "copyLink": "आमंत्रित दुवा कॉपी करण्यासाठी {{999.."
         },
         "email": {
             "subject": "अहो, हे तपासा",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "आपल्याला आमंत्रित केले गेले आहे. {{99 9}} स्वीकारण्यासाठी आणि सामील होण्यासाठी येथे."
-        }
+        },
+        "command": "आमंत्रित करा",
+        "youCanNowPaste": "लोकांना आमंत्रित करण्यासाठी आपण आता हा दुवा कुठेतरी पेस्ट करू शकता"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "क्लिपबोर्डवर दुवा कॉपी केला",
             "codeCopiedToCb": "क्लिपबोर्डवर कोड कॉपी केली",
             "userHasNoVideo": "सहभागीकडे कोणताही व्हिडिओ नाही",
-            "openInBrowserAlert": "परिषदेत सामील होण्यासाठी सफारी ब्राउझरमध्ये दुवा उघडा."
+            "openInBrowserAlert": "परिषदेत सामील होण्यासाठी सफारी ब्राउझरमध्ये दुवा उघडा.",
+            "youBeganVideoRecording": "आपण या परिषदेची नोंद सुरू केली",
+            "youStoppedVideoRecording": "आपण ही परिषद रेकॉर्ड करणे थांबविले आहे"
         },
         "settingsPopup": {
             "webCamera": "वेब कॅमेरा",
@@ -173,7 +184,15 @@
             "fbStartLive": "थेट जा",
             "fbStopLive": "थेट लाइव्ह",
             "fbEmbedCode": "एम्बेड करा",
-            "copy": "कॉपी करा"
+            "copy": "कॉपी करा",
+            "turnOffVideo": "कॅमेरा \/ स्क्रीन सामायिकरण बंद करा",
+            "turnOffScreenSharing": "स्क्रीन सामायिकरण बंद करा",
+            "cameraIsTurnedOff": "कॅमेरा बंद आहे",
+            "startRecording": "रेकॉर्डिंग प्रारंभ करा",
+            "stopRecording": "रेकॉर्डिंग थांबवा",
+            "recordingInProgress": "रेकॉर्डिंग प्रगतीपथावर आहे ...",
+            "publishOnTimeline": "टाइमलाइनवर प्रकाशित करा",
+            "publishToGroup": "गटामध्ये प्रकाशित करा"
         },
         "participantsPopup": {
             "disconnect": "डिस्कनेक्ट करा",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "मला सोडून सर्वात मोठ्याने",
             "maximizeLoudest": "लाउडस्ट वाढवा",
             "staticMaximized": "स्टॅटिक मॅक्सिमाइझ्ड",
-            "manual": "मॅन्युअल"
-        }
+            "manual": "मॅन्युअल",
+            "fullScreen": "पूर्ण स्क्रीन",
+            "turnOffCamera": "व्हिडिओ लपवा",
+            "turnOffAudio": "ऑडिओ नि: शब्द करा",
+            "turnOffScreenSharing": "स्क्रीन सामायिकरण लपवा",
+            "turnOnCamera": "व्हिडिओ दर्शवा",
+            "turnOnAudio": "ऑडिओ सशब्द करा",
+            "turnOnScreenSharing": "स्क्रीन सामायिकरण दर्शवा"
+        },
+        "notAllowedToJoinCall": "आपणास या प्रवाहामध्ये सामील होण्याची परवानगी नाही.",
+        "streamTitle": "} {999}} थेट कॉल"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "जतन करा",
         "Delete": "हटवा",
         "Submenu": "सबमेनू"
+    },
+    "errors": {
+        "HiddenFromYou": "ही सामग्री आपल्यापासून लपलेली आहे."
     }
 }

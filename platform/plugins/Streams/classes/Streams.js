@@ -371,7 +371,7 @@ Streams.listen = function (options, servers) {
 	}
 	
 	// Start internal server
-	var server = Q.listen();
+	var server = Q.listen();	
 	server.attached.express.post('/Q/node', Streams_request_handler);
 
 	// Start external socket server

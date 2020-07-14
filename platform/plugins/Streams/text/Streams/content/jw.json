@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Sampeyan ora duwe idin kanggo melu ing obrolan iki.",
         "startedConversation": "miwiti pacelathon",
         "RealTimeCall": "Telpon Real Time",
-        "SearchByName": "Telusuri miturut jeneng"
+        "SearchByName": "Telusuri miturut jeneng",
+        "Notifications": {
+            "Visit": "{{displayName}} ngunjungi obrolan",
+            "Join": "{{displayName}} gabung ing obrolan",
+            "Leave": "{{displayName}} ninggalake obrolan",
+            "RelatedTo": "{{displayName}} miwiti {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Pesen {{& message.fields.type}} kanggo {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "Teks",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} yen kode wis dipindai"
+            "scannedQR": "{{ClickOrTap}} yen kode wis dipindai",
+            "copyLink": "{{ClickOrTap}} kanggo nyalin link ngajak"
         },
         "email": {
             "subject": "Eh, cek iki metu",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "Sampeyan wis diundang. {{ClickOrTap}} ing kene kanggo nampa lan gabung."
-        }
+        },
+        "command": "Ngundang",
+        "youCanNowPaste": "Sampeyan saiki bisa nempelake link iki ing endi wae kanggo ngundang wong"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "Link disalin menyang clipboard",
             "codeCopiedToCb": "Kode sing disalin menyang clipboard",
             "userHasNoVideo": "Peserta ora duwe video",
-            "openInBrowserAlert": "Bukak link ing browser Safari kanggo melu konferensi kasebut."
+            "openInBrowserAlert": "Bukak link ing browser Safari kanggo melu konferensi kasebut.",
+            "youBeganVideoRecording": "Sampeyan miwiti ngrekam konferensi iki",
+            "youStoppedVideoRecording": "Sampeyan mandheg ngrekam konferensi iki"
         },
         "settingsPopup": {
             "webCamera": "Kamera Web",
@@ -173,7 +184,15 @@
             "fbStartLive": "Go Urip",
             "fbStopLive": "Pungkasan Urip",
             "fbEmbedCode": "Embed",
-            "copy": "Nyalin"
+            "copy": "Nyalin",
+            "turnOffVideo": "Pateni enggo bareng kamera \/ layar",
+            "turnOffScreenSharing": "Pateni enggo bareng layar",
+            "cameraIsTurnedOff": "Kamera dipateni",
+            "startRecording": "Miwiti Rekam",
+            "stopRecording": "Mungkasi Rekam",
+            "recordingInProgress": "Ngrekam saiki",
+            "publishOnTimeline": "Nerbitake garis wektu",
+            "publishToGroup": "Publish menyang klompok"
         },
         "participantsPopup": {
             "disconnect": "Pedhot",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "Paling Ora Kajaba Aku",
             "maximizeLoudest": "Ngoptimalake Loudest",
             "staticMaximized": "Statis Maksimal",
-            "manual": "Manual"
-        }
+            "manual": "Manual",
+            "fullScreen": "Layar Lengkap",
+            "turnOffCamera": "Singidaken video",
+            "turnOffAudio": "Audio bisu",
+            "turnOffScreenSharing": "Singidaken enggo bareng layar",
+            "turnOnCamera": "Tampilake video",
+            "turnOnAudio": "Audio sing ora umum",
+            "turnOnScreenSharing": "Tampilake nuduhake layar"
+        },
+        "notAllowedToJoinCall": "Sampeyan ora duwe idin kanggo gabung stream iki.",
+        "streamTitle": "{{1}} telpon langsung"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "Ngirit",
         "Delete": "Mbusak",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Konten iki didhelikake saka sampeyan."
     }
 }

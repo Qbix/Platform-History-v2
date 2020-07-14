@@ -43,7 +43,8 @@
             "title": "Тамосро интихоб кунед",
             "CreateAccount": "+ Тамос нав",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create ёфт нашуд",
-            "SearchByName": "Ҷустуҷӯ аз рӯи ном"
+            "SearchByName": "Ҷустуҷӯ аз рӯи ном",
+            "EmptyContacts": "Тамос ёфт нашуд ..."
         },
         "select": {
             "title": "Интихоби алоқаи {{displayName}}"

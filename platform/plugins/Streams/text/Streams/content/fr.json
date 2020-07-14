@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Vous n&#39;avez pas la permission de rejoindre cette conversation.",
         "startedConversation": "a commencé une conversation",
         "RealTimeCall": "Appel en temps réel",
-        "SearchByName": "Rechercher par nom"
+        "SearchByName": "Rechercher par nom",
+        "Notifications": {
+            "Visit": "{{displayName}} visite le chat",
+            "Join": "{{displayName}} a rejoint le chat",
+            "Leave": "{{displayName}} a quitté le chat",
+            "RelatedTo": "{{displayName}} a commencé un {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Message {{& message.fields.type}} à {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "Masquer le partage d&#39;écran",
             "turnOnCamera": "Afficher la vidéo",
             "turnOnAudio": "Réactiver le son",
-            "turnOnScreenSharing": "Afficher le partage d&#39;écran"
+            "turnOnScreenSharing": "Afficher le partage d&#39;écran",
+            "fullScreen": "Plein écran"
         },
         "notAllowedToJoinCall": "Vous n&#39;êtes pas autorisé à rejoindre ce flux.",
         "streamTitle": "{{1}} appel en direct"

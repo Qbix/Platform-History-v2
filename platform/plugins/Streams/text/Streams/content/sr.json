@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Немате дозволу да се придружите овом разговору.",
         "startedConversation": "је започео разговор",
         "RealTimeCall": "Позив у реалном времену",
-        "SearchByName": "Тражи по имену"
+        "SearchByName": "Тражи по имену",
+        "Notifications": {
+            "Visit": "{{displayName}} посећује ћаскање",
+            "Join": "{{displayName}} придружио се ћаскању",
+            "Leave": "{{displayName}} напустио ћаскање",
+            "RelatedTo": "{{displayName}} покренуо је {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Порука {{& message.fields.type}} до {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "Сакриј дељење екрана",
             "turnOnCamera": "Прикажи видео",
             "turnOnAudio": "Занемаривање звука",
-            "turnOnScreenSharing": "Прикажи дељење екрана"
+            "turnOnScreenSharing": "Прикажи дељење екрана",
+            "fullScreen": "Цео екран"
         },
         "notAllowedToJoinCall": "Немате дозволу да се придружите овом току.",
         "streamTitle": "{999}} позив уживо"

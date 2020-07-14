@@ -1717,6 +1717,14 @@ class Db_Row implements Iterator
 			: null;
 
 		if (class_exists('Q')) {
+			/**
+			 * Gives an oppotunity to modify the row or do something else.
+			 * Also fired for rows during calls to insertManyAndExecute()
+			 * @event {before} Db/Row/$class_name/save
+			 * @param {Db_Row} row
+			 * @param {boolean} onDuplicateKeyUpdate
+			 * @param {array} modifiedFields
+			 */
 			if (false === Q::event(
 				"Db/Row/$this_class/save",
 				array(
@@ -1739,7 +1747,9 @@ class Db_Row implements Iterator
 		
 		$callback = array($this, "beforeSave");
 		if (is_callable($callback)) {
-			$modifiedFields = call_user_func($callback, $modifiedFields, $onDuplicateKeyUpdate, $commit);
+			$modifiedFields = call_user_func(
+				$callback, $modifiedFields, $onDuplicateKeyUpdate, $commit
+			);
 		}
 		if (! isset($modifiedFields) or $modifiedFields === false) {
 			return false;
@@ -1834,7 +1844,7 @@ class Db_Row implements Iterator
 			 * @param {array} modifiedFields
 			 * @param {array} where
 			 * @return {Db_Query|null}
-			 *	Modified query or NULL if no midifications are necessary
+			 *	Modified query or NULL if no modifications are necessary
 			 */
 			$temp = Q::event("Db/Row/$this_class/saveExecute", array(
 				'row' => $this,

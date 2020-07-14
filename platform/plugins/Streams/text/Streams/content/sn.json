@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Iwe hauna mvumo yekujoinha iyi hurukuro.",
         "startedConversation": "akatanga hurukuro",
         "RealTimeCall": "Nguva Yekufona Chaizvo",
-        "SearchByName": "Tsvaga nemazita"
+        "SearchByName": "Tsvaga nemazita",
+        "Notifications": {
+            "Visit": "{{displayName}} ari kushanyira chat",
+            "Join": "{{displayName}} akajoinha chat",
+            "Leave": "{{displayName}} akasiya chat",
+            "RelatedTo": "{{displayName}} akatanga {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Mharidzo kune (1000)",
@@ -73,7 +79,8 @@
             "byText": "Text",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} kana iyo kodhi yakaongororwa"
+            "scannedQR": "{{ClickOrTap}} kana iyo kodhi yakaongororwa",
+            "copyLink": "{{ClickOrTap}} kutevedzera kukoka link"
         },
         "email": {
             "subject": "Hey, chengeta izvi",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "Iwe wakokwa. Ikozvino kugamuchira nekubatana."
-        }
+        },
+        "command": "Koka",
+        "youCanNowPaste": "Iwe unogona ikozvino kuisa iyi link kune imwe nzvimbo kukoka vanhu"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "Chibatanidza chakapepetwa ku clipboard",
             "codeCopiedToCb": "Code yakapihwa ku clipboard",
             "userHasNoVideo": "Mutori wechikamu haana vhidhiyo",
-            "openInBrowserAlert": "Vhura chinongedzo muSafari browser kuti ubatane nemusangano."
+            "openInBrowserAlert": "Vhura chinongedzo muSafari browser kuti ubatane nemusangano.",
+            "youBeganVideoRecording": "Wakatanga kurekodha musangano uyu",
+            "youStoppedVideoRecording": "Wakarega kunyora musangano uyu"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -173,7 +184,15 @@
             "fbStartLive": "Enda Kurarama",
             "fbStopLive": "End Live",
             "fbEmbedCode": "Embed",
-            "copy": "Copy"
+            "copy": "Copy",
+            "turnOffVideo": "Dzima kamera \/ kugovera skrini",
+            "turnOffScreenSharing": "Dzima kugovera skrini",
+            "cameraIsTurnedOff": "Kamera yakadzimwa",
+            "startRecording": "Kutanga Kurekodha",
+            "stopRecording": "Regedza Kurekodha",
+            "recordingInProgress": "Rekodha riri kuenderera ...",
+            "publishOnTimeline": "Shambadza pane mutsara wenguva",
+            "publishToGroup": "Dhinda kune boka"
         },
         "participantsPopup": {
             "disconnect": "Regedza",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "Anodada Kunze Kwangu",
             "maximizeLoudest": "Kurisa Loudest",
             "staticMaximized": "Static Maximized",
-            "manual": "Manual"
-        }
+            "manual": "Manual",
+            "fullScreen": "Yakazara Screen",
+            "turnOffCamera": "Viga vhidhiyo",
+            "turnOffAudio": "Ridza mhere",
+            "turnOffScreenSharing": "Viga kugoverana skrini",
+            "turnOnCamera": "Ratidza vhidhiyo",
+            "turnOnAudio": "Regedza odhiyo",
+            "turnOnScreenSharing": "Ratidza kugovana skrini"
+        },
+        "notAllowedToJoinCall": "Iwe hauna mvumo yekujoinha rwizi urwu.",
+        "streamTitle": "{{1}} chaiyo yekufona"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "Chengetedza",
         "Delete": "Delete",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Izvi zvirimo zvakavanzika kubva kwauri."
     }
 }

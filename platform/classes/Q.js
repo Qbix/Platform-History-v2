@@ -2109,7 +2109,7 @@ Q.normalize = function _Q_normalize(text, replacement, characters, numChars, kee
 Q.servers = {};
 
 /**
- * Starts internal server to listen for messages from PHP processes and other things.
+ * Starts http or https server to listen for messages from PHP processes and other things.
  * Uses the Q/node/port and Q/node/host config fields.
  * Make sure to protect the communication using a firewall.
  * @static
@@ -3340,6 +3340,7 @@ Sp.queryField = function Q_queryField(name, value) {
 		Q.each(name, function (key, value) {
 			result = result.queryField(key, value);
 		});
+		return result;
 	} else if (value === undefined) {
 		return Q.parseQueryString(what) [ name ];
 	} else if (value === null) {

@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Anda tidak memiliki izin untuk bergabung dengan percakapan ini.",
         "startedConversation": "memulai percakapan",
         "RealTimeCall": "Panggilan Waktu Nyata",
-        "SearchByName": "Cari berdasarkan nama"
+        "SearchByName": "Cari berdasarkan nama",
+        "Notifications": {
+            "Visit": "{{displayName}} sedang mengunjungi obrolan",
+            "Join": "{{displayName}} bergabung dengan obrolan",
+            "Leave": "{{displayName}} meninggalkan obrolan",
+            "RelatedTo": "{{displayName}} memulai {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Pesan {{& message.fields.type}} ke {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "Teks",
             "byFacebook": "Facebook",
             "byTwitter": "Kericau",
-            "scannedQR": "{{ClickOrTap}} jika kode telah dipindai"
+            "scannedQR": "{{ClickOrTap}} jika kode telah dipindai",
+            "copyLink": "{{ClickOrTap}} untuk menyalin tautan undangan"
         },
         "email": {
             "subject": "Hei, lihat ini",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "Anda telah diundang. {{ClickOrTap}} di sini untuk menerima dan bergabung."
-        }
+        },
+        "command": "Undang",
+        "youCanNowPaste": "Anda sekarang dapat menempelkan tautan ini di suatu tempat untuk mengundang orang"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "Tautan disalin ke papan klip",
             "codeCopiedToCb": "Kode disalin ke papan klip",
             "userHasNoVideo": "Peserta tidak memiliki video",
-            "openInBrowserAlert": "Buka tautan di browser Safari untuk bergabung dengan konferensi."
+            "openInBrowserAlert": "Buka tautan di browser Safari untuk bergabung dengan konferensi.",
+            "youBeganVideoRecording": "Anda mulai merekam konferensi ini",
+            "youStoppedVideoRecording": "Anda berhenti merekam konferensi ini"
         },
         "settingsPopup": {
             "webCamera": "Kamera web",
@@ -173,7 +184,15 @@
             "fbStartLive": "Hiduplah",
             "fbStopLive": "Akhiri Langsung",
             "fbEmbedCode": "Menanamkan",
-            "copy": "Salinan"
+            "copy": "Salinan",
+            "turnOffVideo": "Nonaktifkan berbagi kamera \/ layar",
+            "turnOffScreenSharing": "Matikan berbagi layar",
+            "cameraIsTurnedOff": "Kamera dimatikan",
+            "startRecording": "Mulai merekam",
+            "stopRecording": "Hentikan rekaman",
+            "recordingInProgress": "Rekaman sedang berlangsung ...",
+            "publishOnTimeline": "Terbitkan pada timeline",
+            "publishToGroup": "Terbitkan ke grup"
         },
         "participantsPopup": {
             "disconnect": "Memutuskan",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "Paling Keras Kecuali Aku",
             "maximizeLoudest": "Maksimalkan Paling Keras",
             "staticMaximized": "Dimaksimalkan Statis",
-            "manual": "Manual"
-        }
+            "manual": "Manual",
+            "fullScreen": "Layar penuh",
+            "turnOffCamera": "Sembunyikan video",
+            "turnOffAudio": "Membisukan audio",
+            "turnOffScreenSharing": "Sembunyikan berbagi layar",
+            "turnOnCamera": "Tampilkan video",
+            "turnOnAudio": "Suarakan audio",
+            "turnOnScreenSharing": "Tampilkan berbagi layar"
+        },
+        "notAllowedToJoinCall": "Anda tidak memiliki izin untuk bergabung dengan aliran ini.",
+        "streamTitle": "{{1}} panggilan langsung"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "Menyimpan",
         "Delete": "Menghapus",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Konten ini disembunyikan dari Anda."
     }
 }

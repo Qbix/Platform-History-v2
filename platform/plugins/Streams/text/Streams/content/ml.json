@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "ഈ സംഭാഷണത്തിൽ ചേരാൻ നിങ്ങൾക്ക് അനുമതിയില്ല.",
         "startedConversation": "ഒരു സംഭാഷണം ആരംഭിച്ചു",
         "RealTimeCall": "തത്സമയ കോൾ",
-        "SearchByName": "പേര് പ്രകാരം തിരയുക"
+        "SearchByName": "പേര് പ്രകാരം തിരയുക",
+        "Notifications": {
+            "Visit": "{{999} the ചാറ്റ് സന്ദർശിക്കുന്നു",
+            "Join": "{{999} the ചാറ്റിൽ ചേർന്നു",
+            "Leave": "{{999} the ചാറ്റ് വിട്ടു",
+            "RelatedTo": "{{displayName}} ഒരു {{stream.displayType}} ആരംഭിച്ചു"
+        }
     },
     "notifications": {
         "*": "{{& message.fields.type}} മുതൽ {{& stream.fields.title}} വരെ സന്ദേശം",
@@ -73,7 +79,8 @@
             "byText": "വാചകം",
             "byFacebook": "ഫേസ്ബുക്ക്",
             "byTwitter": "ട്വിറ്റർ",
-            "scannedQR": "കോഡ് സ്കാൻ ചെയ്തിട്ടുണ്ടെങ്കിൽ {{ClickOrTap}}"
+            "scannedQR": "കോഡ് സ്കാൻ ചെയ്തിട്ടുണ്ടെങ്കിൽ {{ClickOrTap}}",
+            "copyLink": "ക്ഷണ ലിങ്ക് പകർത്താൻ {{ClickOrTap}}"
         },
         "email": {
             "subject": "ഹേയ്, ഇത് പരിശോധിക്കുക",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "നിങ്ങളെ ക്ഷണിച്ചു. സ്വീകരിക്കുന്നതിനും ചേരുന്നതിനും {{ClickOrTap}} ഇവിടെ."
-        }
+        },
+        "command": "ക്ഷണിക്കുക",
+        "youCanNowPaste": "ആളുകളെ ക്ഷണിക്കുന്നതിന് നിങ്ങൾക്ക് ഇപ്പോൾ എവിടെയെങ്കിലും ഈ ലിങ്ക് ഒട്ടിക്കാൻ കഴിയും"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "ലിങ്ക് ക്ലിപ്പ്ബോർഡിലേക്ക് പകർത്തി",
             "codeCopiedToCb": "കോഡ് ക്ലിപ്പ്ബോർഡിലേക്ക് പകർത്തി",
             "userHasNoVideo": "പങ്കെടുക്കുന്നയാൾക്ക് വീഡിയോയില്ല",
-            "openInBrowserAlert": "കോൺഫറൻസിൽ ചേരാൻ സഫാരി ബ്രൗസറിൽ ലിങ്ക് തുറക്കുക."
+            "openInBrowserAlert": "കോൺഫറൻസിൽ ചേരാൻ സഫാരി ബ്രൗസറിൽ ലിങ്ക് തുറക്കുക.",
+            "youBeganVideoRecording": "നിങ്ങൾ ഈ കോൺഫറൻസ് റെക്കോർഡുചെയ്യാൻ തുടങ്ങി",
+            "youStoppedVideoRecording": "നിങ്ങൾ ഈ കോൺഫറൻസ് റെക്കോർഡുചെയ്യുന്നത് നിർത്തി"
         },
         "settingsPopup": {
             "webCamera": "വെബ് ക്യാമറ",
@@ -173,7 +184,15 @@
             "fbStartLive": "തത്സമയം പോകുക",
             "fbStopLive": "തത്സമയം അവസാനിപ്പിക്കുക",
             "fbEmbedCode": "ഉൾച്ചേർക്കുക",
-            "copy": "പകർത്തുക"
+            "copy": "പകർത്തുക",
+            "turnOffVideo": "ക്യാമറ \/ സ്‌ക്രീൻ പങ്കിടൽ ഓഫാക്കുക",
+            "turnOffScreenSharing": "സ്‌ക്രീൻ പങ്കിടൽ ഓഫാക്കുക",
+            "cameraIsTurnedOff": "ക്യാമറ ഓഫാക്കി",
+            "startRecording": "റെക്കോർഡിംഗ് ആരംഭിക്കുക",
+            "stopRecording": "റെക്കോർഡിംഗ് നിർത്തുക",
+            "recordingInProgress": "റെക്കോർഡിംഗ് പുരോഗതിയിലാണ് ...",
+            "publishOnTimeline": "ടൈംലൈനിൽ പ്രസിദ്ധീകരിക്കുക",
+            "publishToGroup": "ഗ്രൂപ്പിലേക്ക് പ്രസിദ്ധീകരിക്കുക"
         },
         "participantsPopup": {
             "disconnect": "വിച്ഛേദിക്കുക",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "ഞാനൊഴികെ ഉച്ചത്തിൽ",
             "maximizeLoudest": "ഉച്ചത്തിലുള്ളത് വർദ്ധിപ്പിക്കുക",
             "staticMaximized": "സ്റ്റാറ്റിക് മാക്സിമൈസ്ഡ്",
-            "manual": "മാനുവൽ"
-        }
+            "manual": "മാനുവൽ",
+            "fullScreen": "പൂർണ്ണ സ്ക്രീൻ",
+            "turnOffCamera": "വീഡിയോ മറയ്‌ക്കുക",
+            "turnOffAudio": "ഓഡിയോ നിശബ്ദമാക്കുക",
+            "turnOffScreenSharing": "സ്‌ക്രീൻ പങ്കിടൽ മറയ്‌ക്കുക",
+            "turnOnCamera": "വീഡിയോ കാണിക്കുക",
+            "turnOnAudio": "ഓഡിയോ നിശബ്ദമാക്കുക",
+            "turnOnScreenSharing": "സ്‌ക്രീൻ പങ്കിടൽ കാണിക്കുക"
+        },
+        "notAllowedToJoinCall": "ഈ സ്ട്രീമിൽ ചേരാൻ നിങ്ങൾക്ക് അനുമതിയില്ല.",
+        "streamTitle": "{{1}} തത്സമയ കോൾ"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "രക്ഷിക്കും",
         "Delete": "ഇല്ലാതാക്കുക",
         "Submenu": "ഉപമെനു"
+    },
+    "errors": {
+        "HiddenFromYou": "ഈ ഉള്ളടക്കം നിങ്ങളിൽ നിന്ന് മറച്ചിരിക്കുന്നു."
     }
 }

@@ -12,7 +12,7 @@ var util = require('util');
  * @namespace Q
  * @constructor
  * @param {http.Server} server
- * @param {Object} [options={}]
+ * @param {Object} [options={}] Options to pass to the socket.io Server listen() method
  */
 function Socket (server, options) {
 	var io = require('socket.io');
@@ -24,13 +24,15 @@ function Socket (server, options) {
  * @method listen
  * @param {Object} options Can be any options for the server.listen() in socket.io,
  *    as well as the following options:
- * @param {Object} options.host Set the hostname to listen on
- * @param {Object} options.port Set the port to listen on
+ * @param {Object} [options.host] Set the hostname to listen on
+ * @param {Object} [options.port] Set the port to listen on
+ * @param {Object} [options.socket={}] Options for the socket server
+ * @param {Object} [options.socket.path]
  * @param {Object} options.https If you use https, pass https options here (see Q.listen)
  */
 Socket.listen = function (options) {
 	options = options || {};
-	Q.extend(options, Q.Config.get(['Q', 'web', 'node', 'socket']));
+	Q.extend(options, Q.Config.get(['Q', 'node', 'socket']));
 	if (options.path) {
 		var baseUrl = Q.Config.get(['Q', 'web', 'appRootUrl'], options.baseUrl);
 		options.path = options.path.interpolate({baseUrl: baseUrl});

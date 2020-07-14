@@ -73,5 +73,30 @@
             "touchscreen": "Tulên xwe bikar bînin ku zoom û vekin",
             "notTouchscreen": "Ji bo zoom û vekişîna xwe ya çepê û bişkoka xwe bikar bînin"
         }
+    },
+    "timestamp": {
+        "lastNight": "şevê dî",
+        "lastEvening": "şeva borî",
+        "yesterday": "do",
+        "thisMorning": "vê sibehê",
+        "today": "îro",
+        "tonight": "îro êvarî",
+        "tomorrowMorning": "tom sibê",
+        "tomorrow": "sibê",
+        "hoursAgo": "} {999}} saetên berî",
+        "hourAgo": "99} 999}} saet berî",
+        "minuteAgo": "99 99 999}} minute ago",
+        "minutesAgo": "99 {999}} minutes ago",
+        "secondAgo": "99 999}} berê berê",
+        "secondsAgo": "99 {999}} seconds ago",
+        "fewSecondsAgo": "seconds berê",
+        "rightNow": "a niha",
+        "inSecond": "di {999}} duyemîn de",
+        "inSeconds": "in {999}} seconds",
+        "inMinute": "di. 999} deqîqê de",
+        "inMinutes": "di. 999}} deqîqeyan de",
+        "inHour": "di demjimêra} 999} de ye",
+        "inHours": "di demjimêra 99 999}} de",
+        "inUnderMinute": "di nav 1 hûrdeman de"
     }
 }

@@ -73,5 +73,30 @@
             "touchscreen": "ניצן דיין פינגער צו פארגרעסער און שלעפּן",
             "notTouchscreen": "ניצן דיין מויז און ראָד צו פארגרעסער און שלעפּן"
         }
+    },
+    "timestamp": {
+        "lastNight": "נעכטן נאכט",
+        "lastEvening": "לעצטע יוו",
+        "yesterday": "נעכטן",
+        "thisMorning": "דעם מאָרגן",
+        "today": "הייַנט",
+        "tonight": "הייַנט בייַ נאַכט",
+        "tomorrowMorning": "טאָם מאָרן",
+        "tomorrow": "מאָרגן",
+        "hoursAgo": "{{h}} שעה צוריק",
+        "hourAgo": "{{h}} שעה צוריק",
+        "minuteAgo": "{{m}} מינוט צוריק",
+        "minutesAgo": "{{m}} מינוט צוריק",
+        "secondAgo": "{{s}} רגע צוריק",
+        "secondsAgo": "{{s}} סעקונדעס צוריק",
+        "fewSecondsAgo": "סעקונדעס צוריק",
+        "rightNow": "גלייך יעצט",
+        "inSecond": "אין {{s}} סעקונדע",
+        "inSeconds": "אין {{s}} סעקונדעס",
+        "inMinute": "אין {{m}} מינוט",
+        "inMinutes": "אין {{m}} מינוט",
+        "inHour": "אין {{h}} שעה",
+        "inHours": "אין {{h}} שעה",
+        "inUnderMinute": "אין אונטער 1 מינוט"
     }
 }

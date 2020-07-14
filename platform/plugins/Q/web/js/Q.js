@@ -363,6 +363,7 @@ Sp.queryField = function Q_queryField(name, value) {
 		Q.each(name, function (key, value) {
 			result = result.queryField(key, value);
 		});
+		return result;
 	} else if (value === undefined) {
 		return Q.parseQueryString(what) [ name ];
 	} else if (value === null) {
@@ -1077,6 +1078,31 @@ Elp.remainingWidth = function (subpixelAccuracy, excludeMargins) {
 		w -= (_parseFloat(tcs.marginLeft) + _parseFloat(tcs.marginRight));
 	}
 	return subpixelAccuracy ? w : Math.floor(w-0.01);
+};
+
+/**
+ * Gets activated and future tools inside some html element.
+ * @method forEachTool
+ * @param {String} [name=""] Filter by name of the child tools, such as "Q/inplace"
+ * @param {Function} callback The callback to execute at the right time
+ * @param {String} [key]
+ */
+Elp.forEachTool = function _Q_Tool_prototype_forEachChild(name, callback, key) {
+	var element = this;
+	if (typeof name !== 'string') {
+		callback = name;
+		name = "";
+	}
+	// check already activated tools
+	Q.each(element.getElementsByClassName("Q_tool"), function () {
+		var tool = Q.Tool.from(this, name);
+		tool && Q.handle(callback, tool);
+	});
+	Q.Tool.onActivate(name).set(function () {
+		if (element.contains(this.element)) {
+			Q.handle(callback, this);
+		}
+	}, key);
 };
 
 if (!Elp.getElementsByClassName) {
@@ -4097,6 +4123,22 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 Q.Tool.beingActivated = undefined;
 
 /**
+ * Call this to find out if a tool was defined (but maybe not loaded).
+ * 
+ * @static
+ * @method defined
+ * @param {String} toolName the name of the tool
+ * @return {Function|String|undefined} the tool constuctor's constructor function,
+ *    the Javascript file url if not yet loaded, or undefined if not defined
+ */
+Q.Tool.defined = function (toolName) {
+	if (!toolName) {
+		return undefined;
+	}
+	return Q.Tool.constructors[Q.normalize(toolName)];
+};
+
+/**
  * Call this function to define default options for a tool constructor,
  * even if has not been loaded yet. Extends existing options with Q.extend().
  * @static
@@ -5108,6 +5150,63 @@ Q.Links = {
 			}
 		}
 		return url;
+	},
+	/**
+	 * Generates a link for opening a WhatsApp message to a number
+	 * @static
+	 * @method whatsApp
+	 * @param {String} [phoneNumber] This should include the country code, without the "+"
+	 * @param {String} [message] The text can include a URL that will be expanded in the chat
+	 * @return {String}
+	 */
+	whatsApp: function (phoneNumber, message) {
+		return 'whatsapp://send/?phone=' + phoneNumber
+			+ (message ? '&text=' + encodeURIComponent(message) : '');
+	},
+	/**
+	 * Generates a link for sharing a link in Telegram
+	 * @static
+	 * @method telegramShare
+	 * @param {String} [to] Phone number with country code e.g. "+1", or username starting with "@".
+	 *  If a username, then don't supply text or url, it can only open a window to chat.
+	 *  Set this to false and supply text (and optional url) to open Telegram and let the user
+	 *  choose Telegram users, channels and groups to share to.
+	 * @param {String} [text] The text to share, can contain a URL, so need to include the next parameter.
+	 * @param {String} [url] Optionally put a URL to share here, which will appear ahead of the text
+	 * @return {String}
+	 */
+	telegram: function (to, text, url) {
+		if (to && to[0] === '@') {
+			return 'tg://resolve?domain=' + to.substr(1);
+		}
+		return (url
+			? 'tg://msg_url?url=' + encodeURIComponent(url) + '&text=' + encodeURIComponent(text)
+			: 'tg://msg?text=' + encodeURIComponent(text)
+		) + (to ? '&to=' + to : '');
+	},
+	/**
+	 * Generates a link for sharing a link in Skype
+	 * @static
+	 * @method telegramShare
+	 * @param {String} [text] The text to share, can contain a URL
+	 * @param {String} [url] The URL to share
+	 * @return {String}
+	 */
+	skype: function (text, url) {
+		return 'https://web.skype.com/share?'
+			+ (text ? '&text=' + encodeURIComponent(text) : '')
+			+ (url ? '&url=' + encodeURIComponent(url) : '');
+	},
+	/**
+	 * Generates a link for opening in android chrome browser.
+	 * Usable in other browsers on Android.
+	 * @static
+	 * @method androidChrome
+	 * @param {String} [url]
+	 * @return {String}
+	 */
+	androidChrome: function (url) {
+		return 'googlechrome://navigate?url=' + url; // note: don't encodeURIComponent
 	}
 };
 
@@ -5617,11 +5716,12 @@ Q.Page = function (uriString) {
 Q.Page.push = function (url, title) {
 	var prevUrl = location.href;
 	url = Q.url(url);
-	if (url.substr(0, Q.info.baseUrl.length) !== Q.info.baseUrl) {
+	var baseUrl = Q.baseUrl();
+	if (!url.startsWith(baseUrl)) {
 		return;
 	}
 	var parts = url.split('#');
-	var path = (url.substr(Q.info.baseUrl.length+1) || '');
+	var path = (url.substr(Q.baseUrl().length+1) || '');
 	if (history.pushState) {
 		history.pushState({}, null, url);
 	} else {
@@ -5643,7 +5743,7 @@ Q.Page.push = function (url, title) {
 	if (typeof title === 'string') {
 		document.title = title;
 	}
-	Q_hashChangeHandler.currentUrl = url.substr(Q.info.baseUrl.length + 1);
+	Q_hashChangeHandler.currentUrl = url.substr(baseUrl.length + 1);
 	Q.info.url = url;
 	Q.handle(Q.Page.onPush, Q, [url, title, prevUrl]);
 };
@@ -5792,8 +5892,9 @@ Q.init = function _Q_init(options) {
 			Q.ensure(root.JSON, Q.libraries.json, _ready);
 		}
 
+		var baseUrl = Q.baseUrl();
 		if (options && options.isLocalFile) {
-			Q.loadUrl(Q.info.baseUrl, {
+			Q.loadUrl(baseUrl, {
 				ignoreHistory: true,
 				skipNonce: true,
 				onActivate: _getJSON,
@@ -5878,14 +5979,15 @@ Q.init = function _Q_init(options) {
  */
 Q.ready = function _Q_ready() {
 	Q.loadNonce(function readyWithNonce() {
+		var baseUrl = Q.baseUrl();
 		_isReady = true;
 		if (Q.info.isLocalFile) {
 			// This is an HTML file loaded from the local filesystem
 			var url = location.hash.queryField('url');
 			if (url === undefined) {
-				Q.handle(Q.info.baseUrl);
+				Q.handle(baseUrl);
 			} else {
-				Q.handle(url.indexOf(Q.info.baseUrl) == -1 ? Q.info.baseUrl+'/'+url : url);
+				Q.handle(url.indexOf(baseUrl) == -1 ? baseUrl+'/'+url : url);
 			}
 			return;
 		}
@@ -5971,7 +6073,8 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
 		Q.handle(callback, context, args);
 		return;
 	}
-	var p1 = Q.info.baseUrl && Q.info.baseUrl.parseUrl();
+	var baseUrl = Q.baseUrl();
+	var p1 = baseUrl && baseUrl.parseUrl();
 	var p2 = location.href.parseUrl();
 	if (!p1 || p1.host !== p2.host || (p1.scheme !== p2.scheme && p2.scheme === 'https')) {
 		Q.handle(callback, context, args); // nonce won't load cross-origin anyway
@@ -6654,6 +6757,38 @@ Q.layout = function _Q_layout(element) {
  * Call this to fix the iOS Safari bug where dynamically
  * added content doesn't cause the scrolling parent element
  * to start scrolling when -webkit-overflow-scrolling is enabled.
+ * @param {Element} element the element to scroll into view, if needed
+ * @param {Object} options see https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
+ * @param {String} [options.behavior] can be "auto" or "smooth"
+ * @param {String} [options.block] can be "start", "center", "end" or "nearest"
+ * @param {String} [options.inline] can be "start", "center", "end" or "nearest"
+ * @param {Boolean} [options.unlessOffscreenHorizontally]
+ * @return {Boollean} Whether the native scrollIntoView(options) was called on the element.
+ */
+Q.scrollIntoView = function _Q_fixScrollingParent(element, options) {
+	if (!element || typeof element.scrollIntoView !== 'function') {
+		return false;
+	}
+	options = options || {};
+	if (options.unlessOffscreenHorizontally) {
+		var p = element, er = element.getBoundingClientRect();
+		while (p = p.parentNode) {
+			var pr = p.getBoundingClientRect && p.getBoundingClientRect();
+			if (pr && er.left < pr.left) {
+				return false;
+			}
+		}
+		delete options.unlessOffscreenHorizontally;
+	}
+	element.scrollIntoView(options);
+	return true;
+};
+
+/**
+ * Call this to fix the iOS Safari bug where dynamically
+ * added content doesn't cause the scrolling parent element
+ * to start scrolling when -webkit-overflow-scrolling is enabled.
+ * @param {Element} element
  */
 Q.fixScrollingParent = function _Q_fixScrollingParent(element) {
 	if (Q.info.platform !== 'ios') {
@@ -6708,9 +6843,10 @@ Q.load = function _Q_load(plugins, callback, options) {
 	if (typeof plugins === 'string') {
 		plugins = plugins.split(' ').map(function (str) { return str.trim(); });
 	}
+	var baseUrl = Q.baseUrl();
 	Q.each(plugins, function (i, plugin) {
 		if (plugin && !Q.plugins[plugin]) {
-			urls.push(Q.info.baseUrl+'/Q/plugins/'+plugin+'/js/'+plugin+'.js');
+			urls.push(baseUrl+'/Q/plugins/'+plugin+'/js/'+plugin+'.js');
 		}
 	});
 	return Q.addScript(urls, callback, options);	
@@ -6723,7 +6859,7 @@ Q.load = function _Q_load(plugins, callback, options) {
  * @method url
  * @param {Object|String|null} what
  *  Usually the stuff that comes after the base URL.
- *  If you don't provide this, then it just returns the Q.info.baseUrl
+ *  If you don't provide this, then it just returns the Q.baseUrl()
  * @param {Object} fields
  *  Optional fields to append to the querystring.
  *  Fields containing null and undefined are skipped.
@@ -6746,7 +6882,7 @@ Q.url = function _Q_url(what, fields, options) {
 		}
 		what2 = parts[0] + (parts[1] ? '?' + parts[1] : '');
 	}
-	var baseUrl = (options && options.baseUrl) || Q.info.proxyBaseUrl || Q.info.baseUrl;
+	var baseUrl = (options && options.baseUrl) || Q.baseUrl();
 	what3 = Q.interpolateUrl(what2);
 	if (what3.isUrl()) {
 		if (what3.startsWith(baseUrl)) {
@@ -6817,7 +6953,7 @@ Q.interpolateUrl = function (url, additional) {
 		return url;
 	}
 	var substitutions = {};
-	substitutions['baseUrl'] = substitutions[Q.info.app] = Q.info.baseUrl;
+	substitutions['baseUrl'] = substitutions[Q.info.app] = Q.baseUrl();
 	substitutions['Q'] = Q.pluginBaseUrl('Q');
 	for (var plugin in Q.plugins) {
 		substitutions[plugin] = Q.pluginBaseUrl(plugin);
@@ -6901,7 +7037,7 @@ Q.ajaxExtend = function _Q_ajaxExtend(what, slotNames, options) {
 	if (typeof what == 'string') {
 		var p = what.split('#');
 		var what2 = p[0];
-		if (Q.info && Q.info.baseUrl === what2) {
+		if (Q.info && Q.baseUrl() === what2) {
 			what2 += '/'; // otherwise we will have 301 redirect with trailing slash on most servers
 		}
 		what2 += (what2.indexOf('?') < 0) ? '?' : '&';
@@ -7238,7 +7374,8 @@ Q.request = function (url, slotNames, callback, options) {
 			return;
 		}
 
-		if (!o.query && o.xhr !== false && url.startsWith(Q.info.baseUrl)) {
+		if (!o.query && o.xhr !== false
+		&& (url.startsWith(Q.baseUrl()))) {
 			_onStart();
 			return xhr(_onResponse, _onCancel);
 		}
@@ -8143,7 +8280,7 @@ Q.findStylesheet = function (href) {
  * @param {number} [options.expires] number of milliseconds until expiration. Defaults to session cookie.
  * @param {String} [options.domain] the domain to set cookie. If you leave it blank,
  *  then the cookie will be set as a host-only cookie, meaning that subdomains won't get it.
- * @param {String} [options.path] path to set cookie. Defaults to path from Q.info.baseUrl
+ * @param {String} [options.path] path to set cookie. Defaults to path from Q.baseUrl()
  * @return {String|null}
  *   If only name was passed, returns the stored value of the cookie, or null.
  */
@@ -8152,7 +8289,7 @@ Q.cookie = function _Q_cookie(name, value, options) {
 	options = options || {};
 	if (typeof value != 'undefined') {
 		var path, domain = '';
-		parts = Q.info.baseUrl.split('://');
+		parts = Q.baseUrl().split('://');
 		if ('path' in options) {
 			path = ';path='+options.path;
 		} else {
@@ -8448,8 +8585,9 @@ Q.activate = function _Q_activate(elem, options, callback, activateLazyLoad) {
  *  You can update the tool by implementing a handler for
  *  tool.Q.onRetain, which receives the old Q.Tool object, the new options and incoming element.
  *  After the event is handled, the tool's state will be extended with these new options.
- * @param {Element|String} source
- *  An HTML string or a Element which is not part of the DOM
+ * @param {Element|String|DocumentFragment} source
+ *  An HTML string or a Element which is not part of the DOM.
+ *  It is treated as a document fragment, and its contents are used to replace the container's contents.
  * @param {Object} options
  *  Optional. A hash of options, including:
  * @param {Array} [options.replaceElements] array of elements or ids of elements in the document to replace, even if they have "data-q-retain" attributes.
@@ -9124,12 +9262,13 @@ Q.handle = function _Q_handle(callables, /* callback, */ context, args, options)
 					callback = o.callback;
 				}
 			}
-			var sameDomain = callables.sameDomain(Q.info.baseUrl);
+			var baseUrl = Q.baseUrl();
+			var sameDomain = callables.sameDomain(baseUrl);
 			if (callables[0] === '#') {
 				root.location.hash = callables;
 			} else if (o.loadUsingAjax && sameDomain
 			&& (!o.target || o.target === true || o.target === '_self')) {
-				if (callables.search(Q.info.baseUrl) === 0) {
+				if (callables.search(baseUrl) === 0) {
 					// Use AJAX to refresh the page whenever the request is for a local page
 					Q.loadUrl(callables, Q.extend({
 						loadExtras: true,
@@ -9159,7 +9298,7 @@ Q.handle = function _Q_handle(callables, /* callback, */ context, args, options)
 					}
 					Q.formPost(callables, o.fields, method, {onLoad: o.callback, target: o.target});
 				} else {
-					if (Q.info && (callables === Q.info.baseUrl || callables === Q.info.proxyBaseUrl)) {
+					if (Q.info && callables === baseUrl) {
 						callables+= '/';
 					}
 					if (!o.target || o.target === true || o.target === '_self') {
@@ -9218,14 +9357,15 @@ Q.parseQueryString = function Q_parseQueryString(queryString, keys) {
 };
 
 function Q_hashChangeHandler() {
+	var baseUrl = Q.baseUrl();
 	var url = location.hash.queryField('url'), result = null;
 	if (url === undefined) {
-		url = root.location.href.split('#')[0].substr(Q.info.baseUrl.length + 1);
+		url = root.location.href.split('#')[0].substr(baseUrl.length + 1);
 	}
 	if (Q_hashChangeHandler.ignore) {
 		Q_hashChangeHandler.ignore = false;
 	} else if (url != Q_hashChangeHandler.currentUrl) {
-		Q.handle(url.indexOf(Q.info.baseUrl) == -1 ? Q.info.baseUrl + '/' + url : url);
+		Q.handle(url.indexOf(baseUrl) == -1 ? baseUrl + '/' + url : url);
 		result = true;
 	}
 	Q_hashChangeHandler.currentUrl = url;
@@ -9233,14 +9373,15 @@ function Q_hashChangeHandler() {
 }
 
 function Q_popStateHandler() {
+	var baseUrl = Q.baseUrl();
 	var url = root.location.href.split('#')[0], result = null;
 	if (Q.info.url === url) {
 		return; // we are already at this url
 	}
-	url = url.substr(Q.info.baseUrl.length + 1);
+	url = url.substr(baseUrl.length + 1);
 	if (url != Q_hashChangeHandler.currentUrl) {
 		Q.handle(
-			url.indexOf(Q.info.baseUrl) === 0 ? url : Q.info.baseUrl + '/' + url,
+			url.indexOf(baseUrl) === 0 ? url : baseUrl + '/' + url,
 			{
 				ignoreHistory: true,
 				quiet: true
@@ -9480,7 +9621,7 @@ Q.baseUrl = function _Q_host(where) {
 			return result;
 		}
 	}
-	return Q.info.baseUrl; // By default, return the base url of the app
+	return Q.info.proxyBaseUrl || Q.info.baseUrl; // By default, return the base url of the app
 };
 Q.baseUrl.routers = []; // functions returning a custom url
 
@@ -10011,9 +10152,16 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 		}
 		// If we have a disconnected socket that is not connecting.
 		// Forget this socket manager, we must connect another one
-		// because socket.io doesn't reconnect normally otherwise
+		// because g doesn't reconnect normally otherwise
+		var baseUrl = Q.baseUrl();
+		var parsed = url.parseUrl();
+		var host = parsed.scheme + '://' + parsed.host 
+			+ (parsed.port ? ':'+parsed.port : '');
+		if (url.startsWith(host+'/')) {
+			o.path = url.substr(host.length) + Q.getObject('Q.info.socketPath');
+		}
 		_qsockets[ns][url] = qs = new Q.Socket({
-			socket: root.io.connect(url + ns, o),
+			socket: root.io.connect(host+ns, o),
 			url: url,
 			ns: ns
 		});
@@ -10028,8 +10176,8 @@ function _connectSocketNS(ns, url, callback, callback2, forceNew) {
 		_ioOn(socket.io, 'close', function () {
 			console.log('Socket ' + ns + ' disconnected from '+url);
 		});
-		_ioOn(socket, 'error', function () {
-			console.log('Error on connection '+url);
+		_ioOn(socket, 'error', function (error) {
+			console.log('Error on connection '+url+' ('+error+')');
 		});
 
 		callback2 && callback2(_qsockets[ns][url], ns, url);
@@ -11054,6 +11202,7 @@ Q.Pointer = {
 	 * Intelligent focusin event that fires only once per focusin
 	 * @static
 	 * @method focusin
+	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	focusin: function (params) {
 		params.eventName = (Q.info.browser.engine === 'gecko' ? 'focus' : 'focusin');
@@ -11071,6 +11220,7 @@ Q.Pointer = {
 	 * Intelligent focusout event that fires only once per focusout
 	 * @static
 	 * @method focusout
+	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	focusout: function (params) {
 		params.eventName = (Q.info.browser.engine === 'gecko' ? 'blur' : 'focusout');
@@ -11088,6 +11238,7 @@ Q.Pointer = {
 	 * Intelligent click event that also works on touchscreens, and respects Q.Pointer.canceledClick
 	 * @static
 	 * @method click
+	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	click: function _Q_click(params) {
 		params.eventName = 'click';
@@ -11103,6 +11254,7 @@ Q.Pointer = {
 	 * and respects Q.Pointer.canceledClick
 	 * @static
 	 * @method fastclick
+	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	fastclick: function _Q_fastclick (params) {
 		params.eventName = Q.info.isTouchscreen ? 'touchend' : 'click';
@@ -11134,6 +11286,7 @@ Q.Pointer = {
 	 * Respects Q.Pointer.canceledClick
 	 * @static
 	 * @method touchclick
+	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	touchclick: function _Q_touchclick (params) {
 		if (!Q.info.isTouchscreen) {
@@ -11166,6 +11319,7 @@ Q.Pointer = {
 	 * Normalized mouse wheel event that works with various browsers
 	 * @static
 	 * @method click
+	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	wheel: function _Q_wheel (params) {
 		// Modern browsers support "wheel",
@@ -12138,7 +12292,6 @@ Q.Dialogs = {
 	 *  @param {Object} [options.template] can be used instead of content option.
 	 *  @param {String} [options.template.name] names a template to render into the initial dialog content.
 	 *  @param {String} [options.template.fields] fields to pass to the template, if any
-	 *  @param {Array} [options.template.text] any text to load for the template
 	 *  @param {String} [options.className] a CSS class name or 
 	 *   space-separated list of classes to append to the dialog element.
 	 *  @param {String} [options.htmlClass] Any class to add to the html element while the overlay is open
@@ -12398,15 +12551,21 @@ Q.confirm = function(message, callback, options) {
 		'hidePrevious': true
 	}, options));
 	var buttons = dialog.querySelectorAll('.Q_buttons button');
-	Q.addEventListener(buttons[0], Q.Pointer.end, function () {
+	Q.addEventListener(buttons[0], Q.Pointer.end, function (e) {
+		e.preventDefault();
+		e.stopPropagation();
 		buttonClicked = true;
 		Q.Dialogs.pop();
 		Q.handle(callback, root, [true]);
+		return false;
 	});
-	Q.addEventListener(buttons[1], Q.Pointer.end, function () {
+	Q.addEventListener(buttons[1], Q.Pointer.end, function (e) {
+		e.preventDefault();
+		e.stopPropagation();
 		buttonClicked = true;
 		Q.Dialogs.pop();
 		Q.handle(callback, root, [false]);
+		return false;
 	});
 	var buttonYes = dialog.querySelectorAll('.Q_buttons button:first-child')[0];
 	return dialog;
@@ -12499,7 +12658,59 @@ Q.prompt.options = {
 	maxlength: 100,
 	noClose: true
 };
-Q.extend(Q.confirm.options, Q.text.prompt);
+Q.extend(Q.prompt.options, Q.text.prompt);
+
+/**
+ * Opens some content with a title inside an interface construct,
+ * by trying registered Q.invoke.handlers one by one in turn,
+ * until one returns false (to stop trying next ones).
+ * Use Array.prototype.unshift() to prepend handlers to the beginning of the list.
+ * @method invoke
+ * @static
+ * @param {Object} options These options are passed to each handler.
+ *   They should contain at least "trigger", "title", and "content" (or "template")
+ * @param {String|Element} options.title
+ *   The title to display
+ * @param {String|Element} options.content
+ *   The content to display
+ * @param {Element} options.trigger 
+ *   The element that the user interacted with to result in this function call
+ * @param {Object} [options.template] can be used instead of content option.
+ * @param {String} [options.template.name] names a template to render into the initial dialog content.
+ * @param {String} [options.template.fields] fields to pass to the template, if any
+ * @param {Function} [options.callback]
+ *   Optional callback to call once the title and content has been shown and activated.
+ *   Should be passed the container element by the handler.
+ * @return {Integer} Returns the index of the handler that executed in Q.invoke.handlers
+ */
+Q.invoke = function (options) {
+	var o = options;
+	if (options.template) {
+		Q.Template.render(options.template.name, options.template.fields, function (err, html) {
+			o = Q.extend({ content: html }, options);
+			_continue();
+		});
+	} else {
+		_continue();
+	}
+	function _continue() {
+		Q.each(Q.invoke.handlers, function (i, handler) {
+			var ret = Q.handle(handler, Q, o);
+			if (ret === false) {
+				return false
+			}
+		});
+	}
+};
+Q.invoke.handlers = [
+	function (options) {
+		Q.Dialogs.push(Q.extend({}, options, {
+			title: title,
+			content: content,
+			onActivate: options.callback || function () { }
+		}));
+	}
+];
 
 /**
  * Methods relating to internationalization
@@ -12744,6 +12955,11 @@ Q.Audio.speak = function (text, options) {
 	var TTS = root.TTS; // cordova
 	var SS = root.speechSynthesis; //browsers
 	var o = Q.extend({}, Q.Audio.speak.options, 10, options);
+
+	if (o.mute) {
+		return;
+	}
+
 	o.locale = o.locale ||  Q.Text.languageLocale;
 	if (Q.isArrayLike(text)) {
 		var source = text[0];
@@ -13118,7 +13334,7 @@ processStylesheets(); // NOTE: the above works only for stylesheets included bef
 Q.addEventListener(window, 'load', Q.onLoad.handle);
 Q.onInit.add(function () {
 	Q_hashChangeHandler.currentUrl = window.location.href.split('#')[0]
-		.substr(Q.info.baseUrl.length + 1);
+		.substr(Q.baseUrl().length + 1);
 	if (window.history.pushState) {
 		Q.onPopState.set(Q_popStateHandler, 'Q.loadUrl');
 	} else {
@@ -13157,6 +13373,10 @@ Q.onInit.add(function () {
 		QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
 		QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
 	});
+	
+	// load this ASAP so dialogs can load synchronously (for keyboard focus, etc.)
+	Q.addScript("{{Q}}/js/fn/dialog.js");
+	Q.addScript("{{Q}}/js/fn/clickfocus.js");
 
 	function _enableSpeech () {
 		var s = new SpeechSynthesisUtterance();
@@ -13175,6 +13395,9 @@ Q.onInit.add(function () {
 			_documentIsUnloading = true; // WARN: a later handler might cancel the event
 		}
 	});
+
+	// set some options
+	Q.Audio.speak.options.mute = !!Q.getObject("Audio.speak.mute", Q);
 }, 'Q');
 
 Q.onJQuery.add(function ($) {
@@ -13370,7 +13593,7 @@ function _addHandlebarsHelpers() {
 			return context;
 		});
 	}
-	if (!Handlebars.helpers.option) {
+	if (!Handlebars.helpers.interpolate) {
 		Handlebars.registerHelper('interpolate', function(expression) {
 			if (arguments.length < 2) {
 				return '';
@@ -13385,6 +13608,11 @@ function _addHandlebarsHelpers() {
 			return new Handlebars.SafeString(
 				'<option value="'+value.encodeHTML()+'"'+attr+'>'+html+"</option>"
 			);
+		});
+	}
+	if (!Handlebars.helpers.replace) {
+		Handlebars.registerHelper('replace', function(find, replace, options) {
+			return options.fn(this).replace(find, replace);
 		});
 	}
 }
@@ -13651,7 +13879,7 @@ Q.Camera = {
 			 * (using Instascan library dynamically loaded)
 			 * @method instascan
 			 * @static
-			 * @param {object} audio Q.audio with loaded audio file to play when QR code found
+			 * @param {Q.Audio} audio Q.Audio with loaded audio file to play when QR code found
 			 * @param {function} callback function to execute when QR code found and provide text as argument
 			 * @param {object} options object with options to replace default
 			 */
@@ -13679,7 +13907,7 @@ Q.Camera = {
 					var elementWidth = $element.width();
 
 					// create video element
-					var $videoElement = $("<video>").appendTo($element);
+					var $videoElement = $("<video playsinline autoplay>").appendTo($element);
 
 					// set heigth/width of video element to stretch full screen
 					if (elementHeight > elementWidth) {
@@ -13712,15 +13940,7 @@ Q.Camera = {
 						// if more than 1 camera - add swap icon
 						if (camerasAmount > 1) {
 							$("<a class='Q_swap'>").on(Q.Pointer.fastclick, function(){
-
-								if (selectedCamera + 1 < camerasAmount) {
-									selectedCamera++;
-								} else if (selectedCamera - 1 >= 0) {
-									selectedCamera--;
-								} else {
-									return;
-								}
-
+								selectedCamera = (selectedCamera+1) % camerasAmount;
 								scanner.start(cameras[selectedCamera]);
 							}).appendTo(dialog);
 						}
@@ -13783,6 +14003,10 @@ Q.Notices = {
 			persistent: false
 		}, options);
 
+		if (o.persistent && !o.key) {
+			o.key = Date.now().toString();
+		}
+
 		var key = o.key;
 		var content = o.content;
 		var noticeClass = 'Q_' + o.type + '_notice';
@@ -13805,8 +14029,8 @@ Q.Notices = {
 		li.setAttribute('data-notice', JSON.stringify(notice));
 		li.classList.add(noticeClass);
 		li.onclick = function () {
-			Q.handle(o.handler, li, [content]);
 			Q.Notices.remove(li);
+			Q.handle(o.handler, li, [content]);
 		};
 		var span = document.createElement('span');
 		span.innerHTML = content.trim();
@@ -13831,12 +14055,16 @@ Q.Notices = {
 			Q.Notices.show(li);
 
 			if (o.persistent) {
+				if (!key) {
+					throw new Exception("key required for persistent notice");
+				}
+
 				var oj = Q.take(o, ['persistent', 'closeable', 'timeout', 'handler']);
 				Q.req('Q/notice', [], null, {
 					method: 'post',
 					fields: {
 						// we need key for persistent notices
-						key: key || Date.now().toString(),
+						key: key,
 						content: content,
 						options: oj
 					}
@@ -13876,21 +14104,26 @@ Q.Notices = {
 			notice.forEach(function(item) {
 				Q.Notices.remove(item);
 			});
+
+			return;
 		}
 		notice = this.get(notice);
 		if (notice instanceof HTMLElement) {
 			this.hide(notice);
+
+			var key = notice.getAttribute('data-key');
+			var json = notice.getAttribute('data-notice');
+			var o = JSON.parse(json) || {};
+			// if notice persistent - send request to remove from session
+			if (typeof key === 'string' && o.persistent) {
+				Q.req('Q/notice', 'data', null, {
+					method: 'delete',
+					fields: {key: key}
+				});
+			}
+
+			// delay because notice hide with transition
 			setTimeout(function () {
-				var key = notice.getAttribute('data-key');
-				var json = notice.getAttribute('data-notice');
-				var o = JSON.parse(json) || {};
-				// if notice persistent - send request to remove from session
-				if (typeof key === 'string' && o.persistent) {
-					Q.req('Q/notice', 'data', null, {
-						method: 'delete',
-						fields: {key: key}
-					});
-				}
 				notice.remove();
 			}, 1000);
 		}
@@ -13950,7 +14183,7 @@ Q.Notices = {
 };
 
 Q.beforeInit.addOnce(function () {
-	if (!Q.info.baseUrl) {
+	if (!Q.baseUrl()) {
 		throw new Q.Error("Please set Q.info.baseUrl before calling Q.init()");
 	}
 	if (_appId) {

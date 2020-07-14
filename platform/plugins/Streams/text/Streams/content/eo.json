@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Vi ne havas permeson aliĝi al ĉi tiu konversacio.",
         "startedConversation": "komencis konversacion",
         "RealTimeCall": "Reala Tempo-Voko",
-        "SearchByName": "Serĉo laŭ nomo"
+        "SearchByName": "Serĉo laŭ nomo",
+        "Notifications": {
+            "Visit": "{{displayName}} vizitas la babilejon",
+            "Join": "{{displayName}} aliĝis al la babilejo",
+            "Leave": "{{displayName}} forlasis la babilejon",
+            "RelatedTo": "{{displayName}} ekigis {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Mesaĝo {{& message.fields.type}} al {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "Teksto",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} se la kodo estis skanita"
+            "scannedQR": "{{ClickOrTap}} se la kodo estis skanita",
+            "copyLink": "{{ClickOrTap}} por kopii invitan ligon"
         },
         "email": {
             "subject": "Hej, kontrolu ĉi tion",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "Vi estis invitita. {{ClickOrTap}} ĉi tie por akcepti kaj aliĝi."
-        }
+        },
+        "command": "Inviti",
+        "youCanNowPaste": "Vi nun povas alglui ĉi tiun ligon ie por inviti homojn"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "Ligilo kopiita al klipo",
             "codeCopiedToCb": "Kodo kopiita al klipo",
             "userHasNoVideo": "Partoprenanto ne havas filmeton",
-            "openInBrowserAlert": "Malferma ligo en Safari-retumilo por aliĝi al la konferenco."
+            "openInBrowserAlert": "Malferma ligo en Safari-retumilo por aliĝi al la konferenco.",
+            "youBeganVideoRecording": "Vi komencis registri ĉi tiun konferencon",
+            "youStoppedVideoRecording": "Vi ĉesis registri ĉi tiun konferencon"
         },
         "settingsPopup": {
             "webCamera": "Reta fotilo",
@@ -173,7 +184,15 @@
             "fbStartLive": "Iru vivi",
             "fbStopLive": "Fino Viva",
             "fbEmbedCode": "Korpigi",
-            "copy": "Kopii"
+            "copy": "Kopii",
+            "turnOffVideo": "Malŝalti divido de ĉambro \/ ekrano",
+            "turnOffScreenSharing": "Malŝalti ekranan interŝanĝon",
+            "cameraIsTurnedOff": "Fotilo estas malŝaltita",
+            "startRecording": "Komencu Registradon",
+            "stopRecording": "Ĉesu Registri",
+            "recordingInProgress": "Registrado estas en progreso ...",
+            "publishOnTimeline": "Publikigu laŭ templinio",
+            "publishToGroup": "Eldonu al grupo"
         },
         "participantsPopup": {
             "disconnect": "Malkonekti",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "Plej Laŭte Escepte Min",
             "maximizeLoudest": "Maksimume Plej Laŭta",
             "staticMaximized": "Static Maksimumigita",
-            "manual": "Manlibro"
-        }
+            "manual": "Manlibro",
+            "fullScreen": "Plenekrane",
+            "turnOffCamera": "Kaŝi filmeton",
+            "turnOffAudio": "Silentu audio",
+            "turnOffScreenSharing": "Kaŝi ekranan interŝanĝon",
+            "turnOnCamera": "Montri filmeton",
+            "turnOnAudio": "Malŝaltu la sonon",
+            "turnOnScreenSharing": "Montri ekranan interŝanĝon"
+        },
+        "notAllowedToJoinCall": "Vi ne havas permeson aliĝi al ĉi tiu rivereto.",
+        "streamTitle": "{{1}} viva alvoko"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "Savi",
         "Delete": "Forigi",
         "Submenu": "Submenuo"
+    },
+    "errors": {
+        "HiddenFromYou": "Ĉi tiu enhavo estas kaŝita de vi."
     }
 }

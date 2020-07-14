@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Nie masz uprawnień do dołączenia do tej rozmowy.",
         "startedConversation": "rozpoczął rozmowę",
         "RealTimeCall": "Połączenie w czasie rzeczywistym",
-        "SearchByName": "Szukaj według nazwy"
+        "SearchByName": "Szukaj według nazwy",
+        "Notifications": {
+            "Visit": "{{displayName}} odwiedza czat",
+            "Join": "{{displayName}} dołączył do czatu",
+            "Leave": "{{displayName}} opuścił czat",
+            "RelatedTo": "{{displayName}} rozpoczął {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Wiadomość {{& message.fields.type}} do {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "Ukryj udostępnianie ekranu",
             "turnOnCamera": "Pokaż wideo",
             "turnOnAudio": "Wyłącz wyciszenie dźwięku",
-            "turnOnScreenSharing": "Pokaż udostępnianie ekranu"
+            "turnOnScreenSharing": "Pokaż udostępnianie ekranu",
+            "fullScreen": "Pełny ekran"
         },
         "notAllowedToJoinCall": "Nie masz uprawnień, aby dołączyć do tego strumienia.",
         "streamTitle": "{{1}} połączenie na żywo"

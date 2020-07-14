@@ -19,6 +19,31 @@ class Q_Tree
 	}
 	
 	/**
+	 * Constructs a Q_Tree, and loads filename into it, returning the Q_Tree object.
+	 * @method createAndLoad
+	 * @static
+	 * @param {string} $filename The filename of the file to load.
+	 * @param {boolean} $ignoreCache=false
+	 *  Defaults to false. If true, then this function ignores
+	 *  the cached value, if any, and attempts to search
+	 *  for the file. It will cache the new value.
+	 * @return {Q_Tree} Returns the Q_Tree if everything succeeded
+	 * @throws {Q_Exception_InvalidInput} if tree was not loaded
+	 */
+	static function createAndLoad(
+	 $filename,
+	 $ignoreCache = false,
+	 &$linkedArray = null)
+	{
+		$tree = new Q_Tree($linkedArray);
+		$result = $tree->load($filename, $ignoreCache);
+		if (!$result) {
+			throw new Q_Exception_InvalidInput(array('source' => $filename));
+		}
+		return $tree;
+	}
+	
+	/**
 	 * Gets the array of all parameters
 	 * @method getAll
 	 * @return {array}

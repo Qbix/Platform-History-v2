@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Tsy manana alalana hiditra amin&#39;ity resaka ity ianao.",
         "startedConversation": "nanomboka resaka",
         "RealTimeCall": "Fiantsoana tena fotoana",
-        "SearchByName": "Mikaraho amin&#39;ny anarany"
+        "SearchByName": "Mikaraho amin&#39;ny anarany",
+        "Notifications": {
+            "Visit": "{{displayName}} dia mitsidika ny resaka",
+            "Join": "{{displayName}} nanatevina ny resaka",
+            "Leave": "Niala tamin&#39;ny resaka ny {{displayName}}",
+            "RelatedTo": "{{displayName}} nanomboka ny {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Hafatra {{& message.fields.type}} amin&#39;ny {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "Text",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} raha namboarina ilay kaody"
+            "scannedQR": "{{ClickOrTap}} raha namboarina ilay kaody",
+            "copyLink": "{{ClickOrTap}} handika rohy fanasana"
         },
         "email": {
             "subject": "Hey, jereo ity",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "Nasaina ianao. {{ClickOrTap}} eto mba hanaiky sy hiaraka."
-        }
+        },
+        "command": "Asao",
+        "youCanNowPaste": "Azonao atao ny mametaka ity rohy ity any amin&#39;ny toerana hanasana olona"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "Rohy azo adika amin&#39;ny takelaka",
             "codeCopiedToCb": "Kaody azo adika amin&#39;ny takelaka",
             "userHasNoVideo": "Tsy mandray horonantsary ny mpandray anjara",
-            "openInBrowserAlert": "Sokafy ny rohy eo amin&#39;ny navigateur Safari mba hanatevenana ny federasiona."
+            "openInBrowserAlert": "Sokafy ny rohy eo amin&#39;ny navigateur Safari mba hanatevenana ny federasiona.",
+            "youBeganVideoRecording": "Nanomboka nandrakitra ity fihaonambe ity ianao",
+            "youStoppedVideoRecording": "Nijanona ny firaketana an&#39;ity fihaonambe ity"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -173,7 +184,15 @@
             "fbStartLive": "Mandehana Live",
             "fbStopLive": "Fiafarana farany",
             "fbEmbedCode": "Embed",
-            "copy": "Copy"
+            "copy": "Copy",
+            "turnOffVideo": "Tapaho ny fizarana fakantsary \/ fakantsary",
+            "turnOffScreenSharing": "Ampidiro ny fizarana efijery",
+            "cameraIsTurnedOff": "Tapaka ny fakantsary",
+            "startRecording": "Atombohy ny firaketana an-tsoratra",
+            "stopRecording": "Ajanony ny fandraisana an-tsoratra",
+            "recordingInProgress": "Efa mandeha ny fandraketana ...",
+            "publishOnTimeline": "Avoahy ny fandaharam-potoana",
+            "publishToGroup": "Avoahy ny vondrona"
         },
         "participantsPopup": {
             "disconnect": "elektrônika",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "Mihoatra ahy indrindra",
             "maximizeLoudest": "Fampivoarana avo indrindra",
             "staticMaximized": "Static Maximized",
-            "manual": "Manual"
-        }
+            "manual": "Manual",
+            "fullScreen": "Mameno efijery",
+            "turnOffCamera": "Afeno ny horonan-tsary",
+            "turnOffAudio": "Mampiteny feo",
+            "turnOffScreenSharing": "Afeno ny fizarana efijery",
+            "turnOnCamera": "Asehoy horonan-tsary",
+            "turnOnAudio": "Ny feo tsy am-peo",
+            "turnOnScreenSharing": "Asehoy ny fizarana efijery"
+        },
+        "notAllowedToJoinCall": "Tsy manana alalana hiditra amin&#39;ity stream ity ianao.",
+        "streamTitle": "Antso {{1}} mivantana"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "Save",
         "Delete": "Mamafa",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Ny atiny dia afenina anao."
     }
 }

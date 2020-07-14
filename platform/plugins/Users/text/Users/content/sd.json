@@ -43,7 +43,8 @@
             "title": "رابطو چونڊيو",
             "CreateAccount": "+ نئين رابطو",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.cre نه مليو",
-            "SearchByName": "نالو ڳولھيو"
+            "SearchByName": "نالو ڳولھيو",
+            "EmptyContacts": "رابطو نه مليو ..."
         },
         "select": {
             "title": "{{displayName}} مان رابطو ڪريو"

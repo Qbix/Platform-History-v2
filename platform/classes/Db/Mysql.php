@@ -410,9 +410,30 @@ class Db_Mysql implements Db_Interface
 		$last_q = array();
 		$last_queries = array();
 		foreach ($rows as $row) {
-			// get shard, if any
-			$record = ($row instanceof Db_Row) ? $row->fields : $row;
+			if ($row instanceof Db_Row) {
+				if (class_exists('Q') and class_exists($className)) {
+					Q::event("Db/Row/$className/save", array(
+						'row' => $row
+					), 'before');
+				}
+				$fieldNames = method_exists($row, 'fieldNames')
+					? $row->fieldNames()
+					: null;
+				$record = array();
+				if (is_array($fieldNames)) {
+					foreach ($fieldNames as $name) {
+						$record[$name] = $row->fields[$name];
+					}
+				} else {
+					foreach ($row->fields as $name => $value) {
+						$record[$name] = $value;
+					}
+				}
+			} else {
+				$record = $row;
+			}
 			$query = new Db_Query_Mysql($this, Db_Query::TYPE_INSERT);
+			// get shard, if any
 			$shard = '';
 			if (isset($className)) {
 				$query->className = $className;
@@ -2420,7 +2441,7 @@ $field_hints
 	static function table(\$with_db_name = true, \$alias = null)
 	{
 		if (Q_Config::get('Db', 'connections', '$connectionName', 'indexes', '$class_name_base', false)) {
-			return new Db_Expression((\$with_db_name ? '{\$dbname}.' : '').'{\$prefix}'.'$table_name_base');
+			return new Db_Expression((\$with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'$table_name_base');
 		} else {
 			\$conn = Db::getConnection($connectionName_var);
   			\$prefix = empty(\$conn['prefix']) ? '' : \$conn['prefix'];
@@ -2653,7 +2674,7 @@ $dc
  */
 Base.table = function (withoutDbName) {
 	if (Q.Config.get(['Db', 'connections', '$connectionName', 'indexes', '$class_name_base'], false)) {
-		return new Db.Expression((withoutDbName ? '' : '{\$dbname}.')+'{\$prefix}$table_name_base');
+		return new Db.Expression((withoutDbName ? '' : '{{dbname}}.')+'{{prefix}}$table_name_base');
 	} else {
 		var conn = Db.getConnection('$connectionName');
 		var prefix = conn.prefix || '';

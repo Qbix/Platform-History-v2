@@ -30,7 +30,13 @@
         "earlierComments": "earlier comments",
         "startedConversation": "started a conversation",
         "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name"
+        "SearchByName": "Search by name",
+        "Notifications": {
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+        }
     },
     "notifications": {
         "ManageEmailSubscriptions": "manage your email subscriptions",
@@ -137,6 +143,8 @@
         "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
         "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
         "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+		"AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+		"RemoveParticipant": "Remove participant",
         "Identifiers": "Identifiers",
         "Devices": "Devices",
         "Streams": "Streams"

@@ -73,5 +73,30 @@
             "touchscreen": "Brûk jo fingeren om te ferpleatsen en te ferpleatsen",
             "notTouchscreen": "Brûk jo mûs &amp; rol om te ferpleatsen en te ferpleatsen"
         }
+    },
+    "timestamp": {
+        "lastNight": "justerjûn",
+        "lastEvening": "lêste foarjûn",
+        "yesterday": "juster",
+        "thisMorning": "dizze moarn",
+        "today": "hjoed",
+        "tonight": "fannacht",
+        "tomorrowMorning": "tom moarn",
+        "tomorrow": "moarn",
+        "hoursAgo": "{{h}} oeren lyn",
+        "hourAgo": "{{h}} oere lyn",
+        "minuteAgo": "{{m}} minút lyn",
+        "minutesAgo": "{{m}} minuten lyn",
+        "secondAgo": "{{s}} twadde lyn",
+        "secondsAgo": "{{s}} sekonden lyn",
+        "fewSecondsAgo": "sekonden lyn",
+        "rightNow": "fuortendaalks",
+        "inSecond": "yn {{s}} sekonde",
+        "inSeconds": "yn {{s}} sekonden",
+        "inMinute": "yn {{m}} minút",
+        "inMinutes": "yn {{m}} minuten",
+        "inHour": "yn {{h}} oere",
+        "inHours": "yn {{h}} oeren",
+        "inUnderMinute": "yn minder dan 1 minút"
     }
 }

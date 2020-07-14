@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Non tes permiso para unirse a esta conversa.",
         "startedConversation": "iniciou unha conversa",
         "RealTimeCall": "Chamada en tempo real",
-        "SearchByName": "Busca por nome"
+        "SearchByName": "Busca por nome",
+        "Notifications": {
+            "Visit": "{{displayName}} está a visitar o chat",
+            "Join": "{{displayName}} uniuse ao chat",
+            "Leave": "{{displayName}} deixou o chat",
+            "RelatedTo": "{{displayName}} iniciou un {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Mensaxe {{& message.fields.type}} para {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "Agochar a compartición de pantalla",
             "turnOnCamera": "Amosar vídeo",
             "turnOnAudio": "Non activa o son",
-            "turnOnScreenSharing": "Mostrar compartir a pantalla"
+            "turnOnScreenSharing": "Mostrar compartir a pantalla",
+            "fullScreen": "Pantalla completa"
         },
         "notAllowedToJoinCall": "Non tes permiso para unirte a este fluxo.",
         "streamTitle": "{{1}} chamada en directo"

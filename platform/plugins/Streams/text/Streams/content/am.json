@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "ይህንን ውይይት ለመቀላቀል ፈቃድ የልዎትም።",
         "startedConversation": "ውይይት ጀመርኩ",
         "RealTimeCall": "እውነተኛ ሰዓት ጥሪ",
-        "SearchByName": "በስም ይፈልጉ"
+        "SearchByName": "በስም ይፈልጉ",
+        "Notifications": {
+            "Visit": "{{displayName}} ውይይቱን እየጎበኘ ነው",
+            "Join": "{{displayName}} ውይይቱን ተቀላቅሏል",
+            "Leave": "{{displayName}} ውይይቱን ትቶ ወጥቷል",
+            "RelatedTo": "{{displayName}} አንድ {{stream.displayType}} ጀምረዋል"
+        }
     },
     "notifications": {
         "*": "መልዕክት {{& message.fields.type}} to {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "ጽሑፍ",
             "byFacebook": "ፌስቡክ",
             "byTwitter": "ትዊተር",
-            "scannedQR": "ኮዱ ከተቃኘ {{ClickOrTap}}"
+            "scannedQR": "ኮዱ ከተቃኘ {{ClickOrTap}}",
+            "copyLink": "የግብዣ አገናኝን ለመቅዳት {{ClickOrTap}}"
         },
         "email": {
             "subject": "ሄይ, ይህን አረጋግጡ",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "ተጋብዘዋል. ለመቀበል እና ለመቀላቀል እዚህ ላይ {{ClickOrTap}} እዚህ."
-        }
+        },
+        "command": "ጋብዝ",
+        "youCanNowPaste": "ሰዎችን ለመጋበዝ አሁን ይህን አገናኝ በአንድ ቦታ ላይ መለጠፍ ይችላሉ"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "አገናኝ ወደ ቅንጥብ ሰሌዳ ተቀድቷል",
             "codeCopiedToCb": "ኮድ ወደ ቅንጥብ ሰሌዳ ተቀድቷል",
             "userHasNoVideo": "ተሳታፊ ቪዲዮ የለውም",
-            "openInBrowserAlert": "ጉባኤውን ለመቀላቀል Safari አሳሽ ውስጥ አገናኝን ይክፈቱ።"
+            "openInBrowserAlert": "ጉባኤውን ለመቀላቀል Safari አሳሽ ውስጥ አገናኝን ይክፈቱ።",
+            "youBeganVideoRecording": "ይህንን ስብሰባ መቅዳት ጀምረዋል",
+            "youStoppedVideoRecording": "ይህንን ስብሰባ መቅዳት አቁመዋል"
         },
         "settingsPopup": {
             "webCamera": "የድር ካሜራ",
@@ -173,7 +184,15 @@
             "fbStartLive": "ቀጥታ ስርጭት ይሂዱ",
             "fbStopLive": "የቀጥታ ስርጭት",
             "fbEmbedCode": "ክተት",
-            "copy": "ገልብጥ"
+            "copy": "ገልብጥ",
+            "turnOffVideo": "ካሜራ \/ ማያ ማጋራትን ያጥፉ",
+            "turnOffScreenSharing": "የማያ ማጋራትን ያጥፉ",
+            "cameraIsTurnedOff": "ካሜራ ጠፍቷል",
+            "startRecording": "መቅዳት ይጀምሩ",
+            "stopRecording": "መቅዳት አቁም",
+            "recordingInProgress": "ቀረጻ በሂደት ላይ ነው ...",
+            "publishOnTimeline": "በጊዜ መስመር ላይ ያትሙ",
+            "publishToGroup": "ወደ ቡድን ያትሙ"
         },
         "participantsPopup": {
             "disconnect": "ግንኙነት አቋርጥ",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "ከእኔ በስተቀር እጅግ ከባድ ነው",
             "maximizeLoudest": "ከፍተኛ ድምጽን ከፍ ያድርጉ",
             "staticMaximized": "የማይንቀሳቀስ ከፍተኛ",
-            "manual": "መመሪያ"
-        }
+            "manual": "መመሪያ",
+            "fullScreen": "ሙሉ ማያ",
+            "turnOffCamera": "ቪዲዮ ደብቅ",
+            "turnOffAudio": "ኦዲዮን ድምጸ-ከል ያድርጉ",
+            "turnOffScreenSharing": "የማያ ማጋራትን ደብቅ",
+            "turnOnCamera": "ቪዲዮ አሳይ",
+            "turnOnAudio": "ድምጸ-ከል አንሳ",
+            "turnOnScreenSharing": "ማሳያ ማጋራትን አሳይ"
+        },
+        "notAllowedToJoinCall": "ይህንን ጅረት ለመቀላቀል ፈቃድ የልዎትም።",
+        "streamTitle": "{{1}} የቀጥታ ጥሪ"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "አስቀምጥ",
         "Delete": "ሰርዝ",
         "Submenu": "ንዑስ"
+    },
+    "errors": {
+        "HiddenFromYou": "ይህ ይዘት ከእርስዎ ተደብቋል።"
     }
 }

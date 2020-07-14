@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Níl cead agat an comhrá seo a dhéanamh.",
         "startedConversation": "thosaigh comhrá",
         "RealTimeCall": "Glao Ama Fíor-Ama",
-        "SearchByName": "Cuardaigh de réir ainm"
+        "SearchByName": "Cuardaigh de réir ainm",
+        "Notifications": {
+            "Visit": "Tá {{displayName}} ag tabhairt cuairte ar an gcomhrá",
+            "Join": "Chuaigh {{displayName}} isteach sa chomhrá",
+            "Leave": "D’fhág {{displayName}} an comhrá",
+            "RelatedTo": "Chuir {{displayName}} tús le {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Teachtaireacht {{& message.fields.type}} go {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "Folaigh comhroinnt scáileáin",
             "turnOnCamera": "Taispeáin físeán",
             "turnOnAudio": "Fuaim unmute",
-            "turnOnScreenSharing": "Taispeáin comhroinnt scáileáin"
+            "turnOnScreenSharing": "Taispeáin comhroinnt scáileáin",
+            "fullScreen": "Scáileán iomlán"
         },
         "notAllowedToJoinCall": "Níl cead agat dul isteach sa sruth seo.",
         "streamTitle": "{{1}} glao beo"

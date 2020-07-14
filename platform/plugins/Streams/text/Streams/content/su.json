@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Anjeun teu gaduh idin pikeun ngiluan paguneman ieu.",
         "startedConversation": "ngamimitian paguneman",
         "RealTimeCall": "Panggeroan Real Time",
-        "SearchByName": "Milarian ku nami"
+        "SearchByName": "Milarian ku nami",
+        "Notifications": {
+            "Visit": "{{displayName}} nyaéta ngadatangan obrolan",
+            "Join": "{{displayName}} gabung dina obrolan",
+            "Leave": "{{displayName}} tinggalkeun obrolan",
+            "RelatedTo": "{{displayName}} ngamimitian hiji {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Pesen {{& message.fields.type}} kana {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "Téks",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} upami kodena diimbas"
+            "scannedQR": "{{ClickOrTap}} upami kodena diimbas",
+            "copyLink": "{{ClickOrTap}} pikeun nyalin tautan ngajak"
         },
         "email": {
             "subject": "Héy, parios ieu kaluarna",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "Anjeun geus diondang. {{ClickOrTap}} di dieu pikeun nampa sareng ngiringan."
-        }
+        },
+        "command": "Ngajak",
+        "youCanNowPaste": "Anjeun ayeuna tiasa témpélkeun tautan ieu dimana waé pikeun ngundang jalma"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "Link ditiron ka clipboard",
             "codeCopiedToCb": "Kodeu disalin ka clipboard",
             "userHasNoVideo": "Peserta teu gaduh pidio",
-            "openInBrowserAlert": "Link kabuka dina browser Safari pikeun ngiringan konperénsi."
+            "openInBrowserAlert": "Link kabuka dina browser Safari pikeun ngiringan konperénsi.",
+            "youBeganVideoRecording": "Anjeun mimiti ngarékam konperénsi ieu",
+            "youStoppedVideoRecording": "Anjeun lirén ngarékam konperénsi ieu"
         },
         "settingsPopup": {
             "webCamera": "Kaméra Wéb",
@@ -173,7 +184,15 @@
             "fbStartLive": "Indit Langsung",
             "fbStopLive": "Tungtung Langsung",
             "fbEmbedCode": "Nyebak",
-            "copy": "Nyalin"
+            "copy": "Nyalin",
+            "turnOffVideo": "Pareuman babagi kaméra \/ layar",
+            "turnOffScreenSharing": "Pareuman babagi layar",
+            "cameraIsTurnedOff": "Kamera dipareuman",
+            "startRecording": "Mimitian Rékam",
+            "stopRecording": "Eureun Rékam",
+            "recordingInProgress": "Ngarekam nuju kamajuan ...",
+            "publishOnTimeline": "Nyebarkeun dina waktosna",
+            "publishToGroup": "Ngubarkeun ka grup"
         },
         "participantsPopup": {
             "disconnect": "Pegatkeun",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "Anu paling Nyuar",
             "maximizeLoudest": "Maksimalkeun Loudest",
             "staticMaximized": "Statis maksimal",
-            "manual": "Pitunjuk"
-        }
+            "manual": "Pitunjuk",
+            "fullScreen": "Layar pinuh",
+            "turnOffCamera": "Sumputkeun pidéo",
+            "turnOffAudio": "Ngalangkep audio",
+            "turnOffScreenSharing": "Sumputkeun babagi layar",
+            "turnOnCamera": "Tampilkeun video",
+            "turnOnAudio": "Audio anu unmute",
+            "turnOnScreenSharing": "Tampilkeun perkongsian layar"
+        },
+        "notAllowedToJoinCall": "Anjeun teu gaduh idin pikeun ngiringan aliran ieu.",
+        "streamTitle": "Panggero {{1}} langsung"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "Simpen",
         "Delete": "Mupus",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Eusi ieu disumputkeun ti anjeun."
     }
 }

@@ -43,7 +43,8 @@
             "title": "Filifili fesoʻotaʻiga",
             "CreateAccount": "+ New Contact",
             "CreateAccountNotFound": "F.Users.Cordova.UI.create e le maua",
-            "SearchByName": "Saili i le igoa"
+            "SearchByName": "Saili i le igoa",
+            "EmptyContacts": "Le faʻamatalaga e le maua ..."
         },
         "select": {
             "title": "Filifili le fesoʻotaʻiga o {{displayName}}"

@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Немате дозвола да се приклучите на овој разговор.",
         "startedConversation": "започна разговор",
         "RealTimeCall": "Повик во реално време",
-        "SearchByName": "Пребарувајте по име"
+        "SearchByName": "Пребарувајте по име",
+        "Notifications": {
+            "Visit": "{999}} го посетува разговорот",
+            "Join": "} 99 999}} се приклучи на разговорот",
+            "Leave": "{99 999}} го напушти разговорот",
+            "RelatedTo": "{{displayName}} започна со {{1000}"
+        }
     },
     "notifications": {
         "*": "Порака {{& message.fields.type}} до {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "Сокриј споделување на екранот",
             "turnOnCamera": "Покажи видео",
             "turnOnAudio": "Исклучете го аудио",
-            "turnOnScreenSharing": "Прикажи споделување на екранот"
+            "turnOnScreenSharing": "Прикажи споделување на екранот",
+            "fullScreen": "Цел екран"
         },
         "notAllowedToJoinCall": "Немате дозвола да се приклучите на овој поток.",
         "streamTitle": "99 99 999}} во живо повик"

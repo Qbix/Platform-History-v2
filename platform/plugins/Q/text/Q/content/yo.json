@@ -73,5 +73,30 @@
             "touchscreen": "Lo awọn ika rẹ lati sun-un ati fa",
             "notTouchscreen": "Lo asin &amp; kẹkẹ rẹ lati sun-un ati fa"
         }
+    },
+    "timestamp": {
+        "lastNight": "ni alẹ Ana",
+        "lastEvening": "kẹhin Eve",
+        "yesterday": "lana",
+        "thisMorning": "owurọ yi",
+        "today": "loni",
+        "tonight": "alẹ́ alẹ́",
+        "tomorrowMorning": "tom owurọ",
+        "tomorrow": "ọla",
+        "hoursAgo": "{{h}} awọn wakati sẹhin",
+        "hourAgo": "{{h}} wakati kan sẹyin",
+        "minuteAgo": "{{m}} iṣẹju sẹyin",
+        "minutesAgo": "{{m}} awọn iṣẹju sẹyin",
+        "secondAgo": "{{s}} sẹhin sẹyin",
+        "secondsAgo": "{{s}} awọn aaya sẹyin",
+        "fewSecondsAgo": "-aaya sẹyin",
+        "rightNow": "ni bayi",
+        "inSecond": "ni {{s}} keji",
+        "inSeconds": "ni awọn iṣẹju-aaya {{s}}",
+        "inMinute": "ni iṣẹju {{m}}",
+        "inMinutes": "ni awọn iṣẹju {{m}}",
+        "inHour": "ni wakati {{h}}",
+        "inHours": "ninu awọn wakati {{h}}",
+        "inUnderMinute": "ni labẹ iṣẹju 1"
     }
 }

@@ -49,7 +49,7 @@ function Dispatcher (server, options) {
 			}
 			var methods = Q.Config.get(['Q', 'methods'], ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']);
 			var method = Q.Request.method(req);
-			if (!methods.indexOf(method)) {
+			if (methods.indexOf(method) < 0) {
 				res.send(JSON.stringify({"errors": method + " method not supported"}));
 				return;
 			}

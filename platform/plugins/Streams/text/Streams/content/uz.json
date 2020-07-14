@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Sizda ushbu suhbatga kirish huquqi yo&#39;q.",
         "startedConversation": "suhbat boshladi",
         "RealTimeCall": "Haqiqiy vaqt qo&#39;ng&#39;irog&#39;i",
-        "SearchByName": "Nom bo&#39;yicha qidirish"
+        "SearchByName": "Nom bo&#39;yicha qidirish",
+        "Notifications": {
+            "Visit": "{{displayName}} chatga tashrif buyurmoqda",
+            "Join": "{{displayName}} suhbatga qo&#39;shildi",
+            "Leave": "{{displayName}} suhbatni tark etdi",
+            "RelatedTo": "{{displayName}} {{stream.displayType}} ni boshladi"
+        }
     },
     "notifications": {
         "*": "{{& message.fields.type}} dan {{& stream.fields.title}} ga xabar yuborish",
@@ -73,7 +79,8 @@
             "byText": "Matn",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "Agar kod skanerlangan bo&#39;lsa {{ClickOrTap}}"
+            "scannedQR": "Agar kod skanerlangan bo&#39;lsa {{ClickOrTap}}",
+            "copyLink": "Taklif havolasini nusxalash uchun {{ClickOrTap}}"
         },
         "email": {
             "subject": "Hey, buni tekshirib ko&#39;ring",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "Sizni taklif qilishdi. {{ClickOrTap}} bu erda qabul va qo&#39;shilish uchun."
-        }
+        },
+        "command": "Taklif qiling",
+        "youCanNowPaste": "Endi siz ushbu havolani odamlarni taklif qilish uchun biron bir joyga qo&#39;yishingiz mumkin"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "Havola buferga ko&#39;chirildi",
             "codeCopiedToCb": "Kod clipboardga nusxa olindi",
             "userHasNoVideo": "Ishtirokchining videosi yo‘q",
-            "openInBrowserAlert": "Konferentsiyada ishtirok etish uchun Safari brauzerida havolani oching."
+            "openInBrowserAlert": "Konferentsiyada ishtirok etish uchun Safari brauzerida havolani oching.",
+            "youBeganVideoRecording": "Siz ushbu konferentsiyani yozishni boshladingiz",
+            "youStoppedVideoRecording": "Siz ushbu konferentsiyani yozishni to&#39;xtatdingiz"
         },
         "settingsPopup": {
             "webCamera": "Veb-kamera",
@@ -173,7 +184,15 @@
             "fbStartLive": "Jonli efirga chiqing",
             "fbStopLive": "Jonli tugatish",
             "fbEmbedCode": "Joylashtirish",
-            "copy": "Nusxalash"
+            "copy": "Nusxalash",
+            "turnOffVideo": "Kamera \/ ekran almashishni o&#39;chirib qo&#39;ying",
+            "turnOffScreenSharing": "Ekran almashishni o&#39;chirib qo&#39;ying",
+            "cameraIsTurnedOff": "Kamera o&#39;chirilgan",
+            "startRecording": "Yozishni boshlang",
+            "stopRecording": "Yozishni to&#39;xtatish",
+            "recordingInProgress": "Yozib olish davom etmoqda ...",
+            "publishOnTimeline": "Vaqt jadvalida e&#39;lon qiling",
+            "publishToGroup": "Guruhga nashr qilish"
         },
         "participantsPopup": {
             "disconnect": "Uzing",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "Mendan tashqari Loudest",
             "maximizeLoudest": "Loudestni maksimal darajaga ko&#39;taring",
             "staticMaximized": "Statik maksimal darajaga ko&#39;tarildi",
-            "manual": "Qo&#39;lda"
-        }
+            "manual": "Qo&#39;lda",
+            "fullScreen": "To&#39;liq ekran",
+            "turnOffCamera": "Videoni yashirish",
+            "turnOffAudio": "Ovozni o‘chirish",
+            "turnOffScreenSharing": "Ekran almashishni yashirish",
+            "turnOnCamera": "Videoni ko&#39;rsatish",
+            "turnOnAudio": "Ovozni yoqish",
+            "turnOnScreenSharing": "Ekrandagi almashishni ko&#39;rsatish"
+        },
+        "notAllowedToJoinCall": "Ushbu translatsiyaga qo&#39;shilish uchun sizda ruxsat yo&#39;q.",
+        "streamTitle": "{{1}} jonli qo&#39;ng&#39;iroq"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "Saqlash",
         "Delete": "Yo&#39;q qilish",
         "Submenu": "Quyi menyu"
+    },
+    "errors": {
+        "HiddenFromYou": "Ushbu tarkib sizdan yashirilgan."
     }
 }

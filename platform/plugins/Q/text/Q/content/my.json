@@ -73,5 +73,30 @@
             "touchscreen": "ချဲ့ခြင်းနှင့်ဆွဲရန်သင့်လက်ချောင်းများကိုသုံးပါ",
             "notTouchscreen": "ချဲ့ခြင်းနှင့်ဆွဲရန်သင့် mouse ကို &amp; ဘီးကိုသုံးပါ"
         }
+    },
+    "timestamp": {
+        "lastNight": "မနေ့ည",
+        "lastEvening": "နောက်ဆုံးအကြိမ်",
+        "yesterday": "မနေ့က",
+        "thisMorning": "ဒီမနက်",
+        "today": "ဒီနေ့",
+        "tonight": "ဒီည",
+        "tomorrowMorning": "Tom morn",
+        "tomorrow": "မနက်ဖြန်",
+        "hoursAgo": "{{h}} နာရီအကြာက",
+        "hourAgo": "{{h}} တစ်နာရီအကြာ",
+        "minuteAgo": "{{m}} တစ်မိနစ်အကြာ",
+        "minutesAgo": "{{m}} လွန်ခဲ့သောမိနစ်က",
+        "secondAgo": "{{s}} ဒုတိယအလွန်",
+        "secondsAgo": "{{s}} စက္ကန့်အကြာ",
+        "fewSecondsAgo": "စက္ကန့်ပိုင်းက",
+        "rightNow": "အခုပဲ",
+        "inSecond": "{{s}} ဒုတိယ၌တည်၏",
+        "inSeconds": "{{s}} စက္ကန့်အတွင်း",
+        "inMinute": "{{m}} မိနစ်၌တည်၏",
+        "inMinutes": "{{m}} မိနစ်၌တည်၏",
+        "inHour": "{{h}} နာရီ၌",
+        "inHours": "{{h}} နာရီအတွင်း",
+        "inUnderMinute": "1 မိနစ်အောက်မှာ"
     }
 }

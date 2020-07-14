@@ -37,9 +37,7 @@ function Streams_basic_post($params = array())
 			$fields[] = $field;
 		}
 	}
-	$p = new Q_Tree();
-	$p->load(STREAMS_PLUGIN_CONFIG_DIR.DS.'streams.json');
-	$p->load(APP_CONFIG_DIR.DS.'streams.json');
+	$p = Streams::userStreamsTree();
 	$names = array();
 	foreach ($fields as $field) {
 		$names[] = "Streams/user/$field";

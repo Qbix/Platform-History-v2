@@ -5274,11 +5274,11 @@ return;
 	};
 
 	/**
-	 * Start live stream conference on some stream.
+	 * Start live stream conference related to some stream.
 	 * @method WebRTC.start
 	 * @param {Object} options options for the method
-	 * @param {String} options.publisherId Required! Publisher of stream where webrtc need to create.
-	 * @param {String} options.streamName Required! Name of stream where webrtc need to create.
+	 * @param {String} options.publisherId Required. Publisher of stream to which webrtc will be related.
+	 * @param {String} options.streamName Required. Name of stream to which webrtc will be related.
 	 * @param {HTMLElement} [options.element=document.body] Parent DOM element where video screens will be rendered
 	 * @param {String} [options.mode='node'] Technology that is used to start conference ('twillio' OR 'node')
 	 * @param {String} [options.tool=true] Tool to relate Q.events to. By default true used - which means page.
@@ -5306,7 +5306,7 @@ return;
 				// connect to this particular conversation
 				Q.Streams.WebRTC().start({
 					element: options.element,
-					roomId: streamName.split('/').pop(),
+					roomId: Q.normalize(streamName),
 					roomPublisherId: publisherId,
 					mode: options.mode,
 					onWebrtcControlsCreated: function () {

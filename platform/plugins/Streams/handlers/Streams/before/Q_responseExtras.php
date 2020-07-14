@@ -6,7 +6,7 @@ function Streams_before_Q_responseExtras()
 	Q_Response::addScript('{{Streams}}/js/WebRTC.js' , 'Streams');
 
 	if (!Q_Request::isAjax()) {
-		$invite_url = Q_Config::get('Streams', 'invite', 'url', "http://invites.to");
+		$invite_url = Q_Config::get('Streams', 'invite', 'url', "https://invites.to");
 		Q_Response::setScriptData('Q.plugins.Streams.invite.url', $invite_url);
 		if ($sizes = Q_Image::getSizes('Streams/image', $maxStretch)) {
 			ksort($sizes);

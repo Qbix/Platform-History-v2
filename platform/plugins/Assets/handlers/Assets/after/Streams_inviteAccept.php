@@ -17,12 +17,9 @@ function Assets_after_Streams_inviteAccept($params)
 
 	$credits = Q_Config::expect('Assets', 'credits', 'earn', 'acceptedInvite');
 
-	$text = Q_Text::get('Assets/content', array('language' => Users::getLanguage($invitedUser->id)));
-	$text = Q::interpolate($text['credits']['InviteAcceptedBy'], array($invitedUser->displayName()));
-
-	Assets_Credits::earn($credits, $invite->invitingUserId, array(
-		'reason' => $text,
+	Assets_Credits::earn($credits, 'InviteAcceptedBy', $invite->invitingUserId, array(
 		'publisherId' => $participant->publisherId,
-		'streamName' => $participant->streamName
+		'streamName' => $participant->streamName,
+		'invitedUserName' => $invitedUser->displayName()
 	));
 }

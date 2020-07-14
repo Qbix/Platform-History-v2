@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Uma lihin rukhsad inaad ku biirto wadahadalka.",
         "startedConversation": "bilaabay wadahadal",
         "RealTimeCall": "Wicitaanka waqtiga dhabta ah",
-        "SearchByName": "Magac raadso"
+        "SearchByName": "Magac raadso",
+        "Notifications": {
+            "Visit": "{{displayName}} ayaa booqanaya wada sheekaysiga",
+            "Join": "{{displayName}} waxay ku biirtay wada sheekaysiga",
+            "Leave": "{{displayName}} sheekadii wuu ka tagay",
+            "RelatedTo": "{{displayName}} wuxuu bilaabay {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Fariin {{& message.fields.type}} ilaa {1000}}",
@@ -73,7 +79,8 @@
             "byText": "Qoraalka",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} haddii koodhkaas la-sawiray"
+            "scannedQR": "{{ClickOrTap}} haddii koodhkaas la-sawiray",
+            "copyLink": "{{ClickOrTap}} si loo nuqulo xiriirika martiqaadka"
         },
         "email": {
             "subject": "Hey, hubi tan",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "Waxaa lagugu casuumey. {{ClickOrTap}} halkan si aad u aqbalo una biirto."
-        }
+        },
+        "command": "Martiqaad",
+        "youCanNowPaste": "Hada waad ku dhejin kartaa xiriirinkan meel aad ku casuumayso dadka"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "Xiriirinta ayaa lagu soo guuriyey galka",
             "codeCopiedToCb": "Koodhka ayaa lagu soo guuriyey shaashadda",
             "userHasNoVideo": "Ka-qeybgalaha ma leh muuqaal",
-            "openInBrowserAlert": "Ku fur xiriiriyaha Safari biraawsarka si aad ugu biirto shirka."
+            "openInBrowserAlert": "Ku fur xiriiriyaha Safari biraawsarka si aad ugu biirto shirka.",
+            "youBeganVideoRecording": "Waxaad bilawday duubista shirkan",
+            "youStoppedVideoRecording": "Waad joojisay duubista shirkan"
         },
         "settingsPopup": {
             "webCamera": "Kaamirada Websaydhka",
@@ -173,7 +184,15 @@
             "fbStartLive": "Toos U Soco",
             "fbStopLive": "Dhamaadka Tooska",
             "fbEmbedCode": "Ku dhaji",
-            "copy": "Nuqul"
+            "copy": "Nuqul",
+            "turnOffVideo": "Dami kamarad \/ shaashad wadaag",
+            "turnOffScreenSharing": "Dami wadaagista shaashadda",
+            "cameraIsTurnedOff": "Kaamirada ayaa dansan",
+            "startRecording": "Bilow duubista",
+            "stopRecording": "Jooji Duubista",
+            "recordingInProgress": "Duubista ayaa socota ...",
+            "publishOnTimeline": "Ku daabac jadwalka waqtiga",
+            "publishToGroup": "Daabac kooxda"
         },
         "participantsPopup": {
             "disconnect": "Kala goynta",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "Aniga mooyee",
             "maximizeLoudest": "Kordhin Loudest",
             "staticMaximized": "Static Maximized",
-            "manual": "Buugga"
-        }
+            "manual": "Buugga",
+            "fullScreen": "Shaashad Buuxa",
+            "turnOffCamera": "Qari fiidiyaha",
+            "turnOffAudio": "Cod maqal",
+            "turnOffScreenSharing": "Qari wadaagida shaashadda",
+            "turnOnCamera": "Muuji fiidiyow",
+            "turnOnAudio": "Cod maqal",
+            "turnOnScreenSharing": "Muuji wadaagida shaashadda"
+        },
+        "notAllowedToJoinCall": "Uma lihin ogolaansho inaad ku biirto qulqulkaan.",
+        "streamTitle": "{{1}} wicitaan toos ah"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "Badbaadi",
         "Delete": "Tirtir",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Nuxurka ayaa kaa qarsoon."
     }
 }

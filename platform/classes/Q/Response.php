@@ -1463,6 +1463,18 @@ class Q_Response
 			$attributes[] = Q_Html::text("$k").'='.Q_Html::text("$v");
 		}
 		$language = self::language();
+		Q::event('Q/Response/htmlAttributes', array(
+			'touchscreen' => &$touchscreen,
+			'mobile' => &$mobile,
+			'cordova' => &$cordova,
+			'platform' => &$platform,
+			'ie' => &$ie,
+			'ie8' => &$ie8,
+			'uri' => &$uri,
+			'classes' => &$classes,
+			'attributes' => &$attributes,
+			'language' => &$language
+		), 'before');
 		return 'lang="' . $language . '" '
 			. 'prefix="og:http://ogp.me/ns# object:http://ogp.me/ns/object# website:http://ogp.me/ns/website# fb:http://ogp.me/ns/fb#" '
 			. 'itemscope itemtype="https://schema.org/WebPage" '

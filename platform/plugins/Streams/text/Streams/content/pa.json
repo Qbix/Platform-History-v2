@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "ਤੁਹਾਨੂੰ ਇਸ ਗੱਲਬਾਤ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਣ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਹੈ.",
         "startedConversation": "ਇੱਕ ਗੱਲਬਾਤ ਸ਼ੁਰੂ ਕੀਤੀ",
         "RealTimeCall": "ਰੀਅਲ ਟਾਈਮ ਕਾਲ",
-        "SearchByName": "ਨਾਮ ਨਾਲ ਖੋਜ ਕਰੋ"
+        "SearchByName": "ਨਾਮ ਨਾਲ ਖੋਜ ਕਰੋ",
+        "Notifications": {
+            "Visit": "{9 999} visiting ਚੈਟ &#39;ਤੇ ਜਾ ਰਹੇ ਹਨ",
+            "Join": "} {999} the ਚੈਟ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਏ",
+            "Leave": "} 9 999} the ਨੇ ਗੱਲਬਾਤ ਛੱਡ ਦਿੱਤੀ",
+            "RelatedTo": "{{999} ਨੇ ਇੱਕ {{stream.displayType}} ਦੀ ਸ਼ੁਰੂਆਤ ਕੀਤੀ"
+        }
     },
     "notifications": {
         "*": "ਸੁਨੇਹਾ {{& message.fields.type}} ਤੋਂ {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "ਟੈਕਸਟ",
             "byFacebook": "ਫੇਸਬੁੱਕ",
             "byTwitter": "ਟਵਿੱਟਰ",
-            "scannedQR": "ਜੇ ਕੋਡ ਸਕੈਨ ਕੀਤਾ ਗਿਆ ਸੀ ਤਾਂ. 9 999.."
+            "scannedQR": "ਜੇ ਕੋਡ ਸਕੈਨ ਕੀਤਾ ਗਿਆ ਸੀ ਤਾਂ. 9 999..",
+            "copyLink": "Invite 9{} invite invite ਸੱਦਾ ਲਿੰਕ ਨੂੰ ਨਕਲ ਕਰਨ ਲਈ"
         },
         "email": {
             "subject": "Hey, ਇਸ ਦੀ ਜਾਂਚ ਕਰੋ",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "ਤੁਹਾਨੂੰ ਸੱਦਾ ਦਿੱਤਾ ਗਿਆ ਹੈ {{ClickOrTap}} ਇੱਥੇ ਪ੍ਰਵਾਨ ਕਰਨ ਅਤੇ ਜੁਆਇਨ ਕਰਨ ਲਈ."
-        }
+        },
+        "command": "ਸੱਦਾ",
+        "youCanNowPaste": "ਹੁਣ ਤੁਸੀਂ ਲੋਕਾਂ ਨੂੰ ਸੱਦਾ ਦੇਣ ਲਈ ਇਸ ਲਿੰਕ ਨੂੰ ਕਿਤੇ ਚਿਪਕਾ ਸਕਦੇ ਹੋ"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "ਲਿੰਕ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕੀਤਾ ਗਿਆ",
             "codeCopiedToCb": "ਕੋਡ ਦੀ ਨਕਲ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕੀਤੀ ਗਈ",
             "userHasNoVideo": "ਭਾਗੀਦਾਰ ਦਾ ਕੋਈ ਵੀਡੀਓ ਨਹੀਂ ਹੈ",
-            "openInBrowserAlert": "ਕਾਨਫਰੰਸ ਵਿਚ ਸ਼ਾਮਲ ਹੋਣ ਲਈ ਸਫਾਰੀ ਬ੍ਰਾ .ਜ਼ਰ ਵਿਚ ਲਿੰਕ ਖੋਲ੍ਹੋ."
+            "openInBrowserAlert": "ਕਾਨਫਰੰਸ ਵਿਚ ਸ਼ਾਮਲ ਹੋਣ ਲਈ ਸਫਾਰੀ ਬ੍ਰਾ .ਜ਼ਰ ਵਿਚ ਲਿੰਕ ਖੋਲ੍ਹੋ.",
+            "youBeganVideoRecording": "ਤੁਸੀਂ ਇਸ ਕਾਨਫਰੰਸ ਨੂੰ ਰਿਕਾਰਡ ਕਰਨਾ ਸ਼ੁਰੂ ਕੀਤਾ",
+            "youStoppedVideoRecording": "ਤੁਸੀਂ ਇਸ ਕਾਨਫਰੰਸ ਨੂੰ ਰਿਕਾਰਡ ਕਰਨਾ ਬੰਦ ਕਰ ਦਿੱਤਾ ਹੈ"
         },
         "settingsPopup": {
             "webCamera": "ਵੈੱਬ ਕੈਮਰਾ",
@@ -173,7 +184,15 @@
             "fbStartLive": "ਲਾਈਵ ਜਾਓ",
             "fbStopLive": "ਅੰਤ ਲਾਈਵ",
             "fbEmbedCode": "ਏਮਬੇਡ",
-            "copy": "ਕਾੱਪੀ"
+            "copy": "ਕਾੱਪੀ",
+            "turnOffVideo": "ਕੈਮਰਾ \/ ਸਕ੍ਰੀਨ ਸਾਂਝਾਕਰਨ ਬੰਦ ਕਰੋ",
+            "turnOffScreenSharing": "ਸਕ੍ਰੀਨ ਸ਼ੇਅਰਿੰਗ ਬੰਦ ਕਰੋ",
+            "cameraIsTurnedOff": "ਕੈਮਰਾ ਬੰਦ ਹੈ",
+            "startRecording": "ਰਿਕਾਰਡਿੰਗ ਸ਼ੁਰੂ ਕਰੋ",
+            "stopRecording": "ਰਿਕਾਰਡਿੰਗ ਰੋਕੋ",
+            "recordingInProgress": "ਰਿਕਾਰਡਿੰਗ ਜਾਰੀ ਹੈ ...",
+            "publishOnTimeline": "ਟਾਈਮਲਾਈਨ &#39;ਤੇ ਪ੍ਰਕਾਸ਼ਤ ਕਰੋ",
+            "publishToGroup": "ਸਮੂਹ ਵਿੱਚ ਪ੍ਰਕਾਸ਼ਤ ਕਰੋ"
         },
         "participantsPopup": {
             "disconnect": "ਡਿਸਕਨੈਕਟ",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "ਮੈਨੂੰ ਛੱਡ ਕੇ ਸਭ ਤੋਂ ਉੱਚੀ",
             "maximizeLoudest": "ਵੱਧ ਤੋਂ ਵੱਧ ਲਾਉਡੈਸਟ",
             "staticMaximized": "ਸਥਿਰ ਵੱਧ",
-            "manual": "ਮੈਨੂਅਲ"
-        }
+            "manual": "ਮੈਨੂਅਲ",
+            "fullScreen": "ਪੂਰਾ ਸਕਰੀਨ",
+            "turnOffCamera": "ਵੀਡੀਓ ਲੁਕਾਓ",
+            "turnOffAudio": "ਆਡੀਓ ਮਿ Muਟ ਕਰੋ",
+            "turnOffScreenSharing": "ਸਕ੍ਰੀਨ ਸ਼ੇਅਰਿੰਗ ਨੂੰ ਲੁਕਾਓ",
+            "turnOnCamera": "ਵੀਡੀਓ ਦਿਖਾਓ",
+            "turnOnAudio": "ਆਡੀਓ ਅਨਮਿuteਟ ਕਰੋ",
+            "turnOnScreenSharing": "ਸਕ੍ਰੀਨ ਸ਼ੇਅਰਿੰਗ ਦਿਖਾਓ"
+        },
+        "notAllowedToJoinCall": "ਤੁਹਾਨੂੰ ਇਸ ਸਟ੍ਰੀਮ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਣ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਹੈ.",
+        "streamTitle": "Call {999}} ਲਾਈਵ ਕਾਲ"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "ਸੇਵ",
         "Delete": "ਮਿਟਾਓ",
         "Submenu": "ਸਬਮੇਨੁ"
+    },
+    "errors": {
+        "HiddenFromYou": "ਇਹ ਸਮਗਰੀ ਤੁਹਾਡੇ ਤੋਂ ਲੁਕੀ ਹੋਈ ਹੈ."
     }
 }

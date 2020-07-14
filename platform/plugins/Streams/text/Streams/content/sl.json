@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Nimate dovoljenja za pridružitev temu pogovoru.",
         "startedConversation": "začel pogovor",
         "RealTimeCall": "Klic v realnem času",
-        "SearchByName": "Iščite po imenu"
+        "SearchByName": "Iščite po imenu",
+        "Notifications": {
+            "Visit": "{{displayName}} obišče klepet",
+            "Join": "{{displayName}} se je pridružil klepetu",
+            "Leave": "{{displayName}} je zapustil klepet",
+            "RelatedTo": "{{displayName}} je začel {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Sporočilo {{& message.fields.type}} do {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "Skrivanje skupne rabe zaslona",
             "turnOnCamera": "Prikaži video",
             "turnOnAudio": "Vklopite zvok zvoka",
-            "turnOnScreenSharing": "Pokažite skupno rabo zaslona"
+            "turnOnScreenSharing": "Pokažite skupno rabo zaslona",
+            "fullScreen": "Celozaslonski način"
         },
         "notAllowedToJoinCall": "Nimate dovoljenja za pridružitev temu toku.",
         "streamTitle": "{{1}} klic v živo"

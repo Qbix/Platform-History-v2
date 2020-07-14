@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Nemáte povolenie na pripojenie sa k tejto konverzácii.",
         "startedConversation": "začal konverzáciu",
         "RealTimeCall": "Hovor v reálnom čase",
-        "SearchByName": "Vyhľadávanie podľa mena"
+        "SearchByName": "Vyhľadávanie podľa mena",
+        "Notifications": {
+            "Visit": "{{displayName}} navštevuje rozhovor",
+            "Join": "{{displayName}} sa pripojil k rozhovoru",
+            "Leave": "{{displayName}} opustil chat",
+            "RelatedTo": "{{displayName}} začal {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Správa {{& message.fields.type}} až {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "Skryť zdieľanie obrazovky",
             "turnOnCamera": "Zobraziť video",
             "turnOnAudio": "Obnoviť zvuk",
-            "turnOnScreenSharing": "Zobraziť zdieľanie obrazovky"
+            "turnOnScreenSharing": "Zobraziť zdieľanie obrazovky",
+            "fullScreen": "Celá obrazovka"
         },
         "notAllowedToJoinCall": "Na pripojenie k tomuto toku nemáte povolenie.",
         "streamTitle": "{{1}} živý hovor"

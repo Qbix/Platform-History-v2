@@ -43,7 +43,8 @@
             "title": "ເລືອກຕິດຕໍ່",
             "CreateAccount": "+ ຕິດຕໍ່ ໃໝ່",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create ບໍ່ພົບ",
-            "SearchByName": "ຄົ້ນຫາຕາມຊື່"
+            "SearchByName": "ຄົ້ນຫາຕາມຊື່",
+            "EmptyContacts": "ບໍ່ພົບລາຍຊື່ຜູ້ຕິດຕໍ່ ..."
         },
         "select": {
             "title": "ເລືອກທີ່ຕິດຕໍ່ຂອງ {{displayName}}"

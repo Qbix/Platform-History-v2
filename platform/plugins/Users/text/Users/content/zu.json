@@ -43,7 +43,8 @@
             "title": "Khetha othintana naye",
             "CreateAccount": "+ Ukuthintana okusha",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create ayitholakali",
-            "SearchByName": "Sesha ngegama"
+            "SearchByName": "Sesha ngegama",
+            "EmptyContacts": "Oxhumana nabo abatholakali ..."
         },
         "select": {
             "title": "Khetha oxhumana naye {{displayName}}"

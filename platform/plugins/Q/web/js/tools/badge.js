@@ -75,9 +75,13 @@
 		}
 
 		Q.addStylesheet('{{Q}}/css/badge.css', function () {
-			state.interval = setInterval(function () {
-				tool.refresh();
-			}, 3000);
+			tool.refresh();
+		});
+
+		$te.on('DOMNodeRemoved', function(e) {
+			if (Q.instanceOf(e.target, Element) && e.target.classList.contains("Q_badge")) {
+				setTimeout(tool.refresh.bind(tool), 0);
+			}
 		});
 	},
 	{
@@ -195,11 +199,11 @@
 				}
 
 				// if badge element don't exist - create one
-				if (!($badgeElement instanceof jQuery)) {
+				if (!($badgeElement instanceof jQuery) || !$badgeElement.is(":visible")) {
 					$badgeElement = $("<div class='Q_badge'>").appendTo($te);
 
 					if (Q.typeOf(badgeStyle.onClick) === 'function') {
-						$badgeElement.on('click', badgeStyle.onClick);
+						$badgeElement.on(Q.Pointer.fastclick, badgeStyle.onClick);
 					}
 
 					if (badgeStyle.className) {
@@ -217,7 +221,7 @@
 				}
 
 				// remove old styles and apply new
-				$badgeElement.removeAttr("style").css(style);
+				$badgeElement.removeProp("style").css(style);
 			});
 
 			// remove copied elements

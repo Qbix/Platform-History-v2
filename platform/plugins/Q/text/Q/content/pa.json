@@ -73,5 +73,30 @@
             "touchscreen": "ਜ਼ੂਮ ਅਤੇ ਡ੍ਰੈਗ ਕਰਨ ਲਈ ਆਪਣੀਆਂ ਉਂਗਲਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ",
             "notTouchscreen": "ਆਪਣੇ ਮਾਊਸ ਅਤੇ ਵ੍ਹੀਲ ਨੂੰ ਜ਼ੂਮ ਅਤੇ ਡ੍ਰੈਗ ਕਰੋ"
         }
+    },
+    "timestamp": {
+        "lastNight": "ਆਖਰੀ ਰਾਤ",
+        "lastEvening": "ਆਖਰੀ ਸ਼ਾਮ",
+        "yesterday": "ਕੱਲ",
+        "thisMorning": "ਇਸ ਸਵੇਰ ਨੂੰ",
+        "today": "ਅੱਜ",
+        "tonight": "ਅੱਜ ਰਾਤ",
+        "tomorrowMorning": "ਟੋਮ ਸਵੇਰ",
+        "tomorrow": "ਕੱਲ",
+        "hoursAgo": "{9 999}} ਘੰਟੇ ਪਹਿਲਾਂ",
+        "hourAgo": "} 9 999}} ਘੰਟਾ ਪਹਿਲਾਂ",
+        "minuteAgo": "} 9 999}} ਮਿੰਟ ਪਹਿਲਾਂ",
+        "minutesAgo": "} 9 999}} ਮਿੰਟ ਪਹਿਲਾਂ",
+        "secondAgo": "} 9 999}} ਸਕਿੰਟ ਪਹਿਲਾਂ",
+        "secondsAgo": "} 9 999}} ਸਕਿੰਟ ਪਹਿਲਾਂ",
+        "fewSecondsAgo": "ਸਕਿੰਟ ਪਹਿਲਾਂ",
+        "rightNow": "ਹੁਣ ਸੱਜੇ",
+        "inSecond": "{9 999}} ਸਕਿੰਟ ਵਿਚ",
+        "inSeconds": "{9 999}} ਸਕਿੰਟ ਵਿੱਚ",
+        "inMinute": "{9 999}} ਮਿੰਟ ਵਿੱਚ",
+        "inMinutes": "{9 999}} ਮਿੰਟਾਂ ਵਿੱਚ",
+        "inHour": "{9 999}} ਘੰਟੇ ਵਿੱਚ",
+        "inHours": "{9 999}} ਘੰਟਿਆਂ ਵਿੱਚ",
+        "inUnderMinute": "1 ਮਿੰਟ ਦੇ ਅੰਦਰ"
     }
 }

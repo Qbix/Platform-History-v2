@@ -43,7 +43,8 @@
             "title": "Ընտրեք կոնտակտ",
             "CreateAccount": "+ Նոր կապ",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create- ը չի գտնվել",
-            "SearchByName": "Որոնել անունով"
+            "SearchByName": "Որոնել անունով",
+            "EmptyContacts": "Կոնտակտները չեն գտնվել ..."
         },
         "select": {
             "title": "Ընտրեք {{displayName}} - ի կոնտակտը"

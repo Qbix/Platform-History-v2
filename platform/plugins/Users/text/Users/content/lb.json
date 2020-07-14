@@ -43,7 +43,8 @@
             "title": "Kontakt wielen",
             "CreateAccount": "+ Neie Kontakt",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create net fonnt",
-            "SearchByName": "Sich mam Numm"
+            "SearchByName": "Sich mam Numm",
+            "EmptyContacts": "Kontakter net fonnt ..."
         },
         "select": {
             "title": "Wielt Äre Kontakt vun {{displayName}}"

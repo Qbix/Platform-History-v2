@@ -43,7 +43,8 @@
             "title": "Kontaktni tanlang",
             "CreateAccount": "+ Yangi aloqa",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create topilmadi",
-            "SearchByName": "Nom bo&#39;yicha qidirish"
+            "SearchByName": "Nom bo&#39;yicha qidirish",
+            "EmptyContacts": "Kontaktlar topilmadi ..."
         },
         "select": {
             "title": "{{displayName}} kontaktini tanlang"

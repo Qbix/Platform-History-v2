@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "คุณไม่ได้รับอนุญาตให้เข้าร่วมการสนทนานี้",
         "startedConversation": "เริ่มการสนทนา",
         "RealTimeCall": "โทรตามเวลาจริง",
-        "SearchByName": "ค้นหาตามชื่อ"
+        "SearchByName": "ค้นหาตามชื่อ",
+        "Notifications": {
+            "Visit": "{{displayName}} กำลังเยี่ยมชมการแชท",
+            "Join": "{{displayName}} เข้าร่วมการแชท",
+            "Leave": "{{displayName}} ออกจากการแชท",
+            "RelatedTo": "{{displayName}} เริ่ม {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "ข้อความ {{& message.fields.type}} ถึง {{1,000}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "ซ่อนการแชร์หน้าจอ",
             "turnOnCamera": "แสดงวิดีโอ",
             "turnOnAudio": "เปิดเสียง",
-            "turnOnScreenSharing": "แสดงการแชร์หน้าจอ"
+            "turnOnScreenSharing": "แสดงการแชร์หน้าจอ",
+            "fullScreen": "เต็มจอ"
         },
         "notAllowedToJoinCall": "คุณไม่ได้รับอนุญาตให้เข้าร่วมสตรีมนี้",
         "streamTitle": "{{1}} การโทรสด"

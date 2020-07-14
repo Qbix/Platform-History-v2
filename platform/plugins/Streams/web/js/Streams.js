@@ -2424,7 +2424,7 @@ Sp.url = function (messageOrdinal, baseUrl) {
 	});
 	var sep = urlString.indexOf('?') >= 0 ? '&' : '?';
 	var qs = messageOrdinal ? sep+messageOrdinal : "";
-	return Q.url(urlString + sep + qs);
+	return Q.url(urlString + qs);
 };
 /**
  * Save a stream to the server
@@ -3647,10 +3647,11 @@ var Message = Streams.Message = function Streams_Message(fields) {
  * @static
  * @method construct
  * @param {Object} fields Provide any message fields here. Requires at least the "type" of the stream.
- * @param {Boolean} [updateCache=false] Whether to update the Message.get cache after constructing the Message
+ * @param {Boolean} [updateCache=true] Whether to update the Message.get cache after constructing the Message
  * @return {Q.Stream}
  */
 Message.construct = function Streams_Message_construct(fields, updateCache) {
+	updateCache = updateCache !== false;
 	if (Q.isEmpty(fields)) {
 		return false;
 	}
@@ -3675,17 +3676,17 @@ Message.construct = function Streams_Message_construct(fields, updateCache) {
 		messageFunc.messageConstructor = function Streams_Message(fields) {
 			// run any constructors
 			messageFunc.messageConstructor.constructors.apply(this, arguments);
-			if (updateCache) {
-				Message.get.cache.set(
-					[this.publisherId, this.streamName, parseInt(this.ordinal)],
-					0, this, [null, this]
-				);
-			}
 		};
 		Q.mixin(messageFunc, Streams.Message);
 		Q.mixin(messageFunc.messageConstructor, messageFunc);
 	}
 	var msg = new messageFunc.messageConstructor(fields);
+	if (updateCache && !isNaN(parseInt(msg.ordinal))) {
+		Message.get.cache.set(
+			[msg.publisherId, msg.streamName, parseInt(msg.ordinal)],
+			0, msg, [null, msg]
+		);
+	}
 	_updateMessageCache(msg);
 	if (orig) {
 		Q.extend(msg, orig);
@@ -4810,39 +4811,42 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 		"type": "submit",
 		"class": "Q_button Q_main_button Streams_login_start "
 	}).html(Q.text.Users.login.registerButton)
-		.on(Q.Pointer.touchclick, function (e) {
-			Users.submitClosestForm.apply(this, arguments);
-		}).on(Q.Pointer.click, function (e) {
-			e.preventDefault(); // prevent automatic submit on click
-		});
+	.on(Q.Pointer.touchclick, function (e) {
+		Users.submitClosestForm.apply(this, arguments);
+	}).on(Q.Pointer.click, function (e) {
+		e.preventDefault(); // prevent automatic submit on click
+	});
 
 	register_form.append($formContent)
 		.append($('<input type="hidden" name="identifier" />').val(identifier))
 		.append($('<input type="hidden" name="icon" />'))
 		.append($('<input type="hidden" name="Q.method" />').val('post'))
 		.append(
-			$('<div class="Streams_login_get_started">&nbsp;</div>')
-				.append($b)
+			$('<div class="Streams_login_get_started"></div>')
+			.append($b)
 		).submit(Q.throttle(function (e) {
-		var $this = $(this);
-		$this.removeData('cancelSubmit');
-		document.activeElement.blur();
-		if ($('#Users_agree').length && !$('#Users_agree').is(':checked')) {
-			$this.data('cancelSubmit', true);
-			setTimeout(function () {
-				if (confirm(Q.text.Users.login.confirmTerms)) {
-					$('#Users_agree').attr('checked', 'checked');
-					$('#Users_agree')[0].checked = true;
-					$this.submit();
-				}
-			}, 300);
-		}
-	}, 300)).on('keydown', function (e) {
-		if ((e.keyCode || e.which) === 13) {
-			$(this).submit();
-			e.preventDefault();
-		}
-	});
+			var $this = $(this);
+			$this.removeData('cancelSubmit');
+			$b.addClass('Q_working')[0].disabled = true;
+			document.activeElement.blur();
+			if ($('#Users_agree').length && !$('#Users_agree').is(':checked')) {
+				$this.data('cancelSubmit', true);
+				setTimeout(function () {
+					if (confirm(Q.text.Users.login.confirmTerms)) {
+						$('#Users_agree').attr('checked', 'checked');
+						$('#Users_agree')[0].checked = true;
+						$b.addClass('Q_working')[0].disabled = true;
+						$this.submit();
+					}
+				}, 300);
+			}
+		}, 300))
+		.on('keydown', function (e) {
+			if ((e.keyCode || e.which) === 13) {
+				$(this).submit();
+				e.preventDefault();
+			}
+		});
 	if (priv.activation) {
 		register_form.append($('<input type="hidden" name="activation" />').val(priv.activation));
 	}
@@ -5344,6 +5348,10 @@ Q.onInit.add(function _Streams_onInit() {
 					evenIfNotSubscribed: noticeOptions.evenIfNotSubscribed,
 					callback: function () {
 						var stream = this;
+
+						if (stream.fields.name === 'Streams/invited') {
+							stream.fields.title = message.getInstruction('title');
+						}
 
 						Streams.Avatar.get(message.byUserId, function (err, avatar) {
 							var source = (noticeOptions.showSubject !== false ? text : '');

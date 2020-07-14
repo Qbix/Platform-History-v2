@@ -55,9 +55,10 @@ Q.onInit.add(function () {
  * @param {Boolean} [options.cropping=true] Whether to display an interface for selecting cropping images, before sending them to the server. If true, the cropping area overrides the crop option.
  * @default Q.action('Q/image')
  * @param {Q.Event} [options.preprocess] preprocess is a function which is triggering before image upload.
- * Its "this" object will be a jQuery of the imagepicker element
- * The first parameter is a callback, which should be called with an optional
- * hash of overrides, which can include "data", "path", "subpath", "save", "url", "loader" and "crop"
+ *  Its "this" object will be a jQuery of the imagepicker element
+ *  The first parameter is a callback, which should be called with an optional
+ *  hash of overrides, which can include "data", "path", "subpath", "save", "url", "loader" and "crop".
+ *  Or pass false or {cancel: true} as the first parameter to abort.
  * @param {String} [options.save='x'] name of server config under Q/image/sizes, which
  *  are an array of {size: basename} pairs
  *  where the size is of the format "WxH", and either W or H can be empty.
@@ -86,7 +87,9 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		|| ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'ico', 'tiff', 
 			'svg', 'ai', 'psp', 'pcd', 'pct', 'raw'];
 	var extensionList = '.' + extensions.join(', .');
-	state.input = $('<input type="file" accept="' + extensions + '" class="Q_imagepicker_file" />');
+	var inputId = 'Q_imagepicker_input_' + (++counter);
+	state.input = $('<input type="file" accept="' + extensions + '" class="Q_imagepicker_file" />')
+		.attr('id', inputId);
 	state.input.css({
 		'visibility': 'hidden',
 		'height': '0',
@@ -95,12 +98,13 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		'left': '0',
 		'position': 'absolute'
 	});
+	state.label = $('<label for="'+inputId+'"></label>');
 	var originalSrc = $this.attr('src');
 	if (originalSrc && originalSrc.indexOf('?') < 0) {
 		// cache busting
 		$this.attr('src', Q.url(originalSrc, null, {cacheBust: state.cacheBust}));
 	}
-	$this.before(state.input);
+	$this.before(state.input).before(state.label);
 	$this.addClass('Q_imagepicker');
 	Q.addStylesheet('{{Q}}/css/imagepicker.css', { slotName: 'Q' });
 	
@@ -227,6 +231,17 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 
 {
 	/**
+	 * Simulate a click on the imagepicker, leading to selecting a file
+	 * @method click
+	 */
+	click: function () {
+		var $this = this;
+		var state = $this.state('Q/imagepicker');
+		if (state.label && state.label.click) {
+			state.label.click();
+		}
+	},
+	/**
 	 * Set the image in the imagepicker
 	 * @method pick
 	 */
@@ -237,7 +252,6 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		_upload.call(this, src);
 		
 		function _callback (err, res) {
-			var state = $this.state('Q/imagepicker');
 			var msg = Q.firstErrorMessage(err, res);
 			if (msg) {
 				$this.attr('src', state.oldSrc).stop().removeClass('Q_uploading');
@@ -285,7 +299,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				if (requiredSize.width > imageSize.width * ms
 				 || requiredSize.height > imageSize.height * ms) {
 					var result = Q.handle(
-						[state.onTooSmall, state.onFinish], state, 
+						[state.onTooSmall, state.onFinish, instructions], state,
 						[requiredSize, imageSize]
 					);
 					if (result === false) {
@@ -303,6 +317,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	            if ( requiredSize.width && requiredSize.height ) {
 					// if specified both dimensions - we should remove
 					// smaller size to avoid double reductions
+		            requiredSize = Q.copy(requiredSize);
 	                if ( requiredSize.width > requiredSize.height ) {
 	                    requiredSize.height = null;
 	                } else {
@@ -484,34 +499,37 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				                    if (!_checkRequiredSize(requiredSize, bounds)) {
 				                    	return _revert();
 				                    }
-
-									var temp;
-									if (orientation === 6) {
-										temp = bounds.width;
-										bounds.width = bounds.height;
-										bounds.height = temp;
-										temp = bounds.left;
-										bounds.left = bounds.top;
-										bounds.top = isw - temp - bounds.height;
-									} else if (orientation === 8) {
-										temp = bounds.height;
-										bounds.height = bounds.width;
-										bounds.width = temp;
-										temp = bounds.top;
-										bounds.top = bounds.left;
-										bounds.left = ish - temp - bounds.width;
-									} else if (orientation === 3) {
-										bounds.top = ish - bounds.top - bounds.height;
-										bounds.left = isw - bounds.left - bounds.width;
-									}
-									if (!bounds) return;
+									_handleOrientation(bounds);
 				                    _doCanvasCrop(img.src, bounds, orientation, _doUpload);
 		                        }
 		                    });
 						} else {
 							var bounds = _selectionInfo(requiredSize, imageSize);
 							bounds.requiredSize = requiredSize;
+							_handleOrientation(bounds);
 		                    _doCanvasCrop(img.src, bounds, orientation, _doUpload);
+						}
+
+						function _handleOrientation(bounds) {
+							var temp;
+							if (orientation === 6) {
+								temp = bounds.width;
+								bounds.width = bounds.height;
+								bounds.height = temp;
+								temp = bounds.left;
+								bounds.left = bounds.top;
+								bounds.top = isw - temp - bounds.height;
+							} else if (orientation === 8) {
+								temp = bounds.height;
+								bounds.height = bounds.width;
+								bounds.width = temp;
+								temp = bounds.top;
+								bounds.top = bounds.left;
+								bounds.left = ish - temp - bounds.width;
+							} else if (orientation === 3) {
+								bounds.top = ish - bounds.top - bounds.height;
+								bounds.left = isw - bounds.left - bounds.width;
+							}
 						}
 					});
 				});
@@ -519,12 +537,6 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		
 			var EXIFjslib = '{{Q}}/js/exif.js';
 			Q.addScript(EXIFjslib); // start loading it
-		
-			if ((!state.cropping && !state.crop)
-			|| state.saveSizeName.x) {
-				_doUpload(data);
-				return;
-			}
 		
 			var img = new Image;
 			img.onload = _onImgLoad;
@@ -538,7 +550,6 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				_continue({});
 			}
 			function _continue(override) {
-				var state = $this.state('Q/imagepicker');
 				if (override === false || (override && override.cancel)) {
 					return _revert();
 				}
@@ -649,5 +660,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		});
 	}
 });
+
+var counter = 0;
 
 })(Q, Q.$, window, document);

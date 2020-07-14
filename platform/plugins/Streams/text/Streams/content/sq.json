@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Ju nuk keni leje për t&#39;u bashkuar me këtë bisedë.",
         "startedConversation": "filloi një bisedë",
         "RealTimeCall": "Thirrje në kohë reale",
-        "SearchByName": "Kërkoni sipas emrit"
+        "SearchByName": "Kërkoni sipas emrit",
+        "Notifications": {
+            "Visit": "99 99 999}} po viziton bisedën",
+            "Join": "99 99 999}} iu bashkua bisedës",
+            "Leave": "99 999}} u larguan nga biseda",
+            "RelatedTo": "99 {999}} filloi një {{1000}"
+        }
     },
     "notifications": {
         "*": "Mesazhi {{& message.fields.type}} në {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "Fshih ndarjen e ekranit",
             "turnOnCamera": "Shfaq videon",
             "turnOnAudio": "Une audio",
-            "turnOnScreenSharing": "Shfaq ndarjen e ekranit"
+            "turnOnScreenSharing": "Shfaq ndarjen e ekranit",
+            "fullScreen": "Ekran i plotë"
         },
         "notAllowedToJoinCall": "Ju nuk keni leje për t&#39;u bashkuar me këtë rrjedhë.",
         "streamTitle": "999 thirrje live"

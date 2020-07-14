@@ -43,7 +43,8 @@
             "title": "Elige contactu",
             "CreateAccount": "Contact nova +",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create non inveni",
-            "SearchByName": "Quaere nomen"
+            "SearchByName": "Quaere nomen",
+            "EmptyContacts": "Contactus ... non inveni"
         },
         "select": {
             "title": "Selecta ex contactu {{CMXCIX}}"

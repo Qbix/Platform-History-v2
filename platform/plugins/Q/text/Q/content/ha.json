@@ -73,5 +73,30 @@
             "touchscreen": "Yi amfani da yatsunsu don zuƙowa da jawo",
             "notTouchscreen": "Yi amfani da linzamin kwamfuta &amp; motarka don zuƙowa da ja"
         }
+    },
+    "timestamp": {
+        "lastNight": "daren jiya",
+        "lastEvening": "daren jiya",
+        "yesterday": "jiya",
+        "thisMorning": "wannan safiya",
+        "today": "yau",
+        "tonight": "daren yau",
+        "tomorrowMorning": "tom safe",
+        "tomorrow": "gobe",
+        "hoursAgo": "{{h}} awanni da suka gabata",
+        "hourAgo": "{{h}} satin da ya gabata",
+        "minuteAgo": "{{m}} minti daya da suka wuce",
+        "minutesAgo": "{{m}} mintuna da suka wuce",
+        "secondAgo": "{{s}} sati na biyu",
+        "secondsAgo": "{{s}} sakan da suka wuce",
+        "fewSecondsAgo": "seconds da suka wuce",
+        "rightNow": "yanzunnan",
+        "inSecond": "a {{s}} na biyu",
+        "inSeconds": "a cikin {{s}} seconds",
+        "inMinute": "a cikin {{m}} minti",
+        "inMinutes": "a cikin {{m}} minti",
+        "inHour": "a cikin {{h}} awa",
+        "inHours": "a cikin {{h}} sa&#39;o&#39;i",
+        "inUnderMinute": "a karkashin 1 minti"
     }
 }

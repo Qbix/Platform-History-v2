@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "تاسو په دې خبرو اترو کې د شاملیدو اجازه نلرئ.",
         "startedConversation": "خبرې پیل کړې",
         "RealTimeCall": "د ریښتیني وخت زنګ",
-        "SearchByName": "د نوم له مخې لټون"
+        "SearchByName": "د نوم له مخې لټون",
+        "Notifications": {
+            "Visit": "{{999} the چیټ ته ورځي",
+            "Join": "{{999} the په خبرو کې ګډون وکړ",
+            "Leave": "the {999} the چیٹ پریښود",
+            "RelatedTo": "{{displayName}} پیل وکړ {1000}}"
+        }
     },
     "notifications": {
         "*": "پیغام {{& message.fields.type}} {{& stream.fields.title}} ته",
@@ -73,7 +79,8 @@
             "byText": "متن",
             "byFacebook": "فیسبوک",
             "byTwitter": "ټویټر",
-            "scannedQR": "{9 999}} که کوډ سکین شوی و"
+            "scannedQR": "{9 999}} که کوډ سکین شوی و",
+            "copyLink": "د بلنې لینک کاپي کولو لپاره {9 999}."
         },
         "email": {
             "subject": "هو، دا وګوره",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "تاسو ته بلنه ورکړل شوې ده. {{ClickOrTap}} دلته د منلو او ګډون لپاره دلته."
-        }
+        },
+        "command": "بلنه ورکول",
+        "youCanNowPaste": "تاسو اوس کولی شئ دا لینک چیرې چیرې چیرې خلکو ته بلنه ورکړئ"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "لینک کليپ بورډ ته کاپي شوی",
             "codeCopiedToCb": "کوډ کليپ بورډ ته کاپي شوی",
             "userHasNoVideo": "برخه وال هیڅ ویډیو نلري",
-            "openInBrowserAlert": "کنفرانس کې د ګډون لپاره په سفاري براوزر کې لینک خلاص کړئ."
+            "openInBrowserAlert": "کنفرانس کې د ګډون لپاره په سفاري براوزر کې لینک خلاص کړئ.",
+            "youBeganVideoRecording": "تاسو د دې کنفرانس ثبت کول پیل کړل",
+            "youStoppedVideoRecording": "تاسو د دې کنفرانس ثبتول بند کړل"
         },
         "settingsPopup": {
             "webCamera": "ویب کیمره",
@@ -173,7 +184,15 @@
             "fbStartLive": "ژوندی شه",
             "fbStopLive": "ژوندۍ پای",
             "fbEmbedCode": "ضمیمه",
-            "copy": "کاپي"
+            "copy": "کاپي",
+            "turnOffVideo": "د کیمرې \/ سکرین شریکول بند کړئ",
+            "turnOffScreenSharing": "د پردې شریکول بند کړئ",
+            "cameraIsTurnedOff": "کیمره بنده ده",
+            "startRecording": "ثبتول پیل کړئ",
+            "stopRecording": "ثبتول ودروئ",
+            "recordingInProgress": "ثبتول د پرمختګ په حال کې دي ...",
+            "publishOnTimeline": "د مهال ویش په خپرولو سره",
+            "publishToGroup": "ډلې ته نشر کړئ"
         },
         "participantsPopup": {
             "disconnect": "منقول",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "لوډیست مې پرته",
             "maximizeLoudest": "لوډیټس اعظمي کړئ",
             "staticMaximized": "جامد اعظمي شوی",
-            "manual": "لارښود"
-        }
+            "manual": "لارښود",
+            "fullScreen": "مکمله صفحه",
+            "turnOffCamera": "ویډیو پټول",
+            "turnOffAudio": "غږیز غږول",
+            "turnOffScreenSharing": "د پردې شریکول پټ کړئ",
+            "turnOnCamera": "ویډیو ښیې",
+            "turnOnAudio": "غږ غیز کړئ",
+            "turnOnScreenSharing": "د پردې شریکول وښایاست"
+        },
+        "notAllowedToJoinCall": "تاسو په دې جریان کې د شاملیدو اجازه نلرئ.",
+        "streamTitle": "} {999}} ژوندی زنګ"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "خوندي کړئ",
         "Delete": "ړنګول",
         "Submenu": "سب میینو"
+    },
+    "errors": {
+        "HiddenFromYou": "دا مینځپانګه ستاسو څخه پټ ده."
     }
 }

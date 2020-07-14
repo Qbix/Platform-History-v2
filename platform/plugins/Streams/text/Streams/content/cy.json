@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Nid oes gennych ganiatâd i ymuno â&#39;r sgwrs hon.",
         "startedConversation": "cychwyn sgwrs",
         "RealTimeCall": "Galwad Amser Real",
-        "SearchByName": "Chwilio yn ôl enw"
+        "SearchByName": "Chwilio yn ôl enw",
+        "Notifications": {
+            "Visit": "Mae {{displayName}} yn ymweld â&#39;r sgwrs",
+            "Join": "Ymunodd {{displayName}} â&#39;r sgwrs",
+            "Leave": "Gadawodd {{displayName}} y sgwrs",
+            "RelatedTo": "Dechreuodd {{displayName}} {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Neges {{& message.fields.type}} i {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "Cuddio rhannu sgrin",
             "turnOnCamera": "Dangos fideo",
             "turnOnAudio": "Sain ddigamsyniol",
-            "turnOnScreenSharing": "Dangos rhannu sgrin"
+            "turnOnScreenSharing": "Dangos rhannu sgrin",
+            "fullScreen": "Sgrin llawn"
         },
         "notAllowedToJoinCall": "Nid oes gennych ganiatâd i ymuno â&#39;r nant hon.",
         "streamTitle": "{{1}} galwad byw"

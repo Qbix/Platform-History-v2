@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "ليس لديك إذن للانضمام إلى هذه المحادثة.",
         "startedConversation": "بدأت محادثة",
         "RealTimeCall": "نداء الوقت الحقيقي",
-        "SearchByName": "البحث عن طريق الإسم"
+        "SearchByName": "البحث عن طريق الإسم",
+        "Notifications": {
+            "Visit": "{{displayName}} يزور الدردشة",
+            "Join": "انضم {{displayName}} إلى الدردشة",
+            "Leave": "{{displayName}} غادر الدردشة",
+            "RelatedTo": "{{displayName}} بدأ {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "رسالة {{& message.fields.type}} إلى {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "إخفاء مشاركة الشاشة",
             "turnOnCamera": "عرض الفيديو",
             "turnOnAudio": "إلغاء كتم الصوت",
-            "turnOnScreenSharing": "إظهار مشاركة الشاشة"
+            "turnOnScreenSharing": "إظهار مشاركة الشاشة",
+            "fullScreen": "شاشة كاملة"
         },
         "notAllowedToJoinCall": "ليس لديك إذن للانضمام إلى هذا الدفق.",
         "streamTitle": "{{1}} مكالمة مباشرة"

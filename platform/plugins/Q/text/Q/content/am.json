@@ -73,5 +73,30 @@
             "touchscreen": "ለማጉላት እና ለመጎተት ጣቶችህን ተጠቀም",
             "notTouchscreen": "ለማጉላት እና ለመጎተት የእርስዎን መዳፊት እና ጎኖች ይጠቀሙ"
         }
+    },
+    "timestamp": {
+        "lastNight": "ትናንትና ማታ",
+        "lastEvening": "የመጨረሻው ዋዜማ",
+        "yesterday": "ትናንት",
+        "thisMorning": "ይህ ጥዋት",
+        "today": "ዛሬ",
+        "tonight": "ዛሬ ማታ",
+        "tomorrowMorning": "ቶማ ጠዋት",
+        "tomorrow": "ነገ",
+        "hoursAgo": "ከ {{h}} ሰዓታት በፊት",
+        "hourAgo": "ከ {{h}} ሰዓት በፊት",
+        "minuteAgo": "ከ {{m}} ደቂቃ በፊት",
+        "minutesAgo": "ከ {{m}} ደቂቃዎች በፊት",
+        "secondAgo": "{{s}} ሰከንድ በፊት",
+        "secondsAgo": "ከ {{s}} ሰከንዶች በፊት",
+        "fewSecondsAgo": "ከሰከንዶች በፊት",
+        "rightNow": "አሁን",
+        "inSecond": "በ {{s}} ሰከንድ ውስጥ",
+        "inSeconds": "በ {{s}} ሰከንዶች ውስጥ",
+        "inMinute": "በ {{m}} ደቂቃ ውስጥ",
+        "inMinutes": "በ {{m}} ደቂቃዎች ውስጥ",
+        "inHour": "በ {{h}} ሰዓት ውስጥ",
+        "inHours": "በ {{h}} ሰዓታት ውስጥ",
+        "inUnderMinute": "ከ 1 ደቂቃ በታች"
     }
 }

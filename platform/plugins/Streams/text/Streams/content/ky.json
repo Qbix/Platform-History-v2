@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Бул маекти кирүүгө уруксат берилген эмес.",
         "startedConversation": "сөз баштады",
         "RealTimeCall": "Айкын убакыт Call",
-        "SearchByName": "аталышы боюнча издөө"
+        "SearchByName": "аталышы боюнча издөө",
+        "Notifications": {
+            "Visit": "{{displayName}} баарлашууну көрүп жатат",
+            "Join": "Чатка {{displayName}} кошулду",
+            "Leave": "{{displayName}} баарлашуудан чыгып кетти",
+            "RelatedTo": "{{displayName}} {{stream.displayType}} баштаган"
+        }
     },
     "notifications": {
         "*": "Message {{& message.fields.type}} үчүн {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "текст",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "коду сканерден болсо {{ClickOrTap}}"
+            "scannedQR": "коду сканерден болсо {{ClickOrTap}}",
+            "copyLink": "Чакыруу шилтемесин көчүрүү үчүн {{ClickOrTap}}"
         },
         "email": {
             "subject": "Эй, бул текшерип",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "Сиз чакырылган. {{ClickOrTap}} бул жерде кабыл алууга жана кошулуу."
-        }
+        },
+        "command": "чакыруу",
+        "youCanNowPaste": "Азыр бул шилтемени адамдарды чакыруу үчүн бир жерге чаптасаңыз болот"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "тактасына көчүрүлдү -га шилтеме берген барактар",
             "codeCopiedToCb": "Code тактасына көчүрүлдү",
             "userHasNoVideo": "Катышуучу жок Video элек",
-            "openInBrowserAlert": "жыйынында Safari браузер ачуу кошулуу."
+            "openInBrowserAlert": "жыйынында Safari браузер ачуу кошулуу.",
+            "youBeganVideoRecording": "Бул конференцияны жаза баштадыңыз",
+            "youStoppedVideoRecording": "Бул конференцияны жазууну токтоттуңуз"
         },
         "settingsPopup": {
             "webCamera": "Желе Камера",
@@ -173,7 +184,15 @@
             "fbStartLive": "Go Live",
             "fbStopLive": "Аягы",
             "fbEmbedCode": "Embed",
-            "copy": "копия"
+            "copy": "копия",
+            "turnOffVideo": "Камера \/ экран бөлүшүү мүмкүнчүлүгүн өчүрүү",
+            "turnOffScreenSharing": "Экран бөлүшүүнү өчүрүү",
+            "cameraIsTurnedOff": "Камера өчүрүлгөн",
+            "startRecording": "Жазууну баштаңыз",
+            "stopRecording": "Жазууну токтотуу",
+            "recordingInProgress": "Жаздыруу аткарылууда ...",
+            "publishOnTimeline": "Убакыт тилкесинде жарыялаңыз",
+            "publishToGroup": "Топко жарыялоо"
         },
         "participantsPopup": {
             "disconnect": "ажыратуу",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "Дүркүрөгөн кол тышкары Мен",
             "maximizeLoudest": "Maximize дүркүрөгөн",
             "staticMaximized": "Статикалык көбүнчө",
-            "manual": "колдонмо"
-        }
+            "manual": "колдонмо",
+            "fullScreen": "Толук экран",
+            "turnOffCamera": "Видеону жашыруу",
+            "turnOffAudio": "Аудионун үнүн басуу",
+            "turnOffScreenSharing": "Экран бөлүшүүнү жашыруу",
+            "turnOnCamera": "Видеону көрсөтүү",
+            "turnOnAudio": "Аудио үнүн чыгар",
+            "turnOnScreenSharing": "Экранда бөлүшүүнү көрсөтүү"
+        },
+        "notAllowedToJoinCall": "Бул агымга кошулууга уруксатыңыз жок.",
+        "streamTitle": "{{1}} жандуу чалуу"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "Save",
         "Delete": "Delete",
         "Submenu": "судан"
+    },
+    "errors": {
+        "HiddenFromYou": "Бул мазмун сизден жашырылган."
     }
 }

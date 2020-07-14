@@ -2,11 +2,22 @@
 	
 function Assets_after_Assets_charge($params)
 {
-	$user = $payments = $amount = $currency = $charge = $adapter = $options = $format = null;
-	extract($params, EXTR_OVERWRITE);
+	$user = $params['user'];
+	$payments = $params['payments'];
+	$amount = $params['amount'];
+	$currency = $params['currency'];
+	$charge = $params['charge'];
+	$adapter = $params['adapter'];
+	$options = $params['options'];
 
+	// rate for currency required
+	$credits = Assets_Credits::convertToCredits($amount, $currency);
+
+	Assets_Credits::earn($credits, 'BoughtCredits', $user->id);
+
+	//TODO: as we come to use credits system, need to change this to send email with amount of credits bought
 	$text = Q_Text::get('Assets/content', array('language' => Users::getLanguage($user->id)));
-	$description = Q::ifset($text, 'charges', 'GenericDescription', 'a product or service');
+	$description = Q::interpolate(Q::ifset($text, 'credits', 'BoughtCredits', 'Bought {{amount}} credits'), array('amount' => $credits));
 	$stream = Q::ifset($options, 'stream', null);
 	if ($stream) {
 		$publisherId = $stream->publisherId;
@@ -35,7 +46,7 @@ function Assets_after_Assets_charge($params)
 	$link = Q_Request::baseUrl('action.php') . "/Assets/payment"
 			. "?publisherId=" . urlencode($publisherId)
 			. "&userId=" . urlencode($user->id);
-	
+
 	$fields = compact(
 		'user', 'publisher', 'publisherId', 'communityId', 'communityName', 'communitySuffix',
 		'description', 'subscription', 'stream', 'plan', 'currency', 
@@ -60,7 +71,7 @@ function Assets_after_Assets_charge($params)
 			$mobile->sendMessage($mobileView, $fields);
 		}
 	}
-	
+
 	if ($publisher->emailAddress) {
 		$email = new Users_Email();
 		$email->address = $publisher->emailAddress;

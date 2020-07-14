@@ -617,6 +617,7 @@ function _loadUrl(o, cb) {
 function _handlePosAndScroll(o)
 {
 	var $this = this;
+	var $html = $('html');
 	var parent = $this.parent();
 	var topMargin = 0, bottomMargin = 0, parentHeight = 0;
 	var wasVertical = null; // for touch devices
@@ -645,7 +646,7 @@ function _handlePosAndScroll(o)
 		
 		topMargin = o.topMargin || 0;
 		parentHeight = (!o.alignByParent || parent[0] === document.body)
-			? Q.Pointer.windowHeight()
+			? $html.height()
 			: parent.height();
 		if (typeof(topMargin) === 'string') // percentage
 			topMargin = Math.round(parseInt(topMargin) / 100 * parentHeight);

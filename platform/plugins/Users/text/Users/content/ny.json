@@ -43,7 +43,8 @@
             "title": "Sankhani kukhudzana",
             "CreateAccount": "+ Kuyankhulana Kwatsopano",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create sapezeka",
-            "SearchByName": "Sakani ndi dzina"
+            "SearchByName": "Sakani ndi dzina",
+            "EmptyContacts": "Otsatsa sanapezeke ..."
         },
         "select": {
             "title": "Sankhani kukhudzana ndi {{displayName}}"

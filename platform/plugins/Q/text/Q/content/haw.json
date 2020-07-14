@@ -73,5 +73,30 @@
             "touchscreen": "E hoʻohana i kou mau manamana lima e kiʻi a huki",
             "notTouchscreen": "E hoʻohana i kāuʻiole a me ka huila e hoʻoulu a huki"
         }
+    },
+    "timestamp": {
+        "lastNight": "i ka pō nei",
+        "lastEvening": "hope hope",
+        "yesterday": "inehinei",
+        "thisMorning": "kēia kakahiaka",
+        "today": "i kēia lā",
+        "tonight": "kēia pō",
+        "tomorrowMorning": "tom kakahiaka",
+        "tomorrow": "āpōpō",
+        "hoursAgo": "{{h}} mau hola i hala",
+        "hourAgo": "{{h}} hora i hala",
+        "minuteAgo": "{{m}} minute i hala",
+        "minutesAgo": "{{m}} mau minuke i hala",
+        "secondAgo": "{{s}} kekona i hala",
+        "secondsAgo": "{{s}} kekona i hala",
+        "fewSecondsAgo": "mau kekona",
+        "rightNow": "i kēia manawa",
+        "inSecond": "i {{s}} kekona",
+        "inSeconds": "i {{s}} kekona",
+        "inMinute": "i {{m}} minute",
+        "inMinutes": "i {{m}} mau minuke",
+        "inHour": "i {{h}} hora",
+        "inHours": "i {{h}} mau hola",
+        "inUnderMinute": "i lalo o 1 mau minuke"
     }
 }

@@ -73,5 +73,30 @@
             "touchscreen": "Siv koj tus ntiv tes kom zoom thiab luag",
             "notTouchscreen": "Siv koj tus nas &amp; lub log kom zoom thiab luag"
         }
+    },
+    "timestamp": {
+        "lastNight": "nag hmo",
+        "lastEvening": "kawg Eve",
+        "yesterday": "nag hmo",
+        "thisMorning": "tus niam txiv no",
+        "today": "niaj hnub no",
+        "tonight": "hmo no",
+        "tomorrowMorning": "yav sawv ntxov",
+        "tomorrow": "tag kis",
+        "hoursAgo": "{{h}} teev dhau los",
+        "hourAgo": "{{h}} teev dhau los",
+        "minuteAgo": "{{m}} feeb dhau los",
+        "minutesAgo": "{{m}} feeb dhau los",
+        "secondAgo": "{{s}} thib ob dhau los",
+        "secondsAgo": "{{s}} vib nas this dhau los",
+        "fewSecondsAgo": "vib nas this dhau los",
+        "rightNow": "tam sim no",
+        "inSecond": "hauv {{s}} thib ob",
+        "inSeconds": "hauv {{s}} vib nas this",
+        "inMinute": "hauv {{m}} feeb",
+        "inMinutes": "hauv {{m}} feeb",
+        "inHour": "hauv {{h}} teev",
+        "inHours": "hauv {{h}} teev",
+        "inUnderMinute": "hauv qab 1 feeb"
     }
 }

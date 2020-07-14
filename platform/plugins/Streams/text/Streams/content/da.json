@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Du har ikke tilladelse til at deltage i denne samtale.",
         "startedConversation": "startede en samtale",
         "RealTimeCall": "Realtidsopkald",
-        "SearchByName": "Søg efter navn"
+        "SearchByName": "Søg efter navn",
+        "Notifications": {
+            "Visit": "{{displayName}} besøger chatten",
+            "Join": "{{displayName}} blev medlem af chatten",
+            "Leave": "{{displayName}} forlod chatten",
+            "RelatedTo": "{{displayName}} startede en {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Meddelelse {{& message.fields.type}} til {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "Skjul deling af skærmen",
             "turnOnCamera": "Vis video",
             "turnOnAudio": "Dæmp lyden",
-            "turnOnScreenSharing": "Vis skærmdeling"
+            "turnOnScreenSharing": "Vis skærmdeling",
+            "fullScreen": "Fuld skærm"
         },
         "notAllowedToJoinCall": "Du har ikke tilladelse til at deltage i denne strøm.",
         "streamTitle": "{{1}} liveopkald"

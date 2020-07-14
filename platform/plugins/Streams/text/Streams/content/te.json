@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "ఈ సంభాషణలో చేరడానికి మీకు అనుమతి లేదు.",
         "startedConversation": "సంభాషణను ప్రారంభించారు",
         "RealTimeCall": "రియల్ టైమ్ కాల్",
-        "SearchByName": "పేరు ద్వారా శోధించండి"
+        "SearchByName": "పేరు ద్వారా శోధించండి",
+        "Notifications": {
+            "Visit": "{{999} the చాట్‌ను సందర్శిస్తున్నారు",
+            "Join": "{{999} the చాట్‌లో చేరారు",
+            "Leave": "{{999} the చాట్ నుండి నిష్క్రమించారు",
+            "RelatedTo": "{{999} a ప్రారంభమైంది {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "{{& stream.fields.title}} కి సందేశం {{& message.fields.type}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "స్క్రీన్ భాగస్వామ్యాన్ని దాచండి",
             "turnOnCamera": "వీడియో చూపించు",
             "turnOnAudio": "ఆడియోను అన్‌మ్యూట్ చేయండి",
-            "turnOnScreenSharing": "స్క్రీన్ భాగస్వామ్యాన్ని చూపించు"
+            "turnOnScreenSharing": "స్క్రీన్ భాగస్వామ్యాన్ని చూపించు",
+            "fullScreen": "పూర్తి స్క్రీన్"
         },
         "notAllowedToJoinCall": "ఈ స్ట్రీమ్‌లో చేరడానికి మీకు అనుమతి లేదు.",
         "streamTitle": "{{1}} ప్రత్యక్ష కాల్"

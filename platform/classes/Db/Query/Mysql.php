@@ -50,6 +50,9 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		$this->replacements = array(
 			'{{prefix}}' => $prefix
 		);
+		if (isset($db->dbname)) {
+			$this->replacements['{{dbname}}'] = $db->dbname;
+		}
 
 		// Put default contents in the clauses
 		// in case the query gets run.
@@ -379,8 +382,12 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	function getSQL ($callback = null, $template = false)
 	{
 		if (!$template) {
-			if (isset($this->db->dbname)) $this->replacements['{{dbname}}'] = $this->db->dbname;
-			if (isset($this->db->prefix)) $this->replacements['{{prefix}}'] = $this->db->prefix;
+			if (isset($this->db->dbname)) {
+				$this->replacements['{{dbname}}'] = $this->db->dbname;
+			}
+			$this->replacements['{{prefix}}'] = isset($this->db->prefix)
+				? $this->db->prefix
+				: '';
 		}
 		$repres = $this->build();
 		$keys = array_keys($this->parameters);

@@ -73,5 +73,30 @@
             "touchscreen": "Benotzt Är Fanger fir ze vergréisseren an ze ziehen",
             "notTouchscreen": "Benotzt Är Maus a Rad fir ze zoomen an ze ziehen"
         }
+    },
+    "timestamp": {
+        "lastNight": "d&#39;lescht Nuecht",
+        "lastEvening": "leschten Owend",
+        "yesterday": "gëschter",
+        "thisMorning": "dëser Moien",
+        "today": "haut",
+        "tonight": "haut den Owend",
+        "tomorrowMorning": "tom muer",
+        "tomorrow": "muer",
+        "hoursAgo": "{{h}} Stonnen",
+        "hourAgo": "{{h}} Stonn virun",
+        "minuteAgo": "{{m}} Minutten",
+        "minutesAgo": "{{m}} Minutten",
+        "secondAgo": "{{s}} Sekonn",
+        "secondsAgo": "{{s}} Sekonne viru",
+        "fewSecondsAgo": "Sekonnen",
+        "rightNow": "an desem Moment",
+        "inSecond": "an {{s}} Sekonn",
+        "inSeconds": "an {{s}} Sekonnen",
+        "inMinute": "an {{m}} Minutt",
+        "inMinutes": "an {{m}} Minutten",
+        "inHour": "an {{h}} Stonn",
+        "inHours": "an {{h}} Stonnen",
+        "inUnderMinute": "an ënner 1 Minutt"
     }
 }

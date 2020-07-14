@@ -73,5 +73,30 @@
             "touchscreen": "د ځوړولو او ځغلولو لپاره خپلې ګوتې وکارئ",
             "notTouchscreen": "د زوم او ټوپ کولو لپاره خپل مایع او څیر کاروئ"
         }
+    },
+    "timestamp": {
+        "lastNight": "تېره شپه",
+        "lastEvening": "اخري ورځ",
+        "yesterday": "پرون",
+        "thisMorning": "دا سهار",
+        "today": "نن",
+        "tonight": "نن شپه",
+        "tomorrowMorning": "نن سهار",
+        "tomorrow": "سبا",
+        "hoursAgo": "{9 999}} ساعتونه مخکې",
+        "hourAgo": "} 9 999}} ساعت مخکې",
+        "minuteAgo": "} 9 999}} دقیقه مخکې",
+        "minutesAgo": "} 9 999}} دقیقې دمخه",
+        "secondAgo": "} 9 999}} دوهم دمخه",
+        "secondsAgo": "{9 999}} ثانیې مخکې",
+        "fewSecondsAgo": "ثانیې مخکې",
+        "rightNow": "همدا اوس",
+        "inSecond": "په {9 999}} دوهم کې",
+        "inSeconds": "په {9 999}} ثانیو کې",
+        "inMinute": "په {9 999}} دقیقه کې",
+        "inMinutes": "په {9 999}} دقیقو کې",
+        "inHour": "په {9 999}} ساعت کې",
+        "inHours": "په {9 999}} ساعتونو کې",
+        "inUnderMinute": "د 1 دقیقو لاندې"
     }
 }

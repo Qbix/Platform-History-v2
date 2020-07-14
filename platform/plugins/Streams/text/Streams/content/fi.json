@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Sinulla ei ole lupaa liittyä tähän keskusteluun.",
         "startedConversation": "aloitti keskustelun",
         "RealTimeCall": "Reaaliaikainen puhelu",
-        "SearchByName": "Etsi nimen mukaan"
+        "SearchByName": "Etsi nimen mukaan",
+        "Notifications": {
+            "Visit": "{{displayName}} vierailee chatissa",
+            "Join": "{{displayName}} liittyi chattiin",
+            "Leave": "{{displayName}} lähti keskustelusta",
+            "RelatedTo": "{{displayName}} perusti {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Viesti {{& message.fields.type}} kohtaan {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "Piilota näytön jakaminen",
             "turnOnCamera": "Näytä video",
             "turnOnAudio": "Poista äänen mykistys",
-            "turnOnScreenSharing": "Näytä näytön jakaminen"
+            "turnOnScreenSharing": "Näytä näytön jakaminen",
+            "fullScreen": "Koko näyttö"
         },
         "notAllowedToJoinCall": "Sinulla ei ole lupaa liittyä tähän streamiin.",
         "streamTitle": "{{1}} suora puhelu"

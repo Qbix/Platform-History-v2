@@ -73,5 +73,30 @@
             "touchscreen": "Aduprà e vostru dita per allargà è trà",
             "notTouchscreen": "Usate u vostru mouse &amp; rotella per zoomu è trascinarà"
         }
+    },
+    "timestamp": {
+        "lastNight": "a notte passata",
+        "lastEvening": "l&#39;ultima vigilia",
+        "yesterday": "ieri",
+        "thisMorning": "sta matina",
+        "today": "oghje",
+        "tonight": "sta notte",
+        "tomorrowMorning": "tomba matina",
+        "tomorrow": "dumane",
+        "hoursAgo": "{{h}} ore fà",
+        "hourAgo": "{{h}} ora fa",
+        "minuteAgo": "{{m}} minutu fà",
+        "minutesAgo": "{{m}} minuti fà",
+        "secondAgo": "{{s}} secondu",
+        "secondsAgo": "{{s}} seconde fà",
+        "fewSecondsAgo": "sicondi fa",
+        "rightNow": "subitu subitu",
+        "inSecond": "in {{s}} secunna",
+        "inSeconds": "in {{s}} seconde",
+        "inMinute": "in {{m}} minutu",
+        "inMinutes": "in {{m}} minuti",
+        "inHour": "in {{h}} ora",
+        "inHours": "in {{h}} ore",
+        "inUnderMinute": "in menu di 1 minutu"
     }
 }

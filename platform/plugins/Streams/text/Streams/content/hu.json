@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Nincs engedélye a beszélgetéshez.",
         "startedConversation": "beszélgetést kezdett",
         "RealTimeCall": "Valós idejű hívás",
-        "SearchByName": "Keresés név szerint"
+        "SearchByName": "Keresés név szerint",
+        "Notifications": {
+            "Visit": "{{displayName}} meglátogatja a csevegőt",
+            "Join": "{{displayName}} csatlakozott a csevegéshez",
+            "Leave": "{{displayName}} elhagyta a csevegőt",
+            "RelatedTo": "{{displayName}} indított egy {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Üzenet {{& message.fields.type}} {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "A képernyőmegosztás elrejtése",
             "turnOnCamera": "Videó megjelenítése",
             "turnOnAudio": "A hang némítása",
-            "turnOnScreenSharing": "A képernyőmegosztás megjelenítése"
+            "turnOnScreenSharing": "A képernyőmegosztás megjelenítése",
+            "fullScreen": "Teljes képernyő"
         },
         "notAllowedToJoinCall": "Nincs engedélyed ahhoz, hogy csatlakozz ehhez a patakhoz.",
         "streamTitle": "{{1}} élő hívás"

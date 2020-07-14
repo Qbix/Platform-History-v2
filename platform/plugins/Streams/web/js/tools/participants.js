@@ -285,6 +285,11 @@ function _Streams_participants(options) {
 		}
 
 		function _addAvatar(userId, prepend, participant) {
+			var $e = userId ? tool.$avatars : tool.$blanks;
+			if (userId && $(".Users_avatar_tool[id*=" + userId + "]", $e).length) {
+				return;
+			}
+
 			var $element = $(Q.Tool.setUpElement(
 				'div', 
 				'Users/avatar',
@@ -294,7 +299,6 @@ function _Streams_participants(options) {
 				userId || null, 
 				tool.prefix)
 			);
-			var $e = userId ? tool.$avatars : tool.$blanks;
 			if (false !== Q.handle(state.filter, tool, [userId, $element[0]])) {
 				$element[prepend?'prependTo':'appendTo']($e).activate();
 			}

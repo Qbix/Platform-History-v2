@@ -327,6 +327,13 @@ class Streams_Stream extends Base_Streams_Stream
 			);
 		}
 
+		if (isset($this->title) and is_array($this->title)) {
+			$this->title = Q::interpolate($this->title); // fetch from text files
+		}
+		if (isset($this->content) and is_array($this->content)) {
+			$this->content = Q::interpolate($this->content); // fetch from text files
+		}
+
 		if (!$this->retrieved) {
 			foreach (array('messageCount', 'invitedCount', 'participatingCount') as $f) {
 				if (!isset($this->$f)) {
@@ -525,15 +532,15 @@ class Streams_Stream extends Base_Streams_Stream
 		return $result;
 	}
 	
-	function beforeRemove($pk)
+	function beforeClose()
 	{
 		/**
-		 * @event Streams/remove/$streamType {before}
+		 * @event Streams/close/$streamType {before}
 		 * @param {Streams_Stream} stream
 		 * @param {string} asUserId
 		 * @return {false} To cancel further processing
 		 */
-		if (Q::event("Streams/remove/{$this->type}", compact('stream'), 'before') === false) {
+		if (Q::event("Streams/close/{$this->type}", array('stream' => $this), 'before') === false) {
 			return false;
 		}
 		return true;
@@ -971,8 +978,7 @@ class Streams_Stream extends Base_Streams_Stream
 			$this->publisherId,
 			$this->name,
 			$message,
-			$skipAccess,
-			array($this)
+			$skipAccess
 		);
 	}
 	

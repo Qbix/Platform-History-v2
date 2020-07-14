@@ -616,6 +616,7 @@
 	 *  @param {Array} [options.scope=['email','public_profile'] permissions to request from the authentication platform
 	 *  @param {String} [options.identifierType="email,mobile"] the type of the identifier, which could be "mobile" or "email" or "email,mobile"
 	 *  @param {Object} [options.appIds={}] Can be used to set custom {platform: appId} pairs
+	 *  @param {String} [options.identifier] If passed, automatically enters this identifier and clicks the Go button
 	 */
 	Users.login = function (options) {
 
@@ -1317,6 +1318,16 @@
 					.val(username)
 					.width($('#Users_login_identifier').width() - 30)
 			);
+			var $b = $('<button />', {
+				"type": "submit",
+				"class": "Q_button Q_main_button Users_login_start "
+			}).html(Q.text.Users.login.registerButton)
+			.on(Q.Pointer.touchclick, function (e) {
+				Users.submitClosestForm.apply(this, arguments);
+			}).on(Q.Pointer.click, function (e) {
+				e.preventDefault(); // prevent automatic submit on click
+			});
+			var _registering = false;
 			var register_form = $('<form method="post" class="Users_register_form" />')
 				.attr('action', Q.action("Users/register"))
 				.data('form-type', 'register')
@@ -1326,13 +1337,16 @@
 				.append($('<input type="hidden" name="icon[40.png]" />').val(src40))
 				.append($('<input type="hidden" name="icon[50.png]" />').val(src50))
 				.append($('<input type="hidden" name="icon[80.png]" />').val(src80))
-				.append($('<div class="Users_login_get_started">&nbsp;</div>')
-					.append(
-						$('<button type="submit" class="Q_button Users_login_start Q_main_button" />')
-							.html(Q.text.Users.login.registerButton)
-					)).submit(function () {
+				.append(
+					$('<div class="Users_login_get_started"></div>')
+					.append($b)
+				).submit(function () {
+					if (_registering) {
+						return false;
+					}
 					var $this = $(this);
 					$this.removeData('cancelSubmit');
+					$b.addClass('Q_working')[0].disabled = true;
 					document.activeElement.blur();
 					if ($('#Users_agree').length && !$('#Users_agree').is(':checked')) {
 						$this.data('cancelSubmit', true);
@@ -1340,6 +1354,7 @@
 							if (confirm(Q.text.Users.login.confirmTerms)) {
 								$('#Users_agree').attr('checked', 'checked');
 								$('#Users_agree')[0].checked = true;
+								$b.addClass('Q_working')[0].disabled = true;
 								$this.submit();
 							}
 						}, 300);
@@ -1415,6 +1430,7 @@
 		if (!autologin) {
 			var step2 = $('#Users_login_step2').html(step2_form);
 			var $dc = step2.closest('.Q_dialog_content');
+			login_setupDialog.dialog.addClass('Users_login_expanded');
 			if (Q.info && Q.info.isTouchscreen) {
 				step2.show();
 				step2_form.plugin('Q/placeholders');
@@ -1630,11 +1646,27 @@
 				closeOnEsc: Q.typeOf(options.closeOnEsc) === 'undefined' ? true : !!options.closeOnEsc,
 				beforeLoad: function () {
 					$('#Users_login_step1').css('opacity', 1).nextAll().hide();
-					$('input[type!=hidden]', dialog).val('');
+					setTimeout(function () {
+						$('input[type!=hidden]', dialog).val('').trigger('change');
+					}, 0);
 				},
 				onActivate: function () {
+					var $input = $('input[type!=hidden]', dialog)
 					dialog.plugin('Q/placeholders');
-					$('input[type!=hidden]', dialog).eq(0).val('').plugin('Q/clickfocus');
+					if (Q.info.platform === 'ios') {
+						$input.eq(0).plugin('Q/clickfocus');	
+					}
+					setTimeout(function () {
+						$input.val('').trigger('change');
+						if (options.identifier) {
+							$input.val(options.identifier).trigger('change');
+							setTimeout(function () {
+								Users.submitClosestForm.apply($a, arguments);
+							}, 300);
+						} else {
+							$input.val('').trigger('change').eq(0).plugin('Q/clickfocus');
+						}
+					}, 0);
 				},
 				onClose: function () {
 					$('#Users_login_step1 .Q_button').removeAttr('disabled');
@@ -1669,6 +1701,7 @@
 				$('#Users_login_usingPlatforms').css({opacity: 0}).show()
 					.animate({opacity: 1}, 'fast');
 			}
+			login_setupDialog.dialog.removeClass('Users_login_expanded');
 		}
 	}
 
@@ -1764,11 +1797,16 @@
 			alignByParent: false,
 			fullscreen: false,
 			beforeLoad: function () {
-				$('input[type!=hidden]', dialog).val('');
+				setTimeout(function () {
+					$('input[type!=hidden]', dialog).val('').trigger('change');
+				}, 0);
 			},
 			onActivate: function () {
 				dialog.plugin('Q/placeholders');
-				$('input[type!=hidden]', dialog).eq(0).val('').plugin('Q/clickfocus');
+				var $input = $('input[type!=hidden]', dialog).eq(0).plugin('Q/clickfocus');
+				setTimeout(function () {
+					$input.val('').trigger('change');
+				}, 0);
 			},
 			onClose: function () {
 				$('form', dialog).each(function () {
@@ -2059,6 +2097,129 @@
 			method: 'post'
 		});
 	};
+	
+	/**
+	 * Methods for OAuth
+	 * @class Users.OAuth
+	 * @constructor
+	 * @param {Object} fields
+	 */
+	var OAuth = Users.OAuth = {
+		/**
+		 * Generate a URL based on the oAuth spec, with a redirect back to our
+		 * own endpoint hosted by the Users plugin, to save the information in the database
+		 * and possibly close any popup window.
+		 * @method url
+		 * @static
+		 * @param {String} authorizeUri The url of the oAuth service endpoint
+		 * @param {String} client_id The id of this client app on the externa; platform.
+		 *    Typically found in Users_ExternalTo under appId in the Qbix server database.
+		 * @param {String} scope The scopes to request from the platform. See their docs.
+		 * @param {Object} [options={}]
+		 * @param {String} [options.redirect_uri] You can override the redirect URI.
+		 *    Often this has to be added to a whitelist on the platform's side.
+		 * @param {String} [options.response_type='code']
+		 * @param {String} [options.state=Math.random()] If state was not provided, this
+		 *    method also modifies the passed options object and sets options.state on it
+		 * @return {String} The URL to redirect to or open in a window
+		 */
+		url: function (authorizeUri, client_id, scope, options) {
+			options = options || {};
+			var redirectUri = options.redirectUri || Users.OAuth.redirectUri;
+			var responseType = options.responseType || 'code';
+			if (!options.state) {
+				options.state = String(Math.random());
+			}
+			Q.cookie('Users_latest_oAuth_state', options.state);
+			Q.url(authorizeUri, {
+				client_id: client_id,
+				redirect_uri: redirectUri,
+				state: options.state,
+				response_type: responseType,
+				scope: scope
+			});
+		},
+		/**
+		 * Start an oAuth flow, and let the Users plugin handle it
+		 * @method start
+		 * @static
+		 * @param {String} platform The name of an external platform under Q.plugins.Users.apps
+		 * @param {String} scope The scopes to request from the platform. See their docs.
+		 * @param {Function} [callback] This function is called after the oAuth flow ends,
+		 *    unless options.openWindow === false, because then the redirect would happen.
+		 * @param {Object} [options={}]
+		 * @param {Object|String} [openWindow={}] Set to false to start the oAuth flow in the
+		 *    current window. Otherwise, this object can be used to set window features
+		 *    passed to window.open() as a string.
+		 * @param {Object|String} [finalRedirect=location.href] If openWindow === false,
+		 *    this can be used to specify the url to redirect to after Users plugin has
+		 *    handled the oAuth redirect. Defaults to current window location.
+		 * @param {String} [appId=Q.info.app] Override appId to under Q.Users.apps[platform]
+		 * @param {String} [options.redirect_uri] You can override the redirect URI.
+		 *    Often this has to be added to a whitelist on the platform's side.
+		 * @param {String} [options.response_type='code']
+		 * @param {String} [options.state=Math.random()] If state was not provided, this
+		 *    method also modifies the passed options object and sets options.state on it
+		 * @return {String}
+		 */
+		start: function (platform, scope, callback, options) {
+			options = options || {};
+			var finalRedirect = options.finalRedirect || location.href;
+			var appId = options.appId || Q.info.appId;
+			var appInfo = Q.getObject([platform, appId], Users.apps)
+			var authorizeUri = options.authorizeUri || appInfo.authorizeUri;
+			var client_id = options.client_id || appInfo.client_id || appInfo.appId;
+			if (!authorizeUri) {
+				throw new Q.Exception("Users.OAuth.start: authorizeUri is empty");
+			}
+			var redirectUri = options.redirectUri || Users.OAuth.redirectUri;
+			var responseType = options.response_typeeType || 'code';
+			if (!options.state) {
+				options.state = String(Math.random());
+			}
+			if (!('openWindow' in options)) {
+				options.openWindow = {};
+			}
+			// this cookie will be sent on the next request, probably to Users/oauthed action
+			Q.cookie('Q_Users_oAuth', JSON.stringify({
+				platform: platform,
+				appId: appId,
+				scope: scope,
+				state: options.state,
+				finalRedirect: finalRedirect
+			}));
+			var url = OAuth.url(authorizeUri, appId, scope, options);
+			if (options.openWindow === false) {
+				location.href = url;
+			} else {
+				var w = window.open(url, 'Q_Users_oAuth', options.openWindow);
+				var ival = setInterval(function () {
+					if (w.name === 'Q_Users_oAuth_success') {
+						w.close();
+						callback(true);
+						clearInterval(ival);
+					}
+					if (w.name === 'Q_Users_oAuth_error') {
+						w.close();
+						callback(false);
+						clearInterval(ival);
+					}
+				}, 300);
+			}
+		}
+	};
+	
+	/**
+	 * Constructs a contact from fields, which are typically returned from the server.
+	 * @class Users.Contact
+	 * @constructor
+	 * @param {Object} fields
+	 */
+	var Contact = Users.Contact = function Users_Contact(fields) {
+		Q.extend(this, fields);
+		this.typename = 'Q.Users.Contact';
+	};
+	var Cp = Contact.prototype;
 
 	/**
 	 * Constructs a contact from fields, which are typically returned from the server.
@@ -2412,6 +2573,7 @@
 		if (fbAppId) {
 			Users.initFacebook();
 		}
+		OAuth.redirectUri = Q.action('Users/oauthed');
 	}, 'Users');
 	
 	function _setSessionFromQueryString(querystring)

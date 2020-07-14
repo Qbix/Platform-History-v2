@@ -73,5 +73,30 @@
             "touchscreen": "Cleachd na corragan agad airson gluasad agus slaodadh",
             "notTouchscreen": "Cleachd an luchag &amp; roth agad gus gluasad agus slaodadh"
         }
+    },
+    "timestamp": {
+        "lastNight": "a-raoir",
+        "lastEvening": "an oidhche mu dheireadh",
+        "yesterday": "an-dè",
+        "thisMorning": "madainn seo",
+        "today": "an-diugh",
+        "tonight": "a-nochd",
+        "tomorrowMorning": "madainn tom",
+        "tomorrow": "a-màireach",
+        "hoursAgo": "{{h}} uairean air ais",
+        "hourAgo": "{{h}} uair air ais",
+        "minuteAgo": "{{m}} mionaid air ais",
+        "minutesAgo": "{{m}} mionaid air ais",
+        "secondAgo": "{{s}} diog air ais",
+        "secondsAgo": "{{s}} diogan air ais",
+        "fewSecondsAgo": "diogan air ais",
+        "rightNow": "An-dràsta fhèin",
+        "inSecond": "ann an {{s}} san dàrna àite",
+        "inSeconds": "ann an {{s}} diogan",
+        "inMinute": "ann an {{m}} mionaid",
+        "inMinutes": "ann an {{m}} mionaid",
+        "inHour": "ann an {{h}} uair",
+        "inHours": "ann an {{h}} uairean",
+        "inUnderMinute": "ann an nas lugha na 1 mhionaid"
     }
 }

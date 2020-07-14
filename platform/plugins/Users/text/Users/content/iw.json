@@ -43,7 +43,8 @@
             "title": "בחר איש קשר",
             "CreateAccount": "+ איש קשר חדש",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.creat לא נמצא",
-            "SearchByName": "חפש לפי שם"
+            "SearchByName": "חפש לפי שם",
+            "EmptyContacts": "אנשי קשר לא נמצאו ..."
         },
         "select": {
             "title": "בחר איש קשר של {{displayName}}"

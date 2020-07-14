@@ -368,7 +368,7 @@ class Q_Image
 				$mh = imagesy($merge);
 			}
 		}
-		ksort($sizes); // to make sure square sizes get listed before others
+		ksort($sizes); // to make sure square sizes get listed before others, because names are shorter
 		foreach ($sizes as $size => $name) {
 			if (empty($name)) {
 				// generate a filename
@@ -445,8 +445,8 @@ class Q_Image
 				$squarefilename = $writePath.DS."$dw.$ext";
 				if (file_exists($squarefilename)) {
 					Q_Utils::symlink($squarefilename, $writePath.DS.$name);
+					continue;
 				}
-				continue;
 			}
 			if ($merge) {
 				$mergethumb = imagecreatetruecolor($mw, $mh);

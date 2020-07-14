@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Jums nav atļaujas pievienoties šai sarunai.",
         "startedConversation": "sāka sarunu",
         "RealTimeCall": "Reāllaika zvans",
-        "SearchByName": "Meklēt pēc vārda"
+        "SearchByName": "Meklēt pēc vārda",
+        "Notifications": {
+            "Visit": "{{displayName}} apmeklē tērzēšanu",
+            "Join": "{{displayName}} pievienojās tērzēšanai",
+            "Leave": "{{displayName}} pameta tērzēšanu",
+            "RelatedTo": "{{displayName}} izveidoja {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Ziņojums {{& message.fields.type}} uz {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "Slēpt ekrāna kopīgošanu",
             "turnOnCamera": "Rādīt video",
             "turnOnAudio": "Ieslēgt skaņu",
-            "turnOnScreenSharing": "Rādīt ekrāna koplietošanu"
+            "turnOnScreenSharing": "Rādīt ekrāna koplietošanu",
+            "fullScreen": "Pilnekrāna režīmā"
         },
         "notAllowedToJoinCall": "Jums nav atļaujas pievienoties šai straumei.",
         "streamTitle": "{{1}} tiešais zvans"

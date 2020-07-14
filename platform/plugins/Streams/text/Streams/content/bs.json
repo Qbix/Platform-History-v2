@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Nemate dozvolu da se pridružite ovom razgovoru.",
         "startedConversation": "započeo razgovor",
         "RealTimeCall": "Poziv u stvarnom vremenu",
-        "SearchByName": "Traži po imenu"
+        "SearchByName": "Traži po imenu",
+        "Notifications": {
+            "Visit": "{{displayName}} posećuje ćaskanje",
+            "Join": "{{displayName}} pridružio se ćaskanju",
+            "Leave": "{{displayName}} napustio ćaskanje",
+            "RelatedTo": "{{displayName}} pokrenuo je {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Poruka {{& message.fields.type}} do {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "Tekst",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} ako je kod skeniran"
+            "scannedQR": "{{ClickOrTap}} ako je kod skeniran",
+            "copyLink": "{{ClickOrTap}} za kopiranje pozivnice"
         },
         "email": {
             "subject": "Hej, vidi ovo",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "Pozvani ste. {{ClickOrTap}} ovde da prihvatim i pridružim se."
-        }
+        },
+        "command": "Pozovite",
+        "youCanNowPaste": "Sada možete zalijepiti ovu vezu negdje da biste pozvali ljude"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "Veza je kopirana u međuspremnik",
             "codeCopiedToCb": "Kod je kopiran u međuspremnik",
             "userHasNoVideo": "Učesnik nema video",
-            "openInBrowserAlert": "Otvorite vezu u pregledniku Safari da biste se pridružili konferenciji."
+            "openInBrowserAlert": "Otvorite vezu u pregledniku Safari da biste se pridružili konferenciji.",
+            "youBeganVideoRecording": "Počeli ste snimati ovu konferenciju",
+            "youStoppedVideoRecording": "Prestali ste snimati ovu konferenciju"
         },
         "settingsPopup": {
             "webCamera": "Web kamera",
@@ -173,7 +184,15 @@
             "fbStartLive": "Ići uživo",
             "fbStopLive": "Prestani uživo",
             "fbEmbedCode": "Ugradi",
-            "copy": "Kopiraj"
+            "copy": "Kopiraj",
+            "turnOffVideo": "Isključite dijeljenje kamere \/ ekrana",
+            "turnOffScreenSharing": "Isključite deljenje ekrana",
+            "cameraIsTurnedOff": "Kamera je isključena",
+            "startRecording": "Započnite snimanje",
+            "stopRecording": "Zaustavite snimanje",
+            "recordingInProgress": "Snimanje je u toku ...",
+            "publishOnTimeline": "Objavite na vremenskoj traci",
+            "publishToGroup": "Objavite u grupi"
         },
         "participantsPopup": {
             "disconnect": "Prekini vezu",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "Najglasnije osim mene",
             "maximizeLoudest": "Maksimizirajte najglasnije",
             "staticMaximized": "Statički maksimiziran",
-            "manual": "Priručnik"
-        }
+            "manual": "Priručnik",
+            "fullScreen": "Cijeli ekran",
+            "turnOffCamera": "Sakrij video",
+            "turnOffAudio": "Isključivanje zvuka",
+            "turnOffScreenSharing": "Sakrij deljenje ekrana",
+            "turnOnCamera": "Prikaži video",
+            "turnOnAudio": "Zanemarivanje zvuka",
+            "turnOnScreenSharing": "Prikaži dijeljenje ekrana"
+        },
+        "notAllowedToJoinCall": "Nemate dozvolu da se pridružite ovom toku.",
+        "streamTitle": "{999}} poziv uživo"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "Spremi",
         "Delete": "Izbriši",
         "Submenu": "Podmeni"
+    },
+    "errors": {
+        "HiddenFromYou": "Ovaj sadržaj je sakriven od vas."
     }
 }

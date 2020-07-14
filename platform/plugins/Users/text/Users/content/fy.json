@@ -43,7 +43,8 @@
             "title": "Kies kontakt",
             "CreateAccount": "+ Nij kontakt",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create net fûn",
-            "SearchByName": "Sykje op namme"
+            "SearchByName": "Sykje op namme",
+            "EmptyContacts": "Kontakten net fûn ..."
         },
         "select": {
             "title": "Selektearje kontaktpersoan fan {{displayName}}"

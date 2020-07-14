@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Ùn avete micca permessu di unisce à sta cunversazione.",
         "startedConversation": "hà principiatu una cunversazione",
         "RealTimeCall": "Chjamate in tempu Reali",
-        "SearchByName": "Ricerca per nome"
+        "SearchByName": "Ricerca per nome",
+        "Notifications": {
+            "Visit": "{{displayName}} visita a chat",
+            "Join": "{{displayName}} unitu à u chat",
+            "Leave": "{{displayName}} ha lasciatu u chat",
+            "RelatedTo": "{{displayName}} ha iniziatu un {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Messaggio {{& message.fields.type}} per {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "Testo",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} se u codice hè statu scannatu"
+            "scannedQR": "{{ClickOrTap}} se u codice hè statu scannatu",
+            "copyLink": "{{ClickOrTap}} per copià u ligame d&#39;invitu"
         },
         "email": {
             "subject": "Hey, fighjate questu",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "Avete invitu. {{ClickOrTap}} quì per accettà è riunitevi."
-        }
+        },
+        "command": "Invita",
+        "youCanNowPaste": "Pudete avà incollà stu ligame in qualchì locu per invità a ghjente"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "Link copiatu à u clipboard",
             "codeCopiedToCb": "Codice copiatu à i clipboard",
             "userHasNoVideo": "U participante ùn hà micca alcun video",
-            "openInBrowserAlert": "Link aperto in u navigatore Safari per unisce à a cunferenza."
+            "openInBrowserAlert": "Link aperto in u navigatore Safari per unisce à a cunferenza.",
+            "youBeganVideoRecording": "Avete cuminciatu à registrà sta cunferenza",
+            "youStoppedVideoRecording": "Avete firmatu di registrà sta cunferenza"
         },
         "settingsPopup": {
             "webCamera": "Camera Web",
@@ -173,7 +184,15 @@
             "fbStartLive": "Vai Live",
             "fbStopLive": "Fini Live",
             "fbEmbedCode": "Incorpora",
-            "copy": "Copia"
+            "copy": "Copia",
+            "turnOffVideo": "Apaga a camara \/ schermu spartutu",
+            "turnOffScreenSharing": "Disattiva a spartera di schermu",
+            "cameraIsTurnedOff": "A camera hè disattivata",
+            "startRecording": "Cumincià a Registrazione",
+            "stopRecording": "Pare a registrazione",
+            "recordingInProgress": "A registrazione hè in corsu ...",
+            "publishOnTimeline": "Publicà nantu à a cronologia",
+            "publishToGroup": "Publicà à u gruppu"
         },
         "participantsPopup": {
             "disconnect": "Disconnect",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "Più forte m&#39;hè Salvo",
             "maximizeLoudest": "Maximizeghja più forte",
             "staticMaximized": "Massimizatu staticu",
-            "manual": "Manuale"
-        }
+            "manual": "Manuale",
+            "fullScreen": "Schermu sanu",
+            "turnOffCamera": "Oculta i video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Oculta a spartera di a pantalla",
+            "turnOnCamera": "Mostra video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Mostra u sparte di u screnu"
+        },
+        "notAllowedToJoinCall": "Ùn avete micca permessu di unisce à questu flussu.",
+        "streamTitle": "{{1}} chiamata in diretta"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "Salvà",
         "Delete": "Elimina",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Stu cuntenutu hè oculatu da voi."
     }
 }

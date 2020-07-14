@@ -43,7 +43,8 @@
             "title": "കോൺടാക്റ്റ് തിരഞ്ഞെടുക്കുക",
             "CreateAccount": "+ പുതിയ കോൺടാക്റ്റ്",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create കണ്ടെത്തിയില്ല",
-            "SearchByName": "പേര് പ്രകാരം തിരയുക"
+            "SearchByName": "പേര് പ്രകാരം തിരയുക",
+            "EmptyContacts": "കോൺ‌ടാക്റ്റുകൾ കണ്ടെത്തിയില്ല ..."
         },
         "select": {
             "title": "Contact {999} contact ന്റെ കോൺ‌ടാക്റ്റ് തിരഞ്ഞെടുക്കുക"

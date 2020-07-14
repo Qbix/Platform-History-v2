@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Jo hawwe gjin tastimming om mei te dwaan oan dit petear.",
         "startedConversation": "begon in petear",
         "RealTimeCall": "Echte tiidoprop",
-        "SearchByName": "Sykje op namme"
+        "SearchByName": "Sykje op namme",
+        "Notifications": {
+            "Visit": "{{displayName}} is op besite by it petear",
+            "Join": "{{displayName}} die mei oan it petear",
+            "Leave": "{{displayName}} ferliet it petear",
+            "RelatedTo": "{{displayName}} begon in {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Berjocht {{& message.fields.type}} nei {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "Tekst",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} as de koade waard skand"
+            "scannedQR": "{{ClickOrTap}} as de koade waard skand",
+            "copyLink": "{{ClickOrTap}} om útnoegingslink te kopiearjen"
         },
         "email": {
             "subject": "Hjir, kontrolearje dit út",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "Jo binne oanmeld. {{ClickOrTap}} hjir te akseptearjen en te gean."
-        }
+        },
+        "command": "Noegje",
+        "youCanNowPaste": "Jo kinne dizze link no earne plakke om minsken út te noegjen"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "Koppeling kopieare nei klamboerd",
             "codeCopiedToCb": "Koade kopieare nei klamboerd",
             "userHasNoVideo": "Dielnimmer hat gjin fideo",
-            "openInBrowserAlert": "Iepenje kepling yn &#39;e Safari-blêder om mei te dwaan oan&#39; e konferinsje."
+            "openInBrowserAlert": "Iepenje kepling yn &#39;e Safari-blêder om mei te dwaan oan&#39; e konferinsje.",
+            "youBeganVideoRecording": "Jo begon dizze konferinsje op te nimmen",
+            "youStoppedVideoRecording": "Jo binne ophâlden mei it opnimmen fan dizze konferinsje"
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -173,7 +184,15 @@
             "fbStartLive": "Gean libjen",
             "fbStopLive": "Einde Live",
             "fbEmbedCode": "Ynbêde",
-            "copy": "Kopy"
+            "copy": "Kopy",
+            "turnOffVideo": "Dielje fan kamera \/ skerm útsette",
+            "turnOffScreenSharing": "Skerm dielen útsette",
+            "cameraIsTurnedOff": "Kamera is útskeakele",
+            "startRecording": "Begjin opnimme",
+            "stopRecording": "Opname stopje",
+            "recordingInProgress": "Opname is oan &#39;e gong ...",
+            "publishOnTimeline": "Publisearje op tiidline",
+            "publishToGroup": "Publisearje nei groep"
         },
         "participantsPopup": {
             "disconnect": "Disconnect",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "It lûdste útsein my",
             "maximizeLoudest": "Maksimalisearje Loudest",
             "staticMaximized": "Statyske maksimalisearre",
-            "manual": "Hantlieding"
-        }
+            "manual": "Hantlieding",
+            "fullScreen": "Folslein skerm",
+            "turnOffCamera": "Fideo ferstopje",
+            "turnOffAudio": "Audio mute",
+            "turnOffScreenSharing": "Ferbergje skerm dielen",
+            "turnOnCamera": "Fideo sjen litte",
+            "turnOnAudio": "Audio unmute",
+            "turnOnScreenSharing": "Skerm dielen sjen litte"
+        },
+        "notAllowedToJoinCall": "Jo hawwe gjin tastimming om mei te dwaan oan dizze stream.",
+        "streamTitle": "{{1}} live oprop"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "Rêde",
         "Delete": "Ferwiderje",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Dizze ynhâld is foar jo ferburgen."
     }
 }

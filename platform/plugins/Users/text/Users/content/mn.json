@@ -43,7 +43,8 @@
             "title": "Харилцагчийг сонгоно уу",
             "CreateAccount": "+ Шинэ холбоо барих",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create олдсонгүй",
-            "SearchByName": "Нэрээр хайх"
+            "SearchByName": "Нэрээр хайх",
+            "EmptyContacts": "Харилцагч олдсонгүй ..."
         },
         "select": {
             "title": "{{displayName}} -г сонгох"

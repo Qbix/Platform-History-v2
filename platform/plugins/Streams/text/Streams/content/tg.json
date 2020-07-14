@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Шумо иҷозати ҳамроҳ шудан ба ин сӯҳбатро надоред.",
         "startedConversation": "сӯҳбатро оғоз кард",
         "RealTimeCall": "Занги вақти воқеӣ",
-        "SearchByName": "Ҷустуҷӯ аз рӯи ном"
+        "SearchByName": "Ҷустуҷӯ аз рӯи ном",
+        "Notifications": {
+            "Visit": "{{displayName}} ба сӯҳбат ташриф меорад",
+            "Join": "{{displayName}} ба сӯҳбат ҳамроҳ шуд",
+            "Leave": "{{displayName}} сӯҳбатро тарк кард",
+            "RelatedTo": "{{displayName}} барномаи {{stream.displayType}} -ро сар кард"
+        }
     },
     "notifications": {
         "*": "{{& message.fields.type}} то {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "Матн",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} агар код скан карда шуда бошад"
+            "scannedQR": "{{ClickOrTap}} агар код скан карда шуда бошад",
+            "copyLink": "{{ClickOrTap}} -ро нусхабардорӣ кардани истинод даъватнома"
         },
         "email": {
             "subject": "Ҳа, ин тафтиш кунед",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "Шумо даъват кардаед. {{ClickOrTap}} дар ин ҷо барои қабул ва ҳамроҳ шудан."
-        }
+        },
+        "command": "Даъват кунед",
+        "youCanNowPaste": "Шумо метавонед ин истинодро дар ҷое барои даъват кардани одамон гузоред"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "Истинод ба буфер нусхабардорӣ карда шуд",
             "codeCopiedToCb": "Рамз ба силули мухобиротӣ нусхабардорӣ шуд",
             "userHasNoVideo": "Иштирокчӣ видео надорад",
-            "openInBrowserAlert": "Барои ҳамроҳ шудан ба конфронс дар браузери Safari пайванд кушоед."
+            "openInBrowserAlert": "Барои ҳамроҳ шудан ба конфронс дар браузери Safari пайванд кушоед.",
+            "youBeganVideoRecording": "Шумо сабти ин конфронсро оғоз кардед",
+            "youStoppedVideoRecording": "Шумо сабти ин конфронсро қатъ кардед"
         },
         "settingsPopup": {
             "webCamera": "Веб камера",
@@ -173,7 +184,15 @@
             "fbStartLive": "Зинда бошед",
             "fbStopLive": "Охири Live",
             "fbEmbedCode": "Гузоштан",
-            "copy": "Нусха"
+            "copy": "Нусха",
+            "turnOffVideo": "Мубодилаи камера \/ экранро хомӯш кунед",
+            "turnOffScreenSharing": "Мубодилаи экранро хомӯш кунед",
+            "cameraIsTurnedOff": "Камера хомӯш аст",
+            "startRecording": "Оғози сабткунӣ",
+            "stopRecording": "Сабтро қатъ кунед",
+            "recordingInProgress": "Сабт идома дорад ...",
+            "publishOnTimeline": "Дар ҷадвал нашр кунед",
+            "publishToGroup": "Нашр ба гурӯҳ"
         },
         "participantsPopup": {
             "disconnect": "Қатъи",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "Loudest ҷуз ман",
             "maximizeLoudest": "Баланд бардоштани баландтарин",
             "staticMaximized": "Беҳтарин статикӣ",
-            "manual": "Дастӣ"
-        }
+            "manual": "Дастӣ",
+            "fullScreen": "Тамомсафҳа",
+            "turnOffCamera": "Видеоро пинҳон кунед",
+            "turnOffAudio": "Овози хомӯш кунед",
+            "turnOffScreenSharing": "Додугирифти экранро пинҳон кунед",
+            "turnOnCamera": "Намоиши видео",
+            "turnOnAudio": "Аудио садо медиҳад",
+            "turnOnScreenSharing": "Нишон додани мубодилаи экран"
+        },
+        "notAllowedToJoinCall": "Шумо иҷозати ҳамроҳ шудан ба ин ҷараёнро надоред.",
+        "streamTitle": "{{1}} занги мустақим"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "Сарфа",
         "Delete": "Нест кардан",
         "Submenu": "Зерменю"
+    },
+    "errors": {
+        "HiddenFromYou": "Ин мундариҷа аз шумо пинҳон аст."
     }
 }

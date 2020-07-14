@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Nu aveți permisiunea de a vă alătura acestei conversații.",
         "startedConversation": "a început o conversație",
         "RealTimeCall": "Apel în timp real",
-        "SearchByName": "Cauta dupa nume"
+        "SearchByName": "Cauta dupa nume",
+        "Notifications": {
+            "Visit": "{{displayName}} vizitează chatul",
+            "Join": "{{displayName}} s-a alăturat chatului",
+            "Leave": "{{displayName}} a părăsit chat-ul",
+            "RelatedTo": "{{displayName}} a început o {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Mesaj {{& message.fields.type}} până la {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "Ascundeți partajarea ecranului",
             "turnOnCamera": "Afișați videoclipuri",
             "turnOnAudio": "Anulați sunetul",
-            "turnOnScreenSharing": "Afișare partajare ecran"
+            "turnOnScreenSharing": "Afișare partajare ecran",
+            "fullScreen": "Ecran complet"
         },
         "notAllowedToJoinCall": "Nu aveți permisiunea de a vă alătura acestui flux.",
         "streamTitle": "{{1}} apel live"

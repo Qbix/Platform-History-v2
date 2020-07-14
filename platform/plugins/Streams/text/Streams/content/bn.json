@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "আপনার এই কথোপকথনে যোগদানের অনুমতি নেই।",
         "startedConversation": "একটি কথোপকথন শুরু",
         "RealTimeCall": "রিয়েল টাইম কল",
-        "SearchByName": "নাম দ্বারা অনুসন্ধান"
+        "SearchByName": "নাম দ্বারা অনুসন্ধান",
+        "Notifications": {
+            "Visit": "{{999} chat চ্যাটটি পরিদর্শন করছে",
+            "Join": "{{999} chat চ্যাটে যোগ দিয়েছে",
+            "Leave": "The 9 999} the চ্যাট ছেড়ে গেছে",
+            "RelatedTo": "{{999} a একটি {{stream.displayType}} শুরু করেছে"
+        }
     },
     "notifications": {
         "*": "বার্তা {{& message.fields.type}} থেকে {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "স্ক্রিন ভাগ করে নেওয়ার বিষয়টি লুকান",
             "turnOnCamera": "ভিডিও দেখান",
             "turnOnAudio": "অডিও নিঃশব্দ করুন",
-            "turnOnScreenSharing": "স্ক্রিন ভাগ করে নেওয়া দেখান"
+            "turnOnScreenSharing": "স্ক্রিন ভাগ করে নেওয়া দেখান",
+            "fullScreen": "পূর্ণ পর্দা"
         },
         "notAllowedToJoinCall": "আপনার কাছে এই স্ট্রিমে যোগদানের অনুমতি নেই।",
         "streamTitle": "} 9 999}} লাইভ কল"

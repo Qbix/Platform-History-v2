@@ -761,7 +761,8 @@ class Q_Html
 	 * @param {array|string} [$attributes=array()] The attributes for the resulting element. Should at least include the name. You can also just pass the name as a string here.
 	 * @param {array} [$value=null] The value to start out with in the resulting element. If there are options present, this should be the value of one of the options.
 	 * @param {array} [$options=null] Associative array of options, used if the tag type is 'select', 'radios' or 'checkboxes'.
-	 * @param {array} [$params=array()] Additional parameters to pass to the corresponding function
+	 * @param {array} [$params=array()] Additional parameters to pass to the corresponding function,
+	 *   such as array(4 => $includeBlank)
 	 * @return {string} The generated markup
 	 */
 	static function smartTag(

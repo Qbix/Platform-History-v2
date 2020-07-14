@@ -73,5 +73,30 @@
             "touchscreen": "U isticmaal farahaaga si aad u fogaato oo jiido",
             "notTouchscreen": "Isticmaal mashiinkaaga &amp; saqafka si aad u fogeyso una jiido"
         }
+    },
+    "timestamp": {
+        "lastNight": "xalay",
+        "lastEvening": "habeenki ugu dambeeyay",
+        "yesterday": "shalay",
+        "thisMorning": "subaxnimadan",
+        "today": "maanta",
+        "tonight": "caawa",
+        "tomorrowMorning": "tom subax",
+        "tomorrow": "berri",
+        "hoursAgo": "{{h}} saacado kahor",
+        "hourAgo": "{{h}} saac kahor",
+        "minuteAgo": "{{m}} daqiiqad kahor",
+        "minutesAgo": "{{m}} daqiiqado kahor",
+        "secondAgo": "{{s}} labaad kahor",
+        "secondsAgo": "{{s}} sekan kahor",
+        "fewSecondsAgo": "sekano kahor",
+        "rightNow": "haddadaan",
+        "inSecond": "ee {{s}} labaad",
+        "inSeconds": "ee {{s}} sekan",
+        "inMinute": "daqiiqad {{m}} daqiiqad",
+        "inMinutes": "gudaha {{m}} daqiiqado",
+        "inHour": "saacadda {{h}}",
+        "inHours": "saacadaha {{h}}",
+        "inUnderMinute": "in ka yar 1 daqiiqo"
     }
 }

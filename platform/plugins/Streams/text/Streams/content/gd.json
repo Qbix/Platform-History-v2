@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Chan eil cead agad a dhol an sàs sa chòmhradh seo.",
         "startedConversation": "thòisich còmhradh",
         "RealTimeCall": "Call Fìor-ùine",
-        "SearchByName": "Rannsaich a rèir ainm"
+        "SearchByName": "Rannsaich a rèir ainm",
+        "Notifications": {
+            "Visit": "Tha {{displayName}} a ’tadhal air a’ chat",
+            "Join": "Thàinig {{displayName}} a-steach don chat",
+            "Leave": "Dh ’fhàg {{displayName}} an còmhradh",
+            "RelatedTo": "Thòisich {{displayName}} {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Brath {{& message.fields.type}} gu {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "Teacsa",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} ma chaidh an còd a sganadh"
+            "scannedQR": "{{ClickOrTap}} ma chaidh an còd a sganadh",
+            "copyLink": "{{ClickOrTap}} gus ceangal cuireadh a chopaigeadh"
         },
         "email": {
             "subject": "Tha Hey, thoir sùil air seo",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "Fhuair thu cuireadh. {{ClickOrTap}} an seo gus gabhail ris agus gabhail ris."
-        }
+        },
+        "command": "Thoir cuireadh",
+        "youCanNowPaste": "Faodaidh tu a-nis an ceangal seo a phasgadh an àiteigin gus cuireadh a thoirt do dhaoine"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "Ceangal air a chopaigeadh chun a ’bhòrd bhidio",
             "codeCopiedToCb": "Còd air a lethbhreacadh gu cairt-bhòrd",
             "userHasNoVideo": "Chan eil bhidio aig com-pàirtiche",
-            "openInBrowserAlert": "Ceangal fosgailte ann am brabhsair Safari gus a dhol còmhla ris a ’cho-labhairt."
+            "openInBrowserAlert": "Ceangal fosgailte ann am brabhsair Safari gus a dhol còmhla ris a ’cho-labhairt.",
+            "youBeganVideoRecording": "Thòisich thu air a ’cho-labhairt seo a chlàradh",
+            "youStoppedVideoRecording": "Sguir thu a chlàradh a ’cho-labhairt seo"
         },
         "settingsPopup": {
             "webCamera": "Camara lìn",
@@ -173,7 +184,15 @@
             "fbStartLive": "Rach beò",
             "fbStopLive": "Crìoch Beò",
             "fbEmbedCode": "Gabhail a-steach",
-            "copy": "Leth-bhreac"
+            "copy": "Leth-bhreac",
+            "turnOffVideo": "Cuir dheth co-roinneadh camara \/ sgrion",
+            "turnOffScreenSharing": "Cuir dheth roinneadh sgrion",
+            "cameraIsTurnedOff": "Tha an camara air a chuir dheth",
+            "startRecording": "Tòisich a ’clàradh",
+            "stopRecording": "Cuir stad air clàradh",
+            "recordingInProgress": "Tha clàradh a ’dol air adhart ...",
+            "publishOnTimeline": "Foillsich air an loidhne-tìm",
+            "publishToGroup": "Foillsich don bhuidheann"
         },
         "participantsPopup": {
             "disconnect": "Disconnect",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "Loudest Ach a-mhàin mi",
             "maximizeLoudest": "Meudaich an ìre as àirde",
             "staticMaximized": "Static Maximized",
-            "manual": "Stiùireadh"
-        }
+            "manual": "Stiùireadh",
+            "fullScreen": "Sgrion Làn",
+            "turnOffCamera": "Cuir am falach bhidio",
+            "turnOffAudio": "Fuaim claisneachd",
+            "turnOffScreenSharing": "Cuir am falach sgrion",
+            "turnOnCamera": "Seall bhidio",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Seall roinneadh sgrion"
+        },
+        "notAllowedToJoinCall": "Chan eil cead agad a dhol a-steach don t-sruth seo.",
+        "streamTitle": "{{1}} gairm beò"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "Sàbhail",
         "Delete": "Cuir às",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Tha an susbaint seo falaichte bhuat."
     }
 }

@@ -181,6 +181,7 @@ Q.Tool.define("Q/columns", function(options) {
 		});
 
 		var $div = $(div);
+		$div.attr('data-width-index', Math.round($div.width()/300) || 1);
 		Q.onLayout(div).add(function () {
 			$div.attr('data-width-index', Math.round($div.width()/300) || 1);
 		}, this);
@@ -1125,6 +1126,34 @@ function _updateAttributes() {
 		$te.removeClass('Q_columns_over3');
 	}
 }
+
+Q.invoke.handlers.unshift(function (options, callback) {
+	var index, node, columns;
+	if (options.trigger) {
+		node = options.trigger;
+		while (node) {
+			if (node.hasClass) {
+				if (node.hasClass('Q_columns_column')) {
+					index = node.getAttribute('data-index');
+				}
+				if (node.hasClass('Q_columns_tool')) {
+					columns = node.Q.tools['q_columns'];
+				}
+			}
+			node = node.parentNode;
+		}
+		if (columns) {
+			columns.close({min: index+1}, null, {animation: {duration: 0}});
+			columns.open(Q.extend({}, options, {
+				title: options.title,
+				column: options.content,
+				onOpen: options.callback
+			}));
+			return false;
+		}
+	}
+});
+	
 
 })(Q, jQuery);
 

@@ -43,7 +43,8 @@
             "title": "Chwazi kontak",
             "CreateAccount": "+ Nouvo Kontak",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create pa jwenn",
-            "SearchByName": "Rechèch pa non"
+            "SearchByName": "Rechèch pa non",
+            "EmptyContacts": "Kontak pa jwenn ..."
         },
         "select": {
             "title": "Chwazi kontak nan {{displayName}}"

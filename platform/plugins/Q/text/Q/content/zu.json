@@ -73,5 +73,30 @@
             "touchscreen": "Sebenzisa iminwe yakho ukuze usondeze bese uhudula",
             "notTouchscreen": "Sebenzisa i-mouse yakho &amp; isondo ukuze usondise bese uhudula"
         }
+    },
+    "timestamp": {
+        "lastNight": "izolo ebusuku",
+        "lastEvening": "owokugcina",
+        "yesterday": "izolo",
+        "thisMorning": "ekuseni",
+        "today": "namuhla",
+        "tonight": "kulobubusuku",
+        "tomorrowMorning": "kusasa ekuseni",
+        "tomorrow": "kusasa",
+        "hoursAgo": "{{h}} amahora edlule",
+        "hourAgo": "{{h}} ihora eledlule",
+        "minuteAgo": "{{m}} iminithi edlule",
+        "minutesAgo": "{{m}} amaminithi adlule",
+        "secondAgo": "{{s}} kwesibili eledlule",
+        "secondsAgo": "{{s}} imizuzwana edlule",
+        "fewSecondsAgo": "imizuzwana edlule",
+        "rightNow": "khona manje",
+        "inSecond": "e - {{s}} kwesibili",
+        "inSeconds": "ngemizuzwana engu - {{s}}",
+        "inMinute": "ngemizuzu engu - {{m}}",
+        "inMinutes": "ngemizuzu engu - {{m}}",
+        "inHour": "e - {{h}} ihora",
+        "inHours": "emahoreni angu - {{h}}",
+        "inUnderMinute": "ngaphansi kweminithi elingu-1"
     }
 }

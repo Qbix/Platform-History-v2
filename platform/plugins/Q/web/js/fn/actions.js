@@ -152,14 +152,7 @@ function _Q_actions(options) {
 			if (state.clickable) {
 				var $action = $('.Q_actions_action', container);
 				if (!$action.state('Q/clickable')) {
-					$action.plugin('Q/clickable', {}, function () {
-						if (state.horizontal) {
-							$('.Q_clickable_container', container).css({
-								'display': 'inline-block',
-								'zoom': 1
-							});
-						}
-					}).width(0);
+					$action.plugin('Q/clickable').width(0);
 				}
 			}
 		

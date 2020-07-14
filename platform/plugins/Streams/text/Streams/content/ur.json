@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "آپ کو اس گفتگو میں شامل ہونے کی اجازت نہیں ہے۔",
         "startedConversation": "گفتگو شروع کی۔",
         "RealTimeCall": "ریئل ٹائم کال",
-        "SearchByName": "نام سے تلاش کریں"
+        "SearchByName": "نام سے تلاش کریں",
+        "Notifications": {
+            "Visit": "{9 999} the چیٹ کو دیکھ رہے ہیں",
+            "Join": "chat 9 999} chat چیٹ میں شامل ہوئے",
+            "Leave": "chat 9 999} the نے چیٹ چھوڑی",
+            "RelatedTo": "{{999} نے ایک {{stream.displayType}} شروع کیا"
+        }
     },
     "notifications": {
         "*": "پیغام {{& message.fields.type}} {{& stream.fields.title}} تک",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "اسکرین شیئرنگ چھپائیں",
             "turnOnCamera": "ویڈیو دکھائیں",
             "turnOnAudio": "آڈیو خاموش کریں",
-            "turnOnScreenSharing": "اسکرین کا اشتراک دکھائیں"
+            "turnOnScreenSharing": "اسکرین کا اشتراک دکھائیں",
+            "fullScreen": "مکمل اسکرین یا بڑی اسکرین"
         },
         "notAllowedToJoinCall": "آپ کو اس سلسلہ میں شامل ہونے کی اجازت نہیں ہے۔",
         "streamTitle": "} 9 999}} براہ راست کال"

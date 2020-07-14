@@ -77,3 +77,28 @@
 	text-align: center;
 	margin: 20px 0 0;
 }
+
+.Assets_credits_buy .Q_dialog_content {
+	min-width: 300px;
+}
+.Assets_credits_buy .Q_dialog_content .Assets_credits_buy_missing,
+.Assets_credits_buy .Q_dialog_content .Assets_credits_buy {
+	text-align: center;
+	font-weight: bold;
+	margin: 10px 0;
+}
+.Assets_credits_buy .Q_dialog_content .Assets_credits_buy {
+	text-transform: lowercase;
+}
+.Assets_credits_buy .Q_dialog_content .Assets_credits_buy input {
+	height: 40px;
+	width: 80px;
+	font-size: 20px;
+	border-radius: 5px;
+	border: 1px solid;
+	text-align: center;
+}
+.Assets_credits_buy .Q_dialog_content button[name=buy] {
+	display: block;
+	margin: 0 auto 10px;
+}

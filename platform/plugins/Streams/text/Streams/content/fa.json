@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "شما اجازه پیوستن به این گفتگو را ندارید.",
         "startedConversation": "مکالمه ای را شروع کرد",
         "RealTimeCall": "تماس در زمان واقعی",
-        "SearchByName": "جستجو براساس نام"
+        "SearchByName": "جستجو براساس نام",
+        "Notifications": {
+            "Visit": "99 999} در حال بازدید از گپ است",
+            "Join": "99 999} the به گپ پیوست",
+            "Leave": "99 999 the چت را ترک کرد",
+            "RelatedTo": "99 99 999}} شروع به کار {{1000}"
+        }
     },
     "notifications": {
         "*": "پیام {{& message.fields.type}} به {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "اشتراک گذاری صفحه را مخفی کنید",
             "turnOnCamera": "نمایش فیلم",
             "turnOnAudio": "صدا را قطع کنید",
-            "turnOnScreenSharing": "اشتراک گذاری صفحه نمایش"
+            "turnOnScreenSharing": "اشتراک گذاری صفحه نمایش",
+            "fullScreen": "تمام صفحه"
         },
         "notAllowedToJoinCall": "شما اجازه پیوستن به این جریان را ندارید.",
         "streamTitle": "99 999}} تماس زنده"

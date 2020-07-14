@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "E leai sau faʻatagaga e auai i lenei talanoaga.",
         "startedConversation": "amataina se talanoaga",
         "RealTimeCall": "Taimi Moni Taimi",
-        "SearchByName": "Saili i le igoa"
+        "SearchByName": "Saili i le igoa",
+        "Notifications": {
+            "Visit": "{{displayName}} o loo asiasi i le talatalanoaga",
+            "Join": "{{displayName}} auai i le talatalanoaga",
+            "Leave": "{{displayName}} tuʻua le talatalanoaga",
+            "RelatedTo": "{{displayName}} amata le {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Savali {{& message.fields.type}} i {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "Tusitusiga",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} pe afai na siakiina le code"
+            "scannedQR": "{{ClickOrTap}} pe afai na siakiina le code",
+            "copyLink": "{{ClickOrTap}} e kopi ai valaaulia valaʻaulia"
         },
         "email": {
             "subject": "Hey, siaki le mea lenei",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "Ua valaaulia oe. {{ClickOrTap}} iinei e talia ma auai."
-        }
+        },
+        "command": "Valaaulia",
+        "youCanNowPaste": "E mafai nei ona e faapipii lenei sootaga i se mea e valaaulia ai tagata"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "Lisi na kopi i luga o le laupapa",
             "codeCopiedToCb": "Code na kopiina i luga o le laupapa",
             "userHasNoVideo": "E leai se vitio e auai",
-            "openInBrowserAlert": "Tatala avanoa i le saogala Safari e auai i le konafesi."
+            "openInBrowserAlert": "Tatala avanoa i le saogala Safari e auai i le konafesi.",
+            "youBeganVideoRecording": "Oe amata pueina lenei konafesi",
+            "youStoppedVideoRecording": "Ua e le toe pueina lenei konafesi"
         },
         "settingsPopup": {
             "webCamera": "Upega Tafaʻilagi",
@@ -173,7 +184,15 @@
             "fbStartLive": "Alu Ola",
             "fbStopLive": "Maea Ola",
             "fbEmbedCode": "Toto",
-            "copy": "Kopi"
+            "copy": "Kopi",
+            "turnOffVideo": "Tapē le mea pueata \/ faʻafesoʻotaʻi lau",
+            "turnOffScreenSharing": "Tapē le faʻavasegaina o lau",
+            "cameraIsTurnedOff": "Ua tape le meapueata",
+            "startRecording": "Amata Faamaumauina",
+            "stopRecording": "Taofi le pueina",
+            "recordingInProgress": "O loʻo faagasolo faamaumauga i totonu ...",
+            "publishOnTimeline": "Lomiga i taimi",
+            "publishToGroup": "Lolomi i le kulupu"
         },
         "participantsPopup": {
             "disconnect": "Alu ese",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "Filifili Seʻi vagana Au",
             "maximizeLoudest": "Faʻateleina le Laiti",
             "staticMaximized": "Faʻailoga Faʻateleina",
-            "manual": "Tusi lesona"
-        }
+            "manual": "Tusi lesona",
+            "fullScreen": "Ata Mata",
+            "turnOffCamera": "Nana le vitio",
+            "turnOffAudio": "Le faʻalologo leo",
+            "turnOffScreenSharing": "Nana le fetufaaiga lau",
+            "turnOnCamera": "Faaali vitio",
+            "turnOnAudio": "Faʻailoa mai le leo",
+            "turnOnScreenSharing": "Faʻaali le faʻasoa"
+        },
+        "notAllowedToJoinCall": "E leai sau faʻatagaina e te auai i lenei vaitafe.",
+        "streamTitle": "{{1}} ola valaʻau"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "Sefe",
         "Delete": "Aveese",
         "Submenu": "Sui"
+    },
+    "errors": {
+        "HiddenFromYou": "O lenei mea e lilo mai ia te oe."
     }
 }

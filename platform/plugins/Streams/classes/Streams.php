@@ -1683,6 +1683,7 @@ abstract class Streams extends Base_Streams
 	 * @param {double|string} [$options.weight] Pass a numeric value here, or something like "max+1" to make the weight 1 greater than the current MAX(weight)
 	 * @param {array} [$options.extra] Can be array of ($streamName => $extra) info
 	 *  to save in the "extra" field.
+	 * @param {boolean} [$options.inheritAccess=false] If true, inherit access from category to related stream.
 	 * @return {array|boolean}
 	 *  Returns false if the operation was canceled by a hook
 	 *  Returns true if relation was already there
@@ -1760,7 +1761,7 @@ abstract class Streams extends Base_Streams
 				$extra = $options['extra'][$sn];
 				$extra = is_string($extra) ? $extra : Q::json_encode($extra);
 			} else {
-				unset($extra);
+				$extra = null;
 			}
 			/**
 			 * @event Streams/relateTo/$categoryType {before}
@@ -1773,7 +1774,12 @@ abstract class Streams extends Base_Streams
 			 */
 			if (false === Q::event(
 				"Streams/relateTo/{$category->type}",
-				compact('asUserId', 'category', 'stream', 'extra'),
+				array(
+					'asUserId' => $asUserId,
+					'category' => $category,
+					'stream' => $stream,
+					'extra' => &$extra
+				),
 				'before'
 			)) {
 				continue;
@@ -1991,6 +1997,19 @@ abstract class Streams extends Base_Streams
 				compact('relatedTo', 'relatedFrom', 'asUserId', 'category', 'stream'),
 				'after'
 			);
+
+			// inherit access from category to related stream
+			if (Q::ifset($options, 'inheritAccess', false)) {
+				$inheritAccess = ($category and $category->inheritAccess)
+					? Q::json_decode($category->inheritAccess)
+					: array();
+				$newInheritAccess = array($category->publisherId, $category->name);
+				if (!in_array($newInheritAccess, $inheritAccess)) {
+					$inheritAccess[] = $newInheritAccess;
+				}
+				$stream->inheritAccess = Q::json_encode($inheritAccess);
+				$stream->save();
+			}
 		}
 
 		if (empty($options['skipMessageTo'])) {
@@ -2822,7 +2841,7 @@ abstract class Streams extends Base_Streams
 				$extra = Q::json_decode($p->extra, true);
 				$tree = new Q_Tree($extra);
 				$tree->merge($options['extra']);
-				$p->extra = Q::json_encode($tree->getAll(), true);
+				$extra = $p->extra = Q::json_encode($tree->getAll(), true);
 			}
 			$streamNamesUpdate[] = $sn;
 			$updateCounts[$p->state][] = $sn;
@@ -2830,8 +2849,12 @@ abstract class Streams extends Base_Streams
 			$p->state = $state;
 		}
 		if ($streamNamesUpdate) {
+			$updateFields = compact('state');
+			if (isset($extra)) {
+				$updateFields['extra'] = $extra;
+			}
 			Streams_Participant::update()
-				->set(compact('state'))
+				->set($updateFields)
 				->where(array(
 					'publisherId' => $publisherId,
 					'streamName' => $streamNamesUpdate,
@@ -3510,7 +3533,7 @@ abstract class Streams extends Base_Streams
 		// ensure that each userId is included only once
 		$userIds = array_unique($raw_userIds);
 		$alreadyParticipating = Streams_Participant::filter(
-			$userIds, $stream->publisherId, $stream->name, null
+			$userIds, $stream->publisherId, $stream->name, 'participating'
 		);
 
 		// remove already participating users if alwaysSend=false
@@ -3632,6 +3655,8 @@ abstract class Streams extends Base_Streams
 		}
 
 		$return = array(
+			'publisherId' => $publisherId,
+			'streamName' => $streamName,
 			'success' => $result,
 			'count' => count($raw_userIds),
 			'userIds' => $raw_userIds,
@@ -3668,13 +3693,13 @@ abstract class Streams extends Base_Streams
 			$return['url'] = $invite->url();
 		}
 		
-		$instructions = array_merge($who, $options, compact(
-			'displayName', 'appUrl', 'readLevel', 'writeLevel', 'adminLevel', 'permissions'
-		));
-		Streams_Message::post($asUserId, $publisherId, $streamName, array(
-			'type' => 'Streams/invite',
-			'instructions' => $instructions
-		), true);
+		// $instructions = array_merge($who, $options, compact(
+		// 	'displayName', 'appUrl', 'readLevel', 'writeLevel', 'adminLevel', 'permissions'
+		// ));
+		// Streams_Message::post($asUserId, $publisherId, $streamName, array(
+		// 	'type' => 'Streams/invite',
+		// 	'instructions' => $instructions
+		// ), true);
 		
 		/**
 		 * @event Streams/invite {after}
@@ -3833,6 +3858,10 @@ abstract class Streams extends Base_Streams
 					throw new Users_Exception_NotAuthorized();
 				}
 			}
+		}
+
+		if (!$stream->beforeClose()) {
+			return null;
 		}
 
 		// Clean up relations from other streams to this category
@@ -4333,14 +4362,18 @@ abstract class Streams extends Base_Streams
 		}
 		$streamName = 'Streams/user/profile';
 		$stream = Streams::fetchOne($userId, $userId, $streamName);
+		$now = time();
 		if (!$stream) {
 			$stream = Streams::create($userId, $userId, 'Streams/user/profile', array(
 				'name' => $streamName
 			));
+		}
+		if ($stream->getAttribute('userInviteExpires', 0) < $now) {
 			$ret = $stream->invite(array('token' => true, 'appUrl' => $appUrl));
 			$invite = $ret['invite'];
 			$userInviteUrl = $ret['url'];
 			$stream->setAttribute('userInviteUrl', $userInviteUrl);
+			$stream->setAttribute('userInviteExpires', $expires);
 			$stream->changed();
 		} else {
 			$userInviteUrl = $stream->getAttribute('userInviteUrl');

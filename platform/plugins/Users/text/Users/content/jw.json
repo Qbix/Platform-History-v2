@@ -43,7 +43,8 @@
             "title": "Pilih kontak",
             "CreateAccount": "+ Hubungi Anyar",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create ora ditemokake",
-            "SearchByName": "Telusuri miturut jeneng"
+            "SearchByName": "Telusuri miturut jeneng",
+            "EmptyContacts": "Kontak ora ditemokake ..."
         },
         "select": {
             "title": "Pilih kontak saka {{displayName}}"

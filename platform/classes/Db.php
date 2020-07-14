@@ -577,6 +577,14 @@ abstract class Db
 		if (isset(self::$pdo_array[$key])) {
 			return self::$pdo_array[$key];
 		}
+		$dbname = $connection;
+		$parts = explode(';', $dsn);
+		foreach ($parts as $part) {
+			$lr = explode('=', $part);
+			if (strtolower(reset($lr)) === 'dbname') {
+				$dbname = $lr[1];
+			}
+		}
 		// Make a new connection to a database!
 		try {
 			self::$pdo_array[$key] = @new PDO($dsn, $username, $password, $driver_options);
@@ -590,7 +598,7 @@ abstract class Db
 			if (class_exists('Q_Config') and Q_Config::get('Db', 'exceptions', 'log', true)) {
 				Q::log($e);
 			}
-			$exception = new Db_Exception_Connect(compact('connection', 'shard_name'));
+			$exception = new Db_Exception_Connect(compact('connection', 'dbname', 'shard_name'));
 			throw $exception; // so we don't reveal connection details in some PHP instances
 		}
 		return self::$pdo_array[$key];

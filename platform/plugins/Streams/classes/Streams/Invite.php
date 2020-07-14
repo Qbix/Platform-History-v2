@@ -123,6 +123,10 @@ class Streams_Invite extends Base_Streams_Invite
 	 */
 	function accept($options = array())
 	{
+		if ($this->state == 'accepted') {
+			return false;
+		}
+
 		if (!isset($options['access'])) {
 			$options['access'] = true;
 		}
@@ -137,7 +141,7 @@ class Streams_Invite extends Base_Streams_Invite
 				$quotaName = "Streams/invite";
 				$roles = Users::roles($this->publisherId, null, null, $userId);
 				$quota = Users_Quota::check($userId, $this->token, $quotaName, true, 1, $roles);
-				
+
 				$invited2 = new Streams_Invited();
 				$invited2->token = $invited->token;
 				$invited2->userId = $invited->userId;
@@ -148,7 +152,7 @@ class Streams_Invite extends Base_Streams_Invite
 				$quota->used(1);
 			}
 		}
-		
+
 		/**
 		 * @event Streams/invite {before}
 		 * @param {Streams_Invite} stream
@@ -167,14 +171,22 @@ class Streams_Invite extends Base_Streams_Invite
 		$stream = Streams::fetchOne(
 			$this->userId, $this->publisherId, $this->streamName, true
 		);
-	
-		$participant = new Streams_Participant();
-		$participant->publisherId = $this->publisherId; // shouldn't change
-		$participant->streamName = $this->streamName; // shouldn't change
-		$participant->streamType = $stream->type; // shouldn't change
-		$participant->userId = $userId; // shouldn't change
-		$participant->state = 'participating'; // since invite was accepted, user has begun participating in the stream
-		$participant->save(true);
+		
+		/**
+		 * @event Streams/invite {after}
+		 * @param {Streams_Invite} stream
+		 * @param {Users_User} user
+		 */
+		Q::event("Streams/invite/accept", compact('invite', 'participant'), 'after');
+
+		$stream->post($userId, array(
+			'type' => 'Streams/invite/accept',
+			'instructions' => Q::take($this->fields, array(
+				'token', 'userId', 'invitingUserId', 'appUrl',
+				'readLevel', 'writeLevel', 'adminLevel', 'permissions',
+				'ofUserId', 'ofContactLabel'
+			))
+		), true);
 		
 		if (!empty($options['access'])) {
 			// Check if the users exist
@@ -221,36 +233,27 @@ class Streams_Invite extends Base_Streams_Invite
 			}
 		}
 		
-		if (!empty($options['subscribe']) and !$stream->subscription($userId)) {
-			try {
-				$extra = Q::ifset($options, 'extra', array());
-				$configExtra = Streams_Stream::getConfigField($stream->type, array(
-					'invite', 'extra'
-				), array());
-				$extra = array_merge($configExtra, $extra);
-				$options['extra'] = $extra;
-				$stream->subscribe($options);
-			} catch (Exception $e) {
-				// Swallow this exception. If the caller wanted to catch
-				// this exception, hey could have written this code block themselves.
+		if (!empty($options['subscribe'])) {
+			if (!$stream->subscription($userId)) {
+				try {
+					$extra = Q::ifset($options, 'extra', array());
+					$configExtra = Streams_Stream::getConfigField($stream->type, array(
+						'invite', 'extra'
+					), array());
+					$extra = array_merge($configExtra, $extra);
+					$options['extra'] = $extra;
+					$stream->subscribe($options);
+				} catch (Exception $e) {
+					// Swallow this exception. If the caller wanted to catch
+					// this exception, they could have written this code block themselves.
+				}
 			}
+		} else {
+			$stream->join($userId, $this->publisherId, $this->streamName, array(
+				'extra' => array('Streams/invitingUserId' => $this->invitingUserId),
+				'noVisit' => true
+			));
 		}
-		
-		/**
-		 * @event Streams/invite {after}
-		 * @param {Streams_Invite} stream
-		 * @param {Users_User} user
-		 */
-		Q::event("Streams/invite/accept", compact('invite', 'participant'), 'after');
-
-		Streams_Message::post($userId, $this->publisherId, $this->streamName, array(
-			'type' => 'Streams/invite/accept',
-			'instructions' => Q::take($this->fields, array(
-				'token', 'userId', 'invitingUserId', 'appUrl',
-				'readLevel', 'writeLevel', 'adminLevel', 'permissions',
-				'ofUserId', 'ofContactLabel'
-			))
-		), true);
 
 		return true;
 	}

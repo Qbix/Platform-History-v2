@@ -2,26 +2,29 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.3",
+				"version": "1.0.4",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets"]
 			}
 		},
 		"handlersBeforeEvent": {
-			"Q/responseExtras": ["Assets/before/Q_responseExtras"]
+			"Q/responseExtras": ["Assets/before/Q_responseExtras"],
+			"Streams/relateTo/Calendars/event": ["Assets/before/Streams_relateTo_Calendars_event"],
+			"Streams/unrelateTo/Calendars/event": ["Assets/before/Streams_unrelateTo_Calendars_event"]
 		},
 		"handlersAfterEvent": {
 			"Users/insertUser": ["Assets/after/Users_insertUser"],
 			"Assets/charge": ["Assets/after/Assets_charge"],
 			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
 			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
-			"Communities/community/create": ["Assets/after/Community_create"]
+			"Communities/community/create": ["Assets/after/Community_create"],
+			"Streams/create/Assets/service": ["Assets/after/Streams_create_Assets_service"]
 		},
 		"routes@start": {
 			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
 			"Q/plugins/Assets/:action": {"module": "Assets"},
-			"Q/plugins/Assets/services": { "module": "Assets", "action": "services" }
+			"Assets/services": { "module": "Assets", "action": "services" }
 		},
 		"web": {
 			"requireValidNonce": ["Assets"]
@@ -112,7 +115,12 @@
 				"acceptedInvite": 10
 			},
 			"exchange": {
-				"USD": 10
+				"USD": 10,
+				"EUR": 11,
+				"GBP": 12,
+				"JPY": 0.1,
+				"CAD": 0.7,
+				"AUD": 6
 			}
 		},
 		"currencies": {
@@ -153,6 +161,6 @@
 		"browsertab": {
 			"css": []
 		},
-		"canCheckPaid": ["Users/admoins", "Assets/admins"]
+		"canCheckPaid": ["Users/owners", "Users/admins", "Assets/admins"]
 	}
 }

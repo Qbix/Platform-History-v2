@@ -73,5 +73,30 @@
             "touchscreen": "Օգտագործեք ձեր մատները մեծացնելու եւ քաշելու համար",
             "notTouchscreen": "Օգտագործեք մկնիկը եւ անիվը, մեծացնելու եւ քաշեք"
         }
+    },
+    "timestamp": {
+        "lastNight": "նախորդ գիշեր",
+        "lastEvening": "վերջին նախօրեին",
+        "yesterday": "երեկ",
+        "thisMorning": "այս առավոտ",
+        "today": "այսօր",
+        "tonight": "այս երեկո",
+        "tomorrowMorning": "Թոմ առավոտ",
+        "tomorrow": "վաղը",
+        "hoursAgo": "{{h}} ժամ առաջ",
+        "hourAgo": "{{h}} ժամ առաջ",
+        "minuteAgo": "{99 999}} րոպե առաջ",
+        "minutesAgo": "{99 999}} րոպե առաջ",
+        "secondAgo": "{99 999}} երկրորդ առաջ",
+        "secondsAgo": "{{s}} վայրկյան առաջ",
+        "fewSecondsAgo": "վայրկյաններ առաջ",
+        "rightNow": "հենց հիմա",
+        "inSecond": "999 {} վայրկյանում",
+        "inSeconds": "999}} վայրկյանում",
+        "inMinute": "999}. րոպեի ընթացքում",
+        "inMinutes": "999}} րոպեում",
+        "inHour": "999}} ժամում",
+        "inHours": "999}} ժամում",
+        "inUnderMinute": "1 րոպեի ընթացքում"
     }
 }

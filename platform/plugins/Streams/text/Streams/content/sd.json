@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "توهان هن ڪچهري ۾ شامل ٿيڻ جي اجازت نه آهي.",
         "startedConversation": "گفتگو شروع ڪيو",
         "RealTimeCall": "حقيقي وقت ڪال",
-        "SearchByName": "نالو ڳولھيو"
+        "SearchByName": "نالو ڳولھيو",
+        "Notifications": {
+            "Visit": "{{displayName}} چيٽ جو دورو ڪري رهيو آهي",
+            "Join": "{{displayName}} چيٽ ۾ شامل ٿيو",
+            "Leave": "{{displayName}} چيپي ڇڏي وئي",
+            "RelatedTo": "{{displayName}} شروع ڪيو {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "نياپو {{& message.fields.type}} ڏانهن {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "متن",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} ڪوڊ ڪوڊ ڪيو ويو هو"
+            "scannedQR": "{{ClickOrTap}} ڪوڊ ڪوڊ ڪيو ويو هو",
+            "copyLink": "دعوت واري لنڪ ڪاپي ڪرڻ {{ClickOrTap}}"
         },
         "email": {
             "subject": "ائو، هن کي چيڪ ڪريو",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "توھان کي دعوت ڏنو ويو آھي. {{ClickOrTap}} هتي قبول ڪرڻ ۽ شامل ٿيڻ لاء."
-        }
+        },
+        "command": "دعوت ڏيو",
+        "youCanNowPaste": "توھان ھاڻي پنھنجو لنڪ پيسٽ ڪري سگھوٿا ماڻھن کي دعوت ڏيڻ لاءِ"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "ڪڙي ڪلپ بورڊ ڏانهن نقل ڪيو ويو آهي",
             "codeCopiedToCb": "ڪوڊ ڪلپ بورڊ ڏانهن نقل ڪيو ويو آهي",
             "userHasNoVideo": "شرڪت ڪندڙ ڪا وڊيو ناهي",
-            "openInBrowserAlert": "ڪانفرنس ۾ شامل ٿيڻ لاء صفاري برائوزر ۾ لنڪ کوليو."
+            "openInBrowserAlert": "ڪانفرنس ۾ شامل ٿيڻ لاء صفاري برائوزر ۾ لنڪ کوليو.",
+            "youBeganVideoRecording": "توهان ڪانفرنس شروع ڪري رڪارڊ ڪرڻ شروع ڪيو",
+            "youStoppedVideoRecording": "توهان هن ڪانفرنس کي رڪارڊ ڪرڻ بند ڪري ڇڏيو"
         },
         "settingsPopup": {
             "webCamera": "ويب ڪيمرا",
@@ -173,7 +184,15 @@
             "fbStartLive": "جيئڻ وڃو",
             "fbStopLive": "انٽرنيٽ ختم ڪريو",
             "fbEmbedCode": "داخل ڪيو ويو",
-            "copy": "ڪاپي"
+            "copy": "ڪاپي",
+            "turnOffVideo": "ڪئميرا \/ اسڪرين شيئرنگ بند ڪريو",
+            "turnOffScreenSharing": "اسڪرين شيئرنگ بند ڪريو",
+            "cameraIsTurnedOff": "ڪئميرا بند ٿي وئي آهي",
+            "startRecording": "رڪارڊنگ شروع ڪيو",
+            "stopRecording": "رڪارڊنگ بند ڪيو",
+            "recordingInProgress": "رڪارڊنگ جاري آهي ...",
+            "publishOnTimeline": "وقت تي شايع ڪريو",
+            "publishToGroup": "گروپ ڏانھن شايع ڪريو"
         },
         "participantsPopup": {
             "disconnect": "ناڪاري",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "قافلو مون کان سواء",
             "maximizeLoudest": "وڌ ۾ وڌ وڌو",
             "staticMaximized": "جامد وڌايو ويو",
-            "manual": "دستياب"
-        }
+            "manual": "دستياب",
+            "fullScreen": "مڪمل اسڪرين",
+            "turnOffCamera": "وڊيو لڪايو",
+            "turnOffAudio": "خاموش آڊيو",
+            "turnOffScreenSharing": "اسڪرين شيئرنگ لڪايو",
+            "turnOnCamera": "وڊيو ڏيکاريو",
+            "turnOnAudio": "آڊيو کي خاموش ڪريو",
+            "turnOnScreenSharing": "اسڪرين شيئرنگ ڏيکاريو"
+        },
+        "notAllowedToJoinCall": "توهان کي هن وهڪري ۾ شامل ٿيڻ جي اجازت ناهي.",
+        "streamTitle": "{{1}} لائيو ڪال"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "محفوظ ڪريو",
         "Delete": "ختم ڪريو",
         "Submenu": "سبزن جو"
+    },
+    "errors": {
+        "HiddenFromYou": "هي مواد توهان کان لڪيل آهي."
     }
 }

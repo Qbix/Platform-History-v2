@@ -73,5 +73,30 @@
             "touchscreen": "Ampiasao ny rantsan-tànanao mba hampitomboana sy hamindrana",
             "notTouchscreen": "Ampiasao ny totozy sy ny kodiaranao mba hampitomboana sy hisintonana"
         }
+    },
+    "timestamp": {
+        "lastNight": "omaly alina",
+        "lastEvening": "alina farany",
+        "yesterday": "omaly",
+        "thisMorning": "io maraina io",
+        "today": "amin&#39;izao fotoana izao",
+        "tonight": "anio alina",
+        "tomorrowMorning": "tom maraina",
+        "tomorrow": "rahampitso",
+        "hoursAgo": "{{h}} ora lasa izay",
+        "hourAgo": "{{h}} ora lasa izay",
+        "minuteAgo": "{{m}} minitra lasa izay",
+        "minutesAgo": "{{m}} minitra lasa izay",
+        "secondAgo": "{{s}} faharoa lasa izay",
+        "secondsAgo": "{{s}} segondra lasa izay",
+        "fewSecondsAgo": "segondra lasa izay",
+        "rightNow": "izao dia izao",
+        "inSecond": "amin&#39;ny faharoa {{s}} faharoa",
+        "inSeconds": "tao anatin&#39;ny {{s}} segondra",
+        "inMinute": "ao anatin&#39;ny {{m}} minitra",
+        "inMinutes": "ao anatin&#39;ny {{m}} minitra",
+        "inHour": "amin&#39;ny {{h}} ora",
+        "inHours": "amin&#39;ny {{h}} ora",
+        "inUnderMinute": "ao anatin&#39;ny 1 minitra"
     }
 }

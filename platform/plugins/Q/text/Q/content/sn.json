@@ -73,5 +73,30 @@
             "touchscreen": "Shandisa minwe yako kuzorora uye kudhonza",
             "notTouchscreen": "Shandisa mouse yako uye gurusi kuti uwedzere uye udonhe"
         }
+    },
+    "timestamp": {
+        "lastNight": "manheru apfuura",
+        "lastEvening": "last eve",
+        "yesterday": "nezuro",
+        "thisMorning": "mangwanani ano",
+        "today": "nhasi",
+        "tonight": "manheru ano",
+        "tomorrowMorning": "Tom mangwanani",
+        "tomorrow": "mangwana",
+        "hoursAgo": "{{h}} maawa apfuura",
+        "hourAgo": "{{h}} awa yapfuura",
+        "minuteAgo": "{{m}} maminetsi apfuura",
+        "minutesAgo": "{{m}} maminetsi apfuura",
+        "secondAgo": "{{s}} yechipiri yapfuura",
+        "secondsAgo": "{{s}} masekondi apfuura",
+        "fewSecondsAgo": "masekondi apfuura",
+        "rightNow": "izvozvi",
+        "inSecond": "mu {{999]} wechipiri",
+        "inSeconds": "mu {{999]} masekondi",
+        "inMinute": "mu {{999]} mamineti",
+        "inMinutes": "mu {{m}} maminetsi",
+        "inHour": "mu {{h}} awa",
+        "inHours": "mu {{h}} maawa",
+        "inUnderMinute": "mukati me1 miniti"
     }
 }

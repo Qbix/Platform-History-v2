@@ -24,8 +24,23 @@
         "Pay": "Pay"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{1}}",
-        "YouHaveCreditsToStart": "You have {{1}} credits to start"
+        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
+        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
+		"PaymentFor": "Payment for \"{{1}}\"",
+		"PaymentTo": "Payment to {{1}}",
+		"PaymentToUser": "Payment to {{userName}}",
+		"JoinPaidStream": "for joining \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+		"CreatedCommunity": "Created Community \"{{communityId}}\"",
+		"LeftPaidStream": "for leaving \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+		"BoughtCredits": "Bought {{amount}} credits",
+		"BuyAmountCredits": "Buy {{amount}} credits",
+		"MissingCredits": "Missing Credits",
+		"YouMissingCredits": "You missing {{amount}} credits",
+		"BuyCredits": "Buy credits",
+		"Buy": "Buy",
+		"Credits": "Credits",
+		"ErrorInvalidAmount": "Amount invalid",
+		"ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet"
     },
     "history": {
         "Date": "Date",
@@ -35,8 +50,23 @@
         "To": "to",
         "From": "from",
         "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet"
-    },
+        "HistoryEmpty": "You have no data yet",
+		"PaymentFor": "Spent {{amount}} credits",
+		"PaymentTo": "Sent {{amount}} credits",
+		"PaymentToUser": "Sent {{amount}} credits",
+		"JoinPaidStream": {
+			"+": "Earned {{amount}} credits",
+			"-": "Spent {{amount}} credits"
+		},
+		"LeftPaidStream": {
+			"+": "Received {{amount}} credits",
+			"-": "Sent {{amount}} credits"
+		},
+		"CreatedCommunity": "Spent {{amount}} credits",
+		"BoughtCredits": "Bought {{amount}} credits",
+		"InviteAcceptedBy": "Earned {{amount}} credits",
+		"YouHaveCreditsToStart": "Earned {{amount}} credits"
+	},
     "subscriptions": {
         "infoTitle": "Set Payment Information",
         "confirm": {
@@ -51,7 +81,8 @@
     },
     "payments": {
         "infoTitle": "Set Payment Information",
-        "confirm": {
+		"BuyAmountCredits": "Buy {{amount}} credits",
+		"confirm": {
             "title": "Make a Payment",
             "message": "Do you agree to pay {{symbol}}{{amount}}?",
             "ok": "OK",
@@ -84,25 +115,34 @@
         "Assets\/credits\/earned": {
             "content": "Earned {{amount}} credits"
         },
+		"Assets\/credits\/bought": {
+			"content": "Bought {{amount}} credits"
+		},
         "Assets\/credits\/spent": {
             "content": "Spent {{amount}} credits"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits"
+            "content": "Sent {{amount}} credits to {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits"
+            "content": "Received {{amount}} credits from {{fromUserName}}"
         }
     },
 	"services": {
 		"NewServiceTemplate": {
-			"Title": "New Service Template",
+			"Title": "New Service",
 			"TitlePlaceholder": "Service title",
 			"PricePlaceholder": "Set price",
+			"LinkPlaceholder": "set additional info link",
 			"DescriptionPlaceholder": "Service description",
 			"SaveService": "Save Service"
 		},
 		"ManageServiceTemplates": "Manage Service Templates",
-		"ManageServices": "Manage Services"
+		"ManageServices": "Manage Services",
+		"FreeEvent": "Free event",
+		"OptionalContribution": "Optional contribution",
+		"RequiredPayment": "Required payment",
+		"AreYouSureDelete": "Are you sure you want to delete this service?",
+		"AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
 	}
 }

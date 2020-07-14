@@ -168,30 +168,61 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 		// add imagepicker
 		var ipo = Q.extend({}, ps.imagepicker, 10, {
 			preprocess: function (callback) {
-				var subpath;
-				Q.Streams.get(ps.publisherId, ps.streamName, function () {
-					var parts = this.iconUrl(40).split('/');
-					var iconUrl = parts.slice(0, parts.length-1).join('/')
-						.substr(Q.info.baseUrl.length+1);
-					if (parts[1] === 'Users') {
-						// uploading a user icon
-						path = 'Q/uploads/Users';
-						subpath = ps.publisherId.splitId() + '/icon';
-					} else { // uploading a regular stream icon
-						path = 'Q/uploads/Streams';
-						subpath = ps.publisherId.splitId() + '/'
-							+ ps.streamName + '/icon';
+				if (ps.creatable && ps.creatable.preprocess) {
+					Q.handle(ps.creatable.preprocess, this, [_proceed, tool, event]);
+				} else {
+					_proceed();
+				}
+				var r = ps.related;
+				Q.Streams.retainWith(tool)
+				function _proceed(overrides, weight) {
+					if (overrides != undefined && !Q.isPlainObject(overrides)) {
+						return;
 					}
-					subpath += '/'+Math.floor(Date.now()/1000);
-					callback({ path: path, subpath: subpath });
-				});
+					var fields = Q.extend({
+						publisherId: ps.publisherId,
+						type: (ps.creatable && ps.creatable.streamType) || "Streams/image"
+					}, 10, overrides);
+					Q.Streams.create(fields, function (err, stream, extra) {
+						var path, subpath;
+						if (err) {
+							ps.onError.handle.call(tool, err);
+							Q.handle(callback, tool, [{cancel: true}]);
+							return err;
+						}
+						var iconUrl = this.iconUrl(40);
+						var p = 'Q/plugins/';
+						var i = this.iconUrl(40).indexOf('Q/plugins/');
+						if (iconUrl.substr(i+p.length).startsWith('Users/')) {
+							// uploading a user icon
+							path = 'Q/uploads/Users';
+							subpath = ps.publisherId.splitId() + '/icon';
+						} else { // uploading a regular stream icon
+							path = 'Q/uploads/Streams';
+							subpath = ps.publisherId.splitId() + '/'
+								+ stream.fields.name + '/icon';
+						}
+						subpath += '/'+Math.floor(Date.now()/1000);
+						callback({ path: path, subpath: subpath });
+						tool.element.removeClass('Streams_preview_composer');
+						tool.element.addClass('Streams_preview_stream');
+						setTimeout(function () {
+							tool.preview.loading();
+						}, 0);
+						ps.streamName = stream.fields.name;
+					}, r, ps.creatable && ps.creatable.options);
+				}
 			},
-			onSuccess: {'Streams/image/preview': function (data, key, file) {
+			onFinish: {'Streams/image/preview': function (data, key, file) {
 				Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, null, {
 					messages: true,
 					changed: {icon: true},
 					evenIfNotRetained: true
 				});
+				ps.onCreate.handle.call(tool, this);
+				tool.element.removeClass('Streams_preview_composer');
+				tool.element.addClass('Streams_preview_stream');
+				tool.preview.preview();
 				return false;
 			}}
 		});

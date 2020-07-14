@@ -73,5 +73,30 @@
             "touchscreen": "Томруулж, татахын тулд хуруугаа ашиглана уу",
             "notTouchscreen": "Хөдөлгөөнгүй болгохын тулд хулганаа &amp; дугуй ашиглана уу"
         }
+    },
+    "timestamp": {
+        "lastNight": "өнгөрсөн шөнө",
+        "lastEvening": "өнгөрсөн үдэш",
+        "yesterday": "өчигдөр",
+        "thisMorning": "энэ өглөө",
+        "today": "өнөөдөр",
+        "tonight": "өнөө орой",
+        "tomorrowMorning": "том эрэг",
+        "tomorrow": "маргааш",
+        "hoursAgo": "{{h}} цагийн өмнө",
+        "hourAgo": "{{h}} цагийн өмнө",
+        "minuteAgo": "{{m}} минутын өмнө",
+        "minutesAgo": "{{m}} минутын өмнө",
+        "secondAgo": "{{s}} секундын өмнө",
+        "secondsAgo": "{{s}} секундын өмнө",
+        "fewSecondsAgo": "секундын өмнө",
+        "rightNow": "яг одоо",
+        "inSecond": "секундэд {{s}} дарна уу",
+        "inSeconds": "{{s}} секундын дотор",
+        "inMinute": "{{m}} минутанд ашиглах боломжтой",
+        "inMinutes": "{{m}} минутанд ашигладаг",
+        "inHour": "{{h}} цагт",
+        "inHours": "{{h}} цагт",
+        "inUnderMinute": "1 минутын дотор"
     }
 }

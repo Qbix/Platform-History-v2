@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "이 대화에 참여할 수있는 권한이 없습니다.",
         "startedConversation": "대화를 시작했다.",
         "RealTimeCall": "실시간 통화",
-        "SearchByName": "이름으로 검색"
+        "SearchByName": "이름으로 검색",
+        "Notifications": {
+            "Visit": "{{displayName}} 님이 채팅을 방문 중입니다",
+            "Join": "{{displayName}} 님이 채팅에 참여했습니다",
+            "Leave": "{{displayName}} 님이 채팅에서 나갔습니다",
+            "RelatedTo": "{{displayName}}가 {{stream.displayType}}을 (를) 시작했습니다"
+        }
     },
     "notifications": {
         "*": "메시지 {{& message.fields.type}} ~ {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "화면 공유 숨기기",
             "turnOnCamera": "비디오 표시",
             "turnOnAudio": "음소거 해제",
-            "turnOnScreenSharing": "화면 공유 표시"
+            "turnOnScreenSharing": "화면 공유 표시",
+            "fullScreen": "전체 화면"
         },
         "notAllowedToJoinCall": "이 스트림에 참여할 권한이 없습니다.",
         "streamTitle": "{{1}} 실시간 통화"

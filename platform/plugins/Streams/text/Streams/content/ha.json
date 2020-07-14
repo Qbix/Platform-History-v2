@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Baka da izinin shiga wannan tattaunawar.",
         "startedConversation": "fara hira",
         "RealTimeCall": "Kira na Gaskiya",
-        "SearchByName": "Bincika da suna"
+        "SearchByName": "Bincika da suna",
+        "Notifications": {
+            "Visit": "{{displayName}} yana ziyartar tattaunawar",
+            "Join": "{{displayName}} ya shiga tattaunawar",
+            "Leave": "{{displayName}} ya bar hira",
+            "RelatedTo": "{{displayName}} ya fara {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Message {{& message.fields.type}} zuwa {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "Rubutu",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} idan aka kirkiri lambar"
+            "scannedQR": "{{ClickOrTap}} idan aka kirkiri lambar",
+            "copyLink": "{{ClickOrTap}} don kwafar hanyar gayyata"
         },
         "email": {
             "subject": "Hey, duba wannan",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "An gayyatar ku. {{ClickOrTap}} nan don karɓa da shiga."
-        }
+        },
+        "command": "Gayyata",
+        "youCanNowPaste": "Yanzu zaku iya liƙa wannan hanyar haɗin yanar gizon don gayyatar mutane"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "An lika hanyar haɗi zuwa allon rubutu",
             "codeCopiedToCb": "Lambar da aka kwafa zuwa allo",
             "userHasNoVideo": "Mai halarta bashi da bidiyo",
-            "openInBrowserAlert": "Buɗe hanyar haɗi a mai binciken Safari don shiga taron."
+            "openInBrowserAlert": "Buɗe hanyar haɗi a mai binciken Safari don shiga taron.",
+            "youBeganVideoRecording": "Kun fara rikodin wannan taron",
+            "youStoppedVideoRecording": "Kun dakatar da yin wannan taron"
         },
         "settingsPopup": {
             "webCamera": "Kyamarar Yanar gizo",
@@ -173,7 +184,15 @@
             "fbStartLive": "Ku tafi Live",
             "fbStopLive": "Livearshen Rayuwa",
             "fbEmbedCode": "Saka ciki",
-            "copy": "Kwafa"
+            "copy": "Kwafa",
+            "turnOffVideo": "Kashe raba kyamara \/ allo",
+            "turnOffScreenSharing": "Kashe raba allo",
+            "cameraIsTurnedOff": "Ana kashe kamara",
+            "startRecording": "Fara Rikodi",
+            "stopRecording": "Tsaya Rikodi",
+            "recordingInProgress": "Rikodin suna kan ...",
+            "publishOnTimeline": "Buga kan saiti",
+            "publishToGroup": "Bugawa zuwa rukuni"
         },
         "participantsPopup": {
             "disconnect": "Cire haɗin",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "Banda Wuya Sai Ni",
             "maximizeLoudest": "Kara girman Loudest",
             "staticMaximized": "Matsakaicin Matsakaici",
-            "manual": "Manual"
-        }
+            "manual": "Manual",
+            "fullScreen": "Cikakken kariya",
+            "turnOffCamera": "Boye bidiyo",
+            "turnOffAudio": "Sauraren sauti",
+            "turnOffScreenSharing": "Boye raba allo",
+            "turnOnCamera": "Nuna bidiyo",
+            "turnOnAudio": "Bude sauti",
+            "turnOnScreenSharing": "Nuna raba allo"
+        },
+        "notAllowedToJoinCall": "Baka da izinin shiga wannan rafin.",
+        "streamTitle": "{{1}} kiran bidiyo"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "Ajiye",
         "Delete": "Share",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Wannan abu yana ɓoye muku."
     }
 }

@@ -43,7 +43,8 @@
             "title": "Kōwhiria te whakapā",
             "CreateAccount": "+ Whakapā Hou",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create kaore i kitea",
-            "SearchByName": "Rapua te ingoa"
+            "SearchByName": "Rapua te ingoa",
+            "EmptyContacts": "Kāore i kitea ..."
         },
         "select": {
             "title": "Tīpakohia te whakapā o {{displayName}}"

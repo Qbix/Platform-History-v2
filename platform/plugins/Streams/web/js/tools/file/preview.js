@@ -34,9 +34,15 @@ function _Streams_file_preview(options, preview) {
 	var $te = $(tool.element);
 	var state = this.state;
 	var ps = preview.state;
-	ps.templates.create.fields.src = Q.url('{{Q}}/img/actions/upload.png');
-	ps.templates.create.name = 'Streams/file/preview/create';
-	ps.templates.create.showTitle = (state.showTitle !== false);
+	var src = Q.getObject('templates.create.fields.src', state);
+	if (src) {
+		state.templates.create.fields.src = Q.url(src);
+	}
+	ps.templates.create = Q.extend(
+		ps.templates.create, 
+		10,
+		state.templates.create
+	);
 	if (ps.creatable) {
 		ps.creatable.streamType = ps.creatable.streamType || 'Streams/file';
 		ps.creatable.title = ps.creatable.title || 'Upload File';
@@ -72,6 +78,12 @@ function _Streams_file_preview(options, preview) {
 		edit: {
 			name: 'Streams/file/preview/edit',
 			fields: { alt: 'icon', titleClass: '', titleTag: 'h3' }
+		},
+		create: {
+			name: 'Streams/file/preview/create',
+			fields: {
+				src: '{{Q}}/img/actions/upload.png'
+			}
 		}
 	}
 },

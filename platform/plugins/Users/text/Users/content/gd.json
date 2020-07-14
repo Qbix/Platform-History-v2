@@ -43,7 +43,8 @@
             "title": "Tagh conaltradh",
             "CreateAccount": "+ Fios Ùr",
             "CreateAccountNotFound": "Cha deach Q.Users.Cordova.UI.create a lorg",
-            "SearchByName": "Rannsaich a rèir ainm"
+            "SearchByName": "Rannsaich a rèir ainm",
+            "EmptyContacts": "Cha deach fiosan a lorg ..."
         },
         "select": {
             "title": "Tagh conaltradh le {{displayName}}"

@@ -73,5 +73,30 @@
             "touchscreen": "झूम आणि ड्रॅग करण्यासाठी आपली बोटं वापरा",
             "notTouchscreen": "झूम आणि ड्रॅग करण्यासाठी आपला माउस आणि चाक वापरा"
         }
+    },
+    "timestamp": {
+        "lastNight": "काल रात्री",
+        "lastEvening": "शेवटची संध्याकाळ",
+        "yesterday": "काल",
+        "thisMorning": "या सकाळी",
+        "today": "आज",
+        "tonight": "आज रात्री",
+        "tomorrowMorning": "टॉम मॉर्निंग",
+        "tomorrow": "उद्या",
+        "hoursAgo": "{{h}} तासांपूर्वी",
+        "hourAgo": "} {999}} तासापूर्वी",
+        "minuteAgo": "} {999}} मिनिटापूर्वी",
+        "minutesAgo": "} {999}} मिनिटांपूर्वी",
+        "secondAgo": "} 9 999}} सेकंदापूर्वी",
+        "secondsAgo": "} {999}} सेकंदांपूर्वी",
+        "fewSecondsAgo": "सेकंदांपूर्वी",
+        "rightNow": "ताबडतोब",
+        "inSecond": "{9 999}} सेकंदात",
+        "inSeconds": "{{s}} सेकंदात",
+        "inMinute": "{{m}} मिनिटात",
+        "inMinutes": "{{m}} मिनिटांत",
+        "inHour": "{{h}} तासात",
+        "inHours": "{{h}} तासांमध्ये",
+        "inUnderMinute": "1 मिनिटात"
     }
 }

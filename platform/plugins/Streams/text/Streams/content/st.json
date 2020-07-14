@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Ha u na tumello ea ho kena moqoqong ona.",
         "startedConversation": "o qalile moqoqo",
         "RealTimeCall": "Mohala oa Nako ea &#39;nete",
-        "SearchByName": "Batla ka lebitso"
+        "SearchByName": "Batla ka lebitso",
+        "Notifications": {
+            "Visit": "{{displayName}} e etela moqoqo",
+            "Join": "{{displayName}} o kene moqoqong",
+            "Leave": "{{displayName}} o tlohetse moqoqo",
+            "RelatedTo": "{{displayName}} o qalile {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Molaetsa {{& message.fields.type}} ho {{& stream.fields.title}}",
@@ -73,7 +79,8 @@
             "byText": "Mongolo",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} haeba khoutu e hlahlojoa"
+            "scannedQR": "{{ClickOrTap}} haeba khoutu e hlahlojoa",
+            "copyLink": "{{ClickOrTap}} ho kopitsa sehokelo sa memo"
         },
         "email": {
             "subject": "Hey, hlahloba sena",
@@ -89,7 +96,9 @@
         },
         "notice": {
             "text": "U memetsoe. {{ClickOrTap}} mona ho amohela le ho ikopanya."
-        }
+        },
+        "command": "Mema",
+        "youCanNowPaste": "Hona joale o ka beha sehokelo sena kae kae ho mema batho"
     },
     "followup": {
         "mobile": {
@@ -156,7 +165,9 @@
             "linkCopiedToCb": "Khokahano e kopitsoe ho clipboard",
             "codeCopiedToCb": "Khoutu e kopitsoe ho clipboard",
             "userHasNoVideo": "Morupeluoa ha a na video",
-            "openInBrowserAlert": "Bula sehokelo ka sebatli sa Safari ho kenela kopano."
+            "openInBrowserAlert": "Bula sehokelo ka sebatli sa Safari ho kenela kopano.",
+            "youBeganVideoRecording": "O qalile ho rekota kopano ena",
+            "youStoppedVideoRecording": "O emisitse ho rekota kopano ena"
         },
         "settingsPopup": {
             "webCamera": "Khamera ea Webo",
@@ -173,7 +184,15 @@
             "fbStartLive": "Eya ho phela",
             "fbStopLive": "Phethahetseng",
             "fbEmbedCode": "Embed",
-            "copy": "Kopitsa"
+            "copy": "Kopitsa",
+            "turnOffVideo": "Tima ho arolelana kh&#39;amera \/ skrineng",
+            "turnOffScreenSharing": "Tima ho arolelana skrineng",
+            "cameraIsTurnedOff": "Khamera e felisitsoe",
+            "startRecording": "Qala ho Rekota",
+            "stopRecording": "Emisa ho Rekota",
+            "recordingInProgress": "Ho rekota hoa tsoela pele ...",
+            "publishOnTimeline": "Hatisa ka tatellano ea nako",
+            "publishToGroup": "Phatlalatsa ho sehlopha"
         },
         "participantsPopup": {
             "disconnect": "Lahla",
@@ -182,8 +201,17 @@
             "loudestExceptMe": "O Ratehang Haholo ntle le nna",
             "maximizeLoudest": "Phahamisa ka ho Fetisisa",
             "staticMaximized": "E matlafalitsoe",
-            "manual": "Buka ea matsoho"
-        }
+            "manual": "Buka ea matsoho",
+            "fullScreen": "Skrine se felletseng",
+            "turnOffCamera": "Pata video",
+            "turnOffAudio": "Utloisa molumo",
+            "turnOffScreenSharing": "Pata ho arolelana skrini",
+            "turnOnCamera": "Bontša video",
+            "turnOnAudio": "Sokolla molumo",
+            "turnOnScreenSharing": "Bontša ho arolelana skrineng"
+        },
+        "notAllowedToJoinCall": "Ha u na tumello ea ho kenella molatsoaneng ona.",
+        "streamTitle": "{{1}} mohala o tsitsitseng"
     },
     "messages": {
         "html": {
@@ -331,5 +359,8 @@
         "Save": "Boloka",
         "Delete": "Tlosa",
         "Submenu": "Submenu"
+    },
+    "errors": {
+        "HiddenFromYou": "Litaba tsena li patetsoe uena."
     }
 }

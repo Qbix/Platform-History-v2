@@ -55,7 +55,7 @@ Q.Tool.define("Streams/related/menu", ["Streams/related", "Q/tabs"], function _S
 	});
 
 	// replace Q/inplace actions for tabs
-	Q.Tool.onActivate('Streams/preview').add(function () {
+	Q.Tool.onActivate('Streams/preview').set(function () {
 		if (!$(tool.element).has(this.element).length) {
 			return;
 		}

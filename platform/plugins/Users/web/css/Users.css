@@ -306,7 +306,7 @@
 #Users_login_identifier { width: 75%; padding: 2%; }
 #Users_login_username { width: 96%; padding: 2%; }
 #Users_setIdentifier_identifier { width: 100%; padding: 2%; }
-#Users_login_go { width: 23%; margin: 1%; text-align: center; }
+#Users_login_go { width: 23%; margin: 1%; text-align: center; vertical-align: middle; }
 #Users_login_noPassphrase { font-size: 14px; font-weight: bold; color: #a00; text-align: center; }
 #Users_login_notVerified { font-size: 14px; font-weight: bold; text-align: center; }
 #Users_login_identifierExists { font-size: 12px; color: green; text-align: center; font-weight: bold; }
@@ -556,6 +556,11 @@ html.Users_loggedIn .Users_whenLoggedOut {
 
 #Users_login_dialog .Q_dialog_slot {
 	padding: 10px;
+	overflow: visible;
+}
+
+#Users_login_dialog.Users_login_expanded .Q_dialog_slot {
+	overflow: auto;
 }
 
 #notices_slot ul li .Q_tool.Users_avatar_tool {

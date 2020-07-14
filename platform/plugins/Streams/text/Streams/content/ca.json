@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "No teniu permís per unir-vos a aquesta conversa.",
         "startedConversation": "va iniciar una conversa",
         "RealTimeCall": "Trucada en temps real",
-        "SearchByName": "Cerca pel seu nom"
+        "SearchByName": "Cerca pel seu nom",
+        "Notifications": {
+            "Visit": "{{displayName}} visita el xat",
+            "Join": "{{displayName}} es va unir al xat",
+            "Leave": "{{displayName}} va deixar el xat",
+            "RelatedTo": "{{displayName}} va iniciar un {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Missatge {{& message.fields.type}} a {{& stream.fields.title}}",
@@ -212,7 +218,8 @@
             "turnOffScreenSharing": "Amagueu la compartició de pantalla",
             "turnOnCamera": "Mostra vídeo",
             "turnOnAudio": "No activa el so",
-            "turnOnScreenSharing": "Mostra compartició de pantalla"
+            "turnOnScreenSharing": "Mostra compartició de pantalla",
+            "fullScreen": "Pantalla completa"
         },
         "notAllowedToJoinCall": "No teniu permís per unir-vos a aquest flux.",
         "streamTitle": "{{1}} trucada en directe"

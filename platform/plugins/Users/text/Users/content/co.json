@@ -43,7 +43,8 @@
             "title": "Sceglite u cuntattu",
             "CreateAccount": "+ Novu Cuntattu",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create micca truvatu",
-            "SearchByName": "Ricerca per nome"
+            "SearchByName": "Ricerca per nome",
+            "EmptyContacts": "Cuntatti micca truvati ..."
         },
         "select": {
             "title": "Selezziunate u cuntattu di {{displayName}}"
