@@ -18,8 +18,8 @@
  * an associative array of $column => $value pairs
  * @param {string} [$fields.userId] defaults to ""
  * @param {string} [$fields.id] defaults to ""
- * @param {string} [$fields.attributes] defaults to ""
  * @param {string} [$fields.description] defaults to ""
+ * @param {string} [$fields.attributes] defaults to ""
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to "0000-00-00 00:00:00"
  */
@@ -38,16 +38,16 @@ abstract class Base_Assets_Charge extends Db_Row
 	 * 
 	 */
 	/**
+	 * @property $description
+	 * @type string
+	 * @default ""
+	 * human-readable description of the charge
+	 */
+	/**
 	 * @property $attributes
 	 * @type string
 	 * @default ""
 	 * additional information for the charge in JSON format
-	 */
-	/**
-	 * @property $description
-	 * @type string
-	 * @default ""
-	 * 
 	 */
 	/**
 	 * @property $insertedTime
@@ -387,6 +387,60 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_description
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_description($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression) {
+			return array('description', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".description");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".description");
+		return array('description', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the description field
+	 * @return {integer}
+	 */
+	function maxSize_description()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for description column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_description()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_attributes
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -439,60 +493,6 @@ return array (
 	}
 
 	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_description
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_description($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('description', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".description");
-		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".description");
-		return array('description', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the description field
-	 * @return {integer}
-	 */
-	function maxSize_description()
-	{
-
-		return 255;			
-	}
-
-	/**
-	 * Returns schema information for description column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_description()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '255',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => '',
-);			
-	}
-
-	/**
 	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_insertedTime
 	 * @param {string} $value
@@ -528,7 +528,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '255',
+    1 => '1023',
     2 => '',
     3 => false,
   ),
@@ -574,7 +574,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '255',
+    1 => '1023',
     2 => '',
     3 => false,
   ),
@@ -616,7 +616,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('userId', 'id', 'attributes', 'description', 'insertedTime', 'updatedTime');
+		$field_names = array('userId', 'id', 'description', 'attributes', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

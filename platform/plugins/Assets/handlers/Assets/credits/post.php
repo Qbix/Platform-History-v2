@@ -17,14 +17,22 @@ function Assets_credits_post($params = array())
 	}
 
 	// if stream defined
-	$publisherId = Q::ifset($req, 'stream', 'publisherId', null);
-	$streamName = Q::ifset($req, 'stream', 'streamName', null);
+	$toPublisherId = Q::ifset($req, 'toStream', 'publisherId', null);
+	$toStreamName = Q::ifset($req, 'toStream', 'streamName', null);
 	$userId = Q::ifset($req, 'userId', null);
+	$paymentDetails = Q::ifset($req, 'paymentDetails', null);
 
-	if ($publisherId && $streamName) {
-		Assets_Credits::spend($needCredits, 'JoinPaidStream', $loggedUserId, compact("publisherId", "streamName"));
+	// convert amount to credits in paymentDetails
+	if ($paymentDetails) {
+		foreach ($paymentDetails as $key => $item) {
+			$paymentDetails[$key]['amount'] = Assets_Credits::convertToCredits($item['amount'], $req['currency']);
+		}
+	}
+
+	if ($toPublisherId && $toStreamName) {
+		Assets_Credits::spend($needCredits, 'JoinPaidStream', $loggedUserId, compact("toPublisherId", "toStreamName", "paymentDetails"));
 	} elseif ($userId) {
-		Assets_Credits::send($needCredits,'PaymentToUser', $userId, $loggedUserId);
+		Assets_Credits::send($needCredits,'PaymentToUser', $userId, $loggedUserId, compact("toPublisherId", "toStreamName", "paymentDetails"));
 	}
 
 	Q_response::setSlot('status', true);

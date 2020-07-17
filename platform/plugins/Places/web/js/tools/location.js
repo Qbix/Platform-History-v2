@@ -37,8 +37,6 @@ Q.Tool.define("Places/location", function (options) {
 	var state = this.state;
 	var $te = $(tool.element);
 
-	Q.addStylesheet('{{Places}}/css/location.css');
-
 	// change location event
 	$te.on(Q.Pointer.click, "[data-location], .Places_location_preview_tool", function () {
 		tool.toggle(this);
@@ -130,14 +128,17 @@ Q.Tool.define("Places/location", function (options) {
 
 				if (this.getAttribute('placeId') === state.selectedLocation.placeId) {
 					tool.toggle(previewTool.element);
+					state.selectedLocation.selected = true;
 				}
 			});
 		});
 	}
 
+	var pipe = new Q.pipe(['styles', 'texts'], tool.refresh.bind(tool));
+	Q.addStylesheet('{{Places}}/css/location.css', pipe.fill('styles'));
 	Q.Text.get('Places/content', function (err, text) {
 		tool.text = text;
-		tool.refresh();
+		pipe.fill('texts')();
 	});
 },
 
@@ -236,18 +237,22 @@ Q.Tool.define("Places/location", function (options) {
 						Streams.Stream.join(userId, 'Places/user/locations');
 					}
 
-					tool.$(".Places_location_related")
-						.tool('Streams/related', {
-							publisherId: userId,
-							streamName: 'Places/user/locations',
-							relationType: 'Places/locations',
-							isCategory: true,
-							editable: false,
-							realtime: true,
-							sortable: false
-						}, tool.prefix + 'relatedLocations')
-						.activate(function () {
-							tool.relatedTool = this;
+					tool.$(".Places_location_related").tool('Streams/related', {
+						publisherId: userId,
+						streamName: 'Places/user/locations',
+						relationType: 'Places/locations',
+						isCategory: true,
+						editable: false,
+						realtime: true,
+						sortable: false,
+						relatedOptions: {
+							withParticipant: false
+						},
+						onRefresh: function () {
+							$(this.element).attr("data-loading", "false");
+						}
+					}, tool.prefix + 'relatedLocations').activate(function () {
+						tool.relatedTool = this;
 					});
 				}
 
@@ -282,7 +287,7 @@ Q.Tool.define("Places/location", function (options) {
 						}
 
 						// skip this if selected location
-						if (place.id !== Q.getObject("selectedLocation.placeId", state)) {
+						if (userId === Users.loggedInUserId() && place.id !== Q.getObject("selectedLocation.placeId", state)) {
 							var textConfirm = tool.text.location.confirm;
 							Q.confirm(textConfirm.message, function (shouldSave) {
 								if (!shouldSave) {
@@ -330,6 +335,14 @@ Q.Tool.define("Places/location", function (options) {
 								ok: textConfirm.ok,
 								cancel: textConfirm.cancel
 							});
+						}
+
+						// if this placeId already selected in related locations,
+						// set selectedLocation.selected=false to allow select this place further
+						// and exit, to avoid reset above selection
+						if (place.id === Q.getObject("selectedLocation.placeId", state) && Q.getObject("selectedLocation.selected", state)) {
+							state.selectedLocation.selected = false;
+							return;
 						}
 
 						this.venue = place.name;
@@ -452,7 +465,7 @@ Q.Template.set('Places/location/select',
 		'<div data-location="current">{{text.location.myCurrentLocation}}</div>' +
 	'{{/if}}' +
 	'{{#if showLocations}}' +
-		'<div class="Places_location_related"></div>' +
+		'<div class="Places_location_related" data-loading="true"></div>' +
 	'{{/if}}' +
 	'{{#if showAddress}}' +
 		'<div data-location="address">' +

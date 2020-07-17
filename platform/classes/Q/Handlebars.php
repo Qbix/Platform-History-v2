@@ -66,6 +66,7 @@ class Q_Handlebars {
 			self::$handlebars->addHelper('toUrl', array('Q_Handlebars', 'helperToUrl'));
 			self::$handlebars->addHelper('toCapitalized', array('Q_Handlebars', 'helperToCapitalized'));
 			self::$handlebars->addHelper('interpolate', array('Q_Handlebars', 'helperInterpolate'));
+			self::$handlebars->addHelper('replace', array('Q_Handlebars', 'helperReplace'));
 		}
 		return self::$handlebars;
 	}
@@ -227,6 +228,12 @@ class Q_Handlebars {
 			return '';
 		}
 		return Q::interpolate($expression, $args);
+	}
+
+	static function helperReplace($template, $context, $args, $source)
+	{
+		$args = explode(' ', $args);
+		return str_replace($args[0], $args[1], $source);
 	}
 
 	private static $handlebars = null;

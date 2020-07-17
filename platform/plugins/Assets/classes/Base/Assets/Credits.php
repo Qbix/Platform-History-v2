@@ -19,8 +19,10 @@
  * @param {string} [$fields.id] defaults to ""
  * @param {string} [$fields.fromUserId] defaults to null
  * @param {string} [$fields.toUserId] defaults to null
- * @param {string} [$fields.publisherId] defaults to null
- * @param {string} [$fields.streamName] defaults to null
+ * @param {string} [$fields.fromPublisherId] defaults to null
+ * @param {string} [$fields.fromStreamName] defaults to null
+ * @param {string} [$fields.toPublisherId] defaults to null
+ * @param {string} [$fields.toStreamName] defaults to null
  * @param {string} [$fields.reason] defaults to ""
  * @param {integer} [$fields.credits] defaults to 0
  * @param {string} [$fields.attributes] defaults to null
@@ -48,13 +50,25 @@ abstract class Base_Assets_Credits extends Db_Row
 	 * 
 	 */
 	/**
-	 * @property $publisherId
+	 * @property $fromPublisherId
+	 * @type string
+	 * @default null
+	 * publisherId of the stream from which charge was made
+	 */
+	/**
+	 * @property $fromStreamName
+	 * @type string
+	 * @default null
+	 * name of the stream from which charge was made
+	 */
+	/**
+	 * @property $toPublisherId
 	 * @type string
 	 * @default null
 	 * publisherId of the stream regarding which the charge was made
 	 */
 	/**
-	 * @property $streamName
+	 * @property $toStreamName
 	 * @type string
 	 * @default null
 	 * name of the stream regarding which the charge was made
@@ -468,41 +482,41 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_publisherId
+	 * @method beforeSet_fromPublisherId
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_publisherId($value)
+	function beforeSet_fromPublisherId($value)
 	{
 		if (!isset($value)) {
-			return array('publisherId', $value);
+			return array('fromPublisherId', $value);
 		}
 		if ($value instanceof Db_Expression) {
-			return array('publisherId', $value);
+			return array('fromPublisherId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".publisherId");
+			throw new Exception('Must pass a string to '.$this->getTable().".fromPublisherId");
 		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".publisherId");
-		return array('publisherId', $value);			
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".fromPublisherId");
+		return array('fromPublisherId', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the publisherId field
+	 * Returns the maximum string length that can be assigned to the fromPublisherId field
 	 * @return {integer}
 	 */
-	function maxSize_publisherId()
+	function maxSize_fromPublisherId()
 	{
 
 		return 255;			
 	}
 
 	/**
-	 * Returns schema information for publisherId column
+	 * Returns schema information for fromPublisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_publisherId()
+	static function column_fromPublisherId()
 	{
 
 return array (
@@ -522,41 +536,149 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_streamName
+	 * @method beforeSet_fromStreamName
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_streamName($value)
+	function beforeSet_fromStreamName($value)
 	{
 		if (!isset($value)) {
-			return array('streamName', $value);
+			return array('fromStreamName', $value);
 		}
 		if ($value instanceof Db_Expression) {
-			return array('streamName', $value);
+			return array('fromStreamName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".streamName");
+			throw new Exception('Must pass a string to '.$this->getTable().".fromStreamName");
 		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".streamName");
-		return array('streamName', $value);			
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".fromStreamName");
+		return array('fromStreamName', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the streamName field
+	 * Returns the maximum string length that can be assigned to the fromStreamName field
 	 * @return {integer}
 	 */
-	function maxSize_streamName()
+	function maxSize_fromStreamName()
 	{
 
 		return 255;			
 	}
 
 	/**
-	 * Returns schema information for streamName column
+	 * Returns schema information for fromStreamName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_streamName()
+	static function column_fromStreamName()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_toPublisherId
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_toPublisherId($value)
+	{
+		if (!isset($value)) {
+			return array('toPublisherId', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('toPublisherId', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".toPublisherId");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".toPublisherId");
+		return array('toPublisherId', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the toPublisherId field
+	 * @return {integer}
+	 */
+	function maxSize_toPublisherId()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for toPublisherId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_toPublisherId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => 'MUL',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_toStreamName
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_toStreamName($value)
+	{
+		if (!isset($value)) {
+			return array('toStreamName', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('toStreamName', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".toStreamName");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".toStreamName");
+		return array('toStreamName', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the toStreamName field
+	 * @return {integer}
+	 */
+	function maxSize_toStreamName()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for toStreamName column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_toStreamName()
 	{
 
 return array (
@@ -859,7 +981,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('id', 'fromUserId', 'toUserId', 'publisherId', 'streamName', 'reason', 'credits', 'attributes', 'insertedTime', 'updatedTime');
+		$field_names = array('id', 'fromUserId', 'toUserId', 'fromPublisherId', 'fromStreamName', 'toPublisherId', 'toStreamName', 'reason', 'credits', 'attributes', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

@@ -33,15 +33,18 @@ var Streams = Q.Streams;
  *   @param {Function} [options.tabs] Function for interacting with any parent "Q/tabs" tool. Format is function (previewTool, tabsTool) { return urlOrTabKey; }
  *   @param {Object} [options.activate] Options for activating the preview tools that are loaded inside
  *   @param {Object} [options.updateOptions] Options for onUpdate such as duration of the animation, etc.
+ *   @param {Object} [options.beforeRenderPreview] Event occur before Streams/preview tool rendered inside related tool.
+ *   If executing result of this handler===false, skip adding this preview tool to the related list.
  *   @param {Q.Event} [options.onUpdate] Event that receives parameters "data", "entering", "exiting", "updating"
  *   @param {Q.Event} [options.onRefresh] Event that occurs when the tool is completely refreshed, the "this" is the tool.
  *      Parameters are (previews, map, entering, exiting, updating).
  */
 Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	// check for required options
+	var tool = this;
 	var state = this.state;
 	if ((!state.publisherId || !state.streamName)
-	&& (!state.stream || Q.typeOf(state.stream) !== 'Streams.Stream')) {
+	&& (!state.stream || Q.typeOf(state.stream) !== 'Q.Streams.Stream')) {
 		throw new Q.Error("Streams/related tool: missing publisherId or streamName");
 	}
 	if (!state.relationType) {
@@ -52,12 +55,29 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	}
 
 	state.publisherId = state.publisherId || state.stream.fields.publisherId;
-	state.streamName = state.streamName || state.stream.fields.streamName;
+	state.streamName = state.streamName || state.stream.fields.name;
 	
 	state.refreshCount = 0;
 
+	if (this.element.classList.contains("Streams_related_participant")) {
+		state.mode = "participant";
+	} else if (state.mode === "participant" && !this.element.classList.contains("Streams_related_participant")) {
+		this.element.classList.add("Streams_related_participant");
+	}
+
+	var pipe = new Q.pipe(['styles', 'texts'], tool.refresh.bind(tool));
+
 	// render the tool
-	this.refresh();
+	Q.addStylesheet("{{Streams}}/css/tools/related.css", pipe.fill('styles'));
+	Q.Text.get('Streams/content', function (err, text) {
+		var msg = Q.firstErrorMessage(err);
+		if (msg) {
+			console.warn(msg);
+		}
+
+		tool.text = text;
+		pipe.fill('texts')();
+	});
 },
 
 {
@@ -85,6 +105,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	toolName: function (streamType) {
 		return streamType+'/preview';
 	},
+	beforeRenderPreview: new Q.Event(),
 	onUpdate: new Q.Event(
 	function _Streams_related_onUpdate(result, entering, exiting, updating) {
 		function addComposer(streamType, params, creatable, oldElement) {
@@ -208,11 +229,17 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				this.weight,
 				state.previewOptions
 			);
+
+			if (Q.handle(state.beforeRenderPreview, tool, [tff, element]) === false) {
+				return;
+			}
+
 			elements.push(element);
 			$(element).addClass('Streams_related_stream');
 			Q.setObject([tff.publisherId, tff.name], element, tool.previewElements);
 			$container.append(element);
 		});
+
 		// activate the elements one by one, asynchronously
 		var previews = [];
 		var map = {};
@@ -274,8 +301,8 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	refresh: function (onUpdate) {
 		var tool = this;
 		var state = tool.state;
-		var publisherId = state.publisherId;
-		var streamName = state.streamName;
+		var publisherId = state.publisherId || Q.getObject("stream.fields.publisherId", state);
+		var streamName = state.streamName || Q.getObject("stream.fields.name", state);
 		Streams.retainWith(tool).related(
 			publisherId, 
 			streamName, 
@@ -363,6 +390,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		publisherId, streamName, streamType, weight, 
 		previewOptions, specificOptions
 	) {
+		var tool = this;
 		var state = this.state;
 		var o = Q.extend({
 			publisherId: publisherId,
@@ -381,10 +409,47 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			f = Q.getObject(state.toolName) || f;
 		}
 		var toolName = (typeof f === 'function') ? f(streamType, o) : f;
+		var toolNames = ['Streams/preview', toolName];
+		var toolOptions = [o, specificOptions || {}];
+
+		if (state.mode === "participant" && state.closeable && publisherId && streamName) {
+			toolNames.push("Q/badge");
+			toolOptions.push({
+				tr: {
+					size: "24px",
+					right: "-10px",
+					top: "-5px",
+					className: "Streams_preview_close",
+					display: 'block',
+					onClick: function (e) {
+						e.preventDefault();
+						e.stopPropagation();
+
+						var $element = $(this).closest(".Streams_preview_tool");
+
+						$element.addClass('Q_working');
+						Q.confirm(tool.text.participating.AreYouSureRemoveParticipant, function (res) {
+							if (!res) {
+								return $element.removeClass('Q_working');
+							}
+
+							Streams.unrelate(state.publisherId, state.streamName, state.relationType, publisherId, streamName, function (err) {
+								if (err) {
+									return $element.removeClass('Q_working');
+								}
+							});
+						}, {title: tool.text.participating.RemoveParticipant});
+
+						return false;
+					}
+				}
+			});
+		}
+
 		var e = Q.Tool.setUpElement(
 			state.tag || 'div', 
-			['Streams/preview', toolName], 
-			[o, specificOptions || {}], 
+			toolNames,
+			toolOptions,
 			null, this.prefix
 		);
  		return e;

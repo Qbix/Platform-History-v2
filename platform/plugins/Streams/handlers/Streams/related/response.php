@@ -34,12 +34,13 @@ function Streams_related_response()
 	$isCategory = !(empty($_REQUEST['isCategory']) or strtolower($_REQUEST['isCategory']) === 'false');
 	$slotNames = Q_Request::slotNames();
 	$streams_requested = in_array('relatedStreams', $slotNames);
+	$withParticipant = Q::ifset($_REQUEST, 'withParticipant', true) === "false" ? false : true;
 	$options = Q::take($_REQUEST, array(
 		'limit', 'offset', 'min', 'max', 'type', 'prefix', 'filter'
 	));
 	$options['relationsOnly'] = !$streams_requested;
 	$options['orderBy'] = !empty($_REQUEST['ascending']);
-	$options['fetchOptions'] = array('withParticipant' => true);
+	$options['fetchOptions'] = compact('withParticipant');
 	$result = Streams::related(
 		$asUserId,
 		$publisherId,

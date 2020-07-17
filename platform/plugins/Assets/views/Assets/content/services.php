@@ -7,6 +7,7 @@ echo Q::tool("Streams/related", array(
 	"editable" => true,
 	"realtime" => false,
 	"sortable" => false,
+	"relatedOptions" => array("withParticipant" => false),
 	"creatable" => array(
 		'Assets/service' => array(
 			'title' => $types['Assets/service']['newService']
