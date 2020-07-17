@@ -3464,6 +3464,11 @@
 			switch (Users.Facebook.type) {
 				case 'web':
 					var timeout = 2000;
+					var ar = FB.getAuthResponse();
+					if (ar) {
+						cb(ar);
+						break;
+					}
 					if (timeout) {
 						var t = setTimeout(function () {
 							// just in case, if FB is not responding let's still fire the callback
@@ -3478,6 +3483,7 @@
 							cb(response);
 						}, force);
 					} else {
+						if (FB.getAuthResponse())
 						FB.getLoginStatus(cb, force);
 					}
 					break;
