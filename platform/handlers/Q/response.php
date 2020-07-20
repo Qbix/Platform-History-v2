@@ -190,15 +190,7 @@ Q.init();
 	}
 
 	// Get all the usual slots for a webpage
-	foreach ($slotNames as $sn) {
-		Q_Response::fillSlot($sn, 'default', Q::ifset($idPrefixes, $sn, null));
-	}
-
-	// Go through the slots again, because other handlers may have overwritten
-	// their contents using Q_Response::setSlot()
-	foreach ($slotNames as $sn) {
-		Q_Response::fillSlot($sn, 'default', Q::ifset($idPrefixes, $sn, null));
-	}
+	Q_Response::fillSlots($slotNames, $idPrefixes);
 
 	$output = Q_Response::output();
 	if (isset($output)) {
