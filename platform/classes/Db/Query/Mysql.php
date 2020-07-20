@@ -902,7 +902,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * Creates a query to select fields from one or more tables.
 	 * @method select
 	 * @param {string|array} $fields The fields as strings, or array of alias=>field
-	 * @param {string|array} [$tables=''] The tables as strings, or array of alias=>field
+	 * @param {string|array} [$tables=''] The tables as strings, or array of alias=>table
 	 * @param {boolean} [$repeat=false] If $tables is an array, and select() has
 	 * already been called with the exact table name and alias
 	 * as one of the tables in that array, then
