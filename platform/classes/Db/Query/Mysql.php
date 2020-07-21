@@ -1009,6 +1009,9 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 					// a bunch of OR criteria
 					$pieces = array();
 					foreach ($value as $v) {
+						foreach ($v as $a => &$b) {
+							$v[$a] = new Db_Expression($b);
+						}
 						$pieces[] = $this->criteria_internal($v);
 					}
 					$condition_list[] = implode(' OR ', $pieces);

@@ -413,7 +413,11 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 					// a bunch of OR criteria
 					var pieces = [];
 					for (i=0, l=value.length; i<l; ++i) {
-						pieces.push(criteria_internal(this, value[i]));
+						var v = value[i];
+						v = v.map(function (a) {
+							return new Db.Expression(a);
+						});
+						pieces.push(criteria_internal(this, v));
 					}
 					conditionList.push(pieces.join(' OR '));
 				} else {

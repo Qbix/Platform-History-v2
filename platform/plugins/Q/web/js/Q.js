@@ -5138,14 +5138,10 @@ Q.Links = {
 		var parts = [cc, bcc, subject, body];
 		var url = "mailto:" + (to || '');
 		var char = '?';
-		var encode = false;
 		for (var i=0, l=names.length; i<l; ++i) {
 			if (parts[i]) {
 				url += char + names[i] + '=' + 
-					(encode ? encodeURIComponent(parts[i]) : parts[i]);
-				if (i >= 2) {
-					encode = true;
-				}
+					(i >= 2 ? encodeURIComponent(parts[i]) : parts[i]);
 				char = '&';
 			}
 		}
