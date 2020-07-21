@@ -24,7 +24,8 @@ class Q_Links
 	 * @param {string|Array} [mobileNumbers]
 	 * @return {string}
 	 */
-	static function sms ($body, $mobileNumbers = null) {
+	static function sms ($body, $mobileNumbers = null)
+	{
 		$ios = (Q_Request::platform() === 'ios');
 		if ($mobileNumbers && is_array($mobileNumbers)) {
 			$temp = array();
@@ -35,7 +36,7 @@ class Q_Links
 		}
 		$url = "sms:" . ($mobileNumbers ? $mobileNumbers : ($ios ? '%20' : ''));
 		$char = $ios ? '&' : '?';
-		return $url . $char . http_build_query(compact('body'));
+		return $url . $char . http_build_query(compact('body'), null, '&', PHP_QUERY_RFC3986);
 	}
 	/**
 	 * Generates a link for sending an email message
@@ -78,7 +79,7 @@ class Q_Links
 	static function whatsApp ($phoneNumber, $text = null)
 	{
 		return 'whatsapp://send/?phone=' . $phoneNumber
-			. ($text ? '&' . http_build_query(compact('text')) : '');
+			. ($text ? '&' . http_build_query(compact('text'), null, '&', PHP_QUERY_RFC3986) : '');
 	}
 	
 	/**
@@ -100,7 +101,7 @@ class Q_Links
 		}
 		return ($url
 			? 'tg://msg_url?' . http_build_query(compact('url', 'text'))
-			: 'tg://msg?' . http_build_query(compact('text'))
+			: 'tg://msg?' . http_build_query(compact('text'), null, '&', PHP_QUERY_RFC3986)
 		) . ($to ? '&to=' . $to : '');
 	}
 	
@@ -116,7 +117,7 @@ class Q_Links
 	{
 		return 'https://web.skype.com/share?'
 			. ($text ? '&' . http_build_query(compact('text')) : '')
-			. ($url ? '&' . http_build_query(compact('url')) : '');
+			. ($url ? '&' . http_build_query(compact('url'), null, '&', PHP_QUERY_RFC3986) : '');
 	}
 	
 	/**
