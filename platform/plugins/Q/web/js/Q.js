@@ -11391,7 +11391,7 @@ Q.Pointer = {
 	},
 	/**
 	 * Get the rectangle enclosing all the children of the container element
-	 * and – for their children with overflow: visible – their overflowed contents.
+	 * and – for their children with overflow: visible – their overflowed contents.
 	 * @static
 	 * @method boundingRect
 	 * @param {HTMLElement} [container=document.body] The container element
@@ -11657,8 +11657,8 @@ Q.Pointer = {
 						}
 						var offset = target.getBoundingClientRect(); //Q.Pointer.offset(target)
 						point = {
-							x: offset.left + target.offsetWidth / 2,
-							y: offset.top + target.offsetHeight / 2
+							x: Q.Pointer.scrollLeft() + offset.left + target.offsetWidth / 2,
+							y: Q.Pointer.scrollTop() + offset.top + target.offsetHeight / 2
 						};
 					} else {
 						point = target;
