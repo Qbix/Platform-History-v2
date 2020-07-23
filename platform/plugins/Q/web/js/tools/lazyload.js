@@ -35,7 +35,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 	
 	Q.ensure(window.IntersectionObserver, _polyfill, function () {
 		// Observe whatever is on the page already
-		tool.observer = _createObserver(tool, tool.element.scrollingParent());
+		tool.observer = _createObserver(tool, tool.element.scrollingParent(true));
 		tool.observe(tool.prepare(tool.element, false));
 
 		// Override innerHTML
