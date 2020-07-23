@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Vaovao {{relationDisplayType}} amin&#39;ny {{toTitle}}",
         "Streams\/relatedFrom\/*": "Nampiana tamin&#39;ny {{toTitle}} ho {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} no nanonona anao tao anaty hevitra",
-        "Streams\/call": "Miantso anao ny {{displayName}}",
+        "Streams\/call": "{{displayName}} nanomboka fiantsoana tena misy",
         "ManageEmailSubscriptions": "hitantana famandrihana mailaka",
         "IfUnsubscribe": "Raha te-hanao unsubscribe ianao"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Azo antoka ve fa tsy mandika an&#39;io fitaovana io ianao? Hamadika ny fampandrenesana an&#39;io fitaovana io.",
         "Identifiers": "Identifiers",
         "Devices": "fitaovana",
-        "Streams": "mikoriana"
+        "Streams": "mikoriana",
+        "AreYouSureRemoveParticipant": "Tena tianao ve ny manala an&#39;io mpandray anjara io?",
+        "RemoveParticipant": "Esory ny mpandray anjara"
     },
     "menu": {
         "placeholder": "lohatenin&#39;ny pejy",

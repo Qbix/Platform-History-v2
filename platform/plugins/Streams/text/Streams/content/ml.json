@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "{{toTitle}} ലെ പുതിയ {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} എന്നതിലേക്ക് {{relationDisplayType}} ആയി ചേർത്തു",
         "Streams\/mention": "{99 999} a നിങ്ങളെ ഒരു അഭിപ്രായത്തിൽ പരാമർശിച്ചു",
-        "Streams\/call": "{{999} you നിങ്ങളെ വിളിക്കുന്നു",
+        "Streams\/call": "{99 999} a ഒരു തത്സമയ കോൾ ആരംഭിച്ചു",
         "ManageEmailSubscriptions": "നിങ്ങളുടെ ഇമെയിൽ സബ്‌സ്‌ക്രിപ്‌ഷനുകൾ നിയന്ത്രിക്കുക",
         "IfUnsubscribe": "നിങ്ങൾക്ക് അൺസബ്‌സ്‌ക്രൈബുചെയ്യണമെങ്കിൽ"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "ഈ ഉപകരണം അൺസബ്‌സ്‌ക്രൈബുചെയ്യുമെന്ന് നിങ്ങൾക്ക് ഉറപ്പാണോ? ഇത് ഈ ഉപകരണത്തിലേക്കുള്ള അറിയിപ്പുകൾ ഓഫാക്കും.",
         "Identifiers": "ഐഡന്റിഫയറുകൾ",
         "Devices": "ഉപകരണങ്ങൾ",
-        "Streams": "സ്ട്രീമുകൾ"
+        "Streams": "സ്ട്രീമുകൾ",
+        "AreYouSureRemoveParticipant": "ഈ പങ്കാളിയെ നീക്കംചെയ്യാൻ നിങ്ങൾ ആഗ്രഹിക്കുന്നുണ്ടോ?",
+        "RemoveParticipant": "പങ്കാളിയെ നീക്കംചെയ്യുക"
     },
     "menu": {
         "placeholder": "പേജ് ശീർഷകം ടൈപ്പുചെയ്യുക",

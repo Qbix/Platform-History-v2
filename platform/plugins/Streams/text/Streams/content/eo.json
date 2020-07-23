@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Nova {{relationDisplayType}} en {{toTitle}}",
         "Streams\/relatedFrom\/*": "Aldonita al {{toTitle}} kiel {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} menciis vin en komento",
-        "Streams\/call": "{{displayName}} vokas vin",
+        "Streams\/call": "{{displayName}} iniciatis realtempan vokon",
         "ManageEmailSubscriptions": "administri viajn retpoŝtajn abonojn",
         "IfUnsubscribe": "Se vi volas malaboni"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Ĉu vi certas malaboni ĉi tiun aparaton? Ĝi malŝaltos sciigojn al ĉi tiu aparato.",
         "Identifiers": "Identigiloj",
         "Devices": "Aparatoj",
-        "Streams": "Rojoj"
+        "Streams": "Rojoj",
+        "AreYouSureRemoveParticipant": "Ĉu vi certas, ke vi volas forigi ĉi tiun partoprenanton?",
+        "RemoveParticipant": "Forigi partoprenanton"
     },
     "menu": {
         "placeholder": "tajpu paĝtitolon",

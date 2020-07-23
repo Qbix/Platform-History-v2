@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Novum {{CMXCIX}} in {{M}}",
         "Streams\/relatedFrom\/*": "} {Sicut M {ut} {{addidit CMXCIX}}",
         "Streams\/mention": "{{CMXCIX}} in quibus et vos a comment",
-        "Streams\/call": "} {CMXCIX} {vocat vos",
+        "Streams\/call": "{{CMXCIX a real-time vocationem coepi}}",
         "ManageEmailSubscriptions": "manage vestri email subnotationes",
         "IfUnsubscribe": "Si vis unsubscribe"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Certus unsubscribe tu artem? Et sic declinemus ad hoc fabrica Acta Vicimediorum Communium.",
         "Identifiers": "Identifiers",
         "Devices": "cogitationes",
-        "Streams": "FE divisiones aquarum"
+        "Streams": "FE divisiones aquarum",
+        "AreYouSureRemoveParticipant": "Tu es certus vos volo ut removendum est particeps?",
+        "RemoveParticipant": "Aufer participem"
     },
     "menu": {
         "placeholder": "genus title page",

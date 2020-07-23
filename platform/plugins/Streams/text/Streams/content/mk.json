@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Нови {{relationDisplayType}} за {{1000}",
         "Streams\/relatedFrom\/*": "Додадено на 99 999}} како}} 1000}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ве спомнав во коментар",
-        "Streams\/call": ". Ви се јавува 999"
+        "Streams\/call": "{{999} започнале повик во реално време"
     },
     "invite": {
         "messageContent": "{{displayName}} ве покани да {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Дали сте сигурни дека се откажувате од овој уред? Willе ги исклучи известувањата на овој уред.",
         "Identifiers": "Идентификатори",
         "Devices": "Уреди",
-        "Streams": "Струи"
+        "Streams": "Струи",
+        "AreYouSureRemoveParticipant": "Дали сте сигурни дека сакате да го отстраните овој учесник?",
+        "RemoveParticipant": "Отстранете го учесникот"
     },
     "webrtc": {
         "allow": {

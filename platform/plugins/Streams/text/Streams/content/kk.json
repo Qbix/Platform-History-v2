@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "{{toTitle}} жаңа {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} тізіміне {{relationDisplayType}} ретінде қосылды",
         "Streams\/mention": "{{&call 'avatar.displayName'}} сізді түсініктемеде атады",
-        "Streams\/call": "{{displayName}} қоңырау шалып жатыр",
+        "Streams\/call": "{{displayName}} нақты уақытта қоңырау шала бастады",
         "ManageEmailSubscriptions": "электрондық пошта жазылымдарын басқарыңыз",
         "IfUnsubscribe": "Жазылымнан бас тартқыңыз келсе"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Бұл құрылғыны өшіргеніңізге сенімдісіз бе? Бұл құрылғыға арналған хабарландыруларды өшіреді.",
         "Identifiers": "Анықтағыштар",
         "Devices": "Құрылғылар",
-        "Streams": "Ағындар"
+        "Streams": "Ағындар",
+        "AreYouSureRemoveParticipant": "Осы қатысушыны алып тастағыңыз келе ме?",
+        "RemoveParticipant": "Қатысушыны алып тастаңыз"
     },
     "menu": {
         "placeholder": "парақтың тақырыбын теріңіз",

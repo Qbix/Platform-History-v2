@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "ใหม่ {{relationDisplayType}} ใน {{1,000}}",
         "Streams\/relatedFrom\/*": "เพิ่มไปที่ {{toTitle}} เป็น {{1,000}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} พูดถึงคุณในความคิดเห็น",
-        "Streams\/call": "{{displayName}} กำลังโทรหาคุณ"
+        "Streams\/call": "{{displayName}} เริ่มการโทรตามเวลาจริง"
     },
     "invite": {
         "messageContent": "{{displayName}} เชิญคุณเข้าร่วม {{1,000}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "คุณแน่ใจหรือว่ายกเลิกการสมัครอุปกรณ์นี้ มันจะปิดการแจ้งเตือนไปยังอุปกรณ์นี้",
         "Identifiers": "ตัวบ่งชี้",
         "Devices": "อุปกรณ์",
-        "Streams": "ลำธาร"
+        "Streams": "ลำธาร",
+        "AreYouSureRemoveParticipant": "คุณแน่ใจหรือว่าต้องการลบผู้เข้าร่วมนี้",
+        "RemoveParticipant": "ลบผู้เข้าร่วม"
     },
     "webrtc": {
         "allow": {

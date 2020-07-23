@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "نئون {{relationDisplayType}} ۾ {{toTitle}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} as {{relationDisplayType}} تي شامل ڪيو ويو",
         "Streams\/mention": "{{&call 'avatar.displayName'}} توهان جي تبصرو ۾ چيو",
-        "Streams\/call": "{{displayName}} توهان کي سڏي رهيو آهي",
+        "Streams\/call": "{{displayName}} ڪال هاڻ ڪال شروع ڪئي",
         "ManageEmailSubscriptions": "توهان جي اي ميل سبسڪرپشن کي منظم ڪريو",
         "IfUnsubscribe": "جيڪڏهن توهان ختم ڪرڻ چاهيو ٿا"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "ڇا توهان کي هن ڊوائيس جو رڪنيت ختم ڪيو وڃي؟ اهو هن ڊوائيس لاء اطلاعات بند ڪري ڇڏيندو.",
         "Identifiers": "سڃاڻپ ڪندڙ",
         "Devices": "سامان",
-        "Streams": "سلسلا"
+        "Streams": "سلسلا",
+        "AreYouSureRemoveParticipant": "ڇا توهان واقعي هن شرڪت کي ختم ڪرڻ چاهيو ٿا؟",
+        "RemoveParticipant": "حصو وٺندڙ کي هٽايو"
     },
     "menu": {
         "placeholder": "صفحي جو عنوان ڏيو",

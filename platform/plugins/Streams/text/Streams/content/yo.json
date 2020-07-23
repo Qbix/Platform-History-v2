@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Tuntun {{relationDisplayType}} ni {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ṣe afikun si {{toTitle}} bi {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} mẹnuba ninu rẹ ni asọye",
-        "Streams\/call": "{{displayName}} n pe e",
+        "Streams\/call": "{{displayName}} bẹbẹrẹ ipe gidi",
         "ManageEmailSubscriptions": "ṣakoso awọn ṣiṣe alabapin imeeli rẹ",
         "IfUnsubscribe": "Ti o ba fẹ lati yowo kuro"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Ṣe o da ọ loju pe iwọ ko sọ ohun elo yii kuro? Yoo pa awọn iwifunni si ẹrọ yii.",
         "Identifiers": "Awọn idamo",
         "Devices": "Awọn ẹrọ",
-        "Streams": "Awọn ṣiṣan"
+        "Streams": "Awọn ṣiṣan",
+        "AreYouSureRemoveParticipant": "Ṣe o da ọ loju pe o fẹ yọ alabaṣe yii kuro?",
+        "RemoveParticipant": "Mu alabaṣe kuro"
     },
     "menu": {
         "placeholder": "akọle akọle iwe",

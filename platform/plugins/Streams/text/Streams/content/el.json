@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Νέο {{relationDisplayType}} στο {{toTitle}}",
         "Streams\/relatedFrom\/*": "Προστέθηκε στις {{toTitle}} ως {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} σας ανέφερε σε ένα σχόλιο",
-        "Streams\/call": "{{displayName}} σας καλεί"
+        "Streams\/call": "Ο χρήστης {{displayName}} ξεκίνησε μια κλήση σε πραγματικό χρόνο"
     },
     "invite": {
         "messageContent": "{{displayName}} σε προσκάλεσε σε {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Είστε βέβαιοι ότι θα καταργήσετε την εγγραφή σας στη συγκεκριμένη συσκευή; Θα απενεργοποιήσει τις ειδοποιήσεις σε αυτήν τη συσκευή.",
         "Identifiers": "Αναγνωριστικά",
         "Devices": "συσκευές",
-        "Streams": "Ροές"
+        "Streams": "Ροές",
+        "AreYouSureRemoveParticipant": "Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτόν τον συμμετέχοντα;",
+        "RemoveParticipant": "Κατάργηση συμμετέχοντα"
     },
     "webrtc": {
         "allow": {

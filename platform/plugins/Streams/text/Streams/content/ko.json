@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "{{toTitle}}의 새로운 {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}}에 {{relationDisplayType}}으로 추가됨",
         "Streams\/mention": "{{&call 'avatar.displayName'}} 님이 댓글에서 나를 멘션했습니다",
-        "Streams\/call": "{{displayName}} 님이 전화합니다"
+        "Streams\/call": "{{displayName}}가 실시간 통화를 시작했습니다"
     },
     "invite": {
         "messageContent": "{{displayName}} 님이 {{inviteUrl}}에 당신을 초대했습니다.",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "이 기기를 구독 취소 하시겠습니까? 이 장치에 대한 알림이 꺼집니다.",
         "Identifiers": "식별자",
         "Devices": "장치",
-        "Streams": "스트림"
+        "Streams": "스트림",
+        "AreYouSureRemoveParticipant": "이 참가자를 삭제 하시겠습니까?",
+        "RemoveParticipant": "참가자 제거"
     },
     "webrtc": {
         "allow": {

@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Baru {{relationDisplayType}} dalam {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ditambah pada {{toTitle}} sebagai {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} menyebut anda dalam ulasan",
-        "Streams\/call": "{{displayName}} memanggil anda"
+        "Streams\/call": "{{displayName}} memulakan panggilan masa nyata"
     },
     "invite": {
         "messageContent": "{{displayName}} menjemput anda ke {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Adakah anda pasti berhenti melanggan peranti ini? Ia akan mematikan pemberitahuan ke peranti ini.",
         "Identifiers": "Pengenal pasti",
         "Devices": "Peranti",
-        "Streams": "Aliran"
+        "Streams": "Aliran",
+        "AreYouSureRemoveParticipant": "Adakah anda pasti mahu mengalih keluar peserta ini?",
+        "RemoveParticipant": "Alih keluar peserta"
     },
     "webrtc": {
         "allow": {

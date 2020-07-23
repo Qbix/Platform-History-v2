@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Nou {{relationDisplayType}} a {{toTitle}}",
         "Streams\/relatedFrom\/*": "Afegit a {{toTitle}} com a {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} t&#39;ha mencionat en un comentari",
-        "Streams\/call": "{{displayName}} us truca"
+        "Streams\/call": "{{displayName}} va iniciar una trucada en temps real"
     },
     "invite": {
         "messageContent": "{{displayName}} t&#39;ha convidat a {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Esteu segur \/ a de donar-vos de baixa d&#39;aquest dispositiu? Desactivaran les notificacions a aquest dispositiu.",
         "Identifiers": "Identificadors",
         "Devices": "Dispositius",
-        "Streams": "Corrents"
+        "Streams": "Corrents",
+        "AreYouSureRemoveParticipant": "Esteu segur que voleu eliminar aquest participant?",
+        "RemoveParticipant": "Elimina el participant"
     },
     "webrtc": {
         "allow": {

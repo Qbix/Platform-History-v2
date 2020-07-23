@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Új {{relationDisplayType}} a {{toTitle}} -ben",
         "Streams\/relatedFrom\/*": "Hozzáadva a következőhöz: {{toTitle}}, mint {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} megemlített egy megjegyzésben",
-        "Streams\/call": "{{displayName}} hív téged"
+        "Streams\/call": "{{displayName}} valós idejű hívást indított"
     },
     "invite": {
         "messageContent": "{{displayName}} meghívta Önt a {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Biztosan leiratkozott erről az eszközről? Kikapcsolja az eszköz értesítéseit.",
         "Identifiers": "azonosítók",
         "Devices": "eszközök",
-        "Streams": "Streams"
+        "Streams": "Streams",
+        "AreYouSureRemoveParticipant": "Biztos benne, hogy el akarja távolítani ezt a résztvevőt?",
+        "RemoveParticipant": "Távolítsa el a résztvevőt"
     },
     "webrtc": {
         "allow": {

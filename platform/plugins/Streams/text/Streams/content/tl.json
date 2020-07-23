@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Bagong {{relationDisplayType}} sa {{toTitle}}",
         "Streams\/relatedFrom\/*": "Idinagdag sa {{toTitle}} bilang {{relationDisplayType}}",
         "Streams\/mention": "Binanggit ka ng {{&call 'avatar.displayName'}} sa isang puna",
-        "Streams\/call": "Tinatawag ka ng {{displayName}}",
+        "Streams\/call": "Nagsimula ang {{displayName}} isang tawag sa real-time",
         "ManageEmailSubscriptions": "pamahalaan ang iyong mga subscription sa email",
         "IfUnsubscribe": "Kung nais mong mag-unsubscribe"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Sigurado ka bang hindi i-unsubscribe ang aparatong ito? Ito ay patayin ang mga abiso sa aparatong ito.",
         "Identifiers": "Mga nagpapakilala",
         "Devices": "Mga aparato",
-        "Streams": "Batis"
+        "Streams": "Batis",
+        "AreYouSureRemoveParticipant": "Sigurado ka bang gusto mong alisin ang kalahok na ito?",
+        "RemoveParticipant": "Alisin ang kalahok"
     },
     "menu": {
         "placeholder": "pamagat ng uri ng pahina",

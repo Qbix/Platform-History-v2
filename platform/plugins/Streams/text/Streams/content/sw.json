@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Mpya {{relationDisplayType}} katika {{toTitle}}",
         "Streams\/relatedFrom\/*": "Imeongezwa kwa {{toTitle}} kama {{1000]}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} alikutaja kwenye maoni",
-        "Streams\/call": "{{displayName}} anakuita"
+        "Streams\/call": "{{displayName}} alianzisha simu ya wakati halisi"
     },
     "invite": {
         "messageContent": "{{displayName}} alikualika {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Je! Una uhakika wa kujiandikisha kifaa hiki? Itafuta arifu kwa kifaa hiki.",
         "Identifiers": "Vitambulisho",
         "Devices": "Vifaa",
-        "Streams": "Mito"
+        "Streams": "Mito",
+        "AreYouSureRemoveParticipant": "Una uhakika unataka kuondoa mshiriki huyu?",
+        "RemoveParticipant": "Ondoa mshiriki"
     },
     "webrtc": {
         "allow": {

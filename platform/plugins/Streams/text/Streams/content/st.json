@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Ncha {{relationDisplayType}} ho {{1000]}",
         "Streams\/relatedFrom\/*": "E kenyellelitsoe ho {{toTitle}} joalo ka {{1000]}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} o u boletse ka maikutlo",
-        "Streams\/call": "{{displayName}} ea u bitsa",
+        "Streams\/call": "{{displayName}} o letsetse mohala oa nako ea nnete",
         "ManageEmailSubscriptions": "hlokomela ngoliso ea hau ea lengolo-tsoibila",
         "IfUnsubscribe": "Haeba u batla ho itokolla"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "O na le bonnete ba hore u ngolisa sesebelisoa see? E tla tima tsebiso mabapi le sesebelisoa sena.",
         "Identifiers": "Matšoao",
         "Devices": "Lisebelisoa",
-        "Streams": "Meroallo"
+        "Streams": "Meroallo",
+        "AreYouSureRemoveParticipant": "U na le bonnete ba hore u batla ho tlosa motho enoa ea nkang karolo?",
+        "RemoveParticipant": "Tlosa motho ea nkang karolo"
     },
     "menu": {
         "placeholder": "mofuta oa leqephe la sehlooho",

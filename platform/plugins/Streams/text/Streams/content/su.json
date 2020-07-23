@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} di {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ditambahkeun kana {{toTitle}} salaku {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} nyebatkeun anjeun dina koméntar",
-        "Streams\/call": "{{displayName}} nyaéta nelepon anjeun",
+        "Streams\/call": "{{displayName}} ngamimitian nelepon nyata",
         "ManageEmailSubscriptions": "ngatur langganan email anjeun",
         "IfUnsubscribe": "Upami anjeun badé nyarios"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Naha anjeun yakin unsubscribe alat ieu? Éta bakal mareuman béwara ka alat ieu.",
         "Identifiers": "Pengenal",
         "Devices": "Alat",
-        "Streams": "Aliran"
+        "Streams": "Aliran",
+        "AreYouSureRemoveParticipant": "Naha anjeun badé ngahapus pamilon ieu?",
+        "RemoveParticipant": "Cabut pamilon"
     },
     "menu": {
         "placeholder": "judul judul kaca",

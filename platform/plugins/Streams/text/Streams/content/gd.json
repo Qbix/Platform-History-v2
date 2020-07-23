@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Ùr {{relationDisplayType}} ann an {{toTitle}}",
         "Streams\/relatedFrom\/*": "Air a chur ri {{toTitle}} mar {{relationDisplayType}}",
         "Streams\/mention": "Thug {{&call 'avatar.displayName'}} iomradh ort ann am beachd",
-        "Streams\/call": "Tha {{displayName}} gad ghairm",
+        "Streams\/call": "Thòisich {{displayName}} gairm fìor-ùine",
         "ManageEmailSubscriptions": "stiùir na fo-sgrìobhaidhean post-d agad",
         "IfUnsubscribe": "Ma tha thu airson dì-chlàradh a dhèanamh"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "A bheil thu cinnteach gu bheil thu a ’dì-chlàradh an inneal seo? Cuiridh e dheth fiosan chun inneal seo.",
         "Identifiers": "Luchd-comharrachaidh",
         "Devices": "Innealan",
-        "Streams": "Sruth"
+        "Streams": "Sruth",
+        "AreYouSureRemoveParticipant": "A bheil thu cinnteach gu bheil thu airson an com-pàirtiche seo a thoirt air falbh?",
+        "RemoveParticipant": "Thoir air falbh com-pàirtiche"
     },
     "menu": {
         "placeholder": "tiotal duilleag seòrsa",

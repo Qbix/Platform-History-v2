@@ -443,7 +443,7 @@
 					"Streams/chat/edit": { "post": true },
 					"Streams/chat/remove": { "post": true },
 					"Streams/call": {
-						"description": "Video call started",
+						"description": ["Streams/content", ["description", "Streams/call"]],
 						"subject": ["Streams/content", ["notifications", "Streams/call"]]
 					}
 				},

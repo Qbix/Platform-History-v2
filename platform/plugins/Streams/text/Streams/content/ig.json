@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Ọhụrụ {{relationDisplayType}} na {{toTitle}}",
         "Streams\/relatedFrom\/*": "Agbakwunyere na {{toTitle}} dika {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} hotara gi na nzaghachi",
-        "Streams\/call": "{{displayName}} na-akpọ gị",
+        "Streams\/call": "{{displayName}} bidoro oku n’ezie",
         "ManageEmailSubscriptions": "jikwaa ndenye aha email gi",
         "IfUnsubscribe": "Ọ bụrụ na ịchọrọ ịwepu aha"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Ì ji n&#39;aka ị wepu aha a? Ọ ga-agbanyụ amamọkwa na ngwaọrụ a.",
         "Identifiers": "Ndị na-eme nchọpụta",
         "Devices": "Ngwaọrụ",
-        "Streams": "Iyi"
+        "Streams": "Iyi",
+        "AreYouSureRemoveParticipant": "O doro gi anya na ichoro iwepu onye sonyere a?",
+        "RemoveParticipant": "Wepu onye sonyere"
     },
     "menu": {
         "placeholder": "pịnye aha peeji",

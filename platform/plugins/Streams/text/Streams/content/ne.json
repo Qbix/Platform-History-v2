@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "{{toTitle}} मा नयाँ {9{}}}",
         "Streams\/relatedFrom\/*": "{{relationDisplayType}} को रूपमा {{9{} Added to मा थपियो",
         "Streams\/mention": "{{9{} a एक टिप्पणी मा तपाइँ उल्लेख छ",
-        "Streams\/call": "{{9{}} तपाईंलाई कल गर्दै छ",
+        "Streams\/call": "{{9{} एक वास्तविक समय कल शुरू भयो",
         "ManageEmailSubscriptions": "तपाईंको ईमेल सदस्यता प्रबन्ध गर्नुहोस्",
         "IfUnsubscribe": "यदि तपाईं सदस्यता रद्द गर्न चाहानुहुन्छ भने"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "के तपाईं पक्का यो उपकरणको सदस्यता रद्द गर्नुहुन्छ? यो उपकरणको लागि सूचनाहरू बन्द गर्दछ।",
         "Identifiers": "पहिचानकर्ता",
         "Devices": "उपकरणहरू",
-        "Streams": "स्ट्रिमहरू"
+        "Streams": "स्ट्रिमहरू",
+        "AreYouSureRemoveParticipant": "के तपाइँ पक्का हुनुहुन्छ कि तपाइँ यस सहभागीलाई हटाउन चाहनुहुन्छ?",
+        "RemoveParticipant": "सहभागी हटाउनुहोस्"
     },
     "menu": {
         "placeholder": "पृष्ठ शीर्षक टाइप गर्नुहोस्",

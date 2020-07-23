@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Uus {{relationDisplayType}} asukohas {{toTitle}}",
         "Streams\/relatedFrom\/*": "Lisatud saidile {{toTitle}} kui {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} mainis teid oma kommentaaris",
-        "Streams\/call": "{{displayName}} helistab teile"
+        "Streams\/call": "{{displayName}} alustas reaalajas kõnet"
     },
     "invite": {
         "messageContent": "{{displayName}} kutsus teid {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Kas olete kindlasti selle seadme tellimuse tühistanud? See lülitab selle seadme märguanded välja.",
         "Identifiers": "Identifitseerijad",
         "Devices": "Seadmed",
-        "Streams": "Vood"
+        "Streams": "Vood",
+        "AreYouSureRemoveParticipant": "Kas soovite kindlasti selle osaleja eemaldada?",
+        "RemoveParticipant": "Eemalda osaleja"
     },
     "webrtc": {
         "allow": {

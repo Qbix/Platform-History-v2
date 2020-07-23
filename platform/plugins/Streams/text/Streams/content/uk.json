@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Новий {{relationDisplayType}} в {{toTitle}}",
         "Streams\/relatedFrom\/*": "Додано до {{toTitle}} як {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} згадав вас у коментарі",
-        "Streams\/call": "{{displayName}} телефонує вам"
+        "Streams\/call": "{{displayName}} почав дзвінок у режимі реального часу"
     },
     "invite": {
         "messageContent": "{{displayName}} запросив вас до {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Справді скасувати підписку на цей пристрій? Він вимкне сповіщення на цьому пристрої.",
         "Identifiers": "Ідентифікатори",
         "Devices": "Прилади",
-        "Streams": "Потоки"
+        "Streams": "Потоки",
+        "AreYouSureRemoveParticipant": "Ви впевнені, що хочете видалити цього учасника?",
+        "RemoveParticipant": "Видалити учасника"
     },
     "webrtc": {
         "allow": {

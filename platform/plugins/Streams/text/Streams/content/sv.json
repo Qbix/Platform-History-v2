@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Nytt {{relationDisplayType}} i {{toTitle}}",
         "Streams\/relatedFrom\/*": "Tillagd till {{toTitle}} som {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} nämnde dig i en kommentar",
-        "Streams\/call": "{{displayName}} ringer dig"
+        "Streams\/call": "{{displayName}} startade ett realtidssamtal"
     },
     "invite": {
         "messageContent": "{{displayName}} bjöd in dig till {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Är du säker på att du kan avsluta prenumerationen på den här enheten? Det stänger av aviseringar till den här enheten.",
         "Identifiers": "identifierare",
         "Devices": "enheter",
-        "Streams": "Strömmar"
+        "Streams": "Strömmar",
+        "AreYouSureRemoveParticipant": "Är du säker på att du vill ta bort den här deltagaren?",
+        "RemoveParticipant": "Ta bort deltagaren"
     },
     "webrtc": {
         "allow": {

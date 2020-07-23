@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Nou {{relationDisplayType}} în {{toTitle}}",
         "Streams\/relatedFrom\/*": "Adăugat la {{toTitle}} ca {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} v-a menționat într-un comentariu",
-        "Streams\/call": "{{displayName}} vă sună"
+        "Streams\/call": "{{displayName}} a pornit un apel în timp real"
     },
     "invite": {
         "messageContent": "{{displayName}} te-a invitat la {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Sunteți sigur că vă dezabonați acest dispozitiv? Acesta va dezactiva notificările acestui dispozitiv.",
         "Identifiers": "Identificatorii",
         "Devices": "Dispozitive",
-        "Streams": "Curente"
+        "Streams": "Curente",
+        "AreYouSureRemoveParticipant": "Sigur doriți să eliminați acest participant?",
+        "RemoveParticipant": "Eliminați participantul"
     },
     "webrtc": {
         "allow": {

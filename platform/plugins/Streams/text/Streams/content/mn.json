@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "{{toTitle}} -д шинэ {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} -г {{relationDisplayType}} болгож нэмсэн",
         "Streams\/mention": "{{&call 'avatar.displayName'}} таныг коммент дээр дурдсан",
-        "Streams\/call": "{{displayName}} таныг дуудаж байна",
+        "Streams\/call": "{{displayName}} нь бодит цагийн дуудлагыг эхлүүлсэн",
         "ManageEmailSubscriptions": "өөрийн имэйлийн бүртгэлийг удирдах",
         "IfUnsubscribe": "Хэрэв та захиалгаа цуцлахыг хүсч байвал"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Та үнэхээр энэ төхөөрөмжийг бүртгэлээс хасуулсан уу? Энэ нь төхөөрөмж дээрх мэдэгдлийг унтраах болно.",
         "Identifiers": "Тодорхойлогч",
         "Devices": "Төхөөрөмжүүд",
-        "Streams": "Горхи"
+        "Streams": "Горхи",
+        "AreYouSureRemoveParticipant": "Та энэ оролцогчийг хасахдаа итгэлтэй байна уу?",
+        "RemoveParticipant": "Оролцогчдыг хас"
     },
     "menu": {
         "placeholder": "хуудасны гарчгийг бичнэ үү",

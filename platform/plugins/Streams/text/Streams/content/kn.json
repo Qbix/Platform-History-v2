@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "{{toTitle}} ನಲ್ಲಿ ಹೊಸ {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{999} to ಗೆ {{1000} as ಗೆ ಸೇರಿಸಲಾಗಿದೆ",
         "Streams\/mention": "{{999} a ನಿಮ್ಮನ್ನು ಕಾಮೆಂಟ್‌ನಲ್ಲಿ ಉಲ್ಲೇಖಿಸಿದ್ದಾರೆ",
-        "Streams\/call": "{{999} you ನಿಮ್ಮನ್ನು ಕರೆಯುತ್ತಿದೆ"
+        "Streams\/call": "{{999} a ನೈಜ ಸಮಯದ ಕರೆಯನ್ನು ಪ್ರಾರಂಭಿಸಿದೆ"
     },
     "invite": {
         "messageContent": "{{displayName}} ನಿಮ್ಮನ್ನು {{inviteUrl}} ಗೆ ಆಹ್ವಾನಿಸಿದ್ದಾರೆ",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "ಈ ಸಾಧನವನ್ನು ಅನ್‌ಸಬ್‌ಸ್ಕ್ರೈಬ್ ಮಾಡುವುದು ಖಚಿತವೇ? ಇದು ಈ ಸಾಧನಕ್ಕೆ ಅಧಿಸೂಚನೆಗಳನ್ನು ಆಫ್ ಮಾಡುತ್ತದೆ.",
         "Identifiers": "ಗುರುತಿಸುವವರು",
         "Devices": "ಸಾಧನಗಳು",
-        "Streams": "ಸ್ಟ್ರೀಮ್‌ಗಳು"
+        "Streams": "ಸ್ಟ್ರೀಮ್‌ಗಳು",
+        "AreYouSureRemoveParticipant": "ಈ ಭಾಗವಹಿಸುವವರನ್ನು ತೆಗೆದುಹಾಕಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?",
+        "RemoveParticipant": "ಭಾಗವಹಿಸುವವರನ್ನು ತೆಗೆದುಹಾಕಿ"
     },
     "webrtc": {
         "allow": {

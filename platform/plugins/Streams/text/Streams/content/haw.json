@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Hou {{relationDisplayType}} i {{toTitle}}",
         "Streams\/relatedFrom\/*": "Kahi i hoʻohui ʻia ma ka {{toTitle}} e like me {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} i hoʻoiho iā ʻoe ma ka ʻōlelo",
-        "Streams\/call": "{{displayName}} ke kāhea iā ʻoe",
+        "Streams\/call": "{{displayName}} i kāhea i kahi manawa maoli",
         "ManageEmailSubscriptions": "hoʻokō i kāu leka uila leka uila",
         "IfUnsubscribe": "Inā makemake ʻoe e unuhi"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "‘Oe e ho‘opau i ka hana? E hōʻole i nā leka i kēia polokalamu.",
         "Identifiers": "Nā mea ʻike",
         "Devices": "Nā mea hana",
-        "Streams": "Nā Koloho"
+        "Streams": "Nā Koloho",
+        "AreYouSureRemoveParticipant": "Makemake ʻoe e lawe i kēia hoa komo?",
+        "RemoveParticipant": "Wehe i ka mea komo"
     },
     "menu": {
         "placeholder": "poʻo inoa inoa inoa",

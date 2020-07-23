@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Ġdid {{relationDisplayType}} f &#39;{{toTitle}}",
         "Streams\/relatedFrom\/*": "Miżjud ma &#39;{{toTitle}} bħala {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} semmejt f&#39;kumment",
-        "Streams\/call": "{{displayName}} qed isejjaħlek"
+        "Streams\/call": "{{displayName}} bdew sejħa fil-ħin reali"
     },
     "invite": {
         "messageContent": "{{displayName}} stiednek biex {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Int żgur li tħassar dan it-tagħmir? Se itfi n-notifiki ma &#39;dan l-apparat.",
         "Identifiers": "Identifikaturi",
         "Devices": "Apparat",
-        "Streams": "Nixxigħat"
+        "Streams": "Nixxigħat",
+        "AreYouSureRemoveParticipant": "Int żgur li trid tneħħi dan il-parteċipant?",
+        "RemoveParticipant": "Neħħi parteċipant"
     },
     "webrtc": {
         "allow": {

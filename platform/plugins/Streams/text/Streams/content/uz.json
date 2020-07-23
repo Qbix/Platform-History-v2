@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Yangi {{relationDisplayType}} {{toTitle}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} ga {{relationDisplayType}} sifatida qo&#39;shildi",
         "Streams\/mention": "{{&call 'avatar.displayName'}} sizni sharhda eslatib o&#39;tdi",
-        "Streams\/call": "{{displayName}} sizga qo&#39;ng&#39;iroq qilmoqda",
+        "Streams\/call": "{{displayName}} real vaqtda qo&#39;ng&#39;iroqni boshladi",
         "ManageEmailSubscriptions": "elektron pochta obunalaringizni boshqarish",
         "IfUnsubscribe": "Agar obunani bekor qilmoqchi bo&#39;lsangiz"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Haqiqatan ham ushbu qurilmani bekor qilyapsizmi? Ushbu qurilmadagi bildirishnomalarni o&#39;chirib qo&#39;yadi.",
         "Identifiers": "Aniqlovchilar",
         "Devices": "Qurilmalar",
-        "Streams": "Oqimlar"
+        "Streams": "Oqimlar",
+        "AreYouSureRemoveParticipant": "Haqiqatan ham ushbu ishtirokchini olib tashlamoqchimisiz?",
+        "RemoveParticipant": "Ishtirokchini olib tashlash"
     },
     "menu": {
         "placeholder": "sahifa sarlavhasini yozing",

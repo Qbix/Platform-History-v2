@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "ახალი {999}} in {{1000}",
         "Streams\/relatedFrom\/*": "დაამატა 99 999}} როგორც}} 1000}",
         "Streams\/mention": "თქვენ 999}} მოგახსენეთ კომენტარში",
-        "Streams\/call": "999 {calling მირეკავს"
+        "Streams\/call": "999 }– მა რეალურ დროში დაიწყო ზარი"
     },
     "invite": {
         "messageContent": "{{displayName}} მოიწვია თქვენ {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "დარწმუნებული ხართ, რომ გამოიწერეთ ეს მოწყობილობა? ის გამორთავს შეტყობინებებს ამ მოწყობილობაზე.",
         "Identifiers": "იდენტიფიკატორები",
         "Devices": "მოწყობილობები",
-        "Streams": "ნაკადები"
+        "Streams": "ნაკადები",
+        "AreYouSureRemoveParticipant": "დარწმუნებული ხართ, რომ გსურთ ამ მონაწილის წაშლა?",
+        "RemoveParticipant": "მონაწილეების წაშლა"
     },
     "webrtc": {
         "allow": {

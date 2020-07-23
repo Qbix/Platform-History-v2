@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "{{៩៩៩}} ថ្មីនៅក្នុង {{១០០០}}",
         "Streams\/relatedFrom\/*": "បានបន្ថែមទៅ {{៩៩៩}} ជា {{១០០០}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} បានលើកឡើងពីអ្នកនៅក្នុងមតិយោបល់",
-        "Streams\/call": "{{displayName}} កំពុងហៅអ្នក",
+        "Streams\/call": "{{displayName}} បានចាប់ផ្តើមការហៅទូរស័ព្ទភ្លាមៗ",
         "ManageEmailSubscriptions": "គ្រប់គ្រងការជាវអ៊ីមែលរបស់អ្នក",
         "IfUnsubscribe": "ប្រសិនបើអ្នកចង់ឈប់ជាវ"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "តើអ្នកប្រាកដថាឈប់ជាវឧបករណ៍នេះទេ? វានឹងបិទការជូនដំណឹងទៅឧបករណ៍នេះ។",
         "Identifiers": "ឧបករណ៍កំណត់អត្តសញ្ញាណ",
         "Devices": "ឧបករណ៍",
-        "Streams": "ស្ទ្រីម"
+        "Streams": "ស្ទ្រីម",
+        "AreYouSureRemoveParticipant": "តើអ្នកពិតជាចង់លុបអ្នកចូលរួមនេះមែនទេ?",
+        "RemoveParticipant": "ដកអ្នកចូលរួមចេញ"
     },
     "menu": {
         "placeholder": "វាយចំណងជើងទំព័រ",

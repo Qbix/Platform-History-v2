@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "99 999 New} {{1000",
         "Streams\/relatedFrom\/*": "به 99 999} به عنوان {1000} Added اضافه شد",
         "Streams\/mention": "99 999} you شما را در یک نظر ذکر کرد",
-        "Streams\/call": "99 999 you با شما تماس می گیرد"
+        "Streams\/call": "99 99 999 a یک تماس در زمان واقعی شروع کرد"
     },
     "invite": {
         "messageContent": "{{displayName}} شما را به {{inviteUrl}} دعوت کرد",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "آیا مطمئن هستید که این دستگاه را مشترک نیستید؟ این اعلان ها را به این دستگاه خاموش می کند.",
         "Identifiers": "شناسه ها",
         "Devices": "دستگاه ها",
-        "Streams": "جریانها"
+        "Streams": "جریانها",
+        "AreYouSureRemoveParticipant": "آیا مطمئن هستید که می خواهید این شرکت کننده را حذف کنید؟",
+        "RemoveParticipant": "شرکت کننده را حذف کنید"
     },
     "webrtc": {
         "allow": {

@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Nuevo {{relationDisplayType}} en {{toTitle}}",
         "Streams\/relatedFrom\/*": "Agregado a {{toTitle}} como {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} te mencionó en un comentario",
-        "Streams\/call": "{{displayName}} te está llamando"
+        "Streams\/call": "{{displayName}} inició una llamada en tiempo real"
     },
     "invite": {
         "messageContent": "{{displayName}} te invitó a {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "¿Estás seguro de cancelar la suscripción de este dispositivo? Apagará las notificaciones a este dispositivo.",
         "Identifiers": "Identificadores",
         "Devices": "Dispositivos",
-        "Streams": "Corrientes"
+        "Streams": "Corrientes",
+        "AreYouSureRemoveParticipant": "¿Seguro que quieres eliminar a este participante?",
+        "RemoveParticipant": "Eliminar participante"
     },
     "webrtc": {
         "allow": {

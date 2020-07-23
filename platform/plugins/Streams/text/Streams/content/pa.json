@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "{{toTitle}} ਵਿੱਚ ਨਵਾਂ {9 999}",
         "Streams\/relatedFrom\/*": "{9 10009} ਦੇ ਰੂਪ ਵਿੱਚ {{999} to ਵਿੱਚ ਸ਼ਾਮਲ ਕੀਤਾ ਗਿਆ",
         "Streams\/mention": "{{999} a ਨੇ ਇੱਕ ਟਿੱਪਣੀ ਵਿੱਚ ਤੁਹਾਡਾ ਜ਼ਿਕਰ ਕੀਤਾ",
-        "Streams\/call": "{{999} ਤੁਹਾਨੂੰ ਕਾਲ ਕਰ ਰਿਹਾ ਹੈ",
+        "Streams\/call": "{{999} ਨੇ ਇੱਕ ਰੀਅਲ-ਟਾਈਮ ਕਾਲ ਅਰੰਭ ਕੀਤੀ",
         "ManageEmailSubscriptions": "ਆਪਣੀ ਈਮੇਲ ਗਾਹਕੀ ਪ੍ਰਬੰਧਿਤ ਕਰੋ",
         "IfUnsubscribe": "ਜੇ ਤੁਸੀਂ ਗਾਹਕੀ ਰੱਦ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "ਕੀ ਤੁਹਾਨੂੰ ਯਕੀਨ ਹੈ ਕਿ ਇਸ ਡਿਵਾਈਸ ਦੀ ਗਾਹਕੀ ਲਓ? ਇਹ ਇਸ ਡਿਵਾਈਸ ਤੇ ਸੂਚਨਾਵਾਂ ਨੂੰ ਬੰਦ ਕਰ ਦੇਵੇਗਾ.",
         "Identifiers": "ਪਛਾਣਕਰਤਾ",
         "Devices": "ਉਪਕਰਣ",
-        "Streams": "ਸਟ੍ਰੀਮ"
+        "Streams": "ਸਟ੍ਰੀਮ",
+        "AreYouSureRemoveParticipant": "ਕੀ ਤੁਸੀਂ ਨਿਸ਼ਚਤ ਰੂਪ ਤੋਂ ਇਸ ਭਾਗੀਦਾਰ ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
+        "RemoveParticipant": "ਭਾਗੀਦਾਰ ਨੂੰ ਹਟਾਓ"
     },
     "menu": {
         "placeholder": "ਟਾਈਪ ਪੇਜ ਦਾ ਸਿਰਲੇਖ",

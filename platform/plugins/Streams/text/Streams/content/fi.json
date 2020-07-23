@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Uusi {{relationDisplayType}} {{toTitle}}",
         "Streams\/relatedFrom\/*": "Lisätty kansioon {{toTitle}} nimellä {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} mainitsi sinut kommentissa",
-        "Streams\/call": "{{displayName}} soittaa sinulle"
+        "Streams\/call": "{{displayName}} aloitti reaaliaikaisen puhelun"
     },
     "invite": {
         "messageContent": "{{displayName}} kutsui sinut {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Haluatko varmasti lopettaa tämän laitteen tilauksen? Se poistaa tämän laitteen ilmoitukset käytöstä.",
         "Identifiers": "tunnisteet",
         "Devices": "Laitteet",
-        "Streams": "Streams"
+        "Streams": "Streams",
+        "AreYouSureRemoveParticipant": "Haluatko varmasti poistaa tämän osallistujan?",
+        "RemoveParticipant": "Poista osallistuja"
     },
     "webrtc": {
         "allow": {
