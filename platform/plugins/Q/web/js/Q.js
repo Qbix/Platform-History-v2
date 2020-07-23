@@ -799,10 +799,12 @@ Elp.cssDimensions = function () {
  * @method scrollingParent
  * @param {Boolean} [skipIfNotOverflowed=false] If element is not overflowed, continue search
  * @param {String} [direction="all"] Can also be "vertical" or "horizontal"
+ * @param {Boolean} [includSelf=false] Whether the element itself can be returned if it matches
  */
-Elp.scrollingParent = function(skipIfNotOverflowed, direction) {
+Elp.scrollingParent = function(skipIfNotOverflowed, direction, includeSelf) {
 	var p = this;
-	while (p = p.parentNode) {
+	while (includeSelf ? 1 : (p = p.parentNode)) {
+		includeSelf = false;
 		if (typeof p.computedStyle !== 'function') {
 			continue;
 		}

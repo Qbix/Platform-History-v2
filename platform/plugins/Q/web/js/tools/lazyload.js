@@ -21,7 +21,7 @@
  *    Function "preparing" receives (element) and is used the first time to prepare the element
  *    Both functions must return true if the element was modified.
  * @param {Object} [observerOptions] Override any options to pass to IntersectionObserver
- * @param {Element} [observerOptions.root=tool.element]
+ * @param {Element} [observerOptions.root=tool.scrollingParent]
  * @param {String} [observerOptions.rootMargin='0px']
  * @param {String} [observerOptions.threshold=0]
  * @return {Q.Tool}
@@ -35,7 +35,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 	
 	Q.ensure(window.IntersectionObserver, _polyfill, function () {
 		// Observe whatever is on the page already
-		tool.observer = _createObserver(tool, tool.element);
+		tool.observer = _createObserver(tool, tool.element.scrollingParent());
 		tool.observe(tool.prepare(tool.element, false));
 
 		// Override innerHTML
@@ -240,7 +240,7 @@ function _createObserver(tool, container) {
 		Q.each(entries, function (i, entry) {
 			Q.each(tool.state.handlers, function (name, info) {
 				if (entry.target.matches && entry.target.matches(info.selector)) {
-					if (entry.isIntersecting) {
+					if (entry.isVisible) {
 						info.entering.call(tool, entry.target, entry);
 					} else  {
 						var rect = entry.target.getBoundingClientRect();
