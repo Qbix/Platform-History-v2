@@ -242,7 +242,7 @@ function _createObserver(tool, container) {
 		Q.each(entries, function (i, entry) {
 			Q.each(tool.state.handlers, function (name, info) {
 				if (entry.target.matches && entry.target.matches(info.selector)) {
-					if (entry.isVisible) {
+					if (entry.isIntersecting) {
 						info.entering.call(tool, entry.target, entry);
 					} else  {
 						var rect = entry.target.getBoundingClientRect();
