@@ -126,7 +126,7 @@ class   Q_Translate_Google {
 				$doIt = true;
 			} else {
 				foreach ($rt as $v2) {
-					$parts = explode('/', $v2);
+					$parts = Q_Utils::explodeEscaped('/', $v2);
 					foreach ($parts as $i => $p) {
 						if ($v['key'][$i] !== $p) {
 							break 2;
