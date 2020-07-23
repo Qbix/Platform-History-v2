@@ -31,6 +31,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 
 	var tool = this;
 	var state = this.state;
+	state.root = state.root || this.element;
 
 	var Elp = Element.prototype;
 	
