@@ -176,10 +176,10 @@ class Assets_Credits extends Base_Assets_Credits
 			foreach ($paymentDetails as $item) {
 				$more['fromPublisherId'] = $item['publisherId'];
 				$more['fromStreamName'] = $item['streamName'];
-				$assets_credits = self::createCreditRow($item['amount'], $reason, null, $userId, $more);
+				$assets_credits = self::createRow($item['amount'], $reason, null, $userId, $more);
 			}
 		} else {
-			$assets_credits = self::createCreditRow($amount, $reason, null, $userId, $more);
+			$assets_credits = self::createRow($amount, $reason, null, $userId, $more);
 		}
 
 		// decrease credits only after credit rows created
@@ -253,7 +253,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$stream->setAttribute('amount', $stream->getAttribute('amount') + $amount);
 		$stream->changed();
 
-		self::createCreditRow($amount, $reason, $userId, null, $more);
+		self::createRow($amount, $reason, $userId, null, $more);
 
 		// Post that this user earned $amount credits by $reason
 		$text = Q_Text::get('Assets/content');
@@ -325,10 +325,10 @@ class Assets_Credits extends Base_Assets_Credits
 			foreach ($paymentDetails as $item) {
 				$more['fromPublisherId'] = $item['publisherId'];
 				$more['fromStreamName'] = $item['streamName'];
-				$assets_credits = self::createCreditRow($item['amount'], $reason, $toUserId, $fromUserId, $more);
+				$assets_credits = self::createRow($item['amount'], $reason, $toUserId, $fromUserId, $more);
 			}
 		} else {
-			$assets_credits = self::createCreditRow($amount, $reason, $toUserId, $fromUserId, $more);
+			$assets_credits = self::createRow($amount, $reason, $toUserId, $fromUserId, $more);
 		}
 
 		// decrease credits only after credits rows created
@@ -386,7 +386,7 @@ class Assets_Credits extends Base_Assets_Credits
 	}
 	/**
 	 * Create row in Assets_Credits table
-	 * @method createCreditRow
+	 * @method createRow
 	 * @static
 	 * @param {int} $amount Amount of credits. Required,
 	 * @param {string} $reason Identifies the reason for send. Required.
@@ -400,7 +400,7 @@ class Assets_Credits extends Base_Assets_Credits
 	 *
 	 * @return {Assets_Credits} Assets_Credits row
 	 */
-	private static function createCreditRow ($amount, $reason, $toUserId = null, $fromUserId = null, $more = array()) {
+	private static function createRow ($amount, $reason, $toUserId = null, $fromUserId = null, $more = array()) {
 		$toPublisherId = null;
 		$toStreamName = null;
 		$fromPublisherId = null;
