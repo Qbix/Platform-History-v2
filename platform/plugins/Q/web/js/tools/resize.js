@@ -253,7 +253,7 @@
 						} else window.addEventListener('mousemove', drag, { passive: false });
 					}
 
-					var stopMoving = function(container){
+					var stopMoving = function(e){
 						if(Q.info.isTouchscreen) {
 							window.removeEventListener('touchmove', drag, { passive: false });
 						} else window.removeEventListener('mousemove', drag, { passive: false });
@@ -588,8 +588,8 @@
 							}
 						}
 
-						if(prevPosOfTouch1 == null) prevPosOfTouch1 = {x:touch1.clientX, y:touch1.clientY}
-						if(prevPosOfTouch2 == null) prevPosOfTouch2 = {x:touch2.clientX, y:touch2.clientY}
+						if(prevPosOfTouch1 == null) prevPosOfTouch1 = {x:touch1.clientX, y:touch1.clientY, moveDist: 0};
+						if(prevPosOfTouch2 == null) prevPosOfTouch2 = {x:touch2.clientX, y:touch2.clientY, moveDist: 0};
 
 						//if(touch1.clientX >= docRect.right-(docStyles.paddingRight ? docStyles.paddingRight : '0').replace('px', '')) return;
 						var elRect = _elementToResize.getBoundingClientRect();
@@ -605,13 +605,25 @@
 						touch1diff = Math.abs(prevPosOfTouch1.x - touch1.clientX);
 						touch2diff = Math.abs(prevPosOfTouch2.x - touch2.clientX);
 
-						if(Math.abs(touch1.clientX - touch2.clientX) > Math.abs(prevPosOfTouch1.x - prevPosOfTouch2.x)) {
-							elementHeight = _latestHeightValue + Math.abs(touch1.clientX - prevPosOfTouch1.x) + Math.abs(touch2.clientX - prevPosOfTouch2.x);
-							elementWidth = _latestWidthValue + Math.abs(touch1.clientX - prevPosOfTouch1.x) + Math.abs(touch2.clientX - prevPosOfTouch2.x);
+						var xDiff = (touch1.clientX - prevPosOfTouch1.x);
+						var yDiff = (touch1.clientY - prevPosOfTouch1.y);
+
+						var xDiff2 = (touch2.clientX - prevPosOfTouch2.x);
+						var yDiff2 = (touch2.clientY - prevPosOfTouch2.y);
+						var distance1 = Math.sqrt( xDiff*xDiff + yDiff*yDiff );
+						var distance2 = Math.sqrt( xDiff2*xDiff2 + yDiff2*yDiff2 );
+
+						var distBetwFingers = Math.sqrt( (touch1.clientX - touch2.clientX)*(touch1.clientX - touch2.clientX) + (touch1.clientY - touch2.clientY)*(touch1.clientY - touch2.clientY) )
+						var prevdistBetwFingers = Math.sqrt( (prevPosOfTouch1.x - prevPosOfTouch2.x)*(prevPosOfTouch1.x - prevPosOfTouch2.x) + (prevPosOfTouch1.y - prevPosOfTouch2.y)*(prevPosOfTouch1.y - prevPosOfTouch2.y) )
+
+                        if(distBetwFingers > prevdistBetwFingers) {
+                            elementHeight = _latestHeightValue + (distance1 + distance2);
+							elementWidth = _latestWidthValue + (distance1 + distance2);
 						} else {
-							elementHeight = _latestHeightValue - Math.abs(touch1.clientX - prevPosOfTouch1.x + touch2.clientX - prevPosOfTouch2.x);
-							elementWidth = _latestWidthValue - Math.abs(touch1.clientX - prevPosOfTouch1.x + touch2.clientX - prevPosOfTouch2.x);
+                            elementHeight = _latestHeightValue - (distance1 + distance2);
+							elementWidth = _latestWidthValue - (distance1 + distance2);
 						}
+						//console.log('resize elementWidth', Math.abs(touch1.clientX - prevPosOfTouch1.x) + Math.abs(touch2.clientX - prevPosOfTouch2.x))
 
 						if(ratio < 1) {
 							elementWidth = parseInt(elementHeight * ratio);
@@ -633,15 +645,14 @@
 
 						_elementToResize.style.width = elementWidth + 'px';
 						_elementToResize.style.height = elementHeight + 'px';
-						if(typeof cordova != "undefined" && window.device.platform === 'iOS') cordova.plugins.iosrtc.refreshVideos();
 
 						_latestWidthValue = elementWidth;
 						_latestHeightValue = elementHeight;
 
 						prevPosOfTouch1.x = touch1.clientX;
 						prevPosOfTouch1.y = touch1.clientY;
-						prevPosOfTouch2.x = touch2.clientX;
-						prevPosOfTouch2.y = touch2.clientY
+                        prevPosOfTouch2.x = touch2.clientX;
+						prevPosOfTouch2.y = touch2.clientY;
 
 					}
 
