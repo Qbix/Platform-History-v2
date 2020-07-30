@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS {{prefix}}credits (
   KEY toUserId (toUserId),
   KEY toStream (toPublisherId, toStreamName),
   KEY fromStream (fromPublisherId, fromStreamName),
-  KEY credits (credits),w
+  KEY credits (credits),
   KEY reason (reason)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

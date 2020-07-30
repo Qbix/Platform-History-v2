@@ -49,7 +49,7 @@
 			usingOther: "or you can ",
 			facebookSrc: null,
 			prompt: "Choose a username:",
-			newUser: "or create a new account",
+			newUser: "or create a new account below",
 			placeholders: {
 				identifier: "your mobile # or email",
 				mobile: "enter your mobile #",
@@ -1175,8 +1175,9 @@
 					if (response && response.errors) {
 						$this.plugin('Q/validator', 'invalidate',
 							Q.ajaxErrors(response.errors, [first_input.attr('name')]
-							));
+						));
 					}
+					$('button', $this).removeClass('Q_working').removeAttr('disabled');
 					$('#Users_login_identifier').blur();
 					first_input.plugin('Q/clickfocus');
 					return;

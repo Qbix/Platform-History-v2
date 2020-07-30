@@ -76,7 +76,7 @@
         "mobileExists": "Ste se že poskusili registrirati s to mobilno številko? Če je tako, preverite svoj SMS, da aktivirate svoj račun. <a href='#resend' class='Q_button Users_activation_resend'>Kliknite, če želite sporočilo ponovno poslati</a>",
         "usingOther": "ali lahko",
         "prompt": "Izberi uporabniško ime:",
-        "newUser": "ali ustvarite nov račun",
+        "newUser": "ali ustvarite nov račun spodaj",
         "placeholders": {
             "identifier": "vaš mobilni # ali e-poštni naslov",
             "mobile": "vnesite svoj mobilni #",

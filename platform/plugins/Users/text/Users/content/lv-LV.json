@@ -76,7 +76,7 @@
         "mobileExists": "Vai jūs iepriekš mēģinājāt reģistrēties ar šo mobilā tālruņa numuru? Ja tā, pārbaudiet SMS, lai aktivizētu kontu. <a href='#resend' class='Q_button Users_activation_resend'>Noklikšķiniet, lai atkārtoti nosūtītu ziņojumu</a>",
         "usingOther": "vai arī jūs varat",
         "prompt": "Izvēlies lietotājvārdu:",
-        "newUser": "vai izveidojiet jaunu kontu",
+        "newUser": "vai izveidojiet jaunu kontu zemāk",
         "placeholders": {
             "identifier": "jūsu mobilais # vai e-pasts",
             "mobile": "ievadiet savu mobilo nr.",

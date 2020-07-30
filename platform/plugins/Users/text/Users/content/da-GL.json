@@ -76,7 +76,7 @@
         "mobileExists": "Forsøgte du at registrere dig med dette mobilnummer før? I så fald skal du kontrollere din SMS for at aktivere din konto. <a href='#resend' class='Q_button Users_activation_resend'>Klik for at sende beskeden igen</a>",
         "usingOther": "eller du kan",
         "prompt": "Vælg et brugernavn:",
-        "newUser": "eller opret en ny konto",
+        "newUser": "eller opret en ny konto nedenfor",
         "placeholders": {
             "identifier": "din mobilnummer eller e-mail",
             "mobile": "indtast din mobil #",

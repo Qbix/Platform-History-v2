@@ -76,7 +76,7 @@
         "mobileExists": "Reyndirðu að skrá þig með þessu farsímanúmeri áður? Ef svo er skaltu athuga með SMS til að virkja reikninginn þinn. <a href='#resend' class='Q_button Users_activation_resend'>Smelltu til að senda skilaboðin aftur</a>",
         "usingOther": "eða þú getur",
         "prompt": "Veldu notendanafn:",
-        "newUser": "eða stofna nýjan reikning",
+        "newUser": "eða stofnaðu nýjan reikning hér að neðan",
         "placeholders": {
             "identifier": "farsímann þinn eða tölvupóstur",
             "mobile": "sláðu inn farsímann þinn #",

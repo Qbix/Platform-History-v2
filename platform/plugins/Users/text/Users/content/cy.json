@@ -76,7 +76,7 @@
         "mobileExists": "A wnaethoch chi geisio cofrestru gyda&#39;r rhif ffôn symudol hwn o&#39;r blaen? Os felly, gwiriwch eich SMS i actifadu eich cyfrif. <a href='#resend' class='Q_button Users_activation_resend'>Cliciwch i ail-anfon y neges<\/a>",
         "usingOther": "neu gallwch chi",
         "prompt": "Dewiswch enw defnyddiwr:",
-        "newUser": "neu greu cyfrif newydd",
+        "newUser": "neu greu cyfrif newydd isod",
         "placeholders": {
             "identifier": "eich # symudol neu e-bost",
             "mobile": "nodwch eich ffôn symudol #",

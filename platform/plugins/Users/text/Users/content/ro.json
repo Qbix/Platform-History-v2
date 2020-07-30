@@ -76,7 +76,7 @@
         "mobileExists": "Ai mai încercat să te înregistrezi cu acest număr de telefon mobil? Dacă da, verificați SMS-ul pentru a vă activa contul. <a href='#resend' class='Q_button Users_activation_resend'>Faceți clic pentru a trimite din nou mesajul<\/a>",
         "usingOther": "sau puteți",
         "prompt": "Alege un nume de utilizator:",
-        "newUser": "sau creați un cont nou",
+        "newUser": "sau creați un cont nou mai jos",
         "placeholders": {
             "identifier": "numărul de telefon mobil sau e-mailul",
             "mobile": "introduceți numărul dvs. de telefon mobil",

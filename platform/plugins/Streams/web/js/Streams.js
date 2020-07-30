@@ -24,31 +24,25 @@ dc["Q.Streams.Participant"] = true;
 dc["Q.Streams.Avatar"] = true;
 
 Q.text.Streams = {
-
 	access: {
 
 	},
-
 	basic: {
 		prompt: null, //"Fill our your basic information to complete your signup.",
 		title: "Basic Information"
 	},
-
 	login: {
 		prompt: "Let friends recognize you:",
-		newUser: "or create a new account",
+		newUser: "or create a new account below",
 		picTooltip: "You can change this picture later"
 	},
-
 	complete: {
 		// this is just a fallback, see Streams/types/*/invite/dialog config
 		prompt: "Let friends recognize you:"
 	},
-
 	chat: {
 		noMessages: ""
 	},
-
 	followup: {
 		mobile: {
 			title: 'Follow up'

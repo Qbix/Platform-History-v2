@@ -76,7 +76,7 @@
         "mobileExists": "Haben Sie schon einmal versucht, sich mit dieser Handynummer zu registrieren? Wenn ja, überprüfen Sie Ihre SMS, um Ihr Konto zu aktivieren. <a href='#resend' class='Q_button Users_activation_resend'>Klicken Sie hier, um die Nachricht erneut zu senden<\/a>",
         "usingOther": "oder du kannst",
         "prompt": "Wähle einen Benutzernamen:",
-        "newUser": "oder ein neues Konto erstellen",
+        "newUser": "oder erstellen Sie unten ein neues Konto",
         "placeholders": {
             "identifier": "Ihre Handynummer oder E-Mail",
             "mobile": "Geben Sie Ihre Handynummer ein",

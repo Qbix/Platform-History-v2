@@ -76,7 +76,7 @@
         "mobileExists": "Bạn đã thử đăng ký với số điện thoại di động này trước? Nếu vậy, hãy kiểm tra SMS của bạn để kích hoạt tài khoản của bạn. <a href='#resend' class='Q_button Users_activation_resend'>Nhấn vào đây để gửi lại tin nhắn<\/a>",
         "usingOther": "hoặc bạn có thể",
         "prompt": "Chọn tên người dùng:",
-        "newUser": "hoặc tạo một tài khoản mới",
+        "newUser": "hoặc tạo một tài khoản mới bên dưới",
         "placeholders": {
             "identifier": "số điện thoại di động hoặc email của bạn",
             "mobile": "nhập số điện thoại di động của bạn",

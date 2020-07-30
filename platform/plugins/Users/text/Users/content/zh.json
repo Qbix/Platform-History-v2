@@ -76,7 +76,7 @@
         "mobileExists": "您之前是否尝试过注册此手机号码？如果是，请检查您的短信以激活您的帐户。 <a href='#resend' class='Q_button Users_activation_resend'>单击以重新发送消息<\/a>",
         "usingOther": "或者你可以",
         "prompt": "选择一个用户名：",
-        "newUser": "或创建一个新帐户",
+        "newUser": "或在下面创建一个新帐户",
         "placeholders": {
             "identifier": "您的手机号码或电子邮件",
             "mobile": "输入你的手机＃",

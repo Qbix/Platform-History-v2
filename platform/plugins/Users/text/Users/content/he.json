@@ -76,7 +76,7 @@
         "mobileExists": "האם ניסית להירשם למספר הנייד הזה בעבר? אם כן, בדוק את ה- SMS שלך כדי להפעיל את חשבונך. <a href='#resend' class='Q_button Users_activation_resend'>לחץ כדי לשלוח מחדש את ההודעה<\/a>",
         "usingOther": "או שאתה יכול",
         "prompt": "בחר שם משתמש:",
-        "newUser": "או צור חשבון חדש",
+        "newUser": "או צור חשבון חדש למטה",
         "placeholders": {
             "identifier": "מספר הטלפון הנייד או הדוא&quot;ל שלך",
             "mobile": "הזן את מספר הטלפון הנייד שלך",

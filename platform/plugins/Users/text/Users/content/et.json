@@ -76,7 +76,7 @@
         "mobileExists": "Kas proovisite varem selle mobiilinumbriga registreeruda? Kui jah, siis kontrollige oma konto aktiveerimiseks SMS-i. <a href='#resend' class='Q_button Users_activation_resend'>Klõpsake sõnumi uuesti saatmiseks<\/a>",
         "usingOther": "või saate",
         "prompt": "Vali kasutajanimi:",
-        "newUser": "või looge uus konto",
+        "newUser": "või looge allpool uus konto",
         "placeholders": {
             "identifier": "oma mobiiltelefoni nr või e-posti aadressi",
             "mobile": "sisesta oma mobiiltelefoni number",

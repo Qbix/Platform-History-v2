@@ -76,7 +76,7 @@
         "mobileExists": "Sinubukan mo bang magparehistro sa numero ng mobile na ito bago? Kung gayon, suriin ang iyong SMS upang maisaaktibo ang iyong account. <a href='#resend' class='Q_button Users_activation_resend'>Mag-click upang ipadala ang mensahe</a>",
         "usingOther": "o kaya mo",
         "prompt": "Pumili ng isang username:",
-        "newUser": "o lumikha ng isang bagong account",
+        "newUser": "o lumikha ng isang bagong account sa ibaba",
         "placeholders": {
             "identifier": "iyong mobile # o email",
             "mobile": "ipasok ang iyong mobile #",

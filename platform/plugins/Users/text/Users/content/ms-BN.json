@@ -76,7 +76,7 @@
         "mobileExists": "Adakah anda cuba mendaftar dengan nombor telefon bimbit ini sebelum ini? Jika ya, periksa SMS anda untuk mengaktifkan akaun anda. <a href='#resend' class='Q_button Users_activation_resend'>Klik untuk menghantar semula mesej</a>",
         "usingOther": "atau anda boleh",
         "prompt": "Pilih nama pengguna:",
-        "newUser": "atau buat akaun baru",
+        "newUser": "atau buat akaun baru di bawah",
         "placeholders": {
             "identifier": "# atau e-mel mudah alih anda",
             "mobile": "masukkan # telefon bimbit anda",

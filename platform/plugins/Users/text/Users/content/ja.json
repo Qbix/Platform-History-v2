@@ -76,7 +76,7 @@
         "mobileExists": "以前にこの携帯電話番号で登録しようとしましたか？その場合は、SMSを確認してアカウントを有効にしてください。 <a href='#resend' class='Q_button Users_activation_resend'>クリックしてメッセージを再送信します<\/a>",
         "usingOther": "またはあなたはできます",
         "prompt": "ユーザー名を選択：",
-        "newUser": "または新しいアカウントを作成します",
+        "newUser": "または以下で新しいアカウントを作成してください",
         "placeholders": {
             "identifier": "携帯番号またはメール",
             "mobile": "携帯番号を入力してください",

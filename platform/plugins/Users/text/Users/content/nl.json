@@ -76,7 +76,7 @@
         "mobileExists": "Heb je eerder geprobeerd je met dit mobiele nummer te registreren? Controleer dan uw sms om uw account te activeren. <a href='#resend' class='Q_button Users_activation_resend'>Klik om het bericht opnieuw te verzenden<\/a>",
         "usingOther": "of je kan",
         "prompt": "Kies een gebruikersnaam:",
-        "newUser": "of maak een nieuw account",
+        "newUser": "of maak hieronder een nieuw account aan",
         "placeholders": {
             "identifier": "uw mobiele nummer of e-mailadres",
             "mobile": "voer je mobiel in #",

@@ -76,7 +76,7 @@
         "mobileExists": "¿Intentaste registrarte con este número de móvil antes? Si es así, revise su SMS para activar su cuenta. <a href='#resend' class='Q_button Users_activation_resend'>Haga clic para volver a enviar el mensaje.</a>",
         "usingOther": "o tu puedes",
         "prompt": "Elige un nombre de usuario:",
-        "newUser": "o crea una cuenta nueva",
+        "newUser": "o crea una nueva cuenta a continuación",
         "placeholders": {
             "identifier": "su número de móvil o correo electrónico",
             "mobile": "ingrese su número de móvil",

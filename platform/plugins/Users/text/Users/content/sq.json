@@ -76,7 +76,7 @@
         "mobileExists": "A u përpoqët të regjistrohesh më parë me këtë numër celular? Nëse është kështu, kontrolloni SMS-në tuaj për të aktivizuar llogarinë tuaj. <a href='#resend' class='Q_button Users_activation_resend'>Klikoni për të dërguar mesazhin<\/a>",
         "usingOther": "ose mundeni",
         "prompt": "Zgjidhni një emër përdoruesi:",
-        "newUser": "ose krijoni një llogari të re",
+        "newUser": "ose krijoni një llogari të re më poshtë",
         "placeholders": {
             "identifier": "# ose emaili juaj celular",
             "mobile": "shkruani celularin #",

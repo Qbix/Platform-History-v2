@@ -76,7 +76,7 @@
         "mobileExists": "Je! Ulijaribu kujiandikisha na nambari hii ya simu hapo awali? Ikiwa ni hivyo, angalia SMS yako ili kuamsha akaunti yako. <a href='#resend' class='Q_button Users_activation_resend'>Bonyeza kutuma tena ujumbe</a>",
         "usingOther": "au unaweza",
         "prompt": "Chagua jina la mtumiaji:",
-        "newUser": "au unda akaunti mpya",
+        "newUser": "au unda akaunti mpya hapa chini",
         "placeholders": {
             "identifier": "# yako ya rununu au barua pepe",
             "mobile": "ingiza simu yako ya rununu #",
