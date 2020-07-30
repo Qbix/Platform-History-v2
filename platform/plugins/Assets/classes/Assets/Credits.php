@@ -124,8 +124,8 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @static
 	 * @param {integer} $amount The amount of credits to spend.
 	 * @param {string} $reason Identifies the reason for spending. Can't be null.
-	 * @param {string} [$userId=null] User which is spends the credits. Defaults to logged-in user.
-	 * @param {array} [$more] An array supplying more info, including
+	 * @param {string} [$userId=null] User which is spendings the credits. Defaults to logged-in user.
+	 * @param {array} [$more] An array supplying more info, including:
 	 * @param {string} [$more.toPublisherId] The publisher of the valuable stream for which payment is being made
 	 * @param {string} [$more.toStreamName] The name of the valuable stream for which payment is being made
 	 * @param {array} [$more.items] an array of items, each with "publisherId", "streamName" and "amount"
@@ -187,7 +187,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$more['fromUserName'] = $assets_credits->getAttribute("fromUserName");
 		$more['toStreamTitle'] = $assets_credits->getAttribute("toStreamTitle");
 		$more['fromStreamTitle'] = $assets_credits->getAttribute("fromStreamTitle");
-		$more['toUserId'] = 	;
+		$more['toUserId'] = $toPublisherId;
 		$more['items'] = $items;
 
 		$instructions_json = Q::json_encode(array_merge(
