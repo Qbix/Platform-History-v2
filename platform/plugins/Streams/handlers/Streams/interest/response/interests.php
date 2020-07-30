@@ -22,7 +22,8 @@ function Streams_interest_response_interests()
 	if (!$user) {
 		throw new Users_Exception_NotLoggedIn();
 	}
-	return Streams_Category::getRelatedTo(
+	$return = Streams_Category::getRelatedTo(
 		$user->id, 'Streams/user/interests', 'Streams/interests'
 	);
+	return $return ? $return : array();
 }
