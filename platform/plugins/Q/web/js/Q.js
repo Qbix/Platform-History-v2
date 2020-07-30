@@ -6484,7 +6484,10 @@ Q.Browser = {
 var _supportsPassive;
 
 /**
- * Add an event listener to an element
+ * Add an event listener to an element, but with more features than Element.prototype.addEventListener()
+ * You can pass this event listener also to the corresponding Q.removeEventListener(), but
+ * only if you call addEventListener once per eventHandler. Otherwise, you should use this function's return value
+ * in calls to Q.removeEventListener().
  * @static
  * @method addEventListener
  * @param {HTMLElement} element
@@ -6502,6 +6505,7 @@ var _supportsPassive;
  * @param {boolean} hookStopPropagation
  *  Whether to override Event.prototype.stopPropagation in order to capture the event even
  *  when a descendant of the element tries to prevent.
+ * @return {Function} the wrapper function to pass to corresponding Q.removeEventListener
  */
 Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandler, useCapture, hookStopPropagation) {
 	useCapture = useCapture || false;
@@ -6515,7 +6519,7 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		Q.handle(eventHandler, element, [e]);
 	}
 	var handler = (eventHandler.typename === "Q.Event"
-		? eventHandler.eventListener = _Q_addEventListener_wrapper
+		? (eventHandler.eventListener = _Q_addEventListener_wrapper)
 		: eventHandler);
 	if (typeof eventName === 'string') {
 		var split = eventName.trim().split(' ');
@@ -6549,9 +6553,8 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		if (!('eventName' in params)) {
 			throw new Q.Error("Custom $.fn.on handler: need to set params.eventName");
 		}
-		eventHandler.Q_wrapper = wrapper;
-		eventName = params.eventName;
-		eventHandler = wrapper;
+		eventHandler.Q_wrapper = handler = wrapper;
+		eventName = wrapper.eventName = params.eventName;
 	}
 	if (!eventName) {
 		return;
@@ -6574,11 +6577,12 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 	} else if (element.attachEvent) {
 		element.attachEvent('on'+eventName, handler);
 	} else {
+		eventName = eventName.toLowerCase();
 		element["on"+eventName] = function () {
 			if (element["on"+eventName]) {
 				element["on"+eventName].apply(this, arguments);
 			}
-			eventHandler.apply(this, arguments);
+			handler.apply(this, arguments);
 		}; // best we can do
 	}
 	
@@ -6598,6 +6602,7 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		hooks.push(args);
 	}
 	function _f() { }
+	return handler;
 };
 Q.addEventListener.hooks = [];
 function _Q_Event_stopPropagation() {
@@ -6638,6 +6643,9 @@ Q.removeEventListener = function _Q_removeEventListener(element, eventName, even
 	var handler = (eventHandler.typename === "Q.Event"
 		? eventHandler.eventListener
 		: eventHandler);
+	if (handler.Q_wrapper) {
+		handler = handler.Q_wrapper;
+	}
 	if (typeof eventName === 'string') {
 		var split = eventName.split(' ');
 		if (split.length > 1) {
@@ -6654,7 +6662,11 @@ Q.removeEventListener = function _Q_removeEventListener(element, eventName, even
 		return false;
 	}
 	if (typeof eventName === 'function') {
-		eventName = eventHandler.Q_wrapper && eventHandler.Q_wrapper.eventName;
+		var params = {
+			original: function () {}
+		};
+		eventName(params);
+		eventName = params.eventName;
 		if (!eventName) {
 			return false;
 		}
@@ -11509,6 +11521,16 @@ Q.Pointer = {
 		return which;
 	},
 	/**
+	 * Return whether button was pressed or at least one finger is touching touchscreen
+	 * @static
+	 * @method isPressed
+	 * @param {Q.Event} e Some mouse or touch event from the DOM
+	 * @return {boolean}
+	 */
+	isPressed: function (e) {
+		return !!(Q.Pointer.which(e) || Q.Pointer.touchCount(e));
+	},
+	/**
 	 * Consistently returns the target of an event across browsers
 	 * @static
 	 * @method target
@@ -11861,8 +11883,8 @@ Q.Pointer = {
 		if (msUntilStopCancelClick === undefined) {
 			msUntilStopCancelClick = 500;
 		}
-		++_cancelClick_counter;
 		if (msUntilStopCancelClick) {
+			++_cancelClick_counter;
 			setTimeout(function () {
 				if (--_cancelClick_counter === 0) {
 					Q.Pointer.canceledClick = false;
@@ -12241,6 +12263,7 @@ var _onPointerEndHandler = Q.Pointer.ended = function _onPointerEndHandler() {
 	Q.removeEventListener(window, Q.Pointer.cancel, _onPointerEndHandler);
 	Q.removeEventListener(window, Q.Pointer.click, _onPointerClickHandler);
 	Q.handle(Q.Pointer.onEnded, this, arguments);
+	_pos = false;
 	setTimeout(function () {
 		Q.Pointer.canceledClick = false;
 	}, 100);
