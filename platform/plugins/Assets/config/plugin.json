@@ -18,7 +18,6 @@
 			"Assets/charge": ["Assets/after/Assets_charge"],
 			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
 			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
-			"Communities/community/create": ["Assets/after/Community_create"],
 			"Streams/create/Assets/service": ["Assets/after/Streams_create_Assets_service"]
 		},
 		"routes@start": {

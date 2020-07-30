@@ -119,13 +119,13 @@ class Assets_Credits extends Base_Assets_Credits
 		return true;
 	}
 	/**
-	 * Spend credits
+	 * Make a user spend credits. Use the $more array to send credits to a publisher of a stream, instead.
 	 * @method spend
 	 * @static
 	 * @param {integer} $amount The amount of credits to spend.
 	 * @param {string} $reason Identifies the reason for spending. Can't be null.
 	 * @param {string} [$userId=null] User which is spendings the credits. Defaults to logged-in user.
-	 * @param {array} [$more] An array supplying more info, including:
+	 * @param {array} [$more] An array supplying more info, including
 	 * @param {string} [$more.toPublisherId] The publisher of the valuable stream for which payment is being made
 	 * @param {string} [$more.toStreamName] The name of the valuable stream for which payment is being made
 	 * @param {array} [$more.items] an array of items, each with "publisherId", "streamName" and "amount"
@@ -546,4 +546,8 @@ class Assets_Credits extends Base_Assets_Credits
 
 		return false;
 	}
+	
+	const JOIN_PAID_STREAM = 'JoinPaidStream';
+	const PAYMENT_TO_USER = 'PaymentToUser';
+	
 };

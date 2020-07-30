@@ -120,8 +120,9 @@
 			 *  @param {object} options
 			 *  @param {number} options.amount
 			 *  @param {string} options.currency Currency ISO 4217 code (USD, EUR etc)
-			 *  @param {Streams_Stream} [options.toStream] Stream object for which to pay. If also can be object with keys "publisherId" and "streamName"
 			 *  @param {Streams_Stream} [options.userId] The id of user who would receive credits
+			 *  @param {Streams_Stream} [options.toStream] Valuable stream object for which the payment is being made.
+			 *    It also can be object with keys "publisherId" and "streamName"
 			 *  @param {Array} [options.items] an array of objects, each with "publisherId", "streamName" and "amount"
 			 *  @param {function} [options.onSuccess] Callback to run when payment has completed successfully.
 			 *  @param {function} [options.onFailure] Callback to run when payment failed.
