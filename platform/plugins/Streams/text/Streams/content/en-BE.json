@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "You don't have permission to join this conversation.",
         "startedConversation": "started a conversation",
         "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name"
+        "SearchByName": "Search by name",
+        "Notifications": {
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "New {{relationDisplayType}} in {{toTitle}}",
         "Streams/relatedFrom/*": "Added to {{toTitle}} as {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams/call": "{{displayName}} is calling you"
+        "Streams/call": "{{displayName}} started a real-time call"
     },
     "invite": {
         "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
         "Identifiers": "Identifiers",
         "Devices": "Devices",
-        "Streams": "Streams"
+        "Streams": "Streams",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant"
     },
     "webrtc": {
         "allow": {
@@ -209,7 +217,8 @@
             "turnOffScreenSharing": "Hide screen sharing",
             "turnOnCamera": "Show video",
             "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "turnOnScreenSharing": "Show screen sharing",
+            "fullScreen": "Full Screen"
         },
         "notAllowedToJoinCall": "You don't have permission to join this stream.",
         "streamTitle": "{{1}} live call"
