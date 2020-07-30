@@ -94,16 +94,16 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @method checkAmount
 	 * @static
 	 * @param {integer} $amount The amount of credits to spend.
-	 * @param {array} [$more.paymentDetails] an array of items, each with "amount" key, and perhaps other data
+	 * @param {array} [$more.items] an array of items, each with "amount" key, and perhaps other data
 	 * @param {boolean} [$throwIfNotEqual=false]
 	 * @throws {Exception} If not equal
 	 */
-	static function checkAmount ($amount, $paymentDetails, $throwIfNotEqual = false) {
-		if (!is_array($paymentDetails)) {
+	static function checkAmount ($amount, $items, $throwIfNotEqual = false) {
+		if (!is_array($items)) {
 			return true;
 		}
 		$checkSum = 0;
-		foreach ($paymentDetails as $item) {
+		foreach ($items as $item) {
 			$checkSum += $item['amount'];
 		}
 
@@ -128,7 +128,7 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @param {array} [$more] An array supplying more info, including
 	 * @param {string} [$more.toPublisherId] The publisher of the valuable stream for which payment is being made
 	 * @param {string} [$more.toStreamName] The name of the valuable stream for which payment is being made
-	 * @param {array} [$more.paymentDetails] an array of items, each with "publisherId", "streamName" and "amount"
+	 * @param {array} [$more.items] an array of items, each with "publisherId", "streamName" and "amount"
 	 * @throws {Users_Exception_NotLoggedIn} If user is not logged in
 	 */
 	static function spend($amount, $reason, $userId = null, $more = array())
@@ -149,10 +149,10 @@ class Assets_Credits extends Base_Assets_Credits
 
 		$toPublisherId = Q::ifset($more, "toPublisherId", null);
 		$toStreamName = Q::ifset($more, "toStreamName", null);
-		$paymentDetails = Q::ifset($more, "paymentDetails", null);
+		$items = Q::ifset($more, "items", null);
 
 		// make sure the amount is consistent
-		self::checkAmount($amount, $paymentDetails, true);
+		self::checkAmount($amount, $items, true);
 
 		// if user spend credits to stream, make it send credits to stream publisher
 		if ($toPublisherId && $toStreamName) {
@@ -168,8 +168,8 @@ class Assets_Credits extends Base_Assets_Credits
 			));
 		}
 
-		if (is_array($paymentDetails)) {
-			foreach ($paymentDetails as $item) {
+		if (is_array($items)) {
+			foreach ($items as $item) {
 				$more['fromPublisherId'] = $item['publisherId'];
 				$more['fromStreamName'] = $item['streamName'];
 				$assets_credits = self::createRow($item['amount'], $reason, null, $userId, $more);
@@ -188,7 +188,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$more['toStreamTitle'] = $assets_credits->getAttribute("toStreamTitle");
 		$more['fromStreamTitle'] = $assets_credits->getAttribute("fromStreamTitle");
 		$more['toUserId'] = 	;
-		$more['paymentDetails'] = $paymentDetails;
+		$more['items'] = $items;
 
 		$instructions_json = Q::json_encode(array_merge(
 			array(
@@ -279,7 +279,7 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @param {string} $reason Identifies the reason for send. Can't be null.
 	 * @param {string} [$fromUserId=null] null = logged user
 	 * @param {array} [$more] An array supplying more information
-	 * @param {array} [$more.paymentDetails] an array of items, each with "publisherId", "streamName" and "amount"
+	 * @param {array} [$more.items] an array of items, each with "publisherId", "streamName" and "amount"
 	 */
 	static function send($amount, $reason, $toUserId, $fromUserId = null, $more = array())
 	{
@@ -309,13 +309,13 @@ class Assets_Credits extends Base_Assets_Credits
 			));
 		}
 
-		$paymentDetails = Q::ifset($more, "paymentDetails", null);
+		$items = Q::ifset($more, "items", null);
 
 		// make sure the amount is consistent
-		self::checkAmount($amount, $paymentDetails, true);
+		self::checkAmount($amount, $items, true);
 
-		if (is_array($paymentDetails)) {
-			foreach ($paymentDetails as $item) {
+		if (is_array($items)) {
+			foreach ($items as $item) {
 				$more['fromPublisherId'] = $item['publisherId'];
 				$more['fromStreamName'] = $item['streamName'];
 				$assets_credits = self::createRow($item['amount'], $reason, $toUserId, $fromUserId, $more);

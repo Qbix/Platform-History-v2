@@ -33,8 +33,8 @@
 			 *  @param {number} [options.amount=100] Default amount of credits to buy.
 			 *  @param {string} [options.currency=USD] Currency ISO 4217 code (USD, EUR etc)
 			 *  @param {string} [options.missing=false] Whether to show text about credits missing.
-			 *  @param {function} [options.resolve] Callback to run when payment done.
-			 *  @param {function} [options.reject] Callback to run when payment rejected.
+			 *  @param {function} [options.onSuccess] Callback to run when payment has completed successfully.
+			 *  @param {function} [options.onFailure] Callback to run when payment failed.
 			 */
 			buy: function (options) {
 				options = Q.extend({
@@ -100,43 +100,45 @@
 								description: Assets.texts.credits.BuyAmountCredits.interpolate({amount: credits})
 							}, function(err, data) {
 								if (err) {
-									return Q.handle(options.reject, null, [err]);
+									return Q.handle(options.onFailure, null, [err]);
 								}
-								return Q.handle(options.resolve, null, [data]);
+								return Q.handle(options.onSuccess, null, [data]);
 							});
 						});
 					},
 					onClose: function () {
 						if (!paymentStarted) {
-							Q.handle(options.reject);
+							Q.handle(options.onFailure);
 						}
 					}
 				});
 			},
 			/**
-			 * Make payment for some source. Pay with credits if enough, or buy missing credits and pay.
+			 * Make a payment to some user in the system.
+			 * Pay with credits if you have enough of them, otherwise you are prompted to purchase the remained first.
 			 * @method pay
 			 *  @param {object} options
 			 *  @param {number} options.amount
 			 *  @param {string} options.currency Currency ISO 4217 code (USD, EUR etc)
-			 *  @param {Streams_Stream} [options.toStream] Stream object for which to pay. If also can be object {publisherId: ..., streamName: ...}
-			 *  @param {Streams_Stream} [options.userId] User id where need to pass credits.
-			 *  @param {Array} [options.paymentDetails] an array of items, each with "publisherId", "streamName" and "amount"
-			 *  @param {function} [options.resolve] Callback to run when payment done.
-			 *  @param {function} [options.reject] Callback to run when payment rejected.
+			 *  @param {Streams_Stream} [options.toStream] Stream object for which to pay. If also can be object with keys "publisherId" and "streamName"
+			 *  @param {Streams_Stream} [options.userId] The id of user who would receive credits
+			 *  @param {Array} [options.items] an array of objects, each with "publisherId", "streamName" and "amount"
+			 *  @param {function} [options.onSuccess] Callback to run when payment has completed successfully.
+			 *  @param {function} [options.onFailure] Callback to run when payment failed.
 			 */
 			pay: function (options) {
-				if (Streams.isStream(options.stream)) {
+				var stream = options.toStream;
+				if (Streams.isStream(stream)) {
 					options.toStream = {
-						publisherId: options.toStream.fields.publisherId,
-						streamName: options.toStream.fields.name
+						publisherId: stream.fields.publisherId,
+						streamName: stream.fields.name
 					};
 				}
 
 				// check payment details consistent
-				if (options.paymentDetails) {
+				if (options.items) {
 					var checkSum = 0;
-					Q.each(options.paymentDetails, function (i, item) {
+					Q.each(options.items, function (i, item) {
 						checkSum += item.amount;
 					});
 					if (parseFloat(options.amount) !== parseFloat(checkSum)) {
@@ -147,7 +149,7 @@
 				Q.req("Assets/credits", ['status', 'details'], function (err, response) {
 					var msg = Q.firstErrorMessage(err, response && response.errors);
 					if (msg) {
-						Q.handle(options.reject);
+						Q.handle(options.onFailure);
 						return Q.alert(msg);
 					}
 
@@ -157,15 +159,15 @@
 						Assets.Credits.buy({
 							missing: true,
 							amount: details.needCredits,
-							resolve: function () {
+							onSuccess: function () {
 								Assets.Credits.pay(options);
 							},
-							reject: options.reject
+							onFailure: options.onFailure
 						});
 						return;
 					}
 
-					Q.handle(options.resolve, null, response.slots);
+					Q.handle(options.onSuccess, null, response.slots);
 				}, {
 					method: 'post',
 					fields: {
@@ -173,7 +175,7 @@
 						currency: options.currency,
 						userId: options.userId,
 						toStream: options.toStream,
-						paymentDetails: options.paymentDetails
+						items: options.items
 					}
 				});
 			},
@@ -760,7 +762,7 @@
 				paymentRequest.show().then(function (result) {
 					var promise;
 					if (result.methodName === 'basic-card') {
-						promise = new Promise(function (resolve, reject) {
+						promise = new Q.Promise(function (resolve, reject) {
 							Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
 							Stripe.card.createToken({
 								number: result.details.cardNumber,
@@ -781,7 +783,7 @@
 							});
 						});
 					} else if (result.methodName === 'https://google.com/pay') {
-						promise = new Promise(function (resolve, reject) {
+						promise = new Q.Promise(function (resolve, reject) {
 							options.token = Q.getObject("details.paymentMethodData.tokenizationData", result);
 							return Assets.Payments.pay('stripe', options, function (err) {
 								if (err) {
@@ -791,7 +793,7 @@
 							});
 						});
 					}
-					return promise ? promise : Promise.reject({result: result, err: new Error('Unsupported method')});
+					return promise ? promise : Q.Promise.reject({result: result, err: new Error('Unsupported method')});
 				}).then(function (result) {
 					result.complete('success');
 					callback(null, result);
