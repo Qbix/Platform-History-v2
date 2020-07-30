@@ -11845,9 +11845,8 @@ Q.Pointer = {
 	 *   You will want to skip the mask if you want to allow scrolling, for instance.
 	 * @param {Q.Event} [event] Some mouse or touch event from the DOM
 	 * @param {Object} [extraInfo] Extra info to pass to onCancelClick
-	 * @param {Boolean} [msUntilStopCancelClick] Pass a number here to set
-	 *   Q.Pointer.canceledClick = false after this number of milliseconds.
-	 *   Usually you don't want to do this, because it might create race conditions.
+	 * @param {Boolean} [msUntilStopCancelClick=300] Pass a number here to change
+	 *   how many milliseconds until setting Q.Pointer.canceledClick = false .
 	 * @return {boolean}
 	 */
 	cancelClick: function (skipMask, event, extraInfo, msUntilStopCancelClick) {
@@ -11859,9 +11858,15 @@ Q.Pointer = {
 		if (!skipMask) {
 			Q.Masks.show('Q.click.mask');
 		}
+		if (msUntilStopCancelClick === undefined) {
+			msUntilStopCancelClick = 500;
+		}
+		++_cancelClick_counter;
 		if (msUntilStopCancelClick) {
 			setTimeout(function () {
-				Q.Pointer.canceledClick = false;
+				if (--_cancelClick_counter === 0) {
+					Q.Pointer.canceledClick = false;
+				}
 			}, msUntilStopCancelClick);
 		}
 	},
@@ -11985,6 +11990,7 @@ Q.Pointer = {
 	}
 };
 
+var _cancelClick_counter = 0;
 Q.Pointer.preventRubberBand.suspend = {};
 
 function _cancelClickBriefly() {
