@@ -29,8 +29,8 @@
 		"PaymentFor": "Payment for \"{{1}}\"",
 		"PaymentTo": "Payment to {{1}}",
 		"PaymentToUser": "Payment to {{userName}}",
-		"JoinPaidStream": "for joining \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-		"CreatedCommunity": "Created Community \"{{communityId}}\"",
+		"JoinedPaidStream": "for joining \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+		"CreatedCommunity": "for creating community \"{{communityId}}\"",
 		"LeftPaidStream": "for leaving \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
 		"BoughtCredits": "Bought {{amount}} credits",
 		"BuyAmountCredits": "Buy {{amount}} credits",
@@ -54,7 +54,7 @@
 		"PaymentFor": "Spent {{amount}} credits",
 		"PaymentTo": "Sent {{amount}} credits",
 		"PaymentToUser": "Sent {{amount}} credits",
-		"JoinPaidStream": {
+		"JoinedPaidStream": {
 			"+": "Earned {{amount}} credits",
 			"-": "Spent {{amount}} credits"
 		},

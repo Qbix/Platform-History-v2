@@ -517,7 +517,7 @@ class Assets_Credits extends Base_Assets_Credits
 			'toStreamName' => $toStreamName,
 			'fromPublisherId' => $fromPublisherId,
 			'fromStreamName' => $fromStreamName,
-			'reason' => 'JoinPaidStream'
+			'reason' => 'JoinedPaidStream'
 		))
 		->orderBy('insertedTime', false)
 		->limit(1)
@@ -546,8 +546,5 @@ class Assets_Credits extends Base_Assets_Credits
 
 		return false;
 	}
-	
-	const JOIN_PAID_STREAM = 'JoinPaidStream';
-	const PAYMENT_TO_USER = 'PaymentToUser';
 	
 };

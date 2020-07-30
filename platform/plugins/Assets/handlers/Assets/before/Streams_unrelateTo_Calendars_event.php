@@ -21,7 +21,7 @@ function Assets_before_Streams_unrelateTo_Calendars_event ($params) {
 		return true;
 	}
 
-	Assets_Credits::send($assetsCredits->credits, 'LeftPaidStream', $relatedTo->fromPublisherId, $relatedTo->toPublisherId, array(
+	Assets_Credits::send($assetsCredits->credits, Assets::LEFT_PAID_STREAM, $relatedTo->fromPublisherId, $relatedTo->toPublisherId, array(
 		'toPublisherId' => $relatedTo->toPublisherId,
 		'toStreamName' => $relatedTo->toStreamName,
 		'fromPublisherId' => $relatedTo->fromPublisherId,

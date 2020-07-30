@@ -30,7 +30,7 @@ function Assets_credits_post($params = array())
 	}
 
 	if ($toPublisherId && $toStreamName) {
-		Assets_Credits::spend($needCredits, Assets::JOIN_PAID_STREAM, $loggedUserId, compact(
+		Assets_Credits::spend($needCredits, Assets::JOINED_PAID_STREAM, $loggedUserId, compact(
 			"toPublisherId", "toStreamName", "items"
 		));
 	} elseif ($userId) {
