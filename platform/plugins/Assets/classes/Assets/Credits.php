@@ -66,7 +66,7 @@ class Assets_Credits extends Base_Assets_Credits
 			));
 
 			$amount = Q_Config::get('Assets', 'credits', 'amounts', 'Users/insertUser', self::DEFAULT_AMOUNT);
-			self::earn($amount, 'YouHaveCreditsToStart', $userId, array(
+			self::grant($amount, 'YouHaveCreditsToStart', $userId, array(
 				'communityId' => Users::communityId()
 			));
 		}
@@ -94,8 +94,7 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @method checkAmount
 	 * @static
 	 * @param {integer} $amount The amount of credits to spend.
-	 * @param {array} $paymentDetails Array of objects detailed payment. Which userId or stream payment for.
-	 *  look like: [{userId: ..., amount: ...}, {publisherId: ..., streamName: ..., amount: ...}, ...]
+	 * @param {array} [$more.paymentDetails] an array of items, each with "amount" key, and perhaps other data
 	 * @param {boolean} [$throwIfNotEqual=false]
 	 * @throws {Exception} If not equal
 	 */
@@ -103,7 +102,6 @@ class Assets_Credits extends Base_Assets_Credits
 		if (!is_array($paymentDetails)) {
 			return true;
 		}
-
 		$checkSum = 0;
 		foreach ($paymentDetails as $item) {
 			$checkSum += $item['amount'];
@@ -111,12 +109,13 @@ class Assets_Credits extends Base_Assets_Credits
 
 		if ($amount != $checkSum) {
 			if ($throwIfNotEqual) {
-				throw new Exception("amount not equal to checkSum");
+				throw new Q_Exception_WrongValue(array(
+					'field' => 'amount',
+					'range' => $checkSum
+				));
 			}
-
 			return false;
 		}
-
 		return true;
 	}
 	/**
@@ -125,14 +124,11 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @static
 	 * @param {integer} $amount The amount of credits to spend.
 	 * @param {string} $reason Identifies the reason for spending. Can't be null.
-	 * @param {string} [$userId=null] User which spend credits. Null = logged user.
-	 * @param {array} $more An array supplying more info, including
-	 * @param {string} [$more.fromPublisherId] The publisher of the stream user pay to
-	 * @param {string} [$more.fromStreamName] The name of the stream user pay to
-	 * @param {string} [$more.toPublisherId] The publisher of the stream user pay for
-	 * @param {string} [$more.toStreamName] The name of the stream user pay for
-	 * @param {array} [$more.paymentDetails] Array of objects detailed payment. Which userId or stream payment for.
-	 *  look like: [{userId: ..., amount: ...}, {publisherId: ..., streamName: ..., amount: ...}, ...]
+	 * @param {string} [$userId=null] User which is spends the credits. Defaults to logged-in user.
+	 * @param {array} [$more] An array supplying more info, including
+	 * @param {string} [$more.toPublisherId] The publisher of the valuable stream for which payment is being made
+	 * @param {string} [$more.toStreamName] The name of the valuable stream for which payment is being made
+	 * @param {array} [$more.paymentDetails] an array of items, each with "publisherId", "streamName" and "amount"
 	 * @throws {Users_Exception_NotLoggedIn} If user is not logged in
 	 */
 	static function spend($amount, $reason, $userId = null, $more = array())
@@ -155,7 +151,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$toStreamName = Q::ifset($more, "toStreamName", null);
 		$paymentDetails = Q::ifset($more, "paymentDetails", null);
 
-		// check amount consistent
+		// make sure the amount is consistent
 		self::checkAmount($amount, $paymentDetails, true);
 
 		// if user spend credits to stream, make it send credits to stream publisher
@@ -191,12 +187,8 @@ class Assets_Credits extends Base_Assets_Credits
 		$more['fromUserName'] = $assets_credits->getAttribute("fromUserName");
 		$more['toStreamTitle'] = $assets_credits->getAttribute("toStreamTitle");
 		$more['fromStreamTitle'] = $assets_credits->getAttribute("fromStreamTitle");
-		$more['toUserId'] = $assets_credits->toUserId;
-		$more['fromUserId'] = $assets_credits->fromUserId;
-		$more['fromPublisherId'] = $assets_credits->fromPublisherId;
-		$more['fromStreamName'] = $assets_credits->fromStreamName;
-		$more['toPublisherId'] = $assets_credits->toPublisherId;
-		$more['toStreamName'] = $assets_credits->toStreamName;
+		$more['toUserId'] = 	;
+		$more['paymentDetails'] = $paymentDetails;
 
 		$instructions_json = Q::json_encode(array_merge(
 			array(
@@ -218,18 +210,18 @@ class Assets_Credits extends Base_Assets_Credits
 		));
 	}
 	/**
-	 * Earn credits
+	 * Grant credits to a user
 	 * @method earn
 	 * @static
-	 * @param {integer} $amount The amount of credits to earn.
-	 * @param {string} [$userId=null] User which earn. Null = logged user.
-	 * @param {array} $more An array supplying more info, including
-	 * @param {string} $reason Identifies the reason for earn. Can't be null.
+	 * @param {integer} $amount The amount of credits to grant.
+	 * @param {string} $reason Identifies the reason for granting the credits. Can't be null.
+	 * @param {string} [$userId=null] User who is granted the credits. Null = logged user.
+	 * @param {array} [$more=array()] An array supplying more optional info, including
 	 * @param {string} [$more.publisherId] The publisher of the stream representing the purchase
 	 * @param {string} [$more.streamName] The name of the stream representing the purchase
 	 * @throws
 	 */
-	static function earn($amount, $reason, $userId = null, $more = array())
+	static function grant($amount, $reason, $userId = null, $more = array())
 	{
 		$amount = (int)$amount;
 		if ($amount <= 0) {
@@ -255,7 +247,7 @@ class Assets_Credits extends Base_Assets_Credits
 
 		self::createRow($amount, $reason, $userId, null, $more);
 
-		// Post that this user earned $amount credits by $reason
+		// Post that this user granted $amount credits by $reason
 		$text = Q_Text::get('Assets/content');
 		$instructions = array(
 			'app' => Q::app(),
@@ -265,11 +257,11 @@ class Assets_Credits extends Base_Assets_Credits
 		if ($reason == 'BoughtCredits') {
 			$type = 'Assets/credits/bought';
 		} else {
-			$type = 'Assets/credits/earned';
+			$type = 'Assets/credits/granted';
 			$instructions['reason'] = self::reasonToText($reason, $more);
 		}
 
-		$content = Q::ifset($text, 'messages', $type, "content", "Earned {{amount}} credits");
+		$content = Q::ifset($text, 'messages', $type, "content", "Granted {{amount}} credits");
 		$stream->post($userId, array(
 			'type' => $type,
 			'content' => Q::interpolate($content, compact('amount')),
@@ -286,7 +278,8 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @param {string} $toUserId The id of the user to whom you will send the credits
 	 * @param {string} $reason Identifies the reason for send. Can't be null.
 	 * @param {string} [$fromUserId=null] null = logged user
-	 * @param {array} $more An array supplying more info
+	 * @param {array} [$more] An array supplying more information
+	 * @param {array} [$more.paymentDetails] an array of items, each with "publisherId", "streamName" and "amount"
 	 */
 	static function send($amount, $reason, $toUserId, $fromUserId = null, $more = array())
 	{
@@ -318,7 +311,7 @@ class Assets_Credits extends Base_Assets_Credits
 
 		$paymentDetails = Q::ifset($more, "paymentDetails", null);
 
-		// check amount consistent
+		// make sure the amount is consistent
 		self::checkAmount($amount, $paymentDetails, true);
 
 		if (is_array($paymentDetails)) {
@@ -390,14 +383,13 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @static
 	 * @param {int} $amount Amount of credits. Required,
 	 * @param {string} $reason Identifies the reason for send. Required.
-	 * @param {string} $toUserId User id which get credits.
-	 * @param {string} $fromUserId User id which send credits.
-	 * @param {array} $more An array supplying more info, including
-	 * @param {string} [$more.toPublisherId] The publisher of the stream paid to
-	 * @param {string} [$more.toStreamName] The name of the stream paid to
-	 * @param {string} [$more.fromPublisherId] The publisher of the stream paid from
-	 * @param {string} [$more.fromStreamName] The name of the stream paid from
-	 *
+	 * @param {string} $toUserId User id who gets the credits.
+	 * @param {string} $fromUserId User id who sends the credits.
+	 * @param {array} [$more] An array supplying more optional info, including things like
+	 * @param {string} [$more.toPublisherId] The publisher of the valuable stream for which the payment is made
+	 * @param {string} [$more.toStreamName] The name of the stream valuable for which the payment is made
+	 * @param {string} [$more.fromPublisherId] The publisher of the value-receiving stream on whose behalf the payment is made
+	 * @param {string} [$more.fromStreamName] The name of the value-receiving stream on whose behalf the payment is made
 	 * @return {Assets_Credits} Assets_Credits row
 	 */
 	private static function createRow ($amount, $reason, $toUserId = null, $fromUserId = null, $more = array()) {
@@ -422,7 +414,6 @@ class Assets_Credits extends Base_Assets_Credits
 		unset($more['fromStreamName']);
 		unset($more['toPublisherId']);
 		unset($more['toStreamName']);
-		unset($more['paymentDetails']);
 
 		if ($toPublisherId && $toStreamName) {
 			$more['toStreamTitle'] = Streams::fetchOne($toPublisherId, $toPublisherId, $toStreamName)->title;
@@ -432,10 +423,9 @@ class Assets_Credits extends Base_Assets_Credits
 		}
 
 		if ($fromPublisherId && $fromStreamName) {
-			$more['fromStreamTitle'] = Streams::fetchOne($fromPublisherId, $fromPublisherId, $fromStreamName)->title;
+			$more['fromStreamTitle'] = Streams::fetchOne($fromPublisherId, $fromPublisherId, $fromStreamName, true)->title;
 		}
 
-		// add row to assets_credits
 		$assets_credits = new Assets_Credits();
 		$assets_credits->id = uniqid();
 		$assets_credits->fromUserId = $fromUserId;
@@ -471,7 +461,7 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @method reasonToText
 	 * @static
 	 * @param {string} $key json key to search in Assets/content/credits.
-	 * @param {array} $more additional data need to interpolate json with.
+	 * @param {array} $more additional data needed to interpolate json with.
 	 * @return {string}
 	 */
 	static function reasonToText($key, $more = array())

@@ -12,7 +12,7 @@
  * @extends Base_Assets_Earned
  */
 class Assets_Earned extends Base_Assets_Earned
-{	
+{
 	/**
 	 * Saves a row in the database indicating that the user earned a badge
 	 * @method badge

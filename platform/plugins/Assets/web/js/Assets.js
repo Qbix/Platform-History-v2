@@ -121,8 +121,7 @@
 			 *  @param {string} options.currency Currency ISO 4217 code (USD, EUR etc)
 			 *  @param {Streams_Stream} [options.toStream] Stream object for which to pay. If also can be object {publisherId: ..., streamName: ...}
 			 *  @param {Streams_Stream} [options.userId] User id where need to pass credits.
-			 *  @param {array} [options.paymentDetails] Array of objects detailed payment. Which userId or stream payment for.
-			 *  look like: [{userId: ..., amount: ...}, {publisherId: ..., streamName: ..., amount: ...}, ...]
+			 *  @param {Array} [options.paymentDetails] an array of items, each with "publisherId", "streamName" and "amount"
 			 *  @param {function} [options.resolve] Callback to run when payment done.
 			 *  @param {function} [options.reject] Callback to run when payment rejected.
 			 */
@@ -140,9 +139,8 @@
 					Q.each(options.paymentDetails, function (i, item) {
 						checkSum += item.amount;
 					});
-
 					if (parseFloat(options.amount) !== parseFloat(checkSum)) {
-						throw new Error("Assets.Credits.pay: amount not equal to checkSum");
+						throw new Q.Exception("Assets.Credits.pay: amount not equal to items total");
 					}
 				}
 

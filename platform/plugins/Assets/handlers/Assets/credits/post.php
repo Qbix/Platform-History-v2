@@ -30,9 +30,13 @@ function Assets_credits_post($params = array())
 	}
 
 	if ($toPublisherId && $toStreamName) {
-		Assets_Credits::spend($needCredits, 'JoinPaidStream', $loggedUserId, compact("toPublisherId", "toStreamName", "paymentDetails"));
+		Assets_Credits::spend($needCredits, 'JoinPaidStream', $loggedUserId, compact(
+			"toPublisherId", "toStreamName", "paymentDetails"
+		));
 	} elseif ($userId) {
-		Assets_Credits::send($needCredits,'PaymentToUser', $userId, $loggedUserId, compact("toPublisherId", "toStreamName", "paymentDetails"));
+		Assets_Credits::send($needCredits,'PaymentToUser', $userId, $loggedUserId, compact(
+			"toPublisherId", "toStreamName", "paymentDetails"
+		));
 	}
 
 	Q_response::setSlot('status', true);
