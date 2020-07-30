@@ -292,8 +292,13 @@ Q.Tool.define("Q/columns", function(options) {
 			state.container = tool.$('.Q_columns_container')[0];
 			$div.append($title, columnSlot, controlsSlot)
 				.data(dataKey_index, index)
-				.data(dataKey_scrollTop, Q.Pointer.scrollTop())
-				.appendTo(state.container);
+				.data(dataKey_scrollTop, Q.Pointer.scrollTop());
+			var $columns = $('.Q_columns_column', state.container);
+			if ($columns.length) {
+				$div.insertAfter($columns.last());
+			} else {
+				$div.appendTo($(state.container));
+			}
 			if (o.fullscreen) {
 				$(window).scrollTop(0);
 			}

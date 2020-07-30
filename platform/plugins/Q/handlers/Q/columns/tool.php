@@ -76,9 +76,9 @@ function Q_columns_tool($options)
 		if (isset($column['html'])) {
 			$html = $column['html'];
 			$columns[] = <<<EOT
-	<div class="Q_columns_column $columnClass" $attrs1>
-		$html
-	</div>
+<div class="Q_columns_column $columnClass" $attrs1>
+	$html
+</div>
 EOT;
 		} else {
 			$titleHtml = Q::ifset($column, 'title', '[title]');
@@ -109,15 +109,15 @@ EOT;
 EOT;
 			}
 			$columns[] = <<<EOT
-	<div class="Q_columns_column $classes" $attrs1 $attrs2>
-		$titleElement
-		<div class="Q_column_slot">$columnHtml</div>
-		<div class="Q_controls_slot">$controlsHtml</div>
-	</div>
+<div class="Q_columns_column $classes" $attrs1 $attrs2>
+	$titleElement
+	<div class="Q_column_slot">$columnHtml</div>
+	<div class="Q_controls_slot">$controlsHtml</div>
+</div>
 EOT;
 		}
 		++$i;
 	}
-	$result .= "\n" . implode("\n", $columns) . "\n</div>";
+	$result .= implode("", $columns) . "</div>";
 	return $result;
 }
