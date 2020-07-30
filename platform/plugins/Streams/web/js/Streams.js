@@ -4901,18 +4901,18 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 		register_form.append($('<input type="hidden" name="app[platform]" value="facebook" />'));
 	}
 	if (json.emailExists || json.mobileExists) {
-		var p = $('<p id="Streams_login_identifierExists" />')
+		var $p = $('<p id="Streams_login_identifierExists" />')
 			.html(json.emailExists ? Q.text.Users.login.emailExists : Q.text.Users.login.mobileExists);
-		$('a', p).click(function () {
+		$('a', $p).click(function () {
 			$(this).addClass('Q_working');
 			$.post(Q.ajaxExtend(Q.action("Users/resend"), 'data'), 'identifier='+encodeURIComponent(identifier), function () {
 				overlay.close();
 			});
 			return false;
 		});
-		register_form.prepend(p);
+		register_form.prepend($p);
 		if (Q.text.Streams.login.newUser) {
-			$formContent.prepend($('<div />').html(Q.text.Streams.login.newUser));
+			$p.append($('<div />').html(Q.text.Streams.login.newUser));
 		}
 	}
 	return register_form;
