@@ -33,10 +33,6 @@
 	visibility: hidden;
 	-webkit-box-shadow: black 0 0 4px;
 	-moz-box-shadow: black 0 0 4px;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-o-user-select: none;
 }
 .Q_notMobile .Q_columns_column:not(:last-of-type) {
 	margin-right: var(--column-margin);
@@ -51,6 +47,7 @@
     border-bottom: 1px solid #aaa;
 	overflow: hidden;
 	min-height: 50px;
+	user-select: none;
 }
 
 html.Q_ios.Q_standalone .Q_columns_title {
