@@ -49,6 +49,7 @@
 	background: #f8f8f8;
     border-bottom: 1px solid #aaa;
 	overflow: hidden;
+	min-height: 50px;
 }
 
 html.Q_ios.Q_standalone .Q_columns_title {
@@ -76,6 +77,11 @@ html.Q_ios.Q_standalone .Q_columns_title {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	font-size: 25px;
+	line-height: 40px;
+    padding: 5px;
+    box-sizing: border-box;
+	margin: 0;
 }
 
 .Q_columns_title_container {

@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Uzaicinājums akceptēts {{1}}",
-        "YouHaveCreditsToStart": "Lai sāktu, jums ir {{1}} kredīti"
+        "YouHaveCreditsToStart": "Lai sāktu, jums ir {{1}} kredīti",
+        "PaymentFor": "Maksājums par {{1}}",
+        "PaymentTo": "Maksājums adresātam: {{1}}",
+        "PaymentToUser": "Maksājums adresātam: {{userName}}",
+        "JoinedPaidStream": "par pievienošanos &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "kopienas &quot;{{communityId}}&quot; izveidošanai",
+        "LeftPaidStream": "par aiziešanu no “ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> ”",
+        "BoughtCredits": "Nopirka {{amount}} kredītus",
+        "BuyAmountCredits": "Iegādājieties {{amount}} kredītus",
+        "MissingCredits": "Trūkst kredītu",
+        "YouMissingCredits": "Jums trūkst {{amount}} kredītu",
+        "BuyCredits": "Pērciet kredītus",
+        "Buy": "Pērciet",
+        "Credits": "Kredīti",
+        "ErrorInvalidAmount": "Summa nav derīga",
+        "ErrorInvalidCurrency": "Diemžēl pagaidām mēs neatbalstām valūtu {{currency}}"
     },
     "history": {
         "Date": "Datums",
@@ -27,7 +42,22 @@
         "To": "uz",
         "From": "no",
         "HistoryEmpty": "Jums vēl nav datu",
-        "SeeHistory": "Skatīt {{1}} maksājumu vēsturi"
+        "SeeHistory": "Skatīt {{1}} maksājumu vēsturi",
+        "PaymentFor": "Izlietoti {{amount}} kredīti",
+        "PaymentTo": "Nosūtītie {{amount}} kredīti",
+        "PaymentToUser": "Nosūtītie {{amount}} kredīti",
+        "JoinedPaidStream": {
+            "+": "Nopelnīti {{amount}} kredīti",
+            "-": "Izlietoti {{amount}} kredīti"
+        },
+        "LeftPaidStream": {
+            "+": "Saņemti {{amount}} kredīti",
+            "-": "Nosūtītie {{amount}} kredīti"
+        },
+        "CreatedCommunity": "Izlietoti {{amount}} kredīti",
+        "BoughtCredits": "Nopirka {{amount}} kredītus",
+        "InviteAcceptedBy": "Nopelnīti {{amount}} kredīti",
+        "YouHaveCreditsToStart": "Nopelnīti {{amount}} kredīti"
     },
     "subscriptions": {
         "infoTitle": "Iestatiet maksājumu informāciju",
@@ -48,7 +78,8 @@
             "message": "Vai piekrītat maksāt {{symbol}} {{amount}}?",
             "ok": "labi",
             "cancel": "Atcelt"
-        }
+        },
+        "BuyAmountCredits": "Iegādājieties {{amount}} kredītus"
     },
     "types": {
         "Assets\/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets\/credits\/received": {
             "content": "Saņemti {{amount}} kredīti"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Nopirka {{amount}} kredītus"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Paldies par jūsu maksājumu par {{description}}",
         "HavePaid": "Sveiki, {{1}}, tas ir tikai ātrs apstiprinājums tam, ka esat veiksmīgi samaksājis {{2}} {{3}} par {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Jauns pakalpojums",
+            "TitlePlaceholder": "Pakalpojuma nosaukums",
+            "PricePlaceholder": "Iestatiet cenu",
+            "LinkPlaceholder": "iestatīt papildu informācijas saiti",
+            "DescriptionPlaceholder": "Pakalpojuma apraksts",
+            "SaveService": "Saglabāt pakalpojumu"
+        },
+        "ManageServiceTemplates": "Pārvaldiet pakalpojumu veidnes",
+        "ManageServices": "Pārvaldīt pakalpojumus",
+        "FreeEvent": "Bezmaksas pasākums",
+        "OptionalContribution": "Neobligāts ieguldījums",
+        "RequiredPayment": "Nepieciešamais maksājums",
+        "AreYouSureDelete": "Vai tiešām vēlaties dzēst šo pakalpojumu?",
+        "AmountServicesRelated": "Ar šo pakalpojumu ir {{amount}} iespējas. Viņi arī tiks noņemti."
     }
 }

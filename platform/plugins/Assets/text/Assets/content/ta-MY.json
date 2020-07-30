@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "ஏற்றுக்கொள்ளப்பட்ட அழைப்பை {{999} by",
-        "YouHaveCreditsToStart": "தொடங்க உங்களுக்கு {{1}} வரவு உள்ளது"
+        "YouHaveCreditsToStart": "தொடங்க உங்களுக்கு {{1}} வரவு உள்ளது",
+        "PaymentFor": "&quot;{{999} for&quot; க்கான கட்டணம்",
+        "PaymentTo": "{{999} to க்கு கட்டணம்",
+        "PaymentToUser": "{{999} to க்கு கட்டணம்",
+        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{1001} join</a> &quot; இல் சேர",
+        "CreatedCommunity": "சமூகத்தை உருவாக்க &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot; ஐ விட்டு வெளியேறியதற்காக",
+        "BoughtCredits": "{{amount}} வரவுகளை வாங்கியது",
+        "BuyAmountCredits": "{{amount}} வரவுகளை வாங்கவும்",
+        "MissingCredits": "வரவுகளை காணவில்லை",
+        "YouMissingCredits": "நீங்கள் {{amount}} வரவுகளைக் காணவில்லை",
+        "BuyCredits": "வரவுகளை வாங்கவும்",
+        "Buy": "வாங்க",
+        "Credits": "வரவு",
+        "ErrorInvalidAmount": "தொகை தவறானது",
+        "ErrorInvalidCurrency": "துரதிர்ஷ்டவசமாக நாணயத்தை நாங்கள் இன்னும் ஆதரிக்கவில்லை {99 999}}"
     },
     "history": {
         "Date": "தேதி",
@@ -27,7 +42,22 @@
         "To": "க்கு",
         "From": "இருந்து",
         "HistoryEmpty": "உங்களிடம் இன்னும் தரவு இல்லை",
-        "SeeHistory": "Payment 99 999 for for க்கான கட்டண வரலாற்றைக் காண்க"
+        "SeeHistory": "Payment 99 999 for for க்கான கட்டண வரலாற்றைக் காண்க",
+        "PaymentFor": "{{amount}} வரவுகளை செலவிட்டார்",
+        "PaymentTo": "{{amount}} வரவுகளை அனுப்பியது",
+        "PaymentToUser": "{{amount}} வரவுகளை அனுப்பியது",
+        "JoinedPaidStream": {
+            "+": "{{amount}} வரவுகளை சம்பாதித்தார்",
+            "-": "{{amount}} வரவுகளை செலவிட்டார்"
+        },
+        "LeftPaidStream": {
+            "+": "{{amount}} வரவுகளைப் பெற்றது",
+            "-": "{{amount}} வரவுகளை அனுப்பியது"
+        },
+        "CreatedCommunity": "{{amount}} வரவுகளை செலவிட்டார்",
+        "BoughtCredits": "{{amount}} வரவுகளை வாங்கியது",
+        "InviteAcceptedBy": "{{amount}} வரவுகளை சம்பாதித்தார்",
+        "YouHaveCreditsToStart": "{{amount}} வரவுகளை சம்பாதித்தார்"
     },
     "subscriptions": {
         "infoTitle": "கட்டணத் தகவலை அமைக்கவும்",
@@ -48,7 +78,8 @@
             "message": "{{symbol}} {{1000} pay செலுத்த ஒப்புக்கொள்கிறீர்களா?",
             "ok": "சரி",
             "cancel": "ரத்து"
-        }
+        },
+        "BuyAmountCredits": "{{amount}} வரவுகளை வாங்கவும்"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "{{amount}} வரவுகளைப் பெற்றது"
+        },
+        "Assets/credits/bought": {
+            "content": "{{amount}} வரவுகளை வாங்கியது"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "&quot;{{999} for&quot; க்கு நீங்கள் செலுத்தியதற்கு நன்றி",
         "HavePaid": "ஹே {99 999}}, இது {{1002} for க்கு {{2}} க்கு {{3}} க்கு வெற்றிகரமாக செலுத்தியுள்ளீர்கள் என்பதற்கான விரைவான உறுதிப்படுத்தல் மட்டுமே."
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "புதிய சேவை",
+            "TitlePlaceholder": "சேவை தலைப்பு",
+            "PricePlaceholder": "விலையை நிர்ணயிக்கவும்",
+            "LinkPlaceholder": "கூடுதல் தகவல் இணைப்பை அமைக்கவும்",
+            "DescriptionPlaceholder": "சேவை விளக்கம்",
+            "SaveService": "சேவையைச் சேமிக்கவும்"
+        },
+        "ManageServiceTemplates": "சேவை வார்ப்புருக்களை நிர்வகிக்கவும்",
+        "ManageServices": "சேவைகளை நிர்வகிக்கவும்",
+        "FreeEvent": "இலவச நிகழ்வு",
+        "OptionalContribution": "விருப்ப பங்களிப்பு",
+        "RequiredPayment": "தேவையான கட்டணம்",
+        "AreYouSureDelete": "இந்த சேவையை நீக்க விரும்புகிறீர்களா?",
+        "AmountServicesRelated": "இந்த சேவை தொடர்பான {99 999}} கிடைக்கும் தன்மைகள் உள்ளன. அவை அகற்றப்படும்."
     }
 }

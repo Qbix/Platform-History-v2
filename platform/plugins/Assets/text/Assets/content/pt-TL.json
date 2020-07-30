@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Convite aceito até {{1}}",
-        "YouHaveCreditsToStart": "Você tem {{1}} créditos para começar"
+        "YouHaveCreditsToStart": "Você tem {{1}} créditos para começar",
+        "PaymentFor": "Pagamento por &quot;{{1}}&quot;",
+        "PaymentTo": "Pagamento para {{1}}",
+        "PaymentToUser": "Pagamento para {{userName}}",
+        "JoinedPaidStream": "por ingressar em &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "CreatedCommunity": "para criar a comunidade &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "por deixar &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "BoughtCredits": "Comprou {{amount}} créditos",
+        "BuyAmountCredits": "Compre {{amount}} créditos",
+        "MissingCredits": "Créditos ausentes",
+        "YouMissingCredits": "Faltam {{amount}} créditos",
+        "BuyCredits": "Compre créditos",
+        "Buy": "Comprar",
+        "Credits": "Créditos",
+        "ErrorInvalidAmount": "Valor inválido",
+        "ErrorInvalidCurrency": "Infelizmente ainda não suportamos a moeda {{currency}}"
     },
     "history": {
         "Date": "Encontro",
@@ -27,7 +42,22 @@
         "To": "para",
         "From": "de",
         "HistoryEmpty": "Você ainda não tem dados",
-        "SeeHistory": "Veja o histórico de pagamentos para {{1}}"
+        "SeeHistory": "Veja o histórico de pagamentos para {{1}}",
+        "PaymentFor": "{{amount}} créditos gastos",
+        "PaymentTo": "{{amount}} créditos enviados",
+        "PaymentToUser": "{{amount}} créditos enviados",
+        "JoinedPaidStream": {
+            "+": "Ganhou {{amount}} créditos",
+            "-": "{{amount}} créditos gastos"
+        },
+        "LeftPaidStream": {
+            "+": "{{amount}} créditos recebidos",
+            "-": "{{amount}} créditos enviados"
+        },
+        "CreatedCommunity": "{{amount}} créditos gastos",
+        "BoughtCredits": "Comprou {{amount}} créditos",
+        "InviteAcceptedBy": "Ganhou {{amount}} créditos",
+        "YouHaveCreditsToStart": "Ganhou {{amount}} créditos"
     },
     "subscriptions": {
         "infoTitle": "Definir informações de pagamento",
@@ -48,7 +78,8 @@
             "message": "Você concorda em pagar {{symbol}} {{amount}}?",
             "ok": "Está bem",
             "cancel": "Cancelar"
-        }
+        },
+        "BuyAmountCredits": "Compre {{amount}} créditos"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "Recebeu {{amount}} créditos"
+        },
+        "Assets/credits/bought": {
+            "content": "Comprou {{amount}} créditos"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Obrigado pelo seu pagamento pelo &quot;{{description}}&quot;",
         "HavePaid": "Olá, {{1}}, esta é apenas uma confirmação rápida de que você pagou {{2}} a {{3}} por {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Novo serviço",
+            "TitlePlaceholder": "Título do serviço",
+            "PricePlaceholder": "Definir preço",
+            "LinkPlaceholder": "definir link de informações adicionais",
+            "DescriptionPlaceholder": "Descrição do Serviço",
+            "SaveService": "Salvar serviço"
+        },
+        "ManageServiceTemplates": "Gerenciar modelos de serviço",
+        "ManageServices": "Gerenciar serviços",
+        "FreeEvent": "Evento grátis",
+        "OptionalContribution": "Contribuição opcional",
+        "RequiredPayment": "Pagamento obrigatório",
+        "AreYouSureDelete": "Tem certeza de que deseja excluir este serviço?",
+        "AmountServicesRelated": "Existem {{amount}} disponibilidades relacionadas a este serviço. Eles também serão removidos."
     }
 }

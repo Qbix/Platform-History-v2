@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Pozvání přijato {{1}}",
-        "YouHaveCreditsToStart": "Máte {{1}} kredity ke spuštění"
+        "YouHaveCreditsToStart": "Máte {{1}} kredity ke spuštění",
+        "PaymentFor": "Platba za &quot;{{1}}&quot;",
+        "PaymentTo": "Platba do {{1}}",
+        "PaymentToUser": "Platba do {{userName}}",
+        "JoinedPaidStream": "za připojení &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "CreatedCommunity": "pro vytvoření komunity &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "za odchod &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "BoughtCredits": "Koupeno {{amount}} kreditů",
+        "BuyAmountCredits": "Koupit {{amount}} kreditů",
+        "MissingCredits": "Chybějící úvěry",
+        "YouMissingCredits": "Chybí vám {{amount}} kreditů",
+        "BuyCredits": "Koupit kredity",
+        "Buy": "Koupit",
+        "Credits": "Úvěry",
+        "ErrorInvalidAmount": "Částka je neplatná",
+        "ErrorInvalidCurrency": "Bohužel zatím nepodporujeme měnu {{currency}}"
     },
     "history": {
         "Date": "datum",
@@ -27,7 +42,22 @@
         "To": "na",
         "From": "z",
         "HistoryEmpty": "Zatím nemáte žádná data",
-        "SeeHistory": "Zobrazit historii plateb pro {{1}}"
+        "SeeHistory": "Zobrazit historii plateb pro {{1}}",
+        "PaymentFor": "Utracené {{amount}} kredity",
+        "PaymentTo": "Odesláno {{amount}} kreditů",
+        "PaymentToUser": "Odesláno {{amount}} kreditů",
+        "JoinedPaidStream": {
+            "+": "Získané kredity {{amount}}",
+            "-": "Utracené {{amount}} kredity"
+        },
+        "LeftPaidStream": {
+            "+": "Obdrženo {{amount}} kreditů",
+            "-": "Odesláno {{amount}} kreditů"
+        },
+        "CreatedCommunity": "Utracené {{amount}} kredity",
+        "BoughtCredits": "Koupeno {{amount}} kreditů",
+        "InviteAcceptedBy": "Získané kredity {{amount}}",
+        "YouHaveCreditsToStart": "Získané kredity {{amount}}"
     },
     "subscriptions": {
         "infoTitle": "Nastavte informace o platbě",
@@ -48,7 +78,8 @@
             "message": "Souhlasíte s tím, že zaplatíte {{symbol}} {{amount}}?",
             "ok": "OK",
             "cancel": "zrušení"
-        }
+        },
+        "BuyAmountCredits": "Koupit {{amount}} kreditů"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "Obdrženo {{amount}} kreditů"
+        },
+        "Assets/credits/bought": {
+            "content": "Koupeno {{amount}} kreditů"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Děkujeme za vaši platbu za „{{description}}“",
         "HavePaid": "Ahoj {{1}}, je to jen rychlé potvrzení, že jste úspěšně zaplatili {{2}} do {{3}} za {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Nová služba",
+            "TitlePlaceholder": "Název služby",
+            "PricePlaceholder": "Nastavit cenu",
+            "LinkPlaceholder": "nastavit další informační odkaz",
+            "DescriptionPlaceholder": "Popis služby",
+            "SaveService": "Uložit službu"
+        },
+        "ManageServiceTemplates": "Správa šablon služeb",
+        "ManageServices": "Správa služeb",
+        "FreeEvent": "Zdarma akce",
+        "OptionalContribution": "Nepovinný příspěvek",
+        "RequiredPayment": "Požadovaná platba",
+        "AreYouSureDelete": "Opravdu chcete tuto službu smazat?",
+        "AmountServicesRelated": "S touto službou souvisí {{amount}} možnosti. Budou také odstraněny."
     }
 }

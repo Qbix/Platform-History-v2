@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Поканата прифатена од {{1}}",
-        "YouHaveCreditsToStart": "Имате {999}} кредити за да започнете"
+        "YouHaveCreditsToStart": "Имате {999}} кредити за да започнете",
+        "PaymentFor": "Плаќање за „99 999}}“",
+        "PaymentTo": "Плаќање до 99 999}",
+        "PaymentToUser": "Плаќање до 99 999}",
+        "JoinedPaidStream": "за пристапување во „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>1001}}<\/a> “",
+        "CreatedCommunity": "за создавање заедница „{{communityId}}“",
+        "LeftPaidStream": "за напуштање на „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>1001}}<\/a> “",
+        "BoughtCredits": "Купи кредити {999",
+        "BuyAmountCredits": "Купете кредити од 99 999",
+        "MissingCredits": "Недостасуваат кредити",
+        "YouMissingCredits": "Ви недостасуваат кредити од 99 999",
+        "BuyCredits": "Купете кредити",
+        "Buy": "Купи",
+        "Credits": "Кредити",
+        "ErrorInvalidAmount": "Износот е невалиден",
+        "ErrorInvalidCurrency": "За жал, сè уште не поддржуваме валута {999"
     },
     "history": {
         "Date": "Датум",
@@ -27,7 +42,22 @@
         "To": "до",
         "From": "од",
         "HistoryEmpty": "Сè уште немате податоци",
-        "SeeHistory": "Погледнете ја историјата на плаќање за 99 999}}"
+        "SeeHistory": "Погледнете ја историјата на плаќање за 99 999}}",
+        "PaymentFor": "Потрошени кредити {999}",
+        "PaymentTo": "Испрати {999 кредити",
+        "PaymentToUser": "Испрати {999 кредити",
+        "JoinedPaidStream": {
+            "+": "Заработени {99 999} кредити",
+            "-": "Потрошени кредити {999}"
+        },
+        "LeftPaidStream": {
+            "+": "Доби кредити од 99 999 99",
+            "-": "Испрати {999 кредити"
+        },
+        "CreatedCommunity": "Потрошени кредити {999}",
+        "BoughtCredits": "Купи кредити {999",
+        "InviteAcceptedBy": "Заработени {99 999} кредити",
+        "YouHaveCreditsToStart": "Заработени {99 999} кредити"
     },
     "subscriptions": {
         "infoTitle": "Поставете информации за плаќање",
@@ -48,7 +78,8 @@
             "message": "Дали се согласувате да платите 999 фунти {} {{1000?",
             "ok": "добро",
             "cancel": "Откажи"
-        }
+        },
+        "BuyAmountCredits": "Купете кредити од 99 999"
     },
     "types": {
         "Assets\/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets\/credits\/received": {
             "content": "Доби кредити од 99 999 99"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Купи кредити {999"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Ви благодариме за исплатата за „{999}}“",
         "HavePaid": "Еј {999} this, ова е само брза потврда дека успешно плативте {{1000} до 1 1001} за 2 1002"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Нова услуга",
+            "TitlePlaceholder": "Наслов на услугата",
+            "PricePlaceholder": "Поставете цена",
+            "LinkPlaceholder": "поставете дополнителна информативна врска",
+            "DescriptionPlaceholder": "Опис на услугата",
+            "SaveService": "Зачувај услуга"
+        },
+        "ManageServiceTemplates": "Управувајте со шаблони за услуги",
+        "ManageServices": "Управувајте со услугите",
+        "FreeEvent": "Бесплатни настан",
+        "OptionalContribution": "Факултативен придонес",
+        "RequiredPayment": "Задолжително плаќање",
+        "AreYouSureDelete": "Дали сте сигурни дека сакате да ја избришете оваа услуга?",
+        "AmountServicesRelated": "Постојат достапности на оваа услуга од 999 фунти. Тие исто така ќе бидат отстранети."
     }
 }

@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "მოიწვიეთ მიღებული {{1}}",
-        "YouHaveCreditsToStart": "თქვენ გაქვთ {{1}} კრედიტების დაწყება"
+        "YouHaveCreditsToStart": "თქვენ გაქვთ {{1}} კრედიტების დაწყება",
+        "PaymentFor": "გადახდა &quot;{999}}&quot;",
+        "PaymentTo": "გადახდა 99 999}",
+        "PaymentToUser": "გადახდა 99 999}",
+        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>შესვლისთვის<\/a>",
+        "CreatedCommunity": "საზოგადოების შექმნისათვის &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; დატოვებისათვის",
+        "BoughtCredits": "იყიდა 99 999}} კრედიტი",
+        "BuyAmountCredits": "შეიძინეთ 99 999}} კრედიტი",
+        "MissingCredits": "კრედიტები დაკარგული",
+        "YouMissingCredits": "თქვენ დაკარგული {999}} კრედიტი გაქვთ",
+        "BuyCredits": "შეიძინეთ კრედიტი",
+        "Buy": "იყიდეთ",
+        "Credits": "კრედიტები",
+        "ErrorInvalidAmount": "თანხა არასწორია",
+        "ErrorInvalidCurrency": "სამწუხაროდ, ჩვენ ჯერ არ ვუჭერთ მხარს 999 {currency ვალუტას"
     },
     "history": {
         "Date": "თარიღი",
@@ -27,7 +42,22 @@
         "To": "რომ",
         "From": "დან",
         "HistoryEmpty": "თქვენ ჯერ არ გაქვთ მონაცემები",
-        "SeeHistory": "იხილეთ გადახდის ისტორია 999 {} }– სთვის"
+        "SeeHistory": "იხილეთ გადახდის ისტორია 999 {} }– სთვის",
+        "PaymentFor": "დახარჯული {999}} კრედიტი",
+        "PaymentTo": "გაგზავნილი {999}} კრედიტი",
+        "PaymentToUser": "გაგზავნილი {999}} კრედიტი",
+        "JoinedPaidStream": {
+            "+": "იშოვა {999}} კრედიტი",
+            "-": "დახარჯული {999}} კრედიტი"
+        },
+        "LeftPaidStream": {
+            "+": "მიიღო 99 999}} კრედიტი",
+            "-": "გაგზავნილი {999}} კრედიტი"
+        },
+        "CreatedCommunity": "დახარჯული {999}} კრედიტი",
+        "BoughtCredits": "იყიდა 99 999}} კრედიტი",
+        "InviteAcceptedBy": "იშოვა {999}} კრედიტი",
+        "YouHaveCreditsToStart": "იშოვა {999}} კრედიტი"
     },
     "subscriptions": {
         "infoTitle": "დააყენეთ გადახდის ინფორმაცია",
@@ -48,7 +78,8 @@
             "message": "თანახმა ხართ გადაიხადოთ 999 {}}} {} 1000}}?",
             "ok": "კარგი",
             "cancel": "გაუქმება"
-        }
+        },
+        "BuyAmountCredits": "შეიძინეთ 99 999}} კრედიტი"
     },
     "types": {
         "Assets\/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets\/credits\/received": {
             "content": "მიიღო 99 999}} კრედიტი"
+        },
+        "Assets\/credits\/bought": {
+            "content": "იყიდა 99 999}} კრედიტი"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "გმადლობთ გადასახადისთვის &quot;{{999} for&quot;",
         "HavePaid": "999} Hey, ეს მხოლოდ სწრაფი დადასტურებაა იმისა, რომ თქვენ წარმატებით გადაიხადეთ {{2}} {1001}} {2 1002}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "ახალი სერვისი",
+            "TitlePlaceholder": "სამსახურის სათაური",
+            "PricePlaceholder": "დაწესებული ფასი",
+            "LinkPlaceholder": "დააყენეთ დამატებითი ინფორმაცია ბმული",
+            "DescriptionPlaceholder": "მომსახურების აღწერა",
+            "SaveService": "დაზოგეთ მომსახურება"
+        },
+        "ManageServiceTemplates": "მართვის შაბლონების მართვა",
+        "ManageServices": "სერვისების მართვა",
+        "FreeEvent": "უფასო ღონისძიება",
+        "OptionalContribution": "არჩევითი წვლილი",
+        "RequiredPayment": "საჭირო გადახდა",
+        "AreYouSureDelete": "დარწმუნებული ხართ, რომ გსურთ ამ სერვისის წაშლა?",
+        "AmountServicesRelated": "ამ მომსახურებასთან დაკავშირებული 999 {}} შესაძლებლობები არსებობს. ისინი ასევე მოიხსნება."
     }
 }

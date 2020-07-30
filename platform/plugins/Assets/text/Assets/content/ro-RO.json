@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Invitație acceptată de {{1}}",
-        "YouHaveCreditsToStart": "Aveți la dispoziție {{1}} credite pentru a începe"
+        "YouHaveCreditsToStart": "Aveți la dispoziție {{1}} credite pentru a începe",
+        "PaymentFor": "Plata pentru &quot;{{1}}&quot;",
+        "PaymentTo": "Plata către {{1}}",
+        "PaymentToUser": "Plata către {{userName}}",
+        "JoinedPaidStream": "pentru înscrierea la &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "CreatedCommunity": "pentru crearea comunității &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "pentru că a părăsit „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> ”",
+        "BoughtCredits": "Cumpărate {{amount}} credite",
+        "BuyAmountCredits": "Cumpărați {{amount}} credite",
+        "MissingCredits": "Credite lipsă",
+        "YouMissingCredits": "Vă lipsesc {{amount}} credite",
+        "BuyCredits": "Cumpără credite",
+        "Buy": "Cumpără",
+        "Credits": "credite",
+        "ErrorInvalidAmount": "Suma nevalidă",
+        "ErrorInvalidCurrency": "Din păcate, nu acceptăm încă moneda {{currency}}"
     },
     "history": {
         "Date": "Data",
@@ -27,7 +42,22 @@
         "To": "la",
         "From": "din",
         "HistoryEmpty": "Încă nu aveți date",
-        "SeeHistory": "Consultați istoricul plăților pentru {{1}}"
+        "SeeHistory": "Consultați istoricul plăților pentru {{1}}",
+        "PaymentFor": "Au cheltuit {{amount}} credite",
+        "PaymentTo": "Trimise {{amount}} credite",
+        "PaymentToUser": "Trimise {{amount}} credite",
+        "JoinedPaidStream": {
+            "+": "Câștigat {{amount}} credite",
+            "-": "Au cheltuit {{amount}} credite"
+        },
+        "LeftPaidStream": {
+            "+": "A primit {{amount}} credite",
+            "-": "Trimise {{amount}} credite"
+        },
+        "CreatedCommunity": "Au cheltuit {{amount}} credite",
+        "BoughtCredits": "Cumpărate {{amount}} credite",
+        "InviteAcceptedBy": "Câștigat {{amount}} credite",
+        "YouHaveCreditsToStart": "Câștigat {{amount}} credite"
     },
     "subscriptions": {
         "infoTitle": "Setați informații de plată",
@@ -48,7 +78,8 @@
             "message": "Sunteți de acord să plătiți {{symbol}} {{amount}}?",
             "ok": "O.K",
             "cancel": "Anulare"
-        }
+        },
+        "BuyAmountCredits": "Cumpărați {{amount}} credite"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "A primit {{amount}} credite"
+        },
+        "Assets/credits/bought": {
+            "content": "Cumpărate {{amount}} credite"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Vă mulțumim pentru plata pentru &quot;{{description}}&quot;",
         "HavePaid": "Hei {{1}}, aceasta este doar o confirmare rapidă că ai plătit cu succes {{2}} la {{3}} pentru {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Serviciu nou",
+            "TitlePlaceholder": "Titlul serviciului",
+            "PricePlaceholder": "Preț stabilit",
+            "LinkPlaceholder": "setați linkul de informații suplimentare",
+            "DescriptionPlaceholder": "Descrierea serviciului",
+            "SaveService": "Salvare serviciu"
+        },
+        "ManageServiceTemplates": "Gestionați șabloanele de servicii",
+        "ManageServices": "Gestionarea serviciilor",
+        "FreeEvent": "Eveniment gratuit",
+        "OptionalContribution": "Contribuție opțională",
+        "RequiredPayment": "Plata obligatorie",
+        "AreYouSureDelete": "Sigur doriți să ștergeți acest serviciu?",
+        "AmountServicesRelated": "Există {{amount}} disponibilități legate de acest serviciu. Acestea sunt, de asemenea, vor fi eliminate."
     }
 }

@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Приглашение принято {{1}}",
-        "YouHaveCreditsToStart": "У вас есть {{1}} кредитов для начала"
+        "YouHaveCreditsToStart": "У вас есть {{1}} кредитов для начала",
+        "PaymentFor": "Оплата за &quot;{{1}}&quot;",
+        "PaymentTo": "Платеж {{1}}",
+        "PaymentToUser": "Платеж {{userName}}",
+        "JoinedPaidStream": "за вступление в &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "CreatedCommunity": "для создания сообщества &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "за уход &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "BoughtCredits": "Куплено {{amount}} кредитов",
+        "BuyAmountCredits": "Купить {{amount}} кредитов",
+        "MissingCredits": "Недостающие кредиты",
+        "YouMissingCredits": "Вам не хватает {{amount}} кредитов",
+        "BuyCredits": "Купить кредиты",
+        "Buy": "купить",
+        "Credits": "кредиты",
+        "ErrorInvalidAmount": "Неверная сумма",
+        "ErrorInvalidCurrency": "К сожалению, мы пока не поддерживаем валюту {{currency}}"
     },
     "history": {
         "Date": "Дата",
@@ -27,7 +42,22 @@
         "To": "в",
         "From": "от",
         "HistoryEmpty": "У вас еще нет данных",
-        "SeeHistory": "Просмотреть историю платежей за {{1}}"
+        "SeeHistory": "Просмотреть историю платежей за {{1}}",
+        "PaymentFor": "Потрачено {{amount}} кредитов",
+        "PaymentTo": "Отправлено {{amount}} кредитов",
+        "PaymentToUser": "Отправлено {{amount}} кредитов",
+        "JoinedPaidStream": {
+            "+": "Заработанные {{amount}} кредиты",
+            "-": "Потрачено {{amount}} кредитов"
+        },
+        "LeftPaidStream": {
+            "+": "Получено {{amount}} кредитов",
+            "-": "Отправлено {{amount}} кредитов"
+        },
+        "CreatedCommunity": "Потрачено {{amount}} кредитов",
+        "BoughtCredits": "Куплено {{amount}} кредитов",
+        "InviteAcceptedBy": "Заработанные {{amount}} кредиты",
+        "YouHaveCreditsToStart": "Заработанные {{amount}} кредиты"
     },
     "subscriptions": {
         "infoTitle": "Установить информацию об оплате",
@@ -48,7 +78,8 @@
             "message": "Вы согласны заплатить {{symbol}} {{amount}}?",
             "ok": "Хорошо",
             "cancel": "отменить"
-        }
+        },
+        "BuyAmountCredits": "Купить {{amount}} кредитов"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "Получено {{amount}} кредитов"
+        },
+        "Assets/credits/bought": {
+            "content": "Куплено {{amount}} кредитов"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Спасибо за ваш платеж за &quot;{{description}}&quot;",
         "HavePaid": "Эй, {{1}}, это всего лишь быстрое подтверждение того, что вы успешно заплатили {{2}} {{3}} за {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Новый Сервис",
+            "TitlePlaceholder": "Название услуги",
+            "PricePlaceholder": "Установить цену",
+            "LinkPlaceholder": "установить дополнительную информационную ссылку",
+            "DescriptionPlaceholder": "Описание услуг",
+            "SaveService": "Сохранить Сервис"
+        },
+        "ManageServiceTemplates": "Управление шаблонами обслуживания",
+        "ManageServices": "Управление услугами",
+        "FreeEvent": "Бесплатное мероприятие",
+        "OptionalContribution": "Дополнительный вклад",
+        "RequiredPayment": "Требуется оплата",
+        "AreYouSureDelete": "Вы уверены, что хотите удалить эту услугу?",
+        "AmountServicesRelated": "{{amount}} существует доступность, связанная с этой услугой. Они также будут удалены."
     }
 }

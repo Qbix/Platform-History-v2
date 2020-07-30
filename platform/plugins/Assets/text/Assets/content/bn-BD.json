@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "আমন্ত্রিত আমন্ত্রণ {{1}}",
-        "YouHaveCreditsToStart": "আপনার {{1}} ক্রেডিট শুরু করার আছে"
+        "YouHaveCreditsToStart": "আপনার {{1}} ক্রেডিট শুরু করার আছে",
+        "PaymentFor": "&quot;{{1}}&quot; এর জন্য অর্থ প্রদান",
+        "PaymentTo": "{{999} to এ প্রদান",
+        "PaymentToUser": "{{999} to এ প্রদান",
+        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot; যোগদানের জন্য",
+        "CreatedCommunity": "&quot;{{communityId}}&quot; সম্প্রদায় তৈরি করার জন্য",
+        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot; ছাড়ার জন্য",
+        "BoughtCredits": "{999}} ক্রেডিট কিনেছেন",
+        "BuyAmountCredits": "{9 999}} ক্রেডিট কিনুন",
+        "MissingCredits": "অনুপস্থিতি",
+        "YouMissingCredits": "আপনি {9 999} its ক্রেডিট হারিয়েছেন",
+        "BuyCredits": "ক্রেডিট কিনুন",
+        "Buy": "কেনা",
+        "Credits": "ক্রেডিট",
+        "ErrorInvalidAmount": "অবৈধ পরিমাণ",
+        "ErrorInvalidCurrency": "দুর্ভাগ্যক্রমে আমরা এখনও মুদ্রা {{999} don&#39;t সমর্থন করি না"
     },
     "history": {
         "Date": "তারিখ",
@@ -27,7 +42,22 @@
         "To": "থেকে",
         "From": "থেকে",
         "HistoryEmpty": "আপনার কাছে এখনও কোনও ডেটা নেই",
-        "SeeHistory": "Payment {999} for এর জন্য অর্থ প্রদানের ইতিহাস দেখুন"
+        "SeeHistory": "Payment {999} for এর জন্য অর্থ প্রদানের ইতিহাস দেখুন",
+        "PaymentFor": "{9 999}} ক্রেডিট ব্যয় করেছেন",
+        "PaymentTo": "{9 999}} জমা দেওয়া",
+        "PaymentToUser": "{9 999}} জমা দেওয়া",
+        "JoinedPaidStream": {
+            "+": "{999}} ক্রেডিট অর্জন করেছেন",
+            "-": "{9 999}} ক্রেডিট ব্যয় করেছেন"
+        },
+        "LeftPaidStream": {
+            "+": "{999}} ক্রেডিট প্রাপ্ত হয়েছে",
+            "-": "{9 999}} জমা দেওয়া"
+        },
+        "CreatedCommunity": "{9 999}} ক্রেডিট ব্যয় করেছেন",
+        "BoughtCredits": "{999}} ক্রেডিট কিনেছেন",
+        "InviteAcceptedBy": "{999}} ক্রেডিট অর্জন করেছেন",
+        "YouHaveCreditsToStart": "{999}} ক্রেডিট অর্জন করেছেন"
     },
     "subscriptions": {
         "infoTitle": "অর্থ প্রদানের তথ্য সেট করুন",
@@ -48,7 +78,8 @@
             "message": "আপনি কি pay {999}} {{1000} pay দিতে সম্মত হন?",
             "ok": "ঠিক আছে",
             "cancel": "বাতিল"
-        }
+        },
+        "BuyAmountCredits": "{9 999}} ক্রেডিট কিনুন"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "{999}} ক্রেডিট প্রাপ্ত হয়েছে"
+        },
+        "Assets/credits/bought": {
+            "content": "{999}} ক্রেডিট কিনেছেন"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "&quot;{{description}}&quot; এর জন্য আপনার অর্থ প্রদানের জন্য আপনাকে ধন্যবাদ",
         "HavePaid": "আরে {9 999}}, এটি কেবলমাত্র একটি দ্রুত নিশ্চিতকরণ যা আপনি সফলভাবে {{4}} এর জন্য {{10001} থেকে {{1001} paid প্রদান করেছেন"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "নতুন পরিষেবা",
+            "TitlePlaceholder": "পরিষেবার শিরোনাম",
+            "PricePlaceholder": "দাম নির্ধারণ করো",
+            "LinkPlaceholder": "অতিরিক্ত তথ্য লিঙ্ক সেট করুন",
+            "DescriptionPlaceholder": "সেবা বর্ণনা",
+            "SaveService": "পরিষেবা সংরক্ষণ করুন"
+        },
+        "ManageServiceTemplates": "পরিষেবা টেম্পলেটগুলি পরিচালনা করুন",
+        "ManageServices": "পরিষেবাদি পরিচালনা করুন",
+        "FreeEvent": "নিখরচায় অনুষ্ঠান",
+        "OptionalContribution": "Ptionচ্ছিক অবদান",
+        "RequiredPayment": "প্রয়োজনীয় অর্থ প্রদান",
+        "AreYouSureDelete": "আপনি কি নিশ্চিত যে আপনি এই পরিষেবাটি মুছতে চান?",
+        "AmountServicesRelated": "এই পরিষেবাটি সম্পর্কিত There {999}} উপলভ্যতা রয়েছে। সেগুলিও সরানো হবে।"
     }
 }

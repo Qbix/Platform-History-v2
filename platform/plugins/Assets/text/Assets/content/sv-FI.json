@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Bjud in accepterad av {{1}}",
-        "YouHaveCreditsToStart": "Du har {{1}} krediter för att starta"
+        "YouHaveCreditsToStart": "Du har {{1}} krediter för att starta",
+        "PaymentFor": "Betalning för &quot;{{1}}&quot;",
+        "PaymentTo": "Betalning till {{1}}",
+        "PaymentToUser": "Betalning till {{userName}}",
+        "JoinedPaidStream": "för att gå med i &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "CreatedCommunity": "för att skapa community &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "för att ha lämnat &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "BoughtCredits": "Köpte {{amount}} högskolepoäng",
+        "BuyAmountCredits": "Köp {{amount}} krediter",
+        "MissingCredits": "Saknade krediter",
+        "YouMissingCredits": "Du saknar {{amount}} krediter",
+        "BuyCredits": "Köp krediter",
+        "Buy": "köpa",
+        "Credits": "Credits",
+        "ErrorInvalidAmount": "Belopp ogiltigt",
+        "ErrorInvalidCurrency": "Tyvärr stöder vi inte valuta {{currency}} än"
     },
     "history": {
         "Date": "Datum",
@@ -27,7 +42,22 @@
         "To": "till",
         "From": "från",
         "HistoryEmpty": "Du har inga data ännu",
-        "SeeHistory": "Se betalningshistorik för {{1}}"
+        "SeeHistory": "Se betalningshistorik för {{1}}",
+        "PaymentFor": "Tillbringade {{amount}} krediter",
+        "PaymentTo": "Skickade {{amount}} krediter",
+        "PaymentToUser": "Skickade {{amount}} krediter",
+        "JoinedPaidStream": {
+            "+": "Tjäna {{amount}} högskolepoäng",
+            "-": "Tillbringade {{amount}} krediter"
+        },
+        "LeftPaidStream": {
+            "+": "Fått {{amount}} krediter",
+            "-": "Skickade {{amount}} krediter"
+        },
+        "CreatedCommunity": "Tillbringade {{amount}} krediter",
+        "BoughtCredits": "Köpte {{amount}} högskolepoäng",
+        "InviteAcceptedBy": "Tjäna {{amount}} högskolepoäng",
+        "YouHaveCreditsToStart": "Tjäna {{amount}} högskolepoäng"
     },
     "subscriptions": {
         "infoTitle": "Ställ in betalningsinformation",
@@ -48,7 +78,8 @@
             "message": "Håller du med att betala {{symbol}} {{amount}}?",
             "ok": "ok",
             "cancel": "Annullera"
-        }
+        },
+        "BuyAmountCredits": "Köp {{amount}} krediter"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "Fått {{amount}} krediter"
+        },
+        "Assets/credits/bought": {
+            "content": "Köpte {{amount}} högskolepoäng"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Tack för din betalning för &quot;{{description}}&quot;",
         "HavePaid": "Hej {{1}}, detta är bara en snabb bekräftelse på att du har betalat {{2}} till {{3}} för {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Ny tjänst",
+            "TitlePlaceholder": "Servicetitel",
+            "PricePlaceholder": "Sätt pris",
+            "LinkPlaceholder": "ange ytterligare infolänk",
+            "DescriptionPlaceholder": "Service beskrivning",
+            "SaveService": "Spara service"
+        },
+        "ManageServiceTemplates": "Hantera servicemallar",
+        "ManageServices": "Hantera tjänster",
+        "FreeEvent": "Gratis evenemang",
+        "OptionalContribution": "Valfritt bidrag",
+        "RequiredPayment": "Obligatorisk betalning",
+        "AreYouSureDelete": "Är du säker på att du vill ta bort den här tjänsten?",
+        "AmountServicesRelated": "Det finns {{amount}} tillgängligheter relaterade till den här tjänsten. De kommer också att tas bort."
     }
 }

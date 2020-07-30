@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Bjóddu samþykkt af {{1}}",
-        "YouHaveCreditsToStart": "Þú hefur {{1}} einingar til að byrja"
+        "YouHaveCreditsToStart": "Þú hefur {{1}} einingar til að byrja",
+        "PaymentFor": "Greiðsla fyrir „{{1}}“",
+        "PaymentTo": "Greiðsla til {{1}}",
+        "PaymentToUser": "Greiðsla til {{userName}}",
+        "JoinedPaidStream": "fyrir þátttöku í „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> “",
+        "CreatedCommunity": "til að búa til samfélag „{{communityId}}“",
+        "LeftPaidStream": "fyrir að yfirgefa „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> “",
+        "BoughtCredits": "Keypti {{amount}} ein",
+        "BuyAmountCredits": "Kauptu {{amount}} einingar",
+        "MissingCredits": "Einkenni vantar",
+        "YouMissingCredits": "Þú vantar {{amount}} ein",
+        "BuyCredits": "Kauptu einingar",
+        "Buy": "Kauptu",
+        "Credits": "Einingar",
+        "ErrorInvalidAmount": "Fjárhæð ógild",
+        "ErrorInvalidCurrency": "Því miður styðjum við ekki gjaldmiðil {{currency}} enn"
     },
     "history": {
         "Date": "Dagsetning",
@@ -27,7 +42,22 @@
         "To": "að",
         "From": "frá",
         "HistoryEmpty": "Þú hefur engin gögn ennþá",
-        "SeeHistory": "Sjá greiðslusögu fyrir {{1}}"
+        "SeeHistory": "Sjá greiðslusögu fyrir {{1}}",
+        "PaymentFor": "Eytt {{amount}} einingum",
+        "PaymentTo": "Send {{amount}} ein",
+        "PaymentToUser": "Send {{amount}} ein",
+        "JoinedPaidStream": {
+            "+": "Aflað {{amount}} eininga",
+            "-": "Eytt {{amount}} einingum"
+        },
+        "LeftPaidStream": {
+            "+": "Fékk {{amount}} einingar",
+            "-": "Send {{amount}} ein"
+        },
+        "CreatedCommunity": "Eytt {{amount}} einingum",
+        "BoughtCredits": "Keypti {{amount}} ein",
+        "InviteAcceptedBy": "Aflað {{amount}} eininga",
+        "YouHaveCreditsToStart": "Aflað {{amount}} eininga"
     },
     "subscriptions": {
         "infoTitle": "Stilltu greiðsluupplýsingar",
@@ -48,7 +78,8 @@
             "message": "Ertu sammála um að greiða {{symbol}} {{amount}}?",
             "ok": "OK",
             "cancel": "Hætta við"
-        }
+        },
+        "BuyAmountCredits": "Kauptu {{amount}} einingar"
     },
     "types": {
         "Assets\/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets\/credits\/received": {
             "content": "Fékk {{amount}} einingar"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Keypti {{amount}} ein"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Þakka þér fyrir greiðsluna þína fyrir „{{description}}“",
         "HavePaid": "Hey {{1}}, þetta er bara fljótleg staðfesting á því að þú hafir greitt {{2}} til {{3}} fyrir {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Ný þjónusta",
+            "TitlePlaceholder": "Þjónustutitill",
+            "PricePlaceholder": "Stilla verð",
+            "LinkPlaceholder": "stilla viðbótarupplýsingatengil",
+            "DescriptionPlaceholder": "Þjónustulýsing",
+            "SaveService": "Vista þjónustu"
+        },
+        "ManageServiceTemplates": "Stjórna þjónustusniðmátum",
+        "ManageServices": "Stjórna þjónustu",
+        "FreeEvent": "Ókeypis viðburður",
+        "OptionalContribution": "Valfrjálst framlag",
+        "RequiredPayment": "Nauðsynleg greiðsla",
+        "AreYouSureDelete": "Ertu viss um að þú viljir eyða þessari þjónustu?",
+        "AmountServicesRelated": "Það eru {{amount}} tiltæk atriði tengd þessari þjónustu. Þeir eru einnig verður fjarlægður."
     }
 }

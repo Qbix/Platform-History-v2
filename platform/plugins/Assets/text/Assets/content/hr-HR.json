@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Poziv je prihvatio {{1}}",
-        "YouHaveCreditsToStart": "Imate {{1}} kredita za početak"
+        "YouHaveCreditsToStart": "Imate {{1}} kredita za početak",
+        "PaymentFor": "Plaćanje za &quot;{{1}}&quot;",
+        "PaymentTo": "Plaćanje na {{1}}",
+        "PaymentToUser": "Plaćanje na {{userName}}",
+        "JoinedPaidStream": "za pridruživanje &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "CreatedCommunity": "za stvaranje zajednice &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "za odlazak &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "BoughtCredits": "Kupio {{amount}} kredita",
+        "BuyAmountCredits": "Kupite {{amount}} kredita",
+        "MissingCredits": "Nedostaju krediti",
+        "YouMissingCredits": "Nedostaju vam {{amount}} kredita",
+        "BuyCredits": "Kupite kredite",
+        "Buy": "Kupiti",
+        "Credits": "krediti",
+        "ErrorInvalidAmount": "Iznos je nevažeći",
+        "ErrorInvalidCurrency": "Nažalost, još uvijek ne podržavamo valutu {{currency}}"
     },
     "history": {
         "Date": "Datum",
@@ -27,7 +42,22 @@
         "To": "do",
         "From": "iz",
         "HistoryEmpty": "Još nemate podataka",
-        "SeeHistory": "Pogledajte povijest plaćanja za {{1}}"
+        "SeeHistory": "Pogledajte povijest plaćanja za {{1}}",
+        "PaymentFor": "Potrošite {{amount}} kredita",
+        "PaymentTo": "Poslano {{amount}} kredita",
+        "PaymentToUser": "Poslano {{amount}} kredita",
+        "JoinedPaidStream": {
+            "+": "Zarađeno {{amount}} kredita",
+            "-": "Potrošite {{amount}} kredita"
+        },
+        "LeftPaidStream": {
+            "+": "Primljeno je {{amount}} kredita",
+            "-": "Poslano {{amount}} kredita"
+        },
+        "CreatedCommunity": "Potrošite {{amount}} kredita",
+        "BoughtCredits": "Kupio {{amount}} kredita",
+        "InviteAcceptedBy": "Zarađeno {{amount}} kredita",
+        "YouHaveCreditsToStart": "Zarađeno {{amount}} kredita"
     },
     "subscriptions": {
         "infoTitle": "Postavite podatke o plaćanju",
@@ -48,7 +78,8 @@
             "message": "Slažete li se s plaćanjem {{symbol}} {{amount}}?",
             "ok": "u redu",
             "cancel": "Otkazati"
-        }
+        },
+        "BuyAmountCredits": "Kupite {{amount}} kredita"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "Primljeno je {{amount}} kredita"
+        },
+        "Assets/credits/bought": {
+            "content": "Kupio {{amount}} kredita"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Zahvaljujemo na uplati za &quot;{{description}}&quot;",
         "HavePaid": "Hej {{1}}, ovo je samo brza potvrda da ste uspješno platili {{2}} do {{3}} za {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Nova usluga",
+            "TitlePlaceholder": "Naziv usluge",
+            "PricePlaceholder": "Postavite cijenu",
+            "LinkPlaceholder": "postavi dodatnu info vezu",
+            "DescriptionPlaceholder": "Opis usluge",
+            "SaveService": "Spremite uslugu"
+        },
+        "ManageServiceTemplates": "Upravljanje predlozima usluga",
+        "ManageServices": "Upravljanje uslugama",
+        "FreeEvent": "Besplatan događaj",
+        "OptionalContribution": "Neobvezni doprinos",
+        "RequiredPayment": "Obavezno plaćanje",
+        "AreYouSureDelete": "Jeste li sigurni da želite izbrisati ovu uslugu?",
+        "AmountServicesRelated": "Postoje {{amount}} dostupnosti povezane s ovom uslugom. Oni su također biti uklonjeni."
     }
 }

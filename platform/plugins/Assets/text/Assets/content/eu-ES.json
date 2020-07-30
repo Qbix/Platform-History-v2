@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "{999}} -k onartutako gonbidapena",
-        "YouHaveCreditsToStart": "{{1}} kreditu dituzu hasteko"
+        "YouHaveCreditsToStart": "{{1}} kreditu dituzu hasteko",
+        "PaymentFor": "&quot;{{1}}&quot; ordainketa",
+        "PaymentTo": "Ordainketa {{1}} (e) ra",
+        "PaymentToUser": "Ordainketa {{userName}} (e) ra",
+        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>elkartzeko</a>",
+        "CreatedCommunity": "&quot;{{communityId}}&quot; komunitatea sortzeko",
+        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>uzteagatik</a>",
+        "BoughtCredits": "Erosi {{amount}} kreditu",
+        "BuyAmountCredits": "Erosi {{amount}} kredituak",
+        "MissingCredits": "Kredituen falta",
+        "YouMissingCredits": "{{amount}} kredituak falta zaizkizu",
+        "BuyCredits": "Erosi kredituak",
+        "Buy": "Erosi",
+        "Credits": "kredituak",
+        "ErrorInvalidAmount": "Zenbatekoa baliogabea",
+        "ErrorInvalidCurrency": "Zoritxarrez ez dugu moneta {{currency}} onartzen oraindik"
     },
     "history": {
         "Date": "data",
@@ -27,7 +42,22 @@
         "To": "to",
         "From": "batetik",
         "HistoryEmpty": "Datuak oraindik ez dituzu",
-        "SeeHistory": "Ikusi {{1}} ordainketaren historia"
+        "SeeHistory": "Ikusi {{1}} ordainketaren historia",
+        "PaymentFor": "{{amount}} kreditu igorri dira",
+        "PaymentTo": "{{amount}} kreditu bidali dira",
+        "PaymentToUser": "{{amount}} kreditu bidali dira",
+        "JoinedPaidStream": {
+            "+": "Irabazitako {{amount}} kredituak",
+            "-": "{{amount}} kreditu igorri dira"
+        },
+        "LeftPaidStream": {
+            "+": "{{amount}} kredituak jaso dira",
+            "-": "{{amount}} kreditu bidali dira"
+        },
+        "CreatedCommunity": "{{amount}} kreditu igorri dira",
+        "BoughtCredits": "Erosi {{amount}} kreditu",
+        "InviteAcceptedBy": "Irabazitako {{amount}} kredituak",
+        "YouHaveCreditsToStart": "Irabazitako {{amount}} kredituak"
     },
     "subscriptions": {
         "infoTitle": "Ezarri ordainketa informazioa",
@@ -48,7 +78,8 @@
             "message": "Onartzen al duzu {{symbol}} {{amount}} ordaintzea?",
             "ok": "Ados",
             "cancel": "Utzi"
-        }
+        },
+        "BuyAmountCredits": "Erosi {{amount}} kredituak"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "{{amount}} kredituak jaso dira"
+        },
+        "Assets/credits/bought": {
+            "content": "Erosi {{amount}} kreditu"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Eskerrik asko &quot;{{description}}&quot; delakoagatik ordaintzeagatik.",
         "HavePaid": "Kaixo {{1}}, baieztapen bizkorra besterik ez da {{3}} {{3}} (e) tik {{4}} ondo ordaindu duzula."
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Zerbitzu berria",
+            "TitlePlaceholder": "Zerbitzuaren titulua",
+            "PricePlaceholder": "Ezarri prezioa",
+            "LinkPlaceholder": "ezarri esteka informazio gehigarria",
+            "DescriptionPlaceholder": "Zerbitzuaren deskribapena",
+            "SaveService": "Gorde zerbitzua"
+        },
+        "ManageServiceTemplates": "Zerbitzuaren txantiloiak kudeatu",
+        "ManageServices": "Zerbitzuak kudeatu",
+        "FreeEvent": "Doako ekitaldia",
+        "OptionalContribution": "Aukerako ekarpena",
+        "RequiredPayment": "Beharrezko ordainketa",
+        "AreYouSureDelete": "Ziur zerbitzu hau ezabatu nahi duzula?",
+        "AmountServicesRelated": "Zerbitzu honekin lotutako {{amount}} erabilgarritasun daude. Dira ere kendu egingo dira."
     }
 }

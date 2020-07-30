@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "{{1}} द्वारा स्वीकृत आमंत्रण",
-        "YouHaveCreditsToStart": "आपके पास शुरू करने के लिए {{1}} क्रेडिट हैं"
+        "YouHaveCreditsToStart": "आपके पास शुरू करने के लिए {{1}} क्रेडिट हैं",
+        "PaymentFor": "&quot;{{1}}&quot; के लिए भुगतान",
+        "PaymentTo": "{{1}} का भुगतान",
+        "PaymentToUser": "{{userName}} का भुगतान",
+        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; से जुड़ने के लिए",
+        "CreatedCommunity": "समुदाय बनाने के लिए &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}}<\/a> छोड़ने के लिए",
+        "BoughtCredits": "{{amount}} क्रेडिट खरीदा",
+        "BuyAmountCredits": "{{amount}} क्रेडिट खरीदें",
+        "MissingCredits": "मिसिंग क्रेडिट",
+        "YouMissingCredits": "आप {{amount}} क्रेडिट अनुपलब्ध हैं",
+        "BuyCredits": "क्रेडिट्स खरीदें",
+        "Buy": "खरीदें",
+        "Credits": "क्रेडिट",
+        "ErrorInvalidAmount": "राशि अमान्य है",
+        "ErrorInvalidCurrency": "दुर्भाग्य से हम अभी तक मुद्रा {{currency}} का समर्थन नहीं करते हैं"
     },
     "history": {
         "Date": "दिनांक",
@@ -27,7 +42,22 @@
         "To": "सेवा मेरे",
         "From": "से",
         "HistoryEmpty": "आपके पास अभी तक कोई डेटा नहीं है",
-        "SeeHistory": "{{1}} के लिए भुगतान इतिहास देखें"
+        "SeeHistory": "{{1}} के लिए भुगतान इतिहास देखें",
+        "PaymentFor": "{{amount}} क्रेडिट खर्च किया",
+        "PaymentTo": "भेजा गया {{amount}} क्रेडिट",
+        "PaymentToUser": "भेजा गया {{amount}} क्रेडिट",
+        "JoinedPaidStream": {
+            "+": "अर्जित {{amount}} क्रेडिट",
+            "-": "{{amount}} क्रेडिट खर्च किया"
+        },
+        "LeftPaidStream": {
+            "+": "प्राप्त {{amount}} क्रेडिट",
+            "-": "भेजा गया {{amount}} क्रेडिट"
+        },
+        "CreatedCommunity": "{{amount}} क्रेडिट खर्च किया",
+        "BoughtCredits": "{{amount}} क्रेडिट खरीदा",
+        "InviteAcceptedBy": "अर्जित {{amount}} क्रेडिट",
+        "YouHaveCreditsToStart": "अर्जित {{amount}} क्रेडिट"
     },
     "subscriptions": {
         "infoTitle": "भुगतान जानकारी सेट करें",
@@ -48,7 +78,8 @@
             "message": "क्या आप {{symbol}} {{amount}} भुगतान करने के लिए सहमत हैं?",
             "ok": "ठीक",
             "cancel": "रद्द करना"
-        }
+        },
+        "BuyAmountCredits": "{{amount}} क्रेडिट खरीदें"
     },
     "types": {
         "Assets\/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets\/credits\/received": {
             "content": "प्राप्त {{amount}} क्रेडिट"
+        },
+        "Assets\/credits\/bought": {
+            "content": "{{amount}} क्रेडिट खरीदा"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "&quot;{{description}}&quot; के लिए आपके भुगतान के लिए धन्यवाद",
         "HavePaid": "हे {{1}}, यह केवल एक त्वरित पुष्टि है कि आपने {{4}} {{3}} से {{3}} का सफलतापूर्वक भुगतान किया है।"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "नई सेवा",
+            "TitlePlaceholder": "सेवा का शीर्षक",
+            "PricePlaceholder": "कीमत निर्धारित करें",
+            "LinkPlaceholder": "अतिरिक्त जानकारी लिंक सेट करें",
+            "DescriptionPlaceholder": "सेवा विवरण",
+            "SaveService": "सेव सेव"
+        },
+        "ManageServiceTemplates": "सेवा टेम्पलेट प्रबंधित करें",
+        "ManageServices": "सेवाएँ प्रबंधित करें",
+        "FreeEvent": "नि: शुल्क घटना",
+        "OptionalContribution": "वैकल्पिक योगदान",
+        "RequiredPayment": "आवश्यक भुगतान",
+        "AreYouSureDelete": "क्या आप वाकई इस सेवा को हटाना चाहते हैं?",
+        "AmountServicesRelated": "इस सेवा से संबंधित {{amount}} उपलब्धियां हैं। उन्हें भी हटा दिया जाएगा।"
     }
 }

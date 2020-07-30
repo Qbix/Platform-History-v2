@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Paribisha kukubaliwa na {{1}}",
-        "YouHaveCreditsToStart": "Una mikopo ya {{1}} kuanza"
+        "YouHaveCreditsToStart": "Una mikopo ya {{1}} kuanza",
+        "PaymentFor": "Malipo ya &quot;{{1}}&quot;",
+        "PaymentTo": "Malipo kwa {{1}}",
+        "PaymentToUser": "Malipo kwa {{userName}}",
+        "JoinedPaidStream": "kwa kujiunga &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "kwa kuunda jamii &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "kwa kuacha &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Imenunua mikopo {{amount}}",
+        "BuyAmountCredits": "Nunua mikopo ya {{amount}}",
+        "MissingCredits": "Kukosekana kwa dhamana",
+        "YouMissingCredits": "Unakosa mikopo ya {{amount}}",
+        "BuyCredits": "Nunua mikopo",
+        "Buy": "Nunua",
+        "Credits": "Mikopo",
+        "ErrorInvalidAmount": "Kiasi sio sawa",
+        "ErrorInvalidCurrency": "Kwa bahati mbaya hatuungi mkono sarafu {{currency}} bado"
     },
     "history": {
         "Date": "Tarehe",
@@ -27,7 +42,22 @@
         "To": "kwa",
         "From": "kutoka",
         "HistoryEmpty": "Bado haujapata data",
-        "SeeHistory": "Tazama historia ya malipo ya {{1}}"
+        "SeeHistory": "Tazama historia ya malipo ya {{1}}",
+        "PaymentFor": "Alitumia mikopo {{amount}}",
+        "PaymentTo": "Iliyotumwa {{amount}} mikopo",
+        "PaymentToUser": "Iliyotumwa {{amount}} mikopo",
+        "JoinedPaidStream": {
+            "+": "Amepata mikopo {{amount}}",
+            "-": "Alitumia mikopo {{amount}}"
+        },
+        "LeftPaidStream": {
+            "+": "Imepokea mikopo ya {{amount}}",
+            "-": "Iliyotumwa {{amount}} mikopo"
+        },
+        "CreatedCommunity": "Alitumia mikopo {{amount}}",
+        "BoughtCredits": "Imenunua mikopo {{amount}}",
+        "InviteAcceptedBy": "Amepata mikopo {{amount}}",
+        "YouHaveCreditsToStart": "Amepata mikopo {{amount}}"
     },
     "subscriptions": {
         "infoTitle": "Weka Habari ya Malipo",
@@ -48,7 +78,8 @@
             "message": "Je! Unakubali kulipa {{symbol}} {{amount}}?",
             "ok": "sawa",
             "cancel": "Ghairi"
-        }
+        },
+        "BuyAmountCredits": "Nunua mikopo ya {{amount}}"
     },
     "types": {
         "Assets\/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets\/credits\/received": {
             "content": "Imepokea mikopo ya {{amount}}"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Imenunua mikopo {{amount}}"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Asante kwa malipo yako kwa &quot;{{description}}&quot;",
         "HavePaid": "Mh!"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Huduma Mpya",
+            "TitlePlaceholder": "Kichwa cha huduma",
+            "PricePlaceholder": "Bei ya bei",
+            "LinkPlaceholder": "weka kiunga cha habari cha ziada",
+            "DescriptionPlaceholder": "Maelezo ya huduma",
+            "SaveService": "Okoa Huduma"
+        },
+        "ManageServiceTemplates": "Simamia templeti za Huduma",
+        "ManageServices": "Dhibiti Huduma",
+        "FreeEvent": "Hafla ya bure",
+        "OptionalContribution": "Mchango wa hiari",
+        "RequiredPayment": "Malipo inahitajika",
+        "AreYouSureDelete": "Je! Una uhakika unataka kufuta huduma hii?",
+        "AmountServicesRelated": "Kuna upatikanaji wa {{amount}} unaohusiana na huduma hii. Pia zitaondolewa."
     }
 }

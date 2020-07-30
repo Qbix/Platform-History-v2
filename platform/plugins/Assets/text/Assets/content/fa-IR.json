@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "دعوت پذیرفته شده توسط {{1}}",
-        "YouHaveCreditsToStart": "شما باید اعتبار {{1}} را برای شروع بگذارید"
+        "YouHaveCreditsToStart": "شما باید اعتبار {{1}} را برای شروع بگذارید",
+        "PaymentFor": "پرداخت &quot;999 {&quot;",
+        "PaymentTo": "پرداخت به 99 999}",
+        "PaymentToUser": "پرداخت به 99 999}",
+        "JoinedPaidStream": "برای پیوستن به &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>1001}}</a> &quot;",
+        "CreatedCommunity": "برای ایجاد جامعه &quot;{999}}&quot;",
+        "LeftPaidStream": "برای ترک &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>1001}}</a> &quot;",
+        "BoughtCredits": "اعتبار 99 999 خریداری کرد",
+        "BuyAmountCredits": "اعتبار 99 999 بخرید",
+        "MissingCredits": "اعتبار موجود نیست",
+        "YouMissingCredits": "اعتبار شما missing 999 گم شده است",
+        "BuyCredits": "اعتبار بخرید",
+        "Buy": "خرید",
+        "Credits": "وام",
+        "ErrorInvalidAmount": "مقدار نامعتبر است",
+        "ErrorInvalidCurrency": "متأسفانه ما هنوز از {999 پوند ارز پشتیبانی نمی کنیم"
     },
     "history": {
         "Date": "تاریخ",
@@ -27,7 +42,22 @@
         "To": "به",
         "From": "از جانب",
         "HistoryEmpty": "شما هنوز داده ای ندارید",
-        "SeeHistory": "مشاهده تاریخچه پرداخت 999 {}"
+        "SeeHistory": "مشاهده تاریخچه پرداخت 999 {}",
+        "PaymentFor": "اعتبار {999 صرف کرد",
+        "PaymentTo": "ارسال شده {999 اعتبار",
+        "PaymentToUser": "ارسال شده {999 اعتبار",
+        "JoinedPaidStream": {
+            "+": "اعتبار 99 999 کسب کرده است",
+            "-": "اعتبار {999 صرف کرد"
+        },
+        "LeftPaidStream": {
+            "+": "اعتبار 999 {دریافت کرد",
+            "-": "ارسال شده {999 اعتبار"
+        },
+        "CreatedCommunity": "اعتبار {999 صرف کرد",
+        "BoughtCredits": "اعتبار 99 999 خریداری کرد",
+        "InviteAcceptedBy": "اعتبار 99 999 کسب کرده است",
+        "YouHaveCreditsToStart": "اعتبار 99 999 کسب کرده است"
     },
     "subscriptions": {
         "infoTitle": "اطلاعات پرداخت را تنظیم کنید",
@@ -48,7 +78,8 @@
             "message": "آیا قبول دارید مبلغ 999 {}} {{1000} pay بپردازید؟",
             "ok": "خوب",
             "cancel": "لغو"
-        }
+        },
+        "BuyAmountCredits": "اعتبار 99 999 بخرید"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "اعتبار 999 {دریافت کرد"
+        },
+        "Assets/credits/bought": {
+            "content": "اعتبار 99 999 خریداری کرد"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "از پرداخت خود برای &quot;{999}}&quot; متشکریم",
         "HavePaid": "سلام {999}} ، این فقط یک تأیید سریع است که شما با موفقیت paid 1000}}} 1001 {} 1002 {paid successfully پرداخت کرده اید"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "سرویس جدید",
+            "TitlePlaceholder": "عنوان خدمات",
+            "PricePlaceholder": "قیمت تعیین شده",
+            "LinkPlaceholder": "پیوند اطلاعات اضافی را تنظیم کنید",
+            "DescriptionPlaceholder": "شرح خدمات",
+            "SaveService": "ذخیره سرویس"
+        },
+        "ManageServiceTemplates": "مدیریت الگوهای خدمات",
+        "ManageServices": "مدیریت خدمات",
+        "FreeEvent": "رویداد رایگان",
+        "OptionalContribution": "سهم اختیاری",
+        "RequiredPayment": "پرداخت مورد نیاز",
+        "AreYouSureDelete": "آیا مطمئن هستید که می خواهید این سرویس را حذف کنید؟",
+        "AmountServicesRelated": "در دسترس بودن مربوط به این سرویس 999 {است. آنها همچنین حذف خواهند شد."
     }
 }

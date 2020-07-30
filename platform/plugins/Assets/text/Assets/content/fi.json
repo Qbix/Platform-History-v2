@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Kutsu {{1}} hyväksyi kutsun",
-        "YouHaveCreditsToStart": "Sinulla on {{1}} luottoja aloittaa"
+        "YouHaveCreditsToStart": "Sinulla on {{1}} luottoja aloittaa",
+        "PaymentFor": "Maksu kohteelle {{1}}",
+        "PaymentTo": "Maksu {{1}}",
+        "PaymentToUser": "Maksu {{userName}}",
+        "JoinedPaidStream": "liittymisestä ryhmään <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>",
+        "CreatedCommunity": "yhteisön &quot;{{communityId}}&quot; luomiseen",
+        "LeftPaidStream": "jättämisestä &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Osti {{amount}} opintopistettä",
+        "BuyAmountCredits": "Osta {{amount}} hyvityksiä",
+        "MissingCredits": "Puuttuvat luotot",
+        "YouMissingCredits": "Sinulta puuttuu {{amount}} hyvitystä",
+        "BuyCredits": "Osta luottoja",
+        "Buy": "Ostaa",
+        "Credits": "Laajuus",
+        "ErrorInvalidAmount": "Määrä kelpaa",
+        "ErrorInvalidCurrency": "Valitettavasti emme vielä tue valuuttaa {{currency}}"
     },
     "history": {
         "Date": "Treffi",
@@ -27,7 +42,22 @@
         "To": "että",
         "From": "alkaen",
         "HistoryEmpty": "Sinulla ei ole vielä tietoja",
-        "SeeHistory": "Katso {{1}} -historiaa"
+        "SeeHistory": "Katso {{1}} -historiaa",
+        "PaymentFor": "Käytetty {{amount}} hyvitystä",
+        "PaymentTo": "Lähetetty {{amount}} opintopistettä",
+        "PaymentToUser": "Lähetetty {{amount}} opintopistettä",
+        "JoinedPaidStream": {
+            "+": "Ansainnut {{amount}} hyvitystä",
+            "-": "Käytetty {{amount}} hyvitystä"
+        },
+        "LeftPaidStream": {
+            "+": "Saanut {{amount}} hyvitystä",
+            "-": "Lähetetty {{amount}} opintopistettä"
+        },
+        "CreatedCommunity": "Käytetty {{amount}} hyvitystä",
+        "BoughtCredits": "Osti {{amount}} opintopistettä",
+        "InviteAcceptedBy": "Ansainnut {{amount}} hyvitystä",
+        "YouHaveCreditsToStart": "Ansainnut {{amount}} hyvitystä"
     },
     "subscriptions": {
         "infoTitle": "Aseta maksutiedot",
@@ -48,7 +78,8 @@
             "message": "Oletteko samaa mieltä {{symbol}} {{amount}} maksamisesta?",
             "ok": "kunnossa",
             "cancel": "Peruuttaa"
-        }
+        },
+        "BuyAmountCredits": "Osta {{amount}} hyvityksiä"
     },
     "types": {
         "Assets\/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets\/credits\/received": {
             "content": "Saanut {{amount}} hyvitystä"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Osti {{amount}} opintopistettä"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Kiitos maksustasi {{description}}",
         "HavePaid": "Hei {{1}}, tämä on vain nopea vahvistus siitä, että olet maksanut {{2}} {{3}} {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Uusi palvelu",
+            "TitlePlaceholder": "Palvelun nimi",
+            "PricePlaceholder": "Aseta hinta",
+            "LinkPlaceholder": "aseta lisätietolinkki",
+            "DescriptionPlaceholder": "Palvelun kuvaus",
+            "SaveService": "Tallenna palvelu"
+        },
+        "ManageServiceTemplates": "Hallitse palvelumalleja",
+        "ManageServices": "Hallitse palveluita",
+        "FreeEvent": "Ilmainen tapahtuma",
+        "OptionalContribution": "Valinnainen rahoitusosuus",
+        "RequiredPayment": "Vaadittu maksu",
+        "AreYouSureDelete": "Haluatko varmasti poistaa tämän palvelun?",
+        "AmountServicesRelated": "Tähän palveluun liittyy {{amount}} saatavuutta. Ne myös poistetaan."
     }
 }
