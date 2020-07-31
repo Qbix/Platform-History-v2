@@ -29,6 +29,7 @@ function Users_before_Q_responseExtras()
 	Q_Response::setScriptData('Q.plugins.Users.communityId', Users::communityId());
 	Q_Response::setScriptData('Q.plugins.Users.communityName', Users::communityName());
 	Q_Response::setScriptData('Q.plugins.Users.communitySuffix', Users::communitySuffix());
+	Q_Response::setScriptData('Q.plugins.Users.currentCommunityId', Users::currentCommunityId());
 	if ($sizes = Q_Image::getSizes('Users/icon', $maxStretch)) {
 		ksort($sizes);
 		Q_Response::setScriptData('Q.plugins.Users.icon.sizes', $sizes);
