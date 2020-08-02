@@ -98,7 +98,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		'left': '0',
 		'position': 'absolute'
 	});
-	state.label = $('<label for="'+inputId+'"></label>');
+	state.label = $('<label class="Q_imagepicker_label" for="'+inputId+'"></label>');
 	var originalSrc = $this.attr('src');
 	if (originalSrc && originalSrc.indexOf('?') < 0) {
 		// cache busting
