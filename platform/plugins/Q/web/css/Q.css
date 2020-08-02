@@ -472,6 +472,9 @@ div.Q_placeholder { pointer-events: none; }
 	vertical-align: middle !important;
 	overflow: visible !important;
 	white-space: normal !important;
+	transform: none !important;
+	max-width: none !important;
+	max-height: none !important;
 }
 .Q_lazy_load { opacity: 0; }
 .Q_lazy_loaded { opacity: 1; transition: opacity 300ms; }

@@ -3766,6 +3766,10 @@ Q.Tool = function _Q_Tool(element, options) {
 	this.activated = true;
 	this.element = element;
 	this.typename = 'Q.Tool';
+	
+	if (options === true) {
+		options = {};
+	}
 
 	if (root.jQuery) {
 		jQuery(element).data('Q_tool', this);
