@@ -57,7 +57,7 @@ Q.Tool.jQuery('Q/textfill',
 			var maxHeight = o.fillPadding ? $this.innerHeight() : $this.height();
 			var maxWidth = o.fillPadding ? $this.innerWidth() : $this.width();
 			var textHeight, textWidth, lines, tooBig;
-			ourElement.addClass('Q_textfill_resized');
+			ourElement.addClass('Q_textfill_resizing');
 			for (var i=0; i<100; ++i) {
 				ourElement.css('font-size', fontSize + 'px');
 				textHeight = ourElement.outerHeight(true);
@@ -83,6 +83,7 @@ Q.Tool.jQuery('Q/textfill',
 				}
 			};
 			ourElement.add(this).css('font-size', lastGoodFontSize + 'px');
+			ourElement.removeClass('Q_textfill_resizing').addClass('Q_textfill_resized');
 			return this;
 		},
 		

@@ -464,6 +464,7 @@ div.Q_placeholder { pointer-events: none; }
 .Q_notTouchscreen .Q_clickable_container:hover .Q_clickable_shadow
  { display: block; max-width: none !important; }
 .Q_inplace_tool { display: none; visibility: hidden; }
+.Q_textfill_resizing,
 .Q_textfill_resized {
 	line-height: 1.2;
 	display: inline-block !important;
@@ -472,6 +473,8 @@ div.Q_placeholder { pointer-events: none; }
 	vertical-align: middle !important;
 	overflow: visible !important;
 	white-space: normal !important;
+}
+.Q_textfill_resizing {
 	transform: none !important;
 	max-width: none !important;
 	max-height: none !important;
