@@ -28,9 +28,8 @@ class Users_Mobile extends Base_Users_Mobile
 	 *  The name of a view for the message. Fields are passed to this array.
 	 * @param {array} $fields=array()
 	 *  The fields referenced in the subject and/or view
-	 * @param {array} $options=array()
-	 *  Array of options. Can include:<br/>
-	 *  "delay" => A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
+	 * @param {array} [$options=array()]
+	 * @param {string} [$options.delay] A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
 	 * @param {string} [$options.language] Preferred language
 	 * @return {boolean}
 	 * @throws {Q_Exception_WrongType}

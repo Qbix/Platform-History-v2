@@ -83,7 +83,7 @@ Q.Tool.define("Q/columns", function(options) {
 		$toolElement.on(Q.Pointer.fastclick, selector, function(){
 			var index = $(this).closest('.Q_columns_column').data(dataKey_index);
 			if (state.locked) return;
-			if (index) {
+			if (index > 0) {
 				tool.close(index);
 			}
 		}); // no need for key, it will be removed when tool element is removed
@@ -320,7 +320,7 @@ Q.Tool.define("Q/columns", function(options) {
 		if (o.name && state.classes && state.classes[o.name]) {
 			$(div).addClass(state.classes[o.name]);
 		}
-		if (state.closeFromSwipeDown) {
+		if (state.closeFromSwipeDown && index > 0) {
 			Q.addEventListener($title[0], 'touchstart', function (e1) {
 				var x1 = Q.Pointer.getX(e1);
 				var y1 = Q.Pointer.getY(e1);
