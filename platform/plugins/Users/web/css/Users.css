@@ -275,7 +275,6 @@
 {
 	display: inline-block;
 	vertical-align: middle;
-	text-overflow: clip;
 }
 
 
@@ -407,6 +406,7 @@ a.Users_activation_resend:active {
 	width: 30%;
 	max-width: 80px; 
 	margin-left: 1%; margin-right: 1%;
+	text-overflow: clip;
 }
 .Users_list_tool .Users_avatar_icon {
 	width: 100%; height: auto;
