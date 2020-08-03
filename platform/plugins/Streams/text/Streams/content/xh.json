@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Entsha {{relationDisplayType}} kwi {{1000]}",
         "Streams\/relatedFrom\/*": "Yongezwe kwi - {{toTitle}} njenge {{1000]}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ndikukhankanyile kumazwana",
-        "Streams\/call": "{{displayName}} uyakubiza",
+        "Streams\/call": "{{displayName}} uqalile umnxeba okwenyani",
         "ManageEmailSubscriptions": "lawula imirhumo yakho ye-imeyile",
         "IfUnsubscribe": "Ukuba ufuna ukubhalisa"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Uqinisekile ukuba ungasikhupheli esi sixhobo? Iya kucima izaziso kwesi sixhobo.",
         "Identifiers": "Izazisi",
         "Devices": "Izixhobo",
-        "Streams": "Imilambo"
+        "Streams": "Imilambo",
+        "AreYouSureRemoveParticipant": "Uqinisekile ukuba ufuna ukususa lo mthathi-nxaxheba?",
+        "RemoveParticipant": "Susa inxaxheba"
     },
     "menu": {
         "placeholder": "isihloko sephepha",

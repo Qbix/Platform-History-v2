@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Нави {{relationDisplayType}} дар {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ба {{toTitle}} ҳамчун {{relationDisplayType}} илова карда шуд",
         "Streams\/mention": "{{&call 'avatar.displayName'}} шуморо дар шарҳ қайд кард",
-        "Streams\/call": "{{displayName}} ба шумо занг мезанад",
+        "Streams\/call": "{{displayName}} тамоси воқеӣ оғоз кард",
         "ManageEmailSubscriptions": "обунаҳои почтаи электронии худро идора кунед",
         "IfUnsubscribe": "Агар шумо бояд обуна шавед"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Шумо мутмаин ҳастед, ки ин дастгоҳро барҳам мезанед? Он огоҳиҳоро дар ин дастгоҳ хомӯш мекунад.",
         "Identifiers": "Муайянкунандаҳо",
         "Devices": "Дастгоҳҳо",
-        "Streams": "Ҷараёнҳои"
+        "Streams": "Ҷараёнҳои",
+        "AreYouSureRemoveParticipant": "Дар ҳақиқат мехоҳед, ки ин иштирокчиро хориҷ кунед?",
+        "RemoveParticipant": "Иштирокчиро нест кунед"
     },
     "menu": {
         "placeholder": "намуди саҳифа",

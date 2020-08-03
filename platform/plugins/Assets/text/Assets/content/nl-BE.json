@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Uitnodiging geaccepteerd door {{1}}",
-        "YouHaveCreditsToStart": "Je hebt {{1}} credits om te starten"
+        "YouHaveCreditsToStart": "Je hebt {{1}} credits om te starten",
+        "PaymentFor": "Betaling voor &#39;{{1}}&#39;",
+        "PaymentTo": "Betaling aan {{1}}",
+        "PaymentToUser": "Betaling aan {{userName}}",
+        "JoinedPaidStream": "voor deelname aan &#39; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &#39;",
+        "CreatedCommunity": "voor het maken van community &#39;{{communityId}}&#39;",
+        "LeftPaidStream": "voor het verlaten van &#39; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &#39;",
+        "BoughtCredits": "{{amount}} credits gekocht",
+        "BuyAmountCredits": "Koop {{amount}} credits",
+        "MissingCredits": "Ontbrekende credits",
+        "YouMissingCredits": "Je mist {{amount}} credits",
+        "BuyCredits": "Koop tegoed",
+        "Buy": "Kopen",
+        "Credits": "Credits",
+        "ErrorInvalidAmount": "Ongeldig bedrag",
+        "ErrorInvalidCurrency": "Helaas ondersteunen we valuta {{currency}} nog niet"
     },
     "history": {
         "Date": "Datum",
@@ -27,7 +42,22 @@
         "To": "naar",
         "From": "van",
         "HistoryEmpty": "U heeft nog geen gegevens",
-        "SeeHistory": "Bekijk de betalingsgeschiedenis voor {{1}}"
+        "SeeHistory": "Bekijk de betalingsgeschiedenis voor {{1}}",
+        "PaymentFor": "{{amount}} credits uitgegeven",
+        "PaymentTo": "Heeft {{amount}} tegoed verzonden",
+        "PaymentToUser": "Heeft {{amount}} tegoed verzonden",
+        "JoinedPaidStream": {
+            "+": "{{amount}} credits verdiend",
+            "-": "{{amount}} credits uitgegeven"
+        },
+        "LeftPaidStream": {
+            "+": "Heeft {{amount}} tegoed ontvangen",
+            "-": "Heeft {{amount}} tegoed verzonden"
+        },
+        "CreatedCommunity": "{{amount}} credits uitgegeven",
+        "BoughtCredits": "{{amount}} credits gekocht",
+        "InviteAcceptedBy": "{{amount}} credits verdiend",
+        "YouHaveCreditsToStart": "{{amount}} credits verdiend"
     },
     "subscriptions": {
         "infoTitle": "Stel betalingsinformatie in",
@@ -48,7 +78,8 @@
             "message": "Ga je akkoord om {{symbol}} {{amount}} te betalen?",
             "ok": "OK",
             "cancel": "annuleren"
-        }
+        },
+        "BuyAmountCredits": "Koop {{amount}} credits"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "Ontvangen {{amount}} credits"
+        },
+        "Assets/credits/bought": {
+            "content": "{{amount}} credits gekocht"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Hartelijk dank voor uw betaling voor &#39;{{description}}&#39;",
         "HavePaid": "Hoi {{1}}, dit is slechts een snelle bevestiging dat je {{2}} met succes hebt betaald aan {{3}} voor {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Nieuwe dienst",
+            "TitlePlaceholder": "Servicetitel",
+            "PricePlaceholder": "Prijs instellen",
+            "LinkPlaceholder": "stel extra info link in",
+            "DescriptionPlaceholder": "Dienstbeschrijving",
+            "SaveService": "Bespaar service"
+        },
+        "ManageServiceTemplates": "Servicesjablonen beheren",
+        "ManageServices": "Services beheren",
+        "FreeEvent": "Gratis evenement",
+        "OptionalContribution": "Optionele bijdrage",
+        "RequiredPayment": "Vereiste betaling",
+        "AreYouSureDelete": "Weet u zeker dat u deze service wilt verwijderen?",
+        "AmountServicesRelated": "Er zijn {{amount}} beschikbaarheden met betrekking tot deze service. Ze worden ook verwijderd."
     }
 }

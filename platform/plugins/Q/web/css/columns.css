@@ -19,6 +19,7 @@
 	vertical-align: top;
 	background: #fff;
 	overflow: hidden;
+	scrollbar-width: thin;
 }
 
 .Q_mobile .Q_columns_column {
@@ -32,10 +33,6 @@
 	visibility: hidden;
 	-webkit-box-shadow: black 0 0 4px;
 	-moz-box-shadow: black 0 0 4px;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-o-user-select: none;
 }
 .Q_notMobile .Q_columns_column:not(:last-of-type) {
 	margin-right: var(--column-margin);
@@ -49,6 +46,8 @@
 	background: #f8f8f8;
     border-bottom: 1px solid #aaa;
 	overflow: hidden;
+	min-height: 50px;
+	user-select: none;
 }
 
 html.Q_ios.Q_standalone .Q_columns_title {
@@ -76,6 +75,11 @@ html.Q_ios.Q_standalone .Q_columns_title {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	font-size: 25px;
+	line-height: 40px;
+    padding: 5px;
+    box-sizing: border-box;
+	margin: 0;
 }
 
 .Q_columns_title_container {
@@ -191,15 +195,15 @@ html.Q_ios.Q_standalone .Q_columns_title {
 }
 .Q_notMobile .Q_columns_stretchFirstColumn[data-column-count='2'] .Q_column_0 {
 	min-width: var(--column-width);
-	width: calc(100% - var(--column-width) - var(--column-margin) - var(--scrollbar-width));
+	width: calc(100% - var(--column-width) - var(--column-margin));
 }
 .Q_notMobile .Q_columns_stretchFirstColumn[data-column-count='3'] .Q_column_0 {
 	min-width: var(--column-width);
-	width: calc(100% - 2*(var(--column-width) + var(--column-margin) + var(--scrollbar-width)));
+	width: calc(100% - 2*(var(--column-width) + var(--column-margin)));
 }
 .Q_notMobile .Q_columns_stretchFirstColumn.Q_columns_over3 .Q_column_0 {
 	min-width: var(--column-width);
-	width: calc(100% - 2*(var(--column-width) + var(--column-margin) + var(--scrollbar-width)));
+	width: calc(100% - 2*(var(--column-width) + var(--column-margin)));
 }
 .Q_notMobile .Q_columns_stretchFirstColumn.Q_columns_animateWidth .Q_columns_column {
 	transition: width 50ms;

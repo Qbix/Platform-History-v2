@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "{{toTitle}} में नया {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} को {{relationDisplayType}} के रूप में जोड़ा गया",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ने एक टिप्पणी में आपका उल्लेख किया",
-        "Streams\/call": "{{displayName}} आपको कॉल कर रहा है"
+        "Streams\/call": "{{displayName}} ने वास्तविक समय पर कॉल शुरू किया"
     },
     "invite": {
         "messageContent": "{{displayName}} ने आपको {{inviteUrl}} आमंत्रित किया",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "क्या आप वाकई इस डिवाइस को अनसब्सक्राइब कर रहे हैं? यह इस उपकरण के लिए सूचनाओं को बंद कर देगा।",
         "Identifiers": "पहचानकर्ता",
         "Devices": "उपकरण",
-        "Streams": "स्ट्रीम"
+        "Streams": "स्ट्रीम",
+        "AreYouSureRemoveParticipant": "क्या आप वाकई इस प्रतिभागी को हटाना चाहते हैं?",
+        "RemoveParticipant": "प्रतिभागी को हटा दें"
     },
     "webrtc": {
         "allow": {

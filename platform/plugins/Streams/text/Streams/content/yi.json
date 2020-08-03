@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "נייַ {{relationDisplayType}} אין {{toTitle}}",
         "Streams\/relatedFrom\/*": "צוגעגעבן צו {{toTitle}} ווי {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} דערמאנט איר אין אַ באַמערקונג",
-        "Streams\/call": "{{displayName}} רופט דיך",
+        "Streams\/call": "{{displayName}} סטאַרטעד אַ פאַקטיש-צייט רופן",
         "ManageEmailSubscriptions": "פירן דיין E- בריוו אַבאָנעמענץ",
         "IfUnsubscribe": "אויב איר ווילט אַבאָנירן"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "זענט איר זיכער אַבאָנירן צו דעם מיטל? עס וועט קער אַוועק נאָוטאַפאַקיישאַנז צו דעם מיטל.",
         "Identifiers": "ידענטיפיערס",
         "Devices": "דעוויסעס",
-        "Streams": "סטרעאַמס"
+        "Streams": "סטרעאַמס",
+        "AreYouSureRemoveParticipant": "זענט איר זיכער אַז איר ווילט באַזייַטיקן דעם באַטייליקטער?",
+        "RemoveParticipant": "אַראָפּנעמען באַטייליקטער"
     },
     "menu": {
         "placeholder": "טיפּ בלאַט טיטל",

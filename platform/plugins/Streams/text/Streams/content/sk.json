@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Nové {{relationDisplayType}} o {{toTitle}}",
         "Streams\/relatedFrom\/*": "Pridané do {{toTitle}} ako {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} sa o vás zmienil v komentári",
-        "Streams\/call": "{{displayName}} vás volá"
+        "Streams\/call": "{{displayName}} začal hovor v reálnom čase"
     },
     "invite": {
         "messageContent": "{{displayName}} vás pozvalo na {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Naozaj chcete zrušiť odber tohto zariadenia? Vypne upozornenia pre toto zariadenie.",
         "Identifiers": "identifikátory",
         "Devices": "prístroje",
-        "Streams": "prúdy"
+        "Streams": "prúdy",
+        "AreYouSureRemoveParticipant": "Naozaj chcete tohto účastníka odstrániť?",
+        "RemoveParticipant": "Odstráňte účastníka"
     },
     "webrtc": {
         "allow": {

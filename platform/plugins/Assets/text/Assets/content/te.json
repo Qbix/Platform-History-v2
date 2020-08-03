@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "ఆహ్వానించబడినది {{999} by",
-        "YouHaveCreditsToStart": "ప్రారంభించడానికి మీకు {{1}} క్రెడిట్‌లు ఉన్నాయి"
+        "YouHaveCreditsToStart": "ప్రారంభించడానికి మీకు {{1}} క్రెడిట్‌లు ఉన్నాయి",
+        "PaymentFor": "&quot;{{1}}&quot; కోసం చెల్లింపు",
+        "PaymentTo": "{{999} to కు చెల్లింపు",
+        "PaymentToUser": "{{999} to కు చెల్లింపు",
+        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; లో చేరడానికి",
+        "CreatedCommunity": "కమ్యూనిటీని సృష్టించడానికి &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{1001} leave<\/a> &quot; ను వదిలిపెట్టినందుకు",
+        "BoughtCredits": "{{amount}} క్రెడిట్‌లను కొనుగోలు చేసింది",
+        "BuyAmountCredits": "{{amount}} క్రెడిట్‌లను కొనండి",
+        "MissingCredits": "క్రెడిట్స్ లేదు",
+        "YouMissingCredits": "మీకు {{amount}} క్రెడిట్‌లు లేవు",
+        "BuyCredits": "క్రెడిట్స్ కొనండి",
+        "Buy": "కొనుగోలు",
+        "Credits": "క్రెడిట్స్",
+        "ErrorInvalidAmount": "మొత్తం చెల్లదు",
+        "ErrorInvalidCurrency": "దురదృష్టవశాత్తు మేము ఇంకా {{999} currency కరెన్సీకి మద్దతు ఇవ్వము"
     },
     "history": {
         "Date": "తేదీ",
@@ -27,7 +42,22 @@
         "To": "కు",
         "From": "నుండి",
         "HistoryEmpty": "మీకు ఇంకా డేటా లేదు",
-        "SeeHistory": "History {999} for కోసం చెల్లింపు చరిత్ర చూడండి"
+        "SeeHistory": "History {999} for కోసం చెల్లింపు చరిత్ర చూడండి",
+        "PaymentFor": "{{amount}} క్రెడిట్‌లను ఖర్చు చేశారు",
+        "PaymentTo": "{{amount}} క్రెడిట్‌లను పంపారు",
+        "PaymentToUser": "{{amount}} క్రెడిట్‌లను పంపారు",
+        "JoinedPaidStream": {
+            "+": "{{amount}} క్రెడిట్‌లను సంపాదించింది",
+            "-": "{{amount}} క్రెడిట్‌లను ఖర్చు చేశారు"
+        },
+        "LeftPaidStream": {
+            "+": "{{amount}} క్రెడిట్‌లను అందుకున్నారు",
+            "-": "{{amount}} క్రెడిట్‌లను పంపారు"
+        },
+        "CreatedCommunity": "{{amount}} క్రెడిట్‌లను ఖర్చు చేశారు",
+        "BoughtCredits": "{{amount}} క్రెడిట్‌లను కొనుగోలు చేసింది",
+        "InviteAcceptedBy": "{{amount}} క్రెడిట్‌లను సంపాదించింది",
+        "YouHaveCreditsToStart": "{{amount}} క్రెడిట్‌లను సంపాదించింది"
     },
     "subscriptions": {
         "infoTitle": "చెల్లింపు సమాచారాన్ని సెట్ చేయండి",
@@ -48,7 +78,8 @@
             "message": "మీరు {{symbol}} {{1000} pay చెల్లించడానికి అంగీకరిస్తున్నారా?",
             "ok": "అలాగే",
             "cancel": "రద్దు"
-        }
+        },
+        "BuyAmountCredits": "{{amount}} క్రెడిట్‌లను కొనండి"
     },
     "types": {
         "Assets\/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets\/credits\/received": {
             "content": "{{amount}} క్రెడిట్‌లను అందుకున్నారు"
+        },
+        "Assets\/credits\/bought": {
+            "content": "{{amount}} క్రెడిట్‌లను కొనుగోలు చేసింది"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "&quot;{{999} for&quot; కోసం మీ చెల్లింపుకు ధన్యవాదాలు",
         "HavePaid": "హే {{1}}, ఇది మీరు {{1002} for కోసం {{2}} ను {{3}} కు విజయవంతంగా చెల్లించినట్లు శీఘ్ర నిర్ధారణ."
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "క్రొత్త సేవ",
+            "TitlePlaceholder": "సేవా శీర్షిక",
+            "PricePlaceholder": "ధరను నిర్ణయించండి",
+            "LinkPlaceholder": "అదనపు సమాచార లింక్‌ను సెట్ చేయండి",
+            "DescriptionPlaceholder": "సేవా వివరణ",
+            "SaveService": "సేవను సేవ్ చేయండి"
+        },
+        "ManageServiceTemplates": "సేవా టెంప్లేట్‌లను నిర్వహించండి",
+        "ManageServices": "సేవలను నిర్వహించండి",
+        "FreeEvent": "ఉచిత ఈవెంట్",
+        "OptionalContribution": "ఐచ్ఛిక సహకారం",
+        "RequiredPayment": "అవసరమైన చెల్లింపు",
+        "AreYouSureDelete": "మీరు ఖచ్చితంగా ఈ సేవను తొలగించాలనుకుంటున్నారా?",
+        "AmountServicesRelated": "ఈ సేవకు సంబంధించిన {{amount}} లభ్యత ఉన్నాయి. అవి కూడా తొలగించబడతాయి."
     }
 }

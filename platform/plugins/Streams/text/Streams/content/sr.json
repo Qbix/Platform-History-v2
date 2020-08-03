@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Ново {{relationDisplayType}} у {{toTitle}}",
         "Streams\/relatedFrom\/*": "Додато у {{toTitle}} као {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} споменуо вас је у коментару",
-        "Streams\/call": "{{displayName}} зове те"
+        "Streams\/call": "{{displayName}} започео је позив у стварном времену"
     },
     "invite": {
         "messageContent": "{{displayName}} вас је позвао на {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Јесте ли сигурни да ћете одјавити овај уређај? Искључиће обавештења на овом уређају.",
         "Identifiers": "Идентификатори",
         "Devices": "Уређаји",
-        "Streams": "Струје"
+        "Streams": "Струје",
+        "AreYouSureRemoveParticipant": "Јесте ли сигурни да желите да уклоните овог учесника?",
+        "RemoveParticipant": "Уклони учесника"
     },
     "webrtc": {
         "allow": {

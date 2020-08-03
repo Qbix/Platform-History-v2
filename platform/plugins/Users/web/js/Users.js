@@ -49,7 +49,7 @@
 			usingOther: "or you can ",
 			facebookSrc: null,
 			prompt: "Choose a username:",
-			newUser: "or create a new account",
+			newUser: "or create a new account below",
 			placeholders: {
 				identifier: "your mobile # or email",
 				mobile: "enter your mobile #",
@@ -1175,8 +1175,9 @@
 					if (response && response.errors) {
 						$this.plugin('Q/validator', 'invalidate',
 							Q.ajaxErrors(response.errors, [first_input.attr('name')]
-							));
+						));
 					}
+					$('button', $this).removeClass('Q_working').removeAttr('disabled');
 					$('#Users_login_identifier').blur();
 					first_input.plugin('Q/clickfocus');
 					return;
@@ -1401,11 +1402,11 @@
 				register_form.append($('<input type="hidden" name="app[platform]" value="facebook" />'));
 			}
 			if (json.emailExists || json.mobileExists) {
-				var p = $('<p id="Users_login_identifierExists" />')
+				var $p = $('<p id="Users_login_identifierExists" />')
 					.html(
 						json.emailExists ? Q.text.Users.login.emailExists : Q.text.Users.login.mobileExists
 					);
-				$('a', p).click(function () {
+				$('a', $p).click(function () {
 					$.post(
 						Q.ajaxExtend(Q.action("Users/resend"), 'data'),
 						'identifier=' + encodeURIComponent(identifier_input.val()),
@@ -1415,9 +1416,9 @@
 					);
 					return false;
 				});
-				register_form.prepend(p);
+				register_form.prepend($p);
 				if (Q.text.Users.login.newUser) {
-					$formContent.prepend($('<div />').html(Q.text.Streams.login.newUser));
+					$p.append($('<div />').html(Q.text.Streams.login.newUser));
 				}
 			}
 			return register_form;
@@ -3290,17 +3291,11 @@
 	Users.Facebook = {
 
 		usingPlatforms: null,
-
 		me: {},
-
 		type: 'web',
-
 		accessToken: null,
-
 		appId: null,
-
 		scheme: null,
-
 		scope: 'email,public_profile',
 
 		construct: function () {
@@ -3464,6 +3459,11 @@
 			switch (Users.Facebook.type) {
 				case 'web':
 					var timeout = 2000;
+					var ar = FB.getAuthResponse();
+					if (ar) {
+						cb(ar);
+						break;
+					}
 					if (timeout) {
 						var t = setTimeout(function () {
 							// just in case, if FB is not responding let's still fire the callback
@@ -3478,6 +3478,7 @@
 							cb(response);
 						}, force);
 					} else {
+						if (FB.getAuthResponse())
 						FB.getLoginStatus(cb, force);
 					}
 					break;

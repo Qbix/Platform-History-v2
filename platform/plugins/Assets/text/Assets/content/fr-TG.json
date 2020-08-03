@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Invitation acceptée par {{1}}",
-        "YouHaveCreditsToStart": "Vous avez {{1}} crédits pour commencer"
+        "YouHaveCreditsToStart": "Vous avez {{1}} crédits pour commencer",
+        "PaymentFor": "Paiement pour &quot;{{1}}&quot;",
+        "PaymentTo": "Paiement à {{1}}",
+        "PaymentToUser": "Paiement à {{userName}}",
+        "JoinedPaidStream": "pour avoir rejoint &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "CreatedCommunity": "pour créer la communauté &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "d&#39;avoir quitté &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "BoughtCredits": "A acheté {{amount}} crédits",
+        "BuyAmountCredits": "Acheter {{amount}} crédits",
+        "MissingCredits": "Crédits manquants",
+        "YouMissingCredits": "Il vous manque {{amount}} crédits",
+        "BuyCredits": "Acheter des crédits",
+        "Buy": "Acheter",
+        "Credits": "Crédits",
+        "ErrorInvalidAmount": "Montant invalide",
+        "ErrorInvalidCurrency": "Malheureusement, nous ne prenons pas encore en charge la devise {{currency}}"
     },
     "history": {
         "Date": "Rendez-vous amoureux",
@@ -27,7 +42,22 @@
         "To": "à",
         "From": "de",
         "HistoryEmpty": "Vous n&#39;avez pas encore de données",
-        "SeeHistory": "Afficher l&#39;historique des paiements pour {{1}}"
+        "SeeHistory": "Afficher l&#39;historique des paiements pour {{1}}",
+        "PaymentFor": "{{amount}} crédits dépensés",
+        "PaymentTo": "{{amount}} crédits envoyés",
+        "PaymentToUser": "{{amount}} crédits envoyés",
+        "JoinedPaidStream": {
+            "+": "A obtenu {{amount}} crédits",
+            "-": "{{amount}} crédits dépensés"
+        },
+        "LeftPaidStream": {
+            "+": "A reçu {{amount}} crédits",
+            "-": "{{amount}} crédits envoyés"
+        },
+        "CreatedCommunity": "{{amount}} crédits dépensés",
+        "BoughtCredits": "A acheté {{amount}} crédits",
+        "InviteAcceptedBy": "A obtenu {{amount}} crédits",
+        "YouHaveCreditsToStart": "A obtenu {{amount}} crédits"
     },
     "subscriptions": {
         "infoTitle": "Définir les informations de paiement",
@@ -48,7 +78,8 @@
             "message": "Acceptez-vous de payer le {{symbol}} {{amount}}?",
             "ok": "D&#39;accord",
             "cancel": "Annuler"
-        }
+        },
+        "BuyAmountCredits": "Acheter {{amount}} crédits"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "Reçu {{amount}} crédits"
+        },
+        "Assets/credits/bought": {
+            "content": "A acheté {{amount}} crédits"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Merci pour votre paiement pour &quot;{{description}}&quot;",
         "HavePaid": "Hé {{1}}, ceci n&#39;est qu&#39;une confirmation rapide que vous avez bien payé {{2}} à {{3}} pour {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Nouveau service",
+            "TitlePlaceholder": "Titre du service",
+            "PricePlaceholder": "Fixer le prix",
+            "LinkPlaceholder": "définir un lien d&#39;information supplémentaire",
+            "DescriptionPlaceholder": "Description du service",
+            "SaveService": "Enregistrer le service"
+        },
+        "ManageServiceTemplates": "Gérer les modèles de service",
+        "ManageServices": "Gérer les services",
+        "FreeEvent": "Événement gratuit",
+        "OptionalContribution": "Contribution optionnelle",
+        "RequiredPayment": "Paiement requis",
+        "AreYouSureDelete": "Voulez-vous vraiment supprimer ce service?",
+        "AmountServicesRelated": "Il existe {{amount}} disponibilités liées à ce service. Ils seront également supprimés."
     }
 }

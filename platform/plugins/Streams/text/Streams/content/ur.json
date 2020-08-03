@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "{{toTitle}} میں نیا {9 999}",
         "Streams\/relatedFrom\/*": "بطور {{10009} {{999} to میں شامل",
         "Streams\/mention": "{9 999} a نے ایک تبصرے میں آپ کا تذکرہ کیا",
-        "Streams\/call": "{9 999} you آپ کو کال کر رہا ہے"
+        "Streams\/call": "{9 999} نے ریئل ٹائم کال شروع کی"
     },
     "invite": {
         "messageContent": "{{displayName}} آپ کو {{inviteUrl}} میں مدعو کیا",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "کیا آپ واقعی اس آلہ کی رکنیت ختم کریں گے؟ یہ اس آلہ پر اطلاعات کو بند کردے گا۔",
         "Identifiers": "شناخت کرنے والے",
         "Devices": "ڈیوائسز",
-        "Streams": "سلسلہ"
+        "Streams": "سلسلہ",
+        "AreYouSureRemoveParticipant": "کیا آپ واقعی اس شریک کو ہٹانا چاہتے ہیں؟",
+        "RemoveParticipant": "شریک کو ہٹا دیں"
     },
     "webrtc": {
         "allow": {

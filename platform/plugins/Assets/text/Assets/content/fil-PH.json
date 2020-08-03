@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Imbitasyon na tinanggap ng {{1}}",
-        "YouHaveCreditsToStart": "Mayroon kang {{1}} credits upang magsimula"
+        "YouHaveCreditsToStart": "Mayroon kang {{1}} credits upang magsimula",
+        "PaymentFor": "Pagbabayad para sa &quot;{{1}}&quot;",
+        "PaymentTo": "Pagbabayad sa {{1}}",
+        "PaymentToUser": "Pagbabayad sa {{userName}}",
+        "JoinedPaidStream": "para sa pagsali sa &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "CreatedCommunity": "para sa paglikha ng pamayanan &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "para sa pag-iwan ng &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "BoughtCredits": "Binili {{amount}} kredito",
+        "BuyAmountCredits": "Bumili ng {{amount}} credits",
+        "MissingCredits": "Nawawalang Mga Kredito",
+        "YouMissingCredits": "Nawawala ka {{amount}} credits",
+        "BuyCredits": "Bumili ng mga kredito",
+        "Buy": "Bumili",
+        "Credits": "Mga Kredito",
+        "ErrorInvalidAmount": "Hindi wasto ang halaga",
+        "ErrorInvalidCurrency": "Sa kasamaang palad hindi pa namin sinusuportahan ang pera {{currency}}"
     },
     "history": {
         "Date": "Petsa",
@@ -27,7 +42,22 @@
         "To": "sa",
         "From": "mula sa",
         "HistoryEmpty": "Wala ka pang data",
-        "SeeHistory": "Tingnan ang kasaysayan ng pagbabayad para sa {{1}}"
+        "SeeHistory": "Tingnan ang kasaysayan ng pagbabayad para sa {{1}}",
+        "PaymentFor": "Gumastos ng {{amount}} credits",
+        "PaymentTo": "Ipinadala ang {{amount}} credits",
+        "PaymentToUser": "Ipinadala ang {{amount}} credits",
+        "JoinedPaidStream": {
+            "+": "Nakakuha ng mga kredito {{amount}}",
+            "-": "Gumastos ng {{amount}} credits"
+        },
+        "LeftPaidStream": {
+            "+": "Natanggap ang {{amount}} kredito",
+            "-": "Ipinadala ang {{amount}} credits"
+        },
+        "CreatedCommunity": "Gumastos ng {{amount}} credits",
+        "BoughtCredits": "Binili {{amount}} kredito",
+        "InviteAcceptedBy": "Nakakuha ng mga kredito {{amount}}",
+        "YouHaveCreditsToStart": "Nakakuha ng mga kredito {{amount}}"
     },
     "subscriptions": {
         "infoTitle": "Itakda ang Impormasyon sa Pagbabayad",
@@ -48,7 +78,8 @@
             "message": "Sumasang-ayon ka bang magbayad {{symbol}} {{amount}}?",
             "ok": "OK",
             "cancel": "Pagkansela"
-        }
+        },
+        "BuyAmountCredits": "Bumili ng {{amount}} credits"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "Natanggap ang {{amount}} credits"
+        },
+        "Assets/credits/bought": {
+            "content": "Binili {{amount}} kredito"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Salamat sa iyong pagbabayad para sa &quot;{{description}}&quot;",
         "HavePaid": "Hoy {{1}}, ito ay isang mabilis na kumpirmasyon na matagumpay mong nabayaran {{2}} sa {{3}} para sa {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Bagong Serbisyo",
+            "TitlePlaceholder": "Pamagat ng serbisyo",
+            "PricePlaceholder": "Itakda ang presyo",
+            "LinkPlaceholder": "itakda ang karagdagang link sa impormasyon",
+            "DescriptionPlaceholder": "Paglalarawan ng serbisyo",
+            "SaveService": "I-save ang Serbisyo"
+        },
+        "ManageServiceTemplates": "Pamahalaan ang Mga template ng Serbisyo",
+        "ManageServices": "Pamahalaan ang mga Serbisyo",
+        "FreeEvent": "Libreng kaganapan",
+        "OptionalContribution": "Opsyonal na kontribusyon",
+        "RequiredPayment": "Kinakailangan na pagbabayad",
+        "AreYouSureDelete": "Sigurado ka bang gusto mong tanggalin ang serbisyong ito?",
+        "AmountServicesRelated": "Mayroong mga {{amount}} availability na may kaugnayan sa serbisyong ito. Aalisin din sila."
     }
 }

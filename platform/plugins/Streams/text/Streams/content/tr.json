@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "{{toTitle}} içindeki {{relationDisplayType}} yeni",
         "Streams\/relatedFrom\/*": "{{toTitle}} &#39;a {{relationDisplayType}} olarak eklendi",
         "Streams\/mention": "{{&call 'avatar.displayName'}} bir yorumda sizden bahsetti",
-        "Streams\/call": "{{displayName}} seni çağırıyor"
+        "Streams\/call": "{{displayName}} gerçek zamanlı bir çağrı başlattı"
     },
     "invite": {
         "messageContent": "{{displayName}} seni {{inviteUrl}} davet etti",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Bu cihazın aboneliğini iptal ettiğinizden emin misiniz? Bu cihaza yapılan bildirimleri kapatır.",
         "Identifiers": "Tanımlayıcılar",
         "Devices": "Cihazlar",
-        "Streams": "Canlı Yayınlar"
+        "Streams": "Canlı Yayınlar",
+        "AreYouSureRemoveParticipant": "Bu katılımcıyı kaldırmak istediğinizden emin misiniz?",
+        "RemoveParticipant": "Katılımcıyı kaldır"
     },
     "webrtc": {
         "allow": {

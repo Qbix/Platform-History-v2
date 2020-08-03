@@ -685,6 +685,8 @@ abstract class Streams extends Base_Streams
 			return count($streams2);
 		}
 
+		$names = array_unique($names);
+
 		// Get the per-label access data
 		// Avoid making a join to allow more flexibility for sharding
 		$accesses = Streams_Access::select()
@@ -4711,83 +4713,91 @@ abstract class Streams extends Base_Streams
 	}
 
 	/**
-	 * Remove streams from system
+	 * Remove streams from the system, including all related rows.
 	 * @method removeStream
 	 * @static
-	 * @param {Streams_Stream|array} $stream Data about stream to remove.
-	 * Can be Streams_Stream object or array('publisherId' => ..., 'name' => ...)
-	 * Or array of these values.
+	 * @param {string} $publisherId
+	 * @param {string|array} $streamNames
 	 */
-	static function removeStream ($stream) {
-		if (is_array($stream)) {
-			if (isset($stream['name']) && isset($stream['publisherId'])) {
-				$stream = (object)$stream;
-			} else {
-				foreach ($stream as $item) {
-					self::removeStream($item);
-				}
-
-				return;
-			}
+	static function remove($publisherId, $streamNames)
+	{
+		if (is_string($streamNames)) {
+			$streamNames = array($streamNames);
 		}
+		
+		$params = compact('publisherId', 'streamNames');
+		
+		/**
+		 * @event Streams/remove {before}
+		 * @param {string} $publisherId
+		 * @param {string} $streamNames
+		 */
+		Q::event("Streams/remove", $params, 'before');
 
 		Streams_RelatedTo::delete()
-			->where(array('toPublisherId' => $stream->publisherId, 'toStreamName' => $stream->name))
-			->orWhere(array('fromPublisherId' => $stream->publisherId, 'fromStreamName' => $stream->name))
+			->where(array('toPublisherId' => $publisherId, 'toStreamName' => $streamNames))
+			->orWhere(array('fromPublisherId' => $publisherId, 'fromStreamName' => $streamNames))
 			->execute();
 
 		Streams_RelatedFrom::delete()
-			->where(array('toPublisherId' => $stream->publisherId, 'toStreamName' => $stream->name))
-			->orWhere(array('fromPublisherId' => $stream->publisherId, 'fromStreamName' => $stream->name))
+			->where(array('toPublisherId' => $publisherId, 'toStreamName' => $streamNames))
+			->orWhere(array('fromPublisherId' => $publisherId, 'fromStreamName' => $streamNames))
 			->execute();
 
 		Streams_Message::delete()
-			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
 			->execute();
 
 		Streams_MessageTotal::delete()
-			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
 			->execute();
 
 		Streams_Participant::delete()
-			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
 			->execute();
 
 		Streams_Access::delete()
-			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
 			->execute();
 
 		Streams_Subscription::delete()
-			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
 			->execute();
 
 		Streams_SubscriptionRule::delete()
-			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
 			->execute();
 
 		Streams_Invite::delete()
-			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
 			->execute();
 
 		Streams_Notification::delete()
-			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
 			->execute();
 
 		Streams_RelatedFromTotal::delete()
-			->where(array('fromPublisherId' => $stream->publisherId, 'fromStreamName' => $stream->name))
+			->where(array('fromPublisherId' => $publisherId, 'fromStreamName' => $streamNames))
 			->execute();
 
 		Streams_RelatedToTotal::delete()
-			->where(array('toPublisherId' => $stream->publisherId, 'toStreamName' => $stream->name))
+			->where(array('toPublisherId' => $publisherId, 'toStreamName' => $streamNames))
 			->execute();
 
 		Streams_Task::delete()
-			->where(array('publisherId' => $stream->publisherId, 'streamName' => $stream->name))
+			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
 			->execute();
 
 		Streams_Stream::delete()
-			->where(array('publisherId' => $stream->publisherId, 'name' => $stream->name))
+			->where(array('publisherId' => $publisherId, 'name' => $streamNames))
 			->execute();
+		
+		/**
+		 * @event Streams/remove {after}
+		 * @param {string} $publisherId
+		 * @param {string} $streamNames
+		 */
+		Q::event("Streams/remove", $params, 'after');
 	}
 
 	/**

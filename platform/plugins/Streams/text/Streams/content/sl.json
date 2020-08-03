@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Novo {{relationDisplayType}} v {{toTitle}}",
         "Streams\/relatedFrom\/*": "Dodano {{toTitle}} kot {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} vas je omenil v komentarju",
-        "Streams\/call": "{{displayName}} vas kliče"
+        "Streams\/call": "{{displayName}} je sprožil klic v realnem času"
     },
     "invite": {
         "messageContent": "{{displayName}} vas je povabil na {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Ali ste prepričani, da odjavite to napravo? Ta naprava bo izklopila obvestila.",
         "Identifiers": "Identifikatorji",
         "Devices": "Naprave",
-        "Streams": "Potoki"
+        "Streams": "Potoki",
+        "AreYouSureRemoveParticipant": "Ali ste prepričani, da želite odstraniti tega udeleženca?",
+        "RemoveParticipant": "Odstrani udeleženca"
     },
     "webrtc": {
         "allow": {

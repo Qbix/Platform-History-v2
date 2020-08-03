@@ -76,7 +76,7 @@
         "mobileExists": "Het u al voorheen by hierdie selfoonnommer probeer registreer? As dit so is, kyk na u SMS om u rekening te aktiveer. <a href='#resend' class='Q_button Users_activation_resend'>Klik om die boodskap weer te stuur<\/a>",
         "usingOther": "of jy kan",
         "prompt": "Kies &#39;n gebruikers naam:",
-        "newUser": "of skep &#39;n nuwe rekening",
+        "newUser": "of skep &#39;n nuwe rekening hieronder",
         "placeholders": {
             "identifier": "u mobiele nommer of e-pos",
             "mobile": "voer jou selfoon in #",

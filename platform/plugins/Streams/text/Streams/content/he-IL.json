@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "אין לך הרשאה להצטרף לשיחה זו.",
         "startedConversation": "פתח שיחה",
         "RealTimeCall": "שיחה בזמן אמת",
-        "SearchByName": "חפש לפי שם"
+        "SearchByName": "חפש לפי שם",
+        "Notifications": {
+            "Visit": "{{displayName}} מבקר בצ&#39;אט",
+            "Join": "{{displayName}} הצטרפו לצ&#39;אט",
+            "Leave": "{{displayName}} עזב את הצ&#39;אט",
+            "RelatedTo": "{{displayName}} הקים {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "הודעה {{& message.fields.type}} ל {{& stream.fields.title}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "האם אתה בטוח לבטל את הרישום למכשיר זה? זה יכבה את ההתראות למכשיר זה.",
         "Identifiers": "מזהים",
         "Devices": "מכשירים",
-        "Streams": "נחלים"
+        "Streams": "נחלים",
+        "AreYouSureRemoveParticipant": "האם אתה בטוח שברצונך להסיר את המשתתף הזה?",
+        "RemoveParticipant": "הסר את המשתתף"
     },
     "webrtc": {
         "allow": {
@@ -209,7 +217,8 @@
             "turnOffScreenSharing": "הסתר שיתוף מסך",
             "turnOnCamera": "הצג וידאו",
             "turnOnAudio": "בטל השתקת שמע",
-            "turnOnScreenSharing": "הצג שיתוף מסך"
+            "turnOnScreenSharing": "הצג שיתוף מסך",
+            "fullScreen": "מסך מלא"
         },
         "notAllowedToJoinCall": "אין לך הרשאה להצטרף לזרם זה.",
         "streamTitle": "{{1}} שיחה חיה"

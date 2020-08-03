@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} ໃໝ່ ໃນ {{toTitle}}",
         "Streams\/relatedFrom\/*": "ເພີ່ມເຂົ້າໃນ {{toTitle}} ເປັນ {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ໄດ້ກ່າວເຖິງທ່ານໃນ ຄຳ ເຫັນ",
-        "Streams\/call": "{{displayName}} ກຳ ລັງໂທຫາທ່ານ",
+        "Streams\/call": "{{displayName}} ເລີ່ມການໂທດ້ວຍເວລາຈິງ",
         "ManageEmailSubscriptions": "ຈັດການການສະ ໝັກ ໃຊ້ອີເມວຂອງທ່ານ",
         "IfUnsubscribe": "ຖ້າທ່ານຕ້ອງການຍົກເລີກການຈອງ"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "ທ່ານແນ່ໃຈບໍ່ຮັບສະ ໝັກ ອຸປະກອນນີ້ບໍ? ມັນຈະປິດການແຈ້ງເຕືອນໃຫ້ກັບອຸປະກອນນີ້.",
         "Identifiers": "ຕົວລະບຸຕົວຕົນ",
         "Devices": "ອຸປະກອນຕ່າງໆ",
-        "Streams": "ສາຍນ້ ຳ"
+        "Streams": "ສາຍນ້ ຳ",
+        "AreYouSureRemoveParticipant": "ທ່ານແນ່ໃຈບໍ່ວ່າທ່ານຕ້ອງການລຶບຜູ້ເຂົ້າຮ່ວມນີ້?",
+        "RemoveParticipant": "ເອົາຜູ້ເຂົ້າຮ່ວມອອກ"
     },
     "menu": {
         "placeholder": "ປະເພດຫົວຂໍ້ຫນ້າ",

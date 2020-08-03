@@ -76,7 +76,7 @@
         "mobileExists": "Apakah Anda mencoba mendaftar dengan nomor ponsel ini sebelumnya? Jika demikian, periksa SMS Anda untuk mengaktifkan akun Anda. <a href='#resend' class='Q_button Users_activation_resend'>Klik untuk mengirim ulang pesan<\/a>",
         "usingOther": "atau kamu bisa",
         "prompt": "Pilih nama pengguna:",
-        "newUser": "atau buat akun baru",
+        "newUser": "atau buat akun baru di bawah ini",
         "placeholders": {
             "identifier": "# ponsel atau email Anda",
             "mobile": "masukkan # ponsel Anda",

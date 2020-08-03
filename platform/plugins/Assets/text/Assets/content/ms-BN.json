@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Jemput diterima oleh {{1}}",
-        "YouHaveCreditsToStart": "Anda mempunyai kredit {{1}} untuk bermula"
+        "YouHaveCreditsToStart": "Anda mempunyai kredit {{1}} untuk bermula",
+        "PaymentFor": "Pembayaran untuk &quot;{{1}}&quot;",
+        "PaymentTo": "Pembayaran kepada {{1}}",
+        "PaymentToUser": "Pembayaran kepada {{userName}}",
+        "JoinedPaidStream": "kerana menyertai &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "CreatedCommunity": "untuk mewujudkan komuniti &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "kerana meninggalkan &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "BoughtCredits": "Membeli {{amount}} kredit",
+        "BuyAmountCredits": "Beli {{amount}} kredit",
+        "MissingCredits": "Tiada Kredit",
+        "YouMissingCredits": "Anda kehilangan {{amount}} kredit",
+        "BuyCredits": "Beli kredit",
+        "Buy": "Beli",
+        "Credits": "Kredit",
+        "ErrorInvalidAmount": "Amaun tidak sah",
+        "ErrorInvalidCurrency": "Sayangnya kami belum menyokong mata wang {{currency}}"
     },
     "history": {
         "Date": "Tarikh",
@@ -27,7 +42,22 @@
         "To": "kepada",
         "From": "dari",
         "HistoryEmpty": "Anda belum mempunyai data lagi",
-        "SeeHistory": "Lihat sejarah pembayaran untuk {{1}}"
+        "SeeHistory": "Lihat sejarah pembayaran untuk {{1}}",
+        "PaymentFor": "Membelanjakan {{amount}} kredit",
+        "PaymentTo": "Dikirim {{amount}} kredit",
+        "PaymentToUser": "Dikirim {{amount}} kredit",
+        "JoinedPaidStream": {
+            "+": "Memperoleh {{amount}} kredit",
+            "-": "Membelanjakan {{amount}} kredit"
+        },
+        "LeftPaidStream": {
+            "+": "Menerima {{amount}} kredit",
+            "-": "Dikirim {{amount}} kredit"
+        },
+        "CreatedCommunity": "Membelanjakan {{amount}} kredit",
+        "BoughtCredits": "Membeli {{amount}} kredit",
+        "InviteAcceptedBy": "Memperoleh {{amount}} kredit",
+        "YouHaveCreditsToStart": "Memperoleh {{amount}} kredit"
     },
     "subscriptions": {
         "infoTitle": "Tetapkan Maklumat Pembayaran",
@@ -48,7 +78,8 @@
             "message": "Adakah anda bersetuju membayar {{symbol}} {{amount}}?",
             "ok": "okey",
             "cancel": "Batalkan"
-        }
+        },
+        "BuyAmountCredits": "Beli {{amount}} kredit"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "Menerima kredit {{amount}}"
+        },
+        "Assets/credits/bought": {
+            "content": "Membeli {{amount}} kredit"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Terima kasih atas pembayaran anda untuk &quot;{{description}}&quot;",
         "HavePaid": "Hai {{1}}, ini hanya pengesahan ringkas bahawa anda telah berjaya membayar {{2}} kepada {{3}} untuk {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Perkhidmatan Baru",
+            "TitlePlaceholder": "Tajuk perkhidmatan",
+            "PricePlaceholder": "Tetapkan harga",
+            "LinkPlaceholder": "tetapkan pautan maklumat tambahan",
+            "DescriptionPlaceholder": "Penerangan perkhidmatan",
+            "SaveService": "Jimat Perkhidmatan"
+        },
+        "ManageServiceTemplates": "Urus Templat Perkhidmatan",
+        "ManageServices": "Urus Perkhidmatan",
+        "FreeEvent": "Acara percuma",
+        "OptionalContribution": "Sumbangan pilihan",
+        "RequiredPayment": "Pembayaran yang diperlukan",
+        "AreYouSureDelete": "Adakah anda pasti mahu memadamkan perkhidmatan ini?",
+        "AmountServicesRelated": "Terdapat {{amount}} ketersediaan yang berkaitan dengan perkhidmatan ini. Mereka juga akan dikeluarkan."
     }
 }

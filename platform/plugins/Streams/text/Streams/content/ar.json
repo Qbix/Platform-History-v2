@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "الجديد {{relationDisplayType}} في {{toTitle}}",
         "Streams\/relatedFrom\/*": "تمت الإضافة إلى {{toTitle}} كـ {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ذكرك في تعليق",
-        "Streams\/call": "{{displayName}} يتصل بك"
+        "Streams\/call": "بدأ {{displayName}} مكالمة في الوقت الفعلي"
     },
     "invite": {
         "messageContent": "{{displayName}} دعاك إلى {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "هل أنت متأكد من إلغاء اشتراك هذا الجهاز؟ سيؤدي إلى إيقاف تشغيل الإشعارات لهذا الجهاز.",
         "Identifiers": "معرفات",
         "Devices": "الأجهزة",
-        "Streams": "تيارات"
+        "Streams": "تيارات",
+        "AreYouSureRemoveParticipant": "هل أنت متأكد أنك تريد إزالة هذا المشارك؟",
+        "RemoveParticipant": "إزالة المشارك"
     },
     "webrtc": {
         "allow": {

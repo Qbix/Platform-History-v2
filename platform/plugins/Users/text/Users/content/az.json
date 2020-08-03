@@ -76,7 +76,7 @@
         "mobileExists": "Daha əvvəl bu mobil nömrə ilə qeydiyyatdan keçməyə çalışmısınız? Əgər belədirsə, hesabınızı aktivləşdirmək üçün SMS-i yoxlayın. <a href='#resend' class='Q_button Users_activation_resend'>Mesajı yenidən göndərmək üçün vurun<\/a>",
         "usingOther": "ya da edə bilərsən",
         "prompt": "İstifadəçi adı seçin:",
-        "newUser": "və ya yeni bir hesab yaradın",
+        "newUser": "və ya aşağıda yeni bir hesab yaradın",
         "placeholders": {
             "identifier": "mobil # və ya e-poçtunuz",
             "mobile": "mobil telefonunuza daxil olun",

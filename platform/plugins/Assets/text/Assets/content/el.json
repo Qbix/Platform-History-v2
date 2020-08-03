@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Η πρόσκληση έγινε αποδεκτή από την {{1}}",
-        "YouHaveCreditsToStart": "Έχετε {{1}} πιστώσεις για να ξεκινήσετε"
+        "YouHaveCreditsToStart": "Έχετε {{1}} πιστώσεις για να ξεκινήσετε",
+        "PaymentFor": "Πληρωμή για &quot;{{1}}&quot;",
+        "PaymentTo": "Πληρωμή σε {{1}}",
+        "PaymentToUser": "Πληρωμή σε {{userName}}",
+        "JoinedPaidStream": "για συμμετοχή στο &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "για τη δημιουργία κοινότητας &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "για έξοδο από το &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Αγοράσατε {{amount}} πιστώσεις",
+        "BuyAmountCredits": "Αγοράστε {{amount}} πιστώσεις",
+        "MissingCredits": "Λείπουν πιστώσεις",
+        "YouMissingCredits": "Λείπουν {{amount}} πιστώσεις",
+        "BuyCredits": "Αγορά πιστώσεων",
+        "Buy": "Αγορά",
+        "Credits": "Πιστώσεις",
+        "ErrorInvalidAmount": "Το ποσό δεν είναι έγκυρο",
+        "ErrorInvalidCurrency": "Δυστυχώς, δεν υποστηρίζουμε ακόμη το νόμισμα {{currency}}"
     },
     "history": {
         "Date": "Ημερομηνία",
@@ -27,7 +42,22 @@
         "To": "προς το",
         "From": "από",
         "HistoryEmpty": "Δεν έχετε ακόμα δεδομένα",
-        "SeeHistory": "Δείτε το ιστορικό πληρωμών για {{1}}"
+        "SeeHistory": "Δείτε το ιστορικό πληρωμών για {{1}}",
+        "PaymentFor": "Δαπανήθηκαν {{amount}} πιστώσεις",
+        "PaymentTo": "Έστειλαν {{amount}} πιστώσεις",
+        "PaymentToUser": "Έστειλαν {{amount}} πιστώσεις",
+        "JoinedPaidStream": {
+            "+": "Κερδίσατε {{amount}} πιστώσεις",
+            "-": "Δαπανήθηκαν {{amount}} πιστώσεις"
+        },
+        "LeftPaidStream": {
+            "+": "Λάβαμε {{amount}} πιστώσεις",
+            "-": "Έστειλαν {{amount}} πιστώσεις"
+        },
+        "CreatedCommunity": "Δαπανήθηκαν {{amount}} μονάδες",
+        "BoughtCredits": "Αγοράσατε {{amount}} πιστώσεις",
+        "InviteAcceptedBy": "Κερδίσατε {{amount}} πιστώσεις",
+        "YouHaveCreditsToStart": "Κερδίσατε {{amount}} πιστώσεις"
     },
     "subscriptions": {
         "infoTitle": "Ορίστε τις πληροφορίες πληρωμής",
@@ -48,7 +78,8 @@
             "message": "Συμφωνείτε να πληρώσετε {{symbol}} {{amount}};",
             "ok": "Εντάξει",
             "cancel": "Ματαίωση"
-        }
+        },
+        "BuyAmountCredits": "Αγοράστε {{amount}} πιστώσεις"
     },
     "types": {
         "Assets\/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets\/credits\/received": {
             "content": "Λήφθηκαν {{amount}} πιστώσεις"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Αγοράσατε {{amount}} πιστώσεις"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Σας ευχαριστούμε για την πληρωμή σας για το &quot;{{description}}&quot;",
         "HavePaid": "Γεια {{1}}, αυτή είναι μια γρήγορη επιβεβαίωση ότι έχετε πληρώσει με επιτυχία {{2}} στο {{3}} για {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Νέα υπηρεσία",
+            "TitlePlaceholder": "Τίτλος υπηρεσίας",
+            "PricePlaceholder": "Ορίστε την τιμή",
+            "LinkPlaceholder": "ορίστε πρόσθετο σύνδεσμο πληροφοριών",
+            "DescriptionPlaceholder": "Περιγραφή υπηρεσίας",
+            "SaveService": "Αποθήκευση υπηρεσίας"
+        },
+        "ManageServiceTemplates": "Διαχείριση προτύπων υπηρεσίας",
+        "ManageServices": "Διαχείριση υπηρεσιών",
+        "FreeEvent": "Δωρεάν εκδήλωση",
+        "OptionalContribution": "Προαιρετική συνεισφορά",
+        "RequiredPayment": "Απαιτούμενη πληρωμή",
+        "AreYouSureDelete": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την υπηρεσία;",
+        "AmountServicesRelated": "Υπάρχουν {{amount}} διαθεσιμότητα που σχετίζονται με αυτήν την υπηρεσία. Θα αφαιρεθούν επίσης."
     }
 }

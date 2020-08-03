@@ -76,7 +76,7 @@
         "mobileExists": "Kont ippruvajt tirreġistra ma &#39;dan in-numru tal-mowbajl qabel? Jekk iva, iċċekkja l-SMS tiegħek biex tattiva l-kont tiegħek. <a href='#resend' class='Q_button Users_activation_resend'>Ikklikkja biex terġa &#39;tibgħat il-messaġġ<\/a>",
         "usingOther": "jew tista &#39;",
         "prompt": "Għażel Username:",
-        "newUser": "jew toħloq kont ġdid",
+        "newUser": "jew toħloq kont ġdid hawn taħt",
         "placeholders": {
             "identifier": "# jew email mobbli tiegħek",
             "mobile": "daħħal il-mobile tiegħek #",

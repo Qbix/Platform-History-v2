@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Nyt {{relationDisplayType}} om {{toTitle}}",
         "Streams\/relatedFrom\/*": "Føjet til {{toTitle}} som {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} nævnte dig i en kommentar",
-        "Streams\/call": "{{displayName}} ringer til dig"
+        "Streams\/call": "{{displayName}} startede et realtidsopkald"
     },
     "invite": {
         "messageContent": "{{displayName}} inviterede dig til {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Er du sikker på at afmelde denne enhed? Det deaktiverer underretninger til denne enhed.",
         "Identifiers": "identifikatorer",
         "Devices": "Enheder",
-        "Streams": "Vandløb"
+        "Streams": "Vandløb",
+        "AreYouSureRemoveParticipant": "Er du sikker på, at du vil fjerne denne deltager?",
+        "RemoveParticipant": "Fjern deltageren"
     },
     "webrtc": {
         "allow": {

@@ -37,7 +37,8 @@ class Websites_Webpage
 		$response = Q_Utils::get($url, $_SERVER['HTTP_USER_AGENT'], array(
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_VERBOSE => true,
-			CURLOPT_HEADER => true
+			CURLOPT_HEADER => true,
+			CURLOPT_FOLLOWLOCATION => true
 		));
 		$response = explode("\r\n\r\n", $response);
 		if (!is_array($response) || count($response) < 2) {

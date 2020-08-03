@@ -799,10 +799,12 @@ Elp.cssDimensions = function () {
  * @method scrollingParent
  * @param {Boolean} [skipIfNotOverflowed=false] If element is not overflowed, continue search
  * @param {String} [direction="all"] Can also be "vertical" or "horizontal"
+ * @param {Boolean} [includSelf=false] Whether the element itself can be returned if it matches
  */
-Elp.scrollingParent = function(skipIfNotOverflowed, direction) {
+Elp.scrollingParent = function(skipIfNotOverflowed, direction, includeSelf) {
 	var p = this;
-	while (p = p.parentNode) {
+	while (includeSelf ? 1 : (p = p.parentNode)) {
+		includeSelf = false;
 		if (typeof p.computedStyle !== 'function') {
 			continue;
 		}
@@ -3764,6 +3766,10 @@ Q.Tool = function _Q_Tool(element, options) {
 	this.activated = true;
 	this.element = element;
 	this.typename = 'Q.Tool';
+	
+	if (options === true) {
+		options = {};
+	}
 
 	if (root.jQuery) {
 		jQuery(element).data('Q_tool', this);
@@ -5138,14 +5144,10 @@ Q.Links = {
 		var parts = [cc, bcc, subject, body];
 		var url = "mailto:" + (to || '');
 		var char = '?';
-		var encode = false;
 		for (var i=0, l=names.length; i<l; ++i) {
 			if (parts[i]) {
 				url += char + names[i] + '=' + 
-					(encode ? encodeURIComponent(parts[i]) : parts[i]);
-				if (i >= 2) {
-					encode = true;
-				}
+					(i >= 2 ? encodeURIComponent(parts[i]) : parts[i]);
 				char = '&';
 			}
 		}
@@ -6486,7 +6488,10 @@ Q.Browser = {
 var _supportsPassive;
 
 /**
- * Add an event listener to an element
+ * Add an event listener to an element, but with more features than Element.prototype.addEventListener()
+ * You can pass this event listener also to the corresponding Q.removeEventListener(), but
+ * only if you call addEventListener once per eventHandler. Otherwise, you should use this function's return value
+ * in calls to Q.removeEventListener().
  * @static
  * @method addEventListener
  * @param {HTMLElement} element
@@ -6504,6 +6509,7 @@ var _supportsPassive;
  * @param {boolean} hookStopPropagation
  *  Whether to override Event.prototype.stopPropagation in order to capture the event even
  *  when a descendant of the element tries to prevent.
+ * @return {Function} the wrapper function to pass to corresponding Q.removeEventListener
  */
 Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandler, useCapture, hookStopPropagation) {
 	useCapture = useCapture || false;
@@ -6517,7 +6523,7 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		Q.handle(eventHandler, element, [e]);
 	}
 	var handler = (eventHandler.typename === "Q.Event"
-		? eventHandler.eventListener = _Q_addEventListener_wrapper
+		? (eventHandler.eventListener = _Q_addEventListener_wrapper)
 		: eventHandler);
 	if (typeof eventName === 'string') {
 		var split = eventName.trim().split(' ');
@@ -6551,9 +6557,8 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		if (!('eventName' in params)) {
 			throw new Q.Error("Custom $.fn.on handler: need to set params.eventName");
 		}
-		eventHandler.Q_wrapper = wrapper;
-		eventName = params.eventName;
-		eventHandler = wrapper;
+		eventHandler.Q_wrapper = handler = wrapper;
+		eventName = wrapper.eventName = params.eventName;
 	}
 	if (!eventName) {
 		return;
@@ -6576,11 +6581,12 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 	} else if (element.attachEvent) {
 		element.attachEvent('on'+eventName, handler);
 	} else {
+		eventName = eventName.toLowerCase();
 		element["on"+eventName] = function () {
 			if (element["on"+eventName]) {
 				element["on"+eventName].apply(this, arguments);
 			}
-			eventHandler.apply(this, arguments);
+			handler.apply(this, arguments);
 		}; // best we can do
 	}
 	
@@ -6600,6 +6606,7 @@ Q.addEventListener = function _Q_addEventListener(element, eventName, eventHandl
 		hooks.push(args);
 	}
 	function _f() { }
+	return handler;
 };
 Q.addEventListener.hooks = [];
 function _Q_Event_stopPropagation() {
@@ -6640,6 +6647,9 @@ Q.removeEventListener = function _Q_removeEventListener(element, eventName, even
 	var handler = (eventHandler.typename === "Q.Event"
 		? eventHandler.eventListener
 		: eventHandler);
+	if (handler.Q_wrapper) {
+		handler = handler.Q_wrapper;
+	}
 	if (typeof eventName === 'string') {
 		var split = eventName.split(' ');
 		if (split.length > 1) {
@@ -6656,7 +6666,11 @@ Q.removeEventListener = function _Q_removeEventListener(element, eventName, even
 		return false;
 	}
 	if (typeof eventName === 'function') {
-		eventName = eventHandler.Q_wrapper && eventHandler.Q_wrapper.eventName;
+		var params = {
+			original: function () {}
+		};
+		eventName(params);
+		eventName = params.eventName;
 		if (!eventName) {
 			return false;
 		}
@@ -11395,7 +11409,7 @@ Q.Pointer = {
 	},
 	/**
 	 * Get the rectangle enclosing all the children of the container element
-	 * and – for their children with overflow: visible – their overflowed contents.
+	 * and – for their children with overflow: visible – their overflowed contents.
 	 * @static
 	 * @method boundingRect
 	 * @param {HTMLElement} [container=document.body] The container element
@@ -11509,6 +11523,16 @@ Q.Pointer = {
 			which = (button & 1 ? 1 : (button & 2 ? 3 : (button & 4 ? 2 : 0)));
 		}
 		return which;
+	},
+	/**
+	 * Return whether button was pressed or at least one finger is touching touchscreen
+	 * @static
+	 * @method isPressed
+	 * @param {Q.Event} e Some mouse or touch event from the DOM
+	 * @return {boolean}
+	 */
+	isPressed: function (e) {
+		return !!(Q.Pointer.which(e) || Q.Pointer.touchCount(e));
 	},
 	/**
 	 * Consistently returns the target of an event across browsers
@@ -11661,8 +11685,8 @@ Q.Pointer = {
 						}
 						var offset = target.getBoundingClientRect(); //Q.Pointer.offset(target)
 						point = {
-							x: offset.left + target.offsetWidth / 2,
-							y: offset.top + target.offsetHeight / 2
+							x: Q.Pointer.scrollLeft() + offset.left + target.offsetWidth / 2,
+							y: Q.Pointer.scrollTop() + offset.top + target.offsetHeight / 2
 						};
 					} else {
 						point = target;
@@ -11847,9 +11871,8 @@ Q.Pointer = {
 	 *   You will want to skip the mask if you want to allow scrolling, for instance.
 	 * @param {Q.Event} [event] Some mouse or touch event from the DOM
 	 * @param {Object} [extraInfo] Extra info to pass to onCancelClick
-	 * @param {Boolean} [msUntilStopCancelClick] Pass a number here to set
-	 *   Q.Pointer.canceledClick = false after this number of milliseconds.
-	 *   Usually you don't want to do this, because it might create race conditions.
+	 * @param {Boolean} [msUntilStopCancelClick=300] Pass a number here to change
+	 *   how many milliseconds until setting Q.Pointer.canceledClick = false .
 	 * @return {boolean}
 	 */
 	cancelClick: function (skipMask, event, extraInfo, msUntilStopCancelClick) {
@@ -11861,9 +11884,15 @@ Q.Pointer = {
 		if (!skipMask) {
 			Q.Masks.show('Q.click.mask');
 		}
+		if (msUntilStopCancelClick === undefined) {
+			msUntilStopCancelClick = 500;
+		}
 		if (msUntilStopCancelClick) {
+			++_cancelClick_counter;
 			setTimeout(function () {
-				Q.Pointer.canceledClick = false;
+				if (--_cancelClick_counter === 0) {
+					Q.Pointer.canceledClick = false;
+				}
 			}, msUntilStopCancelClick);
 		}
 	},
@@ -11987,6 +12016,7 @@ Q.Pointer = {
 	}
 };
 
+var _cancelClick_counter = 0;
 Q.Pointer.preventRubberBand.suspend = {};
 
 function _cancelClickBriefly() {
@@ -12237,6 +12267,7 @@ var _onPointerEndHandler = Q.Pointer.ended = function _onPointerEndHandler() {
 	Q.removeEventListener(window, Q.Pointer.cancel, _onPointerEndHandler);
 	Q.removeEventListener(window, Q.Pointer.click, _onPointerClickHandler);
 	Q.handle(Q.Pointer.onEnded, this, arguments);
+	_pos = false;
 	setTimeout(function () {
 		Q.Pointer.canceledClick = false;
 	}, 100);

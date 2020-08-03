@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Cusub {{relationDisplayType}} ee {{toTitle}}",
         "Streams\/relatedFrom\/*": "Lagu daray {{toTitle}} sida {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ayaa lagu sheegay faallooyinka",
-        "Streams\/call": "{{displayName}} ayaa ku soo wacaya",
+        "Streams\/call": "{{displayName}} waxay bilaabeen wicitaan waqti-buuxa ah",
         "ManageEmailSubscriptions": "maaree rukhsadaha emaylkaaga",
         "IfUnsubscribe": "Hadaad rabto inaad rukhsad ka bixiso"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Ma hubtaa in aad iskaa iska bixinayso aaladda? Waxay dami doontaa ogeysiisyada aaladdaan.",
         "Identifiers": "Aqoonsiyeyaasha",
         "Devices": "Aaladda",
-        "Streams": "Qulqulka"
+        "Streams": "Qulqulka",
+        "AreYouSureRemoveParticipant": "Ma hubtaa inaad rabto inaad meesha ka saarto ka qaybqaatahan?",
+        "RemoveParticipant": "Ka saar ka qaybqaatayaasha"
     },
     "menu": {
         "placeholder": "nooca cinwaanka bogga",

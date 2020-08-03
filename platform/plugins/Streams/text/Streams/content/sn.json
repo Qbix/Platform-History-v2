@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Nyowani {{relationDisplayType}} mu {{1000]}",
         "Streams\/relatedFrom\/*": "Yakawedzerwa ku {{toTitle}} se {{1000]}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} akakureva iwe mumashoko",
-        "Streams\/call": "{{displayName}} ari kukudaidza",
+        "Streams\/call": "{{displayName}} yakatanga kuridza chaiko-nguva",
         "ManageEmailSubscriptions": "maneja kunyoreswa kwako kweemail",
         "IfUnsubscribe": "Kana iwe uchida kuzvinyoresa"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Une chokwadi chekunyora chishandiso ichi? Iyo inodzima zviziviso zvemudziyo uyu.",
         "Identifiers": "Identifiers",
         "Devices": "Zvishandiso",
-        "Streams": "Miromo"
+        "Streams": "Miromo",
+        "AreYouSureRemoveParticipant": "Une chokwadi here kuti iwe unoda kubvisa uyu mutambi?",
+        "RemoveParticipant": "Bvisa mutambi"
     },
     "menu": {
         "placeholder": "Type peji rezita",

@@ -76,7 +76,7 @@
         "mobileExists": "Yrititkö rekisteröityä tähän matkapuhelinnumeroon aiemmin? Jos näin on, tarkista tekstiviestillä aktivoidaksesi tilisi. <a href='#resend' class='Q_button Users_activation_resend'>Napsauta lähettääksesi viestin uudelleen</a>",
         "usingOther": "tai voit",
         "prompt": "Valitse käyttäjänimi:",
-        "newUser": "tai luo uusi tili",
+        "newUser": "tai luo uusi tili alle",
         "placeholders": {
             "identifier": "matkapuhelinnumerosi tai sähköpostisi",
             "mobile": "kirjoita matkapuhelinnumero",

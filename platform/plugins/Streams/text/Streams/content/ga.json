@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Nua {{relationDisplayType}} i {{toTitle}}",
         "Streams\/relatedFrom\/*": "Curtha le {{toTitle}} mar {{relationDisplayType}}",
         "Streams\/mention": "Luaigh {{&call 'avatar.displayName'}} tú trácht",
-        "Streams\/call": "Tá {{displayName}} ag glaoch ort"
+        "Streams\/call": "Chuir {{displayName}} tús le glao fíor-ama"
     },
     "invite": {
         "messageContent": "Thug {{displayName}} cuireadh duit {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "An bhfuil tú cinnte díliostáil an fheiste seo? Múchfaidh sé fógraí chuig an bhfeiste seo.",
         "Identifiers": "Aitheantóirí",
         "Devices": "Gléasanna",
-        "Streams": "Sruthanna"
+        "Streams": "Sruthanna",
+        "AreYouSureRemoveParticipant": "An bhfuil tú cinnte gur mhaith leat an rannpháirtí seo a bhaint?",
+        "RemoveParticipant": "Bain an rannpháirtí"
     },
     "webrtc": {
         "allow": {

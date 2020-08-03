@@ -76,7 +76,7 @@
         "mobileExists": "Pokusili jste se dříve zaregistrovat toto mobilní číslo? Pokud ano, zkontrolujte svůj účet a aktivujte svůj účet. <a href='#resend' class='Q_button Users_activation_resend'>Klepnutím zprávu znovu odešlete</a>",
         "usingOther": "nebo můžete",
         "prompt": "Vyberte si uživatelské jméno:",
-        "newUser": "nebo si vytvořte nový účet",
+        "newUser": "nebo si vytvořte nový účet níže",
         "placeholders": {
             "identifier": "váš mobilní telefon nebo e-mail",
             "mobile": "zadejte svůj mobilní #",

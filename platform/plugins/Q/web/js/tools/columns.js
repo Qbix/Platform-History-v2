@@ -19,7 +19,7 @@ var dataKey_opening = 'opening';
  *  @param {String}  [options.column] You can put a default content for all columns here (which is shown as they are loading)
  *  @param {String}  [options.controls] You can put default controls HTML for all columns here (which is shown as they are loading)
  *  @param {Object}  [options.data] Any data you want to associate with the column, to be retrieved later by the tool.data() method
- *  @param {Object} [options.expandOnMobile] Whether to expand the top/bottom of columns as they are opened on a mobile device, to fill the scren
+ *  @param {Object}  [options.expandOnMobile] Whether to expand the top/bottom of columns as they are opened on a mobile device, to fill the scren
  *  @param {Boolean} [options.expandOnMobile.top=true] 
  *  @param {Boolean} [options.expandOnMobile.bottom=true] 
  *  @param {Object}  [options.attributes] Any attributes you want to add to the column element
@@ -40,7 +40,7 @@ var dataKey_opening = 'opening';
  *  @param {Object}  [options.handlers] Pairs of columnName: handler where the handler can be a function or a string, in which you assign a function to Q.exports .
  *  @param {Boolean} [options.fullscreen] Whether to use fullscreen mode on mobile phones, using document to scroll instead of relying on possibly buggy "overflow" CSS implementation. Defaults to true on Android stock browser, false everywhere else.
  *  @param {Boolean} [options.hideBackgroundColumns=true] Whether to hide background columns on mobile (perhaps improving browser rendering).
- *  @param {Boolean} [options.stretchFirstColumn=true] If true, stretch first column to whole page width if no other columns exit.
+ *  @param {Boolean} [options.stretchFirstColumn=true] If true, stretch first column to whole page width if no other columns appear.
  *  @param {Boolean|String} [options.pagePushUrl] if this is true and the url of the column
  *    is specified, then Q.Page.push() is called with this URL. You can also pass a string here,
  *    to override the url (in case, for example, the url of the column is not specified, because it is rendered client-side).
@@ -83,7 +83,7 @@ Q.Tool.define("Q/columns", function(options) {
 		$toolElement.on(Q.Pointer.fastclick, selector, function(){
 			var index = $(this).closest('.Q_columns_column').data(dataKey_index);
 			if (state.locked) return;
-			if (index) {
+			if (index > 0) {
 				tool.close(index);
 			}
 		}); // no need for key, it will be removed when tool element is removed
@@ -230,8 +230,9 @@ Q.Tool.define("Q/columns", function(options) {
 	 *  @param {String} [options.name] any name to assign to the column
 	 *  @param {String} [options.columnClass] to add a class to the column
 	 *  @param {Object} [options.data] to add data on the column element with jQuery
-	 *  @param {Object} [options.template] template to render for the "column" slot
+	 *  @param {Object} [options.template] name of the template to render for the "column" slot
 	 *  @param {Object} [options.fields] fields for the template, if any
+	 *  @param {Object} [options.activateOptions] any options to pass to Q.activate() for the column
 	 *  @param {Object} [options.title] override the title of the column
 	 *  @param {Object} [options.column] override the html of the column
 	 *  @param {Object} [options.url] a url to request the slots "title" and "column" from
@@ -291,8 +292,13 @@ Q.Tool.define("Q/columns", function(options) {
 			state.container = tool.$('.Q_columns_container')[0];
 			$div.append($title, columnSlot, controlsSlot)
 				.data(dataKey_index, index)
-				.data(dataKey_scrollTop, Q.Pointer.scrollTop())
-				.appendTo(state.container);
+				.data(dataKey_scrollTop, Q.Pointer.scrollTop());
+			var $columns = $('.Q_columns_column', state.container);
+			if ($columns.length) {
+				$div.insertAfter($columns.last());
+			} else {
+				$div.appendTo($(state.container));
+			}
 			if (o.fullscreen) {
 				$(window).scrollTop(0);
 			}
@@ -314,7 +320,7 @@ Q.Tool.define("Q/columns", function(options) {
 		if (o.name && state.classes && state.classes[o.name]) {
 			$(div).addClass(state.classes[o.name]);
 		}
-		if (state.closeFromSwipeDown) {
+		if (state.closeFromSwipeDown && index > 0) {
 			Q.addEventListener($title[0], 'touchstart', function (e1) {
 				var x1 = Q.Pointer.getX(e1);
 				var y1 = Q.Pointer.getY(e1);
@@ -555,7 +561,7 @@ Q.Tool.define("Q/columns", function(options) {
 					$mask.remove();
 					$div.removeClass('Q_columns_loading');
 				}
-				div.setClass('Q_columns_hasControls', !!$controlsSlot[0].innerHTML);
+				div.setClass('Q_columns_hasControls', $controlsSlot[0] && !!$controlsSlot[0].innerHTML);
 			}).run();
 			
 			Q.each(['on', 'before'], function (k, prefix) {

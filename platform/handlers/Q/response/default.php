@@ -30,12 +30,10 @@ function Q_response_default($params)
 	}
 	$event = "$module/$action/response/$slotName";
 	$function_name = $module.'_'.$action.'_response_'.$slotName;
-	if (function_exists($function_name)) {
+	if (Q::canHandle($event)) {
 		$result = Q::event($event);
 		$result = isset($result) ? $result : "Don't return null from $function_name";
-	}
-	if (Q::canHandle($event)) {
-		return Q::event($event);
+		return $result;
 	}
 	throw new Q_Exception_MissingSlot(compact('event'));
 }

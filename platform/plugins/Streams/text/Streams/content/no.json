@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Ny {{relationDisplayType}} på {{toTitle}}",
         "Streams\/relatedFrom\/*": "Lagt til {{toTitle}} som {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} nevnte deg i en kommentar",
-        "Streams\/call": "{{displayName}} ringer deg",
+        "Streams\/call": "{{displayName}} startet en samtale i sanntid",
         "ManageEmailSubscriptions": "administrer e-postabonnementene dine",
         "IfUnsubscribe": "Hvis du vil melde deg ut"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Er du sikker på å avslutte abonnementet på denne enheten? Det vil slå av varsler på denne enheten.",
         "Identifiers": "identifikatorer",
         "Devices": "enheter",
-        "Streams": "strømmer"
+        "Streams": "strømmer",
+        "AreYouSureRemoveParticipant": "Er du sikker på at du vil fjerne denne deltakeren?",
+        "RemoveParticipant": "Fjern deltaker"
     },
     "menu": {
         "placeholder": "skriv inn sidetittel",

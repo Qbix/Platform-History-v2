@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Baru {{relationDisplayType}} di {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ditambahkan ke {{toTitle}} sebagai {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} menyebut Anda dalam komentar",
-        "Streams\/call": "{{displayName}} memanggil Anda",
+        "Streams\/call": "{{displayName}} memulai panggilan real-time",
         "ManageEmailSubscriptions": "kelola langganan email Anda",
         "IfUnsubscribe": "Jika Anda ingin berhenti berlangganan"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Apakah Anda yakin berhenti berlangganan perangkat ini? Ini akan mematikan notifikasi ke perangkat ini.",
         "Identifiers": "Pengidentifikasi",
         "Devices": "Perangkat",
-        "Streams": "Streaming"
+        "Streams": "Streaming",
+        "AreYouSureRemoveParticipant": "Apakah Anda yakin ingin menghapus peserta ini?",
+        "RemoveParticipant": "Hapus peserta"
     },
     "menu": {
         "placeholder": "ketik judul halaman",

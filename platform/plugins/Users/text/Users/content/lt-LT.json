@@ -76,7 +76,7 @@
         "mobileExists": "Ar bandėte anksčiau registruotis šiuo mobiliojo telefono numeriu? Jei taip, patikrinkite SMS, kad suaktyvintumėte savo sąskaitą. <a href='#resend' class='Q_button Users_activation_resend'>Spustelėkite, jei norite dar kartą išsiųsti pranešimą</a>",
         "usingOther": "ar galite",
         "prompt": "Pasirinkite vartotojo vardą:",
-        "newUser": "arba sukurkite naują paskyrą",
+        "newUser": "arba sukurkite naują sąskaitą žemiau",
         "placeholders": {
             "identifier": "savo mobiliajame telefone arba el",
             "mobile": "įveskite savo mobiliojo telefono numerį",

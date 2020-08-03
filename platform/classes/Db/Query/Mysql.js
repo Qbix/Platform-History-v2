@@ -406,7 +406,27 @@ var Query_Mysql = function(mysql, type, clauses, parameters, table) {
 
 		var expr, value;
 		if (typeof condition === 'object') {
-			condition = criteria_internal(this, condition);
+			var conditionList = [];
+			for (var expr in condition) {
+				var i, l, value = condition[expr];
+				if (Q.isArrayLike(value)) {
+					// a bunch of OR criteria
+					var pieces = [];
+					for (i=0, l=value.length; i<l; ++i) {
+						var v = value[i];
+						v = v.map(function (a) {
+							return new Db.Expression(a);
+						});
+						pieces.push(criteria_internal(this, v));
+					}
+					conditionList.push(pieces.join(' OR '));
+				} else {
+					conditionList = criteria_internal(this, {
+						expr: new Db_Expression(value)
+					}, {});
+				}
+			}
+			condition = conditionList.join(' AND ' );
 		} else if (condition && condition.typename === "Db.Expression") {
 			Q.extend(this.parameters, condition.parameters);
 			condition = condition.toString();
@@ -1199,8 +1219,9 @@ function replaceKeysCompare(a, b) {
 	return b.length-a.length;
 }
 
-function criteria_internal (query, criteria) {
+function criteria_internal (query, criteria, fillCriteria) {
 	var criteria_list, expr, parts, columns, value, values, v, i, j, k, vl, vl2, pl;
+	var fillCriteria = query.criteria;
 	if (typeof criteria === 'object') {
 		criteria_list = [];
 		for (expr in criteria) {
@@ -1220,8 +1241,8 @@ function criteria_internal (query, criteria) {
 				for (k=0; k<pl; ++k) {
 					c = parts[k];
 					columns.push(Query_Mysql.column(c));
-					if (!query.criteria[c]) {
-						query.criteria[c] = []; // sharding heuristics
+					if (!fillCriteria[c]) {
+						fillCriteria[c] = []; // sharding heuristics
 					}
 				}
 				var list = [];
@@ -1244,7 +1265,7 @@ function criteria_internal (query, criteria) {
 						vector.push(":_criteria_" + _valueCounter);
 						query.parameters["_criteria_" + _valueCounter] = value[j][k];
 						_valueCounter = (_valueCounter + 1) % 1000000;
-						query.criteria[column].push(value[j][k]); // sharding heuristics
+						fillCriteria[column].push(value[j][k]); // sharding heuristics
 					}
 					list.push('(' + vector.join(',') + ')');
 				}

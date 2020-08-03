@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Болумушту {{relationDisplayType}} {{жылы 1000}}",
         "Streams\/relatedFrom\/*": "кошулду {{toTitle}} {{катары 1000}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} комментарий сага айтылган",
-        "Streams\/call": "{{displayName}}, сени чакырып жатат",
+        "Streams\/call": "{{displayName}} чыныгы убакытта чалууну баштады",
         "ManageEmailSubscriptions": "электрондук почта жазылууларды башкаруу",
         "IfUnsubscribe": "Эгер сиз жазылууну каалайм"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Сиз бул аппаратты жазылууну барбы? Бул түзмөккө билдирүүлөрдү өчүрөт.",
         "Identifiers": "Identifiers",
         "Devices": "түзмөктөр",
-        "Streams": "агымдар"
+        "Streams": "агымдар",
+        "AreYouSureRemoveParticipant": "Чын эле бул катышуучуну алып салгыңыз келеби?",
+        "RemoveParticipant": "Катышуучуну алып салуу"
     },
     "menu": {
         "placeholder": "түрү барак аты",

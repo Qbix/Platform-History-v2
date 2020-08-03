@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Naujas {{relationDisplayType}} {{toTitle}}",
         "Streams\/relatedFrom\/*": "Pridėta prie {{toTitle}} kaip {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} paminėjo jus komentare",
-        "Streams\/call": "{{displayName}} skambina jums"
+        "Streams\/call": "{{displayName}} pradėjo skambutį realiuoju laiku"
     },
     "invite": {
         "messageContent": "{{displayName}} pakvietė jus į {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Ar tikrai atšaukėte šio įrenginio prenumeratą? Tai išjungs šio įrenginio pranešimus.",
         "Identifiers": "Identifikatoriai",
         "Devices": "Įrenginiai",
-        "Streams": "Srautai"
+        "Streams": "Srautai",
+        "AreYouSureRemoveParticipant": "Ar tikrai norite pašalinti šį dalyvį?",
+        "RemoveParticipant": "Pašalinti dalyvį"
     },
     "webrtc": {
         "allow": {

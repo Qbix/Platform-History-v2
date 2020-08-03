@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Новый {{relationDisplayType}} в {{toTitle}}",
         "Streams\/relatedFrom\/*": "Добавлено в {{toTitle}} как {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} упомянул вас в комментарии",
-        "Streams\/call": "{{displayName}} звонит тебе"
+        "Streams\/call": "{{displayName}} начал разговор в реальном времени"
     },
     "invite": {
         "messageContent": "{{displayName}} пригласил вас на {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Вы уверены, что отписаться от этого устройства? Это отключит уведомления на это устройство.",
         "Identifiers": "Идентификаторы",
         "Devices": "приборы",
-        "Streams": "Streams"
+        "Streams": "Streams",
+        "AreYouSureRemoveParticipant": "Вы уверены, что хотите удалить этого участника?",
+        "RemoveParticipant": "Удалить участника"
     },
     "webrtc": {
         "allow": {

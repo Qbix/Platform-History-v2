@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "New {{relationDisplayType}} i {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ka tapiritia ki te {{toTitle}} hei {{relationDisplayType}}",
         "Streams\/mention": "Na {{&call 'avatar.displayName'}} koe i korero i to korero",
-        "Streams\/call": "Kei te karanga koe i a {{displayName}}",
+        "Streams\/call": "{{displayName}} i tiimata i te waa-pono",
         "ManageEmailSubscriptions": "whakahaere koutou ohaurunga imeera",
         "IfUnsubscribe": "Ki te hiahia koe ki te tuku toha"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Kua tino mohio koe ki te tuku i tenei taputapu? Ka whakaweto i nga panui ki tenei taputapu.",
         "Identifiers": "Ngā Kaiwhakaputa",
         "Devices": "Pūrere",
-        "Streams": "Ngātenga"
+        "Streams": "Ngātenga",
+        "AreYouSureRemoveParticipant": "Kei te pirangi koe ki te tango i tenei kaiwhakauru?",
+        "RemoveParticipant": "Tangohia te kaiuru"
     },
     "menu": {
         "placeholder": "taitara whaarangi",

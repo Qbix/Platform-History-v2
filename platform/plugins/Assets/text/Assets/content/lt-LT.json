@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Pakviesti {{1}}",
-        "YouHaveCreditsToStart": "Pradėti reikia {{1}} kreditų"
+        "YouHaveCreditsToStart": "Pradėti reikia {{1}} kreditų",
+        "PaymentFor": "Mokėjimas už „{{1}}“",
+        "PaymentTo": "Mokėjimas iki {{1}}",
+        "PaymentToUser": "Mokėjimas iki {{userName}}",
+        "JoinedPaidStream": "už prisijungimą prie „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> “",
+        "CreatedCommunity": "už bendruomenės „{{communityId}}“ sukūrimą",
+        "LeftPaidStream": "palikti „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> “",
+        "BoughtCredits": "Nupirko {{amount}} kreditų",
+        "BuyAmountCredits": "Pirkite {{amount}} kreditus",
+        "MissingCredits": "Trūksta kreditų",
+        "YouMissingCredits": "Jums trūksta {{amount}} kreditų",
+        "BuyCredits": "Pirkite kreditus",
+        "Buy": "Pirkite",
+        "Credits": "Kreditai",
+        "ErrorInvalidAmount": "Suma netinkama",
+        "ErrorInvalidCurrency": "Deja, dar nepalaikome valiutos {{currency}}"
     },
     "history": {
         "Date": "Data",
@@ -27,7 +42,22 @@
         "To": "į",
         "From": "iš",
         "HistoryEmpty": "Jūs dar neturite duomenų",
-        "SeeHistory": "Žr. {{1}} mokėjimų istoriją"
+        "SeeHistory": "Žr. {{1}} mokėjimų istoriją",
+        "PaymentFor": "Panaudoti {{amount}} kreditai",
+        "PaymentTo": "Išsiųsti {{amount}} kreditai",
+        "PaymentToUser": "Išsiųsti {{amount}} kreditai",
+        "JoinedPaidStream": {
+            "+": "Uždirbti {{amount}} kreditai",
+            "-": "Panaudoti {{amount}} kreditai"
+        },
+        "LeftPaidStream": {
+            "+": "Gavo {{amount}} kreditų",
+            "-": "Išsiųsti {{amount}} kreditai"
+        },
+        "CreatedCommunity": "Panaudoti {{amount}} kreditai",
+        "BoughtCredits": "Nupirko {{amount}} kreditų",
+        "InviteAcceptedBy": "Uždirbti {{amount}} kreditai",
+        "YouHaveCreditsToStart": "Uždirbti {{amount}} kreditai"
     },
     "subscriptions": {
         "infoTitle": "Nustatykite mokėjimo informaciją",
@@ -48,7 +78,8 @@
             "message": "Ar sutinkate mokėti {{symbol}} {{amount}}?",
             "ok": "Gerai",
             "cancel": "Atšaukti"
-        }
+        },
+        "BuyAmountCredits": "Pirkite {{amount}} kreditus"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "Gavo {{amount}} kreditų"
+        },
+        "Assets/credits/bought": {
+            "content": "Nupirko {{amount}} kreditų"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Dėkojame, kad sumokėjote už „{{description}}“",
         "HavePaid": "Sveiki, {{1}}, tai tik trumpas patvirtinimas, kad sėkmingai sumokėjote {{2}} {{3}} už {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Nauja paslauga",
+            "TitlePlaceholder": "Paslaugos pavadinimas",
+            "PricePlaceholder": "Nustatykite kainą",
+            "LinkPlaceholder": "nustatyti papildomos informacijos saitą",
+            "DescriptionPlaceholder": "Aptarnavimo Aprašymas",
+            "SaveService": "Išsaugoti paslaugą"
+        },
+        "ManageServiceTemplates": "Tvarkykite paslaugų šablonus",
+        "ManageServices": "Valdyti paslaugas",
+        "FreeEvent": "Nemokamas renginys",
+        "OptionalContribution": "Neprivalomas įnašas",
+        "RequiredPayment": "Reikalingas mokėjimas",
+        "AreYouSureDelete": "Ar tikrai norite ištrinti šią paslaugą?",
+        "AmountServicesRelated": "Yra {{amount}} galimybių, susijusių su šia paslauga. Jie taip pat bus pašalinti."
     }
 }

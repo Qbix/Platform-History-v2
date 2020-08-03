@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Du har ikke tillatelse til å delta i denne samtalen.",
         "startedConversation": "startet en samtale",
         "RealTimeCall": "Sanntids samtale",
-        "SearchByName": "Søk etter navn"
+        "SearchByName": "Søk etter navn",
+        "Notifications": {
+            "Visit": "{{displayName}} besøker chatten",
+            "Join": "{{displayName}} ble med i chatten",
+            "Leave": "{{displayName}} forlot chatten",
+            "RelatedTo": "{{displayName}} startet en {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Melding {{& message.fields.type}} til {{& stream.fields.title}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Er du sikker på å avslutte abonnementet på denne enheten? Det vil slå av varsler på denne enheten.",
         "Identifiers": "identifikatorer",
         "Devices": "enheter",
-        "Streams": "strømmer"
+        "Streams": "strømmer",
+        "AreYouSureRemoveParticipant": "Er du sikker på at du vil fjerne denne deltakeren?",
+        "RemoveParticipant": "Fjern deltaker"
     },
     "webrtc": {
         "allow": {
@@ -209,7 +217,8 @@
             "turnOffScreenSharing": "Skjul deling av skjermen",
             "turnOnCamera": "Vis video",
             "turnOnAudio": "Slå av lyden",
-            "turnOnScreenSharing": "Vis skjermdeling"
+            "turnOnScreenSharing": "Vis skjermdeling",
+            "fullScreen": "Full skjerm"
         },
         "notAllowedToJoinCall": "Du har ikke tillatelse til å bli med i denne strømmen.",
         "streamTitle": "{{1}} direktesendt samtale"

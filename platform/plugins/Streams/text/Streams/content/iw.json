@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} חדש ב- {{toTitle}}",
         "Streams\/relatedFrom\/*": "נוסף ל- {{toTitle}} בתור {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} אזכרו אותך בתגובה",
-        "Streams\/call": "{{displayName}} מתקשר אליך",
+        "Streams\/call": "{{displayName}} התחילו שיחה בזמן אמת",
         "ManageEmailSubscriptions": "נהל את מנויי הדוא&quot;ל שלך",
         "IfUnsubscribe": "אם ברצונך לבטל את המנוי"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "האם אתה בטוח לבטל את הרישום למכשיר זה? זה יכבה את ההתראות למכשיר זה.",
         "Identifiers": "מזהים",
         "Devices": "מכשירים",
-        "Streams": "נחלים"
+        "Streams": "נחלים",
+        "AreYouSureRemoveParticipant": "האם אתה בטוח שברצונך להסיר את המשתתף הזה?",
+        "RemoveParticipant": "הסר את המשתתף"
     },
     "menu": {
         "placeholder": "הקלד כותרת עמוד",

@@ -149,7 +149,9 @@ function _Q_viewport(options) {
 					x: Q.Pointer.getX(e),
 					y: Q.Pointer.getY(e)
 				};
-				Q.Pointer.cancelClick(true, e, null); // even on the slightest move
+				if (Q.Pointer.isPressed(e)) {
+					Q.Pointer.cancelClick(true, e, null); // even on the slightest move
+				}
 				e.preventDefault();
 				if (!pos) {
 					return;
@@ -193,16 +195,11 @@ function _Q_viewport(options) {
 		
 			function _endHandler (e) {
 				start = pos = null;
-				Q.removeEventListener(container[0], Q.Pointer.move, _moveHandler);
-				Q.removeEventListener(window, Q.Pointer.end, _endHandler);
-				Q.removeEventListener(window, Q.Pointer.cancel, _cancelHandler);
+				Q.removeEventListener(container[0], Q.Pointer.move, _moveHandler, {passive: false});
+				Q.removeEventListener(window, Q.Pointer.end, _ee);
+				Q.removeEventListener(window, Q.Pointer.cancel, _ec);
 				Q.removeEventListener(window, Q.Pointer.touchclick, _clickHandler);
 				e.preventDefault();
-			}
-		
-			function _cancelHandler (e) {
-				Q.removeEventListener(window, Q.Pointer.end, _endHandler);
-				Q.removeEventListener(window, Q.Pointer.touchclick, _clickHandler);
 			}
 		
 			function _clickHandler (e) {
@@ -222,8 +219,8 @@ function _Q_viewport(options) {
 				top: parseFloat(stretcher.css('top'))
 			};
 			Q.addEventListener(container[0], Q.Pointer.move, _moveHandler, {passive: false});
-			Q.addEventListener(window, Q.Pointer.end, _endHandler, {passive: false});
-			Q.addEventListener(window, Q.Pointer.cancel, _cancelHandler, {passive: false});
+			var _ee = Q.addEventListener(window, Q.Pointer.end, _endHandler, {passive: false});
+			var _ec = Q.addEventListener(window, Q.Pointer.cancel, _endHandler, {passive: false});
 			// Q.addEventListener(window, Q.Pointer.touchclick, _clickHandler, {passive: false});
 		});
 	

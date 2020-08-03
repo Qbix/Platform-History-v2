@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Nuwe {{relationDisplayType}} in {{toTitle}}",
         "Streams\/relatedFrom\/*": "By {{toTitle}} as {{relationDisplayType}} gevoeg",
         "Streams\/mention": "{{&call 'avatar.displayName'}} het u in &#39;n opmerking genoem",
-        "Streams\/call": "{{displayName}} bel jou"
+        "Streams\/call": "{{displayName}} het &#39;n intydse oproep begin"
     },
     "invite": {
         "messageContent": "{{displayName}} het jou genooi na {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Is u seker dat u hierdie toestel inteken? Dit sal kennisgewings op hierdie toestel afskakel.",
         "Identifiers": "identifiseerders",
         "Devices": "toestelle",
-        "Streams": "strome"
+        "Streams": "strome",
+        "AreYouSureRemoveParticipant": "Is u seker dat u hierdie deelnemer wil verwyder?",
+        "RemoveParticipant": "Verwyder die deelnemer"
     },
     "webrtc": {
         "allow": {

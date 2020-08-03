@@ -76,7 +76,7 @@
         "mobileExists": "Próbáltad már regisztrálni erre a mobilszámra? Ha igen, ellenőrizze az SMS-t a fiók aktiválásához. <a href='#resend' class='Q_button Users_activation_resend'>Kattintson az üzenet újbóli elküldéséhez<\/a>",
         "usingOther": "vagy tudsz",
         "prompt": "Válasszon felhasználói nevet:",
-        "newUser": "vagy hozzon létre egy új fiókot",
+        "newUser": "vagy hozzon létre egy új fiókot alább",
         "placeholders": {
             "identifier": "a mobil # vagy e-mail",
             "mobile": "írja be a mobilszámát",

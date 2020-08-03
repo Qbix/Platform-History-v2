@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "አዲስ {{relationDisplayType}} በ {{toTitle}} ውስጥ",
         "Streams\/relatedFrom\/*": "ወደ {{toTitle}} እንደ {{relationDisplayType}} ታክሏል",
         "Streams\/mention": "{{&call 'avatar.displayName'}} በአስተያየት ውስጥ ጠቅሶዎታል",
-        "Streams\/call": "{{displayName}} እየደወለልዎት ነው",
+        "Streams\/call": "{{displayName}} ቅጽበታዊ ጥሪ ጀመረ",
         "ManageEmailSubscriptions": "የኢሜይል ምዝገባዎችዎን ያቀናብሩ",
         "IfUnsubscribe": "ከደንበኝነት ምዝገባ መውጣት ከፈለጉ"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "እርግጠኛ ነዎት የዚህ መሣሪያ ደንበኝነት ምዝገባ ይወጣሉ? ለዚህ መሣሪያ ማሳወቂያዎችን ያጠፋል።",
         "Identifiers": "ለifዎች",
         "Devices": "መሣሪያዎች",
-        "Streams": "ጅረቶች"
+        "Streams": "ጅረቶች",
+        "AreYouSureRemoveParticipant": "እርግጠኛ ነዎት ይህንን ተሳታፊ ለማስወገድ ይፈልጋሉ?",
+        "RemoveParticipant": "ተሳታፊውን ያስወግዱ"
     },
     "menu": {
         "placeholder": "ገጽ ርዕስ ይተይቡ",

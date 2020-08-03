@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "ಆಹ್ವಾನಿಸಿ {{1}}",
-        "YouHaveCreditsToStart": "ಪ್ರಾರಂಭಿಸಲು ನೀವು {{1}} ಸಾಲಗಳನ್ನು ಹೊಂದಿದ್ದೀರಿ"
+        "YouHaveCreditsToStart": "ಪ್ರಾರಂಭಿಸಲು ನೀವು {{1}} ಸಾಲಗಳನ್ನು ಹೊಂದಿದ್ದೀರಿ",
+        "PaymentFor": "&quot;{{999} for&quot; ಗೆ ಪಾವತಿ",
+        "PaymentTo": "{{999} to ಗೆ ಪಾವತಿ",
+        "PaymentToUser": "{{999} to ಗೆ ಪಾವತಿ",
+        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{1001} join<\/a> &quot; ಗೆ ಸೇರ್ಪಡೆಗೊಳ್ಳಲು",
+        "CreatedCommunity": "ಸಮುದಾಯವನ್ನು ರಚಿಸಲು &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{1001} leave<\/a> &quot; ಅನ್ನು ಬಿಡಲು",
+        "BoughtCredits": "{{amount}} ಸಾಲಗಳನ್ನು ಖರೀದಿಸಿದೆ",
+        "BuyAmountCredits": "{{amount}} ಸಾಲಗಳನ್ನು ಖರೀದಿಸಿ",
+        "MissingCredits": "ಕಾಣೆಯಾದ ಸಾಲಗಳು",
+        "YouMissingCredits": "ನೀವು {{amount}} ಸಾಲಗಳನ್ನು ಕಳೆದುಕೊಂಡಿದ್ದೀರಿ",
+        "BuyCredits": "ಸಾಲಗಳನ್ನು ಖರೀದಿಸಿ",
+        "Buy": "ಖರೀದಿಸಿ",
+        "Credits": "ಸಾಲಗಳು",
+        "ErrorInvalidAmount": "ಮೊತ್ತ ಅಮಾನ್ಯವಾಗಿದೆ",
+        "ErrorInvalidCurrency": "ದುರದೃಷ್ಟವಶಾತ್ ನಾವು ಇನ್ನೂ ಕರೆನ್ಸಿಯನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ {99 999}}"
     },
     "history": {
         "Date": "ದಿನಾಂಕ",
@@ -27,7 +42,22 @@
         "To": "ಗೆ",
         "From": "ನಿಂದ",
         "HistoryEmpty": "ನಿಮ್ಮ ಬಳಿ ಇನ್ನೂ ಡೇಟಾ ಇಲ್ಲ",
-        "SeeHistory": "Payment {999} for ಗಾಗಿ ಪಾವತಿ ಇತಿಹಾಸವನ್ನು ನೋಡಿ"
+        "SeeHistory": "Payment {999} for ಗಾಗಿ ಪಾವತಿ ಇತಿಹಾಸವನ್ನು ನೋಡಿ",
+        "PaymentFor": "{{amount}} ಸಾಲಗಳನ್ನು ಕಳೆದರು",
+        "PaymentTo": "{{amount}} ಸಾಲಗಳನ್ನು ಕಳುಹಿಸಲಾಗಿದೆ",
+        "PaymentToUser": "{{amount}} ಸಾಲಗಳನ್ನು ಕಳುಹಿಸಲಾಗಿದೆ",
+        "JoinedPaidStream": {
+            "+": "{{amount}} ಸಾಲಗಳನ್ನು ಗಳಿಸಿದೆ",
+            "-": "{{amount}} ಸಾಲಗಳನ್ನು ಕಳೆದರು"
+        },
+        "LeftPaidStream": {
+            "+": "{{amount}} ಸಾಲಗಳನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ",
+            "-": "{{amount}} ಸಾಲಗಳನ್ನು ಕಳುಹಿಸಲಾಗಿದೆ"
+        },
+        "CreatedCommunity": "{{amount}} ಸಾಲಗಳನ್ನು ಕಳೆದರು",
+        "BoughtCredits": "{{amount}} ಸಾಲಗಳನ್ನು ಖರೀದಿಸಿದೆ",
+        "InviteAcceptedBy": "{{amount}} ಸಾಲಗಳನ್ನು ಗಳಿಸಿದೆ",
+        "YouHaveCreditsToStart": "{{amount}} ಸಾಲಗಳನ್ನು ಗಳಿಸಿದೆ"
     },
     "subscriptions": {
         "infoTitle": "ಪಾವತಿ ಮಾಹಿತಿಯನ್ನು ಹೊಂದಿಸಿ",
@@ -48,7 +78,8 @@
             "message": "{{symbol}} {{1000} pay ಪಾವತಿಸಲು ನೀವು ಒಪ್ಪುತ್ತೀರಾ?",
             "ok": "ಸರಿ",
             "cancel": "ರದ್ದುಮಾಡಿ"
-        }
+        },
+        "BuyAmountCredits": "{{amount}} ಸಾಲಗಳನ್ನು ಖರೀದಿಸಿ"
     },
     "types": {
         "Assets\/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets\/credits\/received": {
             "content": "{{amount}} ಸಾಲಗಳನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ"
+        },
+        "Assets\/credits\/bought": {
+            "content": "{{amount}} ಸಾಲಗಳನ್ನು ಖರೀದಿಸಿದೆ"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "&quot;{{999} for&quot; ಗಾಗಿ ನಿಮ್ಮ ಪಾವತಿಗಾಗಿ ಧನ್ಯವಾದಗಳು",
         "HavePaid": "ಹೇ {{1}}, ನೀವು {{1002} for ಗೆ {{2}} ಗೆ {{3}} ಗೆ ಯಶಸ್ವಿಯಾಗಿ ಪಾವತಿಸಿದ್ದೀರಿ ಎಂಬುದು ತ್ವರಿತ ದೃ mation ೀಕರಣವಾಗಿದೆ."
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "ಹೊಸ ಸೇವೆ",
+            "TitlePlaceholder": "ಸೇವಾ ಶೀರ್ಷಿಕೆ",
+            "PricePlaceholder": "ಬೆಲೆಯನ್ನು ನಿಗದಿಪಡಿಸಿ",
+            "LinkPlaceholder": "ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿ ಲಿಂಕ್ ಅನ್ನು ಹೊಂದಿಸಿ",
+            "DescriptionPlaceholder": "ಸೇವಾ ವಿವರಣೆ",
+            "SaveService": "ಸೇವೆಯನ್ನು ಉಳಿಸಿ"
+        },
+        "ManageServiceTemplates": "ಸೇವಾ ಟೆಂಪ್ಲೇಟ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
+        "ManageServices": "ಸೇವೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
+        "FreeEvent": "ಉಚಿತ ಈವೆಂಟ್",
+        "OptionalContribution": "ಐಚ್ al ಿಕ ಕೊಡುಗೆ",
+        "RequiredPayment": "ಅಗತ್ಯ ಪಾವತಿ",
+        "AreYouSureDelete": "ಈ ಸೇವೆಯನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?",
+        "AmountServicesRelated": "ಈ ಸೇವೆಗೆ ಸಂಬಂಧಿಸಿದ {{amount}} ಲಭ್ಯತೆಗಳಿವೆ. ಅವುಗಳನ್ನು ಸಹ ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ."
     }
 }

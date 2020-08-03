@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Bag-ong {{relationDisplayType}} sa {{toTitle}}",
         "Streams\/relatedFrom\/*": "Gidugang sa {{toTitle}} ingon {{relationDisplayType}}",
         "Streams\/mention": "Gikutlo ka sa {{&call 'avatar.displayName'}} sa usa ka komento",
-        "Streams\/call": "Ang {{displayName}} nagtawag kanimo",
+        "Streams\/call": "Ang {{displayName}} nagsugod usa ka tawag sa real-time",
         "ManageEmailSubscriptions": "pagdumala sa imong mga subskripsyon sa email",
         "IfUnsubscribe": "Kung gusto nimo mag-unsubscribe"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Sigurado ka nga dili pag-unsubscribe kini nga aparato? Kini magpugong sa mga pahibalo sa kini nga aparato.",
         "Identifiers": "Mga nagpakilala",
         "Devices": "Mga lalang",
-        "Streams": "Mga sapa"
+        "Streams": "Mga sapa",
+        "AreYouSureRemoveParticipant": "Sigurado ka nga gusto nimo makuha ang kini nga partisipante?",
+        "RemoveParticipant": "Kuhaa partisipante"
     },
     "menu": {
         "placeholder": "ulohan nga panid sa titulo",

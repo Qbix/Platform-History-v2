@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "คำเชิญได้รับการยอมรับโดย {{1}}",
-        "YouHaveCreditsToStart": "คุณมี {{1}} หน่วยกิตที่จะเริ่มต้น"
+        "YouHaveCreditsToStart": "คุณมี {{1}} หน่วยกิตที่จะเริ่มต้น",
+        "PaymentFor": "การชำระเงินสำหรับ &quot;{{1}}&quot;",
+        "PaymentTo": "การชำระเงินถึง {{1}}",
+        "PaymentToUser": "การชำระเงินถึง {{userName}}",
+        "JoinedPaidStream": "สำหรับการเข้าร่วม &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "CreatedCommunity": "สำหรับการสร้างชุมชน &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "ที่ออก &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "BoughtCredits": "ซื้อ {{amount}} หน่วยกิต",
+        "BuyAmountCredits": "ซื้อ {{amount}} เครดิต",
+        "MissingCredits": "เครดิตหายไป",
+        "YouMissingCredits": "คุณขาด {{amount}} หน่วยกิต",
+        "BuyCredits": "ซื้อเครดิต",
+        "Buy": "ซื้อ",
+        "Credits": "เครดิต",
+        "ErrorInvalidAmount": "จำนวนเงินไม่ถูกต้อง",
+        "ErrorInvalidCurrency": "น่าเสียดายที่เรายังไม่รองรับสกุลเงิน {{currency}}"
     },
     "history": {
         "Date": "วันที่",
@@ -27,7 +42,22 @@
         "To": "ไปยัง",
         "From": "จาก",
         "HistoryEmpty": "คุณยังไม่มีข้อมูล",
-        "SeeHistory": "ดูประวัติการชำระเงินสำหรับ {{1}}"
+        "SeeHistory": "ดูประวัติการชำระเงินสำหรับ {{1}}",
+        "PaymentFor": "ใช้ไป {{amount}} หน่วยกิต",
+        "PaymentTo": "ส่ง {{amount}} หน่วยกิต",
+        "PaymentToUser": "ส่ง {{amount}} หน่วยกิต",
+        "JoinedPaidStream": {
+            "+": "รับ {{amount}} หน่วยกิต",
+            "-": "ใช้ไป {{amount}} หน่วยกิต"
+        },
+        "LeftPaidStream": {
+            "+": "รับ {{amount}} หน่วยกิต",
+            "-": "ส่ง {{amount}} หน่วยกิต"
+        },
+        "CreatedCommunity": "ใช้ไป {{amount}} หน่วยกิต",
+        "BoughtCredits": "ซื้อ {{amount}} หน่วยกิต",
+        "InviteAcceptedBy": "รับ {{amount}} หน่วยกิต",
+        "YouHaveCreditsToStart": "รับ {{amount}} หน่วยกิต"
     },
     "subscriptions": {
         "infoTitle": "ตั้งค่าข้อมูลการชำระเงิน",
@@ -48,7 +78,8 @@
             "message": "คุณตกลงที่จะจ่าย {{symbol}} {{amount}} หรือไม่",
             "ok": "ตกลง",
             "cancel": "ยกเลิก"
-        }
+        },
+        "BuyAmountCredits": "ซื้อ {{amount}} เครดิต"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "รับ {{amount}} หน่วยกิต"
+        },
+        "Assets/credits/bought": {
+            "content": "ซื้อ {{amount}} หน่วยกิต"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "ขอบคุณสำหรับการชำระเงินสำหรับ &quot;{{description}}&quot;",
         "HavePaid": "สวัสดี {{1}} นี่เป็นเพียงการยืนยันอย่างรวดเร็วว่าคุณชำระเงิน {{2}} เป็น {{3}} สำหรับ {{4}} สำเร็จแล้ว"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "บริการใหม่",
+            "TitlePlaceholder": "ชื่อบริการ",
+            "PricePlaceholder": "กำหนดราคา",
+            "LinkPlaceholder": "ตั้งค่าลิงค์ข้อมูลเพิ่มเติม",
+            "DescriptionPlaceholder": "รายละเอียดการบริการ",
+            "SaveService": "บันทึกบริการ"
+        },
+        "ManageServiceTemplates": "จัดการเทมเพลตบริการ",
+        "ManageServices": "จัดการบริการ",
+        "FreeEvent": "กิจกรรมฟรี",
+        "OptionalContribution": "ผลงานทางเลือก",
+        "RequiredPayment": "การชำระเงินที่จำเป็น",
+        "AreYouSureDelete": "คุณแน่ใจหรือว่าต้องการลบบริการนี้",
+        "AmountServicesRelated": "มี {{amount}} ความพร้อมให้บริการที่เกี่ยวข้องกับบริการนี้ พวกเขาก็จะถูกลบออก"
     }
 }

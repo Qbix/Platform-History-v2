@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Neu {{relationDisplayType}} in {{toTitle}}",
         "Streams\/relatedFrom\/*": "Zu {{toTitle}} hinzugefügt als {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} hat Sie in einem Kommentar erwähnt",
-        "Streams\/call": "{{displayName}} ruft Sie an"
+        "Streams\/call": "{{displayName}} hat einen Echtzeitanruf gestartet"
     },
     "invite": {
         "messageContent": "{{displayName}} hat Sie zu {{inviteUrl}} eingeladen",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Sind Sie sicher, dass Sie dieses Gerät abbestellen? Benachrichtigungen für dieses Gerät werden deaktiviert.",
         "Identifiers": "Bezeichner",
         "Devices": "Geräte",
-        "Streams": "Streams"
+        "Streams": "Streams",
+        "AreYouSureRemoveParticipant": "Möchten Sie diesen Teilnehmer wirklich entfernen?",
+        "RemoveParticipant": "Teilnehmer entfernen"
     },
     "webrtc": {
         "allow": {

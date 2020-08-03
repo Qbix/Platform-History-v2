@@ -20,8 +20,9 @@
  *    Function "exiting" receives (element, intersectionObserverEntry)
  *    Function "preparing" receives (element) and is used the first time to prepare the element
  *    Both functions must return true if the element was modified.
+ * @param {Element} [root=tool.element] The container inside which to watch for intesections
  * @param {Object} [observerOptions] Override any options to pass to IntersectionObserver
- * @param {Element} [observerOptions.root=tool.element]
+ * @param {Element} [observerOptions.root=tool.element.scrollingParent(true)]
  * @param {String} [observerOptions.rootMargin='0px']
  * @param {String} [observerOptions.threshold=0]
  * @return {Q.Tool}
@@ -30,12 +31,13 @@ Q.Tool.define('Q/lazyload', function (options) {
 
 	var tool = this;
 	var state = this.state;
+	state.root = state.root || this.element;
 
 	var Elp = Element.prototype;
 	
 	Q.ensure(window.IntersectionObserver, _polyfill, function () {
 		// Observe whatever is on the page already
-		tool.observer = _createObserver(tool, tool.element);
+		tool.observer = _createObserver(tool, tool.element.scrollingParent(true));
 		tool.observe(tool.prepare(tool.element, false));
 
 		// Override innerHTML
@@ -46,7 +48,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 		Object.defineProperty(Elp, 'innerHTML', {
 			set: function (html) {
 				var element = document.createElement('div');
-				var root = tool.observer.root || document.documentElement;
+				var root = state.root || document.documentElement;
 				var inside = (root === this) || root.contains(this);
 				if (!inside) {
 					originalSet.call(this, html);
@@ -81,7 +83,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 				if (!(element instanceof HTMLElement)) {
 					return orig.apply(this, arguments);
 				}
-				var root = tool.observer.root || document.documentElement;
+				var root = state.root || document.documentElement;
 				var inside = (root === this) || root.contains(this);
 				if (!inside) {
 					return orig.apply(this, arguments);
@@ -186,6 +188,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 			exitingRemoveHTML: true
 		}
 	},
+	root: undefined,
 	observerOptions: {
 		root: undefined,
 		rootMargin: '0px',
@@ -234,7 +237,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 function _createObserver(tool, container) {
 	var o = Q.copy(tool.state.observerOptions);
 	if (o.root === undefined) {
-		o.root = container || null;
+		o.root = (container === document.documentElement) ? null : (container || null);
 	}
 	return new IntersectionObserver(function (entries, observer) {
 		Q.each(entries, function (i, entry) {

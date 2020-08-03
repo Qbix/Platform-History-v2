@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Novu {{relationDisplayType}} in {{toTitle}}",
         "Streams\/relatedFrom\/*": "Agghiuntu à {{toTitle}} cum&#39;è {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ci hà mintuatu in un cumentu",
-        "Streams\/call": "{{displayName}} vi chjamanu",
+        "Streams\/call": "{{displayName}} ha iniziatu una chjama in tempu reale",
         "ManageEmailSubscriptions": "gestite i vostri abbonamenti per email",
         "IfUnsubscribe": "Se vulete desubscrive"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Hè sicura di desubscrive stu dispusitivu? Chiuderà i notificazioni à stu dispusitivu.",
         "Identifiers": "Identificatori",
         "Devices": "U dispositivu",
-        "Streams": "Strati"
+        "Streams": "Strati",
+        "AreYouSureRemoveParticipant": "Hè sicuru chì vulete sguassà stu participante?",
+        "RemoveParticipant": "Elimina u participante"
     },
     "menu": {
         "placeholder": "tipu titulu di pagina",

@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Kusha okusha {{relationDisplayType}} ku - {{toTitle}}",
         "Streams\/relatedFrom\/*": "Kungezwe ku - {{toTitle}} njengo - {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ukusho emazwaneni",
-        "Streams\/call": "I - {{displayName}} iyakubiza",
+        "Streams\/call": "{{displayName}} uqale ikholi yesikhathi sangempela",
         "ManageEmailSubscriptions": "phatha okubhaliselwe i-imeyili",
         "IfUnsubscribe": "Uma ufuna ukuzikhipha ohlwini"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Uqinisekile ukuthi uzikhipha ohlwini le divayisi? Izocisha izaziso kule divayisi.",
         "Identifiers": "Izikhombi",
         "Devices": "Amadivayisi",
-        "Streams": "Imisipha"
+        "Streams": "Imisipha",
+        "AreYouSureRemoveParticipant": "Uqinisekile ukuthi ufuna ukususa lo obambe iqhaza?",
+        "RemoveParticipant": "Susa umuntu obambe iqhaza"
     },
     "menu": {
         "placeholder": "isihloko sephepha lekhasi",

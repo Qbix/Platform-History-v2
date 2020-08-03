@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Նոր {99 999}} in {{1000}",
         "Streams\/relatedFrom\/*": "Ավելացված է {{toTitle}} -ի որպես {{relationDisplayType}} -ի",
         "Streams\/mention": "99 99 999} you -ը ձեզ նշել է մեկնաբանության մեջ",
-        "Streams\/call": "99 99 999}} -ը զանգում է ձեզ",
+        "Streams\/call": "99 99 999}} -ը իրական ժամանակում զանգ է սկսել",
         "ManageEmailSubscriptions": "կառավարեք ձեր էլփոստի բաժանորդագրությունները",
         "IfUnsubscribe": "Եթե ուզում եք բաժանորդագրվել"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Համոզվա՞ծ եք, որ բաժանորդագրվում եք այս սարքին: Դա անջատելու է ծանուցումները այս սարքին:",
         "Identifiers": "Նույնականացուցիչներ",
         "Devices": "Սարքեր",
-        "Streams": "Հոսքեր"
+        "Streams": "Հոսքեր",
+        "AreYouSureRemoveParticipant": "Համոզվա՞ծ եք, որ ցանկանում եք հեռացնել այս մասնակիցին:",
+        "RemoveParticipant": "Հեռացրեք մասնակիցը"
     },
     "menu": {
         "placeholder": "մուտքագրեք էջի վերնագիր",

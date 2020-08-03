@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Nouvo {{relationDisplayType}} nan {{toTitle}}",
         "Streams\/relatedFrom\/*": "Te ajoute nan {{toTitle}} kòm {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} mansyone ou nan yon kòmantè",
-        "Streams\/call": "{{displayName}} ap rele ou",
+        "Streams\/call": "{{displayName}} te kòmanse yon apèl an tan reyèl",
         "ManageEmailSubscriptions": "jere abonnman imel ou",
         "IfUnsubscribe": "Si ou vle koupe abònman"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Èske ou sèten koupe abònman aparèy sa a? Li pral fèmen notifikasyon sou aparèy sa a.",
         "Identifiers": "Idantifikatè yo",
         "Devices": "Aparèy",
-        "Streams": "Flux"
+        "Streams": "Flux",
+        "AreYouSureRemoveParticipant": "Èske ou sèten ou vle retire patisipan sa a?",
+        "RemoveParticipant": "Retire patisipan an"
     },
     "menu": {
         "placeholder": "tape tit paj",

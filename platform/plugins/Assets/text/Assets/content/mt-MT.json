@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Stedina aċċettata minn {{1}}",
-        "YouHaveCreditsToStart": "Għandek {{1}} krediti biex tibda"
+        "YouHaveCreditsToStart": "Għandek {{1}} krediti biex tibda",
+        "PaymentFor": "Ħlas għal &quot;{{1}}&quot;",
+        "PaymentTo": "Ħlas lil {{1}}",
+        "PaymentToUser": "Ħlas lil {{userName}}",
+        "JoinedPaidStream": "biex tgħaqqad &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "CreatedCommunity": "għall-ħolqien ta &#39;komunità &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "għat-tluq &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "BoughtCredits": "Xtrajt {{amount}} kredti",
+        "BuyAmountCredits": "Ixtri {{amount}} kredti",
+        "MissingCredits": "Krediti Nieqsa",
+        "YouMissingCredits": "Int nieqes {{amount}} kredti",
+        "BuyCredits": "Ixtri krediti",
+        "Buy": "Ixtri",
+        "Credits": "Krediti",
+        "ErrorInvalidAmount": "Ammont mhux validu",
+        "ErrorInvalidCurrency": "Sfortunatament għadna ma nappoġġjawx il-munita {{currency}}"
     },
     "history": {
         "Date": "Data",
@@ -27,7 +42,22 @@
         "To": "lil",
         "From": "minn",
         "HistoryEmpty": "Għad m’għandekx dejta",
-        "SeeHistory": "Ara l-istorja tal-ħlas għal {{1}}"
+        "SeeHistory": "Ara l-istorja tal-ħlas għal {{1}}",
+        "PaymentFor": "Intnefqu {{amount}} kredti",
+        "PaymentTo": "Intbagħtu {{amount}} kredti",
+        "PaymentToUser": "Intbagħtu {{amount}} kredti",
+        "JoinedPaidStream": {
+            "+": "Kiseb {{amount}} kredti",
+            "-": "Intnefqu {{amount}} kredti"
+        },
+        "LeftPaidStream": {
+            "+": "Irċevejt {{amount}} kredti",
+            "-": "Intbagħtu {{amount}} kredti"
+        },
+        "CreatedCommunity": "Intnefqu {{amount}} kredti",
+        "BoughtCredits": "Xtrajt {{amount}} kredti",
+        "InviteAcceptedBy": "Kiseb {{amount}} kredti",
+        "YouHaveCreditsToStart": "Kiseb {{amount}} kredti"
     },
     "subscriptions": {
         "infoTitle": "Twaqqaf Informazzjoni ta &#39;Ħlas",
@@ -48,7 +78,8 @@
             "message": "Taqbel li tħallas {{symbol}} {{amount}}?",
             "ok": "kollox sew",
             "cancel": "Ikkanċella"
-        }
+        },
+        "BuyAmountCredits": "Ixtri {{amount}} kredti"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "Irċevejt {{amount}} kredti"
+        },
+        "Assets/credits/bought": {
+            "content": "Xtrajt {{amount}} kredti"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Grazzi għall-ħlas għal &quot;{{description}}&quot;",
         "HavePaid": "Ħej {{1}}, din hija biss konferma ta &#39;malajr li int ħallast b&#39;suċċess {{2}} minn {{3}} għal {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Servizz Ġdid",
+            "TitlePlaceholder": "Titolu tas-servizz",
+            "PricePlaceholder": "Issettja l-prezz",
+            "LinkPlaceholder": "waqqaf link addizzjonali ta &#39;informazzjoni",
+            "DescriptionPlaceholder": "Deskrizzjoni tas-Servizz",
+            "SaveService": "Issejvja s-Servizz"
+        },
+        "ManageServiceTemplates": "Immaniġġja Templates tas-Servizz",
+        "ManageServices": "Servizzi ta &#39;Ġestjoni",
+        "FreeEvent": "Avveniment b&#39;xejn",
+        "OptionalContribution": "Kontribuzzjoni mhux obbligatorja",
+        "RequiredPayment": "Ħlas meħtieġ",
+        "AreYouSureDelete": "Int żgur li trid tħassar dan is-servizz?",
+        "AmountServicesRelated": "Hemm {{amount}} disponibbilitajiet relatati ma &#39;dan is-servizz. Huma wkoll se jitneħħew."
     }
 }

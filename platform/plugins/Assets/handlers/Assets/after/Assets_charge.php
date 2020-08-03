@@ -13,7 +13,7 @@ function Assets_after_Assets_charge($params)
 	// rate for currency required
 	$credits = Assets_Credits::convertToCredits($amount, $currency);
 
-	Assets_Credits::earn($credits, 'BoughtCredits', $user->id);
+	Assets_Credits::grant($credits, 'BoughtCredits', $user->id);
 
 	//TODO: as we come to use credits system, need to change this to send email with amount of credits bought
 	$text = Q_Text::get('Assets/content', array('language' => Users::getLanguage($user->id)));

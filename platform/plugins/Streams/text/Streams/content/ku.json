@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
         "Streams\/relatedFrom\/*": "Zêdetir {999}} wek {{1000} Added",
         "Streams\/mention": "99 99 999} you di şîroveyekê de ji we re destnîşan kir",
-        "Streams\/call": "99 999}} gazî we dike",
+        "Streams\/call": "99 99 999} a dest pê kir bangek rast-ê",
         "ManageEmailSubscriptions": "aboneyên e-nameya xwe birêve bibin",
         "IfUnsubscribe": "Heke tu dixwazî ji hev veqetandinê"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Hûn ji vê amûrê re piştrast in? Ew ê agahdariya ji bo vê cîhazê biqede.",
         "Identifiers": "Nasname",
         "Devices": "Amûrên",
-        "Streams": "Streams"
+        "Streams": "Streams",
+        "AreYouSureRemoveParticipant": "Ma hûn bi rastî dixwazin ku hûn vê beşdarê rakirin?",
+        "RemoveParticipant": "Beşdar derxistin"
     },
     "menu": {
         "placeholder": "sernavê rûpelê binivîsin",

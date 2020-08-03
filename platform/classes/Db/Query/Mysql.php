@@ -902,7 +902,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * Creates a query to select fields from one or more tables.
 	 * @method select
 	 * @param {string|array} $fields The fields as strings, or array of alias=>field
-	 * @param {string|array} [$tables=''] The tables as strings, or array of alias=>field
+	 * @param {string|array} [$tables=''] The tables as strings, or array of alias=>table
 	 * @param {boolean} [$repeat=false] If $tables is an array, and select() has
 	 * already been called with the exact table name and alias
 	 * as one of the tables in that array, then
@@ -1005,18 +1005,18 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		if (is_array($condition)) {
 			$condition_list = array();
 			foreach ($condition as $expr => $value) {
-				if ($value instanceof Db_Expression) {
-					if (is_array($value->parameters)) {
-						$this->parameters = array_merge(
-							$this->parameters,
-							$value->parameters
-						);
+				if (is_array($value)) {
+					// a bunch of OR criteria
+					$pieces = array();
+					foreach ($value as $v) {
+						foreach ($v as $a => &$b) {
+							$v[$a] = new Db_Expression($b);
+						}
+						$pieces[] = $this->criteria_internal($v);
 					}
+					$condition_list[] = implode(' OR ', $pieces);
 				} else {
-					$condition_list[] = preg_match('/\W/', substr($expr, - 1))
-						? "$expr $value"
-						: self::column($expr)." = $value";
-					++ $i;
+					$condition_list[] = $this->criteria_internal(array($expr => new Db_Expression($value)), $criteria);
 				}
 			}
 			$condition = implode(' AND ', $condition_list);
@@ -1716,11 +1716,15 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * @method criteria_internal
 	 * @private
 	 * @param {Db_Expression|array} $criteria
+	 * @param {array} [&$fillCriteria=null]
 	 * @return {string}
 	 */
-	private function criteria_internal ($criteria)
+	private function criteria_internal ($criteria, &$fillCriteria = null)
 	{
 		static $i = 1;
+		if (!isset($fillCriteria)) {
+			$fillCriteria = $this->criteria;
+		}
 		if (is_array($criteria)) {
 			$criteria_list = array();
 			foreach ($criteria as $expr => $value) {
@@ -1734,8 +1738,8 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 					$columns = array();
 					foreach ($parts as $column) {
 						$columns[] = self::column($column);
-						if (!empty($this->criteria[$column])) {
-							$this->criteria[$column] = array(); // sharding heuristics
+						if (!empty($fillCriteria[$column])) {
+							$fillCriteria[$column] = array(); // sharding heuristics
 						}
 					}
 					$list = array();
@@ -1755,7 +1759,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 							$vector[] = ":_where_$i";
 							$this->parameters["_where_$i"] = $v;
 							++ $i;
-							$this->criteria[$column][] = $v; // sharding heuristics
+							$fillCriteria[$column][] = $v; // sharding heuristics
 						}
 						$list[] = '(' .  implode(',', $vector) . ')';
 					}

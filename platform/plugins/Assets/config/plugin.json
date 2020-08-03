@@ -18,7 +18,6 @@
 			"Assets/charge": ["Assets/after/Assets_charge"],
 			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
 			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
-			"Communities/community/create": ["Assets/after/Community_create"],
 			"Streams/create/Assets/service": ["Assets/after/Streams_create_Assets_service"]
 		},
 		"routes@start": {
@@ -111,16 +110,11 @@
 				"Users/inviteUser": 10,
 				"createCommunity": 20
 			},
-			"earn": {
+			"granted": {
 				"acceptedInvite": 10
 			},
 			"exchange": {
-				"USD": 10,
-				"EUR": 11,
-				"GBP": 12,
-				"JPY": 0.1,
-				"CAD": 0.7,
-				"AUD": 6
+				"USD": 10
 			}
 		},
 		"currencies": {

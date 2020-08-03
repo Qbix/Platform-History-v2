@@ -15,9 +15,9 @@ function Assets_after_Streams_inviteAccept($params)
 		return;
 	}
 
-	$credits = Q_Config::expect('Assets', 'credits', 'earn', 'acceptedInvite');
+	$credits = Q_Config::expect('Assets', 'credits', 'granted', 'acceptedInvite');
 
-	Assets_Credits::earn($credits, 'InviteAcceptedBy', $invite->invitingUserId, array(
+	Assets_Credits::grant($credits, 'InviteAcceptedBy', $invite->invitingUserId, array(
 		'publisherId' => $participant->publisherId,
 		'streamName' => $participant->streamName,
 		'invitedUserName' => $invitedUser->displayName()

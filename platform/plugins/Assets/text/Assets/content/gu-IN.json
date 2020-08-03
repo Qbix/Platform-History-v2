@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "{{1}} દ્વારા સ્વીકાર્ય આમંત્રણ",
-        "YouHaveCreditsToStart": "તમારી પાસે પ્રારંભ કરવા માટે {{1}} ક્રેડિટ્સ છે"
+        "YouHaveCreditsToStart": "તમારી પાસે પ્રારંભ કરવા માટે {{1}} ક્રેડિટ્સ છે",
+        "PaymentFor": "&quot;{{1}}&quot; માટે ચુકવણી",
+        "PaymentTo": "{{999} to ને ચુકવણી",
+        "PaymentToUser": "{{999} to ને ચુકવણી",
+        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot; જોડાવા માટે",
+        "CreatedCommunity": "&quot;{{communityId}}&quot; સમુદાય બનાવવા માટે",
+        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot; છોડવા માટે",
+        "BoughtCredits": "{9 999} its ક્રેડિટ્સ ખરીદ્યો",
+        "BuyAmountCredits": "{9 999}} ક્રેડિટ્સ ખરીદો",
+        "MissingCredits": "ગુમ ક્રેડિટ્સ",
+        "YouMissingCredits": "તમે {{999} its ક્રેડિટ્સ ખૂટે છે",
+        "BuyCredits": "ક્રેડિટ ખરીદો",
+        "Buy": "ખરીદો",
+        "Credits": "ક્રેડિટ્સ",
+        "ErrorInvalidAmount": "રકમ અમાન્ય છે",
+        "ErrorInvalidCurrency": "દુર્ભાગ્યે અમે હજી સુધી ચલણ support {999} support ને સમર્થન આપતા નથી"
     },
     "history": {
         "Date": "તારીખ",
@@ -27,7 +42,22 @@
         "To": "માટે",
         "From": "માંથી",
         "HistoryEmpty": "તમારી પાસે હજી કોઈ ડેટા નથી",
-        "SeeHistory": "Payment {999} for માટે ચુકવણી ઇતિહાસ જુઓ"
+        "SeeHistory": "Payment {999} for માટે ચુકવણી ઇતિહાસ જુઓ",
+        "PaymentFor": "{9 999}} ક્રેડિટ્સ ખર્ચ્યા",
+        "PaymentTo": "{9 999} its ક્રેડિટ્સ મોકલી",
+        "PaymentToUser": "{9 999} its ક્રેડિટ્સ મોકલી",
+        "JoinedPaidStream": {
+            "+": "{9 999}} કમાણી",
+            "-": "{9 999}} ક્રેડિટ્સ ખર્ચ્યા"
+        },
+        "LeftPaidStream": {
+            "+": "{9 999}} ક્રેડિટ્સ પ્રાપ્ત થઈ",
+            "-": "{9 999} its ક્રેડિટ્સ મોકલી"
+        },
+        "CreatedCommunity": "{9 999}} ક્રેડિટ્સ ખર્ચ્યા",
+        "BoughtCredits": "{9 999} its ક્રેડિટ્સ ખરીદ્યો",
+        "InviteAcceptedBy": "{9 999}} કમાણી",
+        "YouHaveCreditsToStart": "{9 999}} કમાણી"
     },
     "subscriptions": {
         "infoTitle": "ચુકવણીની માહિતી સેટ કરો",
@@ -48,7 +78,8 @@
             "message": "શું તમે pay {999}} {{1000} pay ચૂકવવા માટે સંમત છો?",
             "ok": "ઠીક છે",
             "cancel": "રદ કરો"
-        }
+        },
+        "BuyAmountCredits": "{9 999}} ક્રેડિટ્સ ખરીદો"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "{9 999}} ક્રેડિટ્સ પ્રાપ્ત થઈ"
+        },
+        "Assets/credits/bought": {
+            "content": "{9 999} its ક્રેડિટ્સ ખરીદ્યો"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "&quot;{{description}}&quot; માટે ચૂકવણી બદલ આભાર",
         "HavePaid": "હે {{1}}, આ ફક્ત એક ઝડપી પુષ્ટિ છે કે તમે સફળતાપૂર્વક {{4}} માટે {{3}} ને paid {10001 paid paid ચૂકવ્યું છે"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "નવી સેવા",
+            "TitlePlaceholder": "સેવા શીર્ષક",
+            "PricePlaceholder": "ભાવ નક્કી કરો",
+            "LinkPlaceholder": "વધારાની માહિતી લિંક સેટ કરો",
+            "DescriptionPlaceholder": "સેવા વર્ણન",
+            "SaveService": "સેવા બચાવો"
+        },
+        "ManageServiceTemplates": "સેવા નમૂનાઓ મેનેજ કરો",
+        "ManageServices": "સેવાઓ મેનેજ કરો",
+        "FreeEvent": "નિ eventશુલ્ક ઇવેન્ટ",
+        "OptionalContribution": "વૈકલ્પિક ફાળો",
+        "RequiredPayment": "જરૂરી ચુકવણી",
+        "AreYouSureDelete": "શું તમે ખરેખર આ સેવા કા deleteી નાખવા માંગો છો?",
+        "AmountServicesRelated": "આ સેવાથી સંબંધિત {{amount}} ઉપલબ્ધતાઓ છે. તેઓ પણ દૂર કરવામાં આવશે."
     }
 }

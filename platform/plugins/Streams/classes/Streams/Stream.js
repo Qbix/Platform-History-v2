@@ -250,10 +250,11 @@ Sp.setUp = function () {
 };
 
 /**
- * Verifies wheather Stream can be handled. Can be called syncronously and in such case skips
+ * Verifies whether Stream can be handled. Can be called syncronously and in such case skips
  * verification of inherited access or asyncronously to make ful check
  * @method testLevel
  * @private
+ * @param {string} subj
  * @param {string} type
  * @param {string} values
  * @param {string|integer} level
@@ -618,11 +619,12 @@ Sp.inheritAccess = function (callback) {
 	try {
 		names = JSON.parse(this.fields.inheritAccess);
 	} catch (e) {
-		callback.call(subj, e);
+		return callback.call(subj, e);
 	}
-	if (Q.typeOf(names) !== "object" || !Object.keys(names).length) {
-		callback.call(subj, null, false);
+	if (this.get('inheritedAccess') == this.fields.inheritAccess) {
+		return callback.call(subj, null, false);
 	}
+	this.set('inheritAccess', this.fields.inheritAccess);
 
 	if (!Q.isArrayLike(names)) {
 		var temp = names;
@@ -659,7 +661,8 @@ Sp.inheritAccess = function (callback) {
 	
 	// Inheritance only goes one "generation" here.
 	// To implement several "generations" of inheritance, you can do things like:
-	// 'inheritAccess': '["grandparentStreamName", "parentStreamName"]'
+	// 'inheritAccess': [["publisherId","grandparentStreamName"],
+	//                  ["publisherId","parentStreamName"]]
 	Q.each(names, function (i, name) {
 		var asUserId = subj.get('asUserId', '');
 		var publisherId;

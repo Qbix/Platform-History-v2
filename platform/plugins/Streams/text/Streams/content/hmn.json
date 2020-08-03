@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Tshiab {{relationDisplayType}} hauv {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ntxiv rau {{toTitle}} li {{1000 tauj}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} hais koj hauv ib qho lus pom",
-        "Streams\/call": "{{displayName}} yog koj hu",
+        "Streams\/call": "{{displayName}} tau pib hu-ntawd tiag",
         "ManageEmailSubscriptions": "tswj koj email subscriptions",
         "IfUnsubscribe": "Yog koj xav tshem tawm"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Koj puas tseeb tshem tawm lub cuab yeej no? Nws yuav kaw cov ntawv ceeb toom rau lub cuab yeej no.",
         "Identifiers": "Cov cim",
         "Devices": "Pab kiag li lawm",
-        "Streams": "Ntws"
+        "Streams": "Ntws",
+        "AreYouSureRemoveParticipant": "Koj puas paub tseeb tias koj xav tshem tawm cov koom nrog no?",
+        "RemoveParticipant": "Tshem tawm cov neeg koom"
     },
     "menu": {
         "placeholder": "hom nplooj npe",

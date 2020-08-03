@@ -76,7 +76,7 @@
         "mobileExists": "An ndearna tú iarracht clárú leis an uimhir soghluaiste seo roimhe seo? Má tá, seiceáil do SMS chun do chuntas a ghníomhachtú. <a href='#resend' class='Q_button Users_activation_resend'>Cliceáil chun an teachtaireacht a athsheoladh<\/a>",
         "usingOther": "nó is féidir leat",
         "prompt": "Roghnaigh ainm úsáideora:",
-        "newUser": "nó cuntas nua a chruthú",
+        "newUser": "nó cruthaigh cuntas nua thíos",
         "placeholders": {
             "identifier": "do # soghluaiste nó ríomhphost",
             "mobile": "cuir isteach do phóca #",

@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "{{toTitle}} හි නව {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{999} to ලෙස {{relationDisplayType}} ලෙස එකතු කරන ලදි",
         "Streams\/mention": "Comment 99 999} a ඔබ අදහස් දැක්වීමක සඳහන් කර ඇත",
-        "Streams\/call": "Call {999} you ඔබට කතා කරයි",
+        "Streams\/call": "{99 999} a තත්‍ය කාලීන ඇමතුමක් ආරම්භ කළේය",
         "ManageEmailSubscriptions": "ඔබගේ විද්‍යුත් තැපැල් දායකත්වයන් කළමනාකරණය කරන්න",
         "IfUnsubscribe": "ඔබට දායකත්වයෙන් ඉවත් වීමට අවශ්‍ය නම්"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "මෙම උපාංගය දායක නොවන්නැයි ඔබට විශ්වාසද? එය මෙම උපාංගයට දැනුම්දීම් අක්‍රිය කරයි.",
         "Identifiers": "හඳුනාගැනීම්",
         "Devices": "උපකරණ",
-        "Streams": "ධාරාවන්"
+        "Streams": "ධාරාවන්",
+        "AreYouSureRemoveParticipant": "මෙම සහභාගිවන්නා ඉවත් කිරීමට ඔබට අවශ්‍ය යැයි ඔබට විශ්වාසද?",
+        "RemoveParticipant": "සහභාගිවන්නා ඉවත් කරන්න"
     },
     "menu": {
         "placeholder": "පිටු මාතෘකාව ටයිප් කරන්න",

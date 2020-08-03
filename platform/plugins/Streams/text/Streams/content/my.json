@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "{{၉၉၉}} {{toTitle}} ထဲမှအသစ်",
         "Streams\/relatedFrom\/*": "{{toTitle}} {{relationDisplayType}} အဖြစ်ထည့်သွင်းခဲ့သည်",
         "Streams\/mention": "{{&call 'avatar.displayName'}} မှတ်ချက်တစ်ခုတွင်သင့်အားဖော်ပြခဲ့သည်",
-        "Streams\/call": "{{displayName}} မင်းကမင်းကိုခေါ်နေတယ်",
+        "Streams\/call": "{{displayName}} သည်အချိန်နှင့်တပြေးညီဖုန်းခေါ်ဆိုခဲ့သည်",
         "ManageEmailSubscriptions": "သင့်ရဲ့အီးမေးလ်မှာယူမှုကိုစီမံခန့်ခွဲပါ",
         "IfUnsubscribe": "သင်ရပ်ဆိုင်းချင်တယ်ဆိုရင်"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "ဒီကိရိယာကိုသင်မှာယူမလား? ဒီစက်ကိုအကြောင်းကြားစာများပိတ်လိမ့်မည်",
         "Identifiers": "အမှတ်အသား",
         "Devices": "စက်ပစ္စည်းများ",
-        "Streams": "စီး"
+        "Streams": "စီး",
+        "AreYouSureRemoveParticipant": "သင်ပါ ၀ င်သူကိုသင်ဖယ်ရှားလိုပါသလား။",
+        "RemoveParticipant": "ပါဝင်သူဖယ်ရှားပါ"
     },
     "menu": {
         "placeholder": "စာမျက်နှာခေါင်းစဉ်ရိုက်ပါ",

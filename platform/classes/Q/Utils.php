@@ -130,6 +130,19 @@ class Q_Utils
 		}
 		return base64_decode($result);
 	}
+	
+	static function explodeEscaped($delimiter, $str, $escapeChar = '\\')
+	{
+	    $double = "\0\0\0_doub";
+	    $escaped = "\0\0\0_esc";
+	    $str = str_replace($escapeChar . $escapeChar, $double, $str);
+	    $str = str_replace($escapeChar . $delimiter, $escaped, $str);
+	    $split = explode($delimiter, $str);
+	    foreach ($split as &$val) {
+			$val = str_replace(array($double, $escaped), array($escapeChar, $delimiter), $val);
+		}
+	    return $split;
+	}
 
 	static function memoryLimit()
 	{

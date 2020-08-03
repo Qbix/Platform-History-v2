@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "نوی {9 999}} په {{toTitle}}",
         "Streams\/relatedFrom\/*": "د {1000 {} په توګه",
         "Streams\/mention": "{{999} you په تبصره کې مو یادونه وکړه",
-        "Streams\/call": "{{999} you تلیفون کوي",
+        "Streams\/call": "{{999} د ریښتیني وخت زنګ پیل شو",
         "ManageEmailSubscriptions": "د خپل بریښنالیک شراکت اداره کړئ",
         "IfUnsubscribe": "که تاسو غواړئ غړیتوب واخلئ"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "ایا ته باوري یې چې دا وسیله سبسایب کوي؟ دا به دې وسیلې ته خبرتیاوې وتړي.",
         "Identifiers": "پیژندونکي",
         "Devices": "وسایل",
-        "Streams": "جریانونه"
+        "Streams": "جریانونه",
+        "AreYouSureRemoveParticipant": "ایا تاسو باوري یاست چې غواړئ د دې برخه اخیستونکي لرې کړئ؟",
+        "RemoveParticipant": "برخه اخیستونکی لرې کړئ"
     },
     "menu": {
         "placeholder": "د مخ سرلیک ټایپ کړئ",

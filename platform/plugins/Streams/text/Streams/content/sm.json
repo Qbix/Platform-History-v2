@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
         "Streams\/relatedFrom\/*": "Faʻaopoopo i {{toTitle}} e pei {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} na taʻua oe i se faamatalaga",
-        "Streams\/call": "{{displayName}} o loo valaau ia oe",
+        "Streams\/call": "{{displayName}} amata le telefoni moʻi",
         "ManageEmailSubscriptions": "pulea lau lisiti imeli",
         "IfUnsubscribe": "Afai e te manaʻo e faʻaaoga"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "E te mautinoa e vavaeeseina lenei masini? O le a tape ai faʻamatalaga i lenei masini.",
         "Identifiers": "Faʻamatalaga",
         "Devices": "Lelei",
-        "Streams": "Vaitafe"
+        "Streams": "Vaitafe",
+        "AreYouSureRemoveParticipant": "O e mautinoa e te manaʻo e aveʻese le sui auai lea?",
+        "RemoveParticipant": "Aveese le tagata auai"
     },
     "menu": {
         "placeholder": "ituaiga itulau ulutala",

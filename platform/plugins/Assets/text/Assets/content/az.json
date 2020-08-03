@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "{{1}} tərəfindən qəbul edilən dəvət",
-        "YouHaveCreditsToStart": "Başlamaq üçün {{1}} kreditiniz var"
+        "YouHaveCreditsToStart": "Başlamaq üçün {{1}} kreditiniz var",
+        "PaymentFor": "&quot;{{1}}&quot; üçün ödəniş",
+        "PaymentTo": "Ödəniş {{1}}",
+        "PaymentToUser": "Ödəniş {{userName}}",
+        "JoinedPaidStream": "qoşulduğu üçün &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "icma yaratmaq üçün &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; tərk etdiyi üçün",
+        "BoughtCredits": "{{amount}} kredit aldı",
+        "BuyAmountCredits": "{{amount}} kredit alın",
+        "MissingCredits": "Yarımçıq Kreditlər",
+        "YouMissingCredits": "{{amount}} kredit itkin",
+        "BuyCredits": "Kreditlər alın",
+        "Buy": "Alın",
+        "Credits": "Kreditlər",
+        "ErrorInvalidAmount": "Məbləğ etibarsızdır",
+        "ErrorInvalidCurrency": "Təəssüf ki, hələ {{currency}} valyuta bilmir"
     },
     "history": {
         "Date": "Tarix",
@@ -27,7 +42,22 @@
         "To": "üçün",
         "From": "dən",
         "HistoryEmpty": "Hələ məlumatınız yoxdur",
-        "SeeHistory": "{{1}} üçün ödəniş tarixinə baxın"
+        "SeeHistory": "{{1}} üçün ödəniş tarixinə baxın",
+        "PaymentFor": "{{amount}} kreditləri sərf etdi",
+        "PaymentTo": "{{amount}} kredit göndərildi",
+        "PaymentToUser": "{{amount}} kredit göndərildi",
+        "JoinedPaidStream": {
+            "+": "Qazanılmış {{amount}} kredit",
+            "-": "{{amount}} kreditləri sərf etdi"
+        },
+        "LeftPaidStream": {
+            "+": "{{amount}} kredit aldı",
+            "-": "{{amount}} kredit göndərildi"
+        },
+        "CreatedCommunity": "{{amount}} kreditləri sərf etdi",
+        "BoughtCredits": "{{amount}} kredit aldı",
+        "InviteAcceptedBy": "Qazanılmış {{amount}} kredit",
+        "YouHaveCreditsToStart": "Qazanılmış {{amount}} kredit"
     },
     "subscriptions": {
         "infoTitle": "Ödəniş məlumatlarını təyin edin",
@@ -48,7 +78,8 @@
             "message": "{{symbol}} {{amount}} ödəməyə razısınız?",
             "ok": "tamam",
             "cancel": "Ləğv et"
-        }
+        },
+        "BuyAmountCredits": "{{amount}} kredit alın"
     },
     "types": {
         "Assets\/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets\/credits\/received": {
             "content": "{{amount}} kredit aldı"
+        },
+        "Assets\/credits\/bought": {
+            "content": "{{amount}} kredit aldı"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "&quot;{{description}}&quot; üçün ödəməyiniz üçün təşəkkür edirik",
         "HavePaid": "Hey {{1}}, bu {{4}} üçün {{2}} -ı {{3}} -ə uğurla ödəməyinizin qısa bir təsdiqidir."
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Yeni Xidmət",
+            "TitlePlaceholder": "Xidmətin adı",
+            "PricePlaceholder": "Qiyməti təyin edin",
+            "LinkPlaceholder": "əlavə məlumat bağlantısı qurun",
+            "DescriptionPlaceholder": "Xidmətin təsviri",
+            "SaveService": "Xidməti Saxla"
+        },
+        "ManageServiceTemplates": "Xidmət şablonlarını idarə edin",
+        "ManageServices": "Xidmətləri idarə et",
+        "FreeEvent": "Pulsuz hadisə",
+        "OptionalContribution": "Könüllü töhfə",
+        "RequiredPayment": "Tələb olunan ödəniş",
+        "AreYouSureDelete": "Bu xidməti silmək istədiyinizə əminsiniz?",
+        "AmountServicesRelated": "Bu xidmətlə əlaqəli {{amount}} çatışmazlıqlar var. Bunlar da çıxarılacaq."
     }
 }

@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "New 999 të reja} në {{1000}",
         "Streams\/relatedFrom\/*": "Shtuar në 99 999 si {{1000}",
         "Streams\/mention": "99 99 999}} ju përmenda në një koment",
-        "Streams\/call": "99 999 po ju thërret"
+        "Streams\/call": "99 99 999} filloi një telefonatë në kohë reale"
     },
     "invite": {
         "messageContent": "{{displayName}} ju ftoi për të {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "A jeni i sigurt se abononi këtë pajisje? Do të fiket njoftimet në këtë pajisje.",
         "Identifiers": "identifikues",
         "Devices": "Devices",
-        "Streams": "streams"
+        "Streams": "streams",
+        "AreYouSureRemoveParticipant": "Jeni i sigurt që doni të hiqni këtë pjesëmarrës?",
+        "RemoveParticipant": "Hiq pjesëmarrësin"
     },
     "webrtc": {
         "allow": {

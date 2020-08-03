@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Nýtt {{relationDisplayType}} í {{toTitle}}",
         "Streams\/relatedFrom\/*": "Bætt við {{toTitle}} sem {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} minntist á þig í athugasemd",
-        "Streams\/call": "{{displayName}} hringir í þig"
+        "Streams\/call": "{{displayName}} byrjaði rauntímahringingu"
     },
     "invite": {
         "messageContent": "{{displayName}} bauð þér að {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Ertu viss um að segja upp áskrift að þessu tæki? Það mun slökkva á tilkynningum um þetta tæki.",
         "Identifiers": "Auðkenni",
         "Devices": "Tæki",
-        "Streams": "Straumar"
+        "Streams": "Straumar",
+        "AreYouSureRemoveParticipant": "Ertu viss um að þú viljir fjarlægja þennan þátttakanda?",
+        "RemoveParticipant": "Fjarlægðu þátttakanda"
     },
     "webrtc": {
         "allow": {

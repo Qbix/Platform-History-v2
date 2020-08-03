@@ -76,7 +76,7 @@
         "mobileExists": "Você tentou se registrar com esse número de celular antes? Em caso afirmativo, verifique seu SMS para ativar sua conta. <a href='#resend' class='Q_button Users_activation_resend'>Clique para reenviar a mensagem</a>",
         "usingOther": "ou você pode",
         "prompt": "Escolha um nome de usuário:",
-        "newUser": "ou crie uma nova conta",
+        "newUser": "ou crie uma nova conta abaixo",
         "placeholders": {
             "identifier": "seu celular # ou e-mail",
             "mobile": "digite seu celular #",

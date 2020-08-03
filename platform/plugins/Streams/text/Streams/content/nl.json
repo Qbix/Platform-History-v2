@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Nieuwe {{relationDisplayType}} in {{toTitle}}",
         "Streams\/relatedFrom\/*": "Toegevoegd aan {{toTitle}} als {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} heeft je in een reactie genoemd",
-        "Streams\/call": "{{displayName}} belt u"
+        "Streams\/call": "{{displayName}} is een realtime oproep begonnen"
     },
     "invite": {
         "messageContent": "{{displayName}} heeft je uitgenodigd voor {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Weet u zeker dat u dit apparaat wilt afmelden? Het schakelt meldingen naar dit apparaat uit.",
         "Identifiers": "identifiers",
         "Devices": "apparaten",
-        "Streams": "streams"
+        "Streams": "streams",
+        "AreYouSureRemoveParticipant": "Weet je zeker dat je deze deelnemer wilt verwijderen?",
+        "RemoveParticipant": "Deelnemer verwijderen"
     },
     "webrtc": {
         "allow": {

@@ -76,7 +76,7 @@
         "mobileExists": "Daha önce bu cep telefonu numarasına kaydolmayı denedin mi? Öyleyse, hesabınızı etkinleştirmek için SMS&#39;inizi kontrol edin. <a href='#resend' class='Q_button Users_activation_resend'>Mesajı tekrar göndermek için tıklayın.<\/a>",
         "usingOther": "ya da yapabilirsin",
         "prompt": "Bir kullanıcı adı seçin:",
-        "newUser": "veya yeni bir hesap oluştur",
+        "newUser": "veya aşağıdan yeni bir hesap oluşturun",
         "placeholders": {
             "identifier": "cep telefonu numaranız veya e-posta adresiniz",
             "mobile": "cep telefonunu gir #",

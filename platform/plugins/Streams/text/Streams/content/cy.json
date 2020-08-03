@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "Newydd {{relationDisplayType}} yn {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ychwanegwyd at {{toTitle}} fel {{relationDisplayType}}",
         "Streams\/mention": "Soniodd {{&call 'avatar.displayName'}} amdanoch mewn sylw",
-        "Streams\/call": "Mae {{displayName}} yn eich galw chi"
+        "Streams\/call": "Dechreuodd {{displayName}} alwad amser real"
     },
     "invite": {
         "messageContent": "Gwahoddwyd {{displayName}} i {{inviteUrl}}",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Ydych chi&#39;n sicr yn dad-danysgrifio&#39;r ddyfais hon? Bydd yn diffodd hysbysiadau i&#39;r ddyfais hon.",
         "Identifiers": "Dynodwyr",
         "Devices": "Dyfeisiau",
-        "Streams": "Ffrydiau"
+        "Streams": "Ffrydiau",
+        "AreYouSureRemoveParticipant": "Ydych chi&#39;n siŵr eich bod chi am gael gwared â&#39;r cyfranogwr hwn?",
+        "RemoveParticipant": "Dileu cyfranogwr"
     },
     "webrtc": {
         "allow": {

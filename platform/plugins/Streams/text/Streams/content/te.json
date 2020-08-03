@@ -56,7 +56,7 @@
         "Streams\/relatedTo\/*": "{{toTitle}} లో క్రొత్త {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{999} to కు {{1000} as గా జోడించబడింది",
         "Streams\/mention": "{{999} you మిమ్మల్ని వ్యాఖ్యలో పేర్కొన్నారు",
-        "Streams\/call": "{{999} you మిమ్మల్ని పిలుస్తోంది"
+        "Streams\/call": "{99 999} a నిజ-సమయ కాల్‌ను ప్రారంభించింది"
     },
     "invite": {
         "messageContent": "{{displayName}} మిమ్మల్ని {{inviteUrl}} కి ఆహ్వానించారు",
@@ -124,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "మీరు ఖచ్చితంగా ఈ పరికరాన్ని చందాను తొలగించారా? ఇది ఈ పరికరానికి నోటిఫికేషన్‌లను ఆపివేస్తుంది.",
         "Identifiers": "ఐడెంటిఫైఎర్స్",
         "Devices": "పరికరాల",
-        "Streams": "Streams"
+        "Streams": "Streams",
+        "AreYouSureRemoveParticipant": "మీరు ఖచ్చితంగా ఈ పాల్గొనేవారిని తొలగించాలనుకుంటున్నారా?",
+        "RemoveParticipant": "పాల్గొనేవారిని తొలగించండి"
     },
     "webrtc": {
         "allow": {

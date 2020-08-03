@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "Uitnodiging aanvaar deur {{1}}",
-        "YouHaveCreditsToStart": "Jy het {{1}} krediete om te begin"
+        "YouHaveCreditsToStart": "Jy het {{1}} krediete om te begin",
+        "PaymentFor": "Betaling vir &quot;{{1}}&quot;",
+        "PaymentTo": "Betaling aan {{1}}",
+        "PaymentToUser": "Betaling aan {{userName}}",
+        "JoinedPaidStream": "om by &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; aan te sluit",
+        "CreatedCommunity": "vir die skepping van die gemeenskap &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "omdat u &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; verlaat",
+        "BoughtCredits": "Het {{amount}} krediete gekoop",
+        "BuyAmountCredits": "Koop {{amount}} krediete",
+        "MissingCredits": "Ontbrekende krediete",
+        "YouMissingCredits": "U ontbreek {{amount}} krediete",
+        "BuyCredits": "Koop krediete",
+        "Buy": "Koop",
+        "Credits": "krediete",
+        "ErrorInvalidAmount": "Bedrag ongeldig",
+        "ErrorInvalidCurrency": "Ongelukkig ondersteun ons nog nie geldeenheid {{currency}} nie"
     },
     "history": {
         "Date": "datum",
@@ -27,7 +42,22 @@
         "To": "om",
         "From": "van",
         "HistoryEmpty": "U het nog geen data nie",
-        "SeeHistory": "Kyk na betalingsgeskiedenis vir {{1}}"
+        "SeeHistory": "Kyk na betalingsgeskiedenis vir {{1}}",
+        "PaymentFor": "{{amount}} krediete bestee",
+        "PaymentTo": "{{amount}} krediete gestuur",
+        "PaymentToUser": "{{amount}} krediete gestuur",
+        "JoinedPaidStream": {
+            "+": "{{amount}} krediete verdien",
+            "-": "{{amount}} krediete bestee"
+        },
+        "LeftPaidStream": {
+            "+": "Het {{amount}} krediete ontvang",
+            "-": "{{amount}} krediete gestuur"
+        },
+        "CreatedCommunity": "{{amount}} krediete bestee",
+        "BoughtCredits": "Het {{amount}} krediete gekoop",
+        "InviteAcceptedBy": "{{amount}} krediete verdien",
+        "YouHaveCreditsToStart": "{{amount}} krediete verdien"
     },
     "subscriptions": {
         "infoTitle": "Stel betalinginligting op",
@@ -48,7 +78,8 @@
             "message": "Stem u in om {{symbol}} {{amount}} te betaal?",
             "ok": "OK",
             "cancel": "kanselleer"
-        }
+        },
+        "BuyAmountCredits": "Koop {{amount}} krediete"
     },
     "types": {
         "Assets\/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets\/credits\/received": {
             "content": "Het {{amount}} krediete ontvang"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Het {{amount}} krediete gekoop"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "Dankie vir u betaling vir &quot;{{description}}&quot;",
         "HavePaid": "Hallo {{1}}, dit is net &#39;n vinnige bevestiging dat u {{2}} suksesvol aan {{3}} betaal het vir {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Nuwe diens",
+            "TitlePlaceholder": "Diens titel",
+            "PricePlaceholder": "Stel prys",
+            "LinkPlaceholder": "stel addisionele inligtingskakel",
+            "DescriptionPlaceholder": "Diensbeskrywing",
+            "SaveService": "Stoor diens"
+        },
+        "ManageServiceTemplates": "Bestuur diensjablone",
+        "ManageServices": "Bestuur dienste",
+        "FreeEvent": "Gratis geleentheid",
+        "OptionalContribution": "Opsionele bydrae",
+        "RequiredPayment": "Vereiste betaling",
+        "AreYouSureDelete": "Is u seker dat u hierdie diens wil uitvee?",
+        "AmountServicesRelated": "Daar is {{amount}} beskikbaarhede wat met hierdie diens verband hou. Hulle word ook verwyder."
     }
 }

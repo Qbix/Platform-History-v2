@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} ing {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ditambahake ing {{toTitle}} minangka {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} sampeyan nyebutake komentar",
-        "Streams\/call": "{{displayName}} nelpon sampeyan",
+        "Streams\/call": "{{displayName}} miwiti panggilan nyata-wektu",
         "ManageEmailSubscriptions": "ngatur langgananku email",
         "IfUnsubscribe": "Yen sampeyan pengin nggawe langganan"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Apa sampeyan yakin nggunakake langganan piranti iki? Bakal mateni kabar menyang piranti iki.",
         "Identifiers": "Pengenal",
         "Devices": "Piranti",
-        "Streams": "Aliran"
+        "Streams": "Aliran",
+        "AreYouSureRemoveParticipant": "Apa sampeyan pengin mbusak peserta iki?",
+        "RemoveParticipant": "Mbusak peserta"
     },
     "menu": {
         "placeholder": "judhul kaca",

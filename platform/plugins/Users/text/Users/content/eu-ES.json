@@ -76,7 +76,7 @@
         "mobileExists": "Aurretik saiatu al zara mugikor zenbaki honekin erregistratzen? Hala bada, egiaztatu zure SMS kontua aktibatzeko. <a href='#resend' class='Q_button Users_activation_resend'>Egin klik mezua berriro bidaltzeko</a>",
         "usingOther": "edo ahal duzu",
         "prompt": "Erabiltzaile izena aukeratu:",
-        "newUser": "edo kontu berri bat sortu",
+        "newUser": "edo sortu kontu berria behean",
         "placeholders": {
             "identifier": "zure mugikorra # edo posta elektronikoa",
             "mobile": "sartu zure mugikorrean #",

@@ -22,6 +22,9 @@ class Q_Response
 	 $content)
 	{
 		self::$slots[$slotName] = $content;
+		if (!self::$_fillingSlot) {
+			self::$_slotsWereSet[$slotName] = true;
+		}
 		return $content;
 	}
 	
@@ -111,7 +114,9 @@ class Q_Response
 			return self::$slots[$slotName];
 		}
 		if (isset($result)) {
+			self::$_fillingSlot = true;
 			self::setSlot($slotName, $result);
+			self::$_fillingSlot = false;
 			return $result;
 		}
 
@@ -170,6 +175,28 @@ class Q_Response
 			$return[$slotName] = self::fillSlot($slotName);
 		}
 		return $return;
+	}
+
+	/**
+	 * Used to fill multiple slots from Q/response and other events
+	 * @method fillSlots
+	 * @static
+	 * @param {array} $slotNames array of slot name to fill
+	 * @param {array} [$idPrefixes] array of ($slotName => $idPrefix) pairs
+	 */
+	static function fillSlots($slotNames, $idPrefixes = array())
+	{
+		self::$_slotsWereSet = array();
+		foreach ($slotNames as $sn) {
+			Q_Response::fillSlot($sn, 'default', Q::ifset($idPrefixes, $sn, null));
+		}
+		if (!empty(self::$_slotsWereSet)) {
+			// Go through the slots again, because other handlers may have overwritten
+			// their contents using Q_Response::setSlot()
+			foreach ($slotNames as $sn) {
+				Q_Response::fillSlot($sn, 'default', Q::ifset($idPrefixes, $sn, null));
+			}
+		}
 	}
 
 	/**
@@ -1824,6 +1851,22 @@ class Q_Response
 	 * @type array
 	 */
 	protected static $slots = array();
+	
+	/**
+	 * For internal use
+	 * @property $_slotsWereSet
+	 * @static
+	 * @type array
+	 */
+	protected static $_slotsWereSet = array();
+	
+	/**
+	 * For internal use
+	 * @property $_fillingSlot
+	 * @static
+	 * @type array
+	 */
+	protected static $_fillingSlot = array();
 
 	/**
 	 * @property $scripts

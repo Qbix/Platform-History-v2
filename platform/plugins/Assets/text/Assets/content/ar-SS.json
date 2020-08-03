@@ -17,7 +17,22 @@
     },
     "credits": {
         "InviteAcceptedBy": "تم قبول الدعوة بواسطة {{1}}",
-        "YouHaveCreditsToStart": "لديك {{1}} ائتمانات للبدء"
+        "YouHaveCreditsToStart": "لديك {{1}} ائتمانات للبدء",
+        "PaymentFor": "الدفع لـ &quot;{{1}}&quot;",
+        "PaymentTo": "الدفع إلى {{1}}",
+        "PaymentToUser": "الدفع إلى {{userName}}",
+        "JoinedPaidStream": "للانضمام إلى &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "CreatedCommunity": "لإنشاء المجتمع &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "لمغادرة &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a> &quot;",
+        "BoughtCredits": "اشترى {{amount}} ائتمانات",
+        "BuyAmountCredits": "شراء أرصدة {{amount}}",
+        "MissingCredits": "قروض مفقودة",
+        "YouMissingCredits": "تنقصك أرصدة {{amount}}",
+        "BuyCredits": "شراء إئتمانات",
+        "Buy": "يشترى",
+        "Credits": "ائتمانات",
+        "ErrorInvalidAmount": "المبلغ غير صالح",
+        "ErrorInvalidCurrency": "للأسف ، لا ندعم العملة {{currency}} بعد"
     },
     "history": {
         "Date": "تاريخ",
@@ -27,7 +42,22 @@
         "To": "إلى",
         "From": "من عند",
         "HistoryEmpty": "لا يوجد لديك بيانات حتى الآن",
-        "SeeHistory": "راجع سجل الدفع لـ {{1}}"
+        "SeeHistory": "راجع سجل الدفع لـ {{1}}",
+        "PaymentFor": "نفقت أرصدة {{amount}}",
+        "PaymentTo": "تم إرسال {{amount}} رصيد",
+        "PaymentToUser": "تم إرسال {{amount}} رصيد",
+        "JoinedPaidStream": {
+            "+": "ربح {{amount}} رصيد",
+            "-": "نفقت أرصدة {{amount}}"
+        },
+        "LeftPaidStream": {
+            "+": "تم استلام {{amount}} ائتمانات",
+            "-": "تم إرسال {{amount}} رصيد"
+        },
+        "CreatedCommunity": "نفقت أرصدة {{amount}}",
+        "BoughtCredits": "اشترى {{amount}} ائتمانات",
+        "InviteAcceptedBy": "ربح {{amount}} رصيد",
+        "YouHaveCreditsToStart": "ربح {{amount}} رصيد"
     },
     "subscriptions": {
         "infoTitle": "ضبط معلومات الدفع",
@@ -48,7 +78,8 @@
             "message": "هل توافق على الدفع {{symbol}} {{amount}}؟",
             "ok": "حسنا",
             "cancel": "إلغاء"
-        }
+        },
+        "BuyAmountCredits": "شراء أرصدة {{amount}}"
     },
     "types": {
         "Assets/credits": {
@@ -84,6 +115,9 @@
         },
         "Assets/credits/received": {
             "content": "تلقى {{amount}} ائتمانات"
+        },
+        "Assets/credits/bought": {
+            "content": "اشترى {{amount}} ائتمانات"
         }
     },
     "charge": {
@@ -93,5 +127,22 @@
     "charged": {
         "Subject": "شكرًا لك على دفعتك مقابل &quot;{{description}}&quot;",
         "HavePaid": "مرحبًا {{1}} ، هذا مجرد تأكيد سريع بأنك دفعت {{2}} بنجاح إلى {{3}} مقابل {{4}}"
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "خدمة جديدة",
+            "TitlePlaceholder": "عنوان الخدمة",
+            "PricePlaceholder": "ضع سعر",
+            "LinkPlaceholder": "تعيين ارتباط معلومات إضافية",
+            "DescriptionPlaceholder": "وصف الخدمة",
+            "SaveService": "حفظ الخدمة"
+        },
+        "ManageServiceTemplates": "إدارة قوالب الخدمة",
+        "ManageServices": "إدارة الخدمات",
+        "FreeEvent": "حدث مجاني",
+        "OptionalContribution": "مساهمة اختيارية",
+        "RequiredPayment": "الدفع المطلوب",
+        "AreYouSureDelete": "هل أنت متأكد أنك تريد حذف هذه الخدمة؟",
+        "AmountServicesRelated": "هناك {{amount}} من الإمكانيات المتاحة لهذه الخدمة. كما سيتم إزالتها."
     }
 }

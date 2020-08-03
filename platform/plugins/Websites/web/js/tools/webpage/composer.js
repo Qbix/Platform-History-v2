@@ -62,7 +62,7 @@
 				var $startButton = tool.$('button[name=startConversation]');
 				var $message = tool.$('textarea[name=message]').plugin('Q/placeholders').plugin('Q/autogrow');
 
-				// beowse button only for cordova
+				// browse button only for cordova
 				if (Q.info.isCordova) {
 					var $browse = tool.$('.Websites_webpage_composer_input a');
 					$url.on('change keyup keydown input paste', function () {
@@ -93,7 +93,14 @@
 					});
 				});
 
-				$goButton.on(Q.Pointer.fastclick, function () {
+				$url.on('keydown', function (e) {
+					if (e.keyCode === 13) {
+						_scrape();
+					}
+				});
+				$goButton.on(Q.Pointer.fastclick, _scrape);
+				
+				function _scrape() {
 					var url = $url.val();
 
 					if (!tool.validUrl(url)) {
@@ -144,7 +151,7 @@
 							url: url
 						}
 					});
-				});
+				}
 			});
 		},
 		/**

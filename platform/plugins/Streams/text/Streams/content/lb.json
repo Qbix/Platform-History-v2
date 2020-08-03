@@ -54,7 +54,7 @@
         "Streams\/relatedTo\/*": "Nei {{relationDisplayType}} an {{toTitle}}",
         "Streams\/relatedFrom\/*": "Zu {{toTitle}} als {{relationDisplayType}} bäigefüügt",
         "Streams\/mention": "{{&call 'avatar.displayName'}} huet Iech an engem Kommentar ernimmt",
-        "Streams\/call": "{{displayName}} rufft Iech un",
+        "Streams\/call": "{{displayName}} huet en Echtzäit ugeruff",
         "ManageEmailSubscriptions": "managen Är E-Mail Abonnementer",
         "IfUnsubscribe": "Wann Dir Iech ofschreift"
     },
@@ -351,7 +351,9 @@
         "AreYouSureUnsubscribeDevice": "Sidd Dir sécher dësen Apparat ofgemellt? Et schalt Notifikatiounen op dësem Apparat aus.",
         "Identifiers": "Identifizéierer",
         "Devices": "Apparater",
-        "Streams": "Baachen"
+        "Streams": "Baachen",
+        "AreYouSureRemoveParticipant": "Sidd Dir sécher, datt Dir dee Participant wëllt läschen?",
+        "RemoveParticipant": "Participant ewechhuelen"
     },
     "menu": {
         "placeholder": "Typ Säit Titel",
