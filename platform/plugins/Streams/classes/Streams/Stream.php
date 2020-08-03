@@ -671,7 +671,7 @@ class Streams_Stream extends Base_Streams_Stream
 	{
 		return empty($this->attributes) 
 			? array()
-			: json_decode($this->attributes, true);
+			: Q::json_decode($this->attributes, true);
 	}
 	
 	/**
@@ -1260,6 +1260,10 @@ class Streams_Stream extends Base_Streams_Stream
 		if (!$inheritAccess or !is_array($inheritAccess)) {
 			return false;
 		}
+		if ($this->get('inheritedAccess') == $this->inheritAccess) {
+			return false;
+		}
+		$this->set('inheritedAccess', $this->inheritAccess);
 		$public_source = Streams::$ACCESS_SOURCES['public'];
 		$direct_source = Streams::$ACCESS_SOURCES['direct'];
 		$inherited_public_source = Streams::$ACCESS_SOURCES['inherited_public'];
@@ -1277,7 +1281,7 @@ class Streams_Stream extends Base_Streams_Stream
 		
 		// Inheritance only goes one "generation" here.
 		// To implement several "generations" of inheritance, you can do things like:
-		// 'inheritAccess' => '[["publisherId","grandparentStreamName"], ["publisherId","parentStreamName"]]'
+		// 'inheritAccess' => [["publisherId","grandparentStreamName"], ["publisherId","parentStreamName"]]
 		foreach ($inheritAccess as $ia) {
 			if (!is_array($ia)) {
 				continue;
@@ -1559,8 +1563,10 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 
 		if ($skip or $this->testReadLevel('content')) {
+			$readLevelAtLeastContent = true;
 			$result = $this->toArray();
 		} else {
+			$readLevelAtLeastContent = false;
 			if (!$this->testReadLevel('see')) {
 				return array();
 			}
@@ -1581,17 +1587,40 @@ class Streams_Stream extends Base_Streams_Stream
 			foreach ($fields as $field) {
 				$result[$field] = $this->$field;
 			}
+			// determine which fields and attributes can be seen
+			$canSeeFields = array();
+			$canSeeAttributes = array();
+			$permissions = $this->get('permissions', array());
+			$configPermissions = self::getConfigField($this->type, 'permissions', array());
+			foreach ($permissions as $p) {
+				if (empty($configPermissions[$p])) {
+					continue;
+				}
+				$canSeeFields = array_merge($canSeeFields, 
+					Q::ifset($configPermissions, $p, 'fields', array())
+				);
+				$canSeeAttributes = array_merge($canSeeFields, 
+					Q::ifset($configPermissions, $p, 'attributes', array())
+				);
+			}
 		}
 		$result['icon'] = $this->iconUrl();
 		$result['url'] = $this->url();
 		$classes = Streams::getExtendClasses($this->type);
+		
 		foreach ($classes as $k => $v) {
 			foreach ($v as $f) {
 				if (!isset($options['fields'])
 				or in_array($f, $options['fields'])) {
-					$result[$f] = isset($this->$f) ? $this->$f : null;
+					if ($readLevelAtLeastContent or in_array($f, $canSeeFields, true)) {
+						$result[$f] = isset($this->$f) ? $this->$f : null;
+					}
 				}
 			}
+		}
+		if (!$readLevelAtLeastContent) {
+			$attributes = $this->getAllAttributes();
+			$result['attributes'] = Q::json_encode(Q::take($attributes, $canSeeAttributes));
 		}
 		$result['access'] = array(
 			'readLevel' => $this->get('readLevel', $this->readLevel),
