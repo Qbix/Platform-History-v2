@@ -497,7 +497,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".fromPublisherId");
-		if (strlen($value) > 255)
+		if (strlen($value) > 31)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".fromPublisherId");
 		return array('fromPublisherId', $value);			
 	}
@@ -509,7 +509,7 @@ return array (
 	function maxSize_fromPublisherId()
 	{
 
-		return 255;			
+		return 31;			
 	}
 
 	/**
@@ -523,7 +523,7 @@ return array (
   0 => 
   array (
     0 => 'varbinary',
-    1 => '255',
+    1 => '31',
     2 => '',
     3 => false,
   ),
@@ -605,7 +605,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".toPublisherId");
-		if (strlen($value) > 255)
+		if (strlen($value) > 31)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".toPublisherId");
 		return array('toPublisherId', $value);			
 	}
@@ -617,7 +617,7 @@ return array (
 	function maxSize_toPublisherId()
 	{
 
-		return 255;			
+		return 31;			
 	}
 
 	/**
@@ -631,7 +631,7 @@ return array (
   0 => 
   array (
     0 => 'varbinary',
-    1 => '255',
+    1 => '31',
     2 => '',
     3 => false,
   ),
