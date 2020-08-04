@@ -8698,7 +8698,7 @@ var _latestLoadUrlObjects = {};
  * @param {Array|String} slotNames Optional, defaults to all application slots
  * @param {Function} callback Callback which is called when response returned and scripts,
  * stylesheets and inline styles added, but before inline scripts executed.
- * Receives response as its first agrument. May return DOM element or array of DOM elements on which to call Q.activate
+ * Receives response as its first argument. May return DOM element or array of DOM elements on which to call Q.activate
  * By default place slot content to DOM element with id "{slotName}_slot"
  * @param {Object} options Optional.
  * An hash of options to pass to the loader, and can also include options for loadUrl itself:

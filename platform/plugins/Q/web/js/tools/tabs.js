@@ -107,6 +107,7 @@
 
 		{
 			/**
+			 * Call this method to correctly switch to another tab.
 			 * @method switchTo
 			 * @param {String|Array} name the name of the tab to switch to.
 			 *  Can also be [name, tabElement]
@@ -120,6 +121,7 @@
 				var tool = this;
 				var state = this.state;
 				var tab;
+				loaderOptions = loaderOptions || {};
 				if (tool.switching) {
 					return;
 				}
@@ -170,18 +172,6 @@
 				
 				var fromTabName = state.tabName;
 				var fromUrl = window.location.href;
-				var memorized = tool.memorized[name];
-				if (state.memorize === true || (state.memorize && state.memorize[name])) {
-					if (memorized && (!loaderOptions || !loaderOptions.reload)) {
-						beforeFillSlots();
-						Q.Page.push(memorized.url);
-						Q.each(memorized.stored, function (slotName) {
-							Q.replace(slotContainer(slotName), this);
-						});
-						tool.memorized[name] = null;
-						return;
-					}
-				}
 
 				var o = Q.extend({
 					slotNames: slots,
@@ -199,9 +189,10 @@
 					loadExtras: true,
 					ignorePage: tool.isInDialog(),
 					ignoreHistory: tool.isInDialog(),
-					loader: state.loader,
 					slotContainer: slotContainer,
-					beforeFillSlots: beforeFillSlots
+					beforeFillSlots: beforeFillSlots,
+					loader: loader,
+					handler: handler
 				}, 10, state.loaderOptions, 10, loaderOptions);
 
 				Q.handle(href, o);
@@ -218,22 +209,70 @@
 					return container || document.getElementById(slotName+"_slot");
 				}
 				
-				function beforeFillSlots() {
+				function beforeFillSlots(response, url, options) {
 					// memorize existing slots
 					if (state.memorize === true
 					|| (state.memorize && state.memorize[fromTabName])) {
 						var memorized = tool.memorized[fromTabName] = {
 							url: fromUrl,
-							stored: {}
+							title: window.title,
+							stored: {},
+							response: response // stylesheets, styles, etc.
 						};
 						Q.each(slots, function (i, slotName) {
 							var s = memorized.stored[slotName] = document.createElement('div');
 							var c = slotContainer(slotName);
+							Q.Tool.remove(c);
 							Q.each(c && c.childNodes, function () {
 								s.appendChild(this);
 							});
 						});
 					}
+				}
+				
+				function loader(urlToLoad, slotNames, callback, options) {
+					if (!tool.memorized[name]
+					|| !(state.memorize === true
+					|| (state.memorize && tool.memorized[name]))) {
+						// use default loader
+						var _loader = loaderOptions.loader || state.loader 
+							|| Q.loadUrl.options.loader || Q.request;
+						return _loader.apply(this, arguments);
+					}
+					
+					var request = new Q.Request(urlToLoad, slotNames, callback, options);
+					var memorized = tool.memorized[name];
+					if (memorized.response.slots) {
+						for (var slotName in memorized.slots) {
+							// the slots are going to be filled in a different way
+							memorized.response.slots[slotName] = '';
+						}
+					}
+					// the memorized response will cause the stylesheets to load again
+					Q.handle(callback, request, [null, memorized.response, false]);
+				}
+				
+				function handler(response, url, options) {
+					if (state.memorize === true || (state.memorize && state.memorize[name])) {
+						// load memorized url and slots back into new tab
+						var memorized = tool.memorized[name];
+						if (memorized && (!loaderOptions || !loaderOptions.reload)) {
+							history.replaceState(memorized.url, memorized.title);
+							var elements = [];
+							Q.each(memorized.stored, function (slotName) {
+								var element = slotContainer(slotName);
+								Q.replace(element, this);
+								Q.activate(element);
+								elements.push(element);
+							});
+							tool.memorized[name] = null;
+							return;
+						}
+					}
+					// use default handler
+					var _handler = loaderOptions.handler || state.handler
+						|| Q.loadUrl.options.handler;
+					return _handler.apply(this, arguments);
 				}
 			},
 
