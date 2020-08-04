@@ -968,6 +968,10 @@ Q.Tool.define("Q/columns", function(options) {
 				});
 			}
 			this.stopAdjustingPositions();
+			tool.('.Q_columns_column').each(function () {
+				$(this).removeClass('Q_columns_opening')
+					.removeClass('Q_columns_opened');
+			});
 		}
 	}
 }
