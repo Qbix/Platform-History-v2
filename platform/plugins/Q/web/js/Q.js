@@ -8725,6 +8725,7 @@ var _latestLoadUrlObjects = {};
  * @param {Q.Event} [options.onActivate] event which occurs when all Q.activate's processed and all script lines executed
  * @param {Q.Event} [options.onLoadStart] if "quiet" option is false, anything here will be called after the request is initiated.
  * @param {Q.Event} [options.onLoadEnd] if "quiet" option is false, anything here will be called after the request is fully completed.
+ * @param {Q.Event} [options.beforeFillSlots] handler to call before filling slots with new content
  * @return {Q.Promise} Returns a promise with an extra .cancel() method to cancel the action
  */
 Q.loadUrl = function _Q_loadUrl(url, options) {
@@ -8925,7 +8926,9 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					});
 				}
 			
-				domElements = handler(response, url, o); // this is where we fill all the slots
+				// this is where we fill all the slots
+				Q.handle(o.beforeFillSlots, Q, [response, url, o]);
+				domElements = handler(response, url, o);
 			
 				if (!o.ignorePage && Q.info && Q.info.uri) {
 					Q.Page.onLoad(moduleSlashAction).occurred = false;

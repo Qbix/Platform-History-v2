@@ -14,6 +14,7 @@
 	 *  @param {Array} [options.tabs] An associative array of name: title pairs.
 	 *  @param {Array} [options.urls] An associative array of name: url pairs to override the default urls.
 	 *  @param {String} [options.field='tab'] Uses this field when urls doesn't contain the tab name.
+	 *  @param {Boolean|Object} [options.memorize] Pass true to memorize all tabs, or object of {name: Boolean} for individual tabs. Makes switchTo avoid reloading tab url by default, instead it restores last-seen element and url.
 	 *  @param {Boolean} [options.checkQueryString=false] Whether the default getCurrentTab should check the querystring when determining the current tab
 	 *  @param {boolean} [options.touchlabels=Q.info.isMobile] Whether to show touchlabels on the tabs
 	 *  @param {Boolean} [options.vertical=false] Stack the tabs vertically instead of horizontally
@@ -44,6 +45,8 @@
 			var tool = this;
 			var state = tool.state;
 			var $te = $(tool.element);
+			
+			tool.memorized = {};
 			
 			if (state.touchlabels === undefined) {
 				state.touchlabels = Q.info.isMobile;
@@ -88,6 +91,7 @@
 				defaultText: '...',
 				defaultHtml: '...'
 			},
+			memorize: {},
 			loaderOptions: {},
 			loader: Q.req,
 			onClick: new Q.Event(),
@@ -106,9 +110,11 @@
 			 * @method switchTo
 			 * @param {String|Array} name the name of the tab to switch to.
 			 *  Can also be [name, tabElement]
-			 * @param {Object} loaderOptions any options to merge on top of
+			 * @param {Object} [loaderOptions] any options to merge on top of
 			 *  tool.state.loaderOptions
-			 * @param {Mixed} extra anything to pass to beforeSwitch handlers
+			 * @param {Boolean} [loaderOptions.reload]
+			 *  Reload the tab's url from the server, even if it was memorized
+			 * @param {Mixed} [extra] anything to pass to beforeSwitch handlers
 			 */
 			switchTo: function (name, loaderOptions, extra) {
 				var tool = this;
@@ -161,6 +167,21 @@
 				if (!slots || !state.selectors || !href) {
 					return;
 				}
+				
+				var fromTabName = state.tabName;
+				var fromUrl = window.location.href;
+				var memorized = tool.memorized[name];
+				if (state.memorize === true || (state.memorize && state.memorize[name])) {
+					if (memorized && (!loaderOptions || !loaderOptions.reload)) {
+						beforeFillSlots();
+						Q.Page.push(memorized.url);
+						Q.each(memorized.stored, function (slotName) {
+							Q.replace(slotContainer(slotName), this);
+						});
+						tool.memorized[name] = null;
+						return;
+					}
+				}
 
 				var o = Q.extend({
 					slotNames: slots,
@@ -179,20 +200,41 @@
 					ignorePage: tool.isInDialog(),
 					ignoreHistory: tool.isInDialog(),
 					loader: state.loader,
-					slotContainer: function (slotName) {
-						var container = null;
-						var selector = state.selectors[slotName];
-						$(tool.element).parents().each(function () {
-							var $jq = $(this).find(selector);
-							if (container = $jq[0]) {
-								return false;
-							}
-						});
-						return container || document.getElementById(slotName+"_slot");
-					}
+					slotContainer: slotContainer,
+					beforeFillSlots: beforeFillSlots
 				}, 10, state.loaderOptions, 10, loaderOptions);
 
 				Q.handle(href, o);
+				
+				function slotContainer(slotName) {
+					var container = null;
+					var selector = state.selectors[slotName];
+					$(tool.element).parents().each(function () {
+						var $jq = $(this).find(selector);
+						if (container = $jq[0]) {
+							return false;
+						}
+					});
+					return container || document.getElementById(slotName+"_slot");
+				}
+				
+				function beforeFillSlots() {
+					// memorize existing slots
+					if (state.memorize === true
+					|| (state.memorize && state.memorize[fromTabName])) {
+						var memorized = tool.memorized[fromTabName] = {
+							url: fromUrl,
+							stored: {}
+						};
+						Q.each(slots, function (i, slotName) {
+							var s = memorized.stored[slotName] = document.createElement('div');
+							var c = slotContainer(slotName);
+							Q.each(c && c.childNodes, function () {
+								s.appendChild(this);
+							});
+						});
+					}
+				}
 			},
 
 			/**
