@@ -227,8 +227,6 @@
 								s.appendChild(this);
 							});
 						});
-						memorized = tool.memorized[name];
-						
 					}
 				}
 				
@@ -258,6 +256,9 @@
 					if (state.memorize === true || (state.memorize && state.memorize[name])) {
 						// load memorized url and slots back into new tab
 						var memorized = tool.memorized[name];
+						tool.memorized[name] = {
+							response: response
+						}; // reset it so if we switch to this tab right away again, it will reload
 						if (memorized && memorized.stored
 						&& (!loaderOptions || !loaderOptions.reload)) {
 							history.replaceState(memorized.url, memorized.title);
@@ -270,9 +271,6 @@
 							});
 							return;
 						}
-						tool.memorized[name] = {
-							response: response
-						};
 					}
 					// use default handler
 					var _handler = loaderOptions.handler || state.handler
