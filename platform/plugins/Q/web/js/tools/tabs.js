@@ -256,12 +256,10 @@
 				
 				function handler(response, url, options) {
 					if (state.memorize === true || (state.memorize && state.memorize[name])) {
-						tool.memorized[name] = {
-							response: response
-						};
 						// load memorized url and slots back into new tab
 						var memorized = tool.memorized[name];
-						if (memorized && (!loaderOptions || !loaderOptions.reload)) {
+						if (memorized && memorized.stored
+						&& (!loaderOptions || !loaderOptions.reload)) {
 							history.replaceState(memorized.url, memorized.title);
 							var elements = [];
 							Q.each(memorized.stored, function (slotName) {
@@ -272,6 +270,9 @@
 							});
 							return;
 						}
+						tool.memorized[name] = {
+							response: response
+						};
 					}
 					// use default handler
 					var _handler = loaderOptions.handler || state.handler
