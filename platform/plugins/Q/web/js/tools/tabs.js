@@ -213,11 +213,11 @@
 					// memorize existing slots
 					if (state.memorize === true
 					|| (state.memorize && state.memorize[fromTabName])) {
-						var memorized = tool.memorized[fromTabName] = {
+						var memorized = tool.memorized[fromTabName] || {};
+						Q.extend(memorized, {
 							url: fromUrl,
-							title: window.title,
-							stored: {},
-							response: response // stylesheets, styles, etc.
+							title: document.title,
+							stored: {}
 						};
 						Q.each(slots, function (i, slotName) {
 							var s = memorized.stored[slotName] = document.createElement('div');
@@ -227,6 +227,8 @@
 								s.appendChild(this);
 							});
 						});
+						memorized = tool.memorized[name];
+						
 					}
 				}
 				
@@ -254,6 +256,9 @@
 				
 				function handler(response, url, options) {
 					if (state.memorize === true || (state.memorize && state.memorize[name])) {
+						tool.memorized[name] = {
+							response: response
+						};
 						// load memorized url and slots back into new tab
 						var memorized = tool.memorized[name];
 						if (memorized && (!loaderOptions || !loaderOptions.reload)) {
@@ -265,7 +270,6 @@
 								Q.activate(element);
 								elements.push(element);
 							});
-							tool.memorized[name] = null;
 							return;
 						}
 					}
