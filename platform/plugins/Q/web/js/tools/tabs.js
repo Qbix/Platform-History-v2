@@ -218,7 +218,7 @@
 							url: fromUrl,
 							title: document.title,
 							stored: {}
-						};
+						});
 						Q.each(slots, function (i, slotName) {
 							var s = memorized.stored[slotName] = document.createElement('div');
 							var c = slotContainer(slotName);
@@ -233,9 +233,9 @@
 				}
 				
 				function loader(urlToLoad, slotNames, callback, options) {
-					if (!tool.memorized[name]
-					|| !(state.memorize === true
-					|| (state.memorize && tool.memorized[name]))) {
+					if (!(state.memorize === true
+					|| (state.memorize && tool.memorized[name]))
+					|| !Q.getObject([name, 'url'], tool.memorized)) {
 						// use default loader
 						var _loader = loaderOptions.loader || state.loader 
 							|| Q.loadUrl.options.loader || Q.request;
