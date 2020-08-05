@@ -220,15 +220,15 @@
 								title: document.title,
 								stored: {}
 							});
-						}
-						Q.each(slots, function (i, slotName) {
-							var s = memorized.stored[slotName] = document.createElement('div');
-							var c = slotContainer(slotName);
-							Q.Tool.remove(c);
-							Q.each(c && c.childNodes, function () {
-								s.appendChild(this);
+							Q.each(slots, function (i, slotName) {
+								var s = memorized.stored[slotName] = document.createElement('div');
+								var c = slotContainer(slotName);
+								Q.Tool.remove(c);
+								Q.each(c && c.childNodes, function () {
+									s.appendChild(this);
+								});
 							});
-						});
+						}
 					}
 				}
 				
