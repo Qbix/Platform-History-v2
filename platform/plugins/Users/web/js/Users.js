@@ -142,7 +142,7 @@
 			if (!Users.initFacebook.completed[appId] && fbAppId) {
 				FB.init(Q.extend({
 					appId: fbAppId,
-					version: 'v2.8',
+					version: 'v8.0',
 					status: true,
 					cookie: true,
 					oauth: true,
@@ -3458,12 +3458,7 @@
 		getLoginStatus: function (cb, force) {
 			switch (Users.Facebook.type) {
 				case 'web':
-					var timeout = 2000;
-					var ar = FB.getAuthResponse();
-					if (ar) {
-						cb(ar);
-						break;
-					}
+					var timeout = 5000;
 					if (timeout) {
 						var t = setTimeout(function () {
 							// just in case, if FB is not responding let's still fire the callback
@@ -3478,8 +3473,9 @@
 							cb(response);
 						}, force);
 					} else {
-						if (FB.getAuthResponse())
-						FB.getLoginStatus(cb, force);
+						if (FB.getAuthResponse()) {
+							FB.getLoginStatus(cb, force);
+						}
 					}
 					break;
 				case 'native':
