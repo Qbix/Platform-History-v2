@@ -214,11 +214,13 @@
 					if (state.memorize === true
 					|| (state.memorize && state.memorize[fromTabName])) {
 						var memorized = tool.memorized[fromTabName] || {};
-						Q.extend(memorized, {
-							url: fromUrl,
-							title: document.title,
-							stored: {}
-						});
+						if (url !== fromUrl) {
+							Q.extend(memorized, {
+								url: fromUrl,
+								title: document.title,
+								stored: {}
+							});
+						}
 						Q.each(slots, function (i, slotName) {
 							var s = memorized.stored[slotName] = document.createElement('div');
 							var c = slotContainer(slotName);
