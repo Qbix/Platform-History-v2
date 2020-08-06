@@ -458,7 +458,7 @@ Base.prototype.beforeSet_fromPublisherId = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
 			throw new Error('Must pass a String or Buffer to '+this.table()+".fromPublisherId");
-		if (typeof value === "string" && value.length > 255)
+		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".fromPublisherId");
 		return value;
 };
@@ -469,7 +469,7 @@ Base.prototype.beforeSet_fromPublisherId = function (value) {
 	 */
 Base.prototype.maxSize_fromPublisherId = function () {
 
-		return 255;
+		return 31;
 };
 
 	/**
@@ -478,7 +478,7 @@ Base.prototype.maxSize_fromPublisherId = function () {
 	 */
 Base.column_fromPublisherId = function () {
 
-return [["varbinary","255","",false],true,"MUL",null];
+return [["varbinary","31","",false],true,"MUL",null];
 };
 
 /**
@@ -530,7 +530,7 @@ Base.prototype.beforeSet_toPublisherId = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
 			throw new Error('Must pass a String or Buffer to '+this.table()+".toPublisherId");
-		if (typeof value === "string" && value.length > 255)
+		if (typeof value === "string" && value.length > 31)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".toPublisherId");
 		return value;
 };
@@ -541,7 +541,7 @@ Base.prototype.beforeSet_toPublisherId = function (value) {
 	 */
 Base.prototype.maxSize_toPublisherId = function () {
 
-		return 255;
+		return 31;
 };
 
 	/**
@@ -550,7 +550,7 @@ Base.prototype.maxSize_toPublisherId = function () {
 	 */
 Base.column_toPublisherId = function () {
 
-return [["varbinary","255","",false],true,"MUL",null];
+return [["varbinary","31","",false],true,"MUL",null];
 };
 
 /**
