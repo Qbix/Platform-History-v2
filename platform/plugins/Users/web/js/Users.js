@@ -142,7 +142,7 @@
 			if (!Users.initFacebook.completed[appId] && fbAppId) {
 				FB.init(Q.extend({
 					appId: fbAppId,
-					version: 'v2.8',
+					version: 'v8.0',
 					status: true,
 					cookie: true,
 					oauth: true,
@@ -613,7 +613,7 @@
 	 *  @param {String} [options.using] can be "native", "facebook" or "native,facebook"
 	 *  @param {Boolean} [options.tryQuietly] if true, this is same as Users.authenticate, with platform = "using" option
 	 *  @param {Boolean} [options.unlessLoggedIn] if true, this only proceeds with the login flow if the user isn't already logged in. Can be combined with tryQuietly option.
-	 *  @param {Array} [options.scope=['email','public_profile'] permissions to request from the authentication platform
+	 *  @param {Array} [options.scope=['email'] permissions to request from the authentication platform
 	 *  @param {String} [options.identifierType="email,mobile"] the type of the identifier, which could be "mobile" or "email" or "email,mobile"
 	 *  @param {Object} [options.appIds={}] Can be used to set custom {platform: appId} pairs
 	 *  @param {String} [options.identifier] If passed, automatically enters this identifier and clicks the Go button
@@ -2523,7 +2523,7 @@
 			accountStatusUrl: null,
 			tryQuietly: false,
 			using: 'native', // can also be a platform name like 'facebook'
-			scope: ['public_profile', 'email'], // the permissions to ask for
+			scope: ['email'], // the permissions to ask for
 			linkToken: null,
 			dialogContainer: 'body',
 			setupRegisterForm: null,
@@ -3296,7 +3296,7 @@
 		accessToken: null,
 		appId: null,
 		scheme: null,
-		scope: 'email,public_profile',
+		scope: 'email',
 
 		construct: function () {
 			Users.Facebook.appId = Q.getObject(['facebook', Q.info.app, 'appId'], Users.apps);
@@ -3333,7 +3333,7 @@
 				}, scope ? {scope: scope} : undefined);
 				break;
 			case 'native':
-				facebookConnectPlugin.login(["public_profile", "email"], function (response) {
+				facebookConnectPlugin.login(["email"], function (response) {
 					Users.Facebook.doLogin(response);
 					callback && callback(response);
 				}, function (err) {
@@ -3458,12 +3458,7 @@
 		getLoginStatus: function (cb, force) {
 			switch (Users.Facebook.type) {
 				case 'web':
-					var timeout = 2000;
-					var ar = FB.getAuthResponse();
-					if (ar) {
-						cb(ar);
-						break;
-					}
+					var timeout = 5000;
 					if (timeout) {
 						var t = setTimeout(function () {
 							// just in case, if FB is not responding let's still fire the callback
@@ -3478,8 +3473,9 @@
 							cb(response);
 						}, force);
 					} else {
-						if (FB.getAuthResponse())
-						FB.getLoginStatus(cb, force);
+						if (FB.getAuthResponse()) {
+							FB.getLoginStatus(cb, force);
+						}
 					}
 					break;
 				case 'native':
