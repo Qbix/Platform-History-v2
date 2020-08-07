@@ -780,6 +780,7 @@ html.Q_scanning body > .Q_scanning_code {
 	position: fixed;
 }
 .Q_statusBarOverlapped #status_background { display: block !important; }
+.Q_notCordova #status_background { display: none; }
 
 input[type=text],
 input[type=password] {
