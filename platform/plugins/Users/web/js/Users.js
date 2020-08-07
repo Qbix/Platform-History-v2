@@ -3324,9 +3324,12 @@
 		},
 
 		login: function (callback) {
+			var scope = Users.Facebook.scope;
+			if (Q.isArrayLike(scope)) {
+				scope = scope.join(',');
+			}
 			switch (Users.Facebook.type) {
 			case 'web':
-				var scope = Users.Facebook.scope;
 				FB.login(function (response) {
 					Users.Facebook.doLogin(response);
 					callback && callback(response);
