@@ -2523,17 +2523,6 @@
 
 					var buttonsArr = [
 						{
-							viewMode:'floatingView',
-							btn: floatingViewModeBtn,
-							icon: floatingViewModeBtnIcon,
-							onIcon: icons.freeViewModeOn,
-							offIcon: icons.freeViewModeOff,
-							handler: function () {
-								toggleLoudesScreenMode('disabled');
-								tool.state.webrtcClass.screenRendering.renderDesktopScreensGrid();
-							}
-						},
-						{
 							viewMode:'tiledView',
 							btn: tiledViewModeBtn,
 							icon: tiledViewModeBtnIcon,
@@ -2565,29 +2554,7 @@
 							handler: function () {
 								toggleLoudesScreenMode('all');
 							}
-						},/*
-						{
-							viewMode:'maximizeStatic',
-							btn: maximizeStaticBtn,
-							icon: maximizeStaticBtnIcon,
-							onIcon: icons.staticMaximizeOn,
-							offIcon: icons.staticMaximizeOff,
-							handler: function(){
-								toggleLoudesScreenMode('disabled');
-								var maximize = function(screen) {
-									if(Q.info.isMobile)
-										tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(screen, 300);
-									else tool.state.webrtcClass.screenRendering.renderMaximizedScreensGrid(screen, 300);
-								}
-								var activeScreen = tool.state.webrtcClass.screenRendering.getActiveSreen();
-								if(activeScreen != null) {
-									maximize(activeScreen);
-								} else {
-									var screens = tool.WebRTCLib.screens();
-									maximize(screens[0]);
-								}
-							}
-						},*/
+						},
 						{
 							viewMode:'fullScreen',
 							btn: fullScreenBtn,
@@ -2609,20 +2576,35 @@
 									maximize(screens[0]);
 								}
 							}
-						},
-						{
-							viewMode:'manual',
-							btn: manualLayoutBtn,
-							icon: manualLayoutBtnIcon,
-							onIcon: icons.dragIconOn,
-							offIcon: icons.dragIconOff,
-							handler: function(){
-								toggleLoudesScreenMode('disabled');
-								tool.state.webrtcClass.screenRendering.renderManualScreensGrid();
-
-							}
 						}
 						];
+
+                    if(!Q.info.isMobile) {
+                        buttonsArr.unshift({
+                            viewMode:'floatingView',
+                            btn: floatingViewModeBtn,
+                            icon: floatingViewModeBtnIcon,
+                            onIcon: icons.freeViewModeOn,
+                            offIcon: icons.freeViewModeOff,
+                            handler: function () {
+                                toggleLoudesScreenMode('disabled');
+                                tool.state.webrtcClass.screenRendering.renderDesktopScreensGrid();
+                            }
+                        })
+                        buttonsArr.push({
+                            viewMode:'manual',
+                            btn: manualLayoutBtn,
+                            icon: manualLayoutBtnIcon,
+                            onIcon: icons.dragIconOn,
+                            offIcon: icons.dragIconOff,
+                            handler: function(){
+                                toggleLoudesScreenMode('disabled');
+                                tool.state.webrtcClass.screenRendering.renderManualScreensGrid();
+
+                            }
+                        })
+                    }
+
 					for (var b in buttonsArr) {
 						buttonsArr[b].btn.addEventListener('mouseup', function (e) {
 							toggleViewMode(e, buttonsArr);

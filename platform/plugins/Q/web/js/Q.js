@@ -13629,7 +13629,7 @@ function _addHandlebarsHelpers() {
 	}
 	if (!Handlebars.helpers.interpolate) {
 		Handlebars.registerHelper('interpolate', function(expression) {
-			if (arguments.length < 2) {
+			if (!expression || arguments.length < 2) {
 				return '';
 			}
 			var args = Handlebars.prepareArgs.call(this, arguments);
