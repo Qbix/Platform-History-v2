@@ -530,7 +530,11 @@
 			"50": "own it and appoint managers"
 		},
 		"onInsert": { /* streams to insert when a row is inserted */
-			"Users_User": [
+			"user": [
+				"Streams/contacts",
+				"Streams/labels"
+			],
+			"person": [
 				"Streams/participating",
 				"Streams/invited",
 				"Streams/mentioned",
@@ -541,8 +545,6 @@
 				"Streams/user/emailAddress",
 				"Streams/user/mobileNumber",
 				"Streams/user/interests",
-				"Streams/contacts",
-				"Streams/labels",
 				"Streams/image/album"
 			]
 		},

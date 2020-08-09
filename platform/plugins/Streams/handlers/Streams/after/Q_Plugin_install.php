@@ -10,7 +10,12 @@ function Streams_after_Q_Plugin_install($params)
 	echo "$plugin_name: inserting streams for users...";
 
 	// get stream names need to install
-	$streamsToInstall = Q_Config::get('Streams', 'onInsert', 'Users_User', array());
+	$onInsert = Q_Config::get('Streams', 'onInsert', array());
+	$streamsToInstall = array_merge(
+		Q::ifset($onInsert, 'user', array()),
+		Q::ifset($onInsert, 'person', array()),
+		Q::ifset($onInsert, 'community', array())
+	);
 	// get stream names already installed
     $key = "Streams/User/onInsert";
     $extra = Q_Plugin::extra('Streams', 'plugin', 'Streams');

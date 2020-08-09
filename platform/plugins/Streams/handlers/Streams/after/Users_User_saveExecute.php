@@ -93,9 +93,17 @@ function Streams_after_Users_User_saveExecute($params)
 			}
 		}
 	}
-	$toInsert = $params['inserted']
-		? Q_Config::get('Streams', 'onInsert', 'Users_User', array())
-		: array();
+	$toInsert = array();
+	if ($params['inserted'] && !$user->get('skipInsertingStreams', false)) {
+		$onInsert = Q_Config::get('Streams', 'onInsert', array());
+		$personOrCommunity = ($user->id === ucfirst($user->id))
+			? 'community'
+			: 'person';
+		$toInsert = array_merge(
+			Q::ifset($onInsert, 'user', array()),
+			Q::ifset($onInsert, $personOrCommunity, array())	
+		);
+	}
 	$p = Streams::userStreamsTree();
 	if (!empty(Users::$cache['platformUserData'])) {
 		$infos = $p->getAll();
