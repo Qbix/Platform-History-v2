@@ -189,6 +189,7 @@ body.Q_preventScroll {
 	position: fixed;
 	overflow: hidden;
 	width: 100%;
+	min-height: 100%;
 }
 .Q_dialog_title {
 	padding: 0px 10px;
