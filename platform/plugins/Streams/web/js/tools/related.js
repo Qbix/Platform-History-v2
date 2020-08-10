@@ -369,7 +369,40 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			tool.state.lastMessageOrdinal = msg.ordinal;
 		}
 	},
+	/**
+	 * Some time need to remove relation when user doesn't participated to stream (hence doesn't get unrelatedTo message).
+	 * @method removeRelation
+	 * @param {String } publisherId
+	 * @param {String} streamName
+	 */
+	removeRelation(publisherId, streamName) {
+		var result = this.state.result;
 
+		var previewTools = this.children("Streams/preview");
+		Q.each(previewTools, function (i, previewTool) {
+			previewTool = Q.getObject("streams_preview", previewTool);
+
+			if (!previewTool) {
+				return console.warn("Streams/related.removeRelation: Streams/preview tool not found");
+			}
+
+			if (previewTool.state.publisherId !== publisherId || previewTool.state.streamName !== streamName) {
+				return;
+			}
+
+			Q.Tool.remove(previewTool.element, true, true);
+
+			// delete from relatedStreams
+			delete result.relatedStreams[publisherId + "\t" + streamName];
+
+			// delete from relations
+			Q.each(result.relations, function (j, relation) {
+				if (relation.fromPublisherId === publisherId && relation.fromStreamName === streamName) {
+					result.relations.splice(j, 1);
+				}
+			})
+		});
+	},
 	/**
 	 * You don't normally have to call this method, since it's called automatically.
 	 * Sets up an element for the stream with the tag and toolName provided to the
@@ -434,9 +467,12 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 							}
 
 							Streams.unrelate(state.publisherId, state.streamName, state.relationType, publisherId, streamName, function (err) {
+								$element.removeClass('Q_working');
 								if (err) {
-									return $element.removeClass('Q_working');
+									return console.warn(err);
 								}
+
+								tool.removeRelation(publisherId, streamName);
 							});
 						}, {title: tool.text.participating.RemoveParticipant});
 
