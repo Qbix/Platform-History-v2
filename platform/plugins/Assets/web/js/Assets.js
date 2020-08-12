@@ -54,11 +54,11 @@
 				Q.Template.set('Assets/credits/missing',
 					'<div class="Assets_credits_buy_missing">{{YouMissingCredits}}</div>' +
 					'<input type="hidden" name="amount" value="{{amount}}">' +
-					'<button class="Q_button" name="buy">{{texts.Buy}}</button>'
+					'<button class="Q_button" name="buy">{{texts.PurchaseCredits}}</button>'
 				);
 				Q.Template.set('Assets/credits/buy',
 					'<div class="Assets_credits_buy"><input name="amount" value="{{amount}}"> {{texts.Credits}}</div>' +
-					'<button class="Q_button" name="buy">{{texts.Buy}}</button>'
+					'<button class="Q_button" name="buy">{{texts.PurchaseCredits}}</button>'
 				);
 
 				// indicator of payment process started

@@ -35,9 +35,10 @@
         "BoughtCredits": "Bought {{amount}} credits",
         "BuyAmountCredits": "Buy {{amount}} credits",
         "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You missing {{amount}} credits",
+        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
         "BuyCredits": "Buy credits",
         "Buy": "Buy",
+		"PurchaseCredits": "Purchase Credits",
         "Credits": "Credits",
         "ErrorInvalidAmount": "Amount invalid",
         "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet"
