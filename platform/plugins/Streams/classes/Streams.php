@@ -4714,7 +4714,7 @@ abstract class Streams extends Base_Streams
 
 	/**
 	 * Remove streams from the system, including all related rows.
-	 * @method removeStream
+	 * @method remove
 	 * @static
 	 * @param {string} $publisherId
 	 * @param {string|array} $streamNames
