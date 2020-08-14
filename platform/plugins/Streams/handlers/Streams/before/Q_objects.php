@@ -12,12 +12,6 @@ function Streams_before_Q_objects()
 	$alreadyExecuted = true;
 
 	$invite = Streams_Invite::fromToken($token, true);
-	if (!$invite) {
-		throw new Q_Exception_MissingRow(array(
-			'table' => 'invite',
-			'criteria' => "token=$token"
-		));
-	}
 	
 	// did invite expire?
 	$ts = Streams_Invite::db()->select("CURRENT_TIMESTAMP")->fetchAll(PDO::FETCH_NUM);

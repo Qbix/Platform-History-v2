@@ -34,7 +34,7 @@ class Users_Quota extends Base_Users_Quota
 	 * or a hash of {privilegeName: quotaForPrivilege} which should have at least the key ""
 	 * for default quota with no privileges.
 	 * Please pay attention to "begin" argument!
-	 * @param {string} $userId the user that will be using the quota
+	 * @param {string} $userId the user that will be using the quota, or "" if quota is for all users
 	 * @param {string} $resourceId pass an empty string for global resource check, or for example a string beginning with Users::communityId()
 	 * @param {string} $name the name of the quota to check
 	 * @param {boolean} [$throwIfQuota=false] pass true to throw an exception if one or more of the quotas have been exceeded

@@ -140,7 +140,7 @@ class Streams_Invite extends Base_Streams_Invite
 			if (!$invited->retrieve() or $invited->state !== 'accepted') {
 				$quotaName = "Streams/invite";
 				$roles = Users::roles($this->publisherId, null, null, $userId);
-				$quota = Users_Quota::check($userId, $this->token, $quotaName, true, 1, $roles);
+				$quota = Users_Quota::check("", $this->token, $quotaName, true, 1, $roles);
 
 				$invited2 = new Streams_Invited();
 				$invited2->token = $invited->token;
