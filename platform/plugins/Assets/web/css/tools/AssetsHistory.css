@@ -15,8 +15,3 @@
 	padding: 5px;
 	border-bottom: 1px solid black;
 }
-.Assets_history_tool .Assets_history_date,
-.Assets_history_tool .Assets_history_amount,
-.Assets_history_tool .Assets_history_client {
-	white-space: nowrap;
-}

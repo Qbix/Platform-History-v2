@@ -19,6 +19,9 @@ function Assets_before_Q_responseExtras() {
 		Q_Response::setScriptData('Q.plugins.Assets.Payments.googlePay', Q_Config::get('Assets', 'payments', 'googlePay', null));
 		Q_Response::setScriptData('Q.plugins.Assets.Payments.stripe.version', Q_Config::get('Assets', 'payments', 'stripe', 'version', null));
 	}
+
+	Q_Response::setScriptData('Q.plugins.Assets.service.relatedParticipants', Q_Config::get('Assets', 'service', 'relatedParticipants', null));
+
 	if (!empty($_GET['browsertab']) && $_GET['browsertab'] == 'yes') {
 		Q::event('Assets/browsertab/response/content');
 	}
