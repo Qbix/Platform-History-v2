@@ -14159,7 +14159,7 @@ Q.Notices = {
 			// delay because notice hide with transition
 			setTimeout(function () {
 				notice.remove();
-			}, 1000);
+			}, this.popUpTime);
 		}
 	},
 	/**
