@@ -11,7 +11,11 @@ function Streams_invite_response_suggestion()
 		if (!Users::roles(Users::communityId(), $roles)) {
 			throw new Users_Exception_NotAuthorized();
 		}
-		$token = $_REQUEST['token'];
+		if ($token = $_REQUEST['token']) {
+			if ($invite = Streams_Invite::fromToken($token)) {
+				throw new Q_Exception_AlreadyExists(array('source' => 'invite with this token'))
+			}
+		}
 	} else {
 		$token = Streams_Invite::generateToken();
 	}
