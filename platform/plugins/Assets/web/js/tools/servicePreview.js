@@ -9,7 +9,6 @@
 Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, preview) {
 	var tool = this;
 	tool.preview = preview;
-	var previewState = preview.state;
 
 	Q.addStylesheet('{{Assets}}/css/tools/ServicePreview.css', { slotName: 'Assets' });
 
@@ -66,19 +65,9 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 		});
 	};
 
-	if (previewState.publisherId && previewState.streamName && tool.state.editable) {
-		Q.Streams.get(previewState.publisherId, previewState.streamName, function () {
-			if (!this.testWriteLevel('edit')) {
-				return;
-			}
-
-			$(tool.element).on(Q.Pointer.fastclick, function () {
-				if (tool.state.editable) {
-					tool.edit();
-				}
-			});
-		});
-	}
+	$(tool.element).on(Q.Pointer.fastclick, function () {
+		Q.handle(tool.state.onInvoke, tool);
+	});
 
 	Q.Text.get('Assets/content', function (err, text) {
 		var msg = Q.firstErrorMessage(err);
@@ -93,7 +82,24 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 },
 
 {
-	editable: true
+	editable: true,
+	onInvoke: new Q.Event(function () {
+		var tool = this;
+		var state = this.state;
+		var previewState = tool.preview.state;
+
+		if (!previewState.publisherId || !previewState.streamName || !state.editable) {
+			return;
+		}
+
+		Q.Streams.get(previewState.publisherId, previewState.streamName, function () {
+			if (!this.testWriteLevel('edit')) {
+				return;
+			}
+
+			tool.edit();
+		});
+	})
 },
 
 {
@@ -231,7 +237,7 @@ Q.Template.set('Assets/service/preview',
 Q.Template.set("Assets/service/composer",
 	'<form>' +
 	'	<input type="text" name="title" required placeholder="{{text.services.NewServiceTemplate.TitlePlaceholder}}" value="{{title}}">' +
-	'	<select name="payment"><option value="free">{{text.services.FreeEvent}}</option><option value="optional">{{text.services.OptionalContribution}}</option><option value="required">{{text.services.RequiredPayment}}</option></select>' +
+	'	<select name="payment"><option value="free">{{text.services.Free}}</option><option value="optional">{{text.services.OptionalContribution}}</option><option value="required">{{text.services.RequiredPayment}}</option></select>' +
 	'	<label for="price"><input type="text" name="price" required placeholder="{{text.services.NewServiceTemplate.PricePlaceholder}}" value="{{price}}"></label>' +
 	'	<input type="text" name="link" placeholder="{{text.services.NewServiceTemplate.LinkPlaceholder}}" value="{{link}}">' +
 	'	<textarea name="description" placeholder="{{text.services.NewServiceTemplate.DescriptionPlaceholder}}">{{description}}</textarea>' +

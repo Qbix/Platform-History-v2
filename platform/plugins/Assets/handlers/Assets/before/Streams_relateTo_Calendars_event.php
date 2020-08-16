@@ -27,5 +27,5 @@ function Assets_before_Streams_relateTo_Calendars_event ($params) {
 	}
 
 	$needCredits = Assets_Credits::convertToCredits($amount, $currency);
-	Assets_Credits::spend($needCredits, Assets_Credits::JOINED_PAID_STREAM, $stream->publisherId, compact("toPublisherId", "toStreamName", "fromPublisherId", "fromStreamName"));
+	Assets_Credits::spend($needCredits, Assets::JOINED_PAID_STREAM, $stream->publisherId, compact("toPublisherId", "toStreamName", "fromPublisherId", "fromStreamName"));
 }
