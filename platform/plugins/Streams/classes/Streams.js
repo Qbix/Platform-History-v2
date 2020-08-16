@@ -1132,6 +1132,28 @@ Streams.isStream = function (testing) {
 	return Q.typeOf(testing) === "Q.Streams.Stream";
 };
 
+/**
+ * Returns the type name to display from a stream type.
+ * If none is set, try to figure out a displayable title from a stream's type
+ * @method displayType
+ * @param {String} type
+ * @param {Function} callback The first parameter will be the displayType
+ * @param {Object} [options] Options to use with Q.Text.get, and also
+ * @param {string} [$options.plural=false] Whether to display plural, when available
+ */
+Streams.displayType = function _Streams_displayType(type, callback, options) {
+	var parts = type.split('/');
+	var module = parts.shift();
+	var ret = parts.pop();
+	var text = Q.Text.get(module+'/content', options);
+	var field = 'displayType' + (options && options.plural) ? 'Plural' : '';
+	var result = Q.getObject(['types', type, 'displayType']);
+	if (options && options.plural) {
+		result = Q.getObject(['types', type, 'displayTypePlural'], text) || result;
+	}
+	callback(result || ret);
+};
+
 Streams.WebRTC = require('Streams/WebRTC');
 Streams.Mentions = require('Streams/Mentions');
 
