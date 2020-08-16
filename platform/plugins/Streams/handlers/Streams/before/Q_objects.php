@@ -3,7 +3,13 @@
 function Streams_before_Q_objects()
 {
 	$token = Q_Request::special('Streams.token', null);
-	if ($token === null) return;
+	if ($token === null) {
+		$field = Q_Config::get('Streams', 'token', 'field', null);
+		$token = Q::ifset($_REQUEST, $field, null);
+		if ($token === null) {
+			return;
+		}
+	}
 	
 	static $alreadyExecuted = false;
 	if ($alreadyExecuted) {

@@ -486,6 +486,7 @@
 				"length": 16,
 				"characters": "abcdefghijklmnopqrstuvwxyz"
 			},
+			"canSetToken": ["Streams/inviters"],
 			"baseUrl": "i",
 			"participantReason": "Was invited",
 			"limit": 100,
