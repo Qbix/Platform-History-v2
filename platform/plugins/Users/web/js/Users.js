@@ -1627,20 +1627,15 @@
 					Q.addScript('https://connect.facebook.net/en_US/sdk.js');
 					break;
 				case 'ios':
-					var iosAppId = Q.getObject(['ios', appId, 'bundleId'], Users.apps);
-					if (!iosAppId) {
-						console.warn("Users.login: missing Users.apps.ios." + appId + ".appId");
-						break;
-					}
 					$('<div id="appleid-signin" data-color="black" data-border="true" data-type="sign in">').appendTo(step1_usingPlatforms_div);
 					// need to wait till "appleid-signin" element rendered
 					setTimeout(function () {
 						AppleID.auth.init({
-							clientId : iosAppId,
-							scope : 'name email',
-							redirectURI : Q.url("appleLogin"),
-							state : Q.nonce,
-							//nonce : Q.nonce,
+							clientId: 'com.qbix.appleLogin',
+							scope: 'name email',
+							redirectURI: Q.url("appleLogin"),
+							state: Q.nonce,
+							//nonce: Q.nonce,
 							usePopup : false // if true you can handle with auth on client
 						});
 					}, 0);
