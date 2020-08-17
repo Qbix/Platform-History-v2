@@ -1627,7 +1627,7 @@
 					Q.addScript('https://connect.facebook.net/en_US/sdk.js');
 					break;
 				case 'ios':
-					var iosAppId = Q.getObject(['ios', appId, 'appId'], Users.apps);
+					var iosAppId = Q.getObject(['ios', appId, 'bundleId'], Users.apps);
 					if (!iosAppId) {
 						console.warn("Users.login: missing Users.apps.ios." + appId + ".appId");
 						break;
