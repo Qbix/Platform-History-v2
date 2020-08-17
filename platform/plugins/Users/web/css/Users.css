@@ -577,6 +577,7 @@ html.Users_loggedIn .Users_whenLoggedOut {
 	vertical-align: baseline;
 }
 #appleid-signin {
+	display: none;
 	width: 154px;
 	height: 22px;
 	margin: 10px auto 0;
