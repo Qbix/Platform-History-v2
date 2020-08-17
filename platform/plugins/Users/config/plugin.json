@@ -32,6 +32,7 @@
 			"login/facebook": {"module": "Users", "action": "facebook"},
 			"session": {"module": "Users", "action": "session"},
 			"Users/authorize": {"module": "Users", "action": "authorize"},
+			"appleLogin": {"module": "Users", "action": "appleLogin"},
 			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
 			"Q/plugins/Users/:action": {"module": "Users"},
 			"m/:mobileNumber": { "module": "Users", "action": "activate" },
@@ -80,7 +81,7 @@
 		},
 		"apps-private": {
 			"facebook": ["secret"],
-			"ios": ["token", "device", "logging", "secret"],
+			"ios": ["token", "device", "logging", "secret", "ssl"],
 			"android": ["key", "secret"],
 			"amazon": ["key", "secret"],
 			"windows": ["key", "secret"]

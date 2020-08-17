@@ -576,3 +576,11 @@ html.Users_loggedIn .Users_whenLoggedOut {
 	line-height: normal;
 	vertical-align: baseline;
 }
+#appleid-signin {
+	width: 154px;
+	height: 22px;
+	margin: 10px auto 0;
+}
+#appleid-signin * {
+	font-family: applied-button-font-0;
+}

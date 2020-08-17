@@ -671,6 +671,12 @@
 				var usingPlatforms = (o.using.indexOf('facebook') >= 0)
 					? {facebook: appId}
 					: {};
+
+				// if iOS allow signIn with apple
+				if (Q.info.platform === 'ios') {
+					usingPlatforms.ios = appId;
+				}
+
 				// set up dialog
 				login_setupDialog(usingPlatforms, o);
 				priv.linkToken = null;
@@ -1620,8 +1626,28 @@
 					// can trigger a popup directly, otherwise popup blockers may complain:
 					Q.addScript('https://connect.facebook.net/en_US/sdk.js');
 					break;
+				case 'ios':
+					var iosAppId = Q.getObject(['ios', appId, 'appId'], Users.apps);
+					if (!iosAppId) {
+						console.warn("Users.login: missing Users.apps.ios." + appId + ".appId");
+						break;
+					}
+					$('<div id="appleid-signin" data-color="black" data-border="true" data-type="sign in">').appendTo(step1_usingPlatforms_div);
+					// need to wait till "appleid-signin" element rendered
+					setTimeout(function () {
+						AppleID.auth.init({
+							clientId : iosAppId,
+							scope : 'name email',
+							redirectURI : Q.url("appleLogin"),
+							state : Q.nonce,
+							//nonce : Q.nonce,
+							usePopup : false // if true you can handle with auth on client
+						});
+					}, 0);
+					break;
 			}
 		}
+
 		if (platformCount) {
 			step1_div.append(step1_usingPlatforms_div);
 		}
