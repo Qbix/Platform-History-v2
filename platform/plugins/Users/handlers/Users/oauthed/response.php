@@ -15,7 +15,7 @@ function Users_oauthed_response()
 		$platform = $info['platform'];
 		$appId = $info['appId'];
 		$scope = $info['scope'];
-		if ($state !== $info['state']) {
+		if ($state !== Q_Session::calculateNonce()) {
 			throw new Users_Exception_WrongState(array(
 				'key' => 'state',
 				'state' => $state

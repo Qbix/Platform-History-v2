@@ -2146,22 +2146,16 @@
 		 * @param {String} [options.redirect_uri] You can override the redirect URI.
 		 *    Often this has to be added to a whitelist on the platform's side.
 		 * @param {String} [options.response_type='code']
-		 * @param {String} [options.state=Math.random()] If state was not provided, this
-		 *    method also modifies the passed options object and sets options.state on it
 		 * @return {String} The URL to redirect to or open in a window
 		 */
 		url: function (authorizeUri, client_id, scope, options) {
 			options = options || {};
 			var redirectUri = options.redirectUri || Users.OAuth.redirectUri;
 			var responseType = options.responseType || 'code';
-			if (!options.state) {
-				options.state = String(Math.random());
-			}
-			Q.cookie('Users_latest_oAuth_state', options.state);
 			Q.url(authorizeUri, {
 				client_id: client_id,
 				redirect_uri: redirectUri,
-				state: options.state,
+				state: Q.nonce,
 				response_type: responseType,
 				scope: scope
 			});
@@ -2185,8 +2179,6 @@
 		 * @param {String} [options.redirect_uri] You can override the redirect URI.
 		 *    Often this has to be added to a whitelist on the platform's side.
 		 * @param {String} [options.response_type='code']
-		 * @param {String} [options.state=Math.random()] If state was not provided, this
-		 *    method also modifies the passed options object and sets options.state on it
 		 * @return {String}
 		 */
 		start: function (platform, scope, callback, options) {
@@ -2201,9 +2193,6 @@
 			}
 			var redirectUri = options.redirectUri || Users.OAuth.redirectUri;
 			var responseType = options.response_typeeType || 'code';
-			if (!options.state) {
-				options.state = String(Math.random());
-			}
 			if (!('openWindow' in options)) {
 				options.openWindow = {};
 			}
@@ -2212,7 +2201,6 @@
 				platform: platform,
 				appId: appId,
 				scope: scope,
-				state: options.state,
 				finalRedirect: finalRedirect
 			}));
 			var url = OAuth.url(authorizeUri, appId, scope, options);
@@ -2236,18 +2224,6 @@
 		}
 	};
 	
-	/**
-	 * Constructs a contact from fields, which are typically returned from the server.
-	 * @class Users.Contact
-	 * @constructor
-	 * @param {Object} fields
-	 */
-	var Contact = Users.Contact = function Users_Contact(fields) {
-		Q.extend(this, fields);
-		this.typename = 'Q.Users.Contact';
-	};
-	var Cp = Contact.prototype;
-
 	/**
 	 * Constructs a contact from fields, which are typically returned from the server.
 	 * @class Users.Contact
