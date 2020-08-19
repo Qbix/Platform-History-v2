@@ -11,7 +11,7 @@
  * @param {array} [$options] options to pass to the tool
  *  @param {array} [$options.tabs] An associative array of name: title pairs.
  *  @param {array} [$options.urls] An associative array of name: url pairs to override the default urls.
- *  @param {boolean|array} [options.memorize] Pass true to memorize all tabs, or array of ($name >= $boolean) pairs for individual tabs. Makes switchTo avoid reloading tab url by default, instead it restores last-seen element and url.
+ *  @param {boolean|array} [options.retain] Pass true to retain slots from all tabs, or object of {name: Boolean} for individual tabs. Makes switchTo avoid reloading tab url by default, instead it restores last-seen slot contents, url and title.
  *  @param {string} [$options.field='tab'] Uses this field when urls doesn't contain the tab name.
  *  @param {boolean} [options.checkQueryString=false] Whether the default getCurrentTab should check the querystring when determining the current tab
  *  @param {boolean} [$options.vertical=false] Stack the tabs vertically instead of horizontally

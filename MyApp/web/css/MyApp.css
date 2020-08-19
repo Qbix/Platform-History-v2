@@ -87,7 +87,7 @@ table { table-layout: fixed; }
 /* Notices contents */
 #notices_slot { text-align: center; margin: auto; padding: 0; z-index: 5000; }
 #notices { margin: auto; }
-#notices_slot div.container { overflow: none; overflow-y: auto; }
+#notices_slot div.container { overflow: hidden; overflow-y: auto; }
 #notices_slot ul { list-style-type: none; padding: 0; margin: auto; width: 700px; max-width: 100%; border: solid 1px #555; border-top: solid 1px #aaa; box-shadow: 0 0 5px #222; -moz-box-shadow: 0 0 5px #222; -webkit-box-shadow: 0 0 5px #222; cursor: pointer; }
 #notices_slot li { list-style-type: none; padding: 0; margin: 0; text-align: center; background: #ffd4aa; border: 0; border-bottom: solid 1px #aaa; line-height: 30px; min-height: 30px; }
 #notices_slot ul.Q_errors * { background-color: #ebb; color: #500; }
@@ -113,9 +113,6 @@ table { table-layout: fixed; }
 #notices_slot ul li span {
 	font-size: 12px;
 	line-height: 26px;
-}
-#notices_slot ul li * {
-	vertical-align: middle;
 }
 
 .Q_columns_tool {
@@ -175,7 +172,6 @@ body .Q_tabs_contextual .Q_listing li { text-align: left; }
 html .Q_listing img { height: 30px; }
 
 /* inputs */
-
 input[type=text],
 input[type=email],
 input[type=tel],

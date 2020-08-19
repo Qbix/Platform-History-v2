@@ -189,6 +189,7 @@ body.Q_preventScroll {
 	position: fixed;
 	overflow: hidden;
 	width: 100%;
+	min-height: 100%;
 }
 .Q_dialog_title {
 	padding: 0px 10px;
@@ -673,7 +674,7 @@ html.Q_scanning body > .Q_scanning_code {
 }
 #notices_slot ul li[data-local] {
 	max-height: 0;
-	transition: max-height .75s ease-in-out 0s;
+	transition: max-height .5s ease-in-out 0s;
 }
 #notices_slot ul li.Q_common_notice {
 }
@@ -686,12 +687,13 @@ html.Q_scanning body > .Q_scanning_code {
 	width: 100%;
 }
 #notices_slot ul .Q_hidden_notice {
-	transition: all .25s;
+	transition: all .5s;
 	max-height: 0;
-	opacity: 0;
+	min-height: 0;
+	overflow: hidden;
 }
 #notices_slot ul li.Q_show_notice {
-	transition: opacity .25s;
+	transition: all .5s;
 	opacity: 1;
 	max-height: 100px;
 	display: block;

@@ -3,7 +3,13 @@
 function Streams_before_Q_objects()
 {
 	$token = Q_Request::special('Streams.token', null);
-	if ($token === null) return;
+	if ($token === null) {
+		$field = Q_Config::get('Streams', 'token', 'field', null);
+		$token = Q::ifset($_REQUEST, $field, null);
+		if ($token === null) {
+			return;
+		}
+	}
 	
 	static $alreadyExecuted = false;
 	if ($alreadyExecuted) {
@@ -12,12 +18,6 @@ function Streams_before_Q_objects()
 	$alreadyExecuted = true;
 
 	$invite = Streams_Invite::fromToken($token, true);
-	if (!$invite) {
-		throw new Q_Exception_MissingRow(array(
-			'table' => 'invite',
-			'criteria' => "token=$token"
-		));
-	}
 	
 	// did invite expire?
 	$ts = Streams_Invite::db()->select("CURRENT_TIMESTAMP")->fetchAll(PDO::FETCH_NUM);

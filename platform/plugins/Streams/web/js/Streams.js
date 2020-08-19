@@ -934,6 +934,7 @@ Streams.Dialogs = {
 	 *  It is passed an object with keys "suggestion", "stream", "data"
 	 * @param {object} [options] Different options
 	 * @param {string} [options.title] Custom dialog title
+	 * @param {string} [options.token] Use to set the invite token, if you have enough permissions
 	 */
 	invite: function(publisherId, streamName, callback, options) {
 		var stream = null;
@@ -941,6 +942,13 @@ Streams.Dialogs = {
 		options = Q.extend({}, Streams.Dialogs.invite.options, options);
 
 		var suggestion = null, data = null;
+		var fields = {
+			publisherId: publisherId,
+			streamName: streamName
+		};
+		if (options.token) {
+			fields.token = options.token;
+		}
 		Q.req('Streams/invite', ['suggestion', 'data'], function (err, response) {
 			var slots = response && response.slots;
 			if (slots) {
@@ -949,10 +957,7 @@ Streams.Dialogs = {
 				$('.Streams_invite_dialog').addClass('Streams_suggestion_ready');
 			}
 		}, {
-			fields: {
-				publisherId: publisherId,
-				streamName: streamName
-			}
+			fields: fields
 		});
 
 		// detect if cordova or Contacts Picker API available.
@@ -4707,14 +4712,26 @@ var Interests = Streams.Interests = {
  */
 
 /**
- * Try to figure out a displayable title from a stream's type
- * @static
+ * Returns the type name to display from a stream type.
+ * If none is set, try to figure out a displayable title from a stream's type
  * @method displayType
  * @param {String} type
- * @return {String}
+ * @param {Function} callback The first parameter will be the displayType
+ * @param {Object} [options] Options to use with Q.Text.get, and also
+ * @param {string} [$options.plural=false] Whether to display plural, when available
  */
-Streams.displayType = function _Streams_displayType(type) {
-	return type.split('/').slice(1).join('/');
+Streams.displayType = function _Streams_displayType(type, callback, options) {
+	var parts = type.split('/');
+	var module = parts.shift();
+	var ret = parts.pop();
+	Q.Text.get(module+'/content', function(err, text) {
+		var field = 'displayType' + (options && options.plural) ? 'Plural' : '';
+		var result = Q.getObject(['types', type, 'displayType']);
+		if (options && options.plural) {
+			result = Q.getObject(['types', type, 'displayTypePlural'], text) || result;
+		}
+		callback(result || ret);
+	}, options);
 };
 
 /**

@@ -2026,8 +2026,10 @@ class Streams_Stream extends Base_Streams_Stream
 	/**
 	 * Returns the type name to display from a stream type
 	 * @method displayType
+	 * @param {array} [$options=array()]
 	 * @param {string} [$options.language=null] Override language
 	 * @param {string} [$options.locale=null] Override locale
+	 * @param {string} [$options.plural=false] Whether to display plural, when available
 	 * @static
 	 * @return {string}
 	 */
@@ -2038,6 +2040,9 @@ class Streams_Stream extends Base_Streams_Stream
 		$default = end($parts);
 		$text = Q_Text::get("$module/content", $options);
 		$displayType = Q::ifset($text, 'types', $streamType, 'displayType', null);
+		if (!empty($options['plural'])) {
+			$displayType = Q::ifset($text, 'types', $streamType, 'displayTypePlural', $displayType);
+		}
 		return $displayType ? $displayType : $default;
 	}
 	

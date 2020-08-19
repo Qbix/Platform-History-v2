@@ -9,7 +9,7 @@ function Assets_services_response_data($params) {
 	$_relatedServices = Streams_RelatedTo::select()->where(array(
 		'toPublisherId' => $serviceStream->publisherId,
 		'toStreamName' => $serviceStream->name,
-		'type' => 'Calendars/service'
+		'type' => 'Calendars/availability'
 	))->fetchDbRows();
 	$relatedServices = array();
 	foreach ($_relatedServices as $item) {

@@ -54,7 +54,6 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 	});
 	var originalTime = Date.now();
 	var timing = state.timing;
-	var idString = $this.prop("tagName") + $this.attr("id") + $this.attr("class") + $this.attr("style");
 
 	setTimeout(function _clickify() {
 		// if element already wrapped clickable container, do nothing
@@ -75,10 +74,6 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 			}
 			return;
 		}
-
-		Q.onLayout($this.parent()[0]).set(function () {
-			$this.plugin('Q/clickable', 'remove').plugin('Q/clickable');
-		}, idString);
 
 		state.oldStyle = $this.attr('style');
 		var display = $this.css('display');

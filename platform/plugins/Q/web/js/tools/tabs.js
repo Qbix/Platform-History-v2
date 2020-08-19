@@ -14,7 +14,7 @@
 	 *  @param {Array} [options.tabs] An associative array of name: title pairs.
 	 *  @param {Array} [options.urls] An associative array of name: url pairs to override the default urls.
 	 *  @param {String} [options.field='tab'] Uses this field when urls doesn't contain the tab name.
-	 *  @param {Boolean|Object} [options.memorize] Pass true to memorize all tabs, or object of {name: Boolean} for individual tabs. Makes switchTo avoid reloading tab url by default, instead it restores last-seen element and url.
+	 *  @param {Boolean|Object} [options.retain] Pass true to retain slots from all tabs, or object of {name: Boolean} for individual tabs. Makes switchTo avoid reloading tab url by default, instead it restores last-seen slot contents, url and title.
 	 *  @param {Boolean} [options.checkQueryString=false] Whether the default getCurrentTab should check the querystring when determining the current tab
 	 *  @param {boolean} [options.touchlabels=Q.info.isMobile] Whether to show touchlabels on the tabs
 	 *  @param {Boolean} [options.vertical=false] Stack the tabs vertically instead of horizontally
@@ -46,7 +46,7 @@
 			var state = tool.state;
 			var $te = $(tool.element);
 			
-			tool.memorized = {};
+			tool.retained = {};
 			
 			if (state.touchlabels === undefined) {
 				state.touchlabels = Q.info.isMobile;
@@ -91,7 +91,7 @@
 				defaultText: '...',
 				defaultHtml: '...'
 			},
-			memorize: {},
+			retain: {},
 			loaderOptions: {},
 			loader: Q.req,
 			onClick: new Q.Event(),
@@ -114,7 +114,7 @@
 			 * @param {Object} [loaderOptions] any options to merge on top of
 			 *  tool.state.loaderOptions
 			 * @param {Boolean} [loaderOptions.reload]
-			 *  Reload the tab's url from the server, even if it was memorized
+			 *  Reload the tab's url from the server, even if it was retained
 			 * @param {Mixed} [extra] anything to pass to beforeSwitch handlers
 			 */
 			switchTo: function (name, loaderOptions, extra) {
@@ -210,18 +210,18 @@
 				}
 				
 				function beforeFillSlots(response, url, options) {
-					// memorize existing slots
-					if (state.memorize === true
-					|| (state.memorize && state.memorize[fromTabName])) {
-						var memorized = tool.memorized[fromTabName] || {};
+					// retain contents of existing slots
+					if (state.retain === true
+					|| (state.retain && state.retain[fromTabName])) {
+						var retained = tool.retained[fromTabName] || {};
 						if (url !== fromUrl) {
-							Q.extend(memorized, {
+							Q.extend(retained, {
 								url: fromUrl,
 								title: document.title,
 								stored: {}
 							});
 							Q.each(slots, function (i, slotName) {
-								var s = memorized.stored[slotName] = document.createElement('div');
+								var s = retained.stored[slotName] = document.createElement('div');
 								var c = slotContainer(slotName);
 								Q.Tool.remove(c);
 								Q.each(c && c.childNodes, function () {
@@ -233,9 +233,9 @@
 				}
 				
 				function loader(urlToLoad, slotNames, callback, options) {
-					if (!(state.memorize === true
-					|| (state.memorize && tool.memorized[name]))
-					|| !Q.getObject([name, 'url'], tool.memorized)) {
+					if (!(state.retain === true
+					|| (state.retain && tool.retained[name]))
+					|| !Q.getObject([name, 'url'], tool.retained)) {
 						// use default loader
 						var _loader = loaderOptions.loader || state.loader 
 							|| Q.loadUrl.options.loader || Q.request;
@@ -243,29 +243,29 @@
 					}
 					
 					var request = new Q.Request(urlToLoad, slotNames, callback, options);
-					var memorized = tool.memorized[name];
-					if (memorized.response.slots) {
-						for (var slotName in memorized.slots) {
+					var retained = tool.retained[name];
+					if (retained.response.slots) {
+						for (var slotName in retained.slots) {
 							// the slots are going to be filled in a different way
-							memorized.response.slots[slotName] = '';
+							retained.response.slots[slotName] = '';
 						}
 					}
-					// the memorized response will cause the stylesheets to load again
-					Q.handle(callback, request, [null, memorized.response, false]);
+					// the retained response will cause the stylesheets to load again
+					Q.handle(callback, request, [null, retained.response, false]);
 				}
 				
 				function handler(response, url, options) {
-					if (state.memorize === true || (state.memorize && state.memorize[name])) {
-						// load memorized url and slots back into new tab
-						var memorized = tool.memorized[name];
-						tool.memorized[name] = {
+					if (state.retain === true || (state.retain && state.retain[name])) {
+						// load retained url and slots back into new tab
+						var retained = tool.retained[name];
+						tool.retained[name] = {
 							response: response
 						}; // reset it so if we switch to this tab right away again, it will reload
-						if (memorized && memorized.stored
+						if (retained && retained.stored
 						&& (!loaderOptions || !loaderOptions.reload)) {
-							history.replaceState(memorized.url, memorized.title);
+							history.replaceState(retained.url, retained.title);
 							var elements = [];
-							Q.each(memorized.stored, function (slotName) {
+							Q.each(retained.stored, function (slotName) {
 								var element = slotContainer(slotName);
 								Q.replace(element, this);
 								Q.activate(element);

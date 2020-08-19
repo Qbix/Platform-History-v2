@@ -202,7 +202,7 @@
 		},
 		"onInsert": {
 			"labels": {
-			  /* default labels should be defined individual by each application */
+				/* default labels should be defined individual by each application */
 			}
 		},
 		"communities": {
