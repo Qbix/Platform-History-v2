@@ -713,8 +713,28 @@ window.WebRTCconferenceLib = function app(options){
                         break;
                     }
                 }
+
                 app.event.dispatch('screenHidden', screen);
 
+                let appendedToNextScreen = false;
+                if(screen.soundEl != null && screen.participant.soundMeter.visualizations['participantScreen'] != null
+                    && screen.participant.soundMeter.visualizations['participantScreen'].element == screen.soundEl) {
+                    log('screen.hide move sound', screen.participant.screens.length);
+
+                    for(let s in screen.participant.screens) {
+                        let scr = screen.participant.screens[s];
+                        log('screen.hide move sound change');
+                        if(scr == screen || !scr.isActive) continue;
+                        log('screen.hide move sound change 2');
+                        screen.participant.soundMeter.visualizations['participantScreen'].element = scr.soundEl
+                        scr.soundEl.appendChild(screen.participant.soundMeter.visualizations['participantScreen'].svg);
+                        appendedToNextScreen = true;
+                        break;
+                    }
+                }
+                if(!appendedToNextScreen) {
+                    screen.participant.soundMeter.visualizations['participantScreen'].remove();
+                }
             };
             this.show = function() {
                 log('screen.show');
@@ -732,6 +752,15 @@ window.WebRTCconferenceLib = function app(options){
 
                 if(!presentInScreensList) roomScreens.push(screen);
                 app.event.dispatch('screenShown', screen);
+
+                if(screen.participant.soundMeter.visualizations['participantScreen'] == null) {
+                    app.screensInterface.audioVisualization().build({
+                        name: 'participantScreen',
+                        participant: screen.participant,
+                        element: screen.soundEl,
+                        stopOnMute: true
+                    });
+                }
 
             };
 
@@ -864,10 +893,10 @@ window.WebRTCconferenceLib = function app(options){
         function createAudioAnalyser(track, participant) {
             if(typeof cordova != 'undefined' && _isiOS) return;
 
-            log('createAudioAnalyser', track)
+            log('audiovis: createAudioAnalyser', track)
 
             if(participant.soundMeter.source != null) {
-                log('createAudioAnalyser: source exists')
+                log('audiovis: createAudioAnalyser: source exists')
 
                 /*participant.soundMeter.script.disconnect();
 				participant.soundMeter.source.disconnect();*/
@@ -935,6 +964,7 @@ window.WebRTCconferenceLib = function app(options){
             }
 
             function buildVisualization(participant) {
+                log('audiovis: createAudioAnalyser: buildVisualization');
                 participant.soundMeter.latestUpdate = performance.now();
 
                 participant.soundMeter.script.onaudioprocess = function(e) {
@@ -1077,9 +1107,16 @@ window.WebRTCconferenceLib = function app(options){
         }
 
         function audioVisualization() {
+            log('audiovis: audioVisualization');
 
             function updatVisualizationWidth(participant, visualization) {
+                log('audiovis: audioVisualization: updatVisualizationWidth');
+                try {
+                    var err = (new Error);
+                    console.log(err.stack);
+                } catch (e) {
 
+                }
                 if((visualization == null || visualization.svg == null) || (visualization.updateSizeOnlyOnce && visualization.updated)) return;
 
                 var element = visualization.element;
@@ -1167,6 +1204,8 @@ window.WebRTCconferenceLib = function app(options){
             }
 
             function buildVisualization(options) {
+                log('audiovis: audioVisualization: buildVisualization');
+
                 var name = options.name;
                 var element = options.element;
                 var participant = options.participant;
@@ -1240,6 +1279,10 @@ window.WebRTCconferenceLib = function app(options){
                     setTimeout(function () {
                         updatVisualizationWidth(participant, visualisation)
                     }, 300);
+                };
+                visualisation.remove = function () {
+                    delete options.participant.soundMeter.visualizations[name];
+                    if(visualisation.svg.parentNode != null) visualisation.svg.parentNode.removeChild(visualisation.svg);
                 };
             }
 

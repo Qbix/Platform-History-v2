@@ -1905,13 +1905,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
                 );
 
-                WebRTCconference.screensInterface.audioVisualization().build({
-                    name:'participantScreen',
-                    participant: screen.participant,
-                    element:participantVoice,
-                    stopOnMute:true
-                });
-
+                if(screen.participant.soundMeter.visualizations['participantScreen'] == null) {
+                    WebRTCconference.screensInterface.audioVisualization().build({
+                        name: 'participantScreen',
+                        participant: screen.participant,
+                        element: participantVoice,
+                        stopOnMute: true
+                    });
+                }
 
                 participantNameTextCon.appendChild(participantNameText);
                 chatParticipantName.appendChild(participantNameTextCon);
