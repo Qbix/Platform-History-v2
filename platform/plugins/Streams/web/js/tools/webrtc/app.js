@@ -1448,7 +1448,7 @@ window.WebRTCconferenceLib = function app(options){
                 log('createTrackElement: onload', remoteStreamEl)
             }
             remoteStreamEl.oncanplay = function (e) {
-                log('createTrackElement: oncanplay', remoteStreamEl);
+                log('createTrackElement: oncanplay ' + track.kind, remoteStreamEl);
 
                 if(!participant.isLocal) remoteStreamEl.play();
 
@@ -1476,7 +1476,14 @@ window.WebRTCconferenceLib = function app(options){
                     var currentRation = videoConWidth / videoConHeight;
                     var videoRatio = e.target.videoWidth / e.target.videoHeight;
 
-                    log('createTrackElement: loadedmetadata: ' + videoConWidth + 'x' + videoConHeight)
+                    //if(e.target.videoWidth)
+                    log('createTrackElement: loadedmetadata: video ' + e.target.videoWidth + 'x' + e.target.videoHeight)
+                    log('createTrackElement: loadedmetadata: con ' + videoConWidth + 'x' + videoConHeight)
+                    log('createTrackElement: loadedmetadata: mediaStreamTrack.readyState ' + track.mediaStreamTrack.readyState)
+                    log('createTrackElement: loadedmetadata: mediaStreamTrack.enabled ' + track.mediaStreamTrack.enabled)
+                    log('createTrackElement: loadedmetadata: mediaStreamTrack.muted ' + track.mediaStreamTrack.muted)
+
+                    if(track.mediaStreamTrack.readyState == 'ended' || (e.target.videoWidth == 0 && e.target.videoHeight == 0)) return;
                     var shouldReset = (track.parentScreen != null && currentRation.toFixed(1) != videoRatio.toFixed(1)) || track.screensharing == true;
 
                     track.metadata = {width:e.target.videoWidth, height:e.target.videoHeight};
@@ -1489,7 +1496,7 @@ window.WebRTCconferenceLib = function app(options){
                 });
 
                 track.mediaStreamTrack.addEventListener('mute', function(){
-                    log('mediaStreamTrack mute');
+                    log('mediaStreamTrack mute', track);
 
                     //if(track.participant.videoTracks(true).length != 0) return;
 
@@ -1503,7 +1510,7 @@ window.WebRTCconferenceLib = function app(options){
                 });
 
                 track.mediaStreamTrack.addEventListener('unmute', function(e){
-                    log('mediaStreamTrack unmuted 1');
+                    log('mediaStreamTrack unmuted 1', track);
                     if(track.parentScreen.removeTimer != null) {
                         clearTimeout(track.parentScreen.removeTimer);
                         track.parentScreen.removeTimer = null;
@@ -1513,14 +1520,14 @@ window.WebRTCconferenceLib = function app(options){
                 });
 
                 track.mediaStreamTrack.addEventListener('ended', function(e){
-                    log('mediaStreamTrack ended');
+                    log('mediaStreamTrack ended', track);
                     //if(track.participant.videoTracks(true).length == 0)
                     removeScreenFromCommonList(track.parentScreen);
                 });
             }
 
             track.mediaStreamTrack.addEventListener('mute', function(e){
-                log('mediaStreamTrack muted');
+                log('mediaStreamTrack muted', track);
                 app.event.dispatch('trackMuted', {
                     screen: track.parentScreen,
                     trackEl: e.target,
@@ -1529,7 +1536,7 @@ window.WebRTCconferenceLib = function app(options){
             });
 
             track.mediaStreamTrack.addEventListener('unmute', function(e){
-                log('mediaStreamTrack unmuted 0');
+                log('mediaStreamTrack unmuted 0', track);
                 app.event.dispatch('trackUnmuted', {
                     screen: track.parentScreen,
                     trackEl: e.target,
@@ -1538,7 +1545,7 @@ window.WebRTCconferenceLib = function app(options){
             });
 
             track.mediaStreamTrack.addEventListener('ended', function(e){
-                log('mediaStreamTrack ended');
+                log('mediaStreamTrack ended', track);
                 app.event.dispatch('trackMuted', {
                     screen: track.parentScreen,
                     trackEl: e.target,
@@ -3187,7 +3194,7 @@ window.WebRTCconferenceLib = function app(options){
                     if(_streamingSocket != null && _streamingSocket.connected) return true;
                     return false;
                 },
-                startStreaming: function(fbStreamUrl) {
+                /*startStreaming: function(fbStreamUrl) {
                     log('startStreaming', fbStreamUrl);
 
                     connect(fbStreamUrl, function () {
@@ -3208,6 +3215,13 @@ window.WebRTCconferenceLib = function app(options){
 
                         app.event.dispatch('facebookLiveStreamingStarted', localParticipant);
                         app.eventBinding.sendDataTrackMessage("facebookLiveStreamingStarted");
+                    });
+                },*/
+                startStreaming: function(fbStreamUrl) {
+                    log('startStreaming', fbStreamUrl);
+
+                    socket.emit('Streams/webrtc/fbStreaming', {
+                        'url': fbStreamUrl,
                     });
                 },
                 videoStream:function () {
@@ -4575,7 +4589,7 @@ window.WebRTCconferenceLib = function app(options){
             app.checkOnlineStatusInterval = setInterval(function () {
                 var i, participant;
                 for (i = 0; participant = roomParticipants[i]; i++){
-                    if(participant.isLocal) continue;
+                    if(participant.isLocal || participant.sid == 'recording') continue;
 
                     var audioTracks = participant.tracks.filter(function (t) {
                         if(participant.online == false) return;
@@ -5067,7 +5081,7 @@ window.WebRTCconferenceLib = function app(options){
                 var offer = {
                     type:'offer',
                     sdp: message.localDescription.sdp,
-                    info: {},
+                    info: {usesUnifiedPlan: true},
                     name: 'recording',
                     fromSid: 'recording',
                     connectionId: message.id,
@@ -5090,7 +5104,7 @@ window.WebRTCconferenceLib = function app(options){
                     videoCanvas.style.zIndex = '9999999999999999999';
                     videoCanvas.style.backgroundColor = 'transparent';
                     videoCanvas.width = 2000;
-                    videoCanvas.height = 2000;
+                    videoCanvas.height = 600;
 
                     _outputCtx = videoCanvas.getContext('2d');
 
@@ -5281,7 +5295,8 @@ window.WebRTCconferenceLib = function app(options){
                                     targetSid: participant.sid,
                                     type: "offer",
                                     resetConnection: resetConnection == true ? true : false,
-                                    sdp: newPeerConnection.localDescription.sdp
+                                    sdp: newPeerConnection.localDescription.sdp,
+                                    connectionId: participant.connectionId != null ? participant.connectionId : null
                                 });
                             });
                         })
@@ -5329,7 +5344,7 @@ window.WebRTCconferenceLib = function app(options){
 
                     //startNegotiating();
 
-                    if(participant.signalingRole == 'impolite' && !participant.isNegotiating) {
+                    if(participant.signalingRole == 'impolite' && !participant.isNegotiating && participant.sid != 'recording') {
 
                         if((_localInfo.browserName == 'Chrome' && _localInfo.browserVersion >= 80) || _localInfo.browserName == 'Firefox' || participant.sid == 'recording') {
                             log('negotiate: browser supports rollback');
@@ -5668,6 +5683,8 @@ window.WebRTCconferenceLib = function app(options){
             function createPeerConnection(senderParticipant) {
                 var config = pc_config;
                 if(!senderParticipant.localInfo.usesUnifiedPlan) config.sdpSemantics = "plan-b";
+                log('config.sdpSemantics', config.sdpSemantics)
+
                 var newPeerConnection = new RTCPeerConnection(config);
 
                 function createOffer(hasPriority){
@@ -5711,7 +5728,8 @@ window.WebRTCconferenceLib = function app(options){
                                     name: localParticipant.identity,
                                     targetSid: senderParticipant.sid,
                                     type: "offer",
-                                    sdp: senderParticipant.RTCPeerConnection.localDescription.sdp
+                                    sdp: senderParticipant.RTCPeerConnection.localDescription.sdp,
+                                    connectionId: senderParticipant.connectionId != null ? senderParticipant.connectionId : null
                                 });
                             });
                         })
@@ -5757,7 +5775,7 @@ window.WebRTCconferenceLib = function app(options){
 
                     //startNegotiating();
 
-                    if(senderParticipant.signalingRole == 'impolite' && !senderParticipant.isNegotiating) {
+                    if(senderParticipant.signalingRole == 'impolite' && !senderParticipant.isNegotiating && senderParticipant.sid != 'recording') {
 
                         if((_localInfo.browserName == 'Chrome' && _localInfo.browserVersion >= 80) || _localInfo.browserName == 'Firefox') {
                             log('negotiate: browser supports rollback');
@@ -5897,7 +5915,7 @@ window.WebRTCconferenceLib = function app(options){
                 var localTracks = localParticipant.tracks;
                 log('offerReceived: publishLocalVideo: cameraIsEnabled = ' + (app.conferenceControl.cameraIsEnabled()));
 
-                if(app.conferenceControl.cameraIsEnabled()){
+                //if(app.conferenceControl.cameraIsEnabled()){
                     if ('ontrack' in RTCPeerConnection) {
                         for (let t in localTracks) {
                             log('offerReceived: publishLocalAudio: add videoTrack');
@@ -5910,7 +5928,7 @@ window.WebRTCconferenceLib = function app(options){
                             RTCPeerConnection.addStream(localParticipant.videoStream);
                         }
                     }
-                }
+                //}
             }
 
             function creteEmptyVideoTrack(width, height) {

@@ -908,7 +908,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 screensRendering.updateLayout();
             });
             WebRTCconference.event.on('screenRemoved', function (participant) {
-                log('screen added', participant)
+                log('screen removed', participant)
                 screensRendering.updateLayout();
             });
             WebRTCconference.event.on('trackAdded', function (e) {
