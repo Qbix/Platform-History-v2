@@ -121,7 +121,7 @@ function Q_tabs_tool($options)
 		$result .= Q_Html::tag('li', $attributesMerged, $a);
 	}
 	Q_Response::setToolOptions(compact(
-		'selectors', 'slot', 'urls', 'memorize', 'defaultTabName', 'touchlabels',
+		'selectors', 'slot', 'urls', 'retain', 'defaultTabName', 'touchlabels',
 		'vertical', 'compact', 'overflow',
 		'field', 'loader', 'beforeSwitch', 'beforeScripts', 'onActivate'
 	));
