@@ -291,6 +291,7 @@ class Websites_Webpage
 	}
 	/**
 	 * Create Websites/webpage stream from params
+	 * May return existing stream for this url (fetched without acceess checks)
 	 * @method createStream
 	 * @static
 	 * @param {array} $params
@@ -320,6 +321,12 @@ class Websites_Webpage
 
 		$asUserId = Q::ifset($params, "asUserId", $loggedUserId);
 		$publisherId = Q::ifset($params, "publisherId", $loggedUserId);
+		
+		// check if stream for this url has been already created
+		// and if yes, return it
+		if ($webpageStream = self::fetchStream($url)) {
+			return $webpageStream;
+		}
 
 		$title = Q::ifset($params, 'title', substr($url, strrpos($url, '/') + 1));
 		$title = $title ? substr($title, 0, 255) : '';
@@ -332,16 +339,6 @@ class Websites_Webpage
 		$contentType = Q::ifset($params, 'headers', 'Content-Type', 'text/html'); // content type by default text/html
 		$contentType = explode(';', $contentType)[0];
 		$streamIcon = Q_Config::get('Streams', 'types', 'Websites/webpage', 'defaults', 'icon', null);
-
-		if ($contentType != 'text/html') {
-			// trying to get icon
-			Q_Config::load(WEBSITES_PLUGIN_CONFIG_DIR.DS.'mime-types.json');
-			$extension = Q_Config::get('mime-types', $contentType, '_blank');
-			$urlPrefix = Q_Request::baseUrl().'/{{Streams}}/img/icons/files';
-			$streamIcon = file_exists(STREAMS_PLUGIN_FILES_DIR.DS.'Streams'.DS.'icons'.DS.'files'.DS.$extension)
-				? "$urlPrefix/$extension"
-				: "$urlPrefix/_blank";
-		}
 
 		// special interest stream for websites/webpage stream
 		$port = Q::ifset($urlParsed, 'port', null);
@@ -356,8 +353,19 @@ class Websites_Webpage
 
 		$interestStream = Streams::fetchOne(null, $interestPublisherId, $interestStreamName);
 
+		if ($contentType != 'text/html') {
+			// trying to get icon
+			Q_Config::load(WEBSITES_PLUGIN_CONFIG_DIR.DS.'mime-types.json');
+			$extension = Q_Config::get('mime-types', $contentType, '_blank');
+			$urlPrefix = Q_Request::baseUrl().'/{{Streams}}/img/icons/files';
+			$streamIcon = file_exists(STREAMS_PLUGIN_FILES_DIR.DS.'Streams'.DS.'icons'.DS.'files'.DS.$extension)
+				? "$urlPrefix/$extension"
+				: "$urlPrefix/_blank";
+		}
+
 		// set icon for interest stream
-		if ($interestStream instanceof Streams_Stream && !Users::isCustomIcon($interestStream->icon)) {
+		if ($interestStream instanceof Streams_Stream
+		&& !Users::isCustomIcon($interestStream->icon)) {
 			$result = null;
 
 			if (Q_Valid::url($smallIcon)) {
@@ -378,12 +386,6 @@ class Websites_Webpage
 			}
 
 			$interestStream->save();
-		}
-
-		// check if stream for this url has been already created
-		// and if yes, return it
-		if ($webpageStream = self::fetchStream($url)) {
-			return $webpageStream;
 		}
 
 		$streamName = "Websites/webpage/".self::normalizeUrl($url);
