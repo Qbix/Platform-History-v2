@@ -13478,7 +13478,8 @@ Q.onJQuery.add(function ($) {
 		"Q/layouts": "{{Q}}/js/tools/layouts.js",
 		"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js",
 		"Q/parallax": "{{Q}}/js/tools/parallax.js",
-		"Q/lazyload": "{{Q}}/js/tools/lazyload.js"
+		"Q/lazyload": "{{Q}}/js/tools/lazyload.js",
+		"Q/remoteAudio": "{{Q}}/js/tools/remoteAudio.js"
 	});
 	
 	Q.Tool.jQuery({
