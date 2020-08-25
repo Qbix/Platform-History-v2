@@ -12718,10 +12718,10 @@ Q.extend(Q.prompt.options, Q.text.prompt);
  * @return {Integer} Returns the index of the handler that executed in Q.invoke.handlers
  */
 Q.invoke = function (options) {
-	var o = options;
+	var extendedOptions = options;
 	if (options.template) {
 		Q.Template.render(options.template.name, options.template.fields, function (err, html) {
-			o = Q.extend({ content: html }, options);
+			extendedOptions = Q.extend({ content: html }, options);
 			_continue();
 		});
 	} else {
@@ -12729,7 +12729,7 @@ Q.invoke = function (options) {
 	}
 	function _continue() {
 		Q.each(Q.invoke.handlers, function (i, handler) {
-			var ret = Q.handle(handler, Q, o);
+			var ret = Q.handle(handler, Q, [extendedOptions]);
 			if (ret === false) {
 				return false
 			}
@@ -12738,9 +12738,26 @@ Q.invoke = function (options) {
 };
 Q.invoke.handlers = [
 	function (options) {
+		var node = options.trigger;
+		if (!node) {
+			return;
+		}
+
+		var isDialog = false;
+		while (node) {
+			if (node.hasClass) {
+				if (node.hasClass('Q_dialog_slot')) {
+					isDialog = true;
+				}
+			}
+			node = node.parentNode;
+		}
+
+		if (!isDialog) {
+			return;
+		}
+
 		Q.Dialogs.push(Q.extend({}, options, {
-			title: title,
-			content: content,
 			onActivate: options.callback || function () { }
 		}));
 	}
