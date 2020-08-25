@@ -66,7 +66,7 @@
 
 			// only for exist streams set onFieldChanged event - which refresh tool
 			if (ps.streamName) {
-				Q.Streams.retainWith(true).get(userId, ps.streamName, function () {
+				Q.Streams.retainWith(true).get(ps.publisherId, ps.streamName, function () {
 					this.onAttribute().set(function (fields, k) {
 						Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, function () {
 							console.log(ps.streamName);
