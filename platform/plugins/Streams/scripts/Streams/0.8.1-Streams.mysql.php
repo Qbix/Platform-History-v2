@@ -15,7 +15,9 @@ function Streams_0_8_1_Streams_mysql()
 	$stream->readLevel = Streams::$READ_LEVEL['see'];
 	$stream->writeLevel = Streams::$WRITE_LEVEL['join'];
 	$stream->adminLevel = Streams::$ADMIN_LEVEL['tell'];
-	$stream->save();
+	if (!$stream->retrieve()) {
+        $stream->save();
+    }
 
 	// also save subscription template
 	$subscription = new Streams_Subscription();
@@ -33,17 +35,24 @@ function Streams_0_8_1_Streams_mysql()
 	$subscription->ofUserId = '';
 	$subscription->untilTime = null;
 	$subscription->duration = 0;
-	$subscription->save();
-	
+	if (!$subscription->retrieve()) {
+        $subscription->save();
+    }
+
 	// main community experience stream, for community-wide announcements etc.
 	$user = Users_User::fetch($communityId);
-	Streams::create($communityId, $communityId, 'Streams/experience', array(
-		'skipAccess' => true,
-		'name' => 'Streams/experience/main',
-		'title' => Users::communityName(),
-		'icon' => $user ? $user->iconUrl() : null
-	));
-	
+	$stream = new Streams_Stream();
+    $stream->publisherId = $communityId;
+    $stream->name = 'Streams/experience/main';
+	if (!$stream->retrieve()) {
+        Streams::create($communityId, $communityId, 'Streams/experience', array(
+            'skipAccess' => true,
+            'name' => $stream->name,
+		    'title' => Users::communityName(),
+		    'icon' => $user ? $user->iconUrl() : null
+	    ));
+    }
+
 	// symlink the labels folder
 	Q_Utils::symlink(
 		STREAMS_PLUGIN_FILES_DIR.DS.'Streams'.DS.'icons'.DS.'labels'.DS.'Streams',
