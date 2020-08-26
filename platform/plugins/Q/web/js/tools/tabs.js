@@ -16,7 +16,7 @@
 	 *  @param {String} [options.field='tab'] Uses this field when urls doesn't contain the tab name.
 	 *  @param {Boolean|Object} [options.retain] Pass true to retain slots from all tabs, or object of {name: Boolean} for individual tabs. Makes switchTo avoid reloading tab url by default, instead it restores last-seen slot contents, url and title.
 	 *  @param {Boolean} [options.checkQueryString=false] Whether the default getCurrentTab should check the querystring when determining the current tab
-	 *  @param {boolean} [options.touchlabels=Q.info.isMobile] Whether to show touchlabels on the tabs
+	 *  @param {boolean} [options.touchlabels=false] Whether to show touchlabels on the tabs
 	 *  @param {Boolean} [options.vertical=false] Stack the tabs vertically instead of horizontally
 	 *  @param {Boolean} [options.compact=false] Display the tabs interface in a compact space with a contextual menu
 	 *  @param {Object} [options.overflow] Object defined element with overflowed menu items. If false, don't crop overflowed menu elements.
@@ -49,7 +49,7 @@
 			tool.retained = {};
 			
 			if (state.touchlabels === undefined) {
-				state.touchlabels = Q.info.isMobile;
+				state.touchlabels = false;
 			}
 			
 			if (state.contextualHandler == null) {
@@ -92,7 +92,9 @@
 				defaultHtml: '...'
 			},
 			retain: {},
-			loaderOptions: {},
+			loaderOptions: {
+				retainPropertiesOf: '.Q_overflow,.Q_columns_column'
+			},
 			loader: Q.req,
 			onClick: new Q.Event(),
 			beforeSwitch: new Q.Event(),
@@ -218,11 +220,26 @@
 							Q.extend(retained, {
 								url: fromUrl,
 								title: document.title,
-								stored: {}
+								stored: {},
+								elementsWithProperties: {}
 							});
 							Q.each(slots, function (i, slotName) {
 								var s = retained.stored[slotName] = document.createElement('div');
 								var c = slotContainer(slotName);
+								var r = retained.elementsWithProperties[slotName];
+								if (!r) {
+									r = [s];
+								}
+								r = r.concat(Array.prototype.slice.call(
+									c.querySelectorAll(o.retainPropertiesOf)
+								));
+								retained.elementsWithProperties[slotName] = r;
+								Q.each(r, function (i) {
+									this.Q_retained_properties = {
+										scrollTop: this.scrollTop,
+										scrollLeft: this.scrollLeft
+									};
+								});
 								Q.Tool.remove(c);
 								Q.each(c && c.childNodes, function () {
 									s.appendChild(this);
@@ -267,7 +284,15 @@
 							var elements = [];
 							Q.each(retained.stored, function (slotName) {
 								var element = slotContainer(slotName);
+								var ep = retained.elementsWithProperties
+									&& retained.elementsWithProperties[slotName];
 								Q.replace(element, this);
+								Q.each (ep, function () {
+									Q.each(this.Q_retained_properties, function (k, v) {
+										element[k] = v;
+									});
+									delete this.Q_retained_properties;
+								});
 								Q.activate(element);
 								elements.push(element);
 							});
@@ -490,7 +515,6 @@
 					};
 					$lastVisibleTab = $tabs.eq(index);
 					$overflow = $('<li class="Q_tabs_tab Q_tabs_overflow" />')
-						.css('visibility', 'visible')
 						.html(state.overflow.content.interpolate(values));
 					if (state.overflow.glyph) {
 						$('<span class="Q_tabs_overflowGlyph" />')
@@ -531,6 +555,7 @@
 					for (var i=index+1; i<$tabs.length; ++i) {
 						elements.push($tabs[i]);
 					}
+					$(elements).removeAttr('data-touchlabel');
 					$overflow.plugin("Q/contextual", {
 						elements: elements,
 						className: "Q_tabs_contextual",
@@ -540,6 +565,7 @@
 							tool.$tabs.css('visibility', 'visible');
 							Q.handle(state.onRefresh, this);
 							Q.handle(callback, tool);
+							$overflow.css('visibility', 'visible');
 						},
 						onShow: function (cs) {
 							Q.handle(state.onContextual, this, arguments);

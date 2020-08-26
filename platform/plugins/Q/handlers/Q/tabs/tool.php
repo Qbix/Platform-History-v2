@@ -59,7 +59,7 @@ function Q_tabs_tool($options)
 	 * @var array $touchlabels
 	 */
 	if (!isset($touchlabels)) {
-		$touchlabels = Q_Request::isMobile(); // default
+		$touchlabels = false; // default
 	}
 	$sel = isset($_REQUEST[$field]) ? $_REQUEST[$field] : null;
 	$result = '';

@@ -2661,7 +2661,7 @@ Q.Contextual = {
 						info.moveTarget = $(event.target.parentNode);
 					if (info.moveTarget)
 					{
-						info.moveTarget.addClass('Q_selected');
+						info.moveTarget.addClass('Q_selected Q_contextual_selected');
 						info.selectedAtStart = true;
 					}
 				}
@@ -2766,6 +2766,8 @@ Q.Contextual = {
 			
 			Q.Contextual.endEventHandler = function(e)
 			{
+				$('.Q_contextual_selected.Q_selected')
+				.removeClass('Q_contextual_selected Q_selected');
 				if ($(e.target).hasClass('Q_contextual_inactive')) {
 					return;
 				}
