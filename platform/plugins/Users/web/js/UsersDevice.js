@@ -55,26 +55,30 @@
 						if (subscribed) {
 							return Q.handle(callback, null, [null, subscribed]);
 						}
-						// if the user already granted notifications but the device is not subscribed then just subscribe
-						// device without any confirmation dialog
-						if (granted === true) {
-							return adapter.subscribe(function (err, subscribed) {
-								console.log('Users.Device: User is subscribed.');
-								Q.handle(Users.Device.onSubscribe, Users.Device, [
-									options, granted, subscribed
-								]);
-								Q.handle(callback, null, [err, subscribed]);
-							}, options);
-						}
+
 						// if the user is undecided with notifications then do call the confirmation
 						var userId = Q.Users.loggedInUserId();
 						var cache = Q.Cache.session('Users.Permissions.notifications');
 						var requested = Q.getObject(['subject'], cache.get(userId));
 
+						// if the user already granted notifications or replied 'yes' in confirmation
+						// but the device not subscribed, then just subscribe device without any confirmation dialog
+						if (granted === true || requested === true) {
+							return adapter.subscribe(function (err, subscribed) {
+								console.log('Users.Device: User is subscribed.');
+								Q.handle(Users.Device.onSubscribe, Users.Device, [options, granted, subscribed]);
+								Q.handle(callback, null, [err, subscribed]);
+							}, options);
+						}
+
 						// if permissions already requested - don't request it again
-						if (requested !== undefined && requested !== null) {
+						// this case means requested = 'in progress' or false
+						if (requested !== undefined) {
 							return Q.handle(callback, null, [null, null]);
 						}
+
+						// set this to avoid duplicated notices
+						cache.set(userId, 0, 'in progress');
 
 						Q.Text.get('Users/content', function (err, text) {
 							text = Q.copy(Q.getObject(["notifications"], text));
@@ -86,13 +90,7 @@
 								options, granted, subscribed, text
 							]);
 
-							// set this to avoid duplicated notices
-							cache.set(userId, 0, 'in progress');
-
 							Q.confirm(text.prompt, function (res) {
-								// set cache to null before device subscription
-								cache.set(userId, 0, null);
-
 								if (!res) {
 									// save to cache that notifications requested
 									// only if user refused, because otherwise - notifications has granted
@@ -100,15 +98,12 @@
 									return Q.handle(callback, null, [null, null]);
 								}
 
-								adapter.subscribe(function (err, subscribed) {
-									// if device subscribed set cache to true to avoid duplicate questions
-									if (subscribed) {
-										cache.set(userId, 0, true);
-									}
+								// if user selected 'yes' set cache to true to avoid duplicate questions
+								cache.set(userId, 0, true);
 
-									Q.handle(Users.Device.onSubscribe, Users.Device, [options, granted, subscribed]);
-									Q.handle(callback, null, [err, subscribed]);
-								}, options);
+								// if user selected 'yes', repeat Users.Device.subscribe with same callback
+								// next iteration should start subscription without confirmation
+								Users.Device.subscribe(callback);
 							}, { ok: text.yes, cancel: text.no, title: text.title });
 						});
 					});
