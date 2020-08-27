@@ -13,7 +13,9 @@
 
 .Q_js .Q_tabs_tab { visibility: hidden; }
 
-.Q_tabs_overflowGlyph { float: right; display: inline-block; margin-left: 5px; font-size: 100% !important; text-indent: 0; }
+.Q_tabs_overflowGlyph { display: inline-block; margin-left: 5px; font-size: 100% !important; text-indent: 0; }
+
+.Q_tabs_compact .Q_tabs_overflowGlyph { float: right; }
 
 .Q_tabs_overflow { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
 

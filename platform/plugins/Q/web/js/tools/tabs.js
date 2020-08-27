@@ -71,9 +71,9 @@
 			_addListeners(tool, $te);
 
 			tool.$tabs = tool.$('.Q_tabs_tab').css('visibility', 'hidden');
-			Q.onLayout(tool).set(function () {
+			Q.onLayout(tool).set(Q.throttle(function () {
 				tool.refresh();
-			}, tool);
+			}, 100, true), tool);
 			tool.refresh();
 			Q.handle(state.onActivate, tool, [state.tab, tool.getName(state.tab)]);
 		},
@@ -446,6 +446,7 @@
 				var tool = this;
 				var state = tool.state;
 				var $te = $(tool.element);
+				var html, $copied;
 				var w = Math.min(
 					$te[0].getBoundingClientRect().width,
 					$te[0].remainingWidth(true)
@@ -478,7 +479,7 @@
 					$o.remove();
 				}
 				var $tabs = tool.$tabs = $('.Q_tabs_tab', $te);
-				var $overflow, $lastVisibleTab;
+				var $overflow, $lastVisibleTab, tabAlreadyVisible = false;
 				if (state.vertical) {
 					tool.$tabs.css('visibility', 'visible');
 					Q.handle(state.onRefresh, this);
@@ -490,6 +491,7 @@
 					$tabs.each(function (i) {
 						var cs = this.computedStyle();
 						var $t = $(this);
+						$t.data('index', i);
 						w3 = w2;
 						w2 += this.getBoundingClientRect().width
 							+ parseFloat(cs.marginLeft)
@@ -508,19 +510,23 @@
 					});
 				}
 				if (index >= 0 && state.overflow) {
+					var $tab = $(state.tab);
 					var values = {
 						count: $tabs.length - index - 1,
-						text: $(state.tab).text() || state.overflow.defaultText,
-						html: $(state.tab).html() || state.overflow.defaultHtml
+						text: $tab.text() || state.overflow.defaultText,
+						html: $tab.html() || state.overflow.defaultHtml
 					};
-					$lastVisibleTab = $tabs.eq(index);
+					tabAlreadyVisible = ($tab.data('index') < index);
+					var html = this.state.overflow.content.interpolate(values);
+					$copied = $('<span class="Q_tabs_copiedTitle">').html(html);
 					$overflow = $('<li class="Q_tabs_tab Q_tabs_overflow" />')
-						.html(state.overflow.content.interpolate(values));
+						.empty().append($copied);
 					if (state.overflow.glyph) {
 						$('<span class="Q_tabs_overflowGlyph" />')
-							.html(state.overflow.glyph.interpolate(values))
-							.prependTo($overflow);
+						.html(state.overflow.glyph.interpolate(values))
+						.appendTo($overflow);
 					}
+					$lastVisibleTab = $tabs.eq(index);
 					var oneLess = !!state.compact;
 					if (!oneLess) {
 						$overflow.insertAfter($lastVisibleTab);
@@ -532,12 +538,13 @@
 					if (oneLess) {
 						--index;
 						values.count = $tabs.length - index - 1;
-						$overflow.insertBefore($lastVisibleTab)
-							.html(this.state.overflow.content.interpolate(values));
+						html = this.state.overflow.content.interpolate(values);
+						$copied = $('<span class="Q_tabs_copiedTitle">').html(html);
+						$overflow.insertBefore($lastVisibleTab).empty().append($copied);
 						if (state.overflow.glyph) {
 							$('<span class="Q_tabs_overflowGlyph" />')
 								.html(state.overflow.glyph.interpolate(values))
-								.prependTo($overflow);
+								.appendTo($overflow);
 						}
 					}
 				}
@@ -549,7 +556,11 @@
 				}
 				tool.overflowIndex = index;
 				tool.$overflow = $overflow;
-				_copyClassToOverflow(tool);
+				if (tabAlreadyVisible) {
+					$overflow.addClass('Q_tabs_alreadyVisible');
+				} else {
+					_copyClassToOverflow(tool);	
+				}
 				Q.addScript("{{Q}}/js/QTools.js", function () {
 					var elements = [];
 					for (var i=index+1; i<$tabs.length; ++i) {
