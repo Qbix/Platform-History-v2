@@ -3037,7 +3037,7 @@ Q.Contextual = {
 		var w = (info.size && info.size.width) || contextual.outerWidth();
 		var arrowLeft = 0;
 		var minArrowLeft = 22;
-		var leftOffset = ((w - arrow.outerWidth()) / 2) || minArrowLeft;
+		var leftOffset = Math.max(((w - arrow.outerWidth()) / 2), minArrowLeft);
 		arrow.css('left', leftOffset + 'px');
 		if (info.relativeToElement)
 		{

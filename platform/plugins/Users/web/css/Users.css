@@ -546,7 +546,7 @@ html.Users_loggedIn .Users_whenLoggedOut {
 }
 
 .Q_mobile .Users_status_tool .Users_avatar_tool img {
-	display: block;
+	display: inline-block;
 }
 
 #Users_login_step1,

@@ -13,7 +13,7 @@ function Streams_invite_response_suggestion()
 		}
 		if ($token = $_REQUEST['token']) {
 			if ($invite = Streams_Invite::fromToken($token)) {
-				throw new Q_Exception_AlreadyExists(array('source' => 'invite with this token'))
+				throw new Q_Exception_AlreadyExists(array('source' => 'invite with this token'));
 			}
 		}
 	} else {
