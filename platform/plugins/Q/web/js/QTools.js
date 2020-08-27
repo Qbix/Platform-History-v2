@@ -3108,6 +3108,8 @@ Q.Contextual = {
 		var info = Q.Contextual.collection[Q.Contextual.current].info;
 		info.moveTarget = null;
 		info.selectedAtStart = false;
+		
+		contextual.find('.Q_selected').removeClass('Q_selected');
 
 		var listingWrapper = contextual.children('.Q_listing_wrapper');
 		listingWrapper.plugin('Q/scroller', 'remove');
