@@ -98,5 +98,8 @@
         "inHour": "mewn {{h}} awr",
         "inHours": "mewn {{h}} awr",
         "inUnderMinute": "mewn llai na 1 munud"
+    },
+    "tabs": {
+        "more": "mwy"
     }
 }

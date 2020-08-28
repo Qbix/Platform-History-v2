@@ -1703,7 +1703,7 @@ class Q
 	 * @param {string} $pattern='$class::$function&#32;(from&#32;line&#32;$line)'
 	 * @param {integer} $skip=2
 	 */
-	static function backtrace($pattern = '{{class}}::{{function}} (from line {{line}})', $skip = 2)
+	static function backtrace($pattern = '{{class}}::{{function}} (from line {{line}} in {{file}})', $skip = 2)
 	{
 		$result = array();
 		$i = 0;
@@ -1731,7 +1731,7 @@ class Q
 	 */
 	static function b($separator = ", <br>\n")
 	{
-		return implode($separator, Q::backtrace('{{i}}) {{class}}::{{function}} (from line {{line}})', 3));
+		return implode($separator, Q::backtrace('{{i}}) {{class}}::{{function}} (from line {{line}} in {{file}})', 3));
 	}
 
 	/**

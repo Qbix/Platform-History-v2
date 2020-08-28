@@ -98,5 +98,8 @@
         "inHour": "{{h}} saat içinde",
         "inHours": "{{h}} saat içinde",
         "inUnderMinute": "1 dakikadan kısa sürede"
+    },
+    "tabs": {
+        "more": "Daha"
     }
 }

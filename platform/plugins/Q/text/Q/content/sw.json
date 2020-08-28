@@ -98,5 +98,8 @@
         "inHour": "katika saa {{h}}",
         "inHours": "katika masaa {{h}}",
         "inUnderMinute": "chini ya dakika 1"
+    },
+    "tabs": {
+        "more": "zaidi"
     }
 }

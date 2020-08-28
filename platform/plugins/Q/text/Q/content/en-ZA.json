@@ -99,5 +99,8 @@
         "inHour": "in {{h}} hour",
         "inHours": "in {{h}} hours",
         "inUnderMinute": "in under 1 minute"
+    },
+    "tabs": {
+        "more": "more"
     }
 }

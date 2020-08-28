@@ -98,5 +98,8 @@
         "inHour": "{{h}} tunnissa",
         "inHours": "{{h}} tunnissa",
         "inUnderMinute": "alle 1 minuutissa"
+    },
+    "tabs": {
+        "more": "lisää"
     }
 }

@@ -60,6 +60,9 @@
         "title": "Prompt",
         "ok": "Go"
     },
+    "tabs": {
+        "more": "more"
+    },
     "imagepicker": {
         "errorReadingFile": "Error reading file",
         "cameraCommands": {

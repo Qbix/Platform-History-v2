@@ -33,6 +33,7 @@ table { table-layout: fixed; }
 }
 #dashboard_slot {
 	position: fixed;
+	width: 100%;
 	margin: 0;
 	border: solid 0 #555; 
 	left: 0px;
@@ -52,7 +53,7 @@ table { table-layout: fixed; }
 #dashboard_slot * { color: white; font-size: 24px; font-family: Arial, sans-serif; }
 #dashboard_slot input,
 #dashboard_slot textarea { color: black; }
-#page { position: absolute; left: 0%; width: 100%; top:50px; bottom: 0; } 
+#page { position: absolute; width: 100%; top:50px; bottom: 0; left: 50%; transform: translate(-50%, 0); } 
 .Q_mobile #page { overflow: auto; -webkit-overflow-scrolling: touch; z-index: 0; }
 #dashboard_slot .Q_inplace_tool .Q_hover .Q_inplace_tool_static,
 #dashboard_slot .Q_inplace_tool .Q_hover .Q_inplace_tool_blockstatic { 
@@ -82,6 +83,9 @@ table { table-layout: fixed; }
 }
 .Q_mobile #dashboard_slot .MyApp_dashboard_logo h1 {
 	display: none;
+}
+.Q_layout_sidebar #dashboard_slot .Teaching_dashboard_logo {
+	width: 100%;
 }
 
 /* Notices contents */
@@ -124,7 +128,7 @@ table { table-layout: fixed; }
 #dashboard>h1 { float: left; padding: 5px; width: auto; }
 #dashboard>h2 { float: left; }
 #dashboard_user { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; float: right; }
-.Q_mobile #dashboard_user { max-width: 40%; padding: 5px; }
+.Q_mobile #dashboard_user { max-width: 40%; padding: 5px; margin: -5px; }
 .Q_mobile.Users_loggedIn #dashboard_user { margin: 0; }
 .Q_mobile.Users_loggedOut #dashboard_user { line-height: 40px; }
 #dashboard .Q_contextual * { color: black; }
@@ -149,14 +153,13 @@ table { table-layout: fixed; }
 
 /* Dashboard tabs */
 #dashboard .Q_tabs_tabs { border: 0; width: 100%; margin: auto; text-align: left; }
-#dashboard .Q_tabs_tab { cursor: pointer; width: auto; border: 0 !important; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; background-color: #f8f8f8; background: none; line-height: 30px !important; text-align: left; max-width: 100%; overflow: hidden; text-overflow: ellipsis; text-align: left; }
+#dashboard .Q_tabs_tab { margin: 0px; cursor: pointer; width: auto; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; background-color: #f8f8f8; background: none; text-align: left; max-width: 100%; overflow: hidden; text-overflow: ellipsis; text-align: left; }
 #dashboard .Q_tabs_tab.Streams_preview_tool { padding-left: 10px; }
 #dashboard .Q_tabs_compact.Q_tabs_horizontal { margin: 0; }
 #dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab { padding: 5px 10px; background-color: #222; color: white; width: 100%; }
 #dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab * { color: white; }
 #dashboard .Q_tabs_tab * { white-space: nowrap; overflow-x: hidden; overflow-y: visible; text-overflow: ellipsis; vertical-align: top; }
 #dashboard .Q_tabs_vertical .Q_tabs_tab { background: transparent; }
-#dashboard .Q_tabs_tab:first-child { border-top: 0 solid #e5e5e5; border-left: 0; }
 #dashboard .Q_tabs_tab,
 #dashboard .Q_tabs_tab>* { cursor: pointer; }
 #dashboard .Q_tabs_tab { text-decoration: none; color: white; }
@@ -165,9 +168,9 @@ table { table-layout: fixed; }
 #dashboard .Q_tabs_tab span { display: inline; text-align: left; }
 #dashboard .Q_tabs_tab.Q_current { background-color: #eeeeee; background-image: url(../Q/plugins/Q/img/bg/stucco.png); color: black !important; }
 #dashboard .Q_tabs_tab.Q_current * { color: black; }
-#dashboard .Q_tabs_tab { padding: 5px; margin: 0px; }
-.Q_mobile #dashboard .Q_tabs_tool { max-width: 80%; overflow: hidden; padding: 5px; }
-
+.Q_mobile #dashboard .Q_tabs_tool { height: 40px; max-width: 80%; overflow: hidden; }
+.Q_notMobile.Q_layout_widebar #dashboard .Q_tabs_tool { height: 40px; }
+.Q_layout_sidebar #dashboard .Q_tabs_tab { padding: 5px; }
 body .Q_tabs_contextual .Q_listing li { text-align: left; }
 html .Q_listing img { height: 30px; }
 
@@ -272,7 +275,7 @@ html.Q_notMobile { height: 100%; }
 .Q_notMobile .MyApp_dashboard_logo { float: none; background-position: center top; background-repeat: no-repeat; padding-top: 100px; text-align: center; }
 .Q_notMobile body { height: 100%; }
 .Q_notMobile #dashboard .MyApp_dashboard_logo { background-position: center top; padding-top: 250px; }
-.Q_notMobile #dashboard .MyApp_dashboard_logo h1 { padding: 0; display: none; }
+.Q_notMobile #dashboard .MyApp_dashboard_logo h1 { padding: 0; display: none; max-height: none; }
 .Q_notMobile #dashboard a { display: block; }
 .Q_notMobile #dashboard>h1,
 .Q_notMobile #dashboard>h2 { float: none; }

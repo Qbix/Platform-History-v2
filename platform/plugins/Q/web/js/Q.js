@@ -102,6 +102,9 @@ Q.text = {
 		"prompt": {
 			"title": "Prompt",
 			"ok": "Go"
+		},
+		"tabs": {
+			"more": "more"
 		}
 	}
 }; // put all your text strings here e.g. Q.text.Users.foo
@@ -12950,7 +12953,7 @@ Aup.pause = function () {
 
 /**
  * @method pause
- * Pauses the audio if it is playing
+ * Pauses all the audio that is playing
  */
 Q.Audio.pauseAll = function () {
 	for (var url in Q.Audio.collection) {

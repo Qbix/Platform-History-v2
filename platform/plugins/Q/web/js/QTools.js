@@ -2661,7 +2661,7 @@ Q.Contextual = {
 						info.moveTarget = $(event.target.parentNode);
 					if (info.moveTarget)
 					{
-						info.moveTarget.addClass('Q_selected');
+						info.moveTarget.addClass('Q_selected Q_contextual_selected');
 						info.selectedAtStart = true;
 					}
 				}
@@ -2766,6 +2766,8 @@ Q.Contextual = {
 			
 			Q.Contextual.endEventHandler = function(e)
 			{
+				$('.Q_contextual_selected.Q_selected')
+				.removeClass('Q_contextual_selected Q_selected');
 				if ($(e.target).hasClass('Q_contextual_inactive')) {
 					return;
 				}
@@ -3035,7 +3037,7 @@ Q.Contextual = {
 		var w = (info.size && info.size.width) || contextual.outerWidth();
 		var arrowLeft = 0;
 		var minArrowLeft = 22;
-		var leftOffset = ((w - arrow.outerWidth()) / 2) || minArrowLeft;
+		var leftOffset = Math.max(((w - arrow.outerWidth()) / 2), minArrowLeft);
 		arrow.css('left', leftOffset + 'px');
 		if (info.relativeToElement)
 		{
@@ -3106,6 +3108,8 @@ Q.Contextual = {
 		var info = Q.Contextual.collection[Q.Contextual.current].info;
 		info.moveTarget = null;
 		info.selectedAtStart = false;
+		
+		contextual.find('.Q_selected').removeClass('Q_selected');
 
 		var listingWrapper = contextual.children('.Q_listing_wrapper');
 		listingWrapper.plugin('Q/scroller', 'remove');

@@ -10,7 +10,7 @@
 	<?php echo Q::tool('Q/tabs', array(
 		'vertical' => !Q_Request::isMobile(),
 		'overflow' => array(
-			'content' => '{{html}}',
+			'content' => '{{text}}',
 			'defaultHtml' => $dashboard['Menu']
 		),
 		'compact' => true,

@@ -98,5 +98,8 @@
         "inHour": "tra {{h}} ora",
         "inHours": "tra {{h}} ore",
         "inUnderMinute": "in meno di 1 minuto"
+    },
+    "tabs": {
+        "more": "Di Più"
     }
 }

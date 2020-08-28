@@ -98,5 +98,8 @@
         "inHour": "trong {{h}} giờ",
         "inHours": "trong {{h}} giờ",
         "inUnderMinute": "dưới 1 phút"
+    },
+    "tabs": {
+        "more": "hơn"
     }
 }

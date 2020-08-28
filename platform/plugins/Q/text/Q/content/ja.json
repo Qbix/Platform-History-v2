@@ -98,5 +98,8 @@
         "inHour": "{{h}}時間後",
         "inHours": "{{h}}時間後",
         "inUnderMinute": "1分未満"
+    },
+    "tabs": {
+        "more": "もっと"
     }
 }

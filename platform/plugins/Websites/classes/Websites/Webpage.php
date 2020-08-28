@@ -327,6 +327,13 @@ class Websites_Webpage
 		if ($webpageStream = self::fetchStream($url)) {
 			return $webpageStream;
 		}
+		
+		$quota = null;
+		if (!$skipAccess) {
+			// check quota
+			$roles = Users::roles();
+			$quota = Users_Quota::check($asUserId, '', $quotaName, true, 1, $roles);
+		}
 
 		$title = Q::ifset($params, 'title', substr($url, strrpos($url, '/') + 1));
 		$title = $title ? substr($title, 0, 255) : '';
@@ -389,14 +396,6 @@ class Websites_Webpage
 		}
 
 		$streamName = "Websites/webpage/".self::normalizeUrl($url);
-
-		$quota = null;
-
-		if (!$skipAccess) {
-			// check quota
-			$roles = Users::roles();
-			$quota = Users_Quota::check($asUserId, '', $quotaName, true, 1, $roles);
-		}
 
 		$td = trim($description);
 		$webpageStream = Streams::create($asUserId, $publisherId, 'Websites/webpage', array(

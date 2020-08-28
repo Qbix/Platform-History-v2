@@ -98,5 +98,8 @@
         "inHour": "în {{h}} oră",
         "inHours": "în {{h}} ore",
         "inUnderMinute": "în sub 1 minut"
+    },
+    "tabs": {
+        "more": "Mai Mult"
     }
 }
