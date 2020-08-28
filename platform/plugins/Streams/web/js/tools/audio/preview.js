@@ -21,16 +21,13 @@
 		function _Streams_audio_preview(options, preview) {
 			var tool = this;
 			tool.preview = preview;
-			var state = tool.state;
 			var ps = preview.state;
-			var userId = Q.Users.loggedInUserId();
-			var baseUrl = Q.info.baseUrl;
 
 			// set edit action
 			ps.actions.actions = {
 				edit: function () {
 					var fields = {
-						url: Q.action("Streams/Stream"),
+						fileUploadUHandler: Q.action("Streams/Stream"),
 						publisherId: ps.publisherId,
 						streamName: ps.streamName,
 						action: "recorder",
@@ -39,7 +36,7 @@
 						}
 					};
 
-					$(tool.element).plugin("Q/audio", fields);
+					$("<div>").tool("Q/audio", fields).activate();
 				}
 			};
 
@@ -51,14 +48,13 @@
 				// rewrite Streams/preview composer
 				ps.creatable.preprocess = function (_proceed) {
 					var fields = {
-						url: Q.action("Streams/Stream"),
-						path: "uploads/Streams",
+						fileUploadUHandler: Q.action("Streams/Stream"),
 						action: "recorder",
 						onSuccess: _proceed
 					};
 
 					// activate Q/audio tool
-					$(tool.element).plugin("Q/audio", fields);
+					$(tool.element).tool("Q/audio", fields).activate();
 
 					return false;
 				};
@@ -107,12 +103,9 @@
 				var state = tool.state;
 				var ps = tool.preview.state;
 				var $te = $(tool.element);
-				var baseUrl = Q.info.baseUrl;
 
-				var audioUrl = stream.getAttribute("Q.file.url");
-				audioUrl = audioUrl ? audioUrl.replace("{{baseUrl}}", baseUrl) : "";
-
-				var audioDuration = stream.getAttribute("Q.audio.duration");
+				var audioUrl = stream.getAttribute("Q.file.url") || stream.getAttribute("file.url") || stream.getAttribute("url");
+				audioUrl = audioUrl.interpolate({ "baseUrl": Q.info.baseUrl });
 
 				$te.removeClass('Q_uploading');
 
@@ -148,25 +141,24 @@
 						Q.activate(tool, function () {
 							var playerBox = state.playerBox = $(".Streams_preview_audio_player", $te);
 							playerBox.empty();
-							var durationBox = state.durationBox = $(".Streams_preview_audio_duration", $te);
+							var $durationBox = $(".Streams_preview_audio_duration", $te);
 							var pieOptions = state.pie;
 
 							// assign Q/audio player to playerBox
-							playerBox.plugin("Q/audio", {
+							playerBox.tool("Q/audio", {
 								action: "player",
-								audioUrl: audioUrl,
+								url: audioUrl,
 								pie: pieOptions,
-								onAudioLoad: function () { // when audio loaded (canplay event) - fill duration box
-									durationBox.html(this.formatRecordTime(audioDuration));
+								onLoad: function () { // when audio loaded (canplay event) - fill duration box
+									$durationBox.html(this.formatRecordTime(this.state.duration));
 								},
 								onPlaying: function () { // when audio playing (playing event) - calculate elapsed time
-									var currentTime = this.audio.audio.currentTime;
-									durationBox.html(this.formatRecordTime(audioDuration - currentTime));
+									$durationBox.html(this.formatRecordTime(this.state.duration - this.state.currentPosition));
 								},
 								onEnded: function () { // when audio ended (ended event) - show again duration
-									durationBox.html(this.formatRecordTime(audioDuration));
+									$durationBox.html(this.formatRecordTime(this.state.duration));
 								}
-							});
+							}).activate();
 						});
 					},
 					state.templates["view"]

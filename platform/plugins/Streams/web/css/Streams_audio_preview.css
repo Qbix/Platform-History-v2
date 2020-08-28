@@ -7,3 +7,10 @@
 	margin: 5px 10px 5px 5px;
 }
 
+.Streams_audio_preview_tool .Streams_preview_title {
+	line-height: normal;
+}
+
+.Streams_audio_preview_tool iframe {
+	display: none;
+}
