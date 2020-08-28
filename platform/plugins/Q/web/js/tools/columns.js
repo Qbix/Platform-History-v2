@@ -1151,6 +1151,7 @@ Q.invoke.handlers.unshift(function (options, callback) {
 			}
 			if (node.hasClass('Q_columns_tool')) {
 				columns = node.Q.tools['q_columns'];
+				break;
 			}
 		}
 		node = node.parentNode;
