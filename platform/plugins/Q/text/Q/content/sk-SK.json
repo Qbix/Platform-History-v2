@@ -98,5 +98,8 @@
         "inHour": "o {{h}} hodinu",
         "inHours": "o {{h}} hodín",
         "inUnderMinute": "za menej ako 1 minútu"
+    },
+    "tabs": {
+        "more": "viac"
     }
 }

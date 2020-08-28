@@ -98,5 +98,8 @@
         "inHour": "{{h}} óra múlva",
         "inHours": "{{h}} óra alatt",
         "inUnderMinute": "1 perc alatt"
+    },
+    "tabs": {
+        "more": "több"
     }
 }

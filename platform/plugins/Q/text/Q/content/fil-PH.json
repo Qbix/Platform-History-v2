@@ -98,5 +98,8 @@
         "inHour": "sa {{h}} oras",
         "inHours": "sa {{h}} na oras",
         "inUnderMinute": "sa ilalim ng 1 minuto"
+    },
+    "tabs": {
+        "more": "higit pa"
     }
 }

@@ -98,5 +98,8 @@
         "inHour": "v {{h}} uri",
         "inHours": "v {{h}} urah",
         "inUnderMinute": "v manj kot 1 minuti"
+    },
+    "tabs": {
+        "more": "več"
     }
 }

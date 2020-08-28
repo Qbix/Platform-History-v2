@@ -102,6 +102,9 @@ Q.text = {
 		"prompt": {
 			"title": "Prompt",
 			"ok": "Go"
+		},
+		"tabs": {
+			"more": "more"
 		}
 	}
 }; // put all your text strings here e.g. Q.text.Users.foo

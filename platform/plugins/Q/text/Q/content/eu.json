@@ -98,5 +98,8 @@
         "inHour": "{{h}} orduan",
         "inHours": "{{h}} orduetan",
         "inUnderMinute": "1 minutu baino gutxiagoan"
+    },
+    "tabs": {
+        "more": "gehiago"
     }
 }

@@ -98,5 +98,8 @@
         "inHour": "në {999}} orë",
         "inHours": "në {999}} orë",
         "inUnderMinute": "në nën 1 minutë"
+    },
+    "tabs": {
+        "more": "më shumë"
     }
 }

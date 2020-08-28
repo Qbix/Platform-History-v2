@@ -98,5 +98,8 @@
         "inHour": "{{h}} घंटे में",
         "inHours": "{{h}} घंटे में",
         "inUnderMinute": "1 मिनट से कम"
+    },
+    "tabs": {
+        "more": "अधिक"
     }
 }

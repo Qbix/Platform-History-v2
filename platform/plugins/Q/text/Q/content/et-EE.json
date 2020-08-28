@@ -98,5 +98,8 @@
         "inHour": "tunni pärast {{h}}",
         "inHours": "{{h}} tunni pärast",
         "inUnderMinute": "vähem kui 1 minut"
+    },
+    "tabs": {
+        "more": "rohkem"
     }
 }
