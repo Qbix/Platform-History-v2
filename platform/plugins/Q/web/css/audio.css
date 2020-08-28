@@ -72,6 +72,14 @@ div[data-state=pause] .Q_tool.Q_pie_tool .Q_pie_box {
 }
 .Q_dialog_audio audio { display: none }
 
+.Q_audio_file {
+	visibility: hidden;
+	height: 0;
+	width: 0;
+	top: 0;
+	left: 0;
+	position: absolute;
+}
 /* Promise play dialog */
 .Streams_audio_preview_dialog_promisePlay.Q_overlay { width: auto; }
 .Streams_audio_preview_dialog_promisePlay .Q_title_slot {
@@ -84,6 +92,10 @@ div[data-state=pause] .Q_tool.Q_pie_tool .Q_pie_box {
 	margin: 10px;
 }
 /* ------------------- */
+
+.Q_audio_tool audio {
+	margin: 10px auto;
+}
 
 /* preload images */
 body::after{

@@ -444,7 +444,7 @@ Q.Tool.define("Q/columns", function(options) {
 			_open();
 		}
 		return true;
-		
+
 		function _open() {
 			var $te = $(tool.element);
 			var $titleSlot = $(titleSlot);
@@ -1138,29 +1138,31 @@ function _updateAttributes() {
 }
 
 Q.invoke.handlers.unshift(function (options, callback) {
-	var index, node, columns;
-	if (options.trigger) {
-		node = options.trigger;
-		while (node) {
-			if (node.hasClass) {
-				if (node.hasClass('Q_columns_column')) {
-					index = node.getAttribute('data-index');
-				}
-				if (node.hasClass('Q_columns_tool')) {
-					columns = node.Q.tools['q_columns'];
-				}
+	var index, columns;
+	var node = options.trigger;
+	if (!node) {
+		return;
+	}
+
+	while (node) {
+		if (node.hasClass) {
+			if (node.hasClass('Q_columns_column')) {
+				index = parseInt(node.getAttribute('data-index'));
 			}
-			node = node.parentNode;
+			if (node.hasClass('Q_columns_tool')) {
+				columns = node.Q.tools['q_columns'];
+				break;
+			}
 		}
-		if (columns) {
-			columns.close({min: index+1}, null, {animation: {duration: 0}});
-			columns.open(Q.extend({}, options, {
-				title: options.title,
-				column: options.content,
-				onOpen: options.callback
-			}));
-			return false;
-		}
+		node = node.parentNode;
+	}
+	if (columns) {
+		columns.close({min: index+1}, null, {animation: {duration: 0}});
+		columns.open(Q.extend({}, options, {
+			column: options.content,
+			onOpen: options.callback
+		}));
+		return false;
 	}
 });
 	

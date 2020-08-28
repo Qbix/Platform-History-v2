@@ -12732,7 +12732,7 @@ Q.invoke = function (options) {
 	}
 	function _continue() {
 		Q.each(Q.invoke.handlers, function (i, handler) {
-			var ret = Q.handle(handler, Q, o);
+			var ret = Q.handle(handler, Q, [o]);
 			if (ret === false) {
 				return false
 			}
@@ -12742,8 +12742,6 @@ Q.invoke = function (options) {
 Q.invoke.handlers = [
 	function (options) {
 		Q.Dialogs.push(Q.extend({}, options, {
-			title: title,
-			content: content,
 			onActivate: options.callback || function () { }
 		}));
 	}
@@ -12778,14 +12776,16 @@ Q.Intl = {
  * @class Q.Audio
  * @constructor
  * @param {String} url the url of the audio to load
+ * @param {HTMLElement} container html element to insert audio to
+ * @param {object} attributes json object with attributes to apply to audio element
  */
-Q.Audio = function (url) {
+Q.Audio = function (url, container, attributes) {
 	if (this === root) {
-		throw new Q.Error("Please call Q.Audio with the keyword new");
+		throw new Q.Error("Q.Audio: Please call Q.Audio with the keyword new");
 	}
 	var t = this;
 	this.src = url = Q.url(url);
-	var container = document.getElementById('Q-audio-container');
+	container = container || document.getElementById('Q-audio-container');
 	if (!container) {
 		container = document.createElement('div');
 		container.setAttribute('id', 'Q-audio-container');
@@ -12796,6 +12796,11 @@ Q.Audio = function (url) {
 	var audio = this.audio = document.createElement('audio');
 	audio.setAttribute('src', url);
 	audio.setAttribute('preload', 'auto');
+	attributes = attributes || {};
+	for (var property in attributes) {
+		audio.setAttribute(property, attributes[property]);
+	}
+
 	function _handler(e) {
 		Q.handle(e.type === 'canplay' ? Aup.onCanPlay : (
 			(e.type === 'canplaythrough' ? Aup.onCanPlayThrough : Aup.onEnded)
@@ -12940,7 +12945,8 @@ Aup.pause = function () {
  */
 Q.Audio.pauseAll = function () {
 	for (var url in Q.Audio.collection) {
-		Q.Audio.collection[url].pause();
+		var audio = Q.Audio.collection[url];
+		audio.pause && audio.pause();
 	}
 };
 
@@ -13464,7 +13470,9 @@ Q.onJQuery.add(function ($) {
 		"Q/layouts": "{{Q}}/js/tools/layouts.js",
 		"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js",
 		"Q/parallax": "{{Q}}/js/tools/parallax.js",
-		"Q/lazyload": "{{Q}}/js/tools/lazyload.js"
+		"Q/lazyload": "{{Q}}/js/tools/lazyload.js",
+		"Q/audio": "{{Q}}/js/tools/audio.js",
+		"Q/video": "{{Q}}/js/tools/video.js"
 	});
 	
 	Q.Tool.jQuery({
@@ -13490,8 +13498,8 @@ Q.onJQuery.add(function ($) {
 		"Q/touchscroll": "{{Q}}/js/fn/touchscroll.js",
 		"Q/scrollbarsAutoHide": "{{Q}}/js/fn/scrollbarsAutoHide.js",
 		"Q/sortable": "{{Q}}/js/fn/sortable.js",
-		"Q/validator": "{{Q}}/js/fn/validator.js",
-		"Q/audio": "{{Q}}/js/fn/audio.js"
+		"Q/validator": "{{Q}}/js/fn/validator.js"
+		//"Q/audio": "{{Q}}/js/fn/audio.js"
 	});
 	
 	Q.onLoad.add(function () {
