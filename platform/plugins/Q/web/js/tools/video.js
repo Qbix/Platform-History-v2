@@ -236,10 +236,10 @@ Q.Tool.define("Q/video", function (options) {
 		newA.href = url;
 		var host = newA.hostname;
 
-		if (host.includes("youtube.com/") || host.includes("youtu.be/")) {
+		if (host.includes("youtube.com") || host.includes("youtu.be")) {
 			return 'youtube';
 		}
-		if (host.includes("vimeo.com/")) {
+		if (host.includes("vimeo.com")) {
 			return 'vimeo';
 		}
 		var ext = url.split('.').pop();
