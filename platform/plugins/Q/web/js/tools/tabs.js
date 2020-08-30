@@ -521,8 +521,8 @@
 				var $tab = $(state.tab);
 				var values = {
 					count: $tabs.length - index - 1,
-					text: $tab.text() || state.overflow.defaultText || Q.text.Q.more,
-					html: $tab.html() || state.overflow.defaultHtml || Q.text.Q.more,
+					text: $tab.text() || state.overflow.defaultText || Q.text.Q.tabs.more,
+					html: $tab.html() || state.overflow.defaultHtml || Q.text.Q.tabs.more,
 					more: Q.text.Q.tabs.more
 				};
 				var html = this.state.overflow.content.interpolate(values);
