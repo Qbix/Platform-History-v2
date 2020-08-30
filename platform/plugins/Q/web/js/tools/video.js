@@ -61,7 +61,7 @@ Q.Tool.define("Q/video", function (options) {
 	};
 	tool.adapters.youtube = {
 		init: function () {
-			Q.addScript("{{Q}}/js/videojs/plugins/Youtube.js", function () {
+			Q.addScript("{{Q}}/js/videojs/plugins/YouTube.js", function () {
 				var options = {
 					techOrder: ["youtube"],
 					sources: [{

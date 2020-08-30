@@ -456,7 +456,7 @@ class Q_Uri
 							'pattern' => $pattern,
 							'fromUrl' => $url
 						);
-						if (false === Q::event($fields[''], $params)) {
+						if (false === Q::event($fields[''], $params, false, false, $params)) {
 							$matched = false;
 						}
 					}
