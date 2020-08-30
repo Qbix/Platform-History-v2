@@ -1006,8 +1006,8 @@ function presentColumn(tool, $column, fullscreen, recalculateHeights) {
 		$cs.css('top', '-' + titleOuterHeight + 'px');
 	}
 	var $controls = $column.find('.Q_controls_slot');
-	var cth = $ct.is(":visible") && !hideTitle ? $ct.height() : 0;
-	var controlsh = $controls.is(":visible") ? $controls.height() : 0;
+	var cth = $ct.is(":visible") && !hideTitle ? $ct.outerHeight() : 0;
+	var controlsh = $controls.is(":visible") ? $controls.outerHeight() : 0;
 	var index = parseInt($column.attr('data-index'));
 	var heightToBottom;
 	if (Q.info.isMobile) {

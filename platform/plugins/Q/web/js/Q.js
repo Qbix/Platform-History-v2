@@ -12405,9 +12405,6 @@ Q.Dialogs = {
 				$title = $('<div class="Q_title_slot" />').append($h2);
 				$content = $('<div class="Q_dialog_slot Q_dialog_content Q_overflow" />');
 				$dialog = $('<div />').append($title).append($content);
-				if (o.className) {
-					$dialog.addClass(o.className);
-				}
 				if (o.apply) {
 					$dialog.addClass('Q_overlay_apply');
 				}

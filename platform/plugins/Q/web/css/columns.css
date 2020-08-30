@@ -182,6 +182,7 @@ html.Q_ios.Q_standalone .Q_columns_title {
 
 .Q_notMobile .Q_columns_tool .Q_columns_container {
 	white-space: nowrap;
+	height: 100%;
 }
 .Q_notMobile .Q_columns_tool .Q_columns_container .Q_columns_column {
 	white-space: normal;
