@@ -6751,8 +6751,10 @@ Q.trigger = function _Q_trigger(eventName, element, args) {
  *  on container elements.
  *  If a non-element is passed here (such as null, or a DOMEvent)
  *  then this defaults to the document element.
+ * @param {Boolean} [force] Pass true here to handle Q.onLayout events
+ *   even if ResizeObserver was added
  */
-Q.layout = function _Q_layout(element) {
+Q.layout = function _Q_layout(element, force) {
 	if (!(element instanceof Element)) {
 		element = null;
 	}
@@ -6761,7 +6763,7 @@ Q.layout = function _Q_layout(element) {
 			var event = _layoutEvents[i];
 
 			// return if ResizeObserver defined on this element
-			if (_layoutObservers[i]) {
+			if (!force && _layoutObservers[i]) {
 				return;
 			}
 
@@ -13404,18 +13406,21 @@ Q.onInit.add(function () {
 		Q.addEventListener(document.body, 'click', _enableSpeech, false, true);
 	}
 
-	Q.Text.get('Q/content', function (err, text) {
-		if (!text) {
-			return;
-		}
-		Q.extend(Q.text.Q, 10, text);
-		Q.extend(Q.confirm.options, 10, Q.text.confirm);
-		Q.extend(Q.prompt.options, 10, Q.text.prompt);
-		Q.extend(Q.alert.options, 10, Q.text.alert);
-		var QtQw = Q.text.Q.words;
-		QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
-		QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
-	});
+	if (['en', 'en-US'].indexOf(Q.Text.languageLocale) < 0) {
+		Q.Text.get('Q/content', function (err, text) {
+			if (!text) {
+				return;
+			}
+			Q.extend(Q.text.Q, 10, text);
+			Q.extend(Q.confirm.options, 10, Q.text.confirm);
+			Q.extend(Q.prompt.options, 10, Q.text.prompt);
+			Q.extend(Q.alert.options, 10, Q.text.alert);
+			var QtQw = Q.text.Q.words;
+			QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
+			QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
+			Q.layout(null, true);
+		});
+	}
 	
 	// load this ASAP so dialogs can load synchronously (for keyboard focus, etc.)
 	Q.addScript("{{Q}}/js/fn/dialog.js");

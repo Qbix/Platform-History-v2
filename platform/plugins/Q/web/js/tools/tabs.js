@@ -89,15 +89,15 @@
 			touchlabels: undefined,
 			contextualHandler: null,
 			overflow: {
-				content: '<span><span>{{count}} ' + Q.text.Q.tabs.more  + '</span></span>',
-				alreadyVisible: '<span><span>{{count}} ' + Q.text.Q.tabs.more  + '</span></span>',
+				content: '<span><span>{{count}} {{more}}</span></span>',
+				alreadyVisible: '<span><span>{{count}} {{more}}</span></span>',
 				glyph: '<svg class="Q_overflow_glyph_svg" viewBox="0 0 100 80" width="40" height="40">'
 				    + '<rect y="10" width="100" height="10" rx="8"></rect>'
 				    + '<rect y="40" width="100" height="10" rx="8"></rect>'
 				    + '<rect y="70" width="100" height="10" rx="8"></rect>'
 					+'</svg>',
-				defaultText: Q.text.Q.tabs.more,
-				defaultHtml: Q.text.Q.tabs.more
+				defaultText: null,
+				defaultHtml: null
 			},
 			retain: {},
 			loaderOptions: {
@@ -521,8 +521,9 @@
 				var $tab = $(state.tab);
 				var values = {
 					count: $tabs.length - index - 1,
-					text: $tab.text() || state.overflow.defaultText,
-					html: $tab.html() || state.overflow.defaultHtml
+					text: $tab.text() || state.overflow.defaultText || Q.text.Q.more,
+					html: $tab.html() || state.overflow.defaultHtml || Q.text.Q.more,
+					more: Q.text.Q.tabs.more
 				};
 				var html = this.state.overflow.content.interpolate(values);
 				if (index >= 0 && state.overflow) {
