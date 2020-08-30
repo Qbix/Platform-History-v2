@@ -5728,7 +5728,11 @@ Q.Page.push = function (url, title) {
 	var parts = url.split('#');
 	var path = (url.substr(Q.baseUrl().length+1) || '');
 	if (history.pushState) {
-		history.pushState({}, null, url);
+		if (typeof title === 'string') {
+			history.pushState({}, title, url);	
+		} else {
+			history.pushState({}, null, url);
+		}
 	} else {
 		var hash = '#!url=' + encodeURIComponent(path) +
 			location.hash.replace(/#!url=[^&]*/, '')
@@ -8886,7 +8890,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				}
 
 				if (!o.ignoreHistory) {
-					Q.Page.push(url);
+					Q.Page.push(url, Q.getObject('slots.title', response));
 				}
 			
 				if (!o.ignorePage) {

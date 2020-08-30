@@ -232,6 +232,9 @@
 								elementsWithProperties: {}
 							});
 							Q.each(slots, function (i, slotName) {
+								if (slotName === 'title') {
+									return;
+								}
 								var s = retained.stored[slotName] = document.createElement('div');
 								var c = slotContainer(slotName);
 								var r = retained.elementsWithProperties[slotName];
