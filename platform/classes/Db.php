@@ -399,6 +399,14 @@ abstract class Db
 		} else { // standalone, no Q
 			$results = self::$connections;
 		}
+		foreach ($results as $name => &$info) {
+			if (!isset($info['prefix'])) {
+				$info['prefix'] = strtolower($name) . '_';
+			}
+			if (!isset($info['shards'])) {
+				$info['shards'] = array();
+			}
+		}
 		if ($base = self::getConnection('*')) {
 			foreach ($results as $k => $r) {
 				$results[$k] = array_merge($base, $r);
@@ -423,6 +431,12 @@ abstract class Db
 			$result = isset(self::$connections['name'])
 				? self::$connections[$name]
 				: array();
+		}
+		if (!isset($result['prefix'])) {
+			$result['prefix'] = strtolower($name) . '_';
+		}
+		if (!isset($info['shards'])) {
+			$result['shards'] = array();
 		}
 		return ($name !== '*' and $base = self::getConnection('*'))
 			? array_merge($base, $result)
