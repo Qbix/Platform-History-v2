@@ -20,6 +20,7 @@ table { table-layout: fixed; }
 
 /* The various slot containers */
 #notices_slot {
+	position: fixed;
 	text-align: center;
 }
 #content_slot {
