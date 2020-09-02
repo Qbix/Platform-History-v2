@@ -30,7 +30,7 @@
 				return;
 			}
 
-			var previewTool = Q.Tool.from($preview, "Websites/webpage/preview");
+			var previewTool = Q.Tool.from($preview, "Websites/webpage/preview") || Q.Tool.from($preview, "Streams/audio/preview") || Q.Tool.from($preview, "Streams/video/preview");
 
 			if (Q.typeOf(previewTool) === 'Q.Tool') {
 				fields.instructions = Q.extend({}, fields.instructions, {
@@ -53,7 +53,7 @@
 			fields.html = $html[0].outerHTML;
 		}, tool);
 
-		Q.Tool.onActivate('Websites/webpage/preview').set(function () {
+		var _openNewWindow = function () {
 			var previewTool = this;
 			var $te = $(this.element);
 
@@ -62,7 +62,10 @@
 					window.open(previewTool.state.url, '_blank');
 				});
 			}
-		}, tool);
+		};
+
+		Q.Tool.onActivate('Websites/webpage/preview').set(_openNewWindow, tool);
+		Q.Tool.onActivate('Streams/video/preview').set(_openNewWindow, tool);
 
 		// parse old messages
 		Q.each($(".Streams_chat_item", tool.chatTool.element), function (i, element) {
@@ -120,8 +123,14 @@
 						}
 
 						var siteData = response.slots.result;
+						var streamType = Q.Websites.getStreamType(url);
 
-						$(".Websites_webpage_preview_tool", websitesPreview[url]).tool("Websites/webpage/preview", {
+						$(".Websites_webpage_chat_preview", websitesPreview[url]).tool("Streams/preview", {
+							publisherId: response.slots.publisherId,
+							streamName: response.slots.streamName,
+							closeable: false,
+							editable: false
+						}).tool(streamType + "/preview", {
 							publisherId: response.slots.publisherId,
 							streamName: response.slots.streamName,
 							editable: false
@@ -175,8 +184,22 @@
 			instructions = Q.getObject('Websites/webpages', JSON.parse(instructions || null));
 			if (instructions) {
 				var elementToAppend = state.appendTo === 'bubble' ? $(".Streams_chat_bubble", element) : element;
+				var streamType = instructions.streamName.substr(0, instructions.streamName.lastIndexOf("/"));
 				instructions.editable = false;
-				$(Q.Tool.setUpElementHTML('div', 'Websites/webpage/preview', instructions)).appendTo(elementToAppend);
+
+				var streamsPreview = Q.Tool.setUpElementHTML('div', 'Streams/preview', {
+					publisherId: instructions.publisherId,
+					streamName: instructions.streamName,
+					closeable: false,
+					editable: false
+				});
+				var specialPreview = Q.Tool.setUpElementHTML($(streamsPreview).addClass("Websites_webpage_chat_preview")[0], streamType + '/preview', {
+					publisherId: instructions.publisherId,
+					streamName: instructions.streamName,
+					editable: false
+				});
+
+				$(specialPreview).appendTo(elementToAppend);
 			}
 
 			// mark element as processed
@@ -195,7 +218,7 @@
 
 			for (var url in websitesPreview) {
 				if (websitesPreview[url]) {
-					return $(".Websites_webpage_preview_tool", websitesPreview[url]);
+					return $(".Streams_preview_tool", websitesPreview[url]);
 				}
 			}
 
@@ -220,7 +243,7 @@
 
 	Q.Template.set('Websites/webpage/chat',
 		'<div class="Websites_webpage_chat">' +
-		'	<div class="Websites_webpage_preview_tool"><img src="{{src}}"></div>' +
+		'	<div class="Websites_webpage_chat_preview"><img src="{{src}}"></div>' +
 		'	<a class="Q_close"></a>' +
 		'</div>'
 	);

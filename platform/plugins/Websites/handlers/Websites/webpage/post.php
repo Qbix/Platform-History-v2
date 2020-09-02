@@ -15,4 +15,6 @@ function Websites_webpage_post($params)
 
 	Q_Response::setSlot('publisherId', $stream->publisherId);
 	Q_Response::setSlot('streamName', $stream->name);
+
+	return $stream;
 }

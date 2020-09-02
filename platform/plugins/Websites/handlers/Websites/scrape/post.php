@@ -5,11 +5,12 @@ function Websites_scrape_post($params)
 	// don't let just anyone call this, but only pages loaded from valid sessions
 	Q_Valid::nonce(true);
 
-	$r = array_merge($_REQUEST, $params);
+    $params = array_merge($_REQUEST, $params);
 
-	$fields = Q::take($r, array('url'));
+	$fields = Q::take($params, array('url', 'skipStream'));
 
 	$url = $fields['url'];
+	$skipStream = (bool)$fields['skipStream'];
 
 	if (parse_url($url, PHP_URL_SCHEME) === null) {
 		$url = 'http://'.$url;
@@ -23,14 +24,16 @@ function Websites_scrape_post($params)
 
 	$result = Websites_Webpage::scrape($url);
 
-	// if stream for this URL already exist, return it
-	$streamExist = Websites_scrape_fetchStream($result['url']);
-	if ($streamExist) {
-		return Q_Response::setSlot('result', $streamExist);
-	}
+	if (!$skipStream) {
+        // if stream for this URL already exist, return it
+        $stream = Websites_scrape_fetchStream($result['url']);
+        if (!$stream) {
+            $stream = Q::event('Websites/webpage/post', $result);
+        }
 
-	Q::event('Websites/webpage/post', $result);
-	
+        return Q_Response::setSlot('result', $stream);
+    }
+
 	Q_Response::setSlot('result', $result);
 }
 
