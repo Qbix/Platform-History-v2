@@ -65,8 +65,33 @@ var Websites = Q.Websites = Q.plugins.Websites = {
 				}
 			);
 		}
+	},
+	/**
+	 *	Get stream type from url
+	 * @method getStreamType
+	 * @param {string} url
+	 * @return {string}
+	 */
+	getStreamType: function (url) {
+		var urlParsed = new URL(url);
+		var host = urlParsed.host;
+		var extension = url.substr(url.lastIndexOf('.') + 1);
+
+		var videoHosts = Q.getObject("Q.Websites.videoHosts");
+		var videoExtensions = Q.getObject("Q.Websites.videoExtensions");
+		var audioHosts = Q.getObject("Q.Websites.audioHosts");
+		var audioExtensions = Q.getObject("Q.Websites.audioExtensions");
+
+		if (new RegExp(videoHosts.join("|"), 'gi').test(host) || new RegExp(videoExtensions.join("|"), 'gi').test(extension)) {
+			return "Streams/video";
+		}
+
+		if (new RegExp(audioHosts.join("|"), 'gi').test(host) || new RegExp(audioExtensions.join("|"), 'gi').test(extension)) {
+			return "Streams/audio";
+		}
+
+		return 'Websites/webpage';
 	}
-	
 };
 
 /**
