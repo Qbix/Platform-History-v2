@@ -54,18 +54,23 @@
 		}, tool);
 
 		var _openNewWindow = function () {
-			var previewTool = this;
+			var previewState = this.state;
 			var $te = $(this.element);
 
 			if ($te.closest('.Streams_chat_item').length) {
-				$te.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
-					window.open(previewTool.state.url, '_blank');
+				Q.Streams.get(previewState.publisherId, previewState.streamName, function () {
+					var url = this.getAttribute('url');
+
+					$te.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
+						window.open(url, '_blank');
+					});
 				});
 			}
 		};
 
 		Q.Tool.onActivate('Websites/webpage/preview').set(_openNewWindow, tool);
 		Q.Tool.onActivate('Streams/video/preview').set(_openNewWindow, tool);
+		Q.Tool.onActivate('Streams/audio/preview').set(_openNewWindow, tool);
 
 		// parse old messages
 		Q.each($(".Streams_chat_item", tool.chatTool.element), function (i, element) {
