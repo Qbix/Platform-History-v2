@@ -24,8 +24,10 @@
 			var ps = preview.state;
 
 			// set edit action
-			ps.actions.actions = {
-				edit: function () {
+			ps.actions.actions = ps.actions.actions || {};
+
+			if (ps.editable) {
+				ps.actions.actions.edit = function () {
 					var fields = {
 						fileUploadUHandler: Q.action("Streams/Stream"),
 						publisherId: ps.publisherId,
@@ -38,7 +40,8 @@
 
 					$("<div>").tool("Q/audio", fields).activate();
 				}
-			};
+
+			}
 
 			if (ps.creatable) {
 				if (ps.creatable.clickable) {
