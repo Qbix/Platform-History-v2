@@ -127,7 +127,6 @@
 							return _close();
 						}
 
-						var siteData = response.slots.result;
 						var streamType = Q.Websites.getStreamType(url);
 
 						$(".Websites_webpage_chat_preview", websitesPreview[url]).tool("Streams/preview", {
@@ -146,7 +145,7 @@
 							$te.outerWidth($form.innerWidth());
 
 							$te.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
-								window.open(siteData.url, '_blank');
+								window.open(url, '_blank');
 							});
 						});
 					}, {
