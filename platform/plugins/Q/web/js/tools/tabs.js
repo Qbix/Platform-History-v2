@@ -579,7 +579,7 @@
 					$overflow.addClass('Q_current');
 				}
 				tool.overflowIndex = index;
-				if (tool.$overflow && tool.$overflow.is(':visible')) {
+				if (tool.$overflow && tool.$overflow.closest('html').length) {
 					tool.$tabs.css('visibility', 'visible');
 					Q.handle(state.onRefresh, this);
 					Q.handle(callback, tool);
