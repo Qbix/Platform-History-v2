@@ -22,6 +22,7 @@
 			var tool = this;
 			tool.preview = preview;
 			var ps = preview.state;
+			var state = this.state;
 
 			// set edit action
 			ps.actions.actions = ps.actions.actions || {};
@@ -38,7 +39,15 @@
 						}
 					};
 
-					$("<div>").tool("Q/audio", fields).activate();
+					// if Q/audio tool already created, use one
+					if (state.qAudio) {
+						state.qAudio.recorder();
+					} else {
+						// activate new Q/audio tool and save to state
+						$("<div>").tool("Q/audio", fields).activate(function () {
+							state.qAudio = this;
+						});
+					}
 				}
 
 			}
@@ -56,8 +65,15 @@
 						onSuccess: _proceed
 					};
 
-					// activate Q/audio tool
-					$(tool.element).tool("Q/audio", fields).activate();
+					// if Q/audio tool already created, use one
+					if (state.qAudio) {
+						state.qAudio.recorder();
+					} else {
+						// activate new Q/audio tool and save to state
+						$("<div>").tool("Q/audio", fields).activate(function () {
+							state.qAudio = this;
+						});
+					}
 
 					return false;
 				};
