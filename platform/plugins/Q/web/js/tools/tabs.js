@@ -532,7 +532,8 @@
 				if (index >= 0 && state.overflow) {
 					tabAlreadyVisible = ($tab.data('index') < index);
 					$copied = $('<span class="Q_tabs_copiedTitle">').html(html);
-					$overflow = $('<li class="Q_tabs_tab Q_tabs_overflow" />')
+					$overflow = tool.$overflow ||
+						$('<li class="Q_tabs_tab Q_tabs_overflow" />')
 						.empty().append($copied);
 					if (state.overflow.glyph) {
 						$('<span class="Q_tabs_overflowGlyph" />')
