@@ -580,6 +580,7 @@
 				}
 				tool.overflowIndex = index;
 				if (tool.$overflow && tool.$overflow.closest('html').length) {
+					tool.$overflow.plugin('Q/contextual', 'remove');
 					tool.$tabs.css('visibility', 'visible');
 					Q.handle(state.onRefresh, this);
 					Q.handle(callback, tool);
