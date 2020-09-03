@@ -570,6 +570,7 @@
 					return callback && callback.call(tool);
 				}
 				tool.overflowIndex = index;
+				tool.$overflow = $overflow;
 				if (tabAlreadyVisible) {
 					$overflow.addClass('Q_tabs_alreadyVisible')
 					.find('.Q_tabs_copiedTitle').html(
@@ -579,17 +580,14 @@
 					_copyClassToOverflow(tool);
 					$overflow.addClass('Q_current');
 				}
-				if (tool.$overflow) {
-					return; // the rest has already been done
-				}
-				tool.$overflow = $overflow;
 				Q.addScript("{{Q}}/js/QTools.js", function () {
 					var elements = [];
 					for (var i=index+1; i<$tabs.length; ++i) {
 						elements.push($tabs[i]);
 					}
 					$(elements).removeAttr('data-touchlabel');
-					$overflow.plugin("Q/contextual", {
+					$overflow.plugin("Q/contextual", "remove")
+					.plugin("Q/contextual", {
 						elements: elements,
 						className: "Q_tabs_contextual",
 						defaultHandler: state.contextualHandler,
