@@ -101,7 +101,7 @@
 			},
 			retain: {},
 			loaderOptions: {
-				retainPropertiesOf: '.Q_overflow,.Q_columns_column'
+				retainPropertiesOf: '.Q_overflow,.Q_column_slot'
 			},
 			loader: Q.req,
 			onClick: new Q.Event(),
@@ -299,9 +299,9 @@
 									&& retained.elementsWithProperties[slotName];
 								Q.replace(element, this);
 								Q.each (ep, function () {
-									Q.each(this.Q_retained_properties, function (k, v) {
-										element[k] = v;
-									});
+									for (var k in this.Q_retained_properties) {
+										this[k] = v;
+									}
 									delete this.Q_retained_properties;
 								});
 								Q.activate(element);
