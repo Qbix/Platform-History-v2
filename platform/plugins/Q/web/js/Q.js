@@ -11810,7 +11810,7 @@ Q.Pointer = {
 		div.addClass('Q_touchlabel');
 		document.body.appendChild(div);
 		Q.addEventListener(element, 'touchstart touchmove mousemove', function (e) {
-			if (!Q.Pointer.which(e)) {
+			if (!Q.Pointer.isPressed(e)) {
 				return;
 			}
 			var x = Q.Pointer.getX(e);
