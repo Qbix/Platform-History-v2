@@ -14,3 +14,7 @@
 .Streams_audio_preview_tool iframe {
 	display: none;
 }
+
+.Streams_audio_preview_tool .Streams_preview_container {
+	white-space: nowrap;
+}

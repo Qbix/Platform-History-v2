@@ -27,29 +27,34 @@
 			// set edit action
 			ps.actions.actions = ps.actions.actions || {};
 
-			if (ps.editable) {
-				ps.actions.actions.edit = function () {
-					var fields = {
-						fileUploadUHandler: Q.action("Streams/Stream"),
-						publisherId: ps.publisherId,
-						streamName: ps.streamName,
-						action: "recorder",
-						onSuccess: function () {
-							Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, null, {messages: true});
+			if (ps.editable && ps.publisherId && ps.streamName) {
+				Q.Streams.get(ps.publisherId, ps.streamName, function () {
+					if (!this.testWriteLevel('edit')) {
+						return;
+					}
+
+					ps.actions.actions.edit = function () {
+						var fields = {
+							fileUploadUHandler: Q.action("Streams/Stream"),
+							publisherId: ps.publisherId,
+							streamName: ps.streamName,
+							action: "recorder",
+							onSuccess: function () {
+								Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, null, {messages: true});
+							}
+						};
+
+						// if Q/audio tool already created, use one
+						if (state.qAudio) {
+							state.qAudio.recorder();
+						} else {
+							// activate new Q/audio tool and save to state
+							$("<div>").tool("Q/audio", fields).activate(function () {
+								state.qAudio = this;
+							});
 						}
 					};
-
-					// if Q/audio tool already created, use one
-					if (state.qAudio) {
-						state.qAudio.recorder();
-					} else {
-						// activate new Q/audio tool and save to state
-						$("<div>").tool("Q/audio", fields).activate(function () {
-							state.qAudio = this;
-						});
-					}
-				}
-
+				});
 			}
 
 			if (ps.creatable) {
@@ -123,8 +128,7 @@
 				var ps = tool.preview.state;
 				var $te = $(tool.element);
 
-				var audioUrl = stream.getAttribute("Q.file.url") || stream.getAttribute("file.url") || stream.getAttribute("url");
-				audioUrl = audioUrl.interpolate({ "baseUrl": Q.info.baseUrl });
+				var audioUrl = stream.fileUrl();
 
 				$te.removeClass('Q_uploading');
 
