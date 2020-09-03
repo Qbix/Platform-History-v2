@@ -300,7 +300,7 @@
 								Q.replace(element, this);
 								Q.each (ep, function () {
 									for (var k in this.Q_retained_properties) {
-										this[k] = v;
+										this[k] = this.Q_retained_properties[k];
 									}
 									delete this.Q_retained_properties;
 								});
