@@ -452,7 +452,9 @@ class Q_Uri
 					// If this route has a special condition, test it
 					if (!empty($fields[''])) {
 						$params = array(
-							'fields' => $uri_fields, 
+							'uriFields' => $uri_fields,
+							'routeFields' => $fields,
+							'fields' => array_merge($fields, $uri_fields),
 							'pattern' => $pattern,
 							'fromUrl' => $url
 						);
