@@ -32,6 +32,9 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 	var element = $(this.element);
 	this.$input = $('input', element);
+	if (!this.$input) {
+		return; // some error
+	}
 	var cached = {};
 	var focusedResults = false;
 	tool.$results = $('<div style="text-align: left;" class="Streams_userChooser_results" />')
@@ -214,8 +217,12 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 {
 	end: function () {
-		this.$input.blur().trigger('Q_refresh');
-		this.$results.remove();
+		if (this.$input) {
+			this.$input.blur().trigger('Q_refresh');	
+		}
+		if (this.$results) {
+			this.$results.remove();	
+		}
 	},
 	Q: {
 		beforeRemove: function () {
