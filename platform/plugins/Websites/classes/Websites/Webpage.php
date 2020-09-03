@@ -35,8 +35,7 @@ class Websites_Webpage
 
         // try to get stream
         if ($checkStream) {
-            $streamType = self::getStreamType($url);
-            $stream = self::fetchStream($url, $streamType);
+            $stream = self::fetchStream($url);
             if ($stream) {
                 return  array(
                     'title' => $stream->title,
@@ -322,10 +321,14 @@ class Websites_Webpage
 	 * @method fetchStream
 	 * @static
 	 * @param {string} $url URL string to search stream by.
-     * @param {string} $streamType Type of stream to search
+     * @param {string} [$streamType=null] Type of stream to search. If null it auto detected with getStreamType method.
 	 * @return Streams_Stream
 	 */
-	static function fetchStream($url, $streamType = "Websites/webpage") {
+	static function fetchStream($url, $streamType = null) {
+        if (!$streamType) {
+            $streamType = self::getStreamType($url);
+        }
+
 		$streams = new Streams_Stream();
 		$streams->name = $streamType.'/'.self::normalizeUrl($url);
 		if ($streams->retrieve()) {
@@ -520,7 +523,7 @@ class Websites_Webpage
 
 		// check if stream for this url has been already created
 		// and if yes, return it
-		if ($webpageStream = self::fetchStream($url, $streamType)) {
+		if ($webpageStream = self::fetchStream($url)) {
 			return $webpageStream;
 		}
 		
