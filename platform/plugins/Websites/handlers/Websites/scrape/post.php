@@ -19,7 +19,8 @@ function Websites_scrape_post($params)
 	// if stream for this URL already exist, return it
 	$streamExist = Websites_scrape_fetchStream($url);
 	if ($streamExist) {
-		return Q_Response::setSlot('result', $streamExist);
+		Q_Response::setSlot('result', $streamExist);
+		return;
 	}
 
 	$result = Websites_Webpage::scrape($url);
@@ -31,7 +32,7 @@ function Websites_scrape_post($params)
             $stream = Q::event('Websites/webpage/post', $result);
         }
 
-        return Q_Response::setSlot('result', $stream);
+        Q_Response::setSlot('stream', $stream);
     }
 
 	Q_Response::setSlot('result', $result);
@@ -60,6 +61,7 @@ function Websites_scrape_fetchStream($url) {
 		}
 	}
 
+    Q_Response::setSlot('stream', $stream);
 	Q_Response::setSlot('publisherId', $stream->publisherId);
 	Q_Response::setSlot('streamName', $stream->name);
 

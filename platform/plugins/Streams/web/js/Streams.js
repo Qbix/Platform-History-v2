@@ -2196,7 +2196,8 @@ Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
  * @return {String|null} the url, or null if no url
  */
 Sp.fileUrl = function() {
-	var url = this.getAttribute('Q.file.url') || this.getAttribute('file.url');
+	var url = this.getAttribute("Q.file.url") || this.getAttribute("file.url") || this.getAttribute("url");
+
 	if (!url) {
 		return null;
 	}

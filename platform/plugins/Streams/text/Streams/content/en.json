@@ -319,11 +319,13 @@
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
-            "description": "audio clip"
+            "description": "audio clip",
+            "newItem": "New Audio"
         },
         "Streams\/video": {
             "displayType": "Video Clip",
-            "description": "video clip"
+            "description": "video clip",
+            "newItem": "New Video"
         },
         "Streams\/live": {
             "displayType": "Livestream",

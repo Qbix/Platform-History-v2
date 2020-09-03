@@ -21,6 +21,9 @@ Q.Tool.define("Q/audio", function (options) {
 		state.url = state.url.interpolate({ "baseUrl": Q.info.baseUrl });
 	}
 
+	// convert to milliseconds, as we use milliseconds everywhere for calculations
+	state.maxRecordTime *= 1000;
+
 	tool.adapters = {
 		"soundcloud": {
 			implement: function () {
@@ -176,6 +179,7 @@ Q.Tool.define("Q/audio", function (options) {
 },
 
 {
+	action: "recorder",
 	url: null,
 	autoplay: false,
 	display: "classic", // "compact" | "soundcloud"
@@ -390,6 +394,20 @@ Q.Tool.define("Q/audio", function (options) {
 							e.stopPropagation();
 							Q.Pointer.cancelClick(false, e);
 						});
+
+						// save by URL
+						$("button[name=save]", mainDialog).on(Q.Pointer.click, function (e) {
+							e.preventDefault();
+							e.stopPropagation();
+
+							var url = $("input[name=url]", mainDialog).val();
+
+							if (!url.matchTypes('url').length) {
+								return Q.alert(tool.text.invalidURL);
+							}
+
+							tool.pick(url);
+						});
 					},
 					beforeClose: function(mainDialog) {
 						// clear recorder stream when dialog close.
@@ -498,10 +516,10 @@ Q.Tool.define("Q/audio", function (options) {
 		// start recorder timer to handle all recorder interface actions
 		state.recordIntervalID = setInterval(function(){
 			// set currentRecordTime to maxRecordTime if undefined
-			if(typeof state.currentRecordTime === 'undefined') state.currentRecordTime = state.maxRecordTime - 1;
+			if(typeof state.currentRecordTime === 'undefined') state.currentRecordTime = state.maxRecordTime - 1000;
 
 			// decrease currentRecordTime to 100 milliseconds
-			state.currentRecordTime -= 0.1;
+			state.currentRecordTime -= 100;
 
 			// set time element text
 			state.recordTimeElement.html(tool.formatRecordTime(state.currentRecordTime) + '/' + tool.formatRecordTime(state.maxRecordTime));
@@ -583,8 +601,9 @@ Q.Tool.define("Q/audio", function (options) {
 	/**
 	 * Set the audio
 	 * @method pick
+	 * @param {blob|string} src Can be file blob data or url string
 	 */
-	pick: function (src, callback) {
+	pick: function (src) {
 		var tool = this;
 		var state = this.state;
 		var _upload = function (data) {
@@ -595,7 +614,39 @@ Q.Tool.define("Q/audio", function (options) {
 			_doUpload(data);
 		};
 
-		Q.handle(_upload, tool, [src]);
+		if (src.startsWith('data:audio')) {
+			// file uploading
+			Q.handle(_upload, tool, [src]);
+		} else if (src.matchTypes('url').length) {
+			// url defined
+			Q.req('Websites/scrape', ['result'], function (err, response) {
+				var msg = Q.firstErrorMessage(err, response && response.errors);
+				if (msg) {
+					Q.Dialogs.pop();
+					return console.warn("Q/audio: " + msg);
+				}
+
+				var siteData = response.slots.result;
+
+				Q.handle([state.onSuccess, state.onFinish], tool, [{
+					title: siteData.title,
+					content: siteData.description,
+					icon: siteData.bigIcon,
+					attributes: {
+						host: siteData.host,
+						smallIcon: siteData.smallIcon,
+						url: src
+					}
+				}]);
+				Q.Dialogs.pop();
+			}, {
+				method: 'post',
+				fields: {url: src}
+			});
+		} else {
+			throw new Q.Exception("Q/audio: src invalid");
+		}
+
 
 		function _doUpload(data) {
 			var params = {
@@ -606,7 +657,7 @@ Q.Tool.define("Q/audio", function (options) {
 				}
 			};
 
-			if(state.publisherId && state.streamName) { // if new stream
+			if(state.publisherId && state.streamName) { // if edit existent stream
 				params.publisherId = state.publisherId;
 				params.streamName = state.streamName;
 				params.file.name = state.file.name;
@@ -638,7 +689,7 @@ Q.Tool.define("Q/audio", function (options) {
 					}).parent().submit();
 					state.input.unwrap();
 				}
-			} else { // if edit existent stream
+			} else { // if new stream
 				Q.handle([state.onSuccess, state.onFinish], tool, [params]);
 				Q.Dialogs.pop();
 			}
@@ -673,7 +724,7 @@ Q.Tool.define("Q/audio", function (options) {
 				tool.$playerBox.removeClass("Q_disabled")
 			});
 
-			$pieElement.on(Q.Pointer.click, function (event) {
+			$pieElement.on(Q.Pointer.fastclick, function (event) {
 				event.stopPropagation();
 				event.preventDefault();
 
@@ -681,6 +732,7 @@ Q.Tool.define("Q/audio", function (options) {
 				if(!pieTool.state.clickPos.inside){
 					var newPosition = state.duration/100*pieTool.state.clickPos.anglePercent;
 					tool.setCurrentPosition(newPosition);
+					tool.play();
 					return;
 				}
 
@@ -810,8 +862,11 @@ Q.Template.set('Q/audio/record',
 	+ '  </div>'
 	+ '  <div class="Q_audio_actions">'
 	+ '	   <button name="upload">{{text.orupload}}</button>'
+	+ '	   <label for="url"><input name="url" placeholder="{{text.orseturl}}" type="url"><button name="save">{{text.save}}</button></label>'
 	+ '	   <button name="usethis">{{text.usethis}}</button>'
 	+ '	   <button name="discard">{{text.discard}}</button>'
+	+ '	   <hr>'
+	+ '    <div style="overflow: hidden"><input name="clipStart" placeholder="{{text.setClipStart}} hh:mm:ss"><input name="clipEnd" placeholder="{{text.setClipEnd}} hh:mm:ss"></div>'
 	+ '  </div>'
 	+ '  <audio class="play" controls="true"></audio>'
 	+ '  <div class="Q_audio_encoding">{{text.encoding}}</div>'

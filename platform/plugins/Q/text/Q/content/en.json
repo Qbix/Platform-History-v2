@@ -44,6 +44,11 @@
         "recorded": "Recorded",
         "clip": "clip",
         "orupload": "Or Upload",
+        "orseturl": "Or Set URL",
+        "save": "save",
+        "setClipStart": "set clip start",
+        "setClipEnd": "set clip end",
+        "invalidURL": "Invalid URL",
         "usethis": "Use This",
         "discard": "Discard",
         "encoding": "Encoding"

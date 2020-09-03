@@ -41,11 +41,39 @@ div[data-state=pause] .Q_tool.Q_pie_tool .Q_pie_box {
 	background-image: url(../img/audio/pause.png);
 }
 
-.Q_dialog_audio[data-state] .Q_audio_start button[name=upload] {
+.Q_dialog_audio[data-state] .Q_audio_start button[name=upload],
+.Q_dialog_audio[data-state] .Q_audio_start label {
 	display: none;
 }
 
+.Q_audio_start label[for=url] {
+	margin-top: 10px;
+	display: block;
+	white-space: nowrap;
+}
+.Q_audio_start label[for=url] button,
+.Q_audio_start label[for=url] input {
+	display: inline-block;
+}
+.Q_audio_start label[for=url] input {
+	width: 60%;
+	margin-right: 5px;
+}
+
 .Q_dialog_audio .Q_audio_actions { text-align: center; }
+.Q_dialog_audio .Q_audio_actions hr { border-top: 1px solid #000; }
+
+.Q_dialog_audio .Q_audio_actions input[name=clipStart],
+.Q_dialog_audio .Q_audio_actions input[name=clipEnd] {
+	display: inline-block;
+	width: 45%;
+}
+.Q_dialog_audio .Q_audio_actions input[name=clipStart] {
+	float: left;
+}
+.Q_dialog_audio .Q_audio_actions input[name=clipEnd] {
+	float: right;
+}
 
 .Q_audio_start button[name=usethis] { display: none; }
 .Q_audio_start button[name=discard] { display: none; }
