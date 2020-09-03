@@ -569,8 +569,6 @@
 					Q.handle(state.onRefresh, this);
 					return callback && callback.call(tool);
 				}
-				tool.overflowIndex = index;
-				tool.$overflow = $overflow;
 				if (tabAlreadyVisible) {
 					$overflow.addClass('Q_tabs_alreadyVisible')
 					.find('.Q_tabs_copiedTitle').html(
@@ -580,6 +578,15 @@
 					_copyClassToOverflow(tool);
 					$overflow.addClass('Q_current');
 				}
+				tool.overflowIndex = index;
+				if (tool.$overflow) {
+					tool.$tabs.css('visibility', 'visible');
+					Q.handle(state.onRefresh, this);
+					Q.handle(callback, tool);
+					$overflow.css('visibility', 'visible');
+					return;
+				}
+				tool.$overflow = $overflow;
 				Q.addScript("{{Q}}/js/QTools.js", function () {
 					var elements = [];
 					for (var i=index+1; i<$tabs.length; ++i) {
