@@ -124,6 +124,9 @@ function Streams_stream_put($params) {
 		}
 		Q_Response::setSlot('file', Q::event("Q/file/post", $file));
 		// the Streams/after/Q_file_save hook saves some attributes
+
+		// as Q/file/post changed stream, try to get stream from cache, so as not to lose the saved data
+		$stream = Q::ifset(Streams::$cache, 'canWriteToStream', $stream);
 	}
 
 	if (!empty($fieldNames)) {
