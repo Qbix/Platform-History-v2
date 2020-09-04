@@ -1,9 +1,9 @@
 (function (window, Q, $, undefined) {
-	
+
 /**
  * @module Q
  */
-	
+
 /**
  * YUIDoc description goes here
  * @class Q audio
@@ -275,7 +275,7 @@ Q.Tool.define("Q/audio", function (options) {
 
 					var siteData = response.slots.result;
 
-					Q.handle([state.onSuccess, state.onFinish], tool, [{
+					var params = {
 						title: siteData.title,
 						content: siteData.description,
 						icon: siteData.bigIcon,
@@ -283,11 +283,33 @@ Q.Tool.define("Q/audio", function (options) {
 							host: siteData.host,
 							smallIcon: siteData.smallIcon,
 							url: url,
+							'Q.file.url': "",
+							'file.url': "",
 							clipStart: $clipStart.val(),
 							clipEnd: $clipEnd.val()
 						}
-					}]);
-					Q.Dialogs.pop();
+					};
+
+					// edit stream
+					if (state.streamName) {
+						Q.Streams.get(state.publisherId, state.streamName, function () {
+							var stream = this;
+
+							Q.each(params, function (name, value) {
+								stream.pendingFields[name] = value;
+							});
+							stream.save({
+								onSave: function () {
+									Q.handle([state.onSuccess, state.onFinish], tool, [params]);
+									Q.Dialogs.pop();
+								}
+							});
+						});
+					} else {
+						// new stream
+						Q.handle([state.onSuccess, state.onFinish], tool, [params]);
+						Q.Dialogs.pop();
+					}
 				}, {
 					method: 'post',
 					fields: {url: url}
@@ -641,9 +663,9 @@ Q.Tool.define("Q/audio", function (options) {
 
 		// we have promise on mobile device which need user gesture
 		promise.then(function() {
-			//console.log('The play() Promise fulfilled!');
+			console.log('The play() Promise fulfilled!');
 		}).catch(function(error) {
-			//console.log('The play() Promise rejected!');
+			console.log('The play() Promise rejected!');
 			Q.Dialogs.push({
 				className: 'Streams_audio_preview_dialog_promisePlay',
 				content: pieTool,
