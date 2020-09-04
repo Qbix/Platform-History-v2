@@ -172,6 +172,8 @@
 								action: "player",
 								url: audioUrl,
 								pie: pieOptions,
+								clipStart: stream.getAttribute('clipStart'),
+								clipEnd: stream.getAttribute('clipEnd'),
 								onLoad: function () { // when audio loaded (canplay event) - fill duration box
 									$durationBox.html(this.formatRecordTime(this.state.duration));
 								},
