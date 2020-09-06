@@ -1078,13 +1078,10 @@ class Streams_Stream extends Base_Streams_Stream
 		if ($this->publishedByFetcher) {
 			return true;
 		}
-		// check if user can manage streams published by publisherId
-		if ($canManage = Q_Config::get('Streams', 'canManage', null)) {
-			foreach(Users::byRoles($canManage) as $usersContact) {
-				if ($this->publisherId == $usersContact->userId) {
-					return true;
-				}
-			}
+
+		// check if logged in user manage publisher of stream
+		if (Streams::canManage($this->publisherId)) {
+			return true;
 		}
 
 		if (!empty($this->closedTime) && !$this->testWriteLevel('close')) {
@@ -1125,14 +1122,12 @@ class Streams_Stream extends Base_Streams_Stream
 		if ($this->publishedByFetcher) {
 			return true;
 		}
-		// check if user can manage streams published by publisherId
-		if ($canManage = Q_Config::get('Streams', 'canManage', null)) {
-			foreach(Users::byRoles($canManage) as $usersContact) {
-				if ($this->publisherId == $usersContact->userId) {
-					return true;
-				}
-			}
+
+		// check if logged in user manage publisher of stream
+		if (Streams::canManage($this->publisherId)) {
+			return true;
 		}
+
 		if (!empty($this->closedTime) && $level !== 'close') {
 			return false;
 		}
@@ -1168,13 +1163,10 @@ class Streams_Stream extends Base_Streams_Stream
 		if ($this->publishedByFetcher) {
 			return true;
 		}
-		// check if user can manage streams published by publisherId
-		if ($canManage = Q_Config::get('Streams', 'canManage', null)) {
-			foreach(Users::byRoles($canManage) as $usersContact) {
-				if ($this->publisherId == $usersContact->userId) {
-					return true;
-				}
-			}
+
+		// check if logged in user manage publisher of stream
+		if (Streams::canManage($this->publisherId)) {
+			return true;
 		}
 
 		if (!empty($this->closedTime) && !$this->testWriteLevel('close')) {
@@ -1270,7 +1262,6 @@ class Streams_Stream extends Base_Streams_Stream
 			}
 		}
 	}
-	
 	/**
 	 * Inherits access from any streams specified in the inheritAccess field.
 	 * @method inheritAccess
@@ -1305,13 +1296,9 @@ class Streams_Stream extends Base_Streams_Stream
 		$writeLevel_source = $this->get('writeLevel_source', $public_source);
 		$adminLevel_source = $this->get('adminLevel_source', $public_source);
 
-		// check if user can manage streams published by publisherId
-		if ($canManage = Q_Config::get('Streams', 'canManage', null)) {
-			foreach(Users::byRoles($canManage) as $usersContact) {
-				if ($this->publisherId == $usersContact->userId) {
-					$readLevel = $writeLevel = $adminLevel = 40;
-				}
-			}
+		// check if logged in user manage publisher of stream
+		if (Streams::canManage($this->publisherId)) {
+			$readLevel = $writeLevel = $adminLevel = 40;
 		}
 
 		// Inheritance only goes one "generation" here.

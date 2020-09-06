@@ -296,6 +296,12 @@ abstract class Streams extends Base_Streams
 		'inherited_contact' => 4,
 		'inherited_direct' => 5
 	);
+	/**
+	 * Service property to save info about one user can manage other user.
+	 * @property $CAN_MANAGE['managerId']['managedId']
+	 * @type boolean
+	 */
+	public static $CAN_MANAGE = array();
 
 	/**
 	 * Fetches streams from the database.
@@ -4711,7 +4717,50 @@ abstract class Streams extends Base_Streams
 		}
 		return $realpath . DS . $subpath;
 	}
+	/**
+	 * Check if $manageUserId can manage $userId
+	 * @method canManage
+	 * @param {string} $userId User which can be managed by $manageUserId
+	 * @param {string} [$manageUserId=null] User checking for manage of $userId. If null - logged in user id used.
+	 * @return {boolean}
+	 */
+	static function canManage ($userId, $manageUserId = null) {
+		if (!$userId) {
+			return false;
+		}
 
+		if (empty($manageUserId)) {
+			$manageUserId = Users::loggedInUser();
+			if ($manageUserId instanceof Users_User) {
+				$manageUserId = $manageUserId->id;
+			} else {
+				// if
+				return false;
+			}
+		}
+
+		// if canManage already calculated for these users, return result
+		$resultExist = Q::ifset(Streams::$CAN_MANAGE, $manageUserId, $userId, null);
+		if ($resultExist !== null) {
+			return $resultExist;
+		}
+
+		// get canManage labels from config
+		$canManage = Q_Config::get('Streams', 'canManage', null);
+		if (empty($canManage)) {
+			return  false;
+		}
+
+		foreach(Users::byRoles($canManage) as $usersContact) {
+			if ($userId == $usersContact->userId) {
+				Streams::$CAN_MANAGE[$manageUserId][$userId] = true;
+				return true;
+			}
+		}
+
+		Streams::$CAN_MANAGE[$manageUserId][$userId] = false;
+		return false;
+	}
 	/**
 	 * Remove streams from the system, including all related rows.
 	 * @method remove

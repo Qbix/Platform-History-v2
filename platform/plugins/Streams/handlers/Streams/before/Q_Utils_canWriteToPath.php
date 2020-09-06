@@ -45,16 +45,10 @@ function Streams_before_Q_Utils_canWriteToPath($params, &$result)
 			}
 
 			// check if user can manage streams published by publisherId
-			if ($canManageLabels = Q_Config::get('Streams', 'canManage', null)) {
-				foreach(Users::byRoles($canManageLabels) as $usersContact) {
-					$splitId = Q_Utils::splitId($usersContact->userId, 3, '/');
-					$prefix2 = $prefix.$splitId;
-					if (substr($sp, 0, strlen($prefix2)) === $prefix2) {
-						$result = true; // user can write any invitations here
-                        Streams::$cache['canWriteToStream'] = $stream;
-						return;
-					}
-				}
+			if (Streams::canManage($publisherId)) {
+				$result = true; // user can write any invitations here
+				Streams::$cache['canWriteToStream'] = $stream;
+				return;
 			}
 
 			if ($c >= 3) {
