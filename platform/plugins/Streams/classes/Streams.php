@@ -4729,16 +4729,6 @@ abstract class Streams extends Base_Streams
 			return false;
 		}
 
-		if (empty($manageUserId)) {
-			$manageUserId = Users::loggedInUser();
-			if ($manageUserId instanceof Users_User) {
-				$manageUserId = $manageUserId->id;
-			} else {
-				// if
-				return false;
-			}
-		}
-
 		// if canManage already calculated for these users, return result
 		$resultExist = Q::ifset(Streams::$CAN_MANAGE, $manageUserId, $userId, null);
 		if ($resultExist !== null) {
@@ -4751,11 +4741,9 @@ abstract class Streams extends Base_Streams
 			return  false;
 		}
 
-		foreach(Users::byRoles($canManage) as $usersContact) {
-			if ($userId == $usersContact->userId) {
-				Streams::$CAN_MANAGE[$manageUserId][$userId] = true;
-				return true;
-			}
+		if (Users::roles($userId, $canManage, array(), $manageUserId)) {
+			Streams::$CAN_MANAGE[$manageUserId][$userId] = true;
+			return true;
 		}
 
 		Streams::$CAN_MANAGE[$manageUserId][$userId] = false;
