@@ -5,7 +5,6 @@
  */
 
 /**
- * YUIDoc description goes here
  * @class Q audio
  * @constructor
  * @param {Object} [options] Override various options for this tool
@@ -21,14 +20,7 @@ Q.Tool.define("Q/audio", function (options) {
 		state.url = state.url.interpolate({ "baseUrl": Q.info.baseUrl });
 	}
 
-	if (state.clipStart) {
-		state.clipStart = tool.convertToMiliseconds(state.clipStart);
-	}
-	if (state.clipEnd) {
-		state.clipEnd = tool.convertToMiliseconds(state.clipEnd);
-	}
-
-		// convert to milliseconds, as we use milliseconds everywhere for calculations
+	// convert to milliseconds, as we use milliseconds everywhere for calculations
 	state.maxRecordTime *= 1000;
 
 	tool.adapters = {
@@ -295,8 +287,8 @@ Q.Tool.define("Q/audio", function (options) {
 							url: url,
 							'Q.file.url': "",
 							'file.url': "",
-							clipStart: $clipStart.val(),
-							clipEnd: $clipEnd.val()
+							clipStart: state.clipStart,
+							clipEnd: state.clipEnd
 						}
 					};
 
@@ -337,8 +329,8 @@ Q.Tool.define("Q/audio", function (options) {
 					var params = {
 						title: file.name,
 						attributes: {
-							clipStart: $clipStart.val(),
-							clipEnd: $clipEnd.val()
+							clipStart: state.clipStart,
+							clipEnd: state.clipEnd
 						},
 						file: {
 							data: this.result,
@@ -395,6 +387,18 @@ Q.Tool.define("Q/audio", function (options) {
 				reader.readAsDataURL(file);
 				return;
 			}
+
+			// edit stream
+			if (tool.stream) {
+				tool.stream.setAttribute("clipStart", state.clipStart);
+				tool.stream.setAttribute("clipEnd", state.clipEnd);
+				tool.stream.save({
+					onSave: function () {
+						Q.handle([state.onSuccess, state.onFinish], tool);
+						Q.Dialogs.pop();
+					}
+				});
+			}
 		};
 
 		Q.Dialogs.push({
@@ -416,8 +420,6 @@ Q.Tool.define("Q/audio", function (options) {
 				var pieBox = tool.pieBox = $(".Q_audio_pie", mainDialog);
 				var pieElement = Q.Tool.setUpElement('div', 'Q/pie');
 				var $pieElement = $(pieElement);
-
-				var $playerElement = $(".Q_audio_player", mainDialog);
 
 				// set some elements
 				state.recordTimeElement = $(".Q_audio_record_recordTime", mainDialog);
@@ -455,13 +457,36 @@ Q.Tool.define("Q/audio", function (options) {
 					tool.recorderStateChange(recorderState);
 				});
 
+				var clipFields = {
+					mode: "composer",
+					onStart: function (time) {
+						state.clipStart = time;
+					},
+					onEnd: function (time) {
+						state.clipEnd = time;
+					}
+				};
 				// if stream defined, render player
 				if (tool.stream) {
-					$playerElement.tool("Q/audio", {
+					$(".Q_audio_player", mainDialog).tool("Q/audio", {
 						action: "renderPlayer",
-						url: tool.stream.fileUrl()
+						url: tool.stream.fileUrl(),
+						onPlaying: function () {
+							if (tool.clipTool) {
+								tool.clipTool.setTime(this.state.currentPosition, 'start');
+								tool.clipTool.setTime(this.state.currentPosition, 'end');
+							}
+						}
 					}).activate();
+
+					clipFields.mode = "editor";
+					clipFields.start = tool.stream.getAttribute('clipStart');
+					clipFields.end = tool.stream.getAttribute('clipEnd');
 				}
+
+				$(".Q_audio_clip", mainDialog).tool("Q/clip", clipFields).activate(function () {
+					tool.clipTool = this;
+				});
 
 				// save by URL
 				$("button[name=save]", mainDialog).on(Q.Pointer.click, function (e) {
@@ -867,25 +892,6 @@ Q.Tool.define("Q/audio", function (options) {
 		var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
 		return (hours ? hours + 'h ' : '') + (minutes ? minutes + 'm ' : '') + seconds+'s';
-	},
-	/**
-	 * Convert time from seconds or hh:mm:ss to miliseconds
-	 * @method convertToMiliseconds
-	 * @param {int|string} time Time in seonds or string hh:mm:ss
-	 * @return {string} formatted string
-	 */
-	convertToMiliseconds: function (time) {
-		// time in format hh:mm:ss
-		if (time.match(/\d{1,2}:\d{1,2}:\d{1,2}/)) {
-			var parts = time.split(':');
-			var hours = parseInt(parts[0], 10);
-			var minutes = parseInt(parts[1], 10);
-			var seconds = parseInt(parts[2], 10);
-
-			time = hours * 3600 + minutes * 60 + seconds;
-		}
-
-		return time * 1000;
 	}
 });
 
@@ -911,8 +917,7 @@ Q.Template.set('Q/audio/composer',
 	+ '  </div>'
 	+ '  <div class="Q_audio_actions" style="overflow: hidden">'
 	+ '    <div class="Q_audio_player"></div>'
-	+ '    <input name="clipStart" placeholder="{{text.setClipStart}} hh:mm:ss">'
-	+ '    <input name="clipEnd" placeholder="{{text.setClipEnd}} hh:mm:ss">'
+	+ '    <div class="Q_audio_clip"></div>'
 	+ '  </div>'
 	+ '  <div class="Q_audio_record_submit"><button name="save" class="Q_button" type="button">{{text.save}}</button><button name="reset" type="reset" class="Q_button">{{text.reset}}</button></div>'
 	+ '  <div class="Q_audio_encoding">{{text.encoding}}</div>'

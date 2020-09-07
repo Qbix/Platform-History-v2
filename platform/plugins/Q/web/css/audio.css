@@ -61,21 +61,6 @@ div[data-state=pause] .Q_tool.Q_pie_tool .Q_pie_box {
 	padding: 10px 0;
 	border-top: 1px solid #000;
 }
-.Q_dialog_audio .Q_audio_actions input[name=clipStart],
-.Q_dialog_audio .Q_audio_actions input[name=clipEnd] {
-	display: inline-block;
-	width: 47%;
-	padding: 5px;
-}
-.Q_dialog_audio .Q_audio_actions input[name=clipStart] {
-	float: left;
-}
-.Q_dialog_audio .Q_audio_actions input[name=clipEnd] {
-	float: right;
-}
-
-.Q_audio_start button[name=usethis] { display: none; }
-.Q_audio_start button[name=discard] { display: none; }
 
 div[data-content=record] .Q_audio_allow, .Q_audio_start .Q_audio_encoding {
 	display: none;

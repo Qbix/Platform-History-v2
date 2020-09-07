@@ -57,6 +57,12 @@
         "discard": "Discard",
         "encoding": "Encoding"
     },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End"
+    },
     "alert": {
         "title": "Alert"
     },
