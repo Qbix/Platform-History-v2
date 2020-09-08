@@ -1,3 +1,6 @@
+.Q_clip_tool {
+    overflow: hidden;
+}
 .Q_clip_tool input[name=start],
 .Q_clip_tool input[name=end],
 .Q_clip_tool button[name=start],

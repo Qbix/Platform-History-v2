@@ -29,7 +29,7 @@ Q.Tool.define("Q/clip", function (options) {
 },
 
 { // default options here
-	mode: 'composer',
+	mode: 'editor',
 	start: null,
 	end: null,
 	onStart: new Q.Event(),

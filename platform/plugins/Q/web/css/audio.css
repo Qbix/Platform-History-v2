@@ -105,11 +105,18 @@ div[data-content=record] .Q_audio_allow, .Q_audio_start .Q_audio_encoding {
 .Q_audio_record_content > div {
 	display: none;
 }
-.Q_audio_record_content div[data-content=upload] input,
-.Q_audio_record_content div[data-content=link] input {
+.Q_audio_record_content div[data-content=upload] input.Q_audio_file,
+.Q_audio_record_content div[data-content=link] label {
 	display: block;
-	margin: 50px auto;
+	margin: 40px auto;
 	width: 80%;
+	white-space: nowrap;
+}
+.Q_audio_record_content div[data-content=link] label button {
+	display: inline;
+}
+.Q_audio_record_content audio {
+	width: 100%;
 }
 .Q_audio_record_content > div.Q_selected {
 	display: block;
@@ -122,31 +129,39 @@ div[data-content=record] .Q_audio_allow, .Q_audio_start .Q_audio_encoding {
 }
 .Q_audio_start .Q_audio_record_select > button {
 	display: inline-block;
-	width: 80px;
-	height: 80px;
+	width: 60px;
+	height: 60px;
 	background-repeat: no-repeat;
 	background-position: top center;
 	margin: 0 2%;
 	border: 1px solid #000;
 	border-radius: 10px;
-	padding-top: 50px;
+	padding-top: 40px;
 }
 .Q_audio_start .Q_audio_record_select > button.Q_selected {
 	background-color: #0f0;
 }
+.Q_audio_start .Q_audio_record_select > button[name=edit] {
+	background-image: url('../img/audio/edit/40.png');
+}
+.Q_audio_start[data-composer=true] .Q_audio_record_select > button[name=edit],
+.Q_audio_start[data-composer=true] .Q_audio_record_content > [data-content=edit] {
+	display: none;
+}
 .Q_audio_start .Q_audio_record_select > button[name=record] {
-	background-image: url('../img/audio/microphone/50.png');
+	background-image: url('../img/audio/microphone/40.png');
 }
 .Q_audio_start .Q_audio_record_select > button[name=upload] {
-	background-image: url('../img/audio/upload/50.png');
+	background-image: url('../img/audio/upload/40.png');
 }
 .Q_audio_start .Q_audio_record_select > button[name=link] {
-	background-image: url('../img/audio/link/50.png');
+	background-image: url('../img/audio/link/40.png');
 }
 
 .Q_audio_start .Q_audio_record_submit {
 	text-align: center;
 	white-space: nowrap;
+	margin-top: 10px;
 }
 .Q_audio_start .Q_audio_record_submit button {
 	display: inline-block;
