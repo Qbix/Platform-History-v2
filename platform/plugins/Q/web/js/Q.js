@@ -6894,7 +6894,7 @@ Q.load = function _Q_load(plugins, callback, options) {
  */
 Q.url = function _Q_url(what, fields, options) {
 	var what2 = what || '';
-	if (what2.substr(0, 5) === 'data:') {
+	if (what2.startsWith('data:') || what2.startsWith('blob:')) {
 		return what2; // this is a special type of URL
 	}
 	var parts = what2.split('?');
