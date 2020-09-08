@@ -430,7 +430,6 @@ Q.Tool.define("Q/audio", function (options) {
 				// add Q/pie tool
 				pieBox.append(pieElement).activate(function(){
 					tool.pieTool = this;
-					tool.recorderStateChange("init");
 				});
 
 				// set Q/pie tool handler
@@ -466,6 +465,7 @@ Q.Tool.define("Q/audio", function (options) {
 						state.clipEnd = time;
 					}
 				};
+
 				// if stream defined, render player
 				if (tool.stream) {
 					$(".Q_audio_player", mainDialog).tool("Q/audio", {
@@ -531,6 +531,10 @@ Q.Tool.define("Q/audio", function (options) {
 				$(".Q_audio_record_select button", mainDialog).on(Q.Pointer.click, function (e) {
 					var $this = $(this);
 					var action = $this.prop('name');
+
+					if (action === "record") {
+						tool.recorderStateChange("init");
+					}
 
 					mainDialog.attr("data-action", action);
 					$this.addClass('Q_selected').siblings().removeClass('Q_selected');
