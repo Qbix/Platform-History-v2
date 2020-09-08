@@ -157,6 +157,7 @@ Q.Tool.define("Q/audio", function (options) {
 
 	tool.stream = null;
 	if (state.publisherId && state.streamName) {
+		state.isComposer = false;
 		Q.Streams.get(state.publisherId, state.streamName, function () {
 			tool.stream = this;
 			p.fill('stream')();
@@ -251,7 +252,6 @@ Q.Tool.define("Q/audio", function (options) {
 		var tool = this;
 		var state = this.state;
 		var hasUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
-		var isComposer = !tool.stream;
 
 		tool.implementNativeAudio();
 
@@ -260,8 +260,8 @@ Q.Tool.define("Q/audio", function (options) {
 		 * @method _process
 		 */
 		var _process = function() {
-			var $clipStart = $("input[name=clipStart]", state.mainDialog);
-			var $clipEnd = $("input[name=clipEnd]", state.mainDialog);
+			var clipStart = tool.clipTool ? tool.clipTool.getTime("start") : null;
+			var clipEnd = tool.clipTool ? tool.clipTool.getTime("end") : null;
 
 			state.mainDialog.addClass('Q_uploading');
 
@@ -287,8 +287,8 @@ Q.Tool.define("Q/audio", function (options) {
 							url: url,
 							'Q.file.url': "",
 							'file.url': "",
-							clipStart: state.clipStart,
-							clipEnd: state.clipEnd
+							clipStart: clipStart,
+							clipEnd: clipEnd
 						}
 					};
 
@@ -329,8 +329,8 @@ Q.Tool.define("Q/audio", function (options) {
 					var params = {
 						title: file.name,
 						attributes: {
-							clipStart: state.clipStart,
-							clipEnd: state.clipEnd
+							clipStart: clipStart,
+							clipEnd: clipEnd
 						},
 						file: {
 							data: this.result,
@@ -355,7 +355,7 @@ Q.Tool.define("Q/audio", function (options) {
 								// by default set src equal to first element of the response
 								var key = Q.firstKey(res.slots.data, {nonEmpty: true});
 
-								var c = Q.handle([state.onSuccess, state.onFinish], tool, [res.slots.data, key, file || null]);
+								Q.handle([state.onSuccess, state.onFinish], tool, [res.slots.data, key, file || null]);
 
 								Q.Dialogs.pop();
 							}, {
@@ -390,8 +390,8 @@ Q.Tool.define("Q/audio", function (options) {
 
 			// edit stream
 			if (tool.stream) {
-				tool.stream.setAttribute("clipStart", state.clipStart);
-				tool.stream.setAttribute("clipEnd", state.clipEnd);
+				tool.stream.setAttribute("clipStart", clipStart);
+				tool.stream.setAttribute("clipEnd", clipEnd);
 				tool.stream.save({
 					onSave: function () {
 						Q.handle([state.onSuccess, state.onFinish], tool);
@@ -409,7 +409,7 @@ Q.Tool.define("Q/audio", function (options) {
 				fields: {
 					maxRecordTime: tool.formatRecordTime(state.maxRecordTime),
 					textAllowMicrophoneAccess: tool.text.allowMicrophoneAccess,
-					isComposer: isComposer,
+					isComposer: state.isComposer,
 					text: tool.text
 				}
 			},
@@ -457,13 +457,7 @@ Q.Tool.define("Q/audio", function (options) {
 				});
 
 				var clipFields = {
-					mode: "composer",
-					onStart: function (time) {
-						state.clipStart = time;
-					},
-					onEnd: function (time) {
-						state.clipEnd = time;
-					}
+					mode: "composer"
 				};
 
 				// if stream defined, render player
@@ -520,7 +514,7 @@ Q.Tool.define("Q/audio", function (options) {
 						if (!url.matchTypes('url').length) {
 							return _error(tool.text.invalidURL);
 						}
-					} else if (isComposer) {
+					} else if (state.isComposer) {
 						return _error(tool.text.errorNoSource);
 					}
 
