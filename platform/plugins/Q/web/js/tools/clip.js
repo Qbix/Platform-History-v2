@@ -175,8 +175,16 @@ Q.Template.set('Q/clip/composer',
 
 );
 Q.Template.set('Q/clip/editor',
-	'<button name="start" class="{{startFixed}}" type="button">{{text.ClipStart}}: <span class="Q_clip_edit">{{startTime}}</span></button>'
-	+	'<button name="end" class="{{endFixed}}" type="button">{{text.ClipEnd}}: <span class="Q_clip_edit">{{endTime}}</button>'
+	'<button name="start" class="{{startFixed}}" type="button">' +
+	'	<span class="Q_clip_defined">{{text.ClipStart}}</span>' +
+	'	<span class="Q_clip_set">{{text.SetClipStart}}</span>' +
+	': <span class="Q_clip_edit">{{startTime}}</span>' +
+	'</button>' +
+	'<button name="end" class="{{endFixed}}" type="button">' +
+	'	<span class="Q_clip_defined">{{text.ClipEnd}}</span>' +
+	'	<span class="Q_clip_set">{{text.SetClipEnd}}</span>' +
+	': <span class="Q_clip_edit">{{endTime}}' +
+	'</button>'
 );
 
 })(window, Q, jQuery);

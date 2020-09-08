@@ -5,6 +5,7 @@
     display: inline-block;
     width: 47%;
     padding: 5px;
+    white-space: nowrap;
 }
 .Q_clip_tool input[name=start],
 .Q_clip_tool button[name=start] {
@@ -17,4 +18,17 @@
 
 .Q_clip_tool button.Q_clip_fixed {
     background-color: lime;
+}
+
+.Q_clip_tool button .Q_clip_set {
+    display: inline;
+}
+.Q_clip_tool button .Q_clip_defined {
+    display: none;
+}
+.Q_clip_tool button.Q_clip_fixed .Q_clip_set {
+    display: none;
+}
+.Q_clip_tool button.Q_clip_fixed .Q_clip_defined {
+    display: inline;
 }
