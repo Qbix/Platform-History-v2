@@ -7571,7 +7571,7 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
 	}
 	var parts = [];
 	function _params(prefix, obj) {
-		if (obj == undefined) {
+		if (obj === undefined) {
 			return;
 		}
 		if (Q.isArrayLike(obj)) {
@@ -7600,7 +7600,9 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
 	function _add(key, value) {
 		// If value is a function, invoke it and return its value
 		value = Q.typeOf(value) === "function" ? value() : value;
-		if (value == undefined) return;
+		if (value === undefined) {
+			return;
+		}
 		if (returnAsObject) {
 			result[key] = value;
 		} else {
