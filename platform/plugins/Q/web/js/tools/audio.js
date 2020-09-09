@@ -76,7 +76,7 @@ Q.Tool.define("Q/audio", function (options) {
 						});*/
 						state.audio.bind(SC.Widget.Events.PLAY_PROGRESS, function() {
 							state.audio.getPosition(function (position) {
-								state.currentPosition = position;
+								state.currentPosition = Math.trunc(position);
 								Q.handle(state.onPlaying, tool, [position]);
 							});
 						});
@@ -98,7 +98,7 @@ Q.Tool.define("Q/audio", function (options) {
 				state.audio.pause();
 			},
 			setCurrentPosition: function (position) {
-				state.audio.seekTo(position);
+				state.audio.seekTo(Math.trunc(position));
 			}
 		},
 		"general": {
@@ -181,7 +181,7 @@ Q.Tool.define("Q/audio", function (options) {
 		borderSize: 5,
 		size: null
 	},
-	maxRecordTime: 10, // seconds
+	maxRecordTime: 60, // seconds
 	fileUploadUHandler: Q.action("Q/file"),
 	preprocess: null,
 	duration: 0,
@@ -196,8 +196,13 @@ Q.Tool.define("Q/audio", function (options) {
 	/* </Q/audio jquery plugin states> */
 	onLoad: new Q.Event(),
 	onPlay: new Q.Event(function () {
+		var tool = this;
+		var state = this.sgate;
+
 		// set box attribute to apply valid styles
 		this.pieBox && this.pieBox.attr("data-state", "pause");
+
+		tool.checkClip();
 	}),
 	onPlaying: new Q.Event(function () {
 		var tool = this;
@@ -212,15 +217,7 @@ Q.Tool.define("Q/audio", function (options) {
 			tool.pieTool.stateChanged('fraction');
 		}
 
-		// clipStart handler
-		if (state.clipStart && state.currentPosition < state.clipStart) {
-			tool.setCurrentPosition(state.clipStart);
-		}
-		// clipStart handler
-		if (state.clipEnd && state.currentPosition > state.clipEnd) {
-			tool.setCurrentPosition(state.clipEnd);
-			tool.pause();
-		}
+		tool.checkClip();
 	}),
 	onPause: new Q.Event(function () {
 		// stop timer if exist
@@ -237,6 +234,24 @@ Q.Tool.define("Q/audio", function (options) {
 },
 
 {
+	/**
+	 * Check clip borders and pause if outside
+	 * @method checkClip
+	 */
+	checkClip: function () {
+		var tool = this;
+		var state = this.state;
+
+		// clipStart handler
+		if (state.clipStart && state.currentPosition < state.clipStart) {
+			tool.setCurrentPosition(state.clipStart);
+		}
+		// clipStart handler
+		if (state.clipEnd && state.currentPosition > state.clipEnd) {
+			tool.setCurrentPosition(state.clipEnd);
+			tool.pause();
+		}
+	},
 	/**
 	 * Refreshes the appearance of the tool completely
 	 * @method implement
@@ -268,7 +283,12 @@ Q.Tool.define("Q/audio", function (options) {
 			state.mainDialog.addClass('Q_uploading');
 
 			// url defined
-			var url = $("input[name=url]", state.mainDialog).val();
+			var url = $("input[name=url]:visible", state.mainDialog).val();
+
+			var $file = $("input[type=file]:visible", state.mainDialog);
+			// state.file set in recorder OR html file element
+			var file = state.file || ($file.length && $file[0].files[0]) || null;
+
 			if (url) {
 				Q.req('Websites/scrape', ['result'], function (err, response) {
 					var msg = Q.firstErrorMessage(err, response && response.errors);
@@ -314,14 +334,8 @@ Q.Tool.define("Q/audio", function (options) {
 					method: 'post',
 					fields: {url: url}
 				});
-
 				return;
-			}
-
-			var $file = $("input[type=file]", state.mainDialog);
-			// state.file set in recorder OR html file element
-			var file = state.file || $file[0].files[0];
-			if (file) {
+			} else if (file) {
 				var reader = new FileReader();
 				reader.onload = function (event) {
 					if (state.preprocess) {
@@ -344,6 +358,14 @@ Q.Tool.define("Q/audio", function (options) {
 						params.publisherId = state.publisherId;
 						params.streamName = state.streamName;
 						params.file.name = file.name;
+
+						// for some reason attributes with null values doesn't send to backend in request
+						// so specially update attributes
+						/*if (tool.stream) {
+							tool.stream.setAttribute("clipStart", clipStart);
+							tool.stream.setAttribute("clipEnd", clipEnd);
+							tool.stream.save();
+						}*/
 
 						if (window.FileReader) {
 							Q.request(state.fileUploadUHandler, 'data', function (err, res) {
@@ -390,7 +412,7 @@ Q.Tool.define("Q/audio", function (options) {
 				return;
 			}
 
-			// edit stream
+			// edit stream attributes
 			if (tool.stream) {
 				tool.stream.setAttribute("clipStart", clipStart);
 				tool.stream.setAttribute("clipEnd", clipEnd);
@@ -465,6 +487,8 @@ Q.Tool.define("Q/audio", function (options) {
 
 					$audioElement.tool("Q/audio", {
 						action: "renderPlayer",
+						clipStart: tool.stream.getAttribute('clipStart'),
+						clipEnd: tool.stream.getAttribute('clipEnd'),
 						url: tool.stream.fileUrl(),
 						onPlaying: function () {
 							if (this.clipTool) {
@@ -476,7 +500,13 @@ Q.Tool.define("Q/audio", function (options) {
 						var toolPreview = this;
 						$clipElement.tool("Q/clip", {
 							start: tool.stream.getAttribute('clipStart'),
-							end: tool.stream.getAttribute('clipEnd')
+							end: tool.stream.getAttribute('clipEnd'),
+							onStart: function (time) {
+								toolPreview.state.clipStart = time;
+							},
+							onEnd: function (time) {
+								toolPreview.state.clipEnd = time;
+							}
 						}).activate(function () {
 							toolPreview.clipTool = this;
 						});
@@ -508,8 +538,6 @@ Q.Tool.define("Q/audio", function (options) {
 						if (!$("input[type=file]", mainDialog).val()) {
 							return _error(tool.text.invalidFile);
 						}
-
-						Q.handle(_process, mainDialog);
 					} else if (action === 'link') {
 						var url = $("input[name=url]", mainDialog).val();
 						if (!url.matchTypes('url').length) {
@@ -534,6 +562,16 @@ Q.Tool.define("Q/audio", function (options) {
 					mainDialog.attr("data-action", action);
 					$this.addClass('Q_selected').siblings().removeClass('Q_selected');
 					$(".Q_audio_record_content [data-content=" + action + "]", mainDialog).addClass('Q_selected').siblings().removeClass('Q_selected');
+
+					// pause all exists players
+					tool.recorderStateChange("init");
+					Q.each($(".Q_audio_tool", mainDialog), function () {
+						var audioTool = Q.Tool.from(this, "Q/audio");
+
+						if (audioTool) {
+							audioTool.pause();
+						}
+					});
 				});
 
 				// Reset button
@@ -542,10 +580,17 @@ Q.Tool.define("Q/audio", function (options) {
 					tool.recorderStateChange("init");
 				});
 
+				// set clip start/end for upload
 				$("input[type=file]", mainDialog).on('change', function () {
 					var $audioElement = $(".Q_audio_record_content [data-content=upload] .Q_audio_composer_preview", mainDialog);
 					var $clipElement = $(".Q_audio_record_content [data-content=upload] .Q_audio_composer_clip", mainDialog);
 					var url = URL.createObjectURL(this.files[0]);
+					var toolPreview = Q.Tool.from($audioElement, "Q/audio");
+
+					// if audio tool exists, clear url object
+					if (toolPreview) {
+						URL.revokeObjectURL(toolPreview.state.url);
+					}
 
 					Q.Tool.remove($audioElement[0], true);
 					Q.Tool.remove($clipElement[0], true);
@@ -563,13 +608,21 @@ Q.Tool.define("Q/audio", function (options) {
 							}
 						}
 					}).activate(function () {
-						var toolPreview = this;
-						$clipElement.tool("Q/clip").activate(function () {
+						toolPreview = this;
+						$clipElement.tool("Q/clip", {
+							onStart: function (time) {
+								toolPreview.state.clipStart = time;
+							},
+							onEnd: function (time) {
+								toolPreview.state.clipEnd = time;
+							}
+						}).activate(function () {
 							toolPreview.clipTool = this;
 						});
 					});
 				});
 
+				// set clip start/end for link
 				$("button[name=setClip]", mainDialog).on(Q.Pointer.fastclick, function () {
 					var $audioElement = $(".Q_audio_record_content [data-content=link] .Q_audio_composer_preview", mainDialog);
 					var $clipElement = $(".Q_audio_record_content [data-content=link] .Q_audio_composer_clip", mainDialog);
@@ -595,7 +648,14 @@ Q.Tool.define("Q/audio", function (options) {
 						}
 					}).activate(function () {
 						var toolPreview = this;
-						$clipElement.tool("Q/clip").activate(function () {
+						$clipElement.tool("Q/clip", {
+							onStart: function (time) {
+								toolPreview.state.clipStart = time;
+							},
+							onEnd: function (time) {
+								toolPreview.state.clipEnd = time;
+							}
+						}).activate(function () {
 							toolPreview.clipTool = this;
 						});
 					});
@@ -863,7 +923,7 @@ Q.Tool.define("Q/audio", function (options) {
 		$(tool.audioElement).appendTo(tool.element);
 
 		tool.audioElement.addEventListener('play', function () {
-			state.currentPosition = this.currentTime * 1000;
+			state.currentPosition = Math.trunc(this.currentTime * 1000);
 			console.log("Started at position " + state.currentPosition + " milliseconds");
 			Q.handle(state.onPlay, tool, [state.currentPosition]);
 
@@ -874,14 +934,14 @@ Q.Tool.define("Q/audio", function (options) {
 
 			// start new timer to change needed layout params during play
 			state.playIntervalID = setInterval(function(){
-				state.currentPosition = tool.audioElement.currentTime * 1000;
+				state.currentPosition = Math.trunc(tool.audioElement.currentTime * 1000);
 
 				Q.handle(state.onPlaying, tool, [state.currentPosition]);
 			}, 100);
 		});
 
 		tool.audioElement.addEventListener("canplay", function(){
-			state.duration = tool.audioElement.duration * 1000;
+			state.duration = Math.trunc(tool.audioElement.duration * 1000);
 
 			Q.handle(state.onLoad, tool);
 
@@ -911,12 +971,12 @@ Q.Tool.define("Q/audio", function (options) {
 				state.recordTimeElement.html(tool.formatRecordTime(duration));
 			}
 
-			var time = this.currentTime * 1000;
+			var time = Math.trunc(this.currentTime * 1000);
 			console.log("Ended at position " + time + " milliseconds");
 			Q.handle(state.onEnded, tool, [time]);
 		});
 		tool.audioElement.addEventListener("pause", function(){
-			var time = this.currentTime * 1000;
+			var time = Math.trunc(this.currentTime * 1000);
 			console.log("Paused at position " + time + " milliseconds");
 			Q.handle(state.onPause, tool, [time]);
 		});
