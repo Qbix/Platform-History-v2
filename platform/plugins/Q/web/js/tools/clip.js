@@ -65,6 +65,8 @@ Q.Tool.define("Q/clip", function (options) {
 				if ($this.hasClass('Q_clip_fixed')) {
 					var time = $(".Q_clip_time_milliseconds", $this).text();
 					Q.handle(state["on" + name], tool, [time]);
+				} else {
+					Q.handle(state["on" + name], tool, [null]);
 				}
 			});
 		});
