@@ -19,6 +19,9 @@
     float: right;
 }
 
+.Q_clip_tool button .Q_clip_time_milliseconds {
+    display: none;
+}
 .Q_clip_tool button.Q_clip_fixed {
     background-color: lime;
 }
@@ -29,9 +32,13 @@
 .Q_clip_tool button .Q_clip_defined {
     display: none;
 }
+.Q_clip_tool button .Q_clip_time_string {
+    display: none;
+}
 .Q_clip_tool button.Q_clip_fixed .Q_clip_set {
     display: none;
 }
-.Q_clip_tool button.Q_clip_fixed .Q_clip_defined {
+.Q_clip_tool button.Q_clip_fixed .Q_clip_defined,
+.Q_clip_tool button.Q_clip_fixed .Q_clip_time_string {
     display: inline;
 }

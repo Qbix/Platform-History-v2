@@ -9,13 +9,11 @@
  * @class Q clip
  * @constructor
  * @param {Object} [options] Override various options for this tool
- *  @param {String} [options.mode] Can be 'composer' or 'editor'
  *  @param {String|Integer} [options.start] String in format hh:mm:ss or integeer seconds
  *  @param {String|Integer} [options.end] String in format hh:mm:ss or integeer seconds
  *  @param {Q.Event} onStart event trigger when clip start time defined
  *  @param {Q.Event} onEnd event trigger when clip end time defined
  */
-
 Q.Tool.define("Q/clip", function (options) {
 	var tool = this;
 
@@ -29,7 +27,6 @@ Q.Tool.define("Q/clip", function (options) {
 },
 
 { // default options here
-	mode: 'editor',
 	start: null,
 	end: null,
 	onStart: new Q.Event(),
@@ -46,14 +43,13 @@ Q.Tool.define("Q/clip", function (options) {
 		var $toolElement = $(this.element);
 		var state = tool.state;
 
-		var startTime = String(state.start).match(/^\d+$/) ? tool.convertToString(state.start) : state.start;
-		var endTime = String(state.end).match(/^\d+$/) ? tool.convertToString(state.end) : state.end;
-
-		Q.Template.render('Q/clip/' + state.mode, {
-			startTime: startTime,
-			endTime: endTime,
-			startFixed: startTime ? 'Q_clip_fixed' : '',
-			endFixed: endTime ? 'Q_clip_fixed' : '',
+		Q.Template.render('Q/clip', {
+			startTimeString: tool.convertToString(state.start),
+			endTimeString: tool.convertToString(state.end),
+			startTimeMilliseconds: state.start,
+			endTimeMilliseconds: state.end,
+			startFixed: state.start !== null ? 'Q_clip_fixed' : '',
+			endFixed: state.end !== null ? 'Q_clip_fixed' : '',
 			text: tool.text
 		}, function (err, html) {
 			$toolElement.html(html);
@@ -67,25 +63,9 @@ Q.Tool.define("Q/clip", function (options) {
 				$this.toggleClass("Q_clip_fixed");
 
 				if ($this.hasClass('Q_clip_fixed')) {
-					var time = tool.convertToMilliseconds($(".Q_clip_edit", $this).text());
-
+					var time = $(".Q_clip_time_milliseconds", $this).text();
 					Q.handle(state["on" + name], tool, [time]);
 				}
-			});
-
-			$("input", $toolElement).on("input", function () {
-				var $this = $(this);
-				var time = $this.val();
-				var name = $this.prop("name");
-				// capitalize first letter
-				name = name.charAt(0).toUpperCase() + name.slice(1);
-
-				if (!tool.validFormat(time)) {
-					return;
-				}
-
-				time = tool.convertToMilliseconds(time);
-				Q.handle(state["on" + name], tool, [time]);
 			});
 		});
 	},
@@ -96,15 +76,12 @@ Q.Tool.define("Q/clip", function (options) {
 	 * @param {string} which Can be 'start' or 'end'
 	 */
 	setTime: function (time, which) {
-		var tool = this;
-		time = tool.convertToString(time);
-
-		if (!tool.validFormat(time)) {
-			return Q.alert("Invalid time format");
+		if (!/^\d+$/.test(time)) {
+			time = null;
 		}
 
-		$("button[name=" + which + "]:not(.Q_clip_fixed) .Q_clip_edit", tool.element).text(time);
-		$("input[name=" + which + "]:not(.Q_clip_fixed)", tool.element).val(time);
+		$("button[name=" + which + "]:not(.Q_clip_fixed) .Q_clip_time_milliseconds", this.element).text(time);
+		$("button[name=" + which + "]:not(.Q_clip_fixed) .Q_clip_time_string", this.element).text(this.convertToString(time));
 	},
 	/**
 	 * Get time of start/end clip time
@@ -113,22 +90,13 @@ Q.Tool.define("Q/clip", function (options) {
 	 * @return {integer} time in milliseconds
 	 */
 	getTime: function (which) {
-		var tool = this;
-		var state = this.state;
-		var time = null;
+		var time = $("button[name=" + which + "].Q_clip_fixed .Q_clip_time_milliseconds", this.element).text();
 
-		if (state.mode === 'editor') {
-			time = $("button[name=" + which + "].Q_clip_fixed .Q_clip_edit", tool.element).text();
-		} else if (state.mode === 'composer') {
-			time = $("input[name=" + which + "]", tool.element).val();
+		if (!/^\d+$/.test(time)) {
+			time = null;
 		}
 
-		if (time && !tool.validFormat(time)) {
-			Q.alert("Invalid time format");
-			return null;
-		}
-
-		return time ? tool.convertToMilliseconds(time) : null;
+		return time;
 	},
 	/**
 	 * Convert time from milliseconds to hh:mm:ss string
@@ -137,53 +105,28 @@ Q.Tool.define("Q/clip", function (options) {
 	 * @return {string} formatted string
 	 */
 	convertToString: function (time) {
-		return new Date(time).toISOString().substr(11, 8);
-	},
-	/**
-	 * Convert time from seconds or hh:mm:ss to miliseconds
-	 * @method convertToMilliseconds
-	 * @param {int|string} time Time in seonds or string hh:mm:ss
-	 * @return {string} formatted string
-	 */
-	convertToMilliseconds: function (time) {
-		// time in format hh:mm:ss
-		if (this.validFormat(time)) {
-			var parts = time.split(':');
-			var hours = parseInt(parts[0], 10);
-			var minutes = parseInt(parts[1], 10);
-			var seconds = parseInt(parts[2], 10);
+		time = Math.trunc(time);
+		var timeString = new Date(time).toISOString().substr(11, 8);
 
-			time = hours * 3600 + minutes * 60 + seconds;
-		}
+		// ommit hh if 00
+		timeString = timeString.replace(/^00:/, '');
 
-		return time * 1000;
-	},
-	/**
-	 * Check if string match format hh:mm:ss
-	 * @method validFormat
-	 * @param {string} time
-	 * @return {boolean}
-	 */
-	validFormat: function (time) {
-		return !!time.match(/\d{1,2}:\d{1,2}:\d{1,2}/);
+		return timeString;
 	}
 });
 
-Q.Template.set('Q/clip/composer',
-	'<input name="start" placeholder="{{text.SetClipStart}} hh:mm:ss">'
-	+ '<input name="end" placeholder="{{text.SetClipEnd}} hh:mm:ss">'
-
-);
-Q.Template.set('Q/clip/editor',
+Q.Template.set('Q/clip',
 	'<button name="start" class="{{startFixed}}" type="button">' +
-	'	<span class="Q_clip_defined">{{text.ClipStart}}</span>' +
+	'	<span class="Q_clip_defined">{{text.ClipStart}}: </span>' +
 	'	<span class="Q_clip_set">{{text.SetClipStart}}</span>' +
-	': <span class="Q_clip_edit">{{startTime}}</span>' +
+	'	<span class="Q_clip_time_string">{{startTimeString}}</span>' +
+	'	<span class="Q_clip_time_milliseconds">{{startTimeMilliseconds}}</span>' +
 	'</button>' +
 	'<button name="end" class="{{endFixed}}" type="button">' +
-	'	<span class="Q_clip_defined">{{text.ClipEnd}}</span>' +
+	'	<span class="Q_clip_defined">{{text.ClipEnd}}: </span>' +
 	'	<span class="Q_clip_set">{{text.SetClipEnd}}</span>' +
-	': <span class="Q_clip_edit">{{endTime}}' +
+	'	<span class="Q_clip_time_string">{{endTimeString}}</span>' +
+	'	<span class="Q_clip_time_milliseconds">{{endTimeMilliseconds}}</span>' +
 	'</button>'
 );
 
