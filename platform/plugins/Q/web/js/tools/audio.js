@@ -276,20 +276,29 @@ Q.Tool.define("Q/audio", function (options) {
 		 * @method _process
 		 */
 		var _process = function() {
-			var clipTool = Q.Tool.from($(".Q_clip_tool:visible", state.mainDialog), "Q/clip");
+			var _error = function (err) {
+				state.mainDialog.removeClass('Q_uploading');
+				Q.alert(err);
+			};
+
+			var action = state.mainDialog.attr('data-action');
+			var $currentContent = $(".Q_audio_record_content [data-content=" + action + "]", state.mainDialog);
+			if (!$currentContent.length) {
+				return _error("No action selected");
+			}
+			var clipTool = Q.Tool.from($(".Q_clip_tool", $currentContent), "Q/clip");
 			var clipStart = clipTool ? clipTool.getTime("start") : null;
 			var clipEnd = clipTool ? clipTool.getTime("end") : null;
 
 			state.mainDialog.addClass('Q_uploading');
 
-			// url defined
-			var url = $("input[name=url]:visible", state.mainDialog).val();
+			if (action === "link") {
+				// url defined
+				var url = $("input[name=url]", $currentContent).val();
+				if (!url) {
+					return _error("Link not found");
+				}
 
-			var $file = $("input[type=file]:visible", state.mainDialog);
-			// state.file set in recorder OR html file element
-			var file = state.file || ($file.length && $file[0].files[0]) || null;
-
-			if (url) {
 				Q.req('Websites/scrape', ['result'], function (err, response) {
 					var msg = Q.firstErrorMessage(err, response && response.errors);
 					if (msg) {
@@ -334,8 +343,11 @@ Q.Tool.define("Q/audio", function (options) {
 					method: 'post',
 					fields: {url: url}
 				});
-				return;
-			} else if (file) {
+			} else if (action === "record" || action === "upload") {
+				var $file = $("input[type=file].Q_audio_file", $currentContent);
+				// state.file set in recorder OR html file element
+				var file = state.file || ($file.length && $file[0].files[0]) || null;
+
 				var reader = new FileReader();
 				reader.onload = function (event) {
 					if (state.preprocess) {
@@ -361,11 +373,11 @@ Q.Tool.define("Q/audio", function (options) {
 
 						// for some reason attributes with null values doesn't send to backend in request
 						// so specially update attributes
-						/*if (tool.stream) {
+						if (Q.Streams.isStream(tool.stream)) {
 							tool.stream.setAttribute("clipStart", clipStart);
 							tool.stream.setAttribute("clipEnd", clipEnd);
 							tool.stream.save();
-						}*/
+						}
 
 						if (window.FileReader) {
 							Q.request(state.fileUploadUHandler, 'data', function (err, res) {
@@ -409,11 +421,11 @@ Q.Tool.define("Q/audio", function (options) {
 				};
 
 				reader.readAsDataURL(file);
-				return;
-			}
-
-			// edit stream attributes
-			if (tool.stream) {
+			} else if (action === "edit") {
+				// edit stream attributes
+				if (!Q.Streams.isStream(tool.stream)) {
+					return _error("Stream not found");
+				}
 				tool.stream.setAttribute("clipStart", clipStart);
 				tool.stream.setAttribute("clipEnd", clipEnd);
 				tool.stream.save({
@@ -422,6 +434,8 @@ Q.Tool.define("Q/audio", function (options) {
 						Q.Dialogs.pop();
 					}
 				});
+			} else {
+				_error("Incorrect action " + action);
 			}
 		};
 
