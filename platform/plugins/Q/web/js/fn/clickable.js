@@ -79,7 +79,7 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 			var state = $this.state('Q/clickable');
 			$this.plugin('Q/clickable', 'remove')
 				.plugin('Q/clickable', state);	
-		}, idString);
+		}, 'Q/clickable');
 
 		state.oldStyle = $this.attr('style');
 		var display = $this.css('display');
