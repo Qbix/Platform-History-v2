@@ -4,7 +4,7 @@
 	 * @class Websites/webpage/composer
 	 * @constructor
 	 * @param {Object} [options] this is an object that contains parameters for this function
-	 * @param {Object} [options.categoryStream] Object with publisherId and streamName of stream where to need to
+	 * @param {Object} [options.categoryStream] Object with publisherId, streamName, relationType of stream where to need to
 	 * relate new Websites/webpage stream.
 	 * @param {Object} [options.relationType] Type of relation to category stream.
 	 * @param {Q.Event} [options.onScrape] fires when the tool successfully scrapes a webpage
@@ -40,9 +40,9 @@
 	{
 		categoryStream: {
 			publisherId: Q.Users.communityId,
-			streamName: 'Streams/chats/main'
+			streamName: 'Streams/chats/main',
+			relationType: 'Websites/webpage'
 		},
-		relationType: 'Websites/webpage',
 		onScrape: new Q.Event(),
 		onCreate: new Q.Event()
 	},
@@ -136,9 +136,9 @@
 							keywords: state.siteData.keywords || '',
 							interest: {
 								title: ' ' + state.siteData.host,
-								icon: state.siteData.smallIcon,
+								icon: state.siteData.iconSmall,
 							},
-							src: state.siteData.bigIcon,
+							src: state.siteData.iconBig,
 							url: state.siteData.url
 						}, Date.now()).activate();
 
@@ -182,7 +182,6 @@
 					action: 'start',
 					data: state.siteData,
 					categoryStream: state.categoryStream,
-					relationType: state.relationType,
 					message: $message.val()
 				}
 			});

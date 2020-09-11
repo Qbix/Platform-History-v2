@@ -19,7 +19,7 @@ function Websites_webpage_response_start($params)
 
 	$communityId = Q::ifset($r, 'categoryStream', 'publisherId', $currentCommunity);
 	$mainChatCategory = Q::ifset($r, 'categoryStream', 'streamName', 'Streams/chats/main');
-	$chatRelationType = Q::ifset($r, 'relationType', 'Websites/webpage');
+	$chatRelationType = Q::ifset($r, 'categoryStream', 'relationType', 'Websites/webpage');
 
 	// if this stream already related, exit
 	if (!Streams_RelatedTo::select()->where(array(
