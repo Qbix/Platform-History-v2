@@ -76,7 +76,6 @@
 				Q.onLayout(tool).set(Q.throttle(function () {
 					tool.refresh();
 				}, 100, true), tool);
-				tool.refresh();
 			}, 100);
 			Q.handle(state.onActivate, tool, [state.tab, tool.getName(state.tab)]);
 		},
@@ -579,14 +578,18 @@
 					$overflow.addClass('Q_current');
 				}
 				tool.overflowIndex = index;
-				if (tool.$overflow && tool.$overflow.closest('html').length) {
-					tool.$overflow.plugin('Q/contextual', 'remove');
-					tool.$tabs.css('visibility', 'visible');
-					Q.handle(state.onRefresh, this);
-					Q.handle(callback, tool);
-					$overflow.css('visibility', 'visible');
-					return;
-				}
+				// if (tool.$overflow
+				// && (
+				// 	!tool.$overflow.data('contextual')
+				// 	|| tool.$overflow.closest('html').length)
+				// ) {
+				// 	// it's already set up and wasn't removed
+				// 	tool.$tabs.css('visibility', 'visible');
+				// 	Q.handle(state.onRefresh, this);
+				// 	Q.handle(callback, tool);
+				// 	$overflow.css('visibility', 'visible');
+				// 	return;
+				// }
 				tool.$overflow = $overflow;
 				Q.addScript("{{Q}}/js/QTools.js", function () {
 					var elements = [];
@@ -609,7 +612,7 @@
 						onShow: function (cs) {
 							Q.handle(state.onContextual, this, arguments);
 						}
-					});
+					}).data('contextual', true);
 					tool.$overflowed = $(elements);
 					if (Q.Contextual.current != -1) {
 						// it was open, show it again
