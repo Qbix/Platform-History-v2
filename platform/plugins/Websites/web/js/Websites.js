@@ -69,13 +69,17 @@ var Websites = Q.Websites = Q.plugins.Websites = {
 	/**
 	 *	Get stream type from url
 	 * @method getStreamType
-	 * @param {string} url
+	 * @param {string} param Can be url or extension
 	 * @return {string}
 	 */
-	getStreamType: function (url) {
-		var urlParsed = new URL(url);
-		var host = urlParsed.host;
-		var extension = url.substr(url.lastIndexOf('.') + 1);
+	getStreamType: function (param) {
+		var host = null;
+		var extension = param;
+
+		if (param.matchTypes('url').length) {
+			host = (new URL(param)).host;
+			extension = param.substr(param.lastIndexOf('.') + 1);
+		}
 
 		var videoHosts = Q.getObject("Q.Websites.videoHosts");
 		var videoExtensions = Q.getObject("Q.Websites.videoExtensions");

@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Websites": {
-				"version": "1.0.1",
+				"version": "1.0.2",
 				"compatible": "0.8",
 				"requires": {"Streams": "1.0"},
 				"connections": ["Users", "Streams", "Websites"]
@@ -172,6 +172,6 @@
 		"videoHosts": ["youtube.com", "youtu.be", "vimeo.com"],
 		"videoExtensions": ["MPG", "MP2", "MPEG", "MP4", "AVI", "WMV", "MOV", "FLV", "SWF"],
 		"audioHosts": ["soundcloud.com"],
-		"audioExtensions": ["MP3", "WAV", "AIFF"]
+		"audioExtensions": ["MP3", "WAV", "AIFF", "soundcloud:sound"]
 	}
 }
