@@ -32,7 +32,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 	var element = $(this.element);
 	this.$input = $('input', element);
-	var offset = this.$input && $this.offset();
+	var offset = this.$input && this.$input.offset();
 	if (!offset) {
 		return; // some error
 	}
