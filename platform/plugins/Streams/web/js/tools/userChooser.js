@@ -31,9 +31,9 @@ Q.Tool.define("Streams/userChooser", function(o) {
 	tool.exclude = o.exclude;
 
 	var element = $(this.element);
-	var offset = this.$input.offset();
 	this.$input = $('input', element);
-	if (!this.$input || !offset) {
+	var offset = this.$input && $this.offset();
+	if (!offset) {
 		return; // some error
 	}
 	var cached = {};
