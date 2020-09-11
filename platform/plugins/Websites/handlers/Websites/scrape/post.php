@@ -10,34 +10,39 @@ function Websites_scrape_post($params)
 	$fields = Q::take($params, array('url', 'skipStream'));
 
 	$url = $fields['url'];
-	$skipStream = (bool)$fields['skipStream'];
+	$withStream = (bool)$fields['withStream'];
 
 	if (parse_url($url, PHP_URL_SCHEME) === null) {
 		$url = 'http://'.$url;
 	}
 
-	// if stream for this URL already exist, return it
-	$streamExist = Websites_scrape_fetchStream($url);
-	if ($streamExist) {
-		Q_Response::setSlot('result', $streamExist);
-		return;
-	}
-
 	$result = Websites_Webpage::scrape($url);
 
-	if (!$skipStream) {
-        // if stream for this URL already exist, return it
-        $stream = Websites_scrape_fetchStream($result['url']);
-        if (!$stream) {
-            $stream = Q::event('Websites/webpage/post', $result);
-        }
+	if ($withStream) {
+		// if stream for this URL already exist, return it
+		$stream = Websites_scrape_fetchStream($result['url']);
+		if (!$stream) {
+			$stream = Q::event('Websites/webpage/post', $result);
+		}
 
-        Q_Response::setSlot('stream', $stream);
-    }
+		$result['publisherId'] = $stream->publisherId;
+		$result['streamName'] = $stream->name;
+		Q_Response::setSlot('stream', $stream);
+    } else {
+		$result['publisherId'] = null;
+		$result['streamName'] = null;
+	}
 
 	Q_Response::setSlot('result', $result);
 }
 
+/**
+ * Along with getting stream, this method get small icon from interest
+ * @method Websites_scrape_fetchStream
+ * @static
+ * @param string $url
+ * @return array
+ */
 function Websites_scrape_fetchStream($url) {
 	// if stream for this URL already exist, return it
 	$stream = Websites_Webpage::fetchStream($url);
@@ -70,7 +75,7 @@ function Websites_scrape_fetchStream($url) {
 		'description' => $stream->content,
 		'smallIcon' => $interestData['icon'],
 		'host' => $stream->getAttribute('urlParsed')['host'],
-		'bigIcon' => $stream->getAttribute('icon'),
+		'iconBig' => $stream->getAttribute('iconBig'),
 		'url' => $stream->getAttribute('url'),
 		'alreadyExist' => true
 	);
