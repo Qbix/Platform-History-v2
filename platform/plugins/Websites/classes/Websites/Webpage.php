@@ -7,18 +7,17 @@
  * 
  * @class Websites_Webpage
  */
-class Websites_Webpage
+class Websites_Webpage extends Base_Websites_Webpage
 {
 	/**
 	 * Get URL, load page and crape info to array
 	 * @method scrape
 	 * @static
 	 * @param string $url Page source to load
-     * @param boolean [$checkStream=true] If false, skip checking stream for this url. Scrape source anyway.
 	 * @throws Q_Exception
 	 * @return array
 	 */
-	static function scrape($url, $checkStream = true)
+	static function scrape($url)
 	{
 		// add scheme to url if not exist
 		if (parse_url($url, PHP_URL_SCHEME) === null) {
@@ -29,29 +28,47 @@ class Websites_Webpage
 			throw new Exception("Invalid URL");
 		}
 
+		function _return ($result, $webpageCahe) {
+			if ($webpageCahe) {
+				$webpageCahe->title = substr($result['title'],0, $webpageCahe->maxSize_title());
+				$webpageCahe->description = substr($result['description'], 0, $webpageCahe->maxSize_description());
+				$webpageCahe->results = json_encode($result);
+				$webpageCahe->save();
+			}
+
+			return $result;
+		}
+
 		$parsedUrl = parse_url($url);
 
 		//$document = file_get_contents($url);
 
-        // try to get stream
-        if ($checkStream) {
-            $stream = self::fetchStream($url);
-            if ($stream) {
-                return  array(
-                    'title' => $stream->title,
-                    'url' => $stream->getAttribute("url"),
-                    'bigIcon' => $stream->getAttribute("bigIcon"),
-                    'smallIcon' => $stream->getAttribute("smallIcon"),
-                    'host' => $stream->getAttribute("host")
-                );
-            }
-        }
+        // try to get cache
+		$webpageCahe = null;
+		if (Q_Config::get('Websites', 'cache', 'webpage', true)) {
+			$webpageCahe = new Websites_Webpage();
+			$webpageCahe->url = $url;
+			if ($webpageCahe->retrieve()) {
+				$updatedTime = $webpageCahe->updatedTime;
+				if (isset($updatedTime)) {
+					$db = $webpageCahe->db();
+					$updatedTime = $db->fromDateTime($updatedTime);
+					$currentTime = $db->getCurrentTimestamp();
+					$cacheDuration = Q_Config::get('Websites', 'cache', 'duration', 60*60*24*30); // default 1 month
+					if ($currentTime - $updatedTime < $cacheDuration) {
+						// there are cached webpage results that are still viable
+						return json_decode($webpageCahe->results, true);
+					}
+				}
+			}
+		}
 
-        $headers = get_headers($url, 1);
-        if (is_array($headers['Content-Type'])) {
-            $contentType = end($headers['Content-Type']);
+		$headers = get_headers($url, 1);
+		$headers = array_change_key_case($headers, CASE_LOWER);
+        if (is_array($headers['content-type'])) {
+            $contentType = end($headers['content-type']);
         } else {
-            $contentType = $headers['Content-Type'];
+            $contentType = $headers['content-type'];
         }
 
         // for non text/html content use another approach
@@ -72,12 +89,13 @@ class Websites_Webpage
             $result = array(
                 'title' => Q::ifset($fileInfo, 'comments', 'name', null),
                 'url' => $url,
-                'bigIcon' => $icon,
-                'smallIcon' => $icon,
+                'iconBig' => $icon,
+                'iconSmall' => $icon,
+                'type' => $extension,
                 'host' => $parsedUrl['host']
             );
 
-            return $result;
+            return _return($result, $webpageCahe);
         }
 
 		// get source with header
@@ -202,11 +220,11 @@ class Websites_Webpage
 			'icon'
 		);
 		if (Q_Valid::url($icon)) {
-			$result['bigIcon'] = $icon;
+			$result['iconBig'] = $icon;
 		} else {
 			foreach ($bigIconAllowedMetas as $item) {
 				if ($item = Q::ifset($icons, $item, null)) {
-					$result['bigIcon'] = $item;
+					$result['iconBig'] = $item;
 					break;
 				}
 			}
@@ -219,32 +237,32 @@ class Websites_Webpage
 		);
 		foreach ($smallIconAllowedMetas as $item) {
 			if ($item = Q::ifset($icons, $item, null)) {
-				$result['smallIcon'] = $item;
+				$result['iconSmall'] = $item;
 				break;
 			}
 
 			// by default
-			$result['smallIcon'] = $result['bigIcon'];
+			$result['iconSmall'] = $result['iconBig'];
 		}
 
 		// as we don't support SVG images in Users::importIcon, try to select another image
 		// when we start support SVG, just remove these blocks
-		if (pathinfo($result['bigIcon'], PATHINFO_EXTENSION) == 'svg') {
+		if (pathinfo($result['iconBig'], PATHINFO_EXTENSION) == 'svg') {
 			reset($bigIconAllowedMetas);
 			foreach ($bigIconAllowedMetas as $item) {
 				$item = Q::ifset($icons, $item, null);
 				if ($item && pathinfo($item, PATHINFO_EXTENSION) != 'svg') {
-					$result['bigIcon'] = $item;
+					$result['iconBig'] = $item;
 					break;
 				}
 			}
 		}
-		if (pathinfo($result['smallIcon'], PATHINFO_EXTENSION) == 'svg') {
+		if (pathinfo($result['iconSmall'], PATHINFO_EXTENSION) == 'svg') {
 			reset($smallIconAllowedMetas);
 			foreach ($smallIconAllowedMetas as $item) {
 				$item = Q::ifset($icons, $item, null);
 				if ($item && pathinfo($item, PATHINFO_EXTENSION) != 'svg') {
-					$result['smallIcon'] = $item;
+					$result['iconSmall'] = $item;
 					break;
 				}
 			}
@@ -252,8 +270,8 @@ class Websites_Webpage
 		//---------------------------------------------------------------
 
 		// if big icon empty, set it to small icon
-		if (empty($result['bigIcon']) && !empty($result['smallIcon'])) {
-			$result['bigIcon'] = $result['smallIcon'];
+		if (empty($result['iconBig']) && !empty($result['iconSmall'])) {
+			$result['iconBig'] = $result['iconSmall'];
 		}
 
 		// additional handler for youtube.com
@@ -267,7 +285,7 @@ class Websites_Webpage
 				if ($googleapisSnippet = Q::ifset($googleapisRes, 'items', 0, 'snippet', null)) {
 					$result['title'] = Q::ifset($googleapisSnippet, 'title', Q::ifset($result, 'title', null));
 					$result['description'] = Q::ifset($googleapisSnippet, 'description', Q::ifset($result, 'description', null));
-					$result['bigIcon'] = Q::ifset($googleapisSnippet, 'thumbnails', 'high', 'url', Q::ifset($googleapisSnippet, 'thumbnails', 'medium', 'url', Q::ifset($googleapisSnippet, 'thumbnails', 'default', 'url', Q::ifset($result, 'bigIcon', null))));
+					$result['iconBig'] = Q::ifset($googleapisSnippet, 'thumbnails', 'high', 'url', Q::ifset($googleapisSnippet, 'thumbnails', 'medium', 'url', Q::ifset($googleapisSnippet, 'thumbnails', 'default', 'url', Q::ifset($result, 'iconBig', null))));
 
 					$googleapisTags = Q::ifset($googleapisSnippet, 'tags', null);
 					if (is_array($googleapisTags) && count($googleapisTags)) {
@@ -277,11 +295,11 @@ class Websites_Webpage
 			}
 		}
 
-		$result['bigIcon'] = Q::ifset($result, 'bigIcon', Q_Uri::interpolateUrl("{{baseUrl}}/{{Websites}}/img/icons/Websites/webpage/80.png"));
-		$result['smallIcon'] = Q::ifset($result, 'smallIcon', Q_Uri::interpolateUrl("{{baseUrl}}/{{Websites}}/img/icons/Websites/webpage/40.png"));
+		$result['iconBig'] = Q::ifset($result, 'iconBig', Q_Uri::interpolateUrl("{{baseUrl}}/{{Websites}}/img/icons/Websites/webpage/80.png"));
+		$result['iconSmall'] = Q::ifset($result, 'iconSmall', Q_Uri::interpolateUrl("{{baseUrl}}/{{Websites}}/img/icons/Websites/webpage/40.png"));
 		$result['host'] = $parsedUrl['host'];
 
-		return $result;
+		return _return($result, $webpageCahe);
 	}
 	/**
 	 * Normalize href like '//path/to' or '/path/to' to valid URL
@@ -497,8 +515,8 @@ class Websites_Webpage
 	 * @param {string} [$params.title]
 	 * @param {string} [$params.keywords]
 	 * @param {string} [$params.description]
-	 * @param {string} [$params.bigIcon]
-	 * @param {string} [$params.smallIcon]
+	 * @param {string} [$params.iconBig]
+	 * @param {string} [$params.iconSmall]
 	 * @param {array} [$params.headers] array with key "Content-Type"
 	 * @param {string} [$params.lang] two-letter code
 	 * @param {string} [quotaName='Websites/webpage/chat'] Default quota name. Can be:
@@ -540,8 +558,8 @@ class Websites_Webpage
 		$keywords = Q::ifset($params, 'keywords', null);
 		$description = substr(Q::ifset($params, 'description', ''), 0, 1023);
 		$copyright = Q::ifset($params, 'copyright', null);
-		$bigIcon = self::normalizeHref(Q::ifset($params, 'bigIcon', null), $url);
-		$smallIcon = self::normalizeHref(Q::ifset($params, 'smallIcon', null), $url);
+		$iconBig = self::normalizeHref(Q::ifset($params, 'iconBig', null), $url);
+		$iconSmall = self::normalizeHref(Q::ifset($params, 'iconSmall', null), $url);
 		$contentType = Q::ifset($params, 'headers', 'Content-Type', 'text/html'); // content type by default text/html
 		$contentType = explode(';', $contentType)[0];
 		$streamIcon = Q_Config::get('Streams', 'types', 'Websites/webpage', 'defaults', 'icon', null);
@@ -574,10 +592,10 @@ class Websites_Webpage
 		&& !Users::isCustomIcon($interestStream->icon)) {
 			$result = null;
 
-			if (Q_Valid::url($smallIcon)) {
+			if (Q_Valid::url($iconSmall)) {
 				try {
 					$result = Users::importIcon($interestStream, array(
-						'32.png' => $smallIcon
+						'32.png' => $iconSmall
 					), $interestStream->iconDirectory());
 				} catch (Exception $e) {
 
@@ -605,7 +623,7 @@ class Websites_Webpage
             'attributes' => array(
                 'url' => $url,
                 'urlParsed' => $urlParsed,
-                'icon' => $bigIcon,
+                'icon' => $iconBig,
                 'copyright' => $copyright,
                 'contentType' => $contentType,
                 'lang' => Q::ifset($params, 'lang', 'en')
@@ -623,13 +641,23 @@ class Websites_Webpage
         } else {
             $streamParams['publisherId'] = $publisherId;
             $streamParams['streamName'] = $streamName;
-            $streamParams['icon'] = $bigIcon ?: $streamIcon;
+            $streamParams['icon'] = $iconBig ?: $streamIcon;
 
             $webpageStream = Q::event($streamType.'/post', array(
                 'streamParams' => $streamParams,
                 'relatedParams' => $relatedParams
             ));
         }
+
+		// check if category stream defined, and relate if yes
+		$categoryStream = Q::ifset($params, 'categoryStream', null);
+		if ($categoryStream) {
+			$categoryStream['name'] = $categoryStream['streamName'];
+			$webpageStream->relateTo((object)$categoryStream, $categoryStream['relationType'], null, array(
+				'skipAccess' => true
+			));
+		}
+
 
 		// grant access to this stream for logged user
 		$streamsAccess = new Streams_Access();
@@ -642,9 +670,9 @@ class Websites_Webpage
 		$streamsAccess->save();
 
 		// set custom icon for Websites/webpage stream
-		if (Q_Valid::url($bigIcon)) {
+		if (Q_Valid::url($iconBig)) {
 			try {
-				$result = Users::importIcon($webpageStream, Q_Image::iconArrayWithUrl($bigIcon, 'Streams/image'), $webpageStream->iconDirectory());
+				$result = Users::importIcon($webpageStream, Q_Image::iconArrayWithUrl($iconBig, 'Streams/image'), $webpageStream->iconDirectory());
 				if (!empty($result)) {
 					$webpageStream->save();
 				}
