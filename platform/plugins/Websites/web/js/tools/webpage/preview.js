@@ -20,6 +20,7 @@
 		var tool = this;
 		var state = this.state;
 		var preview = Q.Tool.from(this.element, "Streams/preview");
+		var previewState = Q.getObject("state", preview);
 
 		state.publisherId = state.publisherId || Q.getObject("state.publisherId", preview);
 		state.streamName = state.streamName || Q.getObject("state.streamName", preview);
@@ -29,8 +30,8 @@
 		// wait when styles and texts loaded and then run refresh
 		var pipe = Q.pipe(['styles', 'text'], function () {
 			if (state.publisherId && state.streamName) {
-				if (preview) {
-					preview.state.onRefresh.add(tool.refresh.bind(tool));
+				if (previewState) {
+					previewState.onRefresh.add(tool.refresh.bind(tool));
 				} else {
 					tool.refresh();
 				}
@@ -38,6 +39,46 @@
 				tool.refreshLight();
 			}
 		});
+
+		if (previewState) {
+			if (state.url) {
+				previewState.creatable.options = Q.extend({}, previewState.creatable.options, {
+					skipComposer: true
+				});
+			}
+
+			// rewrite Streams/preview composer
+			previewState.creatable.preprocess = function (_proceed) {
+				// if url specified, just call refresh to build preview with scraped data
+				if (state.url) {
+					Q.req('Websites/scrape', ['result'], function (err, response) {
+						var msg = Q.firstErrorMessage(err, response && response.errors);
+						if (msg) {
+							return Q.alert(msg);
+						}
+
+						var result = response.slots.result;
+
+						state.title = result.title;
+						state.description = result.description;
+						state.keywords = result.keywords || '';
+						state.interest = {
+							title: ' ' + result.host,
+							icon: result.iconSmall,
+						};
+						state.src = result.iconBig;
+
+						tool.refreshLight();
+					}, {
+						method: 'post',
+						fields: {
+							url: state.url
+						}
+					});
+				}
+				return false;
+			};
+		}
 
 		// loading styles
 		Q.addStylesheet('{{Websites}}/css/tools/webpage/preview.css', pipe.fill('styles'));
@@ -80,6 +121,11 @@
 			var tool = this;
 			var state = this.state;
 			var $te = $(tool.element);
+
+
+			if (state.url && !state.streamName) {
+				return tool.refreshLight();
+			}
 
 			var pipe = new Q.Pipe(['interest', 'webpage'], function (params) {
 				var interestStream = params.interest[0];
