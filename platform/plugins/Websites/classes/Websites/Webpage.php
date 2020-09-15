@@ -28,10 +28,16 @@ class Websites_Webpage extends Base_Websites_Webpage
 			throw new Exception("Invalid URL");
 		}
 
-		function _return ($result, $webpageCahe) {
+		function _return ($url, $result, $webpageCahe) {
 			if ($webpageCahe) {
-				$webpageCahe->title = substr($result['title'],0, $webpageCahe->maxSize_title());
-				$webpageCahe->description = substr($result['description'], 0, $webpageCahe->maxSize_description());
+				$webpageCahe->url = $url;
+				$webpageCahe->title = mb_substr($result['title'], 0, $webpageCahe->maxSize_title(), "UTF-8");
+				$webpageCahe->description = mb_substr($result['description'], 0, $webpageCahe->maxSize_description(), "UTF-8");
+				// dummy interest block for cache
+				$result['interest'] = array(
+					'title' => $url,
+					'icon' => $result['iconSmall']
+				);
 				$webpageCahe->results = json_encode($result);
 				$webpageCahe->save();
 			}
@@ -40,6 +46,14 @@ class Websites_Webpage extends Base_Websites_Webpage
 		}
 
 		$parsedUrl = parse_url($url);
+		$host = $parsedUrl["host"];
+		$port = Q::ifset($parsedUrl, "port", null);
+
+		$result = array(
+			'host' => $host,
+			'port' => $host
+		);
+
 
 		//$document = file_get_contents($url);
 
@@ -48,7 +62,13 @@ class Websites_Webpage extends Base_Websites_Webpage
 		if (Q_Config::get('Websites', 'cache', 'webpage', true)) {
 			$webpageCahe = new Websites_Webpage();
 			$webpageCahe->url = $url;
-			if ($webpageCahe->retrieve()) {
+			if (!$webpageCahe->retrieve()) {
+				// if not retrieved try to find url ended with slash (to avoid duplicates of save source)
+				$webpageCahe->url = $url.'/';
+				$webpageCahe->retrieve();
+			}
+
+			if ($webpageCahe->retrieved) {
 				$updatedTime = $webpageCahe->updatedTime;
 				if (isset($updatedTime)) {
 					$db = $webpageCahe->db();
@@ -82,20 +102,19 @@ class Websites_Webpage extends Base_Websites_Webpage
             $dirname = STREAMS_PLUGIN_FILES_DIR.DS.'Streams'.DS.'icons'.DS.'files';
             $urlPrefix = '{{Streams}}/img/icons/files';
             $icon = file_exists($dirname.DS.$extension)
-                ? "$urlPrefix/$extension"
-                : "$urlPrefix/_blank";
+                ? "$urlPrefix/$extension/80.png"
+                : "$urlPrefix/_blank/80.png";
 
 
-            $result = array(
+            $result = array_merge($result, array(
                 'title' => Q::ifset($fileInfo, 'comments', 'name', null),
                 'url' => $url,
                 'iconBig' => $icon,
                 'iconSmall' => $icon,
-                'type' => $extension,
-                'host' => $parsedUrl['host']
-            );
+                'type' => $extension
+            ));
 
-            return _return($result, $webpageCahe);
+            return _return($url, $result, $webpageCahe);
         }
 
 		// get source with header
@@ -157,7 +176,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 			}
 		}
 
-		$result = array_merge($metas, $ogMetas);
+		$result = array_merge($result, $metas, $ogMetas);
 
 		// split headers string into array
 		$result['headers'] = array();
@@ -195,7 +214,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 		$icons = array();
 		$canonicalUrl = null;
 		foreach ($query as $item) {
-			$rel = $item->getAttribute('rel');
+			$rel = strtolower($item->getAttribute('rel'));
 			$href = $item->getAttribute('href');
 
 			if(!empty($rel)){
@@ -275,7 +294,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 		}
 
 		// additional handler for youtube.com
-		if (in_array($parsedUrl['host'], array('www.youtube.com', 'youtube.com'))) {
+		if (in_array($host, array('www.youtube.com', 'youtube.com'))) {
 			$googleapisKey = Q_Config::expect('Websites', 'youtube', 'keys', 'server');
 			preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\\/)[^&\n]+(?=\\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $googleapisMatches);
 			$googleapisUrl = sprintf('https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&fields=items(snippet(title,description,tags,thumbnails))&part=snippet', reset($googleapisMatches), $googleapisKey);
@@ -297,9 +316,8 @@ class Websites_Webpage extends Base_Websites_Webpage
 
 		$result['iconBig'] = Q::ifset($result, 'iconBig', Q_Uri::interpolateUrl("{{baseUrl}}/{{Websites}}/img/icons/Websites/webpage/80.png"));
 		$result['iconSmall'] = Q::ifset($result, 'iconSmall', Q_Uri::interpolateUrl("{{baseUrl}}/{{Websites}}/img/icons/Websites/webpage/40.png"));
-		$result['host'] = $parsedUrl['host'];
 
-		return _return($result, $webpageCahe);
+		return _return($url, $result, $webpageCahe);
 	}
 	/**
 	 * Normalize href like '//path/to' or '/path/to' to valid URL
@@ -512,13 +530,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 	 * @param {array} $params
 	 * @param {string} [$params.asUserId=null] The user who would be create stream. If null - logged user id.
 	 * @param {string} [$params.publisherId=null] Stream publisher id. If null - logged in user.
-	 * @param {string} [$params.title]
-	 * @param {string} [$params.keywords]
-	 * @param {string} [$params.description]
-	 * @param {string} [$params.iconBig]
-	 * @param {string} [$params.iconSmall]
-	 * @param {array} [$params.headers] array with key "Content-Type"
-	 * @param {string} [$params.lang] two-letter code
+	 * @param {string} [$params.url]
 	 * @param {string} [quotaName='Websites/webpage/chat'] Default quota name. Can be:
 	 * 	Websites/webpage/conversation - create Websites/webpage stream for conversation about webpage
 	 * 	Websites/webpage/chat - create Websites/webpage stream from chat to cache webpage.
@@ -528,9 +540,17 @@ class Websites_Webpage extends Base_Websites_Webpage
 	 */
 	static function createStream ($params, $quotaName='Websites/webpage/chat', $skipAccess=false) {
 		$url = Q::ifset($params, 'url', null);
+		// add scheme to url if not exist
+		if (parse_url($url, PHP_URL_SCHEME) === null) {
+			$url = 'http://'.$url;
+		}
+
 		if (!Q_Valid::url($url)) {
 			throw new Exception("Invalid URL");
 		}
+
+		$siteData = self::scrape($url);
+
 		$urlParsed = parse_url($url);
 		$loggedUserId = Users::loggedInUser(true)->id;
 
@@ -544,7 +564,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 		if ($webpageStream = self::fetchStream($url)) {
 			return $webpageStream;
 		}
-		
+
 		$quota = null;
 		if (!$skipAccess) {
 			// check quota
@@ -552,21 +572,23 @@ class Websites_Webpage extends Base_Websites_Webpage
 			$quota = Users_Quota::check($asUserId, '', $quotaName, true, 1, $roles);
 		}
 
-		$title = Q::ifset($params, 'title', substr($url, strrpos($url, '/') + 1));
-		$title = $title ? substr($title, 0, 255) : '';
+		$streamsStream = new Streams_Stream();
+		$title = Q::ifset($siteData, 'title', substr($url, strrpos($url, '/') + 1));
+		$title = $title ? mb_substr($title, 0, $streamsStream->maxSize_title(), "UTF-8") : '';
 
-		$keywords = Q::ifset($params, 'keywords', null);
-		$description = substr(Q::ifset($params, 'description', ''), 0, 1023);
-		$copyright = Q::ifset($params, 'copyright', null);
-		$iconBig = self::normalizeHref(Q::ifset($params, 'iconBig', null), $url);
-		$iconSmall = self::normalizeHref(Q::ifset($params, 'iconSmall', null), $url);
-		$contentType = Q::ifset($params, 'headers', 'Content-Type', 'text/html'); // content type by default text/html
+		$keywords = Q::ifset($siteData, 'keywords', null);
+		$description = mb_substr(Q::ifset($siteData, 'description', ''), 0, $streamsStream->maxSize_content(), "UTF-8");
+		$copyright = Q::ifset($siteData, 'copyright', null);
+		$iconBig = self::normalizeHref(Q::ifset($siteData, 'iconBig', null), $url);
+		$iconSmall = self::normalizeHref(Q::ifset($siteData, 'iconSmall', null), $url);
+		$contentType = Q::ifset($siteData, 'headers', 'Content-Type', 'text/html'); // content type by default text/html
 		$contentType = explode(';', $contentType)[0];
-		$streamIcon = Q_Config::get('Streams', 'types', 'Websites/webpage', 'defaults', 'icon', null);
+		$streamIcon = $iconBig ?: Q_Config::get('Streams', 'types', 'Websites/webpage', 'defaults', 'icon', null);
 
 		// special interest stream for websites/webpage stream
 		$port = Q::ifset($urlParsed, 'port', null);
-		$interestTitle = 'Websites: '.$urlParsed['host'].($port ? ':'.$port : '');
+		$host = $urlParsed['host'];
+		$interestTitle = 'Websites: '.$host.($port ? ':'.$port : '');
 		// insofar as user created Websites/webpage stream, need to complete all actions related to interest created from client
 		Q::event('Streams/interest/post', array(
 			'title' => $interestTitle,
@@ -624,9 +646,11 @@ class Websites_Webpage extends Base_Websites_Webpage
                 'url' => $url,
                 'urlParsed' => $urlParsed,
                 'icon' => $iconBig,
+                'host' => $host,
+                'port' => $port,
                 'copyright' => $copyright,
                 'contentType' => $contentType,
-                'lang' => Q::ifset($params, 'lang', 'en')
+                'lang' => Q::ifset($siteData, 'lang', 'en')
             ),
             'skipAccess' => $skipAccess
         );
@@ -648,16 +672,6 @@ class Websites_Webpage extends Base_Websites_Webpage
                 'relatedParams' => $relatedParams
             ));
         }
-
-		// check if category stream defined, and relate if yes
-		$categoryStream = Q::ifset($params, 'categoryStream', null);
-		if ($categoryStream) {
-			$categoryStream['name'] = $categoryStream['streamName'];
-			$webpageStream->relateTo((object)$categoryStream, $categoryStream['relationType'], null, array(
-				'skipAccess' => true
-			));
-		}
-
 
 		// grant access to this stream for logged user
 		$streamsAccess = new Streams_Access();
@@ -681,7 +695,10 @@ class Websites_Webpage extends Base_Websites_Webpage
 			}
 		}
 
-		$webpageStream->subscribe(compact('userId'));
+		// if publisher not community, subscribe publisher to this stream
+		if (!Users::isCommunityId($publisherId)) {
+			$webpageStream->subscribe(array('userId' => $publisherId));
+		}
 
 		// handle with keywords
 		if (!empty($keywords)) {

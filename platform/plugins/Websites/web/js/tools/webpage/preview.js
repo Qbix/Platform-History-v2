@@ -8,12 +8,9 @@
 	 *   @param {array} [options.editable=["title"]] Array of editable fields (by default only title). Can be ["title", "description"]
 	 *   @param {string} [options.mode=document] This option regulates tool layout. Can be 'title' and 'document'.
 	 *   @param {Q.Event} [options.onInvoke] fires when the user click on preview element
-	 *   @param {string} [options.title] title for preview
-	 *   @param {string} [options.description] description for preview
-	 *   @param {string} [options.keywords] keywords for preview
-	 *   @param {string} [options.interest.title] title of interest for preview
-	 *   @param {string} [options.interest.icon] icon of interest for preview
-	 *   @param {string} [options.src] src for preview icon
+	 *   @param {boolean} [options.showDomainOnly=false] If true show domain:port if port != 80, else show full url
+	 *   @param {boolean} [options.showDescription=false] If true show site description below title instead url
+	 *   @param {object} [options.siteData] Site data
 	 *   @param {string} [options.url] url for preview
 	 */
 	Q.Tool.define("Websites/webpage/preview", function (options) {
@@ -21,11 +18,12 @@
 		var state = this.state;
 		var preview = Q.Tool.from(this.element, "Streams/preview");
 		var previewState = Q.getObject("state", preview);
+		var $toolElement = $(tool.element);
 
 		state.publisherId = state.publisherId || Q.getObject("state.publisherId", preview);
 		state.streamName = state.streamName || Q.getObject("state.streamName", preview);
 
-		$(tool.element).attr('data-mode', this.state.mode);
+		$toolElement.attr('data-mode', this.state.mode);
 
 		// wait when styles and texts loaded and then run refresh
 		var pipe = Q.pipe(['styles', 'text'], function () {
@@ -50,32 +48,12 @@
 			// rewrite Streams/preview composer
 			previewState.creatable.preprocess = function (_proceed) {
 				// if url specified, just call refresh to build preview with scraped data
-				if (state.url) {
-					Q.req('Websites/scrape', ['result'], function (err, response) {
-						var msg = Q.firstErrorMessage(err, response && response.errors);
-						if (msg) {
-							return Q.alert(msg);
-						}
-
-						var result = response.slots.result;
-
-						state.title = result.title;
-						state.description = result.description;
-						state.keywords = result.keywords || '';
-						state.interest = {
-							title: ' ' + result.host,
-							icon: result.iconSmall,
-						};
-						state.src = result.iconBig;
-
-						tool.refreshLight();
-					}, {
-						method: 'post',
-						fields: {
-							url: state.url
-						}
-					});
+				if (!Q.isEmpty(state.siteData)) {
+					tool.refreshLight();
+				} else if (state.url) {
+					tool.scrapeUrl(tool.refreshLight);
 				}
+
 				return false;
 			};
 		}
@@ -94,6 +72,11 @@
 
 			pipe.fill('text')();
 		});
+
+		tool.Q.onStateChanged('url').set(function () {
+			$toolElement.html('<img src="' + Q.info.imgLoading + '">');
+			tool.scrapeUrl(tool.refreshLight);
+		}, tool);
 	},
 
 	{
@@ -103,16 +86,13 @@
 		mode: 'document',
 		onInvoke: new Q.Event(),
 		onRender: new Q.Event(),
+		onError: new Q.Event(),
+		showDomainOnly: false,
+		showDescription: false,
 		hideIfNoParticipants: false,
+
 		// light mode params
-		title: null,
-		description: null,
-		keywords: null,
-		interest: {
-			title: null,
-			icon: null,
-		},
-		src: null,
+		siteData: {},
 		url: null
 	},
 
@@ -121,7 +101,6 @@
 			var tool = this;
 			var state = this.state;
 			var $te = $(tool.element);
-
 
 			if (state.url && !state.streamName) {
 				return tool.refreshLight();
@@ -272,17 +251,33 @@
 				});
 			});
 		},
+		/**
+		 * Create preview tool using just state data
+		 * @method refreshLight
+		 */
 		refreshLight: function () {
 			var tool = this;
 			var state = this.state;
+			var siteData = state.siteData;
+
+			if (!Q.getObject('interest.icon', siteData)) {
+				Q.setObject('interest.icon', siteData.iconSmall, siteData);
+			}
+
+			if (state.showDomainOnly) {
+				Q.setObject('interest.title', siteData.host + (siteData.port ? ':' + siteData.port : ''), siteData);
+			} else {
+				Q.setObject('interest.title', state.url, siteData);
+			}
 
 			Q.Template.render('Websites/webpage/preview', {
-				title: state.title,
-				description: state.description,
-				keywords: state.keywords || '',
-				interest: state.interest,
-				src: state.src,
-				url: state.url
+				title: siteData.title,
+				description: siteData.description,
+				keywords: siteData.keywords || '',
+				interest: siteData.interest,
+				src: siteData.iconBig,
+				url: state.url,
+				showDescription: state.showDescription
 			}, function (err, html) {
 				if (err) {
 					return;
@@ -294,6 +289,38 @@
 					Q.handle(tool.state.onRender, tool);
 				});
 			});
+		},
+		/**
+		 * Request Websites/scrape for site data
+		 * @method scrapeUrl
+		 */
+		scrapeUrl: function (callback) {
+			var tool = this;
+			var state = this.state;
+			var siteData = this.state.siteData;
+
+			Q.req("Websites/scrape", ["result"], function (err, response) {
+				var msg = Q.firstErrorMessage(err, response && response.errors);
+				if (msg) {
+					Q.handle(state.onError, tool, [msg]);
+					return console.warn(msg);
+				}
+
+				var result = response.slots.result;
+
+				siteData.title = result.title;
+				siteData.description = result.description;
+				siteData.keywords = result.keywords;
+				siteData.interest = result.interest;
+				siteData.iconBig = result.iconBig;
+
+				Q.handle(callback, tool, [result]);
+			}, {
+				method: "post",
+				fields: {
+					url: state.url
+				}
+			});
 		}
 	});
 
@@ -302,8 +329,8 @@
 		'<div class="Streams_preview_contents">' +
 		'	<h3 class="Streams_preview_title Streams_preview_view">{{& title}}</h3>' +
 		//'	<div class="Streams_aspect_url">{{& url}}</div>' +
-		'	<div class="Streams_aspect_description">{{& description}}</div>' +
-		'	<div class="Streams_aspect_interests"><img src="{{& interest.icon}}"><a href="{{& url}}" target="_blank">{{& interest.title}}</a></div>' +
+		'	<div class="Streams_aspect_description" data-show="{{showDescription}}">{{& description}}</div>' +
+		'	<div class="Streams_aspect_interests" data-hide="{{showDescription}}"><img src="{{& interest.icon}}"><a href="{{& url}}" target="_blank">{{& interest.title}}</a></div>' +
 		'	<div class="streams_chat_participants"></div>' +
 		'	<div class="streams_chat_unseen"></div>' +
 		'</div>'

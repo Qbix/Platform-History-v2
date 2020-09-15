@@ -77,6 +77,7 @@ var Websites = Q.Websites = Q.plugins.Websites = {
 		var extension = param;
 
 		if (param.matchTypes('url').length) {
+			param = param.match(/:\/\//gm) ? param : 'http://' + param;
 			host = (new URL(param)).host;
 			extension = param.substr(param.lastIndexOf('.') + 1);
 		}
