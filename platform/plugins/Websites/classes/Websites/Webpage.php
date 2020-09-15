@@ -51,7 +51,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 
 		$result = array(
 			'host' => $host,
-			'port' => $host
+			'port' => $port
 		);
 
 
