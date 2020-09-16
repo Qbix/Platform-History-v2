@@ -118,36 +118,7 @@ class Websites_Webpage extends Base_Websites_Webpage
             return _return($url, $result, $webpageCahe);
         }
 
-		// get source with header
-		// "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36"
-		$response = Q_Utils::get($url, $_SERVER['HTTP_USER_AGENT'], array(
-			CURLOPT_RETURNTRANSFER => true,
-			CURLOPT_VERBOSE => true,
-			CURLOPT_HEADER => true,
-			CURLOPT_FOLLOWLOCATION => true
-		));
-		$response = explode("\r\n\r\n", $response);
-		if (!is_array($response) || count($response) < 2) {
-			throw new Exception("Server return wrong response!");
-		}
-		$http_response_header = $document = '';
-		foreach ($response as $i => $item) {
-			if (strpos($item, 'HTTP/') === 0 && empty($document)) {
-				$http_response_header = explode("\n", $item);
-			} else {
-				$document .= $item;
-			}
-		}
-
-		//If http response header mentions that content is gzipped, then uncompress it
-		foreach ($http_response_header as $item) {
-			if(stristr($item, 'content-encoding') && stristr($item, 'gzip') && 0 === mb_strpos($document, "\x1f" . "\x8b" . "\x08", 0, "US-ASCII")) {
-				//Now lets uncompress the compressed data
-				$document = gzinflate(substr($document,10,-8) );
-				break;
-			}
-		}
-
+		$document = self::readURL($url);
 		if (!$document) {
 			throw new Exception("Unable to access the site");
 		}
@@ -179,15 +150,14 @@ class Websites_Webpage extends Base_Websites_Webpage
 
 		$result = array_merge($result, $metas, $ogMetas);
 
-		// split headers string into array
 		$result['headers'] = array();
-		if (is_string($http_response_header)) {
-			$http_response_header = explode("\n", $http_response_header);
-		}
 
-		foreach ($http_response_header as $item) {
-			$middle = explode(":",$item);
-			$result['headers'][trim($middle[0])] = trim(Q::ifset($middle, 1, null));
+		// merge headers into string
+		foreach ($headers as $key => $item) {
+			if (is_array($item)) {
+				$item = end($item);
+			}
+			$result['headers'][trim($key)] = trim($item);
 		}
 
 		// collect language from diff metas
@@ -407,6 +377,41 @@ class Websites_Webpage extends Base_Websites_Webpage
 
         return 'Websites/webpage';
     }
+	/**
+	 * Get limited data from remote url
+	 * @method readURL
+	 * @static
+	 * @param {string} $url
+	 * @param {integer} [$dataLimit=65536] Limit data length (bites) to download. Default 64Kb.
+	 * @throws Q_Exception
+	 * @return string
+	 */
+	static function readURL ($url, $dataLimit = 65536) {
+		if (!$urlp = fopen($url, "r")) {
+			throw new Q_Exception('Error opening URL for reading');
+		}
+
+		$data = null;
+
+		try {
+			$chunk_size = 4096; // Haven't bothered to tune this, maybe other values would work better??
+			$got = 0;
+
+			// Grab the first 64 KB of the file
+			while(!feof($urlp) && $got < $dataLimit) {
+				$data = $data . fgets($urlp, $chunk_size);
+				$got = strlen($data);
+			}
+
+			// Now $fp should be the first and last 64KB of the file!!
+			@fclose($urlp);
+		} catch (Exception $e) {
+			@fclose($urlp);
+			throw new Q_Exception('Error reading remote file using fopen');
+		}
+
+		return $data;
+	}
     /**
      * Get meta data from remote file by url
      * @method getRemoteFileInfo
