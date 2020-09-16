@@ -28,44 +28,11 @@
 			tool.process(this, event);
 		}, 1000));
 
-		// add to preprocess function which check whether streams created for each active preview
-		// if not created - create one and fill preview state with publisherId, streamName to use later for fields.instructions
-		tool.chatTool.state.preprocess.push(function (callback) {
-			var previewTool = tool.getToolFromElement(tool.getActivePreview());
-
-			if (Q.typeOf(previewTool) !== 'Q.Tool' || (previewTool.state.publisherId && previewTool.state.streamName)) {
-				return Q.handle(callback);
-			}
-
-			// send request to create Websites/webpages stream (if not created yet)
-			Q.req("Websites/webpage", ["publisherId", "streamName"], function (err, response) {
-				var msg = Q.firstErrorMessage(err, response && response.errors);
-				if (msg) {
-					return Q.alert(msg);
-				}
-
-				previewTool.state.publisherId = response.slots.publisherId;
-				previewTool.state.streamName = response.slots.streamName;
-
-				Q.handle(callback);
-			}, {
-				method: 'post',
-				fields: {
-					url: previewTool.state.url,
-					// if relate to chat, this preview tool for some reason will appear between chat messages
-					/*categoryStream: {
-						publisherId: tool.chatTool.state.publisherId,
-						streamName: tool.chatTool.state.streamName,
-						relationType: "Websites/webpage"
-					}*/
-				}
-			});
-		});
-
 		// on before message post
 		tool.chatTool.state.beforePost.set(function (fields) {
 			var previewTool = tool.getToolFromElement(tool.getActivePreview());
 			state.websitesPreview = {};
+			state.processedURLs = {};
 
 			if (Q.typeOf(previewTool) !== 'Q.Tool') {
 				return;
@@ -77,9 +44,7 @@
 			fields.instructions = Q.extend({}, fields.instructions, {
 				'Websites/webpages': {
 					url: previewTool.state.url,
-					streamType: type,
-					publisherId: previewTool.state.publisherId,
-					streamName: previewTool.state.streamName
+					streamType: type
 				}
 			});
 
@@ -298,7 +263,7 @@
 				instructions.editable = false;
 
 				var streamsPreview = Q.Tool.setUpElementHTML('div', 'Streams/preview', {
-					publisherId: instructions.publisherId,
+					publisherId: instructions.publisherId || Q.Users.loggedInUserId(),
 					streamName: instructions.streamName,
 					closeable: false,
 					editable: false
@@ -306,6 +271,7 @@
 				var specialPreview = Q.Tool.setUpElementHTML($(streamsPreview).addClass("Websites_webpage_chat_preview")[0], streamType, {
 					publisherId: instructions.publisherId,
 					streamName: instructions.streamName,
+					streamRequired: true,
 					url: instructions.url,
 					editable: false
 				});

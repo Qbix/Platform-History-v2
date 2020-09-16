@@ -28,21 +28,23 @@ class Websites_Webpage extends Base_Websites_Webpage
 			throw new Exception("Invalid URL");
 		}
 
-		function _return ($url, $result, $webpageCahe) {
-			if ($webpageCahe) {
-				$webpageCahe->url = $url;
-				$webpageCahe->title = mb_substr($result['title'], 0, $webpageCahe->maxSize_title(), "UTF-8");
-				$webpageCahe->description = mb_substr($result['description'], 0, $webpageCahe->maxSize_description(), "UTF-8");
-				// dummy interest block for cache
-				$result['interest'] = array(
-					'title' => $url,
-					'icon' => $result['iconSmall']
-				);
-				$webpageCahe->results = json_encode($result);
-				$webpageCahe->save();
-			}
+		if (!function_exists('_return')) {
+			function _return ($url, $result, $webpageCahe) {
+				if ($webpageCahe) {
+					$webpageCahe->url = $url;
+					$webpageCahe->title = mb_substr($result['title'], 0, $webpageCahe->maxSize_title(), "UTF-8");
+					$webpageCahe->description = mb_substr($result['description'], 0, $webpageCahe->maxSize_description(), "UTF-8");
+					// dummy interest block for cache
+					$result['interest'] = array(
+						'title' => $url,
+						'icon' => $result['iconSmall']
+					);
+					$webpageCahe->results = json_encode($result);
+					$webpageCahe->save();
+				}
 
-			return $result;
+				return $result;
+			}
 		}
 
 		$parsedUrl = parse_url($url);
@@ -53,7 +55,6 @@ class Websites_Webpage extends Base_Websites_Webpage
 			'host' => $host,
 			'port' => $port
 		);
-
 
 		//$document = file_get_contents($url);
 

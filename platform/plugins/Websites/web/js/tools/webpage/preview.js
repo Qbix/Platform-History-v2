@@ -5,6 +5,7 @@
 	 * @param {Object} [options] this is an object that contains parameters for this function
 	 *   @param {string} [options.publisherId] publisherId of Websites/webpage stream
 	 *   @param {string} [options.streamName] name of Websites/webpage stream
+	 *   @param {boolean} [options.streamRequired=false] If true and publisherId and streamName empty, send request to get or create stream.
 	 *   @param {array} [options.editable=["title"]] Array of editable fields (by default only title). Can be ["title", "description"]
 	 *   @param {string} [options.mode=document] This option regulates tool layout. Can be 'title' and 'document'.
 	 *   @param {Q.Event} [options.onInvoke] fires when the user click on preview element
@@ -25,17 +26,18 @@
 
 		$toolElement.attr('data-mode', this.state.mode);
 
+		// if tool element empty, fill it with throbber
+		if ($toolElement.is(':empty')) {
+			$toolElement.append('<img src="' + Q.info.imgLoading + '">');
+		}
+
 		// wait when styles and texts loaded and then run refresh
 		var pipe = Q.pipe(['styles', 'text'], function () {
-			if (state.publisherId && state.streamName) {
 				if (previewState) {
 					previewState.onRefresh.add(tool.refresh.bind(tool));
 				} else {
 					tool.refresh();
 				}
-			} else {
-				tool.refreshLight();
-			}
 		});
 
 		if (previewState) {
@@ -47,13 +49,7 @@
 
 			// rewrite Streams/preview composer
 			previewState.creatable.preprocess = function (_proceed) {
-				// if url specified, just call refresh to build preview with scraped data
-				if (!Q.isEmpty(state.siteData)) {
-					tool.refreshLight();
-				} else if (state.url) {
-					tool.scrapeUrl(tool.refreshLight);
-				}
-
+				tool.refresh();
 				return false;
 			};
 		}
@@ -75,13 +71,16 @@
 
 		tool.Q.onStateChanged('url').set(function () {
 			$toolElement.html('<img src="' + Q.info.imgLoading + '">');
-			tool.scrapeUrl(tool.refreshLight);
+			tool.scrapeUrl({
+				callback: tool.refresh
+			});
 		}, tool);
 	},
 
 	{
 		publisherId: null,
 		streamName: null,
+		streamRequired: false,
 		editable: ['title'],
 		mode: 'document',
 		onInvoke: new Q.Event(),
@@ -102,8 +101,20 @@
 			var state = this.state;
 			var $te = $(tool.element);
 
-			if (state.url && !state.streamName) {
+			// if url specified, just call refresh to build preview with scraped data
+			if (!Q.isEmpty(state.siteData)) {
 				return tool.refreshLight();
+			} else if (state.url) {
+				if (!state.streamRequired && !state.streamName) {
+					return tool.scrapeUrl({
+						callback: tool.refreshLight
+					});
+				} else if (state.streamRequired && !state.streamName) {
+					return tool.scrapeUrl({
+						callback: tool.refresh,
+						streamRequired: true
+					});
+				}
 			}
 
 			var pipe = new Q.Pipe(['interest', 'webpage'], function (params) {
@@ -293,21 +304,36 @@
 		/**
 		 * Request Websites/scrape for site data
 		 * @method scrapeUrl
+		 * @param {object} params
+		 * @param {boolean} [params.streamRequired=false] If true force to create stream (if not created yet)
+		 * @param {function} [params.callback] Callback called when on response
 		 */
-		scrapeUrl: function (callback) {
+		scrapeUrl: function (params) {
 			var tool = this;
 			var state = this.state;
 			var siteData = this.state.siteData;
+			var slots = ["result"];
 
-			Q.req("Websites/scrape", ["result"], function (err, response) {
+			var callback = Q.getObject("callback", params);
+			var streamRequired = !!Q.getObject("streamRequired", params);
+
+			if (streamRequired) {
+				slots = slots.concat(["publisherId", "streamName"]);
+			}
+
+			Q.req("Websites/scrape", slots, function (err, response) {
 				var msg = Q.firstErrorMessage(err, response && response.errors);
 				if (msg) {
 					Q.handle(state.onError, tool, [msg]);
 					return console.warn(msg);
 				}
 
-				var result = response.slots.result;
+				if (streamRequired) {
+					state.publisherId = response.slots.publisherId;
+					state.streamName = response.slots.streamName;
+				}
 
+				var result = response.slots.result;
 				siteData.title = result.title;
 				siteData.description = result.description;
 				siteData.keywords = result.keywords;

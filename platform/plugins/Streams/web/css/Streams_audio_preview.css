@@ -4,11 +4,15 @@
 	height: 40px;
 	width: 40px;
 	vertical-align: middle;
-	margin: 5px 10px 5px 5px;
+	margin: 5px;
 }
 
 .Streams_audio_preview_tool .Streams_preview_title {
 	line-height: normal;
+	display: inline-block;
+	width: calc(100% - 60px);
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .Streams_audio_preview_tool iframe {
