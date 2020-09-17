@@ -134,7 +134,7 @@
 
 			// add styles
 			Q.addStylesheet('{{Q}}/css/audio.css');
-			Q.addStylesheet('{{Streams}}/css/Streams_audio_preview.css');
+			Q.addStylesheet('{{Streams}}/css/tools/audio_preview.css');
 		},
 
 		{
@@ -241,7 +241,7 @@
 	Q.Template.set('Streams/audio/preview/view',
 		'<div class="Streams_preview_container Streams_preview_view Q_clearfix">'
 		+ '<div class="Streams_preview_audio_player"></div>'
-		+ '<div class="Streams_preview_contents {{titleClass}}">'
+		+ '<div class="Streams_preview_contents">'
 		+ '<h2 class="Streams_preview_title">{{& inplace}}</h2>'
 		+ '<div class="Streams_preview_audio_duration"></div>'
 		+ '</div></div>'

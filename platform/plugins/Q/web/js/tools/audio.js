@@ -11,7 +11,6 @@
  *  @param {String} [options.url] URL of audio stream
  *  @param {boolean} [options.autoplay=false] If true - start play on load
  */
-
 Q.Tool.define("Q/audio", function (options) {
 	var tool = this;
 	var state = tool.state;
@@ -172,7 +171,6 @@ Q.Tool.define("Q/audio", function (options) {
 	url: null,
 	autoplay: false,
 	isComposer: true,
-	display: "classic", // "compact" | "soundcloud"
 	/* <Q/audio jquery plugin states> */
 	publisherId: null,
 	streamName: null, // create stream or edit
@@ -262,7 +260,7 @@ Q.Tool.define("Q/audio", function (options) {
 	},
 	/**
 	 * Start audio creation dialog
-	 * @method start
+	 * @method recorder
 	 */
 	recorder: function () {
 		var tool = this;
@@ -311,10 +309,10 @@ Q.Tool.define("Q/audio", function (options) {
 					var params = {
 						title: siteData.title,
 						content: siteData.description,
-						icon: siteData.bigIcon,
+						icon: siteData.iconBig,
 						attributes: {
 							host: siteData.host,
-							smallIcon: siteData.smallIcon,
+							iconSmall: siteData.iconSmall,
 							url: url,
 							'Q.file.url': "",
 							'file.url': "",
