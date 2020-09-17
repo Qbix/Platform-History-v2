@@ -57,6 +57,21 @@
         "discard": "Discard",
         "encoding": "Encoding"
     },
+    "video": {
+        "reset": "Reset",
+        "clip": "Clip",
+        "edit": "Edit",
+        "upload": "Upload",
+        "link": "Link",
+        "seturl": "Set URL",
+        "save": "Save",
+        "setClip": "Set Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+    },
     "clip": {
         "SetClipStart": "Set Clip Start",
         "ClipStart": "Clip Start",

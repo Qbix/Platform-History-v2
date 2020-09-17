@@ -1,0 +1,96 @@
+.Q_video_composer {
+    padding: 10px;
+    position: relative;
+}
+
+.Q_video_composer label[for=url] {
+    margin-top: 10px;
+    display: block;
+    white-space: nowrap;
+}
+.Q_video_composer label[for=url] button,
+.Q_video_composer label[for=url] input {
+    display: inline-block;
+}
+.Q_video_composer label[for=url] input {
+    width: 60%;
+    margin-right: 5px;
+}
+
+.Q_dialog_video .Q_video_player {
+    display: none;
+    margin-bottom: 10px;
+}
+.Q_dialog_video .Q_video_composer[data-composer=false] .Q_video_player {
+    display: block;
+}
+
+.Q_video_composer_content > div {
+    display: none;
+}
+.Q_video_composer_content div[data-content=upload] input.Q_video_file,
+.Q_video_composer_content div[data-content=link] label {
+    display: block;
+    margin: 30px auto 0;
+    width: 80%;
+    white-space: nowrap;
+}
+.Q_video_composer_content div[data-content=link] label button {
+    display: inline;
+}
+.Q_video_composer_content > div.Q_selected {
+    background: transparent;
+    border: none;
+    display: block;
+    min-height: 100px;
+}
+.Q_video_composer_content .Q_video_composer_upload_limit {
+    margin: 3px auto 0;
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    color: red;
+}
+.Q_video_composer .Q_video_composer_select {
+    text-align: center;
+    white-space: nowrap;
+}
+.Q_video_composer .Q_video_composer_select > button {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-position: top center;
+    margin: 0 2%;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding-top: 40px;
+}
+.Q_video_composer .Q_video_composer_select > button.Q_selected {
+    background-color: #0f0;
+}
+.Q_video_composer .Q_video_composer_select > button[name=edit] {
+    background-image: url('../img/audio/edit/40.png');
+}
+.Q_video_composer[data-composer=true] .Q_video_composer_select > button[name=edit],
+.Q_video_composer[data-composer=true] .Q_video_composer_content > [data-content=edit] {
+    display: none;
+}
+.Q_video_composer .Q_video_composer_select > button[name=upload] {
+    background-image: url('../img/audio/upload/40.png');
+}
+.Q_video_composer .Q_video_composer_select > button[name=link] {
+    background-image: url('../img/audio/link/40.png');
+}
+.Q_video_composer .Q_video_composer_submit {
+    text-align: center;
+    white-space: nowrap;
+    margin-top: 10px;
+}
+.Q_video_composer .Q_video_composer_submit button {
+    display: inline-block;
+    margin: 0 2%;
+}
+.Q_video_composer_content .Q_video_composer_clip {
+    margin-top: 10px;
+}
