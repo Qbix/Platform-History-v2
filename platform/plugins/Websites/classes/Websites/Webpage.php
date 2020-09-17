@@ -270,8 +270,9 @@ class Websites_Webpage extends Base_Websites_Webpage
 			preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\\/)[^&\n]+(?=\\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $googleapisMatches);
 			$googleapisUrl = sprintf('https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&fields=items(snippet(title,description,tags,thumbnails))&part=snippet', reset($googleapisMatches), $googleapisKey);
 			$googleapisRes = json_decode(Q_Utils::get($googleapisUrl));
+			$error = Q::ifset($googleapisRes, 'error', null);
 			// if json is valid
-			if (json_last_error() == JSON_ERROR_NONE) {
+			if (json_last_error() == JSON_ERROR_NONE && empty($error)) {
 				if ($googleapisSnippet = Q::ifset($googleapisRes, 'items', 0, 'snippet', null)) {
 					$result['title'] = Q::ifset($googleapisSnippet, 'title', Q::ifset($result, 'title', null));
 					$result['description'] = Q::ifset($googleapisSnippet, 'description', Q::ifset($result, 'description', null));
@@ -281,6 +282,10 @@ class Websites_Webpage extends Base_Websites_Webpage
 					if (is_array($googleapisTags) && count($googleapisTags)) {
 						$result['keywords'] = implode(',', $googleapisTags);
 					}
+				}
+			} else {
+				if ($error) {
+					throw new Exception($error->message);
 				}
 			}
 		}
