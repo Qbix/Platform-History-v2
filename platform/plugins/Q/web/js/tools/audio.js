@@ -609,7 +609,8 @@ Q.Tool.define("Q/audio", function (options) {
 								return;
 							}
 
-							Q.Tool.remove(resetTool.element, true, true);
+							Q.Tool.remove(resetTool.element, true);
+							resetTool.element.innerHTML = '';
 						});
 					});
 				});
