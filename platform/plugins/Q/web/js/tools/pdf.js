@@ -422,14 +422,15 @@ Q.Tool.define("Q/pdf", function (options) {
 						var pdfTool = Q.Tool.from($(".Q_pdf_composer_preview", content)[0], "Q/pdf");
 						var clipTool = Q.Tool.from($(".Q_pdf_composer_clip", content)[0], "Q/clip");
 
-						// remove Q/pdf and Q/clip tools from upload and link sections
-						Q.each([pdfTool, clipTool], function (i, resetTool) {
-							if (Q.typeOf(resetTool) !== 'Q.Tool') {
-								return;
-							}
+						if (pdfTool) {
+							$("<div>").addClass('Q_pdf_composer_preview').insertAfter(pdfTool.element);
+							Q.Tool.remove(pdfTool.element, true, true);
+						}
 
-							Q.Tool.remove(resetTool.element, true, true);
-						});
+						if (clipTool) {
+							Q.Tool.remove(clipTool.element, true);
+							clipTool.element.innerHTML = '';
+						}
 					});
 				});
 
