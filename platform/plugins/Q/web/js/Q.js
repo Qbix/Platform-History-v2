@@ -13479,6 +13479,7 @@ Q.onJQuery.add(function ($) {
 		"Q/lazyload": "{{Q}}/js/tools/lazyload.js",
 		"Q/audio": "{{Q}}/js/tools/audio.js",
 		"Q/video": "{{Q}}/js/tools/video.js",
+		"Q/pdf": "{{Q}}/js/tools/pdf.js",
 		"Q/clip": "{{Q}}/js/tools/clip.js"
 	});
 	

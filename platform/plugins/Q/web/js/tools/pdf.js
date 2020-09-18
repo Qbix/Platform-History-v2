@@ -6,13 +6,13 @@
 	
 /**
  * YUIDoc description goes here
- * @class Q video
+ * @class Q pdf
  * @constructor
  * @param {Object} [options] Override various options for this tool
- *  @param {String} [options.url] URL of video source
+ *  @param {String} [options.url] URL of pdf doc
  *  @param {boolean} [options.autoplay=false] If true - start play on load
  */
-Q.Tool.define("Q/video", function (options) {
+Q.Tool.define("Q/pdf", function (options) {
 	var tool = this;
 	var state = tool.state;
 
@@ -20,90 +20,16 @@ Q.Tool.define("Q/video", function (options) {
 		state.url = state.url.interpolate({ "baseUrl": Q.info.baseUrl });
 	}
 
-	tool.adapters = {};
+	var p = Q.pipe(['stylesheet', 'text', 'stream'], function (params, subjects) {
+		tool.text = params.text[1].pdf;
 
-	tool.adapters.mp4 = {
-		init: function () {
-			var options = {
-				sources: [{
-					src: state.url,
-					type: 'video/mp4'
-				}]
-			};
-
-			tool.initPlayer(options);
-		}
-	};
-	tool.adapters.webm = {
-		init: function () {
-			var options = {
-				sources: [{
-					src: state.url,
-					type: 'video/webm'
-				}]
-			};
-
-			tool.initPlayer(options);
-		}
-	};
-	tool.adapters.ogg = {
-		init: function () {
-			var options = {
-				sources: [{
-					src: state.url,
-					type: 'video/ogg'
-				}]
-			};
-
-			tool.initPlayer(options);
-		}
-	};
-	tool.adapters.youtube = {
-		init: function () {
-			Q.addScript("{{Q}}/js/videojs/plugins/YouTube.js", function () {
-				var options = {
-					techOrder: ["youtube"],
-					sources: [{
-						src: state.url,
-						type: 'video/youtube'
-					}],
-					youtube: {
-						ytControls: 2
-					}
-				};
-
-				tool.initPlayer(options);
-			});
-		}
-	};
-	tool.adapters.vimeo = {
-		init: function () {
-			Q.addScript("{{Q}}/js/videojs/plugins/Vimeo.js", function () {
-				var options = {
-					techOrder: ["vimeo"],
-					sources: [{
-						src: state.url,
-						type: 'video/vimeo'
-					}],
-					vimeo: {
-						ytControls: 2
-					}
-				};
-
-				tool.initPlayer(options);
-			});
-		}
-	};
-
-	//tool.adapters.youtube = tool.adapters.vimeo = tool.adapters.mp4 = tool.adapters.webm = tool.adapters.general;
-
-	var p = Q.pipe(['stylesheet', 'text', 'scripts', 'stream'], function (params, subjects) {
-		tool.text = params.text[1].video;
 		Q.handle(tool[state.action], tool);
 	});
 
-	Q.addStylesheet(["{{Q}}/css/videojs.css", "{{Q}}/css/video.css"], p.fill('stylesheet'), { slotName: 'Q' });
-	Q.addScript("{{Q}}/js/videojs/lib.js", p.fill('scripts'));
+	Q.addStylesheet(["{{Q}}/css/pdf.css"], p.fill('stylesheet'), { slotName: 'Q' });
+	// we specially don' wait pdfjs lib loading, because it too big
+	// it will load during user actions
+	Q.addScript("{{Q}}/js/pdfjs/build/pdf.js");
 	Q.Text.get('Q/content', p.fill('text'));
 
 	tool.stream = null;
@@ -121,11 +47,9 @@ Q.Tool.define("Q/video", function (options) {
 {
 	action: "composer",
 	url: null,
-	autoplay: false,
 	isComposer: true,
 	publisherId: null,
 	streamName: null,
-	throttle: 10,
 	fileUploadUHandler: Q.action("Q/file"),
 	preprocess: null,
 	duration: 0,
@@ -134,14 +58,12 @@ Q.Tool.define("Q/video", function (options) {
 	clipEnd: null,
 	onSuccess: new Q.Event(),
 	onError: new Q.Event(function (message) {
-		alert('Flie upload error' + (message ? ': ' + message : '') + '.');
-	}, 'Q/video'),
+		Q.alert('Flie upload error' + (message ? ': ' + message : '') + '.');
+	}, 'Q/audio'),
 	onFinish: new Q.Event(),
+	/* </Q/audio jquery plugin states> */
 	onLoad: new Q.Event(),
 	onPlay: new Q.Event(function () {
-		this.checkClip();
-	}),
-	onPlaying: new Q.Event(function () {
 		this.checkClip();
 	}),
 	onPause: new Q.Event(),
@@ -176,19 +98,60 @@ Q.Tool.define("Q/video", function (options) {
 		var tool = this;
 		var state = this.state;
 
-		Q.Template.render('Q/video/videojs', {
-			autoplay: state.autoplay ? 'autoplay' : '',
-		}, function (err, html) {
-			tool.element.innerHTML = html;
 
-			tool.$video = $("video", tool.element);
+		var loadingTask = pdfjsLib.getDocument(state.url);
 
-			var adapterName = tool.adapterNameFromUrl();
-			tool.adapters[adapterName].init();
+		loadingTask.promise.then(function(pdf) {
+			state.pdf = pdf;
+			tool.renderPage();
 		});
 	},
 	/**
-	 * Start video composer dialog
+	 * Start pdf composer dialog
+	 * @method renderPage
+	 */
+	renderPage: function (page) {
+		var tool = this;
+		var state = this.state;
+		var pdf = state.pdf;
+		var $toolElement = $(tool.element);
+
+		if (!page) {
+			return pdf.getPage(1).then(tool.renderPage.bind(tool));
+		}
+
+		//This gives us the page's dimensions at full scale
+		var viewport = page.getViewport({
+			scale: $toolElement.width()/page.getViewport({scale:1}).width
+		});
+
+		//We'll create a canvas for each page to draw it on
+		var canvas = document.createElement("canvas");
+		canvas.style.display = "block";
+		canvas.height = viewport.height;
+		canvas.width = viewport.width;
+
+		var context = canvas.getContext('2d');
+
+		//Draw it on the canvas
+		page.render({
+			canvasContext: context,
+			viewport: viewport
+		});
+
+		//Add it to the web page
+		tool.element.appendChild(canvas);
+
+		var currPage = page.pageNumber + 1;
+
+		//Move to next page
+		if (pdf !== null && currPage <= pdf.numPages)
+		{
+			pdf.getPage(currPage).then(tool.renderPage.bind(tool));
+		}
+	},
+	/**
+	 * Start pdf composer dialog
 	 * @method composer
 	 */
 	composer: function () {
@@ -206,7 +169,7 @@ Q.Tool.define("Q/video", function (options) {
 			};
 
 			var action = state.mainDialog.attr('data-action');
-			var $currentContent = $(".Q_video_composer_content [data-content=" + action + "]", state.mainDialog);
+			var $currentContent = $(".Q_pdf_composer_content [data-content=" + action + "]", state.mainDialog);
 			if (!$currentContent.length) {
 				return _error("No action selected");
 			}
@@ -227,7 +190,7 @@ Q.Tool.define("Q/video", function (options) {
 					var msg = Q.firstErrorMessage(err, response && response.errors);
 					if (msg) {
 						Q.Dialogs.pop();
-						return console.warn("Q/video: " + msg);
+						return console.warn("Q/audio: " + msg);
 					}
 
 					var siteData = response.slots.result;
@@ -268,7 +231,7 @@ Q.Tool.define("Q/video", function (options) {
 					fields: {url: url}
 				});
 			} else if (action === "upload") {
-				var $file = $("input[type=file].Q_video_file", $currentContent);
+				var $file = $("input[type=file].Q_pdf_file", $currentContent);
 				// state.file set in recorder OR html file element
 				var file = ($file.length && $file[0].files[0]) || null;
 
@@ -291,7 +254,7 @@ Q.Tool.define("Q/video", function (options) {
 						},
 						file: {
 							data: this.result,
-							video: true
+							pdf: true
 						}
 					};
 
@@ -329,14 +292,6 @@ Q.Tool.define("Q/video", function (options) {
 							});
 						} else {
 							Q.alert('FileReader undefined');
-							/*
-                            delete params.data;
-                            state.input.wrap('<form />', {
-                                method: "put",
-                                action: Q.url(state.fileUploadUHandler, params)
-                            }).parent().submit();
-                            state.input.unwrap();
-                            */
 						}
 					} else { // if new stream
 						Q.handle([state.onSuccess, state.onFinish], tool, [params]);
@@ -369,10 +324,10 @@ Q.Tool.define("Q/video", function (options) {
 		};
 
 		Q.Dialogs.push({
-			className: 'Q_dialog_video',
-			title: "Video",
+			className: 'Q_dialog_pdf',
+			title: "PDF",
 			template: {
-				name: 'Q/video/composer',
+				name: 'Q/pdf/composer',
 				fields: {
 					isComposer: state.isComposer,
 					text: tool.text,
@@ -385,10 +340,10 @@ Q.Tool.define("Q/video", function (options) {
 
 				// if stream defined, render player
 				if (tool.stream) {
-					var $videoElement = $(".Q_video_composer_content [data-content=edit] .Q_video_composer_preview", mainDialog);
-					var $clipElement = $(".Q_video_composer_content [data-content=edit] .Q_video_composer_clip", mainDialog);
+					var $pdfElement = $(".Q_pdf_composer_content [data-content=edit] .Q_pdf_composer_preview", mainDialog);
+					var $clipElement = $(".Q_pdf_composer_content [data-content=edit] .Q_pdf_composer_clip", mainDialog);
 
-					$videoElement.tool("Q/video", {
+					$pdfElement.tool("Q/pdf", {
 						action: "implement",
 						clipStart: tool.stream.getAttribute('clipStart'),
 						clipEnd: tool.stream.getAttribute('clipEnd'),
@@ -446,7 +401,7 @@ Q.Tool.define("Q/video", function (options) {
 				});
 
 				// custom tabs implementation
-				$(".Q_video_composer_select button", mainDialog).on(Q.Pointer.click, function (e) {
+				$(".Q_pdf_composer_select button", mainDialog).on(Q.Pointer.click, function (e) {
 					var $this = $(this);
 					var action = $this.prop('name');
 
@@ -456,28 +411,19 @@ Q.Tool.define("Q/video", function (options) {
 
 					mainDialog.attr("data-action", action);
 					$this.addClass('Q_selected').siblings().removeClass('Q_selected');
-					$(".Q_video_composer_content [data-content=" + action + "]", mainDialog).addClass('Q_selected').siblings().removeClass('Q_selected');
-
-					// pause all exists players
-					Q.each($(".Q_video_tool", mainDialog), function () {
-						var videoTool = Q.Tool.from(this, "Q/video");
-
-						if (videoTool) {
-							videoTool.pause();
-						}
-					});
+					$(".Q_pdf_composer_content [data-content=" + action + "]", mainDialog).addClass('Q_selected').siblings().removeClass('Q_selected');
 				});
 
 				// Reset button
 				$("button[name=reset]", mainDialog).on(Q.Pointer.click, function (e) {
 					state.dataBlob = undefined;
 
-					Q.each($(".Q_video_composer_content [data-content=link], .Q_video_composer_content [data-content=upload]", mainDialog), function (i, content) {
-						var videoTool = Q.Tool.from($(".Q_video_composer_preview", content)[0], "Q/video");
-						var clipTool = Q.Tool.from($(".Q_video_composer_clip", content)[0], "Q/clip");
+					Q.each($(".Q_pdf_composer_content [data-content=link], .Q_pdf_composer_content [data-content=upload]", mainDialog), function (i, content) {
+						var pdfTool = Q.Tool.from($(".Q_pdf_composer_preview", content)[0], "Q/pdf");
+						var clipTool = Q.Tool.from($(".Q_pdf_composer_clip", content)[0], "Q/clip");
 
-						// remove Q/video and Q/clip tools from upload and link sections
-						Q.each([videoTool, clipTool], function (i, resetTool) {
+						// remove Q/pdf and Q/clip tools from upload and link sections
+						Q.each([pdfTool, clipTool], function (i, resetTool) {
 							if (Q.typeOf(resetTool) !== 'Q.Tool') {
 								return;
 							}
@@ -489,10 +435,10 @@ Q.Tool.define("Q/video", function (options) {
 
 				// set clip start/end for upload
 				$("input[type=file]", mainDialog).on('change', function () {
-					var $videoElement = $(".Q_video_composer_content [data-content=upload] .Q_video_composer_preview", mainDialog);
-					var $clipElement = $(".Q_video_composer_content [data-content=upload] .Q_video_composer_clip", mainDialog);
+					var $pdfElement = $(".Q_pdf_composer_content [data-content=upload] .Q_pdf_composer_preview", mainDialog);
+					var $clipElement = $(".Q_pdf_composer_content [data-content=upload] .Q_pdf_composer_clip", mainDialog);
 					var url = URL.createObjectURL(this.files[0]);
-					var toolPreview = Q.Tool.from($videoElement, "Q/video");
+					var toolPreview = Q.Tool.from($pdfElement, "Q/pdf");
 
 					// check file size
 					if (this.files[0].size >= parseInt(Q.info.maxUploadSize)) {
@@ -500,18 +446,13 @@ Q.Tool.define("Q/video", function (options) {
 						return Q.alert(tool.text.errorFileSize.interpolate({size: tool.humanFileSize(Q.info.maxUploadSize)}));
 					}
 
-					// if video tool exists, clear url object
-					if (toolPreview) {
-						URL.revokeObjectURL(toolPreview.state.url);
-					}
-
-					Q.Tool.remove($videoElement[0], true);
+					Q.Tool.remove($pdfElement[0], true);
 					Q.Tool.remove($clipElement[0], true);
 
-					$videoElement.empty();
+					$pdfElement.empty();
 					$clipElement.empty();
 
-					$videoElement.tool("Q/video", {
+					$pdfElement.tool("Q/pdf", {
 						action: "implement",
 						url: url,
 						onPlaying: function () {
@@ -537,20 +478,20 @@ Q.Tool.define("Q/video", function (options) {
 
 				// set clip start/end for link
 				$("button[name=setClip]", mainDialog).on(Q.Pointer.fastclick, function () {
-					var $videoElement = $(".Q_video_composer_content [data-content=link] .Q_video_composer_preview", mainDialog);
-					var $clipElement = $(".Q_video_composer_content [data-content=link] .Q_video_composer_clip", mainDialog);
+					var $pdfElement = $(".Q_pdf_composer_content [data-content=link] .Q_pdf_composer_preview", mainDialog);
+					var $clipElement = $(".Q_pdf_composer_content [data-content=link] .Q_pdf_composer_clip", mainDialog);
 					var url = $("input[name=url]", mainDialog).val();
 					if (!url.matchTypes('url').length) {
 						return Q.alert(tool.text.invalidURL);
 					}
 
-					Q.Tool.remove($videoElement[0], true);
+					Q.Tool.remove($pdfElement[0], true);
 					Q.Tool.remove($clipElement[0], true);
 
-					$videoElement.empty();
+					$pdfElement.empty();
 					$clipElement.empty();
 
-					$videoElement.tool("Q/video", {
+					$pdfElement.tool("Q/pdf", {
 						action: "implement",
 						url: url,
 						onPlaying: function () {
@@ -574,89 +515,11 @@ Q.Tool.define("Q/video", function (options) {
 					});
 				});
 
-				$(".Q_video_composer_select button:visible:first", mainDialog).click();
+				$(".Q_pdf_composer_select button:visible:first", mainDialog).click();
 			},
 			beforeClose: function(mainDialog) {
-				// clear recorder stream when dialog close.
-				// In this case every time dialog opened - user should allow to use microphone
-				if(state.recorder && state.recorder.stream) {
-					state.recorder.clearStream();
-				}
+
 			}
-		});
-	},
-	/**
-	 *
-	 * @method initPlayer
-	 */
-	initPlayer: function (options) {
-		var tool = this;
-		var state = this.state;
-		var throttle = state.throttle;
-
-		var _getCurrentPostion = function () {
-			return Math.trunc(state.player.currentTime() * 1000);
-		};
-
-		var onPlay = Q.throttle(function () {
-			var position = state.currentPosition || _getCurrentPostion();
-			console.log("Started at position " + position + " milliseconds");
-			Q.handle(state.onPlay, tool, [position]);
-		}, throttle);
-		var onPause = Q.throttle(function () {
-			var position = state.currentPosition || _getCurrentPostion();
-			console.log("Paused at position " + position + " milliseconds");
-			Q.handle(state.onPause, tool, [position]);
-		}, throttle);
-		var onSeek = Q.throttle(function () {
-			var position = state.currentPosition || _getCurrentPostion();
-			console.log("Seeked at position " + position + " milliseconds");
-			Q.handle(state.onSeek, tool, [position]);
-		}, throttle);
-		var onEnded = Q.throttle(function () {
-			var position = state.currentPosition || _getCurrentPostion();
-			console.log("Seeked at position " + position + " milliseconds");
-			Q.handle(state.onEnded, tool, [position]);
-		}, throttle);
-
-		state.player = videojs(tool.$video[0], options, function onPlayerReady() {
-			videojs.log('Your player is ready!');
-
-			state.currentPosition = 0;
-
-			this.on('play', function () {
-				onPlay();
-			});
-
-			this.on('pause', function () {
-				onPause();
-			});
-
-			this.on('seeking', function() {
-				onPause();
-			});
-
-			this.on('waiting', function() {
-				onPause();
-			});
-
-			this.on('seeked', function() {
-				onPlay();
-				onSeek();
-			});
-
-			this.on('ended', function() {
-				onPause();
-				onEnded();
-			});
-
-			// update currentPosition array on play
-			this.on('timeupdate', function() {
-				setTimeout(function(){
-					state.currentPosition = _getCurrentPostion();
-					Q.handle(state.onPlaying, tool, [state.currentPosition]);
-				}, 500);
-			});
 		});
 	},
 	/**
@@ -676,35 +539,7 @@ Q.Tool.define("Q/video", function (options) {
 	 * @param {integer} position in milliseonds
 	 */
 	setCurrentPosition: function (position) {
-		this.state.player && this.state.player.currentTime(position/1000);
-	},
-	/**
-	 * Detect adapter from url
-	 * @method adapterNameFromUrl
-	 */
-	adapterNameFromUrl: function () {
-		var url = this.state.url;
-		if (!url) {
-			throw new Q.Exception(this.id + ": url is required");
-		}
-		var newA = document.createElement('A');
-		newA.href = url;
-		var host = newA.hostname;
-
-		if (host.includes("youtube.com") || host.includes("youtu.be")) {
-			return 'youtube';
-		}
-		if (host.includes("vimeo.com")) {
-			return 'vimeo';
-		}
-
-		var ext = url.split('.').pop();
-		switch(ext) {
-			case 'webm': return 'webm';
-			case 'ogg': return 'ogg';
-			default: return 'mp4';
-		}
-		//throw new Q.Exception(this.id + ': No adapter for this URL');
+		this.state.player && this.state.player.currentTime(position);
 	},
 	/**
 	 * Convert bytes integer to human readable string
@@ -735,40 +570,35 @@ Q.Tool.define("Q/video", function (options) {
 	}
 });
 
-Q.Template.set('Q/video/composer',
-	'<div class="Q_video_composer" data-composer="{{isComposer}}"><form>'
-	+ '  <div class="Q_video_composer_select">'
+Q.Template.set('Q/pdf/composer',
+	'<div class="Q_pdf_composer" data-composer="{{isComposer}}"><form>'
+	+ '  <div class="Q_pdf_composer_select">'
 	+ '  	<button name="edit" type="button">{{text.edit}}</button>'
 	+ '  	<button name="upload" type="button">{{text.upload}}</button>'
 	+ '  	<button name="link" type="button">{{text.link}}</button>'
 	+ '  </div>'
-	+ '  <div class="Q_video_composer_content">'
+	+ '  <div class="Q_pdf_composer_content">'
 	+ '	 	<div data-content="edit">'
-	+ '			<div class="Q_video_player"></div>'
-	+ '			<div class="Q_video_composer_preview"></div>'
-	+ '			<div class="Q_video_composer_clip"></div>'
+	+ '			<div class="Q_pdf_composer_preview"></div>'
+	+ '			<div class="Q_pdf_composer_clip"></div>'
 	+ '  	</div>'
 	+ '  	<div data-content="upload">'
-	+ '	   		<input type="file" accept="video/*" class="Q_video_file" />'
-	+ '			<div class="Q_video_composer_upload_limit">{{uploadLimit}}</div>'
-	+ '			<div class="Q_video_composer_preview"></div>'
-	+ '			<div class="Q_video_composer_clip"></div>'
+	+ '	   		<input type="file" accept="application/pdf" class="Q_pdf_file" />'
+	+ '			<div class="Q_pdf_composer_upload_limit">{{uploadLimit}}</div>'
+	+ '			<div class="Q_pdf_composer_preview"></div>'
+	+ '			<div class="Q_pdf_composer_clip"></div>'
 	+ '		</div>'
 	+ '  	<div data-content="link">'
 	+ '	   		<label>'
 	+ '				<input name="url" placeholder="{{text.seturl}}" type="url">'
 	+ '				<button name="setClip" type="button" class="Q_button">{{text.setClip}}</button>'
 	+ '			</label>'
-	+ '			<div class="Q_video_composer_preview"></div>'
-	+ '			<div class="Q_video_composer_clip"></div>'
+	+ '			<div class="Q_pdf_composer_preview"></div>'
+	+ '			<div class="Q_pdf_composer_clip"></div>'
 	+ '		</div>'
 	+ '  </div>'
-	+ '  <div class="Q_video_composer_submit"><button name="save" class="Q_button" type="button">{{text.save}}</button><button name="reset" type="reset" class="Q_button">{{text.reset}}</button></div>'
+	+ '  <div class="Q_pdf_composer_submit"><button name="save" class="Q_button" type="button">{{text.save}}</button><button name="reset" type="reset" class="Q_button">{{text.reset}}</button></div>'
 	+ '</form></div>'
-);
-
-Q.Template.set('Q/video/videojs',
-	'<video preload="auto" controls class="video-js vjs-default-skin vjs-4-3" width="100%" height="auto" {{autoplay}}/>'
 );
 
 })(window, Q, jQuery);
