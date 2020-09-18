@@ -55,7 +55,9 @@
         "errorNoSource": "No audio source",
         "usethis": "Use This",
         "discard": "Discard",
-        "encoding": "Encoding"
+        "encoding": "Encoding",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
         "reset": "Reset",

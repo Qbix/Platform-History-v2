@@ -108,9 +108,16 @@ div[data-content=record] .Q_audio_allow, .Q_audio_start .Q_audio_encoding {
 .Q_audio_record_content div[data-content=upload] input.Q_audio_file,
 .Q_audio_record_content div[data-content=link] label {
 	display: block;
-	margin: 40px auto;
+	margin: 30px auto 0;
 	width: 80%;
 	white-space: nowrap;
+}
+.Q_audio_record_content .Q_audio_composer_upload_limit {
+	margin: 3px auto 0;
+	display: block;
+	text-align: center;
+	font-size: 14px;
+	color: red;
 }
 .Q_audio_record_content div[data-content=link] label button {
 	display: inline;
@@ -122,10 +129,18 @@ div[data-content=record] .Q_audio_allow, .Q_audio_start .Q_audio_encoding {
 	display: block;
 	background: transparent;
 	border: none;
+	min-height: 100px;
 }
 .Q_audio_start .Q_audio_record_select {
 	text-align: center;
 	white-space: nowrap;
+}
+.Q_audio_composer_content .Q_audio_composer_upload_limit {
+	margin: 3px auto 0;
+	display: block;
+	text-align: center;
+	font-size: 14px;
+	color: red;
 }
 .Q_audio_start .Q_audio_record_select > button {
 	display: inline-block;

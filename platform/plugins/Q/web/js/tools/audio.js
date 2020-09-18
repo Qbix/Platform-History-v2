@@ -346,6 +346,11 @@ Q.Tool.define("Q/audio", function (options) {
 				// state.file set in recorder OR html file element
 				var file = state.file || ($file.length && $file[0].files[0]) || null;
 
+				// check file size
+				if (file.size && file.size >= parseInt(Q.info.maxUploadSize)) {
+					return Q.alert(tool.text.errorFileSize.interpolate({size: tool.humanFileSize()}));
+				}
+
 				var reader = new FileReader();
 				reader.onload = function (event) {
 					if (state.preprocess) {
@@ -446,6 +451,7 @@ Q.Tool.define("Q/audio", function (options) {
 					maxRecordTime: tool.formatRecordTime(state.maxRecordTime),
 					textAllowMicrophoneAccess: tool.text.allowMicrophoneAccess,
 					isComposer: state.isComposer,
+					uploadLimit: tool.text.uploadLimit.interpolate({size: tool.humanFileSize(Q.info.maxUploadSize)}),
 					text: tool.text
 				}
 			},
@@ -612,6 +618,12 @@ Q.Tool.define("Q/audio", function (options) {
 					var $clipElement = $(".Q_audio_record_content [data-content=upload] .Q_audio_composer_clip", mainDialog);
 					var url = URL.createObjectURL(this.files[0]);
 					var toolPreview = Q.Tool.from($audioElement, "Q/audio");
+
+					// check file size
+					if (this.files[0].size >= parseInt(Q.info.maxUploadSize)) {
+						this.value = null;
+						return Q.alert(tool.text.errorFileSize.interpolate({size: tool.humanFileSize(Q.info.maxUploadSize)}));
+					}
 
 					// if audio tool exists, clear url object
 					if (toolPreview) {
@@ -1040,6 +1052,33 @@ Q.Tool.define("Q/audio", function (options) {
 		var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
 		return (hours ? hours + 'h ' : '') + (minutes ? minutes + 'm ' : '') + seconds+'s';
+	},
+	/**
+	 * Convert bytes integer to human readable string
+	 * @method humanFileSize
+	 */
+	humanFileSize: function humanFileSize(bytes, si=false, dp=1) {
+		var thresh = si ? 1000 : 1024;
+
+		if (Math.abs(bytes) < thresh) {
+			return bytes + ' B';
+		}
+
+		/*var units = si
+			? ['kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+			: ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
+		*/
+		var units = ['kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+		var u = -1;
+		var r = 10**dp;
+
+		do {
+			bytes /= thresh;
+			++u;
+		} while (Math.round(Math.abs(bytes) * r) / r >= thresh && u < units.length - 1);
+
+
+		return bytes.toFixed(dp) + ' ' + units[u];
 	}
 });
 
@@ -1066,6 +1105,7 @@ Q.Template.set('Q/audio/composer',
 	+ '  	</div>'
 	+ '  	<div data-content="upload">'
 	+ '	   		<input type="file" accept="audio/*" class="Q_audio_file" />'
+	+ '			<div class="Q_audio_composer_upload_limit">{{uploadLimit}}</div>'
 	+ '			<div class="Q_audio_composer_preview"></div>'
 	+ '			<div class="Q_audio_composer_clip"></div>'
 	+ '		</div>'

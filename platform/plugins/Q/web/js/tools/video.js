@@ -275,7 +275,7 @@ Q.Tool.define("Q/video", function (options) {
 				var file = ($file.length && $file[0].files[0]) || null;
 
 				// check file size
-				if (file.size && file.size > parseInt(Q.info.maxUploadSize)) {
+				if (file.size && file.size >= parseInt(Q.info.maxUploadSize)) {
 					return Q.alert(tool.text.errorFileSize.interpolate({size: tool.humanFileSize()}));
 				}
 
@@ -497,7 +497,8 @@ Q.Tool.define("Q/video", function (options) {
 					var toolPreview = Q.Tool.from($videoElement, "Q/video");
 
 					// check file size
-					if (this.files[0].size > parseInt(Q.info.maxUploadSize)) {
+					if (this.files[0].size >= parseInt(Q.info.maxUploadSize)) {
+						this.value = null;
 						return Q.alert(tool.text.errorFileSize.interpolate({size: tool.humanFileSize(Q.info.maxUploadSize)}));
 					}
 
