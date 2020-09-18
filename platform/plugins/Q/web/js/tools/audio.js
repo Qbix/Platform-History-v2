@@ -590,6 +590,20 @@ Q.Tool.define("Q/audio", function (options) {
 				$("button[name=reset]", mainDialog).on(Q.Pointer.click, function (e) {
 					state.dataBlob = undefined;
 					tool.recorderStateChange("init");
+
+					Q.each($(".Q_audio_record_content [data-content=link], .Q_audio_record_content [data-content=upload]", mainDialog), function (i, content) {
+						var audioTool = Q.Tool.from($(".Q_audio_composer_preview", content)[0], "Q/audio");
+						var clipTool = Q.Tool.from($(".Q_audio_composer_clip", content)[0], "Q/clip");
+
+						// remove Q/audio and Q/clip tools from upload and link sections
+						Q.each([audioTool, clipTool], function (i, resetTool) {
+							if (Q.typeOf(resetTool) !== 'Q.Tool') {
+								return;
+							}
+
+							Q.Tool.remove(resetTool.element, true, true);
+						});
+					});
 				});
 
 				// set clip start/end for upload

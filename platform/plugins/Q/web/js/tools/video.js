@@ -473,6 +473,20 @@ Q.Tool.define("Q/video", function (options) {
 				// Reset button
 				$("button[name=reset]", mainDialog).on(Q.Pointer.click, function (e) {
 					state.dataBlob = undefined;
+
+					Q.each($(".Q_video_composer_content [data-content=link], .Q_video_composer_content [data-content=upload]", mainDialog), function (i, content) {
+						var videoTool = Q.Tool.from($(".Q_video_composer_preview", content)[0], "Q/video");
+						var clipTool = Q.Tool.from($(".Q_video_composer_clip", content)[0], "Q/clip");
+
+						// remove Q/video and Q/clip tools from upload and link sections
+						Q.each([videoTool, clipTool], function (i, resetTool) {
+							if (Q.typeOf(resetTool) !== 'Q.Tool') {
+								return;
+							}
+
+							Q.Tool.remove(resetTool.element, true, true);
+						});
+					});
 				});
 
 				// set clip start/end for upload
