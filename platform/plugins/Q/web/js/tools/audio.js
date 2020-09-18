@@ -575,6 +575,8 @@ Q.Tool.define("Q/audio", function (options) {
 
 					if (action === "record") {
 						tool.recorderStateChange("init");
+					} else {
+						tool.recorderStateChange("clear");
 					}
 
 					mainDialog.attr("data-action", action);
@@ -582,7 +584,7 @@ Q.Tool.define("Q/audio", function (options) {
 					$(".Q_audio_record_content [data-content=" + action + "]", mainDialog).addClass('Q_selected').siblings().removeClass('Q_selected');
 
 					// pause all exists players
-					tool.recorderStateChange("init");
+					//tool.recorderStateChange("init");
 					Q.each($(".Q_audio_tool", mainDialog), function () {
 						var audioTool = Q.Tool.from(this, "Q/audio");
 
@@ -704,9 +706,7 @@ Q.Tool.define("Q/audio", function (options) {
 			beforeClose: function(mainDialog) {
 				// clear recorder stream when dialog close.
 				// In this case every time dialog opened - user should allow to use microphone
-				if(state.recorder && state.recorder.stream) {
-					state.recorder.clearStream();
-				}
+				tool.recorderStateChange("clear");
 			}
 		});
 	},
@@ -718,6 +718,18 @@ Q.Tool.define("Q/audio", function (options) {
 	recorderStateChange: function(newState){
 		var tool = this;
 		var state = this.state;
+		var _resetPie = function () {
+			// reset pie tool to start point
+			if(tool.pieTool){
+				state.currentRecordTime = state.maxRecordTime;
+
+				state.recordTextElement.html(tool.text.record);
+				state.recordElapsedElement.html(tool.text.maximum);
+				//state.recordTimeElement.show();
+				state.recordTimeElement.html(tool.formatRecordTime(state.currentRecordTime));
+				tool.pieTool.initPos();
+			}
+		};
 
 		tool.implementNativeAudio();
 
@@ -732,15 +744,7 @@ Q.Tool.define("Q/audio", function (options) {
 		// init recorder
 		if(newState === "init"){
 			// reset pie tool to start point
-			if(tool.pieTool){
-				state.currentRecordTime = state.maxRecordTime;
-
-				state.recordTextElement.html(tool.text.record);
-				state.recordElapsedElement.html(tool.text.maximum);
-				//state.recordTimeElement.show();
-				state.recordTimeElement.html(tool.formatRecordTime(state.currentRecordTime));
-				tool.pieTool.initPos();
-			}
+			_resetPie();
 
 			// if recorder exists - just change state to "ready"
 			if(state.recorder && state.recorder.stream){
@@ -763,6 +767,19 @@ Q.Tool.define("Q/audio", function (options) {
 					tool.audioElement.src = URL.createObjectURL(state.dataBlob);
 				}
 			});
+		}
+
+		// clear recorder
+		if(newState === "clear"){
+			// reset pie tool to start point
+			_resetPie();
+
+			tool.audioElement.pause();
+
+			if(state.recorder){
+				state.recorder.clearStream();
+			}
+			return;
 		}
 
 		// play recorded track
