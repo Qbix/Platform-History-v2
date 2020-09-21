@@ -24,7 +24,8 @@ Q.Tool.define("Q/audio", function (options) {
 
 	tool.adapters = {
 		"soundcloud": {
-			implement: function () {
+			implement: function (showPlayer) {
+				showPlayer = Q.typeOf(showPlayer) === "boolean" ? showPlayer : true;
 				var url = 'https://w.soundcloud.com/player/?' + $.param({
 					url: state.url,
 					auto_start: state.autoplay,
@@ -36,7 +37,11 @@ Q.Tool.define("Q/audio", function (options) {
 				Q.Template.render('Q/audio/soundcloud', {
 					url: url
 				}, function (err, html) {
-					tool.element.innerHTML = html;
+					if (showPlayer) {
+						tool.element.innerHTML = html;
+					} else {
+						$(tool.element).append(html);
+					}
 				});
 
 				Q.addScript('https://w.soundcloud.com/player/api.js', function () {
@@ -84,6 +89,10 @@ Q.Tool.define("Q/audio", function (options) {
 
 							Q.handle(state.onLoad, tool);
 						});
+
+						if (showPlayer) {
+							tool.renderPlayer();
+						}
 					});
 				});
 			},
@@ -101,7 +110,8 @@ Q.Tool.define("Q/audio", function (options) {
 			}
 		},
 		"general": {
-			implement: function () {
+			implement: function (showPlayer) {
+				showPlayer = Q.typeOf(showPlayer) === "boolean" ? showPlayer : true;
 				tool.implementNativeAudio();
 
 				tool.audioElement.addEventListener("canplay", function(){
@@ -109,6 +119,10 @@ Q.Tool.define("Q/audio", function (options) {
 						tool.play();
 					}
 				});
+
+				if (showPlayer) {
+					tool.renderPlayer();
+				}
 			},
 			renderPlayer: function () {
 				tool.audioElement.setAttribute('controls', true);
@@ -144,8 +158,6 @@ Q.Tool.define("Q/audio", function (options) {
 
 	var p = Q.pipe(['stylesheet', 'text', 'stream'], function (params, subjects) {
 		tool.text = params.text[1].audio;
-
-		tool.implement();
 
 		// run action
 		Q.handle(tool[state.action], tool);
@@ -253,10 +265,11 @@ Q.Tool.define("Q/audio", function (options) {
 	/**
 	 * Refreshes the appearance of the tool completely
 	 * @method implement
+	 * @param {boolean} [showPlayer=true] If true show player, if false hide.
 	 */
-	implement: function () {
+	implement: function (showPlayer) {
 		var adapterName = this.adapterNameFromUrl();
-		this.adapters[adapterName].implement();
+		this.adapters[adapterName].implement(showPlayer);
 	},
 	/**
 	 * Start audio creation dialog
@@ -285,8 +298,8 @@ Q.Tool.define("Q/audio", function (options) {
 				return _error("No action selected");
 			}
 			var clipTool = Q.Tool.from($(".Q_clip_tool", $currentContent), "Q/clip");
-			var clipStart = clipTool ? clipTool.getTime("start") : null;
-			var clipEnd = clipTool ? clipTool.getTime("end") : null;
+			var clipStart = clipTool ? clipTool.getPosition("start") : null;
+			var clipEnd = clipTool ? clipTool.getPosition("end") : null;
 
 			state.mainDialog.addClass('Q_uploading');
 
@@ -504,26 +517,39 @@ Q.Tool.define("Q/audio", function (options) {
 					var $clipElement = $(".Q_audio_record_content [data-content=edit] .Q_audio_composer_clip", mainDialog);
 
 					$audioElement.tool("Q/audio", {
-						action: "renderPlayer",
+						action: "implement",
 						clipStart: tool.stream.getAttribute('clipStart'),
 						clipEnd: tool.stream.getAttribute('clipEnd'),
-						url: tool.stream.fileUrl(),
-						onPlaying: function () {
-							if (this.clipTool) {
-								this.clipTool.setTime(this.state.currentPosition, 'start');
-								this.clipTool.setTime(this.state.currentPosition, 'end');
-							}
-						}
+						url: tool.stream.fileUrl()
 					}).activate(function () {
 						var toolPreview = this;
+						var clipStart = tool.stream.getAttribute('clipStart');
+						var clipEnd = tool.stream.getAttribute('clipEnd');
+
 						$clipElement.tool("Q/clip", {
-							start: tool.stream.getAttribute('clipStart'),
-							end: tool.stream.getAttribute('clipEnd'),
-							onStart: function (time) {
-								toolPreview.state.clipStart = time;
+							startPosition: clipStart,
+							startPositionDisplay: clipStart.convertTimeToString(),
+							endPosition: clipEnd,
+							endPositionDisplay: clipEnd.convertTimeToString(),
+							onStart: function (setNewPosition) {
+								if (setNewPosition) {
+									var time = toolPreview.state.currentPosition;
+
+									toolPreview.state.clipStart = time;
+									this.setPosition(time, time.toString().convertTimeToString(), "start");
+								} else {
+									toolPreview.state.clipStart = null;
+								}
 							},
-							onEnd: function (time) {
-								toolPreview.state.clipEnd = time;
+							onEnd: function (setNewPosition) {
+								if (setNewPosition) {
+									var time = toolPreview.state.currentPosition;
+
+									toolPreview.state.clipEnd = time;
+									this.setPosition(time, time.toString().convertTimeToString(), "end");
+								} else {
+									toolPreview.state.clipEnd = null;
+								}
 							}
 						}).activate(function () {
 							toolPreview.clipTool = this;
@@ -640,22 +666,30 @@ Q.Tool.define("Q/audio", function (options) {
 					$clipElement.empty();
 
 					$audioElement.tool("Q/audio", {
-						action: "renderPlayer",
-						url: url,
-						onPlaying: function () {
-							if (this.clipTool) {
-								this.clipTool.setTime(this.state.currentPosition, 'start');
-								this.clipTool.setTime(this.state.currentPosition, 'end');
-							}
-						}
+						action: "implement",
+						url: url
 					}).activate(function () {
 						toolPreview = this;
 						$clipElement.tool("Q/clip", {
-							onStart: function (time) {
-								toolPreview.state.clipStart = time;
+							onStart: function (setNewPosition) {
+								if (setNewPosition) {
+									var time = toolPreview.state.currentPosition;
+
+									toolPreview.state.clipStart = time;
+									this.setPosition(time, time.toString().convertTimeToString(), "start");
+								} else {
+									toolPreview.state.clipStart = null;
+								}
 							},
-							onEnd: function (time) {
-								toolPreview.state.clipEnd = time;
+							onEnd: function (setNewPosition) {
+								if (setNewPosition) {
+									var time = toolPreview.state.currentPosition;
+
+									toolPreview.state.clipEnd = time;
+									this.setPosition(time, time.toString().convertTimeToString(), "end");
+								} else {
+									toolPreview.state.clipEnd = null;
+								}
 							}
 						}).activate(function () {
 							toolPreview.clipTool = this;
@@ -679,22 +713,30 @@ Q.Tool.define("Q/audio", function (options) {
 					$clipElement.empty();
 
 					$audioElement.tool("Q/audio", {
-						action: "renderPlayer",
-						url: url,
-						onPlaying: function () {
-							if (this.clipTool) {
-								this.clipTool.setTime(this.state.currentPosition, 'start');
-								this.clipTool.setTime(this.state.currentPosition, 'end');
-							}
-						}
+						action: "implement",
+						url: url
 					}).activate(function () {
 						var toolPreview = this;
 						$clipElement.tool("Q/clip", {
-							onStart: function (time) {
-								toolPreview.state.clipStart = time;
+							onStart: function (setNewPosition) {
+								if (setNewPosition) {
+									var time = toolPreview.state.currentPosition;
+
+									toolPreview.state.clipStart = time;
+									this.setPosition(time, time.toString().convertTimeToString(), "start");
+								} else {
+									toolPreview.state.clipStart = null;
+								}
 							},
-							onEnd: function (time) {
-								toolPreview.state.clipEnd = time;
+							onEnd: function (setNewPosition) {
+								if (setNewPosition) {
+									var time = toolPreview.state.currentPosition;
+
+									toolPreview.state.clipEnd = time;
+									this.setPosition(time, time.toString().convertTimeToString(), "end");
+								} else {
+									toolPreview.state.clipEnd = null;
+								}
 							}
 						}).activate(function () {
 							toolPreview.clipTool = this;
@@ -927,6 +969,8 @@ Q.Tool.define("Q/audio", function (options) {
 		tool.pieBox = $(tool.element);
 		tool.$playerBox = $("<div>").appendTo(tool.pieBox);
 
+		tool.implement(false);
+
 		// set player state if it didn't set yet
 		tool.pieBox.attr("data-state", tool.pieBox.attr("data-state") || "play");
 
@@ -940,7 +984,7 @@ Q.Tool.define("Q/audio", function (options) {
 
 			state.onLoad.add(function () {
 				tool.$playerBox.removeClass("Q_disabled")
-			});
+			}, tool);
 
 			$pieElement.on(Q.Pointer.fastclick, function (event) {
 				event.stopPropagation();

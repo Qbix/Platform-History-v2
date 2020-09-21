@@ -19,7 +19,7 @@
     float: right;
 }
 
-.Q_clip_tool button .Q_clip_time_milliseconds {
+.Q_clip_tool button .Q_clip_position {
     display: none;
 }
 .Q_clip_tool button.Q_clip_fixed {
@@ -32,13 +32,13 @@
 .Q_clip_tool button .Q_clip_defined {
     display: none;
 }
-.Q_clip_tool button .Q_clip_time_string {
+.Q_clip_tool button .Q_clip_position_display {
     display: none;
 }
 .Q_clip_tool button.Q_clip_fixed .Q_clip_set {
     display: none;
 }
 .Q_clip_tool button.Q_clip_fixed .Q_clip_defined,
-.Q_clip_tool button.Q_clip_fixed .Q_clip_time_string {
+.Q_clip_tool button.Q_clip_fixed .Q_clip_position_display {
     display: inline;
 }

@@ -5,14 +5,14 @@
  */
 	
 /**
- * Render tool to select clip start/end time
+ * Render tool to select clip start/end position
  * @class Q clip
  * @constructor
  * @param {Object} [options] Override various options for this tool
- *  @param {String|Integer} [options.start] String in format hh:mm:ss or integeer seconds
- *  @param {String|Integer} [options.end] String in format hh:mm:ss or integeer seconds
- *  @param {Q.Event} onStart event trigger when clip start time defined
- *  @param {Q.Event} onEnd event trigger when clip end time defined
+ *  @param {String|Integer} [options.startPosition] Start position
+ *  @param {String|Integer} [options.endPosition] End position
+ *  @param {Q.Event} onStart event trigger when clip start position defined
+ *  @param {Q.Event} onEnd event trigger when clip end position defined
  */
 Q.Tool.define("Q/clip", function (options) {
 	var tool = this;
@@ -27,8 +27,8 @@ Q.Tool.define("Q/clip", function (options) {
 },
 
 { // default options here
-	start: null,
-	end: null,
+	startPosition: null,
+	endPosition: null,
 	onStart: new Q.Event(),
 	onEnd: new Q.Event()
 },
@@ -44,76 +44,59 @@ Q.Tool.define("Q/clip", function (options) {
 		var state = tool.state;
 
 		Q.Template.render('Q/clip', {
-			startTimeString: tool.convertToString(state.start),
-			endTimeString: tool.convertToString(state.end),
-			startTimeMilliseconds: state.start,
-			endTimeMilliseconds: state.end,
-			startFixed: state.start !== null ? 'Q_clip_fixed' : '',
-			endFixed: state.end !== null ? 'Q_clip_fixed' : '',
+			startPositionDisplay: state.startPositionDisplay,
+			endPositionDisplay: state.endPositionDisplay,
+			startPosition: state.startPosition,
+			endPosition: state.endPosition,
+			startFixed: state.startPosition !== null ? 'Q_clip_fixed' : '',
+			endFixed: state.endPosition !== null ? 'Q_clip_fixed' : '',
 			text: tool.text
 		}, function (err, html) {
 			$toolElement.html(html);
 
 			$("button", $toolElement).on(Q.Pointer.fastclick, function () {
 				var $this = $(this);
-				var name = $this.prop("name");
-				// capitalize first letter
-				name = name.charAt(0).toUpperCase() + name.slice(1);
+				var name = $this.prop("name").toCapitalized();
 
 				$this.toggleClass("Q_clip_fixed");
 
 				if ($this.hasClass('Q_clip_fixed')) {
-					var time = $(".Q_clip_time_milliseconds", $this).text();
-					Q.handle(state["on" + name], tool, [time]);
+					Q.handle(state["on" + name], tool, [true]);
 				} else {
-					Q.handle(state["on" + name], tool, [null]);
+					Q.handle(state["on" + name], tool, [false]);
 				}
 			});
 		});
 	},
 	/**
-	 * Set new time of start/end clip time
-	 * @method setTime
-	 * @param {int} time Time in milliseconds
+	 * Set new position of start/end clip position
+	 * @method setPosition
+	 * @param {int} position
+	 * @param {string} positionDisplay Human readable position
 	 * @param {string} which Can be 'start' or 'end'
 	 */
-	setTime: function (time, which) {
-		if (!/^\d+$/.test(time)) {
-			time = null;
+	setPosition: function (position, positionDisplay, which) {
+		if (!/^\d+$/.test(position)) {
+			position = null;
 		}
 
-		$("button[name=" + which + "]:not(.Q_clip_fixed) .Q_clip_time_milliseconds", this.element).text(time);
-		$("button[name=" + which + "]:not(.Q_clip_fixed) .Q_clip_time_string", this.element).text(this.convertToString(time));
+		$("button[name=" + which + "] .Q_clip_position", this.element).text(position);
+		$("button[name=" + which + "] .Q_clip_position_display", this.element).text(positionDisplay);
 	},
 	/**
-	 * Get time of start/end clip time
-	 * @method getTime
+	 * Get position of start/end clip position
+	 * @method getPosition
 	 * @param {string} which Can be 'start' or 'end'
-	 * @return {integer} time in milliseconds
+	 * @return {integer} position
 	 */
-	getTime: function (which) {
-		var time = $("button[name=" + which + "].Q_clip_fixed .Q_clip_time_milliseconds", this.element).text();
+	getPosition: function (which) {
+		var position = $("button[name=" + which + "].Q_clip_fixed .Q_clip_position", this.element).text();
 
-		if (!/^\d+$/.test(time)) {
-			time = null;
+		if (!/^\d+$/.test(position)) {
+			position = null;
 		}
 
-		return time;
-	},
-	/**
-	 * Convert time from milliseconds to hh:mm:ss string
-	 * @method convertToString
-	 * @param {int} time Time in milliseconds
-	 * @return {string} formatted string
-	 */
-	convertToString: function (time) {
-		time = Math.trunc(time);
-		var timeString = new Date(time).toISOString().substr(11, 8);
-
-		// ommit hh if 00
-		timeString = timeString.replace(/^00:/, '');
-
-		return timeString;
+		return position;
 	}
 });
 
@@ -121,14 +104,14 @@ Q.Template.set('Q/clip',
 	'<button name="start" class="{{startFixed}}" type="button">' +
 	'	<span class="Q_clip_defined">{{text.ClipStart}}: </span>' +
 	'	<span class="Q_clip_set">{{text.SetClipStart}}</span>' +
-	'	<span class="Q_clip_time_string">{{startTimeString}}</span>' +
-	'	<span class="Q_clip_time_milliseconds">{{startTimeMilliseconds}}</span>' +
+	'	<span class="Q_clip_position_display">{{startPositionDisplay}}</span>' +
+	'	<span class="Q_clip_position">{{startPosition}}</span>' +
 	'</button>' +
 	'<button name="end" class="{{endFixed}}" type="button">' +
 	'	<span class="Q_clip_defined">{{text.ClipEnd}}: </span>' +
 	'	<span class="Q_clip_set">{{text.SetClipEnd}}</span>' +
-	'	<span class="Q_clip_time_string">{{endTimeString}}</span>' +
-	'	<span class="Q_clip_time_milliseconds">{{endTimeMilliseconds}}</span>' +
+	'	<span class="Q_clip_position_display">{{endPositionDisplay}}</span>' +
+	'	<span class="Q_clip_position">{{endPosition}}</span>' +
 	'</button>'
 );
 

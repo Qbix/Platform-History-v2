@@ -101,6 +101,7 @@ div[data-content=record] .Q_audio_allow, .Q_audio_start .Q_audio_encoding {
 
 .Q_audio_tool audio {
 	margin: 10px auto;
+	width: 100%;
 }
 .Q_audio_record_content > div {
 	display: none;

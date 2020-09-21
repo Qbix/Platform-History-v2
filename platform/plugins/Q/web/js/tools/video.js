@@ -211,8 +211,8 @@ Q.Tool.define("Q/video", function (options) {
 				return _error("No action selected");
 			}
 			var clipTool = Q.Tool.from($(".Q_clip_tool", $currentContent), "Q/clip");
-			var clipStart = clipTool ? clipTool.getTime("start") : null;
-			var clipEnd = clipTool ? clipTool.getTime("end") : null;
+			var clipStart = clipTool ? clipTool.getPosition("start") : null;
+			var clipEnd = clipTool ? clipTool.getPosition("end") : null;
 
 			state.mainDialog.addClass('Q_uploading');
 
@@ -392,23 +392,36 @@ Q.Tool.define("Q/video", function (options) {
 						action: "implement",
 						clipStart: tool.stream.getAttribute('clipStart'),
 						clipEnd: tool.stream.getAttribute('clipEnd'),
-						url: tool.stream.fileUrl(),
-						onPlaying: function () {
-							if (this.clipTool) {
-								this.clipTool.setTime(this.state.currentPosition, 'start');
-								this.clipTool.setTime(this.state.currentPosition, 'end');
-							}
-						}
+						url: tool.stream.fileUrl()
 					}).activate(function () {
 						var toolPreview = this;
+						var clipStart = tool.stream.getAttribute('clipStart');
+						var clipEnd = tool.stream.getAttribute('clipEnd');
+
 						$clipElement.tool("Q/clip", {
-							start: tool.stream.getAttribute('clipStart'),
-							end: tool.stream.getAttribute('clipEnd'),
-							onStart: function (time) {
-								toolPreview.state.clipStart = time;
+							startPosition: clipStart,
+							startPositionDisplay: clipStart.convertTimeToString(),
+							endPosition: clipEnd,
+							endPositionDisplay: clipEnd.convertTimeToString(),
+							onStart: function (setNewPosition) {
+								if (setNewPosition) {
+									var time = toolPreview.state.currentPosition;
+
+									toolPreview.state.clipStart = time;
+									this.setPosition(time, time.toString().convertTimeToString(), "start");
+								} else {
+									toolPreview.state.clipStart = null;
+								}
 							},
-							onEnd: function (time) {
-								toolPreview.state.clipEnd = time;
+							onEnd: function (setNewPosition) {
+								if (setNewPosition) {
+									var time = toolPreview.state.currentPosition;
+
+									toolPreview.state.clipEnd = time;
+									this.setPosition(time, time.toString().convertTimeToString(), "end");
+								} else {
+									toolPreview.state.clipEnd = null;
+								}
 							}
 						}).activate(function () {
 							toolPreview.clipTool = this;
@@ -514,21 +527,29 @@ Q.Tool.define("Q/video", function (options) {
 
 					$videoElement.tool("Q/video", {
 						action: "implement",
-						url: url,
-						onPlaying: function () {
-							if (this.clipTool) {
-								this.clipTool.setTime(this.state.currentPosition, 'start');
-								this.clipTool.setTime(this.state.currentPosition, 'end');
-							}
-						}
+						url: url
 					}).activate(function () {
 						toolPreview = this;
 						$clipElement.tool("Q/clip", {
-							onStart: function (time) {
-								toolPreview.state.clipStart = time;
+							onStart: function (setNewPosition) {
+								if (setNewPosition) {
+									var time = toolPreview.state.currentPosition;
+
+									toolPreview.state.clipStart = time;
+									this.setPosition(time, time.toString().convertTimeToString(), "start");
+								} else {
+									toolPreview.state.clipStart = null;
+								}
 							},
-							onEnd: function (time) {
-								toolPreview.state.clipEnd = time;
+							onEnd: function (setNewPosition) {
+								if (setNewPosition) {
+									var time = toolPreview.state.currentPosition;
+
+									toolPreview.state.clipEnd = time;
+									this.setPosition(time, time.toString().convertTimeToString(), "end");
+								} else {
+									toolPreview.state.clipEnd = null;
+								}
 							}
 						}).activate(function () {
 							toolPreview.clipTool = this;
@@ -553,21 +574,29 @@ Q.Tool.define("Q/video", function (options) {
 
 					$videoElement.tool("Q/video", {
 						action: "implement",
-						url: url,
-						onPlaying: function () {
-							if (this.clipTool) {
-								this.clipTool.setTime(this.state.currentPosition, 'start');
-								this.clipTool.setTime(this.state.currentPosition, 'end');
-							}
-						}
+						url: url
 					}).activate(function () {
 						var toolPreview = this;
 						$clipElement.tool("Q/clip", {
-							onStart: function (time) {
-								toolPreview.state.clipStart = time;
+							onStart: function (setNewPosition) {
+								if (setNewPosition) {
+									var time = toolPreview.state.currentPosition;
+
+									toolPreview.state.clipStart = time;
+									this.setPosition(time, time.toString().convertTimeToString(), "start");
+								} else {
+									toolPreview.state.clipStart = null;
+								}
 							},
-							onEnd: function (time) {
-								toolPreview.state.clipEnd = time;
+							onEnd: function (setNewPosition) {
+								if (setNewPosition) {
+									var time = toolPreview.state.currentPosition;
+
+									toolPreview.state.clipEnd = time;
+									this.setPosition(time, time.toString().convertTimeToString(), "end");
+								} else {
+									toolPreview.state.clipEnd = null;
+								}
 							}
 						}).activate(function () {
 							toolPreview.clipTool = this;
