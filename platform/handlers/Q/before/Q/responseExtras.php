@@ -40,6 +40,7 @@ function Q_before_Q_responseExtras()
 				'sessionName' => Q_Session::name(),
 				'nodeUrl' => Q_Utils::nodeUrl(),
 				'socketPath' => Q_Utils::socketPath(),
+				'maxUploadSize' => Q_Utils::maxUploadSize(),
 				'slotNames' => Q_Config::get("Q", "response", "slotNames", array(
 					'content', 'dashboard', 'title', 'notices'
 				)),
