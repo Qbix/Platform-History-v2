@@ -319,11 +319,18 @@
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
-            "description": "audio clip"
+            "description": "audio clip",
+            "newItem": "New Audio"
         },
         "Streams\/video": {
             "displayType": "Video Clip",
-            "description": "video clip"
+            "description": "video clip",
+            "newItem": "New Video"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "New PDF"
         },
         "Streams\/live": {
             "displayType": "Livestream",

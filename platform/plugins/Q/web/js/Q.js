@@ -6894,7 +6894,7 @@ Q.load = function _Q_load(plugins, callback, options) {
  */
 Q.url = function _Q_url(what, fields, options) {
 	var what2 = what || '';
-	if (what2.substr(0, 5) === 'data:') {
+	if (what2.startsWith('data:') || what2.startsWith('blob:')) {
 		return what2; // this is a special type of URL
 	}
 	var parts = what2.split('?');
@@ -13481,7 +13481,9 @@ Q.onJQuery.add(function ($) {
 		"Q/parallax": "{{Q}}/js/tools/parallax.js",
 		"Q/lazyload": "{{Q}}/js/tools/lazyload.js",
 		"Q/audio": "{{Q}}/js/tools/audio.js",
-		"Q/video": "{{Q}}/js/tools/video.js"
+		"Q/video": "{{Q}}/js/tools/video.js",
+		"Q/pdf": "{{Q}}/js/tools/pdf.js",
+		"Q/clip": "{{Q}}/js/tools/clip.js"
 	});
 	
 	Q.Tool.jQuery({

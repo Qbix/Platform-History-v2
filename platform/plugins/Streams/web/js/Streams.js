@@ -583,6 +583,8 @@ Q.Tool.define({
 		// does nothing
 	},
 	"Streams/audio/preview" : "{{Streams}}/js/tools/audio/preview.js",
+	"Streams/video/preview" : "{{Streams}}/js/tools/video/preview.js",
+	"Streams/pdf/preview" : "{{Streams}}/js/tools/pdf/preview.js",
 	"Streams/album/preview": "{{Streams}}/js/tools/album/preview.js",
 	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js"
 });
@@ -2196,7 +2198,8 @@ Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
  * @return {String|null} the url, or null if no url
  */
 Sp.fileUrl = function() {
-	var url = this.getAttribute('Q.file.url') || this.getAttribute('file.url');
+	var url = this.getAttribute("Q.file.url") || this.getAttribute("file.url") || this.getAttribute("url");
+
 	if (!url) {
 		return null;
 	}

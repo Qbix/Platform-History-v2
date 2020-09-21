@@ -77,15 +77,6 @@ function Streams_stream_put($params) {
 		}
 	}
 	
-	// handle setting of attributes
-	if (isset($req['attributes'])
-	and is_array($req['attributes'])) {
-		foreach ($req['attributes'] as $k => $v) {
-			$stream->setAttribute($k, $v);
-		}
-		unset($req['attributes']);
-	}
-	
 	// Get all the extended field names for this stream type
 	$fieldNames = Streams::getExtendFieldNames($stream->type);
 	
@@ -124,8 +115,22 @@ function Streams_stream_put($params) {
 		}
 		Q_Response::setSlot('file', Q::event("Q/file/post", $file));
 		// the Streams/after/Q_file_save hook saves some attributes
+
+		// as Q/file/post changed stream, try to get stream from cache, so as not to lose the saved data
+		$stream = Q::ifset(Streams::$cache, 'canWriteToStream', $stream);
 	}
 
+	// special handler for attributes
+	if (isset($req['attributes'])
+		and is_array($req['attributes'])) {
+		foreach ($req['attributes'] as $k => $v) {
+			$v = $v == "null" ? null : $v;
+			$stream->setAttribute($k, $v);
+		}
+		unset($req['attributes']);
+	}
+
+	// set other fields (if defined)
 	if (!empty($fieldNames)) {
 		foreach ($fieldNames as $f) {
 			if (array_key_exists($f, $req)) {
