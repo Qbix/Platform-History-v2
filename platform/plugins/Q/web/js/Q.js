@@ -577,6 +577,25 @@ Sp.deobfuscate = function (key) {
 };
 
 /**
+ * Convert time from milliseconds to hh:mm:ss string
+ * @method convertTimeToString
+ * @param {boolean} [omitHours=true] If true omit hours if 00
+ * @return {string} formatted string
+ */
+Sp.convertTimeToString = function (omitHours) {
+	omitHours = Q.typeOf(omitHours) === 'boolean' ? omitHours : true;
+	var time = Math.trunc(parseInt(this) || 0);
+	var timeString = new Date(time).toISOString().substr(11, 8);
+
+	// omit hh if 00
+	if (omitHours) {
+		timeString = timeString.replace(/^00:/, '');
+	}
+
+	return timeString;
+}
+
+/**
  * @class Function
  * @description Q extended methods for Functions
  */
