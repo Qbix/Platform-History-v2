@@ -10,7 +10,21 @@
  * @constructor
  * @param {Object} [options] Override various options for this tool
  *  @param {String} [options.url] URL of pdf doc
- *  @param {boolean} [options.autoplay=false] If true - start play on load
+ *  @param {string} [options.action=composer] What to start on tool activated. Can be "composer" and "implement".
+ *  @param {string} [options.url] Source to get pdf from. Can be remote url or "blob:" for local files
+ *  @param {string} [options.publisherId] Publisher of Streams/pdf stream
+ *  @param {string} [options.streamName] Name of Streams/pdf stream
+ *  @param {string} [options.fileUploadUHandler] Handler where to upload file
+ *  @param {string} [options.fileUploadUHandler] Handler where to upload file
+ *  @param {string} [options.clipStart] Clip start position
+ *  @param {string} [options.clipEnd] Clip end position
+ *  @param {Q.Event} [options.onSuccess] Call when stream save or upload action successfully ended.
+ *  @param {Q.Event} [options.onFinish] Call when stream save or upload action ended.
+ *  @param {Q.Event} [options.onError] Call when error occur.
+ *  @param {Q.Event} [options.onScroll] Call when pdf scrolled.
+ *  @param {Q.Event} [options.onRender] Call when pdf rendered.
+ *  @param {Q.Event} [options.onEnded] Call when pdf scrolled to the end.
+ *
  */
 Q.Tool.define("Q/pdf", function (options) {
 	var tool = this;
@@ -42,6 +56,13 @@ Q.Tool.define("Q/pdf", function (options) {
 	} else {
 		p.fill('stream')();
 	}
+
+	tool.Q.onStateChanged('clipStart').set(function () {
+		tool.setClip("start")
+	});
+	tool.Q.onStateChanged('clipEnd').set(function () {
+		tool.setClip("end")
+	});
 },
 
 {
@@ -51,23 +72,25 @@ Q.Tool.define("Q/pdf", function (options) {
 	publisherId: null,
 	streamName: null,
 	fileUploadUHandler: Q.action("Q/file"),
-	preprocess: null,
-	duration: 0,
 	currentPosition: 0,
 	clipStart: null,
 	clipEnd: null,
+	pdfInfo: {},
 	onSuccess: new Q.Event(),
 	onError: new Q.Event(function (message) {
 		Q.alert('Flie upload error' + (message ? ': ' + message : '') + '.');
 	}, 'Q/audio'),
 	onFinish: new Q.Event(),
 	/* </Q/audio jquery plugin states> */
-	onLoad: new Q.Event(),
-	onPlay: new Q.Event(function () {
-		this.checkClip();
+	onRender: new Q.Event(function (numPages, element) {
+		// remove preloader
+		this.$preloader && this.$preloader.remove();
+
+		this.state.stuffHeight = this.element.scrollHeight;
+
+		this.setClip("start");
+		this.setClip("end");
 	}),
-	onPause: new Q.Event(),
-	onSeek: new Q.Event(),
 	onEnded: new Q.Event()
 },
 
@@ -97,12 +120,37 @@ Q.Tool.define("Q/pdf", function (options) {
 	implement: function () {
 		var tool = this;
 		var state = this.state;
+		var $toolElement = $(tool.element);
 
+		// add preloader to cover up tool.element till pdf rendered (state.onRender)
+		if (!tool.$preloader) {
+			tool.$preloader = $("<div class='Q_pdf_preloader'><img src='" + Q.url("{{Q}}/img/throbbers/loading.gif") + "'></div>").appendTo(tool.element);
+		}
+
+		// wait till lib loaded
+		if (Q.typeOf(window.pdfjsLib) === "undefined") {
+			return setTimeout(tool.implement.bind(tool), 500);
+		}
+
+		// listen scroll event of preview element
+		$toolElement.on("scroll", function () {
+			state.currentPosition = ($toolElement.scrollTop()/state.stuffHeight * 100).toPrecision(3);
+		});
 
 		var loadingTask = pdfjsLib.getDocument(state.url);
 
 		loadingTask.promise.then(function(pdf) {
 			state.pdf = pdf;
+
+			pdf.getMetadata().then(function(stuff) {
+				state.pdfInfo.title = Q.getObject("info.Title", stuff) || Q.getObject("contentDispositionFilename", stuff);
+				state.pdfInfo.description = Q.getObject("info.Subject", stuff);
+				state.pdfInfo.author = Q.getObject("info.Author", stuff);
+			}).catch(function(err) {
+				console.log('Q/pdf: Error getting meta data');
+				console.log(err);
+			});
+
 			tool.renderPage();
 		});
 	},
@@ -122,7 +170,7 @@ Q.Tool.define("Q/pdf", function (options) {
 
 		//This gives us the page's dimensions at full scale
 		var viewport = page.getViewport({
-			scale: $toolElement.width()/page.getViewport({scale:1}).width
+			scale: $toolElement.width()/page.getViewport({scale: 0.5}).width
 		});
 
 		//We'll create a canvas for each page to draw it on
@@ -145,9 +193,10 @@ Q.Tool.define("Q/pdf", function (options) {
 		var currPage = page.pageNumber + 1;
 
 		//Move to next page
-		if (pdf !== null && currPage <= pdf.numPages)
-		{
+		if (pdf !== null && currPage <= pdf.numPages) {
 			pdf.getPage(currPage).then(tool.renderPage.bind(tool));
+		} else if (currPage >= pdf.numPages) {
+			Q.handle(state.onRender, tool, [pdf.numPages, tool.element]);
 		}
 	},
 	/**
@@ -174,8 +223,8 @@ Q.Tool.define("Q/pdf", function (options) {
 				return _error("No action selected");
 			}
 			var clipTool = Q.Tool.from($(".Q_clip_tool", $currentContent), "Q/clip");
-			var clipStart = clipTool ? clipTool.getTime("start") : null;
-			var clipEnd = clipTool ? clipTool.getTime("end") : null;
+			var clipStart = clipTool ? clipTool.getPosition("start") : null;
+			var clipEnd = clipTool ? clipTool.getPosition("end") : null;
 
 			state.mainDialog.addClass('Q_uploading');
 
@@ -234,6 +283,7 @@ Q.Tool.define("Q/pdf", function (options) {
 				var $file = $("input[type=file].Q_pdf_file", $currentContent);
 				// state.file set in recorder OR html file element
 				var file = ($file.length && $file[0].files[0]) || null;
+				var pdfPreview = Q.Tool.from($(".Q_pdf_composer_preview.Q_pdf_tool", tool.element), "Q/pdf");
 
 				// check file size
 				if (file.size && file.size >= parseInt(Q.info.maxUploadSize)) {
@@ -242,15 +292,13 @@ Q.Tool.define("Q/pdf", function (options) {
 
 				var reader = new FileReader();
 				reader.onload = function (event) {
-					if (state.preprocess) {
-						Q.handle(state.preprocess, tool);
-					}
-
 					var params = {
-						title: file.name,
+						title: Q.getObject("state.pdfInfo.title", pdfPreview) || file.name,
+						content: Q.getObject("state.pdfInfo.description", pdfPreview),
 						attributes: {
 							clipStart: clipStart,
-							clipEnd: clipEnd
+							clipEnd: clipEnd,
+							author: Q.getObject("state.pdfInfo.author", pdfPreview)
 						},
 						file: {
 							data: this.result,
@@ -323,6 +371,33 @@ Q.Tool.define("Q/pdf", function (options) {
 			}
 		};
 
+		// setting clip start position handler
+		var _onStart = function (setNewPosition, toolPreview) {
+			if (setNewPosition) {
+				var position = toolPreview.state.currentPosition;
+
+				toolPreview.state.clipStart = position;
+				this.setPosition(position, position + '%', "start");
+			} else {
+				toolPreview.state.clipStart = null;
+			}
+			toolPreview.stateChanged('clipStart');
+		};
+
+		// setting clip end position handler
+		var _onEnd = function (setNewPosition, toolPreview) {
+			if (setNewPosition) {
+				var contentHeight = ($(toolPreview.element).height()/toolPreview.state.stuffHeight * 100).toPrecision(3);
+				var position = (parseFloat(toolPreview.state.currentPosition) + parseFloat(contentHeight)).toPrecision(3);
+
+				toolPreview.state.clipEnd = position;
+				this.setPosition(position, position + '%', "end");
+			} else {
+				toolPreview.state.clipEnd = null;
+			}
+			toolPreview.stateChanged('clipEnd');
+		};
+
 		Q.Dialogs.push({
 			className: 'Q_dialog_pdf',
 			title: "PDF",
@@ -342,28 +417,27 @@ Q.Tool.define("Q/pdf", function (options) {
 				if (tool.stream) {
 					var $pdfElement = $(".Q_pdf_composer_content [data-content=edit] .Q_pdf_composer_preview", mainDialog);
 					var $clipElement = $(".Q_pdf_composer_content [data-content=edit] .Q_pdf_composer_clip", mainDialog);
+					var clipStart = tool.stream.getAttribute('clipStart');
+					var clipEnd = tool.stream.getAttribute('clipEnd');
 
 					$pdfElement.tool("Q/pdf", {
 						action: "implement",
-						clipStart: tool.stream.getAttribute('clipStart'),
-						clipEnd: tool.stream.getAttribute('clipEnd'),
-						url: tool.stream.fileUrl(),
-						onPlaying: function () {
-							if (this.clipTool) {
-								this.clipTool.setTime(this.state.currentPosition, 'start');
-								this.clipTool.setTime(this.state.currentPosition, 'end');
-							}
-						}
+						clipStart: clipStart,
+						clipEnd: clipEnd,
+						url: tool.stream.fileUrl()
 					}).activate(function () {
 						var toolPreview = this;
+
 						$clipElement.tool("Q/clip", {
-							start: tool.stream.getAttribute('clipStart'),
-							end: tool.stream.getAttribute('clipEnd'),
-							onStart: function (time) {
-								toolPreview.state.clipStart = time;
+							startPosition: clipStart,
+							startPositionDisplay: clipStart + '%',
+							endPosition: clipEnd,
+							endPositionDisplay: clipEnd + '%',
+							onStart: function (setNewPosition) {
+								Q.handle(_onStart, this, [setNewPosition, toolPreview]);
 							},
-							onEnd: function (time) {
-								toolPreview.state.clipEnd = time;
+							onEnd: function (setNewPosition) {
+								Q.handle(_onEnd, this, [setNewPosition, toolPreview]);
 							}
 						}).activate(function () {
 							toolPreview.clipTool = this;
@@ -401,18 +475,17 @@ Q.Tool.define("Q/pdf", function (options) {
 				});
 
 				// custom tabs implementation
-				$(".Q_pdf_composer_select button", mainDialog).on(Q.Pointer.click, function (e) {
+				var _selectTab = function () {
 					var $this = $(this);
 					var action = $this.prop('name');
-
-					if (action === "record") {
-						tool.recorderStateChange("init");
-					}
 
 					mainDialog.attr("data-action", action);
 					$this.addClass('Q_selected').siblings().removeClass('Q_selected');
 					$(".Q_pdf_composer_content [data-content=" + action + "]", mainDialog).addClass('Q_selected').siblings().removeClass('Q_selected');
-				});
+				};
+				$(".Q_pdf_composer_select button", mainDialog).on(Q.Pointer.fastclick, _selectTab);
+				// select first visible tab
+				Q.handle(_selectTab, $(".Q_pdf_composer_select button:visible:first", mainDialog)[0]);
 
 				// Reset button
 				$("button[name=reset]", mainDialog).on(Q.Pointer.click, function (e) {
@@ -455,21 +528,15 @@ Q.Tool.define("Q/pdf", function (options) {
 
 					$pdfElement.tool("Q/pdf", {
 						action: "implement",
-						url: url,
-						onPlaying: function () {
-							if (this.clipTool) {
-								this.clipTool.setTime(this.state.currentPosition, 'start');
-								this.clipTool.setTime(this.state.currentPosition, 'end');
-							}
-						}
+						url: url
 					}).activate(function () {
 						toolPreview = this;
 						$clipElement.tool("Q/clip", {
-							onStart: function (time) {
-								toolPreview.state.clipStart = time;
+							onStart: function (setNewPosition) {
+								Q.handle(_onStart, this, [setNewPosition, toolPreview]);
 							},
-							onEnd: function (time) {
-								toolPreview.state.clipEnd = time;
+							onEnd: function (setNewPosition) {
+								Q.handle(_onEnd, this, [setNewPosition, toolPreview]);
 							}
 						}).activate(function () {
 							toolPreview.clipTool = this;
@@ -494,29 +561,21 @@ Q.Tool.define("Q/pdf", function (options) {
 
 					$pdfElement.tool("Q/pdf", {
 						action: "implement",
-						url: url,
-						onPlaying: function () {
-							if (this.clipTool) {
-								this.clipTool.setTime(this.state.currentPosition, 'start');
-								this.clipTool.setTime(this.state.currentPosition, 'end');
-							}
-						}
+						url: url
 					}).activate(function () {
 						var toolPreview = this;
 						$clipElement.tool("Q/clip", {
-							onStart: function (time) {
-								toolPreview.state.clipStart = time;
+							onStart: function (setNewPosition) {
+								Q.handle(_onStart, this, [setNewPosition, toolPreview]);
 							},
-							onEnd: function (time) {
-								toolPreview.state.clipEnd = time;
+							onEnd: function (setNewPosition) {
+								Q.handle(_onEnd, this, [setNewPosition, toolPreview]);
 							}
 						}).activate(function () {
 							toolPreview.clipTool = this;
 						});
 					});
 				});
-
-				$(".Q_pdf_composer_select button:visible:first", mainDialog).click();
 			},
 			beforeClose: function(mainDialog) {
 
@@ -541,6 +600,49 @@ Q.Tool.define("Q/pdf", function (options) {
 	 */
 	setCurrentPosition: function (position) {
 		this.state.player && this.state.player.currentTime(position);
+	},
+	/**
+	 * @method setClip
+	 * @param {string} which Which side to setup, "start" or "end"
+	 */
+	setClip: function (which) {
+		var tool = this;
+		var state = this.state;
+		var className = "Q_pdf_clip_" + which;
+		var clipValue = state["clip" + which.toCapitalized()] || 0;
+
+		var $element = $("." + className, tool.element);
+
+		if (!clipValue) {
+			return $element.remove();
+		}
+
+		if (!$element.length) {
+			$element = $("<div>").addClass(className).appendTo(tool.element);
+		}
+
+		var height = 0;
+		var top = 0;
+		switch (which) {
+			case "start":
+				height = state.stuffHeight * clipValue / 100;
+				break;
+			case "end":
+				height = state.stuffHeight - (state.stuffHeight * clipValue / 100);
+				top = state.stuffHeight - height;
+				break;
+		}
+
+		$element.css({
+			height: height,
+			top: top,
+			width: tool.element.scrollWidth
+		});
+
+		// scroll doc to clipStart
+		if (which === "start") {
+			$(tool.element).scrollTop(state.stuffHeight * clipValue / 100);
+		}
 	},
 	/**
 	 * Convert bytes integer to human readable string
