@@ -33,7 +33,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 				if ($webpageCahe) {
 					$webpageCahe->url = $url;
 					$webpageCahe->title = mb_substr($result['title'], 0, $webpageCahe->maxSize_title(), "UTF-8");
-					$webpageCahe->description = mb_substr($result['description'], 0, $webpageCahe->maxSize_description(), "UTF-8");
+
 					// dummy interest block for cache
 					$result['interest'] = array(
 						'title' => $url,
