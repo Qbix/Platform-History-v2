@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `{{prefix}}webpage` (
-  `url` varchar(500) NOT NULL,
+  `url` varchar(191) NOT NULL,
   `title` varchar(100) NOT NULL,
   `description` varchar(255) default NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
