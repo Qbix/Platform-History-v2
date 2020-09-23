@@ -101,16 +101,24 @@ Q.Tool.define("Q/pdf", function (options) {
 	 */
 	checkClip: function () {
 		var tool = this;
-		var state = this.state;
+		var elementHeight = $(tool.element).height();
+		var elementScrollTop = tool.element.scrollTop;
+		var topClipLimit = tool.getClip("start");
+		var bottomClipLimit = tool.getClip("end");
 
-		// clipStart handler
-		if (state.clipStart && state.currentPosition < state.clipStart) {
-			tool.setCurrentPosition(state.clipStart);
+		// check if selected clip gap less than element height
+		if (topClipLimit && bottomClipLimit && bottomClipLimit - topClipLimit < elementHeight) {
+			return tool.setCurrentPosition(topClipLimit - (elementHeight - (bottomClipLimit - topClipLimit))/2);
 		}
-		// clipStart handler
-		if (state.clipEnd && state.currentPosition > state.clipEnd) {
-			tool.pause();
-			tool.setCurrentPosition(state.clipEnd);
+
+		// check clipStart border
+		if (topClipLimit && topClipLimit && elementScrollTop < topClipLimit) {
+			tool.setCurrentPosition(topClipLimit);
+		}
+
+		// check clipEnd border
+		if (bottomClipLimit && bottomClipLimit && (elementScrollTop + elementHeight) > bottomClipLimit) {
+			tool.setCurrentPosition(bottomClipLimit - elementHeight);
 		}
 	},
 	/**
@@ -135,6 +143,8 @@ Q.Tool.define("Q/pdf", function (options) {
 		// listen scroll event of preview element
 		$toolElement.on("scroll", function () {
 			state.currentPosition = ($toolElement.scrollTop()/state.stuffHeight * 100).toPrecision(3);
+
+			tool.checkClip();
 		});
 
 		var loadingTask = pdfjsLib.getDocument(state.url);
@@ -583,23 +593,12 @@ Q.Tool.define("Q/pdf", function (options) {
 		});
 	},
 	/**
-	 * @method play
-	 */
-	play: function () {
-		this.state.player && this.state.player.play();
-	},
-	/**
-	 * @method pause
-	 */
-	pause: function () {
-		this.state.player && this.state.player.pause();
-	},
-	/**
 	 * @method setCurrentPosition
-	 * @param {integer} position in milliseonds
+	 * @param {number} position in pixels related to top
 	 */
 	setCurrentPosition: function (position) {
-		this.state.player && this.state.player.currentTime(position);
+		var element = this.element;
+		element.scrollTo(element.scrollLeft, position);
 	},
 	/**
 	 * @method setClip
@@ -609,11 +608,11 @@ Q.Tool.define("Q/pdf", function (options) {
 		var tool = this;
 		var state = this.state;
 		var className = "Q_pdf_clip_" + which;
-		var clipValue = state["clip" + which.toCapitalized()] || 0;
+		var clipValue = tool.getClip(which);
 
 		var $element = $("." + className, tool.element);
 
-		if (!clipValue) {
+		if (clipValue === null) {
 			return $element.remove();
 		}
 
@@ -625,11 +624,11 @@ Q.Tool.define("Q/pdf", function (options) {
 		var top = 0;
 		switch (which) {
 			case "start":
-				height = state.stuffHeight * clipValue / 100;
+				height = clipValue;
 				break;
 			case "end":
-				height = state.stuffHeight - (state.stuffHeight * clipValue / 100);
-				top = state.stuffHeight - height;
+				height = state.stuffHeight - clipValue;
+				top = clipValue;
 				break;
 		}
 
@@ -641,8 +640,22 @@ Q.Tool.define("Q/pdf", function (options) {
 
 		// scroll doc to clipStart
 		if (which === "start") {
-			$(tool.element).scrollTop(state.stuffHeight * clipValue / 100);
+			$(tool.element).scrollTop(clipValue);
 		}
+	},
+	/**
+	 * Get clip border in pixels related to top
+	 * @method getClip
+	 * @param {string} which Which side to setup, "start" or "end"
+	 */
+	getClip: function (which) {
+		var clipValue = this.state["clip" + which.toCapitalized()] || null;
+
+		if (clipValue === null) {
+			return null;
+		}
+
+		return this.state.stuffHeight * clipValue / 100;
 	},
 	/**
 	 * Convert bytes integer to human readable string
