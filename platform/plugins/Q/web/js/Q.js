@@ -8315,8 +8315,10 @@ Q.cookie = function _Q_cookie(name, value, options) {
 		parts = Q.baseUrl().split('://');
 		if ('path' in options) {
 			path = ';path='+options.path;
-		} else {
+		} else if (parts[1]) {
 			path = ';path=/' + parts[1].split('/').slice(1).join('/');
+		} else {
+			return null;
 		}
 		if ('domain' in options) {
 			domain = ';domain='+options.domain;
