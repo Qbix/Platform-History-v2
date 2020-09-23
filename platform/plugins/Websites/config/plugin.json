@@ -172,6 +172,7 @@
 		"videoHosts": ["youtube.com", "youtu.be", "vimeo.com"],
 		"videoExtensions": ["MPG", "MP2", "MPEG", "MP4", "AVI", "WMV", "MOV", "FLV", "SWF"],
 		"audioHosts": ["soundcloud.com"],
-		"audioExtensions": ["MP3", "WAV", "AIFF", "soundcloud:sound"]
+		"audioExtensions": ["MP3", "WAV", "AIFF", "soundcloud:sound"],
+		"cacheFileLimit": 5242880 /* 5Mb */
 	}
 }

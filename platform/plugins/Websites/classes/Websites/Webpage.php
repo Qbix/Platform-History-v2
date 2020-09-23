@@ -423,10 +423,11 @@ class Websites_Webpage extends Base_Websites_Webpage
      * @static
      * @param {string} $url
      * @param {integer} [$dataLimit=65536] Limit data length (bites) to download. Default 64Kb.
+	 * @param {boolean} [$closeFile=true] Whether to remove temp file after method executed
      * @throws Q_Exception
      * @return array
      */
-    static function getRemoteFileInfo ($url, $dataLimit = 65536) {
+    static function getRemoteFileInfo ($url, $dataLimit = 65536, $closeFile = true) {
         if (!$urlp = fopen($url, "r")) {
             throw new Q_Exception('Error opening URL for reading');
         }
@@ -485,7 +486,12 @@ class Websites_Webpage extends Base_Websites_Webpage
             }
         }
 
-        @fclose($file);
+        if ($closeFile) {
+			@fclose($file);
+		} else {
+			$metaData['fileHandler'] = $file;
+		}
+
         return $metaData;
     }
     /**

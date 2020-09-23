@@ -245,7 +245,7 @@ Q.Tool.define("Q/pdf", function (options) {
 					return _error("Link not found");
 				}
 
-				Q.req('Websites/scrape', ['result'], function (err, response) {
+				Q.req('Websites/pdf', ['result'], function (err, response) {
 					var msg = Q.firstErrorMessage(err, response && response.errors);
 					if (msg) {
 						Q.Dialogs.pop();
@@ -256,13 +256,11 @@ Q.Tool.define("Q/pdf", function (options) {
 
 					var params = {
 						title: siteData.title,
-						content: siteData.description,
-						icon: siteData.iconBig,
 						attributes: {
 							host: siteData.host,
-							iconSmall: siteData.iconSmall,
+							port: siteData.port,
 							url: url,
-							'Q.file.url': "",
+							'Q.file.url': siteData.destinationUrl,
 							'file.url': "",
 							clipStart: clipStart,
 							clipEnd: clipEnd
@@ -569,21 +567,33 @@ Q.Tool.define("Q/pdf", function (options) {
 					$pdfElement.empty();
 					$clipElement.empty();
 
-					$pdfElement.tool("Q/pdf", {
-						action: "implement",
-						url: url
-					}).activate(function () {
-						var toolPreview = this;
-						$clipElement.tool("Q/clip", {
-							onStart: function (setNewPosition) {
-								Q.handle(_onStart, this, [setNewPosition, toolPreview]);
-							},
-							onEnd: function (setNewPosition) {
-								Q.handle(_onEnd, this, [setNewPosition, toolPreview]);
-							}
+					Q.req("Websites/pdf", ["result"], function (err, response) {
+						var msg = Q.firstErrorMessage(err, response && response.errors);
+						if (msg) {
+							return console.warn(msg);
+						}
+
+						var result = response.slots.result;
+
+						$pdfElement.tool("Q/pdf", {
+							action: "implement",
+							url: result.destinationUrl
 						}).activate(function () {
-							toolPreview.clipTool = this;
+							var toolPreview = this;
+							$clipElement.tool("Q/clip", {
+								onStart: function (setNewPosition) {
+									Q.handle(_onStart, this, [setNewPosition, toolPreview]);
+								},
+								onEnd: function (setNewPosition) {
+									Q.handle(_onEnd, this, [setNewPosition, toolPreview]);
+								}
+							}).activate(function () {
+								toolPreview.clipTool = this;
+							});
 						});
+					}, {
+						method: "post",
+						fields: {url: url}
 					});
 				});
 			},
