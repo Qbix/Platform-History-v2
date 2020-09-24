@@ -23,4 +23,8 @@ function Websites_before_Q_responseExtras()
 	Q_Response::setScriptData('Q.plugins.Websites.seoStreamName', $seoStreamName);
 	Q_Response::setScriptData('Q.plugins.Websites.userId', Users::communityId());
 	Q_Response::setScriptData('Q.plugins.Websites.seoReload', Q_Config::expect('Websites', 'seoReload'));
+    Q_Response::setScriptData('Q.plugins.Websites.videoHosts', Q_Config::get('Websites', 'videoHosts', array()));
+    Q_Response::setScriptData('Q.plugins.Websites.videoExtensions', Q_Config::get('Websites', 'videoExtensions', array()));
+    Q_Response::setScriptData('Q.plugins.Websites.audioHosts', Q_Config::get('Websites', 'audioHosts', array()));
+    Q_Response::setScriptData('Q.plugins.Websites.audioExtensions', Q_Config::get('Websites', 'audioExtensions', array()));
 }

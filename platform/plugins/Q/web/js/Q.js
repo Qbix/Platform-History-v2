@@ -577,6 +577,25 @@ Sp.deobfuscate = function (key) {
 };
 
 /**
+ * Convert time from milliseconds to hh:mm:ss string
+ * @method convertTimeToString
+ * @param {boolean} [omitHours=true] If true omit hours if 00
+ * @return {string} formatted string
+ */
+Sp.convertTimeToString = function (omitHours) {
+	omitHours = Q.typeOf(omitHours) === 'boolean' ? omitHours : true;
+	var time = Math.trunc(parseInt(this) || 0);
+	var timeString = new Date(time).toISOString().substr(11, 8);
+
+	// omit hh if 00
+	if (omitHours) {
+		timeString = timeString.replace(/^00:/, '');
+	}
+
+	return timeString;
+}
+
+/**
  * @class Function
  * @description Q extended methods for Functions
  */
@@ -6894,7 +6913,7 @@ Q.load = function _Q_load(plugins, callback, options) {
  */
 Q.url = function _Q_url(what, fields, options) {
 	var what2 = what || '';
-	if (what2.substr(0, 5) === 'data:') {
+	if (what2.startsWith('data:') || what2.startsWith('blob:')) {
 		return what2; // this is a special type of URL
 	}
 	var parts = what2.split('?');
@@ -13483,7 +13502,9 @@ Q.onJQuery.add(function ($) {
 		"Q/parallax": "{{Q}}/js/tools/parallax.js",
 		"Q/lazyload": "{{Q}}/js/tools/lazyload.js",
 		"Q/audio": "{{Q}}/js/tools/audio.js",
-		"Q/video": "{{Q}}/js/tools/video.js"
+		"Q/video": "{{Q}}/js/tools/video.js",
+		"Q/pdf": "{{Q}}/js/tools/pdf.js",
+		"Q/clip": "{{Q}}/js/tools/clip.js"
 	});
 	
 	Q.Tool.jQuery({

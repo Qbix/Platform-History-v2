@@ -33,6 +33,8 @@
  *         <li>null/false/etc. - no interface to load earlier messages</li>
  *     </ul>
  *   @param {Object} [options.startWebRTC=false] If true, start webrtc once tool activated. Also if startWebRTC exist somewhere in GET params.
+ *   @param {Object} [options.preprocess=[]] Array of functions which call one by one before message post.
+ *   Each function will get callback as argument. Need to call this callback when ready to go further.
  *   @param {Q.Event} [options.onRefresh] Event for when an the chat has been updated
  *   @param {Q.Event} [options.onError] Event for when an error occurs, and the error is passed
  *   @param {Q.Event} [options.onClose] Event for when chat stream closed
@@ -157,6 +159,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	}),
 	onMessageRender: new Q.Event(),
 	beforePost: new Q.Event(),
+	preprocess: [],
 	templates: {
 		main: {
 			dir: '{{Streams}}/views',
@@ -800,7 +803,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				});
 			}
 
-			function _postMessage() {
+			function __postMessage() {
 				var fields = {
 					'publisherId' : state.publisherId,
 					'streamName'  : state.streamName,
@@ -840,6 +843,18 @@ Q.Tool.define('Streams/chat', function(options) {
 						);
 					}
 				});
+			}
+
+			function _postMessage (preprocessCounter) {
+				preprocessCounter = preprocessCounter || 0;
+
+				Q.handle(state.preprocess[preprocessCounter], tool, [function () {
+					_postMessage(preprocessCounter + 1);
+				}]);
+
+				if (preprocessCounter === state.preprocess.length) {
+					__postMessage();
+				}
 			}
 		}
 	},

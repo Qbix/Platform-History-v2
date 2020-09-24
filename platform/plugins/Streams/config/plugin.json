@@ -386,6 +386,15 @@
 				},
 				"updateTitle": true
 			},
+			"Streams/pdf": {
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"icon": "Streams/pdf",
+					"title": "Untitled PDF doc"
+				},
+				"updateTitle": true
+			},
 			"Streams/live": {
 				"create": true,
 				"edit": true,

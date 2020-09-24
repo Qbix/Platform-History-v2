@@ -28,7 +28,8 @@
  *     @param {Number} [options.creatable.addIconSize=100] The size in pixels of the square add icon
  *     @param {Number} [options.creatable.options={}] Any options to pass to Q.Streams.create
  *     @param {String} [options.creatable.options.streamName] You can set a specific stream name from Streams/possibleUserStreams config
- *     @param {Function} [options.creatable.preprocess] This function receives 
+ *     @param {Boolean} [options.creatable.options.skipComposer] Set it true if you want to skip native composer and go preprocess immediately
+ *     @param {Function} [options.creatable.preprocess] This function receives
  *       (a callback, this tool, the event if any that triggered it). 
  *       This is your chance to do any processing before the request to create the stream is sent.
  *       The function must call the callback.
@@ -98,8 +99,12 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 				tool.loading();
 				tool.preview();
 			} else {
-				tool.element.addClass('Streams_preview_composer');
-				tool.composer();
+				if (Q.getObject("creatable.options.skipComposer", state)) {
+					tool.create();
+				} else {
+					tool.element.addClass('Streams_preview_composer');
+					tool.composer();
+				}
 			}
 		});
 	}, 0);
@@ -237,8 +242,11 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		} else {
 			_proceed();
 		}
-		Q.Pointer.cancelClick(false, event);
-		event.stopPropagation();
+
+		if (event instanceof Event) {
+			Q.Pointer.cancelClick(false, event);
+			event.stopPropagation();
+		}
 	},
 	composer: function _composer () {
 		var tool = this;

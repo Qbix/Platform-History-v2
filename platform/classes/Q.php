@@ -314,7 +314,30 @@ class Q
 		}
 		return $expression;
 	}
-	
+    /**
+     * Modification of stripos function but with array as $needle (case-insensitive)
+     * @method striposa
+     * @static
+     * @param {string} $haystack The string to search in.
+     * @param {array} [$needles=array()] Array of string need to find.
+     * @param {integer} [$offset=0] If specified, search will start this number of characters counted from the beginning of
+     * the string. If the offset is negative, the search will start this number of characters counted from the end of the string.
+     * @return {boolean|intefer} Postion of needle or false if not found.
+     */
+    static function striposa($haystack, $needles=array(), $offset=0) {
+        $chr = array();
+        foreach($needles as $needle) {
+            $res = stripos($haystack, $needle, $offset);
+            if ($res !== false) {
+                $chr[$needle] = $res;
+            }
+        }
+        if(empty($chr)) {
+            return false;
+        }
+
+        return min($chr);
+    }
 	/**
 	 * A convenience method to use in your PHP templates.
 	 * It is short for Q_Html::text(Q::interpolate($expression, ...)).
