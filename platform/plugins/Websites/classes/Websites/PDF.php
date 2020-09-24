@@ -13,11 +13,12 @@ class Websites_PDF extends Base_Websites_Webpage
 	 * Get URL, load pdf and scrape info to cache
 	 * @method scrape
 	 * @static
-	 * @param string $url Page source to load
+	 * @param {string} $url Page source to load
+	 * @param {boolean} [$skipAccess=fasle] If true, skip all permissions and quotas checking
 	 * @throws Q_Exception
 	 * @return array
 	 */
-	static function scrape($url)
+	static function scrape($url, $skipAccess=false)
 	{
 		// add scheme to url if not exist
 		if (parse_url($url, PHP_URL_SCHEME) === null) {
@@ -61,6 +62,14 @@ class Websites_PDF extends Base_Websites_Webpage
 					}
 				}
 			}
+		}
+
+		$asUserId = Users::loggedInUser(true)->id;
+		$quota = null;
+		if (!$skipAccess) {
+			// check quota
+			$roles = Users::roles();
+			$quota = Users_Quota::check($asUserId, '', "Websites/cache", true, 1, $roles);
 		}
 
 		$headers = get_headers($url, 1);
@@ -114,6 +123,11 @@ class Websites_PDF extends Base_Websites_Webpage
 			);
 			$webpageCahe->results = json_encode($result);
 			$webpageCahe->save();
+		}
+
+		// set quota
+		if (!$skipAccess && $quota instanceof Users_Quota) {
+			$quota->used();
 		}
 
 		return $result;

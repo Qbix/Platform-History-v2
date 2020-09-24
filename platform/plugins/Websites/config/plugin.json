@@ -39,6 +39,12 @@
 					"": 10,
 					"Users/admins": 1000
 				}
+			},
+			"Websites/cache": {
+				"86400": {
+					"": 10,
+					"Users/admins": 1000
+				}
 			}
 		}
 	},
