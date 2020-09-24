@@ -956,9 +956,11 @@ Q.Tool.define('Streams/chat', function(options) {
 		if (!state.$scrolling) {
 			state.$scrolling = $($scm[0].scrollingParent());
 		}
-		state.$scrolling.animate({
-			scrollTop: state.$scrolling[0].scrollHeight
-		}, this.state.animations.duration, callback);
+		if (state.$scrolling) {
+			state.$scrolling.animate({
+				scrollTop: state.$scrolling[0].scrollHeight
+			}, this.state.animations.duration, callback);
+		}
 	},
 
 	scrollToTop: function() {

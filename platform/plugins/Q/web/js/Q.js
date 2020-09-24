@@ -827,6 +827,9 @@ Elp.scrollingParent = function(skipIfNotOverflowed, direction, includeSelf) {
 	var p = this;
 	while (includeSelf ? 1 : (p = p.parentNode)) {
 		includeSelf = false;
+		if (p === document.documentElement) {
+			break;
+		}
 		if (typeof p.computedStyle !== 'function') {
 			continue;
 		}
@@ -847,7 +850,7 @@ Elp.scrollingParent = function(skipIfNotOverflowed, direction, includeSelf) {
 			}
 		}
 	}
-	return document.documentElement;
+	return p || null;
 };
 
 /**
