@@ -554,6 +554,8 @@ Q.Tool.define("Q/pdf", function (options) {
 
 				// set clip start/end for link
 				$("button[name=setClip]", mainDialog).on(Q.Pointer.fastclick, function () {
+					var $button = $(this);
+					$button.addClass("Q_working");
 					var $pdfElement = $(".Q_pdf_composer_content [data-content=link] .Q_pdf_composer_preview", mainDialog);
 					var $clipElement = $(".Q_pdf_composer_content [data-content=link] .Q_pdf_composer_clip", mainDialog);
 					var url = $("input[name=url]", mainDialog).val();
@@ -568,6 +570,8 @@ Q.Tool.define("Q/pdf", function (options) {
 					$clipElement.empty();
 
 					Q.req("Websites/pdf", ["result"], function (err, response) {
+						$button.removeClass("Q_working");
+
 						var msg = Q.firstErrorMessage(err, response && response.errors);
 						if (msg) {
 							return console.warn(msg);
