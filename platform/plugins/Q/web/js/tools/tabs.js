@@ -519,6 +519,8 @@
 							this.setAttribute('data-touchlabel', $(this).text());
 						}
 					});
+				} else {
+					$tabs.removeAttr('data-touchlabel');
 				}
 				var $tab = $(state.tab);
 				var values = {
