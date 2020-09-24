@@ -74,28 +74,31 @@ class Websites_PDF extends Base_Websites_Webpage
 			throw new Exception($errorFileSize);
 		}
 
-		$fileInfo = Websites_Webpage::getRemoteFileInfo($url, $cacheFileLimit, false);
-
-		if (filesize($fileInfo["filenamepath"]) > $cacheFileLimit) {
-			@fclose($fileInfo['fileHandler']);
+		//$fileInfo = Websites_Webpage::getRemoteFileInfo($url, $cacheFileLimit, false);
+		$tmpFile = tmpfile();
+		$tmpPath = stream_get_meta_data($tmpFile)['uri'];
+		fwrite($tmpFile, Websites_Webpage::readURL($url, $cacheFileLimit * 1.2));
+		if (filesize($tmpPath) > $cacheFileLimit) {
+			@fclose($tmpFile);
 			throw new Exception($errorFileSize);
 		}
 
-		$extension = Q::ifset($fileInfo, 'fileformat', Q::ifset($fileInfo, 'mime_type', strtolower(pathinfo($url, PATHINFO_EXTENSION))));
-		$extension = preg_replace("/.*\//", '', $extension);
-
-		if (!stristr($extension, "pdf")) {
+		// check mime type
+		$finfo = finfo_open(FILEINFO_MIME_TYPE);
+		//$mimeType = Q::ifset($fileInfo, 'fileformat', Q::ifset($fileInfo, 'mime_type', strtolower(pathinfo($url, PATHINFO_EXTENSION))));
+		$mimeType = finfo_file($finfo, $tmpPath);
+		if (!stristr($mimeType, "pdf")) {
 			throw new Exception(Q::interpolate($text["webpage"]["InvalidPDF"]));
 		}
 
-		$destinationPath = self::getCacheFileName($url);
-		$destinationUrl = self::getCacheFileName($url, "url");
-		copy($fileInfo["filenamepath"], $destinationPath);
+		$destinationPath = self::getCachePath($url);
+		$destinationUrl = self::getCachePath($url, "url");
+		self::cacheFile($tmpPath, $destinationPath);
 
 		$result = array_merge($result, array(
-			'title' => Q::ifset($fileInfo, 'comments', 'name', null),
+			'title' => basename($url),
 			'url' => $url,
-			'type' => $extension,
+			'type' => "pdf",
 			//'destinationPath' => $destinationPath,
 			'destinationUrl' => $destinationUrl
 		));
@@ -116,33 +119,108 @@ class Websites_PDF extends Base_Websites_Webpage
 		return $result;
 	}
 	/**
-	 * Get file path by url to cache url source
-	 * @method getCacheFileName
+	 * Clear cache dir to limited size and copy file to cache dir
+	 * @method cacheFile
 	 * @static
-	 * @param {string} $url
+	 * @param {string} $copyFrom Path to file to copy from
+	 * @param {string} $copyTo Destination path
+	 */
+	static function cacheFile ($copyFrom, $copyTo) {
+		// clear cache directory volume to cacheDirectoryLimit
+		self::clearCache(Q_Config::get("Websites", "cacheDirectoryLimit", 0));
+
+		mkdir(dirname($copyTo), 0777, true);
+
+		// copy new file
+		copy($copyFrom, $copyTo);
+	}
+	/**
+	 * Clear cache dir to limited size (or completely if $dirMaxSize = 0)
+	 * @method clearCache
+	 * @static
+	 * @param {integer} [$dirMaxSize=0] Clear dir to this size. If $dirMaxSize = 0 clear completely.
+	 */
+	static function clearCache ($dirMaxSize = 0) {
+		// check max directory volume and remove old files till limit
+		$dir = self::getCachePath();
+		if(!file_exists($dir)){
+			throw new Exception("Error: websites cache dir not exists");
+		}
+
+		$files = array();
+		$dirSize = 0;
+		foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS)) as $object){
+			$fileSize = $object->getSize();
+			$fileName = $object->getFilename();
+			$filePath = $object->getPathname();
+			$fileModTime = $object->getMTime();
+			$dirSize += $fileSize;
+
+			$files[$fileModTime] = array(
+				"path" => $filePath,
+				"name" => $fileName,
+				"size" => $fileSize
+			);
+		}
+
+		if ($dirSize <= $dirMaxSize) {
+			return;
+		}
+
+		// sort
+		ksort($files);
+
+		// remove oldest files till $dirMaxSize
+		foreach ($files as $fileModTime => $file) {
+			if (!unlink($file["path"])) {
+				continue;
+			}
+
+			$dirSize -= $file["size"];
+			unset($files[$fileModTime]);
+			if ($dirSize <= $dirMaxSize) {
+				break;
+			}
+		}
+	}
+	/**
+	 * Get file path by url to cache url source
+	 * @method getCachePath
+	 * @static
+	 * @param {string} [$url=null] If url defined, return path to file generated from this url. If null return directory path.
 	 * @param {string} [$which="path"] If "path" return local OS path, if "url" return url
 	 * @return String
 	 */
-	static function getCacheFileName ($url, $which="path") {
-		$host = parse_url($url, PHP_URL_HOST);
-		$hostNormalized = Websites_Webpage::normalizeUrl($host);
+	static function getCachePath ($url=null, $which="path") {
 		switch ($which) {
 			case "path":
-				$basedir = APP_FILES_DIR.DS.Q::app().DS.'uploads'.DS.'Websites'.DS.$hostNormalized.DS;
+				$basedir = APP_FILES_DIR.DS.Q::app().DS.'uploads'.DS.'Websites'.DS;
 				// if dir not exists - create one
 				if(!file_exists($basedir)) {
 					mkdir($basedir,0775,true);
 				}
 				break;
 			case "url":
-				$basedir = Q_Request::baseUrl().'/Q/uploads/Websites/'.$hostNormalized.'/';
+				$basedir = Q_Request::baseUrl().'/Q/uploads/Websites/';
 				break;
 			default:
 				throw new Exception("Invalid 'which' param");
 		}
 
-		$path = preg_replace("/.*$host\//", '', $url);
-		return $basedir.Websites_Webpage::normalizeUrl($path);
+		if ($url) {
+			$host = parse_url($url, PHP_URL_HOST);
+			$hostNormalized = Websites_Webpage::normalizeUrl($host);
+			$subPath = preg_replace("/.*$host\//", '', $url);
+			$subPath = Websites_Webpage::normalizeUrl($subPath);
+			if ($which == "path") {
+				$basedir .= $hostNormalized.DS;
+			} else {
+				$basedir .= $hostNormalized.'/';
+			}
+			$basedir .= $subPath;
+		}
+
+		return $basedir;
 	}
 	/**
 	 * Format bytes integer to human readable size string
