@@ -245,7 +245,7 @@ Q.Tool.define("Q/pdf", function (options) {
 					return _error("Link not found");
 				}
 
-				Q.req('Websites/pdf', ['result'], function (err, response) {
+				Q.req('Websites/file', ['result'], function (err, response) {
 					var msg = Q.firstErrorMessage(err, response && response.errors);
 					if (msg) {
 						Q.Dialogs.pop();
@@ -569,7 +569,7 @@ Q.Tool.define("Q/pdf", function (options) {
 					$pdfElement.empty();
 					$clipElement.empty();
 
-					Q.req("Websites/pdf", ["result"], function (err, response) {
+					Q.req("Websites/file", ["result"], function (err, response) {
 						$button.removeClass("Q_working");
 
 						var msg = Q.firstErrorMessage(err, response && response.errors);

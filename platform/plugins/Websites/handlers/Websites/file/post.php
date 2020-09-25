@@ -1,6 +1,6 @@
 <?php
 	
-function Websites_pdf_post($params)
+function Websites_file_post($params)
 {
 	// don't let just anyone call this, but only pages loaded from valid sessions
 	Q_Valid::nonce(true);
@@ -25,12 +25,12 @@ function Websites_pdf_post($params)
 		$url = 'http://'.$url;
 	}
 
-	$result = Websites_PDF::scrape($url);
+	$result = Websites_File::scrape($url);
 
 	if ($stream) {
-		$stream = Websites_PDF::editStream(compact("stream", "url", "clipStart", "clipEnd"));
+		$stream = Websites_File::editStream(compact("stream", "url", "clipStart", "clipEnd"));
 	} elseif ($streamCreate) {
-		$stream = Websites_PDF::createStream(compact("url", "clipStart", "clipEnd"));
+		$stream = Websites_File::createStream(compact("url", "clipStart", "clipEnd"));
 	}
 
 	Q_Response::setSlot('publisherId', Q::ifset($stream, "publisherId", null));

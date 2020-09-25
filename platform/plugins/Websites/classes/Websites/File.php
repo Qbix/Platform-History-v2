@@ -3,14 +3,14 @@
  * @module Websites
  */
 /**
- * Class for dealing with pdf
+ * Class for dealing with files
  * 
- * @class Websites_PDF
+ * @class Websites_File
  */
-class Websites_PDF extends Base_Websites_Webpage
+class Websites_File extends Base_Websites_Webpage
 {
 	/**
-	 * Get URL, load pdf and scrape info to cache
+	 * Get URL, load file and scrape info to cache
 	 * @method scrape
 	 * @static
 	 * @param {string} $url Page source to load
@@ -96,9 +96,10 @@ class Websites_PDF extends Base_Websites_Webpage
 		$finfo = finfo_open(FILEINFO_MIME_TYPE);
 		//$mimeType = Q::ifset($fileInfo, 'fileformat', Q::ifset($fileInfo, 'mime_type', strtolower(pathinfo($url, PATHINFO_EXTENSION))));
 		$mimeType = finfo_file($finfo, $tmpPath);
-		if (!stristr($mimeType, "pdf")) {
-			throw new Exception(Q::interpolate($text["webpage"]["InvalidPDF"]));
-		}
+		$extension = Q_Config::get('mime-types', $mimeType, '_blank');
+		$streamIcon = file_exists(STREAMS_PLUGIN_FILES_DIR.DS.'Streams'.DS.'icons'.DS.'files'.DS.$extension)
+			? "files/$extension"
+			: "files/_blank";
 
 		$destinationPath = self::getCachePath($url);
 		$destinationUrl = self::getCachePath($url, "url");
@@ -107,8 +108,10 @@ class Websites_PDF extends Base_Websites_Webpage
 		$result = array_merge($result, array(
 			'title' => basename($url),
 			'url' => $url,
-			'type' => "pdf",
-			'destinationUrl' => $destinationUrl
+			'type' => $extension,
+			'destinationUrl' => $destinationUrl,
+			'icon' => $streamIcon,
+			'streamType' => "Streams/".$extension
 		));
 
 		if ($webpageCahe) {
@@ -119,7 +122,7 @@ class Websites_PDF extends Base_Websites_Webpage
 			// dummy interest block for cache
 			$result['interest'] = array(
 				'title' => $url,
-				'icon' => "files/pdf"
+				'icon' => $streamIcon
 			);
 			$webpageCahe->results = json_encode($result);
 			$webpageCahe->save();
@@ -269,7 +272,7 @@ class Websites_PDF extends Base_Websites_Webpage
 		return round($bytes, $precision) . $units[$pow];
 	}
 	/**
-	 * Create Streams/pdf stream from params
+	 * Create stream from params
 	 * May return existing stream for this url (fetched without permissions checks)
 	 * @method createStream
 	 * @static
@@ -299,14 +302,13 @@ class Websites_PDF extends Base_Websites_Webpage
 			throw new Exception("Invalid URL");
 		}
 
-		$pdfData = self::scrape($url);
+		$fileData = self::scrape($url);
 
 		$urlParsed = parse_url($url);
 		$loggedUserId = Users::loggedInUser(true)->id;
 
 		$asUserId = Q::ifset($params, "asUserId", $loggedUserId);
 		$publisherId = Q::ifset($params, "publisherId", $loggedUserId);
-		$streamType = "Streams/pdf";
 
 		$quota = null;
 		if (!$skipAccess) {
@@ -316,25 +318,25 @@ class Websites_PDF extends Base_Websites_Webpage
 		}
 
 		$streamsStream = new Streams_Stream();
-		$title = Q::ifset($pdfData, 'title', substr($url, strrpos($url, '/') + 1));
+		$title = Q::ifset($fileData, 'title', substr($url, strrpos($url, '/') + 1));
 		$title = $title ? mb_substr($title, 0, $streamsStream->maxSize_title(), "UTF-8") : '';
-		$description = mb_substr(Q::ifset($pdfData, 'description', ''), 0, $streamsStream->maxSize_content(), "UTF-8");
+		$description = mb_substr(Q::ifset($fileData, 'description', ''), 0, $streamsStream->maxSize_content(), "UTF-8");
 
 		$streamParams = array(
             'title' => trim($title),
             'content' => trim($description),
-            'icon' => "files/pdf",
+            'icon' => $fileData['icon'],
             'attributes' => array(
                 'url' => $url,
                 'urlParsed' => $urlParsed,
 				'clipStart' => $clipStart,
 				'clipEnd' => $clipEnd,
-				'lang' => Q::ifset($pdfData, 'lang', 'en')
+				'lang' => Q::ifset($fileData, 'lang', 'en')
 			),
             'skipAccess' => $skipAccess
         );
 
-		$stream = Streams::create($asUserId, $publisherId, "Streams/pdf", $streamParams, $relatedParams);
+		$stream = Streams::create($asUserId, $publisherId, $fileData['streamType'], $streamParams, $relatedParams);
 
 		// copy file to stream uploads dest
 		self::saveStreamFile($stream, self::getCachePath($url));
@@ -407,11 +409,11 @@ class Websites_PDF extends Base_Websites_Webpage
 			}
 		}
 
-		$pdfData = self::scrape($url);
+		$fileData = self::scrape($url);
 
-		$title = Q::ifset($pdfData, 'title', substr($url, strrpos($url, '/') + 1));
+		$title = Q::ifset($fileData, 'title', substr($url, strrpos($url, '/') + 1));
 		$title = $title ? mb_substr($title, 0, $stream->maxSize_title(), "UTF-8") : '';
-		$description = mb_substr(Q::ifset($pdfData, 'description', ''), 0, $stream->maxSize_content(), "UTF-8");
+		$description = mb_substr(Q::ifset($fileData, 'description', ''), 0, $stream->maxSize_content(), "UTF-8");
 
 		// copy file to stream uploads dest
 		$newFileDest = self::saveStreamFile($stream, self::getCachePath($url));
@@ -424,7 +426,7 @@ class Websites_PDF extends Base_Websites_Webpage
 				'urlParsed' => parse_url($url),
 				'clipStart' => $clipStart,
 				'clipEnd' => $clipEnd,
-				'lang' => Q::ifset($pdfData, 'lang', 'en')
+				'lang' => Q::ifset($fileData, 'lang', 'en')
 			)
 		);
 
