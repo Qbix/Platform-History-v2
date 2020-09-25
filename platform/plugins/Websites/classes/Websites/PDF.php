@@ -108,13 +108,13 @@ class Websites_PDF extends Base_Websites_Webpage
 			'title' => basename($url),
 			'url' => $url,
 			'type' => "pdf",
-			//'destinationPath' => $destinationPath,
 			'destinationUrl' => $destinationUrl
 		));
 
 		if ($webpageCahe) {
 			$webpageCahe->url = $url;
-			$webpageCahe->title = mb_substr($result['title'], 0, $webpageCahe->maxSize_title(), "UTF-8");
+
+			$webpageCahe->cache = str_replace(self::getCachePath(), "", $destinationPath);
 
 			// dummy interest block for cache
 			$result['interest'] = array(
@@ -143,7 +143,9 @@ class Websites_PDF extends Base_Websites_Webpage
 		// clear cache directory volume to cacheDirectoryLimit
 		self::clearCache(Q_Config::get("Websites", "cacheDirectoryLimit", 0));
 
-		mkdir(dirname($copyTo), 0777, true);
+		if(!file_exists(dirname($copyTo))) {
+			mkdir(dirname($copyTo),0775,true);
+		}
 
 		// copy new file
 		copy($copyFrom, $copyTo);
@@ -164,17 +166,19 @@ class Websites_PDF extends Base_Websites_Webpage
 		$files = array();
 		$dirSize = 0;
 		foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS)) as $object){
-			$fileSize = $object->getSize();
-			$fileName = $object->getFilename();
-			$filePath = $object->getPathname();
-			$fileModTime = $object->getMTime();
-			$dirSize += $fileSize;
+			try {
+				$fileSize = $object->getSize();
+				$fileName = $object->getFilename();
+				$filePath = $object->getPathname();
+				$fileModTime = $object->getMTime();
+				$dirSize += $fileSize;
 
-			$files[$fileModTime] = array(
-				"path" => $filePath,
-				"name" => $fileName,
-				"size" => $fileSize
-			);
+				$files[$fileModTime] = array(
+					"path" => $filePath,
+					"name" => $fileName,
+					"size" => $fileSize
+				);
+			} catch (Exception $e) {}
 		}
 
 		if ($dirSize <= $dirMaxSize) {
@@ -188,6 +192,13 @@ class Websites_PDF extends Base_Websites_Webpage
 		foreach ($files as $fileModTime => $file) {
 			if (!unlink($file["path"])) {
 				continue;
+			}
+
+			// remove from websites_webpage table
+			$websitesWebpage = new Websites_Webpage();
+			$websitesWebpage->cache = str_replace($dir, "", $file["path"]);
+			if ($websitesWebpage->retrieve()) {
+				$websitesWebpage->remove();
 			}
 
 			$dirSize -= $file["size"];
@@ -276,7 +287,9 @@ class Websites_PDF extends Base_Websites_Webpage
 	 */
 	static function createStream ($params, $quotaName='Websites/webpage/chat', $relatedParams=array(), $skipAccess=false) {
 		$url = Q::ifset($params, 'url', null);
-		
+		$clipStart = Q::ifset($params, 'clipStart', null);
+		$clipEnd = Q::ifset($params, 'clipEnd', null);
+
 		// add scheme to url if not exist
 		if (parse_url($url, PHP_URL_SCHEME) === null) {
 			$url = 'http://'.$url;
@@ -293,14 +306,7 @@ class Websites_PDF extends Base_Websites_Webpage
 
 		$asUserId = Q::ifset($params, "asUserId", $loggedUserId);
 		$publisherId = Q::ifset($params, "publisherId", $loggedUserId);
-
 		$streamType = "Streams/pdf";
-
-		// check if stream for this url has been already created
-		// and if yes, return it
-		if ($pdfStream = Websites_Webpage::fetchStream($url)) {
-			return $pdfStream;
-		}
 
 		$quota = null;
 		if (!$skipAccess) {
@@ -312,39 +318,46 @@ class Websites_PDF extends Base_Websites_Webpage
 		$streamsStream = new Streams_Stream();
 		$title = Q::ifset($pdfData, 'title', substr($url, strrpos($url, '/') + 1));
 		$title = $title ? mb_substr($title, 0, $streamsStream->maxSize_title(), "UTF-8") : '';
-
 		$description = mb_substr(Q::ifset($pdfData, 'description', ''), 0, $streamsStream->maxSize_content(), "UTF-8");
 
-		$streamName = $streamType."/".Websites_Webpage::normalizeUrl($url);
-
 		$streamParams = array(
-            'name' => $streamName,
             'title' => trim($title),
             'content' => trim($description),
             'icon' => "files/pdf",
             'attributes' => array(
                 'url' => $url,
                 'urlParsed' => $urlParsed,
-                'lang' => Q::ifset($pdfData, 'lang', 'en')
-            ),
+				'clipStart' => $clipStart,
+				'clipEnd' => $clipEnd,
+				'lang' => Q::ifset($pdfData, 'lang', 'en')
+			),
             'skipAccess' => $skipAccess
         );
 
-		$pdfStream = Streams::create($asUserId, $publisherId, $streamType, $streamParams, $relatedParams);
+		$stream = Streams::create($asUserId, $publisherId, "Streams/pdf", $streamParams, $relatedParams);
 
-		// grant access to this stream for logged user
-		$streamsAccess = new Streams_Access();
-		$streamsAccess->publisherId = $pdfStream->publisherId;
-		$streamsAccess->streamName = $pdfStream->name;
-		$streamsAccess->ofUserId = $asUserId;
-		$streamsAccess->readLevel = Streams::$READ_LEVEL['max'];
-		$streamsAccess->writeLevel = Streams::$WRITE_LEVEL['max'];
-		$streamsAccess->adminLevel = Streams::$ADMIN_LEVEL['max'];
-		$streamsAccess->save();
+		// copy file to stream uploads dest
+		self::saveStreamFile($stream, self::getCachePath($url));
+		//$stream->setAttribute('Q.file.url', self::saveStreamFile($stream, self::getCachePath($url)));
+		//$stream->save();
+
+		if ($asUserId != $stream->publisherId) {
+			// grant access to this stream for logged user
+			$streamsAccess = new Streams_Access();
+			$streamsAccess->publisherId = $stream->publisherId;
+			$streamsAccess->streamName = $stream->name;
+			$streamsAccess->ofUserId = $asUserId;
+			$streamsAccess->readLevel = Streams::$READ_LEVEL['max'];
+			$streamsAccess->writeLevel = Streams::$WRITE_LEVEL['max'];
+			$streamsAccess->adminLevel = Streams::$ADMIN_LEVEL['max'];
+			if (!$streamsAccess->retrieve()) {
+				$streamsAccess->save();
+			}
+		}
 
 		// if publisher not community, subscribe publisher to this stream
 		if (!Users::isCommunityId($publisherId)) {
-			$pdfStream->subscribe(array('userId' => $publisherId));
+			$stream->subscribe(array('userId' => $publisherId));
 		}
 
 		// set quota
@@ -352,6 +365,97 @@ class Websites_PDF extends Base_Websites_Webpage
 			$quota->used();
 		}
 
-		return $pdfStream;
+		return $stream;
+	}
+	/**
+	 * Edit stream with new url
+	 * @method editStream
+	 * @static
+	 * @param {array} $params
+	 * @param {string} [$params.asUserId=null] The user who would be modify stream. If null - logged user id.
+	 * @param {string} [$params.stream]
+	 * @param {string} [$params.url]
+	 * @param {string} [$params.clipStart]
+	 * @param {string} [$params.clipEnd]
+	 * @return Streams_Stream
+	 *@throws Exception
+	 */
+	static function editStream ($params) {
+		$stream = Q::ifset($params, 'stream', null);
+		$url = Q::ifset($params, 'url', null);
+		$clipStart = Q::ifset($params, 'clipStart', null);
+		$clipEnd = Q::ifset($params, 'clipEnd', null);
+
+		// add scheme to url if not exist
+		if (parse_url($url, PHP_URL_SCHEME) === null) {
+			$url = 'http://'.$url;
+		}
+
+		if (!Q_Valid::url($url)) {
+			throw new Exception("Invalid URL");
+		}
+
+		if (!($stream instanceof Streams_Stream)) {
+			$publisherId = Q::ifset($stream, "publisherId", null);
+			$streamName = Q::ifset($stream, "streamName", null);
+			if (!$publisherId || !$streamName) {
+				throw new Exception("Invalid stream");
+			}
+			$stream = Streams::fetchOne(null, $publisherId, $streamName);
+			if (!($stream instanceof Streams_Stream)) {
+				throw new Exception("Invalid stream");
+			}
+		}
+
+		$pdfData = self::scrape($url);
+
+		$title = Q::ifset($pdfData, 'title', substr($url, strrpos($url, '/') + 1));
+		$title = $title ? mb_substr($title, 0, $stream->maxSize_title(), "UTF-8") : '';
+		$description = mb_substr(Q::ifset($pdfData, 'description', ''), 0, $stream->maxSize_content(), "UTF-8");
+
+		// copy file to stream uploads dest
+		$newFileDest = self::saveStreamFile($stream, self::getCachePath($url));
+
+		$streamParams = array(
+			'title' => trim($title),
+			'content' => trim($description),
+			'attributes' => array(
+				'url' => $url,
+				'urlParsed' => parse_url($url),
+				'clipStart' => $clipStart,
+				'clipEnd' => $clipEnd,
+				'lang' => Q::ifset($pdfData, 'lang', 'en')
+			)
+		);
+
+		foreach ($streamParams as $field => $streamParam) {
+			$stream[$field] = $streamParam;
+		}
+		$stream->save();
+
+		return $stream;
+	}
+	/**
+	 * Correctly save file for stream to app uploads dir
+	 * @method saveStreamFile
+	 * @static
+	 * @param {Streams_Stream} $stream
+	 * @param {string} $path Path to file need to copy from
+	 * @return {string} $newFileDest New file path
+	 */
+	static function saveStreamFile ($stream, $path) {
+		if (!is_file($path)) {
+			throw new Exception("Source file not found");
+		}
+
+		$publisherId = Q::ifset($stream, 'publisherId', null);
+		$streamName = Q::ifset($stream, 'name', Q::ifset($stream, 'streamName', null));
+
+		$streamDir = APP_FILES_DIR.DS.Q::app().DS.'uploads'.DS.'Streams'.DS.Q_Utils::splitId($publisherId).DS.$streamName.DS.'file'.DS.time();
+		mkdir($streamDir,0775,true);
+		$newFileDest = $streamDir.DS.basename($path);
+		copy($path, $newFileDest);
+
+		return $newFileDest;
 	}
 }
