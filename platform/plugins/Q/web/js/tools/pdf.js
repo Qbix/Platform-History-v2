@@ -143,7 +143,6 @@ Q.Tool.define("Q/pdf", function (options) {
 		// listen scroll event of preview element
 		$toolElement.on("scroll", function () {
 			state.currentPosition = ($toolElement.scrollTop()/state.stuffHeight * 100).toPrecision(3);
-
 			tool.checkClip();
 		});
 
@@ -260,8 +259,6 @@ Q.Tool.define("Q/pdf", function (options) {
 							host: siteData.host,
 							port: siteData.port,
 							url: url,
-							'Q.file.url': siteData.destinationUrl,
-							'file.url': "",
 							clipStart: clipStart,
 							clipEnd: clipEnd
 						}

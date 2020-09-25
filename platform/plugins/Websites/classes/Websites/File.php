@@ -453,11 +453,17 @@ class Websites_File extends Base_Websites_Webpage
 		$publisherId = Q::ifset($stream, 'publisherId', null);
 		$streamName = Q::ifset($stream, 'name', Q::ifset($stream, 'streamName', null));
 
-		$streamDir = APP_FILES_DIR.DS.Q::app().DS.'uploads'.DS.'Streams'.DS.Q_Utils::splitId($publisherId).DS.$streamName.DS.'file'.DS.time();
+		$parts = array('uploads', 'Streams', Q_Utils::splitId($publisherId, 3, '/'), $streamName, 'file', time());
+		$fileName = basename($path);
+
+		$streamDir = APP_FILES_DIR.'/'.Q::app().'/'.implode('/', $parts);
 		mkdir($streamDir,0775,true);
-		$newFileDest = $streamDir.DS.basename($path);
+		$newFileDest = $streamDir.DS.$fileName;
 		copy($path, $newFileDest);
 
-		return $newFileDest;
+		return array(
+			"path" => $newFileDest,
+			"url" => Q_Request::baseUrl().'/Q/'.implode('/', $parts).'/'.$fileName
+		);
 	}
 }
