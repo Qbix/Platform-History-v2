@@ -463,7 +463,7 @@ class Websites_File extends Base_Websites_Webpage
 
 		return array(
 			"path" => $newFileDest,
-			"url" => Q_Request::baseUrl().'/Q/'.implode('/', $parts).'/'.$fileName
+			"url" => '{{baseUrl}}/Q/'.implode('/', $parts).'/'.$fileName
 		);
 	}
 }
