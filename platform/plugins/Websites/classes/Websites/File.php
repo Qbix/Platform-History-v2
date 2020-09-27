@@ -87,7 +87,8 @@ class Websites_File extends Base_Websites_Webpage
 		$tmpFile = tmpfile();
 		$tmpPath = stream_get_meta_data($tmpFile)['uri'];
 		fwrite($tmpFile, Websites_Webpage::readURL($url, $cacheFileLimit * 1.2));
-		if (filesize($tmpPath) > $cacheFileLimit) {
+		$fileSize = filesize($tmpPath);
+		if ($fileSize > $cacheFileLimit) {
 			@fclose($tmpFile);
 			throw new Exception($errorFileSize);
 		}
@@ -96,6 +97,7 @@ class Websites_File extends Base_Websites_Webpage
 		$finfo = finfo_open(FILEINFO_MIME_TYPE);
 		//$mimeType = Q::ifset($fileInfo, 'fileformat', Q::ifset($fileInfo, 'mime_type', strtolower(pathinfo($url, PATHINFO_EXTENSION))));
 		$mimeType = finfo_file($finfo, $tmpPath);
+		Q_Config::load(WEBSITES_PLUGIN_CONFIG_DIR.DS.'mime-types.json');
 		$extension = Q_Config::get('mime-types', $mimeType, '_blank');
 		$streamIcon = file_exists(STREAMS_PLUGIN_FILES_DIR.DS.'Streams'.DS.'icons'.DS.'files'.DS.$extension)
 			? "files/$extension"
@@ -111,6 +113,7 @@ class Websites_File extends Base_Websites_Webpage
 			'type' => $extension,
 			'destinationUrl' => $destinationUrl,
 			'icon' => $streamIcon,
+			'size' => $fileSize,
 			'streamType' => "Streams/".$extension
 		));
 
@@ -162,50 +165,55 @@ class Websites_File extends Base_Websites_Webpage
 	static function clearCache ($dirMaxSize = 0) {
 		// check max directory volume and remove old files till limit
 		$dir = self::getCachePath();
-		if(!file_exists($dir)){
+		if(!is_dir($dir)){
 			throw new Exception("Error: websites cache dir not exists");
 		}
 
 		$files = array();
 		$dirSize = 0;
-		foreach(new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS)) as $object){
-			try {
-				$fileSize = $object->getSize();
-				$fileName = $object->getFilename();
-				$filePath = $object->getPathname();
-				$fileModTime = $object->getMTime();
-				$dirSize += $fileSize;
+		$cacheWebsites = Websites_Webpage::select()->where(new Db_Expression(
+			"cache is not null"
+		))->orderBy("updatedTime", true)->fetchDbRows();
+		foreach ($cacheWebsites as $row) {
+			$filePath = $dir.DS.$row->cache;
+			if (!is_file($filePath) || is_dir($filePath)) {
+				// if path not empty and is not a file - it invalid row
+				$row->remove();
+				continue;
+			}
 
-				$files[$fileModTime] = array(
-					"path" => $filePath,
-					"name" => $fileName,
-					"size" => $fileSize
-				);
-			} catch (Exception $e) {}
+			$results = json_decode($row->results);
+			$fileSize = Q::ifset($results, "size", filesize($filePath));
+			$files[] = array(
+				"subPath" => $row->cache,
+				"path" => $filePath,
+				"size" => $fileSize
+			);
+			$dirSize += (int)$fileSize;
 		}
 
 		if ($dirSize <= $dirMaxSize) {
 			return;
 		}
 
-		// sort
-		ksort($files);
-
 		// remove oldest files till $dirMaxSize
-		foreach ($files as $fileModTime => $file) {
+		foreach ($files as $file) {
 			if (!unlink($file["path"])) {
 				continue;
 			}
 
 			// remove from websites_webpage table
 			$websitesWebpage = new Websites_Webpage();
-			$websitesWebpage->cache = str_replace($dir, "", $file["path"]);
+			$websitesWebpage->cache = $file["subPath"];
 			if ($websitesWebpage->retrieve()) {
 				$websitesWebpage->remove();
 			}
 
-			$dirSize -= $file["size"];
-			unset($files[$fileModTime]);
+			// recalculate dir size after file removed
+			$dirSize -= (int)$file["size"];
+
+			// if total dir size still more than dirMaxSize
+			// continue remove files
 			if ($dirSize <= $dirMaxSize) {
 				break;
 			}
