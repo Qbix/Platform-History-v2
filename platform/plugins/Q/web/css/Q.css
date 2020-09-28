@@ -852,3 +852,39 @@ html.Q_layout_widebar {
 html.Q_layout_sidebar {
 	height: 100%;
 }
+/* <Q tabs> */
+.Q_tabbing_tabs {
+	white-space: nowrap;
+	text-align: center;
+}
+.Q_tabbing_tabs .Q_tabbing_tab {
+	display: inline-block;
+	white-space: nowrap;
+	padding: 3px;
+	font-size: 14px;
+	cursor: pointer;
+	margin: 0 5px 0 0;
+}
+.Q_tabbing_tabs .Q_tabbing_tab:last-of-type {
+	margin-right: 0;
+}
+.Q_tabbing_tabs .Q_tabbing_tab.Q_current {
+	border: 1px solid #777;
+	border-bottom: solid 1px transparent;
+	background-color: #fff;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+.Q_tabbing_container {
+	margin-top: -1px;
+	border: 1px solid #777;
+	background: white;
+}
+.Q_tabbing_container .Q_tabbing_item {
+	display: none;
+	padding: 10px 5px 5px 5px;
+}
+.Q_tabbing_container > .Q_tabbing_item.Q_current {
+	display: block;
+}
+/* </Q tabs> */
