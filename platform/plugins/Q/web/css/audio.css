@@ -54,7 +54,9 @@ div[data-state=pause] .Q_tool.Q_pie_tool .Q_pie_box {
 	width: 60%;
 	margin-right: 5px;
 }
-
+.Q_dialog_audio {
+	min-width: 330px;
+}
 .Q_dialog_audio .Q_audio_actions {
 	text-align: center;
 	margin: 10px 0;
@@ -103,38 +105,28 @@ div[data-content=record] .Q_audio_allow, .Q_audio_start .Q_audio_encoding {
 	margin: 10px auto;
 	width: 100%;
 }
-.Q_audio_record_content > div {
-	display: none;
+.Q_dialog_audio .Q_tabbing_container .Q_tabbing_item {
+	min-height: 100px;
 }
-.Q_audio_record_content div[data-content=upload] input.Q_audio_file,
-.Q_audio_record_content div[data-content=link] label {
+.Q_dialog_audio .Q_tabbing_container .Q_tabbing_item[data-content=upload] input.Q_audio_file,
+.Q_dialog_audio .Q_tabbing_container .Q_tabbing_item[data-content=link] label {
 	display: block;
 	margin: 30px auto 0;
-	width: 80%;
+	width: 90%;
 	white-space: nowrap;
 }
-.Q_audio_record_content .Q_audio_composer_upload_limit {
+.Q_dialog_audio .Q_tabbing_container .Q_audio_composer_upload_limit {
 	margin: 3px auto 0;
 	display: block;
 	text-align: center;
 	font-size: 14px;
 	color: red;
 }
-.Q_audio_record_content div[data-content=link] label button {
+.Q_dialog_audio .Q_tabbing_container .Q_tabbing_item[data-content=link] label button {
 	display: inline;
 }
-.Q_audio_record_content audio {
+.Q_dialog_audio .Q_tabbing_container audio {
 	width: 100%;
-}
-.Q_audio_record_content > div.Q_selected {
-	display: block;
-	background: transparent;
-	border: none;
-	min-height: 100px;
-}
-.Q_audio_start .Q_audio_record_select {
-	text-align: center;
-	white-space: nowrap;
 }
 .Q_audio_composer_content .Q_audio_composer_upload_limit {
 	margin: 3px auto 0;
@@ -143,34 +135,26 @@ div[data-content=record] .Q_audio_allow, .Q_audio_start .Q_audio_encoding {
 	font-size: 14px;
 	color: red;
 }
-.Q_audio_start .Q_audio_record_select > button {
-	display: inline-block;
+.Q_dialog_audio .Q_audio_start .Q_tabbing_tabs > .Q_tabbing_tab {
 	width: 60px;
-	height: 60px;
 	background-repeat: no-repeat;
 	background-position: top center;
-	margin: 0 2%;
-	border: 1px solid #000;
-	border-radius: 10px;
 	padding-top: 40px;
 }
-.Q_audio_start .Q_audio_record_select > button.Q_selected {
-	background-color: #0f0;
-}
-.Q_audio_start .Q_audio_record_select > button[name=edit] {
+.Q_dialog_audio .Q_audio_start .Q_tabbing_tabs > .Q_tabbing_tab[data-name=edit] {
 	background-image: url('../img/audio/edit/40.png');
 }
-.Q_audio_start[data-composer=true] .Q_audio_record_select > button[name=edit],
-.Q_audio_start[data-composer=true] .Q_audio_record_content > [data-content=edit] {
+.Q_dialog_audio .Q_audio_start[data-composer=true] .Q_tabbing_tabs .Q_tabbing_tab[data-name=edit],
+.Q_dialog_audio .Q_audio_start[data-composer=true] .Q_tabbing_container .Q_tabbing_item[data-content=edit] {
 	display: none;
 }
-.Q_audio_start .Q_audio_record_select > button[name=record] {
+.Q_dialog_audio .Q_audio_start .Q_tabbing_tabs > .Q_tabbing_tab[data-name=record] {
 	background-image: url('../img/audio/microphone/40.png');
 }
-.Q_audio_start .Q_audio_record_select > button[name=upload] {
+.Q_dialog_audio .Q_audio_start .Q_tabbing_tabs > .Q_tabbing_tab[data-name=upload] {
 	background-image: url('../img/audio/upload/40.png');
 }
-.Q_audio_start .Q_audio_record_select > button[name=link] {
+.Q_dialog_audio .Q_audio_start .Q_tabbing_tabs > .Q_tabbing_tab[data-name=link] {
 	background-image: url('../img/audio/link/40.png');
 }
 
