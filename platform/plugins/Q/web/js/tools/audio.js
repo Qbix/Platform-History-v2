@@ -107,6 +107,9 @@ Q.Tool.define("Q/audio", function (options) {
 			},
 			setCurrentPosition: function (position) {
 				state.audio.seekTo(Math.trunc(position));
+			},
+			getDuration: function () {
+				return tool.audio.getDuration();
 			}
 		},
 		"general": {
@@ -115,14 +118,14 @@ Q.Tool.define("Q/audio", function (options) {
 				tool.implementNativeAudio();
 
 				tool.audioElement.addEventListener("canplay", function(){
+					if (showPlayer) {
+						tool.renderPlayer();
+					}
+
 					if (state.autoplay) {
 						tool.play();
 					}
 				});
-
-				if (showPlayer) {
-					tool.renderPlayer();
-				}
 			},
 			renderPlayer: function () {
 				tool.audioElement.setAttribute('controls', true);
@@ -152,6 +155,9 @@ Q.Tool.define("Q/audio", function (options) {
 			},
 			setCurrentPosition: function (position) {
 				tool.audioElement.currentTime = position/1000;
+			},
+			getDuration: function () {
+				return tool.audioElement.duration * 1000;
 			}
 		}
 	};
@@ -914,6 +920,15 @@ Q.Tool.define("Q/audio", function (options) {
 		this.adapters[adapterName].pause();
 	},
 	/**
+	 * Get audio duration
+	 * @method getDuration
+	 * @return {float} Audio track duration in milliseconds
+	 */
+	getDuration: function(){
+		var adapterName = this.adapterNameFromUrl();
+		return this.adapters[adapterName].getDuration();
+	},
+	/**
 	 * @method userGesture
 	 * User gesture handler for audio actions if promise != undefined (mobile devices)
 	 * @param {string} action Player action (play, pause, ...)
@@ -1085,6 +1100,70 @@ Q.Tool.define("Q/audio", function (options) {
 		});
 	},
 	/**
+	 * Draw custom audio player
+	 * @method customPlayer
+	 */
+	customPlayer: function () {
+		Q.Template.render("Q/audio/general", {
+			duration: tool.formatRecordTime(tool.getDuration(), "short")
+		}, function (err, html) {
+			var $this = $(html);
+			$(tool.element).append($this);
+
+			var $track = $(".Q_audio_general_track", $this);
+			var $play = $(".Q_audio_general_play", $this);
+			var $sound = $(".Q_audio_general_sound", $this);
+			var $trackCurrent = $(".Q_audio_general_trackCurrent", $this);
+
+			var _calcTrackWidth = function () {
+				var siblingsWidth = 0;
+				$track.siblings().each(function() {
+					siblingsWidth += $(this).outerWidth(true);
+				});
+
+				$track.width($this.innerWidth() - siblingsWidth);
+			}();
+
+			$play.on(Q.Pointer.fastclick, function () {
+				var state = $play.attr("data-state");
+
+				if (state === "pause") {
+					$play.attr("data-state", "play");
+					//tool.play();
+				} else {
+					$play.attr("data-state", "pause");
+					//tool.pause();
+				}
+			});
+
+			$sound.on(Q.Pointer.fastclick, function () {
+				var state = $sound.attr("data-state");
+
+				if (state === "on") {
+					$sound.attr("data-state", "off");
+				} else {
+					$sound.attr("data-state", "on");
+				}
+			});
+
+			var isDragging = false;
+			$trackCurrent.on(Q.Pointer.fastclick, function (e) {
+				e.stopPropagation();
+			});
+
+			$track.mousedown(function() {
+				isDragging = true;
+			}).mousemove(function(e) {
+				if (isDragging) {
+					$trackCurrent.css("left", e.offsetX);
+					console.log(e.offsetX);
+				}
+			}).mouseup(function() {
+				isDragging = false;
+			});
+		});
+	},
+	/**
 	 * Detect adapter from url
 	 * @method adapterNameFromUrl
 	 */
@@ -1107,16 +1186,28 @@ Q.Tool.define("Q/audio", function (options) {
 	 * Format record time elapsed
 	 * @method formatRecordTime
 	 * @param {int} time Time elapsed in miliseconds
+	 * @param {string} [foramt="classic"] "classic": "01h:21m:32s", "short": "01:21:32"
 	 * @return {string} formatted string
 	 */
-	formatRecordTime: function(time) {
+	formatRecordTime: function(time, format) {
 		time = time/1000;
+		format = format || "classic";
 		var sec_num = parseInt(time, 10);
 		var hours   = Math.floor(sec_num / 3600);
 		var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
 		var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
-		return (hours ? hours + 'h ' : '') + (minutes ? minutes + 'm ' : '') + seconds+'s';
+		var res;
+
+		switch (format) {
+			case "short":
+				res = (hours ? hours + ':' : '') + (minutes ? minutes + ':' : '') + seconds;
+				break;
+			default:
+				res = (hours ? hours + 'h ' : '') + (minutes ? minutes + 'm ' : '') + seconds+'s';
+		}
+
+		return res;
 	},
 	/**
 	 * Convert bytes integer to human readable string
@@ -1189,8 +1280,16 @@ Q.Template.set('Q/audio/composer',
 );
 
 Q.Template.set('Q/audio/general',
-	'<audio src="{{url}}" preload="auto" controls {{autoplay}}/>'
-	//'<div class="Q_audio_container"></div>'
+	'<div class="Q_audio_general">' +
+	'	<div class="Q_audio_general_play" data-state="play"></div>' +
+	'	<div class="Q_audio_general_time"><span class="Q_audio_general_timeCurrent">0</span>/<span class="Q_audio_general_timeTotal">{{duration}}</span></div>' +
+	'	<div class="Q_audio_general_track">' +
+	'		<span class="Q_audio_general_trackTotal"></span>' +
+	'		<span class="Q_audio_general_trackPlay"></span>' +
+	'		<span class="Q_audio_general_trackCurrent"></span>' +
+	'	</div>' +
+	'	<div class="Q_audio_general_sound" data-state="on"></div>' +
+	'</div>'
 );
 
 Q.Template.set('Q/audio/soundcloud',

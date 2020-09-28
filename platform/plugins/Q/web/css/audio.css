@@ -1,3 +1,5 @@
+@import "icons.css";
+
 .Q_audio_start {
 	padding: 10px;
 	position: relative;
@@ -167,6 +169,74 @@ div[data-content=record] .Q_audio_allow, .Q_audio_start .Q_audio_encoding {
 	display: inline-block;
 	margin: 0 2%;
 }
+
+/**** <Q_audio_custom_player> *****/
+.Q_audio_general {
+	width: 100%;
+	white-space: nowrap;
+	padding: 10px 5px;
+	margin: 10px auto;
+	background: #777;
+}
+.Q_audio_general > * {
+	display: inline-block;
+	height: 20px;
+	line-height: 20px;
+	vertical-align: middle;
+	color: #fff;
+}
+.Q_audio_general .Q_audio_general_play,
+.Q_audio_general .Q_audio_general_sound {
+	width: 22px;
+	font-size: 20px;
+	font-family: "qplatform-q";
+}
+.Q_audio_general .Q_audio_general_play[data-state=play]:before {
+	content: "\ea1c";
+}
+.Q_audio_general .Q_audio_general_play[data-state=pause]:before {
+	content: "\ea1d";
+}
+.Q_audio_general .Q_audio_general_time {
+	white-space: nowrap;
+	font-size: 14px;
+}
+.Q_audio_general .Q_audio_general_sound[data-state=on]:before {
+	content: "\ea26";
+}
+.Q_audio_general .Q_audio_general_sound[data-state=off]:before {
+	content: "\ea2a";
+}
+.Q_audio_general .Q_audio_general_track {
+	position: relative;
+}
+.Q_audio_general .Q_audio_general_trackTotal,
+.Q_audio_general .Q_audio_general_trackPlay {
+	height: 5px;
+	border-radius: 2px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.Q_audio_general .Q_audio_general_trackTotal {
+	position: relative;
+	display: block;
+	background-color: silver;
+}
+.Q_audio_general .Q_audio_general_trackPlay {
+	position: absolute;
+	background-color: #c4fffa;
+}
+.Q_audio_general .Q_audio_general_trackCurrent {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	left: 0;
+	top: 50%;
+	border-radius: 50%;
+	transform: translateY(-50%);
+	background-color: #fff;
+}
+/**** </Q_audio_custom_player> *****/
 
 /* preload images */
 body::after{
