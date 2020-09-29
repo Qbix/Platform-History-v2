@@ -6,7 +6,7 @@ function Websites_before_Streams_Stream_saveExecute($params)
 	$inserted = $params["inserted"];
 	$query = $params["query"];
 
-	if (!$inserted) {
+	if (!$inserted || empty($row->attributes)) {
 		return;
 	}
 
