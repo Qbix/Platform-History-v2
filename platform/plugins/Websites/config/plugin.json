@@ -17,7 +17,8 @@
 			"Streams/Stream/save/Websites/seo": ["Websites/before/Streams_Stream_save_Websites_seo"]
 		},
 		"handlersAfterEvent": {
-			"Streams/fetch/Websites/webpage": ["Websites/after/Streams_fetch_Websites_webpage"]
+			"Streams/fetch/Websites/webpage": ["Websites/after/Streams_fetch_Websites_webpage"],
+			"Streams/fetch/Streams/video": ["Websites/after/Streams_fetch_Websites_webpage"]
 		},
 		"web": {
 			"requireValidNonce": ["Websites"]
