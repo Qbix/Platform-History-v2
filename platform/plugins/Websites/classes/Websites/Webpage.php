@@ -277,6 +277,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 					$result['title'] = Q::ifset($googleapisSnippet, 'title', Q::ifset($result, 'title', null));
 					$result['description'] = Q::ifset($googleapisSnippet, 'description', Q::ifset($result, 'description', null));
 					$result['iconBig'] = Q::ifset($googleapisSnippet, 'thumbnails', 'high', 'url', Q::ifset($googleapisSnippet, 'thumbnails', 'medium', 'url', Q::ifset($googleapisSnippet, 'thumbnails', 'default', 'url', Q::ifset($result, 'iconBig', null))));
+					$result['iconSmall'] = "{{Websites}}/img/icons/Websites/youtube/32.png";
 
 					$googleapisTags = Q::ifset($googleapisSnippet, 'tags', null);
 					if (is_array($googleapisTags) && count($googleapisTags)) {

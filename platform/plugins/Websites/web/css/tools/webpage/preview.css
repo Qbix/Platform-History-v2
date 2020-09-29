@@ -103,7 +103,8 @@
 }
 .Websites_webpage_preview_tool .Streams_aspect_interests img {
 	width: auto;
-	height: 16px;
+	height: 32px;
+	margin-right: 2%;
 }
 .Websites_webpage_preview_tool ._Streams_aspect_interests::before {
 	font-family: 'qplatform-communities' !important;
@@ -122,6 +123,6 @@
 	vertical-align: middle;
 }
 .Websites_webpage_preview_tool .Streams_preview_icon {
-	margin: 0 10px 0 0;
+	margin: 0 2% 0 0;
 	vertical-align: top;
 }
