@@ -1546,6 +1546,9 @@ class Q
 	static function json_decode()
 	{
 		$args = func_get_args();
+		if (empty($args[0])) {
+			return $args[0];
+		}
 		$result = call_user_func_array('json_decode', $args);
 		if (is_callable('json_last_error')) {
 			if ($code = json_last_error()) {
