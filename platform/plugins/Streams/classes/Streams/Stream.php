@@ -1079,11 +1079,6 @@ class Streams_Stream extends Base_Streams_Stream
 			return true;
 		}
 
-		// check if logged in user manage publisher of stream
-		if (Streams::canManage($this->publisherId)) {
-			return true;
-		}
-
 		if (!empty($this->closedTime) && !$this->testWriteLevel('close')) {
 			return false;
 		}
@@ -1123,11 +1118,6 @@ class Streams_Stream extends Base_Streams_Stream
 			return true;
 		}
 
-		// check if logged in user manage publisher of stream
-		if (Streams::canManage($this->publisherId)) {
-			return true;
-		}
-
 		if (!empty($this->closedTime) && $level !== 'close') {
 			return false;
 		}
@@ -1161,11 +1151,6 @@ class Streams_Stream extends Base_Streams_Stream
 	function testAdminLevel($level)
 	{
 		if ($this->publishedByFetcher) {
-			return true;
-		}
-
-		// check if logged in user manage publisher of stream
-		if (Streams::canManage($this->publisherId)) {
 			return true;
 		}
 
@@ -1295,11 +1280,6 @@ class Streams_Stream extends Base_Streams_Stream
 		$readLevel_source = $this->get('readLevel_source', $public_source);
 		$writeLevel_source = $this->get('writeLevel_source', $public_source);
 		$adminLevel_source = $this->get('adminLevel_source', $public_source);
-
-		// check if logged in user manage publisher of stream
-		if (Streams::canManage($this->publisherId)) {
-			$readLevel = $writeLevel = $adminLevel = 40;
-		}
 
 		// Inheritance only goes one "generation" here.
 		// To implement several "generations" of inheritance, you can do things like:
