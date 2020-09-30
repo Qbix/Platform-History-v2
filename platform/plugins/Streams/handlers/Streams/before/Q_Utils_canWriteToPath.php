@@ -29,8 +29,10 @@ function Streams_before_Q_Utils_canWriteToPath($params, &$result)
 			if ($userId and substr($sp, 0, strlen($prefix2)) === $prefix2) {
 				$result = true; // user can write any invitations here
 				return;
-			}	
+			}
 
+			$parts = explode('/', substr($sp, $len));	
+			$c = count($parts);
 			if ($c >= 3) {
 				$result = false;
 				for ($j=0; $j<$c-3; ++$j) {
@@ -43,9 +45,7 @@ function Streams_before_Q_Utils_canWriteToPath($params, &$result)
 						}
 					}
                     $streamName = implode('/', array_slice($parts, $j+1, $l-$j-1));
-					if ($streamName && $stream = Streams::fetchOne(
-						$userId, $publisherId, $streamName
-					)) {
+					if ($streamName && $stream = Streams::fetchOne($userId, $publisherId, $streamName)) {
 						$result = $stream->testWriteLevel('edit');
 						Streams::$cache['canWriteToStream'] = $stream;
 						break;
