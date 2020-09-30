@@ -25,7 +25,7 @@ function Streams_before_Q_Utils_canWriteToPath($params, &$result)
 
 		if (substr($sp, 0, $len) === $prefix) {
 			$splitId = Q_Utils::splitId($userId, 3, '/');
-			$prefix2 = $prefix.$splitId;
+			$prefix2 = $prefix."invitations/$splitId";
 			if ($userId and substr($sp, 0, strlen($prefix2)) === $prefix2) {
 				$result = true; // user can write any invitations here
 				return;
