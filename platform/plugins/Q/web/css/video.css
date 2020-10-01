@@ -79,3 +79,10 @@
 .Q_dialog_video .Q_tabbing_container .Q_video_composer_clip {
     margin-top: 10px;
 }
+.Q_dialog_video button,
+.Q_dialog_video input {
+    height: 40px;
+}
+.Q_dialog_video .Q_video_composer_submit button[name=reset] {
+    display: none;
+}

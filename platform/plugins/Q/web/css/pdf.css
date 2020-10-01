@@ -101,3 +101,10 @@
     width: 100%;
     background: #fff;
 }
+.Q_dialog_pdf button,
+.Q_dialog_pdf input {
+    height: 40px;
+}
+.Q_dialog_pdf .Q_pdf_composer_submit button[name=reset] {
+    display: none;
+}

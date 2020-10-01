@@ -169,7 +169,13 @@ div[data-content=record] .Q_audio_allow, .Q_audio_start .Q_audio_encoding {
 	display: inline-block;
 	margin: 0 2%;
 }
-
+.Q_dialog_audio button,
+.Q_dialog_audio input {
+	height: 40px;
+}
+.Q_dialog_audio .Q_audio_record_submit button[name=reset] {
+	display: none;
+}
 /**** <Q_audio_custom_player> *****/
 .Q_audio_general {
 	width: 100%;
