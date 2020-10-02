@@ -76,10 +76,6 @@ Q.Tool.define("Q/clip", function (options) {
 	 * @param {string} which Can be 'start' or 'end'
 	 */
 	setPosition: function (position, positionDisplay, which) {
-		if (!/^\d+$/.test(position)) {
-			position = null;
-		}
-
 		$("button[name=" + which + "] .Q_clip_position", this.element).text(position);
 		$("button[name=" + which + "] .Q_clip_position_display", this.element).text(positionDisplay);
 	},
@@ -91,11 +87,6 @@ Q.Tool.define("Q/clip", function (options) {
 	 */
 	getPosition: function (which) {
 		var position = $("button[name=" + which + "].Q_clip_fixed .Q_clip_position", this.element).text();
-
-		if (!/^\d+$/.test(position)) {
-			position = null;
-		}
-
 		return position;
 	}
 });

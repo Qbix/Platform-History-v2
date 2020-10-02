@@ -17,6 +17,9 @@
     margin-right: 5px;
 }
 
+.Q_dialog_video {
+    min-width: 330px;
+}
 .Q_dialog_video .Q_video_player {
     display: none;
     margin-bottom: 10px;
@@ -25,61 +28,43 @@
     display: block;
 }
 
-.Q_video_composer_content > div {
-    display: none;
-}
-.Q_video_composer_content div[data-content=upload] input.Q_video_file,
-.Q_video_composer_content div[data-content=link] label {
-    display: block;
-    margin: 30px auto 0;
-    width: 80%;
-    white-space: nowrap;
-}
-.Q_video_composer_content div[data-content=link] label button {
-    display: inline;
-}
-.Q_video_composer_content > div.Q_selected {
-    background: transparent;
-    border: none;
-    display: block;
+.Q_dialog_video .Q_tabbing_container .Q_tabbing_item {
     min-height: 100px;
 }
-.Q_video_composer_content .Q_video_composer_upload_limit {
+.Q_dialog_video .Q_tabbing_container .Q_tabbing_item[data-content=upload] input.Q_video_file,
+.Q_dialog_video .Q_tabbing_container .Q_tabbing_item[data-content=link] label {
+    display: block;
+    margin: 30px auto 0;
+    width: 90%;
+    white-space: nowrap;
+}
+.Q_dialog_video .Q_tabbing_container .Q_tabbing_item[data-content=link] label button {
+    display: inline;
+}
+.Q_dialog_video .Q_tabbing_container .Q_video_composer_upload_limit {
     margin: 3px auto 0;
     display: block;
     text-align: center;
     font-size: 14px;
     color: red;
 }
-.Q_video_composer .Q_video_composer_select {
-    text-align: center;
-    white-space: nowrap;
-}
-.Q_video_composer .Q_video_composer_select > button {
-    display: inline-block;
+.Q_dialog_video .Q_video_composer .Q_tabbing_tabs > .Q_tabbing_tab {
     width: 60px;
-    height: 60px;
     background-repeat: no-repeat;
     background-position: top center;
-    margin: 0 2%;
-    border: 1px solid #000;
-    border-radius: 10px;
     padding-top: 40px;
 }
-.Q_video_composer .Q_video_composer_select > button.Q_selected {
-    background-color: #0f0;
-}
-.Q_video_composer .Q_video_composer_select > button[name=edit] {
+.Q_dialog_video .Q_video_composer .Q_tabbing_tabs > .Q_tabbing_tab[data-name=edit] {
     background-image: url('../img/audio/edit/40.png');
 }
-.Q_video_composer[data-composer=true] .Q_video_composer_select > button[name=edit],
-.Q_video_composer[data-composer=true] .Q_video_composer_content > [data-content=edit] {
+.Q_dialog_video .Q_video_composer[data-composer=true] .Q_tabbing_tabs > .Q_tabbing_tab[data-name=edit],
+.Q_dialog_video .Q_video_composer[data-composer=true] .Q_tabbing_container > .Q_tabbing_item[data-content=edit] {
     display: none;
 }
-.Q_video_composer .Q_video_composer_select > button[name=upload] {
+.Q_dialog_video .Q_video_composer .Q_tabbing_tabs > .Q_tabbing_tab[data-name=upload] {
     background-image: url('../img/audio/upload/40.png');
 }
-.Q_video_composer .Q_video_composer_select > button[name=link] {
+.Q_dialog_video .Q_video_composer .Q_tabbing_tabs > .Q_tabbing_tab[data-name=link] {
     background-image: url('../img/audio/link/40.png');
 }
 .Q_video_composer .Q_video_composer_submit {
@@ -91,6 +76,13 @@
     display: inline-block;
     margin: 0 2%;
 }
-.Q_video_composer_content .Q_video_composer_clip {
+.Q_dialog_video .Q_tabbing_container .Q_video_composer_clip {
     margin-top: 10px;
+}
+.Q_dialog_video button,
+.Q_dialog_video input {
+    height: 40px;
+}
+.Q_dialog_video .Q_video_composer_submit button[name=reset] {
+    display: none;
 }

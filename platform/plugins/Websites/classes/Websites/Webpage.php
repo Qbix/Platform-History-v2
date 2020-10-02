@@ -32,8 +32,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 			function _return ($url, $result, $webpageCahe) {
 				if ($webpageCahe) {
 					$webpageCahe->url = $url;
-					$webpageCahe->title = mb_substr($result['title'], 0, $webpageCahe->maxSize_title(), "UTF-8");
-					$webpageCahe->description = mb_substr($result['description'], 0, $webpageCahe->maxSize_description(), "UTF-8");
+
 					// dummy interest block for cache
 					$result['interest'] = array(
 						'title' => $url,
@@ -424,10 +423,11 @@ class Websites_Webpage extends Base_Websites_Webpage
      * @static
      * @param {string} $url
      * @param {integer} [$dataLimit=65536] Limit data length (bites) to download. Default 64Kb.
+	 * @param {boolean} [$closeFile=true] Whether to remove temp file after method executed
      * @throws Q_Exception
      * @return array
      */
-    static function getRemoteFileInfo ($url, $dataLimit = 65536) {
+    static function getRemoteFileInfo ($url, $dataLimit = 65536, $closeFile = true) {
         if (!$urlp = fopen($url, "r")) {
             throw new Q_Exception('Error opening URL for reading');
         }
@@ -486,7 +486,12 @@ class Websites_Webpage extends Base_Websites_Webpage
             }
         }
 
-        @fclose($file);
+        if ($closeFile) {
+			@fclose($file);
+		} else {
+			$metaData['fileHandler'] = $file;
+		}
+
         return $metaData;
     }
     /**

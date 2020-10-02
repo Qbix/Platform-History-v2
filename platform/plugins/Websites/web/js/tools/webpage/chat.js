@@ -113,7 +113,7 @@
 			var $form = $input.closest("form");
 			var websitesPreview = this.state.websitesPreview;
 			var processedURLs = this.state.processedURLs;
-			var urls = inputVal.matchTypes('url', {requireScheme: false});
+			var urls = inputVal.replace(/[!^*()]/g,' ').matchTypes('url', {requireScheme: false});
 			var eventType = Q.getObject("type", event);
 
 			Q.each(urls, function (i, url) {

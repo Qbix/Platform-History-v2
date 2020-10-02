@@ -17,8 +17,7 @@
  * @param {array} [$fields=array()] The fields values to initialize table row as 
  * an associative array of $column => $value pairs
  * @param {string} [$fields.url] defaults to ""
- * @param {string} [$fields.title] defaults to ""
- * @param {string} [$fields.description] defaults to null
+ * @param {string} [$fields.cache] defaults to null
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  * @param {string} [$fields.results] defaults to null
@@ -32,13 +31,7 @@ abstract class Base_Websites_Webpage extends Db_Row
 	 * 
 	 */
 	/**
-	 * @property $title
-	 * @type string
-	 * @default ""
-	 * 
-	 */
-	/**
-	 * @property $description
+	 * @property $cache
 	 * @type string
 	 * @default null
 	 * 
@@ -293,7 +286,7 @@ abstract class Base_Websites_Webpage extends Db_Row
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".url");
-		if (strlen($value) > 500)
+		if (strlen($value) > 191)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".url");
 		return array('url', $value);			
 	}
@@ -305,7 +298,7 @@ abstract class Base_Websites_Webpage extends Db_Row
 	function maxSize_url()
 	{
 
-		return 500;			
+		return 191;			
 	}
 
 	/**
@@ -319,7 +312,7 @@ return array (
   0 => 
   array (
     0 => 'varchar',
-    1 => '500',
+    1 => '191',
     2 => '',
     3 => false,
   ),
@@ -332,95 +325,41 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_title
+	 * @method beforeSet_cache
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_title($value)
+	function beforeSet_cache($value)
 	{
 		if (!isset($value)) {
-			$value='';
+			return array('cache', $value);
 		}
 		if ($value instanceof Db_Expression) {
-			return array('title', $value);
+			return array('cache', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".title");
-		if (strlen($value) > 100)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".title");
-		return array('title', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the title field
-	 * @return {integer}
-	 */
-	function maxSize_title()
-	{
-
-		return 100;			
-	}
-
-	/**
-	 * Returns schema information for title column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_title()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '100',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_description
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_description($value)
-	{
-		if (!isset($value)) {
-			return array('description', $value);
-		}
-		if ($value instanceof Db_Expression) {
-			return array('description', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".description");
+			throw new Exception('Must pass a string to '.$this->getTable().".cache");
 		if (strlen($value) > 255)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".description");
-		return array('description', $value);			
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".cache");
+		return array('cache', $value);			
 	}
 
 	/**
-	 * Returns the maximum string length that can be assigned to the description field
+	 * Returns the maximum string length that can be assigned to the cache field
 	 * @return {integer}
 	 */
-	function maxSize_description()
+	function maxSize_cache()
 	{
 
 		return 255;			
 	}
 
 	/**
-	 * Returns schema information for description column
+	 * Returns schema information for cache column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_description()
+	static function column_cache()
 	{
 
 return array (
@@ -432,7 +371,7 @@ return array (
     3 => false,
   ),
   1 => true,
-  2 => '',
+  2 => 'MUL',
   3 => NULL,
 );			
 	}
@@ -618,7 +557,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('url', 'title', 'description', 'insertedTime', 'updatedTime', 'results');
+		$field_names = array('url', 'cache', 'insertedTime', 'updatedTime', 'results');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
