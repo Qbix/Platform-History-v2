@@ -1,7 +1,0 @@
-.Streams_pdf_preview_tool .Streams_preview_container {
-    white-space: nowrap;
-}
-.Streams_pdf_preview_tool .Streams_preview_container .Streams_preview_title,
-.Streams_pdf_preview_tool .Streams_preview_container .Streams_preview_contents {
-    width: calc(100% - 40px);
-}

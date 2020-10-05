@@ -134,7 +134,7 @@
 
 			// add styles
 			Q.addStylesheet('{{Q}}/css/audio.css');
-			Q.addStylesheet('{{Streams}}/css/tools/audio_preview.css');
+			Q.addStylesheet('{{Streams}}/css/tools/previews.css');
 		},
 
 		{

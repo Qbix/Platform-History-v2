@@ -4862,7 +4862,7 @@ Tp.setUpElement = function (element, toolName, toolOptions, id) {
 /**
  * Returns HTML for an element that it can be used to activate a tool.
  * The prefix and id of the element are derived from the tool on which this method is called.
- * For example: $('container').append(Q.Tool.make('Streams/chat')).activate(options);
+ * For example: $('container').append(Q.Tool.setUpElementHTML('Streams/chat')).activate(options);
  * @method setUpElementHTML
  * @param {String|Element} element
  *  The tag of the element, such as "div", or a reference to an existing Element

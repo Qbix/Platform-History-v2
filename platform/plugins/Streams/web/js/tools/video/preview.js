@@ -132,7 +132,7 @@
 
 		// add styles
 		Q.addStylesheet('{{Q}}/css/video.css');
-		Q.addStylesheet('{{Streams}}/css/tools/video_preview.css');
+		Q.addStylesheet('{{Streams}}/css/tools/previews.css');
 	},
 
 	{

@@ -1,5 +1,4 @@
 (function ($, window, undefined) {
-	Streams = Q.Streams;
 	/**
 	 * Q/resize tool.
 	 * Tool makes possible to resize any element on the page
