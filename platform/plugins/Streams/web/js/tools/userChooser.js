@@ -69,8 +69,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 			}
 			focusedResults = false;
 		}, 10);
-	}).on('focus change', doQuery);
-	element.on('keyup keydown', doQuery);
+	}).on('focus change keyup keydown', doQuery)
 	
 	var lastQuery = null;
 
