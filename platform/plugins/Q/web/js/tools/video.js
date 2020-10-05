@@ -126,7 +126,7 @@ Q.Tool.define("Q/video", function (options) {
 	publisherId: null,
 	streamName: null,
 	throttle: 10,
-	fileUploadUHandler: Q.action("Q/file"),
+	fileUploadHandler: Q.action("Q/file"),
 	preprocess: null,
 	duration: 0,
 	currentPosition: 0,
@@ -309,7 +309,7 @@ Q.Tool.define("Q/video", function (options) {
 						}
 
 						if (window.FileReader) {
-							Q.request(state.fileUploadUHandler, 'data', function (err, res) {
+							Q.request(state.fileUploadHandler, 'data', function (err, res) {
 								//console.log(this);
 								var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(res && res.errors);
 								if (msg) {
@@ -333,7 +333,7 @@ Q.Tool.define("Q/video", function (options) {
                             delete params.data;
                             state.input.wrap('<form />', {
                                 method: "put",
-                                action: Q.url(state.fileUploadUHandler, params)
+                                action: Q.url(state.fileUploadHandler, params)
                             }).parent().submit();
                             state.input.unwrap();
                             */
