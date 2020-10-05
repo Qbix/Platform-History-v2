@@ -22,8 +22,7 @@ var Row = Q.require('Db/Row');
  * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
  * @param {String} [fields.url] defaults to ""
- * @param {String} [fields.title] defaults to ""
- * @param {String} [fields.description] defaults to null
+ * @param {String} [fields.cache] defaults to null
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  * @param {String|Db.Expression} [fields.updatedTime] defaults to null
  * @param {String} [fields.results] defaults to null
@@ -41,13 +40,7 @@ Q.mixin(Base, Row);
  * 
  */
 /**
- * @property title
- * @type String
- * @default ""
- * 
- */
-/**
- * @property description
+ * @property cache
  * @type String
  * @default null
  * 
@@ -279,8 +272,7 @@ Base.prototype.fieldNames = function () {
 Base.fieldNames = function () {
 	return [
 		"url",
-		"title",
-		"description",
+		"cache",
 		"insertedTime",
 		"updatedTime",
 		"results"
@@ -302,7 +294,7 @@ Base.prototype.beforeSet_url = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".url");
-		if (typeof value === "string" && value.length > 500)
+		if (typeof value === "string" && value.length > 191)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".url");
 		return value;
 };
@@ -313,7 +305,7 @@ Base.prototype.beforeSet_url = function (value) {
 	 */
 Base.prototype.maxSize_url = function () {
 
-		return 500;
+		return 191;
 };
 
 	/**
@@ -322,81 +314,43 @@ Base.prototype.maxSize_url = function () {
 	 */
 Base.column_url = function () {
 
-return [["varchar","500","",false],false,"PRI",null];
+return [["varchar","191","",false],false,"PRI",null];
 };
 
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
- * @method beforeSet_title
+ * @method beforeSet_cache
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_title = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".title");
-		if (typeof value === "string" && value.length > 100)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".title");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the title field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_title = function () {
-
-		return 100;
-};
-
-	/**
-	 * Returns schema information for title column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_title = function () {
-
-return [["varchar","100","",false],false,"",null];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_description
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_description = function (value) {
+Base.prototype.beforeSet_cache = function (value) {
 		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".description");
+			throw new Error('Must pass a String to '+this.table()+".cache");
 		if (typeof value === "string" && value.length > 255)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".description");
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".cache");
 		return value;
 };
 
 	/**
-	 * Returns the maximum string length that can be assigned to the description field
+	 * Returns the maximum string length that can be assigned to the cache field
 	 * @return {integer}
 	 */
-Base.prototype.maxSize_description = function () {
+Base.prototype.maxSize_cache = function () {
 
 		return 255;
 };
 
 	/**
-	 * Returns schema information for description column
+	 * Returns schema information for cache column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_description = function () {
+Base.column_cache = function () {
 
-return [["varchar","255","",false],true,"",null];
+return [["varchar","255","",false],true,"MUL",null];
 };
 
 /**

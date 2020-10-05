@@ -25,7 +25,9 @@
             "WriteToStartConversation": "Write your thoughts to start off the conversation",
             "StartConversation": "Start Conversation",
             "GotoConversation": "Go to Conversation"
-        }
+        },
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF"
     },
     "types": {
         "Websites\/article": {

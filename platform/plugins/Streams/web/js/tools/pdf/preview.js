@@ -78,13 +78,10 @@
 						var result = response.slots.result;
 
 						state.title = result.title;
-						state.description = result.description;
-						state.keywords = result.keywords || '';
 						state.interest = {
 							title: ' ' + result.host,
 							icon: result.iconSmall,
 						};
-						state.src = result.iconBig;
 
 						tool.refresh();
 					}, {

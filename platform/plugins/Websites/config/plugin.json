@@ -13,6 +13,7 @@
 			"Q/Uri/fromUrl": ["Websites/before/Q_Uri_fromUrl"],
 			"Q/responseExtras": ["Websites/before/Q_responseExtras"],
 			"Q/sessionExtras": ["Websites/before/Q_sessionExtras"],
+			"Db/Row/Streams_Stream/saveExecute": ["Websites/before/Streams_Stream_saveExecute"],
 			"Streams/Stream/save/Websites/article": ["Websites/before/Streams_Stream_save_Websites_article"],
 			"Streams/Stream/save/Websites/seo": ["Websites/before/Streams_Stream_save_Websites_seo"]
 		},
@@ -36,6 +37,12 @@
 				}
 			},
 			"Websites/webpage/chat": {
+				"86400": {
+					"": 10,
+					"Users/admins": 1000
+				}
+			},
+			"Websites/cache": {
 				"86400": {
 					"": 10,
 					"Users/admins": 1000
@@ -173,6 +180,8 @@
 		"videoHosts": ["youtube.com", "youtu.be", "vimeo.com"],
 		"videoExtensions": ["MPG", "MP2", "MPEG", "MP4", "AVI", "WMV", "MOV", "FLV", "SWF"],
 		"audioHosts": ["soundcloud.com"],
-		"audioExtensions": ["MP3", "WAV", "AIFF", "soundcloud:sound"]
+		"audioExtensions": ["MP3", "WAV", "AIFF", "soundcloud:sound"],
+		"cacheFileLimit": 5242880, /* 5 Mb */
+		"cacheDirectoryLimit":  52428800 /* 50 Mb */
 	}
 }

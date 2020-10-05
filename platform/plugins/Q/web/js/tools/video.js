@@ -206,7 +206,7 @@ Q.Tool.define("Q/video", function (options) {
 			};
 
 			var action = state.mainDialog.attr('data-action');
-			var $currentContent = $(".Q_video_composer_content [data-content=" + action + "]", state.mainDialog);
+			var $currentContent = $(".Q_tabbing_container [data-content=" + action + "]", state.mainDialog);
 			if (!$currentContent.length) {
 				return _error("No action selected");
 			}
@@ -385,8 +385,8 @@ Q.Tool.define("Q/video", function (options) {
 
 				// if stream defined, render player
 				if (tool.stream) {
-					var $videoElement = $(".Q_video_composer_content [data-content=edit] .Q_video_composer_preview", mainDialog);
-					var $clipElement = $(".Q_video_composer_content [data-content=edit] .Q_video_composer_clip", mainDialog);
+					var $videoElement = $(".Q_tabbing_container [data-content=edit] .Q_video_composer_preview", mainDialog);
+					var $clipElement = $(".Q_tabbing_container [data-content=edit] .Q_video_composer_clip", mainDialog);
 
 					$videoElement.tool("Q/video", {
 						action: "implement",
@@ -458,18 +458,17 @@ Q.Tool.define("Q/video", function (options) {
 					Q.handle(_process, mainDialog);
 				});
 
-				// custom tabs implementation
-				$(".Q_video_composer_select button", mainDialog).on(Q.Pointer.click, function (e) {
+				var _selectTab = function () {
 					var $this = $(this);
-					var action = $this.prop('name');
+					var action = $this.attr('data-name');
 
 					if (action === "record") {
 						tool.recorderStateChange("init");
 					}
 
 					mainDialog.attr("data-action", action);
-					$this.addClass('Q_selected').siblings().removeClass('Q_selected');
-					$(".Q_video_composer_content [data-content=" + action + "]", mainDialog).addClass('Q_selected').siblings().removeClass('Q_selected');
+					$this.addClass('Q_current').siblings().removeClass('Q_current');
+					$(".Q_tabbing_container .Q_tabbing_item[data-content=" + action + "]", mainDialog).addClass('Q_current').siblings().removeClass('Q_current');
 
 					// pause all exists players
 					Q.each($(".Q_video_tool", mainDialog), function () {
@@ -479,13 +478,16 @@ Q.Tool.define("Q/video", function (options) {
 							videoTool.pause();
 						}
 					});
-				});
+				};
+
+				// custom tabs implementation
+				$(".Q_tabbing_tabs .Q_tabbing_tab", mainDialog).on(Q.Pointer.fastclick, _selectTab);
 
 				// Reset button
 				$("button[name=reset]", mainDialog).on(Q.Pointer.click, function (e) {
 					state.dataBlob = undefined;
 
-					Q.each($(".Q_video_composer_content [data-content=link], .Q_video_composer_content [data-content=upload]", mainDialog), function (i, content) {
+					Q.each($(".Q_tabbing_container .Q_tabbing_item[data-content=link], .Q_tabbing_container .Q_tabbing_item[data-content=upload]", mainDialog), function (i, content) {
 						var videoTool = Q.Tool.from($(".Q_video_composer_preview", content)[0], "Q/video");
 						var clipTool = Q.Tool.from($(".Q_video_composer_clip", content)[0], "Q/clip");
 
@@ -503,8 +505,8 @@ Q.Tool.define("Q/video", function (options) {
 
 				// set clip start/end for upload
 				$("input[type=file]", mainDialog).on('change', function () {
-					var $videoElement = $(".Q_video_composer_content [data-content=upload] .Q_video_composer_preview", mainDialog);
-					var $clipElement = $(".Q_video_composer_content [data-content=upload] .Q_video_composer_clip", mainDialog);
+					var $videoElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=upload] .Q_video_composer_preview", mainDialog);
+					var $clipElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=upload] .Q_video_composer_clip", mainDialog);
 					var url = URL.createObjectURL(this.files[0]);
 					var toolPreview = Q.Tool.from($videoElement, "Q/video");
 
@@ -559,8 +561,8 @@ Q.Tool.define("Q/video", function (options) {
 
 				// set clip start/end for link
 				$("button[name=setClip]", mainDialog).on(Q.Pointer.fastclick, function () {
-					var $videoElement = $(".Q_video_composer_content [data-content=link] .Q_video_composer_preview", mainDialog);
-					var $clipElement = $(".Q_video_composer_content [data-content=link] .Q_video_composer_clip", mainDialog);
+					var $videoElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=link] .Q_video_composer_preview", mainDialog);
+					var $clipElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=link] .Q_video_composer_clip", mainDialog);
 					var url = $("input[name=url]", mainDialog).val();
 					if (!url.matchTypes('url').length) {
 						return Q.alert(tool.text.invalidURL);
@@ -604,7 +606,7 @@ Q.Tool.define("Q/video", function (options) {
 					});
 				});
 
-				$(".Q_video_composer_select button:visible:first", mainDialog).click();
+				Q.handle(_selectTab, $(".Q_tabbing_tabs .Q_tabbing_tab:visible:first", mainDialog)[0]);
 			},
 			beforeClose: function(mainDialog) {
 				// clear recorder stream when dialog close.
@@ -767,24 +769,24 @@ Q.Tool.define("Q/video", function (options) {
 
 Q.Template.set('Q/video/composer',
 	'<div class="Q_video_composer" data-composer="{{isComposer}}"><form>'
-	+ '  <div class="Q_video_composer_select">'
-	+ '  	<button name="edit" type="button">{{text.edit}}</button>'
-	+ '  	<button name="upload" type="button">{{text.upload}}</button>'
-	+ '  	<button name="link" type="button">{{text.link}}</button>'
+	+ '  <div class="Q_tabbing_tabs">'
+	+ '  	<div data-name="edit" class="Q_tabbing_tab">{{text.edit}}</div>'
+	+ '  	<div data-name="upload" class="Q_tabbing_tab">{{text.upload}}</div>'
+	+ '  	<div data-name="link" class="Q_tabbing_tab">{{text.link}}</div>'
 	+ '  </div>'
-	+ '  <div class="Q_video_composer_content">'
-	+ '	 	<div data-content="edit">'
+	+ '  <div class="Q_tabbing_container">'
+	+ '	 	<div class="Q_tabbing_item" data-content="edit">'
 	+ '			<div class="Q_video_player"></div>'
 	+ '			<div class="Q_video_composer_preview"></div>'
 	+ '			<div class="Q_video_composer_clip"></div>'
 	+ '  	</div>'
-	+ '  	<div data-content="upload">'
+	+ '  	<div class="Q_tabbing_item" data-content="upload">'
 	+ '	   		<input type="file" accept="video/*" class="Q_video_file" />'
 	+ '			<div class="Q_video_composer_upload_limit">{{uploadLimit}}</div>'
 	+ '			<div class="Q_video_composer_preview"></div>'
 	+ '			<div class="Q_video_composer_clip"></div>'
 	+ '		</div>'
-	+ '  	<div data-content="link">'
+	+ '  	<div class="Q_tabbing_item" data-content="link">'
 	+ '	   		<label>'
 	+ '				<input name="url" placeholder="{{text.seturl}}" type="url">'
 	+ '				<button name="setClip" type="button" class="Q_button">{{text.setClip}}</button>'

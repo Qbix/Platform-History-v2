@@ -107,6 +107,9 @@ Q.Tool.define("Q/audio", function (options) {
 			},
 			setCurrentPosition: function (position) {
 				state.audio.seekTo(Math.trunc(position));
+			},
+			getDuration: function () {
+				return tool.audio.getDuration();
 			}
 		},
 		"general": {
@@ -115,14 +118,14 @@ Q.Tool.define("Q/audio", function (options) {
 				tool.implementNativeAudio();
 
 				tool.audioElement.addEventListener("canplay", function(){
+					if (showPlayer) {
+						tool.renderPlayer();
+					}
+
 					if (state.autoplay) {
 						tool.play();
 					}
 				});
-
-				if (showPlayer) {
-					tool.renderPlayer();
-				}
 			},
 			renderPlayer: function () {
 				tool.audioElement.setAttribute('controls', true);
@@ -152,6 +155,9 @@ Q.Tool.define("Q/audio", function (options) {
 			},
 			setCurrentPosition: function (position) {
 				tool.audioElement.currentTime = position/1000;
+			},
+			getDuration: function () {
+				return tool.audioElement.duration * 1000;
 			}
 		}
 	};
@@ -293,7 +299,7 @@ Q.Tool.define("Q/audio", function (options) {
 			};
 
 			var action = state.mainDialog.attr('data-action');
-			var $currentContent = $(".Q_audio_record_content [data-content=" + action + "]", state.mainDialog);
+			var $currentContent = $(".Q_tabbing_container [data-content=" + action + "]", state.mainDialog);
 			if (!$currentContent.length) {
 				return _error("No action selected");
 			}
@@ -513,8 +519,8 @@ Q.Tool.define("Q/audio", function (options) {
 
 				// if stream defined, render player
 				if (tool.stream) {
-					var $audioElement = $(".Q_audio_record_content [data-content=edit] .Q_audio_composer_preview", mainDialog);
-					var $clipElement = $(".Q_audio_record_content [data-content=edit] .Q_audio_composer_clip", mainDialog);
+					var $audioElement = $(".Q_tabbing_container [data-content=edit] .Q_audio_composer_preview", mainDialog);
+					var $clipElement = $(".Q_tabbing_container [data-content=edit] .Q_audio_composer_clip", mainDialog);
 
 					$audioElement.tool("Q/audio", {
 						action: "implement",
@@ -594,10 +600,9 @@ Q.Tool.define("Q/audio", function (options) {
 					Q.handle(_process, mainDialog);
 				});
 
-				// custom tabs implementation
-				$(".Q_audio_record_select button", mainDialog).on(Q.Pointer.click, function (e) {
+				var _selectTab = function () {
 					var $this = $(this);
-					var action = $this.prop('name');
+					var action = $this.attr('data-name');
 
 					if (action === "record") {
 						tool.recorderStateChange("init");
@@ -606,8 +611,8 @@ Q.Tool.define("Q/audio", function (options) {
 					}
 
 					mainDialog.attr("data-action", action);
-					$this.addClass('Q_selected').siblings().removeClass('Q_selected');
-					$(".Q_audio_record_content [data-content=" + action + "]", mainDialog).addClass('Q_selected').siblings().removeClass('Q_selected');
+					$this.addClass('Q_current').siblings().removeClass('Q_current');
+					$(".Q_tabbing_container [data-content=" + action + "]", mainDialog).addClass('Q_current').siblings().removeClass('Q_current');
 
 					// pause all exists players
 					//tool.recorderStateChange("init");
@@ -618,14 +623,17 @@ Q.Tool.define("Q/audio", function (options) {
 							audioTool.pause();
 						}
 					});
-				});
+				};
+
+				// custom tabs implementation
+				$(".Q_tabbing_tabs .Q_tabbing_tab", mainDialog).on(Q.Pointer.fastclick, _selectTab);
 
 				// Reset button
 				$("button[name=reset]", mainDialog).on(Q.Pointer.click, function (e) {
 					state.dataBlob = undefined;
 					tool.recorderStateChange("init");
 
-					Q.each($(".Q_audio_record_content [data-content=link], .Q_audio_record_content [data-content=upload]", mainDialog), function (i, content) {
+					Q.each($(".Q_tabbing_container [data-content=link], .Q_tabbing_container [data-content=upload]", mainDialog), function (i, content) {
 						var audioTool = Q.Tool.from($(".Q_audio_composer_preview", content)[0], "Q/audio");
 						var clipTool = Q.Tool.from($(".Q_audio_composer_clip", content)[0], "Q/clip");
 
@@ -643,8 +651,8 @@ Q.Tool.define("Q/audio", function (options) {
 
 				// set clip start/end for upload
 				$("input[type=file]", mainDialog).on('change', function () {
-					var $audioElement = $(".Q_audio_record_content [data-content=upload] .Q_audio_composer_preview", mainDialog);
-					var $clipElement = $(".Q_audio_record_content [data-content=upload] .Q_audio_composer_clip", mainDialog);
+					var $audioElement = $(".Q_tabbing_container [data-content=upload] .Q_audio_composer_preview", mainDialog);
+					var $clipElement = $(".Q_tabbing_container [data-content=upload] .Q_audio_composer_clip", mainDialog);
 					var url = URL.createObjectURL(this.files[0]);
 					var toolPreview = Q.Tool.from($audioElement, "Q/audio");
 
@@ -699,8 +707,8 @@ Q.Tool.define("Q/audio", function (options) {
 
 				// set clip start/end for link
 				$("button[name=setClip]", mainDialog).on(Q.Pointer.fastclick, function () {
-					var $audioElement = $(".Q_audio_record_content [data-content=link] .Q_audio_composer_preview", mainDialog);
-					var $clipElement = $(".Q_audio_record_content [data-content=link] .Q_audio_composer_clip", mainDialog);
+					var $audioElement = $(".Q_tabbing_container [data-content=link] .Q_audio_composer_preview", mainDialog);
+					var $clipElement = $(".Q_tabbing_container [data-content=link] .Q_audio_composer_clip", mainDialog);
 					var url = $("input[name=url]", mainDialog).val();
 					if (!url.matchTypes('url').length) {
 						return Q.alert(tool.text.invalidURL);
@@ -744,9 +752,10 @@ Q.Tool.define("Q/audio", function (options) {
 					});
 				});
 
-				$(".Q_audio_record_select button:visible:first", mainDialog).click();
+				// select first visible tab
+				Q.handle(_selectTab, $(".Q_tabbing_tabs .Q_tabbing_tab:visible:first", mainDialog)[0]);
 			},
-			beforeClose: function(mainDialog) {
+			beforeClose: function (mainDialog) {
 				// clear recorder stream when dialog close.
 				// In this case every time dialog opened - user should allow to use microphone
 				tool.recorderStateChange("clear");
@@ -909,6 +918,15 @@ Q.Tool.define("Q/audio", function (options) {
 	pause: function(){
 		var adapterName = this.adapterNameFromUrl();
 		this.adapters[adapterName].pause();
+	},
+	/**
+	 * Get audio duration
+	 * @method getDuration
+	 * @return {float} Audio track duration in milliseconds
+	 */
+	getDuration: function(){
+		var adapterName = this.adapterNameFromUrl();
+		return this.adapters[adapterName].getDuration();
 	},
 	/**
 	 * @method userGesture
@@ -1082,6 +1100,70 @@ Q.Tool.define("Q/audio", function (options) {
 		});
 	},
 	/**
+	 * Draw custom audio player
+	 * @method customPlayer
+	 */
+	customPlayer: function () {
+		Q.Template.render("Q/audio/general", {
+			duration: tool.formatRecordTime(tool.getDuration(), "short")
+		}, function (err, html) {
+			var $this = $(html);
+			$(tool.element).append($this);
+
+			var $track = $(".Q_audio_general_track", $this);
+			var $play = $(".Q_audio_general_play", $this);
+			var $sound = $(".Q_audio_general_sound", $this);
+			var $trackCurrent = $(".Q_audio_general_trackCurrent", $this);
+
+			var _calcTrackWidth = function () {
+				var siblingsWidth = 0;
+				$track.siblings().each(function() {
+					siblingsWidth += $(this).outerWidth(true);
+				});
+
+				$track.width($this.innerWidth() - siblingsWidth);
+			}();
+
+			$play.on(Q.Pointer.fastclick, function () {
+				var state = $play.attr("data-state");
+
+				if (state === "pause") {
+					$play.attr("data-state", "play");
+					//tool.play();
+				} else {
+					$play.attr("data-state", "pause");
+					//tool.pause();
+				}
+			});
+
+			$sound.on(Q.Pointer.fastclick, function () {
+				var state = $sound.attr("data-state");
+
+				if (state === "on") {
+					$sound.attr("data-state", "off");
+				} else {
+					$sound.attr("data-state", "on");
+				}
+			});
+
+			var isDragging = false;
+			$trackCurrent.on(Q.Pointer.fastclick, function (e) {
+				e.stopPropagation();
+			});
+
+			$track.mousedown(function() {
+				isDragging = true;
+			}).mousemove(function(e) {
+				if (isDragging) {
+					$trackCurrent.css("left", e.offsetX);
+					console.log(e.offsetX);
+				}
+			}).mouseup(function() {
+				isDragging = false;
+			});
+		});
+	},
+	/**
 	 * Detect adapter from url
 	 * @method adapterNameFromUrl
 	 */
@@ -1104,16 +1186,28 @@ Q.Tool.define("Q/audio", function (options) {
 	 * Format record time elapsed
 	 * @method formatRecordTime
 	 * @param {int} time Time elapsed in miliseconds
+	 * @param {string} [foramt="classic"] "classic": "01h:21m:32s", "short": "01:21:32"
 	 * @return {string} formatted string
 	 */
-	formatRecordTime: function(time) {
+	formatRecordTime: function(time, format) {
 		time = time/1000;
+		format = format || "classic";
 		var sec_num = parseInt(time, 10);
 		var hours   = Math.floor(sec_num / 3600);
 		var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
 		var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
-		return (hours ? hours + 'h ' : '') + (minutes ? minutes + 'm ' : '') + seconds+'s';
+		var res;
+
+		switch (format) {
+			case "short":
+				res = (hours ? hours + ':' : '') + (minutes ? minutes + ':' : '') + seconds;
+				break;
+			default:
+				res = (hours ? hours + 'h ' : '') + (minutes ? minutes + 'm ' : '') + seconds+'s';
+		}
+
+		return res;
 	},
 	/**
 	 * Convert bytes integer to human readable string
@@ -1146,32 +1240,32 @@ Q.Tool.define("Q/audio", function (options) {
 
 Q.Template.set('Q/audio/composer',
 	'<div class="Q_audio_start" data-composer="{{isComposer}}"><form>'
-	+ '  <div class="Q_audio_record_select">'
-	+ '  	<button name="edit" type="button">{{text.edit}}</button>'
-	+ '  	<button name="record" type="button">{{text.record}}</button>'
-	+ '  	<button name="upload" type="button">{{text.upload}}</button>'
-	+ '  	<button name="link" type="button">{{text.link}}</button>'
+	+ '  <div class="Q_tabbing_tabs">'
+	+ '  	<div data-name="edit" class="Q_tabbing_tab">{{text.edit}}</div>'
+	+ '  	<div data-name="record" class="Q_tabbing_tab">{{text.record}}</div>'
+	+ '  	<div data-name="upload" class="Q_tabbing_tab">{{text.upload}}</div>'
+	+ '  	<div data-name="link" class="Q_tabbing_tab">{{text.link}}</div>'
 	+ '  </div>'
-	+ '  <div class="Q_audio_record_content">'
-	+ '	 	<div data-content="edit">'
+	+ '  <div class="Q_tabbing_container">'
+	+ '	 	<div class="Q_tabbing_item" data-content="edit">'
 	+ '			<div class="Q_audio_player"></div>'
 	+ '			<div class="Q_audio_composer_preview"></div>'
 	+ '			<div class="Q_audio_composer_clip"></div>'
 	+ '  	</div>'
-	+ '	 	<div data-content="record">'
+	+ '	 	<div class="Q_tabbing_item" data-content="record">'
 	+ '    		<div class="Q_audio_pie"></div>'
 	+ '    		<div class="Q_audio_record_label"><p class="Q_audio_record_recordText">{{text.record}}</p><p><span class="Q_audio_record_recordTime">{{maxRecordTime}}</span> <span class="Q_audio_record_elapsed">{{text.maximum}}</span></p></div>'
 	+ '    		<div class="Q_audio_allow">{{textAllowMicrophoneAccess}}</div>'
 	+ '			<div class="Q_audio_composer_preview"></div>'
 	+ '			<div class="Q_audio_composer_clip"></div>'
 	+ '  	</div>'
-	+ '  	<div data-content="upload">'
+	+ '  	<div class="Q_tabbing_item" data-content="upload">'
 	+ '	   		<input type="file" accept="audio/*" class="Q_audio_file" />'
 	+ '			<div class="Q_audio_composer_upload_limit">{{uploadLimit}}</div>'
 	+ '			<div class="Q_audio_composer_preview"></div>'
 	+ '			<div class="Q_audio_composer_clip"></div>'
 	+ '		</div>'
-	+ '  	<div data-content="link">'
+	+ '  	<div class="Q_tabbing_item" data-content="link">'
 	+ '	   		<label>'
 	+ '				<input name="url" placeholder="{{text.seturl}}" type="url">'
 	+ '				<button name="setClip" type="button" class="Q_button">{{text.setClip}}</button>'
@@ -1186,8 +1280,16 @@ Q.Template.set('Q/audio/composer',
 );
 
 Q.Template.set('Q/audio/general',
-	'<audio src="{{url}}" preload="auto" controls {{autoplay}}/>'
-	//'<div class="Q_audio_container"></div>'
+	'<div class="Q_audio_general">' +
+	'	<div class="Q_audio_general_play" data-state="play"></div>' +
+	'	<div class="Q_audio_general_time"><span class="Q_audio_general_timeCurrent">0</span>/<span class="Q_audio_general_timeTotal">{{duration}}</span></div>' +
+	'	<div class="Q_audio_general_track">' +
+	'		<span class="Q_audio_general_trackTotal"></span>' +
+	'		<span class="Q_audio_general_trackPlay"></span>' +
+	'		<span class="Q_audio_general_trackCurrent"></span>' +
+	'	</div>' +
+	'	<div class="Q_audio_general_sound" data-state="on"></div>' +
+	'</div>'
 );
 
 Q.Template.set('Q/audio/soundcloud',

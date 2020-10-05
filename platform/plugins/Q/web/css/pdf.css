@@ -1,4 +1,5 @@
 .Q_pdf_tool {
+    position: relative;
     width: 100%;
     height: 250px;
     overflow: auto;
@@ -21,7 +22,9 @@
     width: 60%;
     margin-right: 5px;
 }
-
+.Q_dialog_pdf {
+    min-width: 330px;
+}
 .Q_dialog_pdf .Q_pdf_player {
     display: none;
     margin-bottom: 10px;
@@ -30,61 +33,40 @@
     display: block;
 }
 
-.Q_pdf_composer_content > div {
-    display: none;
-}
-.Q_pdf_composer_content div[data-content=upload] input.Q_pdf_file,
-.Q_pdf_composer_content div[data-content=link] label {
+.Q_dialog_pdf .Q_tabbing_container .Q_tabbing_item[data-content=upload] input.Q_pdf_file,
+.Q_dialog_pdf .Q_tabbing_container .Q_tabbing_item[data-content=link] label {
     display: block;
     margin: 30px auto 0;
-    width: 80%;
+    width: 90%;
     white-space: nowrap;
 }
-.Q_pdf_composer_content div[data-content=link] label button {
-    display: inline;
-}
-.Q_pdf_composer_content > div.Q_selected {
-    background: transparent;
-    border: none;
-    display: block;
+.Q_dialog_pdf .Q_tabbing_container .Q_tabbing_item.Q_selected {
     min-height: 100px;
 }
-.Q_pdf_composer_content .Q_pdf_composer_upload_limit {
+.Q_dialog_pdf .Q_tabbing_container .Q_pdf_composer_upload_limit {
     margin: 3px auto 0;
     display: block;
     text-align: center;
     font-size: 14px;
     color: red;
 }
-.Q_pdf_composer .Q_pdf_composer_select {
-    text-align: center;
-    white-space: nowrap;
-}
-.Q_pdf_composer .Q_pdf_composer_select > button {
-    display: inline-block;
+.Q_pdf_composer .Q_tabbing_tabs .Q_tabbing_tab {
     width: 60px;
-    height: 60px;
     background-repeat: no-repeat;
     background-position: top center;
-    margin: 0 2%;
-    border: 1px solid #000;
-    border-radius: 10px;
     padding-top: 40px;
 }
-.Q_pdf_composer .Q_pdf_composer_select > button.Q_selected {
-    background-color: #0f0;
-}
-.Q_pdf_composer .Q_pdf_composer_select > button[name=edit] {
+.Q_pdf_composer .Q_tabbing_tabs .Q_tabbing_tab[data-name=edit] {
     background-image: url('../img/audio/edit/40.png');
 }
-.Q_pdf_composer[data-composer=true] .Q_pdf_composer_select > button[name=edit],
-.Q_pdf_composer[data-composer=true] .Q_pdf_composer_content > [data-content=edit] {
+.Q_pdf_composer[data-composer=true] .Q_tabbing_tabs .Q_tabbing_tab[data-name=edit],
+.Q_pdf_composer[data-composer=true] .Q_tabbing_container .Q_tabbing_item[data-content=edit] {
     display: none;
 }
-.Q_pdf_composer .Q_pdf_composer_select > button[name=upload] {
+.Q_pdf_composer .Q_tabbing_tabs .Q_tabbing_tab[data-name=upload] {
     background-image: url('../img/audio/upload/40.png');
 }
-.Q_pdf_composer .Q_pdf_composer_select > button[name=link] {
+.Q_pdf_composer .Q_tabbing_tabs .Q_tabbing_tab[data-name=link] {
     background-image: url('../img/audio/link/40.png');
 }
 .Q_pdf_composer .Q_pdf_composer_submit {
@@ -96,6 +78,33 @@
     display: inline-block;
     margin: 0 2%;
 }
-.Q_pdf_composer_content .Q_pdf_composer_clip {
+.Q_tabbing_container .Q_pdf_composer_clip {
     margin-top: 10px;
+}
+
+.Q_pdf_tool .Q_pdf_preloader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color:rgba(255, 255, 255, 0.5);
+}
+.Q_pdf_tool .Q_pdf_preloader img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.Q_pdf_clip_start, .Q_pdf_clip_end {
+    position: absolute;
+    width: 100%;
+    background: #fff;
+}
+.Q_dialog_pdf button,
+.Q_dialog_pdf input {
+    height: 40px;
+}
+.Q_dialog_pdf .Q_pdf_composer_submit button[name=reset] {
+    display: none;
 }
