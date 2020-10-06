@@ -593,7 +593,7 @@
 				// 	return;
 				// }
 				tool.$overflow = $overflow;
-				Q.addScript("{{Q}}/js/contextual", function () {
+				Q.addScript("{{Q}}/js/contextual.js", function () {
 					var elements = [];
 					for (var i=index+1; i<$tabs.length; ++i) {
 						elements.push($tabs[i]);
