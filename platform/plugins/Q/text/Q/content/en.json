@@ -42,22 +42,9 @@
         "maximum": "maximum",
         "playing": "Playing",
         "recorded": "Recorded",
-        "reset": "Reset",
         "clip": "clip",
-        "edit": "Edit",
-        "upload": "Upload",
-        "link": "Link",
-        "seturl": "Set URL",
-        "save": "Save",
-        "setClip": "Set Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "usethis": "Use This",
         "discard": "Discard",
-        "encoding": "Encoding",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "encoding": "Encoding"
     },
     "video": {
         "reset": "Reset",

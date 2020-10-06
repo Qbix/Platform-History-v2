@@ -8,7 +8,14 @@
  * @class Q audio
  * @constructor
  * @param {Object} [options] Override various options for this tool
- *  @param {String} [options.url] URL of audio stream
+ *	@param {String} [options.action="implement"] Which mode need to use for this tool. Can be:
+ *		implement - render default player with source from state.url
+ *		recorder  - render audio recorder
+ *		player 	  -	render player in Q/pie view (for preview play)
+ *	@param {Integer} [options.maxRecordTime=60] max record time for recorder in seconds
+ *	@param {Integer} [options.clipStart] if clip defined, start time in seconds
+ *	@param {Integer} [options.clipEnd] if clip defined, end time in seconds
+ *  @param {String} [options.url] URL of audio source
  *  @param {boolean} [options.autoplay=false] If true - start play on load
  */
 Q.Tool.define("Q/audio", function (options) {
@@ -17,6 +24,10 @@ Q.Tool.define("Q/audio", function (options) {
 
 	if (state.url) {
 		state.url = state.url.interpolate({ "baseUrl": Q.info.baseUrl });
+	}
+
+	if (state.action === "implement" && Q.isEmpty(state.url)) {
+		throw new Q.Error("URL required");
 	}
 
 	// convert to milliseconds, as we use milliseconds everywhere for calculations
@@ -132,26 +143,20 @@ Q.Tool.define("Q/audio", function (options) {
 				$(tool.element).append(tool.audioElement);
 			},
 			play: function () {
-				tool.implementNativeAudio();
-
-				var promise = tool.audioElement.play();
-
-				if(typeof promise === 'undefined') {
-					return;
+				// if audio element visible, use it to interaction
+				if (tool.$audioElement.is(":visible")) {
+					tool.audioElement.play();
+				} else { // else use Q.Audio class method
+					tool.audio.play(tool.audioElement.currentTime, tool.audioElement.duration);
 				}
-
-				tool.userGesture("play", promise);
 			},
 			pause: function () {
-				tool.implementNativeAudio();
-
-				var promise = tool.audioElement.pause();
-
-				if (typeof promise === 'undefined') {
-					return;
+				// if audio element visible, use it to interaction
+				if (tool.$audioElement.is(":visible")) {
+					tool.audioElement.pause();
+				} else { // else use Q.Audio class method
+					tool.audio.pause();
 				}
-
-				tool.userGesture("pause", promise);
 			},
 			setCurrentPosition: function (position) {
 				tool.audioElement.currentTime = position/1000;
@@ -162,7 +167,7 @@ Q.Tool.define("Q/audio", function (options) {
 		}
 	};
 
-	var p = Q.pipe(['stylesheet', 'text', 'stream'], function (params, subjects) {
+	var p = Q.pipe(['stylesheet', 'text'], function (params, subjects) {
 		tool.text = params.text[1].audio;
 
 		// run action
@@ -171,35 +176,19 @@ Q.Tool.define("Q/audio", function (options) {
 
 	Q.addStylesheet("{{Q}}/css/audio.css", p.fill('stylesheet'), { slotName: 'Q' });
 	Q.Text.get('Q/content', p.fill('text'));
-
-	tool.stream = null;
-	if (state.publisherId && state.streamName) {
-		state.isComposer = false;
-		Q.Streams.get(state.publisherId, state.streamName, function () {
-			tool.stream = this;
-			p.fill('stream')();
-		});
-	} else {
-		p.fill('stream')();
-	}
 },
 
 {
-	action: "recorder",
+	action: "implement",
 	url: null,
 	autoplay: false,
-	isComposer: true,
 	/* <Q/audio jquery plugin states> */
-	publisherId: null,
-	streamName: null, // create stream or edit
 	pie: { // default Q/pie options
 		fraction: 0,
 		borderSize: 5,
 		size: null
 	},
 	maxRecordTime: 60, // seconds
-	fileUploadUHandler: Q.action("Q/file"),
-	preprocess: null,
 	duration: 0,
 	currentPosition: 0,
 	clipStart: null,
@@ -213,20 +202,15 @@ Q.Tool.define("Q/audio", function (options) {
 	onLoad: new Q.Event(),
 	onPlay: new Q.Event(function () {
 		var tool = this;
-		var state = this.sgate;
 
 		// set box attribute to apply valid styles
-		this.pieBox && this.pieBox.attr("data-state", "pause");
+		this.$pieBox && this.$pieBox.attr("data-state", "pause");
 
 		tool.checkClip();
 	}),
 	onPlaying: new Q.Event(function () {
 		var tool = this;
 		var state = this.state;
-
-		if(state.action === "recorder"){
-			state.recordTimeElement.html(tool.formatRecordTime(state.duration - state.currentPosition) + '/' + tool.formatRecordTime(state.duration));
-		}
 
 		if (tool.pieTool) {
 			tool.pieTool.state.fraction = 100 * state.currentPosition / state.duration;
@@ -237,13 +221,13 @@ Q.Tool.define("Q/audio", function (options) {
 	}),
 	onPause: new Q.Event(function () {
 		// stop timer if exist
-		if(this.state.playIntervalID) {
+		if (this.state.playIntervalID) {
 			clearInterval(this.state.playIntervalID);
 			this.state.playIntervalID = false;
 		}
 
 		// set box attribute to apply valid styles
-		this.pieBox && this.pieBox.attr("data-state", "play");
+		this.$pieBox && this.$pieBox.attr("data-state", "play");
 	}),
 	onSeek: new Q.Event(),
 	onEnded: new Q.Event()
@@ -278,491 +262,6 @@ Q.Tool.define("Q/audio", function (options) {
 		this.adapters[adapterName].implement(showPlayer);
 	},
 	/**
-	 * Start audio creation dialog
-	 * @method recorder
-	 */
-	recorder: function () {
-		var tool = this;
-		var state = this.state;
-		var hasUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
-
-		tool.implementNativeAudio();
-
-		/**
-		 * Process composer submitting
-		 * @method _process
-		 */
-		var _process = function() {
-			var _error = function (err) {
-				state.mainDialog.removeClass('Q_uploading');
-				Q.alert(err);
-			};
-
-			var action = state.mainDialog.attr('data-action');
-			var $currentContent = $(".Q_tabbing_container [data-content=" + action + "]", state.mainDialog);
-			if (!$currentContent.length) {
-				return _error("No action selected");
-			}
-			var clipTool = Q.Tool.from($(".Q_clip_tool", $currentContent), "Q/clip");
-			var clipStart = clipTool ? clipTool.getPosition("start") : null;
-			var clipEnd = clipTool ? clipTool.getPosition("end") : null;
-
-			state.mainDialog.addClass('Q_uploading');
-
-			if (action === "link") {
-				// url defined
-				var url = $("input[name=url]", $currentContent).val();
-				if (!url) {
-					return _error("Link not found");
-				}
-
-				Q.req('Websites/scrape', ['result'], function (err, response) {
-					var msg = Q.firstErrorMessage(err, response && response.errors);
-					if (msg) {
-						Q.Dialogs.pop();
-						return console.warn("Q/audio: " + msg);
-					}
-
-					var siteData = response.slots.result;
-
-					var params = {
-						title: siteData.title,
-						content: siteData.description,
-						icon: siteData.iconBig,
-						attributes: {
-							host: siteData.host,
-							iconSmall: siteData.iconSmall,
-							url: url,
-							'Q.file.url': "",
-							'file.url': "",
-							clipStart: clipStart,
-							clipEnd: clipEnd
-						}
-					};
-
-					// edit stream
-					if (tool.stream) {
-						Q.each(params, function (name, value) {
-							tool.stream.pendingFields[name] = value;
-						});
-						tool.stream.save({
-							onSave: function () {
-								Q.handle([state.onSuccess, state.onFinish], tool, [params]);
-								Q.Dialogs.pop();
-							}
-						});
-					} else {
-						// new stream
-						Q.handle([state.onSuccess, state.onFinish], tool, [params]);
-						Q.Dialogs.pop();
-					}
-				}, {
-					method: 'post',
-					fields: {url: url}
-				});
-			} else if (action === "record" || action === "upload") {
-				var $file = $("input[type=file].Q_audio_file", $currentContent);
-				// state.file set in recorder OR html file element
-				var file = state.file || ($file.length && $file[0].files[0]) || null;
-
-				// check file size
-				if (file.size && file.size >= parseInt(Q.info.maxUploadSize)) {
-					return Q.alert(tool.text.errorFileSize.interpolate({size: tool.humanFileSize()}));
-				}
-
-				var reader = new FileReader();
-				reader.onload = function (event) {
-					if (state.preprocess) {
-						Q.handle(state.preprocess, tool);
-					}
-
-					var params = {
-						title: file.name,
-						attributes: {
-							clipStart: clipStart,
-							clipEnd: clipEnd
-						},
-						file: {
-							data: this.result,
-							audio: true
-						}
-					};
-
-					if(state.publisherId && state.streamName) { // if edit existent stream
-						params.publisherId = state.publisherId;
-						params.streamName = state.streamName;
-						params.file.name = file.name;
-
-						// for some reason attributes with null values doesn't send to backend in request
-						// so specially update attributes
-						if (Q.Streams.isStream(tool.stream)) {
-							tool.stream.setAttribute("clipStart", clipStart);
-							tool.stream.setAttribute("clipEnd", clipEnd);
-							tool.stream.save();
-						}
-
-						if (window.FileReader) {
-							Q.request(state.fileUploadUHandler, 'data', function (err, res) {
-								//console.log(this);
-								var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(res && res.errors);
-								if (msg) {
-									if(state.mainDialog) state.mainDialog.removeClass('Q_uploading');
-									return Q.handle([state.onError, state.onFinish], tool, [msg]);
-								}
-
-								// by default set src equal to first element of the response
-								var key = Q.firstKey(res.slots.data, {nonEmpty: true});
-
-								Q.handle([state.onSuccess, state.onFinish], tool, [res.slots.data, key, file || null]);
-
-								Q.Dialogs.pop();
-							}, {
-								fields: params,
-								method: "put"
-							});
-						} else {
-							Q.alert('FileReader undefined');
-							/*
-                            delete params.data;
-                            state.input.wrap('<form />', {
-                                method: "put",
-                                action: Q.url(state.fileUploadUHandler, params)
-                            }).parent().submit();
-                            state.input.unwrap();
-                            */
-						}
-					} else { // if new stream
-						Q.handle([state.onSuccess, state.onFinish], tool, [params]);
-						Q.Dialogs.pop();
-					}
-				};
-				reader.onerror = function () {
-					setTimeout(function () {
-						callback("Error reading file", res);
-					}, 0);
-				};
-
-				reader.readAsDataURL(file);
-			} else if (action === "edit") {
-				// edit stream attributes
-				if (!Q.Streams.isStream(tool.stream)) {
-					return _error("Stream not found");
-				}
-				tool.stream.setAttribute("clipStart", clipStart);
-				tool.stream.setAttribute("clipEnd", clipEnd);
-				tool.stream.save({
-					onSave: function () {
-						Q.handle([state.onSuccess, state.onFinish], tool);
-						Q.Dialogs.pop();
-					}
-				});
-			} else {
-				_error("Incorrect action " + action);
-			}
-		};
-
-		Q.Dialogs.push({
-			className: 'Q_dialog_audio',
-			title: "Audio",
-			template: {
-				name: 'Q/audio/composer',
-				fields: {
-					maxRecordTime: tool.formatRecordTime(state.maxRecordTime),
-					textAllowMicrophoneAccess: tool.text.allowMicrophoneAccess,
-					isComposer: state.isComposer,
-					uploadLimit: tool.text.uploadLimit.interpolate({size: tool.humanFileSize(Q.info.maxUploadSize)}),
-					text: tool.text
-				}
-			},
-			destroyOnClose: true,
-			onActivate : function (mainDialog) {
-				state.mainDialog = mainDialog;
-
-				var pieBox = tool.pieBox = $(".Q_audio_pie", mainDialog);
-				var pieElement = Q.Tool.setUpElement('div', 'Q/pie');
-				var $pieElement = $(pieElement);
-
-				// set some elements
-				state.recordTimeElement = $(".Q_audio_record_recordTime", mainDialog);
-				state.recordTextElement = $(".Q_audio_record_recordText", mainDialog);
-				state.recordElapsedElement = $(".Q_audio_record_elapsed", mainDialog);
-				state.recordEncodingElement = $(".Q_audio_encoding", mainDialog);
-
-				// add Q/pie tool
-				pieBox.append(pieElement).activate(function(){
-					tool.pieTool = this;
-				});
-
-				// set Q/pie tool handler
-				$pieElement.on(Q.Pointer.fastclick, function(event){
-					event.stopPropagation();
-					event.preventDefault();
-
-					var pieTool = tool.pieTool;
-					var recorderState = state.recorderState;
-
-					// click on arc border - means change play position
-					if(!pieTool.state.clickPos.inside && recorderState === "playing"){
-						tool.audioElement.currentTime = tool.audioElement.duration/100*pieTool.state.clickPos.anglePercent;
-						return;
-					}
-
-					// set pie state
-					if(!recorderState) recorderState = "init";
-					else if(recorderState === "ready") recorderState = "recording";
-					else if(recorderState === "recording") recorderState = "recorded";
-					else if(recorderState === "playing") recorderState = "play";
-					else if(recorderState === "play") recorderState = "playing";
-
-					tool.recorderStateChange(recorderState);
-				});
-
-				// if stream defined, render player
-				if (tool.stream) {
-					var $audioElement = $(".Q_tabbing_container [data-content=edit] .Q_audio_composer_preview", mainDialog);
-					var $clipElement = $(".Q_tabbing_container [data-content=edit] .Q_audio_composer_clip", mainDialog);
-
-					$audioElement.tool("Q/audio", {
-						action: "implement",
-						clipStart: tool.stream.getAttribute('clipStart'),
-						clipEnd: tool.stream.getAttribute('clipEnd'),
-						url: tool.stream.fileUrl()
-					}).activate(function () {
-						var toolPreview = this;
-						var clipStart = tool.stream.getAttribute('clipStart');
-						var clipEnd = tool.stream.getAttribute('clipEnd');
-
-						$clipElement.tool("Q/clip", {
-							startPosition: clipStart,
-							startPositionDisplay: clipStart.convertTimeToString(),
-							endPosition: clipEnd,
-							endPositionDisplay: clipEnd.convertTimeToString(),
-							onStart: function (setNewPosition) {
-								if (setNewPosition) {
-									var time = toolPreview.state.currentPosition;
-
-									toolPreview.state.clipStart = time;
-									this.setPosition(time, time.toString().convertTimeToString(), "start");
-								} else {
-									toolPreview.state.clipStart = null;
-								}
-							},
-							onEnd: function (setNewPosition) {
-								if (setNewPosition) {
-									var time = toolPreview.state.currentPosition;
-
-									toolPreview.state.clipEnd = time;
-									this.setPosition(time, time.toString().convertTimeToString(), "end");
-								} else {
-									toolPreview.state.clipEnd = null;
-								}
-							}
-						}).activate(function () {
-							toolPreview.clipTool = this;
-						});
-					});
-				}
-
-				// save by URL
-				$("button[name=save]", mainDialog).on(Q.Pointer.click, function (e) {
-					e.preventDefault();
-					e.stopPropagation();
-
-					mainDialog.addClass('Q_uploading');
-
-					var _error = function (err) {
-						mainDialog.removeClass('Q_uploading');
-						Q.alert(err);
-					};
-					var action = mainDialog.attr("data-action");
-
-					if (action === 'record') {
-						// wait while track encoded
-						if(typeof state.dataBlob === 'undefined') {
-							return _error(tool.text.errorNoSource);
-						}
-
-						state.file = state.dataBlob;
-						state.file.name = "audio.mp3";
-					} else if (action === 'upload') {
-						if (!$("input[type=file]", mainDialog).val()) {
-							return _error(tool.text.invalidFile);
-						}
-					} else if (action === 'link') {
-						var url = $("input[name=url]", mainDialog).val();
-						if (!url.matchTypes('url').length) {
-							return _error(tool.text.invalidURL);
-						}
-					} else if (state.isComposer) {
-						return _error(tool.text.errorNoSource);
-					}
-
-					Q.handle(_process, mainDialog);
-				});
-
-				var _selectTab = function () {
-					var $this = $(this);
-					var action = $this.attr('data-name');
-
-					if (action === "record") {
-						tool.recorderStateChange("init");
-					} else {
-						tool.recorderStateChange("clear");
-					}
-
-					mainDialog.attr("data-action", action);
-					$this.addClass('Q_current').siblings().removeClass('Q_current');
-					$(".Q_tabbing_container [data-content=" + action + "]", mainDialog).addClass('Q_current').siblings().removeClass('Q_current');
-
-					// pause all exists players
-					//tool.recorderStateChange("init");
-					Q.each($(".Q_audio_tool", mainDialog), function () {
-						var audioTool = Q.Tool.from(this, "Q/audio");
-
-						if (audioTool) {
-							audioTool.pause();
-						}
-					});
-				};
-
-				// custom tabs implementation
-				$(".Q_tabbing_tabs .Q_tabbing_tab", mainDialog).on(Q.Pointer.fastclick, _selectTab);
-
-				// Reset button
-				$("button[name=reset]", mainDialog).on(Q.Pointer.click, function (e) {
-					state.dataBlob = undefined;
-					tool.recorderStateChange("init");
-
-					Q.each($(".Q_tabbing_container [data-content=link], .Q_tabbing_container [data-content=upload]", mainDialog), function (i, content) {
-						var audioTool = Q.Tool.from($(".Q_audio_composer_preview", content)[0], "Q/audio");
-						var clipTool = Q.Tool.from($(".Q_audio_composer_clip", content)[0], "Q/clip");
-
-						// remove Q/audio and Q/clip tools from upload and link sections
-						Q.each([audioTool, clipTool], function (i, resetTool) {
-							if (Q.typeOf(resetTool) !== 'Q.Tool') {
-								return;
-							}
-
-							Q.Tool.remove(resetTool.element, true);
-							resetTool.element.innerHTML = '';
-						});
-					});
-				});
-
-				// set clip start/end for upload
-				$("input[type=file]", mainDialog).on('change', function () {
-					var $audioElement = $(".Q_tabbing_container [data-content=upload] .Q_audio_composer_preview", mainDialog);
-					var $clipElement = $(".Q_tabbing_container [data-content=upload] .Q_audio_composer_clip", mainDialog);
-					var url = URL.createObjectURL(this.files[0]);
-					var toolPreview = Q.Tool.from($audioElement, "Q/audio");
-
-					// check file size
-					if (this.files[0].size >= parseInt(Q.info.maxUploadSize)) {
-						this.value = null;
-						return Q.alert(tool.text.errorFileSize.interpolate({size: tool.humanFileSize(Q.info.maxUploadSize)}));
-					}
-
-					// if audio tool exists, clear url object
-					if (toolPreview) {
-						URL.revokeObjectURL(toolPreview.state.url);
-					}
-
-					Q.Tool.remove($audioElement[0], true);
-					Q.Tool.remove($clipElement[0], true);
-
-					$audioElement.empty();
-					$clipElement.empty();
-
-					$audioElement.tool("Q/audio", {
-						action: "implement",
-						url: url
-					}).activate(function () {
-						toolPreview = this;
-						$clipElement.tool("Q/clip", {
-							onStart: function (setNewPosition) {
-								if (setNewPosition) {
-									var time = toolPreview.state.currentPosition;
-
-									toolPreview.state.clipStart = time;
-									this.setPosition(time, time.toString().convertTimeToString(), "start");
-								} else {
-									toolPreview.state.clipStart = null;
-								}
-							},
-							onEnd: function (setNewPosition) {
-								if (setNewPosition) {
-									var time = toolPreview.state.currentPosition;
-
-									toolPreview.state.clipEnd = time;
-									this.setPosition(time, time.toString().convertTimeToString(), "end");
-								} else {
-									toolPreview.state.clipEnd = null;
-								}
-							}
-						}).activate(function () {
-							toolPreview.clipTool = this;
-						});
-					});
-				});
-
-				// set clip start/end for link
-				$("button[name=setClip]", mainDialog).on(Q.Pointer.fastclick, function () {
-					var $audioElement = $(".Q_tabbing_container [data-content=link] .Q_audio_composer_preview", mainDialog);
-					var $clipElement = $(".Q_tabbing_container [data-content=link] .Q_audio_composer_clip", mainDialog);
-					var url = $("input[name=url]", mainDialog).val();
-					if (!url.matchTypes('url').length) {
-						return Q.alert(tool.text.invalidURL);
-					}
-
-					Q.Tool.remove($audioElement[0], true);
-					Q.Tool.remove($clipElement[0], true);
-
-					$audioElement.empty();
-					$clipElement.empty();
-
-					$audioElement.tool("Q/audio", {
-						action: "implement",
-						url: url
-					}).activate(function () {
-						var toolPreview = this;
-						$clipElement.tool("Q/clip", {
-							onStart: function (setNewPosition) {
-								if (setNewPosition) {
-									var time = toolPreview.state.currentPosition;
-
-									toolPreview.state.clipStart = time;
-									this.setPosition(time, time.toString().convertTimeToString(), "start");
-								} else {
-									toolPreview.state.clipStart = null;
-								}
-							},
-							onEnd: function (setNewPosition) {
-								if (setNewPosition) {
-									var time = toolPreview.state.currentPosition;
-
-									toolPreview.state.clipEnd = time;
-									this.setPosition(time, time.toString().convertTimeToString(), "end");
-								} else {
-									toolPreview.state.clipEnd = null;
-								}
-							}
-						}).activate(function () {
-							toolPreview.clipTool = this;
-						});
-					});
-				});
-
-				// select first visible tab
-				Q.handle(_selectTab, $(".Q_tabbing_tabs .Q_tabbing_tab:visible:first", mainDialog)[0]);
-			},
-			beforeClose: function (mainDialog) {
-				// clear recorder stream when dialog close.
-				// In this case every time dialog opened - user should allow to use microphone
-				tool.recorderStateChange("clear");
-			}
-		});
-	},
-	/**
 	 * Handle recorder states
 	 * @method recorderStateChange
 	 * @param {string} newState New recorder state
@@ -770,28 +269,31 @@ Q.Tool.define("Q/audio", function (options) {
 	recorderStateChange: function(newState){
 		var tool = this;
 		var state = this.state;
+		var $toolElement = $(this.element);
+
+		var $recordTextElement = $(".Q_audio_record_recordText", $toolElement);
+		var $recordElapsedElement = $(".Q_audio_record_elapsed", $toolElement);
+		var $recordTimeElement = $(".Q_audio_record_recordTime", $toolElement);
+
 		var _resetPie = function () {
 			// reset pie tool to start point
 			if(tool.pieTool){
 				state.currentRecordTime = state.maxRecordTime;
 
-				state.recordTextElement.html(tool.text.record);
-				state.recordElapsedElement.html(tool.text.maximum);
-				//state.recordTimeElement.show();
-				state.recordTimeElement.html(tool.formatRecordTime(state.currentRecordTime));
+				$recordTextElement.html(tool.text.record);
+				$recordElapsedElement.html(tool.text.maximum);
+				$recordTimeElement.html(tool.formatRecordTime(state.currentRecordTime));
 				tool.pieTool.initPos();
 			}
 		};
 
-		tool.implementNativeAudio();
-
 		state.recorderState = newState;
 
-		// set dialog attribute to style dialog according to newState
-		state.mainDialog.attr("data-state", newState);
+		// set tool element attribute to style player according to newState
+		$toolElement.attr("data-state", newState);
 
 		// set pieBox attribute to style player according to newState
-		tool.pieBox.attr("data-state", newState);
+		tool.$pieBox.attr("data-state", newState);
 
 		// init recorder
 		if(newState === "init"){
@@ -836,7 +338,7 @@ Q.Tool.define("Q/audio", function (options) {
 
 		// play recorded track
 		if(newState === "playing"){
-			state.recordTextElement.html(tool.text.playing);
+			$recordTextElement.html(tool.text.playing);
 			tool.audioElement.play();
 		}else{
 			tool.audioElement.pause();
@@ -844,9 +346,9 @@ Q.Tool.define("Q/audio", function (options) {
 
 		// ready to play
 		if(newState === "play"){
-			state.recordTextElement.html(tool.text.recorded);
-			state.recordElapsedElement.html(tool.text.clip);
-			state.recordTimeElement.html(tool.formatRecordTime(tool.audioElement.duration));
+			$recordTextElement.html(tool.text.recorded);
+			$recordElapsedElement.html(tool.text.clip);
+			$recordTimeElement.html(tool.formatRecordTime(tool.audioElement.duration));
 		}
 
 		// recorder stoped
@@ -871,9 +373,9 @@ Q.Tool.define("Q/audio", function (options) {
 		state.recorder.start();
 
 		// set some elements text
-		state.recordTextElement.html(tool.text.recording);
-		state.recordElapsedElement.html(tool.text.remains);
-		state.recordTimeElement.html(tool.formatRecordTime(state.maxRecordTime) + '/' + tool.formatRecordTime(state.maxRecordTime));
+		$recordTextElement.html(tool.text.recording);
+		$recordElapsedElement.html(tool.text.remains);
+		$recordTimeElement.html(tool.formatRecordTime(state.maxRecordTime) + '/' + tool.formatRecordTime(state.maxRecordTime));
 
 		// start recorder timer to handle all recorder interface actions
 		state.recordIntervalID = setInterval(function(){
@@ -884,7 +386,7 @@ Q.Tool.define("Q/audio", function (options) {
 			state.currentRecordTime -= 100;
 
 			// set time element text
-			state.recordTimeElement.html(tool.formatRecordTime(state.currentRecordTime) + '/' + tool.formatRecordTime(state.maxRecordTime));
+			$recordTimeElement.html(tool.formatRecordTime(state.currentRecordTime) + '/' + tool.formatRecordTime(state.maxRecordTime));
 
 			// set Q/pie tool position (percents of currentRecordTime time from max maxRecordTime)
 			tool.pieTool.state.fraction = 100*(state.maxRecordTime - state.currentRecordTime)/state.maxRecordTime;
@@ -929,6 +431,15 @@ Q.Tool.define("Q/audio", function (options) {
 		return this.adapters[adapterName].getDuration();
 	},
 	/**
+	 * Set current play position
+	 * @method setCurrentPosition
+	 * @return {integer} position in milliseconds
+	 */
+	setCurrentPosition: function (position) {
+		var adapterName = this.adapterNameFromUrl();
+		this.adapters[adapterName].setCurrentPosition(position);
+	},
+	/**
 	 * @method userGesture
 	 * User gesture handler for audio actions if promise != undefined (mobile devices)
 	 * @param {string} action Player action (play, pause, ...)
@@ -937,6 +448,9 @@ Q.Tool.define("Q/audio", function (options) {
 	userGesture: function(action, promise){
 		var tool = this;
 		var pieTool = tool.$pieElement.clone().removeAttr("id");
+
+		//throw new Q.Error("User gesture required!");
+		return console.warn("User gesture required!");
 
 		// we have promise on mobile device which need user gesture
 		promise.then(function() {
@@ -973,24 +487,79 @@ Q.Tool.define("Q/audio", function (options) {
 			});
 		});
 	},
-	setCurrentPosition: function (position) {
-		var adapterName = this.adapterNameFromUrl();
-		this.adapters[adapterName].setCurrentPosition(position);
-	},
 	/**
-	 * Audio player
-	 * @method player
+	 * Render recorder as Q/pie view
+	 * @method recorder
 	 */
-	player: function(){
+	recorder: function() {
 		var tool = this;
 		var state = this.state;
-		tool.pieBox = $(tool.element);
-		tool.$playerBox = $("<div>").appendTo(tool.pieBox);
+		var $toolElement = $(this.element);
+
+		$toolElement.addClass("Q_audio_recorder");
+
+		Q.Template.render("Q/audio/recorder", {
+			maxRecordTime: tool.formatRecordTime(state.maxRecordTime),
+			text: tool.text
+		}, function (err, html) {
+			$toolElement.html(html);
+
+			tool.implementNativeAudio();
+
+			$(".Q_audio_pie", $toolElement).append(Q.Tool.setUpElement('div', 'Q/pie')).activate(function () {
+				var pieTool = tool.pieTool = this;
+				tool.$pieBox = $toolElement;
+				var $recordTimeElement = $(".Q_audio_record_recordTime", $toolElement);
+
+				// set Q/pie tool handler
+				$toolElement.on(Q.Pointer.fastclick, function(event){
+					event.stopPropagation();
+					event.preventDefault();
+
+					var recorderState = state.recorderState;
+
+					// click on arc border - means change play position
+					if(!pieTool.state.clickPos.inside && recorderState === "playing"){
+						tool.audioElement.currentTime = tool.audioElement.duration / 100 * pieTool.state.clickPos.anglePercent;
+						return;
+					}
+
+					// set pie state
+					if(!recorderState) recorderState = "init";
+					else if(recorderState === "ready") recorderState = "recording";
+					else if(recorderState === "recording") recorderState = "recorded";
+					else if(recorderState === "playing") recorderState = "play";
+					else if(recorderState === "play") recorderState = "playing";
+
+					tool.recorderStateChange(recorderState);
+				});
+
+				// discard recorded track
+				$("button[name=discard]", $toolElement).on(Q.Pointer.click, function (e) {
+					tool.recorderStateChange("init");
+				});
+
+				// change tracking time during playing
+				state.onPlaying.set(function () {
+					$recordTimeElement.html(tool.formatRecordTime(state.duration - state.currentPosition) + '/' + tool.formatRecordTime(state.duration));
+				}, tool.id + "_recorder");
+			});
+		});
+	},
+	/**
+	 * Render player as Q/pie view
+	 * @method player
+	 */
+	player: function() {
+		var tool = this;
+		var state = this.state;
+		tool.$pieBox = $(tool.element);
+		tool.$playerBox = $("<div>").appendTo(tool.$pieBox);
 
 		tool.implement(false);
 
 		// set player state if it didn't set yet
-		tool.pieBox.attr("data-state", tool.pieBox.attr("data-state") || "play");
+		tool.$pieBox.attr("data-state", "play");
 
 		// set up the pie options
 		var pieOptions = state.pie;
@@ -1016,7 +585,8 @@ Q.Tool.define("Q/audio", function (options) {
 					return;
 				}
 
-				if (tool.pieBox.attr("data-state") === "play") {
+				// swap play/pause
+				if (tool.$pieBox.attr("data-state") === "play") {
 					tool.play();
 				} else {
 					tool.pause();
@@ -1036,9 +606,12 @@ Q.Tool.define("Q/audio", function (options) {
 			return tool.audio;
 		}
 
+		var $recordTimeElement = $(".Q_audio_record_recordTime", this.element);
+
 		tool.audio = new Q.Audio(state.url);
 		tool.audioElement = tool.audio.audio;
-		$(tool.audioElement).appendTo(tool.element);
+		tool.$audioElement = $(tool.audioElement);
+		tool.$audioElement.appendTo(tool.element);
 
 		tool.audioElement.addEventListener('play', function () {
 			state.currentPosition = Math.trunc(this.currentTime * 1000);
@@ -1080,13 +653,13 @@ Q.Tool.define("Q/audio", function (options) {
 			this.currentTime = 0;
 
 			// set box attribute to apply valid styles
-			tool.pieBox.attr("data-state", "play");
+			tool.$pieBox.attr("data-state", "play");
 
-			if(state.action === "player"){
+			if(state.action === "player") {
 
-			}else if(state.action === "recorder"){
+			} else if (state.action === "recorder") {
 				tool.recorderStateChange("play");
-				state.recordTimeElement.html(tool.formatRecordTime(duration));
+				$recordTimeElement.length && $recordTimeElement.html(tool.formatRecordTime(duration));
 			}
 
 			var time = Math.trunc(this.currentTime * 1000);
@@ -1186,7 +759,7 @@ Q.Tool.define("Q/audio", function (options) {
 	 * Format record time elapsed
 	 * @method formatRecordTime
 	 * @param {int} time Time elapsed in miliseconds
-	 * @param {string} [foramt="classic"] "classic": "01h:21m:32s", "short": "01:21:32"
+	 * @param {string} [format="classic"] "classic": "01h:21m:32s", "short": "01:21:32"
 	 * @return {string} formatted string
 	 */
 	formatRecordTime: function(time, format) {
@@ -1208,79 +781,11 @@ Q.Tool.define("Q/audio", function (options) {
 		}
 
 		return res;
-	},
-	/**
-	 * Convert bytes integer to human readable string
-	 * @method humanFileSize
-	 */
-	humanFileSize: function humanFileSize(bytes, si=false, dp=1) {
-		var thresh = si ? 1000 : 1024;
-
-		if (Math.abs(bytes) < thresh) {
-			return bytes + ' B';
-		}
-
-		/*var units = si
-			? ['kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
-			: ['KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
-		*/
-		var units = ['kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-		var u = -1;
-		var r = 10**dp;
-
-		do {
-			bytes /= thresh;
-			++u;
-		} while (Math.round(Math.abs(bytes) * r) / r >= thresh && u < units.length - 1);
-
-
-		return bytes.toFixed(dp) + ' ' + units[u];
 	}
 });
 
-Q.Template.set('Q/audio/composer',
-	'<div class="Q_audio_start" data-composer="{{isComposer}}"><form>'
-	+ '  <div class="Q_tabbing_tabs">'
-	+ '  	<div data-name="edit" class="Q_tabbing_tab">{{text.edit}}</div>'
-	+ '  	<div data-name="record" class="Q_tabbing_tab">{{text.record}}</div>'
-	+ '  	<div data-name="upload" class="Q_tabbing_tab">{{text.upload}}</div>'
-	+ '  	<div data-name="link" class="Q_tabbing_tab">{{text.link}}</div>'
-	+ '  </div>'
-	+ '  <div class="Q_tabbing_container">'
-	+ '	 	<div class="Q_tabbing_item" data-content="edit">'
-	+ '			<div class="Q_audio_player"></div>'
-	+ '			<div class="Q_audio_composer_preview"></div>'
-	+ '			<div class="Q_audio_composer_clip"></div>'
-	+ '  	</div>'
-	+ '	 	<div class="Q_tabbing_item" data-content="record">'
-	+ '    		<div class="Q_audio_pie"></div>'
-	+ '    		<div class="Q_audio_record_label"><p class="Q_audio_record_recordText">{{text.record}}</p><p><span class="Q_audio_record_recordTime">{{maxRecordTime}}</span> <span class="Q_audio_record_elapsed">{{text.maximum}}</span></p></div>'
-	+ '    		<div class="Q_audio_allow">{{textAllowMicrophoneAccess}}</div>'
-	+ '			<div class="Q_audio_composer_preview"></div>'
-	+ '			<div class="Q_audio_composer_clip"></div>'
-	+ '  	</div>'
-	+ '  	<div class="Q_tabbing_item" data-content="upload">'
-	+ '	   		<input type="file" accept="audio/*" class="Q_audio_file" />'
-	+ '			<div class="Q_audio_composer_upload_limit">{{uploadLimit}}</div>'
-	+ '			<div class="Q_audio_composer_preview"></div>'
-	+ '			<div class="Q_audio_composer_clip"></div>'
-	+ '		</div>'
-	+ '  	<div class="Q_tabbing_item" data-content="link">'
-	+ '	   		<label>'
-	+ '				<input name="url" placeholder="{{text.seturl}}" type="url">'
-	+ '				<button name="setClip" type="button" class="Q_button">{{text.setClip}}</button>'
-	+ '			</label>'
-	+ '			<div class="Q_audio_composer_preview"></div>'
-	+ '			<div class="Q_audio_composer_clip"></div>'
-	+ '		</div>'
-	+ '  </div>'
-	+ '  <div class="Q_audio_record_submit"><button name="save" class="Q_button" type="button">{{text.save}}</button><button name="reset" type="reset" class="Q_button">{{text.reset}}</button></div>'
-	+ '  <div class="Q_audio_encoding">{{text.encoding}}</div>'
-	+ '</form></div>'
-);
-
 Q.Template.set('Q/audio/general',
-	'<div class="Q_audio_general">' +
+'<div class="Q_audio_general">' +
 	'	<div class="Q_audio_general_play" data-state="play"></div>' +
 	'	<div class="Q_audio_general_time"><span class="Q_audio_general_timeCurrent">0</span>/<span class="Q_audio_general_timeTotal">{{duration}}</span></div>' +
 	'	<div class="Q_audio_general_track">' +
@@ -1296,4 +801,15 @@ Q.Template.set('Q/audio/soundcloud',
 	'<iframe id="sc-widget" name="soundcloud" width="100%" height="166" allow=autoplay scrolling="no" frameborder="no" src="{{url}}"></iframe>'
 );
 
+Q.Template.set('Q/audio/recorder',
+	'  <div class="Q_audio_record">'
+	+ '    <div class="Q_audio_pie"></div>'
+	+ '    <div class="Q_audio_record_label"><p class="Q_audio_record_recordText">{{text.record}}</p><p><span class="Q_audio_record_recordTime">{{maxRecordTime}}</span> <span class="Q_audio_record_elapsed">{{text.maximum}}</span></p></div>'
+	+ '    <div class="Q_audio_allow">{{text.allowMicrophoneAccess}}</div>'
+	+ '</div>'
+	//+ '<div class="Q_audio_actions">'
+	//+ '    <button name="discard">{{textDiscard}}</button>'
+	//+ '</div>'
+	+ '<div class="Q_audio_encoding">{{text.encoding}}</div>'
+);
 })(window, Q, jQuery);

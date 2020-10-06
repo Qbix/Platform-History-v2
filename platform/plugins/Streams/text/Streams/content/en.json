@@ -320,17 +320,17 @@
         "Streams\/audio": {
             "displayType": "Audio Clip",
             "description": "audio clip",
-            "newItem": "New Audio"
+            "newItem": "Add Audio"
         },
         "Streams\/video": {
             "displayType": "Video Clip",
             "description": "video clip",
-            "newItem": "New Video"
+            "newItem": "Add Video"
         },
         "Streams\/pdf": {
             "displayType": "PDF document",
             "description": "PDF document",
-            "newItem": "New PDF"
+            "newItem": "Add PDF"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -367,5 +367,20 @@
         "Save": "Save",
         "Delete": "Delete",
         "Submenu": "Submenu"
+    },
+    "audio": {
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Set Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     }
 }
