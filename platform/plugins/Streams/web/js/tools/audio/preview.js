@@ -165,7 +165,8 @@
 
 				if (!audioUrl) {
 					Q.Tool.remove(tool.element, true, true);
-					throw new Q.Error("Streams/audio/preview: URL undefined");
+					console.warn("Streams/audio/preview: URL undefined");
+					//throw new Q.Error("Streams/audio/preview: URL undefined");
 				}
 
 				$te.removeClass('Q_uploading');
@@ -672,7 +673,7 @@
 	);
 
 	Q.Template.set('Streams/audio/composer',
-		'<div class="Streams_audio_start" data-composer="{{isComposer}}"><form>'
+		'<div class="Streams_audio_composer" data-composer="{{isComposer}}"><form>'
 		+ '  <div class="Q_tabbing_tabs">'
 		+ '  	<div data-name="edit" class="Q_tabbing_tab">{{text.edit}}</div>'
 		+ '  	<div data-name="record" class="Q_tabbing_tab">{{text.record}}</div>'
@@ -703,7 +704,7 @@
 		+ '			<div class="Streams_audio_composer_clip"></div>'
 		+ '		</div>'
 		+ '  </div>'
-		+ '  <div class="Streams_audio_record_submit"><button name="save" class="Q_button" type="button">{{text.save}}</button><button name="reset" type="reset" class="Q_button">{{text.reset}}</button></div>'
+		+ '  <div class="Streams_audio_composer_submit"><button name="save" class="Q_button" type="button">{{text.save}}</button><button name="reset" type="reset" class="Q_button">{{text.reset}}</button></div>'
 		+ '  <div class="Streams_audio_encoding">{{text.encoding}}</div>'
 		+ '</form></div>'
 	);

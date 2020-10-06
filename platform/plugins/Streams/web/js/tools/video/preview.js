@@ -29,27 +29,13 @@
 				if (!this.testWriteLevel('edit')) {
 					return;
 				}
+				
+				state.isComposer = false;
 
 				ps.actions.actions.edit = function () {
-					var fields = {
-						fileUploadUHandler: Q.action("Streams/Stream"),
-						publisherId: ps.publisherId,
-						streamName: ps.streamName,
-						action: "composer",
-						onSuccess: function () {
-							Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, null, {messages: true});
-						}
-					};
-
-					// if Q/video tool already created, use one
-					if (state.qVideo) {
-						state.qVideo.composer();
-					} else {
-						// activate new Q/video tool and save to state
-						$("<div>").tool("Q/video", fields).activate(function () {
-							state.qVideo = this;
-						});
-					}
+					tool.composer(function () {
+						Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, null, {messages: true});
+					});
 				};
 			});
 		}
@@ -97,21 +83,7 @@
 					return ;
 				}
 
-				var fields = {
-					fileUploadUHandler: Q.action("Streams/Stream"),
-					action: "composer",
-					onSuccess: _proceed
-				};
-
-				// if Q/video tool already created, use one
-				if (state.qVideo) {
-					state.qVideo.composer();
-				} else {
-					// activate new Q/video tool and save to state
-					$("<div>").tool("Q/video", fields).activate(function () {
-						state.qVideo = this;
-					});
-				}
+				tool.composer(_proceed);
 
 				return false;
 			};
@@ -128,15 +100,21 @@
 			});
 		}
 
-		ps.onRefresh.add(tool.refresh.bind(tool));
+		var p = Q.pipe(['stylesheet', 'text'], function (params, subjects) {
+			tool.text = params.text[1].video;
+
+			ps.onRefresh.add(tool.refresh.bind(tool), tool);
+		});
+
+		Q.Text.get('Streams/content', p.fill('text'));
 
 		// add styles
-		Q.addStylesheet('{{Q}}/css/video.css');
-		Q.addStylesheet('{{Streams}}/css/tools/previews.css');
+		Q.addStylesheet("{{Streams}}/css/tools/previews.css", p.fill('stylesheet'), { slotName: 'Streams' });
 	},
 
 	{
 		url: null,
+		isComposer: true,
 		inplace: {
 			field: 'title',
 			inplaceType: 'text'
@@ -149,7 +127,7 @@
 		 * @method refresh
 		 * @param {Streams_Stream} stream
 		 */
-		refresh: function (stream, onLoad) {
+		refresh: function (stream) {
 			var tool = this;
 			var state = tool.state;
 			var ps = tool.preview.state;
@@ -178,7 +156,9 @@
 			}
 
 			if (!videoUrl) {
-				throw new Q.Error("Streams/video/preview: URL undefined");
+				Q.Tool.remove(tool.element, true, true);
+				console.warn("Streams/video/preview: URL undefined");
+				//throw new Q.Error("Streams/video/preview: URL undefined");
 			}
 
 			$te.removeClass('Q_uploading');
@@ -199,6 +179,422 @@
 
 				Q.activate($te);
 			});
+		},
+		/**
+		 * Start video composer dialog
+		 * @method composer
+		 * @param {function} callback Calling when data prepared to create or save stream
+		 */
+		composer: function (callback) {
+			var tool = this;
+			var state = this.state;
+
+			/**
+			 * Process composer submitting
+			 * @method _process
+			 */
+			var _process = function() {
+				var _error = function (err) {
+					state.mainDialog.removeClass('Q_uploading');
+					Q.alert(err);
+				};
+
+				var action = state.mainDialog.attr('data-action');
+				var $currentContent = $(".Q_tabbing_container [data-content=" + action + "]", state.mainDialog);
+				if (!$currentContent.length) {
+					return _error("No action selected");
+				}
+				var clipTool = Q.Tool.from($(".Q_clip_tool", $currentContent), "Q/clip");
+				var clipStart = clipTool ? clipTool.getPosition("start") : null;
+				var clipEnd = clipTool ? clipTool.getPosition("end") : null;
+
+				state.mainDialog.addClass('Q_uploading');
+
+				if (action === "link") {
+					// url defined
+					var url = $("input[name=url]", $currentContent).val();
+					if (!url) {
+						return _error("Link not found");
+					}
+
+					Q.req('Websites/scrape', ['result'], function (err, response) {
+						var msg = Q.firstErrorMessage(err, response && response.errors);
+						if (msg) {
+							Q.Dialogs.pop();
+							return console.warn("Q/video: " + msg);
+						}
+
+						var siteData = response.slots.result;
+
+						var params = {
+							title: siteData.title,
+							content: siteData.description,
+							icon: siteData.iconBig,
+							attributes: {
+								host: siteData.host,
+								iconSmall: siteData.iconSmall,
+								url: url,
+								'Q.file.url': "",
+								'file.url': "",
+								clipStart: clipStart,
+								clipEnd: clipEnd
+							}
+						};
+
+						// edit stream
+						if (tool.stream) {
+							Q.each(params, function (name, value) {
+								tool.stream.pendingFields[name] = value;
+							});
+							tool.stream.save({
+								onSave: function () {
+									Q.handle(callback, tool, [params]);
+									Q.Dialogs.pop();
+								}
+							});
+						} else {
+							// new stream
+							Q.handle(callback, tool, [params]);
+							Q.Dialogs.pop();
+						}
+					}, {
+						method: 'post',
+						fields: {
+							url: url
+						}
+					});
+				} else if (action === "upload") {
+					var $file = $("input[type=file].Streams_video_file", $currentContent);
+					// state.file set in recorder OR html file element
+					var file = ($file.length && $file[0].files[0]) || null;
+
+					// check file size
+					if (file.size && file.size >= parseInt(Q.info.maxUploadSize)) {
+						return Q.alert(tool.text.errorFileSize.interpolate({size: Q.humanReadable(Q.info.maxUploadSize, {bytes: true})}));
+					}
+
+					var reader = new FileReader();
+					reader.onload = function (event) {
+						var params = {
+							title: file.name,
+							attributes: {
+								clipStart: clipStart,
+								clipEnd: clipEnd
+							},
+							file: {
+								data: this.result,
+								video: true
+							}
+						};
+
+						if(state.publisherId && state.streamName) { // if edit existent stream
+							params.publisherId = state.publisherId;
+							params.streamName = state.streamName;
+							params.file.name = file.name;
+
+							// for some reason attributes with null values doesn't send to backend in request
+							// so specially update attributes
+							if (Q.Streams.isStream(tool.stream)) {
+								tool.stream.setAttribute("clipStart", clipStart);
+								tool.stream.setAttribute("clipEnd", clipEnd);
+								tool.stream.save();
+							}
+
+							if (window.FileReader) {
+								Q.request(state.fileUploadUHandler, 'data', function (err, res) {
+									//console.log(this);
+									var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(res && res.errors);
+									if (msg) {
+										if(state.mainDialog) state.mainDialog.removeClass('Q_uploading');
+										return Q.handle([state.onError, state.onFinish], tool, [msg]);
+									}
+
+									// by default set src equal to first element of the response
+									var key = Q.firstKey(res.slots.data, {nonEmpty: true});
+
+									Q.handle(callback, tool, [res.slots.data, key, file || null]);
+									Q.Dialogs.pop();
+								}, {
+									fields: params,
+									method: "put"
+								});
+							} else {
+								Q.alert('FileReader undefined');
+								/*
+                                delete params.data;
+                                state.input.wrap('<form />', {
+                                    method: "put",
+                                    action: Q.url(state.fileUploadUHandler, params)
+                                }).parent().submit();
+                                state.input.unwrap();
+                                */
+							}
+						} else { // if new stream
+							Q.handle(callback, tool, [params]);
+							Q.Dialogs.pop();
+						}
+					};
+					reader.readAsDataURL(file);
+				} else if (action === "edit") {
+					// edit stream attributes
+					if (!Q.Streams.isStream(tool.stream)) {
+						return _error("Stream not found");
+					}
+					tool.stream.setAttribute("clipStart", clipStart);
+					tool.stream.setAttribute("clipEnd", clipEnd);
+					tool.stream.save({
+						onSave: function () {
+							Q.handle(callback, tool);
+							Q.Dialogs.pop();
+						}
+					});
+				} else {
+					_error("Incorrect action " + action);
+				}
+			};
+
+			Q.Dialogs.push({
+				className: 'Streams_dialog_video',
+				title: "Video",
+				template: {
+					name: 'Streams/video/composer',
+					fields: {
+						isComposer: state.isComposer,
+						text: tool.text,
+						uploadLimit: tool.text.uploadLimit.interpolate({size: Q.humanReadable(Q.info.maxUploadSize, {bytes: true})})
+					}
+				},
+				destroyOnClose: true,
+				onActivate : function (mainDialog) {
+					state.mainDialog = mainDialog;
+
+					// if stream defined, render player
+					if (tool.stream) {
+						var $videoElement = $(".Q_tabbing_container [data-content=edit] .Streams_video_composer_preview", mainDialog);
+						var $clipElement = $(".Q_tabbing_container [data-content=edit] .Streams_video_composer_clip", mainDialog);
+
+						$videoElement.tool("Q/video", {
+							url: tool.stream.fileUrl(),
+							clipStart: tool.stream.getAttribute('clipStart'),
+							clipEnd: tool.stream.getAttribute('clipEnd')
+						}).activate(function () {
+							var toolPreview = this;
+							var clipStart = tool.stream.getAttribute('clipStart');
+							var clipEnd = tool.stream.getAttribute('clipEnd');
+
+							$clipElement.tool("Q/clip", {
+								startPosition: clipStart,
+								startPositionDisplay: clipStart.convertTimeToString(),
+								endPosition: clipEnd,
+								endPositionDisplay: clipEnd.convertTimeToString(),
+								onStart: function (setNewPosition) {
+									if (setNewPosition) {
+										var time = toolPreview.state.currentPosition;
+
+										toolPreview.state.clipStart = time;
+										this.setPosition(time, time.toString().convertTimeToString(), "start");
+									} else {
+										toolPreview.state.clipStart = null;
+									}
+								},
+								onEnd: function (setNewPosition) {
+									if (setNewPosition) {
+										var time = toolPreview.state.currentPosition;
+
+										toolPreview.state.clipEnd = time;
+										this.setPosition(time, time.toString().convertTimeToString(), "end");
+									} else {
+										toolPreview.state.clipEnd = null;
+									}
+								}
+							}).activate(function () {
+								toolPreview.clipTool = this;
+							});
+						});
+					}
+
+					// save by URL
+					$("button[name=save]", mainDialog).on(Q.Pointer.click, function (e) {
+						e.preventDefault();
+						e.stopPropagation();
+
+						mainDialog.addClass('Q_uploading');
+
+						var _error = function (err) {
+							mainDialog.removeClass('Q_uploading');
+							Q.alert(err);
+						};
+						var action = mainDialog.attr("data-action");
+
+						if (action === 'upload') {
+							if (!$("input[type=file]", mainDialog).val()) {
+								return _error(tool.text.invalidFile);
+							}
+						} else if (action === 'link') {
+							var url = $("input[name=url]", mainDialog).val();
+							if (!url.matchTypes('url').length) {
+								return _error(tool.text.invalidURL);
+							}
+						} else if (state.isComposer) {
+							return _error(tool.text.errorNoSource);
+						}
+
+						Q.handle(_process, mainDialog);
+					});
+
+					var _selectTab = function () {
+						var $this = $(this);
+						var action = $this.attr('data-name');
+
+						mainDialog.attr("data-action", action);
+						$this.addClass('Q_current').siblings().removeClass('Q_current');
+						$(".Q_tabbing_container .Q_tabbing_item[data-content=" + action + "]", mainDialog).addClass('Q_current').siblings().removeClass('Q_current');
+
+						// pause all exists players
+						Q.each($(".Q_video_tool", mainDialog), function () {
+							var videoTool = Q.Tool.from(this, "Q/video");
+
+							if (videoTool) {
+								videoTool.pause();
+							}
+						});
+					};
+
+					// custom tabs implementation
+					$(".Q_tabbing_tabs .Q_tabbing_tab", mainDialog).on(Q.Pointer.fastclick, _selectTab);
+
+					// Reset button
+					$("button[name=reset]", mainDialog).on(Q.Pointer.click, function (e) {
+						state.dataBlob = undefined;
+
+						Q.each($(".Q_tabbing_container .Q_tabbing_item[data-content=link], .Q_tabbing_container .Q_tabbing_item[data-content=upload]", mainDialog), function (i, content) {
+							var videoTool = Q.Tool.from($(".Streams_video_composer_preview", content)[0], "Q/video");
+							var clipTool = Q.Tool.from($(".Streams_video_composer_clip", content)[0], "Q/clip");
+
+							// remove Q/video and Q/clip tools from upload and link sections
+							Q.each([videoTool, clipTool], function (i, resetTool) {
+								if (Q.typeOf(resetTool) !== 'Q.Tool') {
+									return;
+								}
+
+								Q.Tool.remove(resetTool.element, true);
+								resetTool.element.innerHTML = '';
+							});
+						});
+					});
+
+					// set clip start/end for upload
+					$("input[type=file]", mainDialog).on('change', function () {
+						var $videoElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=upload] .Streams_video_composer_preview", mainDialog);
+						var $clipElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=upload] .Streams_video_composer_clip", mainDialog);
+						var url = URL.createObjectURL(this.files[0]);
+						var toolPreview = Q.Tool.from($videoElement, "Q/video");
+
+						// check file size
+						if (this.files[0].size >= parseInt(Q.info.maxUploadSize)) {
+							this.value = null;
+							return Q.alert(tool.text.errorFileSize.interpolate({size: Q.humanReadable(Q.info.maxUploadSize, {bytes: true})}));
+						}
+
+						// if video tool exists, clear url object
+						if (toolPreview) {
+							URL.revokeObjectURL(toolPreview.state.url);
+						}
+
+						Q.Tool.remove($videoElement[0], true);
+						Q.Tool.remove($clipElement[0], true);
+
+						$videoElement.empty();
+						$clipElement.empty();
+
+						$videoElement.tool("Q/video", {
+							url: url
+						}).activate(function () {
+							toolPreview = this;
+							$clipElement.tool("Q/clip", {
+								onStart: function (setNewPosition) {
+									if (setNewPosition) {
+										var time = toolPreview.state.currentPosition;
+
+										toolPreview.state.clipStart = time;
+										this.setPosition(time, time.toString().convertTimeToString(), "start");
+									} else {
+										toolPreview.state.clipStart = null;
+									}
+								},
+								onEnd: function (setNewPosition) {
+									if (setNewPosition) {
+										var time = toolPreview.state.currentPosition;
+
+										toolPreview.state.clipEnd = time;
+										this.setPosition(time, time.toString().convertTimeToString(), "end");
+									} else {
+										toolPreview.state.clipEnd = null;
+									}
+								}
+							}).activate(function () {
+								toolPreview.clipTool = this;
+							});
+						});
+					});
+
+					// set clip start/end for link
+					$("button[name=setClip]", mainDialog).on(Q.Pointer.fastclick, function () {
+						var $videoElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=link] .Streams_video_composer_preview", mainDialog);
+						var $clipElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=link] .Streams_video_composer_clip", mainDialog);
+						var url = $("input[name=url]", mainDialog).val();
+						if (!url.matchTypes('url').length) {
+							return Q.alert(tool.text.invalidURL);
+						}
+
+						Q.Tool.remove($videoElement[0], true);
+						Q.Tool.remove($clipElement[0], true);
+
+						$videoElement.empty();
+						$clipElement.empty();
+
+						$videoElement.tool("Q/video", {
+							action: "implement",
+							url: url
+						}).activate(function () {
+							var toolPreview = this;
+							$clipElement.tool("Q/clip", {
+								onStart: function (setNewPosition) {
+									if (setNewPosition) {
+										var time = toolPreview.state.currentPosition;
+
+										toolPreview.state.clipStart = time;
+										this.setPosition(time, time.toString().convertTimeToString(), "start");
+									} else {
+										toolPreview.state.clipStart = null;
+									}
+								},
+								onEnd: function (setNewPosition) {
+									if (setNewPosition) {
+										var time = toolPreview.state.currentPosition;
+
+										toolPreview.state.clipEnd = time;
+										this.setPosition(time, time.toString().convertTimeToString(), "end");
+									} else {
+										toolPreview.state.clipEnd = null;
+									}
+								}
+							}).activate(function () {
+								toolPreview.clipTool = this;
+							});
+						});
+					});
+
+					Q.handle(_selectTab, $(".Q_tabbing_tabs .Q_tabbing_tab:visible:first", mainDialog)[0]);
+				},
+				beforeClose: function(mainDialog) {
+					// clear recorder stream when dialog close.
+					// In this case every time dialog opened - user should allow to use microphone
+					if(state.recorder && state.recorder.stream) {
+						state.recorder.clearStream();
+					}
+				}
+			});
 		}
 	}
 );
@@ -210,6 +606,38 @@ Q.Template.set('Streams/video/preview/view',
 	'		<h3 class="Streams_preview_title">{{& inplace}}</h3>' +
 	'	</div>' +
 	'</div>'
+);
+
+Q.Template.set('Streams/video/composer',
+	'<div class="Streams_video_composer" data-composer="{{isComposer}}"><form>'
+	+ '  <div class="Q_tabbing_tabs">'
+	+ '  	<div data-name="edit" class="Q_tabbing_tab">{{text.edit}}</div>'
+	+ '  	<div data-name="upload" class="Q_tabbing_tab">{{text.upload}}</div>'
+	+ '  	<div data-name="link" class="Q_tabbing_tab">{{text.link}}</div>'
+	+ '  </div>'
+	+ '  <div class="Q_tabbing_container">'
+	+ '	 	<div class="Q_tabbing_item" data-content="edit">'
+	+ '			<div class="Streams_video_player"></div>'
+	+ '			<div class="Streams_video_composer_preview"></div>'
+	+ '			<div class="Streams_video_composer_clip"></div>'
+	+ '  	</div>'
+	+ '  	<div class="Q_tabbing_item" data-content="upload">'
+	+ '	   		<input type="file" accept="video/*" class="Streams_video_file" />'
+	+ '			<div class="Streams_video_composer_upload_limit">{{uploadLimit}}</div>'
+	+ '			<div class="Streams_video_composer_preview"></div>'
+	+ '			<div class="Streams_video_composer_clip"></div>'
+	+ '		</div>'
+	+ '  	<div class="Q_tabbing_item" data-content="link">'
+	+ '	   		<label>'
+	+ '				<input name="url" placeholder="{{text.setUrl}}" type="url">'
+	+ '				<button name="setClip" type="button" class="Q_button">{{text.setClip}}</button>'
+	+ '			</label>'
+	+ '			<div class="Streams_video_composer_preview"></div>'
+	+ '			<div class="Streams_video_composer_clip"></div>'
+	+ '		</div>'
+	+ '  </div>'
+	+ '  <div class="Streams_video_composer_submit"><button name="save" class="Q_button" type="button">{{text.save}}</button><button name="reset" type="reset" class="Q_button">{{text.reset}}</button></div>'
+	+ '</form></div>'
 );
 
 })(Q, Q.$, window);

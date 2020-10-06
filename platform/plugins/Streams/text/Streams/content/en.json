@@ -382,5 +382,33 @@
         "errorNoSource": "No audio source",
         "uploadLimit": "Max file size: {{size}}",
         "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+    },
+    "video": {
+        "reset": "Reset",
+        "edit": "Edit",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Set Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+    },
+    "pdf": {
+        "reset": "Reset",
+        "edit": "Edit",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Set Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     }
 }
