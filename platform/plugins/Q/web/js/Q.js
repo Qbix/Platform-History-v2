@@ -2156,6 +2156,30 @@ Q.latest.seen = {};
 Q.latest.max = 10000;
 
 /**
+ * Convert string or number to human readable string
+ * @static
+ * @method humanReadable
+ * @param {String|Integer} value
+ * @param {object} params
+ * @param {string} [params.bytes] If true, convert from bytes to human readable string like "12 KB", "1.5 MB" etc
+ * @return {String} Human readable string
+ */
+Q.humanReadable = function (value, params) {
+	if (Q.getObject("bytes", params)) {
+		value = parseInt(value);
+
+		if (value >= Math.pow(2, 30)) {
+			return Math.ceil(value / Math.pow(2, 30)) + ' GB';
+		} else if (value >= Math.pow(2, 20)) {
+			return Math.ceil(value / Math.pow(2, 20)) + ' MB';
+		} else if (value >= Math.pow(2, 10)) {
+			return Math.ceil(value / Math.pow(2, 10)) + ' KB';
+		} else {
+			return value + ' bytes';
+		}
+	}
+}
+/**
  * Calculates a string key by considering the parameter that was passed,
  * the tool being activated, and the page being activated.
  * These keys can be used in methods of Q.Event, Q.Masks etc.
