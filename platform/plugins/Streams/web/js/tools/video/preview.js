@@ -115,6 +115,7 @@
 	{
 		url: null,
 		isComposer: true,
+		fileUploadUHandler: Q.action("Streams/Stream"),
 		inplace: {
 			field: 'title',
 			inplaceType: 'text'
