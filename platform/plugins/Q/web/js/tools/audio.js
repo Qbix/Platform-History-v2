@@ -13,8 +13,8 @@
  *		recorder  - render audio recorder
  *		player 	  -	render player in Q/pie view (for preview play)
  *	@param {Integer} [options.maxRecordTime=60] max record time for recorder in seconds
- *	@param {Integer} [options.clipStart] if clip defined, start time in seconds
- *	@param {Integer} [options.clipEnd] if clip defined, end time in seconds
+ *	@param {Integer} [options.clipStart] if clip defined, start time in milliseconds
+ *	@param {Integer} [options.clipEnd] if clip defined, end time in milliseconds
  *  @param {String} [options.url] URL of audio source
  *  @param {boolean} [options.autoplay=false] If true - start play on load
  */

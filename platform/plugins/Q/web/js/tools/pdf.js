@@ -9,17 +9,11 @@
  * @class Q pdf
  * @constructor
  * @param {Object} [options] Override various options for this tool
- *  @param {String} [options.url] URL of pdf doc
- *  @param {string} [options.action=composer] What to start on tool activated. Can be "composer" and "implement".
  *  @param {string} [options.url] Source to get pdf from. Can be remote url or "blob:" for local files
- *  @param {string} [options.publisherId] Publisher of Streams/pdf stream
- *  @param {string} [options.streamName] Name of Streams/pdf stream
- *  @param {string} [options.fileUploadUHandler] Handler where to upload file
- *  @param {string} [options.fileUploadUHandler] Handler where to upload file
- *  @param {string} [options.clipStart] Clip start position
- *  @param {string} [options.clipEnd] Clip end position
- *  @param {Q.Event} [options.onSuccess] Call when stream save or upload action successfully ended.
- *  @param {Q.Event} [options.onFinish] Call when stream save or upload action ended.
+ *  @param {string} [options.clipStart] Clip start position in percents
+ *  @param {string} [options.clipEnd] Clip end position in percents
+ *  @param {Q.Event} [options.onSuccess] Call when save or upload action successfully ended.
+ *  @param {Q.Event} [options.onFinish] Call when save or upload action ended.
  *  @param {Q.Event} [options.onError] Call when error occur.
  *  @param {Q.Event} [options.onScroll] Call when pdf scrolled.
  *  @param {Q.Event} [options.onRender] Call when pdf rendered.

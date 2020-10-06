@@ -10,6 +10,8 @@
  * @constructor
  * @param {Object} [options] Override various options for this tool
  *  @param {String} [options.url] URL of video source
+ *  @param {string} [options.clipStart] Clip start position in milliseconds
+ *  @param {string} [options.clipEnd] Clip end position in milliseconds
  *  @param {boolean} [options.autoplay=false] If true - start play on load
  */
 Q.Tool.define("Q/video", function (options) {
