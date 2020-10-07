@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS `{{prefix}}webpage` (
   `url` varchar(191) NOT NULL,
   `cache` varchar(255) DEFAULT NULL,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedTime` timestamp DEFAULT NULL,
+  `updatedTime` timestamp NULL DEFAULT NULL,
   `results` text DEFAULT NULL,
   KEY CACHE (`cache`),
   PRIMARY KEY (`url`)
