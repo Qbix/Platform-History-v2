@@ -65,10 +65,6 @@ Q.Tool.define("Q/columns", function(options) {
 		$toolElement.addClass("Q_columns_stretchFirstColumn");
 	}
 
-	if (state.animateWidth) {
-		$toolElement.addClass("Q_columns_animateWidth");
-	}
-
 	Q.addStylesheet('{{Q}}/css/columns.css', function () {
 		if (state.title === undefined) {
 			state.title = $('<div />').append('<img class="Q_columns_loading" src="'
@@ -119,9 +115,14 @@ Q.Tool.define("Q/columns", function(options) {
 		}, tool);
 
 		tool.refresh();
-		if (0 && Q.info.isMobile) {
-			tool.startAdjustingPositions();
-		}
+		// if (Q.info.isMobile) {
+		// 	tool.startAdjustingPositions();
+		// }
+		setTimeout(function () {
+			if (state.animateWidth) {
+				$toolElement.addClass("Q_columns_animateWidth");
+			}
+		}, 100);
 		Q.onLayout(tool).set(function () {
 			tool.refresh();
 		}, tool);
