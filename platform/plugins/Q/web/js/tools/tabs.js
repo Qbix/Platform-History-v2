@@ -60,9 +60,9 @@
 				}
 			}
 
-			var refresh = function () {
+			var refresh = Q.debounce(function () {
 				tool.refresh();
-			};
+			});
 			Q.onPopState.set(refresh, tool);
 			Q.Page.onPush.set(refresh, tool);
 
@@ -76,6 +76,7 @@
 				Q.onLayout(tool).add(Q.throttle(function () {
 					tool.refresh();
 				}, 100, true), tool);
+				tool.refresh();
 			}, 100);
 			Q.handle(state.onActivate, tool, [state.tab, tool.getName(state.tab)]);
 		},
