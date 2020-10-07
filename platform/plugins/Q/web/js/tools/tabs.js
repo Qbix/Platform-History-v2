@@ -73,7 +73,7 @@
 
 			tool.$tabs = tool.$('.Q_tabs_tab').css('visibility', 'hidden');
 			setTimeout(function () {
-				Q.onLayout(tool).set(Q.throttle(function () {
+				Q.onLayout(tool).add(Q.throttle(function () {
 					tool.refresh();
 				}, 100, true), tool);
 			}, 100);
