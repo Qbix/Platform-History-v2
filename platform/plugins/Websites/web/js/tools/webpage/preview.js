@@ -31,16 +31,11 @@
 			$toolElement.append('<img src="' + Q.info.imgLoading + '">');
 		}
 
-		// wait when styles and texts loaded and then run refresh
-		var pipe = Q.pipe(['styles', 'text'], function () {
-				if (previewState) {
-					previewState.onRefresh.add(tool.refresh.bind(tool));
-				} else {
-					tool.refresh();
-				}
-		});
+		if (previewState.creatable) {
+			if (previewState.creatable.clickable) {
+				previewState.creatable.clickable.preventDefault = false;
+			}
 
-		if (previewState) {
 			if (state.url) {
 				previewState.creatable.options = Q.extend({}, previewState.creatable.options, {
 					skipComposer: true
@@ -49,10 +44,27 @@
 
 			// rewrite Streams/preview composer
 			previewState.creatable.preprocess = function (_proceed) {
-				tool.refresh();
+				// if url specified, just call light refresh
+				if (state.url) {
+					tool.scrapeUrl({
+						callback: tool.refreshLight
+					});
+					return ;
+				}
+
+				tool.composer(_proceed);
 				return false;
 			};
 		}
+
+		// wait when styles and texts loaded and then run refresh
+		var pipe = Q.pipe(['styles', 'text'], function () {
+				if (previewState) {
+					previewState.onRefresh.add(tool.refresh.bind(tool));
+				} else {
+					tool.refresh();
+				}
+		});
 
 		// loading styles
 		Q.addStylesheet('{{Websites}}/css/tools/webpage/preview.css', pipe.fill('styles'));
@@ -81,6 +93,7 @@
 		publisherId: null,
 		streamName: null,
 		streamRequired: false,
+		isComposer: true,
 		editable: ['title'],
 		mode: 'document',
 		onInvoke: new Q.Event(),
@@ -89,7 +102,7 @@
 		showDomainOnly: false,
 		showDescription: false,
 		hideIfNoParticipants: false,
-
+		category: null,
 		// light mode params
 		siteData: {},
 		url: null
@@ -129,6 +142,15 @@
 					$te.removeClass('Streams_chat_preview_noParticipants');
 				}
 
+				var icon = webpageStream.getAttribute("iconBig");
+				if (!icon) {
+					icon = webpageStream.fields.icon;
+					if (!icon.match(/\.[a-z]{3,4}$/i)) {
+						icon = webpageStream.iconUrl('80');
+					}
+				}
+
+
 				Q.Template.render('Websites/webpage/preview', {
 					title: state.editable && state.editable.indexOf('title') >= 0
 					? Q.Tool.setUpElementHTML('div', 'Streams/inplace', {
@@ -147,7 +169,7 @@
 						title: (Q.getObject(['fields', 'title'], interestStream) || '').replace('Websites:',''),
 						icon: Q.Streams.isStream(interestStream) ? interestStream.iconUrl(interestStream.getAttribute('iconSize')) : null,
 					},
-					src: webpageStream.iconUrl('80'),
+					src: icon,
 					url: state.url,
 					text: tool.text.webpage
 				}, function (err, html) {
@@ -305,6 +327,7 @@
 		 * Request Websites/scrape for site data
 		 * @method scrapeUrl
 		 * @param {object} params
+		 * @param {string} [params.url] URL to scrape. By default state.url
 		 * @param {boolean} [params.streamRequired=false] If true force to create stream (if not created yet)
 		 * @param {function} [params.callback] Callback called when on response
 		 */
@@ -316,6 +339,7 @@
 
 			var callback = Q.getObject("callback", params);
 			var streamRequired = !!Q.getObject("streamRequired", params);
+			var url = Q.getObject("url", params) || state.url;
 
 			if (streamRequired) {
 				slots = slots.concat(["publisherId", "streamName"]);
@@ -344,7 +368,242 @@
 			}, {
 				method: "post",
 				fields: {
-					url: state.url
+					url: url
+				}
+			});
+		},
+		/**
+		 * Start webpage composer dialog
+		 * @method composer
+		 */
+		composer: function (callback) {
+			var tool = this;
+			var state = this.state;
+
+			/**
+			 * Process composer submitting
+			 * @method _process
+			 */
+			var _process = function () {
+				var _error = function (err) {
+					state.mainDialog.removeClass('Q_uploading');
+					Q.alert(err);
+				};
+
+				var clipTool = Q.Tool.from($(".Q_clip_tool", state.mainDialog), "Q/clip");
+				var clipStart = clipTool ? clipTool.getPosition("start") : null;
+				var clipEnd = clipTool ? clipTool.getPosition("end") : null;
+
+				state.mainDialog.addClass('Q_uploading');
+
+				// url defined
+				var url = $("input[name=url]", state.mainDialog).val();
+				if (!url) {
+					return _error("Link not found");
+				}
+
+				tool.scrapeUrl({
+					url: url,
+					callback: function (result) {
+						Q.Dialogs.pop();
+						Q.handle(callback, tool, [{
+							title: result.title,
+							content: result.description,
+							attributes: {
+								url: url,
+								iconBig: result.iconBig,
+								host: result.host,
+								port: result.port,
+								lang: result.lang
+							}
+						}]);
+					}
+				});
+			};
+
+			// setting clip start position handler
+			var _onStart = function (setNewPosition, toolPreview) {
+				if (setNewPosition) {
+					var position = toolPreview.state.currentPosition;
+
+					toolPreview.state.clipStart = position;
+					this.setPosition(position, position + '%', "start");
+				} else {
+					toolPreview.state.clipStart = null;
+				}
+				toolPreview.stateChanged('clipStart');
+			};
+
+			// setting clip end position handler
+			var _onEnd = function (setNewPosition, toolPreview) {
+				if (setNewPosition) {
+					var contentHeight = ($(toolPreview.element).height() / toolPreview.state.stuffHeight * 100).toPrecision(3);
+					var position = (parseFloat(toolPreview.state.currentPosition) + parseFloat(contentHeight)).toPrecision(3);
+
+					toolPreview.state.clipEnd = position;
+					this.setPosition(position, position + '%', "end");
+				} else {
+					toolPreview.state.clipEnd = null;
+				}
+				toolPreview.stateChanged('clipEnd');
+			};
+
+			Q.Dialogs.push({
+				className: 'Websites_dialog_webpage',
+				title: "Webpage",
+				template: {
+					name: 'Websites/webpage/composer',
+					fields: {
+						isComposer: state.isComposer,
+						text: tool.text.webpage.composer
+					}
+				},
+				onActivate: function (mainDialog) {
+					state.mainDialog = mainDialog;
+
+					// if stream defined, render player
+					if (tool.stream) {
+						var $webpageElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=edit] .Websites_webpage_composer_preview", mainDialog);
+						var $clipElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=edit] .Websites_webpage_composer_clip", mainDialog);
+						var clipStart = tool.stream.getAttribute('clipStart');
+						var clipEnd = tool.stream.getAttribute('clipEnd');
+
+						$webpageElement.tool("Q/website", {
+							clipStart: clipStart,
+							clipEnd: clipEnd,
+							url: tool.getAttribute("url")
+						}).activate(function () {
+							var toolPreview = this;
+
+							$clipElement.tool("Q/clip", {
+								startPosition: clipStart,
+								startPositionDisplay: clipStart + '%',
+								endPosition: clipEnd,
+								endPositionDisplay: clipEnd + '%',
+								onStart: function (setNewPosition) {
+									Q.handle(_onStart, this, [setNewPosition, toolPreview]);
+								},
+								onEnd: function (setNewPosition) {
+									Q.handle(_onEnd, this, [setNewPosition, toolPreview]);
+								}
+							}).activate(function () {
+								toolPreview.clipTool = this;
+							});
+						});
+					}
+
+					// save by URL
+					$("button[name=save]", mainDialog).on(Q.Pointer.click, function (e) {
+						e.preventDefault();
+						e.stopPropagation();
+
+						mainDialog.addClass('Q_uploading');
+
+						var _error = function (err) {
+							mainDialog.removeClass('Q_uploading');
+							Q.alert(err);
+						};
+						var action = mainDialog.attr("data-action");
+
+						if (action === 'link') {
+							var url = $("input[name=url]", mainDialog).val();
+							if (!url.matchTypes('url').length) {
+								return _error(tool.text.webpage.composer.invalidURL);
+							}
+						}
+
+						Q.handle(_process, mainDialog);
+					});
+
+					// custom tabs implementation
+					var _selectTab = function () {
+						var $this = $(this);
+						var action = $this.attr('data-name');
+
+						mainDialog.attr("data-action", action);
+						$this.addClass('Q_current').siblings().removeClass('Q_current');
+						$(".Q_tabbing_container .Q_tabbing_item[data-content=" + action + "]", mainDialog).addClass('Q_current').siblings().removeClass('Q_current');
+					};
+					$(".Q_tabbing_tabs .Q_tabbing_tab", mainDialog).on(Q.Pointer.fastclick, _selectTab);
+
+					// select first visible tab
+					Q.handle(_selectTab, $(".Q_tabbing_tabs .Q_tabbing_tab:visible:first", mainDialog)[0]);
+
+					// hide tabs if there is only one tab
+					$(".Websites_webpage_composer", mainDialog).attr("data-tabs", $(".Q_tabbing_tabs .Q_tabbing_tab:visible", mainDialog).length);
+
+					// Reset button
+					$("button[name=reset]", mainDialog).on(Q.Pointer.click, function (e) {
+						state.dataBlob = undefined;
+
+						Q.each($(".Q_tabbing_container .Q_tabbing_item[data-content=link], .Q_tabbing_container .Q_tabbing_item[data-content=upload]", mainDialog), function (i, content) {
+							var webpageTool = Q.Tool.from($(".Websites_webpage_composer_preview", content)[0], "Q/webpage");
+							var clipTool = Q.Tool.from($(".Websites_webpage_composer_clip", content)[0], "Q/clip");
+
+							if (webpageTool) {
+								$("<div>").addClass('Websites_webpage_composer_preview').insertAfter(webpageTool.element);
+								Q.Tool.remove(webpageTool.element, true, true);
+							}
+
+							if (clipTool) {
+								Q.Tool.remove(clipTool.element, true);
+								clipTool.element.innerHTML = '';
+							}
+						});
+					});
+
+					// set clip start/end for link
+					$("button[name=setClip]", mainDialog).on(Q.Pointer.fastclick, function () {
+						var $button = $(this);
+						$button.addClass("Q_working");
+						var $webpageElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=link] .Websites_webpage_composer_preview", mainDialog);
+						var $clipElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=link] .Websites_webpage_composer_clip", mainDialog);
+						var url = $("input[name=url]", mainDialog).val();
+						if (!url.matchTypes('url').length) {
+							$button.removeClass("Q_working");
+							return Q.alert(tool.text.webpage.composer.invalidURL);
+						}
+
+						Q.Tool.remove($webpageElement[0], true);
+						Q.Tool.remove($clipElement[0], true);
+
+						$webpageElement.empty();
+						$clipElement.empty();
+
+						Q.req("Websites/file", ["result"], function (err, response) {
+							$button.removeClass("Q_working");
+
+							var msg = Q.firstErrorMessage(err, response && response.errors);
+							if (msg) {
+								return console.warn(msg);
+							}
+
+							var result = response.slots.result;
+
+							$webpageElement.tool("Q/webpage", {
+								action: "implement",
+								url: result.destinationUrl
+							}).activate(function () {
+								var toolPreview = this;
+								$clipElement.tool("Q/clip", {
+									onStart: function (setNewPosition) {
+										Q.handle(_onStart, this, [setNewPosition, toolPreview]);
+									},
+									onEnd: function (setNewPosition) {
+										Q.handle(_onEnd, this, [setNewPosition, toolPreview]);
+									}
+								}).activate(function () {
+									toolPreview.clipTool = this;
+								});
+							});
+						}, {
+							method: "post",
+							fields: {url: url}
+						});
+					});
+				},
+				beforeClose: function (mainDialog) {
+
 				}
 			});
 		}
@@ -360,5 +619,29 @@
 		'	<div class="streams_chat_participants"></div>' +
 		'	<div class="streams_chat_unseen"></div>' +
 		'</div>'
+	);
+
+	Q.Template.set('Websites/webpage/composer',
+		'<div class="Websites_webpage_composer" data-composer="{{isComposer}}"><form>'
+		+ '  <div class="Q_tabbing_tabs">'
+		+ '  	<div data-name="edit" class="Q_tabbing_tab">{{text.edit}}</div>'
+		+ '  	<div data-name="link" class="Q_tabbing_tab">{{text.link}}</div>'
+		+ '  </div>'
+		+ '  <div class="Q_tabbing_container">'
+		+ '	 	<div class="Q_tabbing_item" data-content="edit">'
+		+ '			<div class="Websites_webpage_composer_preview"></div>'
+		+ '			<div class="Websites_webpage_composer_clip"></div>'
+		+ '  	</div>'
+		+ '  	<div class="Q_tabbing_item" data-content="link">'
+		+ '	   		<label>'
+		+ '				<input name="url" placeholder="{{text.setUrl}}" type="url">'
+		//+ '				<button name="setClip" type="button" class="Q_button">{{text.setClip}}</button>'
+		+ '			</label>'
+		+ '			<div class="Websites_webpage_composer_preview"></div>'
+		+ '			<div class="Websites_webpage_composer_clip"></div>'
+		+ '		</div>'
+		+ '  </div>'
+		+ '  <div class="Websites_webpage_composer_submit"><button name="save" class="Q_button" type="button">{{text.save}}</button><button name="reset" type="reset" class="Q_button">{{text.reset}}</button></div>'
+		+ '</form></div>'
 	);
 })(Q, Q.$, window);

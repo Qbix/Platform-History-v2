@@ -191,6 +191,7 @@
 }
 /* ------------------- */
 
+/* <Streams_video_preview> */
 .Streams_video_preview_tool .Streams_preview_container {
     white-space: nowrap;
 }
@@ -201,9 +202,9 @@
 .Streams_video_composer .Streams_video_composer_preview {
 	margin: 10px 0;
 }
+/* </Streams_video_preview> */
 
-
-
+/* <Streams_pdf_preview> */
 .Streams_pdf_preview_tool .Streams_preview_container {
     white-space: nowrap;
 }
@@ -211,3 +212,4 @@
 .Streams_pdf_preview_tool .Streams_preview_container .Streams_preview_contents {
     width: calc(100% - 40px);
 }
+/* </Streams_pdf_preview> */

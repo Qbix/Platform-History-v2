@@ -69,6 +69,7 @@
 		{
 			fraction: 0,
 			size: 80,
+			defaultSize: 80,
 			bgImage: "",
 			color: 'red',
 			borderSize: 5, // in px
@@ -147,13 +148,14 @@
 			 */
 			positionParent: function(){
 				var tool = this;
+				var state = this.state;
 
 				// if size already set in params - exit
 				if(tool.state.size) return;
 
 				var parent = $(tool.element).parent();
-				var parentW = parent.width();
-				var parentH = parent.height();
+				var parentW = parent.width() || state.defaultSize;
+				var parentH = parent.height() || state.defaultSize;
 
 				tool.state.size = parentW > parentH ? parentH : parentW;
 			},
