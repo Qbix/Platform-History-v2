@@ -150,7 +150,7 @@
 				}
 			},
 			"Websites/webpage": {
-				"create": false, /* only PHP scrape method can create it */
+				"create": true, /* only PHP scrape method can create it */
 				"edit": ["title", "content"], /* cannot edit everything */
 				"participating": ["Websites/participating/webpages"],
 				"relatedFrom": {

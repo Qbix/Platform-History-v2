@@ -24,7 +24,14 @@
             "BrowseTheWeb": "Browse",
             "WriteToStartConversation": "Write your thoughts to start off the conversation",
             "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation"
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Set Clip",
+            "invalidURL": "Invalid URL"
         },
         "FileTooLarge": "File too large for caching. Max file size {{size}}",
         "InvalidPDF": "File is not a valid PDF"
