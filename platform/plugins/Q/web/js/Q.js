@@ -5448,10 +5448,10 @@ function Q_Cache_set(cache, key, obj, special) {
 		if (cache.localStorage && Q.Frames && !Q.Frames.isMain()) {
 			return false; // do nothing, this isn't the main frame
 		}
-		var serialized = JSON.stringify(obj);
 		var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
 		var id = cache.name + (special===true ? "\t" : "\t\t") + key;
 		try {
+			var serialized = JSON.stringify(obj);
 			storage.setItem(id, serialized);
 		} catch (e) {
 			if (!special) {
