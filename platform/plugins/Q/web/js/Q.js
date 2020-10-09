@@ -5450,7 +5450,21 @@ function Q_Cache_set(cache, key, obj, special) {
 		}
 		var serialized = JSON.stringify(obj);
 		var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
-		storage.setItem(cache.name + (special===true ? "\t" : "\t\t") + key, serialized);
+		var id = cache.name + (special===true ? "\t" : "\t\t") + key;
+		try {
+			storage.setItem(id, serialized);
+		} catch (e) {
+			for (var i=0; i<10; ++i) {
+				try {
+					// try to remove up to 10 items it may be a problem with space
+					cache.remove(cache.earliest());
+					storage.setItem(id, serialized);
+					break;
+				} catch (e) {
+					
+				}
+			}
+		}
 	}
 }
 function Q_Cache_remove(cache, key, special) {
@@ -5544,15 +5558,7 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 		prev: (options && options.prev) ? options.prev : (existing ? existing.prev : this.latest()),
 		next: (options && options.next) ? options.next : (existing ? existing.next : null)
 	};
-	try {
-		Q_Cache_set(this, key, value);
-	} catch (e) {
-		for (var i=0; i<10; ++i) {
-			// try to remove up to 10 items it may be a problem with space
-			this.remove(this.earliest());
-			Q_Cache_set(this, key, value);
-		}
-	}
+	Q_Cache_set(this, key, value);
 	if (!existing || (!options || !options.dontTouch)) {
 		if ((previous = Q_Cache_get(this, value.prev))) {
 			previous.next = key;
