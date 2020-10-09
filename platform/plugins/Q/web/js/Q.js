@@ -5450,21 +5450,7 @@ function Q_Cache_set(cache, key, obj, special) {
 		}
 		var serialized = JSON.stringify(obj);
 		var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
-		var id = cache.name + (special===true ? "\t" : "\t\t") + key;
-		try {
-			storage.setItem(id, serialized);
-		} catch (e) {
-			for (var i=0; i<10; ++i) {
-				try {
-					// try to remove up to 10 items it may be a problem with space
-					cache.remove(cache.earliest());
-					storage.setItem(id, serialized);
-					break;
-				} catch (e) {
-					
-				}
-			}
-		}
+		storage.setItem(cache.name + (special===true ? "\t" : "\t\t") + key, serialized);
 	}
 }
 function Q_Cache_remove(cache, key, special) {
@@ -5558,7 +5544,20 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 		prev: (options && options.prev) ? options.prev : (existing ? existing.prev : this.latest()),
 		next: (options && options.next) ? options.next : (existing ? existing.next : null)
 	};
-	Q_Cache_set(this, key, value);
+	try {
+		Q_Cache_set(this, key, value);
+	} catch (e) {
+		for (var i=0; i<10; ++i) {
+			try {
+				// try to remove up to 10 items it may be a problem with space
+				this.remove(this.earliest());
+				Q_Cache_set(this, key, value);
+				break;
+			} catch (e) {
+				
+			}
+		}
+	}
 	if (!existing || (!options || !options.dontTouch)) {
 		if ((previous = Q_Cache_get(this, value.prev))) {
 			previous.next = key;
@@ -5603,7 +5602,20 @@ Cp.get = function _Q_Cache_prototype_get(key, options) {
 		Q_Cache_set(this, key, existing);
 		if ((previous = Q_Cache_get(this, existing.prev))) {
 			previous.next = key;
-			Q_Cache_set(this, existing.prev, previous);
+			try {
+				Q_Cache_set(this, existing.prev, previous);
+			} catch (e) {
+				for (var i=0; i<10; ++i) {
+					try {
+						// try to remove up to 10 items it may be a problem with space
+						this.remove(this.earliest());
+						Q_Cache_set(this, existing.prev, previous);
+						break;
+					} catch (e) {
+				
+					}
+				}
+			}
 		}
 		this.latest(key);
 	}
