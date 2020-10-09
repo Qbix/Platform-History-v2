@@ -5544,7 +5544,15 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 		prev: (options && options.prev) ? options.prev : (existing ? existing.prev : this.latest()),
 		next: (options && options.next) ? options.next : (existing ? existing.next : null)
 	};
-	Q_Cache_set(this, key, value);
+	try {
+		Q_Cache_set(this, key, value);
+	} catch (e) {
+		for (var i=0; i<10; ++i) {
+			// try to remove up to 10 items it may be a problem with space
+			this.remove(this.earliest());
+			Q_Cache_set(this, key, value);
+		}
+	}
 	if (!existing || (!options || !options.dontTouch)) {
 		if ((previous = Q_Cache_get(this, value.prev))) {
 			previous.next = key;
