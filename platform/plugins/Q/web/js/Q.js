@@ -5459,7 +5459,7 @@ function Q_Cache_set(cache, key, obj, special) {
 					try {
 						// try to remove up to 10 items it may be a problem with space
 						cache.remove(cache.earliest());
-						Q_Cache_set(cache, key, obj);
+						storage.setItem(id, serialized);
 						break;
 					} catch (e) {
 		
