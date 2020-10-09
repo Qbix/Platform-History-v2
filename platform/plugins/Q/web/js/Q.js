@@ -5458,8 +5458,9 @@ function Q_Cache_set(cache, key, obj, special) {
 				for (var i=0; i<10; ++i) {
 					try {
 						// try to remove up to 10 items it may be a problem with space
-						cache.remove(cache.earliest());
-						storage.setItem(id, serialized);
+						if (cache.remove(cache.earliest())) {
+							storage.setItem(id, serialized);
+						}
 						break;
 					} catch (e) {
 		
@@ -5624,7 +5625,7 @@ Cp.remove = function _Q_Cache_prototype_remove(key) {
 	if (typeof key !== 'string') {
 		key = Q.Cache.key(key);
 	}
-	existing = this.get(key, true);
+	existing = this.get(key, {dontTouch: true});
 	if (!existing) {
 		return false;
 	}
