@@ -583,14 +583,22 @@ Q.Tool.define({
 		// does nothing
 	},
 	"Streams/audio/preview" : "{{Streams}}/js/tools/audio/preview.js",
+	"Streams/audio/chat" : "{{Streams}}/js/tools/audio/chatPlugin.js",
 	"Streams/video/preview" : "{{Streams}}/js/tools/video/preview.js",
+	"Streams/video/chat" : "{{Streams}}/js/tools/video/chatPlugin.js",
 	"Streams/pdf/preview" : "{{Streams}}/js/tools/pdf/preview.js",
+	"Streams/pdf/chat" : "{{Streams}}/js/tools/pdf/chatPlugin.js",
 	"Streams/album/preview": "{{Streams}}/js/tools/album/preview.js",
 	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js"
 });
 
 Q.Tool.onActivate("Streams/chat").set(function () {
-	$(this.element).tool('Streams/mentions/chat').activate();
+	$(this.element)
+	.tool('Streams/mentions/chat')
+	.tool('Streams/audio/chat')
+	.tool('Streams/video/chat')
+	.tool('Streams/pdf/chat')
+	.activate();
 }, 'Streams');
 
 /**

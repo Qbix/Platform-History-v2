@@ -39,6 +39,7 @@
  *   @param {Q.Event} [options.onError] Event for when an error occurs, and the error is passed
  *   @param {Q.Event} [options.onClose] Event for when chat stream closed
  *   @param {Q.Event} [options.onMessageRender] Event for when message rendered
+ *   @param {Q.Event} [options.onContextualCreated] Event for when contextual menu for addons rendered
  *   @param {Q.Event} [options.beforePost] Execute before message post (before calling Q.Message.post). Pass fields as argument.
  */
 Q.Tool.define('Streams/chat', function(options) {		
@@ -158,6 +159,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		this.remove();
 	}),
 	onMessageRender: new Q.Event(),
+	onContextualCreated: new Q.Event(),
 	beforePost: new Q.Event(),
 	preprocess: [],
 	templates: {
@@ -311,33 +313,43 @@ Q.Tool.define('Streams/chat', function(options) {
 			function(error, html){
 				if (error) { return error; }
 				$te.html(html).activate();
-				
-				$te.find('.Streams_chat_subscription')
-				.attr({
-					'data-touchlabel': touchlabel,
-					'data-subscribed': subscribed
-				})
-				.on(Q.Pointer.fastclick, function () {
-					var $this = $(this);
-					var status = $this.attr('data-subscribed');
-					var callback = function (err, participant) {
-						if (err) {
-							return console.warn(err);
+
+				Q.addScript("{{Q}}/js/contextual.js", function () {
+					$te.find(".Streams_chat_addons").plugin('Q/contextual', {
+						className: "Streams_chat_addons",
+						onConstruct: function (contextual) {
+							tool.addonsContextual = contextual;
+							Q.handle(state.onContextualCreated, tool, [contextual]);
 						}
+					});
 
-						$this.attr({
-							'data-touchlabel': participant.subscribed === 'yes' ? tool.text.Subscribed : tool.text.Unsubscribed,
-							'data-subscribed': participant.subscribed === 'yes'
-						});
-					};
+					tool.addMenuItem({
+						title: touchlabel,
+						className: "Streams_chat_subscription",
+						attributes: {
+							"data-subscribed": subscribed
+						},
+						handler: function () {
+							var $this = $(this);
+							var status = $this.attr('data-subscribed');
+							var callback = function (err, participant) {
+								if (err) {
+									return console.warn(err);
+								}
 
-					$this.attr('data-subscribed', 'loading');
+								$(".Streams_chat_addon_title", $this).html(participant.subscribed === 'yes' ? tool.text.Subscribed : tool.text.Unsubscribed);
+								$this.attr({'data-subscribed': participant.subscribed === 'yes'});
+							};
 
-					if (status === 'true') {
-						state.stream.unsubscribe(callback);
-					} else {
-						state.stream.subscribe(callback);
-					}
+							$this.attr('data-subscribed', 'loading');
+
+							if (status === 'true') {
+								state.stream.unsubscribe(callback);
+							} else {
+								state.stream.subscribe(callback);
+							}
+						}
+					});
 				});
 
 				$te.find('.Streams_chat_call').attr('data-touchlabel', tool.text.RealTimeCall);
@@ -357,7 +369,40 @@ Q.Tool.define('Streams/chat', function(options) {
 			state.templates.main
 		);
 	},
+	/**
+	 * Add element to addons contextual menu
+	 * @method addMenuItem
+	 * @param {object} params
+	 * @param {string} params.title Element text
+	 * @param {string} [params.icon] Element icon url
+	 * @param {string} [params.className] Element class
+	 * @param {object} [params.attributes] Element attributes
+	 * @param {function} [params.handler] click event handler
+	 * @return {jQuery} Result element
+	 */
+	addMenuItem: function (params) {
+		var $element = $("<li class='Streams_chat_addon'></li>");
 
+		$("<div class='Streams_chat_addon_icon'><img src='" + Q.url(params.icon) + "' /></div>").appendTo($element);
+
+		$("<span class='Streams_chat_addon_title'>" + params.title + "</span>").appendTo($element);
+
+		if (params.className) {
+			$element.addClass(params.className);
+		}
+
+		if (Q.typeOf(params.attributes) === "object") {
+			$element.attr(params.attributes);
+		}
+
+		if (Q.typeOf(params.handler) === "function") {
+			$element.on(Q.Pointer.fastclick, params.handler);
+		}
+
+		this.state.onContextualCreated.add(function (contextual) {
+			$("ul.Q_listing", contextual).append($element);
+		});
+	},
 	renderMessages: function(messages, callback){
 		var tool = this;
 		var state = this.state;
@@ -1118,7 +1163,7 @@ Q.Template.set('Streams/chat/main',
 		'<!-- messages -->'+
 	'</div>'+
 	'<form class="Streams_chat_composer" action="" method="post">'+
-		'<button class="Streams_chat_subscription"></button>' +
+		'<div class="Streams_chat_addons">+</div>' +
 		'{{#if textarea}}' +
 			'<textarea placeholder="{{placeholder}}"></textarea>'+
 		'{{else}}' +
