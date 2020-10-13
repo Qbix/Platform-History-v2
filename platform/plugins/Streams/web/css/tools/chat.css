@@ -124,12 +124,12 @@
 	border: 1px solid #ccc;
 	cursor: pointer;
 	font-family: Arial;
-	width: 40px;
-	height: 40px;
+	width: 30px;
+	height: 30px;
 	color: #3f76e6;
 	background-color: #fff;
 	font-size: 45px;
-	line-height: 40px;
+	line-height: 30px;
 	text-align: center;
 }
 .Streams_chat_addons .Q_listing_wrapper .Streams_chat_addon,

@@ -10,8 +10,8 @@
 	 */
 	Q.Tool.define("Streams/audio/chat", ["Streams/chat"], function (options) {
 		var tool = this;
-		var state = this.state;
 		tool.chatTool = Q.Tool.from(this.element, "Streams/chat");
+		var userId = Q.Users.loggedInUserId();
 
 		// preload throbber
 		$('<img/>')[0].src = Q.info.imgLoading;
@@ -41,7 +41,29 @@
 				title: tool.text.types["Streams/audio"].newItem,
 				icon: "{{Streams}}/img/icons/Streams/audio/40.png",
 				handler: function () {
-					Q.alert("Streams/audio/chat");
+					$("<div>").tool("Streams/preview", {
+						publisherId: userId
+					}).tool("Streams/audio/preview").activate(function () {
+						var audioPreview = Q.Tool.from(this.element, "Streams/audio/preview");
+
+						audioPreview.composer(function (params) {
+							var fields = Q.extend({
+								publisherId: userId,
+								type: "Streams/audio"
+							}, 10, params);
+							Q.Streams.create(fields, function Streams_preview_afterCreate(err, stream, extra) {
+									if (err) {
+										return err;
+									}
+
+									console.log(this);
+							}, {
+								publisherId: tool.chatTool.state.publisherId,
+								streamName: tool.chatTool.state.streamName,
+								type: "Streams/audio"
+							});
+						});
+					});
 				}
 			});
 		});

@@ -10,8 +10,8 @@
 	 */
 	Q.Tool.define("Streams/pdf/chat", ["Streams/chat"], function (options) {
 		var tool = this;
-		var state = this.state;
 		tool.chatTool = Q.Tool.from(this.element, "Streams/chat");
+		var userId = Q.Users.loggedInUserId();
 
 		// preload throbber
 		$('<img/>')[0].src = Q.info.imgLoading;
@@ -41,7 +41,29 @@
 				title: tool.text.types["Streams/pdf"].newItem,
 				icon: "{{Streams}}/img/icons/files/pdf/40.png",
 				handler: function () {
-					Q.alert("Streams/pdf/chat");
+					$("<div>").tool("Streams/preview", {
+						publisherId: userId
+					}).tool("Streams/pdf/preview").activate(function () {
+						var pdfPreview = Q.Tool.from(this.element, "Streams/pdf/preview");
+
+						pdfPreview.composer(function (params) {
+							var fields = Q.extend({
+								publisherId: userId,
+								type: "Streams/pdf"
+							}, 10, params);
+							Q.Streams.create(fields, function Streams_preview_afterCreate(err, stream, extra) {
+								if (err) {
+									return err;
+								}
+
+								console.log(this);
+							}, {
+								publisherId: tool.chatTool.state.publisherId,
+								streamName: tool.chatTool.state.streamName,
+								type: "Streams/pdf"
+							});
+						});
+					});
 				}
 			});
 		});

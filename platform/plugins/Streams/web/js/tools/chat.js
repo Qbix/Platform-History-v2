@@ -317,6 +317,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				Q.addScript("{{Q}}/js/contextual.js", function () {
 					$te.find(".Streams_chat_addons").plugin('Q/contextual', {
 						className: "Streams_chat_addons",
+						defaultHandler: "return",
 						onConstruct: function (contextual) {
 							tool.addonsContextual = contextual;
 							Q.handle(state.onContextualCreated, tool, [contextual]);
@@ -327,10 +328,10 @@ Q.Tool.define('Streams/chat', function(options) {
 						title: touchlabel,
 						className: "Streams_chat_subscription",
 						attributes: {
-							"data-subscribed": subscribed
+							"data-subscribed": subscribed,
+							"data-hide": false
 						},
-						handler: function () {
-							var $this = $(this);
+						handler: function ($this) {
 							var status = $this.attr('data-subscribed');
 							var callback = function (err, participant) {
 								if (err) {
@@ -348,6 +349,8 @@ Q.Tool.define('Streams/chat', function(options) {
 							} else {
 								state.stream.subscribe(callback);
 							}
+
+							return false;
 						}
 					});
 				});
@@ -396,7 +399,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		}
 
 		if (Q.typeOf(params.handler) === "function") {
-			$element.on(Q.Pointer.fastclick, params.handler);
+			$element.data("handler", params.handler);
 		}
 
 		this.state.onContextualCreated.add(function (contextual) {
@@ -724,20 +727,19 @@ Q.Tool.define('Streams/chat', function(options) {
 			tool.renderNotification(Q.first(messages));
 			tool.$('.Streams_chat_noMessages').remove();
 			var $messages = tool.$('.Streams_chat_messages');
-			var $div = $('<div />').tool(previewToolName, {
+			var fields = {
 				publisherId: instructions.fromPublisherId,
 				streamName: instructions.fromStreamName
-			}).appendTo($messages)
+			};
+			$('<div />').tool("Streams/preview", fields).tool(previewToolName, fields).appendTo($messages)
 			.activate()
 			.click(function () {
 				if (instructions.fromType === 'Streams/webrtc') {
 					tool.startWebRTC();
 					return;
 				}
-				var element = Q.Tool.setUpElement('div', previewToolName, {
-					publisherId: instructions.fromPublisherId,
-					streamName: instructions.fromStreamName
-				});
+				var element = Q.Tool.setUpElement('div', "Streams/preview", fields);
+				element = Q.Tool.setUpElement(element, previewToolName, fields);
 				Q.invoke({
 					title: instructions.fromTitle,
 					content: element
