@@ -678,7 +678,6 @@ abstract class Streams extends Base_Streams
 
 			$names[] = $s->name;
 			$names[] = $s->type."*";
-			$names[] = $s->type."/";
 			$streams3[] = $s;
 		}
 		
@@ -720,7 +719,7 @@ abstract class Streams extends Base_Streams
 						$tail = substr($access->streamName, -1);
 						$head = substr($access->streamName, 0, -1);
 						if ($stream->name !== $access->streamName
-						&& (!in_array($tail, array('*', '/')) || $head !== $stream->type)) {
+						and ($tail !== '*' or $head !== $stream->type)) {
 							continue;
 						}
 						$readLevel = $stream->get('readLevel', 0);
