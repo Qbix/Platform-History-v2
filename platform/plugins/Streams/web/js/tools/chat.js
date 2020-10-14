@@ -430,6 +430,19 @@ Q.Tool.define('Streams/chat', function(options) {
 			if (!byMe) {
 				fields = Q.extend({}, fields, { vote: state.vote });
 			}
+
+			// generate special message for related streams
+			if (fields.type === "Streams/relatedTo") {
+				var $html = tool.renderRelatedStream(fields);
+
+				if ($html) {
+					Q.handle(state.onMessageRender, tool, [fields, $html]);
+					p.fill(ordinal)(null, $html);
+				}
+
+				return;
+			}
+
 			Q.Template.render(
 				'Streams/chat/message/bubble',
 				fields,
@@ -446,7 +459,10 @@ Q.Tool.define('Streams/chat', function(options) {
 		p.add(ordinals, 1, function (params) {
 			var items = {};
 			for (var ordinal in params) {
-				var $element = $(params[ordinal][1]);
+				var $element = params[ordinal][1];
+				if (!($element instanceof jQuery)) {
+					$element = $($element);
+				}
 				$('.Streams_chat_avatar_icon', $element).each(function () {
 					Q.Tool.setUpElement(this, 'Users/avatar', {
 						userId: $(this).attr('data-byUserId'),
@@ -560,7 +576,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		var params = {
 			max  : state.earliest ? state.earliest - 1 : state.stream.fields.messageCount,
 			limit: state.messagesToLoad,
-			type: "Streams/chat/message",
+			type: ["Streams/chat/message", "Streams/relatedTo"],
 			withMessageTotals: ["Streams/chat/message"]
 		};
 		if (params.max - params.limit <= 0) {
@@ -717,33 +733,11 @@ Q.Tool.define('Streams/chat', function(options) {
 		// a new stream was related (including a call)
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/relatedTo')
 		.set(function(stream, message) {
-			var instructions = message.getAllInstructions();
-			var previewToolName = instructions.fromType + '/preview';
-			if (!Q.Tool.defined(previewToolName)) {
-				return;
-			}
 			var messages = tool.prepareMessages(message, 'leave');
 			tool.renderNotification(Q.first(messages));
 			tool.$('.Streams_chat_noMessages').remove();
-			var $messages = tool.$('.Streams_chat_messages');
-			var fields = {
-				publisherId: instructions.fromPublisherId,
-				streamName: instructions.fromStreamName
-			};
-			$('<div />').tool("Streams/preview", fields).tool(previewToolName, fields).appendTo($messages)
-			.activate()
-			.click(function () {
-				if (instructions.fromType === 'Streams/webrtc') {
-					tool.startWebRTC();
-					return;
-				}
-				var element = Q.Tool.setUpElement('div', "Streams/preview", fields);
-				element = Q.Tool.setUpElement(element, previewToolName, fields);
-				Q.invoke({
-					title: instructions.fromTitle,
-					content: element
-				});
-			});
+
+			tool.renderRelatedStream(message).appendTo(tool.$('.Streams_chat_messages')).activate();
 		}, tool);
 
 		// new user left
@@ -948,7 +942,60 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 		});
 	},
+	/**
+	 * Render related stream as chat message
+	 * @method renderRelatedStream
+	 * @param {object} message
+	 */
+	renderRelatedStream: function (message) {
+		var tool = this;
 
+		var instructions = message.getAllInstructions();
+		var previewToolName = instructions.fromType + '/preview';
+		if (!Q.Tool.defined(previewToolName)) {
+			return console.warn("tool " + previewToolName + " not found");
+		}
+
+		var fields = {
+			publisherId: instructions.fromPublisherId,
+			streamName: instructions.fromStreamName
+		};
+
+		return $('<div />').tool("Streams/preview", fields).tool(previewToolName, fields).click(function () {
+			if (instructions.fromType === 'Streams/webrtc') {
+				tool.startWebRTC();
+				return;
+			}
+
+			// possible tool names like ["Streams/audio", "Q/audio", "Streams/audio/preview"]
+			var possibleToolNames = [instructions.fromType, instructions.fromType.replace(/(.*)\//, "Q/"), previewToolName];
+			for (var toolName of possibleToolNames) {
+				if (Q.Tool.defined(toolName)) {
+					break;
+				}
+			}
+
+			var element = "div";
+			if (toolName.endsWith("/preview")) {
+				element = Q.Tool.setUpElement(element, "Streams/preview", fields);
+			}
+
+			Q.Streams.get(fields.publisherId, fields.streamName, function (err) {
+				if (err) {
+					return console.warn("stream not found");
+				}
+
+				fields = Q.extend(fields, this.getAllAttributes());
+				fields.url = this.fileUrl();
+
+				element = Q.Tool.setUpElement(element, toolName, fields);
+				Q.invoke({
+					title: instructions.fromTitle,
+					content: element
+				});
+			});
+		});
+	},
 	getOrdinal: function(action, ordinal){
 		if (ordinal) {
 			ordinal = 'data-ordinal='+ordinal;

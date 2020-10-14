@@ -781,6 +781,7 @@ var _Streams_batchFunction_options = {
  *   @param {String} [related.publisherId] the id of whoever is publishing the related stream
  *   @param {String} [related.streamName] the name of the related stream
  *   @param {Mixed} [related.type] the type of the relation
+ *   @param {Mixed} [related.weight] the type of the relation
  * @param {Object} [options] Any extra options involved in creating the stream
  *   @param {Object} [options.fields] Used to override any other fields passed in the request
  *   @param {Object} [options.streamName] Overrides fields.name . You can set a specific stream name from Streams/possibleUserStreams config

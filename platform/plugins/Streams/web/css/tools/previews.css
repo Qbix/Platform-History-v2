@@ -162,7 +162,7 @@
 .Streams_dialog_video .Streams_video_composer .Streams_video_composer_submit button,
 .Streams_dialog_pdf .Streams_pdf_composer .Streams_pdf_composer_submit button {
 	display: inline-block;
-	margin: 0 2%;
+	width: 100%;
 }
 .Streams_dialog_audio button,
 .Streams_dialog_audio input,
