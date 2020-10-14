@@ -317,7 +317,6 @@ Q.Tool.define('Streams/chat', function(options) {
 				Q.addScript("{{Q}}/js/contextual.js", function () {
 					$te.find(".Streams_chat_addons").plugin('Q/contextual', {
 						className: "Streams_chat_addons",
-						defaultHandler: "return",
 						onConstruct: function (contextual) {
 							tool.addonsContextual = contextual;
 							Q.handle(state.onContextualCreated, tool, [contextual]);

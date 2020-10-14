@@ -118,6 +118,7 @@
 }
 .Streams_chat_tool .Streams_chat_addons {
 	position: absolute;
+	overflow: hidden;
 	left: 0;
 	bottom: 0;
 	border-radius: 5px;
