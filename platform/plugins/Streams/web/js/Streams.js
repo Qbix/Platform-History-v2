@@ -583,14 +583,22 @@ Q.Tool.define({
 		// does nothing
 	},
 	"Streams/audio/preview" : "{{Streams}}/js/tools/audio/preview.js",
+	"Streams/audio/chat" : "{{Streams}}/js/tools/audio/chatPlugin.js",
 	"Streams/video/preview" : "{{Streams}}/js/tools/video/preview.js",
+	"Streams/video/chat" : "{{Streams}}/js/tools/video/chatPlugin.js",
 	"Streams/pdf/preview" : "{{Streams}}/js/tools/pdf/preview.js",
+	"Streams/pdf/chat" : "{{Streams}}/js/tools/pdf/chatPlugin.js",
 	"Streams/album/preview": "{{Streams}}/js/tools/album/preview.js",
 	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js"
 });
 
 Q.Tool.onActivate("Streams/chat").set(function () {
-	$(this.element).tool('Streams/mentions/chat').activate();
+	$(this.element)
+	.tool('Streams/mentions/chat')
+	.tool('Streams/audio/chat')
+	.tool('Streams/video/chat')
+	.tool('Streams/pdf/chat')
+	.activate();
 }, 'Streams');
 
 /**
@@ -773,6 +781,7 @@ var _Streams_batchFunction_options = {
  *   @param {String} [related.publisherId] the id of whoever is publishing the related stream
  *   @param {String} [related.streamName] the name of the related stream
  *   @param {Mixed} [related.type] the type of the relation
+ *   @param {Mixed} [related.weight] the type of the relation
  * @param {Object} [options] Any extra options involved in creating the stream
  *   @param {Object} [options.fields] Used to override any other fields passed in the request
  *   @param {Object} [options.streamName] Overrides fields.name . You can set a specific stream name from Streams/possibleUserStreams config

@@ -31,6 +31,7 @@
 				}
 				
 				state.isComposer = false;
+				tool.stream = this;
 
 				ps.actions.actions.edit = function () {
 					tool.composer(function () {
@@ -165,14 +166,17 @@
 			$te.removeClass('Q_uploading');
 
 			var icon = stream.fields.icon;
+			var iconCustom = true;
 			if (!icon.matchTypes('url').length || !icon.match(/\.[png|jpg|gif]/g)) {
 				icon = stream.iconUrl(40);
+				iconCustom = false;
 			}
 
 			// render a template
 			Q.Template.render('Streams/video/preview/view', {
 				inplace: inplace,
-				icon: icon
+				icon: icon,
+				iconCustom: iconCustom
 			}, function (err, html) {
 				if (err) return;
 
@@ -208,6 +212,11 @@
 				var clipTool = Q.Tool.from($(".Q_clip_tool", $currentContent), "Q/clip");
 				var clipStart = clipTool ? clipTool.getPosition("start") : null;
 				var clipEnd = clipTool ? clipTool.getPosition("end") : null;
+
+				var title = $("input[name=title]", $currentContent);
+				title = title.length ? title.val() : null;
+				var content = $("textarea[name=content]", $currentContent);
+				content = content.length ? content.val() : null;
 
 				state.mainDialog.addClass('Q_uploading');
 
@@ -341,6 +350,9 @@
 					if (!Q.Streams.isStream(tool.stream)) {
 						return _error("Stream not found");
 					}
+
+					tool.stream.pendingFields.title = title;
+					tool.stream.pendingFields.content = content;
 					tool.stream.setAttribute("clipStart", clipStart);
 					tool.stream.setAttribute("clipEnd", clipEnd);
 					tool.stream.save({
@@ -360,6 +372,8 @@
 				template: {
 					name: 'Streams/video/composer',
 					fields: {
+						title: tool.stream && tool.stream.fields.title,
+						content: tool.stream && tool.stream.fields.content,
 						isComposer: state.isComposer,
 						text: tool.text,
 						uploadLimit: tool.text.uploadLimit.interpolate({size: Q.humanReadable(Q.info.maxUploadSize, {bytes: true})})
@@ -380,14 +394,14 @@
 							clipEnd: tool.stream.getAttribute('clipEnd')
 						}).activate(function () {
 							var toolPreview = this;
-							var clipStart = tool.stream.getAttribute('clipStart');
-							var clipEnd = tool.stream.getAttribute('clipEnd');
+							var clipStart = tool.stream.getAttribute('clipStart') || null;
+							var clipEnd = tool.stream.getAttribute('clipEnd') || null;
 
 							$clipElement.tool("Q/clip", {
 								startPosition: clipStart,
-								startPositionDisplay: clipStart.convertTimeToString(),
+								startPositionDisplay: clipStart ? clipStart.convertTimeToString() : null,
 								endPosition: clipEnd,
-								endPositionDisplay: clipEnd.convertTimeToString(),
+								endPositionDisplay: clipEnd ? clipEnd.convertTimeToString() : null,
 								onStart: function (setNewPosition) {
 									if (setNewPosition) {
 										var time = toolPreview.state.currentPosition;
@@ -603,6 +617,9 @@
 Q.Template.set('Streams/video/preview/view',
 	'<div class="Streams_preview_container Streams_preview_view Q_clearfix">' +
 	'	<img alt="icon" class="Streams_preview_icon Q_imagepicker" src="{{icon}}">' +
+	'	{{#if iconCustom}}' +
+	'	<div class="Streams_video_preview_icon"></div>' +
+	'	{{/if}}' +
 	'	<div class="Streams_preview_contents">' +
 	'		<h3 class="Streams_preview_title">{{& inplace}}</h3>' +
 	'	</div>' +
@@ -618,7 +635,8 @@ Q.Template.set('Streams/video/composer',
 	+ '  </div>'
 	+ '  <div class="Q_tabbing_container">'
 	+ '	 	<div class="Q_tabbing_item" data-content="edit">'
-	+ '			<div class="Streams_video_player"></div>'
+	+ '			<input name="title" value="{{title}}">'
+	+ '			<textarea name="content">{{content}}</textarea>'
 	+ '			<div class="Streams_video_composer_preview"></div>'
 	+ '			<div class="Streams_video_composer_clip"></div>'
 	+ '  	</div>'

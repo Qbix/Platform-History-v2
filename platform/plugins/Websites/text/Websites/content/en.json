@@ -30,7 +30,7 @@
             "link": "Link",
             "setUrl": "Set URL",
             "save": "Save",
-            "setClip": "Set Clip",
+            "setClip": "Cut Out Clip",
             "invalidURL": "Invalid URL"
         },
         "FileTooLarge": "File too large for caching. Max file size {{size}}",
