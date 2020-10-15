@@ -31,7 +31,7 @@
 			$toolElement.append('<img src="' + Q.info.imgLoading + '">');
 		}
 
-		if (previewState.creatable) {
+		if (Q.getObject("creatable", previewState)) {
 			if (previewState.creatable.clickable) {
 				previewState.creatable.clickable.preventDefault = false;
 			}
