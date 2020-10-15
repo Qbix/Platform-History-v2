@@ -659,7 +659,7 @@ Q.Tool.define("Q/audio", function (options) {
 			this.currentTime = 0;
 
 			// set box attribute to apply valid styles
-			tool.$pieBox.attr("data-state", "play");
+			tool.$pieBox && tool.$pieBox.attr("data-state", "play");
 
 			if(state.action === "player") {
 
