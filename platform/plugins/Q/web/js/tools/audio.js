@@ -128,7 +128,13 @@ Q.Tool.define("Q/audio", function (options) {
 				showPlayer = Q.typeOf(showPlayer) === "boolean" ? showPlayer : true;
 				tool.implementNativeAudio();
 
+				var justOnce = true;
 				tool.audioElement.addEventListener("canplay", function(){
+					if (!justOnce) {
+						return;
+					}
+
+					justOnce = false;
 					if (showPlayer) {
 						tool.renderPlayer();
 					}
@@ -147,7 +153,7 @@ Q.Tool.define("Q/audio", function (options) {
 				if (tool.$audioElement.is(":visible")) {
 					tool.audioElement.play();
 				} else { // else use Q.Audio class method
-					tool.audio.play(tool.audioElement.currentTime, tool.audioElement.duration);
+					tool.audio.play(tool.audioElement.currentTime);
 				}
 			},
 			pause: function () {
@@ -248,8 +254,8 @@ Q.Tool.define("Q/audio", function (options) {
 		}
 		// clipStart handler
 		if (state.clipEnd && state.currentPosition > state.clipEnd) {
-			tool.setCurrentPosition(state.clipEnd);
 			tool.pause();
+			tool.setCurrentPosition(state.clipEnd);
 		}
 	},
 	/**
@@ -647,7 +653,7 @@ Q.Tool.define("Q/audio", function (options) {
 			if(state.playIntervalID) { clearInterval(state.playIntervalID); state.playIntervalID = false; }
 
 			// Q/pie tool reset position
-			tool.pieTool.initPos();
+			tool.pieTool && tool.pieTool.initPos();
 
 			// set audio element to start
 			this.currentTime = 0;
