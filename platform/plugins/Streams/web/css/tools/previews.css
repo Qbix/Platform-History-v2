@@ -172,6 +172,12 @@
 .Streams_dialog_pdf input{
 	height: 40px;
 }
+.Streams_dialog_audio input,
+.Streams_dialog_video input,
+.Streams_dialog_pdf input{
+	height: 40px;
+	width: 60%;
+}
 .Streams_dialog_audio .Streams_audio_composer_submit button[name=reset],
 .Streams_dialog_video .Streams_video_composer_submit button[name=reset],
 .Streams_dialog_pdf .Streams_pdf_composer_submit button[name=reset] {
@@ -201,6 +207,18 @@
 }
 .Streams_video_composer .Streams_video_composer_preview {
 	margin: 10px 0;
+}
+.Streams_video_preview_tool .Streams_video_preview_icon {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 50px;
+	height: 50px;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: 80%;
+	background-image: url(../../img/translucent_play.png);
+	opacity: 0.6;
 }
 /* </Streams_video_preview> */
 

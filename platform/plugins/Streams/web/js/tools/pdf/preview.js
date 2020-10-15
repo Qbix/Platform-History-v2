@@ -604,7 +604,7 @@ Q.Template.set('Streams/pdf/composer',
 	+ '		</div>'
 	+ '  	<div class="Q_tabbing_item" data-content="link">'
 	+ '	   		<label>'
-	+ '				<input name="url" placeholder="{{text.seturl}}" type="url">'
+	+ '				<input name="url" placeholder="{{text.setUrl}}" type="url">'
 	+ '				<button name="setClip" type="button" class="Q_button">{{text.setClip}}</button>'
 	+ '			</label>'
 	+ '			<div class="Streams_pdf_composer_preview"></div>'

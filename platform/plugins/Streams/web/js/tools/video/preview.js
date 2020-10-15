@@ -165,14 +165,17 @@
 			$te.removeClass('Q_uploading');
 
 			var icon = stream.fields.icon;
+			var iconCustom = true;
 			if (!icon.matchTypes('url').length || !icon.match(/\.[png|jpg|gif]/g)) {
 				icon = stream.iconUrl(40);
+				iconCustom = false;
 			}
 
 			// render a template
 			Q.Template.render('Streams/video/preview/view', {
 				inplace: inplace,
-				icon: icon
+				icon: icon,
+				iconCustom: iconCustom
 			}, function (err, html) {
 				if (err) return;
 
@@ -603,6 +606,9 @@
 Q.Template.set('Streams/video/preview/view',
 	'<div class="Streams_preview_container Streams_preview_view Q_clearfix">' +
 	'	<img alt="icon" class="Streams_preview_icon Q_imagepicker" src="{{icon}}">' +
+	'	{{#if iconCustom}}' +
+	'	<div class="Streams_video_preview_icon"></div>' +
+	'	{{/if}}' +
 	'	<div class="Streams_preview_contents">' +
 	'		<h3 class="Streams_preview_title">{{& inplace}}</h3>' +
 	'	</div>' +
