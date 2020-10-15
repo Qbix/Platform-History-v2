@@ -16,7 +16,7 @@
 		// preload throbber
 		$('<img/>')[0].src = Q.info.imgLoading;
 
-		Q.addStylesheet('{{Streams}}/css/tools/videoChatPlugin.css');
+		Q.addStylesheet('{{Streams}}/css/tools/previews.css');
 
 		// on before message post
 		tool.chatTool.state.beforePost.set(function (fields) {
@@ -51,7 +51,12 @@
 								publisherId: userId,
 								type: "Streams/video"
 							}, 10, params);
+
+							var $dummy = $("<div class='Streams_preview_dummy'>").appendTo(tool.chatTool.$('.Streams_chat_messages'));
+
 							Q.Streams.create(fields, function Streams_preview_afterCreate(err, stream, extra) {
+								$dummy.remove();
+
 								if (err) {
 									return err;
 								}

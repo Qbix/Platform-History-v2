@@ -194,6 +194,12 @@
 	display: none;
 }
 
+.Streams_preview_dummy {
+	height: 50px;
+	background-position: left center;
+	background-repeat: no-repeat;
+	background-image: url(../../../Q/img/throbbers/loading.gif);
+}
 
 /* Promise play dialog */
 .Streams_audio_preview_dialog_promisePlay.Q_overlay { width: auto; }

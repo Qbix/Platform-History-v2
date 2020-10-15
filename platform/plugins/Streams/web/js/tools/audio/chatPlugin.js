@@ -16,7 +16,7 @@
 		// preload throbber
 		$('<img/>')[0].src = Q.info.imgLoading;
 
-		Q.addStylesheet('{{Streams}}/css/tools/audioChatPlugin.css');
+		Q.addStylesheet('{{Streams}}/css/tools/previews.css');
 
 		// on before message post
 		tool.chatTool.state.beforePost.set(function (fields) {
@@ -51,12 +51,17 @@
 								publisherId: userId,
 								type: "Streams/audio"
 							}, 10, params);
-							Q.Streams.create(fields, function Streams_preview_afterCreate(err, stream, extra) {
-									if (err) {
-										return err;
-									}
 
-									console.log(this);
+							var $dummy = $("<div class='Streams_preview_dummy'>").appendTo(tool.chatTool.$('.Streams_chat_messages'));
+
+							Q.Streams.create(fields, function Streams_preview_afterCreate(err, stream, extra) {
+								$dummy.remove();
+								
+								if (err) {
+									return err;
+								}
+
+								console.log(this);
 							}, {
 								publisherId: tool.chatTool.state.publisherId,
 								streamName: tool.chatTool.state.streamName,
