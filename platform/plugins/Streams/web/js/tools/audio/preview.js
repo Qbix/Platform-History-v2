@@ -28,11 +28,13 @@
 			state.isComposer = true;
 
 			if (ps.editable && ps.publisherId && ps.streamName) {
-				state.isComposer = false;
 				Q.Streams.get(ps.publisherId, ps.streamName, function () {
 					if (!this.testWriteLevel('edit')) {
 						return;
 					}
+
+					state.isComposer = false;
+					tool.stream = this;
 
 					ps.actions.actions.edit = function () {
 						tool.composer(function () {
@@ -235,6 +237,11 @@
 					var clipStart = clipTool ? clipTool.getPosition("start") : null;
 					var clipEnd = clipTool ? clipTool.getPosition("end") : null;
 
+					var title = $("input[name=title]", $currentContent);
+					title = title.length ? title.val() : null;
+					var content = $("textarea[name=content]", $currentContent);
+					content = content.length ? content.val() : null;
+
 					state.mainDialog.addClass('Q_uploading');
 
 					if (action === "link") {
@@ -373,6 +380,9 @@
 						if (!Q.Streams.isStream(tool.stream)) {
 							return _error("Stream not found");
 						}
+
+						tool.stream.pendingFields.title = title;
+						tool.stream.pendingFields.content = content;
 						tool.stream.setAttribute("clipStart", clipStart);
 						tool.stream.setAttribute("clipEnd", clipEnd);
 						tool.stream.save({
@@ -392,6 +402,8 @@
 					template: {
 						name: 'Streams/audio/composer',
 						fields: {
+							title: tool.stream && tool.stream.fields.title,
+							content: tool.stream && tool.stream.fields.content,
 							isComposer: state.isComposer,
 							uploadLimit: tool.text.uploadLimit.interpolate({size: maxUploadSize}),
 							text: tool.text
@@ -429,14 +441,14 @@
 								url: tool.stream.fileUrl()
 							}).activate(function () {
 								var toolPreview = this;
-								var clipStart = tool.stream.getAttribute('clipStart');
-								var clipEnd = tool.stream.getAttribute('clipEnd');
+								var clipStart = tool.stream.getAttribute('clipStart') || null;
+								var clipEnd = tool.stream.getAttribute('clipEnd') || null;
 
 								$clipElement.tool("Q/clip", {
 									startPosition: clipStart,
-									startPositionDisplay: clipStart.convertTimeToString(),
+									startPositionDisplay: clipStart ? clipStart.convertTimeToString() : null,
 									endPosition: clipEnd,
-									endPositionDisplay: clipEnd.convertTimeToString(),
+									endPositionDisplay: clipEnd ? clipEnd.convertTimeToString() : null,
 									onStart: function (setNewPosition) {
 										if (setNewPosition) {
 											var time = toolPreview.state.currentPosition;
@@ -682,7 +694,8 @@
 		+ '  </div>'
 		+ '  <div class="Q_tabbing_container">'
 		+ '	 	<div class="Q_tabbing_item" data-content="edit">'
-		+ '			<div class="Streams_audio_player"></div>'
+		+ '			<input name="title" value="{{title}}" placeholder="{{text.title}}">'
+		+ '			<textarea name="content" placeholder="{{text.description}}">{{content}}</textarea>'
 		+ '			<div class="Streams_audio_composer_preview"></div>'
 		+ '			<div class="Streams_audio_composer_clip"></div>'
 		+ '  	</div>'

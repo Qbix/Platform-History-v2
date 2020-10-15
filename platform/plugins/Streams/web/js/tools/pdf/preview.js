@@ -31,6 +31,7 @@
 				}
 
 				state.isComposer = false;
+				tool.stream = this;
 
 				ps.actions.actions.edit = function () {
 					tool.composer(function () {
@@ -201,6 +202,11 @@
 				var clipStart = clipTool ? clipTool.getPosition("start") : null;
 				var clipEnd = clipTool ? clipTool.getPosition("end") : null;
 
+				var title = $("input[name=title]", $currentContent);
+				title = title.length ? title.val() : null;
+				var content = $("textarea[name=content]", $currentContent);
+				content = content.length ? content.val() : null;
+
 				state.mainDialog.addClass('Q_uploading');
 
 				if (action === "link") {
@@ -331,6 +337,9 @@
 					if (!Q.Streams.isStream(tool.stream)) {
 						return _error("Stream not found");
 					}
+
+					tool.stream.pendingFields.title = title;
+					tool.stream.pendingFields.content = content;
 					tool.stream.setAttribute("clipStart", clipStart);
 					tool.stream.setAttribute("clipEnd", clipEnd);
 					tool.stream.save({
@@ -377,6 +386,8 @@
 				template: {
 					name: 'Streams/pdf/composer',
 					fields: {
+						title: tool.stream && tool.stream.fields.title,
+						content: tool.stream && tool.stream.fields.content,
 						isComposer: state.isComposer,
 						text: tool.text,
 						uploadLimit: tool.text.uploadLimit.interpolate({size: Q.humanReadable(Q.info.maxUploadSize, {bytes: true})})
@@ -390,8 +401,8 @@
 					if (tool.stream) {
 						var $pdfElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=edit] .Streams_pdf_composer_preview", mainDialog);
 						var $clipElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=edit] .Streams_pdf_composer_clip", mainDialog);
-						var clipStart = tool.stream.getAttribute('clipStart');
-						var clipEnd = tool.stream.getAttribute('clipEnd');
+						var clipStart = tool.stream.getAttribute('clipStart') || null;
+						var clipEnd = tool.stream.getAttribute('clipEnd') || null;
 
 						$pdfElement.tool("Q/pdf", {
 							action: "implement",
@@ -403,9 +414,9 @@
 
 							$clipElement.tool("Q/clip", {
 								startPosition: clipStart,
-								startPositionDisplay: clipStart + '%',
+								startPositionDisplay: clipStart ? clipStart + '%' : null,
 								endPosition: clipEnd,
-								endPositionDisplay: clipEnd + '%',
+								endPositionDisplay: clipEnd ? clipEnd + '%' : null,
 								onStart: function (setNewPosition) {
 									Q.handle(_onStart, this, [setNewPosition, toolPreview]);
 								},
@@ -593,6 +604,8 @@ Q.Template.set('Streams/pdf/composer',
 	+ '  </div>'
 	+ '  <div class="Q_tabbing_container">'
 	+ '	 	<div class="Q_tabbing_item" data-content="edit">'
+	+ '			<input name="title" value="{{title}}" placeholder="{{text.title}}">'
+	+ '			<textarea name="content" placeholder="{{text.description}}">{{content}}</textarea>'
 	+ '			<div class="Streams_pdf_composer_preview"></div>'
 	+ '			<div class="Streams_pdf_composer_clip"></div>'
 	+ '  	</div>'

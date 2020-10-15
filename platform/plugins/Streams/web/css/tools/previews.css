@@ -137,6 +137,16 @@
 .Streams_dialog_pdf .Streams_pdf_composer[data-composer=true] .Q_tabbing_container .Q_tabbing_item[data-content=edit]{
 	display: none;
 }
+.Streams_dialog_audio .Q_tabbing_item[data-content=edit] input[name=title],
+.Streams_dialog_audio .Q_tabbing_item[data-content=edit] textarea[name=content],
+.Streams_dialog_video .Q_tabbing_item[data-content=edit] input[name=title],
+.Streams_dialog_video .Q_tabbing_item[data-content=edit] textarea[name=content],
+.Streams_dialog_pdf .Q_tabbing_item[data-content=edit] input[name=title],
+.Streams_dialog_pdf .Q_tabbing_item[data-content=edit] textarea[name=content] {
+	width: 100%;
+	height: 40px;
+	margin-bottom: 5px;
+}
 .Streams_dialog_audio .Streams_audio_composer .Q_tabbing_tabs > .Q_tabbing_tab[data-name=record] {
 	background-image: url('../../../Q/img/audio/microphone/40.png');
 }
@@ -183,6 +193,7 @@
 .Streams_dialog_pdf .Streams_pdf_composer_submit button[name=reset] {
 	display: none;
 }
+
 
 /* Promise play dialog */
 .Streams_audio_preview_dialog_promisePlay.Q_overlay { width: auto; }

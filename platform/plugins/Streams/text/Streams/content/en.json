@@ -372,6 +372,8 @@
         "record": "Record",
         "reset": "Reset",
         "edit": "Edit",
+        "title": "title",
+        "description": "description",
         "upload": "Upload",
         "link": "Link",
         "setUrl": "Set URL",
@@ -386,6 +388,8 @@
     "video": {
         "reset": "Reset",
         "edit": "Edit",
+        "title": "title",
+        "description": "description",
         "upload": "Upload",
         "link": "Link",
         "setUrl": "Set URL",
@@ -400,6 +404,8 @@
     "pdf": {
         "reset": "Reset",
         "edit": "Edit",
+        "title": "title",
+        "description": "description",
         "upload": "Upload",
         "link": "Link",
         "setUrl": "Set URL",
