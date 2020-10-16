@@ -444,11 +444,10 @@ Q.Tool.define('Streams/chat', function(options) {
 					$(".Streams_chat_message_content", $html).html($preview);
 					Q.handle(state.onMessageRender, tool, [fields, $html]);
 					p.fill(ordinal)(null, $html);
-					return;
+				} else {
+					Q.handle(state.onMessageRender, tool, [fields, html]);
+					p.fill(ordinal)(err, fields.html || html);
 				}
-
-				Q.handle(state.onMessageRender, tool, [fields, html]);
-				p.fill(ordinal)(err, fields.html || html);
 			});
 			ordinals.push(ordinal);
 		}
@@ -505,6 +504,60 @@ Q.Tool.define('Streams/chat', function(options) {
 						}
 					});
 				});
+
+				// set handler for each tool activated in chat message
+				$element[0].forEachTool(function () {
+					var state = this.state;
+					var $toolElement = $(this.element);
+
+					if (!(state.publisherId && state.streamName)) {
+						return;
+					}
+
+					Q.Streams.get(state.publisherId, state.streamName, function (err) {
+						if (err) {
+							return console.warn(err);
+						}
+
+						var stream = this;
+
+						var streamType = stream.fields.type;
+						$toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
+							if (streamType === 'Streams/webrtc') {
+								tool.startWebRTC();
+								return;
+							}
+
+							// possible tool names like ["Streams/audio", "Q/audio", "Streams/audio/preview"]
+							var possibleToolNames = [streamType, streamType.replace(/(.*)\//, "Q/"), streamType + '/preview'];
+							for (var toolName of possibleToolNames) {
+								if (Q.Tool.defined(toolName)) {
+									break;
+								}
+							}
+
+							var element = "div";
+							// if tool is preview, apply Streams/preview tool first, because it may be required
+							if (toolName.endsWith("/preview")) {
+								element = Q.Tool.setUpElement(element, "Streams/preview", fields);
+							}
+
+							var fields = Q.extend({}, stream.getAllAttributes(), {
+								publisherId: stream.fields.publisherId,
+								streamName: stream.fields.name,
+								autoplay: true,
+								url: stream.fileUrl()
+							});
+
+							element = Q.Tool.setUpElement(element, toolName, fields);
+							Q.invoke({
+								title: stream.fields.title,
+								content: element
+							});
+						});
+					});
+				}, tool);
+
 				items[ordinal] = $element;
 			}
 			callback(items, messages);
@@ -964,41 +1017,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 		};
 
-		return $('<div />').tool("Streams/preview", fields).tool(previewToolName, fields).click(function () {
-			if (instructions.fromType === 'Streams/webrtc') {
-				tool.startWebRTC();
-				return;
-			}
-
-			// possible tool names like ["Streams/audio", "Q/audio", "Streams/audio/preview"]
-			var possibleToolNames = [instructions.fromType, instructions.fromType.replace(/(.*)\//, "Q/"), previewToolName];
-			for (var toolName of possibleToolNames) {
-				if (Q.Tool.defined(toolName)) {
-					break;
-				}
-			}
-
-			var element = "div";
-			if (toolName.endsWith("/preview")) {
-				element = Q.Tool.setUpElement(element, "Streams/preview", fields);
-			}
-
-			Q.Streams.get(fields.publisherId, fields.streamName, function (err) {
-				if (err) {
-					return console.warn(err);
-				}
-
-				fields = Q.extend(fields, this.getAllAttributes());
-				fields.url = this.fileUrl();
-				fields.autoplay = true;
-
-				element = Q.Tool.setUpElement(element, toolName, fields);
-				Q.invoke({
-					title: instructions.fromTitle,
-					content: element
-				});
-			});
-		});
+		return $('<div />').tool("Streams/preview", fields).tool(previewToolName, fields);
 	},
 	getOrdinal: function(action, ordinal){
 		if (ordinal) {
