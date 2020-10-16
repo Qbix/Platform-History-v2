@@ -98,5 +98,8 @@
         "inHour": "{{h}} saatda",
         "inHours": "{{h}} saatda",
         "inUnderMinute": "1 dəqiqə ərzində"
+    },
+    "tabs": {
+        "more": "daha çox"
     }
 }

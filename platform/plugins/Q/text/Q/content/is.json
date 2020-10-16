@@ -98,5 +98,8 @@
         "inHour": "eftir {{h}} klukkustund",
         "inHours": "eftir {{h}} klukkustundir",
         "inUnderMinute": "á innan við 1 mínútu"
+    },
+    "tabs": {
+        "more": "meira"
     }
 }

@@ -803,3 +803,8 @@
 	transition: opacity 300ms;
 	pointer-events: all;
 }
+
+.Streams_participant_tool {
+	overflow: hidden;
+	padding-bottom: 10px;
+}

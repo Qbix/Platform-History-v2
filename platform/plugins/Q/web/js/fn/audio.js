@@ -330,16 +330,16 @@
 			state.userGesture = function(action, promise){
 				var pieTool = state.$pieElement.clone().removeAttr("id");
 
-				function hideOnMaskClick(){ Q.Dialogs.pop(); }
+				function hideOnMaskClick() { 
+					Q.Dialogs.pop();
+				}
 
 				// we have promise on mobile device which need user gesture
 				promise.then(function() {
-					//console.log('The play() Promise fulfilled!');
-				}).catch(function(error) {
-					//console.log('The play() Promise rejected!');
 
+				}).catch(function(error) {
 					Q.Dialogs.push({
-						className: 'Streams_audio_preview_dialog_promisePlay',
+						className: 'Q_audio_play_dialog',
 						content: pieTool,
 						destroyOnClose: true,
 						noClose: true,

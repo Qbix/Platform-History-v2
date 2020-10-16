@@ -98,5 +98,8 @@
         "inHour": "over {{h}} uur",
         "inHours": "over {{h}} uur",
         "inUnderMinute": "in minder dan 1 minuut"
+    },
+    "tabs": {
+        "more": "meer"
     }
 }

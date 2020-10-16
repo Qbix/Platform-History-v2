@@ -98,5 +98,8 @@
         "inHour": "pēc {{h}} stundas",
         "inHours": "pēc {{h}} stundām",
         "inUnderMinute": "pēc 1 minūtes"
+    },
+    "tabs": {
+        "more": "vairāk"
     }
 }

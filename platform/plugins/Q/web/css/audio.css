@@ -1,60 +1,50 @@
-.Q_audio_start {
-	padding: 10px;
-	position: relative;
-}
-.Q_audio_record {
-	position: relative;
-}
-.Q_audio_record .Q_audio_pie {
+@import "icons.css";
+
+.Q_audio_recorder .Q_audio_pie {
 	height: 100px;
 	width: 100px;
 	margin: 0 auto;
 	text-align: center;
 	position: relative;
 }
-.Q_audio_record .Q_audio_record_label, .Q_audio_start button {
+.Q_audio_recorder .Q_audio_record_label {
 	display: block;
 	margin: 0 auto;
 	text-align: center;
 }
-.Q_audio_record .Q_audio_record_label p {
+.Q_audio_recorder .Q_audio_record_label p {
 	margin: 5px 0;
 }
-.Q_audio_start .Q_tool.Q_pie_tool {
-	cursor: pointer;
-}
-.Q_audio_start .Q_tool.Q_pie_tool .Q_pie_box {
+.Q_audio_recorder .Q_tool.Q_pie_tool .Q_pie_box {
 	background-image: url(../img/audio/record.png);
 }
-div[data-state=recording] .Q_tool.Q_pie_tool .Q_pie_box {
+.Q_audio_recorder[data-state=recording] .Q_tool.Q_pie_tool .Q_pie_box {
 	background-image: url(../img/audio/stop.png);
 }
-div[data-state=recorded] .Q_audio_start .Q_audio_encoding {
-	display: block;
+.Q_audio_recorder[data-state=recorded] .Q_audio_encoding {
+	display: flex;
 }
 
-div[data-state=play] .Q_tool.Q_pie_tool .Q_pie_box {
+.Q_audio_recorder[data-state=play] .Q_tool.Q_pie_tool .Q_pie_box,
+.Q_audio_tool[data-state=play] .Q_tool.Q_pie_tool .Q_pie_box {
 	background-image: url(../img/audio/play.png);
 }
-div[data-state=playing] .Q_tool.Q_pie_tool .Q_pie_box,
-div[data-state=pause] .Q_tool.Q_pie_tool .Q_pie_box {
+.Q_audio_recorder[data-state=playing] .Q_tool.Q_pie_tool .Q_pie_box,
+.Q_audio_recorder[data-state=pause] .Q_tool.Q_pie_tool .Q_pie_box,
+.Q_audio_tool[data-state=pause] .Q_tool.Q_pie_tool .Q_pie_box {
 	background-image: url(../img/audio/pause.png);
 }
 
-.Q_dialog_audio[data-state] .Q_audio_start button[name=upload] {
-	display: none;
+.Q_audio_recorder .Q_audio_actions {
+	text-align: center;
+	margin: 10px 0;
+	padding: 10px 0;
+	border-top: 1px solid #000;
 }
 
-.Q_dialog_audio .Q_audio_actions { text-align: center; }
-
-.Q_audio_start button[name=usethis] { display: none; }
-.Q_audio_start button[name=discard] { display: none; }
-.Q_dialog_audio[data-state=recorded] .Q_audio_start button[name=usethis],
-.Q_dialog_audio[data-state=play] .Q_audio_start button[name=usethis],
-.Q_dialog_audio[data-state=recorded] .Q_audio_start button[name=discard],
-.Q_dialog_audio[data-state=play] .Q_audio_start button[name=discard] { display: inline-block; }
-
-.Q_audio_record .Q_audio_allow, .Q_audio_start .Q_audio_encoding {
+.Q_audio_recorder .Q_audio_allow, .Q_audio_recorder .Q_audio_encoding {
+	align-items: center;
+	justify-content: center;
 	display: none;
 	left: 0;
 	position: absolute;
@@ -67,23 +57,83 @@ div[data-state=pause] .Q_tool.Q_pie_tool .Q_pie_box {
 	font-weight: bold;
 }
 
-.Q_dialog_audio[data-state=init] .Q_audio_record .Q_audio_allow {
-	display: block;
+.Q_audio_tool[data-state=init] .Q_audio_record .Q_audio_allow {
+	display: flex;
 }
-.Q_dialog_audio audio { display: none }
 
-/* Promise play dialog */
-.Streams_audio_preview_dialog_promisePlay.Q_overlay { width: auto; }
-.Streams_audio_preview_dialog_promisePlay .Q_title_slot {
-	display: none;
+.Q_audio_tool audio {
+	margin: 10px auto;
+	width: 100%;
+	min-width: 300px;
 }
-.Streams_audio_preview_dialog_promisePlay .Q_dialog_content {
+
+/**** <Q_audio_custom_player> *****/
+.Q_audio_general {
+	width: 100%;
+	white-space: nowrap;
+	padding: 10px 5px;
+	margin: 10px auto;
+	background: #777;
+}
+.Q_audio_general > * {
+	display: inline-block;
+	height: 20px;
+	line-height: 20px;
+	vertical-align: middle;
+	color: #fff;
+}
+.Q_audio_general .Q_audio_general_play,
+.Q_audio_general .Q_audio_general_sound {
+	width: 22px;
+	font-size: 20px;
+	font-family: "qplatform-q";
+}
+.Q_audio_general .Q_audio_general_play[data-state=play]:before {
+	content: "\ea1c";
+}
+.Q_audio_general .Q_audio_general_play[data-state=pause]:before {
+	content: "\ea1d";
+}
+.Q_audio_general .Q_audio_general_time {
+	white-space: nowrap;
+	font-size: 14px;
+}
+.Q_audio_general .Q_audio_general_sound[data-state=on]:before {
+	content: "\ea26";
+}
+.Q_audio_general .Q_audio_general_sound[data-state=off]:before {
+	content: "\ea2a";
+}
+.Q_audio_general .Q_audio_general_track {
 	position: relative;
-	width: 100px;
-	height: 100px;
-	margin: 10px;
 }
-/* ------------------- */
+.Q_audio_general .Q_audio_general_trackTotal,
+.Q_audio_general .Q_audio_general_trackPlay {
+	height: 5px;
+	border-radius: 2px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+.Q_audio_general .Q_audio_general_trackTotal {
+	position: relative;
+	display: block;
+	background-color: silver;
+}
+.Q_audio_general .Q_audio_general_trackPlay {
+	position: absolute;
+	background-color: #c4fffa;
+}
+.Q_audio_general .Q_audio_general_trackCurrent {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	left: 0;
+	top: 50%;
+	border-radius: 50%;
+	transform: translateY(-50%);
+	background-color: #fff;
+}
+/**** </Q_audio_custom_player> *****/
 
 /* preload images */
 body::after{

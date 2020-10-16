@@ -102,6 +102,9 @@ Q.text = {
 		"prompt": {
 			"title": "Prompt",
 			"ok": "Go"
+		},
+		"tabs": {
+			"more": "more"
 		}
 	}
 }; // put all your text strings here e.g. Q.text.Users.foo
@@ -574,6 +577,25 @@ Sp.deobfuscate = function (key) {
 };
 
 /**
+ * Convert time from milliseconds to hh:mm:ss string
+ * @method convertTimeToString
+ * @param {boolean} [omitHours=true] If true omit hours if 00
+ * @return {string} formatted string
+ */
+Sp.convertTimeToString = function (omitHours) {
+	omitHours = Q.typeOf(omitHours) === 'boolean' ? omitHours : true;
+	var time = Math.trunc(parseInt(this) || 0);
+	var timeString = new Date(time).toISOString().substr(11, 8);
+
+	// omit hh if 00
+	if (omitHours) {
+		timeString = timeString.replace(/^00:/, '');
+	}
+
+	return timeString;
+}
+
+/**
  * @class Function
  * @description Q extended methods for Functions
  */
@@ -805,6 +827,9 @@ Elp.scrollingParent = function(skipIfNotOverflowed, direction, includeSelf) {
 	var p = this;
 	while (includeSelf ? 1 : (p = p.parentNode)) {
 		includeSelf = false;
+		if (p === document.documentElement) {
+			break;
+		}
 		if (typeof p.computedStyle !== 'function') {
 			continue;
 		}
@@ -825,7 +850,7 @@ Elp.scrollingParent = function(skipIfNotOverflowed, direction, includeSelf) {
 			}
 		}
 	}
-	return document.documentElement;
+	return p || null;
 };
 
 /**
@@ -2130,6 +2155,30 @@ Q.latest.issued = {};
 Q.latest.seen = {};
 Q.latest.max = 10000;
 
+/**
+ * Convert string or number to human readable string
+ * @static
+ * @method humanReadable
+ * @param {String|Integer} value
+ * @param {object} params
+ * @param {string} [params.bytes] If true, convert from bytes to human readable string like "12 KB", "1.5 MB" etc
+ * @return {String} Human readable string
+ */
+Q.humanReadable = function (value, params) {
+	if (Q.getObject("bytes", params)) {
+		value = parseInt(value);
+
+		if (value >= Math.pow(2, 30)) {
+			return Math.ceil(value / Math.pow(2, 30)) + ' GB';
+		} else if (value >= Math.pow(2, 20)) {
+			return Math.ceil(value / Math.pow(2, 20)) + ' MB';
+		} else if (value >= Math.pow(2, 10)) {
+			return Math.ceil(value / Math.pow(2, 10)) + ' KB';
+		} else {
+			return value + ' bytes';
+		}
+	}
+}
 /**
  * Calculates a string key by considering the parameter that was passed,
  * the tool being activated, and the page being activated.
@@ -4837,7 +4886,7 @@ Tp.setUpElement = function (element, toolName, toolOptions, id) {
 /**
  * Returns HTML for an element that it can be used to activate a tool.
  * The prefix and id of the element are derived from the tool on which this method is called.
- * For example: $('container').append(Q.Tool.make('Streams/chat')).activate(options);
+ * For example: $('container').append(Q.Tool.setUpElementHTML('Streams/chat')).activate(options);
  * @method setUpElementHTML
  * @param {String|Element} element
  *  The tag of the element, such as "div", or a reference to an existing Element
@@ -5399,9 +5448,27 @@ function Q_Cache_set(cache, key, obj, special) {
 		if (cache.localStorage && Q.Frames && !Q.Frames.isMain()) {
 			return false; // do nothing, this isn't the main frame
 		}
-		var serialized = JSON.stringify(obj);
 		var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
-		storage.setItem(cache.name + (special===true ? "\t" : "\t\t") + key, serialized);
+		var id = cache.name + (special===true ? "\t" : "\t\t") + key;
+		try {
+			var serialized = JSON.stringify(obj);
+			storage.setItem(id, serialized);
+		} catch (e) {
+			if (!special) {
+				for (var i=0; i<10; ++i) {
+					try {
+						// try to remove up to 10 items it may be a problem with space
+						if (cache.remove(cache.earliest())) {
+							storage.setItem(id, serialized);
+						}
+						break;
+					} catch (e) {
+		
+					}
+				}
+			}
+		}
+		
 	}
 }
 function Q_Cache_remove(cache, key, special) {
@@ -5558,7 +5625,7 @@ Cp.remove = function _Q_Cache_prototype_remove(key) {
 	if (typeof key !== 'string') {
 		key = Q.Cache.key(key);
 	}
-	existing = this.get(key, true);
+	existing = this.get(key, {dontTouch: true});
 	if (!existing) {
 		return false;
 	}
@@ -5725,7 +5792,11 @@ Q.Page.push = function (url, title) {
 	var parts = url.split('#');
 	var path = (url.substr(Q.baseUrl().length+1) || '');
 	if (history.pushState) {
-		history.pushState({}, null, url);
+		if (typeof title === 'string') {
+			history.pushState({}, title, url);	
+		} else {
+			history.pushState({}, null, url);
+		}
 	} else {
 		var hash = '#!url=' + encodeURIComponent(path) +
 			location.hash.replace(/#!url=[^&]*/, '')
@@ -6643,6 +6714,10 @@ Event.prototype.stopPropagation = _Q_Event_stopPropagation;
  * return {boolean} Should normally return true, unless listener could not be found or removed
  */
 Q.removeEventListener = function _Q_removeEventListener(element, eventName, eventHandler, useCapture) {
+	if (Q.isEmpty(element)) {
+		return false;
+	}
+
 	useCapture = useCapture || false;
 	var handler = (eventHandler.typename === "Q.Event"
 		? eventHandler.eventListener
@@ -6748,8 +6823,10 @@ Q.trigger = function _Q_trigger(eventName, element, args) {
  *  on container elements.
  *  If a non-element is passed here (such as null, or a DOMEvent)
  *  then this defaults to the document element.
+ * @param {Boolean} [force] Pass true here to handle Q.onLayout events
+ *   even if ResizeObserver was added
  */
-Q.layout = function _Q_layout(element) {
+Q.layout = function _Q_layout(element, force) {
 	if (!(element instanceof Element)) {
 		element = null;
 	}
@@ -6758,7 +6835,7 @@ Q.layout = function _Q_layout(element) {
 			var event = _layoutEvents[i];
 
 			// return if ResizeObserver defined on this element
-			if (_layoutObservers[i]) {
+			if (!force && _layoutObservers[i]) {
 				return;
 			}
 
@@ -6885,7 +6962,7 @@ Q.load = function _Q_load(plugins, callback, options) {
  */
 Q.url = function _Q_url(what, fields, options) {
 	var what2 = what || '';
-	if (what2.substr(0, 5) === 'data:') {
+	if (what2.startsWith('data:') || what2.startsWith('blob:')) {
 		return what2; // this is a special type of URL
 	}
 	var parts = what2.split('?');
@@ -8306,8 +8383,10 @@ Q.cookie = function _Q_cookie(name, value, options) {
 		parts = Q.baseUrl().split('://');
 		if ('path' in options) {
 			path = ';path='+options.path;
-		} else {
+		} else if (parts[1]) {
 			path = ';path=/' + parts[1].split('/').slice(1).join('/');
+		} else {
+			return null;
 		}
 		if ('domain' in options) {
 			domain = ';domain='+options.domain;
@@ -8881,7 +8960,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				}
 
 				if (!o.ignoreHistory) {
-					Q.Page.push(url);
+					Q.Page.push(url, Q.getObject('slots.title', response));
 				}
 			
 				if (!o.ignorePage) {
@@ -11801,6 +11880,9 @@ Q.Pointer = {
 		div.addClass('Q_touchlabel');
 		document.body.appendChild(div);
 		Q.addEventListener(element, 'touchstart touchmove mousemove', function (e) {
+			if (!Q.Pointer.isPressed(e)) {
+				return;
+			}
 			var x = Q.Pointer.getX(e);
 			var y = Q.Pointer.getY(e);
 			var t = document.elementFromPoint(x, y);
@@ -12396,9 +12478,6 @@ Q.Dialogs = {
 				$title = $('<div class="Q_title_slot" />').append($h2);
 				$content = $('<div class="Q_dialog_slot Q_dialog_content Q_overflow" />');
 				$dialog = $('<div />').append($title).append($content);
-				if (o.className) {
-					$dialog.addClass(o.className);
-				}
 				if (o.apply) {
 					$dialog.addClass('Q_overlay_apply');
 				}
@@ -12729,7 +12808,7 @@ Q.invoke = function (options) {
 	}
 	function _continue() {
 		Q.each(Q.invoke.handlers, function (i, handler) {
-			var ret = Q.handle(handler, Q, o);
+			var ret = Q.handle(handler, Q, [o]);
 			if (ret === false) {
 				return false
 			}
@@ -12739,8 +12818,6 @@ Q.invoke = function (options) {
 Q.invoke.handlers = [
 	function (options) {
 		Q.Dialogs.push(Q.extend({}, options, {
-			title: title,
-			content: content,
 			onActivate: options.callback || function () { }
 		}));
 	}
@@ -12775,14 +12852,16 @@ Q.Intl = {
  * @class Q.Audio
  * @constructor
  * @param {String} url the url of the audio to load
+ * @param {HTMLElement} container html element to insert audio to
+ * @param {object} attributes json object with attributes to apply to audio element
  */
-Q.Audio = function (url) {
+Q.Audio = function (url, container, attributes) {
 	if (this === root) {
-		throw new Q.Error("Please call Q.Audio with the keyword new");
+		throw new Q.Error("Q.Audio: Please call Q.Audio with the keyword new");
 	}
 	var t = this;
 	this.src = url = Q.url(url);
-	var container = document.getElementById('Q-audio-container');
+	container = container || document.getElementById('Q-audio-container');
 	if (!container) {
 		container = document.createElement('div');
 		container.setAttribute('id', 'Q-audio-container');
@@ -12793,6 +12872,11 @@ Q.Audio = function (url) {
 	var audio = this.audio = document.createElement('audio');
 	audio.setAttribute('src', url);
 	audio.setAttribute('preload', 'auto');
+	attributes = attributes || {};
+	for (var property in attributes) {
+		audio.setAttribute(property, attributes[property]);
+	}
+
 	function _handler(e) {
 		Q.handle(e.type === 'canplay' ? Aup.onCanPlay : (
 			(e.type === 'canplaythrough' ? Aup.onCanPlayThrough : Aup.onEnded)
@@ -12933,11 +13017,12 @@ Aup.pause = function () {
 
 /**
  * @method pause
- * Pauses the audio if it is playing
+ * Pauses all the audio that is playing
  */
 Q.Audio.pauseAll = function () {
 	for (var url in Q.Audio.collection) {
-		Q.Audio.collection[url].pause();
+		var audio = Q.Audio.collection[url];
+		audio.pause && audio.pause();
 	}
 };
 
@@ -13395,18 +13480,21 @@ Q.onInit.add(function () {
 		Q.addEventListener(document.body, 'click', _enableSpeech, false, true);
 	}
 
-	Q.Text.get('Q/content', function (err, text) {
-		if (!text) {
-			return;
-		}
-		Q.extend(Q.text.Q, 10, text);
-		Q.extend(Q.confirm.options, 10, Q.text.confirm);
-		Q.extend(Q.prompt.options, 10, Q.text.prompt);
-		Q.extend(Q.alert.options, 10, Q.text.alert);
-		var QtQw = Q.text.Q.words;
-		QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
-		QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
-	});
+	if (['en', 'en-US'].indexOf(Q.Text.languageLocale) < 0) {
+		Q.Text.get('Q/content', function (err, text) {
+			if (!text) {
+				return;
+			}
+			Q.extend(Q.text.Q, 10, text);
+			Q.extend(Q.confirm.options, 10, Q.text.confirm);
+			Q.extend(Q.prompt.options, 10, Q.text.prompt);
+			Q.extend(Q.alert.options, 10, Q.text.alert);
+			var QtQw = Q.text.Q.words;
+			QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
+			QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
+			Q.layout(null, true);
+		});
+	}
 	
 	// load this ASAP so dialogs can load synchronously (for keyboard focus, etc.)
 	Q.addScript("{{Q}}/js/fn/dialog.js");
@@ -13461,7 +13549,11 @@ Q.onJQuery.add(function ($) {
 		"Q/layouts": "{{Q}}/js/tools/layouts.js",
 		"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js",
 		"Q/parallax": "{{Q}}/js/tools/parallax.js",
-		"Q/lazyload": "{{Q}}/js/tools/lazyload.js"
+		"Q/lazyload": "{{Q}}/js/tools/lazyload.js",
+		"Q/audio": "{{Q}}/js/tools/audio.js",
+		"Q/video": "{{Q}}/js/tools/video.js",
+		"Q/pdf": "{{Q}}/js/tools/pdf.js",
+		"Q/clip": "{{Q}}/js/tools/clip.js"
 	});
 	
 	Q.Tool.jQuery({
@@ -13487,8 +13579,8 @@ Q.onJQuery.add(function ($) {
 		"Q/touchscroll": "{{Q}}/js/fn/touchscroll.js",
 		"Q/scrollbarsAutoHide": "{{Q}}/js/fn/scrollbarsAutoHide.js",
 		"Q/sortable": "{{Q}}/js/fn/sortable.js",
-		"Q/validator": "{{Q}}/js/fn/validator.js",
-		"Q/audio": "{{Q}}/js/fn/audio.js"
+		"Q/validator": "{{Q}}/js/fn/validator.js"
+		//"Q/audio": "{{Q}}/js/fn/audio.js"
 	});
 	
 	Q.onLoad.add(function () {

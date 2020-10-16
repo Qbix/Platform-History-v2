@@ -74,6 +74,12 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 			}
 			return;
 		}
+		
+		Q.onLayout($this.parent()[0]).set(function () {
+			var state = $this.state('Q/clickable');
+			$this.plugin('Q/clickable', 'remove')
+				.plugin('Q/clickable', state);	
+		}, 'Q/clickable');
 
 		state.oldStyle = $this.attr('style');
 		var display = $this.css('display');

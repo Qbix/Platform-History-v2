@@ -29,7 +29,7 @@ var MyApp = (function (Q, $) {
 			return false;
 		});
 		
-		Q.addScript("{{Q}}/js/QTools.js", function () {
+		Q.addScript("{{Q}}/js/contextual.js", function () {
 			$('#dashboard .Users_avatar_tool').plugin('Q/contextual', {
 				elements: $('#dashboard_user_contextual .Q_listing').clone().children(),
 				defaultHandler: MyApp.userContextual

@@ -1119,7 +1119,7 @@
 				}
 			}, {"prompt": false});
 		} else if (!json.exists) {
-			// no username available. This user has no password set yet and will activate later
+			// this identifier is available. This user has no password set yet and will activate later
 			step2_form = setupRegisterForm(identifier_input.val(), json, priv, login_setupDialog.dialog.data('Q/dialog'));
 		} else if (json.passphrase_set) {
 			// check password

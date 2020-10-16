@@ -98,5 +98,8 @@
         "inHour": "za {{h}} sat",
         "inHours": "za {{h}} sati",
         "inUnderMinute": "za manje od 1 minute"
+    },
+    "tabs": {
+        "more": "više"
     }
 }

@@ -98,5 +98,8 @@
         "inHour": "dalam {{h}} jam",
         "inHours": "dalam {{h}} jam",
         "inUnderMinute": "kurang dari 1 menit"
+    },
+    "tabs": {
+        "more": "lebih"
     }
 }

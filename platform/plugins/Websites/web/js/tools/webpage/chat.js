@@ -18,28 +18,35 @@
 
 		Q.addStylesheet('{{Websites}}/css/tools/webpage/chat.css');
 
-		$(tool.chatTool.element).on('input', '.Streams_chat_composer input, .Streams_chat_composer textarea', Q.debounce(function () {
-			tool.process(this);
-		}, 500));
+		// input event handler
+		$(tool.chatTool.element).on('input', '.Streams_chat_composer input, .Streams_chat_composer textarea', Q.debounce(function (event) {
+			tool.process(this, event);
+		}, 1000));
+
+		// paste event handler
+		$(tool.chatTool.element).on('paste', '.Streams_chat_composer input, .Streams_chat_composer textarea', Q.debounce(function (event) {
+			tool.process(this, event);
+		}, 1000));
 
 		// on before message post
 		tool.chatTool.state.beforePost.set(function (fields) {
-			var $preview = tool.getActivePreview();
+			var previewTool = tool.getToolFromElement(tool.getActivePreview());
 			state.websitesPreview = {};
-			if (!$preview) {
+			state.processedURLs = {};
+
+			if (Q.typeOf(previewTool) !== 'Q.Tool') {
 				return;
 			}
 
-			var previewTool = Q.Tool.from($preview, "Websites/webpage/preview");
+			var type = previewTool.name.replace(/_/g, '/');
+			type = type.charAt(0).toUpperCase() + type.slice(1);
 
-			if (Q.typeOf(previewTool) === 'Q.Tool') {
-				fields.instructions = Q.extend({}, fields.instructions, {
-					'Websites/webpages': {
-						publisherId: previewTool.state.publisherId,
-						streamName: previewTool.state.streamName
-					}
-				});
-			}
+			fields.instructions = Q.extend({}, fields.instructions, {
+				'Websites/webpages': {
+					url: previewTool.state.url,
+					streamType: type
+				}
+			});
 
 			tool.removePreview(previewTool.element);
 		}, tool);
@@ -49,20 +56,37 @@
 			var $html = $(fields.html || html);
 
 			$html = tool.parseChatMessage($html, fields.instructions);
+			if (!$html) {
+				return;
+			}
 
 			fields.html = $html[0].outerHTML;
 		}, tool);
 
-		Q.Tool.onActivate('Websites/webpage/preview').set(function () {
-			var previewTool = this;
+		var _openNewWindow = function () {
+			var previewState = this.state;
 			var $te = $(this.element);
 
 			if ($te.closest('.Streams_chat_item').length) {
-				$te.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
-					window.open(previewTool.state.url, '_blank');
-				});
+				if (previewState.publisherId && previewState.streamName) {
+					Q.Streams.get(previewState.publisherId, previewState.streamName, function () {
+						var url = this.getAttribute('url');
+
+						$te.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
+							window.open(url, '_blank');
+						});
+					});
+				} else {
+					$te.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
+						window.open(previewState.url, '_blank');
+					});
+				}
 			}
-		}, tool);
+		};
+
+		Q.Tool.onActivate('Websites/webpage/preview').set(_openNewWindow, tool);
+		Q.Tool.onActivate('Streams/video/preview').set(_openNewWindow, tool);
+		Q.Tool.onActivate('Streams/audio/preview').set(_openNewWindow, tool);
 
 		// parse old messages
 		Q.each($(".Streams_chat_item", tool.chatTool.element), function (i, element) {
@@ -73,6 +97,7 @@
 
 	{
 		websitesPreview: {},
+		processedURLs: {},
 		appendTo: 'bubble'
 	},
 
@@ -82,19 +107,51 @@
 		 *
 		 * @method process
 		 * @param {HTMLElement|jQuery} input
+		 * @param {Event} event event which called this method ('input', 'paste', etc)
 		 */
-		process: function (input) {
+		process: function (input, event) {
 			var tool = this;
 			var $input = $(input);
 			var inputVal = $input.val();
 			var $form = $input.closest("form");
 			var websitesPreview = this.state.websitesPreview;
-			var urls = inputVal.matchTypes('url', {requireScheme: false});
+			var processedURLs = this.state.processedURLs;
+			var urls = inputVal.replace(/[!^*()]/g,' ').matchTypes('url', {requireScheme: false});
+			var eventType = Q.getObject("type", event);
 
 			Q.each(urls, function (i, url) {
-				if (tool.getActivePreview() || url in websitesPreview || inputVal.endsWith(url)) {
+				// if url already parsed   or  url not pasted and cursor at the end of url (means user not finished url typing)
+				if (processedURLs[i] === url || (eventType === 'input' && event.target.selectionStart === (inputVal.lastIndexOf(url) + url.length))) {
 					return;
 				}
+
+				var activePreview = tool.getActivePreview();
+
+				// if processed url modified and active preview processed exactly this url
+				if (processedURLs[i] && processedURLs[i] !== url) {
+					var $element = websitesPreview[processedURLs[i]];
+
+					// currently active preview url modified
+					if ($element instanceof jQuery && $element.is(":visible")) {
+						var activePreviewTool = tool.getToolFromElement(activePreview);
+
+						if (activePreviewTool) {
+							activePreviewTool.state.url = url;
+							activePreviewTool.stateChanged('url');
+
+							// replace url in processed urls object
+							Object.defineProperty(websitesPreview, url, Object.getOwnPropertyDescriptor(websitesPreview, processedURLs[i]));
+							delete websitesPreview[processedURLs[i]];
+							processedURLs[i] = url;
+						}
+					}
+				}
+
+				// if we have already active preview - do nothing
+				if (activePreview) {
+					return;
+				}
+
 
 				Q.Template.render('Websites/webpage/chat', {
 					src: Q.info.imgLoading
@@ -103,28 +160,41 @@
 						return;
 					}
 
-					websitesPreview[url] = $(html).prependTo($form);
+					var $element = $(html).prependTo($form);
+					websitesPreview[url] = $element;
+					processedURLs[i] = url;
 
 					var _close = function () {
-						tool.removePreview(websitesPreview[url]);
-						websitesPreview[url] = null;
+						websitesPreview[tool.getActiveURL()] = null;
+						tool.removePreview($element);
 						tool.process(input);
 					};
 
 					$('a.Q_close', websitesPreview[url]).on(Q.Pointer.fastclick, _close);
 
-					Q.req('Websites/scrape', ['result', 'publisherId', 'streamName'], function (err, response) {
+					Q.req('Websites/scrape', ['result'], function (err, response) {
 						var msg = Q.firstErrorMessage(err, response && response.errors);
 						if (msg) {
 							return _close();
 						}
 
-						var siteData = response.slots.result;
+						var result = response.slots.result;
+						var type = result.type;
 
-						$(".Websites_webpage_preview_tool", websitesPreview[url]).tool("Websites/webpage/preview", {
-							publisherId: response.slots.publisherId,
-							streamName: response.slots.streamName,
+						var streamType = type ? Q.Websites.getStreamType(type) : Q.Websites.getStreamType(url);
+
+						$(".Websites_webpage_chat_preview", websitesPreview[url]).tool("Streams/preview", {
+							publisherId: result.publisherId || Q.Users.loggedInUserId(),
+							streamName: result.streamName,
+							closeable: false,
 							editable: false
+						}).tool(streamType + "/preview", {
+							url: url,
+							publisherId: result.publisherId,
+							streamName: result.streamName,
+							siteData: result,
+							editable: false,
+							onError: _close
 						}, Date.now()).activate(function () {
 							var previewTool = this;
 							var $te = $(previewTool.element);
@@ -132,7 +202,7 @@
 							$te.outerWidth($form.innerWidth());
 
 							$te.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
-								window.open(siteData.url, '_blank');
+								window.open(url, '_blank');
 							});
 						});
 					}, {
@@ -141,6 +211,14 @@
 					});
 				});
 			});
+		},
+		/**
+		 *	Get valid preview tool (Q/audio, Q/video, Websites/webpage) from jquery or html element
+		 * @method getToolFromElement
+		 * @return {jQuery|HTMLElement} element
+		 */
+		getToolFromElement: function (element) {
+			return Q.Tool.from(element, "Websites/webpage/preview") || Q.Tool.from(element, "Streams/audio/preview") || Q.Tool.from(element, "Streams/video/preview");
 		},
 		/**
 		 *	Add Websites/webpage/preview tools to chat messages
@@ -161,6 +239,10 @@
 
 			// parse all links in message
 			var $chatMessageContent = $(".Streams_chat_message_content", element);
+			if (!$chatMessageContent.length) {
+				return;
+			}
+
 			var chatMessageContent = $chatMessageContent.html();
 			Q.each(chatMessageContent.matchTypes('url'), function (i, url) {
 				var href = url;
@@ -175,8 +257,33 @@
 			instructions = Q.getObject('Websites/webpages', JSON.parse(instructions || null));
 			if (instructions) {
 				var elementToAppend = state.appendTo === 'bubble' ? $(".Streams_chat_bubble", element) : element;
+				var streamType = null;
+
+				if (instructions.streamType) {
+					streamType = instructions.streamType;
+				} else if (instructions.streamName) {
+					streamType = instructions.streamName.substr(0, instructions.streamName.lastIndexOf("/")) + '/preview';
+				} else {
+					streamType = Q.Websites.getStreamType(instructions.url) + '/preview';
+				}
+
 				instructions.editable = false;
-				$(Q.Tool.setUpElementHTML('div', 'Websites/webpage/preview', instructions)).appendTo(elementToAppend);
+
+				var streamsPreview = Q.Tool.setUpElementHTML('div', 'Streams/preview', {
+					publisherId: instructions.publisherId || Q.Users.loggedInUserId(),
+					streamName: instructions.streamName,
+					closeable: false,
+					editable: false
+				});
+				var specialPreview = Q.Tool.setUpElementHTML($(streamsPreview).addClass("Websites_webpage_chat_preview")[0], streamType, {
+					publisherId: instructions.publisherId,
+					streamName: instructions.streamName,
+					streamRequired: true,
+					url: instructions.url,
+					editable: false
+				});
+
+				$(specialPreview).appendTo(elementToAppend);
 			}
 
 			// mark element as processed
@@ -185,17 +292,32 @@
 			return element;
 		},
 		/**
-		 *	This is used Validation for Website URL Text in the contents.
-		 *
+		 * Return active preview tool
 		 * @method getActivePreview
-		 * @return {Q.Tool} Returns Websites/webpage/preview tool
+		 * @return {jQuery} Returns Websites/webpage/preview tool element
 		 */
 		getActivePreview: function () {
 			var websitesPreview = this.state.websitesPreview;
 
 			for (var url in websitesPreview) {
 				if (websitesPreview[url]) {
-					return $(".Websites_webpage_preview_tool", websitesPreview[url]);
+					return $(".Streams_preview_tool", websitesPreview[url]);
+				}
+			}
+
+			return null;
+		},
+		/**
+		 * Return url from active preview tool
+		 * @method getActiveURL
+		 * @return {String}
+		 */
+		getActiveURL: function () {
+			var websitesPreview = this.state.websitesPreview;
+
+			for (var url in websitesPreview) {
+				if (websitesPreview[url]) {
+					return url;
 				}
 			}
 
@@ -220,7 +342,7 @@
 
 	Q.Template.set('Websites/webpage/chat',
 		'<div class="Websites_webpage_chat">' +
-		'	<div class="Websites_webpage_preview_tool"><img src="{{src}}"></div>' +
+		'	<div class="Websites_webpage_chat_preview"><img src="{{src}}"></div>' +
 		'	<a class="Q_close"></a>' +
 		'</div>'
 	);

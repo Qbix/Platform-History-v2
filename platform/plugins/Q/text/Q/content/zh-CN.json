@@ -98,5 +98,8 @@
         "inHour": "在{{h}}小时内",
         "inHours": "在{{h}}小时内",
         "inUnderMinute": "不到1分钟"
+    },
+    "tabs": {
+        "more": "更多"
     }
 }

@@ -61,7 +61,7 @@
 Q.Tool.jQuery("Q/iScroll", function (o) {
 
 	var $this = $(this);
-	Q.addScript(['{{Q}}/js/QTools.js', '{{Q}}/js/iscroll.js'],
+	Q.addScript(['{{Q}}/js/contextual.js', '{{Q}}/js/iscroll.js'],
 	function () {
 		if (o.jScrollPane) {
 			$this.jScrollPane(o);	

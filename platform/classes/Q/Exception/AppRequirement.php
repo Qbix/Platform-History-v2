@@ -15,4 +15,4 @@ class Q_Exception_AppRequirement extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_AppRequirement', 'App \'{{by}}\' requires plugin \'{{plugin}}\' version $version or compatible.');
+Q_Exception::add('Q_Exception_AppRequirement', 'App \'{{by}}\' requires plugin \'{{plugin}}\' version {{version}} or compatible.');

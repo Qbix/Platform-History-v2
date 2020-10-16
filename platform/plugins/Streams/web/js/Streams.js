@@ -583,12 +583,22 @@ Q.Tool.define({
 		// does nothing
 	},
 	"Streams/audio/preview" : "{{Streams}}/js/tools/audio/preview.js",
+	"Streams/audio/chat" : "{{Streams}}/js/tools/audio/chatPlugin.js",
+	"Streams/video/preview" : "{{Streams}}/js/tools/video/preview.js",
+	"Streams/video/chat" : "{{Streams}}/js/tools/video/chatPlugin.js",
+	"Streams/pdf/preview" : "{{Streams}}/js/tools/pdf/preview.js",
+	"Streams/pdf/chat" : "{{Streams}}/js/tools/pdf/chatPlugin.js",
 	"Streams/album/preview": "{{Streams}}/js/tools/album/preview.js",
 	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js"
 });
 
 Q.Tool.onActivate("Streams/chat").set(function () {
-	$(this.element).tool('Streams/mentions/chat').activate();
+	$(this.element)
+	.tool('Streams/mentions/chat')
+	.tool('Streams/audio/chat')
+	.tool('Streams/video/chat')
+	.tool('Streams/pdf/chat')
+	.activate();
 }, 'Streams');
 
 /**
@@ -771,6 +781,7 @@ var _Streams_batchFunction_options = {
  *   @param {String} [related.publisherId] the id of whoever is publishing the related stream
  *   @param {String} [related.streamName] the name of the related stream
  *   @param {Mixed} [related.type] the type of the relation
+ *   @param {Mixed} [related.weight] the type of the relation
  * @param {Object} [options] Any extra options involved in creating the stream
  *   @param {Object} [options.fields] Used to override any other fields passed in the request
  *   @param {Object} [options.streamName] Overrides fields.name . You can set a specific stream name from Streams/possibleUserStreams config
@@ -2196,7 +2207,8 @@ Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
  * @return {String|null} the url, or null if no url
  */
 Sp.fileUrl = function() {
-	var url = this.getAttribute('Q.file.url') || this.getAttribute('file.url');
+	var url = this.getAttribute("Q.file.url") || this.getAttribute("file.url") || this.getAttribute("url");
+
 	if (!url) {
 		return null;
 	}
@@ -4233,7 +4245,7 @@ var _seen = {};
  * @event get.onError
  */
 MTotal.get.onError = new Q.Event();
-MTotal.seen.cache = Q.Cache['local']("Streams.Message.Total.seen", 1000);
+MTotal.seen.cache = Q.Cache['local']("Streams.Message.Total.seen", 100);
 
 /**
  * Constructs a participant from fields, which are typically returned from the server.
@@ -5165,7 +5177,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	var where = Streams.cache.where || 'document';
 
 	Stream.get = Streams.get = Q.getter(Streams.get, {
-		cache: Q.Cache[where]("Streams.get", 1000),
+		cache: Q.Cache[where]("Streams.get", 100),
 		throttle: 'Streams.get',
 		prepare: function (subject, params, callback) {
 			if (Streams.isStream(subject)) {
@@ -5182,7 +5194,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	Streams.related = Q.getter(Streams.related, {
-		cache: Q.Cache[where]("Streams.related", 1000),
+		cache: Q.Cache[where]("Streams.related", 100),
 		throttle: 'Streams.related',
 		prepare: function (subject, params, callback) {
 			if (params[0]) { // some error
@@ -5206,7 +5218,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	Message.get = Q.getter(Message.get, {
-		cache: Q.Cache[where]("Streams.Message.get", 10000),
+		cache: Q.Cache[where]("Streams.Message.get", 100),
 		throttle: 'Streams.Message.get',
 		prepare: function (subject, params, callback, args) {
 			if (params[0]) {
@@ -5226,12 +5238,12 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	MTotal.get = Q.getter(MTotal.get, {
-		cache: Q.Cache[where]("Streams.Message.Total.get", 10000),
+		cache: Q.Cache[where]("Streams.Message.Total.get", 100),
 		throttle: 'Streams.Message.Total.get'
 	});
 
 	Participant.get = Q.getter(Participant.get, {
-		cache: Q.Cache[where]("Streams.Participant.get", 10000),
+		cache: Q.Cache[where]("Streams.Participant.get", 100),
 		throttle: 'Streams.Participant.get',
 		prepare: function (subject, params, callback, args) {
 			if (params[0]) {
@@ -5251,7 +5263,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	Avatar.get = Q.getter(Avatar.get, {
-		cache: Q.Cache[where]("Streams.Avatar.get", 10000),
+		cache: Q.Cache[where]("Streams.Avatar.get", 1000),
 		throttle: 'Streams.Avatar.get',
 		prepare: function (subject, params, callback) {
 			if (params[0]) {
@@ -5263,7 +5275,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	Avatar.byPrefix = Q.getter(Avatar.byPrefix, {
-		cache: Q.Cache[where]("Streams.Avatar.byPrefix", 10000),
+		cache: Q.Cache[where]("Streams.Avatar.byPrefix", 100),
 		throttle: 'Streams.Avatar.byPrefix'
 	});
 

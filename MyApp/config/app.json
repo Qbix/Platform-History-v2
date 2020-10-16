@@ -25,7 +25,7 @@
 		},
 		"routes": {
 			"facebook/:action": {"module": "MyApp", "facebook": 1},
-			":action": {"module": "MyApp"},
+			":action": {"module": "MyApp", "": "MyApp/moduleCanHandle"},
 			"": {"module": "MyApp", "action": "welcome"}
 		},
 		"response": {

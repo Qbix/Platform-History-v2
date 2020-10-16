@@ -69,6 +69,7 @@
 		{
 			fraction: 0,
 			size: 80,
+			defaultSize: 80,
 			bgImage: "",
 			color: 'red',
 			borderSize: 5, // in px
@@ -110,10 +111,15 @@
 						// set Arc borderSize
 						tool.stateChanged('borderSize');
 
+						var lastEvent = {};
+						$toolElement.on('touchstart touchmove', function (event) {
+							lastEvent = event;
+						});
+
 						// set toolElement click event
-						$toolElement.on(Q.Pointer.click, function (event) {
-							var x = event.pageX - $toolElement.offset().left;
-							var y = event.pageY - $toolElement.offset().top;
+						$toolElement.on(Q.Pointer.fastclick, function (event) {
+							var x = (Q.getObject(["originalEvent", "touches", 0, "pageX"], lastEvent) || event.pageX) - $toolElement.offset().left;
+							var y = (Q.getObject(["originalEvent", "touches", 0, "pageY"], lastEvent) || event.pageY) - $toolElement.offset().top;
 							var toolWidth = $toolElement.width();
 							var insideR = (toolWidth - state.borderSize * 2)/2; // radius of circle inside arcs
 							var outsideR = toolWidth/2; // radius of circle
@@ -142,13 +148,14 @@
 			 */
 			positionParent: function(){
 				var tool = this;
+				var state = this.state;
 
 				// if size already set in params - exit
 				if(tool.state.size) return;
 
 				var parent = $(tool.element).parent();
-				var parentW = parent.width();
-				var parentH = parent.height();
+				var parentW = parent.width() || state.defaultSize;
+				var parentH = parent.height() || state.defaultSize;
 
 				tool.state.size = parentW > parentH ? parentH : parentW;
 			},

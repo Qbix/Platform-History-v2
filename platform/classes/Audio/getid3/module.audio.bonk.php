@@ -1,11 +1,11 @@
 <?php
+
 /////////////////////////////////////////////////////////////////
 /// getID3() by James Heinrich <info@getid3.org>               //
-//  available at http://getid3.sourceforge.net                 //
-//            or http://www.getid3.org                         //
-//          also https://github.com/JamesHeinrich/getID3       //
-/////////////////////////////////////////////////////////////////
-// See readme.txt for more details                             //
+//  available at https://github.com/JamesHeinrich/getID3       //
+//            or https://www.getid3.org                        //
+//            or http://getid3.sourceforge.net                 //
+//  see readme.txt for more details                            //
 /////////////////////////////////////////////////////////////////
 //                                                             //
 // module.audio.la.php                                         //
@@ -14,9 +14,15 @@
 //                                                            ///
 /////////////////////////////////////////////////////////////////
 
+if (!defined('GETID3_INCLUDEPATH')) { // prevent path-exposing attacks that access modules directly on public webservers
+	exit;
+}
 
 class getid3_bonk extends getid3_handler
 {
+	/**
+	 * @return bool
+	 */
 	public function Analyze() {
 		$info = &$this->getid3->info;
 
@@ -29,7 +35,7 @@ class getid3_bonk extends getid3_handler
 
 		if (!getid3_lib::intValueSupported($thisfile_bonk['dataend'])) {
 
-			$info['warning'][] = 'Unable to parse BONK file from end (v0.6+ preferred method) because PHP filesystem functions only support up to '.round(PHP_INT_MAX / 1073741824).'GB';
+			$this->warning('Unable to parse BONK file from end (v0.6+ preferred method) because PHP filesystem functions only support up to '.round(PHP_INT_MAX / 1073741824).'GB');
 
 		} else {
 
@@ -41,8 +47,8 @@ class getid3_bonk extends getid3_handler
 				$this->fseek(0 - $BonkTagSize, SEEK_CUR);
 				$BonkTagOffset = $this->ftell();
 				$TagHeaderTest = $this->fread(5);
-				if (($TagHeaderTest{0} != "\x00") || (substr($PossibleBonkTag, 4, 4) != strtolower(substr($PossibleBonkTag, 4, 4)))) {
-					$info['error'][] = 'Expecting "'.getid3_lib::PrintHexBytes("\x00".strtoupper(substr($PossibleBonkTag, 4, 4))).'" at offset '.$BonkTagOffset.', found "'.getid3_lib::PrintHexBytes($TagHeaderTest).'"';
+				if (($TagHeaderTest[0] != "\x00") || (substr($PossibleBonkTag, 4, 4) != strtolower(substr($PossibleBonkTag, 4, 4)))) {
+					$this->error('Expecting "'.getid3_lib::PrintHexBytes("\x00".strtoupper(substr($PossibleBonkTag, 4, 4))).'" at offset '.$BonkTagOffset.', found "'.getid3_lib::PrintHexBytes($TagHeaderTest).'"');
 					return false;
 				}
 				$BonkTagName = substr($TagHeaderTest, 1, 4);
@@ -114,6 +120,9 @@ class getid3_bonk extends getid3_handler
 
 	}
 
+	/**
+	 * @param string $BonkTagName
+	 */
 	public function HandleBonkTags($BonkTagName) {
 		$info = &$this->getid3->info;
 		switch ($BonkTagName) {
@@ -195,7 +204,7 @@ class getid3_bonk extends getid3_handler
 				// ID3v2 checking is optional
 				if (class_exists('getid3_id3v2')) {
 					$getid3_temp = new getID3();
-					$getid3_temp->openfile($this->getid3->filename);
+					$getid3_temp->openfile($this->getid3->filename, $this->getid3->info['filesize'], $this->getid3->fp);
 					$getid3_id3v2 = new getid3_id3v2($getid3_temp);
 					$getid3_id3v2->StartingOffset = $info['bonk'][' ID3']['offset'] + 2;
 					$info['bonk'][' ID3']['valid'] = $getid3_id3v2->Analyze();
@@ -207,12 +216,18 @@ class getid3_bonk extends getid3_handler
 				break;
 
 			default:
-				$info['warning'][] = 'Unexpected Bonk tag "'.$BonkTagName.'" at offset '.$info['bonk'][$BonkTagName]['offset'];
+				$this->warning('Unexpected Bonk tag "'.$BonkTagName.'" at offset '.$info['bonk'][$BonkTagName]['offset']);
 				break;
 
 		}
 	}
 
+	/**
+	 * @param string $PossibleBonkTag
+	 * @param bool   $ignorecase
+	 *
+	 * @return bool
+	 */
 	public static function BonkIsValidTagName($PossibleBonkTag, $ignorecase=false) {
 		static $BonkIsValidTagName = array('BONK', 'INFO', ' ID3', 'META');
 		foreach ($BonkIsValidTagName as $validtagname) {

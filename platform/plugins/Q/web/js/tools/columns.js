@@ -65,10 +65,6 @@ Q.Tool.define("Q/columns", function(options) {
 		$toolElement.addClass("Q_columns_stretchFirstColumn");
 	}
 
-	if (state.animateWidth) {
-		$toolElement.addClass("Q_columns_animateWidth");
-	}
-
 	Q.addStylesheet('{{Q}}/css/columns.css', function () {
 		if (state.title === undefined) {
 			state.title = $('<div />').append('<img class="Q_columns_loading" src="'
@@ -119,9 +115,14 @@ Q.Tool.define("Q/columns", function(options) {
 		}, tool);
 
 		tool.refresh();
-		if (0 && Q.info.isMobile) {
-			tool.startAdjustingPositions();
-		}
+		// if (Q.info.isMobile) {
+		// 	tool.startAdjustingPositions();
+		// }
+		setTimeout(function () {
+			if (state.animateWidth) {
+				$toolElement.addClass("Q_columns_animateWidth");
+			}
+		}, 100);
 		Q.onLayout(tool).set(function () {
 			tool.refresh();
 		}, tool);
@@ -444,7 +445,7 @@ Q.Tool.define("Q/columns", function(options) {
 			_open();
 		}
 		return true;
-		
+
 		function _open() {
 			var $te = $(tool.element);
 			var $titleSlot = $(titleSlot);
@@ -693,7 +694,7 @@ Q.Tool.define("Q/columns", function(options) {
 					if (!_suddenlyClosing && o.hideBackgroundColumns) {
 						$div.prev().hide();
 					}
-					$div.width('100%');
+					$div.css('width', '100%');
 				} else {
 					if (o.close.clickable) {
 						$close.plugin("Q/clickable", o.close.clickable);
@@ -1006,8 +1007,8 @@ function presentColumn(tool, $column, fullscreen, recalculateHeights) {
 		$cs.css('top', '-' + titleOuterHeight + 'px');
 	}
 	var $controls = $column.find('.Q_controls_slot');
-	var cth = $ct.is(":visible") && !hideTitle ? $ct.height() : 0;
-	var controlsh = $controls.is(":visible") ? $controls.height() : 0;
+	var cth = $ct.is(":visible") && !hideTitle ? $ct.outerHeight() : 0;
+	var controlsh = $controls.is(":visible") ? $controls.outerHeight() : 0;
 	var index = parseInt($column.attr('data-index'));
 	var heightToBottom;
 	if (Q.info.isMobile) {
@@ -1138,29 +1139,31 @@ function _updateAttributes() {
 }
 
 Q.invoke.handlers.unshift(function (options, callback) {
-	var index, node, columns;
-	if (options.trigger) {
-		node = options.trigger;
-		while (node) {
-			if (node.hasClass) {
-				if (node.hasClass('Q_columns_column')) {
-					index = node.getAttribute('data-index');
-				}
-				if (node.hasClass('Q_columns_tool')) {
-					columns = node.Q.tools['q_columns'];
-				}
+	var index, columns;
+	var node = options.trigger;
+	if (!node) {
+		return;
+	}
+
+	while (node) {
+		if (node.hasClass) {
+			if (node.hasClass('Q_columns_column')) {
+				index = parseInt(node.getAttribute('data-index'));
 			}
-			node = node.parentNode;
+			if (node.hasClass('Q_columns_tool')) {
+				columns = node.Q.tools['q_columns'];
+				break;
+			}
 		}
-		if (columns) {
-			columns.close({min: index+1}, null, {animation: {duration: 0}});
-			columns.open(Q.extend({}, options, {
-				title: options.title,
-				column: options.content,
-				onOpen: options.callback
-			}));
-			return false;
-		}
+		node = node.parentNode;
+	}
+	if (columns) {
+		columns.close({min: index+1}, null, {animation: {duration: 0}});
+		columns.open(Q.extend({}, options, {
+			column: options.content,
+			onOpen: options.callback
+		}));
+		return false;
 	}
 });
 	

@@ -98,5 +98,8 @@
         "inHour": "per {{h}} valandą",
         "inHours": "per {{h}} valandas",
         "inUnderMinute": "per mažiau nei 1 minutę"
+    },
+    "tabs": {
+        "more": "daugiau"
     }
 }
