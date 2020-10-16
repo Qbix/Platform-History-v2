@@ -569,6 +569,7 @@ Q.Tool.define({
 	"Streams/html"		 : "{{Streams}}/js/tools/html.js",
 	"Streams/preview"  	   : "{{Streams}}/js/tools/preview.js",
 	"Streams/image/preview": "{{Streams}}/js/tools/image/preview.js",
+	"Streams/image/chat": "{{Streams}}/js/tools/image/chatPlugin.js",
 	"Streams/file/preview" : "{{Streams}}/js/tools/file/preview.js",
 	"Streams/category/preview" : "{{Streams}}/js/tools/category/preview.js",
 	"Streams/category"	 : "{{Streams}}/js/tools/category.js",
@@ -598,6 +599,7 @@ Q.Tool.onActivate("Streams/chat").set(function () {
 	.tool('Streams/audio/chat')
 	.tool('Streams/video/chat')
 	.tool('Streams/pdf/chat')
+	.tool('Streams/image/chat')
 	.activate();
 }, 'Streams');
 
