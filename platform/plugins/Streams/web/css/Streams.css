@@ -817,4 +817,5 @@
 .Streams_chat_item .Streams_chat_message_content .Streams_preview_tool .Streams_preview_add {
 	width: 40px;
 	height: 40px;
+	vertical-align: top;
 }

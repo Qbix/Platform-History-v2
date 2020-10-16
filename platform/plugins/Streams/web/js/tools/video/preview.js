@@ -134,6 +134,7 @@
 			var $te = $(tool.element);
 			var videoUrl = state.url;
 			var inplace = null;
+			var icon = null;
 
 			if (Q.Streams.isStream(stream)) {
 				videoUrl = stream.fileUrl();
@@ -151,8 +152,10 @@
 					}
 					inplace = tool.setUpElementHTML('div', 'Streams/inplace', inplaceOptions);
 				}
+				icon = stream.fields.icon;
 			} else {
 				inplace = state.title;
+				icon = state.src;
 			}
 
 			if (!videoUrl) {
@@ -163,7 +166,6 @@
 
 			$te.removeClass('Q_uploading');
 
-			var icon = stream.fields.icon;
 			var iconCustom = true;
 			if (!icon.matchTypes('url').length || !icon.match(/\.[png|jpg|gif]/g)) {
 				icon = stream.iconUrl(40);
