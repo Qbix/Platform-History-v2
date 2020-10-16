@@ -97,17 +97,22 @@
 	 *  Hash of possible options
 	 */
 	Q.Tool.define("Streams/webrtc/controls", function(options) {
+            this.WebRTCLib = null;
+            this.WebRTCClass = null;
+            this.controlBar = null;
+            this.participantListEl = null;
+            this.participantsList = [];
+            this.chatBox = this.chatDialogue = null;
 
 			if (!options.webRTClibraryInstance || !options.webrtcClass) {
 				throw "Video room should be created";
 			}
 
-			this.state = Q.extend({}, this.state, options);
-			this.WebRTCLib = options.webRTClibraryInstance;
-			this.WebRTCClass = options.webrtcClass;
-			this.icons = icons;
+            this.state = Q.extend({}, this.state, options);
 
-			this.refresh();
+            this.icons = icons;
+
+			this.create();
 
 			this.state.onCreate.handle.call(this);
 
@@ -123,14 +128,17 @@
 		},
 
 		{
-			refresh: function() {
+			create: function() {
 				var tool = this;
+                this.WebRTCLib = this.state.webRTClibraryInstance;
+                this.WebRTCClass = this.state.webrtcClass;
+
 				tool.textes = tool.WebRTCClass.textes();
-				var controlBar = tool.createControlBar();
+                if(tool.controlBar == null) var controlBar = tool.createControlBar();
 
 				tool.updateControlBar();
 
-				tool.element.appendChild(controlBar);
+				if(tool.controlBar.parentNode == null) tool.element.appendChild(controlBar);
 
 				tool.textChat().init();
 				tool.createSettingsPopup();
@@ -140,7 +148,23 @@
 				if(activeViewMode == 'maximized' || activeViewMode == 'maximizedMobile') {
 					tool.participantsPopup().toggleLoudesScreenMode('allButMe');
 				}
-				tool.participantsPopup().checkActiveMediaTracks();
+				//tool.participantsPopup().checkActiveMediaTracks();
+				tool.bindRTCEvents();
+
+			},
+			refresh: function() {
+				var tool = this;
+                this.WebRTCLib = this.state.webRTClibraryInstance;
+
+				tool.updateControlBar();
+
+                //tool.textChat().init();
+                tool.participantsPopup().refreshList();
+
+                var activeViewMode = tool.state.webrtcClass.screenRendering.getActiveViewMode();
+				if(activeViewMode == 'maximized' || activeViewMode == 'maximizedMobile') {
+					tool.participantsPopup().toggleLoudesScreenMode('allButMe');
+				}
 				tool.bindRTCEvents();
 
 			},
@@ -181,6 +205,7 @@
 					}
 				}
 				tool.WebRTCLib.event.on('participantConnected', function (participant) {
+					if(participant.sid == 'recording') return;
 					setRealName(participant, function(name){
 						tool.participantsPopup().addItem(participant);
 					});
@@ -346,6 +371,7 @@
 						apply: true
 					});
 			},
+
 			showBrowserPermissionsInstructions: function(kind) {
 				var instructionsPermissionDialog = document.createElement('DIV');
 				instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
@@ -394,6 +420,7 @@
 			 * @method bindRTCEvents
 			 */
 			createControlBar: function() {
+				console.log('createControlBar');
 				var tool = this;
 				var controlBar = document.createElement('DIV');
 				controlBar.className = 'Streams_webrtc_conference-control';
@@ -882,6 +909,7 @@
 				if(tool.controlBar == null) return;
 				var localParticipant = tool.WebRTCLib.localParticipant();
 				var conferenceControl = tool.WebRTCLib.conferenceControl;
+                console.log('updateControlBar: enabledAudioTracks', tool.WebRTCLib.roomParticipants().length)
 
 				var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
 					return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
@@ -903,17 +931,23 @@
 				}*/
 
 
-				var enabledAud = localParticipant.audioTracks();
 				var enabledAudioTracks = localParticipant.tracks.filter(function (t) {
 					return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 				}).length;
 
+				console.log('updateControlBar: enabledAudioTracks', enabledAudioTracks)
 				if(enabledAudioTracks == 0 && tool.WebRTCLib.localParticipant().audioStream == null) {
-					tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
+                    console.log('updateControlBar: enabledAudioTracks if1')
+
+                    tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
 				} else if(!conferenceControl.micIsEnabled()) {
-					tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
+                    console.log('updateControlBar: enabledAudioTracks if2')
+
+                    tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
 				} else if(conferenceControl.micIsEnabled()) {
-					tool.microphoneBtn.innerHTML = icons.microphone;
+                    console.log('updateControlBar: enabledAudioTracks if3')
+
+                    tool.microphoneBtn.innerHTML = icons.microphone;
 				}
 
 				if(tool.WebRTCLib.conferenceControl.audioOutputMode().getCurrent() == 'speaker'){
@@ -960,6 +994,7 @@
 					} else buttonsArr[b].icon.innerHTML = buttonsArr[b].offIcon;
 				}
 			},
+
 			selectCameraDialogue: function(){
 				var tool = this;
 				//self.closeAllDialogues();
@@ -1014,6 +1049,7 @@
 
 				tool.state.dialogIsOpened = true;
 			},
+
 			/**
 			 * Create settings popup that appears while pointer hovers camera button on desktop/in modal box on mobile
 			 * @method createSettingsPopup
@@ -1635,7 +1671,7 @@
                                 data.title = facebookLiveTtleInput.value;
                                 data.description = facebookLiveDescInput.value;
                                 data.privacy = privacySelect.value;
-                                tool.fbLiveInterface.startFacebookLive(data, function (liveInfo) {
+                                tool.fbLiveInterface.startFacebookLive(data, function (liveInfo) {5
                                     facebookLiveUrl.value = 'https://www.facebook.com' + liveInfo.permalink_url;
 
                                     fbStreamingStartSettings.style.display = 'none';
@@ -1890,7 +1926,7 @@
                                 }
                                 tool.hoverTimeout.setttingsPopup = setTimeout(function () {
                                     tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
-                                }, 400)
+                                }, 600)
                             });
 
                             settingsPopup.addEventListener('mouseenter', function (e) {
@@ -1903,7 +1939,7 @@
                             settingsPopup.addEventListener('mouseleave', function (e) {
                                 setTimeout(function () {
                                     tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
-                                }, 400)
+                                }, 600)
 
                             });
                         }
@@ -2709,6 +2745,19 @@
 					}
 				}
 
+				function refreshList() {
+                    if(tool.participantListEl) tool.participantListEl.innerHTML = '';
+                    tool.participantsList = [];
+                    addItem(localParticipant);
+                    for(var i in roomParticipants) {
+                        if(roomParticipants[i] == localParticipant) continue;
+                        addItem(roomParticipants[i]);
+                    }
+
+                    tool.usersCounter.innerHTML = roomParticipants.length;
+
+                }
+
 				function maximizeLoudestScreen(mode) {
 					tool.WebRTCLib.screensInterface.getLoudestScreen(mode, function (loudestScreen) {
 						if(Q.info.isMobile)
@@ -2795,10 +2844,9 @@
 					}
 				}
 
-
-
 				return {
 					createList:createList,
+                    refreshList:refreshList,
 					toggleLocalVideo:toggleLocalVideo,
 					toggleLocalAudio:toggleLocalAudio,
 					addItem:addItem,
@@ -2826,6 +2874,1491 @@
 
 			initFbLiveInterface: function() {
 				var tool = this;
+
+                /*var canvasComposer = (function () {
+
+                    var _canvas = null;
+                    var _canvasMediStream = null;
+                    var _mediaRecorder = null;
+                    var _dataListeners = [];
+
+                    var videoComposer = (function () {
+                        var _streams = [];
+                        var _size = {width:1280, height: 720};
+                        var _inputCtx = null;
+                        var _outputCtx = null;
+                        var _isActive = null;
+
+                        var _background = new Image();
+                        _background.src = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80";
+
+                        var _backgroundVideo = document.createElement('VIDEO');
+                        _backgroundVideo.src = 'https://www.w3schools.com/html/mov_bbb.mp4';
+                        _backgroundVideo.muted = true;
+                        _backgroundVideo.loop = true;
+
+
+                        function createCanvas() {
+                            var videoCanvas = document.createElement("CANVAS");
+                            videoCanvas.className = "Streams_webrtc_video-stream-canvas";
+                            videoCanvas.style.position = 'absolute';
+                            videoCanvas.style.top = '-999999999px';
+                            //videoCanvas.style.top = '0';
+                            videoCanvas.style.left = '0';
+                            videoCanvas.style.zIndex = '9999999999999999999';
+                            videoCanvas.style.backgroundColor = 'transparent';
+                            videoCanvas.width = _size.width;
+                            videoCanvas.height = _size.height;
+
+                            _inputCtx = videoCanvas.getContext('2d');
+                            _outputCtx = videoCanvas.getContext('2d');
+
+                            _canvas = videoCanvas;
+
+                        }
+                        createCanvas();
+
+                        function setCanvasSize(width, height){
+                            _size.width = width;
+                            _size.height = height;
+                            _canvas.width = _size.width;
+                            _canvas.height = _size.height;
+                        }
+
+                        var CanvasStream = function (participant) {
+                            this.kind = null;
+                            this.participant = participant;
+                            this.name = participant.username;
+                            this.avatar = participant.avatar ? participant.avatar.image : null;
+                            this.track = null;
+                            this.mediaStream = null;
+                            this.htmlVideoEl = null;
+                            this.screenSharing = false;
+                            this.volumeHistory = [];
+                            this.rect = null;
+                        }
+                        function updateCanvasLayout() {
+                            log('updateCanvasLayout start')
+
+                            var tracksToAdd = [];
+                            var tracksToRemove = [];
+
+
+                            var participants = tool.WebRTCLib.roomParticipants(true)
+                            var renderScreenSharingLayout = false;
+                            for(var v in participants) {
+                                log('updateCanvasLayout participant', participants[v].online, participants[v])
+
+                                let renderedTracks = [];
+                                for (let j in _streams) {
+
+                                    if(_streams[j].participant == participants[v]) {
+                                        log('updateCanvasLayout rendered for', _streams[j])
+
+                                        renderedTracks.push(_streams[j])
+                                    }
+                                }
+
+                                log('updateCanvasLayout renderedTracks', renderedTracks)
+
+
+                                if(participants[v].online == false) {
+                                    tracksToRemove = tracksToRemove.concat(renderedTracks);
+                                    continue;
+                                }
+
+
+                                let vTracks = participants[v].videoTracks(true);
+                                let aTracks = participants[v].audioTracks();
+                                log('updateCanvasLayout p tracks', vTracks, aTracks)
+
+                                log('updateCanvasLayout rendered _streams', _streams)
+
+                                vTracks = vTracks.filter(function (o) {
+                                    return o.parentScreen.isActive;
+                                });
+                                log('updateCanvasLayout vTracks', vTracks)
+
+                                let audioIsEnabled = participants[v].isLocal ? app.conferenceControl.micIsEnabled() : participants[v].audioIsMuted != true;
+
+                                log('updateCanvasLayout audioIsEnabled', audioIsEnabled)
+
+
+                                if(vTracks.length != 0) {
+                                    log('updateCanvasLayout vTracks != 0')
+
+                                    for (let s in vTracks) {
+                                        log('updateCanvasLayout track', vTracks[s])
+
+                                        let trackCurrentlyRendered = false;
+                                        for (let c in renderedTracks) {
+                                            log('updateCanvasLayout trackCurrentlyRendered', vTracks[s], renderedTracks[c].track)
+
+                                            if(vTracks[s] == renderedTracks[c].track)  {
+                                                trackCurrentlyRendered = true;
+                                                break;
+                                            }
+                                        }
+
+                                        if(vTracks[s].screensharing) {
+                                            renderScreenSharingLayout = true;
+
+                                            if(!_isActive && vTracks[s].trackEl.videoWidth !== 0 && vTracks[s].trackEl.videoHeight !== 0) {
+                                                setCanvasSize(vTracks[s].trackEl.videoWidth, vTracks[s].trackEl.videoHeight)
+                                            } else if (!_isActive) {
+                                                vTracks[s].trackEl.addEventListener('loadedmetadata', function (e) {
+                                                    setCanvasSize(e.target.videoWidth, e.target.videoHeight)
+                                                });
+                                            }
+                                        }
+                                        log('updateCanvasLayout trackCurrentlyRendered', trackCurrentlyRendered)
+
+                                        if(!trackCurrentlyRendered) {
+                                            log('updateCanvasLayout !trackCurrentlyRendered')
+
+                                            if(vTracks.length > 1) {
+                                                log('updateCanvasLayout !trackCurrentlyRendered if1')
+
+                                                /!*let z;
+                                                for(z = renderedTracks.length - 1; z >= 0 ; z--){
+                                                    if(renderedTracks[z].kind == 'video') {
+                                                        let currentTracks = renderedTracks.splice(z, 1);
+                                                        tracksToRemove = tracksToRemove.concat(currentTracks);
+                                                        tracksToAdd = tracksToAdd.concat(currentTracks);
+                                                    }
+                                                }*!/
+
+                                                let canvasStream = new CanvasStream(participants[v]);
+                                                canvasStream.kind = 'video';
+                                                canvasStream.track = vTracks[s];
+                                                canvasStream.mediaStream = vTracks[s].stream;
+                                                canvasStream.htmlVideoEl = vTracks[s].trackEl;
+                                                if (vTracks[s].screensharing == true) canvasStream.screenSharing = true;
+                                                tracksToAdd.push(canvasStream)
+
+                                            } else {
+                                                log('updateCanvasLayout !trackCurrentlyRendered else')
+
+                                                let z, replacedAudioTrack = false;
+                                                for(z = renderedTracks.length - 1; z >= 0 ; z--){
+                                                    log('updateCanvasLayout !trackCurrentlyRendered renderedTracks[z]', renderedTracks[z])
+
+                                                    if(renderedTracks[z].kind == 'audio') {
+                                                        renderedTracks[z].kind = 'video';
+                                                        renderedTracks[z].track = vTracks[s];
+                                                        renderedTracks[z].mediaStream = vTracks[s].stream;
+                                                        renderedTracks[z].htmlVideoEl = vTracks[s].trackEl;
+                                                        if (vTracks[s].screensharing == true) renderedTracks[z].screenSharing = true;
+                                                        replacedAudioTrack = true;
+                                                        break;
+                                                    }
+                                                }
+
+                                                log('updateCanvasLayout replacedAudioTrack', replacedAudioTrack)
+
+                                                if(!replacedAudioTrack) {
+                                                    let canvasStream = new CanvasStream(participants[v]);
+                                                    canvasStream.kind = 'video';
+                                                    canvasStream.track = vTracks[s];
+                                                    canvasStream.mediaStream = vTracks[s].stream;
+                                                    canvasStream.htmlVideoEl = vTracks[s].trackEl;
+                                                    if (vTracks[s].screensharing == true) canvasStream.screenSharing = true;
+                                                    tracksToAdd.push(canvasStream)
+                                                }
+                                            }
+                                        } else {
+                                            continue;
+                                        }
+
+                                    }
+
+                                } else if (aTracks.length != 0 && audioIsEnabled) {
+                                    log('updateCanvasLayout aTracks != 0')
+
+                                    let audioCurrentlyRendered = false;
+                                    for (let c in renderedTracks) {
+                                        if(renderedTracks[c].kind == 'audio')  {
+                                            audioCurrentlyRendered = true;
+                                            break;
+                                        }
+                                    }
+                                    if(audioCurrentlyRendered) continue;
+
+                                    let renderedVideoTracks = renderedTracks.filter(function (o) {
+                                        return o.kind == 'video';
+                                    })
+
+                                    if(renderedVideoTracks.length != 0) {
+                                        log('updateCanvasLayout aTracks: if1', renderedVideoTracks.length)
+
+                                        var newAudioTrack = renderedVideoTracks.splice(0, 1)[0];
+                                        log('updateCanvasLayout aTracks: if1 splice', renderedVideoTracks.length, tracksToRemove.length)
+
+                                        newAudioTrack.kind = 'audio';
+                                        newAudioTrack.track = null;
+                                        newAudioTrack.mediaStream = null;
+                                        newAudioTrack.htmlVideoEl = null;
+                                        newAudioTrack.screenSharing = false;
+
+                                        tracksToRemove = tracksToRemove.concat(renderedVideoTracks);
+                                    } else {
+                                        log('updateCanvasLayout aTracks: if2')
+
+                                        let canvasStream = new CanvasStream(participants[v]);
+                                        canvasStream.kind = 'audio';
+                                        tracksToAdd.push(canvasStream);
+                                    }
+                                }
+
+                                for (let x in renderedTracks) {
+
+                                    let trackIsLive = false;
+
+                                    if(renderedTracks[x].kind == 'video') {
+                                        for (let m in vTracks) {
+                                            if(renderedTracks[x].track == vTracks[m] && vTracks[m].parentScreen.isActive) {
+                                                log('updateCanvasLayout remove not active', vTracks[m].parentScreen.isActive)
+
+                                                trackIsLive = true;
+                                            }
+                                        }
+                                    } else {
+                                        if(audioIsEnabled) trackIsLive = true;
+                                    }
+
+
+                                    if(!trackIsLive) tracksToRemove.push(renderedTracks[x]);
+                                }
+
+                            }
+                            log('updateCanvasLayout result', tracksToAdd, tracksToRemove)
+
+
+                            var r;
+                            for(r = _streams.length - 1; r >= 0 ; r--){
+                                for(let n in tracksToRemove) {
+                                    if(_streams[r] == tracksToRemove[n]) {
+                                        _inputCtx.clearRect(_streams[r].rect.x, _streams[r].rect.y, _streams[r].rect.width, _streams[r].rect.height);
+                                        _streams[r] = null;
+                                        _streams.splice(r, 1);
+                                    }
+                                    break;
+                                }
+                            }
+
+
+                            var layoutRects, streamsNum = _streams.concat(tracksToAdd).length;
+                            if(renderScreenSharingLayout) {
+                                layoutRects = layoutGenerator('screenSharing', streamsNum);
+                            } else {
+                                layoutRects = layoutGenerator('tiledHorizontalMobile', streamsNum);
+
+                            }
+
+                            log('updateCanvasLayout streamsNum', streamsNum)
+
+                            var streamsToUpdate = _streams.slice();
+                            var c = 0;
+
+                            var videoTracksOfUserWhoShares = [];
+                            var screenSharingIsNew = false;
+
+                            if(renderScreenSharingLayout) {
+                                log('updateCanvasLayout: renderScreenSharingLayout: sort streams')
+
+                                var getUsersTracks = function(participant, screenSharingStream) {
+
+                                    //add another screensharing of this participants to the beginning
+
+                                    for(let k = 0; k < tracksToAdd.length; k++){
+
+                                        if(tracksToAdd[k].participant != participant) continue;
+                                        if(tracksToAdd[k].screenSharing && tracksToAdd[k] != screenSharingStream) {
+                                            videoTracksOfUserWhoShares.push(tracksToAdd[k]);
+                                            tracksToAdd.splice(k, 1);
+                                        }
+                                    }
+
+                                    for(let k = 0; k < streamsToUpdate.length; k++){
+                                        if(streamsToUpdate[k].participant != participant) continue;
+                                        if(streamsToUpdate[k].screenSharing && streamsToUpdate[k] != screenSharingStream) {
+                                            videoTracksOfUserWhoShares.push(streamsToUpdate[k])
+                                            streamsToUpdate.splice(k, 1);
+                                        }
+                                    }
+
+                                    for(let k = 0; k < tracksToAdd.length; k++){
+                                        if(tracksToAdd[k].participant != participant) continue;
+
+                                        if(!tracksToAdd[k].screenSharing) {
+                                            videoTracksOfUserWhoShares.push(tracksToAdd[k])
+                                            tracksToAdd.splice(k, 1);
+                                        }
+                                    }
+
+                                    for(let k = 0; k < streamsToUpdate.length; k++){
+
+                                        if(streamsToUpdate[k].participant != participant) continue;
+
+                                        if(!streamsToUpdate[k].screenSharing) {
+                                            videoTracksOfUserWhoShares.push(streamsToUpdate[k])
+                                            streamsToUpdate.splice(k, 1);
+                                        }
+                                    }
+
+                                }
+
+                                for(r = 0; r < tracksToAdd.length; r++){
+                                    if(!tracksToAdd[r].screenSharing) continue;
+
+                                    let screenSharingStream = tracksToAdd[r];
+                                    tracksToAdd.splice(r, 1);
+                                    videoTracksOfUserWhoShares.push(screenSharingStream)
+
+                                    getUsersTracks(screenSharingStream.participant, screenSharingStream)
+                                    screenSharingIsNew = true;
+                                    break;
+                                }
+
+                                if(!screenSharingIsNew) {
+                                    for(let r = 0; r < streamsToUpdate.length; r++){
+                                        if(!streamsToUpdate[r].screenSharing) continue;
+
+                                        let screenSharingStream = streamsToUpdate[r];
+                                        streamsToUpdate.splice(r, 1);
+                                        videoTracksOfUserWhoShares.push(screenSharingStream)
+
+                                        getUsersTracks(screenSharingStream.participant, screenSharingStream)
+
+                                        break;
+                                    }
+                                }
+
+                                c = videoTracksOfUserWhoShares.length;
+
+                            }
+
+
+                            log('updateCanvasLayout layoutRects', layoutRects)
+
+                            log('updateCanvasLayout tracksToAdd', tracksToAdd)
+
+                            log('updateCanvasLayout streamsToUpdate', streamsToUpdate.length)
+
+                            for(let a = 0; a < tracksToAdd.length; a++){
+                                let rect = layoutRects[c];
+
+                                log('updateCanvasLayout add new tracks', rect)
+                                log('updateCanvasLayout add new tracks c', c)
+
+                                var startRect = new DOMRect(0, 0, 0, 0);
+                                tracksToAdd[a].rect = startRect;
+
+                                requestAnimationFrame(function(timestamp){
+                                    let starttime = timestamp || new Date().getTime()
+                                    moveit(timestamp, tracksToAdd[a].rect, rect, {y:startRect.y, x:startRect.x, width:startRect.width,height:startRect.height}, 300, starttime, 'add');
+                                })
+
+                                _streams.unshift(tracksToAdd[a]);
+
+                                c++
+                            }
+
+                            for(let r = 0; r < streamsToUpdate.length; r++){
+                                let rect = layoutRects[c];
+                                log('updateCanvasLayout streamsToUpdate loop', streamsToUpdate[r].screenSharing, rect)
+                                log('updateCanvasLayout streamsToUpdate c',c)
+
+                                let rectToUpdate = new DOMRect(streamsToUpdate[r].rect.x, streamsToUpdate[r].rect.y, streamsToUpdate[r].rect.width, streamsToUpdate[r].rect.height);
+                                streamsToUpdate[r].rect = rectToUpdate;
+
+                                requestAnimationFrame(function(timestamp){
+                                    let starttime = timestamp || new Date().getTime()
+                                    moveit(timestamp, rectToUpdate, rect, {y:rectToUpdate.y, x:rectToUpdate.x, width:rectToUpdate.width,height:rectToUpdate.height}, 300, starttime, 'up');
+                                })
+
+                                c++;
+                            }
+
+                            if(videoTracksOfUserWhoShares.length != 0) {
+                                for (let a = videoTracksOfUserWhoShares.length - 1; a >= 0; a--) {
+                                    let rect = layoutRects[a];
+
+                                    log('updateCanvasLayout screensharing tracks', rect)
+
+                                    let index = _streams.indexOf(videoTracksOfUserWhoShares[a]);
+
+
+                                    if(index == -1) {
+                                        var startRect = new DOMRect(0, 0, 0, 0);
+                                        videoTracksOfUserWhoShares[a].rect = startRect;
+                                        requestAnimationFrame(function (timestamp) {
+                                            let starttime = timestamp || new Date().getTime()
+                                            moveit(timestamp, videoTracksOfUserWhoShares[a].rect, rect, {
+                                                y: startRect.y,
+                                                x: startRect.x,
+                                                width: startRect.width,
+                                                height: startRect.height
+                                            }, 300, starttime, 'add');
+                                        })
+
+                                        log('updateCanvasLayout videoTracksOfUserWhoShares for screenSharingIsNew', videoTracksOfUserWhoShares[a])
+
+                                        _streams.unshift(videoTracksOfUserWhoShares[a]);
+                                    } else {
+                                        videoTracksOfUserWhoShares[a].rect = rect;
+                                        let rectToUpdate = new DOMRect(videoTracksOfUserWhoShares[a].rect.x, videoTracksOfUserWhoShares[a].rect.y, videoTracksOfUserWhoShares[a].rect.width, videoTracksOfUserWhoShares[a].rect.height);
+                                        videoTracksOfUserWhoShares[a].rect = rectToUpdate;
+
+                                        requestAnimationFrame(function(timestamp){
+                                            let starttime = timestamp || new Date().getTime()
+                                            moveit(timestamp, rectToUpdate, rect, {y:rectToUpdate.y, x:rectToUpdate.x, width:rectToUpdate.width,height:rectToUpdate.height}, 300, starttime, 'up');
+                                        })
+
+                                        log('updateCanvasLayout videoTracksOfUserWhoShares for !screenSharingIsNew index', index)
+
+                                        if(a === 0) {
+                                            _streams.splice(0, 0, _streams.splice(index, 1)[0])
+                                        }
+
+
+                                    }
+
+
+                                }
+                            }
+
+                            log('updateCanvasLayout result streams', _streams)
+
+
+
+                        }
+
+                        function moveit(timestamp, rectToUpdate, distRect, startPositionRect, duration, starttime, a){
+                            var timestamp = timestamp || new Date().getTime()
+                            var runtime = timestamp - starttime
+                            var progress = runtime / duration;
+                            progress = Math.min(progress, 1);
+
+                            rectToUpdate.y = startPositionRect.y + (distRect.y - startPositionRect.y) * progress;
+                            rectToUpdate.x = startPositionRect.x + (distRect.x - startPositionRect.x) * progress;
+                            rectToUpdate.width = startPositionRect.width + (distRect.width - startPositionRect.width) * progress;
+                            rectToUpdate.height = startPositionRect.height + (distRect.height - startPositionRect.height) * progress;
+                            if (runtime < duration){
+                                requestAnimationFrame(function(timestamp){
+                                    moveit(timestamp, rectToUpdate, distRect, startPositionRect, duration, starttime, a)
+                                })
+                            } else {
+                                rectToUpdate.y = distRect.y;
+                                rectToUpdate.x = distRect.x;
+                                rectToUpdate.width = distRect.width;
+                                rectToUpdate.height = distRect.height;
+                            }
+                        }
+
+                        function drawVideosOnCanvas() {
+                            _inputCtx.clearRect(0, 0, _size.width, _size.height);
+                            if(options.liveStreaming.drawBackground && _background != null) drawBackground(_background);
+
+                            for(let i = 0; i < _streams.length; i++) {
+                                let streamData = _streams[i];
+
+                                if(streamData.kind == 'video') {
+                                    //log('drawVideosOnCanvas 1')
+
+                                    drawSingleVideoOnCanvas(streamData.htmlVideoEl, streamData, _size.width, _size.height, streamData.htmlVideoEl.videoWidth, streamData.htmlVideoEl.videoHeight);
+                                } else {
+                                    //log('drawVideosOnCanvas 1')
+
+                                    drawSingleAudioOnCanvas(streamData.htmlVideoEl, streamData, _size.width, _size.height);
+                                }
+                            }
+
+                            requestAnimationFrame(function(){
+                                drawVideosOnCanvas();
+                            })
+                        }
+
+                        function drawBackground(videoOrImg) {
+                            var width, height;
+                            if(typeof videoOrImg.controls != 'undefined') {
+                                videoOrImg.play();
+                                videoOrImg.volume = 0;
+
+                                width = videoOrImg.videoWidth;
+                                height = videoOrImg.videoHeight;
+                            } else {
+                                width = videoOrImg.width;
+                                height = videoOrImg.height;
+                            }
+
+                            var scale = Math.max(_size.width / width, _size.height / height);
+                            // get the top left position of the image
+                            var x = (_size.width / 2) - (width / 2) * scale;
+                            var y = (_size.height / 2) - (height / 2) * scale;
+                            _inputCtx.drawImage(videoOrImg,
+                                x, y,
+                                width * scale, height * scale);
+
+                        }
+
+                        function drawSingleVideoOnCanvas(localVideo, data, canvasWidth, canvasHeight, videoWidth, videoHeight) {
+                            if(data.participant.online == false) return;
+                            //_inputCtx.translate(data.rect.x, data.rect.y);
+
+
+                            var currentWidth = data.htmlVideoEl.videoWidth;
+                            var currentHeight = data.htmlVideoEl.videoHeight;
+
+                            /!*if(data.widthLog != null && data.heightLog != null) {
+                                if(data.widthLog !=currentWidth || data.heightLog != currentHeight) {
+                                    console.log('dimensions changed width: ' + data.widthLog + ' -> ' + currentWidth);
+                                    console.log('dimensions changed height: ' + data.heightLog + ' -> ' + currentHeight);
+                                }
+                            }*!/
+
+                            data.widthLog = currentWidth;
+                            data.heightLog = currentHeight;
+                            data.widthLog = currentWidth;
+                            data.heightLog = currentHeight;
+
+                            if(!data.screenSharing) {
+                                var widthToGet = data.rect.width, heightToGet = data.rect.height, ratio = data.rect.width / data.rect.height;
+                                var x, y;
+
+                                var scale = Math.max( data.rect.width / currentWidth, (data.rect.height / currentHeight));
+
+                                widthToGet =  data.rect.width / scale;
+                                heightToGet = currentHeight;
+
+                                if(widthToGet / heightToGet != data.rect.width / data.rect.height) {
+                                    widthToGet = currentWidth;
+                                    heightToGet = data.rect.height / scale;
+
+                                    x = 0;
+                                    y = ((currentHeight / 2) - (heightToGet / 2));
+                                } else {
+                                    x = ((currentWidth / 2) - (widthToGet / 2));
+                                    y = 0;
+                                }
+
+                                /!* if size is smaller than rect widthToGet = data.rect.width / scale;
+                                heightToGet = data.rect.height / scale;*!/
+
+
+                                _inputCtx.drawImage( localVideo,
+                                    x, y,
+                                    widthToGet, heightToGet,
+                                    data.rect.x, data.rect.y,
+                                    data.rect.width, data.rect.height);
+                            } else {
+                                _inputCtx.fillStyle = "#000000";
+                                _inputCtx.fillRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
+
+                                var hRatio = data.rect.width / currentWidth;
+                                var vRatio = data.rect.height / currentHeight;
+                                var ratio  = Math.min ( hRatio, vRatio );
+
+                                var centerShift_x = ( data.rect.width - currentWidth*ratio ) / 2;
+                                var centerShift_y = ( data.rect.height - currentHeight*ratio ) / 2;
+
+                                _inputCtx.drawImage( localVideo,
+                                    data.rect.x, data.rect.y,
+                                    currentWidth, currentHeight,
+                                    centerShift_x, centerShift_y,
+                                    currentWidth * ratio, currentHeight * ratio);
+                            }
+
+
+
+                            //(currentWidth/2) - (widthToGet / 2), (currentHeight/2) - (heightToGet / 2),
+
+                            if(options.liveStreaming.showLabelWithNames) {
+                                _inputCtx.fillStyle = "#232323";
+                                _inputCtx.fillRect(data.rect.x, data.rect.y, data.rect.width, 36);
+
+                                _inputCtx.font = "16px Arial";
+                                _inputCtx.fillStyle = "white";
+                                _inputCtx.fillText(data.name, data.rect.x + 10, data.rect.y + 36 + 16 - 18 - 8);
+                            }
+                            _inputCtx.strokeStyle = "black";
+                            _inputCtx.beginPath();
+                            _inputCtx.moveTo(data.rect.x + data.rect.width, data.rect.y);
+                            _inputCtx.lineTo(data.rect.x + data.rect.width, options.liveStreaming.showLabelWithNames ? data.rect.y + 36 : data.rect.y);
+                            _inputCtx.stroke();
+
+                            //_inputCtx.strokeRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
+                        }
+
+                        function drawSingleAudioOnCanvas(localVideo, data, canvasWidth, canvasHeight) {
+                            if(data.participant.online == false) return;
+
+                            _inputCtx.clearRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
+
+                            _inputCtx.fillStyle = "#000";
+                            _inputCtx.fillRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
+
+                            //drawAudioVisualization(data);
+
+                            var width, height;
+                            if(data.avatar != null) {
+
+                                var avatar = data.avatar;
+                                width = avatar.width;
+                                height = avatar.height;
+
+                                var scale = Math.min( (data.rect.width / 2) / width,  (data.rect.height / 2) / height);
+                                var scaledWidth = width * scale;
+                                var scaledHeight = height * scale;
+                                // get the top left position of the image
+                                var x = data.rect.x + (( data.rect.width / 2) - (width / 2) * scale);
+                                var y;
+                                if(options.liveStreaming.showLabelWithNames) {
+                                    y = (data.rect.y + 36) + (((data.rect.height - 36) / 2) - (height / 2) * scale);
+                                } else {
+                                    y = data.rect.y + ((data.rect.height / 2) - (height / 2) * scale);
+                                }
+
+                                var size = Math.min(scaledHeight, scaledWidth);
+                                var radius =  size / 2;
+
+                                drawSimpleCircleAudioVisualization(data, x, y, radius, scale, size);
+
+
+                                _inputCtx.save();
+                                _inputCtx.beginPath();
+                                _inputCtx.arc(x + (size / 2), y + (size / 2), radius, 0, Math.PI * 2 , false); //draw the circle
+                                _inputCtx.clip(); //call the clip method so the next render is clipped in last path
+                                //_inputCtx.strokeStyle = "blue";
+                                //_inputCtx.stroke();
+                                _inputCtx.closePath();
+
+                                _inputCtx.drawImage(avatar,
+                                    x, y,
+                                    width * scale, height * scale);
+                                _inputCtx.restore();
+
+
+
+                                _inputCtx.strokeStyle = "black";
+                                _inputCtx.strokeRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
+                            }
+
+                            if(options.liveStreaming.showLabelWithNames) {
+                                //(currentWidth/2) - (widthToGet / 2), (currentHeight/2) - (heightToGet / 2),
+                                _inputCtx.fillStyle = "#232323";
+                                _inputCtx.fillRect(data.rect.x, data.rect.y, data.rect.width, 36);
+
+                                _inputCtx.font = "16px Arial";
+                                _inputCtx.fillStyle = "white";
+                                _inputCtx.fillText(data.name, data.rect.x + 10, data.rect.y + 36 + 16 - 18 - 8);
+                            }
+
+                        }
+
+                        function drawSimpleCircleAudioVisualization(data, x, y, radius, scale, size) {
+                            var analyser = data.participant.soundMeter.analyser;
+                            if(analyser == null) return;
+                            var bufferLength = analyser.frequencyBinCount;
+                            var dataArray = new Uint8Array(bufferLength);
+                            analyser.getByteFrequencyData(dataArray);
+                            //just show bins with a value over the treshold
+                            var threshold = 0;
+                            // clear the current state
+                            //_inputCtx.clearRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
+                            //the max count of bins for the visualization
+                            var maxBinCount = dataArray.length;
+
+                            _inputCtx.save();
+                            _inputCtx.beginPath();
+                            _inputCtx.rect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
+                            _inputCtx.clip();
+                            //_inputCtx.stroke();
+
+                            //var bass = Math.floor(dataArray[1]); //1Hz Frequenz
+                            var rms = data.participant.soundMeter.slowRms * 100;
+                            //console.log(rms, bass)
+                            var radius = ((radius / 100 * rms) + radius);
+
+                            _inputCtx.fillStyle = "#505050";
+                            _inputCtx.beginPath();
+                            if(options.liveStreaming.showLabelWithNames) {
+                                _inputCtx.arc(data.rect.x + (data.rect.width / 2), (data.rect.y + 36) + ( (data.rect.height - 36) / 2), radius, 0, 2 * Math.PI);
+                            } else {
+                                _inputCtx.arc(data.rect.x + (data.rect.width / 2), data.rect.y + (data.rect.height / 2), radius, 0, 2 * Math.PI);
+                            }
+                            _inputCtx.fill();
+                            //var radius =  size / 2  + (bass * 0.25);
+
+                            _inputCtx.restore();
+                        }
+
+                        function drawCircleAudioVisualization(data, x, y, radius, scale, size) {
+                            var analyser = data.participant.soundMeter.analyser;
+                            if(analyser == null) return;
+                            var bufferLength = analyser.frequencyBinCount;
+                            var dataArray = new Uint8Array(bufferLength);
+                            analyser.getByteFrequencyData(dataArray);
+                            //just show bins with a value over the treshold
+                            var threshold = 0;
+                            // clear the current state
+                            //_inputCtx.clearRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
+                            //the max count of bins for the visualization
+                            var maxBinCount = dataArray.length;
+
+                            _inputCtx.save();
+                            _inputCtx.beginPath();
+                            _inputCtx.rect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
+                            _inputCtx.clip();
+                            //_inputCtx.stroke();
+
+                            _inputCtx.globalCompositeOperation='source-over';
+
+                            //_inputCtx.scale(0.5, 0.5);
+                            _inputCtx.translate(x + radius, y + radius);
+                            _inputCtx.fillStyle = "#fff";
+
+                            var bass = Math.floor(dataArray[1]); //1Hz Frequenz
+                            var radius = (bass * 0.1 + radius);
+                            //var radius =  size / 2  + (bass * 0.25);
+
+                            //go over each bin
+                            var x = x;
+                            for ( var i = 0; i < maxBinCount; i++ ){
+
+                                var value = dataArray[i];
+                                var barHeight = value / 2;
+                                if(Math.floor(barHeight) == 0) barHeight = 1;
+                                /!*var r = barHeight + (25 * (i/bufferLength));
+                                var g = 250 * (i/bufferLength);
+                                var b = 50;
+
+                                _inputCtx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";*!/
+                                if (value >= threshold) {
+                                    _inputCtx.fillRect(0, -radius, 2, -barHeight);
+                                    _inputCtx.rotate(((180 / 128) * Math.PI / 180));
+                                }
+                            }
+
+                            /!*for ( var i = 0; i < maxBinCount; i++ ){
+
+                                var value = dataArray[i];
+                                if (value >= threshold) {
+                                    _inputCtx.rotate(-(180 / 128) * Math.PI / 180);
+                                    _inputCtx.fillRect(0, radius, 2, value / 2);
+                                }
+                            }
+
+                            for ( var i = 0; i < maxBinCount; i++ ){
+
+                                var value = dataArray[i];
+                                if (value >= threshold) {
+                                    _inputCtx.rotate((180 / 128) * Math.PI / 180);
+                                    _inputCtx.fillRect(0, radius, 2, value / 2);
+                                }
+                            }*!/
+
+
+                            _inputCtx.restore();
+                        }
+
+                        function drawAudioVisualization(data) {
+                            var analyser = data.participant.soundMeter.analyser;
+                            if(analyser == null) return;
+                            var bufferLength = analyser.frequencyBinCount;
+                            var dataArray = new Uint8Array(bufferLength);
+                            analyser.getByteFrequencyData(dataArray);
+
+                            var WIDTH = data.rect.width;
+                            var HEIGHT = data.rect.height / 2;
+                            var barWidth = 2;
+                            var barsNum = Math.floor(data.rect.width / barWidth);
+                            var barHeight;
+
+                            //var x = data.rect.x;
+                            var y = data.rect.y + 36;
+                            var x = ((data.rect.x + data.rect.width - data.rect.x) / 2) - barWidth + data.rect.x;
+
+                            var lastRightX = x, lastLeftX = x, side = 'l';
+                            for (var i = 0; i < bufferLength; i++) {
+                                barHeight = dataArray[i] * 0.2;
+
+                                //var r = barHeight + (25 * (i/bufferLength));
+                                var r = '0';
+                                //var g = 250 * (i/bufferLength);
+                                var g = 250;
+                                var b = 50;
+
+                                _inputCtx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+                                _inputCtx.fillRect(x, y - (barHeight / 2), barWidth, barHeight);
+
+                                if(side == 'l') {
+                                    lastLeftX = x;
+                                    side = 'r';
+
+                                    x = lastRightX + barWidth + 1;
+
+                                    if(x + barWidth >= data.rect.x + data.rect.width) break;
+                                } else if(side == 'r') {
+                                    lastRightX = x;
+                                    side = 'l';
+
+                                    x = lastLeftX - barWidth - 1;
+                                    if(x - barWidth <= data.rect.x) break;
+                                }
+
+
+                            }
+                        }
+
+                        function compositeVideosAndDraw() {
+                            if(_isActive) return;
+                            if(!document.body.contains(_canvas)) document.body.appendChild(_canvas);
+
+                            updateCanvasLayout();
+                            drawVideosOnCanvas();
+                            _isActive = true;
+
+                            var updateCanvas = function() {
+                                if(_isActive == true) {
+                                    updateCanvasLayout();
+                                }
+                            }
+                            app.event.on('videoTrackLoaded', updateCanvas);
+                            app.event.on('audioTrackLoaded', updateCanvas);
+                            app.event.on('participantDisconnected', updateCanvas);
+                            app.event.on('trackMuted', updateCanvas);
+                            app.event.on('trackUnmuted', updateCanvas);
+                            app.event.on('screenHidden', updateCanvas);
+                            app.event.on('screenShown', updateCanvas);
+                            app.event.on('audioMuted', updateCanvas);
+                            app.event.on('audioUnmuted', updateCanvas);
+
+                        }
+
+                        function layoutGenerator(layoutName, numberOfRects) {
+
+
+                            var layouts = {
+                                tiledHorizontalMobile: function (container, count) {
+                                    var size = {parentWidth: _size.width, parentHeight: _size.height};
+
+                                    switch (count) {
+                                        case 1:
+                                            return simpleGrid(count, size, 1);
+                                        case 2:
+                                            return simpleGrid(count, size, 2);
+                                        case 3:
+                                            return simpleGrid(count, size, 3);
+                                        case 4:
+                                            return simpleGrid(count, size, 2);
+                                        case 5:
+                                            return simpleGridBasedOnRowsNum(count, 3, size)
+                                        case 6:
+                                            return simpleGrid(count, size, 2);
+                                        default:
+                                            return simpleGrid(count, size, 2);
+
+                                    }
+                                },
+                                screenSharing: function (container, count) {
+                                    var size = {parentWidth: _size.width, parentHeight: _size.height};
+
+                                    return screenSharingLayout(count, size, true);
+                                }
+                            }
+
+                            function simpleGrid(count, size, perRow, rowsNum) {
+                                var rects = [];
+                                var rectHeight;
+                                var rectWidth = size.parentWidth / perRow;
+                                if(rowsNum == null) {
+                                    rectHeight = size.parentHeight / Math.ceil(count / perRow);
+                                    rowsNum = Math.floor(size.parentHeight / rectHeight);
+                                } else {
+                                    rectHeight = size.parentHeight / rowsNum;
+                                }
+
+
+                                var isNextNewLast = false;
+                                var rowItemCounter = 1;
+                                var i;
+                                for (i = 1; i <= count; i++) {
+                                    var prevRect = rects[rects.length - 1] ? rects[rects.length - 1] : new DOMRect(0, 0, 0, 0) ;
+                                    var currentRow = isNextNewLast  ? rowsNum : Math.ceil(i/perRow);
+                                    var isNextNewRow  = rowItemCounter == perRow;
+                                    isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == rowsNum;
+
+                                    if(rowItemCounter == 1) {
+                                        var y = prevRect.height * (currentRow - 1);
+                                        var x = 0;
+                                    } else {
+                                        var y = prevRect.y;
+                                        var x = prevRect.x + prevRect.width;
+                                    }
+
+                                    var rect = new DOMRect(x, y, rectWidth, rectHeight);
+
+                                    if (isNextNewRow && isNextNewLast) {
+                                        perRow = count - i;
+                                        rectWidth = size.parentWidth / perRow;
+
+                                    }
+                                    rects.push(rect);
+
+                                    if (isNextNewRow) {
+                                        rowItemCounter = 1;
+                                    } else rowItemCounter++;
+                                }
+
+                                return rects;
+                            }
+
+                            function simpleGridBasedOnRowsNum(count, rowsNum, size) {
+                                var rects = []
+                                var perRow = Math.floor(count / rowsNum);
+
+                                var rectWidth = size.parentWidth / perRow;
+                                var rectHeight = size.parentHeight / rowsNum;
+                                var isNextNewLast   = false;
+                                var rowItemCounter = 1;
+                                var i;
+                                for (i = 1; i <= count; i++) {
+                                    var prevRect = rects[rects.length - 1] ? rects[rects.length - 1] : new DOMRect(0, 0, 0, 0) ;
+                                    var currentRow = isNextNewLast  ? rowsNum : Math.ceil(i/perRow);
+                                    var isNextNewRow  = rowItemCounter == perRow;
+                                    isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == rowsNum;
+
+                                    if(rowItemCounter == 1) {
+                                        var y = prevRect.height * (currentRow - 1);
+                                        var x = 0;
+                                    } else {
+                                        var y = prevRect.y;
+                                        var x = prevRect.x + prevRect.width;
+                                    }
+                                    var rect = new DOMRect(x, y, rectWidth, rectHeight);
+
+                                    if(isNextNewRow && isNextNewLast) {
+                                        perRow = count - i;
+                                        rectWidth = size.parentWidth / perRow;
+                                    }
+
+
+                                    rects.push(rect);
+
+                                    if(isNextNewRow) {
+                                        rowItemCounter = 1;
+                                    } else rowItemCounter++
+                                }
+
+                                return rects;
+                            }
+
+                            function screenSharingLayout(count, size, maximized) {
+                                var rects = [];
+
+                                if(maximized) {
+                                    var mainScreenRect = new DOMRect(0, 0, size.parentWidth, size.parentHeight);
+                                    rects.push(mainScreenRect);
+                                    count--;
+                                }
+
+                                var rectWidth, rectHeight;
+                                if(_size.width > _size.height) {
+                                    rectHeight = _size.height / 100 * 15.5;
+                                    rectWidth = rectHeight / 9 * 16;
+                                } else {
+                                    rectWidth = _size.width / 100 * 16.5;
+                                    rectHeight = rectWidth / 16 * 9;
+                                }
+                                var spaceBetween = 10;
+                                var totalRects = (size.parentWidth * (size.parentHeight - 66)) / ((rectWidth + spaceBetween) * (rectHeight + spaceBetween));
+                                var perCol = Math.floor((size.parentHeight - 66) / (rectHeight + spaceBetween));
+                                var perRow =  Math.floor(size.parentWidth / (rectWidth + spaceBetween));
+
+                                var side = 'right'
+                                var isNextNewLast = false;
+                                var createNewColOnRight = null;
+                                var createNewColOnLeft = null;
+                                var latestRightRect = null;
+                                var latestLeftRect = null;
+                                var colItemCounter = 1;
+                                var leftSideCounter = 0;
+                                var rightSideCounter = 0;
+                                var i;
+                                for (i = 1; i <= count; i++) {
+                                    var firstRect = new DOMRect(size.parentWidth, size.parentHeight - 66, rectWidth, rectHeight)
+                                    var prevRect = rects.length > 1 ? rects[rects.length - 2] : firstRect;
+                                    var currentCol = isNextNewLast  ? perRow : Math.ceil(i/perCol);
+                                    var isNextNewCol = colItemCounter  == perCol;
+                                    isNextNewLast = isNextNewLast == true ? true : isNextNewCol && currentCol + 1 == perRow;
+
+                                    var x, y, rect, prevRect;
+                                    if(side == "right") {
+                                        prevRect = latestRightRect;
+                                        if (rightSideCounter > 0 && !createNewColOnRight) {
+                                            y = prevRect.y - (rectHeight + spaceBetween);
+                                            x = prevRect.x;
+                                        } else if(createNewColOnRight) {
+                                            y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+                                            x = prevRect.x - (rectWidth + spaceBetween);
+                                            createNewColOnRight = false;
+                                        } else {
+                                            y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+                                            x = size.parentWidth - (rectWidth + spaceBetween);
+                                        }
+                                        rightSideCounter++;
+
+                                        rect = new DOMRect(x, y, rectWidth, rectHeight);
+                                        latestRightRect = rect;
+
+                                        side = 'left';
+
+                                        if(rightSideCounter % perCol == 0) {
+                                            createNewColOnRight = true;
+                                        }
+                                    } else {
+                                        prevRect = latestLeftRect;
+                                        if (leftSideCounter > 0 && !createNewColOnLeft) {
+                                            y = prevRect.y - (rectHeight + spaceBetween);
+                                            x = prevRect.x;
+                                        } else if(createNewColOnLeft) {
+                                            y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+                                            x = prevRect.x + prevRect.width + spaceBetween;
+                                            createNewColOnLeft = false;
+                                        } else {
+                                            y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+                                            x = spaceBetween;
+                                        }
+                                        leftSideCounter++;
+
+                                        rect = new DOMRect(x, y, rectWidth, rectHeight);
+                                        latestLeftRect = rect;
+
+                                        side = 'right';
+
+                                        if(leftSideCounter % perCol == 0) {
+                                            createNewColOnLeft = true;
+                                        }
+                                    }
+
+                                    rects.push(rect);
+
+                                    if(isNextNewCol) {
+                                        colItemCounter = 1;
+                                    } else colItemCounter++;
+                                }
+
+                                return rects;
+                            }
+
+                            return layouts[layoutName]({width: _size.width, height: _size.height}, numberOfRects);
+                        }
+
+                        function stopAndRemove() {
+                            if(_canvas != null) {
+                                if(_canvas.parentNode != null) _canvas.parentNode.removeChild(_canvas);
+                            }
+
+                            if(_canvasMediStream != null) {
+                                /!*var streamTracks = _canvasMediStream.getTracks();
+                                for(var t in streamTracks) {
+                                    streamTracks[t].stop();
+                                }*!/
+                            }
+
+                            _isActive = false;
+                            _streams = [];
+                        }
+
+                        function isActive() {
+                            return _isActive;
+                        }
+
+                        return {
+                            updateCanvasLayout: updateCanvasLayout,
+                            compositeVideosAndDraw: compositeVideosAndDraw,
+                            stop: stopAndRemove,
+                            isActive: isActive
+                        }
+                    }());
+
+                    var audioComposer = (function(){
+                        var audio = new AudioContext();
+                        var _dest;
+
+                        function mix() {
+                            _dest = audio.createMediaStreamDestination();
+                            let participants = app.roomParticipants();
+                            let tracksNum = 0;
+                            participants.forEach(function(participant) {
+                                let audiotracks = participant.audioTracks();
+                                if(audiotracks.length != 0) {
+
+                                    if(audiotracks[0].stream != null && audiotracks[0].stream.getAudioTracks().length != 0) {
+                                        const source = audio.createMediaStreamSource(audiotracks[0].stream);
+                                        source.connect(_dest);
+                                        tracksNum++;
+                                    }
+                                }
+                            });
+
+                            let silence = () => {
+                                let ctx = new AudioContext(), oscillator = ctx.createOscillator();
+                                let dst = oscillator.connect(ctx.createMediaStreamDestination());
+                                oscillator.start();
+                                return Object.assign(dst.stream.getAudioTracks()[0], {enabled: false});
+                            }
+
+                            if(tracksNum != 0){
+                                _canvasMediStream.addTrack(_dest.stream.getTracks()[0]);
+                            } else {
+                                var silentTrack = silence();
+                                var silentStream = new MediaStream();
+                                silentStream.addTrack(silentTrack);
+                                let source = audio.createMediaStreamSource(silentStream);
+                                source.connect(_dest);
+                                _canvasMediStream.addTrack(_dest.stream.getTracks()[0]);
+
+                            }
+
+                            app.event.on('audioTrackLoaded', function(e) {
+                                if(_canvasMediStream == null || _dest == null) return;
+                                let source = audio.createMediaStreamSource(e.track.stream);
+                                source.connect(_dest);
+                            })
+                        }
+
+                        function stop() {
+                            if(_dest != null) _dest.disconnect();
+                            _dest = null;
+                        }
+
+                        return {
+                            mix: mix,
+                            stop: stop
+                        }
+                    }());
+
+                    function addDataListener(callbackFunction) {
+                        _dataListeners.push(callbackFunction);
+                    }
+
+                    function removeDataListener(callbackFunction) {
+                        var index = _dataListeners.indexOf(callbackFunction);
+
+                        if (index > -1) {
+                            _dataListeners.splice(index, 1);
+                        }
+                    }
+
+                    function trigerDataListeners(blob) {
+                        for(let i in _dataListeners) {
+                            _dataListeners[i](blob);
+                        }
+                    }
+
+                    function captureStream(ondataavailable) {
+                        if(ondataavailable != null){
+                            addDataListener(ondataavailable);
+                        }
+
+                        var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+
+                        var codecs;
+                        if(isChrome && !_isMobile) {
+                            codecs = 'video/webm;codecs=h264';
+                        } else if (_isMobile && _isAndroid) {
+                            codecs = 'video/webm;codecs=vp8';
+                        }
+
+                        if(options.liveStreaming.useRecordRTCLibrary) {
+                            videoComposer.compositeVideosAndDraw();
+
+                            _canvasMediStream = canvasComposer.canvas().captureStream(25);
+                            audioComposer.mix();
+
+                            _mediaRecorder = RecordRTC(_canvasMediStream, {
+                                recorderType:MediaStreamRecorder,
+                                mimeType: codecs,
+                                timeSlice: 1000,
+                                ondataavailable:trigerDataListeners
+                            });
+                            _mediaRecorder.startRecording();
+                        } else {
+
+                            if(_mediaRecorder != null){
+                                return;
+                            }
+
+                            videoComposer.compositeVideosAndDraw();
+
+                            _canvasMediStream = _canvas.captureStream(30); // 30 FPS
+
+                            audioComposer.mix();
+
+                            _mediaRecorder = new MediaRecorder(_canvasMediStream, {
+                                //mimeType: 'video/webm',
+                                mimeType: codecs,
+                                videoBitsPerSecond : 3 * 1024 * 1024
+                            });
+
+                            _mediaRecorder.onerror = function(e) {
+                                console.error(e);
+                            }
+
+                            _mediaRecorder.addEventListener('dataavailable', function(e) {
+                                trigerDataListeners(e.data);
+                            });
+
+                            _mediaRecorder.start(1000); // Start recording, and dump data every second
+                        }
+
+                    }
+
+                    function stopRecorder() {
+                        log('stopRecorder')
+
+                        if(_mediaRecorder == null) return;
+                        if(options.liveStreaming.useRecordRTCLibrary) {
+                            log('stopRecorder: RecordRTC')
+
+                            _mediaRecorder.stopRecording(function () {
+                                /!*document.querySelector('.Streams_webrtc_recording').addEventListener('click', function () {
+
+                                    var fileName = 'test.webm';
+                                    var file = new File([_mediaRecorder.getBlob()], fileName, {
+                                        type: 'video/webm;codecs=h264'
+                                    });
+                                    invokeSaveAsDialog(file, fileName);
+
+
+                                })*!/
+                            });
+                        } else {
+                            log('stopRecorder: native')
+
+                            _mediaRecorder.stop();
+                            /!*document.querySelector('.Streams_webrtc_recording').addEventListener('click', function () {
+
+
+                                var blobToSave = new Blob(fbLive.videoStream().allBlobs);
+
+                                var fileName = 'test.webm';
+                                var file = new File([blobToSave], fileName, {
+                                    type: 'video/webm;codecs=h264'
+                                });
+                                saveToFile(file, fileName);
+
+
+                            })*!/
+                        }
+                        videoComposer.stop();
+                        audioComposer.stop();
+                    }
+
+                    function saveToFile(file, fileName) {
+                        log('saveToFile')
+                        if (!file) {
+                            throw 'Blob object is required.';
+                        }
+
+                        if (!file.type) {
+                            try {
+                                file.type = 'video/webm';
+                            } catch (e) {}
+                        }
+
+                        var fileExtension = (file.type || 'video/webm').split('/')[1];
+
+                        if (fileName && fileName.indexOf('.') !== -1) {
+                            var splitted = fileName.split('.');
+                            fileName = splitted[0];
+                            fileExtension = splitted[1];
+                        }
+
+                        var fileFullName = (fileName || (Math.round(Math.random() * 9999999999) + 888888888)) + '.' + fileExtension;
+
+                        if (typeof navigator.msSaveOrOpenBlob !== 'undefined') {
+                            return navigator.msSaveOrOpenBlob(file, fileFullName);
+                        } else if (typeof navigator.msSaveBlob !== 'undefined') {
+                            return navigator.msSaveBlob(file, fileFullName);
+                        }
+
+                        var hyperlink = document.createElement('a');
+                        hyperlink.href = URL.createObjectURL(file);
+                        hyperlink.download = fileFullName;
+
+                        hyperlink.style = 'display:none;opacity:0;color:transparent;';
+                        (document.body || document.documentElement).appendChild(hyperlink);
+
+                        if (typeof hyperlink.click === 'function') {
+                            hyperlink.click();
+                        } else {
+                            hyperlink.target = '_blank';
+                            hyperlink.dispatchEvent(new MouseEvent('click', {
+                                view: window,
+                                bubbles: true,
+                                cancelable: true
+                            }));
+                        }
+
+                        URL.revokeObjectURL(hyperlink.href);
+                    }
+
+                    function stopCanvasRendering() {
+                        videoComposer.stop();
+                    }
+
+                    function stopAudioMixing() {
+                        audioComposer.stop();
+                    }
+
+                    return {
+                        videoComposer: videoComposer,
+                        audioComposer: audioComposer,
+                        captureStream: captureStream,
+                        addDataListener: addDataListener,
+                        removeDataListener: removeDataListener,
+                        mediaRecorder: function () {
+                            return _mediaRecorder;
+                        },
+                        canvas: function () {
+                            return _canvas;
+                        },
+                        endStreaming: function () {
+                            stopRecorder();
+                        },
+                        stopRecorder: stopRecorder,
+                        isActive: function () {
+                            if(_mediaRecorder != null) return true;
+                            return false;
+                        }
+                    }
+                }())
+
+                var fbLive = (function () {
+                    var _streamingSocket;
+
+                    var _videoStream = {blobs: [], allBlobs: [], size: 0, timer: null}
+
+                    function connect(streamUrl, callback) {
+                        if(typeof io == 'undefined') return;
+
+                        var secure = options.nodeServer.indexOf('https://') == 0;
+                        _streamingSocket = io.connect(options.nodeServer, {
+                            query: {
+                                rtmp: streamUrl,
+                                localInfo: JSON.stringify(_localInfo)
+                            },
+                            transports: ['websocket'],
+                            'force new connection': true,
+                            secure:secure,
+                            reconnection: true,
+                            reconnectionDelay: 1000,
+                            reconnectionDelayMax: 5000,
+                            reconnectionAttempts: 5
+                        });
+                        _streamingSocket.on('connect', function () {
+                            if(callback != null) callback();
+                        });
+                    }
+
+                    function onDataAvailablehandler(blob) {
+                        //log('fbLive onDataAvailablehandler');
+
+                        _videoStream.blobs.push(blob);
+                        _videoStream.allBlobs.push(blob);
+
+                        _videoStream.size += blob.size;
+
+                        if(options.liveStreaming.timeSlice != null) return;
+
+                        let blobsLength = _videoStream.blobs.length;
+                        let sumSize = 0;
+
+                        for (let i = 0; i < blobsLength; i++) {
+                            if (_videoStream.blobs.length == 0) break;
+                            sumSize = sumSize + _videoStream.blobs[i].size;
+
+                            let chunkSize = options.liveStreaming.chunkSize != null ? options.liveStreaming.chunkSize : 1000000;
+                            if (sumSize >= chunkSize && _videoStream.recordingStopped != true) {
+                                let blobsToSend = _videoStream.blobs.slice(0, i + 1);
+                                _videoStream.blobs.splice(0, i);
+                                var mergedBlob = new Blob(blobsToSend);
+
+                                /!*var blobToSend;
+                                if (mergedBlob.size > 1000000) {
+                                    blobToSend = mergedBlob.slice(0, 1000000);
+                                    var blobToNotSend = mergedBlob.slice(1000000);
+                                    _videoStream.blobs.unshift(blobToNotSend);
+                                } else {
+                                    blobToSend = mergedBlob;
+                                }*!/
+
+                                //let lastChunk = _videoStream.recordingStopped === true ? true : false;
+                                //_videoStream.allBlobs.push(mergedBlob);
+                                log('ondataavailable SEND CHUNK', mergedBlob.size)
+                                _streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
+                                break;
+                            }
+                        }
+
+                    }
+
+                    return {
+                        goLive: function () {
+                            log('goLiveDialog goLive');
+                        },
+                        endStreaming: function () {
+                            log('endStreaming');
+
+                            clearTimeout(_videoStream.timer);
+                            let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
+                            var mergedBlob = new Blob(blobsToSend);
+                            _streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
+
+                            canvasComposer.stopRecorder();
+
+                            if(_streamingSocket != null) _streamingSocket.disconnect();
+                            _streamingSocket = null;
+
+                            app.event.dispatch('facebookLiveStreamingEnded', localParticipant);
+                            app.eventBinding.sendDataTrackMessage("facebookLiveStreamingEnded");
+                        },
+                        isStreaming: function () {
+                            if(_streamingSocket != null && _streamingSocket.connected) return true;
+                            return false;
+                        },
+                        startStreaming: function(fbStreamUrl) {
+                            log('startStreaming', fbStreamUrl);
+
+                            connect(fbStreamUrl, function () {
+                                canvasComposer.captureStream(function (blob) {
+                                    onDataAvailablehandler(blob);
+                                });
+
+                                var timer = function() {
+                                    if(_videoStream.blobs.length != 0) {
+                                        let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
+                                        var mergedBlob = new Blob(blobsToSend);
+                                        _streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
+                                    }
+                                    _videoStream.timer = setTimeout(timer, 6000);
+                                }
+
+                                _videoStream.timer = setTimeout(timer, 6000);
+
+                                app.event.dispatch('facebookLiveStreamingStarted', localParticipant);
+                                app.eventBinding.sendDataTrackMessage("facebookLiveStreamingStarted");
+                            });
+                        },
+                        videoStream:function () {
+                            return _videoStream;
+                        }
+                    }
+                }())*/
+
 				tool.fbLiveInterface = (function() {
 					var _liveId;
 					var _liveInfo;
@@ -2963,6 +4496,7 @@
 								} else {
 									tool.fbLiveInterface.createLive(data, function (response) {
 
+										console.log('response.secure_stream_url', response.secure_stream_url)
 										tool.WebRTCLib.screensInterface.fbLive.startStreaming(response.secure_stream_url);
 										_liveInfo = response;
 										if (callback != null) callback(response);
@@ -3112,6 +4646,7 @@
 					}
 				}());
 			},
+
 			facebookLiveDialog: function () {
 				var tool = this;
 				var fbLiveDialog = document.createElement('DIV');
@@ -3131,6 +4666,7 @@
 					apply: true
 				});
 			},
+
 			closeAllDialogues: function () {
 				var tool = this;
 				var elems=[].slice.call(document.getElementsByClassName('dialog-con')).concat([].slice.call(document.getElementsByClassName('dialog-bg')));
