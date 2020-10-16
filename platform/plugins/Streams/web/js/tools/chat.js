@@ -431,26 +431,25 @@ Q.Tool.define('Streams/chat', function(options) {
 				fields = Q.extend({}, fields, { vote: state.vote });
 			}
 
-			// generate special message for related streams
-			if (fields.type === "Streams/relatedTo") {
-				var $html = tool.renderRelatedStream(fields);
+			Q.Template.render('Streams/chat/message/bubble', fields, function (err, html) {
+				// generate special message for related streams
+				if (fields.type === "Streams/relatedTo") {
+					var $preview = tool.renderRelatedStream(fields);
+					if (!$preview) {
+						return;
+					}
 
-				if ($html) {
+					var $html = $(html);
+					$html.addClass("Streams_chat_message_skipOverflowed");
+					$(".Streams_chat_message_content", $html).html($preview);
 					Q.handle(state.onMessageRender, tool, [fields, $html]);
 					p.fill(ordinal)(null, $html);
+					return;
 				}
 
-				return;
-			}
-
-			Q.Template.render(
-				'Streams/chat/message/bubble',
-				fields,
-				function (err, html) {
-					Q.handle(state.onMessageRender, tool, [fields, html]);
-					p.fill(ordinal)(err, fields.html || html);
-				}
-			);
+				Q.handle(state.onMessageRender, tool, [fields, html]);
+				p.fill(ordinal)(err, fields.html || html);
+			});
 			ordinals.push(ordinal);
 		}
 		var p = new Q.Pipe();
@@ -681,10 +680,10 @@ Q.Tool.define('Streams/chat', function(options) {
 			if (!$element.is('.Streams_chat_message')) {
 				$element = $element.parents('.Streams_chat_message');
 			}
-			if (!$element[0].isOverflowed()) {
+			if ($element.closest(".Streams_chat_message_skipOverflowed").length || !$element[0].isOverflowed()) {
 				return;
 			}
-			
+
 			var $container = $element.parents('.Streams_chat_item');
 			var displayName   = $('.Users_avatar_name', $container).text();
 
@@ -958,7 +957,11 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		var fields = {
 			publisherId: instructions.fromPublisherId,
-			streamName: instructions.fromStreamName
+			streamName: instructions.fromStreamName,
+			closeable: false,
+			onError: function () {
+				$(this.element).closest(".Streams_chat_item").remove();
+			}
 		};
 
 		return $('<div />').tool("Streams/preview", fields).tool(previewToolName, fields).click(function () {
@@ -982,7 +985,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 			Q.Streams.get(fields.publisherId, fields.streamName, function (err) {
 				if (err) {
-					return console.warn("stream not found");
+					return console.warn(err);
 				}
 
 				fields = Q.extend(fields, this.getAllAttributes());
@@ -1065,17 +1068,20 @@ Q.Tool.define('Streams/chat', function(options) {
 	processDOM: function() {
 		var state = this.state;
 		this.$('.Streams_chat_message').each(function () {
-			if (!this.isOverflowed()) {
+			var $this = $(this);
+
+			if ($this.closest(".Streams_chat_message_skipOverflowed").length || !this.isOverflowed()) {
 				return;
 			}
+
 			this.style.cursor = 'pointer';
-			var type = $(this).closest('.Streams_chat_item').hasClass('Streams_chat_to_me')
+			var type = $this.closest('.Streams_chat_item').hasClass('Streams_chat_to_me')
 				? 'srcToMe' : 'srcFromMe';
 			var $indicator = $('<img />', {
 				"src": Q.url(state.overflowed[type]),
 				"class": "Streams_chat_overflowed_indicator"
 			});
-			$(this).closest('.Streams_chat_bubble')
+			$this.closest('.Streams_chat_bubble')
 				.addClass('Streams_chat_overflowed')
 				.append($indicator);
 		});

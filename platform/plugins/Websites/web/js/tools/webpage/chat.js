@@ -69,7 +69,11 @@
 
 			if ($te.closest('.Streams_chat_item').length) {
 				if (previewState.publisherId && previewState.streamName) {
-					Q.Streams.get(previewState.publisherId, previewState.streamName, function () {
+					Q.Streams.get(previewState.publisherId, previewState.streamName, function (err) {
+						if (err) {
+							return;
+						}
+
 						var url = this.getAttribute('url');
 
 						$te.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {

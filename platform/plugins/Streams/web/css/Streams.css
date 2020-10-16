@@ -808,3 +808,13 @@
 	overflow: hidden;
 	padding-bottom: 10px;
 }
+/* if chat message content is related stream, hide image indicated that content out of message element */
+.Streams_chat_item.Streams_chat_message_skipOverflowed .Streams_chat_overflowed_indicator {
+	display: none;
+}
+.Streams_chat_item .Streams_chat_message_content .Streams_preview_tool .Streams_preview_icon,
+.Streams_chat_item .Streams_chat_message_content .Streams_preview_tool .Streams_video_preview_icon,
+.Streams_chat_item .Streams_chat_message_content .Streams_preview_tool .Streams_preview_add {
+	width: 40px;
+	height: 40px;
+}
