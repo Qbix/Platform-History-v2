@@ -197,11 +197,15 @@
 					}
 
 					var initMoving = function(evt){
+						console.log('initMoving: initMoving');
 						if(tool.state.ignoreOnElements.length != 0) {
 							var ignoreEls = tool.state.ignoreOnElements;
 							for(var e in ignoreEls) {
-								if (((evt.type != "mousemove" && evt.type != "touchmove") && (evt.target == ignoreEls[e] || ignoreEls[e].contains(evt.target)))
+                                console.log('IGNORE LOOP',evt.type, ignoreEls[e].contains(evt.target),  ignoreEls[e], evt.target)
+
+                                if ((/*(evt.type != "mousemove" && evt.type != "touchmove") && */(evt.target == ignoreEls[e] || ignoreEls[e].contains(evt.target)))
 									|| (evt.target.nodeName == 'INPUT' && evt.target.type == 'text')) {
+									console.log('IGNORE TRUUUUUUUUUUUUUUUUUUUUUUUE', ignoreEls[e], evt.target)
 									return;
 								}
 							}

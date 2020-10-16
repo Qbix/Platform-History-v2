@@ -812,7 +812,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          * Bind events that are triggered by WebRTC library (app.js)
          * @method bindConferenceEvents
          */
-        function bindConferenceEvents() {
+        function bindConferenceEvents(WebRTCconference) {
             var tool = this;
 
             function setRealName(participant, callback) {
@@ -845,6 +845,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             }
 
             function setUserAvatar(participant) {
+                log('setUserAvatar', participant);
                 var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
 
                 if(userId != null){
@@ -857,6 +858,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         if(src != null) {
                             var avatarImg = new Image();
                             avatarImg.src = src;
+                            log('setUserAvatar set');
+
                             participant.avatar = {src:src, image:avatarImg};
                         }
 
@@ -871,12 +874,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
             WebRTCconference.event.on('joined', function (participant) {
                 if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
+                if(participant.sid == 'recording') return;
                 setRealName(participant);
                 setUserAvatar(participant);
             });
 
             WebRTCconference.event.on('participantConnected', function (participant) {
                 log('user joined',  participant);
+                if(participant.sid == 'recording') return;
                 setRealName(participant, function(name){
                     notice.show(_textes.webrtc.notices.joining.interpolate({userName: name.firstName}));
                 });
@@ -1435,7 +1440,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         debug: _debug
                     });
 
-                    bindConferenceEvents();
+                    bindConferenceEvents(WebRTCconference);
 
                     WebRTCconference.init(function () {
                         screensRendering.updateLayout();
@@ -1557,7 +1562,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     debug: _debug
                 });
 
-                bindConferenceEvents();
+                bindConferenceEvents(WebRTCconference);
                 log('initWithNodeServer: initConference: start init');
 
                 WebRTCconference.init(function (app) {
@@ -2065,6 +2070,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
              * @param {Boolean} [reset] Whether to reset current screen's size in case if it was resized manually.
              */
             function fitScreenToVideo(videoEl, screen, reset, oldSize) {
+                log('fitScreenToVideo');
                 if(videoEl.videoHeight != null && videoEl.videoWidth != null && videoEl.videoHeight != 0 && videoEl.videoWidth != 0 && videoEl.parentNode != null) {
 
                     var videoCon = screen.videoCon;
@@ -5217,6 +5223,75 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
         }
 
+        function switchRoom(publisherId, streamName, callback, options) {
+            //showPageLoader();
+            log('switch WebRTC conference room');
+            
+            var roomId = _options.roomId != null ? _options.roomId : null;
+            if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
+            if(roomId != null) _options.roomId = roomId;
+
+            var createOrJoinRoomStream = function (roomId, asPublisherId) {
+                log('createRoomStream')
+
+                Q.req("Streams/webrtc", ["room"], function (err, response) {
+                    var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                    if (msg) {
+                        return Q.alert(msg);
+                    }
+                    log('createRoomStream: joined/connected');
+
+                    roomId = (response.slots.room.roomId).replace('Streams/webrtc/', '');
+                    var turnCredentials = response.slots.room.turnCredentials;
+                    var socketServer = response.slots.room.socketServer;
+
+                    Q.Streams.get(asPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
+                        log('createRoomStream: joined/connected: pull stream');
+
+                        _roomStream = stream;
+                        if(Q.Streams.WebRTCRooms == null){
+                            Q.Streams.WebRTCRooms = [];
+                        }
+
+                        Q.Streams.WebRTCRooms.push(webRTCInstance);
+
+                        _options.conferenceStartedTime = stream.getAttribute('startTime');
+                        log('start: createOrJoinRoomStream: mode ' + _options.mode)
+                        bindStreamsEvents(stream);
+
+                        WebRTCconference.switchRoom('Yang', 'meeting5', function (newInstance) {
+                            bindConferenceEvents(newInstance);
+                            let prevRoom = WebRTCconference;
+
+                            newInstance.event.on('initNegotiationEnded', function () {
+                                WebRTCconference = newInstance;
+                               // prevRoom.disconnect(true);
+                                updateParticipantData();
+                                _controlsTool.state.webRTClibraryInstance = WebRTCconference;
+                                _controlsTool.refresh();
+
+                                screensRendering.updateLayout();
+                            });
+                        });
+                        //initWithNodeServer(socketServer, turnCredentials);
+                    });
+
+                }, {
+                    method: 'post',
+                    fields: {
+                        roomId: roomId,
+                        publisherId: asPublisherId,
+                        adapter: _options.mode
+                    }
+                });
+            }
+
+            createOrJoinRoomStream(roomId, _options.roomPublisherId);
+
+
+        }
+
         /**
          * Stops WebRTC conference room (closes all peer2peer connections,
          * clears all timeouts, removes tools)
@@ -5325,6 +5400,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         var webRTCInstance = {
             start: start,
             stop: stop,
+            switchRoom: switchRoom,
             screenRendering: screensRendering,
             currentConferenceLibInstance: currentConferenceLibInstance,
             controls: function () {
