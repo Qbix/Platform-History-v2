@@ -27,20 +27,29 @@
 			// if false added tab "Edit" to composer where user can edit stream
 			state.isComposer = true;
 
-			if (ps.editable && ps.publisherId && ps.streamName) {
-				Q.Streams.get(ps.publisherId, ps.streamName, function () {
-					if (!this.testWriteLevel('edit')) {
+			// only for exist streams set onFieldChanged event - which refresh tool
+			if (ps.streamName) {
+				Q.Streams.retainWith(true).get(ps.publisherId, ps.streamName, function (err) {
+					if (err) {
 						return;
 					}
 
-					state.isComposer = false;
-					tool.stream = this;
-
-					ps.actions.actions.edit = function () {
-						tool.composer(function () {
-							Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, null, {messages: true});
+					this.onAttribute().set(function (fields, k) {
+						Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, function () {
+							tool.refresh(this);
 						});
-					};
+					}, tool);
+
+					if (ps.editable && this.testWriteLevel('edit')) {
+						state.isComposer = false;
+						tool.stream = this;
+
+						ps.actions.actions.edit = function () {
+							tool.composer(function () {
+								Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, null, {messages: true});
+							});
+						};
+					}
 				});
 			}
 
@@ -92,17 +101,6 @@
 
 					return false;
 				};
-			}
-
-			// only for exist streams set onFieldChanged event - which refresh tool
-			if (ps.streamName) {
-				Q.Streams.retainWith(true).get(ps.publisherId, ps.streamName, function () {
-					this.onAttribute().set(function (fields, k) {
-						Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, function () {
-							tool.refresh(this);
-						});
-					}, tool);
-				});
 			}
 
 			var p = Q.pipe(['stylesheet', 'text'], function (params, subjects) {
